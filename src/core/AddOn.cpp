@@ -27,11 +27,10 @@
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 
-AddOn::AddOn(const QString addOnId, const QVariantMap& map, Source source)
+AddOn::AddOn(const QString addOnId, const QVariantMap& map)
 	: m_iAddOnId(addOnId)
 	, m_eType(INVALID)
 	, m_bIsValid(false)
-	, m_eSource(source)
 	, m_eStatus(NotInstalled)
 {
 	m_eType = fromStringToType(map.value("type").toString());
@@ -45,7 +44,7 @@ AddOn::AddOn(const QString addOnId, const QVariantMap& map, Source source)
 	m_eCategory = getCategoryFromType(m_eType);
 	m_sTitle = map.value("title").toString();
 	m_sDescription = map.value("description").toString();
-	m_sVersion = map.value("version").toString();
+	m_dVersion = map.value("version").toDate();
 	m_sFirstStel = map.value("first-stel").toString();
 	m_sLastStel = map.value("last-stel").toString();
 	m_sLicense = map.value("license").toString();
@@ -55,6 +54,10 @@ AddOn::AddOn(const QString addOnId, const QVariantMap& map, Source source)
 	m_sDownloadSize = map.value("download-size").toString();
 	m_sChecksum = map.value("checksum").toString();
 	m_sThumbnail = map.value("thumbnail").toString();
+
+	// specific fields in 'installed_addons.json'
+	m_InstalledFiles = map.value("installed-files").toStringList();
+	m_eStatus = (AddOn::Status) map.value("status").toInt();
 
 	// early returns if the mandatory fields are not present
 	if (m_sTitle.isEmpty() || m_sChecksum.isEmpty()

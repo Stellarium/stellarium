@@ -35,7 +35,7 @@ public:
 		Uncatalogued
 	};
 
-	AddOn(const QString addOnId, const QVariantMap& map, Source source);
+	AddOn(const QString addOnId, const QVariantMap& map);
 	virtual ~AddOn();
 
 	//! @enum Type
@@ -92,15 +92,12 @@ public:
 
 	bool isValid() { return m_bIsValid; }
 
-	Source getSource() { return m_eSource; }
-	void setSource(Source source) { m_eSource = source; }
-
 	QString getAddOnId() { return m_iAddOnId; }
 	QString getTitle() { return m_sTitle; }
 	Type getType() { return m_eType; }
 	QString getTypeString();
 	Category getCategory() { return m_eCategory; }
-	QString getVersion() { return m_sVersion; }
+	QDate getVersion() { return m_dVersion; }
 	QList<Authors> getAuthors() { return m_authors; }
 	QString getDescription() { return m_sDescription; }
 	QString getLicenseName() { return m_sLicense; }
@@ -124,7 +121,7 @@ private:
 	Type m_eType;
 	QString m_sTitle;
 	QString m_sDescription;
-	QString m_sVersion;
+	QDate m_dVersion;
 	QString m_sFirstStel;
 	QString m_sLastStel;
 	QString m_sLicense;
@@ -139,7 +136,6 @@ private:
 	QStringList m_InstalledFiles;
 
 	bool m_bIsValid;
-	Source m_eSource;
 	Category m_eCategory;
 	Status m_eStatus;
 

@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2014 Marcos Cardinot
+ * Copyright (C) 2014-2016 Marcos Cardinot
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,8 +35,6 @@ class StelAddOnMgr : public QObject
 {
 	Q_OBJECT
 public:
-	typedef QMap<QString, AddOn*> AddOnMap;
-
 	//! @enum AddOnMgrMsg
 	enum AddOnMgrMsg
 	{
@@ -47,8 +45,9 @@ public:
 	StelAddOnMgr();
 	virtual ~StelAddOnMgr();
 
-	AddOnMap getAddOnMap(AddOn::Type type) { return m_addons.value(type); }
-	QHash<AddOn::Type, AddOnMap> getAddOnHash() { return m_addons; }
+	QHash<QString, AddOn*> getAddonsAvailable() { return m_addonsAvailable; }
+	QHash<QString, AddOn*> getAddonsInstalled() { return m_addonsInstalled; }
+	QHash<QString, AddOn*> getAddonsToUpdate() { return m_addonsToUpdate; }
 	QString getAddOnDir() { return m_sAddOnDir; }
 	QString getThumbnailDir() { return m_sThumbnailDir; }
 	AddOn* getAddOnFromZip(QString filePath);
@@ -104,9 +103,9 @@ private:
 	QString m_sAddonJsonPath;
 	QString m_sUserAddonJsonPath;
 	QString m_sInstalledAddonsJsonPath;
-	QHash<AddOn::Type, AddOnMap> m_addons;
-	QHash<QString, AddOn*> m_addonsByMd5;
-	QHash<QString, AddOn*> m_addonsById;
+	QHash<QString, AddOn*> m_addonsAvailable;
+	QHash<QString, AddOn*> m_addonsInstalled;
+	QHash<QString, AddOn*> m_addonsToUpdate;
 
 	QNetworkReply* m_pThumbnailNetworkReply;
 	QHash<QString, QString> m_thumbnails;
@@ -118,12 +117,10 @@ private:
 	int m_iUpdateFrequencyHour;
 	QString m_sUrlUpdate;
 
-	void insertInAddOnHashes(AddOn* addon);
-	void refreshAddOnStatuses();
 	void refreshThumbnailQueue();
 
+	QHash<QString, AddOn*> loadAddonCatalog(QString jsonPath) const;
 	void restoreDefaultAddonJsonFile();
-	bool loadAddonJson(AddOn::Source source);
 	void updateInstalledAddonsJson(AddOn* addon);
 	void insertAddOnInUserJson(AddOn* addon);
 

@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2014 Marcos Cardinot
+ * Copyright (C) 2014-2016 Marcos Cardinot
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,16 +40,19 @@ StelAddOnMgr::StelAddOnMgr()
 	, m_currentDownloadFile(NULL)
 	, m_sAddOnDir(StelFileMgr::getUserDir() % "/addon/")
 	, m_sThumbnailDir(m_sAddOnDir % "thumbnail/")
-    , m_sAddonJsonFilename("addons_" % StelUtils::getApplicationVersion() %".json")
-	, m_sAddonJsonPath(m_sAddOnDir % m_sAddonJsonFilename)
-	, m_sUserAddonJsonPath(m_sAddOnDir % "user_" % m_sAddonJsonFilename)
 	, m_sInstalledAddonsJsonPath(m_sAddOnDir % "installed_addons.json")
 	, m_progressBar(NULL)
 	, m_iLastUpdate(1388966410)
 	, m_iUpdateFrequencyDays(7)
 	, m_iUpdateFrequencyHour(12)
-	, m_sUrlUpdate("http://cardinot.sourceforge.net/" % m_sAddonJsonFilename)
 {
+	QStringList v = StelUtils::getApplicationVersion().split('.');
+	m_sAddonJsonFilename = QString("addons_%1.%2.json").arg(v.at(0)).arg(v.at(1));
+	m_sAddonJsonPath = m_sAddOnDir % m_sAddonJsonFilename;
+	m_sUserAddonJsonPath = m_sAddOnDir % "user_" % m_sAddonJsonFilename;
+
+	m_sUrlUpdate = "http://cardinot.sourceforge.net/" % m_sAddonJsonFilename;
+
 	// Set user agent as "Stellarium/$version$ ($platform$)"
 	m_userAgent = QString("Stellarium/%1 (%2)")
 			.arg(StelUtils::getApplicationVersion())
@@ -93,60 +96,74 @@ StelAddOnMgr::~StelAddOnMgr()
 {
 }
 
-void StelAddOnMgr::insertInAddOnHashes(AddOn* addon)
-{
-	if (addon && addon->isValid())
-	{
-		AddOnMap amap;
-		if (m_addons.contains(addon->getType()))
-		{
-			amap = m_addons.value(addon->getType());
-		}
-		amap.insert(addon->getAddOnId(), addon);
-		m_addons.insert(addon->getType(), amap);
-		m_addonsByMd5.insert(addon->getChecksum(), addon);
-		m_addonsById.insert(addon->getAddOnId(), addon);
-	}
-}
-
 void StelAddOnMgr::reloadCatalogues()
 {
-	// load oficial catalog ~/.stellarium/addon_x.x.x.json
-	if (!loadAddonJson(AddOn::OficialCatalog))
+	// clear all hashes
+	m_addonsInstalled.clear();
+	m_addonsAvailable.clear();
+	m_addonsToUpdate.clear();
+
+	// load catalog of installed addons (~/.stellarium/installed_addons.json)
+	m_addonsInstalled = loadAddonCatalog(m_sInstalledAddonsJsonPath);
+
+	// load oficial catalog ~/.stellarium/addon_x.x.json
+	m_addonsAvailable = loadAddonCatalog(m_sAddonJsonPath);
+	if (m_addonsAvailable.isEmpty())
 	{
 		restoreDefaultAddonJsonFile();
-		loadAddonJson(AddOn::OficialCatalog); // load again
+		m_addonsAvailable = loadAddonCatalog(m_sAddonJsonPath); // load again
 	}
-	// load user catalog ~/.stellarium/user_addon_x.x.x.json
-	loadAddonJson(AddOn::UserCatalog);
+
+	// load user catalog ~/.stellarium/user_addon_x.x.json
+	m_addonsAvailable.unite(loadAddonCatalog(m_sUserAddonJsonPath));
+
+	// removing the installed addons from 'm_addonsAvailable' hash
+	QHashIterator<QString, AddOn*> i(m_addonsInstalled);
+	while (i.hasNext())
+	{
+		i.next();
+		QString addonId = i.key();
+		AddOn* addonInstalled = i.value();
+		AddOn* addonAvailable = m_addonsAvailable.value(addonId);
+		if (!addonAvailable)
+		{
+			continue;
+		}
+		else if (addonInstalled->getChecksum() == addonAvailable->getChecksum() ||
+			 addonInstalled->getVersion() >= addonAvailable->getVersion())
+		{
+			m_addonsAvailable.remove(addonId);
+		}
+		else if (addonInstalled->getVersion() < addonAvailable->getVersion())
+		{
+			m_addonsAvailable.remove(addonId);
+			m_addonsToUpdate.insert(addonId, addonAvailable);
+		}
+	}
+
 	// download thumbnails
 	refreshThumbnailQueue();
-	// refresh add-ons statuses (it checks which are installed or not)
-	refreshAddOnStatuses();
 }
 
-bool StelAddOnMgr::loadAddonJson(AddOn::Source source)
+QHash<QString, AddOn*> StelAddOnMgr::loadAddonCatalog(QString jsonPath) const
 {
-	QString jsonPath = source == AddOn::OficialCatalog
-			? m_sAddonJsonPath
-			: m_sUserAddonJsonPath;
-
+	QHash<QString, AddOn*> addons;
 	QFile jsonFile(jsonPath);
 	if (!jsonFile.open(QIODevice::ReadOnly))
 	{
 		qWarning() << "Add-On Mgr: Cannot open the catalog!"
 			   << QDir::toNativeSeparators(jsonPath);
-		return false;
+		return addons;
 	}
 
 	QJsonObject json(QJsonDocument::fromJson(jsonFile.readAll()).object());
 	jsonFile.close();
 
 	if (json["name"].toString() != "Add-ons Catalog" ||
-		json["format-version"].toInt() != ADDON_MANAGER_CATALOG_VERSION)
+		json["format"].toInt() != ADDON_MANAGER_CATALOG_VERSION)
 	{
 		qWarning()  << "Add-On Mgr: The current catalog is not compatible!";
-		return false;
+		return addons;
 	}
 
 	qDebug() << "Add-On Mgr: loading catalog file:"
@@ -156,10 +173,14 @@ bool StelAddOnMgr::loadAddonJson(AddOn::Source source)
 	QVariantMap::iterator i;
 	for (i = map.begin(); i != map.end(); ++i)
 	{
-		insertInAddOnHashes(new AddOn(i.key(), i.value().toMap(), source));
+		AddOn* addon = new AddOn(i.key(), i.value().toMap());
+		if (addon && addon->isValid())
+		{
+			addons.insert(addon->getAddOnId(), addon);
+		}
 	}
 
-	return true;
+	return addons;
 }
 
 void StelAddOnMgr::restoreDefaultAddonJsonFile()
@@ -206,39 +227,9 @@ void StelAddOnMgr::setUpdateFrequencyHour(int hour) {
 	m_pConfig->endGroup();
 }
 
-void StelAddOnMgr::refreshAddOnStatuses()
-{
-	QFile jsonFile(m_sInstalledAddonsJsonPath);
-	if (!jsonFile.exists())
-	{
-		return;
-	}
-	else if (!jsonFile.open(QIODevice::ReadOnly))
-	{
-		qWarning() << "Add-On Mgr: Couldn't open the catalog of installed addons!"
-			   << QDir::toNativeSeparators(m_sAddonJsonPath);
-		return;
-	}
-
-	// check add-ons which are already installed (installed_addons.json)
-	QJsonObject object(QJsonDocument::fromJson(jsonFile.readAll()).object());
-	QVariantMap map = object.toVariantMap();
-	QVariantMap::iterator i;
-	for (i = map.begin(); i != map.end(); ++i)
-	{
-		AddOn* addOn = m_addonsById.value(i.key());
-		QVariantMap attributes(i.value().toMap());
-		if (addOn && addOn->getChecksum() == attributes.value("checksum").toString())
-		{
-			addOn->setInstalledFiles(attributes.value("installed-files").toStringList());
-			addOn->setStatus((AddOn::Status)attributes.value("status").toInt());
-		}
-	}
-}
-
 void StelAddOnMgr::refreshThumbnailQueue()
 {
-	QHashIterator<QString, AddOn*> aos(m_addonsById);
+	QHashIterator<QString, AddOn*> aos(m_addonsAvailable);
 	while (aos.hasNext())
 	{
 		aos.next();
@@ -318,10 +309,11 @@ void StelAddOnMgr::installAddOn(AddOn* addon, const QStringList selectedFiles, b
 	}
 	else
 	{
+		/*
 		if (addon->getSource() == AddOn::Uncatalogued)
 		{
 			// duplicated keys?
-			if (m_addonsById.contains(addon->getAddOnId()))
+			if (m_addonsAvailable.contains(addon->getAddOnId()))
 			{
 				// TODO: asks the user if he wants to overwrite?
 				qWarning() << "AddOn Mgr : An addon ("
@@ -333,6 +325,7 @@ void StelAddOnMgr::installAddOn(AddOn* addon, const QStringList selectedFiles, b
 			}
 			insertAddOnInUserJson(addon);
 		}
+		*/
 
 		// installing files
 		addon->setStatus(AddOn::Installing);
@@ -453,12 +446,13 @@ AddOn* StelAddOnMgr::getAddOnFromZip(QString filePath)
 			attributes.insert("checksum", md5sum);
 			attributes.insert("download-size", zipFile.size()/1024.0);
 
+			// TODO: hash by md5 was removed!
 			// finds source
-			AddOn* addonInHash = m_addonsByMd5.value(md5sum);
-			AddOn::Source source = addonInHash
-					? addonInHash->getSource()
-					: AddOn::Uncatalogued;
-			return new AddOn(addonid, attributes, source);
+			//AddOn* addonInHash = m_addonsByMd5.value(md5sum);
+			//AddOn::Source source = addonInHash
+			//		? addonInHash->getSource()
+			//		: AddOn::Uncatalogued;
+			//return new AddOn(addonid, attributes, source);
 		}
 	}
 	return NULL;
@@ -731,7 +725,7 @@ void StelAddOnMgr::insertAddOnInUserJson(AddOn* addon)
 		attributes.insert("type", addon->getTypeString());
 		attributes.insert("title", addon->getTitle());
 		attributes.insert("description", addon->getDescription());
-		attributes.insert("version", addon->getVersion());
+		attributes.insert("version", addon->getVersion().toString("yyyy.MM.dd"));
 		attributes.insert("license", addon->getLicenseName());
 		attributes.insert("license-url", addon->getLicenseURL());
 		attributes.insert("download-url", addon->getDownloadURL());
@@ -764,11 +758,13 @@ void StelAddOnMgr::insertAddOnInUserJson(AddOn* addon)
 		jsonFile.write(QJsonDocument(json).toJson());
 		jsonFile.close();
 
+		// TODO: fix
 		// update source
-		addon->setSource(AddOn::UserCatalog);
+		//addon->setSource(AddOn::UserCatalog);
 
+		// TODO: fix user catalog!
 		// update hash
-		insertInAddOnHashes(addon);
+		//insertAddOn(addon);
 	}
 	else
 	{
