@@ -69,6 +69,15 @@ details of the implementation encapsulated.
 #define TRUE 1
 #define FALSE 0
 
+
+// GZ patches for Large File Support for DE431 past AD10100...
+#if defined(Q_OS_WIN)
+#define FSeek(__FILE, __OFFSET, _MODE) _fseeki64(__FILE, __OFFSET, _MODE)
+#else
+#define FSeek(__FILE, __OFFSET, _MODE) fseeko(__FILE, __OFFSET, _MODE)
+#endif
+
+
 double DLL_FUNC jpl_get_double(const void *ephem, const int value)
 {
    return(*(double *)((char *)ephem + value));
@@ -583,14 +592,14 @@ int DLL_FUNC jpl_state(void *ephem, const double et, const int list[14],
   {
     t[0] = 1.;
     nr--;
-  }
+  }  
 
 /*   read correct record if not in core (static vector buf[])   */
     if(nr != eph->curr_cache_loc)
     {
       eph->curr_cache_loc = nr;
                   /* Read two blocks ahead to account for header: */
-      if(fseek(eph->ifile, (nr + 2) * eph->recsize, SEEK_SET))
+      if(FSeek(eph->ifile, (nr + 2) * eph->recsize, SEEK_SET))
       {
 	      // GZ: Make sure we will try again on next call...
 	      eph->curr_cache_loc=0;
@@ -744,7 +753,7 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
       init_err_code = JPL_INIT_FILE_NOT_FOUND;
     else if(fread(title, 84, 1, ifile) != 1)
       init_err_code = JPL_INIT_FREAD_FAILED;
-    else if(fseek(ifile, 2652L, SEEK_SET))
+    else if(FSeek(ifile, 2652L, SEEK_SET))
       init_err_code = JPL_INIT_FSEEK_FAILED;
     else if(fread(&temp_data, JPL_HEADER_SIZE, 1, ifile) != 1)
       init_err_code = JPL_INIT_FREAD2_FAILED;
@@ -797,7 +806,7 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
          /* need to fseek().  Otherwise,  we gotta skip 6*(n_constants-400) */
          /* bytes. */
       if(temp_data.ncon > 400)
-         fseek(ifile, (size_t)(temp_data.ncon - 400) * 6, SEEK_CUR);
+	 FSeek(ifile, (size_t)(temp_data.ncon - 400) * 6, SEEK_CUR);
       if(fread(&temp_data.ipt[13][0], sizeof(int32_t), 6, ifile) != 6)
          init_err_code = JPL_INIT_FREAD5_FAILED;
     }
@@ -893,7 +902,7 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
       char buff[7];
 
       buff[6] = '\0';
-      fseek(ifile, START_400TH_CONSTANT_NAME, SEEK_SET);
+      FSeek(ifile, START_400TH_CONSTANT_NAME, SEEK_SET);
       while(fread(buff, 6, 1, ifile) && strlen(buff) == 6)
       {
          rval->ncon++;
@@ -902,7 +911,7 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
 
     if(val)
     {
-      fseek(ifile, rval->recsize, SEEK_SET);
+      FSeek(ifile, rval->recsize, SEEK_SET);
       if(fread(val, sizeof(double), (size_t)rval->ncon, ifile)
                         != (size_t)rval->ncon)
          init_err_code = JPL_INIT_FREAD3_FAILED;
@@ -912,11 +921,11 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
 
    if(!init_err_code && nam)
       {
-      fseek(ifile, 84L * 3L, SEEK_SET);   /* just after the 3 'title' lines */
+      FSeek(ifile, 84L * 3L, SEEK_SET);   /* just after the 3 'title' lines */
       for(i = 0; i < rval->ncon && !init_err_code; i++)
       {
         if(i == 400)
-          fseek(ifile, START_400TH_CONSTANT_NAME, SEEK_SET);
+	  FSeek(ifile, START_400TH_CONSTANT_NAME, SEEK_SET);
         if(fread(nam[i], 6, 1, ifile) != 1)
           init_err_code = JPL_INIT_FREAD4_FAILED;
         }
@@ -950,14 +959,15 @@ double DLL_FUNC jpl_get_constant(const int idx, void *ephem, char *constant_name
    *constant_name = '\0';
    if(idx >= 0 && idx < (int)eph->ncon)
       {
-      const long seek_loc = (idx < 400 ? 84L * 3L + (long)idx * 6 :
+	   // GZ extended from const long to const long long
+      const long long seek_loc = (idx < 400 ? 84L * 3L + (long)idx * 6 :
                       START_400TH_CONSTANT_NAME + (idx - 400) * 6);
 
-      fseek(eph->ifile, seek_loc, SEEK_SET);
+      FSeek(eph->ifile, seek_loc, SEEK_SET);
       if(fread(constant_name, 1, 6, eph->ifile))
          {
          constant_name[6] = '\0';
-         fseek(eph->ifile, eph->recsize + (long)idx * sizeof(double), SEEK_SET);
+	 FSeek(eph->ifile, eph->recsize + (long)idx * sizeof(double), SEEK_SET);
          if(fread(&rval, 1, sizeof(double), eph->ifile))
             if(eph->swap_bytes)     /* gotta swap the constants,  too */
                swap_64_bit_val(&rval, 1);
