@@ -58,34 +58,15 @@ void AddOnDialog::styleChanged()
 
 void AddOnDialog::createDialogContent()
 {
-//	connect(&StelApp::getInstance().getStelAddOnMgr(), SIGNAL(updateTableViews()),
-//		this, SLOT(populateTables()));
-
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
-	// settings dialog
-//	connect(ui->btnSettings, SIGNAL(clicked(bool)), this, SLOT(slotOpenSettings()));
-
-	// naming tables according to the category
-//	ui->updatesTableView->setCategory(AddOn::CATALOG);
-//	ui->landscapeTableView->setCategory(AddOn::LANDSCAPE);
-//	ui->languageTableView->setCategory(AddOn::LANGUAGEPACK);
-//	ui->scriptsTableView->setCategory(AddOn::SCRIPT);
-//	ui->starloreTableView->setCategory(AddOn::STARLORE);
-//	ui->texturesTableView->setCategory(AddOn::TEXTURE);
-
-	// hashing all tableViews
-//	m_tableViews.insert(AddOn::CATALOG, ui->catalogsTableView);
-//	m_tableViews.insert(AddOn::LANDSCAPE, ui->landscapeTableView);
-//	m_tableViews.insert(AddOn::LANGUAGEPACK, ui->languageTableView);
-//	m_tableViews.insert(AddOn::SCRIPT, ui->scriptsTableView);
-//	m_tableViews.insert(AddOn::STARLORE, ui->starloreTableView);
-//	m_tableViews.insert(AddOn::TEXTURE, ui->texturesTableView);
+	connect(&StelApp::getInstance().getStelAddOnMgr(), SIGNAL(updateTableViews()),
+		this, SLOT(populateTables()));
 
 	// build and populate all tableviews
-//	populateTables();
+	populateTables();
 
 	// catalog updates
 	ui->txtLastUpdate->setText(StelApp::getInstance().getStelAddOnMgr().getLastUpdateString());
@@ -94,19 +75,20 @@ void AddOnDialog::createDialogContent()
 	// setting up tabs
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)),
 		this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
-	ui->stackedWidget->setCurrentIndex(AddOn::CATALOG);
-	ui->stackListWidget->setCurrentRow(AddOn::CATALOG);
 
 	// buttons: Install and Remove
 //	connect(ui->btnInstall, SIGNAL(clicked()), this, SLOT(installSelectedRows()));
 //	connect(ui->btnRemove, SIGNAL(clicked()), this, SLOT(removeSelectedRows()));
 //	ui->btnInstall->setEnabled(false);
 //	ui->btnRemove->setEnabled(false);
-	for (int itab=0; itab<6; itab++) {
-		AddOn::Category tab = (AddOn::Category)itab;
-		AddOnTableView* view = m_tableViews.value(tab);
-		connect(view, SIGNAL(selectedAddOns(int,int)), this, SLOT(slotUpdateButtons(int,int)));
-	}
+
+	connect(ui->availableTableView, SIGNAL(addonSelected(AddOn*)), this, SLOT(slotAddonSelected(AddOn*)));
+	connect(ui->installedTableView, SIGNAL(addonSelected(AddOn*)), this, SLOT(slotAddonSelected(AddOn*)));
+	connect(ui->updatesTableView, SIGNAL(addonSelected(AddOn*)), this, SLOT(slotAddonSelected(AddOn*)));
+
+	connect(ui->availableTableView, SIGNAL(selectedAddOns(int,int)), this, SLOT(slotUpdateButtons(int,int)));
+	connect(ui->installedTableView, SIGNAL(selectedAddOns(int,int)), this, SLOT(slotUpdateButtons(int,int)));
+	connect(ui->updatesTableView, SIGNAL(selectedAddOns(int,int)), this, SLOT(slotUpdateButtons(int,int)));
 
 	// button Install from File
 	connect(ui->btnInstallFromFile, SIGNAL(clicked()), this, SLOT(installFromFile()));
@@ -119,9 +101,12 @@ void AddOnDialog::createDialogContent()
 	updateTabBarListWidgetWidth();
 }
 
-void AddOnDialog::slotOpenSettings()
+void AddOnDialog::slotAddonSelected(AddOn *addon)
 {
-	m_pSettingsDialog->setVisible(true);
+	QString html = "<html><head></head><body>";
+	html += "<h2>" + addon->getTitle() + "</h2>";
+	html += addon->getDescription();
+	ui->browser->setHtml(html);
 }
 
 void AddOnDialog::slotUpdateButtons(int amountToInstall, int amountToRemove)
@@ -175,23 +160,15 @@ void AddOnDialog::updateTabBarListWidgetWidth()
 
 void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
 {
-	AddOnTableView* lastView = m_tableViews.value((AddOn::Category)ui->stackedWidget->currentIndex());
-	if (lastView)
-	{
-		lastView->clearSelection();
-	}
-
 	current = current ? current : previous;
 	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
 }
 
 void AddOnDialog::populateTables()
 {
-	for (int itab=0; itab<6; itab++) {
-		AddOn::Category tab = (AddOn::Category)itab;
-		AddOnTableView* view = m_tableViews.value(tab);
-		view->setModel(new AddOnTableModel(tab, StelApp::getInstance().getStelAddOnMgr().getAddOnHash()));
-	}
+	ui->availableTableView->setModel(new AddOnTableModel(StelApp::getInstance().getStelAddOnMgr().getAddonsAvailable()));
+	ui->installedTableView->setModel(new AddOnTableModel(StelApp::getInstance().getStelAddOnMgr().getAddonsInstalled()));
+	ui->updatesTableView->setModel(new AddOnTableModel(StelApp::getInstance().getStelAddOnMgr().getAddonsToUpdate()));
 	updateTabBarListWidgetWidth();
 }
 
@@ -257,6 +234,7 @@ void AddOnDialog::installFromFile()
 
 void AddOnDialog::installSelectedRows()
 {
+	/*
 	AddOnTableView* view = m_tableViews.value((AddOn::Category)ui->stackedWidget->currentIndex());
 	QHashIterator<AddOn*, QStringList> i(view->getSelectedAddonsToInstall());
 	while (i.hasNext()) {
@@ -264,10 +242,12 @@ void AddOnDialog::installSelectedRows()
 		StelApp::getInstance().getStelAddOnMgr().installAddOn(i.key(), i.value());
 	}
 	view->clearSelection();
+	*/
 }
 
 void AddOnDialog::removeSelectedRows()
 {
+	/*
 	AddOnTableView* view = m_tableViews.value((AddOn::Category)ui->stackedWidget->currentIndex());
 	QHashIterator<AddOn*, QStringList> i(view->getSelectedAddonsToRemove());
 	while (i.hasNext()) {
@@ -275,4 +255,5 @@ void AddOnDialog::removeSelectedRows()
 		StelApp::getInstance().getStelAddOnMgr().removeAddOn(i.key(), i.value());
 	}
 	view->clearSelection();
+	*/
 }

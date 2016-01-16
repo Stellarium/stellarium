@@ -46,6 +46,7 @@ public:
 public slots:
 	void retranslate();
 	void updateCatalog();
+	void slotAddonSelected(AddOn* addon);
 
 protected:
 	Ui_addonDialogForm* ui;
@@ -56,7 +57,6 @@ private slots:
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 	void slotUpdateMsg(const StelAddOnMgr::AddOnMgrMsg msg);
 	void slotUpdateButtons(int amountToInstall, int amountToRemove);
-	void slotOpenSettings();
 	void downloadFinished();
 	void installFromFile();
 	void installSelectedRows();
@@ -67,7 +67,6 @@ private:
 	AddOnSettingsDialog* m_pSettingsDialog;
 
 	QNetworkReply* m_pUpdateCatalogReply;
-	QHash<AddOn::Category, AddOnTableView*> m_tableViews;
 
 	void updateTabBarListWidgetWidth();
 };
