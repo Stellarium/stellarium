@@ -303,11 +303,13 @@ numerical integration runs \indexterm{DE430} and \indexterm{DE431}
 from NASA's Jet Propulsion Laboratory (JPL). The data files have to be
 downloaded separately, and most users will likely not need them. DE430
 provides highly accurate data for the years $+1550\ldots+2650$, while
-DE431 covers years $-13000\ldots+17000$, which allows
+DE431 covers years $-13000\ldots+17000$, which allows e.g.\ 
 archaeoastronomical research on Mesolithic landscapes. Outside these
 year ranges, positional computation falls back to VSOP87.
 
-To enable use of these data, download from \url{ftp://ssd.jpl.nasa.gov/pub/eph/planets/Linux/}:
+To enable use of these data, download the files from
+JPL\footnote{\url{ftp://ssd.jpl.nasa.gov/pub/eph/planets/Linux/}. (Also
+  download from this directory if you are not running Linux!)}:
 
 \begin{description}
 \item[DE430] \file{linux\_p1550p2650.430} (md5 hash 707c4262533d52d59abaaaa5e69c5738)
@@ -315,10 +317,10 @@ To enable use of these data, download from \url{ftp://ssd.jpl.nasa.gov/pub/eph/p
 \end{description}
 
 
-The files can be placed in a folder named \file{ephem} inside the
-\emph{User Data Directory} (see
-\ref{sec:FilesAndDirectories:DirectoryStructure}). Alternatively, if
-you have them already stored elsewhere, you may add the path to
+The files can be placed in a folder named \file{ephem} inside either
+the \emph{installation directory} or the \emph{user directory}
+(see \ref{sec:FilesAndDirectories:DirectoryStructure}). Alternatively,
+if you have them already stored elsewhere, you may add the path to
 \file{config.ini} like:
 
 \begin{configfile}
@@ -327,7 +329,12 @@ de430_path = C:/Astrodata/JPL_DE43x/linux_p1550p2650.430
 de431_path = C:/Astrodata/JPL_DE43x/lnxm13000p17000.431
 \end{configfile}
 
-%% TODO: Make sure either user or installation dir are OK
+For fast access avoid storing them on a network drive os USB pendrive!
+
+You activate use of either ephemeris in the configuration panel
+(\key{F2}). If you activate both, preference will be given for DE430
+if the simulation time allows it. Outside of the valid times, VSOP87
+will always be used.
 
 
 \chapter{Visual Effects}\label{visual-effects}
