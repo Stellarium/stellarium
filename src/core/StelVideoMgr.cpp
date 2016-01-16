@@ -979,7 +979,11 @@ int StelVideoMgr::getVideoHeight(const QString&){return -1;}
 void StelVideoMgr::muteVideo(const QString&, bool){;}
 void StelVideoMgr::setVideoVolume(const QString&, int){;}
 int StelVideoMgr::getVideoVolume(const QString&){return -1;}
-bool StelVideoMgr::isVideoPlaying(const QString& id){return false;}
+bool StelVideoMgr::isVideoPlaying(const QString& id)
+{
+	Q_UNUSED(id)
+	return false;
+}
 
 #endif // ENABLE_MEDIA
 

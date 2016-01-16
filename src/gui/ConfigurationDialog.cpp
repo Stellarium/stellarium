@@ -77,11 +77,12 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
 	, currentDownloadFile(NULL)
 	, progressBar(NULL)
 	, gui(agui)
+	, hasDownloadedStarCatalog(false)
+	, isDownloadingStarCatalog(false)
+	, isDownloadingEphemData(false)
+	, customDeltaTEquationDialog(NULL)
 {
 	ui = new Ui_configurationDialogForm;
-	customDeltaTEquationDialog = NULL;
-	hasDownloadedStarCatalog = false;
-	isDownloadingStarCatalog = false;
 
 	savedProjectionType = StelApp::getInstance().getCore()->getCurrentProjectionType();
 	// Get info about operating system
@@ -1151,8 +1152,7 @@ void ConfigurationDialog::de430ButtonClicked()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	StelApp::getInstance().getCore()->
-		setDe430Active(!StelApp::getInstance().getCore()->de430IsActive());
+	StelApp::getInstance().getCore()->setDe430Active(!StelApp::getInstance().getCore()->de430IsActive());
 	conf->setValue("astro/flag_use_de430", StelApp::getInstance().getCore()->de430IsActive());
 
 	resetEphemControls(); //refresh labels
@@ -1163,39 +1163,31 @@ void ConfigurationDialog::de431ButtonClicked()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	StelApp::getInstance().getCore()->
-		setDe431Active(!StelApp::getInstance().getCore()->de431IsActive());
+	StelApp::getInstance().getCore()->setDe431Active(!StelApp::getInstance().getCore()->de431IsActive());
 	conf->setValue("astro/flag_use_de431", StelApp::getInstance().getCore()->de431IsActive());
 
 	resetEphemControls(); //refresh labels
 }
 
-
 void ConfigurationDialog::resetEphemControls()
 {
-//	StelApp::getInstance().getCore()->initEphemeridesFunctions(); // WHY HERE?
-
-	ui->downloadLabel->setText(q_("VSOP87 is available"));
-	ui->de430Button->setText(q_("DE430: NO"));
-	ui->de431Button->setText(q_("DE431: NO"));
-
 	ui->de430Button->setEnabled(StelApp::getInstance().getCore()->de430IsAvailable());
 	ui->de431Button->setEnabled(StelApp::getInstance().getCore()->de431IsAvailable());
 
-
 	if(StelApp::getInstance().getCore()->de430IsActive())
-	{
 		ui->de430Button->setText(q_("DE430: 1550...2650"));
-	}
+	else
+		ui->de430Button->setText(q_("DE430: NO"));
 
 	if(StelApp::getInstance().getCore()->de431IsActive())
-	{
 		ui->de431Button->setText(q_("DE431: -13.000...17.000"));
-	}
+	else
+		ui->de431Button->setText(q_("DE431: NO"));
 }
 
 void ConfigurationDialog::downloadEphemData()
 {
+	// TODO in connection with the download manager!
 	resetEphemControls();
 }
 
@@ -1221,6 +1213,7 @@ void ConfigurationDialog::downloadError(QNetworkReply::NetworkError)
 
 void ConfigurationDialog::ephemDataDownloadFinished()
 {
+	// TODO in connection with the download manager!
 
 }
 

@@ -502,7 +502,7 @@ Armidale	New South Wales	au	N	22.673	30.50828S	151.67123E	983	5	Australia/Sydney
 Albury	New South Wales	au	N	45.627	36.07494S	146.92394E	164	5	Australia/Sydney
 South Brisbane	Queensland	au	N	60	27.48333S	153.01667E	31	6	Australia/Brisbane
 Randwick	New South Wales	au	N	25.819	33.91667S	151.24167E	74	5	Australia/Sydney
-Dee Why	New South Wales	au	N	17.463	33.75S	151.3E	-9999	5	Australia/Sydney
+Dee Why	New South Wales	au	N	17.463	33.75S	151.3E	16	5	Australia/Sydney
 Palmerston	Northern Territory	au	N	25	12.48602S	130.9833E	36	5	Australia/Darwin
 Bracken Ridge	Queensland	au	N	15.355	27.3171S	153.03097E	27	5	Australia/Brisbane
 North Ryde	New South Wales	au	N	17.208	33.79677S	151.12436E	79	5	Australia/Sydney
@@ -1103,7 +1103,7 @@ Sao Luis do Quitunde	Alagoas	br	N	20.563	9.31833S	35.56111W	7	5	America/Maceio
 Sao Luis	Maranhao	br	R	917.237	2.52972S	44.30278W	29	8	America/Fortaleza
 Sao Lourenco da Mata	Pernambuco	br	N	88.416	8.00222S	35.01833W	48	6	America/Recife
 Sao Jose do Egito	Pernambuco	br	N	18.218	7.47889S	37.27444W	594	5	America/Recife
-Sao Jose de Ribamar	Maranhao	br	N	27.777	2.56194S	44.05417W	-9999	5	America/Fortaleza
+Sao Jose de Ribamar	Maranhao	br	N	27.777	2.56194S	44.05417W	2	5	America/Fortaleza
 Sao Jose de Mipibu	Rio Grande do Norte	br	N	15.298	6.07472S	35.23778W	63	5	America/Fortaleza
 Sao Joao dos Patos	Maranhao	br	N	19.538	6.495S	43.70222W	346	5	America/Fortaleza
 Sao Goncalo do Amarante	Ceara	br	N	23.583	3.60722S	38.96833W	23	5	America/Fortaleza
@@ -2537,7 +2537,7 @@ Welland	Ontario	ca	N	50.331	42.98342N	79.24958W	180	6	America/Toronto
 West End	British Columbia	ca	N	44.56	49.28333N	123.13333W	49	5	America/Vancouver
 Westmount	Quebec	ca	N	20.494	45.48341N	73.59918W	52	5	America/Montreal
 Whitehorse	Yukon	ca	R	23.272	60.71611N	135.05375W	630	5	America/Whitehorse
-White Rock	British Columbia	ca	N	66.45	49.01636N	122.8026W	-9999	6	America/Vancouver
+White Rock	British Columbia	ca	N	66.45	49.01636N	122.8026W	30	6	America/Vancouver
 Windsor	Ontario	ca	N	278.013	42.30008N	83.01654W	190	7	America/Toronto
 Winnipeg	Manitoba	ca	R	632.063	49.8844N	97.14704W	245	8	America/Winnipeg
 Woodstock	Ontario	ca	N	33.892	43.13339N	80.7497W	299	5	America/Toronto
@@ -6286,7 +6286,7 @@ Leioa	Basque Country	es	N	30.079	43.33333N	2.98333W	57	5	Europe/Madrid
 Leganes	Madrid	es	N	186.066	40.32718N	3.7635W	672	7	Europe/Madrid
 Las Rozas de Madrid	Madrid	es	N	86.34	40.49292N	3.87371W	718	6	Europe/Madrid
 Lasarte	Basque Country	es	N	17.782	43.26774N	2.02169W	16	5	Europe/Madrid
-La Pineda	Catalonia	es	N	17.305	41.07625N	1.18515E	-9999	5	Europe/Madrid
+La Pineda	Catalonia	es	N	17.305	41.07625N	1.18515E	55	5	Europe/Madrid
 Lalin	Galicia	es	N	21.254	42.66085N	8.11285W	552	5	Europe/Madrid
 Laguna de Duero	Castille and Leon	es	N	21.762	41.58151N	4.72332W	708	5	Europe/Madrid
 A Estrada	Galicia	es	N	21.88	42.68333N	8.48333W	266	5	Europe/Madrid
@@ -6574,7 +6574,7 @@ Forssa	Southern Finland	fi	N	17.852	60.81462N	23.62146E	133	5	Europe/Helsinki
 Espoo	Southern Finland	fi	N	256.76	60.2052N	24.6522E	16	7	Europe/Helsinki
 Porvoo	Southern Finland	fi	N	47.192	60.39233N	25.66507E	29	5	Europe/Helsinki
 Anjala	Southern Finland	fi	N	16.779	60.68333N	26.83333E	18	5	Europe/Helsinki
-Laensi-Turunmaa	Western Finland	fi	N	15.498	60.29972N	22.3004E	-9999	5	Europe/Helsinki
+Laensi-Turunmaa	Western Finland	fi	N	15.498	60.29972N	22.3004E	18	5	Europe/Helsinki
 Suva	Central	fj	C	77.366	18.14161S	178.44149E	57	6	Pacific/Fiji
 Nadi	Western	fj	N	42.284	17.8S	177.41667E	10	5	Pacific/Fiji
 Lautoka	Western	fj	R	52.5	17.61667S	177.46667E	23	6	Pacific/Fiji
@@ -7825,7 +7825,7 @@ Bicester	England	gb	N	35.902	51.89998N	1.15357W	75	5	Europe/London
 Bexley	England	gb	N	228	51.44162N	0.14866E	16	7	Europe/London
 Bexhill-on-Sea	England	gb	N	40.478	50.85023N	0.47095E	15	5	Europe/London
 Beverley	England	gb	N	31.968	53.84587N	0.42332W	10	5	Europe/London
-Berwick-Upon-Tweed	England	gb	N	26	55.78333N	2W	-9999	5	Europe/London
+Berwick-Upon-Tweed	England	gb	N	26	55.78333N	2W	24	5	Europe/London
 Berkhamsted	England	gb	N	16.243	51.7604N	0.56528W	113	5	Europe/London
 Bentley	England	gb	N	34.821	53.53333N	1.15W	11	5	Europe/London
 Belper	England	gb	N	22.427	53.0233N	1.48119W	81	5	Europe/London
@@ -7927,7 +7927,7 @@ Deeside	Wales	gb	N	32	53.20053N	3.03841W	28	5	Europe/London
 High Peak	England	gb	N	92.6	53.36797N	1.84536W	335	6	Europe/London
 Hayling Island	England	gb	N	16.887	50.7838N	0.96869W	4	5	Europe/London
 Isle of Lewis	Scotland	gb	N	18.5	58.21901N	6.38803W	14	5	Europe/London
-Shetland	Scotland	gb	N	22.21	60.15456N	1.14899W	-9999	5	Europe/London
+Shetland	Scotland	gb	N	22.21	60.15456N	1.14899W	18	5	Europe/London
 Orkney	Scotland	gb	N	20.1	58.98465N	2.95953W	2	5	Europe/London
 Holloway	England	gb	N	41.329	51.55237N	0.12497W	45	5	Europe/London
 Harringay	England	gb	N	16.5	51.5824N	0.09956W	19	5	Europe/London
@@ -8081,7 +8081,7 @@ Nea Ionia	Attica	gr	N	67.835	38.03333N	23.75E	135	6	Europe/Athens
 Nea Filadelfeia	Attica	gr	N	23.644	38.03333N	23.73333E	93	5	Europe/Athens
 Nea Erythraia	Attica	gr	N	16.432	38.1N	23.81667E	274	5	Europe/Athens
 Nafpaktos	West Greece	gr	N	18	38.39167N	21.8275E	3	5	Europe/Athens
-Moskhaton	Attica	gr	N	23.533	37.94718N	23.67708E	-9999	5	Europe/Athens
+Moskhaton	Attica	gr	N	23.533	37.94718N	23.67708E	12	5	Europe/Athens
 Mytilini	North Aegean	gr	R	28.322	39.11N	26.55472E	12	5	Europe/Athens
 Melissia	Attica	gr	N	22.385	38.05N	23.83333E	273	5	Europe/Athens
 Megara	Attica	gr	N	24.047	38N	23.34556E	50	5	Europe/Athens
@@ -8141,7 +8141,7 @@ Menemeni	Central Macedonia	gr	N	15.706	40.65694N	22.9E	8	5	Europe/Athens
 Kozani	West Macedonia	gr	R	36.481	40.30111N	21.78639E	712	5	Europe/Athens
 Komotini	East Macedonia and Thrace	gr	R	45.631	41.11917N	25.40535E	41	5	Europe/Athens
 Kilkis	Central Macedonia	gr	N	19.734	40.99194N	22.87083E	275	5	Europe/Athens
-Kavala	East Macedonia and Thrace	gr	N	59.24	40.93959N	24.40687E	-9999	6	Europe/Athens
+Kavala	East Macedonia and Thrace	gr	N	59.24	40.93959N	24.40687E	212	6	Europe/Athens
 Katerini	Central Macedonia	gr	N	53.293	40.27194N	22.5025E	44	6	Europe/Athens
 Kalamaria	Central Macedonia	gr	N	91.617	40.5825N	22.95028E	39	6	Europe/Athens
 Florina	West Macedonia	gr	N	16.771	40.78197N	21.40981E	656	5	Europe/Athens
@@ -8251,7 +8251,7 @@ Tai Po	Tai Po	hk	R	16.302	22.45007N	114.16877E	22	5	Asia/Hong_Kong
 Sha Tin	Sha Tin	hk	R	21.559	22.38333N	114.18333E	115	5	Asia/Hong_Kong
 Kowloon	Kowloon City	hk	R	2019.533	22.31667N	114.18333E	92	9	Asia/Hong_Kong
 Hong Kong		hk	C	7012.738	22.28552N	114.15769E	3	9	Asia/Hong_Kong
-Puerto Cortez	Cortes	hn	N	48.013	15.83333N	87.95W	-9999	5	America/Tegucigalpa
+Puerto Cortez	Cortes	hn	N	48.013	15.83333N	87.95W	51	5	America/Tegucigalpa
 Yoro	Yoro	hn	R	15.774	15.1375N	87.12778W	648	5	America/Tegucigalpa
 Villanueva	Cortes	hn	N	31.571	15.31667N	88W	151	5	America/Tegucigalpa
 Tocoa	Colon	hn	N	30.785	15.68333N	86W	37	5	America/Tegucigalpa
@@ -8837,7 +8837,7 @@ Cluain Meala	Munster	ie	N	17.394	52.355N	7.70389W	24	5	Europe/Dublin
 Celbridge	Leinster	ie	N	19.537	53.33861N	6.54361W	57	5	Europe/Dublin
 Carlow	Leinster	ie	N	20.055	52.84083N	6.92611W	55	5	Europe/Dublin
 Blanchardstown	Leinster	ie	N	16.511	53.38806N	6.37556W	49	5	Europe/Dublin
-Balbriggan	Leinster	ie	N	23.364	53.61278N	6.18194W	-9999	5	Europe/Dublin
+Balbriggan	Leinster	ie	N	23.364	53.61278N	6.18194W	20	5	Europe/Dublin
 Athlone	Leinster	ie	N	15.951	53.43333N	7.95W	36	5	Europe/Dublin
 Sandyford	Leinster	ie	N	22.288	53.2747N	6.2253W	100	5	Europe/Dublin
 Donaghmede	Leinster	ie	N	15.299	53.39845N	6.16179W	18	5	Europe/Dublin
@@ -10666,7 +10666,7 @@ Dharmsala	Himachal Pradesh	in	N	19.54	32.24194N	76.32133E	1698	5	Asia/Kolkata
 Dharmavaram	Andhra Pradesh	in	N	114.05	14.41494N	77.71995E	368	7	Asia/Kolkata
 Dharmapuri	Tamil Nadu	in	N	66.017	12.1277N	78.15794E	468	6	Asia/Kolkata
 Dharmanagar	Tripura	in	N	32.912	24.36667N	92.16667E	32	5	Asia/Kolkata
-Dharmadam	Kerala	in	N	29.943	11.78333N	75.43333E	-9999	5	Asia/Kolkata
+Dharmadam	Kerala	in	N	29.943	11.78333N	75.43333E	13	5	Asia/Kolkata
 Dharmabad	Maharashtra	in	N	32.351	18.89116N	77.8494E	360	5	Asia/Kolkata
 Dhariwal	Punjab	in	N	20.604	31.95504N	75.32172E	263	5	Asia/Kolkata
 Dhari	Gujarat	in	N	29.346	21.32855N	71.02645E	213	5	Asia/Kolkata
@@ -11577,7 +11577,7 @@ Sarakhs	Razavi Khorasan	ir	N	46.499	36.5449N	61.1577E	276	5	Asia/Tehran
 Khash	Sistan va Baluchestan	ir	N	69.603	28.22107N	61.21582E	1413	6	Asia/Tehran
 Iranshahr	Sistan va Baluchestan	ir	N	131.232	27.20245N	60.68476E	566	7	Asia/Tehran
 Chah Bahar	Sistan va Baluchestan	ir	N	47.287	25.2919N	60.643E	18	5	Asia/Tehran
-Akureyri	Northeast	is	R	17.693	65.68353N	18.0878W	-9999	5	Atlantic/Reykjavik
+Akureyri	Northeast	is	R	17.693	65.68353N	18.0878W	278	5	Atlantic/Reykjavik
 Reykjavik	Capital Region	is	C	118.918	64.13548N	21.89541W	37	7	Atlantic/Reykjavik
 Kopavogur	Capital Region	is	N	31.719	64.11234N	21.91298W	37	5	Atlantic/Reykjavik
 Hafnarfjoerdur	Capital Region	is	N	26.808	64.0671N	21.93774W	39	5	Atlantic/Reykjavik
@@ -12294,7 +12294,7 @@ Karak City	Karak	jo	R	21.678	31.16368N	35.76204E	948	5	Asia/Amman
 Russeifa	Zarqa	jo	N	268.237	32.01778N	36.04639E	614	7	Asia/Amman
 Shingu	Wakayama	jp	N	31.619	33.73333N	135.98333E	7	5	Asia/Tokyo
 Atsugi	Kanagawa	jp	N	229.199	35.43889N	139.35972E	28	7	Asia/Tokyo
-Akashi	Hyogo	jp	N	297.279	34.63333N	134.98333E	-9999	7	Asia/Tokyo
+Akashi	Hyogo	jp	N	297.279	34.63333N	134.98333E	41	7	Asia/Tokyo
 Zushi	Kanagawa	jp	N	60.055	35.29167N	139.58556E	23	6	Asia/Tokyo
 Zama	Kanagawa	jp	N	134.671	35.48889N	139.38861E	31	7	Asia/Tokyo
 Yuza	Yamagata	jp	N	17.082	39N	139.91667E	13	5	Asia/Tokyo
@@ -12395,7 +12395,7 @@ Nishi-Tokyo-shi	Tokyo	jp	N	195.164	35.72526N	139.5383E	58	7	Asia/Tokyo
 Tanashicho	Tokyo	jp	N	82.112	35.7303N	139.53391E	68	6	Asia/Tokyo
 Tanabe	Kyoto	jp	N	65.903	34.81667N	135.76667E	39	6	Asia/Tokyo
 Tanabe	Wakayama	jp	N	69.563	33.73333N	135.36667E	7	6	Asia/Tokyo
-Tamano	Okayama	jp	N	67.786	34.48333N	133.95E	-9999	6	Asia/Tokyo
+Tamano	Okayama	jp	N	67.786	34.48333N	133.95E	39	6	Asia/Tokyo
 Tamana	Kumamoto	jp	N	45.661	32.91667N	130.56667E	24	5	Asia/Tokyo
 Tamamura	Gunma	jp	N	42.566	36.3N	139.11667E	68	5	Asia/Tokyo
 Taketoyo	Aichi	jp	N	41.679	34.85N	136.91667E	4	5	Asia/Tokyo
@@ -12442,9 +12442,9 @@ Shiozawa	Niigata	jp	N	20.178	37.03333N	138.85E	176	5	Asia/Tokyo
 Shiojiri	Nagano	jp	N	67.159	36.1N	137.96667E	729	6	Asia/Tokyo
 Shinshiro	Aichi	jp	N	36.069	34.9N	137.5E	48	5	Asia/Tokyo
 Shin'ichi	Hiroshima	jp	N	21.03	34.55543N	133.27297E	23	5	Asia/Tokyo
-Shingu	Fukuoka	jp	N	25.991	33.71667N	130.43333E	-9999	5	Asia/Tokyo
+Shingu	Fukuoka	jp	N	25.991	33.71667N	130.43333E	67	5	Asia/Tokyo
 Shinagawa-ku	Tokyo	jp	N	360	35.60902N	139.73017E	23	7	Asia/Tokyo
-Shimonoseki	Yamaguchi	jp	N	245.786	33.95N	130.95E	-9999	7	Asia/Tokyo
+Shimonoseki	Yamaguchi	jp	N	245.786	33.95N	130.95E	44	7	Asia/Tokyo
 Shimodate	Ibaraki	jp	N	63.666	36.3N	139.98333E	34	6	Asia/Tokyo
 Shimoda	Shizuoka	jp	N	26.704	34.66667N	138.95E	1	5	Asia/Tokyo
 Shimminatocho	Wakayama	jp	N	375.339	34.18333N	135.2E	73	7	Asia/Tokyo
@@ -12543,7 +12543,7 @@ Naze	Kagoshima	jp	N	41.365	28.36667N	129.48333E	192	5	Asia/Tokyo
 Naruto	Tokushima	jp	N	64.082	34.18333N	134.61667E	2	6	Asia/Tokyo
 Nara-shi	Nara	jp	R	367.353	34.68505N	135.80485E	68	7	Asia/Tokyo
 Nanao	Ishikawa	jp	N	45.309	37.05N	136.96667E	1	5	Asia/Tokyo
-Namerikawa	Toyama	jp	N	34.638	36.76667N	137.33333E	-9999	5	Asia/Tokyo
+Namerikawa	Toyama	jp	N	34.638	36.76667N	137.33333E	113	5	Asia/Tokyo
 Nakatsugawa	Gifu	jp	N	55.011	35.48333N	137.5E	338	6	Asia/Tokyo
 Nakatsu	Fukuoka	jp	N	67.372	33.59811N	131.1883E	7	6	Asia/Tokyo
 Nakanojo	Gunma	jp	N	17.741	36.58333N	138.85E	332	5	Asia/Tokyo
@@ -12800,10 +12800,10 @@ Futtsu	Chiba	jp	N	51.65	35.30528N	139.81861E	5	6	Asia/Tokyo
 Funabashi	Chiba	jp	N	560.743	35.69306N	139.98333E	5	8	Asia/Tokyo
 Fukuyama	Hiroshima	jp	N	383.298	34.48333N	133.36667E	7	7	Asia/Tokyo
 Fukuroi	Shizuoka	jp	N	63.045	34.75N	137.91667E	11	6	Asia/Tokyo
-Fukura	Hyogo	jp	N	18.721	34.25N	134.71667E	-9999	5	Asia/Tokyo
+Fukura	Hyogo	jp	N	18.721	34.25N	134.71667E	75	5	Asia/Tokyo
 Fukuoka-shi	Fukuoka	jp	R	1392.289	33.60639N	130.41806E	7	9	Asia/Tokyo
 Fukumitsu	Toyama	jp	N	19.535	36.55N	136.86667E	97	5	Asia/Tokyo
-Fukuma	Fukuoka	jp	N	43.154	33.76667N	130.46667E	-9999	5	Asia/Tokyo
+Fukuma	Fukuoka	jp	N	43.154	33.76667N	130.46667E	66	5	Asia/Tokyo
 Fukui-shi	Fukui	jp	R	248.707	36.06443N	136.22257E	15	7	Asia/Tokyo
 Fukuecho	Nagasaki	jp	N	26.636	32.69732N	128.84561E	5	5	Asia/Tokyo
 Fukuchiyama	Kyoto	jp	N	68.735	35.3N	135.11667E	20	6	Asia/Tokyo
@@ -12865,7 +12865,7 @@ Saijo	Ehime	jp	N	58.823	33.91667N	133.18333E	8	6	Asia/Tokyo
 Ozu	Ehime	jp	N	38.833	33.5N	132.55E	27	5	Asia/Tokyo
 Matsuyama-shi	Ehime	jp	R	443.322	33.83916N	132.76574E	28	7	Asia/Tokyo
 Masaki-cho	Ehime	jp	N	30.548	33.78757N	132.71124E	7	5	Asia/Tokyo
-Kawanoe	Ehime	jp	N	37.641	34.01667N	133.56667E	-9999	5	Asia/Tokyo
+Kawanoe	Ehime	jp	N	37.641	34.01667N	133.56667E	342	5	Asia/Tokyo
 Hojo	Ehime	jp	N	27.992	33.97661N	132.77767E	7	5	Asia/Tokyo
 Yuzawa	Akita	jp	N	33.536	39.16667N	140.5E	100	5	Asia/Tokyo
 Yotsukaido	Chiba	jp	N	86.701	35.65N	140.16667E	25	6	Asia/Tokyo
@@ -12912,7 +12912,7 @@ Okawara	Miyagi	jp	N	23.34	38.05N	140.73361E	20	5	Asia/Tokyo
 Ohara	Chiba	jp	N	20.226	35.25N	140.38333E	9	5	Asia/Tokyo
 Ofunato	Iwate	jp	N	35.418	39.07167N	141.71667E	7	5	Asia/Tokyo
 Obanazawa	Yamagata	jp	N	20.821	38.60333N	140.40194E	93	5	Asia/Tokyo
-Oarai	Ibaraki	jp	N	19.326	36.31667N	140.6E	-9999	5	Asia/Tokyo
+Oarai	Ibaraki	jp	N	19.326	36.31667N	140.6E	10	5	Asia/Tokyo
 Oami	Chiba	jp	N	53.239	35.51667N	140.31667E	8	6	Asia/Tokyo
 Nihommatsu	Fukushima	jp	N	36.287	37.58333N	140.43333E	224	5	Asia/Tokyo
 Naruto	Chiba	jp	N	25.696	35.6N	140.41667E	6	5	Asia/Tokyo
@@ -12939,7 +12939,7 @@ Kuroiso	Tochigi	jp	N	61.23	36.96667N	140.05E	301	6	Asia/Tokyo
 Koriyama	Fukushima	jp	N	340.56	37.4N	140.38333E	236	7	Asia/Tokyo
 Kogota	Miyagi	jp	N	19.76	38.55N	141.05E	10	5	Asia/Tokyo
 Kitakami	Iwate	jp	N	93.854	39.28333N	141.11667E	63	6	Asia/Tokyo
-Kitaibaraki	Ibaraki	jp	N	50.843	36.78333N	140.75E	-9999	6	Asia/Tokyo
+Kitaibaraki	Ibaraki	jp	N	50.843	36.78333N	140.75E	77	6	Asia/Tokyo
 Kawaguchi	Chiba	jp	N	29.119	35.0969N	140.1003E	20	5	Asia/Tokyo
 Katsuura	Chiba	jp	N	22.307	35.14297N	140.31388E	21	5	Asia/Tokyo
 Katsuta	Ibaraki	jp	N	155.968	36.38333N	140.53333E	21	7	Asia/Tokyo
@@ -13511,7 +13511,7 @@ Eravur Town	Eastern Province	lk	N	22.982	7.7782N	81.6038E	10	5	Asia/Colombo
 Dambulla	Central	lk	N	66.716	7.86N	80.65167E	168	6	Asia/Colombo
 Colombo	Western	lk	C	648.034	6.93194N	79.84778E	9	8	Asia/Colombo
 Chilaw	North Western	lk	N	24.712	7.57583N	79.79528E	8	5	Asia/Colombo
-Beruwala	Western	lk	N	34.25	6.4788N	79.9828E	-9999	5	Asia/Colombo
+Beruwala	Western	lk	N	34.25	6.4788N	79.9828E	30	5	Asia/Colombo
 Bentota	Southern	lk	N	37	6.42598N	79.99575E	8	5	Asia/Colombo
 Batticaloa	Eastern Province	lk	N	86.742	7.7102N	81.6924E	17	6	Asia/Colombo
 Battaramulla South	Western	lk	N	75.633	6.8964N	79.9181E	11	6	Asia/Colombo
@@ -15256,7 +15256,7 @@ Amsterdam-Zuidoost	North Holland	nl	N	84.811	52.3075N	4.97222E	4	6	Europe/Amster
 Berkel en Rodenrijs	South Holland	nl	N	20.189	51.99313N	4.47865E	0	5	Europe/Amsterdam
 Ypenburg	South Holland	nl	N	30	52.04098N	4.36981E	-4	5	Europe/Amsterdam
 Trondheim	Sor-Trondelag	no	R	147.139	63.43049N	10.39506E	18	7	Europe/Oslo
-Tromso	Troms	no	R	52.436	69.6489N	18.95508E	-9999	6	Europe/Oslo
+Tromso	Troms	no	R	52.436	69.6489N	18.95508E	6	6	Europe/Oslo
 Tonsberg	Vestfold	no	R	38.914	59.26754N	10.40762E	16	5	Europe/Oslo
 Steinkjer	Nord-Trondelag	no	R	20	64.01487N	11.49537E	20	5	Europe/Oslo
 Stavanger	Rogaland	no	R	121.61	58.97005N	5.73332E	15	7	Europe/Oslo
@@ -15389,7 +15389,7 @@ Al Buraymi	Muhafazat al Buraymi	om	R	73.67	24.25088N	55.79312E	297	6	Asia/Muscat
 Adam	Ad Dakhiliyah	om	N	17.283	22.3756N	57.52334E	278	5	Asia/Muscat
 Yanqul	Az Zahirah	om	N	16.599	23.59051N	56.55008E	556	5	Asia/Muscat
 Vista Alegre	Panama	pa	N	41.786	8.93333N	79.7W	28	5	America/Panama
-Veracruz	Panama	pa	N	16.172	8.88333N	79.63333W	-9999	5	America/Panama
+Veracruz	Panama	pa	N	16.172	8.88333N	79.63333W	10	5	America/Panama
 Tocumen	Panama	pa	N	88.543	9.08333N	79.38333W	21	6	America/Panama
 Santiago de Veraguas	Veraguas	pa	R	45.355	8.1N	80.98333W	100	5	America/Panama
 San Miguelito	Panama	pa	N	321.501	9.03333N	79.5W	42	7	America/Panama
@@ -15682,7 +15682,7 @@ Pagbilao	Calabarzon	ph	N	40.818	13.9712N	121.6879E	17	5	Asia/Manila
 Pagalungan	Autonomous Region in Muslim Mindanao	ph	N	31.052	7.14167N	124.38056E	4	5	Asia/Manila
 Pagadian	Zamboanga Peninsula	ph	R	186.852	7.8257N	123.437E	40	7	Asia/Manila
 Paete	Calabarzon	ph	N	26.855	14.3647N	121.4829E	11	5	Asia/Manila
-Pacol	Western Visayas	ph	N	19.839	10.45N	122.81667E	-9999	5	Asia/Manila
+Pacol	Western Visayas	ph	N	19.839	10.45N	122.81667E	16	5	Asia/Manila
 Ozamiz City	Northern Mindanao	ph	N	93.082	8.1481N	123.8405E	10	6	Asia/Manila
 Oroquieta	Northern Mindanao	ph	N	39.279	8.4859N	123.8048E	6	5	Asia/Manila
 Ormoc	Eastern Visayas	ph	N	191.2	11.00639N	124.6075E	11	7	Asia/Manila
@@ -16707,7 +16707,7 @@ Linda-a-Velha	Lisbon	pt	N	20.895	38.71446N	9.2422W	90	5	Europe/Lisbon
 Leiria	Leiria	pt	R	45.112	39.74362N	8.80705W	33	5	Europe/Lisbon
 Laranjeiro	Faro	pt	N	20.473	37.06831N	7.7937W	44	5	Europe/Lisbon
 Lagos	Faro	pt	N	18.831	37.10202N	8.67422W	12	5	Europe/Lisbon
-Funchal	Madeira	pt	R	100.847	32.63333N	16.9W	-9999	7	Atlantic/Madeira
+Funchal	Madeira	pt	R	100.847	32.63333N	16.9W	170	7	Atlantic/Madeira
 Faro	Faro	pt	R	41.355	37.01937N	7.93223W	15	5	Europe/Lisbon
 Evora	Evora	pt	R	55.62	38.56667N	7.9W	269	6	Europe/Lisbon
 Estoril	Lisbon	pt	N	23.7	38.70571N	9.39773W	24	5	Europe/Lisbon
@@ -16720,7 +16720,7 @@ Carnaxide	Lisbon	pt	N	23.698	38.72706N	9.24671W	82	5	Europe/Lisbon
 Carcavelos	Lisbon	pt	N	20.366	38.69105N	9.32215W	30	5	Europe/Lisbon
 Caparica	Setubal	pt	N	21.167	38.66667N	9.2W	107	5	Europe/Lisbon
 Camarate	Lisbon	pt	N	20.177	38.80358N	9.12808W	108	5	Europe/Lisbon
-Camara de Lobos	Madeira	pt	N	32.209	32.63333N	16.96667W	-9999	5	Atlantic/Madeira
+Camara de Lobos	Madeira	pt	N	32.209	32.63333N	16.96667W	168	5	Atlantic/Madeira
 Caldas da Rainha	Leiria	pt	N	26.647	39.40326N	9.13839W	60	5	Europe/Lisbon
 Cacem	Lisbon	pt	N	93.982	38.76698N	9.29793W	123	6	Europe/Lisbon
 Belas	Lisbon	pt	N	21.019	38.77721N	9.26078W	149	5	Europe/Lisbon
@@ -18930,7 +18930,7 @@ Ar Rudayyif	Qafsah	tn	N	30.048	34.3827N	8.15549E	569	5	Africa/Tunis
 Al Wardanin	Al Munastir	tn	N	18.287	35.70915N	10.67397E	63	5	Africa/Tunis
 Kairouan	Al Qayrawan	tn	R	119.794	35.6781N	10.09633E	65	7	Africa/Tunis
 Kasserine	Al Qasrayn	tn	R	81.987	35.16758N	8.83651E	674	6	Africa/Tunis
-Al Qarmadah	Safaqis	tn	N	33.744	34.75N	10.78333E	-9999	5	Africa/Tunis
+Al Qarmadah	Safaqis	tn	N	33.744	34.75N	10.78333E	20	5	Africa/Tunis
 Monastir	Al Munastir	tn	R	71.546	35.77799N	10.82617E	20	6	Africa/Tunis
 La Mohammedia	Tunis	tn	N	66.593	36.67446N	10.15633E	63	6	Africa/Tunis
 Al Metlaoui	Qafsah	tn	N	41.899	34.32081N	8.40158E	223	5	Africa/Tunis
@@ -19305,7 +19305,7 @@ Bafra	Samsun	tr	N	92.944	41.56778N	35.90694E	28	6	Europe/Istanbul
 Babaeski	Kirklareli	tr	N	26.724	41.4325N	27.09306E	58	5	Europe/Istanbul
 Artvin	Artvin	tr	R	24.266	41.18161N	41.82172E	517	5	Europe/Istanbul
 Arsin	Trabzon	tr	N	16.148	40.94958N	39.92756E	46	5	Europe/Istanbul
-Arhavi	Artvin	tr	N	16.217	41.35121N	41.30456E	-9999	5	Europe/Istanbul
+Arhavi	Artvin	tr	N	16.217	41.35121N	41.30456E	12	5	Europe/Istanbul
 Ardesen	Rize	tr	N	67.965	41.19111N	40.9875E	12	6	Europe/Istanbul
 Ardahan	Ardahan	tr	R	21.02	41.10871N	42.70222E	1812	5	Europe/Istanbul
 Arakli	Trabzon	tr	N	29.917	40.93854N	40.05842E	8	5	Europe/Istanbul
@@ -23125,7 +23125,7 @@ Cho Dok	An Giang	vn	N	70.239	10.7N	105.11667E	10	6	Asia/Ho_Chi_Minh
 Cao Lanh	Dong Thap	vn	R	63.77	10.45N	105.63333E	7	6	Asia/Ho_Chi_Minh
 Thanh Pho Cao Bang	Cao Bang	vn	R	41.112	22.66568N	106.25786E	197	5	Asia/Ho_Chi_Minh
 Can Tho	Can Tho	vn	R	259.598	10.03333N	105.78333E	6	7	Asia/Ho_Chi_Minh
-Can Gio	Ho Chi Minh City	vn	N	55.137	10.41667N	106.96667E	-9999	6	Asia/Ho_Chi_Minh
+Can Gio	Ho Chi Minh City	vn	N	55.137	10.41667N	106.96667E	2	6	Asia/Ho_Chi_Minh
 Can Duoc	Long An	vn	N	152.2	10.61667N	106.66667E	4	7	Asia/Ho_Chi_Minh
 Cam Ranh	Khanh Hoa	vn	N	146.771	11.92144N	109.15913E	15	7	Asia/Ho_Chi_Minh
 Cam Pha Mines	Quang Ninh	vn	N	135.477	21.01667N	107.3E	209	7	Asia/Ho_Chi_Minh
