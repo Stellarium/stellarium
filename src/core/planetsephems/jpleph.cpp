@@ -776,7 +776,7 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
     temp_data.ipt[12][2] = temp_data.ipt[13][0];
     temp_data.ephemeris_version = de_version;
 
-    qDebug() << "DE_Version: " << de_version;
+    //qDebug() << "DE_Version: " << de_version;
 
 
     temp_data.swap_bytes = (temp_data.ncon > 65536L);
@@ -840,8 +840,8 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
     if(temp_data.emrat > 81.3008 || temp_data.emrat < 81.30055)
     {   
       init_err_code = JPL_INIT_FILE_CORRUPT;
+      qWarning() << "temp_data: " << temp_data.emrat << "(should have been =~81). JPL_INIT_FILE_CORRUPT!";
     }
-    qDebug() << "tempData: " << temp_data.emrat << "=~81";
 
     if(init_err_code)
     {
