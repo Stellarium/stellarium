@@ -74,11 +74,11 @@ private:
 
 	//! True if a star catalog download is in progress.
 	bool isDownloadingStarCatalog;
-    //! True if a ephemData download is in progress.
-    bool isDownloadingEphemData;
-    //! True if any download is in progress
-    bool isDownloading;
-    
+	//! True if a ephemData download is in progress.
+	bool isDownloadingEphemData;
+	//! True if any download is in progress
+	bool isDownloading;
+
 
 private slots:
 	void setNoSelectedInfo();
@@ -156,10 +156,10 @@ private slots:
 	#endif
 	void setFixedDateTimeToCurrent();
 
-    //! downloads DE430/DE431 ephemData from SourceForge
-    void downloadEphemData();
+	//! downloads DE430/DE431 ephemData from SourceForge
+	void downloadEphemData();
 
-    void de430ButtonClicked();
+	void de430ButtonClicked();
 	void de431ButtonClicked();
 
 private:

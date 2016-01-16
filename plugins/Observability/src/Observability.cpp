@@ -601,7 +601,18 @@ void Observability::draw(StelCore* core)
 		
 		if (culmAlt < (halfpi - refractedHorizonAlt)) // Source can be observed.
 		{
-			double altiAtCulmi = Rad2Deg*(halfpi-culmAlt-refractedHorizonAlt);
+//			THESE IS FREE OF ATMOSPHERE AND REFERRED TO TRUE HORIZON!
+			double altiAtCulmi = (halfpi-culmAlt); //-refractedHorizonAlt);
+
+// Add refraction, if necessary:
+			Vec3d TempRefr;	
+			TempRefr[0] = std::cos(altiAtCulmi);  
+			TempRefr[1] = 0.0; 
+			TempRefr[2] = std::sin(altiAtCulmi);  
+			Vec3d CorrRefr = core->altAzToEquinoxEqu(TempRefr,StelCore::RefractionOff);
+			TempRefr = core->equinoxEquToAltAz(CorrRefr,StelCore::RefractionAuto);
+			altiAtCulmi = Rad2Deg*std::asin(TempRefr[2]);
+
 			double2hms(TFrac*currH,dc,mc,sc);
 			
 			//String with the time span for culmination:
@@ -723,13 +734,13 @@ void Observability::draw(StelCore* core)
 					QString acroRiseStr, acroSetStr;
 					QString cosRiseStr, cosSetStr;
 					QString heliRiseStr, heliSetStr;
-					// TODO: Possible error? Day 0 is 1 Jan.
-					acroRiseStr = (acroRise>0)?formatAsDate(acroRise):msgNone;
-					acroSetStr = (acroSet>0)?formatAsDate(acroSet):msgNone;
+					// TODO: Possible error? Day 0 is 1 Jan. ==> IMV: Indeed! Corrected
+					acroRiseStr = (acroRise>=0)?formatAsDate(acroRise):msgNone;
+					acroSetStr = (acroSet>=0)?formatAsDate(acroSet):msgNone;
 					cosRiseStr = (cosRise>0)?formatAsDate(cosRise):msgNone;
 					cosSetStr = (cosSet>0)?formatAsDate(cosSet):msgNone;
-					heliRiseStr = (heliRise>0)?formatAsDate(heliRise):msgNone;
-					heliSetStr = (heliSet>0)?formatAsDate(heliSet):msgNone;
+					heliRiseStr = (heliRise>=0)?formatAsDate(heliRise):msgNone;
+					heliSetStr = (heliSet>=0)?formatAsDate(heliSet):msgNone;
 
 
 					if (result==3 || result==1)

@@ -1,0 +1,87 @@
+
+\chapter{Plugins}\label{plugins}
+
+Since version 0.10.3, Stellarium's packages include a number of
+plug-ins: Angle Measure, Compass Marks, Oculars, Telescope Control, Text
+User Interface, Satellites, Solar System Editor, Time Zone, Historical
+Supernovae, Quasars, Pulsars, Exoplanets and Observability analysis. All
+these plug-ins are ``built-in'' in the standard Stellarium distribution
+and DON'T need to be downloaded separately.
+
+\section{Enabling plugins}\label{enabling-plugins}
+
+%\begin{figure}[h]
+%\centering\includegraphics{sat_howto_01.jpg}
+%\end{figure}
+
+To enable a plugin:
+
+\begin{enumerate}
+\item
+  Open the \textbf{Configuration dialog} (press F2 or use the left tool
+  bar button)
+\item
+  Select the \textbf{Plugins} tab
+\item
+  Select the plugin you want to enable from the list
+\item
+  Check the \textbf{Load at startup} option
+\item
+  Restart Stellarium
+\end{enumerate}
+
+If the plugin has configuration options, the \textbf{configuration}
+button will be enabled when the plugin is loaded and clicking it will
+open the plugin's configuration window.
+
+\section{Data for plugins}\label{data-for-plugins}
+
+Some plugins contain files with different data, e.g. catalogs. JSON is a
+typical format for those files and you can edit it's manually. Of
+course, each plugin has specific format of data for the own catalogs and
+you should read documentation for plugin before editing of it catalog.
+
+You can read some common instructions for editing catalogs of plugins
+below. In this example we use \texttt{catalog.json} file for
+identification of catalog for typical plugin.
+
+You can modify the \texttt{catalog.json} files manually using a text
+editor. \textbf{If you are using Windows, it is strongly recommended to
+use an advanced text editor such as
+\href{http://notepad-plus-plus.org/}{Notepad++}} to avoid problems with
+end-of-line characters. (It will also color the JSON code and make it
+easier to read.)
+
+\textbf{Warning}: Before editing your \texttt{catalog.json} file, make a
+backup copy. Leaving out the smallest detail (such as a comma or
+forgetting to close a curly bracket) will prevent Stellarium from
+starting.
+
+The path to the directory\footnote{This is a hidden folder, so in order to find it you may need to change your computer's settings to display hidden files and folders.} which contains \texttt{catalog.json} file is
+something like:
+
+\begin{itemize}
+\item
+  C:\textbackslash Users\textbackslash\textbf{UserName}\textbackslash AppData\textbackslash Roaming\textbackslash Stellarium\textbackslash modules\textbackslash \textit{PluginName}\\ (Windows)
+\item
+  \textbf{HomeDirectory}/Library/Preferences/Stellarium/modules/\textit{PluginName}\\ (Mac OS X)
+\item
+  \textasciitilde{}/.stellarium/modules/\textit{PluginName} (Linux and UNIX-like OS)
+\end{itemize}
+
+\section{How you can help}\label{how-you-can-help}
+
+We are welcome bug reports, feature requests and feedback through the
+usual channels (trackers, forums and so on):
+\begin{itemize}
+\item Bug tracker --- \url{https://bugs.launchpad.net/stellarium}
+\item Questions for Stellarium --- \url{https://answers.launchpad.net/stellarium}
+\item Feedback forum --- \url{https://sourceforge.net/p/stellarium/discussion/278769/}
+\item Blueprints for Stellarium --- \url{https://blueprints.launchpad.net/stellarium}
+\end{itemize}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "guide"
+%%% End: 

@@ -1,6 +1,16 @@
-\chapterimage{chapter-bg.png} % Chapter heading image
+% Status info:
+% M. Gates	2006-2009
+% A. Wolf	2011-2015
+% ArdWar	2012
+% B. Gerdes	2013
+% Additions inserted from wiki 2015-12-26
+% Content OK for 0.14+.
+% TODO: add historical notes
+% TODO: typo&grammar check
+
 
 \chapter{Introduction}
+\label{ch:Introduction}
 
 \emph{Stellarium} is a software project that allows people to use their
 home computer as a virtual planetarium. It calculates the positions of
@@ -17,23 +27,98 @@ in some real planetarium projector products. Some amateur astronomy
 groups use it to create sky maps for describing regions of the sky in
 articles for newsletters and magazines.
 
-The development of a powerful scripting system has been continuing for a
-number of years now and can now be called operational. The use of a
+The development of a powerful scripting system has been continuing for
+a number of years now and can now be called operational. The use of a
 script was recognised as a perfect way of arranging a display of a
-sequence of astronomical events from the earliest versions of Stellarium
-and a simple system called the Stratoscript was implemented. The
-scipting facility is Stellarium's version of a \emph{Presentation}, a
-feature that may be used to run an astronomical or other presentation
-for instruction or entertainment from within the Stellarium program. The
-original Stratoscript was quite limited in what it could do so a new
-Stellarium Scripting System has been developed.
+sequence of astronomical events from the earliest versions of
+Stellarium and a simple system called the Stratoscript was
+implemented. The scipting facility is Stellarium's version of a
+\emph{Presentation}, a feature that may be used to run an astronomical
+or other presentation for instruction or entertainment from within the
+Stellarium program. The original Stratoscript was quite limited in
+what it could do so a new Stellarium Scripting System has been
+developed. As of version 0.14.0 a new scripting engine is still in
+development but it has all required features for usage, however new
+commands may be added from time to time. Since version 0.14.0 support
+of scripts for Stratoscript engine has been discontinued.
 
-Stellarium is under fairly rapid development, and by the time you read
+Stellarium is still under  development, and by the time you read
 this guide, a newer version may have been released with even more
 features that those documented here. Check for updates to Stellarium at
 the Stellarium website.
 
 If you have questions and/or comments about this guide, please email the
-author. For comments about Stellarium itself, visit the
-\href{https://sourceforge.net/p/stellarium/discussion/278769/}{Stellarium
-forums}.
+author. For comments about Stellarium itself, visit the Stellarium forums\footnote{%
+\url{https://sourceforge.net/p/stellarium/discussion/278769/}}.
+
+
+\section{Historical notes}
+\label{sec:Introduction:HistoricalNotes}
+
+%% GZ: I put meta-comments under %% and outlines of things which should be included but which I cannot write under single comment signs (%).
+
+%% TODO: A short history. Please one of the original team, this would be really useful to fill in!!!
+%% It may also be possible, if everyone from the original team adds 1/2-1 page under his name, to have some nice anecdotes?
+
+Stellarium has been developed by a small team of enthusiastic developers. 
+%% Please replace the following sentence by something corrected!
+[We should have a short description here!]
+% Fabien Chereau started the project in 2002,%?
+% and soon found support by his brother Guillaume, Matthew Gates,
+% Timothy Reaves, Johannes Gajdosik, Barry Gerdes, and Alexander Wolf.
+% The artist Johan Meuris contributed the graphical elements, not only
+% the GUI button icons, but a full set of drawings of our Western 88
+% constellations.
+
+% It may be interesting for "software archaeologists" to dig into very old versions still available on SourceForge... 
+%% MAYBE SOME DEV. HIGHLIGHTS? Fabien?
+
+%% AND OTHERS?
+%% MAYBE PRESENT THE CONTRIBUTIONS OF THEM? 
+% In 200x, Guillaume ported Stellarium first to the Nokia Maemo platform, then to Android. 
+% The Android version differs a bit from the desktop version: 
+%% WHY, IN WHAT PARTS? Can this guide be applied/extended to the Android version?
+
+By 2010 the team was preparing a first ``final'' release 1.0. 
+%% WHAT HAPPENED THEN?
+
+Unfortunately time is evolving, and most members of the original
+development team are no longer able to devote most of their spare time
+to the project. Fortunately some are still available for limited work
+which requires specific knowledge about the project. Currently (2016)
+most maintenance and regular releases are created by Alexander
+Wolf. Georg Zotti joined around 2010 and is working on extensions
+mostly in the fields of historical and cultural astronomy, but also on
+graphic items like the comet tails or the Zodiacal Light.
+
+%% Whoever feels left out, please present yourself!
+
+
+A great leap forward was the 0.13 series. We had to adapt to
+evolutions in the Qt framework which Stellarium is based
+on. Fortunately Fabien and Guillaume had enough insight into the
+framework to do this. This also means the series 0.13 and later
+require more modern hardware than earlier versions.
+
+Stellarium has been kindly supported by ESA in their Summer of Code in
+Space initiatives, which resulted in better planetary rendering
+(2012), and the web-based remote control and an alternative solution
+for planetary positions based on the DE430/DE431 ephemeris (2015).
+
+
+This guide is based on the user guide written by Matthew Gates for
+version 0.10 around 2008, and updated by Barry Gerdes up to version
+0.12. %% PLEASE CORRECT ME!
+The user documentation has been developed on the Stellarium wiki for
+some time, but we (Alexander and Georg) feel that a singular book may
+be the better format for offline reading.
+
+This new edition of the guide will not contain notes about using
+earlier versions than 0.13 or using very outdated hardware. Some
+references may still be made, but if you are using earlier versions
+for particular reasons, please use the older guides.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "guide"
+%%% End: 
