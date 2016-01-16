@@ -179,8 +179,8 @@ void ConfigurationDialog::createDialogContent()
 	ui->topocentricCheckBox->setChecked(core->getUseTopocentricCoordinates());
 	connect(ui->topocentricCheckBox, SIGNAL(toggled(bool)), core, SLOT(setUseTopocentricCoordinates(bool)));
 
-	connect(ui->de430Button, SIGNAL(clicked()), this, SLOT(de430ButtonClicked()));
-	connect(ui->de431Button, SIGNAL(clicked()), this, SLOT(de431ButtonClicked()));
+	connect(ui->de430checkBox, SIGNAL(clicked()), this, SLOT(de430ButtonClicked()));
+	connect(ui->de431checkBox, SIGNAL(clicked()), this, SLOT(de431ButtonClicked()));
 	
 	resetStarCatalogControls();
 	resetEphemControls();
@@ -1171,18 +1171,29 @@ void ConfigurationDialog::de431ButtonClicked()
 
 void ConfigurationDialog::resetEphemControls()
 {
-	ui->de430Button->setEnabled(StelApp::getInstance().getCore()->de430IsAvailable());
-	ui->de431Button->setEnabled(StelApp::getInstance().getCore()->de431IsAvailable());
+	ui->de430checkBox->setEnabled(StelApp::getInstance().getCore()->de430IsAvailable());
+	ui->de431checkBox->setEnabled(StelApp::getInstance().getCore()->de431IsAvailable());
+	ui->de430checkBox->setChecked(StelApp::getInstance().getCore()->de430IsActive());
+	ui->de431checkBox->setChecked(StelApp::getInstance().getCore()->de431IsActive());
 
 	if(StelApp::getInstance().getCore()->de430IsActive())
-		ui->de430Button->setText(q_("DE430: 1550...2650"));
+		ui->de430label->setText(q_("1550...2650"));
 	else
-		ui->de430Button->setText(q_("DE430: NO"));
-
+	{
+		if (StelApp::getInstance().getCore()->de430IsAvailable())
+			ui->de430label->setText(q_("Available"));
+		else
+			ui->de430label->setText(q_("Not Available"));
+	}
 	if(StelApp::getInstance().getCore()->de431IsActive())
-		ui->de431Button->setText(q_("DE431: -13.000...17.000"));
+		ui->de431label->setText(q_("-13.000...17.000"));
 	else
-		ui->de431Button->setText(q_("DE431: NO"));
+	{
+		if (StelApp::getInstance().getCore()->de431IsAvailable())
+			ui->de431label->setText(q_("Available"));
+		else
+			ui->de431label->setText(q_("Not Available"));
+	}
 }
 
 void ConfigurationDialog::downloadEphemData()
