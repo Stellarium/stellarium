@@ -829,7 +829,7 @@ GridLinesMgr::GridLinesMgr()
 	equatorLine = new SkyLine(SkyLine::EQUATOR_OF_DATE);
 	equatorJ2000Line = new SkyLine(SkyLine::EQUATOR_J2000);
 	eclipticJ2000Line = new SkyLine(SkyLine::ECLIPTIC_J2000); // previous eclipticLine
-	eclipticLine = new SkyLine(SkyLine::ECLIPTIC_OF_DATE); // GZ NEW
+	eclipticLine = new SkyLine(SkyLine::ECLIPTIC_OF_DATE); // NEW in 0.14
 	precessionCircleN = new SkyLine(SkyLine::PRECESSIONCIRCLE_N);
 	precessionCircleS = new SkyLine(SkyLine::PRECESSIONCIRCLE_S);
 	meridianLine = new SkyLine(SkyLine::MERIDIAN);

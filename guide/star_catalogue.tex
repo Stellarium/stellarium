@@ -1,19 +1,21 @@
-\chapterimage{chapter-bg.png} % Chapter heading image
 
-\chapter{Star Catalogue }\label{star-catalogue}
+\chapter{Star Catalogues}
+\label{ch:Catalogues}
 
-This chapter describes how Stellarium records it's star catalogues, and
+This chapter provides technical descriptions on how Stellarium records its star catalogues, and
 the related file formats.
 
-\section{Stellarium's Sky Model}\label{stellariums-sky-model}
+\section{Stellarium's Sky Model}
+\label{sec:Catalogues:SkyModel}
 
-\subsection{Zones}\label{zones}
+\subsection{Zones}
+\label{sec:Catalogues:SkyModel:Zones}
 
 The celestial sphere is split into zones, which correspond to the
 triangular faces of a geodesic sphere. The number of zones (faces)
 depends on the level of sub-division of this sphere. The lowest level,
 0, is an icosahedron (20 faces), subsequent levels, L, of sub-division
-give the number of zones, n as:
+give the number of zones, $n$ as:
 
 \begin{equation}
 n=20 \cdot 4^L
@@ -42,48 +44,34 @@ Directories}).
 The main catalogue data is split into several files:
 
 \begin{itemize}
-\item
-  stars\_0\_0v0\_3.cat
-\item
-  stars\_1\_0v0\_3.cat
-\item
-  stars\_2\_0v0\_3.cat
-\item
-  stars\_3\_0v0\_2.cat
-\item
-  stars\_4\_1v0\_0.cat
-\item
-  stars\_5\_1v0\_0.cat
-\item
-  stars\_6\_2v0\_0.cat
-\item
-  stars\_7\_2v0\_0.cat
-\item
-  stars\_8\_2v0\_0.cat
+\item \file{stars\_0\_0v0\_3.cat}
+\item \file{stars\_1\_0v0\_3.cat}
+\item \file{stars\_2\_0v0\_3.cat}
+\item \file{stars\_3\_0v0\_2.cat}
+\item \file{stars\_4\_1v0\_0.cat}
+\item \file{stars\_5\_1v0\_0.cat}
+\item \file{stars\_6\_2v0\_0.cat}
+\item \file{stars\_7\_2v0\_0.cat}
+\item \file{stars\_8\_2v0\_0.cat}
 \end{itemize}
 
 There also exist some control and reference files:
 
 \begin{itemize}
-\item
-  stars\_hip\_cids\_0v0\_0.cat
-\item
-  stars\_hip\_sp\_0v0\_0.cat
-\item
-  gcvs\_hip\_part.dat
-\item
-  stars.ini
-\item
-  name.fab
+\item \file{stars\_hip\_cids\_0v0\_0.cat}
+\item \file{stars\_hip\_sp\_0v0\_0.cat}
+\item \file{gcvs\_hip\_part.dat}
+\item \file{stars.ini}
+\item \file{name.fab}
 \end{itemize}
 
 When Stellarium starts, it reads the stars.ini file, from which it
 determines the names of the other files, which it then loads.
 
-The \textbf{stars\_hip\_cids\_0v0\_0.cat and stars\_hip\_sp\_0v0\_0.cat}
-files contain reference data for the main catalogue files. The
-\textbf{gcvs\_hip\_part.dat} file contain data about variables stars
-(see section \href{Variable_Stars}{Variable Stars}) which reference for
+The files \file{stars\_hip\_cids\_0v0\_0.cat} and \file{stars\_hip\_sp\_0v0\_0.cat}
+contain reference data for the main catalogue files. The
+file \file{gcvs\_hip\_part.dat} contains data about variables stars
+(see section~\ref{ch:StarCatalogues:VariableStars}) which contains references for
 the main catalogue files too.
 
 A given catalogue file models stars for one and only one level (i.e. for
@@ -98,23 +86,15 @@ know about the zone model to be able to extract positional data.
 \emph{File} & \emph{Data Type} & \emph{Data Record Size} &
 \emph{Geodesic Level} & \emph{\#Records} & \emph{Notes}\tabularnewline
 \midrule
-stars\_0\_0v0\_3.cat & 0 & 28 bytes & 0 & 5,013 &
-Hipparcos\tabularnewline
-stars\_1\_0v0\_3.cat & 0 & 28 bytes & 1 & 21,999 &
-Hipparcos\tabularnewline
-stars\_2\_0v0\_3.cat & 0 & 28 bytes & 2 & 151,516 &
-Hipparcos\tabularnewline
-stars\_3\_1v0\_2.cat & 1 & 10 bytes & 3 & 434,064 & Tycho 2\tabularnewline
-stars\_4\_1v0\_0.cat & 1 & 10 bytes & 4 & 1,725,497 &
-Tycho 2\tabularnewline
-stars\_5\_2v0\_0.cat & 2 & 8 bytes & 5 & 7,669,011 &
-NOMAD\tabularnewline
-stars\_6\_2v0\_0.cat & 2 & 8 bytes & 6 & 26,615,233 &
-NOMAD\tabularnewline
-stars\_7\_2v0\_0.cat & 2 & 8 bytes & 7 & 57,826,266 &
-NOMAD\tabularnewline
-stars\_8\_2v0\_0.cat & 2 & 8 bytes & 7 & 116,923,084 &
-NOMAD\tabularnewline
+\file{stars\_0\_0v0\_3.cat} & 0 & 28 bytes & 0 & 5,013 & Hipparcos\\
+\file{stars\_1\_0v0\_3.cat} & 0 & 28 bytes & 1 & 21,999 & Hipparcos\\
+\file{stars\_2\_0v0\_3.cat} & 0 & 28 bytes & 2 & 151,516 & Hipparcos\\
+\file{stars\_3\_1v0\_2.cat} & 1 & 10 bytes & 3 & 434,064 & Tycho 2\\
+\file{stars\_4\_1v0\_0.cat} & 1 & 10 bytes & 4 & 1,725,497 & Tycho 2\\
+\file{stars\_5\_2v0\_0.cat} & 2 & 8 bytes & 5 & 7,669,011 & NOMAD\\
+\file{stars\_6\_2v0\_0.cat} & 2 & 8 bytes & 6 & 26,615,233 & NOMAD\\
+\file{stars\_7\_2v0\_0.cat} & 2 & 8 bytes & 7 & 57,826,266 & NOMAD\\
+\file{stars\_8\_2v0\_0.cat} & 2 & 8 bytes & 7 & 116,923,084 &NOMAD\\
 \bottomrule
 \end{longtabu}
 
@@ -334,13 +314,18 @@ magnitude range for the file\tabularnewline
 
 
 \section{Variable Stars}
-Since version 0.12.2 Stellarium support the subset of variable stars
-from \href{http://www.sai.msu.su/gcvs/gcvs/}{GCVS}, which have a HIP
-identificators (i.e. stars from Hipparcos catalog). Stellarium's Catalog
-of Variable Stars based on \textbf{General Catalogue of Variable Stars} --- Samus N.N., Durlevich O.V., Kazarovets E V., Kireeva N.N., Pastukhova E.N., Zharova A.V., et al., General Catalogue of Variable Stars (Samus+ 2007-2012).
+\label{ch:StarCatalogues:VariableStars}
 
-\subsection{Variable Star Catalog File
-Format}\label{variable-star-catalog-file-format}
+Since version 0.12.2 Stellarium supports the subset of variable stars
+from GCVS\footnote{\url{http://www.sai.msu.su/gcvs/gcvs/}} which have  HIP
+identificators (i.e., stars from the Hipparcos catalog). Stellarium's Catalog
+of Variable Stars is based on 
+\textbf{General Catalogue of Variable Stars} --- Samus N.N., Durlevich
+O.V., Kazarovets E V., Kireeva N.N., Pastukhova E.N., Zharova A.V., et
+al., General Catalogue of Variable Stars (Samus+ 2007-2012).
+
+\subsection{Variable Star Catalog File Format}
+\label{ch:StarCatalogues:VariableStars:format}
 
 \subsubsection{General Description}\label{general-description}
 
@@ -1388,3 +1373,8 @@ V19).\tabularnewline
 \bottomrule
 \end{longtabu}
 
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "guide"
+%%% End: 
