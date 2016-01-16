@@ -490,7 +490,6 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 
 void Planet::computePosition(const double dateJDE)
 {
-	//qDebug() << "Planet::computePosition() for " << getEnglishName();
 	// Make sure the parent position is computed for the dateJDE, otherwise
 	// getHeliocentricPos() would return incorrect values.
 	if (parent)
@@ -612,9 +611,6 @@ void Planet::computePosition(const double dateJDE)
 	}
 	else if (fabs(lastJDE-dateJDE)>deltaJDE)
 	{
-		//qDebug() << "Planet::computePosition() actual position for " << getEnglishName();
-		// GZ: THE ACTUAL CRASH ON WINDOWS IS HERE!
-		// DE430 initialisation has not been called (no log entries) when this is first executed.
 		// calculate actual Planet position
 		coordFunc(dateJDE, eclipticPos, userDataPtr);
 		// XXX: do we need to do that even when the orbit is not visible?
