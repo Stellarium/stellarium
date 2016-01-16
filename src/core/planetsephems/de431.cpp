@@ -1,5 +1,6 @@
 /*
 Copyright (c) 2015 Holger Niessner
+Copyright (c) 2016 Georg Zotti
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -68,7 +69,7 @@ bool GetDe431Coor(const double jde, const int planet_id, double * xyz, const int
 {
     if(initDone)
     {
-	// This may return some error code! TODO: Check the year 10100 problem!
+	// This may return some error code!
 	int jplresult=jpl_pleph(ephem, jde, planet_id, centralBody_id, tempXYZ, 0);
 
 	switch (jplresult)
@@ -112,10 +113,6 @@ bool GetDe431Coor(const double jde, const int planet_id, double * xyz, const int
     return false;
 }
 
-//void GetDe431OsculatingCoor(double jd0, double jd, int planet_id, double *xyz, const int centralBody_id)
-//{
-	
-//}
 
 #ifdef __cplusplus
   }
