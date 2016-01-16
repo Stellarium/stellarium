@@ -59,6 +59,7 @@
 #include "SkyGui.hpp"
 #include "StelJsonParser.hpp"
 #include "StelTranslator.hpp"
+#include "EphemWrapper.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -72,15 +73,17 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
 	: StelDialog(parent)
 	, nextStarCatalogToDownloadIndex(0)
 	, starCatalogsCount(0)
-	, starCatalogDownloadReply(NULL)
+	, downloadReply(NULL)
 	, currentDownloadFile(NULL)
 	, progressBar(NULL)
 	, gui(agui)
+	, hasDownloadedStarCatalog(false)
+	, isDownloadingStarCatalog(false)
+	, isDownloadingEphemData(false)
+	, customDeltaTEquationDialog(NULL)
 {
 	ui = new Ui_configurationDialogForm;
-	customDeltaTEquationDialog = NULL;
-	hasDownloadedStarCatalog = false;
-	isDownloadingStarCatalog = false;
+
 	savedProjectionType = StelApp::getInstance().getCore()->getCurrentProjectionType();
 	// Get info about operating system
 	QString platform = StelUtils::getOperatingSystemInfo();
@@ -170,11 +173,18 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->getStarsButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
 	connect(ui->downloadCancelButton, SIGNAL(clicked()), this, SLOT(cancelDownload()));
 	connect(ui->downloadRetryButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
-	resetStarCatalogControls();
+	
 	ui->nutationCheckBox->setChecked(core->getUseNutation());
 	connect(ui->nutationCheckBox, SIGNAL(toggled(bool)), core, SLOT(setUseNutation(bool)));
 	ui->topocentricCheckBox->setChecked(core->getUseTopocentricCoordinates());
 	connect(ui->topocentricCheckBox, SIGNAL(toggled(bool)), core, SLOT(setUseTopocentricCoordinates(bool)));
+
+	connect(ui->de430checkBox, SIGNAL(clicked()), this, SLOT(de430ButtonClicked()));
+	connect(ui->de431checkBox, SIGNAL(clicked()), this, SLOT(de431ButtonClicked()));
+	
+	resetStarCatalogControls();
+	resetEphemControls();
+
 #ifdef Q_OS_WIN
 	//Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
@@ -1077,27 +1087,27 @@ void ConfigurationDialog::updateStarCatalogControlsText()
 void ConfigurationDialog::cancelDownload(void)
 {
 	Q_ASSERT(currentDownloadFile);
-	Q_ASSERT(starCatalogDownloadReply);
+	Q_ASSERT(downloadReply);
 	qWarning() << "Aborting download";
-	starCatalogDownloadReply->abort();
+	downloadReply->abort();
 }
 
 void ConfigurationDialog::newStarCatalogData()
 {
 	Q_ASSERT(currentDownloadFile);
-	Q_ASSERT(starCatalogDownloadReply);
+	Q_ASSERT(downloadReply);
 	Q_ASSERT(progressBar);
 
-	int size = starCatalogDownloadReply->bytesAvailable();
+	int size = downloadReply->bytesAvailable();
 	progressBar->setValue((float)progressBar->getValue()+(float)size/1024);
-	currentDownloadFile->write(starCatalogDownloadReply->read(size));
+	currentDownloadFile->write(downloadReply->read(size));
 }
 
 void ConfigurationDialog::downloadStars()
 {
 	Q_ASSERT(!nextStarCatalogToDownload.isEmpty());
 	Q_ASSERT(!isDownloadingStarCatalog);
-	Q_ASSERT(starCatalogDownloadReply==NULL);
+	Q_ASSERT(downloadReply==NULL);
 	Q_ASSERT(currentDownloadFile==NULL);
 	Q_ASSERT(progressBar==NULL);
 
@@ -1112,7 +1122,7 @@ void ConfigurationDialog::downloadStars()
 		ui->downloadRetryButton->setVisible(true);
 		return;
 	}
-
+	isDownloading = true;
 	isDownloadingStarCatalog = true;
 	updateStarCatalogControlsText();
 	ui->downloadCancelButton->setVisible(true);
@@ -1124,10 +1134,10 @@ void ConfigurationDialog::downloadStars()
 	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
 	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
 	req.setRawHeader("User-Agent", userAgent.toLatin1());
-	starCatalogDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-	starCatalogDownloadReply->setReadBufferSize(1024*1024*2);	
-	connect(starCatalogDownloadReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
-	connect(starCatalogDownloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
+	downloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
+	downloadReply->setReadBufferSize(1024*1024*2);	
+	connect(downloadReply, SIGNAL(finished()), this, SLOT(starsDownloadFinished()));
+	connect(downloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
 
 	progressBar = StelApp::getInstance().addProgressBar();
 	progressBar->setValue(0);
@@ -1137,30 +1147,97 @@ void ConfigurationDialog::downloadStars()
 	qDebug() << "Downloading file" << nextStarCatalogToDownload.value("url").toString();
 }
 
+void ConfigurationDialog::de430ButtonClicked()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
+	StelApp::getInstance().getCore()->setDe430Active(!StelApp::getInstance().getCore()->de430IsActive());
+	conf->setValue("astro/flag_use_de430", StelApp::getInstance().getCore()->de430IsActive());
+
+	resetEphemControls(); //refresh labels
+}
+
+void ConfigurationDialog::de431ButtonClicked()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
+	StelApp::getInstance().getCore()->setDe431Active(!StelApp::getInstance().getCore()->de431IsActive());
+	conf->setValue("astro/flag_use_de431", StelApp::getInstance().getCore()->de431IsActive());
+
+	resetEphemControls(); //refresh labels
+}
+
+void ConfigurationDialog::resetEphemControls()
+{
+	ui->de430checkBox->setEnabled(StelApp::getInstance().getCore()->de430IsAvailable());
+	ui->de431checkBox->setEnabled(StelApp::getInstance().getCore()->de431IsAvailable());
+	ui->de430checkBox->setChecked(StelApp::getInstance().getCore()->de430IsActive());
+	ui->de431checkBox->setChecked(StelApp::getInstance().getCore()->de431IsActive());
+
+	if(StelApp::getInstance().getCore()->de430IsActive())
+		ui->de430label->setText(q_("1550...2650"));
+	else
+	{
+		if (StelApp::getInstance().getCore()->de430IsAvailable())
+			ui->de430label->setText(q_("Available"));
+		else
+			ui->de430label->setText(q_("Not Available"));
+	}
+	if(StelApp::getInstance().getCore()->de431IsActive())
+		ui->de431label->setText(q_("-13.000...17.000"));
+	else
+	{
+		if (StelApp::getInstance().getCore()->de431IsAvailable())
+			ui->de431label->setText(q_("Available"));
+		else
+			ui->de431label->setText(q_("Not Available"));
+	}
+}
+
+void ConfigurationDialog::downloadEphemData()
+{
+	// TODO in connection with the download manager!
+	resetEphemControls();
+}
+
 void ConfigurationDialog::downloadError(QNetworkReply::NetworkError)
 {
 	Q_ASSERT(currentDownloadFile);
-	Q_ASSERT(starCatalogDownloadReply);
+	Q_ASSERT(downloadReply);
 
-	isDownloadingStarCatalog = false;
-	qWarning() << "Error downloading file" << starCatalogDownloadReply->url() << ": " << starCatalogDownloadReply->errorString();
-	ui->downloadLabel->setText(q_("Error downloading %1:\n%2").arg(nextStarCatalogToDownload.value("id").toString()).arg(starCatalogDownloadReply->errorString()));
+	isDownloading = false;
+    if(isDownloadingStarCatalog)
+    {
+    	isDownloadingStarCatalog = false;
+    	ui->getStarsButton->setVisible(false);
+		ui->getStarsButton->setEnabled(true);
+    }
+
+	qWarning() << "Error downloading file" << downloadReply->url() << ": " << downloadReply->errorString();
+	ui->downloadLabel->setText(q_("Error downloading %1:\n%2").arg(nextStarCatalogToDownload.value("id").toString()).arg(downloadReply->errorString()));
 	ui->downloadCancelButton->setVisible(false);
 	ui->downloadRetryButton->setVisible(true);
-	ui->getStarsButton->setVisible(false);
-	ui->getStarsButton->setEnabled(true);
+	
 }
 
-void ConfigurationDialog::downloadFinished()
+void ConfigurationDialog::ephemDataDownloadFinished()
+{
+	// TODO in connection with the download manager!
+
+}
+
+void ConfigurationDialog::starsDownloadFinished()
 {
 	Q_ASSERT(currentDownloadFile);
-	Q_ASSERT(starCatalogDownloadReply);
+	Q_ASSERT(downloadReply);
 	Q_ASSERT(progressBar);
 
-	if (starCatalogDownloadReply->error()!=QNetworkReply::NoError)
+	if (downloadReply->error()!=QNetworkReply::NoError)
 	{
-		starCatalogDownloadReply->deleteLater();
-		starCatalogDownloadReply = NULL;
+		downloadReply->deleteLater();
+		downloadReply = NULL;
 		currentDownloadFile->close();
 		currentDownloadFile->deleteLater();
 		currentDownloadFile = NULL;
@@ -1169,31 +1246,34 @@ void ConfigurationDialog::downloadFinished()
 		return;
 	}
 
-	const QVariant& redirect = starCatalogDownloadReply->attribute(QNetworkRequest::RedirectionTargetAttribute);
+	Q_ASSERT(downloadReply->bytesAvailable()==0);
+
+	const QVariant& redirect = downloadReply->attribute(QNetworkRequest::RedirectionTargetAttribute);
 	if (!redirect.isNull())
 	{
 		// We got a redirection, we need to follow
-		starCatalogDownloadReply->deleteLater();
+		downloadReply->deleteLater();
 		QNetworkRequest req(redirect.toUrl());
 		req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
 		req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
 		req.setRawHeader("User-Agent", userAgent.toLatin1());
-		starCatalogDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-		starCatalogDownloadReply->setReadBufferSize(1024*1024*2);
-		connect(starCatalogDownloadReply, SIGNAL(readyRead()), this, SLOT(newStarCatalogData()));
-		connect(starCatalogDownloadReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
-		connect(starCatalogDownloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
+		downloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
+		downloadReply->setReadBufferSize(1024*1024*2);
+		connect(downloadReply, SIGNAL(readyRead()), this, SLOT(newStarCatalogData()));
+		connect(downloadReply, SIGNAL(finished()), this, SLOT(starsDownloadFinished()));
+		connect(downloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
 		return;
 	}
 
-	Q_ASSERT(starCatalogDownloadReply->bytesAvailable()==0);
+	Q_ASSERT(downloadReply->bytesAvailable()==0);
 
 	isDownloadingStarCatalog = false;
+	isDownloading = false;
 	currentDownloadFile->close();
 	currentDownloadFile->deleteLater();
 	currentDownloadFile = NULL;
-	starCatalogDownloadReply->deleteLater();
-	starCatalogDownloadReply = NULL;
+	downloadReply->deleteLater();
+	downloadReply = NULL;
 	StelApp::getInstance().removeProgressBar(progressBar);
 	progressBar=NULL;
 
