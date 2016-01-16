@@ -1,5 +1,8 @@
-\chapter{Files and Directories}\label{advanced-use}
+\chapter{Files and Directories}
 \label{sec:FilesAndDirectories}
+
+\section{Directories}
+\label{sec:Directories}
 
 Stellarium has many data files containing such things as star catalogue
 data, nebula images, button icons, font files and configuration files.
@@ -23,21 +26,18 @@ The locations of the user directory, installation directory,
 according to the operating system and installation options used. The
 following sections describe the locations for various operating systems.
 
-\section{Windows}\label{windows}
+\subsection{Windows}
 \label{sec:FilesAndDirectories:Windows}
 
-\begin{itemize}
-\item
-  \textbf{installation directory} By default this is
-  \texttt{C:\textbackslash{}Program\ Files\textbackslash{}Stellarium\textbackslash{}},
+\begin{description}
+\item[installation directory] By default this is
+  \file{C:\textbackslash{}Program\ Files\textbackslash{}Stellarium\textbackslash{}},
   although this can be adjusted during the installation process.
-\item
-  \textbf{user directory} This is the Stellarium sub-folder in the
+\item[user directory] This is the Stellarium sub-folder in the
   Application Data folder for the user account which is used to run
   Stellarium. Depending on the version of Windows and its configuration,
   this could be any of the following (each of these is tried, if it
   fails, the next in the list if tried).
-\end{itemize}
 
 \begin{commands}
 %APPDATA%\Stellarium\
@@ -47,7 +47,6 @@ following sections describe the locations for various operating systems.
 Stellarium's installation directory
 \end{commands}
 
-
 Thus, on a typical Windows Vista/7/10 system with user ``Bob
 Dobbs'', the user directory will be:
 
@@ -55,96 +54,82 @@ Dobbs'', the user directory will be:
 C:\Users\Bob Dobbs\AppData\Roaming\Stellarium\
 \end{commands}
 
-
-
-\begin{itemize}
-\item
-  \textbf{screenshot save directory} Screenshots will be saved to the
-  \texttt{Pictures/Stellarium} directory, although this can be changed with a command line option (see
-  section \href{Advanced_Use\#Command_Line_Options}{Command Line
-  Options}\footnote{Windows Vista users who do not run Stellarium with
+\item[screenshot save directory] Screenshots will be saved to the
+  \file{Pictures/Stellarium} directory, although this can be changed with a command line option (see
+  section~\ref{sec:CommandLineOptions}\footnote{Windows Vista users who do not run Stellarium with
     administrator priviliges should adjust the shortcut in the start
     menu to specify a different directory for screenshots as the Desktop
     directory is not writable for normal progams. 
     Stellarium includes a GUI option to specify the screenshot
     directory.}).
-\end{itemize}
 
-\section{Mac OS X}\label{mac-os-x}
+\end{description}
+
+\subsection{Mac OS X}
 \label{sec:FilesAndDirectories:MacOSX}
 
-\begin{itemize}
-\item
-  \textbf{installation directory} This is found inside the application
-  bundle, \texttt{Stellarium.app}. See the
-  \href{http://www.mactipsandtricks.com/articles/Wiley_HT_appBundles.lasso}{Inside
-  Application Bundles} for more information.
-\item
-  \textbf{user directory} This is the
-  \texttt{Library/Preferences/Stellarium/} (or
-  \texttt{\textasciitilde{}/Library/Application\ Support/Stellarium} on
+\begin{description}
+\item[installation directory] This is found inside the application
+  bundle, \file{Stellarium.app}. See the \emph{Inside Application
+    Bundles}\footnote{\url{http://www.mactipsandtricks.com/articles/Wiley_HT_appBundles.lasso}}
+  for more information.
+\item[user directory] This is the
+  \file{Library/Preferences/Stellarium/} (or
+  \file{\textasciitilde{}/Library/Application\ Support/Stellarium} on
   newest versions of Mac OS X) sub-directory of the users home
   directory.
-\item
-  \textbf{screenshot save directory} Screenshots are saved to the users
+\item[screenshot save directory] Screenshots are saved to the user's
   Desktop.
-\end{itemize}
+\end{description}
 
-\section{Linux}\label{linux}
+\subsection{Linux}
 \label{sec:FilesAndDirectories:Linux}
 
-\begin{itemize}
-\item
-  \textbf{installation directory} This is in the
+\begin{description}
+\item[installation directory] This is in the
   \texttt{share/stellarium} sub-directory of the installation prefix,
-  i.e. usually \texttt{/usr/share/stellarium} or
-  \texttt{/usr/local/share/stellarium/}.
-\item
-  \textbf{user directory} This is the \texttt{.stellarium} sub-directory
+  i.e. usually \file{/usr/share/stellarium} or
+  \file{/usr/local/share/stellarium/}.
+\item[user directory] This is the \texttt{.stellarium} sub-directory
   of users home directory, i.e. \texttt{\textasciitilde{}/.stellarium/}.
-\item
-  \textbf{screenshot save directory} Screenshots are saved to the users
+\item[screenshot save directory] Screenshots are saved to the users
   home directory.
-\end{itemize}
+\end{description}
 
-\section{Directory Structure}\label{directory-structure}
+\section{Directory Structure}
 \label{sec:FilesAndDirectories:DirectoryStructure}
 
 Within the \emph{installation directory} and \emph{user directory}
-(defined in section \href{Advanced_Use\#Files_and_Directories}{Files and
-Directories}), files are arranged in the following sub-directories.
+defined in section~\ref{sec:Directories}, files are arranged in the
+following sub-directories.
 
-\begin{itemize}
-\item
-  \textbf{landscapes/} contains data files and textures used for
+\begin{description}
+\item[\file{landscapes/}] contains data files and textures used for
   Stellarium's various landscapes. Each landscape has it's own
   sub-directory. The name of this sub-directory is called the
   \emph{landscape ID}, which is used to specify the default landscape in
   the main configuration file.
-\item
-  \textbf{skycultures/} contains constellations, common star names and
+\item[\file{skycultures/}] contains constellations, common star names and
   constellation artwork for Stellarium's many sky cultures. Each culture
   has it's own sub-directory in the skycultures directory.
-\item
-  \textbf{nebulae/} contains data and image files for nebula textures.
+\item[\file{nebulae/}] contains data and image files for nebula textures.
   In future Stellarium will be able to support multiple sets of nebula
   images and switch between them at runtime. This feature is not
   implemented for version 0.9.1, although the directory structure is in
   place - each set of nebula textures has it's own sub-directory in the
   nebulae directory.
-\item
-  \textbf{stars/} contains Stellarium's star catalogues. In future
+\item[\file{stars/}] contains Stellarium's star catalogues. In future
   Stellarium will be able to support multiple star catalogues and switch
   between them at runtime. This feature is not implemented for version
   0.10.0, although the directory structure is in place - each star
   catalogue has it's own sub-directory in the stars directory.
-\item
-  \textbf{data/} contains miscellaneous data files including fonts,
+\item[\file{data/}] contains miscellaneous data files including fonts,
   solar system data, city locations etc.
-\item
-  \textbf{textures/} contains miscellaneous texture files, such as the
+\item[\file{textures/}] contains miscellaneous texture files, such as the
   graphics for the toolbar buttons, planet texture maps etc.
-\end{itemize}
+\item[\file{ephem/}] (optional) may contain data files for planetary
+  ephemerides DE430 and DE431 (see~\ref{sec:ExtraData:ephemerides}).
+\end{description}
 
 If any file exists in both the installation directory and user
 directory, the version in the user directory will be used. Thus it is
@@ -302,6 +287,48 @@ Stellarium is packaged with over 600 thousand stars in the normal
 program download, but much larger star catalogues may be downloaded
 using the tool which is in the \emph{Tools} tab of the
 \emph{Configuration} dialog.
+
+
+\section{Alternative Planet Ephemerides: DE430, DE431}
+\label{sec:ExtraData:ephemerides}
+
+By default, Stellarium uses the \indexterm{VSOP87} planetary theory,
+an analytical solution which is able to deliver planetary positions
+for any input date. However, its use is recommended only for the year
+range $-4000\ldots+8000$. Outside this range, it seems to be usable
+for a few more millennia without too great errors, but with degrading accuracy. 
+
+Since V0.15 you can install extra data files which allow access to the
+numerical integration runs \indexterm{DE430} and \indexterm{DE431}
+from NASA's Jet Propulsion Laboratory (JPL). The data files have to be
+downloaded separately, and most users will likely not need them. DE430
+provides highly accurate data for the years $+1550\ldots+2650$, while
+DE431 covers years $-13000\ldots+17000$, which allows
+archaeoastronomical research on Mesolithic landscapes. Outside these
+year ranges, positional computation falls back to VSOP87.
+
+To enable use of these data, download from \url{ftp://ssd.jpl.nasa.gov/pub/eph/planets/Linux/}:
+
+\begin{description}
+\item[DE430] \file{linux\_p1550p2650.430} (md5 hash 707c4262533d52d59abaaaa5e69c5738)
+\item[DE431] \file{lnxm13000p17000.431} (md5 hash fad0f432ae18c330f9e14915fbf8960a)
+\end{description}
+
+
+The files can be placed in a folder named \file{ephem} inside the
+\emph{User Data Directory} (see
+\ref{sec:FilesAndDirectories:DirectoryStructure}). Alternatively, if
+you have them already stored elsewhere, you may add the path to
+\file{config.ini} like:
+
+\begin{configfile}
+[astro]
+de430_path = C:/Astrodata/JPL_DE43x/linux_p1550p2650.430
+de431_path = C:/Astrodata/JPL_DE43x/lnxm13000p17000.431
+\end{configfile}
+
+%% TODO: Make sure either user or installation dir are OK
+
 
 \chapter{Visual Effects}\label{visual-effects}
 
