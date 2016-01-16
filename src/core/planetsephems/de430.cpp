@@ -1,5 +1,6 @@
 /*
 Copyright (c) 2015 Holger Niessner
+Copyright (c) 2016 Georg Zotti
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -75,27 +76,27 @@ bool GetDe430Coor(const double jde, const int planet_id, double * xyz, const int
 		case 0: // all OK.
 			break;
 		case JPL_EPH_OUTSIDE_RANGE:
-			qDebug() << "GetDe431Coor: JPL_EPH_OUTSIDE_RANGE at jde" << jde << "for planet" << planet_id;
+			qDebug() << "GetDe430Coor: JPL_EPH_OUTSIDE_RANGE at jde" << jde << "for planet" << planet_id;
 			return false;
 			break;
 		case JPL_EPH_READ_ERROR:
-			qDebug() << "GetDe431Coor: JPL_EPH_READ_ERROR at jde" << jde << "for planet" << planet_id;
+			qDebug() << "GetDe430Coor: JPL_EPH_READ_ERROR at jde" << jde << "for planet" << planet_id;
 			return false;
 			break;
 		case JPL_EPH_QUANTITY_NOT_IN_EPHEMERIS:
-			qDebug() << "GetDe431Coor: JPL_EPH_QUANTITY_NOT_IN_EPHEMERIS at jde" << jde << "for planet" << planet_id;
+			qDebug() << "GetDe430Coor: JPL_EPH_QUANTITY_NOT_IN_EPHEMERIS at jde" << jde << "for planet" << planet_id;
 			return false;
 			break;
 		case JPL_EPH_INVALID_INDEX:
-			qDebug() << "GetDe431Coor: JPL_EPH_INVALID_INDEX at jde" << jde << "for planet" << planet_id;
+			qDebug() << "GetDe430Coor: JPL_EPH_INVALID_INDEX at jde" << jde << "for planet" << planet_id;
 			return false;
 			break;
 		case JPL_EPH_FSEEK_ERROR:
-			qDebug() << "GetDe431Coor: JPL_EPH_FSEEK_ERROR at jde" << jde << "for planet" << planet_id;
+			qDebug() << "GetDe430Coor: JPL_EPH_FSEEK_ERROR at jde" << jde << "for planet" << planet_id;
 			return false;
 			break;
 		default: // Should never happen...
-			qDebug() << "GetDe431Coor: unknown error" << jplresult << "at jde" << jde << "for planet" << planet_id;
+			qDebug() << "GetDe430Coor: unknown error" << jplresult << "at jde" << jde << "for planet" << planet_id;
 			return false;
 			break;
 	}
@@ -113,10 +114,6 @@ bool GetDe430Coor(const double jde, const int planet_id, double * xyz, const int
     return false;
 }
 
-//void GetDe430OsculatingCoor(double jd0, double jd, int planet_id, double *xyz, const int centralBody_id)
-//{
-	
-//}
 
 #ifdef __cplusplus
   }
