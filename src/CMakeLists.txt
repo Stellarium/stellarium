@@ -178,12 +178,22 @@ SET(stellarium_lib_SRCS
      core/planetsephems/precession.h
      core/planetsephems/sidereal_time.c
      core/planetsephems/sidereal_time.h
-     core/planetsephems/stellplanet.c
-     core/planetsephems/stellplanet.h
+     #core/planetsephems/stellplanet.c   # replaced by EphemWrapper during de430 work
+     #core/planetsephems/stellplanet.h
+     core/planetsephems/jpl_int.h
+     core/planetsephems/jpleph.h
+     core/planetsephems/jpleph.cpp
+     core/planetsephems/EphemWrapper.cpp
+     core/planetsephems/EphemWrapper.hpp
+
      core/planetsephems/tass17.c
      core/planetsephems/tass17.h
      core/planetsephems/vsop87.c
      core/planetsephems/vsop87.h
+     core/planetsephems/de430.cpp
+     core/planetsephems/de430.hpp
+     core/planetsephems/de431.cpp
+     core/planetsephems/de431.hpp
 
      core/modules/Atmosphere.cpp
      core/modules/Atmosphere.hpp

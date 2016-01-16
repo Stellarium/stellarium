@@ -37,11 +37,16 @@
 #include "LandscapeMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
+#include "StelFileMgr.hpp"
+#include "EphemWrapper.hpp"
 #include "precession.h"
 
 #include <QSettings>
 #include <QDebug>
 #include <QMetaEnum>
+
+#include <iostream>
+#include <fstream>
 
 // Init statics transfo matrices
 // See vsop87.doc:
@@ -73,6 +78,10 @@ StelCore::StelCore()
 	, jdOfLastJDUpdate(0.)
 	, deltaTCustomNDot(-26.0)
 	, deltaTCustomYear(1820.0)
+	, de430Available(false)
+	, de431Available(false)
+	, de430Active(false)
+	, de431Active(false)
 {
 	toneReproducer = new StelToneReproducer();
 
@@ -1927,4 +1936,75 @@ bool StelCore::isBrightDaylight() const
 double StelCore::getCurrentEpoch() const
 {
 	return 2000.0 + (getJD() - 2451545.0)/365.25;
+}
+
+// DE430/DE431 handling
+
+bool StelCore::de430IsAvailable()
+{
+	return de430Available;
+}
+
+bool StelCore::de431IsAvailable()
+{
+	return de431Available;
+}
+
+bool StelCore::de430IsActive()
+{
+	return de430Active;
+}
+
+bool StelCore::de431IsActive()
+{
+	return de431Active;
+}
+
+void StelCore::setDe430Active(bool status)
+{
+	de430Active = de430Available && status;
+}
+
+void StelCore::setDe431Active(bool status)
+{
+	de431Active = de431Available && status;
+}
+
+void StelCore::initEphemeridesFunctions()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+
+	QString de430ConfigPath = conf->value("astro/de430_path").toString();
+	QString de431ConfigPath = conf->value("astro/de431_path").toString();
+
+	QString de430FilePath;
+	QString de431FilePath;
+
+	//<-- DE430 -->
+	if(de430ConfigPath.remove(QChar('"')).isEmpty())
+		de430FilePath = StelFileMgr::findFile("ephem/" + QString(DE430_FILENAME), StelFileMgr::File);
+	else
+		de430FilePath = StelFileMgr::findFile(de430ConfigPath, StelFileMgr::File);
+
+	de430Available=!de430FilePath.isEmpty();
+	if(de430Available)
+	{
+		qDebug() << "DE430 at: " << de430FilePath;
+		EphemWrapper::init_de430(de430FilePath.toStdString().c_str());
+	}
+	setDe430Active(de430Available && conf->value("astro/flag_use_de430").toBool());
+
+	//<-- DE431 -->
+	if(de431ConfigPath.remove(QChar('"')).isEmpty())
+		de431FilePath = StelFileMgr::findFile("ephem/" + QString(DE431_FILENAME), StelFileMgr::File);
+	else
+		de431FilePath = StelFileMgr::findFile(de431ConfigPath, StelFileMgr::File);
+
+	de431Available=!de431FilePath.isEmpty();
+	if(de431Available)
+	{
+		qDebug() << "DE431 at: " << de431FilePath;
+		EphemWrapper::init_de431(de431FilePath.toStdString().c_str());
+	}
+	setDe431Active(de431Available && conf->value("astro/flag_use_de431").toBool());
 }
