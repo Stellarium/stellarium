@@ -36,11 +36,14 @@ public:
 
 	void mousePressEvent(QMouseEvent* e);
 	void mouseDoubleClickEvent(QMouseEvent* e);
+	void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
 	void setModel(QAbstractItemModel* model);
 
 	QCheckBox* getCheckBox(int pRow) { return (QCheckBox*) m_pCheckboxGroup->button(pRow); }
+	QList<AddOn*> getCheckedAddons() { return m_checkedAddons; }
 
 signals:
+	void addonChecked();
 	void addonSelected(AddOn* addon);
 
 public slots:
@@ -48,10 +51,11 @@ public slots:
 	void setAllChecked(bool checked);
 
 private slots:
-	void slotRowChecked(int);
+	void slotButtonToggled(int row, bool checked);
 
 private:
 	QButtonGroup* m_pCheckboxGroup;
+	QList<AddOn*> m_checkedAddons;
 };
 
 #endif // _ADDONTABLEVIEW_HPP_

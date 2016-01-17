@@ -41,7 +41,8 @@ AddOnTableView::AddOnTableView(QWidget* parent)
 	setShowGrid(false);
 
 	m_pCheckboxGroup->setExclusive(false);
-	connect(m_pCheckboxGroup, SIGNAL(buttonClicked(int)), this, SLOT(slotRowChecked(int)));
+	connect(m_pCheckboxGroup, SIGNAL(buttonToggled(int, bool)),
+		this, SLOT(slotButtonToggled(int, bool)));
 }
 
 AddOnTableView::~AddOnTableView()
@@ -87,7 +88,6 @@ void AddOnTableView::mousePressEvent(QMouseEvent *e)
 		return;
 	}
 	selectRow(index.row());
-	emit(addonSelected(((AddOnTableModel*) index.model())->getAddOn(index.row())));
 }
 
 void AddOnTableView::setAllChecked(bool checked)
@@ -104,7 +104,23 @@ void AddOnTableView::clearSelection()
 	setAllChecked(false);
 }
 
-void AddOnTableView::slotRowChecked(int)
+void AddOnTableView::selectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
 {
-	//TODO
+	QAbstractItemView::selectionChanged(selected, deselected);
+	emit(addonSelected(((AddOnTableModel*) model())->getAddOn(selected.first().top())));
+}
+
+void AddOnTableView::slotButtonToggled(int row, bool checked)
+{
+	AddOn* addon = ((AddOnTableModel*) model())->getAddOn(row);
+	if (checked)
+	{
+		m_checkedAddons.append(addon);
+	}
+	else
+	{
+		m_checkedAddons.removeOne(addon);
+	}
+	selectRow(row);
+	emit(addonChecked());
 }

@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2014 Marcos Cardinot
+ * Copyright (C) 2014-2016 Marcos Cardinot
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,7 +56,7 @@ protected:
 private slots:
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 	void slotUpdateMsg(const StelAddOnMgr::AddOnMgrMsg msg);
-	void slotUpdateButtons(int amountToInstall, int amountToRemove);
+	void slotUpdateButton();
 	void downloadFinished();
 	void installFromFile();
 	void installSelectedRows();

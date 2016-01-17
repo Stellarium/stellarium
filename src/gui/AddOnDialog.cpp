@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2014 Marcos Cardinot
+ * Copyright (C) 2014-2016 Marcos Cardinot
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -76,19 +76,18 @@ void AddOnDialog::createDialogContent()
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)),
 		this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 
-	// buttons: Install and Remove
+	// button to install/uninstall/update
 //	connect(ui->btnInstall, SIGNAL(clicked()), this, SLOT(installSelectedRows()));
 //	connect(ui->btnRemove, SIGNAL(clicked()), this, SLOT(removeSelectedRows()));
-//	ui->btnInstall->setEnabled(false);
-//	ui->btnRemove->setEnabled(false);
+	ui->button->setEnabled(false);
 
 	connect(ui->availableTableView, SIGNAL(addonSelected(AddOn*)), this, SLOT(slotAddonSelected(AddOn*)));
 	connect(ui->installedTableView, SIGNAL(addonSelected(AddOn*)), this, SLOT(slotAddonSelected(AddOn*)));
 	connect(ui->updatesTableView, SIGNAL(addonSelected(AddOn*)), this, SLOT(slotAddonSelected(AddOn*)));
 
-	connect(ui->availableTableView, SIGNAL(selectedAddOns(int,int)), this, SLOT(slotUpdateButtons(int,int)));
-	connect(ui->installedTableView, SIGNAL(selectedAddOns(int,int)), this, SLOT(slotUpdateButtons(int,int)));
-	connect(ui->updatesTableView, SIGNAL(selectedAddOns(int,int)), this, SLOT(slotUpdateButtons(int,int)));
+	connect(ui->availableTableView, SIGNAL(addonChecked()), this, SLOT(slotUpdateButton()));
+	connect(ui->installedTableView, SIGNAL(addonChecked()), this, SLOT(slotUpdateButton()));
+	connect(ui->updatesTableView, SIGNAL(addonChecked()), this, SLOT(slotUpdateButton()));
 
 	// button Install from File
 	connect(ui->btnInstallFromFile, SIGNAL(clicked()), this, SLOT(installFromFile()));
@@ -109,14 +108,26 @@ void AddOnDialog::slotAddonSelected(AddOn *addon)
 	ui->browser->setHtml(html);
 }
 
-void AddOnDialog::slotUpdateButtons(int amountToInstall, int amountToRemove)
+void AddOnDialog::slotUpdateButton()
 {
-//	ui->btnInstall->setEnabled(amountToInstall > 0);
-//	ui->btnRemove->setEnabled(amountToRemove > 0);
-	QString txtInstall = QString("%1 (%2)").arg(q_("Install")).arg(amountToInstall);
-	QString txtRemove = QString("%1 (%2)").arg(q_("Remove")).arg(amountToRemove);
-//	ui->btnInstall->setText(txtInstall);
-//	ui->btnRemove->setText(txtRemove);
+	int amount = 0;
+	QString tabName = ui->stackedWidget->currentWidget()->objectName();
+	if (tabName == "updates")
+	{
+		amount = ui->updatesTableView->getCheckedAddons().size();
+		ui->button->setText(QString("%1 (%2)").arg(q_("Update")).arg(amount));
+	}
+	else if (tabName == "installed")
+	{
+		amount = ui->installedTableView->getCheckedAddons().size();
+		ui->button->setText(QString("%1 (%2)").arg(q_("Uninstall")).arg(amount));
+	}
+	else if (tabName == "available")
+	{
+		amount = ui->availableTableView->getCheckedAddons().size();
+		ui->button->setText(QString("%1 (%2)").arg(q_("Install")).arg(amount));
+	}
+	ui->button->setEnabled(amount > 0);
 }
 
 void AddOnDialog::slotUpdateMsg(const StelAddOnMgr::AddOnMgrMsg msg)
@@ -162,6 +173,7 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 {
 	current = current ? current : previous;
 	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
+	slotUpdateButton();
 }
 
 void AddOnDialog::populateTables()
