@@ -1249,7 +1249,7 @@ void ConfigurationDialog::resetEphemControls()
 	ui->de431checkBox->setChecked(StelApp::getInstance().getCore()->de431IsActive());
 
 	if(StelApp::getInstance().getCore()->de430IsActive())
-		ui->de430label->setText(q_("1550...2650"));
+		ui->de430label->setText("1550..2650");
 	else
 	{
 		if (StelApp::getInstance().getCore()->de430IsAvailable())
@@ -1258,7 +1258,7 @@ void ConfigurationDialog::resetEphemControls()
 			ui->de430label->setText(q_("Not Available"));
 	}
 	if(StelApp::getInstance().getCore()->de431IsActive())
-		ui->de431label->setText(q_("-13.000...17.000"));
+		ui->de431label->setText("-13000..17000");
 	else
 	{
 		if (StelApp::getInstance().getCore()->de431IsAvailable())
