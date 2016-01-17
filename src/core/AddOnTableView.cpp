@@ -100,14 +100,19 @@ void AddOnTableView::setAllChecked(bool checked)
 
 void AddOnTableView::clearSelection()
 {
-	QTableView::clearSelection();
 	setAllChecked(false);
+	QTableView::clearSelection();
 }
 
 void AddOnTableView::selectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
 {
 	QAbstractItemView::selectionChanged(selected, deselected);
-	emit(addonSelected(((AddOnTableModel*) model())->getAddOn(selected.first().top())));
+	AddOn* addon;
+	if (!selected.isEmpty())
+	{
+		addon = ((AddOnTableModel*) model())->getAddOn(selected.first().top());
+	}
+	emit(addonSelected(addon));
 }
 
 void AddOnTableView::slotButtonToggled(int row, bool checked)

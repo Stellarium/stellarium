@@ -102,6 +102,12 @@ void AddOnDialog::createDialogContent()
 
 void AddOnDialog::slotAddonSelected(AddOn *addon)
 {
+	if (!addon)
+	{
+		ui->browser->clear();
+		return;
+	}
+
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + addon->getTitle() + "</h2>";
 	html += addon->getDescription();
@@ -173,6 +179,10 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 {
 	current = current ? current : previous;
 	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
+
+	ui->updatesTableView->clearSelection();
+	ui->installedTableView->clearSelection();
+	ui->availableTableView->clearSelection();
 	slotUpdateButton();
 }
 
