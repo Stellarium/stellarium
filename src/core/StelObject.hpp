@@ -35,6 +35,9 @@ class StelCore;
 //! @sa StelObjectP
 class StelObject : public StelRegionObject
 {
+	//Required for Q_FLAGS macro, this requires this header to be MOC'ed
+	Q_GADGET
+	Q_FLAGS(InfoStringGroupFlags InfoStringGroup)
 public:
 	//! @enum InfoStringGroup used as named bitfield flags as specifiers to
 	//! filter results of getInfoString. The precise definition of these should
@@ -69,8 +72,7 @@ public:
 
 
 	};
-	typedef QFlags<InfoStringGroupFlags> InfoStringGroup;
-	Q_FLAGS(InfoStringGroup)
+	Q_DECLARE_FLAGS(InfoStringGroup, InfoStringGroupFlags)
 
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
 	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra|HourAngle|

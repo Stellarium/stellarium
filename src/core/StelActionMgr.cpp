@@ -195,8 +195,8 @@ StelAction* StelActionMgr::addAction(const QString& id, const QString& groupId, 
                                      bool global)
 {
 	StelAction* action = new StelAction(id, groupId, text, shortcut, altShortcut, global);
-	action->connectToObject(target, slot);
 	connect(action,SIGNAL(toggled(bool)),this,SLOT(onStelActionToggled(bool)));
+	action->connectToObject(target, slot);
 	return action;
 }
 

@@ -1,4 +1,4 @@
-define(["jquery", "./remotecontrol", "./flags"], function($, rc, Flags) {
+define(["jquery", "./remotecontrol", "./flags", "./properties"], function($, rc, Flags, propApi) {
     "use strict";
 
     //Private variables
@@ -25,26 +25,25 @@ define(["jquery", "./remotecontrol", "./flags"], function($, rc, Flags) {
             currentSkyculture = data.view.skyculture;
             $(publ).trigger("skycultureChanged", currentSkyculture);
         }
+    });
 
-        if(catalogFlags)
-            catalogFlags.setValue(data.view.dsoCatalog);
+    $(propApi).on("stelPropertyChanged:prop_NebulaMgr_catalogFilters", function(evt, data) {
+        if (catalogFlags)
+            catalogFlags.setValue(data.value);
+    });
 
-        if(typeFlags)
-            typeFlags.setValue(data.view.dsoType);
-
+    $(propApi).on("stelPropertyChanged:prop_NebulaMgr_typeFilters", function(evt, data) {
+        if (typeFlags)
+            typeFlags.setValue(data.value);
     });
 
 
     function setDSOCatalog(flags) {
-        rc.postCmd("/api/view/setDso", {
-            catalog: flags
-        });
+        propApi.setStelProp("prop_NebulaMgr_catalogFilters", flags);
     }
 
     function setDSOType(flags) {
-        rc.postCmd("/api/view/setDso", {
-            type: flags
-        });
+        propApi.setStelProp("prop_NebulaMgr_typeFilters", flags);
     }
 
     //Public stuff
@@ -91,10 +90,12 @@ define(["jquery", "./remotecontrol", "./flags"], function($, rc, Flags) {
 
         registerCatalogFlags: function(elem) {
             catalogFlags = new Flags(elem, setDSOCatalog);
+            catalogFlags.setValue(propApi.getStelProp("prop_NebulaMgr_catalogFilters"));
         },
 
         registerTypeFlags: function(elem) {
-            typeFlags = new Flags(elem,setDSOType);
+            typeFlags = new Flags(elem, setDSOType);
+            typeFlags.setValue(propApi.getStelProp("prop_NebulaMgr_typeFilters"));
         },
 
         setProjection: function(proj) {

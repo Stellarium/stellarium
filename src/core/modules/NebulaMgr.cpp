@@ -115,7 +115,7 @@ void NebulaMgr::setStarColor(const Vec3f& c) {Nebula::starColor = c;}
 const Vec3f &NebulaMgr::getStarColor(void) const {return Nebula::starColor;}
 void NebulaMgr::setCircleScale(float scale) {Nebula::circleScale = scale;}
 float NebulaMgr::getCircleScale(void) const {return Nebula::circleScale;}
-void NebulaMgr::setHintsProportional(const bool proportional) {Nebula::drawHintProportional=proportional;}
+void NebulaMgr::setHintsProportional(const bool proportional) {if(Nebula::drawHintProportional!=proportional){ Nebula::drawHintProportional=proportional; emit hintsProportionalChanged(proportional);}}
 bool NebulaMgr::getHintsProportional(void) const {return Nebula::drawHintProportional;}
 
 NebulaMgr::NebulaMgr(void)
@@ -265,6 +265,12 @@ void NebulaMgr::init()
 
 	addAction("actionShow_Nebulas", N_("Display Options"), N_("Deep-sky objects"), "flagHintDisplayed", "D", "N");
 	addAction("actionSet_Nebula_TypeFilterUsage", N_("Display Options"), N_("Toggle DSO type filter"), "flagTypeFiltersUsage");
+	registerProperty("prop_NebulaMgr_typeFilters","typeFilters");
+	registerProperty("prop_NebulaMgr_catalogFilters", "catalogFilters");
+	registerProperty("prop_NebulaMgr_hintsProportional", "hintsProportional");
+	registerProperty("prop_NebulaMgr_flagSurfaceBrightnessUsage", "flagSurfaceBrightnessUsage");
+	registerProperty("prop_NebulaMgr_labelsAmount", "labelsAmount");
+	registerProperty("prop_NebulaMgr_hintsAmount", "hintsAmount");
 }
 
 struct DrawNebulaFuncObject
@@ -301,7 +307,7 @@ struct DrawNebulaFuncObject
 	bool checkMaxMagHints;
 };
 
-void NebulaMgr::setCatalogFilters(const Nebula::CatalogGroup &cflags)
+void NebulaMgr::setCatalogFilters(Nebula::CatalogGroup cflags)
 {
 	if(static_cast<int>(cflags) != static_cast<int>(Nebula::catalogFilters))
 	{
@@ -323,7 +329,7 @@ void NebulaMgr::setCatalogFilters(const Nebula::CatalogGroup &cflags)
 	}
 }
 
-void NebulaMgr::setTypeFilters(const Nebula::TypeGroup &tflags)
+void NebulaMgr::setTypeFilters(Nebula::TypeGroup tflags)
 {
 	if(static_cast<int>(tflags) != static_cast<int>(Nebula::typeFilters))
 	{

@@ -37,6 +37,7 @@
 #include "StelProjector.hpp"
 #include "StelLocationMgr.hpp"
 #include "StelActionMgr.hpp"
+#include "StelPropertyMgr.hpp"
 
 #include "StelProgressController.hpp"
 #include "StelModuleMgr.hpp"
@@ -243,6 +244,7 @@ StelApp::StelApp(QObject* parent)
 	moduleMgr=NULL;
 	networkAccessManager=NULL;
 	actionMgr = NULL;
+	propMgr = NULL;
 
 	// Can't create 2 StelApp instances
 	Q_ASSERT(!singleton);
@@ -283,6 +285,7 @@ StelApp::~StelApp()
 	delete planetLocationMgr; planetLocationMgr=NULL;
 	delete moduleMgr; moduleMgr=NULL; // Delete the secondary instance
 	delete actionMgr; actionMgr = NULL;
+	delete propMgr; propMgr = NULL;
 
 	Q_ASSERT(singleton);
 	singleton = NULL;
@@ -418,6 +421,7 @@ void StelApp::init(QSettings* conf)
 	skyCultureMgr = new StelSkyCultureMgr();
 	planetLocationMgr = new StelLocationMgr();
 	actionMgr = new StelActionMgr();
+	propMgr = new StelPropertyMgr();
 
 	localeMgr->init();
 

@@ -49,6 +49,8 @@ SET(RemoteControl_SRCS
   SimbadService.cpp
   StelActionService.hpp
   StelActionService.cpp
+  StelPropertyService.hpp
+  StelPropertyService.cpp
   ViewService.hpp
   ViewService.cpp
   gui/RemoteControlDialog.hpp

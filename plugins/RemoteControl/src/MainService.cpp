@@ -23,12 +23,12 @@
 #include "StelActionMgr.hpp"
 #include "StelCore.hpp"
 #include "LandscapeMgr.hpp"
-#include "NebulaMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelObjectMgr.hpp"
+#include "StelPropertyMgr.hpp"
 #include "StelScriptMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelTranslator.hpp"
@@ -44,19 +44,21 @@ MainService::MainService(const QByteArray &serviceName, QObject *parent)
 	//100 should be more than enough
 	//this only has to emcompass events that occur between 2 status updates
 	actionCache.setCapacity(100);
+	propCache.setCapacity(100);
 
 	//this is run in the main thread
 	core = StelApp::getInstance().getCore();
 	actionMgr =  StelApp::getInstance().getStelActionManager();
 	lsMgr = GETSTELMODULE(LandscapeMgr);
-	nebMgr = GETSTELMODULE(NebulaMgr);
 	localeMgr = &StelApp::getInstance().getLocaleMgr();
 	objMgr = &StelApp::getInstance().getStelObjectMgr();
 	mvmgr = GETSTELMODULE(StelMovementMgr);
+	propMgr = StelApp::getInstance().getStelPropertyManager();
 	scriptMgr = &StelApp::getInstance().getScriptMgr();
 	skyCulMgr = &StelApp::getInstance().getSkyCultureMgr();
 
 	connect(actionMgr,SIGNAL(actionToggled(QString,bool)),this,SLOT(actionToggled(QString,bool)));
+	connect(propMgr,SIGNAL(stelPropChanged(QString,QVariant)),this,SLOT(propertyChanged(QString,QVariant)));
 
 	Q_ASSERT(this->thread()==objMgr->thread());
 }
@@ -132,6 +134,10 @@ void MainService::getImpl(const QByteArray& operation, const APIParameters &para
 		QString sActionId = QString::fromUtf8(parameters.value("actionId"));
 		bool actionOk;
 		int actionId = sActionId.toInt(&actionOk);
+
+		QString sPropId = QString::fromUtf8(parameters.value("propId"));
+		bool propOk;
+		int propId = sPropId.toInt(&propOk);
 
 		QJsonObject obj;
 
@@ -211,17 +217,15 @@ void MainService::getImpl(const QByteArray& operation, const APIParameters &para
 			obj2.insert("landscape",lsMgr->getCurrentLandscapeID());
 			obj2.insert("skyculture",skyCulMgr->getCurrentSkyCultureID());
 
-			//DSO options
-			obj2.insert("dsoCatalog", static_cast<int>(nebMgr->getCatalogFilters()));
-			obj2.insert("dsoType", static_cast<int>(nebMgr->getTypeFilters()));
-
 			obj.insert("view",obj2);
 		}
 
-		//// Info about changed actions (if requested)
+		//// Info about changed actions & props (if requested)
 		{
 			if(actionOk)
 				obj.insert("actionChanges",getActionChangesSinceID(actionId));
+			if(propOk)
+				obj.insert("propertyChanges",getPropertyChangesSinceID(propId));
 		}
 
 		response.writeJSON(QJsonDocument(obj));
@@ -451,10 +455,23 @@ void MainService::actionToggled(const QString &id, bool val)
 	if(!actionCache.areIndexesValid())
 	{
 		//in theory, this can happen, but practically not so much
-		qWarning()<<"Action cache indices invalid, clearing whole cache";
+		qWarning()<<"Action cache indices invalid";
 		actionCache.clear();
 	}
 	actionMutex.unlock();
+}
+
+void MainService::propertyChanged(const QString &id, const QVariant &val)
+{
+	propMutex.lock();
+	propCache.append(PropertyCacheEntry(id,val));
+	if(!propCache.areIndexesValid())
+	{
+		//in theory, this can happen, but practically not so much
+		qWarning()<<"Property cache indices invalid";
+		propCache.clear();
+	}
+	propMutex.unlock();
 }
 
 QJsonObject MainService::getActionChangesSinceID(int changeId)
@@ -515,6 +532,62 @@ QJsonObject MainService::getActionChangesSinceID(int changeId)
 		//else no changes happened, interface is at current state!
 	}
 	actionMutex.unlock();
+
+	obj.insert("changes",changes);
+	obj.insert("id",newId);
+
+	return obj;
+}
+
+QJsonObject MainService::getPropertyChangesSinceID(int changeId)
+{
+	//changeId is the last id the interface is available
+	//or -2 if the interface just started
+	// -1 means the initial state was set
+	QJsonObject obj;
+	QJsonObject changes;
+	int newId = changeId;
+
+	propMutex.lock();
+	if(propCache.isEmpty())
+	{
+		if(changeId!=-1)
+		{
+			//this is either the initial state (-2) or
+			//something is "broken", probably from an existing web interface that reconnected after restart
+			//force a full reload
+			foreach(StelProperty* p, propMgr->getAllProperties())
+			{
+				changes.insert(p->getId(), QJsonValue::fromVariant(p->getValue()));
+			}
+			newId = -1;
+		}
+	}
+	else
+	{
+		if(changeId > propCache.lastIndex() || changeId < (propCache.firstIndex()-1))
+		{
+			//this is either the initial state (-2) or
+			//"broken" state again, force full reload
+			foreach(StelProperty* p, propMgr->getAllProperties())
+			{
+				changes.insert(p->getId(), QJsonValue::fromVariant(p->getValue()));
+			}
+			newId = propCache.lastIndex();
+		}
+		else if(changeId < propCache.lastIndex())
+		{
+			//create a "diff" between changeId to lastIndex
+			for(int i = changeId+1;i<=propCache.lastIndex();++i)
+			{
+				const PropertyCacheEntry& e = propCache.at(i);
+				changes.insert(e.id,QJsonValue::fromVariant(e.val));
+			}
+			newId = propCache.lastIndex();
+		}
+		//else no changes happened, interface is at current state!
+	}
+	propMutex.unlock();
 
 	obj.insert("changes",changes);
 	obj.insert("id",newId);

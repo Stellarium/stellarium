@@ -45,6 +45,22 @@ struct RCMag
 class StelSkyDrawer : public QObject
 {
 	Q_OBJECT
+
+	Q_PROPERTY(double relativeStarScale READ getRelativeStarScale WRITE setRelativeStarScale NOTIFY relativeStarScaleChanged)
+	Q_PROPERTY(double absoluteStarScale READ getAbsoluteStarScale WRITE setAbsoluteStarScale NOTIFY absoluteStarScaleChanged)
+	Q_PROPERTY(double twinkleAmount READ getTwinkleAmount WRITE setTwinkleAmount NOTIFY twinkleAmountChanged)
+	Q_PROPERTY(bool flagTwinkle READ getFlagTwinkle WRITE setFlagTwinkle NOTIFY flagTwinkleChanged)
+	Q_PROPERTY(int bortleScaleIndex READ getBortleScaleIndex WRITE setBortleScaleIndex NOTIFY bortleScaleIndexChanged)
+
+	Q_PROPERTY(bool flagStarMagnitudeLimit READ getFlagStarMagnitudeLimit WRITE setFlagStarMagnitudeLimit NOTIFY flagStarMagnitudeLimitChanged)
+	Q_PROPERTY(bool flagNebulaMagnitudeLimit READ getFlagNebulaMagnitudeLimit WRITE setFlagNebulaMagnitudeLimit NOTIFY flagNebulaMagnitudeLimitChanged)
+	Q_PROPERTY(bool flagPlanetMagnitudeLimit READ getFlagPlanetMagnitudeLimit WRITE setFlagPlanetMagnitudeLimit NOTIFY flagPlanetMagnitudeLimitChanged)
+
+	Q_PROPERTY(double customStarMagLimit READ getCustomStarMagnitudeLimit WRITE setCustomStarMagnitudeLimit NOTIFY customStarMagLimitChanged)
+	Q_PROPERTY(double customNebulaMagLimit READ getCustomNebulaMagnitudeLimit WRITE setCustomNebulaMagnitudeLimit NOTIFY customNebulaMagLimitChanged)
+	Q_PROPERTY(double customPlanetMagLimit READ getCustomPlanetMagnitudeLimit WRITE setCustomPlanetMagnitudeLimit NOTIFY customPlanetMagLimitChanged)
+
+	Q_PROPERTY(bool flagLuminanceAdaptation READ getFlagLuminanceAdaptation WRITE setFlagLuminanceAdaptation NOTIFY flagLuminanceAdaptationChanged)
 public:
 
 	//! Constructor
@@ -129,22 +145,22 @@ public:
 
 public slots:
 	//! Set the way brighter stars will look bigger as the fainter ones
-	void setRelativeStarScale(double b=1.0) {starRelativeScale=b;}
+	void setRelativeStarScale(double b=1.0) {if(b!=starRelativeScale){ starRelativeScale=b; emit relativeStarScaleChanged(b);}}
 	//! Get the way brighter stars will look bigger as the fainter ones
-	float getRelativeStarScale() const {return starRelativeScale;}
+	double getRelativeStarScale() const {return starRelativeScale;}
 
 	//! Set the absolute star brightness scale
-	void setAbsoluteStarScale(double b=1.0) {starAbsoluteScaleF=b;}
+	void setAbsoluteStarScale(double b=1.0) {if(b!=starAbsoluteScaleF){ starAbsoluteScaleF=b; emit absoluteStarScaleChanged(b);}}
 	//! Get the absolute star brightness scale
-	float getAbsoluteStarScale() const {return starAbsoluteScaleF;}
+	double getAbsoluteStarScale() const {return starAbsoluteScaleF;}
 
 	//! Set source twinkle amount.
-	void setTwinkleAmount(double b) {twinkleAmount=b;}
+	void setTwinkleAmount(double b) {if(b!=twinkleAmount){ twinkleAmount=b; emit twinkleAmountChanged(b);}}
 	//! Get source twinkle amount.
-	float getTwinkleAmount() const {return twinkleAmount;}
+	double getTwinkleAmount() const {return twinkleAmount;}
 
 	//! Set flag for source twinkling.
-	void setFlagTwinkle(bool b) {flagStarTwinkle=b;}
+	void setFlagTwinkle(bool b) {if(b!=flagStarTwinkle){ flagStarTwinkle=b; emit flagTwinkleChanged(b);}}
 	//! Get flag for source twinkling.
 	bool getFlagTwinkle() const {return flagStarTwinkle;}
 
@@ -164,39 +180,39 @@ public slots:
 	//! If enabled, stars fainter than the magnitude set with
 	//! setCustomStarMagnitudeLimit() will not be displayed.
 	// FIXME: Exposed to scripts - make sure it synchs with the GUI. --BM
-	void setFlagStarMagnitudeLimit(bool b) {flagStarMagnitudeLimit = b;}
+	void setFlagStarMagnitudeLimit(bool b) {if(b!=flagStarMagnitudeLimit){ flagStarMagnitudeLimit = b; emit flagStarMagnitudeLimitChanged(b);}}
 	//! @return true if the user-defined star magnitude limit is in force.
 	bool getFlagStarMagnitudeLimit() const {return flagStarMagnitudeLimit;}
 	//! Toggle the application of user-defined deep-sky object magnitude limit.
 	//! If enabled, deep-sky objects fainter than the magnitude set with
 	//! setCustomNebulaMagnitudeLimit() will not be displayed.
 	// FIXME: Exposed to scripts - make sure it synchs with the GUI. --BM
-	void setFlagNebulaMagnitudeLimit(bool b) {flagNebulaMagnitudeLimit = b;}
+	void setFlagNebulaMagnitudeLimit(bool b) {if(b!=flagNebulaMagnitudeLimit){ flagNebulaMagnitudeLimit = b; emit flagNebulaMagnitudeLimitChanged(b);}}
 	//! @return true if the user-defined nebula magnitude limit is in force.
 	bool getFlagNebulaMagnitudeLimit() const {return flagNebulaMagnitudeLimit;}
 	//! Toggle the application of user-defined solar system object magnitude limit.
 	//! If enabled, planets, planetary moons, asteroids (KBO, ...) and comets fainter than the magnitude set with
 	//! setCustomPlanetMagnitudeLimit() will not be displayed.
 	// FIXME: Exposed to scripts - make sure it synchs with the GUI. --BM  --- GZ: this was copy/paste. Track down BM's changes!!!
-	void setFlagPlanetMagnitudeLimit(bool b) {flagPlanetMagnitudeLimit = b;}
+	void setFlagPlanetMagnitudeLimit(bool b) {if(b!=flagPlanetMagnitudeLimit){ flagPlanetMagnitudeLimit = b; emit flagPlanetMagnitudeLimitChanged(b);}}
 	//! @return true if the user-defined nebula magnitude limit is in force.
 	bool getFlagPlanetMagnitudeLimit() const {return flagPlanetMagnitudeLimit;}
 
 	//! Get the value used for forced star magnitude limiting.
-	float getCustomStarMagnitudeLimit() const {return customStarMagLimit;}
+	double getCustomStarMagnitudeLimit() const {return customStarMagLimit;}
 	//! Sets a lower limit for star magnitudes (anything fainter is ignored).
 	//! In force only if flagStarMagnitudeLimit is set.
-	void setCustomStarMagnitudeLimit(double limit) {customStarMagLimit=limit;}
+	void setCustomStarMagnitudeLimit(double limit) {if(limit!=customStarMagLimit){ customStarMagLimit=limit; emit customStarMagLimitChanged(limit);}}
 	//! Get the value used for forced nebula magnitude limiting.
-	float getCustomNebulaMagnitudeLimit() const {return customNebulaMagLimit;}
+	double getCustomNebulaMagnitudeLimit() const {return customNebulaMagLimit;}
 	//! Sets a lower limit for nebula magnitudes (anything fainter is ignored).
 	//! In force only if flagNebulaMagnitudeLimit is set.
-	void setCustomNebulaMagnitudeLimit(double limit) {customNebulaMagLimit=limit;}
+	void setCustomNebulaMagnitudeLimit(double limit) {if(limit!=customNebulaMagLimit){ customNebulaMagLimit=limit; emit customNebulaMagLimitChanged(limit);}}
 	//! Get the value used for forced solar system object magnitude limiting.
-	float getCustomPlanetMagnitudeLimit() const {return customPlanetMagLimit;}
+	double getCustomPlanetMagnitudeLimit() const {return customPlanetMagLimit;}
 	//! Sets a lower limit for solar system object magnitudes (anything fainter is ignored).
 	//! In force only if flagPlanetMagnitudeLimit is set.
-	void setCustomPlanetMagnitudeLimit(double limit) {customPlanetMagLimit=limit;}
+	void setCustomPlanetMagnitudeLimit(double limit) {if(limit!=customPlanetMagLimit){ customPlanetMagLimit=limit; emit customPlanetMagLimitChanged(limit);}}
 
 	//! Get the luminance of the faintest visible object (e.g. RGB<0.05)
 	//! It depends on the zoom level, on the eye adapation and on the point source rendering parameters
@@ -204,7 +220,7 @@ public slots:
 	float getLimitLuminance() const {return limitLuminance;}
 
 	//! Set the value of the eye adaptation flag
-	void setFlagLuminanceAdaptation(bool b) {flagLuminanceAdaptation=b;}
+	void setFlagLuminanceAdaptation(bool b) {if(b!=flagLuminanceAdaptation){ flagLuminanceAdaptation=b; emit flagLuminanceAdaptationChanged(b);}}
 	//! Get the current value of eye adaptation flag
 	bool getFlagLuminanceAdaptation() const {return flagLuminanceAdaptation;}
 
@@ -236,6 +252,34 @@ public slots:
 	float getBig3dModelHaloRadius() const {return big3dModelHaloRadius;}
 	//! Set the radius of the big halo texture used when a 3d model is very bright.
 	void setBig3dModelHaloRadius(float r) {big3dModelHaloRadius=r;}
+signals:
+	//! Emitted whenever the relative star scale changed
+	void relativeStarScaleChanged(double b);
+	//! Emitted whenever the absolute star scale changed
+	void absoluteStarScaleChanged(double b);
+	//! Emitted whenever the twinkle amount changed
+	void twinkleAmountChanged(double b);
+	//! Emitted whenever the twinkle flag is toggled
+	void flagTwinkleChanged(bool b);
+	//! Emitted whenever the Bortle scale index changed
+	void bortleScaleIndexChanged(int index);
+
+	//! Emitted whenever the star magnitude limit flag is toggled
+	void flagStarMagnitudeLimitChanged(bool b);
+	//! Emitted whenever the nebula magnitude limit flag is toggled
+	void flagNebulaMagnitudeLimitChanged(bool b);
+	//! Emitted whenever the planet magnitude limit flag is toggled
+	void flagPlanetMagnitudeLimitChanged(bool b);
+
+	//! Emitted whenever the star magnitude limit changed
+	void customStarMagLimitChanged(double limit);
+	//! Emitted whenever the nebula magnitude limit changed
+	void customNebulaMagLimitChanged(double limit);
+	//! Emitted whenever the planet magnitude limit changed
+	void customPlanetMagLimitChanged(double limit);
+
+	//! Emitted whenever the luminance adaptation flag is toggled
+	void flagLuminanceAdaptationChanged(bool b);
 	
 private:
 	// Debug
@@ -295,7 +339,7 @@ private:
 
 	float maxAdaptFov, minAdaptFov, lnfovFactor;
 	bool flagStarTwinkle;
-	float twinkleAmount;
+	double twinkleAmount;
 
 	//! Informing the drawer whether atmosphere is displayed.
 	//! This is used to avoid twinkling/simulate extinction/refraction.
@@ -311,8 +355,8 @@ private:
 	//! @see customPlanetMagnitudeLimit
 	bool flagPlanetMagnitudeLimit;
 
-	float starRelativeScale;
-	float starAbsoluteScaleF;
+	double starRelativeScale;
+	double starAbsoluteScaleF;
 
 	float starLinearScale;	// optimization variable
 
@@ -326,19 +370,19 @@ private:
 	//! Interpreted as a lower limit - stars fainter than this value will not
 	//! be displayed.
 	//! Used if flagStarMagnitudeLimit is true.
-	float customStarMagLimit;
+	double customStarMagLimit;
 	//! User-defined magnitude limit for deep-sky objects.
 	//! Interpreted as a lower limit - nebulae fainter than this value will not
 	//! be displayed.
 	//! Used if flagNebulaMagnitudeLimit is true.
 	//! @todo Why the asterisks this is not in NebulaMgr? --BM
 	//  GZ To explain: we have 3 limits for stars, nebulae, planets. It's easier to maintain the pretty similar code in 1 place.
-	float customNebulaMagLimit;
+	double customNebulaMagLimit;
 	//! User-defined magnitude limit for solar system objects.
 	//! Interpreted as a lower limit - planets fainter than this value will not
 	//! be displayed.
 	//! Used if flagPlanetMagnitudeLimit is true.
-	float customPlanetMagLimit;
+	double customPlanetMagLimit;
 
 	//! Little halo texture
 	StelTextureSP texHalo;

@@ -7,8 +7,9 @@ define(["jquery", "settings", "translationdata"], function($, settings, Translat
     var connectionLost = false;
     var lastDataTime;
 
-    //keeps track of StelAction updates from server
+    //keeps track of StelAction & StelProperty updates from server
     var lastActionId = -2;
+    var lastPropId = -2;
 
     // Translates a string using Stellariums current locale. 
     // String must be present in translationdata.js
@@ -37,7 +38,8 @@ define(["jquery", "settings", "translationdata"], function($, settings, Translat
         $.ajax({
             url: "/api/main/status",
             data: {
-                actionId: lastActionId
+                actionId: lastActionId,
+                propId: lastPropId
             },
             dataType: "json",
             success: function(data) {
@@ -52,9 +54,21 @@ define(["jquery", "settings", "translationdata"], function($, settings, Translat
                     if (evt.isDefaultPrevented()) {
                         //if this is set, dont update the action id
                         //this is required to make sure the actions are loaded first
-                        console.log("action change error, resending same id");
+                        console.log("action change error, resending same id on next update");
                     } else {
                         lastActionId = data.actionChanges.id;
+                    }
+                }
+
+                if (data.propertyChanges.id !== lastPropId) {
+                    var evt = $.Event("stelPropertiesChanged");
+                    $(rc).trigger(evt, data.propertyChanges.changes, lastPropId);
+                    if(evt.isDefaultPrevented()) {
+                        //if this is set, dont update the prop id
+                        //this is required to make sure the props are loaded first
+                        console.log("prop change error, resending same id on next update");
+                    } else {
+                        lastPropId = data.propertyChanges.id;
                     }
                 }
 

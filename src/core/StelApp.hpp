@@ -44,6 +44,7 @@ class StelGuiBase;
 class StelMainScriptAPIProxy;
 class StelScriptMgr;
 class StelActionMgr;
+class StelPropertyMgr;
 class StelProgressController;
 
 //! @class StelApp
@@ -122,6 +123,9 @@ public:
 
 	//! Get the actions manager to use for managing and editing actions
 	StelActionMgr* getStelActionManager() {return actionMgr;}
+
+	//! Return the property manager
+	StelPropertyMgr* getStelPropertyManager() {return propMgr;}
 
 	//! Get the video manager
 	StelVideoMgr* getStelVideoMgr() {return videoMgr;}
@@ -278,6 +282,9 @@ private:
 
 	//Actions manager fot the application.  Will replace shortcutMgr.
 	StelActionMgr* actionMgr;
+
+	//Property manager for the application
+	StelPropertyMgr* propMgr;
 
 	// Textures manager for the application
 	StelTextureMgr* textureMgr;

@@ -1,6 +1,6 @@
 /*
  * Stellarium Remote Control plugin
- * Copyright (C) 2015 Florian Schaukowitsch
+ * Copyright (C) 2016 Florian Schaukowitsch
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,32 +17,24 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef VIEWSERVICE_HPP_
-#define VIEWSERVICE_HPP_
+#ifndef STELPROPERTYSERVICE_HPP_
+#define STELPROPERTYSERVICE_HPP_
 
 #include "AbstractAPIService.hpp"
+#include "StelPropertyMgr.hpp"
 
-class StelCore;
-class LandscapeMgr;
-class StelSkyCultureMgr;
-
-class ViewService : public AbstractAPIService
+class StelPropertyService : public AbstractAPIService
 {
 	Q_OBJECT
 public:
-	ViewService(const QByteArray& serviceName, QObject* parent = 0);
+	StelPropertyService(const QByteArray& serviceName, QObject* parent = 0);
 
-	virtual ~ViewService() {}
-
+	virtual ~StelPropertyService() {}
 protected:
-
 	virtual void getImpl(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
 	virtual void postImpl(const QByteArray &operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response) Q_DECL_OVERRIDE;
 private:
-	QString wrapHtml(QString& data,const QString& title) const;
-	StelCore* core;
-	LandscapeMgr* lsMgr;
-	StelSkyCultureMgr* skyCulMgr;
+	StelPropertyMgr* propMgr;
 };
 
 #endif

@@ -375,6 +375,7 @@ void StarMgr::init()
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Stars", displayGroup, N_("Stars"), "flagStarsDisplayed", "S");
 	addAction("actionShow_Stars_Labels", displayGroup, N_("Stars labels"), "flagLabelsDisplayed", "Alt+S");
+	registerProperty("prop_StarMgr_labelsAmount","labelsAmount");
 }
 
 

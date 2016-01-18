@@ -111,6 +111,7 @@ SET(stellarium_lib_SRCS
      core/StelOpenGL.cpp
      core/StelOpenGL.hpp
      core/StelPluginInterface.hpp
+     core/StelRegionObject.hpp
      core/StelSkyCultureMgr.cpp
      core/StelSkyCultureMgr.hpp
      core/StelTextureMgr.cpp
@@ -155,6 +156,8 @@ SET(stellarium_lib_SRCS
      core/StelActionMgr.hpp
      core/StelActionMgr.cpp
      core/StelProgressController.hpp
+     core/StelPropertyMgr.hpp
+     core/StelPropertyMgr.cpp
 
      ${gl_lib_SRCS}
 
@@ -245,6 +248,21 @@ SET(stellarium_lib_SRCS
      CLIProcessor.cpp
      translations.h
 )
+
+### CMake < 3.0 does not AUTOMOC Q_GADGET which some files use, so we have to manually add it
+### Wrap it in an IF to prevent some linker warnings about symbols defined twice (on MSVC13 at least)
+### Q_GADGET is required force the Qt MOC to run on some specific files,
+### because they do not contain QObjects, but require a MOC for Q_FLAGS or similar
+IF("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 3.0)
+     QT5_WRAP_CPP(stellarium_lib_moc_SRCS
+         core/StelObject.hpp
+         core/StelRegionObject.hpp
+         core/modules/Nebula.hpp
+     )
+     SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
+          ${stellarium_lib_moc_SRCS}
+     )
+ENDIF()
 
 SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
      core/external/qtcompress/qzip.cpp

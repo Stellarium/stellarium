@@ -12,21 +12,25 @@ define(["settings","./remotecontrol"],function(settings,rc) {
         this.isQueued = false;
         this.timer = undefined;
         this.finishedCallback = finishedCallback;
+        this.lastData = undefined;
+        this.lastSentData = undefined;
     }
 
     UpdateQueue.prototype.enqueue = function(data) {
         //what to do when enqueuing while sending?
         this.isQueued = true;
+        this.lastData = data;
 
         this.timer && clearTimeout(this.timer);
         this.timer = setTimeout($.proxy(function() {
             this.isTransmitting = true;
             //post an update
-            rc.postCmd(this.url, data, $.proxy(function() {
+            rc.postCmd(this.url, data, $.proxy(function(jqXHR, textStatus) {
+                this.lastSentData = data;
                 rc.forceUpdate();
                 this.isQueued = false;
                 if (this.finishedCallback) {
-                    this.finishedCallback();
+                    this.finishedCallback(jqXHR, textStatus);
                 }
             }, this));
         }, this), settings.editUpdateDelay);

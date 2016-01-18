@@ -54,11 +54,7 @@ private slots:
 	void landscapeChanged(QListWidgetItem* item);
 	void setZHR(int zhr);
 	void updateZhrDescription();
-	void planetsLabelsValueChanged(int);
-	void nebulasLabelsValueChanged(int);
-	void nebulasMarkersValueChanged(int);
 	void setBortleScaleToolTip(int Bindex);
-	void starsLabelsValueChanged(int);
 	void setCurrentLandscapeAsDefault(void);
 	void setCurrentCultureAsDefault(void);
 	void setFlagLandscapeUseMinimalBrightness(bool b);

@@ -139,8 +139,9 @@ define(["jquery", "api/time", "api/actions", "jquery-ui"], function($, timeApi, 
 				val = $this.data('prevData'); //we want only number, no alpha
 				console.log("value rolled back to " + val);
 			}
-			val = parseFloat(val);
-			//this.value = val > max ? max : val < min ? min : val;
+			val = Math.round(parseFloat(val));
+			val = val > max ? max : val < min ? min : val;
+			this.value = val;
 			//for some obscure reason, this.value may be a string instead of a float, so use val directly!
 			if (val !== $this.data('prevData')) setDateTimeField($(this).data("type"), $(this).data("field"), val);
 		}).on('keydown', scope, function(e) { // to allow 'Backspace' key behaviour
@@ -160,9 +161,11 @@ define(["jquery", "api/time", "api/actions", "jquery-ui"], function($, timeApi, 
 			console.log("val: " + val);
 			if (!val.match(/^\d+\.?\d*$/)) val = $this.data('prevData'); //we want only number, no alpha
 			var val2 = parseFloat(val);
-			this.value = val2 > max ? max : val2 < min ? min : val2;
+			val2 = Math.Round(val2);
+			val2 = val2 > max ? max : val2 < min ? min : val2;
+			this.value = val2;
 			//for some obscure reason, this.value may be a string instead of a float, so use val directly!
-			if (val !== $this.data('prevData')) setJDay(val2);
+			if (val2 !== $this.data('prevData')) setJDay(val2);
 		}).on('keydown', function(e) { // to allow 'Backspace' key behaviour
 			$(this).data('onInputPrevented', e.which === 8 ? true : false);
 			$(this).data('prevData', this.value);

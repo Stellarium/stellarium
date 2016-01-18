@@ -34,6 +34,7 @@
 //! The class defines extra abstract functions for searching and listing StelObjects.
 class StelObjectModule : public StelModule
 {
+	Q_OBJECT
 public:
 	StelObjectModule();
 	~StelObjectModule();

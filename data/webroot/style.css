@@ -348,6 +348,10 @@ h2 {
 	flex-direction: column;
 }
 
+.flex-baseline {
+	align-items: baseline;
+}
+
 #loadindicator {
 	position: fixed;
 	width: 32px;
@@ -760,13 +764,40 @@ button.button32:active {
 	margin-top: 10px;
 }
 
-#tab_view label,
-#tab_dso label {
+.blocklabel > label {
 	display: block;
 }
 
 #vo_dsocatalog label {
 	min-width: 150px;
+}
+
+.table {
+	display: table;
+}
+
+.table > p {
+	display: table-row;
+}
+
+.table > p > * {
+	display: table-cell;
+}
+
+#tab_view .flex-baseline label {
+	margin-right: 8px;
+}
+
+#tab_view .table label {
+	min-width: 230px;
+}
+
+#tab_view input.spinner{
+	width: 30px;
+}
+
+#vo_dsolabels label{
+	min-width: 70px;
 }
 
 .landscapeblock {

@@ -29,6 +29,7 @@
 #include "ScriptService.hpp"
 #include "SimbadService.hpp"
 #include "StelActionService.hpp"
+#include "StelPropertyService.hpp"
 #include "ViewService.hpp"
 
 #include "StelApp.hpp"
@@ -80,6 +81,7 @@ RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QOb
 	apiController->registerService(new ScriptService("scripts",apiController));
 	apiController->registerService(new SimbadService("simbad",apiController));
 	apiController->registerService(new StelActionService("stelaction",apiController));
+	apiController->registerService(new StelPropertyService("stelproperty",apiController));
 	apiController->registerService(new LocationService("location",apiController));
 	apiController->registerService(new LocationSearchService("locationsearch",apiController));
 	apiController->registerService(new ViewService("view",apiController));

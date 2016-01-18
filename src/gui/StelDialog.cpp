@@ -23,6 +23,7 @@
 #include "StelGui.hpp"
 #include "StelApp.hpp"
 #include "StelActionMgr.hpp"
+#include "StelPropertyMgr.hpp"
 
 #include <QDebug>
 #include <QAbstractButton>
@@ -31,6 +32,9 @@
 #include <QMetaProperty>
 #include <QStyleOptionGraphicsItem>
 #include <QSettings>
+#include <QSlider>
+#include <QSpinBox>
+#include <QDoubleSpinBox>
 #ifdef Q_OS_WIN
 	#include <QScroller>
 #endif
@@ -180,6 +184,57 @@ void StelDialog::connectCheckBox(QAbstractButton *checkBox, StelAction *action)
 	connect(checkBox, SIGNAL(toggled(bool)), action, SLOT(setChecked(bool)));
 }
 
+void StelDialog::connectIntProperty(QSpinBox *spinBox, const QString &propName)
+{
+	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
+	Q_ASSERT_X(prop,"StelDialog", "StelProperty does not exist");
+	bool ok;
+	spinBox->setValue(prop->getValue().toInt(&ok));
+	Q_ASSERT_X(ok,"StelDialog","Can not convert to required datatype");
+	StelPropertyIntProxy* prox = qobject_cast<StelPropertyIntProxy*>(prop->getProxy());
+	Q_ASSERT_X(prox,"StelDialog", "No valid StelPropertyProxy defined for this property");
+	//in this direction, we require a proxy
+	connect(prox, &StelPropertyIntProxy::propertyChanged, spinBox, &QSpinBox::setValue);
+	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
+	connect(spinBox, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),prop,&StelProperty::setValue);
+}
+
+void StelDialog::connectDoubleProperty(QDoubleSpinBox *spinBox, const QString &propName)
+{
+	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
+	Q_ASSERT_X(prop,"StelDialog", "StelProperty does not exist");
+	bool ok;
+	spinBox->setValue(prop->getValue().toDouble(&ok));
+	Q_ASSERT_X(ok,"StelDialog","Can not convert to required datatype");
+	StelPropertyDoubleProxy* prox = qobject_cast<StelPropertyDoubleProxy*>(prop->getProxy());
+	Q_ASSERT_X(prox,"StelDialog", "No valid StelPropertyProxy defined for this property");
+	//in this direction, we require a proxy
+	connect(prox, &StelPropertyDoubleProxy::propertyChanged, spinBox, &QDoubleSpinBox::setValue);
+	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
+	connect(spinBox, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),prop,&StelProperty::setValue);
+}
+
+void StelDialog::connectDoubleProperty(QSlider *slider, const QString &propName,double minValue, double maxValue)
+{
+	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
+	Q_ASSERT_X(prop,"StelDialog", "StelProperty does not exist");
+
+	//The connection is handled by a helper class. It is automatically destroyed when the slider is destroyed.
+	new QSliderStelPropertyConnectionHelper(slider,prop,minValue,maxValue,slider);
+}
+
+void StelDialog::connectBoolProperty(QAbstractButton *checkBox, const QString &propName)
+{
+	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
+	Q_ASSERT_X(prop,"StelDialog", "StelProperty does not exist");
+	checkBox->setChecked(prop->getValue().toBool());
+	StelPropertyBoolProxy* prox = qobject_cast<StelPropertyBoolProxy*>(prop->getProxy());
+	Q_ASSERT_X(prox,"StelDialog", "No valid StelPropertyProxy defined for this property");
+	//in this direction, we require a proxy
+	connect(prox, &StelPropertyBoolProxy::propertyChanged, checkBox, &QAbstractButton::setChecked);
+	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
+	connect(checkBox, &QAbstractButton::toggled, prop, &StelProperty::setValue);
+}
 
 #ifdef Q_OS_WIN
 void StelDialog::installKineticScrolling(QList<QWidget *> addscroll)
@@ -201,4 +256,32 @@ void StelDialog::installKineticScrolling(QList<QWidget *> addscroll)
 void StelDialog::updateNightModeProperty()
 {
 	dialog->setProperty("nightMode", StelApp::getInstance().getVisionModeNight());
+}
+
+QSliderStelPropertyConnectionHelper::QSliderStelPropertyConnectionHelper(QSlider *slider, StelProperty *prop, double minValue, double maxValue, QObject *parent)
+	: QObject(parent),slider(slider),prop(prop),minValue(minValue),maxValue(maxValue)
+{
+	bool ok;
+	prop->getValue().toDouble(&ok);
+	Q_ASSERT_X(ok,"QSliderStelPropertyConnectionHelper","Can not convert to required datatype");
+
+	dRange = maxValue - minValue;
+	propertyValueChanged(prop->getValue());
+
+	connect(slider,SIGNAL(valueChanged(int)),this,SLOT(sliderIntValueChanged(int)));
+	connect(prop,SIGNAL(changed(QVariant)), this, SLOT(propertyValueChanged(QVariant)));
+}
+
+void QSliderStelPropertyConnectionHelper::sliderIntValueChanged(int val)
+{
+	double dVal = ((val - slider->minimum()) / (double)(slider->maximum() - slider->minimum())) * dRange + minValue;
+	prop->setValue(dVal);
+}
+
+void QSliderStelPropertyConnectionHelper::propertyValueChanged(const QVariant& val)
+{
+	double dVal = val.toDouble();
+	int iRange = slider->maximum() - slider->minimum();
+	int iVal = qRound(((dVal - minValue)/dRange) * iRange + slider->minimum());
+	slider->setValue(iVal);
 }
