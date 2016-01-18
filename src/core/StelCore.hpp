@@ -584,6 +584,16 @@ public slots:
 	//! Get coefficients for custom equation for calculation of Delta-T
 	Vec3f getDeltaTCustomEquationCoefficients() const { return deltaTCustomEquationCoeff; }
 
+	//! initialize ephemerides calculation functions
+	void initEphemeridesFunctions();
+
+	bool de430IsAvailable(); //!< true if DE430 ephemeris file has been found
+	bool de431IsAvailable(); //!< true if DE431 ephemeris file has been found
+	bool de430IsActive();    //!< true if DE430 ephemeris is in use
+	bool de431IsActive();    //!< true if DE431 ephemeris is in use
+	void setDe430Active(bool status); //!< switch DE430 use to @param status (if de430IsAvailable()) DE430 is only used if date is within range of DE430.
+	void setDe431Active(bool status); //!< switch DE431 use to @param status (if de431IsAvailable()). DE431 is only used if DE430 is not used and the date is within range of DE431.
+
 signals:
 	//! This signal is emitted when the observer location has changed.
 	void locationChanged(StelLocation);
@@ -591,7 +601,7 @@ signals:
 	void timeRateChanged(double rate);
 
 private:
-	StelToneReproducer* toneConverter;		// Tones conversion between stellarium world and display device
+	StelToneReproducer* toneReproducer;		// Tones conversion between stellarium world and display device
 	StelSkyDrawer* skyDrawer;
 	StelMovementMgr* movementMgr;		// Manage vision movements
 
@@ -652,6 +662,12 @@ private:
 	Vec3f deltaTCustomEquationCoeff;
 	float deltaTCustomNDot;
 	float deltaTCustomYear;
+
+	// Variables for DE430/431 ephem calculation
+	bool de430Available; // ephem file found
+	bool de431Available; // ephem file found
+	bool de430Active;    // available and user-activated.
+	bool de431Active;    // available and user-activated.
 
 };
 

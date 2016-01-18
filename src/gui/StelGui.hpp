@@ -203,6 +203,11 @@ private:
 
 	// Currently used StelStyle
 	StelStyle currentStelStyle;
+
+#ifndef DISABLE_SCRIPTING
+	// We use a QStringList to save the user-configured buttons while script is running, and restore them later.
+	QStringList scriptSaveSpeedbuttons;
+#endif
 };
 
 #else // NO_GUI

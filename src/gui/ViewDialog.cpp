@@ -45,6 +45,7 @@
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelActionMgr.hpp"
+#include "StelMovementMgr.hpp"
 
 #include <QDebug>
 #include <QFrame>
@@ -312,15 +313,21 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showEclipticGridOfDateCheckBox, "actionShow_Ecliptic_Grid");
 	connectCheckBox(ui->showCardinalPointsCheckBox, "actionShow_Cardinal_Points");
 	connectCheckBox(ui->showPrecessionCirclesCheckBox, "actionShow_Precession_Circles");
+	connectCheckBox(ui->showPrimeVerticalLineCheckBox, "actionShow_Prime_Vertical_Line");
+	connectCheckBox(ui->showColuresLineCheckBox, "actionShow_Colure_Lines");
 
 	// Constellations
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
+	StelMovementMgr* moveMgr = GETSTELMODULE(StelMovementMgr);
+	Q_ASSERT(cmgr);
+	Q_ASSERT(moveMgr);
 	connectCheckBox(ui->showConstellationLinesCheckBox, "actionShow_Constellation_Lines");
 	connectCheckBox(ui->showConstellationLabelsCheckBox, "actionShow_Constellation_Labels");
 	connectCheckBox(ui->showConstellationBoundariesCheckBox, "actionShow_Constellation_Boundaries");
 	connectCheckBox(ui->showConstellationArtCheckBox, "actionShow_Constellation_Art");
-	ui->constellationArtBrightnessSpinBox->setValue(cmgr->getArtIntensity());
-	connect(ui->constellationArtBrightnessSpinBox, SIGNAL(valueChanged(double)), cmgr, SLOT(setArtIntensity(double)));
+	// Solve LP:#1520783: StelMovementMgr controls Art Intensity because of fade-out for LP:#1294483
+	ui->constellationArtBrightnessSpinBox->setValue(moveMgr->getInitConstellationIntensity());
+	connect(ui->constellationArtBrightnessSpinBox, SIGNAL(valueChanged(double)), moveMgr, SLOT(setInitConstellationIntensity(double)));
 	ui->constellationLineThicknessSpinBox->setValue(cmgr->getConstellationLineThickness());
 	connect(ui->constellationLineThicknessSpinBox, SIGNAL(valueChanged(double)), cmgr, SLOT(setConstellationLineThickness(double)));
 
@@ -331,7 +338,6 @@ void ViewDialog::createDialogContent()
 	ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
 	connect(ui->nativeNameCheckBox, SIGNAL(clicked(bool)), ssmgr, SLOT(setFlagNativeNames(bool)));
 	ui->nativeNameCheckBox->setChecked(ssmgr->getFlagNativeNames());
-	// GZ NEW allow to display short names and inhibit translation.
 	connect(ui->skyCultureNamesStyleComboBox, SIGNAL(currentIndexChanged(int)), cmgr, SLOT(setConstellationDisplayStyle(int)));
 
 	// Sky layers. This not yet finished and not visible in releases.

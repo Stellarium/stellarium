@@ -21,7 +21,7 @@
 #include <QDebug>
 #include <QDir>
 
-#ifdef ENABLE_SOUND
+#ifdef ENABLE_MEDIA
 
 #include <QMediaPlayer>
 

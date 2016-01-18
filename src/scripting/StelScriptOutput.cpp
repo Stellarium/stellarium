@@ -18,6 +18,7 @@
  */
 
 #include "StelScriptOutput.hpp"
+#include <QDir>
 #include <QDebug>
 
 // Init static variables.
@@ -47,4 +48,21 @@ void StelScriptOutput::reset(void)
 {
 	outputFile.reset();
 	outputText.clear();
+}
+
+void StelScriptOutput::saveOutputAs(const QString &name)
+{
+	QFile asFile;
+	QFileInfo outputInfo(outputFile);
+	QDir dir=outputInfo.dir(); // will hold complete dirname
+
+	asFile.setFileName(dir.absolutePath() + "/" + name);
+	if (!asFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text | QIODevice::Unbuffered))
+	{
+		qDebug() << "ERROR: Cannot open file" << dir.absolutePath() + "/" + name;
+		return;
+	}
+	qDebug() << "saving copy of output.txt to " << dir.absolutePath() + "/" + name;
+	asFile.write(qPrintable(outputText), outputText.size());
+	asFile.close();
 }
