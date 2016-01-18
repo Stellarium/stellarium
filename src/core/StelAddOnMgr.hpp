@@ -52,8 +52,12 @@ public:
 	QString getThumbnailDir() { return m_sThumbnailDir; }
 	AddOn* getAddOnFromZip(QString filePath);
 	QList<AddOn*> scanFilesInAddOnDir();
-	void installAddOn(AddOn *addon, const QStringList selectedFiles, bool tryDownload = true);
-	void removeAddOn(AddOn *addon, QStringList files);
+	void installAddOnFromFile(QString filePath);
+	void installAddOn(AddOn *addon, bool tryDownload = true);
+	void removeAddOn(AddOn *addon);
+	void updateAddons(QList<AddOn*> addons);
+	void installAddons(QList<AddOn*> addons);
+	void removeAddons(QList<AddOn*> addons);
 	void setUpdateFrequencyDays(int days);
 	void setUpdateFrequencyHour(int hour);
 	void setLastUpdate(qint64 time);
@@ -90,7 +94,7 @@ private:
 	QSettings* m_pConfig;
 
 	AddOn* m_downloadingAddOn;
-	QMap<AddOn*, QStringList> m_downloadQueue;
+	QList<AddOn*> m_downloadQueue;
 	QNetworkReply* m_pAddOnNetworkReply;
 	QFile* m_currentDownloadFile;
 	QByteArray m_userAgent;
@@ -121,8 +125,8 @@ private:
 
 	QHash<QString, AddOn*> loadAddonCatalog(QString jsonPath) const;
 	void restoreDefaultAddonJsonFile();
-	void updateInstalledAddonsJson(AddOn* addon);
-	void insertAddOnInUserJson(AddOn* addon);
+	void insertAddonInJson(AddOn* addon, QString jsonPath);
+	void removeAddonFromJson(AddOn* addon, QString jsonPath);
 
 	void downloadNextAddOn();
 	void finishCurrentDownload();
@@ -132,7 +136,7 @@ private:
 	// download thumbnails
 	void downloadNextThumbnail();
 
-	void unzip(AddOn& addon, QStringList selectedFiles);
+	void unzip(AddOn& addon);
 };
 
 #endif // _STELADDONMGR_HPP_

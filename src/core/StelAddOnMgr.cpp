@@ -272,7 +272,63 @@ void StelAddOnMgr::downloadThumbnailFinished()
 	downloadNextThumbnail();
 }
 
-void StelAddOnMgr::installAddOn(AddOn* addon, const QStringList selectedFiles, bool tryDownload)
+void StelAddOnMgr::updateAddons(QList<AddOn *> addons)
+{
+	// TODO
+}
+
+void StelAddOnMgr::installAddons(QList<AddOn *> addons)
+{
+	foreach (AddOn* addon, addons) {
+		installAddOn(addon);
+	}
+}
+
+void StelAddOnMgr::removeAddons(QList<AddOn *> addons)
+{
+	// TODO
+}
+
+void StelAddOnMgr::installAddOnFromFile(QString filePath)
+{
+	AddOn* addon = getAddOnFromZip(filePath);
+
+	// checking if this addonId is in the catalog
+	AddOn* addonInHash = m_addonsAvailable.value(addon->getAddOnId());
+	addonInHash = addonInHash ? addonInHash : m_addonsToUpdate.value(addon->getAddOnId());
+
+	if (addonInHash)
+	{
+		// addonId exists, but file is different!
+		// do not install it! addonIds must be unique.
+		if (addon->getChecksum() != addonInHash->getChecksum())
+		{
+			// TODO: asks the user if he wants to overwrite?
+			qWarning() << "AddOn Mgr : An addon ("
+				   << addon->getTypeString()
+				   << ") with the ID"
+				   << addon->getAddOnId()
+				   << "already exists. Aborting installation!";
+			return;
+		}
+		else
+		{
+			// same file! just install it!
+			installAddOn(addonInHash, false);
+		}
+	}
+	else
+	{
+		installAddOn(addon, false);
+		if (addon->getStatus() == AddOn::FullyInstalled)
+		{
+			insertAddonInJson(addon, m_sUserAddonJsonPath);
+			m_addonsInstalled.insert(addon->getAddOnId(), addon);
+		}
+	}
+}
+
+void StelAddOnMgr::installAddOn(AddOn* addon, bool tryDownload)
 {
 	if (m_downloadQueue.contains(addon))
 	{
@@ -295,9 +351,9 @@ void StelAddOnMgr::installAddOn(AddOn* addon, const QStringList selectedFiles, b
 	// only accept zip archive
 	else if (!addon->getDownloadFilepath().endsWith(".zip"))
 	{
+		addon->setStatus(AddOn::InvalidFormat);
 		qWarning() << "Add-On Mgr: Error" << addon->getAddOnId()
 			   << "The file found is not a .zip archive";
-		addon->setStatus(AddOn::InvalidFormat);
 	}
 	// checking integrity
 	else if (addon->getChecksum() != calculateMd5(file))
@@ -309,28 +365,10 @@ void StelAddOnMgr::installAddOn(AddOn* addon, const QStringList selectedFiles, b
 	}
 	else
 	{
-		/*
-		if (addon->getSource() == AddOn::Uncatalogued)
-		{
-			// duplicated keys?
-			if (m_addonsAvailable.contains(addon->getAddOnId()))
-			{
-				// TODO: asks the user if he wants to overwrite?
-				qWarning() << "AddOn Mgr : An addon ("
-					   << addon->getTypeString()
-					   << ") with the ID"
-					   << addon->getAddOnId()
-					   << "already exists. Aborting installation!";
-				return;
-			}
-			insertAddOnInUserJson(addon);
-		}
-		*/
-
 		// installing files
 		addon->setStatus(AddOn::Installing);
 		emit (dataUpdated(addon));
-		unzip(*addon, selectedFiles);
+		unzip(*addon);
 		// remove zip archive from ~/.stellarium/addon/
 		QFile(addon->getDownloadFilepath()).remove();
 	}
@@ -348,27 +386,23 @@ void StelAddOnMgr::installAddOn(AddOn* addon, const QStringList selectedFiles, b
 	else if (tryDownload && (addon->getStatus() == AddOn::NotInstalled || addon->getStatus() == AddOn::Corrupted))
 	{
 		addon->setStatus(AddOn::Installing);
-		m_downloadQueue.insert(addon, selectedFiles);
+		m_downloadQueue.append(addon);
 		downloadNextAddOn();
 	}
 
 	emit (dataUpdated(addon));
 }
 
-void StelAddOnMgr::removeAddOn(AddOn* addon, QStringList selectedFiles)
+void StelAddOnMgr::removeAddOn(AddOn* addon)
 {
 	if (!addon || !addon->isValid())
 	{
 		return;
 	}
 
-	if (selectedFiles.isEmpty()) // remove all files
-	{
-		selectedFiles = addon->getInstalledFiles();
-	}
-
+	addon->setStatus(AddOn::NotInstalled);
 	QStringList installedFiles = addon->getInstalledFiles();
-	foreach (QString filePath, selectedFiles) {
+	foreach (QString filePath, addon->getInstalledFiles()) {
 		QFile file(filePath);
 		if (file.remove())
 		{
@@ -381,30 +415,29 @@ void StelAddOnMgr::removeAddOn(AddOn* addon, QStringList selectedFiles)
 		}
 		else
 		{
-			qWarning() << "Add-On Mgr : Unable to remove"
+			addon->setStatus(AddOn::PartiallyInstalled);
+			qWarning() << "[Add-on] Unable to remove"
 				   << QDir::toNativeSeparators(filePath);
 		}
-
 	}
 
-	if (installedFiles.size() == 0)
+	if (addon->getStatus() == AddOn::NotInstalled)
 	{
-		qDebug() << "Add-On Mgr : Successfully removed" << addon->getAddOnId();
-		addon->setStatus(AddOn::NotInstalled);
+		removeAddonFromJson(addon, m_sInstalledAddonsJsonPath);
+		qDebug() << "[Add-on] Successfully removed: " << addon->getAddOnId();
 	}
-	else if (addon->getInstalledFiles().size() > installedFiles.size())
+	else if (addon->getStatus() == AddOn::PartiallyInstalled)
 	{
-		qWarning() << "Add-On Mgr : Partially removed" << addon->getAddOnId();
-		addon->setStatus(AddOn::PartiallyInstalled);
+		qWarning() << "[Add-on] Partially removed: " << addon->getAddOnId();
 	}
 	else
 	{
 		addon->setStatus(AddOn::UnableToRemove);
+		qWarning() << "[Add-on] Unable to remove: " << addon->getAddOnId();
 		return; // nothing changed
 	}
 
 	addon->setInstalledFiles(installedFiles);
-	updateInstalledAddonsJson(addon);
 
 	if (addon->getCategory() == AddOn::CATALOG || addon->getCategory() == AddOn::LANGUAGEPACK
 			|| addon->getCategory() == AddOn::TEXTURE)
@@ -439,20 +472,14 @@ AddOn* StelAddOnMgr::getAddOnFromZip(QString filePath)
 			qDebug() << "Add-On Mgr: loading catalog file:"
 				 << QDir::toNativeSeparators(info.filePath);
 
-			QString addonid = json.keys().at(0);
-			QVariantMap attributes = json.value(addonid).toObject().toVariantMap();
+			QString addonId = json.keys().at(0);
+			QVariantMap attributes = json.value(addonId).toObject().toVariantMap();
 			QFile zipFile(filePath);
 			QString md5sum = calculateMd5(zipFile);
 			attributes.insert("checksum", md5sum);
-			attributes.insert("download-size", zipFile.size()/1024.0);
+			attributes.insert("download-size", zipFile.size() / 1024.0);
 
-			// TODO: hash by md5 was removed!
-			// finds source
-			//AddOn* addonInHash = m_addonsByMd5.value(md5sum);
-			//AddOn::Source source = addonInHash
-			//		? addonInHash->getSource()
-			//		: AddOn::Uncatalogued;
-			//return new AddOn(addonid, attributes, source);
+			return new AddOn(addonId, attributes);
 		}
 	}
 	return NULL;
@@ -499,11 +526,11 @@ void StelAddOnMgr::downloadNextAddOn()
 	Q_ASSERT(m_currentDownloadFile==NULL);
 	Q_ASSERT(m_progressBar==NULL);
 
-	m_downloadingAddOn = m_downloadQueue.firstKey();
+	m_downloadingAddOn = m_downloadQueue.first();
 	m_currentDownloadFile = new QFile(m_downloadingAddOn->getDownloadFilepath());
 	if (!m_currentDownloadFile->open(QIODevice::WriteOnly))
 	{
-		qWarning() << "Can't open a writable file: "
+		qWarning() << "[Add-on] Can't open a writable file: "
 			   << QDir::toNativeSeparators(m_downloadingAddOn->getDownloadFilepath());
 		cancelAllDownloads();
 		emit (addOnMgrMsg(UnableToWriteFiles));
@@ -562,7 +589,7 @@ void StelAddOnMgr::downloadAddOnFinished()
 			return;
 		}
 		finishCurrentDownload();
-		installAddOn(m_downloadingAddOn, m_downloadQueue.value(m_downloadingAddOn), false);
+		installAddOn(m_downloadingAddOn, false);
 	}
 	else
 	{
@@ -602,7 +629,7 @@ void StelAddOnMgr::finishCurrentDownload()
 		m_progressBar = NULL;
 	}
 
-	m_downloadQueue.remove(m_downloadingAddOn);
+	m_downloadQueue.removeOne(m_downloadingAddOn);
 }
 
 void StelAddOnMgr::cancelAllDownloads()
@@ -614,7 +641,7 @@ void StelAddOnMgr::cancelAllDownloads()
 	emit(updateTableViews());
 }
 
-void StelAddOnMgr::unzip(AddOn& addon, QStringList selectedFiles)
+void StelAddOnMgr::unzip(AddOn& addon)
 {
 	Stel::QZipReader reader(addon.getDownloadFilepath());
 	if (reader.status() != Stel::QZipReader::NoError)
@@ -658,16 +685,6 @@ void StelAddOnMgr::unzip(AddOn& addon, QStringList selectedFiles)
 		StelFileMgr::makeSureDirExistsAndIsWritable(fileInfo.absolutePath());
 		QFile file(fileInfo.absoluteFilePath());
 
-		// when selectedFiles is empty, extract all files
-		if (!selectedFiles.isEmpty())
-		{
-			if (!selectedFiles.contains(fileInfo.filePath()) && !file.exists())
-			{
-				addon.setStatus(AddOn::PartiallyInstalled);
-				continue;
-			}
-		}
-
 		file.remove(); // overwrite
 		QByteArray data = reader.fileData(info.filePath);
 		if (!file.open(QIODevice::WriteOnly))
@@ -684,41 +701,12 @@ void StelAddOnMgr::unzip(AddOn& addon, QStringList selectedFiles)
 	}
 	installedFiles.removeDuplicates();
 	addon.setInstalledFiles(installedFiles);
-	updateInstalledAddonsJson(&addon);
+	insertAddonInJson(&addon, m_sInstalledAddonsJsonPath);
 }
 
-void StelAddOnMgr::updateInstalledAddonsJson(AddOn* addon)
+void StelAddOnMgr::insertAddonInJson(AddOn* addon, QString jsonPath)
 {
-	QFile jsonFile(m_sInstalledAddonsJsonPath);
-	if (jsonFile.open(QIODevice::ReadWrite))
-	{
-		QJsonObject object(QJsonDocument::fromJson(jsonFile.readAll()).object());
-		if (addon->getStatus() == AddOn::NotInstalled)
-		{
-			object.remove(addon->getAddOnId());
-		}
-		else
-		{
-			QJsonObject attributes;
-			attributes.insert("checksum", addon->getChecksum());
-			attributes.insert("status", addon->getStatus());
-			attributes.insert("installed-files", QJsonArray::fromStringList(addon->getInstalledFiles()));
-			object.insert(addon->getAddOnId(), attributes);
-		}
-		jsonFile.resize(0);
-		jsonFile.write(QJsonDocument(object).toJson());
-		jsonFile.close();
-	}
-	else
-	{
-		qWarning() << "Add-On Mgr: Couldn't open the catalog of installed addons!"
-			   << QDir::toNativeSeparators(m_sInstalledAddonsJsonPath);
-	}
-}
-
-void StelAddOnMgr::insertAddOnInUserJson(AddOn* addon)
-{
-	QFile jsonFile(m_sUserAddonJsonPath);
+	QFile jsonFile(jsonPath);
 	if (jsonFile.open(QIODevice::ReadWrite))
 	{
 		QJsonObject attributes;
@@ -735,6 +723,9 @@ void StelAddOnMgr::insertAddOnInUserJson(AddOn* addon)
 		attributes.insert("thumbnail", addon->getThumbnail());
 		attributes.insert("textures", addon->getAllTextures().join(","));
 
+		attributes.insert("status", addon->getStatus());
+		attributes.insert("installed-files", QJsonArray::fromStringList(addon->getInstalledFiles()));
+
 		QJsonArray authors;
 		foreach (AddOn::Authors a, addon->getAuthors())
 		{
@@ -748,7 +739,7 @@ void StelAddOnMgr::insertAddOnInUserJson(AddOn* addon)
 
 		QJsonObject json(QJsonDocument::fromJson(jsonFile.readAll()).object());
 		json.insert("name", QString("Add-ons Catalog"));
-		json.insert("format-version", ADDON_MANAGER_CATALOG_VERSION);
+		json.insert("format", ADDON_MANAGER_CATALOG_VERSION);
 
 		QJsonObject addons = json["add-ons"].toObject();
 		addons.insert(addon->getAddOnId(), attributes);
@@ -757,19 +748,30 @@ void StelAddOnMgr::insertAddOnInUserJson(AddOn* addon)
 		jsonFile.resize(0);
 		jsonFile.write(QJsonDocument(json).toJson());
 		jsonFile.close();
-
-		// TODO: fix
-		// update source
-		//addon->setSource(AddOn::UserCatalog);
-
-		// TODO: fix user catalog!
-		// update hash
-		//insertAddOn(addon);
 	}
 	else
 	{
 		qWarning() << "Add-On Mgr: Couldn't open the user catalog of addons!"
 			   << QDir::toNativeSeparators(m_sInstalledAddonsJsonPath);
+	}
+}
+
+void StelAddOnMgr::removeAddonFromJson(AddOn *addon, QString jsonPath)
+{
+	QFile jsonFile(jsonPath);
+	if (jsonFile.open(QIODevice::ReadWrite))
+	{
+		QJsonObject object(QJsonDocument::fromJson(jsonFile.readAll()).object());
+		object.remove(addon->getAddOnId());
+
+		jsonFile.resize(0);
+		jsonFile.write(QJsonDocument(object).toJson());
+		jsonFile.close();
+	}
+	else
+	{
+		qWarning() << "[Add-on] Unable to open the catalog: "
+			   << QDir::toNativeSeparators(jsonPath);
 	}
 }
 

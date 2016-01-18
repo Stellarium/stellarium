@@ -59,8 +59,7 @@ private slots:
 	void slotUpdateButton();
 	void downloadFinished();
 	void installFromFile();
-	void installSelectedRows();
-	void removeSelectedRows();
+	void slotCheckedRows();
 	void populateTables();
 
 private:

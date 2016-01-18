@@ -77,8 +77,7 @@ void AddOnDialog::createDialogContent()
 		this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 
 	// button to install/uninstall/update
-//	connect(ui->btnInstall, SIGNAL(clicked()), this, SLOT(installSelectedRows()));
-//	connect(ui->btnRemove, SIGNAL(clicked()), this, SLOT(removeSelectedRows()));
+	connect(ui->button, SIGNAL(clicked()), this, SLOT(slotCheckedRows()));
 	ui->button->setEnabled(false);
 
 	connect(ui->availableTableView, SIGNAL(addonSelected(AddOn*)), this, SLOT(slotAddonSelected(AddOn*)));
@@ -118,17 +117,17 @@ void AddOnDialog::slotUpdateButton()
 {
 	int amount = 0;
 	QString tabName = ui->stackedWidget->currentWidget()->objectName();
-	if (tabName == "updates")
+	if (tabName == ui->updates->objectName())
 	{
 		amount = ui->updatesTableView->getCheckedAddons().size();
 		ui->button->setText(QString("%1 (%2)").arg(q_("Update")).arg(amount));
 	}
-	else if (tabName == "installed")
+	else if (tabName == ui->installed->objectName())
 	{
 		amount = ui->installedTableView->getCheckedAddons().size();
 		ui->button->setText(QString("%1 (%2)").arg(q_("Uninstall")).arg(amount));
 	}
-	else if (tabName == "available")
+	else if (tabName == ui->available->objectName())
 	{
 		amount = ui->availableTableView->getCheckedAddons().size();
 		ui->button->setText(QString("%1 (%2)").arg(q_("Install")).arg(amount));
@@ -247,35 +246,27 @@ void AddOnDialog::downloadFinished()
 void AddOnDialog::installFromFile()
 {
 	QString filePath = QFileDialog::getOpenFileName(NULL, q_("Select Add-On"), QDir::homePath(), "*.zip");
-	if (QFile(filePath).exists())
+	StelApp::getInstance().getStelAddOnMgr().installAddOnFromFile(filePath);
+}
+
+void AddOnDialog::slotCheckedRows()
+{
+	AddOnTableView* tableview;
+	QString tabName = ui->stackedWidget->currentWidget()->objectName();
+	if (tabName == ui->updates->objectName())
 	{
-		AddOn* addon = StelApp::getInstance().getStelAddOnMgr().getAddOnFromZip(filePath);
-		StelApp::getInstance().getStelAddOnMgr().installAddOn(addon, QStringList());
+		tableview = ui->updatesTableView;
+		StelApp::getInstance().getStelAddOnMgr().updateAddons(tableview->getCheckedAddons());
 	}
-}
-
-void AddOnDialog::installSelectedRows()
-{
-	/*
-	AddOnTableView* view = m_tableViews.value((AddOn::Category)ui->stackedWidget->currentIndex());
-	QHashIterator<AddOn*, QStringList> i(view->getSelectedAddonsToInstall());
-	while (i.hasNext()) {
-		i.next();
-		StelApp::getInstance().getStelAddOnMgr().installAddOn(i.key(), i.value());
+	else if (tabName == ui->installed->objectName())
+	{
+		tableview = ui->installedTableView;
+		StelApp::getInstance().getStelAddOnMgr().removeAddons(tableview->getCheckedAddons());
 	}
-	view->clearSelection();
-	*/
-}
-
-void AddOnDialog::removeSelectedRows()
-{
-	/*
-	AddOnTableView* view = m_tableViews.value((AddOn::Category)ui->stackedWidget->currentIndex());
-	QHashIterator<AddOn*, QStringList> i(view->getSelectedAddonsToRemove());
-	while (i.hasNext()) {
-		i.next();
-		StelApp::getInstance().getStelAddOnMgr().removeAddOn(i.key(), i.value());
+	else if (tabName == ui->available->objectName())
+	{
+		tableview = ui->availableTableView;
+		StelApp::getInstance().getStelAddOnMgr().installAddons(tableview->getCheckedAddons());
 	}
-	view->clearSelection();
-	*/
+	tableview->clearSelection();
 }

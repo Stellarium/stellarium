@@ -82,7 +82,7 @@ void AddOnScanner::slotInstallCompatibles()
 	foreach (AddOn* addon, m_addonsList) {
 		if (addon->isValid())
 		{
-			StelApp::getInstance().getStelAddOnMgr().installAddOn(addon, QStringList());
+			StelApp::getInstance().getStelAddOnMgr().installAddOn(addon);
 			m_addonsList.removeOne(addon);
 		}
 	}
