@@ -20,6 +20,7 @@
 #include "StelModule.hpp"
 #include "StelApp.hpp"
 #include "StelActionMgr.hpp"
+#include "StelPropertyMgr.hpp"
 
 /*************************************************************************
  Get the version of the module, default is stellarium main version
@@ -37,3 +38,8 @@ class StelAction* StelModule::addAction(const QString& id, const QString& groupI
 	return mgr->addAction(id, groupId, text, target, slot, shortcut, altShortcut);
 }
 
+class StelProperty* StelModule::registerProperty(const QString &id, QObject *target, const char *prop)
+{
+	StelPropertyMgr* mgr = StelApp::getInstance().getStelPropertyManager();
+	return mgr->registerProperty(id, target, prop);
+}

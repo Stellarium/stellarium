@@ -48,6 +48,7 @@ typedef QSharedPointer<Nebula> NebulaP;
 class NebulaMgr : public StelObjectModule
 {
 	Q_OBJECT
+	//StelActions
 	Q_PROPERTY(bool flagHintDisplayed
 		   READ getFlagHints
 		   WRITE setFlagHints)
@@ -55,7 +56,37 @@ class NebulaMgr : public StelObjectModule
 		   READ getFlagTypeFiltersUsage
 		   WRITE setFlagTypeFiltersUsage
 		   )
-
+	//StelProperties
+	Q_PROPERTY(Nebula::TypeGroup typeFilters
+		   READ getTypeFilters
+		   WRITE setTypeFilters
+		   NOTIFY typeFiltersChanged
+		   )
+	Q_PROPERTY(Nebula::CatalogGroup catalogFilters
+		   READ getCatalogFilters
+		   WRITE setCatalogFilters
+		   NOTIFY catalogFiltersChanged
+		   )
+	Q_PROPERTY(bool hintsProportional
+		   READ getHintsProportional
+		   WRITE setHintsProportional
+		   NOTIFY hintsProportionalChanged
+		   )
+	Q_PROPERTY(bool flagSurfaceBrightnessUsage
+		   READ getFlagSurfaceBrightnessUsage
+		   WRITE setFlagSurfaceBrightnessUsage
+		   NOTIFY flagSurfaceBrightnessUsageChanged
+		   )
+	Q_PROPERTY(double labelsAmount
+		   READ getLabelsAmount
+		   WRITE setLabelsAmount
+		   NOTIFY labelsAmountChanged
+		   )
+	Q_PROPERTY(double hintsAmount
+		   READ getHintsAmount
+		   WRITE setHintsAmount
+		   NOTIFY hintsAmountChanged
+		   )
 public:
 	NebulaMgr();
 	virtual ~NebulaMgr();
@@ -123,11 +154,11 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 public slots:
-	void setCatalogFilters(const Nebula::CatalogGroup& cflags);
-	const Nebula::CatalogGroup& getCatalogFilters() const { return Nebula::catalogFilters; }
+	void setCatalogFilters(Nebula::CatalogGroup cflags);
+	Nebula::CatalogGroup getCatalogFilters() const { return Nebula::catalogFilters; }
 
-	void setTypeFilters(const Nebula::TypeGroup& tflags);
-	const Nebula::TypeGroup& getTypeFilters() const { return Nebula::typeFilters; }
+	void setTypeFilters(Nebula::TypeGroup tflags);
+	Nebula::TypeGroup getTypeFilters() const { return Nebula::typeFilters; }
 
 	//! Set the default color used to draw the nebula symbols (default circles, etc).
 	//! @param c The color of the nebula symbols
@@ -461,7 +492,7 @@ public slots:
 	bool getHintsProportional(void) const;
 
 	//! Set whether hints (symbols) should be visible according to surface brightness value.
-	void setFlagSurfaceBrightnessUsage(const bool usage) { Nebula::surfaceBrightnessUsage=usage; }
+	void setFlagSurfaceBrightnessUsage(const bool usage) {if(usage!=Nebula::surfaceBrightnessUsage){ Nebula::surfaceBrightnessUsage=usage; emit flagSurfaceBrightnessUsageChanged(usage);}}
 	//! Get whether hints (symbols) are visible according to surface brightness value.
 	bool getFlagSurfaceBrightnessUsage(void) const { return Nebula::surfaceBrightnessUsage; }
 
@@ -488,23 +519,27 @@ public slots:
 	//! Set the amount of nebulae labels. The real amount is also proportional with FOV.
 	//! The limit is set in function of the nebulae magnitude
 	//! @param a the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
-	void setLabelsAmount(float a) {labelsAmount=a;}
+	void setLabelsAmount(double a) {if(a!=labelsAmount){labelsAmount=a; emit labelsAmountChanged(a);}}
 	//! Get the amount of nebulae labels. The real amount is also proportional with FOV.
 	//! @return the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
-	float getLabelsAmount(void) const {return labelsAmount;}
+	double getLabelsAmount(void) const {return labelsAmount;}
 
 	//! Set the amount of nebulae hints. The real amount is also proportional with FOV.
 	//! The limit is set in function of the nebulae magnitude
 	//! @param f the amount between 0 and 10. 0 is no hints, 10 is maximum of hints
-	void setHintsAmount(float f) {hintsAmount = f;}
+	void setHintsAmount(double f) {if(hintsAmount!=f){hintsAmount = f; emit hintsAmountChanged(f);}}
 	//! Get the amount of nebulae labels. The real amount is also proportional with FOV.
 	//! @return the amount between 0 and 10. 0 is no hints, 10 is maximum of hints
-	float getHintsAmount(void) const {return hintsAmount;}
+	double getHintsAmount(void) const {return hintsAmount;}
 signals:
 	//! Emitted when the catalog filter is changed
-	void catalogFiltersChanged(const Nebula::CatalogGroup& flags);
+	void catalogFiltersChanged(Nebula::CatalogGroup flags);
 	//! Emitted when the type filter is changed
-	void typeFiltersChanged(const Nebula::TypeGroup& flags);
+	void typeFiltersChanged(Nebula::TypeGroup flags);
+	void hintsProportionalChanged(bool b);
+	void flagSurfaceBrightnessUsageChanged(bool b);
+	void labelsAmountChanged(double a);
+	void hintsAmountChanged(double f);
 
 private slots:
 	//! Sets the colors of the Nebula labels and markers according to the
@@ -569,9 +604,9 @@ private:
 	StelSphericalIndex nebGrid;
 
 	//! The amount of hints (between 0 and 10)
-	float hintsAmount;
+	double hintsAmount;
 	//! The amount of labels (between 0 and 10)
-	float labelsAmount;
+	double labelsAmount;
 
 	//! The selection pointer texture
 	StelTextureSP texPointer;

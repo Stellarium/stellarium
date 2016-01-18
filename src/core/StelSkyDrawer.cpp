@@ -35,6 +35,7 @@
 #include "StelUtils.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
+#include "StelPropertyMgr.hpp"
 
 #include <QOpenGLContext>
 #include <QOpenGLShaderProgram>
@@ -191,6 +192,24 @@ void StelSkyDrawer::init()
 	starShaderVars.pos = starShaderProgram->attributeLocation("pos");
 	starShaderVars.color = starShaderProgram->attributeLocation("color");
 	starShaderVars.texture = starShaderProgram->uniformLocation("tex");
+
+	//Add StelProperties
+	StelPropertyMgr* mgr = StelApp::getInstance().getStelPropertyManager();
+	mgr->registerProperty("prop_SkyDrawer_relativeStarScale",this,"relativeStarScale");
+	mgr->registerProperty("prop_SkyDrawer_absoluteStarScale",this,"absoluteStarScale");
+	mgr->registerProperty("prop_SkyDrawer_twinkleAmount",this,"twinkleAmount");
+	mgr->registerProperty("prop_SkyDrawer_flagTwinkle",this,"flagTwinkle");
+	mgr->registerProperty("prop_SkyDrawer_bortleScaleIndex",this,"bortleScaleIndex");
+
+	mgr->registerProperty("prop_SkyDrawer_flagStarMagnitudeLimit",this,"flagStarMagnitudeLimit");
+	mgr->registerProperty("prop_SkyDrawer_flagNebulaMagnitudeLimit",this,"flagNebulaMagnitudeLimit");
+	mgr->registerProperty("prop_SkyDrawer_flagPlanetMagnitudeLimit",this,"flagPlanetMagnitudeLimit");
+
+	mgr->registerProperty("prop_SkyDrawer_customStarMagLimit",this,"customStarMagLimit");
+	mgr->registerProperty("prop_SkyDrawer_customNebulaMagLimit",this,"customNebulaMagLimit");
+	mgr->registerProperty("prop_SkyDrawer_customPlanetMagLimit",this,"customPlanetMagLimit");
+
+	mgr->registerProperty("prop_SkyDrawer_flagLuminanceAdaptation",this,"flagLuminanceAdaptation");
 			
 	update(0);
 }
@@ -644,24 +663,28 @@ void StelSkyDrawer::preDraw()
 // See http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
 void StelSkyDrawer::setBortleScaleIndex(int bIndex)
 {
-	// Associate the Bortle index (1 to 9) to inScale value
-	if (bIndex<1)
+	if(bortleScaleIndex!=bIndex)
 	{
-		qWarning() << "WARNING: Bortle scale index range is [1;9], given" << bIndex;
-		bIndex = 1;
-	}
-	if (bIndex>9)
-	{
-		qWarning() << "WARNING: Bortle scale index range is [1;9], given" << bIndex;
-		bIndex = 9;
-	}
+		// Associate the Bortle index (1 to 9) to inScale value
+		if (bIndex<1)
+		{
+			qWarning() << "WARNING: Bortle scale index range is [1;9], given" << bIndex;
+			bIndex = 1;
+		}
+		if (bIndex>9)
+		{
+			qWarning() << "WARNING: Bortle scale index range is [1;9], given" << bIndex;
+			bIndex = 9;
+		}
 
-	bortleScaleIndex = bIndex;
-	// GZ: I moved this block to update()
-	// These value have been calibrated by hand, looking at the faintest star in stellarium at around 40 deg FOV
-	// They should roughly match the scale described at http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
-	// static const float bortleToInScale[9] = {2.45, 1.55, 1.0, 0.63, 0.40, 0.24, 0.23, 0.145, 0.09};
-	// setInputScale(bortleToInScale[bIndex-1]);
+		bortleScaleIndex = bIndex;
+		emit bortleScaleIndexChanged(bortleScaleIndex);
+		// GZ: I moved this block to update()
+		// These value have been calibrated by hand, looking at the faintest star in stellarium at around 40 deg FOV
+		// They should roughly match the scale described at http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
+		// static const float bortleToInScale[9] = {2.45, 1.55, 1.0, 0.63, 0.40, 0.24, 0.23, 0.145, 0.09};
+		// setInputScale(bortleToInScale[bIndex-1]);
+	}
 }
 
 

@@ -35,6 +35,11 @@ class QDataStream;
 class Nebula : public StelObject
 {
 friend class NebulaMgr;
+
+	//Required for the correct working of the Q_FLAGS macro (which requires a MOC pass)
+	Q_GADGET
+	Q_FLAGS(CatalogGroup)
+	Q_FLAGS(TypeGroup)
 public:
 	enum CatalogGroupFlags
 	{
@@ -54,6 +59,7 @@ public:
 		CatUGC		= 0x00002000, //!< The Uppsala General Catalogue of Galaxies
 		CatCed		= 0x00004000 //!< Cederblad Catalog of bright diffuse Galactic nebulae (Ced)
 	};
+	Q_DECLARE_FLAGS(CatalogGroup, CatalogGroupFlags)
 
 	enum TypeGroupFlags
 	{
@@ -68,12 +74,7 @@ public:
 		TypeSupernovaRemnants	= 0x00000100, //!< Supernova Remnants
 		TypeOther		= 0x00000200  //!< Other objects
 	};
-
-
-	typedef QFlags<CatalogGroupFlags> CatalogGroup;
-	Q_FLAGS(CatalogGroup)
-	typedef QFlags<TypeGroupFlags> TypeGroup;
-	Q_FLAGS(TypeGroup)
+	Q_DECLARE_FLAGS(TypeGroup, TypeGroupFlags)
 
 	//! A pre-defined set of specifiers for the catalogs filter
 	static const CatalogGroupFlags AllCatalogs = (CatalogGroupFlags)(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed);

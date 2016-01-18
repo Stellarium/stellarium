@@ -107,16 +107,14 @@ define(["jquery", "api/viewoptions", "api/actions"], function($, viewOptionApi, 
 		viewOptionApi.registerTypeFlags($("#vo_dsotype > div")); //needs a stricter selector to prevent capturing the header checkbox
 	}
 
-	$(actionApi).on("stelActionChanged", function(evt, id, data){
-		if(id==="actionSet_Nebula_TypeFilterUsage"){
-			$("#vo_dsotype > div input[type='checkbox']").prop("disabled", !data.isChecked);
-		}
+	$(actionApi).on("stelActionChanged:actionSet_Nebula_TypeFilterUsage", function(evt, data) {
+		$("#vo_dsotype > div input[type='checkbox']").prop("disabled", !data.isChecked);
 	});
 
 
 	$(viewOptionApi).on("projectionChanged", function(evt, proj) {
 		//this forces a reload of the iframe
-		$("#vo_projectioninfo").attr("src", function(i,val){
+		$("#vo_projectioninfo").attr("src", function(i, val) {
 			return val;
 		});
 
