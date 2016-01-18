@@ -59,6 +59,7 @@
 #include "SkyGui.hpp"
 #include "StelJsonParser.hpp"
 #include "StelTranslator.hpp"
+#include "EphemWrapper.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -171,6 +172,11 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->downloadCancelButton, SIGNAL(clicked()), this, SLOT(cancelDownload()));
 	connect(ui->downloadRetryButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
 	resetStarCatalogControls();
+
+	connect(ui->de430checkBox, SIGNAL(clicked()), this, SLOT(de430ButtonClicked()));
+	connect(ui->de431checkBox, SIGNAL(clicked()), this, SLOT(de431ButtonClicked()));
+	resetEphemControls();
+
 	ui->nutationCheckBox->setChecked(core->getUseNutation());
 	connect(ui->nutationCheckBox, SIGNAL(toggled(bool)), core, SLOT(setUseNutation(bool)));
 	ui->topocentricCheckBox->setChecked(core->getUseTopocentricCoordinates());
@@ -588,6 +594,8 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_galactic_grid", glmgr->getFlagGalacticGrid());
 	conf->setValue("viewing/flag_galactic_equator_line", glmgr->getFlagGalacticEquatorLine());
 	conf->setValue("viewing/flag_cardinal_points", lmgr->getFlagCardinalsPoints());
+	conf->setValue("viewing/flag_prime_vertical_line", glmgr->getFlagPrimeVerticalLine());
+	conf->setValue("viewing/flag_colure_lines", glmgr->getFlagColureLines());
 	conf->setValue("viewing/flag_constellation_drawing", cmgr->getFlagLines());
 	conf->setValue("viewing/flag_constellation_name", cmgr->getFlagLabels());
 	conf->setValue("viewing/flag_constellation_boundaries", cmgr->getFlagBoundaries());
@@ -597,7 +605,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_light_pollution_database", lmgr->getFlagUseLightPollutionFromDatabase());
 	conf->setValue("viewing/flag_atmosphere_auto_enable", lmgr->getFlagAtmosphereAutoEnable());
 	conf->setValue("viewing/flag_planets_native_names", ssmgr->getFlagNativeNames());
-	conf->setValue("viewing/constellation_art_intensity", cmgr->getArtIntensity());
+	conf->setValue("viewing/constellation_art_intensity", mvmgr->getInitConstellationIntensity());
 	conf->setValue("viewing/constellation_name_style", cmgr->getConstellationDisplayStyleString());
 	conf->setValue("viewing/constellation_line_thickness", cmgr->getConstellationLineThickness());
 	conf->setValue("viewing/flag_night", StelApp::getInstance().getVisionModeNight());
@@ -1209,6 +1217,55 @@ void ConfigurationDialog::downloadFinished()
 	}
 
 	resetStarCatalogControls();
+}
+
+void ConfigurationDialog::de430ButtonClicked()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
+	StelApp::getInstance().getCore()->setDe430Active(!StelApp::getInstance().getCore()->de430IsActive());
+	conf->setValue("astro/flag_use_de430", StelApp::getInstance().getCore()->de430IsActive());
+
+	resetEphemControls(); //refresh labels
+}
+
+void ConfigurationDialog::de431ButtonClicked()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
+	StelApp::getInstance().getCore()->setDe431Active(!StelApp::getInstance().getCore()->de431IsActive());
+	conf->setValue("astro/flag_use_de431", StelApp::getInstance().getCore()->de431IsActive());
+
+	resetEphemControls(); //refresh labels
+}
+
+void ConfigurationDialog::resetEphemControls()
+{
+	ui->de430checkBox->setEnabled(StelApp::getInstance().getCore()->de430IsAvailable());
+	ui->de431checkBox->setEnabled(StelApp::getInstance().getCore()->de431IsAvailable());
+	ui->de430checkBox->setChecked(StelApp::getInstance().getCore()->de430IsActive());
+	ui->de431checkBox->setChecked(StelApp::getInstance().getCore()->de431IsActive());
+
+	if(StelApp::getInstance().getCore()->de430IsActive())
+		ui->de430label->setText("1550..2650");
+	else
+	{
+		if (StelApp::getInstance().getCore()->de430IsAvailable())
+			ui->de430label->setText(q_("Available"));
+		else
+			ui->de430label->setText(q_("Not Available"));
+	}
+	if(StelApp::getInstance().getCore()->de431IsActive())
+		ui->de431label->setText("-13000..17000");
+	else
+	{
+		if (StelApp::getInstance().getCore()->de431IsAvailable())
+			ui->de431label->setText(q_("Available"));
+		else
+			ui->de431label->setText(q_("Not Available"));
+	}
 }
 
 void ConfigurationDialog::updateSelectedInfoCheckBoxes()

@@ -81,12 +81,13 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 	connect(this, SIGNAL(requestDropSound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(dropSound(const QString&)));
 
 	connect(this, SIGNAL(requestLoadVideo(const QString&, const QString&, float, float, bool, float)), StelApp::getInstance().getStelVideoMgr(), SLOT(loadVideo(const QString&, const QString&, float, float, bool, float)));
-	connect(this, SIGNAL(requestPlayVideo(const QString&)), StelApp::getInstance().getStelVideoMgr(), SLOT(playVideo(const QString&)));
+	connect(this, SIGNAL(requestPlayVideo(const QString&, const bool)), StelApp::getInstance().getStelVideoMgr(), SLOT(playVideo(const QString&, const bool)));
+	connect(this, SIGNAL(requestPlayVideoPopout(QString,float,float,float,float,float,float,float,bool)), StelApp::getInstance().getStelVideoMgr(), SLOT(playVideoPopout(QString,float,float,float,float,float,float,float,bool)));
 	connect(this, SIGNAL(requestPauseVideo(const QString&)), StelApp::getInstance().getStelVideoMgr(), SLOT(pauseVideo(const QString&)));
 	connect(this, SIGNAL(requestStopVideo(const QString&)), StelApp::getInstance().getStelVideoMgr(), SLOT(stopVideo(const QString&)));
 	connect(this, SIGNAL(requestDropVideo(const QString&)), StelApp::getInstance().getStelVideoMgr(), SLOT(dropVideo(const QString&)));
-	connect(this, SIGNAL(requestSeekVideo(const QString&, qint64)), StelApp::getInstance().getStelVideoMgr(), SLOT(seekVideo(const QString&, qint64)));
-	connect(this, SIGNAL(requestSetVideoXY(const QString&, float, float)), StelApp::getInstance().getStelVideoMgr(), SLOT(setVideoXY(const QString&, float, float)));
+	connect(this, SIGNAL(requestSeekVideo(const QString&, qint64, bool)), StelApp::getInstance().getStelVideoMgr(), SLOT(seekVideo(const QString&, qint64, bool)));
+	connect(this, SIGNAL(requestSetVideoXY(const QString&, float, float, bool)), StelApp::getInstance().getStelVideoMgr(), SLOT(setVideoXY(const QString&, float, float, bool)));
 	connect(this, SIGNAL(requestSetVideoAlpha(const QString&, float)), StelApp::getInstance().getStelVideoMgr(), SLOT(setVideoAlpha(const QString&, float)));
 	connect(this, SIGNAL(requestResizeVideo(const QString&, float, float)), StelApp::getInstance().getStelVideoMgr(), SLOT(resizeVideo(const QString&, float, float)));
 	connect(this, SIGNAL(requestShowVideo(const QString&, bool)), StelApp::getInstance().getStelVideoMgr(), SLOT(showVideo(const QString&, bool)));
@@ -403,6 +404,18 @@ void StelMainScriptAPI::setDiskViewport(bool b)
 	emit(requestSetDiskViewport(b));
 }
 
+void StelMainScriptAPI::setViewportOffset(const float x, const float y)
+{
+	StelCore* core = StelApp::getInstance().getCore();
+
+	StelProjector::StelProjectorParams params=core->getCurrentStelProjectorParams();
+	params.viewportCenterOffset.set(qMin(qMax(x, -0.5f), 0.5f), qMin(qMax(y, -0.5f), 0.5f) );
+	params.viewportCenter.set(params.viewportXywh.v[0]+(0.5+params.viewportCenterOffset.v[0])*params.viewportXywh.v[2],
+			params.viewportXywh.v[1]+(0.5+params.viewportCenterOffset.v[1])*params.viewportXywh.v[3]);
+
+	core->setCurrentStelProjectorParams(params);
+}
+
 void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 				     double ra0, double dec0,
 				     double ra1, double dec1,
@@ -569,9 +582,14 @@ void StelMainScriptAPI::loadVideo(const QString& filename, const QString& id, fl
 	emit(requestLoadVideo(path, id, x, y, show, alpha));
 }
 
-void StelMainScriptAPI::playVideo(const QString& id)
+void StelMainScriptAPI::playVideo(const QString& id, bool keepVisibleAtEnd)
 {
-	emit(requestPlayVideo(id));
+	emit(requestPlayVideo(id, keepVisibleAtEnd));
+}
+
+void StelMainScriptAPI::playVideoPopout(const QString& id, float fromX, float fromY, float atCenterX, float atCenterY, float finalSizeX, float finalSizeY, float popupDuration, bool frozenInTransition)
+{
+	emit(requestPlayVideoPopout(id, fromX, fromY, atCenterX, atCenterY, finalSizeX, finalSizeY, popupDuration, frozenInTransition));
 }
 
 void StelMainScriptAPI::pauseVideo(const QString& id)
@@ -589,14 +607,14 @@ void StelMainScriptAPI::dropVideo(const QString& id)
 	emit(requestDropVideo(id));
 }
 
-void StelMainScriptAPI::seekVideo(const QString& id, qint64 ms)
+void StelMainScriptAPI::seekVideo(const QString& id, qint64 ms, bool pause)
 {
-	emit(requestSeekVideo(id, ms));
+	emit(requestSeekVideo(id, ms, pause));
 }
 
-void StelMainScriptAPI::setVideoXY(const QString& id, float x, float y)
+void StelMainScriptAPI::setVideoXY(const QString& id, float x, float y, bool relative)
 {
-	emit(requestSetVideoXY(id, x, y));
+	emit(requestSetVideoXY(id, x, y, relative));
 }
 
 void StelMainScriptAPI::setVideoAlpha(const QString& id, float alpha)
@@ -612,6 +630,16 @@ void StelMainScriptAPI::resizeVideo(const QString& id, float w, float h)
 void StelMainScriptAPI::showVideo(const QString& id, bool show)
 {
 	emit(requestShowVideo(id, show));
+}
+
+qint64 StelMainScriptAPI::getVideoDuration(const QString& id)
+{
+	return StelApp::getInstance().getStelVideoMgr()->getVideoDuration(id);
+}
+
+qint64 StelMainScriptAPI::getVideoPosition(const QString& id)
+{
+	return StelApp::getInstance().getStelVideoMgr()->getVideoPosition(id);
 }
 
 int StelMainScriptAPI::getScreenWidth()
@@ -675,6 +703,11 @@ void StelMainScriptAPI::output(const QString &s)
 void StelMainScriptAPI::resetOutput(void)
 {
 	StelApp::getInstance().getScriptMgr().resetOutput();
+}
+
+void StelMainScriptAPI::saveOutputAs(const QString &filename)
+{
+	StelApp::getInstance().getScriptMgr().saveOutputAs(filename);
 }
 
 double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spec)
@@ -794,13 +827,13 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 	pos = obj->getEquinoxEquatorialPos(core);
 	StelUtils::rectToSphe(&ra, &dec, pos);
 	map.insert("ra", ra*180./M_PI);
-	map.insert("dec", dec*180./M_PI);
+	map.insert("dec", dec*180./M_PI);	
 
 	// ra/dec in J2000
 	pos = obj->getJ2000EquatorialPos(core);
 	StelUtils::rectToSphe(&ra, &dec, pos);
 	map.insert("raJ2000", ra*180./M_PI);
-	map.insert("decJ2000", dec*180./M_PI);
+	map.insert("decJ2000", dec*180./M_PI);	
 
 	// apparent altitude/azimuth
 	pos = obj->getAltAzPosApparent(core);
@@ -813,7 +846,7 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 		az -= M_PI*2;
 
 	map.insert("altitude", alt*180./M_PI);
-	map.insert("azimuth", az*180./M_PI);
+	map.insert("azimuth", az*180./M_PI);	
 
 	// geometric altitude/azimuth
 	pos = obj->getAltAzPosGeometric(core);
@@ -823,13 +856,13 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 		az -= M_PI*2;
 
 	map.insert("altitude-geometric", alt*180./M_PI);
-	map.insert("azimuth-geometric", az*180./M_PI);
+	map.insert("azimuth-geometric", az*180./M_PI);	
 
 	// galactic long/lat
 	pos = obj->getGalacticPos(core);
 	StelUtils::rectToSphe(&glong, &glat, pos);
 	map.insert("glong", glong*180./M_PI);
-	map.insert("glat", glat*180./M_PI);
+	map.insert("glat", glat*180./M_PI);	
 
 	// magnitude
 	map.insert("vmag", obj->getVMagnitude(core));
@@ -904,13 +937,13 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 	pos = obj->getEquinoxEquatorialPos(core);
 	StelUtils::rectToSphe(&ra, &dec, pos);
 	map.insert("ra", ra*180./M_PI);
-	map.insert("dec", dec*180./M_PI);
+	map.insert("dec", dec*180./M_PI);	
 
 	// ra/dec in J2000
 	pos = obj->getJ2000EquatorialPos(core);
 	StelUtils::rectToSphe(&ra, &dec, pos);
 	map.insert("raJ2000", ra*180./M_PI);
-	map.insert("decJ2000", dec*180./M_PI);
+	map.insert("decJ2000", dec*180./M_PI);	
 
 	// apparent altitude/azimuth
 	pos = obj->getAltAzPosApparent(core);
@@ -923,7 +956,7 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 		az -= M_PI*2;
 
 	map.insert("altitude", alt*180./M_PI);
-	map.insert("azimuth", az*180./M_PI);
+	map.insert("azimuth", az*180./M_PI);	
 
 	// geometric altitude/azimuth
 	pos = obj->getAltAzPosGeometric(core);
@@ -933,13 +966,13 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 		az -= M_PI*2;
 
 	map.insert("altitude-geometric", alt*180./M_PI);
-	map.insert("azimuth-geometric", az*180./M_PI);
+	map.insert("azimuth-geometric", az*180./M_PI);	
 
 	// galactic long/lat
 	pos = obj->getGalacticPos(core);
 	StelUtils::rectToSphe(&glong, &glat, pos);
 	map.insert("glong", glong*180./M_PI);
-	map.insert("glat", glat*180./M_PI);
+	map.insert("glat", glat*180./M_PI);	
 
 	// magnitude
 	map.insert("vmag", obj->getVMagnitude(core));
@@ -1194,6 +1227,7 @@ void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, flo
 {
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	Q_ASSERT(mvmgr);
+	StelCore* core = StelApp::getInstance().getCore();
 
 	GETSTELMODULE(StelObjectMgr)->unSelect();
 
@@ -1205,13 +1239,23 @@ void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, flo
 		dAzi -= M_PI;
 
 	StelUtils::spheToRect(dAzi,dAlt,aim);
-	mvmgr->moveToJ2000(StelApp::getInstance().getCore()->altAzToJ2000(aim, StelCore::RefractionOff), duration);
+
+	// make up vector more stable:
+	StelMovementMgr::MountMode mountMode=mvmgr->getMountMode();
+	Vec3d aimUp;
+	if ( (mountMode==StelMovementMgr::MountAltAzimuthal) && (fabs(dAlt)> (0.9*M_PI/2.0)) )
+		aimUp=core->altAzToJ2000(Vec3d(-cos(dAzi), -sin(dAzi), 0.) * (dAlt>0. ? 1. : -1. ), StelCore::RefractionOff);
+	else
+		aimUp=core->altAzToJ2000(Vec3d(0., 0., 1.), StelCore::RefractionOff);
+
+	mvmgr->moveToJ2000(StelApp::getInstance().getCore()->altAzToJ2000(aim, StelCore::RefractionOff), aimUp, duration);
 }
 
 void StelMainScriptAPI::moveToRaDec(const QString& ra, const QString& dec, float duration)
 {
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	Q_ASSERT(mvmgr);
+	StelCore* core = StelApp::getInstance().getCore();
 
 	GETSTELMODULE(StelObjectMgr)->unSelect();
 
@@ -1220,7 +1264,15 @@ void StelMainScriptAPI::moveToRaDec(const QString& ra, const QString& dec, float
 	double dDec = StelUtils::getDecAngle(dec);
 
 	StelUtils::spheToRect(dRa,dDec,aim);
-	mvmgr->moveToJ2000(StelApp::getInstance().getCore()->equinoxEquToJ2000(aim), duration);
+	// make up vector more stable:
+	StelMovementMgr::MountMode mountMode=mvmgr->getMountMode();
+	Vec3d aimUp;
+	if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(dDec)> (0.9*M_PI/2.0)) )
+		aimUp=core->equinoxEquToJ2000(Vec3d(-cos(dRa), -sin(dRa), 0.) * (dDec>0. ? 1. : -1. ));
+	else
+		aimUp=core->equinoxEquToJ2000(Vec3d(0., 0., 1.));
+
+	mvmgr->moveToJ2000(StelApp::getInstance().getCore()->equinoxEquToJ2000(aim), aimUp, duration);
 }
 
 void StelMainScriptAPI::moveToRaDecJ2000(const QString& ra, const QString& dec, float duration)
@@ -1235,7 +1287,15 @@ void StelMainScriptAPI::moveToRaDecJ2000(const QString& ra, const QString& dec, 
 	double dDec = StelUtils::getDecAngle(dec);
 
 	StelUtils::spheToRect(dRa,dDec,aimJ2000);	
-	mvmgr->moveToJ2000(aimJ2000, duration);
+	// make up vector more stable. Not sure if we have to set the up vector in this case though.
+	StelMovementMgr::MountMode mountMode=mvmgr->getMountMode();
+	Vec3d aimUp;
+	if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(dDec)> (0.9*M_PI/2.0)) )
+		aimUp=Vec3d(-cos(dRa), -sin(dRa), 0.) * (dDec>0. ? 1. : -1. );
+	else
+		aimUp=Vec3d(0., 0., 1.);
+
+	mvmgr->moveToJ2000(aimJ2000, aimUp, duration);
 }
 
 QString StelMainScriptAPI::getAppLanguage()

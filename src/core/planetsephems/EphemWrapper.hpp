@@ -1,5 +1,7 @@
 /*
 Copyright (C) 2003 Fabien Chereau
+Copyright (C) 2015 Holger Niessner
+Copyright (C) 2015 Georg Zotti
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU Library General Public License as published by
@@ -16,12 +18,28 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#ifndef _STELLPLANET_H_
-#define _STELLPLANET_H_
+/*
+ * This class provides a wrapper to multiple methods to calculate ephemerides.
+ * Depending on availability of extra data files, the class uses:
+ * - VSOP87 and ELP82B
+ * - DE430
+ * - DE431
+ *
+ * Extending the old stellplanet-class, this updated version now
+ * includes access to DE430 and DE431 for a more precise, yet storage-space intensive solution.
+ */
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#ifndef _EPHEMWRAPPER_HPP_
+#define _EPHEMWRAPPER_HPP_
+
+#define DE430_FILENAME  "linux_p1550p2650.430"
+#define DE431_FILENAME  "lnxm13000p17000.431"
+
+class EphemWrapper{
+public:
+    static void init_de430(const char* filepath);
+    static void init_de431(const char* filepath);
+};
 
 void get_sun_helio_coordsv(double jd,double xyz[3], void*);
 void get_mercury_helio_coordsv(double jd,double xyz[3], void*);
@@ -44,7 +62,7 @@ void get_uranus_helio_osculating_coords(double jd0,double jd,double xyz[3]);
 void get_neptune_helio_osculating_coords(double jd0,double jd,double xyz[3]);
 void get_pluto_helio_osculating_coords(double jd0,double jd,double xyz[3]);
 
-void get_lunar_parent_coordsv(double jd,double xyz[3], void*);
+void get_lunar_parent_coordsv(double jde, double xyz[3], void*);
 
 void get_phobos_parent_coordsv(double jd,double xyz[3], void*);
 void get_deimos_parent_coordsv(double jd,double xyz[3], void*);
@@ -69,9 +87,6 @@ void get_umbriel_parent_coordsv(double jd,double xyz[3], void*);
 void get_titania_parent_coordsv(double jd,double xyz[3], void*);
 void get_oberon_parent_coordsv(double jd,double xyz[3], void*);
 
-#ifdef __cplusplus
-}
-#endif
+#endif // _EPHEMWRAPPER_HPP_
 
 
-#endif /* _STELLPLANET_H_ */
