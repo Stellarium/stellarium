@@ -1,7 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2007 Fabien Chereau
- * Copyright (C) 2015 Georg Zotti (offset view adaptations)
+ * Copyright (C) 2015 Georg Zotti (offset view adaptations, Up vector fix for zenithal views)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,6 +42,9 @@ public:
 	//! MountGalactic is currently only available via scripting API: core.clear("galactic")
 	// TODO: add others like MountEcliptical
 	enum MountMode { MountAltAzimuthal, MountEquinoxEquatorial, MountGalactic};
+
+	//! Named constants for zoom operations.
+	enum ZoomingMode { ZoomOut=-1, ZoomNone=0, ZoomIn=1};
 
 	StelMovementMgr(StelCore* core);
 	virtual ~StelMovementMgr();
@@ -88,9 +91,13 @@ public:
 	// TODO: what are the units?
 	double getZoomSpeed() {return keyZoomSpeed;}
 
-	//! Return the current up view vector.
+	//! Return the current up view vector in J2000 coordinates.
 	Vec3d getViewUpVectorJ2000() const;
+	// You can set an upVector in J2000 coordinates which is translated to current mount mode. Important when viewing into the pole of the current mount mode coordinates.
 	void setViewUpVectorJ2000(const Vec3d& up);
+	// Set vector directly. This is set in the current mountmode, but will be translated to J2000 internally
+	// We need this only when viewing to the poles of current coordinate system where the view vector would else be parallel to the up vector.
+	void setViewUpVector(const Vec3d& up);
 
 	void setMovementSpeedFactor(float s) {movementsSpeedFactor=s;}
 	float getMovementSpeedFactor() const {return movementsSpeedFactor;}
@@ -153,10 +160,15 @@ public slots:
 
 	//! Move the view to a specified J2000 position.
 	//! @param aim The position to move to expressed as a vector.
+	//! @param aimUp Up vector. Can be usually (0/0/1) but may have to be exact for looking into the zenith/pole
 	//! @param moveDuration The time it takes for the move to complete.
-	//! @param zooming ???
-	void moveToJ2000(const Vec3d& aim, float moveDuration = 1., int zooming = 0);
-	void moveToObject(const StelObjectP& target, float moveDuration = 1., int zooming = 0);
+	//! @param zooming you want to zoom in, out or not (just center).
+	//! @example You can use the following code most of the times to find a valid aimUp vector:
+	//! 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+	//!	mvmgr->moveToJ2000(pos, mvmgr->mountFrameToJ2000(Vec3d(0., 0., 1.)), mvmgr->getAutoMoveDuration());
+	//!
+	void moveToJ2000(const Vec3d& aim, const Vec3d &aimUp, float moveDuration = 1., ZoomingMode zooming = ZoomNone);
+	void moveToObject(const StelObjectP& target, float moveDuration = 1., ZoomingMode zooming = ZoomNone);
 
 	//! Change the zoom level.
 	//! @param aimFov The desired field of view in degrees.
@@ -211,19 +223,24 @@ public slots:
 	void setDragTimeMode(bool b) {dragTimeMode=b;}
 	bool getDragTimeMode() const {return dragTimeMode;}
 
+	//! Return the initial value of intensity of art of constellations.
+	double getInitConstellationIntensity() const {return initConstellationIntensity;}
+	//! Set the initial value of intensity of art of constellations.
+	void setInitConstellationIntensity(double v) {initConstellationIntensity=v; changeConstellationArtIntensity();}
+
+	//! Function designed only for scripting context. Put the function into the startup.ssc of your planetarium setup,
+	//! this will avoid any unwanted tracking.
+	void setInhibitAllAutomoves(bool inhibit) { flagInhibitAllAutomoves=inhibit;}
+
 private slots:
 	//! Called when the selected object changes.
 	void selectedObjectChange(StelModule::StelModuleSelectAction action);
 
-	//! Return the initial value of intensity of art of constellations.
-	double getInitConstellationIntensity() const {return initConstellationIntensity;}
-	//! Set the initial value of intensity of art of constellations.
-	void setInitConstellationIntensity(double v) {initConstellationIntensity=v;}
-	
-private:
+public:
 	Vec3d j2000ToMountFrame(const Vec3d& v) const;
 	Vec3d mountFrameToJ2000(const Vec3d& v) const;
 
+private:
 	double currentFov; // The current FOV in degrees
 	double initFov;    // The FOV at startup
 	double minFov;     // Minimum FOV in degrees
@@ -243,6 +260,8 @@ private:
 	void changeFov(double deltaFov);
 	void changeConstellationArtIntensity();
 
+	// Move (a bit) to selected/tracked object until move.coef reaches 1, or auto-follow (track) selected object.
+	// Does nothing if flagInhibitAllAutomoves=true
 	void updateVisionVector(double deltaTime);
 	void updateAutoZoom(double deltaTime); // Update autoZoom if activated
 
@@ -253,6 +272,7 @@ private:
 	class StelObjectMgr* objectMgr;
 	bool flagLockEquPos;     // Define if the equatorial position is locked
 	bool flagTracking;       // Define if the selected object is followed
+	bool flagInhibitAllAutomoves; // Required for special installations: If true, there is no automatic centering etc.
 
 	// Flags for mouse movements
 	bool isMouseMovingHoriz;
@@ -277,6 +297,8 @@ private:
 	{
 		Vec3d start;
 		Vec3d aim;
+		Vec3d startUp; // The Up vector at start time
+		Vec3d aimUp;   // The Up vector at end time of move
 		float speed;
 		float coef;
 		// If not null, move to the object.
@@ -285,7 +307,7 @@ private:
 
 	AutoMove move;          // Current auto movement
 	bool flagAutoMove;       // Define if automove is on or off
-	int zoomingMode;        // 0 : undefined, 1 zooming, -1 unzooming
+	ZoomingMode zoomingMode;
 
 	double deltaFov,deltaAlt,deltaAz; // View movement
 
@@ -342,6 +364,8 @@ private:
 	// Viewing direction in the mount reference frame.
 	Vec3d viewDirectionMountFrame;
 
+	// Up vector (in OpenGL terms) in the mount reference frame.
+	// This can usually be just 0/0/1, but must be set to something useful when viewDirectionMountFrame is parallel, i.e. looks into a pole.
 	Vec3d upVectorMountFrame;
 
 	float dragTriggerDistance;

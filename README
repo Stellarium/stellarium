@@ -226,6 +226,9 @@ for more details on the location of the user data directory for your OS.
 	2.4 The tesselation algorithms were originally extracted from the glues 
 		library version 1.4 Mike Gorchak <mike@malva.ua> (SGI FREE SOFTWARE
 		LICENSE B).
+    2.5 OBJ loader in the Scenery3D plugin based on glObjViewer (c) 2007 dhpoware
+    2.6 Parts of the code to work with DE430 and DE431 data files have been 
+        taken from Project Pluto (GPL license).
 
 3. Data
 	3.1 The Hipparcos star catalog
@@ -455,7 +458,7 @@ for more details on the location of the user data directory for your OS.
 --------------------------------------------------------------------------------
 9. LICENSE
 --------------------------------------------------------------------------------
-   Copyright (C) 2004-2015 Fabien Chereau et al.
+   Copyright (C) 2004-2016 Fabien Chereau et al.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License

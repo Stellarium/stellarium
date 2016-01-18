@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
 
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
   #include <windows.h> // GetSystemTimeAsFileTime
 #else
   #include <sys/time.h>
@@ -37,7 +37,7 @@ long long int GetNow(void)
 {
 	long long int t;
 	//StelCore *core = StelApp::getInstance().getCore();
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
 	union
 	{
 		FILETIME file_time;

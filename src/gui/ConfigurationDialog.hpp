@@ -102,6 +102,7 @@ private slots:
 	void cancelDownload();
 	void downloadFinished();
 	void downloadError(QNetworkReply::NetworkError);
+	void resetEphemControls();
 
 	//! Update the labels displaying the current default state
 	void updateConfigLabels();
@@ -147,6 +148,9 @@ private slots:
 	void populateScriptsList();
 	#endif
 	void setFixedDateTimeToCurrent();
+
+	void de430ButtonClicked();
+	void de431ButtonClicked();
 
 private:
 	StelGui* gui;

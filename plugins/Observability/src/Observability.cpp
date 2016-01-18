@@ -76,7 +76,6 @@ const double Observability::Rad2Deg = 180./M_PI;         // Convert degrees into
 const double Observability::Rad2Hr = 12./M_PI;           // Convert hours into radians
 const double Observability::UA =  AU;                    // 1.4958e+8;         // Astronomical Unit in Km. ==> HAS BEEN DEFINED IN StelUtils.hpp!
 const double Observability::TFrac = 0.9972677595628414;  // Convert sidereal time into Solar time
-const double Observability::JDsec = 1./86400.;           // A second in days. ==> TODO USE StelCore::JD_SECOND instead
 const double Observability::halfpi = M_PI * 0.5;         //  1.57079632675; // pi/2
 const double Observability::MoonT = 29.530588;           // Moon synodic period (used as first estimate of Full Moon). ==> FIND MORE DEC. PLACES!
 const double Observability::RefFullMoon = 2451564.696; // Reference Julian date of a Full Moon.
@@ -602,7 +601,18 @@ void Observability::draw(StelCore* core)
 		
 		if (culmAlt < (halfpi - refractedHorizonAlt)) // Source can be observed.
 		{
-			double altiAtCulmi = Rad2Deg*(halfpi-culmAlt-refractedHorizonAlt);
+//			THESE IS FREE OF ATMOSPHERE AND REFERRED TO TRUE HORIZON!
+			double altiAtCulmi = (halfpi-culmAlt); //-refractedHorizonAlt);
+
+// Add refraction, if necessary:
+			Vec3d TempRefr;	
+			TempRefr[0] = std::cos(altiAtCulmi);  
+			TempRefr[1] = 0.0; 
+			TempRefr[2] = std::sin(altiAtCulmi);  
+			Vec3d CorrRefr = core->altAzToEquinoxEqu(TempRefr,StelCore::RefractionOff);
+			TempRefr = core->equinoxEquToAltAz(CorrRefr,StelCore::RefractionAuto);
+			altiAtCulmi = Rad2Deg*std::asin(TempRefr[2]);
+
 			double2hms(TFrac*currH,dc,mc,sc);
 			
 			//String with the time span for culmination:
@@ -724,13 +734,13 @@ void Observability::draw(StelCore* core)
 					QString acroRiseStr, acroSetStr;
 					QString cosRiseStr, cosSetStr;
 					QString heliRiseStr, heliSetStr;
-					// TODO: Possible error? Day 0 is 1 Jan.
-					acroRiseStr = (acroRise>0)?formatAsDate(acroRise):msgNone;
-					acroSetStr = (acroSet>0)?formatAsDate(acroSet):msgNone;
+					// TODO: Possible error? Day 0 is 1 Jan. ==> IMV: Indeed! Corrected
+					acroRiseStr = (acroRise>=0)?formatAsDate(acroRise):msgNone;
+					acroSetStr = (acroSet>=0)?formatAsDate(acroSet):msgNone;
 					cosRiseStr = (cosRise>0)?formatAsDate(cosRise):msgNone;
 					cosSetStr = (cosSet>0)?formatAsDate(cosSet):msgNone;
-					heliRiseStr = (heliRise>0)?formatAsDate(heliRise):msgNone;
-					heliSetStr = (heliSet>0)?formatAsDate(heliSet):msgNone;
+					heliRiseStr = (heliRise>=0)?formatAsDate(heliRise):msgNone;
+					heliSetStr = (heliSet>=0)?formatAsDate(heliSet):msgNone;
 
 
 					if (result==3 || result==1)
@@ -1402,7 +1412,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 
 // Only recompute ephemeris from second to second (at least)
 // or if the source has changed (i.e., Sun <-> Moon). This saves resources:
-	if (qAbs(myJD.first-lastJDMoon)>JDsec || lastType!=bodyType || souChanged)
+	if (qAbs(myJD.first-lastJDMoon)>StelCore::JD_SECOND || lastType!=bodyType || souChanged)
 	{
 
 //		qDebug() << q_("%1  %2   %3   %4").arg(Kind).arg(LastObject).arg(myJD,0,'f',5).arg(lastJDMoon,0,'f',5);
@@ -1491,7 +1501,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 				tempH = (-hHoriz-Hcurr)*TFrac;
 				if (hasRisen==false) tempH += (tempH<0.0)?24.0:0.0;
 			// Check convergence:
-				if (qAbs(tempH-tempEphH)<JDsec) break;
+				if (qAbs(tempH-tempEphH)<StelCore::JD_SECOND) break;
 			// Update rise-time estimate:
 				tempEphH = tempH;
 				MoonRise = myJD.first + (tempEphH/24.);
@@ -1528,7 +1538,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 				if (!hasRisen)
 					tempH -= (tempH>0.0)?24.0:0.0;
 		// Check convergence:
-				if (qAbs(tempH-tempEphH)<JDsec)
+				if (qAbs(tempH-tempEphH)<StelCore::JD_SECOND)
 					break;
 		// Update set-time estimate:
 				tempEphH = tempH;
@@ -1572,7 +1582,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 	// Compute eph. times for mod. coordinates:
 			tempH = -Hcurr*TFrac;
 	// Check convergence:
-			if (qAbs(tempH-tempEphH)<JDsec) break;
+			if (qAbs(tempH-tempEphH)<StelCore::JD_SECOND) break;
 			tempEphH = tempH;
 			MoonCulm = myJD.first + (tempEphH/24.);
 			culmAlt = qAbs(mylat-dec); // 90 - altitude at transit.

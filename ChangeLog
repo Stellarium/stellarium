@@ -1,3 +1,34 @@
+0.14.2 [2016-01-08]
+Bugfix release:
+- Reduce planet brightness in daylight (LP: #1503248)
+- Fixed perspective mode with offset viewport in scenery3d (LP: #1509728)
+- Fixed wrong altitudes for some locations (LP: #1530759)
+- Fixed some skyculture links
+- Fixed editing some shortcut keys (LP: #1530567)
+- Fixed drawing reticle for telescope (LP: #1526348)
+- Refactoring coloring markers of the DSO
+- Removed info about Moon phases (avoid inconsistency for strings).
+- Updated default config options
+- Updated icons for View dialog
+- Updated Stellarium DSO Catalog
+- Added list of dwarf galaxies (Search Tool)
+- Added improvements in Scenery 3D plugin
+
+0.14.1 [2015-12-02]
+Bugfix release:
+- Added support for side-by-side assembly technology (LP: #1400045)
+- Enhancements of the Ocular plugin: add OAG support (LP: #1354427)
+- Added Belarusian translation for landscapes and sky cultures (LP: #1520303)
+- Added designations for few stars in Scorpius (LP: #1518437)
+- Fixed constellation art brightness and zooming (LP: #1520783)
+- Fixed number of satellite orbit segments resets (LP: #1510592)
+- Fixed certain outplanet moons with wrong Longitudes (LP: #1509693, #1509692)
+- Fixed saving settings for some View panel options (LP: #1509639)
+- Fixed fails to run up on Windows when invoked from a different directory (LP: #1410529)
+- Fixed wrong value of ecliptic obliquity (LP: #1520792)
+- Fixed segmentation fault (core dumped) while try update stars catalog (LP: #1514542)
+- Tentative fix for support 4K resolution (GUI scaling) (LP: #1372781)
+
 0.14.0 [2015-10-24]
 A big leap forward in astronomical accuracy for historical applications:
  - Precession now follows the IAU2006 model in the long-time version from Vondrak 
