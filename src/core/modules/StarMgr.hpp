@@ -88,6 +88,10 @@ class StarMgr : public StelObjectModule
 		   READ getFlagLabels
 		   WRITE setFlagLabels
 		   NOTIFY starLabelsDisplayedChanged)
+	Q_PROPERTY(double labelsAmount
+		   READ getLabelsAmount
+		   WRITE setLabelsAmount
+		   NOTIFY labelsAmountChanged)
 
 public:
 	StarMgr(void);
@@ -171,10 +175,10 @@ public slots:
 	//! Set the amount of star labels. The real amount is also proportional with FOV.
 	//! The limit is set in function of the stars magnitude
 	//! @param a the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
-	void setLabelsAmount(float a) {labelsAmount=a;}
+	void setLabelsAmount(double a) {if(a!=labelsAmount){ labelsAmount=a; emit labelsAmountChanged(a);}}
 	//! Get the amount of star labels. The real amount is also proportional with FOV.
 	//! @return the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
-	float getLabelsAmount(void) const {return labelsAmount;}
+	double getLabelsAmount(void) const {return labelsAmount;}
 
 	//! Define font size to use for star names display.
 	void setFontSize(float newFontSize);
@@ -300,6 +304,7 @@ private slots:
 signals:
 	void starLabelsDisplayedChanged(const bool displayed);
 	void starsDisplayedChanged(const bool displayed);
+	void labelsAmountChanged(float a);
 
 private:
 
@@ -340,7 +345,7 @@ private:
 	LinearFader starsFader;
 
 	bool flagStarName;
-	float labelsAmount;
+	double labelsAmount;
 	bool gravityLabel;
 
 	int maxGeodesicGridLevel;

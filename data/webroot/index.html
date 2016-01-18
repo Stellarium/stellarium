@@ -29,7 +29,7 @@
       <ul>
         <li><a href="#tab_main"><?= tr("Main controls")?></a></li>
         <li><a href="#tab_selection"><?= tr("Selection")?></a></li>
-        <li><a href="#tab_view"><?= tr("Markings")?></a></li>
+        <li><a href="#tab_view"><?= tr("Sky")?></a></li>
         <li><a href="#tab_dso"><?= tr("DSO")?></a></li>
         <li><a href="#tab_landscape"><?= tr("Landscape")?></a></li>
         <li><a href="#tab_skyculture"><?= tr("Starlore")?></a></li>
@@ -187,20 +187,36 @@
       <!-- handled by ui/viewoptions.js -->
       <div id="tab_view">
         <div class="flex flex-wrap">
-          <!-- checkboxes get automatically hooked up if the have a StelAction as value -->
-          <div class="smallblock">
-            <h3><?= tr("Sky")?></h3>
-            <div class="innerblock">
-              <h3><?= tr("Planets and satellites")?></h3>
-              <label><input type="checkbox" value="actionShow_Planets" /><?= tr("Show planets")?></label>
-              <label><input type="checkbox" value="actionShow_Planets_Hints" /><?= tr("Show planet markers")?></label>
-              <label><input type="checkbox" value="actionShow_Planets_Orbits" /><?= tr("Show planet orbits")?></label>
+          <div id="vo_stars" class="smallblock blocklabel">
+            <h3><?= tr("Stars")?></h3>
+            <div class="table">
+              <!-- inputs with stelproperty class are automatically connected by mainui.js -->
+              <p><label for="stars_absoluteScale"><?= tr("Absolute scale:")?></label><input id="stars_absoluteScale" class="spinner stelproperty" name="prop_SkyDrawer_absoluteStarScale" data-min="0" data-max="9" data-step="0.1" data-decimals="2"/></p>
+              <p><label for="stars_relativeScale"><?= tr("Relative scale:")?></label><input id="stars_relativeScale" class="spinner stelproperty" name="prop_SkyDrawer_relativeStarScale" data-min="0.25" data-max="5" data-step="0.05" data-decimals="2"/></p>
+              <p><label for="stars_milkywayintensity"><?= tr("Milky Way brightness:")?></label><input id="stars_milkywayintensity" class="spinner stelproperty" name="prop_MilkyWay_intensity" data-min="0" data-max="10" data-step="0.1" data-decimals="2"/></p>
+              <p><label for="stars_zodiacintensity"><?= tr("Zodiacal Light brightness:")?></label><input id="stars_zodiacintensity" class="spinner stelproperty" name="prop_ZodiacalLight_intensity" data-min="0" data-max="10" data-step="0.1" data-decimals="2"/></p>
+              <p><label><input class="stelproperty" name="prop_SkyDrawer_flagTwinkle" type="checkbox"/><?= tr("Twinkle:")?></label><input class="spinner stelproperty" name="prop_SkyDrawer_twinkleAmount" data-min="0" data-max="1.5" data-step="0.1" data-decimals="2"/></p>
+              <p><label><input class="stelproperty" name="prop_SkyDrawer_flagStarMagnitudeLimit" type="checkbox"/><?= tr("Limit magnitude:")?></label><input class="spinner stelproperty" name="prop_SkyDrawer_customStarMagLimit" data-min="0" data-max="21" data-step="0.1" data-decimals="2"/></p>
             </div>
-            <div class="innerblock">
-              <h3><?= tr("Labels and Markers")?></h3>
-              <label><input type="checkbox" value="actionShow_Stars_Labels" /><?= tr("Stars")?></label>
-              <label><input type="checkbox" value="actionShow_Nebulas" /><?= tr("DSOs")?></label>
-              <label><input type="checkbox" value="actionShow_Planets_Labels" /><?= tr("Planets")?></label>
+            <label><input class="stelproperty" name="prop_SkyDrawer_flagLuminanceAdaptation" type="checkbox"/><?= tr("Dynamic eye adaptation")?></label>
+            <div class="flex flex-baseline">
+              <label><input type="checkbox" value="actionShow_Stars_Labels"/><?= tr("Labels and Markers")?></label><div class="slider stelproperty flex-expand" data-prop="prop_StarMgr_labelsAmount" data-min="0" data-max="10" data-step="0.1"></div>
+            </div>
+          </div>
+          <div class="smallblock blocklabel">
+            <h3><?= tr("Planets and satellites")?></h3>
+            <label><input type="checkbox" value="actionShow_Planets" /><?= tr("Show Solar System objects")?></label>
+            <label><input type="checkbox" value="actionShow_Planets_Hints" /><?= tr("Show planet markers")?></label>
+            <label><input type="checkbox" value="actionShow_Planets_Orbits" /><?= tr("Show planet orbits")?></label>
+            <label><input class="stelproperty" name="prop_SolarSystem_flagIsolatedOrbits" type="checkbox"/><?= tr("Show orbit for selected planet")?></label>
+            <label><input class="stelproperty" name="prop_SolarSystem_flagIsolatedTrails" type="checkbox"/><?= tr("Show trail only for selected planet")?></label>
+            <label><input class="stelproperty" name="prop_SolarSystem_flagLightTravelTime" type="checkbox"/><?= tr("Simulate light speed")?></label>
+            <div class="table">
+              <p><label><input class="stelproperty" name="prop_SolarSystem_flagMoonScale" type="checkbox"/><?= tr("Scale Moon:")?></label><input class="spinner stelproperty" name="prop_SolarSystem_moonScale" data-min="1" data-max="20" data-step="0.1" data-decimals="2"/></p>
+              <p><label><input class="stelproperty" name="prop_SkyDrawer_flagPlanetMagnitudeLimit" type="checkbox"/><?= tr("Limit magnitude:")?></label><input class="spinner stelproperty" name="prop_SkyDrawer_customPlanetMagLimit" data-min="0" data-max="22" data-step="0.1" data-decimals="2"/></p>
+            </div>
+            <div class="flex flex-baseline">
+              <label><input type="checkbox" value="actionShow_Planets_Labels"/><?= tr("Labels and Markers")?></label><div class="slider stelproperty flex-expand" data-prop="prop_SolarSystem_labelsAmount" data-min="0" data-max="10" data-step="0.1"></div>
             </div>
             <label><input type="checkbox" value="actionShow_Atmosphere" /><?= tr("Atmosphere")?></label>
             <label><input type="checkbox" value="actionShow_LightPollution_Database" /><?= tr("Light pollution data from locations database")?></label>
@@ -209,7 +225,7 @@
             <h3><?= tr("Markings")?></h3>
             <div id="vo_markers_boxes" class="innerblock">
               <h3><?= tr("Celestial Sphere")?></h3>
-              <div class="inline-block">
+              <div class="inline-block blocklabel">
                 <label><input type="checkbox" value="actionShow_Equatorial_J2000_Grid" /><?= tr("Equatorial grid (J2000)")?></label>
                 <label><input type="checkbox" value="actionShow_Equatorial_Grid" /><?= tr("Equatorial grid (of date)")?></label>
                 <label><input type="checkbox" value="actionShow_Ecliptic_J2000_Grid" /><?= tr("Ecliptic grid (J2000)")?></label>
@@ -219,7 +235,7 @@
                 <label><input type="checkbox" value="actionShow_Cardinal_Points" /><?= tr("Cardinal points")?></label>
                 <label><input type="checkbox" value="actionShow_Precession_Circles" /><?= tr("Precession circles")?></label>
               </div>
-              <div class="inline-block">
+              <div class="inline-block blocklabel">
                 <label><input type="checkbox" value="actionShow_Equator_J2000_Line" /><?= tr("Equator (J2000)")?></label>
                 <label><input type="checkbox" value="actionShow_Equator_Line" /><?= tr("Equator (of date)")?></label>
                 <label><input type="checkbox" value="actionShow_Ecliptic_J2000_Line" /><?= tr("Ecliptic (J2000)")?></label>
@@ -238,7 +254,7 @@
           <div id="vo_dsocatalog" class="smallblock">
             <h3><?= tr("Display objects from catalogs")?></h3>
             <!-- give the checkboxes the flag values -->
-            <div class="inline-block">
+            <div class="inline-block blocklabel">
               <label title='<?= tr("Messier Catalogue")?>'>
                 <input type="checkbox" value="0x0004" /><?= tr("M")?>
               </label>
@@ -255,7 +271,7 @@
                 <input type="checkbox" value="0x1000" /><?= tr("PGC")?>
               </label>
             </div>
-            <div class="inline-block">
+            <div class="inline-block blocklabel">
               <label title='<?= tr("Caldwell Catalogue")?>'>
                 <input type="checkbox" value="0x0008" /><?= tr("C")?>
               </label>
@@ -272,7 +288,7 @@
                 <input type="checkbox" value="0x2000" /><?= tr("UGC")?>
               </label>
             </div>
-            <div class="inline-block">
+            <div class="inline-block blocklabel">
               <label title='<?= tr("New General Catalogue of Nebulae and Clusters of Stars")?>'>
                 <input type="checkbox" value="0x0001" /><?= tr("NGC")?>
               </label>
@@ -292,20 +308,32 @@
           </div>
           <div id="vo_dsotype" class="smallblock">
             <h3><label><input id="vo_dsotypefiltercheckbox" type="checkbox" class="valign-middle" value="actionSet_Nebula_TypeFilterUsage"/><?= tr("Filter by type")?></label></h3>
-            <div class="inline-block">
+            <div class="inline-block blocklabel">
               <label><input type="checkbox" value="0x001"/><?= tr("Galaxies")?></label>
               <label><input type="checkbox" value="0x002"/><?= tr("Active galaxies")?></label>
               <label><input type="checkbox" value="0x004"/><?= tr("Interacting galaxies")?></label>
               <label><input type="checkbox" value="0x008"/><?= tr("Star clusters")?></label>
               <label><input type="checkbox" value="0x010"/><?= tr("Hydrogen regions")?></label>
             </div>
-            <div class="inline-block">
+            <div class="inline-block blocklabel">
               <label><input type="checkbox" value="0x020"/><?= tr("Bright Nebulae")?></label>
               <label><input type="checkbox" value="0x040"/><?= tr("Dark Nebulae")?></label>
               <label><input type="checkbox" value="0x080"/><?= tr("Planetary Nebulae")?></label>
               <label><input type="checkbox" value="0x100"/><?= tr("Supernova remnants")?></label>
               <label><input type="checkbox" value="0x200"/><?= tr("Other")?></label>
             </div>
+          </div>
+          <div id="vo_dsolabels" class="smallblock blocklabel">
+            <h3><label><input class="stelaction" type="checkbox" value="actionShow_Nebulas" /><?= tr("Labels and markers")?></label></h3>
+            <div class="flex flex-baseline">
+              <label><?= tr("Labels")?></label><div class="slider stelproperty flex-expand" data-prop="prop_NebulaMgr_labelsAmount" data-min="0" data-max="10" data-step="0.1"></div>
+            </div>
+            <div class="flex flex-baseline">
+              <label><?= tr("Hints")?></label><div class="slider stelproperty flex-expand" data-prop="prop_NebulaMgr_hintsAmount" data-min="0" data-max="10" data-step="0.1"></div>
+            </div>
+            <label><input class="stelproperty" name="prop_NebulaMgr_hintsProportional" type="checkbox"/><?= tr("Use proportional hints")?></label>
+            <label><input class="stelproperty" name="prop_NebulaMgr_flagSurfaceBrightnessUsage" type="checkbox"/><?= tr("Use surface brightness")?></label>
+            <p><label><input class="stelproperty" name="prop_SkyDrawer_flagNebulaMagnitudeLimit" type="checkbox"/><?= tr("Limit magnitude:")?></label><input class="spinner stelproperty" name="prop_SkyDrawer_customNebulaMagLimit" data-min="3" data-max="21" data-step="0.25" data-decimals="2"/></p>
           </div>
         </div>
       </div>

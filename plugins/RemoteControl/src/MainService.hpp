@@ -32,10 +32,10 @@
 class StelCore;
 class StelActionMgr;
 class LandscapeMgr;
-class NebulaMgr;
 class StelLocaleMgr;
 class StelMovementMgr;
 class StelObjectMgr;
+class StelPropertyMgr;
 class StelScriptMgr;
 class StelSkyCultureMgr;
 
@@ -68,15 +68,16 @@ private slots:
 	void setFov(double fov);
 
 	void actionToggled(const QString& id, bool val);
+	void propertyChanged(const QString& id, const QVariant& val);
 
 private:
 	StelCore* core;
 	StelActionMgr* actionMgr;
 	LandscapeMgr* lsMgr;
-	NebulaMgr* nebMgr;
 	StelLocaleMgr* localeMgr;
 	StelMovementMgr* mvmgr;
 	StelObjectMgr* objMgr;
+	StelPropertyMgr* propMgr;
 	StelScriptMgr* scriptMgr;
 	StelSkyCultureMgr* skyCulMgr;
 
@@ -93,8 +94,17 @@ private:
 	//lists the recently toggled actions - this is a pseudo-circular buffer
 	QContiguousCache<ActionCacheEntry> actionCache;
 	QMutex actionMutex;
-
 	QJsonObject getActionChangesSinceID(int changeId);
+
+	struct PropertyCacheEntry
+	{
+		PropertyCacheEntry(const QString& str, const QVariant& val) : id(str),val(val) {}
+		QString id;
+		QVariant val;
+	};
+	QContiguousCache<PropertyCacheEntry> propCache;
+	QMutex propMutex;
+	QJsonObject getPropertyChangesSinceID(int changeId);
 
 };
 

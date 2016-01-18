@@ -79,6 +79,7 @@ void ZodiacalLight::init()
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_ZodiacalLight", displayGroup, N_("Zodiacal Light"), "flagZodiacalLightDisplayed", "Ctrl+Shift+Z");
+	registerProperty("prop_ZodiacalLight_intensity","intensity");
 }
 
 

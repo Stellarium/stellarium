@@ -22,8 +22,9 @@ define(["jquery", "./remotecontrol"], function($, rc) {
             });
         }
 
-        //trigger changed event
+        //trigger changed events, one generic and one specific
         $(publ).trigger("stelActionChanged", [actionId, action]);
+        $(publ).trigger("stelActionChanged:" + actionId, action);
     }
 
     function fillActionList() {
@@ -211,7 +212,12 @@ define(["jquery", "./remotecontrol"], function($, rc) {
 
         //Connects all checkbox input elements and buttons below this container to the StelAction that corresponds to its value
         connectActionContainer: connectActionContainer,
-        connectCheckbox: connectCheckbox
+        connectCheckbox: connectCheckbox,
+
+        isChecked: function(id)
+        {
+            return actionData[id] ? actionData[id].isChecked : undefined;
+        }
     };
 
     return publ;

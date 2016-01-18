@@ -23,7 +23,11 @@
 #include <QObject>
 
 class QAbstractButton;
+class QSpinBox;
+class QDoubleSpinBox;
+class QSlider;
 class StelAction;
+class StelProperty;
 
 //! @class StelDialog
 //! Base class for all the GUI windows in Stellarium.
@@ -72,8 +76,6 @@ public slots:
 	void close();
 signals:
 	void visibleChanged(bool);
-private slots:
-	void updateNightModeProperty();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots.
@@ -84,6 +86,17 @@ protected:
 	//! Helper function to connect a checkbox to the given StelAction
 	static void connectCheckBox(QAbstractButton *checkBox, StelAction* action);
 
+	//! Helper function to connect a QSpinBox to an integer StelProperty
+	static void connectIntProperty(QSpinBox* spinBox, const QString& propName);
+	//! Helper function to connect a QDoubleSpinBox to an double or float StelProperty
+	static void connectDoubleProperty(QDoubleSpinBox* spinBox, const QString& propName);
+	//! Helper function to connect a QSlider to an double or float StelProperty
+	//! @param minValue the double value associated with the minimal slider position
+	//! @param maxValue the double value associated with the maximal slider position
+	static void connectDoubleProperty(QSlider* slider, const QString& propName, double minValue, double maxValue);
+	//! Helper function to connect a checkbox to a bool StelProperty
+	static void connectBoolProperty(QAbstractButton* checkBox, const QString& propName);
+
 	//! The main dialog
 	QWidget* dialog;
 	class CustomProxy* proxy;
@@ -92,6 +105,24 @@ protected:
 	//! Kinetic scrolling for lists.
 	void installKineticScrolling(QList<QWidget *> addscroll);
 #endif
+
+private slots:
+	void updateNightModeProperty();
+
+};
+
+class QSliderStelPropertyConnectionHelper : public QObject
+{
+	Q_OBJECT
+public:
+	QSliderStelPropertyConnectionHelper(QSlider* slider, StelProperty* prop, double minValue, double maxValue, QObject* parent);
+private slots:
+	void sliderIntValueChanged(int val);
+	void propertyValueChanged(const QVariant &val);
+private:
+	QSlider* slider;
+	StelProperty* prop;
+	double minValue, maxValue,dRange;
 };
 
 #endif // _STELDIALOG_HPP_

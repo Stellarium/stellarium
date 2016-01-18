@@ -145,79 +145,40 @@ void ViewDialog::createDialogContent()
 	connect(nmgr, SIGNAL(typeFiltersChanged(Nebula::TypeGroup)), this, SLOT(updateSelectedTypesCheckBoxes()));
 	connect(ui->buttonGroupDisplayedDSOTypes, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedTypesFromCheckBoxes()));
 	connectGroupBox(ui->groupBoxDSOTypeFilters,"actionSet_Nebula_TypeFilterUsage");
-	ui->checkBoxProportionalHints->setChecked(nmgr->getHintsProportional());
-	connect(ui->checkBoxProportionalHints, SIGNAL(toggled(bool)), nmgr, SLOT(setHintsProportional(bool)));
-	ui->checkBoxSurfaceBrightnessUsage->setChecked(nmgr->getFlagSurfaceBrightnessUsage());
-	connect(ui->checkBoxSurfaceBrightnessUsage, SIGNAL(toggled(bool)), nmgr, SLOT(setFlagSurfaceBrightnessUsage(bool)));
+	connectBoolProperty(ui->checkBoxProportionalHints, "prop_NebulaMgr_hintsProportional");
+	connectBoolProperty(ui->checkBoxSurfaceBrightnessUsage, "prop_NebulaMgr_flagSurfaceBrightnessUsage");
 
 	// Stars section
-	ui->starTwinkleCheckBox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagTwinkle());
-	connect(ui->starTwinkleCheckBox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagTwinkle(bool)));
-
-	ui->starScaleRadiusDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAbsoluteStarScale());
-	connect(ui->starScaleRadiusDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setAbsoluteStarScale(double)));
-
-	ui->starRelativeScaleDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getRelativeStarScale());
-	connect(ui->starRelativeScaleDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setRelativeStarScale(double)));
-
-	MilkyWay* mw = GETSTELMODULE(MilkyWay);
-	ui->milkyWayBrightnessDoubleSpinBox->setValue(mw->getIntensity());
-	connect(ui->milkyWayBrightnessDoubleSpinBox, SIGNAL(valueChanged(double)), mw, SLOT(setIntensity(double)));
-
-	ZodiacalLight* zl = GETSTELMODULE(ZodiacalLight);
-	ui->zodiacalLightBrightnessDoubleSpinBox->setValue(zl->getIntensity());
-	connect(ui->zodiacalLightBrightnessDoubleSpinBox, SIGNAL(valueChanged(double)), zl, SLOT(setIntensity(double)));
-
-	ui->starTwinkleAmountDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getTwinkleAmount());
-	connect(ui->starTwinkleAmountDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setTwinkleAmount(double)));
-
-	ui->adaptationCheckbox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagLuminanceAdaptation());
-	connect(ui->adaptationCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagLuminanceAdaptation(bool)));
+	connectBoolProperty(ui->starTwinkleCheckBox, "prop_SkyDrawer_flagTwinkle");
+	connectDoubleProperty(ui->starScaleRadiusDoubleSpinBox,"prop_SkyDrawer_absoluteStarScale");
+	connectDoubleProperty(ui->starRelativeScaleDoubleSpinBox, "prop_SkyDrawer_relativeStarScale");
+	connectDoubleProperty(ui->milkyWayBrightnessDoubleSpinBox, "prop_MilkyWay_intensity");
+	connectDoubleProperty(ui->zodiacalLightBrightnessDoubleSpinBox, "prop_ZodiacalLight_intensity");
+	connectDoubleProperty(ui->starTwinkleAmountDoubleSpinBox,"prop_SkyDrawer_twinkleAmount");
+	connectBoolProperty(ui->adaptationCheckbox,"prop_SkyDrawer_flagLuminanceAdaptation");
 
 	// Limit Magnitudes
-	const StelSkyDrawer* drawer = StelApp::getInstance().getCore()->getSkyDrawer();
 	// Stars
-	ui->starLimitMagnitudeCheckBox->setChecked(drawer->getFlagStarMagnitudeLimit());
-	ui->starLimitMagnitudeDoubleSpinBox->setValue(drawer->getCustomStarMagnitudeLimit());
+	connectBoolProperty(ui->starLimitMagnitudeCheckBox,"prop_SkyDrawer_flagStarMagnitudeLimit");
+	connectDoubleProperty(ui->starLimitMagnitudeDoubleSpinBox, "prop_SkyDrawer_customStarMagLimit");
 	// Planets
-	ui->planetLimitMagnitudeCheckBox->setChecked(drawer->getFlagPlanetMagnitudeLimit());
-	ui->planetLimitMagnitudeDoubleSpinBox->setValue(drawer->getCustomPlanetMagnitudeLimit());
+	connectBoolProperty(ui->planetLimitMagnitudeCheckBox,"prop_SkyDrawer_flagPlanetMagnitudeLimit");
+	connectDoubleProperty(ui->planetLimitMagnitudeDoubleSpinBox,"prop_SkyDrawer_customPlanetMagLimit");
 	// DSO
-	ui->nebulaLimitMagnitudeCheckBox->setChecked(drawer->getFlagNebulaMagnitudeLimit());
-	ui->nebulaLimitMagnitudeDoubleSpinBox->setValue(drawer->getCustomNebulaMagnitudeLimit());
-	
-	connect(ui->starLimitMagnitudeCheckBox, SIGNAL(toggled(bool)),
-	        drawer, SLOT(setFlagStarMagnitudeLimit(bool)));
-	connect(ui->planetLimitMagnitudeCheckBox, SIGNAL(toggled(bool)),
-		drawer, SLOT(setFlagPlanetMagnitudeLimit(bool)));
-	connect(ui->nebulaLimitMagnitudeCheckBox, SIGNAL(toggled(bool)),
-	        drawer, SLOT(setFlagNebulaMagnitudeLimit(bool)));
-	connect(ui->starLimitMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)),
-	        drawer, SLOT(setCustomStarMagnitudeLimit(double)));
-	connect(ui->planetLimitMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)),
-		drawer, SLOT(setCustomPlanetMagnitudeLimit(double)));
-	connect(ui->nebulaLimitMagnitudeDoubleSpinBox,
-	        SIGNAL(valueChanged(double)),
-		drawer, SLOT(setCustomNebulaMagnitudeLimit(double)));
+	connectBoolProperty(ui->nebulaLimitMagnitudeCheckBox,"prop_SkyDrawer_flagNebulaMagnitudeLimit");
+	connectDoubleProperty(ui->nebulaLimitMagnitudeDoubleSpinBox,"prop_SkyDrawer_customNebulaMagLimit");
 
 	// Planets section
-	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 	connectCheckBox(ui->showPlanetCheckBox, "actionShow_Planets");
 	connectCheckBox(ui->planetMarkerCheckBox, "actionShow_Planets_Hints");
 
-	ui->planetScaleMoonCheckBox->setChecked(ssmgr->getFlagMoonScale());
-	connect(ui->planetScaleMoonCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagMoonScale(bool)));
-	ui->moonScaleFactor->setValue(ssmgr->getMoonScale());
-	connect(ui->moonScaleFactor, SIGNAL(valueChanged(double)), ssmgr, SLOT(setMoonScale(double)));
+	connectBoolProperty(ui->planetScaleMoonCheckBox, "prop_SolarSystem_flagMoonScale");
+	connectDoubleProperty(ui->moonScaleFactor,"prop_SolarSystem_moonScale");
 
 	connectCheckBox(ui->planetOrbitCheckBox, "actionShow_Planets_Orbits");
-	ui->planetIsolatedOrbitCheckBox->setChecked(ssmgr->getFlagIsolatedOrbits());
-	connect(ui->planetIsolatedOrbitCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagIsolatedOrbits(bool)));
-	ui->planetIsolatedTrailsCheckBox->setChecked(ssmgr->getFlagIsolatedTrails());
-	connect(ui->planetIsolatedTrailsCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagIsolatedTrails(bool)));
-
-	ui->planetLightSpeedCheckBox->setChecked(ssmgr->getFlagLightTravelTime());
-	connect(ui->planetLightSpeedCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLightTravelTime(bool)));
+	connectBoolProperty(ui->planetIsolatedOrbitCheckBox, "prop_SolarSystem_flagIsolatedOrbits");
+	connectBoolProperty(ui->planetIsolatedTrailsCheckBox, "prop_SolarSystem_flagIsolatedTrails");
+	connectBoolProperty(ui->planetLightSpeedCheckBox, "prop_SolarSystem_flagLightTravelTime");
 
 	// Shooting stars section
 	SporadicMeteorMgr* mmgr = GETSTELMODULE(SporadicMeteorMgr);
@@ -229,19 +190,14 @@ void ViewDialog::createDialogContent()
 	setZHR(mmgr->getZHR());
 
 	// Labels section
-	StarMgr* smgr = GETSTELMODULE(StarMgr);
 	connectCheckBox(ui->starLabelCheckBox, "actionShow_Stars_Labels");
 	connectGroupBox(ui->groupBoxLabelsAndMarkers, "actionShow_Nebulas");
 	connectCheckBox(ui->planetLabelCheckBox, "actionShow_Planets_Labels");
 
-	ui->starsLabelsHorizontalSlider->setValue((int)(smgr->getLabelsAmount()*10.f));
-	connect(ui->starsLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(starsLabelsValueChanged(int)));
-	ui->planetsLabelsHorizontalSlider->setValue((int)(ssmgr->getLabelsAmount()*10.f));
-	connect(ui->planetsLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(planetsLabelsValueChanged(int)));
-	ui->nebulasLabelsHorizontalSlider->setValue((int)(nmgr->getLabelsAmount()*10.f));
-	connect(ui->nebulasLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(nebulasLabelsValueChanged(int)));
-	ui->nebulasHintsHorizontalSlider->setValue((int)(nmgr->getHintsAmount()*10.f));
-	connect(ui->nebulasHintsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(nebulasMarkersValueChanged(int)));
+	connectDoubleProperty(ui->starsLabelsHorizontalSlider,"prop_StarMgr_labelsAmount",0.0,10.0);
+	connectDoubleProperty(ui->planetsLabelsHorizontalSlider, "prop_SolarSystem_labelsAmount",0.0,10.0);
+	connectDoubleProperty(ui->nebulasLabelsHorizontalSlider, "prop_NebulaMgr_labelsAmount",0.0,10.0);
+	connectDoubleProperty(ui->nebulasHintsHorizontalSlider, "prop_NebulaMgr_hintsAmount",0.0,10.0);
 
 	// Landscape section
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
@@ -821,13 +777,6 @@ void ViewDialog::updateZhrDescription()
 	}
 }
 
-void ViewDialog::starsLabelsValueChanged(int v)
-{
-	StarMgr* smgr = GETSTELMODULE(StarMgr);
-	float a= ((float)v)/10.f;
-	smgr->setLabelsAmount(a);
-}
-
 void ViewDialog::setCurrentLandscapeAsDefault(void)
 {
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
@@ -842,27 +791,6 @@ void ViewDialog::setCurrentCultureAsDefault(void)
 	StelApp::getInstance().getSkyCultureMgr().setDefaultSkyCultureID(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID());
 	ui->useAsDefaultSkyCultureCheckBox->setChecked(true);
 	ui->useAsDefaultSkyCultureCheckBox->setEnabled(false);
-}
-
-void ViewDialog::planetsLabelsValueChanged(int v)
-{
-	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
-	float a= ((float)v)/10.f;
-	ssmgr->setLabelsAmount(a);
-}
-
-void ViewDialog::nebulasLabelsValueChanged(int v)
-{
-	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
-	float a= ((float)v)/10.f;	
-	nmgr->setLabelsAmount(a);
-}
-
-void ViewDialog::nebulasMarkersValueChanged(int v)
-{
-	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
-	float a= ((float)v)/10.f;
-	nmgr->setHintsAmount(a);
 }
 
 // Update the widget to make sure it is synchrone if a value was changed programmatically

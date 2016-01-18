@@ -149,6 +149,15 @@ protected:
 	                            const QString& shortcut="", const QString& altShortcut="") {
 		return addAction(id, groupId, text, this, slot, shortcut, altShortcut);
 	}
+
+	//! convenience method to register a property with the StelPropertyMgr
+	class StelProperty* registerProperty(const QString& id,QObject* target, const char* prop);
+
+	//! convenience method to register a property with the StelPropertyMgr
+	class StelProperty* registerProperty(const QString& id,const char* prop)
+	{
+		return registerProperty(id,this,prop);
+	}
 };
 
 Q_DECLARE_METATYPE(StelModule::StelModuleSelectAction)

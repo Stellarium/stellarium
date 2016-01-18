@@ -125,7 +125,6 @@ define(["jquery", "api/remotecontrol", "api/actions"], function($, rc, actionApi
 	});
 
 	$(actionApi).on("stelActionChanged",function(evt,id,data){
-
 		var option = $actionlist.find('option[value="'+id+'"]');
 		if(option.length>0)
 			option[0].textContent = data.text + " (" + (data.isChecked ? rc.tr("on") : rc.tr("off")) + ")";

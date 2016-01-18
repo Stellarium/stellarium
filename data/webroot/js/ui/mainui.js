@@ -1,6 +1,6 @@
 /* jshint expr: true */
 
-define(["jquery", "settings", "api/remotecontrol", "./time", "./actions", "./viewoptions", "./scripts", "./viewcontrol", "./location", "./search", "jquery-ui"], function($, settings, rc, timeui) {
+define(["jquery", "settings", "api/remotecontrol", "api/actions", "api/properties", "./time", "./actions", "./viewoptions", "./scripts", "./viewcontrol", "./location", "./search", "jquery-ui"], function($, settings, rc, actionApi, propApi, timeui) {
 	"use strict";
 
 	var animationSupported = (window.requestAnimationFrame !== undefined);
@@ -71,6 +71,90 @@ define(["jquery", "settings", "api/remotecontrol", "./time", "./actions", "./vie
 				my: "center",
 				at: "center",
 				of: window
+			});
+		});
+
+		//automatically setup spinners
+		$("input.spinner").each(function() {
+			var self = $(this),
+				min = self.data("min"),
+				max = self.data("max"),
+				step = self.data("step"),
+				//decimals are currently unsupported
+				decimals = self.data("decimals");
+			self.spinner({
+				min: min,
+				max: max,
+				step: step
+			});
+		});
+
+		//setup sliders
+		$("div.slider").each(function() {
+			var self = $(this),
+				min = self.data("min"),
+				max = self.data("max"),
+				step = self.data("step");
+			self.slider({
+				min: min,
+				max: max,
+				step: step
+			});
+		});
+
+		//hook up automatic stelproperty spinners
+		$("input.spinner.stelproperty").each(function() {
+			var self = $(this);
+			var prop = self.attr("name");
+
+			$(propApi).on("stelPropertyChanged:" + prop, function(evt, prop) {
+				self.spinner("value", prop.value);
+			});
+			self.spinner("value", propApi.getStelProp(prop));
+
+			self.on("spin",function(evt,ui){
+				propApi.setStelPropQueued(prop,ui.value);
+			});
+		});
+
+		//hook up stelproperty checkboxes
+		$("input[type='checkbox'].stelproperty").each(function(){
+			var self = $(this);
+			var prop = self.attr("name");
+
+			$(propApi).on("stelPropertyChanged:" + prop, function(evt, prop) {
+				self[0].checked = prop.value;
+			});
+			self[0].checked = propApi.getStelProp(prop);
+			self.click(function(){
+				propApi.setStelProp(prop,this.checked);
+			});
+		});
+
+		$("div.slider.stelproperty").each(function(){
+			var self = $(this);
+			var prop = self.data("prop");
+
+			$(propApi).on("stelPropertyChanged:" + prop, function(evt, prop) {
+				self.slider("value", prop.value);
+			});
+			self.slider("value", propApi.getStelProp(prop));
+			self.on("slide",function(evt,ui){
+				propApi.setStelPropQueued(prop,ui.value);
+			});
+		});
+
+		//hook up stelaction checkboxes
+		$("input[type='checkbox'].stelaction").each(function(){
+			var self = $(this);
+			var id = this.value;
+
+			$(actionApi).on("stelActionChanged:" + id, function(evt, action) {
+				self[0].checked = action.isChecked;
+			});
+			self[0].checked = actionApi.isChecked(id);
+			self.click(function(){
+				actionApi.execute(id);
 			});
 		});
 
