@@ -27,9 +27,10 @@
 
 TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QString &params, Equinox eq)
 	: TelescopeClient(name)
-	, port(0)
 	, networkManager(new QNetworkAccessManager)
 	, equinox(eq)
+	, port(0)
+	, address("")
 	, url("http://localhost:8889/api/get?d=T0")
 {
 	// Example params:
@@ -68,7 +69,9 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 
 	request.setUrl(url);
 
-	QNetworkReply* currentReply = networkManager.get(request);
+	//QNetworkReply* currentReply = networkManager.get(request);
+	
+	networkManager.get(request);
 
 	connect(&networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
 }
@@ -120,7 +123,12 @@ Vec3d TelescopeClientJsonRts2::getJ2000EquatorialPos(const StelCore* core) const
 
 void TelescopeClientJsonRts2::telescopeGoto(const Vec3d &j2000Pos)
 {
+	if (!isConnected())
+		return;
 
+	const double ra_signed = atan2(j2000Pos[1], j2000Pos[0]);
+	const double ra = (ra_signed >= 0) ? ra_signed : (ra_signed + 2 * M_PI);
+	const double dec = atan2(j2000Pos[2], std::sqrt(j2000Pos[0]*j2000Pos[0]+j2000Pos[1]*j2000Pos[1]));
 }
 
 bool TelescopeClientJsonRts2::hasKnownPosition(void) const
