@@ -12,6 +12,8 @@ SET(TelescopeControl_SRCS
   clients/InterpolatedPosition.cpp
   clients/TelescopeClient.hpp
   clients/TelescopeClient.cpp
+  clients/TelescopeClientJsonRts2.hpp
+  clients/TelescopeClientJsonRts2.cpp
   clients/TelescopeClientDirectLx200.hpp
   clients/TelescopeClientDirectLx200.cpp
   clients/TelescopeClientDirectNexStar.hpp

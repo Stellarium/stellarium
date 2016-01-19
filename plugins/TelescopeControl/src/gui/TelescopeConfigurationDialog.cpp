@@ -82,6 +82,7 @@ void TelescopeConfigurationDialog::createDialogContent()
 	connect(ui->radioButtonTelescopeLocal, SIGNAL(toggled(bool)), this, SLOT(toggleTypeLocal(bool)));
 	connect(ui->radioButtonTelescopeConnection, SIGNAL(toggled(bool)), this, SLOT(toggleTypeConnection(bool)));
 	connect(ui->radioButtonTelescopeVirtual, SIGNAL(toggled(bool)), this, SLOT(toggleTypeVirtual(bool)));
+	connect(ui->radioButtonTelescopeRTS2, SIGNAL(toggled(bool)), this, SLOT(toggleTypeRTS2(bool)));
 	
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(buttonSavePressed()));
 	connect(ui->pushButtonDiscard, SIGNAL(clicked()), this, SLOT(buttonDiscardPressed()));
@@ -210,7 +211,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 		ui->radioButtonTelescopeConnection->setChecked(true);
 		ui->lineEditHostName->setText("localhost");
 	}
-	else
+	else if (connectionType == ConnectionVirtual)
 	{
 		ui->radioButtonTelescopeVirtual->setChecked(true);
 	}
@@ -292,6 +293,24 @@ void TelescopeConfigurationDialog::toggleTypeVirtual(bool isChecked)
 	ui->scrollArea->ensureWidgetVisible(ui->groupBoxTelescopeProperties);
 }
 
+void TelescopeConfigurationDialog::toggleTypeRTS2(bool isChecked)
+{
+	if(isChecked)
+	{
+		//Re-initialize values that may have been changed
+		ui->lineEditHostName->setText("localhost");
+		ui->spinBoxTCPPort->setValue(DEFAULT_TCP_PORT_FOR_SLOT(configuredSlot));
+
+		ui->groupBoxDeviceSettings->setEnabled(false);
+
+		ui->scrollArea->ensureWidgetVisible(ui->groupBoxTelescopeProperties);
+	}
+	else
+	{
+		ui->groupBoxDeviceSettings->setEnabled(true);
+	}
+}
+
 void TelescopeConfigurationDialog::buttonSavePressed()
 {
 	//Main telescope properties
@@ -356,6 +375,11 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 	{
 		type = ConnectionVirtual;
 		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, QString(), portTCP, delay, connectAtStartup, circles);
+	}
+	else if (ui->radioButtonTelescopeRTS2->isChecked())
+	{
+		type = ConnectionRTS2;
+		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay, connectAtStartup, circles);
 	}
 	
 	emit changesSaved(name, type);

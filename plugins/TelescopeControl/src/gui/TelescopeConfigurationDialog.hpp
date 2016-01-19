@@ -62,6 +62,7 @@ private slots:
 	void toggleTypeLocal(bool);
 	void toggleTypeConnection(bool);
 	void toggleTypeVirtual(bool);
+	void toggleTypeRTS2(bool);
 	
 	void deviceModelSelected(const QString&);
 

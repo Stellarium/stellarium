@@ -24,6 +24,7 @@
  */
 
 #include "TelescopeClient.hpp"
+#include "TelescopeClientJsonRts2.hpp"
 #include "TelescopeClientDirectLx200.hpp"
 #include "TelescopeClientDirectNexStar.hpp"
 #include "StelUtils.hpp"
@@ -92,6 +93,10 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 	else if (type == "TCP")
 	{
 		newTelescope = new TelescopeTCP(name, params, eq);
+	}
+	else if (type == "RTS2")
+	{
+		newTelescope = new TelescopeClientJsonRts2(name, params, eq);
 	}
 	else if (type == "TelescopeServerLx200") //BM: One of the rare occasions of painless extension
 	{
