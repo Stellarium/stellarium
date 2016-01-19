@@ -27,7 +27,7 @@ class AddOn : public QObject
 {
 	Q_OBJECT
 public:
-	AddOn(const QString addOnId, const QVariantMap& map);
+	AddOn(const QString addonId, const QVariantMap& map);
 	virtual ~AddOn();
 
 	//! @enum Type
@@ -73,7 +73,7 @@ public:
 
 	bool isValid() { return m_bIsValid; }
 
-	QString getAddOnId() { return m_iAddOnId; }
+	QString getAddOnId() { return m_sAddonId; }
 	QString getTitle() { return m_sTitle; }
 	Type getType() { return m_eType; }
 	QString getTypeString() { return m_sType; }
@@ -98,7 +98,7 @@ public:
 	QStringList getInstalledFiles() { return m_InstalledFiles; }
 
 private:
-	QString m_iAddOnId;
+	QString m_sAddonId;
 	Type m_eType;
 	QString m_sType;
 	QString m_sTypeDisplayRole;

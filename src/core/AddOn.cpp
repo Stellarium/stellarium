@@ -27,8 +27,8 @@
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 
-AddOn::AddOn(const QString addOnId, const QVariantMap& map)
-	: m_iAddOnId(addOnId)
+AddOn::AddOn(const QString addonId, const QVariantMap& map)
+	: m_sAddonId(addonId)
 	, m_eType(INVALID)
 	, m_bIsValid(false)
 	, m_eStatus(NotInstalled)
@@ -38,7 +38,7 @@ AddOn::AddOn(const QString addOnId, const QVariantMap& map)
 	m_sTypeDisplayRole = typeToDisplayRole(m_eType);
 	if (m_eType == INVALID)
 	{
-		qWarning() << "Add-On Catalog : Error! Add-on" << m_iAddOnId
+		qWarning() << "Add-On Catalog : Error! Add-on" << m_sAddonId
 			   << "does not have a valid type!";
 		return;
 	}
@@ -65,7 +65,7 @@ AddOn::AddOn(const QString addOnId, const QVariantMap& map)
 		|| m_sDownloadURL.isEmpty() || m_sDownloadFilename.isEmpty()
 		|| m_sDownloadSize.isEmpty())
 	{
-		qWarning() << "Add-On Catalog : Error! Add-on" << m_iAddOnId
+		qWarning() << "Add-On Catalog : Error! Add-on" << m_sAddonId
 			   << "does not have all the required fields!";
 		return;
 	}
@@ -76,7 +76,7 @@ AddOn::AddOn(const QString addOnId, const QVariantMap& map)
 		// a texture must have "textures"
 		if (m_AllTextures.isEmpty())
 		{
-			qWarning() << "Add-On Catalog : Error! Texture" << m_iAddOnId
+			qWarning() << "Add-On Catalog : Error! Texture" << m_sAddonId
 				   << "does not have the field \"textures\"!";
 			return;
 		}
