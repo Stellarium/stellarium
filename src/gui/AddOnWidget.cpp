@@ -87,7 +87,7 @@ AddOnWidget::AddOnWidget(QWidget* parent, int row, AddOn* addon)
 	m_sSelectedFilesToRemove.clear();
 	ui->listWidget->setVisible(false);
 
-	if (addon->getCategory() == AddOn::TEXTURE)
+	if (addon->getType() == AddOn::TEXTURE)
 	{
 		if (addon->getAllTextures().size() > 1) // display list just when it is a texture set
 		{

@@ -34,26 +34,15 @@ public:
 	//! Add-on type
 	enum Type
 	{
-		Landscape,
-		Language_Stellarium,
-		Language_SkyCulture,
-		Plugin_Catalog,
-		Script,
-		Sky_Culture,
-		Star_Catalog,
-		Texture,
-		INVALID
-	};
-
-	//! @enum categories
-	enum Category {
-		CATALOG,
 		LANDSCAPE,
-		LANGUAGEPACK,
+		LANG_STELLARIUM,
+		LANG_SKYCULTURE,
+		PLUGIN_CATALOG,
 		SCRIPT,
-		STARLORE,
+		SKY_CULTURE,
+		STAR_CATALOG,
 		TEXTURE,
-		INVALID_CATEGORY
+		INVALID
 	};
 
 	//! @enum AddOnStatus
@@ -87,8 +76,8 @@ public:
 	QString getAddOnId() { return m_iAddOnId; }
 	QString getTitle() { return m_sTitle; }
 	Type getType() { return m_eType; }
-	QString getTypeString();
-	Category getCategory() { return m_eCategory; }
+	QString getTypeString() { return m_sType; }
+	QString getTypeDisplayRole() { return m_sTypeDisplayRole; }
 	QDate getVersion() { return m_dVersion; }
 	QList<Authors> getAuthors() { return m_authors; }
 	QString getDescription() { return m_sDescription; }
@@ -111,6 +100,8 @@ public:
 private:
 	QString m_iAddOnId;
 	Type m_eType;
+	QString m_sType;
+	QString m_sTypeDisplayRole;
 	QString m_sTitle;
 	QString m_sDescription;
 	QDate m_dVersion;
@@ -128,12 +119,12 @@ private:
 	QStringList m_InstalledFiles;
 
 	bool m_bIsValid;
-	Category m_eCategory;
 	Status m_eStatus;
 
 	bool isCompatible(QString first, QString last);
-	Category getCategoryFromType(Type type);
-	Type fromStringToType(QString string);
+
+	Type typeStringToEnum(QString string);
+	QString typeToDisplayRole(Type type);
 };
 
 #endif // _ADDON_HPP_

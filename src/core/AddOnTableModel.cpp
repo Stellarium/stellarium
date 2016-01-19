@@ -64,7 +64,7 @@ QVariant AddOnTableModel::data(const QModelIndex &index, int role) const
 			value = addon->getTitle();
 			break;
 		case Type:
-			value = addon->getTypeString();
+			value = addon->getTypeDisplayRole();
 			break;
 		case Version:
 			value = addon->getVersion();

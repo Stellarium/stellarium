@@ -33,7 +33,9 @@ AddOn::AddOn(const QString addOnId, const QVariantMap& map)
 	, m_bIsValid(false)
 	, m_eStatus(NotInstalled)
 {
-	m_eType = fromStringToType(map.value("type").toString());
+	m_sType = map.value("type").toString();
+	m_eType = typeStringToEnum(m_sType);
+	m_sTypeDisplayRole = typeToDisplayRole(m_eType);
 	if (m_eType == INVALID)
 	{
 		qWarning() << "Add-On Catalog : Error! Add-on" << m_iAddOnId
@@ -41,7 +43,6 @@ AddOn::AddOn(const QString addOnId, const QVariantMap& map)
 		return;
 	}
 
-	m_eCategory = getCategoryFromType(m_eType);
 	m_sTitle = map.value("title").toString();
 	m_sDescription = map.value("description").toString();
 	m_dVersion = map.value("version").toDate();
@@ -69,7 +70,7 @@ AddOn::AddOn(const QString addOnId, const QVariantMap& map)
 		return;
 	}
 
-	if (m_eType == Texture)
+	if (m_eType == TEXTURE)
 	{
 		m_AllTextures = map.value("textures").toString().split(",").toSet().toList();
 		// a texture must have "textures"
@@ -136,68 +137,6 @@ bool AddOn::isCompatible(QString first, QString last)
 	return true;
 }
 
-AddOn::Type AddOn::fromStringToType(QString string)
-{
-	if (string == "landscape")
-	{
-		return Landscape;
-	}
-	else if (string == "language_stellarium")
-	{
-		return Language_Stellarium;
-	}
-	else if (string == "language_skyculture")
-	{
-		return Language_SkyCulture;
-	}
-	else if (string == "plugin_catalog")
-	{
-		return Plugin_Catalog;
-	}
-	else if (string == "script")
-	{
-		return Script;
-	}
-	else if (string == "sky_culture")
-	{
-		return Sky_Culture;
-	}
-	else if (string == "star_catalog")
-	{
-		return Star_Catalog;
-	}
-	else if (string == "texture")
-	{
-		return Texture;
-	}
-	else
-	{
-		return INVALID;
-	}
-}
-
-AddOn::Category AddOn::getCategoryFromType(Type type)
-{
-	switch (type) {
-		case Landscape:
-			return LANDSCAPE;
-		case Language_Stellarium:
-		case Language_SkyCulture:
-			return LANGUAGEPACK;
-		case Plugin_Catalog:
-		case Star_Catalog:
-			return CATALOG;
-		case Script:
-			return SCRIPT;
-		case Sky_Culture:
-			return STARLORE;
-		case Texture:
-			return TEXTURE;
-		default:
-			return INVALID_CATEGORY;
-	}
-}
-
 QString AddOn::getStatusString() {
 	switch (m_eStatus)
 	{
@@ -230,30 +169,86 @@ QString AddOn::getStatusString() {
 	}
 }
 
-QString AddOn::getTypeString() {
-	switch (m_eType) {
-		case Landscape:
-			return "Landscape";
-		case Language_Stellarium:
-			return "Stellarium";
-		case Language_SkyCulture:
-			return "Sky Culture";
-		case Plugin_Catalog:
-			return "Plugin";
-		case Star_Catalog:
-			return "Star";
-		case Script:
-			return "Script";
-		case Sky_Culture:
-			return "Sky Culture";
-		case Texture:
-			return "Texture";
-		default:
-			return "Invalid";
-	}
-}
-
 QString AddOn::getDownloadFilepath()
 {
 	return StelApp::getInstance().getStelAddOnMgr().getAddOnDir() % m_sDownloadFilename;
+}
+
+AddOn::Type AddOn::typeStringToEnum(QString string)
+{
+	if (string == "landscape")
+	{
+		return LANDSCAPE;
+	}
+	else if (string == "language_stellarium")
+	{
+		return LANG_STELLARIUM;
+	}
+	else if (string == "language_skyculture")
+	{
+		return LANG_SKYCULTURE;
+	}
+	else if (string == "plugin_catalog")
+	{
+		return PLUGIN_CATALOG;
+	}
+	else if (string == "script")
+	{
+		return SCRIPT;
+	}
+	else if (string == "sky_culture")
+	{
+		return SKY_CULTURE;
+	}
+	else if (string == "star_catalog")
+	{
+		return STAR_CATALOG;
+	}
+	else if (string == "texture")
+	{
+		return TEXTURE;
+	}
+	else
+	{
+		return INVALID;
+	}
+}
+
+QString AddOn::typeToDisplayRole(Type type) {
+	if (type == LANDSCAPE)
+	{
+		return "Landscape";
+	}
+	else if (type == LANG_STELLARIUM)
+	{
+		return "Stellarium";
+	}
+	else if (type == LANG_SKYCULTURE)
+	{
+		return "Sky Culture";
+	}
+	else if (type == PLUGIN_CATALOG)
+	{
+		return "Plugin";
+	}
+	else if (type == SCRIPT)
+	{
+		return "Script";
+	}
+	else if (type == SKY_CULTURE)
+	{
+		return "Sky Culture";
+	}
+	else if (type == STAR_CATALOG)
+	{
+		return "Star";
+	}
+	else if (type == TEXTURE)
+	{
+		return "Texture";
+	}
+	else
+	{
+		return "Invalid";
+	}
 }

@@ -375,8 +375,9 @@ void StelAddOnMgr::installAddOn(AddOn* addon, bool tryDownload)
 
 	// require restart
 	if ((addon->getStatus() == AddOn::PartiallyInstalled || addon->getStatus() == AddOn::FullyInstalled) &&
-		(addon->getCategory() == AddOn::CATALOG || addon->getCategory() == AddOn::LANGUAGEPACK
-			|| addon->getCategory() == AddOn::TEXTURE))
+		(addon->getType() == AddOn::PLUGIN_CATALOG || addon->getType() == AddOn::STAR_CATALOG ||
+		 addon->getType() == AddOn::LANG_SKYCULTURE || addon->getType() == AddOn::LANG_STELLARIUM ||
+		 addon->getType() == AddOn::TEXTURE))
 	{
 		addon->setStatus(AddOn::Restart);
 		emit (addOnMgrMsg(RestartRequired));
@@ -439,8 +440,9 @@ void StelAddOnMgr::removeAddOn(AddOn* addon)
 
 	addon->setInstalledFiles(installedFiles);
 
-	if (addon->getCategory() == AddOn::CATALOG || addon->getCategory() == AddOn::LANGUAGEPACK
-			|| addon->getCategory() == AddOn::TEXTURE)
+	if (addon->getType() == AddOn::PLUGIN_CATALOG || addon->getType() == AddOn::STAR_CATALOG ||
+		addon->getType() == AddOn::LANG_SKYCULTURE || addon->getType() == AddOn::LANG_STELLARIUM ||
+		addon->getType() == AddOn::TEXTURE)
 	{
 		emit (addOnMgrMsg(RestartRequired));
 		addon->setStatus(AddOn::Restart);
@@ -777,16 +779,16 @@ void StelAddOnMgr::removeAddonFromJson(AddOn *addon, QString jsonPath)
 
 void StelAddOnMgr::slotDataUpdated(AddOn* addon)
 {
-	AddOn::Category cat = addon->getCategory();
-	if (cat == AddOn::LANDSCAPE)
+	AddOn::Type type = addon->getType();
+	if (type == AddOn::LANDSCAPE)
 	{
 		emit (landscapesChanged());
 	}
-	else if (cat == AddOn::SCRIPT)
+	else if (type == AddOn::SCRIPT)
 	{
 		emit (scriptsChanged());
 	}
-	else if (cat == AddOn::STARLORE)
+	else if (type == AddOn::SKY_CULTURE)
 	{
 		emit (skyCulturesChanged());
 	}

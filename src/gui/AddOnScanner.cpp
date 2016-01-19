@@ -69,7 +69,7 @@ void AddOnScanner::loadAddons(QList<AddOn*> addons)
 	foreach (AddOn* addon, addons) {
 		int lastRow = ui->tableWidget->rowCount();
 		ui->tableWidget->insertRow(lastRow);
-		ui->tableWidget->setItem(lastRow, 0, new QTableWidgetItem(addon->getTypeString()));
+		ui->tableWidget->setItem(lastRow, 0, new QTableWidgetItem(addon->getTypeDisplayRole()));
 		ui->tableWidget->setItem(lastRow, 1, new QTableWidgetItem(addon->getTitle()));
 		ui->tableWidget->setItem(lastRow, 2, new QTableWidgetItem(addon->isValid()?"Compatible":"Incompatible"));
 	}
