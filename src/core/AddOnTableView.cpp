@@ -107,7 +107,7 @@ void AddOnTableView::clearSelection()
 void AddOnTableView::selectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
 {
 	QAbstractItemView::selectionChanged(selected, deselected);
-	AddOn* addon;
+	AddOn* addon = NULL;
 	if (!selected.isEmpty())
 	{
 		addon = ((AddOnTableModel*) model())->getAddOn(selected.first().top());
