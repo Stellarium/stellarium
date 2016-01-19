@@ -101,6 +101,7 @@ TelescopeControl::TelescopeControl()
 	connectionTypeNames.insert(ConnectionInternal, "internal");
 	connectionTypeNames.insert(ConnectionLocal, "local");
 	connectionTypeNames.insert(ConnectionRemote, "remote");
+	connectionTypeNames.insert(ConnectionRTS2, "RTS2");
 }
 
 TelescopeControl::~TelescopeControl()
@@ -1327,6 +1328,11 @@ bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connecti
 		case ConnectionLocal:
 			if (isValidPort(portTCP))
 				initString = QString("%1:TCP:%2:%3:%4:%5").arg(name, equinox, "localhost", QString::number(portTCP), QString::number(delay));
+			break;
+
+		case ConnectionRTS2:
+			if (isValidPort(portTCP))
+				initString = QString("%1:RTS2:%2:%3:%4:%5:%6").arg(name, equinox, host, QString::number(portTCP), "petr", "test");
 			break;
 
 		case ConnectionRemote:
