@@ -286,7 +286,9 @@ void StelAddOnMgr::installAddons(QList<AddOn *> addons)
 
 void StelAddOnMgr::removeAddons(QList<AddOn *> addons)
 {
-	// TODO
+	foreach (AddOn* addon, addons) {
+		removeAddOn(addon);
+	}
 }
 
 void StelAddOnMgr::installAddOnFromFile(QString filePath)
@@ -405,7 +407,7 @@ void StelAddOnMgr::removeAddOn(AddOn* addon)
 	QStringList installedFiles = addon->getInstalledFiles();
 	foreach (QString filePath, addon->getInstalledFiles()) {
 		QFile file(filePath);
-		if (file.remove())
+		if (!file.exists() || file.remove())
 		{
 			installedFiles.removeOne(filePath);
 			QDir dir(filePath);
@@ -763,11 +765,13 @@ void StelAddOnMgr::removeAddonFromJson(AddOn *addon, QString jsonPath)
 	QFile jsonFile(jsonPath);
 	if (jsonFile.open(QIODevice::ReadWrite))
 	{
-		QJsonObject object(QJsonDocument::fromJson(jsonFile.readAll()).object());
-		object.remove(addon->getAddOnId());
+		QJsonObject json(QJsonDocument::fromJson(jsonFile.readAll()).object());
+		QJsonObject addons = json.take("add-ons").toObject();
+		addons.remove(addon->getAddOnId());
+		json.insert("add-ons", addons);
 
 		jsonFile.resize(0);
-		jsonFile.write(QJsonDocument(object).toJson());
+		jsonFile.write(QJsonDocument(json).toJson());
 		jsonFile.close();
 	}
 	else
