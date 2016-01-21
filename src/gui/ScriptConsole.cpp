@@ -41,6 +41,7 @@ ScriptConsole::ScriptConsole(QObject *parent)
 	: StelDialog(parent)
 	, highlighter(NULL)
 {
+	dialogName = "ScriptConsole";
 	ui = new Ui_scriptConsoleForm;
 }
 

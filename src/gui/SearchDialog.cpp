@@ -128,6 +128,7 @@ const char* SearchDialog::DEF_SIMBAD_URL = "http://simbad.u-strasbg.fr/";
 
 SearchDialog::SearchDialog(QObject* parent) : StelDialog(parent), simbadReply(NULL)
 {
+	dialogName = "Search";
 	ui = new Ui_searchDialogForm;
 	simbadSearcher = new SimbadSearcher(this);
 	objectMgr = GETSTELMODULE(StelObjectMgr);

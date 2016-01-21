@@ -27,6 +27,7 @@ AtmosphereDialog::AtmosphereDialog()
 	, extinction(NULL)
 
 {
+	dialogName = "Atmosphere";
 	ui = new Ui_atmosphereDialogForm;
 }
 

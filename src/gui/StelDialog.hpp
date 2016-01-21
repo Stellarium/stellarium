@@ -79,6 +79,8 @@ protected:
 	//! The main dialog
 	QWidget* dialog;
 	class CustomProxy* proxy;
+	//! The name should be set in derived classes' constructors and can be used to store and retrieve the panel locations.
+	QString dialogName;
 
 #ifdef Q_OS_WIN
 	//! Kinetic scrolling for lists.
