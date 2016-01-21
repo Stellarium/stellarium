@@ -1592,7 +1592,11 @@ bool SolarSystem::getFlagTranslatedNames() const
 
 void SolarSystem::setFlagIsolatedTrails(bool b)
 {
-	flagIsolatedTrails = b;
+	if(b!=flagIsolatedTrails)
+	{
+		flagIsolatedTrails = b;
+		emit flagIsolatedTrailsChanged(b);
+	}
 }
 
 bool SolarSystem::getFlagIsolatedTrails() const
