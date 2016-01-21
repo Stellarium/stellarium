@@ -150,6 +150,7 @@ void ConfigurationDialog::createDialogContent()
 	ui->stackListWidget->setCurrentRow(0);
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	// Main tab
 	// Fill the language list widget from the available list

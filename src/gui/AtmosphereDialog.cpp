@@ -50,6 +50,7 @@ void AtmosphereDialog::createDialogContent()
 	//Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	const StelSkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
 	ui->pressureDoubleSpinBox->setValue(skyDrawer->getAtmospherePressure());
