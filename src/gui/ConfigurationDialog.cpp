@@ -78,6 +78,7 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
 	, progressBar(NULL)
 	, gui(agui)
 {
+	dialogName = "Configuration";
 	ui = new Ui_configurationDialogForm;
 	customDeltaTEquationDialog = NULL;
 	hasDownloadedStarCatalog = false;

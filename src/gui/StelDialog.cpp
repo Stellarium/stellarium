@@ -63,6 +63,11 @@ class CustomProxy : public QGraphicsProxyWidget
 					case QEvent::GrabMouse:
 						widget()->setWindowOpacity(0.9);
 						break;
+						// GZ Add moving events!
+					case QEvent::Drop:
+						// TODO: Store panel locations. HOW TO RETRIEVE DIALOG NAME?
+						//widget()->
+						qDebug() << "panel location changed to " << pos();
 					default:
 						break;
 				}
@@ -137,9 +142,22 @@ void StelDialog::setVisible(bool v)
 		proxy->setWidget(dialog);
 		QSizeF size = proxy->size();
 
-		// centre with dialog according to current window size.
-		int newX = (int)((screenSize.width() - size.width())/2);
-		int newY = (int)((screenSize.height() - size.height())/2);
+		int newX, newY;
+
+		// Retrieve panel locations from config.ini, but shift if required to a visible position.
+		// else centre dialog according to current window size.
+		QSettings *conf=StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		QString confNameX="DialogPositions/" + dialogName + "_x";
+		QString confNameY="DialogPositions/" + dialogName + "_y";
+		newX=conf->value(confNameX, (int)((screenSize.width()  - size.width() )/2)).toInt();
+		newY=conf->value(confNameY, (int)((screenSize.height() - size.height())/2)).toInt();
+
+		if (newX>=screenSize.width())
+			newX= (screenSize.width()  - dialog->size().width());
+		if (newY>=screenSize.height())
+			newY= (screenSize.height() - dialog->size().height());
+
 		// Make sure that the window's title bar is accessible
 		if (newY <-0)
 			newY = 0;

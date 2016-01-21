@@ -43,6 +43,7 @@
 
 LocationDialog::LocationDialog(QObject* parent) : StelDialog(parent), isEditingNew(false)
 {
+	dialogName = "Location";
 	ui = new Ui_locationDialogForm;
 }
 

@@ -43,6 +43,7 @@ DateTimeDialog::DateTimeDialog(QObject* parent) :
   mjd(0)
 {
 	ui = new Ui_dateTimeDialogForm;
+	dialogName = "DateTime";
 }
 
 DateTimeDialog::~DateTimeDialog()

@@ -28,6 +28,7 @@
 
 CustomDeltaTEquationDialog::CustomDeltaTEquationDialog()
 {
+	dialogName = "CustomDeltaTEquation";
 	ui = new Ui_customDeltaTEquationDialogForm;
 	conf = StelApp::getInstance().getSettings();
 	core = StelApp::getInstance().getCore();
