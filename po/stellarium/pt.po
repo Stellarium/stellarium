@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-17 15:39+0600\n"
-"PO-Revision-Date: 2015-12-05 12:32+0000\n"
+"PO-Revision-Date: 2016-01-19 23:07+0000\n"
 "Last-Translator: Tiago S. <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-18 05:23+0000\n"
+"X-Launchpad-Export-Date: 2016-01-21 05:12+0000\n"
 "X-Generator: Launchpad (build 17886)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -1861,11 +1861,11 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1256 src/gui/ConfigurationDialog.cpp:1265
 msgid "Available"
-msgstr ""
+msgstr "Disponível"
 
 #: src/gui/ConfigurationDialog.cpp:1258 src/gui/ConfigurationDialog.cpp:1267
 msgid "Not Available"
-msgstr ""
+msgstr "Não Disponível"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1330
@@ -5481,40 +5481,46 @@ msgstr "Idioma da cultura do céu"
 
 #: src/ui_configurationDialog.h:1086
 msgid "Ephemeris settings"
-msgstr ""
+msgstr "Definições de Efemérides"
 
 #: src/ui_configurationDialog.h:1087 src/ui_configurationDialog.h:1088
 msgid "Not installed"
-msgstr ""
+msgstr "Não instalado"
 
 #: src/ui_configurationDialog.h:1090
 msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
 msgstr ""
+"DE431 fornece os dados de posição para os anos 13000...+17000. Somente para "
+"aplicações especiais."
 
 #: src/ui_configurationDialog.h:1092
 msgid "Use DE431 (long-time data)"
-msgstr ""
+msgstr "Utilizar DE431 (dados de tempo longínquo)"
 
 #: src/ui_configurationDialog.h:1094
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
-msgstr ""
+msgstr "DE430 oferece a maior precisão mas somente para os anos 1550...2650."
 
 #: src/ui_configurationDialog.h:1096
 msgid "Use DE430 (high accuracy)"
-msgstr ""
+msgstr "Utilizar DE430 (alta precisão)"
 
 #: src/ui_configurationDialog.h:1098
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
 msgstr ""
+"Utilizar VSOP87 é recomendado somente para os anos -4000...+8000 mas oferece "
+"posições úteis fora deste intervalo."
 
 #: src/ui_configurationDialog.h:1100
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
+"VSOP87/ELP2000-82B é utilizados quando estes não estão instalados ou estejam "
+"inativos"
 
 #: src/ui_configurationDialog.h:1101
 msgid "Default options"
