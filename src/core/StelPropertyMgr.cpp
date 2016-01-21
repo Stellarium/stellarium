@@ -9,7 +9,7 @@ StelProperty::StelProperty(const QString &id, QObject* target, const char* propI
 	//check if this property name is already defined, print an error if it is
 	if(parent()->findChild<StelProperty*>(id,Qt::FindDirectChildrenOnly))
 	{
-		qFatal("Fatal error: StelProperty '%s' has already been registered!", qUtf8Printable(id));
+		qFatal("Fatal error: StelProperty '%s' has already been registered!", id.toUtf8().constData());
 	}
 	setObjectName(id);
 
@@ -18,18 +18,18 @@ StelProperty::StelProperty(const QString &id, QObject* target, const char* propI
 	int propIdx = metaObj->indexOfProperty(propId);
 	if(propIdx==-1)
 	{
-		qFatal("Fatal error: No Q_PROPERTY '%s' registered on class '%s'", propId, qUtf8Printable(metaObj->className()));
+		qFatal("Fatal error: No Q_PROPERTY '%s' registered on class '%s'", propId, metaObj->className());
 	}
 
 	prop = metaObj->property(propIdx);
 	//check if the property is valid and has a NOTIFY signal
 	if(!prop.isValid())
 	{
-		qFatal("Fatal error: Q_PROPERTY '%s' on class '%s' has no READ or MEMBER definition", propId, qUtf8Printable(metaObj->className()));
+		qFatal("Fatal error: Q_PROPERTY '%s' on class '%s' has no READ or MEMBER definition", propId, metaObj->className());
 	}
 	if(!prop.hasNotifySignal())
 	{
-		qFatal("Fatal error: Q_PROPERTY '%s' on class '%s' has no NOTIFY signal", propId, qUtf8Printable(metaObj->className()));
+		qFatal("Fatal error: Q_PROPERTY '%s' on class '%s' has no NOTIFY signal", propId, metaObj->className());
 	}
 	//qDebug()<<prop.name()<<prop.type()<<prop.typeName();
 
@@ -110,7 +110,7 @@ StelProperty* StelPropertyMgr::registerProperty(const QString& id, QObject* targ
 	//this may reveal if a qRegisterMetaType or similar is needed
 	QVariant value = prop->getValue();
 	if(!value.isValid())
-		qFatal("StelProperty %s can not be read. Missing READ or need to register MetaType?",qUtf8Printable(id));
+		qFatal("StelProperty %s can not be read. Missing READ or need to register MetaType?",id.toUtf8().constData());
 
 	connect(prop, SIGNAL(changed(QVariant)), this, SLOT(onStelPropChanged(QVariant)));
 	qDebug()<<"StelProperty"<<id<<"registered, value"<<value;
