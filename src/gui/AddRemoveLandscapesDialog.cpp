@@ -32,6 +32,7 @@
 
 AddRemoveLandscapesDialog::AddRemoveLandscapesDialog()
 {
+	dialogName = "AddRemoveLandscapes";
 	ui = new Ui_addRemoveLandscapesDialogForm;
 	landscapeManager = GETSTELMODULE(LandscapeMgr);
 	lastUsedDirectoryPath = QDir::homePath();

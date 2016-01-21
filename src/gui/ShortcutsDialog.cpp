@@ -65,6 +65,7 @@ ShortcutsDialog::ShortcutsDialog(QObject* parent) :
 	filterModel(new ShortcutsFilterModel(this)),
 	mainModel(new QStandardItemModel(this))
 {
+	dialogName = "Shortcuts";
 	actionMgr = StelApp::getInstance().getStelActionManager();
 }
 

@@ -53,6 +53,7 @@
 HelpDialog::HelpDialog(QObject* parent)
 	: StelDialog(parent)
 {
+	dialogName = "Help";
 	ui = new Ui_helpDialogForm;
 }
 

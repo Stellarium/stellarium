@@ -58,6 +58,7 @@
 
 ViewDialog::ViewDialog(QObject* parent) : StelDialog(parent)
 {
+	dialogName = "View";
 	ui = new Ui_viewDialogForm;
 	addRemoveLandscapesDialog = NULL;
 	atmosphereDialog=NULL;

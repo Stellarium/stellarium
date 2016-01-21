@@ -36,6 +36,7 @@
 AstroCalcDialog::AstroCalcDialog(QObject *parent)
 	: StelDialog(parent)
 {
+	dialogName = "AstroCalc";
 	ui = new Ui_astroCalcDialogForm;
 	core = StelApp::getInstance().getCore();
 	solarSystem = GETSTELMODULE(SolarSystem);
