@@ -67,6 +67,8 @@ public slots:
 	void setVisible(bool);
 	//! Closes the window (the window widget is not deleted, just not visible).
 	void close();
+	//! Adds dialog location to config.ini; should be connected in createDialogContent()
+	void handleMovedTo(QPoint newPos);
 signals:
 	void visibleChanged(bool);
 private slots:
