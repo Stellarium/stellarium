@@ -331,6 +331,7 @@ void SearchDialog::createDialogContent()
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)),
 		this, SLOT(onSearchTextChanged(const QString&)));
 	connect(ui->pushButtonGotoSearchSkyObject, SIGNAL(clicked()), this, SLOT(gotoObject()));

@@ -281,7 +281,8 @@ void ShortcutsDialog::switchToEditors(const QModelIndex& index)
 void ShortcutsDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+
 	resetModel();
 	filterModel->setSourceModel(mainModel);
 	filterModel->setFilterCaseSensitivity(Qt::CaseInsensitive);

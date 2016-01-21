@@ -63,11 +63,6 @@ class CustomProxy : public QGraphicsProxyWidget
 					case QEvent::GrabMouse:
 						widget()->setWindowOpacity(0.9);
 						break;
-						// GZ Add moving events!
-					case QEvent::Drop:
-						// TODO: Store panel locations. HOW TO RETRIEVE DIALOG NAME?
-						//widget()->
-						qDebug() << "panel location changed to " << pos();
 					default:
 						break;
 				}
@@ -143,15 +138,29 @@ void StelDialog::setVisible(bool v)
 		QSizeF size = proxy->size();
 
 		int newX, newY;
+		QPoint storedPos;
 
 		// Retrieve panel locations from config.ini, but shift if required to a visible position.
 		// else centre dialog according to current window size.
 		QSettings *conf=StelApp::getInstance().getSettings();
 		Q_ASSERT(conf);
-		QString confNameX="DialogPositions/" + dialogName + "_x";
-		QString confNameY="DialogPositions/" + dialogName + "_y";
-		newX=conf->value(confNameX, (int)((screenSize.width()  - size.width() )/2)).toInt();
-		newY=conf->value(confNameY, (int)((screenSize.height() - size.height())/2)).toInt();
+		QString confNamePt="DialogPositions/" + dialogName;
+		QString storedPosString=conf->value(confNamePt,
+						    QString("%1,%2")
+						    .arg((int)((screenSize.width()  - size.width() )/2))
+						    .arg((int)((screenSize.height() - size.height())/2)))
+				.toString();
+		QStringList posList=storedPosString.split(",");
+		if (posList.length()==2)
+		{
+			newX=posList.at(0).toInt();
+			newY=posList.at(1).toInt();
+		}
+		else	// in case there is an invalid string?
+		{
+			newX=(int)((screenSize.width()  - size.width() )/2);
+			newY=(int)((screenSize.height() - size.height())/2);
+		}
 
 		if (newX>=screenSize.width())
 			newX= (screenSize.width()  - dialog->size().width());
@@ -201,4 +210,11 @@ void StelDialog::installKineticScrolling(QList<QWidget *> addscroll)
 void StelDialog::updateNightModeProperty()
 {
 	dialog->setProperty("nightMode", StelApp::getInstance().getVisionModeNight());
+}
+
+void StelDialog::handleMovedTo(QPoint newPos)
+{
+	QSettings *conf=StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	conf->setValue("DialogPositions/" + dialogName, QString("%1,%2").arg(newPos.x()).arg(newPos.y()));
 }
