@@ -143,6 +143,8 @@ void StelAddOnMgr::reloadCatalogues()
 
 	// download thumbnails
 	refreshThumbnailQueue();
+
+	emit(updateTableViews());
 }
 
 QHash<QString, AddOn*> StelAddOnMgr::loadAddonCatalog(QString jsonPath) const
@@ -393,6 +395,7 @@ void StelAddOnMgr::installAddOn(AddOn* addon, bool tryDownload)
 		downloadNextAddOn();
 	}
 
+	reloadCatalogues();
 	emit (dataUpdated(addon));
 }
 
@@ -449,6 +452,8 @@ void StelAddOnMgr::removeAddOn(AddOn* addon)
 		emit (addOnMgrMsg(RestartRequired));
 		addon->setStatus(AddOn::Restart);
 	}
+
+	reloadCatalogues();
 	emit (dataUpdated(addon));
 }
 
