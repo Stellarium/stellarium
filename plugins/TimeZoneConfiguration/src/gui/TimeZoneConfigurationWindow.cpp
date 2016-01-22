@@ -29,6 +29,7 @@
 TimeZoneConfigurationWindow::TimeZoneConfigurationWindow()
 {
 	ui = new Ui_timeZoneConfigurationWindowForm();
+	dialogName = "TimeZoneConfiguration";
 	timeZoneConfiguration = GETSTELMODULE(TimeZoneConfiguration);
 	defineTimeZoneWindow = NULL;
 }
@@ -55,6 +56,7 @@ void TimeZoneConfigurationWindow::createDialogContent()
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveTimeZoneSettings()));
 	connect(ui->pushButtonEditTimeZone, SIGNAL(clicked()), this, SLOT(openDefineTimeZoneWindow()));
 
