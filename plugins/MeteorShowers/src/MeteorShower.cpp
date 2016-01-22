@@ -272,7 +272,7 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 		}
 	}
 
-	// going forward or backward ?
+	// paused | forward | backward ?
 	// don't create new meteors
 	if(!core->getRealTimeSpeed())
 	{
