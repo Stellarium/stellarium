@@ -75,7 +75,7 @@ StelAddOnMgr::StelAddOnMgr()
 	}
 	else // If no settings were found, create it with default values
 	{
-		qDebug() << "StelAddOnMgr: no AddOn section exists in main config file - creating with defaults";
+		qDebug() << "[Add-on] The main config file does not have an AddOn section - creating with defaults";
 		m_pConfig->beginGroup("AddOn");
 		// delete all existing settings...
 		m_pConfig->remove("");
@@ -153,7 +153,7 @@ QHash<QString, AddOn*> StelAddOnMgr::loadAddonCatalog(QString jsonPath) const
 	QFile jsonFile(jsonPath);
 	if (!jsonFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Add-On Mgr: Cannot open the catalog!"
+		qWarning() << "[Add-on] Cannot open the catalog!"
 			   << QDir::toNativeSeparators(jsonPath);
 		return addons;
 	}
@@ -164,11 +164,11 @@ QHash<QString, AddOn*> StelAddOnMgr::loadAddonCatalog(QString jsonPath) const
 	if (json["name"].toString() != "Add-ons Catalog" ||
 		json["format"].toInt() != ADDON_MANAGER_CATALOG_VERSION)
 	{
-		qWarning()  << "Add-On Mgr: The current catalog is not compatible!";
+		qWarning()  << "[Add-on] The current catalog is not compatible!";
 		return addons;
 	}
 
-	qDebug() << "Add-On Mgr: loading catalog file:"
+	qDebug() << "[Add-on] loading catalog file:"
 		 << QDir::toNativeSeparators(jsonPath);
 
 	QVariantMap map = json["add-ons"].toObject().toVariantMap();
@@ -191,7 +191,7 @@ void StelAddOnMgr::restoreDefaultAddonJsonFile()
 	QFile(m_sAddonJsonPath).remove(); // always overwrite
 	if (defaultJson.copy(m_sAddonJsonPath))
 	{
-		qDebug() << "Add-On Mgr: default_" % m_sAddonJsonFilename % " was copied to " % m_sAddonJsonPath;
+		qDebug() << "[Add-on] default_" % m_sAddonJsonFilename % " was copied to " % m_sAddonJsonPath;
 		QFile jsonFile(m_sAddonJsonPath);
 		jsonFile.setPermissions(jsonFile.permissions() | QFile::WriteOwner);
 		// cleaning last_update var
@@ -200,7 +200,7 @@ void StelAddOnMgr::restoreDefaultAddonJsonFile()
 	}
 	else
 	{
-		qWarning() << "Add-On Mgr: cannot copy JSON resource to"
+		qWarning() << "[Add-on] cannot copy JSON resource to"
 			   << QDir::toNativeSeparators(m_sAddonJsonPath);
 	}
 }
@@ -308,7 +308,7 @@ void StelAddOnMgr::installAddOnFromFile(QString filePath)
 		if (addon->getChecksum() != addonInHash->getChecksum())
 		{
 			// TODO: asks the user if he wants to overwrite?
-			qWarning() << "AddOn Mgr : An addon ("
+			qWarning() << "[Add-on] An addon ("
 				   << addon->getTypeString()
 				   << ") with the ID"
 				   << addon->getAddOnId()
@@ -340,7 +340,7 @@ void StelAddOnMgr::installAddOn(AddOn* addon, bool tryDownload)
 	}
 	else if (!addon || !addon->isValid())
 	{
-		qWarning() << "Add-On Mgr : Unable to install"
+		qWarning() << "[Add-on] Unable to install"
 			   << QDir::toNativeSeparators(addon->getDownloadFilepath())
 			   << "AddOn is not compatible!";
 		return;
@@ -356,14 +356,14 @@ void StelAddOnMgr::installAddOn(AddOn* addon, bool tryDownload)
 	else if (!addon->getDownloadFilepath().endsWith(".zip"))
 	{
 		addon->setStatus(AddOn::InvalidFormat);
-		qWarning() << "Add-On Mgr: Error" << addon->getAddOnId()
+		qWarning() << "[Add-on] Error" << addon->getAddOnId()
 			   << "The file found is not a .zip archive";
 	}
 	// checking integrity
 	else if (addon->getChecksum() != calculateMd5(file))
 	{
 		addon->setStatus(AddOn::Corrupted);
-		qWarning() << "Add-On Mgr: Error: File "
+		qWarning() << "[Add-on] Error: File "
 			   << QDir::toNativeSeparators(addon->getDownloadFilepath())
 			   << " is corrupt, MD5 mismatch!";
 	}
@@ -478,7 +478,7 @@ AddOn* StelAddOnMgr::getAddOnFromZip(QString filePath)
 		if (!data.isEmpty())
 		{
 			QJsonObject json(QJsonDocument::fromJson(data).object());
-			qDebug() << "Add-On Mgr: loading catalog file:"
+			qDebug() << "[Add-on] loading catalog file:"
 				 << QDir::toNativeSeparators(info.filePath);
 
 			QString addonId = json.keys().at(0);
@@ -643,7 +643,7 @@ void StelAddOnMgr::finishCurrentDownload()
 
 void StelAddOnMgr::cancelAllDownloads()
 {
-	qDebug() << "Add-On Mgr: Canceling all downloads!";
+	qDebug() << "[Add-on] Canceling all downloads!";
 	finishCurrentDownload();
 	m_downloadingAddOn = NULL;
 	m_downloadQueue.clear();
@@ -706,7 +706,7 @@ void StelAddOnMgr::unzip(AddOn& addon)
 		file.write(data);
 		file.close();
 		installedFiles.append(fileInfo.absoluteFilePath());
-		qDebug() << "StelAddOnMgr: New file installed:" << info.filePath;
+		qDebug() << "[Add-on] New file installed:" << info.filePath;
 	}
 	installedFiles.removeDuplicates();
 	addon.setInstalledFiles(installedFiles);

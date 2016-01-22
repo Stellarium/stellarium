@@ -229,13 +229,13 @@ void AddOnDialog::downloadFinished()
 		}
 		else
 		{
-			qWarning() << "AddOnDialog : unable to update the database! cannot write json file";
+			qWarning() << "[Add-on] unable to update the database! cannot write json file";
 			ui->txtLastUpdate->setText(q_("Database update failed!"));
 		}
 	}
 	else
 	{
-		qWarning() << "AddOnDialog : unable to update the database!" << m_pUpdateCatalogReply->errorString();
+		qWarning() << "[Add-on] unable to update the database!" << m_pUpdateCatalogReply->errorString();
 		ui->txtLastUpdate->setText(q_("Database update failed!"));
 	}
 

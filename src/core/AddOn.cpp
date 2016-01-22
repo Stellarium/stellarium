@@ -38,7 +38,7 @@ AddOn::AddOn(const QString addonId, const QVariantMap& map)
 	m_sTypeDisplayRole = typeToDisplayRole(m_eType);
 	if (m_eType == INVALID)
 	{
-		qWarning() << "Add-On Catalog : Error! Add-on" << m_sAddonId
+		qWarning() << "[Add-on] Error! Add-on" << m_sAddonId
 			   << "does not have a valid type!";
 		return;
 	}
@@ -65,7 +65,7 @@ AddOn::AddOn(const QString addonId, const QVariantMap& map)
 		|| m_sDownloadURL.isEmpty() || m_sDownloadFilename.isEmpty()
 		|| m_sDownloadSize.isEmpty())
 	{
-		qWarning() << "Add-On Catalog : Error! Add-on" << m_sAddonId
+		qWarning() << "[Add-on] Error! Add-on" << m_sAddonId
 			   << "does not have all the required fields!";
 		return;
 	}
@@ -76,7 +76,7 @@ AddOn::AddOn(const QString addonId, const QVariantMap& map)
 		// a texture must have "textures"
 		if (m_AllTextures.isEmpty())
 		{
-			qWarning() << "Add-On Catalog : Error! Texture" << m_sAddonId
+			qWarning() << "[Add-on] Error! Texture" << m_sAddonId
 				   << "does not have the field \"textures\"!";
 			return;
 		}

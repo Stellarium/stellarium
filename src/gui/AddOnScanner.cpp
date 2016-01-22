@@ -98,7 +98,7 @@ void AddOnScanner::slotRemoveAll()
 		}
 		else
 		{
-			qWarning() << "Add-On Scanner - Unable to remove"
+			qWarning() << "[Add-on] Unable to remove"
 				   << addon->getDownloadFilepath();
 		}
 	}
@@ -116,7 +116,7 @@ void AddOnScanner::slotRemoveIncompatibles()
 			}
 			else
 			{
-				qWarning() << "Add-On Scanner - Unable to remove"
+				qWarning() << "[Add-on] Unable to remove"
 					   << addon->getDownloadFilepath();
 			}
 		}
