@@ -42,6 +42,7 @@ TelescopeConfigurationDialog::TelescopeConfigurationDialog()
 	: configuredSlot(0)
 {
 	ui = new Ui_telescopeConfigurationDialog;
+	dialogName = "TelescopeControlConfiguration";
 	
 	telescopeManager = GETSTELMODULE(TelescopeControl);
 
@@ -117,6 +118,7 @@ void TelescopeConfigurationDialog::createDialogContent()
 	//Inherited connect
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(buttonDiscardPressed()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(dialog, SIGNAL(rejected()), this, SLOT(buttonDiscardPressed()));
 	
 	//Connect: sender, signal, receiver, member

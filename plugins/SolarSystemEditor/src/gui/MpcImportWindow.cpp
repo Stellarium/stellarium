@@ -58,6 +58,7 @@ MpcImportWindow::MpcImportWindow()
 	, countdown(0)
 {
 	ui = new Ui_mpcImportWindow();
+	dialogName = "SolarSystemEditorMPCimport";
 	ssoManager = GETSTELMODULE(SolarSystemEditor);
 
 	networkManager = StelApp::getInstance().getNetworkAccessManager();
@@ -95,6 +96,7 @@ void MpcImportWindow::createDialogContent()
 	//Signals
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->pushButtonAcquire, SIGNAL(clicked()),
 	        this, SLOT(acquireObjectData()));
