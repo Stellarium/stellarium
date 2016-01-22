@@ -29,6 +29,7 @@
 DefineTimeZoneWindow::DefineTimeZoneWindow()
 {
 	ui = new Ui_defineTimeZoneForm();
+	dialogName = "TimeZoneConfigurationDefineTimeZone";
 	timeZoneNameValidator = new QRegExpValidator(QRegExp("[^:\\d,+-/]{3,}"), this);
 }
 
@@ -70,6 +71,7 @@ void DefineTimeZoneWindow::createDialogContent()
 	        this, SLOT(retranslate()));
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->pushButtonUseDefinition, SIGNAL(clicked()),
 	        this, SLOT(useDefinition()));
 

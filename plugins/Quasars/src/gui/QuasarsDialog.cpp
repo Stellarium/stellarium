@@ -42,6 +42,7 @@ QuasarsDialog::QuasarsDialog()
 	, updateTimer(NULL)
 {
 	ui = new Ui_quasarsDialog;
+	dialogName = "Quasars";
 }
 
 QuasarsDialog::~QuasarsDialog()
@@ -95,6 +96,7 @@ void QuasarsDialog::createDialogContent()
 	updateTimer->start(7000);
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
