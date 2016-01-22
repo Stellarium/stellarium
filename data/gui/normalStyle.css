@@ -775,37 +775,20 @@ QHeaderView::section {
 }
 
 /**************** Add-On Dialog ***************/
-
 AddOnTableView {
-	font-size: 12px;
+	font-size: 10px;
 	color: rgb(0, 0, 0);
 	background-color: transparent;
-	background-origin: border;
 }
 
 AddOnTableView::item {
-	margin: 3px;
-	border: 1px solid rgba(0, 0, 0, 10%);
-	border-style: inset;
-	border-radius: 10px;
-	background-origin: border;
+	margin: 0px;
 	background-color: rgba(149, 150, 152, 20%);
 }
 
 AddOnTableView::item:selected {
 	margin: 0px;
-	border: none;
-	border-radius: 0px;
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(177, 130, 43), stop: 1 rgb(210, 207, 133));
-}
-
-AddOnHeader::section {
-	background-color: rgb(31, 31, 31);
-	color: rgb(255, 255, 255);
-	border: 1px solid rgb(108, 108, 108);
-	font: bold;
-	font-size: 12px;
-	padding-left: 4px;
 }
 
 QGroupBox#addOnDialogButtons, QGroupBox#addOnDialogCatalog {
