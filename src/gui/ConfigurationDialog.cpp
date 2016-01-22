@@ -812,6 +812,11 @@ void ConfigurationDialog::setDefaultViewOptions()
 	Q_ASSERT(conf);
 
 	conf->setValue("main/restore_defaults", true);
+	// reset all stored panel locations
+	conf->beginGroup("DialogPositions");
+	conf->remove("");
+	conf->endGroup();
+
 }
 
 void ConfigurationDialog::populatePluginsList()
