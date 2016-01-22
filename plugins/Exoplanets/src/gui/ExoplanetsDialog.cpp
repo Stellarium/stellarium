@@ -43,6 +43,7 @@ ExoplanetsDialog::ExoplanetsDialog()
 	, updateTimer(NULL)
 {
         ui = new Ui_exoplanetsDialog;
+	dialogName = "Exoplanets";
 }
 
 ExoplanetsDialog::~ExoplanetsDialog()
@@ -109,6 +110,7 @@ void ExoplanetsDialog::createDialogContent()
 	updateTimer->start(7000);
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));

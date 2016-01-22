@@ -46,6 +46,9 @@
 %----------------------------------------------------------------------------------------
 
 \input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
+%\usepackage{fancyvrb}
+\usepackage{color}
+\usepackage{listings}
 
 % Emergency definition as this is not in MiKTeX.
 \makeatletter
@@ -55,6 +58,46 @@
 \def\@textsubscript#1{%
   {\m@th\ensuremath{_{\mbox{\fontsize\sf@size\z@#1}}}}}
 \makeatother
+
+
+%% GZ Somme commands which can be used later, like version number etc.
+%% Also, some typesetting macros given here once are better than immediate formatting.
+
+\newcommand{\StelVersion}{0.15.0}
+\newcommand{\DocumentEdition}{1}
+
+%% File names. 
+\newcommand{\file}[1]{\texttt{#1}}
+%% Keypress buttons. This is just a font change now, but can be a boxed key or such.
+\newcommand{\key}[1]{\textbf{\textsf{#1}}}
+%% Person names. In some places they have been italicised, in others bold. Make them appear the same with this, and add them to the index:
+\newcommand{\name}[1]{\textsc{#1}\index{#1}}
+%% Some new term that is presented here with emphasis and also goes immediately to the index. 
+\newcommand{\indexterm}[1]{\emph{#1}\index{#1}}
+
+%% A few units. Add what you need in the same style here.
+\newcommand{\cm}{\ensuremath{\,\mathrm{cm}}}
+\newcommand{\mm}{\ensuremath{\,\mathrm{mm}}}
+\newcommand{\km}{\ensuremath{\,\mathrm{km}}}
+\newcommand{\um}{\ensuremath{\,\mathrm{\mu m}}}
+\newcommand{\AU}{\ensuremath{\,\mathrm{AU}}}
+\newcommand{\LY}{\ensuremath{\,\mathrm{LY}}}
+\newcommand{\pc}{\ensuremath{\,\mathrm{pc}}}
+\newcommand{\kpc}{\ensuremath{\,\mathrm{kpc}}}
+\newcommand{\Mpc}{\ensuremath{\,\mathrm{Mpc}}}
+
+%\newenvironment{commands}{\begin{wBox}\begin{Verbatim}}{\end{Verbatim}\end{wBox}}
+%\DefineVerbatimEnvironment{commands}{\begin{wBox}\begin{Verbatim}}{\end{Verbatim}\end{wBox}}
+%\lstnewenvironment{commands}{\begin{wBox}\lstset{basicstyle=\ttfamily}\begin{lstlisting}}{\end{lstlisting}\end{wBox}}
+\lstnewenvironment{commands}{\lstset{language=sh,basicstyle=\ttfamily\small,%
+                                     backgroundcolor=\color{black!5},frame=leftline,rulecolor=\color{blue},framerule=1pt}%
+                             }{}%
+\lstnewenvironment{configfile}{\lstset{language=sh,basicstyle=\ttfamily\small,%
+                                   backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
+                             }{}%
+
+
+
 
 \begin{document}
 
@@ -69,9 +112,13 @@
 \node at (current page.north west)
 {\begin{tikzpicture}[remember picture,overlay]
 \node[anchor=north west,inner sep=0pt] at (0,0) {\includegraphics[width=\paperwidth]{bookcover}}; % Background image
-\draw[anchor=north] (midpoint) node [fill=ocre!30!white,fill opacity=0.6,text opacity=1,inner sep=1cm]{\Huge\centering\bfseries\sffamily\parbox[c][][t]{\paperwidth}{\centering Stellarium User Guide\\[18pt] % Book title
-{\Large Version 0.15.0-1}\\[15pt] % Subtitle
-{\Large Matthew Gates, Alexander Wolf, Barry Gerdes, Georg Zotti}}}; % Author name
+\draw[anchor=north] (midpoint) node [fill=ocre!30!white,fill opacity=0.6,text opacity=1,inner sep=1cm]%
+     {\Huge\centering\bfseries\sffamily\parbox[c][][t]{\paperwidth}%
+                                              {\centering Stellarium User Guide\\[18pt] % Book title
+                                              {\Large Matthew Gates, Alexander Wolf, Barry Gerdes, Georg Zotti}\\[15pt]% Author names
+                                              {\Large Version \StelVersion-\DocumentEdition}\\[15pt]% Version like 0.15.0-1
+                                              {\Large 2016}% Year
+                                             }}; % 
 \end{tikzpicture}};
 \end{tikzpicture}
 \vfill
@@ -86,13 +133,13 @@
 \thispagestyle{empty}
 
 \noindent Copyright \copyright\ 2006-2009 Matthew Gates.\\ % Copyright notice
-\noindent Copyright \copyright\ 2011-2015 Alexander Wolf.\\ % Copyright notice
+\noindent Copyright \copyright\ 2011-2016 Alexander Wolf.\\ % Copyright notice
 \noindent Copyright \copyright\ 2013-2014 Barry Gerdes.\\ % Copyright notice
-\noindent Copyright \copyright\ 2014-2015 Georg Zotti.\\ % Copyright notice
+\noindent Copyright \copyright\ 2014-2016 Georg Zotti.\\ % Copyright notice
 
 \noindent \textsc{stellarium.org}\\ % URL
 
-\noindent Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License, Version 1.2 or any later version published by the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. A copy of the license is included in the section entitled ``GNU Free Documentation License''.\\ % License information
+\noindent Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License, Version 1.2 or any later version published by the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. A copy of the license is included in section~\ref{ch:License} entitled ``GNU Free Documentation License''.\\ % License information
 
 \noindent \textit{A draft of version 0.15.0-1, \today} % Printing/edition date
 
@@ -110,6 +157,9 @@
 
 \pagestyle{fancy} % Print headers again
 
+
+%% There should be one source file per chapter. 
+%% Structural changes (chapter images etc.) should be in this main file to better have an overview.
 %----------------------------------------------------------------------------------------
 %	PART I
 %----------------------------------------------------------------------------------------
@@ -119,6 +169,7 @@
 %----------------------------------------------------------------------------------------
 %	CHAPTER 1 (Introduction)
 %----------------------------------------------------------------------------------------
+\chapterimage{chapter-t2-bg} % Chapter heading image
 
 \include{introduction}
 
@@ -126,8 +177,9 @@
 %----------------------------------------------------------------------------------------
 %	CHAPTER 2 (Installation)
 %----------------------------------------------------------------------------------------
+% \chapterimage{chapter-t2-bg} % Chapter heading image Did not change...
 
-\include{installation}
+\include{start}
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER 3 (Interface Guide)
@@ -151,19 +203,24 @@
 %----------------------------------------------------------------------------------------
 %	CHAPTER 5 (Advanced Use)
 %----------------------------------------------------------------------------------------
+\chapterimage{chapter-t3-bg} % Chapter heading image
 
-\include{advanced_use}
+\input{advanced_use}
+\input{landscapes}
+\input{dso} %% Maybe DSO is more a reference chapter? --> Appendix in this case? Or split?
 
 
 %----------------------------------------------------------------------------------------
 %	PART III
 %----------------------------------------------------------------------------------------
 
-\part{Extra Stuff}
-
-\include{built-in_plugins}
-
-\include{scripts}
+\part{Extending Stellarium}
+\chapterimage{chapter-t3-bg} % Chapter heading image
+\input{plugins}
+\chapterimage{chapter-bg.png} % Chapter heading image
+\input{plugins_builtin}
+%\input{plugins_external} %% This must be written...
+\input{scripting}
 
 %----------------------------------------------------------------------------------------
 %	PART IV
@@ -175,7 +232,7 @@
 %----------------------------------------------------------------------------------------
 %	CHAPTER X (Astronomical Concepts)
 %----------------------------------------------------------------------------------------
-
+\chapterimage{chapter-t4-bg} % Chapter heading image
 \include{astronomical_concepts}
 
 %----------------------------------------------------------------------------------------
@@ -193,14 +250,15 @@
 %----------------------------------------------------------------------------------------
 %	CHAPTER X (Exercises)
 %----------------------------------------------------------------------------------------
-
+\chapterimage{chapter-t4-bg} % Chapter heading image
 \include{exercises}
 
 %----------------------------------------------------------------------------------------
 %	PART V
 %----------------------------------------------------------------------------------------
 
-\part{Appendicies}
+\appendix
+\part{Appendices}
 
 
 %----------------------------------------------------------------------------------------
@@ -212,15 +270,9 @@
 %----------------------------------------------------------------------------------------
 %	CHAPTER X (Star Catalogue)
 %----------------------------------------------------------------------------------------
+\chapterimage{chapter-t1-bg} % Chapter heading image
 
 \include{star_catalogue}
-
-
-%----------------------------------------------------------------------------------------
-%	CHAPTER X (License)
-%----------------------------------------------------------------------------------------
-
-\include{license}
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER X (Acknowledgements)
@@ -228,6 +280,12 @@
 
 \include{acknowledgements}
 
+%----------------------------------------------------------------------------------------
+%	CHAPTER X (License)
+%----------------------------------------------------------------------------------------
+
+\chapterimage{chapter-t1-bg} % Chapter heading image
+\include{license}
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
@@ -255,3 +313,9 @@
 %----------------------------------------------------------------------------------------
 
 \end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-PDF-mode: t
+%%% TeX-master: t
+%%% End: 

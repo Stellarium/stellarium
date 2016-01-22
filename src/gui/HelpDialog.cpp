@@ -53,6 +53,7 @@
 HelpDialog::HelpDialog(QObject* parent)
 	: StelDialog(parent)
 {
+	dialogName = "Help";
 	ui = new Ui_helpDialogForm;
 }
 
@@ -86,6 +87,7 @@ void HelpDialog::createDialogContent()
 	ui->stackedWidget->setCurrentIndex(0);
 	ui->stackListWidget->setCurrentRow(0);
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 #ifdef Q_OS_WIN
 	//Kinetic scrolling for tablet pc and pc

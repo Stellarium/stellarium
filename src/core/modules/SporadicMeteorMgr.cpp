@@ -70,15 +70,6 @@ void SporadicMeteorMgr::update(double deltaTime)
 		return;
 	}
 
-	StelCore* core = StelApp::getInstance().getCore();
-
-	// is paused?
-	// freeze meteors at the current position
-	if (!core->getTimeRate())
-	{
-		return;
-	}
-
 	// step through and update all active meteors
 	foreach (SporadicMeteor* m, activeMeteors)
 	{
@@ -87,6 +78,8 @@ void SporadicMeteorMgr::update(double deltaTime)
 			activeMeteors.removeOne(m);
 		}
 	}
+
+	StelCore* core = StelApp::getInstance().getCore();
 
 	// going forward/backward OR current ZHR is zero ?
 	// don't create new meteors

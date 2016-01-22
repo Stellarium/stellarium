@@ -60,6 +60,7 @@
 #include "SkyGui.hpp"
 #include "StelJsonParser.hpp"
 #include "StelTranslator.hpp"
+#include "EphemWrapper.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -78,6 +79,7 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
 	, progressBar(NULL)
 	, gui(agui)
 {
+	dialogName = "Configuration";
 	ui = new Ui_configurationDialogForm;
 	customDeltaTEquationDialog = NULL;
 	hasDownloadedStarCatalog = false;
@@ -149,6 +151,7 @@ void ConfigurationDialog::createDialogContent()
 	ui->stackListWidget->setCurrentRow(0);
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	// Main tab
 	// Fill the language list widget from the available list
@@ -172,6 +175,11 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->downloadCancelButton, SIGNAL(clicked()), this, SLOT(cancelDownload()));
 	connect(ui->downloadRetryButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
 	resetStarCatalogControls();
+
+	connect(ui->de430checkBox, SIGNAL(clicked()), this, SLOT(de430ButtonClicked()));
+	connect(ui->de431checkBox, SIGNAL(clicked()), this, SLOT(de431ButtonClicked()));
+	resetEphemControls();
+
 	ui->nutationCheckBox->setChecked(core->getUseNutation());
 	connect(ui->nutationCheckBox, SIGNAL(toggled(bool)), core, SLOT(setUseNutation(bool)));
 	ui->topocentricCheckBox->setChecked(core->getUseTopocentricCoordinates());
@@ -806,6 +814,11 @@ void ConfigurationDialog::setDefaultViewOptions()
 	Q_ASSERT(conf);
 
 	conf->setValue("main/restore_defaults", true);
+	// reset all stored panel locations
+	conf->beginGroup("DialogPositions");
+	conf->remove("");
+	conf->endGroup();
+
 }
 
 void ConfigurationDialog::populatePluginsList()
@@ -1213,6 +1226,55 @@ void ConfigurationDialog::downloadFinished()
 	}
 
 	resetStarCatalogControls();
+}
+
+void ConfigurationDialog::de430ButtonClicked()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
+	StelApp::getInstance().getCore()->setDe430Active(!StelApp::getInstance().getCore()->de430IsActive());
+	conf->setValue("astro/flag_use_de430", StelApp::getInstance().getCore()->de430IsActive());
+
+	resetEphemControls(); //refresh labels
+}
+
+void ConfigurationDialog::de431ButtonClicked()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
+	StelApp::getInstance().getCore()->setDe431Active(!StelApp::getInstance().getCore()->de431IsActive());
+	conf->setValue("astro/flag_use_de431", StelApp::getInstance().getCore()->de431IsActive());
+
+	resetEphemControls(); //refresh labels
+}
+
+void ConfigurationDialog::resetEphemControls()
+{
+	ui->de430checkBox->setEnabled(StelApp::getInstance().getCore()->de430IsAvailable());
+	ui->de431checkBox->setEnabled(StelApp::getInstance().getCore()->de431IsAvailable());
+	ui->de430checkBox->setChecked(StelApp::getInstance().getCore()->de430IsActive());
+	ui->de431checkBox->setChecked(StelApp::getInstance().getCore()->de431IsActive());
+
+	if(StelApp::getInstance().getCore()->de430IsActive())
+		ui->de430label->setText("1550..2650");
+	else
+	{
+		if (StelApp::getInstance().getCore()->de430IsAvailable())
+			ui->de430label->setText(q_("Available"));
+		else
+			ui->de430label->setText(q_("Not Available"));
+	}
+	if(StelApp::getInstance().getCore()->de431IsActive())
+		ui->de431label->setText("-13000..17000");
+	else
+	{
+		if (StelApp::getInstance().getCore()->de431IsAvailable())
+			ui->de431label->setText(q_("Available"));
+		else
+			ui->de431label->setText(q_("Not Available"));
+	}
 }
 
 void ConfigurationDialog::updateSelectedInfoCheckBoxes()

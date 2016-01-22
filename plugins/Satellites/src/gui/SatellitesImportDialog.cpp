@@ -44,6 +44,7 @@ SatellitesImportDialog::SatellitesImportDialog()
 	, filterProxyModel(NULL)
 {
 	ui = new Ui_satellitesImportDialog;
+	dialogName = "SatellitesImport";
 	newSatellitesModel = new QStandardItemModel(this);
 }
 
@@ -94,6 +95,8 @@ void SatellitesImportDialog::createDialogContent()
 	
 	connect(ui->closeStelWindow, SIGNAL(clicked()),
 	        this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)),
+		this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->pushButtonGetData, SIGNAL(clicked()),
 	        this, SLOT(getData()));

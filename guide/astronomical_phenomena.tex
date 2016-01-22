@@ -108,12 +108,14 @@ is Latin for ``The Great Dog'').
 
 There are several more formal naming conventions that are in common use.
 
-\subsubsection{Bayer Designation}\label{bayer-designation}
+\subsubsection{Bayer Designation}
+\label{sec:concept:Bayer}
+\index{Bayer}
 
-German astronomer \emph{Johan Bayer} devised one such system in the
+German astronomer \emph{Johann Bayer} devised one such system in the
 16-17th century. His scheme names the stars according to the
 constellation in which they lie prefixed by a lower case Greek letter,
-starting at $\alpha$ for the brightest star in the constellation and proceeding with $\beta, \gamma, ...$ in descending order of apparent magnitude. For example,
+starting at $\alpha$ for (usually) the brightest star in the constellation and proceeding with $\beta, \gamma, ...$ in descending order of apparent magnitude. For example,
 such a \emph{Bayer Designation} for Sirius is ``$\alpha$ Canis Majoris'' (note
 that the genitive form of the constellation name is used). There are
 some exceptions to the descending magnitude ordering, and some multiple
@@ -121,7 +123,9 @@ stars (both real and optical) are named with a numerical superscript
 after the Greek letter, e.g. $\pi$\textsuperscript{1}...
 $\pi$\textsuperscript{6} Orionis.
 
-\subsubsection{Flamsteed Designation}\label{flamsteed-designation}
+\subsubsection{Flamsteed Designation}
+\label{sec:concepts:Flamsteed}
+\index{Flamsteed}
 
 English astronomer \emph{John Flamsteed} numbered stars in each
 constellation in order of increasing right ascension followed by the
@@ -213,12 +217,12 @@ VII & White-dwarfs\tabularnewline
 Plotting the luminosity of stars against their spectral type/surface
 temperature, gives a diagram called a Hertzsprung-Russell diagram (after
 the two astronomers \emph{Ejnar Hertzsprung} and \emph{Henry Norris
-Russell} who devised it). A slight variation of this is see in figure
-{[}fig:colourmag{]} (which is technically a colour/magnitude plot).
+Russell} who devised it). A slight variation of this is shown in figure~\ref{fig:colourmag} (which is technically a colour/magnitude plot).
 
-\begin{figure}[h]
-\centering\includegraphics[scale=1.5]{colour_magnitude_graph}
-%\caption{Figure caption}
+\begin{figure}[tp]
+\centering\includegraphics[width=\textwidth]{colour_magnitude_graph}
+\label{fig:colourmag}
+\caption{Hertzsprung-Russell Diagram}
 \end{figure}
 
 \subsection{Variables}\label{variables}
@@ -605,7 +609,7 @@ white light, so use a red torch if possible (and one that is as dim as
 you can manage with). A single red LED light is ideal.
 
 \textbf{The Moon} Unless you're particularly interested in observing the
-Moon on a given night, it can be a nuisance-\/-\/-it can be so bright as
+Moon on a given night, it can be a nuisance---it can be so bright as
 to make observation of dimmer objects such as nebulae impossible. When
 planning what you want to observe, take the phase and position of the
 Moon into account. Of course Stellarium is the ideal tool for finding
@@ -617,42 +621,12 @@ object is slightly too dim to see directly, looking slightly off to the
 side but concentrating on the object's location can often reveal it.
 
 \textbf{Angular distance} Learn how to estimate angular distances. Learn
-the angular distances described in section {[}sec:handyangles{]}. If you
+the angular distances described in section~\ref{sec:concepts:units:angles:handyAngles}. If you
 have a pair of binoculars, find out the angular distance across the
 field of view and use this as a standard measure.
 
-\section{Handy Angles}\label{handy-angles}
 
-Being able to estimate angular distance can be very useful when trying
-to find objects from star maps in the sky. One way to do this with a
-device called a \emph{crossbow}.
-
-Crossbows are a nice way get an idea of angular distances, but carrying
-one about is a little cumbersome. A more convenient alternative is to
-hold up an object such as a pencil at arm's length. If you know the
-length of the pencil, d, and the distance of it from your eye, D, you
-can calculate it's angular size, $\theta$ using this formula:
-
-\begin{equation}
-\theta=2 \cdot \arctan{\left(\frac{d}{2 \cdot D}\right) }
-\end{equation}
-
-
-Another, more handy (ahem!) method is to use the size of your hand at
-arm's length:
-
-\textbf{Tip of little finger} About 1\degree
-
-\textbf{Middle three fingers} About 4\degree
-
-\textbf{Across the knuckles of the fist} About 10\degree
-
-\textbf{Open hand} About 18\degree
-
-Using you hand in this way is not very precise, but it's close enough to
-give you some way to translate an idea like ``Mars will be $45\degree$ above the
-Southeastern horizon at 21:30''. Of course, there is variation from
-person to person, but the variation is compensated for somewhat by the
-fact that people with long arms tend to have larger hands. In exercise
-\href{Exercises\#Handy_Angles}{handy angles}, you will work out your own
-``handy angles''.
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "guide"
+%%% End: 
