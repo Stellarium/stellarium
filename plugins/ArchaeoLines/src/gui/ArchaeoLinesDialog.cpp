@@ -30,6 +30,7 @@
 ArchaeoLinesDialog::ArchaeoLinesDialog()
 	: al(NULL)
 {
+	dialogName = "ArchaeoLines";
 	ui = new Ui_archaeoLinesDialog();
 	//colorDialog = new QColorDialog(NULL);
 }
@@ -63,6 +64,7 @@ void ArchaeoLinesDialog::createDialogContent()
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	//ui->useDmsFormatCheckBox->setChecked(al->isDmsFormat());
 	//connect(ui->useDmsFormatCheckBox, SIGNAL(toggled(bool)), al, SLOT(useDmsFormat(bool)));

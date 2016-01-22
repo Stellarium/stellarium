@@ -78,6 +78,7 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
 	, progressBar(NULL)
 	, gui(agui)
 {
+	dialogName = "Configuration";
 	ui = new Ui_configurationDialogForm;
 	customDeltaTEquationDialog = NULL;
 	hasDownloadedStarCatalog = false;
@@ -149,6 +150,7 @@ void ConfigurationDialog::createDialogContent()
 	ui->stackListWidget->setCurrentRow(0);
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	// Main tab
 	// Fill the language list widget from the available list
@@ -810,6 +812,11 @@ void ConfigurationDialog::setDefaultViewOptions()
 	Q_ASSERT(conf);
 
 	conf->setValue("main/restore_defaults", true);
+	// reset all stored panel locations
+	conf->beginGroup("DialogPositions");
+	conf->remove("");
+	conf->endGroup();
+
 }
 
 void ConfigurationDialog::populatePluginsList()
