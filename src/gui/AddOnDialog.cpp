@@ -172,6 +172,7 @@ void AddOnDialog::updateTabBarListWidgetWidth()
 
 	// Hack to force the window to be resized...
 	ui->stackListWidget->setMinimumWidth(width);
+	ui->stackListWidget->updateGeometry();
 }
 
 void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
