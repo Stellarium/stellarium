@@ -269,12 +269,6 @@ void MeteorShowersMgr::update(double deltaTime)
 		return;
 	}
 
-	// is paused?
-	// freeze meteors at the current position
-	if (!StelApp::getInstance().getCore()->getTimeRate()) {
-		return;
-	}
-
 	m_meteorShowers->update(deltaTime);
 }
 

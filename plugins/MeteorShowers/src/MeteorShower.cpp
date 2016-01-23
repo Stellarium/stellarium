@@ -272,7 +272,7 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 		}
 	}
 
-	// going forward or backward ?
+	// paused | forward | backward ?
 	// don't create new meteors
 	if(!core->getRealTimeSpeed())
 	{
@@ -512,6 +512,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 
 	QString str;
 	QTextStream oss(&str);
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
 	QString mstdata;
 	if (m_status == ACTIVE_GENERIC)
@@ -550,10 +551,18 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 
 	if(flags&Extra)
 	{
+		QString sDriftRA = StelUtils::radToHmsStr(m_driftAlpha);
+		QString sDriftDE = StelUtils::radToDmsStr(m_driftDelta);
+		if (withDecimalDegree)
+		{
+			sDriftRA = StelUtils::radToDecDegStr(m_driftAlpha,4,false,true);
+			sDriftDE = StelUtils::radToDecDegStr(m_driftDelta,4,false,true);
+		}
+
 		oss << QString("%1: %2/%3")
 			.arg(q_("Radiant drift (per day)"))
-			.arg(StelUtils::radToHmsStr(m_driftAlpha))
-			.arg(StelUtils::radToDmsStr(m_driftDelta));
+			.arg(sDriftRA)
+			.arg(sDriftDE);
 		oss << "<br />";
 
 		if (m_speed > 0)
@@ -592,7 +601,8 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 			oss << "<br />";
 			oss << q_("Maximum: %1").arg(m_activity.peak.toString("d MMMM"));
 
-			oss << QString(" (%1 %2&deg;)").arg(q_("Solar longitude"))
+			oss << QString(" (%1 %2&deg;)")
+			       .arg(q_("Solar longitude"))
 			       .arg(getSolarLongitude(m_activity.peak));
 			oss << "<br />";
 
