@@ -101,7 +101,7 @@ void AddOnDialog::createDialogContent()
 
 void AddOnDialog::slotAddonSelected(AddOn *addon)
 {
-	if (!addon)
+	if (addon == NULL)
 	{
 		ui->browser->clear();
 		return;
