@@ -60,12 +60,12 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
 void EphemWrapper::init_de430(const char* filepath)
 {
-  InitDE430(filepath);
+	InitDE430(filepath);
 }
 
 void EphemWrapper::init_de431(const char* filepath)
 {
-  InitDE431(filepath);
+	InitDE431(filepath);
 }
 
 bool jd_fits_de431(const double jd)
@@ -86,14 +86,12 @@ bool jd_fits_de430(const double jd)
 
 bool use_de430(const double jd)
 {
-    return StelApp::getInstance().getCore()->de430IsActive() &&
-        jd_fits_de430(jd);
+	return StelApp::getInstance().getCore()->de430IsActive() && jd_fits_de430(jd);
 }
 
 bool use_de431(const double jd)
 {
-    return StelApp::getInstance().getCore()->de431IsActive() &&
-        jd_fits_de431(jd);
+	return StelApp::getInstance().getCore()->de431IsActive() && jd_fits_de431(jd);
 }
 
 // planet_id is ONLY one of the #defined values 0..8 above.
@@ -177,20 +175,25 @@ void get_pluto_helio_coordsv(double jd,double xyz[3], void* unused)
 /* Return 0 for the sun */
 void get_sun_helio_coordsv(double jd,double xyz[3], void* unused)
 {
-    xyz[0]=0.; xyz[1]=0.; xyz[2]=0.;
+	Q_UNUSED(jd);
+	Q_UNUSED(unused);
+	xyz[0]=0.; xyz[1]=0.; xyz[2]=0.;
 }
 
 void get_mercury_helio_coordsv(double jd,double xyz[3], void* unused)
 {
+	Q_UNUSED(unused);
   	get_planet_helio_coordsv(jd, xyz, EPHEM_MERCURY_ID);
 }
 void get_venus_helio_coordsv(double jd,double xyz[3], void* unused)
 {
+	Q_UNUSED(unused);
   	get_planet_helio_coordsv(jd, xyz, EPHEM_VENUS_ID);
 }
 
 void get_earth_helio_coordsv(const double jd,double xyz[3], void* unused) 
 {
+	Q_UNUSED(unused);
 	bool deOk=false;
 	if(!std::isfinite(jd))
 	{
@@ -222,67 +225,72 @@ void get_earth_helio_coordsv(const double jd,double xyz[3], void* unused)
 
 void get_mars_helio_coordsv(double jd,double xyz[3], void* unused)
 {
-	 get_planet_helio_coordsv(jd, xyz, EPHEM_MARS_ID);
+	Q_UNUSED(unused);
+	get_planet_helio_coordsv(jd, xyz, EPHEM_MARS_ID);
 }
 
 void get_jupiter_helio_coordsv(double jd,double xyz[3], void* unused)
 {
-	 get_planet_helio_coordsv(jd, xyz, EPHEM_JUPITER_ID);
+	Q_UNUSED(unused);
+	get_planet_helio_coordsv(jd, xyz, EPHEM_JUPITER_ID);
 }
 
 void get_saturn_helio_coordsv(double jd,double xyz[3], void* unused)
 {
-	 get_planet_helio_coordsv(jd, xyz, EPHEM_SATURN_ID);
+	Q_UNUSED(unused);
+	get_planet_helio_coordsv(jd, xyz, EPHEM_SATURN_ID);
 }
 
 void get_uranus_helio_coordsv(double jd,double xyz[3], void* unused)
 {
-	 get_planet_helio_coordsv(jd, xyz, EPHEM_URANUS_ID);
+	Q_UNUSED(unused);
+	get_planet_helio_coordsv(jd, xyz, EPHEM_URANUS_ID);
 }
 
 void get_neptune_helio_coordsv(double jd,double xyz[3], void* unused)
 {
-	 get_planet_helio_coordsv(jd, xyz, EPHEM_NEPTUNE_ID);
+	Q_UNUSED(unused);
+	get_planet_helio_coordsv(jd, xyz, EPHEM_NEPTUNE_ID);
 }
 
 void get_mercury_helio_osculating_coords(double jd0,double jd,double xyz[3])
 {
-	 get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_MERCURY_ID);
+	get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_MERCURY_ID);
 }
 
 void get_venus_helio_osculating_coords(double jd0,double jd,double xyz[3])
 {
-	 get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_VENUS_ID);
+	get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_VENUS_ID);
 }
 
 void get_earth_helio_osculating_coords(double jd0,double jd,double xyz[3])
 {
-	 get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_EMB_ID);
+	get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_EMB_ID);
 }
 
 void get_mars_helio_osculating_coords(double jd0,double jd,double xyz[3])
 {
-	 get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_MARS_ID);
+	get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_MARS_ID);
 }
 
 void get_jupiter_helio_osculating_coords(double jd0,double jd,double xyz[3])
 {
-	 get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_JUPITER_ID);
+	get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_JUPITER_ID);
 }
 
 void get_saturn_helio_osculating_coords(double jd0,double jd,double xyz[3])
 {
-	 get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_SATURN_ID);
+	get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_SATURN_ID);
 }
 
 void get_uranus_helio_osculating_coords(double jd0,double jd,double xyz[3])
 {
-	 get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_URANUS_ID);
+	get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_URANUS_ID);
 }
 
 void get_neptune_helio_osculating_coords(double jd0,double jd,double xyz[3])
 {
-	 get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_NEPTUNE_ID);
+	get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_NEPTUNE_ID);
 }
 
 /* Calculate the rectangular geocentric lunar coordinates to the inertial mean
@@ -294,6 +302,7 @@ void get_neptune_helio_osculating_coords(double jd0,double jd,double xyz[3])
  * param jd Julian day, rect pos */
 void get_lunar_parent_coordsv(double jde,double xyz[3], void* unused)
 {
+	Q_UNUSED(unused);
 	bool deOk=false;
 	if(use_de430(jde))
 		deOk=GetDe430Coor(jde, EPHEM_JPL_MOON_ID, xyz, EPHEM_JPL_EARTH_ID);
@@ -305,96 +314,115 @@ void get_lunar_parent_coordsv(double jde,double xyz[3], void* unused)
 
 void get_phobos_parent_coordsv(double jd,double xyz[3], void* unused)
 {
-    GetMarsSatCoor(jd,MARS_SAT_PHOBOS,xyz);
+	Q_UNUSED(unused);
+	GetMarsSatCoor(jd,MARS_SAT_PHOBOS,xyz);
 }
 
 void get_deimos_parent_coordsv(double jd,double xyz[3], void* unused)
 {
-    GetMarsSatCoor(jd,MARS_SAT_DEIMOS,xyz);
+	Q_UNUSED(unused);
+	GetMarsSatCoor(jd,MARS_SAT_DEIMOS,xyz);
 }
 
 void get_io_parent_coordsv(double jd,double xyz[3], void* unused)
 {
-    GetL1Coor(jd,L1_IO,xyz);
+	Q_UNUSED(unused);
+	GetL1Coor(jd,L1_IO,xyz);
 }
 
 void get_europa_parent_coordsv(double jd,double xyz[3], void* unused)
 {
-    GetL1Coor(jd,L1_EUROPA,xyz);
+	Q_UNUSED(unused);
+	GetL1Coor(jd,L1_EUROPA,xyz);
 }
 
 void get_ganymede_parent_coordsv(double jd,double xyz[3], void* unused)
 {
-    GetL1Coor(jd,L1_GANYMEDE,xyz);
+	Q_UNUSED(unused);
+	GetL1Coor(jd,L1_GANYMEDE,xyz);
 }
 
 void get_callisto_parent_coordsv(double jd,double xyz[3], void* unused)
 {
-    GetL1Coor(jd,L1_CALLISTO,xyz);
+	Q_UNUSED(unused);
+	GetL1Coor(jd,L1_CALLISTO,xyz);
 }
 
 void get_mimas_parent_coordsv(double jd,double xyz[3], void* unused)
 { 
-    GetTass17Coor(jd,TASS17_MIMAS,xyz);
+	Q_UNUSED(unused);
+	GetTass17Coor(jd,TASS17_MIMAS,xyz);
 }
 
 void get_enceladus_parent_coordsv(double jd,double xyz[3], void* unused)
-{ 
-    GetTass17Coor(jd,TASS17_ENCELADUS,xyz);
+{
+	Q_UNUSED(unused);
+	GetTass17Coor(jd,TASS17_ENCELADUS,xyz);
 }
 
 void get_tethys_parent_coordsv(double jd,double xyz[3], void* unused)
 { 
-    GetTass17Coor(jd,TASS17_TETHYS,xyz);
+	Q_UNUSED(unused);
+	GetTass17Coor(jd,TASS17_TETHYS,xyz);
 }
 
 void get_dione_parent_coordsv(double jd,double xyz[3], void* unused)
 { 
-    GetTass17Coor(jd,TASS17_DIONE,xyz);
+	Q_UNUSED(unused);
+	GetTass17Coor(jd,TASS17_DIONE,xyz);
 }
 
 void get_rhea_parent_coordsv(double jd,double xyz[3], void* unused)
 { 
-    GetTass17Coor(jd,TASS17_RHEA,xyz);
+	Q_UNUSED(unused);
+	GetTass17Coor(jd,TASS17_RHEA,xyz);
 }
 
 void get_titan_parent_coordsv(double jd,double xyz[3], void* unused)
 { 
-    GetTass17Coor(jd,TASS17_TITAN,xyz);
+	Q_UNUSED(unused);
+	GetTass17Coor(jd,TASS17_TITAN,xyz);
 }
 
 void get_hyperion_parent_coordsv(double jd,double xyz[3], void* unused)
 { 
-    GetTass17Coor(jd,TASS17_HYPERION,xyz);
+	Q_UNUSED(unused);
+	GetTass17Coor(jd,TASS17_HYPERION,xyz);
 }
 
 void get_iapetus_parent_coordsv(double jd,double xyz[3], void* unused)
 { 
-    GetTass17Coor(jd,TASS17_IAPETUS,xyz);
+	Q_UNUSED(unused);
+	GetTass17Coor(jd,TASS17_IAPETUS,xyz);
 }
 
 void get_miranda_parent_coordsv(double jd,double xyz[3], void* unused)
 {
-    GetGust86Coor(jd,GUST86_MIRANDA,xyz);
+	Q_UNUSED(unused);
+	GetGust86Coor(jd,GUST86_MIRANDA,xyz);
 }
 
 void get_ariel_parent_coordsv(double jd,double xyz[3], void* unused)
 {
-    GetGust86Coor(jd,GUST86_ARIEL,xyz);
+	Q_UNUSED(unused);
+	GetGust86Coor(jd,GUST86_ARIEL,xyz);
 }
 
 void get_umbriel_parent_coordsv(double jd,double xyz[3], void* unused)
 {
-    GetGust86Coor(jd,GUST86_UMBRIEL,xyz);
+	Q_UNUSED(unused);
+	GetGust86Coor(jd,GUST86_UMBRIEL,xyz);
 }
 
 void get_titania_parent_coordsv(double jd,double xyz[3], void* unused)
 {
-    GetGust86Coor(jd,GUST86_TITANIA,xyz);
+	Q_UNUSED(unused);
+	GetGust86Coor(jd,GUST86_TITANIA,xyz);
 }
 
 void get_oberon_parent_coordsv(double jd,double xyz[3], void* unused)
 {
-    GetGust86Coor(jd,GUST86_OBERON,xyz);
+	Q_UNUSED(unused);
+	GetGust86Coor(jd,GUST86_OBERON,xyz);
 }
 
