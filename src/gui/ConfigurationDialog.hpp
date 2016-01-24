@@ -72,8 +72,6 @@ private:
 	QFile* currentDownloadFile;
 	class StelProgressController* progressBar;
 
-	QString userAgent;
-
 private slots:
 	void setNoSelectedInfo();
 	void setAllSelectedInfo();

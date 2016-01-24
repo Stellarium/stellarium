@@ -345,7 +345,7 @@ void StelLocationMgr::locationFromIP()
 {
 	QNetworkRequest req( QUrl( QString("http://freegeoip.net/csv/") ) );	
 	req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
-	req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
+	req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
 	QNetworkReply* networkReply=StelApp::getInstance().getNetworkAccessManager()->get(req);
 	connect(networkReply, SIGNAL(finished()), this, SLOT(changeLocationFromNetworkLookup()));
 }

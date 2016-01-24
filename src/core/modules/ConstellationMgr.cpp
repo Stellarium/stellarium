@@ -125,7 +125,7 @@ void ConstellationMgr::init()
 
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);
-	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), 
+	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
 			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));

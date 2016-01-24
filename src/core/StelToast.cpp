@@ -51,7 +51,6 @@ ToastTile::ToastTile(QObject* parent, int level, int x, int y)
 		boundingCap.d=qMin(qMin(n*pts.at(0), n*pts.at(1)), qMin(n*pts.at(2), n*pts.at(3)));
 }
 
-
 const ToastGrid* ToastTile::getGrid() const
 {
 	return getSurvey()->getGrid();
@@ -195,6 +194,7 @@ void ToastTile::draw(StelPainter* sPainter, const SphericalCap& viewportShape, i
 	}
 	if (level==maxVisibleLevel || !isCovered(viewportShape))
 		drawTile(sPainter);
+
 	// Draw all the children
 	foreach (ToastTile* child, subTiles)
 	{
