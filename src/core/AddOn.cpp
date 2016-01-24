@@ -61,9 +61,7 @@ AddOn::AddOn(const QString addonId, const QVariantMap& map)
 	m_eStatus = (AddOn::Status) map.value("status").toInt();
 
 	// early returns if the mandatory fields are not present
-	if (m_sTitle.isEmpty() || m_sChecksum.isEmpty()
-		|| m_sDownloadURL.isEmpty() || m_sDownloadFilename.isEmpty()
-		|| m_sDownloadSize.isEmpty())
+	if (m_sTitle.isEmpty() || m_sDescription.isEmpty() || m_dVersion.isNull())
 	{
 		qWarning() << "[Add-on] Error! Add-on" << m_sAddonId
 			   << "does not have all the required fields!";
