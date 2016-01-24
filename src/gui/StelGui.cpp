@@ -311,6 +311,11 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Nebulas");
 	skyGui->buttonBar->addButton(b, "040-nebulaeGroup");
 
+	pxmapOn = QPixmap(":/graphicGui/btToastSurvey-on.png");
+	pxmapOff = QPixmap(":/graphicGui/btToastSurvey-off.png");
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Toast_Survey");
+	skyGui->buttonBar->addButton(b, "040-nebulaeGroup");
+
 	pxmapOn = QPixmap(":/graphicGui/btPlanets-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btPlanets-off.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Planets_Labels");

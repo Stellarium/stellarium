@@ -60,6 +60,7 @@
 #include "StelJsonParser.hpp"
 #include "StelTranslator.hpp"
 #include "EphemWrapper.hpp"
+#include "ToastMgr.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -571,6 +572,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/meteor_rate", mmgr->getZHR());
 	conf->setValue("astro/milky_way_intensity", GETSTELMODULE(MilkyWay)->getIntensity());
 	conf->setValue("astro/zodiacal_light_intensity", GETSTELMODULE(ZodiacalLight)->getIntensity());
+	conf->setValue("astro/flag_toast_survey", GETSTELMODULE(ToastMgr)->getFlagSurveyDisplay());
 
 	// view dialog / markings tab settings
 	conf->setValue("viewing/flag_azimuthal_grid", glmgr->getFlagAzimuthalGrid());

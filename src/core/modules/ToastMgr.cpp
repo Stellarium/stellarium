@@ -24,6 +24,7 @@
 #include "StelPainter.hpp"
 #include "StelCore.hpp"
 #include "StelApp.hpp"
+#include "StelTranslator.hpp"
 
 #include <QSettings>
 
@@ -48,10 +49,32 @@ void ToastMgr::init()
 	QString dssHost = conf->value("dss/host", "http://dss.astro.altspu.ru").toString();
 	survey = new ToastSurvey(dssHost+"/results/{level}/{x}_{y}.jpg", 11);
 	survey->setParent(this);
+
+	// Hide deep-sky survey by default
+	setFlagSurveyDisplay(conf->value("astro/flag_toast_survey", false).toBool());
+
+	addAction("actionShow_Toast_Survey", N_("Display Options"), N_("Deep-sky survey"), "surveyDisplayed", "Ctrl+Alt+D");
 }
 
 void ToastMgr::draw(StelCore* core)
 {
+	if (!flagSurveyDisplayed)
+		return;
+
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 	survey->draw(&sPainter);
+}
+
+void ToastMgr::setFlagSurveyDisplay(const bool displayed)
+{
+	if (flagSurveyDisplayed != displayed)
+	{
+		flagSurveyDisplayed = displayed;
+		emit surveyDisplayedChanged(displayed);
+	}
+}
+
+bool ToastMgr::getFlagSurveyDisplay(void) const
+{
+	return flagSurveyDisplayed;
 }
