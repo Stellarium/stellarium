@@ -191,6 +191,9 @@ void AddOnDialog::populateTables()
 	ui->availableTableView->setModel(new AddOnTableModel(StelApp::getInstance().getStelAddOnMgr().getAddonsAvailable()));
 	ui->installedTableView->setModel(new AddOnTableModel(StelApp::getInstance().getStelAddOnMgr().getAddonsInstalled()));
 	ui->updatesTableView->setModel(new AddOnTableModel(StelApp::getInstance().getStelAddOnMgr().getAddonsToUpdate()));
+
+	ui->browser->clear();
+	slotUpdateButton();
 	updateTabBarListWidgetWidth();
 }
 
@@ -269,5 +272,4 @@ void AddOnDialog::slotCheckedRows()
 		tableview = ui->availableTableView;
 		StelApp::getInstance().getStelAddOnMgr().installAddons(tableview->getCheckedAddons());
 	}
-	tableview->clearSelection();
 }

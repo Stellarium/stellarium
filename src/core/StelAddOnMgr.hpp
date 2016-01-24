@@ -55,9 +55,9 @@ public:
 	void installAddOnFromFile(QString filePath);
 	void installAddOn(AddOn *addon, bool tryDownload = true);
 	void removeAddOn(AddOn *addon);
-	void updateAddons(QList<AddOn*> addons);
-	void installAddons(QList<AddOn*> addons);
-	void removeAddons(QList<AddOn*> addons);
+	void updateAddons(QSet<AddOn *> addons);
+	void installAddons(QSet<AddOn*> addons);
+	void removeAddons(QSet<AddOn*> addons);
 	void setUpdateFrequencyDays(int days);
 	void setUpdateFrequencyHour(int hour);
 	void setLastUpdate(qint64 time);

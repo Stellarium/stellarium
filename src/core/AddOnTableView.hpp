@@ -40,7 +40,7 @@ public:
 	void setModel(QAbstractItemModel* model);
 
 	QCheckBox* getCheckBox(int pRow) { return (QCheckBox*) m_pCheckboxGroup->button(pRow); }
-	QList<AddOn*> getCheckedAddons() { return m_checkedAddons; }
+	QSet<AddOn*> getCheckedAddons() { return m_checkedAddons; }
 
 signals:
 	void addonChecked();
@@ -55,7 +55,7 @@ private slots:
 
 private:
 	QButtonGroup* m_pCheckboxGroup;
-	QList<AddOn*> m_checkedAddons;
+	QSet<AddOn*> m_checkedAddons;
 };
 
 #endif // _ADDONTABLEVIEW_HPP_

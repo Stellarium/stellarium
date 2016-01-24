@@ -274,19 +274,19 @@ void StelAddOnMgr::downloadThumbnailFinished()
 	downloadNextThumbnail();
 }
 
-void StelAddOnMgr::updateAddons(QList<AddOn *> addons)
+void StelAddOnMgr::updateAddons(QSet<AddOn *> addons)
 {
 	// TODO
 }
 
-void StelAddOnMgr::installAddons(QList<AddOn *> addons)
+void StelAddOnMgr::installAddons(QSet<AddOn *> addons)
 {
 	foreach (AddOn* addon, addons) {
 		installAddOn(addon);
 	}
 }
 
-void StelAddOnMgr::removeAddons(QList<AddOn *> addons)
+void StelAddOnMgr::removeAddons(QSet<AddOn *> addons)
 {
 	foreach (AddOn* addon, addons) {
 		removeAddOn(addon);

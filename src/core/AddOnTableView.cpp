@@ -68,6 +68,7 @@ void AddOnTableView::setModel(QAbstractItemModel* model)
 		setIndexWidget(model->index(row, lastColumn), cbox);
 		m_pCheckboxGroup->addButton(cbox, row);
 	}
+	m_checkedAddons.clear();
 }
 
 void AddOnTableView::mouseDoubleClickEvent(QMouseEvent *e)
@@ -120,11 +121,11 @@ void AddOnTableView::slotButtonToggled(int row, bool checked)
 	AddOn* addon = ((AddOnTableModel*) model())->getAddOn(row);
 	if (checked)
 	{
-		m_checkedAddons.append(addon);
+		m_checkedAddons.insert(addon);
 	}
 	else
 	{
-		m_checkedAddons.removeOne(addon);
+		m_checkedAddons.remove(addon);
 	}
 	selectRow(row);
 	emit(addonChecked());
