@@ -24,6 +24,11 @@
 
 class ToastMgr : public StelModule
 {
+	Q_OBJECT
+	Q_PROPERTY(bool surveyDisplayed
+			READ getFlagSurveyDisplay
+			WRITE setFlagSurveyDisplay
+			NOTIFY surveyDisplayedChanged)
 public:
 	ToastMgr();
 	virtual ~ToastMgr();
@@ -31,8 +36,18 @@ public:
 	virtual void update(double) {;}
 	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName) const {return 1.5;}
+
+public slots:
+	void setFlagSurveyDisplay(const bool displayed);
+	bool getFlagSurveyDisplay(void) const;
+
+signals:
+	void surveyDisplayedChanged(const bool displayed) const;
+
 private:
 	class ToastSurvey* survey;
+
+	bool flagSurveyDisplayed;
 };
 
 #endif // _TOASTMGR_HPP_
