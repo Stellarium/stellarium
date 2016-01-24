@@ -42,7 +42,7 @@ class ToastTile : public QObject
 	Q_OBJECT
 
 public:
-	ToastTile(QObject* parent, int level, int x, int y);
+	ToastTile(QObject* parent, int level, int x, int y);	
 	void draw(StelPainter* painter, const SphericalCap& viewportShape, int maxVisibleLevel);
 	bool isTransparent();
 

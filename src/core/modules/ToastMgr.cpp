@@ -28,6 +28,19 @@
 #include <QSettings>
 
 ToastMgr::ToastMgr()
+{	
+}
+
+ToastMgr::~ToastMgr()
+{
+	if (survey)
+	{
+		delete survey;
+		survey = NULL;
+	}
+}
+
+void ToastMgr::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
@@ -35,15 +48,6 @@ ToastMgr::ToastMgr()
 	QString dssHost = conf->value("dss/host", "http://dss.astro.altspu.ru").toString();
 	survey = new ToastSurvey(dssHost+"/results/{level}/{x}_{y}.jpg", 11);
 	survey->setParent(this);
-}
-
-ToastMgr::~ToastMgr()
-{
-}
-
-void ToastMgr::init()
-{
-	qDebug() << "init ToastMgr";
 }
 
 void ToastMgr::draw(StelCore* core)
