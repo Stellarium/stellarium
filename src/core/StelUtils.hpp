@@ -49,6 +49,9 @@ namespace StelUtils
 	//! Return the name and the version of operating system, i.e. "Mac OS X 10.7"
 	QString getOperatingSystemInfo();
 
+	//! Return the user agent name, i.e. "Stellarium/0.15.0 (Linux)"
+	QString getUserAgentString();
+
 	//! Convert an angle in hms format to radian.
 	//! @param h hour component
 	//! @param m minute component
