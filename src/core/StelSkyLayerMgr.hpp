@@ -33,7 +33,9 @@ class StelSkyImageTile;
 class StelSkyLayerMgr : public StelModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool visible READ getFlagShow WRITE setFlagShow)
+	Q_PROPERTY(bool visible
+		   READ getFlagShow
+		   WRITE setFlagShow)
 
 public:
 	StelSkyLayerMgr();
