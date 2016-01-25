@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>497</width>
+    <width>509</width>
     <height>538</height>
    </rect>
   </property>
@@ -168,7 +168,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QGroupBox" name="groupBox_2">
+           <widget class="QGroupBox" name="groupBox_LanguageSettings">
             <property name="title">
              <string>Language settings</string>
             </property>
@@ -260,6 +260,75 @@
                  </property>
                  <property name="insertPolicy">
                   <enum>QComboBox::NoInsert</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_EphemerisSettings">
+            <property name="title">
+             <string>Ephemeris settings</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_ephemeris">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item row="0" column="0">
+              <layout class="QGridLayout" name="EphemerisGridLayout">
+               <item row="1" column="1">
+                <widget class="QLabel" name="de431label">
+                 <property name="text">
+                  <string>Not installed</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="de430label">
+                 <property name="text">
+                  <string>Not installed</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QCheckBox" name="de431checkBox">
+                 <property name="toolTip">
+                  <string>DE431 provides position data for years -13000...+17000. For special applications only.</string>
+                 </property>
+                 <property name="text">
+                  <string>Use DE431 (long-time data)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QCheckBox" name="de430checkBox">
+                 <property name="toolTip">
+                  <string>DE430 provides highest accuracy, only for years 1550...2650.</string>
+                 </property>
+                 <property name="text">
+                  <string>Use DE430 (high accuracy)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0" colspan="2">
+                <widget class="QLabel" name="label_VSOP87used">
+                 <property name="toolTip">
+                  <string>Using VSOP87 is recommended for years -4000...+8000 only, but delivers useful positions outside this range.</string>
+                 </property>
+                 <property name="text">
+                  <string>VSOP87/ELP2000-82B is used when these are not installed or not activated.</string>
                  </property>
                 </widget>
                </item>
@@ -1143,16 +1212,6 @@
                </property>
               </widget>
              </item>
-             <item row="7" column="0" colspan="2">
-              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
-               <property name="toolTip">
-                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
-               </property>
-               <property name="text">
-                <string>Auto zoom out returns to initial direction of view</string>
-               </property>
-              </widget>
-             </item>
              <item row="3" column="1">
               <widget class="QCheckBox" name="decimalDegreeCheckBox">
                <property name="toolTip">
@@ -1190,6 +1249,16 @@
                </property>
                <property name="text">
                 <string>Azimuth from South</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0" colspan="2">
+              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
+               <property name="toolTip">
+                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
+               </property>
+               <property name="text">
+                <string>Auto zoom out returns to initial direction of view</string>
                </property>
               </widget>
              </item>

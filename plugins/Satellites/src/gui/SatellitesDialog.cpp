@@ -55,6 +55,7 @@ SatellitesDialog::SatellitesDialog()
 	, checkStateRole(Qt::UserRole)
 {
 	ui = new Ui_satellitesDialog;
+	dialogName = "Satellites";
 }
 
 SatellitesDialog::~SatellitesDialog()
@@ -94,6 +95,7 @@ void SatellitesDialog::createDialogContent()
 	ui->tabs->setCurrentIndex(0);
 	ui->labelAutoAdd->setVisible(false);
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 	        this, SLOT(retranslate()));
 	Satellites* plugin = GETSTELMODULE(Satellites);

@@ -58,6 +58,7 @@
 
 ViewDialog::ViewDialog(QObject* parent) : StelDialog(parent)
 {
+	dialogName = "View";
 	ui = new Ui_viewDialogForm;
 	addRemoveLandscapesDialog = NULL;
 	atmosphereDialog=NULL;
@@ -124,6 +125,7 @@ void ViewDialog::createDialogContent()
 #endif
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	populateLists();
 	ui->viewportOffsetSpinBox->setValue((int) round(StelApp::getInstance().getCore()->getCurrentStelProjectorParams().viewportCenterOffset[1] * 100.0f));

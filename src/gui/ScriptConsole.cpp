@@ -41,6 +41,7 @@ ScriptConsole::ScriptConsole(QObject *parent)
 	: StelDialog(parent)
 	, highlighter(NULL)
 {
+	dialogName = "ScriptConsole";
 	ui = new Ui_scriptConsoleForm;
 }
 
@@ -81,6 +82,7 @@ void ScriptConsole::createDialogContent()
 
 	connect(ui->scriptEdit, SIGNAL(cursorPositionChanged()), this, SLOT(rowColumnChanged()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->loadButton, SIGNAL(clicked()), this, SLOT(loadScript()));
 	connect(ui->saveButton, SIGNAL(clicked()), this, SLOT(saveScript()));
 	connect(ui->clearButton, SIGNAL(clicked()), this, SLOT(clearButtonPressed()));

@@ -29,6 +29,7 @@
 AngleMeasureDialog::AngleMeasureDialog()
 	: am(NULL)
 {
+	dialogName = "AngleMeasure";
 	ui = new Ui_angleMeasureDialog();
 }
 
@@ -60,6 +61,7 @@ void AngleMeasureDialog::createDialogContent()
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	ui->useDmsFormatCheckBox->setChecked(am->isDmsFormat());
 	connect(ui->useDmsFormatCheckBox, SIGNAL(toggled(bool)), am, SLOT(useDmsFormat(bool)));

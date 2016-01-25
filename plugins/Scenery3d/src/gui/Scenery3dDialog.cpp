@@ -37,6 +37,7 @@
 Scenery3dDialog::Scenery3dDialog(QObject* parent) : StelDialog(parent), mgr(NULL)
 {
 	ui = new Ui_scenery3dDialogForm;
+	dialogName = "Scenery3d";
 }
 
 Scenery3dDialog::~Scenery3dDialog()
@@ -89,6 +90,7 @@ void Scenery3dDialog::createDialogContent()
 
 	//connect UI events
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->scenery3dListWidget, &QListWidget::currentItemChanged, this, &Scenery3dDialog::scenery3dChanged);
 
 	//checkboxes can connect directly to manager

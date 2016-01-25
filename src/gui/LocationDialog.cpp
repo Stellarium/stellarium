@@ -43,6 +43,7 @@
 
 LocationDialog::LocationDialog(QObject* parent) : StelDialog(parent), isEditingNew(false)
 {
+	dialogName = "Location";
 	ui = new Ui_locationDialogForm;
 }
 
@@ -114,6 +115,7 @@ void LocationDialog::createDialogContent()
 
 	// Connect all the QT signals
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->mapLabel, SIGNAL(positionChanged(double, double)), this, SLOT(setPositionFromMap(double, double)));
 
 	connect(ui->addLocationToListPushButton, SIGNAL(clicked()), this, SLOT(addCurrentLocationToList()));

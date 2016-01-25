@@ -52,7 +52,7 @@ public:
 	           bool global=false);
 	//! Connect the action to an object property or slot.
 	//! @param slot A property or a slot name.  The slot can either have the signature `func()`, and in that
-	//! case the action is made not checkable, either have the signature `func(bool)` and in that case the action
+	//! case the action is made not checkable, or have the signature `func(bool)` and in that case the action
 	//! is made checkable.  When linked to a property the action is always made checkable.
 	void connectToObject(QObject* obj, const char* slot);
 	//! Don't use setCheckable, connectToObject can automatically determine if the action is checkable or not.
