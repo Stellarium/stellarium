@@ -84,11 +84,13 @@ public:
 	QString getLicenseName() { return m_sLicense; }
 	QString getLicenseURL() { return m_sLicenseURL; }
 	QString getDownloadFilename() { return m_sDownloadFilename; }
-	QString getDownloadFilepath();
 	float getDownloadSize() { return m_sDownloadSize.toFloat() * 1000; }
 	QString getDownloadURL() { return m_sDownloadURL; }
 	QString getThumbnail() { return m_sThumbnail; }
 	QString getChecksum() { return m_sChecksum; }
+
+	QString getZipPath();
+	void setZipPath(QString path) { m_sZipPath = path; }
 
 	Status getStatus() { return m_eStatus; }
 	QString getStatusString();
@@ -112,6 +114,7 @@ private:
 	QString m_sDownloadURL;
 	QString m_sDownloadFilename;
 	QString m_sDownloadSize;
+	QString m_sZipPath;
 	QString m_sChecksum;
 	QString m_sThumbnail;
 	QList<Authors> m_authors;

@@ -92,14 +92,14 @@ void AddOnScanner::slotInstallCompatibles()
 void AddOnScanner::slotRemoveAll()
 {
 	foreach (AddOn* addon, m_addonsList) {
-		if (QFile(addon->getDownloadFilepath()).remove())
+		if (QFile(addon->getZipPath()).remove())
 		{
 			m_addonsList.removeOne(addon);
 		}
 		else
 		{
 			qWarning() << "[Add-on] Unable to remove"
-				   << addon->getDownloadFilepath();
+				   << addon->getZipPath();
 		}
 	}
 	loadAddons(m_addonsList);
@@ -110,14 +110,14 @@ void AddOnScanner::slotRemoveIncompatibles()
 	foreach (AddOn* addon, m_addonsList) {
 		if (!addon->isValid())
 		{
-			if (QFile(addon->getDownloadFilepath()).remove())
+			if (QFile(addon->getZipPath()).remove())
 			{
 				m_addonsList.removeOne(addon);
 			}
 			else
 			{
 				qWarning() << "[Add-on] Unable to remove"
-					   << addon->getDownloadFilepath();
+					   << addon->getZipPath();
 			}
 		}
 	}

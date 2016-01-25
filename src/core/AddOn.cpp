@@ -135,6 +135,15 @@ bool AddOn::isCompatible(QString first, QString last)
 	return true;
 }
 
+QString AddOn::getZipPath()
+{
+	if (m_sZipPath.isEmpty())
+	{
+		return StelApp::getInstance().getStelAddOnMgr().getAddOnDir() % m_sDownloadFilename;
+	}
+	return m_sZipPath;
+}
+
 QString AddOn::getStatusString() {
 	switch (m_eStatus)
 	{
@@ -165,11 +174,6 @@ QString AddOn::getStatusString() {
 		default:
 			return "Not installed";
 	}
-}
-
-QString AddOn::getDownloadFilepath()
-{
-	return StelApp::getInstance().getStelAddOnMgr().getAddOnDir() % m_sDownloadFilename;
 }
 
 AddOn::Type AddOn::typeStringToEnum(QString string)

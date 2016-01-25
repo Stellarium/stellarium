@@ -318,6 +318,7 @@ void StelAddOnMgr::installAddOnFromFile(QString filePath)
 		else
 		{
 			// same file! just install it!
+			addonInHash->setZipPath(filePath);
 			installAddOn(addonInHash, false);
 		}
 	}
@@ -341,19 +342,19 @@ void StelAddOnMgr::installAddOn(AddOn* addon, bool tryDownload)
 	else if (!addon || !addon->isValid())
 	{
 		qWarning() << "[Add-on] Unable to install"
-			   << QDir::toNativeSeparators(addon->getDownloadFilepath())
+			   << QDir::toNativeSeparators(addon->getZipPath())
 			   << "AddOn is not compatible!";
 		return;
 	}
 
-	QFile file(addon->getDownloadFilepath());
+	QFile file(addon->getZipPath());
 	// checking if we have this file in the add-on dir (local disk)
 	if (!file.exists())
 	{
 		addon->setStatus(AddOn::NotInstalled);
 	}
 	// only accept zip archive
-	else if (!addon->getDownloadFilepath().endsWith(".zip"))
+	else if (!addon->getZipPath().endsWith(".zip"))
 	{
 		addon->setStatus(AddOn::InvalidFormat);
 		qWarning() << "[Add-on] Error" << addon->getAddOnId()
@@ -364,7 +365,7 @@ void StelAddOnMgr::installAddOn(AddOn* addon, bool tryDownload)
 	{
 		addon->setStatus(AddOn::Corrupted);
 		qWarning() << "[Add-on] Error: File "
-			   << QDir::toNativeSeparators(addon->getDownloadFilepath())
+			   << QDir::toNativeSeparators(addon->getZipPath())
 			   << " is corrupt, MD5 mismatch!";
 	}
 	else
@@ -374,7 +375,7 @@ void StelAddOnMgr::installAddOn(AddOn* addon, bool tryDownload)
 		emit (dataUpdated(addon));
 		unzip(*addon);
 		// remove zip archive from ~/.stellarium/addon/
-		QFile(addon->getDownloadFilepath()).remove();
+		QFile(addon->getZipPath()).remove();
 	}
 
 	// require restart
@@ -487,8 +488,9 @@ AddOn* StelAddOnMgr::getAddOnFromZip(QString filePath)
 			QString md5sum = calculateMd5(zipFile);
 			attributes.insert("checksum", md5sum);
 			attributes.insert("download-size", zipFile.size() / 1024.0);
-
-			return new AddOn(addonId, attributes);
+			AddOn* addon = new AddOn(addonId, attributes);
+			addon->setZipPath(filePath);
+			return addon;
 		}
 	}
 	return NULL;
@@ -536,11 +538,11 @@ void StelAddOnMgr::downloadNextAddOn()
 	Q_ASSERT(m_progressBar==NULL);
 
 	m_downloadingAddOn = m_downloadQueue.first();
-	m_currentDownloadFile = new QFile(m_downloadingAddOn->getDownloadFilepath());
+	m_currentDownloadFile = new QFile(m_downloadingAddOn->getZipPath());
 	if (!m_currentDownloadFile->open(QIODevice::WriteOnly))
 	{
 		qWarning() << "[Add-on] Can't open a writable file: "
-			   << QDir::toNativeSeparators(m_downloadingAddOn->getDownloadFilepath());
+			   << QDir::toNativeSeparators(m_downloadingAddOn->getZipPath());
 		cancelAllDownloads();
 		emit (addOnMgrMsg(UnableToWriteFiles));
 		return;
@@ -652,11 +654,11 @@ void StelAddOnMgr::cancelAllDownloads()
 
 void StelAddOnMgr::unzip(AddOn& addon)
 {
-	Stel::QZipReader reader(addon.getDownloadFilepath());
+	Stel::QZipReader reader(addon.getZipPath());
 	if (reader.status() != Stel::QZipReader::NoError)
 	{
 		qWarning() << "StelAddOnMgr: Unable to open the ZIP archive:"
-			   << QDir::toNativeSeparators(addon.getDownloadFilepath());
+			   << QDir::toNativeSeparators(addon.getZipPath());
 		addon.setStatus(AddOn::UnableToRead);
 	}
 
