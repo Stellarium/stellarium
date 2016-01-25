@@ -64,11 +64,11 @@ double StelSkyLayerMgr::getCallOrder(StelModuleActionName actionName) const
 // read from stream
 void StelSkyLayerMgr::init()
 {
-	/*QString path = StelFileMgr::findFile("nebulae/default/textures.json");
+	QString path = StelFileMgr::findFile("nebulae/default/textures.json");
 	if (path.isEmpty())
 		qWarning() << "ERROR while loading nebula texture set default";
 	else
-		insertSkyImage(path);*/
+		insertSkyImage(path);
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("skylayers");

@@ -25,6 +25,8 @@
 #include "StelCore.hpp"
 #include "StelApp.hpp"
 #include "StelTranslator.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelSkyLayerMgr.hpp"
 
 #include <QSettings>
 
@@ -51,7 +53,7 @@ void ToastMgr::init()
 	survey->setParent(this);
 
 	// Hide deep-sky survey by default
-	setFlagSurveyDisplay(conf->value("astro/flag_toast_survey", false).toBool());
+	setFlagSurveyShow(conf->value("astro/flag_toast_survey", false).toBool());
 
 	addAction("actionShow_Toast_Survey", N_("Display Options"), N_("Deep-sky survey"), "surveyDisplayed", "Ctrl+Alt+D");
 }
@@ -65,16 +67,17 @@ void ToastMgr::draw(StelCore* core)
 	survey->draw(&sPainter);
 }
 
-void ToastMgr::setFlagSurveyDisplay(const bool displayed)
+void ToastMgr::setFlagSurveyShow(const bool displayed)
 {
 	if (flagSurveyDisplayed != displayed)
 	{
 		flagSurveyDisplayed = displayed;
+		GETSTELMODULE(StelSkyLayerMgr)->setFlagShow(!displayed);
 		emit surveyDisplayedChanged(displayed);
 	}
 }
 
-bool ToastMgr::getFlagSurveyDisplay(void) const
+bool ToastMgr::getFlagSurveyShow(void) const
 {
 	return flagSurveyDisplayed;
 }

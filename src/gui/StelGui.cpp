@@ -370,7 +370,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 
 	// add the flip buttons if requested in the config
 	setFlagShowFlipButtons(conf->value("gui/flag_show_flip_buttons", false).toBool());
-	setFlagShowNebulaBackgroundButton(conf->value("gui/flag_show_nebulae_background_button", false).toBool());	
+	setFlagShowNebulaBackgroundButton(conf->value("gui/flag_show_nebulae_background_button", false).toBool());
 
 	///////////////////////////////////////////////////////////////////////
 	// Create the main base widget
