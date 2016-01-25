@@ -65,7 +65,7 @@ private slots:
 	void showAddRemoveLandscapesDialog();
         void showAtmosphereDialog();
 
-	void populateLightPollution();
+	void setLightPollutionSpinBoxStatus();
 	void populateLandscapeMinimalBrightness();
 
 	// WHAT IS THE SKY LAYER? hidden, under development?

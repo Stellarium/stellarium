@@ -107,6 +107,10 @@ define(["jquery", "api/viewoptions", "api/actions"], function($, viewOptionApi, 
 		viewOptionApi.registerTypeFlags($("#vo_dsotype > div")); //needs a stricter selector to prevent capturing the header checkbox
 	}
 
+	$(actionApi).on("stelActionChanged:actionShow_LightPollution_Database", function(evt,data){
+		$("#atmosphere_bortlescaleindex").spinner("option", "disabled", data.isChecked);
+	});
+
 	$(actionApi).on("stelActionChanged:actionSet_Nebula_TypeFilterUsage", function(evt, data) {
 		$("#vo_dsotype > div input[type='checkbox']").prop("disabled", !data.isChecked);
 	});
