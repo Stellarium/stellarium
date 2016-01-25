@@ -38,6 +38,7 @@
 SolarSystemManagerWindow::SolarSystemManagerWindow()
 {
 	ui = new Ui_solarSystemManagerWindow();
+	dialogName = "SolarSystemEditor";
 	mpcImportWindow = new MpcImportWindow();
 	manualImportWindow = NULL;
 
@@ -69,6 +70,7 @@ void SolarSystemManagerWindow::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 	        this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->pushButtonCopyFile, SIGNAL(clicked()), this, SLOT(copyConfiguration()));
 	connect(ui->pushButtonReplaceFile, SIGNAL(clicked()), this, SLOT(replaceConfiguration()));
 	connect(ui->pushButtonRemove, SIGNAL(clicked()), this, SLOT(removeObject()));

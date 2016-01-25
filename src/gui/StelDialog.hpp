@@ -48,6 +48,14 @@ class StelProperty;
 //! class. Every derived window class needs a BarFrame object - it
 //! has to be either included in a .ui file, or manually instantiated in
 //! createDialogContent().
+//!
+//! The screen location of the StelDialog can be stored in config.ini. This requires
+//! setting dialogName (must be a unique name, should be set in the constructor),
+//! and setting a connect() from the BarFrame's movedTo() signal to handleMovedTo()
+//! in createDialogContent().
+//! If the dialog is called and the stored location is off-screen, the dialog is
+//! shifted to become visible.
+//!
 class StelDialog : public QObject
 {
 	Q_OBJECT
@@ -74,6 +82,8 @@ public slots:
 	void setVisible(bool);
 	//! Closes the window (the window widget is not deleted, just not visible).
 	void close();
+	//! Adds dialog location to config.ini; should be connected in createDialogContent()
+	void handleMovedTo(QPoint newPos);
 signals:
 	void visibleChanged(bool);
 
@@ -100,6 +110,8 @@ protected:
 	//! The main dialog
 	QWidget* dialog;
 	class CustomProxy* proxy;
+	//! The name should be set in derived classes' constructors and can be used to store and retrieve the panel locations.
+	QString dialogName;
 
 #ifdef Q_OS_WIN
 	//! Kinetic scrolling for lists.

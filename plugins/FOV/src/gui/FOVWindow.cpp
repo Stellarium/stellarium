@@ -30,6 +30,7 @@ FOVWindow::FOVWindow()
 	: fov(NULL)
 {
 	ui = new Ui_fovWindowForm();
+	dialogName = "FOV";
 }
 
 FOVWindow::~FOVWindow()
@@ -53,6 +54,7 @@ void FOVWindow::createDialogContent()
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	populateFOV();
 
