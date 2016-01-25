@@ -81,7 +81,7 @@ void ViewDialog::retranslate()
 		ui->retranslateUi(dialog);
 		updateZhrDescription();
 		populateLists();
-		populateLightPollution();
+		setBortleScaleToolTip(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex());
 
 		//Hack to shrink the tabs to optimal size after language change
 		//by causing the list items to be laid out again.
@@ -221,13 +221,17 @@ void ViewDialog::createDialogContent()
 	populateLandscapeMinimalBrightness();
 
 	// Light pollution
-	populateLightPollution();
+	StelSkyDrawer* drawer = StelApp::getInstance().getCore()->getSkyDrawer();
+	setLightPollutionSpinBoxStatus();
 	ui->useLocationDataCheckBox->setChecked(lmgr->getFlagUseLightPollutionFromDatabase());
 	connect(ui->useLocationDataCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagUseLightPollutionFromDatabase(bool)));
-	connect(lmgr, SIGNAL(lightPollutionUsageChanged(bool)), this, SLOT(populateLightPollution()));
-	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), lmgr, SLOT(setAtmosphereBortleLightPollution(int)));
-	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setBortleScaleIndex(int)));
-	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setBortleScaleToolTip(int)));
+	connect(lmgr, SIGNAL(lightPollutionUsageChanged(bool)), ui->useLocationDataCheckBox, SLOT(setChecked(bool)));
+	connect(lmgr, SIGNAL(lightPollutionUsageChanged(bool)), this, SLOT(setLightPollutionSpinBoxStatus()));
+
+	ui->lightPollutionSpinBox->setValue(drawer->getBortleScaleIndex());
+	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), drawer, SLOT(setBortleScaleIndex(int)));
+	connect(drawer, SIGNAL(bortleScaleIndexChanged(int)), ui->lightPollutionSpinBox, SLOT(setValue(int)));
+	connect(drawer, SIGNAL(bortleScaleIndexChanged(int)), this, SLOT(setBortleScaleToolTip(int)));
 
 	ui->autoChangeLandscapesCheckBox->setChecked(lmgr->getFlagLandscapeAutoSelection());
 	connect(ui->autoChangeLandscapesCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeAutoSelection(bool)));
@@ -462,26 +466,10 @@ void ViewDialog::populateLandscapeMinimalBrightness()
 	}
 }
 
-void ViewDialog::populateLightPollution()
+void ViewDialog::setLightPollutionSpinBoxStatus()
 {
-	StelCore *core = StelApp::getInstance().getCore();
 	LandscapeMgr *lmgr = GETSTELMODULE(LandscapeMgr);
-	int bIdx = core->getSkyDrawer()->getBortleScaleIndex();
-	if (lmgr->getFlagUseLightPollutionFromDatabase())
-	{
-		StelLocation loc = core->getCurrentLocation();
-		bIdx = loc.bortleScaleIndex;
-		if (!loc.planetName.contains("Earth")) // location not on Earth...
-			bIdx = 1;
-		if (bIdx<1) // ...or it observatory, or it unknown location
-			bIdx = loc.DEFAULT_BORTLE_SCALE_INDEX;
-		ui->lightPollutionSpinBox->setEnabled(false);
-	}
-	else
-		ui->lightPollutionSpinBox->setEnabled(true);
-
-	ui->lightPollutionSpinBox->setValue(bIdx);
-	setBortleScaleToolTip(bIdx);
+	ui->lightPollutionSpinBox->setEnabled(!lmgr->getFlagUseLightPollutionFromDatabase());
 }
 
 void ViewDialog::setBortleScaleToolTip(int Bindex)

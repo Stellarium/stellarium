@@ -250,11 +250,6 @@ public slots:
 	//! Set atmosphere fade duration in s.
 	void setAtmosphereFadeDuration(const float f);
 
-	//! Set the light pollution following the Bortle Scale. Emits lightPollutionChanged().
-	void setAtmosphereBortleLightPollution(const int bIndex);
-	//! Get the light pollution following the Bortle Scale
-	int getAtmosphereBortleLightPollution() const;
-
 	//! Set the rotation of the landscape about the z-axis.
 	//! This is intended for special uses such as when the landscape consists of
 	//! a vehicle which might change orientation over time (e.g. a ship).
@@ -401,6 +396,12 @@ signals:
 private slots:
 	//! Load a color scheme from a configuration object
 	void setStelStyle(const QString& section);
+
+	//! Set the light pollution following the Bortle Scale. Emits lightPollutionChanged().
+	void setAtmosphereBortleLightPollution(const int bIndex);
+
+	//! Reacts to StelCore::locationChanged, and changes the light pollution if the flagLightPollutionFromDatabase is true
+	void updateLocationBasedPollution(StelLocation loc);
 
 	//! Translate labels to new language settings.
 	void updateI18n();	

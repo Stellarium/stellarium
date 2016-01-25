@@ -846,7 +846,7 @@ void TextUserInterface::saveDefaultSettings(void)
 	conf->setValue("color/nebula_circle_color", colToConf(nmgr->getCirclesColor()));
 
 	// sub-menu 6: effects
-	conf->setValue("stars/init_bortle_scale", lmgr->getAtmosphereBortleLightPollution());
+	conf->setValue("stars/init_bortle_scale", skyd->getBortleScaleIndex());
 	lmgr->setDefaultLandscapeID(lmgr->getCurrentLandscapeID());
 	conf->setValue("navigation/auto_zoom_out_resets_direction", mvmgr->getFlagAutoZoomOutResetsDirection());
 	conf->setValue("astro/milky_way_intensity", milk->getIntensity());
@@ -871,8 +871,6 @@ void TextUserInterface::shutDown()
 
 void TextUserInterface::setBortleScale(int bortle)
 {
-	LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
 	StelSkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
-	landscapeMgr->setAtmosphereBortleLightPollution(bortle);
 	skyDrawer->setBortleScaleIndex(bortle);
 }

@@ -399,15 +399,12 @@ void LandscapeMgr::init()
 	setFlagIllumination(conf->value("landscape/flag_enable_illumination_layer", true).toBool());
 	setFlagLabels(conf->value("landscape/flag_enable_labels", true).toBool());
 
-	bool ok =true;
-	setAtmosphereBortleLightPollution(conf->value("stars/init_bortle_scale",3).toInt(&ok));
-	if (!ok)
-	{
-		conf->setValue("stars/init_bortle_scale",3);
-		setAtmosphereBortleLightPollution(3);
-		ok = true;
-	}
 	StelApp *app = &StelApp::getInstance();
+	//Bortle scale is managed by SkyDrawer
+	StelSkyDrawer* drawer = app->getCore()->getSkyDrawer();
+	setAtmosphereBortleLightPollution(drawer->getBortleScaleIndex());
+	connect(app->getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(updateLocationBasedPollution(StelLocation)));
+	connect(drawer, SIGNAL(bortleScaleIndexChanged(int)), this, SLOT(setAtmosphereBortleLightPollution(int)));
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 
@@ -471,7 +468,6 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 			}
 			if (landscape->getDefaultBortleIndex() > 0)
 			{
-				setAtmosphereBortleLightPollution(landscape->getDefaultBortleIndex());
 				drawer->setBortleScaleIndex(landscape->getDefaultBortleIndex());
 			}
 			if (landscape->getDefaultAtmosphericExtinction() >= 0.0)
@@ -572,7 +568,33 @@ void LandscapeMgr::setFlagUseLightPollutionFromDatabase(const bool usage)
 	if (flagLightPollutionFromDatabase != usage)
 	{
 		flagLightPollutionFromDatabase = usage;
+
+		StelCore* core = StelApp::getInstance().getCore();
+
+		//this was previously logic in ViewDialog, but should really be on a non-GUI layer
+		if (usage)
+		{
+			StelLocation loc = core->getCurrentLocation();
+			updateLocationBasedPollution(loc);
+		}
+
 		emit lightPollutionUsageChanged(usage);
+	}
+}
+
+void LandscapeMgr::updateLocationBasedPollution(StelLocation loc)
+{
+	if(flagLightPollutionFromDatabase)
+	{
+		//this was previously logic in ViewDialog, but should really be on a non-GUI layer
+		StelCore* core = StelApp::getInstance().getCore();
+		int bIdx = loc.bortleScaleIndex;
+		if (!loc.planetName.contains("Earth")) // location not on Earth...
+			bIdx = 1;
+		if (bIdx<1) // ...or it observatory, or it unknown location
+			bIdx = loc.DEFAULT_BORTLE_SCALE_INDEX;
+
+		core->getSkyDrawer()->setBortleScaleIndex(bIdx);
 	}
 }
 
@@ -773,12 +795,6 @@ void LandscapeMgr::setAtmosphereBortleLightPollution(const int bIndex)
 	// This is an empirical formula
 	setAtmosphereLightPollutionLuminance(qMax(0.,0.0004*std::pow(bIndex-1, 2.1)));
 	emit lightPollutionChanged();
-}
-
-//! Get the light pollution following the Bortle Scale
-int LandscapeMgr::getAtmosphereBortleLightPollution() const
-{
-	return (int)std::pow(getAtmosphereLightPollutionLuminance()/0.0004, 1./2.1) + 1;
 }
 
 void LandscapeMgr::setZRotation(const float d)
