@@ -144,9 +144,36 @@ void StelDialog::setVisible(bool v)
 		proxy->setWidget(dialog);
 		QSizeF size = proxy->size();
 
-		// centre with dialog according to current window size.
-		int newX = (int)((screenSize.width() - size.width())/2);
-		int newY = (int)((screenSize.height() - size.height())/2);
+		int newX, newY;
+		QPoint storedPos;
+
+		// Retrieve panel locations from config.ini, but shift if required to a visible position.
+		// else centre dialog according to current window size.
+		QSettings *conf=StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		QString confNamePt="DialogPositions/" + dialogName;
+		QString storedPosString=conf->value(confNamePt,
+						    QString("%1,%2")
+						    .arg((int)((screenSize.width()  - size.width() )/2))
+						    .arg((int)((screenSize.height() - size.height())/2)))
+				.toString();
+		QStringList posList=storedPosString.split(",");
+		if (posList.length()==2)
+		{
+			newX=posList.at(0).toInt();
+			newY=posList.at(1).toInt();
+		}
+		else	// in case there is an invalid string?
+		{
+			newX=(int)((screenSize.width()  - size.width() )/2);
+			newY=(int)((screenSize.height() - size.height())/2);
+		}
+
+		if (newX>=screenSize.width())
+			newX= (screenSize.width()  - dialog->size().width());
+		if (newY>=screenSize.height())
+			newY= (screenSize.height() - dialog->size().height());
+
 		// Make sure that the window's title bar is accessible
 		if (newY <-0)
 			newY = 0;
@@ -256,6 +283,13 @@ void StelDialog::installKineticScrolling(QList<QWidget *> addscroll)
 void StelDialog::updateNightModeProperty()
 {
 	dialog->setProperty("nightMode", StelApp::getInstance().getVisionModeNight());
+}
+
+void StelDialog::handleMovedTo(QPoint newPos)
+{
+	QSettings *conf=StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	conf->setValue("DialogPositions/" + dialogName, QString("%1,%2").arg(newPos.x()).arg(newPos.y()));
 }
 
 QSliderStelPropertyConnectionHelper::QSliderStelPropertyConnectionHelper(QSlider *slider, StelProperty *prop, double minValue, double maxValue, QObject *parent)

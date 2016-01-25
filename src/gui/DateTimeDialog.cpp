@@ -43,6 +43,7 @@ DateTimeDialog::DateTimeDialog(QObject* parent) :
   mjd(0)
 {
 	ui = new Ui_dateTimeDialogForm;
+	dialogName = "DateTime";
 }
 
 DateTimeDialog::~DateTimeDialog()
@@ -60,6 +61,7 @@ void DateTimeDialog::createDialogContent()
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connectSpinnerEvents();
 }

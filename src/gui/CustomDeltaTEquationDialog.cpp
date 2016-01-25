@@ -28,6 +28,7 @@
 
 CustomDeltaTEquationDialog::CustomDeltaTEquationDialog()
 {
+	dialogName = "CustomDeltaTEquation";
 	ui = new Ui_customDeltaTEquationDialogForm;
 	conf = StelApp::getInstance().getSettings();
 	core = StelApp::getInstance().getCore();
@@ -69,6 +70,7 @@ void CustomDeltaTEquationDialog::createDialogContent()
 	//Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->lineEditNDot, SIGNAL(textEdited(const QString&)), this, SLOT(setNDot(const QString&)));
 	connect(ui->lineEditYear, SIGNAL(textEdited(const QString&)), this, SLOT(setYear(const QString&)));

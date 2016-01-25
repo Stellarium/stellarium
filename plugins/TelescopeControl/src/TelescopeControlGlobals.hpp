@@ -36,12 +36,10 @@ namespace TelescopeControlGlobals {
 	
 	const int MAX_CIRCLE_COUNT = 10;
 	
-	#ifdef Q_OS_WIN32
+	#ifdef Q_OS_WIN
 	const QString TELESCOPE_SERVER_PATH = QString("/%1.exe");
-	const QString SERIAL_PORT_PREFIX = QString("COM");
 	#else
 	const QString TELESCOPE_SERVER_PATH = QString("/%1");
-	const QString SERIAL_PORT_PREFIX = QString("/");
 	#endif
 	
 	const int DEFAULT_DELAY = 500000; //Microseconds; == 0.5 seconds

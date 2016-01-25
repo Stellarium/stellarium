@@ -620,6 +620,9 @@ void StelMainView::init(QSettings* conf)
 	// plugins, because the gui create the QActions needed by some plugins.
 	StelApp::getInstance().initPlugIns();
 
+	// activate DE430/431 
+	StelApp::getInstance().getCore()->initEphemeridesFunctions();
+
 	// The script manager can only be fully initialized after the plugins have loaded.
 	StelApp::getInstance().initScriptMgr();
 
