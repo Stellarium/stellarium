@@ -197,6 +197,9 @@ private:
 	bool flagShowNebulaBackgroundButton;
 	StelButton* btShowNebulaeBackground;
 
+	bool flagShowNebulaSurveyButton;
+	StelButton* btShowNebulaeSurvey;
+
 	bool initDone;
 
 	QSizeF savedProgressBarSize;
