@@ -1352,3 +1352,13 @@ double StelMainScriptAPI::getZodiacalLightIntensity()
 {
 	return GETSTELMODULE(ZodiacalLight)->getIntensity();
 }
+
+int StelMainScriptAPI::getBortleScaleIndex() const
+{
+	return StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex();
+}
+
+void StelMainScriptAPI::setBortleScaleIndex(int index)
+{
+	StelApp::getInstance().getCore()->getSkyDrawer()->setBortleScaleIndex(index);
+}
