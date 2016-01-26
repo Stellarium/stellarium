@@ -223,16 +223,16 @@
             <h3><label><input type="checkbox" class="valign-middle" value="actionShow_Atmosphere"/><?= tr("Atmosphere")?></label></h3>
             <label><input type="checkbox" value="actionShow_LightPollution_Database" /><?= tr("Light pollution data from locations database")?></label>
             <div class="table">
-              <p><label for="atmosphere_bortlescaleindex"><?= tr("Light pollution:")?></label><input id="atmosphere_bortlescaleindex" class="spinner stelproperty" name="prop_SkyDrawer_bortleScaleIndex" data-min="1" data-max="9" data-step="1" data-decimals="0s"/></p>
+              <p><label for="atmosphere_bortlescaleindex"><?= tr("Light pollution:")?></label><input id="atmosphere_bortlescaleindex" class="spinner stelproperty" name="prop_SkyDrawer_bortleScaleIndex" data-min="1" data-max="9" data-step="1" data-decimals="0"/></p>
             </div>
-            <!--<div class="innerblock">
-              <h3><?= tr("Refraction/Extinction settings...")?></h3>
+            <div id="vo_refraction" class="innerblock">
+              <h3><?= tr("Refraction Settings")?></h3>
               <div class="table">
-                <p><label for="atmosphere_bortlescaleindex"><?= tr("Light pollution:")?></label><input id="atmosphere_bortlescaleindex" class="spinner stelproperty" name="prop_SkyDrawer_bortleScaleIndex" data-min="1" data-max="9" data-step="1" data-decimals="0s"/></p>
-                <p><label for="atmosphere_bortlescaleindex"><?= tr("Light pollution:")?></label><input id="atmosphere_bortlescaleindex" class="spinner stelproperty" name="prop_SkyDrawer_bortleScaleIndex" data-min="1" data-max="9" data-step="1" data-decimals="0s"/></p>
-                <p><label for="atmosphere_bortlescaleindex"><?= tr("Light pollution:")?></label><input id="atmosphere_bortlescaleindex" class="spinner stelproperty" name="prop_SkyDrawer_bortleScaleIndex" data-min="1" data-max="9" data-step="1" data-decimals="0s"/></p>
+                <p><label for="atmosphere_pressure"><?= tr("Pressure (mbar):")?></label><input id="atmosphere_pressure" class="spinner stelproperty" name="prop_SkyDrawer_atmospherePressure" data-min="0" data-max="1500" data-step="1" data-decimals="2"/></p>
+                <p><label for="atmosphere_temperature"><?= tr("Temperature (C):")?></label><input id="atmosphere_temperature" class="spinner stelproperty" name="prop_SkyDrawer_atmosphereTemperature" data-min="-100" data-max="100" data-step="1" data-decimals="1"/></p>
+                <p><label for="atmosphere_extinction"><?= tr("Extinction Coefficient:")?></label><input id="atmosphere_extinction" class="spinner stelproperty" name="prop_SkyDrawer_extinctionCoefficient" data-min="0" data-max="3" data-step="0.01" data-decimals="2"/></p>
               </div>
-            </div>-->
+            </div>
           </div>
           <div class="smallblock flex">
             <h3><?= tr("Markings")?></h3>
