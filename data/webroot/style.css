@@ -796,6 +796,14 @@ button.button32:active {
 	width: 30px;
 }
 
+#vo_refraction .table label {
+	min-width: 200px;
+}
+
+#vo_refraction input.spinner{
+	width: 60px;
+}
+
 #vo_dsolabels label{
 	min-width: 70px;
 }

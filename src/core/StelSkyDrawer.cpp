@@ -210,6 +210,10 @@ void StelSkyDrawer::init()
 	mgr->registerProperty("prop_SkyDrawer_customPlanetMagLimit",this,"customPlanetMagLimit");
 
 	mgr->registerProperty("prop_SkyDrawer_flagLuminanceAdaptation",this,"flagLuminanceAdaptation");
+
+	mgr->registerProperty("prop_SkyDrawer_extinctionCoefficient",this,"extinctionCoefficient");
+	mgr->registerProperty("prop_SkyDrawer_atmosphereTemperature",this,"atmosphereTemperature");
+	mgr->registerProperty("prop_SkyDrawer_atmospherePressure",this,"atmospherePressure");
 			
 	update(0);
 }

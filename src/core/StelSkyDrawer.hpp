@@ -61,6 +61,11 @@ class StelSkyDrawer : public QObject
 	Q_PROPERTY(double customPlanetMagLimit READ getCustomPlanetMagnitudeLimit WRITE setCustomPlanetMagnitudeLimit NOTIFY customPlanetMagLimitChanged)
 
 	Q_PROPERTY(bool flagLuminanceAdaptation READ getFlagLuminanceAdaptation WRITE setFlagLuminanceAdaptation NOTIFY flagLuminanceAdaptationChanged)
+
+	Q_PROPERTY(double extinctionCoefficient READ getExtinctionCoefficient WRITE setExtinctionCoefficient NOTIFY extinctionCoefficientChanged)
+	Q_PROPERTY(double atmosphereTemperature READ getAtmosphereTemperature WRITE setAtmosphereTemperature NOTIFY atmosphereTemperatureChanged)
+	Q_PROPERTY(double atmospherePressure READ getAtmospherePressure WRITE setAtmospherePressure NOTIFY atmospherePressureChanged)
+
 public:
 
 	//! Constructor
@@ -231,15 +236,15 @@ public slots:
 	bool getFlagHasAtmosphere() const {return flagHasAtmosphere;}
 
 	//! Set extinction coefficient, mag/airmass (for extinction).
-	void setExtinctionCoefficient(double extCoeff) {extinction.setExtinctionCoefficient(extCoeff);}
+	void setExtinctionCoefficient(double extCoeff) {if(extCoeff!=extinction.getExtinctionCoefficient()){ extinction.setExtinctionCoefficient(extCoeff); emit extinctionCoefficientChanged(extinction.getExtinctionCoefficient());}}
 	//! Get extinction coefficient, mag/airmass (for extinction).
 	double getExtinctionCoefficient() const {return extinction.getExtinctionCoefficient();}
 	//! Set atmospheric (ground) temperature in deg celsius (for refraction).
-	void setAtmosphereTemperature(double celsius) {refraction.setTemperature(celsius);}
+	void setAtmosphereTemperature(double celsius) {if(celsius!=refraction.getTemperature()){refraction.setTemperature(celsius); emit atmosphereTemperatureChanged(refraction.getTemperature());}}
 	//! Get atmospheric (ground) temperature in deg celsius (for refraction).
 	double getAtmosphereTemperature() const {return refraction.getTemperature();}
 	//! Set atmospheric (ground) pressure in mbar (for refraction).
-	void setAtmospherePressure(double mbar) {refraction.setPressure(mbar);}
+	void setAtmospherePressure(double mbar) {if(mbar!=refraction.getPressure()){ refraction.setPressure(mbar); emit atmospherePressureChanged(refraction.getPressure());}}
 	//! Get atmospheric (ground) pressure in mbar (for refraction).
 	double getAtmospherePressure() const {return refraction.getPressure();}
 
@@ -280,6 +285,10 @@ signals:
 
 	//! Emitted whenever the luminance adaptation flag is toggled
 	void flagLuminanceAdaptationChanged(bool b);
+
+	void extinctionCoefficientChanged(double coeff);
+	void atmosphereTemperatureChanged(double celsius);
+	void atmospherePressureChanged(double mbar);
 	
 private:
 	// Debug
