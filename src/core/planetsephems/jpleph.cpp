@@ -142,7 +142,7 @@ int DLL_FUNC jpl_pleph(void *ephem, const double et, const int ntarg,
                       const int ncent, double rrd[], const int calc_velocity)
 {
     struct jpl_eph_data *eph = (struct jpl_eph_data *)ephem;
-    double pv[13][6];/* pv is the position/velocity array
+    double pv[13][6]={0.};/* pv is the position/velocity array
                              NUMBERED FROM ZERO: 0=Mercury,1=Venus,...
                              8=Pluto,9=Moon,10=Sun,11=SSBary,12=EMBary
                              First 10 elements (0-9) are affected by
@@ -180,6 +180,13 @@ int DLL_FUNC jpl_pleph(void *ephem, const double et, const int ntarg,
         if(eph->ipt[i + 11][1] > 0) /* quantity is in ephemeris */
         {
           list[i + 10] = list_val;
+
+	  // GZ: Coverity Scan (travis) automatic test chokes on next line with:
+	  // CID 134920:  Memory - corruptions  (OVERRUN)
+	  //     Overrunning array "list" of 56 bytes by passing it to a function
+	  //     which accesses it at byte offset 56.
+	  // I see it does explicitly NOT access list[14].
+	  // TODO: check again after next round of travis.
           rval = jpl_state(ephem, et, list, pv, rrd, 0);
         }
         else          /*  quantity doesn't exist in the ephemeris file  */
@@ -571,104 +578,104 @@ static int dimension(const int idx)
 int DLL_FUNC jpl_state(void *ephem, const double et, const int list[14],
                           double pv[][6], double nut[4], const int bary)
 {
-  struct jpl_eph_data *eph = (struct jpl_eph_data *)ephem;
-  unsigned i, j, n_intervals;
-  uint32_t nr;
-  double *buf = eph->cache;
-  double t[2];
-  const double block_loc = (et - eph->ephem_start) / eph->ephem_step;
-  bool recompute_pvsun;
-  const double aufac = 1.0 / eph->au;
+	struct jpl_eph_data *eph = (struct jpl_eph_data *)ephem;
+	unsigned i, j, n_intervals;
+	uint32_t nr;
+	double *buf = eph->cache;
+	double t[2];
+	const double block_loc = (et - eph->ephem_start) / eph->ephem_step;
+	bool recompute_pvsun;
+	const double aufac = 1.0 / eph->au;
 
-/*   error return for epoch out of range  */
-  if(et < eph->ephem_start || et > eph->ephem_end)
-    return(JPL_EPH_OUTSIDE_RANGE);
+	/*   error return for epoch out of range  */
+	if(et < eph->ephem_start || et > eph->ephem_end)
+		return(JPL_EPH_OUTSIDE_RANGE);
 
-/*   calculate record # and relative time in interval   */
+	/*   calculate record # and relative time in interval   */
 
-  nr = (uint32_t)block_loc;
-  t[0] = block_loc - (double)nr;
-  if(!t[0] && nr)
-  {
-    t[0] = 1.;
-    nr--;
-  }  
+	nr = (uint32_t)block_loc;
+	t[0] = block_loc - (double)nr;
+	if(!t[0] && nr)
+	{
+		t[0] = 1.;
+		nr--;
+	}
 
-/*   read correct record if not in core (static vector buf[])   */
-    if(nr != eph->curr_cache_loc)
-    {
-      eph->curr_cache_loc = nr;
-                  /* Read two blocks ahead to account for header: */
-      if(FSeek(eph->ifile, (nr + 2) * eph->recsize, SEEK_SET))
-      {
-	      // GZ: Make sure we will try again on next call...
-	      eph->curr_cache_loc=0;
-	      return(JPL_EPH_FSEEK_ERROR);
-      }
-      if(fread(buf, sizeof(double), (size_t)eph->ncoeff, eph->ifile)
-                               != (size_t)eph->ncoeff)
-        return(JPL_EPH_READ_ERROR);
+	/*   read correct record if not in core (static vector buf[])   */
+	if(nr != eph->curr_cache_loc)
+	{
+		eph->curr_cache_loc = nr;
+		/* Read two blocks ahead to account for header: */
+		if(FSeek(eph->ifile, (nr + 2) * eph->recsize, SEEK_SET))
+		{
+			// GZ: Make sure we will try again on next call...
+			eph->curr_cache_loc=0;
+			return(JPL_EPH_FSEEK_ERROR);
+		}
+		if(fread(buf, sizeof(double), (size_t)eph->ncoeff, eph->ifile)
+				!= (size_t)eph->ncoeff)
+			return(JPL_EPH_READ_ERROR);
 
-      if(eph->swap_bytes)
-         swap_64_bit_val(buf, eph->ncoeff);
-      }
-    t[1] = eph->ephem_step;
+		if(eph->swap_bytes)
+			swap_64_bit_val(buf, eph->ncoeff);
+	}
+	t[1] = eph->ephem_step;
 
-    if(eph->pvsun_t != et)   /* If several calls are made for the same et, */
-    {                      /* don't recompute pvsun each time... only on */
-      recompute_pvsun = true;   /* the first run through.                     */
-      eph->pvsun_t = et;
-    }
-    else
-      recompute_pvsun = false;
+	if(eph->pvsun_t != et)   /* If several calls are made for the same et, */
+	{                      /* don't recompute pvsun each time... only on */
+		recompute_pvsun = true;   /* the first run through.                     */
+		eph->pvsun_t = et;
+	}
+	else
+		recompute_pvsun = false;
 
-          /* Here, i loops through the "traditional" 14 listed items -- 10
-          solar system objects,  nutations,  librations,  lunar mantle angles,
-          and TT-TDT -- plus a fifteenth:  the solar system barycenter.  That
-          last is quite different:  it's computed 'as needed',  rather than
-          from list[];  the output goes to pvsun rather than the pv array;
-          and three quantities (position,  velocity,  acceleration) are
-          computed (nobody else gets accelerations at present.)  */
-  for(n_intervals = 1; n_intervals <= 8; n_intervals *= 2)
-    for(i = 0; i < 15; i++)
-    {
-        unsigned quantities;
-        uint32_t *iptr = &eph->ipt[i + 1][0];
+	/* Here, i loops through the "traditional" 14 listed items -- 10
+	  solar system objects,  nutations,  librations,  lunar mantle angles,
+	  and TT-TDT -- plus a fifteenth:  the solar system barycenter.  That
+	  last is quite different:  it's computed 'as needed',  rather than
+	  from list[];  the output goes to pvsun rather than the pv array;
+	  and three quantities (position,  velocity,  acceleration) are
+	  computed (nobody else gets accelerations at present.)  */
+	for(n_intervals = 1; n_intervals <= 8; n_intervals *= 2)
+		for(i = 0; i < 15; i++)
+		{
+			unsigned quantities;
+			uint32_t *iptr = &eph->ipt[i + 1][0];
 
-        if(i == 14)
-        {
-            quantities = (recompute_pvsun ? 3 : 0);
-            iptr = &eph->ipt[10][0];
-          }
-          else
-          {
-            quantities = list[i];
-            iptr = &eph->ipt[i < 10 ? i : i + 1][0];
-          }
-          if(n_intervals == iptr[2] && quantities)
-          {
-            double *dest = ((i == 10) ? eph->pvsun : pv[i]);
+			if(i == 14)
+			{
+				quantities = (recompute_pvsun ? 3 : 0);
+				iptr = &eph->ipt[10][0];
+			}
+			else
+			{
+				quantities = list[i];
+				iptr = &eph->ipt[i < 10 ? i : i + 1][0];
+			}
+			if(n_intervals == iptr[2] && quantities)
+			{
+				double *dest = ((i == 10) ? eph->pvsun : pv[i]);
 
-            if(i < 10)
-               dest = pv[i];
-            else if(i == 14)
-               dest = eph->pvsun;
-            else
-               dest = nut;
-            interp(&eph->iinfo, &buf[iptr[0]-1], t, (int)iptr[1],
-                                    dimension(i + 1),
-                                    n_intervals, quantities, dest);
+				if(i < 10)
+					dest = pv[i];
+				else if(i == 14)
+					dest = eph->pvsun;
+				else
+					dest = nut;
+				interp(&eph->iinfo, &buf[iptr[0]-1], t, (int)iptr[1],
+						dimension(i + 1),
+						n_intervals, quantities, dest);
 
-            if(i < 10 || i == 14)        /*  convert km to AU */
-               for(j = 0; j < quantities * 3; j++)
-                  dest[j] *= aufac;
-            }
-         }
-    if(!bary)                             /* gotta correct everybody for */
-      for(i = 0; i < 9; i++)            /* the solar system barycenter */
-         for(j = 0; j < (unsigned)list[i] * 3; j++)
-            pv[i][j] -= eph->pvsun[j];
-    return(0);
+				if(i < 10 || i == 14)        /*  convert km to AU */
+					for(j = 0; j < quantities * 3; j++)
+						dest[j] *= aufac;
+			}
+		}
+	if(!bary)                             /* gotta correct everybody for */
+		for(i = 0; i < 9; i++)            /* the solar system barycenter */
+			for(j = 0; j < (unsigned)list[i] * 3; j++)
+				pv[i][j] -= eph->pvsun[j];
+	return(0);
 }
 
 static int init_err_code = JPL_INIT_NOT_CALLED;
@@ -806,7 +813,12 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
          /* need to fseek().  Otherwise,  we gotta skip 6*(n_constants-400) */
          /* bytes. */
       if(temp_data.ncon > 400)
-	 FSeek(ifile, (size_t)(temp_data.ncon - 400) * 6, SEEK_CUR);
+      {
+	if ( FSeek(ifile, (size_t)(temp_data.ncon - 400) * 6, SEEK_CUR) != 0)
+	{
+	      qWarning() << "jpl_init_ephemeris(): Cannot seek in file. Result will be undefined.";
+	}
+      }
       if(fread(&temp_data.ipt[13][0], sizeof(int32_t), 6, ifile) != 6)
          init_err_code = JPL_INIT_FREAD5_FAILED;
     }
@@ -953,26 +965,40 @@ void DLL_FUNC jpl_close_ephemeris(void *ephem)
 
 double DLL_FUNC jpl_get_constant(const int idx, void *ephem, char *constant_name)
 {
-   struct jpl_eph_data *eph = (struct jpl_eph_data *)ephem;
-   double rval = 0.;
+	struct jpl_eph_data *eph = (struct jpl_eph_data *)ephem;
+	double rval = 0.;
 
-   *constant_name = '\0';
-   if(idx >= 0 && idx < (int)eph->ncon)
-      {
-	   // GZ extended from const long to const long long
-      const long long seek_loc = (idx < 400 ? 84L * 3L + (long)idx * 6 :
-                      START_400TH_CONSTANT_NAME + (idx - 400) * 6);
+	*constant_name = '\0';
+	if(idx >= 0 && idx < (int)eph->ncon)
+	{
+		// GZ extended from const long to const long long
+		const long long seek_loc = (idx < 400 ? 84L * 3L + (long)idx * 6 :
+							START_400TH_CONSTANT_NAME + (idx - 400) * 6);
 
-      FSeek(eph->ifile, seek_loc, SEEK_SET);
-      if(fread(constant_name, 1, 6, eph->ifile))
-         {
-         constant_name[6] = '\0';
-	 FSeek(eph->ifile, eph->recsize + (long)idx * sizeof(double), SEEK_SET);
-         if(fread(&rval, 1, sizeof(double), eph->ifile))
-            if(eph->swap_bytes)     /* gotta swap the constants,  too */
-               swap_64_bit_val(&rval, 1);
-         }
-      }
-   return(rval);
+		if (FSeek(eph->ifile, seek_loc, SEEK_SET) != 0)
+		{
+			qWarning() << "jpl_get_constant(): Cannot seek in file. Result will be undefined.";
+		}
+		if(fread(constant_name, 1, 6, eph->ifile) == 6 )
+		{
+			constant_name[6] = '\0';
+			if (FSeek(eph->ifile, eph->recsize + (long)idx * sizeof(double), SEEK_SET) != 0)
+			{
+				qWarning() << "jpl_get_constant(): Cannot seek in file (call2). Result will be undefined.";
+			}
+
+			// GZ added tests to make travis test suite (Coverity Scan) happier
+			if( fread(&rval, 1, sizeof(double), eph->ifile) == sizeof(double) )
+			{
+				if(eph->swap_bytes)     /* gotta swap the constants,  too */
+					swap_64_bit_val(&rval, 1);
+			}
+			else
+				qWarning() << "jpl_get_constant(): fread() failed to read a double. Result will be undefined.";
+		}
+		else
+			qWarning() << "jpl_get_constant(): fread() failed to read a constant name. Result will be 0, likely wrong.";
+	}
+	return(rval);
 }
 /*************************** THE END ***************************************/
