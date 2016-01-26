@@ -137,11 +137,7 @@ bool AddOn::isCompatible(QString first, QString last)
 
 QString AddOn::getZipPath()
 {
-	if (m_sZipPath.isEmpty())
-	{
-		return StelApp::getInstance().getStelAddOnMgr().getAddOnDir() % m_sDownloadFilename;
-	}
-	return m_sZipPath;
+	return StelApp::getInstance().getStelAddOnMgr().getAddOnDir() % m_sDownloadFilename;
 }
 
 QString AddOn::getStatusString() {

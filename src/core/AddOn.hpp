@@ -90,7 +90,6 @@ public:
 	QString getChecksum() { return m_sChecksum; }
 
 	QString getZipPath();
-	void setZipPath(QString path) { m_sZipPath = path; }
 
 	Status getStatus() { return m_eStatus; }
 	QString getStatusString();
@@ -114,7 +113,6 @@ private:
 	QString m_sDownloadURL;
 	QString m_sDownloadFilename;
 	QString m_sDownloadSize;
-	QString m_sZipPath;
 	QString m_sChecksum;
 	QString m_sThumbnail;
 	QList<Authors> m_authors;

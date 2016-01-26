@@ -296,6 +296,20 @@ void StelAddOnMgr::removeAddons(QSet<AddOn *> addons)
 void StelAddOnMgr::installAddOnFromFile(QString filePath)
 {
 	AddOn* addon = getAddOnFromZip(filePath);
+	if (addon == NULL || !addon->isValid())
+	{
+		return;
+	}
+	else if (!filePath.startsWith(m_sAddOnDir))
+	{
+		if (!QFile(filePath).copy(addon->getZipPath()))
+		{
+			qWarning() << "[Add-on] Unable to copy"
+				   << addon->getAddOnId() << "to"
+				   << addon->getZipPath();
+			return;
+		}
+	}
 
 	// checking if this addonId is in the catalog
 	AddOn* addonInHash = m_addonsAvailable.value(addon->getAddOnId());
@@ -318,7 +332,6 @@ void StelAddOnMgr::installAddOnFromFile(QString filePath)
 		else
 		{
 			// same file! just install it!
-			addonInHash->setZipPath(filePath);
 			installAddOn(addonInHash, false);
 		}
 	}
@@ -488,9 +501,9 @@ AddOn* StelAddOnMgr::getAddOnFromZip(QString filePath)
 			QString md5sum = calculateMd5(zipFile);
 			attributes.insert("checksum", md5sum);
 			attributes.insert("download-size", zipFile.size() / 1024.0);
-			AddOn* addon = new AddOn(addonId, attributes);
-			addon->setZipPath(filePath);
-			return addon;
+			attributes.insert("download-filename", QFileInfo(zipFile).fileName());
+
+			return new AddOn(addonId, attributes);
 		}
 	}
 	return NULL;
