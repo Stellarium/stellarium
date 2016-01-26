@@ -72,7 +72,6 @@ private slots:
 	void setAppLanguage(QString lang);
 	void saveDefaultSettings(void);
 	void shutDown(void);
-	void setBortleScale(int bortle);
 
 private:
 	DummyDialog dummyDialog;

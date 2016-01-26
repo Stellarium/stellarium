@@ -744,6 +744,19 @@ public slots:
 	//! @return value of Zodiacal Light intensity, e.g. "1.2"
 	double getZodiacalLightIntensity();
 
+	//! Returns the currently set Bortle scale index, which is used to simulate light pollution.
+	//! Wrapper for StelSkyDrawer::getBortleScaleIndex
+	//! @see https://en.wikipedia.org/wiki/Bortle_scale
+	//! @return the Bortle scale index in range [1,9]
+	int getBortleScaleIndex() const;
+
+	//! Changes the Bortle scale index, which is used to simulate light pollution.
+	//! Wrapper for StelSkyDrawer::setBortleScaleIndex
+	//! Valid values are in the range [1,9]
+	//! @see https://en.wikipedia.org/wiki/Bortle_scale
+	//! @param index the new Bortle scale index, must be in range [1,9]
+	void setBortleScaleIndex(int index);
+
 	//! For use in setDate and waitFor
 	//! For parameter descriptions see setDate().
 	//! @returns Julian day.

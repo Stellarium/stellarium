@@ -171,9 +171,10 @@ public slots:
 
 	//! Set the parameters so that the stars disappear at about the limit given by the bortle scale
 	//! The limit is valid only at a given zoom level (around 60 deg)
-	//! See http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
+	//! @see https://en.wikipedia.org/wiki/Bortle_scale
 	void setBortleScaleIndex(int index);
 	//! Get the current Bortle scale index
+	//! @see https://en.wikipedia.org/wiki/Bortle_scale
 	int getBortleScaleIndex() const {return bortleScaleIndex;}
 
 	//! Get the magnitude of the currently faintest visible point source
