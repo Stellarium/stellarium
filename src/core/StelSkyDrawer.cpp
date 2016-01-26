@@ -86,9 +86,9 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 
 	bool ok=true;
 
-	setBortleScaleIndex(conf->value("stars/init_bortle_scale",2).toInt(&ok));
+	setBortleScaleIndex(conf->value("stars/init_bortle_scale",3).toInt(&ok));
 	if (!ok)
-		setBortleScaleIndex(2);
+		setBortleScaleIndex(3);
 
 	setRelativeStarScale(conf->value("stars/relative_scale",1.0).toFloat(&ok));
 	if (!ok)
