@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-17 15:39+0600\n"
-"PO-Revision-Date: 2015-12-15 11:48+0000\n"
+"PO-Revision-Date: 2016-01-25 14:40+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-18 05:28+0000\n"
-"X-Generator: Launchpad (build 17886)\n"
+"X-Launchpad-Export-Date: 2016-01-26 05:08+0000\n"
+"X-Generator: Launchpad (build 17902)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:904 src/core/modules/LandscapeMgr.cpp:414
@@ -1847,11 +1847,11 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1256 src/gui/ConfigurationDialog.cpp:1265
 msgid "Available"
-msgstr ""
+msgstr "Available"
 
 #: src/gui/ConfigurationDialog.cpp:1258 src/gui/ConfigurationDialog.cpp:1267
 msgid "Not Available"
-msgstr ""
+msgstr "Not Available"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1330
@@ -3467,6 +3467,7 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 261 events in all!"
 msgstr ""
+"Screensaver of various happenings in the Solar System. 261 events in all!"
 
 #: src/translations.h:310
 msgid "A tour of the western constellations."
@@ -5429,40 +5430,45 @@ msgstr "Sky Culture Language"
 
 #: src/ui_configurationDialog.h:1086
 msgid "Ephemeris settings"
-msgstr ""
+msgstr "Ephemeris settings"
 
 #: src/ui_configurationDialog.h:1087 src/ui_configurationDialog.h:1088
 msgid "Not installed"
-msgstr ""
+msgstr "Not installed"
 
 #: src/ui_configurationDialog.h:1090
 msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
 msgstr ""
+"DE431 provides position data for years -13000...+17000. For special "
+"applications only."
 
 #: src/ui_configurationDialog.h:1092
 msgid "Use DE431 (long-time data)"
-msgstr ""
+msgstr "Use DE431 (long-time data)"
 
 #: src/ui_configurationDialog.h:1094
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
-msgstr ""
+msgstr "DE430 provides highest accuracy, only for years 1550...2650."
 
 #: src/ui_configurationDialog.h:1096
 msgid "Use DE430 (high accuracy)"
-msgstr ""
+msgstr "Use DE430 (high accuracy)"
 
 #: src/ui_configurationDialog.h:1098
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
 msgstr ""
+"Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
+"useful positions outside this range."
 
 #: src/ui_configurationDialog.h:1100
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
+"VSOP87/ELP2000-82B is used when these are not installed or not activated."
 
 #: src/ui_configurationDialog.h:1101
 msgid "Default options"
