@@ -38,6 +38,16 @@ class QSettings;
 //! This includes landscape textures, fog, atmosphere and cardinal points.
 //! I decided to put all these elements together in a single class because they are
 //! inherently linked, especially when we start moving the observer in altitude.
+//! \note
+//! The Bortle scale index setting was removed from this class, because it was duplicated
+//! from StelSkyDrawer, complicating code that changes it.
+//! It is now only in StelSkyDrawer and can be accessed with
+//! with \link StelSkyDrawer::getBortleScaleIndex getBortleScaleIndex \endlink
+//! and \link StelSkyDrawer::setBortleScaleIndex setBortleScaleIndex \endlink.
+//! Slots setAtmosphereBortleLightPollution and getAtmosphereBortleLightPollution
+//! in this class have been removed/made private.
+//! If script access is desired, use
+//! \link StelMainScriptAPI::getBortleScaleIndex StelMainScriptAPI::get \endlink/\link StelMainScriptAPI::setBortleScaleIndex setBortleScaleIndex \endlink
 class LandscapeMgr : public StelModule
 {
 	Q_OBJECT
@@ -250,6 +260,12 @@ public slots:
 	//! Set atmosphere fade duration in s.
 	void setAtmosphereFadeDuration(const float f);
 
+	/*
+	//This method has been removed, use StelSkyDrawer::getBortleScaleIndex instead, or StelMainScriptAPI::getBortleScaleIndex in scripts
+	//Also, if required, please use StelSkyDrawer::setBortleScaleIndex or StelMainScriptAPI::setBortleScaleIndex instead of LandscapeMgr::setAtmosphereBortleLightPollution
+	int getAtmosphereBortleLightPollution() const;
+	*/
+
 	//! Set the rotation of the landscape about the z-axis.
 	//! This is intended for special uses such as when the landscape consists of
 	//! a vehicle which might change orientation over time (e.g. a ship).
@@ -370,9 +386,6 @@ signals:
 	//! the Sky and viewing options window (the ViewDialog class)
 	void landscapesChanged();
 
-	//! emitted by setAtmosphereBortleLightPollution().
-	void lightPollutionChanged();
-
 	//! Emitted when installLandscapeFromArchive() can't read from, write to or
 	//! create a file or a directory.
 	//! (A way of moving the need for translatable error messages to the GUI.)
@@ -397,7 +410,8 @@ private slots:
 	//! Load a color scheme from a configuration object
 	void setStelStyle(const QString& section);
 
-	//! Set the light pollution following the Bortle Scale. Emits lightPollutionChanged().
+	//! Set the light pollution following the Bortle Scale.
+	//! This should not be called from script code, use StelMainScriptAPI::setBortleScaleIndex if you want to change the light pollution.
 	void setAtmosphereBortleLightPollution(const int bIndex);
 
 	//! Reacts to StelCore::locationChanged, and changes the light pollution if the flagLightPollutionFromDatabase is true
