@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-17 15:39+0600\n"
-"PO-Revision-Date: 2016-01-16 04:22+0000\n"
+"PO-Revision-Date: 2016-01-26 18:13+0000\n"
 "Last-Translator: Lê Văn Bách <levanbach1994ag@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-18 05:27+0000\n"
-"X-Generator: Launchpad (build 17886)\n"
+"X-Launchpad-Export-Date: 2016-01-27 05:09+0000\n"
+"X-Generator: Launchpad (build 17902)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:904 src/core/modules/LandscapeMgr.cpp:414
@@ -1846,11 +1846,11 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1256 src/gui/ConfigurationDialog.cpp:1265
 msgid "Available"
-msgstr ""
+msgstr "Sẵn có"
 
 #: src/gui/ConfigurationDialog.cpp:1258 src/gui/ConfigurationDialog.cpp:1267
 msgid "Not Available"
-msgstr ""
+msgstr "Không sẵn có"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1330
@@ -5446,40 +5446,46 @@ msgstr "Ngôn ngữ văn hóa bầu trời"
 
 #: src/ui_configurationDialog.h:1086
 msgid "Ephemeris settings"
-msgstr ""
+msgstr "Cài đặt lịch thiên văn"
 
 #: src/ui_configurationDialog.h:1087 src/ui_configurationDialog.h:1088
 msgid "Not installed"
-msgstr ""
+msgstr "Không được cài đặt"
 
 #: src/ui_configurationDialog.h:1090
 msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
 msgstr ""
+"DE431 cung cấp dữ liệu vị trí cho những năm -13000...+17000. Chỉ dành cho "
+"những chương trình đặc biệt."
 
 #: src/ui_configurationDialog.h:1092
 msgid "Use DE431 (long-time data)"
-msgstr ""
+msgstr "Sử dụng DE431 (Dữ liệu thời gian dài)"
 
 #: src/ui_configurationDialog.h:1094
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
-msgstr ""
+msgstr "DE430 cung cấp sự chính xác cao nhất, chỉ cho những năm 1550...2650."
 
 #: src/ui_configurationDialog.h:1096
 msgid "Use DE430 (high accuracy)"
-msgstr ""
+msgstr "Sử dụng DE430 (sự chính xác cao)"
 
 #: src/ui_configurationDialog.h:1098
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
 msgstr ""
+"Sử dụng VSOP87 chỉ được đề nghị cho những năm -4000...+8000, nhưng phân phát "
+"vị trí hữu dụng nằm ngoài phạm vi này."
 
 #: src/ui_configurationDialog.h:1100
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
+"VSOP87/ELP2000-82B được sử dụng khi những cái này không được cài đặt hoặc "
+"không được kích hoạt."
 
 #: src/ui_configurationDialog.h:1101
 msgid "Default options"
