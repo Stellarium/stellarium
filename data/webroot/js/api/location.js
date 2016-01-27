@@ -91,6 +91,7 @@ define(["jquery", "./remotecontrol", "./updatequeue"], function($, rc, UpdateQue
         }
         if (lastAltitude !== loc.altitude) {
             $(publ).trigger('altitudeChanged', loc.altitude);
+            lastAltitude = loc.altitude;
         }
         var posChanged = false;
         if (lastLat !== loc.latitude) {

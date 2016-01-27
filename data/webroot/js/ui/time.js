@@ -106,13 +106,13 @@ define(["jquery", "api/time", "api/actions", "jquery-ui"], function($, timeApi, 
 		$("#input_jd").spinner({
 			min: -100000000,
 			max: 100000000,
-			numberFormat: "d5",
+			numberFormat: "n5",
 			step: 0.00001
 		});
 		$("#input_mjd").spinner({
 			min: -100000000,
 			max: 100000000,
-			numberFormat: "d5",
+			numberFormat: "n5",
 			step: 0.00001
 		});
 
