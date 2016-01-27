@@ -352,6 +352,12 @@ h2 {
 	align-items: baseline;
 }
 
+.slider {
+	min-width: 150px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
 #loadindicator {
 	position: fixed;
 	width: 32px;
@@ -782,10 +788,6 @@ button.button32:active {
 
 .table > p > * {
 	display: table-cell;
-}
-
-#tab_view .flex-baseline label {
-	margin-right: 8px;
 }
 
 #tab_view .table label {

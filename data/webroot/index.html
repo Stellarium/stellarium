@@ -215,6 +215,7 @@
               <p><label><input class="stelproperty" name="prop_SolarSystem_flagMoonScale" type="checkbox"/><?= tr("Scale Moon:")?></label><input class="spinner stelproperty" name="prop_SolarSystem_moonScale" data-min="1" data-max="20" data-step="0.1" data-decimals="2"/></p>
               <p><label><input class="stelproperty" name="prop_SkyDrawer_flagPlanetMagnitudeLimit" type="checkbox"/><?= tr("Limit magnitude:")?></label><input class="spinner stelproperty" name="prop_SkyDrawer_customPlanetMagLimit" data-min="0" data-max="22" data-step="0.1" data-decimals="2"/></p>
             </div>
+            <label><input class="stelproperty" name="prop_LandscapeMgr_flagLandscapeAutoSelection" type="checkbox"/><?= tr("Auto select landscapes")?></label>
             <div class="flex flex-baseline">
               <label><input type="checkbox" value="actionShow_Planets_Labels"/><?= tr("Labels and Markers")?></label><div class="slider stelproperty flex-expand" data-prop="prop_SolarSystem_labelsAmount" data-min="0" data-max="10" data-step="0.1"></div>
             </div>
@@ -233,6 +234,12 @@
                 <p><label for="atmosphere_extinction"><?= tr("Extinction Coefficient:")?></label><input id="atmosphere_extinction" class="spinner stelproperty" name="prop_SkyDrawer_extinctionCoefficient" data-min="0" data-max="3" data-step="0.01" data-decimals="2"/></p>
               </div>
             </div>
+            <div class="innerblock flex flex-baseline">
+            <h3><?= tr("Shooting Stars")?></h3>
+            <label><?= tr("ZHR:")?></label>
+            <div class="slider stelproperty flex-expand" data-prop="prop_SporadicMeteorMgr_zhr" data-min="0" data-max="240000" data-step="1"></div>
+            <span class="stelproperty" style="margin-left: 5px; min-width: 48px;" data-prop="prop_SporadicMeteorMgr_zhr">Blabla</span>
+          </div>
           </div>
           <div class="smallblock flex">
             <h3><?= tr("Markings")?></h3>

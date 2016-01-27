@@ -416,6 +416,7 @@ void LandscapeMgr::init()
 	addAction("actionShow_LandscapeIllumination", displayGroup, N_("Illumination"), "illuminationDisplayed", "Shift+G");
 	addAction("actionShow_LandscapeLabels", displayGroup, N_("Labels"), "labelsDisplayed", "Ctrl+Shift+G");
 	addAction("actionShow_LightPollution_Database", displayGroup, N_("Light pollution data from locations database"), "databaseUsage");
+	registerProperty("prop_LandscapeMgr_flagLandscapeAutoSelection","flagLandscapeAutoSelection");
 }
 
 void LandscapeMgr::setStelStyle(const QString& section)
@@ -639,7 +640,11 @@ bool LandscapeMgr::getFlagLabels() const
 
 void LandscapeMgr::setFlagLandscapeAutoSelection(bool enableAutoSelect)
 {
-	flagLandscapeAutoSelection = enableAutoSelect;
+	if(enableAutoSelect != flagLandscapeAutoSelection)
+	{
+		flagLandscapeAutoSelection = enableAutoSelect;
+		emit flagLandscapeAutoSelectionChanged(enableAutoSelect);
+	}
 }
 
 bool LandscapeMgr::getFlagLandscapeAutoSelection() const
