@@ -104,8 +104,9 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CULL_FACE);
+	// GZ moved that to StelApp. Is this a comment from Qt4 times?
 	// Fix some problem when using Qt OpenGL2 engine
-	glStencilMask(0x11111111);
+	//glStencilMask(0x11111111);
 	// Deactivate drawing in depth buffer by default
 	glDepthMask(GL_FALSE);
 	enableTexture2d(false);
@@ -533,7 +534,8 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		// painter.setFont(currentFont);
 		
 		QPainter painter(&device);
-		painter.beginNativePainting();
+		// GZ Maybe the logic is inverted: we should call "begin" when WE issue OpenGL drawing.
+		painter.endNativePainting();
 		
 		QFont tmpFont = currentFont;
 		tmpFont.setPixelSize(currentFont.pixelSize()*prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio());
@@ -563,7 +565,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			painter.drawText(x+xshift, y+yshift, str);
 		}
 		
-		painter.endNativePainting();
+		painter.beginNativePainting();
 	}
 }
 

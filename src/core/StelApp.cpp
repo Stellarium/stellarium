@@ -592,8 +592,12 @@ void StelApp::prepareRenderBuffer()
 		int h = params.viewportXywh[3];
 		viewportEffect = new StelViewportDistorterFisheyeToSphericMirror(w, h);
 		renderBuffer = new QOpenGLFramebufferObject(w, h, QOpenGLFramebufferObject::CombinedDepthStencil);
+		// Moved from StelPainter constructor:
+		// Fix some problem when using Qt OpenGL2 engine
+		glStencilMask(0x11111111);
 	}
 	renderBuffer->bind();
+
 }
 
 void StelApp::applyRenderBuffer()
@@ -610,6 +614,9 @@ void StelApp::draw()
 		return;
 	prepareRenderBuffer();
 	core->preDraw();
+
+	// GZ: To avoid needless GL state changes and switches, try to optimize the modules number in a better way,
+	// and don't encapsulate their draw()s with needless glEnable(bla), ..., glDisable(bla).
 
 	const QList<StelModule*> modules = moduleMgr->getCallOrders(StelModule::ActionDraw);
 	foreach(StelModule* module, modules)

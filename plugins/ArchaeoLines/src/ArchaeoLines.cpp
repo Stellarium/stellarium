@@ -353,6 +353,16 @@ void ArchaeoLines::draw(StelCore* core)
 	if (core->getCurrentPlanet()->getEnglishName()!="Earth")
 		return;
 
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+	glDisable(GL_TEXTURE_2D);
+
+	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
+	#ifdef GL_LINE_SMOOTH
+	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+		glEnable(GL_LINE_SMOOTH);
+	#endif
+
 	equinoxLine->draw(core, lineFader.getInterstate());
 	northernSolsticeLine->draw(core, lineFader.getInterstate());
 	southernSolsticeLine->draw(core, lineFader.getInterstate());
@@ -819,15 +829,6 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 
 	// Initialize a painter and set OpenGL state
 	StelPainter sPainter(prj);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-	glDisable(GL_TEXTURE_2D);
-
-	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
-	#ifdef GL_LINE_SMOOTH
-	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-		glEnable(GL_LINE_SMOOTH);
-	#endif
 
 	sPainter.setColor(color[0], color[1], color[2], intensity*fader.getInterstate());
 	//Vec4f textColor(color[0], color[1], color[2], intensity*fader.getInterstate());
@@ -862,20 +863,20 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 			sPainter.drawSmallCircleArc(pt1, pt2, rotCenter, alViewportEdgeIntersectCallback, &userData);
 			sPainter.drawSmallCircleArc(pt2, pt3, rotCenter, alViewportEdgeIntersectCallback, &userData);
 			sPainter.drawSmallCircleArc(pt3, pt1, rotCenter, alViewportEdgeIntersectCallback, &userData);
-			#ifdef GL_LINE_SMOOTH
-			if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-				glDisable(GL_LINE_SMOOTH);
-			#endif
-			glDisable(GL_BLEND);
+//			#ifdef GL_LINE_SMOOTH
+//			if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+//				glDisable(GL_LINE_SMOOTH);
+//			#endif
+//			glDisable(GL_BLEND);
 			return;
 		}
 		else
 		{
-			#ifdef GL_LINE_SMOOTH
-			if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-				glDisable(GL_LINE_SMOOTH);
-			#endif
-			glDisable(GL_BLEND);
+//			#ifdef GL_LINE_SMOOTH
+//			if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+//				glDisable(GL_LINE_SMOOTH);
+//			#endif
+//			glDisable(GL_BLEND);
 			return;
 		}
 	}
@@ -894,11 +895,12 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 	sPainter.drawSmallCircleArc(p1, middlePoint, rotCenter,alViewportEdgeIntersectCallback, &userData);
 	sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, alViewportEdgeIntersectCallback, &userData);
 
-	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
-	#ifdef GL_LINE_SMOOTH
-	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-		glDisable(GL_LINE_SMOOTH);
-	#endif
+	// GZ Remove needless state changes
+//	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
+//	#ifdef GL_LINE_SMOOTH
+//	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+//		glDisable(GL_LINE_SMOOTH);
+//	#endif
 
-	glDisable(GL_BLEND);
+//	glDisable(GL_BLEND);
 }

@@ -70,6 +70,13 @@ void StelModuleMgr::registerModule(StelModule* m, bool fgenerateCallingLists)
 
 	if (fgenerateCallingLists)
 		generateCallingLists();
+	//
+	// GZ Dump info on draw() call orders.
+	// TODO REMOVE THIS AFTER TESTS
+	qDebug() << "Module drawAction Sequence: Try to minimize state changes between them!";
+	foreach (StelModule *m, getCallOrders(StelModule::ActionDraw))
+		qDebug() << "  " << m->objectName() << ":" << m->getCallOrder(StelModule::ActionDraw);
+
 }
 
 /*************************************************************************

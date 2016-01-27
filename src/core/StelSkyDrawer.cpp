@@ -118,7 +118,8 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 
 	// Initialize buffers for use by gl vertex array
 	nbPointSources = 0;
-	maxPointSources = 1000;
+	// Try to further increase efficiency. Was 1000
+	maxPointSources = 2000;
 	
 	
 	vertexArray = new StarVertex[maxPointSources*6];
@@ -385,6 +386,7 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 	if (nbPointSources==0)
 		return;
 	texHalo->bind();
+	// GZ We did all that in preDrawPointSource. Why do we NEED it here?
 	sPainter->enableTexture2d(true);
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_BLEND);
@@ -438,10 +440,12 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 			cmag = 1.f;
 
 		texBigHalo->bind();
+		// GZ We did all that in preDrawPointSource. WHY IS IT REQUIRED AGAIN???
 		sPainter->enableTexture2d(true);
 		glBlendFunc(GL_ONE, GL_ONE);
-		glEnable(GL_BLEND);				
+		glEnable(GL_BLEND);
 		sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
+		// TODO According to AMD GL profiler, it would radically increase performance to also buffer this sprite drawing! 64% of draws may be here!
 		sPainter->drawSprite2dModeNoDeviceScale(win[0], win[1], rmag);
 	}
 
