@@ -79,7 +79,9 @@ define(["jquery", "settings", "translationdata"], function($, settings, Translat
                 $(rc).trigger("serverDataError", errorThrown);
 
                 connectionLost = true;
+                //reset IDs to force a full reload when connection is re-established
                 lastActionId = -2;
+                lastPropId = -2;
                 console.log("Error fetching updates");
                 console.log("Error: " + errorThrown);
                 console.log("Status: " + status);
