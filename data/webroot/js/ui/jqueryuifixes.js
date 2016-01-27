@@ -15,29 +15,20 @@ define(["jquery", "jquery-ui"], function($, jqueryui) {
 		}
 	});
 
-	//disable forced spinner rounding
-	//http://stackoverflow.com/questions/19063956/ui-spinner-bug-when-changing-value-using-mouse-up-and-down
+	//override spinner _adjustValue to disable spinner always rounding to nearest step
+	$.widget("ui.spinner", $.ui.spinner, {
+		_adjustValue: function(value) {
+			var  options = this.options;
 
-	/* //disabled for now until globalize.js works
-        proto = $.ui.spinner.prototype;
-        $.extend(proto, {
-            _adjustValue: function(value) {
-                var base, aboveMin,
-                    options = this.options;
+			// clamp the value
+			if (options.max !== null && value > options.max) {
+				return options.max;
+			}
+			if (options.min !== null && value < options.min) {
+				return options.min;
+			}
 
-                // fix precision from bad JS floating point math
-                //value = parseFloat(value.toFixed(this._precision()));
-
-                // clamp the value
-                if (options.max !== null && value > options.max) {
-                    return options.max;
-                }
-                if (options.min !== null && value < options.min) {
-                    return options.min;
-                }
-
-                return value;
-            }
-        });
-*/
+			return value;
+		}
+	});
 });

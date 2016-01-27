@@ -14,6 +14,14 @@ requirejs.config({
 		"ui/jqueryuifixes":{
 			"jquery-ui":"jquery-ui"
 		}
+	},
+	shim:{
+		"globalize":{
+			exports: "Globalize"
+		},
+		"jquery-ui":{
+			deps: ["globalize"]
+		}
 	}
 });
 

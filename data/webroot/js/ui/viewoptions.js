@@ -1,4 +1,4 @@
-define(["jquery", "api/viewoptions", "api/actions"], function($, viewOptionApi, actionApi) {
+define(["jquery", "api/viewoptions", "api/actions","jquery-ui"], function($, viewOptionApi, actionApi) {
 	"use strict";
 
 	var $vo_projectionlist;
