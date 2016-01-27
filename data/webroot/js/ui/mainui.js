@@ -80,12 +80,12 @@ define(["jquery", "settings", "api/remotecontrol", "api/actions", "api/propertie
 				min = self.data("min"),
 				max = self.data("max"),
 				step = self.data("step"),
-				//decimals are currently unsupported
-				decimals = self.data("decimals");
+				format = self.data("numberformat");
 			self.spinner({
 				min: min,
 				max: max,
-				step: step
+				step: step,
+				numberFormat: format
 			});
 		});
 
