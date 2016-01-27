@@ -79,7 +79,7 @@ void ViewDialog::retranslate()
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
-		updateZhrDescription();
+		updateZhrDescription(GETSTELMODULE(SporadicMeteorMgr)->getZHR());
 		populateLists();
 		setBortleScaleToolTip(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex());
 
@@ -186,10 +186,16 @@ void ViewDialog::createDialogContent()
 	SporadicMeteorMgr* mmgr = GETSTELMODULE(SporadicMeteorMgr);
 	Q_ASSERT(mmgr);
 
-	connect(mmgr, SIGNAL(zhrChanged(int)), this, SLOT(setZHR(int)));
-	connect(ui->zhrSlider, SIGNAL(valueChanged(int)), this, SLOT(setZHR(int)));
-	connect(ui->zhrSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setZHR(int)));
-	setZHR(mmgr->getZHR());
+	int zhr = mmgr->getZHR();
+	ui->zhrSlider->setValue(zhr);
+	ui->zhrSpinBox->setValue(zhr);
+	updateZhrDescription(zhr);
+	//connect to the data, instead of the GUI
+	connect(mmgr, SIGNAL(zhrChanged(int)), this, SLOT(updateZhrDescription(int)));
+	connect(mmgr, SIGNAL(zhrChanged(int)), ui->zhrSlider, SLOT(setValue(int)));
+	connect(mmgr, SIGNAL(zhrChanged(int)), ui->zhrSpinBox, SLOT(setValue(int)));
+	connect(ui->zhrSlider, SIGNAL(valueChanged(int)), mmgr, SLOT(setZHR(int)));
+	connect(ui->zhrSpinBox, SIGNAL(valueChanged(int)), mmgr, SLOT(setZHR(int)));
 
 	// Labels section
 	connectCheckBox(ui->starLabelCheckBox, "actionShow_Stars_Labels");
@@ -233,8 +239,7 @@ void ViewDialog::createDialogContent()
 	connect(drawer, SIGNAL(bortleScaleIndexChanged(int)), ui->lightPollutionSpinBox, SLOT(setValue(int)));
 	connect(drawer, SIGNAL(bortleScaleIndexChanged(int)), this, SLOT(setBortleScaleToolTip(int)));
 
-	ui->autoChangeLandscapesCheckBox->setChecked(lmgr->getFlagLandscapeAutoSelection());
-	connect(ui->autoChangeLandscapesCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeAutoSelection(bool)));
+	connectBoolProperty(ui->autoChangeLandscapesCheckBox,"prop_LandscapeMgr_flagLandscapeAutoSelection");
 	
 	// atmosphere details
 	connect(ui->pushButtonAtmosphereDetails, SIGNAL(clicked()), this, SLOT(showAtmosphereDialog()));
@@ -699,28 +704,8 @@ void ViewDialog::showAtmosphereDialog()
 	atmosphereDialog->setVisible(true);
 }
 
-
-void ViewDialog::setZHR(int zhr)
+void ViewDialog::updateZhrDescription(int zhr)
 {
-	SporadicMeteorMgr* mmgr = GETSTELMODULE(SporadicMeteorMgr);
-	mmgr->blockSignals(true);
-	ui->zhrSlider->blockSignals(true);
-	ui->zhrSpinBox->blockSignals(true);
-
-	mmgr->setFlagShow(zhr > 0);
-	mmgr->setZHR(zhr);
-	ui->zhrSlider->setValue(zhr);
-	ui->zhrSpinBox->setValue(zhr);
-	updateZhrDescription();
-
-	mmgr->blockSignals(false);
-	ui->zhrSlider->blockSignals(false);
-	ui->zhrSpinBox->blockSignals(false);
-}
-
-void ViewDialog::updateZhrDescription()
-{
-	int zhr = ui->zhrSpinBox->value();
 	switch (zhr)
 	{
 		case 0:

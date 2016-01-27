@@ -158,6 +158,17 @@ define(["jquery", "settings", "api/remotecontrol", "api/actions", "api/propertie
 			});
 		});
 
+		//hook up span stelproperty display
+		$("span.stelproperty").each(function(){
+			var self = $(this);
+			var prop = self.data("prop");
+
+			$(propApi).on("stelPropertyChanged:" + prop, function(evt, prop) {
+				self.text(prop.value);
+			});
+			self.text(propApi.getStelProp(prop));
+		});
+
 		//main tabs
 		//remember which tab was active after refresh by storing id in sessionstore
 		var oldTabId = 0;

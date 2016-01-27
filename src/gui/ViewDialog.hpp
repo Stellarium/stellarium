@@ -52,8 +52,7 @@ private slots:
 	void projectionChanged(const QString& projectionName);
 	void viewportVerticalShiftChanged(const int shift);
 	void landscapeChanged(QListWidgetItem* item);
-	void setZHR(int zhr);
-	void updateZhrDescription();
+	void updateZhrDescription(int zhr);
 	void setBortleScaleToolTip(int Bindex);
 	void setCurrentLandscapeAsDefault(void);
 	void setCurrentCultureAsDefault(void);
