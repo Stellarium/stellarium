@@ -79,6 +79,12 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 
 	EPCount=0;
 	PHEPCount=0;
+	eccentricityList.clear();
+	semiAxisList.clear();
+	massList.clear();
+	radiusList.clear();
+	periodList.clear();
+	angleDistanceList.clear();
 	if (map.contains("exoplanets"))
 	{
 		foreach(const QVariant &expl, map.value("exoplanets").toList())
@@ -101,6 +107,36 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 			p.EqTemp = exoplanetMap.value("EqTemp", -1).toInt();
 			p.ESI = exoplanetMap.value("ESI", -1).toInt();
 			exoplanets.append(p);
+
+			if (p.eccentricity>0)
+				eccentricityList.append(p.eccentricity);
+			else
+				eccentricityList.append(0);
+
+			if (p.semiAxis>0)
+				semiAxisList.append(p.semiAxis);
+			else
+				semiAxisList.append(0);
+
+			if (p.mass>0)
+				massList.append(p.mass);
+			else
+				massList.append(0);
+
+			if (p.radius>0)
+				radiusList.append(p.radius);
+			else
+				radiusList.append(0);
+
+			if (p.angleDistance>0)
+				angleDistanceList.append(p.angleDistance);
+			else
+				angleDistanceList.append(0);
+
+			if (p.period>0)
+				periodList.append(p.period);
+			else
+				periodList.append(0);
 		}
 	}
 
