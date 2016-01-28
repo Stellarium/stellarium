@@ -38,6 +38,8 @@
 #include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 
+#include "qcustomplot.h"
+
 ExoplanetsDialog::ExoplanetsDialog()
 	: ep(NULL)
 	, updateTimer(NULL)
@@ -66,6 +68,7 @@ void ExoplanetsDialog::retranslate()
 		setAboutHtml();
 		setInfoHtml();
 		setWebsitesHtml();
+		populateDiagramsList();
 	}
 }
 
@@ -114,6 +117,7 @@ void ExoplanetsDialog::createDialogContent()
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
+	connect(ui->plotDiagram, SIGNAL(clicked()), this, SLOT(drawDiagram()));
 
 	// About & Info tabs
 	setAboutHtml();
@@ -127,8 +131,8 @@ void ExoplanetsDialog::createDialogContent()
 		ui->websitesTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	}
 
+	populateDiagramsList();
 	updateGuiFromSettings();
-
 }
 
 void ExoplanetsDialog::setAboutHtml(void)
@@ -336,4 +340,112 @@ void ExoplanetsDialog::updateJSON(void)
 	{
 		ep->updateJSON();
 	}
+}
+
+void ExoplanetsDialog::drawDiagram()
+{
+	int currentAxisX = ui->comboAxisX->currentData(Qt::UserRole).toInt();
+	QString currentAxisXString = ui->comboAxisX->currentText();
+	int currentAxisY = ui->comboAxisY->currentData(Qt::UserRole).toInt();
+	QString currentAxisYString = ui->comboAxisY->currentText();
+
+	QList<double> aX = ep->getExoplanetsData(currentAxisX), aY = ep->getExoplanetsData(currentAxisY);
+	QVector<double> x = aX.toVector(), y = aY.toVector();
+
+	double minX, minY, maxX, maxY;
+	minX = maxX = aX.first();
+	minY = maxY = aY.first();
+
+	foreach (double temp, aX)
+	{
+		if(maxX < temp) maxX = temp;
+		if(minX > temp) minX = temp;
+	}
+	foreach (double temp, aY)
+	{
+		if(maxY < temp) maxY = temp;
+		if(minY > temp) minY = temp;
+	}
+
+	if (!ui->minX->text().isEmpty())
+		minX = ui->minX->text().toDouble();
+
+	if (!ui->maxX->text().isEmpty())
+		maxX = ui->maxX->text().toDouble();
+
+	if (!ui->minY->text().isEmpty())
+		minY = ui->minY->text().toDouble();
+
+	if (!ui->maxY->text().isEmpty())
+		maxY = ui->maxY->text().toDouble();
+
+	ui->customPlot->addGraph();
+	ui->customPlot->graph(0)->setData(x, y);
+	ui->customPlot->graph(0)->setPen(QPen(Qt::blue));
+	ui->customPlot->graph(0)->setLineStyle(QCPGraph::lsNone);
+	ui->customPlot->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssDisc, 4));
+	ui->customPlot->graph(0)->rescaleAxes(true);
+	ui->customPlot->xAxis->setLabel(currentAxisXString);
+	ui->customPlot->yAxis->setLabel(currentAxisYString);
+
+	ui->customPlot->xAxis->setRange(minX, maxX);
+	if (ui->checkBoxLogX->isChecked())
+	{
+		ui->customPlot->xAxis->setScaleType(QCPAxis::stLogarithmic);
+		ui->customPlot->xAxis->setScaleLogBase(10);
+	}
+	else
+		ui->customPlot->xAxis->setScaleType(QCPAxis::stLinear);
+
+	ui->customPlot->yAxis->setRange(minY, maxY);
+	if (ui->checkBoxLogY->isChecked())
+	{
+		ui->customPlot->yAxis->setScaleType(QCPAxis::stLogarithmic);
+		ui->customPlot->yAxis->setScaleLogBase(10);
+	}
+	else
+		ui->customPlot->yAxis->setScaleType(QCPAxis::stLinear);
+
+	ui->customPlot->replot();
+}
+
+void ExoplanetsDialog::populateDiagramsList()
+{
+	Q_ASSERT(ui->comboAxisX);
+	Q_ASSERT(ui->comboAxisY);
+
+	QComboBox* axisX = ui->comboAxisX;
+	QComboBox* axisY = ui->comboAxisY;
+
+	//Save the current selection to be restored later
+	axisX->blockSignals(true);
+	axisY->blockSignals(true);
+	int indexX = axisX->currentIndex();
+	int indexY = axisY->currentIndex();
+	QVariant selectedAxisX = axisX->itemData(indexX);
+	QVariant selectedAxisY = axisY->itemData(indexY);
+	axisX->clear();
+	axisY->clear();
+
+	QList<axisPair> axis;
+	axis.append(qMakePair(q_("Orbital Eccentricity"), 0));
+	axis.append(qMakePair(q_("Orbit Semi-Major Axis, AU"), 1));
+	axis.append(qMakePair(q_("Planetary Mass, Mjup"), 2));
+	axis.append(qMakePair(q_("Planetary Radius, Rjup"), 3));
+	axis.append(qMakePair(q_("Orbital Period, days"), 4));
+	axis.append(qMakePair(q_("Angular Distance, arcsec."), 5));
+
+	for(int i=0; i<axis.size(); ++i)
+	{
+		axisX->addItem(axis.at(i).first, axis.at(i).second);
+		axisY->addItem(axis.at(i).first, axis.at(i).second);
+	}
+
+	//Restore the selection
+	indexX = axisX->findData(selectedAxisX, Qt::UserRole, Qt::MatchCaseSensitive);
+	indexY = axisY->findData(selectedAxisY, Qt::UserRole, Qt::MatchCaseSensitive);
+	axisX->setCurrentIndex(indexX);
+	axisY->setCurrentIndex(indexY);
+	axisX->blockSignals(false);
+	axisY->blockSignals(false);
 }

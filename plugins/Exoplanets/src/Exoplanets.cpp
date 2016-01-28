@@ -518,6 +518,12 @@ void Exoplanets::setEPMap(const QVariantMap& map)
 {
 	ep.clear();
 	PSCount = EPCountAll = EPCountPH = 0;
+	EPEccentricityAll.clear();
+	EPSemiAxisAll.clear();
+	EPMassAll.clear();
+	EPRadiusAll.clear();
+	EPPeriodAll.clear();
+	EPAngleDistanceAll.clear();
 	QVariantMap epsMap = map.value("stars").toMap();
 	foreach(QString epsKey, epsMap.keys())
 	{
@@ -530,6 +536,12 @@ void Exoplanets::setEPMap(const QVariantMap& map)
 		if (eps->initialized)
 		{
 			ep.append(eps);
+			EPEccentricityAll.append(eps->getData(0));
+			EPSemiAxisAll.append(eps->getData(1));
+			EPMassAll.append(eps->getData(2));
+			EPRadiusAll.append(eps->getData(3));
+			EPPeriodAll.append(eps->getData(4));
+			EPAngleDistanceAll.append(eps->getData(5));
 			EPCountAll += eps->getCountExoplanets();
 			EPCountPH += eps->getCountHabitableExoplanets();
 		}
