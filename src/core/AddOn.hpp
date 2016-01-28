@@ -84,7 +84,8 @@ public:
 	QString getLicenseName() { return m_sLicense; }
 	QString getLicenseURL() { return m_sLicenseURL; }
 	QString getDownloadFilename() { return m_sDownloadFilename; }
-	float getDownloadSize() { return m_sDownloadSize.toFloat() * 1000; }
+	float getDownloadSize() { return m_fDownloadSize; }
+	QString getDownloadSizeString() { return m_sDownloadSize; }
 	QString getDownloadURL() { return m_sDownloadURL; }
 	QString getThumbnail() { return m_sThumbnail; }
 	QString getChecksum() { return m_sChecksum; }
@@ -112,6 +113,7 @@ private:
 	QString m_sLicenseURL;
 	QString m_sDownloadURL;
 	QString m_sDownloadFilename;
+	float m_fDownloadSize;
 	QString m_sDownloadSize;
 	QString m_sChecksum;
 	QString m_sThumbnail;
@@ -126,6 +128,7 @@ private:
 
 	Type typeStringToEnum(QString string);
 	QString typeToDisplayRole(Type type);
+	QString fileSizeToString(float bytes);
 };
 
 #endif // _ADDON_HPP_

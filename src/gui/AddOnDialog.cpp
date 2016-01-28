@@ -110,6 +110,8 @@ void AddOnDialog::slotAddonSelected(AddOn *addon)
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + addon->getTitle() + "</h2>";
 	html += addon->getDescription();
+	html += "<br><br>Size: ";
+	html += addon->getDownloadSizeString();
 	ui->browser->setHtml(html);
 }
 

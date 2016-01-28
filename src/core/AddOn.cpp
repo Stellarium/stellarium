@@ -52,7 +52,7 @@ AddOn::AddOn(const QString addonId, const QVariantMap& map)
 	m_sLicenseURL = map.value("license-url").toString();
 	m_sDownloadURL = map.value("download-url").toString();
 	m_sDownloadFilename = map.value("download-filename").toString();
-	m_sDownloadSize = map.value("download-size").toString();
+	m_fDownloadSize = map.value("download-size").toFloat();
 	m_sChecksum = map.value("checksum").toString();
 	m_sThumbnail = map.value("thumbnail").toString();
 
@@ -68,6 +68,8 @@ AddOn::AddOn(const QString addonId, const QVariantMap& map)
 			   << "(title, description, version and download-filename)";
 		return;
 	}
+
+	m_sDownloadSize = fileSizeToString(m_fDownloadSize);
 
 	if (m_eType == TEXTURE)
 	{
@@ -250,4 +252,18 @@ QString AddOn::typeToDisplayRole(Type type) {
 	{
 		return "Invalid";
 	}
+}
+
+QString AddOn::fileSizeToString(float bytes)
+{
+	QStringList list;
+	list << "KB" << "MB" << "GB" << "TB";
+	QStringListIterator i(list);
+	QString unit("bytes");
+	while(bytes >= 1000.0 && i.hasNext())
+	{
+	    unit = i.next();
+	    bytes /= 1000.0;
+	}
+	return QString::number(bytes,'f',2) % " " % unit;
 }
