@@ -109,6 +109,30 @@ public:
 		return PHEPCount;
 	}
 
+	QList<double> getData(int mode)
+	{
+		switch(mode)
+		{
+			case 1:
+				return semiAxisList;
+				break;
+			case 2:
+				return massList;
+				break;
+			case 3:
+				return radiusList;
+				break;
+			case 4:
+				return periodList;
+				break;
+			case 5:
+				return angleDistanceList;
+				break;
+			default:
+				return eccentricityList;
+		}
+	}
+
 private:
 
 	QString getPlanetaryClassI18n(QString ptype) const;
@@ -143,6 +167,8 @@ private:
 	int effectiveTemp;			//! Effective temperature of star in K
 	bool hasHabitableExoplanets;		//! Has potential habitable exoplanets
 	QList<exoplanetData> exoplanets;	//! List of exoplanets
+
+	QList<double> eccentricityList, semiAxisList, massList, radiusList, periodList, angleDistanceList;
 
 	LinearFader labelsFader;
 
