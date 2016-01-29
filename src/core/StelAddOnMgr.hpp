@@ -28,7 +28,6 @@
 
 #include "AddOn.hpp"
 
-#define ADDON_MANAGER_VERSION "0.1.0"
 #define ADDON_MANAGER_CATALOG_VERSION 1
 
 class StelAddOnMgr : public QObject

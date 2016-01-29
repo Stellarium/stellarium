@@ -128,7 +128,7 @@ void AddOnSettingsDialog::setAboutHtml()
 {
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Add-ons Manager") + "</h2><table width=\"90%\">";
-	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + ADDON_MANAGER_VERSION + "</td></tr>";
+	// html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + ADDON_MANAGER_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Marcos Cardinot &lt;mcardinot@gmail.com&gt;</td></tr>";
 	html += "</table>";
 
