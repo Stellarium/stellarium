@@ -107,7 +107,7 @@ private:
 	QString m_sTitle;
 	QString m_sDescription;
 	QDate m_dVersion;
-	QString m_sFirstStel;
+	QStringList m_supported;
 	QString m_sLastStel;
 	QString m_sLicense;
 	QString m_sLicenseURL;
@@ -124,7 +124,7 @@ private:
 	bool m_bIsValid;
 	Status m_eStatus;
 
-	bool isCompatible(QString first, QString last);
+	bool isSupported(QStringList supported);
 
 	Type typeStringToEnum(QString string);
 	QString typeToDisplayRole(Type type);

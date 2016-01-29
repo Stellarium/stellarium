@@ -46,8 +46,7 @@ AddOn::AddOn(const QString addonId, const QVariantMap& map)
 	m_sTitle = map.value("title").toString();
 	m_sDescription = map.value("description").toString();
 	m_dVersion = map.value("version").toDate();
-	m_sFirstStel = map.value("first-stel").toString();
-	m_sLastStel = map.value("last-stel").toString();
+	m_supported = map.value("supported").toStringList();
 	m_sLicense = map.value("license").toString();
 	m_sLicenseURL = map.value("license-url").toString();
 	m_sDownloadURL = map.value("download-url").toString();
@@ -69,6 +68,13 @@ AddOn::AddOn(const QString addonId, const QVariantMap& map)
 		return;
 	}
 
+	// checking compatibility
+	if (!isSupported(m_supported))
+	{
+		qWarning() << "[Add-on] Error! Add-on" << m_sAddonId << "is not supported!";
+		return;
+	}
+
 	m_sDownloadSize = fileSizeToString(m_fDownloadSize);
 
 	if (m_eType == TEXTURE)
@@ -84,12 +90,6 @@ AddOn::AddOn(const QString addonId, const QVariantMap& map)
 		for (int i=0; i < m_AllTextures.size(); i++) {
 			m_AllTextures[i] = StelFileMgr::getUserDir() % "/textures/" % m_AllTextures[i];
 		}
-	}
-
-	// checking compatibility
-	if (!isCompatible(m_sFirstStel, m_sLastStel))
-	{
-		return;
 	}
 
 	if (map.contains("authors"))
@@ -112,30 +112,16 @@ AddOn::~AddOn()
 {
 }
 
-bool AddOn::isCompatible(QString first, QString last)
+bool AddOn::isSupported(QStringList supported)
 {
-	if (first.isEmpty() && last.isEmpty()) {
+	if (supported.isEmpty()) {
 		return true;
 	}
 
-	QStringList c = StelUtils::getApplicationVersion().split(".");
-	QStringList f = first.split(".");
-	QStringList l = last.split(".");
+	QString current = StelUtils::getApplicationVersion();
+	current.truncate(current.lastIndexOf("."));
 
-	if (c.size() < 3 || f.size() < 3 || l.size() < 3) {
-		return false; // invalid version
-	}
-
-	int currentVersion = QString(c.at(0) % "00" % c.at(1) % "0" % c.at(2)).toInt();
-	int firstVersion = QString(f.at(0) % "00" % f.at(1) % "0" % f.at(2)).toInt();
-	int lastVersion = QString(l.at(0) % "00" % l.at(1) % "0" % l.at(2)).toInt();
-
-	if (currentVersion < firstVersion || currentVersion > lastVersion)
-	{
-		return false; // out of bounds
-	}
-
-	return true;
+	return supported.contains(current);
 }
 
 QString AddOn::getZipPath()
