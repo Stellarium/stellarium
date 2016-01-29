@@ -26,16 +26,18 @@
 
 #include <QtMath>
 
-Meteor::Meteor(const StelCore* core, const StelTextureSP& bolideTexture)
+Meteor::Meteor(const StelCore* core) //, const StelTextureSP& bolideTexture)
 	: m_core(core)
 	, m_alive(false)
-	, m_speed(72.)
-	, m_initialZ(1.)
-	, m_finalZ(1.)
-	, m_minDist(1.)
-	, m_absMag(.5)
-	, m_aptMag(.5)
-	, m_bolideTexture(bolideTexture)
+	, m_speed(72.f)
+	, m_initialZ(1.f)
+	, m_finalZ(1.f)
+	, m_minDist(1.f)
+	, m_absMag(.5f)
+	, m_aptMag(.5f)
+	, m_thickness(0.f)
+	, m_bolideSize(0.f)
+	//, m_bolideTexture(bolideTexture)
 	, m_segments(10)
 {
 	qsrand(QDateTime::currentMSecsSinceEpoch());
@@ -43,7 +45,7 @@ Meteor::Meteor(const StelCore* core, const StelTextureSP& bolideTexture)
 
 Meteor::~Meteor()
 {
-	m_bolideTexture.clear();
+//	m_bolideTexture.clear();
 }
 
 void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
@@ -198,21 +200,25 @@ bool Meteor::update(double deltaTime)
 	return true;
 }
 
-void Meteor::draw(const StelCore* core, StelPainter& sPainter)
-{
-	if (!m_alive)
-	{
-		return;
-	}
+// GZ Remove this. draw requires GL switches, these should me made only once outside the calling loops.
+//void Meteor::draw(const StelCore* core, StelPainter& sPainter)
+//{
+//	if (!m_alive)
+//	{
+//		return;
+//	}
 
-	float thickness;
-	float bolideSize;
-	calculateThickness(core, thickness, bolideSize);
+//	qDebug() << "Meteor::draw(). This call is not recommended. Use the group draws in the Manager classes instead.";
+//	//float thickness;
+//	//float bolideSize;
+//	calculateThickness(core); //, thickness, bolideSize);
 
-	drawTrain(sPainter, thickness);
-
-	drawBolide(sPainter, bolideSize);
-}
+//	drawTrain(sPainter); //, thickness);
+//	glEnable(GL_BLEND);
+//	glBlendFunc(GL_ONE, GL_ONE);
+//	drawBolide(sPainter); //, bolideSize);
+//	//glDisable(GL_BLEND); // Avoid state change at end. Every module will set this up as needed.
+//}
 
 Vec4f Meteor::getColorFromName(QString colorName)
 {
@@ -351,26 +357,27 @@ Vec3d Meteor::radiantToAltAz(Vec3d position)
 	return position;
 }
 
-void Meteor::calculateThickness(const StelCore* core, float& thickness, float& bolideSize)
+void Meteor::calculateThickness(const StelCore* core) //, float& thickness, float& bolideSize)
 {
 	float maxFOV = core->getMovementMgr()->getMaxFov();
 	float FOV = core->getMovementMgr()->getCurrentFov();
-	thickness = 2*log(FOV + 0.25)/(1.2*maxFOV - (FOV + 0.25)) + 0.01;
+	m_thickness = 2*log(FOV + 0.25)/(1.2*maxFOV - (FOV + 0.25)) + 0.01;
 	if (FOV <= 0.5)
 	{
-		thickness = 0.013 * FOV; // decreasing faster
+		m_thickness = 0.013 * FOV; // decreasing faster
 	}
 	else if (FOV > 100.0)
 	{
-		thickness = 0; // remove prism
+		m_thickness = 0; // remove prism
 	}
 
-	bolideSize = thickness*3;
+	m_bolideSize = m_thickness*3;
 }
 
-void Meteor::drawBolide(StelPainter& sPainter, const float& bolideSize)
+void Meteor::drawBolide(StelPainter& sPainter) //, const float& bolideSize)
 {
-	if (!bolideSize || !m_bolideTexture)
+//	if (!bolideSize || !m_bolideTexture)
+	if (!m_bolideSize)
 	{
 		return;
 	}
@@ -382,40 +389,44 @@ void Meteor::drawBolide(StelPainter& sPainter, const float& bolideSize)
 	Vec4f bolideColor = Vec4f(1, 1, 1, m_aptMag);
 
 	Vec3d topLeft = m_position;
-	topLeft[1] -= bolideSize;
+	topLeft[1] -= m_bolideSize;
 	vertexArrayBolide.push_back(radiantToAltAz(topLeft));
 	colorArrayBolide.push_back(bolideColor);
 
 	Vec3d topRight = m_position;
-	topRight[0] -= bolideSize;
+	topRight[0] -= m_bolideSize;
 	vertexArrayBolide.push_back(radiantToAltAz(topRight));
 	colorArrayBolide.push_back(bolideColor);
 
 	Vec3d bottomRight = m_position;
-	bottomRight[1] += bolideSize;
+	bottomRight[1] += m_bolideSize;
 	vertexArrayBolide.push_back(radiantToAltAz(bottomRight));
 	colorArrayBolide.push_back(bolideColor);
 
 	Vec3d bottomLeft = m_position;
-	bottomLeft[0] += bolideSize;
+	bottomLeft[0] += m_bolideSize;
 	vertexArrayBolide.push_back(radiantToAltAz(bottomLeft));
 	colorArrayBolide.push_back(bolideColor);
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
-	sPainter.enableClientStates(true, true, true);
-	m_bolideTexture->bind();
-	static const float texCoordData[] = {1.,0., 0.,0., 0.,1., 1.,1.};
-	sPainter.setTexCoordPointer(2, GL_FLOAT, texCoordData);
+	//glEnable(GL_BLEND);
+	//glBlendFunc(GL_ONE, GL_ONE);
+	//sPainter.enableClientStates(true, true, true);
+	// GZ The next 3 lines must have been given outside, before the function is called.
+	// This is to avoid needless state switches. Sorry if this makes the code harder to read.
+	//m_bolideTexture->bind();
+	//static const float texCoordData[] = {1.,0., 0.,0., 0.,1., 1.,1.};
+	//sPainter.setTexCoordPointer(2, GL_FLOAT, texCoordData);
 	sPainter.setColorPointer(4, GL_FLOAT, colorArrayBolide.constData());
 	sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayBolide.constData());
 	sPainter.drawFromArray(StelPainter::TriangleFan, vertexArrayBolide.size(), 0, true);
 
-	glDisable(GL_BLEND);
-	sPainter.enableClientStates(false);
+	//glDisable(GL_BLEND); // Avoid state change at end. Every module will set this up as needed.
+	//sPainter.enableClientStates(false);
+	// TODO: It would be even more efficient to only add the data to a Mgr's vertexArrays etc,
+	// and then draw everything in one single drawFromArray per frame in the Mgr.
 }
 
-void Meteor::drawTrain(StelPainter& sPainter, const float& thickness)
+void Meteor::drawTrain(StelPainter& sPainter) //, const float& thickness)
 {
 	if (m_segments != m_lineColorVector.size() || 2*m_segments != m_trainColorVector.size())
 	{
@@ -431,12 +442,12 @@ void Meteor::drawTrain(StelPainter& sPainter, const float& thickness)
 	QVector<Vec3d> vertexArrayTop;
 
 	Vec3d posTrainB = m_posTrain;
-	posTrainB[0] += thickness*0.7;
-	posTrainB[1] += thickness*0.7;
+	posTrainB[0] += m_thickness*0.7;
+	posTrainB[1] += m_thickness*0.7;
 	Vec3d posTrainL = m_posTrain;
-	posTrainL[1] -= thickness;
+	posTrainL[1] -= m_thickness;
 	Vec3d posTrainR = m_posTrain;
-	posTrainR[0] -= thickness;
+	posTrainR[0] -= m_thickness;
 
 	for (int i = 0; i < m_segments; ++i)
 	{
@@ -468,10 +479,11 @@ void Meteor::drawTrain(StelPainter& sPainter, const float& thickness)
 		m_trainColorVector[i*2+1][3] = mag;
 	}
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	sPainter.enableClientStates(true, false, true);
-	if (thickness)
+	// GZ these switches are better in the enclosing Mgr classes: SporadicMeteorMgr::draw() and MeteorShowerMgr::draw()
+	//glEnable(GL_BLEND);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//sPainter.enableClientStates(true, false, true);
+	if (m_thickness)
 	{
 		sPainter.setColorPointer(4, GL_FLOAT, m_trainColorVector.constData());
 
@@ -488,6 +500,8 @@ void Meteor::drawTrain(StelPainter& sPainter, const float& thickness)
 	sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayLine.constData());
 	sPainter.drawFromArray(StelPainter::LineStrip, vertexArrayLine.size(), 0, true);
 
-	glDisable(GL_BLEND);
-	sPainter.enableClientStates(false);
+	// GZ avoid this. Next module will set it when it needs it.
+	//glDisable(GL_BLEND);
+	// GZ again, moved those to the enclosing Mgr
+	//sPainter.enableClientStates(false);
 }

@@ -300,7 +300,7 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 		if (prob < rate)
 		{
 			MeteorObj *m = new MeteorObj(core, m_speed, m_radiantAlpha, m_radiantDelta,
-						     m_pidx, m_colors, m_mgr->getBolideTexture());
+						     m_pidx, m_colors); //, m_mgr->getBolideTexture());
 			if (m->isAlive())
 			{
 				m_activeMeteors.append(m);
@@ -315,6 +315,7 @@ void MeteorShower::draw(StelCore* core)
 	{
 		return;
 	}
+	glEnable(GL_BLEND);
 	drawRadiant(core);
 	drawMeteors(core);
 }
@@ -328,7 +329,6 @@ void MeteorShower::drawRadiant(StelCore *core)
 	painter.getProjector()->project(m_position, XY);
 
 	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
 	Vec3f rgb;
@@ -383,11 +383,45 @@ void MeteorShower::drawMeteors(StelCore *core)
 	}
 
 	// step through and draw all active meteors
-	StelPainter painter(core->getProjection(StelCore::FrameAltAz));
+	StelPainter sPainter(core->getProjection(StelCore::FrameAltAz));
+	// GZ Like in SporadicMeteorMgr, we must avoid using Meteor::draw, but enclose some GL setup code here and call the
+	// Meteor sub-draw calls.
+//	foreach (MeteorObj* m, m_activeMeteors)
+//	{
+//		m->draw(core, painter);
+//	}
+
+	// GZ It is better to make GL state switches first and then go through the lists several times.
+	//glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	sPainter.enableClientStates(true, false, true);
 	foreach (MeteorObj* m, m_activeMeteors)
 	{
-		m->draw(core, painter);
+		if (m->m_alive)
+		{
+			m->calculateThickness(core);
+			m->drawTrain(sPainter);
+		}
+		//m->draw(core, sPainter);
 	}
+	// GZ Don't. It must be re-enabled immediately for the bolides!
+	//sPainter.enableClientStates(false);
+	// Bolides. Switch blendfunc here, once per frame, not once per bolide.
+	// See Meteor.cpp: It is more efficient to just build up a vertex array in drawBolide and make a single drawFromArray at end.
+	//glEnable(GL_BLEND); // GZ Had been enabled above.
+	glBlendFunc(GL_ONE, GL_ONE);
+	// This now has been done already!
+	//sPainter.enableClientStates(true, true, true);
+	m_mgr->getBolideTexture()->bind();
+	//m_bolideTexture->bind(); // We use the Mgr's texture which is the same. No need to set up the same texture for each Meteor!
+	// DONE remove single meteor's texture pointer.
+	static const float texCoordData[] = {1.,0., 0.,0., 0.,1., 1.,1.};
+	sPainter.setTexCoordPointer(2, GL_FLOAT, texCoordData); // should be enough to do this once!
+	foreach (MeteorObj* m, m_activeMeteors)
+	{
+		m->drawBolide(sPainter);
+	}
+	sPainter.enableClientStates(false);
 }
 
 MeteorShower::Activity MeteorShower::hasGenericShower(QDate date, bool &found) const

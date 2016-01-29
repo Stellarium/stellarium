@@ -101,7 +101,7 @@ void SporadicMeteorMgr::update(double deltaTime)
 		float prob = (float) qrand() / (float) RAND_MAX;
 		if (prob < rate)
 		{
-			SporadicMeteor* m = new SporadicMeteor(core, m_maxVelocity, m_bolideTexture);
+			SporadicMeteor* m = new SporadicMeteor(core, m_maxVelocity); //, m_bolideTexture);
 			if (m->isAlive())
 			{
 				activeMeteors.append(m);
@@ -124,11 +124,38 @@ void SporadicMeteorMgr::draw(StelCore* core)
 	}
 
 	// step through and draw all active meteors
+	// TODO: try to avoid GL state changes (blend mode switching).
 	StelPainter sPainter(core->getProjection(StelCore::FrameAltAz));
+	// GZ It is better to make GL state switches first and then go through the lists several times.
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	sPainter.enableClientStates(true, false, true);
 	foreach (SporadicMeteor* m, activeMeteors)
 	{
-		m->draw(core, sPainter);
+		if (m->m_alive)
+		{
+			m->calculateThickness(core);
+			m->drawTrain(sPainter);
+		}
+		//m->draw(core, sPainter);
 	}
+	// GZ Don't. It will be re-enabled immediately!
+	//sPainter.enableClientStates(false);
+	// Bolides. Switch blendfunc here, once per frame, not once per bolide.
+	// See Meteor.cpp: It would be more efficient to just build up a vertex array in drawBolide and make a single drawFromArray at end.
+	//glEnable(GL_BLEND); // GZ Had een enabled above!
+	glBlendFunc(GL_ONE, GL_ONE);
+	// This has been done already!
+	//sPainter.enableClientStates(true, true, true);
+	m_bolideTexture->bind(); // We use the Mgr's texture which is the same. No need to set up the same texture for each Meteor!
+	// TODO: remove single meteor's texture pointer.
+	static const float texCoordData[] = {1.,0., 0.,0., 0.,1., 1.,1.};
+	sPainter.setTexCoordPointer(2, GL_FLOAT, texCoordData); // should be enough to do this once!
+	foreach (SporadicMeteor* m, activeMeteors)
+	{
+		m->drawBolide(sPainter);
+	}
+	sPainter.enableClientStates(false);
 }
 
 void SporadicMeteorMgr::setZHR(int zhr)

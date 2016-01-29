@@ -21,8 +21,8 @@
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
 
-SporadicMeteor::SporadicMeteor(const StelCore* core, const float& maxVel, const StelTextureSP& bolideTexture)
-	: Meteor(core, bolideTexture)
+SporadicMeteor::SporadicMeteor(const StelCore* core, const float& maxVel) // , const StelTextureSP& bolideTexture)
+	: Meteor(core) //, bolideTexture)
 {
 	// meteor velocity
 	// (see line 460 in StelApp.cpp)

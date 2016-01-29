@@ -46,7 +46,7 @@ public:
 	typedef QPair<QString, int> ColorPair;
 
 	//! Create a Meteor object.
-	Meteor(const StelCore* core, const StelTextureSP &bolideTexture);
+	Meteor(const StelCore* core); //, const StelTextureSP &bolideTexture);
 	virtual ~Meteor();
 
 	//! Initialize meteor
@@ -58,8 +58,8 @@ public:
 	//! @return true of the meteor is still alive, else false.
 	virtual bool update(double deltaTime);
 	
-	//! Draws the meteor.
-	virtual void draw(const StelCore* core, StelPainter& sPainter);
+	// Draws the meteor. GZ: the Managers (friends) should call the sub-draws instead.
+	//virtual void draw(const StelCore* core, StelPainter& sPainter);
 
 	//! Indicate if the meteor still visible.
 	bool isAlive() { return m_alive; }
@@ -69,6 +69,9 @@ public:
 	float absMag() { return m_absMag; }
 
 private:
+	friend class MeteorShower;
+	friend class SporadicMeteorMgr;
+
 	//! Determine color vectors of line and prism used to draw meteor train.
 	void buildColorVectors(const QList<ColorPair> colors);
 
@@ -76,13 +79,19 @@ private:
 	Vec4f getColorFromName(QString colorName);
 
 	//! Calculates the train thickness and bolide size.
-	void calculateThickness(const StelCore* core, float &thickness, float &bolideSize);
+	void calculateThickness(const StelCore* core); //, float &thickness, float &bolideSize);
 
 	//! Draws the meteor bolide.
-	void drawBolide(StelPainter &sPainter, const float &bolideSize);
+	//! Caution: OpenGL state has to be setup before this call which is typically made in a loop.
+	//! After the call, some OpenGL state may have to be reset.
+	//! See SporadicMeteorMgr::draw() and MeteorShower::drawMeteors() source for details and proper use.
+	void drawBolide(StelPainter &sPainter); //, const float &bolideSize);
 
 	//! Draws the meteor train.
-	void drawTrain(StelPainter& sPainter, const float &thickness);
+	//! Caution: OpenGL state has to be setup before this call which is typically made in a loop.
+	//! After the call, some OpenGL state may have to be reset.
+	//! See SporadicMeteorMgr::draw() and MeteorShower::drawMeteors() source for details and proper use.
+	void drawTrain(StelPainter& sPainter); //, const float &thickness);
 
 	//! Calculates the z-component of a meteor as a function of meteor zenith angle
 	float meteorZ(float zenithAngle, float altitude);
@@ -105,8 +114,12 @@ private:
 	float m_minDist;                //! Shortest distance between meteor and observer.
 	float m_absMag;                 //! Absolute magnitude [0, 1]
 	float m_aptMag;                 //! Apparent magnitude [0, 1]
+	// GZ moved 2 here to reduce GL state switching.
+	float m_thickness;
+	float m_bolideSize;
 
-	StelTextureSP m_bolideTexture;  //! Meteor bolide texture
+	// GZ It's enough if the managers have the texture.
+	// StelTextureSP m_bolideTexture;  //! Meteor bolide texture
 	const int m_segments;           //! Number of segments along the train (useful to curve along projection distortions)
 	QVector<Vec4f> m_trainColorVector;
 	QVector<Vec4f> m_lineColorVector;

@@ -29,7 +29,7 @@ class SporadicMeteor : public Meteor
 {
 public:
 	//! Create a SporadicMeteor object.
-	SporadicMeteor(const StelCore* core, const float& maxVel, const StelTextureSP& bolideTexture);
+	SporadicMeteor(const StelCore* core, const float& maxVel); //, const StelTextureSP& bolideTexture);
 	virtual ~SporadicMeteor();
 
 private:

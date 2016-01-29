@@ -21,8 +21,8 @@
 #include "MeteorObj.hpp"
 
 MeteorObj::MeteorObj(const StelCore* core, int speed, const float& radiantAlpha, const float& radiantDelta,
-		     const float& pidx, QList<Meteor::ColorPair> colors, const StelTextureSP& bolideTexture)
-	: Meteor(core, bolideTexture)
+		     const float& pidx, QList<Meteor::ColorPair> colors) //, const StelTextureSP& bolideTexture)
+	: Meteor(core) //, bolideTexture)
 {
 	// if speed is zero, use a random value
 	if (!speed)

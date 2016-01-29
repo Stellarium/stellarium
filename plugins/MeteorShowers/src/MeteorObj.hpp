@@ -24,22 +24,23 @@
 #include "StelCore.hpp"
 
 //! @class MeteorObj
-//! Models a single meteor.
+//! Models a single meteor. In addition to a sporadic meteor, this includes shower-based properties:
+//! speed, radiant, and population index-based brightness
 //! @author Marcos Cardinot <mcardinot@gmail.com>
 //! @ingroup meteorShowers
 class MeteorObj : public Meteor
 {
 public:
-	//! Create a Meteor object.
+	//! Create a MeteorObj object.
 	//! @param core StelCore instance.
 	//! @param speed Meteor speed in km/s.
 	//! @param radiantAlpha The radiant alpha in rad.
 	//! @param radiantDelta The radiant delta in rad.
-	//! @param pidx Population index.
+	//! @param pidx Population index. (influences brightness distribution)
 	//! @param colors Meteor color.
-	//! @param bolideTexture Bolide texture.
+	// //! @param bolideTexture Bolide texture.
 	MeteorObj(const StelCore*, int speed, const float& radiantAlpha, const float& radiantDelta,
-		  const float& pidx, QList<Meteor::ColorPair> colors, const StelTextureSP& bolideTexture);
+		  const float& pidx, QList<Meteor::ColorPair> colors); //, const StelTextureSP& bolideTexture);
 	virtual ~MeteorObj();
 };
 
