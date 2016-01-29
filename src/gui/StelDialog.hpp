@@ -23,6 +23,7 @@
 #include <QObject>
 
 class QAbstractButton;
+class QComboBox;
 class QSpinBox;
 class QDoubleSpinBox;
 class QSlider;
@@ -96,8 +97,13 @@ protected:
 	//! Helper function to connect a checkbox to the given StelAction
 	static void connectCheckBox(QAbstractButton *checkBox, StelAction* action);
 
-	//! Helper function to connect a QSpinBox to an integer StelProperty
+	//! Helper function to connect a QSpinBox to an integer StelProperty.
+	//! @note This method also works with flag/enum types
 	static void connectIntProperty(QSpinBox* spinBox, const QString& propName);
+	//! Helper function to connect a QComboBox to an integer StelProperty.
+	//! The property is mapped to the selected index of the combobox.
+	//! @note This method also works with flag/enum types
+	static void connectIntProperty(QComboBox* comboBox, const QString& propName);
 	//! Helper function to connect a QDoubleSpinBox to an double or float StelProperty
 	static void connectDoubleProperty(QDoubleSpinBox* spinBox, const QString& propName);
 	//! Helper function to connect a QSlider to an double or float StelProperty

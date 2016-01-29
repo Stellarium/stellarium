@@ -130,10 +130,11 @@ void ViewDialog::createDialogContent()
 	populateLists();
 	ui->viewportOffsetSpinBox->setValue((int) round(StelApp::getInstance().getCore()->getCurrentStelProjectorParams().viewportCenterOffset[1] * 100.0f));
 
-	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyCultureChanged(const QString&)));
-	connect(ui->projectionListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(projectionChanged(const QString&)));
+	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)),&StelApp::getInstance().getSkyCultureMgr(),SLOT(setCurrentSkyCultureNameI18(QString)));
+	connect(&StelApp::getInstance(), SIGNAL(skyCultureChanged(QString)), this, SLOT(skyCultureChanged(QString)));
+	connect(ui->projectionListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(changeProjection(const QString&)));
+	connect(StelApp::getInstance().getCore(), SIGNAL(currentProjectionTypeChanged(StelCore::ProjectionType)),this,SLOT(projectionChanged()));
 	connect(ui->viewportOffsetSpinBox, SIGNAL(valueChanged(int)), this, SLOT(viewportVerticalShiftChanged(int)));
-	connect(ui->landscapesListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(landscapeChanged(QListWidgetItem*)));
 
 	// Connect and initialize checkboxes and other widgets
 
@@ -215,16 +216,26 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->landscapeIlluminationCheckBox, "actionShow_LandscapeIllumination");
 	connectCheckBox(ui->landscapeLabelsCheckBox, "actionShow_LandscapeLabels");
 
-	ui->landscapePositionCheckBox->setChecked(lmgr->getFlagLandscapeSetsLocation());
-	connect(ui->landscapePositionCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsLocation(bool)));
+	connectBoolProperty(ui->landscapePositionCheckBox, "prop_LandscapeMgr_flagLandscapeSetsLocation");
 
-	ui->landscapeBrightnessCheckBox->setChecked(lmgr->getFlagLandscapeUseMinimalBrightness());
-	connect(ui->landscapeBrightnessCheckBox, SIGNAL(toggled(bool)), this, SLOT(setFlagLandscapeUseMinimalBrightness(bool)));
-	ui->landscapeBrightnessSpinBox->setValue(lmgr->getDefaultMinimalBrightness());
-	connect(ui->landscapeBrightnessSpinBox, SIGNAL(valueChanged(double)), lmgr, SLOT(setDefaultMinimalBrightness(double)));
-	ui->localLandscapeBrightnessCheckBox->setChecked(lmgr->getFlagLandscapeSetsMinimalBrightness());
-	connect(ui->localLandscapeBrightnessCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsMinimalBrightness(bool)));
-	populateLandscapeMinimalBrightness();
+	connectBoolProperty(ui->landscapeBrightnessCheckBox,"prop_LandscapeMgr_flagLandscapeUseMinimalBrightness");
+	connect(lmgr,SIGNAL(flagLandscapeUseMinimalBrightnessChanged(bool)),ui->localLandscapeBrightnessCheckBox,SLOT(setEnabled(bool)));
+	connect(lmgr,SIGNAL(flagLandscapeUseMinimalBrightnessChanged(bool)),ui->landscapeBrightnessSpinBox,SLOT(setEnabled(bool)));
+	ui->localLandscapeBrightnessCheckBox->setEnabled(lmgr->getFlagLandscapeUseMinimalBrightness());
+	ui->landscapeBrightnessSpinBox->setEnabled(lmgr->getFlagLandscapeUseMinimalBrightness());
+
+	connectDoubleProperty(ui->landscapeBrightnessSpinBox,"prop_LandscapeMgr_defaultMinimalBrightness");
+	connectBoolProperty(ui->localLandscapeBrightnessCheckBox,"prop_LandscapeMgr_flagLandscapeSetsMinimalBrightness");
+
+	connect(ui->landscapesListWidget, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)), this, SLOT(changeLandscape(QListWidgetItem*)));
+	connect(lmgr, SIGNAL(currentLandscapeChanged(QString,QString)), this, SLOT(landscapeChanged(QString,QString)));
+
+	connect(ui->useAsDefaultLandscapeCheckBox, SIGNAL(clicked()), this, SLOT(setCurrentLandscapeAsDefault()));
+	connect(lmgr,SIGNAL(defaultLandscapeChanged(QString)),this,SLOT(updateDefaultLandscape()));
+	updateDefaultLandscape();
+
+	connect(GETSTELMODULE(LandscapeMgr), SIGNAL(landscapesChanged()), this, SLOT(populateLists()));
+	connect(ui->pushButtonAddRemoveLandscapes, SIGNAL(clicked()), this, SLOT(showAddRemoveLandscapesDialog()));
 
 	// Light pollution
 	StelSkyDrawer* drawer = StelApp::getInstance().getCore()->getSkyDrawer();
@@ -243,13 +254,6 @@ void ViewDialog::createDialogContent()
 	
 	// atmosphere details
 	connect(ui->pushButtonAtmosphereDetails, SIGNAL(clicked()), this, SLOT(showAtmosphereDialog()));
-
-	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getCurrentLandscapeID()==lmgr->getDefaultLandscapeID());
-	ui->useAsDefaultLandscapeCheckBox->setEnabled(lmgr->getCurrentLandscapeID()!=lmgr->getDefaultLandscapeID());
-	connect(ui->useAsDefaultLandscapeCheckBox, SIGNAL(clicked()), this, SLOT(setCurrentLandscapeAsDefault()));
-
-	connect(GETSTELMODULE(LandscapeMgr), SIGNAL(landscapesChanged()), this, SLOT(populateLists()));
-	connect(ui->pushButtonAddRemoveLandscapes, SIGNAL(clicked()), this, SLOT(showAddRemoveLandscapesDialog()));
 
 	// Grid and lines
 	connectCheckBox(ui->showEquatorLineCheckBox, "actionShow_Equator_Line");
@@ -273,29 +277,24 @@ void ViewDialog::createDialogContent()
 
 	// Constellations
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
-	StelMovementMgr* moveMgr = GETSTELMODULE(StelMovementMgr);
 	Q_ASSERT(cmgr);
-	Q_ASSERT(moveMgr);
 	connectCheckBox(ui->showConstellationLinesCheckBox, "actionShow_Constellation_Lines");
 	connectCheckBox(ui->showConstellationLabelsCheckBox, "actionShow_Constellation_Labels");
 	connectCheckBox(ui->showConstellationBoundariesCheckBox, "actionShow_Constellation_Boundaries");
 	connectCheckBox(ui->showConstellationArtCheckBox, "actionShow_Constellation_Art");
-	// Solve LP:#1520783: StelMovementMgr controls Art Intensity because of fade-out for LP:#1294483
-	ui->constellationArtBrightnessSpinBox->setValue(moveMgr->getInitConstellationIntensity());
-	connect(ui->constellationArtBrightnessSpinBox, SIGNAL(valueChanged(double)), moveMgr, SLOT(setInitConstellationIntensity(double)));
-	ui->constellationLineThicknessSpinBox->setValue(cmgr->getConstellationLineThickness());
-	connect(ui->constellationLineThicknessSpinBox, SIGNAL(valueChanged(double)), cmgr, SLOT(setConstellationLineThickness(double)));
+
+	connectDoubleProperty(ui->constellationArtBrightnessSpinBox,"prop_ConstellationMgr_artIntensity");
+	connectDoubleProperty(ui->constellationLineThicknessSpinBox,"prop_ConstellationMgr_constellationLineThickness");
 
 	// Starlore
 	connect(ui->useAsDefaultSkyCultureCheckBox, SIGNAL(clicked()), this, SLOT(setCurrentCultureAsDefault()));
-	const bool b = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID()==StelApp::getInstance().getSkyCultureMgr().getDefaultSkyCultureID();
-	ui->useAsDefaultSkyCultureCheckBox->setChecked(b);
-	ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
+	connect(&StelApp::getInstance().getSkyCultureMgr(), SIGNAL(defaultSkyCultureChanged(QString)),this,SLOT(updateDefaultSkyCulture()));
+	updateDefaultSkyCulture();
 
 	connectCheckBox(ui->nativeNameCheckBox,"actionShow_Skyculture_Nativenames");
 
 	// GZ NEW allow to display short names and inhibit translation.
-	connect(ui->skyCultureNamesStyleComboBox, SIGNAL(currentIndexChanged(int)), cmgr, SLOT(setConstellationDisplayStyle(int)));
+	connectIntProperty(ui->skyCultureNamesStyleComboBox,"prop_ConstellationMgr_constellationDisplayStyle");
 
 	// Sky layers. This not yet finished and not visible in releases.
 	populateSkyLayersList();
@@ -303,10 +302,6 @@ void ViewDialog::createDialogContent()
 	connect(ui->skyLayerListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyLayersSelectionChanged(const QString&)));
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 	connect(ui->skyLayerEnableCheckBox, SIGNAL(stateChanged(int)), this, SLOT(skyLayersEnabledChanged(int)));
-
-	QTimer* refreshTimer = new QTimer(this);
-	connect(refreshTimer, SIGNAL(timeout()), this, SLOT(updateFromProgram()));
-	refreshTimer->start(200);
 
 	updateTabBarListWidgetWidth();
 }
@@ -449,28 +444,6 @@ void ViewDialog::updateSelectedTypesCheckBoxes()
 	ui->checkBoxOtherType->setChecked(flags & Nebula::TypeOther);
 }
 
-
-void ViewDialog::setFlagLandscapeUseMinimalBrightness(bool b)
-{
-	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-	lmgr->setFlagLandscapeUseMinimalBrightness(b);
-	populateLandscapeMinimalBrightness();
-}
-
-void ViewDialog::populateLandscapeMinimalBrightness()
-{
-	if (ui->landscapeBrightnessCheckBox->isChecked())
-	{
-		ui->localLandscapeBrightnessCheckBox->setEnabled(true);
-		ui->landscapeBrightnessSpinBox->setEnabled(true);
-	}
-	else
-	{
-		ui->localLandscapeBrightnessCheckBox->setEnabled(false);
-		ui->landscapeBrightnessSpinBox->setEnabled(false);
-	}
-}
-
 void ViewDialog::setLightPollutionSpinBoxStatus()
 {
 	LandscapeMgr *lmgr = GETSTELMODULE(LandscapeMgr);
@@ -590,8 +563,7 @@ void ViewDialog::populateLists()
 	l->blockSignals(false);	
 	ui->landscapeTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
-	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getDefaultLandscapeID()==lmgr->getCurrentLandscapeID());
-	ui->useAsDefaultLandscapeCheckBox->setEnabled(lmgr->getDefaultLandscapeID()!=lmgr->getCurrentLandscapeID());
+	updateDefaultLandscape();
 }
 
 void ViewDialog::populateSkyLayersList()
@@ -625,13 +597,12 @@ void ViewDialog::skyLayersEnabledChanged(int state)
 	skyLayerMgr->showLayer(ui->skyLayerListWidget->currentItem()->text(), state);
 }
 
-void ViewDialog::skyCultureChanged(const QString& cultureName)
+void ViewDialog::skyCultureChanged(const QString& cultureId)
 {
-	StelApp::getInstance().getSkyCultureMgr().setCurrentSkyCultureNameI18(cultureName);
+	QListWidget* l = ui->culturesListWidget;
+	l->setCurrentItem(l->findItems(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
 	updateSkyCultureText();
-	const bool b = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID()==StelApp::getInstance().getSkyCultureMgr().getDefaultSkyCultureID();
-	ui->useAsDefaultSkyCultureCheckBox->setChecked(b);
-	ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
+	updateDefaultSkyCulture();
 }
 
 // fill the description text window, not the names in the sky.
@@ -651,13 +622,17 @@ void ViewDialog::updateSkyCultureText()
 	ui->skyCultureTextBrowser->setHtml(html);
 }
 
-void ViewDialog::projectionChanged(const QString& projectionNameI18n)
+void ViewDialog::changeProjection(const QString& projectionNameI18n)
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	core->setCurrentProjectionTypeKey(core->projectionNameI18nToTypeKey(projectionNameI18n));
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	ui->projectionTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+}
+
+void ViewDialog::projectionChanged()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	QListWidget* l = ui->projectionListWidget;
+	l->setCurrentItem(l->findItems(core->projectionTypeKeyToNameI18n(core->getCurrentProjectionTypeKey()), Qt::MatchExactly).at(0),QItemSelectionModel::SelectCurrent);
 	ui->projectionTextBrowser->setHtml(core->getProjection(StelCore::FrameJ2000)->getHtmlSummary());
 }
 
@@ -673,19 +648,27 @@ void ViewDialog::viewportVerticalShiftChanged(const int shift)
 	core->setCurrentStelProjectorParams(params);
 }
 
-void ViewDialog::landscapeChanged(QListWidgetItem* item)
+void ViewDialog::changeLandscape(QListWidgetItem* item)
 {
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	lmgr->setCurrentLandscapeName(item->data(Qt::UserRole).toString());
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	ui->landscapeTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+}
+
+void ViewDialog::landscapeChanged(QString id, QString name)
+{
+	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
+	for (int i = 0; i < ui->landscapesListWidget->count(); i++)
+	{
+		if (ui->landscapesListWidget->item(i)->data(Qt::UserRole).toString() == name)
+		{
+			ui->landscapesListWidget->setCurrentRow(i, QItemSelectionModel::SelectCurrent);
+			break;
+		}
+	}
 	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
-	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getDefaultLandscapeID()==lmgr->getCurrentLandscapeID());
-	ui->useAsDefaultLandscapeCheckBox->setEnabled(lmgr->getDefaultLandscapeID()!=lmgr->getCurrentLandscapeID());
+	updateDefaultLandscape();
 	// Reset values that might have changed.
 	ui->showFogCheckBox->setChecked(lmgr->getFlagFog());
-	ui->lightPollutionSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex());
 }
 
 void ViewDialog::showAddRemoveLandscapesDialog()
@@ -757,39 +740,28 @@ void ViewDialog::setCurrentLandscapeAsDefault(void)
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	Q_ASSERT(lmgr);
 	lmgr->setDefaultLandscapeID(lmgr->getCurrentLandscapeID());
-	ui->useAsDefaultLandscapeCheckBox->setChecked(true);
-	ui->useAsDefaultLandscapeCheckBox->setEnabled(false);
 }
 
 void ViewDialog::setCurrentCultureAsDefault(void)
 {
 	StelApp::getInstance().getSkyCultureMgr().setDefaultSkyCultureID(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID());
-	ui->useAsDefaultSkyCultureCheckBox->setChecked(true);
-	ui->useAsDefaultSkyCultureCheckBox->setEnabled(false);
 }
 
-// Update the widget to make sure it is synchrone if a value was changed programmatically
-void ViewDialog::updateFromProgram()
+void ViewDialog::updateDefaultSkyCulture()
 {
-	if (!dialog->isVisible())
-		return;
-
 	// Check that the useAsDefaultSkyCultureCheckBox needs to be updated
 	bool b = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID()==StelApp::getInstance().getSkyCultureMgr().getDefaultSkyCultureID();
-	if (b!=ui->useAsDefaultSkyCultureCheckBox->isChecked())
-	{
-		ui->useAsDefaultSkyCultureCheckBox->setChecked(b);
-		ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
-	}
+	ui->useAsDefaultSkyCultureCheckBox->setChecked(b);
+	ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
+}
 
+void ViewDialog::updateDefaultLandscape()
+{
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	Q_ASSERT(lmgr);
-	b = lmgr->getCurrentLandscapeID()==lmgr->getDefaultLandscapeID();
-	if (b!=ui->useAsDefaultLandscapeCheckBox->isChecked())
-	{
-		ui->useAsDefaultLandscapeCheckBox->setChecked(b);
-		ui->useAsDefaultLandscapeCheckBox->setEnabled(!b);
-	}
+	bool b = lmgr->getCurrentLandscapeID()==lmgr->getDefaultLandscapeID();
+	ui->useAsDefaultLandscapeCheckBox->setChecked(b);
+	ui->useAsDefaultLandscapeCheckBox->setEnabled(!b);
 }
 
 void ViewDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)

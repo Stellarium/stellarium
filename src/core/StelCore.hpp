@@ -618,6 +618,8 @@ signals:
 	//! This happens whenever the internal jDay is changed through setJDay/setMJDay and similar,
 	//! and whenever the time rate changes.
 	void timeSyncOccurred(double jDay);
+	//! Emitted whenever the projection type changes
+	void currentProjectionTypeChanged(StelCore::ProjectionType newType);
 
 private:
 	StelToneReproducer* toneReproducer;		// Tones conversion between stellarium world and display device

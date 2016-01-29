@@ -67,6 +67,10 @@ void StelSkyCultureMgr::init()
 //! Set the current sky culture from the passed directory
 bool StelSkyCultureMgr::setCurrentSkyCultureID(const QString& cultureDir)
 {
+	//prevent unnecessary changes
+	if(cultureDir==currentSkyCultureDir)
+		return false;
+
 	// make sure culture definition exists before attempting or will die
 	if (directoryToSkyCultureEnglish(cultureDir) == "")
 	{
@@ -92,6 +96,8 @@ bool StelSkyCultureMgr::setDefaultSkyCultureID(const QString& id)
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	conf->setValue("localization/sky_culture", id);
+
+	emit defaultSkyCultureChanged(id);
 	return true;
 }
 	

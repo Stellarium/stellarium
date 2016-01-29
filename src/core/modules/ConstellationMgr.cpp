@@ -30,6 +30,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelMovementMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
@@ -53,11 +54,13 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 	  constellationDisplayStyle(ConstellationMgr::constellationsTranslated),
 	  artFadeDuration(1.),
 	  artIntensity(0),
+	  artIntensityMinimumFov(1.0),
+	  artIntensityMaximumFov(2.0),
 	  artDisplayed(0),
 	  boundariesDisplayed(0),
 	  linesDisplayed(0),
 	  namesDisplayed(0),
-	  constellationLineThickness(1.f)
+	  constellationLineThickness(1.)
 {
 	setObjectName("ConstellationMgr");
 	Q_ASSERT(hipStarMgr);
@@ -137,6 +140,9 @@ void ConstellationMgr::init()
 	addAction("actionShow_Constellation_Art", displayGroup, N_("Constellation art"), "artDisplayed", "R");
 	addAction("actionShow_Constellation_Labels", displayGroup, N_("Constellation labels"), "namesDisplayed", "V");
 	addAction("actionShow_Constellation_Boundaries", displayGroup, N_("Constellation boundaries"), "boundariesDisplayed", "B");
+	registerProperty("prop_ConstellationMgr_constellationDisplayStyle","constellationDisplayStyle");
+	registerProperty("prop_ConstellationMgr_constellationLineThickness","constellationLineThickness");
+	registerProperty("prop_ConstellationMgr_artIntensity","artIntensity");
 }
 
 /*************************************************************************
@@ -341,15 +347,18 @@ float ConstellationMgr::getFontSize() const
 	return asterFont.pixelSize();
 }
 
-void ConstellationMgr::setConstellationDisplayStyle(int style)
+void ConstellationMgr::setConstellationDisplayStyle(ConstellationDisplayStyle style)
 {
-	constellationDisplayStyle=(ConstellationMgr::ConstellationDisplayStyle) style;
-	if (constellationDisplayStyle==constellationsTranslated)
-		GETSTELMODULE(SolarSystem)->setFlagTranslatedNames(true);
-	else
-		GETSTELMODULE(SolarSystem)->setFlagTranslatedNames(false);
+	if(style!=constellationDisplayStyle)
+	{
+		constellationDisplayStyle=style;
+		if (constellationDisplayStyle==constellationsTranslated)
+			GETSTELMODULE(SolarSystem)->setFlagTranslatedNames(true);
+		else
+			GETSTELMODULE(SolarSystem)->setFlagTranslatedNames(false);
 
-	emit constellationsDisplayStyleChanged(constellationDisplayStyle);
+		emit constellationsDisplayStyleChanged(constellationDisplayStyle);
+	}
 }
 
 QString ConstellationMgr::getConstellationDisplayStyleString()
@@ -363,11 +372,16 @@ ConstellationMgr::ConstellationDisplayStyle ConstellationMgr::getConstellationDi
 	return constellationDisplayStyle;
 }
 
-void ConstellationMgr::setConstellationLineThickness(const double thickness)
+void ConstellationMgr::setConstellationLineThickness(const float thickness)
 {
-	constellationLineThickness = thickness;
-	if (constellationLineThickness<=0.f) // The line can not be negative or zero thickness
-		constellationLineThickness = 1.f;
+	if(thickness!=constellationLineThickness)
+	{
+		constellationLineThickness = thickness;
+		if (constellationLineThickness<=0.f) // The line can not be negative or zero thickness
+			constellationLineThickness = 1.f;
+
+		emit constellationLineThicknessChanged(thickness);
+	}
 }
 
 void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &artfileName, const QString& cultureName)
@@ -850,6 +864,10 @@ void ConstellationMgr::updateI18n()
 // update faders
 void ConstellationMgr::update(double deltaTime)
 {
+	//calculate FOV fade value, linear fade between artIntensityMaximumFov and artIntensityMinimumFov
+	double fov = StelApp::getInstance().getCore()->getMovementMgr()->getCurrentFov();
+	Constellation::artIntensityFovScale = qBound(0.0,(fov - artIntensityMinimumFov) / (artIntensityMaximumFov - artIntensityMinimumFov),1.0);
+
 	vector < Constellation * >::const_iterator iter;
 	const int delta = (int)(deltaTime*1000);
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
@@ -858,35 +876,60 @@ void ConstellationMgr::update(double deltaTime)
 	}
 }
 
-void ConstellationMgr::setArtIntensity(const double intensity)
+void ConstellationMgr::setArtIntensity(const float intensity)
 {
 	if (artIntensity != intensity)
+	{
 		artIntensity = intensity;
 
-	vector < Constellation * >::const_iterator iter;
-	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-	{
-		(*iter)->artFader.setMaxValue(artIntensity);
+		vector < Constellation * >::const_iterator iter;
+		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+		{
+			(*iter)->artFader.setMaxValue(artIntensity);
+		}
+
+		emit artIntensityChanged(intensity);
 	}
-	emit artIntensityChanged(intensity);
 }
 
-double ConstellationMgr::getArtIntensity() const
+float ConstellationMgr::getArtIntensity() const
 {
 	return artIntensity;
+}
+
+void ConstellationMgr::setArtIntensityMinimumFov(const double fov)
+{
+	artIntensityMinimumFov = fov;
+}
+
+double ConstellationMgr::getArtIntensityMinimumFov() const
+{
+	return artIntensityMinimumFov;
+}
+
+void ConstellationMgr::setArtIntensityMaximumFov(const double fov)
+{
+	artIntensityMaximumFov = fov;
+}
+
+double ConstellationMgr::getArtIntensityMaximumFov() const
+{
+	return artIntensityMaximumFov;
 }
 
 void ConstellationMgr::setArtFadeDuration(const float duration)
 {
 	if (artFadeDuration != duration)
+	{
 		artFadeDuration = duration;
 
-	vector < Constellation * >::const_iterator iter;
-	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-	{
-		(*iter)->artFader.setDuration((int) (duration * 1000.f));
+		vector < Constellation * >::const_iterator iter;
+		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+		{
+			(*iter)->artFader.setDuration((int) (duration * 1000.f));
+		}
+		emit artFadeDurationChanged(duration);
 	}
-	emit artFadeDurationChanged(duration);
 }
 
 float ConstellationMgr::getArtFadeDuration() const

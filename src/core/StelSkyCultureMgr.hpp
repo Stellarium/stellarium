@@ -100,6 +100,11 @@ public slots:
 
 	//! Returns a map from sky culture IDs/folders to sky culture names.
 	QMap<QString, StelSkyCulture> getDirToNameMap() const { return dirToNameEnglish; }
+
+signals:
+	//! Emitted whenever the default sky culture changed.
+	//! @see setDefaultSkyCultureID
+	void defaultSkyCultureChanged(const QString& id);
 	
 private:
 	//! Get the culture name in English associated with a specified directory.

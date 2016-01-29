@@ -48,24 +48,23 @@ protected:
 	virtual void createDialogContent();
 private slots:
 	void populateLists();
-	void skyCultureChanged(const QString& cultureName);
-	void projectionChanged(const QString& projectionName);
+	void skyCultureChanged(const QString& cultureId);
+	void changeProjection(const QString& projectionNameI18n);
+	void projectionChanged();
 	void viewportVerticalShiftChanged(const int shift);
-	void landscapeChanged(QListWidgetItem* item);
+	void changeLandscape(QListWidgetItem* item);
+	void landscapeChanged(QString id,QString name);
 	void updateZhrDescription(int zhr);
 	void setBortleScaleToolTip(int Bindex);
 	void setCurrentLandscapeAsDefault(void);
 	void setCurrentCultureAsDefault(void);
-	void setFlagLandscapeUseMinimalBrightness(bool b);
-	//! Update the widget to make sure it is synchrone if a value was changed programmatically
-	//! This function should be called repeatidly with e.g. a timer
-	void updateFromProgram();
+	void updateDefaultSkyCulture();
+	void updateDefaultLandscape();
 
 	void showAddRemoveLandscapesDialog();
         void showAtmosphereDialog();
 
 	void setLightPollutionSpinBoxStatus();
-	void populateLandscapeMinimalBrightness();
 
 	// WHAT IS THE SKY LAYER? hidden, under development?
 	void populateSkyLayersList();

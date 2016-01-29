@@ -25,7 +25,6 @@
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
-#include "ConstellationMgr.hpp"
 
 #include <cmath>
 #include <QString>
@@ -39,7 +38,6 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, initFov(60.)
 	, minFov(0.001389)
 	, maxFov(100.)
-	, initConstellationIntensity(0.45)
 	, core(acore)
 	, objectMgr(NULL)
 	, flagLockEquPos(false)
@@ -108,7 +106,6 @@ void StelMovementMgr::init()
 	maxFov = 100.;
 	initFov = conf->value("navigation/init_fov",60.f).toFloat();
 	currentFov = initFov;
-	setInitConstellationIntensity(conf->value("viewing/constellation_art_intensity", 0.5f).toFloat());
 
 	// With a special code of init_view_position=x/y/2 you can set zenith into the center and atan2(x/y) to bottom of screen.
 	// examples: 1/0->0             (-1/0)
@@ -1147,25 +1144,6 @@ void StelMovementMgr::changeFov(double deltaFov)
 	// if we are zooming in or out
 	if (deltaFov)
 		setFov(currentFov + deltaFov);
-}
-
-void StelMovementMgr::changeConstellationArtIntensity()
-{
-	ConstellationMgr *cmgr = GETSTELMODULE(ConstellationMgr);
-	// During startup this may not have been initialized yet!
-	if (!cmgr)
-		return;
-
-	if (cmgr->getFlagArt())
-	{
-		double artInt = getInitConstellationIntensity();
-		// Fade out constellation art when FOV less 2 degrees
-		if (currentFov<=2.)
-		{
-			artInt *= currentFov>1.? (currentFov-1.) : 0. ;
-		}
-		cmgr->setArtIntensity(artInt);
-	}
 }
 
 double StelMovementMgr::getAimFov(void) const
