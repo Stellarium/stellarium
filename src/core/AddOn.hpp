@@ -108,6 +108,7 @@ private:
 	QString m_sDescription;
 	QDate m_dVersion;
 	QStringList m_supported;
+	QString m_sLanguage;
 	QString m_sLastStel;
 	QString m_sLicense;
 	QString m_sLicenseURL;

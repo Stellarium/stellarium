@@ -55,6 +55,9 @@ AddOn::AddOn(const QString addonId, const QVariantMap& map)
 	m_sChecksum = map.value("checksum").toString();
 	m_sThumbnail = map.value("thumbnail").toString();
 
+	// specific field for scripts
+	m_sLanguage = map.value("language").toString();
+
 	// specific fields in 'installed_addons.json'
 	m_InstalledFiles = map.value("installed-files").toStringList();
 	m_eStatus = (AddOn::Status) map.value("status").toInt();
