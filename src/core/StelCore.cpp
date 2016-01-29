@@ -474,12 +474,17 @@ void StelCore::postDraw()
 
 void StelCore::setCurrentProjectionType(ProjectionType type)
 {
-	currentProjectionType=type;
-	const double savedFov = currentProjectorParams.fov;
-	currentProjectorParams.fov = 0.0001;	// Avoid crash
-	double newMaxFov = getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity())))->getMaxFov();
-	movementMgr->setMaxFov(newMaxFov);
-	currentProjectorParams.fov = qMin(newMaxFov, savedFov);
+	if(type!=currentProjectionType)
+	{
+		currentProjectionType=type;
+		const double savedFov = currentProjectorParams.fov;
+		currentProjectorParams.fov = 0.0001;	// Avoid crash
+		double newMaxFov = getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity())))->getMaxFov();
+		movementMgr->setMaxFov(newMaxFov);
+		currentProjectorParams.fov = qMin(newMaxFov, savedFov);
+
+		emit currentProjectionTypeChanged(type);
+	}
 }
 
 StelCore::ProjectionType StelCore::getCurrentProjectionType() const

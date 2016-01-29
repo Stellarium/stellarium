@@ -27,6 +27,7 @@
 
 #include <QDebug>
 #include <QAbstractButton>
+#include <QComboBox>
 #include <QDialog>
 #include <QGraphicsProxyWidget>
 #include <QMetaProperty>
@@ -224,6 +225,21 @@ void StelDialog::connectIntProperty(QSpinBox *spinBox, const QString &propName)
 	connect(prox, &StelPropertyIntProxy::propertyChanged, spinBox, &QSpinBox::setValue);
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
 	connect(spinBox, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),prop,&StelProperty::setValue);
+}
+
+void StelDialog::connectIntProperty(QComboBox *comboBox, const QString &propName)
+{
+	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
+	Q_ASSERT_X(prop,"StelDialog", "StelProperty does not exist");
+	bool ok;
+	comboBox->setCurrentIndex(prop->getValue().toInt(&ok));
+	Q_ASSERT_X(ok,"StelDialog","Can not convert to required datatype");
+	StelPropertyIntProxy* prox = qobject_cast<StelPropertyIntProxy*>(prop->getProxy());
+	Q_ASSERT_X(prox,"StelDialog", "No valid StelPropertyProxy defined for this property");
+	//in this direction, we require a proxy
+	connect(prox, &StelPropertyIntProxy::propertyChanged, comboBox, &QComboBox::setCurrentIndex);
+	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
+	connect(comboBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated),prop,&StelProperty::setValue);
 }
 
 void StelDialog::connectDoubleProperty(QDoubleSpinBox *spinBox, const QString &propName)

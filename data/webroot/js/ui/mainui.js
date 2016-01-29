@@ -106,46 +106,61 @@ define(["jquery", "settings", "api/remotecontrol", "api/actions", "api/propertie
 		$("input.spinner.stelproperty").each(function() {
 			var self = $(this);
 			var prop = self.attr("name");
+			if (!prop) {
+				console.error('Error: no StelProperty name defined on an "stelproperty" element, element follows...');
+				console.dir(this);
+				alert('Error: no StelProperty name defined on an "stelproperty" element, see log for details');
+			}
 
 			$(propApi).on("stelPropertyChanged:" + prop, function(evt, prop) {
 				self.spinner("value", prop.value);
 			});
 			self.spinner("value", propApi.getStelProp(prop));
 
-			self.on("spin",function(evt,ui){
-				propApi.setStelPropQueued(prop,ui.value);
+			self.on("spin", function(evt, ui) {
+				propApi.setStelPropQueued(prop, ui.value);
 			});
 		});
 
 		//hook up stelproperty checkboxes
-		$("input[type='checkbox'].stelproperty").each(function(){
+		$("input[type='checkbox'].stelproperty").each(function() {
 			var self = $(this);
 			var prop = self.attr("name");
+			if (!prop) {
+				console.error('Error: no StelProperty name defined on an "stelproperty" element, element follows...');
+				console.dir(this);
+				alert('Error: no StelProperty name defined on an "stelproperty" element, see log for details');
+			}
 
 			$(propApi).on("stelPropertyChanged:" + prop, function(evt, prop) {
 				self[0].checked = prop.value;
 			});
 			self[0].checked = propApi.getStelProp(prop);
-			self.click(function(){
-				propApi.setStelProp(prop,this.checked);
+			self.click(function() {
+				propApi.setStelProp(prop, this.checked);
 			});
 		});
 
-		$("div.slider.stelproperty").each(function(){
+		$("div.slider.stelproperty").each(function() {
 			var self = $(this);
 			var prop = self.data("prop");
+			if (!prop) {
+				console.error('Error: no StelProperty name defined on an "stelproperty" element, element follows...');
+				console.dir(this);
+				alert('Error: no StelProperty name defined on an "stelproperty" element, see log for details');
+			}
 
 			$(propApi).on("stelPropertyChanged:" + prop, function(evt, prop) {
 				self.slider("value", prop.value);
 			});
 			self.slider("value", propApi.getStelProp(prop));
-			self.on("slide",function(evt,ui){
-				propApi.setStelPropQueued(prop,ui.value);
+			self.on("slide", function(evt, ui) {
+				propApi.setStelPropQueued(prop, ui.value);
 			});
 		});
 
 		//hook up stelaction checkboxes
-		$("input[type='checkbox'].stelaction").each(function(){
+		$("input[type='checkbox'].stelaction").each(function() {
 			var self = $(this);
 			var id = this.value;
 
@@ -153,15 +168,21 @@ define(["jquery", "settings", "api/remotecontrol", "api/actions", "api/propertie
 				self[0].checked = action.isChecked;
 			});
 			self[0].checked = actionApi.isChecked(id);
-			self.click(function(){
+			self.click(function() {
 				actionApi.execute(id);
 			});
 		});
 
 		//hook up span stelproperty display
-		$("span.stelproperty").each(function(){
+		$("span.stelproperty").each(function() {
 			var self = $(this);
 			var prop = self.data("prop");
+
+			if (!prop) {
+				console.error('Error: no StelProperty name defined on an "stelproperty" element, element follows...');
+				console.dir(this);
+				alert('Error: no StelProperty name defined on an "stelproperty" element, see log for details');
+			}
 
 			$(propApi).on("stelPropertyChanged:" + prop, function(evt, prop) {
 				self.text(prop.value);

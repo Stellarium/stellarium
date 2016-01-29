@@ -416,7 +416,11 @@ void LandscapeMgr::init()
 	addAction("actionShow_LandscapeIllumination", displayGroup, N_("Illumination"), "illuminationDisplayed", "Shift+G");
 	addAction("actionShow_LandscapeLabels", displayGroup, N_("Labels"), "labelsDisplayed", "Ctrl+Shift+G");
 	addAction("actionShow_LightPollution_Database", displayGroup, N_("Light pollution data from locations database"), "databaseUsage");
-	registerProperty("prop_LandscapeMgr_flagLandscapeAutoSelection","flagLandscapeAutoSelection");
+	registerProperty("prop_LandscapeMgr_flagLandscapeAutoSelection", "flagLandscapeAutoSelection");
+	registerProperty("prop_LandscapeMgr_flagLandscapeSetsLocation", "flagLandscapeSetsLocation");
+	registerProperty("prop_LandscapeMgr_flagLandscapeUseMinimalBrightness", "flagLandscapeUseMinimalBrightness");
+	registerProperty("prop_LandscapeMgr_flagLandscapeSetsMinimalBrightness", "flagLandscapeSetsMinimalBrightness");
+	registerProperty("prop_LandscapeMgr_defaultMinimalBrightness", "defaultMinimalBrightness");
 }
 
 void LandscapeMgr::setStelStyle(const QString& section)
@@ -431,6 +435,10 @@ void LandscapeMgr::setStelStyle(const QString& section)
 bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeLocationDuration)
 {
 	if (id.isEmpty())
+		return false;
+
+	//prevent unnecessary changes/file access
+	if(id==currentLandscapeID)
 		return false;
 
 	// We want to lookup the landscape ID (dir) from the name.
@@ -495,6 +503,8 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 	}
 	currentLandscapeID = id;
 
+	emit currentLandscapeChanged(currentLandscapeID,getCurrentLandscapeName());
+
 	// else qDebug() << "Will not set new location; Landscape location: planet: " << landscape->getLocation().planetName << "name: " << landscape->getLocation().name;
 	return true;
 }
@@ -524,6 +534,7 @@ bool LandscapeMgr::setDefaultLandscapeID(const QString& id)
 	defaultLandscapeID = id;
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("init_location/landscape_name", id);
+	emit defaultLandscapeChanged(id);
 	return true;
 }
 

@@ -227,11 +227,6 @@ public slots:
 	void setDragTimeMode(bool b) {dragTimeMode=b;}
 	bool getDragTimeMode() const {return dragTimeMode;}
 
-	//! Return the initial value of intensity of art of constellations.
-	double getInitConstellationIntensity() const {return initConstellationIntensity;}
-	//! Set the initial value of intensity of art of constellations.
-	void setInitConstellationIntensity(double v) {initConstellationIntensity=v; changeConstellationArtIntensity();}
-
 	//! Function designed only for scripting context. Put the function into the startup.ssc of your planetarium setup,
 	//! this will avoid any unwanted tracking.
 	void setInhibitAllAutomoves(bool inhibit) { flagInhibitAllAutomoves=inhibit;}
@@ -253,7 +248,6 @@ private:
 	double initFov;    // The FOV at startup
 	double minFov;     // Minimum FOV in degrees
 	double maxFov;     // Maximum FOV in degrees
-	double initConstellationIntensity;   // The initial constellation art intensity (level at startup)
 
 	void setFov(double f)
 	{
@@ -262,11 +256,8 @@ private:
 			currentFov = maxFov;
 		if (f<minFov)
 			currentFov = minFov;
-
-		changeConstellationArtIntensity();
 	}
 	void changeFov(double deltaFov);
-	void changeConstellationArtIntensity();
 
 	// Move (a bit) to selected/tracked object until move.coef reaches 1, or auto-follow (track) selected object.
 	// Does nothing if flagInhibitAllAutomoves=true
