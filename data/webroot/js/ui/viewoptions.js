@@ -1,4 +1,4 @@
-define(["jquery", "api/viewoptions", "api/actions","jquery-ui"], function($, viewOptionApi, actionApi) {
+define(["jquery", "api/viewoptions", "api/actions", "api/properties", "jquery-ui"], function($, viewOptionApi, actionApi, propApi) {
 	"use strict";
 
 	var $vo_projectionlist;
@@ -109,6 +109,11 @@ define(["jquery", "api/viewoptions", "api/actions","jquery-ui"], function($, vie
 
 	$(actionApi).on("stelActionChanged:actionShow_LightPollution_Database", function(evt,data){
 		$("#atmosphere_bortlescaleindex").spinner("option", "disabled", data.isChecked);
+	});
+
+	$(propApi).on("stelPropertyChanged:prop_LandscapeMgr_flagLandscapeUseMinimalBrightness", function(evt,data){
+		$("#landscape_defaultMinimalBrightness").spinner("option", "disabled", !data.value);
+		$("#landscape_flagLandscapeSetsMinimalBrightness").prop("disabled", !data.value);
 	});
 
 	$(actionApi).on("stelActionChanged:actionSet_Nebula_TypeFilterUsage", function(evt, data) {

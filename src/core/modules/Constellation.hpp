@@ -188,6 +188,9 @@ private:
 
 	static bool singleSelected;	
 	static bool seasonalRuleEnabled;
+	// set by ConstellationMgr to fade out art on small FOV values
+	// see LP:#1294483
+	static float artIntensityFovScale;
 };
 
 #endif // _CONSTELLATION_HPP_
