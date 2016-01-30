@@ -307,6 +307,16 @@ StelObjectP Exoplanets::searchByName(const QString& englishName) const
 			}
 		}
 
+		ppn = eps->getExoplanetsDesignations();
+		if (!ppn.isEmpty())
+		{
+			foreach (const QString &str, ppn)
+			{
+				if (str.toUpper() == englishName.toUpper())
+					return qSharedPointerCast<StelObject>(eps);
+			}
+		}
+
 	}
 
 	return NULL;
@@ -466,21 +476,18 @@ QStringList Exoplanets::listAllObjects(bool inEnglish) const
 	if (!flagShowExoplanets)
 		return result;
 
+	foreach (const ExoplanetP& planet, ep)
+		result << planet->getExoplanetsDesignations();
+
 	if (inEnglish)
 	{
 		foreach (const ExoplanetP& planet, ep)
-		{
-			result << planet->getEnglishName();
 			result << planet->getExoplanetsEnglishNames();
-		}
 	}
 	else
 	{
 		foreach (const ExoplanetP& planet, ep)
-		{
-			result << planet->getNameI18n();
 			result << planet->getExoplanetsNamesI18n();
-		}
 	}
 	return result;
 }

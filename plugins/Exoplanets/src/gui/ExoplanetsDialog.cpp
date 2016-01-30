@@ -39,7 +39,7 @@
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
 
-#include "qcustomplot.h"
+#include "qcustomplot/qcustomplot.h"
 
 ExoplanetsDialog::ExoplanetsDialog()
 	: ep(NULL)

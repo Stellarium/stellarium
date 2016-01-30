@@ -90,6 +90,7 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 	angleDistanceList.clear();
 	englishNames.clear();
 	translatedNames.clear();
+	exoplanetDesignations.clear();
 	if (map.contains("exoplanets"))
 	{
 		foreach(const QVariant &expl, map.value("exoplanets").toList())
@@ -97,8 +98,14 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 			QVariantMap exoplanetMap = expl.toMap();
 			exoplanetData p;
 			EPCount++;
-			if (exoplanetMap.contains("planetName")) p.planetName = exoplanetMap.value("planetName").toString();
-			if (exoplanetMap.contains("planetProperName")) {
+			if (exoplanetMap.contains("planetName"))
+			{
+				p.planetName = exoplanetMap.value("planetName").toString();
+				QString epd = QString("%1 %2").arg(designation, p.planetName);
+				exoplanetDesignations.append(epd);
+			}
+			if (exoplanetMap.contains("planetProperName"))
+			{
 				p.planetProperName = exoplanetMap.value("planetProperName").toString();
 				englishNames.append(p.planetProperName);
 				translatedNames.append(trans.qtranslate(p.planetProperName));
@@ -235,6 +242,11 @@ QStringList Exoplanet::getExoplanetsEnglishNames() const
 QStringList Exoplanet::getExoplanetsNamesI18n() const
 {
 	return translatedNames;
+}
+
+QStringList Exoplanet::getExoplanetsDesignations() const
+{
+	return exoplanetDesignations;
 }
 
 QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
