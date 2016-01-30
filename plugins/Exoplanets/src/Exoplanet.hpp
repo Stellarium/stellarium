@@ -97,6 +97,7 @@ public:
 	QString getDesignation(void) const;
 	QStringList getExoplanetsEnglishNames(void) const;
 	QStringList getExoplanetsNamesI18n(void) const;
+	QStringList getExoplanetsDesignations(void) const;
 
 	bool isDiscovered(const StelCore* core);
 
@@ -171,7 +172,7 @@ private:
 	bool hasHabitableExoplanets;		//! Has potential habitable exoplanets
 	QList<exoplanetData> exoplanets;	//! List of exoplanets
 
-	QStringList englishNames, translatedNames;
+	QStringList englishNames, translatedNames, exoplanetDesignations;
 
 	QList<double> eccentricityList, semiAxisList, massList, radiusList, periodList, angleDistanceList;
 

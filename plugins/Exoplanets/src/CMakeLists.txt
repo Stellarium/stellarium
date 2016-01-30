@@ -1,17 +1,13 @@
 INCLUDE_DIRECTORIES(
      .
-     qcp
      gui
      ${CMAKE_BINARY_DIR}/plugins/Exoplanets/src
-     ${CMAKE_BINARY_DIR}/plugins/Exoplanets/src/qcp
      ${CMAKE_BINARY_DIR}/plugins/Exoplanets/src/gui
 )
 
 LINK_DIRECTORIES(${BUILD_DIR}/src)
 
 SET(Exoplanets_SRCS
-     qcp/qcustomplot.h
-     qcp/qcustomplot.cpp
      Exoplanets.hpp
      Exoplanets.cpp
      Exoplanet.hpp
