@@ -212,6 +212,8 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 	$starname =~ s/Fomalhaut/alpha PsA/gi;
 	$starname =~ s/Aldebaran/alpha Tau/gi;
 	$starname =~ s/Pollux/beta Gem/gi;
+	$starname =~ s/PSR 1257 12/PSR B1257+12/gi;
+	$starname =~ s/PSR 1719-14/PSR B1719-14/gi;
 	# fixed designations of stars
 	$starname =~ s/Eridani/Eri/gi;
 	$starname =~ s/Cephei/Cep/gi;
