@@ -215,10 +215,10 @@ void ExoplanetsDialog::setInfoHtml(void)
 	html += QString("<li><strong>%1</strong> (%2) &mdash; %3.</li>").arg(trans.qtranslate("Rocinante"), "μ Ara d", q_("Fictional horse of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>"));
 	html += QString("<li><strong>%1</strong> (%2) &mdash; %3.</li>").arg(trans.qtranslate("Sancho"), "μ Ara e", q_("Fictional squire of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>"));
 	html += QString("<li><strong>%1</strong><sup>*</sup> (%2) &mdash; %3.<sup>5</sup></li>").arg(trans.qtranslate("Thestias"), "β Gem b", q_("Thestias is the patronym of Leda and her sister Althaea, the daughters of Thestius. Leda was a Greek goddess, mother of Pollux and of his twin Castor, and of Helen and Clytemnestra"));
-	html += QString("<li><strong>%1</strong> (%2) &mdash; %3.</li>").arg(trans.qtranslate("Lich"), "PSR 1257+12", q_("Lich is a fictional undead creature known for controlling other undead creatures with magic"));
-	html += QString("<li><strong>%1</strong> (%2) &mdash; %3.</li>").arg(trans.qtranslate("Draugr"), "PSR 1257+12 b", q_("Draugr refers to undead creatures in Norse mythology"));
-	html += QString("<li><strong>%1</strong> (%2) &mdash; %3.</li>").arg(trans.qtranslate("Poltergeist"), "PSR 1257+12 c", q_("Poltergeist is an name for supernatural beings that create physical disturbences, from German for <em>noisy ghost</em>"));
-	html += QString("<li><strong>%1</strong> (%2) &mdash; %3.</li>").arg(trans.qtranslate("Phobetor"), "PSR 1257+12 d", q_("Phobetor is a Greek mythological deity of nightmares, the son of Nyx, the primordial deity of night"));
+	html += QString("<li><strong>%1</strong> (%2) &mdash; %3.</li>").arg(trans.qtranslate("Lich"), "PSR B1257+12", q_("Lich is a fictional undead creature known for controlling other undead creatures with magic"));
+	html += QString("<li><strong>%1</strong> (%2) &mdash; %3.</li>").arg(trans.qtranslate("Draugr"), "PSR B1257+12 b", q_("Draugr refers to undead creatures in Norse mythology"));
+	html += QString("<li><strong>%1</strong> (%2) &mdash; %3.</li>").arg(trans.qtranslate("Poltergeist"), "PSR B1257+12 c", q_("Poltergeist is an name for supernatural beings that create physical disturbences, from German for <em>noisy ghost</em>"));
+	html += QString("<li><strong>%1</strong> (%2) &mdash; %3.</li>").arg(trans.qtranslate("Phobetor"), "PSR B1257+12 d", q_("Phobetor is a Greek mythological deity of nightmares, the son of Nyx, the primordial deity of night"));
 	html += QString("<li><strong>%1</strong> (%2) &mdash; %3.</li>").arg(trans.qtranslate("Titawin"), "υ And", q_("Titawin (also known as Medina of Tetouan) is a settlement in northern Morocco and UNESCO World Heritage Site. Historically it was an important point of contact between two civilizations (Spanish and Arab) and two continents (Europe and Africa) after the 8th century"));
 	html += QString("<li><strong>%1</strong> (%2) &mdash; %3.</li>").arg(trans.qtranslate("Saffar"), "υ And b", q_("Saffar is named for Abu al-Qasim Ahmed Ibn-Abd Allah Ibn-Omar al Ghafiqi Ibn-al-Saffar, who taught arithmetic, geometry, and astronomy in 11th century Cordova in Andalusia (modern Spain), and wrote an influential treatise on the uses of the astrolabe"));
 	html += QString("<li><strong>%1</strong> (%2) &mdash; %3.</li>").arg(trans.qtranslate("Samh"), "υ And c", q_("Samh is named for Abu al-Qasim 'Asbagh ibn Muhammad ibn al-Samh al-Mahri (or <em>Ibn al-Samh</em>), a noted 11th century astronomer and mathematician in the school of al Majriti in Cordova (Andalusia, now modern Spain)"));
@@ -236,10 +236,9 @@ void ExoplanetsDialog::setInfoHtml(void)
 	html += "<h2>" + q_("Additional info") + "</h2><ul>";
 	html += QString("<li><a href='https://en.wikipedia.org/wiki/Circumstellar_habitable_zone'>%1</a> (en)</li>").arg(q_("Circumstellar habitable zone"));
 	html += QString("<li><a href='https://en.wikipedia.org/wiki/Planetary_equilibrium_temperature'>%1</a> (en)</li>").arg(q_("Planetary equilibrium temperature"));
-	html += QString("<li><a href='https://en.wikipedia.org/wiki/Planetary_habitability'>%1</a> (en)</li>").arg(q_("Planetary habitability"));
-	html += QString("<li><a href='https://en.wikipedia.org/wiki/Earth_Similarity_Index'>%1</a> (en)</li>").arg(q_("Earth Similarity Index"));
+	html += QString("<li><a href='http://en.wikipedia.org/wiki/Planetary_habitability'>%1</a> (en)</li>").arg(q_("Planetary habitability"));
+	html += QString("<li><a href='http://en.wikipedia.org/wiki/Earth_Similarity_Index'>%1</a> (en)</li>").arg(q_("Earth Similarity Index"));
 	html += QString("<li><a href='http://www.iau.org/news/pressreleases/detail/iau1514/'>%1</a> (en)</li>").arg(q_("Final Results of NameExoWorlds Public Vote Released"));
-	html += QString("<li><a href='http://nameexoworlds.iau.org'>%1</a> (en)</li>").arg(q_("NameExoWorlds website"));
 	html += "</ul></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
