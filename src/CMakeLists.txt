@@ -260,6 +260,8 @@ SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
      core/external/qtcompress/qzip.cpp
      core/external/qtcompress/qzipreader.h
      core/external/qtcompress/qzipwriter.h
+     core/external/qcustomplot/qcustomplot.cpp
+     core/external/qcustomplot/qcustomplot.h
 )
 
 IF(ENABLE_SCRIPTING)
