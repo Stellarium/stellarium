@@ -236,9 +236,10 @@ void ExoplanetsDialog::setInfoHtml(void)
 	html += "<h2>" + q_("Additional info") + "</h2><ul>";
 	html += QString("<li><a href='https://en.wikipedia.org/wiki/Circumstellar_habitable_zone'>%1</a> (en)</li>").arg(q_("Circumstellar habitable zone"));
 	html += QString("<li><a href='https://en.wikipedia.org/wiki/Planetary_equilibrium_temperature'>%1</a> (en)</li>").arg(q_("Planetary equilibrium temperature"));
-	html += QString("<li><a href='http://en.wikipedia.org/wiki/Planetary_habitability'>%1</a> (en)</li>").arg(q_("Planetary habitability"));
-	html += QString("<li><a href='http://en.wikipedia.org/wiki/Earth_Similarity_Index'>%1</a> (en)</li>").arg(q_("Earth Similarity Index"));
+	html += QString("<li><a href='https://en.wikipedia.org/wiki/Planetary_habitability'>%1</a> (en)</li>").arg(q_("Planetary habitability"));
+	html += QString("<li><a href='https://en.wikipedia.org/wiki/Earth_Similarity_Index'>%1</a> (en)</li>").arg(q_("Earth Similarity Index"));
 	html += QString("<li><a href='http://www.iau.org/news/pressreleases/detail/iau1514/'>%1</a> (en)</li>").arg(q_("Final Results of NameExoWorlds Public Vote Released"));
+	html += QString("<li><a href='http://nameexoworlds.iau.org/'>%1</a> (en)</li>").arg(q_("NameExoWorlds website"));
 	html += "</ul></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
