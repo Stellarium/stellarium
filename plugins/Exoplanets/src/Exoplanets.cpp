@@ -294,8 +294,29 @@ StelObjectP Exoplanets::searchByName(const QString& englishName) const
 
 	foreach(const ExoplanetP& eps, ep)
 	{
-		if (eps->getEnglishName().toUpper() == englishName.toUpper())
+		if (eps->getEnglishName().toUpper() == englishName.toUpper() || eps->getDesignation().toUpper() == englishName.toUpper())
 			return qSharedPointerCast<StelObject>(eps);
+
+		QStringList ppn = eps->getExoplanetsEnglishNames();
+		if (!ppn.isEmpty())
+		{
+			foreach (const QString &str, ppn)
+			{
+				if (str.toUpper() == englishName.toUpper())
+					return qSharedPointerCast<StelObject>(eps);
+			}
+		}
+
+		ppn = eps->getExoplanetsDesignations();
+		if (!ppn.isEmpty())
+		{
+			foreach (const QString &str, ppn)
+			{
+				if (str.toUpper() == englishName.toUpper())
+					return qSharedPointerCast<StelObject>(eps);
+			}
+		}
+
 	}
 
 	return NULL;
@@ -308,8 +329,18 @@ StelObjectP Exoplanets::searchByNameI18n(const QString& nameI18n) const
 
 	foreach(const ExoplanetP& eps, ep)
 	{
-		if (eps->getNameI18n().toUpper() == nameI18n.toUpper())
+		if (eps->getNameI18n().toUpper() == nameI18n.toUpper() || eps->getDesignation().toUpper() == nameI18n.toUpper())
 			return qSharedPointerCast<StelObject>(eps);
+
+		QStringList ppn = eps->getExoplanetsNamesI18n();
+		if (!ppn.isEmpty())
+		{
+			foreach (const QString &str, ppn)
+			{
+				if (str.toUpper() == nameI18n.toUpper())
+					return qSharedPointerCast<StelObject>(eps);
+			}
+		}
 	}
 
 	return NULL;
@@ -343,6 +374,29 @@ QStringList Exoplanets::listMatchingObjectsI18n(const QString& objPrefix, int ma
 		if (find)
 		{
 			result << epsn;
+		}
+
+		QStringList epsnp = eps->getExoplanetsNamesI18n();
+		if (!epsnp.isEmpty())
+		{
+			foreach (const QString &str, epsnp)
+			{
+				find = false;
+				if (useStartOfWords)
+				{
+					if (str.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
+						find = true;
+				}
+				else
+				{
+					if (str.contains(objPrefix, Qt::CaseInsensitive))
+						find = true;
+				}
+				if (find)
+				{
+					result << str;
+				}
+			}
 		}
 	}
 
@@ -383,6 +437,28 @@ QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbI
 		{
 			result << epsn;
 		}
+		QStringList epsnp = eps->getExoplanetsEnglishNames();
+		if (!epsnp.isEmpty())
+		{
+			foreach (const QString &str, epsnp)
+			{
+				find = false;
+				if (useStartOfWords)
+				{
+					if (str.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
+						find = true;
+				}
+				else
+				{
+					if (str.contains(objPrefix, Qt::CaseInsensitive))
+						find = true;
+				}
+				if (find)
+				{
+					result << str;
+				}
+			}
+		}
 	}
 
 	result.sort();
@@ -400,19 +476,18 @@ QStringList Exoplanets::listAllObjects(bool inEnglish) const
 	if (!flagShowExoplanets)
 		return result;
 
+	foreach (const ExoplanetP& planet, ep)
+		result << planet->getExoplanetsDesignations();
+
 	if (inEnglish)
 	{
 		foreach (const ExoplanetP& planet, ep)
-		{
-			result << planet->getEnglishName();
-		}
+			result << planet->getExoplanetsEnglishNames();
 	}
 	else
 	{
 		foreach (const ExoplanetP& planet, ep)
-		{
-			result << planet->getNameI18n();
-		}
+			result << planet->getExoplanetsNamesI18n();
 	}
 	return result;
 }
@@ -518,6 +593,12 @@ void Exoplanets::setEPMap(const QVariantMap& map)
 {
 	ep.clear();
 	PSCount = EPCountAll = EPCountPH = 0;
+	EPEccentricityAll.clear();
+	EPSemiAxisAll.clear();
+	EPMassAll.clear();
+	EPRadiusAll.clear();
+	EPPeriodAll.clear();
+	EPAngleDistanceAll.clear();
 	QVariantMap epsMap = map.value("stars").toMap();
 	foreach(QString epsKey, epsMap.keys())
 	{
@@ -530,6 +611,12 @@ void Exoplanets::setEPMap(const QVariantMap& map)
 		if (eps->initialized)
 		{
 			ep.append(eps);
+			EPEccentricityAll.append(eps->getData(0));
+			EPSemiAxisAll.append(eps->getData(1));
+			EPMassAll.append(eps->getData(2));
+			EPRadiusAll.append(eps->getData(3));
+			EPPeriodAll.append(eps->getData(4));
+			EPAngleDistanceAll.append(eps->getData(5));
 			EPCountAll += eps->getCountExoplanets();
 			EPCountPH += eps->getCountHabitableExoplanets();
 		}
