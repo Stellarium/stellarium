@@ -90,8 +90,8 @@ void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, float)
 	updatePercent(result.size(), numToBeLoaded);
 
 	// Draw in the good order
-	sPainter.enableTexture2d(true);
-	glBlendFunc(GL_ONE, GL_ONE);
+	sPainter.enableTexture2d(true, false, __FILE__, __LINE__);
+	sPainter.setBlendFunc(GL_ONE, GL_ONE);
 	QMap<double, StelSkyImageTile*>::Iterator i = result.end();
 	while (i!=result.begin())
 	{
@@ -252,21 +252,21 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 	if (alphaBlend==true || texFader->state()==QTimeLine::Running)
 	{
 		if (!alphaBlend)
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+			sPainter.setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 		else
-			glBlendFunc(GL_ONE, GL_ONE);
-		glEnable(GL_BLEND);
+			sPainter.setBlendFunc(GL_ONE, GL_ONE);
+		sPainter.enableBlend(true, false, __FILE__, __LINE__);
 		color.set(ad_lum,ad_lum,ad_lum, texFader->currentValue());
 	}
 	else
 	{
-		glDisable(GL_BLEND);
+		sPainter.enableBlend(false, false, __FILE__, __LINE__);
 		color.set(ad_lum,ad_lum,ad_lum, 1.f);
 	}
 
 	const bool withExtinction=(core->getSkyDrawer()->getFlagHasAtmosphere() && core->getSkyDrawer()->getExtinction().getExtinctionCoefficient()>=0.01f);
 	
-	sPainter.enableTexture2d(true);
+	sPainter.enableTexture2d(true, false, __FILE__, __LINE__);
 	foreach (const SphericalRegionP& poly, skyConvexPolygons)
 	{
 		Vec4f extinctedColor = color;
@@ -300,9 +300,9 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 		Vec3d bary = poly->getPointInside();
 		sPainter.getProjector()->project(bary,win);
 		sPainter.drawText(debugFont, win[0], win[1], getAbsoluteImageURI());
-		sPainter.enableTexture2d(false);
+		sPainter.enableTexture2d(false, false, __FILE__, __LINE__);
 		sPainter.drawSphericalRegion(poly.get(), StelPainter::SphericalPolygonDrawModeBoundary, &color);
-		sPainter.enableTexture2d(true);
+		sPainter.enableTexture2d(true, false, __FILE__, __LINE__);
 	}
 #endif
 

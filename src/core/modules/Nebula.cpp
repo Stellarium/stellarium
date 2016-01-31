@@ -446,8 +446,11 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 	if (!(sPainter.getProjector()->projectCheck(XYZ, win)))
 		return;
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
+	// GZ This state should have been switched on already.
+	// For some reason, we must override and re-activate blending here.
+	// TODO: Find out why this is required!
+	sPainter.enableBlend(true, true, __FILE__, __LINE__);
+	sPainter.setBlendFunc(GL_ONE, GL_ONE);
 	float lum = 1.f;//qMin(1,4.f/getOnScreenSize(core))*0.8;
 
 	Vec3f color=circleColor;
@@ -646,6 +649,7 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 		sPainter.setColor(col[0], col[1], col[2], 0.f);
 
 	float size = getAngularSize(NULL)*M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
+	// for large nebulae when plotted not proportional the next value seems to become too large. Why 1.8?
 	float shift = 4.f + (drawHintProportional ? size : size/1.8f);
 
 	QString str = getNameI18n();

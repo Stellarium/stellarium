@@ -309,9 +309,9 @@ void SolarSystem::drawPointer(const StelCore* core)
 
 		texPointer->bind();
 
-		sPainter.enableTexture2d(true);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		sPainter.enableTexture2d(true, false, __FILE__, __LINE__);
+		sPainter.enableBlend(true, false, __FILE__, __LINE__);
+		sPainter.setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);  // Normal transparency mode
 
 		size*=0.5;
 		const float angleBase = StelApp::getInstance().getTotalRunTime() * 10;
@@ -1026,6 +1026,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 // Compute the position for every elements of the solar system.
 // The order is not important since the position is computed relatively to the mother body
+// TODO: FIND A WAY TO PARALLELIZE THIS to separate threads. OpenMP or classical threads?
 void SolarSystem::computePositions(double dateJDE, const Vec3d& observerPos)
 {
 	if (flagLightTravelTime)
@@ -1033,9 +1034,9 @@ void SolarSystem::computePositions(double dateJDE, const Vec3d& observerPos)
 		foreach (PlanetP p, systemPlanets)
 		{
 			p->computePositionWithoutOrbits(dateJDE);
-		}
-		foreach (PlanetP p, systemPlanets)
-		{
+		//}
+		//foreach (PlanetP p, systemPlanets)
+		//{
 			const double light_speed_correction = (p->getHeliocentricEclipticPos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
 			p->computePosition(dateJDE-light_speed_correction);
 		}
@@ -1115,6 +1116,7 @@ void SolarSystem::draw(StelCore* core)
 	// Draw the elements
 	foreach (const PlanetP& p, systemPlanets)
 	{
+		//qDebug() << "    SolarSystem::draw() drawing planet" << p->getEnglishName();
 		p->draw(core, maxMagLabel, planetNameFont);
 	}
 

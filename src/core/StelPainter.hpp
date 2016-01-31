@@ -32,11 +32,20 @@
 class QOpenGLShaderProgram;
 
 //! @class StelPainter
-//! Provides functions for performing openGL drawing operations.
+//! Provides functions for performing OpenGL drawing operations.
 //! All coordinates are converted using the StelProjector instance passed at construction.
 //! Because openGL is not thread safe, only one instance of StelPainter can exist at a time, enforcing thread safety.
-//! As a coding rule, no openGL calls should be performed when no instance of StelPainter exist.
+//! As a coding rule, no OpenGL calls should be performed when no instance of StelPainter exist.
 //! Typical usage is to create a local instance of StelPainter where drawing operations are needed.
+//! GZ for 0.15:
+//! To increase OpenGL peformance, the StelPainter class tracks the most frequently used OpenGL state switches,
+//! and only calls the glEnable() etc. calls when necessary. Never call these state changes directly, but call
+//! enableTexture2d(bool), enableFaceCulling(bool), enableDepthTest(bool), enableBlending(bool), and setBlendMode(....)
+//! If no painter is active, you can also call the methods directly from the class.
+
+// activate next line for debugging of StelPainter's state tracking
+#define STELPAINTER_DEBUG_STATE_CHANGE
+
 class StelPainter
 {
 public:
@@ -237,7 +246,51 @@ public:
 	static void deinitGLShaders();
 
 	//! Set whether texturing is enabled.
-	void enableTexture2d(bool b);
+	//! calls glEnable(GL_TEXTURE_2D) or glDisable(GL_TEXTURE_2D), but only if required.
+	//! Using this consistently avoids needless OpenGL state changes.
+	static void enableTexture2d(const bool b=true, const bool force=false, QString filename="", int line=0);
+	static bool isTexture2dEnabled() {return  texture2dEnabled;}
+
+	//! Set whether backface culling is enabled.
+	//! calls glEnable(GL_CULL_FACE) or glDisable(GL_CULL_FACE), but only if required.
+	//! Using this consistently avoids needless OpenGL state changes.
+	static void enableFaceCulling(const bool b=true, const bool force=false, QString filename="", int line=0);
+	static bool isFaceCullingEnabled() {return faceCullingEnabled;}
+
+	//! Set whether depth test is enabled.
+	//! calls glEnable(GL_DEPTH_TEST) or glDisable(GL_DEPTH_TEST), but only if required.
+	//! Using this consistently avoids needless OpenGL state changes.
+	static void enableDepthTest(const bool b=true, const bool force=false, QString filename="", int line=0);
+	static bool isDepthTestEnabled() {return depthTestEnabled;}
+
+	//! Set whether line smoothing is enabled.
+	//! calls glEnable(GL_LINE_SMOOTH) or glDisable(GL_LINE_SMOOTH), but only if required.
+	//! On OpenGL ES2 systems (where this is not available), it does nothing.
+	//! Using this consistently avoids needless OpenGL state changes.
+	static void enableLineSmooth(const bool b=true, const bool force=false, QString filename="", int line=0);
+	static bool isLineSmoothEnabled() {return lineSmoothEnabled;}
+
+	//! Set whether blending is enabled.
+	//! calls glEnable(GL_BLEND) or glDisable(GL_BLEND), but only if required.
+	//! Using this consistently avoids needless OpenGL state changes.
+	//! Unfortunately there seem to be conditions where blending state gets lost.
+	//! In a debug build, state is tested (a big no-no for Release version), and diagnostics where
+	//! the problem is detected is given in the log.
+	//! Setting enableBlend with force=true once should fix the situation without too much overhead.
+	//! @param b true to switch on, false to switch off.
+	//! @param filename source file name (for debugging, optional but recommended, just use __FILE__
+	//! @param line line number (for debugging, optional but recommended, just use __LINE__
+	static void enableBlend(const bool b=true, const bool force=false, QString filename="", int line=0);
+	static bool isBlendEnabled() {return blendingEnabled;}
+
+	//! Set OpenGL blending mode, but only if different from the current blending mode.
+	//! StelPainter keeps record of the OpenGL Blending mode,
+	//! and will call gl_Blendfunc(src, dst) or
+	//! gl_BlendfuncSeparate(src, dst, srcAlpha, dstAlpha) when separate=true
+	//! but only if required.
+	//! Using this consistently avoids needless OpenGL state changes.
+	//! There is no need currently for a get operator here.
+	static void setBlendFunc(const int src, const int dst, const int srcAlpha=0, const int dstAlpha=0, const bool separate=false);
 
 	// Thoses methods should eventually be replaced by a single setVertexArray
 	//! use instead of glVertexPointer
@@ -291,17 +344,20 @@ private:
 	friend class StelTextureMgr;
 	friend class StelTexture;
 
-	//! RAII class used to store and restore the opengl state.
-	//! to use it we just need to instanciate it at the beginning of a method that might change the state.
-	class GLState
-	{
-	public:
-		GLState();
-		~GLState();
-	private:
-		bool blend;
-		int blendSrcRGB, blendDstRGB, blendSrcAlpha, blendDstAlpha;
-	};
+	// RAII class used to store and restore the opengl state.
+	// to use it we just need to instanciate it at the beginning of a method that might change the state.
+	// GZ 2016-01-29 THIS IS DEAD SLOW! GL debuggers warn from using GLget.
+	// But it is indeed recommended to track OpenGL state changes and only call them when needed.
+	// It is not used anywhere, so I comment it away for now.
+//	class GLState
+//	{
+//	public:
+//		GLState();
+//		~GLState();
+//	private:
+//		bool blend;
+//		int blendSrcRGB, blendDstRGB, blendSrcAlpha, blendDstAlpha;
+//	};
 
 	//! Struct describing one opengl array
 	typedef struct ArrayDesc
@@ -349,7 +405,17 @@ private:
 	QFont currentFont;
 
 	Vec4f currentColor;
-	bool texture2dEnabled;
+	// these should be used to track and avoid needless OpenGL state switches.
+	// Given that there is always only one StelPainter, we can track the most frequently used OpenGL state changes with static variables.
+	// In 0.14.2, AMD CodeXL and gDEbugger OpenGL profilers showed that 60% or more of OpenGL calls were state switches, of which most were not required!
+	// Instead of glEnable(GL_TEXTURE_2D) etc., use painter->enableTexture2d(bool), and this method will only toggle if required.
+	static bool texture2dEnabled;
+	static bool faceCullingEnabled;
+	static bool depthTestEnabled;
+	static bool lineSmoothEnabled;
+	static bool blendingEnabled;
+	static bool separateBlendingEnabled;
+	static int blendMode[4];
 	
 	static QOpenGLShaderProgram* basicShaderProgram;
 	struct BasicShaderVars {

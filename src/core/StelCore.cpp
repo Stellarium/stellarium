@@ -459,6 +459,7 @@ void StelCore::preDraw()
 	// Clear areas not redrawn by main viewport (i.e. fisheye square viewport)
 	glClearColor(0,0,0,0);
 	glClear(GL_COLOR_BUFFER_BIT);
+	StelPainter::enableBlend(false, true, __FILE__, __LINE__); // GZ Force a known state at begin.
 }
 
 
@@ -469,6 +470,9 @@ void StelCore::postDraw()
 {
 	StelPainter sPainter(getProjection(StelCore::FrameJ2000));
 	sPainter.drawViewportShape();
+	// Apparently the OpenGL buffer is rset to no-blend between frames.
+	// For now reset at end, but maybe just reset the bool?
+	//sPainter.enableBlend(false, false, __FILE__, __LINE__);
 }
 
 void StelCore::setCurrentProjectionType(ProjectionType type)

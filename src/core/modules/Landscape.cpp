@@ -309,14 +309,10 @@ void Landscape::drawLabels(StelCore* core, StelPainter *painter)
 	QFontMetrics fm(font);
 	painter->setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate()*landFader.getInterstate());
 
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
-	glDisable(GL_TEXTURE_2D);
-	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH. But it looks much better.
-	#ifdef GL_LINE_SMOOTH
-	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-		glEnable(GL_LINE_SMOOTH);
-	#endif
+	painter->setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	painter->enableBlend(true, false, __FILE__, __LINE__);
+	painter->enableTexture2d(false,  false, __FILE__, __LINE__);
+	painter->enableLineSmooth(true);
 
 	for (int i = 0; i < landscapeLabels.size(); ++i)
 	{
@@ -332,12 +328,6 @@ void Landscape::drawLabels(StelCore* core, StelPainter *painter)
 		}
 		painter->drawGreatCircleArc(landscapeLabels.at(i).featurePoint, landscapeLabels.at(i).labelPoint, NULL);
 	}
-
-	#ifdef GL_LINE_SMOOTH
-	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-		glDisable(GL_LINE_SMOOTH);
-	#endif
-	glDisable(GL_BLEND);
 }
 
 
@@ -622,10 +612,10 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 void LandscapeOldStyle::draw(StelCore* core)
 {
 	StelPainter painter(core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff));
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
-	painter.enableTexture2d(true);
-	glEnable(GL_CULL_FACE);
+	painter.setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	painter.enableBlend(true, false, __FILE__, __LINE__);
+	painter.enableTexture2d(true, false, __FILE__, __LINE__);
+	painter.enableFaceCulling(true);
 
 	if (!validLandscape)
 		return;
@@ -639,7 +629,7 @@ void LandscapeOldStyle::draw(StelCore* core)
 	// Self-luminous layer (Light pollution etc). This looks striking!
 	if (lightScapeBrightness>0.0f && illumFader.getInterstate())
 	{
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+		painter.setBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		drawDecor(core, painter, true);
 	}
 
@@ -651,7 +641,7 @@ void LandscapeOldStyle::draw(StelCore* core)
 		transfo->combine(Mat4d::zrotation(-angleRotateZOffset));
 		const StelProjectorP prj = core->getProjection(transfo);
 		painter.setProjector(prj);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		painter.setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		painter.setColor(horizonPolygonLineColor[0], horizonPolygonLineColor[1], horizonPolygonLineColor[2], landFader.getInterstate());
 		painter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
 	}
@@ -679,7 +669,7 @@ void LandscapeOldStyle::drawFog(StelCore* core, StelPainter& sPainter) const
 
 	transfo->combine(Mat4d::translation(Vec3d(0.,0.,vpos)));
 	sPainter.setProjector(core->getProjection(transfo));
-	glBlendFunc(GL_ONE, GL_ONE);
+	sPainter.setBlendFunc(GL_ONE, GL_ONE);
 	sPainter.setColor(landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
 			  landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
 			  landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness), landFader.getInterstate());
@@ -688,7 +678,7 @@ void LandscapeOldStyle::drawFog(StelCore* core, StelPainter& sPainter) const
 				radius*(std::tan((fogAltAngle+fogAngleShift)*M_PI/180.)  - std::tan(fogAngleShift*M_PI/180.))
 				: ((tanMode) ? radius*std::tan(fogAltAngle*M_PI/180.) : radius*std::sin(fogAltAngle*M_PI/180.)));
 	sPainter.sCylinder(radius, height, 64, 1);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	sPainter.setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 // Draw the side textures
@@ -860,11 +850,11 @@ void LandscapePolygonal::draw(StelCore* core)
 	StelPainter sPainter(prj);
 
 	// Normal transparency mode for the transition blending
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_CULL_FACE);
-	glEnable(GL_BLEND);
+	sPainter.setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	sPainter.enableFaceCulling(false, false, __FILE__, __LINE__);
+	sPainter.enableBlend(true, false, __FILE__, __LINE__);
 	//#ifdef GL_POLYGON_SMOOTH
-	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH. Anyway, Polygon smoothing makes the triangles visible. May be Interesting for debugging only.
+	// OpenGL ES 2.0 doesn't have GL_POLYGON_SMOOTH. Anyway, Polygon smoothing makes the triangles visible. May be Interesting for debugging only.
 	//if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
 	//	glEnable(GL_POLYGON_SMOOTH);
 	//#endif
@@ -877,19 +867,10 @@ void LandscapePolygonal::draw(StelCore* core)
 
 	if (horizonPolygonLineColor[0] >= 0)
 	{
-		// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
-		#ifdef GL_LINE_SMOOTH
-		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-			glEnable(GL_LINE_SMOOTH);
-		#endif
+		sPainter.enableLineSmooth(true);
 		sPainter.setColor(horizonPolygonLineColor[0], horizonPolygonLineColor[1], horizonPolygonLineColor[2], landFader.getInterstate());
 		sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
-		#ifdef GL_LINE_SMOOTH
-		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-			glDisable(GL_LINE_SMOOTH);
-		#endif
 	}
-	glDisable(GL_CULL_FACE);
 	drawLabels(core, &sPainter);
 }
 
@@ -967,18 +948,18 @@ void LandscapeFisheye::draw(StelCore* core)
 	StelPainter sPainter(prj);
 
 	// Normal transparency mode
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	sPainter.setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	sPainter.setColor(landscapeBrightness, landscapeBrightness, landscapeBrightness, landFader.getInterstate());
-	glEnable(GL_CULL_FACE);
-	sPainter.enableTexture2d(true);
-	glEnable(GL_BLEND);
+	sPainter.enableFaceCulling(true, false, __FILE__, __LINE__);
+	sPainter.enableTexture2d(true, false, __FILE__, __LINE__);
+	sPainter.enableBlend(true, false, __FILE__, __LINE__);
 	mapTex->bind();
 	sPainter.sSphereMap(radius,cols,rows,texFov,1);
 	// NEW since 0.13: Fog also for fisheye...
 	if ((mapTexFog) && (core->getSkyDrawer()->getFlagHasAtmosphere()))
 	{
-		//glBlendFunc(GL_ONE, GL_ONE); // GZ: Take blending mode as found in the old_style landscapes...
-		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR); // GZ: better?
+		//sPainter.setBlendFunc(GL_ONE, GL_ONE); // GZ: Take blending mode as found in the old_style landscapes...
+		sPainter.setBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);  // GZ: better?
 		sPainter.setColor(landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
 				  landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
 				  landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness), landFader.getInterstate());
@@ -988,15 +969,13 @@ void LandscapeFisheye::draw(StelCore* core)
 
 	if (mapTexIllum && lightScapeBrightness>0.0f && illumFader.getInterstate())
 	{
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+		sPainter.setBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		sPainter.setColor(illumFader.getInterstate()*lightScapeBrightness,
 				  illumFader.getInterstate()*lightScapeBrightness,
 				  illumFader.getInterstate()*lightScapeBrightness, landFader.getInterstate());
 		mapTexIllum->bind();
 		sPainter.sSphereMap(radius, cols, rows, texFov, 1);
 	}
-
-	glDisable(GL_CULL_FACE);
 	drawLabels(core, &sPainter);
 }
 
@@ -1127,12 +1106,12 @@ void LandscapeSpherical::draw(StelCore* core)
 	StelPainter sPainter(prj);
 
 	// Normal transparency mode
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	sPainter.setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	sPainter.setColor(landscapeBrightness, landscapeBrightness, landscapeBrightness, landFader.getInterstate());
 
-	glEnable(GL_CULL_FACE);
-	sPainter.enableTexture2d(true);
-	glEnable(GL_BLEND);
+	sPainter.enableFaceCulling(true, false, __FILE__, __LINE__);
+	sPainter.enableTexture2d(true, false, __FILE__, __LINE__);
+	sPainter.enableBlend(true, false, __FILE__, __LINE__);
 	mapTex->bind();
 
 	// TODO: verify that this works correctly for custom projections [comment not by GZ]
@@ -1141,7 +1120,7 @@ void LandscapeSpherical::draw(StelCore* core)
 	// Since 0.13: Fog also for sphericals...
 	if ((mapTexFog) && (core->getSkyDrawer()->getFlagHasAtmosphere()))
 	{
-		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
+		sPainter.setBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
 		sPainter.setColor(landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
 				  landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
 				  landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness), landFader.getInterstate());
@@ -1152,7 +1131,7 @@ void LandscapeSpherical::draw(StelCore* core)
 	// Self-luminous layer (Light pollution etc). This looks striking!
 	if (mapTexIllum && (lightScapeBrightness>0.0f) && illumFader.getInterstate())
 	{
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+		sPainter.setBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		sPainter.setColor(lightScapeBrightness*illumFader.getInterstate(),
 				  lightScapeBrightness*illumFader.getInterstate(),
 				  lightScapeBrightness*illumFader.getInterstate(), landFader.getInterstate());
@@ -1169,12 +1148,12 @@ void LandscapeSpherical::draw(StelCore* core)
 		transfo->combine(Mat4d::zrotation(-angleRotateZOffset));
 		const StelProjectorP prj = core->getProjection(transfo);
 		sPainter.setProjector(prj);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		sPainter.setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		sPainter.setColor(horizonPolygonLineColor[0], horizonPolygonLineColor[1], horizonPolygonLineColor[2], landFader.getInterstate());
 		sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
 	}
 	//else qDebug() << "no polygon defined";
-	glDisable(GL_CULL_FACE);
+	// glDisable(GL_CULL_FACE); // GZ NO MORE!
 	drawLabels(core, &sPainter);
 }
 

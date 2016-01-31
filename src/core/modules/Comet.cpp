@@ -456,6 +456,7 @@ void Comet::update(int deltaTime)
 		}
 	}
 	else // no atmosphere: set all vertices to same brightness.
+		// TODO: Maybe in this case switch to single color and disable color array.
 	{
 		gastailColorArr.fill(gasColor,   gastailVertexArr.length());
 		dusttailColorArr.fill(dustColor, dusttailVertexArr.length());
@@ -534,15 +535,9 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 		return;
 	}
 
-#ifndef NDEBUG
-	if (!glIsEnabled(GL_BLEND))
-	{
-		qDebug() << "Comet::draw() blend is not enabled. We must use it!";
-		glEnable(GL_BLEND); // GZ TODO: It is possible that blend is active.
-	}
-#endif
-	glBlendFunc(GL_ONE, GL_ONE);
-	glDisable(GL_CULL_FACE); // we need that for the backfacing triangles of the hyperbolae. It may cause the problem in orthographic projection.
+	StelPainter::enableBlend(true, false, __FILE__, __LINE__);
+	StelPainter::setBlendFunc(GL_ONE, GL_ONE);
+	StelPainter::enableFaceCulling(false); // we need that for the backfacing triangles of the hyperbolae. It may cause the problem in orthographic projection.
 	// but tails should also be drawn if comet core is off-screen...
 	if (tailActive && tailBright)
 	{
@@ -555,17 +550,16 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	//Coma: this is just a fan disk tilted towards the observer;-)
 
 	drawComa(core, transfo);
-	//glDisable(GL_BLEND);
-
 	return;
 }
 
 void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, bool gas)
 {	
 	// GZ make sure to call this with following states:
-	//glEnable(GL_BLEND);
-	//glBlendFunc(GL_ONE, GL_ONE);
-	//glDisable(GL_CULL_FACE);
+	//StelPainter::enableBlend(true, false, __FILE__, __LINE__);
+	//StelPainter::setBlendFunc(GL_ONE, GL_ONE);
+	//StelPainter::enableFaceCulling(false);
+	// And make sure a tail texture has been bound.
 
 	StelPainter* sPainter = new StelPainter(core->getProjection(transfo));
 
@@ -583,9 +577,9 @@ void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, 
 void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
 {
 	// GZ make sure to call this with following states:
-	//glEnable(GL_BLEND);
-	//glBlendFunc(GL_ONE, GL_ONE);
-	//glDisable(GL_CULL_FACE);
+	//StelPainter::enableBlend(true, false, __FILE__, __LINE__);
+	//StelPainter::setBlendFunc(GL_ONE, GL_ONE);
+	//StelPainter::enableFaceCulling(false);
 	// Find rotation matrix from 0/0/1 to viewdirection! crossproduct for axis (normal vector), dotproduct for angle.
 	Vec3d eclposNrm=eclipticPos - core->getObserverHeliocentricEclipticPos()  ; eclposNrm.normalize();
 	Mat4d comarot=Mat4d::rotation(Vec3d(0.0, 0.0, 1.0)^(eclposNrm), std::acos(Vec3d(0.0, 0.0, 1.0).dot(eclposNrm)) );

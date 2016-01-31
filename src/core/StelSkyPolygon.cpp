@@ -61,8 +61,8 @@ void StelSkyPolygon::draw(StelCore* core, StelPainter& sPainter, float)
 	getTilesToDraw(result, core, prj->getViewportConvexPolygon(0, 0), true);
 
 	// Draw in the good order
-	sPainter.enableTexture2d(false);
-	glBlendFunc(GL_ONE, GL_ONE);
+	sPainter.enableTexture2d(false, false, __FILE__, __LINE__);
+	sPainter.setBlendFunc(GL_ONE, GL_ONE);
 	QMap<double, StelSkyPolygon*>::Iterator i = result.end();
 	while (i!=result.begin())
 	{

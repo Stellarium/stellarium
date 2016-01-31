@@ -161,10 +161,10 @@ void MilkyWay::draw(StelCore* core)
 		vertexArray->colors.fill(Vec3f(c[0], c[1], c[2]));
 
 	StelPainter sPainter(prj);
-	glEnable(GL_CULL_FACE);
-	sPainter.enableTexture2d(true);
-	glDisable(GL_BLEND);
+	sPainter.enableFaceCulling(true, false, __FILE__, __LINE__);
+	sPainter.enableTexture2d(true, false, __FILE__, __LINE__);
+	sPainter.enableBlend(false, false, __FILE__, __LINE__);
 	tex->bind();
 	sPainter.drawStelVertexArray(*vertexArray);
-	glDisable(GL_CULL_FACE);
+	// glDisable(GL_CULL_FACE); // GZ What for?
 }

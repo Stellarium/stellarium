@@ -612,6 +612,7 @@ void StelApp::draw()
 {
 	if (!initialized)
 		return;
+	//qDebug() << "StelApp: draw(): Drawing modules";
 	prepareRenderBuffer();
 	core->preDraw();
 
@@ -621,6 +622,7 @@ void StelApp::draw()
 	const QList<StelModule*> modules = moduleMgr->getCallOrders(StelModule::ActionDraw);
 	foreach(StelModule* module, modules)
 	{
+		//qDebug() << "  Drawing " << module->objectName();
 		module->draw(core);
 	}
 	core->postDraw();

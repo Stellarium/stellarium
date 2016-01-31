@@ -42,8 +42,7 @@ typedef QSharedPointer<Nebula> NebulaP;
 
 //! @class NebulaMgr
 //! Manage a collection of nebulae. This class is used
-//! to display the NGC catalog with information, and textures for some of them.
-// GZ: This doc seems outdated/misleading - photo textures are not mamaged here but in StelSkyImageTile
+//! to display the NGC and other catalogs with information, and icon textures (hints) for some of them.
 
 class NebulaMgr : public StelObjectModule
 {

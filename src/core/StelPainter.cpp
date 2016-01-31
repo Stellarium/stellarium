@@ -51,27 +51,37 @@ StelPainter::TexturesShaderVars StelPainter::texturesShaderVars;
 StelPainter::BasicShaderVars StelPainter::colorShaderVars;
 StelPainter::TexturesColorShaderVars StelPainter::texturesColorShaderVars;
 
-StelPainter::GLState::GLState()
-{
-	blend = glIsEnabled(GL_BLEND);
-	glGetIntegerv(GL_BLEND_SRC_RGB, &blendSrcRGB);
-	glGetIntegerv(GL_BLEND_DST_RGB, &blendDstRGB);
-	glGetIntegerv(GL_BLEND_SRC_ALPHA, &blendSrcAlpha);
-	glGetIntegerv(GL_BLEND_DST_ALPHA, &blendDstAlpha);
-}
+// Instead of glEnable(GL_BLEND) etc, use StelPainter::setBlendingEnabled(bool) etc, and this method will only toggle if required.
+bool StelPainter::texture2dEnabled=false;
+bool StelPainter::faceCullingEnabled=false;
+bool StelPainter::depthTestEnabled=false;
+bool StelPainter::lineSmoothEnabled=false;
+bool StelPainter::blendingEnabled=false;
+bool StelPainter::separateBlendingEnabled=false;
+int StelPainter::blendMode[4]; // srcRGB, dstRGB, srcAlpha, dstAlpha or src, dst, -, -, as controlled by separateBlendingEnabled
 
-StelPainter::GLState::~GLState()
-{
-	if (blend)
-	{
-		glEnable(GL_BLEND);
-		glBlendFuncSeparate(blendSrcRGB, blendDstRGB, blendSrcAlpha, blendDstAlpha);
-	}
-	else
-	{
-		glDisable(GL_BLEND);
-	}
-}
+//StelPainter::GLState::GLState()
+//{
+
+//	blend = glIsEnabled(GL_BLEND);
+//	glGetIntegerv(GL_BLEND_SRC_RGB, &blendSrcRGB);
+//	glGetIntegerv(GL_BLEND_DST_RGB, &blendDstRGB);
+//	glGetIntegerv(GL_BLEND_SRC_ALPHA, &blendSrcAlpha);
+//	glGetIntegerv(GL_BLEND_DST_ALPHA, &blendDstAlpha);
+//}
+
+//StelPainter::GLState::~GLState()
+//{
+//	if (blend)
+//	{
+//		glEnable(GL_BLEND);
+//		glBlendFuncSeparate(blendSrcRGB, blendDstRGB, blendSrcAlpha, blendDstAlpha);
+//	}
+//	else
+//	{
+//		glDisable(GL_BLEND);
+//	}
+//}
 
 bool StelPainter::linkProg(QOpenGLShaderProgram* prog, const QString& name)
 {
@@ -102,14 +112,14 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 	}
 #endif
 
-	glDisable(GL_DEPTH_TEST);
-	glDisable(GL_CULL_FACE);
+	enableDepthTest(false); // glDisable(GL_DEPTH_TEST);  // MAYBE NOT HERE! ONLY AS REQUIRED
+	enableFaceCulling(false); //glDisable(GL_CULL_FACE);  // MAYBE  NOT HERE! ONLY AS REQUIRED!
 	// GZ moved that to StelApp. Is this a comment from Qt4 times?
 	// Fix some problem when using Qt OpenGL2 engine
 	//glStencilMask(0x11111111);
 	// Deactivate drawing in depth buffer by default
 	glDepthMask(GL_FALSE);
-	enableTexture2d(false);
+	//enableTexture2d(false, false, __FILE__, __LINE__); // This should be switched as needed before drawing. (It did nothing in 0.14.2, just set the functionless boolean)
 	setProjector(proj);
 }
 
@@ -169,7 +179,7 @@ void StelPainter::drawViewportShape(const GLfloat innerRadius)
 	if (prj->maskType != StelProjector::MaskDisk)
 		return;
 
-	glDisable(GL_BLEND);
+	enableBlend(false, false, __FILE__, __LINE__); // glDisable(GL_BLEND);
 	setColor(0.f,0.f,0.f);
 
 	GLfloat outerRadius = prj->getViewportWidth()+prj->getViewportHeight();
@@ -534,9 +544,11 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		// painter.setFont(currentFont);
 		
 		QPainter painter(&device);
-		// GZ Maybe the logic is inverted: we should call "begin" when WE issue OpenGL drawing.
-		painter.endNativePainting();
+		// GZ Maybe the logic is inverted: we should call "begin" when WE issue OpenGL drawing, i.e., at exit of this function!
+		painter.beginNativePainting();
 		
+		// GZ Apparently the QPainter comes natively without blend. This confuses our state caching.
+
 		QFont tmpFont = currentFont;
 		tmpFont.setPixelSize(currentFont.pixelSize()*prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio());
 		painter.setFont(tmpFont);
@@ -565,7 +577,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			painter.drawText(x+xshift, y+yshift, str);
 		}
 		
-		painter.beginNativePainting();
+		painter.endNativePainting();
 	}
 }
 
@@ -1758,9 +1770,147 @@ void StelPainter::sCylinder(float radius, float height, int slices, int orientIn
 		glCullFace(GL_BACK);
 }
 
-void StelPainter::enableTexture2d(bool b)
+void StelPainter::enableTexture2d(const bool b, const bool force, QString filename, int line)
 {
-	texture2dEnabled = b;
+	if (!force)
+	{
+#ifdef STELPAINTER_DEBUG_STATE_CHANGE
+		// glIs... method are slow. Only activate for debug builds, and please check the log!
+		if (texture2dEnabled != glIsEnabled(GL_TEXTURE_2D))
+		{
+			qDebug() << "StelPainter::enableTexture2d: inconsistent state detected. File " << filename << "line" << line << "Fixing.";
+			texture2dEnabled = glIsEnabled(GL_TEXTURE_2D);
+		}
+#endif
+	}
+	if ((texture2dEnabled!=b) || force)
+	{
+		texture2dEnabled = b;
+		if (b)
+			glEnable(GL_TEXTURE_2D);
+		else
+			glDisable(GL_TEXTURE_2D);
+	}
+}
+
+void StelPainter::enableFaceCulling(const bool b, const bool force, QString filename, int line)
+{
+	if (!force)
+	{
+#ifdef STELPAINTER_DEBUG_STATE_CHANGE
+		// glIs... method are slow. Only activate for debug builds, and please check the log!
+		if (faceCullingEnabled != glIsEnabled(GL_CULL_FACE))
+		{
+			qDebug() << "StelPainter::enableFaceCulling: inconsistent state detected. File " << filename << "line" << line << "Fixing.";
+			faceCullingEnabled = glIsEnabled(GL_CULL_FACE);
+		}
+#endif
+	}
+	if ((faceCullingEnabled!=b) || force)
+	{
+		faceCullingEnabled = b;
+		if (b)
+			glEnable(GL_CULL_FACE);
+		else
+			glDisable(GL_CULL_FACE);
+	}
+}
+
+void StelPainter::enableDepthTest(const bool b, const bool force, QString filename, int line)
+{
+	if (!force)
+	{
+#ifdef STELPAINTER_DEBUG_STATE_CHANGE
+		// glIs... method are slow. Only activate for debug builds, and please check the log!
+		if (depthTestEnabled != glIsEnabled(GL_DEPTH_TEST))
+		{
+			qDebug() << "StelPainter::enableDepthTest: inconsistent state detected. File " << filename << "line" << line << "Fixing.";
+			depthTestEnabled = glIsEnabled(GL_DEPTH_TEST);
+		}
+#endif
+	}
+	if ((depthTestEnabled!=b) || force)
+	{
+		depthTestEnabled = b;
+		if (b)
+			glEnable(GL_DEPTH_TEST);
+		else
+			glDisable(GL_DEPTH_TEST);
+	}
+}
+
+void StelPainter::enableLineSmooth(const bool b, const bool force, QString filename, int line)
+{
+	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH. But it looks much better, enable if possible.
+#ifdef GL_LINE_SMOOTH
+	if (!force)
+	{
+# ifdef STELPAINTER_DEBUG_STATE_CHANGE
+		// glIs... method are slow. Only activate for debug builds, and please check the log!
+		if (lineSmoothEnabled != glIsEnabled(GL_LINE_SMOOTH))
+		{
+			qDebug() << "StelPainter::enableLineSmooth: inconsistent state detected. File " << filename << "line" << line << "Fixing.";
+			lineSmoothEnabled = glIsEnabled(GL_LINE_SMOOTH);
+		}
+# endif
+	}
+	if ((lineSmoothEnabled!=b) || force)
+	{
+		lineSmoothEnabled = b;
+		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+		{
+			if (b)
+				glEnable(GL_LINE_SMOOTH);
+			else
+				glDisable(GL_LINE_SMOOTH);
+		}
+	}
+#endif
+}
+
+void StelPainter::enableBlend(const bool b, const bool force, QString filename, int line)
+{
+	if (!force)
+	{
+#ifdef STELPAINTER_DEBUG_STATE_CHANGE
+		// glIs... method are slow. Only activate for debug builds, and please check the log!
+		if (blendingEnabled != glIsEnabled(GL_BLEND))
+		{
+			qDebug() << "StelPainter::enableBlend: inconsistent state detected. File " << filename << "line" << line << "Fixing.";
+			blendingEnabled = !blendingEnabled;
+		}
+#endif
+	}
+	// only change OpenGL state if required.
+	if ((blendingEnabled!=b) || force)
+	{
+		blendingEnabled = b;
+		if (b)
+			glEnable(GL_BLEND);
+		else
+			glDisable(GL_BLEND);
+	}
+}
+
+void StelPainter::setBlendFunc(const int src, const int dst, const int srcAlpha, const int dstAlpha, const bool separate)
+{
+	// If any previous state did not match, set state. Else avoid it!
+	if (separate)
+	{
+		if  ( !separateBlendingEnabled || (src!=blendMode[0]) || (dst!=blendMode[1]) || (srcAlpha!=blendMode[2]) || (dstAlpha!=blendMode[3]) )
+		{
+			separateBlendingEnabled=true;
+			glBlendFuncSeparate(src, dst, srcAlpha, dstAlpha);
+		}
+	}
+	else
+	{
+		if  ( separateBlendingEnabled || (src!=blendMode[0]) || (dst!=blendMode[1]) )
+		{
+			separateBlendingEnabled=false;
+			glBlendFunc(src, dst);
+		}
+	}
 }
 
 void StelPainter::initGLShaders()

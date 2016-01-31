@@ -373,9 +373,11 @@ void StelSkyDrawer::preDrawPointSource(StelPainter* p)
 
 	// Blending is really important. Otherwise faint stars in the vicinity of
 	// bright star will cause tiny black squares on the bright star, e.g. see Procyon.
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
-	p->enableTexture2d(true);
+	// For some reason, at this point blend state may be confused. Force blending on.
+	// TODO: Explain why we must force texturing here.
+	p->enableBlend(true, true, __FILE__, __LINE__);
+	p->setBlendFunc(GL_ONE, GL_ONE);
+	p->enableTexture2d(true, true, __FILE__, __LINE__);
 }
 
 // Finalize the drawing of point sources
@@ -386,10 +388,10 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 	if (nbPointSources==0)
 		return;
 	texHalo->bind();
-	// GZ We did all that in preDrawPointSource. Why do we NEED it here?
-	sPainter->enableTexture2d(true);
-	glBlendFunc(GL_ONE, GL_ONE);
-	glEnable(GL_BLEND);
+	// GZ We did all that in preDrawPointSource. Why do we NEED it here again, and even forced?
+	sPainter->enableBlend(true, true, __FILE__, __LINE__);
+	sPainter->setBlendFunc(GL_ONE, GL_ONE);
+	sPainter->enableTexture2d(true, false, __FILE__, __LINE__);
 
 	const Mat4f& m = sPainter->getProjector()->getProjectionMatrix();
 	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);
@@ -441,9 +443,9 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 
 		texBigHalo->bind();
 		// GZ We did all that in preDrawPointSource. WHY IS IT REQUIRED AGAIN???
-		sPainter->enableTexture2d(true);
-		glBlendFunc(GL_ONE, GL_ONE);
-		glEnable(GL_BLEND);
+		sPainter->enableTexture2d(true, false, __FILE__, __LINE__);
+		sPainter->setBlendFunc(GL_ONE, GL_ONE);
+		sPainter->enableBlend(true, true, __FILE__, __LINE__);
 		sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
 		// TODO According to AMD GL profiler, it would radically increase performance to also buffer this sprite drawing! 64% of draws may be here!
 		sPainter->drawSprite2dModeNoDeviceScale(win[0], win[1], rmag);
@@ -476,9 +478,9 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3f& v, float radius, const Vec3f& color, const float alpha)
 {
 	texSunCorona->bind();
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
-	painter->enableTexture2d(true);
+	painter->enableBlend(true, false, __FILE__, __LINE__);
+	painter->setBlendFunc(GL_ONE, GL_ONE);
+	painter->enableTexture2d(true, false, __FILE__, __LINE__);
 
 	Vec3f win;
 	painter->getProjector()->project(v, win);
@@ -503,9 +505,9 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 		// Sun, halo size varies in function of the magnitude because sun as seen from pluto should look dimmer
 		// as the sun as seen from earth
 		texSunHalo->bind();
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_ONE, GL_ONE);
-		painter->enableTexture2d(true);
+		painter->enableBlend(true, false, __FILE__, __LINE__);
+		painter->setBlendFunc(GL_ONE, GL_ONE);
+		painter->enableTexture2d(true, false, __FILE__, __LINE__);
 		float rmag = big3dModelHaloRadius*(mag+15.f)/-11.f;
 		float cmag = 1.f;
 		if (rmag<pixRadius*3.f+100.)

@@ -332,9 +332,9 @@ void NebulaMgr::draw(StelCore* core)
 
 	Nebula::hintsBrightness = hintsFader.getInterstate()*flagShow.getInterstate();
 
-	sPainter.enableTexture2d(true);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
+	sPainter.enableTexture2d(true, false, __FILE__, __LINE__);
+	sPainter.enableBlend(true, false, __FILE__, __LINE__);
+	sPainter.setBlendFunc(GL_ONE, GL_ONE);
 
 	// Use a 1 degree margin
 	const double margin = 1.*M_PI/180.*prj->getPixelPerRadAtCenter();
@@ -367,9 +367,9 @@ void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 
 		texPointer->bind();
 
-		sPainter.enableTexture2d(true);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		sPainter.enableTexture2d(true, false, __FILE__, __LINE__);
+		sPainter.enableBlend(true, false, __FILE__, __LINE__);
+		sPainter.setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
 		// Size on screen
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();

@@ -23,6 +23,10 @@
 #include "StelProjector.hpp"
 #include "StelApp.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelPainter.hpp"
+
+// GZ Note. In 2016-01 I found this file unused in the project. 
+// I still added the changes to avoid useless GL state changes so that it can more easily be reactivated.
 
 StelGeodesicGridDrawer::StelGeodesicGridDrawer(int maxLevel)
 {
@@ -47,9 +51,10 @@ double StelGeodesicGridDrawer::draw(StelCore* core, int maxSearchLevel)
 
 	const GeodesicSearchResult* geodesic_search_result = geodesicGrid->search(prj->unprojectViewport(), maxSearchLevel);
 	
-	glDisable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);	
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+	StelPainter::enableTexture2d(false); // glDisable(GL_TEXTURE_2D);
+	StelPainter::enableBlend(true);      //glEnable(GL_BLEND);	
+	StelPainter::blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); 
+    // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 	core->setCurrentFrame(StelCore::FrameJ2000);	// set 2D coordinate
 	sPainter.setColor(0.2,0.3,0.2);
 	
@@ -82,9 +87,10 @@ double StelGeodesicGridDrawer::draw(StelCore* core, int maxSearchLevel)
 			center*=0.33333;
 			QString str = QString("%1 (%2)").arg(index)
 			                                .arg(geodesicGrid->getPartnerTriangle(lev, index));
-			glEnable(GL_TEXTURE_2D);
+			// GZ Why do you enable textures to draw text?
+			StelPainter::enableTexture2d(true); //glEnable(GL_TEXTURE_2D);
 				prj->drawText(font,center[0]-6, center[1]+6, str);
-			glDisable(GL_TEXTURE_2D);
+				StelPainter::enableTexture2d(false); // glDisable(GL_TEXTURE_2D);
 		}
 	}
 	GeodesicSearchBorderIterator it1(*geodesic_search_result, lev);
@@ -107,9 +113,9 @@ double StelGeodesicGridDrawer::draw(StelCore* core, int maxSearchLevel)
 		center*=0.33333;
 		QString str = QString("%1 (%2)").arg(index)
 		                                .arg(geodesicGrid->getPartnerTriangle(lev, index));
-		glEnable(GL_TEXTURE_2D);
+		StelPainter::enableTexture2d(true); //glEnable(GL_TEXTURE_2D);
 			prj->drawText(font,center[0]-6, center[1]+6, str);
-		glDisable(GL_TEXTURE_2D);
+		StelPainter::enableTexture2d(false); //glDisable(GL_TEXTURE_2D);
 	}
 	
 	return 0.;

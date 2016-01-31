@@ -156,19 +156,7 @@ void ZodiacalLight::draw(StelCore* core)
 	// intensity of 1.0 is "proper", but allow boost for dim screens
 	c*=aLum*intensity;
 
-//	// In brighter twilight we should tune brightness down. So for sun above -18 degrees, we must tweak here:
-//	const Vec3d& sunPos = GETSTELMODULE(SolarSystem)->getSun()->getAltAzPosGeometric(core);
-//	if (drawer->getFlagHasAtmosphere())
-//	{
-//		if (sunPos[2] > -0.1) return; // Make ZL invisible during civil twilight and daylight.
-//		if (sunPos[2] > -0.3)
-//		{ // scale twilight down for sun altitude -18..-6, i.e. scale -0.3..-0.1 to 1..0,
-//			float twilightScale= -5.0f* (sunPos[2]+0.1)  ; // 0(if bright)..1(dark)
-//			c*=twilightScale;
-//		}
-//	}
-
-	// Better: adapt brightness by atmospheric brightness
+	// adapt brightness by atmospheric brightness
 	const float atmLum = GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance();
 	if (atmLum>0.05f) return; // 10cd/m^2 at sunset, 3.3 at civil twilight (sun at -6deg). 0.0145 sun at -12, 0.0004 sun at -18,  0.01 at Full Moon!?
 	//qDebug() << "AtmLum: " << atmLum;
@@ -205,11 +193,10 @@ void ZodiacalLight::draw(StelCore* core)
 		vertexArray->colors.fill(Vec3f(c[0], c[1], c[2]));
 
 	StelPainter sPainter(prj);
-	glEnable(GL_CULL_FACE);
-	sPainter.enableTexture2d(true);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
+	sPainter.enableFaceCulling(true, false, __FILE__, __LINE__);
+	sPainter.enableTexture2d(true, false, __FILE__, __LINE__);
+	sPainter.enableBlend(true, false, __FILE__, __LINE__);
+	sPainter.setBlendFunc(GL_ONE, GL_ONE);
 	tex->bind();
 	sPainter.drawStelVertexArray(*vertexArray);
-	glDisable(GL_CULL_FACE);
 }
