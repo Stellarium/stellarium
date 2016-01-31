@@ -177,6 +177,7 @@ Q_IMPORT_PLUGIN(Scenery3dStelPluginInterface)
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
 qint64 StelApp::startMSecs = 0;
+float StelApp::animationScale = 1.f;
 
 void StelApp::initStatic()
 {
@@ -502,6 +503,9 @@ void StelApp::init(QSettings* conf)
 
 	setFlagShowDecimalDegrees(confSettings->value("gui/flag_show_decimal_degrees", false).toBool());
 	setFlagOldAzimuthUsage(confSettings->value("gui/flag_use_azimuth_from_south", false).toBool());
+
+	// Animation
+	animationScale = confSettings->value("gui/pointer_animation_speed", 1.f).toFloat();
 	
 	initialized = true;
 }
@@ -783,6 +787,11 @@ double StelApp::getTotalRunTime()
 	return (double)(QDateTime::currentMSecsSinceEpoch() - StelApp::startMSecs)/1000.;
 }
 
+// Return the scaled time since when stellarium is running in second.
+double StelApp::getAnimationTime()
+{
+	return (double)(QDateTime::currentMSecsSinceEpoch() - StelApp::startMSecs)*StelApp::animationScale/1000.;
+}
 
 void StelApp::reportFileDownloadFinished(QNetworkReply* reply)
 {
