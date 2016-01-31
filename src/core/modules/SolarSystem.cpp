@@ -66,7 +66,7 @@ SolarSystem::SolarSystem()
 	, flagOrbits(false)
 	, flagLightTravelTime(true)
 	, flagShow(false)
-	, flagMarker(false)
+	, flagPointer(false)
 	, flagNativeNames(false)
 	, flagTranslatedNames(false)
 	, flagIsolatedTrails(true)
@@ -146,7 +146,7 @@ void SolarSystem::init()
 	setLabelsAmount(conf->value("astro/labels_amount", 3.).toFloat());
 	setFlagOrbits(conf->value("astro/flag_planets_orbits").toBool());
 	setFlagLightTravelTime(conf->value("astro/flag_light_travel_time", true).toBool());
-	setFlagMarkers(conf->value("astro/flag_planets_markers", true).toBool());
+	setFlagPointers(conf->value("astro/flag_planets_pointers", true).toBool());
 	// Set the algorithm from Astronomical Almanac for computation of apparent magnitudes for
 	// planets in case  observer on the Earth by default
 	setApparentMagnitudeAlgorithmOnEarth(conf->value("astro/apparent_magnitude_algorithm", "Harris").toString());
@@ -305,7 +305,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()*2.;
 		
 		const float scale = prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio();
-		size+= scale * (45.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime()));
+		size+= scale * (45.f + 10.f*std::sin(2.f * StelApp::getInstance().getAnimationTime()));
 
 		texPointer->bind();
 
@@ -314,7 +314,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
 		size*=0.5;
-		const float angleBase = StelApp::getInstance().getTotalRunTime() * 10;
+		const float angleBase = StelApp::getInstance().getAnimationTime() * 10;
 		// We draw 4 instances of the sprite at the corners of the pointer
 		for (int i = 0; i < 4; ++i)
 		{
@@ -1118,7 +1118,7 @@ void SolarSystem::draw(StelCore* core)
 		p->draw(core, maxMagLabel, planetNameFont);
 	}
 
-	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer() && getFlagMarkers())
+	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer() && getFlagPointers())
 		drawPointer(core);
 }
 
