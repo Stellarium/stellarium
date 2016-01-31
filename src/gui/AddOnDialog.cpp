@@ -75,6 +75,7 @@ void AddOnDialog::createDialogContent()
 	// setting up tabs
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)),
 		this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
+	ui->stackListWidget->setCurrentRow(0);
 
 	// button to install/uninstall/update
 	connect(ui->button, SIGNAL(clicked()), this, SLOT(slotCheckedRows()));
@@ -186,6 +187,13 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 	ui->installedTableView->clearSelection();
 	ui->availableTableView->clearSelection();
 	slotUpdateButton();
+
+	// settings tab?
+	bool settings = ui->stackedWidget->currentIndex() == ui->stackListWidget->count() - 1;
+	ui->settingsGroup->setVisible(settings);
+	ui->addOnDialogButtons->setVisible(!settings);
+	ui->browser->setVisible(!settings);
+	ui->stackedWidget->setVisible(!settings);
 }
 
 void AddOnDialog::populateTables()
