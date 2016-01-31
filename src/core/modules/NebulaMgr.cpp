@@ -379,7 +379,7 @@ void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 
 		if (Nebula::drawHintProportional)
 			size*=1.2f;
-		size+=20.f + 10.f*std::sin(3.f * StelApp::getInstance().getTotalRunTime());
+		size+=20.f + 10.f*std::sin(3.f * StelApp::getInstance().getAnimationTime());
 		sPainter.drawSprite2dMode(pos[0]-size/2, pos[1]-size/2, 10, 90);
 		sPainter.drawSprite2dMode(pos[0]-size/2, pos[1]+size/2, 10, 0);
 		sPainter.drawSprite2dMode(pos[0]+size/2, pos[1]+size/2, 10, -90);
