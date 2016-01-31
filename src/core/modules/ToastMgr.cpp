@@ -49,6 +49,7 @@ void ToastMgr::init()
 	Q_ASSERT(conf);
 
 	QString dssHost = conf->value("dss/host", "http://dss.astro.altspu.ru").toString();
+	// TODO: change "results" to "survey" before release
 	survey = new ToastSurvey(dssHost+"/results/{level}/{x}_{y}.jpg", 11);
 	survey->setParent(this);
 
