@@ -226,6 +226,9 @@ public slots:
 	//! Return the time since when stellarium is running in second.
 	static double getTotalRunTime();
 
+	//! Return the scaled time for animated objects
+	static double getAnimationTime();
+
 	//! Report that a download occured. This is used for statistics purposes.
 	//! Connect this slot to QNetworkAccessManager::finished() slot to obtain statistics at the end of the program.
 	void reportFileDownloadFinished(QNetworkReply* reply);
@@ -340,6 +343,7 @@ private:
 	bool initialized;
 
 	static qint64 startMSecs;
+	static float animationScale;
 
 	// Temporary variables used to store the last gl window resize
 	// if the core was not yet initialized
