@@ -383,7 +383,7 @@
         <item>
          <widget class="QGroupBox" name="settingsGroup">
           <property name="title">
-           <string>Auto-update database</string>
+           <string>Automatically check for updates</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -421,7 +421,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>Update database</string>
+              <string>Check interval:</string>
              </property>
             </widget>
            </item>
