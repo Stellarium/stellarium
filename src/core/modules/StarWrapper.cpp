@@ -116,7 +116,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			designations.append(varSciName);
 
 		QString hip;
-		if (s->getComponentIds())
+		if (s->hasComponentID())
 			hip = QString("HIP %1 %2").arg(s->getHip()).arg(StarMgr::convertToComponentIds(s->getComponentIds()));
 		else
 			hip = QString("HIP %1").arg(s->getHip());

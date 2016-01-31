@@ -228,6 +228,7 @@ FIND_PACKAGE(Qt5Gui REQUIRED)
 FIND_PACKAGE(Qt5Network REQUIRED)
 FIND_PACKAGE(Qt5OpenGL REQUIRED)
 FIND_PACKAGE(Qt5Widgets REQUIRED)
+FIND_PACKAGE(Qt5PrintSupport REQUIRED)
 IF(USE_PLUGIN_TELESCOPECONTROL)
      FIND_PACKAGE(Qt5SerialPort REQUIRED)
 ENDIF()
@@ -513,6 +514,7 @@ INCLUDE_DIRECTORIES(
      ${CMAKE_SOURCE_DIR}/src/core/planetsephems
      ${CMAKE_SOURCE_DIR}/src/core/external
      ${CMAKE_SOURCE_DIR}/src/core/external/qtcompress
+     ${CMAKE_SOURCE_DIR}/src/core/external/qcustomplot
      ${CMAKE_SOURCE_DIR}/src/core/external/glues_stel/source/
      ${CMAKE_SOURCE_DIR}/src/core/external/glues_stel/source/libtess
      ${CMAKE_SOURCE_DIR}/src/gui

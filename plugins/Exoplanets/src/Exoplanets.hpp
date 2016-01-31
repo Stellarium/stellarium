@@ -202,6 +202,30 @@ public:
 		return EPCountPH;
 	}
 
+	QList<double> getExoplanetsData(int mode)
+	{
+		switch(mode)
+		{
+			case 1:
+				return EPSemiAxisAll;
+				break;
+			case 2:
+				return EPMassAll;
+				break;
+			case 3:
+				return EPRadiusAll;
+				break;
+			case 4:
+				return EPPeriodAll;
+				break;
+			case 5:
+				return EPAngleDistanceAll;
+				break;
+			default:
+				return EPEccentricityAll;
+		}
+	}
+
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(Exoplanets::UpdateState state);
@@ -271,6 +295,8 @@ private:
 	int PSCount;
 	int EPCountAll;
 	int EPCountPH;
+
+	QList<double> EPEccentricityAll, EPSemiAxisAll, EPMassAll, EPRadiusAll, EPPeriodAll, EPAngleDistanceAll;
 
 	StelTextureSP texPointer;
 	QList<ExoplanetP> ep;
