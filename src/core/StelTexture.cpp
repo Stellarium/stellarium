@@ -126,7 +126,7 @@ bool StelTexture::bind(int slot)
 		req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
 		req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
 		networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-		connect(networkReply, SIGNAL(finished()), this, SLOT(onNetworkReply()));
+		connect(networkReply, SIGNAL(finished()), this, SLOT(onNetworkReply()));		
 		return false;
 	}
 	// The network connection is still running.
