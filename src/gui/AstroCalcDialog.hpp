@@ -24,6 +24,7 @@
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 #include <QMap>
+#include <QVector>
 
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
@@ -71,6 +72,8 @@ public:
 
 	AstroCalcDialog(QObject* parent);
 	virtual ~AstroCalcDialog();
+
+	static QVector<Vec3d> EphemerisListJ2000;
 
 public slots:
         void retranslate();
