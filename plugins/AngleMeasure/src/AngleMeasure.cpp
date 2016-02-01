@@ -254,7 +254,7 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 		y -= ls;
 		painter.drawText(x, y, messageRightButton);
 	}
-	glDisable(GL_BLEND);
+	painter.enableBlend(false, false, __FILE__, __LINE__);
 }
 
 //! Draw any parts on the screen which are for our module

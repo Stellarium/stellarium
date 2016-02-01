@@ -347,6 +347,9 @@ public:
 	//! @return true if the link was successful.
 	static bool linkProg(class QOpenGLShaderProgram* prog, const QString& name);
 
+#ifndef NDEBUG
+	static void stateChangeDiagnosticsLog();
+#endif
 private:
 
 	friend class StelTextureMgr;
@@ -407,6 +410,17 @@ private:
 #ifndef NDEBUG
 	//! Mutex allowing thread safety
 	static class QMutex* globalMutex;
+	// Used exclusively for handmade profiling. Track the efficiency of our state caching.
+	struct StateChangeCounters {
+		// The QPairs have first=switched, second=called, but no switch required. Gives output at end.
+		QPair<unsigned int, unsigned int> texture2dEnabled;
+		QPair<unsigned int, unsigned int> faceCullingEnabled;
+		QPair<unsigned int, unsigned int> depthTestEnabled;
+		QPair<unsigned int, unsigned int> linesmoothEnabled;
+		QPair<unsigned int, unsigned int> blendingEnabled;
+		QPair<unsigned int, unsigned int> blendModeSwitched;
+	};
+	static StateChangeCounters stateChangeCounters;
 #endif
 
 	//! The used for text drawing

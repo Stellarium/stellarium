@@ -90,10 +90,6 @@ Q_IMPORT_PLUGIN(SimpleDrawLineStelPluginInterface)
 Q_IMPORT_PLUGIN(AngleMeasureStelPluginInterface)
 #endif
 
-#ifdef USE_STATIC_PLUGIN_ARCHAEOLINES
-Q_IMPORT_PLUGIN(ArchaeoLinesStelPluginInterface)
-#endif
-
 #ifdef USE_STATIC_PLUGIN_COMPASSMARKS
 Q_IMPORT_PLUGIN(CompassMarksStelPluginInterface)
 #endif
@@ -168,6 +164,10 @@ Q_IMPORT_PLUGIN(PointerCoordinatesStelPluginInterface)
 
 #ifdef USE_STATIC_PLUGIN_OBSERVABILITY
 Q_IMPORT_PLUGIN(ObservabilityStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_ARCHAEOLINES
+Q_IMPORT_PLUGIN(ArchaeoLinesStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_SCENERY3D
@@ -257,6 +257,9 @@ StelApp::~StelApp()
 {
 	qDebug() << qPrintable(QString("Downloaded %1 files (%2 kbytes) in a session of %3 sec (average of %4 kB/s + %5 files from cache (%6 kB)).").arg(nbDownloadedFiles).arg(totalDownloadedSize/1024).arg(getTotalRunTime()).arg((double)(totalDownloadedSize/1024)/getTotalRunTime()).arg(nbUsedCache).arg(totalUsedCacheSize/1024));
 
+#ifndef NDEBUG
+	StelPainter::stateChangeDiagnosticsLog();
+#endif
 	stelObjectMgr->unSelect();
 	moduleMgr->unloadModule("StelVideoMgr", false);  // We need to delete it afterward
 	moduleMgr->unloadModule("StelSkyLayerMgr", false);  // We need to delete it afterward

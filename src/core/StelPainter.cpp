@@ -46,6 +46,7 @@
 #define STELPAINTER_DEBUG_STATE_CHANGE
 
 QMutex* StelPainter::globalMutex = new QMutex();
+StelPainter::StateChangeCounters StelPainter::stateChangeCounters = {QPair<unsigned int, unsigned int>(0,0) };
 #endif
 
 QOpenGLShaderProgram* StelPainter::texturesShaderProgram=NULL;
@@ -187,7 +188,7 @@ void StelPainter::drawViewportShape(const GLfloat innerRadius)
 	if (prj->maskType != StelProjector::MaskDisk)
 		return;
 
-	enableBlend(false, false, __FILE__, __LINE__); // glDisable(GL_BLEND);
+	enableBlend(false, false, __FILE__, __LINE__);
 	setColor(0.f,0.f,0.f);
 
 	GLfloat outerRadius = prj->getViewportWidth()+prj->getViewportHeight();
@@ -1796,7 +1797,7 @@ void StelPainter::enableTexture2d(const bool b, const bool force, QString filena
 		if (texture2dEnabled != glIsEnabled(GL_TEXTURE_2D))
 		{
 			qDebug() << "StelPainter::enableTexture2d: inconsistent state detected. File " << filename << "line" << line << "Fixing.";
-			texture2dEnabled = glIsEnabled(GL_TEXTURE_2D);
+			texture2dEnabled = !texture2dEnabled;
 		}
 #endif
 	}
@@ -1807,7 +1808,14 @@ void StelPainter::enableTexture2d(const bool b, const bool force, QString filena
 			glEnable(GL_TEXTURE_2D);
 		else
 			glDisable(GL_TEXTURE_2D);
+#ifndef NDEBUG
+		stateChangeCounters.texture2dEnabled.first++;
+#endif
 	}
+#ifndef NDEBUG
+	else
+		stateChangeCounters.texture2dEnabled.second++;
+#endif
 }
 
 void StelPainter::enableFaceCulling(const bool b, const bool force, QString filename, int line)
@@ -1819,7 +1827,7 @@ void StelPainter::enableFaceCulling(const bool b, const bool force, QString file
 		if (faceCullingEnabled != glIsEnabled(GL_CULL_FACE))
 		{
 			qDebug() << "StelPainter::enableFaceCulling: inconsistent state detected. File " << filename << "line" << line << "Fixing.";
-			faceCullingEnabled = glIsEnabled(GL_CULL_FACE);
+			faceCullingEnabled = !faceCullingEnabled;
 		}
 #endif
 	}
@@ -1830,7 +1838,14 @@ void StelPainter::enableFaceCulling(const bool b, const bool force, QString file
 			glEnable(GL_CULL_FACE);
 		else
 			glDisable(GL_CULL_FACE);
+#ifndef NDEBUG
+		stateChangeCounters.faceCullingEnabled.first++;
+#endif
 	}
+#ifndef NDEBUG
+	else
+		stateChangeCounters.faceCullingEnabled.second++;
+#endif
 }
 
 void StelPainter::enableDepthTest(const bool b, const bool force, QString filename, int line)
@@ -1842,7 +1857,7 @@ void StelPainter::enableDepthTest(const bool b, const bool force, QString filena
 		if (depthTestEnabled != glIsEnabled(GL_DEPTH_TEST))
 		{
 			qDebug() << "StelPainter::enableDepthTest: inconsistent state detected. File " << filename << "line" << line << "Fixing.";
-			depthTestEnabled = glIsEnabled(GL_DEPTH_TEST);
+			depthTestEnabled = !depthTestEnabled;
 		}
 #endif
 	}
@@ -1853,7 +1868,14 @@ void StelPainter::enableDepthTest(const bool b, const bool force, QString filena
 			glEnable(GL_DEPTH_TEST);
 		else
 			glDisable(GL_DEPTH_TEST);
+#ifndef NDEBUG
+		stateChangeCounters.depthTestEnabled.first++;
+#endif
 	}
+#ifndef NDEBUG
+	else
+		stateChangeCounters.depthTestEnabled.second++;
+#endif
 }
 
 void StelPainter::enableLineSmooth(const bool b, const bool force, QString filename, int line)
@@ -1872,7 +1894,7 @@ void StelPainter::enableLineSmooth(const bool b, const bool force, QString filen
 		if (lineSmoothEnabled != glIsEnabled(GL_LINE_SMOOTH))
 		{
 			qDebug() << "StelPainter::enableLineSmooth: inconsistent state detected. File " << filename << "line" << line << "Fixing.";
-			lineSmoothEnabled = glIsEnabled(GL_LINE_SMOOTH);
+			lineSmoothEnabled = !lineSmoothEnabled;
 		}
 #else
 		Q_UNUSED(filename);
@@ -1890,7 +1912,14 @@ void StelPainter::enableLineSmooth(const bool b, const bool force, QString filen
 			else
 				glDisable(GL_LINE_SMOOTH);
 		}
+# ifndef NDEBUG
+		stateChangeCounters.linesmoothEnabled.first++;
+# endif
 	}
+# ifndef NDEBUG
+	else
+		stateChangeCounters.linesmoothEnabled.second++;
+# endif
 #endif
 }
 
@@ -1915,7 +1944,14 @@ void StelPainter::enableBlend(const bool b, const bool force, QString filename, 
 			glEnable(GL_BLEND);
 		else
 			glDisable(GL_BLEND);
+#ifndef NDEBUG
+		stateChangeCounters.blendingEnabled.first++;
+#endif
 	}
+#ifndef NDEBUG
+	else
+		stateChangeCounters.blendingEnabled.second++;
+#endif
 }
 
 void StelPainter::setBlendFunc(const int src, const int dst, const int srcAlpha, const int dstAlpha, const bool separate)
@@ -1927,7 +1963,18 @@ void StelPainter::setBlendFunc(const int src, const int dst, const int srcAlpha,
 		{
 			separateBlendingEnabled=true;
 			glBlendFuncSeparate(src, dst, srcAlpha, dstAlpha);
+			blendMode[0]=src;
+			blendMode[1]=dst;
+			blendMode[2]=srcAlpha;
+			blendMode[3]=dstAlpha;
+#ifndef NDEBUG
+			stateChangeCounters.blendModeSwitched.first++;
+#endif
 		}
+#ifndef NDEBUG
+		else
+			stateChangeCounters.blendModeSwitched.second++;
+#endif
 	}
 	else
 	{
@@ -1935,7 +1982,16 @@ void StelPainter::setBlendFunc(const int src, const int dst, const int srcAlpha,
 		{
 			separateBlendingEnabled=false;
 			glBlendFunc(src, dst);
+			blendMode[0]=src;
+			blendMode[1]=dst;
+#ifndef NDEBUG
+			stateChangeCounters.blendModeSwitched.first++;
+#endif
 		}
+#ifndef NDEBUG
+		else
+			stateChangeCounters.blendModeSwitched.second++;
+#endif
 	}
 }
 
@@ -2270,3 +2326,16 @@ StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& a
 	return ret;
 }
 
+#ifndef NDEBUG
+void StelPainter::stateChangeDiagnosticsLog()
+{
+	qDebug() << "StelPainter has cached a few OpenGL state changes:" ;
+	qDebug() << " Switches of GL_TEXTURE_2D: " << stateChangeCounters.texture2dEnabled.first   << "Avoided:" << stateChangeCounters.texture2dEnabled.second;
+	qDebug() << " Switches of GL_CULL_FACE:  " << stateChangeCounters.faceCullingEnabled.first << "Avoided:" << stateChangeCounters.faceCullingEnabled.second;
+	qDebug() << " Switches of GL_DEPTH_TEST: " << stateChangeCounters.depthTestEnabled.first   << "Avoided:" << stateChangeCounters.depthTestEnabled.second;
+	qDebug() << " Switches of GL_LINE_SMOOTH:" << stateChangeCounters.linesmoothEnabled.first  << "Avoided:" << stateChangeCounters.linesmoothEnabled.second;
+	qDebug() << " Switches of GL_BLEND:      " << stateChangeCounters.blendingEnabled.first    << "Avoided:" << stateChangeCounters.blendingEnabled.second;
+	qDebug() << " Switches of glBlendMode:   " << stateChangeCounters.blendModeSwitched.first  << "Avoided:" << stateChangeCounters.blendModeSwitched.second;
+}
+
+#endif
