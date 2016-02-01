@@ -44,6 +44,9 @@
 #include "TrailGroup.hpp"
 #include "RefractionExtinction.hpp"
 
+#include "AstroCalcDialog.hpp"
+#include "StelGui.hpp"
+
 #include <functional>
 #include <algorithm>
 
@@ -97,6 +100,9 @@ SolarSystem::~SolarSystem()
 	Planet::hintCircleTex.clear();
 	Planet::texEarthShadow.clear();
 
+	texCircle.clear();
+	texPointer.clear();
+
 	delete allTrails;
 	allTrails = NULL;
 
@@ -129,6 +135,8 @@ void SolarSystem::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
+
+	gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 
 	Planet::init();
 	loadPlanets();	// Load planets data
@@ -166,6 +174,7 @@ void SolarSystem::init()
 			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur4.png");
+	texCircle = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb.png");	// Load circle texture
 	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/planet-indicator.png");
 	
 	StelApp *app = &StelApp::getInstance();
@@ -1120,6 +1129,32 @@ void SolarSystem::draw(StelCore* core)
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer() && getFlagPointers())
 		drawPointer(core);
+
+	// AstroCalcDialog
+	if (gui && gui->getAstroCalcVisible())
+	{
+		StelProjectorP prj = core->getProjection(StelCore::FrameJ2000); // , StelCore::RefractionOff);
+		StelPainter sPainter(prj);
+		sPainter.setColor(1.0f, 1.0f, 0.0f, 1.0f);
+
+		float size = 4.0f;
+
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_ONE, GL_ONE);
+
+		for (int i =0; i< AstroCalcDialog::EphemerisListJ2000.count(); i++)
+		{
+			// draw EphemerisListJ2000[i];
+			Vec3d win;
+
+			// Check visibility of pointer
+			if (!(sPainter.getProjector()->projectCheck(AstroCalcDialog::EphemerisListJ2000[i], win)))
+				continue;
+
+			texCircle->bind();
+			sPainter.drawSprite2dMode(win[0], win[1], size);
+		}
+	}
 }
 
 void SolarSystem::setStelStyle(const QString& section)
