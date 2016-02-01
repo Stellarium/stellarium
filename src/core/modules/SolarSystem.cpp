@@ -1135,9 +1135,8 @@ void SolarSystem::draw(StelCore* core)
 	{
 		StelProjectorP prj = core->getProjection(StelCore::FrameJ2000); // , StelCore::RefractionOff);
 		StelPainter sPainter(prj);
-		sPainter.setColor(1.0f, 1.0f, 0.0f, 1.0f);
 
-		float size = 4.0f;
+		float size;
 
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_ONE, GL_ONE);
@@ -1150,6 +1149,17 @@ void SolarSystem::draw(StelCore* core)
 			// Check visibility of pointer
 			if (!(sPainter.getProjector()->projectCheck(AstroCalcDialog::EphemerisListJ2000[i], win)))
 				continue;
+
+			if (i == AstroCalcDialog::DisplayedPositionIndex)
+			{
+				sPainter.setColor(1.0f, 0.7f, 0.0f, 1.0f);
+				size = 6.f;
+			}
+			else
+			{
+				sPainter.setColor(1.0f, 1.0f, 0.0f, 1.0f);
+				size = 4.f;
+			}
 
 			texCircle->bind();
 			sPainter.drawSprite2dMode(win[0], win[1], size);

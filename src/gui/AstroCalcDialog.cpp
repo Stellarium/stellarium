@@ -34,6 +34,7 @@
 #include <QTimer>
 
 QVector<Vec3d> AstroCalcDialog::EphemerisListJ2000;
+int AstroCalcDialog::DisplayedPositionIndex = -1;
 
 AstroCalcDialog::AstroCalcDialog(QObject *parent)
 	: StelDialog(parent)
@@ -104,6 +105,7 @@ void AstroCalcDialog::createDialogContent()
 
 	connect(ui->ephemerisPushButton, SIGNAL(clicked()), this, SLOT(generateEphemeris()));
 	connect(ui->ephemerisTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentEphemeride(QModelIndex)));
+	connect(ui->ephemerisTreeWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(onChangedEphemerisPosition(QModelIndex)));
 
 	connect(ui->phenomenaPushButton, SIGNAL(clicked()), this, SLOT(calculatePhenomena()));
 	connect(ui->phenomenaTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentPhenomen(QModelIndex)));
@@ -178,6 +180,11 @@ void AstroCalcDialog::currentPlanetaryPositions()
 
 	// sort-by-name
 	ui->planetaryPositionsTreeWidget->sortItems(ColumnName, Qt::AscendingOrder);
+}
+
+void AstroCalcDialog::onChangedEphemerisPosition(const QModelIndex &modelIndex)
+{
+	DisplayedPositionIndex = modelIndex.row();
 }
 
 void AstroCalcDialog::selectCurrentPlanetaryPosition(const QModelIndex &modelIndex)
