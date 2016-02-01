@@ -1565,7 +1565,7 @@ void Scenery3d::drawFromCubeMap()
 
 	cubeShader->bind();
 
-	//We simulate the generate behavoir of drawStelVertexArray ourselves
+	//We simulate the generate behavior of drawStelVertexArray ourselves
 	//check if discontinuties exist
 	//if(altAzProjector->hasDiscontinuity())
 	//{

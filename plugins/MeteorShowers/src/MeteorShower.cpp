@@ -315,7 +315,7 @@ void MeteorShower::draw(StelCore* core)
 	{
 		return;
 	}
-	glEnable(GL_BLEND);
+	StelPainter::enableBlend(true, false, __FILE__, __LINE__);
 	drawRadiant(core);
 	drawMeteors(core);
 }
@@ -328,8 +328,8 @@ void MeteorShower::drawRadiant(StelCore *core)
 	StelUtils::spheToRect(m_radiantAlpha, m_radiantDelta, m_position);
 	painter.getProjector()->project(m_position, XY);
 
-	glEnable(GL_TEXTURE_2D);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+	painter.enableTexture2d(true, false, __FILE__, __LINE__);
+	painter.setBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
 	Vec3f rgb;
 	float alpha = 0.85f + ((float) qrand() / (float) RAND_MAX) / 10.f;
@@ -364,7 +364,12 @@ void MeteorShower::drawRadiant(StelCore *core)
 			float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
 			float shift = 8.f + size/1.8f;
 			if ((mag+1.f)<mlimit)
+			{
 				painter.drawText(XY[0]+shift, XY[1]+shift, getNameI18n(), 0, 0, 0, false);
+				// drawText garbles blend state. restore, forced :-(
+				painter.enableBlend(true, true, __FILE__, __LINE__);
+			}
+
 		}
 	}
 }
@@ -393,7 +398,7 @@ void MeteorShower::drawMeteors(StelCore *core)
 
 	// GZ It is better to make GL state switches first and then go through the lists several times.
 	//glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	sPainter.setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	sPainter.enableClientStates(true, false, true);
 	foreach (MeteorObj* m, m_activeMeteors)
 	{
@@ -409,7 +414,7 @@ void MeteorShower::drawMeteors(StelCore *core)
 	// Bolides. Switch blendfunc here, once per frame, not once per bolide.
 	// See Meteor.cpp: It is more efficient to just build up a vertex array in drawBolide and make a single drawFromArray at end.
 	//glEnable(GL_BLEND); // GZ Had been enabled above.
-	glBlendFunc(GL_ONE, GL_ONE);
+	sPainter.setBlendFunc(GL_ONE, GL_ONE);
 	// This now has been done already!
 	//sPainter.enableClientStates(true, true, true);
 	m_mgr->getBolideTexture()->bind();

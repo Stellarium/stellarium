@@ -1619,9 +1619,9 @@ void Satellites::draw(StelCore* core)
 	painter.setFont(labelFont);
 	Satellite::hintBrightness = hintFader.getInterstate();
 
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
-	glEnable(GL_TEXTURE_2D);
+	painter.setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	painter.enableBlend(true, false, __FILE__, __LINE__);
+	painter.enableTexture2d(true, false, __FILE__, __LINE__);
 	Satellite::hintTexture->bind();
 	Satellite::viewportHalfspace = painter.getProjector()->getBoundingCap();
 	foreach (const SatelliteP& sat, satellites)
@@ -1651,9 +1651,9 @@ void Satellites::drawPointer(StelCore* core, StelPainter& painter)
 		painter.setColor(0.4f,0.5f,0.8f);
 		texPointer->bind();
 
-		glEnable(GL_TEXTURE_2D);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		painter.enableTexture2d(true, false, __FILE__, __LINE__);
+		painter.enableBlend(true, false, __FILE__, __LINE__);
+		painter.setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
 		// Size on screen
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();

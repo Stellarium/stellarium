@@ -381,8 +381,8 @@ void Pulsar::draw(StelCore* core, StelPainter *painter)
 	if (!(painter->getProjector()->projectCheck(XYZ, win)))
 		return;
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
+	painter->enableBlend(true, false, __FILE__, __LINE__);
+	painter->setBlendFunc(GL_ONE, GL_ONE);
 	if (glitch>0 && glitchFlag)
 		painter->setColor(glitchColor[0], glitchColor[1], glitchColor[2], 1);
 	else

@@ -317,6 +317,5 @@ void Nova::draw(StelCore* core, StelPainter* painter)
 			painter->drawText(XYZ, name, 0, shift, shift, false);
 		}
 	}
-
 	sd->postDrawPointSource(painter);
 }

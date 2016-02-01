@@ -189,8 +189,8 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 	StelPainter painter(prj);
 	painter.setFont(font);
 
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
+	painter.setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	painter.enableBlend(true, false, __FILE__, __LINE__);
 	if (lineVisible.getInterstate() > 0.000001f)
 	{
 		Vec3d xy;
@@ -220,12 +220,8 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 			}
 		}
 
-		glDisable(GL_TEXTURE_2D);
-		// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH. But it looks much better.
-		#ifdef GL_LINE_SMOOTH
-		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-			glEnable(GL_LINE_SMOOTH);
-		#endif
+		painter.enableTexture2d(false, false, __FILE__, __LINE__);
+		painter.enableLineSmooth(true);
 
 		// main line is a great circle
 		painter.setColor(lineColor[0], lineColor[1], lineColor[2], lineVisible.getInterstate());
@@ -245,10 +241,6 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 			painter.drawGreatCircleArc(perp1StartPointHor, perp1EndPointHor, NULL);
 			painter.drawGreatCircleArc(perp2StartPointHor, perp2EndPointHor, NULL);
 		}
-		#ifdef GL_LINE_SMOOTH
-		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-			glDisable(GL_LINE_SMOOTH);
-		#endif
 	}
 	if (messageFader.getInterstate() > 0.000001f)
 	{

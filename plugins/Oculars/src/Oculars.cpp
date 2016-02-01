@@ -300,9 +300,9 @@ void Oculars::draw(StelCore* core)
 			if (guiPanelEnabled)
 			{
 				// Reset the state to allow the panel to be painted normally
-				glDisable(GL_TEXTURE_2D);
-				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-				glEnable(GL_BLEND);
+				StelPainter::enableTexture2d(false, false, __FILE__, __LINE__);
+				StelPainter::setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+				StelPainter::enableBlend(true, false, __FILE__, __LINE__);
 			}
 			else
 			{
@@ -315,9 +315,9 @@ void Oculars::draw(StelCore* core)
 		if (guiPanelEnabled)
 		{
 			// Reset the state to allow the panel to be painted normally
-			glDisable(GL_TEXTURE_2D);
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			glEnable(GL_BLEND);
+			StelPainter::enableTexture2d(false, false, __FILE__, __LINE__);
+			StelPainter::setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			StelPainter::enableBlend(true, false, __FILE__, __LINE__);
 		}
 		else
 		{
@@ -1588,13 +1588,12 @@ void Oculars::paintOcularMask(const StelCore *core)
 		inner = oculars[selectedOcularIndex]->appearentFOV() * inner / maxEyepieceAngle;
 	}
 
-	// Paint the reticale, if needed
+	// Paint the reticle, if needed
 	if (!reticleTexture.isNull()){
-		glEnable(GL_BLEND);
-		painter.enableTexture2d(true);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		painter.enableBlend(true, false, __FILE__, __LINE__);
+		painter.enableTexture2d(true, false, __FILE__, __LINE__);
 		painter.setColor(0.77, 0.14, 0.16, 1.0);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		painter.setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 		reticleTexture->bind();
 
 		int textureHeight;
@@ -1638,9 +1637,9 @@ void Oculars::paintText(const StelCore* core)
 
 	// set up the color and the GL state
 	painter.setColor(0.8, 0.48, 0.0, 1);
-	glDisable(GL_TEXTURE_2D);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
+	painter.enableTexture2d(false, false, __FILE__, __LINE__);
+	painter.setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	painter.enableBlend(true, false, __FILE__, __LINE__);
 
 	// Get the X & Y positions, and the line height
 	painter.setFont(font);

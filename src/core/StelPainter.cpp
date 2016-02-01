@@ -39,6 +39,12 @@
 
 
 #ifndef NDEBUG
+// activate next line for debugging of StelPainter's state tracking.
+// If there is an entry in log, go to the line indicated and set second parameter to true.
+// The only source of trouble seems to be StelPainter::drawText, which changes the current blend state.
+// After a thorough fix of drawText, those calls should be reverted to second parameter force=false.
+#define STELPAINTER_DEBUG_STATE_CHANGE
+
 QMutex* StelPainter::globalMutex = new QMutex();
 #endif
 
@@ -56,10 +62,12 @@ bool StelPainter::texture2dEnabled=false;
 bool StelPainter::faceCullingEnabled=false;
 bool StelPainter::depthTestEnabled=false;
 bool StelPainter::lineSmoothEnabled=false;
+int StelPainter::lineSmoothSupported=-1;
 bool StelPainter::blendingEnabled=false;
 bool StelPainter::separateBlendingEnabled=false;
 int StelPainter::blendMode[4]; // srcRGB, dstRGB, srcAlpha, dstAlpha or src, dst, -, -, as controlled by separateBlendingEnabled
 
+// This is unused. While elegant in concept, glGet... is slow, so avoid that except for debugging.
 //StelPainter::GLState::GLState()
 //{
 
@@ -578,6 +586,15 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		}
 		
 		painter.endNativePainting();
+		// GZ For whichever reasons the QPainter modified the OpenGL state, and restore with
+		// endNativePainting() does not work as expected.
+		// Often blend state will be garbled and must be restored after calling drawText().
+		// Given that this function may come in a loop, its better to call it after that loop.
+		// Or, trying to force restoration of blend, linesmooth, etc. This causes 5 state changes.
+		//restoreCachedOpenGLstate();
+		// Still not enough. Better not call this here, but hand-track that stuff.
+		// We must do that here. TODO: Do whatever is necessary to fix drawText...
+		enableBlend(blendingEnabled, true);
 	}
 }
 
@@ -1843,6 +1860,11 @@ void StelPainter::enableLineSmooth(const bool b, const bool force, QString filen
 {
 	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH. But it looks much better, enable if possible.
 #ifdef GL_LINE_SMOOTH
+	if (lineSmoothSupported == -1)
+	{
+		// A query is expensive. Do that only once, and cache in here.
+		lineSmoothSupported= (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL ? 1 : 0);
+	}
 	if (!force)
 	{
 # ifdef STELPAINTER_DEBUG_STATE_CHANGE
@@ -1852,12 +1874,16 @@ void StelPainter::enableLineSmooth(const bool b, const bool force, QString filen
 			qDebug() << "StelPainter::enableLineSmooth: inconsistent state detected. File " << filename << "line" << line << "Fixing.";
 			lineSmoothEnabled = glIsEnabled(GL_LINE_SMOOTH);
 		}
+#else
+		Q_UNUSED(filename);
+		Q_UNUSED(line);
 # endif
 	}
 	if ((lineSmoothEnabled!=b) || force)
 	{
 		lineSmoothEnabled = b;
-		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+		if (lineSmoothSupported==1)
+		//if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
 		{
 			if (b)
 				glEnable(GL_LINE_SMOOTH);
@@ -1911,6 +1937,15 @@ void StelPainter::setBlendFunc(const int src, const int dst, const int srcAlpha,
 			glBlendFunc(src, dst);
 		}
 	}
+}
+
+void StelPainter::restoreCachedOpenGLstate()
+{
+	enableTexture2d(texture2dEnabled, true);
+	enableFaceCulling(faceCullingEnabled, true);
+	enableDepthTest(depthTestEnabled, true);
+	enableLineSmooth(lineSmoothEnabled, true);
+	enableBlend(blendingEnabled, true);
 }
 
 void StelPainter::initGLShaders()

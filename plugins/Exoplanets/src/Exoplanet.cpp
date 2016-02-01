@@ -444,6 +444,12 @@ void Exoplanet::update(double deltaTime)
 
 void Exoplanet::draw(StelCore* core, StelPainter *painter)
 {
+	if (habitableMode)
+	{
+		if (!hasHabitableExoplanets)
+			return;
+	}
+
 	bool visible;
 	StelSkyDrawer* sd = core->getSkyDrawer();
 	StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
@@ -455,8 +461,8 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 	StelUtils::spheToRect(RA, DE, XYZ);
 	double mag = getVMagnitudeWithExtinction(core);
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
+	painter->enableBlend(true, false, __FILE__, __LINE__);
+	painter->setBlendFunc(GL_ONE, GL_ONE);
 	painter->setColor(color[0], color[1], color[2], 1);
 
 	if (timelineMode)
@@ -468,11 +474,6 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 		visible = true;
 	}
 
-	if (habitableMode)
-	{
-		if (!hasHabitableExoplanets)
-			return;
-	}
 
 	Vec3d win;
 	// Check visibility of exoplanet system
@@ -491,6 +492,8 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+1.f)<mlimit && smgr->getFlagLabels())
 		{
 			painter->drawText(XYZ, getNameI18n(), 0, shift, shift, false);
+			// drawText garbles blend.
+			painter->enableBlend(true, true, __FILE__, __LINE__);
 		}
 	}
 }

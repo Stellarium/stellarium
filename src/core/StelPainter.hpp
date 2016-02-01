@@ -42,9 +42,9 @@ class QOpenGLShaderProgram;
 //! and only calls the glEnable() etc. calls when necessary. Never call these state changes directly, but call
 //! enableTexture2d(bool), enableFaceCulling(bool), enableDepthTest(bool), enableBlending(bool), and setBlendMode(....)
 //! If no painter is active, you can also call the methods directly from the class.
+//! There is a caveat to this: drawText is performed by a QPainter, which changes the OpenGL state!
+//! We must restore, manually, some OpenGL states after issuing drawText (or just at end of drawText, but this can come in a loop..).
 
-// activate next line for debugging of StelPainter's state tracking
-#define STELPAINTER_DEBUG_STATE_CHANGE
 
 class StelPainter
 {
@@ -292,6 +292,14 @@ public:
 	//! There is no need currently for a get operator here.
 	static void setBlendFunc(const int src, const int dst, const int srcAlpha=0, const int dstAlpha=0, const bool separate=false);
 
+	//! Some draw commands misbehave. StelPainter::drawText uses a QPainter which modifies the OpenGL state in an unclear way
+	//! which breaks the assumptions that we can cache the state in all cases.
+	//! After StelPainter::drawText(), this call should be used to restore the assumed state.
+	//! Another application for this is to cleanup after drawing of heavy plugins like Scenery3D
+	//! which use their own OpenGL code and does not use StelPainter.
+	//! There is no "store current state" like glPush/glPop here.
+	static void restoreCachedOpenGLstate();
+
 	// Thoses methods should eventually be replaced by a single setVertexArray
 	//! use instead of glVertexPointer
 	void setVertexPointer(int size, int type, const void* pointer) {
@@ -413,6 +421,7 @@ private:
 	static bool faceCullingEnabled;
 	static bool depthTestEnabled;
 	static bool lineSmoothEnabled;
+	static int lineSmoothSupported; // does system support it at all? (only 1 query at startup) -1=not initialized, 0=no, 1=yes.
 	static bool blendingEnabled;
 	static bool separateBlendingEnabled;
 	static int blendMode[4];

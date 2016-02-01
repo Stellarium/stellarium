@@ -82,8 +82,8 @@ void MeteorShowers::drawPointer(StelCore* core)
 	painter.setColor(c[0],c[1],c[2]);
 	m_mgr->getPointerTexture()->bind();
 	painter.enableTexture2d(true);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+	painter.enableBlend(true, false, __FILE__, __LINE__);
+	painter.setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
 	float size = obj->getAngularSize(core) * M_PI / 180. * painter.getProjector()->getPixelPerRadAtCenter();
 	size += 20.f + 10.f * qSin(2.f * StelApp::getInstance().getTotalRunTime());

@@ -353,15 +353,10 @@ void ArchaeoLines::draw(StelCore* core)
 	if (core->getCurrentPlanet()->getEnglishName()!="Earth")
 		return;
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-	glDisable(GL_TEXTURE_2D);
-
-	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
-	#ifdef GL_LINE_SMOOTH
-	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-		glEnable(GL_LINE_SMOOTH);
-	#endif
+	StelPainter::enableBlend(true, false, __FILE__, __LINE__);
+	StelPainter::setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+	StelPainter::enableTexture2d(false, false, __FILE__, __LINE__);
+	StelPainter::enableLineSmooth(true, false, __FILE__, __LINE__);
 
 	equinoxLine->draw(core, lineFader.getInterstate());
 	northernSolsticeLine->draw(core, lineFader.getInterstate());
@@ -735,9 +730,9 @@ void alViewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& direct
 
 	d->sPainter->drawText(screenPos[0], screenPos[1], text, angleDeg, xshift, 3);
 	//d->sPainter->setColor(tmpColor[0], tmpColor[1], tmpColor[2], tmpColor[3]); // RESTORE
-	glDisable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	d->sPainter->enableTexture2d(false, false, __FILE__, __LINE__);
+	d->sPainter->enableBlend(true, true, __FILE__, __LINE__);
+	d->sPainter->setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 
@@ -863,20 +858,14 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 			sPainter.drawSmallCircleArc(pt1, pt2, rotCenter, alViewportEdgeIntersectCallback, &userData);
 			sPainter.drawSmallCircleArc(pt2, pt3, rotCenter, alViewportEdgeIntersectCallback, &userData);
 			sPainter.drawSmallCircleArc(pt3, pt1, rotCenter, alViewportEdgeIntersectCallback, &userData);
-//			#ifdef GL_LINE_SMOOTH
-//			if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-//				glDisable(GL_LINE_SMOOTH);
-//			#endif
-//			glDisable(GL_BLEND);
+			//sPainter.enableLineSmooth(false);
+			//sPainter.enableBlend(false);
 			return;
 		}
 		else
 		{
-//			#ifdef GL_LINE_SMOOTH
-//			if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-//				glDisable(GL_LINE_SMOOTH);
-//			#endif
-//			glDisable(GL_BLEND);
+			//sPainter.enableLineSmooth(false);
+			//sPainter.enableBlend(false);
 			return;
 		}
 	}
@@ -896,11 +885,6 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 	sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, alViewportEdgeIntersectCallback, &userData);
 
 	// GZ Remove needless state changes
-//	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
-//	#ifdef GL_LINE_SMOOTH
-//	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-//		glDisable(GL_LINE_SMOOTH);
-//	#endif
-
-//	glDisable(GL_BLEND);
+	//sPainter.enableLineSmooth(false);
+	//sPainter.enableBlend(false);
 }

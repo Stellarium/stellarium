@@ -138,6 +138,9 @@ void Scenery3dMgr::draw(StelCore* core)
 		painter.drawText(83, 120, currentMessage);
 	}
 
+	// Scenery3D has its own heavy drawing code and may have switched OpenGL state.
+	// It is easiest to just restore what it was before.
+	StelPainter::restoreCachedOpenGLstate();
 }
 
 void Scenery3dMgr::init()
