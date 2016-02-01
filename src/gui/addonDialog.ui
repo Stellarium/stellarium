@@ -381,7 +381,7 @@
       <item row="1" column="0" colspan="3">
        <layout class="QVBoxLayout" name="settingsLayout">
         <item>
-         <widget class="QGroupBox" name="settingsGroup">
+         <widget class="QGroupBox" name="autoUpdate">
           <property name="title">
            <string>Automatically check for updates</string>
           </property>
@@ -389,29 +389,6 @@
            <bool>true</bool>
           </property>
           <layout class="QGridLayout" name="gridLayout_3">
-           <item row="0" column="2">
-            <widget class="QLabel" name="label_5">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>at</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QComboBox" name="updateFrequency">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-            </widget>
-           </item>
            <item row="0" column="0">
             <widget class="QLabel" name="label_6">
              <property name="sizePolicy">
@@ -425,16 +402,13 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="3">
-            <widget class="QDateTimeEdit" name="updateTime">
+           <item row="0" column="1">
+            <widget class="QComboBox" name="updateFrequency">
              <property name="sizePolicy">
               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
-             </property>
-             <property name="displayFormat">
-              <string>HH:00</string>
              </property>
             </widget>
            </item>
