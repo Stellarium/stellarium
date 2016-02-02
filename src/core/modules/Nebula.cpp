@@ -449,7 +449,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 	// GZ This state should have been switched on already.
 	// For some reason, we must override and re-activate blending here.
 	// TODO: Find out why this is required!
-	sPainter.enableBlend(true, true, __FILE__, __LINE__);
+	sPainter.enableBlend(true, false, __FILE__, __LINE__);
 	sPainter.setBlendFunc(GL_ONE, GL_ONE);
 	float lum = 1.f;//qMin(1,4.f/getOnScreenSize(core))*0.8;
 

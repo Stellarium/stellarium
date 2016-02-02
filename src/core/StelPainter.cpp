@@ -71,7 +71,6 @@ int StelPainter::blendMode[4]; // srcRGB, dstRGB, srcAlpha, dstAlpha or src, dst
 // This is unused. While elegant in concept, glGet... is slow, so avoid that except for debugging.
 //StelPainter::GLState::GLState()
 //{
-
 //	blend = glIsEnabled(GL_BLEND);
 //	glGetIntegerv(GL_BLEND_SRC_RGB, &blendSrcRGB);
 //	glGetIntegerv(GL_BLEND_DST_RGB, &blendDstRGB);
@@ -350,8 +349,6 @@ void StelPainter::computeFanDisk(float radius, int innerFanSlices, int level, QV
 			vertexArr << x << y << 0;
 		}
 	}
-
-
 }
 
 static void sSphereMapTexCoordFast(float rho_div_fov, const float costheta, const float sintheta, QVector<float>& out)
@@ -592,11 +589,20 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		// Often blend state will be garbled and must be restored after calling drawText().
 		// Given that this function may come in a loop, its better to call it after that loop.
 		// Or, trying to force restoration of blend, linesmooth, etc. This causes 5 state changes.
-		//restoreCachedOpenGLstate();
+		// restoreCachedOpenGLstate();
 		// Still not enough. Better not call this here, but hand-track that stuff.
 		// We must do that here. TODO: Do whatever is necessary to fix drawText...
-		enableBlend(blendingEnabled, true);
+		//enableBlend(blendingEnabled, true);
+
 	}
+	// QPainter scope is finished.
+	// It seems we only must restore 3 states:
+	enableTexture2d(texture2dEnabled, true, __FILE__, __LINE__);
+	//enableFaceCulling(faceCullingEnabled, false, __FILE__, __LINE__);
+	//enableDepthTest(depthTestEnabled, false, __FILE__, __LINE__);
+	//enableLineSmooth(lineSmoothEnabled, false, __FILE__, __LINE__);
+	enableBlend(blendingEnabled, true, __FILE__, __LINE__);
+	setBlendFunc(blendMode[0], blendMode[1], blendMode[2], blendMode[3], separateBlendingEnabled, true);
 }
 
 // Recursive method cutting a small circle in small segments
@@ -1439,7 +1445,7 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 		case SphericalPolygonDrawModeFill:
 		case SphericalPolygonDrawModeTextureFill:
 		case SphericalPolygonDrawModeTextureFillColormodulated:
-			glEnable(GL_CULL_FACE);
+			enableFaceCulling(true, false, __FILE__, __LINE__);
 			// The polygon is already tesselated as triangles
 			if (doSubDivise || prj->intersectViewportDiscontinuity(poly->getBoundingCap()))
 				// flag for color-modulated textured mode (e.g. for Milky Way/extincted)
@@ -1447,7 +1453,7 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 			else
 				drawStelVertexArray(poly->getFillVertexArray(), false);
 
-			glDisable(GL_CULL_FACE);
+			//enableFaceCulling(false, false, __FILE__, __LINE__); // REQUIRED?
 			break;
 		default:
 			Q_ASSERT(0);
@@ -1954,12 +1960,12 @@ void StelPainter::enableBlend(const bool b, const bool force, QString filename, 
 #endif
 }
 
-void StelPainter::setBlendFunc(const int src, const int dst, const int srcAlpha, const int dstAlpha, const bool separate)
+void StelPainter::setBlendFunc(const int src, const int dst, const int srcAlpha, const int dstAlpha, const bool separate, const bool force)
 {
 	// If any previous state did not match, set state. Else avoid it!
 	if (separate)
 	{
-		if  ( !separateBlendingEnabled || (src!=blendMode[0]) || (dst!=blendMode[1]) || (srcAlpha!=blendMode[2]) || (dstAlpha!=blendMode[3]) )
+		if  ( !separateBlendingEnabled || force || (src!=blendMode[0]) || (dst!=blendMode[1]) || (srcAlpha!=blendMode[2]) || (dstAlpha!=blendMode[3]) )
 		{
 			separateBlendingEnabled=true;
 			glBlendFuncSeparate(src, dst, srcAlpha, dstAlpha);
@@ -1978,7 +1984,7 @@ void StelPainter::setBlendFunc(const int src, const int dst, const int srcAlpha,
 	}
 	else
 	{
-		if  ( separateBlendingEnabled || (src!=blendMode[0]) || (dst!=blendMode[1]) )
+		if  ( separateBlendingEnabled || force || (src!=blendMode[0]) || (dst!=blendMode[1]) )
 		{
 			separateBlendingEnabled=false;
 			glBlendFunc(src, dst);
@@ -1995,13 +2001,16 @@ void StelPainter::setBlendFunc(const int src, const int dst, const int srcAlpha,
 	}
 }
 
+// AVOID USING THIS! Better just take the lines as shown here, wharn you need them.
 void StelPainter::restoreCachedOpenGLstate()
 {
-	enableTexture2d(texture2dEnabled, true);
-	enableFaceCulling(faceCullingEnabled, true);
-	enableDepthTest(depthTestEnabled, true);
-	enableLineSmooth(lineSmoothEnabled, true);
-	enableBlend(blendingEnabled, true);
+	// It is a bit unclear which states are broken by drawText's QPainter. Only set 2nd argument to true if there are log messages.
+	enableTexture2d(texture2dEnabled, true, __FILE__, __LINE__); // req. by QPainter action.
+	enableFaceCulling(faceCullingEnabled, true, __FILE__, __LINE__);
+	enableDepthTest(depthTestEnabled, true, __FILE__, __LINE__);
+	enableLineSmooth(lineSmoothEnabled, true, __FILE__, __LINE__);
+	enableBlend(blendingEnabled, true, __FILE__, __LINE__); // req. by QPainter action.
+	setBlendFunc(blendMode[0], blendMode[1], blendMode[2], blendMode[3], separateBlendingEnabled, true); // req. by QPainter action.
 }
 
 void StelPainter::initGLShaders()
@@ -2329,7 +2338,7 @@ StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& a
 #ifndef NDEBUG
 void StelPainter::stateChangeDiagnosticsLog()
 {
-	qDebug() << "StelPainter has cached a few OpenGL state changes:" ;
+	qDebug() << "StelPainter has cached a few OpenGL state change types:" ;
 	qDebug() << " Switches of GL_TEXTURE_2D: " << stateChangeCounters.texture2dEnabled.first   << "Avoided:" << stateChangeCounters.texture2dEnabled.second;
 	qDebug() << " Switches of GL_CULL_FACE:  " << stateChangeCounters.faceCullingEnabled.first << "Avoided:" << stateChangeCounters.faceCullingEnabled.second;
 	qDebug() << " Switches of GL_DEPTH_TEST: " << stateChangeCounters.depthTestEnabled.first   << "Avoided:" << stateChangeCounters.depthTestEnabled.second;

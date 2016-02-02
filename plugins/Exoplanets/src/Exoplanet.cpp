@@ -492,8 +492,8 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+1.f)<mlimit && smgr->getFlagLabels())
 		{
 			painter->drawText(XYZ, getNameI18n(), 0, shift, shift, false);
-			// drawText garbles blend.
-			painter->enableBlend(true, true, __FILE__, __LINE__);
+			// drawText garbled blend.
+			//painter->enableBlend(true, true, __FILE__, __LINE__);
 		}
 	}
 }

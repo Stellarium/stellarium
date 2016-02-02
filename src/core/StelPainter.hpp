@@ -290,7 +290,7 @@ public:
 	//! but only if required.
 	//! Using this consistently avoids needless OpenGL state changes.
 	//! There is no need currently for a get operator here.
-	static void setBlendFunc(const int src, const int dst, const int srcAlpha=0, const int dstAlpha=0, const bool separate=false);
+	static void setBlendFunc(const int src, const int dst, const int srcAlpha=0, const int dstAlpha=0, const bool separate=false, const bool force=false);
 
 	//! Some draw commands misbehave. StelPainter::drawText uses a QPainter which modifies the OpenGL state in an unclear way
 	//! which breaks the assumptions that we can cache the state in all cases.

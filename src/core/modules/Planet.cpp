@@ -1702,10 +1702,10 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 			return;
 		}
 	}
-	painter->enableTexture2d(true, true, __FILE__, __LINE__); // WE MUST SET THIS FORCEFULLY
+	painter->enableTexture2d(true, false, __FILE__, __LINE__); // WE MUST SET THIS FORCEFULLY
 	// TODO: It is unclear why blending state is confused at this point. We must set here explicitly.
-	painter->enableBlend(false, true, __FILE__, __LINE__);
-	painter->enableFaceCulling(true);
+	painter->enableBlend(false, false, __FILE__, __LINE__);
+	painter->enableFaceCulling(true, false, __FILE__, __LINE__);
 
 	// Draw the spheroid itself
 	// Adapt the number of facets according with the size of the sphere for optimization

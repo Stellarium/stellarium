@@ -185,7 +185,7 @@ void NavStars::draw(StelCore* core)
 			if (!markerTexture.isNull())
 			{
 				painter.enableBlend(true, false, __FILE__, __LINE__);
-				painter.enableTexture2d(true);
+				painter.enableTexture2d(true, false, __FILE__, __LINE__);
 				painter.setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 				painter.setColor(markerColor[0],
 						markerColor[1],
@@ -200,8 +200,8 @@ void NavStars::draw(StelCore* core)
 			if (i > 0) // Not Polaris
 				label = QString("%1 (%2)").arg(label).arg(i);
 			painter.drawText(pos[0], pos[1], label, 0, 10.f, 10.f, false);
-			// drawText garbles blend mode... force back.
-			painter.enableBlend(true, true, __FILE__, __LINE__);
+			// drawText garbled blend mode... force back.
+			//painter.enableBlend(true, true, __FILE__, __LINE__);
 
 		}
 	}

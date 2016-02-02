@@ -731,7 +731,7 @@ void alViewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& direct
 	d->sPainter->drawText(screenPos[0], screenPos[1], text, angleDeg, xshift, 3);
 	//d->sPainter->setColor(tmpColor[0], tmpColor[1], tmpColor[2], tmpColor[3]); // RESTORE
 	d->sPainter->enableTexture2d(false, false, __FILE__, __LINE__);
-	d->sPainter->enableBlend(true, true, __FILE__, __LINE__);
+	d->sPainter->enableBlend(true, false, __FILE__, __LINE__);
 	d->sPainter->setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
@@ -858,16 +858,8 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 			sPainter.drawSmallCircleArc(pt1, pt2, rotCenter, alViewportEdgeIntersectCallback, &userData);
 			sPainter.drawSmallCircleArc(pt2, pt3, rotCenter, alViewportEdgeIntersectCallback, &userData);
 			sPainter.drawSmallCircleArc(pt3, pt1, rotCenter, alViewportEdgeIntersectCallback, &userData);
-			//sPainter.enableLineSmooth(false);
-			//sPainter.enableBlend(false);
-			return;
 		}
-		else
-		{
-			//sPainter.enableLineSmooth(false);
-			//sPainter.enableBlend(false);
-			return;
-		}
+		return;
 	}
 	// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
 	Vec3d middlePoint = p1-rotCenter+p2-rotCenter;
@@ -880,11 +872,6 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 		middlePoint*=-1.;
 		middlePoint+=rotCenter;
 	}
-
 	sPainter.drawSmallCircleArc(p1, middlePoint, rotCenter,alViewportEdgeIntersectCallback, &userData);
 	sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, alViewportEdgeIntersectCallback, &userData);
-
-	// GZ Remove needless state changes
-	//sPainter.enableLineSmooth(false);
-	//sPainter.enableBlend(false);
 }

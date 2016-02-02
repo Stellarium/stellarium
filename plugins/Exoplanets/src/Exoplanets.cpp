@@ -230,8 +230,6 @@ void Exoplanets::draw(StelCore* core)
 		if (eps && eps->initialized)
 		{
 			eps->draw(core, &painter);
-			// drawText ruined blend. restore.
-			//painter.enableBlend(true, true, __FILE__, __LINE__);
 		}
 	}
 
@@ -256,7 +254,7 @@ void Exoplanets::drawPointer(StelCore* core, StelPainter& painter)
 		const Vec3f& c(obj->getInfoColor());
 		painter.setColor(c[0],c[1],c[2]);
 		texPointer->bind();
-		painter.enableTexture2d(true);
+		painter.enableTexture2d(true, false, __FILE__, __LINE__);
 		painter.enableBlend(true, false, __FILE__, __LINE__);
 		painter.setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);

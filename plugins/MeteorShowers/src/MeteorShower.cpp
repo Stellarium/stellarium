@@ -366,8 +366,8 @@ void MeteorShower::drawRadiant(StelCore *core)
 			if ((mag+1.f)<mlimit)
 			{
 				painter.drawText(XY[0]+shift, XY[1]+shift, getNameI18n(), 0, 0, 0, false);
-				// drawText garbles blend state. restore, forced :-(
-				painter.enableBlend(true, true, __FILE__, __LINE__);
+				// drawText garbled blend state. restore, forced :-(
+				//painter.enableBlend(true, true, __FILE__, __LINE__);
 			}
 
 		}

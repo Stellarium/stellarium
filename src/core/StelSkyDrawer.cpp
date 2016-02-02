@@ -375,7 +375,7 @@ void StelSkyDrawer::preDrawPointSource(StelPainter* p)
 	// bright star will cause tiny black squares on the bright star, e.g. see Procyon.
 	// For some reason, at this point blend state may be confused. Force blending on.
 	// TODO: Explain why we must force texturing here.
-	p->enableBlend(true, true, __FILE__, __LINE__);
+	p->enableBlend(true, false, __FILE__, __LINE__);
 	p->setBlendFunc(GL_ONE, GL_ONE);
 	p->enableTexture2d(true, true, __FILE__, __LINE__);
 }
@@ -389,7 +389,7 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 		return;
 	texHalo->bind();
 	// GZ We did all that in preDrawPointSource. Why do we NEED it here again, and even forced?
-	sPainter->enableBlend(true, true, __FILE__, __LINE__);
+	sPainter->enableBlend(true, false, __FILE__, __LINE__);
 	sPainter->setBlendFunc(GL_ONE, GL_ONE);
 	sPainter->enableTexture2d(true, false, __FILE__, __LINE__);
 
@@ -442,10 +442,10 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 			cmag = 1.f;
 
 		texBigHalo->bind();
-		// GZ We did all that in preDrawPointSource. WHY IS IT REQUIRED AGAIN???
+		// GZ We did all that in preDrawPointSource. WHY IS IT REQUIRED AGAIN??? HAA, no more, StelPainter::drawText was guilty for all troubles.
 		sPainter->enableTexture2d(true, false, __FILE__, __LINE__);
 		sPainter->setBlendFunc(GL_ONE, GL_ONE);
-		sPainter->enableBlend(true, true, __FILE__, __LINE__);
+		sPainter->enableBlend(true, false, __FILE__, __LINE__);
 		sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
 		// TODO According to AMD GL profiler, it would radically increase performance to also buffer this sprite drawing! 64% of draws may be here!
 		sPainter->drawSprite2dModeNoDeviceScale(win[0], win[1], rmag);

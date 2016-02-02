@@ -582,8 +582,8 @@ void ConstellationMgr::drawArt(StelPainter& sPainter) const
 {
 	sPainter.setBlendFunc(GL_ONE, GL_ONE);
 	// TODO: Find out why texture and blending state may be confused at this point. We must override and set in any case.
-	sPainter.enableTexture2d(true, true, __FILE__, __LINE__); //
-	sPainter.enableBlend(true, true, __FILE__, __LINE__);
+	sPainter.enableTexture2d(true, false, __FILE__, __LINE__); //
+	sPainter.enableBlend(true, false, __FILE__, __LINE__);
 	sPainter.enableFaceCulling(true, false, __FILE__, __LINE__);
 
 	vector < Constellation * >::const_iterator iter;
@@ -592,8 +592,6 @@ void ConstellationMgr::drawArt(StelPainter& sPainter) const
 	{
 		(*iter)->drawArtOptim(sPainter, *region);
 	}
-
-	//glDisable(GL_CULL_FACE); // GZ Not meaningful. Next module will set what it needs.
 }
 
 // Draw constellations lines

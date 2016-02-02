@@ -308,7 +308,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	d->sPainter->drawText(screenPos[0], screenPos[1], text, angleDeg, xshift, 3);
 	d->sPainter->setColor(tmpColor[0], tmpColor[1], tmpColor[2], tmpColor[3]);
 	d->sPainter->enableTexture2d(false, false, __FILE__, __LINE__);
-	d->sPainter->enableBlend(true, true, __FILE__, __LINE__);
+	d->sPainter->enableBlend(true, false, __FILE__, __LINE__);
 	d->sPainter->setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
