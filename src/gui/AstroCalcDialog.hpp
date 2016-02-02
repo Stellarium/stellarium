@@ -2,6 +2,7 @@
  * Stellarium
  * 
  * Copyright (C) 2015 Alexander Wolf
+ * Copyright (C) 2016 Nick Fedoseev (visualization of ephemeris)
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
