@@ -105,6 +105,8 @@ public:
 
 	virtual bool getVisible() const;
 
+	virtual bool getAstroCalcVisible();
+
 	virtual bool isCurrentlyUsed() const;
 	
 	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags);

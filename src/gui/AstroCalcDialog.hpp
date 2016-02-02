@@ -24,6 +24,7 @@
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 #include <QMap>
+#include <QVector>
 
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
@@ -72,6 +73,9 @@ public:
 	AstroCalcDialog(QObject* parent);
 	virtual ~AstroCalcDialog();
 
+	static QVector<Vec3d> EphemerisListJ2000;
+	static int DisplayedPositionIndex;
+
 public slots:
         void retranslate();
 
@@ -84,6 +88,7 @@ private slots:
 	//! Search planetary positions and fill the list.
 	void currentPlanetaryPositions();
 	void selectCurrentPlanetaryPosition(const QModelIndex &modelIndex);
+	void onChangedEphemerisPosition(const QModelIndex &modelIndex);
 
 	//! Calculate ephemeris for selected celestial body and fill the list.
 	void generateEphemeris();

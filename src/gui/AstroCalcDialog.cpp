@@ -33,6 +33,9 @@
 
 #include <QTimer>
 
+QVector<Vec3d> AstroCalcDialog::EphemerisListJ2000;
+int AstroCalcDialog::DisplayedPositionIndex = -1;
+
 AstroCalcDialog::AstroCalcDialog(QObject *parent)
 	: StelDialog(parent)
 {
@@ -102,6 +105,7 @@ void AstroCalcDialog::createDialogContent()
 
 	connect(ui->ephemerisPushButton, SIGNAL(clicked()), this, SLOT(generateEphemeris()));
 	connect(ui->ephemerisTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentEphemeride(QModelIndex)));
+	connect(ui->ephemerisTreeWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(onChangedEphemerisPosition(QModelIndex)));
 
 	connect(ui->phenomenaPushButton, SIGNAL(clicked()), this, SLOT(calculatePhenomena()));
 	connect(ui->phenomenaTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentPhenomen(QModelIndex)));
@@ -176,6 +180,11 @@ void AstroCalcDialog::currentPlanetaryPositions()
 
 	// sort-by-name
 	ui->planetaryPositionsTreeWidget->sortItems(ColumnName, Qt::AscendingOrder);
+}
+
+void AstroCalcDialog::onChangedEphemerisPosition(const QModelIndex &modelIndex)
+{
+	DisplayedPositionIndex = modelIndex.row();
 }
 
 void AstroCalcDialog::selectCurrentPlanetaryPosition(const QModelIndex &modelIndex)
@@ -294,12 +303,16 @@ void AstroCalcDialog::generateEphemeris()
 		double firstJD = StelUtils::qDateTimeToJd(ui->dateFromDateTimeEdit->dateTime());
 		firstJD = firstJD - StelUtils::getGMTShiftFromQT(firstJD)/24;
 		int elements = (int)((StelUtils::qDateTimeToJd(ui->dateToDateTimeEdit->dateTime()) - firstJD)/currentStep);
+		EphemerisListJ2000.clear();
+		EphemerisListJ2000.reserve(elements);
 		for (int i=0; i<elements; i++)
 		{
 			double JD = firstJD + i*currentStep;
 			core->setJD(JD);
-			core->update(0); // force update to get new coordinates
-			StelUtils::rectToSphe(&ra,&dec,obj->getJ2000EquatorialPos(core));
+			core->update(0); // force update to get new coordinates			
+			Vec3d pos = obj->getJ2000EquatorialPos(core);
+			EphemerisListJ2000.append(pos);
+			StelUtils::rectToSphe(&ra,&dec,pos);
 			ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->ephemerisTreeWidget);
 			// local date and time
 			treeItem->setText(EphemerisDate, StelUtils::jdToQDateTime(JD + StelUtils::getGMTShiftFromQT(JD)/24).toString("yyyy-MM-dd hh:mm:ss"));
