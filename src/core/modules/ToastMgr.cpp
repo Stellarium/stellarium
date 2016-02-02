@@ -21,6 +21,7 @@
 
 #include "ToastMgr.hpp"
 #include "StelToast.hpp"
+#include "StelFader.hpp"
 #include "StelPainter.hpp"
 #include "StelCore.hpp"
 #include "StelApp.hpp"
@@ -32,6 +33,8 @@
 
 ToastMgr::ToastMgr()
 {	
+	setObjectName("ToastMgr");
+	fader = new LinearFader();
 }
 
 ToastMgr::~ToastMgr()
@@ -41,6 +44,9 @@ ToastMgr::~ToastMgr()
 		delete survey;
 		survey = NULL;
 	}
+
+	delete fader;
+	fader = NULL;
 }
 
 void ToastMgr::init()
@@ -61,24 +67,29 @@ void ToastMgr::init()
 
 void ToastMgr::draw(StelCore* core)
 {
-	if (!flagSurveyDisplayed)
+	if (!getFlagSurveyShow())
 		return;
 
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 	survey->draw(&sPainter);
 }
 
+void ToastMgr::update(double deltaTime)
+{
+	fader->update((int)(deltaTime*1000));
+}
+
 void ToastMgr::setFlagSurveyShow(const bool displayed)
 {
-	if (flagSurveyDisplayed != displayed)
+	if (*fader != displayed)
 	{
-		flagSurveyDisplayed = displayed;
+		*fader = displayed;
 		GETSTELMODULE(StelSkyLayerMgr)->setFlagShow(!displayed);
 		emit surveyDisplayedChanged(displayed);
 	}
 }
 
-bool ToastMgr::getFlagSurveyShow(void) const
+bool ToastMgr::getFlagSurveyShow() const
 {
-	return flagSurveyDisplayed;
+	return *fader;
 }
