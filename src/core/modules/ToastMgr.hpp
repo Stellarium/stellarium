@@ -33,12 +33,13 @@ public:
 	ToastMgr();
 	virtual ~ToastMgr();
 	virtual void init();
-	virtual void update(double) {;}
+	virtual void update(double deltaTime);
 	virtual void draw(StelCore* core);
-	virtual double getCallOrder(StelModuleActionName) const {return 2.0;}
+	//! Used to determine the order in which the various modules are drawn. MilkyWay=1, we use 7.
+	virtual double getCallOrder(StelModuleActionName actionName) const {Q_UNUSED(actionName); return 7.;}
 
 public slots:
-	void setFlagSurveyShow(const bool displayed);
+	void setFlagSurveyShow(bool displayed);
 	bool getFlagSurveyShow(void) const;
 
 signals:
@@ -46,8 +47,7 @@ signals:
 
 private:
 	class ToastSurvey* survey;
-
-	bool flagSurveyDisplayed;
+	class LinearFader* fader;
 };
 
 #endif // _TOASTMGR_HPP_

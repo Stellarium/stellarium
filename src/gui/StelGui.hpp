@@ -91,6 +91,9 @@ public:
 	//! Get whether the button toggling nebulae background is visible
 	bool getFlagShowNebulaBackgroundButton() const;
 
+	//! Get whether the button toggling TOAST survey is visible
+	bool getFlagShowToastSurveyButton() const;
+
 	//! returns true if the gui has completed init process.
 	bool initComplete(void) const;
 
@@ -118,6 +121,9 @@ public slots:
 	
 	//! Define whether the button toggling nebulae background should be visible
 	void setFlagShowNebulaBackgroundButton(bool b);
+
+	//! Define whether the button toggling TOAST survey should be visible
+	void setFlagShowToastSurveyButton(bool b);
 
 	void setFlagShowDecimalDegrees(bool b);
 
@@ -198,6 +204,9 @@ private:
 
 	bool flagShowNebulaBackgroundButton;
 	StelButton* btShowNebulaeBackground;
+
+	bool flagShowToastSurveyButton;
+	StelButton* btShowToastSurvey;
 
 	bool initDone;
 
