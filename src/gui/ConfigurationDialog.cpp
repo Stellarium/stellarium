@@ -267,6 +267,9 @@ void ConfigurationDialog::createDialogContent()
 	ui->showNebulaBgButtonCheckbox->setChecked(gui->getFlagShowNebulaBackgroundButton());
 	connect(ui->showNebulaBgButtonCheckbox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowNebulaBackgroundButton(bool)));
 
+	ui->showToastSurveyButtonCheckbox->setChecked(gui->getFlagShowToastSurveyButton());
+	connect(ui->showToastSurveyButtonCheckbox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowToastSurveyButton(bool)));
+
 	ui->decimalDegreeCheckBox->setChecked(StelApp::getInstance().getFlagShowDecimalDegrees());
 	connect(ui->decimalDegreeCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowDecimalDegrees(bool)));
 	ui->azimuthFromSouthcheckBox->setChecked(StelApp::getInstance().getFlagOldAzimuthUsage());
@@ -731,6 +734,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("gui/auto_hide_horizontal_toolbar", gui->getAutoHideHorizontalButtonBar());
 	conf->setValue("gui/auto_hide_vertical_toolbar", gui->getAutoHideVerticalButtonBar());
 	conf->setValue("gui/flag_show_nebulae_background_button", gui->getFlagShowNebulaBackgroundButton());
+	conf->setValue("gui/flag_show_toast_survey_button", gui->getFlagShowToastSurveyButton());
 	conf->setValue("gui/flag_show_decimal_degrees", StelApp::getInstance().getFlagShowDecimalDegrees());
 	conf->setValue("gui/flag_use_azimuth_from_south", StelApp::getInstance().getFlagOldAzimuthUsage());
 

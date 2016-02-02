@@ -42,6 +42,7 @@
 #include "StelObjectType.hpp"
 #include "StelObject.hpp"
 #include "SolarSystem.hpp"
+#include "ToastMgr.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelSkyDrawer.hpp"
@@ -100,6 +101,8 @@ StelGui::StelGui()
 	, flipHoriz(NULL)
 	, flagShowNebulaBackgroundButton(false)
 	, btShowNebulaeBackground(NULL)
+	, flagShowToastSurveyButton(false)
+	, btShowToastSurvey(NULL)
 	, initDone(false)
 #ifndef DISABLE_SCRIPTING
 	  // We use a QStringList to save the user-configured buttons while script is running, and restore them later.
@@ -311,11 +314,6 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Nebulas");
 	skyGui->buttonBar->addButton(b, "040-nebulaeGroup");
 
-	pxmapOn = QPixmap(":/graphicGui/btToastSurvey-on.png");
-	pxmapOff = QPixmap(":/graphicGui/btToastSurvey-off.png");
-	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Toast_Survey");
-	skyGui->buttonBar->addButton(b, "040-nebulaeGroup");
-
 	pxmapOn = QPixmap(":/graphicGui/btPlanets-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btPlanets-off.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Planets_Labels");
@@ -371,6 +369,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	// add the flip buttons if requested in the config
 	setFlagShowFlipButtons(conf->value("gui/flag_show_flip_buttons", false).toBool());
 	setFlagShowNebulaBackgroundButton(conf->value("gui/flag_show_nebulae_background_button", false).toBool());
+	setFlagShowToastSurveyButton(conf->value("gui/flag_show_toast_survey_button", false).toBool());
 
 	///////////////////////////////////////////////////////////////////////
 	// Create the main base widget
@@ -514,6 +513,10 @@ void StelGui::update()
 	flag = GETSTELMODULE(StelSkyLayerMgr)->getFlagShow();
 	if (getAction("actionShow_DSS")->isChecked() != flag)
 		getAction("actionShow_DSS")->setChecked(flag);
+
+	flag = GETSTELMODULE(ToastMgr)->getFlagSurveyShow();
+	if (getAction("actionShow_Toast_Survey")->isChecked() != flag)
+		getAction("actionShow_Toast_Survey")->setChecked(flag);
 
 	flag = StelApp::getInstance().getVisionModeNight();
 	if (getAction("actionShow_Night_Mode")->isChecked() != flag)
@@ -666,6 +669,24 @@ void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 	flagShowNebulaBackgroundButton = b;
 }
 
+// Define whether the button toggling TOAST survey images should be visible
+void StelGui::setFlagShowToastSurveyButton(bool b)
+{
+	if (b==true) {
+		if (btShowToastSurvey==NULL) {
+			// Create the nebulae background button
+			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
+			QPixmap pxmapOn(":/graphicGui/btToastSurvey-on.png");
+			QPixmap pxmapOff(":/graphicGui/btToastSurvey-off.png");
+			btShowToastSurvey = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Toast_Survey");
+		}
+		getButtonBar()->addButton(btShowToastSurvey, "040-nebulaeGroup");
+	} else {
+		getButtonBar()->hideButton("actionShow_Toast_Survey");
+	}
+	flagShowToastSurveyButton = b;
+}
+
 void StelGui::setFlagShowDecimalDegrees(bool b)
 {
 	StelApp::getInstance().setFlagShowDecimalDegrees(b);
@@ -752,6 +773,11 @@ bool StelGui::getFlagShowFlipButtons() const
 bool StelGui::getFlagShowNebulaBackgroundButton() const
 {
 	return flagShowNebulaBackgroundButton;
+}
+
+bool StelGui::getFlagShowToastSurveyButton() const
+{
+	return flagShowToastSurveyButton;
 }
 
 bool StelGui::initComplete(void) const
