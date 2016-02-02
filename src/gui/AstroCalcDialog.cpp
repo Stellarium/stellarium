@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2015 Alexander Wolf
+ * Copyright (C) 2016 Nick Fedoseev (visualization of ephemeris)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -286,10 +287,19 @@ void AstroCalcDialog::generateEphemeris()
 			currentStep = StelCore::JD_DAY;
 			break;
 		case 4:
-			currentStep = 10 * StelCore::JD_DAY;
+			currentStep = 5 * StelCore::JD_DAY;
 			break;
 		case 5:
+			currentStep = 10 * StelCore::JD_DAY;
+			break;
+		case 6:
+			currentStep = 15 * StelCore::JD_DAY;
+			break;
+		case 7:
 			currentStep = 30 * StelCore::JD_DAY;
+			break;
+		case 8:
+			currentStep = 60 * StelCore::JD_DAY;
 			break;
 		default:
 			currentStep = StelCore::JD_DAY;
@@ -379,8 +389,11 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 	steps->addItem(q_("10 minutes"), "1");
 	steps->addItem(q_("1 hour"), "2");
 	steps->addItem(q_("1 day"), "3");
-	steps->addItem(q_("10 days"), "4");
-	steps->addItem(q_("30 days"), "5");
+	steps->addItem(q_("5 days"), "4");
+	steps->addItem(q_("10 days"), "5");
+	steps->addItem(q_("15 days"), "6");
+	steps->addItem(q_("30 days"), "7");
+	steps->addItem(q_("60 days"), "8");
 
 	index = steps->findData(selectedStepId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
