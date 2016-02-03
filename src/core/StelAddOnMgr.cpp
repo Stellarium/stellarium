@@ -42,9 +42,8 @@ StelAddOnMgr::StelAddOnMgr()
 	, m_sThumbnailDir(m_sAddOnDir % "thumbnail/")
 	, m_sInstalledAddonsJsonPath(m_sAddOnDir % "installed_addons.json")
 	, m_progressBar(NULL)
-	, m_iLastUpdate(1388966410)
+	, m_lastUpdate(QDateTime::fromString("2016-01-01", "yyyy-MM-dd"))
 	, m_iUpdateFrequencyDays(7)
-	, m_iUpdateFrequencyHour(12)
 {
 	QStringList v = StelUtils::getApplicationVersion().split('.');
 	m_sAddonJsonFilename = QString("addons_%1.%2.json").arg(v.at(0)).arg(v.at(1));
@@ -67,9 +66,8 @@ StelAddOnMgr::StelAddOnMgr()
 	if (m_pConfig->childGroups().contains("AddOn"))
 	{
 		m_pConfig->beginGroup("AddOn");
-		m_iLastUpdate = m_pConfig->value("last_update", m_iLastUpdate).toLongLong();
+		m_lastUpdate = m_pConfig->value("last_update", m_lastUpdate).toDateTime();
 		m_iUpdateFrequencyDays = m_pConfig->value("upload_frequency_days", m_iUpdateFrequencyDays).toInt();
-		m_iUpdateFrequencyHour = m_pConfig->value("upload_frequency_hour", m_iUpdateFrequencyHour).toInt();
 		m_sUrlUpdate = m_pConfig->value("url", m_sUrlUpdate).toString();
 		m_pConfig->endGroup();
 	}
@@ -79,9 +77,8 @@ StelAddOnMgr::StelAddOnMgr()
 		m_pConfig->beginGroup("AddOn");
 		// delete all existing settings...
 		m_pConfig->remove("");
-		m_pConfig->setValue("last_update", m_iLastUpdate);
+		m_pConfig->setValue("last_update", m_lastUpdate);
 		m_pConfig->setValue("upload_frequency_days", m_iUpdateFrequencyDays);
-		m_pConfig->setValue("upload_frequency_hour", m_iUpdateFrequencyHour);
 		m_pConfig->setValue("url", m_sUrlUpdate);
 		m_pConfig->endGroup();
 	}
@@ -196,7 +193,7 @@ void StelAddOnMgr::restoreDefaultAddonJsonFile()
 		jsonFile.setPermissions(jsonFile.permissions() | QFile::WriteOwner);
 		// cleaning last_update var
 		m_pConfig->remove("AddOn/last_update");
-		m_iLastUpdate = 1388966410;
+		m_lastUpdate = QDateTime::fromString("2016-01-01", "yyyy-MM-dd");
 	}
 	else
 	{
@@ -205,27 +202,21 @@ void StelAddOnMgr::restoreDefaultAddonJsonFile()
 	}
 }
 
-void StelAddOnMgr::setLastUpdate(qint64 time) {
-	m_iLastUpdate = time;
+void StelAddOnMgr::setLastUpdate(QDateTime lastUpdate)
+{
+	m_lastUpdate = lastUpdate;
 	// update config file
 	m_pConfig->beginGroup("AddOn");
-	m_pConfig->setValue("last_update", m_iLastUpdate);
+	m_pConfig->setValue("last_update", m_lastUpdate);
 	m_pConfig->endGroup();
 }
 
-void StelAddOnMgr::setUpdateFrequencyDays(int days) {
+void StelAddOnMgr::setUpdateFrequencyDays(int days)
+{
 	m_iUpdateFrequencyDays = days;
 	// update config file
 	m_pConfig->beginGroup("AddOn");
 	m_pConfig->setValue("upload_frequency_days", m_iUpdateFrequencyDays);
-	m_pConfig->endGroup();
-}
-
-void StelAddOnMgr::setUpdateFrequencyHour(int hour) {
-	m_iUpdateFrequencyHour = hour;
-	// update config file
-	m_pConfig->beginGroup("AddOn");
-	m_pConfig->setValue("upload_frequency_hour", m_iUpdateFrequencyHour);
 	m_pConfig->endGroup();
 }
 

@@ -190,7 +190,7 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 
 	// settings tab?
 	bool settings = ui->stackedWidget->currentIndex() == ui->stackListWidget->count() - 1;
-	ui->settingsGroup->setVisible(settings);
+	ui->autoUpdate->setVisible(settings);
 	ui->addOnDialogButtons->setVisible(!settings);
 	ui->browser->setVisible(!settings);
 	ui->stackedWidget->setVisible(!settings);
@@ -236,8 +236,7 @@ void AddOnDialog::downloadFinished()
 			jsonFile.close();
 
 			StelApp::getInstance().getStelAddOnMgr().reloadCatalogues();
-			qint64 currentTime = QDateTime::currentMSecsSinceEpoch() / 1000;
-			StelApp::getInstance().getStelAddOnMgr().setLastUpdate(currentTime);
+			StelApp::getInstance().getStelAddOnMgr().setLastUpdate(QDateTime::currentDateTime());
 			ui->txtLastUpdate->setText(StelApp::getInstance().getStelAddOnMgr().getLastUpdateString());
 			populateTables();
 		}

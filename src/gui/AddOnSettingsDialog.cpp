@@ -61,7 +61,7 @@ void AddOnSettingsDialog::createDialogContent()
 	ui->updateFrequency->addItem(q_("Every three days"), 3);
 	ui->updateFrequency->addItem(q_("Every week"), 7);
 	setCurrentUpdateFrequency(m_pStelAddOnMgr->getUpdateFrequencyDays());
-	ui->updateTime->setTime(QTime(m_pStelAddOnMgr->getUpdateFrequencyHour(), 0));
+	//ui->updateTime->setTime(QTime(m_pStelAddOnMgr->getUpdateFrequencyHour(), 0));
 
 	connect(ui->autoUpdate, SIGNAL(clicked(bool)), this, SLOT(setAutoUpdate(bool)));
 	connect(ui->updateFrequency, SIGNAL(currentIndexChanged(int)), this, SLOT(setUpdateFrequency(int)));
@@ -109,19 +109,19 @@ void AddOnSettingsDialog::setUpdateFrequency(int index)
 
 void AddOnSettingsDialog::setUpdateTime(QTime time)
 {
-	m_pStelAddOnMgr->setUpdateFrequencyHour(time.hour());
+	//m_pStelAddOnMgr->setUpdateFrequencyHour(time.hour());
 }
 
 void AddOnSettingsDialog::updateCatalog()
 {
-	QDateTime lastUpdate = QDateTime::fromTime_t(m_pStelAddOnMgr->getLastUpdate());
-	QDateTime nextUpdate = lastUpdate.addDays(m_pStelAddOnMgr->getUpdateFrequencyDays());
-	nextUpdate.setTime(QTime(m_pStelAddOnMgr->getUpdateFrequencyHour(), 0));
+	//QDateTime lastUpdate = QDateTime::fromTime_t(m_pStelAddOnMgr->getLastUpdate());
+	//QDateTime nextUpdate = lastUpdate.addDays(m_pStelAddOnMgr->getUpdateFrequencyDays());
+	//nextUpdate.setTime(QTime(m_pStelAddOnMgr->getUpdateFrequencyHour(), 0));
 
-	if (QDateTime::currentDateTime() >= nextUpdate)
-	{
-		m_pAddOnDialog->updateCatalog();
-	}
+	//if (QDateTime::currentDateTime() >= nextUpdate)
+	//{
+	//	m_pAddOnDialog->updateCatalog();
+	//}
 }
 
 void AddOnSettingsDialog::setAboutHtml()

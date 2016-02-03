@@ -58,16 +58,10 @@ public:
 	void installAddons(QSet<AddOn*> addons);
 	void removeAddons(QSet<AddOn*> addons);
 	void setUpdateFrequencyDays(int days);
-	void setUpdateFrequencyHour(int hour);
-	void setLastUpdate(qint64 time);
-	QString getLastUpdateString()
-	{
-		return QDateTime::fromMSecsSinceEpoch(m_iLastUpdate*1000)
-				.toString("dd MMM yyyy - hh:mm:ss");
-	}
-	qint64 getLastUpdate() { return m_iLastUpdate; }
+	void setLastUpdate(QDateTime lastUpdate);
+	QString getLastUpdateString() { return m_lastUpdate.toString("dd MMM yyyy - hh:mm:ss"); }
+	QDateTime getLastUpdate() { return m_lastUpdate; }
 	int getUpdateFrequencyDays() { return m_iUpdateFrequencyDays; }
-	int getUpdateFrequencyHour() { return m_iUpdateFrequencyHour; }
 	QString getUrlForUpdates() { return m_sUrlUpdate; }
 	QString getAddonJsonPath() { return m_sAddonJsonPath; }
 
@@ -115,9 +109,8 @@ private:
 	QStringList m_thumbnailQueue;
 
 	class StelProgressController* m_progressBar;
-	qint64 m_iLastUpdate;
+	QDateTime m_lastUpdate;
 	int m_iUpdateFrequencyDays;
-	int m_iUpdateFrequencyHour;
 	QString m_sUrlUpdate;
 
 	void refreshThumbnailQueue();
