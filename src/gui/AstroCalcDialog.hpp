@@ -93,6 +93,7 @@ private slots:
 
 	//! Calculate ephemeris for selected celestial body and fill the list.
 	void generateEphemeris();
+	void cleanupEphemeris();
 	void selectCurrentEphemeride(const QModelIndex &modelIndex);
 
 	//! Calculate phenomena for selected celestial body and fill the list.
