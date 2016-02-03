@@ -105,6 +105,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->planetaryPositionsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentPlanetaryPosition(QModelIndex)));
 
 	connect(ui->ephemerisPushButton, SIGNAL(clicked()), this, SLOT(generateEphemeris()));
+	connect(ui->ephemerisCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupEphemeris()));
 	connect(ui->ephemerisTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentEphemeride(QModelIndex)));
 	connect(ui->ephemerisTreeWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(onChangedEphemerisPosition(QModelIndex)));
 
@@ -155,6 +156,9 @@ void AstroCalcDialog::currentPlanetaryPositions()
 	QList<PlanetP> allPlanets = solarSystem->getAllPlanets();
 
 	initListPlanetaryPositions();
+
+	double JD = StelApp::getInstance().getCore()->getJD();
+	ui->positionsTimeLabel->setText(q_("Positions on %1").arg(StelUtils::jdToQDateTime(JD + StelUtils::getGMTShiftFromQT(JD)/24).toString("yyyy-MM-dd hh:mm:ss")));
 
 	foreach (const PlanetP& planet, allPlanets)
 	{
@@ -345,6 +349,12 @@ void AstroCalcDialog::generateEphemeris()
 
 	// sort-by-date
 	ui->ephemerisTreeWidget->sortItems(EphemerisDate, Qt::AscendingOrder);
+}
+
+void AstroCalcDialog::cleanupEphemeris()
+{
+	EphemerisListJ2000.clear();
+	ui->ephemerisTreeWidget->clear();
 }
 
 void AstroCalcDialog::populateCelestialBodyList()
