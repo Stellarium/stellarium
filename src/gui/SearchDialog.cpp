@@ -45,6 +45,7 @@
 #include <QComboBox>
 #include <QMenu>
 #include <QMetaEnum>
+#include <QClipboard>
 
 #include "SimbadSearcher.hpp"
 
@@ -842,7 +843,18 @@ void SearchDialog::showContextMenu(const QPoint &pt)
 {
 	QMenu *menu = ui->lineEditSearchSkyObject->createStandardContextMenu();
 	menu->addSeparator();
-	menu->addAction(q_("Paste and Search"), this, SLOT(pasteAndGo()));
+	QString clipText;
+	QClipboard *clipboard = QApplication::clipboard();
+	if (clipboard)
+		clipText = clipboard->text();
+	if (clipText.length())
+	{
+		if (clipText.length()>12)
+			clipText = clipText.right(9) + "...";
+		clipText = "\t(" + clipText + ")";
+	}
+
+	menu->addAction(q_("Paste and Search") + clipText, this, SLOT(pasteAndGo()));
 	menu->exec(ui->lineEditSearchSkyObject->mapToGlobal(pt));
 	delete menu;
 }
