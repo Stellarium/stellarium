@@ -712,8 +712,10 @@ void MpcImportWindow::sendQuery()
 	startCountdown();
 	ui->pushButtonAbortQuery->setVisible(true);
 
-	sendQueryToUrl(QUrl("http://stellarium.org/mpc-mpeph"));
+	//sendQueryToUrl(QUrl("http://stellarium.org/mpc-mpeph"));
 	//sendQueryToUrl(QUrl("http://scully.cfa.harvard.edu/cgi-bin/mpeph2.cgi"));
+	// MPC requirements now :(
+	sendQueryToUrl(QUrl("http://www.minorplanetcenter.net/cgi-bin/mpeph2.cgi"));
 }
 
 void MpcImportWindow::sendQueryToUrl(QUrl url)
@@ -755,7 +757,7 @@ void MpcImportWindow::sendQueryToUrl(QUrl url)
 	                  url.query(QUrl::FullyEncoded).length());
 
 	connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(receiveQueryReply(QNetworkReply*)));
-	queryReply = networkManager->post(request, url.query(QUrl::FullyEncoded).toUtf8());
+	queryReply = networkManager->post(request, url.query(QUrl::FullyEncoded).toUtf8());	
 	connect(queryReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateQueryProgress(qint64,qint64)));
 }
 
@@ -827,10 +829,12 @@ void MpcImportWindow::receiveQueryReply(QNetworkReply *reply)
 	}
 	else
 	{
-                ui->labelQueryMessage->setText("Object not found.");
+		ui->labelQueryMessage->setText("Object not found.");
 		ui->labelQueryMessage->setVisible(true);
 		enableInterface(true);
 	}
+
+	readQueryReply(reply);
 
 	reply->deleteLater();
 	queryReply = 0;
