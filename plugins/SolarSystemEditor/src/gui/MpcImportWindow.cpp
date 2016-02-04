@@ -710,8 +710,10 @@ void MpcImportWindow::sendQuery()
 	startCountdown();
 	ui->pushButtonAbortQuery->setVisible(true);
 
-	sendQueryToUrl(QUrl("http://stellarium.org/mpc-mpeph"));
+	//sendQueryToUrl(QUrl("http://stellarium.org/mpc-mpeph"));
 	//sendQueryToUrl(QUrl("http://scully.cfa.harvard.edu/cgi-bin/mpeph2.cgi"));
+	// MPC requirements now :(
+	sendQueryToUrl(QUrl("http://www.minorplanetcenter.net/cgi-bin/mpeph2.cgi"));
 }
 
 void MpcImportWindow::sendQueryToUrl(QUrl url)
