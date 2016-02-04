@@ -54,9 +54,11 @@ void ToastMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	QString dssHost = conf->value("dss/host", "http://dss.astro.altspu.ru").toString();
-	// TODO: change "results" to "survey" before release
-	survey = new ToastSurvey(dssHost+"/results/{level}/{x}_{y}.jpg", 11);
+	// TODO: change settings before release (results->survey; dss.astro.altspu.ru->dss.stellarium.org)
+	QString toastHost = conf->value("astro/toast_survey_host", "http://dss.astro.altspu.ru").toString();	
+	QString toastDir = conf->value("astro/toast_survey_directory", "results").toString();
+	int toastLevel = conf->value("astro/toast_survey_levels", 11).toInt();	
+	survey = new ToastSurvey(toastHost+"/" + toastDir + "/{level}/{x}_{y}.jpg", toastLevel);
 	survey->setParent(this);
 
 	// Hide deep-sky survey by default
