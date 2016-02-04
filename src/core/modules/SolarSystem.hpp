@@ -428,6 +428,7 @@ private:
 
 	//! The selection pointer texture.
 	StelTextureSP texPointer;
+	StelTextureSP texCircle;                    // The symbolic circle texture
 
 	bool flagShow;
 	bool flagPointer;
@@ -437,6 +438,7 @@ private:
 	bool flagIsolatedOrbits;
 
 	class TrailGroup* allTrails;
+	class StelGui* gui;
 	LinearFader trailFader;
 	Vec3f trailColor;
 	Vec3f pointerColor;

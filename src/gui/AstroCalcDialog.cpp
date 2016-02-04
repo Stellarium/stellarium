@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2015 Alexander Wolf
+ * Copyright (C) 2016 Nick Fedoseev (visualization of ephemeris)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,6 +33,9 @@
 #include "ui_astroCalcDialog.h"
 
 #include <QTimer>
+
+QVector<Vec3d> AstroCalcDialog::EphemerisListJ2000;
+int AstroCalcDialog::DisplayedPositionIndex = -1;
 
 AstroCalcDialog::AstroCalcDialog(QObject *parent)
 	: StelDialog(parent)
@@ -101,7 +105,9 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->planetaryPositionsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentPlanetaryPosition(QModelIndex)));
 
 	connect(ui->ephemerisPushButton, SIGNAL(clicked()), this, SLOT(generateEphemeris()));
+	connect(ui->ephemerisCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupEphemeris()));
 	connect(ui->ephemerisTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentEphemeride(QModelIndex)));
+	connect(ui->ephemerisTreeWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(onChangedEphemerisPosition(QModelIndex)));
 
 	connect(ui->phenomenaPushButton, SIGNAL(clicked()), this, SLOT(calculatePhenomena()));
 	connect(ui->phenomenaTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentPhenomen(QModelIndex)));
@@ -151,6 +157,9 @@ void AstroCalcDialog::currentPlanetaryPositions()
 
 	initListPlanetaryPositions();
 
+	double JD = StelApp::getInstance().getCore()->getJD();
+	ui->positionsTimeLabel->setText(q_("Positions on %1").arg(StelUtils::jdToQDateTime(JD + StelUtils::getGMTShiftFromQT(JD)/24).toString("yyyy-MM-dd hh:mm:ss")));
+
 	foreach (const PlanetP& planet, allPlanets)
 	{
 		if (planet->getPlanetType()!=Planet::isUNDEFINED && planet->getEnglishName()!="Sun" && planet->getEnglishName()!=core->getCurrentPlanet()->getEnglishName())
@@ -176,6 +185,11 @@ void AstroCalcDialog::currentPlanetaryPositions()
 
 	// sort-by-name
 	ui->planetaryPositionsTreeWidget->sortItems(ColumnName, Qt::AscendingOrder);
+}
+
+void AstroCalcDialog::onChangedEphemerisPosition(const QModelIndex &modelIndex)
+{
+	DisplayedPositionIndex = modelIndex.row();
 }
 
 void AstroCalcDialog::selectCurrentPlanetaryPosition(const QModelIndex &modelIndex)
@@ -277,10 +291,19 @@ void AstroCalcDialog::generateEphemeris()
 			currentStep = StelCore::JD_DAY;
 			break;
 		case 4:
-			currentStep = 10 * StelCore::JD_DAY;
+			currentStep = 5 * StelCore::JD_DAY;
 			break;
 		case 5:
+			currentStep = 10 * StelCore::JD_DAY;
+			break;
+		case 6:
+			currentStep = 15 * StelCore::JD_DAY;
+			break;
+		case 7:
 			currentStep = 30 * StelCore::JD_DAY;
+			break;
+		case 8:
+			currentStep = 60 * StelCore::JD_DAY;
 			break;
 		default:
 			currentStep = StelCore::JD_DAY;
@@ -294,12 +317,16 @@ void AstroCalcDialog::generateEphemeris()
 		double firstJD = StelUtils::qDateTimeToJd(ui->dateFromDateTimeEdit->dateTime());
 		firstJD = firstJD - StelUtils::getGMTShiftFromQT(firstJD)/24;
 		int elements = (int)((StelUtils::qDateTimeToJd(ui->dateToDateTimeEdit->dateTime()) - firstJD)/currentStep);
+		EphemerisListJ2000.clear();
+		EphemerisListJ2000.reserve(elements);
 		for (int i=0; i<elements; i++)
 		{
 			double JD = firstJD + i*currentStep;
 			core->setJD(JD);
-			core->update(0); // force update to get new coordinates
-			StelUtils::rectToSphe(&ra,&dec,obj->getJ2000EquatorialPos(core));
+			core->update(0); // force update to get new coordinates			
+			Vec3d pos = obj->getJ2000EquatorialPos(core);
+			EphemerisListJ2000.append(pos);
+			StelUtils::rectToSphe(&ra,&dec,pos);
 			ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->ephemerisTreeWidget);
 			// local date and time
 			treeItem->setText(EphemerisDate, StelUtils::jdToQDateTime(JD + StelUtils::getGMTShiftFromQT(JD)/24).toString("yyyy-MM-dd hh:mm:ss"));
@@ -322,6 +349,12 @@ void AstroCalcDialog::generateEphemeris()
 
 	// sort-by-date
 	ui->ephemerisTreeWidget->sortItems(EphemerisDate, Qt::AscendingOrder);
+}
+
+void AstroCalcDialog::cleanupEphemeris()
+{
+	EphemerisListJ2000.clear();
+	ui->ephemerisTreeWidget->clear();
 }
 
 void AstroCalcDialog::populateCelestialBodyList()
@@ -366,8 +399,11 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 	steps->addItem(q_("10 minutes"), "1");
 	steps->addItem(q_("1 hour"), "2");
 	steps->addItem(q_("1 day"), "3");
-	steps->addItem(q_("10 days"), "4");
-	steps->addItem(q_("30 days"), "5");
+	steps->addItem(q_("5 days"), "4");
+	steps->addItem(q_("10 days"), "5");
+	steps->addItem(q_("15 days"), "6");
+	steps->addItem(q_("30 days"), "7");
+	steps->addItem(q_("60 days"), "8");
 
 	index = steps->findData(selectedStepId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
