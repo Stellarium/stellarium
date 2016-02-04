@@ -834,8 +834,6 @@ void MpcImportWindow::receiveQueryReply(QNetworkReply *reply)
 		enableInterface(true);
 	}
 
-	readQueryReply(reply);
-
 	reply->deleteLater();
 	queryReply = 0;
 }
