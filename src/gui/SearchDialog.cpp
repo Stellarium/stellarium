@@ -126,6 +126,7 @@ void CompletionLabel::updateText()
 // Start of members for class SearchDialog
 
 const char* SearchDialog::DEF_SIMBAD_URL = "http://simbad.u-strasbg.fr/";
+QString SearchDialog::extSearchText = "";
 
 SearchDialog::SearchDialog(QObject* parent) : StelDialog(parent), simbadReply(NULL)
 {
@@ -735,6 +736,16 @@ bool SearchDialog::eventFilter(QObject*, QEvent *event)
 			return true;
 		}
 	}
+	if (event->type() == QEvent::Show)
+	{
+		if (!extSearchText.isEmpty())
+		{
+			ui->lineEditSearchSkyObject->setText(extSearchText);
+			ui->lineEditSearchSkyObject->selectAll();
+			extSearchText.clear();
+		}
+	}
+
 
 	return false;
 }
@@ -847,7 +858,7 @@ void SearchDialog::showContextMenu(const QPoint &pt)
 	QClipboard *clipboard = QApplication::clipboard();
 	if (clipboard)
 		clipText = clipboard->text();
-	if (clipText.length())
+	if (!clipText.isEmpty())
 	{
 		if (clipText.length()>12)
 			clipText = clipText.right(9) + "...";

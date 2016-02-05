@@ -30,6 +30,7 @@
 #include "StelTranslator.hpp"
 #include "SolarSystem.hpp"
 #include "StelProgressController.hpp"
+#include "SearchDialog.hpp"
 
 #include <QGuiApplication>
 #include <QClipboard>
@@ -261,6 +262,8 @@ void MpcImportWindow::addObjects()
 		if (item->checkState() == Qt::Checked)
 		{
 			checkedObjectsNames.append(item->text());
+			if (row==0)
+				SearchDialog::extSearchText = item->text();
 		}
 	}
 	//qDebug() << "Checked:" << checkedObjectsNames;
