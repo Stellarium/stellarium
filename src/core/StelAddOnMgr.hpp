@@ -41,6 +41,16 @@ public:
 		UnableToWriteFiles
 	};
 
+	//! @enum update frequency for add-ons catalog
+	enum UpdateFrequency
+	{
+		NEVER,
+		ON_STARTUP,
+		EVERY_DAY,
+		EVERY_THREE_DAYS,
+		EVERY_WEEK
+	};
+
 	StelAddOnMgr();
 	virtual ~StelAddOnMgr();
 
@@ -57,11 +67,11 @@ public:
 	void updateAddons(QSet<AddOn *> addons);
 	void installAddons(QSet<AddOn*> addons);
 	void removeAddons(QSet<AddOn*> addons);
-	void setUpdateFrequencyDays(int days);
+	void setUpdateFrequency(UpdateFrequency freq);
 	void setLastUpdate(QDateTime lastUpdate);
 	QString getLastUpdateString() { return m_lastUpdate.toString("dd MMM yyyy - hh:mm:ss"); }
 	QDateTime getLastUpdate() { return m_lastUpdate; }
-	int getUpdateFrequencyDays() { return m_iUpdateFrequencyDays; }
+	UpdateFrequency getUpdateFrequency() { return m_eUpdateFrequency; }
 	QString getUrlForUpdates() { return m_sUrlUpdate; }
 	QString getAddonJsonPath() { return m_sAddonJsonPath; }
 
@@ -110,7 +120,7 @@ private:
 
 	class StelProgressController* m_progressBar;
 	QDateTime m_lastUpdate;
-	int m_iUpdateFrequencyDays;
+	UpdateFrequency m_eUpdateFrequency;
 	QString m_sUrlUpdate;
 
 	void refreshThumbnailQueue();

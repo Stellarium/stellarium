@@ -20,6 +20,7 @@
 #include <QDateTime>
 #include <QFileDialog>
 #include <QStringBuilder>
+#include <QTimer>
 
 #include "AddOnDialog.hpp"
 #include "AddOnTableModel.hpp"
@@ -96,8 +97,70 @@ void AddOnDialog::createDialogContent()
 	connect(&StelApp::getInstance().getStelAddOnMgr(), SIGNAL(addOnMgrMsg(StelAddOnMgr::AddOnMgrMsg)),
 		this, SLOT(slotUpdateMsg(StelAddOnMgr::AddOnMgrMsg)));
 
+	// settings tab
+	ui->updateFrequency->addItem(q_("Never"), StelAddOnMgr::NEVER);
+	ui->updateFrequency->addItem(q_("On Startup"), StelAddOnMgr::ON_STARTUP);
+	ui->updateFrequency->addItem(q_("Every day"), StelAddOnMgr::EVERY_DAY);
+	ui->updateFrequency->addItem(q_("Every three days"), StelAddOnMgr::EVERY_THREE_DAYS);
+	ui->updateFrequency->addItem(q_("Every week"), StelAddOnMgr::EVERY_WEEK);
+	StelAddOnMgr::UpdateFrequency uf = StelApp::getInstance().getStelAddOnMgr().getUpdateFrequency();
+	for (int idx=0; idx < ui->updateFrequency->count(); idx++)
+	{
+		if (uf == ui->updateFrequency->itemData(idx).toInt())
+		{
+			ui->updateFrequency->setCurrentIndex(idx);
+			break;
+		}
+	}
+	if (uf == StelAddOnMgr::ON_STARTUP)
+	{
+		updateCatalog();
+	}
+
+	connect(ui->updateFrequency, SIGNAL(currentIndexChanged(int)), this, SLOT(updateFrequencyChanged(int)));
+
+	QTimer* timer = new QTimer(this);
+	connect(timer, SIGNAL(timeout()), this, SLOT(checkInterval()));
+	timer->start(600000);
+	checkInterval();
+
 	// fix dialog width
 	updateTabBarListWidgetWidth();
+}
+
+void AddOnDialog::checkInterval()
+{
+	QDateTime lastUpdate = StelApp::getInstance().getStelAddOnMgr().getLastUpdate();
+	StelAddOnMgr::UpdateFrequency uf = StelApp::getInstance().getStelAddOnMgr().getUpdateFrequency();
+	QDateTime nextUpdate;
+	switch (uf) {
+		case StelAddOnMgr::NEVER:
+		case StelAddOnMgr::ON_STARTUP:
+			return;
+		case StelAddOnMgr::EVERY_DAY:
+			nextUpdate = lastUpdate.addDays(1);
+			break;
+		case StelAddOnMgr::EVERY_THREE_DAYS:
+			nextUpdate = lastUpdate.addDays(3);
+			break;
+		case StelAddOnMgr::EVERY_WEEK:
+			nextUpdate = lastUpdate.addDays(7);
+			break;
+		default:
+			qWarning() << "[Add-on] Error! Invalid update frequency!";
+			return;
+	}
+
+	if (QDateTime::currentDateTime() >= nextUpdate)
+	{
+		updateCatalog();
+	}
+}
+
+void AddOnDialog::updateFrequencyChanged(int idx)
+{
+	StelAddOnMgr::UpdateFrequency uf = (StelAddOnMgr::UpdateFrequency) ui->updateFrequency->itemData(idx).toInt();
+	StelApp::getInstance().getStelAddOnMgr().setUpdateFrequency(uf);
 }
 
 void AddOnDialog::slotAddonSelected(AddOn *addon)

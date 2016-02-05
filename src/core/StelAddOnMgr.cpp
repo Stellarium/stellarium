@@ -43,7 +43,7 @@ StelAddOnMgr::StelAddOnMgr()
 	, m_sInstalledAddonsJsonPath(m_sAddOnDir % "installed_addons.json")
 	, m_progressBar(NULL)
 	, m_lastUpdate(QDateTime::fromString("2016-01-01", "yyyy-MM-dd"))
-	, m_iUpdateFrequencyDays(7)
+	, m_eUpdateFrequency(EVERY_THREE_DAYS)
 {
 	QStringList v = StelUtils::getApplicationVersion().split('.');
 	m_sAddonJsonFilename = QString("addons_%1.%2.json").arg(v.at(0)).arg(v.at(1));
@@ -67,7 +67,7 @@ StelAddOnMgr::StelAddOnMgr()
 	{
 		m_pConfig->beginGroup("AddOn");
 		m_lastUpdate = m_pConfig->value("last_update", m_lastUpdate).toDateTime();
-		m_iUpdateFrequencyDays = m_pConfig->value("upload_frequency_days", m_iUpdateFrequencyDays).toInt();
+		m_eUpdateFrequency = (UpdateFrequency) m_pConfig->value("update_frequency", m_eUpdateFrequency).toInt();
 		m_sUrlUpdate = m_pConfig->value("url", m_sUrlUpdate).toString();
 		m_pConfig->endGroup();
 	}
@@ -78,7 +78,7 @@ StelAddOnMgr::StelAddOnMgr()
 		// delete all existing settings...
 		m_pConfig->remove("");
 		m_pConfig->setValue("last_update", m_lastUpdate);
-		m_pConfig->setValue("upload_frequency_days", m_iUpdateFrequencyDays);
+		m_pConfig->setValue("update_frequency", m_eUpdateFrequency);
 		m_pConfig->setValue("url", m_sUrlUpdate);
 		m_pConfig->endGroup();
 	}
@@ -211,12 +211,12 @@ void StelAddOnMgr::setLastUpdate(QDateTime lastUpdate)
 	m_pConfig->endGroup();
 }
 
-void StelAddOnMgr::setUpdateFrequencyDays(int days)
+void StelAddOnMgr::setUpdateFrequency(UpdateFrequency freq)
 {
-	m_iUpdateFrequencyDays = days;
+	m_eUpdateFrequency = freq;
 	// update config file
 	m_pConfig->beginGroup("AddOn");
-	m_pConfig->setValue("upload_frequency_days", m_iUpdateFrequencyDays);
+	m_pConfig->setValue("update_frequency", m_eUpdateFrequency);
 	m_pConfig->endGroup();
 }
 

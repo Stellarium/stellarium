@@ -60,7 +60,7 @@ void AddOnSettingsDialog::createDialogContent()
 	ui->updateFrequency->addItem(q_("Every day"), 1);
 	ui->updateFrequency->addItem(q_("Every three days"), 3);
 	ui->updateFrequency->addItem(q_("Every week"), 7);
-	setCurrentUpdateFrequency(m_pStelAddOnMgr->getUpdateFrequencyDays());
+	//setCurrentUpdateFrequency(m_pStelAddOnMgr->getUpdateFrequencyDays());
 	//ui->updateTime->setTime(QTime(m_pStelAddOnMgr->getUpdateFrequencyHour(), 0));
 
 	connect(ui->autoUpdate, SIGNAL(clicked(bool)), this, SLOT(setAutoUpdate(bool)));
@@ -92,8 +92,8 @@ void AddOnSettingsDialog::setCurrentUpdateFrequency(int days)
 		}
 	}
 	// using 7 days as default
-	m_pStelAddOnMgr->setUpdateFrequencyDays(7);
-	setCurrentUpdateFrequency(m_pStelAddOnMgr->getUpdateFrequencyDays());
+	//m_pStelAddOnMgr->setUpdateFrequencyDays(7);
+	//setCurrentUpdateFrequency(m_pStelAddOnMgr->getUpdateFrequencyDays());
 }
 
 void AddOnSettingsDialog::setAutoUpdate(bool enabled)
@@ -104,7 +104,7 @@ void AddOnSettingsDialog::setAutoUpdate(bool enabled)
 
 void AddOnSettingsDialog::setUpdateFrequency(int index)
 {
-	m_pStelAddOnMgr->setUpdateFrequencyDays(ui->updateFrequency->itemData(index).toInt());
+	//m_pStelAddOnMgr->setUpdateFrequencyDays(ui->updateFrequency->itemData(index).toInt());
 }
 
 void AddOnSettingsDialog::setUpdateTime(QTime time)
