@@ -139,8 +139,8 @@ void RemoteControl::init()
 		if (gui!=NULL)
 		{
 			toolbarButton = new StelButton(NULL,
-						       QPixmap(":/RemoteControl/resources/bt_network_on.png"),
-						       QPixmap(":/RemoteControl/resources/bt_network_off.png"),
+						       QPixmap(":/RemoteControl/resources/bt_remote_on.png"),
+						       QPixmap(":/RemoteControl/resources/bt_remote_off.png"),
 						       QPixmap(":/graphicGui/glow32x32.png"),
 						       "actionShow_Remote_Control");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
@@ -148,7 +148,7 @@ void RemoteControl::init()
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "WARNING: unable create toolbar button for RemoteControl plugin: " << e.what();
+		qWarning() << "WARNING: unable to create toolbar button for RemoteControl plugin: " << e.what();
 	}
 
 	if(autoStart)
