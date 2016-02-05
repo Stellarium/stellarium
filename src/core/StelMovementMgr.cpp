@@ -858,7 +858,7 @@ void StelMovementMgr::autoZoomOut(float moveDuration, bool full)
 	zoomTo(initFov, moveDuration);
 	if (flagAutoZoomOutResetsDirection)
 	{
-		moveToJ2000(core->altAzToJ2000(getInitViewingDirection(), StelCore::RefractionOff), moveDuration, -1);
+		moveToJ2000(core->altAzToJ2000(getInitViewingDirection(), StelCore::RefractionOff), mountFrameToJ2000(Vec3d(0., 0., 1.)), moveDuration, ZoomOut);
 		setFlagTracking(false);
 		setFlagLockEquPos(false);
 	}
