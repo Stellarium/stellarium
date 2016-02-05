@@ -1392,9 +1392,6 @@ void StelCore::updateTime(double deltaTime)
 {
 	if (getRealTimeSpeed())
 	{
-		// Get rid of the error from the 1 /
-		// JDay = JDayOfLastJDayUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDayUpdate) / ONE_OVER_JD_SECOND;
-		// GZ I don't understand the comment. Is the constant wrong?
 		JD.first = jdOfLastJDUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDUpdate) * JD_SECOND;
 	}
 	else
