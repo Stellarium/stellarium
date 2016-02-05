@@ -40,7 +40,7 @@ StelModule* RemoteSyncStelPluginInterface::getStelModule() const
 StelPluginInfo RemoteSyncStelPluginInterface::getPluginInfo() const
 {
 	// Allow to load the resources when used as a static plugin
-	//Q_INIT_RESOURCE(RemoteSync);
+	Q_INIT_RESOURCE(RemoteSync);
 
 	StelPluginInfo info;
 	info.id = "RemoteSync";

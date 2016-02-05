@@ -29,12 +29,12 @@ SET(RemoteSync_UIS
 QT5_WRAP_UI(RemoteSync_UIS_H ${RemoteSync_UIS})
 
 ################# compiles resources files ############
-#SET(RemoteSync_RES ../RemoteSync.qrc)
-#QT5_ADD_RESOURCES(RemoteSync_RES_CXX ${RemoteSync_RES})
+SET(RemoteSync_RES ../RemoteSync.qrc)
+QT5_ADD_RESOURCES(RemoteSync_RES_CXX ${RemoteSync_RES})
 
 SET(extLinkerOption ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
 
-ADD_LIBRARY(RemoteSync-static STATIC ${RemoteSync_SRCS} ${RemoteSync_UIS_H} ) # ${RemoteSync_RES_CXX} 
+ADD_LIBRARY(RemoteSync-static STATIC ${RemoteSync_SRCS} ${RemoteSync_UIS_H} ${RemoteSync_RES_CXX})
 QT5_USE_MODULES(RemoteSync-static Core Network Widgets)
 # The library target "RemoteSync-static" has a default OUTPUT_NAME of "RemoteSync-static", so change it.
 SET_TARGET_PROPERTIES(RemoteSync-static PROPERTIES OUTPUT_NAME "RemoteSync")
