@@ -847,7 +847,7 @@ void SearchDialog::showContextMenu(const QPoint &pt)
 	QClipboard *clipboard = QApplication::clipboard();
 	if (clipboard)
 		clipText = clipboard->text();
-	if (clipText.length())
+	if (!clipText.isEmpty())
 	{
 		if (clipText.length()>12)
 			clipText = clipText.right(9) + "...";
