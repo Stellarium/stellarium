@@ -42,7 +42,7 @@ void Skybright::setDate(const int year, const int month, const float moonPhase)
 	RA = (month - 3.f) * 0.52359878f;
 
 	// Term for dark sky brightness computation.
-	// GZ: This works for a few 11-year solar cycles around 1992...
+	// GZ: This works for a few 11-year solar cycles around 1992... ... cos((y-1992)/11 * 2pi)
 	bNightTerm = 1.0e-13 + 0.3e-13 * std::cos(0.57118f * (year-1992.f));
 }
 
@@ -52,11 +52,12 @@ void Skybright::setLocation(const float latitude, const float altitude, const fl
 	float sign_latitude = (latitude>=0.f) * 2.f - 1.f;
 
 	// extinction Coefficient for V band
-	float KR = 0.1066f * std::exp(-altitude/8200.f); // Rayleigh
-	float KA = 0.1f * std::exp(-altitude/1500.f) * std::pow(1.f - 0.32f/std::log(relativeHumidity/100.f) ,1.33f) *
-		(1.f + 0.33f * sign_latitude * std::sin(RA)); // Aerosol
-	float KO = 0.031f * std::exp(-altitude/8200.f) * ( 3.f + 0.4f * (latitude * std::cos(RA) - std::cos(3.f*latitude)) )/3.f; // Ozone
-	float KW = 0.031f * 0.94f * (relativeHumidity/100.f) * std::exp(temperature/15.f) * std::exp(-altitude/8200.f); // Water
+	// GZ TODO: re-create UBVRI for colored extinction, and get RGB extinction factors from SkyBright!
+	float KR = 0.1066f * std::expf(-altitude/8200.f); // Rayleigh
+	float KA = 0.1f * std::expf(-altitude/1500.f) * std::powf(1.f - 0.32f/std::log(relativeHumidity/100.f) ,1.33f) *
+		(1.f + 0.33f * sign_latitude * std::sinf(RA)); // Aerosol
+	float KO = 0.031f * std::expf(-altitude/8200.f) * ( 3.f + 0.4f * (latitude * std::cosf(RA) - std::cosf(3.f*latitude)) )/3.f; // Ozone
+	float KW = 0.031f * 0.94f * (relativeHumidity/100.f) * std::expf(temperature/15.f) * std::expf(-altitude/8200.f); // Water
 	K = KR + KA + KO + KW; // Total extinction coefficient
 }
 
