@@ -2,6 +2,7 @@
  * Stellarium
  * 
  * Copyright (C) 2015 Alexander Wolf
+ * Copyright (C) 2016 Nick Fedoseev (visualization of ephemeris)
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -92,6 +93,7 @@ private slots:
 
 	//! Calculate ephemeris for selected celestial body and fill the list.
 	void generateEphemeris();
+	void cleanupEphemeris();
 	void selectCurrentEphemeride(const QModelIndex &modelIndex);
 
 	//! Calculate phenomena for selected celestial body and fill the list.

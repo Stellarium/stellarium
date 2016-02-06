@@ -36,14 +36,14 @@ Skybright::Skybright() : SN(1.f)
 // moonPhase in radian 0=Full Moon, PI/2=First Quadrant/Last Quadran, PI=No Moon
 void Skybright::setDate(const int year, const int month, const float moonPhase)
 {
-	magMoon = -12.73f + 1.4896903f * std::fabs(moonPhase) + 0.04310727f * std::pow(moonPhase, 4.f);
+	magMoon = -12.73f + 1.4896903f * fabsf(moonPhase) + 0.04310727f * powf(moonPhase, 4.f);
 
 	// GZ: Bah, a very crude estimate for the solar position...
 	RA = (month - 3.f) * 0.52359878f;
 
 	// Term for dark sky brightness computation.
-	// GZ: This works for a few 11-year solar cycles around 1992...
-	bNightTerm = 1.0e-13 + 0.3e-13 * std::cos(0.57118f * (year-1992.f));
+	// GZ: This works for a few 11-year solar cycles around 1992... ... cos((y-1992)/11 * 2pi)
+	bNightTerm = 1.0e-13 + 0.3e-13 * cosf(0.57118f * (year-1992.f));
 }
 
 
@@ -52,11 +52,12 @@ void Skybright::setLocation(const float latitude, const float altitude, const fl
 	float sign_latitude = (latitude>=0.f) * 2.f - 1.f;
 
 	// extinction Coefficient for V band
-	float KR = 0.1066f * std::exp(-altitude/8200.f); // Rayleigh
-	float KA = 0.1f * std::exp(-altitude/1500.f) * std::pow(1.f - 0.32f/std::log(relativeHumidity/100.f) ,1.33f) *
-		(1.f + 0.33f * sign_latitude * std::sin(RA)); // Aerosol
-	float KO = 0.031f * std::exp(-altitude/8200.f) * ( 3.f + 0.4f * (latitude * std::cos(RA) - std::cos(3.f*latitude)) )/3.f; // Ozone
-	float KW = 0.031f * 0.94f * (relativeHumidity/100.f) * std::exp(temperature/15.f) * std::exp(-altitude/8200.f); // Water
+	// GZ TODO: re-create UBVRI for colored extinction, and get RGB extinction factors from SkyBright!
+	float KR = 0.1066f * expf(-altitude/8200.f); // Rayleigh
+	float KA = 0.1f * expf(-altitude/1500.f) * powf(1.f - 0.32f/logf(relativeHumidity/100.f) ,1.33f) *
+		(1.f + 0.33f * sign_latitude * sinf(RA)); // Aerosol
+	float KO = 0.031f * expf(-altitude/8200.f) * ( 3.f + 0.4f * (latitude * cosf(RA) - cosf(3.f*latitude)) )/3.f; // Ozone
+	float KW = 0.031f * 0.94f * (relativeHumidity/100.f) * expf(temperature/15.f) * expf(-altitude/8200.f); // Water
 	K = KR + KA + KO + KW; // Total extinction coefficient
 }
 
@@ -66,11 +67,11 @@ void Skybright::setSunMoon(const float cosDistMoonZenith, const float cosDistSun
 {
 	// Air mass for Moon
 	if (cosDistMoonZenith<0) airMassMoon = 40.f;
-	else airMassMoon = 1.f / (cosDistMoonZenith+0.025f*std::exp(-11.f*cosDistMoonZenith));
+	else airMassMoon = 1.f / (cosDistMoonZenith+0.025f*expf(-11.f*cosDistMoonZenith));
 
 	// Air mass for Sun
 	if (cosDistSunZenith<0) airMassSun = 40.f;
-	else airMassSun = 1.f / (cosDistSunZenith+0.025f*std::exp(-11.f*cosDistSunZenith));
+	else airMassSun = 1.f / (cosDistSunZenith+0.025f*expf(-11.f*cosDistSunZenith));
 
 	bMoonTerm1 = stelpow10f(-0.4f * (magMoon + 54.32f));
 
@@ -82,7 +83,7 @@ void Skybright::setSunMoon(const float cosDistMoonZenith, const float cosDistSun
 
 	C3 = stelpow10f(-0.4f*K*airMassMoon);	// Term for moon brightness computation
 
-	bTwilightTerm = -6.724f + 22.918312f * (M_PI_2-std::acos(cosDistSunZenith));
+	bTwilightTerm = -6.724f + 22.918312f * (M_PI_2-acosf(cosDistSunZenith));
 
 	C4 = stelpow10f(-0.4f*K*airMassSun);	// Term for sky brightness computation
 }
@@ -125,7 +126,7 @@ float Skybright::getLuminance( float cosDistMoon,
 		else
 		{
 			// Because the accuracy of our power serie is bad around 1, call the real acos if it's the case
-			dist_moon = cosDistMoon > 0.99f ? std::acos(cosDistMoon) : StelUtils::fastAcos(cosDistMoon);
+			dist_moon = cosDistMoon > 0.99f ? acosf(cosDistMoon) : StelUtils::fastAcos(cosDistMoon);
 		}
 		
 		const float FM = 18886.28f / (dist_moon*dist_moon + 0.0005f)	// The last 0.0005 should be 0, but it causes too fast brightness change
@@ -137,7 +138,7 @@ float Skybright::getLuminance( float cosDistMoon,
 	// Dark night sky brightness, don't compute if less than 1% daylight
 	if ((bNightTerm*bKX)/b_total>0.01f)
 	{
-		b_total += (0.4f + 0.6f / std::sqrt(0.04f + 0.96f * cosDistZenith*cosDistZenith)) * bNightTerm * bKX;
+		b_total += (0.4f + 0.6f / sqrtf(0.04f + 0.96f * cosDistZenith*cosDistZenith)) * bNightTerm * bKX;
 	}
 	
 	return (b_total<0.f) ? 0.f : b_total * (900900.9f * static_cast<float>(M_PI) * 1e-4f * 3239389.f*2.f *1.5f);
