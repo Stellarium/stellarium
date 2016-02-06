@@ -45,7 +45,6 @@
 #include "RefractionExtinction.hpp"
 
 #include "AstroCalcDialog.hpp"
-#include "StelGui.hpp"
 
 #include <functional>
 #include <algorithm>
@@ -78,6 +77,7 @@ SolarSystem::SolarSystem()
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getBaseFontSize());
 	setObjectName("SolarSystem");
+	gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 }
 
 void SolarSystem::setFontSize(float newFontSize)
@@ -135,8 +135,6 @@ void SolarSystem::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
-
-	gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 
 	Planet::init();
 	loadPlanets();	// Load planets data
