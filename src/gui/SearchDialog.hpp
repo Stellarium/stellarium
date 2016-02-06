@@ -185,6 +185,10 @@ private:
 
 	// The current coordinate system
 	CoordinateSystem currentCoordinateSystem;
+
+public:
+	static QString extSearchText;
+
 };
 
 #endif // _SEARCHDIALOG_HPP_

@@ -17,21 +17,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-31 00:33+0600\n"
-"PO-Revision-Date: 2016-01-30 22:26+0000\n"
+"POT-Creation-Date: 2016-02-05 10:28+0600\n"
+"PO-Revision-Date: 2016-02-05 12:17+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-31 05:14+0000\n"
+"X-Launchpad-Export-Date: 2016-02-06 05:15+0000\n"
 "X-Generator: Launchpad (build 17908)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:904 src/core/modules/LandscapeMgr.cpp:414
-#: src/core/modules/NebulaMgr.cpp:266 src/core/modules/SolarSystem.cpp:176
+#: src/core/modules/NebulaMgr.cpp:266 src/core/modules/SolarSystem.cpp:185
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
-#: src/core/StelApp.cpp:501 src/core/StelCore.cpp:210
+#: src/core/StelApp.cpp:502 src/core/StelCore.cpp:210
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:557
 msgid "Display Options"
 msgstr "Options d'affichage"
@@ -228,7 +228,7 @@ msgstr "Situation : "
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:686 src/ui_astroCalcDialog.h:361
+#: src/core/modules/LandscapeMgr.cpp:686 src/ui_astroCalcDialog.h:380
 msgid "Celestial body:"
 msgstr "Corps céleste :"
 
@@ -838,22 +838,22 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "Longueur de la queue de plasma (estimation) : %1 mio km"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:177 src/gui/AstroCalcDialog.cpp:419
+#: src/core/modules/SolarSystem.cpp:186 src/gui/AstroCalcDialog.cpp:455
 #: src/translations.h:62
 msgid "Planets"
 msgstr "Planètes"
 
-#: src/core/modules/SolarSystem.cpp:178
+#: src/core/modules/SolarSystem.cpp:187
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:309
 msgid "Planet labels"
 msgstr "Noms des planètes"
 
-#: src/core/modules/SolarSystem.cpp:179
+#: src/core/modules/SolarSystem.cpp:188
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:313
 msgid "Planet orbits"
 msgstr "Orbites des planètes"
 
-#: src/core/modules/SolarSystem.cpp:180
+#: src/core/modules/SolarSystem.cpp:189
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Planet trails"
 msgstr "Chemins des planètes"
@@ -942,13 +942,13 @@ msgstr "Voie Lactée"
 msgid "Zodiacal Light"
 msgstr "Lumière zodiacale"
 
-#: src/core/StelApp.cpp:501
+#: src/core/StelApp.cpp:502
 msgid "Night mode"
 msgstr "Mode nuit"
 
 #. TRANSLATORS: name of object
 #: src/core/StelCore.cpp:208 src/gui/StelGui.cpp:189
-#: src/gui/AstroCalcDialog.cpp:237 src/gui/AstroCalcDialog.cpp:440
+#: src/gui/AstroCalcDialog.cpp:251 src/gui/AstroCalcDialog.cpp:476
 #: src/ui_dateTimeDialogGui.h:376 src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:173
 msgid "Date and Time"
@@ -2508,79 +2508,79 @@ msgstr "naturel"
 msgid "starchart"
 msgstr "carte du ciel"
 
-#: src/gui/SearchDialog.cpp:234
+#: src/gui/SearchDialog.cpp:235
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
 msgstr "Équatoriales (J2000.0)"
 
-#: src/gui/SearchDialog.cpp:235
+#: src/gui/SearchDialog.cpp:236
 msgctxt "coordinate system"
 msgid "Equatorial"
 msgstr "Équatoriales"
 
-#: src/gui/SearchDialog.cpp:236
+#: src/gui/SearchDialog.cpp:237
 msgctxt "coordinate system"
 msgid "Horizontal"
 msgstr "Horizontal"
 
-#: src/gui/SearchDialog.cpp:237
+#: src/gui/SearchDialog.cpp:238
 msgctxt "coordinate system"
 msgid "Galactic"
 msgstr "Galactique"
 
-#: src/gui/SearchDialog.cpp:238
+#: src/gui/SearchDialog.cpp:239
 msgctxt "coordinate system"
 msgid "Ecliptic"
 msgstr "Écliptique"
 
-#: src/gui/SearchDialog.cpp:239
+#: src/gui/SearchDialog.cpp:240
 msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
 msgstr "Écliptique (J2000.0)"
 
-#: src/gui/SearchDialog.cpp:267
+#: src/gui/SearchDialog.cpp:268
 msgid "Right ascension"
 msgstr "Ascension droite"
 
-#: src/gui/SearchDialog.cpp:270
+#: src/gui/SearchDialog.cpp:271
 msgid "Declination"
 msgstr "Déclinaison"
 
-#: src/gui/SearchDialog.cpp:278
+#: src/gui/SearchDialog.cpp:279
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:945
 msgid "Azimuth"
 msgstr "Azimut"
 
-#: src/gui/SearchDialog.cpp:281
+#: src/gui/SearchDialog.cpp:282
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
 msgid "Altitude"
 msgstr "Hauteur"
 
-#: src/gui/SearchDialog.cpp:291
+#: src/gui/SearchDialog.cpp:292
 msgid "Longitude"
 msgstr "Longitude"
 
-#: src/gui/SearchDialog.cpp:294
+#: src/gui/SearchDialog.cpp:295
 msgid "Latitude"
 msgstr "Latitude"
 
-#: src/gui/SearchDialog.cpp:605
+#: src/gui/SearchDialog.cpp:606
 msgid "Simbad Lookup Error"
 msgstr "Erreur de la recherche Simbad"
 
-#: src/gui/SearchDialog.cpp:613
+#: src/gui/SearchDialog.cpp:614
 msgid "Simbad Lookup"
 msgstr "Recherche Simbad"
 
-#: src/gui/SearchDialog.cpp:784
+#: src/gui/SearchDialog.cpp:785
 msgid "University of Strasbourg (France)"
 msgstr "Université de Strasbourg (France)"
 
-#: src/gui/SearchDialog.cpp:785
+#: src/gui/SearchDialog.cpp:786
 msgid "Harvard University (USA)"
 msgstr "Université de Harvard (USA)"
 
-#: src/gui/SearchDialog.cpp:845
+#: src/gui/SearchDialog.cpp:857
 msgid "Paste and Search"
 msgstr "Coller et chercher"
 
@@ -2615,7 +2615,7 @@ msgid "year"
 msgstr "année"
 
 #. TRANSLATORS: name of object
-#: src/gui/AstroCalcDialog.cpp:129 src/ui_configurationDialog.h:1135
+#: src/gui/AstroCalcDialog.cpp:135 src/ui_configurationDialog.h:1135
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:286
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 #: plugins/Exoplanets/src/Exoplanet.cpp:323
@@ -2624,112 +2624,129 @@ msgid "Name"
 msgstr "Nom"
 
 #. TRANSLATORS: right ascension
-#: src/gui/AstroCalcDialog.cpp:131 src/gui/AstroCalcDialog.cpp:240
+#: src/gui/AstroCalcDialog.cpp:137 src/gui/AstroCalcDialog.cpp:254
 msgid "RA (J2000)"
 msgstr "AD (J2000)"
 
 #. TRANSLATORS: declination
-#: src/gui/AstroCalcDialog.cpp:133 src/gui/AstroCalcDialog.cpp:242
+#: src/gui/AstroCalcDialog.cpp:139 src/gui/AstroCalcDialog.cpp:256
 msgid "Dec (J2000)"
 msgstr "Déc (J2000)"
 
 #. TRANSLATORS: magnitude
-#: src/gui/AstroCalcDialog.cpp:135 src/gui/AstroCalcDialog.cpp:244
+#: src/gui/AstroCalcDialog.cpp:141 src/gui/AstroCalcDialog.cpp:258
 msgid "Mag."
 msgstr "Mag."
 
 #. TRANSLATORS: type of object
-#: src/gui/AstroCalcDialog.cpp:137 src/ui_configurationDialog.h:1155
+#: src/gui/AstroCalcDialog.cpp:143 src/ui_configurationDialog.h:1155
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 msgid "Type"
 msgstr "Type"
 
-#: src/gui/AstroCalcDialog.cpp:238
+#: src/gui/AstroCalcDialog.cpp:161
+#, qt-format
+msgid "Positions on %1"
+msgstr "Positions le %1"
+
+#: src/gui/AstroCalcDialog.cpp:252
 msgid "JD"
 msgstr "JD"
 
-#: src/gui/AstroCalcDialog.cpp:366
+#: src/gui/AstroCalcDialog.cpp:399
 msgid "10 minutes"
 msgstr "10 minutes"
 
-#: src/gui/AstroCalcDialog.cpp:367
+#: src/gui/AstroCalcDialog.cpp:400
 msgid "1 hour"
 msgstr "1 heure"
 
-#: src/gui/AstroCalcDialog.cpp:368
+#: src/gui/AstroCalcDialog.cpp:401
 msgid "1 day"
 msgstr "1 jour"
 
-#: src/gui/AstroCalcDialog.cpp:369
+#: src/gui/AstroCalcDialog.cpp:402
+msgid "5 days"
+msgstr "5 jours"
+
+#: src/gui/AstroCalcDialog.cpp:403
 msgid "10 days"
 msgstr "10 jours"
 
-#: src/gui/AstroCalcDialog.cpp:370
+#: src/gui/AstroCalcDialog.cpp:404
+msgid "15 days"
+msgstr "15 jours"
+
+#: src/gui/AstroCalcDialog.cpp:405
 msgid "30 days"
 msgstr "30 jours"
 
-#: src/gui/AstroCalcDialog.cpp:418
+#: src/gui/AstroCalcDialog.cpp:406
+msgid "60 days"
+msgstr "60 jours"
+
+#: src/gui/AstroCalcDialog.cpp:454
 msgid "Solar system"
 msgstr "Système Solaire"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:420 src/translations.h:66
+#: src/gui/AstroCalcDialog.cpp:456 src/translations.h:66
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
 msgstr "Astéroïdes"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:421 src/translations.h:70
+#: src/gui/AstroCalcDialog.cpp:457 src/translations.h:70
 msgid "Plutinos"
 msgstr "Plutinos"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:422 src/translations.h:64
+#: src/gui/AstroCalcDialog.cpp:458 src/translations.h:64
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
 msgstr "Comètes"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:423 src/translations.h:72
+#: src/gui/AstroCalcDialog.cpp:459 src/translations.h:72
 msgid "Dwarf planets"
 msgstr "Planètes naines"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:424 src/translations.h:74
+#: src/gui/AstroCalcDialog.cpp:460 src/translations.h:74
 msgid "Cubewanos"
 msgstr "Cubewanos"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:425 src/translations.h:76
+#: src/gui/AstroCalcDialog.cpp:461 src/translations.h:76
 msgid "Scattered disc objects"
 msgstr "Objets épars"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:426 src/translations.h:78
+#: src/gui/AstroCalcDialog.cpp:462 src/translations.h:78
 msgid "Oort cloud objects"
 msgstr "Objets du nuage d'Oort"
 
-#: src/gui/AstroCalcDialog.cpp:439
+#: src/gui/AstroCalcDialog.cpp:475
 msgid "Phenomenon"
 msgstr "Phénomène"
 
-#: src/gui/AstroCalcDialog.cpp:441
+#: src/gui/AstroCalcDialog.cpp:477
 msgid "Object 1"
 msgstr "Objet 1"
 
-#: src/gui/AstroCalcDialog.cpp:442
+#: src/gui/AstroCalcDialog.cpp:478
 msgid "Object 2"
 msgstr "Objet 2"
 
-#: src/gui/AstroCalcDialog.cpp:443
+#: src/gui/AstroCalcDialog.cpp:479
 msgid "Separation"
 msgstr "Séparation"
 
-#: src/gui/AstroCalcDialog.cpp:599
+#: src/gui/AstroCalcDialog.cpp:635
 msgid "Conjunction"
 msgstr "Conjonction"
 
-#: src/gui/AstroCalcDialog.cpp:603
+#: src/gui/AstroCalcDialog.cpp:639
 msgid "Opposition"
 msgstr "Opposition"
 
@@ -6127,71 +6144,75 @@ msgstr "Inclure le dossier :"
 msgid "..."
 msgstr "…"
 
-#: src/ui_astroCalcDialog.h:357
-msgid "AstroCalc"
-msgstr "AstroCalc"
-
-#: src/ui_astroCalcDialog.h:359
+#: src/ui_astroCalcDialog.h:377
 msgid "Planetary positions every 5 minutes."
 msgstr "Positions des planètes toutes les 5 minutes."
 
-#: src/ui_astroCalcDialog.h:360
+#: src/ui_astroCalcDialog.h:379
 msgid "Planetary positions"
 msgstr "Positions des planètes"
 
-#: src/ui_astroCalcDialog.h:363
+#: src/ui_astroCalcDialog.h:382
 msgid "Time step:"
 msgstr "Pas de temps :"
 
-#: src/ui_astroCalcDialog.h:364 src/ui_astroCalcDialog.h:372
+#: src/ui_astroCalcDialog.h:383 src/ui_astroCalcDialog.h:392
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
 msgstr "De :"
 
-#: src/ui_astroCalcDialog.h:365 src/ui_astroCalcDialog.h:367
+#: src/ui_astroCalcDialog.h:384 src/ui_astroCalcDialog.h:386
 msgid "yyyy.MM.dd hh:mm"
 msgstr "yyyy.MM.dd hh:mm"
 
-#: src/ui_astroCalcDialog.h:366 src/ui_astroCalcDialog.h:374
+#: src/ui_astroCalcDialog.h:385 src/ui_astroCalcDialog.h:394
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
 msgstr "À :"
 
-#: src/ui_astroCalcDialog.h:368
+#: src/ui_astroCalcDialog.h:387
 msgid "Calculate ephemeris"
 msgstr "Calculer les éphémérides"
 
-#: src/ui_astroCalcDialog.h:369
+#: src/ui_astroCalcDialog.h:388
+msgid "Cleanup ephemerides"
+msgstr "Effacer les éphémérides"
+
+#: src/ui_astroCalcDialog.h:389
 msgid "Ephemeris"
 msgstr "Ephémérides"
 
-#: src/ui_astroCalcDialog.h:370
+#: src/ui_astroCalcDialog.h:390
 msgid "Between objects:"
 msgstr "Entre les objets :"
 
-#: src/ui_astroCalcDialog.h:371
+#: src/ui_astroCalcDialog.h:391
 msgid "and"
 msgstr "et"
 
-#: src/ui_astroCalcDialog.h:373 src/ui_astroCalcDialog.h:375
+#: src/ui_astroCalcDialog.h:393 src/ui_astroCalcDialog.h:395
 msgid "yyyy.MM.dd"
 msgstr "yyyy.MM.dd"
 
-#: src/ui_astroCalcDialog.h:376
+#: src/ui_astroCalcDialog.h:396
 msgid "Maximum allowed separation:"
 msgstr "Séparation maximale autorisée :"
 
-#: src/ui_astroCalcDialog.h:378
+#: src/ui_astroCalcDialog.h:398
 msgid "Value in decimal degrees"
 msgstr "Valeur en degrés décimaux"
 
-#: src/ui_astroCalcDialog.h:380
+#: src/ui_astroCalcDialog.h:400
 msgid "Calculate phenomena"
 msgstr "Calculer les phénomènes"
 
-#: src/ui_astroCalcDialog.h:381
+#: src/ui_astroCalcDialog.h:401
 msgid "Phenomena"
 msgstr "Phénomènes"
+
+#: src/ui_astroCalcDialog.h:402
+msgid "AstroCalc"
+msgstr "AstroCalc"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:138
@@ -7437,7 +7458,7 @@ msgstr "Voir %1ce document%2 pour plus d'informations."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:165
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:158
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:181
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:295
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
 msgid "Internet updates disabled"
 msgstr "Mise à jour via Internet désactivée"
 
@@ -7451,8 +7472,8 @@ msgstr "Mise à jour via Internet désactivée"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:212
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:183
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:241
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:359
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:298
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:360
 msgid "Updating now..."
 msgstr "Mise à jour en cours…"
 
@@ -7461,7 +7482,7 @@ msgstr "Mise à jour en cours…"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:169
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:162
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:299
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:300
 msgid "Next update: < 1 minute"
 msgstr "Prochaine mise à jour: < 1 minute"
 
@@ -7470,7 +7491,7 @@ msgstr "Prochaine mise à jour: < 1 minute"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:171
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:164
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:301
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:302
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr "Prochaine mise à jour: %1 minutes"
@@ -7480,7 +7501,7 @@ msgstr "Prochaine mise à jour: %1 minutes"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:173
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:166
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:189
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:303
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:304
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr "Prochaine mise à jour: %1 heures"
@@ -7490,7 +7511,7 @@ msgstr "Prochaine mise à jour: %1 heures"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:204
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:215
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:244
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:362
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:363
 msgid "Update error"
 msgstr "Erreur lors de la mise à jour"
 
@@ -7518,7 +7539,7 @@ msgstr "[nouvelle source]"
 #: plugins/Quasars/src/ui_quasarsDialog.h:265
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:206
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:271
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:348
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:349
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:464
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:460
 msgid "Update now"
@@ -7529,7 +7550,7 @@ msgstr "Mettre à jour maintenant"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:192
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:185
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:208
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:350
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:351
 msgid "Update from files"
 msgstr "Mettre à jour à partir de fichiers"
 
@@ -9799,107 +9820,116 @@ msgstr ""
 "de sa température de surface."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
-msgid "The proper names"
-msgstr ""
+msgid "Proper names"
+msgstr "Noms populaires"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid ""
-"From the latin <em>Veritas</em>, truth. The ablative form means <em>where "
-"there is truth</em>"
+"In December 2015, the International Astronomical Union (IAU) has officially "
+"approved names for several exoplanets after a public vote."
 msgstr ""
-"Du latin <em>veritas</em>, la vérité. La déclinaison à l'ablatif signifie "
-"<em>là où il y a la vérité</em>"
+"En décembre 2015, l'Union Astronomique Internationale (IAU) a approuvé "
+"officiellement les noms de plusieurs exoplanètes, après une votation "
+"publique."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
 msgid ""
-"From the latin <em>Spes</em>, hope. The ablative form means <em>where there "
-"is hope</em>"
+"From the latin <em>Veritas</em>, truth. The ablative form means <em>where "
+"there is truth</em>."
 msgstr ""
-"Du latin <em>spes</em>, l'espoir. La déclinaison à l'ablatif signifie<em>là "
-"où il y a l'espoir</em>"
+"Du latin <em>veritas</em>, la vérité. La déclinaison à l'ablatif signifie "
+"<em>là où il y a la vérité</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
-msgid "Musica is Latin for <em>music</em>"
-msgstr "Musica est le terme latin pour <em>musique</em>"
+msgid ""
+"From the latin <em>Spes</em>, hope. The ablative form means <em>where there "
+"is hope</em>."
+msgstr ""
+"Du latin <em>spes</em>, l'espoir. La déclinaison à l'ablatif signifie<em>là "
+"où il y a l'espoir</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
+msgid "Musica is Latin for <em>music</em>."
+msgstr "Musica est le terme latin pour <em>musique</em>."
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
 msgid ""
 "Arion was a genius of poetry and music in ancient Greece. According to "
 "legend, his life was saved at sea by dolphins after attracting their "
-"attention by the playing of his kithara"
+"attention by the playing of his kithara."
 msgstr ""
 "Arion était un génie de la poésie et de la musique dans la Grèce antique. "
 "Selon la légende, sa vie fut sauvée en mer par des dauphins après avoir "
-"attiré leur attention en jouant de sa cithare"
+"attiré leur attention en jouant de sa cithare."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
-msgid "Fafnir was a Norse mythological dwarf who turned into a dragon"
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:188
+msgid "Fafnir was a Norse mythological dwarf who turned into a dragon."
 msgstr ""
 "Fafnir était un nain de la mythologie scandinave qui s'est transformé en "
 "dragon"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:188
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
 msgid ""
 "Orbitar is a contrived word paying homage to the space launch and orbital "
-"operations of NASA"
+"operations of NASA."
 msgstr ""
-"Orbitar est un mot fabriqué pour rendre hommage aux lancements et opérations "
-"spatiales de la NASA"
-
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
-msgid "Chalawan is a mythological crocodile king from a Thai folktale"
-msgstr "Chalawan est un roi crocodile du folklore thaïlandais"
+"Orbitar est un nom construit pour rendre hommage aux lancements et "
+"opérations spatiales de la NASA."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:190
-msgid ""
-"Taphao Thong is one of two sisters associated with the Thai folk tale of "
-"Chalawan"
-msgstr ""
-"Taphao Thong est l'une des deux soeurs associées au conte de Chalawan, dans "
-"le folklore thaïlandais"
+msgid "Chalawan is a mythological crocodile king from a Thai folktale."
+msgstr "Chalawan est un roi crocodile d'un conte folklore thaïlandais."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
 msgid ""
-"Taphao Kae is one of two sisters associated with the Thai folk tale of "
-"Chalawan"
+"Taphao Thong is one of two sisters associated with the Thai folk tale of "
+"Chalawan."
 msgstr ""
-"Taphao Kae est l'une des deux soeurs associées au conte de Chalawan, dans le "
-"folklore thaïlandais"
+"Taphao Thong est l'une des deux soeurs associées au conte de Chalawan, dans "
+"un conte folklore thaïlandais."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
 msgid ""
-"Helvetios is the Latin for <em>the Helvetian</em> and refers to the Celtic "
-"tribe that lived in Switzerland during the Middle Ages"
+"Taphao Kae is one of two sisters associated with the Thai folk tale of "
+"Chalawan."
 msgstr ""
-"Helvetios est le terme latin pour <em>les Helvètes</em> et désigne la tribu "
-"celte qui occupait le territoire de la Suisse actuelle dans l'antiquité "
-"romaine"
+"Taphao Kae est l'une des deux soeurs associées au conte de Chalawan, dans un "
+"conte du folklore thaïlandais."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
 msgid ""
-"Dimidium is Latin for <em>half</em>, referring to the planet's mass of at "
-"least half the mass of Jupiter"
+"Helvetios is the Latin for <em>the Helvetian</em> and refers to the Celtic "
+"tribe that lived in Switzerland during the Middle Ages."
 msgstr ""
-"Dimidium est un adjectif latin signifiant <em>demi</em>, et désigne la masse "
-"d'une planète au moins égale à la moitié de la masse de Jupiter"
+"Helvetios est le terme latin pour <em>les Helvètes</em> et désigne la tribu "
+"celte qui occupait le territoire de la Suisse actuelle dans l'antiquité "
+"romaine."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid ""
+"Dimidium is Latin for <em>half</em>, referring to the planet's mass of at "
+"least half the mass of Jupiter."
+msgstr ""
+"Dimidium est un adjectif latin signifiant <em>demi</em>, et en référence à "
+"la masse d'une planète au moins égale à la moitié de celle de Jupiter."
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
+msgid ""
 "Nicolaus Copernicus or Mikolaj Kopernik (1473-1543) was a Polish astronomer "
 "who proposed the heliocentric model of the solar system in his book <em>De "
-"revolutionibus orbium coelestium</em>"
+"revolutionibus orbium coelestium</em>."
 msgstr ""
 "Nicolaus Copernicus or Mikolaj Kopernik (1473–1543) était un astronome "
 "polonais qui proposa un modèle héliocentrique du système solaire dans son "
 "ouvrage <em>De revolutionibus orbium coelestium</em>."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
 msgid ""
 "Galileo Galilei (1564-1642) was an Italian astronomer and physicist often "
 "called the <em>father of observational astronomy</em> and the <em>father of "
 "modern physics</em>. Using a telescope, he discovered the four largest "
 "satellites of Jupiter, and the reported the first telescopic observations of "
-"the phases of Venus, among other discoveries"
+"the phases of Venus, among other discoveries."
 msgstr ""
 "Galileo Galilei (1564–1642) était un astronome et physicien italien, souvent "
 "surnommé le <em>père de l'astronomie d'observation</em> et le <em>père de la "
@@ -9907,7 +9937,7 @@ msgstr ""
 "grands satellites de Jupiter et fit les premières observations à la lunette "
 "des phases de Vénus, entre autres découvertes."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid ""
 "Tycho Brahe (1546-1601) was a Danish astronomer and nobleman who recorded "
 "accurate astronomical observations of the stars and planets. These "
@@ -9919,403 +9949,468 @@ msgstr ""
 "Ces observations ont permis à Kepler la formulation de ces trois lois des "
 "mouvements planétaires."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
 msgid ""
 "Hans Lipperhey (1570-1619) was a German-Dutch lens grinder and spectacle "
 "maker who is often attributed with the invention of the refracting telescope "
-"in 1608"
+"in 1608."
 msgstr ""
 "Hans Lipperhey (1570–1619) était un fabriquant de lentilles et homme de "
 "spectacle germano-hollandais. On lui attribue souvent l'invention de la "
 "lunette (réfracteur), en 1608."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid ""
 "Jacharias Janssen (1580s-1630s) was a Dutch spectacle maker who is often "
 "attributed with invention of the microscope, and more controversially with "
-"the invention of the telescope"
+"the invention of the telescope."
 msgstr ""
 "Jacharias Janssen (1580s–1630s) était un homme de spectacle hollandais à qui "
 "l'on attribue souvent l'invention du microscope, ainsi que, de façon plus "
 "controversée, celle du télescope."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid ""
 "Thomas Harriot (ca. 1560-1621) was an English astronomer, mathematician, "
 "ethnographer, and translator, who is attributed with the first drawing of "
-"the Moon through telescopic observations"
+"the Moon through telescopic observations."
 msgstr ""
 "Thomas Harriot (env. 1560–1621) était un astronome, mathématicien, "
 "ethnographe et traducteur anglais à qui l'on attribue le premier dessin de "
 "la Lune fait au moyen d'observations à la lunette."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid ""
 "<em>Amateru</em> is a common Japanese appellation for shrines when they "
 "enshrine Amaterasu, the Shinto goddess of the Sun, born from the left eye of "
-"the god Izanagi"
+"the god Izanagi."
 msgstr ""
 "<em>Amateru</em> est un nom japonais qui désigne les autels dédiés à "
 "Amaterasu, la déesse Shinto du Soleil, née de l'œil gauche du dieu Izanagi."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid ""
 "Hypatia was a famous Greek astronomer, mathmatician, and philosopher. She "
 "was head of the Neo-Platonic school at Alexandria in the early 5th century, "
-"until murdered by a Christian mob in 415"
+"until murdered by a Christian mob in 415."
 msgstr ""
 "Hypatie d'Alexandrie était une astronome, mathématicienne et philosophe "
 "grecque célèbre. Elle dirigeait l'école néo-platoniciennne d'Alexandrie au "
 "début du Ve siècle de notre ère, jusqu'à son assassinat en 415 par des "
 "chrétiens."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
-msgid ""
-"Ran is the Norse goddess of the sea, who stirs up the waves and captures "
-"sailors with her net"
-msgstr ""
-"Ran est la déesse scandinave de la mer, qui engendre les vagues et capture "
-"les marins au moyen de son filet."
-
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid ""
-"AEgir is Ran's husband, the personified god of the ocean. <em>AEgir</em> and "
-"<em>Ran</em> both represent the <em>Jotuns</em> who reign in the outer "
-"Universe; together they had nine daughters"
+"Ran is the Norse goddess of the sea, who stirs up the waves and captures "
+"sailors with her net."
 msgstr ""
+"Rán est la déesse scandinave de la mer, qui engendre les vagues et capture "
+"les marins au moyen de son filet."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid ""
+"AEgir is Ran's husband, the personified god of the ocean. <em>AEgir</em> and "
+"<em>Ran</em> both represent the <em>Jotuns</em> who reign in the outer "
+"Universe; together they had nine daughters."
+msgstr ""
+"Ægir est la personnification de l'océan dans la mythologie scandinave. Il "
+"est l'époux de Rán. Ægir et Rán ont neuf filles qui personnifient les vagues."
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
+msgid ""
 "Ancient Semitic name and modern Arabic name for the city of Palmyra, a "
-"UNESCO World Heritage Site"
+"UNESCO World Heritage Site."
 msgstr ""
 "Nom sémitique antique et nom arabe moderne de la cité de Palmyre, un site du "
 "patrimoine mondial de l'UNESCO."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
-msgid "Dagon was a Semitic deity, often represented as half-man, half-fish"
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
+msgid "Dagon was a Semitic deity, often represented as half-man, half-fish."
 msgstr ""
 "Dagon était une divinité sémitique, souvent représentée mi-homme, mi-poisson."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
-msgid "Tonatiuh was the Aztec god of the Sun"
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
+msgid "Tonatiuh was the Aztec god of the Sun."
 msgstr "Tonatiuh était le dieu aztèque du Soleil."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
-msgid "Meztli was the Aztec goddess of the Moon"
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
+msgid "Meztli was the Aztec goddess of the Moon."
 msgstr "Meztli était le déesse aztèque de la Lune."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 msgid ""
 "Ogma was a deity of eloquence, writing, and great physical strength in the "
 "Celtic mythologies of Ireland and Scotland, and may be related to the Gallo-"
-"Roman deity <em>Ogmios</em>"
+"Roman deity <em>Ogmios</em>."
 msgstr ""
-
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
-msgid "Smertrios was a Gallic deity of war"
-msgstr ""
+"Ogma est un dieu de l'éloquence de la mythologie celtique. C'est un champion "
+"à la grande force physique. En Gaule, il était connu sous le nom de Ogmios."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
-msgid ""
-"Intercrus means <em>between the legs</em> in Latin style, referring to the "
-"star's position in the constellation Ursa Major"
-msgstr ""
+msgid "Smertrios was a Gallic deity of war."
+msgstr "Smertrios était un dieu de la guerre vénéré en Gaule."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
-msgid "Arkas was the son of Callisto (Ursa Major) in Greek mythology"
+msgid ""
+"Intercrus means <em>between the legs</em> in Latin style, referring to the "
+"star's position in the constellation Ursa Major."
 msgstr ""
+"Intercrus signifie en latin <em>entre les jambes</em>, faisant référence à "
+"la position de l'étoile dans la constellation de la Grande Ourse."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
-msgid ""
-"Miguel de Cervantes Saavedra (1547-1616) was a famous Spanish writer and "
-"author of <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>"
+msgid "Arkas was the son of Callisto (Ursa Major) in Greek mythology."
 msgstr ""
+"Arkas était le fiks de Callisto (la Grande Ourse) dans la mythologie grecque."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
 msgid ""
-"Lead fictional character from Cervantes's <em>El Ingenioso Hidalgo Don "
-"Quixote de la Mancha</em>"
+"Miguel de Cervantes Saavedra (1547-1616) was a famous Spanish writer and "
+"author of <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr ""
+"Miguel de Cervantes Saavedra (1547–1616) est un romancier, poète et "
+"dramaturge espagnol, célèbre par son roman <em>L’Ingénieux Hidalgo Don "
+"Quichotte de la Manche</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
 msgid ""
-"Fictional character and love interest of Don Quijote (or Quixote) in "
-"Cervantes's <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>"
+"Lead fictional character from Cervantes's <em>El Ingenioso Hidalgo Don "
+"Quixote de la Mancha</em>."
 msgstr ""
+"Don Quichotte, le héros du roman <em>L’Ingénieux Hidalgo Don Quichotte de la "
+"Manche</em> de Cervantes."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
 msgid ""
-"Fictional horse of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
-"Quixote de la Mancha</em>"
+"Fictional character and love interest of Don Quijote (or Quixote) in "
+"Cervantes's <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr ""
+"Dulcinée, dame des pensées de Don Quichotte, dans le roman <em>L’Ingénieux "
+"Hidalgo Don Quichotte de la Manche</em> de Cervantes."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
 msgid ""
-"Fictional squire of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
-"Quixote de la Mancha</em>"
+"Fictional horse of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
+"Quixote de la Mancha</em>."
 msgstr ""
+"Rossinante est le cheval de Don Quichotte, dans le roman <em>L’Ingénieux "
+"Hidalgo Don Quichotte de la Manche</em> de Cervantes."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
 msgid ""
-"Thestias is the patronym of Leda and her sister Althaea, the daughters of "
-"Thestius. Leda was a Greek goddess, mother of Pollux and of his twin Castor, "
-"and of Helen and Clytemnestra"
+"Fictional squire of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
+"Quixote de la Mancha</em>."
 msgstr ""
+"Sancho Panza, écuyer de Don Quichotte dans <em>L’Ingénieux Hidalgo Don "
+"Quichotte de la Manche</em> de Cervantes."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
 msgid ""
-"Lich is a fictional undead creature known for controlling other undead "
-"creatures with magic"
+"Thestias is the patronym of Leda and her sister Althaea, the daughters of "
+"Thestius. Leda was a Greek queen, mother of Pollux and of his twin Castor, "
+"and of Helen and Clytemnestra."
 msgstr ""
+"Thestias est le patronyme de Léda et de sa soeur Althée, les filles de "
+"Thestius. Léda était une déesse grecque, mère des jumeaux Castor et Pollux, "
+"ainsi que d'Hélène et de Clytemnestre."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
-msgid "Draugr refers to undead creatures in Norse mythology"
+msgid ""
+"Lich is a fictional undead creature known for controlling other undead "
+"creatures with magic."
 msgstr ""
+"La liche est, dans la littérature, un sorcier mort-vivant qui se maintient "
+"grâce à ses pouvoirs magiques."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
-msgid ""
-"Poltergeist is an name for supernatural beings that create physical "
-"disturbences, from German for <em>noisy ghost</em>"
-msgstr ""
+msgid "Draugr refers to undead creatures in Norse mythology."
+msgstr "Un draugr est une créature vampirique de la mythologie scandinave."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 msgid ""
-"Phobetor is a Greek mythological deity of nightmares, the son of Nyx, the "
-"primordial deity of night"
+"Poltergeist is an name for supernatural beings that create physical "
+"disturbances, from German for <em>noisy ghost</em>."
 msgstr ""
+"Poltergeist est le nom d'êtres surnaturels qui créent des perturbations "
+"physiques."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
+msgid ""
+"Phobetor is a Greek mythological deity of nightmares, the son of Nyx, the "
+"primordial deity of night."
+msgstr ""
+"Phobétor est la divinité des cauchemars, dans la mythologie grecque. Il est "
+"le fils de Nyx, le dieu de la nuit ou de Hypnos, le dieu du sommeil."
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
 msgid ""
 "Titawin (also known as Medina of Tetouan) is a settlement in northern "
 "Morocco and UNESCO World Heritage Site. Historically it was an important "
 "point of contact between two civilizations (Spanish and Arab) and two "
-"continents (Europe and Africa) after the 8th century"
+"continents (Europe and Africa) after the 8th century."
 msgstr ""
+"Titawin (aujourd'hui la Médina de Tétouan) est une ville du nord du Maroc et "
+"un site du patrimoine mondial de l'UNESCO.  À partir du VIIIe siècle, elle a "
+"été le principal point de jonction entre le Maroc et l'Andalousie."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
 msgid ""
 "Saffar is named for Abu al-Qasim Ahmed Ibn-Abd Allah Ibn-Omar al Ghafiqi Ibn-"
 "al-Saffar, who taught arithmetic, geometry, and astronomy in 11th century "
 "Cordova in Andalusia (modern Spain), and wrote an influential treatise on "
-"the uses of the astrolabe"
+"the uses of the astrolabe."
 msgstr ""
-
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
-msgid ""
-"Samh is named for Abu al-Qasim 'Asbagh ibn Muhammad ibn al-Samh al-Mahri (or "
-"<em>Ibn al-Samh</em>), a noted 11th century astronomer and mathematician in "
-"the school of al Majriti in Cordova (Andalusia, now modern Spain)"
-msgstr ""
+"Saffar est dénommée en référence à Ibn al-Saffar (Abu al‐Qasim Ahmad ibn Abd "
+"Allah ibn Umar al‐Ghafiqī ibn al-Saffar al‐Andalusi), qui enseignait "
+"l'arithmétique, la géométrie et l'astronomie au XIe siècle à Cordoue, en "
+"Andalousie. Il a écrit un traité sur l'utilisation l'astrolabe, d'une grande "
+"influence."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
 msgid ""
-"Majriti is named for Abu al-Qasim al-Qurtubi al-Majriti, a notable "
-"mathematician, astronomer, scholar, and teacher in 10th century and early "
-"11th century Andalusia (modern Spain)"
+"Samh is named for Abu al-Qasim 'Asbagh ibn Muhammad ibn al-Samh al-Mahri (or "
+"<em>Ibn al-Samh</em>), a noted 11th century astronomer and mathematician in "
+"the school of al Majriti in Cordova (Andalusia, now modern Spain)."
 msgstr ""
+"Le nom Samh est une référence à Ibn al-Samh (Abu al-Qasim 'Asbagh ibn "
+"Muhammad ibn al-Samh al-Mahri), un astronome et mathématicien de l'école de "
+"al-Majritî ayant vécu au XIe siècle à Cordoue (Andalousie)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
 msgid ""
-"Libertas is Latin for <em>liberty</em>. Liberty refers to social and "
-"political freedoms, and a reminder that there are people derived of liberty "
-"in the world even today. The constellation Aquila represents an eagle - a "
-"popular symbol of liberty"
+"Majriti is named for Abu al-Qasim al-Qurtubi al-Majriti, a notable "
+"mathematician, astronomer, scholar, and teacher in 10th century and early "
+"11th century Andalusia (modern Spain)."
 msgstr ""
+"Le nom Majritî est une référence à Maslama al-Majritî (Abû-l-Qâsim Maslama "
+"ibn Ahmad al-Faradi al-Hasib al-Qurtubi al-Majritî),  mathématicien, "
+"chimiste et astronome ayant vécu aux Xe et XIe siècle à Cordoue (Andalousie)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
 msgid ""
-"Fortitudo is Latin for <em>fortitude</em>. Fortitude means emotional and "
-"mental strength in the face of adversity, as embodied by the eagle "
-"(represented by the constellation Aquila)"
+"Libertas is Latin for <em>liberty</em>. Liberty refers to social and "
+"political freedoms, and a reminder that there are people deprived of liberty "
+"in the world even today. The constellation Aquila represents an eagle - a "
+"popular symbol of liberty."
 msgstr ""
+"Libertas est le nom latin de la <em>liberté</em>, choisi pour rappeler "
+"qu'aujourd'hui encore des peuples sont privés de liberté. L'Aigle, "
+"constellation dans laquelle Libertas est située, est un symbole de la "
+"liberté."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
+msgid ""
+"Fortitudo is Latin for <em>fortitude</em>. Fortitude means emotional and "
+"mental strength in the face of adversity, as embodied by the eagle "
+"(represented by the constellation Aquila)."
+msgstr ""
+"Fortitudo est le nom latin de la <em>bravoure</em>. C'est aussi la force "
+"émotionnelle et mentale face à l'adversité, symbolisée par l'aigle."
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
 msgid "Notes"
 msgstr "Remarques"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
-msgid ""
-"These names are modified based on the original proposals, to be consistent "
-"with the IAU rules"
-msgstr ""
-
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
 msgid ""
-"The original name proposed, <em>Veritas</em>, is that of an asteroid "
-"important for the study of the solar system"
+"These names are modified based on the original proposals, to be consistent "
+"with the IAU rules."
 msgstr ""
+"Ces noms, basés sur les propositions originales, ont été modifiés afin de "
+"correspondre aux règles de l'IAU."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
 msgid ""
-"The name originally proposed, Amaterasu, is already used for an asteroid"
+"The original name proposed, <em>Veritas</em>, is that of an asteroid "
+"important for the study of the solar system."
 msgstr ""
+"Le nom original proposé, <em>Veritas</em>, est déjà celui d'un astéroïde du "
+"système solaire."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
+msgid ""
+"The name originally proposed, Amaterasu, is already used for an asteroid."
+msgstr ""
+"Le nom original proposé, <em>Amaterasu</em>, est déjà celui d'un astéroïde "
+"du système solaire."
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
 msgid ""
 "Note the typographical difference between <em>AEgir</em> and <em>Aegir</em>, "
 "the Norwegian transliteration. The same name, with the spelling "
 "<em>Aegir</em>, has been attributed to one of Saturn's satellites, "
-"discovered in 2004"
+"discovered in 2004."
 msgstr ""
-
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
-msgid "<em>Ogmios</em> is a name already attributed to an asteroid"
-msgstr ""
+"À noter la différence typographique entre <em> Ægir</em> et <em>Aegir</em>, "
+"la transliteration norvégienne. Le nom <em>Aegir</em>, a été attribué à l'un "
+"des satellites de Saturne, découvert en 2004."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
+msgid "<em>Ogmios</em> is a name already attributed to an asteroid."
+msgstr ""
+"Le nom original proposé, <em>Ogmios</em>, est déjà celui d'un astéroïde du "
+"système solaire."
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
 msgid ""
 "The original proposed name <em>Leda</em> is already attributed to an "
 "asteroid and to one of Jupiter's satellites. The name <em>Althaea</em> is "
-"also attributed to an asteroid"
+"also attributed to an asteroid."
 msgstr ""
+"Le nom original proposé, <em>Léda</em>, est déjà celui d'un astéroïde du "
+"système solaire et d'un satellite de Jupiter. Le nom <em>Althée</em> est "
+"aussi déjà attribué à un astéroïde."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 msgid ""
 "The original spelling of <em>Lippershey</em> was corrected to "
 "<em>Lipperhey</em> on 15.01.2016. The commonly seen spelling "
 "<em>Lippershey</em> (with an <em>s</em>) results in fact from a "
-"typographical error dating back from 1831, thus should be avoided"
+"typographical error dating back from 1831, thus should be avoided."
 msgstr ""
+"L'orthographe originale <em>Lippershey</em> a été corrigée le 15 janvier "
+"2016 en <em>Lipperhey</em>. L'ancienne orthographe <em>Lippershey</em> (avec "
+"un <em>s</em>) provient d'une erreur typographique remontant à 1831, et doit "
+"donc être évitée."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
 msgid "Additional info"
 msgstr "Informations supplémentaires"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
 msgid "Circumstellar habitable zone"
 msgstr "Zone habitable circumstellaire"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
 msgid "Planetary equilibrium temperature"
 msgstr "Température d'équilibre planétaire"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
 msgid "Planetary habitability"
 msgstr "Habitabilité planétaire"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
 msgid "Earth Similarity Index"
 msgstr "Indice de similarité avec la Terre"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
-msgid "Final Results of NameExoWorlds Public Vote Released"
-msgstr ""
-
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
-msgid "NameExoWorlds website"
-msgstr ""
+msgid "Final Results of NameExoWorlds Public Vote Released"
+msgstr "Résultats définitifs de la votation publique de NameExoWorlds."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:257
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
+msgid "NameExoWorlds website"
+msgstr "Site web de NameExoWorlds"
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
 msgid "General professional Web sites relevant to extrasolar planets"
 msgstr "Sites web professionnels sur le thème des planètes extrasolaires"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
 msgid "Exoplanets: an interactive version of XKCD 1071"
 msgstr "Exoplanètes : une version interactive de xkcd 1071"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:260
 msgid "HEK (The Hunt for Exomoons with Kepler)"
 msgstr "HEK (The Hunt for Exomoons with Kepler)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:260
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
 msgstr ""
 "Exoplanètes dans des systèmes binaires et multiples (Richard Schwarz)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
 msgid "Naming exoplanets (IAU)"
 msgstr "Dénomination des exoplanètes (IAU)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr ""
 "Quelques astronomes et groupes actifs dans l'étude des planètes extrasolaires"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
 msgid "update: 16 April 2012"
 msgstr "mise à jour : 16 avril 2012"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
 msgid "The Exoplanet Data Explorer"
 msgstr "L'explorateur de données des exoplanètes"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
 msgid "The Anglo-Australian Planet Search"
 msgstr "The Anglo-Australian Planet Search"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:266
 msgid "Geneva Extrasolar Planet Search Programmes"
 msgstr "The Geneva Extrasolar Planet Search Programmes"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:266
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
 msgstr "OLBIN (Optical Long-Baseline Interferometry News)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
 msgid "NASA's Exoplanet Exploration Program"
 msgstr "NASA's Exoplanet Exploration Program"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
 msgid "Pulsar planets"
 msgstr "Planètes de pulsar"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:270
 msgid "The NASA Exoplanet Archive"
 msgstr "The NASA Exoplanet Archive"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:270
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
 msgid "IAU Commission 53: Extrasolar Planets"
 msgstr "Commission 53 de l'UAI : Planètes extrasolaires"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
 msgid "ExoMol"
 msgstr "ExoMol"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
 msgid "The Habitable Zone Gallery"
 msgstr "The Habitable Zone Gallery"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
 msgid "PlanetQuest - The Search for Another Earth"
 msgstr "PlanetQuest - The Search for Another Earth"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
 msgid "Open Exoplanet Catalogue"
 msgstr "Catalogue Open Exoplanet"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:276
 msgid "The Habitable Exoplanets Catalog"
 msgstr "The Habitable Exoplanets Catalog"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:369
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:370
 msgid "Exoplanets is updated"
 msgstr "Les exoplanètes sont à jour"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:490
-msgid "Orbital Eccentricity"
-msgstr ""
-
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:491
-msgid "Orbit Semi-Major Axis, AU"
-msgstr ""
+msgid "Orbital Eccentricity"
+msgstr "Excentricité orbitale"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:492
-msgid "Planetary Mass, Mjup"
-msgstr ""
+msgid "Orbit Semi-Major Axis, AU"
+msgstr "Demi-grand-axe de l'orbite, UA"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:493
-msgid "Planetary Radius, Rjup"
-msgstr ""
+msgid "Planetary Mass, Mjup"
+msgstr "Masse planétaire, Mjup"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:494
-msgid "Orbital Period, days"
-msgstr ""
+msgid "Planetary Radius, Rjup"
+msgstr "Rayon planétaire, Mjup"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:495
+msgid "Orbital Period, days"
+msgstr "Période orbitale, jours"
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:496
 msgid "Angular Distance, arcsec."
-msgstr ""
+msgstr "Distance angulaire, arcsec."
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:456
 msgid "Exoplanets Configuration"
@@ -10367,44 +10462,44 @@ msgstr "Afficher le bouton exoplanètes dans la barre d'outils"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:483
 msgid "Diagrams: scatter plot"
-msgstr ""
+msgstr "Diagramme : nuage de points"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:484
 msgid "Plot"
-msgstr ""
+msgstr "Dessiner"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:485
 msgid "Y axis"
-msgstr ""
+msgstr "Axe Y"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:487
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:494
 msgid "Logarithmic scale"
-msgstr ""
+msgstr "Échelle logarithmique"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:489
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:496
 msgid "log scale"
-msgstr ""
+msgstr "Échelle log"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:490
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:498
 msgid "min"
-msgstr ""
+msgstr "min"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:491
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:499
 msgid "max"
-msgstr ""
+msgstr "max"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:492
 msgid "X axis"
-msgstr ""
+msgstr "Axe X"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:500
 msgctxt "tab in plugin windows"
 msgid "Diagram"
-msgstr ""
+msgstr "Diagramme"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:501
 msgctxt "tab in plugin windows"
