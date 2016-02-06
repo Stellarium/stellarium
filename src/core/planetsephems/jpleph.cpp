@@ -142,7 +142,7 @@ int DLL_FUNC jpl_pleph(void *ephem, const double et, const int ntarg,
                       const int ncent, double rrd[], const int calc_velocity)
 {
     struct jpl_eph_data *eph = (struct jpl_eph_data *)ephem;
-    double pv[13][6]={0.};/* pv is the position/velocity array
+    double pv[13][6]={{0.}};/* pv is the position/velocity array
                              NUMBERED FROM ZERO: 0=Mercury,1=Venus,...
                              8=Pluto,9=Moon,10=Sun,11=SSBary,12=EMBary
                              First 10 elements (0-9) are affected by
