@@ -237,6 +237,7 @@ FIND_PACKAGE(Qt5Gui REQUIRED)
 FIND_PACKAGE(Qt5Network REQUIRED)
 FIND_PACKAGE(Qt5OpenGL REQUIRED)
 FIND_PACKAGE(Qt5Widgets REQUIRED)
+FIND_PACKAGE(Qt5PrintSupport REQUIRED)
 IF(USE_PLUGIN_TELESCOPECONTROL)
      FIND_PACKAGE(Qt5SerialPort REQUIRED)
 ENDIF()
@@ -382,6 +383,7 @@ IF(WIN32)
     GET_TARGET_PROPERTY(QtWidgets_location Qt5::Widgets LOCATION)
     GET_TARGET_PROPERTY(QtSql_location Qt5::Sql LOCATION)    
     GET_TARGET_PROPERTY(QtXmlPatterns_location Qt5::XmlPatterns LOCATION)
+    GET_TARGET_PROPERTY(QtPrintSupport_location Qt5::PrintSupport LOCATION)
     IF(ENABLE_SCRIPTING)
         GET_TARGET_PROPERTY(QtScript_location Qt5::Script LOCATION)
         SET(ISS_QT_SCRIPT "Source: \"${QtScript_location}\"; DestDir: \"{app}\";")
@@ -522,6 +524,7 @@ INCLUDE_DIRECTORIES(
      ${CMAKE_SOURCE_DIR}/src/core/planetsephems
      ${CMAKE_SOURCE_DIR}/src/core/external
      ${CMAKE_SOURCE_DIR}/src/core/external/qtcompress
+     ${CMAKE_SOURCE_DIR}/src/core/external/qcustomplot
      ${CMAKE_SOURCE_DIR}/src/core/external/glues_stel/source/
      ${CMAKE_SOURCE_DIR}/src/core/external/glues_stel/source/libtess
      ${CMAKE_SOURCE_DIR}/src/gui

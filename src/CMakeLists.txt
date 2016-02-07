@@ -278,6 +278,8 @@ SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
      core/external/qtcompress/qzip.cpp
      core/external/qtcompress/qzipreader.h
      core/external/qtcompress/qzipwriter.h
+     core/external/qcustomplot/qcustomplot.cpp
+     core/external/qcustomplot/qcustomplot.h
 )
 
 IF(ENABLE_SCRIPTING)
@@ -459,7 +461,7 @@ ENDIF()
 IF(GENERATE_STELMAINLIB)
      ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
      TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
-     QT5_USE_MODULES(stelMain Core Concurrent Gui Network OpenGL Script Widgets)
+     QT5_USE_MODULES(stelMain Core Concurrent Gui Network OpenGL Script Widgets PrintSupport)
      IF(ENABLE_MEDIA)
          QT5_USE_MODULES(stelMain Multimedia MultimediaWidgets)
      ENDIF()
@@ -476,7 +478,7 @@ ELSE()
      # This will add the ANGLE lib if the Qt version supports it.
      TARGET_LINK_LIBRARIES(stellarium ${Qt5Gui_LIBRARIES} ${Qt5Gui_OPENGL_LIBRARIES})
 
-     QT5_USE_MODULES(stellarium Core Concurrent Gui Network OpenGL Script Widgets)
+     QT5_USE_MODULES(stellarium Core Concurrent Gui Network OpenGL Script Widgets PrintSupport)
      IF(ENABLE_MEDIA)
           QT5_USE_MODULES(stellarium Multimedia MultimediaWidgets)
      ENDIF()
