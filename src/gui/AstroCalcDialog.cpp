@@ -158,7 +158,7 @@ void AstroCalcDialog::currentPlanetaryPositions()
 			treeItem->setText(ColumnName, planet->getNameI18n());
 			treeItem->setText(ColumnRA, StelUtils::radToHmsStr(ra));
 			treeItem->setTextAlignment(ColumnRA, Qt::AlignRight);
-			treeItem->setText(ColumnDec, StelUtils::radToHmsStr(dec));
+			treeItem->setText(ColumnDec, StelUtils::radToDmsStr(dec, true));
 			treeItem->setTextAlignment(ColumnDec, Qt::AlignRight);
 			treeItem->setText(ColumnMagnitude, QString::number(planet->getVMagnitudeWithExtinction(core), 'f', 2));
 			treeItem->setTextAlignment(ColumnMagnitude, Qt::AlignRight);
@@ -304,7 +304,7 @@ void AstroCalcDialog::generateEphemeris()
 			treeItem->setText(EphemerisJD, QString::number(JD, 'f', 5));
 			treeItem->setText(EphemerisRA, StelUtils::radToHmsStr(ra));
 			treeItem->setTextAlignment(EphemerisRA, Qt::AlignRight);
-			treeItem->setText(EphemerisDec, StelUtils::radToHmsStr(dec));
+			treeItem->setText(EphemerisDec, StelUtils::radToDmsStr(dec, true));
 			treeItem->setTextAlignment(EphemerisDec, Qt::AlignRight);
 			treeItem->setText(EphemerisMagnitude, QString::number(obj->getVMagnitudeWithExtinction(core), 'f', 2));
 			treeItem->setTextAlignment(EphemerisMagnitude, Qt::AlignRight);
