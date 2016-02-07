@@ -45,7 +45,8 @@ AddOn::AddOn(const QString addonId, const QVariantMap& map)
 
 	m_sTitle = map.value("title").toString();
 	m_sDescription = map.value("description").toString();
-	m_dVersion = map.value("version").toDate();
+	m_iVersion = map.value("version").toInt();
+	m_dDate = map.value("date").toDate();
 	m_supported = map.value("supported").toStringList();
 	m_sLicense = map.value("license").toString();
 	m_sLicenseURL = map.value("license-url").toString();
@@ -63,11 +64,11 @@ AddOn::AddOn(const QString addonId, const QVariantMap& map)
 	m_eStatus = (AddOn::Status) map.value("status").toInt();
 
 	// early returns if the mandatory fields are not present
-	if (m_sTitle.isEmpty() || m_sDescription.isEmpty() || m_dVersion.isNull() || m_sDownloadFilename.isEmpty())
+	if (m_sTitle.isEmpty() || m_sDescription.isEmpty() || m_dDate.isNull() || m_sDownloadFilename.isEmpty())
 	{
 		qWarning() << "[Add-on] Error! Add-on" << m_sAddonId
 			   << "does not have all the required fields!"
-			   << "(title, description, version and download-filename)";
+			   << "(title, description, date and download-filename)";
 		return;
 	}
 

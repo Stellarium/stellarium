@@ -78,7 +78,8 @@ public:
 	Type getType() { return m_eType; }
 	QString getTypeString() { return m_sType; }
 	QString getTypeDisplayRole() { return m_sTypeDisplayRole; }
-	QDate getVersion() { return m_dVersion; }
+	int getVersion() { return m_iVersion; }
+	QDate getDate() { return m_dDate; }
 	QList<Authors> getAuthors() { return m_authors; }
 	QString getDescription() { return m_sDescription; }
 	QString getLicenseName() { return m_sLicense; }
@@ -106,7 +107,8 @@ private:
 	QString m_sTypeDisplayRole;
 	QString m_sTitle;
 	QString m_sDescription;
-	QDate m_dVersion;
+	int m_iVersion;
+	QDate m_dDate;
 	QStringList m_supported;
 	QString m_sLanguage;
 	QString m_sLastStel;

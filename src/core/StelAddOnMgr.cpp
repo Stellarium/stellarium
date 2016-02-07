@@ -127,11 +127,11 @@ void StelAddOnMgr::reloadCatalogues()
 			continue;
 		}
 		else if (addonInstalled->getChecksum() == addonAvailable->getChecksum() ||
-			 addonInstalled->getVersion() >= addonAvailable->getVersion())
+			 addonInstalled->getDate() >= addonAvailable->getDate())
 		{
 			m_addonsAvailable.remove(addonId);
 		}
-		else if (addonInstalled->getVersion() < addonAvailable->getVersion())
+		else if (addonInstalled->getDate() < addonAvailable->getDate())
 		{
 			m_addonsAvailable.remove(addonId);
 			m_addonsToUpdate.insert(addonId, addonAvailable);
@@ -728,7 +728,8 @@ void StelAddOnMgr::insertAddonInJson(AddOn* addon, QString jsonPath)
 		attributes.insert("type", addon->getTypeString());
 		attributes.insert("title", addon->getTitle());
 		attributes.insert("description", addon->getDescription());
-		attributes.insert("version", addon->getVersion().toString("yyyy.MM.dd"));
+		attributes.insert("version", addon->getVersion());
+		attributes.insert("date", addon->getDate().toString("yyyy.MM.dd"));
 		attributes.insert("license", addon->getLicenseName());
 		attributes.insert("license-url", addon->getLicenseURL());
 		attributes.insert("download-url", addon->getDownloadURL());
