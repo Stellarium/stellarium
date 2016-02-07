@@ -64,8 +64,11 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 	// return initialized if the mandatory fields are not present
 	if (!map.contains("designation"))
 		return;
+
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 		
 	designation  = map.value("designation").toString();
+	starProperName = map.value("starProperName").toString();
 	RA = StelUtils::getDecAngle(map.value("RA").toString());
 	DE = StelUtils::getDecAngle(map.value("DE").toString());
 	distance = map.value("distance").toFloat();
@@ -79,6 +82,15 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 
 	EPCount=0;
 	PHEPCount=0;
+	eccentricityList.clear();
+	semiAxisList.clear();
+	massList.clear();
+	radiusList.clear();
+	periodList.clear();
+	angleDistanceList.clear();
+	englishNames.clear();
+	translatedNames.clear();
+	exoplanetDesignations.clear();
 	if (map.contains("exoplanets"))
 	{
 		foreach(const QVariant &expl, map.value("exoplanets").toList())
@@ -86,7 +98,18 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 			QVariantMap exoplanetMap = expl.toMap();
 			exoplanetData p;
 			EPCount++;
-			if (exoplanetMap.contains("planetName")) p.planetName = exoplanetMap.value("planetName").toString();
+			if (exoplanetMap.contains("planetName"))
+			{
+				p.planetName = exoplanetMap.value("planetName").toString();
+				QString epd = QString("%1 %2").arg(designation, p.planetName);
+				exoplanetDesignations.append(epd);
+			}
+			if (exoplanetMap.contains("planetProperName"))
+			{
+				p.planetProperName = exoplanetMap.value("planetProperName").toString();
+				englishNames.append(p.planetProperName);
+				translatedNames.append(trans.qtranslate(p.planetProperName));
+			}
 			p.period = exoplanetMap.value("period", -1.f).toFloat();
 			p.mass = exoplanetMap.value("mass", -1.f).toFloat();
 			p.radius = exoplanetMap.value("radius", -1.f).toFloat();
@@ -101,6 +124,36 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 			p.EqTemp = exoplanetMap.value("EqTemp", -1).toInt();
 			p.ESI = exoplanetMap.value("ESI", -1).toInt();
 			exoplanets.append(p);
+
+			if (p.eccentricity>0)
+				eccentricityList.append(p.eccentricity);
+			else
+				eccentricityList.append(0);
+
+			if (p.semiAxis>0)
+				semiAxisList.append(p.semiAxis);
+			else
+				semiAxisList.append(0);
+
+			if (p.mass>0)
+				massList.append(p.mass);
+			else
+				massList.append(0);
+
+			if (p.radius>0)
+				radiusList.append(p.radius);
+			else
+				radiusList.append(0);
+
+			if (p.angleDistance>0)
+				angleDistanceList.append(p.angleDistance);
+			else
+				angleDistanceList.append(0);
+
+			if (p.period>0)
+				periodList.append(p.period);
+			else
+				periodList.append(0);
 		}
 	}
 
@@ -116,6 +169,7 @@ QVariantMap Exoplanet::getMap(void)
 {
 	QVariantMap map;
 	map["designation"] = designation;
+	if (!starProperName.isEmpty()) map["starProperName"] = starProperName;
 	map["RA"] = RA;
 	map["DE"] = DE;
 	map["distance"] = distance;
@@ -131,6 +185,7 @@ QVariantMap Exoplanet::getMap(void)
 	{
 		QVariantMap explMap;
 		explMap["planetName"] = p.planetName;
+		if (!p.planetProperName.isEmpty()) explMap["planetProperName"] = p.planetProperName;
 		if (p.mass > -1.f) explMap["mass"] = p.mass;
 		if (p.period > -1.f) explMap["period"] = p.period;
 		if (p.radius > -1.f) explMap["radius"] = p.radius;
@@ -158,17 +213,55 @@ QString Exoplanet::getNameI18n(void) const
 {
 	// Use SkyTranslator for translation star names
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
-	return trans.qtranslate(designation);
+	QString name = trans.qtranslate(designation);
+	if (!starProperName.isEmpty())
+		name = trans.qtranslate(starProperName);
+
+	return name;
+}
+
+QString Exoplanet::getEnglishName(void) const
+{
+	QString name = designation;
+	if (!starProperName.isEmpty())
+		name = starProperName;
+
+	return name;
+}
+
+QString Exoplanet::getDesignation(void) const
+{
+	return designation;
+}
+
+QStringList Exoplanet::getExoplanetsEnglishNames() const
+{
+	return englishNames;
+}
+
+QStringList Exoplanet::getExoplanetsNamesI18n() const
+{
+	return translatedNames;
+}
+
+QStringList Exoplanet::getExoplanetsDesignations() const
+{
+	return exoplanetDesignations;
 }
 
 QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
 	QString str;
 	QTextStream oss(&str);
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 
 	if (flags&Name)
 	{
-		oss << "<h2>" << getNameI18n() << "</h2>";
+		QString systemName = getNameI18n();
+		if (!starProperName.isEmpty())
+			systemName.append(QString(" (%1)").arg(designation));
+
+		oss << "<h2>" << systemName << "</h2>";
 	}
 	
 	if (flags&ObjectType)
@@ -227,6 +320,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		if (exoplanets.size() > 0)
 		{
 			QString planetNameLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Exoplanet"));
+			QString planetProperNameLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Name"));
 			QString periodLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2)</td>").arg(q_("Period")).arg(q_("days"));
 			QString massLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (M<sub>%2</sub>)</td>").arg(q_("Mass")).arg(q_("Jup"));
 			QString radiusLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (R<sub>%2</sub>)</td>").arg(q_("Radius")).arg(q_("Jup"));
@@ -249,6 +343,14 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 				else
 				{
 					planetNameLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+				}
+				if (!p.planetProperName.isEmpty())
+				{
+					planetProperNameLabel.append("<td style=\"padding:0 2px;\">").append(trans.qtranslate(p.planetProperName)).append("</td>");
+				}
+				else
+				{
+					planetProperNameLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
 				}
 				if (p.period > -1.f)
 				{
@@ -341,6 +443,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 			}
 			oss << "<table>";
 			oss << "<tr>" << planetNameLabel << "</tr>";
+			oss << "<tr>" << planetProperNameLabel << "</tr>";
 			oss << "<tr>" << periodLabel << "</tr>";
 			oss << "<tr>" << massLabel << "</tr>";
 			oss << "<tr>" << radiusLabel << "</tr>";

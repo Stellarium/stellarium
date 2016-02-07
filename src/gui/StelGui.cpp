@@ -807,3 +807,8 @@ void StelGui::copySelectedObjectInfo(void)
 {
 	QGuiApplication::clipboard()->setText(skyGui->infoPanel->getSelectedText());
 }
+
+bool StelGui::getAstroCalcVisible()
+{
+	return astroCalcDialog && astroCalcDialog->visible();
+}

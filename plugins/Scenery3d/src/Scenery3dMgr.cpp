@@ -80,8 +80,9 @@ Scenery3dMgr::Scenery3dMgr() :
 
 Scenery3dMgr::~Scenery3dMgr()
 {
+#ifndef NDEBUG
 	qDebug()<<"[Scenery3dMgr] Destructor called";
-
+#endif
 	if(!cleanedUp)
 		deinit();
 
