@@ -45,6 +45,7 @@
 #include <QComboBox>
 #include <QMenu>
 #include <QMetaEnum>
+#include <QClipboard>
 
 #include "SimbadSearcher.hpp"
 
@@ -126,6 +127,7 @@ void CompletionLabel::updateText()
 
 const char* SearchDialog::DEF_SIMBAD_URL = "http://simbad.u-strasbg.fr/";
 SearchDialog::SearchDialogStaticData SearchDialog::staticData;
+QString SearchDialog::extSearchText = "";
 
 SearchDialog::SearchDialog(QObject* parent) : StelDialog(parent), simbadReply(NULL)
 {
@@ -706,6 +708,16 @@ bool SearchDialog::eventFilter(QObject*, QEvent *event)
 			return true;
 		}
 	}
+	if (event->type() == QEvent::Show)
+	{
+		if (!extSearchText.isEmpty())
+		{
+			ui->lineEditSearchSkyObject->setText(extSearchText);
+			ui->lineEditSearchSkyObject->selectAll();
+			extSearchText.clear();
+		}
+	}
+
 
 	return false;
 }
@@ -816,7 +828,18 @@ void SearchDialog::showContextMenu(const QPoint &pt)
 {
 	QMenu *menu = ui->lineEditSearchSkyObject->createStandardContextMenu();
 	menu->addSeparator();
-	menu->addAction(q_("Paste and Search"), this, SLOT(pasteAndGo()));
+	QString clipText;
+	QClipboard *clipboard = QApplication::clipboard();
+	if (clipboard)
+		clipText = clipboard->text();
+	if (!clipText.isEmpty())
+	{
+		if (clipText.length()>12)
+			clipText = clipText.right(9) + "...";
+		clipText = "\t(" + clipText + ")";
+	}
+
+	menu->addAction(q_("Paste and Search") + clipText, this, SLOT(pasteAndGo()));
 	menu->exec(ui->lineEditSearchSkyObject->mapToGlobal(pt));
 	delete menu;
 }
