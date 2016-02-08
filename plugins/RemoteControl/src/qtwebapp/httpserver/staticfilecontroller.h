@@ -74,6 +74,9 @@ public:
     void service(HttpRequest& request, HttpResponse& response);
 
     QString getDocRoot() const { return docroot; }
+
+    /** Returns the content type of this file. This is currently only determined by file name. */
+    static QByteArray getContentType(QString fileName, QString encoding);
 private:
 
     /** Encoding of text files */

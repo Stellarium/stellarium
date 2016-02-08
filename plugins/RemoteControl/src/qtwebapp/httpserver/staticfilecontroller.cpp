@@ -101,30 +101,35 @@ void StaticFileController::service(HttpRequest& request, HttpResponse& response)
     }
 }
 
+QByteArray StaticFileController::getContentType(QString fileName, QString encoding)
+{
+	if (fileName.endsWith(".png")) {
+		return "image/png";
+	}
+	else if (fileName.endsWith(".jpg")) {
+		return "image/jpeg";
+	}
+	else if (fileName.endsWith(".gif")) {
+		return "image/gif";
+	}
+	else if (fileName.endsWith(".pdf")) {
+		return "application/pdf";
+	}
+	else if (fileName.endsWith(".txt")) {
+		return qPrintable("text/plain; charset="+encoding);
+	}
+	else if (fileName.endsWith(".html") || fileName.endsWith(".htm")) {
+		return qPrintable("text/html; charset="+encoding);
+	}
+	else if (fileName.endsWith(".css")) {
+		return "text/css";
+	}
+	else if (fileName.endsWith(".js")) {
+		return qPrintable("text/javascript; charset="+encoding);
+	}
+	return "";
+}
+
 void StaticFileController::setContentType(QString fileName, HttpResponse& response) const {
-    if (fileName.endsWith(".png")) {
-        response.setHeader("Content-Type", "image/png");
-    }
-    else if (fileName.endsWith(".jpg")) {
-        response.setHeader("Content-Type", "image/jpeg");
-    }
-    else if (fileName.endsWith(".gif")) {
-        response.setHeader("Content-Type", "image/gif");
-    }
-    else if (fileName.endsWith(".pdf")) {
-        response.setHeader("Content-Type", "application/pdf");
-    }
-    else if (fileName.endsWith(".txt")) {
-        response.setHeader("Content-Type", qPrintable("text/plain; charset="+encoding));
-    }
-    else if (fileName.endsWith(".html") || fileName.endsWith(".htm")) {
-        response.setHeader("Content-Type", qPrintable("text/html; charset="+encoding));
-    }
-    else if (fileName.endsWith(".css")) {
-        response.setHeader("Content-Type", "text/css");
-    }
-    else if (fileName.endsWith(".js")) {
-	response.setHeader("Content-Type", qPrintable("text/javascript; charset="+encoding));
-    }
-    // Todo: add all of your content types
+	response.setHeader("Content-Type", getContentType(fileName,encoding));
 }

@@ -14,7 +14,7 @@
     <div class="loadwrapper">
       <div class="loadinner textcenter">
         <img src="images/stellariumlarge.png" alt="Stellarium logo" class="display-block margin-auto"/>
-        <div class="margin-auto">Please wait, loading</div>
+        <div class="margin-auto"><?= tr("Please wait, loading")?></div>
         <noscript><p class="ui-state-error">This remote control requires JavaScript and a reasonably modern browser.<br/>For further information, here are <a href="http://www.enable-javascript.com/" target="_blank">
          instructions how to enable JavaScript in your web browser</a></p></noscript>
        </div>
@@ -169,7 +169,7 @@
               </div>
             </div>
             <div>
-              <h2>Quick select</h2>
+              <h2><?= tr("Quick select")?></h2>
               <ul id="quickselect" class="ui-corner-all ui-widget-content button32list">
                 <!-- to add a new quick select button, simply add a new button with the english name of the object as value -->
                 <!-- try not to add whitespace between li items (inline-block layout uglyness) -->
