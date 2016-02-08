@@ -204,6 +204,7 @@ void StelCore::init()
 	skyDrawer->init();
 
 	setCurrentProjectionTypeKey(getDefaultProjectionTypeKey());
+	updateMaximumFov();
 
 	// Register all the core actions.
 	QString timeGroup = N_("Date and Time");
@@ -472,16 +473,21 @@ void StelCore::postDraw()
 	sPainter.drawViewportShape();
 }
 
+void StelCore::updateMaximumFov()
+{
+	const double savedFov = currentProjectorParams.fov;
+	currentProjectorParams.fov = 0.0001;	// Avoid crash
+	double newMaxFov = getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity())))->getMaxFov();
+	movementMgr->setMaxFov(newMaxFov);
+	currentProjectorParams.fov = qMin(newMaxFov, savedFov);
+}
+
 void StelCore::setCurrentProjectionType(ProjectionType type)
 {
 	if(type!=currentProjectionType)
 	{
 		currentProjectionType=type;
-		const double savedFov = currentProjectorParams.fov;
-		currentProjectorParams.fov = 0.0001;	// Avoid crash
-		double newMaxFov = getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity())))->getMaxFov();
-		movementMgr->setMaxFov(newMaxFov);
-		currentProjectorParams.fov = qMin(newMaxFov, savedFov);
+		updateMaximumFov();
 
 		emit currentProjectionTypeChanged(type);
 	}

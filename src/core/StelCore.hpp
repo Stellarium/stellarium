@@ -640,6 +640,7 @@ private:
 
 	void updateTransformMatrices();
 	void updateTime(double deltaTime);
+	void updateMaximumFov();
 	void resetSync();
 
 
@@ -689,7 +690,6 @@ private:
 	bool de431Available; // ephem file found
 	bool de430Active;    // available and user-activated.
 	bool de431Active;    // available and user-activated.
-
 };
 
 #endif // _STELCORE_HPP_
