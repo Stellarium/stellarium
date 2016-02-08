@@ -86,13 +86,8 @@ RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QOb
 	apiController->registerService(new LocationSearchService("locationsearch",apiController));
 	apiController->registerService(new ViewService("view",apiController));
 
-	connect(&StelApp::getInstance(),SIGNAL(languageChanged()),this,SLOT(refreshHtmlTemplate()));
-
 	staticFiles = new StaticFileController(settings,this);
-	indexFilePath = staticFiles->getDocRoot() + "/index.html";
-	transDataPath = staticFiles->getDocRoot() + "/js/translationdata.js";
-	qDebug()<<"Index file located at "<<indexFilePath;
-
+	connect(&StelApp::getInstance(),SIGNAL(languageChanged()),this,SLOT(refreshHtmlTemplate()));
 	refreshHtmlTemplate();
 }
 
@@ -130,45 +125,43 @@ void RequestHandler::service(HttpRequest &request, HttpResponse &response)
 		}
 	}
 
-	QByteArray rawPath = request.getRawPath();
+	//QByteArray rawPath = request.getRawPath();
 	QByteArray path = request.getPath();
-	qDebug()<<"Request path:"<<rawPath<<" decoded:"<<path;
+	//qDebug()<<"Request path:"<<rawPath<<" decoded:"<<path;
 
 	if(path.startsWith("/api/"))
+	{
+		//this is an API request, pass it on
 		apiController->service(request,response);
+	}
 	else
 	{
-#ifndef QT_NO_DEBUG
-		if(path.startsWith("/external/"))
-		{
-			//let browser cache external stuff even if in development
-			response.setHeader("Cache-Control","max-age=86400");
-		}
-#endif
-
 		if(path.isEmpty() || path == "/" || path == "/index.html")
 		{
-			//special handling for indexFile
-			response.setHeader("Content-Type", qPrintable("text/html; charset=UTF-8"));
-#ifndef QT_NO_DEBUG
-			//force fresh loading for each request
-			refreshHtmlTemplate();
-#endif
-			response.write(indexFile.toUtf8(),true);
+			//transparently redirect to index.html
+			path = "/index.html";
 		}
-		else if (path == "/js/translationdata.js")
-		{
-			response.setHeader("Content-Type", qPrintable("text/javascript; charset=UTF-8"));
 
+		if(templateMap.contains(path))
+		{
 #ifndef QT_NO_DEBUG
-			//force fresh loading for each request
+			//force fresh loading for each request in debug mode
+			//to allow for immediate display of changes
 			refreshHtmlTemplate();
 #endif
+			//get a mime type
+			QByteArray mime = StaticFileController::getContentType(path,"utf-8");
+			if(!mime.isEmpty())
+				response.setHeader("Content-Type",mime);
 
-			response.write(transData.toUtf8(),true);
+			//serve the stored template
+			response.write(templateMap[path].toUtf8(),true);
 		}
 		else
+		{
+			//let the static file controller handle the request
 			staticFiles->service(request,response);
+		}
 	}
 }
 
@@ -189,15 +182,42 @@ void RequestHandler::setPassword(const QString &pw)
 
 void RequestHandler::refreshHtmlTemplate()
 {
-	StelTemplateTranslationProvider transProv;
-	QFile file(indexFilePath);
-	Template tmp(file);
-	tmp.translate(transProv);
-	indexFile = tmp;
+	//remove old tranlations
+	templateMap.clear();
 
-	file.close();
-	file.setFileName(transDataPath);
-	Template tmp2(file);
-	tmp2.translate(transProv);
-	transData = tmp2;
+	StelTemplateTranslationProvider transProv;
+	QDir docRoot = QDir(staticFiles->getDocRoot());
+	//load the translate_files list
+	QFile transFileList(docRoot.absoluteFilePath("translate_files"));
+	if(transFileList.open(QFile::ReadOnly))
+	{
+		QTextStream text(&transFileList);
+		//read line by line, ignoring whitespace and comments
+		while(!text.atEnd())
+		{
+			QString line = text.readLine().trimmed();
+			if(line.isEmpty() || line.startsWith('#'))
+				continue;
+
+			//load file and translate
+			QFile f(docRoot.absoluteFilePath(line));
+			if(f.exists())
+			{
+				Template tmp(f);
+				tmp.translate(transProv);
+				//check if the file was correctly loaded
+				if(tmp.size()>0)
+				{
+					templateMap.insert('/'+line.toUtf8(),tmp);
+				}
+			}
+			else
+				qWarning()<<"[RemoteControl] Translatable file"<<f.fileName()<<"does not exist!";
+		}
+		transFileList.close();
+	}
+	else
+	{
+		qWarning()<<"[RemoteControl] "<<transFileList.fileName()<<" could not be opened, can not automatically translate files with StelTranslator!";
+	}
 }
