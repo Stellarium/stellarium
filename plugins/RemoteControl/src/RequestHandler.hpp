@@ -48,11 +48,9 @@ private slots:
 	void refreshHtmlTemplate();
 
 private:
-	//Contains the translated index.html
-	QString indexFile;
-	QString indexFilePath;
-	QString transData;
-	QString transDataPath;
+	//Contains the translated templates loaded from the file "translate_files" in the webroot folder
+	QMap<QByteArray,QString> templateMap;
+
 	bool usePassword;
 	QString password;
 	QByteArray passwordReply;
