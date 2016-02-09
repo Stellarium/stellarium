@@ -113,11 +113,20 @@ define(["jquery", "settings", "api/remotecontrol", "api/actions", "api/propertie
 			}
 
 			$(propApi).on("stelPropertyChanged:" + prop, function(evt, prop) {
-				self.spinner("value", prop.value);
+				if(!self.data("updatePaused"))
+					self.spinner("value", prop.value);
 			});
 			self.spinner("value", propApi.getStelProp(prop));
 
-			self.on("spin", function(evt, ui) {
+			self.on("focus",function(evt){
+				self.data("updatePaused",true);
+			});
+
+			self.on("blur",function(evt){
+				self.data("updatePaused",false);
+			});
+
+			self.on("spinuserinput", function(evt, ui) {
 				propApi.setStelPropQueued(prop, ui.value);
 			});
 		});
