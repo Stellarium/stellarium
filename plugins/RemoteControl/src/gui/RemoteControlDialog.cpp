@@ -17,6 +17,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QHostInfo>
 #include "RemoteControl.hpp"
 #include "RemoteControlDialog.hpp"
 #include "ui_remoteControlDialog.h"
@@ -30,6 +31,7 @@ RemoteControlDialog::RemoteControlDialog()
 	: rc(NULL)
 {
 	ui = new Ui_remoteControlDialog();
+	dialogName="RemoteControl";
 }
 
 RemoteControlDialog::~RemoteControlDialog()
@@ -60,10 +62,13 @@ void RemoteControlDialog::createDialogContent()
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	// TODO Fill other buttons
 
 	connectCheckBox(ui->enabledCheckbox,"actionShow_Remote_Control");
+	connect(ui->enabledCheckbox, SIGNAL(clicked(bool)), this, SLOT(updateIPlabel(bool)));
+	updateIPlabel(ui->enabledCheckbox->isChecked());
 
 	ui->activateOnStartCheckBox->setChecked(rc->getFlagAutoStart());
 	connect(ui->activateOnStartCheckBox, SIGNAL(toggled(bool)), rc, SLOT(setFlagAutoStart(bool)));
@@ -139,4 +144,30 @@ void RemoteControlDialog::restart()
 	rc->stopServer();
 	rc->startServer();
 	ui->restartPanel->setVisible(false);
+}
+
+void RemoteControlDialog::updateIPlabel(bool running)
+{
+	if (running)
+	{
+		QString localHostName=QHostInfo::localHostName();
+		QHostInfo hostInfo = QHostInfo::fromName(localHostName);
+		QString ipString("");
+		foreach (QHostAddress a, hostInfo.addresses())
+		{
+			if ((a.protocol() == QAbstractSocket::IPv4Protocol) && a != QHostAddress(QHostAddress::LocalHost))
+			{
+				ipString += a.toString() + " ";
+				continue;
+			}
+		}
+		ui->label_RemoteRunningState->setText(q_("Listening on %1, IP: ").arg(localHostName) + ipString);
+		ui->label_RemoteRunningState->show();
+	}
+	else
+	{
+		ui->label_RemoteRunningState->setText(q_("Not active."));
+		// Maybe even hide the label?
+		ui->label_RemoteRunningState->hide();
+	}
 }

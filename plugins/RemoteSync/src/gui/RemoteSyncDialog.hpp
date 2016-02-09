@@ -46,6 +46,7 @@ protected:
 private slots:
 	void printErrorMessage(const QString error);
 	void updateState();
+	void updateIPlabel(bool running);
 
 private:
 	Ui_remoteSyncDialog* ui;
