@@ -265,11 +265,6 @@ void StelAddOnMgr::downloadThumbnailFinished()
 	downloadNextThumbnail();
 }
 
-void StelAddOnMgr::updateAddons(QSet<AddOn *> addons)
-{
-	// TODO
-}
-
 void StelAddOnMgr::installAddons(QSet<AddOn *> addons)
 {
 	foreach (AddOn* addon, addons) {

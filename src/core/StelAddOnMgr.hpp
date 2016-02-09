@@ -64,7 +64,6 @@ public:
 	void installAddOnFromFile(QString filePath);
 	void installAddOn(AddOn *addon, bool tryDownload = true);
 	void removeAddOn(AddOn *addon);
-	void updateAddons(QSet<AddOn *> addons);
 	void installAddons(QSet<AddOn*> addons);
 	void removeAddons(QSet<AddOn*> addons);
 	void setUpdateFrequency(UpdateFrequency freq);

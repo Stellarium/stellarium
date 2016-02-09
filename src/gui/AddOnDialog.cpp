@@ -329,12 +329,7 @@ void AddOnDialog::slotCheckedRows()
 {
 	AddOnTableView* tableview;
 	QString tabName = ui->stackedWidget->currentWidget()->objectName();
-	if (tabName == ui->updates->objectName())
-	{
-		tableview = ui->updatesTableView;
-		StelApp::getInstance().getStelAddOnMgr().updateAddons(tableview->getCheckedAddons());
-	}
-	else if (tabName == ui->installed->objectName())
+	if (tabName == ui->updates->objectName() || tabName == ui->installed->objectName())
 	{
 		tableview = ui->installedTableView;
 		StelApp::getInstance().getStelAddOnMgr().removeAddons(tableview->getCheckedAddons());
