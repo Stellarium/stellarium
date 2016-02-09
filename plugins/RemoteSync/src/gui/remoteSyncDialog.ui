@@ -151,14 +151,14 @@
           <string>Server mode</string>
          </property>
          <layout class="QFormLayout" name="formLayout_2">
-          <item row="2" column="0" colspan="2">
+          <item row="3" column="0" colspan="2">
            <widget class="QPushButton" name="serverButton">
             <property name="text">
              <string>Start server</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="0" colspan="2">
+          <item row="1" column="0" colspan="2">
            <widget class="QWidget" name="serverControls" native="true">
             <layout class="QFormLayout" name="formLayout_4">
              <property name="leftMargin">
@@ -197,6 +197,13 @@
               </widget>
              </item>
             </layout>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_serverName">
+            <property name="text">
+             <string>Server Name, IP: </string>
+            </property>
            </widget>
           </item>
          </layout>
