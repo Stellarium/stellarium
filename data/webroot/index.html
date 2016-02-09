@@ -49,24 +49,24 @@
               </ul>
               <div id="time_local" class="timetab">
                 <p class="timedisplay">
-                  <input id="date_year" />
+                  <input id="date_year" class="spinner" data-type="date" data-field="year" data-min="-100000" data-max="100000"/>
                   /
-                  <input id="date_month" />
+                  <input id="date_month" class="spinner" data-type="date" data-field="month" data-min="0" data-max="13"/>
                   /
-                  <input id="date_day" />
+                  <input id="date_day" class="spinner" data-type="date" data-field="day" data-min="0" data-max="32"/>
                 </p>
                 <p class="timedisplay">
-                  <input id="time_hour" />
+                  <input id="time_hour" class="spinner" data-type="time" data-field="hour" data-min="-1" data-max="24"/>
                   :
-                  <input id="time_minute" />
+                  <input id="time_minute" class="spinner" data-type="time" data-field="minute" data-min="-1" data-max="60"/>
                   :
-                  <input id="time_second" />
+                  <input id="time_second" class="spinner" data-type="time" data-field="second" data-min="-1" data-max="60"/>
                 </p>
               </div>
               <div id="time_jday" class="timetab">
                 <div>
-                  <p class="timedisplay"><label for="input_jd">JD: </label><input id="input_jd"/></p>
-                  <p class="timedisplay"><label for="input_mjd">MJD: </label><input id="input_mjd"/></p>
+                  <p class="timedisplay"><label for="input_jd">JD: </label><input id="input_jd" class="spinner" data-min="-100000000" data-max="100000000" data-step="0.00001"/></p>
+                  <p class="timedisplay"><label for="input_mjd">MJD: </label><input id="input_mjd" class="spinner" data-min="-100000000" data-max="100000000" data-step="0.00001"/></p>
                 </div>
               </div>
             </div>
