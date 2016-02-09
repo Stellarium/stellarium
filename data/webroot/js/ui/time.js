@@ -61,134 +61,23 @@ define(["jquery", "api/time", "api/actions", "jquery-ui"], function($, timeApi, 
 		//jQuery UI initialization
 		$("#timewidget").tabs();
 
-		$("#date_year").spinner({
-			min: -100000,
-			max: 100000
-		}).data({
-			type: "date",
-			field: "year"
-		});
-		$("#date_month").spinner({
-			min: 0,
-			max: 13
-		}).data({
-			type: "date",
-			field: "month"
-		});
-		$("#date_day").spinner({
-			min: 0,
-			max: 32
-		}).data({
-			type: "date",
-			field: "day"
-		});
-		$("#time_hour").spinner({
-			min: -1,
-			max: 24
-		}).data({
-			type: "time",
-			field: "hour"
-		});
-		$("#time_minute").spinner({
-			min: -1,
-			max: 60
-		}).data({
-			type: "time",
-			field: "minute"
-		});
-		$("#time_second").spinner({
-			min: -1,
-			max: 60
-		}).data({
-			type: "time",
-			field: "second"
-		});
-		$("#input_jd").spinner({
-			min: -100000000,
-			max: 100000000,
-			numberFormat: "n5",
-			step: 0.00001
-		});
-		$("#input_mjd").spinner({
-			min: -100000000,
-			max: 100000000,
-			numberFormat: "n5",
-			step: 0.00001
-		});
-
 		//use delegated event style here to reduce number of unique events
 		var scope = ".timedisplay input";
-		$("#timewidget").on("focusin", scope, function(evt) {
+		$("#timewidget").on("focus", scope, function(evt) {
 			enterTimeEditMode();
-		}).on("focusout", scope, function(evt) {
+		}).on("blur", scope, function(evt) {
 			leaveTimeEditMode();
 		});
 
-		$("#time_local").on('input', scope, function() {
-			var val = this.value,
-				$this = $(this),
-				max = $this.spinner('option', 'max'),
-				min = $this.spinner('option', 'min');
-
-			console.log("val: " + val);
-			if ($this.data('onInputPrevented')) {
-				console.log("inputprevented");
-				//return;
-			}
-			if (!val.match(/^\d+$/)) {
-				val = $this.data('prevData'); //we want only number, no alpha
-				console.log("value rolled back to " + val);
-			}
-			val = Math.round(parseFloat(val));
-			val = val > max ? max : val < min ? min : val;
-			this.value = val;
-			//for some obscure reason, this.value may be a string instead of a float, so use val directly!
-			if (val !== $this.data('prevData')) setDateTimeField($(this).data("type"), $(this).data("field"), val);
-		}).on('keydown', scope, function(e) { // to allow 'Backspace' key behaviour
-			$(this).data('onInputPrevented', e.which === 8 ? true : false);
-			$(this).data('prevData', this.value);
-		}).on("spin", scope, function(evt, ui) {
+		$("#time_local").on("spinuserinput", scope, function(evt,ui){
 			setDateTimeField($(this).data("type"), $(this).data("field"), ui.value);
-			return false;
 		});
 
-		$("#input_jd").on('input', function() {
-			if ($(this).data('onInputPrevented')) return;
-			var val = this.value,
-				$this = $(this),
-				max = $this.spinner('option', 'max'),
-				min = $this.spinner('option', 'min');
-			console.log("val: " + val);
-			if (!val.match(/^\d+\.?\d*$/)) val = $this.data('prevData'); //we want only number, no alpha
-			var val2 = parseFloat(val);
-			val2 = Math.Round(val2);
-			val2 = val2 > max ? max : val2 < min ? min : val2;
-			this.value = val2;
-			//for some obscure reason, this.value may be a string instead of a float, so use val directly!
-			if (val2 !== $this.data('prevData')) setJDay(val2);
-		}).on('keydown', function(e) { // to allow 'Backspace' key behaviour
-			$(this).data('onInputPrevented', e.which === 8 ? true : false);
-			$(this).data('prevData', this.value);
-		}).on("spin", function(evt, ui) {
+		$("#input_jd").on("spinuserinput", function(evt, ui) {
 			setJDay(ui.value);
 		});
 
-		$("#input_mjd").on('input', function() {
-			if ($(this).data('onInputPrevented')) return;
-			var val = this.value,
-				$this = $(this),
-				max = $this.spinner('option', 'max'),
-				min = $this.spinner('option', 'min');
-			console.log("val: " + val);
-			if (!val.match(/^\d+\.?\d*$/)) val = $this.data('prevData'); //we want only number, no alpha
-			var val2 = parseFloat(val);
-			this.value = val2 > max ? max : val2 < min ? min : val2;
-			//for some obscure reason, this.value may be a string instead of a float, so use val directly!
-			if (val !== $this.data('prevData')) setJDay(val2 + 2400000.5);
-		}).on('keydown', function(e) { // to allow 'Backspace' key behaviour
-			$(this).data('onInputPrevented', e.which === 8 ? true : false);
-			$(this).data('prevData', this.value);
-		}).on("spin", function(evt, ui) {
+		$("#input_mjd").on("spinuserinput", function(evt, ui) {
 			setJDay(ui.value + 2400000.5);
 		});
 
