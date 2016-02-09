@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include <QHostInfo>
 #include "RemoteSync.hpp"
 #include "RemoteSyncDialog.hpp"
 #include "ui_remoteSyncDialog.h"
@@ -30,6 +31,7 @@ RemoteSyncDialog::RemoteSyncDialog()
 	: rs(NULL)
 {
 	ui = new Ui_remoteSyncDialog();
+	dialogName="RemoteSync";
 }
 
 RemoteSyncDialog::~RemoteSyncDialog()
@@ -60,6 +62,7 @@ void RemoteSyncDialog::createDialogContent()
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(rs, SIGNAL(stateChanged(RemoteSync::SyncState)), this, SLOT(updateState()));
 	updateState();
@@ -108,6 +111,7 @@ void RemoteSyncDialog::updateState()
 		connect(ui->clientButton, SIGNAL(clicked(bool)), rs, SLOT(connectToServer()));
 
 		ui->statusLabel->setText(q_("Not running"));
+		updateIPlabel(false);
 	}
 	else if (state == RemoteSync::SERVER)
 	{
@@ -117,6 +121,7 @@ void RemoteSyncDialog::updateState()
 		ui->clientGroupBox->setEnabled(false);
 
 		ui->statusLabel->setText(QString(q_("Running as server on port %1")).arg(rs->getServerPort()));
+		updateIPlabel(true);
 	}
 	else if(state == RemoteSync::CLIENT_CONNECTING)
 	{
@@ -125,6 +130,7 @@ void RemoteSyncDialog::updateState()
 
 		ui->clientButton->setText(q_("Connecting..."));
 		ui->statusLabel->setText(QString(q_("Connecting to %1:%2...")).arg(rs->getClientServerHost()).arg(rs->getClientServerPort()));
+		updateIPlabel(false);
 	}
 	else if (state == RemoteSync::CLIENT)
 	{
@@ -136,6 +142,7 @@ void RemoteSyncDialog::updateState()
 		connect(ui->clientButton, SIGNAL(clicked(bool)), rs, SLOT(disconnectFromServer()));
 
 		ui->statusLabel->setText(QString(q_("Connected to %1:%2")).arg(rs->getClientServerHost()).arg(rs->getClientServerPort()));
+		updateIPlabel(false);
 	}
 }
 
@@ -171,4 +178,30 @@ void RemoteSyncDialog::setAboutHtml(void)
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
 	}
 	ui->aboutTextBrowser->setHtml(html);
+}
+
+void RemoteSyncDialog::updateIPlabel(bool running)
+{
+	if (running)
+	{
+		QString localHostName=QHostInfo::localHostName();
+		QHostInfo hostInfo = QHostInfo::fromName(localHostName);
+		QString ipString("");
+		foreach (QHostAddress a, hostInfo.addresses())
+		{
+			if ((a.protocol() == QAbstractSocket::IPv4Protocol) && a != QHostAddress(QHostAddress::LocalHost))
+			{
+				ipString += a.toString() + " ";
+				continue;
+			}
+		}
+		ui->label_serverName->setText(q_("Server Name %1, IP: ").arg(localHostName) + ipString);
+		//ui->label_RemoteRunningState->show();
+	}
+	else
+	{
+		ui->label_serverName->setText(q_("Server not active."));
+		// Maybe even hide the label?
+		//ui->label_RemoteRunningState->hide();
+	}
 }
