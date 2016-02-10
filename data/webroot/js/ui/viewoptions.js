@@ -76,21 +76,21 @@ define(["jquery", "api/viewoptions", "api/actions", "api/properties", "jquery-ui
 		actionApi.connectActionContainer($("#tab_landscape"));
 		actionApi.connectActionContainer($("#tab_skyculture"));
 		$vo_projectionlist = $("#vo_projectionlist");
-		$vo_projectionlist.dblclick(function() {
+		$vo_projectionlist.change(function(event) {	
 			if (this.selectedIndex >= 0) {
 				var proj = this.options[this.selectedIndex].value;
 				viewOptionApi.setProjection(proj);
 			}
 		});
 
-		$vo_landscapelist.dblclick(function(evt, data) {
+		$vo_landscapelist.change(function(event) {
 			if (this.selectedIndex >= 0) {
 				var ls = this.options[this.selectedIndex].value;
 				viewOptionApi.setLandscape(ls);
 			}
 		});
 
-		$vo_skyculturelist.dblclick(function(evt, data) {
+		$vo_skyculturelist.change(function(evt) {
 			if (this.selectedIndex >= 0) {
 				var sc = this.options[this.selectedIndex].value;
 				viewOptionApi.setSkyculture(sc);
@@ -127,9 +127,7 @@ define(["jquery", "api/viewoptions", "api/actions", "api/properties", "jquery-ui
 			return val;
 		});
 
-		$vo_projectionlist.children('option.select_selected').removeClass('select_selected');
 		$vo_projectionlist.val(proj);
-		$vo_projectionlist.children("option[value='" + proj + "']").addClass('select_selected');
 	});
 
 	$(viewOptionApi).on("landscapeChanged", function(evt, landscape) {
@@ -138,9 +136,7 @@ define(["jquery", "api/viewoptions", "api/actions", "api/properties", "jquery-ui
 			return val;
 		});
 
-		$vo_landscapelist.children("option.select_selected").removeClass("select_selected");
 		$vo_landscapelist.val(landscape);
-		$vo_landscapelist.children("option[value='" + landscape + "']").addClass("select_selected");
 	});
 
 	$(viewOptionApi).on("skycultureChanged", function(evt, skyculture) {
@@ -149,9 +145,7 @@ define(["jquery", "api/viewoptions", "api/actions", "api/properties", "jquery-ui
 			return val;
 		});
 
-		$vo_skyculturelist.children(".select_selected").removeClass("select_selected");
 		$vo_skyculturelist.val(skyculture);
-		$vo_skyculturelist.children("option[value='" + skyculture + "']").addClass("select_selected");
 	});
 
 	$(initControls);
