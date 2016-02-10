@@ -831,6 +831,29 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 	map.insert("glong", glong*180./M_PI);
 	map.insert("glat", glat*180./M_PI);	
 
+	if (core->getCurrentLocation().planetName == "Earth")
+	{
+		SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
+		double ra_equ, dec_equ, lambda, beta;
+		// J2000
+		double eclJ2000 = ssmgr->getEarth()->getRotObliquity(2451545.0);
+		double ecl = ssmgr->getEarth()->getRotObliquity(core->getJDE());
+
+		// ecliptic longitude/latitude (J2000 frame)
+		StelUtils::rectToSphe(&ra_equ,&dec_equ, obj->getJ2000EquatorialPos(core));
+		StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &lambda, &beta);
+		if (lambda<0) lambda+=2.0*M_PI;
+		map.insert("elongJ2000", lambda*180./M_PI);
+		map.insert("elatJ2000", beta*180./M_PI);
+
+		// ecliptic longitude/latitude
+		StelUtils::rectToSphe(&ra_equ,&dec_equ, obj->getEquinoxEquatorialPos(core));
+		StelUtils::equToEcl(ra_equ, dec_equ, ecl, &lambda, &beta);
+		if (lambda<0) lambda+=2.0*M_PI;
+		map.insert("elong", lambda*180./M_PI);
+		map.insert("elat", beta*180./M_PI);
+	}
+
 	// magnitude
 	map.insert("vmag", obj->getVMagnitude(core));
 	map.insert("vmage", obj->getVMagnitudeWithExtinction(core));
@@ -940,6 +963,29 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 	StelUtils::rectToSphe(&glong, &glat, pos);
 	map.insert("glong", glong*180./M_PI);
 	map.insert("glat", glat*180./M_PI);	
+
+	if (core->getCurrentLocation().planetName == "Earth")
+	{
+		SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
+		double ra_equ, dec_equ, lambda, beta;
+		// J2000
+		double eclJ2000 = ssmgr->getEarth()->getRotObliquity(2451545.0);
+		double ecl = ssmgr->getEarth()->getRotObliquity(core->getJDE());
+
+		// ecliptic longitude/latitude (J2000 frame)
+		StelUtils::rectToSphe(&ra_equ,&dec_equ, obj->getJ2000EquatorialPos(core));
+		StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &lambda, &beta);
+		if (lambda<0) lambda+=2.0*M_PI;
+		map.insert("elongJ2000", lambda*180./M_PI);
+		map.insert("elatJ2000", beta*180./M_PI);
+
+		// ecliptic longitude/latitude
+		StelUtils::rectToSphe(&ra_equ,&dec_equ, obj->getEquinoxEquatorialPos(core));
+		StelUtils::equToEcl(ra_equ, dec_equ, ecl, &lambda, &beta);
+		if (lambda<0) lambda+=2.0*M_PI;
+		map.insert("elong", lambda*180./M_PI);
+		map.insert("elat", beta*180./M_PI);
+	}
 
 	// magnitude
 	map.insert("vmag", obj->getVMagnitude(core));
