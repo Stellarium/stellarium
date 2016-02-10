@@ -38,7 +38,7 @@ define(["jquery", "api/scripts", "api/remotecontrol"], function($, scriptApi, rc
 			console.log("selected: " + selection);
 		}).dblclick(runscriptfn);
 
-		$bt_runscript.dblclick(runscriptfn);
+		$bt_runscript.click(runscriptfn);
 		$bt_stopscript.click(scriptApi.stopScript);
 
 		scriptApi.loadScriptList(fillScriptList);
