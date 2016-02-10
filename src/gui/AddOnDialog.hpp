@@ -54,6 +54,7 @@ protected:
 	virtual void createDialogContent();
 
 private slots:
+	void checkInterval();
 	void updateFrequencyChanged(int idx);
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 	void slotUpdateMsg(const StelAddOnMgr::AddOnMgrMsg msg);
@@ -68,7 +69,6 @@ private:
 
 	QNetworkReply* m_pUpdateCatalogReply;
 
-	void checkInterval();
 	void updateTabBarListWidgetWidth();
 };
 
