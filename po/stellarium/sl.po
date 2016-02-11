@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-06 11:34+0600\n"
+"POT-Creation-Date: 2016-02-10 22:43+0600\n"
 "PO-Revision-Date: 2010-11-30 12:06+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-02-07 05:23+0000\n"
-"X-Generator: Launchpad (build 17908)\n"
+"X-Launchpad-Export-Date: 2016-02-11 05:27+0000\n"
+"X-Generator: Launchpad (build 17923)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:904 src/core/modules/LandscapeMgr.cpp:414
-#: src/core/modules/NebulaMgr.cpp:266 src/core/modules/SolarSystem.cpp:185
+#: src/core/modules/NebulaMgr.cpp:266 src/core/modules/SolarSystem.cpp:183
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:502 src/core/StelCore.cpp:210
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:557
@@ -828,22 +828,22 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:186 src/gui/AstroCalcDialog.cpp:455
+#: src/core/modules/SolarSystem.cpp:184 src/gui/AstroCalcDialog.cpp:455
 #: src/translations.h:62
 msgid "Planets"
 msgstr "Planeti"
 
-#: src/core/modules/SolarSystem.cpp:187
+#: src/core/modules/SolarSystem.cpp:185
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:309
 msgid "Planet labels"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:188
+#: src/core/modules/SolarSystem.cpp:186
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:313
 msgid "Planet orbits"
 msgstr "Orbite planetov"
 
-#: src/core/modules/SolarSystem.cpp:189
+#: src/core/modules/SolarSystem.cpp:187
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Planet trails"
 msgstr "Poti planeta"
@@ -9374,8 +9374,8 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
 msgid ""
-"Helvetios is the Latin for <em>the Helvetian</em> and refers to the Celtic "
-"tribe that lived in Switzerland during the Middle Ages."
+"Helvetios is Celtic for <em>the Helvetian</em> and refers to the Celtic "
+"tribe that lived in Switzerland during antiquity."
 msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
