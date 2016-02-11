@@ -130,7 +130,7 @@ void RemoteControl::init()
 	StelApp& app = StelApp::getInstance();
 
 	// Create action for enable/disable & hook up signals	
-	addAction("actionShow_Remote_Control", N_("Remote Control"), N_("Remote control"), "enabled", "Ctrl+N");
+	addAction("actionShow_Remote_Control", N_("Remote Control"), N_("Remote control"), "enabled", "");
 
 	// Add a toolbar button. TODO:  decide whether a button is necessary at all. Maye the button should not only enable, but call the GUI dialog directly?
 	try
