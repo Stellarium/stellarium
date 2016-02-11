@@ -1,0 +1,842 @@
+@font-face {
+	font-family: DejaVuSans;
+	src: url("DejaVuSans.ttf");
+}
+
+@font-face {
+	font-family: DejaVuSansMono;
+	src: url("DejaVuSansMono.ttf");
+}
+
+/* --- Stellarium-style jQuery UI Theme for some objects ---*/
+
+/* Base stuff */
+.ui-widget {
+	font-size: 1em;
+	font-family: DejaVuSans,Verdana,Helvetica,Arial,sans-serif;
+}
+
+.ui-widget-content {
+	border: none;
+	color: rgb(3,3,3);
+	background: linear-gradient(rgb(86, 87, 90),rgb(48, 49, 52));
+}
+
+/* Tab customization */
+.ui-tabs {
+    padding: 0px;
+    background: rgb(31,31,31);
+    border-width: 0px;
+}
+
+.ui-tabs .ui-widget-header { 
+    background: transparent; 
+    border: none; 
+    border-radius: 0px; 
+}
+
+.ui-tabs .ui-widget-header .ui-state-default a {
+    font-weight: bold;
+    color: rgb(170, 173, 164);
+}
+
+.ui-tabs .ui-widget-header .ui-state-active a {
+    color: rgb(220, 223, 214);
+}
+
+div#srch_tab_object {
+    border-radius: 0px;
+}
+
+.ui-tabs .ui-tabs-nav {
+    padding-left: 0px;
+    background: transparent;
+    border-width: 0px 0px 1px 0px;
+    border-radius: 0px;
+}
+
+.ui-tabs .ui-tabs-nav .ui-corner-top {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.ui-tabs .ui-tabs-nav .ui-state-default { 
+    background: transparent; 
+    border: none; 
+}
+
+.ui-tabs .ui-tabs-nav .ui-state-active { 
+    background: linear-gradient(rgb(68, 69, 72),rgb(86, 87, 90)); 
+    border: none; 
+}
+
+.ui-tabs .ui-tabs-panel {
+    color: rgb(3,3,3);
+    background: linear-gradient(rgb(86, 87, 90),rgb(48, 49, 52));
+    border-width: 0px;
+	border-radius: 0px;
+}
+
+/* Large vertical spinners */
+.ui-spinner {
+    display: inline-block;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    vertical-align: middle;
+	background: linear-gradient(rgb(180, 180, 183),rgb(93, 95, 98));
+	border-radius: 0px;
+}
+
+.ui-spinner-button {
+	border-radius: 0px;
+}
+
+.ui-spinner a.ui-spinner-button {
+	border-top: none;
+	border-bottom: none;
+	border-right: none;
+	border-left: none;
+}
+
+.ui-spinner-button.ui-spinner-up {
+    background: linear-gradient(rgb(97, 97, 92),rgb(74, 74, 75));
+}
+
+.ui-spinner-button.ui-spinner-down {
+    background: linear-gradient(rgb(68, 68, 69),rgb(40, 40, 40));
+}
+
+#timewidget .ui-spinner-input {
+    margin: 22px 0.2em;
+    text-align: center;
+}
+
+#timewidget .ui-spinner a.ui-spinner-button {
+    border: medium none;
+}
+
+#timewidget .ui-spinner-button {
+    height: 20px;
+    left: 0;
+    width: 100%;
+	
+    cursor: default;
+    display: block;
+    font-size: 1.5em;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    text-align: center;
+}
+
+#timewidget .ui-spinner .ui-icon {
+    left: 50%;
+    margin-left: -7px;
+    /* margin-top: -5px;
+    top: 2px; */
+    position: absolute;
+}
+
+/* override slider handle size TODO: HOW TO MAKE THIS WORK??? */
+#view_fov .ui-slider-handle {
+	width: 2em;
+	height: 2em;
+}
+#view_fov .ui-slider-horizontal {
+    height: 2.8em;
+}
+
+/* Autocomplete */
+.ui-autocomplete {
+	max-height: 200px;
+	overflow-y: auto;
+	/* prevent horizontal scrollbar */
+	overflow-x: hidden;
+}
+  
+* html .ui-autocomplete {
+	height: 200px;
+}
+
+/* fix for a 1px discrepancy when using a different background */
+.ui-tabs .ui-tabs-nav li.ui-tabs-active {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+/* End jQuery UI override */
+
+html {
+	background: #fff url("images/stars.png");
+	font-size: 13px;
+	font-family: DejaVuSans,Verdana,Helvetica,Arial,sans-serif;
+}
+
+::selection {
+    background: rgb(253, 216, 134);
+}
+
+::-moz-selection {
+    background: rgb(253, 216, 134);
+}
+
+
+select {
+	padding: 1px 0px;
+	/*font-size: small;  GZ changed to */
+	font-size: medium;
+}
+
+h1 {
+	font-size: 26px;
+}
+
+h2 {
+	font-size: 14px;
+}
+
+#wrapper {
+	border: 1px;
+	background: rgb(86, 87, 90);
+	solid #595959;
+	margin: 1em;
+	padding: 1em;
+}
+
+.fixed-dialog{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}
+
+.fixed-dialog .ui-dialog-titlebar-close{
+  visibility: hidden;
+}
+
+.center {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.textcenter {
+	text-align: center;
+}
+
+.display-block {
+	display: block;
+}
+
+.inline-block {
+	display: inline-block;
+}
+
+.margin-auto {
+	margin: auto;
+}
+
+.margin-block {
+	margin: 10px;
+}
+
+.valign-middle {
+	vertical-align: middle;
+}
+
+.block {
+	position: relative;
+	padding: 15px;
+	padding-top: 35px;
+	margin-right: 10px;
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background: rgba(149, 150, 152, 0.2);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-style: inset;
+	border-radius: 10px;
+	/* vertical-align: top; */
+	min-width: 18em;
+}
+
+.block header {
+	display: block;
+	text-align: left;
+	position: absolute;
+	left: 17px;
+	top: 10px;
+	color: rgb(0,0,0);
+}
+
+.block header h2 {
+	/* font-size: 14px; */
+	margin: 0px;
+	/* display: inline-block; */
+}
+
+.innerblock {
+	position: relative;
+	padding: 5px;
+	padding-top: 25px;
+	margin-right: 5px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/* vertical-align: top; */
+}
+
+.innerblock > h3 {
+	display: block;
+	position: absolute;
+	left: 10px;
+	top: 2px;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 0px;
+}
+
+.smallblock {
+	position: relative;
+	padding: 5px;
+	padding-top: 25px;
+	margin-right: 5px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	background: rgba(149, 150, 152, 0.2);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-style: inset;
+	border-radius: 5px;
+	/* vertical-align: top; */
+	/* display: inline-block; */
+}
+
+.smallblock > h3 {
+	/* vertical-align: middle; */
+	margin: 0px;
+	padding: 0px;
+	display: block;
+	position: absolute;
+	left: 10px;
+	top: 4px;
+	font-size: 12px;
+	font-weight: bold;
+	/* line-height: 0px; */
+}
+
+.relative {
+	position: relative;
+}
+
+.flex {
+	display: flex;
+}
+
+.flex-wrap {
+	flex-wrap: wrap;
+}
+
+.inline-flex {
+	display: inline-flex;
+}
+
+.flex-expand {
+	flex-grow: 1;
+}
+
+.flex-noshrink {
+	flex-shrink: 0;
+}
+
+.flex-column {
+	flex-direction: column;
+}
+
+.flex-baseline {
+	align-items: baseline;
+}
+
+.slider {
+	min-width: 150px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#loadindicator {
+	position: fixed;
+	width: 32px;
+	height: 32px;
+	bottom: 12px;
+	right: 21px;
+	background-image: url("images/ajax-loader.gif");
+}
+
+#loadoverlay {
+	color: white;
+	font-size: xx-large;
+	background: #fff url("images/stars.png");
+	opacity: 1.0;
+	z-index: 50;
+	display: table;
+	/* position: absolute; */
+}
+
+.loadwrapper {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.loadinner {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+header h1 {
+	margin-left: 1em;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+header img {
+	vertical-align: middle;
+	height: 64px;
+	width: 64px;
+}
+
+#timewidget {
+	font-size: 14px;
+	min-width: 295px;	
+}
+
+.ui-tabs-panel.timetab {
+	background: linear-gradient(rgb(235, 239, 249),rgb(210, 214, 224));
+}
+
+.timedisplay {
+	font-family: DejaVuSansMono,"Courier New",monospace;
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+#time_jday .timedisplay {
+	text-align: right;
+}
+
+#time_jday > div {
+	display: inline-block;
+}
+
+#date_year {
+	width: 4em;
+}
+
+#date_month,
+#date_day,
+#time_hour,
+#time_minute,
+#time_second {
+	width: 2em;
+}
+
+#input_jd,
+#input_mjd{
+	width: 8em;
+}
+
+#timecontrols {
+	/* display: block; */
+	text-align: center;
+	margin-top: 10px;
+	padding: 6px;
+}
+
+ul.button32list {
+	padding: 0px;
+	list-style: none;
+	/* text-align: center; */
+}
+
+ul.button32list > li,
+li.button32wrapper {
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	overflow: hidden;
+	vertical-align: middle;
+}
+
+ul.button32list > li:hover,
+li.button32wrapper:hover {
+	background: url("images/icons.png") no-repeat;
+	background-position: -851px 0;
+}
+
+ul.button32list > li > button,
+button.button32 {
+	background-color: transparent;
+	cursor: pointer;
+	font-size: 26px;
+	width: 32px;
+	height: 32px;
+	line-height: 32px;
+	vertical-align: middle;
+	overflow: hidden;
+	padding: 0px;
+	margin: 0px;
+	border-radius: 2px;
+	border: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-ms-user-select: none;
+}
+
+ul.button32list > li > button:active,
+button.button32:active {
+	background-color: rgb(180, 180, 183);
+}
+
+.icon32 {
+	background: url("images/icons.png") no-repeat;
+	height: 32px;
+	width: 32px;
+}
+
+.icon32.active {
+	background-image: url("images/icons-active.png");
+}
+
+.icon32.btAtmosphere { background-position: 0 0; } 
+.icon32.btAzimuthalGrid { background-position: -37px 0; } 
+.icon32.btCardinalPoints { background-position: -74px 0; } 
+.icon32.btConstellationArt { background-position: -111px 0; } 
+.icon32.btConstellationLabels { background-position: -148px 0; } 
+.icon32.btConstellationLines { background-position: -185px 0; } 
+.icon32.btDSS { background-position: -222px 0; } 
+.icon32.btFlipHorizontal { background-position: -259px 0; } 
+.icon32.btEquatorialGrid { background-position: -296px 0; } 
+.icon32.btEquatorialMount { background-position: -333px 0; } 
+.icon32.btFlipVertical { background-position: -370px 0; } 
+.icon32.btFullScreen { background-position: -407px 0; } 
+.icon32.btGotoSelectedObject { background-position: -444px 0; } 
+.icon32.btGround { background-position: -481px 0; } 
+.icon32.btNebula { background-position: -518px 0; } 
+.icon32.btNightView { background-position: -555px 0; } 
+.icon32.btPlanets { background-position: -592px 0; } 
+.icon32.btScriptRun { background-position: -629px 0; } 
+.icon32.btTimeForward { background-position: -666px 0; } 
+.icon32.btScriptStop { background-position: -703px 0; } 
+.icon32.btTimeNow { background-position: -740px 0; } 
+.icon32.btTimeRealtime { background-position: -777px 0; } 
+.icon32.btTimeRewind { background-position: -814px 0; } 
+.icon32.glow32x32 { background-position: -851px 0; } 
+.icon32.btTimeRealtime.paused  { background-image: url("images/icons-active.png"); background-position: -851px 0; } 
+
+#timejumplist ul {
+	list-style: none;
+	padding: 0px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+#activescript {
+	font-weight: bold;
+}
+
+.scrollselect {
+	padding: 1px 0px;
+	min-height: 12em;
+	/* margin-left: auto; */
+	/* margin-right: auto; */
+	box-sizing: border-box;
+	display: block;
+}
+
+.select_selected,
+.checkableaction {
+	font-style: italic;
+}
+
+#loc_map {
+	display: inline-block;
+	position: relative;
+	width: 400px;
+	height: 240px;
+	overflow: hidden;
+}
+
+#loc_mapimg {
+	width: 100%;
+	height: 100%;
+}
+
+#loc_mappointer {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+}
+
+#loc_searchlist{
+	vertical-align: top;
+	height: 240px;
+	width: 150px;
+	float: right;
+}
+
+#loc_searchlist > *{
+	width: 100%;
+	box-sizing: border-box;
+	display: block;
+}
+
+#loc_list {
+	flex: 1 1 auto;
+	position: static;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+#loc_list li {
+	white-space: nowrap;
+	text-align: left;
+}
+
+#loc_inputs {
+	text-align: left;
+}
+
+#loc_inputs > div {
+	display: inline-block;
+}
+
+#loc_inputs > div label {
+	width: 100px;
+	display: inline-block;
+}
+
+#loc_name {
+	width: 240px;
+	box-sizing: border-box;
+}
+
+#loc_inputs input.custom-combobox-input {
+	width: 212px;
+	box-sizing: border-box;
+}
+
+#loc_inputs input.ui-spinner-input {
+	width: 77px;
+	box-sizing: border-box;
+}
+
+.custom-combobox {
+	background: linear-gradient(#B4B4B7, #5D5F62);
+	overflow: hidden;
+	position: relative;
+	padding: 0px;
+	vertical-align: middle;
+	display: inline-block;
+}
+.custom-combobox-toggle {
+	position: absolute;
+	margin: 0px;
+	bottom: 0;
+	padding: 0;
+	display: block;
+	right: 0px;
+	height: 100%;
+	width: 16px;
+}
+.custom-combobox-input {
+	margin: 0.2em 22px 0.2em 0.4em;
+	padding: 0px;
+	background: transparent;
+	border: none;
+}
+
+#srch_results {
+	/* text-align: left; */
+	max-width: 367px;
+	height: 180px;
+	font-size: 14px;
+	padding-left: 10px;
+	padding-right: 5px;
+	background: none;
+	margin: 5px 0px;
+	border: 1px solid black;
+}
+
+#srch_results span {
+	padding: 1em;
+}
+
+#srch_results span.state-selected {
+	font-weight: bold;
+}
+
+#srch_greek div {
+	display: flex;
+}
+
+#srch_greek button {
+	width: 42px;
+	height: 35px;
+	margin: 0px;
+	padding: 0px;
+	flex-grow: 1;
+}
+
+#srch_greek button .ui-button-text {
+	padding: 0px;
+}
+
+#srch_list_objectlist {
+	margin-top: 5px;
+	height: 270px;
+	/* width: 400px; */
+}
+
+#srch_tab_list {
+	text-align: left;
+}
+
+#srch_tab_list span.custom-combobox {
+	flex-grow: 1;
+}
+
+#srch_tab_list input.custom-combobox-input {
+	width: 90%;
+}
+
+#quickselect {
+	list-style: none;
+	font-weight: bold;
+}
+
+#quickselect li {
+	display: inline-block;
+}
+
+#selection {
+	position: relative;
+}
+
+#sel_infostring {
+	text-align: left;
+	/* white-space: nowrap; */
+	/* overflow-x: hidden; */
+	/* overflow-y: auto; */
+	/* width: 20em; */
+	/* max-height: 340px; */
+	/* max-width: 100%; */
+	display: inline-block;
+}
+
+#view_controls {
+	display: inline-flex;
+	flex-wrap: wrap;
+	width: 96px;
+	height: 96px;
+}
+
+.joybutton {
+	background: url("images/joystick.png") no-repeat;
+	cursor: pointer;
+	width: 32px;
+	height: 32px;
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+#view_up {
+	background-position: -32px 0px;
+}
+
+#view_left {
+	background-position: 0px -32px;
+}
+
+#view_center {
+	background-position: -32px -32px;
+}
+
+#view_right {
+	background-position:  -64px -32px;
+}
+
+#view_down {
+	background-position:  -32px -64px;
+}
+
+#view_wrapper {
+	margin-top: 10px;
+}
+
+.blocklabel > label {
+	display: block;
+}
+
+#vo_dsocatalog label {
+	min-width: 150px;
+}
+
+.table {
+	display: table;
+}
+
+.table > p {
+	display: table-row;
+}
+
+.table > p > * {
+	display: table-cell;
+}
+
+#tab_view .table label {
+	min-width: 230px;
+}
+
+#tab_view input.spinner{
+	width: 30px;
+}
+
+#vo_refraction .table label {
+	min-width: 200px;
+}
+
+#vo_refraction input.spinner{
+	width: 60px;
+}
+
+#vo_dsolabels label{
+	min-width: 70px;
+}
+
+.landscapeblock {
+	height: 30em;
+}
+
+#tab_actions > div {
+    height: 30em;
+}
+
+#location {
+	height: auto;
+}
+
+#srch_simbad {
+	font-style: italic;
+}
+
+#srch_simbad_text{
+	font-weight: bold;
+}
