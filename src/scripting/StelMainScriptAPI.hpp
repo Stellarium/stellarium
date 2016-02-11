@@ -163,11 +163,15 @@ public slots:
 	//! - altitude-geometric : geometric altitude angle in decimal degrees
 	//! - azimuth-geometric : geometric azimuth angle in decimal degrees
 	//! - ra : right ascension angle (current date frame) in decimal degrees
-	//! - dec : declination angle in (current date frame) decimal degrees
+	//! - dec : declination angle (current date frame) in decimal degrees
 	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
-	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees
+	//! - decJ2000 : declination angle (J2000 frame) in decimal degrees
 	//! - glong : galactic longitude in decimal degrees
 	//! - glat : galactic latitude in decimal degrees
+	//! - elong : ecliptic longitude in decimal degrees (on Earth only!)
+	//! - elat : ecliptic latitude in decimal degrees (on Earth only!)
+	//! - elongJ2000 : ecliptic longitude (J2000 frame) in decimal degrees (on Earth only!)
+	//! - elatJ2000 : ecliptic latitude (J2000 frame) in decimal degrees (on Earth only!)
 	//! - vmag : visual magnitude
 	//! - vmage : visual magnitude (extincted)
 	//! - size: angular size in radians
@@ -198,6 +202,10 @@ public slots:
 	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees	
 	//! - glong : galactic longitude in decimal degrees
 	//! - glat : galactic latitude in decimal degrees
+	//! - elong : ecliptic longitude in decimal degrees (on Earth only!)
+	//! - elat : ecliptic latitude in decimal degrees (on Earth only!)
+	//! - elongJ2000 : ecliptic longitude (J2000 frame) in decimal degrees (on Earth only!)
+	//! - elatJ2000 : ecliptic latitude (J2000 frame) in decimal degrees (on Earth only!)
 	//! - vmag : visual magnitude
 	//! - vmage : visual magnitude (extincted)	
 	//! - size: angular size in radians
