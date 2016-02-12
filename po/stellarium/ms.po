@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-02-10 22:43+0600\n"
-"PO-Revision-Date: 2015-10-14 16:03+0000\n"
-"Last-Translator: StellariumUser20 <kishenrao_20@hotmail.com>\n"
+"PO-Revision-Date: 2016-02-11 19:37+0000\n"
+"Last-Translator: Asrapsirap <kidzi.14@gmail.com>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-02-11 05:23+0000\n"
+"X-Launchpad-Export-Date: 2016-02-12 05:11+0000\n"
 "X-Generator: Launchpad (build 17923)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -242,7 +242,7 @@ msgstr "Jenis: <b>%1</b> (%2)"
 #: src/core/modules/Nebula.cpp:197
 #, qt-format
 msgid "Opacity: <b>%1</b>"
-msgstr ""
+msgstr "Ketelusan: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:226
 #: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:182
@@ -265,7 +265,7 @@ msgstr "Magnitud: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:211
 msgid " (Photometric system: B)"
-msgstr ""
+msgstr " (System Fotometrik: B)"
 
 #: src/core/modules/Nebula.cpp:217 src/core/modules/StarWrapper.cpp:68
 #: src/core/modules/StarWrapper.cpp:202 plugins/Quasars/src/Quasar.cpp:119
@@ -309,22 +309,22 @@ msgstr "Jarak: %1 tahun cahaya"
 #. TRANSLATORS: Unit of measure for distance - megaparsecs
 #: src/core/modules/Nebula.cpp:283
 msgid "Mpc"
-msgstr ""
+msgstr "Mpc"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
 #: src/core/modules/Nebula.cpp:288
 msgid "kpc"
-msgstr ""
+msgstr "kpc"
 
 #: src/core/modules/Nebula.cpp:291
 #, qt-format
 msgid "Distance: %1 %2"
-msgstr ""
+msgstr "Jarak: %1 %2"
 
 #: src/core/modules/Nebula.cpp:305
 #, qt-format
 msgid "Redshift: %1"
-msgstr ""
+msgstr "Anjakanmerah: %1"
 
 #: src/core/modules/Nebula.cpp:316 src/core/modules/StarWrapper.cpp:241
 #, qt-format
@@ -333,22 +333,22 @@ msgstr "Paralaks: %1\""
 
 #: src/core/modules/Nebula.cpp:320
 msgid "Morphological description: "
-msgstr ""
+msgstr "Penerangan morfologi: "
 
 #: src/core/modules/Nebula.cpp:816
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
-msgstr ""
+msgstr "kepekatan bintang yang tinggi ke arah pusat"
 
 #: src/core/modules/Nebula.cpp:819
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "dense central concentration of stars"
-msgstr ""
+msgstr "kepekatan bintang berkepadatan pusat"
 
 #: src/core/modules/Nebula.cpp:822
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "strong inner core of stars"
-msgstr ""
+msgstr "teras dalam padu bintang"
 
 #: src/core/modules/Nebula.cpp:825
 msgctxt "Shapley–Sawyer Concentration Class"
@@ -413,47 +413,47 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:880
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
-msgstr ""
+msgstr "kelas kepekatan tidak didokumentasikan"
 
 #: src/core/modules/Nebula.cpp:886
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
-msgstr ""
+msgstr "rendah kepelbagaian kecerahan anggota kelompok"
 
 #: src/core/modules/Nebula.cpp:889
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
-msgstr ""
+msgstr "sederhana kepelbagaian kecerahan anggota kelompok"
 
 #: src/core/modules/Nebula.cpp:892
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
-msgstr ""
+msgstr "tinggi kepelbagaian kecerahan anggota kelompok"
 
 #: src/core/modules/Nebula.cpp:895
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
-msgstr ""
+msgstr "kepelbagaian kecerahan anggota kelompok tidak didokumentasikan"
 
 #: src/core/modules/Nebula.cpp:901
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
-msgstr ""
+msgstr "kelompok daif dengan kurang daripada 50 butir bintang"
 
 #: src/core/modules/Nebula.cpp:904
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
-msgstr ""
+msgstr "kelompok sederhana dengan 50-100 butir bintang"
 
 #: src/core/modules/Nebula.cpp:907
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
-msgstr ""
+msgstr "kelompok mewah dengan 100 butir bintang"
 
 #: src/core/modules/Nebula.cpp:910
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
-msgstr ""
+msgstr "bilangan kelas ahli tidak didokumenkan"
 
 #: src/core/modules/Nebula.cpp:914
 msgctxt "nebulosity factor of open clusters"
@@ -463,32 +463,32 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:935
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
-msgstr ""
+msgstr "sangat cerah"
 
 #: src/core/modules/Nebula.cpp:938
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
-msgstr ""
+msgstr "cerah"
 
 #: src/core/modules/Nebula.cpp:941
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
-msgstr ""
+msgstr "kecerahan sederhana"
 
 #: src/core/modules/Nebula.cpp:944
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
-msgstr ""
+msgstr "malap"
 
 #: src/core/modules/Nebula.cpp:947
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
-msgstr ""
+msgstr "sangat malap"
 
 #: src/core/modules/Nebula.cpp:950
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
-msgstr ""
+msgstr "kecerahan tak tentu"
 
 #: src/core/modules/Nebula.cpp:953
 msgctxt "Reflection Nebulae Brightness"
@@ -527,70 +527,70 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:997
 msgid "circular form"
-msgstr ""
+msgstr "bentuk membulat"
 
 #: src/core/modules/Nebula.cpp:1000
 msgid "elliptical form"
-msgstr ""
+msgstr "bentuk mengelips"
 
 #: src/core/modules/Nebula.cpp:1003
 msgid "irregular form"
-msgstr ""
+msgstr "bentuk tak sekata"
 
 #: src/core/modules/Nebula.cpp:1006
 msgid "undocumented form"
-msgstr ""
+msgstr "bentuk tidak didokumenkan"
 
 #: src/core/modules/Nebula.cpp:1012
 msgid "amorphous structure"
-msgstr ""
+msgstr "struktur amorfus"
 
 #: src/core/modules/Nebula.cpp:1015
 msgid "conventional structure"
-msgstr ""
+msgstr "struktur konvensional"
 
 #: src/core/modules/Nebula.cpp:1018
 msgid "filamentary structure"
-msgstr ""
+msgstr "struktur berfilamen"
 
 #: src/core/modules/Nebula.cpp:1021
 msgid "undocumented structure"
-msgstr ""
+msgstr "struktur tidak didokumenkan"
 
 #: src/core/modules/Nebula.cpp:1027
 msgctxt "HII region brightness"
 msgid "faintest"
-msgstr ""
+msgstr "termalap"
 
 #: src/core/modules/Nebula.cpp:1030
 msgctxt "HII region brightness"
 msgid "moderate brightness"
-msgstr ""
+msgstr "kecerahan sederhana"
 
 #: src/core/modules/Nebula.cpp:1033
 msgctxt "HII region brightness"
 msgid "brightest"
-msgstr ""
+msgstr "sangat cerah"
 
 #: src/core/modules/Nebula.cpp:1036
 msgid "undocumented brightness"
-msgstr ""
+msgstr "kecerahan tidak didokumenkan"
 
 #: src/core/modules/Nebula.cpp:1052
 msgid "galaxy"
-msgstr ""
+msgstr "galaksi"
 
 #: src/core/modules/Nebula.cpp:1055
 msgid "active galaxy"
-msgstr ""
+msgstr "galaksi aktif"
 
 #: src/core/modules/Nebula.cpp:1058
 msgid "radio galaxy"
-msgstr ""
+msgstr "galaksi radio"
 
 #: src/core/modules/Nebula.cpp:1061
 msgid "interacting galaxy"
-msgstr ""
+msgstr "galaksi berinteraksi"
 
 #: src/core/modules/Nebula.cpp:1064 plugins/Quasars/src/Quasar.cpp:98
 msgid "quasar"
@@ -598,27 +598,27 @@ msgstr "kuasar"
 
 #: src/core/modules/Nebula.cpp:1067
 msgid "star cluster"
-msgstr ""
+msgstr "gugusan bintang"
 
 #: src/core/modules/Nebula.cpp:1070
 msgid "open star cluster"
-msgstr ""
+msgstr "gugusan bintang terbuka"
 
 #: src/core/modules/Nebula.cpp:1073
 msgid "globular star cluster"
-msgstr ""
+msgstr "gugusan bintang globular"
 
 #: src/core/modules/Nebula.cpp:1076
 msgid "nebula"
-msgstr ""
+msgstr "nebula"
 
 #: src/core/modules/Nebula.cpp:1079
 msgid "planetary nebula"
-msgstr ""
+msgstr "nebula planet"
 
 #: src/core/modules/Nebula.cpp:1082
 msgid "dark nebula"
-msgstr ""
+msgstr "nebula gelap"
 
 #: src/core/modules/Nebula.cpp:1085
 msgid "cluster associated with nebulosity"
@@ -626,19 +626,19 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1088
 msgid "bipolar nebula"
-msgstr ""
+msgstr "nebula dwikutub"
 
 #: src/core/modules/Nebula.cpp:1091
 msgid "emission nebula"
-msgstr ""
+msgstr "nebula melepas"
 
 #: src/core/modules/Nebula.cpp:1094
 msgid "HII region"
-msgstr ""
+msgstr "kawasan HII"
 
 #: src/core/modules/Nebula.cpp:1097
 msgid "reflection nebula"
-msgstr ""
+msgstr "nebula memantul"
 
 #: src/core/modules/Nebula.cpp:1100
 msgid "supernova remnant"
@@ -646,47 +646,47 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1103
 msgid "stellar association"
-msgstr ""
+msgstr "pertubuhan angkasaraya"
 
 #: src/core/modules/Nebula.cpp:1106
 msgid "star cloud"
-msgstr ""
+msgstr "awan bintang"
 
 #: src/core/modules/Nebula.cpp:1109
 msgid "interstellar matter"
-msgstr ""
+msgstr "jasad angkasa"
 
 #: src/core/modules/Nebula.cpp:1112
 msgid "emission object"
-msgstr ""
+msgstr "objek pelepasan"
 
 #: src/core/modules/Nebula.cpp:1115
 msgid "BL Lac object"
-msgstr ""
+msgstr "Objek BL Lac"
 
 #: src/core/modules/Nebula.cpp:1118
 msgid "blazar"
-msgstr ""
+msgstr "belasar"
 
 #: src/core/modules/Nebula.cpp:1121
 msgid "molecular cloud"
-msgstr ""
+msgstr "awan molekul"
 
 #: src/core/modules/Nebula.cpp:1124
 msgid "young stellar object"
-msgstr ""
+msgstr "objek angkasa muda"
 
 #: src/core/modules/Nebula.cpp:1127
 msgid "possible quasar"
-msgstr ""
+msgstr "kemungkinan kuasar"
 
 #: src/core/modules/Nebula.cpp:1130
 msgid "possible planetary nebula"
-msgstr ""
+msgstr "kemungkinan nebula planet"
 
 #: src/core/modules/Nebula.cpp:1133
 msgid "protoplanetary nebula"
-msgstr ""
+msgstr "nebula protoplanet"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1136 src/core/modules/StarWrapper.cpp:53
@@ -696,11 +696,11 @@ msgstr "bintang"
 
 #: src/core/modules/Nebula.cpp:1139
 msgid "object of unknown nature"
-msgstr ""
+msgstr "objek tidak diketahui sifatnya"
 
 #: src/core/modules/Nebula.cpp:1142
 msgid "undocumented type"
-msgstr ""
+msgstr "jenis tidak didokumenkan"
 
 #: src/core/modules/NebulaMgr.cpp:266
 msgid "Deep-sky objects"
@@ -754,7 +754,7 @@ msgstr "Min hari suria: %1"
 
 #: src/core/modules/Planet.cpp:308
 msgid "The period of rotation is chaotic"
-msgstr ""
+msgstr "Jangka masa putaran adalah huru-hara"
 
 #: src/core/modules/Planet.cpp:318 src/core/modules/Planet.cpp:323
 #, qt-format
@@ -779,7 +779,7 @@ msgstr "Disinari: %1%"
 #: src/core/modules/Planet.cpp:340
 #, qt-format
 msgid "Eclipse Factor: %1%"
-msgstr ""
+msgstr "Faktor Gerhana: %1%"
 
 #: src/core/modules/MinorPlanet.cpp:205
 #, qt-format
@@ -789,12 +789,12 @@ msgstr "Penentuan sementara: %1"
 #: src/core/modules/Comet.cpp:170
 msgctxt "type of comet"
 msgid "non-periodic"
-msgstr ""
+msgstr "tidak berkala"
 
 #: src/core/modules/Comet.cpp:174
 msgctxt "type of comet"
 msgid "periodic"
-msgstr ""
+msgstr "berkala"
 
 #: src/core/modules/Comet.cpp:207
 #, no-c-format, qt-format
@@ -825,7 +825,7 @@ msgstr ""
 #: src/core/modules/Comet.cpp:264
 #, no-c-format, qt-format
 msgid "Gas tail length (estimate): %1 Mio km"
-msgstr ""
+msgstr "(Anggaran) panjang ekor gas: %1 Mio km"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:184 src/gui/AstroCalcDialog.cpp:455
@@ -928,7 +928,7 @@ msgstr "Bima Sakti"
 
 #: src/core/modules/ZodiacalLight.cpp:81
 msgid "Zodiacal Light"
-msgstr ""
+msgstr "Sinaran Zodiak"
 
 #: src/core/StelApp.cpp:502
 msgid "Night mode"
@@ -984,7 +984,7 @@ msgstr "Tambah 1 hari solar"
 
 #: src/core/StelCore.cpp:221
 msgid "Add 7 solar days"
-msgstr ""
+msgstr "Tambah 7 hari suria"
 
 #: src/core/StelCore.cpp:222
 msgid "Subtract 1 solar hour"
@@ -996,7 +996,7 @@ msgstr "Tolak 1 hari solar"
 
 #: src/core/StelCore.cpp:224
 msgid "Subtract 7 solar days"
-msgstr ""
+msgstr "Tolak 7 hari suria"
 
 #: src/core/StelCore.cpp:225
 msgid "Add 1 sidereal day"
@@ -1052,11 +1052,11 @@ msgstr ""
 
 #: src/core/StelCore.cpp:238
 msgid "Add 1 Julian year"
-msgstr ""
+msgstr "Tambah 1 tahun Masihi"
 
 #: src/core/StelCore.cpp:239
 msgid "Add 1 Julian century"
-msgstr ""
+msgstr "Tambah 1 abad Masihi"
 
 #: src/core/StelCore.cpp:240
 msgid "Add 1 Gaussian year"
@@ -1116,11 +1116,11 @@ msgstr ""
 
 #: src/core/StelCore.cpp:254
 msgid "Subtract 1 Julian year"
-msgstr ""
+msgstr "Tolak 1 tahun Masihi"
 
 #: src/core/StelCore.cpp:255
 msgid "Subtract 1 Julian century"
-msgstr ""
+msgstr "Tolak 1 abad Masihi"
 
 #: src/core/StelCore.cpp:256
 msgid "Subtract 1 Gaussian year"
@@ -1424,7 +1424,7 @@ msgstr "Digunakan sebagai lalai."
 
 #: src/core/StelCore.cpp:1742
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
-msgstr ""
+msgstr "VERSI TAMPUNGAN TANPA PECUTAN BULAN TAMBAHAN"
 
 #: src/core/StelCore.cpp:1745
 #, qt-format
@@ -1848,11 +1848,11 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1263 src/gui/ConfigurationDialog.cpp:1272
 msgid "Available"
-msgstr ""
+msgstr "Wujud"
 
 #: src/gui/ConfigurationDialog.cpp:1265 src/gui/ConfigurationDialog.cpp:1274
 msgid "Not Available"
-msgstr ""
+msgstr "Tidak Wujud"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1337
@@ -1973,7 +1973,7 @@ msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
 #: src/gui/ConfigurationDialog.cpp:1380
 msgid "Khalid, Sultana & Zaidi (2014)"
-msgstr ""
+msgstr "Khalid, Sultana & Zaidi (2014)"
 
 #: src/gui/ConfigurationDialog.cpp:1381
 #, qt-format
@@ -2133,7 +2133,7 @@ msgstr "Penguji: %1"
 
 #: src/gui/HelpDialog.cpp:309
 msgid "Former Developers"
-msgstr ""
+msgstr "Mantan Pembangun"
 
 #: src/gui/HelpDialog.cpp:310
 msgid ""
@@ -2161,6 +2161,8 @@ msgid ""
 "Several people have made contributions to the project and their work has "
 "made Stellarium better (sorted alphabetically): %1."
 msgstr ""
+"Beberapa sukarelawan telah menyumbangkan tenaga dalam projek ini dan hasil "
+"kerja mereka telah menambahbaik Stellarium (susunan ikut huruf): %1."
 
 #: src/gui/StelGui.cpp:190
 msgid "Windows"
@@ -2228,7 +2230,7 @@ msgstr "Tetingkap pintasan"
 
 #: src/gui/StelGui.cpp:211
 msgid "AstroCalc window"
-msgstr ""
+msgstr "Tetingkap AstroKal"
 
 #: src/gui/StelGui.cpp:212
 msgid "Copy selected object information to clipboard"
@@ -2258,11 +2260,11 @@ msgstr "%1m"
 #: src/gui/StelGuiItems.cpp:631
 #, qt-format
 msgid "planetocentric distance %1 km"
-msgstr ""
+msgstr "jarak jajarankeplanet %1 km"
 
 #: src/gui/StelGuiItems.cpp:633
 msgid "planetocentric observer"
-msgstr ""
+msgstr "pemerhati jajarankeplanet"
 
 #: src/gui/StelGuiItems.cpp:657
 msgid "Field of view"
@@ -2323,11 +2325,11 @@ msgstr "Magnitid pengehadan mata-sebenar ialah"
 
 #: src/gui/ViewDialog.cpp:600
 msgid "Abbreviated"
-msgstr ""
+msgstr "Singkatan"
 
 #: src/gui/ViewDialog.cpp:601
 msgid "Native"
-msgstr ""
+msgstr "Asli"
 
 #: src/gui/ViewDialog.cpp:602
 msgid "Translated"
@@ -2359,7 +2361,7 @@ msgstr "Kadar Geminid piawai"
 
 #: src/gui/ViewDialog.cpp:839
 msgid "Exceptional Perseid rate"
-msgstr ""
+msgstr "Kadar Perseid yang luar biasa"
 
 #: src/gui/ViewDialog.cpp:842
 msgid "Meteor storm rate"
@@ -2367,7 +2369,7 @@ msgstr "Kadar ribut meteor"
 
 #: src/gui/ViewDialog.cpp:845
 msgid "Exceptional Draconid rate"
-msgstr ""
+msgstr "Kadar Drakonid yang luar biasa"
 
 #: src/gui/ViewDialog.cpp:848
 msgid "Exceptional Leonid rate"
@@ -2379,7 +2381,7 @@ msgstr "Kadar sangat tinggi (1966 Leonids)"
 
 #: src/gui/ViewDialog.cpp:854
 msgid "Highest rate ever (1833 Leonids)"
-msgstr ""
+msgstr "Kadar tertinggi (1833 Pancuran Asad)"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:114
 msgid "Select a ZIP archive that contains a Stellarium landscape"
@@ -2495,7 +2497,7 @@ msgstr "Khatulistiwa"
 #: src/gui/SearchDialog.cpp:238
 msgctxt "coordinate system"
 msgid "Horizontal"
-msgstr ""
+msgstr "Mengufuk"
 
 #: src/gui/SearchDialog.cpp:239
 msgctxt "coordinate system"
@@ -2505,7 +2507,7 @@ msgstr "Galaktik"
 #: src/gui/SearchDialog.cpp:240
 msgctxt "coordinate system"
 msgid "Ecliptic"
-msgstr ""
+msgstr "Ekliptik"
 
 #: src/gui/SearchDialog.cpp:241
 msgctxt "coordinate system"
@@ -2523,7 +2525,7 @@ msgstr "Keserongan"
 #: src/gui/SearchDialog.cpp:280
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:945
 msgid "Azimuth"
-msgstr ""
+msgstr "Azimut"
 
 #: src/gui/SearchDialog.cpp:283
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
@@ -2532,11 +2534,11 @@ msgstr "Altitud"
 
 #: src/gui/SearchDialog.cpp:293
 msgid "Longitude"
-msgstr ""
+msgstr "Longitud"
 
 #: src/gui/SearchDialog.cpp:296
 msgid "Latitude"
-msgstr ""
+msgstr "Latitud"
 
 #: src/gui/SearchDialog.cpp:607
 msgid "Simbad Lookup Error"
@@ -2610,7 +2612,7 @@ msgstr ""
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:141 src/gui/AstroCalcDialog.cpp:258
 msgid "Mag."
-msgstr ""
+msgstr "Mag."
 
 #. TRANSLATORS: type of object
 #: src/gui/AstroCalcDialog.cpp:143 src/ui_configurationDialog.h:1155
@@ -2621,47 +2623,47 @@ msgstr "Jenis"
 #: src/gui/AstroCalcDialog.cpp:161
 #, qt-format
 msgid "Positions on %1"
-msgstr ""
+msgstr "Posisi pada %1"
 
 #: src/gui/AstroCalcDialog.cpp:252
 msgid "JD"
-msgstr ""
+msgstr "JD"
 
 #: src/gui/AstroCalcDialog.cpp:399
 msgid "10 minutes"
-msgstr ""
+msgstr "10 minit"
 
 #: src/gui/AstroCalcDialog.cpp:400
 msgid "1 hour"
-msgstr ""
+msgstr "1 jam"
 
 #: src/gui/AstroCalcDialog.cpp:401
 msgid "1 day"
-msgstr ""
+msgstr "1 hari"
 
 #: src/gui/AstroCalcDialog.cpp:402
 msgid "5 days"
-msgstr ""
+msgstr "5 hari"
 
 #: src/gui/AstroCalcDialog.cpp:403
 msgid "10 days"
-msgstr ""
+msgstr "10 hari"
 
 #: src/gui/AstroCalcDialog.cpp:404
 msgid "15 days"
-msgstr ""
+msgstr "15 hari"
 
 #: src/gui/AstroCalcDialog.cpp:405
 msgid "30 days"
-msgstr ""
+msgstr "30 hari"
 
 #: src/gui/AstroCalcDialog.cpp:406
 msgid "60 days"
-msgstr ""
+msgstr "60 hari"
 
 #: src/gui/AstroCalcDialog.cpp:454
 msgid "Solar system"
-msgstr ""
+msgstr "Sistem Suria"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:456 src/translations.h:66
@@ -2672,7 +2674,7 @@ msgstr "Asteroid"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:457 src/translations.h:70
 msgid "Plutinos"
-msgstr ""
+msgstr "Plutinos"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:458 src/translations.h:64
@@ -2683,56 +2685,58 @@ msgstr "Komet"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:459 src/translations.h:72
 msgid "Dwarf planets"
-msgstr ""
+msgstr "Planet kerdil"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:460 src/translations.h:74
 msgid "Cubewanos"
-msgstr ""
+msgstr "Cubewanos"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:461 src/translations.h:76
 msgid "Scattered disc objects"
-msgstr ""
+msgstr "Objek leper bersepai"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:462 src/translations.h:78
 msgid "Oort cloud objects"
-msgstr ""
+msgstr "Objek awan Oort"
 
 #: src/gui/AstroCalcDialog.cpp:475
 msgid "Phenomenon"
-msgstr ""
+msgstr "Fenomena"
 
 #: src/gui/AstroCalcDialog.cpp:477
 msgid "Object 1"
-msgstr ""
+msgstr "Objek 1"
 
 #: src/gui/AstroCalcDialog.cpp:478
 msgid "Object 2"
-msgstr ""
+msgstr "Objek 2"
 
 #: src/gui/AstroCalcDialog.cpp:479
 msgid "Separation"
-msgstr ""
+msgstr "Pengasingan"
 
 #: src/gui/AstroCalcDialog.cpp:635
 msgid "Conjunction"
-msgstr ""
+msgstr "Penghubung"
 
 #: src/gui/AstroCalcDialog.cpp:639
 msgid "Opposition"
-msgstr ""
+msgstr "Tentangan"
 
 #: src/StelMainView.cpp:462 src/StelMainView.cpp:477
 msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
 msgstr ""
+"OpenGL 2 tidak dijumpai dalam sistem ini. Sila naiktaraf perkakasan atau "
+"gunakan MESA atau versi yang lama."
 
 #: src/StelMainView.cpp:491
 msgid "Cannot acquire necessary OpenGL resources."
-msgstr ""
+msgstr "Sumber-sumber OpenGL yang diperlukan tidak diperolehi."
 
 #: src/StelMainView.cpp:556
 msgid "Save screenshot"
@@ -2747,6 +2751,8 @@ msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
 msgstr ""
+"Versi OpenGL tidak memenuhi syarat. Sila naiktaraf pemacu, perkakasan "
+"grafik, atau gunakan pilihan mod-sudut-- (atau mod-mesa--)."
 
 #: src/StelMainView.cpp:713
 msgid ""
@@ -2760,6 +2766,10 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"DirectX/OpenGL ES subsistem anda mempunyai masalah. Sila lihat log untuk "
+"maklumat selanjutnya.\n"
+"Abaikan dan matikan notis ini pada lain masa dan teruskan sahaja mencuba "
+"dalam mod terencat?"
 
 #: src/StelMainView.cpp:806
 msgid ""
@@ -2767,6 +2777,10 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"OpenGL/Mesa subsistem anda mempunyai masalah. Sila lihat log untuk maklumat "
+"selanjutnya.\n"
+"Abaikan dan matikan notis ini pada lain masa dan teruskan sahaja mencuba "
+"dalam mod terencat?"
 
 #: src/StelMainView.cpp:861
 msgid ""
@@ -2774,6 +2788,10 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"OpenGL subsistem anda mempunyai masalah. Sila lihat log untuk maklumat "
+"selanjutnya.\n"
+"Abaikan dan matikan notis ini pada lain masa dan teruskan sahaja mencuba "
+"dalam mod terencat?"
 
 #: src/StelMainView.cpp:902
 msgid ""
@@ -2781,6 +2799,10 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"OpenGL ES subsistem anda mempunyai masalah. Sila lihat log untuk maklumat "
+"selanjutnya.\n"
+"Abaikan dan matikan notis ini pada lain masa dan teruskan sahaja mencuba "
+"dalam mod terencat?"
 
 #: src/StelMainView.cpp:1013
 #, qt-format
@@ -2826,32 +2848,32 @@ msgstr "bulan"
 #. TRANSLATORS: Type of object
 #: src/translations.h:52
 msgid "plutino"
-msgstr ""
+msgstr "plutino"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:54
 msgid "dwarf planet"
-msgstr ""
+msgstr "planet kerdil"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:56
 msgid "cubewano"
-msgstr ""
+msgstr "cubewano"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:58
 msgid "scattered disc object"
-msgstr ""
+msgstr "objek leper bersepai"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:60
 msgid "Oort cloud object"
-msgstr ""
+msgstr "objek awan Oort"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:68
 msgid "Moons"
-msgstr ""
+msgstr "Bulan"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:80
@@ -2861,17 +2883,17 @@ msgstr "Buruj"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:85
 msgid "Bright galaxies"
-msgstr ""
+msgstr "Galaksi cerah"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:87
 msgid "Open star clusters"
-msgstr ""
+msgstr "Gugusan bintang terbuka"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:89
 msgid "Globular star clusters"
-msgstr ""
+msgstr "Gugusan bintang globular"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:91
@@ -2886,7 +2908,7 @@ msgstr "Nebula planet"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:95
 msgid "Dark nebulae"
-msgstr ""
+msgstr "Nebula kelam"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:97
@@ -2901,157 +2923,157 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:101
 msgid "Reflection nebulae"
-msgstr ""
+msgstr "Nebula Memantul"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:103 src/ui_viewDialog.h:1704
 msgid "Active galaxies"
-msgstr ""
+msgstr "Galaksi aktif"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:105
 msgid "Radio galaxies"
-msgstr ""
+msgstr "Galaksi radio"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:107 src/ui_viewDialog.h:1698
 msgid "Interacting galaxies"
-msgstr ""
+msgstr "Galaksi Berinteraksi"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:109
 msgid "Bright quasars"
-msgstr ""
+msgstr "Kuasar cerah"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:111 src/ui_viewDialog.h:1701
 msgid "Star clusters"
-msgstr ""
+msgstr "Gugusan bintang"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:113
 msgid "Stellar associations"
-msgstr ""
+msgstr "Pertubuhan angkasaraya"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:115
 msgid "Star clouds"
-msgstr ""
+msgstr "Awan bintang"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:117
 msgid "Bipolar nebulae"
-msgstr ""
+msgstr "Nebula dwi-kutub"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:119
 msgid "Emission nebulae"
-msgstr ""
+msgstr "Nebula melepas"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:121 src/ui_viewDialog.h:1697
 msgid "Supernova remnants"
-msgstr ""
+msgstr "Sisa supernova"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:123
 msgid "Interstellar matter"
-msgstr ""
+msgstr "Jasad cakerawala"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:125
 msgid "Emission objects"
-msgstr ""
+msgstr "Objek dilepas"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:127
 msgid "BL Lac objects"
-msgstr ""
+msgstr "Objek BL Lac"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:129
 msgid "Blazars"
-msgstr ""
+msgstr "Belazar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:131
 msgid "Molecular Clouds"
-msgstr ""
+msgstr "Awan-awan Molekul"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:133
 msgid "Young Stellar Objects"
-msgstr ""
+msgstr "Objek Cakerawala Muda"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:135
 msgid "Possible Quasars"
-msgstr ""
+msgstr "Kemungkinan Kuasar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:137
 msgid "Possible Planetary Nebulae"
-msgstr ""
+msgstr "Kemungkinan Nebula Planet"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:139
 msgid "Protoplanetary Nebulae"
-msgstr ""
+msgstr "Nebula Protoplanet"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:141 src/ui_viewDialog.h:1661
 msgid "Messier Catalogue"
-msgstr ""
+msgstr "Katalog Messier"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:143 src/ui_viewDialog.h:1664
 msgid "Caldwell Catalogue"
-msgstr ""
+msgstr "Katalog Caldwell"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:145
 msgid "Barnard Catalogue"
-msgstr ""
+msgstr "Katalog Barnard"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:147
 msgid "Sharpless Catalogue"
-msgstr ""
+msgstr "Katalog Sharpless"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:149
 msgid "Van den Bergh Catalogue"
-msgstr ""
+msgstr "Katalog Van den Bergh"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:151
 msgid "The Catalogue of Rodgers, Campbell, and Whiteoak"
-msgstr ""
+msgstr "Katalog Rodgers, Campbell, dan Whiteoak"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:153
 msgid "Collinder Catalogue"
-msgstr ""
+msgstr "Katalog Collinder"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:155
 msgid "Melotte Catalogue"
-msgstr ""
+msgstr "Katalog Melotte"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:157
 msgid "Dwarf galaxies"
-msgstr ""
+msgstr "Galaksi kerdil"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:162
 msgid "Interesting double stars"
-msgstr ""
+msgstr "Dwi-bintang menarik"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:164
 msgid "Interesting variable stars"
-msgstr ""
+msgstr "Bintang laras menarik"
 
 #: src/translations.h:168
 msgid "Arabic"
@@ -3059,7 +3081,7 @@ msgstr "Arab"
 
 #: src/translations.h:169
 msgid "Arabic Moon Stations"
-msgstr ""
+msgstr "Stesen Bulan Arab"
 
 #: src/translations.h:170
 msgid "Aztec"
@@ -3067,7 +3089,7 @@ msgstr "Aztek"
 
 #: src/translations.h:171
 msgid "Boorong"
-msgstr ""
+msgstr "Burung"
 
 #: src/translations.h:172
 msgid "Chinese"
@@ -3087,7 +3109,7 @@ msgstr "Veda India"
 
 #: src/translations.h:176
 msgid "Japanese Moon Stations"
-msgstr ""
+msgstr "Stesen Bulan Jepun"
 
 #: src/translations.h:177
 msgid "Korean"
@@ -3103,7 +3125,7 @@ msgstr "Maori"
 
 #: src/translations.h:180
 msgid "Mongolian"
-msgstr ""
+msgstr "Bahasa Mongolia"
 
 #: src/translations.h:181
 msgid "Navajo"
@@ -3128,11 +3150,11 @@ msgstr "Sami"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:187
 msgid "Siberian"
-msgstr ""
+msgstr "Bahasa Siberia"
 
 #: src/translations.h:188
 msgid "Tukano"
-msgstr ""
+msgstr "Bahasa Tukano"
 
 #: src/translations.h:189
 msgid "Tupi-Guarani"
@@ -3148,7 +3170,7 @@ msgstr "Barat"
 
 #: src/translations.h:192
 msgid "Western (H.A.Rey)"
-msgstr ""
+msgstr "Barat (H.A.Rey)"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:198
@@ -3218,17 +3240,17 @@ msgstr "Grossmugl"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:224
 msgid "Zero Horizon"
-msgstr ""
+msgstr "Dataran Kosong"
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
 #: src/translations.h:229
 msgid "Vienna Sterngarten"
-msgstr ""
+msgstr "Sterngarten Vienna"
 
 #. TRANSLATORS: Name of 3D scene
 #: src/translations.h:231
 msgid "Testscene"
-msgstr ""
+msgstr "adengan ujian"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:236
@@ -3350,6 +3372,8 @@ msgstr "Peristiwa Bumi menerusi Marikh"
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr ""
+"Pemanjangan dan Tentangan Terbesar Bumi dan planet-planet lain daripada "
+"Marikh"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:284
