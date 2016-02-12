@@ -72,7 +72,12 @@ define(["jquery", "api/viewoptions", "api/actions", "api/properties", "jquery-ui
 	function initControls() {
 		$vo_landscapelist = $("#vo_landscapelist");
 		$vo_skyculturelist = $("#vo_skyculturelist");
+		// Maybe its enough/better to try and connect to vo_ divs, not the tabs? The vo_ are the better address when they move around different layouts.
 		actionApi.connectActionContainer($("#tab_view"));
+		actionApi.connectActionContainer($("#tab_view_stars"));
+		actionApi.connectActionContainer($("#tab_view_planets"));
+		actionApi.connectActionContainer($("#tab_view_atm"));
+		actionApi.connectActionContainer($("#tab_view_grids"));
 		actionApi.connectActionContainer($("#tab_landscape"));
 		actionApi.connectActionContainer($("#tab_skyculture"));
 		$vo_projectionlist = $("#vo_projectionlist");
