@@ -10,18 +10,6 @@ define(["jquery", "./remotecontrol"], function($, rc) {
         var action = actionData[actionId];
         console.log("stelActionChanged: " + actionId + ", " + action.isChecked);
 
-        //update buttons/checkboxes
-        if (action.checkboxes) {
-            action.checkboxes.forEach(function(val) {
-                val.checked = action.isChecked;
-            });
-        }
-        if (action.buttons) {
-            action.buttons.forEach(function(val) {
-                $(val).toggleClass("active", action.isChecked);
-            });
-        }
-
         //trigger changed events, one generic and one specific
         $(publ).trigger("stelActionChanged", [actionId, action]);
         $(publ).trigger("stelActionChanged:" + actionId, action);
@@ -108,73 +96,6 @@ define(["jquery", "./remotecontrol"], function($, rc) {
         });
     }
 
-    function connectCheckbox(elem) {
-        $(elem).each(function() {
-            if (this.value.lastIndexOf("action", 0) === 0) {
-                var newData = {};
-                newData[this.value] = {
-                    checkboxes: [this]
-                };
-                $.extend(true, actionData, newData);
-
-                //check if action has a checked value, apply it if it does
-                if ("isChecked" in actionData[this.value]) {
-                    this.checked = actionData[this.value].isChecked;
-                }
-            }
-        }).on("click", function(evt) {
-            //assume all values start with "action"
-            if (this.value.lastIndexOf("action", 0) === 0) {
-                executeAction(this.value);
-            }
-        });
-    }
-
-    function connectActionContainer(elem) {
-        //console.log("connecting container");
-        var e = $(elem);
-
-        //remember checkboxes for updating
-        e.find("input[type='checkbox']").each(function() {
-            if (this.value.lastIndexOf("action", 0) === 0) {
-                var newData = {};
-                newData[this.value] = {
-                    checkboxes: [this]
-                };
-                $.extend(true, actionData, newData);
-
-                //check if action has a checked value, apply it if it does
-                if ("isChecked" in actionData[this.value]) {
-                    this.checked = actionData[this.value].isChecked;
-                }
-            }
-        });
-
-        //give buttons the "active" class if the action is active
-        e.find("input[type='button'], button").each(function() {
-            if (this.value.lastIndexOf("action", 0) === 0) {
-                var newData = {};
-                newData[this.value] = {
-                    buttons: [this]
-                };
-                $.extend(true, actionData, newData);
-
-                //check if action has a checked value, apply it if it does
-                if ("isChecked" in actionData[this.value]) {
-                    this.className += "active";
-                }
-            }
-        });
-
-        //react to clicks by toggling/triggering the action
-        e.on("click", "input[type='checkbox'], input[type='button'], button", function(evt) {
-            //assume all values start with "action"
-            if (this.value.lastIndexOf("action", 0) === 0) {
-                executeAction(this.value);
-            }
-        });
-    }
-
     $(rc).on("stelActionsChanged", function(evt, changes) {
         if (!actionsInitialized) {
             //dont handle, tell main obj to send same id again
@@ -209,10 +130,6 @@ define(["jquery", "./remotecontrol"], function($, rc) {
     var publ = {
         //Trigger an StelAction on the Server
         execute: executeAction,
-
-        //Connects all checkbox input elements and buttons below this container to the StelAction that corresponds to its value
-        connectActionContainer: connectActionContainer,
-        connectCheckbox: connectCheckbox,
 
         isChecked: function(id)
         {

@@ -75,7 +75,7 @@ define(["jquery", "api/remotecontrol", "api/actions"], function($, rc, actionApi
 
 		buttonActions.forEach(function(val) {
 			var btn = document.createElement("button");
-			btn.className = "icon32 " + val[1];
+			btn.className = "stelaction icon32 " + val[1];
 			btn.value = val[0];
 
 			var li = document.createElement("li");
@@ -83,9 +83,6 @@ define(["jquery", "api/remotecontrol", "api/actions"], function($, rc, actionApi
 
 			$ul.append(li);
 		});
-
-		//this automatically connects to StelAction
-		actionApi.connectActionContainer($ul);
 
 		$ul.appendTo(parent);
 	}
@@ -122,12 +119,34 @@ define(["jquery", "api/remotecontrol", "api/actions"], function($, rc, actionApi
 			group.appendTo($actionlist);
 		});
 		$actionlist.prependTo(parent);
+
+		//init stelaction checkboxes
+		$("input[type='checkbox'].stelaction").each(function() {
+			var self = $(this);
+			var id = this.value;
+
+			if (!id) {
+				console.error('Error: no StelAction name defined on an "stelaction" element, element follows...');
+				console.dir(this);
+				alert('Error: no StelProperty name defined on an "stelaction" element, see log for details');
+			}
+
+			self[0].checked = actionApi.isChecked(id);
+		});
+
+		$(document).on("click","input[type='checkbox'].stelaction, input[type='button'].stelaction, button.stelaction",function(){
+			actionApi.execute(this.value);
+		});
 	});
 
 	$(actionApi).on("stelActionChanged",function(evt,id,data){
 		var option = $actionlist.find('option[value="'+id+'"]');
 		if(option.length>0)
 			option[0].textContent = data.text + " (" + (data.isChecked ? rc.tr("on") : rc.tr("off")) + ")";
+
+		//update checkboxes
+		$("input[type='checkbox'][value='"+id+"'].stelaction").prop("checked",data.isChecked);
+		$("input[type='button'][value='"+id+"'].stelaction, button[value='"+id+"'].stelaction").toggleClass("active",data.isChecked);
 	});
 
 });
