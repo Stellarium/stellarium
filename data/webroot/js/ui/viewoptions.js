@@ -72,16 +72,8 @@ define(["jquery", "api/viewoptions", "api/actions", "api/properties", "jquery-ui
 	function initControls() {
 		$vo_landscapelist = $("#vo_landscapelist");
 		$vo_skyculturelist = $("#vo_skyculturelist");
-		// Maybe its enough/better to try and connect to vo_ divs, not the tabs? The vo_ are the better address when they move around different layouts.
-		actionApi.connectActionContainer($("#tab_view"));
-		actionApi.connectActionContainer($("#tab_view_stars"));
-		actionApi.connectActionContainer($("#tab_view_planets"));
-		actionApi.connectActionContainer($("#tab_view_atm"));
-		actionApi.connectActionContainer($("#tab_view_grids"));
-		actionApi.connectActionContainer($("#tab_landscape"));
-		actionApi.connectActionContainer($("#tab_skyculture"));
 		$vo_projectionlist = $("#vo_projectionlist");
-		$vo_projectionlist.change(function(event) {	
+		$vo_projectionlist.change(function(event) {
 			if (this.selectedIndex >= 0) {
 				var proj = this.options[this.selectedIndex].value;
 				viewOptionApi.setProjection(proj);
@@ -102,8 +94,6 @@ define(["jquery", "api/viewoptions", "api/actions", "api/properties", "jquery-ui
 			}
 		});
 
-		actionApi.connectCheckbox($("#vo_dsotypefiltercheckbox"));
-
 		viewOptionApi.loadProjectionList(fillProjectionList);
 		viewOptionApi.loadLandscapeList(fillLandscapeList);
 		viewOptionApi.loadSkycultureList(fillSkycultureList);
@@ -112,11 +102,11 @@ define(["jquery", "api/viewoptions", "api/actions", "api/properties", "jquery-ui
 		viewOptionApi.registerTypeFlags($("#vo_dsotype > div")); //needs a stricter selector to prevent capturing the header checkbox
 	}
 
-	$(actionApi).on("stelActionChanged:actionShow_LightPollution_Database", function(evt,data){
+	$(actionApi).on("stelActionChanged:actionShow_LightPollution_Database", function(evt, data) {
 		$("#atmosphere_bortlescaleindex").spinner("option", "disabled", data.isChecked);
 	});
 
-	$(propApi).on("stelPropertyChanged:prop_LandscapeMgr_flagLandscapeUseMinimalBrightness", function(evt,data){
+	$(propApi).on("stelPropertyChanged:prop_LandscapeMgr_flagLandscapeUseMinimalBrightness", function(evt, data) {
 		$("#landscape_defaultMinimalBrightness").spinner("option", "disabled", !data.value);
 		$("#landscape_flagLandscapeSetsMinimalBrightness").prop("disabled", !data.value);
 	});
