@@ -168,20 +168,6 @@ define(["jquery", "settings", "api/remotecontrol", "api/actions", "api/propertie
 			});
 		});
 
-		//hook up stelaction checkboxes
-		$("input[type='checkbox'].stelaction").each(function() {
-			var self = $(this);
-			var id = this.value;
-
-			$(actionApi).on("stelActionChanged:" + id, function(evt, action) {
-				self[0].checked = action.isChecked;
-			});
-			self[0].checked = actionApi.isChecked(id);
-			self.click(function() {
-				actionApi.execute(id);
-			});
-		});
-
 		//hook up span stelproperty display
 		$("span.stelproperty").each(function() {
 			var self = $(this);

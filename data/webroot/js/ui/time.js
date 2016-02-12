@@ -89,11 +89,9 @@ define(["jquery", "api/time", "api/actions", "jquery-ui"], function($, timeApi, 
 		var $items = $("#timejumplist li");
 		$items.each(function(){
 			var $this = $(this);
-			$this.prepend($("<button>",{value: $this.data("next"), class:"button32 icon32 btTimeForward"}));
-			$this.prepend($("<button>",{value: $this.data("prev"), class:"button32 icon32 btTimeRewind"}));
+			$this.prepend($("<button>",{value: $this.data("next"), class:"stelaction button32 icon32 btTimeForward"}));
+			$this.prepend($("<button>",{value: $this.data("prev"), class:"stelaction button32 icon32 btTimeRewind"}));
 		});
-
-		actionApi.connectActionContainer($("#timejumplist"));
 	}
 
 	function setDateTimeField(type, field, val) {
