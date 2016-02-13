@@ -148,6 +148,12 @@ void StelMovementMgr::init()
 	addAction("actionZoom_In_Auto", movementGroup, N_("Zoom in on selected object"), "autoZoomIn()", "/");
 	addAction("actionZoom_Out_Auto", movementGroup, N_("Zoom out"), "autoZoomOut()", "\\");
 	addAction("actionSet_Tracking", movementGroup, N_("Track object"), "tracking", "T");
+	// Implementation of quick turning to different directions (examples: CdC, HNSKY)
+	addAction("actionTurn_East", movementGroup, N_("Turn East"), "turnEast()", "Shift+E");
+	addAction("actionTurn_West", movementGroup, N_("Turn West"), "turnWest()", "Shift+W");
+	addAction("actionTurn_North", movementGroup, N_("Turn North"), "turnNorth()", "Shift+N");
+	addAction("actionTurn_South", movementGroup, N_("Turn South"), "turnSouth()", "Shift+S");
+	addAction("actionTurn_Zenith", movementGroup, N_("Turn Zenith"), "turnZenith()", "Shift+Z");
 }
 
 void StelMovementMgr::setMountMode(MountMode m)
@@ -562,6 +568,53 @@ void StelMovementMgr::zoomOut(bool s)
 {
 	if (flagEnableZoomKeys)
 		deltaFov = (s!=0);
+}
+
+void StelMovementMgr::turnEast(void)
+{
+	float cx, cy;
+	Vec3f dir;
+	StelUtils::rectToSphe(&cy,&cx,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
+	cy = M_PI/2.;
+	StelUtils::spheToRect(cy, cx, dir);
+	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
+}
+
+void StelMovementMgr::turnWest(void)
+{
+	float cx, cy;
+	Vec3f dir;
+	StelUtils::rectToSphe(&cy,&cx,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
+	cy = 3.*M_PI/2.;
+	StelUtils::spheToRect(cy, cx, dir);
+	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
+}
+
+void StelMovementMgr::turnNorth(void)
+{
+	float cx, cy;
+	Vec3f dir;
+	StelUtils::rectToSphe(&cy,&cx,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
+	cy = M_PI;
+	StelUtils::spheToRect(cy, cx, dir);
+	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
+}
+
+void StelMovementMgr::turnSouth(void)
+{
+	float cx, cy;
+	Vec3f dir;
+	StelUtils::rectToSphe(&cy,&cx,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
+	cy = 0.;
+	StelUtils::spheToRect(cy, cx, dir);
+	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
+}
+
+void StelMovementMgr::turnZenith(void)
+{
+	Vec3f dir;
+	StelUtils::spheToRect(M_PI, M_PI/2., dir);
+	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
 }
 
 
