@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-02-10 22:43+0600\n"
-"PO-Revision-Date: 2016-01-30 10:40+0000\n"
+"PO-Revision-Date: 2016-02-12 15:17+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-02-11 05:20+0000\n"
-"X-Generator: Launchpad (build 17923)\n"
+"X-Launchpad-Export-Date: 2016-02-13 05:11+0000\n"
+"X-Generator: Launchpad (build 17925)\n"
 "X-Poedit-Language: Hungarian\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -664,7 +664,7 @@ msgstr "emissziós objektum"
 
 #: src/core/modules/Nebula.cpp:1115
 msgid "BL Lac object"
-msgstr ""
+msgstr "BL Lac objektum"
 
 #: src/core/modules/Nebula.cpp:1118
 msgid "blazar"
@@ -2645,7 +2645,7 @@ msgstr "1 nap"
 
 #: src/gui/AstroCalcDialog.cpp:402
 msgid "5 days"
-msgstr ""
+msgstr "5 nap"
 
 #: src/gui/AstroCalcDialog.cpp:403
 msgid "10 days"
@@ -2653,7 +2653,7 @@ msgstr "10 nap"
 
 #: src/gui/AstroCalcDialog.cpp:404
 msgid "15 days"
-msgstr ""
+msgstr "15 nap"
 
 #: src/gui/AstroCalcDialog.cpp:405
 msgid "30 days"
@@ -2661,7 +2661,7 @@ msgstr "30 nap"
 
 #: src/gui/AstroCalcDialog.cpp:406
 msgid "60 days"
-msgstr ""
+msgstr "60 nap"
 
 #: src/gui/AstroCalcDialog.cpp:454
 msgid "Solar system"
@@ -5214,7 +5214,7 @@ msgstr "Jelenlegi dátum ekliptikus hálója"
 
 #: src/ui_viewDialog.h:1740
 msgid "Altitudes and azimuth (counted from North towards East)."
-msgstr ""
+msgstr "Magasság és azimut (északról kelet felé számolva)"
 
 #: src/ui_viewDialog.h:1744
 msgid "Galactic Coordinates, System II (IAU 1958)."
@@ -5270,7 +5270,7 @@ msgstr "Meridiánvonal"
 
 #: src/ui_viewDialog.h:1780
 msgid "Show Prime (East-West) Vertical."
-msgstr ""
+msgstr "Elsődleges vertikális mutatása (É-Ny)"
 
 #: src/ui_viewDialog.h:1784
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
@@ -5386,7 +5386,7 @@ msgstr "Bolygók nevei"
 
 #: src/ui_viewDialog.h:1830
 msgid "Show lines with thickness"
-msgstr ""
+msgstr "Vonalak vastagítása"
 
 #: src/ui_viewDialog.h:1832
 msgid "Value in pixels"
@@ -5460,24 +5460,28 @@ msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
 msgstr ""
+"DE431 pozíciós adatok -13000...+17000 év között. Csak speciális alkalmazások "
+"számára."
 
 #: src/ui_configurationDialog.h:1092
 msgid "Use DE431 (long-time data)"
-msgstr ""
+msgstr "DE431 (hosszútávú adatok)"
 
 #: src/ui_configurationDialog.h:1094
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
-msgstr ""
+msgstr "DE430: legnagyobb pontosság, csak 1550...2650 között."
 
 #: src/ui_configurationDialog.h:1096
 msgid "Use DE430 (high accuracy)"
-msgstr ""
+msgstr "DE430 (nagy pontosság)"
 
 #: src/ui_configurationDialog.h:1098
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
 msgstr ""
+"VSOP87: -4000...+8000 év között ajánlott, de ezen kívül is használható "
+"eredményt ad."
 
 #: src/ui_configurationDialog.h:1100
 msgid ""
@@ -6101,7 +6105,7 @@ msgstr "Efemerisz számítása"
 
 #: src/ui_astroCalcDialog.h:388
 msgid "Cleanup ephemerides"
-msgstr ""
+msgstr "Efemeridák tisztítása"
 
 #: src/ui_astroCalcDialog.h:389
 msgid "Ephemeris"
@@ -9645,13 +9649,16 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
 msgid "Proper names"
-msgstr ""
+msgstr "Saját nevek"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid ""
 "In December 2015, the International Astronomical Union (IAU) has officially "
 "approved names for several exoplanets after a public vote."
 msgstr ""
+"A Nemzetközi Csillagászati Unió  (IAU) 2015 decemberében hivatalosan "
+"elfogadott néhány javaslatot exobolygók elnevezésére, miután nyilvánosan "
+"szavazott a közvélemény."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
 msgid ""
@@ -9939,6 +9946,8 @@ msgid ""
 "These names are modified based on the original proposals, to be consistent "
 "with the IAU rules."
 msgstr ""
+"A neveket az eredeti javaslatokhoz képest módosított formában fogadták el, "
+"hogy megfeleljenek az IAU szabályainak."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
 msgid ""
@@ -10001,11 +10010,11 @@ msgstr "Földhasonlósági index"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
 msgid "Final Results of NameExoWorlds Public Vote Released"
-msgstr ""
+msgstr "A nyilvános NameExoWorlds szavazás végső eredményei"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
 msgid "NameExoWorlds website"
-msgstr ""
+msgstr "NameExoWorlds honlap"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
 msgid "General professional Web sites relevant to extrasolar planets"
@@ -10094,27 +10103,27 @@ msgstr "Exobolygók frissítve"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:491
 msgid "Orbital Eccentricity"
-msgstr ""
+msgstr "Pályaexcentricitás"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:492
 msgid "Orbit Semi-Major Axis, AU"
-msgstr ""
+msgstr "A keringés fél nagytengelye, CsE"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:493
 msgid "Planetary Mass, Mjup"
-msgstr ""
+msgstr "Bolygótömeg, Mjup"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:494
 msgid "Planetary Radius, Rjup"
-msgstr ""
+msgstr "Bolygósugár, Rjup"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:495
 msgid "Orbital Period, days"
-msgstr ""
+msgstr "Keringési idő (nap)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:496
 msgid "Angular Distance, arcsec."
-msgstr ""
+msgstr "Szögtávolság (arcsec)"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:456
 msgid "Exoplanets Configuration"
@@ -10172,12 +10181,12 @@ msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:485
 msgid "Y axis"
-msgstr ""
+msgstr "Y tengely"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:487
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:494
 msgid "Logarithmic scale"
-msgstr ""
+msgstr "Logaritmus skála"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:489
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:496
@@ -10187,21 +10196,21 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:490
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:498
 msgid "min"
-msgstr ""
+msgstr "min"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:491
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:499
 msgid "max"
-msgstr ""
+msgstr "max"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:492
 msgid "X axis"
-msgstr ""
+msgstr "X tengely"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:500
 msgctxt "tab in plugin windows"
 msgid "Diagram"
-msgstr ""
+msgstr "Diagram"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:501
 msgctxt "tab in plugin windows"
