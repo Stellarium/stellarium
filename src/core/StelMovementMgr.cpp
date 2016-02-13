@@ -159,11 +159,11 @@ void StelMovementMgr::init()
 	addAction("actionZoom_Out_Auto", movementGroup, N_("Zoom out"), "autoZoomOut()", "\\");
 	addAction("actionSet_Tracking", movementGroup, N_("Track object"), "tracking", "T");
 	// Implementation of quick turning to different directions (examples: CdC, HNSKY)
-	addAction("actionTurn_East", movementGroup, N_("Look towards East"), "lookEast()", "Shift+E");
-	addAction("actionTurn_West", movementGroup, N_("Look towards West"), "lookWest()", "Shift+W");
-	addAction("actionTurn_North", movementGroup, N_("Look towards North"), "lookNorth()", "Shift+N");
-	addAction("actionTurn_South", movementGroup, N_("Look towards South"), "lookSouth()", "Shift+S");
-	addAction("actionTurn_Zenith", movementGroup, N_("Look towards Zenith"), "lookZenith()", "Shift+Z");
+	addAction("actionLook_Towards_East", movementGroup, N_("Look towards East"), "lookEast()", "Shift+E");
+	addAction("actionLook_Towards_West", movementGroup, N_("Look towards West"), "lookWest()", "Shift+W");
+	addAction("actionLook_Towards_North", movementGroup, N_("Look towards North"), "lookNorth()", "Shift+N");
+	addAction("actionLook_Towards_South", movementGroup, N_("Look towards South"), "lookSouth()", "Shift+S");
+	addAction("actionLook_Towards_Zenith", movementGroup, N_("Look towards Zenith"), "lookZenith()", "Shift+Z");
 }
 
 void StelMovementMgr::setMountMode(MountMode m)
