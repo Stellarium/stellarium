@@ -110,19 +110,6 @@ void StelMovementMgr::init()
 	currentFov = initFov;
 	setInitConstellationIntensity(conf->value("viewing/constellation_art_intensity", 0.5f).toFloat());
 
-	QString tmpstr = conf->value("navigation/viewing_mode", "horizon").toString();
-	if (tmpstr=="equator")
-		setMountMode(StelMovementMgr::MountEquinoxEquatorial);
-	else
-	{
-		if (tmpstr=="horizon")
-			setMountMode(StelMovementMgr::MountAltAzimuthal);
-		else
-		{
-			qWarning() << "ERROR: Unknown viewing mode type: " << tmpstr;
-			setMountMode(StelMovementMgr::MountEquinoxEquatorial);
-		}
-	}
 
 	// With a special code of init_view_position=x/y/1 (or actually, anything equal or larger to 1) you can set zenith into the center and atan2(x/y) to bottom of screen.
 	// examples: 1/0->0         NORTH is bottom
@@ -149,6 +136,20 @@ void StelMovementMgr::init()
 		initViewPos.set(tmp[0], tmp[1], tmp[2]);
 		initViewUp.set(0., 0., 1.);
 		viewDirectionJ2000 = core->altAzToJ2000(initViewPos, StelCore::RefractionOff);
+	}
+
+	QString tmpstr = conf->value("navigation/viewing_mode", "horizon").toString();
+	if (tmpstr=="equator")
+		setMountMode(StelMovementMgr::MountEquinoxEquatorial);
+	else
+	{
+		if (tmpstr=="horizon")
+			setMountMode(StelMovementMgr::MountAltAzimuthal);
+		else
+		{
+			qWarning() << "ERROR: Unknown viewing mode type: " << tmpstr;
+			setMountMode(StelMovementMgr::MountEquinoxEquatorial);
+		}
 	}
 
 	QString movementGroup = N_("Movement and Selection");
@@ -579,7 +580,7 @@ void StelMovementMgr::zoomOut(bool s)
 		deltaFov = (s!=0);
 }
 
-void StelMovementMgr::turnEast(void)
+void StelMovementMgr::lookEast(void)
 {
 	float cx, cy;
 	Vec3f dir;
@@ -589,7 +590,7 @@ void StelMovementMgr::turnEast(void)
 	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
 }
 
-void StelMovementMgr::turnWest(void)
+void StelMovementMgr::lookWest(void)
 {
 	float cx, cy;
 	Vec3f dir;
@@ -599,7 +600,7 @@ void StelMovementMgr::turnWest(void)
 	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
 }
 
-void StelMovementMgr::turnNorth(void)
+void StelMovementMgr::lookNorth(void)
 {
 	float cx, cy;
 	Vec3f dir;
@@ -609,7 +610,7 @@ void StelMovementMgr::turnNorth(void)
 	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
 }
 
-void StelMovementMgr::turnSouth(void)
+void StelMovementMgr::lookSouth(void)
 {
 	float cx, cy;
 	Vec3f dir;
@@ -619,7 +620,7 @@ void StelMovementMgr::turnSouth(void)
 	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
 }
 
-void StelMovementMgr::turnZenith(void)
+void StelMovementMgr::lookZenith(void)
 {
 	Vec3f dir;
 	StelUtils::spheToRect(M_PI, M_PI/2., dir);
