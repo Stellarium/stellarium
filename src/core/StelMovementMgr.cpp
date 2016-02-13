@@ -110,24 +110,6 @@ void StelMovementMgr::init()
 	currentFov = initFov;
 	setInitConstellationIntensity(conf->value("viewing/constellation_art_intensity", 0.5f).toFloat());
 
-	// With a special code of init_view_position=x/y/2 you can set zenith into the center and atan2(x/y) to bottom of screen.
-	// examples: 1/0->0             (-1/0)
-	//           -1/0 ->180         (1/0)
-	//            0/-1 --> 90       (0/-1)
-	//            0/1  ->270        (0/1)
-	Vec3f tmp = StelUtils::strToVec3f(conf->value("navigation/init_view_pos").toString());
-	if (tmp[2]==2)
-	{
-		initViewPos.set(0., 0., 1.);
-		setViewUpVector(Vec3d(tmp[0], tmp[1], 0.));
-		setViewDirectionJ2000(core->altAzToJ2000(Vec3d(0., 0., 1.), StelCore::RefractionOff));
-	}
-	else
-	{
-		initViewPos.set(tmp[0], tmp[1], tmp[2]);
-		viewDirectionJ2000 = core->altAzToJ2000(initViewPos, StelCore::RefractionOff);
-	}
-
 	QString tmpstr = conf->value("navigation/viewing_mode", "horizon").toString();
 	if (tmpstr=="equator")
 		setMountMode(StelMovementMgr::MountEquinoxEquatorial);
@@ -142,12 +124,45 @@ void StelMovementMgr::init()
 		}
 	}
 
+	// With a special code of init_view_position=x/y/1 (or actually, anything equal or larger to 1) you can set zenith into the center and atan2(x/y) to bottom of screen.
+	// examples: 1/0->0         NORTH is bottom
+	//           -1/0 ->180     SOUTH is bottom
+	//            0/-1 --> 90   EAST is bottom
+	//            0/1  ->270    WEST is bottom
+	Vec3f tmp = StelUtils::strToVec3f(conf->value("navigation/init_view_pos").toString());
+	if (tmp[2]>=1)
+	{
+		//qDebug() << "Special zenith setup:";
+		setViewDirectionJ2000(mountFrameToJ2000(Vec3d(0., 0., 1.)));
+		initViewPos.set(0., 0., 1.);
+
+		// It is not good to code 0/0/1 as view vector: bottom azimuth is undefined. Use default-south:
+		if ((tmp[0]==0.) && (tmp[1]==0.))
+			tmp[0]=-1.;
+
+		upVectorMountFrame.set(tmp[0], tmp[1], 0.);
+		upVectorMountFrame.normalize();
+		initViewUp=upVectorMountFrame;
+	}
+	else
+	{
+		initViewPos.set(tmp[0], tmp[1], tmp[2]);
+		initViewUp.set(0., 0., 1.);
+		viewDirectionJ2000 = core->altAzToJ2000(initViewPos, StelCore::RefractionOff);
+	}
+
 	QString movementGroup = N_("Movement and Selection");
 	addAction("actionSwitch_Equatorial_Mount", N_("Miscellaneous"), N_("Switch between equatorial and azimuthal mount"), "equatorialMount", "Ctrl+M");
 	addAction("actionGoto_Selected_Object", movementGroup, N_("Center on selected object"), "setFlagTracking()", "Space");
 	addAction("actionZoom_In_Auto", movementGroup, N_("Zoom in on selected object"), "autoZoomIn()", "/");
 	addAction("actionZoom_Out_Auto", movementGroup, N_("Zoom out"), "autoZoomOut()", "\\");
 	addAction("actionSet_Tracking", movementGroup, N_("Track object"), "tracking", "T");
+	// Implementation of quick turning to different directions (examples: CdC, HNSKY)
+	addAction("actionTurn_East", movementGroup, N_("Turn East"), "turnEast()", "Shift+E");
+	addAction("actionTurn_West", movementGroup, N_("Turn West"), "turnWest()", "Shift+W");
+	addAction("actionTurn_North", movementGroup, N_("Turn North"), "turnNorth()", "Shift+N");
+	addAction("actionTurn_South", movementGroup, N_("Turn South"), "turnSouth()", "Shift+S");
+	addAction("actionTurn_Zenith", movementGroup, N_("Turn Zenith"), "turnZenith()", "Shift+Z");
 }
 
 void StelMovementMgr::setMountMode(MountMode m)
@@ -564,6 +579,53 @@ void StelMovementMgr::zoomOut(bool s)
 		deltaFov = (s!=0);
 }
 
+void StelMovementMgr::turnEast(void)
+{
+	float cx, cy;
+	Vec3f dir;
+	StelUtils::rectToSphe(&cy,&cx,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
+	cy = M_PI/2.;
+	StelUtils::spheToRect(cy, cx, dir);
+	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
+}
+
+void StelMovementMgr::turnWest(void)
+{
+	float cx, cy;
+	Vec3f dir;
+	StelUtils::rectToSphe(&cy,&cx,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
+	cy = 3.*M_PI/2.;
+	StelUtils::spheToRect(cy, cx, dir);
+	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
+}
+
+void StelMovementMgr::turnNorth(void)
+{
+	float cx, cy;
+	Vec3f dir;
+	StelUtils::rectToSphe(&cy,&cx,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
+	cy = M_PI;
+	StelUtils::spheToRect(cy, cx, dir);
+	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
+}
+
+void StelMovementMgr::turnSouth(void)
+{
+	float cx, cy;
+	Vec3f dir;
+	StelUtils::rectToSphe(&cy,&cx,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
+	cy = 0.;
+	StelUtils::spheToRect(cy, cx, dir);
+	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
+}
+
+void StelMovementMgr::turnZenith(void)
+{
+	Vec3f dir;
+	StelUtils::spheToRect(M_PI, M_PI/2., dir);
+	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
+}
+
 
 // Increment/decrement smoothly the vision field and position
 void StelMovementMgr::updateMotion(double deltaTime)
@@ -858,7 +920,7 @@ void StelMovementMgr::autoZoomOut(float moveDuration, bool full)
 	zoomTo(initFov, moveDuration);
 	if (flagAutoZoomOutResetsDirection)
 	{
-		moveToJ2000(core->altAzToJ2000(getInitViewingDirection(), StelCore::RefractionOff), mountFrameToJ2000(Vec3d(0., 0., 1.)), moveDuration, ZoomOut);
+		moveToJ2000(core->altAzToJ2000(getInitViewingDirection(), StelCore::RefractionOff), mountFrameToJ2000(initViewUp), moveDuration, ZoomOut);
 		setFlagTracking(false);
 		setFlagLockEquPos(false);
 	}

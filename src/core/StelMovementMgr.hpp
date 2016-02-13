@@ -31,16 +31,16 @@ class StelMovementMgr : public StelModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool equatorialMount
-			   READ getEquatorialMount
-			   WRITE setEquatorialMount)
+		   READ getEquatorialMount
+		   WRITE setEquatorialMount)
 	Q_PROPERTY(bool tracking
-			   READ getFlagTracking
-			   WRITE setFlagTracking)
+		   READ getFlagTracking
+		   WRITE setFlagTracking)
 public:
 
 	//! Possible mount modes defining the reference frame in which head movements occur.
 	//! MountGalactic is currently only available via scripting API: core.clear("galactic")
-	// TODO: add others like MountEcliptical
+	// TODO: add others: MountEcliptical, MountEq2000, MountEcliptical2000 and implement proper variants.
 	enum MountMode { MountAltAzimuthal, MountEquinoxEquatorial, MountGalactic};
 
 	//! Named constants for zoom operations.
@@ -214,6 +214,12 @@ public slots:
 	void zoomIn(bool);
 	void zoomOut(bool);
 
+	void turnEast(void);
+	void turnWest(void);
+	void turnNorth(void);
+	void turnSouth(void);
+	void turnZenith(void);
+
 	//! Set current mount type defining the reference frame in which head movements occur.
 	void setMountMode(MountMode m);
 	//! Get current mount type defining the reference frame in which head movements occur.
@@ -358,6 +364,7 @@ private:
 	MountMode mountMode;
 
 	Vec3d initViewPos;        // Default viewing direction
+	Vec3d initViewUp;         // original up vector. Usually 0/0/1, but maybe something else in rare setups.
 
 	// Viewing direction in equatorial J2000 coordinates
 	Vec3d viewDirectionJ2000;
