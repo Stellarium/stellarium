@@ -89,7 +89,7 @@ ArchaeoLines::ArchaeoLines()
 	objMgr=GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(objMgr);
 
-	// optimize readabiity so that each upper line of the lunistice doubles is labeled.
+	// optimize readability so that each upper line of the lunistice doubles is labeled.
 	equinoxLine = new ArchaeoLine(ArchaeoLine::Equinox, 0.0);
 	northernSolsticeLine = new ArchaeoLine(ArchaeoLine::Solstices, 23.50);
 	southernSolsticeLine = new ArchaeoLine(ArchaeoLine::Solstices, -23.50);
@@ -116,6 +116,7 @@ ArchaeoLines::ArchaeoLines()
 
 	configDialog = new ArchaeoLinesDialog();
 	conf = StelApp::getInstance().getSettings();
+
 }
 
 ArchaeoLines::~ArchaeoLines()
@@ -208,6 +209,17 @@ void ArchaeoLines::init()
 	{
 		qWarning() << "WARNING: unable to create toolbar button for ArchaeoLines plugin: " << e.what();
 	}
+	addAction("actionAL_showEquinoxLine",          N_("ArchaeoLines"), N_("Show Line for Equinox"),            "flagShowEquinox"         ); // No Shortcuts configured.
+	addAction("actionAL_showSolsticeLines",        N_("ArchaeoLines"), N_("Show Line for Solstices"),          "flagShowSolstices"       ); // No Shortcuts configured.
+	addAction("actionAL_showCrossquarterLines",    N_("ArchaeoLines"), N_("Show Line for Crossquarter"),       "flagShowCrossquarters"   ); // No Shortcuts configured.
+	addAction("actionAL_showMajorStandstillLines", N_("ArchaeoLines"), N_("Show Line for Major Standstill"),   "flagShowMajorStandstills"); // No Shortcuts configured.
+	addAction("actionAL_showMinorStandstillLines", N_("ArchaeoLines"), N_("Show Line for Minor Standstill"),   "flagShowMinorStandstills"); // No Shortcuts configured.
+	addAction("actionAL_showZenithPassageLine",    N_("ArchaeoLines"), N_("Show Line for Zenith Passage"),     "flagShowZenithPassage"   ); // No Shortcuts configured.
+	addAction("actionAL_showNadirPassageLine",     N_("ArchaeoLines"), N_("Show Line for Nadir Passage"),      "flagShowNadirPassage"    ); // No Shortcuts configured.
+	addAction("actionAL_showSelectedObjectLine",   N_("ArchaeoLines"), N_("Show Line for Selected Object"),    "flagShowSelectedObject"  ); // No Shortcuts configured.
+	addAction("actionAL_showCurrentSunLine",       N_("ArchaeoLines"), N_("Show Line for Current Sun"),        "flagShowCurrentSun"      ); // No Shortcuts configured.
+	addAction("actionAL_showCurrentMoonLine",      N_("ArchaeoLines"), N_("Show Line for Current Moon"),       "flagShowCurrentMoon"     ); // No Shortcuts configured.
+	//addAction("actionAL_showEquinoxLine",        N_("ArchaeoLines"), N_("Show Line for Selected Planet"), flagShow); // No Shortcuts configured.
 }
 
 void ArchaeoLines::update(double deltaTime)
