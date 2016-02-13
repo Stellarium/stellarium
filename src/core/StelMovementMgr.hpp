@@ -40,7 +40,7 @@ public:
 
 	//! Possible mount modes defining the reference frame in which head movements occur.
 	//! MountGalactic is currently only available via scripting API: core.clear("galactic")
-	// TODO: add others like MountEcliptical
+	// TODO: add others: MountEcliptical, MountEq2000, MountEcliptical2000 and implement proper variants.
 	enum MountMode { MountAltAzimuthal, MountEquinoxEquatorial, MountGalactic};
 
 	//! Named constants for zoom operations.
@@ -364,6 +364,7 @@ private:
 	MountMode mountMode;
 
 	Vec3d initViewPos;        // Default viewing direction
+	Vec3d initViewUp;         // original up vector. Usually 0/0/1, but maybe something else in rare setups.
 
 	// Viewing direction in equatorial J2000 coordinates
 	Vec3d viewDirectionJ2000;
