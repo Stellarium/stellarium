@@ -31,11 +31,11 @@ class StelMovementMgr : public StelModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool equatorialMount
-			   READ getEquatorialMount
-			   WRITE setEquatorialMount)
+		   READ getEquatorialMount
+		   WRITE setEquatorialMount)
 	Q_PROPERTY(bool tracking
-			   READ getFlagTracking
-			   WRITE setFlagTracking)
+		   READ getFlagTracking
+		   WRITE setFlagTracking)
 public:
 
 	//! Possible mount modes defining the reference frame in which head movements occur.
@@ -213,6 +213,12 @@ public slots:
 	void moveSlow(bool b) {flagMoveSlow=b;}
 	void zoomIn(bool);
 	void zoomOut(bool);
+
+	void turnEast(void);
+	void turnWest(void);
+	void turnNorth(void);
+	void turnSouth(void);
+	void turnZenith(void);
 
 	//! Set current mount type defining the reference frame in which head movements occur.
 	void setMountMode(MountMode m);
