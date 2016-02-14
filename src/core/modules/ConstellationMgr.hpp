@@ -378,7 +378,7 @@ private:
 	QFont asterFont;
 	StarMgr* hipStarMgr;
 
-	bool isolateSelected;
+	bool isolateSelected; // true to pick individual constellations.
 	bool constellationPickEnabled;
 	std::vector<std::vector<Vec3f> *> allBoundarySegments;
 
