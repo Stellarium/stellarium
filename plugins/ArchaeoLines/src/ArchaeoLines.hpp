@@ -174,7 +174,8 @@ class ArchaeoLines : public StelModule
 				WRITE showCurrentMoon)
 	Q_PROPERTY(ArchaeoLine::Line enumShowCurrentPlanet
 				READ    whichCurrentPlanetDisplayed
-				WRITE showCurrentPlanet)
+				WRITE showCurrentPlanet
+				NOTIFY currentPlanetChanged)
 
 public:
 	ArchaeoLines();
@@ -190,19 +191,7 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	virtual void handleKeys(class QKeyEvent* event){event->setAccepted(false);}
 	virtual bool configureGui(bool show=true);
-	bool isEnabled() const {return flagShowArchaeoLines;}
 	bool isDmsFormat() const { return flagUseDmsFormat; } // NOT SURE IF USEFUL
-	bool isEquinoxDisplayed() const {return flagShowEquinox;}
-	bool isSolsticesDisplayed() const {return flagShowSolstices;}
-	bool isCrossquartersDisplayed() const {return flagShowCrossquarters;}
-	bool isMajorStandstillsDisplayed() const {return flagShowMajorStandstills;}
-	bool isMinorStandstillsDisplayed() const {return flagShowMinorStandstills;}
-	bool isZenithPassageDisplayed() const {return flagShowZenithPassage;}
-	bool isNadirPassageDisplayed() const {return flagShowNadirPassage;}
-	bool isSelectedObjectDisplayed() const {return flagShowSelectedObject;}
-	bool isCurrentSunDisplayed() const {return flagShowCurrentSun;}
-	bool isCurrentMoonDisplayed() const {return flagShowCurrentMoon;}
-	ArchaeoLine::Line whichCurrentPlanetDisplayed() const {return enumShowCurrentPlanet;}
 
 	//! Restore the plug-in's settings to the default state.
 	//! Replace the plug-in's settings in Stellarium's configuration file
@@ -217,10 +206,26 @@ public:
 	//! @see restoreDefaultSettings()
 	void loadSettings();
 
+signals:
+	void currentPlanetChanged(ArchaeoLine::Line l); // meaningful only CurrentPlanetNone...CurrentPlanetSaturn.
 
 public slots:
 	void enableArchaeoLines(bool b);
 	//void useDmsFormat(bool b);
+
+	bool isEnabled() const {return flagShowArchaeoLines;}
+	bool isEquinoxDisplayed() const {return flagShowEquinox;}
+	bool isSolsticesDisplayed() const {return flagShowSolstices;}
+	bool isCrossquartersDisplayed() const {return flagShowCrossquarters;}
+	bool isMajorStandstillsDisplayed() const {return flagShowMajorStandstills;}
+	bool isMinorStandstillsDisplayed() const {return flagShowMinorStandstills;}
+	bool isZenithPassageDisplayed() const {return flagShowZenithPassage;}
+	bool isNadirPassageDisplayed() const {return flagShowNadirPassage;}
+	bool isSelectedObjectDisplayed() const {return flagShowSelectedObject;}
+	bool isCurrentSunDisplayed() const {return flagShowCurrentSun;}
+	bool isCurrentMoonDisplayed() const {return flagShowCurrentMoon;}
+	ArchaeoLine::Line whichCurrentPlanetDisplayed() const {return enumShowCurrentPlanet;}
+
 
 	void showEquinox(bool b);
 	void showSolstices(bool b);
@@ -233,7 +238,7 @@ public slots:
 	void showCurrentSun(bool b);
 	void showCurrentMoon(bool b);
 	void showCurrentPlanet(ArchaeoLine::Line l); // Allowed values for l: CurrentPlanetNone...CurrentPlanetSaturn.
-	void showCurrentPlanet(QString planet); // Allowed values for planet: "none", "Mercury", "Venus", "Mars", "Jupiter", "Saturn".
+	void showCurrentPlanetNamed(QString planet); // Allowed values for planet: "none", "Mercury", "Venus", "Mars", "Jupiter", "Saturn".
 
 	// called by the dialog GUI, converts GUI's QColor (0..255) to Stellarium's Vec3f float color.
 	void setLineColor(ArchaeoLine::Line whichLine, QColor color);
