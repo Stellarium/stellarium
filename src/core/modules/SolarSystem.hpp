@@ -270,7 +270,7 @@ public slots:
 
 	//! Set the display scaling factor for Earth's moon.
 	void setMoonScale(double f);
-	//! Get the display scaling factor for Earth's oon.
+	//! Get the display scaling factor for Earth's moon.
 	double getMoonScale(void) const {return moonScale;}
 
 	//! Translate names. (public so that SolarSystemEditor can call it).

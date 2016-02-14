@@ -138,12 +138,25 @@ public:
 
 protected:
 
-	//! convenience methods to add an action to the StelActionMgr object.
+	//! convenience methods to add an action (call to slot) to the StelActionMgr object.
+	//! @param id unique identifier. Should be called actionMy_Action. (i.e., start with "action" and then "Capitalize_Underscore" style.)
+	//! @param groupId string to be used in the Help menu. The action will be listed in this group.
+	//! @param text short translatable description what the action does.
+	//! @param target recipient of the call
+	//! @param slot name of slot in target recipient
+	//! @param shortcut default shortcut. Can be reconfigured.
+	//! @param altShortcut default alternative shortcut. Can be reconfigured.
 	class StelAction* addAction(const QString& id, const QString& groupId, const QString& text,
 	                            QObject* target, const char* slot,
 	                            const QString& shortcut="", const QString& altShortcut="");
 
-	//! convenience methods to add an action to the StelActionMgr object.
+	//! convenience methods to add an action (call to own slot) to the StelActionMgr object.
+	//! @param id unique identifier. Should be called actionMy_Action. (i.e., start with "action" and then "Capitalize_Underscore" style.)
+	//! @param groupId string to be used in the Help menu. The action will be listed in this group.
+	//! @param text short translatable description what the action does.
+	//! @param slot name of slot in target recipient
+	//! @param shortcut default shortcut. Can be reconfigured.
+	//! @param altShortcut default alternative shortcut. Can be reconfigured.
 	class StelAction* addAction(const QString& id, const QString& groupId, const QString& text,
 	                            const char* slot,
 	                            const QString& shortcut="", const QString& altShortcut="") {
