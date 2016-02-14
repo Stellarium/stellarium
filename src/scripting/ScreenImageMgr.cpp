@@ -212,7 +212,7 @@ void ScreenImageMgr::createScreenImage(const QString& id, const QString& filenam
 	}
 	else
 	{
-		qWarning() << "Failed to create ScreenImage: file not exists";
+		qWarning() << "Failed to create ScreenImage" << id << ": file not found: " << filename;
 	}
 }
 
