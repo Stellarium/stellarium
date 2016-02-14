@@ -220,9 +220,8 @@ void ArchaeoLines::init()
 	addAction("actionAL_showSelectedObjectLine",   section, N_("Show Line for Selected Object"),    "flagShowSelectedObject"  ); // No Shortcuts configured.
 	addAction("actionAL_showCurrentSunLine",       section, N_("Show Line for Current Sun"),        "flagShowCurrentSun"      ); // No Shortcuts configured.
 	addAction("actionAL_showCurrentMoonLine",      section, N_("Show Line for Current Moon"),       "flagShowCurrentMoon"     ); // No Shortcuts configured.
-	// GZ Do we need the long name? Or just convention.
-	// TODO: Why does Stellarium crash with this?
-	//registerProperty("prop_ArchaeoLines_enumShowCurrentPlanet", "enumShowCurrentPlanet");
+
+	registerProperty("prop_ArchaeoLines_enumShowCurrentPlanet", "enumShowCurrentPlanet");
 }
 
 void ArchaeoLines::update(double deltaTime)
@@ -541,12 +540,17 @@ void ArchaeoLines::showCurrentMoon(bool b)
 
 void ArchaeoLines::showCurrentPlanet(ArchaeoLine::Line l)
 {
-	enumShowCurrentPlanet=l;
-	const char *planetStrings[]={"none", "Mercury", "Venus", "Mars", "Jupiter", "Saturn"};
+	if(l!=enumShowCurrentPlanet)
+	{
+		enumShowCurrentPlanet=l;
+		const char *planetStrings[]={"none", "Mercury", "Venus", "Mars", "Jupiter", "Saturn"};
 
-	conf->setValue("ArchaeoLines/show_current_planet", planetStrings[l-ArchaeoLine::CurrentPlanetNone]);
-	currentPlanetLine->setLineType(enumShowCurrentPlanet);
-	currentPlanetLine->setDisplayed(enumShowCurrentPlanet != ArchaeoLine::CurrentPlanetNone);
+		conf->setValue("ArchaeoLines/show_current_planet", planetStrings[l-ArchaeoLine::CurrentPlanetNone]);
+		currentPlanetLine->setLineType(enumShowCurrentPlanet);
+		currentPlanetLine->setDisplayed(enumShowCurrentPlanet != ArchaeoLine::CurrentPlanetNone);
+
+		emit currentPlanetChanged(l);
+	}
 }
 
 void ArchaeoLines::showCurrentPlanetNamed(QString planet)

@@ -77,6 +77,10 @@ class ArchaeoLine : QObject
 	Q_OBJECT
 	Q_PROPERTY(Vec3f color READ getColor WRITE setColor)
 	Q_PROPERTY(bool flagLabel READ isLabelVisible WRITE setLabelVisible)
+
+	//Need to register Enum with Qt to be able to use it as Q_PROPERTY
+	//or in signals/slots
+	Q_ENUMS(Line)
 public:
 	enum Line {
 		Equinox,
