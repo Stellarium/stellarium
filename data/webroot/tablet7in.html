@@ -91,14 +91,40 @@
               <div id="view_upleft" class="joybutton"><?= tr("Up/Left")?></div><div id="view_up" class="joybutton"><?= tr("Up")?></div><div id="view_upright" class="joybutton"><?= tr("Up/Right")?></div><div id="view_left" class="joybutton"><?= tr("Left")?></div><div id="view_center" class="joybutton" title='<?= tr("Focus on selected object")?>'><?= tr("Focus on selection")?></div><div id="view_right" class="joybutton"><?= tr("Right")?></div><div id="view_downleft" class="joybutton"><?= tr("Down/Left")?></div><div id="view_down" class="joybutton"><?= tr("Down")?></div><div id="view_downright" class="joybutton"><?= tr("Down/Right")?></div>
             </div>
 
-            <!-- GZ TODO We have now StelMovementMgr::lookNorth(), lookEast(),  lookSouth(), lookWest(), lookZenith(). How would 5 buttons be configured here?  -->
+            <!-- GZ TODO We have now StelMovementMgr actions::lookNorth(), lookEast(),  lookSouth(), lookWest(), lookZenith(). 
+                 How would 5 buttons be configured here? These buttons here are type checkbox which is of course 
+                 I'd need a button that just triggers an action without argument. What is the input type for this? It should look like a labeled button.
+                 We may add turnEast() etc which triggers a smooth move, so these buttons would be changed to trigger those. Still, the actions will not have arguments. 
+                 In case these will not be actions but simple slots like turnSouth(float duration_seconds=3.0f), those could also be used as arg-less actions.
+                 Or maybe this would be a case for a to-be-developed "1-line script" button which could look like <button class="ssc" code="StelMovementMgr.turnWest(4);"><?= tr("W")?></button> 
+                 I could think of button class="ssc" with either code or script arguments. The script arg would be the name of the script (ssc file) which would be triggered.
+                 -->
+
+            <div class="smallblock blocklabel">
+              <label  title='<?= tr("Look towards East")>'><input type="checkbox" class="stelaction" value="actionLook_Towards_East" /><?= tr("E")?></label>
+              <label  title='<?= tr("Look towards South")>'><input type="checkbox" class="stelaction" value="actionLook_Towards_South" /><?= tr("S")?></label>
+              <label  title='<?= tr("Look towards West")>'><input type="checkbox" class="stelaction" value="actionLook_Towards_West" /><?= tr("W")?></label>
+              <label  title='<?= tr("Look towards North")>'><input type="checkbox" class="stelaction" value="actionLook_Towards_North" /><?= tr("N")?></label>
+              <label  title='<?= tr("Look towards Zenith")>'><input type="checkbox" class="stelaction" value="actionLook_Towards_Zenith" /><?= tr("Z")?></label>
+            </div>
+
+
+
+            <!--  GZ TODO: I see this thing is handled specially in the JS code. There are now sliders with some generic syntax. Is this fov slider still special?  -->
+
 
             <div id="view_wrapper">
               <div id="view_fov"></div>
               <p title='<?= tr("Field of view")?>'>FOV: <span id="view_fov_text"></span></p>
-              <!-- GZ TODO I would like to have a row of buttons with fixed FoV values here The buttons in the ul below don't work yet.-->
+
+
+              <!-- GZ TODO I would like to have a row of buttons (or 3x4 or 2x6?) with fixed FoV values here. The buttons in the ul below don't work yet. ul may rather be a div? 
+                   I guess the 
+
+              -->
               <div id="view_fovbuttons" class="ui-corner-all ui-widget-content">
               <ul>
+                <li><button id="fov_01" >0.1</button></li>
                 <li><button id="fov_1" >1</button></li>
                 <li><button id="fov_10" >10</button></li>
                 <li><button id="fov_20" >20</button></li>
@@ -203,7 +229,15 @@
                 <!-- to add a new quick select button, simply add a new button with the english name of the object as value -->
                 <!-- try not to add whitespace between li items (inline-block layout uglyness)  -GZ: I don't see where?  But I had to change to 2-letter names: No Unicode Planet chars on Android :-( -->
                 <li><button title='<?= tr("Sun")?>' value="Sun">Su</button></li><li><button title='<?= tr("Moon")?>' value="Moon">Mo</button></li><li><button title='<?= tr("Mercury")?>' value="Mercury">Me</button></li><li><button title='<?= tr("Venus")?>' value="Venus">Ve</button></li><!--li><button title='<?= tr("Earth")?>' value="Earth">&#x2641;</button></li--><li><button title='<?= tr("Mars")?>' value="Mars">Ma</button></li><li><button title='<?= tr("Jupiter")?>' value="Jupiter">Ju</button></li><li><button title='<?= tr("Saturn")?>' value="Saturn">Sa</button></li><li><button title='<?= tr("Uranus")?>' value="Uranus">Ur</button></li><li><button title='<?= tr("Neptune")?>' value="Neptune">Ne</button></li><li><button title='<?= tr("Pluto")?>' value="Pluto">Pl</button></li><br/> 
-                <li><button title='<?= tr("Pleiades")?>' value="M45">M45</button></li>
+
+
+                <!-- GZ TODO: Is it possible to override button size to adapt to the longer strings of star names?  -->
+                <li><button title='<?= tr("Sirius")?>' value="Sirius" style="width: 100px">Sirius</button></li>
+                <li><button title='<?= tr("Arcturus")?>' value="Arcturus">Arctur</button></li>
+                <li><button title='<?= tr("Capella")?>' value="Capella">Capella</button></li>
+                <li><button title='<?= tr("Vega")?>' value="Vega">Vega</button></li>
+                <li><button title='<?= tr("Deneb")?>' value="Deneb">Deneb</button></li>
+                <li><button title='<?= tr("Altair")?>' value="Altair">Altair</button></li>
                 <li><button title='<?= tr("Andromeda Galaxy")?>' value="M31">M31</button></li>
                 <li><button title='<?= tr("Hercules Cluster")?>' value="M13">M13</button></li>
                 <li><button title='<?= tr("Orion Nebula")?>' value="M42">M42</button></li>
@@ -348,7 +382,9 @@
               <label><input type="checkbox" class="stelaction" value="actionAL_showSelectedObjectLine"/><?= tr("Selected Object")?></label>
               <label><input type="checkbox" class="stelaction" value="actionAL_showCurrentSunLine"/><?= tr("Current Sun")?></label>
               <label><input type="checkbox" class="stelaction" value="actionAL_showCurrentMoonLine"/><?= tr("Current Moon")?></label>
-              <!-- GZ TODO: How would selecting a planet line work here? Best thing a row of radiobuttons, or Combobox. Likely ArchaeoLines needs a registerProperty? -->
+              <!-- GZ TODO: How would selecting a planet line work here? Best thing a row of radiobuttons, or a Combobox to set the planetline stelProperty.  
+				Is there a button type to set a property directly? 
+              -->
             </div>
           </div>
 
