@@ -126,6 +126,7 @@ public slots:
 	//! for using StelFileMgr, with "scripts/" prefixed to the filename.
 	//! @param x The x-coordinate for the image (0 = left of screen)
 	//! @param y The y-coordinate for the image (0 = bottom of screen)
+	//! @param scale scale factor for the image. 1 = original size, 0.5 = 50% size etc.
 	//! @param visible The initial visible state of the image
 	//! @param alpha The initial alpha (transparancy) value for the image (range 0.0 to 1.0)
 	//! @param fadeDuration the time it takes for screen images to fade in/out/change alpha in seconds.
