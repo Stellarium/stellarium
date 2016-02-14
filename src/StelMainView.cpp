@@ -1019,7 +1019,26 @@ void StelMainView::setFullScreen(bool b)
 	if (b)
 		showFullScreen();
 	else
+	{
 		showNormal();
+		// Not enough. If we had started in fullscreen, the inner part of the window is at 0/0, with the frame extending to top/left off screen.
+		// Therefore moving is not possible. We must move to the stored position or at least defaults.
+		if ( (x()<0)  && (y()<0))
+		{
+			QSettings *conf = StelApp::getInstance().getSettings();
+			QDesktopWidget *desktop = QApplication::desktop();
+			int screen = conf->value("video/screen_number", 0).toInt();
+			if (screen < 0 || screen >= desktop->screenCount())
+			{
+				qWarning() << "WARNING: screen" << screen << "not found";
+				screen = 0;
+			}
+			QRect screenGeom = desktop->screenGeometry(screen);
+			int x = conf->value("video/screen_x", 0).toInt();
+			int y = conf->value("video/screen_y", 0).toInt();
+			move(x + screenGeom.x(), y + screenGeom.y());
+		}
+	}
 }
 
 void StelMainView::updateScene() {
