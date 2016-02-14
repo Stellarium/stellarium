@@ -214,11 +214,16 @@ public slots:
 	void zoomIn(bool);
 	void zoomOut(bool);
 
-	void turnEast(void);
-	void turnWest(void);
-	void turnNorth(void);
-	void turnSouth(void);
-	void turnZenith(void);
+	//! Look immediately towards East.
+	void lookEast(void);
+	//! Look immediately towards West.
+	void lookWest(void);
+	//! Look immediately towards North.
+	void lookNorth(void);
+	//! Look immediately towards South.
+	void lookSouth(void);
+	//! Look immediately towards Zenith.
+	void lookZenith(void);
 
 	//! Set current mount type defining the reference frame in which head movements occur.
 	void setMountMode(MountMode m);
