@@ -84,3 +84,19 @@ ul.button32list {
 	list-style: none;
 	/* text-align: center; */
 }
+
+/* QuickSearch Buttons */
+ul.button32list > li > button,
+button.button32 {
+	font-size: 16px;
+}
+
+/* Experimenting: this should be visible only if plugin has been loaded. Some magic around a "stelplugin" class could do that.  */
+#vo_archaeolines {
+	visibility: visible;
+}
+
+/* Experimenting:; this should be visible only if plugin has been loaded. Some magic around a "stelplugin" class could do that.  */
+.stelplugin {
+	visibility: collapse;
+} 
