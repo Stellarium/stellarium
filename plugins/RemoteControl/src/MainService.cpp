@@ -375,7 +375,7 @@ void MainService::postImpl(const QByteArray& operation, const APIParameters &par
 	else
 	{
 		//TODO some sort of service description?
-		response.writeRequestError("unsupported operation. POST: time,focus,move");
+		response.writeRequestError("unsupported operation. POST: time,focus,move,fov");
 	}
 }
 
