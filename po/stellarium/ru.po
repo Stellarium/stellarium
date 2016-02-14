@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-10 22:43+0600\n"
-"PO-Revision-Date: 2016-02-12 16:17+0000\n"
+"POT-Creation-Date: 2016-02-13 20:32+0600\n"
+"PO-Revision-Date: 2016-02-13 15:23+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-02-13 05:11+0000\n"
+"X-Launchpad-Export-Date: 2016-02-14 05:23+0000\n"
 "X-Generator: Launchpad (build 17925)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -945,7 +945,7 @@ msgstr "Ночной режим"
 msgid "Date and Time"
 msgstr "Дата и время"
 
-#: src/core/StelCore.cpp:209 src/core/StelMovementMgr.cpp:145
+#: src/core/StelCore.cpp:209 src/core/StelMovementMgr.cpp:155
 msgid "Movement and Selection"
 msgstr "Перемещение и выбор"
 
@@ -1137,20 +1137,20 @@ msgstr "Сделать выбранную планету домашней"
 msgid "Go to home"
 msgstr "Перейти к дому"
 
-#: src/core/StelCore.cpp:260
+#: src/core/StelCore.cpp:261
 msgid "Flip scene horizontally"
 msgstr "Отразить по горизонтали"
 
-#: src/core/StelCore.cpp:261
+#: src/core/StelCore.cpp:262
 msgid "Flip scene vertically"
 msgstr "Отразить по вертикали"
 
-#: src/core/StelCore.cpp:1661
+#: src/core/StelCore.cpp:1662
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Коррекция отключена. Используйте только если вы знаете, что вы делаете!"
 
-#: src/core/StelCore.cpp:1664
+#: src/core/StelCore.cpp:1665
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1162,7 +1162,7 @@ msgstr ""
 "Эйнштейна подтверждена древними солнечными затмениями</em> (%1). Подробности "
 "смотрите %2здесь%3."
 
-#: src/core/StelCore.cpp:1667
+#: src/core/StelCore.cpp:1668
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1171,7 +1171,7 @@ msgstr ""
 "Это эмпирическое уравнение было опубликовано Г. М. Клеменсом в статье <em>О "
 "системе астрономических констант</em> (%1)."
 
-#: src/core/StelCore.cpp:1670
+#: src/core/StelCore.cpp:1671
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1184,7 +1184,7 @@ msgstr ""
 "его книге <em>Астрономические формулы для калькуляторов</em>. Кроме того эта "
 "формула используется в компьютерной программе SunTracker Pro."
 
-#: src/core/StelCore.cpp:1674
+#: src/core/StelCore.cpp:1675
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1194,7 +1194,7 @@ msgstr ""
 "<em>Астрономических эфемеридах</em> и в <em>Каноне солнечных затмений</em> "
 "Муке и Меёса (1983)."
 
-#: src/core/StelCore.cpp:1678
+#: src/core/StelCore.cpp:1679
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1205,7 +1205,7 @@ msgstr ""
 "5 - и 10-дневных интервалах от 601 г. до н.э. по 1649 г. н.э. Это же "
 "соотношение было также неявно принято в таблице сизигий Голдштейна (1973)."
 
-#: src/core/StelCore.cpp:1682
+#: src/core/StelCore.cpp:1683
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1215,7 +1215,7 @@ msgstr ""
 "Это уравнение было опубликовано П. М. Мюллером и Ф. Р. Стивенсоном в статье "
 "<em>Ускорение Земли и Луны из ранних астрономических наблюдений</em> (%1)."
 
-#: src/core/StelCore.cpp:1685
+#: src/core/StelCore.cpp:1686
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1224,7 +1224,7 @@ msgstr ""
 "Это уравнение было опубликовано Ф. Р. Стивенсоном в статье "
 "<em>Дотелескопические астрономические наблюдения</em> (%1)."
 
-#: src/core/StelCore.cpp:1688
+#: src/core/StelCore.cpp:1689
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1237,7 +1237,7 @@ msgstr ""
 "аппроксимация для коррекции дельта T E.T.-U.T. за период 1800-1975 г.г.</em> "
 "(%1) как аппроксимация данных, опубликованным Броувером (1952)."
 
-#: src/core/StelCore.cpp:1691
+#: src/core/StelCore.cpp:1692
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1247,7 +1247,7 @@ msgstr ""
 "<em>Планетные программы и таблицы с -4000 по +2800 годы</em> (1986) и в "
 "компьютерной программе-планетарии RedShift."
 
-#: src/core/StelCore.cpp:1694
+#: src/core/StelCore.cpp:1695
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1258,12 +1258,12 @@ msgstr ""
 "<em>Долгосрочные изменения вращения Земли с 700 г. до н.э. до 1980 г. "
 "н.э.</em> (%1)."
 
-#: src/core/StelCore.cpp:1697
+#: src/core/StelCore.cpp:1698
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "Этот алгоритм используется в компьютерной программе-планетарии Guide 7."
 
-#: src/core/StelCore.cpp:1700
+#: src/core/StelCore.cpp:1701
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -1273,7 +1273,7 @@ msgstr ""
 "солнечных затмений: 1986-2035</em> (1987) и его <em>Пятидесятилетнем каноне "
 "лунных затмений: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:1703
+#: src/core/StelCore.cpp:1704
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -1283,7 +1283,7 @@ msgstr ""
 "солнечном затмении за период между 2137 годом до нашей эры и 1715 годом "
 "нашей эры."
 
-#: src/core/StelCore.cpp:1706
+#: src/core/StelCore.cpp:1707
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1296,7 +1296,7 @@ msgstr ""
 "г.г.</em> (%1) как аппроксимация данных, приведённых Стивенсоном и Моррисом "
 "(1984)."
 
-#: src/core/StelCore.cpp:1709
+#: src/core/StelCore.cpp:1710
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -1306,7 +1306,7 @@ msgstr ""
 "версии лунной теории ELP 2000-85 в их книге <em>Лунные таблицы и программы с "
 "4000 г. до н.э. до 8000 г. н.э.</em> (1991)."
 
-#: src/core/StelCore.cpp:1712
+#: src/core/StelCore.cpp:1713
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1317,7 +1317,7 @@ msgstr ""
 "статье <em>Долгосрочные флуктуации во вращении Земли: с 700 г. до н.э. до "
 "1990 г. н.э.</em> (%1)."
 
-#: src/core/StelCore.cpp:1715
+#: src/core/StelCore.cpp:1716
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1326,7 +1326,7 @@ msgstr ""
 "Ф. Р. Стивенсон опубликовал эту формулу в своей книге <em>Исторические "
 "затмения и вращение Земли</em> (%1)."
 
-#: src/core/StelCore.cpp:1718
+#: src/core/StelCore.cpp:1719
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1337,7 +1337,7 @@ msgstr ""
 "Шапрон, Шапрон-Таузи и Франко (1997) для дат за пределами диапазона "
 "1620..2000."
 
-#: src/core/StelCore.cpp:1721
+#: src/core/StelCore.cpp:1722
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1346,7 +1346,7 @@ msgstr ""
 "Группа Динамики Солнечной Системы Лаборатории Реактивного Движения (JPL) "
 "NASA использует эут формулу на их интерактивном вебсайте %1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:1724
+#: src/core/StelCore.cpp:1725
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1355,7 +1355,7 @@ msgstr ""
 "Этот полином был опубликован Ж. Меёсом и Л. Симонсом в статье "
 "<em>Полиномиальное приближение к дельта T, 1620-2000 Н.Э.</em> (%1)."
 
-#: src/core/StelCore.cpp:1727
+#: src/core/StelCore.cpp:1728
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1365,7 +1365,7 @@ msgstr ""
 "персональном компьютере</em> (2000) представлен простой полином 3-го "
 "порядка, подходящий для недавнего прошлого."
 
-#: src/core/StelCore.cpp:1730
+#: src/core/StelCore.cpp:1731
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1377,7 +1377,7 @@ msgstr ""
 "(2002). Он основан на данных из книги Жана Меёса <em>Астрономические "
 "алгоритмы </em> (1991)."
 
-#: src/core/StelCore.cpp:1733
+#: src/core/StelCore.cpp:1734
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1388,7 +1388,7 @@ msgstr ""
 "статье <em>Исторические значения ошибки земных часов %1T и расчёт "
 "затмений</em> (%2) с добавлениямм в (%3)."
 
-#: src/core/StelCore.cpp:1736
+#: src/core/StelCore.cpp:1737
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1401,7 +1401,7 @@ msgstr ""
 "косинусом и квадратным уравнением. Это уравнение основано на возможной "
 "периодичности, описанной Стивенсоном (%2). Подробнее смотрите %3здесь%4."
 
-#: src/core/StelCore.cpp:1739 src/core/StelCore.cpp:1742
+#: src/core/StelCore.cpp:1740 src/core/StelCore.cpp:1743
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1417,15 +1417,15 @@ msgstr ""
 "используется для расчёта солнечных, лунных и планетных эфемерид в программе "
 "SOLEX."
 
-#: src/core/StelCore.cpp:1739
+#: src/core/StelCore.cpp:1740
 msgid "Used by default."
 msgstr "Используется по умолчанию."
 
-#: src/core/StelCore.cpp:1742
+#: src/core/StelCore.cpp:1743
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "ИСПРАВЛЕННАЯ ВЕРСИЯ БЕЗ ДОБАВЛЕНИЯ ЛУННОГО УСКОРЕНИЯ."
 
-#: src/core/StelCore.cpp:1745
+#: src/core/StelCore.cpp:1746
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1436,7 +1436,7 @@ msgstr ""
 "(1984), было опубликовано в статье <em>Древние затмения и датировка падения "
 "Вавилона</em> (%1)."
 
-#: src/core/StelCore.cpp:1748
+#: src/core/StelCore.cpp:1749
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1448,7 +1448,7 @@ msgstr ""
 "полиноминальном приближении для дельта Т</em> (%1) и пересмотрено Саной "
 "Исламом в 2013 году."
 
-#: src/core/StelCore.cpp:1751
+#: src/core/StelCore.cpp:1752
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1459,7 +1459,7 @@ msgstr ""
 "Султане и Фахима Зайди была опубликована в <em> Дельта T: полиномиальная "
 "аппроксимация для период времени 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:1754
+#: src/core/StelCore.cpp:1755
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1468,15 +1468,15 @@ msgstr ""
 "Это квадратичная формула для вычисления %1T с коэффициентами, заданными "
 "пользователем."
 
-#: src/core/StelCore.cpp:1757 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1758 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "Ошибка"
 
-#: src/core/StelCore.cpp:1807
+#: src/core/StelCore.cpp:1808
 msgid "with meaningless values outside this range"
 msgstr "с бессмысленным значения вне этого диапазона"
 
-#: src/core/StelCore.cpp:1833
+#: src/core/StelCore.cpp:1834
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -1484,23 +1484,23 @@ msgstr ""
 "со средней ошибкой менее секунды, максимальной ошибкой в 1,9 сек и "
 "бессмысленным значения вне этого диапазона"
 
-#: src/core/StelCore.cpp:1855 src/core/StelCore.cpp:1860
-#: src/core/StelCore.cpp:1888 src/core/StelCore.cpp:1893
-#: src/core/StelCore.cpp:1898
+#: src/core/StelCore.cpp:1856 src/core/StelCore.cpp:1861
+#: src/core/StelCore.cpp:1889 src/core/StelCore.cpp:1894
+#: src/core/StelCore.cpp:1899
 msgid "with zero values outside this range"
 msgstr "с нулевым значением вне этого диапазона"
 
-#: src/core/StelCore.cpp:1865
+#: src/core/StelCore.cpp:1866
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "с типичной 1-секундной точностью и нулевым значением вне этого диапазона"
 
-#: src/core/StelCore.cpp:1908
+#: src/core/StelCore.cpp:1909
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Допустимый диапазон применения: между %1 и %2 годами, %3."
 
-#: src/core/StelCore.cpp:1910
+#: src/core/StelCore.cpp:1911
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Допустимый диапазон применения: между %1 и %2 годами."
@@ -1682,30 +1682,50 @@ msgstr "Видимое звёздное время: %1"
 msgid "Deep-sky objects background images"
 msgstr "Фоновые изображения объектов глубокого космоса"
 
-#: src/core/StelMovementMgr.cpp:146 src/gui/StelGui.cpp:191
+#: src/core/StelMovementMgr.cpp:156 src/gui/StelGui.cpp:191
 #: src/StelMainView.cpp:556
 msgid "Miscellaneous"
 msgstr "Прочее"
 
-#: src/core/StelMovementMgr.cpp:146
+#: src/core/StelMovementMgr.cpp:156
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Переключение между экваториальным и азимутальным восхождением"
 
-#: src/core/StelMovementMgr.cpp:147
+#: src/core/StelMovementMgr.cpp:157
 msgid "Center on selected object"
 msgstr "Центрировать выбранный объект"
 
-#: src/core/StelMovementMgr.cpp:148
+#: src/core/StelMovementMgr.cpp:158
 msgid "Zoom in on selected object"
 msgstr "Увеличить выбранный объект"
 
-#: src/core/StelMovementMgr.cpp:149
+#: src/core/StelMovementMgr.cpp:159
 msgid "Zoom out"
 msgstr "Отдалить"
 
-#: src/core/StelMovementMgr.cpp:150
+#: src/core/StelMovementMgr.cpp:160
 msgid "Track object"
 msgstr "Следить за объектом"
+
+#: src/core/StelMovementMgr.cpp:162
+msgid "Look towards East"
+msgstr "Посмотреть на восток"
+
+#: src/core/StelMovementMgr.cpp:163
+msgid "Look towards West"
+msgstr "Посмотреть на запад"
+
+#: src/core/StelMovementMgr.cpp:164
+msgid "Look towards North"
+msgstr "Посмотреть на север"
+
+#: src/core/StelMovementMgr.cpp:165
+msgid "Look towards South"
+msgstr "Посмотреть на юг"
+
+#: src/core/StelMovementMgr.cpp:166
+msgid "Look towards Zenith"
+msgstr "Посмотреть в зенит"
 
 #: src/core/SimbadSearcher.cpp:56
 msgid "Network error"
@@ -9804,19 +9824,23 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:190
 msgid "Chalawan is a mythological crocodile king from a Thai folktale."
-msgstr ""
+msgstr "Тчалаван - мифологический король-крокодил из тайского фольклора."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
 msgid ""
 "Taphao Thong is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr ""
+"Тапфау Тон - одна из двух сестёр, связанных с тайской народной сказкой о "
+"Тчалаване."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
 msgid ""
 "Taphao Kae is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr ""
+"Тапфау Кееу - одна из двух сестёр, связанных с тайской народной сказкой о "
+"Тчалаване."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
 msgid ""
@@ -9901,6 +9925,8 @@ msgid ""
 "Ran is the Norse goddess of the sea, who stirs up the waves and captures "
 "sailors with her net."
 msgstr ""
+"Ран - норвежская богиня моря, поднимающая волны и захватывающая моряков в "
+"сети."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid ""
@@ -10002,22 +10028,28 @@ msgid ""
 "Lich is a fictional undead creature known for controlling other undead "
 "creatures with magic."
 msgstr ""
+"Лич - вымышленная нежить, знающая как управлять другой нежитью с помощью "
+"магии."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
 msgid "Draugr refers to undead creatures in Norse mythology."
-msgstr ""
+msgstr "Драугр относится к нежити в скандинавской мифологии."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 msgid ""
 "Poltergeist is a name for supernatural beings that create physical "
 "disturbances, from German for <em>noisy ghost</em>."
 msgstr ""
+"Полтергейст - название сверхъестественных существ, умеющих физически "
+"перемещать предметы, от немецкого <em> шумный призрак</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
 msgid ""
 "Phobetor is a Greek mythological deity of nightmares, the son of Nyx, the "
 "primordial deity of night."
 msgstr ""
+"Фобетор - греческое мифологическое божество кошмаров, сын Никса, "
+"изначального божества ночи."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
 msgid ""
