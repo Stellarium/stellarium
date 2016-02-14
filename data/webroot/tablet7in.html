@@ -84,15 +84,34 @@
             </div>
           </section>
           
-          <!-- part of ui/viecontrol.js -->
+          <!-- part of ui/viewcontrol.js -->
           <section id="view" class="block textcenter">
             <header><h2><?= tr("View")?></h2></header>
             <div id="view_controls" class="ui-corner-all ui-widget-content">
               <div id="view_upleft" class="joybutton"><?= tr("Up/Left")?></div><div id="view_up" class="joybutton"><?= tr("Up")?></div><div id="view_upright" class="joybutton"><?= tr("Up/Right")?></div><div id="view_left" class="joybutton"><?= tr("Left")?></div><div id="view_center" class="joybutton" title='<?= tr("Focus on selected object")?>'><?= tr("Focus on selection")?></div><div id="view_right" class="joybutton"><?= tr("Right")?></div><div id="view_downleft" class="joybutton"><?= tr("Down/Left")?></div><div id="view_down" class="joybutton"><?= tr("Down")?></div><div id="view_downright" class="joybutton"><?= tr("Down/Right")?></div>
             </div>
+
+            <!-- GZ TODO We have now StelMovementMgr::lookNorth(), lookEast(),  lookSouth(), lookWest(), lookZenith(). How would 5 buttons be configured here?  -->
+
             <div id="view_wrapper">
               <div id="view_fov"></div>
               <p title='<?= tr("Field of view")?>'>FOV: <span id="view_fov_text"></span></p>
+              <!-- GZ TODO I would like to have a row of buttons with fixed FoV values here The buttons in the ul below don't work yet.-->
+              <div id="view_fovbuttons" class="ui-corner-all ui-widget-content">
+              <ul>
+                <li><button id="fov_1" >1</button></li>
+                <li><button id="fov_10" >10</button></li>
+                <li><button id="fov_20" >20</button></li>
+                <li><button id="fov_30" >30</button></li>
+                <li><button id="fov_40" >40</button></li>
+                <li><button id="fov_60" >60</button></li>
+                <li><button id="fov_90" >90</button></li>
+                <li><button id="fov_120" >120</button></li>
+                <li><button id="fov_150" >150</button></li>
+                <li><button id="fov_180" >180</button></li>
+                <li><button id="fov_230" >230</button></li>
+              </ul>
+              </div> 
               <p><?= tr("Projection")?>: <span id="view_projection"></span></p>
             </div>
           </section>
@@ -182,8 +201,27 @@
               <h2><?= tr("Quick select")?></h2>
               <ul id="quickselect" class="ui-corner-all ui-widget-content button32list">
                 <!-- to add a new quick select button, simply add a new button with the english name of the object as value -->
-                <!-- try not to add whitespace between li items (inline-block layout uglyness) -->
-                <li><button title='<?= tr("Sun")?>' value="Sun">&#x2609;</button></li><li><button title='<?= tr("Mercury")?>' value="Mercury">&#x263F;</button></li><li><button title='<?= tr("Venus")?>' value="Venus">&#x2640;</button></li><li><button title='<?= tr("Earth")?>' value="Earth">&#x2641;</button></li><li><button title='<?= tr("Moon")?>' value="Moon">&#x263D;</button></li><li><button title='<?= tr("Mars")?>' value="Mars">&#x2642;</button></li><li><button title='<?= tr("Jupiter")?>' value="Jupiter">&#x2643;</button></li><li><button title='<?= tr("Saturn")?>' value="Saturn">&#x2644;</button></li><li><button title='<?= tr("Uranus")?>' value="Uranus">&#x2645;</button></li><li><button title='<?= tr("Neptune")?>' value="Neptune">&#x2646;</button></li><li><button title='<?= tr("Pluto")?>' value="Pluto">&#x2647;</button></li>
+                <!-- try not to add whitespace between li items (inline-block layout uglyness)  -GZ: I don't see where?  But I had to change to 2-letter names: No Unicode Planet chars on Android :-( -->
+                <li><button title='<?= tr("Sun")?>' value="Sun">Su</button></li><li><button title='<?= tr("Moon")?>' value="Moon">Mo</button></li><li><button title='<?= tr("Mercury")?>' value="Mercury">Me</button></li><li><button title='<?= tr("Venus")?>' value="Venus">Ve</button></li><!--li><button title='<?= tr("Earth")?>' value="Earth">&#x2641;</button></li--><li><button title='<?= tr("Mars")?>' value="Mars">Ma</button></li><li><button title='<?= tr("Jupiter")?>' value="Jupiter">Ju</button></li><li><button title='<?= tr("Saturn")?>' value="Saturn">Sa</button></li><li><button title='<?= tr("Uranus")?>' value="Uranus">Ur</button></li><li><button title='<?= tr("Neptune")?>' value="Neptune">Ne</button></li><li><button title='<?= tr("Pluto")?>' value="Pluto">Pl</button></li><br/> 
+                <li><button title='<?= tr("Pleiades")?>' value="M45">M45</button></li>
+                <li><button title='<?= tr("Andromeda Galaxy")?>' value="M31">M31</button></li>
+                <li><button title='<?= tr("Hercules Cluster")?>' value="M13">M13</button></li>
+                <li><button title='<?= tr("Orion Nebula")?>' value="M42">M42</button></li>
+                <li><button title='<?= tr("Eta Carinae Nebula")?>' value="C92">&eta;Car</button></li>
+                <li><button title='<?= tr("47 Tucanae Cluster")?>' value="47 Tuc">47 Tuc</button></li>
+                <!-- li><button title='<?= tr("Clear Selection")?>' value="">Clr</button></li GZ TODO: MAKE THIS WORK SOMEWHERE! May also be on other place in this panel. --><br/>
+                <li><button title='<?= tr("Aries")?>' value="Aries">Ari</button></li>
+                <li><button title='<?= tr("Taurus")?>' value="Taurus">Tau</button></li>
+                <li><button title='<?= tr("Gemini")?>' value="Gemini">Gem</button></li>
+                <li><button title='<?= tr("Cancer")?>' value="Cancer">Cnc</button></li>
+                <li><button title='<?= tr("Leo")?>' value="Leo">Leo</button></li>
+                <li><button title='<?= tr("Virgo")?>' value="Virgo">Vir</button></li>
+                <li><button title='<?= tr("Libra")?>' value="Libra">Lib</button></li>
+                <li><button title='<?= tr("Scorpius")?>' value="Scorpius">Sco</button></li>
+                <li><button title='<?= tr("Sagittarius")?>' value="Sagittarius">Sgr</button></li>
+                <li><button title='<?= tr("Capricornus")?>' value="Capricornus">Cap</button></li>
+                <li><button title='<?= tr("Aquarius")?>' value="Aquarius">Aqr</button></li>
+                <li><button title='<?= tr("Pisces")?>' value="Pisces">Psc</button></li>
               </ul>
             </div>
           </section>
@@ -275,8 +313,8 @@
                 <label><input type="checkbox" class="stelaction" value="actionShow_Azimuthal_Grid" /><?= tr("Azimuthal grid")?></label>
                 <label><input type="checkbox" class="stelaction" value="actionShow_Galactic_Grid" /><?= tr("Galactic grid")?></label>
                 <label><input type="checkbox" class="stelaction" value="actionShow_Cardinal_Points" /><?= tr("Cardinal points")?></label>
-                <label><input type="checkbox" class="stelaction" value="actionShow_Prime_Vertical_Line" /><?= tr("Prime Vertical")?></label>
-                <label><input type="checkbox" class="stelaction" value="actionShow_Precession_Circles" /><?= tr("Precession circles")?></label>
+                <label title='<?= tr("Show Prime (East-West) Vertical.")>'><input type="checkbox" class="stelaction" value="actionShow_Prime_Vertical_Line" /><?= tr("Prime Vertical")?></label>
+                <label title='<?= tr("Instantaneous circles of earth´s axis on its motion around ecliptical poles. Displayed on Earth only.")>'><input type="checkbox" class="stelaction" value="actionShow_Precession_Circles" /><?= tr("Precession circles")?></label>
               </div>
               <div class="inline-block blocklabel">
                 <label><input type="checkbox" class="stelaction" value="actionShow_Equator_J2000_Line" /><?= tr("Equator (J2000)")?></label>
@@ -286,11 +324,35 @@
                 <label><input type="checkbox" class="stelaction" value="actionShow_Horizon_Line" /><?= tr("Horizon")?></label>
                 <label><input type="checkbox" class="stelaction" value="actionShow_Galactic_Equator_Line" /><?= tr("Galactic equator")?></label>
                 <label><input type="checkbox" class="stelaction" value="actionShow_Meridian_Line" /><?= tr("Meridian")?></label>
-                <label><input type="checkbox" class="stelaction" value="actionShow_Colure_Lines" /><?= tr("Colures")?></label>
-                <label><input type="checkbox" class="stelaction" value="actionShow_Longitude_Line" /><?= tr("O./C. longitude")?></label>
+                <label title='<?= tr("Show colures (great circles through poles and solstices/equinoxes).")?>'><input type="checkbox" class="stelaction" value="actionShow_Colure_Lines" /><?= tr("Colures")?></label>
+                <label title='<?= tr("Opposition/conjunction longitude line - the line of ecliptic longitude which passes through both ecliptic poles, the Sun and opposition point.")?>'>
+                       <input type="checkbox" class="stelaction" value="actionShow_Longitude_Line" /><?= tr("O./C. longitude")?></label>
               </div>
             </div>
           </div>
+
+           <!-- GZ TODO: The tab works perfectly when the plugin is loaded. Else there is an error box if user clicks on an option. I have declared a class stelplugin here which may help to develop 
+                         some mechanism where a class that belongs to an unloaded plugin is visibility:collapsed. Some element attribute (to be invented) like plugin_active can be used for this?   -->
+           <div id="vo_archaeolines" class="smallblock stelplugin">
+            <h3><label><input type="checkbox" class="stelaction valign-middle" value="actionShow_Archaeo_Lines"/><?= tr("ArchaeoLines")?></label></h3>
+            <div class="inline-block blocklabel">
+              <label><input type="checkbox" class="stelaction" value="actionAL_showEquinoxLine"/><?= tr("Equinox")?></label>
+              <label><input type="checkbox" class="stelaction" value="actionAL_showSolsticeLines"/><?= tr("Solstices")?></label>
+              <label><input type="checkbox" class="stelaction" value="actionAL_showCrossquarterLines"/><?= tr("Crossquarters")?></label>
+              <label><input type="checkbox" class="stelaction" value="actionAL_showMajorStandstillLines"/><?= tr("Major Standstill")?></label>
+              <label><input type="checkbox" class="stelaction" value="actionAL_showMinorStandstillLines"/><?= tr("Minor Standstill")?></label>
+            </div>
+            <div class="inline-block blocklabel">
+              <label><input type="checkbox" class="stelaction" value="actionAL_showZenithPassageLine"/><?= tr("Zenith Passage")?></label>
+              <label><input type="checkbox" class="stelaction" value="actionAL_showNadirPassageLine"/><?= tr("Nadir Passage")?></label>
+              <label><input type="checkbox" class="stelaction" value="actionAL_showSelectedObjectLine"/><?= tr("Selected Object")?></label>
+              <label><input type="checkbox" class="stelaction" value="actionAL_showCurrentSunLine"/><?= tr("Current Sun")?></label>
+              <label><input type="checkbox" class="stelaction" value="actionAL_showCurrentMoonLine"/><?= tr("Current Moon")?></label>
+              <!-- GZ TODO: How would selecting a planet line work here? Best thing a row of radiobuttons, or Combobox. Likely ArchaeoLines needs a registerProperty? -->
+            </div>
+          </div>
+
+
         </div>
       </div>
       <div id="tab_dso">
@@ -418,14 +480,15 @@
               <label><input type="checkbox" class="stelaction" value="actionShow_Constellation_Lines" /><?= tr("Show lines with thickness")?></label>
               <input class="flex-expand spinner stelproperty" name="prop_ConstellationMgr_constellationLineThickness" data-min="1" data-max="5" data-step="1" data-numberformat="n0"/>
             </div>
-          </div>
-          <div class="inline-block blocklabel">
-            <label><input type="checkbox" class="stelaction" value="actionShow_Constellation_Boundaries" /><?= tr("Show boundaries")?></label>
-            <label><input type="checkbox" class="stelaction" value="actionShow_Skyculture_Nativenames" /><?= tr("Use native names for planets")?></label>
             <div class="flex flex-baseline">
               <label><input type="checkbox" class="stelaction" value="actionShow_Constellation_Art" /><?= tr("Show art in brightness")?></label>
               <input class="flex-expand spinner stelproperty" name="prop_ConstellationMgr_artIntensity" data-min="0" data-max="1" data-step="0.05" data-numberformat="n2"/>
             </div>
+          </div>
+          <div class="inline-block blocklabel">
+            <label><input type="checkbox" class="stelaction" value="actionShow_Constellation_Boundaries" /><?= tr("Show boundaries")?></label>
+            <label><input type="checkbox" class="stelaction" value="actionShow_Skyculture_Nativenames" /><?= tr("Use native names for planets")?></label>
+            <label><input type="checkbox" class="stelaction" value="actionShow_Constellation_Isolated" /><?= tr("Constellation selection isolated")?></label>
           </div>
         </div>
         <div class="smallblock flex landscapeblock">
