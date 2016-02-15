@@ -50,7 +50,7 @@ StelAddOnMgr::StelAddOnMgr()
 	m_sAddonJsonPath = m_sAddOnDir % m_sAddonJsonFilename;
 	m_sUserAddonJsonPath = m_sAddOnDir % "user_" % m_sAddonJsonFilename;
 
-	m_sUrlUpdate = "http://cardinot.sourceforge.net/" % m_sAddonJsonFilename;
+	m_sUrl = "http://cardinot.sourceforge.net/" % m_sAddonJsonFilename;
 
 	// Set user agent as "Stellarium/$version$ ($platform$)"
 	m_userAgent = QString("Stellarium/%1 (%2)")
@@ -62,26 +62,8 @@ StelAddOnMgr::StelAddOnMgr()
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sAddOnDir);
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sThumbnailDir);
 
-	// Initialize settings in the main config file
-	if (m_pConfig->childGroups().contains("AddOn"))
-	{
-		m_pConfig->beginGroup("AddOn");
-		m_lastUpdate = m_pConfig->value("last_update", m_lastUpdate).toDateTime();
-		m_eUpdateFrequency = (UpdateFrequency) m_pConfig->value("update_frequency", m_eUpdateFrequency).toInt();
-		m_sUrlUpdate = m_pConfig->value("url", m_sUrlUpdate).toString();
-		m_pConfig->endGroup();
-	}
-	else // If no settings were found, create it with default values
-	{
-		qDebug() << "[Add-on] The main config file does not have an AddOn section - creating with defaults";
-		m_pConfig->beginGroup("AddOn");
-		// delete all existing settings...
-		m_pConfig->remove("");
-		m_pConfig->setValue("last_update", m_lastUpdate);
-		m_pConfig->setValue("update_frequency", m_eUpdateFrequency);
-		m_pConfig->setValue("url", m_sUrlUpdate);
-		m_pConfig->endGroup();
-	}
+	// load settings from config file
+	loadConfig();
 
 	connect(this, SIGNAL(dataUpdated(AddOn*)), this, SLOT(slotDataUpdated(AddOn*)));
 
@@ -202,22 +184,29 @@ void StelAddOnMgr::restoreDefaultAddonJsonFile()
 	}
 }
 
-void StelAddOnMgr::setLastUpdate(QDateTime lastUpdate)
+void StelAddOnMgr::setLastUpdate(const QDateTime& lastUpdate)
 {
 	m_lastUpdate = lastUpdate;
-	// update config file
-	m_pConfig->beginGroup("AddOn");
-	m_pConfig->setValue("last_update", m_lastUpdate);
-	m_pConfig->endGroup();
+	m_pConfig->setValue(ADDON_CONFIG_PREFIX + "/last_update", m_lastUpdate.toString(Qt::ISODate));
 }
 
-void StelAddOnMgr::setUpdateFrequency(UpdateFrequency freq)
+void StelAddOnMgr::setUpdateFrequency(const UpdateFrequency& freq)
 {
 	m_eUpdateFrequency = freq;
-	// update config file
-	m_pConfig->beginGroup("AddOn");
-	m_pConfig->setValue("update_frequency", m_eUpdateFrequency);
-	m_pConfig->endGroup();
+	m_pConfig->setValue(ADDON_CONFIG_PREFIX + "/update_frequency", m_eUpdateFrequency);
+}
+
+void StelAddOnMgr::setUrl(const QString& url)
+{
+	m_sUrl = url;
+	m_pConfig->setValue(ADDON_CONFIG_PREFIX + "/url", m_sUrl);
+}
+
+void StelAddOnMgr::loadConfig()
+{
+	setLastUpdate(m_pConfig->value(ADDON_CONFIG_PREFIX + "last_update", m_lastUpdate).toDateTime());
+	setUpdateFrequency((UpdateFrequency) m_pConfig->value(ADDON_CONFIG_PREFIX + "update_frequency", m_eUpdateFrequency).toInt());
+	setUrl(m_pConfig->value(ADDON_CONFIG_PREFIX + "/url", m_sUrl).toString());
 }
 
 void StelAddOnMgr::refreshThumbnailQueue()

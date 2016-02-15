@@ -276,7 +276,7 @@ void AddOnDialog::updateCatalog()
 	ui->txtLastUpdate->setText(q_("Updating catalog..."));
 
 	QNetworkRequest req;
-	req.setUrl(QUrl(StelApp::getInstance().getStelAddOnMgr().getUrlForUpdates()));
+	req.setUrl(QUrl(StelApp::getInstance().getStelAddOnMgr().getUrl()));
 	req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, false);
 	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
 	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);

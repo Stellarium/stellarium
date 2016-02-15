@@ -28,6 +28,7 @@
 
 #include "AddOn.hpp"
 
+#define ADDON_CONFIG_PREFIX QString("AddOn")
 #define ADDON_MANAGER_CATALOG_VERSION 1
 
 class StelAddOnMgr : public QObject
@@ -54,6 +55,17 @@ public:
 	StelAddOnMgr();
 	virtual ~StelAddOnMgr();
 
+	//! Set the date and time of last update.
+	void setLastUpdate(const QDateTime& lastUpdate);
+	QDateTime getLastUpdate() { return m_lastUpdate; }
+
+	//! Set the update frequency.
+	void setUpdateFrequency(const UpdateFrequency& freq);
+
+	//! Set the URL for downloading the catalog of add-ons.
+	void setUrl(const QString& url);
+	QString getUrl() { return m_sUrl; }
+
 	QHash<QString, AddOn*> getAddonsAvailable() { return m_addonsAvailable; }
 	QHash<QString, AddOn*> getAddonsInstalled() { return m_addonsInstalled; }
 	QHash<QString, AddOn*> getAddonsToUpdate() { return m_addonsToUpdate; }
@@ -66,12 +78,9 @@ public:
 	void removeAddOn(AddOn *addon);
 	void installAddons(QSet<AddOn*> addons);
 	void removeAddons(QSet<AddOn*> addons);
-	void setUpdateFrequency(UpdateFrequency freq);
-	void setLastUpdate(QDateTime lastUpdate);
 	QString getLastUpdateString() { return m_lastUpdate.toString("dd MMM yyyy - hh:mm:ss"); }
-	QDateTime getLastUpdate() { return m_lastUpdate; }
+
 	UpdateFrequency getUpdateFrequency() { return m_eUpdateFrequency; }
-	QString getUrlForUpdates() { return m_sUrlUpdate; }
 	QString getAddonJsonPath() { return m_sAddonJsonPath; }
 
 	QByteArray getUserAgent() { return m_userAgent; }
@@ -120,10 +129,11 @@ private:
 	class StelProgressController* m_progressBar;
 	QDateTime m_lastUpdate;
 	UpdateFrequency m_eUpdateFrequency;
-	QString m_sUrlUpdate;
+	QString m_sUrl;
 
 	void refreshThumbnailQueue();
 
+	void loadConfig();
 	QHash<QString, AddOn*> loadAddonCatalog(QString jsonPath) const;
 	void restoreDefaultAddonJsonFile();
 	void insertAddonInJson(AddOn* addon, QString jsonPath);
