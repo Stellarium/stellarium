@@ -22,6 +22,11 @@ IF(USE_PLUGIN_REMOTECONTROL)
 		PATTERN "*.html"
 		PATTERN "*.js"
 		PATTERN "*.css"
+		PATTERN "*.eot"
+		PATTERN "*.svg"
+		PATTERN "*.ttf"
+		PATTERN "*.woff"
+		PATTERN "*.woff2"
 		PATTERN "translate_files"
 		PATTERN "*.ico")
 	INSTALL(FILES DejaVuSans.ttf DejaVuSansMono.ttf DESTINATION share/${PACKAGE}/data/webroot)

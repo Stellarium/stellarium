@@ -44,18 +44,10 @@ define(["jquery", "api/viewcontrol", "api/viewoptions", "api/actions", "jquery-u
 		$("#view_down").mousedown(viewControlApi.moveDown);
 		$("#view_downright").mousedown(viewControlApi.moveDownRight);
 
-        // GZ TODO: How would I initialize those buttons? 
-		$("#fov_1").mouseup(viewControlApi.setFOV(1));
-		$("#fov_10").mouseup(viewControlApi.setFOV(10));
-		$("#fov_20").mouseup(viewControlApi.setFOV(20));
-		$("#fov_30").mouseup(viewControlApi.setFOV(30));
-		$("#fov_40").mouseup(viewControlApi.setFOV(40));
-		$("#fov_60").mouseup(viewControlApi.setFOV(60));
-		$("#fov_90").mouseup(viewControlApi.setFOV(90));
-		$("#fov_120").mouseup(viewControlApi.setFOV(120));
-		$("#fov_150").mouseup(viewControlApi.setFOV(150));
-		$("#fov_180").mouseup(viewControlApi.setFOV(180));
-		$("#fov_230").mouseup(viewControlApi.setFOV(230));
+		//initialize FOV buttons
+		$("button.fovbutton").click(function(event){
+			viewControlApi.setFOV(this.value);
+		});
 
 		$("#view_controls div").on("mouseup mouseleave", viewControlApi.stopMovement);
 
