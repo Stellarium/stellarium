@@ -11,6 +11,8 @@ define(["jquery", "settings", "api/remotecontrol", "api/actions", "api/propertie
 	var sel_infostring;
 
 	var activeTab = 0;
+	//keep preloaded images to prevent browser from releasing them
+	var preloadedImgs=[];
 
 
 	if (!animationSupported) {
@@ -18,21 +20,6 @@ define(["jquery", "settings", "api/remotecontrol", "api/actions", "api/propertie
 	} else {
 		console.log("animation frame supported");
 	}
-
-
-	$(window).load(function() {
-		//preload the error images, otherwise they may be loaded when the connection is lost, which of course wont work
-
-		var preLoadImages = [
-			"/external/images/ui-icons_fbc856_256x240.png",
-			"/external/images/ui-bg_flat_0_eeeeee_40x100.png",
-			"/external/images/ui-bg_glass_35_dddddd_1x400.png"
-		];
-
-		preLoadImages.forEach(function(val) {
-			(new Image()).src = val;
-		});
-	});
 
 	function animate() {
 
@@ -54,6 +41,19 @@ define(["jquery", "settings", "api/remotecontrol", "api/actions", "api/propertie
 
 	//DOM-ready
 	$(function() {
+		//preload the error images, otherwise they may be loaded when the connection is lost, which of course wont work
+
+		var preLoadImages = [
+			"/external/images/ui-icons_fbc856_256x240.png",
+			"/external/images/ui-bg_glass_35_dddddd_1x400.png"
+		];
+
+		preLoadImages.forEach(function(val) {
+			var img = new Image();
+			img.src = val;
+			preloadedImgs.push(img);
+		});
+
 		//find and setup some controls
 		$noresponse = $("#noresponse");
 		$noresponsetime = $("#noresponsetime");
@@ -184,6 +184,9 @@ define(["jquery", "settings", "api/remotecontrol", "api/actions", "api/propertie
 			});
 			self.text(propApi.getStelProp(prop));
 		});
+
+		//create jquery ui buttons
+		$("button.jquerybutton").button();
 
 		//main tabs
 		//remember which tab was active after refresh by storing id in sessionstore

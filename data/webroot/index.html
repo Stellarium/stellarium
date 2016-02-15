@@ -128,7 +128,7 @@
       <div id="tab_selection">
         <div class="flex flex-wrap">
           <!-- part of ui/search.js -->
-          <section id="search" class="block flex-noshrink">
+          <section id="search" class="block">
             <header><h2><?= tr("Search")?></h2></header>
             <div id="srch_tabs">
               <ul>
@@ -164,13 +164,15 @@
                 </div>
               </div>
             </div>
-            <div>
+            <div id="quickselect">
               <h2><?= tr("Quick select")?></h2>
-              <ul id="quickselect" class="ui-corner-all ui-widget-content button32list">
+              <ul class="ui-corner-all ui-widget-content button32list">
                 <!-- to add a new quick select button, simply add a new button with the english name of the object as value -->
                 <!-- try not to add whitespace between li items (inline-block layout uglyness) -->
                 <li><button title='<?= tr("Sun")?>' value="Sun">&#x2609;</button></li><li><button title='<?= tr("Mercury")?>' value="Mercury">&#x263F;</button></li><li><button title='<?= tr("Venus")?>' value="Venus">&#x2640;</button></li><li><button title='<?= tr("Earth")?>' value="Earth">&#x2641;</button></li><li><button title='<?= tr("Moon")?>' value="Moon">&#x263D;</button></li><li><button title='<?= tr("Mars")?>' value="Mars">&#x2642;</button></li><li><button title='<?= tr("Jupiter")?>' value="Jupiter">&#x2643;</button></li><li><button title='<?= tr("Saturn")?>' value="Saturn">&#x2644;</button></li><li><button title='<?= tr("Uranus")?>' value="Uranus">&#x2645;</button></li><li><button title='<?= tr("Neptune")?>' value="Neptune">&#x2646;</button></li><li><button title='<?= tr("Pluto")?>' value="Pluto">&#x2647;</button></li>
               </ul>
+              <!-- an empty value will deselect -->
+              <button class="jquerybutton" value=""><?= tr("Clear selection")?></button>
             </div>
           </section>
           <!-- part of ui/mainui.js -->

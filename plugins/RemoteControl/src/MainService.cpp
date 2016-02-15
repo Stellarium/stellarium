@@ -299,8 +299,8 @@ void MainService::postImpl(const QByteArray& operation, const APIParameters &par
 		{
 			if(parameters.value("position").isEmpty())
 			{
-				response.writeRequestError("requires 'target' or 'position' parameter");
-				return;
+				//no parameters = clear focus
+				target = "";
 			}
 			else
 			{
@@ -398,6 +398,13 @@ QString MainService::getInfoString()
 bool MainService::focusObject(const QString &name)
 {
 	//StelDialog::gotoObject
+
+	//if name is empty, unselect
+	if(name.isEmpty())
+	{
+		objMgr->unSelect();
+		return true;
+	}
 
 	bool result = false;
 	if (objMgr->findAndSelectI18n(name) || objMgr->findAndSelect(name))
