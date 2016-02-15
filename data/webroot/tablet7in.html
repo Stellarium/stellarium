@@ -92,22 +92,22 @@
             </div>
 
             <!-- GZ TODO We have now StelMovementMgr actions::lookNorth(), lookEast(),  lookSouth(), lookWest(), lookZenith(). 
-                 How would 5 buttons be configured here? These buttons here are type checkbox which is of course 
-                 I'd need a button that just triggers an action without argument. What is the input type for this? It should look like a labeled button.
-                 We may add turnEast() etc which triggers a smooth move, so these buttons would be changed to trigger those. Still, the actions will not have arguments. 
-                 In case these will not be actions but simple slots like turnSouth(float duration_seconds=3.0f), those could also be used as arg-less actions.
-                 Or maybe this would be a case for a to-be-developed "1-line script" button which could look like <button class="ssc" code="StelMovementMgr.turnWest(4);"><?= tr("W")?></button> 
-                 I could think of button class="ssc" with either code or script arguments. The script arg would be the name of the script (ssc file) which would be triggered.
+                 
+                 An action or call-script button is simple to develop now, thanks a lot! Each script is already available as action! A script button can be configured like e.g.
+                 <button type="button" class="stelaction" value="actionScript/MAMUZ/GZ_screen_image3.ssc"/><?= tr("MAMUZ mammoth test3")?></button>
+
+                 We may add  StelMovementMgr::turnEast() etc which would trigger a smooth move, so these buttons would be changed to trigger those. 
+                 In case these will be slots with default argument like turnSouth(float duration_seconds=3.0f), those could also be used as arg-less actions.
+                 Or maybe this would be a case for a to-be-developed "inline script" button which could look like <button class="stelssc" value="StelMovementMgr.turnWest(4);"><?= tr("W")?></button> 
                  -->
 
             <div class="smallblock blocklabel">
-              <label  title='<?= tr("Look towards East")>'><input type="checkbox" class="stelaction" value="actionLook_Towards_East" /><?= tr("E")?></label>
-              <label  title='<?= tr("Look towards South")>'><input type="checkbox" class="stelaction" value="actionLook_Towards_South" /><?= tr("S")?></label>
-              <label  title='<?= tr("Look towards West")>'><input type="checkbox" class="stelaction" value="actionLook_Towards_West" /><?= tr("W")?></label>
-              <label  title='<?= tr("Look towards North")>'><input type="checkbox" class="stelaction" value="actionLook_Towards_North" /><?= tr("N")?></label>
-              <label  title='<?= tr("Look towards Zenith")>'><input type="checkbox" class="stelaction" value="actionLook_Towards_Zenith" /><?= tr("Z")?></label>
+              <button type="button" class="stelaction" title='<?= tr("Look towards East")?>'   value="actionLook_Towards_East"><?= tr("E")?></button>
+              <button type="button" class="stelaction" title='<?= tr("Look towards South")?>'  value="actionLook_Towards_South"><?= tr("S")?></button> 
+              <button type="button" class="stelaction" title='<?= tr("Look towards West")?>'   value="actionLook_Towards_West"><?= tr("W")?></button>
+              <button type="button" class="stelaction" title='<?= tr("Look towards North")?>'  value="actionLook_Towards_North"><?= tr("N")?></button>
+              <button type="button" class="stelaction" title='<?= tr("Look towards Zenith")?>' value="actionLook_Towards_Zenith"><?= tr("Z")?></button>
             </div>
-
 
 
             <!--  GZ TODO: I see this thing is handled specially in the JS code. There are now sliders with some generic syntax. Is this fov slider still special?  -->
@@ -118,13 +118,13 @@
               <p title='<?= tr("Field of view")?>'>FOV: <span id="view_fov_text"></span></p>
 
 
-              <!-- GZ TODO I would like to have a row of buttons (or 3x4 or 2x6?) with fixed FoV values here. The buttons in the ul below don't work yet. ul may rather be a div? 
-                   I guess the 
+              <!-- GZ TODO I would like to have a row of buttons (or 3x4 or 2x6?) with fixed FoV values here. The buttons in the ul below don't work yet. ul may rather be just a div? 
+                   I don't find the prop_ name for fov. (The name="prop_fov" is of course wrong.) Is this handled differently?
 
               -->
               <div id="view_fovbuttons" class="ui-corner-all ui-widget-content">
               <ul>
-                <li><button id="fov_01" >0.1</button></li>
+                <li><button type="button" class="stelproperty" name="prop_fov" value="0.1">0.1</button></li><!-- GZ This may be approximate guesswork on syntax -->
                 <li><button id="fov_1" >1</button></li>
                 <li><button id="fov_10" >10</button></li>
                 <li><button id="fov_20" >20</button></li>
@@ -231,7 +231,7 @@
                 <li><button title='<?= tr("Sun")?>' value="Sun">Su</button></li><li><button title='<?= tr("Moon")?>' value="Moon">Mo</button></li><li><button title='<?= tr("Mercury")?>' value="Mercury">Me</button></li><li><button title='<?= tr("Venus")?>' value="Venus">Ve</button></li><!--li><button title='<?= tr("Earth")?>' value="Earth">&#x2641;</button></li--><li><button title='<?= tr("Mars")?>' value="Mars">Ma</button></li><li><button title='<?= tr("Jupiter")?>' value="Jupiter">Ju</button></li><li><button title='<?= tr("Saturn")?>' value="Saturn">Sa</button></li><li><button title='<?= tr("Uranus")?>' value="Uranus">Ur</button></li><li><button title='<?= tr("Neptune")?>' value="Neptune">Ne</button></li><li><button title='<?= tr("Pluto")?>' value="Pluto">Pl</button></li><br/> 
 
 
-                <!-- GZ TODO: Is it possible to override button size to adapt to the longer strings of star names?  -->
+                <!-- GZ TODO: Is it possible to override button size to adapt to the longer strings of star names? the style trial here does not work. -->
                 <li><button title='<?= tr("Sirius")?>' value="Sirius" style="width: 100px">Sirius</button></li>
                 <li><button title='<?= tr("Arcturus")?>' value="Arcturus">Arctur</button></li>
                 <li><button title='<?= tr("Capella")?>' value="Capella">Capella</button></li>
@@ -555,6 +555,12 @@
             </select>
             <div class="textcenter"><?= tr("Active script:")?> <span id="activescript"><?= tr("-none-")?></span></div>
             <div><button id="bt_runscript" disabled="disabled"><?= tr("Run selected script")?></button><button id="bt_stopscript" disabled="disabled"><?= tr("Stop current script")?></button></div>
+
+            <div>
+                 <!-- label><input type="button" class="stelaction" value="actionScript/MAMUZ/GZ_screen_image3.ssc" alt="MAMUZ mammoth"/><?= tr("MAMUZ mammoth test3")?></label -->
+                 <!-- GZ HEHE MUCH SIMPLER! :-) -->
+                 <button type="button" class="stelaction" title='<?= tr("MAMUZ Mammoth")?>'  value="actionScript/MAMUZ/GZ_screen_image3.ssc"><?= tr("MAMUZ mammoth test3")?></button> 
+            </div>
           </section>
         </div>
       </div>
