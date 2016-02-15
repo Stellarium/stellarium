@@ -29,7 +29,6 @@ IF(USE_PLUGIN_REMOTECONTROL)
 		PATTERN "*.woff2"
 		PATTERN "translate_files"
 		PATTERN "*.ico")
-	INSTALL(FILES DejaVuSans.ttf DejaVuSansMono.ttf DESTINATION share/${PACKAGE}/data/webroot)
 ENDIF()
 
 IF (BUILD_FOR_MAEMO)
