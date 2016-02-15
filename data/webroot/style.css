@@ -1,20 +1,31 @@
 @font-face {
-	font-family: DejaVuSans;
-	src: url("DejaVuSans.ttf");
+    font-family: 'DejaVuSans';
+    src: url('dejavusans-webfont.eot');
+    src: url('dejavusans-webfont.eot?#iefix') format('embedded-opentype'),
+         url('dejavusans-webfont.woff2') format('woff2'),
+         url('dejavusans-webfont.woff') format('woff'),
+         url('dejavusans-webfont.ttf') format('truetype'),
+         url('dejavusans-webfont.svg#dejavu_sansbook') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
 }
 
 @font-face {
-	font-family: DejaVuSansMono;
-	src: url("DejaVuSansMono.ttf");
+    font-family: 'DejaVuSansMono';
+    src: url('dejavusansmono-webfont.eot');
+    src: url('dejavusansmono-webfont.eot?#iefix') format('embedded-opentype'),
+         url('dejavusansmono-webfont.woff2') format('woff2'),
+         url('dejavusansmono-webfont.woff') format('woff'),
+         url('dejavusansmono-webfont.ttf') format('truetype'),
+         url('dejavusansmono-webfont.svg#dejavu_sans_monobook') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 
 /* --- Stellarium-style jQuery UI Theme for some objects ---*/
 
 /* Base stuff */
-.ui-widget {
-	font-size: 1em;
-	font-family: DejaVuSans,Verdana,Helvetica,Arial,sans-serif;
-}
 
 .ui-widget-content {
 	border: none;
@@ -153,8 +164,8 @@ div#srch_tab_object {
 
 /* fix for a 1px discrepancy when using a different background */
 .ui-tabs .ui-tabs-nav li.ui-tabs-active {
-    margin-bottom: 0px;
-    padding-bottom: 0px;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 /* End jQuery UI override */
@@ -175,8 +186,12 @@ html {
 
 
 select {
-	padding: 1px 0px;
+	padding: 1px 0;
 	font-size: small;
+}
+
+button {
+	color: rgb(0, 0, 0);
 }
 
 h1 {
@@ -190,7 +205,6 @@ h2 {
 #wrapper {
 	border: 1px;
 	background: rgb(86, 87, 90);
-	solid #595959;
 	margin: 1em;
 	padding: 1em;
 }
@@ -448,10 +462,21 @@ header img {
 	padding: 6px;
 }
 
+ul.buttonlist,
 ul.button32list {
 	padding: 0px;
 	list-style: none;
-	/* text-align: center; */
+}
+
+ul.buttonlist > li,
+ul.button32list > li,
+li.button32wrapper {	
+	overflow: hidden;
+	vertical-align: middle;
+}
+
+ul.buttonlist > li {
+	display: inline-block;
 }
 
 ul.button32list > li,
@@ -459,8 +484,6 @@ li.button32wrapper {
 	display: inline-block;
 	width: 32px;
 	height: 32px;
-	overflow: hidden;
-	vertical-align: middle;
 }
 
 ul.button32list > li:hover,
@@ -469,8 +492,31 @@ li.button32wrapper:hover {
 	background-position: -851px 0;
 }
 
-ul.button32list > li > button,
-button.button32 {
+ul.buttonlist > li > button {
+	background-color: transparent;
+	cursor: pointer;
+	font-size: 26px;
+	/* line-height: 32px; */
+	/* vertical-align: middle; */
+	/* text-align: center; */
+	/* overflow: hidden; */
+	padding: 10px;
+	margin: 0;
+	border-radius: 2px;
+	border: 2px outset gray;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-ms-user-select: none;
+}
+
+ul.buttonlist > li > button:active{
+	background-color: rgb(180, 180, 183);
+	border-style: inset;
+}
+
+button.button32,
+ul.button32list > li > button{
 	background-color: transparent;
 	cursor: pointer;
 	font-size: 26px;
@@ -654,7 +700,7 @@ button.button32:active {
 
 #srch_results {
 	/* text-align: left; */
-	max-width: 367px;
+	/* max-width: 367px; */
 	height: 180px;
 	font-size: 14px;
 	padding-left: 10px;
@@ -708,10 +754,6 @@ button.button32:active {
 #quickselect {
 	list-style: none;
 	font-weight: bold;
-}
-
-#quickselect li {
-	display: inline-block;
 }
 
 #selection {

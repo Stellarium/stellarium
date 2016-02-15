@@ -7,6 +7,7 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QDateTime>
+#include <QMimeDatabase>
 
 StaticFileController::StaticFileController(const StaticFileControllerSettings& settings, QObject* parent)
     :HttpRequestHandler(parent)
@@ -103,6 +104,7 @@ void StaticFileController::service(HttpRequest& request, HttpResponse& response)
 
 QByteArray StaticFileController::getContentType(QString fileName, QString encoding)
 {
+	//Directly return the most commonly used types
 	if (fileName.endsWith(".png")) {
 		return "image/png";
 	}
@@ -127,9 +129,37 @@ QByteArray StaticFileController::getContentType(QString fileName, QString encodi
 	else if (fileName.endsWith(".js")) {
 		return qPrintable("text/javascript; charset="+encoding);
 	}
-	return "";
+	else if (fileName.endsWith(".woff")) {
+		return qPrintable("application/font-woff");
+	}
+	else if (fileName.endsWith(".woff2")) {
+		return qPrintable("application/font-woff2");
+	}
+	else if (fileName.endsWith(".ttf")) {
+		return qPrintable("application/x-font-truetype");
+	}
+	else if (fileName.endsWith(".otf")) {
+		return qPrintable("application/x-font-opentype");
+	}
+	else if (fileName.endsWith(".eot")) {
+		return qPrintable("application/vnd.ms-fontobject");
+	}
+	else if (fileName.endsWith(".svg")) {
+		return qPrintable("image/svg+xml");
+	}
+	else{
+		//Query Qt for file type, using only the name for now
+		QMimeDatabase mimeData;
+		QMimeType type = mimeData.mimeTypeForFile(fileName, QMimeDatabase::MatchExtension);
+
+		if(type.isValid())
+			return qPrintable(type.name());
+		return QByteArray();
+	}
 }
 
 void StaticFileController::setContentType(QString fileName, HttpResponse& response) const {
-	response.setHeader("Content-Type", getContentType(fileName,encoding));
+	QByteArray contentType = getContentType(fileName,encoding);
+	if(!contentType.isEmpty())
+		response.setHeader("Content-Type", contentType);
 }
