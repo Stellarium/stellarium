@@ -133,7 +133,6 @@ private:
 
 	void refreshThumbnailQueue();
 
-	void loadConfig();
 	QHash<QString, AddOn*> loadAddonCatalog(QString jsonPath) const;
 	void restoreDefaultAddonJsonFile();
 	void insertAddonInJson(AddOn* addon, QString jsonPath);
@@ -148,6 +147,9 @@ private:
 	void downloadNextThumbnail();
 
 	void unzip(AddOn& addon);
+
+	//! Load settings from config.ini.
+	void loadConfig();
 };
 
 #endif // _STELADDONMGR_HPP_

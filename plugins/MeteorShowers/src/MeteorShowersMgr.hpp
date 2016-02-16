@@ -261,8 +261,10 @@ private:
 	QNetworkAccessManager* m_downloadMgr;
 	class StelProgressController* m_progressBar;
 
-	void createActions();
+	//! Load settings from config.ini.
 	void loadConfig();
+
+	void createActions();
 	void loadTextures();
 	bool loadCatalog(const QString& jsonPath);
 
