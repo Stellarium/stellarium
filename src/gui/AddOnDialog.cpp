@@ -119,9 +119,11 @@ void AddOnDialog::createDialogContent()
 
 	connect(ui->updateFrequency, SIGNAL(currentIndexChanged(int)), this, SLOT(updateFrequencyChanged(int)));
 
+	// every 5 min, check if it's time to update
 	QTimer* timer = new QTimer(this);
+	timer->setInterval(300000);
 	connect(timer, SIGNAL(timeout()), this, SLOT(checkInterval()));
-	timer->start(600000);
+	timer->start();
 	checkInterval();
 
 	// fix dialog width
