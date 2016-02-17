@@ -109,34 +109,27 @@
               <button type="button" class="stelaction" title='<?= tr("Look towards Zenith")?>' value="actionLook_Towards_Zenith"><?= tr("Z")?></button>
             </div>
 
-
-            <!--  GZ TODO: I see this thing is handled specially in the JS code. There are now sliders with some generic syntax. Is this fov slider still special?  -->
-
-
             <div id="view_wrapper">
               <div id="view_fov"></div>
               <p title='<?= tr("Field of view")?>'>FOV: <span id="view_fov_text"></span></p>
 
-
-              <!-- GZ TODO I would like to have a row of buttons (or 3x4 or 2x6?) with fixed FoV values here. The buttons in the ul below don't work yet. ul may rather be just a div? 
-                   I don't find the prop_ name for fov. (The name="prop_fov" is of course wrong.) Is this handled differently?
-
-              -->
               <div id="view_fovbuttons" class="ui-corner-all ui-widget-content">
-              <ul>
-                <li><button type="button" class="fovbutton" value="0.1">0.1</button></li>
-                <li><button type="button" class="fovbutton" value="1">1</button></li>
-                <li><button type="button" class="fovbutton" value="10">10</button></li>
-                <li><button type="button" class="fovbutton" value="20">20</button></li>
-                <li><button type="button" class="fovbutton" value="30">30</button></li>
-                <li><button type="button" class="fovbutton" value="40">40</button></li>
-                <li><button type="button" class="fovbutton" value="60">60</button></li>
-                <li><button type="button" class="fovbutton" value="90">90</button></li>
-                <li><button type="button" class="fovbutton" value="120">120</button></li>
-                <li><button type="button" class="fovbutton" value="150">150</button></li>
-                <li><button type="button" class="fovbutton" value="180">180</button></li>
-                <li><button type="button" class="fovbutton" value="230">230</button></li>
-              </ul>
+              <table>
+               <tr>
+                <td><button type="button" class="fovbutton" value="0.1">0.1&deg;</button></td>
+                <td><button type="button" class="fovbutton" value="1">1&deg;</button></td>
+                <td><button type="button" class="fovbutton" value="10">10&deg;</button></td>
+                <td><button type="button" class="fovbutton" value="20">20&deg;</button></td></tr><tr>
+                <td><button type="button" class="fovbutton" value="30">30&deg;</button></td>
+                <td><button type="button" class="fovbutton" value="40">40&deg;</button></td>
+                <td><button type="button" class="fovbutton" value="60">60&deg;</button></td>
+                <td><button type="button" class="fovbutton" value="90">90&deg;</button></td></tr><tr>
+                <td><button type="button" class="fovbutton" value="120">120&deg;</button></td>
+                <td><button type="button" class="fovbutton" value="150">150&deg;</button></td>
+                <td><button type="button" class="fovbutton" value="180">180&deg;</button></td>
+                <td><button type="button" class="fovbutton" value="230">230&deg;</button></td>
+               </tr>
+              </table>
               </div> 
               <p><?= tr("Projection")?>: <span id="view_projection"></span></p>
             </div>
@@ -228,7 +221,7 @@
               <ul class="ui-corner-all ui-widget-content buttonlist">
                 <!-- to add a new quick select button, simply add a new button with the english name of the object as value -->
                 <!-- try not to add whitespace between li items (inline-block layout uglyness) -->
-                <li><button title='<?= tr("Sun")?>' value="Sun">&#x2609;</button></li><li><button title='<?= tr("Mercury")?>' value="Mercury">&#x263F;</button></li><li><button title='<?= tr("Venus")?>' value="Venus">&#x2640;</button></li><li><button title='<?= tr("Earth")?>' value="Earth">&#x2641;</button></li><li><button title='<?= tr("Moon")?>' value="Moon">&#x263D;</button></li><li><button title='<?= tr("Mars")?>' value="Mars">&#x2642;</button></li><li><button title='<?= tr("Jupiter")?>' value="Jupiter">&#x2643;</button></li><li><button title='<?= tr("Saturn")?>' value="Saturn">&#x2644;</button></li><li><button title='<?= tr("Uranus")?>' value="Uranus">&#x2645;</button></li><li><button title='<?= tr("Neptune")?>' value="Neptune">&#x2646;</button></li><li><button title='<?= tr("Pluto")?>' value="Pluto">&#x2647;</button></li>
+                <li><button title='<?= tr("Sun")?>' value="Sun">&#x2609;</button></li><li><button title='<?= tr("Mercury")?>' value="Mercury">&#x263F;</button></li><li><button title='<?= tr("Venus")?>' value="Venus">&#x2640;</button></li><li><button title='<?= tr("Earth")?>' value="Earth">&#x2641;</button></li><li><button title='<?= tr("Moon")?>' value="Moon">&#x263D;</button></li><li><button title='<?= tr("Mars")?>' value="Mars">&#x2642;</button></li><li><button title='<?= tr("Jupiter")?>' value="Jupiter">&#x2643;</button></li><li><button title='<?= tr("Saturn")?>' value="Saturn">&#x2644;</button></li><li><button title='<?= tr("Uranus")?>' value="Uranus">&#x2645;</button></li><li><button title='<?= tr("Neptune")?>' value="Neptune">&#x2646;</button></li><li><button title='<?= tr("Pluto")?>' value="Pluto">&#x2647;</button></li><br/>
                 <li><button title='<?= tr("Sirius")?>' value="Sirius">Sirius</button></li>
                 <li><button title='<?= tr("Arcturus")?>' value="Arcturus">Arctur</button></li>
                 <li><button title='<?= tr("Capella")?>' value="Capella">Capella</button></li>
@@ -316,11 +309,17 @@
             </div>
             <div id="vo_refraction" class="innerblock">
               <h3><?= tr("Refraction Settings")?></h3>
-              <div class="table">
+              <!--div class="table">
                 <p><label for="atmosphere_pressure"><?= tr("Pressure (mbar):")?></label><input id="atmosphere_pressure" class="spinner stelproperty" name="prop_SkyDrawer_atmospherePressure" data-min="0" data-max="1500" data-step="1" data-numberformat="n2"/></p>
                 <p><label for="atmosphere_temperature"><?= tr("Temperature (C):")?></label><input id="atmosphere_temperature" class="spinner stelproperty" name="prop_SkyDrawer_atmosphereTemperature" data-min="-100" data-max="100" data-step="1" data-numberformat="n1"/></p>
                 <p><label for="atmosphere_extinction"><?= tr("Extinction Coefficient:")?></label><input id="atmosphere_extinction" class="spinner stelproperty" name="prop_SkyDrawer_extinctionCoefficient" data-min="0" data-max="3" data-step="0.01" data-numberformat="n2"/></p>
-              </div>
+              </div-->
+              <table>
+                <tr><td><label for="atmosphere_pressure"><?= tr("Pressure (mbar):")?></label></td><td><input id="atmosphere_pressure" class="spinner stelproperty" name="prop_SkyDrawer_atmospherePressure" data-min="0" data-max="1500" data-step="1" data-numberformat="n2"/></td></tr>
+                <tr><td><label for="atmosphere_temperature"><?= tr("Temperature (C):")?></label></td><td><input id="atmosphere_temperature" class="spinner stelproperty" name="prop_SkyDrawer_atmosphereTemperature" data-min="-100" data-max="100" data-step="1" data-numberformat="n1"/></td></tr>
+                <tr><td><label for="atmosphere_extinction"><?= tr("Extinction Coefficient:")?></label></td><td><input id="atmosphere_extinction" class="spinner stelproperty" name="prop_SkyDrawer_extinctionCoefficient" data-min="0" data-max="3" data-step="0.01" data-numberformat="n2"/></td></tr>
+              </table>
+
             </div>
             <div class="innerblock flex flex-baseline">
               <h3><?= tr("Shooting Stars")?></h3>
