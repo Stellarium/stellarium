@@ -59,15 +59,14 @@ private slots:
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 	void slotUpdateMsg(const StelAddOnMgr::AddOnMgrMsg msg);
 	void slotUpdateButton();
-	void downloadFinished();
+	void downloadFinished(QNetworkReply* reply);
 	void installFromFile();
 	void slotCheckedRows();
 	void populateTables();
 
 private:
 	AddOnSettingsDialog* m_pSettingsDialog;
-
-	QNetworkReply* m_pUpdateCatalogReply;
+	StelProgressController* m_progressBar;
 
 	void updateTabBarListWidgetWidth();
 };

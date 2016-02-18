@@ -27,6 +27,7 @@
 #include "AddOnWidget.hpp"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
+#include "StelProgressController.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 #include "ui_addonDialog.h"
@@ -34,6 +35,7 @@
 AddOnDialog::AddOnDialog(QObject* parent)
 	: StelDialog(parent)
 	, m_pSettingsDialog(new AddOnSettingsDialog(this))
+	, m_progressBar(NULL)
 {
 	ui = new Ui_addonDialogForm;
 }
@@ -277,48 +279,58 @@ void AddOnDialog::updateCatalog()
 	ui->btnUpdate->setEnabled(false);
 	ui->txtLastUpdate->setText(q_("Updating catalog..."));
 
+	m_progressBar = StelApp::getInstance().addProgressBar();
+	m_progressBar->setValue(0);
+	m_progressBar->setRange(0, 100);
+	m_progressBar->setFormat("Add-ons Catalog");
+
 	QNetworkRequest req;
 	req.setUrl(QUrl(StelApp::getInstance().getStelAddOnMgr().getUrl()));
 	req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, false);
 	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
 	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
 	req.setRawHeader("User-Agent", StelApp::getInstance().getStelAddOnMgr().getUserAgent());
-	m_pUpdateCatalogReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-	connect(m_pUpdateCatalogReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
+
+	QNetworkAccessManager* mgr = StelApp::getInstance().getNetworkAccessManager();
+	mgr->get(req);
+	connect(mgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadFinished(QNetworkReply*)));
 }
 
-void AddOnDialog::downloadFinished()
+void AddOnDialog::downloadFinished(QNetworkReply* reply)
 {
-	ui->btnUpdate->setEnabled(true);
-	QByteArray result(m_pUpdateCatalogReply->readAll());
-	if (m_pUpdateCatalogReply->error() == QNetworkReply::NoError && !result.isEmpty())
+	if (m_progressBar)
 	{
-		QFile jsonFile(StelApp::getInstance().getStelAddOnMgr().getAddonJsonPath());
-		jsonFile.remove(); // overwrite
-		if (jsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
-		{
-			jsonFile.write(result);
-			jsonFile.close();
-
-			StelApp::getInstance().getStelAddOnMgr().reloadCatalogues();
-			StelApp::getInstance().getStelAddOnMgr().setLastUpdate(QDateTime::currentDateTime());
-			ui->txtLastUpdate->setText(StelApp::getInstance().getStelAddOnMgr().getLastUpdateString());
-			populateTables();
-		}
-		else
-		{
-			qWarning() << "[Add-on] unable to update the database! cannot write json file";
-			ui->txtLastUpdate->setText(q_("Database update failed!"));
-		}
+		m_progressBar->setValue(100);
+		StelApp::getInstance().removeProgressBar(m_progressBar);
+		m_progressBar = NULL;
 	}
-	else
+
+	QByteArray result(reply->readAll());
+	if (reply->error() != QNetworkReply::NoError || result.isEmpty())
 	{
-		qWarning() << "[Add-on] unable to update the database!" << m_pUpdateCatalogReply->errorString();
+		qWarning() << "[Add-on] unable to download file!" << reply->url();
+		qWarning() << "[Add-on] download error:" << reply->errorString();
 		ui->txtLastUpdate->setText(q_("Database update failed!"));
+		return;
 	}
 
-	m_pUpdateCatalogReply->deleteLater();
-	m_pUpdateCatalogReply = NULL;
+	QFile file(StelApp::getInstance().getStelAddOnMgr().getAddonJsonPath());
+	file.remove(); // overwrite
+	if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
+	{
+		qWarning() << "[Add-on] unable to open a temporary file!";
+		ui->txtLastUpdate->setText(q_("Database update failed!"));
+		return;
+	}
+
+	file.write(result);
+	file.close();
+
+	StelApp::getInstance().getStelAddOnMgr().reloadCatalogues();
+	StelApp::getInstance().getStelAddOnMgr().setLastUpdate(QDateTime::currentDateTime());
+	ui->txtLastUpdate->setText(StelApp::getInstance().getStelAddOnMgr().getLastUpdateString());
+	populateTables();
+	ui->btnUpdate->setEnabled(true);
 }
 
 void AddOnDialog::installFromFile()
