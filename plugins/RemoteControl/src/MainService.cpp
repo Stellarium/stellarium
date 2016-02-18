@@ -230,10 +230,36 @@ void MainService::getImpl(const QByteArray& operation, const APIParameters &para
 
 		response.writeJSON(QJsonDocument(obj));
 	}
+	else if(operation=="plugins")
+	{
+		// Retrieve list of plugins
+
+		QJsonObject mainObj;
+
+		StelModuleMgr& modMgr = StelApp::getInstance().getModuleMgr();
+		foreach(const StelModuleMgr::PluginDescriptor& desc, modMgr.getPluginsList())
+		{
+			QJsonObject pluginObj,infoObj;
+			pluginObj.insert("loadAtStartup", desc.loadAtStartup);
+			pluginObj.insert("loaded", desc.loaded);
+
+			infoObj.insert("authors", desc.info.authors);
+			infoObj.insert("contact", desc.info.contact);
+			infoObj.insert("description", desc.info.description);
+			infoObj.insert("displayedName", desc.info.displayedName);
+			infoObj.insert("startByDefault", desc.info.startByDefault);
+			infoObj.insert("version", desc.info.version);
+
+			pluginObj.insert("info",infoObj);
+			mainObj.insert(desc.info.id, pluginObj);
+		}
+
+		response.writeJSON(QJsonDocument(mainObj));
+	}
 	else
 	{
 		//TODO some sort of service description?
-		response.writeRequestError("unsupported operation. GET: status");
+		response.writeRequestError("unsupported operation. GET: status, plugins");
 	}
 }
 
