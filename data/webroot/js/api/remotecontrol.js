@@ -63,7 +63,7 @@ define(["jquery", "settings", "translationdata"], function($, settings, Translat
                 if (data.propertyChanges.id !== lastPropId) {
                     var evt = $.Event("stelPropertiesChanged");
                     $(rc).trigger(evt, data.propertyChanges.changes, lastPropId);
-                    if(evt.isDefaultPrevented()) {
+                    if (evt.isDefaultPrevented()) {
                         //if this is set, dont update the prop id
                         //this is required to make sure the props are loaded first
                         console.log("prop change error, resending same id on next update");
@@ -95,6 +95,64 @@ define(["jquery", "settings", "translationdata"], function($, settings, Translat
             }
         });
     }
+
+    //remove panels for disabled plugins and load additional JS files if required for enabled ones
+    function processPluginInfo(data) {
+        //iterate over all stelplugin elements
+        $(".stelplugin").each(function() {
+            var self = $(this);
+            var pluginId = self.data("plugin");
+            if (!pluginId) {
+                console.error("Plugin element needs a data-plugin attribute!");
+                console.dir(this);
+            } else {
+                //check if the plugin is known and is enabled
+                if(data[pluginId] && data[pluginId].loaded)
+                {
+                    console.log("plugin " + pluginId + " is enabled");
+                    //check if additional JS files are required
+                    var js = self.data("pluginjs");
+                    if(js)
+                    {
+                        require([js],function(){
+                            console.log("additional plugin JS files loaded: " + js);
+                        });
+                    }
+                }
+                else
+                {
+                    //plugin is not loaded, remove elements
+                    console.log("plugin " + pluginId + " not enabled, removing DOM elements");
+                    self.remove();
+                }
+
+            }
+        });
+    }
+
+    // load plugin list, and disable/load elements if required
+    function loadPlugins() {
+        $.ajax({
+            url: '/api/main/plugins',
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                //when the document is ready (can be now), process plugin info
+                $(function() {
+                    processPluginInfo(data);
+                });
+            },
+            error: function(xhr, status, errorThrown) {
+                console.log("Error loading plugin information");
+                console.log("Error: " + errorThrown);
+                console.log("Status: " + status);
+                alert("Error loading plugin information");
+            }
+        });
+    }
+
+    //start this as soon as possible
+    loadPlugins();
 
     //Public stuff
     var rc = {

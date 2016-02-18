@@ -168,6 +168,18 @@ div#srch_tab_object {
     padding-bottom: 0;
 }
 
+span.ui-selectmenu-button.ui-state-default {
+	border: 1px solid black;
+	border-radius: 0px;
+	color: rgb(3,3,3);
+	background: linear-gradient(#B4B4B7, #5D5F62);
+}
+
+.ui-selectmenu-button span.ui-icon {
+    /* border: 1px solid #cccccc; */
+    /* background: #eeeeee url("images/ui-bg_glass_60_eeeeee_1x400.png") 50% 50%; */
+}
+
 /* End jQuery UI override */
 
 html {
@@ -674,6 +686,7 @@ button.button32:active {
 }
 
 .custom-combobox {
+	/* border: 1px solid black; */
 	background: linear-gradient(#B4B4B7, #5D5F62);
 	overflow: hidden;
 	position: relative;
@@ -870,4 +883,8 @@ button.button32:active {
 
 #srch_simbad_text{
 	font-weight: bold;
+}
+
+#vo_archaeolines .selectmenu + span.ui-selectmenu-button {
+	display: block;
 }

@@ -42,7 +42,37 @@ define(["jquery", "./remotecontrol", "./updatequeue"], function($, rc, UpdateQue
 		return propData[id] ? propData[id].value : undefined;
 	}
 
+	function convertStelProp(id,val) {
+		//try to determine if this is an numeric type needing to be parsed
+		//this is not necessarily needed, but may prevent some unnecessary refreshes if the type is converted server-side
+		if (typeof val === 'string' || val instanceof String)
+		{
+			var type = propData[id].typeEnum;
+			//boolean
+			if(type===1)
+				if(val)
+					return true;
+				else
+					return false;
+
+			//integer types
+			if((type>=2 && type<=5) || (type>=32 && type<=37)){
+				return parseInt(val,10);
+			}
+			//floating types
+			if(type===6 || type===38){
+				return parseFloat(val);
+			}
+		}
+
+		//either no conversion is needed, or we dont know how
+		//in this case just let the server deal with the conversion
+		//(this may result in another stelPropertyChanged event)
+		return val;
+	}
+
 	function setStelProp(id, val) {
+		val = convertStelProp(id,val);
 		$.ajax({
 			url: "/api/stelproperty/set",
 			method: "POST",
@@ -87,7 +117,7 @@ define(["jquery", "./remotecontrol", "./updatequeue"], function($, rc, UpdateQue
 			updateQueues[id] = new UpdateQueue("/api/stelproperty/set", updateQueueCallback);
 		updateQueues[id].enqueue({
 			id: id,
-			value: val
+			value: convertStelProp(id,val)
 		});
 	}
 
