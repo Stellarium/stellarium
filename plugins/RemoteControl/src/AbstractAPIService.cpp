@@ -79,7 +79,13 @@ void APIServiceResponse::writeRequestError(const QByteArray &msg)
 
 void APIServiceResponse::writeJSON(const QJsonDocument &doc)
 {
-	QByteArray data = doc.toJson();
+#ifdef QT_NO_DEBUG
+	//Use compact JSON format for release builds for smaller files
+	QByteArray data = doc.toJson(QJsonDocument::Compact);
+#else
+	//Use indented JSON format in debug builds for easier human reading
+	QByteArray data = doc.toJson(QJsonDocument::Indented);
+#endif
 	//setHeader("Content-Length",data.size());
 	setHeader("Content-Type","application/json; charset=utf-8");
 	setData(data);

@@ -12,7 +12,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/actions", "api/propertie
 
 	var activeTab = 0;
 	//keep preloaded images to prevent browser from releasing them
-	var preloadedImgs=[];
+	var preloadedImgs = [];
 
 
 	if (!animationSupported) {
@@ -39,41 +39,8 @@ define(["jquery", "settings", "api/remotecontrol", "api/actions", "api/propertie
 		}
 	}
 
-	//DOM-ready
-	$(function() {
-		//preload the error images, otherwise they may be loaded when the connection is lost, which of course wont work
-
-		var preLoadImages = [
-			"/external/images/ui-icons_fbc856_256x240.png",
-			"/external/images/ui-bg_glass_35_dddddd_1x400.png"
-		];
-
-		preLoadImages.forEach(function(val) {
-			var img = new Image();
-			img.src = val;
-			preloadedImgs.push(img);
-		});
-
-		//find and setup some controls
-		$noresponse = $("#noresponse");
-		$noresponsetime = $("#noresponsetime");
-
-		$noresponse.dialog({
-			autoOpen: false,
-			modal: true,
-			draggable: false,
-			resizable: false,
-			dialogClass: "fixed-dialog ui-state-error"
-		});
-
-		$(window).resize(function() {
-			$noresponse.dialog("option", "position", {
-				my: "center",
-				at: "center",
-				of: window
-			});
-		});
-
+	// create 
+	function createAutomaticGUIElements() {
 		//automatically setup spinners
 		$("input.spinner").each(function() {
 			var self = $(this),
@@ -102,6 +69,12 @@ define(["jquery", "settings", "api/remotecontrol", "api/actions", "api/propertie
 			});
 		});
 
+		//create jquery ui buttons + selectmenu
+		$("button.jquerybutton").button();
+		$("select.selectmenu").selectmenu({width: 'auto'});
+	}
+
+	function connectStelProperties() {
 		//hook up automatic stelproperty spinners
 		$("input.spinner.stelproperty").each(function() {
 			var self = $(this);
@@ -113,17 +86,17 @@ define(["jquery", "settings", "api/remotecontrol", "api/actions", "api/propertie
 			}
 
 			$(propApi).on("stelPropertyChanged:" + prop, function(evt, prop) {
-				if(!self.data("updatePaused"))
+				if (!self.data("updatePaused"))
 					self.spinner("value", prop.value);
 			});
 			self.spinner("value", propApi.getStelProp(prop));
 
-			self.on("focus",function(evt){
-				self.data("updatePaused",true);
+			self.on("focus", function(evt) {
+				self.data("updatePaused", true);
 			});
 
-			self.on("blur",function(evt){
-				self.data("updatePaused",false);
+			self.on("blur", function(evt) {
+				self.data("updatePaused", false);
 			});
 
 			self.on("spinuserinput", function(evt, ui) {
@@ -185,8 +158,68 @@ define(["jquery", "settings", "api/remotecontrol", "api/actions", "api/propertie
 			self.text(propApi.getStelProp(prop));
 		});
 
-		//create jquery ui buttons
-		$("button.jquerybutton").button();
+		$("select.stelproperty").each(function() {
+			var self = $(this);
+			var prop = self.attr("name");
+
+			if (!prop) {
+				console.error('Error: no StelProperty name defined on an "stelproperty" element, element follows...');
+				console.dir(this);
+				alert('Error: no StelProperty name defined on an "stelproperty" element, see log for details');
+			}
+			$(propApi).on("stelPropertyChanged:" + prop, function(evt, prop) {
+				self.val(prop.value);
+				//if this is a jquery UI selectmenu, we have to refresh
+				if(self.hasClass('selectmenu')){
+					self.selectmenu("refresh");
+				}
+			});
+			self.val(propApi.getStelProp(prop));
+			self.on("change selectmenuchange",function(evt){
+				propApi.setStelProp(prop, self.val());
+			});
+		});
+
+	}
+
+	//DOM-ready
+	$(function() {
+		//preload the error images, otherwise they may be loaded when the connection is lost, which of course wont work
+
+		var preLoadImages = [
+			"/external/images/ui-icons_fbc856_256x240.png",
+			"/external/images/ui-bg_glass_35_dddddd_1x400.png"
+		];
+
+		preLoadImages.forEach(function(val) {
+			var img = new Image();
+			img.src = val;
+			preloadedImgs.push(img);
+		});
+
+		//find and setup some controls
+		$noresponse = $("#noresponse");
+		$noresponsetime = $("#noresponsetime");
+
+		$noresponse.dialog({
+			autoOpen: false,
+			modal: true,
+			draggable: false,
+			resizable: false,
+			dialogClass: "fixed-dialog ui-state-error"
+		});
+
+		$(window).resize(function() {
+			$noresponse.dialog("option", "position", {
+				my: "center",
+				at: "center",
+				of: window
+			});
+		});
+
+		//create and connect automatic GUI elements defined in the DOM
+		createAutomaticGUIElements();
+		connectStelProperties();
 
 		//main tabs
 		//remember which tab was active after refresh by storing id in sessionstore

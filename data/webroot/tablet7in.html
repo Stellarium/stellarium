@@ -361,10 +361,7 @@
               </div>
             </div>
           </div>
-
-           <!-- GZ TODO: The tab works perfectly when the plugin is loaded. Else there is an error box if user clicks on an option. I have declared a class stelplugin here which may help to develop 
-                         some mechanism where a class that belongs to an unloaded plugin is visibility:collapsed. Some element attribute (to be invented) like plugin_active can be used for this?   -->
-           <div id="vo_archaeolines" class="smallblock stelplugin">
+           <div id="vo_archaeolines" class="smallblock stelplugin" data-plugin="ArchaeoLines" data-pluginjs="plugins/archaeolines">
             <h3><label><input type="checkbox" class="stelaction valign-middle" value="actionShow_Archaeo_Lines"/><?= tr("ArchaeoLines")?></label></h3>
             <div class="inline-block blocklabel">
               <label><input type="checkbox" class="stelaction" value="actionAL_showEquinoxLine"/><?= tr("Equinox")?></label>
@@ -379,13 +376,19 @@
               <label><input type="checkbox" class="stelaction" value="actionAL_showSelectedObjectLine"/><?= tr("Selected Object")?></label>
               <label><input type="checkbox" class="stelaction" value="actionAL_showCurrentSunLine"/><?= tr("Current Sun")?></label>
               <label><input type="checkbox" class="stelaction" value="actionAL_showCurrentMoonLine"/><?= tr("Current Moon")?></label>
-              <!-- GZ TODO: How would selecting a planet line work here? Best thing a row of radiobuttons, or a Combobox to set the planetline stelProperty.  
-				Is there a button type to set a property directly? 
-              -->
             </div>
+            <!-- automatic selectmenu generation and stelproperty binding -->
+            <!-- the selectmenu is styled in the css because we can't really add classes here -->
+            <label class="display-block" for="select_ArchaeoLines_enumShowCurrentPlanet"><?= tr("Current Planet:")?></label>
+            <select id="select_ArchaeoLines_enumShowCurrentPlanet" class="selectmenu stelproperty display-block" name="prop_ArchaeoLines_enumShowCurrentPlanet">
+              <option value="10"><?= tr("None")?></option>
+              <option value="11"><?= tr("Mercury")?></option>
+              <option value="12"><?= tr("Venus")?></option>
+              <option value="13"><?= tr("Mars")?></option>
+              <option value="14"><?= tr("Jupiter")?></option>
+              <option value="15"><?= tr("Saturn")?></option>
+            </select>
           </div>
-
-
         </div>
       </div>
       <div id="tab_dso">
