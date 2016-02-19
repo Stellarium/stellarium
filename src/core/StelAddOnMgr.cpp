@@ -31,17 +31,13 @@
 #include "StelAddOnMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelProgressController.hpp"
 
 StelAddOnMgr::StelAddOnMgr()
 	: m_pConfig(StelApp::getInstance().getSettings())
-	, m_downloadingAddOn(NULL)
-	, m_pAddOnNetworkReply(NULL)
-	, m_currentDownloadFile(NULL)
+	, m_pDownloadMgr(new DownloadMgr(this))
 	, m_sAddOnDir(StelFileMgr::getUserDir() % "/addon/")
 	, m_sThumbnailDir(m_sAddOnDir % "thumbnail/")
 	, m_sInstalledAddonsJsonPath(m_sAddOnDir % "installed_addons.json")
-	, m_progressBar(NULL)
 	, m_lastUpdate(QDateTime::fromString("2016-01-01", "yyyy-MM-dd"))
 	, m_eUpdateFrequency(EVERY_THREE_DAYS)
 {
@@ -51,12 +47,6 @@ StelAddOnMgr::StelAddOnMgr()
 	m_sUserAddonJsonPath = m_sAddOnDir % "user_" % m_sAddonJsonFilename;
 
 	m_sUrl = "http://cardinot.sourceforge.net/" % m_sAddonJsonFilename;
-
-	// Set user agent as "Stellarium/$version$ ($platform$)"
-	m_userAgent = QString("Stellarium/%1 (%2)")
-			.arg(StelUtils::getApplicationVersion())
-			.arg(StelUtils::getOperatingSystemInfo())
-			.toLatin1();
 
 	// creating addon dir
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sAddOnDir);
@@ -121,7 +111,7 @@ void StelAddOnMgr::reloadCatalogues()
 	}
 
 	// download thumbnails
-	refreshThumbnailQueue();
+//	refreshThumbnailQueue();
 
 	emit(updateTableViews());
 }
@@ -209,6 +199,7 @@ void StelAddOnMgr::loadConfig()
 	setUrl(m_pConfig->value(ADDON_CONFIG_PREFIX + "/url", m_sUrl).toString());
 }
 
+/*
 void StelAddOnMgr::refreshThumbnailQueue()
 {
 	QHashIterator<QString, AddOn*> aos(m_addonsAvailable);
@@ -253,6 +244,7 @@ void StelAddOnMgr::downloadThumbnailFinished()
 	m_thumbnailQueue.removeFirst();
 	downloadNextThumbnail();
 }
+*/
 
 void StelAddOnMgr::installAddons(QSet<AddOn *> addons)
 {
@@ -323,7 +315,7 @@ void StelAddOnMgr::installAddOnFromFile(QString filePath)
 
 void StelAddOnMgr::installAddOn(AddOn* addon, bool tryDownload)
 {
-	if (m_downloadQueue.contains(addon))
+	if (m_pDownloadMgr->isDownloading(addon))
 	{
 		return;
 	}
@@ -380,8 +372,7 @@ void StelAddOnMgr::installAddOn(AddOn* addon, bool tryDownload)
 	else if (tryDownload && (addon->getStatus() == AddOn::NotInstalled || addon->getStatus() == AddOn::Corrupted))
 	{
 		addon->setStatus(AddOn::Installing);
-		m_downloadQueue.append(addon);
-		downloadNextAddOn();
+		m_pDownloadMgr->download(addon);
 	}
 
 	reloadCatalogues();
@@ -512,132 +503,6 @@ QString StelAddOnMgr::calculateMd5(QFile& file) const
 		file.close();
 	}
 	return checksum;
-}
-
-void StelAddOnMgr::downloadNextAddOn()
-{
-	if (m_downloadingAddOn)
-	{
-		return;
-	}
-
-	Q_ASSERT(m_pAddOnNetworkReply==NULL);
-	Q_ASSERT(m_currentDownloadFile==NULL);
-	Q_ASSERT(m_progressBar==NULL);
-
-	m_downloadingAddOn = m_downloadQueue.first();
-	m_currentDownloadFile = new QFile(m_downloadingAddOn->getZipPath());
-	if (!m_currentDownloadFile->open(QIODevice::WriteOnly))
-	{
-		qWarning() << "[Add-on] Can't open a writable file: "
-			   << QDir::toNativeSeparators(m_downloadingAddOn->getZipPath());
-		cancelAllDownloads();
-		emit (addOnMgrMsg(UnableToWriteFiles));
-		return;
-	}
-
-	QNetworkRequest req(m_downloadingAddOn->getDownloadURL());
-	req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, false);
-	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
-	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
-	req.setRawHeader("User-Agent", m_userAgent);
-	m_pAddOnNetworkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-	connect(m_pAddOnNetworkReply, SIGNAL(readyRead()), this, SLOT(newDownloadedData()));
-	connect(m_pAddOnNetworkReply, SIGNAL(finished()), this, SLOT(downloadAddOnFinished()));
-
-	m_progressBar = StelApp::getInstance().addProgressBar();
-	m_progressBar->setValue(0);
-	m_progressBar->setRange(0, m_downloadingAddOn->getDownloadSize());
-	m_progressBar->setFormat(QString("%1: %p%").arg(m_downloadingAddOn->getDownloadFilename()));
-}
-
-void StelAddOnMgr::newDownloadedData()
-{
-	Q_ASSERT(m_currentDownloadFile);
-	Q_ASSERT(m_pAddOnNetworkReply);
-	Q_ASSERT(m_progressBar);
-
-	float size = m_pAddOnNetworkReply->bytesAvailable();
-	m_progressBar->setValue((float)m_progressBar->getValue()+(float)size);
-	m_currentDownloadFile->write(m_pAddOnNetworkReply->read(size));
-}
-
-void StelAddOnMgr::downloadAddOnFinished()
-{
-	Q_ASSERT(m_currentDownloadFile);
-	Q_ASSERT(m_pAddOnNetworkReply);
-	Q_ASSERT(m_progressBar);
-
-	if (m_pAddOnNetworkReply->error() == QNetworkReply::NoError)
-	{
-		Q_ASSERT(m_pAddOnNetworkReply->bytesAvailable()==0);
-
-		const QVariant& redirect = m_pAddOnNetworkReply->attribute(QNetworkRequest::RedirectionTargetAttribute);
-		if (!redirect.isNull())
-		{
-			// We got a redirection, we need to follow
-			m_currentDownloadFile->reset();
-			m_pAddOnNetworkReply->deleteLater();
-			QNetworkRequest req(redirect.toUrl());
-			req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
-			req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
-			m_pAddOnNetworkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-			m_pAddOnNetworkReply->setReadBufferSize(1024*1024*2);
-			connect(m_pAddOnNetworkReply, SIGNAL(readyRead()), this, SLOT(newDownloadedData()));
-			connect(m_pAddOnNetworkReply, SIGNAL(finished()), this, SLOT(downloadAddOnFinished()));
-			return;
-		}
-		finishCurrentDownload();
-		installAddOn(m_downloadingAddOn, false);
-	}
-	else
-	{
-		qWarning() << "Add-on Mgr: FAILED to download" << m_pAddOnNetworkReply->url()
-			   << " Error:" << m_pAddOnNetworkReply->errorString();
-		m_downloadingAddOn->setStatus(AddOn::DownloadFailed);
-		emit (dataUpdated(m_downloadingAddOn));
-		finishCurrentDownload();
-	}
-
-	m_downloadingAddOn = NULL;
-	if (!m_downloadQueue.isEmpty())
-	{
-		// next download
-		downloadNextAddOn();
-	}
-}
-
-void StelAddOnMgr::finishCurrentDownload()
-{
-	if (m_currentDownloadFile)
-	{
-		m_currentDownloadFile->close();
-		m_currentDownloadFile->deleteLater();
-		m_currentDownloadFile = NULL;
-	}
-
-	if (m_pAddOnNetworkReply)
-	{
-		m_pAddOnNetworkReply->deleteLater();
-		m_pAddOnNetworkReply = NULL;
-	}
-
-	if (m_progressBar)
-	{
-		StelApp::getInstance().removeProgressBar(m_progressBar);
-		m_progressBar = NULL;
-	}
-
-	m_downloadQueue.removeOne(m_downloadingAddOn);
-}
-
-void StelAddOnMgr::cancelAllDownloads()
-{
-	qDebug() << "[Add-on] Canceling all downloads!";
-	finishCurrentDownload();
-	m_downloadingAddOn = NULL;
-	m_downloadQueue.clear();
-	emit(updateTableViews());
 }
 
 void StelAddOnMgr::unzip(AddOn& addon)

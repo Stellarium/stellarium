@@ -289,11 +289,11 @@ void AddOnDialog::updateCatalog()
 	req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, false);
 	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
 	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
-	req.setRawHeader("User-Agent", StelApp::getInstance().getStelAddOnMgr().getUserAgent());
+//	req.setRawHeader("User-Agent", StelApp::getInstance().getStelAddOnMgr().getUserAgent());
 
 	QNetworkAccessManager* mgr = StelApp::getInstance().getNetworkAccessManager();
 	mgr->get(req);
-	connect(mgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadFinished(QNetworkReply*)));
+	//connect(mgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadFinished(QNetworkReply*)));
 }
 
 void AddOnDialog::downloadFinished(QNetworkReply* reply)

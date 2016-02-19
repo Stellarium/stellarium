@@ -21,15 +21,16 @@
 #define _STELADDONMGR_HPP_
 
 #include <QDateTime>
-#include <QFile>
-#include <QNetworkReply>
 #include <QObject>
 #include <QSettings>
 
 #include "AddOn.hpp"
+#include "DownloadMgr.hpp"
 
 #define ADDON_CONFIG_PREFIX QString("AddOn")
 #define ADDON_CATALOG_VERSION 1
+
+class DownloadMgr;
 
 class StelAddOnMgr : public QObject
 {
@@ -83,8 +84,6 @@ public:
 	UpdateFrequency getUpdateFrequency() { return m_eUpdateFrequency; }
 	QString getAddonJsonPath() { return m_sAddonJsonPath; }
 
-	QByteArray getUserAgent() { return m_userAgent; }
-
 	void reloadCatalogues();
 
 signals:
@@ -97,18 +96,11 @@ signals:
 
 private slots:
 	void slotDataUpdated(AddOn* addon);
-	void downloadThumbnailFinished();
-	void downloadAddOnFinished();
-	void newDownloadedData();
+//	void downloadThumbnailFinished();
 
 private:
-	QSettings* m_pConfig;
-
-	AddOn* m_downloadingAddOn;
-	QList<AddOn*> m_downloadQueue;
-	QNetworkReply* m_pAddOnNetworkReply;
-	QFile* m_currentDownloadFile;
-	QByteArray m_userAgent;
+	QSettings* m_pConfig;		//! instace of main config.ini file
+	DownloadMgr* m_pDownloadMgr;	//! instance of DownloadMgr class
 
 	// addon directories
 	const QString m_sAddOnDir;
@@ -126,7 +118,6 @@ private:
 	QHash<QString, QString> m_thumbnails;
 	QStringList m_thumbnailQueue;
 
-	class StelProgressController* m_progressBar;
 	QDateTime m_lastUpdate;
 	UpdateFrequency m_eUpdateFrequency;
 	QString m_sUrl;
@@ -138,9 +129,6 @@ private:
 	void insertAddonInJson(AddOn* addon, QString jsonPath);
 	void removeAddonFromJson(AddOn* addon, QString jsonPath);
 
-	void downloadNextAddOn();
-	void finishCurrentDownload();
-	void cancelAllDownloads();
 	QString calculateMd5(QFile &file) const;
 
 	// download thumbnails

@@ -163,6 +163,8 @@ SET(stellarium_lib_SRCS
      core/AddOnTableModel.hpp
      core/AddOnTableView.cpp
      core/AddOnTableView.hpp
+     core/DownloadMgr.cpp
+     core/DownloadMgr.hpp
 
      ${gl_lib_SRCS}
 
