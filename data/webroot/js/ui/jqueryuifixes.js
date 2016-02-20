@@ -1,4 +1,4 @@
-define(["jquery", "jquery-ui"], function($, jqueryui) {
+define(["jquery", "jquery.ui.touch-punch"], function($, jqueryui) {
 	"use strict";
 
 	//fix for jQuery UI autocomplete to respect the size of the "of" positional parameter
