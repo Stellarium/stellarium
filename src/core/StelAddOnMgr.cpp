@@ -351,6 +351,8 @@ void StelAddOnMgr::installAddOn(AddOn* addon, bool tryDownload)
 		// installing files
 		addon->setStatus(AddOn::Installing);
 		unzip(*addon);
+		reloadCatalogues();
+		refreshType(addon->getType());
 		// remove zip archive from ~/.stellarium/addon/
 		QFile(addon->getZipPath()).remove();
 	}
@@ -371,9 +373,6 @@ void StelAddOnMgr::installAddOn(AddOn* addon, bool tryDownload)
 		addon->setStatus(AddOn::Installing);
 		m_pDownloadMgr->download(addon);
 	}
-
-	reloadCatalogues();
-	refreshType(addon->getType());
 }
 
 void StelAddOnMgr::removeAddOn(AddOn* addon)
