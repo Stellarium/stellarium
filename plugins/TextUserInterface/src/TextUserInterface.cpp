@@ -294,9 +294,9 @@ void TextUserInterface::init()
 	                                 constellationMgr->getBoundariesColor(), 
                                          m5, m5_3);
 	// TRANSLATORS: Refers to constellation art
-	TuiNode* m5_5 = new TuiNodeDouble(N_("Art brightness:"),
+	TuiNode* m5_5 = new TuiNodeFloat(N_("Art brightness:"),
 	                                  constellationMgr,
-	                                  SLOT(setArtIntensity(double)),
+					  SLOT(setArtIntensity(float)),
 	                                  constellationMgr->getArtIntensity(),
 	                                  0.0, 1.0, 0.05,
 	                                  m5, m5_4);
