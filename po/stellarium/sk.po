@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-02-13 20:32+0600\n"
-"PO-Revision-Date: 2015-10-27 18:02+0000\n"
-"Last-Translator: Pavol Gajdoš <Unknown>\n"
+"PO-Revision-Date: 2016-02-19 18:41+0000\n"
+"Last-Translator: Juraj Kubica <Juraj.Kubica@seznam.cz>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-02-14 05:24+0000\n"
+"X-Launchpad-Export-Date: 2016-02-20 05:11+0000\n"
 "X-Generator: Launchpad (build 17925)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -95,15 +95,15 @@ msgstr "Šírka opoz./konj."
 #: src/core/modules/GridLinesMgr.cpp:637 src/core/modules/GridLinesMgr.cpp:920
 #: src/ui_viewDialog.h:1782
 msgid "Prime Vertical"
-msgstr ""
+msgstr "Hlavný poludník"
 
 #: src/core/modules/GridLinesMgr.cpp:641
 msgid "Equinoctial Colure"
-msgstr ""
+msgstr "Ekvinokciálny kolúr"
 
 #: src/core/modules/GridLinesMgr.cpp:645
 msgid "Solstitial Colure"
-msgstr ""
+msgstr "Slnovratový kolúr"
 
 #: src/core/modules/GridLinesMgr.cpp:905
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
@@ -176,7 +176,7 @@ msgstr "Kruhy precesie"
 
 #: src/core/modules/GridLinesMgr.cpp:921
 msgid "Colure Lines"
-msgstr ""
+msgstr "Čiary kolúru"
 
 #: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1602
 msgid "Atmosphere"
@@ -1699,23 +1699,23 @@ msgstr "Sledovať objekt"
 
 #: src/core/StelMovementMgr.cpp:162
 msgid "Look towards East"
-msgstr ""
+msgstr "Pohľad na východ"
 
 #: src/core/StelMovementMgr.cpp:163
 msgid "Look towards West"
-msgstr ""
+msgstr "Pohľad na západ"
 
 #: src/core/StelMovementMgr.cpp:164
 msgid "Look towards North"
-msgstr ""
+msgstr "Pohľad na sever"
 
 #: src/core/StelMovementMgr.cpp:165
 msgid "Look towards South"
-msgstr ""
+msgstr "Pohľad na juh"
 
 #: src/core/StelMovementMgr.cpp:166
 msgid "Look towards Zenith"
-msgstr ""
+msgstr "Pohľad do zenitu"
 
 #: src/core/SimbadSearcher.cpp:56
 msgid "Network error"
@@ -1866,7 +1866,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1263 src/gui/ConfigurationDialog.cpp:1272
 msgid "Available"
-msgstr ""
+msgstr "K dispozícii"
 
 #: src/gui/ConfigurationDialog.cpp:1265 src/gui/ConfigurationDialog.cpp:1274
 msgid "Not Available"
