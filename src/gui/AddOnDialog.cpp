@@ -95,9 +95,8 @@ void AddOnDialog::createDialogContent()
 	// button Install from File
 	connect(ui->btnInstallFromFile, SIGNAL(clicked()), this, SLOT(installFromFile()));
 
-	// display the AddOnMgr message
-	connect(&StelApp::getInstance().getStelAddOnMgr(), SIGNAL(addOnMgrMsg(StelAddOnMgr::AddOnMgrMsg)),
-		this, SLOT(slotUpdateMsg(StelAddOnMgr::AddOnMgrMsg)));
+	// display message that a restart is required
+	connect(&StelApp::getInstance().getStelAddOnMgr(), SIGNAL(restartRequired()), this, SLOT(slotRestartRequired()));
 
 	// settings tab
 	ui->updateFrequency->addItem(q_("Never"), StelAddOnMgr::NEVER);
@@ -205,21 +204,10 @@ void AddOnDialog::slotUpdateButton()
 	ui->button->setEnabled(amount > 0);
 }
 
-void AddOnDialog::slotUpdateMsg(const StelAddOnMgr::AddOnMgrMsg msg)
+void AddOnDialog::slotRestartRequired()
 {
-	QString txt, toolTip;
-	switch (msg) {
-		case StelAddOnMgr::RestartRequired:
-			txt = q_("Stellarium restart requiried!");
-			toolTip = q_("You must restart the Stellarium to make some changes take effect.");
-			break;
-		case StelAddOnMgr::UnableToWriteFiles:
-			txt = q_("Unable to write files!");
-			toolTip = q_("The user directory is not writable. Please check the permissions on that directory.");
-			break;
-	}
-	ui->msg->setText(txt);
-	ui->msg->setToolTip(toolTip);
+	ui->msg->setText(q_("Stellarium restart requiried!"));
+	ui->msg->setToolTip(q_("You must restart the Stellarium to make some changes take effect."));
 }
 
 void AddOnDialog::updateTabBarListWidgetWidth()

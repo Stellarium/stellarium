@@ -40,6 +40,8 @@ DownloadMgr::DownloadMgr(StelAddOnMgr* mgr)
 				      .arg(StelUtils::getApplicationVersion())
 				      .arg(StelUtils::getOperatingSystemInfo())
 				      .toLatin1());
+
+	connect(this, SIGNAL(updateTableViews()), m_pMgr, SIGNAL(updateTableViews()));
 }
 
 DownloadMgr::~DownloadMgr()
@@ -71,7 +73,6 @@ void DownloadMgr::downloadNextAddOn()
 		qWarning() << "[Add-on] cannot open a writable file:"
 			   << QDir::toNativeSeparators(m_downloadingAddOn->getZipPath());
 		cancelAllDownloads();
-//		emit (addOnMgrMsg(UnableToWriteFiles));
 		return;
 	}
 
@@ -122,7 +123,6 @@ void DownloadMgr::downloadFinished()
 		qWarning() << "[Add-on] unable to download file!" << m_networkReply->url();
 		qWarning() << "[Add-on] download error:" << m_networkReply->errorString();
 		m_downloadingAddOn->setStatus(AddOn::DownloadFailed);
-//		emit(dataUpdated(m_downloadingAddOn));
 		finishCurrentDownload();
 	}
 
@@ -160,5 +160,5 @@ void DownloadMgr::cancelAllDownloads()
 	qDebug() << "[Add-on] canceling all downloads!";
 	finishCurrentDownload();
 	m_downloadQueue.clear();
-//	emit(updateTableViews());
+	emit(updateTableViews());
 }

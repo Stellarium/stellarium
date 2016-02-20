@@ -46,6 +46,9 @@ public:
 	//! @return true if it's in the queue
 	bool isDownloading(AddOn* addon);
 
+signals:
+	void updateTableViews();
+
 private slots:
 	//! Slot for readyRead() signal, which is emitted once
 	//! every time new data is available for reading.

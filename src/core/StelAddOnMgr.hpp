@@ -36,13 +36,6 @@ class StelAddOnMgr : public QObject
 {
 	Q_OBJECT
 public:
-	//! @enum AddOnMgrMsg
-	enum AddOnMgrMsg
-	{
-		RestartRequired,
-		UnableToWriteFiles
-	};
-
 	//! @enum update frequency for add-ons catalog
 	enum UpdateFrequency
 	{
@@ -87,16 +80,15 @@ public:
 	void reloadCatalogues();
 
 signals:
-	void addOnMgrMsg(StelAddOnMgr::AddOnMgrMsg);
-	void dataUpdated(AddOn* addon);
+	//! let's the user know that a restart is required.
+	void restartRequired();
+
+	//! let's addonMgr aware that table views should be refreshed.
 	void updateTableViews();
+
 	void landscapesChanged();
 	void scriptsChanged();
 	void skyCulturesChanged();
-
-private slots:
-	void slotDataUpdated(AddOn* addon);
-//	void downloadThumbnailFinished();
 
 private:
 	QSettings* m_pConfig;		//! instace of main config.ini file
@@ -138,6 +130,10 @@ private:
 
 	//! Load settings from config.ini.
 	void loadConfig();
+
+	//! It will let all table views of 'type' know that they need to refresh.
+	//! @param type AddOn::Type
+	void refreshType(AddOn::Type type);
 };
 
 #endif // _STELADDONMGR_HPP_

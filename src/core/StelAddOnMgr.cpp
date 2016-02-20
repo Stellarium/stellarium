@@ -55,8 +55,6 @@ StelAddOnMgr::StelAddOnMgr()
 	// load settings from config file
 	loadConfig();
 
-	connect(this, SIGNAL(dataUpdated(AddOn*)), this, SLOT(slotDataUpdated(AddOn*)));
-
 	// loading json files
 	reloadCatalogues();
 }
@@ -352,7 +350,6 @@ void StelAddOnMgr::installAddOn(AddOn* addon, bool tryDownload)
 	{
 		// installing files
 		addon->setStatus(AddOn::Installing);
-		emit (dataUpdated(addon));
 		unzip(*addon);
 		// remove zip archive from ~/.stellarium/addon/
 		QFile(addon->getZipPath()).remove();
@@ -364,8 +361,8 @@ void StelAddOnMgr::installAddOn(AddOn* addon, bool tryDownload)
 		 addon->getType() == AddOn::LANG_SKYCULTURE || addon->getType() == AddOn::LANG_STELLARIUM ||
 		 addon->getType() == AddOn::TEXTURE))
 	{
+		emit(restartRequired());
 		addon->setStatus(AddOn::Restart);
-		emit (addOnMgrMsg(RestartRequired));
 	}
 	// something goes wrong (file not found OR corrupt).
 	// if applicable, try downloading it...
@@ -376,7 +373,7 @@ void StelAddOnMgr::installAddOn(AddOn* addon, bool tryDownload)
 	}
 
 	reloadCatalogues();
-	emit (dataUpdated(addon));
+	refreshType(addon->getType());
 }
 
 void StelAddOnMgr::removeAddOn(AddOn* addon)
@@ -429,12 +426,12 @@ void StelAddOnMgr::removeAddOn(AddOn* addon)
 		addon->getType() == AddOn::LANG_SKYCULTURE || addon->getType() == AddOn::LANG_STELLARIUM ||
 		addon->getType() == AddOn::TEXTURE)
 	{
-		emit (addOnMgrMsg(RestartRequired));
+		emit (restartRequired());
 		addon->setStatus(AddOn::Restart);
 	}
 
 	reloadCatalogues();
-	emit (dataUpdated(addon));
+	refreshType(addon->getType());
 }
 
 AddOn* StelAddOnMgr::getAddOnFromZip(QString filePath)
@@ -642,9 +639,8 @@ void StelAddOnMgr::removeAddonFromJson(AddOn *addon, QString jsonPath)
 	}
 }
 
-void StelAddOnMgr::slotDataUpdated(AddOn* addon)
+void StelAddOnMgr::refreshType(AddOn::Type type)
 {
-	AddOn::Type type = addon->getType();
 	if (type == AddOn::LANDSCAPE)
 	{
 		emit (landscapesChanged());
