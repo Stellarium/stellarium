@@ -11,7 +11,7 @@ requirejs.config({
 			"jquery-ui":"ui/jqueryuifixes"
 		},
 		//allow jquery fix to access jquery-ui
-		"ui/jqueryuifixes":{
+		"jquery.ui.touch-punch":{
 			"jquery-ui":"jquery-ui"
 		}
 	},
@@ -21,6 +21,9 @@ requirejs.config({
 		},
 		"jquery-ui":{
 			deps: ["globalize"]
+		},
+		"jquery.ui.touch-punch":{
+			deps: ["jquery-ui"]
 		}
 	}
 });
