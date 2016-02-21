@@ -28,6 +28,7 @@
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
 #include "Planet.hpp"
+#include "StelGui.hpp"
 
 #include <QFont>
 
@@ -438,7 +439,7 @@ private:
 	bool flagIsolatedOrbits;
 
 	class TrailGroup* allTrails;
-	class StelGui* gui;
+	StelGui* gui;
 	LinearFader trailFader;
 	Vec3f trailColor;
 	Vec3f pointerColor;
