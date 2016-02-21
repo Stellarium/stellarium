@@ -1,10 +1,10 @@
 // Author: Qam1
 // Name: Earth Events from Mars
 // License: Public Domain
-// Version: 7.0 
+// Version: 8.0 
 // Description: Earth Events from Mars
 
-// Made on Stellarium 0.14.0
+// Made on Stellarium 0.14.1
 
 
 spd = 4; // speed for screen saver mode in seconds
@@ -1359,7 +1359,7 @@ im[256] = 0.194
 ij[256] = 27.3
 id[257] = "2018-06-21T12:51:02"
 ik[257] = 1.62
-il[257] = -179
+il[257] = -148
 im[257] = 0.2686
 ij[257] = 28.2
 id[258] = "2018-06-27T10:57:38"
@@ -67917,7 +67917,7 @@ LabelMgr.setLabelShow(txt1, true);
 
 pt = sty + pt + 20
 
-txt1 = LabelMgr.labelScreen("Press + / - to toggle", 680 * x, pt*y, false, 15,"#AAAAAA");
+txt1 = LabelMgr.labelScreen("Press = / - to toggle", 680 * x, pt*y, false, 15,"#AAAAAA");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -69211,136 +69211,10 @@ pety = 0;
 
 
 
-if (Me<0)
-{
-while (Me >0)
-{    
-Me = Me + 360;
-}
-}   
 
-if (Me>360)
-{
-while (Me <360)
-{
-Me = Me - 360;
-} 
-}
 
 Mj = Me * rad;
-
-
-if (Me<0)
-{
-while (Me >0)
-{    
-Me = Me + 360;
-}
-}   
-
-if (Me>360)
-{
-while (Me <360)
-{
-Me = Me - 360;
-} 
-}
-
 Ms = Me * rad;
-
-
-
-if (Me<0)
-{
-while (Me >0)
-{    
-Me = Me + 360;
-}
-}   
-
-if (Me>360)
-{
-while (Me <360)
-{
-Me = Me - 360;
-} 
-}
-
-
-
-
-
-
-if (w<0)
-{
-while (w >0)
-{    
-w = w + 360;
-}
-}   
-
-
-if (w>360)
-{
-while (w <360)
-{
-w = w - 360;
-} 
-}
-
-if (Me<0)
-{
-while (Me >0)
-{    
-Me = Me + 360;
-}
-}   
-
-
-
-
-if (Me>360)
-{
-while (Me <360)
-{
-Me = Me - 360;
-} 
-}
-
-
-
-if (N<0)
-{
-while (N >0)
-{    
-N = N + 360;
-}
-}   
-
-if (N>360)
-{
-while (N <360)
-{
-N = N - 360;
-} 
-}
-
-if (ii<0)
-{
-while (ii >0)
-{    
-ii = ii + 360;
-}
-}   
-
-if (ii>360)
-{
-while (ii <360)
-{
-ii = ii - 360;
-} 
-}
-
 ii = ii * rad;
 
 
@@ -69358,7 +69232,7 @@ E2 =  E0 * rad;
 E1 =  E0 - (E2 - (e * Math.sin(E2)) - (Me* rad)) / ( 1 - e * Math.cos(E2));
 
 
-if (Math.abs(E1-E0)< 0.000001)
+if (Math.abs(E1-E0)< 0.0001)
 {
 E4 = 1;
 }
@@ -69585,34 +69459,26 @@ LabelMgr.setLabelShow(txt1, true);
 
 
 
-txt1 = LabelMgr.labelScreen("Total Magnitude:", 10*x, 580*y, false, 20, "#AAFFAA");
+
+txt1 = LabelMgr.labelScreen("Earth Magnitude:", 10*x, 580*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
-txt1 = LabelMgr.labelScreen(tmag.toFixed(3), 200*x, 580*y, false, 20, "#AAFFAA");
-LabelMgr.setLabelShow(txt1, true);
-
-
-
-
-txt1 = LabelMgr.labelScreen("Earth Magnitude:", 10*x, 610*y, false, 20, "#AAFFAA");
-LabelMgr.setLabelShow(txt1, true);
-
-txt1 = LabelMgr.labelScreen(emag[i].toFixed(3), 200*x, 610*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen(emag[i].toFixed(3), 200*x, 580*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 
-txt1 = LabelMgr.labelScreen("Moon Magnitude:", 10*x, 640*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Moon Magnitude:", 10*x, 605*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 if (mfv[i] < 0)
 {
 
-txt1 = LabelMgr.labelScreen(mfv[i].toFixed(3), 200*x, 640*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen(mfv[i].toFixed(3), 200*x, 605*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 }
 else
 {
-txt1 = LabelMgr.labelScreen(mfv[i].toFixed(3), 205*x, 640*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen(mfv[i].toFixed(3), 205*x, 605*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 }
 
@@ -69621,21 +69487,21 @@ LabelMgr.setLabelShow(txt1, true);
 
 
 
-txt1 = LabelMgr.labelScreen("Moon Elongation:", 10*x, 665*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Moon Elongation:", 10*x, 635*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
-txt1 = LabelMgr.labelScreen(im[i].toFixed(3) + degstring, 205*x, 665*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen(im[i].toFixed(3) + degstring, 205*x, 635*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 
 if (il[i] > 0)
 {
-txt1 = LabelMgr.labelScreen("Viewing Longitude:     " + il[i] + "E", 10*x, 695*y, false, 20, "#FF0000");
+txt1 = LabelMgr.labelScreen("Viewing Longitude:     " + il[i] + "E", 10*x, 660*y, false, 20, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
 }
 else
 {
-txt1 = LabelMgr.labelScreen("Viewing Longitude:     " + Math.abs(il[i])+"W", 10*x, 695*y, false, 20, "#FF0000");
+txt1 = LabelMgr.labelScreen("Viewing Longitude:     " + Math.abs(il[i])+"W", 10*x, 660*y, false, 20, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
 }
 
@@ -69874,6 +69740,10 @@ ename = "Inferior Conjunction - Transit";
 
 
 
+
+
+
+
 txt1 = LabelMgr.labelScreen(ename, 450*x, 0*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
@@ -69883,8 +69753,9 @@ LabelMgr.setLabelShow(txt1, true);
 txt1 = LabelMgr.labelScreen("Julian Date:", 700*x, 635*y, false, 15, "#00FF71");
 LabelMgr.setLabelShow(txt1, true);
 
-txt1 = LabelMgr.labelScreen(core.getJDay().toFixed(3), 775*x, 635*y, false, 15, "#00FF71");
+txt1 = LabelMgr.labelScreen(core.getJDay().toFixed(3), 790*x, 635*y, false, 15, "#00FF71");
 LabelMgr.setLabelShow(txt1, true);
+
 
 
 

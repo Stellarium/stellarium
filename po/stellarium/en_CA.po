@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-02-05 10:28+0600\n"
+"POT-Creation-Date: 2016-02-13 20:32+0600\n"
 "PO-Revision-Date: 2015-09-13 08:41+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: English (Canada) <en_CA@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-02-06 05:28+0000\n"
-"X-Generator: Launchpad (build 17908)\n"
+"X-Launchpad-Export-Date: 2016-02-14 05:28+0000\n"
+"X-Generator: Launchpad (build 17925)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:904 src/core/modules/LandscapeMgr.cpp:414
-#: src/core/modules/NebulaMgr.cpp:266 src/core/modules/SolarSystem.cpp:185
+#: src/core/modules/NebulaMgr.cpp:266 src/core/modules/SolarSystem.cpp:183
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:502 src/core/StelCore.cpp:210
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:557
@@ -828,22 +828,22 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "Gas tail length (estimate): %1 Mio km"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:186 src/gui/AstroCalcDialog.cpp:455
+#: src/core/modules/SolarSystem.cpp:184 src/gui/AstroCalcDialog.cpp:455
 #: src/translations.h:62
 msgid "Planets"
 msgstr "Planets"
 
-#: src/core/modules/SolarSystem.cpp:187
+#: src/core/modules/SolarSystem.cpp:185
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:309
 msgid "Planet labels"
 msgstr "Planet labels"
 
-#: src/core/modules/SolarSystem.cpp:188
+#: src/core/modules/SolarSystem.cpp:186
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:313
 msgid "Planet orbits"
 msgstr "Planet orbits"
 
-#: src/core/modules/SolarSystem.cpp:189
+#: src/core/modules/SolarSystem.cpp:187
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Planet trails"
 msgstr "Planet trails"
@@ -942,7 +942,7 @@ msgstr "Night mode"
 msgid "Date and Time"
 msgstr "Date and Time"
 
-#: src/core/StelCore.cpp:209 src/core/StelMovementMgr.cpp:145
+#: src/core/StelCore.cpp:209 src/core/StelMovementMgr.cpp:155
 msgid "Movement and Selection"
 msgstr "Movement and Selection"
 
@@ -1134,19 +1134,19 @@ msgstr "Set home planet to selected planet"
 msgid "Go to home"
 msgstr "Go to home"
 
-#: src/core/StelCore.cpp:260
+#: src/core/StelCore.cpp:261
 msgid "Flip scene horizontally"
 msgstr "Flip scene horizontally"
 
-#: src/core/StelCore.cpp:261
+#: src/core/StelCore.cpp:262
 msgid "Flip scene vertically"
 msgstr "Flip scene vertically"
 
-#: src/core/StelCore.cpp:1664
+#: src/core/StelCore.cpp:1662
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "Correction is disabled. Use only if you know what you are doing!"
 
-#: src/core/StelCore.cpp:1667
+#: src/core/StelCore.cpp:1665
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1157,7 +1157,7 @@ msgstr ""
 "Henriksson in his article <em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 
-#: src/core/StelCore.cpp:1670
+#: src/core/StelCore.cpp:1668
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1166,7 +1166,7 @@ msgstr ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 
-#: src/core/StelCore.cpp:1673
+#: src/core/StelCore.cpp:1671
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1179,7 +1179,7 @@ msgstr ""
 "<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
 "PC program SunTracker Pro."
 
-#: src/core/StelCore.cpp:1677
+#: src/core/StelCore.cpp:1675
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1189,7 +1189,7 @@ msgstr ""
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 
-#: src/core/StelCore.cpp:1681
+#: src/core/StelCore.cpp:1679
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1201,7 +1201,7 @@ msgstr ""
 "relation was also implicitly adopted in the syzygy tables of Goldstine "
 "(1973)."
 
-#: src/core/StelCore.cpp:1685
+#: src/core/StelCore.cpp:1683
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1212,7 +1212,7 @@ msgstr ""
 "article <em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 
-#: src/core/StelCore.cpp:1688
+#: src/core/StelCore.cpp:1686
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1221,7 +1221,7 @@ msgstr ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 
-#: src/core/StelCore.cpp:1691
+#: src/core/StelCore.cpp:1689
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1234,7 +1234,7 @@ msgstr ""
 "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 
-#: src/core/StelCore.cpp:1694
+#: src/core/StelCore.cpp:1692
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1244,7 +1244,7 @@ msgstr ""
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 
-#: src/core/StelCore.cpp:1697
+#: src/core/StelCore.cpp:1695
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1255,11 +1255,11 @@ msgstr ""
 "article <em>Long-term changes in the rotation of the earth - 700 B.C. to "
 "A.D. 1980</em> (%1)."
 
-#: src/core/StelCore.cpp:1700
+#: src/core/StelCore.cpp:1698
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "This algorithm is used in the PC planetarium program Guide 7."
 
-#: src/core/StelCore.cpp:1703
+#: src/core/StelCore.cpp:1701
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -1269,7 +1269,7 @@ msgstr ""
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:1706
+#: src/core/StelCore.cpp:1704
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -1278,7 +1278,7 @@ msgstr ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 
-#: src/core/StelCore.cpp:1709
+#: src/core/StelCore.cpp:1707
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1291,7 +1291,7 @@ msgstr ""
 "Period 1800-1988</em> (%1) as data fit through values given by Stephenson & "
 "Morrison (1984)."
 
-#: src/core/StelCore.cpp:1712
+#: src/core/StelCore.cpp:1710
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -1301,7 +1301,7 @@ msgstr ""
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 
-#: src/core/StelCore.cpp:1715
+#: src/core/StelCore.cpp:1713
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1312,7 +1312,7 @@ msgstr ""
 "article <em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD "
 "1990</em> (%1)."
 
-#: src/core/StelCore.cpp:1718
+#: src/core/StelCore.cpp:1716
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1321,7 +1321,7 @@ msgstr ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 
-#: src/core/StelCore.cpp:1721
+#: src/core/StelCore.cpp:1719
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1331,7 +1331,7 @@ msgstr ""
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 
-#: src/core/StelCore.cpp:1724
+#: src/core/StelCore.cpp:1722
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1340,7 +1340,7 @@ msgstr ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:1727
+#: src/core/StelCore.cpp:1725
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1349,7 +1349,7 @@ msgstr ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 
-#: src/core/StelCore.cpp:1730
+#: src/core/StelCore.cpp:1728
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1359,7 +1359,7 @@ msgstr ""
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 
-#: src/core/StelCore.cpp:1733
+#: src/core/StelCore.cpp:1731
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1371,7 +1371,7 @@ msgstr ""
 "<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
 "<em>Astronomical Algorithms</em> (1991)."
 
-#: src/core/StelCore.cpp:1736
+#: src/core/StelCore.cpp:1734
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1382,7 +1382,7 @@ msgstr ""
 "in article <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 
-#: src/core/StelCore.cpp:1739
+#: src/core/StelCore.cpp:1737
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1395,7 +1395,7 @@ msgstr ""
 "cosine and square function. This is based on a possible periodicy described "
 "by Stephenson (%2). See for more info %3here%4."
 
-#: src/core/StelCore.cpp:1742 src/core/StelCore.cpp:1745
+#: src/core/StelCore.cpp:1740 src/core/StelCore.cpp:1743
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1410,15 +1410,15 @@ msgstr ""
 "Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the "
 "solar, lunar and planetary ephemeris program SOLEX."
 
-#: src/core/StelCore.cpp:1742
+#: src/core/StelCore.cpp:1740
 msgid "Used by default."
 msgstr "Used by default."
 
-#: src/core/StelCore.cpp:1745
+#: src/core/StelCore.cpp:1743
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr ""
 
-#: src/core/StelCore.cpp:1748
+#: src/core/StelCore.cpp:1746
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1429,7 +1429,7 @@ msgstr ""
 "published in article <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 
-#: src/core/StelCore.cpp:1751
+#: src/core/StelCore.cpp:1749
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1440,7 +1440,7 @@ msgstr ""
 "Simons (2000), was published in article <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 
-#: src/core/StelCore.cpp:1754
+#: src/core/StelCore.cpp:1752
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1451,7 +1451,7 @@ msgstr ""
 "Mariam Sultana and Faheem Zaidi was published in <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:1757
+#: src/core/StelCore.cpp:1755
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1460,15 +1460,15 @@ msgstr ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 
-#: src/core/StelCore.cpp:1760 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1758 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "Error"
 
-#: src/core/StelCore.cpp:1810
+#: src/core/StelCore.cpp:1808
 msgid "with meaningless values outside this range"
 msgstr "with meaningless values outside this range"
 
-#: src/core/StelCore.cpp:1836
+#: src/core/StelCore.cpp:1834
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -1476,22 +1476,22 @@ msgstr ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 
-#: src/core/StelCore.cpp:1858 src/core/StelCore.cpp:1863
-#: src/core/StelCore.cpp:1891 src/core/StelCore.cpp:1896
-#: src/core/StelCore.cpp:1901
+#: src/core/StelCore.cpp:1856 src/core/StelCore.cpp:1861
+#: src/core/StelCore.cpp:1889 src/core/StelCore.cpp:1894
+#: src/core/StelCore.cpp:1899
 msgid "with zero values outside this range"
 msgstr "with zero values outside this range"
 
-#: src/core/StelCore.cpp:1868
+#: src/core/StelCore.cpp:1866
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "with a typical 1-second accuracy and zero values outside this range"
 
-#: src/core/StelCore.cpp:1911
+#: src/core/StelCore.cpp:1909
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Valid range of usage: between years %1 and %2, %3."
 
-#: src/core/StelCore.cpp:1913
+#: src/core/StelCore.cpp:1911
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Valid range of usage: between years %1 and %2."
@@ -1667,30 +1667,50 @@ msgstr ""
 msgid "Deep-sky objects background images"
 msgstr "Deep-sky objects background images"
 
-#: src/core/StelMovementMgr.cpp:146 src/gui/StelGui.cpp:191
+#: src/core/StelMovementMgr.cpp:156 src/gui/StelGui.cpp:191
 #: src/StelMainView.cpp:556
 msgid "Miscellaneous"
 msgstr "Miscellaneous"
 
-#: src/core/StelMovementMgr.cpp:146
+#: src/core/StelMovementMgr.cpp:156
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Switch between equatorial and azimuthal mount"
 
-#: src/core/StelMovementMgr.cpp:147
+#: src/core/StelMovementMgr.cpp:157
 msgid "Center on selected object"
 msgstr "Center on selected object"
 
-#: src/core/StelMovementMgr.cpp:148
+#: src/core/StelMovementMgr.cpp:158
 msgid "Zoom in on selected object"
 msgstr "Zoom in on selected object"
 
-#: src/core/StelMovementMgr.cpp:149
+#: src/core/StelMovementMgr.cpp:159
 msgid "Zoom out"
 msgstr "Zoom out"
 
-#: src/core/StelMovementMgr.cpp:150
+#: src/core/StelMovementMgr.cpp:160
 msgid "Track object"
 msgstr "Track object"
+
+#: src/core/StelMovementMgr.cpp:162
+msgid "Look towards East"
+msgstr ""
+
+#: src/core/StelMovementMgr.cpp:163
+msgid "Look towards West"
+msgstr ""
+
+#: src/core/StelMovementMgr.cpp:164
+msgid "Look towards North"
+msgstr ""
+
+#: src/core/StelMovementMgr.cpp:165
+msgid "Look towards South"
+msgstr ""
+
+#: src/core/StelMovementMgr.cpp:166
+msgid "Look towards Zenith"
+msgstr ""
 
 #: src/core/SimbadSearcher.cpp:56
 msgid "Network error"
@@ -2474,79 +2494,79 @@ msgstr "natural"
 msgid "starchart"
 msgstr "starchart"
 
-#: src/gui/SearchDialog.cpp:235
+#: src/gui/SearchDialog.cpp:236
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
 msgstr "Equatorial (J2000.0)"
 
-#: src/gui/SearchDialog.cpp:236
+#: src/gui/SearchDialog.cpp:237
 msgctxt "coordinate system"
 msgid "Equatorial"
 msgstr "Equatorial"
 
-#: src/gui/SearchDialog.cpp:237
+#: src/gui/SearchDialog.cpp:238
 msgctxt "coordinate system"
 msgid "Horizontal"
 msgstr "Horizontal"
 
-#: src/gui/SearchDialog.cpp:238
+#: src/gui/SearchDialog.cpp:239
 msgctxt "coordinate system"
 msgid "Galactic"
 msgstr "Galactic"
 
-#: src/gui/SearchDialog.cpp:239
+#: src/gui/SearchDialog.cpp:240
 msgctxt "coordinate system"
 msgid "Ecliptic"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:240
+#: src/gui/SearchDialog.cpp:241
 msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:268
+#: src/gui/SearchDialog.cpp:269
 msgid "Right ascension"
 msgstr "Right ascension"
 
-#: src/gui/SearchDialog.cpp:271
+#: src/gui/SearchDialog.cpp:272
 msgid "Declination"
 msgstr "Declination"
 
-#: src/gui/SearchDialog.cpp:279
+#: src/gui/SearchDialog.cpp:280
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:945
 msgid "Azimuth"
 msgstr "Azimuth"
 
-#: src/gui/SearchDialog.cpp:282
+#: src/gui/SearchDialog.cpp:283
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
 msgid "Altitude"
 msgstr "Altitude"
 
-#: src/gui/SearchDialog.cpp:292
+#: src/gui/SearchDialog.cpp:293
 msgid "Longitude"
 msgstr "Longitude"
 
-#: src/gui/SearchDialog.cpp:295
+#: src/gui/SearchDialog.cpp:296
 msgid "Latitude"
 msgstr "Latitude"
 
-#: src/gui/SearchDialog.cpp:606
+#: src/gui/SearchDialog.cpp:607
 msgid "Simbad Lookup Error"
 msgstr "Simbad Lookup Error"
 
-#: src/gui/SearchDialog.cpp:614
+#: src/gui/SearchDialog.cpp:615
 msgid "Simbad Lookup"
 msgstr "Simbad Lookup"
 
-#: src/gui/SearchDialog.cpp:785
+#: src/gui/SearchDialog.cpp:796
 msgid "University of Strasbourg (France)"
 msgstr "University of Strasbourg (France)"
 
-#: src/gui/SearchDialog.cpp:786
+#: src/gui/SearchDialog.cpp:797
 msgid "Harvard University (USA)"
 msgstr "Harvard University (USA)"
 
-#: src/gui/SearchDialog.cpp:857
+#: src/gui/SearchDialog.cpp:868
 msgid "Paste and Search"
 msgstr "Paste and Search"
 
@@ -8644,16 +8664,16 @@ msgid "Import orbital elements in MPC format..."
 msgstr "Import orbital elements in MPC format..."
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris Service" is inserted.
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:157
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:158
 #, qt-format
 msgid "Query the MPC's %1:"
 msgstr "Query the MPC's %1:"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:160
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:161
 msgid "Only one result will be returned if the query is successful."
 msgstr "Only one result will be returned if the query is successful."
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:161
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:162
 msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
@@ -8661,7 +8681,7 @@ msgstr ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:168
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:169
 #, qt-format
 msgid ""
 "Comet <i>names</i> need to be prefixed with %1 or %2. If more than one comet "
@@ -8674,7 +8694,7 @@ msgstr ""
 "searching for \"%3\" will return %4, Halley's Comet, but a search for \"%5\" "
 "will return the asteroid %6."
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:209
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:210
 msgid "Select bookmark..."
 msgstr ""
 
@@ -9705,8 +9725,8 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
 msgid ""
-"Helvetios is the Latin for <em>the Helvetian</em> and refers to the Celtic "
-"tribe that lived in Switzerland during the Middle Ages."
+"Helvetios is Celtic for <em>the Helvetian</em> and refers to the Celtic "
+"tribe that lived in Switzerland during antiquity."
 msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
@@ -9769,7 +9789,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid ""
-"Hypatia was a famous Greek astronomer, mathmatician, and philosopher. She "
+"Hypatia was a famous Greek astronomer, mathematician, and philosopher. She "
 "was head of the Neo-Platonic school at Alexandria in the early 5th century, "
 "until murdered by a Christian mob in 415."
 msgstr ""
@@ -9875,7 +9895,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 msgid ""
-"Poltergeist is an name for supernatural beings that create physical "
+"Poltergeist is a name for supernatural beings that create physical "
 "disturbances, from German for <em>noisy ghost</em>."
 msgstr ""
 
@@ -9949,7 +9969,8 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 msgid ""
-"The name originally proposed, Amaterasu, is already used for an asteroid."
+"The name originally proposed, <em>Amaterasu</em>, is already used for an "
+"asteroid."
 msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
@@ -10804,7 +10825,7 @@ msgid "Toggle radiant labels"
 msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:153
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:233
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:234
 msgid "Show settings dialog"
 msgstr ""
 
@@ -11757,149 +11778,149 @@ msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:172
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:173
 msgid "Scenery3d plugin loaded!"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:229
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:230
 msgid "Scenery3d: 3D landscapes"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:232
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:233
 msgid "Toggle 3D landscape"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:234
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:235
 msgid "Show viewpoint dialog"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:235
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:236
 msgid "Toggle shadows"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:236
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:237
 msgid "Toggle debug information"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:237
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:238
 msgid "Toggle location text"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:238
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:239
 msgid "Toggle torchlight"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:239
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:240
 msgid "Reload shaders"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:280
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:281
 msgid "Scenery3d shaders reloaded"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:335
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:336
 msgid "Loading scene. Please be patient!"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:337
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:338
 #, qt-format
 msgid "Loading scene '%1'"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:360
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:361
 msgid "Could not load scene, please check log for error messages!"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:364
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:365
 msgid "Scene successfully loaded."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:423
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:424
 msgid "Could not load scene info, please check log for error messages!"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:447
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:448
 #, qt-format
 msgid "Could not find scene ID for %1"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:480
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:481
 msgid "Please load a scene first!"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:518
 #, qt-format
 msgid "Per-Pixel shading %1."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:518
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:537
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:573
 msgctxt "enable"
 msgid "on"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:518
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:537
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:573
 msgctxt "disable"
 msgid "off"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:537
 #, qt-format
 msgid "Shadows %1."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:541
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:542
 msgid "Shadows deactivated or not possible."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:573
 #, qt-format
 msgid "Surface bumps %1."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:620
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:621
 msgid "Selected cubemap mode not supported, falling back to '6 Textures'"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:717
 #, qt-format
 msgid "Lazy cubemapping: %1"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:717
 msgid "enabled"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:717
 msgid "disabled"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:789
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:790
 msgid "Cubemap size changed"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:791
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:792
 #, qt-format
 msgid "Cubemap size not supported, set to %1"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:812
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:813
 msgid "Shadowmap size changed"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:814
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:815
 #, qt-format
 msgid "Shadowmap size not supported, set to %1"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:927
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:928
 msgid "3D Sceneries"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:930
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:931
 msgid ""
 "<p>3D foreground renderer. Walk around, find and avoid obstructions in your "
 "garden, find and demonstrate possible astronomical alignments in temples, "
