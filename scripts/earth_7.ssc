@@ -1,7 +1,7 @@
 // Author: Qam1
 // Name: Earth and other Planets from Ceres
 // License: Public Domain
-// Version: 7.0
+// Version: 8.0
 // Description: Earth the other visible Planet's Greatest Elongations and Oppositions from Ceres 2000-3000
 
 // Made on Stellarium 0.14.0
@@ -15680,10 +15680,14 @@ StelMovementMgr.setFlagTracking(true);
 core.wait(0.3);
 
 
-txt1 = LabelMgr.labelScreen("Earth and other visible planets Greatest Elongations and Oppositions", 200*x, 20*y, false, 20, "#9AAAFF");
+txt1 = LabelMgr.labelScreen("Earth and other visible planets", 350*x, 20*y, false, 20, "#9AAAFF");
 LabelMgr.setLabelShow(txt1, true);
 
-txt1 = LabelMgr.labelScreen("From Ceres", 400*x, 50*y, false, 20, "#9AAAFF");
+txt1 = LabelMgr.labelScreen("Greatest Elongations and Oppositions", 320*x, 50*y, false, 20, "#9AAAFF");
+LabelMgr.setLabelShow(txt1, true);
+
+
+txt1 = LabelMgr.labelScreen("From Ceres", 450*x, 80*y, false, 20, "#9AAAFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -15691,7 +15695,7 @@ LabelMgr.setLabelShow(txt1, true);
 
 txt1 = LabelMgr.labelScreen(id[f].substring(5,7) + "/" + id[f].substring(0,4) + " to " + id[l].substring(5,7) + "/" + id
 
-[l].substring(0,4), 400*x, 80*y, false, 20, "#9AAAFF");
+[l].substring(0,4), 410*x, 110*y, false, 20, "#9AAAFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -15738,7 +15742,7 @@ LabelMgr.setLabelShow(txt1, true);
 
 
 
-txt1 = LabelMgr.labelScreen("Press + / - to toggle", 380 * x, 650*y, false, 15, "#FF0000");
+txt1 = LabelMgr.labelScreen("Press = / - to toggle", 380 * x, 650*y, false, 15, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
 
 txt1 = LabelMgr.labelScreen("Press [ for Keypress mode", 380 * x, 670*y, false, 15, "#FF0000");
@@ -15749,7 +15753,7 @@ LabelMgr.setLabelShow(txt1, true);
 
 
 
-txt1 = LabelMgr.labelScreen("By Qam1 ", 900*x, 10, false, 25, "#A0801D");
+txt1 = LabelMgr.labelScreen("By Qam1 ", 900*x, 670*y, false, 25, "#A0801D");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -15861,10 +15865,10 @@ if (ss == 0)
 {
 
 
-txt1 = LabelMgr.labelScreen("Press + for next event", 700 * x, 400*y, false, 15, "#FF0000");
+txt1 = LabelMgr.labelScreen("Press = for next event", 700 * x, 400*y, false, 15, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
 
-txt1 = LabelMgr.labelScreen("Press -  for previous event", 700*x, 440*y, false, 15, "#FF0000");
+txt1 = LabelMgr.labelScreen("Press -  for previous event", 700*x, 420*y, false, 15, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -16198,9 +16202,6 @@ core.stopScript();
  
 
 
-txt1 = LabelMgr.labelScreen(ij[i], 400*x, 10*y, false, 30, "#AAFFAA");
-LabelMgr.setLabelShow(txt1, true);
-
 // #&!@)#&
 
 
@@ -16229,21 +16230,21 @@ core.setObserverLocation(il[i], lat, 20, 0, "", "Ceres");
 if (ij[i] < 3)
 {
 
-txt1 = LabelMgr.labelScreen("Earth Greatest Elongation Evening", 700*x, 10*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Earth Greatest Elongation Evening", 10*x, 460*y, false, 20, "#AAFFAA");
 
 if (ij[i] == 2)
 {
-txt1 = LabelMgr.labelScreen("Earth Greatest Elongation Morning", 700*x, 10*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Earth Greatest Elongation Morning", 10*x, 460*y, false, 20, "#AAFFAA");
 }
 
 LabelMgr.setLabelShow(txt1, true);
 
 p1 = "Earth";
 
-txt1 = LabelMgr.labelScreen("Elongation:    " + ik[i] + degstring + woes, 700*x, 40*y, false, 25, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Elongation:    " + ik[i] + degstring + woes, 10*x, 490*y, false, 25, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
-txt1 = LabelMgr.labelScreen("Moon Elong:    " + im[i] + degstring, 700*x, 70*y, false, 25, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Moon Elong:    " + im[i] + degstring, 10*x, 520*y, false, 25, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 }
@@ -16260,18 +16261,18 @@ if (ij[i] < 5)
 p1 = "Mars";
 
 
-txt1 = LabelMgr.labelScreen("Mars Greatest Elongation Evening", 700*x, 10*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Mars Greatest Elongation Evening", 10*x, 460*y, false, 20, "#AAFFAA");
 
 
 if (ij[i] == 4)
 {
-txt1 = LabelMgr.labelScreen("Mars Greatest Elongation Morning", 700*x, 10*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Mars Greatest Elongation Morning", 10*x, 460*y, false, 20, "#AAFFAA");
 }
 
 LabelMgr.setLabelShow(txt1, true);
 
 
-txt1 = LabelMgr.labelScreen("Elongation:    " + ik[i] + degstring + woes, 700*x, 40*y, false, 25, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Elongation:    " + ik[i] + degstring + woes, 10*x, 490*y, false, 25, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -16284,7 +16285,7 @@ LabelMgr.setLabelShow(txt1, true);
 if (ij[i] == 5)
 {
 p1 = "Jupiter";
-txt1 = LabelMgr.labelScreen("Jupiter Opposition", 700*x, 10*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Jupiter Opposition", 10*x, 460*y, false, 20, "#AAFFAA");
 
 LabelMgr.setLabelShow(txt1, true);
 
@@ -16295,12 +16296,12 @@ LabelMgr.setLabelShow(txt1, true);
 if (ij[i] == 6)
 {
 p1 = "Saturn";
-txt1 = LabelMgr.labelScreen("Saturn Opposition", 700*x, 10*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Saturn Opposition", 10*x, 460*y, false, 20, "#AAFFAA");
 
 LabelMgr.setLabelShow(txt1, true);
 
 
-txt1 = LabelMgr.labelScreen("Ring Tilt:    " + im[i].toFixed(2) + degstring, 700*x, 40*y, false, 25, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Ring Tilt:    " + im[i].toFixed(2) + degstring, 10*x, 490*y, false, 25, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 }
@@ -16309,17 +16310,17 @@ LabelMgr.setLabelShow(txt1, true);
 if (ij[i] == 10)
 {
 p1 = "Saturn";
-txt1 = LabelMgr.labelScreen("Jupiter - Saturn Conjunction", 700*x, 10*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Jupiter - Saturn Conjunction", 10*x, 460*y, false, 20, "#AAFFAA");
 
 LabelMgr.setLabelShow(txt1, true);
 
 
-txt1 = LabelMgr.labelScreen("Seperation:    " + ik[i].toFixed(3)+ degstring, 700*x, 40*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Seperation:    " + ik[i].toFixed(3)+ degstring, 10*x, 490*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 
 
-txt1 = LabelMgr.labelScreen("Ring Tilt:     " + im[i].toFixed(3) + degstring, 700*x, 65*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Ring Tilt:     " + im[i].toFixed(3) + degstring, 10*x, 520*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 }
@@ -16329,11 +16330,11 @@ LabelMgr.setLabelShow(txt1, true);
 if (ij[i] == 11)
 {
 p1 = "Earth";
-txt1 = LabelMgr.labelScreen("Earth - Mars Conjunction", 700*x, 10*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Earth - Mars Conjunction", 10*x, 460*y, false, 20, "#AAFFAA");
 
 LabelMgr.setLabelShow(txt1, true);
 
-txt1 = LabelMgr.labelScreen("Seperation:    " + ik[i].toFixed(3)+ degstring, 700*x, 40*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Seperation:    " + ik[i].toFixed(3)+ degstring, 10*x, 490*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -16349,12 +16350,12 @@ LabelMgr.setLabelShow(txt1, true);
 if (ij[i] == 12)
 {
 p1 = "Mars";
-txt1 = LabelMgr.labelScreen("Mars - Jupiter Conjunction", 700*x, 10*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Mars - Jupiter Conjunction", 10*x, 460*y, false, 20, "#AAFFAA");
 
 LabelMgr.setLabelShow(txt1, true);
 
 
-txt1 = LabelMgr.labelScreen("Seperation:    " + ik[i].toFixed(3)+ degstring, 700*x, 40*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Seperation:    " + ik[i].toFixed(3)+ degstring, 10*x, 490*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -16365,12 +16366,12 @@ LabelMgr.setLabelShow(txt1, true);
 if (ij[i] == 13)
 {
 p1 = "Earth";
-txt1 = LabelMgr.labelScreen("Earth - Jupiter Conjunction", 700*x, 10*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Earth - Jupiter Conjunction", 10*x, 460*y, false, 20, "#AAFFAA");
 
 LabelMgr.setLabelShow(txt1, true);
 
 
-txt1 = LabelMgr.labelScreen("Seperation:    " + ik[i].toFixed(3)+ degstring, 700*x, 40*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Seperation:    " + ik[i].toFixed(3)+ degstring, 10*x, 490*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -16381,17 +16382,17 @@ LabelMgr.setLabelShow(txt1, true);
 if (ij[i] == 14)
 {
 p1 = "Saturn";
-txt1 = LabelMgr.labelScreen("Earth - Saturn Conjunction", 700*x, 10*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Earth - Saturn Conjunction", 10*x, 460*y, false, 20, "#AAFFAA");
 
 LabelMgr.setLabelShow(txt1, true);
 
 
-txt1 = LabelMgr.labelScreen("Seperation:    " + ik[i].toFixed(3)+ degstring, 700*x, 40*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Seperation:    " + ik[i].toFixed(3)+ degstring, 10*x, 490*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 
 
-txt1 = LabelMgr.labelScreen("Ring Tilt:     " + im[i].toFixed(3) + degstring, 700*x, 65*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Ring Tilt:     " + im[i].toFixed(3) + degstring, 10*x, 520*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 }
@@ -16401,17 +16402,17 @@ LabelMgr.setLabelShow(txt1, true);
 if (ij[i] == 15)
 {
 p1 = "Saturn";
-txt1 = LabelMgr.labelScreen("Mars - Saturn Conjunction", 700*x, 10*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Mars - Saturn Conjunction", 10*x, 460*y, false, 20, "#AAFFAA");
 
 LabelMgr.setLabelShow(txt1, true);
 
 
-txt1 = LabelMgr.labelScreen("Seperation:    " + ik[i].toFixed(3)+ degstring, 700*x, 40*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Seperation:    " + ik[i].toFixed(3)+ degstring, 10*x, 490*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 
 
-txt1 = LabelMgr.labelScreen("Ring Tilt:     " + im[i].toFixed(3) + degstring, 700*x, 65*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Ring Tilt:     " + im[i].toFixed(3) + degstring, 10*x, 520*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 }
@@ -16493,12 +16494,12 @@ ename = "Jupiter - Kaus Borealis Conjunction"
 
 
 p1 = "Jupiter";
-txt1 = LabelMgr.labelScreen(ename, 700*x, 10*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen(ename, 10*x, 460*y, false, 20, "#AAFFAA");
 
 LabelMgr.setLabelShow(txt1, true);
 
 
-txt1 = LabelMgr.labelScreen("Seperation:    " + ik[i].toFixed(3)+ degstring, 700*x, 40*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Seperation:    " + ik[i].toFixed(3)+ degstring, 10*x, 490*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -16510,7 +16511,7 @@ if (ij[i] == 33)
 {
 p1 = "Jupiter";
 
-txt1 = LabelMgr.labelScreen("Jupiter in Circlet", 700*x, 10*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Jupiter in Circlet", 10*x, 460*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -16544,12 +16545,12 @@ core.wait(wt);
 
 if (il[i] > 0)
 {
-txt1 = LabelMgr.labelScreen("Viewing Longitude: "  + il[i] + "E", 700*x, 100*y, false, 20, "#FF0000");
+txt1 = LabelMgr.labelScreen("Viewing Longitude: "  + il[i] + "E", 10*x, 560*y, false, 20, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
 }
 else
 {
-txt1 = LabelMgr.labelScreen("Viewing Longitude: " + Math.abs(il[i])+"W", 700*x, 100*y, false, 20, "#FF0000");
+txt1 = LabelMgr.labelScreen("Viewing Longitude: " + Math.abs(il[i])+"W", 10*x, 560*y, false, 20, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
 }
 
@@ -16563,12 +16564,12 @@ else
 
 if (il[i] > 0)
 {
-txt1 = LabelMgr.labelScreen("Viewing Longitude: " + il[i] + "E", 700*x, 100*y, false, 20, "#FF0000");
+txt1 = LabelMgr.labelScreen("Viewing Longitude: " + il[i] + "E", 10*x, 560*y, false, 20, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
 }
 else
 {
-txt1 = LabelMgr.labelScreen("Viewing Longitude: " + Math.abs(il[i])+"W", 700*x, 100*y, false, 20, "#FF0000");
+txt1 = LabelMgr.labelScreen("Viewing Longitude: " + Math.abs(il[i])+"W", 10*x, 560*y, false, 20, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
 }
 

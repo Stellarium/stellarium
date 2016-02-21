@@ -7,20 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-05 10:28+0600\n"
-"PO-Revision-Date: 2016-02-05 07:06+0000\n"
+"POT-Creation-Date: 2016-02-13 20:32+0600\n"
+"PO-Revision-Date: 2016-02-20 11:51+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-02-06 05:12+0000\n"
-"X-Generator: Launchpad (build 17908)\n"
+"X-Launchpad-Export-Date: 2016-02-21 05:13+0000\n"
+"X-Generator: Launchpad (build 17925)\n"
 "Language: bn\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:904 src/core/modules/LandscapeMgr.cpp:414
-#: src/core/modules/NebulaMgr.cpp:266 src/core/modules/SolarSystem.cpp:185
+#: src/core/modules/NebulaMgr.cpp:266 src/core/modules/SolarSystem.cpp:183
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:502 src/core/StelCore.cpp:210
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:557
@@ -829,22 +829,22 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "গ্যাসীয় লেজটির দৈর্ঘ্য (আনুমানিক) : %1 মিলিয়ন কিমি"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:186 src/gui/AstroCalcDialog.cpp:455
+#: src/core/modules/SolarSystem.cpp:184 src/gui/AstroCalcDialog.cpp:455
 #: src/translations.h:62
 msgid "Planets"
 msgstr "গ্রহ"
 
-#: src/core/modules/SolarSystem.cpp:187
+#: src/core/modules/SolarSystem.cpp:185
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:309
 msgid "Planet labels"
 msgstr "গ্রহের নাম"
 
-#: src/core/modules/SolarSystem.cpp:188
+#: src/core/modules/SolarSystem.cpp:186
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:313
 msgid "Planet orbits"
 msgstr "গ্রহের কক্ষপথ"
 
-#: src/core/modules/SolarSystem.cpp:189
+#: src/core/modules/SolarSystem.cpp:187
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Planet trails"
 msgstr "গ্রহের গমনপথ"
@@ -944,7 +944,7 @@ msgstr "রাত্রিকালীন প্রদর্শণ সুবি�
 msgid "Date and Time"
 msgstr "তারিখ ও সময়"
 
-#: src/core/StelCore.cpp:209 src/core/StelMovementMgr.cpp:145
+#: src/core/StelCore.cpp:209 src/core/StelMovementMgr.cpp:155
 msgid "Movement and Selection"
 msgstr "পরিচালনা এবং নির্বাচন"
 
@@ -1136,20 +1136,20 @@ msgstr "নির্বাচিত গ্রহটি বাড়ি হিসা
 msgid "Go to home"
 msgstr "নিজ স্থানে প্রত্যাবর্তন করুন"
 
-#: src/core/StelCore.cpp:260
+#: src/core/StelCore.cpp:261
 msgid "Flip scene horizontally"
 msgstr "আড়াআড়ি ভাবে দৃশ্যপট ঘোরান"
 
-#: src/core/StelCore.cpp:261
+#: src/core/StelCore.cpp:262
 msgid "Flip scene vertically"
 msgstr "লম্বালম্বিভাবে দৃশ্যপট ঘোরান"
 
-#: src/core/StelCore.cpp:1664
+#: src/core/StelCore.cpp:1662
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "সংশোধন প্রনালি নিস্ক্রিয় করা আছে । সম্যক ধারণা থাকলে তবেই সক্রিয় করুন ।"
 
-#: src/core/StelCore.cpp:1667
+#: src/core/StelCore.cpp:1665
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1161,7 +1161,7 @@ msgstr ""
 "(%1) নামক প্রবন্ধে এটি ব্যবহার করেছেন । বিস্তারিত তথ্য জানতে %2এখানে%3 দেখুন "
 "।"
 
-#: src/core/StelCore.cpp:1670
+#: src/core/StelCore.cpp:1668
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1170,7 +1170,7 @@ msgstr ""
 "এই বিখ্যাত সূত্রটি G. M. Clemence তাঁর  <em>On the system of astronomical "
 "constants</em> (%1) নামক প্রবন্ধে প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1673
+#: src/core/StelCore.cpp:1671
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1183,7 +1183,7 @@ msgstr ""
 "<em>Astronomical Formulae for Calculators</em> নামক প্রবন্ধে এটি ব্যবহার "
 "করেছেন ।"
 
-#: src/core/StelCore.cpp:1677
+#: src/core/StelCore.cpp:1675
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1193,7 +1193,7 @@ msgstr ""
 "প্রবর্তিত <em>জ্যোতির্বৈজ্ঞানিক পঞ্জিকা</em> ও <em>Canon of Solar "
 "Eclipses</em> নামক প্রবন্ধে গৃহীত হয়েছে ।"
 
-#: src/core/StelCore.cpp:1681
+#: src/core/StelCore.cpp:1679
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1205,7 +1205,7 @@ msgstr ""
 "তালিকা দেওয়া আছে । এই একই সম্পর্ক Goldstine (১৯৭৩) প্রবর্তিত syzygy ছকেও "
 "গৃহিত হয়েছে ।"
 
-#: src/core/StelCore.cpp:1685
+#: src/core/StelCore.cpp:1683
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1216,7 +1216,7 @@ msgstr ""
 "observations</em> (%1) নামক প্রবন্ধে P. M. Muller এবং F. R. Stephenson এই "
 "সমীকরনটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1688
+#: src/core/StelCore.cpp:1686
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1225,7 +1225,7 @@ msgstr ""
 "<em>Pre-Telescopic Astronomical Observations</em> (%1) নামক প্রবন্ধে P. M. "
 "Muller এবং F. R. Stephenson এই সমীকরনটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1691
+#: src/core/StelCore.cpp:1689
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1239,7 +1239,7 @@ msgstr ""
 "period 1800-1975</em> (%1) নামক প্রবন্ধে L. D. Schmadel এবং G. Zech প্রকাশ "
 "করেন ।"
 
-#: src/core/StelCore.cpp:1694
+#: src/core/StelCore.cpp:1692
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1249,7 +1249,7 @@ msgstr ""
 "and Tables from -4000 to +2800</em> (১৯৮৬) ও RedShift নামক কম্পিউটার "
 "প্রোগ্রামে গৃহিত হয়েছে ।"
 
-#: src/core/StelCore.cpp:1697
+#: src/core/StelCore.cpp:1695
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1260,13 +1260,13 @@ msgstr ""
 "rotation of the earth - 700 B.C. to A.D. 1980</em> (%1) নামক প্রবন্ধে এই "
 "সূত্রটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1700
+#: src/core/StelCore.cpp:1698
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "Guide নামক কম্পিউটার প্রোগ্রামের ৭ম সংস্করণে এই কার্যপ্রনালীটি ব্যবহৃত হয়েছে "
 "।"
 
-#: src/core/StelCore.cpp:1703
+#: src/core/StelCore.cpp:1701
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -1276,7 +1276,7 @@ msgstr ""
 "Year Canon of Lunar Eclipses: 1986-2035</em> (১৯৮৯) নামক প্রবন্ধে F. Espenak "
 "এই কার্যপ্রনালীটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1706
+#: src/core/StelCore.cpp:1704
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -1285,7 +1285,7 @@ msgstr ""
 "২১৩৭ খ্রীষ্টপূর্বাব্দ থেকে ১৭১৫ খ্রীষ্টাব্দ পর্যন্ত ঘটা সূর্যগ্রহণগুলির "
 "মধ্যের ৩১টির সংগৃহিত তথ্য থেকে K.M. Borkowski (%1) এই সূত্রটি তৈরী করেছেন ।"
 
-#: src/core/StelCore.cpp:1709
+#: src/core/StelCore.cpp:1707
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1297,7 +1297,7 @@ msgstr ""
 "সমীকরনটি <em>Empirical Transformations from U.T. to E.T. for the Period 1800-"
 "1988</em> (%1) নামক প্রবন্ধে L. D. Schmadel এবং G. Zech প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1712
+#: src/core/StelCore.cpp:1710
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -1307,7 +1307,7 @@ msgstr ""
 "4000 B.C. to A.D. 8000</em> (১৯৯১) প্রবন্ধে চাঁদ সংক্রান্ত ELP 2000-85 "
 "মতবাদের সংক্ষিপ্ত রূপটিতে এই সূত্রটি গৃহিত হয়েছে ।"
 
-#: src/core/StelCore.cpp:1715
+#: src/core/StelCore.cpp:1713
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1318,7 +1318,7 @@ msgstr ""
 "Earth's Rotation: 700 BC to AD 1990</em> (%1) নামক প্রবন্ধে এই সূত্রটি "
 "প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1718
+#: src/core/StelCore.cpp:1716
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1327,7 +1327,7 @@ msgstr ""
 "F. R. Stephenson তাঁর রচিত<em>Historical Eclipses and Earth's Rotation</em> "
 "(%1) বইয়ে এই সূত্রটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1721
+#: src/core/StelCore.cpp:1719
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1338,7 +1338,7 @@ msgstr ""
 "তালিকা ও তার বাইরের দিনগুলির জন্য Chapront, Chapront-Touze এবং Francou "
 "(১৯৯৭) প্রবর্তিত অপেক্ষক যোগ করা হয়েছে ।"
 
-#: src/core/StelCore.cpp:1724
+#: src/core/StelCore.cpp:1722
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1347,7 +1347,7 @@ msgstr ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "তার ওয়েবসাইট %1JPL Horizons%2 এ এই সূত্র ব্যবহার করে ।"
 
-#: src/core/StelCore.cpp:1727
+#: src/core/StelCore.cpp:1725
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1356,7 +1356,7 @@ msgstr ""
 "J. Meeus এবং L. Simons তাঁদের প্রবন্ধ <em>Polynomial approximations to Delta "
 "T, 1620-2000 AD</em> (%1) তে এই বহুপদী সমীকরনটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1730
+#: src/core/StelCore.cpp:1728
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1366,7 +1366,7 @@ msgstr ""
 "রচিত <em>Astronomy on the Personal Computer</em> (২০০০) এর ৪র্থ সংস্করণে "
 "পাওয়া যায় ।"
 
-#: src/core/StelCore.cpp:1733
+#: src/core/StelCore.cpp:1731
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1378,7 +1378,7 @@ msgstr ""
 "Tabulations</em> (২০০২) এ প্রকাশ করেন । যদিও এটির ভিত্তি Jean Meeus এর "
 "<em>Astronomical Algorithms</em> (১৯৯১) ।"
 
-#: src/core/StelCore.cpp:1736
+#: src/core/StelCore.cpp:1734
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1389,7 +1389,7 @@ msgstr ""
 "the Earth's clock error %1T and the calculation of eclipses</em> (%2) এর "
 "একটি সংযোজনে (%3) এই গুরুত্বপূর্ণ সমাধানটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1739
+#: src/core/StelCore.cpp:1737
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1403,7 +1403,7 @@ msgstr ""
 "পর্যায়বৃত্তির উপর ভিত্তি করে নির্ণয় করা হয়েছে । আরও তথ্যের জন্য %3এখানে%4 "
 "দেখুন ।"
 
-#: src/core/StelCore.cpp:1742 src/core/StelCore.cpp:1745
+#: src/core/StelCore.cpp:1740 src/core/StelCore.cpp:1743
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1419,15 +1419,15 @@ msgstr ""
 "গ্রহ উপগ্রহ ইত্যাদির পঞ্জিকা নির্ণয়ের জন্য ব্যবহৃত SOLEX নামক একটি "
 "প্রোগ্রামে এটি ব্যবহার করা হয়েছে ।"
 
-#: src/core/StelCore.cpp:1742
+#: src/core/StelCore.cpp:1740
 msgid "Used by default."
 msgstr "প্রারম্ভিক সূচনা হিসেবে ব্যবহার করা হয়ে থাকে ।"
 
-#: src/core/StelCore.cpp:1745
+#: src/core/StelCore.cpp:1743
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "সংযোজিত সংস্করণ, চন্দ্র জনিত অতিরিক্ত ত্বরণ উপেক্ষিত"
 
-#: src/core/StelCore.cpp:1748
+#: src/core/StelCore.cpp:1746
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1438,7 +1438,7 @@ msgstr ""
 "<em>Ancient eclipses and dating the fall of Babylon</em> (%1) প্রবন্ধে "
 "প্রকাশিত হয় ।"
 
-#: src/core/StelCore.cpp:1751
+#: src/core/StelCore.cpp:1749
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1450,7 +1450,7 @@ msgstr ""
 "DeltaT</em> (%1) প্রবন্ধে প্রকাশিত হয় যা ২০১৩ সালে Sana Islam পুনরুত্থাপন "
 "করেন ।"
 
-#: src/core/StelCore.cpp:1754
+#: src/core/StelCore.cpp:1752
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1461,7 +1461,7 @@ msgstr ""
 "<em>Delta T: Polynomial Approximation of Time Period 1620-2013</em> (%1) "
 "নামক প্রবন্ধে প্রকাশ করেন । এটিতেমাত্র ০.৬ সেকেন্ডের এদিক ওদিক হয় ।"
 
-#: src/core/StelCore.cpp:1757
+#: src/core/StelCore.cpp:1755
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1469,15 +1469,15 @@ msgid ""
 msgstr ""
 "এটি %1T নির্ণয় করার জন্য ব্যবহারকারী প্রদত্ত সহগ যুক্ত দ্বিঘাত সমীকরন ।"
 
-#: src/core/StelCore.cpp:1760 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1758 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "ত্রুটি"
 
-#: src/core/StelCore.cpp:1810
+#: src/core/StelCore.cpp:1808
 msgid "with meaningless values outside this range"
 msgstr "এই সীমার বাইরের মানগুলি অর্থহীন যা কোন কাজের নয়"
 
-#: src/core/StelCore.cpp:1836
+#: src/core/StelCore.cpp:1834
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -1485,24 +1485,24 @@ msgstr ""
 "গড়ে সর্বনিম্ন ১ সেকেন্ড ও সর্বোচ্চ ১.৯ সেকেন্ড ত্রুটি থাকতে পারে এবং এই "
 "সীমার বাইরের মানগুলি অর্থহীন যা কোন কাজের নয়"
 
-#: src/core/StelCore.cpp:1858 src/core/StelCore.cpp:1863
-#: src/core/StelCore.cpp:1891 src/core/StelCore.cpp:1896
-#: src/core/StelCore.cpp:1901
+#: src/core/StelCore.cpp:1856 src/core/StelCore.cpp:1861
+#: src/core/StelCore.cpp:1889 src/core/StelCore.cpp:1894
+#: src/core/StelCore.cpp:1899
 msgid "with zero values outside this range"
 msgstr "এই সীমার বাইরের মান সবসময় শূন্য হয়"
 
-#: src/core/StelCore.cpp:1868
+#: src/core/StelCore.cpp:1866
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "সচরাচর হিসাবে ১ সেকেন্ডেরও কম ত্রুটি থাকে এবং এই সীমার বাইরের মান সবসময় "
 "শূন্য হয়"
 
-#: src/core/StelCore.cpp:1911
+#: src/core/StelCore.cpp:1909
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "ব্যবহারিক সীমা : %1 থেকে %2 বছরের মধ্যে , %3 ।"
 
-#: src/core/StelCore.cpp:1913
+#: src/core/StelCore.cpp:1911
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "ব্যবহারিক সীমা : %1 থেকে %2 বছরের মধ্যে ।"
@@ -1684,30 +1684,50 @@ msgstr "আহ্নিকগতি অনুসারে সময় : %1"
 msgid "Deep-sky objects background images"
 msgstr "মহাজাগতিক জ্যোতিষ্কগুলির ছবি"
 
-#: src/core/StelMovementMgr.cpp:146 src/gui/StelGui.cpp:191
+#: src/core/StelMovementMgr.cpp:156 src/gui/StelGui.cpp:191
 #: src/StelMainView.cpp:556
 msgid "Miscellaneous"
 msgstr "অন্যান্য"
 
-#: src/core/StelMovementMgr.cpp:146
+#: src/core/StelMovementMgr.cpp:156
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "নিরক্ষীয় এবং দিগংশিক দৃষ্টির মধ্যে অদলবদল"
 
-#: src/core/StelMovementMgr.cpp:147
+#: src/core/StelMovementMgr.cpp:157
 msgid "Center on selected object"
 msgstr "জ্যোতিষ্কটিকে দৃশ্যপটের মাঝে আনুন"
 
-#: src/core/StelMovementMgr.cpp:148
+#: src/core/StelMovementMgr.cpp:158
 msgid "Zoom in on selected object"
 msgstr "আরও কাছে থেকে দেখুন"
 
-#: src/core/StelMovementMgr.cpp:149
+#: src/core/StelMovementMgr.cpp:159
 msgid "Zoom out"
 msgstr "আরও দূর থেকে দেখুন"
 
-#: src/core/StelMovementMgr.cpp:150
+#: src/core/StelMovementMgr.cpp:160
 msgid "Track object"
 msgstr "নির্বাচিত জ্যোতিষ্কটিকে অনুসরণ করুন"
+
+#: src/core/StelMovementMgr.cpp:162
+msgid "Look towards East"
+msgstr "পূর্ব দিকে দেখুন"
+
+#: src/core/StelMovementMgr.cpp:163
+msgid "Look towards West"
+msgstr "পশ্চিম দিকে দেখুন"
+
+#: src/core/StelMovementMgr.cpp:164
+msgid "Look towards North"
+msgstr "উত্তর দিকে দেখুন"
+
+#: src/core/StelMovementMgr.cpp:165
+msgid "Look towards South"
+msgstr "দক্ষিন দিকে দেখুন"
+
+#: src/core/StelMovementMgr.cpp:166
+msgid "Look towards Zenith"
+msgstr "উপরের দিকে দেখুন"
 
 #: src/core/SimbadSearcher.cpp:56
 msgid "Network error"
@@ -2492,79 +2512,79 @@ msgstr "স্বাভাবিক দৃশ্যপট"
 msgid "starchart"
 msgstr "নক্ষত্রমন্ডলের নকশা"
 
-#: src/gui/SearchDialog.cpp:235
+#: src/gui/SearchDialog.cpp:236
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
 msgstr "ভূ-বিষুব স্থানাঙ্ক (J2000.0 অনুযায়ী)"
 
-#: src/gui/SearchDialog.cpp:236
+#: src/gui/SearchDialog.cpp:237
 msgctxt "coordinate system"
 msgid "Equatorial"
 msgstr "ভূ-বিষুব স্থানাঙ্ক"
 
-#: src/gui/SearchDialog.cpp:237
+#: src/gui/SearchDialog.cpp:238
 msgctxt "coordinate system"
 msgid "Horizontal"
 msgstr "দিগন্ত ভিত্তিক স্থানাঙ্ক"
 
-#: src/gui/SearchDialog.cpp:238
+#: src/gui/SearchDialog.cpp:239
 msgctxt "coordinate system"
 msgid "Galactic"
 msgstr "ছায়াপথ কেন্দ্রিক স্থানাঙ্ক"
 
-#: src/gui/SearchDialog.cpp:239
+#: src/gui/SearchDialog.cpp:240
 msgctxt "coordinate system"
 msgid "Ecliptic"
 msgstr "সূর্যের বার্ষিক পরিক্রমণ পথ"
 
-#: src/gui/SearchDialog.cpp:240
+#: src/gui/SearchDialog.cpp:241
 msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
 msgstr "সূর্যের বার্ষিক পরিক্রমণ পথ (J2000.0 অনুযায়ী)"
 
-#: src/gui/SearchDialog.cpp:268
+#: src/gui/SearchDialog.cpp:269
 msgid "Right ascension"
 msgstr "বিষুবাংশ"
 
-#: src/gui/SearchDialog.cpp:271
+#: src/gui/SearchDialog.cpp:272
 msgid "Declination"
 msgstr "বিষুবলম্ব"
 
-#: src/gui/SearchDialog.cpp:279
+#: src/gui/SearchDialog.cpp:280
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:945
 msgid "Azimuth"
 msgstr "দিগংশ"
 
-#: src/gui/SearchDialog.cpp:282
+#: src/gui/SearchDialog.cpp:283
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
 msgid "Altitude"
 msgstr "উন্নতি কোণ"
 
-#: src/gui/SearchDialog.cpp:292
+#: src/gui/SearchDialog.cpp:293
 msgid "Longitude"
 msgstr "দ্রাঘিমাংশ"
 
-#: src/gui/SearchDialog.cpp:295
+#: src/gui/SearchDialog.cpp:296
 msgid "Latitude"
 msgstr "অক্ষাংশ"
 
-#: src/gui/SearchDialog.cpp:606
+#: src/gui/SearchDialog.cpp:607
 msgid "Simbad Lookup Error"
 msgstr "সিমবাড তালিকায় অনুসন্ধানে ত্রুটি"
 
-#: src/gui/SearchDialog.cpp:614
+#: src/gui/SearchDialog.cpp:615
 msgid "Simbad Lookup"
 msgstr "সিমবাড তালিকায় অনুসন্ধান"
 
-#: src/gui/SearchDialog.cpp:785
+#: src/gui/SearchDialog.cpp:796
 msgid "University of Strasbourg (France)"
 msgstr "স্ট্রসবুর্গ বিশ্ববিদ্যালয় (ফ্রান্স)"
 
-#: src/gui/SearchDialog.cpp:786
+#: src/gui/SearchDialog.cpp:797
 msgid "Harvard University (USA)"
 msgstr "হার্ভাড বিশ্ববিদ্যালয় (আমেরিকা)"
 
-#: src/gui/SearchDialog.cpp:857
+#: src/gui/SearchDialog.cpp:868
 msgid "Paste and Search"
 msgstr "অনুকৃত নাম অনুসন্ধান করুন"
 
@@ -3168,7 +3188,7 @@ msgstr "তাপী-গুয়ারানী"
 
 #: src/translations.h:190
 msgid "Tongan"
-msgstr "টোংগা"
+msgstr "তোংয়া"
 
 #: src/translations.h:191
 msgid "Western"
@@ -4417,7 +4437,7 @@ msgstr "টিউনিসিয়া"
 
 #: src/translations.h:536
 msgid "Tonga"
-msgstr "টোংগা"
+msgstr "তোংয়া"
 
 #: src/translations.h:537
 msgid "Turkey"
@@ -8696,16 +8716,16 @@ msgid "Import orbital elements in MPC format..."
 msgstr "MPC format-এ প্রদত্ত কক্ষপথ সংক্রান্ত তথ্য আমদানি করুন"
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris Service" is inserted.
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:157
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:158
 #, qt-format
 msgid "Query the MPC's %1:"
 msgstr "%1 এ উল্কা বা ধূমকেতু অনুসন্ধান :"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:160
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:161
 msgid "Only one result will be returned if the query is successful."
 msgstr "অনুসন্ধান সফল হলে শুধুমাত্র একটিই ফলাফল দেখাবে ।"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:161
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:162
 msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
@@ -8713,7 +8733,7 @@ msgstr ""
 "ধূমকেতু এবং গ্রহাণু উভয়কেই তাদের ক্রমসংখ্যা, নাম (ইংরাজীতে) বা ডাক নাম দিয়ে "
 "অনুসন্ধান করা  যাবে ।"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:168
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:169
 #, qt-format
 msgid ""
 "Comet <i>names</i> need to be prefixed with %1 or %2. If more than one comet "
@@ -8726,7 +8746,7 @@ msgstr ""
 "অনুসন্ধানে %4 (হ্যালীর ধূমকেতু) দেখায়, কিন্তু  \"%5\" অনুসন্ধানে %6 (উল্কা) "
 "দেখায় ।"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:209
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:210
 msgid "Select bookmark..."
 msgstr "বুকমার্ক বাছুন ..."
 
@@ -9509,12 +9529,12 @@ msgstr "মঙ্গলের মত"
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:949
 msgid "Terran"
-msgstr "পৃথিবীর মত"
+msgstr "পার্থিব"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:951
 msgid "Superterran"
-msgstr "কয়েকগুন পৃথিবীর মত"
+msgstr "বৃহৎ পার্থিব"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:953
@@ -9767,6 +9787,8 @@ msgid ""
 "Orbitar is a contrived word paying homage to the space launch and orbital "
 "operations of NASA."
 msgstr ""
+"নাসার বিবিধ মহাকাশযান প্রবর্তন ও কাক্ষিক কার্যকলাপের প্রতি শ্রদ্ধা জানাতে "
+"অর্বিটার নামটি রাখা হয়েছে ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:190
 msgid "Chalawan is a mythological crocodile king from a Thai folktale."
@@ -9786,9 +9808,11 @@ msgstr "থাপাও ক্যা ছিলেন থাই লোককথ�
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
 msgid ""
-"Helvetios is the Latin for <em>the Helvetian</em> and refers to the Celtic "
-"tribe that lived in Switzerland during the Middle Ages."
+"Helvetios is Celtic for <em>the Helvetian</em> and refers to the Celtic "
+"tribe that lived in Switzerland during antiquity."
 msgstr ""
+"হেলভেতিয়স কথাটির বুৎপত্তি সেলটিক শব্দ <em>the Helvetian</em> বা হেলভেশিয়ান "
+"থেকে । সুইজারল্যান্ডে বসবাসকারী প্রাচীন সেলটিক গোষ্ঠীদের এই নামে ডাকা হত ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid ""
@@ -9868,19 +9892,27 @@ msgid ""
 "enshrine Amaterasu, the Shinto goddess of the Sun, born from the left eye of "
 "the god Izanagi."
 msgstr ""
+"<em>আমাটেরু</em> হল সেই সব জাপানী পবিত্র স্থল যেখানে আমাটেরাসু সংরক্ষিত করা "
+"আছে । আমাটেরাসু হলেন সিন্টো ধর্মাবলম্বীদের কাছে সূর্যের দেবী, যিনি ভগবান "
+"ইসানাগির বাম চোখ থেকে প্রকট হয়েছিলেন ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid ""
-"Hypatia was a famous Greek astronomer, mathmatician, and philosopher. She "
+"Hypatia was a famous Greek astronomer, mathematician, and philosopher. She "
 "was head of the Neo-Platonic school at Alexandria in the early 5th century, "
 "until murdered by a Christian mob in 415."
 msgstr ""
+"হাইপ্যাশিয়া ছিলেন ৫শ মতকের একজন বিখ্যাত মহিলা গ্রীক জ্যোতির্বিজ্ঞানী, "
+"গণিতজ্ঞ ও দার্শনিক । তিনি আলেক্সান্দ্রিয়ার নব্য প্লেটোনীয় স্কুলের প্রধান "
+"ছিলেন । সেইসময়ের এক উগ্র খ্রীষ্টান দাঙ্গায় তাঁর অকালমৃত্যু হয় ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid ""
 "Ran is the Norse goddess of the sea, who stirs up the waves and captures "
 "sailors with her net."
 msgstr ""
+"রাং হলেন নরদেশীয় সমুদ্রের দেবী, যিনি সমুদ্রে বিশাল ঢেউ তৈরী করেন এবং "
+"নাবিকদের জালে করে বন্দী বানান ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid ""
@@ -9888,6 +9920,9 @@ msgid ""
 "<em>Ran</em> both represent the <em>Jotuns</em> who reign in the outer "
 "Universe; together they had nine daughters."
 msgstr ""
+"এয়েগির হলেন রাং এর স্বামী ও সমুদ্রের দেবতা । <em>এয়েগির</em> এবং "
+"<em>রাং</em> দুজনেই <em>Jotuns</em> বা ইয়তুনস বর্গের প্রতিনিধি ছিলেন এবং "
+"সমগ্র বাইরের বিশ্বে রাজত্ব করতেন । তাঁদের নটি মেয়ে ছিল ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 msgid ""
@@ -9916,6 +9951,8 @@ msgid ""
 "Celtic mythologies of Ireland and Scotland, and may be related to the Gallo-"
 "Roman deity <em>Ogmios</em>."
 msgstr ""
+"স্কটল্যান্ড ও আয়ারল্যান্ডের সেলটিক রূপকথা অনুযায়ী ওঘমা হলেন বাগ্নিতা, বিদ্যা "
+"ও শক্তির দেবী । আবার অনেকে এঁকে রোমান দেবতা <em>ওগমিয়স</em> বলেও মনে করেণ ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
 msgid "Smertrios was a Gallic deity of war."
@@ -9979,28 +10016,36 @@ msgid ""
 "Thestius. Leda was a Greek queen, mother of Pollux and of his twin Castor, "
 "and of Helen and Clytemnestra."
 msgstr ""
+"থেসটিয়াস হল লিডা ও তার বোন আলথেই এর বংশ নাম । কারণ তাদের পিতা ছিলেন থেসটিয়ুস "
+"। লিডা ছিলেন একজন গ্রীক রানী এবং পোলাক্স ও ক্যাস্টর নামক যমজ পুত্র এবং হেলেন "
+"ও ক্লিটেমিন্সত্রা নামক দুই কন্যার মা ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
 msgid ""
 "Lich is a fictional undead creature known for controlling other undead "
 "creatures with magic."
 msgstr ""
+"লিচ হল বিশাল এক দৈত্য যে জাদু করে অন্যান্য দৈত্যদের দিয়ে মর্জিমাফিক কাজ করায় "
+"।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
 msgid "Draugr refers to undead creatures in Norse mythology."
-msgstr ""
+msgstr "নরওয়ের রূপকথা অনুযায়ী দ্রাউগ বলতে পৈশাচিক জীবদের বোঝায় ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 msgid ""
-"Poltergeist is an name for supernatural beings that create physical "
+"Poltergeist is a name for supernatural beings that create physical "
 "disturbances, from German for <em>noisy ghost</em>."
 msgstr ""
+"জার্মান শব্দ পোল্টেগেইস্ট বলতে <em>উপদ্রবকারী ভুত</em> বা শারিরীক গোলোযোগ "
+"সৃষ্টিকারী অশরিরীদের বোঝায় ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
 msgid ""
 "Phobetor is a Greek mythological deity of nightmares, the son of Nyx, the "
 "primordial deity of night."
 msgstr ""
+"রাতের আদিম দেবতা নিক্সের পুত্র ফোবেটর হলেন গ্রীকদের কাছে দুঃস্বপ্নের দেবতা ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
 msgid ""
@@ -10009,6 +10054,10 @@ msgid ""
 "point of contact between two civilizations (Spanish and Arab) and two "
 "continents (Europe and Africa) after the 8th century."
 msgstr ""
+"টিটাউইন (বা টিটোয়ানের মদিনা) উত্তর মরক্কোয় অবস্থিত একটি ইউনেস্কো ঘোষিত বিশ্ব "
+"ঐহিহ্য স্থান । এর ঐতিহাসিক গুরুত্ব অপরিসীম । এটি ৮ম শতাব্দীতে প্রাচীন "
+"স্প্যানীশ ও আরব সভ্যতার মিলনস্থল হিসাবে বিখ্যাত ছিল । তাছাড়া এটি ইউরোপ ও "
+"আফ্রিকার মিলনস্থলও বটে ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
 msgid ""
@@ -10017,6 +10066,10 @@ msgid ""
 "Cordova in Andalusia (modern Spain), and wrote an influential treatise on "
 "the uses of the astrolabe."
 msgstr ""
+"এটির নামকরণ করা হয়েছে একাদশ শতকের আন্দালুশিয়ায় অবস্থিত কর্ডোভার (আধুনিক "
+"স্পেন) বিখ্যাত জ্যোতির্বিজ্ঞানী ও গণিতজ্ঞ আবু আল কাশিম আহমেদ ইবন আবেদুল্লা "
+"ইবন ওমার আল গফিকি ইবন আল সাফার এর মানানুসারে । তিনি জ্যোতির্বিজ্ঞানের "
+"ব্যবহারের উপর একটি প্রভাবশালী গ্রন্থ লিখেছিলেন ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
 msgid ""
@@ -10024,6 +10077,9 @@ msgid ""
 "<em>Ibn al-Samh</em>), a noted 11th century astronomer and mathematician in "
 "the school of al Majriti in Cordova (Andalusia, now modern Spain)."
 msgstr ""
+"এটির নামকরণ করা হয়েছে একাদশ শতকের আন্দালুশিয়ায় অবস্থিত কর্ডোভার (আধুনিক "
+"স্পেন) বিখ্যাত জ্যোতির্বিজ্ঞানী ও গণিতজ্ঞ আবু আল কাশিম আসবাঘ ইবন মহম্মদ ইবন "
+"আল সাহম আল মাহরি (বা <em>ইবন আল সাহম</em>) এর মানানুসারে ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
 msgid ""
@@ -10031,6 +10087,9 @@ msgid ""
 "mathematician, astronomer, scholar, and teacher in 10th century and early "
 "11th century Andalusia (modern Spain)."
 msgstr ""
+"এটির নামকরণ করা হয়েছে একাদশ শতকের আন্দালুশিয়ার (আধুনিক স্পেন) বিখ্যাত "
+"পন্ডিত, জ্যোতির্বিজ্ঞানী, গণিতজ্ঞ ও শিক্ষক আবু আল কাশিম আল কুর্তুব আল "
+"মাজরিতি এর মানানুসারে ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
 msgid ""
@@ -10039,6 +10098,10 @@ msgid ""
 "in the world even today. The constellation Aquila represents an eagle - a "
 "popular symbol of liberty."
 msgstr ""
+"এর বুৎপত্তি ল্যাটিন শব্দ লিবেরতাস থেকে, যার অর্থ <em>স্বাধীনতা</em> । "
+"স্বাধীনতা বলতে সমস্ত রকম সামাজিক ও রাজনৈতিক মুক্তির কথা বলা হয়েছে, যা আজও "
+"স্বাধীনতা থেকে বঞ্চিত মানুষগুলির কথা মনে করিয়ে দেয় । ঈগল মন্ডলের ঈগলটির "
+"প্রতিরূপটিকে মুক্তির প্রতিক হিসাবে ব্যবহার করা হয় ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
 msgid ""
@@ -10046,6 +10109,10 @@ msgid ""
 "mental strength in the face of adversity, as embodied by the eagle "
 "(represented by the constellation Aquila)."
 msgstr ""
+"শব্দটির বুৎপত্তি ল্যাটিন শব্দ Fortitudo বা ফর্তিতুদো থেকে, যার অর্থ "
+"<em>সহিষ্ণুতা</em> । সহিষ্ণুতা বলতে এখানে প্রতিকূলতা বিরূদ্ধে আবেগময় এবং "
+"মানসিক শক্তির প্রকাশকে বোঝানো হয়েছে । অনেক সময় একে ঈগলের (বা ঈগল মন্ডল) সাথে "
+"তুলনা করা হয় ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
@@ -10057,17 +10124,24 @@ msgid ""
 "These names are modified based on the original proposals, to be consistent "
 "with the IAU rules."
 msgstr ""
+"এক্ষেত্রে IAU এর নিয়মাবলীর সাথে সামঞ্জস্য রেখে প্রস্তাবিত নামগুলিকে সামান্য "
+"পরিবর্তন করে রাখা হয়েছে ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
 msgid ""
 "The original name proposed, <em>Veritas</em>, is that of an asteroid "
 "important for the study of the solar system."
 msgstr ""
+"প্রথমে <em>Veritas</em> বা ভেরিতাস নামটি রাখার প্রস্তাব ছিল, কিন্তু ততদিনে ঐ "
+"নামে একটি গুরুত্বপূর্ণ উল্কার নামকরণ করা হয়ে গিয়েছিল ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 msgid ""
-"The name originally proposed, Amaterasu, is already used for an asteroid."
+"The name originally proposed, <em>Amaterasu</em>, is already used for an "
+"asteroid."
 msgstr ""
+"প্রথমে <em>আমাটেরাসু</em> নামটির প্রস্তাব করা হলেও, এটি আগেই একটি গ্রহাণুর "
+"জন্য ব্যবহার করা হয়ে গিয়েছিল ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
 msgid ""
@@ -10076,10 +10150,13 @@ msgid ""
 "<em>Aegir</em>, has been attributed to one of Saturn's satellites, "
 "discovered in 2004."
 msgstr ""
+"এয়েগির কথাটির বানান <em>AEgir</em> রাখা হয়েছে, কারণ <em>Aegir</em> বানানটি "
+"২০০৪ সালে আরিষ্কৃত শনির একটি চাঁদের জন্য ব্যবহার করা হয়েছে ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
 msgid "<em>Ogmios</em> is a name already attributed to an asteroid."
 msgstr ""
+"<em>ওমিগোস</em> নামটি আগেই একটি গ্রহাণুর ক্ষেত্রে ব্যবহার করা হয়ে গেছে ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
 msgid ""
@@ -10087,6 +10164,8 @@ msgid ""
 "asteroid and to one of Jupiter's satellites. The name <em>Althaea</em> is "
 "also attributed to an asteroid."
 msgstr ""
+"প্রথমে প্রস্তাবিত নাম লিডা আগেই একটি গ্রহাণুর জন্য ব্যবহার করা হয়ে গিয়েছিল । "
+"এমনকি অ্যালথেই নামটিও বৃহস্পতির একটি চাঁদের জন্য ব্যবহার করা হয়ে গিয়েছিল ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 msgid ""
@@ -10095,6 +10174,10 @@ msgid ""
 "<em>Lippershey</em> (with an <em>s</em>) results in fact from a "
 "typographical error dating back from 1831, thus should be avoided."
 msgstr ""
+"১৮৩১ সালে <em>লিপারহে</em> কথাটি বর্ণগত ভুলের কারণে <em>লিপারশে</em> হয়ে যায় "
+"। ভুল বশত <em>লিপারহে</em> কথাটির 'h' এর আগে একটি <em>s</em> বসে গিয়ে তা 'শ' "
+"এ পরিণত হয় । তবে শেষ পর্যন্ত ১৫.০১.২০১৬ তারিখে সেটি সংশোধন করে "
+"<em>লিপারহে</em> কথাটিই ব্যবহার করা হয়েছে ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
 msgid "Additional info"
@@ -10954,7 +11037,7 @@ msgid "Toggle radiant labels"
 msgstr "উৎসবিন্দুর নাম"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:153
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:233
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:234
 msgid "Show settings dialog"
 msgstr "তথ্য বিন্যাস বিভাগ"
 
@@ -11956,151 +12039,151 @@ msgid ""
 msgstr ""
 "এই হার্ডওয্যারে ছায়া গঠন করা সম্ভব নয় , আরও তথ্যের জন্য কার্যলিপি দেখুন"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:172
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:173
 msgid "Scenery3d plugin loaded!"
 msgstr "ত্রিমাতৃক ভূমিরূপ সরঞ্জামটি চালু আাছে!"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:229
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:230
 msgid "Scenery3d: 3D landscapes"
 msgstr "ত্রিমাতৃক ভূমিরূপ"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:232
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:233
 msgid "Toggle 3D landscape"
 msgstr "ত্রিমাতৃক ভূমিরূপ চালু বা বন্ধ করুন"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:234
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:235
 msgid "Show viewpoint dialog"
 msgstr "দৃশ্যরূপ বিভাগ"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:235
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:236
 msgid "Toggle shadows"
 msgstr "ছায়া চালু বা বন্ধ করুন"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:236
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:237
 msgid "Toggle debug information"
 msgstr "ডিবাগ তথ্য চালু বা বন্ধ করুন"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:237
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:238
 msgid "Toggle location text"
 msgstr "ঠিকানার নাম চালু বা বন্ধ করুন"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:238
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:239
 msgid "Toggle torchlight"
 msgstr "টর্চ চালু বা বন্ধ করুন"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:239
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:240
 msgid "Reload shaders"
 msgstr "পুনরায় প্রতিকৃতি গঠন"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:280
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:281
 msgid "Scenery3d shaders reloaded"
 msgstr "নতুন করে প্রতিকৃতি গঠন করা হয়েছে"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:335
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:336
 msgid "Loading scene. Please be patient!"
 msgstr "দৃশ্যরূপটি গঠন করা হচ্ছে । একটু অপেক্ষা করুন !"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:337
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:338
 #, qt-format
 msgid "Loading scene '%1'"
 msgstr "'%1' দৃশ্যরূপটি গঠন করা হচ্ছে"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:360
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:361
 msgid "Could not load scene, please check log for error messages!"
 msgstr "দৃশ্যরূপ গঠন করা যায় নি, ত্রুটি সম্পর্কে জানতে কার্যবিবরণী দেখুন !"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:364
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:365
 msgid "Scene successfully loaded."
 msgstr "দৃশ্যরূপ সফল ভাবে গঠন করা হয়েছে ।"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:423
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:424
 msgid "Could not load scene info, please check log for error messages!"
 msgstr ""
 "দৃশ্যরূপটির বিবরণ জানা যাচ্ছে না, ত্রুটি সম্পর্কে জানতে কার্যবিবরণী দেখুন ।"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:447
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:448
 #, qt-format
 msgid "Could not find scene ID for %1"
 msgstr "%1 এর দৃশ্যরূপটি খুঁজে পাওয়া যায় নি"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:480
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:481
 msgid "Please load a scene first!"
 msgstr "প্রথমে যে কোনো একটি দৃশ্যরূপ পছন্দ করুন!"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:518
 #, qt-format
 msgid "Per-Pixel shading %1."
 msgstr "পিক্সেল ধরে ধরে প্রতিকৃতি গঠন %1 ।"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:518
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:537
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:573
 msgctxt "enable"
 msgid "on"
 msgstr "চালু"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:518
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:537
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:573
 msgctxt "disable"
 msgid "off"
 msgstr "বন্ধ"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:537
 #, qt-format
 msgid "Shadows %1."
 msgstr "ছায়া %1 ।"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:541
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:542
 msgid "Shadows deactivated or not possible."
 msgstr "ছায়া বন্ধ করা আছে অথবা গঠন করা সম্ভব নয় ।"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:573
 #, qt-format
 msgid "Surface bumps %1."
 msgstr "তলের গভীরতা গঠন %1 ।"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:620
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:621
 msgid "Selected cubemap mode not supported, falling back to '6 Textures'"
 msgstr ""
 "বেছে নেওয়া ঘনকাকার অভিক্ষপন করা সম্ভব নয়, তাই ৬টি ছবি ব্যবহার করা হচ্ছে ।"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:717
 #, qt-format
 msgid "Lazy cubemapping: %1"
 msgstr "বিলম্বিত অভিক্ষেপন : %1"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:717
 msgid "enabled"
 msgstr "চালু"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:717
 msgid "disabled"
 msgstr "বন্ধ"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:789
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:790
 msgid "Cubemap size changed"
 msgstr "অভিক্ষেপন গঠনচিত্রের আকার পরিবর্তিত করা হল"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:791
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:792
 #, qt-format
 msgid "Cubemap size not supported, set to %1"
 msgstr "এই আকারের অভিক্ষেপন সম্ভব নয়, তাই বদলে %1 করা হল"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:812
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:813
 msgid "Shadowmap size changed"
 msgstr "ছায়া অভিক্ষেপন চিত্রের আকার পরিবর্তিত করা হল"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:814
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:815
 #, qt-format
 msgid "Shadowmap size not supported, set to %1"
 msgstr "এই আকারের ছায়া অভিক্ষেপন সম্ভব নয়, তাই বদলে %1 করা হল"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:927
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:928
 msgid "3D Sceneries"
 msgstr "ত্রিমাত্রিক ভূমিরূপ"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:930
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:931
 msgid ""
 "<p>3D foreground renderer. Walk around, find and avoid obstructions in your "
 "garden, find and demonstrate possible astronomical alignments in temples, "
