@@ -36,7 +36,6 @@ StelAddOnMgr::StelAddOnMgr()
 	: m_pConfig(StelApp::getInstance().getSettings())
 	, m_pDownloadMgr(new DownloadMgr(this))
 	, m_sAddOnDir(StelFileMgr::getUserDir() % "/addon/")
-	, m_sThumbnailDir(m_sAddOnDir % "thumbnail/")
 	, m_sInstalledAddonsJsonPath(m_sAddOnDir % "installed_addons.json")
 	, m_lastUpdate(QDateTime::fromString("2016-01-01", "yyyy-MM-dd"))
 	, m_eUpdateFrequency(EVERY_THREE_DAYS)
@@ -50,7 +49,6 @@ StelAddOnMgr::StelAddOnMgr()
 
 	// creating addon dir
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sAddOnDir);
-	StelFileMgr::makeSureDirExistsAndIsWritable(m_sThumbnailDir);
 
 	// load settings from config file
 	loadConfig();
@@ -107,9 +105,6 @@ void StelAddOnMgr::reloadCatalogues()
 			m_addonsToUpdate.insert(addonId, addonAvailable);
 		}
 	}
-
-	// download thumbnails
-//	refreshThumbnailQueue();
 
 	emit(updateTableViews());
 }
@@ -196,53 +191,6 @@ void StelAddOnMgr::loadConfig()
 	setUpdateFrequency((UpdateFrequency) m_pConfig->value(ADDON_CONFIG_PREFIX + "update_frequency", m_eUpdateFrequency).toInt());
 	setUrl(m_pConfig->value(ADDON_CONFIG_PREFIX + "/url", m_sUrl).toString());
 }
-
-/*
-void StelAddOnMgr::refreshThumbnailQueue()
-{
-	QHashIterator<QString, AddOn*> aos(m_addonsAvailable);
-	while (aos.hasNext())
-	{
-		aos.next();
-		m_thumbnails.insert(aos.key(), aos.value()->getThumbnail());
-		if (!QFile(m_sThumbnailDir % aos.key() % ".png").exists())
-		{
-			m_thumbnailQueue.append(aos.value()->getThumbnail());
-		}
-	}
-	downloadNextThumbnail();
-}
-
-void StelAddOnMgr::downloadNextThumbnail()
-{
-	if (m_thumbnailQueue.isEmpty()) {
-	    return;
-	}
-
-	QUrl url(m_thumbnailQueue.first());
-	m_pThumbnailNetworkReply = StelApp::getInstance().getNetworkAccessManager()->get(QNetworkRequest(url));
-	connect(m_pThumbnailNetworkReply, SIGNAL(finished()), this, SLOT(downloadThumbnailFinished()));
-}
-
-void StelAddOnMgr::downloadThumbnailFinished()
-{
-	if (m_thumbnailQueue.isEmpty() || m_pThumbnailNetworkReply == NULL) {
-	    return;
-	}
-
-	if (m_pThumbnailNetworkReply->error() == QNetworkReply::NoError) {
-	    QPixmap pixmap;
-	    if (pixmap.loadFromData(m_pThumbnailNetworkReply->readAll())) {
-		    pixmap.save(m_sThumbnailDir % m_thumbnails.key(m_thumbnailQueue.first()) % ".jpg");
-	    }
-	}
-
-	m_pThumbnailNetworkReply->deleteLater();
-	m_pThumbnailNetworkReply = NULL;
-	m_thumbnailQueue.removeFirst();
-	downloadNextThumbnail();
-}
-*/
 
 void StelAddOnMgr::installAddons(QSet<AddOn *> addons)
 {

@@ -66,7 +66,7 @@ AddOnWidget::AddOnWidget(QWidget* parent, int row, AddOn* addon)
 
 	// Download Size
 	ui->txtSize->setText(fileSizeToString(addon->getDownloadSize()));
-
+/*
 	// Thumbnail
 	QString thumbnailDir = StelApp::getInstance().getStelAddOnMgr().getThumbnailDir();
 	QPixmap thumbnail(thumbnailDir % addon->getAddOnId() % ".jpg");
@@ -80,7 +80,7 @@ AddOnWidget::AddOnWidget(QWidget* parent, int row, AddOn* addon)
 		ui->thumbnail->setPixmap(thumbnail);
 		ui->thumbnail->resize(thumbnail.size());
 	}
-
+*/
 	// List of files - for now, applicable only for textures
 	ui->listWidget->clear();
 	m_sSelectedFilesToInstall.clear();

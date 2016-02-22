@@ -64,7 +64,6 @@ public:
 	QHash<QString, AddOn*> getAddonsInstalled() { return m_addonsInstalled; }
 	QHash<QString, AddOn*> getAddonsToUpdate() { return m_addonsToUpdate; }
 	QString getAddOnDir() { return m_sAddOnDir; }
-	QString getThumbnailDir() { return m_sThumbnailDir; }
 	AddOn* getAddOnFromZip(QString filePath);
 	QList<AddOn*> scanFilesInAddOnDir();
 	void installAddOnFromFile(QString filePath);
@@ -93,10 +92,7 @@ signals:
 private:
 	QSettings* m_pConfig;		//! instace of main config.ini file
 	DownloadMgr* m_pDownloadMgr;	//! instance of DownloadMgr class
-
-	// addon directories
-	const QString m_sAddOnDir;
-	const QString m_sThumbnailDir;
+	const QString m_sAddOnDir;	//! path to the addon directory
 
 	QString m_sAddonJsonFilename;
 	QString m_sAddonJsonPath;
@@ -106,15 +102,9 @@ private:
 	QHash<QString, AddOn*> m_addonsInstalled;
 	QHash<QString, AddOn*> m_addonsToUpdate;
 
-	QNetworkReply* m_pThumbnailNetworkReply;
-	QHash<QString, QString> m_thumbnails;
-	QStringList m_thumbnailQueue;
-
 	QDateTime m_lastUpdate;
 	UpdateFrequency m_eUpdateFrequency;
 	QString m_sUrl;
-
-	void refreshThumbnailQueue();
 
 	QHash<QString, AddOn*> loadAddonCatalog(QString jsonPath) const;
 	void restoreDefaultAddonJsonFile();
@@ -122,9 +112,6 @@ private:
 	void removeAddonFromJson(AddOn* addon, QString jsonPath);
 
 	QString calculateMd5(QFile &file) const;
-
-	// download thumbnails
-	void downloadNextThumbnail();
 
 	void unzip(AddOn& addon);
 
