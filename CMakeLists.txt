@@ -141,7 +141,7 @@ IF(STELLARIUM_RELEASE_BUILD)
 ENDIF()
 
 # Activate media support
-SET(ENABLE_MEDIA 0 CACHE BOOL "Define whether media support should be activated.")
+SET(ENABLE_MEDIA 1 CACHE BOOL "Define whether media support should be activated.")
 
 SET(ENABLE_SCRIPTING 1 CACHE BOOL "Define whether scripting features should be activated.")
 IF(ENABLE_SCRIPTING)
