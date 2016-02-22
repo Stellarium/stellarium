@@ -467,7 +467,7 @@ void Observability::draw(StelCore* core)
 
 
 // Force re-computation of ephemeris if the location changes or the user changes the configuration:
-	if (locChanged || configChanged || yearChanged)
+	if (locChanged || configChanged) // || yearChanged)
 	{ 
 		souChanged=true;
 		configChanged=false;
