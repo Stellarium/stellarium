@@ -54,7 +54,6 @@ AddOn::AddOn(const QString addonId, const QVariantMap& map)
 	m_sDownloadFilename = map.value("download-filename").toString();
 	m_fDownloadSize = map.value("download-size").toFloat();
 	m_sChecksum = map.value("checksum").toString();
-	m_sThumbnail = map.value("thumbnail").toString();
 
 	// specific field for scripts
 	m_sLanguage = map.value("language").toString();

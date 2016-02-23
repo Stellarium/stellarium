@@ -88,7 +88,6 @@ public:
 	float getDownloadSize() { return m_fDownloadSize; }
 	QString getDownloadSizeString() { return m_sDownloadSize; }
 	QString getDownloadURL() { return m_sDownloadURL; }
-	QString getThumbnail() { return m_sThumbnail; }
 	QString getChecksum() { return m_sChecksum; }
 
 	QString getZipPath();
@@ -119,7 +118,6 @@ private:
 	float m_fDownloadSize;
 	QString m_sDownloadSize;
 	QString m_sChecksum;
-	QString m_sThumbnail;
 	QList<Authors> m_authors;
 	QStringList m_AllTextures;
 	QStringList m_InstalledFiles;

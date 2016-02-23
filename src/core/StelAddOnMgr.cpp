@@ -529,7 +529,6 @@ void StelAddOnMgr::insertAddonInJson(AddOn* addon, QString jsonPath)
 		attributes.insert("download-filename", addon->getDownloadFilename());
 		attributes.insert("download-size", addon->getDownloadSize());
 		attributes.insert("checksum", addon->getChecksum());
-		attributes.insert("thumbnail", addon->getThumbnail());
 		attributes.insert("textures", addon->getAllTextures().join(","));
 
 		attributes.insert("status", addon->getStatus());
