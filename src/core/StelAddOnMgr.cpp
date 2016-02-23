@@ -37,7 +37,7 @@ StelAddOnMgr::StelAddOnMgr()
 	, m_pDownloadMgr(new DownloadMgr(this))
 	, m_sAddOnDir(StelFileMgr::getUserDir() % "/addon/")
 	, m_sInstalledAddonsJsonPath(m_sAddOnDir % "installed_addons.json")
-	, m_lastUpdate(QDateTime::fromString("2016-01-01", "yyyy-MM-dd"))
+	, m_lastUpdate(QDateTime::fromString("2016.01.01", "yyyy.MM.dd"))
 	, m_eUpdateFrequency(EVERY_THREE_DAYS)
 {
 	QStringList v = StelUtils::getApplicationVersion().split('.');
@@ -158,7 +158,7 @@ void StelAddOnMgr::restoreDefaultAddonJsonFile()
 		jsonFile.setPermissions(jsonFile.permissions() | QFile::WriteOwner);
 		// cleaning last_update var
 		m_pConfig->remove("AddOn/last_update");
-		m_lastUpdate = QDateTime::fromString("2016-01-01", "yyyy-MM-dd");
+		m_lastUpdate = QDateTime::fromString("2016.01.01", "yyyy.MM.dd");
 	}
 	else
 	{
