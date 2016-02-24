@@ -448,14 +448,14 @@ public slots:
 	//! @param filename the file name of the image.  If a relative
 	//! path is specified, "scripts/" will be prefixed before the
 	//! image is searched for using StelFileMgr.
-	//! @param ra0 The right ascension of the first corner of the image in degrees
-	//! @param dec0 The declination of the first corner of the image in degrees
-	//! @param ra1 The right ascension of the second corner of the image in degrees
-	//! @param dec1 The declination of the second corner of the image in degrees
-	//! @param ra2 The right ascension of the third corner of the image in degrees
-	//! @param dec2 The declination of the third corner of the image in degrees
-	//! @param ra3 The right ascension of the fourth corner of the image in degrees
-	//! @param dec3 The declination of the fourth corner of the image in degrees
+	//! @param ra0 The right ascension of the first corner of the image in degrees (J2000.0)
+	//! @param dec0 The declination of the first corner of the image in degrees (J2000.0)
+	//! @param ra1 The right ascension of the second corner of the image in degrees (J2000.0)
+	//! @param dec1 The declination of the second corner of the image in degrees (J2000.0)
+	//! @param ra2 The right ascension of the third corner of the image in degrees (J2000.0)
+	//! @param dec2 The declination of the third corner of the image in degrees (J2000.0)
+	//! @param ra3 The right ascension of the fourth corner of the image in degrees (J2000.0)
+	//! @param dec3 The declination of the fourth corner of the image in degrees (J2000.0)
 	//! @param minRes The minimum resolution setting for the image
 	//! @param maxBright The maximum brightness setting for the image
 	//! @param visible The initial visibility of the image
@@ -503,7 +503,7 @@ public slots:
 					  const QString& ra, const QString& dec, double angSize, double rotation,
 					  double minRes=2.5, double maxBright=14, bool visible=true);
 
-	//! Load an image which will have sky coordinates.
+	//! Load an image which will have a sky location given in alt-azimuthal coordinates.
 	//! @param id a string ID to be used when referring to this
 	//! image (e.g. when changing the displayed status or deleting
 	//! it.
@@ -522,14 +522,14 @@ public slots:
 	//! @param maxBright The maximum brightness setting for the image
 	//! @param visible The initial visibility of the image
 	void loadSkyImageAltAz(const QString& id, const QString& filename,
-					  double alt0, double azi0,
-					  double alt1, double azi1,
-					  double alt2, double azi2,
-					  double alt3, double azi3,
+					  double azi0, double alt0,
+					  double azi1, double alt1,
+					  double azi2, double alt2,
+					  double azi3, double alt3,
 					  double minRes=2.5, double maxBright=14, bool visible=true);
 
 	//! Convenience function which allows loading of a sky image based on a
-	//! central coordinate, angular size and rotation.
+	//! central alt-azimuthal coordinate, angular size and rotation.
 	//! @param id a string ID to be used when referring to this
 	//! image (e.g. when changing the displayed status or deleting it.
 	//! @param filename the file name of the image.  If a relative
