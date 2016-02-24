@@ -1597,7 +1597,10 @@ void Satellites::parseQSMagFile(QString qsMagFile)
 
 void Satellites::update(double deltaTime)
 {
-	if (StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates() || (!hintFader && hintFader.getInterstate() <= 0.))
+	// Separated because first test should be very fast.
+	if (!hintFader && hintFader.getInterstate() <= 0.)
+		return;
+	if (StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
 		return;
 
 	hintFader.update((int)(deltaTime*1000));
@@ -1611,7 +1614,10 @@ void Satellites::update(double deltaTime)
 
 void Satellites::draw(StelCore* core)
 {
-	if (core->getCurrentLocation().planetName != earth->getEnglishName() ||	!isValidRangeDates() || (!hintFader && hintFader.getInterstate() <= 0.))
+	// Separated because first test should be very fast.
+	if (!hintFader && hintFader.getInterstate() <= 0.)
+		return;
+	if (core->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
 		return;
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
