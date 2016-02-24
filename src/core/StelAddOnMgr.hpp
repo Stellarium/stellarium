@@ -111,8 +111,6 @@ private:
 	void insertAddonInJson(AddOn* addon, QString jsonPath);
 	void removeAddonFromJson(AddOn* addon, QString jsonPath);
 
-	QString calculateMd5(QFile &file) const;
-
 	void unzip(AddOn& addon);
 
 	//! Load settings from config.ini.
@@ -121,6 +119,11 @@ private:
 	//! It will let all table views of 'type' know that they need to refresh.
 	//! @param type AddOn::Type
 	void refreshType(AddOn::Type type);
+
+	//! Calculate the MD5 hash of a given QFile.
+	//! @param file QFile
+	//! @return md5 hash
+	QString calculateMd5(QFile &file) const;
 };
 
 #endif // _STELADDONMGR_HPP_
