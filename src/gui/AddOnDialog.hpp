@@ -26,17 +26,17 @@
 #include <QObject>
 #include <QTableView>
 
-#include "AddOnSettingsDialog.hpp"
+#include "AddOnAboutDialog.hpp"
 #include "AddOnTableView.hpp"
 #include "StelAddOnMgr.hpp"
 #include "StelDialog.hpp"
 
-class AddOnSettingsDialog;
+class AddOnAboutDialog;
 class Ui_addonDialogForm;
 
 class AddOnDialog : public StelDialog
 {
-Q_OBJECT
+	Q_OBJECT
 public:
 	AddOnDialog(QObject* parent);
 	virtual ~AddOnDialog();
@@ -47,6 +47,7 @@ public slots:
 	void retranslate();
 	void updateCatalog();
 	void slotAddonSelected(AddOn* addon);
+	void slotAbout();
 
 protected:
 	Ui_addonDialogForm* ui;
@@ -65,7 +66,7 @@ private slots:
 	void populateTables();
 
 private:
-	AddOnSettingsDialog* m_pSettingsDialog;
+	AddOnAboutDialog* m_pAboutDialog;
 	StelProgressController* m_progressBar;
 
 	void updateTabBarListWidgetWidth();

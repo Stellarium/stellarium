@@ -34,7 +34,7 @@
 
 AddOnDialog::AddOnDialog(QObject* parent)
 	: StelDialog(parent)
-	, m_pSettingsDialog(new AddOnSettingsDialog(this))
+	, m_pAboutDialog(new AddOnAboutDialog(this))
 	, m_progressBar(NULL)
 {
 	ui = new Ui_addonDialogForm;
@@ -79,6 +79,9 @@ void AddOnDialog::createDialogContent()
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)),
 		this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 	ui->stackListWidget->setCurrentRow(0);
+
+	// about
+	connect(ui->btnAbout, SIGNAL(clicked()), this, SLOT(slotAbout()));
 
 	// button to install/uninstall/update
 	connect(ui->button, SIGNAL(clicked()), this, SLOT(slotCheckedRows()));
@@ -245,7 +248,7 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 
 	// settings tab?
 	bool settings = ui->stackedWidget->currentIndex() == ui->stackListWidget->count() - 1;
-	ui->autoUpdate->setVisible(settings);
+	ui->settingsPane->setVisible(settings);
 	ui->addOnDialogButtons->setVisible(!settings);
 	ui->browser->setVisible(!settings);
 	ui->stackedWidget->setVisible(!settings);
@@ -341,4 +344,9 @@ void AddOnDialog::slotCheckedRows()
 		tableview = ui->availableTableView;
 		StelApp::getInstance().getStelAddOnMgr().installAddons(tableview->getCheckedAddons());
 	}
+}
+
+void AddOnDialog::slotAbout()
+{
+	m_pAboutDialog->setVisible(true);
 }

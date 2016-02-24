@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2014 Marcos Cardinot
+ * Copyright (C) 2014-2016 Marcos Cardinot
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,23 +17,22 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#ifndef _ADDONSETTINGSDIALOG_HPP_
-#define _ADDONSETTINGSDIALOG_HPP_
+#ifndef _ADDONABOUTDIALOG_HPP_
+#define _ADDONABOUTDIALOG_HPP_
 
 #include "AddOnDialog.hpp"
-#include "StelAddOnMgr.hpp"
 #include "StelDialog.hpp"
 
 class AddOnDialog;
-class Ui_addonSettingsDialogForm;
+class Ui_addonAboutDialogForm;
 
-//! @class AddOnSettingsDialog
-class AddOnSettingsDialog : public StelDialog
+//! @class AddOnAboutDialog
+class AddOnAboutDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-	AddOnSettingsDialog(AddOnDialog* addOnDialog);
-	virtual ~AddOnSettingsDialog();
+	AddOnAboutDialog(AddOnDialog* addOnDialog);
+	virtual ~AddOnAboutDialog();
 
 public slots:
 	void retranslate();
@@ -41,20 +40,10 @@ public slots:
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
-	Ui_addonSettingsDialogForm* ui;
-
-private slots:
-	void updateCatalog();
-	void setAutoUpdate(bool enabled);
-	void setUpdateFrequency(int index);
-	void setUpdateTime(QTime time);
+	Ui_addonAboutDialogForm* ui;
 
 private:
-	AddOnDialog* m_pAddOnDialog;
-	StelAddOnMgr* m_pStelAddOnMgr;
-
 	void setAboutHtml();
-	void setCurrentUpdateFrequency(int days);
 };
 
-#endif // _ADDONSETTINGSDIALOG_HPP_
+#endif // _ADDONABOUTDIALOG_HPP_

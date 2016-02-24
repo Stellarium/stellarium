@@ -351,8 +351,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/AddOnDialog.cpp
           gui/AddOnScanner.hpp
           gui/AddOnScanner.cpp
-          gui/AddOnSettingsDialog.hpp
-          gui/AddOnSettingsDialog.cpp
+	  gui/AddOnAboutDialog.hpp
+	  gui/AddOnAboutDialog.cpp
           gui/AddOnWidget.cpp
           gui/AddOnWidget.hpp
      )
@@ -372,7 +372,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/addRemoveLandscapesDialog.ui
           gui/addonDialog.ui
           gui/addonScanner.ui
-          gui/addonSettingsDialog.ui
+	  gui/addonAboutDialog.ui
           gui/addonWidget.ui
      )
 
