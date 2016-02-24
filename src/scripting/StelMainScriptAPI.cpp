@@ -488,10 +488,10 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 }
 
 void StelMainScriptAPI::loadSkyImageAltAz(const QString& id, const QString& filename,
-					  double alt0, double azi0,
-					  double alt1, double azi1,
-					  double alt2, double azi2,
-					  double alt3, double azi3,
+					  double azi0, double alt0,
+					  double azi1, double alt1,
+					  double azi2, double alt2,
+					  double azi3, double alt3,
 					  double minRes, double maxBright, bool visible)
 {
 	QString path = "scripts/" + filename;
@@ -510,9 +510,9 @@ void StelMainScriptAPI::loadSkyImageAltAz(const QString& id, const QString& file
 	XYZ*=RADIUS_NEB;
 	float texSize = RADIUS_NEB * sin(angSize/2/60*M_PI/180);
 	Mat4f matPrecomp = Mat4f::translation(XYZ) *
-			   Mat4f::zrotation((180-azi)*M_PI/180.) *
+			   Mat4f::zrotation((180.-azi)*M_PI/180.) *
 			   Mat4f::yrotation(-alt*M_PI/180.) *
-			   Mat4f::xrotation((rotation+90)*M_PI/180.);
+			   Mat4f::xrotation((rotation+90.)*M_PI/180.);
 
 	Vec3f corners[4];
 	corners[0] = matPrecomp * Vec3f(0.f,-texSize,-texSize);
