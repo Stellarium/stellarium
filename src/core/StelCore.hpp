@@ -60,78 +60,78 @@ public:
 	//! Supported reference frame types
 	enum FrameType
 	{
-        FrameUninitialized,                 //!< Reference frame is not set (FMajerech: Added to avoid condition on uninitialized value in StelSkyLayerMgr::draw())
-        FrameAltAz,                         //!< Altazimuthal reference frame centered on observer.
+		FrameUninitialized,			//!< Reference frame is not set (FMajerech: Added to avoid condition on uninitialized value in StelSkyLayerMgr::draw())
+		FrameAltAz,				//!< Altazimuthal reference frame centered on observer.
 		FrameHeliocentricEclipticJ2000,		//!< Fixed-ecliptic reference frame centered on the Sun. GZ: This is J2000 ecliptical / almost VSOP87.
 		FrameObservercentricEclipticJ2000,	//!< Fixed-ecliptic reference frame centered on the Observer. GZ: was ObservercentricEcliptic, but renamed because it is Ecliptic of J2000!
 		FrameObservercentricEclipticOfDate,	//!< Moving ecliptic reference frame centered on the Observer. GZ new for V0.14: Ecliptic of date, i.e. includes the precession of the ecliptic.
-        FrameEquinoxEqu,                    //!< Equatorial reference frame at the current equinox centered on the observer.
-                                            //!< The north pole follows the precession of the planet on which the observer is located. On Earth, this may include nutation if so configured.
-                                            //!< Has been corrected for V0.14 to really properly reflect ecliptical motion and precession (Vondrak 2011 model) and nutation.
-        FrameJ2000,                         //!< Equatorial reference frame at the J2000 equinox centered on the observer.
-                                            //!< This is also the ICRS reference frame.
-        FrameGalactic                       //!< Galactic reference frame centered on observer.
+		FrameEquinoxEqu,			//!< Equatorial reference frame at the current equinox centered on the observer.
+							//!< The north pole follows the precession of the planet on which the observer is located. On Earth, this may include nutation if so configured.
+							//!< Has been corrected for V0.14 to really properly reflect ecliptical motion and precession (Vondrak 2011 model) and nutation.
+		FrameJ2000,				//!< Equatorial reference frame at the J2000 equinox centered on the observer.
+							//!< This is also the ICRS reference frame.
+		FrameGalactic				//!< Galactic reference frame centered on observer.
 	};
 
 	//! @enum ProjectionType
 	//! Available projection types. A value of 1000 indicate the default projection
 	enum ProjectionType
 	{
-        ProjectionPerspective,              //!< Perspective projection
-        ProjectionEqualArea,                //!< Equal Area projection
-        ProjectionStereographic,            //!< Stereograhic projection
-        ProjectionFisheye,                  //!< Fisheye projection
-        ProjectionHammer,                   //!< Hammer-Aitoff projection
-        ProjectionCylinder,                 //!< Cylinder projection
-        ProjectionMercator,                 //!< Mercator projection
-        ProjectionOrthographic,             //!< Orthographic projection
-        ProjectionSinusoidal                //!< Sinusoidal projection
+		ProjectionPerspective,              //!< Perspective projection
+		ProjectionEqualArea,                //!< Equal Area projection
+		ProjectionStereographic,            //!< Stereograhic projection
+		ProjectionFisheye,                  //!< Fisheye projection
+		ProjectionHammer,                   //!< Hammer-Aitoff projection
+		ProjectionCylinder,                 //!< Cylinder projection
+		ProjectionMercator,                 //!< Mercator projection
+		ProjectionOrthographic,             //!< Orthographic projection
+		ProjectionSinusoidal                //!< Sinusoidal projection
 	};
 
 	//! @enum RefractionMode
 	//! Available refraction mode.
 	enum RefractionMode
 	{
-        RefractionAuto,                     //!< Automatically decide to add refraction if atmosphere is activated
-        RefractionOn,                       //!< Always add refraction (i.e. apparent coordinates)
-        RefractionOff                       //!< Never add refraction (i.e. geometric coordinates)
+		RefractionAuto,                     //!< Automatically decide to add refraction if atmosphere is activated
+		RefractionOn,                       //!< Always add refraction (i.e. apparent coordinates)
+		RefractionOff                       //!< Never add refraction (i.e. geometric coordinates)
 	};
 
 	//! @enum DeltaTAlgorithm
 	//! Available DeltaT algorithms
 	enum DeltaTAlgorithm
 	{
-        WithoutCorrection,                  //!< Without correction, DeltaT is Zero. Like Stellarium versions before 0.12.
-        Schoch,                             //!< Schoch (1931) algorithm for DeltaT
-        Clemence,                           //!< Clemence (1948) algorithm for DeltaT
-        IAU,                                //!< IAU (1952) algorithm for DeltaT (based on observations by Spencer Jones (1939))
-        AstronomicalEphemeris,              //!< Astronomical Ephemeris (1960) algorithm for DeltaT
-        TuckermanGoldstine,                 //!< Tuckerman (1962, 1964) & Goldstine (1973) algorithm for DeltaT
-        MullerStephenson,                   //!< Muller & Stephenson (1975) algorithm for DeltaT
-        Stephenson1978,                     //!< Stephenson (1978) algorithm for DeltaT
-        SchmadelZech1979,                   //!< Schmadel & Zech (1979) algorithm for DeltaT
-        MorrisonStephenson1982,             //!< Morrison & Stephenson (1982) algorithm for DeltaT (used by RedShift)
-        StephensonMorrison1984,             //!< Stephenson & Morrison (1984) algorithm for DeltaT
-        StephensonHoulden,                  //!< Stephenson & Houlden (1986) algorithm for DeltaT
-        Espenak,                            //!< Espenak (1987, 1989) algorithm for DeltaT
-        Borkowski,                          //!< Borkowski (1988) algorithm for DeltaT
-        SchmadelZech1988,                   //!< Schmadel & Zech (1988) algorithm for DeltaT
-        ChaprontTouze,                      //!< Chapront-Touzé & Chapront (1991) algorithm for DeltaT
-        StephensonMorrison1995,             //!< Stephenson & Morrison (1995) algorithm for DeltaT
-        Stephenson1997,                     //!< Stephenson (1997) algorithm for DeltaT
-        ChaprontMeeus,                      //!< Chapront, Chapront-Touze & Francou (1997) & Meeus (1998) algorithm for DeltaT
-        JPLHorizons,                        //!< JPL Horizons algorithm for DeltaT
-        MeeusSimons,                        //!< Meeus & Simons (2000) algorithm for DeltaT
-        MontenbruckPfleger,                 //!< Montenbruck & Pfleger (2000) algorithm for DeltaT
-        ReingoldDershowitz,                 //!< Reingold & Dershowitz (2002, 2007) algorithm for DeltaT
-        MorrisonStephenson2004,             //!< Morrison & Stephenson (2004, 2005) algorithm for DeltaT
-        Reijs,                              //!< Reijs (2006) algorithm for DeltaT
-        EspenakMeeus,                       //!< Espenak & Meeus (2006) algorithm for DeltaT (Recommended, default)
-        EspenakMeeusZeroMoonAccel,          //   Espenak & Meeus (2006) algorithm for DeltaT (but without additional Lunar acceleration. FOR TESTING ONLY, NONPUBLIC)
-        Banjevic,                           //!< Banjevic (2006) algorithm for DeltaT
-        IslamSadiqQureshi,                  //!< Islam, Sadiq & Qureshi (2008 + revisited 2013) algorithm for DeltaT (6 polynomials)
-        KhalidSultanaZaidi,                 //!< M. Khalid, Mariam Sultana and Faheem Zaidi polinomial approximation of time period 1620-2013 (2014)
-        Custom                              //!< User defined coefficients for quadratic equation for DeltaT
+		WithoutCorrection,                  //!< Without correction, DeltaT is Zero. Like Stellarium versions before 0.12.
+		Schoch,                             //!< Schoch (1931) algorithm for DeltaT
+		Clemence,                           //!< Clemence (1948) algorithm for DeltaT
+		IAU,                                //!< IAU (1952) algorithm for DeltaT (based on observations by Spencer Jones (1939))
+		AstronomicalEphemeris,              //!< Astronomical Ephemeris (1960) algorithm for DeltaT
+		TuckermanGoldstine,                 //!< Tuckerman (1962, 1964) & Goldstine (1973) algorithm for DeltaT
+		MullerStephenson,                   //!< Muller & Stephenson (1975) algorithm for DeltaT
+		Stephenson1978,                     //!< Stephenson (1978) algorithm for DeltaT
+		SchmadelZech1979,                   //!< Schmadel & Zech (1979) algorithm for DeltaT
+		MorrisonStephenson1982,             //!< Morrison & Stephenson (1982) algorithm for DeltaT (used by RedShift)
+		StephensonMorrison1984,             //!< Stephenson & Morrison (1984) algorithm for DeltaT
+		StephensonHoulden,                  //!< Stephenson & Houlden (1986) algorithm for DeltaT
+		Espenak,                            //!< Espenak (1987, 1989) algorithm for DeltaT
+		Borkowski,                          //!< Borkowski (1988) algorithm for DeltaT
+		SchmadelZech1988,                   //!< Schmadel & Zech (1988) algorithm for DeltaT
+		ChaprontTouze,                      //!< Chapront-Touzé & Chapront (1991) algorithm for DeltaT
+		StephensonMorrison1995,             //!< Stephenson & Morrison (1995) algorithm for DeltaT
+		Stephenson1997,                     //!< Stephenson (1997) algorithm for DeltaT
+		ChaprontMeeus,                      //!< Chapront, Chapront-Touze & Francou (1997) & Meeus (1998) algorithm for DeltaT
+		JPLHorizons,                        //!< JPL Horizons algorithm for DeltaT
+		MeeusSimons,                        //!< Meeus & Simons (2000) algorithm for DeltaT
+		MontenbruckPfleger,                 //!< Montenbruck & Pfleger (2000) algorithm for DeltaT
+		ReingoldDershowitz,                 //!< Reingold & Dershowitz (2002, 2007) algorithm for DeltaT
+		MorrisonStephenson2004,             //!< Morrison & Stephenson (2004, 2005) algorithm for DeltaT
+		Reijs,                              //!< Reijs (2006) algorithm for DeltaT
+		EspenakMeeus,                       //!< Espenak & Meeus (2006) algorithm for DeltaT (Recommended, default)
+		EspenakMeeusZeroMoonAccel,          //   Espenak & Meeus (2006) algorithm for DeltaT (but without additional Lunar acceleration. FOR TESTING ONLY, NONPUBLIC)
+		Banjevic,                           //!< Banjevic (2006) algorithm for DeltaT
+		IslamSadiqQureshi,                  //!< Islam, Sadiq & Qureshi (2008 + revisited 2013) algorithm for DeltaT (6 polynomials)
+		KhalidSultanaZaidi,                 //!< M. Khalid, Mariam Sultana and Faheem Zaidi polinomial approximation of time period 1620-2013 (2014)
+		Custom                              //!< User defined coefficients for quadratic equation for DeltaT
 	};
 
 	StelCore();
@@ -392,7 +392,7 @@ public slots:
 	//! using plain UT, but all orbital motions or rotation of the other planets must be computed in TT, which is a regular time frame.
 	//! Also satellites are computed in the UT frame because (1) they are short-lived and (2) must follow paths over earth ground.
 	//! (Note that we make no further difference between TT and DT, those are regarded equivalent for our purpose.)
-    //! @param JD the date and time expressed as a Julian Day
+	//! @param JD the date and time expressed as a Julian Day
 	//! @return DeltaT in seconds
 	//! @note Thanks to Rob van Gent which create a collection from many formulas for calculation of Delta-T: http://www.staff.science.uu.nl/~gent0113/deltat/deltat.htm
 	//! @note Use this only if needed, prefer calling getDeltaT() for access to the current value.
@@ -586,12 +586,12 @@ public slots:
 	//! initialize ephemerides calculation functions
 	void initEphemeridesFunctions();
 
-    bool de430IsAvailable();            //!< true if DE430 ephemeris file has been found
-    bool de431IsAvailable();            //!< true if DE431 ephemeris file has been found
-    bool de430IsActive();               //!< true if DE430 ephemeris is in use
-    bool de431IsActive();               //!< true if DE431 ephemeris is in use
-    void setDe430Active(bool status);   //!< switch DE430 use to @param status (if de430IsAvailable()) DE430 is only used if date is within range of DE430.
-    void setDe431Active(bool status);   //!< switch DE431 use to @param status (if de431IsAvailable()). DE431 is only used if DE430 is not used and the date is within range of DE431.
+	bool de430IsAvailable();            //!< true if DE430 ephemeris file has been found
+	bool de431IsAvailable();            //!< true if DE431 ephemeris file has been found
+	bool de430IsActive();               //!< true if DE430 ephemeris is in use
+	bool de431IsActive();               //!< true if DE431 ephemeris is in use
+	void setDe430Active(bool status);   //!< switch DE430 use to @param status (if de430IsAvailable()) DE430 is only used if date is within range of DE430.
+	void setDe431Active(bool status);   //!< switch DE431 use to @param status (if de431IsAvailable()). DE431 is only used if DE430 is not used and the date is within range of DE431.
 
 signals:
 	//! This signal is emitted when the observer location has changed.
@@ -647,10 +647,10 @@ private:
 	bool flagUseTopocentricCoordinates;
 
 	// Time variables
-    double timeSpeed;           // Positive : forward, Negative : Backward, 1 = 1sec/sec
-    //double JDay;              // Current time in Julian day. IN V0.12 TO V0.14, this was JD in TT, and all places where UT was required had to subtract getDeltaT() explicitly.
-    QPair<double,double> JD;    // From 0.14 on: JD.first=JD_UT, JD.second=DeltaT=TT-UT. To gain JD_TT, compute JDE=JD.first+JD.second or better just call getJDE()
-                                // Use is best with calls getJD()/setJD() and getJDE()/setJDE() to explicitly state which flavour of JD you need.
+	double timeSpeed;           // Positive : forward, Negative : Backward, 1 = 1sec/sec
+	//double JDay;              // Current time in Julian day. IN V0.12 TO V0.14, this was JD in TT, and all places where UT was required had to subtract getDeltaT() explicitly.
+	QPair<double,double> JD;    // From 0.14 on: JD.first=JD_UT, JD.second=DeltaT=TT-UT. To gain JD_TT, compute JDE=JD.first+JD.second or better just call getJDE()
+				// Use is best with calls getJD()/setJD() and getJDE()/setJDE() to explicitly state which flavour of JD you need.
 	double presetSkyTime;
 	QTime initTodayTime;
 	QString startupTimeMode;
