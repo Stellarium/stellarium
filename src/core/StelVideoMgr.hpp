@@ -84,8 +84,10 @@ class QGraphicsVideoItem;
 //! We opted for the latter solution because it allows scaled but undistorted video frames which may also take current screen resolution into account.
 //!
 //! Under unclear circumstances we also have a pair of messages:
-//! @code Failed to start video surface due to main thread blocked.
-//! @code Failed to start video surface
+//! @code
+//! Failed to start video surface due to main thread blocked.
+//! Failed to start video surface
+//! @endcode
 //! and non-appearing video frame, this seems to be https://bugreports.qt.io/browse/QTBUG-39567.
 //! This occurred on an Intel NUC5i3 with SSD, so loading the file should not be much of an issue.
 //!

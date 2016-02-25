@@ -56,7 +56,6 @@ class StelCore : public QObject
 	Q_PROPERTY(bool flagUseTopocentricCoordinates READ getUseTopocentricCoordinates WRITE setUseTopocentricCoordinates)
 
 public:
-	//! @enum FrameType
 	//! Supported reference frame types
 	enum FrameType
 	{
@@ -66,14 +65,12 @@ public:
 		FrameObservercentricEclipticJ2000,	//!< Fixed-ecliptic reference frame centered on the Observer. GZ: was ObservercentricEcliptic, but renamed because it is Ecliptic of J2000!
 		FrameObservercentricEclipticOfDate,	//!< Moving ecliptic reference frame centered on the Observer. GZ new for V0.14: Ecliptic of date, i.e. includes the precession of the ecliptic.
 		FrameEquinoxEqu,			//!< Equatorial reference frame at the current equinox centered on the observer.
-							//!< The north pole follows the precession of the planet on which the observer is located. On Earth, this may include nutation if so configured.
-							//!< Has been corrected for V0.14 to really properly reflect ecliptical motion and precession (Vondrak 2011 model) and nutation.
-		FrameJ2000,				//!< Equatorial reference frame at the J2000 equinox centered on the observer.
-							//!< This is also the ICRS reference frame.
+							//!< The north pole follows the precession of the planet on which the observer is located.
+							//!< On Earth, this may include nutation if so configured. Has been corrected for V0.14 to really properly reflect ecliptical motion and precession (Vondrak 2011 model) and nutation.
+		FrameJ2000,				//!< Equatorial reference frame at the J2000 equinox centered on the observer. This is also the ICRS reference frame.
 		FrameGalactic				//!< Galactic reference frame centered on observer.
 	};
 
-	//! @enum ProjectionType
 	//! Available projection types. A value of 1000 indicate the default projection
 	enum ProjectionType
 	{
@@ -88,7 +85,6 @@ public:
 		ProjectionSinusoidal                //!< Sinusoidal projection
 	};
 
-	//! @enum RefractionMode
 	//! Available refraction mode.
 	enum RefractionMode
 	{
@@ -97,7 +93,6 @@ public:
 		RefractionOff                       //!< Never add refraction (i.e. geometric coordinates)
 	};
 
-	//! @enum DeltaTAlgorithm
 	//! Available DeltaT algorithms
 	enum DeltaTAlgorithm
 	{
@@ -127,7 +122,7 @@ public:
 		MorrisonStephenson2004,             //!< Morrison & Stephenson (2004, 2005) algorithm for DeltaT
 		Reijs,                              //!< Reijs (2006) algorithm for DeltaT
 		EspenakMeeus,                       //!< Espenak & Meeus (2006) algorithm for DeltaT (Recommended, default)
-		EspenakMeeusZeroMoonAccel,          //   Espenak & Meeus (2006) algorithm for DeltaT (but without additional Lunar acceleration. FOR TESTING ONLY, NONPUBLIC)
+		EspenakMeeusZeroMoonAccel,          //!< Espenak & Meeus (2006) algorithm for DeltaT (but without additional Lunar acceleration. FOR TESTING ONLY, NONPUBLIC)
 		Banjevic,                           //!< Banjevic (2006) algorithm for DeltaT
 		IslamSadiqQureshi,                  //!< Islam, Sadiq & Qureshi (2008 + revisited 2013) algorithm for DeltaT (6 polynomials)
 		KhalidSultanaZaidi,                 //!< M. Khalid, Mariam Sultana and Faheem Zaidi polinomial approximation of time period 1620-2013 (2014)
@@ -313,6 +308,7 @@ public:
 	QString getDefaultProjectionTypeKey(void) const;
 
 public slots:
+
 	//! Set the current ProjectionType to use
 	void setCurrentProjectionType(ProjectionType type);
 	ProjectionType getCurrentProjectionType() const;
