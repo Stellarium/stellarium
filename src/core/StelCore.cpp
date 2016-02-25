@@ -24,6 +24,7 @@
 #include "StelToneReproducer.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelApp.hpp"
+#include "StelPropertyMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelGeodesicGrid.hpp"
 #include "StelMovementMgr.hpp"
@@ -262,7 +263,11 @@ void StelCore::init()
 
 	actionsMgr->addAction("actionHorizontal_Flip", displayGroup, N_("Flip scene horizontally"), this, "flipHorz", "Ctrl+Shift+H", "", true);
 	actionsMgr->addAction("actionVertical_Flip", displayGroup, N_("Flip scene vertically"), this, "flipVert", "Ctrl+Shift+V", "", true);
-	
+
+	StelPropertyMgr *propMgr=StelApp::getInstance().getStelPropertyManager();
+	propMgr->registerProperty("prop_StelCore_viewportHorizontalOffset", this, "viewportHorizontalOffset");
+	propMgr->registerProperty("prop_StelCore_viewportVerticalOffset", this, "viewportVerticalOffset");
+
 }
 
 QString StelCore::getDefaultProjectionTypeKey() const
@@ -562,6 +567,35 @@ bool StelCore::getFlipVert(void) const
 {
 	return currentProjectorParams.flipVert;
 }
+
+// Get current value for horizontal viewport offset [-50...50]
+double StelCore::getViewportHorizontalOffset(void)
+{
+	return (currentProjectorParams.viewportCenterOffset[0] * 100.0f);
+}
+// Set horizontal viewport offset. Argument will be clamped to be inside [-50...50]
+void StelCore::setViewportHorizontalOffset(double newOffsetPct)
+{
+	currentProjectorParams.viewportCenterOffset[0]=0.01f* qMin(50., qMax(-50., newOffsetPct));
+	currentProjectorParams.viewportCenter.set(currentProjectorParams.viewportXywh[0]+(0.5f+currentProjectorParams.viewportCenterOffset.v[0])*currentProjectorParams.viewportXywh[2],
+						currentProjectorParams.viewportXywh[1]+(0.5f+currentProjectorParams.viewportCenterOffset.v[1])*currentProjectorParams.viewportXywh[3]);
+	emit viewportHorizontalOffsetChanged(newOffsetPct);
+}
+
+// Get current value for vertical viewport offset [-50...50]
+double StelCore::getViewportVerticalOffset(void)
+{
+	return (currentProjectorParams.viewportCenterOffset[1] * 100.0f);
+}
+// Set vertical viewport offset. Argument will be clamped to be inside [-50...50]
+void StelCore::setViewportVerticalOffset(double newOffsetPct)
+{
+	currentProjectorParams.viewportCenterOffset[1]=0.01f* qMin(50., qMax(-50., newOffsetPct));
+	currentProjectorParams.viewportCenter.set(currentProjectorParams.viewportXywh[0]+(0.5f+currentProjectorParams.viewportCenterOffset.v[0])*currentProjectorParams.viewportXywh[2],
+						currentProjectorParams.viewportXywh[1]+(0.5f+currentProjectorParams.viewportCenterOffset.v[1])*currentProjectorParams.viewportXywh[3]);
+	emit viewportVerticalOffsetChanged(newOffsetPct);
+}
+
 
 QString StelCore::getDefaultLocationID() const
 {
