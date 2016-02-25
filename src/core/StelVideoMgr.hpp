@@ -106,37 +106,37 @@ public slots:
 	// Methods from StelModule: only update() needed.
 	virtual void init(){;} // Or do something?
 
-	//! Update the module with respect to the time. This allows the special effects in @name playVideoPopout(), and may evaluate things like video resolution when they become available.
+	//! Update the module with respect to the time. This allows the special effects in playVideoPopout(), and may evaluate things like video resolution when they become available.
 	//! @param deltaTime the time increment in second since last call.
 	virtual void update(double deltaTime);
 
-	//! load a video from @param filename, assign an @param id for it for later reference.
-	//! If @param id is already in use, replace it.
-	//! Prepare replay at upper-left corner @param x/@param y in native resolution,
-	//! decide whether to @param show (play) the video already, and set opacity @name alpha.
-	//! If you want non-native resolution, load with @param show set to false, and use @name resizeVideo() and @name showVideo().
-	//! @bug Note that with @param alpha =0 the video is invisible as expected, other values make it fully opaque. There is no semi-transparency possible.
+	//! load a video from filename, assign an id for it for later reference.
+	//! If id is already in use, replace it.
+	//! Prepare replay at upper-left corner x/ y in native resolution,
+	//! decide whether to show (play) the video already, and set opacity alpha.
+	//! If you want non-native resolution, load with show set to false, and use resizeVideo() and showVideo().
+	//! @bug Note that with  alpha =0 the video is invisible as expected, other values make it fully opaque. There is no semi-transparency possible.
 	void loadVideo(const QString& filename, const QString& id, const float x, const float y, const bool show, const float alpha);
-	//! play video from current position. If @param keepLastFrame is true, video pauses at last frame.
+	//! play video from current position. If keepLastFrame is true, video pauses at last frame.
 	void playVideo(const QString& id, const bool keepVisibleAtEnd=false);
 
-	//! Play a video which has previously been loaded with loadVideo with a complex effect.
-	//! The video appears to pop out from @param fromX/ @param fromY,
-	//! grows within @param popupDuration to size @param finalSizeX/@param finalSizeY, and
-	//! shrinks back towards @param fromX/@param fromY at the end during @param popdownDuration.
+	//! Play a video which has previously been loaded with loadVideo() with a complex effect.
+	//! The video appears to pop out from  fromX/ fromY,
+	//! grows within popupDuration to size  finalSizeX/ finalSizeY, and
+	//! shrinks back towards  fromX/ fromY at the end during popdownDuration.
 	//! @param id the identifier used when loadVideo was called
 	//! @param fromX X position of starting point, counted from left of window. May be absolute (if >1) or relative (0<X<1)
 	//! @param fromY Y position of starting point, counted from top of window. May be absolute (if >1) or relative (0<Y<1)
 	//! @param atCenterX X position of center of final video frame, counted from left of window. May be absolute (if >1) or relative (0<X<1)
 	//! @param atCenterY Y position of center of final video frame, counted from top of window. May be absolute (if >1) or relative (0<Y<1)
-	//! @param finalSizeX X size of final video frame. May be absolute (if >1) or relative to window size (0<X<1). If -1, scale proportional from @param finalSizeY.
-	//! @param finalSizeY Y size of final video frame. May be absolute (if >1) or relative to window size (0<Y<1). If -1, scale proportional from @param finalSizeX.
+	//! @param finalSizeX X size of final video frame. May be absolute (if >1) or relative to window size (0<X<1). If -1, scale proportional from finalSizeY.
+	//! @param finalSizeY Y size of final video frame. May be absolute (if >1) or relative to window size (0<Y<1). If -1, scale proportional from finalSizeX.
 	//! @param popupDuration duration of growing (start) / shrinking (end) transitions (seconds)
 	//! @param frozenInTransition true if video should be paused during growing/shrinking transition.
 	void playVideoPopout(const QString& id, float fromX, float fromY, float atCenterX, float atCenterY, float finalSizeX, float finalSizeY, float popupDuration, bool frozenInTransition);
 
 	//! Pause video, keep it visible on-screen.
-	//! Sending @name playVideo() continues replay, sending seekVideo() can move to a different position.
+	//! Calling playVideo() continues replay, calling seekVideo() can move to a different position.
 	void pauseVideo(const QString& id);
 
 	//! Stop playing, resets video and hides video output window
@@ -145,24 +145,24 @@ public slots:
 	//! Unload video from memory.
 	void dropVideo(const QString& id);
 
-	//! Seek a position in video @param id. Pause the video playing if @param pause=true.
+	//! Seek a position in video id. Pause the video playing if pause=true.
 	//! @note This may not work if video has not been fully loaded. Better wait a second before proceeding after loadVideo(), and call seekVideo(., ., false); pauseVideo(.);
 	void seekVideo(const QString& id, const qint64 ms, bool pause=false);
 
-	//! move upper left corner of video @name id to @name x, @name y.
+	//! move upper left corner of video id to  x, y.
 	//! If x or y are <1, this is relative to screen size!
 	void setVideoXY(const QString& id, const float x, const float y, const bool relative=false);
 
 	//! sets opacity
 	//! @param alpha opacity for the video (0=transparent, ... 1=fully opaque).
-	//! @note if alpha is 0, also @name showVideo(id, true) cannot show the video.
-	//! @bug (as of Qt5.5) Note that with @param alpha =0 the video is invisible as expected, other values make it fully opaque. There is no semi-transparency possible.
+	//! @note if alpha is 0, also showVideo(id, true) cannot show the video.
+	//! @bug (as of Qt5.5) Note that with alpha =0 the video is invisible as expected, other values make it fully opaque. There is no semi-transparency possible.
 	void setVideoAlpha(const QString& id, const float alpha);
 
-	//! set video size to width @param w and height @param h.
-	//! Use @param w=-1 or @param h=-1 for autoscale from the other dimension,
-	//! or use @param w=h=-1 for native size of video.
-	//! if @param w or @param h are <=1, the size is relative to screen dimensions.
+	//! set video size to width  w and height  h.
+	//! Use  w=-1 or h=-1 for autoscale from the other dimension,
+	//! or use w=h=-1 for native size of video.
+	//! if w or h are <=1, the size is relative to screen dimensions.
 	//! This should be the preferred use, because it allows the development of device-independent scripts.
 	//! When native resolution is unknown at the time you call this, it will be evaluated at the next update() after resolution becomes known.
 	//! Autoscaling uses viewport dimensions at the time of calling, so resizing the Stellarium window will not resize the video frame during replay.
@@ -170,14 +170,14 @@ public slots:
 
 	//! show or hide video player
 	//! @param id name given during loadVideo()
-	//! @param show @value true to show, @value false to hide
+	//! @param show true to show, false to hide
 	void showVideo(const QString& id, const bool show);
 
-	//! returns duration (in milliseconds) of loaded video. This may return valid result only after @name playVideo() or @name pauseVideo() have been called.
+	//! returns duration (in milliseconds) of loaded video. This may return valid result only after playVideo() or pauseVideo() have been called.
 	//! Returns -1 if video has not been analyzed yet. (loaded, but not started).
 	qint64 getVideoDuration(const QString& id);
 
-	//! returns current position (in milliseconds) of loaded video. This may return valid result only after @name playVideo() or @name pauseVideo() have been called.
+	//! returns current position (in milliseconds) of loaded video. This may return valid result only after playVideo() or pauseVideo() have been called.
 	//! Returns -1 if video has not been analyzed yet. (loaded, but not started).
 	qint64 getVideoPosition(const QString& id);
 
@@ -189,7 +189,7 @@ public slots:
 	int getVideoHeight(const QString& id);
 
 	//! set mute state of video player
-	//! @param mute true to silence the video, false to hear audio.
+	//! @param muteVideo true to silence the video, false to hear audio.
 	void muteVideo(const QString& id, bool muteVideo=true);
 	//! set volume for video. Valid values are 0..100, values outside this range will be clamped.
 	void setVideoVolume(const QString& id, int newVolume);
@@ -198,7 +198,7 @@ public slots:
 
 	//! returns whether video is currently playing.
 	//! @param id name assigned during loadVideo().
-	//! @note If video is not found, also returns @value false.
+	//! @note If video is not found, also returns false.
 	bool isVideoPlaying(const QString& id);
 
 #ifdef ENABLE_MEDIA
@@ -248,10 +248,10 @@ private:
 		bool keepVisible;          //!< true if you want to show the last frame after video has played. (Due to delays in signal/slot handling of mediaplayer status changes, we use update() to stop a few frames before end.)
 		bool needResize;           //!< becomes true if resize is called before resolution becomes available.
 		bool simplePlay;           //!< only play in one static size. true for playVideo(), false during playVideoPopout().
-		LinearFader fader;         //!< Used during @name playVideoPopout() for nice transition effects.
-		QSizeF  targetFrameSize;   //!< Video frame size, used during @name playVideo(), and final frame size during @name playVideoPopout().
-		QPointF popupOrigin;       //!< Screen point where video appears to come out during @name playVideoPopout()
-		QPointF popupTargetCenter; //!< Target frame position (center of target frame) used during @name playVideoPopout()
+		LinearFader fader;         //!< Used during playVideoPopout() for nice transition effects.
+		QSizeF  targetFrameSize;   //!< Video frame size, used during playVideo(), and final frame size during playVideoPopout().
+		QPointF popupOrigin;       //!< Screen point where video appears to come out during playVideoPopout()
+		QPointF popupTargetCenter; //!< Target frame position (center of target frame) used during playVideoPopout()
 		int lastPos;               //!< This should not be required: We must track a bug in QtMultimedia where the QMediaPlayer is in playing state but does not progress the video position. In update() we try to let it run again.
 	} VideoPlayer;
 	QMap<QString, VideoPlayer*> videoObjects;
