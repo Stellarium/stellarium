@@ -76,7 +76,6 @@ class SearchDialog : public StelDialog
 	Q_ENUMS(CoordinateSystem)
 
 public:
-	//! @enum CoordinateSystem
 	//! Available coordinate systems
 	enum CoordinateSystem
 	{
