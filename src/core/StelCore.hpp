@@ -54,6 +54,8 @@ class StelCore : public QObject
 	Q_PROPERTY(bool flipVert READ getFlipVert WRITE setFlipVert)
 	Q_PROPERTY(bool flagUseNutation READ getUseNutation WRITE setUseNutation)
 	Q_PROPERTY(bool flagUseTopocentricCoordinates READ getUseTopocentricCoordinates WRITE setUseTopocentricCoordinates)
+	Q_PROPERTY(double viewportHorizontalOffset READ getViewportHorizontalOffset WRITE setViewportHorizontalOffset NOTIFY viewportHorizontalOffsetChanged)
+	Q_PROPERTY(double viewportVerticalOffset   READ getViewportVerticalOffset   WRITE setViewportVerticalOffset   NOTIFY viewportVerticalOffsetChanged)
 
 public:
 	//! @enum FrameType
@@ -361,6 +363,18 @@ public slots:
 	//! @return True if flipped vertically, else false.
 	bool getFlipVert(void) const;
 
+	//New for 0.15: Vertical offset should even be available for animation, so at last with property mechanism.
+	//! Get current value for horizontal viewport offset [-50...50]
+	double getViewportHorizontalOffset(void);
+	//! Set horizontal viewport offset. Argument will be clamped to be inside [-50...50]
+	void setViewportHorizontalOffset(double newOffsetPct);
+	//! Get current value for vertical viewport offset [-50...50]
+	double getViewportVerticalOffset(void);
+	//! Set vertical viewport offset. Argument will be clamped to be inside [-50...50]
+	void setViewportVerticalOffset(double newOffsetPct);
+
+
+
 	//! Get the location used by default at startup
 	QString getDefaultLocationID() const;
 	//! Set the location to use by default at startup
@@ -620,6 +634,10 @@ signals:
 	void timeSyncOccurred(double jDay);
 	//! Emitted whenever the projection type changes
 	void currentProjectionTypeChanged(StelCore::ProjectionType newType);
+	//! Emitted when horizontal viewport offset changed
+	void viewportHorizontalOffsetChanged(const double newOffset);
+	//! Emitted when vertical viewport offset changed
+	void viewportVerticalOffsetChanged(const double newOffset);
 
 private:
 	StelToneReproducer* toneReproducer;		// Tones conversion between stellarium world and display device
