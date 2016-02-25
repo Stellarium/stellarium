@@ -39,11 +39,11 @@ class StelPainter;
 //! @class Constellation
 //! The Constellation class models a grouping of stars in a Sky Culture.
 //! Each Constellation consists of a list of stars identified by their
-//! @var abbreviation and Hipparcos catalogue numbers (taken from @file: constellationship.fab),
-//! another entry in @file constellation_names.eng.fab with the defining abbreviated name,
-//! @var nativeName, and translatable @var englishName (translation goes into @var nameI18),
-//! boundary shape from @file constellations_boundaries.dat and an (optional) artistic pictorial representation.
-//! GZ NEW: The @var nativeName should be accessible in a GUI option, so that e.g. original names as written in a
+//! abbreviation and Hipparcos catalogue numbers (taken from file: constellationship.fab),
+//! another entry in file constellation_names.eng.fab with the defining abbreviated name,
+//! nativeName, and translatable englishName (translation goes into nameI18),
+//! boundary shape from file constellations_boundaries.dat and an (optional) artistic pictorial representation.
+//! GZ NEW: The nativeName should be accessible in a GUI option, so that e.g. original names as written in a
 //! concrete book where a skyculture has been taken from can be assured even when translation is available.
 //! TODO: There should be a distinction between constellations and asterisms, which are "inofficial" figures within a sky culture.
 //! For example, Western sky culture has a "Big Dipper", "Coathanger", etc. These would be nice to see, but in different style.

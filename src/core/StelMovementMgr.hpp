@@ -163,10 +163,11 @@ public slots:
 	//! @param aimUp Up vector. Can be usually (0/0/1) but may have to be exact for looking into the zenith/pole
 	//! @param moveDuration The time it takes for the move to complete.
 	//! @param zooming you want to zoom in, out or not (just center).
-	//! @example You can use the following code most of the times to find a valid aimUp vector:
-	//! 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-	//!	mvmgr->moveToJ2000(pos, mvmgr->mountFrameToJ2000(Vec3d(0., 0., 1.)), mvmgr->getAutoMoveDuration());
-	//!
+	//! @code
+	//! // You can use the following code most of the times to find a valid aimUp vector:
+	//! StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+	//! mvmgr->moveToJ2000(pos, mvmgr->mountFrameToJ2000(Vec3d(0., 0., 1.)), mvmgr->getAutoMoveDuration());
+	//! @endcode
 	void moveToJ2000(const Vec3d& aim, const Vec3d &aimUp, float moveDuration = 1., ZoomingMode zooming = ZoomNone);
 	void moveToObject(const StelObjectP& target, float moveDuration = 1., ZoomingMode zooming = ZoomNone);
 
