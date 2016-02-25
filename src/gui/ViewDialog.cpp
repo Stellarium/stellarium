@@ -128,13 +128,12 @@ void ViewDialog::createDialogContent()
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	populateLists();
-	ui->viewportOffsetSpinBox->setValue((int) round(StelApp::getInstance().getCore()->getCurrentStelProjectorParams().viewportCenterOffset[1] * 100.0f));
+	connectDoubleProperty(ui->viewportOffsetSpinBox, "prop_StelCore_viewportVerticalOffset");
 
 	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)),&StelApp::getInstance().getSkyCultureMgr(),SLOT(setCurrentSkyCultureNameI18(QString)));
 	connect(&StelApp::getInstance(), SIGNAL(skyCultureChanged(QString)), this, SLOT(skyCultureChanged(QString)));
 	connect(ui->projectionListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(changeProjection(const QString&)));
 	connect(StelApp::getInstance().getCore(), SIGNAL(currentProjectionTypeChanged(StelCore::ProjectionType)),this,SLOT(projectionChanged()));
-	connect(ui->viewportOffsetSpinBox, SIGNAL(valueChanged(int)), this, SLOT(viewportVerticalShiftChanged(int)));
 
 	// Connect and initialize checkboxes and other widgets
 
@@ -293,7 +292,7 @@ void ViewDialog::createDialogContent()
 
 	connectCheckBox(ui->nativeNameCheckBox,"actionShow_Skyculture_Nativenames");
 
-	// GZ NEW allow to display short names and inhibit translation.
+	// allow to display short names and inhibit translation.
 	connectIntProperty(ui->skyCultureNamesStyleComboBox,"prop_ConstellationMgr_constellationDisplayStyle");
 
 	// Sky layers. This not yet finished and not visible in releases.
@@ -636,17 +635,6 @@ void ViewDialog::projectionChanged()
 	ui->projectionTextBrowser->setHtml(core->getProjection(StelCore::FrameJ2000)->getHtmlSummary());
 }
 
-void ViewDialog::viewportVerticalShiftChanged(const int shift)
-{
-	StelCore* core = StelApp::getInstance().getCore();
-	StelProjector::StelProjectorParams params=core->getCurrentStelProjectorParams();
-	params.viewportCenterOffset[1]=qMax(-0.5f, qMin(shift/100.0f, 0.5f)); // Sanity check
-
-	params.viewportCenter.set(params.viewportXywh[0]+(0.5f+params.viewportCenterOffset.v[0])*params.viewportXywh[2],
-				  params.viewportXywh[1]+(0.5f+params.viewportCenterOffset.v[1])*params.viewportXywh[3]);
-
-	core->setCurrentStelProjectorParams(params);
-}
 
 void ViewDialog::changeLandscape(QListWidgetItem* item)
 {
