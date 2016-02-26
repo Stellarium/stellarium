@@ -586,8 +586,8 @@ public slots:
 	//! You should load a video with show=true (or leave default), to start it immediately in native size.
 	//! Else set show=false, and then call resizeVideo(), playVideo() or use playVideoPopout().
 	//! @param alpha the initial alpha value of the video, defaults to 1.
-	//! @bug With Qt5/V0.15+, @param alpha does not work properly (no semitransparency), only @param alpha=0 makes it invisible.
-	//! @bug With Qt5/V0.15+, @param show=false causes an assert failure (crash) on Windows. The responsible assert is not fired on release builds.
+	//! @bug With Qt5/V0.15+, alpha does not work properly (no semitransparency), only alpha=0 makes it invisible.
+	//! @bug With Qt5/V0.15+, show=false causes an assert failure (crash) on Windows. The responsible assert is not fired on release builds.
 	void loadVideo(const QString& filename, const QString& id, float x, float y, bool show=true, float alpha=1.0f);
 
 	//! Play a video which has previously been loaded with loadVideo
@@ -595,16 +595,16 @@ public slots:
 	void playVideo(const QString& id, bool keepVisibleAtEnd=false);
 
 	//! Play a video which has previously been loaded with loadVideo with a complex effect.
-	//! The video appears out of @param fromX/ @param fromY,
-	//! grows within @param popupDuration to size @param finalSizeX/@param finalSizeY, and
-	//! shrinks back towards @param fromX/@param fromY at the end during @param popdownDuration.
+	//! The video appears out of fromX/fromY,
+	//! grows within popupDuration to size finalSizeX/finalSizeY, and
+	//! shrinks back towards fromX/fromY at the end during popdownDuration.
 	//! @param id the identifier used when loadVideo was called
 	//! @param fromX X position of starting point, counted from left of window. May be absolute (if >1) or relative (0<X<1)
 	//! @param fromY Y position of starting point, counted from top of window. May be absolute (if >1) or relative (0<Y<1)
 	//! @param atCenterX X position of center of final video frame, counted from left of window. May be absolute (if >1) or relative (0<X<1)
 	//! @param atCenterY Y position of center of final video frame, counted from top of window. May be absolute (if >1) or relative (0<Y<1)
-	//! @param finalSizeX X size of final video frame. May be absolute (if >1) or relative to window size (0<X<1). If -1, scale proportional from @param finalSizeY.
-	//! @param finalSizeY Y size of final video frame. May be absolute (if >1) or relative to window size (0<Y<1). If -1, scale proportional from @param finalSizeX.
+	//! @param finalSizeX X size of final video frame. May be absolute (if >1) or relative to window size (0<X<1). If -1, scale proportional from finalSizeY.
+	//! @param finalSizeY Y size of final video frame. May be absolute (if >1) or relative to window size (0<Y<1). If -1, scale proportional from finalSizeX.
 	//! @param popupDuration duration of growing start transition (seconds)
 	//! @param frozenInTransition true if video should be paused during growing/shrinking transition.
 	void playVideoPopout(const QString& id, float fromX, float fromY, float atCenterX, float atCenterY, float finalSizeX, float finalSizeY, float popupDuration, bool frozenInTransition);
