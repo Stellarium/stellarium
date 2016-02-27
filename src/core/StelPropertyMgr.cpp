@@ -113,7 +113,9 @@ StelProperty* StelPropertyMgr::registerProperty(const QString& id, QObject* targ
 		qFatal("StelProperty %s can not be read. Missing READ or need to register MetaType?",id.toUtf8().constData());
 
 	connect(prop, SIGNAL(changed(QVariant)), this, SLOT(onStelPropChanged(QVariant)));
+	#ifndef NDEBUG
 	qDebug()<<"StelProperty"<<id<<"registered, value"<<value;
+	#endif
 	return prop;
 }
 
@@ -133,7 +135,9 @@ StelProperty* StelPropertyMgr::getProperty(const QString &id) const
 void StelPropertyMgr::onStelPropChanged(const QVariant &val)
 {
 	StelProperty* prop = qobject_cast<StelProperty*>(sender());
+	#ifndef NDEBUG
 	qDebug()<<"StelProperty"<<prop->getId()<<"changed, value"<<val;
+	#endif
 	emit stelPropChanged(prop->getId(),val);
 }
 
