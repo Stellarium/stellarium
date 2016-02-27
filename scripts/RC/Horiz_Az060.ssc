@@ -1,0 +1,8 @@
+//
+// Name: Horiz_060
+// License: Public Domain
+// Author: Georg Zotti
+// Description: Move to look towards Az.60/altitude 0 within 3 seconds. Best used in Cylindrical projection.
+//        
+
+core.moveToAltAzi(0., 60., 3.);
