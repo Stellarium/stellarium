@@ -70,6 +70,7 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, flagAutoZoom(0)
 	, flagAutoZoomOutResetsDirection(0)
 	, dragTriggerDistance(4.f)
+	, viewportOffsetTimeline(NULL)
 {
 	setObjectName("StelMovementMgr");
 	isDragging = false;
@@ -79,6 +80,7 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 
 StelMovementMgr::~StelMovementMgr()
 {
+	if (viewportOffsetTimeline) delete viewportOffsetTimeline; viewportOffsetTimeline=NULL;
 }
 
 void StelMovementMgr::init()
@@ -161,6 +163,10 @@ void StelMovementMgr::init()
 	addAction("actionLook_Towards_North", movementGroup, N_("Look towards North"), "lookNorth()", "Shift+N");
 	addAction("actionLook_Towards_South", movementGroup, N_("Look towards South"), "lookSouth()", "Shift+S");
 	addAction("actionLook_Towards_Zenith", movementGroup, N_("Look towards Zenith"), "lookZenith()", "Shift+Z");
+
+	viewportOffsetTimeline=new QTimeLine(1000, this);
+	viewportOffsetTimeline->setFrameRange(0, 100);
+	connect(viewportOffsetTimeline, SIGNAL(valueChanged(qreal)), this, SLOT(handleViewportOffsetMovement(qreal)));
 }
 
 void StelMovementMgr::setMountMode(MountMode m)
@@ -1222,4 +1228,38 @@ void StelMovementMgr::setMaxFov(double max)
 	{
 		setFov(max);
 	}
+}
+
+
+// start animated move of the viewport offset.
+// @param offsetX new horizontal viewport offset, percent. clamped to [-50...50]
+// @param offsetY new horizontal viewport offset, percent. clamped to [-50...50]
+// @param duration animation duration, seconds.
+void StelMovementMgr::moveViewport(const float offsetX, const float offsetY, const float duration)
+{
+	if (duration==0)
+	{
+		core->setViewportHorizontalOffset(offsetX);
+		core->setViewportVerticalOffset(offsetY);
+		return;
+	}
+
+	viewportOffsetTimeline->stop();
+	viewportOffsetTimeline->setDuration(1000.*duration);
+	// Frame will now be 0..100, and we must interpolate in handleViewportOffsetMovement(frame) between old and new offsets.
+	oldViewportOffset.set(core->getViewportHorizontalOffset(), core->getViewportVerticalOffset());
+	targetViewportOffset.set(qMax(-50.f, qMin(50.f, offsetX)), qMax(-50.f, qMin(50.f, offsetY)));
+	//qDebug() << "moveViewport() started, from " << oldViewportOffset.v[0] << "/" << oldViewportOffset.v[1] << " towards " << offsetX << "/" << offsetY;
+	viewportOffsetTimeline->start();
+}
+
+// slot which is connected to the viewportOffsetTimeline and does the actual updates.
+void StelMovementMgr::handleViewportOffsetMovement(qreal value)
+{
+	// value is always 0...1
+	float offsetX=oldViewportOffset.v[0] + (targetViewportOffset.v[0]-oldViewportOffset.v[0])*value;
+	float offsetY=oldViewportOffset.v[1] + (targetViewportOffset.v[1]-oldViewportOffset.v[1])*value;
+	//qDebug() << "handleViewportOffsetMovement(" << value << "): Setting viewport offset to " << offsetX << "/" << offsetY;
+	core->setViewportHorizontalOffset(offsetX);
+	core->setViewportVerticalOffset(offsetY);
 }
