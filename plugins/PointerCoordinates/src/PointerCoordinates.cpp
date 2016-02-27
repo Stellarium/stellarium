@@ -138,7 +138,7 @@ void PointerCoordinates::draw(StelCore *core)
 		return;
 
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
-	bool useOldAzimuth = StelApp::getInstance().getFlagOldAzimuthUsage();
+	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 
 	QString coordsSystem, cxt, cyt;
 	double cx, cy;
@@ -180,7 +180,7 @@ void PointerCoordinates::draw(StelCore *core)
 		{
 			StelUtils::rectToSphe(&cy,&cx,core->j2000ToAltAz(mousePosition, StelCore::RefractionAuto));
 			float direction = 3.; // N is zero, E is 90 degrees
-			if (useOldAzimuth)
+			if (useSouthAzimuth)
 				direction = 2.;
 			cy = direction*M_PI - cy;
 			if (cy > M_PI*2)

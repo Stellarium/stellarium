@@ -214,11 +214,19 @@ public slots:
 	//! Get flag for showing decimal degree in various places.
 	bool getFlagShowDecimalDegrees() const {return flagShowDecimalDegrees;}
 
-	//! Set flag for using calculation of azimuth from south towards west (as in old astronomical literature)
-	bool getFlagOldAzimuthUsage() const { return flagUseAzimuthFromSouth; }
-	//! Get flag for using calculation of azimuth from south towards west (as in old astronomical literature)
-	void setFlagOldAzimuthUsage(bool use) { flagUseAzimuthFromSouth=use; }
+	//! Set flag for using calculation of azimuth from south towards west (instead north towards east)
+	bool getFlagSouthAzimuthUsage() const { return flagUseAzimuthFromSouth; }
+	//! Get flag for using calculation of azimuth from south towards west (instead north towards east)
+	void setFlagSouthAzimuthUsage(bool use) { flagUseAzimuthFromSouth=use; }
 	
+	//! Set flag for using calculation of azimuth from south towards west (as in older astronomical literature)
+	//! @deprecated Use getFlagSouthAzimuthUsage() instead.
+	bool getFlagOldAzimuthUsage() const { return getFlagSouthAzimuthUsage(); }
+	//! Get flag for using calculation of azimuth from south towards west (as in older astronomical literature)
+	//! @deprecated Use setFlagSouthAzimuthUsage() instead.
+	void setFlagOldAzimuthUsage(bool use) { setFlagSouthAzimuthUsage(use); }
+
+
 	//! Get the current number of frame per second.
 	//! @return the FPS averaged on the last second
 	float getFps() const {return fps;}
