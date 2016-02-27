@@ -1398,3 +1398,25 @@ double StelMainScriptAPI::getZodiacalLightIntensity()
 {
 	return GETSTELMODULE(ZodiacalLight)->getIntensity();
 }
+
+QVariantMap StelMainScriptAPI::getScreenXYFromAltAzi(const QString &alt, const QString &azi)
+{
+	Vec3d aim, v;
+	double dAlt = StelUtils::getDecAngle(alt);
+	double dAzi = M_PI - StelUtils::getDecAngle(azi);
+
+	if (StelApp::getInstance().getFlagOldAzimuthUsage())
+		dAzi -= M_PI;
+
+	StelUtils::spheToRect(dAzi,dAlt,aim);
+
+	const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionAuto);
+
+	prj->project(aim, v);
+
+	QVariantMap map;
+	map.insert("x", qRound(v[0]));
+	map.insert("y", prj->getViewportHeight()-qRound(v[1]));
+
+	return map;
+}
