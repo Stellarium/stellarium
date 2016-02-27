@@ -122,18 +122,18 @@
               <div id="view_fovbuttons" class="ui-corner-all ui-widget-content">
               <table>
                <tr>
-                <td><button type="button" class="fovbutton" value="0.1">0.1&deg;</button></td>
-                <td><button type="button" class="fovbutton" value="1">1&deg;</button></td>
-                <td><button type="button" class="fovbutton" value="10">10&deg;</button></td>
-                <td><button type="button" class="fovbutton" value="20">20&deg;</button></td></tr><tr>
-                <td><button type="button" class="fovbutton" value="30">30&deg;</button></td>
-                <td><button type="button" class="fovbutton" value="40">40&deg;</button></td>
-                <td><button type="button" class="fovbutton" value="60">60&deg;</button></td>
-                <td><button type="button" class="fovbutton" value="90">90&deg;</button></td></tr><tr>
-                <td><button type="button" class="fovbutton" value="120">120&deg;</button></td>
-                <td><button type="button" class="fovbutton" value="150">150&deg;</button></td>
-                <td><button type="button" class="fovbutton" value="180">180&deg;</button></td>
-                <td><button type="button" class="fovbutton" value="230">230&deg;</button></td>
+                <td><button type="button" class="fovbutton" flex value="0.1">0.1&deg;</button></td>
+                <td><button type="button" class="fovbutton" flex value="1">1&deg;</button></td>
+                <td><button type="button" class="fovbutton" flex value="10">10&deg;</button></td>
+                <td><button type="button" class="fovbutton" flex value="20">20&deg;</button></td></tr><tr>
+                <td><button type="button" class="fovbutton" flex value="30">30&deg;</button></td>
+                <td><button type="button" class="fovbutton" flex value="40">40&deg;</button></td>
+                <td><button type="button" class="fovbutton" flex value="60">60&deg;</button></td>
+                <td><button type="button" class="fovbutton" flex value="90">90&deg;</button></td></tr><tr>
+                <td><button type="button" class="fovbutton" flex value="120">120&deg;</button></td>
+                <td><button type="button" class="fovbutton" flex value="150">150&deg;</button></td>
+                <td><button type="button" class="fovbutton" flex value="180">180&deg;</button></td>
+                <td><button type="button" class="fovbutton" flex value="230">230&deg;</button></td>
                </tr>
               </table>
               </div> 
@@ -561,13 +561,29 @@
             </select>
             <div class="textcenter"><?= tr("Active script:")?> <span id="activescript"><?= tr("-none-")?></span></div>
             <div><button id="bt_runscript" disabled="disabled"><?= tr("Run selected script")?></button><button id="bt_stopscript" disabled="disabled"><?= tr("Stop current script")?></button></div>
-
-            <div>
-                 <!-- label><input type="button" class="stelaction" value="actionScript/MAMUZ/GZ_screen_image3.ssc" alt="MAMUZ mammoth"/><?= tr("MAMUZ mammoth test3")?></label -->
-                 <!-- GZ HEHE MUCH SIMPLER! :-) -->
-                 <button type="button" class="stelaction" title='<?= tr("MAMUZ Mammoth")?>'  value="actionScript/MAMUZ/GZ_screen_image3.ssc"><?= tr("MAMUZ mammoth test3")?></button> 
-            </div>
+               <button type="button" class="stelaction" title='<?= tr("MAMUZ Mammoth")?>'  value="actionScript/MAMUZ/GZ_screen_image3.ssc"><?= tr("MAMUZ mammoth test3")?></button> 
+  
           </section>
+        </div>
+        <div class="flex">
+        	<section class="block flex flex-column">
+        	 <header><h2><?= tr("View towards horizon at Azimuth")?></h2></header>
+             <div>
+                 <button type="button" class="stelaction"  value="actionScript/RC/Horiz_Az000.ssc">0</button> 
+                 <button type="button" class="stelaction"  value="actionScript/RC/Horiz_Az030.ssc">30</button> 
+                 <button type="button" class="stelaction"  value="actionScript/RC/Horiz_Az060.ssc">60</button> 
+                 <button type="button" class="stelaction"  value="actionScript/RC/Horiz_Az090.ssc">90</button> 
+                 <button type="button" class="stelaction"  value="actionScript/RC/Horiz_Az120.ssc">120</button> 
+                 <button type="button" class="stelaction"  value="actionScript/RC/Horiz_Az150.ssc">150</button> 
+                 <button type="button" class="stelaction"  value="actionScript/RC/Horiz_Az180.ssc">180</button> 
+                 <button type="button" class="stelaction"  value="actionScript/RC/Horiz_Az210.ssc">210</button> 
+                 <button type="button" class="stelaction"  value="actionScript/RC/Horiz_Az240.ssc">240</button> 
+                 <button type="button" class="stelaction"  value="actionScript/RC/Horiz_Az270.ssc">270</button> 
+                 <button type="button" class="stelaction"  value="actionScript/RC/Horiz_Az300.ssc">300</button> 
+                 <button type="button" class="stelaction"  value="actionScript/RC/Horiz_Az330.ssc">330</button> 
+            </div>
+           </section>
+
         </div>
       </div>
       <!-- handled by ui/location.js -->
