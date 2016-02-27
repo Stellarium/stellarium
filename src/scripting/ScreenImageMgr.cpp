@@ -1,7 +1,8 @@
 /*
  * Stellarium
  * This file Copyright (C) 2008 Matthew Gates
- * 
+ * Parts copyright (C) 2016 Georg Zotti (added size transitions)
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -44,8 +45,8 @@
 ScreenImage::ScreenImage(const QString& filename, float x, float y, bool show, float scale, float alpha, float fadeDuration)
 	: tex(NULL), maxAlpha(alpha)
 {
-	QPixmap pm(filename);
-	tex = StelMainView::getInstance().scene()->addPixmap(pm.scaled(pm.size()*scale));
+	QPixmap pixmap(filename);
+	tex = StelMainView::getInstance().scene()->addPixmap(pixmap.scaled(pixmap.size()*scale));
 	tex->setPos(x, y);
 
 	anim = new QGraphicsItemAnimation();
@@ -53,6 +54,15 @@ ScreenImage::ScreenImage(const QString& filename, float x, float y, bool show, f
 	moveTimer->setCurveShape(QTimeLine::LinearCurve);
 	anim->setTimeLine(moveTimer);
 	anim->setItem(tex);
+
+	scaleAnim = new QGraphicsItemAnimation();
+	scaleTimer = new QTimeLine();
+	scaleTimer->setCurveShape(QTimeLine::LinearCurve);
+	scaleAnim->setTimeLine(scaleTimer);
+	scaleAnim->setItem(tex);
+	// we must configure the end for proper rescaling
+	scaleAnim->setScaleAt(0., 1., 1.);
+	scaleAnim->setScaleAt(1., 1., 1.);
 
 	fadeTimer = new QTimeLine();
 	fadeTimer->setCurveShape(QTimeLine::LinearCurve);
@@ -74,8 +84,11 @@ ScreenImage::~ScreenImage()
 		tex = NULL;
 	}
 	moveTimer->stop();
+	scaleTimer->stop();
 	delete anim; anim = NULL;
+	delete scaleAnim; scaleAnim = NULL;
 	delete moveTimer; moveTimer = NULL;
+	delete scaleTimer; scaleTimer = NULL;
 }
 
 bool ScreenImage::draw(const StelCore*)
@@ -89,9 +102,7 @@ void ScreenImage::update(double)
 
 void ScreenImage::setFadeDuration(float duration)
 {
-	int fadeMs = duration * 1000;
-	if (fadeMs<=0) fadeMs=1;
-	fadeTimer->setDuration(fadeMs);
+	fadeTimer->setDuration(qMax(1, (int)(duration*1000)));
 }
 
 void ScreenImage::setFlagShow(bool b)
@@ -169,6 +180,33 @@ void ScreenImage::setOpacity(qreal alpha)
 {
 	tex->setOpacity(alpha*maxAlpha);
 }
+
+void ScreenImage::setScale(float scaleX, float scaleY, float duration)
+{
+	scaleTimer->stop();
+
+	// Set a least a tiny duration to allow running the "animation"
+	scaleTimer->setDuration(qMax(0.001f, duration)*1000);
+	scaleTimer->setFrameRange(0,100);
+
+	tex->setTransformationMode(Qt::SmoothTransformation);
+
+	// reconfigure the animation which may have halted at 1 after a previous run, so the current scale is at position 1.
+	scaleAnim->setScaleAt(0., scaleAnim->horizontalScaleAt(1.), scaleAnim->verticalScaleAt(1.));
+	scaleAnim->setScaleAt(1., scaleX, scaleY);
+	scaleTimer->start();
+}
+
+float ScreenImage::imageScaleX()
+{
+	return scaleAnim->horizontalScaleAt(1.);
+}
+
+float ScreenImage::imageScaleY()
+{
+	return scaleAnim->verticalScaleAt(1.);
+}
+
 
 //////////////////////////
 // ScreenImageMgr class //
@@ -270,7 +308,23 @@ int ScreenImageMgr::getImageHeight(const QString& id)
 			return allScreenImages[id]->imageHeight();
 	return 0;
 }
-	
+
+float ScreenImageMgr::getImageScaleX(const QString& id)
+{
+	if (allScreenImages.contains(id))
+		if (allScreenImages[id]!=NULL)
+			return allScreenImages[id]->imageScaleX();
+	return 0;
+}
+
+float ScreenImageMgr::getImageScaleY(const QString& id)
+{
+	if (allScreenImages.contains(id))
+		if (allScreenImages[id]!=NULL)
+			return allScreenImages[id]->imageScaleY();
+	return 0;
+}
+
 void ScreenImageMgr::showImage(const QString& id, bool show)
 {
 	if (allScreenImages.contains(id))
@@ -289,8 +343,23 @@ void ScreenImageMgr::setImageXY(const QString& id, float x, float y, float durat
 {
 	if (allScreenImages.contains(id))
 		if (allScreenImages[id]!=NULL)
-			allScreenImages[id]->setXY(x,y, duration);
+			allScreenImages[id]->setXY(x, y, duration);
 }
+
+void ScreenImageMgr::addImageXY(const QString& id, float x, float y, float duration)
+{
+	if (allScreenImages.contains(id))
+		if (allScreenImages[id]!=NULL)
+			allScreenImages[id]->addXY(x, y, duration);
+}
+
+void ScreenImageMgr::setImageScale(const QString& id, float scaleX, float scaleY, float duration)
+{
+	if (allScreenImages.contains(id))
+		if (allScreenImages[id]!=NULL)
+			allScreenImages[id]->setScale(scaleX, scaleY, duration);
+}
+
 
 void ScreenImageMgr::update(double deltaTime)
 {
