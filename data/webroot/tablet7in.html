@@ -108,7 +108,12 @@
               <button type="button" class="stelaction" title='<?= tr("Look towards North")?>'  value="actionLook_Towards_North"><?= tr("N")?></button>
               <button type="button" class="stelaction" title='<?= tr("Look towards Zenith")?>' value="actionLook_Towards_Zenith"><?= tr("Z")?></button>
             </div>
-
+             <div>
+             <div class="slider stelproperty flex-expand" data-prop="prop_StelCore_viewportVerticalOffset" data-min="-50" data-max="50" data-step="1"></div>
+             Vertical View offset: <span class="stelproperty" style="margin-left: 5px; min-width: 48px;" data-prop="prop_StelCore_viewportVerticalOffset"></span>
+             <!-- GZ TODO: I would like to have a Button with a defined value to set to zero here (or a few with defined values)! -->
+             <button type="button" class="stelproperty" title='<?= tr("Reset")?>' data-prop="prop_StelCore_viewportVerticalOffset" data-value="0"><?= tr("Reset")?></button>
+            </div>
             <div id="view_wrapper">
               <div id="view_fov"></div>
               <p title='<?= tr("Field of view")?>'>FOV: <span id="view_fov_text"></span></p>
