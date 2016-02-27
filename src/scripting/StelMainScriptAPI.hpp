@@ -552,8 +552,8 @@ public slots:
 
 	//! Get screen coordinates from some specified altitude and azimuth
 	//! angles may be specified in a format recognised by StelUtils::getDecAngle()
-	//! @param alt the altitude angle
-	//! @param azi the azimuth angle
+	//! @param alt the altitude angle [degrees]
+	//! @param azi the azimuth angle [degrees]
 	//! @return a map of object data.  Keys:
 	//! - x : x coordinate on the screen
 	//! - y : y coordinate on the screen
