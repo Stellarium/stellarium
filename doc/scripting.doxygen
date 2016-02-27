@@ -74,7 +74,7 @@ core.wait(...);
 \code
 LandscapeMgr.setFlagAtmosphere(true);
 \endcode
-  Note: All of these except for StelSkyDrawer are StelModule classes.
+\note All of these except for StelSkyDrawer are StelModule classes.
 
 @section include_scripts Includes
 
@@ -84,7 +84,7 @@ command:
 \code
 include("common_objects.inc");
 \endcode
-Note: Detailed example can be found <a href="http://bazaar.launchpad.net/~stellarium/stellarium/trunk/view/head:/scripts/constellations_tour.ssc">in Constellations Tour script</a>.
+\note Detailed example can be found <a href="http://bazaar.launchpad.net/~stellarium/stellarium/trunk/view/head:/scripts/constellations_tour.ssc">in Constellations Tour script</a>.
 
 @section script_console Script Console
 
@@ -92,7 +92,7 @@ It is possible to open, edit run and save scripts using the script console windo
 To toggle the script console, press F12.  The script console also provides
 an output window in which script debugging output is visible.
 
-Note:  The Script Console is a build-time option.  It has been enabled by
+\note The Script Console is a build-time option.  It has been enabled by
 default since version 0.10.5.  To enable or disable this feature, use the
 ENABLE_SCRIPT_CONSOLE=1 or =0 option to cmake.
 

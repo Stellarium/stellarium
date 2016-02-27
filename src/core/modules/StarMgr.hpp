@@ -223,7 +223,7 @@ public:
 	//! Get the (English) common name for a star with a specified
 	//! Hipparcos catalogue number.
 	//! @param hip The Hipparcos number of star
-	//! @return common name of star (from skyculture @file star_names.fab)
+	//! @return common name of star (from skyculture file star_names.fab)
 	static QString getCommonEnglishName(int hip);
 
 	//! Get the cross-index designations for a star with a specified

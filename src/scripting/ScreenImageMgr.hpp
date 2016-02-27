@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * This file Copyright (C) 2008 Matthew Gates
+ * Parts copyright (C) 2016 Georg Zotti (added size transitions)
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,6 +49,9 @@ public:
 	//! @param y the screen x-position for the texture (in pixels), measured from the bottom of the screen.
 	//! @param show the initial displayed status of the image (false == hidden).
 	//! @param scale scale factor for the image. 1 = original size, 0.5 = 50% size etc.
+	//!        Note that this also controls the final resolution of the image! Scale smaller that 1 leads to reduced resolution,
+	//!        larger than 1 of course creates upsampling artifacts. The scaling that happens after loading is a simple stretch of this loaded pixmap.
+	//!        In order to get a small image on screen which you might want to grow later, load with this scale=1 and setScale() later.
 	//! @param fadeDuration the time it takes for screen images to fade in/out/change alpha in seconds.
 	ScreenImage(const QString& filename, float x, float y, bool show=false, float scale=1., float alpha=1., float fadeDuration=1.);
 	virtual ~ScreenImage();
@@ -55,7 +59,7 @@ public:
 	//! Draw the image.
 	//! @param core the StelCore object
 	virtual bool draw(const StelCore* core);
-	//! update fade for on/off action
+	//! Empty dummy. The various animations are updated by other means.
 	virtual void update(double deltaTime);
 	//! Set the duration used for the fade in / fade out of the image
 	virtual void setFadeDuration(float duration);
@@ -64,15 +68,18 @@ public:
 	virtual void setFlagShow(bool b);
 	//! Get the displayed status of the image
 	virtual bool getFlagShow(void);
+
 	//! Set the image alpha for when it is in full "on" (after fade in).
 	//! @param a the new alpha (transparency) for the image.  1.0 = totally transparent, 0.0 = fully opaque.
 	//! @param duration the time for the change in alpha to take effect.
 	virtual void setAlpha(float a);
+
 	//! Set the x, y position of the image.
 	//! @param x new x position
 	//! @param y new y position
 	//! @param duration how long for the movement to take in seconds
 	virtual void setXY(float x, float y, float duration=0.);
+
 	//! Set the x, y position of the image relative to the current position
 	//! @param x the offset in the x-axis
 	//! @param y the offset in the y-axis
@@ -81,11 +88,21 @@ public:
 	virtual int imageHeight(void);
 	virtual int imageWidth(void);
 
+	//! Set the image scale relative to the size originally loaded.
+	//! @param scaleX new (target) horizontal scale factor. Native size=1.
+	//! @param scaleY new (target) vertical scale factor. Native size=1.
+	//! @param duration how long for the resize to take in seconds
+	virtual void setScale(float scaleX, float scaleY, float duration=0.);
+	virtual float imageScaleX(void);
+	virtual float imageScaleY(void);
+
 protected:
 	QGraphicsPixmapItem* tex;
-	QTimeLine* moveTimer;
-	QTimeLine* fadeTimer;
+	QTimeLine* moveTimer; // for position changes
+	QTimeLine* fadeTimer; // for transparency
+	QTimeLine* scaleTimer; // for grow/shrink
 	QGraphicsItemAnimation* anim;
+	QGraphicsItemAnimation* scaleAnim;
 
 private slots:
 	void setOpacity(qreal alpha);
@@ -145,19 +162,42 @@ public slots:
 	//! Set an image's visible status.
 	//! @param id the ID for the desired image.
 	//! @param show the new visible state to set.
+	void showImage(const QString& id, bool show);
+	//! @param id the ID for the desired image.
+	//! @return width (unscaled!) in pixels.
 	int getImageWidth(const QString& id);
+	//! @param id the ID for the desired image.
+	//! @return height (unscaled!) in pixels.
 	int getImageHeight(const QString& id);
-	void showImage(const QString& id, bool show); 
+
+	//! Set the x and y scale for the specified image, relative to size given at load time.
+	//! @param id the ID for the desired image.
+	//! @param scaleX The new x-scale for the image.
+	//! @param scaleY The new y-scale for the image.
+	//! @param duration The time for the change to take place, in seconds.
+	void setImageScale(const QString& id, float scaleX, float scaleY, float duration=0.);
+	//! @param id the ID for the desired image.
+	//! @return current X scaling factor, relative to loaded size.
+	float getImageScaleX(const QString& id);
+	//! @param id the ID for the desired image.
+	//! @return current Y scaling factor, relative to loaded size.
+	float getImageScaleY(const QString& id);
 	//! Set an image's alpha value when visible
 	//! @param id the ID for the desired image.
 	//! @param alpha the new alpha value to set.
 	void setImageAlpha(const QString& id, float alpha); 
 	//! Set the x and y coordinates for the specified image
 	//! @param id the ID for the desired image.
-	//! @param x The new x-coordinate for the image.
-	//! @param y The new y-coordinate for the image.
+	//! @param x The new x-coordinate for the image, pixels.
+	//! @param y The new y-coordinate for the image, pixels.
 	//! @param duration The time for the change to take place, in seconds.
 	void setImageXY(const QString& id, float x, float y, float duration=0.);
+	//! Add x and y coordinate offsets to the specified image
+	//! @param id the ID for the desired image.
+	//! @param x The x-coordinate shift for the image, pixels.
+	//! @param y The y-coordinate shift for the image, pixels.
+	//! @param duration The time for the change to take place, in seconds.
+	void addImageXY(const QString& id, float x, float y, float duration=0.);
 	//! Delete an image.
 	//! @param id the ID for the desired image.
 	void deleteImage(const QString& id);
