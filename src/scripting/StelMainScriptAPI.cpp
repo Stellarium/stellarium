@@ -821,7 +821,7 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 	Vec3d pos;
 	double ra, dec, alt, az, glong, glat;
 	StelCore* core = StelApp::getInstance().getCore();
-	bool useOldAzimuth = StelApp::getInstance().getFlagOldAzimuthUsage();
+	bool useOldAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 
 	// ra/dec
 	pos = obj->getEquinoxEquatorialPos(core);
@@ -954,7 +954,7 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 	Vec3d pos;
 	double ra, dec, alt, az, glong, glat;
 	StelCore* core = StelApp::getInstance().getCore();
-	bool useOldAzimuth = StelApp::getInstance().getFlagOldAzimuthUsage();
+	bool useOldAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 
 	// ra/dec
 	pos = obj->getEquinoxEquatorialPos(core);
@@ -1281,7 +1281,7 @@ void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, flo
 	double dAlt = StelUtils::getDecAngle(alt);	
 	double dAzi = M_PI - StelUtils::getDecAngle(azi);
 
-	if (StelApp::getInstance().getFlagOldAzimuthUsage())
+	if (StelApp::getInstance().getFlagSouthAzimuthUsage())
 		dAzi -= M_PI;
 
 	StelUtils::spheToRect(dAzi,dAlt,aim);
@@ -1397,4 +1397,26 @@ void StelMainScriptAPI::setZodiacalLightIntensity(double i)
 double StelMainScriptAPI::getZodiacalLightIntensity()
 {
 	return GETSTELMODULE(ZodiacalLight)->getIntensity();
+}
+
+QVariantMap StelMainScriptAPI::getScreenXYFromAltAzi(const QString &alt, const QString &azi)
+{
+	Vec3d aim, v;
+	double dAlt = StelUtils::getDecAngle(alt);
+	double dAzi = M_PI - StelUtils::getDecAngle(azi);
+
+	if (StelApp::getInstance().getFlagSouthAzimuthUsage())
+		dAzi -= M_PI;
+
+	StelUtils::spheToRect(dAzi,dAlt,aim);
+
+	const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionAuto);
+
+	prj->project(aim, v);
+
+	QVariantMap map;
+	map.insert("x", qRound(v[0]));
+	map.insert("y", prj->getViewportHeight()-qRound(v[1]));
+
+	return map;
 }
