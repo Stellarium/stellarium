@@ -365,12 +365,19 @@ public slots:
 
 	//New for 0.15: Vertical offset should even be available for animation, so at last with property mechanism.
 	//! Get current value for horizontal viewport offset [-50...50]
+	//! An offset of 50 percent means projective image center is on the right screen border
 	double getViewportHorizontalOffset(void);
 	//! Set horizontal viewport offset. Argument will be clamped to be inside [-50...50]
+	//! An offset of 50 percent means projective image center is on the right screen border
+	//! Animation is available via StelMovementMgr::moveViewport()
 	void setViewportHorizontalOffset(double newOffsetPct);
 	//! Get current value for vertical viewport offset [-50...50]
+	//! An offset of 50 percent means projective image center is on the upper screen border
 	double getViewportVerticalOffset(void);
 	//! Set vertical viewport offset. Argument will be clamped to be inside [-50...50]
+	//! An offset of 50 percent means projective image center is on the upper screen border
+	//! Setting to a negative value will move the visible horizon down, this may be desired esp. in cylindrical projection.
+	//! Animation is available via StelMovementMgr::moveViewport()
 	void setViewportVerticalOffset(double newOffsetPct);
 
 

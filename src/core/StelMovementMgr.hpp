@@ -24,6 +24,7 @@
 #include "StelModule.hpp"
 #include "StelProjector.hpp"
 #include "StelObjectType.hpp"
+#include <QTimeLine>
 
 //! @class StelMovementMgr
 //! Manages the head movements and zoom operations.
@@ -230,6 +231,13 @@ public slots:
 	//! Look immediately towards Zenith.
 	void lookZenith(void);
 
+	//! start animated move of the viewport offset.
+	//! @param offsetX new horizontal viewport offset, percent. clamped to [-50...50]
+	//! @param offsetY new horizontal viewport offset, percent. clamped to [-50...50]
+	//! @param duration animation duration, seconds.
+	//! @note Only vertical viewport is really meaningful.
+	void moveViewport(const float offsetX, const float offsetY, const float duration=0.f);
+
 	//! Set current mount type defining the reference frame in which head movements occur.
 	void setMountMode(MountMode m);
 	//! Get current mount type defining the reference frame in which head movements occur.
@@ -246,11 +254,14 @@ public slots:
 signals:
 	//! Emitted when the tracking property changes
 	void flagTrackingChanged(bool b);
-  void equatorialMountChanged(bool b);
+	void equatorialMountChanged(bool b);
 
 private slots:
 	//! Called when the selected object changes.
 	void selectedObjectChange(StelModule::StelModuleSelectAction action);
+
+	//! Connected to the viewportOffsetTimeLine, does the actual viewport shift.
+	void handleViewportOffsetMovement(qreal value);
 
 public:
 	Vec3d j2000ToMountFrame(const Vec3d& v) const;
@@ -381,7 +392,15 @@ private:
 	// This can usually be just 0/0/1, but must be set to something useful when viewDirectionMountFrame is parallel, i.e. looks into a pole.
 	Vec3d upVectorMountFrame;
 
+	// TODO: Docfix?
 	float dragTriggerDistance;
+
+	// Viewport shifting. This animates a property belonging to StelCore. But the shift itself is likely best placed here.
+	QTimeLine *viewportOffsetTimeline;
+	// Those two are used during viewport offset animation transitions. Both are set by moveViewport(), and irrelevant after the transition.
+	Vec2f oldViewportOffset;
+	Vec2f targetViewportOffset;
+
 };
 
 #endif // _STELMOVEMENTMGR_HPP_
