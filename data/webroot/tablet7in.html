@@ -53,20 +53,21 @@
                 <li><a href="#time_local"><?= tr("Date and Time")?></a></li>
                 <li><a href="#time_jday"><?= tr("Julian Day")?></a></li>
               </ul>
+              <!-- GZ attribute readonly prevents the tablet virtual keyboard from coming up! We just need it for the year... -->
               <div id="time_local" class="timetab">
                 <p class="timedisplay">
                   <input id="date_year" class="spinner" data-type="date" data-field="year" data-min="-100000" data-max="100000"/>
                   /
-                  <input id="date_month" class="spinner" data-type="date" data-field="month" data-min="0" data-max="13"/>
+                  <input id="date_month" class="spinner" data-type="date" data-field="month" data-min="0" data-max="13" readonly="readonly"/>
                   /
-                  <input id="date_day" class="spinner" data-type="date" data-field="day" data-min="0" data-max="32"/>
+                  <input id="date_day" class="spinner" data-type="date" data-field="day" data-min="0" data-max="32" readonly="readonly"/>
                 </p>
                 <p class="timedisplay">
-                  <input id="time_hour" class="spinner" data-type="time" data-field="hour" data-min="-1" data-max="24"/>
+                  <input id="time_hour" class="spinner" data-type="time" data-field="hour" data-min="-1" data-max="24" readonly="readonly"/>
                   :
-                  <input id="time_minute" class="spinner" data-type="time" data-field="minute" data-min="-1" data-max="60"/>
+                  <input id="time_minute" class="spinner" data-type="time" data-field="minute" data-min="-1" data-max="60" readonly="readonly"/>
                   :
-                  <input id="time_second" class="spinner" data-type="time" data-field="second" data-min="-1" data-max="60"/>
+                  <input id="time_second" class="spinner" data-type="time" data-field="second" data-min="-1" data-max="60" readonly="readonly"/>
                 </p>
               </div>
               <div id="time_jday" class="timetab">
@@ -269,12 +270,12 @@
             <h3><?= tr("Stars")?></h3>
             <div class="table">
               <!-- inputs with stelproperty class are automatically connected by mainui.js -->
-              <p><label for="stars_absoluteScale"><?= tr("Absolute scale:")?></label><input id="stars_absoluteScale" class="spinner stelproperty" name="prop_SkyDrawer_absoluteStarScale" data-min="0" data-max="9" data-step="0.1" data-numberformat="n2"/></p>
-              <p><label for="stars_relativeScale"><?= tr("Relative scale:")?></label><input id="stars_relativeScale" class="spinner stelproperty" name="prop_SkyDrawer_relativeStarScale" data-min="0.25" data-max="5" data-step="0.05" data-numberformat="n2"/></p>
-              <p><label for="stars_milkywayintensity"><?= tr("Milky Way brightness:")?></label><input id="stars_milkywayintensity" class="spinner stelproperty" name="prop_MilkyWay_intensity" data-min="0" data-max="10" data-step="0.1" data-numberformat="n2"/></p>
-              <p><label for="stars_zodiacintensity"><?= tr("Zodiacal Light brightness:")?></label><input id="stars_zodiacintensity" class="spinner stelproperty" name="prop_ZodiacalLight_intensity" data-min="0" data-max="10" data-step="0.1" data-numberformat="n2"/></p>
-              <p><label><input class="stelproperty" name="prop_SkyDrawer_flagTwinkle" type="checkbox"/><?= tr("Twinkle:")?></label><input class="spinner stelproperty" name="prop_SkyDrawer_twinkleAmount" data-min="0" data-max="1.5" data-step="0.1" data-numberformat="n2"/></p>
-              <p><label><input class="stelproperty" name="prop_SkyDrawer_flagStarMagnitudeLimit" type="checkbox"/><?= tr("Limit magnitude:")?></label><input class="spinner stelproperty" name="prop_SkyDrawer_customStarMagLimit" data-min="0" data-max="21" data-step="0.1" data-numberformat="n2"/></p>
+              <p><label for="stars_absoluteScale"><?= tr("Absolute scale:")?></label><input id="stars_absoluteScale" class="spinner stelproperty" name="prop_SkyDrawer_absoluteStarScale" data-min="0" data-max="9" data-step="0.1" data-numberformat="n2" readonly="readonly"/></p>
+              <p><label for="stars_relativeScale"><?= tr("Relative scale:")?></label><input id="stars_relativeScale" class="spinner stelproperty" name="prop_SkyDrawer_relativeStarScale" data-min="0.25" data-max="5" data-step="0.05" data-numberformat="n2" readonly="readonly"/></p>
+              <p><label for="stars_milkywayintensity"><?= tr("Milky Way brightness:")?></label><input id="stars_milkywayintensity" class="spinner stelproperty" name="prop_MilkyWay_intensity" data-min="0" data-max="10" data-step="0.1" data-numberformat="n2" readonly="readonly"/></p>
+              <p><label for="stars_zodiacintensity"><?= tr("Zodiacal Light brightness:")?></label><input id="stars_zodiacintensity" class="spinner stelproperty" name="prop_ZodiacalLight_intensity" data-min="0" data-max="10" data-step="0.1" data-numberformat="n2" readonly="readonly"/></p>
+              <p><label><input class="stelproperty" name="prop_SkyDrawer_flagTwinkle" type="checkbox"/><?= tr("Twinkle:")?></label><input class="spinner stelproperty" name="prop_SkyDrawer_twinkleAmount" data-min="0" data-max="1.5" data-step="0.1" data-numberformat="n2" readonly="readonly"/></p>
+              <p><label><input class="stelproperty" name="prop_SkyDrawer_flagStarMagnitudeLimit" type="checkbox"/><?= tr("Limit magnitude:")?></label><input class="spinner stelproperty" name="prop_SkyDrawer_customStarMagLimit" data-min="0" data-max="21" data-step="0.1" data-numberformat="n2" readonly="readonly"/></p>
             </div>
             <label><input class="stelproperty" name="prop_SkyDrawer_flagLuminanceAdaptation" type="checkbox"/><?= tr("Dynamic eye adaptation")?></label>
             <div class="flex flex-baseline">
@@ -294,8 +295,8 @@
             <label><input class="stelproperty" name="prop_SolarSystem_flagIsolatedTrails" type="checkbox"/><?= tr("Show trail only for selected planet")?></label>
             <label><input class="stelproperty" name="prop_SolarSystem_flagLightTravelTime" type="checkbox"/><?= tr("Simulate light speed")?></label>
             <div class="table">
-              <p><label><input class="stelproperty" name="prop_SolarSystem_flagMoonScale" type="checkbox"/><?= tr("Scale Moon:")?></label><input class="spinner stelproperty" name="prop_SolarSystem_moonScale" data-min="1" data-max="20" data-step="0.1" data-numberformat="n2"/></p>
-              <p><label><input class="stelproperty" name="prop_SkyDrawer_flagPlanetMagnitudeLimit" type="checkbox"/><?= tr("Limit magnitude:")?></label><input class="spinner stelproperty" name="prop_SkyDrawer_customPlanetMagLimit" data-min="0" data-max="22" data-step="0.1" data-numberformat="n2"/></p>
+              <p><label><input class="stelproperty" name="prop_SolarSystem_flagMoonScale" type="checkbox"/><?= tr("Scale Moon:")?></label><input class="spinner stelproperty" name="prop_SolarSystem_moonScale" data-min="1" data-max="20" data-step="0.1" data-numberformat="n2" readonly="readonly"/></p>
+              <p><label><input class="stelproperty" name="prop_SkyDrawer_flagPlanetMagnitudeLimit" type="checkbox"/><?= tr("Limit magnitude:")?></label><input class="spinner stelproperty" name="prop_SkyDrawer_customPlanetMagLimit" data-min="0" data-max="22" data-step="0.1" data-numberformat="n2" readonly="readonly"/></p>
             </div>
             <label><input class="stelproperty" name="prop_LandscapeMgr_flagLandscapeAutoSelection" type="checkbox"/><?= tr("Auto select landscapes")?></label>
             <div class="flex flex-baseline">
@@ -310,7 +311,7 @@
             <h3><label><input type="checkbox" class="stelaction valign-middle" value="actionShow_Atmosphere"/><?= tr("Atmosphere")?></label></h3>
             <label><input type="checkbox" class="stelaction" value="actionShow_LightPollution_Database" /><?= tr("Light pollution data from locations database")?></label>
             <div class="table">
-              <p><label for="atmosphere_bortlescaleindex"><?= tr("Light pollution:")?></label><input id="atmosphere_bortlescaleindex" class="spinner stelproperty" name="prop_SkyDrawer_bortleScaleIndex" data-min="1" data-max="9" data-step="1" data-numberformat="n0"/></p>
+              <p><label for="atmosphere_bortlescaleindex"><?= tr("Light pollution:")?></label><input id="atmosphere_bortlescaleindex" class="spinner stelproperty" name="prop_SkyDrawer_bortleScaleIndex" data-min="1" data-max="9" data-step="1" data-numberformat="n0" readonly="readonly"/></p>
             </div>
             <div id="vo_refraction" class="innerblock">
               <h3><?= tr("Refraction Settings")?></h3>
@@ -320,9 +321,9 @@
                 <p><label for="atmosphere_extinction"><?= tr("Extinction Coefficient:")?></label><input id="atmosphere_extinction" class="spinner stelproperty" name="prop_SkyDrawer_extinctionCoefficient" data-min="0" data-max="3" data-step="0.01" data-numberformat="n2"/></p>
               </div-->
               <table>
-                <tr><td><label for="atmosphere_pressure"><?= tr("Pressure (mbar):")?></label></td><td><input id="atmosphere_pressure" class="spinner stelproperty" name="prop_SkyDrawer_atmospherePressure" data-min="0" data-max="1500" data-step="1" data-numberformat="n2"/></td></tr>
-                <tr><td><label for="atmosphere_temperature"><?= tr("Temperature (C):")?></label></td><td><input id="atmosphere_temperature" class="spinner stelproperty" name="prop_SkyDrawer_atmosphereTemperature" data-min="-100" data-max="100" data-step="1" data-numberformat="n1"/></td></tr>
-                <tr><td><label for="atmosphere_extinction"><?= tr("Extinction Coefficient:")?></label></td><td><input id="atmosphere_extinction" class="spinner stelproperty" name="prop_SkyDrawer_extinctionCoefficient" data-min="0" data-max="3" data-step="0.01" data-numberformat="n2"/></td></tr>
+                <tr><td><label for="atmosphere_pressure"><?= tr("Pressure (mbar):")?></label></td><td><input id="atmosphere_pressure" class="spinner stelproperty" name="prop_SkyDrawer_atmospherePressure" data-min="0" data-max="1500" data-step="1" data-numberformat="n2" readonly="readonly"/></td></tr>
+                <tr><td><label for="atmosphere_temperature"><?= tr("Temperature (C):")?></label></td><td><input id="atmosphere_temperature" class="spinner stelproperty" name="prop_SkyDrawer_atmosphereTemperature" data-min="-100" data-max="100" data-step="1" data-numberformat="n1" readonly="readonly"/></td></tr>
+                <tr><td><label for="atmosphere_extinction"><?= tr("Extinction Coefficient:")?></label></td><td><input id="atmosphere_extinction" class="spinner stelproperty" name="prop_SkyDrawer_extinctionCoefficient" data-min="0" data-max="3" data-step="0.01" data-numberformat="n2" readonly="readonly"/></td></tr>
               </table>
 
             </div>
@@ -480,7 +481,7 @@
             </div>
             <label><input class="stelproperty" name="prop_NebulaMgr_hintsProportional" type="checkbox"/><?= tr("Use proportional hints")?></label>
             <label><input class="stelproperty" name="prop_NebulaMgr_flagSurfaceBrightnessUsage" type="checkbox"/><?= tr("Use surface brightness")?></label>
-            <p><label><input class="stelproperty" name="prop_SkyDrawer_flagNebulaMagnitudeLimit" type="checkbox"/><?= tr("Limit magnitude:")?></label><input class="spinner stelproperty" name="prop_SkyDrawer_customNebulaMagLimit" data-min="3" data-max="21" data-step="0.25" data-numberformat="n2"/></p>
+            <p><label><input class="stelproperty" name="prop_SkyDrawer_flagNebulaMagnitudeLimit" type="checkbox"/><?= tr("Limit magnitude:")?></label><input class="spinner stelproperty" name="prop_SkyDrawer_customNebulaMagLimit" data-min="3" data-max="21" data-step="0.25" data-numberformat="n2" readonly="readonly"/></p>
           </div>
         </div>
       </div>
@@ -494,7 +495,7 @@
             <label><input type="checkbox" class="stelaction" value="actionShow_Fog" /><?= tr("Show fog")?></label>
             <div class="flex flex-baseline">
               <label><input type="checkbox" class="stelproperty" name="prop_LandscapeMgr_flagLandscapeUseMinimalBrightness"/><?= tr("Minimal brightness:")?></label>
-              <input id="landscape_defaultMinimalBrightness" class="flex-expand spinner stelproperty" name="prop_LandscapeMgr_defaultMinimalBrightness" data-min="0" data-max="1" data-step="0.01" data-numberformat="n2"/>
+              <input id="landscape_defaultMinimalBrightness" class="flex-expand spinner stelproperty" name="prop_LandscapeMgr_defaultMinimalBrightness" data-min="0" data-max="1" data-step="0.01" data-numberformat="n2" readonly="readonly"/>
             </div>
           </div>
           <div class="inline-block blocklabel">
@@ -519,11 +520,11 @@
             <label><input type="checkbox" class="stelaction" value="actionShow_Constellation_Labels" /><?= tr("Show labels")?></label>
             <div class="flex flex-baseline">
               <label><input type="checkbox" class="stelaction" value="actionShow_Constellation_Lines" /><?= tr("Show lines with thickness")?></label>
-              <input class="flex-expand spinner stelproperty" name="prop_ConstellationMgr_constellationLineThickness" data-min="1" data-max="5" data-step="1" data-numberformat="n0"/>
+              <input class="flex-expand spinner stelproperty" name="prop_ConstellationMgr_constellationLineThickness" data-min="1" data-max="5" data-step="1" data-numberformat="n0" readonly="readonly"/>
             </div>
             <div class="flex flex-baseline">
               <label><input type="checkbox" class="stelaction" value="actionShow_Constellation_Art" /><?= tr("Show art in brightness")?></label>
-              <input class="flex-expand spinner stelproperty" name="prop_ConstellationMgr_artIntensity" data-min="0" data-max="1" data-step="0.05" data-numberformat="n2"/>
+              <input class="flex-expand spinner stelproperty" name="prop_ConstellationMgr_artIntensity" data-min="0" data-max="1" data-step="0.05" data-numberformat="n2" readonly="readonly"/>
             </div>
           </div>
           <div class="inline-block blocklabel">
