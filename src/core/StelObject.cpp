@@ -107,7 +107,7 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 {
 	bool withAtmosphere = core->getSkyDrawer()->getFlagHasAtmosphere();
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
-	bool useOldAzimuth = StelApp::getInstance().getFlagOldAzimuthUsage();
+	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 	double az_app, alt_app;
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
 	Q_UNUSED(az_app);
@@ -175,7 +175,7 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		double az,alt;
 		StelUtils::rectToSphe(&az,&alt,getAltAzPosGeometric(core));
 		float direction = 3.; // N is zero, E is 90 degrees
-		if (useOldAzimuth)
+		if (useSouthAzimuth)
 			direction = 2.;
 		az = direction*M_PI - az;
 		if (az > M_PI*2)
