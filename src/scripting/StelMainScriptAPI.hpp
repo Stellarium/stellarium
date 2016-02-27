@@ -550,6 +550,15 @@ public slots:
 	//! @param id the ID of the image to remove.
 	void removeSkyImage(const QString& id);
 
+	//! Get screen coordinates from some specified altitude and azimuth
+	//! angles may be specified in a format recognised by StelUtils::getDecAngle()
+	//! @param alt the altitude angle
+	//! @param azi the azimuth angle
+	//! @return a map of object data.  Keys:
+	//! - x : x coordinate on the screen
+	//! - y : y coordinate on the screen
+	QVariantMap getScreenXYFromAltAzi(const QString& alt, const QString& azi);
+
 	//! Load a sound from a file.
 	//! @param filename the name of the file to load.
 	//! @param id the identifier which will be used to refer to the sound
