@@ -113,7 +113,7 @@ void ScriptService::postImpl(const QByteArray& operation, const APIParameters &p
 		//we can not use blocking connection here because runPreprocessedScript is blocking!
 		//there is also no way to check if the script was actually started except for polling some time later
 		QMetaObject::invokeMethod(scriptMgr,"runPreprocessedScript",
-					  Qt::QueuedConnection,Q_ARG(QString,script));
+					  Qt::QueuedConnection,Q_ARG(QString,script),Q_ARG(QString,scriptId));
 		response.setData("ok");
 	}
 	else if(operation=="stop")
