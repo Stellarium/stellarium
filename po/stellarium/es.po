@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-13 20:32+0600\n"
+"POT-Creation-Date: 2016-02-27 19:29+0600\n"
 "PO-Revision-Date: 2016-02-26 13:43+0000\n"
 "Last-Translator: Jorge Luis Granda <costeeleation@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-02-27 04:32+0000\n"
+"X-Launchpad-Export-Date: 2016-02-28 04:50+0000\n"
 "X-Generator: Launchpad (build 17925)\n"
 "Language: es_ES\n"
 
@@ -5874,12 +5874,8 @@ msgid "Topocentric coordinates"
 msgstr "Coordenadas topocéntricas"
 
 #: src/ui_configurationDialog.h:1257
-msgid ""
-"Activate this option to calculate azimuth from south towards west (as in old "
-"astronomical literature)."
+msgid "Activate this option to calculate azimuth from south towards west."
 msgstr ""
-"Activar esta opción para calcular el azimut desde el sur hacia el oeste "
-"(como en literatura astronómica antigua)."
 
 #: src/ui_configurationDialog.h:1259
 msgid "Azimuth from South"
@@ -7110,92 +7106,92 @@ msgstr ""
 "defecto"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1786
+#: plugins/Satellites/src/Satellites.cpp:1792
 msgid "visual"
 msgstr "visibles"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1788
+#: plugins/Satellites/src/Satellites.cpp:1794
 msgid "scientific"
 msgstr "científico"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1790
+#: plugins/Satellites/src/Satellites.cpp:1796
 msgid "communications"
 msgstr "comunicaciones"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1792
+#: plugins/Satellites/src/Satellites.cpp:1798
 msgid "navigation"
 msgstr "navegación"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1794
+#: plugins/Satellites/src/Satellites.cpp:1800
 msgid "amateur"
 msgstr "amateur"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1796
+#: plugins/Satellites/src/Satellites.cpp:1802
 msgid "weather"
 msgstr "clima"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1798
+#: plugins/Satellites/src/Satellites.cpp:1804
 msgid "geostationary"
 msgstr "geoestacionario"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1800
+#: plugins/Satellites/src/Satellites.cpp:1806
 msgid "non-operational"
 msgstr "no operativo"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1802
+#: plugins/Satellites/src/Satellites.cpp:1808
 msgid "gps"
 msgstr "gps"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:1804
+#: plugins/Satellites/src/Satellites.cpp:1810
 msgid "glonass"
 msgstr "glonass"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:1806
+#: plugins/Satellites/src/Satellites.cpp:1812
 msgid "galileo"
 msgstr "galileo"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1808
+#: plugins/Satellites/src/Satellites.cpp:1814
 msgid "iridium"
 msgstr "iridium"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:1810
+#: plugins/Satellites/src/Satellites.cpp:1816
 msgid "stations"
 msgstr "estacion espacial"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:1812
+#: plugins/Satellites/src/Satellites.cpp:1818
 msgid "education"
 msgstr "educación"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:1814
+#: plugins/Satellites/src/Satellites.cpp:1820
 msgid "observatory"
 msgstr "observatorio"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1825
+#: plugins/Satellites/src/Satellites.cpp:1831
 msgid "The Hubble Space Telescope"
 msgstr "El Telescopio Espacial Hubble"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1827
+#: plugins/Satellites/src/Satellites.cpp:1833
 msgid "The International Space Station"
 msgstr "La Estación Espacial Internacional"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1829
+#: plugins/Satellites/src/Satellites.cpp:1835
 msgid "China's first space station"
 msgstr "Primera estación espacial de China"
 
@@ -14126,6 +14122,13 @@ msgstr "Planeta Actual: Saturno"
 
 #~ msgid "Show names"
 #~ msgstr "Mostrar nombres"
+
+#~ msgid ""
+#~ "Activate this option to calculate azimuth from south towards west (as in old "
+#~ "astronomical literature)."
+#~ msgstr ""
+#~ "Activar esta opción para calcular el azimut desde el sur hacia el oeste "
+#~ "(como en literatura astronómica antigua)."
 
 #~ msgid "dd/MMM/yyyy"
 #~ msgstr "dd/MMM/yyyy"
