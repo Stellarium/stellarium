@@ -285,7 +285,7 @@ const QString StelScriptMgr::getDescription(const QString& s)
 	return desc;
 }
 
-bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript)
+bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript, const QString& scriptId)
 {
 	if (engine.isEvaluating())
 	{
@@ -303,6 +303,8 @@ bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript)
 
 	engine.globalObject().setProperty("scriptRateReadOnly", 1.0);
 
+	scriptFileName = scriptId;
+
 	// Notify that the script starts here
 	emit(scriptRunning());
 
@@ -317,7 +319,25 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 {
 	QString preprocessedScript;
 	prepareScript(preprocessedScript,fileName,includePath);
-	return runPreprocessedScript(preprocessedScript);
+	return runPreprocessedScript(preprocessedScript,fileName);
+}
+
+bool StelScriptMgr::runScriptDirect(const QString &scriptCode, const QString& includePath)
+{
+	if(includePath.isNull())
+		return runPreprocessedScript(scriptCode, "<Direct script input>");
+	else
+	{
+		QString path = includePath;
+		if(includePath.isEmpty())
+			path = QStringLiteral("scripts");
+
+		QString processed;
+		bool ok = preprocessScript(scriptCode,processed, path);
+		if(ok)
+			return runPreprocessedScript(processed, "<Direct script input>");
+		return false;
+	}
 }
 
 bool StelScriptMgr::prepareScript(QString &script, const QString &fileName, const QString &includePath)
@@ -358,7 +378,7 @@ bool StelScriptMgr::prepareScript(QString &script, const QString &fileName, cons
 	{
 		return false;
 	}
-	scriptFileName = fileName;
+
 	return true;
 }
 

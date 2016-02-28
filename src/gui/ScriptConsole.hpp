@@ -37,11 +37,13 @@ public:
 
 public slots:
 	void retranslate();
+private slots:
 	void runScript();
 	void loadScript();
 	void saveScript();
 	void clearButtonPressed();
 	void preprocessScript();
+	void scriptStarted();
 	void scriptEnded();
 	void appendLogLine(const QString& s);
 	void appendOutputLine(const QString& s);

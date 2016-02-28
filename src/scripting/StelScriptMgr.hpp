@@ -53,7 +53,7 @@ public:
 	//! Find out if a script is running
 	//! @return true if a script is running, else false
 	bool scriptIsRunning();
-	//! Get the ID (filename) of the currently running script
+	//! Get the ID (usually filename) of the currently running script
 	//! @return Empty string if no script is running, else the 
 	//! ID of the script which is running.
 	QString runningScriptId();
@@ -110,23 +110,35 @@ public slots:
 	//! Empty string will be returned.
 	const QString getShortcut(const QString& s);
 
-	//! Run the preprocessed script
-	//! @param preprocessedScript the string containing the preprocessed script.
-	//! @return false if the given script could not be run, true otherwise
-	bool runPreprocessedScript(const QString& preprocessedScript);
-
-	//! Run the script located at the given location. In essence, this calls prepareScript and runPreprocessedScript.
-	//! This is a blocking call! The event queue is held up by calls of QCoreApplication::processEvents().
+	//! Run the script located in the given file. In essence, this calls prepareScript and runPreprocessedScript.
+	//! @note This is a blocking call! The event queue is held up by calls of QCoreApplication::processEvents().
 	//! @param fileName the location of the file containing the script.
 	//! @param includePath the directory to use when searching for include files
-	//! in the SSC preprocessor.  Usually this will be the same as the 
-	//! script file itself, but if you're running a generated script from 
+	//! in the SSC preprocessor. If empty, this will be the same as the
+	//! directory where the script file resides. If you're running a generated script from
 	//! a temp directory, but want to include a file from elsewhere, it 
 	//! can be usetul to set it to something else (e.g. in ScriptConsole).
 	//! @return false if the named script could not be prepared or run, true otherwise
 	bool runScript(const QString& fileName, const QString& includePath="");
 
-	//! Does all preparatory steps except for actually executing the script in the engine.
+	//! Runs the script code given. This can be used for quick script executions, without having to create a
+	//! temporary file first.
+	//! @note This is a blocking call! The event queue is held up by calls of QCoreApplication::processEvents().
+	//! @param scriptCode The script to execute
+	//! @param includePath If a null string (the default), no pre-processing is done. If an empty string, the default
+	//! script directories are used (script/ in both user and install directory). Otherwise, the given directory is used.
+	//! @return false if the named script code could not be prepared or run, true otherwise
+	bool runScriptDirect(const QString& scriptCode, const QString &includePath = QString());
+
+	//! Runs preprocessed script code which has been generated using runPreprocessedScript().
+	//! In general, you do not want to use this method, use runScript() or runScriptDirect() instead.
+	//! @note This is a blocking call! The event queue is held up by calls of QCoreApplication::processEvents().
+	//! @param preprocessedScript the string containing the preprocessed script.
+	//! @param scriptId The name of the script. Usually should correspond to the file name.
+	//! @return false if the given script code could not be run, true otherwise
+	bool runPreprocessedScript(const QString& preprocessedScript, const QString &scriptId);
+
+	//! Loads a script file and does all preparatory steps except for actually executing the script in the engine.
 	//! Use runPreprocessedScript to execute the script.
 	//! It should be safe to call this method from another thread.
 	//! @param script returns the preprocessed script text
