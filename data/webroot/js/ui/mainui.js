@@ -1,6 +1,6 @@
 /* jshint expr: true */
 
-define(["jquery", "settings", "api/remotecontrol", "api/actions", "api/properties", "./time", "./actions", "./viewoptions", "./scripts", "./viewcontrol", "./location", "./search", "jquery-ui"], function($, settings, rc, actionApi, propApi, timeui) {
+define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions", "api/properties", "./time", "./actions", "./viewoptions", "./scripts", "./viewcontrol", "./location", "./search", "jquery-ui"], function($, settings, globalize, rc, actionApi, propApi, timeui) {
 	"use strict";
 
 	var animationSupported = (window.requestAnimationFrame !== undefined);
@@ -145,8 +145,10 @@ define(["jquery", "settings", "api/remotecontrol", "api/actions", "api/propertie
 
 		//hook up span stelproperty display
 		$("span.stelproperty").each(function() {
+			var elem = this;
 			var self = $(this);
 			var prop = self.data("prop");
+			var numberformat = self.data("numberformat");
 
 			if (!prop) {
 				console.error('Error: no StelProperty name defined on an "stelproperty" element, element follows...');
@@ -155,9 +157,15 @@ define(["jquery", "settings", "api/remotecontrol", "api/actions", "api/propertie
 			}
 
 			$(propApi).on("stelPropertyChanged:" + prop, function(evt, prop) {
-				self.text(prop.value);
+				var val = prop.value;
+				if(numberformat)
+					val = globalize.format(val,numberformat);
+				elem.textContent = val;
 			});
-			self.text(propApi.getStelProp(prop));
+			var val = propApi.getStelProp(prop);
+			if(numberformat)
+					val = globalize.format(val,numberformat);
+			elem.textContent = val;
 		});
 
 		$("select.stelproperty").each(function() {
