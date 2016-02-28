@@ -128,6 +128,12 @@ void ScriptService::postImpl(const QByteArray& operation, const APIParameters &p
 		}
 		else
 		{
+			if(scriptMgr->scriptIsRunning())
+			{
+				response.setData("error: a script is already running");
+				return;
+			}
+
 			//use QVariant logic to convert to bool
 			bool bUseIncludes = QVariant(useIncludes).toBool();
 
