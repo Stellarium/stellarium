@@ -91,6 +91,7 @@ void ScriptConsole::createDialogContent()
 	connect(ui->stopButton, SIGNAL(clicked()), &StelApp::getInstance().getScriptMgr(), SLOT(stopScript()));
 	connect(ui->includeBrowseButton, SIGNAL(clicked()), this, SLOT(includeBrowse()));
 	connect(ui->quickrunCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(quickRun(int)));
+	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptRunning()), this, SLOT(scriptStarted()));
 	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptStopped()), this, SLOT(scriptEnded()));
 	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptDebug(const QString&)), this, SLOT(appendLogLine(const QString&)));
 	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptOutput(const QString&)), this, SLOT(appendOutputLine(const QString&)));
@@ -148,26 +149,19 @@ void ScriptConsole::clearButtonPressed()
 void ScriptConsole::preprocessScript()
 {
 	qDebug() << "ScriptConsole::preprocessScript";
-	QTemporaryFile src(QDir::tempPath() + "/stelscriptXXXXXX");
+	//perform pre-processing without an intermediate temp file
 	QString dest;
-	QString srcName;
-	if (src.open())
+	QString src = ui->scriptEdit->toPlainText();
+
+	if (sender() == ui->preprocessSSCButton)
 	{
-		QTextStream out(&src);
-		out << ui->scriptEdit->toPlainText();
-		srcName = src.fileName();
-
-		if (sender() == ui->preprocessSSCButton)
-		{
-			qDebug() << "Preprocessing with SSC proprocessor";
-			StelApp::getInstance().getScriptMgr().preprocessScript(src, dest, ui->includeEdit->text());
-		}
-		else
-			qWarning() << "WARNING: unknown preprocessor type";
-
-		ui->scriptEdit->setPlainText(dest);
-		src.close();
+		qDebug() << "Preprocessing with SSC proprocessor";
+		StelApp::getInstance().getScriptMgr().preprocessScript(src, dest, ui->includeEdit->text());
 	}
+	else
+		qWarning() << "WARNING: unknown preprocessor type";
+
+	ui->scriptEdit->setPlainText(dest);
 	ui->tabs->setCurrentIndex(0);
 }
 
@@ -175,42 +169,23 @@ void ScriptConsole::runScript()
 {
 	ui->tabs->setCurrentIndex(1);
 	ui->logBrowser->setHtml("");
-	QTemporaryFile file(QDir::tempPath() + "/stelscriptXXXXXX.ssc");
-	QString fileName;
-	if (file.open()) {
-		QTextStream out(&file);
-		out << ui->scriptEdit->toPlainText() << "\n";
-		fileName = file.fileName();
-		file.close();
-	}
-	else
-	{	
-		QString msg = "ERROR - cannot open tmp file for writing script text";
-		qWarning() << "ScriptConsole::runScript " + msg;
-		appendLogLine(msg);
-		return;
-	}
-
-	ui->runButton->setEnabled(false);
-	ui->stopButton->setEnabled(true);
 
 	appendLogLine(QString("Starting script at %1").arg(QDateTime::currentDateTime().toString()));
-	if (!StelApp::getInstance().getScriptMgr().runScript(fileName, ui->includeEdit->text()))
+	if (!StelApp::getInstance().getScriptMgr().runScriptDirect(ui->scriptEdit->toPlainText(), ui->includeEdit->text()))
 	{
-		QString msg = QString("ERROR - cannot run script from temp file: \"%1\"").arg(fileName);
+		QString msg = QString("ERROR - cannot run script");
 		qWarning() << "ScriptConsole::runScript " + msg;
 		appendLogLine(msg);
-		if (file.open())
-		{
-			int n=0;
-			while(!file.atEnd()) 
-			{
-				appendLogLine(QString("%1:%2").arg(n,2).arg(QString(file.readLine())));
-			}
-			file.close();
-		}
 		return;
 	}
+}
+
+void ScriptConsole::scriptStarted()
+{
+	//prevent strating of scripts while any script is running
+	ui->quickrunCombo->setEnabled(false);
+	ui->runButton->setEnabled(false);
+	ui->stopButton->setEnabled(true);
 }
 
 void ScriptConsole::scriptEnded()
@@ -218,6 +193,7 @@ void ScriptConsole::scriptEnded()
 	qDebug() << "ScriptConsole::scriptEnded";
 	QString html = ui->logBrowser->toHtml();
 	appendLogLine(QString("Script finished at %1").arg(QDateTime::currentDateTime().toString()));
+	ui->quickrunCombo->setEnabled(true);
 	ui->runButton->setEnabled(true);
 	ui->stopButton->setEnabled(false);
 }
@@ -281,20 +257,8 @@ void ScriptConsole::quickRun(int idx)
 	if (scriptText.isEmpty())
 		return;
 
-	QTemporaryFile file(QDir::tempPath() + "/stelscriptXXXXXX.ssc");
-	if (file.open())
-	{
-		QString fileName = file.fileName();
-		QTextStream out(&file);
-		out << scriptText;
-		file.close();
-		appendLogLine(QString("Running: %1").arg(scriptText));
-		StelApp::getInstance().getScriptMgr().runScript(fileName);
-	}
-	else
-	{
-		appendLogLine("Can't run quick script (could not open temp file)");
-	}
+	appendLogLine(QString("Running: %1").arg(scriptText));
+	StelApp::getInstance().getScriptMgr().runScriptDirect(scriptText);
 }
 
 void ScriptConsole::rowColumnChanged()
