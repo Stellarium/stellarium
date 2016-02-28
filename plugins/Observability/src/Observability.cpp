@@ -290,10 +290,8 @@ void Observability::draw(StelCore* core)
 //	GMTShift = StelUtils::getGMTShiftFromQT(currJD)/24.0;
 	GMTShift = StelApp::getInstance().getLocaleMgr().getGMTShift(currJD)/24.0;
 
-//	qDebug() << QString("%1%2 ").arg(GMTShift);
 
 	double currLocalT = 24.*modf(currJD + GMTShift,&currJDint);
-
 	int auxm, auxd, auxy;
 	StelUtils::getDateFromJulianDay(currJD, &auxy, &auxm, &auxd);
 	bool isSource = StelApp::getInstance().getStelObjectMgr().getWasSelected();
@@ -366,6 +364,7 @@ void Observability::draw(StelCore* core)
 	{
 		updateSunH();
 		lastJDMoon = 0.0;
+
 	};
 
 //////////////////////////////////////////////////////////////////
@@ -466,8 +465,9 @@ void Observability::draw(StelCore* core)
 // Compute source's altitude (in radians):
 	alti = std::asin(LocPos[2]);
 
+
 // Force re-computation of ephemeris if the location changes or the user changes the configuration:
-	if (locChanged || configChanged)
+	if (locChanged || configChanged || yearChanged)
 	{ 
 		souChanged=true;
 		configChanged=false;
@@ -1415,7 +1415,6 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 	if (qAbs(myJD.first-lastJDMoon)>StelCore::JD_SECOND || lastType!=bodyType || souChanged)
 	{
 
-//		qDebug() << q_("%1  %2   %3   %4").arg(Kind).arg(LastObject).arg(myJD,0,'f',5).arg(lastJDMoon,0,'f',5);
 
 		lastType = bodyType;
 
@@ -1588,7 +1587,6 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 			culmAlt = qAbs(mylat-dec); // 90 - altitude at transit.
 		};
 
-//		qDebug() << q_("%1").arg(MoonCulm,0,'f',5);
 
 
 	lastJDMoon = myJD.first;
@@ -1659,13 +1657,11 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 
 					};
 
-				//	qDebug() << QString("%1 %2 %3 %4 ").arg(Sec1).arg(Sec2).arg(Temp1).arg(Temp2);	
 
 
 					if (qAbs(Sec2.first-Sec1.first) < 10.*dT)  // 1 minute accuracy; convergence.
 					{
 						TempFullMoon = (Sec1.first+Sec2.first)/2.;
-				//		qDebug() << QString("%1%2 ").arg(TempFullMoon);	
 						break;
 					};
 					
