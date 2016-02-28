@@ -488,10 +488,10 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 }
 
 void StelMainScriptAPI::loadSkyImageAltAz(const QString& id, const QString& filename,
-					  double alt0, double azi0,
-					  double alt1, double azi1,
-					  double alt2, double azi2,
-					  double alt3, double azi3,
+					  double azi0, double alt0,
+					  double azi1, double alt1,
+					  double azi2, double alt2,
+					  double azi3, double alt3,
 					  double minRes, double maxBright, bool visible)
 {
 	QString path = "scripts/" + filename;
@@ -510,9 +510,9 @@ void StelMainScriptAPI::loadSkyImageAltAz(const QString& id, const QString& file
 	XYZ*=RADIUS_NEB;
 	float texSize = RADIUS_NEB * sin(angSize/2/60*M_PI/180);
 	Mat4f matPrecomp = Mat4f::translation(XYZ) *
-			   Mat4f::zrotation((180-azi)*M_PI/180.) *
+			   Mat4f::zrotation((180.-azi)*M_PI/180.) *
 			   Mat4f::yrotation(-alt*M_PI/180.) *
-			   Mat4f::xrotation((rotation+90)*M_PI/180.);
+			   Mat4f::xrotation((rotation+90.)*M_PI/180.);
 
 	Vec3f corners[4];
 	corners[0] = matPrecomp * Vec3f(0.f,-texSize,-texSize);
@@ -821,7 +821,7 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 	Vec3d pos;
 	double ra, dec, alt, az, glong, glat;
 	StelCore* core = StelApp::getInstance().getCore();
-	bool useOldAzimuth = StelApp::getInstance().getFlagOldAzimuthUsage();
+	bool useOldAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 
 	// ra/dec
 	pos = obj->getEquinoxEquatorialPos(core);
@@ -954,7 +954,7 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 	Vec3d pos;
 	double ra, dec, alt, az, glong, glat;
 	StelCore* core = StelApp::getInstance().getCore();
-	bool useOldAzimuth = StelApp::getInstance().getFlagOldAzimuthUsage();
+	bool useOldAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 
 	// ra/dec
 	pos = obj->getEquinoxEquatorialPos(core);
@@ -1281,7 +1281,7 @@ void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, flo
 	double dAlt = StelUtils::getDecAngle(alt);	
 	double dAzi = M_PI - StelUtils::getDecAngle(azi);
 
-	if (StelApp::getInstance().getFlagOldAzimuthUsage())
+	if (StelApp::getInstance().getFlagSouthAzimuthUsage())
 		dAzi -= M_PI;
 
 	StelUtils::spheToRect(dAzi,dAlt,aim);
@@ -1397,4 +1397,26 @@ void StelMainScriptAPI::setZodiacalLightIntensity(double i)
 double StelMainScriptAPI::getZodiacalLightIntensity()
 {
 	return GETSTELMODULE(ZodiacalLight)->getIntensity();
+}
+
+QVariantMap StelMainScriptAPI::getScreenXYFromAltAzi(const QString &alt, const QString &azi)
+{
+	Vec3d aim, v;
+	double dAlt = StelUtils::getDecAngle(alt);
+	double dAzi = M_PI - StelUtils::getDecAngle(azi);
+
+	if (StelApp::getInstance().getFlagSouthAzimuthUsage())
+		dAzi -= M_PI;
+
+	StelUtils::spheToRect(dAzi,dAlt,aim);
+
+	const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionAuto);
+
+	prj->project(aim, v);
+
+	QVariantMap map;
+	map.insert("x", qRound(v[0]));
+	map.insert("y", prj->getViewportHeight()-qRound(v[1]));
+
+	return map;
 }
