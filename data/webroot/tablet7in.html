@@ -95,7 +95,7 @@
             <!-- GZ TODO We have now StelMovementMgr actions::lookNorth(), lookEast(),  lookSouth(), lookWest(), lookZenith(). 
                  
                  An action or call-script button is simple to develop now, thanks a lot! Each script is already available as action! A script button can be configured like e.g.
-                 <button type="button" class="stelaction" value="actionScript/MAMUZ/GZ_screen_image3.ssc"/><?= tr("MAMUZ mammoth test3")?></button>
+                 <button type="button" class="stelaction" name="actionScript/MAMUZ/GZ_screen_image3.ssc"/><?= tr("MAMUZ mammoth test3")?></button>
 
                  We may add  StelMovementMgr::turnEast() etc which would trigger a smooth move, so these buttons would be changed to trigger those. 
                  In case these will be slots with default argument like turnSouth(float duration_seconds=3.0f), those could also be used as arg-less actions.
@@ -103,11 +103,11 @@
                  -->
 
             <div class="smallblock blocklabel">
-              <button type="button" class="stelaction" title='<?= tr("Look towards East")?>'   value="actionLook_Towards_East"><?= tr("E")?></button>
-              <button type="button" class="stelaction" title='<?= tr("Look towards South")?>'  value="actionLook_Towards_South"><?= tr("S")?></button> 
-              <button type="button" class="stelaction" title='<?= tr("Look towards West")?>'   value="actionLook_Towards_West"><?= tr("W")?></button>
-              <button type="button" class="stelaction" title='<?= tr("Look towards North")?>'  value="actionLook_Towards_North"><?= tr("N")?></button>
-              <button type="button" class="stelaction" title='<?= tr("Look towards Zenith")?>' value="actionLook_Towards_Zenith"><?= tr("Z")?></button>
+              <button type="button" class="stelaction" title='<?= tr("Look towards East")?>'   name="actionLook_Towards_East"><?= tr("E")?></button>
+              <button type="button" class="stelaction" title='<?= tr("Look towards South")?>'  name="actionLook_Towards_South"><?= tr("S")?></button> 
+              <button type="button" class="stelaction" title='<?= tr("Look towards West")?>'   name="actionLook_Towards_West"><?= tr("W")?></button>
+              <button type="button" class="stelaction" title='<?= tr("Look towards North")?>'  name="actionLook_Towards_North"><?= tr("N")?></button>
+              <button type="button" class="stelaction" title='<?= tr("Look towards Zenith")?>' name="actionLook_Towards_Zenith"><?= tr("Z")?></button>
             </div>
              <div>
              <div class="slider stelproperty flex-expand" data-prop="prop_StelCore_viewportVerticalOffset" data-min="-50" data-max="50" data-step="1"></div>
@@ -122,18 +122,18 @@
               <div id="view_fovbuttons" class="ui-corner-all ui-widget-content">
               <table>
                <tr>
-                <td><button type="button" class="fovbutton" flex value="0.1">0.1&deg;</button></td>
-                <td><button type="button" class="fovbutton" flex value="1">1&deg;</button></td>
-                <td><button type="button" class="fovbutton" flex value="10">10&deg;</button></td>
-                <td><button type="button" class="fovbutton" flex value="20">20&deg;</button></td></tr><tr>
-                <td><button type="button" class="fovbutton" flex value="30">30&deg;</button></td>
-                <td><button type="button" class="fovbutton" flex value="40">40&deg;</button></td>
-                <td><button type="button" class="fovbutton" flex value="60">60&deg;</button></td>
-                <td><button type="button" class="fovbutton" flex value="90">90&deg;</button></td></tr><tr>
-                <td><button type="button" class="fovbutton" flex value="120">120&deg;</button></td>
-                <td><button type="button" class="fovbutton" flex value="150">150&deg;</button></td>
-                <td><button type="button" class="fovbutton" flex value="180">180&deg;</button></td>
-                <td><button type="button" class="fovbutton" flex value="230">230&deg;</button></td>
+                <td><button type="button" class="fovbutton" value="0.1">0.1&deg;</button></td>
+                <td><button type="button" class="fovbutton" value="1">1&deg;</button></td>
+                <td><button type="button" class="fovbutton" value="10">10&deg;</button></td>
+                <td><button type="button" class="fovbutton" value="20">20&deg;</button></td></tr><tr>
+                <td><button type="button" class="fovbutton" value="30">30&deg;</button></td>
+                <td><button type="button" class="fovbutton" value="40">40&deg;</button></td>
+                <td><button type="button" class="fovbutton" value="60">60&deg;</button></td>
+                <td><button type="button" class="fovbutton" value="90">90&deg;</button></td></tr><tr>
+                <td><button type="button" class="fovbutton" value="120">120&deg;</button></td>
+                <td><button type="button" class="fovbutton" value="150">150&deg;</button></td>
+                <td><button type="button" class="fovbutton" value="180">180&deg;</button></td>
+                <td><button type="button" class="fovbutton" value="230">230&deg;</button></td>
                </tr>
               </table>
               </div> 
@@ -279,7 +279,7 @@
             </div>
             <label><input class="stelproperty" name="prop_SkyDrawer_flagLuminanceAdaptation" type="checkbox"/><?= tr("Dynamic eye adaptation")?></label>
             <div class="flex flex-baseline">
-              <label><input type="checkbox" class="stelaction" value="actionShow_Stars_Labels"/><?= tr("Labels and Markers")?></label><div class="slider stelproperty flex-expand" data-prop="prop_StarMgr_labelsAmount" data-min="0" data-max="10" data-step="0.1"></div>
+              <label><input type="checkbox" class="stelaction" name="actionShow_Stars_Labels"/><?= tr("Labels and Markers")?></label><div class="slider stelproperty flex-expand" data-prop="prop_StarMgr_labelsAmount" data-min="0" data-max="10" data-step="0.1"></div>
             </div>
           </div>
         </div>
@@ -288,9 +288,9 @@
         <div class="flex flex-wrap">
           <div class="smallblock blocklabel">
             <h3><?= tr("Planets and satellites")?></h3>
-            <label><input type="checkbox" class="stelaction" value="actionShow_Planets" /><?= tr("Show Solar System objects")?></label>
-            <label><input type="checkbox" class="stelaction" value="actionShow_Planets_Hints" /><?= tr("Show planet markers")?></label>
-            <label><input type="checkbox" class="stelaction" value="actionShow_Planets_Orbits" /><?= tr("Show planet orbits")?></label>
+            <label><input type="checkbox" class="stelaction" name="actionShow_Planets" /><?= tr("Show Solar System objects")?></label>
+            <label><input type="checkbox" class="stelaction" name="actionShow_Planets_Hints" /><?= tr("Show planet markers")?></label>
+            <label><input type="checkbox" class="stelaction" name="actionShow_Planets_Orbits" /><?= tr("Show planet orbits")?></label>
             <label><input class="stelproperty" name="prop_SolarSystem_flagIsolatedOrbits" type="checkbox"/><?= tr("Show orbit for selected planet")?></label>
             <label><input class="stelproperty" name="prop_SolarSystem_flagIsolatedTrails" type="checkbox"/><?= tr("Show trail only for selected planet")?></label>
             <label><input class="stelproperty" name="prop_SolarSystem_flagLightTravelTime" type="checkbox"/><?= tr("Simulate light speed")?></label>
@@ -300,7 +300,7 @@
             </div>
             <label><input class="stelproperty" name="prop_LandscapeMgr_flagLandscapeAutoSelection" type="checkbox"/><?= tr("Auto select landscapes")?></label>
             <div class="flex flex-baseline">
-              <label><input type="checkbox" class="stelaction" value="actionShow_Planets_Labels"/><?= tr("Labels and Markers")?></label><div class="slider stelproperty flex-expand" data-prop="prop_SolarSystem_labelsAmount" data-min="0" data-max="10" data-step="0.1"></div>
+              <label><input type="checkbox" class="stelaction" name="actionShow_Planets_Labels"/><?= tr("Labels and Markers")?></label><div class="slider stelproperty flex-expand" data-prop="prop_SolarSystem_labelsAmount" data-min="0" data-max="10" data-step="0.1"></div>
             </div>
           </div>
         </div>
@@ -308,8 +308,8 @@
       <div id="tab_view_atm">
         <div class="flex flex-wrap">
           <div class="smallblock">
-            <h3><label><input type="checkbox" class="stelaction valign-middle" value="actionShow_Atmosphere"/><?= tr("Atmosphere")?></label></h3>
-            <label><input type="checkbox" class="stelaction" value="actionShow_LightPollution_Database" /><?= tr("Light pollution data from locations database")?></label>
+            <h3><label><input type="checkbox" class="stelaction valign-middle" name="actionShow_Atmosphere"/><?= tr("Atmosphere")?></label></h3>
+            <label><input type="checkbox" class="stelaction" name="actionShow_LightPollution_Database" /><?= tr("Light pollution data from locations database")?></label>
             <div class="table">
               <p><label for="atmosphere_bortlescaleindex"><?= tr("Light pollution:")?></label><input id="atmosphere_bortlescaleindex" class="spinner stelproperty" name="prop_SkyDrawer_bortleScaleIndex" data-min="1" data-max="9" data-step="1" data-numberformat="n0" readonly="readonly"/></p>
             </div>
@@ -343,45 +343,45 @@
             <div id="vo_markers_boxes" class="innerblock">
               <h3><?= tr("Celestial Sphere")?></h3>
               <div class="inline-block blocklabel">
-                <label><input type="checkbox" class="stelaction" value="actionShow_Equatorial_J2000_Grid" /><?= tr("Equatorial grid (J2000)")?></label>
-                <label><input type="checkbox" class="stelaction" value="actionShow_Equatorial_Grid" /><?= tr("Equatorial grid (of date)")?></label>
-                <label><input type="checkbox" class="stelaction" value="actionShow_Ecliptic_J2000_Grid" /><?= tr("Ecliptic grid (J2000)")?></label>
-                <label><input type="checkbox" class="stelaction" value="actionShow_Ecliptic_Grid" /><?= tr("Ecliptic grid (of date)")?></label>
-                <label><input type="checkbox" class="stelaction" value="actionShow_Azimuthal_Grid" /><?= tr("Azimuthal grid")?></label>
-                <label><input type="checkbox" class="stelaction" value="actionShow_Galactic_Grid" /><?= tr("Galactic grid")?></label>
-                <label><input type="checkbox" class="stelaction" value="actionShow_Cardinal_Points" /><?= tr("Cardinal points")?></label>
-                <label title='<?= tr("Show Prime (East-West) Vertical.")?>'><input type="checkbox" class="stelaction" value="actionShow_Prime_Vertical_Line" /><?= tr("Prime Vertical")?></label>
-                <label title='<?= tr("Instantaneous circles of earth´s axis on its motion around ecliptical poles. Displayed on Earth only.")?>'><input type="checkbox" class="stelaction" value="actionShow_Precession_Circles" /><?= tr("Precession circles")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Equatorial_J2000_Grid" /><?= tr("Equatorial grid (J2000)")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Equatorial_Grid" /><?= tr("Equatorial grid (of date)")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Ecliptic_J2000_Grid" /><?= tr("Ecliptic grid (J2000)")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Ecliptic_Grid" /><?= tr("Ecliptic grid (of date)")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Azimuthal_Grid" /><?= tr("Azimuthal grid")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Galactic_Grid" /><?= tr("Galactic grid")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Cardinal_Points" /><?= tr("Cardinal points")?></label>
+                <label title='<?= tr("Show Prime (East-West) Vertical.")?>'><input type="checkbox" class="stelaction" name="actionShow_Prime_Vertical_Line" /><?= tr("Prime Vertical")?></label>
+                <label title='<?= tr("Instantaneous circles of earth´s axis on its motion around ecliptical poles. Displayed on Earth only.")?>'><input type="checkbox" class="stelaction" name="actionShow_Precession_Circles" /><?= tr("Precession circles")?></label>
               </div>
               <div class="inline-block blocklabel">
-                <label><input type="checkbox" class="stelaction" value="actionShow_Equator_J2000_Line" /><?= tr("Equator (J2000)")?></label>
-                <label><input type="checkbox" class="stelaction" value="actionShow_Equator_Line" /><?= tr("Equator (of date)")?></label>
-                <label><input type="checkbox" class="stelaction" value="actionShow_Ecliptic_J2000_Line" /><?= tr("Ecliptic (J2000)")?></label>
-                <label><input type="checkbox" class="stelaction" value="actionShow_Ecliptic_Line" /><?= tr("Ecliptic (of date)")?></label>
-                <label><input type="checkbox" class="stelaction" value="actionShow_Horizon_Line" /><?= tr("Horizon")?></label>
-                <label><input type="checkbox" class="stelaction" value="actionShow_Galactic_Equator_Line" /><?= tr("Galactic equator")?></label>
-                <label><input type="checkbox" class="stelaction" value="actionShow_Meridian_Line" /><?= tr("Meridian")?></label>
-                <label title='<?= tr("Show colures (great circles through poles and solstices/equinoxes).")?>'><input type="checkbox" class="stelaction" value="actionShow_Colure_Lines" /><?= tr("Colures")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Equator_J2000_Line" /><?= tr("Equator (J2000)")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Equator_Line" /><?= tr("Equator (of date)")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Ecliptic_J2000_Line" /><?= tr("Ecliptic (J2000)")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Ecliptic_Line" /><?= tr("Ecliptic (of date)")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Horizon_Line" /><?= tr("Horizon")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Galactic_Equator_Line" /><?= tr("Galactic equator")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Meridian_Line" /><?= tr("Meridian")?></label>
+                <label title='<?= tr("Show colures (great circles through poles and solstices/equinoxes).")?>'><input type="checkbox" class="stelaction" name="actionShow_Colure_Lines" /><?= tr("Colures")?></label>
                 <label title='<?= tr("Opposition/conjunction longitude line - the line of ecliptic longitude which passes through both ecliptic poles, the Sun and opposition point.")?>'>
-                       <input type="checkbox" class="stelaction" value="actionShow_Longitude_Line" /><?= tr("O./C. longitude")?></label>
+                       <input type="checkbox" class="stelaction" name="actionShow_Longitude_Line" /><?= tr("O./C. longitude")?></label>
               </div>
             </div>
           </div>
            <div id="vo_archaeolines" class="smallblock stelplugin" data-plugin="ArchaeoLines" data-pluginjs="plugins/archaeolines">
-            <h3><label><input type="checkbox" class="stelaction valign-middle" value="actionShow_Archaeo_Lines"/><?= tr("ArchaeoLines")?></label></h3>
+            <h3><label><input type="checkbox" class="stelaction valign-middle" name="actionShow_Archaeo_Lines"/><?= tr("ArchaeoLines")?></label></h3>
             <div class="inline-block blocklabel">
-              <label><input type="checkbox" class="stelaction" value="actionAL_showEquinoxLine"/><?= tr("Equinox")?></label>
-              <label><input type="checkbox" class="stelaction" value="actionAL_showSolsticeLines"/><?= tr("Solstices")?></label>
-              <label><input type="checkbox" class="stelaction" value="actionAL_showCrossquarterLines"/><?= tr("Crossquarters")?></label>
-              <label><input type="checkbox" class="stelaction" value="actionAL_showMajorStandstillLines"/><?= tr("Major Standstill")?></label>
-              <label><input type="checkbox" class="stelaction" value="actionAL_showMinorStandstillLines"/><?= tr("Minor Standstill")?></label>
+              <label><input type="checkbox" class="stelaction" name="actionAL_showEquinoxLine"/><?= tr("Equinox")?></label>
+              <label><input type="checkbox" class="stelaction" name="actionAL_showSolsticeLines"/><?= tr("Solstices")?></label>
+              <label><input type="checkbox" class="stelaction" name="actionAL_showCrossquarterLines"/><?= tr("Crossquarters")?></label>
+              <label><input type="checkbox" class="stelaction" name="actionAL_showMajorStandstillLines"/><?= tr("Major Standstill")?></label>
+              <label><input type="checkbox" class="stelaction" name="actionAL_showMinorStandstillLines"/><?= tr("Minor Standstill")?></label>
             </div>
             <div class="inline-block blocklabel">
-              <label><input type="checkbox" class="stelaction" value="actionAL_showZenithPassageLine"/><?= tr("Zenith Passage")?></label>
-              <label><input type="checkbox" class="stelaction" value="actionAL_showNadirPassageLine"/><?= tr("Nadir Passage")?></label>
-              <label><input type="checkbox" class="stelaction" value="actionAL_showSelectedObjectLine"/><?= tr("Selected Object")?></label>
-              <label><input type="checkbox" class="stelaction" value="actionAL_showCurrentSunLine"/><?= tr("Current Sun")?></label>
-              <label><input type="checkbox" class="stelaction" value="actionAL_showCurrentMoonLine"/><?= tr("Current Moon")?></label>
+              <label><input type="checkbox" class="stelaction" name="actionAL_showZenithPassageLine"/><?= tr("Zenith Passage")?></label>
+              <label><input type="checkbox" class="stelaction" name="actionAL_showNadirPassageLine"/><?= tr("Nadir Passage")?></label>
+              <label><input type="checkbox" class="stelaction" name="actionAL_showSelectedObjectLine"/><?= tr("Selected Object")?></label>
+              <label><input type="checkbox" class="stelaction" name="actionAL_showCurrentSunLine"/><?= tr("Current Sun")?></label>
+              <label><input type="checkbox" class="stelaction" name="actionAL_showCurrentMoonLine"/><?= tr("Current Moon")?></label>
             </div>
             <!-- automatic selectmenu generation and stelproperty binding -->
             <!-- the selectmenu is styled in the css because we can't really add classes here -->
@@ -455,7 +455,7 @@
             </div>
           </div>
           <div id="vo_dsotype" class="smallblock">
-            <h3><label><input id="vo_dsotypefiltercheckbox" type="checkbox" class="stelaction valign-middle" value="actionSet_Nebula_TypeFilterUsage"/><?= tr("Filter by type")?></label></h3>
+            <h3><label><input id="vo_dsotypefiltercheckbox" type="checkbox" class="stelaction valign-middle" name="actionSet_Nebula_TypeFilterUsage"/><?= tr("Filter by type")?></label></h3>
             <div class="inline-block blocklabel">
               <label><input type="checkbox" value="0x001"/><?= tr("Galaxies")?></label>
               <label><input type="checkbox" value="0x002"/><?= tr("Active galaxies")?></label>
@@ -472,7 +472,7 @@
             </div>
           </div>
           <div id="vo_dsolabels" class="smallblock blocklabel">
-            <h3><label><input class="stelaction" type="checkbox" value="actionShow_Nebulas" /><?= tr("Labels and markers")?></label></h3>
+            <h3><label><input class="stelaction" type="checkbox" name="actionShow_Nebulas" /><?= tr("Labels and markers")?></label></h3>
             <div class="flex flex-baseline">
               <label><?= tr("Labels")?></label><div class="slider stelproperty flex-expand" data-prop="prop_NebulaMgr_labelsAmount" data-min="0" data-max="10" data-step="0.1"></div>
             </div>
@@ -490,17 +490,17 @@
         <div class="smallblock">
           <h3><?= tr("Options")?></h3>
           <div class="inline-block blocklabel">
-            <label><input type="checkbox" class="stelaction" value="actionShow_Ground" /><?= tr("Show ground")?></label>
+            <label><input type="checkbox" class="stelaction" name="actionShow_Ground" /><?= tr("Show ground")?></label>
             <label><input type="checkbox" class="stelproperty" name="prop_LandscapeMgr_flagLandscapeSetsLocation"/><?= tr("Use associated planet and position")?></label>
-            <label><input type="checkbox" class="stelaction" value="actionShow_Fog" /><?= tr("Show fog")?></label>
+            <label><input type="checkbox" class="stelaction" name="actionShow_Fog" /><?= tr("Show fog")?></label>
             <div class="flex flex-baseline">
               <label><input type="checkbox" class="stelproperty" name="prop_LandscapeMgr_flagLandscapeUseMinimalBrightness"/><?= tr("Minimal brightness:")?></label>
               <input id="landscape_defaultMinimalBrightness" class="flex-expand spinner stelproperty" name="prop_LandscapeMgr_defaultMinimalBrightness" data-min="0" data-max="1" data-step="0.01" data-numberformat="n2" readonly="readonly"/>
             </div>
           </div>
           <div class="inline-block blocklabel">
-            <label><input type="checkbox" class="stelaction" value="actionShow_LandscapeLabels" /><?= tr("Show landscape labels")?></label>
-            <label><input type="checkbox" class="stelaction" value="actionShow_LandscapeIllumination" /><?= tr("Show illumination")?></label>
+            <label><input type="checkbox" class="stelaction" name="actionShow_LandscapeLabels" /><?= tr("Show landscape labels")?></label>
+            <label><input type="checkbox" class="stelaction" name="actionShow_LandscapeIllumination" /><?= tr("Show illumination")?></label>
             <label/> <!-- empty label to move the next down a line -->
             <label><input id="landscape_flagLandscapeSetsMinimalBrightness" type="checkbox" class="stelproperty" name="prop_LandscapeMgr_flagLandscapeSetsMinimalBrightness"/><?= tr("from landscape, if given")?></label>
           </div>
@@ -517,20 +517,20 @@
         <div class="smallblock">
           <h3><?= tr("Options")?></h3>
           <div class="inline-block blocklabel">
-            <label><input type="checkbox" class="stelaction" value="actionShow_Constellation_Labels" /><?= tr("Show labels")?></label>
+            <label><input type="checkbox" class="stelaction" name="actionShow_Constellation_Labels" /><?= tr("Show labels")?></label>
             <div class="flex flex-baseline">
-              <label><input type="checkbox" class="stelaction" value="actionShow_Constellation_Lines" /><?= tr("Show lines with thickness")?></label>
+              <label><input type="checkbox" class="stelaction" name="actionShow_Constellation_Lines" /><?= tr("Show lines with thickness")?></label>
               <input class="flex-expand spinner stelproperty" name="prop_ConstellationMgr_constellationLineThickness" data-min="1" data-max="5" data-step="1" data-numberformat="n0" readonly="readonly"/>
             </div>
             <div class="flex flex-baseline">
-              <label><input type="checkbox" class="stelaction" value="actionShow_Constellation_Art" /><?= tr("Show art in brightness")?></label>
+              <label><input type="checkbox" class="stelaction" name="actionShow_Constellation_Art" /><?= tr("Show art in brightness")?></label>
               <input class="flex-expand spinner stelproperty" name="prop_ConstellationMgr_artIntensity" data-min="0" data-max="1" data-step="0.05" data-numberformat="n2" readonly="readonly"/>
             </div>
           </div>
           <div class="inline-block blocklabel">
-            <label><input type="checkbox" class="stelaction" value="actionShow_Constellation_Boundaries" /><?= tr("Show boundaries")?></label>
-            <label><input type="checkbox" class="stelaction" value="actionShow_Skyculture_Nativenames" /><?= tr("Use native names for planets")?></label>
-            <label><input type="checkbox" class="stelaction" value="actionShow_Constellation_Isolated" /><?= tr("Constellation selection isolated")?></label>
+            <label><input type="checkbox" class="stelaction" name="actionShow_Constellation_Boundaries" /><?= tr("Show boundaries")?></label>
+            <label><input type="checkbox" class="stelaction" name="actionShow_Skyculture_Nativenames" /><?= tr("Use native names for planets")?></label>
+            <label><input type="checkbox" class="stelaction" name="actionShow_Constellation_Isolated" /><?= tr("Constellation selection isolated")?></label>
           </div>
         </div>
         <div class="smallblock flex landscapeblock">
@@ -543,7 +543,7 @@
       <!-- handled by ui/actions.js -->
       <div id="tab_actions">
         <div class="flex">
-          <section id="stelaction" class="block flex flex-column">
+          <section id="stelaction" name="block flex flex-column">
             <header><h2><?= tr("Actions")?></h2></header>
             <select id="actionlist" class="scrollselect flex-expand" size="10">
             </select>
@@ -561,7 +561,7 @@
             </select>
             <div class="textcenter"><?= tr("Active script:")?> <span id="activescript"><?= tr("-none-")?></span></div>
             <div><button id="bt_runscript" disabled="disabled"><?= tr("Run selected script")?></button><button id="bt_stopscript" disabled="disabled"><?= tr("Stop current script")?></button></div>
-               <button type="button" class="stelaction" title='<?= tr("MAMUZ Mammoth")?>'  value="actionScript/MAMUZ/GZ_screen_image3.ssc"><?= tr("MAMUZ mammoth test3")?></button> 
+               <button type="button" class="stelaction" title='<?= tr("MAMUZ Mammoth")?>'  name="actionScript/MAMUZ/GZ_screen_image3.ssc"><?= tr("MAMUZ mammoth test3")?></button> 
   
           </section>
         </div>
@@ -569,18 +569,18 @@
         	<section class="block flex flex-column">
         	 <header><h2><?= tr("View towards horizon at Azimuth")?></h2></header>
              <div>
-                 <button type="button" class="stelaction"  value="actionScript/RC/Horiz_Az000.ssc">0</button> 
-                 <button type="button" class="stelaction"  value="actionScript/RC/Horiz_Az030.ssc">30</button> 
-                 <button type="button" class="stelaction"  value="actionScript/RC/Horiz_Az060.ssc">60</button> 
-                 <button type="button" class="stelaction"  value="actionScript/RC/Horiz_Az090.ssc">90</button> 
-                 <button type="button" class="stelaction"  value="actionScript/RC/Horiz_Az120.ssc">120</button> 
-                 <button type="button" class="stelaction"  value="actionScript/RC/Horiz_Az150.ssc">150</button> 
-                 <button type="button" class="stelaction"  value="actionScript/RC/Horiz_Az180.ssc">180</button> 
-                 <button type="button" class="stelaction"  value="actionScript/RC/Horiz_Az210.ssc">210</button> 
-                 <button type="button" class="stelaction"  value="actionScript/RC/Horiz_Az240.ssc">240</button> 
-                 <button type="button" class="stelaction"  value="actionScript/RC/Horiz_Az270.ssc">270</button> 
-                 <button type="button" class="stelaction"  value="actionScript/RC/Horiz_Az300.ssc">300</button> 
-                 <button type="button" class="stelaction"  value="actionScript/RC/Horiz_Az330.ssc">330</button> 
+                 <button type="button" class="stelaction"  name="actionScript/RC/Horiz_Az000.ssc">0</button> 
+                 <button type="button" class="stelaction"  name="actionScript/RC/Horiz_Az030.ssc">30</button> 
+                 <button type="button" class="stelaction"  name="actionScript/RC/Horiz_Az060.ssc">60</button> 
+                 <button type="button" class="stelaction"  name="actionScript/RC/Horiz_Az090.ssc">90</button> 
+                 <button type="button" class="stelaction"  name="actionScript/RC/Horiz_Az120.ssc">120</button> 
+                 <button type="button" class="stelaction"  name="actionScript/RC/Horiz_Az150.ssc">150</button> 
+                 <button type="button" class="stelaction"  name="actionScript/RC/Horiz_Az180.ssc">180</button> 
+                 <button type="button" class="stelaction"  name="actionScript/RC/Horiz_Az210.ssc">210</button> 
+                 <button type="button" class="stelaction"  name="actionScript/RC/Horiz_Az240.ssc">240</button> 
+                 <button type="button" class="stelaction"  name="actionScript/RC/Horiz_Az270.ssc">270</button> 
+                 <button type="button" class="stelaction"  name="actionScript/RC/Horiz_Az300.ssc">300</button> 
+                 <button type="button" class="stelaction"  name="actionScript/RC/Horiz_Az330.ssc">330</button> 
             </div>
            </section>
 
