@@ -116,6 +116,28 @@ void ScriptService::postImpl(const QByteArray& operation, const APIParameters &p
 					  Qt::QueuedConnection,Q_ARG(QString,script),Q_ARG(QString,scriptId));
 		response.setData("ok");
 	}
+	else if(operation=="direct")
+	{
+		//directly runs the given script code
+		QString code = QString::fromUtf8(parameters.value("code"));
+		QString useIncludes = QString::fromUtf8(parameters.value("useIncludes"));
+
+		if(code.isEmpty())
+		{
+			response.writeRequestError("need parameter: code");
+		}
+		else
+		{
+			//use QVariant logic to convert to bool
+			bool bUseIncludes = QVariant(useIncludes).toBool();
+
+			//also requires queued connection
+			QMetaObject::invokeMethod(scriptMgr,"runScriptDirect", Qt::QueuedConnection,
+						  Q_ARG(QString,code),
+						  Q_ARG(QString,bUseIncludes ? QStringLiteral("") : QString() ));
+			response.setData("ok");
+		}
+	}
 	else if(operation=="stop")
 	{
 		//scriptMgr->stopScript();
@@ -126,6 +148,6 @@ void ScriptService::postImpl(const QByteArray& operation, const APIParameters &p
 	else
 	{
 		//TODO some sort of service description?
-		response.writeRequestError("unsupported operation. GET: list,info,status POST: run,stop");
+		response.writeRequestError("unsupported operation. GET: list,info,status POST: run,direct,stop");
 	}
 }

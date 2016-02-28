@@ -63,6 +63,7 @@ define(["jquery", "./remotecontrol"], function($, rc) {
     }
 
     function executeAction(actionName) {
+        console.log("StelAction " + actionName + " triggered");
         $.ajax({
             url: "/api/stelaction/do",
             method: "POST",

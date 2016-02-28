@@ -8,11 +8,31 @@ define(["jquery", "api/scripts", "api/remotecontrol"], function($, scriptApi, rc
 	var $scriptlist;
 
 	function fillScriptList(data) {
-		$scriptlist.empty();
+		//document must be ready
+		$(function() {
+			$scriptlist.empty();
 
-		//sort it and insert
-		$.each(data.sort(), function(idx, elem) {
-			$("<option/>").text(elem).val(elem).appendTo($scriptlist);
+			//sort it and insert
+			$.each(data.sort(), function(idx, elem) {
+				$("<option/>").text(elem).val(elem).appendTo($scriptlist);
+			});
+		});
+	}
+
+	//initialize the automatic script buttons
+	function initScriptButtons() {
+		$("button.stelssc, input[type='button'].stelssc").click(function() {
+			var code = this.value;
+			if (!code) {
+				console.error("No code defined for this script button");
+				return;
+			}
+
+			var useIncludes = false;
+			if($(this).data("useIncludes"))
+				useIncludes = true;
+
+			scriptApi.runDirectScript(code,useIncludes);
 		});
 	}
 
@@ -41,7 +61,7 @@ define(["jquery", "api/scripts", "api/remotecontrol"], function($, scriptApi, rc
 		$bt_runscript.click(runscriptfn);
 		$bt_stopscript.click(scriptApi.stopScript);
 
-		scriptApi.loadScriptList(fillScriptList);
+		initScriptButtons();
 	}
 
 	$(scriptApi).on("activeScriptChanged", function(evt, script) {
@@ -58,6 +78,8 @@ define(["jquery", "api/scripts", "api/remotecontrol"], function($, scriptApi, rc
 		$scriptlist.children("option[value='" + script + "']").addClass("select_selected");
 	});
 
+	//queue script list loading as soon as this script is loaded instead of ready event
+	scriptApi.loadScriptList(fillScriptList);
 	$(initControls);
 
 });

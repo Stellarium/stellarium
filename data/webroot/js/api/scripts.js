@@ -46,6 +46,16 @@ define(["jquery", "./remotecontrol"], function($, rc) {
             });
         },
 
+        //sends the given code to the server for direct execution
+        //if useIncludes is true, the default script directories are used for preprocessing (i.e. include statements)
+        runDirectScript: function(code, useIncludes) {
+            console.log("Sending script: " + code);
+            rc.postCmd("/api/scripts/direct",{
+                code: code,
+                useIncludes: useIncludes
+            });
+        },
+
         stopScript: function() {
             //change the local active script for improved responsiveness
             changeActiveScript(undefined);
