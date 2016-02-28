@@ -71,7 +71,9 @@ define(["jquery", "settings", "api/remotecontrol", "api/actions", "api/propertie
 
 		//create jquery ui buttons + selectmenu
 		$("button.jquerybutton").button();
-		$("select.selectmenu").selectmenu({width: 'auto'});
+		$("select.selectmenu").selectmenu({
+			width: 'auto'
+		});
 	}
 
 	function connectStelProperties() {
@@ -170,16 +172,38 @@ define(["jquery", "settings", "api/remotecontrol", "api/actions", "api/propertie
 			$(propApi).on("stelPropertyChanged:" + prop, function(evt, prop) {
 				self.val(prop.value);
 				//if this is a jquery UI selectmenu, we have to refresh
-				if(self.hasClass('selectmenu')){
+				if (self.hasClass('selectmenu')) {
 					self.selectmenu("refresh");
 				}
 			});
 			self.val(propApi.getStelProp(prop));
-			self.on("change selectmenuchange",function(evt){
+			self.on("change selectmenuchange", function(evt) {
 				propApi.setStelProp(prop, self.val());
 			});
 		});
 
+		//stelproperty direct value change
+		$("button.stelproperty, input[type='button'].stelproperty").click(function() {
+			var self = $(this);
+			var prop = this.name;
+			var val = this.value;
+
+			if (!prop) {
+				console.error('Error: no StelProperty name defined on an "stelproperty" element, element follows...');
+				console.dir(this);
+				alert('Error: no StelProperty name defined on an "stelproperty" element, see log for details');
+				return;
+			}
+
+			if (!val) {
+				console.error('Error: no value defined for an "stelproperty" button, element follows...');
+				console.dir(this);
+				alert('Error: no value defined for an "stelproperty" button,, see log for details');
+				return;
+			}
+
+			propApi.setStelProp(prop, val);
+		});
 	}
 
 	//DOM-ready
