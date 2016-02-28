@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-13 20:32+0600\n"
-"PO-Revision-Date: 2016-02-13 16:16+0000\n"
+"POT-Creation-Date: 2016-02-27 19:29+0600\n"
+"PO-Revision-Date: 2016-02-27 18:26+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-02-14 05:26+0000\n"
+"X-Launchpad-Export-Date: 2016-02-28 04:53+0000\n"
 "X-Generator: Launchpad (build 17925)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -5905,12 +5905,9 @@ msgid "Topocentric coordinates"
 msgstr "Топоцентричні координати"
 
 #: src/ui_configurationDialog.h:1257
-msgid ""
-"Activate this option to calculate azimuth from south towards west (as in old "
-"astronomical literature)."
+msgid "Activate this option to calculate azimuth from south towards west."
 msgstr ""
-"Позначте цей пункт, щоб наказати програмі обчислювати азимут від півдня на "
-"захід (як у старій астрономічній літературі)."
+"Позначте цей пункт для обчислення азимута з півдня у напрямку на захід."
 
 #: src/ui_configurationDialog.h:1259
 msgid "Azimuth from South"
@@ -7143,92 +7140,92 @@ msgstr ""
 "використано типовий файл."
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1786
+#: plugins/Satellites/src/Satellites.cpp:1792
 msgid "visual"
 msgstr "видимі"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1788
+#: plugins/Satellites/src/Satellites.cpp:1794
 msgid "scientific"
 msgstr "наукові"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1790
+#: plugins/Satellites/src/Satellites.cpp:1796
 msgid "communications"
 msgstr "комунікаційні"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1792
+#: plugins/Satellites/src/Satellites.cpp:1798
 msgid "navigation"
 msgstr "навігаційні"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1794
+#: plugins/Satellites/src/Satellites.cpp:1800
 msgid "amateur"
 msgstr "аматорське радіомовлення"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1796
+#: plugins/Satellites/src/Satellites.cpp:1802
 msgid "weather"
 msgstr "метеорологічні"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1798
+#: plugins/Satellites/src/Satellites.cpp:1804
 msgid "geostationary"
 msgstr "геостаціонарні"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1800
+#: plugins/Satellites/src/Satellites.cpp:1806
 msgid "non-operational"
 msgstr "недієздатні"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1802
+#: plugins/Satellites/src/Satellites.cpp:1808
 msgid "gps"
 msgstr "gps"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:1804
+#: plugins/Satellites/src/Satellites.cpp:1810
 msgid "glonass"
 msgstr "глонасс"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:1806
+#: plugins/Satellites/src/Satellites.cpp:1812
 msgid "galileo"
 msgstr "галілео"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1808
+#: plugins/Satellites/src/Satellites.cpp:1814
 msgid "iridium"
 msgstr "iridium"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:1810
+#: plugins/Satellites/src/Satellites.cpp:1816
 msgid "stations"
 msgstr "станції"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:1812
+#: plugins/Satellites/src/Satellites.cpp:1818
 msgid "education"
 msgstr "освітні"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:1814
+#: plugins/Satellites/src/Satellites.cpp:1820
 msgid "observatory"
 msgstr "обсерваторії"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1825
+#: plugins/Satellites/src/Satellites.cpp:1831
 msgid "The Hubble Space Telescope"
 msgstr "Космічний телескоп «Хаббл»"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1827
+#: plugins/Satellites/src/Satellites.cpp:1833
 msgid "The International Space Station"
 msgstr "Міжнародна космічна станція"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1829
+#: plugins/Satellites/src/Satellites.cpp:1835
 msgid "China's first space station"
 msgstr "перша китайська космічна станція"
 
@@ -14312,3 +14309,10 @@ msgstr "Поточна планета: Сатурн"
 
 #~ msgid "Show names"
 #~ msgstr "Показувати назви"
+
+#~ msgid ""
+#~ "Activate this option to calculate azimuth from south towards west (as in old "
+#~ "astronomical literature)."
+#~ msgstr ""
+#~ "Позначте цей пункт, щоб наказати програмі обчислювати азимут від півдня на "
+#~ "захід (як у старій астрономічній літературі)."
