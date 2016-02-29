@@ -19,6 +19,7 @@
 
 #include <QDebug>
 #include <QDir>
+#include <QTimer>
 
 #include "DownloadMgr.hpp"
 #include "StelApp.hpp"
@@ -42,6 +43,13 @@ DownloadMgr::DownloadMgr(StelAddOnMgr* mgr)
 				      .toLatin1());
 
 	connect(this, SIGNAL(updateTableViews()), m_pMgr, SIGNAL(updateTableViews()));
+
+	// every 5 min, check if it's time to update the catalog of add-ons
+	QTimer* timer = new QTimer(this);
+	timer->setInterval(300000);
+	timer->setInterval(300);
+	connect(timer, SIGNAL(timeout()), this, SLOT(checkInterval()));
+	timer->start();
 }
 
 DownloadMgr::~DownloadMgr()
@@ -162,3 +170,76 @@ void DownloadMgr::cancelAllDownloads()
 	m_downloadQueue.clear();
 	emit(updateTableViews());
 }
+
+void DownloadMgr::checkInterval()
+{
+	QDateTime lastUpdate = m_pMgr->getLastUpdate();
+	QDateTime nextUpdate;
+	switch (m_pMgr->getUpdateFrequency()) {
+		case StelAddOnMgr::NEVER:
+		case StelAddOnMgr::ON_STARTUP:
+			return;
+		case StelAddOnMgr::EVERY_DAY:
+			nextUpdate = lastUpdate.addDays(1);
+			break;
+		case StelAddOnMgr::EVERY_THREE_DAYS:
+			nextUpdate = lastUpdate.addDays(3);
+			break;
+		case StelAddOnMgr::EVERY_WEEK:
+			nextUpdate = lastUpdate.addDays(7);
+			break;
+		default:
+			qWarning() << "[Add-on] Error! Invalid update frequency!";
+			return;
+	}
+
+	// check if it's time to update the catalog of add-ons
+	if (QDateTime::currentDateTime() >= nextUpdate)
+	{
+		updateCatalog();
+	}
+}
+
+void DownloadMgr::updateCatalog()
+{
+	// TO DO
+}
+
+/*
+void AddOnDialog::downloadFinished(QNetworkReply* reply)
+{
+	if (m_progressBar)
+	{
+		m_progressBar->setValue(100);
+		StelApp::getInstance().removeProgressBar(m_progressBar);
+		m_progressBar = NULL;
+	}
+
+	QByteArray result(reply->readAll());
+	if (reply->error() != QNetworkReply::NoError || result.isEmpty())
+	{
+		qWarning() << "[Add-on] unable to download file!" << reply->url();
+		qWarning() << "[Add-on] download error:" << reply->errorString();
+		ui->txtLastUpdate->setText(q_("Database update failed!"));
+		return;
+	}
+
+	QFile file(StelApp::getInstance().getStelAddOnMgr().getAddonJsonPath());
+	file.remove(); // overwrite
+	if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
+	{
+		qWarning() << "[Add-on] unable to open a temporary file!";
+		ui->txtLastUpdate->setText(q_("Database update failed!"));
+		return;
+	}
+
+	file.write(result);
+	file.close();
+
+	StelApp::getInstance().getStelAddOnMgr().reloadCatalogues();
+	StelApp::getInstance().getStelAddOnMgr().setLastUpdate(QDateTime::currentDateTime());
+	ui->txtLastUpdate->setText(StelApp::getInstance().getStelAddOnMgr().getLastUpdateString());
+	populateTables();
+	ui->btnUpdate->setEnabled(true);
+}
+*/

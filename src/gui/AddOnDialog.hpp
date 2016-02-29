@@ -55,19 +55,16 @@ protected:
 	virtual void createDialogContent();
 
 private slots:
-	void checkInterval();
 	void updateFrequencyChanged(int idx);
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 	void slotRestartRequired();
 	void slotUpdateButton();
-	void downloadFinished(QNetworkReply* reply);
 	void installFromFile();
 	void slotCheckedRows();
 	void populateTables();
 
 private:
 	AddOnAboutDialog* m_pAboutDialog;
-	StelProgressController* m_progressBar;
 
 	void updateTabBarListWidgetWidth();
 };

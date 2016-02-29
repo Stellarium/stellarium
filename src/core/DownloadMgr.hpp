@@ -46,6 +46,9 @@ public:
 	//! @return true if it's in the queue
 	bool isDownloading(AddOn* addon);
 
+	//! Update catalog of add-ons.
+	void updateCatalog();
+
 signals:
 	void updateTableViews();
 
@@ -56,6 +59,10 @@ private slots:
 
 	//! Triggered when the download is complete.
 	void downloadFinished();
+
+	//! Check if it's time to update the catalog of add-ons.
+	//! This function is triggered automatically by a QTimer.
+	void checkInterval();
 
 private:
 	StelAddOnMgr* m_pMgr;			//! instace of add-on mgr class (parent).

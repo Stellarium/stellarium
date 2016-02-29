@@ -20,7 +20,6 @@
 #include <QDateTime>
 #include <QFileDialog>
 #include <QStringBuilder>
-#include <QTimer>
 
 #include "AddOnDialog.hpp"
 #include "AddOnTableModel.hpp"
@@ -35,7 +34,6 @@
 AddOnDialog::AddOnDialog(QObject* parent)
 	: StelDialog(parent)
 	, m_pAboutDialog(new AddOnAboutDialog(this))
-	, m_progressBar(NULL)
 {
 	ui = new Ui_addonDialogForm;
 }
@@ -123,44 +121,8 @@ void AddOnDialog::createDialogContent()
 
 	connect(ui->updateFrequency, SIGNAL(currentIndexChanged(int)), this, SLOT(updateFrequencyChanged(int)));
 
-	// every 5 min, check if it's time to update
-	QTimer* timer = new QTimer(this);
-	timer->setInterval(300000);
-	connect(timer, SIGNAL(timeout()), this, SLOT(checkInterval()));
-	timer->start();
-	checkInterval();
-
 	// fix dialog width
 	updateTabBarListWidgetWidth();
-}
-
-void AddOnDialog::checkInterval()
-{
-	QDateTime lastUpdate = StelApp::getInstance().getStelAddOnMgr().getLastUpdate();
-	StelAddOnMgr::UpdateFrequency uf = StelApp::getInstance().getStelAddOnMgr().getUpdateFrequency();
-	QDateTime nextUpdate;
-	switch (uf) {
-		case StelAddOnMgr::NEVER:
-		case StelAddOnMgr::ON_STARTUP:
-			return;
-		case StelAddOnMgr::EVERY_DAY:
-			nextUpdate = lastUpdate.addDays(1);
-			break;
-		case StelAddOnMgr::EVERY_THREE_DAYS:
-			nextUpdate = lastUpdate.addDays(3);
-			break;
-		case StelAddOnMgr::EVERY_WEEK:
-			nextUpdate = lastUpdate.addDays(7);
-			break;
-		default:
-			qWarning() << "[Add-on] Error! Invalid update frequency!";
-			return;
-	}
-
-	if (QDateTime::currentDateTime() >= nextUpdate)
-	{
-		updateCatalog();
-	}
 }
 
 void AddOnDialog::updateFrequencyChanged(int idx)
@@ -267,61 +229,7 @@ void AddOnDialog::populateTables()
 
 void AddOnDialog::updateCatalog()
 {
-	ui->btnUpdate->setEnabled(false);
-	ui->txtLastUpdate->setText(q_("Updating catalog..."));
-
-	m_progressBar = StelApp::getInstance().addProgressBar();
-	m_progressBar->setValue(0);
-	m_progressBar->setRange(0, 100);
-	m_progressBar->setFormat("Add-ons Catalog");
-
-	QNetworkRequest req;
-	req.setUrl(QUrl(StelApp::getInstance().getStelAddOnMgr().getUrl()));
-	req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, false);
-	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
-	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
-//	req.setRawHeader("User-Agent", StelApp::getInstance().getStelAddOnMgr().getUserAgent());
-
-	QNetworkAccessManager* mgr = StelApp::getInstance().getNetworkAccessManager();
-	mgr->get(req);
-	//connect(mgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadFinished(QNetworkReply*)));
-}
-
-void AddOnDialog::downloadFinished(QNetworkReply* reply)
-{
-	if (m_progressBar)
-	{
-		m_progressBar->setValue(100);
-		StelApp::getInstance().removeProgressBar(m_progressBar);
-		m_progressBar = NULL;
-	}
-
-	QByteArray result(reply->readAll());
-	if (reply->error() != QNetworkReply::NoError || result.isEmpty())
-	{
-		qWarning() << "[Add-on] unable to download file!" << reply->url();
-		qWarning() << "[Add-on] download error:" << reply->errorString();
-		ui->txtLastUpdate->setText(q_("Database update failed!"));
-		return;
-	}
-
-	QFile file(StelApp::getInstance().getStelAddOnMgr().getAddonJsonPath());
-	file.remove(); // overwrite
-	if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
-	{
-		qWarning() << "[Add-on] unable to open a temporary file!";
-		ui->txtLastUpdate->setText(q_("Database update failed!"));
-		return;
-	}
-
-	file.write(result);
-	file.close();
-
-	StelApp::getInstance().getStelAddOnMgr().reloadCatalogues();
-	StelApp::getInstance().getStelAddOnMgr().setLastUpdate(QDateTime::currentDateTime());
-	ui->txtLastUpdate->setText(StelApp::getInstance().getStelAddOnMgr().getLastUpdateString());
-	populateTables();
-	ui->btnUpdate->setEnabled(true);
+	StelApp::getInstance().getStelAddOnMgr().getDownloadMgr()->updateCatalog();
 }
 
 void AddOnDialog::installFromFile()

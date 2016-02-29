@@ -49,6 +49,10 @@ public:
 	StelAddOnMgr();
 	virtual ~StelAddOnMgr();
 
+	//! Get instance of DownloadMgr class.
+	//! @return DownloadMgr instace
+	DownloadMgr* getDownloadMgr() { return m_pDownloadMgr; }
+
 	//! Set the date and time of last update.
 	void setLastUpdate(const QDateTime& lastUpdate);
 	QDateTime getLastUpdate() { return m_lastUpdate; }
