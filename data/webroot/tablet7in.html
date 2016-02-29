@@ -91,29 +91,42 @@
             <div id="view_controls" class="ui-corner-all ui-widget-content">
               <div id="view_upleft" class="joybutton"><?= tr("Up/Left")?></div><div id="view_up" class="joybutton"><?= tr("Up")?></div><div id="view_upright" class="joybutton"><?= tr("Up/Right")?></div><div id="view_left" class="joybutton"><?= tr("Left")?></div><div id="view_center" class="joybutton" title='<?= tr("Focus on selected object")?>'><?= tr("Focus on selection")?></div><div id="view_right" class="joybutton"><?= tr("Right")?></div><div id="view_downleft" class="joybutton"><?= tr("Down/Left")?></div><div id="view_down" class="joybutton"><?= tr("Down")?></div><div id="view_downright" class="joybutton"><?= tr("Down/Right")?></div>
             </div>
-
-            <!-- GZ TODO We have now StelMovementMgr actions::lookNorth(), lookEast(),  lookSouth(), lookWest(), lookZenith(). 
-                 
-                 An action or call-script button is simple to develop now, thanks a lot! Each script is already available as action! A script button can be configured like e.g.
-                 <button type="button" class="stelaction" name="actionScript/MAMUZ/GZ_screen_image3.ssc"/><?= tr("MAMUZ mammoth test3")?></button>
-
-                 We may add  StelMovementMgr::turnEast() etc which would trigger a smooth move, so these buttons would be changed to trigger those. 
-                 In case these will be slots with default argument like turnSouth(float duration_seconds=3.0f), those could also be used as arg-less actions.
-                 Or maybe this would be a case for a to-be-developed "inline script" button which could look like <button class="stelssc" value="StelMovementMgr.turnWest(4);"><?= tr("W")?></button> 
-                 -->
-
-            <div class="smallblock blocklabel">
-              <button type="button" class="stelaction" title='<?= tr("Look towards East")?>'   name="actionLook_Towards_East"><?= tr("E")?></button>
-              <button type="button" class="stelaction" title='<?= tr("Look towards South")?>'  name="actionLook_Towards_South"><?= tr("S")?></button> 
-              <button type="button" class="stelaction" title='<?= tr("Look towards West")?>'   name="actionLook_Towards_West"><?= tr("W")?></button>
-              <button type="button" class="stelaction" title='<?= tr("Look towards North")?>'  name="actionLook_Towards_North"><?= tr("N")?></button>
-              <button type="button" class="stelaction" title='<?= tr("Look towards Zenith")?>' name="actionLook_Towards_Zenith"><?= tr("Z")?></button>
+            <div class="flex">
+        	<section class="block flex flex-column">
+        	 <header><h2><?= tr("View towards horizon at Azimuth")?></h2></header>
+             <div><table><tr>
+                 <td><button type="button" class="stelssc" value="core.moveToAltAzi(0., 0., 3.)">0&deg;</button></td>
+                 <td><button type="button" class="stelssc" value="core.moveToAltAzi(0., 30., 3.)">30&deg;</button></td>
+                 <td><button type="button" class="stelssc" value="core.moveToAltAzi(0., 60., 3.)">60&deg;</button></td>
+                 <td><button type="button" class="stelssc" value="core.moveToAltAzi(0., 90., 3.)">90&deg;</button></td>
+                 <td><button type="button" class="stelssc" value="core.moveToAltAzi(0., 120., 3.)">120&deg;</button></td>
+                 <td><button type="button" class="stelssc" value="core.moveToAltAzi(0., 150., 3.)">150&deg;</button></td></tr><tr>
+                 <td><button type="button" class="stelssc" value="core.moveToAltAzi(0., 180., 3.)">180&deg;</button></td>
+                 <td><button type="button" class="stelssc" value="core.moveToAltAzi(0., 210., 3.)">210&deg;</button></td>
+                 <td><button type="button" class="stelssc" value="core.moveToAltAzi(0., 240., 3.)">240&deg;</button></td>
+                 <td><button type="button" class="stelssc" value="core.moveToAltAzi(0., 270., 3.)">270&deg;</button></td>
+                 <td><button type="button" class="stelssc" value="core.moveToAltAzi(0., 300., 3.)">300&deg;</button></td>
+                 <td><button type="button" class="stelssc" value="core.moveToAltAzi(0., 330., 3.)">330&deg;</button></td></tr>
+                 </table>
             </div>
-             <div>
-             <div class="slider stelproperty flex-expand" data-prop="prop_StelCore_viewportVerticalOffset" data-min="-50" data-max="50" data-step="1"></div>
+           </section>
+           </div>
+
+             <div class="flex-expand">
+             <!-- It would be more intuitive to have this slider in vertical orientation.  -->
+             <div id="view_offset" class="slider stelproperty flex-expand" data-prop="prop_StelCore_viewportVerticalOffset" data-min="-50" data-max="50" data-step="1"></div>
              Vertical View offset: <span class="stelproperty" style="margin-left: 5px; min-width: 48px;" data-prop="prop_StelCore_viewportVerticalOffset" data-numberformat="n0"></span>
-             <!-- GZ TODO: I would like to have a Button with a defined value to set to zero here (or a few with defined values)! -->
-             <button type="button" class="stelproperty" title='<?= tr("Reset")?>' name="prop_StelCore_viewportVerticalOffset" value="0"><?= tr("Reset")?></button>
+             <!-- GZ Add a few buttons with defined values to set here -->
+             <table><tr>
+             <td><button type="button" class="stelssc" value="StelMovementMgr.moveViewport(0.,-50., 3.)">-50%</button></td>
+             <td><button type="button" class="stelssc" value="StelMovementMgr.moveViewport(0.,-40., 3.)">-40%</button></td>
+             <td><button type="button" class="stelssc" value="StelMovementMgr.moveViewport(0.,-30., 3.)">-30%</button></td>
+             <td><button type="button" class="stelssc" value="StelMovementMgr.moveViewport(0.,-20., 3.)">-20%</button></td>
+             <td><button type="button" class="stelssc" value="StelMovementMgr.moveViewport(0.,-10., 3.)">-10%</button></td>
+             <td><button type="button" class="stelssc" value="StelMovementMgr.moveViewport(0.,0., 3.)">0%</button></td>
+             <td><button type="button" class="stelssc" value="StelMovementMgr.moveViewport(0.,20., 3.)">20%</button></td>
+             <!--button type="button" class="stelproperty" title='<?= tr("Reset")?>' name="prop_StelCore_viewportVerticalOffset" value="0"><?= tr("Reset")?></button-->
+             </tr></table>
             </div>
             <div id="view_wrapper">
               <div id="view_fov"></div>
@@ -124,12 +137,14 @@
                <tr>
                 <td><button type="button" class="fovbutton" value="0.1">0.1&deg;</button></td>
                 <td><button type="button" class="fovbutton" value="1">1&deg;</button></td>
+                <td><button type="button" class="fovbutton" value="5">5&deg;</button></td>
                 <td><button type="button" class="fovbutton" value="10">10&deg;</button></td>
-                <td><button type="button" class="fovbutton" value="20">20&deg;</button></td></tr><tr>
+                <td><button type="button" class="fovbutton" value="20">20&deg;</button></td>
                 <td><button type="button" class="fovbutton" value="30">30&deg;</button></td>
-                <td><button type="button" class="fovbutton" value="40">40&deg;</button></td>
+                <td><button type="button" class="fovbutton" value="40">40&deg;</button></td></tr><tr>
+                <td><button type="button" class="fovbutton" value="50">50&deg;</button></td>
                 <td><button type="button" class="fovbutton" value="60">60&deg;</button></td>
-                <td><button type="button" class="fovbutton" value="90">90&deg;</button></td></tr><tr>
+                <td><button type="button" class="fovbutton" value="90">90&deg;</button></td>
                 <td><button type="button" class="fovbutton" value="120">120&deg;</button></td>
                 <td><button type="button" class="fovbutton" value="150">150&deg;</button></td>
                 <td><button type="button" class="fovbutton" value="180">180&deg;</button></td>
@@ -281,6 +296,12 @@
             <div class="flex flex-baseline">
               <label><input type="checkbox" class="stelaction" name="actionShow_Stars_Labels"/><?= tr("Labels and Markers")?></label><div class="slider stelproperty flex-expand" data-prop="prop_StarMgr_labelsAmount" data-min="0" data-max="10" data-step="0.1"></div>
             </div>
+            <div class="stelplugin" data-plugin="NavStars">
+                   <label><input type="checkbox" class="stelaction" name="actionShow_NavStars"/><?= tr("Navigational Stars")?></label>
+            </div>
+            <div class="stelplugin" data-plugin="ExoPlanets">
+                   <label><input type="checkbox" class="stelaction" name="actionShow_Exoplanets"/><?= tr("Exoplanets")?></label>
+            </div>
           </div>
         </div>
       </div>
@@ -315,11 +336,6 @@
             </div>
             <div id="vo_refraction" class="innerblock">
               <h3><?= tr("Refraction Settings")?></h3>
-              <!--div class="table">
-                <p><label for="atmosphere_pressure"><?= tr("Pressure (mbar):")?></label><input id="atmosphere_pressure" class="spinner stelproperty" name="prop_SkyDrawer_atmospherePressure" data-min="0" data-max="1500" data-step="1" data-numberformat="n2"/></p>
-                <p><label for="atmosphere_temperature"><?= tr("Temperature (C):")?></label><input id="atmosphere_temperature" class="spinner stelproperty" name="prop_SkyDrawer_atmosphereTemperature" data-min="-100" data-max="100" data-step="1" data-numberformat="n1"/></p>
-                <p><label for="atmosphere_extinction"><?= tr("Extinction Coefficient:")?></label><input id="atmosphere_extinction" class="spinner stelproperty" name="prop_SkyDrawer_extinctionCoefficient" data-min="0" data-max="3" data-step="0.01" data-numberformat="n2"/></p>
-              </div-->
               <table>
                 <tr><td><label for="atmosphere_pressure"><?= tr("Pressure (mbar):")?></label></td><td><input id="atmosphere_pressure" class="spinner stelproperty" name="prop_SkyDrawer_atmospherePressure" data-min="0" data-max="1500" data-step="1" data-numberformat="n2" readonly="readonly"/></td></tr>
                 <tr><td><label for="atmosphere_temperature"><?= tr("Temperature (C):")?></label></td><td><input id="atmosphere_temperature" class="spinner stelproperty" name="prop_SkyDrawer_atmosphereTemperature" data-min="-100" data-max="100" data-step="1" data-numberformat="n1" readonly="readonly"/></td></tr>
@@ -332,6 +348,9 @@
               <label><?= tr("ZHR:")?></label>
               <div class="slider stelproperty flex-expand" data-prop="prop_SporadicMeteorMgr_zhr" data-min="0" data-max="240000" data-step="1"></div>
               <span class="stelproperty" style="margin-left: 5px; min-width: 48px;" data-prop="prop_SporadicMeteorMgr_zhr"></span>
+              <div class="stelplugin" data-plugin="MeteorShowers">
+                   <label><input type="checkbox" class="stelaction" name="actionShow_MeteorShowers"/><?= tr("Meteor Showers")?></label>
+              </div>
             </div>
           </div>
         </div>
@@ -339,9 +358,8 @@
       <div id="tab_view_grids">
         <div class="flex flex-wrap">
           <div class="smallblock flex">
-            <h3><?= tr("Markings")?></h3>
+            <h3><?= tr("Markings")?>--<?= tr("Celestial Sphere")?></h3>
             <div id="vo_markers_boxes" class="innerblock">
-              <h3><?= tr("Celestial Sphere")?></h3>
               <div class="inline-block blocklabel">
                 <label><input type="checkbox" class="stelaction" name="actionShow_Equatorial_J2000_Grid" /><?= tr("Equatorial grid (J2000)")?></label>
                 <label><input type="checkbox" class="stelaction" name="actionShow_Equatorial_Grid" /><?= tr("Equatorial grid (of date)")?></label>
@@ -395,6 +413,10 @@
               <option value="15"><?= tr("Saturn")?></option>
             </select>
           </div>
+          <div class="smllblock stelplugin" data-plugin="CompassMarks">
+                   <label><input type="checkbox" class="stelaction" name="actionShow_Compass_Marks"/><?= tr("Compass Marks")?></label>
+          </div>
+
         </div>
       </div>
       <div id="tab_dso">
@@ -453,6 +475,8 @@
                 <input type="checkbox" value="0x4000" /><?= tr("Ced")?>
               </label>
             </div>
+
+
           </div>
           <div id="vo_dsotype" class="smallblock">
             <h3><label><input id="vo_dsotypefiltercheckbox" type="checkbox" class="stelaction valign-middle" name="actionSet_Nebula_TypeFilterUsage"/><?= tr("Filter by type")?></label></h3>
@@ -462,12 +486,18 @@
               <label><input type="checkbox" value="0x004"/><?= tr("Interacting galaxies")?></label>
               <label><input type="checkbox" value="0x008"/><?= tr("Star clusters")?></label>
               <label><input type="checkbox" value="0x010"/><?= tr("Hydrogen regions")?></label>
+              <div class="stelplugin" data-plugin="Quasars">
+                   <label><input type="checkbox" class="stelaction" name="actionShow_Quasars"/><?= tr("Quasars")?></label>
+              </div>
             </div>
             <div class="inline-block blocklabel">
               <label><input type="checkbox" value="0x020"/><?= tr("Bright Nebulae")?></label>
               <label><input type="checkbox" value="0x040"/><?= tr("Dark Nebulae")?></label>
               <label><input type="checkbox" value="0x080"/><?= tr("Planetary Nebulae")?></label>
               <label><input type="checkbox" value="0x100"/><?= tr("Supernova remnants")?></label>
+              <div class="stelplugin" data-plugin="Pulsars">
+                   <label><input type="checkbox" class="stelaction" name="actionShow_Pulsars"/><?= tr("Pulsars")?></label>
+              </div>
               <label><input type="checkbox" value="0x200"/><?= tr("Other")?></label>
             </div>
           </div>
@@ -560,31 +590,18 @@
             <select id="scriptlist" class="scrollselect flex-expand" size="10">
             </select>
             <div class="textcenter"><?= tr("Active script:")?> <span id="activescript"><?= tr("-none-")?></span></div>
-            <div><button id="bt_runscript" disabled="disabled"><?= tr("Run selected script")?></button><button id="bt_stopscript" disabled="disabled"><?= tr("Stop current script")?></button></div>
-               <button type="button" class="stelaction" title='<?= tr("MAMUZ Mammoth")?>'  name="actionScript/MAMUZ/GZ_screen_image3.ssc"><?= tr("MAMUZ mammoth test3")?></button> 
-  
+            <div><button id="bt_runscript" disabled="disabled"><?= tr("Run selected script")?></button><button id="bt_stopscript" disabled="disabled"><?= tr("Stop current script")?></button></div>  
           </section>
         </div>
         <div class="flex">
         	<section class="block flex flex-column">
-        	 <header><h2><?= tr("View towards horizon at Azimuth")?></h2></header>
+        	 <header><h2><?= tr("Favorites")?></h2></header>
              <div>
-                 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 0., 3.)">0</button> 
-                 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 30., 3.)">30</button> 
-                 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 60., 3.)">60</button> 
-                 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 90., 3.)">90</button> 
-                 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 120., 3.)">120</button> 
-                 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 150., 3.)">150</button> 
-                 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 180., 3.)">180</button> 
-                 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 210., 3.)">210</button> 
-                 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 240., 3.)">240</button> 
-                 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 270., 3.)">270</button> 
-                 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 300., 3.)">300</button> 
-                 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 330., 3.)">330</button> 
+                 <button type="button" class="stelaction"  title='<?= tr("MAMUZ Mammoth")?>'  name="actionScript/MAMUZ/GZ_screen_image3.ssc"><?= tr("MAMUZ mammoth test3")?></button> 
             </div>
            </section>
-
         </div>
+
       </div>
       <!-- handled by ui/location.js -->
       <div id="tab_location">
@@ -624,7 +641,7 @@
         </div>
       </div>
     </div>
-    <!-- GZ Attempt to bring main buttons under the tabs -->
+    <!-- main buttons under the tabs -->
     <!-- part of ui/actions.js -->
     <ul id="autobuttons" class="ui-corner-all ui-widget-content button32list margin-block">
     </ul>
@@ -633,7 +650,7 @@
   </div>
   <!-- handled by mainui.js -->
   <div id="noresponse" title='<?= tr("No response from server")?>'>
-    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span><?= tr("No response from server since %1 seconds. Is Stellarium still running?","<span id='noresponsetime'>0</span>")?></p>
+    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span><?= tr("No response from server for %1 seconds. Is Stellarium still running?","<span id='noresponsetime'>0</span>")?></p>
   </div>
   <div id="loadindicator"></div>
 </body>

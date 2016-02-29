@@ -1,5 +1,10 @@
 /* some improvements for small 7"-tablets */
 
+/*html {
+	background: #fff url("images/stars.png");
+	font-size: 18px;
+	font-family: DejaVuSans,Verdana,Helvetica,Arial,sans-serif;
+}*/
 
 /* larger spinner button */
 #timewidget .ui-spinner-input {
@@ -38,9 +43,16 @@
 	height: 2em;
 }
 
-/* TODO: Find real element name? */
-#view_fov .ui-slider-horizontal {
-    height: 2.8em;
+/* override slider handle size  */
+#view_offset .ui-slider-handle {
+	width: 2em;
+	height: 2em;
+}
+
+
+/* TODO: Find real element name? Height of slider bar */
+.ui-slider-horizontal {
+    height: 1em;
 }
 
 
@@ -61,14 +73,21 @@ select {
 }
 
 label {
-	font-size: 15px;
+	font-size: 18px;
 	padding: 2px 1px;
 }
 
 button {
-	font-size: 350%;
+	font-size: 35px;
+	margin-top: 2px;
+	margin-bottom: 2px;
 }
 
+input {
+	font-size: 35px;
+	margin-top: 2px;
+	margin-bottom: 2px;	
+}
 /* TODO: make them a bit larger. */
 input .spinner .stelproperty {
 font-size: 26px;
