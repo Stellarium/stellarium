@@ -46,6 +46,9 @@ namespace StelUtils
 	//! Return the version of stellarium, i.e. "0.9.0"
 	QString getApplicationVersion();
 
+	//! Return the stellarium series, i.e. "0.9"
+	QString getApplicationSeries();
+
 	//! Return the name and the version of operating system, i.e. "Mac OS X 10.7"
 	QString getOperatingSystemInfo();
 

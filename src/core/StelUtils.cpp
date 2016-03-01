@@ -60,6 +60,13 @@ QString getApplicationVersion()
 #endif
 }
 
+//! Return the stellarium series, i.e. "0.9"
+QString getApplicationSeries()
+{
+	QStringList v = getApplicationVersion().split('.');
+	return QString("%1.%2").arg(v.at(0)).arg(v.at(1));
+}
+
 QString getOperatingSystemInfo()
 {
 	QString OS = "Unknown operating system";
