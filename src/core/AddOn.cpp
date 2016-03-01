@@ -166,7 +166,11 @@ QString AddOn::getStatusString() {
 
 AddOn::Type AddOn::typeStringToEnum(QString string)
 {
-	if (string == "landscape")
+	if (string == "addon_catalog")
+	{
+		return ADDON_CATALOG;
+	}
+	else if (string == "landscape")
 	{
 		return LANDSCAPE;
 	}
@@ -205,7 +209,11 @@ AddOn::Type AddOn::typeStringToEnum(QString string)
 }
 
 QString AddOn::typeToDisplayRole(Type type) {
-	if (type == LANDSCAPE)
+	if (type == ADDON_CATALOG)
+	{
+		return "Add-on Catalog";
+	}
+	else if (type == LANDSCAPE)
 	{
 		return "Landscape";
 	}

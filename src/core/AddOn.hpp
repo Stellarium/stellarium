@@ -34,6 +34,7 @@ public:
 	//! Add-on type
 	enum Type
 	{
+		ADDON_CATALOG,
 		LANDSCAPE,
 		LANG_STELLARIUM,
 		LANG_SKYCULTURE,
