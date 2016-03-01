@@ -227,7 +227,7 @@ QString AddOn::typeToDisplayRole(Type type) {
 	}
 	else if (type == PLUGIN_CATALOG)
 	{
-		return "Plugin";
+		return "Plugin Catalog";
 	}
 	else if (type == SCRIPT)
 	{
@@ -239,7 +239,7 @@ QString AddOn::typeToDisplayRole(Type type) {
 	}
 	else if (type == STAR_CATALOG)
 	{
-		return "Star";
+		return "Star Catalog";
 	}
 	else if (type == TEXTURE)
 	{
