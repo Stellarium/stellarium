@@ -162,6 +162,10 @@ public:
 	//! @return the path to the user private data directory
 	static QString getUserDir();
 
+	//! Returns the path to the add-ons directory.
+	//! @return the path to the add-ons directory
+	static QString getAddonDir();
+
 	//! Returns the path to the installation directory.
 	//! This is the directory where we expect to find scripts, nebulae, stars,
 	//! skycultures etc, and will be added at the end of the search path
@@ -220,6 +224,9 @@ private:
 
 	//! Used to store the application data directory
 	static QString installDir;
+
+	//! Used to store the add-on directory
+	static QString addonDir;
 
 #ifdef Q_OS_WIN
 	//! For internal use - retreives windows special named directories.

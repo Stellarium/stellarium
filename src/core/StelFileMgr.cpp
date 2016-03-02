@@ -42,22 +42,26 @@
 // Initialize static members.
 QStringList StelFileMgr::fileLocations;
 QString StelFileMgr::userDir;
+QString StelFileMgr::addonDir;
 QString StelFileMgr::screenshotDir;
 QString StelFileMgr::installDir;
 
 void StelFileMgr::init()
 {
-	// Set the userDir member.
+	// Set the userDir and addonDir members.
 #ifdef Q_OS_WIN
 	QString winApiPath = getWin32SpecialDirPath(CSIDL_APPDATA);
 	if (!winApiPath.isEmpty())
 	{
 		userDir = winApiPath + "\\Stellarium";
+		addonDir = userDir + "\\addon";
 	}
 #elif defined(Q_OS_MAC)
 	userDir = QDir::homePath() + "/Library/Application Support/Stellarium";
+	addonDir = userDir + "/addon";
 #else
 	userDir = QDir::homePath() + "/.stellarium";
+	addonDir = userDir + "/addon";
 #endif
 
 	if (!QFile(userDir).exists())
@@ -76,6 +80,19 @@ void StelFileMgr::init()
 	// OK, now we have the userDir set, add it to the search path
 	fileLocations.append(userDir);
 
+	// Determine add-ons directory location
+	if (!QFile(addonDir).exists())
+	{
+		qWarning() << "Add-ons directory does not exist: " << QDir::toNativeSeparators(addonDir);
+	}
+	try
+	{
+		makeSureDirExistsAndIsWritable(addonDir);
+	}
+	catch (std::runtime_error &e)
+	{
+		qFatal("Error: cannot create add-ons directory: %s", e.what());
+	}
 
 	// Determine install data directory location
 
@@ -370,6 +387,11 @@ QString StelFileMgr::getDesktopDir()
 QString StelFileMgr::getUserDir()
 {
 	return userDir;
+}
+
+QString StelFileMgr::getAddonDir()
+{
+	return addonDir;
 }
 
 void StelFileMgr::setUserDir(const QString& newDir)
