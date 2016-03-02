@@ -108,6 +108,8 @@ AddOn::AddOn(const QString addonId, const QVariantMap& map)
 		}
 	}
 
+	m_sZipPath = StelFileMgr::getAddonDir() % "/" % m_sDownloadFilename;
+
 	m_bIsValid = true;
 }
 
@@ -125,11 +127,6 @@ bool AddOn::isSupported(QStringList supported)
 	current.truncate(current.lastIndexOf("."));
 
 	return supported.contains(current);
-}
-
-QString AddOn::getZipPath()
-{
-	return StelApp::getInstance().getStelAddOnMgr().getAddOnDir() % m_sDownloadFilename;
 }
 
 QString AddOn::getStatusString() {

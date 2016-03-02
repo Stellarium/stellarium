@@ -91,7 +91,9 @@ public:
 	QString getDownloadURL() { return m_sDownloadURL; }
 	QString getChecksum() { return m_sChecksum; }
 
-	QString getZipPath();
+	//! Get path to the zip archive.
+	//! @return path
+	QString getZipPath() { return m_sZipPath; }
 
 	Status getStatus() { return m_eStatus; }
 	QString getStatusString();
@@ -122,6 +124,7 @@ private:
 	QList<Authors> m_authors;
 	QStringList m_AllTextures;
 	QStringList m_InstalledFiles;
+	QString m_sZipPath;
 
 	bool m_bIsValid;
 	Status m_eStatus;
