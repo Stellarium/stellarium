@@ -368,6 +368,7 @@ class Translations
 		N_("Colombia");
 		N_("Costa Rica");
 		N_("Serbia and Montenegro");
+		N_("Montenegro");
 		N_("Cuba");
 		N_("Cape Verde");
 		N_("Christmas Island");
