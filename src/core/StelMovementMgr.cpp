@@ -174,7 +174,8 @@ void StelMovementMgr::setMountMode(MountMode m)
 	mountMode = m;
 	setViewDirectionJ2000(viewDirectionJ2000);
 	// TODO: Decide whether re-setting Up-vector is required here.
-	// setViewUpVector(Vec3d(0., 0., 1.));
+	//setViewUpVector(Vec3d(0., 0., 1.));
+	//setViewUpVectorJ2000(Vec3d(0., 0., 1.)); // Looks wrong on start.
 	emit equatorialMountChanged(m==MountEquinoxEquatorial);
 }
 
@@ -847,6 +848,10 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 			{
 				// Vision vector locked to its position in the mountFrame
 				setViewDirectionJ2000(mountFrameToJ2000(viewDirectionMountFrame));
+				// After setting time, moveToAltAz broke the up vector without this:
+				// Make sure this does not now break zenith views!
+				// Or make sure to call moveToAltAz twice.
+				setViewUpVectorJ2000(mountFrameToJ2000(Vec3d(0.,0.,1.)));
 			}
 		}
 	}
