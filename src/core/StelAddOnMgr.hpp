@@ -67,7 +67,7 @@ public:
 	QHash<QString, AddOn*> getAddonsAvailable() { return m_addonsAvailable; }
 	QHash<QString, AddOn*> getAddonsInstalled() { return m_addonsInstalled; }
 	QHash<QString, AddOn*> getAddonsToUpdate() { return m_addonsToUpdate; }
-	QString getAddOnDir() { return m_sAddOnDir; }
+
 	AddOn* getAddOnFromZip(QString filePath);
 	QList<AddOn*> scanFilesInAddOnDir();
 	void installAddOnFromFile(QString filePath);
@@ -96,12 +96,10 @@ signals:
 private:
 	QSettings* m_pConfig;		//! instace of main config.ini file
 	DownloadMgr* m_pDownloadMgr;	//! instance of DownloadMgr class
-	const QString m_sAddOnDir;	//! path to the addon directory
 
-	QString m_sAddonJsonFilename;
 	QString m_sAddonJsonPath;
-	QString m_sUserAddonJsonPath;
 	QString m_sInstalledAddonsJsonPath;
+	QString m_sUserAddonJsonPath;
 	QHash<QString, AddOn*> m_addonsAvailable;
 	QHash<QString, AddOn*> m_addonsInstalled;
 	QHash<QString, AddOn*> m_addonsToUpdate;

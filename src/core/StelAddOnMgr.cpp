@@ -35,26 +35,23 @@
 StelAddOnMgr::StelAddOnMgr()
 	: m_pConfig(StelApp::getInstance().getSettings())
 	, m_pDownloadMgr(new DownloadMgr(this))
-	, m_sAddOnDir(StelFileMgr::getUserDir() % "/addon/")
-	, m_sInstalledAddonsJsonPath(m_sAddOnDir % "installed_addons.json")
 	, m_lastUpdate(QDateTime::fromString("2016.01.01", "yyyy.MM.dd"))
 	, m_eUpdateFrequency(EVERY_THREE_DAYS)
 {
-	QStringList v = StelUtils::getApplicationVersion().split('.');
-	m_sAddonJsonFilename = QString("addons_%1.%2.json").arg(v.at(0)).arg(v.at(1));
-	m_sAddonJsonPath = m_sAddOnDir % m_sAddonJsonFilename;
-	m_sUserAddonJsonPath = m_sAddOnDir % "user_" % m_sAddonJsonFilename;
-
-	m_sUrl = "http://cardinot.sourceforge.net/" % m_sAddonJsonFilename;
-
-	// creating addon dir
-	StelFileMgr::makeSureDirExistsAndIsWritable(m_sAddOnDir);
+	QDir dir(StelFileMgr::getAddonDir());
+	m_sAddonJsonPath = dir.filePath(StelUtils::getApplicationSeries() % "/addons.json");
+	m_sInstalledAddonsJsonPath = dir.filePath("installed_addons.json");
+	m_sUserAddonJsonPath = dir.filePath("user_addons.json");
 
 	// load settings from config file
 	loadConfig();
 
 	// loading json files
 	reloadCatalogues();
+	if (m_addonsAvailable.isEmpty())
+	{
+		restoreDefaultAddonJsonFile();
+	}
 }
 
 StelAddOnMgr::~StelAddOnMgr()
@@ -73,11 +70,6 @@ void StelAddOnMgr::reloadCatalogues()
 
 	// load oficial catalog ~/.stellarium/addon_x.x.json
 	m_addonsAvailable = loadAddonCatalog(m_sAddonJsonPath);
-	if (m_addonsAvailable.isEmpty())
-	{
-		restoreDefaultAddonJsonFile();
-		m_addonsAvailable = loadAddonCatalog(m_sAddonJsonPath); // load again
-	}
 
 	// load user catalog ~/.stellarium/user_addon_x.x.json
 	m_addonsAvailable.unite(loadAddonCatalog(m_sUserAddonJsonPath));
@@ -149,22 +141,11 @@ QHash<QString, AddOn*> StelAddOnMgr::loadAddonCatalog(QString jsonPath) const
 
 void StelAddOnMgr::restoreDefaultAddonJsonFile()
 {
-	QFile defaultJson(StelFileMgr::getInstallationDir() % "/data/default_" % m_sAddonJsonFilename);
-	QFile(m_sAddonJsonPath).remove(); // always overwrite
-	if (defaultJson.copy(m_sAddonJsonPath))
-	{
-		qDebug() << "[Add-on] default_" % m_sAddonJsonFilename % " was copied to " % m_sAddonJsonPath;
-		QFile jsonFile(m_sAddonJsonPath);
-		jsonFile.setPermissions(jsonFile.permissions() | QFile::WriteOwner);
-		// cleaning last_update var
-		m_pConfig->remove("AddOn/last_update");
-		m_lastUpdate = QDateTime::fromString("2016.01.01", "yyyy.MM.dd");
-	}
-	else
-	{
-		qWarning() << "[Add-on] cannot copy JSON resource to"
-			   << QDir::toNativeSeparators(m_sAddonJsonPath);
-	}
+	QString path = StelFileMgr::getInstallationDir() % QDir::separator()
+			% "data" % QDir::separator()
+			% StelUtils::getApplicationSeries() % ".zip";
+	qDebug() << "[Add-on] restoring default add-on catalog!" << path;
+	installAddOnFromFile(path);
 }
 
 void StelAddOnMgr::setLastUpdate(const QDateTime& lastUpdate)
@@ -213,13 +194,13 @@ void StelAddOnMgr::installAddOnFromFile(QString filePath)
 	{
 		return;
 	}
-	else if (!filePath.startsWith(m_sAddOnDir))
+	else if (!filePath.startsWith(StelFileMgr::getAddonDir()))
 	{
 		if (!QFile(filePath).copy(addon->getZipPath()))
 		{
 			qWarning() << "[Add-on] Unable to copy"
 				   << addon->getAddOnId() << "to"
-				   << addon->getZipPath();
+				   << QDir::toNativeSeparators(addon->getZipPath());
 			return;
 		}
 	}
@@ -423,13 +404,13 @@ QList<AddOn*> StelAddOnMgr::scanFilesInAddOnDir()
 {
 	// check if there is any zip archives in the ~/.stellarium/addon dir
 	QList<AddOn*> addons;
-	QDir dir(m_sAddOnDir);
+	QDir dir(StelFileMgr::getAddonDir());
 	dir.setFilter(QDir::Files | QDir::Readable | QDir::NoDotAndDotDot);
 	dir.setNameFilters(QStringList("*.zip"));
 	foreach (QFileInfo fileInfo, dir.entryInfoList())
 	{
 		AddOn* addon = getAddOnFromZip(fileInfo.absoluteFilePath());
-		if (addon)	// get all addons, even the imcompatibles
+		if (addon)	// get all addons, even the incompatibles
 		{
 			addons.append(addon);
 		}
@@ -454,7 +435,7 @@ void StelAddOnMgr::unzip(AddOn& addon)
 	Stel::QZipReader reader(addon.getZipPath());
 	if (reader.status() != Stel::QZipReader::NoError)
 	{
-		qWarning() << "StelAddOnMgr: Unable to open the ZIP archive:"
+		qWarning() << "[Add-on] Unable to open the ZIP archive:"
 			   << QDir::toNativeSeparators(addon.getZipPath());
 		addon.setStatus(AddOn::UnableToRead);
 	}
@@ -469,8 +450,8 @@ void StelAddOnMgr::unzip(AddOn& addon)
 		}
 
 		QStringList validDirs;
-		validDirs << "landscapes/" << "modules/" << "scripts/" << "skycultures/"
-			  << "stars/" << "textures/" << "translations/";
+		validDirs << "addon/" << "landscapes/" << "modules/" << "scripts/"
+			  << "skycultures/" << "stars/" << "textures/" << "translations/";
 		bool validDir = false;
 		foreach (QString dir, validDirs)
 		{
@@ -483,7 +464,7 @@ void StelAddOnMgr::unzip(AddOn& addon)
 
 		if (!validDir)
 		{
-			qWarning() << "StelAddOnMgr: Unable to install! Invalid destination"
+			qWarning() << "[Add-on] Unable to install! Invalid destination"
 				   << info.filePath;
 			addon.setStatus(AddOn::InvalidDestination);
 			return;
@@ -497,7 +478,7 @@ void StelAddOnMgr::unzip(AddOn& addon)
 		QByteArray data = reader.fileData(info.filePath);
 		if (!file.open(QIODevice::WriteOnly))
 		{
-			qWarning() << "StelAddOnMgr: cannot open file"
+			qWarning() << "[Add-on] cannot open file"
 				   << QDir::toNativeSeparators(info.filePath);
 			addon.setStatus(AddOn::UnableToWrite);
 			continue;
@@ -505,7 +486,8 @@ void StelAddOnMgr::unzip(AddOn& addon)
 		file.write(data);
 		file.close();
 		installedFiles.append(fileInfo.absoluteFilePath());
-		qDebug() << "[Add-on] New file installed:" << info.filePath;
+		qDebug() << "[Add-on] New file installed:"
+			 << QDir::toNativeSeparators(info.filePath);
 	}
 	installedFiles.removeDuplicates();
 	addon.setInstalledFiles(installedFiles);
