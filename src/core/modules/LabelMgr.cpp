@@ -493,7 +493,10 @@ void LabelMgr::setLabelText(int id, const QString& newText)
 	
 bool LabelMgr::deleteLabel(int id)
 {
-	if (allLabels.at(id)!=NULL)
+    if (id<0)
+        return false;
+
+    if (allLabels.at(id)!=NULL)
 	{
 		delete allLabels.at(id);
 		allLabels[id] = NULL;
