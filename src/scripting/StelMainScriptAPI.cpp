@@ -1090,11 +1090,16 @@ void StelMainScriptAPI::clear(const QString& state)
 		glmgr->setFlagEquatorGrid(false);
 		glmgr->setFlagEquatorLine(false);
 		glmgr->setFlagEclipticLine(false);
+		glmgr->setFlagEclipticJ2000Line(false);
 		glmgr->setFlagMeridianLine(false);
 		glmgr->setFlagLongitudeLine(false);
 		glmgr->setFlagHorizonLine(false);
+		glmgr->setFlagColureLines(false);
+		glmgr->setFlagPrimeVerticalLine(false);
 		glmgr->setFlagGalacticEquatorLine(false);
 		glmgr->setFlagEquatorJ2000Grid(false);
+		glmgr->setFlagEclipticGrid(false);
+		glmgr->setFlagEclipticJ2000Grid(false);
 		lmgr->setFlagCardinalsPoints(false);
 		cmgr->setFlagLines(false);
 		cmgr->setFlagLabels(false);
