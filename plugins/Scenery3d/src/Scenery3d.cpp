@@ -1837,7 +1837,7 @@ void Scenery3d::drawDebug()
 
     StelPainter painter(altAzProjector);
     painter.setFont(debugTextFont);
-    painter.setColor(1,0,1,1);
+    painter.setColor(1.f,0.f,1.f,1.f);
     // For now, these messages print light mixture values.
     painter.drawText(20, 160, lightMessage);
     painter.drawText(20, 145, lightMessage2);

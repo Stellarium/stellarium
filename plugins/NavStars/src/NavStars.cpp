@@ -187,10 +187,7 @@ void NavStars::draw(StelCore* core)
 				glEnable(GL_BLEND);
 				painter.enableTexture2d(true);
 				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-				painter.setColor(markerColor[0],
-						markerColor[1],
-						markerColor[2],
-						markerFader.getInterstate());
+				painter.setColor(markerColor[0], markerColor[1], markerColor[2], markerFader.getInterstate());
 				markerTexture->bind();
 				painter.drawSprite2dMode(pos[0], pos[1], 11.f);
 			}
