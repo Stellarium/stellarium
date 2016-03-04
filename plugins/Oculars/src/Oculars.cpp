@@ -1888,6 +1888,7 @@ void Oculars::paintText(const StelCore* core)
 			QString telescopeString = "";
 			QString magString = "";
 			QString fovString = "";
+			QString exitPupil = "";
 
 			if (telescope!=NULL)
 			{
@@ -1906,6 +1907,8 @@ void Oculars::paintText(const StelCore* core)
 
 					fovString = QString::number(((int)(ocular->actualFOV(telescope, lens) * 10000.00)) / 10000.0);
 					fovString.append(QChar(0x00B0));//Degree sign
+
+					exitPupil = QString::number(telescope->diameter()/ocular->magnification(telescope, lens), 'f', 2);
 				}
 			}
 
@@ -1913,6 +1916,9 @@ void Oculars::paintText(const StelCore* core)
 			yPosition-=lineHeight;
 
 			painter.drawText(xPosition, yPosition, QString(q_("Magnification: %1")).arg(magString));
+			yPosition-=lineHeight;
+
+			painter.drawText(xPosition, yPosition, QString(q_("Exit pupil: %1mm")).arg(exitPupil));
 			yPosition-=lineHeight;
 
 			painter.drawText(xPosition, yPosition, QString(q_("FOV: %1")).arg(fovString));
