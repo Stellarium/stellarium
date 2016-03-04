@@ -384,9 +384,9 @@ void Pulsar::draw(StelCore* core, StelPainter *painter)
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
 	if (glitch>0 && glitchFlag)
-		painter->setColor(glitchColor[0], glitchColor[1], glitchColor[2], 1);
+		painter->setColor(glitchColor[0], glitchColor[1], glitchColor[2], 1.f);
 	else
-		painter->setColor(markerColor[0], markerColor[1], markerColor[2], 1);
+		painter->setColor(markerColor[0], markerColor[1], markerColor[2], 1.f);
 	float mlimit = sd->getLimitMagnitude();
 
 	if (mag <= mlimit)
