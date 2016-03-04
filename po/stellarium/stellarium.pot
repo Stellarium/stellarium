@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-04 22:53+0600\n"
+"POT-Creation-Date: 2016-03-04 23:54+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6319,8 +6319,9 @@ msgid "Magnification: %1"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1921
-#, c-format, qt-format
-msgid "Exit pupil: %1mm"
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:833
+#, qt-format
+msgid "Exit pupil: %1 mm"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1924
@@ -6490,11 +6491,6 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:816
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
-msgstr ""
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:833
-#, qt-format
-msgid "Exit pupil: %1 mm"
 msgstr ""
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
