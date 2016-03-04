@@ -1918,7 +1918,7 @@ void Oculars::paintText(const StelCore* core)
 			painter.drawText(xPosition, yPosition, QString(q_("Magnification: %1")).arg(magString));
 			yPosition-=lineHeight;
 
-			painter.drawText(xPosition, yPosition, QString(q_("Exit pupil: %1mm")).arg(exitPupil));
+			painter.drawText(xPosition, yPosition, QString(q_("Exit pupil: %1 mm")).arg(exitPupil));
 			yPosition-=lineHeight;
 
 			painter.drawText(xPosition, yPosition, QString(q_("FOV: %1")).arg(fovString));
