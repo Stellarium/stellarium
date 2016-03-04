@@ -277,7 +277,7 @@ void Observability::draw(StelCore* core)
 
 // Set the painter:
 	StelPainter painter(core->getProjection2d());
-	painter.setColor(fontColor[0],fontColor[1],fontColor[2],1);
+	painter.setColor(fontColor[0],fontColor[1],fontColor[2],1.f);
 	font.setPixelSize(fontSize);
 	painter.setFont(font);
 
