@@ -266,6 +266,8 @@ private:
 	//! Display the GUI control panel
 	bool guiPanelEnabled;
 	bool flagDecimalDegrees;
+	bool flipVert;
+	bool flipHorz;
 
 	QSignalMapper * ccdRotationSignalMapper;  //!< Used to rotate the CCD. */
 	QSignalMapper * ccdsSignalMapper; //!< Used to determine which CCD was selected from the popup navigator. */
