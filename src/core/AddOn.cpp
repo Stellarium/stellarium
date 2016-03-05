@@ -19,6 +19,7 @@
 
 #include <QStringBuilder>
 #include <QtDebug>
+#include <QDir>
 #include <QVariantMap>
 
 #include "AddOn.hpp"
@@ -108,7 +109,7 @@ AddOn::AddOn(const QString addonId, const QVariantMap& map)
 		}
 	}
 
-	m_sZipPath = StelFileMgr::getAddonDir() % "/" % m_sDownloadFilename;
+	m_sZipPath = StelFileMgr::getAddonDir() % QDir::separator() % m_sDownloadFilename;
 
 	m_bIsValid = true;
 }
