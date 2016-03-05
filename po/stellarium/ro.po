@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-03 21:55+0600\n"
+"POT-Creation-Date: 2016-03-04 23:54+0600\n"
 "PO-Revision-Date: 2015-02-28 14:29+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-03-04 04:50+0000\n"
+"X-Launchpad-Export-Date: 2016-03-05 05:33+0000\n"
 "X-Generator: Launchpad (build 17936)\n"
 "100 > 19) || ((n % 100 == 0) && (n != 0))) ? 2: 1))\n"
 
@@ -5566,7 +5566,7 @@ msgstr "Toate disponibile"
 msgid "Display no information"
 msgstr "Nu arăta informații"
 
-#: src/ui_configurationDialog.h:1125 plugins/Oculars/src/Oculars.cpp:2048
+#: src/ui_configurationDialog.h:1125 plugins/Oculars/src/Oculars.cpp:2251
 #: plugins/Observability/src/Observability.cpp:205
 msgid "None"
 msgstr "Nimic"
@@ -6395,7 +6395,7 @@ msgstr "Afișează direcția după busolă de-a lungul orizontului"
 msgid "Compass marks"
 msgstr "Marcajele busolei"
 
-#: plugins/Oculars/src/Oculars.cpp:81 plugins/Oculars/src/Oculars.cpp:1320
+#: plugins/Oculars/src/Oculars.cpp:81 plugins/Oculars/src/Oculars.cpp:1481
 #: plugins/Oculars/src/ui_ocularDialog.h:1155
 msgid "Oculars"
 msgstr "Oculare"
@@ -6410,320 +6410,334 @@ msgstr ""
 "simulate numai mărirea şi cîmpul vizual.) Poate de asemenea arăta cadrul "
 "unui senzor si viziunea unui Telrad."
 
-#: plugins/Oculars/src/Oculars.cpp:854
+#: plugins/Oculars/src/Oculars.cpp:939
 msgid "Please select an object before switching to ocular view."
 msgstr ""
 "Te rugăm să selectezi un obiect înainte de comutarea la vederea ocular."
 
-#: plugins/Oculars/src/Oculars.cpp:948
+#: plugins/Oculars/src/Oculars.cpp:1049
 msgid "&Previous ocular"
 msgstr "&Ocularul anterior"
 
-#: plugins/Oculars/src/Oculars.cpp:949
+#: plugins/Oculars/src/Oculars.cpp:1050
 msgid "&Next ocular"
 msgstr "&Ocularul următor"
 
-#: plugins/Oculars/src/Oculars.cpp:950
+#: plugins/Oculars/src/Oculars.cpp:1051
 msgid "Select &ocular"
 msgstr "Selectează &ocular"
 
-#: plugins/Oculars/src/Oculars.cpp:991
+#: plugins/Oculars/src/Oculars.cpp:1102
 msgid "Toggle &crosshair"
 msgstr "Comută &cursor"
 
-#: plugins/Oculars/src/Oculars.cpp:999
+#: plugins/Oculars/src/Oculars.cpp:1112
 msgid "Configure &Oculars"
 msgstr "Configurează &Oculare"
 
-#: plugins/Oculars/src/Oculars.cpp:1007
+#: plugins/Oculars/src/Oculars.cpp:1121
 msgid "Toggle &CCD"
 msgstr "Comută &CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1014
+#: plugins/Oculars/src/Oculars.cpp:1129
 msgid "Toggle &Telrad"
 msgstr "Comută &Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1022
+#: plugins/Oculars/src/Oculars.cpp:1138
 msgid "&Previous CCD"
 msgstr "&CCD anterior"
 
-#: plugins/Oculars/src/Oculars.cpp:1023
+#: plugins/Oculars/src/Oculars.cpp:1139
 msgid "&Next CCD"
 msgstr "&CCD următor"
 
-#: plugins/Oculars/src/Oculars.cpp:1024
+#: plugins/Oculars/src/Oculars.cpp:1140
 msgid "&Select CCD"
 msgstr "&Selectează CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1041
+#: plugins/Oculars/src/Oculars.cpp:1162
 msgid "&Rotate CCD"
 msgstr "&Roteşte CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1063
+#: plugins/Oculars/src/Oculars.cpp:1184
 msgid "&Reset rotation"
 msgstr "&Resetează rotaţia"
 
-#: plugins/Oculars/src/Oculars.cpp:1321
+#: plugins/Oculars/src/Oculars.cpp:1482
 #: plugins/Oculars/src/ui_ocularDialog.h:1157
 msgid "Ocular view"
 msgstr "Vizualizarea prin ocular"
 
-#: plugins/Oculars/src/Oculars.cpp:1338
+#: plugins/Oculars/src/Oculars.cpp:1498
 msgid "Oculars popup menu"
 msgstr "Meniu oculare"
 
-#: plugins/Oculars/src/Oculars.cpp:1339
+#: plugins/Oculars/src/Oculars.cpp:1499
 msgid "Show crosshairs"
 msgstr "Arată cursorul"
 
-#: plugins/Oculars/src/Oculars.cpp:1340
+#: plugins/Oculars/src/Oculars.cpp:1500
 msgid "Image sensor frame"
 msgstr "Cadrul senzorului de imagine"
 
-#: plugins/Oculars/src/Oculars.cpp:1341
+#: plugins/Oculars/src/Oculars.cpp:1501
 msgid "Telrad sight"
 msgstr "Vederea Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1342
+#: plugins/Oculars/src/Oculars.cpp:1502
 msgid "Oculars plugin configuration"
 msgstr "Configuraţia plugin-ului Oculare"
 
-#: plugins/Oculars/src/Oculars.cpp:1344
+#: plugins/Oculars/src/Oculars.cpp:1504
 msgid "Select next telescope"
 msgstr "Alege telescopul următor"
 
-#: plugins/Oculars/src/Oculars.cpp:1346
+#: plugins/Oculars/src/Oculars.cpp:1506
 msgid "Select previous telescope"
 msgstr "Alege telescopul precedent"
 
-#: plugins/Oculars/src/Oculars.cpp:1348
+#: plugins/Oculars/src/Oculars.cpp:1508
 msgid "Select next eyepiece"
 msgstr "Alege ocularul următor"
 
-#: plugins/Oculars/src/Oculars.cpp:1350
+#: plugins/Oculars/src/Oculars.cpp:1510
 msgid "Select previous eyepiece"
 msgstr "Alege ocularul precedent"
 
-#: plugins/Oculars/src/Oculars.cpp:1527
+#: plugins/Oculars/src/Oculars.cpp:1695
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "Înălţarea dreaptă / Declinaţia (J2000.0) crucii"
 
-#: plugins/Oculars/src/Oculars.cpp:1664
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:501
+#: plugins/Oculars/src/Oculars.cpp:1837
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:503
 #, qt-format
 msgid "Ocular #%1"
 msgstr "Ocular #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1669
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:505
+#: plugins/Oculars/src/Oculars.cpp:1841
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:507
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "Ocular #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1683
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:542
+#: plugins/Oculars/src/Oculars.cpp:1855
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:544
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Ocular FL: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1690
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:552
+#: plugins/Oculars/src/Oculars.cpp:1862
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:554
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Ocular aFOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1702
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:582
+#: plugins/Oculars/src/Oculars.cpp:1873
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:584
 #, qt-format
 msgid "Lens #%1"
 msgstr "Lentila #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1706
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:586
+#: plugins/Oculars/src/Oculars.cpp:1877
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:588
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Lentila #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1711
+#: plugins/Oculars/src/Oculars.cpp:1882
 msgid "Lens: none"
 msgstr "Lentila: nici una"
 
-#: plugins/Oculars/src/Oculars.cpp:1741 plugins/Oculars/src/Oculars.cpp:1782
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:738
+#: plugins/Oculars/src/Oculars.cpp:1915 plugins/Oculars/src/Oculars.cpp:1960
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:740
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Telescop #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1744
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:818
+#: plugins/Oculars/src/Oculars.cpp:1918
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:823
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Magnificaţie: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1747
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:827
+#: plugins/Oculars/src/Oculars.cpp:1921
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:833
+#, qt-format
+msgid "Exit pupil: %1 mm"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1924
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:842
 #, qt-format
 msgid "FOV: %1"
 msgstr "FOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1766
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:684
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:780
+#: plugins/Oculars/src/Oculars.cpp:1944
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:686
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:782
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Dimensiuni: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1770
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:644
+#: plugins/Oculars/src/Oculars.cpp:1948
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:646
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Senzor #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1774
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:648
+#: plugins/Oculars/src/Oculars.cpp:1952
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:650
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Senzor #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1787
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
+#: plugins/Oculars/src/Oculars.cpp:1965
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:744
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Telescop #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2044
+#: plugins/Oculars/src/Oculars.cpp:2247
 msgid "&Lens"
 msgstr "&Lentilă"
 
-#: plugins/Oculars/src/Oculars.cpp:2045
+#: plugins/Oculars/src/Oculars.cpp:2248
 msgid "&Previous lens"
 msgstr "&Precedenta lentilă"
 
-#: plugins/Oculars/src/Oculars.cpp:2046
+#: plugins/Oculars/src/Oculars.cpp:2249
 msgid "&Next lens"
 msgstr "&Următoarea lentilă"
 
-#: plugins/Oculars/src/Oculars.cpp:2076
+#: plugins/Oculars/src/Oculars.cpp:2279
 msgid "&Telescope"
 msgstr "&Telescop"
 
-#: plugins/Oculars/src/Oculars.cpp:2077
+#: plugins/Oculars/src/Oculars.cpp:2280
 msgid "&Previous telescope"
 msgstr "&Telescop anterior"
 
-#: plugins/Oculars/src/Oculars.cpp:2078
+#: plugins/Oculars/src/Oculars.cpp:2281
 msgid "&Next telescope"
 msgstr "&Telescop următor"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:187
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:189
 msgid "Previous ocular"
 msgstr "Ocular anterior"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:193
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:195
 msgid "Next ocular"
 msgstr "Ocular următor"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:199
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:201
 msgid "Previous lens"
 msgstr "Lentila precedentă"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:205
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
 msgid "Next lens"
 msgstr "Lentila următoare"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:211
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:213
 msgid "Previous CCD frame"
 msgstr "Cadru CCD anterior"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:217
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:219
 msgid "Next CCD frame"
 msgstr "Cadru CCD următor"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:223
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:225
 msgid "Previous telescope"
 msgstr "Telescop anterior"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:229
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:231
 msgid "Next telescope"
 msgstr "Telescop următor"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:262
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:264
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
 msgstr "Roteşte cadrul senzorului la 15 grade invers acelor de ceasornic"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:275
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:277
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
 msgstr "Roteşte cadrul senzorului la 5 grade invers acelor de ceasornic"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:288
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:290
 msgid "Rotate the sensor frame 1 degree counterclockwise"
 msgstr "Roteşte cadrul senzorului la 1 grad invers acelor de ceasornic"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:301
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:303
 msgid "Reset the sensor frame rotation"
 msgstr "Resetează rotaţia cadrului senzorului"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:314
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:316
 msgid "Rotate the sensor frame 1 degree clockwise"
 msgstr "Roteşte cadrul senzorului la un grad în sensul acelor de ceasornic"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:327
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:329
 msgid "Rotate the sensor frame 5 degrees clockwise"
 msgstr "Roteşte cadrul senzorului la 5 grade în sensul acelor de ceasornic"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:340
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:342
 msgid "Rotate the sensor frame 15 degrees clockwise"
 msgstr "Roteşte cadrul senzorului la 15 grade în sensul acelor de ceasornic"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:544
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:546
 msgid "Effective focal length of the ocular"
 msgstr "Distanţa focală efectivă a ocularului"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:555
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:557
 msgid "Apparent field of view of the ocular"
 msgstr "Câmpul aparent al ocularului"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:588
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:590
 #, qt-format
 msgid "Multiplicity: %1"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:593
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:595
 msgid "Lens: None"
 msgstr "Lentilă: nici una"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:594
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:596
 msgid "Multiplicity: N/A"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:600
 msgid "Focal length of eyepiece"
 msgstr "Focala ocularului"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:691
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:693
 #, qt-format
 msgid "Rotation: %1"
 msgstr "Rotație: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:801
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:804
 msgid "Magnification provided by these binoculars"
 msgstr "Magnificaţie asigurată de aceste binocluri"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:802
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:805
 msgid "Actual field of view provided by these binoculars"
 msgstr "Câmpul actual asigurat de aceste binoculare"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:810
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:806
+msgid "Exit pupil provided by these binoculars"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:814
 msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr "Mărirea obţinută cu această combinaţie ocular/lentilă/telescop"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:811
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:815
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr "Cîmpul vizual obţinut cu această combinaţie ocular/lentilă/telescop"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:816
+msgid "Exit pupil provided by this ocular/lens/telescope combination"
+msgstr ""
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:525
