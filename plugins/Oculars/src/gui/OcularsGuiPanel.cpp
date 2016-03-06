@@ -138,6 +138,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldCcdRotation = new QGraphicsTextItem(ccdControls);
 	fieldTelescopeName = new QGraphicsTextItem(telescopeControls);
 	fieldMagnification = new QGraphicsTextItem(telescopeControls);
+	fieldExitPupil = new QGraphicsTextItem(telescopeControls);
 	fieldFov = new QGraphicsTextItem(telescopeControls);
 
 	fieldLensName = new QGraphicsTextItem(lensControls);
@@ -162,6 +163,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldCcdRotation->setTextWidth(maxWidth);
 	fieldTelescopeName->setTextWidth(maxWidth);
 	fieldMagnification->setTextWidth(maxWidth);
+	fieldExitPupil->setTextWidth(maxWidth);
 	fieldFov->setTextWidth(maxWidth);
 
 	fieldLensName->setTextWidth(maxWidth);
@@ -781,6 +783,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 		fieldCcdDimensions->setPlainText(dimensionsLabel);
 
 		fieldMagnification->setVisible(false);
+		fieldExitPupil->setVisible(false);
 		fieldFov->setVisible(false);
 	}
 	else if (ocularsPlugin->flagShowOculars)
@@ -798,8 +801,9 @@ void OcularsGuiPanel::updateTelescopeControls()
 			posY = 0.;
 			widgetHeight = 0.;
 
-			fieldMagnification->setToolTip(q_("Magnification provided by these binoculars"));
+			fieldMagnification->setToolTip(q_("Magnification provided by these binoculars"));			
 			fieldFov->setToolTip(q_("Actual field of view provided by these binoculars"));
+			fieldExitPupil->setToolTip(q_("Exit pupil provided by these binoculars"));
 		}
 		else
 		{
@@ -807,20 +811,31 @@ void OcularsGuiPanel::updateTelescopeControls()
 			nextTelescopeButton->setVisible(true);
 			fieldTelescopeName->setVisible(true);
 
-			fieldMagnification->setToolTip(q_("Magnification provided by this ocular/lens/telescope combination"));
+			fieldMagnification->setToolTip(q_("Magnification provided by this ocular/lens/telescope combination"));			
 			fieldFov->setToolTip(q_("Actual field of view provided by this ocular/lens/telescope combination"));
+			fieldExitPupil->setToolTip(q_("Exit pupil provided by this ocular/lens/telescope combination"));
 		}
 
 		//WTF? Rounding?
 		double magnification = ((int)(ocular->magnification(telescope, lens) * 10.0)) / 10.0;
-		QString magnificationString = QString::number(magnification);
-		magnificationString.append(QChar(0x00D7));
-		QString magnificationLabel = QString(q_("Magnification: %1"))
-		                             .arg(magnificationString);
+		QString magnificationString = QString::number(magnification);		
+		magnificationString.append(QChar(0x00D7));		
+		QString magnificationLabel = QString(q_("Magnification: %1")).arg(magnificationString);
 		fieldMagnification->setPlainText(magnificationLabel);
 		fieldMagnification->setPos(posX, posY);
 		posY += fieldMagnification->boundingRect().height();
 		widgetHeight += fieldMagnification->boundingRect().height();
+
+		double mag = ocular->magnification(telescope, lens);
+		if (mag>0)
+		{
+			double exitPupil = telescope->diameter()/mag;
+			QString exitPupilLabel = QString(q_("Exit pupil: %1 mm")).arg(QString::number(exitPupil, 'f', 2));
+			fieldExitPupil->setPlainText(exitPupilLabel);
+			fieldExitPupil->setPos(posX, posY);
+			posY += fieldExitPupil->boundingRect().height();
+			widgetHeight += fieldExitPupil->boundingRect().height();
+		}
 
 		double fov = ((int)(ocular->actualFOV(telescope, lens) * 10000.00)) / 10000.0;
 		QString fovString = QString::number(fov) + QChar(0x00B0);
@@ -831,6 +846,10 @@ void OcularsGuiPanel::updateTelescopeControls()
 
 		fieldMagnification->setVisible(true);
 		fieldFov->setVisible(true);
+		if (mag>0)
+			fieldExitPupil->setVisible(true);
+		else
+			fieldExitPupil->setVisible(false);
 	}
 	else
 	{
@@ -840,6 +859,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 
 		fieldMagnification->setVisible(false);
 		fieldFov->setVisible(false);
+		fieldExitPupil->setVisible(false);
 	}
 
 	telescopeControls->setMinimumSize(widgetWidth, widgetHeight);
@@ -990,6 +1010,7 @@ void OcularsGuiPanel::setControlsColor(const QColor& color)
 	Q_ASSERT(fieldCcdRotation);
 	Q_ASSERT(fieldTelescopeName);
 	Q_ASSERT(fieldMagnification);
+	Q_ASSERT(fieldExitPupil);
 	Q_ASSERT(fieldFov);
 	Q_ASSERT(fieldLensName);
 	Q_ASSERT(fieldLensMultipler);
@@ -1003,6 +1024,7 @@ void OcularsGuiPanel::setControlsColor(const QColor& color)
 	fieldTelescopeName->setDefaultTextColor(color);
 	fieldMagnification->setDefaultTextColor(color);
 	fieldFov->setDefaultTextColor(color);
+	fieldExitPupil->setDefaultTextColor(color);
 	fieldLensName->setDefaultTextColor(color);
 	fieldLensMultipler->setDefaultTextColor(color);
 }
@@ -1017,6 +1039,7 @@ void OcularsGuiPanel::setControlsFont(const QFont& font)
 	Q_ASSERT(fieldCcdRotation);
 	Q_ASSERT(fieldTelescopeName);
 	Q_ASSERT(fieldMagnification);
+	Q_ASSERT(fieldExitPupil);
 	Q_ASSERT(fieldFov);
 	Q_ASSERT(fieldLensName);
 	Q_ASSERT(fieldLensMultipler);
@@ -1030,6 +1053,7 @@ void OcularsGuiPanel::setControlsFont(const QFont& font)
 	fieldTelescopeName->setFont(font);
 	fieldMagnification->setFont(font);
 	fieldFov->setFont(font);
+	fieldExitPupil->setFont(font);
 	fieldLensName->setFont(font);
 	fieldLensMultipler->setFont(font);
 }

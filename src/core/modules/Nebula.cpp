@@ -965,11 +965,17 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 				rtx << qc_("star is located on the corner of the illuminated nebulosity", "Reflection Nebulae Classification");
 				break;
 			case 3:
+			{
+				// TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
 				rtx << qc_("star is located outside the illuminated peculiar nebulosity", "Reflection Nebulae Classification");
 				break;
+			}
 			case 4:
+			{
+				// TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
 				rtx << qc_("the illuminated peculiar nebulosity", "Reflection Nebulae Classification");
 				break;
+			}
 			default:
 				rtx << qc_("undocumented reflection nebulae", "Reflection Nebulae Classification");
 				break;
