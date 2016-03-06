@@ -58,6 +58,8 @@ class StelCore : public QObject
 	Q_PROPERTY(double viewportVerticalOffset   READ getViewportVerticalOffset   WRITE setViewportVerticalOffset   NOTIFY viewportVerticalOffsetChanged)
 
 public:
+
+	//! @enum FrameType
 	//! Supported reference frame types
 	enum FrameType
 	{
@@ -73,6 +75,7 @@ public:
 		FrameGalactic				//!< Galactic reference frame centered on observer.
 	};
 
+	//! @enum ProjectionType
 	//! Available projection types. A value of 1000 indicate the default projection
 	enum ProjectionType
 	{
@@ -87,6 +90,7 @@ public:
 		ProjectionSinusoidal                //!< Sinusoidal projection
 	};
 
+	//! @enum RefractionMode
 	//! Available refraction mode.
 	enum RefractionMode
 	{
@@ -95,6 +99,7 @@ public:
 		RefractionOff                       //!< Never add refraction (i.e. geometric coordinates)
 	};
 
+	//! @enum DeltaTAlgorithm
 	//! Available DeltaT algorithms
 	enum DeltaTAlgorithm
 	{

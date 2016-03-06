@@ -767,10 +767,10 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 			if (visibility != VISIBLE)
 			{
 				txtMag = mag - 10.f; // Oops... Artificial satellite is invisible, but let's make the label visible
-				painter.setColor(invisibleSatelliteColor[0], invisibleSatelliteColor[1], invisibleSatelliteColor[2], 1);
+				painter.setColor(invisibleSatelliteColor[0], invisibleSatelliteColor[1], invisibleSatelliteColor[2], 1.f);
 			}
 			else
-				painter.setColor(color[0], color[1], color[2], 1);
+				painter.setColor(color[0], color[1], color[2], 1.f);
 
 			// Draw the label of the satellite when it enabled
 			if (txtMag <= sd->getLimitMagnitude() && Satellite::showLabels)

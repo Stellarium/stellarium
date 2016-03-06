@@ -110,6 +110,7 @@ private:
 	QGraphicsTextItem* fieldCcdRotation;
 	QGraphicsTextItem* fieldTelescopeName;
 	QGraphicsTextItem* fieldMagnification;
+	QGraphicsTextItem* fieldExitPupil;
 	QGraphicsTextItem* fieldFov;
 
 	//Sensor frame rotation controls
