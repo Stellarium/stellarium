@@ -128,6 +128,7 @@ Oculars::Oculars():
 	useMaxEyepieceAngle(true),
 	guiPanelEnabled(false),
 	flagDecimalDegrees(false),
+	flagSemiTransporency(false),
 	flipVert(false),
 	flipHorz(false),
 	ccdRotationSignalMapper(0),
@@ -650,6 +651,7 @@ void Oculars::init()
 		setFlagLimitMagnitude(settings->value("limit_stellar_magnitude", true).toBool());
 		setFlagInitFovUsage(settings->value("use_initial_fov", false).toBool());
 		setFlagUseFlipForCCD(settings->value("use_ccd_flip", false).toBool());
+		setFlagUseSemiTransparency(settings->value("use_semi_transparency", false).toBool());
 	}
 	catch (std::runtime_error& e)
 	{
@@ -1756,14 +1758,15 @@ void Oculars::paintOcularMask(const StelCore *core)
 		inner = oculars[selectedOcularIndex]->appearentFOV() * inner / maxEyepieceAngle;
 	}
 
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+
 	// Paint the reticale, if needed
 	if (!reticleTexture.isNull())
 	{
-		glEnable(GL_BLEND);
 		painter.enableTexture2d(true);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+
 		reticleTexture->bind();
 
 		int textureHeight;
@@ -1778,8 +1781,53 @@ void Oculars::paintOcularMask(const StelCore *core)
 	if (oculars[selectedOcularIndex]->hasPermanentCrosshair())
 	{
 		paintCrosshairs();
-	}	
-	painter.drawViewportShape(inner);
+	}
+
+	float alpha = 1.f;
+	if (getFlagUseSemiTransparency())
+		alpha = 0.85f;
+
+	painter.setColor(0.f,0.f,0.f,alpha);
+
+	GLfloat outerRadius = params.viewportXywh[2] * params.devicePixelsPerPixel + params.viewportXywh[3] * params.devicePixelsPerPixel;
+	GLint slices = 239;
+
+	GLfloat sinCache[240];
+	GLfloat cosCache[240];
+	GLfloat vertices[(240+1)*2][3];
+	GLfloat deltaRadius;
+	GLfloat radiusHigh;
+
+	/* Compute length (needed for normal calculations) */
+	deltaRadius=outerRadius-inner;
+
+	/* Cache is the vertex locations cache */
+	for (int i=0; i<=slices; i++)
+	{
+		GLfloat angle=(M_PI*2.0f)*i/slices;
+		sinCache[i]=(GLfloat)sin(angle);
+		cosCache[i]=(GLfloat)cos(angle);
+	}
+
+	sinCache[slices]=sinCache[0];
+	cosCache[slices]=cosCache[0];
+
+	/* Enable arrays */
+	painter.enableClientStates(true);
+	painter.setVertexPointer(3, GL_FLOAT, vertices);
+
+	radiusHigh=outerRadius-deltaRadius;
+	for (int i=0; i<=slices; i++)
+	{
+		vertices[i*2][0]= params.viewportCenter[0] + outerRadius*sinCache[i];
+		vertices[i*2][1]= params.viewportCenter[1] + outerRadius*cosCache[i];
+		vertices[i*2][2] = 0.0;
+		vertices[i*2+1][0]= params.viewportCenter[0] + radiusHigh*sinCache[i];
+		vertices[i*2+1][1]= params.viewportCenter[1] + radiusHigh*cosCache[i];
+		vertices[i*2+1][2] = 0.0;
+	}
+	painter.drawFromArray(StelPainter::TriangleStrip, (slices+1)*2, 0, false);
+	painter.enableClientStates(false);
 }
 
 void Oculars::paintText(const StelCore* core)
@@ -2076,7 +2124,6 @@ void Oculars::unzoomOcular()
 	GETSTELMODULE(SolarSystem)->setFlagMoonScale(flagMoonScale);
 
 	// Set the screen display
-	core->setMaskType(StelProjector::MaskNone);
 	core->setFlipHorz(flipHorz);
 	core->setFlipVert(flipVert);
 
@@ -2178,7 +2225,6 @@ void Oculars::zoomOcular()
 	}
 
 	// Set the screen display
-	core->setMaskType(StelProjector::MaskDisk);
 	Ocular * ocular = oculars[selectedOcularIndex];
 	Telescope * telescope = NULL;
 	Lens * lens = NULL;
@@ -2349,6 +2395,18 @@ void Oculars::setFlagUseFlipForCCD(const bool b)
 bool Oculars::getFlagUseFlipForCCD() const
 {
 	return flagUseFlipForCCD;
+}
+
+void Oculars::setFlagUseSemiTransparency(const bool b)
+{
+	flagSemiTransporency = b;
+	settings->setValue("use_semi_transparency", b);
+	settings->sync();
+}
+
+bool Oculars::getFlagUseSemiTransparency() const
+{
+	return flagSemiTransporency;
 }
 
 QString Oculars::getDimensionsString(double fovX, double fovY) const
