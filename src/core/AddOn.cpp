@@ -73,7 +73,7 @@ AddOn::AddOn(const QString addonId, const QVariantMap& map)
 	}
 
 	// checking compatibility
-	if (!isSupported(m_supported))
+	if (!m_supported.isEmpty() && !m_supported.contains(StelUtils::getApplicationSeries()))
 	{
 		qWarning() << "[Add-on] Error! Add-on" << m_sAddonId << "is not supported!";
 		return;
@@ -116,18 +116,6 @@ AddOn::AddOn(const QString addonId, const QVariantMap& map)
 
 AddOn::~AddOn()
 {
-}
-
-bool AddOn::isSupported(QStringList supported)
-{
-	if (supported.isEmpty()) {
-		return true;
-	}
-
-	QString current = StelUtils::getApplicationVersion();
-	current.truncate(current.lastIndexOf("."));
-
-	return supported.contains(current);
 }
 
 QString AddOn::getStatusString() {

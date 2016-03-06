@@ -129,8 +129,6 @@ private:
 	bool m_bIsValid;
 	Status m_eStatus;
 
-	bool isSupported(QStringList supported);
-
 	Type typeStringToEnum(QString string);
 	QString typeToDisplayRole(Type type);
 	QString fileSizeToString(float bytes);
