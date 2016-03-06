@@ -163,7 +163,7 @@ QFontMetrics StelPainter::getFontMetrics() const
 // Standard methods for drawing primitives
 
 // Fill with black around the circle
-void StelPainter::drawViewportShape(const GLfloat innerRadius)
+void StelPainter::drawViewportShape(void)
 {
 	if (prj->maskType != StelProjector::MaskDisk)
 		return;
@@ -171,20 +171,15 @@ void StelPainter::drawViewportShape(const GLfloat innerRadius)
 	glDisable(GL_BLEND);
 	setColor(0.f,0.f,0.f);
 
+	GLfloat innerRadius = 0.5*prj->viewportFovDiameter;
 	GLfloat outerRadius = prj->getViewportWidth()+prj->getViewportHeight();
-	GLint slices = 256;
-	GLfloat sweepAngle = 360.;
+	GLint slices = 239;
 
 	GLfloat sinCache[240];
 	GLfloat cosCache[240];
 	GLfloat vertices[(240+1)*2][3];
 	GLfloat deltaRadius;
 	GLfloat radiusHigh;
-
-	if (slices>=240)
-	{
-		slices=240-1;
-	}
 
 	if (outerRadius<=0.0 || innerRadius<0.0 ||innerRadius > outerRadius)
 	{
@@ -198,7 +193,7 @@ void StelPainter::drawViewportShape(const GLfloat innerRadius)
 	/* Cache is the vertex locations cache */
 	for (int i=0; i<=slices; i++)
 	{
-		GLfloat angle=((M_PI*sweepAngle)/180.0f)*i/slices;
+		GLfloat angle=(M_PI*2.0f)*i/slices;
 		sinCache[i]=(GLfloat)sin(angle);
 		cosCache[i]=(GLfloat)cos(angle);
 	}
@@ -223,13 +218,6 @@ void StelPainter::drawViewportShape(const GLfloat innerRadius)
 	drawFromArray(TriangleStrip, (slices+1)*2, 0, false);
 	enableClientStates(false);
 }
-
-void StelPainter::drawViewportShape(void)
-{
-	this->drawViewportShape(0.5*prj->viewportFovDiameter);
-}
-
-
 
 void StelPainter::computeFanDisk(float radius, int innerFanSlices, int level, QVector<double>& vertexArr, QVector<float>& texCoordArr)
 {
