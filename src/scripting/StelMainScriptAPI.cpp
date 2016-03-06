@@ -1278,7 +1278,7 @@ void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, flo
 {
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	Q_ASSERT(mvmgr);
-	StelCore* core = StelApp::getInstance().getCore();
+	//StelCore* core = StelApp::getInstance().getCore();
 
 	GETSTELMODULE(StelObjectMgr)->unSelect();
 
@@ -1295,11 +1295,13 @@ void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, flo
 	StelMovementMgr::MountMode mountMode=mvmgr->getMountMode();
 	Vec3d aimUp;
 	if ( (mountMode==StelMovementMgr::MountAltAzimuthal) && (fabs(dAlt)> (0.9*M_PI/2.0)) )
-		aimUp=core->altAzToJ2000(Vec3d(-cos(dAzi), -sin(dAzi), 0.) * (dAlt>0. ? 1. : -1. ), StelCore::RefractionOff);
+		aimUp=Vec3d(-cos(dAzi), -sin(dAzi), 0.) * (dAlt>0. ? 1. : -1.);
 	else
-		aimUp=core->altAzToJ2000(Vec3d(0., 0., 1.), StelCore::RefractionOff);
+		aimUp=Vec3d(0., 0., 1.);
 
 	mvmgr->moveToJ2000(StelApp::getInstance().getCore()->altAzToJ2000(aim, StelCore::RefractionOff), aimUp, duration);
+	// Last chance for avoiding a new call?
+	//mvmgr->moveToAltAzi(aim, aimUp, duration);
 }
 
 void StelMainScriptAPI::moveToRaDec(const QString& ra, const QString& dec, float duration)
