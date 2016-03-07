@@ -25,6 +25,9 @@
 
 #include <QMutex>
 
+//! @ingroup remoteControl
+//! This class handles the API-specific requests and dispatches them to the correct service.
+//! To see the default services used, see the RequestHandler::RequestHandler constructor.
 class APIController : public HttpRequestHandler
 {
 	Q_OBJECT
@@ -32,11 +35,13 @@ public:
 	APIController(int prefixLength, QObject* parent = 0);
 	virtual ~APIController();
 
-	//! Called in the main thread each frame
+	//! Should be called each frame, like from StelModule::update.
+	//! Passed on to each AbstractAPIService::update method for optional processing.
 	void update(double deltaTime);
 
 	virtual void service(HttpRequest& request, HttpResponse& response);
 
+	//! Registers a service with the APIController.
 	void registerService(AbstractAPIService* service);
 private:
 	int m_prefixLength;
