@@ -112,6 +112,14 @@ void RemoteControlDialog::setAboutHtml(void)
 	html += "<p>" + q_("The Remote Control plugin provides a web interface to allow state changes and triggering scripts using a connected webbrowser.") + "</p>";
 	// TODO Add longer instructions?
 
+	html += "<p>" + q_("It is also possible to send commands via command line, e.g..");
+	html += "<pre>\n"
+		"wget -q --post-data 'id=myScript.ssc' http://localhost:8080/api/scripts/run >/dev/null 2>&amp;1\n"
+		"curl --data 'id=myScript.ssc' http://localhost:8080/api/scripts/run >/dev/null 2>&amp;1\n"
+		"curl -d     'id=myScript.ssc' http://localhost:8080/api/scripts/run >/dev/null 2>&amp;1\n"
+		"</pre>";
+	html += q_("This allows triggering automatic show setups for museums etc.") + "</p>";
+
 	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Remote Control plugin") + "</p>";
 	html += "<p><ul>";
