@@ -35,18 +35,21 @@ class RemoteControlDialog;
 class HttpListener;
 class RequestHandler;
 
-//! Main class of the RemoteControl plug-in.
-//! Provides a remote control using a webserver interface, usable for single or even synchronized cluster of clients (via the RemoteSync plugin).
-//! You can either connect via (JavaScript enabled) web browser (recommended in 2016: Firefox, Chrome) to a
-//! configurable port (default: 8080) as in
-//! http://localhost:8080[/index.html]
-//! or for alternative GUI which may be better suited for small 7inch screens,
-//! http://localhost:8080/tablet7in.html
-//! The HTML pages for the interface reside in the /data/webroot directory inside the installation directory.
+//! @defgroup remoteControl Remote Control plug-in
+//! @brief Control Stellarium through your web browser!
+//!
+//! The %RemoteControl plugin provides a remote control using a webserver interface, usable for single or even synchronized cluster of clients (via the RemoteSync plugin).
+//! You can either connect via (JavaScript enabled) web browser (recommended in 2016: <a href="https://mozilla.org/firefox">Firefox</a>, <a href="https://www.google.com/chrome/">Chrome</a>) to a
+//! configurable port (default: 8090) as in
+//! http://localhost:8090[/index.html]
+//! or for alternative GUI which may be better suited for smaller 7inch screens,
+//! http://localhost:8090/tablet7in.html
+//! The web data for the interface resides in the /data/webroot directory inside the installation directory, and can be customized with
+//! some knowledge of HTML, CSS and maybe JavaScript (not necessary for basic functionality, only when more complex additions are required).
 //! Alternative or derived HTML control GUIs must be placed into the same folder,
 //! the web server cannot read data in the private Stellarium user directory.
 //!
-//! The RemoteControl plugin makes extensive use of the StelProperty system introduced with it. This allows not only to trigger actions,
+//! This plugin makes extensive use of the StelProperty system introduced with it. This allows not only to trigger actions,
 //! but also set QVariant values, which is enough to control many things in the program.
 //! A few dedicated modules have been implemented closely following the existing GUI for view motion, location setting,
 //! landscape and skyculture selection, searching objects, etc.
@@ -54,27 +57,39 @@ class RequestHandler;
 //!
 //! It is also possible to send commands via commandline, e.g..
 //! @code
-//! wget -q --post-data 'id=double_stars.ssc' http://localhost:8080/api/scripts/run >/dev/null 2>&amp;1
-//! curl --data 'id=double_stars.ssc' http://localhost:8080/api/scripts/run >/dev/null 2>&amp;1
-//! curl -d     'id=double_stars.ssc' http://localhost:8080/api/scripts/run >/dev/null 2>&amp;1
+//! wget -q --post-data 'id=double_stars.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&amp;1
+//! curl --data 'id=double_stars.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&amp;1
+//! curl -d     'id=double_stars.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&amp;1
 //! @endcode
 //! This allows triggering automatic show setups for museums etc.
 //!
-//! @author Florian Schaukowitsch
-//! This plugin has been developed as project of ESA SoCiS 2015.
+//! @author Florian Schaukowitsch, Georg Zotti
+//! @note This plugin includes parts of the QtWebApp web server by Stefan Frings (http://stefanfrings.de/qtwebapp/index-en.html), used under the LGPL
+//! @note This plugin has been developed as project of ESA SoCiS 2015 (http://sophia.estec.esa.int/socis/)
 //!
 //! TODO: Complete this documentation.
+//! @{
+//!
+
+//! Main class of the %RemoteControl plug-in, implementing the StelModule interface.
+//! Manages the settings and the starting/stopping of the web server.
+//! The RequestHandler class is used for request processing.
+//! @author Florian Schaukowitsch
 class RemoteControl : public StelModule
 {
 	Q_OBJECT
+	//! Determines if the web server is running, and can be used to start/stop the server
 	Q_PROPERTY(bool enabled
 		   READ getFlagEnabled
 		   WRITE setFlagEnabled
 		   NOTIFY flagEnabledChanged)
+	//! If true, the server is automatically started when init() is called
 	Q_PROPERTY(bool autoStart
 		   READ getFlagAutoStart
 		   WRITE setFlagAutoStart
 		   NOTIFY flagAutoStartChanged)
+	//! If true, the password set with setPassword() is required for all requests.
+	//! The password is passed on to the RequestHandler.
 	Q_PROPERTY(bool usePassword
 		   READ getFlagUsePassword
 		   WRITE setFlagUsePassword
@@ -129,7 +144,9 @@ public slots:
 	//! Uses internally loadSettings() and saveSettings().
 	void restoreDefaultSettings();
 
-	//! Starts the HTTP server and begins handling request
+	//! Starts the HTTP server using the current settings and begins handling requests.
+	//! Uses the RequestHandler class for processing.
+	//! @see RequestHandler
 	void startServer();
 	//! Stops the HTTP server
 	void stopServer();
@@ -183,6 +200,8 @@ public:
 	virtual StelModule* getStelModule() const;
 	virtual StelPluginInfo getPluginInfo() const;
 };
+
+//! @}
 
 #endif /*REMOTECONTROL_HPP_*/
 

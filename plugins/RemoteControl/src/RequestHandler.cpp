@@ -68,7 +68,6 @@ private:
 	StelTranslator* rcTranslator;
 };
 
-
 RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QObject* parent) : HttpRequestHandler(parent), usePassword(false)
 {
 	apiController = new APIController(QByteArray("/api/").size(),this);
