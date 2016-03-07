@@ -264,14 +264,16 @@ public slots:
 	//! @return the Declination angle in J2000 frame in decimal degrees.
 	double getViewDecJ2000Angle();
 
-	//! move the current viewing direction to some specified altitude and azimuth
+	//! move the current viewing direction to some specified altitude and azimuth.
+	//! The move will run in AltAz coordinates. This will look different from moveToRaDec() when timelapse is fast.
 	//! angles may be specified in a format recognised by StelUtils::getDecAngle()
 	//! @param alt the altitude angle
 	//! @param azi the azimuth angle
 	//! @param duration the duration of the movement in seconds
 	void moveToAltAzi(const QString& alt, const QString& azi, float duration=1.);
 
-	//! move the current viewing direction to some specified right ascension and declination
+	//! move the current viewing direction to some specified right ascension and declination.
+	//! The move will run in equatorial coordinates. This will look different from moveToAltAzi() when timelapse is fast.
 	//! angles may be specified in a format recognised by StelUtils::getDecAngle()
 	//! @param ra the right ascension angle
 	//! @param dec the declination angle

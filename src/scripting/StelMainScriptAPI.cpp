@@ -1278,7 +1278,6 @@ void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, flo
 {
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	Q_ASSERT(mvmgr);
-	//StelCore* core = StelApp::getInstance().getCore();
 
 	GETSTELMODULE(StelObjectMgr)->unSelect();
 
@@ -1299,9 +1298,7 @@ void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, flo
 	else
 		aimUp=Vec3d(0., 0., 1.);
 
-	mvmgr->moveToJ2000(StelApp::getInstance().getCore()->altAzToJ2000(aim, StelCore::RefractionOff), aimUp, duration);
-	// Last chance for avoiding a new call?
-	//mvmgr->moveToAltAzi(aim, aimUp, duration);
+	mvmgr->moveToAltAzi(aim, aimUp, duration);
 }
 
 void StelMainScriptAPI::moveToRaDec(const QString& ra, const QString& dec, float duration)
