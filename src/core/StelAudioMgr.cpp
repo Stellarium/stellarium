@@ -112,6 +112,35 @@ void StelAudioMgr::dropSound(const QString& id)
 	}
 }
 
+
+qint64 StelAudioMgr::position(const QString& id)
+{
+	if (!audioObjects.contains(id))
+	{
+		qDebug() << "StelAudioMgr: Cannot report position for sound, " << id << "not loaded.";
+		return(-1);
+	}
+	if (audioObjects[id]!=NULL)
+	{
+		return audioObjects[id]->position();
+	}
+	return (-1);
+}
+
+qint64 StelAudioMgr::duration(const QString& id)
+{
+	if (!audioObjects.contains(id))
+	{
+		qDebug() << "StelAudioMgr: Cannot report duration for sound, " << id << "not loaded.";
+		return(-1);
+	}
+	if (audioObjects[id]!=NULL)
+	{
+		return audioObjects[id]->duration();
+	}
+	return (-1);
+}
+
 #else 
 void StelAudioMgr::loadSound(const QString& filename, const QString& id)
 {
@@ -123,4 +152,6 @@ void StelAudioMgr::playSound(const QString&) {;}
 void StelAudioMgr::pauseSound(const QString&) {;}
 void StelAudioMgr::stopSound(const QString&) {;}
 void StelAudioMgr::dropSound(const QString&) {;}
+qint64 StelAudioMgr::position(const QString&){return -1;}
+qint64 StelAudioMgr::duration(const QString&){return -1;}
 #endif

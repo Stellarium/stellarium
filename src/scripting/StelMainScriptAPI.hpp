@@ -587,6 +587,17 @@ public slots:
 	//! @param id the identifier used when loadSound was called
 	void dropSound(const QString& id);
 
+	//! Get position in a playing sound.
+	//! @param id the identifier used when loadSound was called
+	//! @return position [ms] during play or pause, 0 when stopped, -1 in case of error.
+	qint64 getSoundPosition(const QString& id);
+
+	//! Get duration of a sound object (if possible).
+	//! @param id the identifier used when loadSound was called
+	//! @return duration[ms] if known, 0 if unknown (e.g. during load/before playing), -1 in case of error.
+	qint64 getSoundDuration(const QString& id);
+
+
 	//! Load a video from a file.
 	//! @param filename the name of the file to load, relative to the scripts directory.
 	//! @param id the identifier which will be used to refer to the video
