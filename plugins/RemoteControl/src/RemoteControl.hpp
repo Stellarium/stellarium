@@ -37,7 +37,33 @@ class RequestHandler;
 
 //! Main class of the RemoteControl plug-in.
 //! Provides a remote control using a webserver interface, usable for single or even synchronized cluster of clients (via the RemoteSync plugin).
-//! This plugin has been developed during ESA SoCiS 2015.
+//! You can either connect via (JavaScript enabled) web browser (recommended in 2016: Firefox, Chrome) to a
+//! configurable port (default: 8080) as in
+//! http://localhost:8080[/index.html]
+//! or for alternative GUI which may be better suited for small 7inch screens,
+//! http://localhost:8080/tablet7in.html
+//! The HTML pages for the interface reside in the /data/webroot directory inside the installation directory.
+//! Alternative or derived HTML control GUIs must be placed into the same folder,
+//! the web server cannot read data in the private Stellarium user directory.
+//!
+//! The RemoteControl plugin makes extensive use of the StelProperty system introduced with it. This allows not only to trigger actions,
+//! but also set QVariant values, which is enough to control many things in the program.
+//! A few dedicated modules have been implemented closely following the existing GUI for view motion, location setting,
+//! landscape and skyculture selection, searching objects, etc.
+//! It is possible to define simple action or property control interfaces which are only shown for activated plugins.
+//!
+//! It is also possible to send commands via commandline, e.g..
+//! @code
+//! wget -q --post-data 'id=double_stars.ssc' http://localhost:8080/api/scripts/run >/dev/null 2>&amp;1
+//! curl --data 'id=double_stars.ssc' http://localhost:8080/api/scripts/run >/dev/null 2>&amp;1
+//! curl -d     'id=double_stars.ssc' http://localhost:8080/api/scripts/run >/dev/null 2>&amp;1
+//! @endcode
+//! This allows triggering automatic show setups for museums etc.
+//!
+//! @author Florian Schaukowitsch
+//! This plugin has been developed as project of ESA SoCiS 2015.
+//!
+//! TODO: Complete this documentation.
 class RemoteControl : public StelModule
 {
 	Q_OBJECT
