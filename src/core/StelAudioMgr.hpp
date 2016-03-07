@@ -46,6 +46,11 @@ public slots:
 	void stopSound(const QString& id);
 	//! remove audio object from memory. Prints warning to logfile if id not found.
 	void dropSound(const QString& id);
+	//! report position (in ms) in running audio track id, or -1 if this is not possible.
+	qint64 position(const QString& id);
+	//! report duration (in ms) in running audio track id, 0 if unknown (before playback starts!), or -1 if this is not possible.
+	//! @note duration may only be detected after playback has started! Call it a second after that.
+	qint64 duration(const QString& id);
 
 private:
 	QMap<QString, QMediaPlayer*> audioObjects;
