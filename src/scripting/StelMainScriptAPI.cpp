@@ -570,6 +570,16 @@ void StelMainScriptAPI::dropSound(const QString& id)
 	emit(requestDropSound(id));
 }
 
+qint64 StelMainScriptAPI::getSoundPosition(const QString& id)
+{
+	return StelApp::getInstance().getStelAudioMgr()->position(id);
+}
+
+qint64 StelMainScriptAPI::getSoundDuration(const QString& id)
+{
+	return StelApp::getInstance().getStelAudioMgr()->duration(id);
+}
+
 void StelMainScriptAPI::loadVideo(const QString& filename, const QString& id, float x, float y, bool show, float alpha)
 {
 	QString path = StelFileMgr::findFile("scripts/" + filename);
