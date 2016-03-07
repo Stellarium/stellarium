@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-04 23:54+0600\n"
+"POT-Creation-Date: 2016-03-06 22:58+0600\n"
 "PO-Revision-Date: 2016-01-10 05:17+0000\n"
 "Last-Translator: SeokHwan Park <mints1324@gmail.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-03-05 05:28+0000\n"
+"X-Launchpad-Export-Date: 2016-03-07 05:25+0000\n"
 "X-Generator: Launchpad (build 17936)\n"
 "Language: ko\n"
 
@@ -1721,7 +1721,7 @@ msgstr "연락처"
 
 #: src/gui/ConfigurationDialog.cpp:871
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
-#: plugins/Oculars/src/gui/OcularDialog.cpp:542
+#: plugins/Oculars/src/gui/OcularDialog.cpp:547
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:408
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
 #: plugins/Novae/src/gui/NovaeDialog.cpp:118
@@ -1736,7 +1736,7 @@ msgstr "버전"
 
 #: src/gui/ConfigurationDialog.cpp:954
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:543
+#: plugins/Oculars/src/gui/OcularDialog.cpp:548
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:120
 #: plugins/Novae/src/gui/NovaeDialog.cpp:119
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
@@ -2116,7 +2116,7 @@ msgstr "OSX 개발자: %1"
 
 #: src/gui/HelpDialog.cpp:317
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
-#: plugins/Oculars/src/gui/OcularDialog.cpp:544
+#: plugins/Oculars/src/gui/OcularDialog.cpp:549
 msgid "Contributors"
 msgstr "도움을 주신 분"
 
@@ -4470,10 +4470,10 @@ msgid "&Paste"
 msgstr "붙여넣기(&P)"
 
 #: src/translations.h:572 src/ui_locationDialogGui.h:432
-#: plugins/Oculars/src/ui_ocularDialog.h:1180
-#: plugins/Oculars/src/ui_ocularDialog.h:1190
-#: plugins/Oculars/src/ui_ocularDialog.h:1197
-#: plugins/Oculars/src/ui_ocularDialog.h:1214
+#: plugins/Oculars/src/ui_ocularDialog.h:1189
+#: plugins/Oculars/src/ui_ocularDialog.h:1199
+#: plugins/Oculars/src/ui_ocularDialog.h:1206
+#: plugins/Oculars/src/ui_ocularDialog.h:1223
 msgid "Delete"
 msgstr "삭제"
 
@@ -5455,7 +5455,7 @@ msgstr "모두"
 msgid "Display no information"
 msgstr "정보 보이지 않음"
 
-#: src/ui_configurationDialog.h:1125 plugins/Oculars/src/Oculars.cpp:2251
+#: src/ui_configurationDialog.h:1125 plugins/Oculars/src/Oculars.cpp:2297
 #: plugins/Observability/src/Observability.cpp:205
 msgid "None"
 msgstr "없음"
@@ -6232,7 +6232,7 @@ msgid "Restore default settings"
 msgstr "기본 설정 복원"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
-#: plugins/Oculars/src/ui_ocularDialog.h:1222
+#: plugins/Oculars/src/ui_ocularDialog.h:1231
 #: plugins/Satellites/src/ui_satellitesDialog.h:793
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
@@ -6265,8 +6265,8 @@ msgstr "지평선을 따라 나침반 방위 표시를 나타냅니다."
 msgid "Compass marks"
 msgstr "나침반 표시"
 
-#: plugins/Oculars/src/Oculars.cpp:81 plugins/Oculars/src/Oculars.cpp:1481
-#: plugins/Oculars/src/ui_ocularDialog.h:1155
+#: plugins/Oculars/src/Oculars.cpp:81 plugins/Oculars/src/Oculars.cpp:1483
+#: plugins/Oculars/src/ui_ocularDialog.h:1160
 msgid "Oculars"
 msgstr "접안렌즈"
 
@@ -6279,216 +6279,216 @@ msgstr ""
 "망원경 접안렌즈를 통해 보는 것처럼 하늘을 보여줍니다. (배율과 시야각만 재현합니다.) 또 센서 프레임과 텔라드 시야를 표시할 수 "
 "있습니다."
 
-#: plugins/Oculars/src/Oculars.cpp:939
+#: plugins/Oculars/src/Oculars.cpp:941
 msgid "Please select an object before switching to ocular view."
 msgstr "접안부 시야로 전환하기 전에 천체를 선택해주세요."
 
-#: plugins/Oculars/src/Oculars.cpp:1049
+#: plugins/Oculars/src/Oculars.cpp:1051
 msgid "&Previous ocular"
 msgstr "이전 접안부(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:1050
+#: plugins/Oculars/src/Oculars.cpp:1052
 msgid "&Next ocular"
 msgstr "다음 접안부(&N)"
 
-#: plugins/Oculars/src/Oculars.cpp:1051
+#: plugins/Oculars/src/Oculars.cpp:1053
 msgid "Select &ocular"
 msgstr "선택된 접안부(&o)"
 
-#: plugins/Oculars/src/Oculars.cpp:1102
+#: plugins/Oculars/src/Oculars.cpp:1104
 msgid "Toggle &crosshair"
 msgstr "십자선 켜기/끄기(&c)"
 
-#: plugins/Oculars/src/Oculars.cpp:1112
+#: plugins/Oculars/src/Oculars.cpp:1114
 msgid "Configure &Oculars"
 msgstr "접안부 설정(&O)"
 
-#: plugins/Oculars/src/Oculars.cpp:1121
+#: plugins/Oculars/src/Oculars.cpp:1123
 msgid "Toggle &CCD"
 msgstr "CCD 켜기/끄기(&C)"
 
-#: plugins/Oculars/src/Oculars.cpp:1129
+#: plugins/Oculars/src/Oculars.cpp:1131
 msgid "Toggle &Telrad"
 msgstr "텔라드 켜기/끄기(&T)"
 
-#: plugins/Oculars/src/Oculars.cpp:1138
+#: plugins/Oculars/src/Oculars.cpp:1140
 msgid "&Previous CCD"
 msgstr "이전 CCD(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:1139
+#: plugins/Oculars/src/Oculars.cpp:1141
 msgid "&Next CCD"
 msgstr "다음 CCD(&N)"
 
-#: plugins/Oculars/src/Oculars.cpp:1140
+#: plugins/Oculars/src/Oculars.cpp:1142
 msgid "&Select CCD"
 msgstr "CCD 선택(&S)"
 
-#: plugins/Oculars/src/Oculars.cpp:1162
+#: plugins/Oculars/src/Oculars.cpp:1164
 msgid "&Rotate CCD"
 msgstr "CCD 회전(&R)"
 
-#: plugins/Oculars/src/Oculars.cpp:1184
+#: plugins/Oculars/src/Oculars.cpp:1186
 msgid "&Reset rotation"
 msgstr "회전 초기화(&R)"
 
-#: plugins/Oculars/src/Oculars.cpp:1482
-#: plugins/Oculars/src/ui_ocularDialog.h:1157
+#: plugins/Oculars/src/Oculars.cpp:1484
+#: plugins/Oculars/src/ui_ocularDialog.h:1162
 msgid "Ocular view"
 msgstr "접안렌즈 시야"
 
-#: plugins/Oculars/src/Oculars.cpp:1498
+#: plugins/Oculars/src/Oculars.cpp:1500
 msgid "Oculars popup menu"
 msgstr "접안렌즈 팝업 메뉴"
 
-#: plugins/Oculars/src/Oculars.cpp:1499
+#: plugins/Oculars/src/Oculars.cpp:1501
 msgid "Show crosshairs"
 msgstr "십자선 보이기"
 
-#: plugins/Oculars/src/Oculars.cpp:1500
+#: plugins/Oculars/src/Oculars.cpp:1502
 msgid "Image sensor frame"
 msgstr "이미지 센서 프레임"
 
-#: plugins/Oculars/src/Oculars.cpp:1501
+#: plugins/Oculars/src/Oculars.cpp:1503
 msgid "Telrad sight"
 msgstr "텔라드 시야"
 
-#: plugins/Oculars/src/Oculars.cpp:1502
+#: plugins/Oculars/src/Oculars.cpp:1504
 msgid "Oculars plugin configuration"
 msgstr "접안렌즈 플러그인 설정"
 
-#: plugins/Oculars/src/Oculars.cpp:1504
+#: plugins/Oculars/src/Oculars.cpp:1506
 msgid "Select next telescope"
 msgstr "다음 망원경 선택"
 
-#: plugins/Oculars/src/Oculars.cpp:1506
+#: plugins/Oculars/src/Oculars.cpp:1508
 msgid "Select previous telescope"
 msgstr "이전 망원경 선택"
 
-#: plugins/Oculars/src/Oculars.cpp:1508
+#: plugins/Oculars/src/Oculars.cpp:1510
 msgid "Select next eyepiece"
 msgstr "다음 접안렌즈 선택"
 
-#: plugins/Oculars/src/Oculars.cpp:1510
+#: plugins/Oculars/src/Oculars.cpp:1512
 msgid "Select previous eyepiece"
 msgstr "이전 접안렌즈 선택"
 
-#: plugins/Oculars/src/Oculars.cpp:1695
+#: plugins/Oculars/src/Oculars.cpp:1697
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1837
+#: plugins/Oculars/src/Oculars.cpp:1885
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:503
 #, qt-format
 msgid "Ocular #%1"
 msgstr "접안렌즈 #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1841
+#: plugins/Oculars/src/Oculars.cpp:1889
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:507
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "접안렌즈 #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1855
+#: plugins/Oculars/src/Oculars.cpp:1903
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:544
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "접안렌즈 초점거리: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1862
+#: plugins/Oculars/src/Oculars.cpp:1910
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:554
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "접안부 aFOV(시야각):%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1873
+#: plugins/Oculars/src/Oculars.cpp:1921
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:584
 #, qt-format
 msgid "Lens #%1"
 msgstr "렌즈 #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1877
+#: plugins/Oculars/src/Oculars.cpp:1925
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:588
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "렌즈 #%1:%2"
 
-#: plugins/Oculars/src/Oculars.cpp:1882
+#: plugins/Oculars/src/Oculars.cpp:1930
 msgid "Lens: none"
 msgstr "렌즈: 없음"
 
-#: plugins/Oculars/src/Oculars.cpp:1915 plugins/Oculars/src/Oculars.cpp:1960
+#: plugins/Oculars/src/Oculars.cpp:1963 plugins/Oculars/src/Oculars.cpp:2008
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:740
 #, qt-format
 msgid "Telescope #%1"
 msgstr "망원경 #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1918
+#: plugins/Oculars/src/Oculars.cpp:1966
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:823
 #, qt-format
 msgid "Magnification: %1"
 msgstr "배율: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1921
+#: plugins/Oculars/src/Oculars.cpp:1969
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:833
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1924
+#: plugins/Oculars/src/Oculars.cpp:1972
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:842
 #, qt-format
 msgid "FOV: %1"
 msgstr "시야각: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1944
+#: plugins/Oculars/src/Oculars.cpp:1992
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:686
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:782
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "범위: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1948
+#: plugins/Oculars/src/Oculars.cpp:1996
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:646
 #, qt-format
 msgid "Sensor #%1"
 msgstr "센서 #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1952
+#: plugins/Oculars/src/Oculars.cpp:2000
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:650
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "센서 #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1965
+#: plugins/Oculars/src/Oculars.cpp:2013
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:744
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "망원경 #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2247
+#: plugins/Oculars/src/Oculars.cpp:2293
 msgid "&Lens"
 msgstr "렌즈(&L)"
 
-#: plugins/Oculars/src/Oculars.cpp:2248
+#: plugins/Oculars/src/Oculars.cpp:2294
 msgid "&Previous lens"
 msgstr "이전 렌즈(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:2249
+#: plugins/Oculars/src/Oculars.cpp:2295
 msgid "&Next lens"
 msgstr "다음 렌즈(&N)"
 
-#: plugins/Oculars/src/Oculars.cpp:2279
+#: plugins/Oculars/src/Oculars.cpp:2325
 msgid "&Telescope"
 msgstr "망원경(&T)"
 
-#: plugins/Oculars/src/Oculars.cpp:2280
+#: plugins/Oculars/src/Oculars.cpp:2326
 msgid "&Previous telescope"
 msgstr "이전 망원경(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:2281
+#: plugins/Oculars/src/Oculars.cpp:2327
 msgid "&Next telescope"
 msgstr "다음 망원경(&N)"
 
@@ -6608,39 +6608,39 @@ msgid "Exit pupil provided by this ocular/lens/telescope combination"
 msgstr ""
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:525
+#: plugins/Oculars/src/gui/OcularDialog.cpp:530
 msgid "tFOV:"
 msgstr ""
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:527
+#: plugins/Oculars/src/gui/OcularDialog.cpp:532
 msgid "Magnification factor:"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:531
-#: plugins/Oculars/src/ui_ocularDialog.h:1182
+#: plugins/Oculars/src/gui/OcularDialog.cpp:536
+#: plugins/Oculars/src/ui_ocularDialog.h:1191
 msgid "aFOV:"
 msgstr "겉보기 시야각:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:532
-#: plugins/Oculars/src/ui_ocularDialog.h:1183
-#: plugins/Oculars/src/ui_ocularDialog.h:1216
+#: plugins/Oculars/src/gui/OcularDialog.cpp:537
+#: plugins/Oculars/src/ui_ocularDialog.h:1192
+#: plugins/Oculars/src/ui_ocularDialog.h:1225
 msgid "Focal length:"
 msgstr "초점거리:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:541
+#: plugins/Oculars/src/gui/OcularDialog.cpp:546
 msgid "Oculars Plug-in"
 msgstr "접안렌즈 플러그인"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:544
+#: plugins/Oculars/src/gui/OcularDialog.cpp:549
 msgid "Barlow lens feature"
 msgstr "바로우 렌즈 부분"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:548
+#: plugins/Oculars/src/gui/OcularDialog.cpp:553
 msgid "Overview"
 msgstr "개요"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:550
+#: plugins/Oculars/src/gui/OcularDialog.cpp:555
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece.  "
 "This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -6650,7 +6650,7 @@ msgstr ""
 "이 플러그인은 당신이 접안렌즈를 통해 볼 수 있는 시야를 재현합니다. 설정에서 접안렌즈와 망원경와 CCD 센서를 추가, 수정 또는 삭제할 "
 "수 있습니다. 맨 처음 시작할 때 몇몇 샘플이 주어집니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:551
+#: plugins/Oculars/src/gui/OcularDialog.cpp:556
 msgid ""
 "You can choose to scale the image you see on the screen.  This is intended "
 "to show you a better comparison of what one eyepiece/telescope combination "
@@ -6664,7 +6664,7 @@ msgstr ""
 "위함입니다. 같은 접안렌즈를 초점거리가 다른 두 망원경에 대면 서로 다른 시야를 가지게 됩니다. 이 때 이미지의 배율이 높으면 버려지는 "
 "화면의 양이 늘어난다는 상반관계가 존재하므로 필요하지 않은 경우에는 사용하지 않는 것을 권합니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:552
+#: plugins/Oculars/src/gui/OcularDialog.cpp:557
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
@@ -6673,7 +6673,7 @@ msgstr ""
 "여러분은 시야에서 십자표시를 켜고 끌 수 있습니다. 이상적으론 이 십자표시가 북쪽으로 정렬되어야 하지만 그렇게 할 수 없었습니다.  "
 "그래서 지금은 화면의 위에 맞춰 정렬됩니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:553
+#: plugins/Oculars/src/gui/OcularDialog.cpp:558
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -6684,218 +6684,222 @@ msgstr ""
 "여러분은 텔라드 파인더를 켜고 끌 수 있습니다; 이 때 접안렌즈로 보고 있지 않은 상태여야 합니다. 이 기능은 중심이 같은 0.5%1, "
 "2.0%1, 4.0%1의 크기의 원을 그려 텔라드(혹은 비슷한) 파인더를 맨눈으로 보았을 때 어떻게 보이는지를 짐작하게 해 줍니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:554
+#: plugins/Oculars/src/gui/OcularDialog.cpp:559
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr "당신이 어떠한 문제를 발견했다면 즉시 알려주세요."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:557
+#: plugins/Oculars/src/gui/OcularDialog.cpp:562
 msgid "Hot Keys"
 msgstr "단축키"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:558
+#: plugins/Oculars/src/gui/OcularDialog.cpp:563
 msgid "The plug-in's key bindings can be edited in the General Tab."
 msgstr "플러그인 단축키는 일반 탭에서 편집할 수 있습니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:572
 #: plugins/Oculars/src/gui/OcularDialog.cpp:577
+#: plugins/Oculars/src/gui/OcularDialog.cpp:582
 msgid "[no key defined]"
 msgstr "[설정된 키가 없습니다]"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:581
+#: plugins/Oculars/src/gui/OcularDialog.cpp:586
 msgid "Switches on/off the ocular overlay."
 msgstr "접안부 오버레이 켜기/끄기"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:585
+#: plugins/Oculars/src/gui/OcularDialog.cpp:590
 msgid "Opens the pop-up navigation menu."
 msgstr "팝업 탐색 메뉴 열기"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1158
+#: plugins/Oculars/src/ui_ocularDialog.h:1163
 msgid "Enable only if an object is selected"
 msgstr "천체를 선택한 경우에만 사용"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1159
-msgid "Scale image circle"
-msgstr "이미지 서클 크기 조정"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1161
+#: plugins/Oculars/src/ui_ocularDialog.h:1165
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
 msgstr "망원경의 구경에 따라 볼 수 있는 천체의 한계등급을 다르게 설정합니다."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1163
+#: plugins/Oculars/src/ui_ocularDialog.h:1167
 msgid "Limit stellar magnitude"
 msgstr "별의 한계등급"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1164
+#: plugins/Oculars/src/ui_ocularDialog.h:1168
+msgid "Scale image circle"
+msgstr "이미지 서클 크기 조정"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1172
+msgid "Use semi-transparent mask"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1173
 msgid "Key mappings"
 msgstr "키 설정"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1165
+#: plugins/Oculars/src/ui_ocularDialog.h:1174
 msgid "Toggle ocular view:"
 msgstr "접안렌즈 시야 켜기/끄기:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1167
+#: plugins/Oculars/src/ui_ocularDialog.h:1176
 msgid "Open pop-up navigation menu:"
 msgstr "팝업 탐색 메뉴 열기:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1168
+#: plugins/Oculars/src/ui_ocularDialog.h:1177
 msgid "Interface"
 msgstr "인터페이스"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1169
+#: plugins/Oculars/src/ui_ocularDialog.h:1178
 msgid "On-screen control panel"
 msgstr "화면상의 컨트롤 패널"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1171
+#: plugins/Oculars/src/ui_ocularDialog.h:1180
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of Stellarium."
 msgstr "시야각을 스텔라리움 시작 시와 똑같게 하려면 체크"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1173
+#: plugins/Oculars/src/ui_ocularDialog.h:1182
 msgid "Restore FOV to initial values"
 msgstr "시야각을 처음 값으로 복구"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1174
+#: plugins/Oculars/src/ui_ocularDialog.h:1183
 msgid "Sensor view"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1175
+#: plugins/Oculars/src/ui_ocularDialog.h:1184
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "CCD 시야각을 도와 분으로 표시"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1176
+#: plugins/Oculars/src/ui_ocularDialog.h:1185
 msgid "Use flip for CCD"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1177
+#: plugins/Oculars/src/ui_ocularDialog.h:1186
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:226
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:432
 msgid "General"
 msgstr "일반"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1178
 #: plugins/Oculars/src/ui_ocularDialog.h:1187
+#: plugins/Oculars/src/ui_ocularDialog.h:1196
 msgid "Eyepieces"
 msgstr "접안렌즈"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1179
-#: plugins/Oculars/src/ui_ocularDialog.h:1189
-#: plugins/Oculars/src/ui_ocularDialog.h:1196
-#: plugins/Oculars/src/ui_ocularDialog.h:1213
+#: plugins/Oculars/src/ui_ocularDialog.h:1188
+#: plugins/Oculars/src/ui_ocularDialog.h:1198
+#: plugins/Oculars/src/ui_ocularDialog.h:1205
+#: plugins/Oculars/src/ui_ocularDialog.h:1222
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:219
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Add"
 msgstr "추가"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1181
-#: plugins/Oculars/src/ui_ocularDialog.h:1191
-#: plugins/Oculars/src/ui_ocularDialog.h:1198
-#: plugins/Oculars/src/ui_ocularDialog.h:1215
+#: plugins/Oculars/src/ui_ocularDialog.h:1190
+#: plugins/Oculars/src/ui_ocularDialog.h:1200
+#: plugins/Oculars/src/ui_ocularDialog.h:1207
+#: plugins/Oculars/src/ui_ocularDialog.h:1224
 #: plugins/Satellites/src/ui_satellitesDialog.h:760
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:234
 msgid "Name:"
 msgstr "이름:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1184
+#: plugins/Oculars/src/ui_ocularDialog.h:1193
 msgid "Field stop:"
 msgstr "시야 조리개:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1185
+#: plugins/Oculars/src/ui_ocularDialog.h:1194
 msgid "Binoculars"
 msgstr "쌍안경"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1186
+#: plugins/Oculars/src/ui_ocularDialog.h:1195
 msgid "Has permanent cross-hairs"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1188
-#: plugins/Oculars/src/ui_ocularDialog.h:1194
+#: plugins/Oculars/src/ui_ocularDialog.h:1197
+#: plugins/Oculars/src/ui_ocularDialog.h:1203
 msgid "Lenses"
 msgstr "렌즈"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1192
+#: plugins/Oculars/src/ui_ocularDialog.h:1201
 msgid "Multiplier:"
 msgstr "배율:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1193
+#: plugins/Oculars/src/ui_ocularDialog.h:1202
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
 msgstr "배율이 1 초과면 초점거리 증가 (바로우 렌즈). 배율이 1 미만이면 초점거리 감소(섀플리 렌즈)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1195
-#: plugins/Oculars/src/ui_ocularDialog.h:1211
+#: plugins/Oculars/src/ui_ocularDialog.h:1204
+#: plugins/Oculars/src/ui_ocularDialog.h:1220
 msgid "Sensors"
 msgstr "센서"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1199
+#: plugins/Oculars/src/ui_ocularDialog.h:1208
 msgid "Resolution x (pixels):"
 msgstr "가로 해상도 (픽셀):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1200
+#: plugins/Oculars/src/ui_ocularDialog.h:1209
 msgid "Resolution y (pixels):"
 msgstr "세로 해상도 (픽셀):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1201
+#: plugins/Oculars/src/ui_ocularDialog.h:1210
 msgid "Chip height (mm):"
 msgstr "칩 높이 (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1202
+#: plugins/Oculars/src/ui_ocularDialog.h:1211
 msgid "Chip width (mm):"
 msgstr "칩 폭 (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1203
+#: plugins/Oculars/src/ui_ocularDialog.h:1212
 msgid "Pixel width (micron):"
 msgstr "픽셀 폭 (마이크론):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1204
+#: plugins/Oculars/src/ui_ocularDialog.h:1213
 msgid "Pixel height (micron):"
 msgstr "픽셀 높이 (마이크론):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1205
+#: plugins/Oculars/src/ui_ocularDialog.h:1214
 msgid "Prism/CCD distance (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1206
+#: plugins/Oculars/src/ui_ocularDialog.h:1215
 msgid "Prism/CCD height (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1207
+#: plugins/Oculars/src/ui_ocularDialog.h:1216
 msgid "Prism/CCD width (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1208
+#: plugins/Oculars/src/ui_ocularDialog.h:1217
 msgid "Position angle (degrees):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1209
+#: plugins/Oculars/src/ui_ocularDialog.h:1218
 msgid "Off-Axis guider"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1210
+#: plugins/Oculars/src/ui_ocularDialog.h:1219
 msgid "Rotation Angle (degrees):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1212
 #: plugins/Oculars/src/ui_ocularDialog.h:1221
+#: plugins/Oculars/src/ui_ocularDialog.h:1230
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
 msgstr "망원경"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1217
+#: plugins/Oculars/src/ui_ocularDialog.h:1226
 msgid "Diameter:"
 msgstr "직경:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1218
+#: plugins/Oculars/src/ui_ocularDialog.h:1227
 msgid "Horizontal flip"
 msgstr "좌우 반전"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1219
+#: plugins/Oculars/src/ui_ocularDialog.h:1228
 msgid "Vertical flip"
 msgstr "상하 반전"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1220
+#: plugins/Oculars/src/ui_ocularDialog.h:1229
 msgid "Equatorial Mount"
 msgstr ""
 
