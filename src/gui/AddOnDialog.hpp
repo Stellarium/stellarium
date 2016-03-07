@@ -45,9 +45,6 @@ public:
 
 public slots:
 	void retranslate();
-	void updateCatalog();
-	void slotAddonSelected(AddOn* addon);
-	void slotAbout();
 
 protected:
 	Ui_addonDialogForm* ui;
@@ -62,7 +59,8 @@ private slots:
 	void installFromFile();
 	void slotCheckedRows();
 	void populateTables();
-
+	void slotAddonSelected(AddOn* addon);
+	void slotAbout();
 private:
 	AddOnAboutDialog* m_pAboutDialog;
 

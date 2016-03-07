@@ -46,11 +46,12 @@ public:
 	//! @return true if it's in the queue
 	bool isDownloading(AddOn* addon);
 
-	//! Update catalog of add-ons.
-	void updateCatalog();
-
 signals:
 	void updateTableViews();
+
+public slots:
+	//! Update catalog of add-ons.
+	void updateCatalog();
 
 private slots:
 	//! Slot for readyRead() signal, which is emitted once

@@ -71,7 +71,7 @@ void AddOnDialog::createDialogContent()
 
 	// catalog updates
 	ui->txtLastUpdate->setText(StelApp::getInstance().getStelAddOnMgr().getLastUpdateString());
-	connect(ui->btnUpdate, SIGNAL(clicked()), this, SLOT(updateCatalog()));
+	connect(ui->btnUpdate, SIGNAL(clicked()), StelApp::getInstance().getStelAddOnMgr().getDownloadMgr(), SLOT(updateCatalog()));
 
 	// setting up tabs
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)),
@@ -116,7 +116,7 @@ void AddOnDialog::createDialogContent()
 	}
 	if (uf == StelAddOnMgr::ON_STARTUP)
 	{
-		updateCatalog();
+		StelApp::getInstance().getStelAddOnMgr().getDownloadMgr()->updateCatalog();
 	}
 
 	connect(ui->updateFrequency, SIGNAL(currentIndexChanged(int)), this, SLOT(updateFrequencyChanged(int)));
@@ -225,11 +225,6 @@ void AddOnDialog::populateTables()
 	ui->browser->clear();
 	slotUpdateButton();
 	updateTabBarListWidgetWidth();
-}
-
-void AddOnDialog::updateCatalog()
-{
-	StelApp::getInstance().getStelAddOnMgr().getDownloadMgr()->updateCatalog();
 }
 
 void AddOnDialog::installFromFile()
