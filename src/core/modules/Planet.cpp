@@ -1202,7 +1202,6 @@ void Planet::PlanetShaderVars::initLocations(QOpenGLShaderProgram* p)
 	GL(shadowData = p->uniformLocation("shadowData"));
 	GL(sunInfo = p->uniformLocation("sunInfo"));
 	GL(skyBrightness = p->uniformLocation("skyBrightness"));
-	GL(shadowCanBeUsed = p->uniformLocation("shadowCanBeUsed"));
 }
 
 void Planet::initShader()
@@ -1255,7 +1254,6 @@ void Planet::initShader()
 		"\n"
 		"uniform int shadowCount;\n"
 		"uniform highp mat4 shadowData;\n"
-		"uniform bool shadowCanBeUsed;\n"
 		"\n"
 		"#ifdef RINGS_SUPPORT\n"
 		"uniform bool ring;\n"
@@ -1315,7 +1313,7 @@ void Planet::initShader()
 		"        highp float R = asin(sunRadius / L);\n"
 		"        for (int i = 0; i < 4; ++i)\n"
 		"        {\n"
-		"            if (shadowCount>i && shadowCanBeUsed)\n"
+		"            if (shadowCount>i)\n"
 		"            {\n"
 		"                highp vec3 satellitePosition = shadowData[i].xyz;\n"
 		"                highp float satelliteRadius = shadowData[i].w;\n"
@@ -1797,14 +1795,6 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	LandscapeMgr* lmgr=GETSTELMODULE(LandscapeMgr);
 	Q_ASSERT(lmgr);
 
-	// Don't use shadows when GLSL is lesser 1.30!
-	QString glslString(reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION)));
-	QRegExp glslRegExp("^(\\d\\.\\d\\d)");
-	glslRegExp.exactMatch(glslString);
-	float glslVersion=glslRegExp.cap(0).toFloat();
-	bool shadowFlag = true;
-	if (glslVersion<1.3f)
-		shadowFlag = false;
 
 	GL(shader->setUniformValue(shaderVars->projectionMatrix, qMat));
 	GL(shader->setUniformValue(shaderVars->lightDirection, lightPos3[0], lightPos3[1], lightPos3[2]));
@@ -1817,7 +1807,6 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	GL(shader->setUniformValue(shaderVars->sunInfo, mTarget[12], mTarget[13], mTarget[14], ssm->getSun()->getRadius()));
 	GL(texMap->bind(1));
 	GL(shader->setUniformValue(shaderVars->skyBrightness, lmgr->getLuminance()));
-	GL(shader->setUniformValue(shaderVars->shadowCanBeUsed, shadowFlag));
 
 	
 	if (rings!=NULL)
