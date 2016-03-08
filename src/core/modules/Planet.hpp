@@ -378,7 +378,6 @@ protected:
 		int shadowData;
 		int sunInfo;
 		int skyBrightness;
-		int shadowCanBeUsed;
 		
 		void initLocations(QOpenGLShaderProgram*);
 	};
