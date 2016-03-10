@@ -61,6 +61,7 @@ private slots:
 	void populateTables();
 	void slotAddonSelected(AddOn* addon);
 	void slotAbout();
+
 private:
 	AddOnAboutDialog* m_pAboutDialog;
 

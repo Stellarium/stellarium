@@ -268,7 +268,7 @@ void StelAddOnMgr::installAddOn(AddOn* addon, bool tryDownload)
 			   << "The file found is not a .zip archive";
 	}
 	// checking integrity
-	else if (addon->getChecksum() != calculateMd5(file))
+	else if (addon->getType() != AddOn::ADDON_CATALOG && addon->getChecksum() != calculateMd5(file))
 	{
 		addon->setStatus(AddOn::Corrupted);
 		qWarning() << "[Add-on] Error: File "

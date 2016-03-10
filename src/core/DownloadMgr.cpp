@@ -202,44 +202,21 @@ void DownloadMgr::checkInterval()
 
 void DownloadMgr::updateCatalog()
 {
-	// TO DO
+	QString key = "addons";
+	AddOn* catalog = m_pMgr->getAddonsInstalled().value(key);
+	if (catalog == NULL)
+	{
+		catalog = m_pMgr->getAddonsToUpdate().value(key);
+		if (catalog == NULL)
+		{
+			catalog = m_pMgr->getAddonsAvailable().value(key);
+			if (catalog == NULL)
+			{
+				qWarning() << "[Add-on] unable to find an url to perform the catalog update!";
+				return;
+			}
+		}
+	}
+	download(catalog);
+	m_pMgr->setLastUpdate(QDateTime::currentDateTime());
 }
-
-/*
-void AddOnDialog::downloadFinished(QNetworkReply* reply)
-{
-	if (m_progressBar)
-	{
-		m_progressBar->setValue(100);
-		StelApp::getInstance().removeProgressBar(m_progressBar);
-		m_progressBar = NULL;
-	}
-
-	QByteArray result(reply->readAll());
-	if (reply->error() != QNetworkReply::NoError || result.isEmpty())
-	{
-		qWarning() << "[Add-on] unable to download file!" << reply->url();
-		qWarning() << "[Add-on] download error:" << reply->errorString();
-		ui->txtLastUpdate->setText(q_("Database update failed!"));
-		return;
-	}
-
-	QFile file(StelApp::getInstance().getStelAddOnMgr().getAddonJsonPath());
-	file.remove(); // overwrite
-	if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
-	{
-		qWarning() << "[Add-on] unable to open a temporary file!";
-		ui->txtLastUpdate->setText(q_("Database update failed!"));
-		return;
-	}
-
-	file.write(result);
-	file.close();
-
-	StelApp::getInstance().getStelAddOnMgr().reloadCatalogues();
-	StelApp::getInstance().getStelAddOnMgr().setLastUpdate(QDateTime::currentDateTime());
-	ui->txtLastUpdate->setText(StelApp::getInstance().getStelAddOnMgr().getLastUpdateString());
-	populateTables();
-	ui->btnUpdate->setEnabled(true);
-}
-*/

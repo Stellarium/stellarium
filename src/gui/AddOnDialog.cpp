@@ -70,7 +70,6 @@ void AddOnDialog::createDialogContent()
 	populateTables();
 
 	// catalog updates
-	ui->txtLastUpdate->setText(StelApp::getInstance().getStelAddOnMgr().getLastUpdateString());
 	connect(ui->btnUpdate, SIGNAL(clicked()), StelApp::getInstance().getStelAddOnMgr().getDownloadMgr(), SLOT(updateCatalog()));
 
 	// setting up tabs
@@ -225,6 +224,7 @@ void AddOnDialog::populateTables()
 	ui->browser->clear();
 	slotUpdateButton();
 	updateTabBarListWidgetWidth();
+	ui->txtLastUpdate->setText(StelApp::getInstance().getStelAddOnMgr().getLastUpdateString());
 }
 
 void AddOnDialog::installFromFile()
