@@ -110,7 +110,7 @@ private:
 
 	QHash<QString, AddOn*> loadAddonCatalog(QString jsonPath) const;
 	void restoreDefaultAddonJsonFile();
-	void insertAddonInJson(AddOn* addon, QString jsonPath);
+	void addonToJson(AddOn* addon, QString jsonPath);
 	void removeAddonFromJson(AddOn* addon, QString jsonPath);
 
 	void unzip(AddOn& addon);

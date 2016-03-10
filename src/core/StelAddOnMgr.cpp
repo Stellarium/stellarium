@@ -234,7 +234,7 @@ void StelAddOnMgr::installAddOnFromFile(QString filePath)
 		installAddOn(addon, false);
 		if (addon->getStatus() == AddOn::FullyInstalled)
 		{
-			insertAddonInJson(addon, m_sUserAddonJsonPath);
+			addonToJson(addon, m_sUserAddonJsonPath);
 			m_addonsInstalled.insert(addon->getAddOnId(), addon);
 		}
 	}
@@ -491,10 +491,10 @@ void StelAddOnMgr::unzip(AddOn& addon)
 	}
 	installedFiles.removeDuplicates();
 	addon.setInstalledFiles(installedFiles);
-	insertAddonInJson(&addon, m_sInstalledAddonsJsonPath);
+	addonToJson(&addon, m_sInstalledAddonsJsonPath);
 }
 
-void StelAddOnMgr::insertAddonInJson(AddOn* addon, QString jsonPath)
+void StelAddOnMgr::addonToJson(AddOn* addon, QString jsonPath)
 {
 	QFile jsonFile(jsonPath);
 	if (jsonFile.open(QIODevice::ReadWrite))
