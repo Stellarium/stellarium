@@ -81,7 +81,7 @@ public:
 	QString getTypeDisplayRole() { return m_sTypeDisplayRole; }
 	int getVersion() { return m_iVersion; }
 	QDate getDate() { return m_dDate; }
-	QList<Authors> getAuthors() { return m_authors; }
+	QList<Authors> getAuthors() { return m_lAuthors; }
 	QString getDescription() { return m_sDescription; }
 	QString getLicenseName() { return m_sLicense; }
 	QString getLicenseURL() { return m_sLicenseURL; }
@@ -91,16 +91,20 @@ public:
 	QString getDownloadURL() { return m_sDownloadURL; }
 	QString getChecksum() { return m_sChecksum; }
 
-	//! Get path to the zip archive.
+	//! Get path to the zip archive
 	//! @return path
 	QString getZipPath() { return m_sZipPath; }
+
+	//! Convert this AddOn object back to a QVariantMap
+	//! @return map
+	QVariantMap getMap();
 
 	Status getStatus() { return m_eStatus; }
 	QString getStatusString();
 	void setStatus(Status status) { m_eStatus = status; }
-	QStringList getAllTextures() { return m_AllTextures; }
-	void setInstalledFiles(QStringList installedFiles) { m_InstalledFiles = installedFiles; }
-	QStringList getInstalledFiles() { return m_InstalledFiles; }
+	QStringList getAllTextures() { return m_lAllTextures; }
+	void setInstalledFiles(QStringList installedFiles) { m_lInstalledFiles = installedFiles; }
+	QStringList getInstalledFiles() { return m_lInstalledFiles; }
 
 private:
 	QString m_sAddonId;
@@ -111,7 +115,7 @@ private:
 	QString m_sDescription;
 	int m_iVersion;
 	QDate m_dDate;
-	QStringList m_supported;
+	QStringList m_lSupported;
 	QString m_sLanguage;
 	QString m_sLastStel;
 	QString m_sLicense;
@@ -121,9 +125,9 @@ private:
 	float m_fDownloadSize;
 	QString m_sDownloadSize;
 	QString m_sChecksum;
-	QList<Authors> m_authors;
-	QStringList m_AllTextures;
-	QStringList m_InstalledFiles;
+	QList<Authors> m_lAuthors;
+	QStringList m_lAllTextures;
+	QStringList m_lInstalledFiles;
 	QString m_sZipPath;
 
 	bool m_bIsValid;

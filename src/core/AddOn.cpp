@@ -45,23 +45,18 @@ AddOn::AddOn(const QString addonId, const QVariantMap& map)
 	}
 
 	m_sTitle = map.value("title").toString();
-	m_sDescription = map.value("description").toString();
-	m_iVersion = map.value("version").toInt();
 	m_dDate = map.value("date").toDate();
-	m_supported = map.value("supported").toStringList();
+	m_sDescription = map.value("description").toString();
+	m_lSupported = map.value("supported").toStringList();
 	m_sLicense = map.value("license").toString();
 	m_sLicenseURL = map.value("license-url").toString();
-	m_sDownloadURL = map.value("download-url").toString();
+
+	m_sChecksum = map.value("checksum").toString();
 	m_sDownloadFilename = map.value("download-filename").toString();
 	m_fDownloadSize = map.value("download-size").toFloat();
-	m_sChecksum = map.value("checksum").toString();
+	m_sDownloadURL = map.value("download-url").toString();
 
-	// specific field for scripts
-	m_sLanguage = map.value("language").toString();
-
-	// specific fields in 'installed_addons.json'
-	m_InstalledFiles = map.value("installed-files").toStringList();
-	m_eStatus = (AddOn::Status) map.value("status").toInt();
+	m_iVersion = map.value("version").toInt();
 
 	// early returns if the mandatory fields are not present
 	if (m_sTitle.isEmpty() || m_sDescription.isEmpty() || m_dDate.isNull() || m_sDownloadFilename.isEmpty())
@@ -73,7 +68,7 @@ AddOn::AddOn(const QString addonId, const QVariantMap& map)
 	}
 
 	// checking compatibility
-	if (!m_supported.isEmpty() && !m_supported.contains(StelUtils::getApplicationSeries()))
+	if (!m_lSupported.isEmpty() && !m_lSupported.contains(StelUtils::getApplicationSeries()))
 	{
 		qWarning() << "[Add-on] Error! Add-on" << m_sAddonId << "is not supported!";
 		return;
@@ -81,35 +76,44 @@ AddOn::AddOn(const QString addonId, const QVariantMap& map)
 
 	m_sDownloadSize = fileSizeToString(m_fDownloadSize);
 
-	if (m_eType == TEXTURE)
+	if (m_eType == SCRIPT)
 	{
-		m_AllTextures = map.value("textures").toString().split(",").toSet().toList();
+		m_sLanguage = map.value("language").toString();
+	}
+	else if (m_eType == TEXTURE)
+	{
+		m_lAllTextures = map.value("textures").toString().split(",").toSet().toList();
 		// a texture must have "textures"
-		if (m_AllTextures.isEmpty())
+		if (m_lAllTextures.isEmpty())
 		{
 			qWarning() << "[Add-on] Error! Texture" << m_sAddonId
 				   << "does not have the field \"textures\"!";
 			return;
 		}
-		for (int i=0; i < m_AllTextures.size(); i++) {
-			m_AllTextures[i] = StelFileMgr::getUserDir() % "/textures/" % m_AllTextures[i];
+		for (int i=0; i < m_lAllTextures.size(); i++) {
+			m_lAllTextures[i] = StelFileMgr::getUserDir() % "/textures/" % m_lAllTextures[i];
 		}
 	}
 
 	if (map.contains("authors"))
 	{
-		foreach (const QVariant& author, map.value("authors").toList())
+		QVariantList list = map.value("authors").toList();
+		foreach (const QVariant& author, list)
 		{
 			QVariantMap authors = author.toMap();
 			Authors a;
 			a.name = authors.value("name").toString();
 			a.email = authors.value("email").toString();
 			a.url = authors.value("url").toString();
-			m_authors.append(a);
+			m_lAuthors.append(a);
 		}
 	}
 
 	m_sZipPath = StelFileMgr::getAddonDir() % QDir::separator() % m_sDownloadFilename;
+
+	// specific fields in 'installed_addons.json'
+	m_lInstalledFiles = map.value("installed-files").toStringList();
+	m_eStatus = (AddOn::Status) map.value("status").toInt();
 
 	m_bIsValid = true;
 }
@@ -118,7 +122,51 @@ AddOn::~AddOn()
 {
 }
 
-QString AddOn::getStatusString() {
+QVariantMap AddOn::getMap()
+{
+	QVariantMap map;
+	map.insert("type", m_sType);
+	map.insert("title", m_sTitle);
+	map.insert("date", m_dDate.toString("yyyy.MM.dd"));
+	map.insert("description", m_sDescription);
+	map.insert("supported", m_lSupported);
+	map.insert("license", m_sLicense);
+	map.insert("license-url", m_sLicenseURL);
+
+	map.insert("checksum", m_sChecksum);
+	map.insert("download-filename", m_sDownloadFilename);
+	map.insert("download-size", m_fDownloadSize);
+	map.insert("download-url", m_sDownloadURL);
+
+	map.insert("version", m_iVersion);
+
+	QVariantList authors;
+	foreach (AddOn::Authors a, m_lAuthors)
+	{
+		QVariantMap author;
+		author.insert("name", a.name);
+		author.insert("email", a.email);
+		author.insert("url", a.url);
+		authors.append(author);
+	}
+	map.insert("authors", authors);
+
+	if (m_eType == SCRIPT)
+	{
+		m_sLanguage = map.value("language").toString();
+	}
+
+	if (!m_lInstalledFiles.isEmpty())
+	{
+		map.insert("installed-files", m_lInstalledFiles);
+	}
+	map.insert("status", m_eStatus);
+
+	return map;
+}
+
+QString AddOn::getStatusString()
+{
 	switch (m_eStatus)
 	{
 		case PartiallyInstalled:
