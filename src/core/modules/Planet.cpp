@@ -1549,8 +1549,20 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		sPainter=NULL;
 	}
 
+	bool allowDrawHalo = true;
+	if (this!=ssm->getSun())
+	{
+		// Let's hide halo when inner planet between Sun and observer (or moon between planet and observer)
+		Vec3d obj = getJ2000EquatorialPos(core);
+		Vec3d par = getParent()->getJ2000EquatorialPos(core);
+		double angle = obj.angle(par)*180.f/M_PI;
+		double asize = getParent()->getAngularSize(core);
+		if (angle<=asize)
+			allowDrawHalo = false;
+	}
+
 	// Draw the halo if it enabled in the ssystem.ini file (+ special case for backward compatible for the Sun)
-	if (hasHalo() || this==ssm->getSun())
+	if ((hasHalo() || this==ssm->getSun()) && allowDrawHalo)
 	{
 		// Prepare openGL lighting parameters according to luminance
 		float surfArcMin2 = getSpheroidAngularSize(core)*60;
