@@ -1556,7 +1556,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		Vec3d obj = getJ2000EquatorialPos(core);
 		Vec3d par = getParent()->getJ2000EquatorialPos(core);
 		double angle = obj.angle(par)*180.f/M_PI;
-		double asize = getParent()->getAngularSize(core);
+		double asize = getParent()->getSpheroidAngularSize(core);
 		if (angle<=asize)
 			allowDrawHalo = false;
 	}
