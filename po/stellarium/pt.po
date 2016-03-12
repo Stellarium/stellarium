@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-03-06 22:58+0600\n"
-"PO-Revision-Date: 2016-02-26 18:02+0000\n"
-"Last-Translator: Ricardo Sousa <Unknown>\n"
+"PO-Revision-Date: 2016-03-12 04:42+0000\n"
+"Last-Translator: Tiago S. <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-03-07 05:29+0000\n"
-"X-Generator: Launchpad (build 17936)\n"
+"X-Launchpad-Export-Date: 2016-03-12 05:19+0000\n"
+"X-Generator: Launchpad (build 17939)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:904 src/core/modules/LandscapeMgr.cpp:414
@@ -3800,7 +3800,7 @@ msgstr "Sérvia e Montenegro"
 
 #: src/translations.h:371
 msgid "Montenegro"
-msgstr ""
+msgstr "Montenegro"
 
 #: src/translations.h:372
 msgid "Cuba"
@@ -5917,7 +5917,7 @@ msgstr "Coordenadas topocêntricas"
 
 #: src/ui_configurationDialog.h:1257
 msgid "Activate this option to calculate azimuth from south towards west."
-msgstr ""
+msgstr "Ativar esta opção para calcular o azimute do Sul para Oeste."
 
 #: src/ui_configurationDialog.h:1259
 msgid "Azimuth from South"
@@ -6955,7 +6955,7 @@ msgstr "Aumentar a escala do círculo da imagem"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1172
 msgid "Use semi-transparent mask"
-msgstr ""
+msgstr "Utilizar máscara semi-transparente"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1173
 msgid "Key mappings"
@@ -9868,16 +9868,20 @@ msgid ""
 "From the latin <em>Veritas</em>, truth. The ablative form means <em>where "
 "there is truth</em>."
 msgstr ""
+"Do latim <em>Veritas</em>, verdade. A forma ablativa significa <em>onde "
+"existe verdade</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
 msgid ""
 "From the latin <em>Spes</em>, hope. The ablative form means <em>where there "
 "is hope</em>."
 msgstr ""
+"Do latim <em>Spes</em>, esperança. A forma ablativa significa <em>onde "
+"existe esperança</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
 msgid "Musica is Latin for <em>music</em>."
-msgstr ""
+msgstr "Musica é a forma em latim para <em>música</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
 msgid ""
@@ -9923,6 +9927,8 @@ msgid ""
 "Dimidium is Latin for <em>half</em>, referring to the planet's mass of at "
 "least half the mass of Jupiter."
 msgstr ""
+"Dimidium é latim para <em>metade</em>, em referência à massa do planeta ser "
+"pelo menos metade da masse de Júpiter."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
 msgid ""
@@ -10172,7 +10178,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
 msgid "<em>Ogmios</em> is a name already attributed to an asteroid."
-msgstr ""
+msgstr "<em>Ogmios</em> é um nome já atribuído a um asteróide."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
 msgid ""
@@ -10211,11 +10217,11 @@ msgstr "Índice de similaridade com a Terra"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
 msgid "Final Results of NameExoWorlds Public Vote Released"
-msgstr ""
+msgstr "Resultados Finais da Votação Pública em NameExoWorlds"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
 msgid "NameExoWorlds website"
-msgstr ""
+msgstr "Website NameExoWorlds"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
 msgid "General professional Web sites relevant to extrasolar planets"
@@ -10305,27 +10311,27 @@ msgstr "Os exoplanetas estão actualizados"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:491
 msgid "Orbital Eccentricity"
-msgstr ""
+msgstr "Excentricidade Orbital"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:492
 msgid "Orbit Semi-Major Axis, AU"
-msgstr ""
+msgstr "Eixo Semi-Maior da Orbita, AU"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:493
 msgid "Planetary Mass, Mjup"
-msgstr ""
+msgstr "Massa Planetária, Mjup"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:494
 msgid "Planetary Radius, Rjup"
-msgstr ""
+msgstr "Raio Planetário, Rjup"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:495
 msgid "Orbital Period, days"
-msgstr ""
+msgstr "Período Orbital, dias"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:496
 msgid "Angular Distance, arcsec."
-msgstr ""
+msgstr "Distância Ângular, arcsec"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:456
 msgid "Exoplanets Configuration"
@@ -10377,44 +10383,44 @@ msgstr "Mostrar o botão de exoplanetas na barra de ferramentas"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:483
 msgid "Diagrams: scatter plot"
-msgstr ""
+msgstr "Diagrama: gráfico de dispersão"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:484
 msgid "Plot"
-msgstr ""
+msgstr "Gráfico"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:485
 msgid "Y axis"
-msgstr ""
+msgstr "Eixo Y"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:487
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:494
 msgid "Logarithmic scale"
-msgstr ""
+msgstr "Escala logarítmica"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:489
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:496
 msgid "log scale"
-msgstr ""
+msgstr "Escala log"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:490
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:498
 msgid "min"
-msgstr ""
+msgstr "mín"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:491
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:499
 msgid "max"
-msgstr ""
+msgstr "máx"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:492
 msgid "X axis"
-msgstr ""
+msgstr "Eixo X"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:500
 msgctxt "tab in plugin windows"
 msgid "Diagram"
-msgstr ""
+msgstr "Diagrama"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:501
 msgctxt "tab in plugin windows"
