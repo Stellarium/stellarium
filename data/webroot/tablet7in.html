@@ -659,11 +659,22 @@
       </div>
     </div>
     <!-- main buttons under the tabs -->
-    <!-- part of ui/actions.js -->
-    <ul id="autobuttons" class="ui-corner-all ui-widget-content button32list margin-block">
+    <ul class="ui-corner-all ui-widget-content button32list margin-vertical">
+      <li><button class="stelaction icon32 btConstellationLines" name="actionShow_Constellation_Lines"></button></li>
+      <li><button class="stelaction icon32 btConstellationLabels" name="actionShow_Constellation_Labels"></button></li>
+      <li><button class="stelaction icon32 btConstellationArt" name="actionShow_Constellation_Art"></button></li>
+      <li><button class="stelaction icon32 btEquatorialGrid" name="actionShow_Equatorial_Grid"></button></li>
+      <li><button class="stelaction icon32 btAzimuthalGrid" name="actionShow_Azimuthal_Grid"></button></li>
+      <li><button class="stelaction icon32 btGround" name="actionShow_Ground"></button></li>
+      <li><button class="stelaction icon32 btCardinalPoints" name="actionShow_Cardinal_Points"></button></li>
+      <li><button class="stelaction icon32 btAtmosphere" name="actionShow_Atmosphere"></button></li>
+      <li><button class="stelaction icon32 btNebula" name="actionShow_Nebulas"></button></li>
+      <li><button class="stelaction icon32 btPlanets" name="actionShow_Planets_Labels"></button></li>
+      <li><button class="stelaction icon32 btEquatorialMount" name="actionSwitch_Equatorial_Mount"></button></li>
+      <li><button class="stelaction icon32 btGotoSelectedObject" name="actionSet_Tracking"></button></li>
+      <li><button class="stelaction icon32 btNightView" name="actionShow_Night_Mode"></button></li>
+      <li><button class="stelaction icon32 btFullScreen" name="actionSet_Full_Screen_Global"></button></li>
     </ul>
-
-
   </div>
   <!-- handled by mainui.js -->
   <div id="noresponse" title='<?= tr("No response from server")?>'>
