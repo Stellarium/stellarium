@@ -1873,6 +1873,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 		
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.isRing, true));
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.texture, 2));
+		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.ringS, 1));
 		
 		computeModelMatrix(modelMatrix);
 		const Vec4d position = mTarget * modelMatrix.getColumn(3);
