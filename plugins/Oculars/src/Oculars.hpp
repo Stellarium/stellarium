@@ -152,6 +152,9 @@ public slots:
 	void setFlagUseFlipForCCD(const bool b);
 	bool getFlagUseFlipForCCD(void) const;
 
+	void setFlagUseSemiTransparency(const bool b);
+	bool getFlagUseSemiTransparency(void) const;
+
 signals:
 	void selectedCCDChanged();
 	void selectedOcularChanged();
@@ -266,6 +269,7 @@ private:
 	//! Display the GUI control panel
 	bool guiPanelEnabled;
 	bool flagDecimalDegrees;
+	bool flagSemiTransporency;
 
 	QSignalMapper * ccdRotationSignalMapper;  //!< Used to rotate the CCD. */
 	QSignalMapper * ccdsSignalMapper; //!< Used to determine which CCD was selected from the popup navigator. */

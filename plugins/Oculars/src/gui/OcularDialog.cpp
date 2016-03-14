@@ -354,6 +354,7 @@ void OcularDialog::createDialogContent()
 	connect(ui->scaleImageCircleCheckBox, SIGNAL(stateChanged(int)), this, SLOT(scaleImageCircleStateChanged(int)));
 	connect(ui->requireSelectionCheckBox, SIGNAL(stateChanged(int)), this, SLOT(requireSelectionStateChanged(int)));
 	connect(ui->limitStellarMagnitudeCheckBox, SIGNAL(clicked(bool)), plugin, SLOT(setFlagLimitMagnitude(bool)));
+	connect(ui->semiTransparencyCheckBox, SIGNAL(clicked(bool)), plugin, SLOT(setFlagUseSemiTransparency(bool)));
 	connect(ui->checkBoxControlPanel, SIGNAL(clicked(bool)), plugin, SLOT(enableGuiPanel(bool)));
 	connect(ui->checkBoxDecimalDegrees, SIGNAL(clicked(bool)), plugin, SLOT(setFlagDecimalDegrees(bool)));
 	connect(ui->checkBoxInitialFOV, SIGNAL(clicked(bool)), plugin, SLOT(setFlagInitFovUsage(bool)));
@@ -504,6 +505,10 @@ void OcularDialog::createDialogContent()
 	if (settings->value("use_ccd_flip", true).toBool())
 	{
 		ui->checkBoxUseFlipForCCD->setChecked(true);
+	}
+	if (settings->value("use_semi_transparency", true).toBool())
+	{
+		ui->semiTransparencyCheckBox->setChecked(true);
 	}
 
 	//Initialize the style
