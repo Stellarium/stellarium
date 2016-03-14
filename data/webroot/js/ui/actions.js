@@ -3,53 +3,6 @@ define(["jquery", "api/remotecontrol", "api/actions"], function($, rc, actionApi
 
 	var $actionlist;
 
-	//this is a list of all actions together with their button image
-	//that automatically should be created and connected
-	var buttonActions = [
-		[
-			"actionShow_Constellation_Lines", "btConstellationLines"
-		],
-		[
-			"actionShow_Constellation_Labels", "btConstellationLabels"
-		],
-		[
-			"actionShow_Constellation_Art", "btConstellationArt"
-		],
-		[
-			"actionShow_Equatorial_Grid", "btEquatorialGrid"
-		],
-		[
-			"actionShow_Azimuthal_Grid", "btAzimuthalGrid"
-		],
-		[
-			"actionShow_Ground", "btGround"
-		],
-		[
-			"actionShow_Cardinal_Points", "btCardinalPoints"
-		],
-		[
-			"actionShow_Atmosphere", "btAtmosphere"
-		],
-		[
-			"actionShow_Nebulas", "btNebula"
-		],
-		[
-			"actionShow_Planets_Labels", "btPlanets"
-		],
-		[
-			"actionSwitch_Equatorial_Mount", "btEquatorialMount"
-		],
-		[ //this is actually a different action than the main GUI, but toggles properly (which the one from the GUI does not for some reason)
-			"actionSet_Tracking", "btGotoSelectedObject"
-		],
-		[
-			"actionShow_Night_Mode", "btNightView"
-		],
-		[
-			"actionSet_Full_Screen_Global", "btFullScreen"
-		]
-	];
-
 	function initControls() {
 		$actionlist = $("#actionlist");
 
@@ -67,29 +20,8 @@ define(["jquery", "api/remotecontrol", "api/actions"], function($, rc, actionApi
 		$("#bt_doaction").click(runactionfn);
 	}
 
-
-	function createAutoButtons() {
-		var $ul = $("#autobuttons");
-		var parent = $ul.parent();
-		$ul.detach();
-
-		buttonActions.forEach(function(val) {
-			var btn = document.createElement("button");
-			btn.className = "stelaction icon32 " + val[1];
-			btn.name = val[0];
-
-			var li = document.createElement("li");
-			li.appendChild(btn);
-
-			$ul.append(li);
-		});
-
-		$ul.appendTo(parent);
-	}
-
 	$(function() {
 		initControls();
-		createAutoButtons();
 	});
 
 	$(actionApi).on("actionListLoaded", function(evt, data) {
