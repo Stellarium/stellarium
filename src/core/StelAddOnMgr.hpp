@@ -28,6 +28,7 @@
 #include "DownloadMgr.hpp"
 
 #define ADDON_CONFIG_PREFIX QString("AddOn")
+#define ADDON_CATALOG_NAME QString("Add-ons Catalog")
 #define ADDON_CATALOG_VERSION 1
 
 class DownloadMgr;

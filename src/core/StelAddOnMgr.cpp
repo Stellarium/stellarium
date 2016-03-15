@@ -115,7 +115,7 @@ QHash<QString, AddOn*> StelAddOnMgr::loadAddonCatalog(QString jsonPath) const
 	QJsonObject json(QJsonDocument::fromJson(jsonFile.readAll()).object());
 	jsonFile.close();
 
-	if (json["name"].toString() != "Add-ons Catalog" ||
+	if (json["name"].toString() != ADDON_CATALOG_NAME ||
 		json["format"].toInt() != ADDON_CATALOG_VERSION)
 	{
 		qWarning()  << "[Add-on] The current catalog is not compatible!";
@@ -528,7 +528,7 @@ void StelAddOnMgr::addonToJson(AddOn* addon, QString jsonPath)
 		attributes.insert("authors", authors);
 
 		QJsonObject json(QJsonDocument::fromJson(jsonFile.readAll()).object());
-		json.insert("name", QString("Add-ons Catalog"));
+		json.insert("name", ADDON_CATALOG_NAME);
 		json.insert("format", ADDON_CATALOG_VERSION);
 
 		QJsonObject addons = json["add-ons"].toObject();
