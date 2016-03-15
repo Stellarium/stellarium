@@ -84,6 +84,8 @@ StelCore::StelCore()
 	, de430Active(false)
 	, de431Active(false)
 {
+	registerMathMetaTypes();
+
 	toneReproducer = new StelToneReproducer();
 	milliSecondsOfLastJDUpdate = QDateTime::currentMSecsSinceEpoch();
 
@@ -263,11 +265,6 @@ void StelCore::init()
 
 	actionsMgr->addAction("actionHorizontal_Flip", displayGroup, N_("Flip scene horizontally"), this, "flipHorz", "Ctrl+Shift+H", "", true);
 	actionsMgr->addAction("actionVertical_Flip", displayGroup, N_("Flip scene vertically"), this, "flipVert", "Ctrl+Shift+V", "", true);
-
-	StelPropertyMgr *propMgr=StelApp::getInstance().getStelPropertyManager();
-	propMgr->registerProperty("prop_StelCore_viewportHorizontalOffset", this, "viewportHorizontalOffset");
-	propMgr->registerProperty("prop_StelCore_viewportVerticalOffset", this, "viewportVerticalOffset");
-
 }
 
 QString StelCore::getDefaultProjectionTypeKey() const
@@ -579,7 +576,6 @@ void StelCore::setViewportHorizontalOffset(double newOffsetPct)
 	currentProjectorParams.viewportCenterOffset[0]=0.01f* qMin(50., qMax(-50., newOffsetPct));
 	currentProjectorParams.viewportCenter.set(currentProjectorParams.viewportXywh[0]+(0.5f+currentProjectorParams.viewportCenterOffset.v[0])*currentProjectorParams.viewportXywh[2],
 						currentProjectorParams.viewportXywh[1]+(0.5f+currentProjectorParams.viewportCenterOffset.v[1])*currentProjectorParams.viewportXywh[3]);
-	emit viewportHorizontalOffsetChanged(newOffsetPct);
 }
 
 // Get current value for vertical viewport offset [-50...50]
@@ -593,7 +589,6 @@ void StelCore::setViewportVerticalOffset(double newOffsetPct)
 	currentProjectorParams.viewportCenterOffset[1]=0.01f* qMin(50., qMax(-50., newOffsetPct));
 	currentProjectorParams.viewportCenter.set(currentProjectorParams.viewportXywh[0]+(0.5f+currentProjectorParams.viewportCenterOffset.v[0])*currentProjectorParams.viewportXywh[2],
 						currentProjectorParams.viewportXywh[1]+(0.5f+currentProjectorParams.viewportCenterOffset.v[1])*currentProjectorParams.viewportXywh[3]);
-	emit viewportVerticalOffsetChanged(newOffsetPct);
 }
 
 
@@ -1502,6 +1497,22 @@ void StelCore::resetSync()
 	//also changed to qint64 to increase precision
 	milliSecondsOfLastJDUpdate = QDateTime::currentMSecsSinceEpoch();
 	emit timeSyncOccurred(jdOfLastJDUpdate);
+}
+
+void StelCore::registerMathMetaTypes()
+{
+	qRegisterMetaType<Vec2d>();
+	qRegisterMetaType<Vec2f>();
+	qRegisterMetaType<Vec2i>();
+	qRegisterMetaType<Vec3d>();
+	qRegisterMetaType<Vec3f>();
+	qRegisterMetaType<Vec4d>();
+	qRegisterMetaType<Vec4f>();
+	qRegisterMetaType<Vec4i>();
+	qRegisterMetaType<Mat4d>();
+	qRegisterMetaType<Mat4f>();
+	qRegisterMetaType<Mat3d>();
+	qRegisterMetaType<Mat3f>();
 }
 
 void StelCore::setStartupTimeMode(const QString& s)

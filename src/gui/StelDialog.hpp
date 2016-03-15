@@ -28,7 +28,6 @@ class QSpinBox;
 class QDoubleSpinBox;
 class QSlider;
 class StelAction;
-class StelProperty;
 
 //! @class StelDialog
 //! Base class for all the GUI windows in Stellarium.
@@ -127,20 +126,6 @@ protected:
 private slots:
 	void updateNightModeProperty();
 
-};
-
-class QSliderStelPropertyConnectionHelper : public QObject
-{
-	Q_OBJECT
-public:
-	QSliderStelPropertyConnectionHelper(QSlider* slider, StelProperty* prop, double minValue, double maxValue, QObject* parent);
-private slots:
-	void sliderIntValueChanged(int val);
-	void propertyValueChanged(const QVariant &val);
-private:
-	QSlider* slider;
-	StelProperty* prop;
-	double minValue, maxValue,dRange;
 };
 
 #endif // _STELDIALOG_HPP_

@@ -39,6 +39,11 @@ class StelMovementMgr : public StelModule
 			   READ getFlagTracking
 			   WRITE setFlagTracking
 			   NOTIFY flagTrackingChanged)
+
+	//The targets of viewport offset animation
+	Q_PROPERTY(float viewportHorizontalOffsetTarget READ getViewportHorizontalOffsetTarget WRITE setViewportHorizontalOffsetTarget NOTIFY viewportHorizontalOffsetTargetChanged)
+	Q_PROPERTY(float viewportVerticalOffsetTarget READ getViewportVerticalOffsetTarget WRITE setViewportVerticalOffsetTarget NOTIFY viewportVerticalOffsetTargetChanged)
+
 public:
 
 	//! Possible mount modes defining the reference frame in which head movements occur.
@@ -251,7 +256,7 @@ public slots:
 	//! @param offsetY new horizontal viewport offset, percent. clamped to [-50...50]
 	//! @param duration animation duration, seconds.
 	//! @note Only vertical viewport is really meaningful.
-	void moveViewport(const float offsetX, const float offsetY, const float duration=0.f);
+	void moveViewport(float offsetX, float offsetY, const float duration=0.f);
 
 	//! Set current mount type defining the reference frame in which head movements occur.
 	void setMountMode(MountMode m);
@@ -266,10 +271,21 @@ public slots:
 	//! this will avoid any unwanted tracking.
 	void setInhibitAllAutomoves(bool inhibit) { flagInhibitAllAutomoves=inhibit;}
 
+	//! Returns the targetted value of the viewport offset
+	Vec2f getViewportOffsetTarget() const { return targetViewportOffset; }
+	float getViewportHorizontalOffsetTarget() const { return targetViewportOffset[0]; }
+	float getViewportVerticalOffsetTarget() const { return targetViewportOffset[1]; }
+
+	void setViewportHorizontalOffsetTarget(float f) { moveViewport(f,getViewportVerticalOffsetTarget()); }
+	void setViewportVerticalOffsetTarget(float f) { moveViewport(getViewportHorizontalOffsetTarget(),f); }
+
 signals:
 	//! Emitted when the tracking property changes
 	void flagTrackingChanged(bool b);
 	void equatorialMountChanged(bool b);
+
+	void viewportHorizontalOffsetTargetChanged(float f);
+	void viewportVerticalOffsetTargetChanged(float f);
 
 private slots:
 	//! Called when the selected object changes.
