@@ -87,10 +87,7 @@ class StelProperty : public QObject
 {
 	friend class StelPropertyMgr;
 	Q_OBJECT
-public:
-	//! If this property type can be supported by a property proxy, it is returned.
-	//! Use qobject_cast to cast to the specific type.
-	StelPropertyProxy* getProxy() const;
+
 public slots:
 	//! Returns the unique ID which is used to identify this property
 	QString getId() const { return objectName(); }
@@ -125,7 +122,6 @@ private:
 
 	QObject* target;
 	QMetaProperty prop;
-	StelPropertyProxy* proxy;
 };
 
 //! Manages the registration of specific object properties with the StelProperty system.

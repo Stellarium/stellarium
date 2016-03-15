@@ -405,15 +405,9 @@ void StelMainScriptAPI::setDiskViewport(bool b)
 }
 
 void StelMainScriptAPI::setViewportOffset(const float x, const float y)
-{
+{	
 	StelCore* core = StelApp::getInstance().getCore();
-
-	StelProjector::StelProjectorParams params=core->getCurrentStelProjectorParams();
-	params.viewportCenterOffset.set(qMin(qMax(x, -0.5f), 0.5f), qMin(qMax(y, -0.5f), 0.5f) );
-	params.viewportCenter.set(params.viewportXywh.v[0]+(0.5+params.viewportCenterOffset.v[0])*params.viewportXywh.v[2],
-			params.viewportXywh.v[1]+(0.5+params.viewportCenterOffset.v[1])*params.viewportXywh.v[3]);
-
-	core->setCurrentStelProjectorParams(params);
+	core->getMovementMgr()->moveViewport(x,y);
 }
 
 void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,

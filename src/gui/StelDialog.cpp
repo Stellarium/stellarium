@@ -19,6 +19,7 @@
 
 
 #include "StelDialog.hpp"
+#include "StelDialog_p.hpp"
 #include "StelMainView.hpp"
 #include "StelGui.hpp"
 #include "StelApp.hpp"
@@ -216,45 +217,27 @@ void StelDialog::connectIntProperty(QSpinBox *spinBox, const QString &propName)
 {
 	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
 	Q_ASSERT_X(prop,"StelDialog", "StelProperty does not exist");
-	bool ok;
-	spinBox->setValue(prop->getValue().toInt(&ok));
-	Q_ASSERT_X(ok,"StelDialog","Can not convert to required datatype");
-	StelPropertyIntProxy* prox = qobject_cast<StelPropertyIntProxy*>(prop->getProxy());
-	Q_ASSERT_X(prox,"StelDialog", "No valid StelPropertyProxy defined for this property");
-	//in this direction, we require a proxy
-	connect(prox, &StelPropertyIntProxy::propertyChanged, spinBox, &QSpinBox::setValue);
-	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
-	connect(spinBox, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),prop,&StelProperty::setValue);
+
+	//use a proxy for the connection
+	new QSpinBoxStelPropertyConnectionHelper(prop,spinBox);
 }
 
 void StelDialog::connectIntProperty(QComboBox *comboBox, const QString &propName)
 {
 	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
 	Q_ASSERT_X(prop,"StelDialog", "StelProperty does not exist");
-	bool ok;
-	comboBox->setCurrentIndex(prop->getValue().toInt(&ok));
-	Q_ASSERT_X(ok,"StelDialog","Can not convert to required datatype");
-	StelPropertyIntProxy* prox = qobject_cast<StelPropertyIntProxy*>(prop->getProxy());
-	Q_ASSERT_X(prox,"StelDialog", "No valid StelPropertyProxy defined for this property");
-	//in this direction, we require a proxy
-	connect(prox, &StelPropertyIntProxy::propertyChanged, comboBox, &QComboBox::setCurrentIndex);
-	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
-	connect(comboBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated),prop,&StelProperty::setValue);
+
+	//use a proxy for the connection
+	new QComboBoxStelPropertyConnectionHelper(prop,comboBox);
 }
 
 void StelDialog::connectDoubleProperty(QDoubleSpinBox *spinBox, const QString &propName)
 {
 	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
 	Q_ASSERT_X(prop,"StelDialog", "StelProperty does not exist");
-	bool ok;
-	spinBox->setValue(prop->getValue().toDouble(&ok));
-	Q_ASSERT_X(ok,"StelDialog","Can not convert to required datatype");
-	StelPropertyDoubleProxy* prox = qobject_cast<StelPropertyDoubleProxy*>(prop->getProxy());
-	Q_ASSERT_X(prox,"StelDialog", "No valid StelPropertyProxy defined for this property");
-	//in this direction, we require a proxy
-	connect(prox, &StelPropertyDoubleProxy::propertyChanged, spinBox, &QDoubleSpinBox::setValue);
-	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
-	connect(spinBox, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),prop,&StelProperty::setValue);
+
+	//use a proxy for the connection
+	new QDoubleSpinBoxStelPropertyConnectionHelper(prop,spinBox);
 }
 
 void StelDialog::connectDoubleProperty(QSlider *slider, const QString &propName,double minValue, double maxValue)
@@ -263,20 +246,15 @@ void StelDialog::connectDoubleProperty(QSlider *slider, const QString &propName,
 	Q_ASSERT_X(prop,"StelDialog", "StelProperty does not exist");
 
 	//The connection is handled by a helper class. It is automatically destroyed when the slider is destroyed.
-	new QSliderStelPropertyConnectionHelper(slider,prop,minValue,maxValue,slider);
+	new QSliderStelPropertyConnectionHelper(prop,minValue,maxValue,slider);
 }
 
 void StelDialog::connectBoolProperty(QAbstractButton *checkBox, const QString &propName)
 {
 	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
 	Q_ASSERT_X(prop,"StelDialog", "StelProperty does not exist");
-	checkBox->setChecked(prop->getValue().toBool());
-	StelPropertyBoolProxy* prox = qobject_cast<StelPropertyBoolProxy*>(prop->getProxy());
-	Q_ASSERT_X(prox,"StelDialog", "No valid StelPropertyProxy defined for this property");
-	//in this direction, we require a proxy
-	connect(prox, &StelPropertyBoolProxy::propertyChanged, checkBox, &QAbstractButton::setChecked);
-	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
-	connect(checkBox, &QAbstractButton::toggled, prop, &StelProperty::setValue);
+
+	new QAbstractButtonStelPropertyConnectionHelper(prop,checkBox);
 }
 
 #ifdef Q_OS_WIN
@@ -308,18 +286,101 @@ void StelDialog::handleMovedTo(QPoint newPos)
 	conf->setValue("DialogPositions/" + dialogName, QString("%1,%2").arg(newPos.x()).arg(newPos.y()));
 }
 
-QSliderStelPropertyConnectionHelper::QSliderStelPropertyConnectionHelper(QSlider *slider, StelProperty *prop, double minValue, double maxValue, QObject *parent)
-	: QObject(parent),slider(slider),prop(prop),minValue(minValue),maxValue(maxValue)
+
+//// --- Implementation of StelDialog_p.hpp classes follow ---
+
+QAbstractButtonStelPropertyConnectionHelper::QAbstractButtonStelPropertyConnectionHelper(StelProperty *prop, QAbstractButton *button)
+	:StelPropertyProxy(prop,button), button(button)
 {
-	bool ok;
-	prop->getValue().toDouble(&ok);
-	Q_ASSERT_X(ok,"QSliderStelPropertyConnectionHelper","Can not convert to required datatype");
+	QVariant val = prop->getValue();
+	bool ok = val.canConvert<bool>();
+	Q_ASSERT_X(ok,"QAbstractButtonStelPropertyConnectionHelper","Can not convert to bool datatype");
+	onPropertyChanged(val);
+
+	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
+	connect(button, &QAbstractButton::toggled, prop, &StelProperty::setValue);
+}
+
+void QAbstractButtonStelPropertyConnectionHelper::onPropertyChanged(const QVariant &value)
+{
+	//block signals to prevent sending the valueChanged signal, changing the property again
+	bool b = button->blockSignals(true);
+	button->setChecked(value.toBool());
+	button->blockSignals(b);
+}
+
+QComboBoxStelPropertyConnectionHelper::QComboBoxStelPropertyConnectionHelper(StelProperty *prop, QComboBox *combo)
+	:StelPropertyProxy(prop,combo), combo(combo)
+{
+	QVariant val = prop->getValue();
+	bool ok = val.canConvert<int>();
+	Q_ASSERT_X(ok,"QComboBoxStelPropertyConnectionHelper","Can not convert to int datatype");
+	onPropertyChanged(val);
+
+	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
+	connect(combo, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated),prop,&StelProperty::setValue);
+}
+
+void QComboBoxStelPropertyConnectionHelper::onPropertyChanged(const QVariant &value)
+{
+	//block signals to prevent sending the valueChanged signal, changing the property again
+	bool b = combo->blockSignals(true);
+	combo->setCurrentIndex(value.toInt());
+	combo->blockSignals(b);
+}
+
+
+QSpinBoxStelPropertyConnectionHelper::QSpinBoxStelPropertyConnectionHelper(StelProperty *prop, QSpinBox *spin)
+	:StelPropertyProxy(prop,spin), spin(spin)
+{
+	QVariant val = prop->getValue();
+	bool ok = val.canConvert<int>();
+	Q_ASSERT_X(ok,"QSpinBoxStelPropertyConnectionHelper","Can not convert to int datatype");
+	onPropertyChanged(val);
+
+	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
+	connect(spin, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),prop,&StelProperty::setValue);
+}
+
+void QSpinBoxStelPropertyConnectionHelper::onPropertyChanged(const QVariant &value)
+{
+	//block signals to prevent sending the valueChanged signal, changing the property again
+	bool b = spin->blockSignals(true);
+	spin->setValue(value.toInt());
+	spin->blockSignals(b);
+}
+
+QDoubleSpinBoxStelPropertyConnectionHelper::QDoubleSpinBoxStelPropertyConnectionHelper(StelProperty *prop, QDoubleSpinBox *spin)
+	:StelPropertyProxy(prop,spin), spin(spin)
+{
+	QVariant val = prop->getValue();
+	bool ok = val.canConvert<double>();
+	Q_ASSERT_X(ok,"QDoubleSpinBoxStelPropertyConnectionHelper","Can not convert to double datatype");
+	onPropertyChanged(val);
+
+	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
+	connect(spin, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),prop,&StelProperty::setValue);
+}
+
+void QDoubleSpinBoxStelPropertyConnectionHelper::onPropertyChanged(const QVariant &value)
+{
+	//block signals to prevent sending the valueChanged signal, changing the property again
+	bool b = spin->blockSignals(true);
+	spin->setValue(value.toDouble());
+	spin->blockSignals(b);
+}
+
+QSliderStelPropertyConnectionHelper::QSliderStelPropertyConnectionHelper(StelProperty *prop, double minValue, double maxValue, QSlider *slider)
+	: StelPropertyProxy(prop,slider),minValue(minValue),maxValue(maxValue),slider(slider)
+{
+	QVariant val = prop->getValue();
+	bool ok = val.canConvert<double>();
+	Q_ASSERT_X(ok,"QSliderStelPropertyConnectionHelper","Can not convert to double datatype");
 
 	dRange = maxValue - minValue;
-	propertyValueChanged(prop->getValue());
+	onPropertyChanged(val);
 
 	connect(slider,SIGNAL(valueChanged(int)),this,SLOT(sliderIntValueChanged(int)));
-	connect(prop,SIGNAL(changed(QVariant)), this, SLOT(propertyValueChanged(QVariant)));
 }
 
 void QSliderStelPropertyConnectionHelper::sliderIntValueChanged(int val)
@@ -328,10 +389,12 @@ void QSliderStelPropertyConnectionHelper::sliderIntValueChanged(int val)
 	prop->setValue(dVal);
 }
 
-void QSliderStelPropertyConnectionHelper::propertyValueChanged(const QVariant& val)
+void QSliderStelPropertyConnectionHelper::onPropertyChanged(const QVariant& val)
 {
 	double dVal = val.toDouble();
 	int iRange = slider->maximum() - slider->minimum();
 	int iVal = qRound(((dVal - minValue)/dRange) * iRange + slider->minimum());
+	bool b = slider->blockSignals(true);
 	slider->setValue(iVal);
+	slider->blockSignals(b);
 }
