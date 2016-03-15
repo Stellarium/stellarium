@@ -128,7 +128,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	populateLists();
-	connectDoubleProperty(ui->viewportOffsetSpinBox, "prop_StelCore_viewportVerticalOffset");
+	connectDoubleProperty(ui->viewportOffsetSpinBox, "prop_StelMovementMgr_viewportVerticalOffsetTarget");
 
 	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)),&StelApp::getInstance().getSkyCultureMgr(),SLOT(setCurrentSkyCultureNameI18(QString)));
 	connect(&StelApp::getInstance(), SIGNAL(skyCultureChanged(QString)), this, SLOT(skyCultureChanged(QString)));

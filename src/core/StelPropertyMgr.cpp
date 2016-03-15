@@ -4,7 +4,7 @@
 
 StelProperty::StelProperty(const QString &id, QObject* target, const char* propId)
 	: QObject(StelApp::getInstance().getStelPropertyManager()),
-	  target(target), proxy(NULL)
+	  target(target)
 {
 	//check if this property name is already defined, print an error if it is
 	if(parent()->findChild<StelProperty*>(id,Qt::FindDirectChildrenOnly))
@@ -32,35 +32,7 @@ StelProperty::StelProperty(const QString &id, QObject* target, const char* propI
 		qFatal("Fatal error: Q_PROPERTY '%s' on class '%s' has no NOTIFY signal", propId, metaObj->className());
 	}
 	//qDebug()<<prop.name()<<prop.type()<<prop.typeName();
-
-	//determine if a property proxy can be used
-	if(prop.isEnumType())
-		proxy = new StelPropertyIntProxy(this,this);
-	else
-	{
-		switch (getType()) {
-			case QMetaType::UInt:
-			case QMetaType::Int:
-				proxy = new StelPropertyIntProxy(this,this);
-				break;
-			case QMetaType::Double:
-			case QMetaType::Float:
-				proxy = new StelPropertyDoubleProxy(this,this);
-				break;
-			case QMetaType::Bool:
-				proxy = new StelPropertyBoolProxy(this,this);
-				break;
-			default:
-				//No proxy supported
-				break;
-		}
-	}
 	connect(target, prop.notifySignal(), this, metaObject()->method(metaObject()->indexOfSlot("propertyChanged()")));
-}
-
-StelPropertyProxy* StelProperty::getProxy() const
-{
-	return proxy;
 }
 
 QVariant StelProperty::getValue() const
@@ -70,6 +42,10 @@ QVariant StelProperty::getValue() const
 
 bool StelProperty::setValue(const QVariant &value) const
 {
+	//check if the property already has the specified value
+	//preventing some unnecessary events
+	if(getValue() == value)
+		return true;
 	return prop.write(target,value);
 }
 

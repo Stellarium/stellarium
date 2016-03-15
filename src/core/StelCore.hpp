@@ -54,8 +54,6 @@ class StelCore : public QObject
 	Q_PROPERTY(bool flipVert READ getFlipVert WRITE setFlipVert)
 	Q_PROPERTY(bool flagUseNutation READ getUseNutation WRITE setUseNutation)
 	Q_PROPERTY(bool flagUseTopocentricCoordinates READ getUseTopocentricCoordinates WRITE setUseTopocentricCoordinates)
-	Q_PROPERTY(double viewportHorizontalOffset READ getViewportHorizontalOffset WRITE setViewportHorizontalOffset NOTIFY viewportHorizontalOffsetChanged)
-	Q_PROPERTY(double viewportVerticalOffset   READ getViewportVerticalOffset   WRITE setViewportVerticalOffset   NOTIFY viewportVerticalOffsetChanged)
 
 public:
 
@@ -640,10 +638,6 @@ signals:
 	void timeSyncOccurred(double jDay);
 	//! Emitted whenever the projection type changes
 	void currentProjectionTypeChanged(StelCore::ProjectionType newType);
-	//! Emitted when horizontal viewport offset changed
-	void viewportHorizontalOffsetChanged(const double newOffset);
-	//! Emitted when vertical viewport offset changed
-	void viewportVerticalOffsetChanged(const double newOffset);
 
 private:
 	StelToneReproducer* toneReproducer;		// Tones conversion between stellarium world and display device
@@ -667,6 +661,7 @@ private:
 	void updateMaximumFov();
 	void resetSync();
 
+	void registerMathMetaTypes();
 
 
 	// Matrices used for every coordinate transfo

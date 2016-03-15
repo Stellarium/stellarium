@@ -167,6 +167,10 @@ void StelMovementMgr::init()
 	viewportOffsetTimeline=new QTimeLine(1000, this);
 	viewportOffsetTimeline->setFrameRange(0, 100);
 	connect(viewportOffsetTimeline, SIGNAL(valueChanged(qreal)), this, SLOT(handleViewportOffsetMovement(qreal)));
+	targetViewportOffset.set(core->getViewportHorizontalOffset(), core->getViewportVerticalOffset());
+
+	registerProperty("prop_StelMovementMgr_viewportHorizontalOffsetTarget","viewportHorizontalOffsetTarget");
+	registerProperty("prop_StelMovementMgr_viewportVerticalOffsetTarget","viewportVerticalOffsetTarget");
 }
 
 void StelMovementMgr::setMountMode(MountMode m)
@@ -1308,24 +1312,35 @@ void StelMovementMgr::setMaxFov(double max)
 }
 
 
-// start animated move of the viewport offset.
-// @param offsetX new horizontal viewport offset, percent. clamped to [-50...50]
-// @param offsetY new horizontal viewport offset, percent. clamped to [-50...50]
-// @param duration animation duration, seconds.
-void StelMovementMgr::moveViewport(const float offsetX, const float offsetY, const float duration)
+void StelMovementMgr::moveViewport(float offsetX, float offsetY, const float duration)
 {
-	if (duration==0)
+	//clamp to valid range
+	offsetX = qMax(-50.f, qMin(50.f, offsetX));
+	offsetY = qMax(-50.f, qMin(50.f, offsetY));
+
+	Vec2f oldTarget = targetViewportOffset;
+	//move this here so it is clamped even when duration == 0
+	targetViewportOffset.set(offsetX, offsetY);
+
+	if(offsetX != oldTarget[0])
+		emit viewportHorizontalOffsetTargetChanged(offsetX);
+	if(offsetY != oldTarget[1])
+		emit viewportVerticalOffsetTargetChanged(offsetY);
+
+	if (duration<=0.0f)
 	{
-		core->setViewportHorizontalOffset(offsetX);
-		core->setViewportVerticalOffset(offsetY);
+		//avoid using the timeline to minimize overhead
+		core->setViewportHorizontalOffset(targetViewportOffset[0]);
+		core->setViewportVerticalOffset(targetViewportOffset[1]);
 		return;
 	}
 
-	viewportOffsetTimeline->stop();
-	viewportOffsetTimeline->setDuration(1000.*duration);
 	// Frame will now be 0..100, and we must interpolate in handleViewportOffsetMovement(frame) between old and new offsets.
 	oldViewportOffset.set(core->getViewportHorizontalOffset(), core->getViewportVerticalOffset());
-	targetViewportOffset.set(qMax(-50.f, qMin(50.f, offsetX)), qMax(-50.f, qMin(50.f, offsetY)));
+
+	viewportOffsetTimeline->stop();
+	viewportOffsetTimeline->setDuration(1000.*duration);
+
 	//qDebug() << "moveViewport() started, from " << oldViewportOffset.v[0] << "/" << oldViewportOffset.v[1] << " towards " << offsetX << "/" << offsetY;
 	viewportOffsetTimeline->start();
 }

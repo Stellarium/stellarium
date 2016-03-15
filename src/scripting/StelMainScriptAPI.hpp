@@ -412,6 +412,7 @@ public slots:
 	//! This can be used e.g. in wide cylindrical panorama screens to push the horizon down and see more of the sky.
 	//! @param x -0.5...0.5 horizontal offset. This is not available in the GUI, and it is recommended to keep it at 0.
 	//! @param y -0.5...0.5 vertical offset. This is available in the GUI.
+	//! @deprecated Use StelMovementMgr::moveViewport instead
 	void setViewportOffset(const float x, const float y);
 
 	//! Get a list of Sky Culture IDs

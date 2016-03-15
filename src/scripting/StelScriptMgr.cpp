@@ -50,8 +50,6 @@
 
 #include <cmath>
 
-Q_DECLARE_METATYPE(Vec3f)
-
 QScriptValue vec3fToScriptValue(QScriptEngine *engine, const Vec3f& c)
 {
 	QScriptValue obj = engine->newObject();
