@@ -876,7 +876,7 @@ void TelescopeControl::loadTelescopes()
 			}
 		}
 
-		if (connectionType == ConnectionRemote)
+		if (connectionType == ConnectionRemote || connectionType == ConnectionRTS2)
 		{
 			//Validation: Host name
 			hostName = telescope.value("host_name").toString();
@@ -1013,7 +1013,7 @@ bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionTyp
 	telescope.insert("connection", connectionTypeNames.value(connectionType));
 	telescope.insert("equinox", equinox);//TODO: Validation!
 
-	if (connectionType == ConnectionRemote)
+	if (connectionType == ConnectionRemote || connectionType == ConnectionRTS2)
 	{
 		//TODO: Add more validation!
 		if (host.isEmpty())
@@ -1331,7 +1331,7 @@ bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connecti
 			break;
 
 		case ConnectionRTS2:
-			if (isValidPort(portTCP))
+			if (isValidPort(portTCP) && !host.isEmpty())
 				initString = QString("%1:RTS2:%2:%3:%4:%5:%6").arg(name, equinox, host, QString::number(portTCP), "petr", "test");
 			break;
 

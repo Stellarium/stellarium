@@ -1071,6 +1071,8 @@ void ConfigurationDialog::downloadStars()
 	progressBar->setValue(0);
 	progressBar->setRange(0, nextStarCatalogToDownload.value("sizeMb").toDouble()*1024);
 	progressBar->setFormat(QString("%1: %p%").arg(nextStarCatalogToDownload.value("id").toString()));
+
+	qDebug() << "Downloading file" << nextStarCatalogToDownload.value("url").toString();
 }
 
 void ConfigurationDialog::downloadError(QNetworkReply::NetworkError)
@@ -1105,8 +1107,6 @@ void ConfigurationDialog::downloadFinished()
 		return;
 	}
 
-	Q_ASSERT(starCatalogDownloadReply->bytesAvailable()==0);
-
 	const QVariant& redirect = starCatalogDownloadReply->attribute(QNetworkRequest::RedirectionTargetAttribute);
 	if (!redirect.isNull())
 	{
@@ -1123,6 +1123,8 @@ void ConfigurationDialog::downloadFinished()
 		connect(starCatalogDownloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
 		return;
 	}
+
+	Q_ASSERT(starCatalogDownloadReply->bytesAvailable()==0);
 
 	isDownloadingStarCatalog = false;
 	currentDownloadFile->close();

@@ -1,7 +1,7 @@
 /*
  * RTS2 Json stellarium plugin
  * 
- * Copyright (C) 2014 Petr Kubanek
+ * Copyright (C) 2014-2016 Petr Kubanek
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,7 +44,7 @@ private:
 	Equinox equinox;
 	unsigned int port;
 	QHostAddress address;
-	QUrl url;
+	QUrl baseurl;
 	QNetworkRequest request;
 	Vec3d position;
 
