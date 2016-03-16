@@ -236,7 +236,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>2</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QGridLayout" name="gridLayout">
@@ -857,16 +857,6 @@
                 </widget>
                </item>
               </layout>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="autoChangeLandscapesCheckBox">
-               <property name="toolTip">
-                <string>Automatic change of landscape when planet is changed</string>
-               </property>
-               <property name="text">
-                <string>Auto select landscapes</string>
-               </property>
-              </widget>
              </item>
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_17">
