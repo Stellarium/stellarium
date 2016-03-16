@@ -1,7 +1,7 @@
 /*
  * RTS2 Json stellarium plugin
  * 
- * Copyright (C) 2014 Petr Kubanek
+ * Copyright (C) 2014-2016 Petr Kubanek
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@
 #include "QJsonDocument"
 #include "QJsonParseError"
 #include "QJsonObject"
+#include "QUrlQuery"
 
 #include "TelescopeClientJsonRts2.hpp"
 
@@ -31,7 +32,7 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 	, equinox(eq)
 	, port(0)
 	, address("")
-	, url("http://localhost:8889/api/get?d=T0")
+	, baseurl("http://localhost:8889/")
 {
 	// Example params:
 	// localhost:10000:petr:test
@@ -67,10 +68,21 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 		return;
 	}
 
-	request.setUrl(url);
+	baseurl.setHost(host);
+	baseurl.setPort(port);
+	baseurl.setUserName(login);
+	baseurl.setPassword(password);
 
-	//QNetworkReply* currentReply = networkManager.get(request);
-	
+	QUrl rurl(baseurl);
+
+	rurl.setPath("/api/get");
+
+	QUrlQuery query;
+	query.addQueryItem("d", "T0");
+	rurl.setQuery(query);
+
+	request.setUrl(rurl);
+
 	networkManager.get(request);
 
 	connect(&networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
@@ -129,6 +141,19 @@ void TelescopeClientJsonRts2::telescopeGoto(const Vec3d &j2000Pos)
 	const double ra_signed = atan2(j2000Pos[1], j2000Pos[0]);
 	const double ra = (ra_signed >= 0) ? ra_signed : (ra_signed + 2 * M_PI);
 	const double dec = atan2(j2000Pos[2], std::sqrt(j2000Pos[0]*j2000Pos[0]+j2000Pos[1]*j2000Pos[1]));
+
+	QUrl set(baseurl);
+	set.setPath("/api/cmd");
+
+	QUrlQuery query;
+	query.addQueryItem("d", "T0");
+	query.addQueryItem("c", QString("move+%1+%2").arg(ra * 180 / M_PI).arg(dec * 180 / M_PI));
+	set.setQuery(query);
+
+	QNetworkRequest setR;
+	setR.setUrl(set);
+
+	networkManager.get(setR);
 }
 
 bool TelescopeClientJsonRts2::hasKnownPosition(void) const
