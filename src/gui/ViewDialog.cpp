@@ -284,9 +284,6 @@ void ViewDialog::createDialogContent()
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), lmgr, SLOT(setAtmosphereBortleLightPollution(int)));
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setBortleScaleIndex(int)));
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setBortleScaleToolTip(int)));
-
-	ui->autoChangeLandscapesCheckBox->setChecked(lmgr->getFlagLandscapeAutoSelection());
-	connect(ui->autoChangeLandscapesCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeAutoSelection(bool)));
 	
 	// atmosphere details
 	connect(ui->pushButtonAtmosphereDetails, SIGNAL(clicked()), this, SLOT(showAtmosphereDialog()));
