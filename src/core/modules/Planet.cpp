@@ -709,38 +709,31 @@ double Planet::getSiderealTime(double JD, double JDE) const
 	double wholeRotations = floor(rotations);
 	double remainder = rotations - wholeRotations;
 
-	if (englishName=="Jupiter")
+	if (englishName=="Jupiter" && re.offset >= 0.0)
 	{
-		if( re.offset >= 0.0 )
-		{
-			return remainder * 360. + re.offset;
-		}
-		else
-		{
-			// http://www.projectpluto.com/grs_form.htm
-			// CM( System II) =  181.62 + 870.1869147 * jd + correction [870d rotation every day]
-			const double rad  = M_PI/180.;
-			double jup_mean = (JDE - 2455636.938) * 360. / 4332.89709;
-			double eqn_center = 5.55 * sin( rad*jup_mean);
-			double angle = (JDE - 2451870.628) * 360. / 398.884 - eqn_center;
-			//double correction = 11 * sin( rad*angle) + 5 * cos( rad*angle)- 1.25 * cos( rad*jup_mean) - eqn_center; // original correction
-			double correction = 25.8 + 11 * sin( rad*angle) - 2.5 * cos( rad*jup_mean) - eqn_center; // light speed correction not used because in stellarium the jd is manipulated for that
-			double cm2=181.62 + 870.1869147 * JDE + correction; // Central Meridian II
-			cm2=cm2 - 360.0*(int)(cm2/360.);
-			// http://www.skyandtelescope.com/observing/transit-times-of-jupiters-great-red-spot/ writes:
-			// The predictions assume the Red Spot was at Jovian System II longitude 216° in September 2014 and continues to drift 1.25° per month, based on historical trends noted by JUPOS.
-			// GRS longitude was at 2014-09-08 216d with a drift of 1.25d every month
-			double longitudeGRS=216+1.25*( JDE - 2456908)/30;
-			// qDebug() << "Jupiter: CM2 = " << cm2 << " longitudeGRS = " << longitudeGRS << " --> rotation = " << (cm2 - longitudeGRS);
-			return cm2 - longitudeGRS + 25.; // + 25 = Jupiter Texture not 0d
-			// To verify:
-			// GRS at 2015-02-26 23:07 UT on picture at https://maximusphotography.files.wordpress.com/2015/03/jupiter-febr-26-2015.jpg
-			//        2014-02-25 19:03 UT    http://www.damianpeach.com/jup1314/2014_02_25rgb0305.jpg
-			//	  2013-05-01 10:29 UT    http://astro.christone.net/jupiter/jupiter2012/jupiter20130501.jpg
-			//        2012-10-26 00:12 UT at http://www.lunar-captures.com//jupiter2012_files/121026_JupiterGRS_Tar.jpg
-			//	  2011-08-28 02:29 UT at http://www.damianpeach.com/jup1112/2011_08_28rgb.jpg
-			// stellarium 2h too early: 2010-09-21 23:37 UT http://www.digitalsky.org.uk/Jupiter/2010-09-21_23-37-30_R-G-B_800.jpg
-		}
+		// http://www.projectpluto.com/grs_form.htm
+		// CM( System II) =  181.62 + 870.1869147 * jd + correction [870d rotation every day]
+		const double rad  = M_PI/180.;
+		double jup_mean = (JDE - 2455636.938) * 360. / 4332.89709;
+		double eqn_center = 5.55 * sin( rad*jup_mean);
+		double angle = (JDE - 2451870.628) * 360. / 398.884 - eqn_center;
+		//double correction = 11 * sin( rad*angle) + 5 * cos( rad*angle)- 1.25 * cos( rad*jup_mean) - eqn_center; // original correction
+		double correction = 25.8 + 11 * sin( rad*angle) - 2.5 * cos( rad*jup_mean) - eqn_center; // light speed correction not used because in stellarium the jd is manipulated for that
+		double cm2=181.62 + 870.1869147 * JDE + correction; // Central Meridian II
+		cm2=cm2 - 360.0*(int)(cm2/360.);
+		// http://www.skyandtelescope.com/observing/transit-times-of-jupiters-great-red-spot/ writes:
+		// The predictions assume the Red Spot was at Jovian System II longitude 216° in September 2014 and continues to drift 1.25° per month, based on historical trends noted by JUPOS.
+		// GRS longitude was at 2014-09-08 216d with a drift of 1.25d every month
+		double longitudeGRS=216+1.25*( JDE - 2456908)/30;
+		// qDebug() << "Jupiter: CM2 = " << cm2 << " longitudeGRS = " << longitudeGRS << " --> rotation = " << (cm2 - longitudeGRS);
+		return cm2 - longitudeGRS + 25.; // + 25 = Jupiter Texture not 0d
+		// To verify:
+		// GRS at 2015-02-26 23:07 UT on picture at https://maximusphotography.files.wordpress.com/2015/03/jupiter-febr-26-2015.jpg
+		//        2014-02-25 19:03 UT    http://www.damianpeach.com/jup1314/2014_02_25rgb0305.jpg
+		//	  2013-05-01 10:29 UT    http://astro.christone.net/jupiter/jupiter2012/jupiter20130501.jpg
+		//        2012-10-26 00:12 UT at http://www.lunar-captures.com//jupiter2012_files/121026_JupiterGRS_Tar.jpg
+		//	  2011-08-28 02:29 UT at http://www.damianpeach.com/jup1112/2011_08_28rgb.jpg
+		// stellarium 2h too early: 2010-09-21 23:37 UT http://www.digitalsky.org.uk/Jupiter/2010-09-21_23-37-30_R-G-B_800.jpg
 	}
 	else
 		return remainder * 360. + re.offset;
