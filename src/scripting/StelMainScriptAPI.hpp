@@ -415,6 +415,11 @@ public slots:
 	//! @deprecated Use StelMovementMgr::moveViewport instead
 	void setViewportOffset(const float x, const float y);
 
+	//! Set a lateral width distortion. Currently only affects Cylindrical projection. Use this e.g. in startup.ssc.
+	//! Implemented for 0.15 for a setup with 5 beamers with edge blending. The 9600x1200 get squeezed somewhat which loooks a bit odd. Use this stretch to compensate.
+	//! Experimental! To avoid overuse, there is currently no config.ini setting available.
+	void setViewportStretch(const float stretch);
+
 	//! Get a list of Sky Culture IDs
 	//! @return a list of valid sky culture IDs
 	QStringList getAllSkyCultureIDs();

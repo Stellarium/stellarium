@@ -378,7 +378,10 @@ public slots:
 	//! Animation is available via StelMovementMgr::moveViewport()
 	void setViewportVerticalOffset(double newOffsetPct);
 
-
+	//! Can be used in rare circumstances:
+	//! @param stretch [default 1] enlarge to stretch image to non-square pixels. Currently only affects Cylindrical projection.
+	//! @note This is a quick hack for a special application of V0.15. Instead of patching the projection, it may be more useful to change the viewport geometry. Maybe later.
+	void setViewportStretch(float stretch);
 
 	//! Get the location used by default at startup
 	QString getDefaultLocationID() const;
