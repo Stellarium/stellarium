@@ -410,6 +410,11 @@ void StelMainScriptAPI::setViewportOffset(const float x, const float y)
 	core->getMovementMgr()->moveViewport(x,y);
 }
 
+void StelMainScriptAPI::setViewportStretch(const float stretch)
+{
+	StelApp::getInstance().getCore()->setViewportStretch(stretch);
+}
+
 void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 				     double ra0, double dec0,
 				     double ra1, double dec1,
