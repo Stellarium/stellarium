@@ -322,7 +322,7 @@ bool StelProjectorCylinder::forward(Vec3f &v) const
 	const bool rval = (-r < v[1] && v[1] < r);
 	const float alpha = std::atan2(v[0],-v[2]);
 	const float delta = std::asin(v[1]/r);
-	v[0] = alpha;
+	v[0] = alpha*widthStretch;
 	v[1] = delta;
 	v[2] = r;
 	return rval;
@@ -332,8 +332,9 @@ bool StelProjectorCylinder::backward(Vec3d &v) const
 {
 	const bool rval = v[1]<M_PI_2 && v[1]>-M_PI_2 && v[0]>-M_PI && v[0]<M_PI;
 	const double cd = std::cos(v[1]);
-	v[2] = - cd * std::cos(v[0]);
-	v[0] = cd * std::sin(v[0]);
+	const double alpha=v[0]/widthStretch;
+	v[2] = - cd * std::cos(alpha);
+	v[0] = cd * std::sin(alpha);
 	v[1] = std::sin(v[1]);
 	return rval;
 }

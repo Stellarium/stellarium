@@ -106,7 +106,8 @@ public:
 			, viewportFovDiameter(0.f)
 			, flipHorz(false)
 			, flipVert(false)
-			, devicePixelsPerPixel(1.f) {;}
+			, devicePixelsPerPixel(1.f)
+			, widthStretch(1.f) {;}
 
 		Vector4<int> viewportXywh;       //! posX, posY, width, height
 		float fov;                       //! FOV in degrees
@@ -120,6 +121,7 @@ public:
 		float viewportFovDiameter;       //! diameter of the FOV disk in pixel
 		bool flipHorz, flipVert;         //! Whether to flip in horizontal or vertical directions
 		float devicePixelsPerPixel;      //! The number of device pixel per "Device Independent Pixels" (value is usually 1, but 2 for mac retina screens)
+		float widthStretch;              //! A factor to adapt to rare situations. Currently only used to allow to stretch/squeeze Cylindrical projections a bit. Larger than 1 means the image is stretched wider.
 	};
 
 	//! Destructor
@@ -326,7 +328,7 @@ protected:
 	float defaultAngleForGravityText;   // a rotation angle to apply to gravity text (only if gravityLabels is set to false)
 	SphericalCap boundingCap;           // Bounding cap of the whole viewport
 	float devicePixelsPerPixel;         // The number of device pixel per "Device Independent Pixels" (value is usually 1, but 2 for mac retina screens)
-
+	float widthStretch;                 // A factor to adapt to rare situations. Currently only used to allow to stretch/squeeze Cylindrical projections a bit. Larger than 1 means the image is stretched wider.
 private:
 	//! Initialise the StelProjector from a param instance.
 	void init(const StelProjectorParams& param);
