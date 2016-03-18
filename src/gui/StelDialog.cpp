@@ -371,7 +371,7 @@ void QDoubleSpinBoxStelPropertyConnectionHelper::onPropertyChanged(const QVarian
 }
 
 QSliderStelPropertyConnectionHelper::QSliderStelPropertyConnectionHelper(StelProperty *prop, double minValue, double maxValue, QSlider *slider)
-	: StelPropertyProxy(prop,slider),minValue(minValue),maxValue(maxValue),slider(slider)
+	: StelPropertyProxy(prop,slider),slider(slider),minValue(minValue),maxValue(maxValue)
 {
 	QVariant val = prop->getValue();
 	bool ok = val.canConvert<double>();
