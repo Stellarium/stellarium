@@ -37,7 +37,7 @@ IF(${XGETTEXT_FOUND})
 			--copyright-holder=Stellarium's\ team
 			--package-name=stellarium-remotecontrol
 			--from-code=utf-8
-			index.html
+			index.html tablet7in.html
 		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 		COMMENT "Generating stellarium-remotecontrol.pot"
 		VERBATIM

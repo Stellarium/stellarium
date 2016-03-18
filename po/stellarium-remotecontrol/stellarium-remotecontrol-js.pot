@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-14 20:46+0100\n"
+"POT-Creation-Date: 2016-03-18 23:57+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,15 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/webroot/js/api/actions.js:71
+#: data/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
 msgstr ""
 
-#: data/webroot/js/api/actions.js:98
+#: data/webroot/js/api/actions.js:88
 msgid "Action '%1' not accepted by server: "
 msgstr ""
 
-#: data/webroot/js/api/actions.js:105
+#: data/webroot/js/api/actions.js:95
 msgid "Error sending action '%1' to server: "
 msgstr ""
 
@@ -34,15 +34,27 @@ msgstr ""
 msgid "Error performing search"
 msgstr ""
 
-#: data/webroot/js/api/location.js:124
+#: data/webroot/js/api/location.js:125
 msgid "Could not retrieve country list"
 msgstr ""
 
-#: data/webroot/js/api/location.js:137
+#: data/webroot/js/api/location.js:138
 msgid "Could not retrieve planet list"
 msgstr ""
 
-#: data/webroot/js/api/remotecontrol.js:119
+#: data/webroot/js/api/properties.js:28
+msgid "Could not retrieve property list"
+msgstr ""
+
+#: data/webroot/js/api/properties.js:89 data/webroot/js/api/properties.js:110
+msgid "Property '%1' not accepted by server: "
+msgstr ""
+
+#: data/webroot/js/api/properties.js:96
+msgid "Error sending property '%1' to server: "
+msgstr ""
+
+#: data/webroot/js/api/remotecontrol.js:193
 msgid "Error sending command to server: "
 msgstr ""
 
@@ -78,19 +90,19 @@ msgstr ""
 msgid "waiting"
 msgstr ""
 
-#: data/webroot/js/api/viewoptions.js:61
+#: data/webroot/js/api/viewoptions.js:60
 msgid "Could not retrieve projection list"
 msgstr ""
 
-#: data/webroot/js/api/viewoptions.js:74 data/webroot/js/api/viewoptions.js:87
+#: data/webroot/js/api/viewoptions.js:73 data/webroot/js/api/viewoptions.js:86
 msgid "Could not retrieve landscape list"
 msgstr ""
 
-#: data/webroot/js/ui/actions.js:115 data/webroot/js/ui/actions.js:131
+#: data/webroot/js/ui/actions.js:44 data/webroot/js/ui/actions.js:77
 msgid "on"
 msgstr ""
 
-#: data/webroot/js/ui/actions.js:115 data/webroot/js/ui/actions.js:131
+#: data/webroot/js/ui/actions.js:44 data/webroot/js/ui/actions.js:77
 msgid "off"
 msgstr ""
 
@@ -102,10 +114,10 @@ msgstr ""
 msgid "Input did not match any item"
 msgstr ""
 
-#: data/webroot/js/ui/mainui.js:134
+#: data/webroot/js/ui/mainui.js:313
 msgid "No current selection"
 msgstr ""
 
-#: data/webroot/js/ui/scripts.js:51
+#: data/webroot/js/ui/scripts.js:71
 msgid "-none-"
 msgstr ""
