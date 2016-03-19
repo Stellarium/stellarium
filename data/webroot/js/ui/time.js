@@ -63,9 +63,9 @@ define(["jquery", "api/time", "api/actions", "jquery-ui"], function($, timeApi, 
 
 		//use delegated event style here to reduce number of unique events
 		var scope = ".timedisplay input";
-		$("#timewidget").on("focus", scope, function(evt) {
+		$("#timewidget").on("focus spinstart", scope, function(evt) {
 			enterTimeEditMode();
-		}).on("blur", scope, function(evt) {
+		}).on("blur spinstop", scope, function(evt) {
 			leaveTimeEditMode();
 		});
 
