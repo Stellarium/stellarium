@@ -61,7 +61,6 @@ Source: "@QtPrintSupport_location@"; DestDir: "{app}";
 @ISS_ANGLE_LIBS@
 @ISS_ICU_LIBS@
 @ISS_QT_PLUGINS@
-@ISS_MULTIMEDIA_PLUGINS@
 Source: "@CMAKE_INSTALL_PREFIX@\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs
 
 [Tasks]
@@ -170,9 +169,9 @@ const
   VC_REDIST_X86 = '{13A4EE12-23EA-3371-91EE-EFB36DDFFF3E}';
   VC_REDIST_X64 = '{A749D8E6-B613-3BE3-8F5F-045C84EBA29B}';
   
-  // Visual C++ 2015 Redistributable 14.0.23026
-  // VC_REDIST_X86 = '{A2563E55-3BEC-3828-8D67-E5E8B9E8B675}';
-  // VC_REDIST_X64 = '{0D3E9E15-DE7A-300B-96F1-B4AF12B96488}';
+  // Visual C++ 2015 Redistributable 14.0.23506
+  // VC_REDIST_X86 = '{23daf363-3020-4059-b3ae-dc4ad39fed19}';
+  // VC_REDIST_X64 = '{3ee5e5bb-b7cc-4556-8861-a00a82977d6c}';
 
 function MsiQueryProductState(szProduct: string): INSTALLSTATE; 
   external 'MsiQueryProductState{#AW}@msi.dll stdcall';
