@@ -45,8 +45,28 @@ define(["jquery", "jquery.ui.touch-punch"], function($, jqueryui) {
 		_create: function() {
 			this._super();
 
-			//register additional events to react to keyboard input
+			//register additional events to react to keyboard and touch input
 			this._on({
+
+				//better touch support for buttons with repeating
+				"touchstart .ui-spinner-button": function(event) {
+					if (this._start(event) === false) {
+						return;
+					}
+
+					this._repeat(null, $(event.currentTarget).hasClass("ui-spinner-up") ? 1 : -1, event);
+					//prevent scrolling
+					event.preventDefault();
+				},
+
+				//prevent scrolling
+				"touchmove .ui-spinner-button": function(event) {
+					event.preventDefault();
+				},
+
+				"touchend .ui-spinner-button": function(event) {
+					this._stop();
+				},
 
 				focus: function(event) {
 					//make sure this is correct before input happens
@@ -63,7 +83,7 @@ define(["jquery", "jquery.ui.touch-punch"], function($, jqueryui) {
 					//prevent leading zeroes
 					var elem = this.element[0];
 					if ('selectionStart' in elem) {
-						if(event.which === 48 && elem.selectionStart === 0 && elem.selectionEnd === 0)
+						if (event.which === 48 && elem.selectionStart === 0 && elem.selectionEnd === 0)
 							event.preventDefault();
 					}
 
@@ -103,7 +123,10 @@ define(["jquery", "jquery.ui.touch-punch"], function($, jqueryui) {
 		//select whole input field when spin is performed
 		_repeat: function(i, steps, event) {
 			this._super(i, steps, event);
-			this.element.select();
+
+			//if we have reasonable suspicion this is a touch device (set by touch-punch), dont select text to avoid bringing the keyboard up
+			if (!$.support.touch)
+				this.element.select();
 		},
 
 		//override spin to fire input event
