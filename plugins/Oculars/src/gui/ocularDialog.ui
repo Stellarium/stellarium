@@ -183,7 +183,7 @@
             <property name="title">
              <string>Ocular view</string>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_7">
+            <layout class="QGridLayout" name="gridLayout_6">
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -196,27 +196,37 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item>
+             <item row="0" column="0">
               <widget class="QCheckBox" name="requireSelectionCheckBox">
                <property name="text">
                 <string>Enable only if an object is selected</string>
                </property>
               </widget>
              </item>
-             <item>
-              <widget class="QCheckBox" name="scaleImageCircleCheckBox">
-               <property name="text">
-                <string>Scale image circle</string>
-               </property>
-              </widget>
-             </item>
-             <item>
+             <item row="3" column="0">
               <widget class="QCheckBox" name="limitStellarMagnitudeCheckBox">
                <property name="toolTip">
                 <string>Apply limits stellar magnitude for different apertures of telescopes</string>
                </property>
                <property name="text">
                 <string>Limit stellar magnitude</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="scaleImageCircleCheckBox">
+               <property name="text">
+                <string>Scale image circle</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="semiTransparencyCheckBox">
+               <property name="toolTip">
+                <string/>
+               </property>
+               <property name="text">
+                <string>Use semi-transparent mask</string>
                </property>
               </widget>
              </item>
@@ -1810,7 +1820,6 @@
  <tabstops>
   <tabstop>Tabs</tabstop>
   <tabstop>requireSelectionCheckBox</tabstop>
-  <tabstop>scaleImageCircleCheckBox</tabstop>
   <tabstop>togglePluginLineEdit</tabstop>
   <tabstop>togglePopupNavigatorWindowLineEdit</tabstop>
   <tabstop>ocularListView</tabstop>

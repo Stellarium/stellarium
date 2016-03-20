@@ -1573,6 +1573,8 @@ void SolarSystem::selectedObjectChange(StelModule::StelModuleSelectAction)
 		if (getFlagIsolatedTrails())
 			recreateTrails();
 	}
+	else
+		setSelected("");
 }
 
 // Activate/Deactivate planets display
