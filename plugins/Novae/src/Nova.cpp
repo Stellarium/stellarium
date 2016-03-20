@@ -308,7 +308,7 @@ void Nova::draw(StelCore* core, StelPainter* painter)
 	{
 		sd->computeRCMag(mag, &rcMag);
 		sd->drawPointSource(painter, Vec3f(XYZ[0],XYZ[1],XYZ[2]), rcMag, color, false);
-		painter->setColor(color[0], color[1], color[2], 1);
+		painter->setColor(color[0], color[1], color[2], 1.f);
 		size = getAngularSize(NULL)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
 		shift = 6.f + size/1.8f;
 		if (labelsFader.getInterstate()<=0.f && (mag+5.f)<mlimit && smgr->getFlagLabels())
