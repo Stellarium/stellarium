@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-27 19:29+0600\n"
+"POT-Creation-Date: 2016-03-18 00:42+0600\n"
 "PO-Revision-Date: 2014-05-18 04:50+0000\n"
 "Last-Translator: henrysky <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-02-28 04:54+0000\n"
-"X-Generator: Launchpad (build 17925)\n"
+"X-Launchpad-Export-Date: 2016-03-18 05:38+0000\n"
+"X-Generator: Launchpad (build 17947)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:904 src/core/modules/LandscapeMgr.cpp:414
@@ -46,7 +46,7 @@ msgstr "星座標示"
 msgid "Constellation boundaries"
 msgstr "星座邊界"
 
-#: src/core/modules/StarMgr.cpp:376 src/ui_viewDialog.h:1584
+#: src/core/modules/StarMgr.cpp:376 src/ui_viewDialog.h:1571
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:246
 msgid "Stars"
 msgstr "星星"
@@ -55,7 +55,7 @@ msgstr "星星"
 msgid "Stars labels"
 msgstr "星星標誌"
 
-#: src/core/modules/GridLinesMgr.cpp:599 src/ui_viewDialog.h:1778
+#: src/core/modules/GridLinesMgr.cpp:599 src/ui_viewDialog.h:1760
 msgid "Meridian"
 msgstr "子午圈"
 
@@ -79,7 +79,7 @@ msgstr "赤道"
 msgid "Precession Circle"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:624 src/ui_viewDialog.h:1766
+#: src/core/modules/GridLinesMgr.cpp:624 src/ui_viewDialog.h:1748
 msgid "Horizon"
 msgstr "地平線"
 
@@ -88,12 +88,12 @@ msgid "Galactic Equator"
 msgstr ""
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
-#: src/core/modules/GridLinesMgr.cpp:633 src/ui_viewDialog.h:1790
+#: src/core/modules/GridLinesMgr.cpp:633 src/ui_viewDialog.h:1772
 msgid "O./C. longitude"
 msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:637 src/core/modules/GridLinesMgr.cpp:920
-#: src/ui_viewDialog.h:1782
+#: src/ui_viewDialog.h:1764
 msgid "Prime Vertical"
 msgstr ""
 
@@ -110,7 +110,7 @@ msgstr ""
 msgid "Equatorial grid"
 msgstr "赤道座標柵格"
 
-#: src/core/modules/GridLinesMgr.cpp:906 src/ui_viewDialog.h:1742
+#: src/core/modules/GridLinesMgr.cpp:906 src/ui_viewDialog.h:1724
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Azimuthal grid"
 msgstr "地平座標柵格"
@@ -156,12 +156,12 @@ msgstr "黃道座標柵格 (J2000)"
 msgid "Ecliptic grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:916 src/ui_viewDialog.h:1746
+#: src/core/modules/GridLinesMgr.cpp:916 src/ui_viewDialog.h:1728
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:382
 msgid "Galactic grid"
 msgstr "銀河系柵格"
 
-#: src/core/modules/GridLinesMgr.cpp:917 src/ui_viewDialog.h:1770
+#: src/core/modules/GridLinesMgr.cpp:917 src/ui_viewDialog.h:1752
 msgid "Galactic equator"
 msgstr ""
 
@@ -178,7 +178,7 @@ msgstr ""
 msgid "Colure Lines"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1602
+#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1589
 msgid "Atmosphere"
 msgstr "大氣"
 
@@ -186,7 +186,7 @@ msgstr "大氣"
 msgid "Fog"
 msgstr "霧"
 
-#: src/core/modules/LandscapeMgr.cpp:417 src/ui_viewDialog.h:1774
+#: src/core/modules/LandscapeMgr.cpp:417 src/ui_viewDialog.h:1756
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:304
 msgid "Cardinal points"
 msgstr "方向標示"
@@ -199,7 +199,7 @@ msgstr "地面"
 msgid "Illumination"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:1708
+#: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:1690
 #: plugins/Satellites/src/ui_satellitesDialog.h:718
 msgid "Labels"
 msgstr "標記"
@@ -510,195 +510,197 @@ msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:968
+#. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
+#: src/core/modules/Nebula.cpp:970
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:971
+#. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
+#: src/core/modules/Nebula.cpp:976
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:974
+#: src/core/modules/Nebula.cpp:980
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:997
+#: src/core/modules/Nebula.cpp:1003
 msgid "circular form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1000
+#: src/core/modules/Nebula.cpp:1006
 msgid "elliptical form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1003
+#: src/core/modules/Nebula.cpp:1009
 msgid "irregular form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1006
+#: src/core/modules/Nebula.cpp:1012
 msgid "undocumented form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1012
+#: src/core/modules/Nebula.cpp:1018
 msgid "amorphous structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1015
+#: src/core/modules/Nebula.cpp:1021
 msgid "conventional structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1018
+#: src/core/modules/Nebula.cpp:1024
 msgid "filamentary structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1021
-msgid "undocumented structure"
-msgstr ""
-
 #: src/core/modules/Nebula.cpp:1027
-msgctxt "HII region brightness"
-msgid "faintest"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:1030
-msgctxt "HII region brightness"
-msgid "moderate brightness"
+msgid "undocumented structure"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:1033
 msgctxt "HII region brightness"
-msgid "brightest"
+msgid "faintest"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:1036
+msgctxt "HII region brightness"
+msgid "moderate brightness"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:1039
+msgctxt "HII region brightness"
+msgid "brightest"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:1042
 msgid "undocumented brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1052
+#: src/core/modules/Nebula.cpp:1058
 msgid "galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1055
+#: src/core/modules/Nebula.cpp:1061
 msgid "active galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1058
+#: src/core/modules/Nebula.cpp:1064
 msgid "radio galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1061
+#: src/core/modules/Nebula.cpp:1067
 msgid "interacting galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1064 plugins/Quasars/src/Quasar.cpp:98
+#: src/core/modules/Nebula.cpp:1070 plugins/Quasars/src/Quasar.cpp:98
 msgid "quasar"
 msgstr "類星體"
 
-#: src/core/modules/Nebula.cpp:1067
+#: src/core/modules/Nebula.cpp:1073
 msgid "star cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1070
+#: src/core/modules/Nebula.cpp:1076
 msgid "open star cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1073
+#: src/core/modules/Nebula.cpp:1079
 msgid "globular star cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1076
+#: src/core/modules/Nebula.cpp:1082
 msgid "nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1079
+#: src/core/modules/Nebula.cpp:1085
 msgid "planetary nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1082
+#: src/core/modules/Nebula.cpp:1088
 msgid "dark nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1085
+#: src/core/modules/Nebula.cpp:1091
 msgid "cluster associated with nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1088
+#: src/core/modules/Nebula.cpp:1094
 msgid "bipolar nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1091
+#: src/core/modules/Nebula.cpp:1097
 msgid "emission nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1094
+#: src/core/modules/Nebula.cpp:1100
 msgid "HII region"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1097
+#: src/core/modules/Nebula.cpp:1103
 msgid "reflection nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1100
+#: src/core/modules/Nebula.cpp:1106
 msgid "supernova remnant"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1103
+#: src/core/modules/Nebula.cpp:1109
 msgid "stellar association"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1106
+#: src/core/modules/Nebula.cpp:1112
 msgid "star cloud"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1109
+#: src/core/modules/Nebula.cpp:1115
 msgid "interstellar matter"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1112
+#: src/core/modules/Nebula.cpp:1118
 msgid "emission object"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1115
+#: src/core/modules/Nebula.cpp:1121
 msgid "BL Lac object"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1118
+#: src/core/modules/Nebula.cpp:1124
 msgid "blazar"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1121
+#: src/core/modules/Nebula.cpp:1127
 msgid "molecular cloud"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1124
+#: src/core/modules/Nebula.cpp:1130
 msgid "young stellar object"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1127
+#: src/core/modules/Nebula.cpp:1133
 msgid "possible quasar"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1130
+#: src/core/modules/Nebula.cpp:1136
 msgid "possible planetary nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1133
+#: src/core/modules/Nebula.cpp:1139
 msgid "protoplanetary nebula"
 msgstr ""
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1136 src/core/modules/StarWrapper.cpp:53
+#: src/core/modules/Nebula.cpp:1142 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:174 src/translations.h:42
 msgid "star"
 msgstr "星星"
 
-#: src/core/modules/Nebula.cpp:1139
+#: src/core/modules/Nebula.cpp:1145
 msgid "object of unknown nature"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1142
+#: src/core/modules/Nebula.cpp:1148
 msgid "undocumented type"
 msgstr ""
 
@@ -1659,32 +1661,32 @@ msgstr "找不到"
 msgid "Found"
 msgstr "已找到"
 
-#: src/gui/ConfigurationDialog.cpp:504
+#: src/gui/ConfigurationDialog.cpp:507
 msgid "Select screenshot directory"
 msgstr "選擇儲存截圖資料夾"
 
-#: src/gui/ConfigurationDialog.cpp:798
+#: src/gui/ConfigurationDialog.cpp:801
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "啟動時視野大小:%1%2"
 
-#: src/gui/ConfigurationDialog.cpp:806
+#: src/gui/ConfigurationDialog.cpp:809
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "啟動時的地平坐標方位角/高度角: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:868
+#: src/gui/ConfigurationDialog.cpp:871
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
 msgid "Authors"
 msgstr "著作群"
 
-#: src/gui/ConfigurationDialog.cpp:869 src/gui/ViewDialog.cpp:677
+#: src/gui/ConfigurationDialog.cpp:872 src/gui/ViewDialog.cpp:679
 msgid "Contact"
 msgstr "聯繫"
 
-#: src/gui/ConfigurationDialog.cpp:871
+#: src/gui/ConfigurationDialog.cpp:874
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
-#: plugins/Oculars/src/gui/OcularDialog.cpp:542
+#: plugins/Oculars/src/gui/OcularDialog.cpp:547
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:408
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
 #: plugins/Novae/src/gui/NovaeDialog.cpp:118
@@ -1697,9 +1699,9 @@ msgstr "聯繫"
 msgid "Version"
 msgstr "版本"
 
-#: src/gui/ConfigurationDialog.cpp:954
+#: src/gui/ConfigurationDialog.cpp:957
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:543
+#: plugins/Oculars/src/gui/OcularDialog.cpp:548
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:120
 #: plugins/Novae/src/gui/NovaeDialog.cpp:119
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
@@ -1711,23 +1713,23 @@ msgstr "版本"
 msgid "Author"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:958
+#: src/gui/ConfigurationDialog.cpp:961
 msgid "License"
 msgstr "授權條款"
 
-#: src/gui/ConfigurationDialog.cpp:962
+#: src/gui/ConfigurationDialog.cpp:965
 msgid "Shortcut"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:986
+#: src/gui/ConfigurationDialog.cpp:989
 msgid "Running script: "
 msgstr "執行指令： "
 
-#: src/gui/ConfigurationDialog.cpp:993
+#: src/gui/ConfigurationDialog.cpp:996
 msgid "Running script: [none]"
 msgstr "執行指令：[空白]"
 
-#: src/gui/ConfigurationDialog.cpp:1058
+#: src/gui/ConfigurationDialog.cpp:1061
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -1735,23 +1737,23 @@ msgstr ""
 "新的星體資料庫經已下載完畢！\n"
 "請重新啟動 Stellarium 以使用新的星體資料庫。"
 
-#: src/gui/ConfigurationDialog.cpp:1062
+#: src/gui/ConfigurationDialog.cpp:1065
 msgid "All available star catalogs have been installed."
 msgstr "所有可用星體資料庫均已安裝"
 
-#: src/gui/ConfigurationDialog.cpp:1067
+#: src/gui/ConfigurationDialog.cpp:1070
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "取得星體資料庫 %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:1074
+#: src/gui/ConfigurationDialog.cpp:1077
 #, qt-format
 msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr "下載中 %1 ..."
 
-#: src/gui/ConfigurationDialog.cpp:1081
+#: src/gui/ConfigurationDialog.cpp:1084
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -1762,7 +1764,7 @@ msgstr ""
 "星體數量:%2 百萬\n"
 "星等範圍: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1124 src/gui/ConfigurationDialog.cpp:1160
+#: src/gui/ConfigurationDialog.cpp:1127 src/gui/ConfigurationDialog.cpp:1163
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1771,11 +1773,11 @@ msgstr ""
 "錯誤！下載中 %1：\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1213
+#: src/gui/ConfigurationDialog.cpp:1216
 msgid "Verifying file integrity..."
 msgstr "正在檢查檔案完整性..."
 
-#: src/gui/ConfigurationDialog.cpp:1217
+#: src/gui/ConfigurationDialog.cpp:1220
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1784,136 +1786,136 @@ msgstr ""
 "錯誤！下載中 %1：\n"
 "檔案損壞。"
 
-#: src/gui/ConfigurationDialog.cpp:1263 src/gui/ConfigurationDialog.cpp:1272
+#: src/gui/ConfigurationDialog.cpp:1266 src/gui/ConfigurationDialog.cpp:1275
 msgid "Available"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1265 src/gui/ConfigurationDialog.cpp:1274
+#: src/gui/ConfigurationDialog.cpp:1268 src/gui/ConfigurationDialog.cpp:1277
 msgid "Not Available"
 msgstr ""
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1337
+#: src/gui/ConfigurationDialog.cpp:1340
 msgid "Algorithm of"
 msgstr "演算法"
 
-#: src/gui/ConfigurationDialog.cpp:1348
+#: src/gui/ConfigurationDialog.cpp:1351
 msgid "Without correction"
 msgstr "無修正"
 
-#: src/gui/ConfigurationDialog.cpp:1349
+#: src/gui/ConfigurationDialog.cpp:1352
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1350
+#: src/gui/ConfigurationDialog.cpp:1353
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1351
+#: src/gui/ConfigurationDialog.cpp:1354
 msgid "IAU (1952)"
 msgstr "國際天文聯會 IAU (19520"
 
-#: src/gui/ConfigurationDialog.cpp:1352
+#: src/gui/ConfigurationDialog.cpp:1355
 msgid "Astronomical Ephemeris (1960)"
 msgstr "天文星歷 (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1353
+#: src/gui/ConfigurationDialog.cpp:1356
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1354
+#: src/gui/ConfigurationDialog.cpp:1357
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller & Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1355
+#: src/gui/ConfigurationDialog.cpp:1358
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1356
+#: src/gui/ConfigurationDialog.cpp:1359
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel & Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1357
+#: src/gui/ConfigurationDialog.cpp:1360
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison & Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1358
+#: src/gui/ConfigurationDialog.cpp:1361
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson & Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1359
+#: src/gui/ConfigurationDialog.cpp:1362
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson & Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1360
+#: src/gui/ConfigurationDialog.cpp:1363
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1361
+#: src/gui/ConfigurationDialog.cpp:1364
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1362
+#: src/gui/ConfigurationDialog.cpp:1365
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel & Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1363
+#: src/gui/ConfigurationDialog.cpp:1366
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze & Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1364
+#: src/gui/ConfigurationDialog.cpp:1367
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson & Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1365
+#: src/gui/ConfigurationDialog.cpp:1368
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1367
+#: src/gui/ConfigurationDialog.cpp:1370
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (與 Chapront, Chapront-Touze & Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1368
+#: src/gui/ConfigurationDialog.cpp:1371
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1369
+#: src/gui/ConfigurationDialog.cpp:1372
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus & Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1370
+#: src/gui/ConfigurationDialog.cpp:1373
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1371
+#: src/gui/ConfigurationDialog.cpp:1374
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold & Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1372
+#: src/gui/ConfigurationDialog.cpp:1375
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison & Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1374
+#: src/gui/ConfigurationDialog.cpp:1377
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak & Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1377
+#: src/gui/ConfigurationDialog.cpp:1380
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1378
+#: src/gui/ConfigurationDialog.cpp:1381
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1379
+#: src/gui/ConfigurationDialog.cpp:1382
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1380
+#: src/gui/ConfigurationDialog.cpp:1383
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1381
+#: src/gui/ConfigurationDialog.cpp:1384
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "自定 %1T公式"
@@ -2075,7 +2077,7 @@ msgstr "OSX開發: %1"
 
 #: src/gui/HelpDialog.cpp:317
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
-#: plugins/Oculars/src/gui/OcularDialog.cpp:544
+#: plugins/Oculars/src/gui/OcularDialog.cpp:549
 msgid "Contributors"
 msgstr "貢獻者"
 
@@ -2197,111 +2199,111 @@ msgid "Frames per second"
 msgstr "每秒格數"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:546
+#: src/gui/ViewDialog.cpp:548
 msgid "Excellent dark-sky site"
 msgstr "極好黑暗星空地點"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:548
+#: src/gui/ViewDialog.cpp:550
 msgid "Typical truly dark site"
 msgstr "一般好黑暗星空地點"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:550
+#: src/gui/ViewDialog.cpp:552
 msgid "Rural sky"
 msgstr "鄉郊星空"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:552
+#: src/gui/ViewDialog.cpp:554
 msgid "Rural/suburban transition"
 msgstr "鄉郊/市郊過渡"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:554
+#: src/gui/ViewDialog.cpp:556
 msgid "Suburban sky"
 msgstr "市郊星空"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:556
+#: src/gui/ViewDialog.cpp:558
 msgid "Bright suburban sky"
 msgstr "光明市郊星空"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:558
+#: src/gui/ViewDialog.cpp:560
 msgid "Suburban/urban transition"
 msgstr "市郊/城市過渡"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:560
+#: src/gui/ViewDialog.cpp:562
 msgid "City sky"
 msgstr "城市星空"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:562
+#: src/gui/ViewDialog.cpp:564
 msgid "Inner-city sky"
 msgstr "市中心星空"
 
-#: src/gui/ViewDialog.cpp:576
+#: src/gui/ViewDialog.cpp:578
 msgid "The naked-eye limiting magnitude is"
 msgstr "肉眼可見最小星等是"
 
-#: src/gui/ViewDialog.cpp:600
+#: src/gui/ViewDialog.cpp:602
 msgid "Abbreviated"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:601
+#: src/gui/ViewDialog.cpp:603
 msgid "Native"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:602
+#: src/gui/ViewDialog.cpp:604
 msgid "Translated"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:726
+#: src/gui/ViewDialog.cpp:728
 msgid "No description"
 msgstr "沒有資訊"
 
-#: src/gui/ViewDialog.cpp:819
+#: src/gui/ViewDialog.cpp:821
 msgid "No shooting stars"
 msgstr "無流星"
 
-#: src/gui/ViewDialog.cpp:827
+#: src/gui/ViewDialog.cpp:829
 msgid "Normal rate"
 msgstr "正常頻率"
 
-#: src/gui/ViewDialog.cpp:830
+#: src/gui/ViewDialog.cpp:832
 msgid "Standard Orionids rate"
 msgstr "標準獵戶座流星雨率"
 
-#: src/gui/ViewDialog.cpp:833
+#: src/gui/ViewDialog.cpp:835
 msgid "Standard Perseids rate"
 msgstr "標準英仙座流星雨頻率"
 
-#: src/gui/ViewDialog.cpp:836
+#: src/gui/ViewDialog.cpp:838
 msgid "Standard Geminids rate"
 msgstr "標準雙子座流星雨率"
 
-#: src/gui/ViewDialog.cpp:839
+#: src/gui/ViewDialog.cpp:841
 msgid "Exceptional Perseid rate"
 msgstr "特殊英仙座流星雨率"
 
-#: src/gui/ViewDialog.cpp:842
+#: src/gui/ViewDialog.cpp:844
 msgid "Meteor storm rate"
 msgstr "流星雨數量"
 
-#: src/gui/ViewDialog.cpp:845
+#: src/gui/ViewDialog.cpp:847
 msgid "Exceptional Draconid rate"
 msgstr "特殊天龍座流星雨率"
 
-#: src/gui/ViewDialog.cpp:848
+#: src/gui/ViewDialog.cpp:850
 msgid "Exceptional Leonid rate"
 msgstr "超量獅子座流星雨"
 
-#: src/gui/ViewDialog.cpp:851
+#: src/gui/ViewDialog.cpp:853
 msgid "Very high rate (1966 Leonids)"
 msgstr "非常高 (1966獅子座的流星雨)"
 
-#: src/gui/ViewDialog.cpp:854
+#: src/gui/ViewDialog.cpp:856
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "有史以來最高 (1833獅子座的流星雨)"
 
@@ -2511,7 +2513,7 @@ msgid "year"
 msgstr "年"
 
 #. TRANSLATORS: name of object
-#: src/gui/AstroCalcDialog.cpp:135 src/ui_configurationDialog.h:1135
+#: src/gui/AstroCalcDialog.cpp:135 src/ui_configurationDialog.h:1141
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:286
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 #: plugins/Exoplanets/src/Exoplanet.cpp:323
@@ -2535,7 +2537,7 @@ msgid "Mag."
 msgstr ""
 
 #. TRANSLATORS: type of object
-#: src/gui/AstroCalcDialog.cpp:143 src/ui_configurationDialog.h:1155
+#: src/gui/AstroCalcDialog.cpp:143 src/ui_configurationDialog.h:1161
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 msgid "Type"
 msgstr "種類"
@@ -2825,7 +2827,7 @@ msgid "Reflection nebulae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:103 src/ui_viewDialog.h:1704
+#: src/translations.h:103 src/ui_viewDialog.h:1686
 msgid "Active galaxies"
 msgstr ""
 
@@ -2835,7 +2837,7 @@ msgid "Radio galaxies"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:107 src/ui_viewDialog.h:1698
+#: src/translations.h:107 src/ui_viewDialog.h:1680
 msgid "Interacting galaxies"
 msgstr ""
 
@@ -2845,7 +2847,7 @@ msgid "Bright quasars"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:111 src/ui_viewDialog.h:1701
+#: src/translations.h:111 src/ui_viewDialog.h:1683
 msgid "Star clusters"
 msgstr ""
 
@@ -2870,7 +2872,7 @@ msgid "Emission nebulae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:121 src/ui_viewDialog.h:1697
+#: src/translations.h:121 src/ui_viewDialog.h:1679
 msgid "Supernova remnants"
 msgstr ""
 
@@ -2920,12 +2922,12 @@ msgid "Protoplanetary Nebulae"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:141 src/ui_viewDialog.h:1661
+#: src/translations.h:141 src/ui_viewDialog.h:1643
 msgid "Messier Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:143 src/ui_viewDialog.h:1664
+#: src/translations.h:143 src/ui_viewDialog.h:1646
 msgid "Caldwell Catalogue"
 msgstr ""
 
@@ -3616,859 +3618,863 @@ msgid "Serbia and Montenegro"
 msgstr "塞爾維亞和黑山"
 
 #: src/translations.h:371
+msgid "Montenegro"
+msgstr ""
+
+#: src/translations.h:372
 msgid "Cuba"
 msgstr "古巴"
 
-#: src/translations.h:372
+#: src/translations.h:373
 msgid "Cape Verde"
 msgstr "維德角"
 
-#: src/translations.h:373
+#: src/translations.h:374
 msgid "Christmas Island"
 msgstr "聖誕島"
 
-#: src/translations.h:374
+#: src/translations.h:375
 msgid "Cyprus"
 msgstr "賽普勒斯"
 
-#: src/translations.h:375
+#: src/translations.h:376
 msgid "Czech Republic"
 msgstr "捷克共和國"
 
-#: src/translations.h:376
+#: src/translations.h:377
 msgid "Germany"
 msgstr "德國"
 
-#: src/translations.h:377
+#: src/translations.h:378
 msgid "Djibouti"
 msgstr "吉布地"
 
-#: src/translations.h:378
+#: src/translations.h:379
 msgid "Denmark"
 msgstr "丹麥"
 
-#: src/translations.h:379
+#: src/translations.h:380
 msgid "Dominica"
 msgstr "多明尼加"
 
-#: src/translations.h:380
+#: src/translations.h:381
 msgid "Dominican Republic"
 msgstr "多明尼加共和國"
 
-#: src/translations.h:381
+#: src/translations.h:382
 msgid "Algeria"
 msgstr "阿爾及利亞"
 
-#: src/translations.h:382
+#: src/translations.h:383
 msgid "Ecuador"
 msgstr "厄瓜多爾"
 
-#: src/translations.h:383
+#: src/translations.h:384
 msgid "Estonia"
 msgstr "愛沙尼亞"
 
-#: src/translations.h:384
+#: src/translations.h:385
 msgid "Egypt"
 msgstr "埃及"
 
-#: src/translations.h:385
+#: src/translations.h:386
 msgid "Western Sahara"
 msgstr "西撒哈拉"
 
-#: src/translations.h:386
+#: src/translations.h:387
 msgid "Eritrea"
 msgstr "厄利垂亞"
 
-#: src/translations.h:387
+#: src/translations.h:388
 msgid "Spain"
 msgstr "西班牙"
 
-#: src/translations.h:388
+#: src/translations.h:389
 msgid "Ethiopia"
 msgstr "埃塞俄比亞"
 
-#: src/translations.h:389
+#: src/translations.h:390
 msgid "Finland"
 msgstr "芬蘭"
 
-#: src/translations.h:390
+#: src/translations.h:391
 msgid "Fiji"
 msgstr "斐濟"
 
-#: src/translations.h:391
+#: src/translations.h:392
 msgid "Falkland Islands"
 msgstr "福克蘭群島"
 
-#: src/translations.h:392
+#: src/translations.h:393
 msgid "Micronesia"
 msgstr "密克羅西尼亞"
 
-#: src/translations.h:393
+#: src/translations.h:394
 msgid "Faroe Islands"
 msgstr "法羅羣島"
 
-#: src/translations.h:394
+#: src/translations.h:395
 msgid "France"
 msgstr "法國"
 
-#: src/translations.h:395
+#: src/translations.h:396
 msgid "Gabon"
 msgstr "加彭"
 
-#: src/translations.h:396
+#: src/translations.h:397
 msgid "United Kingdom"
 msgstr "英國"
 
-#: src/translations.h:397
+#: src/translations.h:398
 msgid "Grenada"
 msgstr "格瑞那達"
 
-#: src/translations.h:398
+#: src/translations.h:399
 msgid "Georgia"
 msgstr "格魯吉亞"
 
-#: src/translations.h:399
+#: src/translations.h:400
 msgid "French Guiana"
 msgstr "法屬圭亞那"
 
-#: src/translations.h:400
+#: src/translations.h:401
 msgid "Ghana"
 msgstr "加納"
 
-#: src/translations.h:401
+#: src/translations.h:402
 msgid "Gibraltar"
 msgstr "直布羅陀"
 
-#: src/translations.h:402
+#: src/translations.h:403
 msgid "Greenland"
 msgstr "格陵蘭"
 
-#: src/translations.h:403
+#: src/translations.h:404
 msgid "Gambia"
 msgstr "岡比亞"
 
-#: src/translations.h:404
+#: src/translations.h:405
 msgid "Guinea"
 msgstr "畿內亞"
 
-#: src/translations.h:405
+#: src/translations.h:406
 msgid "Guadeloupe"
 msgstr "瓜德魯普島"
 
-#: src/translations.h:406
+#: src/translations.h:407
 msgid "Equatorial Guinea"
 msgstr "赤道畿內亞"
 
-#: src/translations.h:407
+#: src/translations.h:408
 msgid "Greece"
 msgstr "希臘"
 
-#: src/translations.h:408
+#: src/translations.h:409
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "南喬治亞島和南桑威奇羣島"
 
-#: src/translations.h:409
+#: src/translations.h:410
 msgid "Guatemala"
 msgstr "危地馬拉"
 
-#: src/translations.h:410
+#: src/translations.h:411
 msgid "Guam"
 msgstr "關島"
 
-#: src/translations.h:411
+#: src/translations.h:412
 msgid "Guinea-Bissau"
 msgstr "畿內亞比索"
 
-#: src/translations.h:412
+#: src/translations.h:413
 msgid "Guyana"
 msgstr "圭亞那"
 
-#: src/translations.h:413
+#: src/translations.h:414
 msgid "Hong Kong"
 msgstr "香港"
 
-#: src/translations.h:414
+#: src/translations.h:415
 msgid "Heard Island and McDonald Islands"
 msgstr "赫德島與麥當勞群島"
 
-#: src/translations.h:415
+#: src/translations.h:416
 msgid "Honduras"
 msgstr "洪都拉斯"
 
-#: src/translations.h:416
+#: src/translations.h:417
 msgid "Croatia"
 msgstr "克羅地亞"
 
-#: src/translations.h:417
+#: src/translations.h:418
 msgid "Haiti"
 msgstr "海地"
 
-#: src/translations.h:418
+#: src/translations.h:419
 msgid "Hungary"
 msgstr "匈牙利"
 
-#: src/translations.h:419
+#: src/translations.h:420
 msgid "Indonesia"
 msgstr "印度尼西亞"
 
-#: src/translations.h:420
+#: src/translations.h:421
 msgid "Ireland"
 msgstr "愛爾蘭"
 
-#: src/translations.h:421
+#: src/translations.h:422
 msgid "Israel"
 msgstr "以色列"
 
-#: src/translations.h:422
+#: src/translations.h:423
 msgid "India"
 msgstr "印度"
 
-#: src/translations.h:423
+#: src/translations.h:424
 msgid "British Indian Ocean Territory"
 msgstr "英屬印度洋領地"
 
-#: src/translations.h:424
+#: src/translations.h:425
 msgid "Iraq"
 msgstr "伊拉克"
 
-#: src/translations.h:425
+#: src/translations.h:426
 msgid "Iran"
 msgstr "伊朗"
 
-#: src/translations.h:426
+#: src/translations.h:427
 msgid "Iceland"
 msgstr "冰島"
 
-#: src/translations.h:427
+#: src/translations.h:428
 msgid "Italy"
 msgstr "意大利"
 
-#: src/translations.h:428
+#: src/translations.h:429
 msgid "Jamaica"
 msgstr "牙買加"
 
-#: src/translations.h:429
+#: src/translations.h:430
 msgid "Jordan"
 msgstr "約旦"
 
-#: src/translations.h:430
+#: src/translations.h:431
 msgid "Japan"
 msgstr "日本"
 
-#: src/translations.h:431
+#: src/translations.h:432
 msgid "Kenya"
 msgstr "肯亞"
 
-#: src/translations.h:432
+#: src/translations.h:433
 msgid "Kyrgyzstan"
 msgstr "吉爾吉斯"
 
-#: src/translations.h:433
+#: src/translations.h:434
 msgid "Cambodia"
 msgstr "柬埔寨"
 
-#: src/translations.h:434
+#: src/translations.h:435
 msgid "Kiribati"
 msgstr "基里巴斯"
 
-#: src/translations.h:435
+#: src/translations.h:436
 msgid "Comoros"
 msgstr "科摩羅"
 
-#: src/translations.h:436
+#: src/translations.h:437
 msgid "Saint Kitts and Nevis"
 msgstr "聖基茨和尼維斯聯邦"
 
-#: src/translations.h:437
+#: src/translations.h:438
 msgid "Democratic People's Republic of Korea"
 msgstr "北韓"
 
-#: src/translations.h:438
+#: src/translations.h:439
 msgid "Republic of Korea"
 msgstr "南韓"
 
-#: src/translations.h:439
+#: src/translations.h:440
 msgid "Kuwait"
 msgstr "科威特"
 
-#: src/translations.h:440
+#: src/translations.h:441
 msgid "Cayman Islands"
 msgstr "開曼群島"
 
-#: src/translations.h:441
+#: src/translations.h:442
 msgid "Kazakhstan"
 msgstr "哈薩克"
 
-#: src/translations.h:442
+#: src/translations.h:443
 msgid "Lao"
 msgstr "寮國"
 
-#: src/translations.h:443
+#: src/translations.h:444
 msgid "Lebanon"
 msgstr "黎巴嫩"
 
-#: src/translations.h:444
+#: src/translations.h:445
 msgid "Saint Lucia"
 msgstr "聖盧西亞"
 
-#: src/translations.h:445
+#: src/translations.h:446
 msgid "Liechtenstein"
 msgstr "列支敦斯登"
 
-#: src/translations.h:446
+#: src/translations.h:447
 msgid "Sri Lanka"
 msgstr "斯里蘭卡"
 
-#: src/translations.h:447
+#: src/translations.h:448
 msgid "Liberia"
 msgstr "利比里亞"
 
-#: src/translations.h:448
+#: src/translations.h:449
 msgid "Lesotho"
 msgstr "萊索托"
 
-#: src/translations.h:449
+#: src/translations.h:450
 msgid "Lithuania"
 msgstr "立陶宛"
 
-#: src/translations.h:450
+#: src/translations.h:451
 msgid "Luxembourg"
 msgstr "盧森堡"
 
-#: src/translations.h:451
+#: src/translations.h:452
 msgid "Latvia"
 msgstr "拉脫維亞"
 
-#: src/translations.h:452
+#: src/translations.h:453
 msgid "Libyan Arab Jamahiriya"
 msgstr "利比亞"
 
-#: src/translations.h:453
+#: src/translations.h:454
 msgid "Morocco"
 msgstr "摩洛哥"
 
-#: src/translations.h:454
+#: src/translations.h:455
 msgid "Monaco"
 msgstr "摩納哥"
 
-#: src/translations.h:455
+#: src/translations.h:456
 msgid "Moldova"
 msgstr "摩爾多瓦"
 
-#: src/translations.h:456
+#: src/translations.h:457
 msgid "Madagascar"
 msgstr "馬達加斯加"
 
-#: src/translations.h:457
+#: src/translations.h:458
 msgid "Marshall Islands"
 msgstr "馬紹爾群島"
 
-#: src/translations.h:458
+#: src/translations.h:459
 msgid "Macedonia"
 msgstr "馬其頓"
 
-#: src/translations.h:459
+#: src/translations.h:460
 msgid "Mali"
 msgstr "馬里"
 
-#: src/translations.h:460
+#: src/translations.h:461
 msgid "Myanmar"
 msgstr "緬甸"
 
-#: src/translations.h:461
+#: src/translations.h:462
 msgid "Mongolia"
 msgstr "蒙古"
 
-#: src/translations.h:462
+#: src/translations.h:463
 msgid "Macau"
 msgstr "澳門"
 
-#: src/translations.h:463
+#: src/translations.h:464
 msgid "Northern Mariana Islands"
 msgstr "北馬里亞納群島"
 
-#: src/translations.h:464
+#: src/translations.h:465
 msgid "Martinique"
 msgstr "法屬馬丁尼克"
 
-#: src/translations.h:465
+#: src/translations.h:466
 msgid "Mauritania"
 msgstr "毛里塔尼亞"
 
-#: src/translations.h:466
+#: src/translations.h:467
 msgid "Montserrat"
 msgstr "蒙的塞拉特"
 
-#: src/translations.h:467
+#: src/translations.h:468
 msgid "Malta"
 msgstr "馬耳他"
 
-#: src/translations.h:468
+#: src/translations.h:469
 msgid "Mauritius"
 msgstr "毛里裘斯"
 
-#: src/translations.h:469
+#: src/translations.h:470
 msgid "Maldives"
 msgstr "馬爾代夫"
 
-#: src/translations.h:470
+#: src/translations.h:471
 msgid "Malawi"
 msgstr "馬拉威"
 
-#: src/translations.h:471
+#: src/translations.h:472
 msgid "Mexico"
 msgstr "墨西哥"
 
-#: src/translations.h:472
+#: src/translations.h:473
 msgid "Malaysia"
 msgstr "馬來西亞"
 
-#: src/translations.h:473
+#: src/translations.h:474
 msgid "Mozambique"
 msgstr "莫三比克"
 
-#: src/translations.h:474
+#: src/translations.h:475
 msgid "Namibia"
 msgstr "納米比亞"
 
-#: src/translations.h:475
+#: src/translations.h:476
 msgid "New Caledonia"
 msgstr "新喀里多尼亞"
 
-#: src/translations.h:476
+#: src/translations.h:477
 msgid "Niger"
 msgstr "尼日爾"
 
-#: src/translations.h:477
+#: src/translations.h:478
 msgid "Norfolk Island"
 msgstr "諾福克羣島"
 
-#: src/translations.h:478
+#: src/translations.h:479
 msgid "Nigeria"
 msgstr "尼日利亞"
 
-#: src/translations.h:479
+#: src/translations.h:480
 msgid "Nicaragua"
 msgstr "尼加拉瓜"
 
-#: src/translations.h:480
+#: src/translations.h:481
 msgid "Netherlands"
 msgstr "荷蘭"
 
-#: src/translations.h:481
+#: src/translations.h:482
 msgid "Norway"
 msgstr "挪威"
 
-#: src/translations.h:482
+#: src/translations.h:483
 msgid "Nepal"
 msgstr "尼泊爾"
 
-#: src/translations.h:483
+#: src/translations.h:484
 msgid "Nauru"
 msgstr "瑙魯"
 
-#: src/translations.h:484
+#: src/translations.h:485
 msgid "Niue"
 msgstr "紐埃"
 
-#: src/translations.h:485
+#: src/translations.h:486
 msgid "New Zealand"
 msgstr "新西蘭"
 
-#: src/translations.h:486
+#: src/translations.h:487
 msgid "Oman"
 msgstr "阿曼"
 
-#: src/translations.h:487
+#: src/translations.h:488
 msgid "Panama"
 msgstr "巴拿馬"
 
-#: src/translations.h:488
+#: src/translations.h:489
 msgid "Peru"
 msgstr "秘魯"
 
-#: src/translations.h:489
+#: src/translations.h:490
 msgid "French Polynesia"
 msgstr "法屬玻利尼西亞"
 
-#: src/translations.h:490
+#: src/translations.h:491
 msgid "Papua New Guinea"
 msgstr "巴布亞新畿內亞"
 
-#: src/translations.h:491
+#: src/translations.h:492
 msgid "Philippines"
 msgstr "菲律賓"
 
-#: src/translations.h:492
+#: src/translations.h:493
 msgid "Pakistan"
 msgstr "巴基斯坦"
 
-#: src/translations.h:493
+#: src/translations.h:494
 msgid "Poland"
 msgstr "波蘭"
 
-#: src/translations.h:494
+#: src/translations.h:495
 msgid "Saint Pierre and Miquelon"
 msgstr "聖皮耶與密克隆羣島"
 
-#: src/translations.h:495
+#: src/translations.h:496
 msgid "Pitcairn"
 msgstr "皮特康島"
 
-#: src/translations.h:496
+#: src/translations.h:497
 msgid "Puerto Rico"
 msgstr "波多黎各"
 
-#: src/translations.h:497
+#: src/translations.h:498
 msgid "Palestinian Territories"
 msgstr "巴勒斯坦領土"
 
-#: src/translations.h:498
+#: src/translations.h:499
 msgid "Portugal"
 msgstr "葡萄牙"
 
-#: src/translations.h:499
+#: src/translations.h:500
 msgid "Palau"
 msgstr "帛琉"
 
-#: src/translations.h:500
+#: src/translations.h:501
 msgid "Paraguay"
 msgstr "巴拉圭"
 
-#: src/translations.h:501
+#: src/translations.h:502
 msgid "Qatar"
 msgstr "卡塔爾"
 
-#: src/translations.h:502
+#: src/translations.h:503
 msgid "Réunion"
 msgstr "留尼旺"
 
-#: src/translations.h:503
+#: src/translations.h:504
 msgid "Romania"
 msgstr "羅馬尼亞"
 
-#: src/translations.h:504
+#: src/translations.h:505
 msgid "Serbia"
 msgstr "塞爾維亞"
 
-#: src/translations.h:505
+#: src/translations.h:506
 msgid "Russian Federation"
 msgstr "俄羅斯"
 
-#: src/translations.h:506
+#: src/translations.h:507
 msgid "Rwanda"
 msgstr "盧安達"
 
-#: src/translations.h:507
+#: src/translations.h:508
 msgid "Saudi Arabia"
 msgstr "沙特阿拉伯"
 
-#: src/translations.h:508
+#: src/translations.h:509
 msgid "Solomon Islands"
 msgstr "所羅門羣島"
 
-#: src/translations.h:509
+#: src/translations.h:510
 msgid "Seychelles"
 msgstr "塞舌爾羣島"
 
-#: src/translations.h:510
+#: src/translations.h:511
 msgid "Sudan"
 msgstr "蘇丹"
 
-#: src/translations.h:511
+#: src/translations.h:512
 msgid "Sweden"
 msgstr "瑞典"
 
-#: src/translations.h:512
+#: src/translations.h:513
 msgid "Singapore"
 msgstr "新加坡"
 
-#: src/translations.h:513
+#: src/translations.h:514
 msgid "Saint Helena"
 msgstr "聖海倫拿島"
 
-#: src/translations.h:514
+#: src/translations.h:515
 msgid "Slovenia"
 msgstr "斯洛維尼亞"
 
-#: src/translations.h:515
+#: src/translations.h:516
 msgid "Svalbard and Jan Mayen"
 msgstr "斯瓦爾巴特和揚馬延島"
 
-#: src/translations.h:516
+#: src/translations.h:517
 msgid "Slovakia"
 msgstr "斯洛伐克"
 
-#: src/translations.h:517
+#: src/translations.h:518
 msgid "Sierra Leone"
 msgstr "塞拉里昂"
 
-#: src/translations.h:518
+#: src/translations.h:519
 msgid "San Marino"
 msgstr "聖馬利諾"
 
-#: src/translations.h:519
+#: src/translations.h:520
 msgid "Senegal"
 msgstr "塞內加爾"
 
-#: src/translations.h:520
+#: src/translations.h:521
 msgid "Somalia"
 msgstr "索馬里"
 
-#: src/translations.h:521
+#: src/translations.h:522
 msgid "Suriname"
 msgstr "蘇里南"
 
-#: src/translations.h:522
+#: src/translations.h:523
 msgid "Sao Tome and Principe"
 msgstr "聖多美普林西比"
 
-#: src/translations.h:523
+#: src/translations.h:524
 msgid "El Salvador"
 msgstr "薩爾瓦多"
 
-#: src/translations.h:524
+#: src/translations.h:525
 msgid "Syrian Arab Republic"
 msgstr "敍利亞"
 
-#: src/translations.h:525
+#: src/translations.h:526
 msgid "Swaziland"
 msgstr "史瓦濟蘭"
 
-#: src/translations.h:526
+#: src/translations.h:527
 msgid "Turks and Caicos Islands"
 msgstr "特克斯和凱科斯羣島"
 
-#: src/translations.h:527
+#: src/translations.h:528
 msgid "Chad"
 msgstr "查德"
 
-#: src/translations.h:528
+#: src/translations.h:529
 msgid "French Southern Territories"
 msgstr "法屬南方領土"
 
-#: src/translations.h:529
+#: src/translations.h:530
 msgid "Togo"
 msgstr "多哥"
 
-#: src/translations.h:530
+#: src/translations.h:531
 msgid "Thailand"
 msgstr "泰國"
 
-#: src/translations.h:531
+#: src/translations.h:532
 msgid "Tajikistan"
 msgstr "塔吉克"
 
-#: src/translations.h:532
+#: src/translations.h:533
 msgid "Tokelau"
 msgstr "托克勞群島"
 
-#: src/translations.h:533
+#: src/translations.h:534
 msgid "East Timor"
 msgstr "東帝汶"
 
-#: src/translations.h:534
+#: src/translations.h:535
 msgid "Turkmenistan"
 msgstr "土庫曼"
 
-#: src/translations.h:535
+#: src/translations.h:536
 msgid "Tunisia"
 msgstr "突尼西亞"
 
-#: src/translations.h:536
+#: src/translations.h:537
 msgid "Tonga"
 msgstr "東加"
 
-#: src/translations.h:537
+#: src/translations.h:538
 msgid "Turkey"
 msgstr "土耳其"
 
-#: src/translations.h:538
+#: src/translations.h:539
 msgid "Trinidad and Tobago"
 msgstr "千里達"
 
-#: src/translations.h:539
+#: src/translations.h:540
 msgid "Tuvalu"
 msgstr "圖瓦盧"
 
-#: src/translations.h:540
+#: src/translations.h:541
 msgid "Taiwan"
 msgstr "台灣"
 
-#: src/translations.h:541
+#: src/translations.h:542
 msgid "Tanzania"
 msgstr "坦桑尼亞"
 
-#: src/translations.h:542
+#: src/translations.h:543
 msgid "Ukraine"
 msgstr "烏克蘭"
 
-#: src/translations.h:543
+#: src/translations.h:544
 msgid "Uganda"
 msgstr "烏干達"
 
-#: src/translations.h:544
+#: src/translations.h:545
 msgid "United States Minor Outlying Islands"
 msgstr "美屬邊疆群島"
 
-#: src/translations.h:545
+#: src/translations.h:546
 msgid "United States"
 msgstr "美國"
 
-#: src/translations.h:546
+#: src/translations.h:547
 msgid "Uruguay"
 msgstr "烏拉圭"
 
-#: src/translations.h:547
+#: src/translations.h:548
 msgid "Uzbekistan"
 msgstr "烏茲別克"
 
-#: src/translations.h:548
+#: src/translations.h:549
 msgid "Vatican City State"
 msgstr "梵蒂岡"
 
-#: src/translations.h:549
+#: src/translations.h:550
 msgid "Saint Vincent and the Grenadines"
 msgstr "聖文森特和格林納丁斯"
 
-#: src/translations.h:550
+#: src/translations.h:551
 msgid "Venezuela"
 msgstr "委內瑞拉"
 
-#: src/translations.h:551
+#: src/translations.h:552
 msgid "British Virgin Islands"
 msgstr "英屬維爾京羣島"
 
-#: src/translations.h:552
+#: src/translations.h:553
 msgid "United States Virgin Islands"
 msgstr "美屬維京群島"
 
-#: src/translations.h:553
+#: src/translations.h:554
 msgid "Viet Nam"
 msgstr "越南"
 
-#: src/translations.h:554
+#: src/translations.h:555
 msgid "Vanuatu"
 msgstr "瓦努阿圖"
 
-#: src/translations.h:555
+#: src/translations.h:556
 msgid "Wallis and Futuna"
 msgstr "瓦利斯及富圖納羣島"
 
-#: src/translations.h:556
+#: src/translations.h:557
 msgid "Samoa"
 msgstr "薩摩亞羣島"
 
-#: src/translations.h:557
+#: src/translations.h:558
 msgid "Yemen"
 msgstr "也門"
 
-#: src/translations.h:558
+#: src/translations.h:559
 msgid "Mayotte"
 msgstr "馬約特"
 
-#: src/translations.h:559
+#: src/translations.h:560
 msgid "Yugoslavia"
 msgstr "南斯拉夫"
 
-#: src/translations.h:560
+#: src/translations.h:561
 msgid "South Africa"
 msgstr "南非"
 
-#: src/translations.h:561
+#: src/translations.h:562
 msgid "Zambia"
 msgstr "贊比亞"
 
-#: src/translations.h:562
+#: src/translations.h:563
 msgid "Zimbabwe"
 msgstr "津巴布韋"
 
-#: src/translations.h:566
+#: src/translations.h:567
 msgid "&Undo"
 msgstr "&還原"
 
-#: src/translations.h:567
+#: src/translations.h:568
 msgid "&Redo"
 msgstr "&重做"
 
-#: src/translations.h:568
+#: src/translations.h:569
 msgid "Cu&t"
 msgstr "剪&下"
 
-#: src/translations.h:569
+#: src/translations.h:570
 msgid "&Copy"
 msgstr "&複製"
 
-#: src/translations.h:570
+#: src/translations.h:571
 msgid "&Paste"
 msgstr "&貼上"
 
-#: src/translations.h:571 src/ui_locationDialogGui.h:432
-#: plugins/Oculars/src/ui_ocularDialog.h:1180
-#: plugins/Oculars/src/ui_ocularDialog.h:1190
-#: plugins/Oculars/src/ui_ocularDialog.h:1197
-#: plugins/Oculars/src/ui_ocularDialog.h:1214
+#: src/translations.h:572 src/ui_locationDialogGui.h:432
+#: plugins/Oculars/src/ui_ocularDialog.h:1189
+#: plugins/Oculars/src/ui_ocularDialog.h:1199
+#: plugins/Oculars/src/ui_ocularDialog.h:1206
+#: plugins/Oculars/src/ui_ocularDialog.h:1223
 msgid "Delete"
 msgstr "删除"
 
-#: src/translations.h:572
+#: src/translations.h:573
 msgid "Select All"
 msgstr "全選"
 
-#: src/translations.h:573
+#: src/translations.h:574
 msgid "Look in:"
 msgstr "搜尋於:"
 
-#: src/translations.h:574
+#: src/translations.h:575
 msgid "Directory:"
 msgstr "目錄:"
 
-#: src/translations.h:575
+#: src/translations.h:576
 msgid "Folder"
 msgstr "資料夾"
 
-#: src/translations.h:576
+#: src/translations.h:577
 msgid "&Choose"
 msgstr "&選擇"
 
-#: src/translations.h:577 src/ui_configurationDialog.h:1280
+#: src/translations.h:578 src/ui_configurationDialog.h:1290
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "Cancel"
 msgstr "取消"
 
-#: src/translations.h:578
+#: src/translations.h:579
 msgid "Files of type:"
 msgstr "檔案類型:"
 
-#: src/translations.h:579
+#: src/translations.h:580
 msgid "Date Modified"
 msgstr "修改日期"
 
-#: src/translations.h:580
+#: src/translations.h:581
 msgid "Directories"
 msgstr "目錄"
 
-#: src/translations.h:581
+#: src/translations.h:582
 msgid "Computer"
 msgstr "電腦"
 
-#: src/translations.h:582
+#: src/translations.h:583
 msgid "&Open"
 msgstr "&開啟"
 
-#: src/translations.h:583
+#: src/translations.h:584
 msgid "File &name:"
 msgstr "檔案&名稱"
 
-#: src/translations.h:584
+#: src/translations.h:585
 msgid "Copy &Link Location"
 msgstr "複製&連結位置"
 
-#: src/translations.h:585
+#: src/translations.h:586
 msgid "Abort"
 msgstr ""
 
-#: src/translations.h:586
+#: src/translations.h:587
 msgid "Ignore"
 msgstr ""
 
@@ -4497,7 +4503,7 @@ msgstr "關於"
 msgid "Log"
 msgstr "記錄"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1182
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1188
 msgid "Edit keyboard shortcuts..."
 msgstr "修改鍵盤快捷鍵..."
 
@@ -4751,596 +4757,586 @@ msgstr "搜尋設定"
 msgid "Use autofill only from the beginning of words"
 msgstr "只有從單詞開始使用自動填寫"
 
-#: src/ui_searchDialogGui.h:716 src/ui_viewDialog.h:1797
-#: src/ui_viewDialog.h:1819 src/ui_viewDialog.h:1836
-#: src/ui_configurationDialog.h:1281 src/ui_configurationDialog.h:1292
+#: src/ui_searchDialogGui.h:716 src/ui_viewDialog.h:1779
+#: src/ui_viewDialog.h:1801 src/ui_viewDialog.h:1818
+#: src/ui_configurationDialog.h:1291 src/ui_configurationDialog.h:1302
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "選項"
 
-#: src/ui_viewDialog.h:1582
+#: src/ui_viewDialog.h:1569
 msgid "View"
 msgstr "顯示"
 
-#: src/ui_viewDialog.h:1585
+#: src/ui_viewDialog.h:1572
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:259
 msgid "Absolute scale:"
 msgstr "絕對大小:"
 
-#: src/ui_viewDialog.h:1586
+#: src/ui_viewDialog.h:1573
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:253
 msgid "Relative scale:"
 msgstr "相對大小:"
 
-#: src/ui_viewDialog.h:1587
+#: src/ui_viewDialog.h:1574
 msgid "Milky Way brightness:"
 msgstr "銀河光度"
 
-#: src/ui_viewDialog.h:1588
+#: src/ui_viewDialog.h:1575
 msgid "Zodiacal Light brightness:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1589
+#: src/ui_viewDialog.h:1576
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:265
 msgid "Twinkle:"
 msgstr "閃爍:"
 
-#: src/ui_viewDialog.h:1591
+#: src/ui_viewDialog.h:1578
 msgid "Limit the magnitude of stars"
 msgstr "限制星等"
 
-#: src/ui_viewDialog.h:1593 src/ui_viewDialog.h:1635 src/ui_viewDialog.h:1721
+#: src/ui_viewDialog.h:1580 src/ui_viewDialog.h:1617 src/ui_viewDialog.h:1703
 msgid "Limit magnitude:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1595
+#: src/ui_viewDialog.h:1582
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "降低明亮天體附近其餘天體的亮度"
 
-#: src/ui_viewDialog.h:1597
+#: src/ui_viewDialog.h:1584
 msgid "Dynamic eye adaptation"
 msgstr "人眼動態視覺調適"
 
-#: src/ui_viewDialog.h:1598 src/ui_viewDialog.h:1640 src/ui_viewDialog.h:1707
+#: src/ui_viewDialog.h:1585 src/ui_viewDialog.h:1622 src/ui_viewDialog.h:1689
 msgid "Labels and Markers"
 msgstr "名稱及標記"
 
-#: src/ui_viewDialog.h:1600
+#: src/ui_viewDialog.h:1587
 msgid "Show atmosphere"
 msgstr "顯示大氣層"
 
-#: src/ui_viewDialog.h:1604
+#: src/ui_viewDialog.h:1591
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
 msgstr "使用該地點在數據庫之光污染資訊, 並忽略下列之光污染設定"
 
-#: src/ui_viewDialog.h:1606
+#: src/ui_viewDialog.h:1593
 msgid "Light pollution data from locations database"
 msgstr "使用該地點在數據庫之光污染資訊"
 
-#: src/ui_viewDialog.h:1607
+#: src/ui_viewDialog.h:1594
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:428
 msgid "Light pollution:"
 msgstr "光污染:"
 
-#: src/ui_viewDialog.h:1609
+#: src/ui_viewDialog.h:1596
 msgid "pressure, temperature, extinction coefficient"
 msgstr "壓力, 溫度, 消光係數"
 
-#: src/ui_viewDialog.h:1611
+#: src/ui_viewDialog.h:1598
 msgid "Refraction/Extinction settings..."
 msgstr "折射/消光設置 ..."
 
-#: src/ui_viewDialog.h:1612
-msgid "Planets and satellites"
-msgstr "行星及衛星"
+#: src/ui_viewDialog.h:1599
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:293
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
+msgid "Solar System objects"
+msgstr "太陽系天體"
 
-#: src/ui_viewDialog.h:1613
-msgid "Show Solar System objects"
-msgstr ""
-
-#: src/ui_viewDialog.h:1614
+#: src/ui_viewDialog.h:1600
 msgid "Show planet markers"
 msgstr "顯示行星標記"
 
-#: src/ui_viewDialog.h:1615
+#: src/ui_viewDialog.h:1601
 msgid "Show planet orbits"
 msgstr "顯示行星軌道"
 
-#: src/ui_viewDialog.h:1617
+#: src/ui_viewDialog.h:1603
 msgid ""
 "Deactivate this option if you want to see orbit for selected planet and its "
 "moons."
 msgstr ""
 
-#: src/ui_viewDialog.h:1619
+#: src/ui_viewDialog.h:1605
 msgid "Show orbit for selected planet"
 msgstr ""
 
-#: src/ui_viewDialog.h:1621
+#: src/ui_viewDialog.h:1607
 msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
 msgstr ""
 
-#: src/ui_viewDialog.h:1623
+#: src/ui_viewDialog.h:1609
 msgid "Show trail only for selected planet"
 msgstr ""
 
-#: src/ui_viewDialog.h:1625
+#: src/ui_viewDialog.h:1611
 msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
 msgstr ""
 
-#: src/ui_viewDialog.h:1627
+#: src/ui_viewDialog.h:1613
 msgid "Simulate light speed"
 msgstr "模擬光速"
 
-#: src/ui_viewDialog.h:1628
-msgid "Scale Moon:"
-msgstr ""
-
-#: src/ui_viewDialog.h:1630
-msgid "Scale factor"
-msgstr "比例係數"
-
-#: src/ui_viewDialog.h:1633
+#: src/ui_viewDialog.h:1615
 msgid "Limit the magnitude of solar system objects"
 msgstr ""
 
-#: src/ui_viewDialog.h:1637
-msgid "Automatic change of landscape when planet is changed"
-msgstr "行星地點改變時自動改變地型"
+#: src/ui_viewDialog.h:1618
+msgid "Scale Moon:"
+msgstr ""
 
-#: src/ui_viewDialog.h:1639
-msgid "Auto select landscapes"
-msgstr "自動選擇地型"
+#: src/ui_viewDialog.h:1620
+msgid "Scale factor"
+msgstr "比例係數"
 
-#: src/ui_viewDialog.h:1642
+#: src/ui_viewDialog.h:1624
 msgid "Settings for sporadic meteors"
 msgstr "偶發流星設定"
 
-#: src/ui_viewDialog.h:1644
+#: src/ui_viewDialog.h:1626
 msgid "Shooting Stars"
 msgstr "流星"
 
-#: src/ui_viewDialog.h:1646
+#: src/ui_viewDialog.h:1628
 msgid "Hourly zenith rate"
 msgstr "每小時天頂率"
 
-#: src/ui_viewDialog.h:1648
+#: src/ui_viewDialog.h:1630
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
 msgstr "每小時天頂流星數"
 
-#: src/ui_viewDialog.h:1650
+#: src/ui_viewDialog.h:1632
 msgid "Display objects from catalogs"
 msgstr ""
 
-#: src/ui_viewDialog.h:1652
+#: src/ui_viewDialog.h:1634
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1655
+#: src/ui_viewDialog.h:1637
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1658
+#: src/ui_viewDialog.h:1640
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1667
+#: src/ui_viewDialog.h:1649
 msgid "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1670
+#: src/ui_viewDialog.h:1652
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1673
+#: src/ui_viewDialog.h:1655
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1676
+#: src/ui_viewDialog.h:1658
 msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, 1960)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1679
+#: src/ui_viewDialog.h:1661
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1682
+#: src/ui_viewDialog.h:1664
 msgid "Catalog of Open Galactic Clusters (Collinder, 1931)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1685
+#: src/ui_viewDialog.h:1667
 msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1688
+#: src/ui_viewDialog.h:1670
 msgid "Catalog of galaxies"
 msgstr ""
 
-#: src/ui_viewDialog.h:1691
+#: src/ui_viewDialog.h:1673
 msgid "The Uppsala General Catalogue of Galaxies"
 msgstr ""
 
-#: src/ui_viewDialog.h:1694
+#: src/ui_viewDialog.h:1676
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1696
+#: src/ui_viewDialog.h:1678
 msgid "Filter by type"
 msgstr ""
 
-#: src/ui_viewDialog.h:1699
+#: src/ui_viewDialog.h:1681
 msgid "Hydrogen regions"
 msgstr ""
 
-#: src/ui_viewDialog.h:1700
+#: src/ui_viewDialog.h:1682
 msgid "Other"
 msgstr "其他"
 
-#: src/ui_viewDialog.h:1702
+#: src/ui_viewDialog.h:1684
 msgid "Planetary Nebulae"
 msgstr ""
 
-#: src/ui_viewDialog.h:1703
+#: src/ui_viewDialog.h:1685
 msgid "Galaxies"
 msgstr ""
 
-#: src/ui_viewDialog.h:1705
+#: src/ui_viewDialog.h:1687
 msgid "Dark Nebulae"
 msgstr ""
 
-#: src/ui_viewDialog.h:1706
+#: src/ui_viewDialog.h:1688
 msgid "Bright Nebulae"
 msgstr ""
 
-#: src/ui_viewDialog.h:1709
+#: src/ui_viewDialog.h:1691
 msgid "Hints"
 msgstr ""
 
-#: src/ui_viewDialog.h:1711
+#: src/ui_viewDialog.h:1693
 msgid ""
 "Use surface brightness of deep-sky objects for scale of the visibility of "
 "their markers and labels."
 msgstr ""
 
-#: src/ui_viewDialog.h:1713
+#: src/ui_viewDialog.h:1695
 msgid "Use surface brightness"
 msgstr ""
 
-#: src/ui_viewDialog.h:1715
+#: src/ui_viewDialog.h:1697
 msgid "Use hints proportional to angular size of deep-sky objects"
 msgstr ""
 
-#: src/ui_viewDialog.h:1717
+#: src/ui_viewDialog.h:1699
 msgid "Use proportional hints"
 msgstr ""
 
-#: src/ui_viewDialog.h:1719
+#: src/ui_viewDialog.h:1701
 msgid ""
 "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
 
-#: src/ui_viewDialog.h:1722
+#: src/ui_viewDialog.h:1704
 msgid "Celestial Sphere"
 msgstr "天球"
 
-#: src/ui_viewDialog.h:1724
+#: src/ui_viewDialog.h:1706
 msgid "Equatorial coordinates of J2000.0."
 msgstr ""
 
-#: src/ui_viewDialog.h:1726
+#: src/ui_viewDialog.h:1708
 msgid "Equatorial grid (J2000)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1728
+#: src/ui_viewDialog.h:1710
 msgid "Equatorial coordinates of current date and planet."
 msgstr ""
 
-#: src/ui_viewDialog.h:1730
+#: src/ui_viewDialog.h:1712
 msgid "Equatorial grid (of date)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1732
+#: src/ui_viewDialog.h:1714
 msgid "Ecliptical coordinates for J2000.0."
 msgstr ""
 
-#: src/ui_viewDialog.h:1734
+#: src/ui_viewDialog.h:1716
 msgid "Ecliptic grid (J2000)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1736
+#: src/ui_viewDialog.h:1718
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
 msgstr ""
 
-#: src/ui_viewDialog.h:1738
+#: src/ui_viewDialog.h:1720
 msgid "Ecliptic grid (of date)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1740
+#: src/ui_viewDialog.h:1722
 msgid "Altitudes and azimuth (counted from North towards East)."
 msgstr ""
 
-#: src/ui_viewDialog.h:1744
+#: src/ui_viewDialog.h:1726
 msgid "Galactic Coordinates, System II (IAU 1958)."
 msgstr ""
 
-#: src/ui_viewDialog.h:1748
+#: src/ui_viewDialog.h:1730
 msgid "Show celestial equator of J2000.0."
 msgstr ""
 
-#: src/ui_viewDialog.h:1750
+#: src/ui_viewDialog.h:1732
 msgid "Equator (J2000)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1752
+#: src/ui_viewDialog.h:1734
 msgid "Show celestial equator of current planet and date."
 msgstr ""
 
-#: src/ui_viewDialog.h:1754
+#: src/ui_viewDialog.h:1736
 msgid "Equator (of date)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1756
+#: src/ui_viewDialog.h:1738
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
 msgstr ""
 
-#: src/ui_viewDialog.h:1758
+#: src/ui_viewDialog.h:1740
 msgid "Ecliptic (J2000)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1760
+#: src/ui_viewDialog.h:1742
 msgid "Show ecliptic line of current date."
 msgstr ""
 
-#: src/ui_viewDialog.h:1762
+#: src/ui_viewDialog.h:1744
 msgid "Ecliptic (of date)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1764
+#: src/ui_viewDialog.h:1746
 msgid "Show horizon line."
 msgstr ""
 
-#: src/ui_viewDialog.h:1768
+#: src/ui_viewDialog.h:1750
 msgid "Show Galactic equator line."
 msgstr ""
 
-#: src/ui_viewDialog.h:1772
+#: src/ui_viewDialog.h:1754
 msgid "Labels for the Cardinal directions."
 msgstr ""
 
-#: src/ui_viewDialog.h:1776
+#: src/ui_viewDialog.h:1758
 msgid "Show meridian line."
 msgstr ""
 
-#: src/ui_viewDialog.h:1780
+#: src/ui_viewDialog.h:1762
 msgid "Show Prime (East-West) Vertical."
 msgstr ""
 
-#: src/ui_viewDialog.h:1784
+#: src/ui_viewDialog.h:1766
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
 msgstr ""
 
-#: src/ui_viewDialog.h:1786
+#: src/ui_viewDialog.h:1768
 msgid "Colures"
 msgstr ""
 
-#: src/ui_viewDialog.h:1788
+#: src/ui_viewDialog.h:1770
 msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which "
 "passes through both ecliptic poles, the Sun and opposition point."
 msgstr ""
 
-#: src/ui_viewDialog.h:1792
+#: src/ui_viewDialog.h:1774
 msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
 msgstr ""
 
-#: src/ui_viewDialog.h:1794
+#: src/ui_viewDialog.h:1776
 msgid "Precession circles"
 msgstr ""
 
-#: src/ui_viewDialog.h:1795
+#: src/ui_viewDialog.h:1777
 msgid "Projection"
 msgstr "投影方式"
 
-#: src/ui_viewDialog.h:1796
+#: src/ui_viewDialog.h:1778
 msgid "Vertical viewport offset"
 msgstr ""
 
-#: src/ui_viewDialog.h:1798
+#: src/ui_viewDialog.h:1780
 msgid "Show ground"
 msgstr "顯示地面"
 
-#: src/ui_viewDialog.h:1799
+#: src/ui_viewDialog.h:1781
 msgid "Use this landscape as default"
 msgstr "將此地形設定為預設值"
 
-#: src/ui_viewDialog.h:1800
+#: src/ui_viewDialog.h:1782
 msgid "Use associated planet and position"
 msgstr "使用與此地景關聯的位置與行星"
 
-#: src/ui_viewDialog.h:1801
+#: src/ui_viewDialog.h:1783
 msgid "Show landscape labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1802
+#: src/ui_viewDialog.h:1784
 msgid "Show fog"
 msgstr "顯示霧氣"
 
-#: src/ui_viewDialog.h:1804
+#: src/ui_viewDialog.h:1786
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1806
+#: src/ui_viewDialog.h:1788
 msgid "Show illumination "
 msgstr ""
 
-#: src/ui_viewDialog.h:1808
+#: src/ui_viewDialog.h:1790
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr ""
 
-#: src/ui_viewDialog.h:1810
+#: src/ui_viewDialog.h:1792
 msgid "Minimal brightness:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1812
+#: src/ui_viewDialog.h:1794
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1815
+#: src/ui_viewDialog.h:1797
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr ""
 
-#: src/ui_viewDialog.h:1817
+#: src/ui_viewDialog.h:1799
 msgid "from landscape, if given"
 msgstr ""
 
-#: src/ui_viewDialog.h:1818
+#: src/ui_viewDialog.h:1800
 msgid "Add/remove landscapes..."
 msgstr "添加/移除地形..."
 
-#: src/ui_viewDialog.h:1820
+#: src/ui_viewDialog.h:1802
 msgid "Use this sky culture as default"
 msgstr "将此星空述语设为预设值"
 
-#: src/ui_viewDialog.h:1821
+#: src/ui_viewDialog.h:1803
 msgid "Show labels"
 msgstr "顯示星座名稱"
 
-#: src/ui_viewDialog.h:1823
+#: src/ui_viewDialog.h:1805
 msgid "Select if you want names abbreviated, original or translated"
 msgstr ""
 
-#: src/ui_viewDialog.h:1827
+#: src/ui_viewDialog.h:1809
 msgid "Use native names for planets from current culture"
 msgstr ""
 
-#: src/ui_viewDialog.h:1829
+#: src/ui_viewDialog.h:1811
 msgid "Use native names for planets"
 msgstr ""
 
-#: src/ui_viewDialog.h:1830
+#: src/ui_viewDialog.h:1812
 msgid "Show lines with thickness"
 msgstr ""
 
-#: src/ui_viewDialog.h:1832
+#: src/ui_viewDialog.h:1814
 msgid "Value in pixels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1834
+#: src/ui_viewDialog.h:1816
 msgid "Show art in brightness"
 msgstr ""
 
-#: src/ui_viewDialog.h:1835
+#: src/ui_viewDialog.h:1817
 msgid "Show boundaries"
 msgstr "顯示星座界線"
 
-#: src/ui_viewDialog.h:1837
+#: src/ui_viewDialog.h:1819
 msgid "Visible"
 msgstr "可見的"
 
-#: src/ui_viewDialog.h:1842
+#: src/ui_viewDialog.h:1824
 msgid "Sky"
 msgstr "天空"
 
-#: src/ui_viewDialog.h:1844
+#: src/ui_viewDialog.h:1826
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
 msgstr ""
 
-#: src/ui_viewDialog.h:1846
+#: src/ui_viewDialog.h:1828
 msgid "Deep-Sky Objects"
 msgstr ""
 
-#: src/ui_viewDialog.h:1849
+#: src/ui_viewDialog.h:1831
 msgid "Markings"
 msgstr "標示"
 
-#: src/ui_viewDialog.h:1851
+#: src/ui_viewDialog.h:1833
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:433
 msgid "Landscape"
 msgstr "地形"
 
-#: src/ui_viewDialog.h:1853
+#: src/ui_viewDialog.h:1835
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:229
 msgid "Starlore"
 msgstr "星空術語"
 
-#: src/ui_configurationDialog.h:1081
+#: src/ui_configurationDialog.h:1087
 msgid "Configuration"
 msgstr "設定"
 
-#: src/ui_configurationDialog.h:1083
+#: src/ui_configurationDialog.h:1089
 msgid "Language settings"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1084
+#: src/ui_configurationDialog.h:1090
 msgid "Program Language"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1085
+#: src/ui_configurationDialog.h:1091
 msgid "Sky Culture Language"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1086
+#: src/ui_configurationDialog.h:1092
 msgid "Ephemeris settings"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1087 src/ui_configurationDialog.h:1088
+#: src/ui_configurationDialog.h:1093 src/ui_configurationDialog.h:1094
 msgid "Not installed"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1090
+#: src/ui_configurationDialog.h:1096
 msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1092
+#: src/ui_configurationDialog.h:1098
 msgid "Use DE431 (long-time data)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1094
+#: src/ui_configurationDialog.h:1100
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1096
+#: src/ui_configurationDialog.h:1102
 msgid "Use DE430 (high accuracy)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1098
+#: src/ui_configurationDialog.h:1104
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1100
+#: src/ui_configurationDialog.h:1106
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1101
+#: src/ui_configurationDialog.h:1107
 msgid "Default options"
 msgstr "預設選項"
 
-#: src/ui_configurationDialog.h:1103
+#: src/ui_configurationDialog.h:1109
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
 msgstr "儲存你在此期間已改的設定, 並成為下次啟動Stellarium的設定"
 
-#: src/ui_configurationDialog.h:1105
+#: src/ui_configurationDialog.h:1111
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 #: plugins/FOV/src/ui_fovWindow.h:391
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:281
@@ -5348,415 +5344,423 @@ msgstr "儲存你在此期間已改的設定, 並成為下次啟動Stellarium的
 msgid "Save settings"
 msgstr "儲存設定"
 
-#: src/ui_configurationDialog.h:1107
+#: src/ui_configurationDialog.h:1113
 msgid "Restore the default settings that came with Stellarium"
 msgstr "恢愎Stellarium的原來設定"
 
-#: src/ui_configurationDialog.h:1109 plugins/FOV/src/ui_fovWindow.h:408
+#: src/ui_configurationDialog.h:1115 plugins/FOV/src/ui_fovWindow.h:408
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:282
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:357
 msgid "Restore defaults"
 msgstr "還原預設值"
 
-#: src/ui_configurationDialog.h:1110
+#: src/ui_configurationDialog.h:1116
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
 "next startup."
 msgstr "恢復預設設定需要重新啟動Stellarium。儲存包含目前視野大小、觀看方向等所有設定以用於下次啟動。"
 
-#: src/ui_configurationDialog.h:1112
+#: src/ui_configurationDialog.h:1118
 msgid "The width of your view when Stellarium starts"
 msgstr "Stellarium 啟動時的視場大小"
 
-#: src/ui_configurationDialog.h:1115
+#: src/ui_configurationDialog.h:1121
 msgid "The direction you're looking when Stellarium starts"
 msgstr "你啟動Stellarium時望的方向"
 
-#: src/ui_configurationDialog.h:1117 src/ui_configurationDialog.h:1303
+#: src/ui_configurationDialog.h:1123 src/ui_configurationDialog.h:1313
 msgid "Selected object information"
 msgstr "已選擇天體資料"
 
-#: src/ui_configurationDialog.h:1119
+#: src/ui_configurationDialog.h:1125
 msgid "Display all information available"
 msgstr "顯示所有資料"
 
-#: src/ui_configurationDialog.h:1121
+#: src/ui_configurationDialog.h:1127
 msgid "All available"
 msgstr "完整顯示"
 
-#: src/ui_configurationDialog.h:1123
+#: src/ui_configurationDialog.h:1129
 msgid "Display no information"
 msgstr "不顯示任何資料"
 
-#: src/ui_configurationDialog.h:1125 plugins/Oculars/src/Oculars.cpp:2048
+#: src/ui_configurationDialog.h:1131 plugins/Oculars/src/Oculars.cpp:2297
 #: plugins/Observability/src/Observability.cpp:205
 msgid "None"
 msgstr "無"
 
-#: src/ui_configurationDialog.h:1127
+#: src/ui_configurationDialog.h:1133
 msgid "Display less information"
 msgstr "顯示較少的資料"
 
-#: src/ui_configurationDialog.h:1129
+#: src/ui_configurationDialog.h:1135
 msgid "Short"
 msgstr "簡短顯示"
 
-#: src/ui_configurationDialog.h:1131
+#: src/ui_configurationDialog.h:1137
 msgid "Display user settings information"
 msgstr "顯示用戶設定資料"
 
-#: src/ui_configurationDialog.h:1133
+#: src/ui_configurationDialog.h:1139
 msgid "Customized"
 msgstr "自訂"
 
-#: src/ui_configurationDialog.h:1134
+#: src/ui_configurationDialog.h:1140
 msgid "Displayed fields"
 msgstr "巳顯示的資訊"
 
-#: src/ui_configurationDialog.h:1137 src/ui_configurationDialog.h:1161
+#: src/ui_configurationDialog.h:1143 src/ui_configurationDialog.h:1167
 msgid "Equatorial coordinates, equinox of date"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1139
+#: src/ui_configurationDialog.h:1145
 msgid "Right ascension/Declination (of date)"
 msgstr "赤經/赤緯 (現在)"
 
-#: src/ui_configurationDialog.h:1140
+#: src/ui_configurationDialog.h:1146
 msgid "Catalog number(s)"
 msgstr "資料庫號碼"
 
-#: src/ui_configurationDialog.h:1142
+#: src/ui_configurationDialog.h:1148
 msgid "Equatorial coordinates, equinox of J2000.0"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1144
+#: src/ui_configurationDialog.h:1150
 msgid "Right ascension/Declination (J2000)"
 msgstr "赤經/赤緯 (J2000)"
 
-#: src/ui_configurationDialog.h:1145
+#: src/ui_configurationDialog.h:1151
 msgid "Absolute magnitude"
 msgstr "絕對星等"
 
-#: src/ui_configurationDialog.h:1146
+#: src/ui_configurationDialog.h:1152
 msgid "Galactic coordinates"
 msgstr "銀河座標"
 
-#: src/ui_configurationDialog.h:1147
+#: src/ui_configurationDialog.h:1153
 msgid "Visual magnitude"
 msgstr "視星等"
 
-#: src/ui_configurationDialog.h:1149
+#: src/ui_configurationDialog.h:1155
 msgid "Angular or physical size"
 msgstr "角或實際尺寸"
 
-#: src/ui_configurationDialog.h:1151
+#: src/ui_configurationDialog.h:1157
 msgid "Size"
 msgstr "大小"
 
-#: src/ui_configurationDialog.h:1153
+#: src/ui_configurationDialog.h:1159
 msgid "The type of the object (star, planet, etc.)"
 msgstr "天體類型 (星星, 行星等等)"
 
-#: src/ui_configurationDialog.h:1157
+#: src/ui_configurationDialog.h:1163
 msgid "Spectral class, nebula type, etc."
 msgstr "光譜類, 星雲類型等"
 
-#: src/ui_configurationDialog.h:1159
+#: src/ui_configurationDialog.h:1165
 msgid "Additional information"
 msgstr "額外資訊"
 
-#: src/ui_configurationDialog.h:1163
+#: src/ui_configurationDialog.h:1169
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:166
 msgid "Hour angle/Declination"
 msgstr "時角/赤緯"
 
-#: src/ui_configurationDialog.h:1165
+#: src/ui_configurationDialog.h:1171
 msgid "Horizontal coordinates"
 msgstr "水平坐標"
 
-#: src/ui_configurationDialog.h:1167
+#: src/ui_configurationDialog.h:1173
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:169
 msgid "Altitude/Azimuth"
 msgstr "海拔/方位"
 
-#: src/ui_configurationDialog.h:1168
+#: src/ui_configurationDialog.h:1174
 msgid "Distance"
 msgstr "距離"
 
-#: src/ui_configurationDialog.h:1170
+#: src/ui_configurationDialog.h:1176
 msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1172
+#: src/ui_configurationDialog.h:1178
 msgid "Ecliptic coordinates"
 msgstr "黄道坐標"
 
-#: src/ui_configurationDialog.h:1173
+#: src/ui_configurationDialog.h:1179
 msgid "Control"
 msgstr "控制"
 
-#: src/ui_configurationDialog.h:1175
+#: src/ui_configurationDialog.h:1181
 msgid "Allow keyboard to pan and zoom"
 msgstr "使用键盘移动及缩放画面"
 
-#: src/ui_configurationDialog.h:1177
+#: src/ui_configurationDialog.h:1183
 msgid "Enable keyboard navigation"
 msgstr "開啟鍵盤導覽"
 
-#: src/ui_configurationDialog.h:1179
+#: src/ui_configurationDialog.h:1185
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "使用鼠标移动及缩放画面 (拖拉滚轮)"
 
-#: src/ui_configurationDialog.h:1181
+#: src/ui_configurationDialog.h:1187
 msgid "Enable mouse navigation"
 msgstr "啟用鼠標導覽"
 
-#: src/ui_configurationDialog.h:1184
+#: src/ui_configurationDialog.h:1190
 msgid "Hides the mouse cursor when inactive"
 msgstr "靜止時隱藏滑鼠指標"
 
-#: src/ui_configurationDialog.h:1186
+#: src/ui_configurationDialog.h:1192
 msgid "Mouse cursor timeout:"
 msgstr "鼠標逾時消失"
 
-#: src/ui_configurationDialog.h:1188
+#: src/ui_configurationDialog.h:1194
 msgid "seconds"
 msgstr "秒"
 
-#: src/ui_configurationDialog.h:1190
+#: src/ui_configurationDialog.h:1196
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:192
 msgid "Startup date and time"
 msgstr "啟動時的日期及時間"
 
-#: src/ui_configurationDialog.h:1192
+#: src/ui_configurationDialog.h:1198
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "啟動Stellarium時，使用特定時間及日期"
 
-#: src/ui_configurationDialog.h:1194
+#: src/ui_configurationDialog.h:1200
 msgid "Other:"
 msgstr "其他:"
 
-#: src/ui_configurationDialog.h:1196
+#: src/ui_configurationDialog.h:1202
 msgid "Use current local date and time"
 msgstr "使用當前本地日期和時間"
 
-#: src/ui_configurationDialog.h:1198
+#: src/ui_configurationDialog.h:1204
 msgid "use current"
 msgstr "使用現在的設定"
 
-#: src/ui_configurationDialog.h:1200
+#: src/ui_configurationDialog.h:1206
 msgid "Starts Stellarium at system clock date and time"
 msgstr "以系統設定的時間啟動"
 
-#: src/ui_configurationDialog.h:1202
+#: src/ui_configurationDialog.h:1208
 msgid "System date and time"
 msgstr "系統日期及時間"
 
-#: src/ui_configurationDialog.h:1204
+#: src/ui_configurationDialog.h:1210
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1206
+#: src/ui_configurationDialog.h:1212
 msgid "System date at:"
 msgstr "系統日期:"
 
-#: src/ui_configurationDialog.h:1207
+#: src/ui_configurationDialog.h:1213
 msgid "Time correction"
 msgstr "時間修正"
 
-#: src/ui_configurationDialog.h:1210
+#: src/ui_configurationDialog.h:1216
 msgid "Edit equation"
 msgstr "修改公式"
 
-#: src/ui_configurationDialog.h:1212
+#: src/ui_configurationDialog.h:1218
 msgid "Planetarium options"
 msgstr "天文館選項"
 
-#: src/ui_configurationDialog.h:1214
+#: src/ui_configurationDialog.h:1220
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
 msgstr "球面鏡扭曲(使用Stellarium 做為低成本星象投影系統的場合)"
 
-#: src/ui_configurationDialog.h:1216
+#: src/ui_configurationDialog.h:1222
 msgid "Spheric mirror distortion"
 msgstr "球面鏡扭曲"
 
-#: src/ui_configurationDialog.h:1218
+#: src/ui_configurationDialog.h:1224
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "遮去在中間圓形範圍以外的星空"
 
-#: src/ui_configurationDialog.h:1220
+#: src/ui_configurationDialog.h:1226
 msgid "Disc viewport"
 msgstr "圓形視角"
 
-#: src/ui_configurationDialog.h:1222 src/ui_configurationDialog.h:1225
+#: src/ui_configurationDialog.h:1228 src/ui_configurationDialog.h:1231
 msgid "Hide other constellations when you click one"
 msgstr "當你點擊一個星座時, 隱藏其他星座"
 
-#: src/ui_configurationDialog.h:1227
+#: src/ui_configurationDialog.h:1233
 msgid "Select single constellation"
 msgstr "選擇單一星座"
 
-#: src/ui_configurationDialog.h:1229
+#: src/ui_configurationDialog.h:1235
 msgid "Align labels with the horizon"
 msgstr "星體名稱文字保持水平"
 
-#: src/ui_configurationDialog.h:1231
+#: src/ui_configurationDialog.h:1237
 msgid "Gravity labels"
 msgstr "重力名稱文字"
 
-#: src/ui_configurationDialog.h:1233
+#: src/ui_configurationDialog.h:1239
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "切換開啟星雲背景顯示."
 
-#: src/ui_configurationDialog.h:1235
+#: src/ui_configurationDialog.h:1241
 msgid "Show nebula background button"
 msgstr "顯示星雲背景按扭"
 
-#: src/ui_configurationDialog.h:1237
+#: src/ui_configurationDialog.h:1243
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "轉換垂直及水平翻轉按鈕"
 
-#: src/ui_configurationDialog.h:1239
+#: src/ui_configurationDialog.h:1245
 msgid "Show flip buttons"
 msgstr "顯示翻轉按鍵"
 
-#: src/ui_configurationDialog.h:1241
+#: src/ui_configurationDialog.h:1247
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr "位置視窗中自動顯示具有大氣層天體之大氣"
 
-#: src/ui_configurationDialog.h:1243
+#: src/ui_configurationDialog.h:1249
 msgid "Auto-enabling for the atmosphere"
 msgstr "自動顯示大氣"
 
-#: src/ui_configurationDialog.h:1245
+#: src/ui_configurationDialog.h:1251
 msgid "Use decimal degrees for coordinates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1247
+#: src/ui_configurationDialog.h:1253
 msgid "Use decimal degrees"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1249
+#: src/ui_configurationDialog.h:1255
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1251
+#: src/ui_configurationDialog.h:1257
 msgid "Include nutation"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1253
+#: src/ui_configurationDialog.h:1259
 msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1255
+#: src/ui_configurationDialog.h:1261
 msgid "Topocentric coordinates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1257
+#: src/ui_configurationDialog.h:1263
 msgid "Activate this option to calculate azimuth from south towards west."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1259
+#: src/ui_configurationDialog.h:1265
 msgid "Azimuth from South"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1261
+#: src/ui_configurationDialog.h:1267
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr "啟動後，「自動縮小」鍵亦會將還原觀測方向。"
 
-#: src/ui_configurationDialog.h:1263
+#: src/ui_configurationDialog.h:1269
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "自動縮小時回到原本的觀看方向"
 
-#: src/ui_configurationDialog.h:1264
+#: src/ui_configurationDialog.h:1271
+msgid "Automatic change of landscape when planet is changed"
+msgstr "行星地點改變時自動改變地型"
+
+#: src/ui_configurationDialog.h:1273
+msgid "Auto select landscapes"
+msgstr "自動選擇地型"
+
+#: src/ui_configurationDialog.h:1274
 msgid "Screenshots"
 msgstr "屏幕擷圖"
 
-#: src/ui_configurationDialog.h:1265
+#: src/ui_configurationDialog.h:1275
 msgid "Screenshot Directory"
 msgstr "截圖儲存資料夾"
 
-#: src/ui_configurationDialog.h:1267
+#: src/ui_configurationDialog.h:1277
 msgid "Invert colors"
 msgstr "對調顏色"
 
-#: src/ui_configurationDialog.h:1268
+#: src/ui_configurationDialog.h:1278
 msgid "Star catalog updates"
 msgstr "星體資料庫更新"
 
-#: src/ui_configurationDialog.h:1270
+#: src/ui_configurationDialog.h:1280
 msgid "Click here to start downloading"
 msgstr "點擊這裡開始下載"
 
-#: src/ui_configurationDialog.h:1272
+#: src/ui_configurationDialog.h:1282
 msgid "Download this file to view even more stars"
 msgstr "下載本檔案可以觀看更多恆星"
 
-#: src/ui_configurationDialog.h:1274
+#: src/ui_configurationDialog.h:1284
 msgid "Restart the download"
 msgstr "重新啟動下載"
 
-#: src/ui_configurationDialog.h:1276
+#: src/ui_configurationDialog.h:1286
 msgid "Retry"
 msgstr "重試"
 
-#: src/ui_configurationDialog.h:1278
+#: src/ui_configurationDialog.h:1288
 msgid "Stop the download. You can always restart it later"
 msgstr "停止下載. 您稍後可以重新下載它"
 
-#: src/ui_configurationDialog.h:1283
+#: src/ui_configurationDialog.h:1293
 msgid "Close window when script runs"
 msgstr "執行指令時關閉視窗"
 
-#: src/ui_configurationDialog.h:1285
+#: src/ui_configurationDialog.h:1295
 msgid "Run the selected script"
 msgstr "執行選取的指令"
 
-#: src/ui_configurationDialog.h:1289
+#: src/ui_configurationDialog.h:1299
 msgid "Stop a running script"
 msgstr "停止執行中的指令"
 
-#: src/ui_configurationDialog.h:1293
+#: src/ui_configurationDialog.h:1303
 msgid "Load at startup"
 msgstr "在啟動時載入"
 
-#: src/ui_configurationDialog.h:1294
+#: src/ui_configurationDialog.h:1304
 msgid "configure"
 msgstr "設定"
 
-#: src/ui_configurationDialog.h:1299
+#: src/ui_configurationDialog.h:1309
 msgid "Main"
 msgstr "主要設定"
 
-#: src/ui_configurationDialog.h:1301
+#: src/ui_configurationDialog.h:1311
 msgid "Information"
 msgstr "資訊"
 
-#: src/ui_configurationDialog.h:1306
+#: src/ui_configurationDialog.h:1316
 msgid "Navigation"
 msgstr "導覽"
 
-#: src/ui_configurationDialog.h:1308
+#: src/ui_configurationDialog.h:1318
 msgid "Tools"
 msgstr "工具"
 
-#: src/ui_configurationDialog.h:1310
+#: src/ui_configurationDialog.h:1320
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:486
 msgid "Scripts"
 msgstr "劇本"
 
-#: src/ui_configurationDialog.h:1312
+#: src/ui_configurationDialog.h:1322
 msgid "Plugins"
 msgstr "插件"
 
@@ -6158,7 +6162,7 @@ msgid "Restore default settings"
 msgstr "回復預設設定"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
-#: plugins/Oculars/src/ui_ocularDialog.h:1222
+#: plugins/Oculars/src/ui_ocularDialog.h:1231
 #: plugins/Satellites/src/ui_satellitesDialog.h:793
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
@@ -6191,8 +6195,8 @@ msgstr "沿著地平線顯示羅盤方位角標記"
 msgid "Compass marks"
 msgstr "指南針"
 
-#: plugins/Oculars/src/Oculars.cpp:81 plugins/Oculars/src/Oculars.cpp:1320
-#: plugins/Oculars/src/ui_ocularDialog.h:1155
+#: plugins/Oculars/src/Oculars.cpp:81 plugins/Oculars/src/Oculars.cpp:1483
+#: plugins/Oculars/src/ui_ocularDialog.h:1160
 msgid "Oculars"
 msgstr "觀測模擬插件"
 
@@ -6203,354 +6207,368 @@ msgid ""
 "frame and a Telrad sight."
 msgstr "模擬透過望遠鏡目鏡看到的星空 (只有模擬倍率及視野大小). 此插件亦可模擬感光器邊框及Telrad sight"
 
-#: plugins/Oculars/src/Oculars.cpp:854
+#: plugins/Oculars/src/Oculars.cpp:941
 msgid "Please select an object before switching to ocular view."
 msgstr "請先選擇天體才轉到觀測模擬插件檢視"
 
-#: plugins/Oculars/src/Oculars.cpp:948
+#: plugins/Oculars/src/Oculars.cpp:1051
 msgid "&Previous ocular"
 msgstr "&上一個目鏡"
 
-#: plugins/Oculars/src/Oculars.cpp:949
+#: plugins/Oculars/src/Oculars.cpp:1052
 msgid "&Next ocular"
 msgstr "&下一個目鏡"
 
-#: plugins/Oculars/src/Oculars.cpp:950
+#: plugins/Oculars/src/Oculars.cpp:1053
 msgid "Select &ocular"
 msgstr "選擇 &目鏡"
 
-#: plugins/Oculars/src/Oculars.cpp:991
+#: plugins/Oculars/src/Oculars.cpp:1104
 msgid "Toggle &crosshair"
 msgstr "切換 &十字"
 
-#: plugins/Oculars/src/Oculars.cpp:999
+#: plugins/Oculars/src/Oculars.cpp:1114
 msgid "Configure &Oculars"
 msgstr "設定 &目鏡"
 
-#: plugins/Oculars/src/Oculars.cpp:1007
+#: plugins/Oculars/src/Oculars.cpp:1123
 msgid "Toggle &CCD"
 msgstr "切換 &CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1014
+#: plugins/Oculars/src/Oculars.cpp:1131
 msgid "Toggle &Telrad"
 msgstr "切換 &紅點尋星器"
 
-#: plugins/Oculars/src/Oculars.cpp:1022
+#: plugins/Oculars/src/Oculars.cpp:1140
 msgid "&Previous CCD"
 msgstr "&上一個CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1023
+#: plugins/Oculars/src/Oculars.cpp:1141
 msgid "&Next CCD"
 msgstr "&下一個CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1024
+#: plugins/Oculars/src/Oculars.cpp:1142
 msgid "&Select CCD"
 msgstr "&選擇CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1041
+#: plugins/Oculars/src/Oculars.cpp:1164
 msgid "&Rotate CCD"
 msgstr "&轉換CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1063
+#: plugins/Oculars/src/Oculars.cpp:1186
 msgid "&Reset rotation"
 msgstr "&重設轉換"
 
-#: plugins/Oculars/src/Oculars.cpp:1321
-#: plugins/Oculars/src/ui_ocularDialog.h:1157
+#: plugins/Oculars/src/Oculars.cpp:1484
+#: plugins/Oculars/src/ui_ocularDialog.h:1162
 msgid "Ocular view"
 msgstr "觀測模擬插件顯示"
 
-#: plugins/Oculars/src/Oculars.cpp:1338
+#: plugins/Oculars/src/Oculars.cpp:1500
 msgid "Oculars popup menu"
 msgstr "觀測模擬插件彈出選單"
 
-#: plugins/Oculars/src/Oculars.cpp:1339
+#: plugins/Oculars/src/Oculars.cpp:1501
 msgid "Show crosshairs"
 msgstr "顯示十字線"
 
-#: plugins/Oculars/src/Oculars.cpp:1340
+#: plugins/Oculars/src/Oculars.cpp:1502
 msgid "Image sensor frame"
 msgstr "影像感光元件邊框"
 
-#: plugins/Oculars/src/Oculars.cpp:1341
+#: plugins/Oculars/src/Oculars.cpp:1503
 msgid "Telrad sight"
 msgstr "紅點尋星器視覺"
 
-#: plugins/Oculars/src/Oculars.cpp:1342
+#: plugins/Oculars/src/Oculars.cpp:1504
 msgid "Oculars plugin configuration"
 msgstr "觀測模擬插件設定"
 
-#: plugins/Oculars/src/Oculars.cpp:1344
+#: plugins/Oculars/src/Oculars.cpp:1506
 msgid "Select next telescope"
 msgstr "選取下一支望遠鏡"
 
-#: plugins/Oculars/src/Oculars.cpp:1346
+#: plugins/Oculars/src/Oculars.cpp:1508
 msgid "Select previous telescope"
 msgstr "選取上一支望遠鏡"
 
-#: plugins/Oculars/src/Oculars.cpp:1348
+#: plugins/Oculars/src/Oculars.cpp:1510
 msgid "Select next eyepiece"
 msgstr "選擇下一個目鏡"
 
-#: plugins/Oculars/src/Oculars.cpp:1350
+#: plugins/Oculars/src/Oculars.cpp:1512
 msgid "Select previous eyepiece"
 msgstr "選擇上一個目鏡"
 
-#: plugins/Oculars/src/Oculars.cpp:1527
+#: plugins/Oculars/src/Oculars.cpp:1697
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1664
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:501
+#: plugins/Oculars/src/Oculars.cpp:1885
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:503
 #, qt-format
 msgid "Ocular #%1"
 msgstr "目鏡 #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1669
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:505
+#: plugins/Oculars/src/Oculars.cpp:1889
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:507
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "目鏡 #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1683
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:542
+#: plugins/Oculars/src/Oculars.cpp:1903
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:544
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "目鏡焦距: %1毫米"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1690
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:552
+#: plugins/Oculars/src/Oculars.cpp:1910
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:554
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "目鏡視埸: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1702
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:582
+#: plugins/Oculars/src/Oculars.cpp:1921
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:584
 #, qt-format
 msgid "Lens #%1"
 msgstr "鏡片 #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1706
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:586
+#: plugins/Oculars/src/Oculars.cpp:1925
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:588
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "鏡片 #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1711
+#: plugins/Oculars/src/Oculars.cpp:1930
 msgid "Lens: none"
 msgstr "鏡片: 沒有"
 
-#: plugins/Oculars/src/Oculars.cpp:1741 plugins/Oculars/src/Oculars.cpp:1782
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:738
+#: plugins/Oculars/src/Oculars.cpp:1963 plugins/Oculars/src/Oculars.cpp:2008
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:740
 #, qt-format
 msgid "Telescope #%1"
 msgstr "望遠鏡 #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1744
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:818
+#: plugins/Oculars/src/Oculars.cpp:1966
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:823
 #, qt-format
 msgid "Magnification: %1"
 msgstr "倍數: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1747
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:827
+#: plugins/Oculars/src/Oculars.cpp:1969
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:833
+#, qt-format
+msgid "Exit pupil: %1 mm"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1972
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:842
 #, qt-format
 msgid "FOV: %1"
 msgstr "視場: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1766
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:684
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:780
+#: plugins/Oculars/src/Oculars.cpp:1992
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:686
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:782
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "尺寸: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1770
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:644
+#: plugins/Oculars/src/Oculars.cpp:1996
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:646
 #, qt-format
 msgid "Sensor #%1"
 msgstr "感光元件 #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1774
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:648
+#: plugins/Oculars/src/Oculars.cpp:2000
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:650
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "感光元件 #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1787
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
+#: plugins/Oculars/src/Oculars.cpp:2013
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:744
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "望遠鏡 #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2044
+#: plugins/Oculars/src/Oculars.cpp:2293
 msgid "&Lens"
 msgstr "&鏡片"
 
-#: plugins/Oculars/src/Oculars.cpp:2045
+#: plugins/Oculars/src/Oculars.cpp:2294
 msgid "&Previous lens"
 msgstr "&上一塊鏡片"
 
-#: plugins/Oculars/src/Oculars.cpp:2046
+#: plugins/Oculars/src/Oculars.cpp:2295
 msgid "&Next lens"
 msgstr "&下一塊鏡片"
 
-#: plugins/Oculars/src/Oculars.cpp:2076
+#: plugins/Oculars/src/Oculars.cpp:2325
 msgid "&Telescope"
 msgstr "&Telescope"
 
-#: plugins/Oculars/src/Oculars.cpp:2077
+#: plugins/Oculars/src/Oculars.cpp:2326
 msgid "&Previous telescope"
 msgstr "&上一支望遠鏡"
 
-#: plugins/Oculars/src/Oculars.cpp:2078
+#: plugins/Oculars/src/Oculars.cpp:2327
 msgid "&Next telescope"
 msgstr "&下一支望遠鏡"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:187
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:189
 msgid "Previous ocular"
 msgstr "上一個目鏡"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:193
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:195
 msgid "Next ocular"
 msgstr "下一個目鏡"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:199
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:201
 msgid "Previous lens"
 msgstr "上一塊鏡片"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:205
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
 msgid "Next lens"
 msgstr "下一塊鏡片"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:211
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:213
 msgid "Previous CCD frame"
 msgstr "上一個CCD框架"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:217
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:219
 msgid "Next CCD frame"
 msgstr "下一個CCD框架"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:223
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:225
 msgid "Previous telescope"
 msgstr "上一支望遠鏡"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:229
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:231
 msgid "Next telescope"
 msgstr "下一支望遠鏡"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:262
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:264
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
 msgstr "逆時針旋轉感光元件邊框15度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:275
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:277
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
 msgstr "逆時針旋轉感光元件邊框5度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:288
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:290
 msgid "Rotate the sensor frame 1 degree counterclockwise"
 msgstr "逆時針旋轉感光元件邊框1度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:301
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:303
 msgid "Reset the sensor frame rotation"
 msgstr "重設感光元件邊框旋轉"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:314
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:316
 msgid "Rotate the sensor frame 1 degree clockwise"
 msgstr "順時針旋轉感光元件邊框1度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:327
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:329
 msgid "Rotate the sensor frame 5 degrees clockwise"
 msgstr "順時針旋轉感光元件邊框5度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:340
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:342
 msgid "Rotate the sensor frame 15 degrees clockwise"
 msgstr "順時針旋轉感光元件邊框1度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:544
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:546
 msgid "Effective focal length of the ocular"
 msgstr "此目鏡有效焦距"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:555
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:557
 msgid "Apparent field of view of the ocular"
 msgstr "目鏡視埸大小"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:588
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:590
 #, qt-format
 msgid "Multiplicity: %1"
 msgstr "多個: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:593
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:595
 msgid "Lens: None"
 msgstr "鏡片: 沒有"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:594
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:596
 msgid "Multiplicity: N/A"
 msgstr "多個: 不適用"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:600
 msgid "Focal length of eyepiece"
 msgstr "焦距目鏡"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:691
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:693
 #, qt-format
 msgid "Rotation: %1"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:801
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:804
 msgid "Magnification provided by these binoculars"
 msgstr "這些雙筒望遠鏡的放大倍率"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:802
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:805
 msgid "Actual field of view provided by these binoculars"
 msgstr "這些雙筒望遠鏡之實際視野"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:810
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:806
+msgid "Exit pupil provided by these binoculars"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:814
 msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr "由目鏡/鏡片/望遠鏡組合的倍率"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:811
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:815
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr "目鏡/鏡片/望遠鏡組合的實際視埸"
 
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:816
+msgid "Exit pupil provided by this ocular/lens/telescope combination"
+msgstr ""
+
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:525
+#: plugins/Oculars/src/gui/OcularDialog.cpp:530
 msgid "tFOV:"
 msgstr ""
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:527
+#: plugins/Oculars/src/gui/OcularDialog.cpp:532
 msgid "Magnification factor:"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:531
-#: plugins/Oculars/src/ui_ocularDialog.h:1182
+#: plugins/Oculars/src/gui/OcularDialog.cpp:536
+#: plugins/Oculars/src/ui_ocularDialog.h:1191
 msgid "aFOV:"
 msgstr "視場:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:532
-#: plugins/Oculars/src/ui_ocularDialog.h:1183
-#: plugins/Oculars/src/ui_ocularDialog.h:1216
+#: plugins/Oculars/src/gui/OcularDialog.cpp:537
+#: plugins/Oculars/src/ui_ocularDialog.h:1192
+#: plugins/Oculars/src/ui_ocularDialog.h:1225
 msgid "Focal length:"
 msgstr "焦距："
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:541
+#: plugins/Oculars/src/gui/OcularDialog.cpp:546
 msgid "Oculars Plug-in"
 msgstr "觀測模擬插件"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:544
+#: plugins/Oculars/src/gui/OcularDialog.cpp:549
 msgid "Barlow lens feature"
 msgstr "巴羅鏡"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:548
+#: plugins/Oculars/src/gui/OcularDialog.cpp:553
 msgid "Overview"
 msgstr "概覽"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:550
+#: plugins/Oculars/src/gui/OcularDialog.cpp:555
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece.  "
 "This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -6559,7 +6577,7 @@ msgid ""
 msgstr ""
 "此插件可讓你模擬目鏡所看到的效果. 你可以透過這些設定去新增, 更改或刪除目鏡, 望遠鏡及CCD感光元件. 第一次可使用預設儀器去模擬效果."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:551
+#: plugins/Oculars/src/gui/OcularDialog.cpp:556
 msgid ""
 "You can choose to scale the image you see on the screen.  This is intended "
 "to show you a better comparison of what one eyepiece/telescope combination "
@@ -6570,14 +6588,14 @@ msgid ""
 "recommend that you leave it off, unless you feel you have a need of it."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:552
+#: plugins/Oculars/src/gui/OcularDialog.cpp:557
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
 "top of the screen."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:553
+#: plugins/Oculars/src/gui/OcularDialog.cpp:558
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -6586,218 +6604,222 @@ msgid ""
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:554
+#: plugins/Oculars/src/gui/OcularDialog.cpp:559
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr "如果說有任何問題, 請話我知. 享受!"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:557
+#: plugins/Oculars/src/gui/OcularDialog.cpp:562
 msgid "Hot Keys"
 msgstr "熱鍵"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:558
+#: plugins/Oculars/src/gui/OcularDialog.cpp:563
 msgid "The plug-in's key bindings can be edited in the General Tab."
 msgstr "插件的綁定鍵可以在一般設定編輯."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:572
 #: plugins/Oculars/src/gui/OcularDialog.cpp:577
+#: plugins/Oculars/src/gui/OcularDialog.cpp:582
 msgid "[no key defined]"
 msgstr "[無按鍵定義]"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:581
+#: plugins/Oculars/src/gui/OcularDialog.cpp:586
 msgid "Switches on/off the ocular overlay."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:585
+#: plugins/Oculars/src/gui/OcularDialog.cpp:590
 msgid "Opens the pop-up navigation menu."
 msgstr "打開彈出式導航選單."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1158
+#: plugins/Oculars/src/ui_ocularDialog.h:1163
 msgid "Enable only if an object is selected"
 msgstr "只有天體被選擇了才啟用"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1159
-msgid "Scale image circle"
-msgstr "影像比例圈框"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1161
+#: plugins/Oculars/src/ui_ocularDialog.h:1165
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
 msgstr "為不同口徑望遠鏡設極限星等"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1163
+#: plugins/Oculars/src/ui_ocularDialog.h:1167
 msgid "Limit stellar magnitude"
 msgstr "限制星等"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1164
+#: plugins/Oculars/src/ui_ocularDialog.h:1168
+msgid "Scale image circle"
+msgstr "影像比例圈框"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1172
+msgid "Use semi-transparent mask"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1173
 msgid "Key mappings"
 msgstr "對應按鍵"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1165
+#: plugins/Oculars/src/ui_ocularDialog.h:1174
 msgid "Toggle ocular view:"
 msgstr "切換目鏡模擬:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1167
+#: plugins/Oculars/src/ui_ocularDialog.h:1176
 msgid "Open pop-up navigation menu:"
 msgstr "開啟彈出選單"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1168
+#: plugins/Oculars/src/ui_ocularDialog.h:1177
 msgid "Interface"
 msgstr "界面"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1169
+#: plugins/Oculars/src/ui_ocularDialog.h:1178
 msgid "On-screen control panel"
 msgstr "螢幕控制面板"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1171
+#: plugins/Oculars/src/ui_ocularDialog.h:1180
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of Stellarium."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1173
+#: plugins/Oculars/src/ui_ocularDialog.h:1182
 msgid "Restore FOV to initial values"
 msgstr "回復預設視野大小"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1174
+#: plugins/Oculars/src/ui_ocularDialog.h:1183
 msgid "Sensor view"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1175
+#: plugins/Oculars/src/ui_ocularDialog.h:1184
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "使用角度及分去表示CCD視埸"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1176
+#: plugins/Oculars/src/ui_ocularDialog.h:1185
 msgid "Use flip for CCD"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1177
+#: plugins/Oculars/src/ui_ocularDialog.h:1186
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:226
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:432
 msgid "General"
 msgstr "一般設定"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1178
 #: plugins/Oculars/src/ui_ocularDialog.h:1187
+#: plugins/Oculars/src/ui_ocularDialog.h:1196
 msgid "Eyepieces"
 msgstr "目鏡"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1179
-#: plugins/Oculars/src/ui_ocularDialog.h:1189
-#: plugins/Oculars/src/ui_ocularDialog.h:1196
-#: plugins/Oculars/src/ui_ocularDialog.h:1213
+#: plugins/Oculars/src/ui_ocularDialog.h:1188
+#: plugins/Oculars/src/ui_ocularDialog.h:1198
+#: plugins/Oculars/src/ui_ocularDialog.h:1205
+#: plugins/Oculars/src/ui_ocularDialog.h:1222
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:219
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Add"
 msgstr "新增"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1181
-#: plugins/Oculars/src/ui_ocularDialog.h:1191
-#: plugins/Oculars/src/ui_ocularDialog.h:1198
-#: plugins/Oculars/src/ui_ocularDialog.h:1215
+#: plugins/Oculars/src/ui_ocularDialog.h:1190
+#: plugins/Oculars/src/ui_ocularDialog.h:1200
+#: plugins/Oculars/src/ui_ocularDialog.h:1207
+#: plugins/Oculars/src/ui_ocularDialog.h:1224
 #: plugins/Satellites/src/ui_satellitesDialog.h:760
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:234
 msgid "Name:"
 msgstr "名稱:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1184
+#: plugins/Oculars/src/ui_ocularDialog.h:1193
 msgid "Field stop:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1185
+#: plugins/Oculars/src/ui_ocularDialog.h:1194
 msgid "Binoculars"
 msgstr "雙筒望遠鏡"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1186
+#: plugins/Oculars/src/ui_ocularDialog.h:1195
 msgid "Has permanent cross-hairs"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1188
-#: plugins/Oculars/src/ui_ocularDialog.h:1194
+#: plugins/Oculars/src/ui_ocularDialog.h:1197
+#: plugins/Oculars/src/ui_ocularDialog.h:1203
 msgid "Lenses"
 msgstr "鏡片組"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1192
+#: plugins/Oculars/src/ui_ocularDialog.h:1201
 msgid "Multiplier:"
 msgstr "倍數:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1193
+#: plugins/Oculars/src/ui_ocularDialog.h:1202
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1195
-#: plugins/Oculars/src/ui_ocularDialog.h:1211
+#: plugins/Oculars/src/ui_ocularDialog.h:1204
+#: plugins/Oculars/src/ui_ocularDialog.h:1220
 msgid "Sensors"
 msgstr "感光元件"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1199
+#: plugins/Oculars/src/ui_ocularDialog.h:1208
 msgid "Resolution x (pixels):"
 msgstr "解像度x (像素):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1200
+#: plugins/Oculars/src/ui_ocularDialog.h:1209
 msgid "Resolution y (pixels):"
 msgstr "解像度y (像素):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1201
+#: plugins/Oculars/src/ui_ocularDialog.h:1210
 msgid "Chip height (mm):"
 msgstr "芯片高度 (微米):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1202
+#: plugins/Oculars/src/ui_ocularDialog.h:1211
 msgid "Chip width (mm):"
 msgstr "芯片寬度 (微米):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1203
+#: plugins/Oculars/src/ui_ocularDialog.h:1212
 msgid "Pixel width (micron):"
 msgstr "像素寬度 (微米):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1204
+#: plugins/Oculars/src/ui_ocularDialog.h:1213
 msgid "Pixel height (micron):"
 msgstr "像素高度 (微米):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1205
+#: plugins/Oculars/src/ui_ocularDialog.h:1214
 msgid "Prism/CCD distance (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1206
+#: plugins/Oculars/src/ui_ocularDialog.h:1215
 msgid "Prism/CCD height (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1207
+#: plugins/Oculars/src/ui_ocularDialog.h:1216
 msgid "Prism/CCD width (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1208
+#: plugins/Oculars/src/ui_ocularDialog.h:1217
 msgid "Position angle (degrees):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1209
+#: plugins/Oculars/src/ui_ocularDialog.h:1218
 msgid "Off-Axis guider"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1210
+#: plugins/Oculars/src/ui_ocularDialog.h:1219
 msgid "Rotation Angle (degrees):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1212
 #: plugins/Oculars/src/ui_ocularDialog.h:1221
+#: plugins/Oculars/src/ui_ocularDialog.h:1230
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
 msgstr "望遠鏡"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1217
+#: plugins/Oculars/src/ui_ocularDialog.h:1226
 msgid "Diameter:"
 msgstr "直徑:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1218
+#: plugins/Oculars/src/ui_ocularDialog.h:1227
 msgid "Horizontal flip"
 msgstr "水平倒轉"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1219
+#: plugins/Oculars/src/ui_ocularDialog.h:1228
 msgid "Vertical flip"
 msgstr "垂直倒轉"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1220
+#: plugins/Oculars/src/ui_ocularDialog.h:1229
 msgid "Equatorial Mount"
 msgstr ""
 
@@ -8515,11 +8537,6 @@ msgstr "只更新軌道資料"
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 msgid "Add objects"
 msgstr "新增天體"
-
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:293
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
-msgid "Solar System objects"
-msgstr "太陽系天體"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:295
 msgid "Warning"
@@ -10855,108 +10872,118 @@ msgstr "秋季白羊座流星雨"
 msgid "χ-Orionids"
 msgstr "獵戶座χ流星雨"
 
-#. TRANSLATORS: Name of parent object for meteor shower
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:155
+msgid "Sextantids"
+msgstr ""
+
+#. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:157
+msgid "November Orionids"
+msgstr ""
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:161
 msgid "Comet 1P/Halley"
 msgstr "1P/哈雷彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:159
+#: plugins/MeteorShowers/src/translations.h:163
 msgid "Comet 7P/Pons-Winnecke"
 msgstr "7P/龐斯 - 溫內克彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:161
+#: plugins/MeteorShowers/src/translations.h:165
 msgid "Comet 55P/Tempel-Tuttle"
 msgstr "55P/坦普爾 - 塔特爾彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:163
+#: plugins/MeteorShowers/src/translations.h:167
 msgid "Comet 96P/Machholz"
 msgstr "96P/麥克霍爾茲彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:165
+#: plugins/MeteorShowers/src/translations.h:169
 msgid "Comet 109P/Swift-Tuttle"
 msgstr "109P/斯威夫特 - 塔特爾彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:167
+#: plugins/MeteorShowers/src/translations.h:171
 msgid "Comet Thatcher (1861 I)"
 msgstr "佘契爾彗星 (1861 I)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:169
+#: plugins/MeteorShowers/src/translations.h:173
 msgid "Comet 26P/Grigg-Skjellerup"
 msgstr "26P/Grigg-Skjellerup彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:171
+#: plugins/MeteorShowers/src/translations.h:175
 msgid "Comet 21P/Giacobini-Zinner"
 msgstr "21P/ 賈可比尼 - 秦諾彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:173
+#: plugins/MeteorShowers/src/translations.h:177
 msgid "Comet 169P/NEAT"
 msgstr "169P/NEAT 彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:175
+#: plugins/MeteorShowers/src/translations.h:179
 msgid "Comet 289P/Blanpain"
 msgstr "289P/ 寶珀彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:177
+#: plugins/MeteorShowers/src/translations.h:181
 msgid "Comet 8P/Tuttle"
 msgstr "109P/塔特爾彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:179
+#: plugins/MeteorShowers/src/translations.h:183
 msgid "Comet 3D/Biela"
 msgstr "3D/比拉彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:181
+#: plugins/MeteorShowers/src/translations.h:185
 msgid "Comet C/1917 F1 (Mellish)"
 msgstr "彗星C/1917 F1 (Mellish)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:183
+#: plugins/MeteorShowers/src/translations.h:187
 msgid "Comet C/1964 N1 (Ikeya)"
 msgstr "彗星C/1964 N1 (池谷)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:185
+#: plugins/MeteorShowers/src/translations.h:189
 msgid "Comet Schwassmann-Wachmann 3"
 msgstr "施瓦斯曼-瓦茨曼3號彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:187
+#: plugins/MeteorShowers/src/translations.h:191
 msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
 msgstr "小行星2003 EH1和彗星C/1490 Y1"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:189
+#: plugins/MeteorShowers/src/translations.h:193
 msgid "Minor planet (4450) Pan"
 msgstr "小行星 (4450) Pan"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:191
+#: plugins/MeteorShowers/src/translations.h:195
 msgid "Minor planet 2008 ED69"
 msgstr "小行星 2008 ED69"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:193
+#: plugins/MeteorShowers/src/translations.h:197
 msgid "Comet 2P/Encke"
 msgstr "2P/恩克彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:195
+#: plugins/MeteorShowers/src/translations.h:199
 msgid "Minor planet 2004 TG10"
 msgstr "小行星2004 TG10"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:197
+#: plugins/MeteorShowers/src/translations.h:201
 msgid "Minor planet (3200) Phaethon"
 msgstr "小行星 (3200) 法厄同"
 
@@ -12545,6 +12572,9 @@ msgstr ""
 
 #~ msgid "Landscape: "
 #~ msgstr "地形: "
+
+#~ msgid "Planets and satellites"
+#~ msgstr "行星及衛星"
 
 #~ msgid "Maximum Magnitude to Label: "
 #~ msgstr "顯示星名的最高星等: "

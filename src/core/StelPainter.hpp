@@ -72,7 +72,6 @@ public:
 
 	//! Fill with black around the viewport.
 	void drawViewportShape(void);
-	void drawViewportShape(const GLfloat innerRadius);
 
 	//! Draw the string at the given position and angle with the given font.
 	//! If the gravity label flag is set, uses drawTextGravity180.
