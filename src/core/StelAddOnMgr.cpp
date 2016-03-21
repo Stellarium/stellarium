@@ -497,53 +497,26 @@ void StelAddOnMgr::unzip(AddOn& addon)
 void StelAddOnMgr::addonToJson(AddOn* addon, QString jsonPath)
 {
 	QFile jsonFile(jsonPath);
-	if (jsonFile.open(QIODevice::ReadWrite))
+	if (!jsonFile.open(QIODevice::ReadWrite))
 	{
-		QJsonObject attributes;
-		attributes.insert("type", addon->getTypeString());
-		attributes.insert("title", addon->getTitle());
-		attributes.insert("description", addon->getDescription());
-		attributes.insert("version", addon->getVersion());
-		attributes.insert("date", addon->getDate().toString("yyyy.MM.dd"));
-		attributes.insert("license", addon->getLicenseName());
-		attributes.insert("license-url", addon->getLicenseURL());
-		attributes.insert("download-url", addon->getDownloadURL());
-		attributes.insert("download-filename", addon->getDownloadFilename());
-		attributes.insert("download-size", addon->getDownloadSize());
-		attributes.insert("checksum", addon->getChecksum());
-		attributes.insert("textures", addon->getAllTextures().join(","));
-
-		attributes.insert("status", addon->getStatus());
-		attributes.insert("installed-files", QJsonArray::fromStringList(addon->getInstalledFiles()));
-
-		QJsonArray authors;
-		foreach (AddOn::Authors a, addon->getAuthors())
-		{
-			QJsonObject author;
-			author.insert("name", a.name);
-			author.insert("email", a.email);
-			author.insert("url", a.url);
-			authors.append(author);
-		}
-		attributes.insert("authors", authors);
-
-		QJsonObject json(QJsonDocument::fromJson(jsonFile.readAll()).object());
-		json.insert("name", ADDON_CATALOG_NAME);
-		json.insert("format", ADDON_CATALOG_VERSION);
-
-		QJsonObject addons = json["add-ons"].toObject();
-		addons.insert(addon->getAddOnId(), attributes);
-		json.insert("add-ons", addons);
-
-		jsonFile.resize(0);
-		jsonFile.write(QJsonDocument(json).toJson());
-		jsonFile.close();
-	}
-	else
-	{
-		qWarning() << "Add-On Mgr: Couldn't open the user catalog of addons!"
+		qWarning() << "[Add-on] Unable to open the catalog of addons"
 			   << QDir::toNativeSeparators(m_sInstalledAddonsJsonPath);
+		return;
 	}
+
+	QJsonObject json(QJsonDocument::fromJson(jsonFile.readAll()).object());
+	json.insert("name", ADDON_CATALOG_NAME);
+	json.insert("format", ADDON_CATALOG_VERSION);
+	json.insert("date", QDateTime::currentDateTime().toString("yyyy.MM.dd"));
+	json.insert("series", StelUtils::getApplicationSeries());
+
+	QJsonObject addons = json["add-ons"].toObject();
+	addons.insert(addon->getAddOnId(), QJsonObject::fromVariantMap(addon->getMap()));
+	json.insert("add-ons", addons);
+
+	jsonFile.resize(0);
+	jsonFile.write(QJsonDocument(json).toJson());
+	jsonFile.close();
 }
 
 void StelAddOnMgr::removeAddonFromJson(AddOn *addon, QString jsonPath)
