@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-03-18 00:42+0600\n"
-"PO-Revision-Date: 2016-03-04 20:58+0000\n"
+"PO-Revision-Date: 2016-03-21 18:10+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-03-18 05:25+0000\n"
-"X-Generator: Launchpad (build 17947)\n"
+"X-Launchpad-Export-Date: 2016-03-22 05:21+0000\n"
+"X-Generator: Launchpad (build 17958)\n"
 "Language: gd\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -5425,7 +5425,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1093 src/ui_configurationDialog.h:1094
 msgid "Not installed"
-msgstr ""
+msgstr "Cha deach a stàladh"
 
 #: src/ui_configurationDialog.h:1096
 msgid ""
@@ -5656,7 +5656,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1194
 msgid "seconds"
-msgstr ""
+msgstr "diog"
 
 #: src/ui_configurationDialog.h:1196
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:192
@@ -6062,16 +6062,16 @@ msgstr ""
 #: src/ui_astroCalcDialog.h:383 src/ui_astroCalcDialog.h:392
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
-msgstr ""
+msgstr "O:"
 
 #: src/ui_astroCalcDialog.h:384 src/ui_astroCalcDialog.h:386
 msgid "yyyy.MM.dd hh:mm"
-msgstr ""
+msgstr "yyyy.MM.dd hh:mm"
 
 #: src/ui_astroCalcDialog.h:385 src/ui_astroCalcDialog.h:394
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
-msgstr ""
+msgstr "Gu:"
 
 #: src/ui_astroCalcDialog.h:387
 msgid "Calculate ephemeris"
@@ -6091,11 +6091,11 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:391
 msgid "and"
-msgstr ""
+msgstr "agus"
 
 #: src/ui_astroCalcDialog.h:393 src/ui_astroCalcDialog.h:395
 msgid "yyyy.MM.dd"
-msgstr ""
+msgstr "yyyy.MM.dd"
 
 #: src/ui_astroCalcDialog.h:396
 msgid "Maximum allowed separation:"
@@ -6190,7 +6190,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:206
 msgid "Links"
-msgstr ""
+msgstr "Ceanglaichean"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:447
@@ -6297,7 +6297,7 @@ msgstr "Ceangal a' phuing-dheiridh ris an speur a' cuairteachadh"
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:229
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:361
 msgid "Format"
-msgstr ""
+msgstr "Fòrmat"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:230
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:362
@@ -6710,7 +6710,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:1192
 #: plugins/Oculars/src/ui_ocularDialog.h:1225
 msgid "Focal length:"
-msgstr ""
+msgstr "Faid an fhòcais:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:546
 msgid "Oculars Plug-in"
@@ -7379,7 +7379,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:464
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:460
 msgid "Update now"
-msgstr ""
+msgstr "Ùraich an-dràsta"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:628
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:195
@@ -7425,7 +7425,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:943
 msgid "Brightness"
-msgstr ""
+msgstr "Soilleireachd"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:946
 msgid "Satellite"
@@ -7468,7 +7468,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:711
 msgid "Updates"
-msgstr ""
+msgstr "Ùrachaidhean"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:712
 msgid "Update satellite data from Internet sources"
@@ -7481,7 +7481,7 @@ msgstr ""
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:268
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:461
 msgid "Last update:"
-msgstr ""
+msgstr "An t-ùrachadh mu dheireadh:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
 msgid "On update, add all new satellites from the selected source(s)"
@@ -7556,7 +7556,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:482
 #: plugins/Observability/src/ui_ObservabilityDialog.h:359
 msgid "Settings"
-msgstr ""
+msgstr "Roghainnean"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:747
 msgid "Double-click a satellite to start tracking it."
@@ -7605,7 +7605,7 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesDialog.h:774
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:219
 msgid "Description:"
-msgstr ""
+msgstr "Tuairisgeul:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:775
 msgid "Groups:"
@@ -7637,7 +7637,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:790
 msgid "Sources"
-msgstr ""
+msgstr "Tùsan"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:791
 msgid "Predict Iridium flares"
@@ -7673,7 +7673,7 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:218
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Discard"
-msgstr ""
+msgstr "Tilg air falbh"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:78
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:163
@@ -7715,7 +7715,7 @@ msgstr "Rèitich a' phrosbaig"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:63
 msgid "N/A"
-msgstr ""
+msgstr "Chan eil seo iomchaidh"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:64
 msgid "Starting"
@@ -7723,19 +7723,19 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:65
 msgid "Connecting"
-msgstr ""
+msgstr "'Ga cheangal"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:66
 msgid "Connected"
-msgstr ""
+msgstr "Ceangailte"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:67
 msgid "Disconnected"
-msgstr ""
+msgstr "Gun cheangal"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:68
 msgid "Stopped"
-msgstr ""
+msgstr "Sguireadh dheth"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:251
 msgid "Telescope Control plug-in"
@@ -7749,17 +7749,17 @@ msgstr "Plugan uidheam-smachd na prosbaig"
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:112
 #, qt-format
 msgid "Version %1"
-msgstr ""
+msgstr "Tionndadh %1"
 
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:282
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:94
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 msgid "Status"
-msgstr ""
+msgstr "Staid"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:301
 #, qt-format
@@ -7807,7 +7807,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:761
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
 msgid "Start"
-msgstr ""
+msgstr "Tòisich"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:762
 msgid "Start the selected local telescope"
@@ -7815,7 +7815,7 @@ msgstr "Tòisich a' phrosbaig ionadail a thagh thu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:767
 msgid "Stop"
-msgstr ""
+msgstr "Cuir stad air"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:768
 msgid "Stop the selected local telescope"
@@ -7823,7 +7823,7 @@ msgstr "Cuir stad air a' phrosbaig ionadail a thagh thu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:773
 msgid "Connect"
-msgstr ""
+msgstr "Ceangail"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:774
 msgid "Connect to the selected telescope"
@@ -7831,7 +7831,7 @@ msgstr "Ceangail ris a' phrosbaig a thagh thu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:779
 msgid "Disconnect"
-msgstr ""
+msgstr "Dì-cheangail"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:780
 msgid "Disconnect from the selected telescope"
@@ -7999,7 +7999,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
 msgid "Device model:"
-msgstr ""
+msgstr "Modail an uidheim:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
 msgid "Connection settings"
@@ -8007,7 +8007,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "Host:"
-msgstr ""
+msgstr "Òstair:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:493
 msgid ""
@@ -8042,7 +8042,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
 msgid "OK"
-msgstr ""
+msgstr "Ceart ma-thà"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:394
 msgid "Telescopes Controlled"
@@ -8054,7 +8054,7 @@ msgstr "Rèitich na prosbaigean a thagh thu"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
 msgid "Configure"
-msgstr ""
+msgstr "Rèitich"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:401
 msgid "Add a new telescope"
@@ -8082,7 +8082,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
 msgid "Files"
-msgstr ""
+msgstr "Faidhlichean"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Log telescope driver messages to files"
@@ -8111,7 +8111,7 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
-msgstr ""
+msgstr "Roinn-tìde"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:44
 msgid ""
@@ -8429,7 +8429,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:235
 msgid "Language"
-msgstr ""
+msgstr "Cànan"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:249
 msgid "Show stars"
@@ -8437,7 +8437,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:277
 msgid "Colors"
-msgstr ""
+msgstr "Dathan"
 
 #. TRANSLATORS: Refers to constellation art
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
@@ -9309,7 +9309,7 @@ msgstr "Uinneag rèiteachaidh nan exo-phlanaidean"
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:938
 msgid "Hot"
-msgstr ""
+msgstr "Teth"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:940
@@ -9804,7 +9804,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
 msgid "Notes"
-msgstr ""
+msgstr "Nòtaichean"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
 msgid ""
@@ -10077,7 +10077,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:501
 msgctxt "tab in plugin windows"
 msgid "Info"
-msgstr ""
+msgstr "Fiosrachadh"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:502
 msgctxt "tab in plugin windows"
@@ -10565,13 +10565,13 @@ msgstr ""
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:260
 msgctxt "time"
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #. TRANSLATORS: seconds.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:262
 msgctxt "time"
 msgid "s"
-msgstr ""
+msgstr "d"
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:82
 msgid "Equation of Time plug-in"
@@ -10605,7 +10605,7 @@ msgstr ""
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:280
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:343
 msgid "Font size:"
-msgstr ""
+msgstr "Meud a' chrutha-chlò:"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:98
 msgid "The current catalog of Meteor Showers is invalid!"
@@ -10701,11 +10701,11 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:589
 msgid "Active"
-msgstr ""
+msgstr "Gnìomhach"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:597
 msgid "Activity"
-msgstr ""
+msgstr "Gnìomhachd"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:602
 #, qt-format
@@ -11038,77 +11038,77 @@ msgstr ""
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:161
 msgid "Comet 1P/Halley"
-msgstr ""
+msgstr "Comaid 1P/Halley"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:163
 msgid "Comet 7P/Pons-Winnecke"
-msgstr ""
+msgstr "Comaid 7P/Pons-Winnecke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:165
 msgid "Comet 55P/Tempel-Tuttle"
-msgstr ""
+msgstr "Comaid 55P/Tempel-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:167
 msgid "Comet 96P/Machholz"
-msgstr ""
+msgstr "Comaid 96P/Machholz"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:169
 msgid "Comet 109P/Swift-Tuttle"
-msgstr ""
+msgstr "Comaid 109P/Swift-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:171
 msgid "Comet Thatcher (1861 I)"
-msgstr ""
+msgstr "Comaid Thatcher (1861 I)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:173
 msgid "Comet 26P/Grigg-Skjellerup"
-msgstr ""
+msgstr "Comaid 26P/Grigg-Skjellerup"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:175
 msgid "Comet 21P/Giacobini-Zinner"
-msgstr ""
+msgstr "Comaid 21P/Giacobini-Zinner"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:177
 msgid "Comet 169P/NEAT"
-msgstr ""
+msgstr "Comaid 169P/NEAT"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:179
 msgid "Comet 289P/Blanpain"
-msgstr ""
+msgstr "Comaid 289P/Blanpain"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:181
 msgid "Comet 8P/Tuttle"
-msgstr ""
+msgstr "Comaid 8P/Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:183
 msgid "Comet 3D/Biela"
-msgstr ""
+msgstr "Comaid 3D/Biela"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:185
 msgid "Comet C/1917 F1 (Mellish)"
-msgstr ""
+msgstr "Comaid C/1917 F1 (Mellish)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:187
 msgid "Comet C/1964 N1 (Ikeya)"
-msgstr ""
+msgstr "Comaid C/1964 N1 (Ikeya)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:189
 msgid "Comet Schwassmann-Wachmann 3"
-msgstr ""
+msgstr "Comaid Schwassmann-Wachmann 3"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:191
@@ -11128,7 +11128,7 @@ msgstr ""
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:197
 msgid "Comet 2P/Encke"
-msgstr ""
+msgstr "Comaid 2P/Encke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:199
@@ -11142,7 +11142,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:132
 msgid "Updating..."
-msgstr ""
+msgstr "'Ga ùrachadh..."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:137
 msgid "Successfully updated!"
@@ -11150,7 +11150,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:141
 msgid "Failed!"
-msgstr ""
+msgstr "Dh'fhàillig leis!"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:145
 msgid "Outdated!"
@@ -11266,7 +11266,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:297
 msgid "Info"
-msgstr ""
+msgstr "Fiosrachadh"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:298
 msgid "Info about meteor showers you can get here:"
@@ -11929,7 +11929,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Shadows"
-msgstr ""
+msgstr "Sgàilean"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Simple shadows"
@@ -11953,11 +11953,11 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Hardware"
-msgstr ""
+msgstr "Bathar-cruaidh"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
 msgid "Low"
-msgstr ""
+msgstr "Ìseal"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
 msgid "Low + Hardware"
@@ -12025,7 +12025,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:218
 msgid "Title:"
-msgstr ""
+msgstr "Tiotal:"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:59
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:191
@@ -12212,7 +12212,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:343
 msgid "Change color"
-msgstr ""
+msgstr "Atharraich an dath"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:345
 msgid "Major Lunar Standstill lines"
