@@ -836,7 +836,8 @@ void StelMainView::updateNightModeProperty()
 #ifndef Q_OS_MAC
 	QRegExp glslRegExp("^(\\d\\.\\d\\d)");
 	int pos=glslRegExp.indexIn(glslString);
-	QRegExp glslesRegExp("ES (\\d\\.\\d\\d)");
+	// VC4 drivers on Raspberry Pi reports ES 1.0.16 or so, we must step down to one cipher after decimal.
+	QRegExp glslesRegExp("ES (\\d\\.\\d)");
 	int posES=glslesRegExp.indexIn(glslString);
 	if (pos >-1)
 	{
