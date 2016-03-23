@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-03-18 00:42+0600\n"
-"PO-Revision-Date: 2016-02-07 02:23+0000\n"
+"PO-Revision-Date: 2016-03-23 01:56+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-03-18 05:32+0000\n"
-"X-Generator: Launchpad (build 17947)\n"
+"X-Launchpad-Export-Date: 2016-03-23 05:17+0000\n"
+"X-Generator: Launchpad (build 17958)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -1707,23 +1707,23 @@ msgstr "Śledź obiekt"
 
 #: src/core/StelMovementMgr.cpp:162
 msgid "Look towards East"
-msgstr ""
+msgstr "Spójrz na wschód"
 
 #: src/core/StelMovementMgr.cpp:163
 msgid "Look towards West"
-msgstr ""
+msgstr "Spójrz na zachód"
 
 #: src/core/StelMovementMgr.cpp:164
 msgid "Look towards North"
-msgstr ""
+msgstr "Spójrz na północ"
 
 #: src/core/StelMovementMgr.cpp:165
 msgid "Look towards South"
-msgstr ""
+msgstr "Spójrz na południe"
 
 #: src/core/StelMovementMgr.cpp:166
 msgid "Look towards Zenith"
-msgstr ""
+msgstr "Spójrz w kierunku zenitu"
 
 #: src/core/SimbadSearcher.cpp:56
 msgid "Network error"
@@ -1874,11 +1874,11 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1266 src/gui/ConfigurationDialog.cpp:1275
 msgid "Available"
-msgstr ""
+msgstr "Dostępne"
 
 #: src/gui/ConfigurationDialog.cpp:1268 src/gui/ConfigurationDialog.cpp:1277
 msgid "Not Available"
-msgstr ""
+msgstr "Niedostępne"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1340
@@ -5185,10 +5185,12 @@ msgid ""
 "Use surface brightness of deep-sky objects for scale of the visibility of "
 "their markers and labels."
 msgstr ""
+"Używaj jasności powierzchni obiektów głębokiego nieba do określania stopnia "
+"widoczności ich znaczników i etykiet."
 
 #: src/ui_viewDialog.h:1695
 msgid "Use surface brightness"
-msgstr ""
+msgstr "Używaj jasności powierzchni"
 
 #: src/ui_viewDialog.h:1697
 msgid "Use hints proportional to angular size of deep-sky objects"
@@ -5308,10 +5310,12 @@ msgstr ""
 #: src/ui_viewDialog.h:1766
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
 msgstr ""
+"Pokaż kolury (wielkie koła przechodzące przez bieguny i punkty "
+"przesilenia/równonocy)."
 
 #: src/ui_viewDialog.h:1768
 msgid "Colures"
-msgstr ""
+msgstr "Kolury"
 
 #: src/ui_viewDialog.h:1770
 msgid ""
@@ -5324,6 +5328,8 @@ msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
 msgstr ""
+"Okręgi kreślone w danej chwili przez oś Ziemi w jej ruchu wokół biegunów "
+"ekliptycznych. Wyświetlane tylko na Ziemi."
 
 #: src/ui_viewDialog.h:1776
 msgid "Precession circles"
@@ -5868,6 +5874,7 @@ msgstr "Współrzędne topocentryczne"
 #: src/ui_configurationDialog.h:1263
 msgid "Activate this option to calculate azimuth from south towards west."
 msgstr ""
+"Włączenie tej opcji powoduje obliczanie azymutu z południa na zachód."
 
 #: src/ui_configurationDialog.h:1265
 msgid "Azimuth from South"
@@ -6167,7 +6174,7 @@ msgstr "Maksymalna dopuszczalna odległość:"
 
 #: src/ui_astroCalcDialog.h:398
 msgid "Value in decimal degrees"
-msgstr ""
+msgstr "Wartość w stopniach wyrażonych w ułamkach dziesiętnych"
 
 #: src/ui_astroCalcDialog.h:400
 msgid "Calculate phenomena"
@@ -6595,7 +6602,7 @@ msgstr "Powiększenie: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:833
 #, qt-format
 msgid "Exit pupil: %1 mm"
-msgstr ""
+msgstr "Źrenica wyjściowa: %1 mm"
 
 #: plugins/Oculars/src/Oculars.cpp:1972
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:842
@@ -6761,7 +6768,7 @@ msgstr "Rzeczywiste pole widzenia tej lornetki"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:806
 msgid "Exit pupil provided by these binoculars"
-msgstr ""
+msgstr "Źrenica wyjściowa tej lornetki"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:814
 msgid "Magnification provided by this ocular/lens/telescope combination"
@@ -6777,7 +6784,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:816
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
-msgstr ""
+msgstr "Źrenica wyjściowa tej kombinacji okularu/soczewki/teleskopu"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:530
@@ -6912,7 +6919,7 @@ msgstr "Skaluj okrągłe pole obrazu"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1172
 msgid "Use semi-transparent mask"
-msgstr ""
+msgstr "Używaj półprzezroczystej maski"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1173
 msgid "Key mappings"
@@ -6955,7 +6962,7 @@ msgstr "Używaj minut i sekund do pomiaru pola widzenia sensora CCD"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1185
 msgid "Use flip for CCD"
-msgstr ""
+msgstr "Odwrócenie obrazu CCD"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1186
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:226
@@ -7063,11 +7070,11 @@ msgstr "Kąt położenia (stopnie):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1218
 msgid "Off-Axis guider"
-msgstr ""
+msgstr "Układ naprowadzania pozaosiowego"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1219
 msgid "Rotation Angle (degrees):"
-msgstr ""
+msgstr "Kąt obrotu (w stopniach):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1221
 #: plugins/Oculars/src/ui_ocularDialog.h:1230
