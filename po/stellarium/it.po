@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-03-18 00:42+0600\n"
-"PO-Revision-Date: 2016-01-31 15:43+0000\n"
-"Last-Translator: Aliak <aliak_93@yahoo.it>\n"
+"PO-Revision-Date: 2016-03-23 11:41+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-03-18 05:27+0000\n"
-"X-Generator: Launchpad (build 17947)\n"
+"X-Launchpad-Export-Date: 2016-03-24 05:20+0000\n"
+"X-Generator: Launchpad (build 17958)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:904 src/core/modules/LandscapeMgr.cpp:414
@@ -413,7 +413,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:880
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
-msgstr ""
+msgstr "Classe di concentrazione non documentata"
 
 #: src/core/modules/Nebula.cpp:886
 msgctxt "Trumpler's Brightness Class"
@@ -468,27 +468,27 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:938
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
-msgstr ""
+msgstr "luminosa"
 
 #: src/core/modules/Nebula.cpp:941
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
-msgstr ""
+msgstr "luminosità moderata"
 
 #: src/core/modules/Nebula.cpp:944
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
-msgstr ""
+msgstr "debole"
 
 #: src/core/modules/Nebula.cpp:947
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
-msgstr ""
+msgstr "molto debole"
 
 #: src/core/modules/Nebula.cpp:950
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
-msgstr ""
+msgstr "luminosità incerta"
 
 #: src/core/modules/Nebula.cpp:953
 msgctxt "Reflection Nebulae Brightness"
@@ -567,7 +567,7 @@ msgstr "debole"
 #: src/core/modules/Nebula.cpp:1036
 msgctxt "HII region brightness"
 msgid "moderate brightness"
-msgstr ""
+msgstr "luminosità moderata"
 
 #: src/core/modules/Nebula.cpp:1039
 msgctxt "HII region brightness"
@@ -1422,7 +1422,7 @@ msgstr "Utilizzata come predefinita."
 
 #: src/core/StelCore.cpp:1743
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
-msgstr ""
+msgstr "VERSIONE MIGLIORATA SENZA ACCELERAZIONE AGGIUNTIVA DELLA LUNA"
 
 #: src/core/StelCore.cpp:1746
 #, qt-format
@@ -1600,6 +1600,9 @@ msgid ""
 "preserves direction and shapes but distorts size, in an increasing degree "
 "away from the equator."
 msgstr ""
+"La proiezione di Mercatore è una delle più usate per le cartine del mondo. "
+"Conserva direzioni e forme ma distorce le dimensioni, in misura crescente "
+"mentre ci si allontana dall'equatore."
 
 #: src/core/StelProjectorClasses.cpp:410
 msgid "Orthographic"
@@ -1623,6 +1626,9 @@ msgid ""
 "projection</i>, sometimes called the Sanson–Flamsteed or the Mercator equal-"
 "area projection."
 msgstr ""
+"La proiezione sinusoidale è una <i>proiezione pseudo cilindrica ad area "
+"equivalente</i>, a volte chiamata la Sanson–Flamsteed o la proiezione di "
+"Mercatore ad area equivalente."
 
 #: src/core/StelObject.cpp:114
 msgctxt "coordinates for current epoch"
@@ -1706,23 +1712,23 @@ msgstr "Segui l'oggetto"
 
 #: src/core/StelMovementMgr.cpp:162
 msgid "Look towards East"
-msgstr ""
+msgstr "Guarda verso est"
 
 #: src/core/StelMovementMgr.cpp:163
 msgid "Look towards West"
-msgstr ""
+msgstr "Guarda verso ovest"
 
 #: src/core/StelMovementMgr.cpp:164
 msgid "Look towards North"
-msgstr ""
+msgstr "Guarda verso nord"
 
 #: src/core/StelMovementMgr.cpp:165
 msgid "Look towards South"
-msgstr ""
+msgstr "Guarda verso sud"
 
 #: src/core/StelMovementMgr.cpp:166
 msgid "Look towards Zenith"
-msgstr ""
+msgstr "Guarda verso lo zenit"
 
 #: src/core/SimbadSearcher.cpp:56
 msgid "Network error"
@@ -1873,11 +1879,11 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1266 src/gui/ConfigurationDialog.cpp:1275
 msgid "Available"
-msgstr ""
+msgstr "Disponibile"
 
 #: src/gui/ConfigurationDialog.cpp:1268 src/gui/ConfigurationDialog.cpp:1277
 msgid "Not Available"
-msgstr ""
+msgstr "Non disponibile"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1340
@@ -2646,7 +2652,7 @@ msgstr "Tipo"
 #: src/gui/AstroCalcDialog.cpp:161
 #, qt-format
 msgid "Positions on %1"
-msgstr ""
+msgstr "Posizioni su %1"
 
 #: src/gui/AstroCalcDialog.cpp:252
 msgid "JD"
