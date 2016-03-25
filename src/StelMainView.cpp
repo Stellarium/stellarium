@@ -480,20 +480,38 @@ StelMainView::StelMainView(QWidget* parent)
 
 	// Create an openGL viewport
 	QGLFormat glFormat(QGL::StencilBuffer | QGL::DepthBuffer | QGL::DoubleBuffer);
-	// Even if setting a version here, it is ignored in StelQGLWidget()!
+	// Even if setting a version here, it may not be accepted in StelQGLWidget()!
+	// Currently, not setting a version explicitly works on Windows and Linux.
+	// Apparently some Macs have problems however and default to 2.1.
+	// We try a new CLI flag here which requests 3.3 Compatibiliy Profile which modern Macs should deliver.
+	// OpenGL Specs say this will deliver at least the requested version, if possible.
 	// TBD: Maybe this must make a differentiation between OpenGL and OpenGL ES!
-	// glFormat.setVersion(2, 1);
+	// TBD: If this works for Mac, it should be requested on all Macs without CLI option!
+	if (qApp->property("onetime_compat33")==true)
+	{
+		if (!(QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_Version_3_3))
+		{
+			qWarning() << "No OpenGL 3.3 found here. We will get whatever is available.";
+			qDebug()   << "FYI: OpenGL Versions Supported: " << QGLFormat::openGLVersionFlags();
+		}
+		glFormat.setVersion(3, 3);
+		glFormat.setProfile(QGLFormat::CompatibilityProfile);
+	}
 	QGLContext* context=new QGLContext(glFormat);
 
 	if (context->format() != glFormat)
 	{
-		qWarning() << "Cannot provide OpenGL context. Apparently insufficient OpenGL resources on this system.";
+		qWarning() << "Cannot provide requested OpenGL format. Apparently insufficient OpenGL resources on this system.";
 		QMessageBox::critical(0, "Stellarium", q_("Cannot acquire necessary OpenGL resources."), QMessageBox::Abort, QMessageBox::Abort);
 		exit(1);
 	}
 	glWidget = new StelQGLWidget(context, this);
-	// This does not return the version number set previously!
-	// qDebug() << "glWidget.context.format.version, result:" << glWidget->context()->format().majorVersion() << "." << glWidget->context()->format().minorVersion();
+	if (qApp->property("onetime_compat33")==true)
+	{
+		// This may not return the version number set previously!
+		qDebug() << "StelQGLWidget context format version:" << glWidget->context()->format().majorVersion() << "." << glWidget->context()->format().minorVersion();
+		qDebug() << "StelQGLWidget has CompatibilityProfile:" << (glWidget->context()->format().profile()==QGLFormat::CompatibilityProfile ? "yes" : "no") << "(" <<glWidget->context()->format().profile() << ")";
+	}
 #endif
 
 	setViewport(glWidget);
