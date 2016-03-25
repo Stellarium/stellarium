@@ -80,20 +80,6 @@ AddOn::AddOn(const QString addonId, const QVariantMap& map)
 	{
 		m_sLanguage = map.value("language").toString();
 	}
-	else if (m_eType == TEXTURE)
-	{
-		m_lAllTextures = map.value("textures").toString().split(",").toSet().toList();
-		// a texture must have "textures"
-		if (m_lAllTextures.isEmpty())
-		{
-			qWarning() << "[Add-on] Error! Texture" << m_sAddonId
-				   << "does not have the field \"textures\"!";
-			return;
-		}
-		for (int i=0; i < m_lAllTextures.size(); i++) {
-			m_lAllTextures[i] = StelFileMgr::getUserDir() % "/textures/" % m_lAllTextures[i];
-		}
-	}
 
 	if (map.contains("authors"))
 	{

@@ -80,7 +80,7 @@ AddOnWidget::AddOnWidget(QWidget* parent, int row, AddOn* addon)
 		ui->thumbnail->setPixmap(thumbnail);
 		ui->thumbnail->resize(thumbnail.size());
 	}
-*/
+
 	// List of files - for now, applicable only for textures
 	ui->listWidget->clear();
 	m_sSelectedFilesToInstall.clear();
@@ -107,6 +107,7 @@ AddOnWidget::AddOnWidget(QWidget* parent, int row, AddOn* addon)
 			ui->listWidget->setVisible(true);
 		}
 	}
+	*/
 }
 
 AddOnWidget::~AddOnWidget()

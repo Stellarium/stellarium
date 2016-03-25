@@ -102,7 +102,6 @@ public:
 	Status getStatus() { return m_eStatus; }
 	QString getStatusString();
 	void setStatus(Status status) { m_eStatus = status; }
-	QStringList getAllTextures() { return m_lAllTextures; }
 	void setInstalledFiles(QStringList installedFiles) { m_lInstalledFiles = installedFiles; }
 	QStringList getInstalledFiles() { return m_lInstalledFiles; }
 
@@ -126,7 +125,6 @@ private:
 	QString m_sDownloadSize;
 	QString m_sChecksum;
 	QList<Authors> m_lAuthors;
-	QStringList m_lAllTextures;
 	QStringList m_lInstalledFiles;
 	QString m_sZipPath;
 
