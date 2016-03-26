@@ -1022,7 +1022,8 @@ void StelMovementMgr::moveToJ2000(const Vec3d& aim, const Vec3d& aimUp, float mo
 	move.speed=1.f/(moveDuration*1000);
 	move.coef=0.;
 	move.targetObject.clear();
-	move.mountMode=mountMode; // Maybe better to have MountEquinoxEquatorial here?
+	//move.mountMode=mountMode; // Maybe better to have MountEquinoxEquatorial here? ==> YES, fixed orientation problem.
+	move.mountMode=MountEquinoxEquatorial;
 	flagAutoMove = true;
 }
 
@@ -1041,7 +1042,8 @@ void StelMovementMgr::moveToObject(const StelObjectP& target, float moveDuration
 	move.speed=1.f/(moveDuration*1000);
 	move.coef=0.;
 	move.targetObject = target;
-	move.mountMode=mountMode;  // Maybe better to have MountEquinoxEquatorial here?
+	//move.mountMode=mountMode;  // Maybe better to have MountEquinoxEquatorial here? ==> YES, fixed orientation problem.
+	move.mountMode=MountEquinoxEquatorial;
 	flagAutoMove = true;
 }
 
@@ -1318,13 +1320,12 @@ void StelMovementMgr::moveViewport(float offsetX, float offsetY, const float dur
 	offsetX = qMax(-50.f, qMin(50.f, offsetX));
 	offsetY = qMax(-50.f, qMin(50.f, offsetY));
 
-	Vec2f oldTarget = targetViewportOffset;
-	//move this here so it is clamped even when duration == 0
+	Vec2f oldTargetViewportOffset = targetViewportOffset;
 	targetViewportOffset.set(offsetX, offsetY);
 
-	if(offsetX != oldTarget[0])
+	if(offsetX != oldTargetViewportOffset[0])
 		emit viewportHorizontalOffsetTargetChanged(offsetX);
-	if(offsetY != oldTarget[1])
+	if(offsetY != oldTargetViewportOffset[1])
 		emit viewportVerticalOffsetTargetChanged(offsetY);
 
 	if (duration<=0.0f)
