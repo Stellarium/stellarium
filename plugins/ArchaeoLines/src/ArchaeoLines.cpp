@@ -381,6 +381,7 @@ void ArchaeoLines::enableArchaeoLines(bool b)
 {
 	flagShowArchaeoLines = b;
 	lineFader = b;
+	conf->setValue("ArchaeoLines/enable_at_startup", flagShowArchaeoLines);
 }
 
 
@@ -450,6 +451,8 @@ void ArchaeoLines::loadSettings()
 	showCurrentSun(conf->value("ArchaeoLines/show_current_sun", true).toBool());
 	showCurrentMoon(conf->value("ArchaeoLines/show_current_moon", true).toBool());
 	showCurrentPlanet(conf->value("ArchaeoLines/show_current_planet", "none").toString());
+
+	enableArchaeoLines(conf->value("ArchaeoLines/enable_at_startup", false).toBool());
 }
 
 void ArchaeoLines::showEquinox(bool b)
@@ -722,6 +725,9 @@ void alViewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& direct
 
 	d->sPainter->drawText(screenPos[0], screenPos[1], text, angleDeg, xshift, 3);
 	//d->sPainter->setColor(tmpColor[0], tmpColor[1], tmpColor[2], tmpColor[3]); // RESTORE
+	glDisable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 
@@ -813,10 +819,9 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 
 	// Initialize a painter and set OpenGL state
 	StelPainter sPainter(prj);
-	sPainter.setColor(color[0], color[1], color[2], intensity*fader.getInterstate());
+	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 	glDisable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
 
 	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
 	#ifdef GL_LINE_SMOOTH
@@ -824,6 +829,7 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 		glEnable(GL_LINE_SMOOTH);
 	#endif
 
+	sPainter.setColor(color[0], color[1], color[2], intensity*fader.getInterstate());
 	//Vec4f textColor(color[0], color[1], color[2], intensity*fader.getInterstate());
 
 	ALViewportEdgeIntersectCallbackData userData(&sPainter);

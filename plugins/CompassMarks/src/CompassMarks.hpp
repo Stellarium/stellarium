@@ -66,12 +66,7 @@ public slots:
 	//! values.
 	//! @see saveSettings(), restoreDefaultSettings()
 	void loadConfiguration();
-	//! Save the plug-in's settings to the configuration file.
-	//! @warning markColor is not saved.
-	//! @todo find a way to save color values without "rounding drift"
-	//! (this is especially important for restoring default color values).
-	//! @see loadSettings(), restoreDefaultSettings()
-	void saveConfiguration();
+
 	void restoreDefaultConfiguration();
 
 signals:

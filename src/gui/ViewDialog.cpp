@@ -45,6 +45,7 @@
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelActionMgr.hpp"
+#include "StelMovementMgr.hpp"
 
 #include <QDebug>
 #include <QFrame>
@@ -57,6 +58,7 @@
 
 ViewDialog::ViewDialog(QObject* parent) : StelDialog(parent)
 {
+	dialogName = "View";
 	ui = new Ui_viewDialogForm;
 	addRemoveLandscapesDialog = NULL;
 	atmosphereDialog=NULL;
@@ -132,170 +134,136 @@ void ViewDialog::createDialogContent()
 #endif
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	populateLists();
-	ui->viewportOffsetSpinBox->setValue((int) round(StelApp::getInstance().getCore()->getCurrentStelProjectorParams().viewportCenterOffset[1] * 100.0f));
 
-	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyCultureChanged(const QString&)));
-	connect(ui->projectionListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(projectionChanged(const QString&)));
-	connect(ui->viewportOffsetSpinBox, SIGNAL(valueChanged(int)), this, SLOT(viewportVerticalShiftChanged(int)));
-	connect(ui->landscapesListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(landscapeChanged(QListWidgetItem*)));
-
-	// Connect and initialize checkboxes and other widgets
-
+	// Init managers block
+	const StelSkyDrawer* drawer = StelApp::getInstance().getCore()->getSkyDrawer();
 	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
+	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
+	MilkyWay* mw = GETSTELMODULE(MilkyWay);
+	ZodiacalLight* zl = GETSTELMODULE(ZodiacalLight);
+	StarMgr* smgr = GETSTELMODULE(StarMgr);
+	SporadicMeteorMgr* mmgr = GETSTELMODULE(SporadicMeteorMgr);
+	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
+	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
+	StelMovementMgr* moveMgr = GETSTELMODULE(StelMovementMgr);
+	Q_ASSERT(mmgr);
+	Q_ASSERT(cmgr);
+	Q_ASSERT(moveMgr);
 
-	// DSO
-	updateSelectedCatalogsCheckBoxes();
-	connect(ui->buttonGroupDisplayedDSOCatalogs, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedCatalogsFromCheckBoxes()));
-	updateSelectedTypesCheckBoxes();
-	connect(ui->buttonGroupDisplayedDSOTypes, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedTypesFromCheckBoxes()));
-	ui->groupBoxDSOTypeFilters->setChecked(nmgr->getFlagTypeFiltersUsage());
-	connect(ui->groupBoxDSOTypeFilters, SIGNAL(toggled(bool)), nmgr, SLOT(setFlagTypeFiltersUsage(bool)));
-	ui->checkBoxProportionalHints->setChecked(nmgr->getHintsProportional());
-	connect(ui->checkBoxProportionalHints, SIGNAL(toggled(bool)), nmgr, SLOT(setHintsProportional(bool)));
-	ui->checkBoxSurfaceBrightnessUsage->setChecked(nmgr->getFlagSurfaceBrightnessUsage());
-	connect(ui->checkBoxSurfaceBrightnessUsage, SIGNAL(toggled(bool)), nmgr, SLOT(setFlagSurfaceBrightnessUsage(bool)));
+	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
+
+	//
+	// Sky Tab
+	//
 
 	// Stars section
-	ui->starTwinkleCheckBox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagTwinkle());
-	connect(ui->starTwinkleCheckBox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagTwinkle(bool)));
+	connectGroupBox(ui->starGroupBox, "actionShow_Stars");
+	connectCheckBox(ui->starLabelCheckBox, "actionShow_Stars_Labels");
 
-	ui->starScaleRadiusDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAbsoluteStarScale());
-	connect(ui->starScaleRadiusDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setAbsoluteStarScale(double)));
-
-	ui->starRelativeScaleDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getRelativeStarScale());
-	connect(ui->starRelativeScaleDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setRelativeStarScale(double)));
-
-	MilkyWay* mw = GETSTELMODULE(MilkyWay);
+	ui->starScaleRadiusDoubleSpinBox->setValue(drawer->getAbsoluteStarScale());
+	connect(ui->starScaleRadiusDoubleSpinBox, SIGNAL(valueChanged(double)), drawer, SLOT(setAbsoluteStarScale(double)));
+	ui->starRelativeScaleDoubleSpinBox->setValue(drawer->getRelativeStarScale());
+	connect(ui->starRelativeScaleDoubleSpinBox, SIGNAL(valueChanged(double)), drawer, SLOT(setRelativeStarScale(double)));
 	ui->milkyWayBrightnessDoubleSpinBox->setValue(mw->getIntensity());
 	connect(ui->milkyWayBrightnessDoubleSpinBox, SIGNAL(valueChanged(double)), mw, SLOT(setIntensity(double)));
-
-	ZodiacalLight* zl = GETSTELMODULE(ZodiacalLight);
 	ui->zodiacalLightBrightnessDoubleSpinBox->setValue(zl->getIntensity());
 	connect(ui->zodiacalLightBrightnessDoubleSpinBox, SIGNAL(valueChanged(double)), zl, SLOT(setIntensity(double)));
-
-	ui->starTwinkleAmountDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getTwinkleAmount());
-	connect(ui->starTwinkleAmountDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setTwinkleAmount(double)));
-
-	ui->adaptationCheckbox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagLuminanceAdaptation());
-	connect(ui->adaptationCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagLuminanceAdaptation(bool)));
-
-	// Limit Magnitudes
-	const StelSkyDrawer* drawer = StelApp::getInstance().getCore()->getSkyDrawer();
-	// Stars
+	ui->starTwinkleCheckBox->setChecked(drawer->getFlagTwinkle());
+	connect(ui->starTwinkleCheckBox, SIGNAL(toggled(bool)), drawer, SLOT(setFlagTwinkle(bool)));
+	ui->starTwinkleAmountDoubleSpinBox->setValue(drawer->getTwinkleAmount());
+	connect(ui->starTwinkleAmountDoubleSpinBox, SIGNAL(valueChanged(double)), drawer, SLOT(setTwinkleAmount(double)));
 	ui->starLimitMagnitudeCheckBox->setChecked(drawer->getFlagStarMagnitudeLimit());
+	connect(ui->starLimitMagnitudeCheckBox, SIGNAL(toggled(bool)), drawer, SLOT(setFlagStarMagnitudeLimit(bool)));
 	ui->starLimitMagnitudeDoubleSpinBox->setValue(drawer->getCustomStarMagnitudeLimit());
-	// Planets
-	ui->planetLimitMagnitudeCheckBox->setChecked(drawer->getFlagPlanetMagnitudeLimit());
-	ui->planetLimitMagnitudeDoubleSpinBox->setValue(drawer->getCustomPlanetMagnitudeLimit());
-	// DSO
-	ui->nebulaLimitMagnitudeCheckBox->setChecked(drawer->getFlagNebulaMagnitudeLimit());
-	ui->nebulaLimitMagnitudeDoubleSpinBox->setValue(drawer->getCustomNebulaMagnitudeLimit());
-	
-	connect(ui->starLimitMagnitudeCheckBox, SIGNAL(toggled(bool)),
-	        drawer, SLOT(setFlagStarMagnitudeLimit(bool)));
-	connect(ui->planetLimitMagnitudeCheckBox, SIGNAL(toggled(bool)),
-		drawer, SLOT(setFlagPlanetMagnitudeLimit(bool)));
-	connect(ui->nebulaLimitMagnitudeCheckBox, SIGNAL(toggled(bool)),
-	        drawer, SLOT(setFlagNebulaMagnitudeLimit(bool)));
-	connect(ui->starLimitMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)),
-	        drawer, SLOT(setCustomStarMagnitudeLimit(double)));
-	connect(ui->planetLimitMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)),
-		drawer, SLOT(setCustomPlanetMagnitudeLimit(double)));
-	connect(ui->nebulaLimitMagnitudeDoubleSpinBox,
-	        SIGNAL(valueChanged(double)),
-		drawer, SLOT(setCustomNebulaMagnitudeLimit(double)));
+	connect(ui->starLimitMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)), drawer, SLOT(setCustomStarMagnitudeLimit(double)));
+	ui->adaptationCheckbox->setChecked(drawer->getFlagLuminanceAdaptation());
+	connect(ui->adaptationCheckbox, SIGNAL(toggled(bool)), drawer, SLOT(setFlagLuminanceAdaptation(bool)));
+	ui->starsLabelsHorizontalSlider->setValue((int)(smgr->getLabelsAmount()*10.f));
+	connect(ui->starsLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(starsLabelsValueChanged(int)));
 
-	// Planets section
-	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
-	ui->showPlanetCheckBox->setChecked(ssmgr->getFlagPlanets());
-	connect(ui->showPlanetCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagPlanets(bool)));
+	// Atmosphere section
+	connectGroupBox(ui->atmosphereGroupBox, "actionShow_Atmosphere");
+
+	populateLightPollution();
+
+	ui->useLocationDataCheckBox->setChecked(lmgr->getFlagUseLightPollutionFromDatabase());
+	connect(ui->useLocationDataCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagUseLightPollutionFromDatabase(bool)));
+	connect(lmgr, SIGNAL(lightPollutionUsageChanged(bool)), this, SLOT(populateLightPollution()));
+	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), lmgr, SLOT(setAtmosphereBortleLightPollution(int)));
+	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), drawer, SLOT(setBortleScaleIndex(int)));
+	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setBortleScaleToolTip(int)));
+	connect(ui->pushButtonAtmosphereDetails, SIGNAL(clicked()), this, SLOT(showAtmosphereDialog()));
+
+	// Solar System objects section
+	connectGroupBox(ui->planetsGroupBox, "actionShow_Planets");
+	connectCheckBox(ui->planetOrbitCheckBox, "actionShow_Planets_Orbits");
+	connectCheckBox(ui->planetLabelCheckBox, "actionShow_Planets_Labels");
 
 	ui->planetMarkerCheckBox->setChecked(ssmgr->getFlagHints());
 	connect(ui->planetMarkerCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagHints(bool)));
-
 	ui->planetScaleMoonCheckBox->setChecked(ssmgr->getFlagMoonScale());
 	connect(ui->planetScaleMoonCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagMoonScale(bool)));
 	ui->moonScaleFactor->setValue(ssmgr->getMoonScale());
 	connect(ui->moonScaleFactor, SIGNAL(valueChanged(double)), ssmgr, SLOT(setMoonScale(double)));
-
-	ui->planetOrbitCheckBox->setChecked(ssmgr->getFlagOrbits());
-	connect(ui->planetOrbitCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagOrbits(bool)));
 	ui->planetIsolatedOrbitCheckBox->setChecked(ssmgr->getFlagIsolatedOrbits());
 	connect(ui->planetIsolatedOrbitCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagIsolatedOrbits(bool)));
 	ui->planetIsolatedTrailsCheckBox->setChecked(ssmgr->getFlagIsolatedTrails());
 	connect(ui->planetIsolatedTrailsCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagIsolatedTrails(bool)));
-
 	ui->planetLightSpeedCheckBox->setChecked(ssmgr->getFlagLightTravelTime());
 	connect(ui->planetLightSpeedCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLightTravelTime(bool)));
-
-	// Shooting stars section
-	SporadicMeteorMgr* mmgr = GETSTELMODULE(SporadicMeteorMgr);
-	Q_ASSERT(mmgr);
-
-	ui->zhrSpinBox->setValue(mmgr->getZHR());
-	connect(mmgr, SIGNAL(zhrChanged(int)), this, SLOT(updateZhrControls(int)));
-	connect(ui->zhrSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setZhrFromControls(int)));
-	updateZhrDescription();
-
-	// Labels section
-	StarMgr* smgr = GETSTELMODULE(StarMgr);
-	connectCheckBox(ui->starLabelCheckBox, "actionShow_Stars_Labels");
-	connectGroupBox(ui->groupBoxLabelsAndMarkers, "actionShow_Nebulas");
-	connectCheckBox(ui->planetLabelCheckBox, "actionShow_Planets_Labels");
-
-	ui->starsLabelsHorizontalSlider->setValue((int)(smgr->getLabelsAmount()*10.f));
-	connect(ui->starsLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(starsLabelsValueChanged(int)));
+	ui->planetLimitMagnitudeCheckBox->setChecked(drawer->getFlagPlanetMagnitudeLimit());
+	connect(ui->planetLimitMagnitudeCheckBox, SIGNAL(toggled(bool)), drawer, SLOT(setFlagPlanetMagnitudeLimit(bool)));
+	ui->planetLimitMagnitudeDoubleSpinBox->setValue(drawer->getCustomPlanetMagnitudeLimit());
+	connect(ui->planetLimitMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)), drawer, SLOT(setCustomPlanetMagnitudeLimit(double)));
 	ui->planetsLabelsHorizontalSlider->setValue((int)(ssmgr->getLabelsAmount()*10.f));
 	connect(ui->planetsLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(planetsLabelsValueChanged(int)));
+
+	// Shooting stars section
+	connect(mmgr, SIGNAL(zhrChanged(int)), this, SLOT(setZHR(int)));
+	connect(ui->zhrSlider, SIGNAL(valueChanged(int)), this, SLOT(setZHR(int)));
+	connect(ui->zhrSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setZHR(int)));
+	setZHR(mmgr->getZHR());
+
+	//
+	// Deep-Sky Objects tab
+	//
+
+	// DSO catalogs section
+	updateSelectedCatalogsCheckBoxes();
+	connect(ui->buttonGroupDisplayedDSOCatalogs, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedCatalogsFromCheckBoxes()));
+
+	// DSO filters section
+	updateSelectedTypesCheckBoxes();
+	connect(ui->buttonGroupDisplayedDSOTypes, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedTypesFromCheckBoxes()));
+
+	ui->groupBoxDSOTypeFilters->setChecked(nmgr->getFlagTypeFiltersUsage());
+	connect(ui->groupBoxDSOTypeFilters, SIGNAL(toggled(bool)), nmgr, SLOT(setFlagTypeFiltersUsage(bool)));
+
+	// DSO settings section
+	connectGroupBox(ui->groupBoxLabelsAndMarkers, "actionShow_Nebulas");
+
+	ui->checkBoxProportionalHints->setChecked(nmgr->getHintsProportional());
+	connect(ui->checkBoxProportionalHints, SIGNAL(toggled(bool)), nmgr, SLOT(setHintsProportional(bool)));
+	ui->checkBoxSurfaceBrightnessUsage->setChecked(nmgr->getFlagSurfaceBrightnessUsage());
+	connect(ui->checkBoxSurfaceBrightnessUsage, SIGNAL(toggled(bool)), nmgr, SLOT(setFlagSurfaceBrightnessUsage(bool)));
+	ui->nebulaLimitMagnitudeCheckBox->setChecked(drawer->getFlagNebulaMagnitudeLimit());
+	connect(ui->nebulaLimitMagnitudeCheckBox, SIGNAL(toggled(bool)), drawer, SLOT(setFlagNebulaMagnitudeLimit(bool)));
+	ui->nebulaLimitMagnitudeDoubleSpinBox->setValue(drawer->getCustomNebulaMagnitudeLimit());
+	connect(ui->nebulaLimitMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)), drawer, SLOT(setCustomNebulaMagnitudeLimit(double)));
 	ui->nebulasLabelsHorizontalSlider->setValue((int)(nmgr->getLabelsAmount()*10.f));
 	connect(ui->nebulasLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(nebulasLabelsValueChanged(int)));
 	ui->nebulasHintsHorizontalSlider->setValue((int)(nmgr->getHintsAmount()*10.f));
 	connect(ui->nebulasHintsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(nebulasMarkersValueChanged(int)));
 
-	// Landscape section
-	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-	connectCheckBox(ui->showGroundCheckBox, "actionShow_Ground");
-	connectCheckBox(ui->showFogCheckBox, "actionShow_Fog");
-	connectGroupBox(ui->atmosphereGroupBox, "actionShow_Atmosphere");
-	connectCheckBox(ui->landscapeIlluminationCheckBox, "actionShow_LandscapeIllumination");
-	connectCheckBox(ui->landscapeLabelsCheckBox, "actionShow_LandscapeLabels");
 
-	ui->landscapePositionCheckBox->setChecked(lmgr->getFlagLandscapeSetsLocation());
-	connect(ui->landscapePositionCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsLocation(bool)));
+	//
+	// Markings tab
+	//
 
-	ui->landscapeBrightnessCheckBox->setChecked(lmgr->getFlagLandscapeUseMinimalBrightness());
-	connect(ui->landscapeBrightnessCheckBox, SIGNAL(toggled(bool)), this, SLOT(setFlagLandscapeUseMinimalBrightness(bool)));
-	ui->landscapeBrightnessSpinBox->setValue(lmgr->getDefaultMinimalBrightness());
-	connect(ui->landscapeBrightnessSpinBox, SIGNAL(valueChanged(double)), lmgr, SLOT(setDefaultMinimalBrightness(double)));
-	ui->localLandscapeBrightnessCheckBox->setChecked(lmgr->getFlagLandscapeSetsMinimalBrightness());
-	connect(ui->localLandscapeBrightnessCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsMinimalBrightness(bool)));
-	populateLandscapeMinimalBrightness();
-
-	// Light pollution
-	populateLightPollution();
-	ui->useLocationDataCheckBox->setChecked(lmgr->getFlagUseLightPollutionFromDatabase());
-	connect(ui->useLocationDataCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagUseLightPollutionFromDatabase(bool)));
-	connect(lmgr, SIGNAL(lightPollutionUsageChanged(bool)), this, SLOT(populateLightPollution()));
-	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), lmgr, SLOT(setAtmosphereBortleLightPollution(int)));
-	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setBortleScaleIndex(int)));
-	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setBortleScaleToolTip(int)));
-
-	ui->autoChangeLandscapesCheckBox->setChecked(lmgr->getFlagLandscapeAutoSelection());
-	connect(ui->autoChangeLandscapesCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeAutoSelection(bool)));
-	
-	// atmosphere details
-	connect(ui->pushButtonAtmosphereDetails, SIGNAL(clicked()), this, SLOT(showAtmosphereDialog()));
-
-	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getCurrentLandscapeID()==lmgr->getDefaultLandscapeID());
-	ui->useAsDefaultLandscapeCheckBox->setEnabled(lmgr->getCurrentLandscapeID()!=lmgr->getDefaultLandscapeID());
-	connect(ui->useAsDefaultLandscapeCheckBox, SIGNAL(clicked()), this, SLOT(setCurrentLandscapeAsDefault()));
-
-	connect(GETSTELMODULE(LandscapeMgr), SIGNAL(landscapesChanged()), this, SLOT(populateLists()));
-	connect(ui->pushButtonAddRemoveLandscapes, SIGNAL(clicked()), this, SLOT(showAddRemoveLandscapesDialog()));
-
-	// Grid and lines
+	// Celestial sphere section (grids and lines)
 	connectCheckBox(ui->showEquatorLineCheckBox, "actionShow_Equator_Line");
 	connectCheckBox(ui->showEquatorJ2000LineCheckBox, "actionShow_Equator_J2000_Line");
 	connectCheckBox(ui->showEclipticLineJ2000CheckBox, "actionShow_Ecliptic_J2000_Line");
@@ -312,34 +280,76 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showEclipticGridOfDateCheckBox, "actionShow_Ecliptic_Grid");
 	connectCheckBox(ui->showCardinalPointsCheckBox, "actionShow_Cardinal_Points");
 	connectCheckBox(ui->showPrecessionCirclesCheckBox, "actionShow_Precession_Circles");
+	connectCheckBox(ui->showPrimeVerticalLineCheckBox, "actionShow_Prime_Vertical_Line");
+	connectCheckBox(ui->showColuresLineCheckBox, "actionShow_Colure_Lines");
 
-	// Constellations
-	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
+	// Projection section
+	connect(ui->projectionListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(projectionChanged(const QString&)));
+
+	ui->viewportOffsetSpinBox->setValue((int) round(StelApp::getInstance().getCore()->getCurrentStelProjectorParams().viewportCenterOffset[1] * 100.0f));
+	connect(ui->viewportOffsetSpinBox, SIGNAL(valueChanged(int)), this, SLOT(viewportVerticalShiftChanged(int)));
+
+	//
+	// Landscape tab
+	//
+
+	connect(ui->landscapesListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(landscapeChanged(QListWidgetItem*)));
+
+	// Landscape settings section
+	connectCheckBox(ui->showGroundCheckBox, "actionShow_Ground");
+	connectCheckBox(ui->showFogCheckBox, "actionShow_Fog");
+	connectCheckBox(ui->landscapeIlluminationCheckBox, "actionShow_LandscapeIllumination");
+	connectCheckBox(ui->landscapeLabelsCheckBox, "actionShow_LandscapeLabels");
+
+	ui->landscapePositionCheckBox->setChecked(lmgr->getFlagLandscapeSetsLocation());
+	connect(ui->landscapePositionCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsLocation(bool)));
+	ui->landscapeBrightnessCheckBox->setChecked(lmgr->getFlagLandscapeUseMinimalBrightness());
+	connect(ui->landscapeBrightnessCheckBox, SIGNAL(toggled(bool)), this, SLOT(setFlagLandscapeUseMinimalBrightness(bool)));
+	ui->landscapeBrightnessSpinBox->setValue(lmgr->getDefaultMinimalBrightness());
+	connect(ui->landscapeBrightnessSpinBox, SIGNAL(valueChanged(double)), lmgr, SLOT(setDefaultMinimalBrightness(double)));
+	ui->localLandscapeBrightnessCheckBox->setChecked(lmgr->getFlagLandscapeSetsMinimalBrightness());
+	connect(ui->localLandscapeBrightnessCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsMinimalBrightness(bool)));
+	populateLandscapeMinimalBrightness();
+
+	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getCurrentLandscapeID()==lmgr->getDefaultLandscapeID());
+	ui->useAsDefaultLandscapeCheckBox->setEnabled(lmgr->getCurrentLandscapeID()!=lmgr->getDefaultLandscapeID());
+	connect(ui->useAsDefaultLandscapeCheckBox, SIGNAL(clicked()), this, SLOT(setCurrentLandscapeAsDefault()));
+
+	connect(lmgr, SIGNAL(landscapesChanged()), this, SLOT(populateLists()));
+
+	connect(ui->pushButtonAddRemoveLandscapes, SIGNAL(clicked()), this, SLOT(showAddRemoveLandscapesDialog()));
+
+	//
+	// Starlore tab
+	//
+
+	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyCultureChanged(const QString&)));
+
+	// Constellations settings section
 	connectCheckBox(ui->showConstellationLinesCheckBox, "actionShow_Constellation_Lines");
 	connectCheckBox(ui->showConstellationLabelsCheckBox, "actionShow_Constellation_Labels");
 	connectCheckBox(ui->showConstellationBoundariesCheckBox, "actionShow_Constellation_Boundaries");
 	connectCheckBox(ui->showConstellationArtCheckBox, "actionShow_Constellation_Art");
-	ui->constellationArtBrightnessSpinBox->setValue(cmgr->getArtIntensity());
-	connect(ui->constellationArtBrightnessSpinBox, SIGNAL(valueChanged(double)), cmgr, SLOT(setArtIntensity(double)));
+	// Solve LP:#1520783: StelMovementMgr controls Art Intensity because of fade-out for LP:#1294483
+	ui->constellationArtBrightnessSpinBox->setValue(moveMgr->getInitConstellationIntensity());
+	connect(ui->constellationArtBrightnessSpinBox, SIGNAL(valueChanged(double)), moveMgr, SLOT(setInitConstellationIntensity(double)));
 	ui->constellationLineThicknessSpinBox->setValue(cmgr->getConstellationLineThickness());
 	connect(ui->constellationLineThicknessSpinBox, SIGNAL(valueChanged(double)), cmgr, SLOT(setConstellationLineThickness(double)));
 
-	// Starlore
 	connect(ui->useAsDefaultSkyCultureCheckBox, SIGNAL(clicked()), this, SLOT(setCurrentCultureAsDefault()));
 	const bool b = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID()==StelApp::getInstance().getSkyCultureMgr().getDefaultSkyCultureID();
 	ui->useAsDefaultSkyCultureCheckBox->setChecked(b);
 	ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
 	connect(ui->nativeNameCheckBox, SIGNAL(clicked(bool)), ssmgr, SLOT(setFlagNativeNames(bool)));
 	ui->nativeNameCheckBox->setChecked(ssmgr->getFlagNativeNames());
-	// GZ NEW allow to display short names and inhibit translation.
 	connect(ui->skyCultureNamesStyleComboBox, SIGNAL(currentIndexChanged(int)), cmgr, SLOT(setConstellationDisplayStyle(int)));
 
+
 	// Sky layers. This not yet finished and not visible in releases.
-	populateSkyLayersList();
-	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(populateSkyLayersList()));
-	connect(ui->skyLayerListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyLayersSelectionChanged(const QString&)));
-	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
-	connect(ui->skyLayerEnableCheckBox, SIGNAL(stateChanged(int)), this, SLOT(skyLayersEnabledChanged(int)));
+	// populateSkyLayersList();
+	// connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(populateSkyLayersList()));
+	// connect(ui->skyLayerListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyLayersSelectionChanged(const QString&)));
+	// connect(ui->skyLayerEnableCheckBox, SIGNAL(stateChanged(int)), this, SLOT(skyLayersEnabledChanged(int)));
 
 	QTimer* refreshTimer = new QTimer(this);
 	connect(refreshTimer, SIGNAL(timeout()), this, SLOT(updateFromProgram()));
@@ -784,25 +794,22 @@ void ViewDialog::showAtmosphereDialog()
 }
 
 
-void ViewDialog::setZhrFromControls(int zhr)
+void ViewDialog::setZHR(int zhr)
 {
 	SporadicMeteorMgr* mmgr = GETSTELMODULE(SporadicMeteorMgr);
-	if (zhr==0)
-	{
-		mmgr->setFlagShow(false);
-	}
-	else
-	{
-		mmgr->setFlagShow(true);
-		mmgr->setZHR(zhr);
-	}
-	updateZhrDescription();
-}
+	mmgr->blockSignals(true);
+	ui->zhrSlider->blockSignals(true);
+	ui->zhrSpinBox->blockSignals(true);
 
-void ViewDialog::updateZhrControls(int zhr)
-{
+	mmgr->setFlagShow(zhr > 0);
+	mmgr->setZHR(zhr);
+	ui->zhrSlider->setValue(zhr);
 	ui->zhrSpinBox->setValue(zhr);
 	updateZhrDescription();
+
+	mmgr->blockSignals(false);
+	ui->zhrSlider->blockSignals(false);
+	ui->zhrSpinBox->blockSignals(false);
 }
 
 void ViewDialog::updateZhrDescription()

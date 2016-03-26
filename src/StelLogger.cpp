@@ -130,21 +130,19 @@ void StelLogger::init(const QString& logFilePath)
 #elif defined Q_OS_WIN
 	// Hopefully doesn't throw a linker error on earlier systems. Not like
 	// I'm gonna test it or anything.
-	if (QSysInfo::WindowsVersion >= QSysInfo::WV_2000)
+	if (QSysInfo::WindowsVersion >= QSysInfo::WV_XP)
 	{
-#ifdef __LP64__
 		MEMORYSTATUSEX statex;
+		statex.dwLength = sizeof (statex);
 		GlobalMemoryStatusEx(&statex);
-		writeLog(QString("Total physical memory: %1 MB (unreliable)").arg(statex.ullTotalPhys/(1024<<10)));
-		writeLog(QString("Total virtual memory: %1 MB (unreliable)").arg(statex.ullTotalVirtual/(1024<<10)));
+		writeLog(QString("Total physical memory: %1 MB").arg(statex.ullTotalPhys/(1024<<10)));
+		writeLog(QString("Available physical memory: %1 MB").arg(statex.ullAvailPhys/(1024<<10)));
 		writeLog(QString("Physical memory in use: %1%").arg(statex.dwMemoryLoad));
-#else
-		MEMORYSTATUS statex;
-		GlobalMemoryStatus(&statex);
-		writeLog(QString("Total memory: %1 MB (unreliable)").arg(statex.dwTotalPhys/(1024<<10)));
-		writeLog(QString("Total virtual memory: %1 MB (unreliable)").arg(statex.dwTotalVirtual/(1024<<10)));
-		writeLog(QString("Physical memory in use: %1%").arg(statex.dwMemoryLoad));
-#endif
+		#ifndef _WIN64
+		// This always reports about 8TB on Win64, not really useful to show.
+		writeLog(QString("Total virtual memory: %1 MB").arg(statex.ullTotalVirtual/(1024<<10)));
+		writeLog(QString("Available virtual memory: %1 MB").arg(statex.ullAvailVirtual/(1024<<10)));
+		#endif
 	}
 	else
 		writeLog("Windows version too old to get memory info.");
@@ -288,6 +286,9 @@ QString StelLogger::getMsvcVersionString(int ver)
 			break;
 		case 1800:
 			version = "MSVC++ 12.0 (Visual Studio 2013)";
+			break;
+		case 1900:
+			version = "MSVC++ 14.0 (Visual Studio 2015)";
 			break;
 		default:
 			version = "unknown MSVC++ version";

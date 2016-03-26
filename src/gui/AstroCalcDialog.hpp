@@ -2,6 +2,7 @@
  * Stellarium
  * 
  * Copyright (C) 2015 Alexander Wolf
+ * Copyright (C) 2016 Nick Fedoseev (visualization of ephemeris)
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +25,7 @@
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 #include <QMap>
+#include <QVector>
 
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
@@ -72,6 +74,9 @@ public:
 	AstroCalcDialog(QObject* parent);
 	virtual ~AstroCalcDialog();
 
+	static QVector<Vec3d> EphemerisListJ2000;
+	static int DisplayedPositionIndex;
+
 public slots:
         void retranslate();
 
@@ -84,9 +89,11 @@ private slots:
 	//! Search planetary positions and fill the list.
 	void currentPlanetaryPositions();
 	void selectCurrentPlanetaryPosition(const QModelIndex &modelIndex);
+	void onChangedEphemerisPosition(const QModelIndex &modelIndex);
 
 	//! Calculate ephemeris for selected celestial body and fill the list.
 	void generateEphemeris();
+	void cleanupEphemeris();
 	void selectCurrentEphemeride(const QModelIndex &modelIndex);
 
 	//! Calculate phenomena for selected celestial body and fill the list.

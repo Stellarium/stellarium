@@ -55,6 +55,7 @@ SatellitesDialog::SatellitesDialog()
 	, checkStateRole(Qt::UserRole)
 {
 	ui = new Ui_satellitesDialog;
+	dialogName = "Satellites";
 }
 
 SatellitesDialog::~SatellitesDialog()
@@ -94,6 +95,7 @@ void SatellitesDialog::createDialogContent()
 	ui->tabs->setCurrentIndex(0);
 	ui->labelAutoAdd->setVisible(false);
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 	        this, SLOT(retranslate()));
 	Satellites* plugin = GETSTELMODULE(Satellites);
@@ -145,15 +147,15 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->realisticGroup, SIGNAL(clicked(bool)),
 		plugin, SLOT(setFlagRelisticMode(bool)));
 
+	// Settings tab - populate all values
+	updateSettingsPage();
+
 	// Settings tab / orbit lines group
 	connect(ui->orbitLinesGroup, SIGNAL(clicked(bool)),
 	        plugin, SLOT(setOrbitLinesFlag(bool)));
 	connect(ui->orbitSegmentsSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
 	connect(ui->orbitFadeSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
 	connect(ui->orbitDurationSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
-	
-	// Settings tab - populate all values
-	updateSettingsPage();
 
 	// Satellites tab
 	filterModel = new SatellitesListFilterModel(this);

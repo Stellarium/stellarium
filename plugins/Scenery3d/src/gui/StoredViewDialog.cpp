@@ -30,6 +30,7 @@
 StoredViewDialog::StoredViewDialog(QObject *parent) : StelDialog(parent), mgr(NULL), viewModel(NULL)
 {
 	ui = new Ui_storedViewDialogForm;
+	dialogName = "Scenery3dViews";
 }
 
 StoredViewDialog::~StoredViewDialog()
@@ -47,6 +48,7 @@ void StoredViewDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	connect(ui->closeStelWindow, &QPushButton::clicked, this, &StelDialog::close);
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	mgr = GETSTELMODULE(Scenery3dMgr);
 	Q_ASSERT(mgr);

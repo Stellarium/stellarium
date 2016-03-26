@@ -59,6 +59,7 @@
 #include "SkyGui.hpp"
 #include "StelJsonParser.hpp"
 #include "StelTranslator.hpp"
+#include "EphemWrapper.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -77,6 +78,7 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
 	, progressBar(NULL)
 	, gui(agui)
 {
+	dialogName = "Configuration";
 	ui = new Ui_configurationDialogForm;
 	customDeltaTEquationDialog = NULL;
 	hasDownloadedStarCatalog = false;
@@ -148,6 +150,7 @@ void ConfigurationDialog::createDialogContent()
 	ui->stackListWidget->setCurrentRow(0);
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	// Main tab
 	// Fill the language list widget from the available list
@@ -171,6 +174,11 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->downloadCancelButton, SIGNAL(clicked()), this, SLOT(cancelDownload()));
 	connect(ui->downloadRetryButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
 	resetStarCatalogControls();
+
+	connect(ui->de430checkBox, SIGNAL(clicked()), this, SLOT(de430ButtonClicked()));
+	connect(ui->de431checkBox, SIGNAL(clicked()), this, SLOT(de431ButtonClicked()));
+	resetEphemControls();
+
 	ui->nutationCheckBox->setChecked(core->getUseNutation());
 	connect(ui->nutationCheckBox, SIGNAL(toggled(bool)), core, SLOT(setUseNutation(bool)));
 	ui->topocentricCheckBox->setChecked(core->getUseTopocentricCoordinates());
@@ -268,7 +276,7 @@ void ConfigurationDialog::createDialogContent()
 
 	ui->decimalDegreeCheckBox->setChecked(StelApp::getInstance().getFlagShowDecimalDegrees());
 	connect(ui->decimalDegreeCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowDecimalDegrees(bool)));
-	ui->azimuthFromSouthcheckBox->setChecked(StelApp::getInstance().getFlagOldAzimuthUsage());
+	ui->azimuthFromSouthcheckBox->setChecked(StelApp::getInstance().getFlagSouthAzimuthUsage());
 	connect(ui->azimuthFromSouthcheckBox, SIGNAL(toggled(bool)), this, SLOT(updateStartPointForAzimuth(bool)));
 
 	ui->mouseTimeoutCheckbox->setChecked(StelMainView::getInstance().getFlagCursorTimeout());
@@ -290,6 +298,9 @@ void ConfigurationDialog::createDialogContent()
 	LandscapeMgr *lmgr = GETSTELMODULE(LandscapeMgr);
 	ui->autoEnableAtmosphereCheckBox->setChecked(lmgr->getFlagAtmosphereAutoEnable());
 	connect(ui->autoEnableAtmosphereCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagAtmosphereAutoEnable(bool)));
+
+	ui->autoChangeLandscapesCheckBox->setChecked(lmgr->getFlagLandscapeAutoSelection());
+	connect(ui->autoChangeLandscapesCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeAutoSelection(bool)));
 
 	// script tab controls
 	#ifndef DISABLE_SCRIPTING
@@ -481,7 +492,7 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 
 void ConfigurationDialog::updateStartPointForAzimuth(bool b)
 {
-	StelApp::getInstance().setFlagOldAzimuthUsage(b);
+	StelApp::getInstance().setFlagSouthAzimuthUsage(b);
 }
 
 void ConfigurationDialog::cursorTimeOutChanged()
@@ -553,22 +564,18 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("stars/relative_scale", skyd->getRelativeStarScale());
 	conf->setValue("stars/flag_star_twinkle", skyd->getFlagTwinkle());
 	conf->setValue("stars/star_twinkle_amount", skyd->getTwinkleAmount());
-	conf->setValue("astro/flag_star_magnitude_limit",
-	               skyd->getFlagStarMagnitudeLimit());
-	conf->setValue("astro/star_magnitude_limit",
-	               skyd->getCustomStarMagnitudeLimit());
-	conf->setValue("astro/flag_planet_magnitude_limit",
-		       skyd->getFlagPlanetMagnitudeLimit());
-	conf->setValue("astro/planet_magnitude_limit",
-		       skyd->getCustomPlanetMagnitudeLimit());
-	conf->setValue("astro/flag_nebula_magnitude_limit",
-	               skyd->getFlagNebulaMagnitudeLimit());
-	conf->setValue("astro/nebula_magnitude_limit",
-	               skyd->getCustomNebulaMagnitudeLimit());
+	conf->setValue("astro/flag_star_magnitude_limit", skyd->getFlagStarMagnitudeLimit());
+	conf->setValue("astro/star_magnitude_limit", skyd->getCustomStarMagnitudeLimit());
+	conf->setValue("astro/flag_planet_magnitude_limit", skyd->getFlagPlanetMagnitudeLimit());
+	conf->setValue("astro/planet_magnitude_limit", skyd->getCustomPlanetMagnitudeLimit());
+	conf->setValue("astro/flag_nebula_magnitude_limit", skyd->getFlagNebulaMagnitudeLimit());
+	conf->setValue("astro/nebula_magnitude_limit", skyd->getCustomNebulaMagnitudeLimit());
 	conf->setValue("viewing/use_luminance_adaptation", skyd->getFlagLuminanceAdaptation());
 	conf->setValue("astro/flag_planets", ssmgr->getFlagPlanets());
 	conf->setValue("astro/flag_planets_hints", ssmgr->getFlagHints());
 	conf->setValue("astro/flag_planets_orbits", ssmgr->getFlagOrbits());
+	conf->setValue("viewing/flag_isolated_trails", ssmgr->getFlagIsolatedTrails());
+	conf->setValue("viewing/flag_isolated_orbits", ssmgr->getFlagIsolatedOrbits());
 	conf->setValue("astro/flag_light_travel_time", ssmgr->getFlagLightTravelTime());
 	conf->setValue("viewing/flag_moon_scaled", ssmgr->getFlagMoonScale());
 	conf->setValue("viewing/moon_scale", ssmgr->getMoonScale());
@@ -592,6 +599,8 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_galactic_grid", glmgr->getFlagGalacticGrid());
 	conf->setValue("viewing/flag_galactic_equator_line", glmgr->getFlagGalacticEquatorLine());
 	conf->setValue("viewing/flag_cardinal_points", lmgr->getFlagCardinalsPoints());
+	conf->setValue("viewing/flag_prime_vertical_line", glmgr->getFlagPrimeVerticalLine());
+	conf->setValue("viewing/flag_colure_lines", glmgr->getFlagColureLines());
 	conf->setValue("viewing/flag_constellation_drawing", cmgr->getFlagLines());
 	conf->setValue("viewing/flag_constellation_name", cmgr->getFlagLabels());
 	conf->setValue("viewing/flag_constellation_boundaries", cmgr->getFlagBoundaries());
@@ -601,7 +610,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_light_pollution_database", lmgr->getFlagUseLightPollutionFromDatabase());
 	conf->setValue("viewing/flag_atmosphere_auto_enable", lmgr->getFlagAtmosphereAutoEnable());
 	conf->setValue("viewing/flag_planets_native_names", ssmgr->getFlagNativeNames());
-	conf->setValue("viewing/constellation_art_intensity", cmgr->getArtIntensity());
+	conf->setValue("viewing/constellation_art_intensity", mvmgr->getInitConstellationIntensity());
 	conf->setValue("viewing/constellation_name_style", cmgr->getConstellationDisplayStyleString());
 	conf->setValue("viewing/constellation_line_thickness", cmgr->getConstellationLineThickness());
 	conf->setValue("viewing/flag_night", StelApp::getInstance().getVisionModeNight());
@@ -732,7 +741,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("gui/auto_hide_vertical_toolbar", gui->getAutoHideVerticalButtonBar());
 	conf->setValue("gui/flag_show_nebulae_background_button", gui->getFlagShowNebulaBackgroundButton());
 	conf->setValue("gui/flag_show_decimal_degrees", StelApp::getInstance().getFlagShowDecimalDegrees());
-	conf->setValue("gui/flag_use_azimuth_from_south", StelApp::getInstance().getFlagOldAzimuthUsage());
+	conf->setValue("gui/flag_use_azimuth_from_south", StelApp::getInstance().getFlagSouthAzimuthUsage());
 
 	mvmgr->setInitFov(mvmgr->getCurrentFov());
 	mvmgr->setInitViewDirectionToCurrent();
@@ -806,6 +815,11 @@ void ConfigurationDialog::setDefaultViewOptions()
 	Q_ASSERT(conf);
 
 	conf->setValue("main/restore_defaults", true);
+	// reset all stored panel locations
+	conf->beginGroup("DialogPositions");
+	conf->remove("");
+	conf->endGroup();
+
 }
 
 void ConfigurationDialog::populatePluginsList()
@@ -1135,6 +1149,8 @@ void ConfigurationDialog::downloadStars()
 	progressBar->setValue(0);
 	progressBar->setRange(0, nextStarCatalogToDownload.value("sizeMb").toDouble()*1024);
 	progressBar->setFormat(QString("%1: %p%").arg(nextStarCatalogToDownload.value("id").toString()));
+
+	qDebug() << "Downloading file" << nextStarCatalogToDownload.value("url").toString();
 }
 
 void ConfigurationDialog::downloadError(QNetworkReply::NetworkError)
@@ -1169,8 +1185,6 @@ void ConfigurationDialog::downloadFinished()
 		return;
 	}
 
-	Q_ASSERT(starCatalogDownloadReply->bytesAvailable()==0);
-
 	const QVariant& redirect = starCatalogDownloadReply->attribute(QNetworkRequest::RedirectionTargetAttribute);
 	if (!redirect.isNull())
 	{
@@ -1187,6 +1201,8 @@ void ConfigurationDialog::downloadFinished()
 		connect(starCatalogDownloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
 		return;
 	}
+
+	Q_ASSERT(starCatalogDownloadReply->bytesAvailable()==0);
 
 	isDownloadingStarCatalog = false;
 	currentDownloadFile->close();
@@ -1211,6 +1227,55 @@ void ConfigurationDialog::downloadFinished()
 	}
 
 	resetStarCatalogControls();
+}
+
+void ConfigurationDialog::de430ButtonClicked()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
+	StelApp::getInstance().getCore()->setDe430Active(!StelApp::getInstance().getCore()->de430IsActive());
+	conf->setValue("astro/flag_use_de430", StelApp::getInstance().getCore()->de430IsActive());
+
+	resetEphemControls(); //refresh labels
+}
+
+void ConfigurationDialog::de431ButtonClicked()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
+	StelApp::getInstance().getCore()->setDe431Active(!StelApp::getInstance().getCore()->de431IsActive());
+	conf->setValue("astro/flag_use_de431", StelApp::getInstance().getCore()->de431IsActive());
+
+	resetEphemControls(); //refresh labels
+}
+
+void ConfigurationDialog::resetEphemControls()
+{
+	ui->de430checkBox->setEnabled(StelApp::getInstance().getCore()->de430IsAvailable());
+	ui->de431checkBox->setEnabled(StelApp::getInstance().getCore()->de431IsAvailable());
+	ui->de430checkBox->setChecked(StelApp::getInstance().getCore()->de430IsActive());
+	ui->de431checkBox->setChecked(StelApp::getInstance().getCore()->de431IsActive());
+
+	if(StelApp::getInstance().getCore()->de430IsActive())
+		ui->de430label->setText("1550..2650");
+	else
+	{
+		if (StelApp::getInstance().getCore()->de430IsAvailable())
+			ui->de430label->setText(q_("Available"));
+		else
+			ui->de430label->setText(q_("Not Available"));
+	}
+	if(StelApp::getInstance().getCore()->de431IsActive())
+		ui->de431label->setText("-13000..17000");
+	else
+	{
+		if (StelApp::getInstance().getCore()->de431IsAvailable())
+			ui->de431label->setText(q_("Available"));
+		else
+			ui->de431label->setText(q_("Not Available"));
+	}
 }
 
 void ConfigurationDialog::updateSelectedInfoCheckBoxes()

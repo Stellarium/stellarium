@@ -1,31 +1,31 @@
 INCLUDE_DIRECTORIES(
-    .
-    gui
-    ${CMAKE_BINARY_DIR}/plugins/MeteorShowers/src
-    ${CMAKE_BINARY_DIR}/plugins/MeteorShowers/src/gui
+     .
+     gui
+     ${CMAKE_BINARY_DIR}/plugins/MeteorShowers/src
+     ${CMAKE_BINARY_DIR}/plugins/MeteorShowers/src/gui
 )
 
 LINK_DIRECTORIES(${BUILD_DIR}/src)
 
 SET(MeteorShowers_SRCS
-    MeteorShower.hpp
-    MeteorShower.cpp
-    MeteorShowers.hpp
-    MeteorShowers.cpp
-    MeteorShowersMgr.hpp
-    MeteorShowersMgr.cpp
-    MeteorObj.hpp
-    MeteorObj.cpp
-    gui/MSConfigDialog.hpp
-    gui/MSConfigDialog.cpp
-    gui/MSSearchDialog.hpp
-    gui/MSSearchDialog.cpp
-    translations.h
+     MeteorShower.hpp
+     MeteorShower.cpp
+     MeteorShowers.hpp
+     MeteorShowers.cpp
+     MeteorShowersMgr.hpp
+     MeteorShowersMgr.cpp
+     MeteorObj.hpp
+     MeteorObj.cpp
+     gui/MSConfigDialog.hpp
+     gui/MSConfigDialog.cpp
+     gui/MSSearchDialog.hpp
+     gui/MSSearchDialog.cpp
+     translations.h
 )
 
 SET(MeteorShowersDialog_UIS
-    gui/MSConfigDialog.ui
-    gui/MSSearchDialog.ui
+     gui/MSConfigDialog.ui
+     gui/MSSearchDialog.ui
 )
 
 QT5_WRAP_UI(MeteorShowersDialog_UIS_H ${MeteorShowersDialog_UIS})

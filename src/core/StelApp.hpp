@@ -171,7 +171,7 @@ public:
 	//! Get the size of font
 	int getBaseFontSize() const { return baseFontSize; }
 	void setBaseFontSize(int s) { baseFontSize=s; }
-	
+
 	//! Get the GUI instance implementing the abstract GUI interface.
 	StelGuiBase* getGui() const {return stelGui;}
 	//! Tell the StelApp instance which GUI si currently being used.
@@ -214,17 +214,28 @@ public slots:
 	//! Get flag for showing decimal degree in various places.
 	bool getFlagShowDecimalDegrees() const {return flagShowDecimalDegrees;}
 
-	//! Set flag for using calculation of azimuth from south towards west (as in old astronomical literature)
-	bool getFlagOldAzimuthUsage() const { return flagUseAzimuthFromSouth; }
-	//! Get flag for using calculation of azimuth from south towards west (as in old astronomical literature)
-	void setFlagOldAzimuthUsage(bool use) { flagUseAzimuthFromSouth=use; }
+	//! Set flag for using calculation of azimuth from south towards west (instead north towards east)
+	bool getFlagSouthAzimuthUsage() const { return flagUseAzimuthFromSouth; }
+	//! Get flag for using calculation of azimuth from south towards west (instead north towards east)
+	void setFlagSouthAzimuthUsage(bool use) { flagUseAzimuthFromSouth=use; }
 	
+	//! Set flag for using calculation of azimuth from south towards west (as in older astronomical literature)
+	//! @deprecated Use getFlagSouthAzimuthUsage() instead.
+	bool getFlagOldAzimuthUsage() const { return getFlagSouthAzimuthUsage(); }
+	//! Get flag for using calculation of azimuth from south towards west (as in older astronomical literature)
+	//! @deprecated Use setFlagSouthAzimuthUsage() instead.
+	void setFlagOldAzimuthUsage(bool use) { setFlagSouthAzimuthUsage(use); }
+
+
 	//! Get the current number of frame per second.
 	//! @return the FPS averaged on the last second
 	float getFps() const {return fps;}
 
 	//! Return the time since when stellarium is running in second.
 	static double getTotalRunTime();
+
+	//! Return the scaled time for animated objects
+	static double getAnimationTime();
 
 	//! Report that a download occured. This is used for statistics purposes.
 	//! Connect this slot to QNetworkAccessManager::finished() slot to obtain statistics at the end of the program.
@@ -292,7 +303,7 @@ private:
 	QNetworkAccessManager* networkAccessManager;
 
 	//! Get proxy settings from config file... if not set use http_proxy env var
-	void setupHttpProxy();
+	void setupNetworkProxy();
 
 	// The audio manager.  Must execute in the main thread.
 	StelAudioMgr* audioMgr;
@@ -340,6 +351,7 @@ private:
 	bool initialized;
 
 	static qint64 startMSecs;
+	static float animationScale;
 
 	// Temporary variables used to store the last gl window resize
 	// if the core was not yet initialized
