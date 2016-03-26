@@ -56,6 +56,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  << "--user-dir (or -u)      : Use an alternative user data directory\n"
 			  << "--verbose               : Even more diagnostic output in logfile \n"
 			  << "                          (esp. multimedia handling)\n"
+			  << "--fix-text (or -t)      : May fix text rendering problems\n"
 			#ifdef Q_OS_WIN
 			  << "--angle-mode (or -a)    : Use ANGLE as OpenGL ES2 rendering engine (autodetect driver)\n"
 			  << "--angle-d3d9 (or -9)    : Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine\n"
@@ -91,6 +92,10 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 	if (argsGetOption(argList, "", "--verbose"))
 	{
 		qApp->setProperty("verbose", true);
+	}
+	if (argsGetOption(argList, "-t", "--fix-text"))
+	{
+		qApp->setProperty("text_texture", true); // Will be observed in StelPainter::drawText()
 	}
 
 	#ifdef Q_OS_WIN
