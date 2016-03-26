@@ -12,8 +12,14 @@ WizardImageBackColor=clBlack
 AppName=Stellarium
 AppVersion=@PACKAGE_VERSION@
 AppVerName=Stellarium @PACKAGE_VERSION@
+AppCopyright=Copyright (C) @COPYRIGHT_YEARS@ Stellarium team
 AppPublisher=Stellarium team
 AppPublisherURL=http://www.stellarium.org/
+AppSupportURL=http://www.stellarium.org/
+AppUpdatesURL=http://www.stellarium.org/
+VersionInfoVersion=@PACKAGE_VERSION@
+MinVersion=0,@MIN_VERSION@
+SetupIconFile=data\stellarium.ico
 OutputBaseFilename=stellarium-@PACKAGE_VERSION@-@ISS_PACKAGE_PLATFORM@
 OutputDir=installers
 ; In 64-bit mode, {pf} is equivalent to {pf64},
@@ -22,13 +28,19 @@ DefaultDirName={pf}\Stellarium
 DefaultGroupName=Stellarium
 UninstallDisplayIcon={app}\data\stellarium.ico
 LicenseFile=COPYING
-Compression=zip/9
+ChangesAssociations=yes
+; LZMA2/max required 95 MB RAM for compression and 8 MB RAM for decompression
+; Using LZMA2/max algorithm reduces size of package on ~10%
+Compression=lzma2/max
 
 [Files]
 Source: "@CMAKE_INSTALL_PREFIX@\bin\stellarium.exe"; DestDir: "{app}"
 @STELMAINLIB@
+@MESALIB@
 @REDIST_FILES@
 Source: "stellarium.url"; DestDir: "{app}"
+Source: "stellarium-guide.url"; DestDir: "{app}"
+Source: "stellarium-devdocs.url"; DestDir: "{app}"
 Source: "README"; DestDir: "{app}"; Flags: isreadme; DestName: "README.rtf"
 Source: "INSTALL"; DestDir: "{app}"; DestName: "INSTALL.rtf"
 Source: "COPYING"; DestDir: "{app}"; DestName: "GPL.rtf"
@@ -42,17 +54,14 @@ Source: "@QtWidgets_location@"; DestDir: "{app}";
 Source: "@QtSql_location@"; DestDir: "{app}";
 Source: "@QtXmlPatterns_location@"; DestDir: "{app}";
 Source: "@QtConcurrent_location@"; DestDir: "{app}";
+Source: "@QtPrintSupport_location@"; DestDir: "{app}";
 @ISS_QT_SCRIPT@
 @ISS_QT_MULTIMEDIA@
+@ISS_QT_SERIALPORT@
 @ISS_ANGLE_LIBS@
 @ISS_ICU_LIBS@
-@ISS_WINDOWS_PLUGIN@
-@ISS_ICO_PLUGIN@
-@ISS_JPEG_PLUGIN@
-@ISS_MULTIMEDIA_PLUGINS@
-@ISS_QML_DIR@
-@ISS_QML_PLUGINS@
-@ISS_QML_SHADERS@
+@ISS_QT_PLUGINS@
+; Stellarium's stuff
 Source: "@CMAKE_INSTALL_PREFIX@\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs
 
 [Tasks]
@@ -85,15 +94,31 @@ Type: filesandordirs; Name: "{localappdata}\stellarium\stellarium"; Tasks: remov
 
 [Icons]
 Name: "{group}\{cm:ProgramOnTheWeb,Stellarium}"; Filename: "{app}\stellarium.url"; IconFilename: "{app}\data\stellarium.ico"
+Name: "{group}\{cm:UserGuideOnTheWeb}"; Filename: "{app}\stellarium-guide.url"; IconFilename: "{app}\data\stellarium.ico"
+Name: "{group}\{cm:DevelopersDocsOnTheWeb}"; Filename: "{app}\stellarium-devdocs.url"; IconFilename: "{app}\data\stellarium.ico"
 Name: "{group}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
-;Name: "{group}\Stellarium {cm:FallbackMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--safe-mode"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
+; Name: "{group}\Stellarium {cm:FallbackMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--safe-mode"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
 Name: "{group}\Stellarium {cm:DebugMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--dump-opengl-details"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
+; Name: "{group}\Stellarium {cm:AngleMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--angle-mode"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
+; Name: "{group}\Stellarium {cm:AngleD3D9Mode}"; Filename: "{app}\stellarium.exe"; Parameters: "--angle-d3d9"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
+; Name: "{group}\Stellarium {cm:AngleD3D11Mode}"; Filename: "{app}\stellarium.exe"; Parameters: "--angle-d3d11"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
+; Name: "{group}\Stellarium {cm:AngleWarpMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--angle-warp"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
+Name: "{group}\Stellarium {cm:AngleMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--angle-d3d9"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
+Name: "{group}\Stellarium {cm:MesaMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--mesa-mode"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
 Name: "{group}\{cm:UninstallProgram,Stellarium}"; Filename: "{uninstallexe}"
 Name: "{group}\config.ini"; Filename: "{userappdata}\Stellarium\config.ini"
 Name: "{group}\{cm:LastRunLog}"; Filename: "{userappdata}\Stellarium\log.txt"
 Name: "{group}\{cm:ChangeLog}"; Filename: "{app}\ChangeLog.rtf"
+Name: "{group}\{cm:Scenery3dDocs}"; Filename: "{app}\data\Scenery3d.pdf"
 Name: "{commondesktop}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"; Tasks: desktopicon\common
 Name: "{userdesktop}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"; Tasks: desktopicon\user
+
+[Registry]
+; Set file associations for Stellarium scripts
+Root: HKCR; Subkey: ".ssc"; ValueType: string; ValueName: ""; ValueData: "Stellarium.Script"; Flags: uninsdeletevalue
+Root: HKCR; Subkey: "Stellarium.Script"; ValueType: string; ValueName: ""; ValueData: "Stellarium Script"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "Stellarium.Script\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\stellarium.exe,0"
+Root: HKCR; Subkey: "Stellarium.Script\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\stellarium.exe"" --startup-script ""%1"""
 
 ; Recommended use Inno Setup 5.5.3+
 [Languages]
@@ -141,8 +166,13 @@ const
   INSTALLSTATE_ABSENT = 2;       // The product is installed for a different user.
   INSTALLSTATE_DEFAULT = 5;      // The product is installed for the current user.
 
-  VC_REDIST_X86 = '{13A4EE12-23EA-3371-91EE-EFB36DDFFF3E}'; //Microsoft.VS.VC_RuntimeMinimumVSU_x86,v12
-  VC_REDIST_X64 = '{A749D8E6-B613-3BE3-8F5F-045C84EBA29B}'; //Microsoft.VS.VC_RuntimeMinimumVSU_amd64,v12
+  // Visual C++ 2013 Redistributable 12.0.21005
+  VC_REDIST_X86 = '{13A4EE12-23EA-3371-91EE-EFB36DDFFF3E}';
+  VC_REDIST_X64 = '{A749D8E6-B613-3BE3-8F5F-045C84EBA29B}';
+  
+  // Visual C++ 2015 Redistributable 14.0.23506
+  // VC_REDIST_X86 = '{23daf363-3020-4059-b3ae-dc4ad39fed19}';
+  // VC_REDIST_X64 = '{3ee5e5bb-b7cc-4556-8861-a00a82977d6c}';
 
 function MsiQueryProductState(szProduct: string): INSTALLSTATE; 
   external 'MsiQueryProductState{#AW}@msi.dll stdcall';

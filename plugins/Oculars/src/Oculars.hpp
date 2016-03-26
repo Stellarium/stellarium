@@ -100,6 +100,7 @@ public:
 	virtual void handleKeys(class QKeyEvent* event);
 	virtual void handleMouseClicks(class QMouseEvent* event);
 	virtual void update(double) {;}
+	double ccdRotationAngle() const;
 
 	QString getDimensionsString(double fovX, double fovY) const;
 	QString getFOVString(double fov) const;
@@ -150,6 +151,9 @@ public slots:
 
 	void setFlagUseFlipForCCD(const bool b);
 	bool getFlagUseFlipForCCD(void) const;
+
+	void setFlagUseSemiTransparency(const bool b);
+	bool getFlagUseSemiTransparency(void) const;
 
 signals:
 	void selectedCCDChanged();
@@ -258,7 +262,6 @@ private:
 
 	bool flagMoonScale;		//!< Flag to track of usage zooming of the Moon
 
-	double ccdRotationAngle;	//!< The angle to rotate the CCD bounding box. */
 	double maxEyepieceAngle;	//!< The maximum aFOV of any eyepiece.
 	bool requireSelection;		//!< Read from the ini file, whether an object is required to be selected to zoom in.
 	bool flagLimitMagnitude;	//!< Read from the ini file, whether a magnitude is required to be limited.
@@ -266,6 +269,9 @@ private:
 	//! Display the GUI control panel
 	bool guiPanelEnabled;
 	bool flagDecimalDegrees;
+	bool flagSemiTransporency;
+	bool flipVert;
+	bool flipHorz;
 
 	QSignalMapper * ccdRotationSignalMapper;  //!< Used to rotate the CCD. */
 	QSignalMapper * ccdsSignalMapper; //!< Used to determine which CCD was selected from the popup navigator. */

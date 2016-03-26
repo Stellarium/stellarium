@@ -76,7 +76,6 @@ class SearchDialog : public StelDialog
 	Q_ENUMS(CoordinateSystem)
 
 public:
-	//! @enum CoordinateSystem
 	//! Available coordinate systems
 	enum CoordinateSystem
 	{
@@ -185,6 +184,10 @@ private:
 
 	// The current coordinate system
 	CoordinateSystem currentCoordinateSystem;
+
+public:
+	static QString extSearchText;
+
 };
 
 #endif // _SEARCHDIALOG_HPP_

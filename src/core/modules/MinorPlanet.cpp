@@ -183,6 +183,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	QTextStream oss(&str);
 	double az_app, alt_app;
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	Q_UNUSED(az_app);
 
 	if (flags&Name)
@@ -260,7 +261,12 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 	float aSize = 2.*getAngularSize(core)*M_PI/180.;
 	if (flags&Size && aSize>1e-6)
-		oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(aSize, true)) << "<br>";
+	{
+		if (withDecimalDegree)
+			oss << q_("Apparent diameter: %1").arg(StelUtils::radToDecDegStr(aSize,5,false,true)) << "<br>";
+		else
+			oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(aSize, true)) << "<br>";
+	}
 
 	// If semi-major axis not zero then calculate and display orbital period for asteroid in days
 	double siderealPeriod = getSiderealPeriod();

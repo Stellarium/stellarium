@@ -53,6 +53,7 @@ TelescopeDialog::TelescopeDialog()
 	telescopeType[0] = ConnectionNA;
 
 	ui = new Ui_telescopeDialogForm;
+	dialogName = "TelescopeControl";
 
 	//TODO: Fix this - it's in the same plugin
 	telescopeManager = GETSTELMODULE(TelescopeControl);
@@ -109,7 +110,8 @@ void TelescopeDialog::createDialogContent()
 	//Inherited connect
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+
 	//Connect: sender, signal, receiver, method
 	//Page: Telescopes
 	connect(ui->pushButtonChangeStatus, SIGNAL(clicked()), this, SLOT(buttonChangeStatusPressed()));

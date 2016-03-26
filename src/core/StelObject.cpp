@@ -107,7 +107,7 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 {
 	bool withAtmosphere = core->getSkyDrawer()->getFlagHasAtmosphere();
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
-	bool useOldAzimuth = StelApp::getInstance().getFlagOldAzimuthUsage();
+	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 	double az_app, alt_app;
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
 	Q_UNUSED(az_app);
@@ -175,7 +175,7 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		double az,alt;
 		StelUtils::rectToSphe(&az,&alt,getAltAzPosGeometric(core));
 		float direction = 3.; // N is zero, E is 90 degrees
-		if (useOldAzimuth)
+		if (useSouthAzimuth)
 			direction = 2.;
 		az = direction*M_PI - az;
 		if (az > M_PI*2)
@@ -217,7 +217,7 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 
 		if (core->getCurrentPlanet()->getEnglishName()=="Earth")
 		{
-			ecl = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0);
+			ecl = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDE());
 
 			StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
 			StelUtils::equToEcl(ra_equ, dec_equ, ecl, &lambda, &beta);
@@ -248,9 +248,16 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 	{
 		double longitude=core->getCurrentLocation().longitude;
 		double sidereal=(get_mean_sidereal_time(core->getJD(), core->getJDE())  + longitude) / 15.;
+		sidereal=fmod(sidereal, 24.);
+		if (sidereal < 0.) sidereal+=24.;
 		res += q_("Mean Sidereal Time: %1").arg(StelUtils::hoursToHmsStr(sidereal)) + "<br>";
-		sidereal=(get_apparent_sidereal_time(core->getJD(), core->getJDE()) + longitude) / 15.;
-		res += q_("Apparent Sidereal Time: %1").arg(StelUtils::hoursToHmsStr(sidereal)) + "<br>";
+		if (core->getUseNutation())
+		{
+			sidereal=(get_apparent_sidereal_time(core->getJD(), core->getJDE()) + longitude) / 15.;
+			sidereal=fmod(sidereal, 24.);
+			if (sidereal < 0.) sidereal+=24.;
+			res += q_("Apparent Sidereal Time: %1").arg(StelUtils::hoursToHmsStr(sidereal)) + "<br>";
+		}
 	}
 
 	return res;

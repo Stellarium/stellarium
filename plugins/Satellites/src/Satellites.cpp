@@ -141,7 +141,7 @@ void Satellites::init()
 		// key bindings and other actions		
 		QString satGroup = N_("Satellites");
 		addAction("actionShow_Satellite_Hints", satGroup, N_("Satellite hints"), "hintsVisible", "Ctrl+Z");
-		addAction("actionShow_Satellite_Labels", satGroup, N_("Satellite labels"), "labelsVisible", "Shift+Z");
+		addAction("actionShow_Satellite_Labels", satGroup, N_("Satellite labels"), "labelsVisible", "Alt+Shift+Z");
 		addAction("actionShow_Satellite_ConfigDialog_Global", satGroup, N_("Satellites configuration window"), configDialog, "visible", "Alt+Z");
 
 		// Gui toolbar button
@@ -1597,7 +1597,10 @@ void Satellites::parseQSMagFile(QString qsMagFile)
 
 void Satellites::update(double deltaTime)
 {
-	if (StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates() || (!hintFader && hintFader.getInterstate() <= 0.))
+	// Separated because first test should be very fast.
+	if (!hintFader && hintFader.getInterstate() <= 0.)
+		return;
+	if (StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
 		return;
 
 	hintFader.update((int)(deltaTime*1000));
@@ -1611,7 +1614,10 @@ void Satellites::update(double deltaTime)
 
 void Satellites::draw(StelCore* core)
 {
-	if (core->getCurrentLocation().planetName != earth->getEnglishName() ||	!isValidRangeDates() || (!hintFader && hintFader.getInterstate() <= 0.))
+	// Separated because first test should be very fast.
+	if (!hintFader && hintFader.getInterstate() <= 0.)
+		return;
+	if (core->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
 		return;
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);

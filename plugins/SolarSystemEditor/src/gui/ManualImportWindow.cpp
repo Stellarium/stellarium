@@ -37,6 +37,7 @@
 ManualImportWindow::ManualImportWindow()
 {
 	ui = new Ui_manualImportWindow();
+	dialogName = "SolarSystemEditorManualImport";
 	ssoManager = GETSTELMODULE(SolarSystemEditor);
 }
 
@@ -53,6 +54,7 @@ void ManualImportWindow::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 	        this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->LocationBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->lineEditColor, SIGNAL(textChanged(QString)), this, SLOT(parseColorString(QString)));
 	connect(ui->pushButtonSelectColor, SIGNAL(clicked()), this, SLOT(selectColor()));

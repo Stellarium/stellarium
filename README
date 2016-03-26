@@ -210,7 +210,10 @@ for more details on the location of the user data directory for your OS.
 	1.5 An accurate long-time precession model compatible with P03:
 		J. Vondrak, N. Capitaine, P. Wallace: New precession expressions, valid for long time intervals.
 		Astronomy&Astrophysics 534, A22 (2011); DOI: 10.1051/0004-6361/201117274
-
+	1.6 Nutation: 
+		Dennis D. McCarthy and Brian J. Lizum: An Abridged Model of the Precession-Nutation of the Celestial Pole.
+		Celestial Mechanics and Dynamical Astronomy 85: 37-49, 2003.
+		This model provides accuracy better than 1 milli-arcsecond in the time 1995-2050. It is applied for years 1500..2500 only.
 
 2. Included source code
 	2.1 Some computation of the sideral time (sidereal_time.h/c) and pluto
@@ -223,6 +226,9 @@ for more details on the location of the user data directory for your OS.
 	2.4 The tesselation algorithms were originally extracted from the glues 
 		library version 1.4 Mike Gorchak <mike@malva.ua> (SGI FREE SOFTWARE
 		LICENSE B).
+    2.5 OBJ loader in the Scenery3D plugin based on glObjViewer (c) 2007 dhpoware
+    2.6 Parts of the code to work with DE430 and DE431 data files have been 
+        taken from Project Pluto (GPL license).
 
 3. Data
 	3.1 The Hipparcos star catalog
@@ -319,6 +325,7 @@ for more details on the location of the user data directory for your OS.
 	3.11 Morphological classification and magnitudes (partially) for Melotte catalogue was taken from
 		DeepSkyPedia
 		http://deepskypedia.com/wiki/List:Melotte
+
 
 4. Graphics
 	4.1 All graphics are copyrighted by the Stellarium's Team (GPL) except
@@ -447,11 +454,13 @@ for more details on the location of the user data directory for your OS.
 		http://www.madpc.co.uk/~peterv/
 	4.26 Image of IC434 from Marc Aragnou
 	4.27 Image of solar corona from eclipse 2008-08-01 by Georg Zotti
+	4.28 Images of IC59, IC63, IC410, NGC2359, Sadr region from Carole Pope
+		https://sites.google.com/site/caroleastroimaging/
 
 --------------------------------------------------------------------------------
 9. LICENSE
 --------------------------------------------------------------------------------
-   Copyright (C) 2004-2012 Fabien Chereau et al.
+   Copyright (C) 2004-2016 Fabien Chereau et al.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License

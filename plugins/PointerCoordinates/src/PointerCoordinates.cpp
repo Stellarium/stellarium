@@ -124,16 +124,21 @@ void PointerCoordinates::draw(StelCore *core)
 	float mx = p.x()-wh; // point 0 in center of the screen, axis X directed to right
 	float my = p.y()-hh; // point 0 in center of the screen, axis Y directed to bottom
 	// calculate position of mouse cursor via position of center of the screen (and invert axis Y)
-	prj->unProject(prj->getViewportPosX()+wh+mx, prj->getViewportPosY()+hh+1-my, mousePosition);
+	// If coordinates are invalid, don't draw them.
+	bool coordsValid=false;
+	coordsValid = prj->unProject(prj->getViewportPosX()+wh+mx, prj->getViewportPosY()+hh+1-my, mousePosition);
 	{ // Nick Fedoseev patch
 		Vec3d win;
 		prj->project(mousePosition,win);
 		float dx = prj->getViewportPosX()+wh+mx - win.v[0];
 		float dy = prj->getViewportPosY()+hh+1-my - win.v[1];
-		prj->unProject(prj->getViewportPosX()+wh+mx+dx, prj->getViewportPosY()+hh+1-my+dy, mousePosition);
+		coordsValid = prj->unProject(prj->getViewportPosX()+wh+mx+dx, prj->getViewportPosY()+hh+1-my+dy, mousePosition);
 	}
+	if (!coordsValid)
+		return;
+
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
-	bool useOldAzimuth = StelApp::getInstance().getFlagOldAzimuthUsage();
+	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 
 	QString coordsSystem, cxt, cyt;
 	double cx, cy;
@@ -175,7 +180,7 @@ void PointerCoordinates::draw(StelCore *core)
 		{
 			StelUtils::rectToSphe(&cy,&cx,core->j2000ToAltAz(mousePosition, StelCore::RefractionAuto));
 			float direction = 3.; // N is zero, E is 90 degrees
-			if (useOldAzimuth)
+			if (useSouthAzimuth)
 				direction = 2.;
 			cy = direction*M_PI - cy;
 			if (cy > M_PI*2)

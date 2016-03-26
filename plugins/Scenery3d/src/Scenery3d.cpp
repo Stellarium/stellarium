@@ -386,8 +386,17 @@ void Scenery3d::update(double deltaTime)
 		//if we were moving in the last update
 		bool wasMoving = moveVector.lengthSquared()>0.0;
 
-		moveVector = Vec3d(( movement[0] * std::cos(az) + movement[1] * std::sin(az)),
-				( movement[0] * std::sin(az) - movement[1] * std::cos(az)),
+		//moveVector = Vec3d(( movement[0] * std::cos(az) + movement[1] * std::sin(az)),
+		//		( movement[0] * std::sin(az) - movement[1] * std::cos(az)),
+		//		movement[2]);
+		//Bring move into world-grid space
+		//currentScene.zRotateMatrix.transfo(moveVector);
+		// GZ DON'T!: Rotating by zRotateMatrix will make a case of convergence_angle=180 (i.e. misconfigured model) very silly (inverted!). -->Just swap x/y.
+		// moveVector.set(-moveVector.v[1], moveVector.v[0], moveVector.v[2]);
+
+		// Better yet: immediately make it right.
+		moveVector.set( movement[1] * std::cos(az) - movement[0] * std::sin(az),
+				movement[0] * std::cos(az) + movement[1] * std::sin(az),
 				movement[2]);
 
 		//get current time
@@ -439,8 +448,6 @@ void Scenery3d::update(double deltaTime)
 
 		moveVector *= deltaTime * 0.01 * qMax(5.0, stelMovementMgr->getCurrentFov());
 
-		//Bring move into world-grid space
-		currentScene.zRotateMatrix.transfo(moveVector);
 
 		absolutePosition.v[0] += moveVector.v[0];
 		absolutePosition.v[1] += moveVector.v[1];
@@ -1657,7 +1664,22 @@ void Scenery3d::drawDirect() // for Perspective Projection only!
     //set final rendering matrices
     modelViewMatrix = mvMatrix;
     projectionMatrix.setToIdentity();
-    projectionMatrix.perspective(fov,aspect,currentScene.camNearZ,currentScene.camFarZ);
+
+    //without viewport offset, you could simply call this:
+    //projectionMatrix.perspective(fov,aspect,currentScene.camNearZ,currentScene.camFarZ);
+    //these 2 lines replicate gluPerspective with glFrustum
+    float fH = qTan( fov / 360.0f * M_PI ) * currentScene.camNearZ;
+    float fW = fH * aspect;
+
+    //apply offset values
+    Vec2f vp = altAzProjector->getViewportCenterOffset();
+    float horizOffset = 2.0 * fW * vp[0];
+    float vertOffset = - 2.0 * fH * vp[1];
+
+    //final projection matrix
+    projectionMatrix.frustum(-fW + horizOffset, fW + horizOffset,
+			     -fH + vertOffset, fH + vertOffset,
+			     currentScene.camNearZ, currentScene.camFarZ);
 
     //depth test needs enabling, clear depth buffer, color buffer already contains background so it stays
     glEnable(GL_DEPTH_TEST);
@@ -1815,7 +1837,7 @@ void Scenery3d::drawDebug()
 
     StelPainter painter(altAzProjector);
     painter.setFont(debugTextFont);
-    painter.setColor(1,0,1,1);
+    painter.setColor(1.f,0.f,1.f,1.f);
     // For now, these messages print light mixture values.
     painter.drawText(20, 160, lightMessage);
     painter.drawText(20, 145, lightMessage2);

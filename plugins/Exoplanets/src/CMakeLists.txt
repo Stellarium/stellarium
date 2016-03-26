@@ -1,23 +1,23 @@
 INCLUDE_DIRECTORIES(
-    .
-    gui
-    ${CMAKE_BINARY_DIR}/plugins/Exoplanets/src
-    ${CMAKE_BINARY_DIR}/plugins/Exoplanets/src/gui
+     .
+     gui
+     ${CMAKE_BINARY_DIR}/plugins/Exoplanets/src
+     ${CMAKE_BINARY_DIR}/plugins/Exoplanets/src/gui
 )
 
 LINK_DIRECTORIES(${BUILD_DIR}/src)
 
 SET(Exoplanets_SRCS
-  Exoplanets.hpp
-  Exoplanets.cpp
-  Exoplanet.hpp
-  Exoplanet.cpp
-  gui/ExoplanetsDialog.hpp
-  gui/ExoplanetsDialog.cpp
+     Exoplanets.hpp
+     Exoplanets.cpp
+     Exoplanet.hpp
+     Exoplanet.cpp
+     gui/ExoplanetsDialog.hpp
+     gui/ExoplanetsDialog.cpp
 )
 
 SET(ExoplanetsDialog_UIS
-  gui/exoplanetsDialog.ui
+     gui/exoplanetsDialog.ui
 )
 QT5_WRAP_UI(ExoplanetsDialog_UIS_H ${ExoplanetsDialog_UIS})
 

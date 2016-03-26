@@ -1,9 +1,10 @@
 // Author: Qam1
-// Version: 6.0
+// Version: 8.0
 // License: Public Domain
 // Name: Earth best views from other bodies
 // Description: Best views of Earth from other Solar System bodies in the 21st Century.
-//
+
+// Made on Stellarium 0.14.1
 
 //basics
 var spd = 5; // speed for screen saver mode in seconds
@@ -14,19 +15,19 @@ var sl = StarMgr.getLabelsAmount();
 var ss = 0;
 
 // Labels
-var txt1 = LabelMgr.labelScreen("Press = for next outer body", 770, 20, false, 15, "#FF0000");
+var txt1 = LabelMgr.labelScreen("Press = for next outer body", 770, 60, false, 15, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
 
-txt1 = LabelMgr.labelScreen("Press -  for previous inner body", 770, 40, false, 15, "#FF0000");
+txt1 = LabelMgr.labelScreen("Press -+-+-  for previous inner body", 770, 80, false, 15, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
 
-txt1 = LabelMgr.labelScreen("Press [  to toggle flags and labels", 770, 60, false, 15, "#FF0000");
+txt1 = LabelMgr.labelScreen("Press [  to toggle flags and labels", 770, 100, false, 15, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
 
-txt1 = LabelMgr.labelScreen("Press ]  toggle scrren saver mode", 770, 80, false, 15, "#FF0000");
+txt1 = LabelMgr.labelScreen("Press ]  toggle scrren saver mode", 770, 120, false, 15, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
 
-txt1 = LabelMgr.labelScreen("By Qam1", 770, 100, false, 15, "#FF0000");
+txt1 = LabelMgr.labelScreen("By Qam1", 770, 140, false, 15, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
 
 spd = spd * 4;
@@ -73,7 +74,7 @@ while (q == 0)
 
 		core.setDate("2061-05-31T01:04:47", "utc");
 		core.setObserverLocation(91.80, 44.24, 7, 1, "", "Mercury");
-		StelMovementMgr.zoomTo(90, 1);
+		StelMovementMgr.zoomTo(64, 1);
 
 		SolarSystem.setFlagOrbits(false);
 
@@ -99,17 +100,21 @@ while (q == 0)
 		sw = 1709;
 	}
 
+
+
+
+
 	if (i == 3) 
 	{
 		
-		i = 4;
+		
 
 		LandscapeMgr.setFlagAtmosphere(false);
 		LandscapeMgr.setFlagFog(false);
 		LandscapeMgr.setCurrentLandscapeID("moon");
 
-		core.setDate("2023-01-21T20:57:47", "utc");
-		core.setObserverLocation(19.7, 39.0, 50, 1, "", "Moon");
+		core.setDate("2049-01-04T01:10:00", "utc");
+		core.setObserverLocation(0.7, 0.0, 50, 1, "", "Moon");
 		StelMovementMgr.zoomTo(12, 1);
 
 		SolarSystem.setFlagOrbits(false);
@@ -117,6 +122,10 @@ while (q == 0)
 		sd = 1;
 		sw = 7;
 	}
+
+
+
+
 
 	if (i == 4) 
 	{
@@ -135,10 +144,6 @@ SolarSystem.setFlagOrbits(true);
 
 		sd = 1;
 		sw = 7;
-
-
-
-
 
 
 	}
@@ -164,10 +169,10 @@ SolarSystem.setFlagOrbits(true);
 		LandscapeMgr.setCurrentLandscapeID("saturn");
 
 		core.setDate("2058-07-15T11:52:00", "utc");
-		core.setObserverLocation(134.71, 27.24, 71492000, 1, "", "Jupiter");
+		core.setObserverLocation(124.71, 27.24, 71492000, 1, "", "Jupiter");
 		StelMovementMgr.zoomTo(34, 1);
 
-		txt1 = LabelMgr.labelScreen("Elongation: 11.849 degrees", 500, 10, false, 25, "#AAFFAA");
+		txt1 = LabelMgr.labelScreen("Elongation: 11.849 degrees", 350, 10, false, 25, "#AAFFAA");
 		LabelMgr.setLabelShow(txt1, true);
 	}
 
@@ -182,7 +187,7 @@ SolarSystem.setFlagOrbits(true);
 		core.wait(0.1);
 		StelMovementMgr.zoomTo(28, 1);
 
-		txt1 = LabelMgr.labelScreen("Elongation: 6.390 degrees", 500, 10, false, 25, "#AAFFAA");
+		txt1 = LabelMgr.labelScreen("Elongation: 6.390 degrees", 350, 10, false, 25, "#AAFFAA");
 		LabelMgr.setLabelShow(txt1, true);
 	}
 
@@ -196,7 +201,7 @@ SolarSystem.setFlagOrbits(true);
 		core.setObserverLocation(-76.73, 76.92, 30268000, 1, "", "Uranus");
 		StelMovementMgr.zoomTo(15.6, 1);
 
-		txt1 = LabelMgr.labelScreen("Elongation: 3.186 degrees", 500, 10, false, 25, "#AAFFAA");
+		txt1 = LabelMgr.labelScreen("Elongation: 3.186 degrees", 350, 10, false, 25, "#AAFFAA");
 		LabelMgr.setLabelShow(txt1, true);
 
 
@@ -214,7 +219,7 @@ SolarSystem.setFlagOrbits(true);
 		core.setObserverLocation(76.71, 1.24, 24764000, 1, "", "Neptune");
 		StelMovementMgr.zoomTo(10.6, 1);
 
-		txt1 = LabelMgr.labelScreen("Elongation: 1.952 degrees", 500, 10, false, 25, "#AAFFAA");
+		txt1 = LabelMgr.labelScreen("Elongation: 1.952 degrees", 350, 10, false, 25, "#AAFFAA");
 		LabelMgr.setLabelShow(txt1, true);
 
 		sd = 1;
@@ -260,12 +265,8 @@ var r = d;
 		r = Math.floor(core.getJDay()) + 1;
 	
 
-if (i < 3) // why??
-{
-i = i + 1;
-}
 
-if (i == 10) // Why??
+if (i == 11) // Why??
 {
 i = i + 1;
 }
@@ -327,7 +328,7 @@ r = Math.floor(core.getJDay());
 			
 
 
-if (i < 3) // Merc & venus
+if (i < 4) // Merc & venus & moon
 
 {
 

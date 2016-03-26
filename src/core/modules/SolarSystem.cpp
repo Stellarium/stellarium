@@ -21,7 +21,7 @@
 
 #include "SolarSystem.hpp"
 #include "StelTexture.hpp"
-#include "stellplanet.h"
+#include "EphemWrapper.hpp"
 #include "Orbit.hpp"
 
 #include "StelProjector.hpp"
@@ -44,6 +44,8 @@
 #include "TrailGroup.hpp"
 #include "RefractionExtinction.hpp"
 
+#include "AstroCalcDialog.hpp"
+
 #include <functional>
 #include <algorithm>
 
@@ -64,9 +66,9 @@ SolarSystem::SolarSystem()
 	, moonScale(1.)
 	, labelsAmount(false)
 	, flagOrbits(false)
-	, flagLightTravelTime(false)
+	, flagLightTravelTime(true)
 	, flagShow(false)
-	, flagMarker(false)
+	, flagPointer(false)
 	, flagNativeNames(false)
 	, flagTranslatedNames(false)
 	, flagIsolatedTrails(true)
@@ -75,6 +77,7 @@ SolarSystem::SolarSystem()
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getBaseFontSize());
 	setObjectName("SolarSystem");
+	gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 }
 
 void SolarSystem::setFontSize(float newFontSize)
@@ -96,6 +99,9 @@ SolarSystem::~SolarSystem()
 	earth.clear();
 	Planet::hintCircleTex.clear();
 	Planet::texEarthShadow.clear();
+
+	texCircle.clear();
+	texPointer.clear();
 
 	delete allTrails;
 	allTrails = NULL;
@@ -145,8 +151,8 @@ void SolarSystem::init()
 	setFlagLabels(conf->value("astro/flag_planets_labels", true).toBool());
 	setLabelsAmount(conf->value("astro/labels_amount", 3.).toFloat());
 	setFlagOrbits(conf->value("astro/flag_planets_orbits").toBool());
-	setFlagLightTravelTime(conf->value("astro/flag_light_travel_time", false).toBool());
-	setFlagMarkers(conf->value("astro/flag_planets_markers", true).toBool());
+	setFlagLightTravelTime(conf->value("astro/flag_light_travel_time", true).toBool());
+	setFlagPointers(conf->value("astro/flag_planets_pointers", true).toBool());
 	// Set the algorithm from Astronomical Almanac for computation of apparent magnitudes for
 	// planets in case  observer on the Earth by default
 	setApparentMagnitudeAlgorithmOnEarth(conf->value("astro/apparent_magnitude_algorithm", "Harris").toString());
@@ -154,6 +160,7 @@ void SolarSystem::init()
 	// Is enabled the showing of isolated trails for selected objects only?
 	setFlagIsolatedTrails(conf->value("viewing/flag_isolated_trails", true).toBool());
 	setFlagIsolatedOrbits(conf->value("viewing/flag_isolated_orbits", true).toBool());
+	setFlagPermanentOrbits(conf->value("astro/flag_permanent_orbits", false).toBool());
 
 	recreateTrails();
 
@@ -165,6 +172,7 @@ void SolarSystem::init()
 			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur4.png");
+	texCircle = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb.png");	// Load circle texture
 	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/planet-indicator.png");
 	
 	StelApp *app = &StelApp::getInstance();
@@ -304,7 +312,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()*2.;
 		
 		const float scale = prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio();
-		size+= scale * (45.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime()));
+		size+= scale * (45.f + 10.f*std::sin(2.f * StelApp::getInstance().getAnimationTime()));
 
 		texPointer->bind();
 
@@ -313,7 +321,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
 		size*=0.5;
-		const float angleBase = StelApp::getInstance().getTotalRunTime() * 10;
+		const float angleBase = StelApp::getInstance().getAnimationTime() * 10;
 		// We draw 4 instances of the sprite at the corners of the pointer
 		for (int i = 0; i < 4; ++i)
 		{
@@ -1117,8 +1125,44 @@ void SolarSystem::draw(StelCore* core)
 		p->draw(core, maxMagLabel, planetNameFont);
 	}
 
-	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer() && getFlagMarkers())
+	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer() && getFlagPointers())
 		drawPointer(core);
+
+	// AstroCalcDialog
+	if (gui && gui->getAstroCalcVisible())
+	{
+		StelProjectorP prj = core->getProjection(StelCore::FrameJ2000); // , StelCore::RefractionOff);
+		StelPainter sPainter(prj);
+
+		float size;
+
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_ONE, GL_ONE);
+
+		for (int i =0; i< AstroCalcDialog::EphemerisListJ2000.count(); i++)
+		{
+			// draw EphemerisListJ2000[i];
+			Vec3d win;
+
+			// Check visibility of pointer
+			if (!(sPainter.getProjector()->projectCheck(AstroCalcDialog::EphemerisListJ2000[i], win)))
+				continue;
+
+			if (i == AstroCalcDialog::DisplayedPositionIndex)
+			{
+				sPainter.setColor(1.0f, 0.7f, 0.0f, 1.0f);
+				size = 6.f;
+			}
+			else
+			{
+				sPainter.setColor(1.0f, 1.0f, 0.0f, 1.0f);
+				size = 4.f;
+			}
+
+			texCircle->bind();
+			sPainter.drawSprite2dMode(win[0], win[1], size);
+		}
+	}
 }
 
 void SolarSystem::setStelStyle(const QString& section)
@@ -1529,6 +1573,8 @@ void SolarSystem::selectedObjectChange(StelModule::StelModuleSelectAction)
 		if (getFlagIsolatedTrails())
 			recreateTrails();
 	}
+	else
+		setSelected("");
 }
 
 // Activate/Deactivate planets display
@@ -1737,6 +1783,11 @@ void SolarSystem::setApparentMagnitudeAlgorithmOnEarth(QString algorithm)
 QString SolarSystem::getApparentMagnitudeAlgorithmOnEarth() const
 {
 	return getEarth()->getApparentMagnitudeAlgorithmString();
+}
+
+void SolarSystem::setFlagPermanentOrbits(bool b)
+{
+	Planet::permanentDrawingOrbits=b;
 }
 
 double SolarSystem::getEclipseFactor(const StelCore* core) const

@@ -1,18 +1,93 @@
+0.14.3 [2016-03-20]
+Bugfix release:
+- Added Bengali description for landscapes (LP: #1548627)
+- Added background transparency in Oculars plugin (LP: #1511393)
+- Fixed serial port issue on Windows version (LP: #1543813)
+- Fixed MESA mode on Windows (LP: #1509735)
+- Fixed Stellarium crashes in ocular view of Saturn/Neptune/Uranus (LP: #1495232)
+- Fixed artifacts in rendering of Mercury in the Sun (LP: #1533647)
+- Fixed loading scenes for Scenery 3D plugin (LP: #1533069)
+- Fixed movement of radiant when time is switched manually (LP: #1535950)
+- Fixed changing name of planet (LP: #1548008)
+
+0.14.2 [2016-01-08]
+Bugfix release:
+- Reduce planet brightness in daylight (LP: #1503248)
+- Fixed perspective mode with offset viewport in scenery3d (LP: #1509728)
+- Fixed wrong altitudes for some locations (LP: #1530759)
+- Fixed some skyculture links
+- Fixed editing some shortcut keys (LP: #1530567)
+- Fixed drawing reticle for telescope (LP: #1526348)
+- Refactoring coloring markers of the DSO
+- Removed info about Moon phases (avoid inconsistency for strings).
+- Updated default config options
+- Updated icons for View dialog
+- Updated Stellarium DSO Catalog
+- Added list of dwarf galaxies (Search Tool)
+- Added improvements in Scenery 3D plugin
+
+0.14.1 [2015-12-02]
+Bugfix release:
+- Added support for side-by-side assembly technology (LP: #1400045)
+- Enhancements of the Ocular plugin: add OAG support (LP: #1354427)
+- Added Belarusian translation for landscapes and sky cultures (LP: #1520303)
+- Added designations for few stars in Scorpius (LP: #1518437)
+- Fixed constellation art brightness and zooming (LP: #1520783)
+- Fixed number of satellite orbit segments resets (LP: #1510592)
+- Fixed certain outplanet moons with wrong Longitudes (LP: #1509693, #1509692)
+- Fixed saving settings for some View panel options (LP: #1509639)
+- Fixed fails to run up on Windows when invoked from a different directory (LP: #1410529)
+- Fixed wrong value of ecliptic obliquity (LP: #1520792)
+- Fixed segmentation fault (core dumped) while try update stars catalog (LP: #1514542)
+- Tentative fix for support 4K resolution (GUI scaling) (LP: #1372781)
+
+0.14.0 [2015-10-24]
+A big leap forward in astronomical accuracy for historical applications:
+ - Precession now follows the IAU2006 model in the long-time version from Vondrak 
+   et al. 2011.
+ - Nutation is applied (IAU2000B solution). Given that nobody has observed it without 
+   telescope and the model does not give limits of applicability, we limit its application 
+   to 1500..2500
+ - Application of DeltaT has been simplified and made a bit more intuitive.
+
+We now dare to add another coordinate system: Ecliptic coordinates of date.
+
+We can therefore now show that planetary positions given by the commonly used solution 
+VSOP87 is applicable to -4000..+8000 only, and its use outside this range will give 
+somewhat artificial results. There is more to follow in future versions.
+
+The other big addition is a greatly improved collection of DSO data with lots of 
+possibilities in a new GUI tab to select for object type and/or catalog. In total, 
+15 catalogs are now built-in!
+
+Also the Meteor Shower, Satellites, Telescope Control and 3D Sceneries plugins have 
+been improved.
+
+Landscapes can have switchable labels, so you can e.g. indicate mountain peaks.
+
+In total 83 bugs and wishlist items were fixed or at least decided.
+
+A platform-specific change for Windows: OpenGL binding is now dynamic. That means, there are 
+no more separate OpenGL/ANGLE/MESA downloads, but after installation you will have separate 
+commands in the start menu which force ANGLE or MESA modes.
+
+Full list of changes: https://launchpad.net/stellarium/0.14/0.14.0
+
 0.13.3 [2015-04-25]
 Bugfix release with few new features.
 
-This version is contains over 30 closed bugs, who include some wishes and new nice features - like 
+This version is contains over 30 closed bugs, who include some wishes and new nice features - like
 visualization of the 3D landscapes and extra DSO catalogs.
 
-Full list of changes: https://launchpad.net/stellarium/+milestone/0.13.3
+Full list of changes: https://launchpad.net/stellarium/0.13/0.13.3
 
 0.13.2 [2015-01-20]
 Major bugfix release with few new features.
 
-This version is contains over 70 closed bugs, who include some wishes and new nice features - like 
+This version is contains over 70 closed bugs, who include some wishes and new nice features - like
 visualization of the zodiacal light and new sky cultures.
 
-Full list of changes: https://launchpad.net/stellarium/+milestone/0.13.2
+Full list of changes: https://launchpad.net/stellarium/0.13/0.13.2
 
 0.13.1 [2014-10-19]
 Bugfix release with few new features.
@@ -37,7 +112,7 @@ Bugfix release with few new features.
 - Fixed: Various GUI/rendering improvements (LP: #1380502, #1320065, #1338252, #1096050, #1376550, #1382689)
 - Fixed: "missing disk in drive <whatever>" (LP: #1371183)
 
-Full list of changes: https://launchpad.net/stellarium/+milestone/0.13.1
+Full list of changes: https://launchpad.net/stellarium/0.13/0.13.1
 
 0.13.0 [2014-07-19]
 This version based on Qt 5 and has new modulated core, and new features (example: normal mapping) and fixes for 115 bugs, including:

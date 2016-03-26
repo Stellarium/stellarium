@@ -102,7 +102,6 @@ public:
 	bool isHorizontalEndSkylinked() const { return flagShowHorizontalEndSkylinked; }
 	bool isHorPaDisplayed() const { return flagShowHorizontalPA; }
 
-
 	//! Restore the plug-in's settings to the default state.
 	//! Replace the plug-in's settings in Stellarium's configuration file
 	//! with the default values and re-load them.
@@ -115,14 +114,6 @@ public:
 	//! values.
 	//! @see saveSettings(), restoreSettings()
 	void loadSettings();
-
-	//! Save the plug-in's settings to the configuration file.
-	//! @warning textColor and lineColor are not saved, probably because
-	//! they can't be changed by the user in-program.
-	//! @todo find a way to save color values without "rounding drift"
-	//! (this is especially important for restoring default color values).
-	//! @see loadSettings(), restoreSettings()
-	void saveSettings();
 
 public slots:
 	void enableAngleMeasure(bool b);

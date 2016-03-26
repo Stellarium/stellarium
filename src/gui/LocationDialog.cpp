@@ -43,6 +43,7 @@
 
 LocationDialog::LocationDialog(QObject* parent) : StelDialog(parent), isEditingNew(false)
 {
+	dialogName = "Location";
 	ui = new Ui_locationDialogForm;
 }
 
@@ -78,8 +79,14 @@ void LocationDialog::createDialogContent()
 	// Init the SpinBox entries
 	ui->longitudeSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 	ui->longitudeSpinBox->setPrefixType(AngleSpinBox::Longitude);
+	ui->longitudeSpinBox->setMinimum(-180.0, true);
+	ui->longitudeSpinBox->setMaximum( 180.0, true);
+	ui->longitudeSpinBox->setWrapping(true);
 	ui->latitudeSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 	ui->latitudeSpinBox->setPrefixType(AngleSpinBox::Latitude);
+	ui->latitudeSpinBox->setMinimum(-90.0, true);
+	ui->latitudeSpinBox->setMaximum( 90.0, true);
+	ui->latitudeSpinBox->setWrapping(false);
 
 	QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
 	proxyModel->setSourceModel((QAbstractItemModel*)StelApp::getInstance().getLocationMgr().getModelAll());
@@ -99,14 +106,15 @@ void LocationDialog::createDialogContent()
 
 	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
 	connect(ui->citiesListView, SIGNAL(clicked(const QModelIndex&)),
-	        this, SLOT(setPositionFromList(const QModelIndex&)));
+		this, SLOT(setPositionFromList(const QModelIndex&)));
 
 	// Connect all the QT signals
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->mapLabel, SIGNAL(positionChanged(double, double)), this, SLOT(setPositionFromMap(double, double)));
 
 	connect(ui->addLocationToListPushButton, SIGNAL(clicked()), this, SLOT(addCurrentLocationToList()));
-	connect(ui->deleteLocationFromListPushButton, SIGNAL(clicked()), this, SLOT(deleteCurrentLocationFromList()));	
+	connect(ui->deleteLocationFromListPushButton, SIGNAL(clicked()), this, SLOT(deleteCurrentLocationFromList()));
 	connect(ui->resetListPushButton, SIGNAL(clicked()), this, SLOT(resetCompleteList()));
 	connect(ui->countryNameComboBox, SIGNAL(activated(const QString &)), this, SLOT(filterSitesByCountry()));
 
@@ -128,7 +136,7 @@ void LocationDialog::createDialogContent()
 	connect(ui->pushButtonReturnToDefault, SIGNAL(clicked()), core, SLOT(returnToDefaultLocation()));
 
 	connectEditSignals();
-	
+
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateFromProgram(StelLocation)));
 
 	ui->citySearchLineEdit->setFocus();
@@ -139,11 +147,11 @@ void LocationDialog::updateFromProgram(const StelLocation& currentLocation)
 {
 	if (!dialog->isVisible())
 		return;
-	
+
 	StelCore* stelCore = StelApp::getInstance().getCore();
 
 	isEditingNew = false;
-	
+
 	// Check that the use as default check box needs to be updated
 	// Move to setFieldsFromLocation()? --BM?
 	const bool b = currentLocation.getID() == stelCore->getDefaultLocationID();
@@ -195,7 +203,7 @@ void LocationDialog::connectEditSignals()
 }
 
 void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
-{	
+{
 	// Deactivate edit signals
 	disconnectEditSignals();
 
@@ -228,7 +236,7 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 
 	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 	PlanetP p = ssm->searchByEnglishName(loc.planetName);
-	LandscapeMgr* ls = GETSTELMODULE(LandscapeMgr);	
+	LandscapeMgr* ls = GETSTELMODULE(LandscapeMgr);
 	if (ls->getFlagAtmosphereAutoEnable())
 	{
 		if (loc.planetName != StelApp::getInstance().getCore()->getCurrentLocation().planetName)
@@ -272,6 +280,8 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 			pixmap = QPixmap(path);
 		}
 	}
+	StelCore * core = StelApp::getInstance().getCore();
+	pixmap.setDevicePixelRatio(core->getCurrentStelProjectorParams().devicePixelsPerPixel);
 	ui->mapLabel->setPixmap(pixmap);
 	// For caching
 	lastPlanet = loc.planetName;
@@ -307,7 +317,7 @@ void LocationDialog::populatePlanetList()
 void LocationDialog::populateCountryList()
 {
 	Q_ASSERT(ui->countryNameComboBox);
-	
+
 	QComboBox* countries = ui->countryNameComboBox;
 	QStringList countryNames(StelLocaleMgr::getAllCountryNames());
 
@@ -348,7 +358,7 @@ StelLocation LocationDialog::locationFromFields() const
 		loc.country = QString();//As returned by QComboBox::currentText()
 	else
 		loc.country = ui->countryNameComboBox->itemData(index).toString();
-	
+
 	return loc;
 }
 
@@ -525,7 +535,7 @@ void LocationDialog::deleteCurrentLocationFromList()
 void LocationDialog::updateDefaultLocationControls(bool currentIsDefault)
 {
 	ui->useAsDefaultLocationCheckBox->setChecked(currentIsDefault);
-	ui->useAsDefaultLocationCheckBox->setEnabled(!currentIsDefault);	
+	ui->useAsDefaultLocationCheckBox->setEnabled(!currentIsDefault);
 }
 
 // called when the user clicks on the IP Query button

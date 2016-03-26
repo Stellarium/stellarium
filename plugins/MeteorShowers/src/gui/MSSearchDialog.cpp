@@ -30,6 +30,7 @@ MSSearchDialog::MSSearchDialog(MeteorShowersMgr* mgr)
 	: m_mgr(mgr)
 	, m_ui(new Ui_MSSearchDialog)
 {
+	dialogName = "MeteorShowersSearch";
 }
 
 MSSearchDialog::~MSSearchDialog()
@@ -73,6 +74,7 @@ void MSSearchDialog::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	connect(m_ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(m_ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(m_ui->searchButton, SIGNAL(clicked()), this, SLOT(checkDates()));
 

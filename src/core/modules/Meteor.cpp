@@ -164,7 +164,7 @@ bool Meteor::update(double deltaTime)
 		return false;
 	}
 
-	if (m_position[2] < m_finalZ)
+	if (!m_core->getRealTimeSpeed() || m_position[2] < m_finalZ)
 	{
 		// burning has stopped so magnitude fades out
 		// assume linear fade out
