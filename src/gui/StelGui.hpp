@@ -105,6 +105,8 @@ public:
 
 	virtual bool getVisible() const;
 
+	virtual bool getAstroCalcVisible();
+
 	virtual bool isCurrentlyUsed() const;
 	
 	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags);
@@ -203,6 +205,11 @@ private:
 
 	// Currently used StelStyle
 	StelStyle currentStelStyle;
+
+#ifndef DISABLE_SCRIPTING
+	// We use a QStringList to save the user-configured buttons while script is running, and restore them later.
+	QStringList scriptSaveSpeedbuttons;
+#endif
 };
 
 #else // NO_GUI

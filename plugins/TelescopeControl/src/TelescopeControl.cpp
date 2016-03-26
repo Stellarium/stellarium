@@ -232,7 +232,7 @@ void TelescopeControl::deinit()
 	while(iterator != telescopeServerProcess.constEnd())
 	{
 		int slotNumber = iterator.key();
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
 		telescopeServerProcess[slotNumber]->close();
 #else
 		telescopeServerProcess[slotNumber]->terminate();
@@ -263,10 +263,7 @@ void TelescopeControl::draw(StelCore* core)
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 	sPainter.setFont(labelFont);
-	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
-	reticleTexture->bind();
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+	reticleTexture->bind();	
 	foreach (const TelescopeClientP& telescope, telescopeClients)
 	{
 		if (telescope->isConnected() && telescope->hasKnownPosition())
@@ -287,8 +284,12 @@ void TelescopeControl::draw(StelCore* core)
 				}
 				if (reticleFader.getInterstate() >= 0)
 				{
+					glEnable(GL_TEXTURE_2D);
+					glEnable(GL_BLEND);
+					glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 					sPainter.setColor(reticleColor[0], reticleColor[1], reticleColor[2], reticleFader.getInterstate());
 					sPainter.drawSprite2dMode(XY[0],XY[1],15.f);
+					glDisable(GL_TEXTURE_2D);
 				}
 				if (labelFader.getInterstate() >= 0)
 				{
@@ -626,7 +627,7 @@ void TelescopeControl::loadConfiguration()
 	setFlagTelescopeCircles(settings->value("flag_telescope_circles", true).toBool());
 
 	//Load font size
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
 	setFontSize(settings->value("telescope_labels_font_size", 13).toInt()); //Windows Qt bug workaround
 #else
 	setFontSize(settings->value("telescope_labels_font_size", 12).toInt());
@@ -867,7 +868,7 @@ void TelescopeControl::loadTelescopes()
 				continue;
 			}
 
-			if(portSerial.isEmpty() || !portSerial.startsWith(SERIAL_PORT_PREFIX))
+			if(portSerial.isEmpty())
 			{
 				qDebug() << "TelescopeControl: Unable to load telescope: No valid serial port specified at slot" << key;
 				map.remove(key);
@@ -1247,15 +1248,11 @@ bool TelescopeControl::startServerAtSlot(int slotNumber, QString deviceModelName
 			return false;
 		}
 
-#ifdef Q_OS_WIN32
-		QString serialPortName;
-		if(portSerial.right(portSerial.size() - SERIAL_PORT_PREFIX.size()).toInt() > 9)
-			serialPortName = "\\\\.\\" + portSerial;//"\\.\COMxx", not sure if it will work
-		else
-			serialPortName = portSerial;
+#ifdef Q_OS_WIN
+		QString serialPortName = "\\\\.\\" + portSerial;
 #else
 		QString serialPortName = portSerial;
-#endif //Q_OS_WIN32
+#endif //Q_OS_WIN
 		QStringList serverArguments;
 		serverArguments << QString::number(portTCP) << serialPortName;
 		if(useTelescopeServerLogs)
@@ -1285,11 +1282,11 @@ bool TelescopeControl::stopServerAtSlot(int slotNumber)
 		return false;
 
 	//Stop/close the process
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
 	telescopeServerProcess[slotNumber]->close();
 #else
 	telescopeServerProcess[slotNumber]->terminate();
-#endif //Q_OS_WIN32
+#endif //Q_OS_WIN
 	telescopeServerProcess[slotNumber]->waitForFinished();
 
 	delete telescopeServerProcess[slotNumber];

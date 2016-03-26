@@ -796,6 +796,11 @@ float LandscapeMgr::getAtmosphereAverageLuminance() const
 	return atmosphere->getAverageLuminance();
 }
 
+// Override auto-computed luminance. Only use when you know what you are doing, and don't forget to unfreeze the average by calling this function with a negative value.
+void LandscapeMgr::setAtmosphereAverageLuminance(const float overrideLum)
+{
+	atmosphere->setAverageLuminance(overrideLum);
+}
 
 Landscape* LandscapeMgr::createFromFile(const QString& landscapeFile, const QString& landscapeId)
 {

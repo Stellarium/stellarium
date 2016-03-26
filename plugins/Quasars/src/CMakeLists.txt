@@ -1,23 +1,23 @@
 INCLUDE_DIRECTORIES(
-    .
-    gui
-    ${CMAKE_BINARY_DIR}/plugins/Quasars/src
-    ${CMAKE_BINARY_DIR}/plugins/Quasars/src/gui
+     .
+     gui
+     ${CMAKE_BINARY_DIR}/plugins/Quasars/src
+     ${CMAKE_BINARY_DIR}/plugins/Quasars/src/gui
 )
 
 LINK_DIRECTORIES(${BUILD_DIR}/src)
 
 SET(Quasars_SRCS
-    Quasars.hpp
-    Quasars.cpp
-    Quasar.hpp
-    Quasar.cpp
-    gui/QuasarsDialog.hpp
-    gui/QuasarsDialog.cpp
+     Quasars.hpp
+     Quasars.cpp
+     Quasar.hpp
+     Quasar.cpp
+     gui/QuasarsDialog.hpp
+     gui/QuasarsDialog.cpp
 )
 
 SET(QuasarsDialog_UIS
-    gui/quasarsDialog.ui
+     gui/quasarsDialog.ui
 )
 
 QT5_WRAP_UI(QuasarsDialog_UIS_H ${QuasarsDialog_UIS})

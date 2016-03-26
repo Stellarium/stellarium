@@ -34,8 +34,8 @@ class SimbadLookupReply : public QObject
 	Q_OBJECT
 	Q_ENUMS(SimbadLookupStatus)
 
-public:
 	friend class SimbadSearcher;
+public:
 
 	//! Possible status for a simbad query.
 	enum SimbadLookupStatus

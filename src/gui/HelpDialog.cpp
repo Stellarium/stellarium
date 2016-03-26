@@ -53,6 +53,7 @@
 HelpDialog::HelpDialog(QObject* parent)
 	: StelDialog(parent)
 {
+	dialogName = "Help";
 	ui = new Ui_helpDialogForm;
 }
 
@@ -86,6 +87,7 @@ void HelpDialog::createDialogContent()
 	ui->stackedWidget->setCurrentIndex(0);
 	ui->stackListWidget->setCurrentRow(0);
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 #ifdef Q_OS_WIN
 	//Kinetic scrolling for tablet pc and pc
@@ -268,13 +270,13 @@ void HelpDialog::updateText(void)
 		     << "Simon Parzer" << "Peter Neubauer" << "Andrei Borza" << "Florian Schaukowitsch"
 		     << "Allan Johnson" << "Felix Zeltner" << "Paolo Cancedda" << "Ross Mitchell"
 		     << "David Baucum" << "Maciej Serylak" << "Adriano Steffler" << "Sibi Antony"
-		     << "Tony Furr" << "misibacsi" << "Pavel Klimenko";
+		     << "Tony Furr" << "misibacsi" << "Pavel Klimenko" << "Rumen G. Bogdanovski";
 	contributors.sort();
 
 	// populate About tab
 	newHtml = "<h1>" + StelUtils::getApplicationName() + "</h1>";
 	// Note: this legal notice is not suitable for traslation
-	newHtml += "<h3>Copyright &copy; 2000-2014 Stellarium Developers</h3>";
+	newHtml += QString("<h3>Copyright &copy; %1 Stellarium Developers</h3>").arg(COPYRIGHT_YEARS);
 	newHtml += "<p>This program is free software; you can redistribute it and/or ";
 	newHtml += "modify it under the terms of the GNU General Public License ";
 	newHtml += "as published by the Free Software Foundation; either version 2 ";
@@ -293,6 +295,7 @@ void HelpDialog::updateText(void)
 	newHtml += "<h3>" + q_("Developers").toHtmlEscaped() + "</h3><ul>";
 	newHtml += "<li>" + q_("Project coordinator & lead developer: %1").arg(QString("Fabien Ch%1reau").arg(QChar(0x00E9))).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Doc author/developer: %1").arg(QString("Matthew Gates")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Graphic/other designer: %1").arg(QString("Johan Meuris")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Bogdan Marinov")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Timothy Reaves")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Guillaume Ch%1reau").arg(QChar(0x00E9))).toHtmlEscaped() + "</li>";
@@ -304,8 +307,7 @@ void HelpDialog::updateText(void)
 	newHtml += "<li>" + q_("Continuous Integration: %1").arg(QString("Hans Lambermont")).toHtmlEscaped() + "</li>";	
 	newHtml += "<li>" + q_("Tester: %1").arg(QString("Khalid AlAjaji")).toHtmlEscaped() + "</li></ul>";
 	newHtml += "<h3>" + q_("Former Developers").toHtmlEscaped() + "</h3>";
-	newHtml += "<p>"  + q_("Several people have made significant contributions, but are no longer active. Their work has made a big difference to the project:").toHtmlEscaped() + "</p><ul>";
-	newHtml += "<li>" + q_("Graphic/other designer: %1").arg(QString("Johan Meuris")).toHtmlEscaped() + "</li>";
+	newHtml += "<p>"  + q_("Several people have made significant contributions, but are no longer active. Their work has made a big difference to the project:").toHtmlEscaped() + "</p><ul>";	
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Johannes Gajdosik")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Rob Spearman")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Andr%1s Mohari").arg(QChar(0x00E1))).toHtmlEscaped() + "</li>";

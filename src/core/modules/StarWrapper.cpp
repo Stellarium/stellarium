@@ -107,44 +107,38 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		const QString addSciName = StarMgr::getSciAdditionalName(s->getHip());
 		const QString varSciName = StarMgr::getGcvsName(s->getHip());
 		const QString crossIndexData = StarMgr::getCrossIndexDesignations(s->getHip());
-		QStringList sciNames;
+		QStringList designations;
 		if (!sciName.isEmpty())
-			sciNames.append(sciName);
+			designations.append(sciName);
 		if (!addSciName.isEmpty())
-			sciNames.append(addSciName);
+			designations.append(addSciName);
 		if (!varSciName.isEmpty() && varSciName!=addSciName && varSciName!=sciName)
-			sciNames.append(varSciName);
-		const QString sciNamesList = sciNames.join(" - ");
+			designations.append(varSciName);
 
-		bool nameWasEmpty=true;
+		QString hip;
+		if (s->hasComponentID())
+			hip = QString("HIP %1 %2").arg(s->getHip()).arg(StarMgr::convertToComponentIds(s->getComponentIds()));
+		else
+			hip = QString("HIP %1").arg(s->getHip());
+
+		designations.append(hip);
+
+		if (!crossIndexData.isEmpty())
+			designations.append(crossIndexData);
+
+		const QString designationsList = designations.join(" - ");
+
 		if (flags&Name)
 		{
-			if (!commonNameI18.isEmpty() || !sciNamesList.isEmpty())
-			{
-				if (!commonNameI18.isEmpty())
-					oss << commonNameI18;
+			if (!commonNameI18.isEmpty())
+				oss << commonNameI18;
 
-				if (!commonNameI18.isEmpty() && !sciNamesList.isEmpty())
-					oss << " (" << sciNamesList << ")";
-
-				if (commonNameI18.isEmpty() && !sciNamesList.isEmpty())
-					oss << sciNamesList;
-
-				nameWasEmpty=false;
-			}
+			if (!commonNameI18.isEmpty() && !designationsList.isEmpty() && flags&CatalogNumber)
+				oss << "<br>";
 		}
-		if ((flags&CatalogNumber) && (flags&Name) && !nameWasEmpty)
-			oss << " - ";
 
-		if (flags&CatalogNumber || (nameWasEmpty && (flags&Name)))
-		{
-			oss << "HIP " << s->getHip();
-			if (s->getComponentIds())
-				oss << " " << StarMgr::convertToComponentIds(s->getComponentIds());
-
-			if (!crossIndexData.isEmpty())
-				oss << " (" << crossIndexData << ")";
-		}
+		if (flags&CatalogNumber)
+			oss << designationsList;
 
 		if ((flags&Name) || (flags&CatalogNumber))
 			oss << "</h2>";

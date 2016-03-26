@@ -1,28 +1,28 @@
 INCLUDE_DIRECTORIES(
-	.
-	gui
-	${CMAKE_BINARY_DIR}/plugins/Oculars/src
+     .
+     gui
+     ${CMAKE_BINARY_DIR}/plugins/Oculars/src
 )
 
 LINK_DIRECTORIES(/src)
 
 SET(Oculars_SRCS
-  CCD.hpp
-  CCD.cpp
-  Lens.hpp
-  Lens.cpp
-  Ocular.hpp
-  Ocular.cpp
-  Oculars.hpp
-  Oculars.cpp
-  Telescope.hpp
-  Telescope.cpp
-  gui/OcularDialog.hpp
-  gui/OcularDialog.cpp
-  gui/PropertyBasedTableModel.hpp
-  gui/PropertyBasedTableModel.cpp
-  gui/OcularsGuiPanel.hpp
-  gui/OcularsGuiPanel.cpp
+     CCD.hpp
+     CCD.cpp
+     Lens.hpp
+     Lens.cpp
+     Ocular.hpp
+     Ocular.cpp
+     Oculars.hpp
+     Oculars.cpp
+     Telescope.hpp
+     Telescope.cpp
+     gui/OcularDialog.hpp
+     gui/OcularDialog.cpp
+     gui/PropertyBasedTableModel.hpp
+     gui/PropertyBasedTableModel.cpp
+     gui/OcularsGuiPanel.hpp
+     gui/OcularsGuiPanel.cpp
 )
 
 SET(Oculars_RES ../resources/Oculars.qrc)
@@ -30,7 +30,7 @@ QT5_ADD_RESOURCES(Oculars_RES_CXX ${Oculars_RES})
 
 ################# compiles .ui files ############
 SET(Oculars_UIS
-  gui/ocularDialog.ui
+     gui/ocularDialog.ui
 )
 QT5_WRAP_UI(Oculars_UIS_H ${Oculars_UIS})
 

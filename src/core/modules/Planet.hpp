@@ -177,7 +177,7 @@ public:
 	//! Get duration of sidereal day
 	double getSiderealDay(void) const {return re.period;}
 	//! Get duration of sidereal year
-	// GZ: made that virtual for Comets.
+	// must be virtual for Comets.
 	virtual double getSiderealPeriod(void) const { return re.siderealPeriod; }
 	//! Get duration of mean solar day
 	double getMeanSolarDay(void) const;
@@ -291,6 +291,8 @@ public:
 	static void setOrbitColor(const Vec3f& oc) {orbitColor = oc;}
 	static const Vec3f& getOrbitColor() {return orbitColor;}
 
+	static bool permanentDrawingOrbits;
+
 	//! Return the list of planets which project some shadow on this planet
 	QVector<const Planet*> getCandidatesForShadow() const;
 	
@@ -375,6 +377,7 @@ protected:
 		int shadowCount;
 		int shadowData;
 		int sunInfo;
+		int skyBrightness;
 		
 		void initLocations(QOpenGLShaderProgram*);
 	};

@@ -28,6 +28,7 @@
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
 #include "Planet.hpp"
+#include "StelGui.hpp"
 
 #include <QFont>
 
@@ -166,10 +167,10 @@ public slots:
 	//! Get the current value of the flag which determines if planet orbits are drawn or hidden.
 	bool getFlagOrbits() const {return flagOrbits;}
 
-	//! Set flag which determines if planet markers are drawn or hidden.
-	void setFlagMarkers(bool b) { flagMarker=b; }
-	//! Get the current value of the flag which determines if planet markers are drawn or hidden.
-	bool getFlagMarkers() const {return flagMarker;}
+	//! Set flag which determines if planet pointers are drawn or hidden.
+	void setFlagPointers(bool b) { flagPointer=b; }
+	//! Get the current value of the flag which determines if planet pointers are drawn or hidden.
+	bool getFlagPointers() const {return flagPointer;}
 
 	//! Set flag which determines if the light travel time calculation is used or not.
 	void setFlagLightTravelTime(bool b);
@@ -391,6 +392,9 @@ private:
 
 	void recreateTrails();
 
+	//! Set flag who enable display a permanent orbits for objects or not
+	void setFlagPermanentOrbits(bool b);
+
 	//! Used to count how many planets actually need shadow information
 	int shadowPlanetCount;
 	PlanetP sun;
@@ -425,15 +429,17 @@ private:
 
 	//! The selection pointer texture.
 	StelTextureSP texPointer;
+	StelTextureSP texCircle;                    // The symbolic circle texture
 
 	bool flagShow;
-	bool flagMarker;
+	bool flagPointer;
 	bool flagNativeNames;
 	bool flagTranslatedNames;
 	bool flagIsolatedTrails;
 	bool flagIsolatedOrbits;
 
 	class TrailGroup* allTrails;
+	StelGui* gui;
 	LinearFader trailFader;
 	Vec3f trailColor;
 	Vec3f pointerColor;

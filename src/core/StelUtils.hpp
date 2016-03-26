@@ -613,6 +613,15 @@ namespace StelUtils
 	//! @return sigma in seconds
 	double getDeltaTStandardError(const double jDay);
 
+	//! Get value of the Moon fluctuation
+	//! Source: The Rotation of the Earth, and the Secular Accelerations of the Sun, Moon and Planets
+	//! Spencer Jones, H.
+	//! Monthly Notices of the Royal Astronomical Society, 99 (1939), 541-558
+	//! 1939MNRAS..99..541S [http://adsabs.harvard.edu/abs/1939MNRAS..99..541S]
+	//! @param jDay the JD
+	//! @return fluctuation in seconds
+	double getMoonFluctuation(const double jDay);
+
 	//! Sign function from http://stackoverflow.com/questions/1903954/is-there-a-standard-sign-function-signum-sgn-in-c-c
 	template <typename T> int sign(T val)
 	{

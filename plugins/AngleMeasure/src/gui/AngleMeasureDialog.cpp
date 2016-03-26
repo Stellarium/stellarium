@@ -29,6 +29,7 @@
 AngleMeasureDialog::AngleMeasureDialog()
 	: am(NULL)
 {
+	dialogName = "AngleMeasure";
 	ui = new Ui_angleMeasureDialog();
 }
 
@@ -60,6 +61,7 @@ void AngleMeasureDialog::createDialogContent()
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	ui->useDmsFormatCheckBox->setChecked(am->isDmsFormat());
 	connect(ui->useDmsFormatCheckBox, SIGNAL(toggled(bool)), am, SLOT(useDmsFormat(bool)));
@@ -76,7 +78,6 @@ void AngleMeasureDialog::createDialogContent()
 	ui->azAltEndOnSkyCheckBox->setChecked(am->isHorizontalEndSkylinked());
 	connect(ui->azAltEndOnSkyCheckBox, SIGNAL(toggled(bool)), am, SLOT(showHorizontalEndSkylinked(bool)));
 
-	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveAngleMeasureSettings()));
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(resetAngleMeasureSettings()));
 
 	setAboutHtml();
@@ -116,11 +117,6 @@ void AngleMeasureDialog::setAboutHtml(void)
 	}
 
 	ui->aboutTextBrowser->setHtml(html);
-}
-
-void AngleMeasureDialog::saveAngleMeasureSettings()
-{
-	am->saveSettings();
 }
 
 void AngleMeasureDialog::resetAngleMeasureSettings()

@@ -55,11 +55,31 @@ Vec3f Nebula::galaxyColor = Vec3f(1.0,0.2,0.2);
 Vec3f Nebula::radioGalaxyColor = Vec3f(0.3,0.3,0.3);
 Vec3f Nebula::activeGalaxyColor = Vec3f(0.8,0.8,0.1);
 Vec3f Nebula::interactingGalaxyColor = Vec3f(0.8,0.8,0.1);
-Vec3f Nebula::brightNebulaColor = Vec3f(0.1,1.0,0.1);
+Vec3f Nebula::quasarColor = Vec3f(1.0,0.2,0.2);
+Vec3f Nebula::nebulaColor = Vec3f(0.1,1.0,0.1);
+Vec3f Nebula::planetaryNebulaColor = Vec3f(0.1,1.0,0.1);
+Vec3f Nebula::reflectionNebulaColor = Vec3f(0.1,1.0,0.1);
+Vec3f Nebula::bipolarNebulaColor = Vec3f(0.1,1.0,0.1);
+Vec3f Nebula::emissionNebulaColor = Vec3f(0.1,1.0,0.1);
 Vec3f Nebula::darkNebulaColor = Vec3f(0.3,0.3,0.3);
 Vec3f Nebula::hydrogenRegionColor = Vec3f(0.1,1.0,0.1);
 Vec3f Nebula::supernovaRemnantColor = Vec3f(0.1,1.0,0.1);
+Vec3f Nebula::interstellarMatterColor = Vec3f(0.1,1.0,0.1);
+Vec3f Nebula::clusterWithNebulosityColor = Vec3f(0.1,1.0,0.1);
 Vec3f Nebula::clusterColor = Vec3f(1.0,1.0,0.1);
+Vec3f Nebula::openClusterColor = Vec3f(1.0,1.0,0.1);
+Vec3f Nebula::globularClusterColor = Vec3f(1.0,1.0,0.1);
+Vec3f Nebula::stellarAssociationColor = Vec3f(1.0,1.0,0.1);
+Vec3f Nebula::starCloudColor = Vec3f(1.0,1.0,0.1);
+Vec3f Nebula::emissionObjectColor = Vec3f(1.0,1.0,0.1);
+Vec3f Nebula::blLacObjectColor = Vec3f(1.0,1.0,0.1);
+Vec3f Nebula::blazarColor = Vec3f(1.0,1.0,0.1);
+Vec3f Nebula::molecularCloudColor = Vec3f(1.0,1.0,0.1);
+Vec3f Nebula::youngStellarObjectColor = Vec3f(1.0,1.0,0.1);
+Vec3f Nebula::possibleQuasarColor = Vec3f(1.0,0.2,0.2);
+Vec3f Nebula::possiblePlanetaryNebulaColor = Vec3f(1.0,1.0,0.1);
+Vec3f Nebula::protoplanetaryNebulaColor = Vec3f(1.0,1.0,0.1);
+Vec3f Nebula::starColor = Vec3f(1.0,1.0,0.1);
 bool Nebula::flagUsageTypeFilter = false;
 Nebula::CatalogGroup Nebula::catalogFilters = Nebula::CatalogGroup(0);
 Nebula::TypeGroup Nebula::typeFilters = Nebula::TypeGroup(Nebula::AllTypes);
@@ -446,48 +466,88 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 			color=activeGalaxyColor;
 			break;
 		case NebQSO:
+			Nebula::texGalaxy->bind();
+			color=quasarColor;
+			break;
 		case NebPossQSO:
+			Nebula::texGalaxy->bind();
+			color=possibleQuasarColor;
+			break;
 		case NebBLL:
+			Nebula::texGalaxy->bind();
+			color=blLacObjectColor;
+			break;
 		case NebBLA:
 			Nebula::texGalaxy->bind();
+			color=blazarColor;
 			break;
 		case NebRGx:
 			Nebula::texGalaxy->bind();
 			color=radioGalaxyColor;
 			break;
 		case NebOc:
+			Nebula::texOpenCluster->bind();
+			color=openClusterColor;
+			break;
 		case NebSA:
+			Nebula::texOpenCluster->bind();
+			color=stellarAssociationColor;
+			break;
 		case NebSC:
+			Nebula::texOpenCluster->bind();
+			color=starCloudColor;
+			break;
 		case NebCl:
 			Nebula::texOpenCluster->bind();
 			color=clusterColor;
 			break;
 		case NebGc:
 			Nebula::texGlobularCluster->bind();
-			color=clusterColor;
+			color=globularClusterColor;
 			break;
 		case NebN:
+			Nebula::texDiffuseNebula->bind();
+			color=nebulaColor;
+			break;
 		case NebHII:
-		case NebMolCld:
-		case NebYSO:
 			Nebula::texDiffuseNebula->bind();
 			color=hydrogenRegionColor;
 			break;
+		case NebMolCld:
+			Nebula::texDiffuseNebula->bind();
+			color=molecularCloudColor;
+			break;
+		case NebYSO:
+			Nebula::texDiffuseNebula->bind();
+			color=youngStellarObjectColor;
+			break;
 		case NebRn:		
+			Nebula::texDiffuseNebula->bind();
+			color=reflectionNebulaColor;
+			break;
 		case NebSNR:
 			Nebula::texDiffuseNebula->bind();
 			color=supernovaRemnantColor;
 			break;
 		case NebBn:
+			Nebula::texDiffuseNebula->bind();
+			color=bipolarNebulaColor;
+			break;
 		case NebEn:
 			Nebula::texDiffuseNebula->bind();
-			color=brightNebulaColor;
+			color=emissionNebulaColor;
 			break;
 		case NebPn:
+			Nebula::texPlanetaryNebula->bind();
+			color=planetaryNebulaColor;
+			break;
 		case NebPossPN:
+			Nebula::texPlanetaryNebula->bind();
+			color=possiblePlanetaryNebulaColor;
+			break;
 		case NebPPN:
 			Nebula::texPlanetaryNebula->bind();
-			color=brightNebulaColor;
+			color=protoplanetaryNebulaColor;
 			break;
 		case NebDn:		
 			Nebula::texDarkNebula->bind();
@@ -495,7 +555,11 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 			break;
 		case NebCn:
 			Nebula::texOpenClusterWithNebulosity->bind();
-			color=clusterColor;
+			color=clusterWithNebulosityColor;
+			break;
+		case NebEMO:
+			Nebula::texCircle->bind();
+			color=emissionObjectColor;
 			break;
 		default:
 			Nebula::texCircle->bind();
@@ -506,27 +570,31 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 		col = Vec3f(0.f,0.f,0.f);
 	sPainter.setColor(col[0], col[1], col[2], 1);
 
-	//Q_ASSERT(majorAxisSize>0.); // THIS ASSERT FAILS. Catalog error?
-	if (drawHintProportional && (majorAxisSize>0.))
+	float size = 6.0f;
+	float scaledSize = 0.0f;
+	if (drawHintProportional)
 	{
-		float size = majorAxisSize *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
-		// Rotation looks good only for galaxies.
-		if ((nType <=NebQSO) || (nType==NebBLA) || (nType==NebBLL) )
-		{
-			// The rotation angle in drawSprite2dMode() is relative to screen. Make sure to compute correct angle from 90+orientationAngle.
-			// Find an on-screen direction vector from a point offset somewhat in declination from our object.
-			Vec3d XYZrel(XYZ);
-			XYZrel[2]*=0.99;
-			Vec3d XYrel;
-			sPainter.getProjector()->project(XYZrel, XYrel);
-			float screenAngle=atan2(XYrel[1]-XY[1], XYrel[0]-XY[0]);
-			sPainter.drawSprite2dMode(XY[0], XY[1], qMax(6.0f,size), screenAngle*180./M_PI + orientationAngle);
-		}
-		else	// no galaxy
-			sPainter.drawSprite2dMode(XY[0], XY[1], qMax(6.0f,size));
+		if (majorAxisSize>0.)
+			scaledSize = majorAxisSize *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
+		else
+			scaledSize = minorAxisSize *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
 	}
-	else // not proportional or size unknown
-		sPainter.drawSprite2dMode(XY[0], XY[1], 6.0f);
+
+	// Rotation looks good only for galaxies.
+	if ((nType <=NebQSO) || (nType==NebBLA) || (nType==NebBLL) )
+	{
+		// The rotation angle in drawSprite2dMode() is relative to screen. Make sure to compute correct angle from 90+orientationAngle.
+		// Find an on-screen direction vector from a point offset somewhat in declination from our object.
+		Vec3d XYZrel(XYZ);
+		XYZrel[2]*=0.99;
+		Vec3d XYrel;
+		sPainter.getProjector()->project(XYZrel, XYrel);
+		float screenAngle=atan2(XYrel[1]-XY[1], XYrel[0]-XY[0]);
+		sPainter.drawSprite2dMode(XY[0], XY[1], qMax(size, scaledSize), screenAngle*180./M_PI + orientationAngle);
+	}
+	else	// no galaxy
+		sPainter.drawSprite2dMode(XY[0], XY[1], qMax(size, scaledSize));
+
 }
 
 void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
@@ -897,11 +965,17 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 				rtx << qc_("star is located on the corner of the illuminated nebulosity", "Reflection Nebulae Classification");
 				break;
 			case 3:
+			{
+				// TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
 				rtx << qc_("star is located outside the illuminated peculiar nebulosity", "Reflection Nebulae Classification");
 				break;
+			}
 			case 4:
+			{
+				// TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
 				rtx << qc_("the illuminated peculiar nebulosity", "Reflection Nebulae Classification");
 				break;
+			}
 			default:
 				rtx << qc_("undocumented reflection nebulae", "Reflection Nebulae Classification");
 				break;
