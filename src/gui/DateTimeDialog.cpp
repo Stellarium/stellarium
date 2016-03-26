@@ -32,15 +32,14 @@
 #include <QLineEdit>
 
 DateTimeDialog::DateTimeDialog(QObject* parent) :
-  StelDialog(parent),
-  year(0),
-  month(0),
-  day(0),
-  hour(0),
-  minute(0),
-  second(0),
-  jd(0),
-  mjd(0)
+	StelDialog(parent),
+	year(0),
+	month(0),
+	day(0),
+	hour(0),
+	minute(0),
+	second(0),
+	jd(0)
 {
 	ui = new Ui_dateTimeDialogForm;
 	dialogName = "DateTime";
@@ -170,24 +169,19 @@ void DateTimeDialog::dayChanged(int newday)
 }
 void DateTimeDialog::hourChanged(int newhour)
 {
-	if ( hour != newhour )
-	{
-		valid( year, month, day, newhour, minute, second );
-	}
+	int delta = newhour - hour;
+	validJd(jd + delta/24.);
 }
 void DateTimeDialog::minuteChanged(int newminute)
 {
-	if ( minute != newminute )
-	{
-		valid( year, month, day, hour, newminute, second );
-	}
+	int delta = newminute - minute;
+	validJd(jd + delta/1440.);
+
 }
 void DateTimeDialog::secondChanged(int newsecond)
 {
-	if ( second != newsecond )
-	{
-		valid( year, month, day, hour, minute, newsecond );
-	}
+	int delta = newsecond - second;
+	validJd(jd + delta/86400.);
 }
 void DateTimeDialog::jdChanged(double njd)
 {
@@ -198,10 +192,8 @@ void DateTimeDialog::jdChanged(double njd)
 }
 void DateTimeDialog::mjdChanged(double nmjd)
 {
-	if ( mjd != nmjd)
-	{
-		validJd(2400000.5 + nmjd);
-	}
+	double delta = nmjd - getMjd();
+	validJd(jd + delta);
 }
 
 
@@ -221,16 +213,10 @@ void DateTimeDialog::pushToWidgets()
 	ui->spinner_month->setValue(month);
 	ui->spinner_day->setValue(day);
 	ui->spinner_hour->setValue(hour);
-	if (!ui->spinner_minute->hasFocus() || (ui->spinner_minute->value() == -1) || (ui->spinner_minute->value() == 60))
-	{
-		ui->spinner_minute->setValue(minute);
-	}
-	if (!ui->spinner_second->hasFocus() || (ui->spinner_second->value() == -1) || (ui->spinner_second->value() == 60))
-	{
-		ui->spinner_second->setValue(second);
-	}
+	ui->spinner_minute->setValue(minute);
+	ui->spinner_second->setValue(second);
 	ui->spinner_jd->setValue(jd);
-	ui->spinner_mjd->setValue(mjd);
+	ui->spinner_mjd->setValue(getMjd());
 	if (jd<2299161) // 1582-10-15
 		ui->dateTimeTab->setToolTip(q_("Date and Time in Julian calendar"));
 	else
@@ -249,7 +235,6 @@ void DateTimeDialog::setDateTime(double newJd)
 		StelUtils::getDateFromJulianDay(newJdC, &year, &month, &day);
 		StelUtils::getTimeFromJulianDay(newJdC, &hour, &minute, &second);
 		jd = newJd;
-		mjd = newJd-2400000.5;
 
 		pushToWidgets();
 	}
