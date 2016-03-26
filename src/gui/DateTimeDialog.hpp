@@ -78,8 +78,9 @@ private:
 	int minute;
 	int second;
 	double jd;
-	double mjd;
 	void pushToWidgets();
+	void setMjd(double mjd) { jd = 2400000.5 + mjd; }
+	double getMjd() { return jd - 2400000.5 ; }
 };
 
 #endif // _DATETIMEDIALOG_HPP_
