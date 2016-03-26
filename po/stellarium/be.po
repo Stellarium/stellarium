@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-03-18 00:42+0600\n"
-"PO-Revision-Date: 2016-02-19 08:39+0000\n"
+"PO-Revision-Date: 2016-03-26 01:48+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-03-18 05:21+0000\n"
-"X-Generator: Launchpad (build 17947)\n"
+"X-Launchpad-Export-Date: 2016-03-26 05:17+0000\n"
+"X-Generator: Launchpad (build 17967)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -1193,7 +1193,7 @@ msgid ""
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
-"Гэта крыху зьмененая вэрсія формулы МАС (1952), прынятая <em>Астранамічнымі "
+"Гэта крыху зьмененая вэрсія формулы МАЗ (1952), прынятая <em>Астранамічнымі "
 "эфэмэрыдамі</em> і<em>Канонам сонечных зацьменьняў</em>, напісаных Муке й "
 "Мэёсам (1983)."
 
@@ -1709,23 +1709,23 @@ msgstr "Сачыць за аб'ектам"
 
 #: src/core/StelMovementMgr.cpp:162
 msgid "Look towards East"
-msgstr ""
+msgstr "Паглядзець у напрамку Ўсходу"
 
 #: src/core/StelMovementMgr.cpp:163
 msgid "Look towards West"
-msgstr ""
+msgstr "Паглядзець у напрамку Захаду"
 
 #: src/core/StelMovementMgr.cpp:164
 msgid "Look towards North"
-msgstr ""
+msgstr "Паглядзець у напрамку Поўначы"
 
 #: src/core/StelMovementMgr.cpp:165
 msgid "Look towards South"
-msgstr ""
+msgstr "Паглядзець у напрамку Поўдня"
 
 #: src/core/StelMovementMgr.cpp:166
 msgid "Look towards Zenith"
-msgstr ""
+msgstr "Паглядзець у напрамку Зэніту"
 
 #: src/core/SimbadSearcher.cpp:56
 msgid "Network error"
@@ -1901,7 +1901,7 @@ msgstr "Клемэнс (1948)"
 
 #: src/gui/ConfigurationDialog.cpp:1354
 msgid "IAU (1952)"
-msgstr "МАС (1952)"
+msgstr "МАЗ (1952)"
 
 #: src/gui/ConfigurationDialog.cpp:1355
 msgid "Astronomical Ephemeris (1960)"
@@ -2651,7 +2651,7 @@ msgstr "Тып"
 #: src/gui/AstroCalcDialog.cpp:161
 #, qt-format
 msgid "Positions on %1"
-msgstr ""
+msgstr "Пазыцыі на %1"
 
 #: src/gui/AstroCalcDialog.cpp:252
 msgid "JD"
@@ -2671,7 +2671,7 @@ msgstr "1 дзень"
 
 #: src/gui/AstroCalcDialog.cpp:402
 msgid "5 days"
-msgstr ""
+msgstr "5 дзён"
 
 #: src/gui/AstroCalcDialog.cpp:403
 msgid "10 days"
@@ -2679,7 +2679,7 @@ msgstr "10 дзён"
 
 #: src/gui/AstroCalcDialog.cpp:404
 msgid "15 days"
-msgstr ""
+msgstr "15 дзён"
 
 #: src/gui/AstroCalcDialog.cpp:405
 msgid "30 days"
@@ -2687,7 +2687,7 @@ msgstr "30 дзён"
 
 #: src/gui/AstroCalcDialog.cpp:406
 msgid "60 days"
-msgstr ""
+msgstr "60 дзён"
 
 #: src/gui/AstroCalcDialog.cpp:454
 msgid "Solar system"
@@ -5247,7 +5247,7 @@ msgstr "Вышынмі й азімут (разьлічваюцца з поўна
 
 #: src/ui_viewDialog.h:1726
 msgid "Galactic Coordinates, System II (IAU 1958)."
-msgstr "Каляктычныя каардынаты, сыстэма II (МАС 1958)."
+msgstr "Каляктычныя каардынаты, сыстэма II (МАЗ 1958)."
 
 #: src/ui_viewDialog.h:1730
 msgid "Show celestial equator of J2000.0."
@@ -6141,7 +6141,7 @@ msgstr "Разьлічыць эфэмэрыды"
 
 #: src/ui_astroCalcDialog.h:388
 msgid "Cleanup ephemerides"
-msgstr ""
+msgstr "Ачысьціць эфэмэрыды"
 
 #: src/ui_astroCalcDialog.h:389
 msgid "Ephemeris"
@@ -9767,29 +9767,35 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
 msgid "Proper names"
-msgstr ""
+msgstr "Правільныя назвы"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid ""
 "In December 2015, the International Astronomical Union (IAU) has officially "
 "approved names for several exoplanets after a public vote."
 msgstr ""
+"У сьнежні 2015 г. міжнародны астранамічны зьвяз (МАЗ) пасьля грамадзкага "
+"галасаваньня афіцыйна зацьвердзіў назвы некалькіх экзаплянэт."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
 msgid ""
 "From the latin <em>Veritas</em>, truth. The ablative form means <em>where "
 "there is truth</em>."
 msgstr ""
+"З лаціны <em>Veritas</em> ­гэта праўда. Аблятыўная форма значыць <em>там, "
+"дзе праўда</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
 msgid ""
 "From the latin <em>Spes</em>, hope. The ablative form means <em>where there "
 "is hope</em>."
 msgstr ""
+"З лаціны <em>Spes</em> ­гэта надзея. Аблятыўная форма значыць <em>там, дзе "
+"надзея</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
 msgid "Musica is Latin for <em>music</em>."
-msgstr ""
+msgstr "Музыка, ад лацінскага <em>musica</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
 msgid ""
@@ -9797,44 +9803,55 @@ msgid ""
 "legend, his life was saved at sea by dolphins after attracting their "
 "attention by the playing of his kithara."
 msgstr ""
+"Арыён быў ґеніяльным паэтам і музыкам старажытнай Грэцыі. Паводле леґенды, "
+"дэльфіны ўратавалі ягонае жыцьцё на моры, калі ён прывабіў іх ігрой на "
+"кітары."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:188
 msgid "Fafnir was a Norse mythological dwarf who turned into a dragon."
-msgstr ""
+msgstr "Фафнір быў нарвэскім мітычным карлікам, які стаў драконам."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
 msgid ""
 "Orbitar is a contrived word paying homage to the space launch and orbital "
 "operations of NASA."
 msgstr ""
+"Арбітар — штучнае слова, якое аддае пашану запускам у космас і арбітальным "
+"апэрацыям НАСА."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:190
 msgid "Chalawan is a mythological crocodile king from a Thai folktale."
-msgstr ""
+msgstr "Чалаван — гэта мітычны кароль кракадзілаў з тайскага фальклёру."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
 msgid ""
 "Taphao Thong is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr ""
+"Тафао Тонґ ­— гэта адна з дзьвюх сясьцёр з тайскага эпасу пра Чалавана."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
 msgid ""
 "Taphao Kae is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr ""
+"Тафао Таэў ­— гэта адна з дзьвюх сясьцёр з тайскага эпасу пра Чалавана."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
 msgid ""
 "Helvetios is Celtic for <em>the Helvetian</em> and refers to the Celtic "
 "tribe that lived in Switzerland during antiquity."
 msgstr ""
+"Гельвэтыяс — гэта на лаціне <em>гельвэты</em>, кельцкае племя, якое жыло ў "
+"Швэйцарыі ў Сярэднявеччы."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid ""
 "Dimidium is Latin for <em>half</em>, referring to the planet's mass of at "
 "least half the mass of Jupiter."
 msgstr ""
+"Дымідыюм у перакладзе з лаціны — <em>палова</em>, зьвязана з тым, што маса "
+"плянэты ня менш за палову масы Юпітэра."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
 msgid ""
@@ -9842,6 +9859,9 @@ msgid ""
 "who proposed the heliocentric model of the solar system in his book <em>De "
 "revolutionibus orbium coelestium</em>."
 msgstr ""
+"Мікалай Капернік (1473-1543) — польскі астраном, які прапанаваў "
+"геліяцэнтрычную мадэль сонечнай сыстэмы ў кнізе em>De revolutionibus orbium "
+"coelestium</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
 msgid ""
@@ -9851,6 +9871,11 @@ msgid ""
 "satellites of Jupiter, and the reported the first telescopic observations of "
 "the phases of Venus, among other discoveries."
 msgstr ""
+"Ґалілеа Ґалілей (1564-1642) быў італійскім астораномам і фізыкам, якога "
+"часта называюць <em>бацькам назіральнай астраноміі</em> і <em>бацькам "
+"сучаснай фізыкі</em>. карыстаючыся тэлескопам, ён адкрыў чатыры найбуйнейшыя "
+"спадарожнікі Юпітэра, правёў першыя тэлескапічныя назіраньні фазаў Вэнэры й "
+"зрабіў іншыя адкрыцьці."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid ""
@@ -9859,6 +9884,9 @@ msgid ""
 "observations were critical to Kepler's formulation of his three laws of "
 "planetary motion."
 msgstr ""
+"Тыха Браге (1546-1601) быў дацкім астраномам і шляхціцам, які запісаў "
+"дакладныя астранамічныя назіраньні зорак і плянэт. Гэтыя назіраньні былі "
+"крытычнымі для фармуляваньня Кеплерам трох законаў руху плянэт."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
 msgid ""
@@ -9866,6 +9894,9 @@ msgid ""
 "maker who is often attributed with the invention of the refracting telescope "
 "in 1608."
 msgstr ""
+"Ганс Ліпэргей (1570-1619) — нямецкі й галяндзкі тачыльшчык лінзаў і выробца "
+"акуляраў, якому часта прыпісваюць стварэньне тэлескопа-рэфрактара ў 1608 "
+"годзе."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid ""
@@ -9873,6 +9904,9 @@ msgid ""
 "attributed with invention of the microscope, and more controversially with "
 "the invention of the telescope."
 msgstr ""
+"Яхарыяс Янсэн (1580я-1630я) быў галяндзкім пастаноўшчыкам відовішчаў, якому "
+"часта прыпісваюць вынаходніцтва мікраскопа, і, больш спрэчна, вынаходніцтва "
+"тэлескопа."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid ""
@@ -9880,6 +9914,9 @@ msgid ""
 "ethnographer, and translator, who is attributed with the first drawing of "
 "the Moon through telescopic observations."
 msgstr ""
+"Томас Гарыят (каля 1560-1621) быў анґельскім астраномам, матэматыкам, "
+"этноґрафам і перакладчыкам, якому прыпісваюць першыя зарысоўкі Месяца з "
+"дапамогай тэлескопа."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid ""
@@ -9887,6 +9924,9 @@ msgid ""
 "enshrine Amaterasu, the Shinto goddess of the Sun, born from the left eye of "
 "the god Izanagi."
 msgstr ""
+"<em>Аматэру</em> — агульнапрынятае японскае найменьне для сьвятыняў, калі "
+"яны заховаюць памяць аб Аматэрасу, сынтаісцкай багіні Сонца, народжанай зь "
+"левага вока бога Ідзанаґі."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid ""
@@ -9894,12 +9934,17 @@ msgid ""
 "was head of the Neo-Platonic school at Alexandria in the early 5th century, "
 "until murdered by a Christian mob in 415."
 msgstr ""
+"Гіпація — славутая грэцкая астраном, матэматык і філёзаф. Яна ачольвала "
+"нэаплатанічную школу ў Александрыі на пачатку 5-га стагодзьдзя, да забойства "
+"хрысьціянскім натоўпам у 415 годзе."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid ""
 "Ran is the Norse goddess of the sea, who stirs up the waves and captures "
 "sailors with her net."
 msgstr ""
+"Ран — гэта нарвэская багіня мора, якая стварае хвалі й палоніць маракоў "
+"сваёй сеткай."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid ""
@@ -9907,24 +9952,30 @@ msgid ""
 "<em>Ran</em> both represent the <em>Jotuns</em> who reign in the outer "
 "Universe; together they had nine daughters."
 msgstr ""
+"Эґір — муж Ран, пэрсаніфікаваны бог акіяну. <em>Эґір</em> і <em>Ран</em> "
+"абое ўвасабляюць <em>Ятуна</em>, які кіруе ў вонкавым Сусьвеце; яны маюць "
+"дзевяць дачок."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 msgid ""
 "Ancient Semitic name and modern Arabic name for the city of Palmyra, a "
 "UNESCO World Heritage Site."
 msgstr ""
+"Старажытная сэміцкая й сучасная арабская назва горада Пальміра, абвешчанага "
+"ЮНЭСКА сусьветнай спадчынай."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
 msgid "Dagon was a Semitic deity, often represented as half-man, half-fish."
 msgstr ""
+"Даґон — сэміцкае боства, часта ўяўляецца напалову чалавекам, напалову рыбай."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid "Tonatiuh was the Aztec god of the Sun."
-msgstr ""
+msgstr "Танатыю быў богам Сонца ў ацтэкаў."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
 msgid "Meztli was the Aztec goddess of the Moon."
-msgstr ""
+msgstr "Мэзтлі была багіняў Месца ў ацтэкаў."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 msgid ""
@@ -9932,50 +9983,65 @@ msgid ""
 "Celtic mythologies of Ireland and Scotland, and may be related to the Gallo-"
 "Roman deity <em>Ogmios</em>."
 msgstr ""
+"Оґма — боства красамоўства, пісьма й вялікай фізычнай сілы ў кельцкай "
+"міталёґіі Ірляндыі й Шатляндыі, і можа быць зьвязаны з ґала-раманскім "
+"боствам <em>Оґміяс</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
 msgid "Smertrios was a Gallic deity of war."
-msgstr ""
+msgstr "Смэртрыяс быў ґальскім боствам вайны."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
 msgid ""
 "Intercrus means <em>between the legs</em> in Latin style, referring to the "
 "star's position in the constellation Ursa Major."
 msgstr ""
+"Інтэркрус, назва ў лацінскім стылі, значыць <em>паміж ног</em>, гэта "
+"зьвязана са становішчам зоркі ў сузор'і Вялікай мядзьведзіцы."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
 msgid "Arkas was the son of Callisto (Ursa Major) in Greek mythology."
-msgstr ""
+msgstr "Аркас быў сынам Каліста (Вялікая мядзьведзіца) ў грэцкай міталёґіі."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
 msgid ""
 "Miguel de Cervantes Saavedra (1547-1616) was a famous Spanish writer and "
 "author of <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr ""
+"Міґель дэ Сэрвантэс Саавэдра (1547-1616) — знакаміты гішпанскі пісьменьнік і "
+"аўтар <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
 msgid ""
 "Lead fictional character from Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
+"Галоўны герой <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em> "
+"Сэрвантэса."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
 msgid ""
 "Fictional character and love interest of Don Quijote (or Quixote) in "
 "Cervantes's <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr ""
+"Пэрсанаж і каханка Дона Кіхота ў <em>El Ingenioso Hidalgo Don Quixote de la "
+"Mancha</em> Сэрвантэса."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
 msgid ""
 "Fictional horse of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
+"Конь Дона Кіхота ў <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em> "
+"Сэрвантэса."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
 msgid ""
 "Fictional squire of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
+"Збраяносец Дона Кіхота ў <em>El Ingenioso Hidalgo Don Quixote de la "
+"Mancha</em> Сэрвантэса."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
 msgid ""
@@ -9983,28 +10049,35 @@ msgid ""
 "Thestius. Leda was a Greek queen, mother of Pollux and of his twin Castor, "
 "and of Helen and Clytemnestra."
 msgstr ""
+"Тэстыяс — імя па бацьку Леды й ейнай сястры Альтэі, дачок Тэстыюса. Леда "
+"была каралевай Грэцыі, маці Палюкса й ягонага блізьнюка Кастора, Гелены й "
+"Клітэмнэстры."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
 msgid ""
 "Lich is a fictional undead creature known for controlling other undead "
 "creatures with magic."
-msgstr ""
+msgstr "Ліч — выдуманая нежыць, якая з дапамогай магіі кіруе іншай нежыцьцю."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
 msgid "Draugr refers to undead creatures in Norse mythology."
-msgstr ""
+msgstr "Драўґр — нежыць з нарвэскай міталёґіі."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 msgid ""
 "Poltergeist is a name for supernatural beings that create physical "
 "disturbances, from German for <em>noisy ghost</em>."
 msgstr ""
+"Пальтэрґайст — назва звышнатуральнай існасьці, якая стварае фізычны "
+"беспарадак, ад нямецкага <em>шумны дух</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
 msgid ""
 "Phobetor is a Greek mythological deity of nightmares, the son of Nyx, the "
 "primordial deity of night."
 msgstr ""
+"Фабэтар — грэцкае мітычнае боства кашмараў, сын Нікты, першапачатковага "
+"боства ночы."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
 msgid ""
@@ -10013,6 +10086,10 @@ msgid ""
 "point of contact between two civilizations (Spanish and Arab) and two "
 "continents (Europe and Africa) after the 8th century."
 msgstr ""
+"Тытавін (таксама вядомы як Мэдына Тэтуана) — паселішча ў паўночным Марока й "
+"месца сусьветнай спадчыны ЮНЭСКА. Гістарычна гэта была важная кропка "
+"кантактаў між дзьвюма цывілізацыямі (гішпанскай і арабскай) і двух "
+"кантынэнтаў (Эўропы й Афрыкі) пасьля 8га стагодзьдзя."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
 msgid ""
@@ -10021,6 +10098,10 @@ msgid ""
 "Cordova in Andalusia (modern Spain), and wrote an influential treatise on "
 "the uses of the astrolabe."
 msgstr ""
+"Сафар названы ў гонар Абу аль-Касім Ахмэд Ібн-Абд Алах Ібн-Амар аль Ґафікі "
+"Ібн-фль-Сафара, які вучыў матэматыцы, ґеамэтрыі й астраноміі ў андалюзійскай "
+"Кардове (сёньняшняя Гішпанія) 11 стагодзьдзя й напісаў уплывовы трактат па "
+"выкарыстаньні астралябіі."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
 msgid ""
@@ -10028,6 +10109,9 @@ msgid ""
 "<em>Ibn al-Samh</em>), a noted 11th century astronomer and mathematician in "
 "the school of al Majriti in Cordova (Andalusia, now modern Spain)."
 msgstr ""
+"Сам названы ў гонар Абу аль-Касім Асбаґ ібн Мухамад ібн аль-Сам аль-Махры "
+"(або <em>Ібн аль-Сам</em>), выбітнага астранома й матэматыка 11 стагодзьдзя "
+"ў школе аль Маджрыці ў Кардове (Андалюзія, цяпер Гішпанія)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
 msgid ""
@@ -10035,6 +10119,9 @@ msgid ""
 "mathematician, astronomer, scholar, and teacher in 10th century and early "
 "11th century Andalusia (modern Spain)."
 msgstr ""
+"Маджрыці названы ў гонар Абу аль-Касім аль-Курбуці аль-Маджрыці, выбітнага "
+"матэматыка, астранома, навукоўца й настаўніка 10-га й пачатку 11-га "
+"стагодзьдзяў з Андалюзіі (сучасная Гішпанія)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
 msgid ""
@@ -10043,6 +10130,9 @@ msgid ""
 "in the world even today. The constellation Aquila represents an eagle - a "
 "popular symbol of liberty."
 msgstr ""
+"Лібэртас з лаціны — <em>воля</em>. Воля адсылае да сацыяльных і палітычных "
+"свабодаў, і нагадвае, што нават сёньня ў сьвеці існуюць людзі, пазбаўленыя "
+"свабоды. Знаходзіцца ў сузор'і Арла, а арол — папулярны сымбаль свабоды."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
 msgid ""
@@ -10050,6 +10140,8 @@ msgid ""
 "mental strength in the face of adversity, as embodied by the eagle "
 "(represented by the constellation Aquila)."
 msgstr ""
+"Фартытуда з лаціны — <em>адвага</em>. Адвага азначае эмацыйную і псыхічную "
+"сілу супрацьстаяць няшчасьцям, увасобленая арлом (сузор'ем Арла)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
@@ -10061,18 +10153,23 @@ msgid ""
 "These names are modified based on the original proposals, to be consistent "
 "with the IAU rules."
 msgstr ""
+"Гэтыя назвы папраўленыя спачатныя прапановы, каб быць пасьлядоўнымі з "
+"правіламі МАЗ."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
 msgid ""
 "The original name proposed, <em>Veritas</em>, is that of an asteroid "
 "important for the study of the solar system."
 msgstr ""
+"Прапанаваная спачатку назва, <em>Вэрытас</em>, належыць астэроіду, важнаму "
+"для вывучэньня сонечнай сыстэмы."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 msgid ""
 "The name originally proposed, <em>Amaterasu</em>, is already used for an "
 "asteroid."
 msgstr ""
+"Прапанаваная спачатку назва, Аматэрасу, ужо выкарыстаная для астэроіда."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
 msgid ""
@@ -10081,10 +10178,13 @@ msgid ""
 "<em>Aegir</em>, has been attributed to one of Saturn's satellites, "
 "discovered in 2004."
 msgstr ""
+"У лацінскім напісаньні, у адпаведасьці з нарвэскай трансьлітарацыяй існуюць "
+"два напісаньні Эґір: <em>AEgir</em> і <em>Aegir</em>. Назва ў напісаньні "
+"<em>Aegir</em> выкарыстаная для спадарожніка Сатурна, адкрытага ў 204 годзе."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
 msgid "<em>Ogmios</em> is a name already attributed to an asteroid."
-msgstr ""
+msgstr "<em>Оґміяс</em> — гэта назва, ужо прыпісаная астэроіду."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
 msgid ""
@@ -10092,6 +10192,8 @@ msgid ""
 "asteroid and to one of Jupiter's satellites. The name <em>Althaea</em> is "
 "also attributed to an asteroid."
 msgstr ""
+"Прапанаваная спачатку назва <em>Леда</em> ўжо прыпісаная астэроіду й аднаму "
+"са спадарожнікаў Юпітэра. Назва <em>Альтэя</em> таксама прыпісаная астэроіду."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 msgid ""
@@ -10100,6 +10202,10 @@ msgid ""
 "<em>Lippershey</em> (with an <em>s</em>) results in fact from a "
 "typographical error dating back from 1831, thus should be avoided."
 msgstr ""
+"Пачатковае напісаньне <em>Ліпэрсгей</em> (Lippershey) было папраўленае на "
+"<em>Ліпэргей</em> (Lipperhey) 15 студзеня 2016. Агульна ўжыванае напісаньне "
+"<em>Ліпэрсгей</em> (з <em>с</em>) выкліканае друкарскай памылкай, зробленай "
+"у 183 годзе, таму яго варта пазьбягаць."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
 msgid "Additional info"
@@ -10148,7 +10254,7 @@ msgstr "Экзаплянэты ў падвойных і кратных сыст�
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
 msgid "Naming exoplanets (IAU)"
-msgstr "Называньне экзаплянэтаў (МАС)"
+msgstr "Называньне экзаплянэтаў (МАЗ)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
@@ -10188,7 +10294,7 @@ msgstr "Архіў экзаплянэт NASA"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
 msgid "IAU Commission 53: Extrasolar Planets"
-msgstr "Камісія 53 МАС: пазасонечныя плянэты"
+msgstr "Камісія 53 МАЗ: пазасонечныя плянэты"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
 msgid "ExoMol"
@@ -14145,3 +14251,262 @@ msgstr "Бягучая плянэта: Сатурн"
 
 #~ msgid "Show Solar System objects"
 #~ msgstr "Паказваць аб'екты Сонечнай сыстэмы"
+
+#~ msgid "The proper names"
+#~ msgstr "Правільныя назвы"
+
+#~ msgid ""
+#~ "From the latin <em>Veritas</em>, truth. The ablative form means <em>where "
+#~ "there is truth</em>"
+#~ msgstr ""
+#~ "З лаціны <em>Veritas</em> ­гэта праўда. Аблятыўная форма значыць <em>там, "
+#~ "дзе праўда</em>"
+
+#~ msgid ""
+#~ "From the latin <em>Spes</em>, hope. The ablative form means <em>where there "
+#~ "is hope</em>"
+#~ msgstr ""
+#~ "З лаціны <em>Spes</em> ­гэта надзея. Аблятыўная форма значыць <em>там, дзе "
+#~ "надзея</em>"
+
+#~ msgid "Musica is Latin for <em>music</em>"
+#~ msgstr "Музыка, ад лацінскага <em>musica</em>"
+
+#~ msgid ""
+#~ "Arion was a genius of poetry and music in ancient Greece. According to "
+#~ "legend, his life was saved at sea by dolphins after attracting their "
+#~ "attention by the playing of his kithara"
+#~ msgstr ""
+#~ "Арыён быў ґеніяльным паэтам і музыкам старажытнай Грэцыі. Паводле леґенды, "
+#~ "дэльфіны ўратавалі ягонае жыцьцё на моры, калі ён прывабіў іх ігрой на кітары"
+
+#~ msgid "Fafnir was a Norse mythological dwarf who turned into a dragon"
+#~ msgstr "Фафнір быў нарвэскім мітычным карлікам, які стаў драконам"
+
+#~ msgid ""
+#~ "Orbitar is a contrived word paying homage to the space launch and orbital "
+#~ "operations of NASA"
+#~ msgstr ""
+#~ "Арбітар — штучнае слова, якое аддае пашану запускам у космас і арбітальным "
+#~ "апэрацыям НАСА"
+
+#~ msgid "Chalawan is a mythological crocodile king from a Thai folktale"
+#~ msgstr "Чалаван — гэта мітычны кароль кракадзілаў з тайскага фальклёру"
+
+#~ msgid ""
+#~ "Taphao Thong is one of two sisters associated with the Thai folk tale of "
+#~ "Chalawan"
+#~ msgstr ""
+#~ "Тафао Тонґ ­— гэта адна з дзьвюх сясьцёр з тайскага эпасу пра Чалавана"
+
+#~ msgid ""
+#~ "Taphao Kae is one of two sisters associated with the Thai folk tale of "
+#~ "Chalawan"
+#~ msgstr ""
+#~ "Тафао Таэў ­— гэта адна з дзьвюх сясьцёр з тайскага эпасу пра Чалавана"
+
+#~ msgid ""
+#~ "Helvetios is the Latin for <em>the Helvetian</em> and refers to the Celtic "
+#~ "tribe that lived in Switzerland during the Middle Ages"
+#~ msgstr ""
+#~ "Гельвэтыяс — гэта на лаціне <em>гельвэты</em>, кельцкае племя, якое жыло ў "
+#~ "Швэйцарыі ў Сярэднявеччы"
+
+#~ msgid ""
+#~ "Dimidium is Latin for <em>half</em>, referring to the planet's mass of at "
+#~ "least half the mass of Jupiter"
+#~ msgstr ""
+#~ "Дымідыюм у перакладзе з лаціны — <em>палова</em>, зьвязана з тым, што маса "
+#~ "плянэты ня менш за палову масы Юпітэра"
+
+#~ msgid ""
+#~ "Nicolaus Copernicus or Mikolaj Kopernik (1473-1543) was a Polish astronomer "
+#~ "who proposed the heliocentric model of the solar system in his book <em>De "
+#~ "revolutionibus orbium coelestium</em>"
+#~ msgstr ""
+#~ "Мікалай Капернік (1473-1543) — польскі астраном, які прапанаваў "
+#~ "геліяцэнтрычную мадэль сонечнай сыстэмы ў кнізе em>De revolutionibus orbium "
+#~ "coelestium</em>"
+
+#~ msgid ""
+#~ "Hans Lipperhey (1570-1619) was a German-Dutch lens grinder and spectacle "
+#~ "maker who is often attributed with the invention of the refracting telescope "
+#~ "in 1608"
+#~ msgstr ""
+#~ "Ганс Ліпэргей (1570-1619) — нямецкі й галяндзкі тачыльшчык лінзаў і выробца "
+#~ "акуляраў, якому часта прыпісваюць стварэньне тэлескопа-рэфрактара ў 1608 "
+#~ "годзе"
+
+#~ msgid ""
+#~ "<em>Amateru</em> is a common Japanese appellation for shrines when they "
+#~ "enshrine Amaterasu, the Shinto goddess of the Sun, born from the left eye of "
+#~ "the god Izanagi"
+#~ msgstr ""
+#~ "<em>Аматэру</em> — агульнапрынятае японскае найменьне для сьвятыняў, калі "
+#~ "яны заховаюць памяць аб Аматэрасу, сынтаісцкай багіні Сонца, народжанай зь "
+#~ "левага вока бога Ідзанаґі"
+
+#~ msgid ""
+#~ "Hypatia was a famous Greek astronomer, mathmatician, and philosopher. She "
+#~ "was head of the Neo-Platonic school at Alexandria in the early 5th century, "
+#~ "until murdered by a Christian mob in 415"
+#~ msgstr ""
+#~ "Гіпація — славутая грэцкая астраном, матэматык і філёзаф. Яна ачольвала "
+#~ "нэаплатанічную школу ў Александрыі на пачатку 5-га стагодзьдзя, да забойства "
+#~ "хрысьціянскім натоўпам у 415 годзе"
+
+#~ msgid ""
+#~ "Ran is the Norse goddess of the sea, who stirs up the waves and captures "
+#~ "sailors with her net"
+#~ msgstr ""
+#~ "Ран — гэта нарвэская багіня мора, якая стварае хвалі й палоніць маракоў "
+#~ "сваёй сеткай"
+
+#~ msgid ""
+#~ "AEgir is Ran's husband, the personified god of the ocean. <em>AEgir</em> and "
+#~ "<em>Ran</em> both represent the <em>Jotuns</em> who reign in the outer "
+#~ "Universe; together they had nine daughters"
+#~ msgstr ""
+#~ "Эґір — муж Ран, пэрсаніфікаваны бог акіяну. <em>Эґір</em> і <em>Ран</em> "
+#~ "абое ўвасабляюць <em>Ятуна</em>, які кіруе ў вонкавым Сусьвеце; яны маюць "
+#~ "дзевяць дачок"
+
+#~ msgid ""
+#~ "Ancient Semitic name and modern Arabic name for the city of Palmyra, a "
+#~ "UNESCO World Heritage Site"
+#~ msgstr ""
+#~ "Старажытная сэміцкая й сучасная арабская назва горада Пальміра, абвешчанага "
+#~ "ЮНЭСКА сусьветнай спадчынай"
+
+#~ msgid "Dagon was a Semitic deity, often represented as half-man, half-fish"
+#~ msgstr ""
+#~ "Даґон — сэміцкае боства, часта ўяўляецца напалову чалавекам, напалову рыбай"
+
+#~ msgid "Tonatiuh was the Aztec god of the Sun"
+#~ msgstr "Танатыю быў богам Сонца ў ацтэкаў"
+
+#~ msgid "Meztli was the Aztec goddess of the Moon"
+#~ msgstr "Мэзтлі была багіняў Месца ў ацтэкаў"
+
+#~ msgid ""
+#~ "Ogma was a deity of eloquence, writing, and great physical strength in the "
+#~ "Celtic mythologies of Ireland and Scotland, and may be related to the Gallo-"
+#~ "Roman deity <em>Ogmios</em>"
+#~ msgstr ""
+#~ "Оґма — боства красамоўства, пісьма й вялікай фізычнай сілы ў кельцкай "
+#~ "міталёґіі Ірляндыі й Шатляндыі, і можа быць зьвязаны з ґала-раманскім "
+#~ "боствам <em>Оґміяс</em>"
+
+#~ msgid "Smertrios was a Gallic deity of war"
+#~ msgstr "Смэртрыяс быў ґальскім боствам вайны"
+
+#~ msgid ""
+#~ "Intercrus means <em>between the legs</em> in Latin style, referring to the "
+#~ "star's position in the constellation Ursa Major"
+#~ msgstr ""
+#~ "Інтэркрус, назва ў лацінскім стылі, значыць <em>паміж ног</em>, гэта "
+#~ "зьвязана са становішчам зоркі ў сузор'і Вялікай мядзьведзіцы"
+
+#~ msgid "Arkas was the son of Callisto (Ursa Major) in Greek mythology"
+#~ msgstr "Аркас быў сынам Каліста (Вялікая мядзьведзіца) ў грэцкай міталёґіі"
+
+#~ msgid ""
+#~ "Miguel de Cervantes Saavedra (1547-1616) was a famous Spanish writer and "
+#~ "author of <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>"
+#~ msgstr ""
+#~ "Міґель дэ Сэрвантэс Саавэдра (1547-1616) — знакаміты гішпанскі пісьменьнік і "
+#~ "аўтар <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>"
+
+#~ msgid ""
+#~ "Lead fictional character from Cervantes's <em>El Ingenioso Hidalgo Don "
+#~ "Quixote de la Mancha</em>"
+#~ msgstr ""
+#~ "Галоўны герой <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em> "
+#~ "Сэрвантэса"
+
+#~ msgid ""
+#~ "Fictional character and love interest of Don Quijote (or Quixote) in "
+#~ "Cervantes's <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>"
+#~ msgstr ""
+#~ "Пэрсанаж і каханка Дона Кіхота ў <em>El Ingenioso Hidalgo Don Quixote de la "
+#~ "Mancha</em> Сэрвантэса"
+
+#~ msgid ""
+#~ "Fictional horse of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
+#~ "Quixote de la Mancha</em>"
+#~ msgstr ""
+#~ "Конь Дона Кіхота ў <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em> "
+#~ "Сэрвантэса"
+
+#~ msgid ""
+#~ "Fictional squire of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
+#~ "Quixote de la Mancha</em>"
+#~ msgstr ""
+#~ "Збраяносец Дона Кіхота ў <em>El Ingenioso Hidalgo Don Quixote de la "
+#~ "Mancha</em> Сэрвантэса"
+
+#~ msgid ""
+#~ "Lich is a fictional undead creature known for controlling other undead "
+#~ "creatures with magic"
+#~ msgstr "Ліч — выдуманая нежыць, якая з дапамогай магіі кіруе іншай нежыцьцю"
+
+#~ msgid "Draugr refers to undead creatures in Norse mythology"
+#~ msgstr "Драўґр — нежыць з нарвэскай міталёґіі"
+
+#~ msgid ""
+#~ "Phobetor is a Greek mythological deity of nightmares, the son of Nyx, the "
+#~ "primordial deity of night"
+#~ msgstr ""
+#~ "Фабэтар — грэцкае мітычнае боства кашмараў, сын Нікты, першапачатковага "
+#~ "боства ночы"
+
+#~ msgid ""
+#~ "These names are modified based on the original proposals, to be consistent "
+#~ "with the IAU rules"
+#~ msgstr ""
+#~ "Гэтыя назвы папраўленыя спачатныя прапановы, каб быць пасьлядоўнымі з "
+#~ "правіламі МАС"
+
+#~ msgid ""
+#~ "The original name proposed, <em>Veritas</em>, is that of an asteroid "
+#~ "important for the study of the solar system"
+#~ msgstr ""
+#~ "Прапанаваная спачатку назва, <em>Вэрытас</em>, належыць астэроіду, важнаму "
+#~ "для вывучэньня сонечнай сыстэмы"
+
+#~ msgid ""
+#~ "The name originally proposed, Amaterasu, is already used for an asteroid"
+#~ msgstr ""
+#~ "Прапанаваная спачатку назва, Аматэрасу, ужо выкарыстаная для астэроіда"
+
+#~ msgid ""
+#~ "Note the typographical difference between <em>AEgir</em> and <em>Aegir</em>, "
+#~ "the Norwegian transliteration. The same name, with the spelling "
+#~ "<em>Aegir</em>, has been attributed to one of Saturn's satellites, "
+#~ "discovered in 2004"
+#~ msgstr ""
+#~ "У лацінскім напісаньні, у адпаведасьці з нарвэскай трансьлітарацыяй існуюць "
+#~ "два напісаньні Эґір: <em>AEgir</em> і <em>Aegir</em>. Назва ў напісаньні "
+#~ "<em>Aegir</em> выкарыстаная для спадарожніка Сатурна, адкрытага ў 204 годзе"
+
+#~ msgid "<em>Ogmios</em> is a name already attributed to an asteroid"
+#~ msgstr "<em>Оґміяс</em> — гэта назва, ужо прыпісаная астэроіду"
+
+#~ msgid ""
+#~ "The original proposed name <em>Leda</em> is already attributed to an "
+#~ "asteroid and to one of Jupiter's satellites. The name <em>Althaea</em> is "
+#~ "also attributed to an asteroid"
+#~ msgstr ""
+#~ "Прапанаваная спачатку назва <em>Леда</em> ўжо прыпісаная астэроіду й аднаму "
+#~ "са спадарожнікаў Юпітэра. Назва <em>Альтэя</em> таксама прыпісаная астэроіду"
+
+#~ msgid ""
+#~ "The original spelling of <em>Lippershey</em> was corrected to "
+#~ "<em>Lipperhey</em> on 15.01.2016. The commonly seen spelling "
+#~ "<em>Lippershey</em> (with an <em>s</em>) results in fact from a "
+#~ "typographical error dating back from 1831, thus should be avoided"
+#~ msgstr ""
+#~ "Пачатковае напісаньне <em>Ліпэрсгей</em> (Lippershey) было папраўленае на "
+#~ "<em>Ліпэргей</em> (Lipperhey) 15 студзеня 2016. Агульна ўжыванае напісаньне "
+#~ "<em>Ліпэрсгей</em> (з <em>с</em>) выкліканае друкарскай памылкай, зробленай "
+#~ "у 183 годзе, таму яго варта пазьбягайь"

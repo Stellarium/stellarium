@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-03-18 00:42+0600\n"
-"PO-Revision-Date: 2016-02-26 13:43+0000\n"
-"Last-Translator: Jorge Luis Granda <costeeleation@gmail.com>\n"
+"PO-Revision-Date: 2016-03-25 13:07+0000\n"
+"Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-03-18 05:34+0000\n"
-"X-Generator: Launchpad (build 17947)\n"
+"X-Launchpad-Export-Date: 2016-03-26 05:17+0000\n"
+"X-Generator: Launchpad (build 17967)\n"
 "Language: es_ES\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -11993,18 +11993,19 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3d.cpp:2127
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr ""
-"No está soportado el sombreado geométrico. Vuelva al modo '6 Texturas'"
+"No se admite el sombreado geométrico. Se ha activado el modo «6 Textures» en "
+"su lugar."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2137
 msgid "Falling back to '6 Textures' because of ANGLE bug"
-msgstr "Volviendo a '6 Texturas'  debido a un error de àngulo"
+msgstr "Se ha activado «6 Textures» debido a un error de ANGLE"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2658
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
-"No se puede usar mapeo de sombra en tu hardware, revisar registro para "
-"detalles"
+"En este equipo no se puede utilizar la asignación de sombras. Consulte el "
+"registro para obtener detalles"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:173
 msgid "Scenery3d plugin loaded!"
