@@ -245,10 +245,23 @@ private:
 	void updateText(bool forceUpdatePos=false);
 	void updateButtonsGroups();
 	QRectF getButtonsBoundingRect() const;
+	// Elements which get displayed above the buttons:
 	QGraphicsSimpleTextItem* location;
 	QGraphicsSimpleTextItem* datetime;
 	QGraphicsSimpleTextItem* fov;
 	QGraphicsSimpleTextItem* fps;
+	// For bad graphics, show these instead. But we can use location etc for font info.
+//	// We need a texture cache in those cases.
+	// We use ad-hoc pixmaps instead if command-line arg. -t (--text-fix) is given.
+	QGraphicsPixmapItem* locationPixmap;
+	QGraphicsPixmapItem* datetimePixmap;
+	QGraphicsPixmapItem* fovPixmap;
+	QGraphicsPixmapItem* fpsPixmap;
+//	// Idea text-use-opengl-buffer
+//	static QCache<QByteArray, struct StringPixmap> pxCache;
+//	struct StringPixmap* getTexPixmap(const QString& str, int pixelSize);
+
+
 
 	struct ButtonGroup
 	{
@@ -283,6 +296,7 @@ private:
 	bool flagShowTZ;
 
 	QGraphicsSimpleTextItem* helpLabel;
+	QGraphicsPixmapItem* helpLabelPixmap;
 };
 
 // The path around the bottom left button bars
