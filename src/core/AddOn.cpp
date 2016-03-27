@@ -194,14 +194,6 @@ AddOn::Type AddOn::typeStringToEnum(QString string)
 	{
 		return LANDSCAPE;
 	}
-	else if (string == "language_stellarium")
-	{
-		return LANG_STELLARIUM;
-	}
-	else if (string == "language_skyculture")
-	{
-		return LANG_SKYCULTURE;
-	}
 	else if (string == "plugin_catalog")
 	{
 		return PLUGIN_CATALOG;
@@ -222,6 +214,10 @@ AddOn::Type AddOn::typeStringToEnum(QString string)
 	{
 		return TEXTURE;
 	}
+	else if (string == "translation")
+	{
+		return TRANSLATION;
+	}
 	else
 	{
 		return INVALID;
@@ -236,14 +232,6 @@ QString AddOn::typeToDisplayRole(Type type) {
 	else if (type == LANDSCAPE)
 	{
 		return "Landscape";
-	}
-	else if (type == LANG_STELLARIUM)
-	{
-		return "Stellarium";
-	}
-	else if (type == LANG_SKYCULTURE)
-	{
-		return "Sky Culture";
 	}
 	else if (type == PLUGIN_CATALOG)
 	{
@@ -264,6 +252,10 @@ QString AddOn::typeToDisplayRole(Type type) {
 	else if (type == TEXTURE)
 	{
 		return "Texture";
+	}
+	else if (type == TRANSLATION)
+	{
+		return "Translation";
 	}
 	else
 	{

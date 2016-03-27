@@ -289,8 +289,7 @@ void StelAddOnMgr::installAddOn(AddOn* addon, bool tryDownload)
 	// require restart
 	if ((addon->getStatus() == AddOn::PartiallyInstalled || addon->getStatus() == AddOn::FullyInstalled) &&
 		(addon->getType() == AddOn::PLUGIN_CATALOG || addon->getType() == AddOn::STAR_CATALOG ||
-		 addon->getType() == AddOn::LANG_SKYCULTURE || addon->getType() == AddOn::LANG_STELLARIUM ||
-		 addon->getType() == AddOn::TEXTURE))
+		 addon->getType() == AddOn::TEXTURE || addon->getType() == AddOn::TRANSLATION))
 	{
 		emit(restartRequired());
 		addon->setStatus(AddOn::Restart);
@@ -351,8 +350,7 @@ void StelAddOnMgr::removeAddOn(AddOn* addon)
 	addon->setInstalledFiles(installedFiles);
 
 	if (addon->getType() == AddOn::PLUGIN_CATALOG || addon->getType() == AddOn::STAR_CATALOG ||
-		addon->getType() == AddOn::LANG_SKYCULTURE || addon->getType() == AddOn::LANG_STELLARIUM ||
-		addon->getType() == AddOn::TEXTURE)
+		addon->getType() == AddOn::TEXTURE || addon->getType() == AddOn::TRANSLATION)
 	{
 		emit (restartRequired());
 		addon->setStatus(AddOn::Restart);
