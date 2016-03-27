@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-03-18 00:42+0600\n"
-"PO-Revision-Date: 2016-02-13 21:23+0000\n"
+"PO-Revision-Date: 2016-03-26 14:25+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-03-18 05:27+0000\n"
-"X-Generator: Launchpad (build 17947)\n"
+"X-Launchpad-Export-Date: 2016-03-27 05:17+0000\n"
+"X-Generator: Launchpad (build 17967)\n"
 "X-Poedit-Language: Hungarian\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -97,7 +97,7 @@ msgstr "O./C. hosszúság"
 #: src/core/modules/GridLinesMgr.cpp:637 src/core/modules/GridLinesMgr.cpp:920
 #: src/ui_viewDialog.h:1764
 msgid "Prime Vertical"
-msgstr ""
+msgstr "Elsődleges függőleges"
 
 #: src/core/modules/GridLinesMgr.cpp:641
 msgid "Equinoctial Colure"
@@ -1426,7 +1426,7 @@ msgstr "Alapértelmezés."
 
 #: src/core/StelCore.cpp:1743
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
-msgstr ""
+msgstr "Módosított verzió, a Hold gyorsítása nélkül"
 
 #: src/core/StelCore.cpp:1746
 #, qt-format
@@ -1711,23 +1711,23 @@ msgstr "Égitest követése"
 
 #: src/core/StelMovementMgr.cpp:162
 msgid "Look towards East"
-msgstr ""
+msgstr "Nézet kelet felé"
 
 #: src/core/StelMovementMgr.cpp:163
 msgid "Look towards West"
-msgstr ""
+msgstr "Nézet nyugat felé"
 
 #: src/core/StelMovementMgr.cpp:164
 msgid "Look towards North"
-msgstr ""
+msgstr "Nézet észak felé"
 
 #: src/core/StelMovementMgr.cpp:165
 msgid "Look towards South"
-msgstr ""
+msgstr "Nézet dél felé"
 
 #: src/core/StelMovementMgr.cpp:166
 msgid "Look towards Zenith"
-msgstr ""
+msgstr "Nézet zenit felé"
 
 #: src/core/SimbadSearcher.cpp:56
 msgid "Network error"
@@ -3768,7 +3768,7 @@ msgstr "Szerbia és Montenegro"
 
 #: src/translations.h:371
 msgid "Montenegro"
-msgstr ""
+msgstr "Montenegró"
 
 #: src/translations.h:372
 msgid "Cuba"
@@ -5183,7 +5183,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1699
 msgid "Use proportional hints"
-msgstr ""
+msgstr "Tippek mutatása"
 
 #: src/ui_viewDialog.h:1701
 msgid ""
@@ -6869,7 +6869,7 @@ msgstr "Kép méretének skálázása"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1172
 msgid "Use semi-transparent mask"
-msgstr ""
+msgstr "Féligáteresztő szűrő használata"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1173
 msgid "Key mappings"
@@ -9698,16 +9698,20 @@ msgid ""
 "From the latin <em>Veritas</em>, truth. The ablative form means <em>where "
 "there is truth</em>."
 msgstr ""
+"A latin <em>veritas</em> szóból, jelentése: igazság. Ablatív formában "
+"jelentése: <em>ahol az igazság van</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
 msgid ""
 "From the latin <em>Spes</em>, hope. The ablative form means <em>where there "
 "is hope</em>."
 msgstr ""
+"A latin <em>spes</em> szóból,  jelentése: remény. Ablatív formában "
+"jelentése:  <em>ahol van remény</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
 msgid "Musica is Latin for <em>music</em>."
-msgstr ""
+msgstr "Musica latin szó, jelentése:  <em>zene</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
 msgid ""
@@ -9771,6 +9775,9 @@ msgid ""
 "who proposed the heliocentric model of the solar system in his book <em>De "
 "revolutionibus orbium coelestium</em>."
 msgstr ""
+"Nicolaus Copernicus vagy saját nevén Mikolaj Kopernik (1473-1543) lengyel "
+"csillagász, aki <em>De revolutionibus orbium coelestium</em> című könyvében "
+"a Naprendszer heliocentrikus modelljét ismertette.."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
 msgid ""
@@ -9780,6 +9787,10 @@ msgid ""
 "satellites of Jupiter, and the reported the first telescopic observations of "
 "the phases of Venus, among other discoveries."
 msgstr ""
+"Galileo Galilei (1564-1642) olasz csillagász, fizikus, akit gyakran a "
+"csillagászati megfigyelések atyjának neveznek. Kezdetleges távcsövet "
+"használva felfedezte a Jupiter négy legnagyobb holdját.  Elsőként írta le a "
+"Vénusz fényességfázisait."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid ""
@@ -9788,6 +9799,10 @@ msgid ""
 "observations were critical to Kepler's formulation of his three laws of "
 "planetary motion."
 msgstr ""
+"Tycho Brahe (1546-1601) dán csillagász, nemesember; a csillagok és bolygók "
+"pontos csillagászati megfigyeléseit írta le.  Ezek a megfigyelési adatok "
+"életbevágóan fontosak voltak Kepler számára,  aki ezek alapján írta le az "
+"égi objektumok három törvényét (lásd: Kepler törvények)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
 msgid ""
@@ -9795,6 +9810,8 @@ msgid ""
 "maker who is often attributed with the invention of the refracting telescope "
 "in 1608."
 msgstr ""
+"Hans Lipperhey (1570-1619) német-holland lencsekészítő;  gyakran hivatkoznak "
+"rá, mint a lencsés távcső feltalálójára (1608)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid ""
@@ -9802,6 +9819,8 @@ msgid ""
 "attributed with invention of the microscope, and more controversially with "
 "the invention of the telescope."
 msgstr ""
+"Jacharias Janssen (1580s-1630s) holland távcsőkészítő;  gyakran hivatkoznak "
+"rá, mint a mikroszkóp és a távcső feltalálójára."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid ""
@@ -9809,6 +9828,9 @@ msgid ""
 "ethnographer, and translator, who is attributed with the first drawing of "
 "the Moon through telescopic observations."
 msgstr ""
+"Thomas Harriot (ca. 1560-1621) angol csillagász, matematikus, néprajzkutató, "
+"fordító;  neki tulajdonítják a Hold első rajzait, amihez távcsöves "
+"megfigyeléseket használt fel."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid ""
@@ -9823,6 +9845,9 @@ msgid ""
 "was head of the Neo-Platonic school at Alexandria in the early 5th century, "
 "until murdered by a Christian mob in 415."
 msgstr ""
+"Hypatia ismert görög  csillagász, matematikus, filozófus. Az alexandriai neo-"
+"platonikus iskola vezetője volt a korai 5. században.   415-ben a keresztény "
+"csőcselék megölte."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid ""
@@ -9838,6 +9863,9 @@ msgid ""
 "<em>Ran</em> both represent the <em>Jotuns</em> who reign in the outer "
 "Universe; together they had nine daughters."
 msgstr ""
+"AEgir, az óceán istene,  Ran férje.  <em>AEgir</em> és <em>Ran</em> "
+"mindketten a <em>Jötunn</em> tagjai, akik a külső Univerzumot uralják. "
+"Kilenc közös lányuk van."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 msgid ""
@@ -9883,30 +9911,36 @@ msgid ""
 "Miguel de Cervantes Saavedra (1547-1616) was a famous Spanish writer and "
 "author of <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr ""
+"Miguel de Cervantes Saavedra (1547-1616) híres spanyol író, az <em>El "
+"Ingenioso Hidalgo Don Quixote de la Mancha</em> szerzője."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
 msgid ""
 "Lead fictional character from Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
+"Kitalált főszereplő Cervantes <em>El Ingenioso Hidalgo Don Quixote de la "
+"Mancha</em> című művében."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
 msgid ""
 "Fictional character and love interest of Don Quijote (or Quixote) in "
 "Cervantes's <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr ""
+"Kitalált szereplő Cervantes <em>El Ingenioso Hidalgo Don Quixote de la "
+"Mancha</em> című művében, Don Quijote szerelme."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
 msgid ""
 "Fictional horse of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
-msgstr ""
+msgstr "Kitalált ló a Don Quijote című műben."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
 msgid ""
 "Fictional squire of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
-msgstr ""
+msgstr "Kitalált földesúr Cervantes  Don Quijote című művében."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
 msgid ""

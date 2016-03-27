@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-03-18 00:42+0600\n"
-"PO-Revision-Date: 2016-03-26 01:48+0000\n"
+"PO-Revision-Date: 2016-03-26 06:21+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-03-26 05:17+0000\n"
+"X-Launchpad-Export-Date: 2016-03-27 05:16+0000\n"
 "X-Generator: Launchpad (build 17967)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -3780,7 +3780,7 @@ msgstr "Сэрбія й Чарнагорыя"
 
 #: src/translations.h:371
 msgid "Montenegro"
-msgstr ""
+msgstr "Чарнагорская"
 
 #: src/translations.h:372
 msgid "Cuba"
@@ -5867,7 +5867,7 @@ msgstr "Топацэнтрычныя каардынаты"
 
 #: src/ui_configurationDialog.h:1263
 msgid "Activate this option to calculate azimuth from south towards west."
-msgstr ""
+msgstr "Задзейнічай гэты выбор, каб лічыць азімут з поўдня на захад."
 
 #: src/ui_configurationDialog.h:1265
 msgid "Azimuth from South"
@@ -6601,7 +6601,7 @@ msgstr "Павелічэньне: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:833
 #, qt-format
 msgid "Exit pupil: %1 mm"
-msgstr ""
+msgstr "Выходная зрэнка: %1 мм"
 
 #: plugins/Oculars/src/Oculars.cpp:1972
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:842
@@ -6758,7 +6758,7 @@ msgstr "Сапраўднае поле зроку, якое забясьпечв�
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:806
 msgid "Exit pupil provided by these binoculars"
-msgstr ""
+msgstr "Выходная зрэнка, якая забясьпечваецца гэтым біноклем"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:814
 msgid "Magnification provided by this ocular/lens/telescope combination"
@@ -6776,6 +6776,8 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:816
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
 msgstr ""
+"Выходная зрэнка, якая забясьпечваецца злучэньнем гэтых "
+"акуляра/лінзы/тэлескопа"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:530
@@ -6905,7 +6907,7 @@ msgstr "Зьмяненьне памеру акружыны відарыса"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1172
 msgid "Use semi-transparent mask"
-msgstr ""
+msgstr "Выкарыстоўваць псэўдапразрыстую маску"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1173
 msgid "Key mappings"
@@ -11487,12 +11489,12 @@ msgstr "χ-Арыяніды"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:155
 msgid "Sextantids"
-msgstr ""
+msgstr "Сэкстантыды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:157
 msgid "November Orionids"
-msgstr ""
+msgstr "Лістападаўскія Арыяніды"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:161
@@ -14251,262 +14253,3 @@ msgstr "Бягучая плянэта: Сатурн"
 
 #~ msgid "Show Solar System objects"
 #~ msgstr "Паказваць аб'екты Сонечнай сыстэмы"
-
-#~ msgid "The proper names"
-#~ msgstr "Правільныя назвы"
-
-#~ msgid ""
-#~ "From the latin <em>Veritas</em>, truth. The ablative form means <em>where "
-#~ "there is truth</em>"
-#~ msgstr ""
-#~ "З лаціны <em>Veritas</em> ­гэта праўда. Аблятыўная форма значыць <em>там, "
-#~ "дзе праўда</em>"
-
-#~ msgid ""
-#~ "From the latin <em>Spes</em>, hope. The ablative form means <em>where there "
-#~ "is hope</em>"
-#~ msgstr ""
-#~ "З лаціны <em>Spes</em> ­гэта надзея. Аблятыўная форма значыць <em>там, дзе "
-#~ "надзея</em>"
-
-#~ msgid "Musica is Latin for <em>music</em>"
-#~ msgstr "Музыка, ад лацінскага <em>musica</em>"
-
-#~ msgid ""
-#~ "Arion was a genius of poetry and music in ancient Greece. According to "
-#~ "legend, his life was saved at sea by dolphins after attracting their "
-#~ "attention by the playing of his kithara"
-#~ msgstr ""
-#~ "Арыён быў ґеніяльным паэтам і музыкам старажытнай Грэцыі. Паводле леґенды, "
-#~ "дэльфіны ўратавалі ягонае жыцьцё на моры, калі ён прывабіў іх ігрой на кітары"
-
-#~ msgid "Fafnir was a Norse mythological dwarf who turned into a dragon"
-#~ msgstr "Фафнір быў нарвэскім мітычным карлікам, які стаў драконам"
-
-#~ msgid ""
-#~ "Orbitar is a contrived word paying homage to the space launch and orbital "
-#~ "operations of NASA"
-#~ msgstr ""
-#~ "Арбітар — штучнае слова, якое аддае пашану запускам у космас і арбітальным "
-#~ "апэрацыям НАСА"
-
-#~ msgid "Chalawan is a mythological crocodile king from a Thai folktale"
-#~ msgstr "Чалаван — гэта мітычны кароль кракадзілаў з тайскага фальклёру"
-
-#~ msgid ""
-#~ "Taphao Thong is one of two sisters associated with the Thai folk tale of "
-#~ "Chalawan"
-#~ msgstr ""
-#~ "Тафао Тонґ ­— гэта адна з дзьвюх сясьцёр з тайскага эпасу пра Чалавана"
-
-#~ msgid ""
-#~ "Taphao Kae is one of two sisters associated with the Thai folk tale of "
-#~ "Chalawan"
-#~ msgstr ""
-#~ "Тафао Таэў ­— гэта адна з дзьвюх сясьцёр з тайскага эпасу пра Чалавана"
-
-#~ msgid ""
-#~ "Helvetios is the Latin for <em>the Helvetian</em> and refers to the Celtic "
-#~ "tribe that lived in Switzerland during the Middle Ages"
-#~ msgstr ""
-#~ "Гельвэтыяс — гэта на лаціне <em>гельвэты</em>, кельцкае племя, якое жыло ў "
-#~ "Швэйцарыі ў Сярэднявеччы"
-
-#~ msgid ""
-#~ "Dimidium is Latin for <em>half</em>, referring to the planet's mass of at "
-#~ "least half the mass of Jupiter"
-#~ msgstr ""
-#~ "Дымідыюм у перакладзе з лаціны — <em>палова</em>, зьвязана з тым, што маса "
-#~ "плянэты ня менш за палову масы Юпітэра"
-
-#~ msgid ""
-#~ "Nicolaus Copernicus or Mikolaj Kopernik (1473-1543) was a Polish astronomer "
-#~ "who proposed the heliocentric model of the solar system in his book <em>De "
-#~ "revolutionibus orbium coelestium</em>"
-#~ msgstr ""
-#~ "Мікалай Капернік (1473-1543) — польскі астраном, які прапанаваў "
-#~ "геліяцэнтрычную мадэль сонечнай сыстэмы ў кнізе em>De revolutionibus orbium "
-#~ "coelestium</em>"
-
-#~ msgid ""
-#~ "Hans Lipperhey (1570-1619) was a German-Dutch lens grinder and spectacle "
-#~ "maker who is often attributed with the invention of the refracting telescope "
-#~ "in 1608"
-#~ msgstr ""
-#~ "Ганс Ліпэргей (1570-1619) — нямецкі й галяндзкі тачыльшчык лінзаў і выробца "
-#~ "акуляраў, якому часта прыпісваюць стварэньне тэлескопа-рэфрактара ў 1608 "
-#~ "годзе"
-
-#~ msgid ""
-#~ "<em>Amateru</em> is a common Japanese appellation for shrines when they "
-#~ "enshrine Amaterasu, the Shinto goddess of the Sun, born from the left eye of "
-#~ "the god Izanagi"
-#~ msgstr ""
-#~ "<em>Аматэру</em> — агульнапрынятае японскае найменьне для сьвятыняў, калі "
-#~ "яны заховаюць памяць аб Аматэрасу, сынтаісцкай багіні Сонца, народжанай зь "
-#~ "левага вока бога Ідзанаґі"
-
-#~ msgid ""
-#~ "Hypatia was a famous Greek astronomer, mathmatician, and philosopher. She "
-#~ "was head of the Neo-Platonic school at Alexandria in the early 5th century, "
-#~ "until murdered by a Christian mob in 415"
-#~ msgstr ""
-#~ "Гіпація — славутая грэцкая астраном, матэматык і філёзаф. Яна ачольвала "
-#~ "нэаплатанічную школу ў Александрыі на пачатку 5-га стагодзьдзя, да забойства "
-#~ "хрысьціянскім натоўпам у 415 годзе"
-
-#~ msgid ""
-#~ "Ran is the Norse goddess of the sea, who stirs up the waves and captures "
-#~ "sailors with her net"
-#~ msgstr ""
-#~ "Ран — гэта нарвэская багіня мора, якая стварае хвалі й палоніць маракоў "
-#~ "сваёй сеткай"
-
-#~ msgid ""
-#~ "AEgir is Ran's husband, the personified god of the ocean. <em>AEgir</em> and "
-#~ "<em>Ran</em> both represent the <em>Jotuns</em> who reign in the outer "
-#~ "Universe; together they had nine daughters"
-#~ msgstr ""
-#~ "Эґір — муж Ран, пэрсаніфікаваны бог акіяну. <em>Эґір</em> і <em>Ран</em> "
-#~ "абое ўвасабляюць <em>Ятуна</em>, які кіруе ў вонкавым Сусьвеце; яны маюць "
-#~ "дзевяць дачок"
-
-#~ msgid ""
-#~ "Ancient Semitic name and modern Arabic name for the city of Palmyra, a "
-#~ "UNESCO World Heritage Site"
-#~ msgstr ""
-#~ "Старажытная сэміцкая й сучасная арабская назва горада Пальміра, абвешчанага "
-#~ "ЮНЭСКА сусьветнай спадчынай"
-
-#~ msgid "Dagon was a Semitic deity, often represented as half-man, half-fish"
-#~ msgstr ""
-#~ "Даґон — сэміцкае боства, часта ўяўляецца напалову чалавекам, напалову рыбай"
-
-#~ msgid "Tonatiuh was the Aztec god of the Sun"
-#~ msgstr "Танатыю быў богам Сонца ў ацтэкаў"
-
-#~ msgid "Meztli was the Aztec goddess of the Moon"
-#~ msgstr "Мэзтлі была багіняў Месца ў ацтэкаў"
-
-#~ msgid ""
-#~ "Ogma was a deity of eloquence, writing, and great physical strength in the "
-#~ "Celtic mythologies of Ireland and Scotland, and may be related to the Gallo-"
-#~ "Roman deity <em>Ogmios</em>"
-#~ msgstr ""
-#~ "Оґма — боства красамоўства, пісьма й вялікай фізычнай сілы ў кельцкай "
-#~ "міталёґіі Ірляндыі й Шатляндыі, і можа быць зьвязаны з ґала-раманскім "
-#~ "боствам <em>Оґміяс</em>"
-
-#~ msgid "Smertrios was a Gallic deity of war"
-#~ msgstr "Смэртрыяс быў ґальскім боствам вайны"
-
-#~ msgid ""
-#~ "Intercrus means <em>between the legs</em> in Latin style, referring to the "
-#~ "star's position in the constellation Ursa Major"
-#~ msgstr ""
-#~ "Інтэркрус, назва ў лацінскім стылі, значыць <em>паміж ног</em>, гэта "
-#~ "зьвязана са становішчам зоркі ў сузор'і Вялікай мядзьведзіцы"
-
-#~ msgid "Arkas was the son of Callisto (Ursa Major) in Greek mythology"
-#~ msgstr "Аркас быў сынам Каліста (Вялікая мядзьведзіца) ў грэцкай міталёґіі"
-
-#~ msgid ""
-#~ "Miguel de Cervantes Saavedra (1547-1616) was a famous Spanish writer and "
-#~ "author of <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>"
-#~ msgstr ""
-#~ "Міґель дэ Сэрвантэс Саавэдра (1547-1616) — знакаміты гішпанскі пісьменьнік і "
-#~ "аўтар <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>"
-
-#~ msgid ""
-#~ "Lead fictional character from Cervantes's <em>El Ingenioso Hidalgo Don "
-#~ "Quixote de la Mancha</em>"
-#~ msgstr ""
-#~ "Галоўны герой <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em> "
-#~ "Сэрвантэса"
-
-#~ msgid ""
-#~ "Fictional character and love interest of Don Quijote (or Quixote) in "
-#~ "Cervantes's <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>"
-#~ msgstr ""
-#~ "Пэрсанаж і каханка Дона Кіхота ў <em>El Ingenioso Hidalgo Don Quixote de la "
-#~ "Mancha</em> Сэрвантэса"
-
-#~ msgid ""
-#~ "Fictional horse of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
-#~ "Quixote de la Mancha</em>"
-#~ msgstr ""
-#~ "Конь Дона Кіхота ў <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em> "
-#~ "Сэрвантэса"
-
-#~ msgid ""
-#~ "Fictional squire of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
-#~ "Quixote de la Mancha</em>"
-#~ msgstr ""
-#~ "Збраяносец Дона Кіхота ў <em>El Ingenioso Hidalgo Don Quixote de la "
-#~ "Mancha</em> Сэрвантэса"
-
-#~ msgid ""
-#~ "Lich is a fictional undead creature known for controlling other undead "
-#~ "creatures with magic"
-#~ msgstr "Ліч — выдуманая нежыць, якая з дапамогай магіі кіруе іншай нежыцьцю"
-
-#~ msgid "Draugr refers to undead creatures in Norse mythology"
-#~ msgstr "Драўґр — нежыць з нарвэскай міталёґіі"
-
-#~ msgid ""
-#~ "Phobetor is a Greek mythological deity of nightmares, the son of Nyx, the "
-#~ "primordial deity of night"
-#~ msgstr ""
-#~ "Фабэтар — грэцкае мітычнае боства кашмараў, сын Нікты, першапачатковага "
-#~ "боства ночы"
-
-#~ msgid ""
-#~ "These names are modified based on the original proposals, to be consistent "
-#~ "with the IAU rules"
-#~ msgstr ""
-#~ "Гэтыя назвы папраўленыя спачатныя прапановы, каб быць пасьлядоўнымі з "
-#~ "правіламі МАС"
-
-#~ msgid ""
-#~ "The original name proposed, <em>Veritas</em>, is that of an asteroid "
-#~ "important for the study of the solar system"
-#~ msgstr ""
-#~ "Прапанаваная спачатку назва, <em>Вэрытас</em>, належыць астэроіду, важнаму "
-#~ "для вывучэньня сонечнай сыстэмы"
-
-#~ msgid ""
-#~ "The name originally proposed, Amaterasu, is already used for an asteroid"
-#~ msgstr ""
-#~ "Прапанаваная спачатку назва, Аматэрасу, ужо выкарыстаная для астэроіда"
-
-#~ msgid ""
-#~ "Note the typographical difference between <em>AEgir</em> and <em>Aegir</em>, "
-#~ "the Norwegian transliteration. The same name, with the spelling "
-#~ "<em>Aegir</em>, has been attributed to one of Saturn's satellites, "
-#~ "discovered in 2004"
-#~ msgstr ""
-#~ "У лацінскім напісаньні, у адпаведасьці з нарвэскай трансьлітарацыяй існуюць "
-#~ "два напісаньні Эґір: <em>AEgir</em> і <em>Aegir</em>. Назва ў напісаньні "
-#~ "<em>Aegir</em> выкарыстаная для спадарожніка Сатурна, адкрытага ў 204 годзе"
-
-#~ msgid "<em>Ogmios</em> is a name already attributed to an asteroid"
-#~ msgstr "<em>Оґміяс</em> — гэта назва, ужо прыпісаная астэроіду"
-
-#~ msgid ""
-#~ "The original proposed name <em>Leda</em> is already attributed to an "
-#~ "asteroid and to one of Jupiter's satellites. The name <em>Althaea</em> is "
-#~ "also attributed to an asteroid"
-#~ msgstr ""
-#~ "Прапанаваная спачатку назва <em>Леда</em> ўжо прыпісаная астэроіду й аднаму "
-#~ "са спадарожнікаў Юпітэра. Назва <em>Альтэя</em> таксама прыпісаная астэроіду"
-
-#~ msgid ""
-#~ "The original spelling of <em>Lippershey</em> was corrected to "
-#~ "<em>Lipperhey</em> on 15.01.2016. The commonly seen spelling "
-#~ "<em>Lippershey</em> (with an <em>s</em>) results in fact from a "
-#~ "typographical error dating back from 1831, thus should be avoided"
-#~ msgstr ""
-#~ "Пачатковае напісаньне <em>Ліпэрсгей</em> (Lippershey) было папраўленае на "
-#~ "<em>Ліпэргей</em> (Lipperhey) 15 студзеня 2016. Агульна ўжыванае напісаньне "
-#~ "<em>Ліпэрсгей</em> (з <em>с</em>) выкліканае друкарскай памылкай, зробленай "
-#~ "у 183 годзе, таму яго варта пазьбягайь"
