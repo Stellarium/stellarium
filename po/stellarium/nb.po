@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-03-18 00:42+0600\n"
-"PO-Revision-Date: 2016-03-19 18:12+0000\n"
+"PO-Revision-Date: 2016-03-26 19:50+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-03-20 05:18+0000\n"
-"X-Generator: Launchpad (build 17947)\n"
+"X-Launchpad-Export-Date: 2016-03-27 05:17+0000\n"
+"X-Generator: Launchpad (build 17967)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
@@ -631,7 +631,7 @@ msgstr "Stjernehop assosiert med tåke"
 
 #: src/core/modules/Nebula.cpp:1094
 msgid "bipolar nebula"
-msgstr ""
+msgstr "Bipolar tåke"
 
 #: src/core/modules/Nebula.cpp:1097
 msgid "emission nebula"
@@ -667,11 +667,11 @@ msgstr "Emisjonsobjekt"
 
 #: src/core/modules/Nebula.cpp:1121
 msgid "BL Lac object"
-msgstr ""
+msgstr "BL Lac-objekt"
 
 #: src/core/modules/Nebula.cpp:1124
 msgid "blazar"
-msgstr ""
+msgstr "Blazar"
 
 #: src/core/modules/Nebula.cpp:1127
 msgid "molecular cloud"
@@ -2569,7 +2569,7 @@ msgstr "Type"
 #: src/gui/AstroCalcDialog.cpp:161
 #, qt-format
 msgid "Positions on %1"
-msgstr ""
+msgstr "Posisjoner for %1"
 
 #: src/gui/AstroCalcDialog.cpp:252
 msgid "JD"
@@ -3680,7 +3680,7 @@ msgstr "Serbia og Montenegro"
 
 #: src/translations.h:371
 msgid "Montenegro"
-msgstr ""
+msgstr "Montenegro"
 
 #: src/translations.h:372
 msgid "Cuba"
@@ -5075,7 +5075,7 @@ msgstr "Lyse stjernetåker"
 
 #: src/ui_viewDialog.h:1691
 msgid "Hints"
-msgstr ""
+msgstr "Hint"
 
 #: src/ui_viewDialog.h:1693
 msgid ""
@@ -5099,8 +5099,8 @@ msgstr "Bruk proporsjonale hint"
 msgid ""
 "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
-"Avgrensingsmagnitude (for observatører med kikkert eller uten hjelpemiddel) "
-"for deep-sky-objekter."
+"Avgrensingsmagnitude for deep-sky-objekter (for observatører med kikkert "
+"eller uten hjelpemiddel)."
 
 #: src/ui_viewDialog.h:1704
 msgid "Celestial Sphere"
@@ -5385,29 +5385,34 @@ msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
 msgstr ""
+"DE431 gir posisjonsdata for år -13000...+17000. Bare ment for spesielle "
+"anvendelser."
 
 #: src/ui_configurationDialog.h:1098
 msgid "Use DE431 (long-time data)"
-msgstr ""
+msgstr "Bruk DE431 (langtidsdata)"
 
 #: src/ui_configurationDialog.h:1100
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
-msgstr ""
+msgstr "DE430 gir høyest nøyaktighet, bare for år 1550...2650."
 
 #: src/ui_configurationDialog.h:1102
 msgid "Use DE430 (high accuracy)"
-msgstr ""
+msgstr "Bruk DE430 (høy nøyaktighet)"
 
 #: src/ui_configurationDialog.h:1104
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
 msgstr ""
+"Bruk av VSOP87 anbefales bare for år -4000...+8000, men gir brukbare "
+"posisjoner utenfor dette området."
 
 #: src/ui_configurationDialog.h:1106
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
+"VSOP87/ELP2000-82B brukes når disse ikke er installert eller ikke aktivert."
 
 #: src/ui_configurationDialog.h:1107
 msgid "Default options"
@@ -5754,7 +5759,7 @@ msgstr "Toposentriske koordinater"
 
 #: src/ui_configurationDialog.h:1263
 msgid "Activate this option to calculate azimuth from south towards west."
-msgstr ""
+msgstr "Aktiver dette alternativet for å beregne asimut fra sør mot vest."
 
 #: src/ui_configurationDialog.h:1265
 msgid "Azimuth from South"
@@ -6029,7 +6034,7 @@ msgstr "Beregn efemerider"
 
 #: src/ui_astroCalcDialog.h:388
 msgid "Cleanup ephemerides"
-msgstr ""
+msgstr "Slett efemerider"
 
 #: src/ui_astroCalcDialog.h:389
 msgid "Ephemeris"
@@ -6779,7 +6784,7 @@ msgstr "Skaler bildesirkel"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1172
 msgid "Use semi-transparent mask"
-msgstr ""
+msgstr "Bruk semi-transparent maske"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1173
 msgid "Key mappings"
@@ -6914,19 +6919,19 @@ msgstr "Pikselhøyde (mikrometer):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1214
 msgid "Prism/CCD distance (mm):"
-msgstr ""
+msgstr "Prisme/CCD-avstand (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1215
 msgid "Prism/CCD height (mm):"
-msgstr ""
+msgstr "Prisme/CCD-høyde (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1216
 msgid "Prism/CCD width (mm):"
-msgstr ""
+msgstr "Prisme/CCD-bredde (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1217
 msgid "Position angle (degrees):"
-msgstr ""
+msgstr "Posisjonsvinkel (grader):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1218
 msgid "Off-Axis guider"
@@ -6934,7 +6939,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1219
 msgid "Rotation Angle (degrees):"
-msgstr ""
+msgstr "Rotasjonsvinkel (grader):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1221
 #: plugins/Oculars/src/ui_ocularDialog.h:1230
@@ -7055,17 +7060,17 @@ msgstr "iridium"
 #. TRANSLATORS: Satellite group: Space stations
 #: plugins/Satellites/src/Satellites.cpp:1816
 msgid "stations"
-msgstr ""
+msgstr "stasjoner"
 
 #. TRANSLATORS: Satellite group: Education satellites
 #: plugins/Satellites/src/Satellites.cpp:1818
 msgid "education"
-msgstr ""
+msgstr "utdanning"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
 #: plugins/Satellites/src/Satellites.cpp:1820
 msgid "observatory"
-msgstr ""
+msgstr "observatorie"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:1831
@@ -7139,7 +7144,7 @@ msgstr "TEME-hastighet (km/s): %1"
 #: plugins/Satellites/src/Satellite.cpp:324
 #, qt-format
 msgid "Sun reflection angle: %1%2"
-msgstr ""
+msgstr "Solrefleksjonsvinkel: %1%2"
 
 #: plugins/Satellites/src/Satellite.cpp:335
 msgid "The satellite and the observer are in sunlight."
