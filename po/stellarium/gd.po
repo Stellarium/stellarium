@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-03-18 00:42+0600\n"
-"PO-Revision-Date: 2016-03-25 08:05+0000\n"
+"PO-Revision-Date: 2016-03-26 23:16+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-03-26 05:17+0000\n"
+"X-Launchpad-Export-Date: 2016-03-27 05:17+0000\n"
 "X-Generator: Launchpad (build 17967)\n"
 "Language: gd\n"
 
@@ -91,7 +91,7 @@ msgstr "An crios-meadhain reul-chriosaich"
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:633 src/ui_viewDialog.h:1772
 msgid "O./C. longitude"
-msgstr "Domhan-faid c./f"
+msgstr "Domhan-fhaid c./f"
 
 #: src/core/modules/GridLinesMgr.cpp:637 src/core/modules/GridLinesMgr.cpp:920
 #: src/ui_viewDialog.h:1764
@@ -5336,12 +5336,17 @@ msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which "
 "passes through both ecliptic poles, the Sun and opposition point."
 msgstr ""
+"Loidhne domhan-fhaid na comhaireachd 's an fhochair - seo loidhne an domhan-"
+"fhaid èicliptich a thèid tron dà phòla èiclipteach, tron ghrian 's tro "
+"phuing na comhaireachd."
 
 #: src/ui_viewDialog.h:1774
 msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
 msgstr ""
+"Cearcallan sa bhad aig aiseal na Talmhainn a' gluasad timcheall nam "
+"pòlaichean èiclipteach. 'Ga shealltainn air an Talamh a-mhàin."
 
 #: src/ui_viewDialog.h:1776
 msgid "Precession circles"
@@ -5353,7 +5358,7 @@ msgstr "Sealladh"
 
 #: src/ui_viewDialog.h:1778
 msgid "Vertical viewport offset"
-msgstr ""
+msgstr "Frith-àireamh inghearach a' phuirt-sheallaidh"
 
 #: src/ui_viewDialog.h:1780
 msgid "Show ground"
@@ -5369,7 +5374,7 @@ msgstr "Cleachd a' phlanaid is an ionad na cois"
 
 #: src/ui_viewDialog.h:1783
 msgid "Show landscape labels"
-msgstr ""
+msgstr "Seall leubailean crutha-tìre"
 
 #: src/ui_viewDialog.h:1784
 msgid "Show fog"
@@ -5383,28 +5388,34 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1788
 msgid "Show illumination "
-msgstr ""
+msgstr "Seall an t-soillseachadh "
 
 #: src/ui_viewDialog.h:1790
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr ""
+"Cleachd beagan soillearachd ach an gabh an cruth-tìre faicinn san dorchadas "
+"cuideachd"
 
 #: src/ui_viewDialog.h:1792
 msgid "Minimal brightness:"
-msgstr ""
+msgstr "An t-soillearachd as lugha:"
 
 #: src/ui_viewDialog.h:1794
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr ""
+"Rainse an luach 0..1 (cruth-tìre dubh air an oidhche - cruth-tìre gu tur "
+"soilleir)"
 
 #: src/ui_viewDialog.h:1797
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr ""
+"Cleachd an t-soillearachd as lugha mar a chaidh mìneachadh ann an "
+"landscape.ini ma dh'fhaoidte"
 
 #: src/ui_viewDialog.h:1799
 msgid "from landscape, if given"
-msgstr ""
+msgstr "on chruth-tìre ma chaidh a shònrachadh ann"
 
 #: src/ui_viewDialog.h:1800
 msgid "Add/remove landscapes..."
@@ -5421,27 +5432,29 @@ msgstr "Seall leubailean"
 #: src/ui_viewDialog.h:1805
 msgid "Select if you want names abbreviated, original or translated"
 msgstr ""
+"Tagh ma tha thu airson ainmean tùsail, air an eadar-theangachadh no air an "
+"giorrachadh"
 
 #: src/ui_viewDialog.h:1809
 msgid "Use native names for planets from current culture"
 msgstr ""
-"Cleachd ainmean tùsach airson nam planaidean on dhualchas speura làithreach"
+"Cleachd ainmean tùsail airson nam planaidean on dhualchas speura làithreach"
 
 #: src/ui_viewDialog.h:1811
 msgid "Use native names for planets"
-msgstr ""
+msgstr "Cleachd ainmean tùsail airson nam planaidean"
 
 #: src/ui_viewDialog.h:1812
 msgid "Show lines with thickness"
-msgstr ""
+msgstr "Tiughad nan loidhnichean"
 
 #: src/ui_viewDialog.h:1814
 msgid "Value in pixels"
-msgstr ""
+msgstr "Luach ann am piogsailean"
 
 #: src/ui_viewDialog.h:1816
 msgid "Show art in brightness"
-msgstr ""
+msgstr "Soilleireachd na h-ealaine"
 
 #: src/ui_viewDialog.h:1817
 msgid "Show boundaries"
@@ -5458,7 +5471,7 @@ msgstr "An speur"
 #: src/ui_viewDialog.h:1826
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
-msgstr ""
+msgstr "Fad às"
 
 #: src/ui_viewDialog.h:1828
 msgid "Deep-Sky Objects"
@@ -5484,11 +5497,11 @@ msgstr "Rèiteachadh"
 
 #: src/ui_configurationDialog.h:1089
 msgid "Language settings"
-msgstr ""
+msgstr "Roghainnean cànain"
 
 #: src/ui_configurationDialog.h:1090
 msgid "Program Language"
-msgstr ""
+msgstr "Cànan a' phrògraim"
 
 #: src/ui_configurationDialog.h:1091
 msgid "Sky Culture Language"
@@ -5496,7 +5509,7 @@ msgstr "Cànan an dualchas speura"
 
 #: src/ui_configurationDialog.h:1092
 msgid "Ephemeris settings"
-msgstr ""
+msgstr "Roghainnean ephemeris"
 
 #: src/ui_configurationDialog.h:1093 src/ui_configurationDialog.h:1094
 msgid "Not installed"
@@ -5507,29 +5520,38 @@ msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
 msgstr ""
+"Bheir DE431 dàta nan ionadan dhut airson nam blianaichean -13000...+17000. A "
+"chum cleachdaidh shònraichte a-mhàin."
 
 #: src/ui_configurationDialog.h:1098
 msgid "Use DE431 (long-time data)"
-msgstr ""
+msgstr "Cleachd DE431 (dàta air ùine mhòr)"
 
 #: src/ui_configurationDialog.h:1100
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
 msgstr ""
+"Bheir DE430 a' phongalachd as fhearr dhut ach airson nam blianaichean "
+"1550...2650 a-mhàin."
 
 #: src/ui_configurationDialog.h:1102
 msgid "Use DE430 (high accuracy)"
-msgstr ""
+msgstr "Cleachd DE430 (pongalachd àrd)"
 
 #: src/ui_configurationDialog.h:1104
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
 msgstr ""
+"Mholamaid nach cleachd thu VSOP87 ach airson nam bliadhnaichean -"
+"4000...+8000 ach bheir e ionadan feumail dhut taobh a-muigh nam "
+"bliadhnaichean sin cuideachd."
 
 #: src/ui_configurationDialog.h:1106
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
+"Thèid VSOP87/ELP2000-82B a chleachdadh mura deach an fheadhainn seo a "
+"stàladh no a ghnìomhachadh."
 
 #: src/ui_configurationDialog.h:1107
 msgid "Default options"
@@ -5846,10 +5868,12 @@ msgstr "Seall putanan flipidh"
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
+"Thèid an àile a chur an comas gu fèin-obrachail airson nam bodhaigean ann an "
+"uinneag an ionaid"
 
 #: src/ui_configurationDialog.h:1249
 msgid "Auto-enabling for the atmosphere"
-msgstr ""
+msgstr "Àile fèin-obrachail"
 
 #: src/ui_configurationDialog.h:1251
 msgid "Use decimal degrees for coordinates"
@@ -5863,10 +5887,12 @@ msgstr "Cleachd ceuman deicheach"
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr ""
+"'S e luasgadh dhe bheagan àrc-dhiogan air aiseal na Talmhainn a th' anns an "
+"nùtachadh."
 
 #: src/ui_configurationDialog.h:1257
 msgid "Include nutation"
-msgstr ""
+msgstr "Gabh a-steach an nùtachadh"
 
 #: src/ui_configurationDialog.h:1259
 msgid ""
