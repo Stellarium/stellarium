@@ -36,7 +36,7 @@ SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 ########### Main global variables ###########
 IF(NOT CMAKE_BUILD_TYPE)
-  SET(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind Release RelWithDebInfo MinSizeRel." FORCE)
+  SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind Release RelWithDebInfo MinSizeRel." FORCE)
 ENDIF()
 
 # GZ I had seen that some releases (e.g. 0.13.3 Ubuntu/ARM) were not compiled with NDEBUG defined. Maybe a bug in compilatation setup? 
@@ -98,15 +98,16 @@ IF("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
      ENDIF()
 ENDIF()
 
-SET(RASPI_BUILD 1 CACHE BOOL "Build for Raspberry Pi.")
-IF(RASPI_BUILD)
- SET(QT_OPENGL_ES_2 1)
-  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DRASPI_BUILD -DQT_OPENGL_ES_2")
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DRASPI_BUILD -DQT_OPENGL_ES_2")
-  FIND_LIBRARY(GLES2_LIBRARIES GLESv2 PATHS /opt/vc/lib/ DOC "GLES2 link option")
-# TODO: Find the right CMake call to add the magic link command to link.txt (see README_RaspberryPi.txt for details)
-#  TARGET_LINK_LIBRARIES(  ${GLES2})
-ENDIF(RASPI_BUILD)
+# It seems this is no longer required for Raspi with VC4.
+#SET(RASPI_BUILD 1 CACHE BOOL "Build for Raspberry Pi.")
+#IF(RASPI_BUILD)
+# SET(QT_OPENGL_ES_2 1)
+#  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DRASPI_BUILD -DQT_OPENGL_ES_2")
+#  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DRASPI_BUILD -DQT_OPENGL_ES_2")
+#  FIND_LIBRARY(GLES2_LIBRARIES GLESv2 PATHS /opt/vc/lib/ DOC "GLES2 link option")
+## TODO: Find the right CMake call to add the magic link command to link.txt (see README_RaspberryPi.txt for details)
+##  TARGET_LINK_LIBRARIES(  ${GLES2})
+#ENDIF(RASPI_BUILD)
 
 # FreeBSD-specific compiler flags
 # resolve bug for FreeBSD/amd64 and NVIDIA proprietary drivers 
