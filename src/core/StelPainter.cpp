@@ -542,8 +542,9 @@ StringTexture* StelPainter::getTexTexture(const QString& str, int pixelSize)
 	QPixmap strImage = QPixmap(StelUtils::getBiggerPowerOfTwo(w), StelUtils::getBiggerPowerOfTwo(h));
 	strImage.fill(Qt::transparent);
 	QPainter painter(&strImage);
+	tmpFont.setStyleStrategy(QFont::NoAntialias);
 	painter.setFont(tmpFont);
-	painter.setRenderHints(QPainter::TextAntialiasing);
+	//painter.setRenderHints(QPainter::TextAntialiasing);
 	painter.setPen(Qt::white);
 	painter.drawText(-strRect.x(), -strRect.y(), str);
 	StringTexture* newTex = new StringTexture(new QOpenGLTexture(strImage.toImage()), QSize(w, h));
@@ -560,7 +561,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	}
 	else if (qApp->property("text_texture")==true) // CLI option -t given?
 	{
-		qDebug() <<  "Text texture" << str;
+	  //qDebug() <<  "Text texture" << str;
 		// This is taken from branch text-use-opengl-buffer. This is essential on devices like Raspberry Pi (2016-03).
 		StringTexture* tex = getTexTexture(str, currentFont.pixelSize());
 		Q_ASSERT(tex);
