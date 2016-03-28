@@ -177,7 +177,11 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 
 			QColor infoColor(colorStr);
 			// inject a marker word in the infostring to mark end of header.
-			s.insert(s.indexOf("</h2>")+5, QString("ENDHEAD<br/>"));
+			// In case no header exists, put it after the color tag (first closing brace).
+			int endHead=s.indexOf("</h2>")+5;
+			if (endHead==4)
+				endHead=s.indexOf(">")+1;
+			s.insert(endHead, QString("ENDHEAD<br/>"));
 			setHtml(s);
 			infoPixmap->setPixmap(getInfoPixmap(getSelectedText().split("\n"), this->font(), infoColor));
 			// setting visible=false would hide also the child QGraphicsPixmapItem...
