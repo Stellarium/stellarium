@@ -25,6 +25,7 @@
 
 #include <QDebug>
 #include <QGraphicsWidget>
+#include <QGraphicsPixmapItem>
 
 class QGraphicsSceneMouseEvent;
 class QGraphicsTextItem;
@@ -40,6 +41,7 @@ class InfoPanel : public QGraphicsTextItem
 		//! Reads "gui/selected_object_info", etc from the configuration file.
 		//! @todo Bad idea to read from the configuration file in a constructor? --BM
 		InfoPanel(QGraphicsItem* parent);
+		~InfoPanel();
 		void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) {infoTextFilters=aflags;}
 		const StelObject::InfoStringGroup& getInfoTextFilters(void) const {return infoTextFilters;}
 		void setTextFromObjects(const QList<StelObjectP>&);
@@ -47,6 +49,7 @@ class InfoPanel : public QGraphicsTextItem
 
 	private:
 		StelObject::InfoStringGroup infoTextFilters;
+		QGraphicsPixmapItem *infoPixmap; // Used when text rendering is buggy. Used when CLI option -t given.
 };
 
 //! The class managing the layout for button bars, selected object info and loading bars.
