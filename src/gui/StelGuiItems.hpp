@@ -251,16 +251,12 @@ private:
 	QGraphicsSimpleTextItem* datetime;
 	QGraphicsSimpleTextItem* fov;
 	QGraphicsSimpleTextItem* fps;
-	// For bad graphics, show these instead. But we can use location etc for font info.
-//	// We need a texture cache in those cases.
+	// For bad graphics, show these instead. We can use location etc for font info.
 	// We use ad-hoc pixmaps instead if command-line arg. -t (--text-fix) is given.
 	QGraphicsPixmapItem* locationPixmap;
 	QGraphicsPixmapItem* datetimePixmap;
 	QGraphicsPixmapItem* fovPixmap;
 	QGraphicsPixmapItem* fpsPixmap;
-//	// Idea text-use-opengl-buffer
-//	static QCache<QByteArray, struct StringPixmap> pxCache;
-//	struct StringPixmap* getTexPixmap(const QString& str, int pixelSize);
 
 
 

@@ -50,8 +50,8 @@
 #include <QGraphicsLinearLayout>
 #include <QSettings>
 
-// GZ: RasPi necessity as of 2016-03-26. Inspired by GC's text-use-opengl-buffer branch.
-// May be useful in other broken OpenGL font situations.
+// Inspired by text-use-opengl-buffer branch: work around font problems in GUI buttons.
+// May be useful in other broken OpenGL font situations. RasPi necessity as of 2016-03-26.
 QPixmap getTextPixmap(const QString& str, QFont font)
 {
 	// Render the text str into a QPixmap.
@@ -59,7 +59,6 @@ QPixmap getTextPixmap(const QString& str, QFont font)
 	int w = strRect.width()+1+(int)(0.02f*strRect.width());
 	int h = strRect.height();
 
-	//QPixmap strPixmap(StelUtils::getBiggerPowerOfTwo(w), StelUtils::getBiggerPowerOfTwo(h));
 	QPixmap strPixmap(w, h);
 	strPixmap.fill(Qt::transparent);
 	QPainter painter(&strPixmap);
