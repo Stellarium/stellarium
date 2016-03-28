@@ -186,16 +186,6 @@
 #  define GL_LINE_SMOOTH 0x0B20
 # endif
 
-
-#if defined(QT_OPENGL_ES_1) 
-#pragma message "==========================This goes to OpenGL ES 1 and will not work"
-#elif defined(QT_OPENGL_ES_2) 
-#pragma message "==========================This goes to OpenGL ES 2"
-#else 
-#pragma message "==========================This goes to Desktop OpenGL"
-#endif
-
-
 const char* getGLErrorText(int code);
 int checkGLErrors(const char *file, int line);
 
