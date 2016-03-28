@@ -59,7 +59,8 @@ QPixmap getTextPixmap(const QString& str, QFont font)
 	int w = strRect.width()+1+(int)(0.02f*strRect.width());
 	int h = strRect.height();
 
-	QPixmap strPixmap(StelUtils::getBiggerPowerOfTwo(w), StelUtils::getBiggerPowerOfTwo(h));
+	//QPixmap strPixmap(StelUtils::getBiggerPowerOfTwo(w), StelUtils::getBiggerPowerOfTwo(h));
+	QPixmap strPixmap(w, h);
 	strPixmap.fill(Qt::transparent);
 	QPainter painter(&strPixmap);
 	font.setStyleStrategy(QFont::NoAntialias); // else: font problems on RasPi20160326
@@ -245,14 +246,18 @@ void StelButton::setBackgroundPixmap(const QPixmap &newBackground)
 LeftStelBar::LeftStelBar(QGraphicsItem* parent)
 	: QGraphicsItem(parent)
 	, hideTimeLine(NULL)
+	, helpLabelPixmap(NULL)
 {
 	// Create the help label
 	helpLabel = new QGraphicsSimpleTextItem("", this);
 	helpLabel->setBrush(QBrush(QColor::fromRgbF(1,1,1,1)));
+	if (qApp->property("text_texture")==true) // CLI option -t given?
+		helpLabelPixmap=new QGraphicsPixmapItem(this);
 }
 
 LeftStelBar::~LeftStelBar()
 {
+	if (helpLabelPixmap) { delete helpLabelPixmap; helpLabelPixmap=NULL; }
 }
 
 void LeftStelBar::addButton(StelButton* button)
@@ -285,7 +290,7 @@ QRectF LeftStelBar::boundingRectNoHelpLabel() const
 	QRectF childRect;
 	foreach (QGraphicsItem *child, QGraphicsItem::childItems())
 	{
-		if (child==helpLabel)
+		if ((child==helpLabel) || (child==helpLabelPixmap))
 			continue;
 		QPointF childPos = child->pos();
 		QTransform matrix = child->transform() * QTransform().translate(childPos.x(), childPos.y());
@@ -315,11 +320,25 @@ void LeftStelBar::buttonHoverChanged(bool b)
 			}
 			helpLabel->setText(tip);
 			helpLabel->setPos(qRound(boundingRectNoHelpLabel().width()+15.5),qRound(button->pos().y()+button->pixmap().size().height()/2-8));
+			if (qApp->property("text_texture")==true)
+			{
+				helpLabel->setVisible(false);
+				//if(helpLabelPixmap)
+				//	delete helpLabelPixmap;
+				helpLabelPixmap->setPixmap(getTextPixmap(tip, helpLabel->font()));
+				helpLabelPixmap->setVisible(true);
+				//helpLabelPixmap->setPos(20, -27);
+				helpLabelPixmap->setPos(helpLabel->pos());
+				// and we must silence the text label! Else there is some gibberish.
+				//helpLabel->setText("H" + QString(tip.length()-2, ' ') + "P");
+			}
 		}
 	}
 	else
 	{
 		helpLabel->setText("");
+		if (qApp->property("text_texture")==true)
+			helpLabelPixmap->setVisible(false);
 	}
 	// Update the screen as soon as possible.
 	StelMainView::getInstance().thereWasAnEvent();

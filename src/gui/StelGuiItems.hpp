@@ -179,6 +179,7 @@ private slots:
 private:
 	QTimeLine* hideTimeLine;
 	QGraphicsSimpleTextItem* helpLabel;
+	QGraphicsPixmapItem* helpLabelPixmap; // bad-graphics replacement.
 };
 
 // The button bar on the bottom containing actions toggle buttons
@@ -296,7 +297,7 @@ private:
 	bool flagShowTZ;
 
 	QGraphicsSimpleTextItem* helpLabel;
-	QGraphicsPixmapItem* helpLabelPixmap;
+	QGraphicsPixmapItem* helpLabelPixmap; // bad-graphics replacement.
 };
 
 // The path around the bottom left button bars
