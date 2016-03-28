@@ -323,14 +323,9 @@ void LeftStelBar::buttonHoverChanged(bool b)
 			if (qApp->property("text_texture")==true)
 			{
 				helpLabel->setVisible(false);
-				//if(helpLabelPixmap)
-				//	delete helpLabelPixmap;
 				helpLabelPixmap->setPixmap(getTextPixmap(tip, helpLabel->font()));
-				helpLabelPixmap->setVisible(true);
-				//helpLabelPixmap->setPos(20, -27);
 				helpLabelPixmap->setPos(helpLabel->pos());
-				// and we must silence the text label! Else there is some gibberish.
-				//helpLabel->setText("H" + QString(tip.length()-2, ' ') + "P");
+				helpLabelPixmap->setVisible(true);
 			}
 		}
 	}
@@ -356,14 +351,14 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
                              const QPixmap& pixMiddle,
                              const QPixmap& pixSingle) :
 	QGraphicsItem(parent),
-	pixBackgroundLeft(pixLeft),
-	pixBackgroundRight(pixRight),
-	pixBackgroundMiddle(pixMiddle),
-	pixBackgroundSingle(pixSingle),
 	datetimePixmap(NULL),
 	locationPixmap(NULL),
 	fovPixmap(NULL),
 	fpsPixmap(NULL),
+	pixBackgroundLeft(pixLeft),
+	pixBackgroundRight(pixRight),
+	pixBackgroundMiddle(pixMiddle),
+	pixBackgroundSingle(pixSingle),
 	helpLabelPixmap(NULL)
 {
 	// The text is dummy just for testing
@@ -844,13 +839,9 @@ void BottomStelBar::buttonHoverChanged(bool b)
 			if (qApp->property("text_texture")==true)
 			{
 				helpLabel->setVisible(false);
-				//if(helpLabelPixmap)
-				//	delete helpLabelPixmap;
 				helpLabelPixmap->setPixmap(getTextPixmap(tip, helpLabel->font()));
+				helpLabelPixmap->setPos(helpLabel->pos());
 				helpLabelPixmap->setVisible(true);
-				helpLabelPixmap->setPos(20, -27);
-				// and we must silence the text label! Else there is some gibberish.
-				helpLabel->setText("H" + QString(tip.length()-2, ' ') + "P");
 			}
 		}
 	}
@@ -982,21 +973,3 @@ void CornerButtons::setOpacity(double opacity)
 		sb->setOpacity(opacity);
 	}
 }
-
-
-//// Methods taken from text-use-opengl-buffer
-//// Container for one cached string texture
-//struct StringPixmap
-//{
-//	QOpenGLTexture* texture;
-//	QSize size;
-//	QSizeF getTexSize() const {
-//		return QSizeF((float)size.width() / texture->width(),
-//			      (float)size.height() / texture->height());
-//	}
-
-//	StringTexture(QOpenGLTexture* tex, const QSize& size) :
-//	     texture(tex), size(size) {}
-//	~StringTexture() {delete texture;}
-//};
-
