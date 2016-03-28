@@ -151,11 +151,9 @@ int main(int argc, char **argv)
 	QGuiApplication::setDesktopSettingsAware(false);
 	QGuiApplication app(argc, argv);
 #endif
-	bool useSplash= qgetenv("STELLARIUM_NOSPLASH") != "1";
 	QPixmap pixmap(":/splash.png");
 	QSplashScreen splash(pixmap);
-	if (useSplash)
-		splash.show();
+	splash.show();
 	app.processEvents();
 
 	// QApplication sets current locale, but
@@ -354,8 +352,7 @@ int main(int argc, char **argv)
 
 	StelMainView mainWin;
 	mainWin.init(confSettings); // May exit(0) when OpenGL subsystem insufficient
-	if (useSplash)
-		splash.finish(&mainWin);
+	splash.finish(&mainWin);
 	app.exec();
 	mainWin.deinit();
 
