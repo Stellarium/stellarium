@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>743</width>
-    <height>366</height>
+    <width>677</width>
+    <height>359</height>
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
@@ -128,31 +128,163 @@
     <widget class="QWidget" name="widget" native="true">
      <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="0">
-       <widget class="QTreeWidget" name="bookmarksTreeWidget">
-        <property name="editTriggers">
-         <set>QAbstractItemView::NoEditTriggers</set>
+       <widget class="QTreeView" name="bookmarksTreeView"/>
+      </item>
+      <item row="1" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QPushButton" name="currentObjectPushButton">
+          <property name="text">
+           <string>&amp;Current object</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="centerScreenPushButton">
+          <property name="text">
+           <string>Center of the screen</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="2" column="0">
+       <widget class="QFrame" name="frame">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
-        <property name="rootIsDecorated">
-         <bool>false</bool>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
         </property>
-        <property name="uniformRowHeights">
-         <bool>true</bool>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
         </property>
-        <property name="itemsExpandable">
-         <bool>false</bool>
-        </property>
-        <property name="sortingEnabled">
-         <bool>true</bool>
-        </property>
-        <property name="expandsOnDoubleClick">
-         <bool>false</bool>
-        </property>
-        <property name="columnCount">
-         <number>0</number>
-        </property>
-        <attribute name="headerShowSortIndicator" stdset="0">
-         <bool>true</bool>
-        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QLabel" name="labelBookmarkName">
+             <property name="text">
+              <string>Name:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="bookmarkName"/>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_5">
+             <item>
+              <widget class="QLabel" name="labelRA_2">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Right Ascension (J2000):</string>
+               </property>
+               <property name="buddy">
+                <cstring>raSpinBox</cstring>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="labelDec_2">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Declination (J2000):</string>
+               </property>
+               <property name="buddy">
+                <cstring>decSpinBox</cstring>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_6">
+             <item>
+              <widget class="AngleSpinBox" name="raSpinBox">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="AngleSpinBox" name="decSpinBox">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <item>
+            <widget class="QCheckBox" name="dateTimeCheckBox">
+             <property name="text">
+              <string>Add date and time</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="locationCheckBox">
+             <property name="text">
+              <string>Add location</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_7">
+           <item>
+            <widget class="QPushButton" name="addBookmarkButton">
+             <property name="text">
+              <string>&amp;Add bookmark</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="removeBookmarkButton">
+             <property name="text">
+              <string>&amp;Remove bookmark</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="goToButton">
+             <property name="text">
+              <string>&amp;Go to...</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>
@@ -166,6 +298,11 @@
    <extends>QFrame</extends>
    <header>Dialog.hpp</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>AngleSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header location="global">AngleSpinBox.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>
