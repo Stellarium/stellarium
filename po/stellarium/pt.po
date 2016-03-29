@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-03-18 00:42+0600\n"
-"PO-Revision-Date: 2016-03-12 04:42+0000\n"
+"PO-Revision-Date: 2016-03-28 09:03+0000\n"
 "Last-Translator: Tiago S. <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-03-18 05:33+0000\n"
-"X-Generator: Launchpad (build 17947)\n"
+"X-Launchpad-Export-Date: 2016-03-29 05:17+0000\n"
+"X-Generator: Launchpad (build 17967)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:904 src/core/modules/LandscapeMgr.cpp:414
@@ -6644,7 +6644,7 @@ msgstr "Ampliação: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:833
 #, qt-format
 msgid "Exit pupil: %1 mm"
-msgstr ""
+msgstr "Pupila de saída: %1 mm"
 
 #: plugins/Oculars/src/Oculars.cpp:1972
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:842
@@ -6801,7 +6801,7 @@ msgstr "Campo de visão real fornecido por este binóculo"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:806
 msgid "Exit pupil provided by these binoculars"
-msgstr ""
+msgstr "Pupila de saída fornecida por estes binóculos"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:814
 msgid "Magnification provided by this ocular/lens/telescope combination"
@@ -6816,6 +6816,7 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:816
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
 msgstr ""
+"Pupila de saída fornecida por esta combinação de ocular, lentes ou telescópio"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:530
@@ -9882,38 +9883,48 @@ msgid ""
 "legend, his life was saved at sea by dolphins after attracting their "
 "attention by the playing of his kithara."
 msgstr ""
+"Arion foi um génio da poesia e música na Grécia antiga. De acordo com a "
+"lenda, foi salvo por golfinhos depois de chamar a sua atenção no mar ao "
+"tocar a sua cítara."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:188
 msgid "Fafnir was a Norse mythological dwarf who turned into a dragon."
 msgstr ""
+"Fafnir foi um anão da mitologia Nórdica que se transformou num dragão."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
 msgid ""
 "Orbitar is a contrived word paying homage to the space launch and orbital "
 "operations of NASA."
 msgstr ""
+"Orbitar é uma palavra criada para prestar homenagem aos lançamentos "
+"espaciais e às operações espaciais da NASA."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:190
 msgid "Chalawan is a mythological crocodile king from a Thai folktale."
-msgstr ""
+msgstr "Chalawan é um rei crocodilo mitológico do folclore tailandês."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
 msgid ""
 "Taphao Thong is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr ""
+"Taphao Thong é uma de duas irmãs associadas à fábula tailandesa de Chalawan."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
 msgid ""
 "Taphao Kae is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr ""
+"Taphao Kae é uma de duas irmãs associadas à fábula tailandesa de Chalawan."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
 msgid ""
 "Helvetios is Celtic for <em>the Helvetian</em> and refers to the Celtic "
 "tribe that lived in Switzerland during antiquity."
 msgstr ""
+"Helvetios é a palavra celta para <em>os Helvéticos</em> e refere-se à tribo "
+"celta que viveu na antiguidade na região da Suíça."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid ""
@@ -9929,6 +9940,9 @@ msgid ""
 "who proposed the heliocentric model of the solar system in his book <em>De "
 "revolutionibus orbium coelestium</em>."
 msgstr ""
+"Nicolaus Copernicus ou Mikolaj Kopernik (1473-1543) foi o astrónomo polaco "
+"que propôs o modelo heliocêntrico do sistema solar no seu livro <em>De "
+"revolutionibus orbium coelestium</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
 msgid ""
@@ -9938,6 +9952,11 @@ msgid ""
 "satellites of Jupiter, and the reported the first telescopic observations of "
 "the phases of Venus, among other discoveries."
 msgstr ""
+"Galileo Galilei (1564-1642) foi um astrónomo italiano e físico, vulgarmente "
+"apelidado de <em>pai da astronomia observacional</em> e de <em>pai da física "
+"moderna</em>. Utilizando um telescópio, descobriu entre outras coisas, os "
+"quatro maiores satélites de Júpiter e produziu os primeiros relatos das "
+"observações telescópicas das fases de Vénus."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid ""
@@ -9946,6 +9965,10 @@ msgid ""
 "observations were critical to Kepler's formulation of his three laws of "
 "planetary motion."
 msgstr ""
+"Tycho Brache (1546-1601) foi um astrónoma dinamarquês e um nobre que fez "
+"registos precisos das observações astronómicas das estrelas e dos planetas. "
+"Estas observações foram críticas para as formulações do Kepler sobre as três "
+"leis do movimento planetário."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
 msgid ""
@@ -9953,6 +9976,9 @@ msgid ""
 "maker who is often attributed with the invention of the refracting telescope "
 "in 1608."
 msgstr ""
+"Hans Lipperhey (1570-1619) foi um polidor de lentes alemão-holandês e "
+"criador de óculos a quem foi atribuída a criação do telescópio de refração "
+"em 1608."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid ""
@@ -9960,6 +9986,9 @@ msgid ""
 "attributed with invention of the microscope, and more controversially with "
 "the invention of the telescope."
 msgstr ""
+"Jacharias Janssen (1580-1630) foi um holandês criador de óculos a quem é "
+"atribuída a invenção do microscópio, e de forma mais controversa, a invenção "
+"do telescópio."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid ""
@@ -9967,6 +9996,9 @@ msgid ""
 "ethnographer, and translator, who is attributed with the first drawing of "
 "the Moon through telescopic observations."
 msgstr ""
+"Thomas Harriot (ca. 1560-1621) foi um astrónomo, matemático, etnógrafo e "
+"tradutor inglês, a quem se atribuí o primeiro desenho da lua a partir de "
+"observações telescópicas."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid ""
@@ -9974,6 +10006,9 @@ msgid ""
 "enshrine Amaterasu, the Shinto goddess of the Sun, born from the left eye of "
 "the god Izanagi."
 msgstr ""
+"<em>Amateru</em> é uma denominação comum em templos japoneses quando são "
+"dedicados a Amaterasu, a deusa Shinto do Sol, nascido do olho direito do "
+"deus Izanagi."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid ""
@@ -9981,12 +10016,17 @@ msgid ""
 "was head of the Neo-Platonic school at Alexandria in the early 5th century, "
 "until murdered by a Christian mob in 415."
 msgstr ""
+"Hypatia foi a famosa grega astrónoma, matemática e filósofa. Foi a reitora "
+"da escola Neo-Platónica em Alexandria no inicio do século V, até ser "
+"assassinada por uma multidão cristã em 415."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid ""
 "Ran is the Norse goddess of the sea, who stirs up the waves and captures "
 "sailors with her net."
 msgstr ""
+"Ran é o deusa nórdica do mar, que agita as ondas e captura os marinheiros na "
+"sua rede."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid ""
@@ -9994,16 +10034,23 @@ msgid ""
 "<em>Ran</em> both represent the <em>Jotuns</em> who reign in the outer "
 "Universe; together they had nine daughters."
 msgstr ""
+"AEgir é o marido de Ran, o deus do oceano personificado. <em>AEgir</em> e "
+"<em>Ran</em> representam em conjunto o <em>Jotuns</em> que reina o universo "
+"exterior, em conjunto com as suas nove filhas."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 msgid ""
 "Ancient Semitic name and modern Arabic name for the city of Palmyra, a "
 "UNESCO World Heritage Site."
 msgstr ""
+"Nome semita antigo e nome árabe moderno para a cidade de Palmira, um lugar "
+"Património da Humanidade da UNESCO."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
 msgid "Dagon was a Semitic deity, often represented as half-man, half-fish."
 msgstr ""
+"Dagon foi a divindade Semita, vulgarmente representado por um ser metade "
+"homem, metade peixe."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid "Tonatiuh was the Aztec god of the Sun."
@@ -10019,50 +10066,65 @@ msgid ""
 "Celtic mythologies of Ireland and Scotland, and may be related to the Gallo-"
 "Roman deity <em>Ogmios</em>."
 msgstr ""
+"Ogma era a divindade da eloquência, escrita e grande força física nas "
+"mitologias celtas da Irlanda e da Escócia e pode estar relacionada com a "
+"divindade Galesa-Romana <em>Ogmios</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
 msgid "Smertrios was a Gallic deity of war."
-msgstr ""
+msgstr "Smertrios foi o deus gaulês da guerra."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
 msgid ""
 "Intercrus means <em>between the legs</em> in Latin style, referring to the "
 "star's position in the constellation Ursa Major."
 msgstr ""
+"Intercrus significa  <em>entre as pernas</em> em latim, em referência à "
+"posição da estrela na constelação Ursa Maior."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
 msgid "Arkas was the son of Callisto (Ursa Major) in Greek mythology."
-msgstr ""
+msgstr "Arkas foi o filho de Calisto (Ursa Maior) na mitologia grega."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
 msgid ""
 "Miguel de Cervantes Saavedra (1547-1616) was a famous Spanish writer and "
 "author of <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr ""
+"Miguel de Cervantes Saavedra (1547-1616) foi o famoso escritor espanhol e "
+"autor de <em>O Engenhoso Fidalgo Don Quixoche de la Mancha</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
 msgid ""
 "Lead fictional character from Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
+"Personagem ficcional principal do livro de Cervantes <em>O Engenhoso Fidalgo "
+"Don Quixoche de la Mancha</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
 msgid ""
 "Fictional character and love interest of Don Quijote (or Quixote) in "
 "Cervantes's <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr ""
+"Personagem ficcional e interesse amoroso de Don Quixote no livro de "
+"Cervantes <em>O Engenhoso Fidalgo Don Quixoche de la Mancha</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
 msgid ""
 "Fictional horse of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
+"Cavalo ficcional do Don Quixote no livro de Cervantes <em>O Engenhoso "
+"Fidalgo Don Quixoche de la Mancha</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
 msgid ""
 "Fictional squire of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
+"Escudeira ficcional do Don Quixote no livro de Cervantes <em>O Engenhoso "
+"Fidalgo Don Quixoche de la Mancha</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
 msgid ""
@@ -10070,28 +10132,37 @@ msgid ""
 "Thestius. Leda was a Greek queen, mother of Pollux and of his twin Castor, "
 "and of Helen and Clytemnestra."
 msgstr ""
+"Thestias é o património de Leda e a sua irmã Althea, a filha de Thestius. "
+"Leda foi a rainha grega, mãe de Pollux e do seu gémeo Castor, e da Helena de "
+"Clytemnestra."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
 msgid ""
 "Lich is a fictional undead creature known for controlling other undead "
 "creatures with magic."
 msgstr ""
+"Lé é a figura ficcional zombie conhecida por controlar outros zombies com "
+"magia."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
 msgid "Draugr refers to undead creatures in Norse mythology."
-msgstr ""
+msgstr "Draugr refere-se aos zombies da mitologia nórdica."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 msgid ""
 "Poltergeist is a name for supernatural beings that create physical "
 "disturbances, from German for <em>noisy ghost</em>."
 msgstr ""
+"Poltergeist é o nome dos seres sobrenaturais que criam perturbações físicas, "
+"do alemão <em>fantasma barulhento</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
 msgid ""
 "Phobetor is a Greek mythological deity of nightmares, the son of Nyx, the "
 "primordial deity of night."
 msgstr ""
+"Phobetor é a divindade dos pesadelos na mitologia grega, o filho de Nyx, a "
+"divindade primordial da noite."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
 msgid ""
@@ -10100,6 +10171,10 @@ msgid ""
 "point of contact between two civilizations (Spanish and Arab) and two "
 "continents (Europe and Africa) after the 8th century."
 msgstr ""
+"Titawin (também conhecido por Medina de Tetouan) é uma assentamento no norte "
+"de Marrocos e um lugar Património da Humanidade pela UNESCO. Historicamente "
+"foi um ponto importante de contacto entre duas civilizações (espanhola e "
+"árabe) e de dois continentes (Europeu e África) depois do século VIII."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
 msgid ""
@@ -10108,6 +10183,10 @@ msgid ""
 "Cordova in Andalusia (modern Spain), and wrote an influential treatise on "
 "the uses of the astrolabe."
 msgstr ""
+"Saffar foi denominada em honra a Abu al-Qasim Ahmed Ibn-Abd Allah Ibn-Omar "
+"al Ghafiqi Ibn-al-Saffar, que ensinou aritmética, geometria e astronomia no "
+"século XI em Córdova, Andaluzia (actualmente Espanha) e escreveu um tratado "
+"influente sobre os usos do astrolábio."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
 msgid ""
@@ -10115,6 +10194,10 @@ msgid ""
 "<em>Ibn al-Samh</em>), a noted 11th century astronomer and mathematician in "
 "the school of al Majriti in Cordova (Andalusia, now modern Spain)."
 msgstr ""
+"Samh foi denominada em honra a Abu al-Qasim 'Asbagh ibn Muhammad ibn al-Samh "
+"al-Mahri (ou <em>Ibn al-Samh</em>), um astrónomo e matemático notável do "
+"século XI na escola de al Majriti em Córdoba (Andaluzia, actualmente "
+"Espanha)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
 msgid ""
@@ -10122,6 +10205,9 @@ msgid ""
 "mathematician, astronomer, scholar, and teacher in 10th century and early "
 "11th century Andalusia (modern Spain)."
 msgstr ""
+"Majriti foi denominada em honra a Abu al-Qasim al-Qurtubi al-Majriti, um "
+"notável matemático, astrónoma, estudioso, e professor do século X em "
+"Andaluzia (actualmente Espanha)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
 msgid ""
@@ -10130,6 +10216,9 @@ msgid ""
 "in the world even today. The constellation Aquila represents an eagle - a "
 "popular symbol of liberty."
 msgstr ""
+"Libertas é latim para <em>liberdade</em>. Liberdade refere-se às liberdades "
+"sociais e políticas e recorda que, nos dias que correm, existem pessoas "
+"privadas dessas mesmas liberdades no mundo inteiro."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
 msgid ""
@@ -10137,6 +10226,9 @@ msgid ""
 "mental strength in the face of adversity, as embodied by the eagle "
 "(represented by the constellation Aquila)."
 msgstr ""
+"Fortitudo é latim para <em>coragem</em>. Coragem significa a força emocional "
+"e mental em face à adversidade, como o que é representado pela águia "
+"(representado na constelação Aquilla)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
@@ -10148,18 +10240,24 @@ msgid ""
 "These names are modified based on the original proposals, to be consistent "
 "with the IAU rules."
 msgstr ""
+"Estes nomes foram modificados com base nas propostas originais, de forma "
+"serem consistentes com as regras do IAU."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
 msgid ""
 "The original name proposed, <em>Veritas</em>, is that of an asteroid "
 "important for the study of the solar system."
 msgstr ""
+"O nome originalmente proposto, <em>Veritas</em> é o de um asteróide "
+"importante para o estudo do sistema solar."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 msgid ""
 "The name originally proposed, <em>Amaterasu</em>, is already used for an "
 "asteroid."
 msgstr ""
+"O nome originalmente proposto,  <em>Amaterasu</em>, já estava em uso para "
+"outro asteróide."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
 msgid ""
@@ -10168,6 +10266,9 @@ msgid ""
 "<em>Aegir</em>, has been attributed to one of Saturn's satellites, "
 "discovered in 2004."
 msgstr ""
+"Note a diferença tipográfica entre <em>AEgir</em> e <em>Aegir</em>, a "
+"transliteração nórdica. O mesmo nome pode, com a grafia <em>Aegir</em>, foi "
+"atribuído a um dos satélites de Saturno, descoberto em 2004."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
 msgid "<em>Ogmios</em> is a name already attributed to an asteroid."
@@ -10179,6 +10280,9 @@ msgid ""
 "asteroid and to one of Jupiter's satellites. The name <em>Althaea</em> is "
 "also attributed to an asteroid."
 msgstr ""
+"O nome originalmente proposto <em>Leda</em> já tinha sido atribuido a um "
+"asteróide e a um dos satélites de Júpiter. O nome <em>Althaea</em> é "
+"atribuído a um asteróide."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 msgid ""
@@ -10187,6 +10291,10 @@ msgid ""
 "<em>Lippershey</em> (with an <em>s</em>) results in fact from a "
 "typographical error dating back from 1831, thus should be avoided."
 msgstr ""
+"A grafia original de <em>Lippershey</em> foi corrigida para "
+"<em>Lipperhey</em> em 15/01/2016. A grafia habitualmente utilizada  "
+"<em>Lippershey</em> (com um <em>s</em>) resulta do facto de um erro "
+"tipográfico que já data de 1831, e que deve ser evitado."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
 msgid "Additional info"
@@ -11478,12 +11586,12 @@ msgstr "χ-Oriônidas"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:155
 msgid "Sextantids"
-msgstr ""
+msgstr "Sextantídeas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:157
 msgid "November Orionids"
-msgstr ""
+msgstr "Oreonídeas de Novembro"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:161
