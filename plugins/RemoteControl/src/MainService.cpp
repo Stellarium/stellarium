@@ -265,6 +265,8 @@ void MainService::getImpl(const QByteArray& operation, const APIParameters &para
 
 void MainService::postImpl(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
+	Q_UNUSED(data);
+
 	if(operation == "time")
 	{
 		bool doneSomething = false;

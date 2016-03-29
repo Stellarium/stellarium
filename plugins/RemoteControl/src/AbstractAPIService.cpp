@@ -137,6 +137,8 @@ void AbstractAPIService::postImpl(const QByteArray& operation, const QMultiMap<Q
 {
 	Q_UNUSED(operation);
 	Q_UNUSED(parameters);
+	Q_UNUSED(data);
+
 	response.setStatus(405,"Method Not allowed");
 	QString str(QStringLiteral("Method POST not allowed for service %2"));
 	response.setData(str.arg(QString::fromLatin1(serviceName())).toLatin1());

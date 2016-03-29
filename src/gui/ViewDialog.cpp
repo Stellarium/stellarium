@@ -131,7 +131,7 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->viewportOffsetSpinBox, "prop_StelMovementMgr_viewportVerticalOffsetTarget");
 
 	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)),&StelApp::getInstance().getSkyCultureMgr(),SLOT(setCurrentSkyCultureNameI18(QString)));
-	connect(&StelApp::getInstance(), SIGNAL(skyCultureChanged(QString)), this, SLOT(skyCultureChanged(QString)));
+	connect(&StelApp::getInstance(), SIGNAL(skyCultureChanged(QString)), this, SLOT(skyCultureChanged()));
 	connect(ui->projectionListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(changeProjection(const QString&)));
 	connect(StelApp::getInstance().getCore(), SIGNAL(currentProjectionTypeChanged(StelCore::ProjectionType)),this,SLOT(projectionChanged()));
 
@@ -596,7 +596,7 @@ void ViewDialog::skyLayersEnabledChanged(int state)
 	skyLayerMgr->showLayer(ui->skyLayerListWidget->currentItem()->text(), state);
 }
 
-void ViewDialog::skyCultureChanged(const QString& cultureId)
+void ViewDialog::skyCultureChanged()
 {
 	QListWidget* l = ui->culturesListWidget;
 	l->setCurrentItem(l->findItems(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
@@ -644,6 +644,8 @@ void ViewDialog::changeLandscape(QListWidgetItem* item)
 
 void ViewDialog::landscapeChanged(QString id, QString name)
 {
+	Q_UNUSED(id)
+
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	for (int i = 0; i < ui->landscapesListWidget->count(); i++)
 	{

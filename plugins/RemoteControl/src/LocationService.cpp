@@ -153,6 +153,8 @@ void LocationService::getImpl(const QByteArray& operation, const APIParameters &
 
 void LocationService::postImpl(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
+	Q_UNUSED(data);
+
 	if (operation == "setlocationfields")
 	{
 		QString id = QString::fromUtf8(parameters.value("id"));

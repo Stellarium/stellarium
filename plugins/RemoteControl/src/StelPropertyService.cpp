@@ -36,6 +36,8 @@ StelPropertyService::StelPropertyService(const QByteArray &serviceName, QObject 
 
 void StelPropertyService::getImpl(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
 {
+	Q_UNUSED(parameters);
+
 	if(operation=="list")
 	{
 		QJsonObject rootObj;
@@ -63,6 +65,8 @@ void StelPropertyService::getImpl(const QByteArray& operation, const APIParamete
 
 void StelPropertyService::postImpl(const QByteArray &operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
+	Q_UNUSED(data);
+
 	if(operation=="set")
 	{
 		QString id = QString::fromUtf8(parameters.value("id"));
