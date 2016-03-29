@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-03-18 00:42+0600\n"
-"PO-Revision-Date: 2016-03-26 19:50+0000\n"
+"PO-Revision-Date: 2016-03-28 14:46+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-03-27 05:17+0000\n"
+"X-Launchpad-Export-Date: 2016-03-29 05:16+0000\n"
 "X-Generator: Launchpad (build 17967)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
@@ -651,7 +651,7 @@ msgstr "Supernova-levning"
 
 #: src/core/modules/Nebula.cpp:1109
 msgid "stellar association"
-msgstr ""
+msgstr "Stjerneassosiasjon"
 
 #: src/core/modules/Nebula.cpp:1112
 msgid "star cloud"
@@ -679,7 +679,7 @@ msgstr "Molekylsky"
 
 #: src/core/modules/Nebula.cpp:1130
 msgid "young stellar object"
-msgstr ""
+msgstr "Ungt stjerneobjekt"
 
 #: src/core/modules/Nebula.cpp:1133
 msgid "possible quasar"
@@ -691,7 +691,7 @@ msgstr "Mulig planetarisk tåke"
 
 #: src/core/modules/Nebula.cpp:1139
 msgid "protoplanetary nebula"
-msgstr ""
+msgstr "Protoplanetarisk tåke"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1142 src/core/modules/StarWrapper.cpp:53
@@ -5385,7 +5385,7 @@ msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
 msgstr ""
-"DE431 gir posisjonsdata for år -13000...+17000. Bare ment for spesielle "
+"DE431 gir posisjonsdata for årene -13000...+17000. Bare ment for spesielle "
 "anvendelser."
 
 #: src/ui_configurationDialog.h:1098
@@ -5405,7 +5405,7 @@ msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
 msgstr ""
-"Bruk av VSOP87 anbefales bare for år -4000...+8000, men gir brukbare "
+"Bruk av VSOP87 anbefales bare for årene -4000...+8000, men gir brukbare "
 "posisjoner utenfor dette området."
 
 #: src/ui_configurationDialog.h:1106
@@ -7045,12 +7045,12 @@ msgstr "gps"
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
 #: plugins/Satellites/src/Satellites.cpp:1810
 msgid "glonass"
-msgstr ""
+msgstr "glonass"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
 #: plugins/Satellites/src/Satellites.cpp:1812
 msgid "galileo"
-msgstr ""
+msgstr "galileo"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
 #: plugins/Satellites/src/Satellites.cpp:1814
@@ -7085,7 +7085,7 @@ msgstr "Den internasjonale romstasjonen"
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1835
 msgid "China's first space station"
-msgstr ""
+msgstr "Kinas første romstasjon"
 
 #: plugins/Satellites/src/Satellite.cpp:257
 #: plugins/Satellites/src/Satellite.cpp:261
