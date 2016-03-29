@@ -566,6 +566,28 @@ void Exoplanets::readJsonFile(void)
 	emit(updateStateChanged(updateState));
 }
 
+void Exoplanets::reloadCatalog(void)
+{
+	bool hasSelection = false;
+	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
+	// Whether any exoplanet are selected? Save the current selection...
+	const QList<StelObjectP> selectedObject = objMgr->getSelectedObject("Exoplanet");
+	if (!selectedObject.isEmpty())
+	{
+		// ... unselect current exoplanet.
+		hasSelection = true;
+		objMgr->unSelect();
+	}
+
+	setEPMap(loadEPMap());
+
+	if (hasSelection)
+	{
+		// Restore selection...
+		objMgr->setSelectedObject(selectedObject);
+	}
+}
+
 /*
   Parse JSON file and load exoplanets to map
 */
