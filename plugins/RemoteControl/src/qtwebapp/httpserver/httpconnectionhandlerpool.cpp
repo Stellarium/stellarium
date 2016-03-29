@@ -19,9 +19,11 @@ HttpConnectionHandlerPool::HttpConnectionHandlerPool(const HttpConnectionHandler
 }
 
 
-HttpConnectionHandlerPool::~HttpConnectionHandlerPool() {
+HttpConnectionHandlerPool::~HttpConnectionHandlerPool()
+{
     // delete all connection handlers and wait until their threads are closed
-    foreach(HttpConnectionHandler* handler, pool) {
+    foreach(HttpConnectionHandler* handler, pool)
+    {
        delete handler;
     }
     delete sslConfiguration;
@@ -29,21 +31,26 @@ HttpConnectionHandlerPool::~HttpConnectionHandlerPool() {
 }
 
 
-HttpConnectionHandler* HttpConnectionHandlerPool::getConnectionHandler() {
+HttpConnectionHandler* HttpConnectionHandlerPool::getConnectionHandler()
+{
     HttpConnectionHandler* freeHandler=0;
     mutex.lock();
     // find a free handler in pool
-    foreach(HttpConnectionHandler* handler, pool) {
-        if (!handler->isBusy()) {
+    foreach(HttpConnectionHandler* handler, pool)
+    {
+        if (!handler->isBusy())
+        {
             freeHandler=handler;
             freeHandler->setBusy();
             break;
         }
     }
     // create a new handler, if necessary
-    if (!freeHandler) {
-	int maxConnectionHandlers=settings.maxThreads;
-        if (pool.count()<maxConnectionHandlers) {
+    if (!freeHandler)
+    {
+        int maxConnectionHandlers=settings.maxThreads;
+        if (pool.count()<maxConnectionHandlers)
+        {
             freeHandler=new HttpConnectionHandler(settings,requestHandler,sslConfiguration);
             freeHandler->setBusy();
             pool.append(freeHandler);
@@ -54,15 +61,19 @@ HttpConnectionHandler* HttpConnectionHandlerPool::getConnectionHandler() {
 }
 
 
-void HttpConnectionHandlerPool::cleanup() {
+void HttpConnectionHandlerPool::cleanup()
+{
     int maxIdleHandlers=settings.minThreads;
     int idleCounter=0;
     mutex.lock();
-    foreach(HttpConnectionHandler* handler, pool) {
-        if (!handler->isBusy()) {
-            if (++idleCounter > maxIdleHandlers) {
-                pool.removeOne(handler);
+    foreach(HttpConnectionHandler* handler, pool)
+    {
+        if (!handler->isBusy())
+        {
+            if (++idleCounter > maxIdleHandlers)
+            {
                 delete handler;
+                pool.removeOne(handler);
                 qDebug("HttpConnectionHandlerPool: Removed connection handler (%p), pool size is now %i",handler,pool.size());
                 break; // remove only one handler in each interval
             }
@@ -72,11 +83,13 @@ void HttpConnectionHandlerPool::cleanup() {
 }
 
 
-void HttpConnectionHandlerPool::loadSslConfig() {
+void HttpConnectionHandlerPool::loadSslConfig()
+{
     // If certificate and key files are configured, then load them
     QString sslKeyFileName=settings.sslKeyFile;
     QString sslCertFileName=settings.sslCertFile;
-    if (!sslKeyFileName.isEmpty() && !sslCertFileName.isEmpty()) {
+    if (!sslKeyFileName.isEmpty() && !sslCertFileName.isEmpty())
+    {
         #ifdef QT_NO_OPENSSL
             qWarning("HttpConnectionHandlerPool: SSL is not supported");
         #else
@@ -93,7 +106,8 @@ void HttpConnectionHandlerPool::loadSslConfig() {
 
             // Load the SSL certificate
             QFile certFile(sslCertFileName);
-            if (!certFile.open(QIODevice::ReadOnly)) {
+            if (!certFile.open(QIODevice::ReadOnly))
+            {
                 qCritical("HttpConnectionHandlerPool: cannot open sslCertFile %s", qPrintable(sslCertFileName));
                 return;
             }
@@ -102,7 +116,8 @@ void HttpConnectionHandlerPool::loadSslConfig() {
 
             // Load the key file
             QFile keyFile(sslKeyFileName);
-            if (!keyFile.open(QIODevice::ReadOnly)) {
+            if (!keyFile.open(QIODevice::ReadOnly))
+            {
                 qCritical("HttpConnectionHandlerPool: cannot open sslKeyFile %s", qPrintable(sslKeyFileName));
                 return;
             }

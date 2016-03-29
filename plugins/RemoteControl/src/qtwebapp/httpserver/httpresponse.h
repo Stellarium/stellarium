@@ -13,9 +13,8 @@
 #include "httpcookie.h"
 
 /**
-  This object represents a HTTP response, in particular the response headers.
+  This object represents a HTTP response, used to return something to the web client.
   <p>
-  Example code for proper response generation:
   <code><pre>
     response.setStatus(200,"OK"); // optional, because this is the default
     response.writeBody("Hello");
@@ -28,10 +27,8 @@
     response.write("The request cannot be processed because the servers is broken",true);
   </pre></code>
   <p>
-  For performance reason, writing a single or few large packets is better than writing
-  many small packets. In case of large responses (e.g. file downloads), a Content-Length
-  header should be set before calling write(). Web Browsers use that information to display
-  a progress bar.
+  In case of large responses (e.g. file downloads), a Content-Length header should be set
+  before calling write(). Web Browsers use that information to display a progress bar.
 */
 
 class DECLSPEC HttpResponse {
@@ -45,14 +42,16 @@ public:
     HttpResponse(QTcpSocket* socket);
 
     /**
-      Set a HTTP response header
+      Set a HTTP response header.
+      You must call this method before the first write().
       @param name name of the header
       @param value value of the header
     */
     void setHeader(QByteArray name, QByteArray value);
 
     /**
-      Set a HTTP response header
+      Set a HTTP response header.
+      You must call this method before the first write().
       @param name name of the header
       @param value value of the header
     */
@@ -69,42 +68,58 @@ public:
 
     /**
       Set status code and description. The default is 200,OK.
+      You must call this method before the first write().
     */
     void setStatus(int statusCode, QByteArray description=QByteArray());
+
+    /** Return the status code. */
+    int getStatusCode() const;
 
     /**
       Write body data to the socket.
       <p>
-      The HTTP status line and headers are sent automatically before the first
-      byte of the body gets sent.
+      The HTTP status line, headers and cookies are sent automatically before the body.
       <p>
       If the response contains only a single chunk (indicated by lastPart=true),
-      the response is transferred in traditional mode with a Content-Length
-      header, which is automatically added if not already set before.
+      then a Content-Length header is automatically set.
       <p>
-      Otherwise, each part is transferred in chunked mode.
+      Chunked mode is automatically selected if there is no Content-Length header
+      and also no Connection:close header.
       @param data Data bytes of the body
-      @param lastPart Indicator, if this is the last part of the response.
+      @param lastPart Indicates that this is the last chunk of data and flushes the output buffer.
     */
     void write(QByteArray data, bool lastPart=false);
 
     /**
-      Indicates wheter the body has been sent completely. Used by the connection
-      handler to terminate the body automatically when necessary.
+      Indicates whether the body has been sent completely (write() has been called with lastPart=true).
     */
     bool hasSentLastPart() const;
 
     /**
-      Set a cookie. Cookies are sent together with the headers when the first
-      call to write() occurs.
+      Set a cookie.
+      You must call this method before the first write().
     */
     void setCookie(const HttpCookie& cookie);
 
     /**
       Send a redirect response to the browser.
+      Cannot be combined with write().
       @param url Destination URL
     */
     void redirect(const QByteArray& url);
+
+    /**
+     * Flush the output buffer (of the underlying socket).
+     * You normally don't need to call this method because flush is
+     * automatically called after HttpRequestHandler::service() returns.
+     */
+    void flush();
+
+    /**
+     * May be used to check whether the connection to the web client has been lost.
+     * This might be useful to cancel the generation of large or slow responses.
+     */
+    bool isConnected() const;
 
 private:
 
@@ -125,6 +140,9 @@ private:
 
     /** Indicator whether the body has been sent completely */
     bool sentLastPart;
+
+    /** Whether the response is sent in chunked mode */
+    bool chunkedMode;
 
     /** Cookies */
     QMap<QByteArray,HttpCookie> cookies;

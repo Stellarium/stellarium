@@ -47,7 +47,7 @@ public:
  Example code to fill this template:
  <p><code><pre>
  Template t(QFile("test.tpl"),QTextCode::codecForName("UTF-8"));
- t.setVariable("user", "Stefan");
+ t.setVariable("username", "Stefan");
  t.setCondition("locked",false);
  t.loop("user",2);
  t.setVariable("user0.name,"Markus");

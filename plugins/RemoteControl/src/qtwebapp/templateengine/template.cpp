@@ -8,120 +8,154 @@
 #include <QRegularExpression>
 
 Template::Template(QString source, QString sourceName)
-    : QString(source) {
+    : QString(source)
+{
     this->sourceName=sourceName;
     this->warnings=false;
 }
 
-Template::Template(QFile& file, QTextCodec* textCodec) {
+Template::Template(QFile& file, QTextCodec* textCodec)
+{
     this->warnings=false;
     sourceName=QFileInfo(file.fileName()).baseName();
-    if (!file.isOpen()) {
+    if (!file.isOpen())
+    {
         file.open(QFile::ReadOnly | QFile::Text);
     }
     QByteArray data=file.readAll();
     file.close();
-    if (data.size()==0 || file.error()) {
-	    qCritical("Template: cannot read from %s, %s",qPrintable(sourceName),qPrintable(file.errorString()));
-	}
-	else
-	{
-		if(textCodec)
-			append(textCodec->toUnicode(data));
-		else
-			append(fromUtf8(data));
+    if (data.size()==0 || file.error())
+    {
+        qCritical("Template: cannot read from %s, %s",qPrintable(sourceName),qPrintable(file.errorString()));
+    }
+    else
+    {
+        if(textCodec)
+            append(textCodec->toUnicode(data));
+        else
+            append(fromUtf8(data));
     }
 }
 
 
-int Template::setVariable(QString name, QString value) {
+int Template::setVariable(QString name, QString value)
+{
     int count=0;
     QString variable="{"+name+"}";
     int start=indexOf(variable);
-    while (start>=0) {
+    while (start>=0)
+    {
         replace(start, variable.length(), value);
         count++;
         start=indexOf(variable,start+value.length());
     }
-    if (count==0 && warnings) {
+    if (count==0 && warnings)
+    {
         qWarning("Template: missing variable %s in %s",qPrintable(variable),qPrintable(sourceName));
     }
     return count;
 }
 
-int Template::setCondition(QString name, bool value) {
+int Template::setCondition(QString name, bool value)
+{
     int count=0;
     QString startTag=QString("{if %1}").arg(name);
     QString elseTag=QString("{else %1}").arg(name);
     QString endTag=QString("{end %1}").arg(name);
     // search for if-else-end
     int start=indexOf(startTag);
-    while (start>=0) {
+    while (start>=0)
+    {
         int end=indexOf(endTag,start+startTag.length());
-        if (end>=0) {
+        if (end>=0)
+        {
             count++;
             int ellse=indexOf(elseTag,start+startTag.length());
-            if (ellse>start && ellse<end) { // there is an else part
-                if (value==true) {
+            if (ellse>start && ellse<end)
+            {
+                // there is an else part
+                if (value==true)
+                {
                     QString truePart=mid(start+startTag.length(), ellse-start-startTag.length());
                     replace(start, end-start+endTag.length(), truePart);
                 }
-                else { // value==false
+                else
+                {
+                    // value==false
                     QString falsePart=mid(ellse+elseTag.length(), end-ellse-elseTag.length());
                     replace(start, end-start+endTag.length(), falsePart);
                 }
             }
-            else if (value==true) { // and no else part
+            else if (value==true)
+            {
+                // and no else part
                 QString truePart=mid(start+startTag.length(), end-start-startTag.length());
                 replace(start, end-start+endTag.length(), truePart);
             }
-            else { // value==false and no else part
+            else
+            {
+                // value==false and no else part
                 replace(start, end-start+endTag.length(), "");
             }
             start=indexOf(startTag,start);
         }
-        else {
+        else
+        {
             qWarning("Template: missing condition end %s in %s",qPrintable(endTag),qPrintable(sourceName));
         }
     }
     // search for ifnot-else-end
     QString startTag2="{ifnot "+name+"}";
     start=indexOf(startTag2);
-    while (start>=0) {
+    while (start>=0)
+    {
         int end=indexOf(endTag,start+startTag2.length());
-        if (end>=0) {
+        if (end>=0)
+        {
             count++;
             int ellse=indexOf(elseTag,start+startTag2.length());
-            if (ellse>start && ellse<end) { // there is an else part
-                if (value==false) {
+            if (ellse>start && ellse<end)
+            {
+                // there is an else part
+                if (value==false)
+                {
                     QString falsePart=mid(start+startTag2.length(), ellse-start-startTag2.length());
                     replace(start, end-start+endTag.length(), falsePart);
                 }
-                else { // value==true
+                else
+                {
+                    // value==true
                     QString truePart=mid(ellse+elseTag.length(), end-ellse-elseTag.length());
                     replace(start, end-start+endTag.length(), truePart);
                 }
             }
-            else if (value==false) { // and no else part
+            else if (value==false)
+            {
+                // and no else part
                 QString falsePart=mid(start+startTag2.length(), end-start-startTag2.length());
                 replace(start, end-start+endTag.length(), falsePart);
             }
-            else { // value==true and no else part
+            else
+            {
+                // value==true and no else part
                 replace(start, end-start+endTag.length(), "");
             }
             start=indexOf(startTag2,start);
         }
-        else {
+        else
+        {
             qWarning("Template: missing condition end %s in %s",qPrintable(endTag),qPrintable(sourceName));
         }
     }
-    if (count==0 && warnings) {
+    if (count==0 && warnings)
+    {
         qWarning("Template: missing condition %s or %s in %s",qPrintable(startTag),qPrintable(startTag2),qPrintable(sourceName));
     }
     return count;
 }
 
-int Template::loop(QString name, int repetitions) {
+int Template::loop(QString name, int repetitions)
+{
     Q_ASSERT(repetitions>=0);
     int count=0;
     QString startTag="{loop "+name+"}";
@@ -129,16 +163,22 @@ int Template::loop(QString name, int repetitions) {
     QString endTag="{end "+name+"}";
     // search for loop-else-end
     int start=indexOf(startTag);
-    while (start>=0) {
+    while (start>=0)
+    {
         int end=indexOf(endTag,start+startTag.length());
-        if (end>=0) {
+        if (end>=0)
+        {
             count++;
             int ellse=indexOf(elseTag,start+startTag.length());
-            if (ellse>start && ellse<end) { // there is an else part
-                if (repetitions>0) {
+            if (ellse>start && ellse<end)
+            {
+                // there is an else part
+                if (repetitions>0)
+                {
                     QString loopPart=mid(start+startTag.length(), ellse-start-startTag.length());
                     QString insertMe;
-                    for (int i=0; i<repetitions; ++i) {
+                    for (int i=0; i<repetitions; ++i)
+                    {
                         // number variables, conditions and sub-loop within the loop
                         QString nameNum=name+QString::number(i);
                         QString s=loopPart;
@@ -152,15 +192,20 @@ int Template::loop(QString name, int repetitions) {
                     }
                     replace(start, end-start+endTag.length(), insertMe);
                 }
-                else { // repetitions==0
+                else
+                {
+                    // repetitions==0
                     QString elsePart=mid(ellse+elseTag.length(), end-ellse-elseTag.length());
                     replace(start, end-start+endTag.length(), elsePart);
                 }
             }
-            else if (repetitions>0) { // and no else part
+            else if (repetitions>0)
+            {
+                // and no else part
                 QString loopPart=mid(start+startTag.length(), end-start-startTag.length());
                 QString insertMe;
-                for (int i=0; i<repetitions; ++i) {
+                for (int i=0; i<repetitions; ++i)
+                {
                     // number variables, conditions and sub-loop within the loop
                     QString nameNum=name+QString::number(i);
                     QString s=loopPart;
@@ -174,22 +219,27 @@ int Template::loop(QString name, int repetitions) {
                 }
                 replace(start, end-start+endTag.length(), insertMe);
             }
-            else { // repetitions==0 and no else part
+            else
+            {
+                // repetitions==0 and no else part
                 replace(start, end-start+endTag.length(), "");
             }
             start=indexOf(startTag,start);
         }
-        else {
+        else
+        {
             qWarning("Template: missing loop end %s in %s",qPrintable(endTag),qPrintable(sourceName));
         }
     }
-    if (count==0 && warnings) {
+    if (count==0 && warnings)
+    {
         qWarning("Template: missing loop %s in %s",qPrintable(startTag),qPrintable(sourceName));
     }
     return count;
 }
 
-void Template::enableWarnings(bool enable) {
+void Template::enableWarnings(bool enable)
+{
     warnings=enable;
 }
 

@@ -7,6 +7,7 @@
 #define HTTPREQUEST_H
 
 #include <QByteArray>
+#include <QHostAddress>
 #include <QTcpSocket>
 #include <QMap>
 #include <QMultiMap>
@@ -52,7 +53,8 @@ public:
     virtual ~HttpRequest();
 
     /**
-      Read the request from a socket. This method must be called repeatedly
+      Read the HTTP request from a socket.
+      This method is called by the connection handler repeatedly
       until the status is RequestStatus::complete or RequestStatus::abort.
       @param socket Source of the data
     */
@@ -67,11 +69,11 @@ public:
     /** Get the method of the HTTP request  (e.g. "GET") */
     QByteArray getMethod() const;
 
-    /** Returns the raw path data, without percent decoding */
-    QByteArray getRawPath() const;
-
     /** Get the decoded path of the HTPP request (e.g. "/index.html") */
     QByteArray getPath() const;
+
+    /** Get the raw path of the HTTP request (e.g. "/file%20with%20spaces.html") */
+    const QByteArray& getRawPath() const;
 
     /** Get the version of the HTPP request (e.g. "HTTP/1.1") */
     QByteArray getVersion() const;
@@ -107,10 +109,10 @@ public:
     */
     QList<QByteArray> getParameters(const QByteArray& name) const;
 
-    /** Get all HTTP request parameters */
+    /** Get all HTTP request parameters. */
     QMultiMap<QByteArray,QByteArray> getParameterMap() const;
 
-    /** Get the HTTP request body  */
+    /** Get the HTTP request body.  */
     QByteArray getBody() const;
 
     /**
@@ -129,16 +131,23 @@ public:
       For uploaded files, the method getParameters() returns
       the original fileName as provided by the calling web browser.
     */
-    QTemporaryFile* getUploadedFile(const QByteArray fieldName);
+    QTemporaryFile* getUploadedFile(const QByteArray fieldName) const;
 
     /**
-      Get the value of a cookie
+      Get the value of a cookie.
       @param name Name of the cookie
     */
     QByteArray getCookie(const QByteArray& name) const;
 
-    /** Get the map of cookies */
+    /** Get all cookies. */
     QMap<QByteArray,QByteArray>& getCookieMap();
+
+    /**
+      Get the address of the connected client.
+      Note that multiple clients may have the same IP address, if they
+      share an internet connection (which is very common).
+     */
+    QHostAddress getPeerAddress() const;
 
 private:
 
@@ -170,10 +179,13 @@ private:
     QByteArray version;
 
     /**
-      Status of this request.
+      Status of this request. For the state engine.
       @see RequestStatus
     */
     RequestStatus status;
+
+    /** Address of the connected peer. */
+    QHostAddress peerAddress;
 
     /** Maximum size of requests in bytes. */
     int maxSize;

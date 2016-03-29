@@ -37,7 +37,7 @@ struct StaticFileControllerSettings
 
 /**
   Delivers static files. It is usually called by the applications main request handler when
-  the caller request a path that is mapped to static files.
+  the caller requests a path that is mapped to static files.
   <p>
   The following settings are required in the config file:
   <code><pre>

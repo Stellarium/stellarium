@@ -22,20 +22,24 @@ HttpListener::HttpListener(const HttpListenerSettings &settings, HttpRequestHand
 }
 
 
-HttpListener::~HttpListener() {
+HttpListener::~HttpListener()
+{
     close();
     qDebug("HttpListener: destroyed");
 }
 
 
-void HttpListener::listen() {
-    if (!pool) {
+void HttpListener::listen()
+{
+    if (!pool)
+    {
         pool=new HttpConnectionHandlerPool(settings,requestHandler);
     }
     QString host = settings.host;
     int port=settings.port;
     QTcpServer::listen(host.isEmpty() ? QHostAddress::Any : QHostAddress(host), port);
-    if (!isListening()) {
+    if (!isListening())
+    {
         qCritical("HttpListener: Cannot bind on port %i: %s",port,qPrintable(errorString()));
     }
     else {
@@ -59,19 +63,22 @@ void HttpListener::incomingConnection(tSocketDescriptor socketDescriptor) {
 #endif
 
     HttpConnectionHandler* freeHandler=NULL;
-    if (pool) {
+    if (pool)
+    {
         freeHandler=pool->getConnectionHandler();
     }
 
     // Let the handler process the new connection.
-    if (freeHandler) {
+    if (freeHandler)
+    {
         // The descriptor is passed via signal/slot because the handler lives in another
         // thread and cannot open the socket when directly called by another thread.
         connect(this,SIGNAL(handleConnection(tSocketDescriptor)),freeHandler,SLOT(handleConnection(tSocketDescriptor)));
         emit handleConnection(socketDescriptor);
         disconnect(this,SIGNAL(handleConnection(tSocketDescriptor)),freeHandler,SLOT(handleConnection(tSocketDescriptor)));
     }
-    else {
+    else
+    {
         // Reject the connection
         qDebug("HttpListener: Too many incoming connections");
         QTcpSocket* socket=new QTcpSocket(this);

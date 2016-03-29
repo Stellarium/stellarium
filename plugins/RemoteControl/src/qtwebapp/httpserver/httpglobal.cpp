@@ -2,6 +2,6 @@
 
 const char* getQtWebAppLibVersion()
 {
-    return "1.5.8 (+Stellarium modifications)";
+    return "1.6.4-stellarium";
 }
 
