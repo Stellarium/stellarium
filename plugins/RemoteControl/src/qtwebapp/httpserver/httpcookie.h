@@ -68,7 +68,7 @@ public:
     /** Set the path for that the cookie will be sent, default="/" which means the whole domain */
     void setPath(const QByteArray path);
 
-    /** Set secure mode, so that the cokkie will only be sent on secure connections */
+    /** Set secure mode, so that the cookie will only be sent on secure connections */
     void setSecure(const bool secure);
 
     /** Get the name of this cookie */

@@ -36,9 +36,9 @@ struct HttpConnectionHandlerPoolSettings : public HttpConnectionHandlerSettings
   <p>
   Example for the required configuration settings:
   <code><pre>
-  minThreads=1
+  minThreads=4
   maxThreads=100
-  cleanupInterval=1000
+  cleanupInterval=60000
   readTimeout=60000
   ;sslKeyFile=ssl/my.key
   ;sslCertFile=ssl/my.cert
