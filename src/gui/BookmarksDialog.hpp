@@ -21,33 +21,31 @@
 #define _BOOKMARKSDIALOG_HPP_
 
 #include <QObject>
-#include <QTreeWidget>
-#include <QTreeWidgetItem>
+#include <QStandardItemModel>
 #include <QMap>
-#include <QVector>
+#include <QDir>
 
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
 
 class Ui_bookmarksDialogForm;
 
+struct bookmark
+{
+	int number;
+	QString name;
+	double RA;
+	double Dec;
+	QString jd;
+	QString location;
+};
+Q_DECLARE_METATYPE(bookmark)
+
 class BookmarksDialog : public StelDialog
 {
 	Q_OBJECT
 
 public:
-	//! Defines the number and the order of the columns in the table that lists planetary positions
-	//! @enum PlanetaryPositionsColumns
-	enum BookmarksColumns {
-		ColumnName,		//! name of bookmark
-		//ColumnDescription,	//! description of bookmark
-		ColumnRA,		//! right ascension (J2000.0)
-		ColumnDec,		//! declination (J2000.0)
-		ColumnDate,		//! date and time (optional)
-		ColumnLocation,		//! location (optional)
-		ColumnCount		//! total number of columns
-	};
-
 	BookmarksDialog(QObject* parent);
 	virtual ~BookmarksDialog();
 
@@ -60,39 +58,39 @@ protected:
 	Ui_bookmarksDialogForm *ui;
 
 private slots:
-	//! Search bookmarks and fill the list.
-	void currentBookmarks();
-	void selectCurrentBookmark(const QModelIndex &modelIndex);
+	void addBookmarkButtonPressed();
+	void removeBookmarkButtonPressed();
+	void goToBookmarkButtonPressed();
+
+	void getCurrentObjectInfo();
+	void getCenterInfo();
 
 private:
+	enum BookmarksColumns {
+		ColumnSlot = 0,		//! slot number
+		ColumnName,		//! name of bookmark
+		ColumnRA,		//! right ascension (J2000.0)
+		ColumnDec,		//! declination (J2000.0)
+		ColumnDate,		//! date and time (optional)
+		ColumnLocation,		//! location (optional)
+		ColumnCount		//! total number of columns
+	};
+	QStandardItemModel * bookmarksListModel;
+
 	class StelCore* core;
 	class StelObjectMgr* objectMgr;
+
+	QString bookmarksJsonPath;
+	QHash<QString, bookmark> bookmarksCollection;
 
 	//! Update header names for bookmarks table
 	void setBookmarksHeaderNames();
 
-	//! Init header and list of bookmarks
-	void initListBookmarks();
+	void addModelRow(int number, QString name, QString RA, QString Dec, QString date = "", QString Location = "");
 
-	//! Populates the drop-down list of bookmarks.
-	void populateBookmarksList();
+	void loadBookmarks();
+	void saveBookmarks();
 };
 
-// Reimplements the QTreeWidgetItem class to fix the sorting bug
-class BmTreeWidgetItem : public QTreeWidgetItem
-{
-public:
-	BmTreeWidgetItem(QTreeWidget* parent)
-		: QTreeWidgetItem(parent)
-	{
-	}
-
-private:
-	bool operator < (const QTreeWidgetItem &other) const
-	{
-		int column = treeWidget()->sortColumn();
-		return text(column).toLower() < other.text(column).toLower();
-	}
-};
 
 #endif // _BOOKMARKSDIALOG_HPP_
