@@ -36,12 +36,16 @@
 #include <QCache>
 #include <QOpenGLPaintDevice>
 #include <QOpenGLShader>
+#include <QOpenGLTexture>
+#include <QApplication>
 
+static const int TEX_CACHE_LIMIT = 7000000;
 
 #ifndef NDEBUG
 QMutex* StelPainter::globalMutex = new QMutex();
 #endif
 
+QCache<QByteArray, StringTexture> StelPainter::texCache(TEX_CACHE_LIMIT);
 QOpenGLShaderProgram* StelPainter::texturesShaderProgram=NULL;
 QOpenGLShaderProgram* StelPainter::basicShaderProgram=NULL;
 QOpenGLShaderProgram* StelPainter::colorShaderProgram=NULL;
@@ -481,7 +485,7 @@ void StelPainter::drawText(const Vec3d& v, const QString& str, float angleDeg, f
 /*************************************************************************
  Draw the string at the given position and angle with the given font
 *************************************************************************/
-
+/*
 // Container for one cached string texture
 struct StringTexture
 {
@@ -503,6 +507,50 @@ struct StringTexture
 			glDeleteTextures(1, &texture);
 	}
 };
+*/
+// Methods taken from text-use-opengl-buffer
+// Container for one cached string texture
+struct StringTexture
+{
+	QOpenGLTexture* texture;
+	QSize size;
+	QSizeF getTexSize() const {
+		return QSizeF((float)size.width() / texture->width(),
+			      (float)size.height() / texture->height());
+	}
+
+	StringTexture(QOpenGLTexture* tex, const QSize& size) :
+	     texture(tex), size(size) {}
+	~StringTexture() {delete texture;}
+};
+
+StringTexture* StelPainter::getTexTexture(const QString& str, int pixelSize)
+{
+	// Render first the text into a QPixmap, then create a QOpenGLTexture
+	// from it.  We could optimize by directly using a QImage, but for some
+	// reason the result is not exactly the same than with a QPixmap.
+	QByteArray hash = str.toUtf8() + QByteArray::number(pixelSize);
+	StringTexture* cachedTex = texCache.object(hash);
+	if (cachedTex)
+		return cachedTex;
+	QFont tmpFont = currentFont;
+	tmpFont.setPixelSize(currentFont.pixelSize()*prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio());
+	QRect strRect = QFontMetrics(tmpFont).boundingRect(str);
+	int w = strRect.width()+1+(int)(0.02f*strRect.width());
+	int h = strRect.height();
+
+	QPixmap strImage = QPixmap(StelUtils::getBiggerPowerOfTwo(w), StelUtils::getBiggerPowerOfTwo(h));
+	strImage.fill(Qt::transparent);
+	QPainter painter(&strImage);
+	tmpFont.setStyleStrategy(QFont::NoAntialias);
+	painter.setFont(tmpFont);
+	//painter.setRenderHints(QPainter::TextAntialiasing);
+	painter.setPen(Qt::white);
+	painter.drawText(-strRect.x(), -strRect.y(), str);
+	StringTexture* newTex = new StringTexture(new QOpenGLTexture(strImage.toImage()), QSize(w, h));
+	texCache.insert(hash, newTex, 3*w*h);
+	return newTex;
+}
 
 void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity)
 {
@@ -510,6 +558,59 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	if (prj->gravityLabels && !noGravity)
 	{
 		drawTextGravity180(x, y, str, xshift, yshift);
+	}
+	else if (qApp->property("text_texture")==true) // CLI option -t given?
+	{
+	  //qDebug() <<  "Text texture" << str;
+		// This is taken from branch text-use-opengl-buffer. This is essential on devices like Raspberry Pi (2016-03).
+		StringTexture* tex = getTexTexture(str, currentFont.pixelSize());
+		Q_ASSERT(tex);
+		if (!noGravity)
+			angleDeg += prj->defaultAngleForGravityText;
+		tex->texture->bind();
+
+		enableTexture2d(true);
+		static float vertexData[8];
+		// compute the vertex coordinates applying the translation and the rotation
+		static const float vertexBase[] = {0., 0., 1., 0., 0., 1., 1., 1.};
+		if (std::fabs(angleDeg)>1.f*M_PI/180.f)
+		{
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			const float cosr = std::cos(angleDeg * M_PI/180.);
+			const float sinr = std::sin(angleDeg * M_PI/180.);
+			for (int i = 0; i < 8; i+=2)
+			{
+				vertexData[i] = int(x + (tex->size.width()*vertexBase[i]+xshift) * cosr - (tex->size.height()*vertexBase[i+1]+yshift) * sinr);
+				vertexData[i+1] = int(y  + (tex->size.width()*vertexBase[i]+xshift) * sinr + (tex->size.height()*vertexBase[i+1]+yshift) * cosr);
+			}
+		}
+		else
+		{
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+			for (int i = 0; i < 8; i+=2)
+			{
+				vertexData[i] = int(x + tex->size.width()*vertexBase[i]+xshift);
+				vertexData[i+1] = int(y  + tex->size.height()*vertexBase[i+1]+yshift);
+			}
+		}
+
+		float* texCoords = new float[8];
+		for (int i=0;i<4;i++)
+		{
+			texCoords[i*2+0] = tex->getTexSize().width() * (i % 2);
+			texCoords[i*2+1] = tex->getTexSize().height() * (1 - i / 2);
+		}
+		setTexCoordPointer(2, GL_FLOAT, texCoords);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_BLEND);
+		enableClientStates(true, true);
+		setVertexPointer(2, GL_FLOAT, vertexData);
+		drawFromArray(TriangleStrip, 4, 0, false);
+		enableClientStates(false, false);
+		tex->texture->release();
+		delete[] texCoords;
 	}
 	else
 	{
@@ -1905,6 +2006,7 @@ void StelPainter::deinitGLShaders()
 	texturesShaderProgram = NULL;
 	delete texturesColorShaderProgram;
 	texturesColorShaderProgram = NULL;
+	texCache.clear();
 }
 
 
