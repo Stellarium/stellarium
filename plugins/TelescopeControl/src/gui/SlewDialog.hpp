@@ -40,7 +40,7 @@ class SlewDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-    SlewDialog();
+	SlewDialog();
 	virtual ~SlewDialog();
 
 public slots:
@@ -77,37 +77,31 @@ private slots:
 	//! The parameter is necessary for signal/slot compatibility (QRadioButton).
 	//! If "set" is "false", this method does nothing.
 	void setFormatDecimal(bool set);
-    //! Sets the input fields to current info
-    void getCurrentObjectInfo();
+	//! Sets the input fields to current info
+	void getCurrentObjectInfo();
 	//! Sets the input fields to current info
 	void getCenterInfo();
-    //! Add or remove user points
-    void editStoredPoints();
-    //!
-    void addStoredPointToComboBox(int number,
-            QString name,
-            double radiansRA,
-            double radiansDec);
-    //!
-    void removeStoredPointFromComboBox(int number);
-    //! Sets the input fields to selected point info
-    void getStoredPointInfo();
-    //
+
+	//! Add or remove user points
+	void editStoredPoints();
+	void addStoredPointToComboBox(int number, QString name, double radiansRA, double radiansDec);
+	void removeStoredPointFromComboBox(int number);
+	//! Sets the input fields to selected point info
+	void getStoredPointInfo();
 
 private:
-    //
 	TelescopeControl * telescopeManager;
-    StoredPointsDialog * storedPointsDialog;
+	StoredPointsDialog * storedPointsDialog;
 	QHash<QString, int> connectedSlotsByName;
-    QVariantMap storedPointsDescriptions;
+	QVariantMap storedPointsDescriptions;
 
 	void updateTelescopeList();
 	void updateTelescopeControls();
-    //
-    void updateStoredPointsList();
-    //
-    void savePointsToFile();
-    void loadPointsFromFile();
+
+	void updateStoredPointsList();
+
+	void savePointsToFile();
+	void loadPointsFromFile();
 };
 
 #endif // _SLEWDIALOG_

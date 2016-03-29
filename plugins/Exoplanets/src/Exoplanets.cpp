@@ -562,8 +562,7 @@ bool Exoplanets::backupJsonFile(bool deleteOriginal)
 */
 void Exoplanets::readJsonFile(void)
 {
-	setEPMap(loadEPMap());
-	emit(updateStateChanged(updateState));
+	setEPMap(loadEPMap());	
 }
 
 void Exoplanets::reloadCatalog(void)
@@ -579,7 +578,7 @@ void Exoplanets::reloadCatalog(void)
 		objMgr->unSelect();
 	}
 
-	setEPMap(loadEPMap());
+	readJsonFile();
 
 	if (hasSelection)
 	{
