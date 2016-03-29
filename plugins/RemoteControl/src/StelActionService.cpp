@@ -36,6 +36,8 @@ StelActionService::StelActionService(const QByteArray &serviceName, QObject *par
 
 void StelActionService::getImpl(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
 {
+	Q_UNUSED(parameters);
+
 	if(operation=="list")
 	{
 		//list all registered StelActions, this should be thread safe
@@ -67,6 +69,8 @@ void StelActionService::getImpl(const QByteArray& operation, const APIParameters
 
 void StelActionService::postImpl(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
+	Q_UNUSED(data);
+
 	if(operation == "do")
 	{
 		QString id = QString::fromUtf8(parameters.value("id"));

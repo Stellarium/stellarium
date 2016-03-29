@@ -48,7 +48,7 @@ protected:
 	virtual void createDialogContent();
 private slots:
 	void populateLists();
-	void skyCultureChanged(const QString& cultureId);
+	void skyCultureChanged();
 	void changeProjection(const QString& projectionNameI18n);
 	void projectionChanged();
 	void changeLandscape(QListWidgetItem* item);

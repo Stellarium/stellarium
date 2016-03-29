@@ -56,6 +56,8 @@ QString ViewService::wrapHtml(QString &text, const QString &title) const
 
 void ViewService::getImpl(const QByteArray &operation, const APIParameters &parameters, APIServiceResponse &response)
 {
+	Q_UNUSED(parameters);
+
 	if(operation=="listlandscape")
 	{
 		//list all installed landscapes
@@ -215,6 +217,8 @@ void ViewService::getImpl(const QByteArray &operation, const APIParameters &para
 
 void ViewService::postImpl(const QByteArray &operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
+	Q_UNUSED(data);
+
 	if(operation == "setlandscape")
 	{
 		QString id = QString::fromUtf8(parameters.value("id"));
