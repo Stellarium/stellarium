@@ -1,4 +1,4 @@
-SET(NOVAE_VERSION "0.1.2")
+SET(NOVAE_VERSION "0.1.3")
 
 IF(APPLE)
      SET(CMAKE_INSTALL_PREFIX $ENV{HOME}/Library/Application\ Support/Stellarium)
