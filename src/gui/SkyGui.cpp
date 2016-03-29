@@ -144,7 +144,7 @@ QPixmap getInfoPixmap(const QStringList& strList, QFont font, QColor color)
 			txtOffset=8;
 		}
 		else
-			painter.drawText(-strRect.x(), -strRect.y()+i*(painter.font().pixelSize()+2)+txtOffset, strList.at(i));
+			painter.drawText(-strRect.x()+1, -strRect.y()+i*(painter.font().pixelSize()+2)+txtOffset, strList.at(i));
 	}
 	return strPixmap;
 }
