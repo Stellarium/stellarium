@@ -207,6 +207,7 @@ public slots:
 	void setFlagShowPulsarsButton(bool b);
 	bool getFlagShowPulsarsButton(void) { return flagShowPulsarsButton; }
 
+	void reloadCatalog(void);
 
 private:
 	// Font used for displaying our text

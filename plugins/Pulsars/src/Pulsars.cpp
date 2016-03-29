@@ -825,3 +825,25 @@ void Pulsars::setMarkerColor(QString c, bool mtype)
 	else
 		Pulsar::glitchColor = StelUtils::strToVec3f(c);
 }
+
+void Pulsars::reloadCatalog(void)
+{
+	bool hasSelection = false;
+	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
+	// Whether any pulsar are selected? Save the current selection...
+	const QList<StelObjectP> selectedObject = objMgr->getSelectedObject("Pulsar");
+	if (!selectedObject.isEmpty())
+	{
+		// ... unselect current pulsar.
+		hasSelection = true;
+		objMgr->unSelect();
+	}
+
+	readJsonFile();
+
+	if (hasSelection)
+	{
+		// Restore selection...
+		objMgr->setSelectedObject(selectedObject);
+	}
+}
