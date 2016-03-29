@@ -334,6 +334,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/CustomDeltaTEquationDialog.cpp
           gui/AstroCalcDialog.hpp
           gui/AstroCalcDialog.cpp
+          gui/BookmarksDialog.hpp
+          gui/BookmarksDialog.cpp
           gui/StelDialog.hpp
           gui/StelDialog.cpp
      )
@@ -350,6 +352,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/atmosphereDialog.ui
           gui/customDeltaTEquationDialog.ui
           gui/astroCalcDialog.ui
+          gui/bookmarksDialog.ui
           gui/addRemoveLandscapesDialog.ui
      )
 
