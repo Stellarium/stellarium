@@ -485,29 +485,7 @@ void StelPainter::drawText(const Vec3d& v, const QString& str, float angleDeg, f
 /*************************************************************************
  Draw the string at the given position and angle with the given font
 *************************************************************************/
-/*
-// Container for one cached string texture
-struct StringTexture
-{
-	GLuint texture;
-	int width;
-	int height;
-	int subTexWidth;
-	int subTexHeight;
 
-	StringTexture()
-		: texture(0),
-		  width(0),
-		  height(0),
-		  subTexWidth(0),
-		  subTexHeight(0) {;}
-	~StringTexture()
-	{
-		if (texture != 0)
-			glDeleteTextures(1, &texture);
-	}
-};
-*/
 // Methods taken from text-use-opengl-buffer
 // Container for one cached string texture
 struct StringTexture
@@ -549,7 +527,8 @@ StringTexture* StelPainter::getTexTexture(const QString& str, int pixelSize)
 	painter.drawText(-strRect.x(), -strRect.y(), str);
 	StringTexture* newTex = new StringTexture(new QOpenGLTexture(strImage.toImage()), QSize(w, h));
 	texCache.insert(hash, newTex, 3*w*h);
-	return newTex;
+	// simply returning newTex is dangerous as the object is owned by the cache now. (Coverity Scan barks.)
+	return texCache.object(hash);
 }
 
 void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity)
