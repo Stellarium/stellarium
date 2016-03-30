@@ -52,6 +52,8 @@ interpolation) function,  resulting in a bit of a speedup.
 The code has been modified to be a separately linkable component,  with
 details of the implementation encapsulated.
 *****************************************************************************/
+// Make Large File Support work also on ARM boards, explicitly.
+#define _FILE_OFFSET_BITS 64
 
 #include <stdio.h>
 #include <assert.h>
