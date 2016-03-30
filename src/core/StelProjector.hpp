@@ -121,7 +121,7 @@ public:
 		float viewportFovDiameter;       //! diameter of the FOV disk in pixel
 		bool flipHorz, flipVert;         //! Whether to flip in horizontal or vertical directions
 		float devicePixelsPerPixel;      //! The number of device pixel per "Device Independent Pixels" (value is usually 1, but 2 for mac retina screens)
-		float widthStretch;              //! A factor to adapt to rare situations. Currently only used to allow to stretch/squeeze Cylindrical projections a bit. Larger than 1 means the image is stretched wider.
+		float widthStretch;              //! A factor to adapt to special installation setups, e.g. multi-projector with edge blending. Allow to stretch/squeeze projected content. Larger than 1 means the image is stretched wider.
 	};
 
 	//! Destructor
@@ -298,7 +298,8 @@ protected:
 		  viewportFovDiameter(0.f),
 		  gravityLabels(true),
 		  defaultAngleForGravityText(0.f),
-		  devicePixelsPerPixel(1.f) {;}
+		  devicePixelsPerPixel(1.f),
+		  widthStretch(1.0f) {;}
 
 	//! Return whether the projection presents discontinuities. Used for optimization.
 	virtual bool hasDiscontinuity() const =0;
@@ -328,7 +329,7 @@ protected:
 	float defaultAngleForGravityText;   // a rotation angle to apply to gravity text (only if gravityLabels is set to false)
 	SphericalCap boundingCap;           // Bounding cap of the whole viewport
 	float devicePixelsPerPixel;         // The number of device pixel per "Device Independent Pixels" (value is usually 1, but 2 for mac retina screens)
-	float widthStretch;                 // A factor to adapt to rare situations. Currently only used to allow to stretch/squeeze Cylindrical projections a bit. Larger than 1 means the image is stretched wider.
+	float widthStretch;                 // A factor to adapt to special installation setups, e.g. multi-projector with edge blending. Allow to stretch/squeeze projected content. Larger than 1 means the image is stretched wider.
 private:
 	//! Initialise the StelProjector from a param instance.
 	void init(const StelProjectorParams& param);
