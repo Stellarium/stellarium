@@ -593,7 +593,7 @@ void StelCore::setViewportVerticalOffset(double newOffsetPct)
 
 void StelCore::setViewportStretch(float stretch)
 {
-	currentProjectorParams.widthStretch=stretch;
+	currentProjectorParams.widthStretch=qMax(0.001f, stretch);
 }
 
 QString StelCore::getDefaultLocationID() const
