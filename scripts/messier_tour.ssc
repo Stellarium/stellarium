@@ -1,0 +1,35 @@
+//
+// Name: Messier Objects Tour
+// License: Public Domain
+// Author: C. Gaudion, La Société Guernesiaise, Astronomy Section
+// Description: A tour of Messier Objects
+
+// load data array in inc file
+
+include("common_objects.inc");
+
+core.clear("deepspace");
+core.wait(4);
+
+ConstellationMgr.setFlagIsolateSelected(true);
+
+LabelMgr.labelScreen("Stellarium Messier Object Tour",200,200,true,30,"#ff0000");
+core.wait(5);
+LabelMgr.deleteAllLabels();
+
+for (i=0; i<messier.length; i++)
+{
+	objName = messier[i];
+	core.selectObjectByName(objName, true);
+	
+	StelMovementMgr.autoZoomIn(6);
+	core.wait(10);
+	
+	StelMovementMgr.zoomTo(40,8);
+	core.wait(5);
+
+}
+
+LabelMgr.labelScreen("Stellarium Messier Object End of Tour",200,200,true,30,"#ff0000");
+core.wait(5);
+LabelMgr.deleteAllLabels();
