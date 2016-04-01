@@ -286,6 +286,8 @@ class Translations
 		N_("Tycho's Supernova");
 		// TRANSLATORS: Name of script
 		N_("Earth and other Planets from Ceres");
+		// TRANSLATORS: Name of script
+		N_("Messier Objects Tour");
 		
 		// =====================================================================
 		// Script descriptions
@@ -316,6 +318,7 @@ class Translations
 		N_("Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-3000");
 		N_("Earth Greatest Elongations and Transits from Callisto 2000-3000. Why Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's moons, Callisto will be the one.");
 		N_("Earth the other visible Planet's Greatest Elongations and Oppositions from Ceres 2000-3000");
+		N_("A tour of Messier Objects");
 		
 		// =====================================================================
 		// List of countries
