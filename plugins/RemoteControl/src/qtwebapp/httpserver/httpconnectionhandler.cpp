@@ -6,7 +6,7 @@
 #include "httpconnectionhandler.h"
 #include "httpresponse.h"
 
-HttpConnectionHandler::HttpConnectionHandler(const HttpConnectionHandlerSettings& settings, HttpRequestHandler* requestHandler, QSslConfiguration* sslConfiguration)
+HttpConnectionHandler::HttpConnectionHandler(const HttpConnectionHandlerSettings& settings, HttpRequestHandler* requestHandler, HttpSslConfiguration *sslConfiguration)
     : QThread()
 {
     Q_ASSERT(requestHandler!=0);
