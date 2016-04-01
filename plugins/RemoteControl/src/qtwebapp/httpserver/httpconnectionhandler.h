@@ -6,8 +6,6 @@
 #ifndef HTTPCONNECTIONHANDLER_H
 #define HTTPCONNECTIONHANDLER_H
 
-#define QT_NO_OPENSSL
-
 #ifndef QT_NO_OPENSSL
    #include <QSslConfiguration>
 #endif
