@@ -6,6 +6,8 @@
 #ifndef HTTPCONNECTIONHANDLER_H
 #define HTTPCONNECTIONHANDLER_H
 
+#define QT_NO_OPENSSL
+
 #ifndef QT_NO_OPENSSL
    #include <QSslConfiguration>
 #endif
@@ -25,7 +27,9 @@
 
 /** Alias for QSslConfiguration if OpenSSL is not supported */
 #ifdef QT_NO_OPENSSL
-  #define QSslConfiguration QObject
+typedef QObject HttpSslConfiguration;
+#else
+typedef QSslConfiguration HttpSslConfiguration;
 #endif
 
 /**
@@ -72,7 +76,7 @@ public:
       @param requestHandler Handler that will process each incoming HTTP request
       @param sslConfiguration SSL (HTTPS) will be used if not NULL
     */
-    HttpConnectionHandler(const HttpConnectionHandlerSettings& settings, HttpRequestHandler* requestHandler, QSslConfiguration* sslConfiguration=NULL);
+    HttpConnectionHandler(const HttpConnectionHandlerSettings& settings, HttpRequestHandler* requestHandler, HttpSslConfiguration* sslConfiguration=NULL);
 
     /** Destructor */
     virtual ~HttpConnectionHandler();
@@ -104,7 +108,7 @@ private:
     bool busy;
 
     /** Configuration for SSL */
-    QSslConfiguration* sslConfiguration;
+    HttpSslConfiguration* sslConfiguration;
 
     /** Executes the threads own event loop */
     void run();
