@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-18 00:42+0600\n"
+"POT-Creation-Date: 2016-04-02 00:21+0700\n"
 "PO-Revision-Date: 2013-01-07 10:27+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Afrikaans <af@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-03-18 05:19+0000\n"
-"X-Generator: Launchpad (build 17947)\n"
+"X-Launchpad-Export-Date: 2016-04-02 05:16+0000\n"
+"X-Generator: Launchpad (build 17972)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:904 src/core/modules/LandscapeMgr.cpp:414
@@ -307,400 +307,405 @@ msgid "Distance: %1 ly"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - megaparsecs
-#: src/core/modules/Nebula.cpp:283
+#: src/core/modules/Nebula.cpp:289
 msgid "Mpc"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:288
+#: src/core/modules/Nebula.cpp:295
 msgid "kpc"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:291
+#. TRANSLATORS: Unit of measure for distance - Light Years
+#: src/core/modules/Nebula.cpp:298
+msgid "ly"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:300
 #, qt-format
 msgid "Distance: %1 %2"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:305
+#: src/core/modules/Nebula.cpp:314
 #, qt-format
 msgid "Redshift: %1"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:316 src/core/modules/StarWrapper.cpp:241
+#: src/core/modules/Nebula.cpp:325 src/core/modules/StarWrapper.cpp:241
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Parallaks: %1\""
 
-#: src/core/modules/Nebula.cpp:320
+#: src/core/modules/Nebula.cpp:329
 msgid "Morphological description: "
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:816
-msgctxt "Shapley–Sawyer Concentration Class"
-msgid "high concentration of stars toward the center"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:819
-msgctxt "Shapley–Sawyer Concentration Class"
-msgid "dense central concentration of stars"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:822
-msgctxt "Shapley–Sawyer Concentration Class"
-msgid "strong inner core of stars"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:825
 msgctxt "Shapley–Sawyer Concentration Class"
+msgid "high concentration of stars toward the center"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:828
+msgctxt "Shapley–Sawyer Concentration Class"
+msgid "dense central concentration of stars"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:831
+msgctxt "Shapley–Sawyer Concentration Class"
+msgid "strong inner core of stars"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:834
+msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:830
-msgctxt "Shapley–Sawyer Concentration Class"
-msgid "intermediate concentrations of stars"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:833
-msgctxt "Shapley–Sawyer Concentration Class"
-msgid "rather loosely concentration of stars towards the center"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:836
-msgctxt "Shapley–Sawyer Concentration Class"
-msgid "loose concentration of stars towards the center"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:839
 msgctxt "Shapley–Sawyer Concentration Class"
-msgid "loose concentration of stars"
+msgid "intermediate concentrations of stars"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:842
 msgctxt "Shapley–Sawyer Concentration Class"
-msgid "very loose concentration of stars towards the center"
+msgid "rather loosely concentration of stars towards the center"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:845
 msgctxt "Shapley–Sawyer Concentration Class"
-msgid "almost no concentration towards the center"
+msgid "loose concentration of stars towards the center"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:848
 msgctxt "Shapley–Sawyer Concentration Class"
+msgid "loose concentration of stars"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:851
+msgctxt "Shapley–Sawyer Concentration Class"
+msgid "very loose concentration of stars towards the center"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:854
+msgctxt "Shapley–Sawyer Concentration Class"
+msgid "almost no concentration towards the center"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:857
+msgctxt "Shapley–Sawyer Concentration Class"
 msgid "undocumented concentration class"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:868
-msgctxt "Trumpler's Concentration Class"
-msgid "strong central concentration of stars"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:871
-msgctxt "Trumpler's Concentration Class"
-msgid "little central concentration of stars"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:874
-msgctxt "Trumpler's Concentration Class"
-msgid "no noticeable concentration of stars"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:877
 msgctxt "Trumpler's Concentration Class"
-msgid "a star field condensation"
+msgid "strong central concentration of stars"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:880
 msgctxt "Trumpler's Concentration Class"
-msgid "undocumented concentration class"
+msgid "little central concentration of stars"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:883
+msgctxt "Trumpler's Concentration Class"
+msgid "no noticeable concentration of stars"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:886
-msgctxt "Trumpler's Brightness Class"
-msgid "small brightness range of cluster members"
+msgctxt "Trumpler's Concentration Class"
+msgid "a star field condensation"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:889
-msgctxt "Trumpler's Brightness Class"
-msgid "medium brightness range of cluster members"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:892
-msgctxt "Trumpler's Brightness Class"
-msgid "large brightness range of cluster members"
+msgctxt "Trumpler's Concentration Class"
+msgid "undocumented concentration class"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:895
 msgctxt "Trumpler's Brightness Class"
-msgid "undocumented brightness range of cluster members"
+msgid "small brightness range of cluster members"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:898
+msgctxt "Trumpler's Brightness Class"
+msgid "medium brightness range of cluster members"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:901
-msgctxt "Trumpler's Number of Members Class"
-msgid "poor cluster with less than 50 stars"
+msgctxt "Trumpler's Brightness Class"
+msgid "large brightness range of cluster members"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:904
-msgctxt "Trumpler's Number of Members Class"
-msgid "moderately rich cluster with 50-100 stars"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:907
-msgctxt "Trumpler's Number of Members Class"
-msgid "rich cluster with more than 100 stars"
+msgctxt "Trumpler's Brightness Class"
+msgid "undocumented brightness range of cluster members"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:910
 msgctxt "Trumpler's Number of Members Class"
+msgid "poor cluster with less than 50 stars"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:913
+msgctxt "Trumpler's Number of Members Class"
+msgid "moderately rich cluster with 50-100 stars"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:916
+msgctxt "Trumpler's Number of Members Class"
+msgid "rich cluster with more than 100 stars"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:919
+msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:914
+#: src/core/modules/Nebula.cpp:923
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:935
+#: src/core/modules/Nebula.cpp:944
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:938
+#: src/core/modules/Nebula.cpp:947
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:941
+#: src/core/modules/Nebula.cpp:950
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:944
+#: src/core/modules/Nebula.cpp:953
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:947
+#: src/core/modules/Nebula.cpp:956
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:950
+#: src/core/modules/Nebula.cpp:959
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:953
+#: src/core/modules/Nebula.cpp:962
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:959
+#: src/core/modules/Nebula.cpp:968
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:962
+#: src/core/modules/Nebula.cpp:971
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:965
+#: src/core/modules/Nebula.cpp:974
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr ""
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:970
+#: src/core/modules/Nebula.cpp:979
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr ""
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:976
+#: src/core/modules/Nebula.cpp:985
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:980
+#: src/core/modules/Nebula.cpp:989
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1003
+#: src/core/modules/Nebula.cpp:1012
 msgid "circular form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1006
+#: src/core/modules/Nebula.cpp:1015
 msgid "elliptical form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1009
+#: src/core/modules/Nebula.cpp:1018
 msgid "irregular form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1012
+#: src/core/modules/Nebula.cpp:1021
 msgid "undocumented form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1018
+#: src/core/modules/Nebula.cpp:1027
 msgid "amorphous structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1021
+#: src/core/modules/Nebula.cpp:1030
 msgid "conventional structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1024
+#: src/core/modules/Nebula.cpp:1033
 msgid "filamentary structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1027
+#: src/core/modules/Nebula.cpp:1036
 msgid "undocumented structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1033
+#: src/core/modules/Nebula.cpp:1042
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1036
+#: src/core/modules/Nebula.cpp:1045
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1039
+#: src/core/modules/Nebula.cpp:1048
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1042
+#: src/core/modules/Nebula.cpp:1051
 msgid "undocumented brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1058
+#: src/core/modules/Nebula.cpp:1067
 msgid "galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1061
+#: src/core/modules/Nebula.cpp:1070
 msgid "active galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1064
+#: src/core/modules/Nebula.cpp:1073
 msgid "radio galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1067
+#: src/core/modules/Nebula.cpp:1076
 msgid "interacting galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1070 plugins/Quasars/src/Quasar.cpp:98
+#: src/core/modules/Nebula.cpp:1079 plugins/Quasars/src/Quasar.cpp:98
 msgid "quasar"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1073
+#: src/core/modules/Nebula.cpp:1082
 msgid "star cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1076
+#: src/core/modules/Nebula.cpp:1085
 msgid "open star cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1079
+#: src/core/modules/Nebula.cpp:1088
 msgid "globular star cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1082
+#: src/core/modules/Nebula.cpp:1091
 msgid "nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1085
+#: src/core/modules/Nebula.cpp:1094
 msgid "planetary nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1088
+#: src/core/modules/Nebula.cpp:1097
 msgid "dark nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1091
+#: src/core/modules/Nebula.cpp:1100
 msgid "cluster associated with nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1094
+#: src/core/modules/Nebula.cpp:1103
 msgid "bipolar nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1097
+#: src/core/modules/Nebula.cpp:1106
 msgid "emission nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1100
+#: src/core/modules/Nebula.cpp:1109
 msgid "HII region"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1103
+#: src/core/modules/Nebula.cpp:1112
 msgid "reflection nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1106
+#: src/core/modules/Nebula.cpp:1115
 msgid "supernova remnant"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1109
+#: src/core/modules/Nebula.cpp:1118
 msgid "stellar association"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1112
+#: src/core/modules/Nebula.cpp:1121
 msgid "star cloud"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1115
+#: src/core/modules/Nebula.cpp:1124
 msgid "interstellar matter"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1118
+#: src/core/modules/Nebula.cpp:1127
 msgid "emission object"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1121
+#: src/core/modules/Nebula.cpp:1130
 msgid "BL Lac object"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1124
+#: src/core/modules/Nebula.cpp:1133
 msgid "blazar"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1127
+#: src/core/modules/Nebula.cpp:1136
 msgid "molecular cloud"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1130
+#: src/core/modules/Nebula.cpp:1139
 msgid "young stellar object"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1133
+#: src/core/modules/Nebula.cpp:1142
 msgid "possible quasar"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1136
+#: src/core/modules/Nebula.cpp:1145
 msgid "possible planetary nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1139
+#: src/core/modules/Nebula.cpp:1148
 msgid "protoplanetary nebula"
 msgstr ""
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1142 src/core/modules/StarWrapper.cpp:53
+#: src/core/modules/Nebula.cpp:1151 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:174 src/translations.h:42
 msgid "star"
 msgstr "ster"
 
-#: src/core/modules/Nebula.cpp:1145
+#: src/core/modules/Nebula.cpp:1154
 msgid "object of unknown nature"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1148
+#: src/core/modules/Nebula.cpp:1157
 msgid "undocumented type"
 msgstr ""
 
@@ -1674,11 +1679,11 @@ msgstr "Kontak"
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:547
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:408
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
-#: plugins/Novae/src/gui/NovaeDialog.cpp:118
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:127
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:120
+#: plugins/Novae/src/gui/NovaeDialog.cpp:119
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:144
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:207
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:185
@@ -1688,11 +1693,11 @@ msgstr "Weergawe"
 #: src/gui/ConfigurationDialog.cpp:957
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
 #: plugins/Oculars/src/gui/OcularDialog.cpp:548
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:120
-#: plugins/Novae/src/gui/NovaeDialog.cpp:119
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:144
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
+#: plugins/Novae/src/gui/NovaeDialog.cpp:120
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:120
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:186
@@ -2171,29 +2176,29 @@ msgstr "Verberg vertikale keusebalk outomaties"
 msgid "Toggle visibility of GUI"
 msgstr "Skakel sigbaarheid van GUI"
 
-#: src/gui/StelGuiItems.cpp:293 src/gui/StelGuiItems.cpp:752
+#: src/gui/StelGuiItems.cpp:317 src/gui/StelGuiItems.cpp:832
 msgid "Space"
 msgstr "Ruimte"
 
-#: src/gui/StelGuiItems.cpp:599
+#: src/gui/StelGuiItems.cpp:655
 #, c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/StelGuiItems.cpp:631
+#: src/gui/StelGuiItems.cpp:687
 #, qt-format
 msgid "planetocentric distance %1 km"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:633
+#: src/gui/StelGuiItems.cpp:689
 msgid "planetocentric observer"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:657
+#: src/gui/StelGuiItems.cpp:718
 msgid "Field of view"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:677
+#: src/gui/StelGuiItems.cpp:743
 msgid "Frames per second"
 msgstr ""
 
@@ -2694,21 +2699,21 @@ msgid ""
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:861
+#: src/StelMainView.cpp:862
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:902
+#: src/StelMainView.cpp:903
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1013
+#: src/StelMainView.cpp:1014
 #, qt-format
 msgid "Stellarium %1"
 msgstr ""
@@ -3292,75 +3297,80 @@ msgstr "Tycho se Supernova"
 msgid "Earth and other Planets from Ceres"
 msgstr ""
 
+#. TRANSLATORS: Name of script
+#: src/translations.h:290
+msgid "Messier Objects Tour"
+msgstr ""
+
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:294
+#: src/translations.h:296
 msgid "Look around each installed landscape."
 msgstr ""
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:296
+#: src/translations.h:298
 msgid "Look at each installed sky culture."
 msgstr ""
 
-#: src/translations.h:297
+#: src/translations.h:299
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr ""
 
-#: src/translations.h:298
+#: src/translations.h:300
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr ""
 
-#: src/translations.h:299
+#: src/translations.h:301
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr ""
 
-#: src/translations.h:300
+#: src/translations.h:302
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
 
-#: src/translations.h:301
+#: src/translations.h:303
 msgid "Script which runs automatically at startup"
 msgstr ""
 
-#: src/translations.h:302
+#: src/translations.h:304
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
 
-#: src/translations.h:303
+#: src/translations.h:305
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr ""
 
-#: src/translations.h:304
+#: src/translations.h:306
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr ""
 
-#: src/translations.h:305
+#: src/translations.h:307
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr ""
 
-#: src/translations.h:306
+#: src/translations.h:308
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
 
-#: src/translations.h:307
+#: src/translations.h:309
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
 
-#: src/translations.h:308
+#: src/translations.h:310
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -3370,47 +3380,47 @@ msgid ""
 "light up later."
 msgstr ""
 
-#: src/translations.h:309
+#: src/translations.h:311
 msgid ""
 "Screensaver of various happenings in the Solar System. 261 events in all!"
 msgstr ""
 
-#: src/translations.h:310
+#: src/translations.h:312
 msgid "A tour of the western constellations."
 msgstr ""
 
-#: src/translations.h:311
+#: src/translations.h:313
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr ""
 
-#: src/translations.h:312
+#: src/translations.h:314
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 
-#: src/translations.h:313
+#: src/translations.h:315
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 
-#: src/translations.h:314
+#: src/translations.h:316
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr ""
 
-#: src/translations.h:315
+#: src/translations.h:317
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
 
-#: src/translations.h:316
+#: src/translations.h:318
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
 msgstr ""
 
-#: src/translations.h:317
+#: src/translations.h:319
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -3418,1001 +3428,1005 @@ msgid ""
 "moons, Callisto will be the one."
 msgstr ""
 
-#: src/translations.h:318
+#: src/translations.h:320
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
 msgstr ""
 
-#: src/translations.h:322
+#: src/translations.h:321
+msgid "A tour of Messier Objects"
+msgstr ""
+
+#: src/translations.h:325
 msgid "Andorra"
 msgstr "Andorra"
 
-#: src/translations.h:323
+#: src/translations.h:326
 msgid "United Arab Emirates"
 msgstr "Verenigde Arabiese Emirate"
 
-#: src/translations.h:324
+#: src/translations.h:327
 msgid "Afghanistan"
 msgstr "Afganistan"
 
-#: src/translations.h:325
+#: src/translations.h:328
 msgid "Antigua and Barbuda"
 msgstr "Antigue en Barbuda"
 
-#: src/translations.h:326
+#: src/translations.h:329
 msgid "Anguilla"
 msgstr "Anguilla"
 
-#: src/translations.h:327
+#: src/translations.h:330
 msgid "Albania"
 msgstr "Albanië"
 
-#: src/translations.h:328
+#: src/translations.h:331
 msgid "Armenia"
 msgstr "Armenië"
 
-#: src/translations.h:329
+#: src/translations.h:332
 msgid "Netherlands Antilles"
 msgstr "Nederlandse Antilles"
 
-#: src/translations.h:330
+#: src/translations.h:333
 msgid "Angola"
 msgstr "Angola"
 
-#: src/translations.h:331
+#: src/translations.h:334
 msgid "Antarctica"
 msgstr "Antarktika"
 
-#: src/translations.h:332
+#: src/translations.h:335
 msgid "Argentina"
 msgstr "Argentinië"
 
-#: src/translations.h:333
+#: src/translations.h:336
 msgid "American Samoa"
 msgstr "Amerikanse Samoa"
 
-#: src/translations.h:334
+#: src/translations.h:337
 msgid "Austria"
 msgstr "Oostenryk"
 
-#: src/translations.h:335
+#: src/translations.h:338
 msgid "Australia"
 msgstr "Australië"
 
-#: src/translations.h:336
+#: src/translations.h:339
 msgid "Aruba"
 msgstr "Aruba"
 
-#: src/translations.h:337
+#: src/translations.h:340
 msgid "Azerbaijan"
 msgstr "Azerbaijan"
 
-#: src/translations.h:338
+#: src/translations.h:341
 msgid "Bosnia and Herzegowina"
 msgstr "Bosnia en Herzegowina"
 
-#: src/translations.h:339
+#: src/translations.h:342
 msgid "Barbados"
 msgstr "Barbados"
 
-#: src/translations.h:340
+#: src/translations.h:343
 msgid "Bangladesh"
 msgstr "Bangladesh"
 
-#: src/translations.h:341
+#: src/translations.h:344
 msgid "Belgium"
 msgstr "België"
 
-#: src/translations.h:342
+#: src/translations.h:345
 msgid "Burkina Faso"
 msgstr "Burkina Faso"
 
-#: src/translations.h:343
+#: src/translations.h:346
 msgid "Bulgaria"
 msgstr "Bulgarye"
 
-#: src/translations.h:344
+#: src/translations.h:347
 msgid "Bahrain"
 msgstr "Bahrain"
 
-#: src/translations.h:345
+#: src/translations.h:348
 msgid "Burundi"
 msgstr "Burundi"
 
-#: src/translations.h:346
+#: src/translations.h:349
 msgid "Benin"
 msgstr "Benin"
 
-#: src/translations.h:347
+#: src/translations.h:350
 msgid "Bermuda"
 msgstr "Bermuda"
 
-#: src/translations.h:348
+#: src/translations.h:351
 msgid "Brunei Darussalam"
 msgstr "Brunei Darussalam"
 
-#: src/translations.h:349
+#: src/translations.h:352
 msgid "Bolivia"
 msgstr "Bolivië"
 
-#: src/translations.h:350
+#: src/translations.h:353
 msgid "Brazil"
 msgstr "Brazilië"
 
-#: src/translations.h:351
+#: src/translations.h:354
 msgid "Bahamas"
 msgstr "Bahamas"
 
-#: src/translations.h:352
+#: src/translations.h:355
 msgid "Bhutan"
 msgstr "Bhutan"
 
-#: src/translations.h:353
+#: src/translations.h:356
 msgid "Bouvet Island"
 msgstr "Bouveteiland"
 
-#: src/translations.h:354
+#: src/translations.h:357
 msgid "Botswana"
 msgstr "Botswana"
 
-#: src/translations.h:355
+#: src/translations.h:358
 msgid "Belarus"
 msgstr "Belarus"
 
-#: src/translations.h:356
+#: src/translations.h:359
 msgid "Belize"
 msgstr "Belize"
 
-#: src/translations.h:357
+#: src/translations.h:360
 msgid "Canada"
 msgstr "Kanada"
 
-#: src/translations.h:358
+#: src/translations.h:361
 msgid "Cocos Islands"
 msgstr "Kokos Eilande"
 
-#: src/translations.h:359
+#: src/translations.h:362
 msgid "Democratic Republic of the Congo"
 msgstr "Demokratiese Republief van die Kongo"
 
-#: src/translations.h:360
+#: src/translations.h:363
 msgid "Central African Republic"
 msgstr "Sentraal-Afrikaanse Republiek"
 
-#: src/translations.h:361
+#: src/translations.h:364
 msgid "Republic of the Congo"
 msgstr "Republiek van die Kongo"
 
-#: src/translations.h:362
+#: src/translations.h:365
 msgid "Switzerland"
 msgstr "Switserland"
 
-#: src/translations.h:363
+#: src/translations.h:366
 msgid "Cote d'Ivoire"
 msgstr "Ivoorkus"
 
-#: src/translations.h:364
+#: src/translations.h:367
 msgid "Cook Islands"
 msgstr "Cook Eilande"
 
-#: src/translations.h:365
+#: src/translations.h:368
 msgid "Chile"
 msgstr "Chile"
 
-#: src/translations.h:366
+#: src/translations.h:369
 msgid "Cameroon"
 msgstr "Kameroen"
 
-#: src/translations.h:367
+#: src/translations.h:370
 msgid "China"
 msgstr "China"
 
-#: src/translations.h:368
+#: src/translations.h:371
 msgid "Colombia"
 msgstr "Colombië"
 
-#: src/translations.h:369
+#: src/translations.h:372
 msgid "Costa Rica"
 msgstr "Costa Rica"
 
-#: src/translations.h:370
+#: src/translations.h:373
 msgid "Serbia and Montenegro"
 msgstr "Serwië en Montenegro"
 
-#: src/translations.h:371
+#: src/translations.h:374
 msgid "Montenegro"
 msgstr ""
 
-#: src/translations.h:372
+#: src/translations.h:375
 msgid "Cuba"
 msgstr "Kuba"
 
-#: src/translations.h:373
+#: src/translations.h:376
 msgid "Cape Verde"
 msgstr "Kaap Verde"
 
-#: src/translations.h:374
+#: src/translations.h:377
 msgid "Christmas Island"
 msgstr "Kersfees Eiland"
 
-#: src/translations.h:375
+#: src/translations.h:378
 msgid "Cyprus"
 msgstr "Ciprus"
 
-#: src/translations.h:376
+#: src/translations.h:379
 msgid "Czech Republic"
 msgstr "Tjeggiese Republiek"
 
-#: src/translations.h:377
+#: src/translations.h:380
 msgid "Germany"
 msgstr "Duitsland"
 
-#: src/translations.h:378
+#: src/translations.h:381
 msgid "Djibouti"
 msgstr "Djibouti"
 
-#: src/translations.h:379
+#: src/translations.h:382
 msgid "Denmark"
 msgstr "Denemarke"
 
-#: src/translations.h:380
+#: src/translations.h:383
 msgid "Dominica"
 msgstr "Dominika"
 
-#: src/translations.h:381
+#: src/translations.h:384
 msgid "Dominican Republic"
 msgstr "Dominikaanse Republiek"
 
-#: src/translations.h:382
+#: src/translations.h:385
 msgid "Algeria"
 msgstr "Algerië"
 
-#: src/translations.h:383
+#: src/translations.h:386
 msgid "Ecuador"
 msgstr "Ecuador"
 
-#: src/translations.h:384
+#: src/translations.h:387
 msgid "Estonia"
 msgstr ""
 
-#: src/translations.h:385
+#: src/translations.h:388
 msgid "Egypt"
 msgstr "Egipte"
 
-#: src/translations.h:386
+#: src/translations.h:389
 msgid "Western Sahara"
 msgstr "Wes-Sahara"
 
-#: src/translations.h:387
+#: src/translations.h:390
 msgid "Eritrea"
 msgstr "Eritrea"
 
-#: src/translations.h:388
+#: src/translations.h:391
 msgid "Spain"
 msgstr "Spanje"
 
-#: src/translations.h:389
+#: src/translations.h:392
 msgid "Ethiopia"
 msgstr "Ethiopië"
 
-#: src/translations.h:390
+#: src/translations.h:393
 msgid "Finland"
 msgstr "Finland"
 
-#: src/translations.h:391
+#: src/translations.h:394
 msgid "Fiji"
 msgstr "Fiji"
 
-#: src/translations.h:392
+#: src/translations.h:395
 msgid "Falkland Islands"
 msgstr "Falklandeilande"
 
-#: src/translations.h:393
+#: src/translations.h:396
 msgid "Micronesia"
 msgstr "Mikronesië"
 
-#: src/translations.h:394
+#: src/translations.h:397
 msgid "Faroe Islands"
 msgstr "Faroe Eilande"
 
-#: src/translations.h:395
+#: src/translations.h:398
 msgid "France"
 msgstr "Frankryk"
 
-#: src/translations.h:396
+#: src/translations.h:399
 msgid "Gabon"
 msgstr "Gabon"
 
-#: src/translations.h:397
+#: src/translations.h:400
 msgid "United Kingdom"
 msgstr "Verenigde Koninkryk"
 
-#: src/translations.h:398
+#: src/translations.h:401
 msgid "Grenada"
 msgstr ""
 
-#: src/translations.h:399
+#: src/translations.h:402
 msgid "Georgia"
 msgstr "Georgië"
 
-#: src/translations.h:400
+#: src/translations.h:403
 msgid "French Guiana"
 msgstr "Frans-Guinee"
 
-#: src/translations.h:401
+#: src/translations.h:404
 msgid "Ghana"
 msgstr "Ghana"
 
-#: src/translations.h:402
+#: src/translations.h:405
 msgid "Gibraltar"
 msgstr "Gibraltar"
 
-#: src/translations.h:403
+#: src/translations.h:406
 msgid "Greenland"
 msgstr "Groenland"
 
-#: src/translations.h:404
+#: src/translations.h:407
 msgid "Gambia"
 msgstr "Gambië"
 
-#: src/translations.h:405
+#: src/translations.h:408
 msgid "Guinea"
 msgstr "Guinea"
 
-#: src/translations.h:406
+#: src/translations.h:409
 msgid "Guadeloupe"
 msgstr "Guadeloupe"
 
-#: src/translations.h:407
+#: src/translations.h:410
 msgid "Equatorial Guinea"
 msgstr "Ekwatoriaal Guinea"
 
-#: src/translations.h:408
+#: src/translations.h:411
 msgid "Greece"
 msgstr "Griekeland"
 
-#: src/translations.h:409
+#: src/translations.h:412
 msgid "South Georgia and the South Sandwich Islands"
 msgstr ""
 
-#: src/translations.h:410
+#: src/translations.h:413
 msgid "Guatemala"
 msgstr "Gautemala"
 
-#: src/translations.h:411
+#: src/translations.h:414
 msgid "Guam"
 msgstr "Guam"
 
-#: src/translations.h:412
+#: src/translations.h:415
 msgid "Guinea-Bissau"
 msgstr "Guinea-Bissau"
 
-#: src/translations.h:413
+#: src/translations.h:416
 msgid "Guyana"
 msgstr "Guyana"
 
-#: src/translations.h:414
+#: src/translations.h:417
 msgid "Hong Kong"
 msgstr "Hong Kong"
 
-#: src/translations.h:415
+#: src/translations.h:418
 msgid "Heard Island and McDonald Islands"
 msgstr ""
 
-#: src/translations.h:416
+#: src/translations.h:419
 msgid "Honduras"
 msgstr "Honduras"
 
-#: src/translations.h:417
+#: src/translations.h:420
 msgid "Croatia"
 msgstr "Kroatië"
 
-#: src/translations.h:418
+#: src/translations.h:421
 msgid "Haiti"
 msgstr "Haïti"
 
-#: src/translations.h:419
+#: src/translations.h:422
 msgid "Hungary"
 msgstr "Hongarye"
 
-#: src/translations.h:420
+#: src/translations.h:423
 msgid "Indonesia"
 msgstr "Indonesië"
 
-#: src/translations.h:421
+#: src/translations.h:424
 msgid "Ireland"
 msgstr "Ierland"
 
-#: src/translations.h:422
+#: src/translations.h:425
 msgid "Israel"
 msgstr "Israel"
 
-#: src/translations.h:423
+#: src/translations.h:426
 msgid "India"
 msgstr "Indië"
 
-#: src/translations.h:424
+#: src/translations.h:427
 msgid "British Indian Ocean Territory"
 msgstr "Britse Indiese Oseaan Gebied"
 
-#: src/translations.h:425
+#: src/translations.h:428
 msgid "Iraq"
 msgstr "Irak"
 
-#: src/translations.h:426
+#: src/translations.h:429
 msgid "Iran"
 msgstr "Iran"
 
-#: src/translations.h:427
+#: src/translations.h:430
 msgid "Iceland"
 msgstr "Ysland"
 
-#: src/translations.h:428
+#: src/translations.h:431
 msgid "Italy"
 msgstr "Italië"
 
-#: src/translations.h:429
+#: src/translations.h:432
 msgid "Jamaica"
 msgstr ""
 
-#: src/translations.h:430
+#: src/translations.h:433
 msgid "Jordan"
 msgstr "Jordanië"
 
-#: src/translations.h:431
+#: src/translations.h:434
 msgid "Japan"
 msgstr "Japan"
 
-#: src/translations.h:432
+#: src/translations.h:435
 msgid "Kenya"
 msgstr "Kenia"
 
-#: src/translations.h:433
+#: src/translations.h:436
 msgid "Kyrgyzstan"
 msgstr "Kyrgyzstan"
 
-#: src/translations.h:434
+#: src/translations.h:437
 msgid "Cambodia"
 msgstr ""
 
-#: src/translations.h:435
+#: src/translations.h:438
 msgid "Kiribati"
 msgstr "Kiribati"
 
-#: src/translations.h:436
+#: src/translations.h:439
 msgid "Comoros"
 msgstr ""
 
-#: src/translations.h:437
+#: src/translations.h:440
 msgid "Saint Kitts and Nevis"
 msgstr "Saint Kitts en Nevis"
 
-#: src/translations.h:438
+#: src/translations.h:441
 msgid "Democratic People's Republic of Korea"
 msgstr "Demokratiese Volksrepubliek van Korea"
 
-#: src/translations.h:439
+#: src/translations.h:442
 msgid "Republic of Korea"
 msgstr "Republiek van Korea"
 
-#: src/translations.h:440
+#: src/translations.h:443
 msgid "Kuwait"
 msgstr "Koeweit"
 
-#: src/translations.h:441
+#: src/translations.h:444
 msgid "Cayman Islands"
 msgstr ""
 
-#: src/translations.h:442
+#: src/translations.h:445
 msgid "Kazakhstan"
 msgstr "Kazakhstan"
 
-#: src/translations.h:443
+#: src/translations.h:446
 msgid "Lao"
 msgstr "Lao"
 
-#: src/translations.h:444
+#: src/translations.h:447
 msgid "Lebanon"
 msgstr "Libanon"
 
-#: src/translations.h:445
+#: src/translations.h:448
 msgid "Saint Lucia"
 msgstr ""
 
-#: src/translations.h:446
+#: src/translations.h:449
 msgid "Liechtenstein"
 msgstr "Liechtenstein"
 
-#: src/translations.h:447
+#: src/translations.h:450
 msgid "Sri Lanka"
 msgstr "Sri Lanka"
 
-#: src/translations.h:448
+#: src/translations.h:451
 msgid "Liberia"
 msgstr "Liberië"
 
-#: src/translations.h:449
+#: src/translations.h:452
 msgid "Lesotho"
 msgstr "Lesotho"
 
-#: src/translations.h:450
+#: src/translations.h:453
 msgid "Lithuania"
 msgstr "Lithuanië"
 
-#: src/translations.h:451
+#: src/translations.h:454
 msgid "Luxembourg"
 msgstr ""
 
-#: src/translations.h:452
+#: src/translations.h:455
 msgid "Latvia"
 msgstr "Latvia"
 
-#: src/translations.h:453
+#: src/translations.h:456
 msgid "Libyan Arab Jamahiriya"
 msgstr ""
 
-#: src/translations.h:454
+#: src/translations.h:457
 msgid "Morocco"
 msgstr "Morokko"
 
-#: src/translations.h:455
+#: src/translations.h:458
 msgid "Monaco"
 msgstr "Monako"
 
-#: src/translations.h:456
+#: src/translations.h:459
 msgid "Moldova"
 msgstr ""
 
-#: src/translations.h:457
+#: src/translations.h:460
 msgid "Madagascar"
 msgstr "Madagaskar"
 
-#: src/translations.h:458
+#: src/translations.h:461
 msgid "Marshall Islands"
 msgstr "Marshall EIlande"
 
-#: src/translations.h:459
+#: src/translations.h:462
 msgid "Macedonia"
 msgstr ""
 
-#: src/translations.h:460
+#: src/translations.h:463
 msgid "Mali"
 msgstr "Mali"
 
-#: src/translations.h:461
+#: src/translations.h:464
 msgid "Myanmar"
 msgstr "Myanmar"
 
-#: src/translations.h:462
+#: src/translations.h:465
 msgid "Mongolia"
 msgstr "Mongolië"
 
-#: src/translations.h:463
+#: src/translations.h:466
 msgid "Macau"
 msgstr ""
 
-#: src/translations.h:464
+#: src/translations.h:467
 msgid "Northern Mariana Islands"
 msgstr ""
 
-#: src/translations.h:465
+#: src/translations.h:468
 msgid "Martinique"
 msgstr ""
 
-#: src/translations.h:466
+#: src/translations.h:469
 msgid "Mauritania"
 msgstr ""
 
-#: src/translations.h:467
+#: src/translations.h:470
 msgid "Montserrat"
 msgstr "Montserrat"
 
-#: src/translations.h:468
+#: src/translations.h:471
 msgid "Malta"
 msgstr "Malta"
 
-#: src/translations.h:469
+#: src/translations.h:472
 msgid "Mauritius"
 msgstr ""
 
-#: src/translations.h:470
+#: src/translations.h:473
 msgid "Maldives"
 msgstr ""
 
-#: src/translations.h:471
+#: src/translations.h:474
 msgid "Malawi"
 msgstr "Malawi"
 
-#: src/translations.h:472
+#: src/translations.h:475
 msgid "Mexico"
 msgstr ""
 
-#: src/translations.h:473
+#: src/translations.h:476
 msgid "Malaysia"
 msgstr ""
 
-#: src/translations.h:474
+#: src/translations.h:477
 msgid "Mozambique"
 msgstr "Mosambiek"
 
-#: src/translations.h:475
+#: src/translations.h:478
 msgid "Namibia"
 msgstr "Namibië"
 
-#: src/translations.h:476
+#: src/translations.h:479
 msgid "New Caledonia"
 msgstr ""
 
-#: src/translations.h:477
+#: src/translations.h:480
 msgid "Niger"
 msgstr "Niger"
 
-#: src/translations.h:478
+#: src/translations.h:481
 msgid "Norfolk Island"
 msgstr "Norfolk Eiland"
 
-#: src/translations.h:479
+#: src/translations.h:482
 msgid "Nigeria"
 msgstr "Nigerië"
 
-#: src/translations.h:480
+#: src/translations.h:483
 msgid "Nicaragua"
 msgstr ""
 
-#: src/translations.h:481
+#: src/translations.h:484
 msgid "Netherlands"
 msgstr "Nederland"
 
-#: src/translations.h:482
+#: src/translations.h:485
 msgid "Norway"
 msgstr "Noorweë"
 
-#: src/translations.h:483
+#: src/translations.h:486
 msgid "Nepal"
 msgstr "Nepal"
 
-#: src/translations.h:484
+#: src/translations.h:487
 msgid "Nauru"
 msgstr "Nauru"
 
-#: src/translations.h:485
+#: src/translations.h:488
 msgid "Niue"
 msgstr ""
 
-#: src/translations.h:486
+#: src/translations.h:489
 msgid "New Zealand"
 msgstr "Nieu-Seeland"
 
-#: src/translations.h:487
+#: src/translations.h:490
 msgid "Oman"
 msgstr "Oman"
 
-#: src/translations.h:488
+#: src/translations.h:491
 msgid "Panama"
 msgstr "Panama"
 
-#: src/translations.h:489
+#: src/translations.h:492
 msgid "Peru"
 msgstr "Peru"
 
-#: src/translations.h:490
+#: src/translations.h:493
 msgid "French Polynesia"
 msgstr ""
 
-#: src/translations.h:491
+#: src/translations.h:494
 msgid "Papua New Guinea"
 msgstr ""
 
-#: src/translations.h:492
+#: src/translations.h:495
 msgid "Philippines"
 msgstr "Fillipyne"
 
-#: src/translations.h:493
+#: src/translations.h:496
 msgid "Pakistan"
 msgstr "Pakistan"
 
-#: src/translations.h:494
+#: src/translations.h:497
 msgid "Poland"
 msgstr "Pole"
 
-#: src/translations.h:495
+#: src/translations.h:498
 msgid "Saint Pierre and Miquelon"
 msgstr ""
 
-#: src/translations.h:496
+#: src/translations.h:499
 msgid "Pitcairn"
 msgstr "Pitcairn"
 
-#: src/translations.h:497
+#: src/translations.h:500
 msgid "Puerto Rico"
 msgstr "Puerto Rico"
 
-#: src/translations.h:498
+#: src/translations.h:501
 msgid "Palestinian Territories"
 msgstr ""
 
-#: src/translations.h:499
+#: src/translations.h:502
 msgid "Portugal"
 msgstr "Portugal"
 
-#: src/translations.h:500
+#: src/translations.h:503
 msgid "Palau"
 msgstr "Palau"
 
-#: src/translations.h:501
+#: src/translations.h:504
 msgid "Paraguay"
 msgstr "Paraguay"
 
-#: src/translations.h:502
+#: src/translations.h:505
 msgid "Qatar"
 msgstr ""
 
-#: src/translations.h:503
+#: src/translations.h:506
 msgid "Réunion"
 msgstr ""
 
-#: src/translations.h:504
+#: src/translations.h:507
 msgid "Romania"
 msgstr "Romenië"
 
-#: src/translations.h:505
+#: src/translations.h:508
 msgid "Serbia"
 msgstr ""
 
-#: src/translations.h:506
+#: src/translations.h:509
 msgid "Russian Federation"
 msgstr ""
 
-#: src/translations.h:507
+#: src/translations.h:510
 msgid "Rwanda"
 msgstr "Rwanda"
 
-#: src/translations.h:508
+#: src/translations.h:511
 msgid "Saudi Arabia"
 msgstr "Saudi Arabië"
 
-#: src/translations.h:509
+#: src/translations.h:512
 msgid "Solomon Islands"
 msgstr "Solomon Eilande"
 
-#: src/translations.h:510
+#: src/translations.h:513
 msgid "Seychelles"
 msgstr "Seychelles"
 
-#: src/translations.h:511
+#: src/translations.h:514
 msgid "Sudan"
 msgstr ""
 
-#: src/translations.h:512
+#: src/translations.h:515
 msgid "Sweden"
 msgstr ""
 
-#: src/translations.h:513
+#: src/translations.h:516
 msgid "Singapore"
 msgstr ""
 
-#: src/translations.h:514
+#: src/translations.h:517
 msgid "Saint Helena"
 msgstr ""
 
-#: src/translations.h:515
+#: src/translations.h:518
 msgid "Slovenia"
 msgstr ""
 
-#: src/translations.h:516
+#: src/translations.h:519
 msgid "Svalbard and Jan Mayen"
 msgstr ""
 
-#: src/translations.h:517
+#: src/translations.h:520
 msgid "Slovakia"
 msgstr ""
 
-#: src/translations.h:518
+#: src/translations.h:521
 msgid "Sierra Leone"
 msgstr ""
 
-#: src/translations.h:519
+#: src/translations.h:522
 msgid "San Marino"
 msgstr ""
 
-#: src/translations.h:520
+#: src/translations.h:523
 msgid "Senegal"
 msgstr ""
 
-#: src/translations.h:521
+#: src/translations.h:524
 msgid "Somalia"
 msgstr ""
 
-#: src/translations.h:522
+#: src/translations.h:525
 msgid "Suriname"
 msgstr ""
 
-#: src/translations.h:523
+#: src/translations.h:526
 msgid "Sao Tome and Principe"
 msgstr ""
 
-#: src/translations.h:524
+#: src/translations.h:527
 msgid "El Salvador"
 msgstr ""
 
-#: src/translations.h:525
+#: src/translations.h:528
 msgid "Syrian Arab Republic"
 msgstr ""
 
-#: src/translations.h:526
+#: src/translations.h:529
 msgid "Swaziland"
 msgstr ""
 
-#: src/translations.h:527
+#: src/translations.h:530
 msgid "Turks and Caicos Islands"
 msgstr ""
 
-#: src/translations.h:528
+#: src/translations.h:531
 msgid "Chad"
 msgstr ""
 
-#: src/translations.h:529
+#: src/translations.h:532
 msgid "French Southern Territories"
 msgstr ""
 
-#: src/translations.h:530
+#: src/translations.h:533
 msgid "Togo"
 msgstr ""
 
-#: src/translations.h:531
+#: src/translations.h:534
 msgid "Thailand"
 msgstr ""
 
-#: src/translations.h:532
+#: src/translations.h:535
 msgid "Tajikistan"
 msgstr "Tajikistan"
 
-#: src/translations.h:533
+#: src/translations.h:536
 msgid "Tokelau"
 msgstr "Tokelau"
 
-#: src/translations.h:534
+#: src/translations.h:537
 msgid "East Timor"
 msgstr "Oos-Timor"
 
-#: src/translations.h:535
+#: src/translations.h:538
 msgid "Turkmenistan"
 msgstr "Turkmenistan"
 
-#: src/translations.h:536
+#: src/translations.h:539
 msgid "Tunisia"
 msgstr "Tunisië"
 
-#: src/translations.h:537
+#: src/translations.h:540
 msgid "Tonga"
 msgstr "Tonga"
 
-#: src/translations.h:538
+#: src/translations.h:541
 msgid "Turkey"
 msgstr "Turkye"
 
-#: src/translations.h:539
+#: src/translations.h:542
 msgid "Trinidad and Tobago"
 msgstr "Trinidad en Tobago"
 
-#: src/translations.h:540
+#: src/translations.h:543
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
-#: src/translations.h:541
+#: src/translations.h:544
 msgid "Taiwan"
 msgstr "Taiwan"
 
-#: src/translations.h:542
+#: src/translations.h:545
 msgid "Tanzania"
 msgstr "Tanzanië"
 
-#: src/translations.h:543
+#: src/translations.h:546
 msgid "Ukraine"
 msgstr ""
 
-#: src/translations.h:544
+#: src/translations.h:547
 msgid "Uganda"
 msgstr "Uganda"
 
-#: src/translations.h:545
+#: src/translations.h:548
 msgid "United States Minor Outlying Islands"
 msgstr ""
 
-#: src/translations.h:546
+#: src/translations.h:549
 msgid "United States"
 msgstr "Verenigde State"
 
-#: src/translations.h:547
+#: src/translations.h:550
 msgid "Uruguay"
 msgstr "Uruguay"
 
-#: src/translations.h:548
+#: src/translations.h:551
 msgid "Uzbekistan"
 msgstr "Uzbekistan"
 
-#: src/translations.h:549
+#: src/translations.h:552
 msgid "Vatican City State"
 msgstr ""
 
-#: src/translations.h:550
+#: src/translations.h:553
 msgid "Saint Vincent and the Grenadines"
 msgstr ""
 
-#: src/translations.h:551
+#: src/translations.h:554
 msgid "Venezuela"
 msgstr ""
 
-#: src/translations.h:552
+#: src/translations.h:555
 msgid "British Virgin Islands"
 msgstr ""
 
-#: src/translations.h:553
+#: src/translations.h:556
 msgid "United States Virgin Islands"
 msgstr ""
 
-#: src/translations.h:554
+#: src/translations.h:557
 msgid "Viet Nam"
 msgstr "Viëtnam"
 
-#: src/translations.h:555
+#: src/translations.h:558
 msgid "Vanuatu"
 msgstr "Vanuatu"
 
-#: src/translations.h:556
+#: src/translations.h:559
 msgid "Wallis and Futuna"
 msgstr "Wallis en Futuna"
 
-#: src/translations.h:557
+#: src/translations.h:560
 msgid "Samoa"
 msgstr "Samoa"
 
-#: src/translations.h:558
+#: src/translations.h:561
 msgid "Yemen"
 msgstr "Yemen"
 
-#: src/translations.h:559
+#: src/translations.h:562
 msgid "Mayotte"
 msgstr ""
 
-#: src/translations.h:560
+#: src/translations.h:563
 msgid "Yugoslavia"
 msgstr ""
 
-#: src/translations.h:561
+#: src/translations.h:564
 msgid "South Africa"
 msgstr "Suid-Afrika"
 
-#: src/translations.h:562
+#: src/translations.h:565
 msgid "Zambia"
 msgstr "Zambië"
 
-#: src/translations.h:563
+#: src/translations.h:566
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
 
-#: src/translations.h:567
+#: src/translations.h:570
 msgid "&Undo"
 msgstr ""
 
-#: src/translations.h:568
+#: src/translations.h:571
 msgid "&Redo"
 msgstr ""
 
-#: src/translations.h:569
+#: src/translations.h:572
 msgid "Cu&t"
 msgstr ""
 
-#: src/translations.h:570
+#: src/translations.h:573
 msgid "&Copy"
 msgstr ""
 
-#: src/translations.h:571
+#: src/translations.h:574
 msgid "&Paste"
 msgstr ""
 
-#: src/translations.h:572 src/ui_locationDialogGui.h:432
+#: src/translations.h:575 src/ui_locationDialogGui.h:432
 #: plugins/Oculars/src/ui_ocularDialog.h:1189
 #: plugins/Oculars/src/ui_ocularDialog.h:1199
 #: plugins/Oculars/src/ui_ocularDialog.h:1206
@@ -4420,64 +4434,64 @@ msgstr ""
 msgid "Delete"
 msgstr "Skrap"
 
-#: src/translations.h:573
+#: src/translations.h:576
 msgid "Select All"
 msgstr ""
 
-#: src/translations.h:574
+#: src/translations.h:577
 msgid "Look in:"
 msgstr ""
 
-#: src/translations.h:575
+#: src/translations.h:578
 msgid "Directory:"
 msgstr ""
 
-#: src/translations.h:576
+#: src/translations.h:579
 msgid "Folder"
 msgstr ""
 
-#: src/translations.h:577
+#: src/translations.h:580
 msgid "&Choose"
 msgstr ""
 
-#: src/translations.h:578 src/ui_configurationDialog.h:1290
+#: src/translations.h:581 src/ui_configurationDialog.h:1290
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "Cancel"
 msgstr "Kanselleer"
 
-#: src/translations.h:579
+#: src/translations.h:582
 msgid "Files of type:"
 msgstr ""
 
-#: src/translations.h:580
+#: src/translations.h:583
 msgid "Date Modified"
 msgstr ""
 
-#: src/translations.h:581
+#: src/translations.h:584
 msgid "Directories"
 msgstr ""
 
-#: src/translations.h:582
+#: src/translations.h:585
 msgid "Computer"
 msgstr ""
 
-#: src/translations.h:583
+#: src/translations.h:586
 msgid "&Open"
 msgstr ""
 
-#: src/translations.h:584
+#: src/translations.h:587
 msgid "File &name:"
 msgstr ""
 
-#: src/translations.h:585
+#: src/translations.h:588
 msgid "Copy &Link Location"
 msgstr ""
 
-#: src/translations.h:586
+#: src/translations.h:589
 msgid "Abort"
 msgstr ""
 
-#: src/translations.h:587
+#: src/translations.h:590
 msgid "Ignore"
 msgstr ""
 
@@ -6050,11 +6064,11 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:446
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:138
-#: plugins/Novae/src/gui/NovaeDialog.cpp:135
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:151
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:150
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:139
+#: plugins/Novae/src/gui/NovaeDialog.cpp:136
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:206
 msgid "Links"
@@ -6062,11 +6076,11 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:447
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:139
-#: plugins/Novae/src/gui/NovaeDialog.cpp:136
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:140
+#: plugins/Novae/src/gui/NovaeDialog.cpp:137
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:207
 #, qt-format
 msgid ""
@@ -6077,11 +6091,11 @@ msgstr ""
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:103
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:450
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:142
-#: plugins/Novae/src/gui/NovaeDialog.cpp:139
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:132
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:155
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
+#: plugins/Novae/src/gui/NovaeDialog.cpp:140
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:156
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:210
 #, qt-format
@@ -6091,11 +6105,11 @@ msgstr "Indien U vrae het kan %1antwoorde hier%2 gevind word"
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:452
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
-#: plugins/Novae/src/gui/NovaeDialog.cpp:141
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:157
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:156
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:145
+#: plugins/Novae/src/gui/NovaeDialog.cpp:142
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:135
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:158
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:311
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:212
 #, qt-format
@@ -6105,11 +6119,11 @@ msgstr "Probleme kan %1hier%2 gerapporteer word."
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:107
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:454
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:146
-#: plugins/Novae/src/gui/NovaeDialog.cpp:143
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:136
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:159
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:158
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:147
+#: plugins/Novae/src/gui/NovaeDialog.cpp:144
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:214
 msgid ""
@@ -7169,64 +7183,64 @@ msgid "See %1this document%2 for details."
 msgstr "Sien %1hierdie dokument%2 vir besonderhede."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:476
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:168
-#: plugins/Novae/src/gui/NovaeDialog.cpp:165
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:158
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:181
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:169
+#: plugins/Novae/src/gui/NovaeDialog.cpp:166
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:159
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:182
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
 msgid "Internet updates disabled"
 msgstr "Internet opdatterings uitgestel"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:478
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:494
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:170
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:204
-#: plugins/Novae/src/gui/NovaeDialog.cpp:167
-#: plugins/Novae/src/gui/NovaeDialog.cpp:201
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:212
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:183
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:241
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:298
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:360
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:171
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:205
+#: plugins/Novae/src/gui/NovaeDialog.cpp:168
+#: plugins/Novae/src/gui/NovaeDialog.cpp:202
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:161
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:213
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:184
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:242
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:299
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:361
 msgid "Updating now..."
 msgstr "Besig met opdattering..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:483
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:172
-#: plugins/Novae/src/gui/NovaeDialog.cpp:169
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:162
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:300
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:173
+#: plugins/Novae/src/gui/NovaeDialog.cpp:170
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:163
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:186
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:301
 msgid "Next update: < 1 minute"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:485
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:174
-#: plugins/Novae/src/gui/NovaeDialog.cpp:171
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:164
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:302
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:175
+#: plugins/Novae/src/gui/NovaeDialog.cpp:172
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:165
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:188
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:303
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:487
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
-#: plugins/Novae/src/gui/NovaeDialog.cpp:173
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:166
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:189
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:304
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:177
+#: plugins/Novae/src/gui/NovaeDialog.cpp:174
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:167
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:190
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:305
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:497
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:207
-#: plugins/Novae/src/gui/NovaeDialog.cpp:204
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:215
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:244
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:363
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:208
+#: plugins/Novae/src/gui/NovaeDialog.cpp:205
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:216
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:245
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:364
 msgid "Update error"
 msgstr ""
 
@@ -7246,26 +7260,26 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:626
 #: plugins/Satellites/src/ui_satellitesDialog.h:715
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:193
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:194
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
-#: plugins/Novae/src/gui/NovaeDialog.cpp:190
+#: plugins/Novae/src/gui/NovaeDialog.cpp:191
 #: plugins/Novae/src/ui_novaeDialog.h:240
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:183
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:184
 #: plugins/Quasars/src/ui_quasarsDialog.h:265
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:206
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:207
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:271
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:349
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:350
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:464
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:460
 msgid "Update now"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:628
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:195
-#: plugins/Novae/src/gui/NovaeDialog.cpp:192
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:185
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:208
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:351
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:196
+#: plugins/Novae/src/gui/NovaeDialog.cpp:193
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:186
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:209
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:352
 msgid "Update from files"
 msgstr ""
 
@@ -8650,31 +8664,31 @@ msgstr "Tipe supernova: %1"
 msgid "Maximum brightness: %1"
 msgstr ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
 msgid "Historical Supernovae Plug-in"
 msgstr ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 msgid "This plugin allows you to see some bright historical supernovae: "
 msgstr ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
-#: plugins/Novae/src/gui/NovaeDialog.cpp:127
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:126
+#: plugins/Novae/src/gui/NovaeDialog.cpp:128
 #, qt-format
 msgid "This list altogether contains %1 stars."
 msgstr ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:126
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
 #, qt-format
 msgid "All those supernovae are brighter %1 at peak of brightness."
 msgstr ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:128
-#: plugins/Novae/src/gui/NovaeDialog.cpp:129
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
+#: plugins/Novae/src/gui/NovaeDialog.cpp:130
 msgid "Light curves"
 msgstr ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:130
 #, qt-format
 msgid ""
 "This plugin implements a simple model of light curves for different "
@@ -8683,47 +8697,47 @@ msgid ""
 "plugin."
 msgstr ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:132
 msgid "Acknowledgments"
 msgstr ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:132
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
 msgid ""
 "We thank the following people for their contribution and valuable comments:"
 msgstr ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:134
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:135
 msgid "Sergei Blinnikov"
 msgstr ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:136
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:137
 msgid "Institute for Theoretical and Experimental Physics"
 msgstr ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:137
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:145
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:138
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:146
 msgid "in Russia"
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:148
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:161
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:149
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:162
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of catalog, you can %1get info here%2."
 msgstr ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
-#: plugins/Novae/src/gui/NovaeDialog.cpp:175
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:168
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:191
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:179
+#: plugins/Novae/src/gui/NovaeDialog.cpp:176
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:169
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:192
 #, qt-format
 msgid "Next update: %1 days"
 msgstr ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:214
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:215
 msgid "Historical supernovae is updated"
 msgstr ""
 
@@ -8769,7 +8783,7 @@ msgstr ""
 msgid "Bright Novae"
 msgstr ""
 
-#: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/gui/NovaeDialog.cpp:122
+#: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/gui/NovaeDialog.cpp:123
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
 msgstr ""
 
@@ -8781,53 +8795,53 @@ msgstr ""
 msgid "nova"
 msgstr ""
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:117
+#: plugins/Novae/src/gui/NovaeDialog.cpp:118
 msgid "Bright Novae Plug-in"
 msgstr ""
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:123
+#: plugins/Novae/src/gui/NovaeDialog.cpp:124
 msgid ""
 "You can find novae via search tool by entering designation of nova or its "
 "common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg')."
 msgstr ""
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:125
+#: plugins/Novae/src/gui/NovaeDialog.cpp:126
 msgid "This plugin allows you to see recent bright novae: "
 msgstr ""
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:128
+#: plugins/Novae/src/gui/NovaeDialog.cpp:129
 #, qt-format
 msgid "All those novae are brighter than %1 at peak of brightness."
 msgstr ""
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:130
+#: plugins/Novae/src/gui/NovaeDialog.cpp:131
 msgid ""
 "This plugin uses a very simple model for calculation of light curves for "
 "novae stars."
 msgstr ""
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:131
+#: plugins/Novae/src/gui/NovaeDialog.cpp:132
 #, qt-format
 msgid ""
 "This model is based on time for decay by %1 magnitudes from the maximum "
 "value, where %1 is 2, 3, 6 and 9."
 msgstr ""
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:132
+#: plugins/Novae/src/gui/NovaeDialog.cpp:133
 msgid ""
 "If a nova has no values for decay of magnitude then this plugin will use "
 "generalized values for it."
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Novae/src/gui/NovaeDialog.cpp:145
+#: plugins/Novae/src/gui/NovaeDialog.cpp:146
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin, its history and "
 "catalog format, you can %1get info here%2."
 msgstr ""
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:211
+#: plugins/Novae/src/gui/NovaeDialog.cpp:212
 msgid "Novae is updated"
 msgstr ""
 
@@ -8864,35 +8878,35 @@ msgstr ""
 msgid "Z (redshift): %1"
 msgstr ""
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:117
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 msgid "Quasars Plug-in"
 msgstr ""
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:123
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
 msgid ""
 "The Quasars plugin provides visualization of some quasars brighter than "
 "visual magnitude 16. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:125
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 msgid "Veron+ 2010"
 msgstr ""
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
 #, qt-format
 msgid "The current catalog contains info about %1 quasars."
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:138
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:139
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of the catalog, you can %1get info here%2."
 msgstr ""
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:222
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:223
 msgid "Quasars is updated"
 msgstr ""
 
@@ -8933,7 +8947,7 @@ msgid "Pulsars"
 msgstr ""
 
 #: plugins/Pulsars/src/Pulsars.cpp:74
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
@@ -9075,11 +9089,11 @@ msgid ""
 "radio emission"
 msgstr ""
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:127
 msgid "Pulsars Plug-in"
 msgstr ""
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
 #, qt-format
 msgid ""
 "Pulsar data is derived from 'The ATNF Pulsar Catalogue'  (Manchester, R. N., "
@@ -9087,44 +9101,44 @@ msgid ""
 "(%1astro-ph/0412641%2))."
 msgstr ""
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:135
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
 #, qt-format
 msgid "Current catalog contains info about %1 pulsars."
 msgstr ""
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:137
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
 msgid "Note"
 msgstr ""
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:139
 msgid "pulsar identifiers have the prefix 'PSR'"
 msgstr ""
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:139
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 msgid "Acknowledgment"
 msgstr ""
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:143
 msgid "Vladimir Samodourov"
 msgstr ""
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:145
 msgid "Pushchino Radio Astronomy Observatory"
 msgstr ""
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:147
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:148
 msgid "Maciej Serylak"
 msgstr ""
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:149
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
 msgid "Nancay Radioastronomical Observatory"
 msgstr ""
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:151
 msgid "in France"
 msgstr ""
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:251
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:252
 msgid "Pulsars is updated"
 msgstr ""
 
@@ -9173,47 +9187,47 @@ msgid "Exoplanets configuration window"
 msgstr ""
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:938
+#: plugins/Exoplanets/src/Exoplanets.cpp:959
 msgid "Hot"
 msgstr ""
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:940
+#: plugins/Exoplanets/src/Exoplanets.cpp:961
 msgid "Warm"
 msgstr ""
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:942
+#: plugins/Exoplanets/src/Exoplanets.cpp:963
 msgid "Cold"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:945
+#: plugins/Exoplanets/src/Exoplanets.cpp:966
 msgid "Miniterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:947
+#: plugins/Exoplanets/src/Exoplanets.cpp:968
 msgid "Subterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:949
+#: plugins/Exoplanets/src/Exoplanets.cpp:970
 msgid "Terran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:951
+#: plugins/Exoplanets/src/Exoplanets.cpp:972
 msgid "Superterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:953
+#: plugins/Exoplanets/src/Exoplanets.cpp:974
 msgid "Jovian"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:955
+#: plugins/Exoplanets/src/Exoplanets.cpp:976
 msgid "Neptunian"
 msgstr ""
 
@@ -9301,18 +9315,18 @@ msgstr ""
 msgid "ESI"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:142
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
 msgid "Exoplanets Plug-in"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:146
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
 #, qt-format
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:148
 #, qt-format
 msgid ""
 "The list of potential habitable exoplanets and data about them were taken "
@@ -9320,7 +9334,7 @@ msgid ""
 "Laboratory%3."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:149
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:150
 #, qt-format
 msgid ""
 "The current catalog contains info about %1 planetary systems, which "
@@ -9329,7 +9343,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:160
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:161
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:315
 #, qt-format
 msgid ""
@@ -9337,32 +9351,32 @@ msgid ""
 "format of the catalog you can %1get info here%2."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgid "Potential habitable exoplanets"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
 msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
 msgid "Planetary Class"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
 msgid ""
 "Planet classification from host star spectral type (F, G, K, M), habitable "
 "zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, "
 "jovian, neptunian) (Earth = G-Warm Terran)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
 msgid "Equilibrium Temperature"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
 msgid ""
 "The planetary equilibrium temperature is a theoretical temperature in (°C) "
 "that the planet would be at when considered simply as if it were a black "
@@ -9370,96 +9384,96 @@ msgid ""
 "example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
 msgid "Earth Similarity Index (ESI)"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
 msgid ""
 "Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-"
 "like. ESI depends on the planet's radius, density, escape velocity, and "
 "surface temperature."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "Proper names"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
 msgid ""
 "In December 2015, the International Astronomical Union (IAU) has officially "
 "approved names for several exoplanets after a public vote."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
 msgid ""
 "From the latin <em>Veritas</em>, truth. The ablative form means <em>where "
 "there is truth</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
 msgid ""
 "From the latin <em>Spes</em>, hope. The ablative form means <em>where there "
 "is hope</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
 msgid "Musica is Latin for <em>music</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:188
 msgid ""
 "Arion was a genius of poetry and music in ancient Greece. According to "
 "legend, his life was saved at sea by dolphins after attracting their "
 "attention by the playing of his kithara."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:188
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
 msgid "Fafnir was a Norse mythological dwarf who turned into a dragon."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:190
 msgid ""
 "Orbitar is a contrived word paying homage to the space launch and orbital "
 "operations of NASA."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:190
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
 msgid "Chalawan is a mythological crocodile king from a Thai folktale."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
 msgid ""
 "Taphao Thong is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
 msgid ""
 "Taphao Kae is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid ""
 "Helvetios is Celtic for <em>the Helvetian</em> and refers to the Celtic "
 "tribe that lived in Switzerland during antiquity."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
 msgid ""
 "Dimidium is Latin for <em>half</em>, referring to the planet's mass of at "
 "least half the mass of Jupiter."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
 msgid ""
 "Nicolaus Copernicus or Mikolaj Kopernik (1473-1543) was a Polish astronomer "
 "who proposed the heliocentric model of the solar system in his book <em>De "
 "revolutionibus orbium coelestium</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid ""
 "Galileo Galilei (1564-1642) was an Italian astronomer and physicist often "
 "called the <em>father of observational astronomy</em> and the <em>father of "
@@ -9468,7 +9482,7 @@ msgid ""
 "the phases of Venus, among other discoveries."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
 msgid ""
 "Tycho Brahe (1546-1601) was a Danish astronomer and nobleman who recorded "
 "accurate astronomical observations of the stars and planets. These "
@@ -9476,153 +9490,153 @@ msgid ""
 "planetary motion."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid ""
 "Hans Lipperhey (1570-1619) was a German-Dutch lens grinder and spectacle "
 "maker who is often attributed with the invention of the refracting telescope "
 "in 1608."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid ""
 "Jacharias Janssen (1580s-1630s) was a Dutch spectacle maker who is often "
 "attributed with invention of the microscope, and more controversially with "
 "the invention of the telescope."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid ""
 "Thomas Harriot (ca. 1560-1621) was an English astronomer, mathematician, "
 "ethnographer, and translator, who is attributed with the first drawing of "
 "the Moon through telescopic observations."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid ""
 "<em>Amateru</em> is a common Japanese appellation for shrines when they "
 "enshrine Amaterasu, the Shinto goddess of the Sun, born from the left eye of "
 "the god Izanagi."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid ""
 "Hypatia was a famous Greek astronomer, mathematician, and philosopher. She "
 "was head of the Neo-Platonic school at Alexandria in the early 5th century, "
 "until murdered by a Christian mob in 415."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid ""
 "Ran is the Norse goddess of the sea, who stirs up the waves and captures "
 "sailors with her net."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 msgid ""
 "AEgir is Ran's husband, the personified god of the ocean. <em>AEgir</em> and "
 "<em>Ran</em> both represent the <em>Jotuns</em> who reign in the outer "
 "Universe; together they had nine daughters."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
 msgid ""
 "Ancient Semitic name and modern Arabic name for the city of Palmyra, a "
 "UNESCO World Heritage Site."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid "Dagon was a Semitic deity, often represented as half-man, half-fish."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
 msgid "Tonatiuh was the Aztec god of the Sun."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 msgid "Meztli was the Aztec goddess of the Moon."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
 msgid ""
 "Ogma was a deity of eloquence, writing, and great physical strength in the "
 "Celtic mythologies of Ireland and Scotland, and may be related to the Gallo-"
 "Roman deity <em>Ogmios</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
 msgid "Smertrios was a Gallic deity of war."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
 msgid ""
 "Intercrus means <em>between the legs</em> in Latin style, referring to the "
 "star's position in the constellation Ursa Major."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
 msgid "Arkas was the son of Callisto (Ursa Major) in Greek mythology."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
 msgid ""
 "Miguel de Cervantes Saavedra (1547-1616) was a famous Spanish writer and "
 "author of <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
 msgid ""
 "Lead fictional character from Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
 msgid ""
 "Fictional character and love interest of Don Quijote (or Quixote) in "
 "Cervantes's <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
 msgid ""
 "Fictional horse of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
 msgid ""
 "Fictional squire of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
 msgid ""
 "Thestias is the patronym of Leda and her sister Althaea, the daughters of "
 "Thestius. Leda was a Greek queen, mother of Pollux and of his twin Castor, "
 "and of Helen and Clytemnestra."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
 msgid ""
 "Lich is a fictional undead creature known for controlling other undead "
 "creatures with magic."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 msgid "Draugr refers to undead creatures in Norse mythology."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
 msgid ""
 "Poltergeist is a name for supernatural beings that create physical "
 "disturbances, from German for <em>noisy ghost</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
 msgid ""
 "Phobetor is a Greek mythological deity of nightmares, the son of Nyx, the "
 "primordial deity of night."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
 msgid ""
 "Titawin (also known as Medina of Tetouan) is a settlement in northern "
 "Morocco and UNESCO World Heritage Site. Historically it was an important "
@@ -9630,7 +9644,7 @@ msgid ""
 "continents (Europe and Africa) after the 8th century."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
 msgid ""
 "Saffar is named for Abu al-Qasim Ahmed Ibn-Abd Allah Ibn-Omar al Ghafiqi Ibn-"
 "al-Saffar, who taught arithmetic, geometry, and astronomy in 11th century "
@@ -9638,21 +9652,21 @@ msgid ""
 "the uses of the astrolabe."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
 msgid ""
 "Samh is named for Abu al-Qasim 'Asbagh ibn Muhammad ibn al-Samh al-Mahri (or "
 "<em>Ibn al-Samh</em>), a noted 11th century astronomer and mathematician in "
 "the school of al Majriti in Cordova (Andalusia, now modern Spain)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
 msgid ""
 "Majriti is named for Abu al-Qasim al-Qurtubi al-Majriti, a notable "
 "mathematician, astronomer, scholar, and teacher in 10th century and early "
 "11th century Andalusia (modern Spain)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
 msgid ""
 "Libertas is Latin for <em>liberty</em>. Liberty refers to social and "
 "political freedoms, and a reminder that there are people deprived of liberty "
@@ -9660,37 +9674,37 @@ msgid ""
 "popular symbol of liberty."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
 msgid ""
 "Fortitudo is Latin for <em>fortitude</em>. Fortitude means emotional and "
 "mental strength in the face of adversity, as embodied by the eagle "
 "(represented by the constellation Aquila)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
 msgid "Notes"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
 msgid ""
 "These names are modified based on the original proposals, to be consistent "
 "with the IAU rules."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 msgid ""
 "The original name proposed, <em>Veritas</em>, is that of an asteroid "
 "important for the study of the solar system."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
 msgid ""
 "The name originally proposed, <em>Amaterasu</em>, is already used for an "
 "asteroid."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
 msgid ""
 "Note the typographical difference between <em>AEgir</em> and <em>Aegir</em>, "
 "the Norwegian transliteration. The same name, with the spelling "
@@ -9698,18 +9712,18 @@ msgid ""
 "discovered in 2004."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
 msgid "<em>Ogmios</em> is a name already attributed to an asteroid."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 msgid ""
 "The original proposed name <em>Leda</em> is already attributed to an "
 "asteroid and to one of Jupiter's satellites. The name <em>Althaea</em> is "
 "also attributed to an asteroid."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
 msgid ""
 "The original spelling of <em>Lippershey</em> was corrected to "
 "<em>Lipperhey</em> on 15.01.2016. The commonly seen spelling "
@@ -9717,139 +9731,139 @@ msgid ""
 "typographical error dating back from 1831, thus should be avoided."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
 msgid "Additional info"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
 msgid "Circumstellar habitable zone"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
 msgid "Planetary equilibrium temperature"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
 msgid "Planetary habitability"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
 msgid "Earth Similarity Index"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
 msgid "Final Results of NameExoWorlds Public Vote Released"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
 msgid "NameExoWorlds website"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
 msgid "General professional Web sites relevant to extrasolar planets"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:260
 msgid "Exoplanets: an interactive version of XKCD 1071"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:260
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
 msgid "HEK (The Hunt for Exomoons with Kepler)"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
 msgid "Naming exoplanets (IAU)"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
 msgid "update: 16 April 2012"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
 msgid "The Exoplanet Data Explorer"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:266
 msgid "The Anglo-Australian Planet Search"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:266
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
 msgid "Geneva Extrasolar Planet Search Programmes"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
 msgid "NASA's Exoplanet Exploration Program"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:270
 msgid "Pulsar planets"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:270
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
 msgid "The NASA Exoplanet Archive"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
 msgid "IAU Commission 53: Extrasolar Planets"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
 msgid "ExoMol"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
 msgid "The Habitable Zone Gallery"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
 msgid "PlanetQuest - The Search for Another Earth"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:276
 msgid "Open Exoplanet Catalogue"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:276
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:277
 msgid "The Habitable Exoplanets Catalog"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:370
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:372
 msgid "Exoplanets is updated"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:491
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:493
 msgid "Orbital Eccentricity"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:492
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:494
 msgid "Orbit Semi-Major Axis, AU"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:493
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:495
 msgid "Planetary Mass, Mjup"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:494
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:496
 msgid "Planetary Radius, Rjup"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:495
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:497
 msgid "Orbital Period, days"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:496
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:498
 msgid "Angular Distance, arcsec."
 msgstr ""
 

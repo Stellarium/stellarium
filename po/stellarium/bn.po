@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-18 00:42+0600\n"
-"PO-Revision-Date: 2016-03-18 04:52+0000\n"
+"POT-Creation-Date: 2016-04-02 00:21+0700\n"
+"PO-Revision-Date: 2016-04-02 02:16+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-03-19 05:21+0000\n"
-"X-Generator: Launchpad (build 17947)\n"
+"X-Launchpad-Export-Date: 2016-04-02 05:19+0000\n"
+"X-Generator: Launchpad (build 17972)\n"
 "Language: bn\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -308,400 +308,405 @@ msgid "Distance: %1 ly"
 msgstr "দূরত্ব : %1 আলোকবর্ষ"
 
 #. TRANSLATORS: Unit of measure for distance - megaparsecs
-#: src/core/modules/Nebula.cpp:283
+#: src/core/modules/Nebula.cpp:289
 msgid "Mpc"
 msgstr "মেগা পারসেক"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:288
+#: src/core/modules/Nebula.cpp:295
 msgid "kpc"
 msgstr "কিলো পারসেক"
 
-#: src/core/modules/Nebula.cpp:291
+#. TRANSLATORS: Unit of measure for distance - Light Years
+#: src/core/modules/Nebula.cpp:298
+msgid "ly"
+msgstr "আলোকবর্ষ"
+
+#: src/core/modules/Nebula.cpp:300
 #, qt-format
 msgid "Distance: %1 %2"
 msgstr "দূরত্ব : %1 %2"
 
-#: src/core/modules/Nebula.cpp:305
+#: src/core/modules/Nebula.cpp:314
 #, qt-format
 msgid "Redshift: %1"
 msgstr "লোহিত সরণ : %1"
 
-#: src/core/modules/Nebula.cpp:316 src/core/modules/StarWrapper.cpp:241
+#: src/core/modules/Nebula.cpp:325 src/core/modules/StarWrapper.cpp:241
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "লম্বণ : %1\""
 
-#: src/core/modules/Nebula.cpp:320
+#: src/core/modules/Nebula.cpp:329
 msgid "Morphological description: "
 msgstr "গঠন বৈশিষ্ট্য : "
 
-#: src/core/modules/Nebula.cpp:816
+#: src/core/modules/Nebula.cpp:825
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr "কেন্দ্র বরাবর তারাগুলো অতি ঘনসন্নিবিষ্ট হয়ে আছে"
 
-#: src/core/modules/Nebula.cpp:819
+#: src/core/modules/Nebula.cpp:828
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr "কেন্দ্রে তারাগুলো খুব ঘনসন্নিবিষ্ট হয়ে আছে"
 
-#: src/core/modules/Nebula.cpp:822
+#: src/core/modules/Nebula.cpp:831
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr "কেন্দ্রে তারাগুলো ঘনসন্নিবিষ্ট হয়ে আছে"
 
-#: src/core/modules/Nebula.cpp:825
+#: src/core/modules/Nebula.cpp:834
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr "কেন্দ্রে তারাগুলো প্রায় ঘনসন্নিবিষ্ট হয়ে আছে"
 
-#: src/core/modules/Nebula.cpp:830
+#: src/core/modules/Nebula.cpp:839
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr "কেন্দ্রে তারাগুলো মোটামুটি ভাবে ঘনসন্নিবিষ্ট হয়ে আছে"
 
-#: src/core/modules/Nebula.cpp:833
+#: src/core/modules/Nebula.cpp:842
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "rather loosely concentration of stars towards the center"
 msgstr "কেন্দ্র বরাবর তারাগুলো সামান্য খাপছাড়া ভাবে আছে"
 
-#: src/core/modules/Nebula.cpp:836
+#: src/core/modules/Nebula.cpp:845
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr "কেন্দ্র বরাবর তারাগুলো প্রায় খাপছাড়া ভাবে আছে"
 
-#: src/core/modules/Nebula.cpp:839
+#: src/core/modules/Nebula.cpp:848
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr "কেন্দ্রে তারাগুলো খাপছাড়া ভাবে আছে"
 
-#: src/core/modules/Nebula.cpp:842
+#: src/core/modules/Nebula.cpp:851
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr "কেন্দ্র বরাবর তারাগুলো খুব খাপছাড়া ভাবে আছে"
 
-#: src/core/modules/Nebula.cpp:845
+#: src/core/modules/Nebula.cpp:854
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr "কেন্দ্র বরাবর তারাগুলো একদম খাপছাড়া ভাবে আছে"
 
-#: src/core/modules/Nebula.cpp:848
+#: src/core/modules/Nebula.cpp:857
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr "তারাগুলো কি রকম ঘনসন্নিবিষ্ট হয়ে আছে তা এখনও নথিভুক্ত করা হয় নি"
 
-#: src/core/modules/Nebula.cpp:868
+#: src/core/modules/Nebula.cpp:877
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr "তারাগুলোর কেন্দ্রাভিমুখী সমাবেশ দেখা যায়"
 
-#: src/core/modules/Nebula.cpp:871
+#: src/core/modules/Nebula.cpp:880
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr "তারাগুলোর সামান্য কেন্দ্রাভিমুখী সমাবেশ দেখা যায়"
 
-#: src/core/modules/Nebula.cpp:874
+#: src/core/modules/Nebula.cpp:883
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr "তারাগুলো খাপছাড়া ভাবে আছে"
 
-#: src/core/modules/Nebula.cpp:877
+#: src/core/modules/Nebula.cpp:886
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr "এটি একটি ঘন সন্নিবিষ্ট নক্ষত্র ক্ষেত্র"
 
-#: src/core/modules/Nebula.cpp:880
+#: src/core/modules/Nebula.cpp:889
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr "তারাগুলো কি রকম ঘনসন্নিবিষ্ট হয়ে আছে তা এখনও নথিভুক্ত করা হয় নি"
 
-#: src/core/modules/Nebula.cpp:886
+#: src/core/modules/Nebula.cpp:895
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr "নক্ষত্র গুলির উজ্জ্ব্যলতা প্রায় সমান"
 
-#: src/core/modules/Nebula.cpp:889
+#: src/core/modules/Nebula.cpp:898
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr "নক্ষত্র গুলির উজ্জ্ব্যলতা একটু কমবেশি"
 
-#: src/core/modules/Nebula.cpp:892
+#: src/core/modules/Nebula.cpp:901
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr "নক্ষত্র গুলির উজ্জ্ব্যলতা ফারাক অনেক"
 
-#: src/core/modules/Nebula.cpp:895
+#: src/core/modules/Nebula.cpp:904
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr "তারাগুলোর উজ্জ্ব্যললতার ফারাক এখনও নথিভুক্ত করা হয় নি"
 
-#: src/core/modules/Nebula.cpp:901
+#: src/core/modules/Nebula.cpp:910
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr "৫০ টিরও কম নক্ষত্র আছে"
 
-#: src/core/modules/Nebula.cpp:904
+#: src/core/modules/Nebula.cpp:913
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr "মোটামুটি ভাবে ৫০ থেকে ১০০ টির মত নক্ষত্র আছে"
 
-#: src/core/modules/Nebula.cpp:907
+#: src/core/modules/Nebula.cpp:916
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr "১০০ রও বেশী নক্ষত্র আছে"
 
-#: src/core/modules/Nebula.cpp:910
+#: src/core/modules/Nebula.cpp:919
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr "কতগুলো তারা আছে তা এখনও নথিভুক্ত করা হয় নি"
 
-#: src/core/modules/Nebula.cpp:914
+#: src/core/modules/Nebula.cpp:923
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr "তারকাগুচ্ছটি নীহারিকা মন্ডলের মধ্যে অবস্থিত"
 
-#: src/core/modules/Nebula.cpp:935
+#: src/core/modules/Nebula.cpp:944
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr "অতি উজ্জ্বল"
 
-#: src/core/modules/Nebula.cpp:938
+#: src/core/modules/Nebula.cpp:947
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr "উজ্জ্বল"
 
-#: src/core/modules/Nebula.cpp:941
+#: src/core/modules/Nebula.cpp:950
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr "মোটামুটি উজ্জ্বল"
 
-#: src/core/modules/Nebula.cpp:944
+#: src/core/modules/Nebula.cpp:953
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr "ম্লান"
 
-#: src/core/modules/Nebula.cpp:947
+#: src/core/modules/Nebula.cpp:956
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr "আবছা"
 
-#: src/core/modules/Nebula.cpp:950
+#: src/core/modules/Nebula.cpp:959
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr "উজ্জ্বলতা পরিবর্তনশীল"
 
-#: src/core/modules/Nebula.cpp:953
+#: src/core/modules/Nebula.cpp:962
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr "নীহারিকাটি কতটা উজ্জ্ব্যল তা এখনও নথিভুক্ত করা হয় নি"
 
-#: src/core/modules/Nebula.cpp:959
+#: src/core/modules/Nebula.cpp:968
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr "আলোক প্রদানকারী নক্ষত্রটি নীহারিকা মন্ডলে অবস্থিত"
 
-#: src/core/modules/Nebula.cpp:962
+#: src/core/modules/Nebula.cpp:971
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr "আলোক প্রদানকারী নক্ষত্রটি নীহারিকা মন্ডলের বাইরে অবস্থিত"
 
-#: src/core/modules/Nebula.cpp:965
+#: src/core/modules/Nebula.cpp:974
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr "আলোক প্রদানকারী নক্ষত্রটি নীহারিকা মন্ডলের এক কোনে অবস্থিত"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:970
+#: src/core/modules/Nebula.cpp:979
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr "আলোক প্রদানকারী নক্ষত্রটি পরিবর্তনশীল নীহারিকা মন্ডলের বাইরে অবস্থিত"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:976
+#: src/core/modules/Nebula.cpp:985
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr "পরিবর্তনশীল নীহারিকা"
 
-#: src/core/modules/Nebula.cpp:980
+#: src/core/modules/Nebula.cpp:989
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr "অনথিভুক্ত"
 
-#: src/core/modules/Nebula.cpp:1003
+#: src/core/modules/Nebula.cpp:1012
 msgid "circular form"
 msgstr "গোলকাকার"
 
-#: src/core/modules/Nebula.cpp:1006
+#: src/core/modules/Nebula.cpp:1015
 msgid "elliptical form"
 msgstr "উপবৃত্তাকার"
 
-#: src/core/modules/Nebula.cpp:1009
+#: src/core/modules/Nebula.cpp:1018
 msgid "irregular form"
 msgstr "অনিয়তকার"
 
-#: src/core/modules/Nebula.cpp:1012
+#: src/core/modules/Nebula.cpp:1021
 msgid "undocumented form"
 msgstr "আকার এখনও নথিভুক্ত করা হয় নি"
 
-#: src/core/modules/Nebula.cpp:1018
+#: src/core/modules/Nebula.cpp:1027
 msgid "amorphous structure"
 msgstr "খাপছাড়া গ্যাসীয় গঠন"
 
-#: src/core/modules/Nebula.cpp:1021
+#: src/core/modules/Nebula.cpp:1030
 msgid "conventional structure"
 msgstr "প্রথাগত গ্যাসীয় গঠন"
 
-#: src/core/modules/Nebula.cpp:1024
+#: src/core/modules/Nebula.cpp:1033
 msgid "filamentary structure"
 msgstr "জালিকাকার গ্যাসীয় গঠন"
 
-#: src/core/modules/Nebula.cpp:1027
+#: src/core/modules/Nebula.cpp:1036
 msgid "undocumented structure"
 msgstr "অনথিভুক্ত"
 
-#: src/core/modules/Nebula.cpp:1033
+#: src/core/modules/Nebula.cpp:1042
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "ম্লান"
 
-#: src/core/modules/Nebula.cpp:1036
+#: src/core/modules/Nebula.cpp:1045
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr "মোটামুটি উজ্জ্বল"
 
-#: src/core/modules/Nebula.cpp:1039
+#: src/core/modules/Nebula.cpp:1048
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "উজ্জ্বল"
 
-#: src/core/modules/Nebula.cpp:1042
+#: src/core/modules/Nebula.cpp:1051
 msgid "undocumented brightness"
 msgstr "অনথিভুক্ত"
 
-#: src/core/modules/Nebula.cpp:1058
+#: src/core/modules/Nebula.cpp:1067
 msgid "galaxy"
 msgstr "নক্ষত্রলোক"
 
-#: src/core/modules/Nebula.cpp:1061
+#: src/core/modules/Nebula.cpp:1070
 msgid "active galaxy"
 msgstr "সক্রিয় নক্ষত্রলোক"
 
-#: src/core/modules/Nebula.cpp:1064
+#: src/core/modules/Nebula.cpp:1073
 msgid "radio galaxy"
 msgstr "বেতার নক্ষত্রলোক"
 
-#: src/core/modules/Nebula.cpp:1067
+#: src/core/modules/Nebula.cpp:1076
 msgid "interacting galaxy"
 msgstr "পারস্পরিক ক্রিয়াশীল নক্ষত্রলোক"
 
-#: src/core/modules/Nebula.cpp:1070 plugins/Quasars/src/Quasar.cpp:98
+#: src/core/modules/Nebula.cpp:1079 plugins/Quasars/src/Quasar.cpp:98
 msgid "quasar"
 msgstr "কোয়াসার"
 
-#: src/core/modules/Nebula.cpp:1073
+#: src/core/modules/Nebula.cpp:1082
 msgid "star cluster"
 msgstr "তারকাগুচ্ছ"
 
-#: src/core/modules/Nebula.cpp:1076
+#: src/core/modules/Nebula.cpp:1085
 msgid "open star cluster"
 msgstr "মুক্ত তারকাগুচ্ছ"
 
-#: src/core/modules/Nebula.cpp:1079
+#: src/core/modules/Nebula.cpp:1088
 msgid "globular star cluster"
 msgstr "গোলকাকার তারকা গুচ্ছ"
 
-#: src/core/modules/Nebula.cpp:1082
+#: src/core/modules/Nebula.cpp:1091
 msgid "nebula"
 msgstr "নীহারিকা"
 
-#: src/core/modules/Nebula.cpp:1085
+#: src/core/modules/Nebula.cpp:1094
 msgid "planetary nebula"
 msgstr "গ্রহরূপী নীহারিকা"
 
-#: src/core/modules/Nebula.cpp:1088
+#: src/core/modules/Nebula.cpp:1097
 msgid "dark nebula"
 msgstr "কৃষ্ণবর্ণ নিহারীকা"
 
-#: src/core/modules/Nebula.cpp:1091
+#: src/core/modules/Nebula.cpp:1100
 msgid "cluster associated with nebulosity"
 msgstr "নীহারিকা যুক্ত তারকা গুচ্ছ"
 
-#: src/core/modules/Nebula.cpp:1094
+#: src/core/modules/Nebula.cpp:1103
 msgid "bipolar nebula"
 msgstr "ডাম্বেলাকার নীহারিকা"
 
-#: src/core/modules/Nebula.cpp:1097
+#: src/core/modules/Nebula.cpp:1106
 msgid "emission nebula"
 msgstr "নিঃসরণ নীহারিকা"
 
-#: src/core/modules/Nebula.cpp:1100
+#: src/core/modules/Nebula.cpp:1109
 msgid "HII region"
 msgstr "HII বা আয়নিত হাইড্রোজেন অধ্যুষিত এলাকা"
 
-#: src/core/modules/Nebula.cpp:1103
+#: src/core/modules/Nebula.cpp:1112
 msgid "reflection nebula"
 msgstr "প্রতিফলিত নিহারীকা"
 
-#: src/core/modules/Nebula.cpp:1106
+#: src/core/modules/Nebula.cpp:1115
 msgid "supernova remnant"
 msgstr "অতিনোভার ধ্বংসাবশেষ"
 
-#: src/core/modules/Nebula.cpp:1109
+#: src/core/modules/Nebula.cpp:1118
 msgid "stellar association"
 msgstr "নক্ষত্র সমাবেশ"
 
-#: src/core/modules/Nebula.cpp:1112
+#: src/core/modules/Nebula.cpp:1121
 msgid "star cloud"
 msgstr "নক্ষত্র মেঘ"
 
-#: src/core/modules/Nebula.cpp:1115
+#: src/core/modules/Nebula.cpp:1124
 msgid "interstellar matter"
 msgstr "আন্তঃনাক্ষত্রিক গ্যাস ও ধূলিকনা"
 
-#: src/core/modules/Nebula.cpp:1118
+#: src/core/modules/Nebula.cpp:1127
 msgid "emission object"
 msgstr "উৎক্ষেপিত পদার্থ"
 
-#: src/core/modules/Nebula.cpp:1121
+#: src/core/modules/Nebula.cpp:1130
 msgid "BL Lac object"
 msgstr "ব্ল ল্যাকটারে বস্তু"
 
-#: src/core/modules/Nebula.cpp:1124
+#: src/core/modules/Nebula.cpp:1133
 msgid "blazar"
 msgstr "ব্লেজার"
 
-#: src/core/modules/Nebula.cpp:1127
+#: src/core/modules/Nebula.cpp:1136
 msgid "molecular cloud"
 msgstr "নক্ষত্র সৃষ্টিকারী গ্যাস ও ধূলিকনার মেঘ"
 
-#: src/core/modules/Nebula.cpp:1130
+#: src/core/modules/Nebula.cpp:1139
 msgid "young stellar object"
 msgstr "প্রাক নাক্ষত্রিক জ্যোতিষ্ক"
 
-#: src/core/modules/Nebula.cpp:1133
+#: src/core/modules/Nebula.cpp:1142
 msgid "possible quasar"
 msgstr "সম্ভবত কোয়াসার"
 
-#: src/core/modules/Nebula.cpp:1136
+#: src/core/modules/Nebula.cpp:1145
 msgid "possible planetary nebula"
 msgstr "সম্ভবত গ্রহরূপী নীহারিকা"
 
-#: src/core/modules/Nebula.cpp:1139
+#: src/core/modules/Nebula.cpp:1148
 msgid "protoplanetary nebula"
 msgstr "প্রাকগ্রহরূপী নীহারিকা"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1142 src/core/modules/StarWrapper.cpp:53
+#: src/core/modules/Nebula.cpp:1151 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:174 src/translations.h:42
 msgid "star"
 msgstr "নক্ষত্র"
 
-#: src/core/modules/Nebula.cpp:1145
+#: src/core/modules/Nebula.cpp:1154
 msgid "object of unknown nature"
 msgstr "নির্ধারণ করা যায় নি"
 
-#: src/core/modules/Nebula.cpp:1148
+#: src/core/modules/Nebula.cpp:1157
 msgid "undocumented type"
 msgstr "অনথিভুক্ত"
 
@@ -1778,11 +1783,11 @@ msgstr "যোগাযোগ"
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:547
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:408
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
-#: plugins/Novae/src/gui/NovaeDialog.cpp:118
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:127
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:120
+#: plugins/Novae/src/gui/NovaeDialog.cpp:119
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:144
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:207
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:185
@@ -1792,11 +1797,11 @@ msgstr "সংস্করণ"
 #: src/gui/ConfigurationDialog.cpp:957
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
 #: plugins/Oculars/src/gui/OcularDialog.cpp:548
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:120
-#: plugins/Novae/src/gui/NovaeDialog.cpp:119
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:144
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
+#: plugins/Novae/src/gui/NovaeDialog.cpp:120
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:120
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:186
@@ -2277,29 +2282,29 @@ msgstr "স্বয়ংক্রিয় ভাবে পাশের সরঞ
 msgid "Toggle visibility of GUI"
 msgstr "দৃশ্যপটের রূপরেখা পরিবর্তন"
 
-#: src/gui/StelGuiItems.cpp:293 src/gui/StelGuiItems.cpp:752
+#: src/gui/StelGuiItems.cpp:317 src/gui/StelGuiItems.cpp:832
 msgid "Space"
 msgstr "Space"
 
-#: src/gui/StelGuiItems.cpp:599
+#: src/gui/StelGuiItems.cpp:655
 #, c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/StelGuiItems.cpp:631
+#: src/gui/StelGuiItems.cpp:687
 #, qt-format
 msgid "planetocentric distance %1 km"
 msgstr "গ্রহ কেন্দ্রিক দূরত্ব %1 কিমি"
 
-#: src/gui/StelGuiItems.cpp:633
+#: src/gui/StelGuiItems.cpp:689
 msgid "planetocentric observer"
 msgstr "গ্রহ কেন্দ্রিক দৃশ্যপট"
 
-#: src/gui/StelGuiItems.cpp:657
+#: src/gui/StelGuiItems.cpp:718
 msgid "Field of view"
 msgstr "দৃষ্টিক্ষেত্র"
 
-#: src/gui/StelGuiItems.cpp:677
+#: src/gui/StelGuiItems.cpp:743
 msgid "Frames per second"
 msgstr "ফ্রেম প্রতি সেকেন্ড"
 
@@ -2812,7 +2817,7 @@ msgstr ""
 "এই বিজ্ঞপ্তিটিকে প্রত্যেকবার এড়িযে গিয়ে স্টেলারিয়ামকে কী পুরোনো ধাঁচে চালাতে "
 "চান ?"
 
-#: src/StelMainView.cpp:861
+#: src/StelMainView.cpp:862
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2822,7 +2827,7 @@ msgstr ""
 "এই বিজ্ঞপ্তিটিকে প্রত্যেকবার এড়িযে গিয়ে স্টেলারিয়ামকে কী পুরোনো ধাঁচে চালাতে "
 "চান ?"
 
-#: src/StelMainView.cpp:902
+#: src/StelMainView.cpp:903
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2832,7 +2837,7 @@ msgstr ""
 "এই বিজ্ঞপ্তিটিকে প্রত্যেকবার এড়িযে গিয়ে স্টেলারিয়ামকে কী পুরোনো ধাঁচে চালাতে "
 "চান ?"
 
-#: src/StelMainView.cpp:1013
+#: src/StelMainView.cpp:1014
 #, qt-format
 msgid "Stellarium %1"
 msgstr "স্টেলারিয়াম %1"
@@ -3417,40 +3422,45 @@ msgstr "টাইকোর অতিনোভা"
 msgid "Earth and other Planets from Ceres"
 msgstr "সেরেসের আকাশে পৃথিবী ও অন্য গ্রহেরা"
 
+#. TRANSLATORS: Name of script
+#: src/translations.h:290
+msgid "Messier Objects Tour"
+msgstr ""
+
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:294
+#: src/translations.h:296
 msgid "Look around each installed landscape."
 msgstr "সবকটি ভূমিরূপ ঘুরে দেখুন ।"
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:296
+#: src/translations.h:298
 msgid "Look at each installed sky culture."
 msgstr "মহাকাশচর্চার বিভিন্ন সংস্কৃতিগুলি ঘুরে দেখুন ।"
 
-#: src/translations.h:297
+#: src/translations.h:299
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "খন্ডগ্রাস চন্দ্রগ্রহণ দেখানোর কার্যলিপি ।"
 
-#: src/translations.h:298
+#: src/translations.h:300
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "পূর্ণগ্রাস চন্দ্রগ্রহণ দেখানোর কার্যলিপি ।"
 
-#: src/translations.h:299
+#: src/translations.h:301
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "ধীরসুস্থে অসীম মহাকাশের পরিভ্রমণ ।"
 
-#: src/translations.h:300
+#: src/translations.h:302
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
 "২০০৯ এর পূর্ণগ্রাস সূর্যগ্রহণ দেখানোর কার্যলিপি । (বাংলাদেশের রংপুর থেকে)"
 
-#: src/translations.h:301
+#: src/translations.h:303
 msgid "Script which runs automatically at startup"
 msgstr "প্রারম্ভে স্বয়ংক্রিয়রূপে সঞ্চালিত কার্যলিপি"
 
-#: src/translations.h:302
+#: src/translations.h:304
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -3459,7 +3469,7 @@ msgstr ""
 "এই কার্যলিপিটি রাশিচক্রগুলি দেখায় মানে সেই সমস্ত নক্ষত্রমন্ডলগুলি, যারা "
 "সৌরপথের উপর পড়ে ।"
 
-#: src/translations.h:303
+#: src/translations.h:305
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -3467,7 +3477,7 @@ msgstr ""
 "বার্ষিক ও আহ্নিক গতির অদ্ভূত বিশিষ্টতার জন্য বুধের কোথাও কোথাও এক দিনে "
 "তিনবার সূর্যোদয় ও সূর্যাস্ত হয় ।"
 
-#: src/translations.h:304
+#: src/translations.h:306
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -3475,7 +3485,7 @@ msgstr ""
 "২৬ শে এপ্রিল, ২০১৭ সাল : বৃশ্চিক ও ধনু রাশির মাঝে মঙ্গল গ্রহ সূর্যকে গ্রাস "
 "করার আগেই তার পিছন থেকে ফোবস এসে সূর্যকে প্রথমে গ্রাস করে ফেলে ।"
 
-#: src/translations.h:305
+#: src/translations.h:307
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -3483,13 +3493,13 @@ msgstr ""
 "২৩ শে এপ্রিল, ২০৩১ সাল : বৃষ ও মিথুন রাশির মাঝে মঙ্গল গ্রহ সূর্যকে গ্রাস "
 "করার আগেই তার পিছন থেকে ফোবস এসে সূর্যকে প্রথমে গ্রাস করে ফেলে ।"
 
-#: src/translations.h:306
+#: src/translations.h:308
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
 "১০ই জানুয়ারি, ২০৬৮ সালে মঙ্গলের অলিম্পাস পর্বত থেকে ফোবস দ্বারা সূর্যের "
 "গ্রহণ দেখা য়ায ।"
 
-#: src/translations.h:307
+#: src/translations.h:309
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
@@ -3498,7 +3508,7 @@ msgstr ""
 "ফোবোস-পৃথিবী সমাপতন ও ফোবোস-বৃহস্পতি সমাপতন খুবই সাধারণ ব্যাপার । তবে একসাথে "
 "একই দিনে দুটো ঘটা খুবই দুর্লভ, যার একটা ২৩/০১/২০৪৮ তে হবে ।"
 
-#: src/translations.h:308
+#: src/translations.h:310
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -3512,39 +3522,39 @@ msgstr ""
 "এরপর মঙ্গল সূর্যের পূর্ণ গ্রহণ ঘটায়, আর ফোবোস মঙ্গলের ছায়ায় ঢাকা পড়ে যায় । "
 "ফোবসের নিষ্ক্রমণের পরও তা মঙ্গলের ছায়ায় আরও কিছু সময় অনুজ্জ্বল হয়ে থাকে ।"
 
-#: src/translations.h:309
+#: src/translations.h:311
 msgid ""
 "Screensaver of various happenings in the Solar System. 261 events in all!"
 msgstr "সৌরজগতে ঘটমান ২৬১টি বিশিষ্ট ঘটনা নিয়ে স্ক্রিনসেভার ।"
 
-#: src/translations.h:310
+#: src/translations.h:312
 msgid "A tour of the western constellations."
 msgstr "এটি পশ্চিমী সংস্কৃতির তারামন্ডলগুলির একটি ভ্রমণ মাত্র ।"
 
-#: src/translations.h:311
+#: src/translations.h:313
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "প্লুটো ও সৌরজগতের বড় গ্রহগুলি থেকে সূর্যকে দেখা ।"
 
-#: src/translations.h:312
+#: src/translations.h:314
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "এটি (একবিংশ শতাব্দীতে) সৌরজগতের অন্যান্য বস্তুগুলির আকাশে দৃশ্যমান পৃথিবীর "
 "শ্রেষ্ঠ দৃশ্যগুলির একটি সংগ্রহ ।"
 
-#: src/translations.h:313
+#: src/translations.h:315
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 "৬ই জুন, ২০১২ সালে অস্ট্রেলিয়ার সিডনি থেকে দৃশ্যমান শুক্রের সরণটি দেখায় ।"
 
-#: src/translations.h:314
+#: src/translations.h:316
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr ""
 "এই স্ক্রিপটি সূর্যায়ণ অর্থাৎ সূর্যের সারা বছরের পরিক্রমণটি পথ দেখায় ।"
 
-#: src/translations.h:315
+#: src/translations.h:317
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -3552,7 +3562,7 @@ msgstr ""
 "১৫৭২ সালে টাইকো ব্রাহের দেখা অতিনোভা বিস্ফোরণটি দেখায় । তবে এক্ষেত্রে "
 "অতিনোভা সরঞ্জামটি অবশ্যই সক্রিয় থাকতে হবে ।"
 
-#: src/translations.h:316
+#: src/translations.h:318
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
@@ -3560,7 +3570,7 @@ msgstr ""
 "মঙ্গলের আকাশে পৃথিবী ও অন্য গ্রহের প্রতিযোগ ও সর্বোচ্চ অবস্থান (২০০০ থেকে "
 "৩০০০ সালের মধ্যে)"
 
-#: src/translations.h:317
+#: src/translations.h:319
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -3573,7 +3583,7 @@ msgstr ""
 "বেষ্টনীর বাইরে অবস্থিত । তাই যদি কোনো দিন মানুষ বৃহস্পতির কাছে বসতি গড়ে তোলে "
 "তবে এটাই হবে সবচেয়ে আদর্শ স্থান ।"
 
-#: src/translations.h:318
+#: src/translations.h:320
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
@@ -3581,995 +3591,999 @@ msgstr ""
 "সেরেসের আকাশে পৃথিবী ও অন্য গ্রহের প্রতিযোগ ও সর্বোচ্চ অবস্থান (২০০০ থেকে "
 "৩০০০ সালের মধ্যে)"
 
-#: src/translations.h:322
+#: src/translations.h:321
+msgid "A tour of Messier Objects"
+msgstr ""
+
+#: src/translations.h:325
 msgid "Andorra"
 msgstr "অ্যান্ডোরা"
 
-#: src/translations.h:323
+#: src/translations.h:326
 msgid "United Arab Emirates"
 msgstr "সংযুক্ত আরব আমিরশাহী"
 
-#: src/translations.h:324
+#: src/translations.h:327
 msgid "Afghanistan"
 msgstr "আফগানিস্তান"
 
-#: src/translations.h:325
+#: src/translations.h:328
 msgid "Antigua and Barbuda"
 msgstr "অ্যান্টিগুয়া এবং বার্বুডা"
 
-#: src/translations.h:326
+#: src/translations.h:329
 msgid "Anguilla"
 msgstr "অ্যাংগুইলা"
 
-#: src/translations.h:327
+#: src/translations.h:330
 msgid "Albania"
 msgstr "আলবেনিয়া"
 
-#: src/translations.h:328
+#: src/translations.h:331
 msgid "Armenia"
 msgstr "আর্মেনিয়া"
 
-#: src/translations.h:329
+#: src/translations.h:332
 msgid "Netherlands Antilles"
 msgstr "নেদারল্যান্ডস অ্যান্টেলিস"
 
-#: src/translations.h:330
+#: src/translations.h:333
 msgid "Angola"
 msgstr "অ্যাঙ্গোলা"
 
-#: src/translations.h:331
+#: src/translations.h:334
 msgid "Antarctica"
 msgstr "আন্টার্টিকা"
 
-#: src/translations.h:332
+#: src/translations.h:335
 msgid "Argentina"
 msgstr "আর্জেন্টিনা"
 
-#: src/translations.h:333
+#: src/translations.h:336
 msgid "American Samoa"
 msgstr "আমেরিকান সামোয়া"
 
-#: src/translations.h:334
+#: src/translations.h:337
 msgid "Austria"
 msgstr "অস্ট্রিয়া"
 
-#: src/translations.h:335
+#: src/translations.h:338
 msgid "Australia"
 msgstr "অস্ট্রেলিয়া"
 
-#: src/translations.h:336
+#: src/translations.h:339
 msgid "Aruba"
 msgstr "আরুবা"
 
-#: src/translations.h:337
+#: src/translations.h:340
 msgid "Azerbaijan"
 msgstr "আজারবাইজান"
 
-#: src/translations.h:338
+#: src/translations.h:341
 msgid "Bosnia and Herzegowina"
 msgstr "বসনিয়া এবং হ্যাতজাগোভীণা"
 
-#: src/translations.h:339
+#: src/translations.h:342
 msgid "Barbados"
 msgstr "বার্বাডোস"
 
-#: src/translations.h:340
+#: src/translations.h:343
 msgid "Bangladesh"
 msgstr "বাংলাদেশ"
 
-#: src/translations.h:341
+#: src/translations.h:344
 msgid "Belgium"
 msgstr "বেলজিয়াম"
 
-#: src/translations.h:342
+#: src/translations.h:345
 msgid "Burkina Faso"
 msgstr "বারকিনা ফাসো"
 
-#: src/translations.h:343
+#: src/translations.h:346
 msgid "Bulgaria"
 msgstr "বুলগেরিয়া"
 
-#: src/translations.h:344
+#: src/translations.h:347
 msgid "Bahrain"
 msgstr "বাহরীন"
 
-#: src/translations.h:345
+#: src/translations.h:348
 msgid "Burundi"
 msgstr "বুরুন্ডি"
 
-#: src/translations.h:346
+#: src/translations.h:349
 msgid "Benin"
 msgstr "বেনিন"
 
-#: src/translations.h:347
+#: src/translations.h:350
 msgid "Bermuda"
 msgstr "বার্মুডা"
 
-#: src/translations.h:348
+#: src/translations.h:351
 msgid "Brunei Darussalam"
 msgstr "ব্রুনেই দারুস্‌সালাম"
 
-#: src/translations.h:349
+#: src/translations.h:352
 msgid "Bolivia"
 msgstr "বলিভিয়া"
 
-#: src/translations.h:350
+#: src/translations.h:353
 msgid "Brazil"
 msgstr "ব্রাজিল"
 
-#: src/translations.h:351
+#: src/translations.h:354
 msgid "Bahamas"
 msgstr "বাহামা দ্বীপপুঞ্জ"
 
-#: src/translations.h:352
+#: src/translations.h:355
 msgid "Bhutan"
 msgstr "ভুটান"
 
-#: src/translations.h:353
+#: src/translations.h:356
 msgid "Bouvet Island"
 msgstr "বুভেট দ্বীপ"
 
-#: src/translations.h:354
+#: src/translations.h:357
 msgid "Botswana"
 msgstr "বটসোয়ানা"
 
-#: src/translations.h:355
+#: src/translations.h:358
 msgid "Belarus"
 msgstr "বেলারুস"
 
-#: src/translations.h:356
+#: src/translations.h:359
 msgid "Belize"
 msgstr "বেলিজ"
 
-#: src/translations.h:357
+#: src/translations.h:360
 msgid "Canada"
 msgstr "কানাডা"
 
-#: src/translations.h:358
+#: src/translations.h:361
 msgid "Cocos Islands"
 msgstr "কোকো দ্বীপপুঞ্জ"
 
-#: src/translations.h:359
+#: src/translations.h:362
 msgid "Democratic Republic of the Congo"
 msgstr "কঙ্গোর গনতন্ত্রী প্রজাতন্ত্র"
 
-#: src/translations.h:360
+#: src/translations.h:363
 msgid "Central African Republic"
 msgstr "কেন্দ্রীয় আফ্রিকান প্রজাতন্ত্র"
 
-#: src/translations.h:361
+#: src/translations.h:364
 msgid "Republic of the Congo"
 msgstr "কঙ্গো প্রজাতন্ত্র"
 
-#: src/translations.h:362
+#: src/translations.h:365
 msgid "Switzerland"
 msgstr "সুইজারল্যাণ্ড"
 
-#: src/translations.h:363
+#: src/translations.h:366
 msgid "Cote d'Ivoire"
 msgstr "আইভরি কোস্ট"
 
-#: src/translations.h:364
+#: src/translations.h:367
 msgid "Cook Islands"
 msgstr "কুক দ্বীপপুঞ্জ"
 
-#: src/translations.h:365
+#: src/translations.h:368
 msgid "Chile"
 msgstr "চিলি"
 
-#: src/translations.h:366
+#: src/translations.h:369
 msgid "Cameroon"
 msgstr "ক্যামেরুন"
 
-#: src/translations.h:367
+#: src/translations.h:370
 msgid "China"
 msgstr "চীন"
 
-#: src/translations.h:368
+#: src/translations.h:371
 msgid "Colombia"
 msgstr "কলোম্বিয়া"
 
-#: src/translations.h:369
+#: src/translations.h:372
 msgid "Costa Rica"
 msgstr "কোস্টা রিকা"
 
-#: src/translations.h:370
+#: src/translations.h:373
 msgid "Serbia and Montenegro"
 msgstr "সার্বিয়া এবং মন্টিনিগ্রো"
 
-#: src/translations.h:371
+#: src/translations.h:374
 msgid "Montenegro"
 msgstr "মন্টেনেগ্রো"
 
-#: src/translations.h:372
+#: src/translations.h:375
 msgid "Cuba"
 msgstr "কিউবা"
 
-#: src/translations.h:373
+#: src/translations.h:376
 msgid "Cape Verde"
 msgstr "কেপ ভার্দে"
 
-#: src/translations.h:374
+#: src/translations.h:377
 msgid "Christmas Island"
 msgstr "ক্রিস্টমাস দ্বীপ"
 
-#: src/translations.h:375
+#: src/translations.h:378
 msgid "Cyprus"
 msgstr "সাইপ্রাস"
 
-#: src/translations.h:376
+#: src/translations.h:379
 msgid "Czech Republic"
 msgstr "চেক প্রজাতন্ত্র"
 
-#: src/translations.h:377
+#: src/translations.h:380
 msgid "Germany"
 msgstr "জার্মানী"
 
-#: src/translations.h:378
+#: src/translations.h:381
 msgid "Djibouti"
 msgstr "জিবুতি"
 
-#: src/translations.h:379
+#: src/translations.h:382
 msgid "Denmark"
 msgstr "ডেনমার্ক"
 
-#: src/translations.h:380
+#: src/translations.h:383
 msgid "Dominica"
 msgstr "ডোমিনিকা"
 
-#: src/translations.h:381
+#: src/translations.h:384
 msgid "Dominican Republic"
 msgstr "ডমিনিকান প্রজাতন্ত্র"
 
-#: src/translations.h:382
+#: src/translations.h:385
 msgid "Algeria"
 msgstr "আলজেরিয়া"
 
-#: src/translations.h:383
+#: src/translations.h:386
 msgid "Ecuador"
 msgstr "ইকুয়েডোর"
 
-#: src/translations.h:384
+#: src/translations.h:387
 msgid "Estonia"
 msgstr "এস্তোনিয়া"
 
-#: src/translations.h:385
+#: src/translations.h:388
 msgid "Egypt"
 msgstr "মিশর"
 
-#: src/translations.h:386
+#: src/translations.h:389
 msgid "Western Sahara"
 msgstr "পশ্চিম সাহারা"
 
-#: src/translations.h:387
+#: src/translations.h:390
 msgid "Eritrea"
 msgstr "ইরিট্রিয়া"
 
-#: src/translations.h:388
+#: src/translations.h:391
 msgid "Spain"
 msgstr "স্পেন"
 
-#: src/translations.h:389
+#: src/translations.h:392
 msgid "Ethiopia"
 msgstr "ইথিওপিয়া"
 
-#: src/translations.h:390
+#: src/translations.h:393
 msgid "Finland"
 msgstr "ফিনল্যান্ড"
 
-#: src/translations.h:391
+#: src/translations.h:394
 msgid "Fiji"
 msgstr "ফিজি"
 
-#: src/translations.h:392
+#: src/translations.h:395
 msgid "Falkland Islands"
 msgstr "ফকল্যান্ড দ্বীপপুঞ্জ"
 
-#: src/translations.h:393
+#: src/translations.h:396
 msgid "Micronesia"
 msgstr "মাইক্রোনেশিয়া"
 
-#: src/translations.h:394
+#: src/translations.h:397
 msgid "Faroe Islands"
 msgstr "ফ্যারো দ্বীপপূঞ্জ"
 
-#: src/translations.h:395
+#: src/translations.h:398
 msgid "France"
 msgstr "ফ্রান্স"
 
-#: src/translations.h:396
+#: src/translations.h:399
 msgid "Gabon"
 msgstr "গ্যাবন"
 
-#: src/translations.h:397
+#: src/translations.h:400
 msgid "United Kingdom"
 msgstr "যুক্তরাজ্য"
 
-#: src/translations.h:398
+#: src/translations.h:401
 msgid "Grenada"
 msgstr "গ্রেনাডা"
 
-#: src/translations.h:399
+#: src/translations.h:402
 msgid "Georgia"
 msgstr "জর্জিয়া"
 
-#: src/translations.h:400
+#: src/translations.h:403
 msgid "French Guiana"
 msgstr "ফেঞ্চ গায়ানা"
 
-#: src/translations.h:401
+#: src/translations.h:404
 msgid "Ghana"
 msgstr "ঘানা"
 
-#: src/translations.h:402
+#: src/translations.h:405
 msgid "Gibraltar"
 msgstr "জিব্রাল্টার"
 
-#: src/translations.h:403
+#: src/translations.h:406
 msgid "Greenland"
 msgstr "গ্রীনল্যান্ড"
 
-#: src/translations.h:404
+#: src/translations.h:407
 msgid "Gambia"
 msgstr "জামবিয়া"
 
-#: src/translations.h:405
+#: src/translations.h:408
 msgid "Guinea"
 msgstr "গিনি"
 
-#: src/translations.h:406
+#: src/translations.h:409
 msgid "Guadeloupe"
 msgstr "গুয়াডুলুপ"
 
-#: src/translations.h:407
+#: src/translations.h:410
 msgid "Equatorial Guinea"
 msgstr "ইকুয়েটরিয়াল গিনি"
 
-#: src/translations.h:408
+#: src/translations.h:411
 msgid "Greece"
 msgstr "গ্রীস"
 
-#: src/translations.h:409
+#: src/translations.h:412
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "দক্ষিণ জর্জিয়া এবং দক্ষিণ স্যান্ডউইচ দ্বীপপুঞ্জ"
 
-#: src/translations.h:410
+#: src/translations.h:413
 msgid "Guatemala"
 msgstr "গুয়াটেমালা"
 
-#: src/translations.h:411
+#: src/translations.h:414
 msgid "Guam"
 msgstr "গুয়াম"
 
-#: src/translations.h:412
+#: src/translations.h:415
 msgid "Guinea-Bissau"
 msgstr "গিনি-বিসাউ"
 
-#: src/translations.h:413
+#: src/translations.h:416
 msgid "Guyana"
 msgstr "গায়ানা"
 
-#: src/translations.h:414
+#: src/translations.h:417
 msgid "Hong Kong"
 msgstr "হং কং"
 
-#: src/translations.h:415
+#: src/translations.h:418
 msgid "Heard Island and McDonald Islands"
 msgstr "হার্ড দ্বীপ ও ম্যাকডোনাল্ড দ্বীপপুঞ্জ"
 
-#: src/translations.h:416
+#: src/translations.h:419
 msgid "Honduras"
 msgstr "হণ্ডুরাস"
 
-#: src/translations.h:417
+#: src/translations.h:420
 msgid "Croatia"
 msgstr "ক্রোয়েশিয়া"
 
-#: src/translations.h:418
+#: src/translations.h:421
 msgid "Haiti"
 msgstr "হাইতি"
 
-#: src/translations.h:419
+#: src/translations.h:422
 msgid "Hungary"
 msgstr "হাঙ্গেরী"
 
-#: src/translations.h:420
+#: src/translations.h:423
 msgid "Indonesia"
 msgstr "ইন্দোনেশিয়া"
 
-#: src/translations.h:421
+#: src/translations.h:424
 msgid "Ireland"
 msgstr "আয়ারল্যান্ড"
 
-#: src/translations.h:422
+#: src/translations.h:425
 msgid "Israel"
 msgstr "ইজরায়েল"
 
-#: src/translations.h:423
+#: src/translations.h:426
 msgid "India"
 msgstr "ভারত"
 
-#: src/translations.h:424
+#: src/translations.h:427
 msgid "British Indian Ocean Territory"
 msgstr "ব্রিটিশ ভারত মহাসাগরীয় ভূখন্ড"
 
-#: src/translations.h:425
+#: src/translations.h:428
 msgid "Iraq"
 msgstr "ইরাক"
 
-#: src/translations.h:426
+#: src/translations.h:429
 msgid "Iran"
 msgstr "ইরান"
 
-#: src/translations.h:427
+#: src/translations.h:430
 msgid "Iceland"
 msgstr "আইসল্যান্ড"
 
-#: src/translations.h:428
+#: src/translations.h:431
 msgid "Italy"
 msgstr "ইতালি"
 
-#: src/translations.h:429
+#: src/translations.h:432
 msgid "Jamaica"
 msgstr "জ্যামাইকা"
 
-#: src/translations.h:430
+#: src/translations.h:433
 msgid "Jordan"
 msgstr "জর্ডন"
 
-#: src/translations.h:431
+#: src/translations.h:434
 msgid "Japan"
 msgstr "জাপান"
 
-#: src/translations.h:432
+#: src/translations.h:435
 msgid "Kenya"
 msgstr "কেনিয়া"
 
-#: src/translations.h:433
+#: src/translations.h:436
 msgid "Kyrgyzstan"
 msgstr "কির্গিজস্তান"
 
-#: src/translations.h:434
+#: src/translations.h:437
 msgid "Cambodia"
 msgstr "কম্বোডিয়া"
 
-#: src/translations.h:435
+#: src/translations.h:438
 msgid "Kiribati"
 msgstr "কিরিবাটি"
 
-#: src/translations.h:436
+#: src/translations.h:439
 msgid "Comoros"
 msgstr "কমোরোস"
 
-#: src/translations.h:437
+#: src/translations.h:440
 msgid "Saint Kitts and Nevis"
 msgstr "সেইন্ট কিটস এন্ড নেভিস"
 
-#: src/translations.h:438
+#: src/translations.h:441
 msgid "Democratic People's Republic of Korea"
 msgstr "জনগণতান্ত্রিক কোরিয়া প্রজাতন্ত্র"
 
-#: src/translations.h:439
+#: src/translations.h:442
 msgid "Republic of Korea"
 msgstr "কোরিয়া প্রজাতন্ত্র"
 
-#: src/translations.h:440
+#: src/translations.h:443
 msgid "Kuwait"
 msgstr "কুয়েত"
 
-#: src/translations.h:441
+#: src/translations.h:444
 msgid "Cayman Islands"
 msgstr "কেম্যান দ্বীপপুঞ্জ"
 
-#: src/translations.h:442
+#: src/translations.h:445
 msgid "Kazakhstan"
 msgstr "কাজাখস্তান"
 
-#: src/translations.h:443
+#: src/translations.h:446
 msgid "Lao"
 msgstr "লাও"
 
-#: src/translations.h:444
+#: src/translations.h:447
 msgid "Lebanon"
 msgstr "লেবানন"
 
-#: src/translations.h:445
+#: src/translations.h:448
 msgid "Saint Lucia"
 msgstr "সেন্ট লুসিয়া"
 
-#: src/translations.h:446
+#: src/translations.h:449
 msgid "Liechtenstein"
 msgstr "লিখটেনস্টাইন"
 
-#: src/translations.h:447
+#: src/translations.h:450
 msgid "Sri Lanka"
 msgstr "শ্রী লঙ্কা"
 
-#: src/translations.h:448
+#: src/translations.h:451
 msgid "Liberia"
 msgstr "লাইবিরিয়া"
 
-#: src/translations.h:449
+#: src/translations.h:452
 msgid "Lesotho"
 msgstr "লেসোথো"
 
-#: src/translations.h:450
+#: src/translations.h:453
 msgid "Lithuania"
 msgstr "লিথুয়েনিয়া"
 
-#: src/translations.h:451
+#: src/translations.h:454
 msgid "Luxembourg"
 msgstr "লুক্সেমবর্গ"
 
-#: src/translations.h:452
+#: src/translations.h:455
 msgid "Latvia"
 msgstr "লাতভিয়া"
 
-#: src/translations.h:453
+#: src/translations.h:456
 msgid "Libyan Arab Jamahiriya"
 msgstr "লিবিয়ান আরব জামাহিরিয়া"
 
-#: src/translations.h:454
+#: src/translations.h:457
 msgid "Morocco"
 msgstr "মরক্কো"
 
-#: src/translations.h:455
+#: src/translations.h:458
 msgid "Monaco"
 msgstr "মোনাকো"
 
-#: src/translations.h:456
+#: src/translations.h:459
 msgid "Moldova"
 msgstr "মলডোভা"
 
-#: src/translations.h:457
+#: src/translations.h:460
 msgid "Madagascar"
 msgstr "মাদাগাস্কার"
 
-#: src/translations.h:458
+#: src/translations.h:461
 msgid "Marshall Islands"
 msgstr "মার্শাল দ্বীপপুঞ্জ"
 
-#: src/translations.h:459
+#: src/translations.h:462
 msgid "Macedonia"
 msgstr "ম্যাসিডোনিয়া"
 
-#: src/translations.h:460
+#: src/translations.h:463
 msgid "Mali"
 msgstr "মালি"
 
-#: src/translations.h:461
+#: src/translations.h:464
 msgid "Myanmar"
 msgstr "মায়ানমার"
 
-#: src/translations.h:462
+#: src/translations.h:465
 msgid "Mongolia"
 msgstr "মোঙ্গোলিয়া"
 
-#: src/translations.h:463
+#: src/translations.h:466
 msgid "Macau"
 msgstr "ম্যাকাও"
 
-#: src/translations.h:464
+#: src/translations.h:467
 msgid "Northern Mariana Islands"
 msgstr "উত্তর মারিয়ানা দ্বীপপুঞ্জ"
 
-#: src/translations.h:465
+#: src/translations.h:468
 msgid "Martinique"
 msgstr "মার্টিনিক্"
 
-#: src/translations.h:466
+#: src/translations.h:469
 msgid "Mauritania"
 msgstr "মরিটানিয়া"
 
-#: src/translations.h:467
+#: src/translations.h:470
 msgid "Montserrat"
 msgstr "মন্টসেরাট"
 
-#: src/translations.h:468
+#: src/translations.h:471
 msgid "Malta"
 msgstr "মাল্টা"
 
-#: src/translations.h:469
+#: src/translations.h:472
 msgid "Mauritius"
 msgstr "মরিশাস"
 
-#: src/translations.h:470
+#: src/translations.h:473
 msgid "Maldives"
 msgstr "মালদ্বীপ"
 
-#: src/translations.h:471
+#: src/translations.h:474
 msgid "Malawi"
 msgstr "মালায়ি"
 
-#: src/translations.h:472
+#: src/translations.h:475
 msgid "Mexico"
 msgstr "মেক্সিকো"
 
-#: src/translations.h:473
+#: src/translations.h:476
 msgid "Malaysia"
 msgstr "মালয়েশিয়া"
 
-#: src/translations.h:474
+#: src/translations.h:477
 msgid "Mozambique"
 msgstr "মোজাম্বিক"
 
-#: src/translations.h:475
+#: src/translations.h:478
 msgid "Namibia"
 msgstr "নামিবিয়া"
 
-#: src/translations.h:476
+#: src/translations.h:479
 msgid "New Caledonia"
 msgstr "নিউ ক্যালিডোনিয়া"
 
-#: src/translations.h:477
+#: src/translations.h:480
 msgid "Niger"
 msgstr "নিজের"
 
-#: src/translations.h:478
+#: src/translations.h:481
 msgid "Norfolk Island"
 msgstr "নরফোক দ্বীপপুঞ্জ"
 
-#: src/translations.h:479
+#: src/translations.h:482
 msgid "Nigeria"
 msgstr "নাইজেরিয়া"
 
-#: src/translations.h:480
+#: src/translations.h:483
 msgid "Nicaragua"
 msgstr "নিকারাগুয়া"
 
-#: src/translations.h:481
+#: src/translations.h:484
 msgid "Netherlands"
 msgstr "নেদারল্যান্ডস"
 
-#: src/translations.h:482
+#: src/translations.h:485
 msgid "Norway"
 msgstr "নরওয়ে"
 
-#: src/translations.h:483
+#: src/translations.h:486
 msgid "Nepal"
 msgstr "নেপাল"
 
-#: src/translations.h:484
+#: src/translations.h:487
 msgid "Nauru"
 msgstr "নাউরু"
 
-#: src/translations.h:485
+#: src/translations.h:488
 msgid "Niue"
 msgstr "নিউয়ে"
 
-#: src/translations.h:486
+#: src/translations.h:489
 msgid "New Zealand"
 msgstr "নিউ জিল্যাণ্ড"
 
-#: src/translations.h:487
+#: src/translations.h:490
 msgid "Oman"
 msgstr "ওমান"
 
-#: src/translations.h:488
+#: src/translations.h:491
 msgid "Panama"
 msgstr "পানামা"
 
-#: src/translations.h:489
+#: src/translations.h:492
 msgid "Peru"
 msgstr "পেরু"
 
-#: src/translations.h:490
+#: src/translations.h:493
 msgid "French Polynesia"
 msgstr "ফেঞ্চ পলিনেশিয়া"
 
-#: src/translations.h:491
+#: src/translations.h:494
 msgid "Papua New Guinea"
 msgstr "পাপুয়া নিউ গিনি"
 
-#: src/translations.h:492
+#: src/translations.h:495
 msgid "Philippines"
 msgstr "ফিলিপিনস"
 
-#: src/translations.h:493
+#: src/translations.h:496
 msgid "Pakistan"
 msgstr "পাকিস্তান"
 
-#: src/translations.h:494
+#: src/translations.h:497
 msgid "Poland"
 msgstr "পোল্যান্ড"
 
-#: src/translations.h:495
+#: src/translations.h:498
 msgid "Saint Pierre and Miquelon"
 msgstr "সেন্ট পিয়ের এবং মিকেলন"
 
-#: src/translations.h:496
+#: src/translations.h:499
 msgid "Pitcairn"
 msgstr "পিটক্যাইর্ন"
 
-#: src/translations.h:497
+#: src/translations.h:500
 msgid "Puerto Rico"
 msgstr "পোর্টো রিকো"
 
-#: src/translations.h:498
+#: src/translations.h:501
 msgid "Palestinian Territories"
 msgstr "প্যালিস্তেনিয়ান আঞ্চল"
 
-#: src/translations.h:499
+#: src/translations.h:502
 msgid "Portugal"
 msgstr "পর্তুগাল"
 
-#: src/translations.h:500
+#: src/translations.h:503
 msgid "Palau"
 msgstr "পালাউ"
 
-#: src/translations.h:501
+#: src/translations.h:504
 msgid "Paraguay"
 msgstr "প্যারাগুয়ে"
 
-#: src/translations.h:502
+#: src/translations.h:505
 msgid "Qatar"
 msgstr "কাতার"
 
-#: src/translations.h:503
+#: src/translations.h:506
 msgid "Réunion"
 msgstr "রিইউনিয়ন"
 
-#: src/translations.h:504
+#: src/translations.h:507
 msgid "Romania"
 msgstr "রোমানিয়া"
 
-#: src/translations.h:505
+#: src/translations.h:508
 msgid "Serbia"
 msgstr "সার্বিয়া"
 
-#: src/translations.h:506
+#: src/translations.h:509
 msgid "Russian Federation"
 msgstr "রুশ ফেডারেশন"
 
-#: src/translations.h:507
+#: src/translations.h:510
 msgid "Rwanda"
 msgstr "রোয়ান্ডা"
 
-#: src/translations.h:508
+#: src/translations.h:511
 msgid "Saudi Arabia"
 msgstr "সৌদি আরব"
 
-#: src/translations.h:509
+#: src/translations.h:512
 msgid "Solomon Islands"
 msgstr "সলোমন দ্বীপপুঞ্জ"
 
-#: src/translations.h:510
+#: src/translations.h:513
 msgid "Seychelles"
 msgstr "সেশিলস"
 
-#: src/translations.h:511
+#: src/translations.h:514
 msgid "Sudan"
 msgstr "সুদান"
 
-#: src/translations.h:512
+#: src/translations.h:515
 msgid "Sweden"
 msgstr "সুইডেন"
 
-#: src/translations.h:513
+#: src/translations.h:516
 msgid "Singapore"
 msgstr "সিঙ্গাপুর"
 
-#: src/translations.h:514
+#: src/translations.h:517
 msgid "Saint Helena"
 msgstr "সেন্ট হেলেনা"
 
-#: src/translations.h:515
+#: src/translations.h:518
 msgid "Slovenia"
 msgstr "স্লোভেনিয়া"
 
-#: src/translations.h:516
+#: src/translations.h:519
 msgid "Svalbard and Jan Mayen"
 msgstr "স্ভ্যালবার্ড ও জান মেয়েন"
 
-#: src/translations.h:517
+#: src/translations.h:520
 msgid "Slovakia"
 msgstr "স্লোভাকিয়া"
 
-#: src/translations.h:518
+#: src/translations.h:521
 msgid "Sierra Leone"
 msgstr "সিয়েরা লিওন"
 
-#: src/translations.h:519
+#: src/translations.h:522
 msgid "San Marino"
 msgstr "সান মারিনো"
 
-#: src/translations.h:520
+#: src/translations.h:523
 msgid "Senegal"
 msgstr "সেনেগাল"
 
-#: src/translations.h:521
+#: src/translations.h:524
 msgid "Somalia"
 msgstr "সোমালিয়া"
 
-#: src/translations.h:522
+#: src/translations.h:525
 msgid "Suriname"
 msgstr "সুরিনাম"
 
-#: src/translations.h:523
+#: src/translations.h:526
 msgid "Sao Tome and Principe"
 msgstr "সাও টোম এবং প্রিন্সিপে"
 
-#: src/translations.h:524
+#: src/translations.h:527
 msgid "El Salvador"
 msgstr "এল সালভাডোর"
 
-#: src/translations.h:525
+#: src/translations.h:528
 msgid "Syrian Arab Republic"
 msgstr "সিরিয় আরব প্রজাতন্ত্র"
 
-#: src/translations.h:526
+#: src/translations.h:529
 msgid "Swaziland"
 msgstr "সোয়াজিল্যান্ড"
 
-#: src/translations.h:527
+#: src/translations.h:530
 msgid "Turks and Caicos Islands"
 msgstr "টার্কস এবং কাইকোস দ্বীপপুঞ্জ"
 
-#: src/translations.h:528
+#: src/translations.h:531
 msgid "Chad"
 msgstr "চাদ"
 
-#: src/translations.h:529
+#: src/translations.h:532
 msgid "French Southern Territories"
 msgstr "ফ্রেঞ্চ সাউদার্ন অঞ্চল"
 
-#: src/translations.h:530
+#: src/translations.h:533
 msgid "Togo"
 msgstr "টোগো"
 
-#: src/translations.h:531
+#: src/translations.h:534
 msgid "Thailand"
 msgstr "থাইল্যান্ড"
 
-#: src/translations.h:532
+#: src/translations.h:535
 msgid "Tajikistan"
 msgstr "তাজাকিস্তান"
 
-#: src/translations.h:533
+#: src/translations.h:536
 msgid "Tokelau"
 msgstr "টোকালাউ"
 
-#: src/translations.h:534
+#: src/translations.h:537
 msgid "East Timor"
 msgstr "পূর্ব তিমূর"
 
-#: src/translations.h:535
+#: src/translations.h:538
 msgid "Turkmenistan"
 msgstr "তুর্কমেনিস্তান"
 
-#: src/translations.h:536
+#: src/translations.h:539
 msgid "Tunisia"
 msgstr "টিউনিসিয়া"
 
-#: src/translations.h:537
+#: src/translations.h:540
 msgid "Tonga"
 msgstr "তোংয়া"
 
-#: src/translations.h:538
+#: src/translations.h:541
 msgid "Turkey"
 msgstr "তুরস্ক"
 
-#: src/translations.h:539
+#: src/translations.h:542
 msgid "Trinidad and Tobago"
 msgstr "ত্রিনিদাদ এবং টোবাগো"
 
-#: src/translations.h:540
+#: src/translations.h:543
 msgid "Tuvalu"
 msgstr "টুভালু"
 
-#: src/translations.h:541
+#: src/translations.h:544
 msgid "Taiwan"
 msgstr "তাইওয়ান"
 
-#: src/translations.h:542
+#: src/translations.h:545
 msgid "Tanzania"
 msgstr "তানজানিয়া"
 
-#: src/translations.h:543
+#: src/translations.h:546
 msgid "Ukraine"
 msgstr "ইউক্রেন"
 
-#: src/translations.h:544
+#: src/translations.h:547
 msgid "Uganda"
 msgstr "উগান্ডা"
 
-#: src/translations.h:545
+#: src/translations.h:548
 msgid "United States Minor Outlying Islands"
 msgstr "যুক্তরাষ্ট্রের প্রান্তবর্তী ক্ষুদ্র দ্বীপপুঞ্জ"
 
-#: src/translations.h:546
+#: src/translations.h:549
 msgid "United States"
 msgstr "মার্কিন যুক্তরাষ্ট্র"
 
-#: src/translations.h:547
+#: src/translations.h:550
 msgid "Uruguay"
 msgstr "উরুগুয়ে"
 
-#: src/translations.h:548
+#: src/translations.h:551
 msgid "Uzbekistan"
 msgstr "উজবেকিস্তান"
 
-#: src/translations.h:549
+#: src/translations.h:552
 msgid "Vatican City State"
 msgstr "ভ্যাটিকেন সিটি রাজ্য"
 
-#: src/translations.h:550
+#: src/translations.h:553
 msgid "Saint Vincent and the Grenadines"
 msgstr "সেইন্ট ভিনসেন্ট ও গ্রানাডাইন্স"
 
-#: src/translations.h:551
+#: src/translations.h:554
 msgid "Venezuela"
 msgstr "ভেনিজুয়েলা"
 
-#: src/translations.h:552
+#: src/translations.h:555
 msgid "British Virgin Islands"
 msgstr "ব্রিটিশ ভার্জিন দ্বীপপুঞ্জ"
 
-#: src/translations.h:553
+#: src/translations.h:556
 msgid "United States Virgin Islands"
 msgstr "যুক্তরাষ্ট্র ভার্জিন দ্বীপপুঞ্জ"
 
-#: src/translations.h:554
+#: src/translations.h:557
 msgid "Viet Nam"
 msgstr "ভিয়েতনাম"
 
-#: src/translations.h:555
+#: src/translations.h:558
 msgid "Vanuatu"
 msgstr "ভানুয়াতু"
 
-#: src/translations.h:556
+#: src/translations.h:559
 msgid "Wallis and Futuna"
 msgstr "ওয়ালিস এবং ফুটুনা"
 
-#: src/translations.h:557
+#: src/translations.h:560
 msgid "Samoa"
 msgstr "সামোয়া"
 
-#: src/translations.h:558
+#: src/translations.h:561
 msgid "Yemen"
 msgstr "ইয়েমেন"
 
-#: src/translations.h:559
+#: src/translations.h:562
 msgid "Mayotte"
 msgstr "মায়োট"
 
-#: src/translations.h:560
+#: src/translations.h:563
 msgid "Yugoslavia"
 msgstr "যুগোস্লাভিয়া"
 
-#: src/translations.h:561
+#: src/translations.h:564
 msgid "South Africa"
 msgstr "দক্ষিণ আফ্রিকা"
 
-#: src/translations.h:562
+#: src/translations.h:565
 msgid "Zambia"
 msgstr "জাম্বিয়া"
 
-#: src/translations.h:563
+#: src/translations.h:566
 msgid "Zimbabwe"
 msgstr "জিম্বাবোয়ে"
 
-#: src/translations.h:567
+#: src/translations.h:570
 msgid "&Undo"
 msgstr "পূর্বা&বস্থায় ফিরুন"
 
-#: src/translations.h:568
+#: src/translations.h:571
 msgid "&Redo"
 msgstr "পুনরা&য় করুন"
 
-#: src/translations.h:569
+#: src/translations.h:572
 msgid "Cu&t"
 msgstr "কেটে নি&ন"
 
-#: src/translations.h:570
+#: src/translations.h:573
 msgid "&Copy"
 msgstr "&অনুকরন করুন"
 
-#: src/translations.h:571
+#: src/translations.h:574
 msgid "&Paste"
 msgstr "অনুলে&পন করুন"
 
-#: src/translations.h:572 src/ui_locationDialogGui.h:432
+#: src/translations.h:575 src/ui_locationDialogGui.h:432
 #: plugins/Oculars/src/ui_ocularDialog.h:1189
 #: plugins/Oculars/src/ui_ocularDialog.h:1199
 #: plugins/Oculars/src/ui_ocularDialog.h:1206
@@ -4577,64 +4591,64 @@ msgstr "অনুলে&পন করুন"
 msgid "Delete"
 msgstr "মুছে ফেলুন"
 
-#: src/translations.h:573
+#: src/translations.h:576
 msgid "Select All"
 msgstr "সব নির্বাচন করুন"
 
-#: src/translations.h:574
+#: src/translations.h:577
 msgid "Look in:"
 msgstr "নির্বাচন স্থল :"
 
-#: src/translations.h:575
+#: src/translations.h:578
 msgid "Directory:"
 msgstr "ডিরেক্টরি :"
 
-#: src/translations.h:576
+#: src/translations.h:579
 msgid "Folder"
 msgstr "ফোল্ডার"
 
-#: src/translations.h:577
+#: src/translations.h:580
 msgid "&Choose"
 msgstr "বেছে নি&ন"
 
-#: src/translations.h:578 src/ui_configurationDialog.h:1290
+#: src/translations.h:581 src/ui_configurationDialog.h:1290
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "Cancel"
 msgstr "বাতিল করুন"
 
-#: src/translations.h:579
+#: src/translations.h:582
 msgid "Files of type:"
 msgstr "ধরণ :"
 
-#: src/translations.h:580
+#: src/translations.h:583
 msgid "Date Modified"
 msgstr "শেষ সম্পাদনা"
 
-#: src/translations.h:581
+#: src/translations.h:584
 msgid "Directories"
 msgstr "ডিরেক্টরি সমূহ"
 
-#: src/translations.h:582
+#: src/translations.h:585
 msgid "Computer"
 msgstr "কম্পিউটার"
 
-#: src/translations.h:583
+#: src/translations.h:586
 msgid "&Open"
 msgstr "খুলু&ন"
 
-#: src/translations.h:584
+#: src/translations.h:587
 msgid "File &name:"
 msgstr "নথির &নাম :"
 
-#: src/translations.h:585
+#: src/translations.h:588
 msgid "Copy &Link Location"
 msgstr "সংযো&গটির ঠিকানা অনুকরন করুন"
 
-#: src/translations.h:586
+#: src/translations.h:589
 msgid "Abort"
 msgstr "বাতিল করুন"
 
-#: src/translations.h:587
+#: src/translations.h:590
 msgid "Ignore"
 msgstr "উপেক্ষা করুন"
 
@@ -6254,11 +6268,11 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:446
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:138
-#: plugins/Novae/src/gui/NovaeDialog.cpp:135
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:151
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:150
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:139
+#: plugins/Novae/src/gui/NovaeDialog.cpp:136
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:206
 msgid "Links"
@@ -6266,11 +6280,11 @@ msgstr "বিবিধ"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:447
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:139
-#: plugins/Novae/src/gui/NovaeDialog.cpp:136
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:140
+#: plugins/Novae/src/gui/NovaeDialog.cpp:137
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:207
 #, qt-format
 msgid ""
@@ -6283,11 +6297,11 @@ msgstr ""
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:103
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:450
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:142
-#: plugins/Novae/src/gui/NovaeDialog.cpp:139
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:132
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:155
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
+#: plugins/Novae/src/gui/NovaeDialog.cpp:140
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:156
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:210
 #, qt-format
@@ -6297,11 +6311,11 @@ msgstr "এ ব্যাপারে আপনার সব প্রশ্ন�
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:452
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
-#: plugins/Novae/src/gui/NovaeDialog.cpp:141
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:157
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:156
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:145
+#: plugins/Novae/src/gui/NovaeDialog.cpp:142
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:135
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:158
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:311
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:212
 #, qt-format
@@ -6311,11 +6325,11 @@ msgstr "সমস্যা সংক্রান্ত প্রতিবেদ�
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:107
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:454
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:146
-#: plugins/Novae/src/gui/NovaeDialog.cpp:143
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:136
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:159
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:158
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:147
+#: plugins/Novae/src/gui/NovaeDialog.cpp:144
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:214
 msgid ""
@@ -7420,64 +7434,64 @@ msgid "See %1this document%2 for details."
 msgstr "বিশদ জানতে %1এই নথিটি%2 দেখুন ।"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:476
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:168
-#: plugins/Novae/src/gui/NovaeDialog.cpp:165
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:158
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:181
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:169
+#: plugins/Novae/src/gui/NovaeDialog.cpp:166
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:159
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:182
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
 msgid "Internet updates disabled"
 msgstr "ইন্টারনেটের মাধ্যমে সংশোধন ব্যবস্থা নিষ্ক্রিয় করা আছে"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:478
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:494
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:170
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:204
-#: plugins/Novae/src/gui/NovaeDialog.cpp:167
-#: plugins/Novae/src/gui/NovaeDialog.cpp:201
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:212
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:183
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:241
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:298
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:360
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:171
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:205
+#: plugins/Novae/src/gui/NovaeDialog.cpp:168
+#: plugins/Novae/src/gui/NovaeDialog.cpp:202
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:161
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:213
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:184
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:242
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:299
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:361
 msgid "Updating now..."
 msgstr "এখনই সংশোধন করুন..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:483
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:172
-#: plugins/Novae/src/gui/NovaeDialog.cpp:169
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:162
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:300
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:173
+#: plugins/Novae/src/gui/NovaeDialog.cpp:170
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:163
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:186
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:301
 msgid "Next update: < 1 minute"
 msgstr "পরবর্তী সংশোধন : < ১ মিনিট পর"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:485
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:174
-#: plugins/Novae/src/gui/NovaeDialog.cpp:171
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:164
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:302
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:175
+#: plugins/Novae/src/gui/NovaeDialog.cpp:172
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:165
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:188
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:303
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr "পরবর্তী সংশোধন: %1 মিনিট পর"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:487
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
-#: plugins/Novae/src/gui/NovaeDialog.cpp:173
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:166
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:189
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:304
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:177
+#: plugins/Novae/src/gui/NovaeDialog.cpp:174
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:167
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:190
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:305
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr "পরবর্তী সংশোধন : %1 ঘন্টা পর"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:497
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:207
-#: plugins/Novae/src/gui/NovaeDialog.cpp:204
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:215
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:244
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:363
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:208
+#: plugins/Novae/src/gui/NovaeDialog.cpp:205
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:216
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:245
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:364
 msgid "Update error"
 msgstr "সংশোধনে ত্রুটি"
 
@@ -7499,26 +7513,26 @@ msgstr "[নতুন উত্স]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:626
 #: plugins/Satellites/src/ui_satellitesDialog.h:715
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:193
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:194
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
-#: plugins/Novae/src/gui/NovaeDialog.cpp:190
+#: plugins/Novae/src/gui/NovaeDialog.cpp:191
 #: plugins/Novae/src/ui_novaeDialog.h:240
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:183
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:184
 #: plugins/Quasars/src/ui_quasarsDialog.h:265
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:206
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:207
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:271
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:349
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:350
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:464
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:460
 msgid "Update now"
 msgstr "এখনই সংশোধন করুন"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:628
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:195
-#: plugins/Novae/src/gui/NovaeDialog.cpp:192
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:185
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:208
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:351
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:196
+#: plugins/Novae/src/gui/NovaeDialog.cpp:193
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:186
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:209
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:352
 msgid "Update from files"
 msgstr "কোন নথি থেকে সংশোধন করুন"
 
@@ -8954,31 +8968,31 @@ msgstr "অতিনোভার ধরণ : %1"
 msgid "Maximum brightness: %1"
 msgstr "সর্বোচ্চ ঔজ্জ্বল্য : %1"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
 msgid "Historical Supernovae Plug-in"
 msgstr "বিখ্যাত অতিনোভা দেখানোর সরঞ্জাম"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 msgid "This plugin allows you to see some bright historical supernovae: "
 msgstr "এই সরঞ্জামটি আমাদের কিছু বিখ্যাত অতিনোভা দেখায় : "
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
-#: plugins/Novae/src/gui/NovaeDialog.cpp:127
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:126
+#: plugins/Novae/src/gui/NovaeDialog.cpp:128
 #, qt-format
 msgid "This list altogether contains %1 stars."
 msgstr "বর্তমান তালিকাটিতে সর্বোমোট %1 টি নক্ষত্রের তথ্য আছে ।"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:126
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
 #, qt-format
 msgid "All those supernovae are brighter %1 at peak of brightness."
 msgstr "এগুলি তাদের ঔজ্জ্বল্যতার চূড়ায় %1 এর থেকেও উজ্জ্বল ছিল ।"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:128
-#: plugins/Novae/src/gui/NovaeDialog.cpp:129
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
+#: plugins/Novae/src/gui/NovaeDialog.cpp:130
 msgid "Light curves"
 msgstr "অালো সংক্রান্ত লেখচিত্র"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:130
 #, qt-format
 msgid ""
 "This plugin implements a simple model of light curves for different "
@@ -8990,33 +9004,33 @@ msgstr ""
 "মডেল ব্যবহার করে । type I ও type II অতিনোভার আলোক লেখচিত্রের তথ্য %1এখানে%2 "
 "পাবেন (দিনে পরিমিত) যা এই সরঞ্জামে মডেল হিসাবে ব্যবহৃত হয়েছে ।"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:132
 msgid "Acknowledgments"
 msgstr "কৃতজ্ঞতা স্বীকার"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:132
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
 msgid ""
 "We thank the following people for their contribution and valuable comments:"
 msgstr ""
 "অামরা নিম্নলিখিত ব্যক্তিবর্গের মূল্যবান মতামত ও অবদানের জন্য ধন্যবাদ জানাই  :"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:134
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:135
 msgid "Sergei Blinnikov"
 msgstr "Sergei Blinnikov"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:136
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:137
 msgid "Institute for Theoretical and Experimental Physics"
 msgstr "ইনস্টিটিউট ফর থিওরিটিক্যাল অ্যান্ড এক্সপেরিমেন্টাল ফিজিক্স"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:137
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:145
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:138
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:146
 msgid "in Russia"
 msgstr ", রাশিয়া"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:148
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:161
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:149
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:162
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin, its history and "
@@ -9025,15 +9039,15 @@ msgstr ""
 "এই সরঞ্জাম, তার ইতিহাস ও এতে ব্যবহৃত তালিকার বিন্যাস সম্বন্ধে বিশদ তথ্য "
 "%1এখানে%2 পাবেন ।"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
-#: plugins/Novae/src/gui/NovaeDialog.cpp:175
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:168
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:191
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:179
+#: plugins/Novae/src/gui/NovaeDialog.cpp:176
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:169
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:192
 #, qt-format
 msgid "Next update: %1 days"
 msgstr "পরবর্তী সংশোধন : %1 দিন পর"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:214
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:215
 msgid "Historical supernovae is updated"
 msgstr "বিখ্যাত অতিনোভাগুলির তথ্য সংশোধন করা হয়েছে"
 
@@ -9079,7 +9093,7 @@ msgstr "[পরবর্তী সংশোধন তথ্য]"
 msgid "Bright Novae"
 msgstr "বিস্ফোরিত নক্ষত্র"
 
-#: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/gui/NovaeDialog.cpp:122
+#: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/gui/NovaeDialog.cpp:123
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
 msgstr ""
 "এই সরঞ্জামটি আমাদের ছায়াপথে ঘটা কিছু উজ্জ্বল নক্ষত্র বিস্ফোরণ দেখায় ।"
@@ -9092,11 +9106,11 @@ msgstr "বিস্ফোরিত নক্ষত্রের বৈশিষ�
 msgid "nova"
 msgstr "বিস্ফোরিত নক্ষত্র"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:117
+#: plugins/Novae/src/gui/NovaeDialog.cpp:118
 msgid "Bright Novae Plug-in"
 msgstr "বিস্ফোরিত নক্ষত্র দেখানোর সরঞ্জাম"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:123
+#: plugins/Novae/src/gui/NovaeDialog.cpp:124
 msgid ""
 "You can find novae via search tool by entering designation of nova or its "
 "common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg')."
@@ -9104,17 +9118,17 @@ msgstr ""
 "আপনি আসল বা ডাক নাম (যেমন  'Nova Cygni 1975' বা 'V1500 Cyg'), যে কোনো একটা "
 "ব্যবহার করে অনুসন্ধান সরঞ্জামের সাহায্যে এদের খুঁজতে পারেন ।"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:125
+#: plugins/Novae/src/gui/NovaeDialog.cpp:126
 msgid "This plugin allows you to see recent bright novae: "
 msgstr ""
 "এই সরঞ্জামটি সাম্প্রতিক ঘটা নিম্নলিখিত কিছু নক্ষত্র বিস্ফোরণ দেখায় : "
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:128
+#: plugins/Novae/src/gui/NovaeDialog.cpp:129
 #, qt-format
 msgid "All those novae are brighter than %1 at peak of brightness."
 msgstr "এগুলি তাদের ঔজ্জ্বল্যতার চূড়ায় %1 এর থেকেও উজ্জ্বল ছিল ।"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:130
+#: plugins/Novae/src/gui/NovaeDialog.cpp:131
 msgid ""
 "This plugin uses a very simple model for calculation of light curves for "
 "novae stars."
@@ -9122,7 +9136,7 @@ msgstr ""
 "এই সরঞ্জামটি বিস্ফোরিত নক্ষত্রের অালো সংক্রান্ত লেখচিত্রের একটি সরল মডেল "
 "ব্যবহার করে ।"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:131
+#: plugins/Novae/src/gui/NovaeDialog.cpp:132
 #, qt-format
 msgid ""
 "This model is based on time for decay by %1 magnitudes from the maximum "
@@ -9131,7 +9145,7 @@ msgstr ""
 "সর্বোচ্চ ঔজ্জ্বল্যতা থেকে %1 ঔজ্জ্বল্য কমে যাওয়ার সময়কালের উপর ভিত্তি করে এই "
 "মডেলটি তৈরী , যেখানে %1 এর মান ২, ৩, ৬ বা ৯ হতে পারে ।"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:132
+#: plugins/Novae/src/gui/NovaeDialog.cpp:133
 msgid ""
 "If a nova has no values for decay of magnitude then this plugin will use "
 "generalized values for it."
@@ -9140,7 +9154,7 @@ msgstr ""
 "সাধারণ মানটি ব্যবহার করা হয়ে থাকে ।"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Novae/src/gui/NovaeDialog.cpp:145
+#: plugins/Novae/src/gui/NovaeDialog.cpp:146
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin, its history and "
@@ -9149,7 +9163,7 @@ msgstr ""
 "এই সরঞ্জাম, তার ইতিহাস ও এতে ব্যবহৃত তালিকার বিন্যাস সম্বন্ধে বিশদ তথ্য "
 "%1এখানে%2 পাবেন ।"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:211
+#: plugins/Novae/src/gui/NovaeDialog.cpp:212
 msgid "Novae is updated"
 msgstr "বিস্ফোরিত নক্ষত্রগুলির তথ্য সংশোধন করা হয়েছে"
 
@@ -9189,11 +9203,11 @@ msgstr "কোয়াসারের বৈশিষ্ট্য বিন্য�
 msgid "Z (redshift): %1"
 msgstr "Z (লোহিত সরন): %1"
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:117
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 msgid "Quasars Plug-in"
 msgstr "কোয়াসার দেখানোর সরঞ্জাম"
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:123
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
 msgid ""
 "The Quasars plugin provides visualization of some quasars brighter than "
 "visual magnitude 16. The catalogue of quasars was compiled from \"Quasars "
@@ -9203,17 +9217,17 @@ msgstr ""
 "দেখায় । ব্যবহৃত তালিকাটি 'Quasars and Active Galactic Nuclei' (13th Ed.) "
 "থেকে নেওয়া হয়েছে ।"
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:125
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 msgid "Veron+ 2010"
 msgstr "ভেরন+ ২০১০"
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
 #, qt-format
 msgid "The current catalog contains info about %1 quasars."
 msgstr "বর্তমান তালিকাটিতে %1 টি কোয়াসারের তথ্য দেওয়া আছে ।"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:138
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:139
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin, its history and "
@@ -9222,7 +9236,7 @@ msgstr ""
 "এই সরঞ্জাম, তার ইতিহাস ও এতে ব্যবহৃত তালিকার বিন্যাস সম্বন্ধে বিশদ তথ্য "
 "%1এখানে%2 পাবেন ।"
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:222
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:223
 msgid "Quasars is updated"
 msgstr "কোয়াসারগুলির তথ্য সংশোধন করা হয়ে গেছে"
 
@@ -9263,7 +9277,7 @@ msgid "Pulsars"
 msgstr "পালসার"
 
 #: plugins/Pulsars/src/Pulsars.cpp:74
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
@@ -9414,11 +9428,11 @@ msgstr ""
 "উষ্ণতার কারণে এক্স-রশ্মি বিকিরণ করা কোন একাকী নিউট্রন নক্ষত্র, যদিও কোন "
 "বেতার তরঙ্গের বিকিরণ খুঁজে পাওয়া যায় নি"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:127
 msgid "Pulsars Plug-in"
 msgstr "পালসার দেখানোর সরঞ্জাম"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
 #, qt-format
 msgid ""
 "Pulsar data is derived from 'The ATNF Pulsar Catalogue'  (Manchester, R. N., "
@@ -9429,44 +9443,44 @@ msgstr ""
 "B., Teoh, A. & Hobbs, M., Astron. J., ১২৯, ১৯৯৩-২০০৬ (২০০৫) (%1astro-"
 "ph/0412641%2)) থেকে নেওয়া হয়েছে"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:135
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
 #, qt-format
 msgid "Current catalog contains info about %1 pulsars."
 msgstr "বর্তমান তালিকাটিতে %1 টি পালসারের তথ্য দেওয়া আছে ।"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:137
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
 msgid "Note"
 msgstr "বি.দ্র."
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:139
 msgid "pulsar identifiers have the prefix 'PSR'"
 msgstr "পালসারদের অাগে অবশ্যই 'PSR' শব্দটি থাকতে হবে"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:139
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 msgid "Acknowledgment"
 msgstr "কৃতজ্ঞতা স্বীকার"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:143
 msgid "Vladimir Samodourov"
 msgstr "Vladimir Samodourov"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:145
 msgid "Pushchino Radio Astronomy Observatory"
 msgstr "পুসচিনো বেতার মানমন্দির"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:147
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:148
 msgid "Maciej Serylak"
 msgstr "Maciej Serylak"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:149
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
 msgid "Nancay Radioastronomical Observatory"
 msgstr "ন্যান্সি বেতার মানমন্দির"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:151
 msgid "in France"
 msgstr ", ফ্রান্স"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:251
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:252
 msgid "Pulsars is updated"
 msgstr "পালসারগুলির তথ্য সংশোধন করা হয়ে গেছে"
 
@@ -9517,47 +9531,47 @@ msgid "Exoplanets configuration window"
 msgstr "বহির গ্রহগুলির বৈশিষ্ট্য বিন্যাস"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:938
+#: plugins/Exoplanets/src/Exoplanets.cpp:959
 msgid "Hot"
 msgstr "গরম"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:940
+#: plugins/Exoplanets/src/Exoplanets.cpp:961
 msgid "Warm"
 msgstr "মনোরম"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:942
+#: plugins/Exoplanets/src/Exoplanets.cpp:963
 msgid "Cold"
 msgstr "ঠান্ডা"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:945
+#: plugins/Exoplanets/src/Exoplanets.cpp:966
 msgid "Miniterran"
 msgstr "বুধের মত"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:947
+#: plugins/Exoplanets/src/Exoplanets.cpp:968
 msgid "Subterran"
 msgstr "মঙ্গলের মত"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:949
+#: plugins/Exoplanets/src/Exoplanets.cpp:970
 msgid "Terran"
 msgstr "পার্থিব"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:951
+#: plugins/Exoplanets/src/Exoplanets.cpp:972
 msgid "Superterran"
 msgstr "বৃহৎ পার্থিব"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:953
+#: plugins/Exoplanets/src/Exoplanets.cpp:974
 msgid "Jovian"
 msgstr "বৃহস্পতির মত"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:955
+#: plugins/Exoplanets/src/Exoplanets.cpp:976
 msgid "Neptunian"
 msgstr "নেপচুনের মত"
 
@@ -9645,11 +9659,11 @@ msgstr "সুস্থিত তাপমাত্রা"
 msgid "ESI"
 msgstr "ভূসদৃশ্যতা"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:142
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
 msgid "Exoplanets Plug-in"
 msgstr "বহির গ্রহ দেখানোর সরঞ্জাম"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:146
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
 #, qt-format
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
@@ -9658,7 +9672,7 @@ msgstr ""
 "এই সরঞ্জামটি গ্রহ আছে এমন নক্ষত্রদের অবস্থান দেখায় । বহির গ্রহ সম্পর্কে "
 "সমস্ত তথ্য \"%1বহির গ্রহ বিশ্বকোষ%2\" থেকে নেওয়া হয়েছে ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:148
 #, qt-format
 msgid ""
 "The list of potential habitable exoplanets and data about them were taken "
@@ -9669,7 +9683,7 @@ msgstr ""
 "Laboratory%3 দ্বারা নির্মিত \"%1বসবাসযোগ্য বহির গ্রহগুলির তালিকা%3\" থেকে "
 "নেওয়া হয়েছে ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:149
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:150
 #, qt-format
 msgid ""
 "The current catalog contains info about %1 planetary systems, which "
@@ -9680,7 +9694,7 @@ msgstr ""
 "(%3 টি আপাত বসবাসযোগ্য গ্রহ সহ) তথ্য আছে ।"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:160
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:161
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:315
 #, qt-format
 msgid ""
@@ -9690,11 +9704,11 @@ msgstr ""
 "এই সরঞ্জাম ও তার নানা খুঁটিনাটি কিংবা এতে ব্যবহৃত তালিকার বিন্যাস সম্বন্ধে "
 "বিশদ তথ্য %1এখানে%2 পাবেন ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgid "Potential habitable exoplanets"
 msgstr "আপাত বসবাসযোগ্য বহির গ্রহ"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
 msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
@@ -9702,11 +9716,11 @@ msgstr ""
 "এই সরঞ্জামের সাহায্যে আপাত বসবাসযোগ্য বহির গ্রহ গুলির অবস্থান (কমলা রং এর "
 "চিহ্ন) ও বিভিন্ন তথ্য জানা য়ায় ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
 msgid "Planetary Class"
 msgstr "ধরণ"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
 msgid ""
 "Planet classification from host star spectral type (F, G, K, M), habitable "
 "zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, "
@@ -9717,11 +9731,11 @@ msgstr ""
 "থেকে কয়েকগুন বড়, বৃহস্পতির মত, নেপচুনের মত) করা আছে । (পৃথিবী = G শ্রেণীর "
 "মনোরম গ্রহ)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
 msgid "Equilibrium Temperature"
 msgstr "সুস্থিত তাপমাত্রা"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
 msgid ""
 "The planetary equilibrium temperature is a theoretical temperature in (°C) "
 "that the planet would be at when considered simply as if it were a black "
@@ -9732,11 +9746,11 @@ msgstr ""
 "প্রকৃত কালো বস্তু যতটা গরম হয় সেটাই হল গ্রহটির সুস্থিত তাপমাত্রা (°C) । "
 "উদাহরণ স্বরূপ বলা যায় যে পৃথিবীর সুস্থিত তাপমাত্রা হল -18.15°C (255 K)।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
 msgid "Earth Similarity Index (ESI)"
 msgstr "ভূসদৃশ্যতা (ESI)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
 msgid ""
 "Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-"
 "like. ESI depends on the planet's radius, density, escape velocity, and "
@@ -9746,11 +9760,11 @@ msgstr ""
 "মিলের পরিমান সর্বোচ্চ । এটির মান গ্রহের ব্যাস, ঘনত্ব, মুক্তিবেগ ও পৃষ্ঠতলের "
 "উষ্ণতার উপর নির্ভর করে ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "Proper names"
 msgstr "যথাযথ নাম"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
 msgid ""
 "In December 2015, the International Astronomical Union (IAU) has officially "
 "approved names for several exoplanets after a public vote."
@@ -9759,7 +9773,7 @@ msgstr ""
 "জ্যোতির্বৈজ্ঞানিক সঙ্ঘ (IAU) কিছু বহির গ্রহের নাম আধিকারীক ভাবে চুড়ান্ত "
 "করেছে ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
 msgid ""
 "From the latin <em>Veritas</em>, truth. The ablative form means <em>where "
 "there is truth</em>."
@@ -9767,7 +9781,7 @@ msgstr ""
 "এর অর্থ <em>যেখানে সত্য আছে</em> । শব্দটির বুৎপত্তি ল্যাটিন শব্দ "
 "<em>Veritas</em> বা ভেরিতাস থেকে, যার অর্থ সত্য ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
 msgid ""
 "From the latin <em>Spes</em>, hope. The ablative form means <em>where there "
 "is hope</em>."
@@ -9775,13 +9789,13 @@ msgstr ""
 "এর অর্থ <em>যেখানে আশা আছে</em> । শব্দটির বুৎপত্তি ল্যাটিন শব্দ "
 "<em>Spes</em> বা স্প্যাস থেকে, যার অর্থ আশা ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
 msgid "Musica is Latin for <em>music</em>."
 msgstr ""
 "শব্দটির বুৎপত্তি ল্যাটিন শব্দ Musica বা মুজিকা থেকে, যার অর্থ "
 "<em>সঙ্গীত</em> ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:188
 msgid ""
 "Arion was a genius of poetry and music in ancient Greece. According to "
 "legend, his life was saved at sea by dolphins after attracting their "
@@ -9792,12 +9806,12 @@ msgstr ""
 "দেখতে পান । তিনি তখন তাঁর কিতারার সাহায্যে এমনই মনোমুগ্ধকর সঙ্গীতের সৃষ্টি "
 "করেন যে ডলফিনগুলি পর্যন্ত আকৃষ্ট হয়ে তাঁর জীবন বাঁচায় ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:188
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
 msgid "Fafnir was a Norse mythological dwarf who turned into a dragon."
 msgstr ""
 "ফাফনির ছিলেন নর্স রূপকথার সেই বামন যিনি পরে এক ভয়ঙ্কর ড্রাগনে পরিনত হন ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:190
 msgid ""
 "Orbitar is a contrived word paying homage to the space launch and orbital "
 "operations of NASA."
@@ -9805,23 +9819,23 @@ msgstr ""
 "নাসার বিবিধ মহাকাশযান প্রবর্তন ও কাক্ষিক কার্যকলাপের প্রতি শ্রদ্ধা জানাতে "
 "অর্বিটার নামটি রাখা হয়েছে ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:190
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
 msgid "Chalawan is a mythological crocodile king from a Thai folktale."
 msgstr "ছালাওয়ান ছিলেন থাই লোককথার বিখ্যাত কুমীর রাজা ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
 msgid ""
 "Taphao Thong is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr "থাপাও থং ছিলেন থাই লোককথা ছালাওয়ানের দুই বোনের একজন ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
 msgid ""
 "Taphao Kae is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr "থাপাও ক্যা ছিলেন থাই লোককথা ছালাওয়ানের দুই বোনের একজন ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid ""
 "Helvetios is Celtic for <em>the Helvetian</em> and refers to the Celtic "
 "tribe that lived in Switzerland during antiquity."
@@ -9829,7 +9843,7 @@ msgstr ""
 "হেলভেতিয়স কথাটির বুৎপত্তি সেলটিক শব্দ <em>the Helvetian</em> বা হেলভেশিয়ান "
 "থেকে । সুইজারল্যান্ডে বসবাসকারী প্রাচীন সেলটিক গোষ্ঠীদের এই নামে ডাকা হত ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
 msgid ""
 "Dimidium is Latin for <em>half</em>, referring to the planet's mass of at "
 "least half the mass of Jupiter."
@@ -9837,7 +9851,7 @@ msgstr ""
 "এর বুৎপত্তি ল্যাটিন শব্দ দিমিদিয়াম থেকে, যার অর্থ <em>অর্ধেক</em> । গ্রহটির "
 "ভর বৃহস্পতির অর্ধেক বোঝাতেই এই নামকরণ করা হয়েছে ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
 msgid ""
 "Nicolaus Copernicus or Mikolaj Kopernik (1473-1543) was a Polish astronomer "
 "who proposed the heliocentric model of the solar system in his book <em>De "
@@ -9847,7 +9861,7 @@ msgstr ""
 "জ্যোতির্বৈজ্ঞানী । তিনি তাঁর বই <em>De revolutionibus orbium coelestium</em> "
 "য়ে সূর্য কেন্দ্রীক সৌরজগতের কথা বলেছিলেন ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid ""
 "Galileo Galilei (1564-1642) was an Italian astronomer and physicist often "
 "called the <em>father of observational astronomy</em> and the <em>father of "
@@ -9861,7 +9875,7 @@ msgstr ""
 "বৃহস্পতির চারটি চাঁদ আবিষ্কার করেন এবং শুক্রের কলা সহ আরও অনেক গুরুত্বপূর্ণ "
 "বিষয়ের কথা উল্লেখ করেন ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
 msgid ""
 "Tycho Brahe (1546-1601) was a Danish astronomer and nobleman who recorded "
 "accurate astronomical observations of the stars and planets. These "
@@ -9873,7 +9887,7 @@ msgstr ""
 "সঠিক পর্যবেক্ষনের উপর ভিত্তি করেই বিজ্ঞানী কেপলার গ্রহের কক্ষপথ সংক্রান্ত "
 "সূত্র তিনটি তৈরী করেন ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid ""
 "Hans Lipperhey (1570-1619) was a German-Dutch lens grinder and spectacle "
 "maker who is often attributed with the invention of the refracting telescope "
@@ -9883,7 +9897,7 @@ msgstr ""
 "কারক । ১৬০৮ সালে তিনি দুটি চশমার উত্তল লেন্স পরপর রেখে দূরের জিনিষ কাছে "
 "দেখতে পান । তাই তাঁকে অনেক সময় প্রতিসরণ দূরবীনের জনক বলা হয়ে থাকে ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid ""
 "Jacharias Janssen (1580s-1630s) was a Dutch spectacle maker who is often "
 "attributed with invention of the microscope, and more controversially with "
@@ -9892,7 +9906,7 @@ msgstr ""
 "জাখারিয়াস ইয়ানসে (১৫৮০-১৬৩০) ছিলেন একজন বিখ্যাত ডাচ চশমা প্রস্তুত কারক । "
 "অনেক সময় তাঁকে অনুবীক্ষন যন্ত্রের জনক কিংবা দূরবীনেরও জনক বলা হয়ে থাকে ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid ""
 "Thomas Harriot (ca. 1560-1621) was an English astronomer, mathematician, "
 "ethnographer, and translator, who is attributed with the first drawing of "
@@ -9901,7 +9915,7 @@ msgstr ""
 "থমাস হ্যারিয়ট (১৫৬০-১৬২১) ছিলেন একজন বিখ্যাত ইংরেজ জ্যোতির্বৈজ্ঞানী, গণিতজ্ঞ "
 "এবং অনুবাদক । তিনিই প্রথম দূরবীনের সাহায্যে চাঁদের মানচিত্র প্রস্তুত করেন ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid ""
 "<em>Amateru</em> is a common Japanese appellation for shrines when they "
 "enshrine Amaterasu, the Shinto goddess of the Sun, born from the left eye of "
@@ -9911,7 +9925,7 @@ msgstr ""
 "আছে । আমাটেরাসু হলেন সিন্টো ধর্মাবলম্বীদের কাছে সূর্যের দেবী, যিনি ভগবান "
 "ইসানাগির বাম চোখ থেকে প্রকট হয়েছিলেন ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid ""
 "Hypatia was a famous Greek astronomer, mathematician, and philosopher. She "
 "was head of the Neo-Platonic school at Alexandria in the early 5th century, "
@@ -9921,7 +9935,7 @@ msgstr ""
 "গণিতজ্ঞ ও দার্শনিক । তিনি আলেক্সান্দ্রিয়ার নব্য প্লেটোনীয় স্কুলের প্রধান "
 "ছিলেন । সেইসময়ের এক উগ্র খ্রীষ্টান দাঙ্গায় তাঁর অকালমৃত্যু হয় ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid ""
 "Ran is the Norse goddess of the sea, who stirs up the waves and captures "
 "sailors with her net."
@@ -9929,7 +9943,7 @@ msgstr ""
 "রাং হলেন নরদেশীয় সমুদ্রের দেবী, যিনি সমুদ্রে বিশাল ঢেউ তৈরী করেন এবং "
 "নাবিকদের জালে করে বন্দী বানান ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 msgid ""
 "AEgir is Ran's husband, the personified god of the ocean. <em>AEgir</em> and "
 "<em>Ran</em> both represent the <em>Jotuns</em> who reign in the outer "
@@ -9939,7 +9953,7 @@ msgstr ""
 "<em>রাং</em> দুজনেই <em>Jotuns</em> বা ইয়তুনস বর্গের প্রতিনিধি ছিলেন এবং "
 "সমগ্র বাইরের বিশ্বে রাজত্ব করতেন । তাঁদের নটি মেয়ে ছিল ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
 msgid ""
 "Ancient Semitic name and modern Arabic name for the city of Palmyra, a "
 "UNESCO World Heritage Site."
@@ -9947,20 +9961,20 @@ msgstr ""
 "এটি পামেইরা শহরের আরব্য নাম । প্রাচীন সেমেটিকরাও এই নামেই শহরটিকে চিনত । এটি "
 "বর্তমানে এটি ইউনেস্কো ঘোষিত বিশ্ব ঐতিহ্যবাহী স্থানগুলির একটি ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid "Dagon was a Semitic deity, often represented as half-man, half-fish."
 msgstr ""
 "দাগন হলেন একজন সেমিটিক দেবতা । তাঁকে অর্ধেক মানুষ ও অর্ধেক মাছের মতন দেখতে ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
 msgid "Tonatiuh was the Aztec god of the Sun."
 msgstr "টোনাটিহ্ হলেন অ্যাজটেকদের সূর্য দেবতা ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 msgid "Meztli was the Aztec goddess of the Moon."
 msgstr "মেশচি হলেন অ্যাজটেকদের চাঁদের দেবতা ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
 msgid ""
 "Ogma was a deity of eloquence, writing, and great physical strength in the "
 "Celtic mythologies of Ireland and Scotland, and may be related to the Gallo-"
@@ -9969,11 +9983,11 @@ msgstr ""
 "স্কটল্যান্ড ও আয়ারল্যান্ডের সেলটিক রূপকথা অনুযায়ী ওঘমা হলেন বাগ্নিতা, বিদ্যা "
 "ও শক্তির দেবী । আবার অনেকে এঁকে রোমান দেবতা <em>ওগমিয়স</em> বলেও মনে করেণ ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
 msgid "Smertrios was a Gallic deity of war."
 msgstr "স্মার্টায়োস হলেন গ্যালিকদের যুদ্ধের দেবতা ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
 msgid ""
 "Intercrus means <em>between the legs</em> in Latin style, referring to the "
 "star's position in the constellation Ursa Major."
@@ -9981,11 +9995,11 @@ msgstr ""
 "ইন্টেরক্রুশ কথার অর্থ <em>দু পায়ের মাঝখানে</em> । গ্রহ সম্পর্কিত তারাটির "
 "ভল্লুক মন্ডলে বিশেষ অবস্থান অনুযায়ী এই নামকরণ করা হয়েছে ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
 msgid "Arkas was the son of Callisto (Ursa Major) in Greek mythology."
 msgstr "গ্রীক রূপকথা অনুসারে আর্কাস হল ক্যালিস্টোর (ঋক্ষমন্ডল) পুত্র ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
 msgid ""
 "Miguel de Cervantes Saavedra (1547-1616) was a famous Spanish writer and "
 "author of <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
@@ -9993,7 +10007,7 @@ msgstr ""
 "মিগেল দে সেরভান্তে সাভেদ্‍রা (১৫৪৭-১৬১৬) ছিলেন একজন বিখ্যাত স্পেনীয় লেখক ও "
 "তিনি <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em> বইটির রচয়িতা ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
 msgid ""
 "Lead fictional character from Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
@@ -10001,7 +10015,7 @@ msgstr ""
 "সেরভান্তেস রচিত বই <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em> এর "
 "মুখ্য কাল্পনিক চরিত্র ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
 msgid ""
 "Fictional character and love interest of Don Quijote (or Quixote) in "
 "Cervantes's <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
@@ -10009,7 +10023,7 @@ msgstr ""
 "সেরভান্তেস রচিত বই <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em> এর "
 "চরিত্র ডন কিউহোটে (বা কিহোটি) এর প্রেমিকা ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
 msgid ""
 "Fictional horse of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
@@ -10017,7 +10031,7 @@ msgstr ""
 "সেরভান্তেস রচিত বই <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em> এর "
 "চরিত্র ডন কিউহোটের ঘোড়া ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
 msgid ""
 "Fictional squire of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
@@ -10025,7 +10039,7 @@ msgstr ""
 "সেরভান্তেস রচিত বই <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em> এর "
 "চরিত্র মহান ডন কিউহোটে ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
 msgid ""
 "Thestias is the patronym of Leda and her sister Althaea, the daughters of "
 "Thestius. Leda was a Greek queen, mother of Pollux and of his twin Castor, "
@@ -10035,7 +10049,7 @@ msgstr ""
 "। লিডা ছিলেন একজন গ্রীক রানী এবং পোলাক্স ও ক্যাস্টর নামক যমজ পুত্র এবং হেলেন "
 "ও ক্লিটেমিন্সত্রা নামক দুই কন্যার মা ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
 msgid ""
 "Lich is a fictional undead creature known for controlling other undead "
 "creatures with magic."
@@ -10043,11 +10057,11 @@ msgstr ""
 "লিচ হল বিশাল এক দৈত্য যে জাদু করে অন্যান্য দৈত্যদের দিয়ে মর্জিমাফিক কাজ করায় "
 "।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 msgid "Draugr refers to undead creatures in Norse mythology."
 msgstr "নরওয়ের রূপকথা অনুযায়ী দ্রাউগ বলতে পৈশাচিক জীবদের বোঝায় ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
 msgid ""
 "Poltergeist is a name for supernatural beings that create physical "
 "disturbances, from German for <em>noisy ghost</em>."
@@ -10055,14 +10069,14 @@ msgstr ""
 "জার্মান শব্দ পোল্টেগেইস্ট বলতে <em>উপদ্রবকারী ভুত</em> বা শারিরীক গোলোযোগ "
 "সৃষ্টিকারী অশরিরীদের বোঝায় ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
 msgid ""
 "Phobetor is a Greek mythological deity of nightmares, the son of Nyx, the "
 "primordial deity of night."
 msgstr ""
 "রাতের আদিম দেবতা নিক্সের পুত্র ফোবেটর হলেন গ্রীকদের কাছে দুঃস্বপ্নের দেবতা ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
 msgid ""
 "Titawin (also known as Medina of Tetouan) is a settlement in northern "
 "Morocco and UNESCO World Heritage Site. Historically it was an important "
@@ -10074,7 +10088,7 @@ msgstr ""
 "স্প্যানীশ ও আরব সভ্যতার মিলনস্থল হিসাবে বিখ্যাত ছিল । তাছাড়া এটি ইউরোপ ও "
 "আফ্রিকার মিলনস্থলও বটে ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
 msgid ""
 "Saffar is named for Abu al-Qasim Ahmed Ibn-Abd Allah Ibn-Omar al Ghafiqi Ibn-"
 "al-Saffar, who taught arithmetic, geometry, and astronomy in 11th century "
@@ -10086,7 +10100,7 @@ msgstr ""
 "ইবন ওমার আল গফিকি ইবন আল সাফার এর মানানুসারে । তিনি জ্যোতির্বিজ্ঞানের "
 "ব্যবহারের উপর একটি প্রভাবশালী গ্রন্থ লিখেছিলেন ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
 msgid ""
 "Samh is named for Abu al-Qasim 'Asbagh ibn Muhammad ibn al-Samh al-Mahri (or "
 "<em>Ibn al-Samh</em>), a noted 11th century astronomer and mathematician in "
@@ -10096,7 +10110,7 @@ msgstr ""
 "স্পেন) বিখ্যাত জ্যোতির্বিজ্ঞানী ও গণিতজ্ঞ আবু আল কাশিম আসবাঘ ইবন মহম্মদ ইবন "
 "আল সাহম আল মাহরি (বা <em>ইবন আল সাহম</em>) এর মানানুসারে ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
 msgid ""
 "Majriti is named for Abu al-Qasim al-Qurtubi al-Majriti, a notable "
 "mathematician, astronomer, scholar, and teacher in 10th century and early "
@@ -10106,7 +10120,7 @@ msgstr ""
 "পন্ডিত, জ্যোতির্বিজ্ঞানী, গণিতজ্ঞ ও শিক্ষক আবু আল কাশিম আল কুর্তুব আল "
 "মাজরিতি এর মানানুসারে ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
 msgid ""
 "Libertas is Latin for <em>liberty</em>. Liberty refers to social and "
 "political freedoms, and a reminder that there are people deprived of liberty "
@@ -10118,7 +10132,7 @@ msgstr ""
 "স্বাধীনতা থেকে বঞ্চিত মানুষগুলির কথা মনে করিয়ে দেয় । ঈগল মন্ডলের ঈগলটির "
 "প্রতিরূপটিকে মুক্তির প্রতিক হিসাবে ব্যবহার করা হয় ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
 msgid ""
 "Fortitudo is Latin for <em>fortitude</em>. Fortitude means emotional and "
 "mental strength in the face of adversity, as embodied by the eagle "
@@ -10129,12 +10143,12 @@ msgstr ""
 "মানসিক শক্তির প্রকাশকে বোঝানো হয়েছে । অনেক সময় একে ঈগলের (বা ঈগল মন্ডল) সাথে "
 "তুলনা করা হয় ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
 msgid "Notes"
 msgstr "বি.দ্র."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
 msgid ""
 "These names are modified based on the original proposals, to be consistent "
 "with the IAU rules."
@@ -10142,7 +10156,7 @@ msgstr ""
 "এক্ষেত্রে IAU এর নিয়মাবলীর সাথে সামঞ্জস্য রেখে প্রস্তাবিত নামগুলিকে সামান্য "
 "পরিবর্তন করে রাখা হয়েছে ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 msgid ""
 "The original name proposed, <em>Veritas</em>, is that of an asteroid "
 "important for the study of the solar system."
@@ -10150,7 +10164,7 @@ msgstr ""
 "প্রথমে <em>Veritas</em> বা ভেরিতাস নামটি রাখার প্রস্তাব ছিল, কিন্তু ততদিনে ঐ "
 "নামে একটি গুরুত্বপূর্ণ উল্কার নামকরণ করা হয়ে গিয়েছিল ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
 msgid ""
 "The name originally proposed, <em>Amaterasu</em>, is already used for an "
 "asteroid."
@@ -10158,7 +10172,7 @@ msgstr ""
 "প্রথমে <em>আমাটেরাসু</em> নামটির প্রস্তাব করা হলেও, এটি আগেই একটি গ্রহাণুর "
 "জন্য ব্যবহার করা হয়ে গিয়েছিল ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
 msgid ""
 "Note the typographical difference between <em>AEgir</em> and <em>Aegir</em>, "
 "the Norwegian transliteration. The same name, with the spelling "
@@ -10168,12 +10182,12 @@ msgstr ""
 "এয়েগির কথাটির বানান <em>AEgir</em> রাখা হয়েছে, কারণ <em>Aegir</em> বানানটি "
 "২০০৪ সালে আরিষ্কৃত শনির একটি চাঁদের জন্য ব্যবহার করা হয়েছে ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
 msgid "<em>Ogmios</em> is a name already attributed to an asteroid."
 msgstr ""
 "<em>ওমিগোস</em> নামটি আগেই একটি গ্রহাণুর ক্ষেত্রে ব্যবহার করা হয়ে গেছে ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 msgid ""
 "The original proposed name <em>Leda</em> is already attributed to an "
 "asteroid and to one of Jupiter's satellites. The name <em>Althaea</em> is "
@@ -10182,7 +10196,7 @@ msgstr ""
 "প্রথমে প্রস্তাবিত নাম লিডা আগেই একটি গ্রহাণুর জন্য ব্যবহার করা হয়ে গিয়েছিল । "
 "এমনকি অ্যালথেই নামটিও বৃহস্পতির একটি চাঁদের জন্য ব্যবহার করা হয়ে গিয়েছিল ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
 msgid ""
 "The original spelling of <em>Lippershey</em> was corrected to "
 "<em>Lipperhey</em> on 15.01.2016. The commonly seen spelling "
@@ -10194,139 +10208,139 @@ msgstr ""
 "এ পরিণত হয় । তবে শেষ পর্যন্ত ১৫.০১.২০১৬ তারিখে সেটি সংশোধন করে "
 "<em>লিপারহে</em> কথাটিই ব্যবহার করা হয়েছে ।"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
 msgid "Additional info"
 msgstr "অতিরিক্ত তথ্য"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
 msgid "Circumstellar habitable zone"
 msgstr "নক্ষত্রের চারপাশে অবস্থিত বসবাসযোগ্য অঞ্চল"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
 msgid "Planetary equilibrium temperature"
 msgstr "গ্রহের সুস্থিত তাপমাত্রা"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
 msgid "Planetary habitability"
 msgstr "বসবাসযোগ্যতা"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
 msgid "Earth Similarity Index"
 msgstr "ভূসদৃশ্যতা"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
 msgid "Final Results of NameExoWorlds Public Vote Released"
 msgstr "সার্বজনীন ভোটাভুটির মাধ্যমে তৈরী বহিরগ্রহ গুলির নামের চুড়ান্ত তালিকা"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
 msgid "NameExoWorlds website"
 msgstr "NameExoWorlds ওয়েবসাইট"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
 msgid "General professional Web sites relevant to extrasolar planets"
 msgstr "বহির গ্রহ সম্পর্কিত কিছু গুরুত্বপূর্ণ  ‌ঠিকানা"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:260
 msgid "Exoplanets: an interactive version of XKCD 1071"
 msgstr "Exoplanets: an interactive version of XKCD 1071"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:260
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
 msgid "HEK (The Hunt for Exomoons with Kepler)"
 msgstr "HEK (The Hunt for Exomoons with Kepler)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
 msgstr "Exoplanets in binaries and multiple systems (Richard Schwarz)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
 msgid "Naming exoplanets (IAU)"
 msgstr "Naming exoplanets (IAU)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr "Some Astronomers and Groups active in extrasolar planets studies"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
 msgid "update: 16 April 2012"
 msgstr "update: 16 April 2012"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
 msgid "The Exoplanet Data Explorer"
 msgstr "The Exoplanet Data Explorer"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:266
 msgid "The Anglo-Australian Planet Search"
 msgstr "The Anglo-Australian Planet Search"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:266
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
 msgid "Geneva Extrasolar Planet Search Programmes"
 msgstr "Geneva Extrasolar Planet Search Programmes"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
 msgstr "OLBIN (Optical Long-Baseline Interferometry News)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
 msgid "NASA's Exoplanet Exploration Program"
 msgstr "NASA's Exoplanet Exploration Program"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:270
 msgid "Pulsar planets"
 msgstr "Pulsar planets"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:270
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
 msgid "The NASA Exoplanet Archive"
 msgstr "The NASA Exoplanet Archive"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
 msgid "IAU Commission 53: Extrasolar Planets"
 msgstr "IAU Commission 53: Extrasolar Planets"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
 msgid "ExoMol"
 msgstr "ExoMol"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
 msgid "The Habitable Zone Gallery"
 msgstr "The Habitable Zone Gallery"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
 msgid "PlanetQuest - The Search for Another Earth"
 msgstr "PlanetQuest - The Search for Another Earth"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:276
 msgid "Open Exoplanet Catalogue"
 msgstr "Open Exoplanet Catalogue"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:276
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:277
 msgid "The Habitable Exoplanets Catalog"
 msgstr "The Habitable Exoplanets Catalog"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:370
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:372
 msgid "Exoplanets is updated"
 msgstr "তথ্য সংশোধণ করা হয়ে গেছে"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:491
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:493
 msgid "Orbital Eccentricity"
 msgstr "কক্ষের উৎকেন্দ্রতা"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:492
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:494
 msgid "Orbit Semi-Major Axis, AU"
 msgstr "কক্ষের প্রাধান অক্ষের ব্যাসার্ধ (AU)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:493
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:495
 msgid "Planetary Mass, Mjup"
 msgstr "গ্রহের ভর (বৃহস্পতি ভরে পরিমিত)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:494
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:496
 msgid "Planetary Radius, Rjup"
 msgstr "গ্রহের ব্যাসার্ধ (বৃহস্পতি ব্যাসার্ধে পরিমিত)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:495
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:497
 msgid "Orbital Period, days"
 msgstr "বার্ষিক গতি (দিনে পরিমিত)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:496
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:498
 msgid "Angular Distance, arcsec."
 msgstr "কৌণিক দূরত্ব (আর্কসেকেন্ডে পরিমিত)"
 
@@ -13479,12 +13493,6 @@ msgstr "শনি"
 #~ msgid "Nebulas background images"
 #~ msgstr "নীহারিকার পশ্চাদ্পট প্রদর্শণ"
 
-#~ msgid "The equatorial coordinates (of date)"
-#~ msgstr "নিরক্ষীয় ছক স্থানাঙ্ক (উক্ত তারিখে)"
-
-#~ msgid "Display the equatorial position (of date)"
-#~ msgstr "নিরক্ষীয় ছকে (উক্ত তারিখে) অবস্থান দেখায়"
-
 #~ msgid "Display mode for quasars"
 #~ msgstr "কোয়াসার প্রদর্শণ মোড"
 
@@ -13629,6 +13637,12 @@ msgstr "শনি"
 #~ "SN 1604A (৮ই অক্টোবর), SN 1680A (১৫ঠা আগষ্ট), SN 1885A (১৭ঠা আগষ্ট), SN "
 #~ "1895B (৫রা জুলাই), SN 1937C (২১ঠা আগষ্ট), SN 1972E (৮ই মে), SN 1987A (২৪শে "
 #~ "ফেব্রুয়ারী) and SN 2011FE (১৩ই সেপ্টেম্বর)."
+
+#~ msgid "The equatorial coordinates (of date)"
+#~ msgstr "নিরক্ষীয় ছক স্থানাঙ্ক (তারিখ অনুযায়ী)"
+
+#~ msgid "Display the equatorial position (of date)"
+#~ msgstr "নিরক্ষীয় ছকে (তারিখ অনুযায়ী) অবস্থান দেখায়"
 
 #~ msgid ""
 #~ "A plugin that shows some historical supernovae brighter than 10 visual "
