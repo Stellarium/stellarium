@@ -709,7 +709,7 @@ double Planet::getSiderealTime(double JD, double JDE) const
 	double wholeRotations = floor(rotations);
 	double remainder = rotations - wholeRotations;
 
-	if (englishName=="Jupiter" && re.offset >= 0.0)
+	if (englishName=="Jupiter" && re.offset < 0.0)
 	{
 		// http://www.projectpluto.com/grs_form.htm
 		// CM( System II) =  181.62 + 870.1869147 * jd + correction [870d rotation every day]

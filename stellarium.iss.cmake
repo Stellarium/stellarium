@@ -34,18 +34,18 @@ ChangesAssociations=yes
 Compression=lzma2/max
 
 [Files]
-Source: "@CMAKE_INSTALL_PREFIX@\bin\stellarium.exe"; DestDir: "{app}"
+Source: "@CMAKE_INSTALL_PREFIX@\bin\stellarium.exe"; Flags: ignoreversion; DestDir: "{app}"
 @STELMAINLIB@
 @MESALIB@
 @REDIST_FILES@
-Source: "stellarium.url"; DestDir: "{app}"
-Source: "stellarium-guide.url"; DestDir: "{app}"
-Source: "stellarium-devdocs.url"; DestDir: "{app}"
-Source: "README"; DestDir: "{app}"; Flags: isreadme; DestName: "README.rtf"
-Source: "INSTALL"; DestDir: "{app}"; DestName: "INSTALL.rtf"
-Source: "COPYING"; DestDir: "{app}"; DestName: "GPL.rtf"
-Source: "AUTHORS"; DestDir: "{app}"; DestName: "AUTHORS.rtf"
-Source: "ChangeLog"; DestDir: "{app}"; DestName: "ChangeLog.rtf"
+Source: "stellarium.url"; Flags: ignoreversion; DestDir: "{app}"
+Source: "stellarium-guide.url"; Flags: ignoreversion; DestDir: "{app}"
+Source: "stellarium-devdocs.url"; Flags: ignoreversion; DestDir: "{app}"
+Source: "README"; DestDir: "{app}"; Flags: isreadme ignoreversion; DestName: "README.rtf"
+Source: "INSTALL"; DestDir: "{app}"; Flags: ignoreversion; DestName: "INSTALL.rtf"
+Source: "COPYING"; DestDir: "{app}"; Flags: ignoreversion; DestName: "GPL.rtf"
+Source: "AUTHORS"; DestDir: "{app}"; Flags: ignoreversion; DestName: "AUTHORS.rtf"
+Source: "ChangeLog"; DestDir: "{app}"; Flags: ignoreversion; DestName: "ChangeLog.rtf"
 Source: "@QtCore_location@"; DestDir: "{app}";
 Source: "@QtGui_location@"; DestDir: "{app}";
 Source: "@QtOpenGL_location@"; DestDir: "{app}";
