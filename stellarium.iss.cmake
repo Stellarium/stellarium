@@ -62,7 +62,7 @@ Source: "@QtPrintSupport_location@"; DestDir: "{app}";
 @ISS_ICU_LIBS@
 @ISS_QT_PLUGINS@
 ; Stellarium's stuff
-Source: "@CMAKE_INSTALL_PREFIX@\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs
+Source: "@CMAKE_INSTALL_PREFIX@\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs ignoreversion
 
 [Tasks]
 Name: desktopicon; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
