@@ -39,8 +39,65 @@
 \usepackage{xcolor} % Required for specifying colors by name
 \definecolor{ocre}{RGB}{51,153,255} % Define the color used for highlighting throughout the book
 
+\usepackage{color}
+\usepackage{listings}
+
+%----------------------------------------------------------------------------------------
+%	NEW COMMANDS AND ADDITIONS
+%----------------------------------------------------------------------------------------
+
+% Emergency definition as this is not in MiKTeX.
+\makeatletter
+%\DeclareRobustCommand*
+\providecommand\textsubscript[1]{%
+  \@textsubscript{\selectfont#1}}
+\def\@textsubscript#1{%
+  {\m@th\ensuremath{_{\mbox{\fontsize\sf@size\z@#1}}}}}
+\makeatother
+
 \usepackage{newunicodechar}
 \newunicodechar{°}{\degree}
+
+%% GZ Somme commands which can be used later, like version number etc.
+%% Also, some typesetting macros given here once are better than immediate formatting.
+
+\newcommand{\StelVersion}{0.15.0}
+\newcommand{\DocumentEdition}{1}
+
+%% File names. 
+\newcommand{\file}[1]{\texttt{#1}}
+%% Keypress buttons. This is just a font change now, but can be a boxed key or such.
+\newcommand{\key}[1]{\textbf{\textsf{#1}}}
+%% Person names. In some places they have been italicised, in others bold. Make them appear the same with this, and add them to the index:
+\newcommand{\name}[1]{\textsc{#1}\index{#1}}
+%% Some new term that is presented here with emphasis and also goes immediately to the index. 
+\newcommand{\indexterm}[1]{\emph{#1}\index{#1}}
+
+%% A command to show the version number when a feature was introduced in the margin.
+\newcommand{\newFeature}[1]{\marginpar{#1}}
+
+%% A few units. Add what you need in the same style here.
+\newcommand{\cm}{\ensuremath{\,\mathrm{cm}}}
+\newcommand{\mm}{\ensuremath{\,\mathrm{mm}}}
+\newcommand{\km}{\ensuremath{\,\mathrm{km}}}
+\newcommand{\um}{\ensuremath{\,\mathrm{\mu m}}}
+\newcommand{\AU}{\ensuremath{\,\mathrm{AU}}}
+\newcommand{\LY}{\ensuremath{\,\mathrm{LY}}}
+\newcommand{\pc}{\ensuremath{\,\mathrm{pc}}}
+\newcommand{\kpc}{\ensuremath{\,\mathrm{kpc}}}
+\newcommand{\Mpc}{\ensuremath{\,\mathrm{Mpc}}}
+\newcommand{\Hz}{\ensuremath{\,\mathrm{Hz}}}
+\newcommand{\MHz}{\ensuremath{\,\mathrm{MHz}}}
+\newcommand{\mJy}{\ensuremath{\,\mathrm{mJy}}}
+
+\lstnewenvironment{commands}{\lstset{language=sh,basicstyle=\ttfamily\small,%
+                                     backgroundcolor=\color{black!5},frame=leftline,rulecolor=\color{blue},framerule=1pt}%
+                             }{}%
+\lstnewenvironment{configfile}{\lstset{language=sh,basicstyle=\ttfamily\small,%
+                                   backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
+                             }{}%
+
+
 
 %----------------------------------------------------------------------------------------
 %	FONTS
@@ -491,9 +548,9 @@ innerbottommargin=5pt]{cBox}
 %----------------------------------------------------------------------------------------
 
 \usepackage{hyperref}
-%\hypersetup{hidelinks,backref=true,pagebackref=true,hyperindex=true,colorlinks=false,breaklinks=true,urlcolor= ocre,bookmarks=true,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
+\hypersetup{hidelinks,backref=true,pagebackref=true,hyperindex=true,colorlinks=false,breaklinks=true,urlcolor= ocre,bookmarks=true,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
 %% GZ Maybe in some other style, but links should be visible. 
-\hypersetup{backref=true,pagebackref=true,hyperindex=true,colorlinks=true,breaklinks=true,urlcolor=blue,bookmarks=true,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
+%\hypersetup{backref=true,pagebackref=true,hyperindex=true,colorlinks=true,breaklinks=true,urlcolor=blue,bookmarks=true,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
 \usepackage{bookmark}
 \bookmarksetup{
 open,
