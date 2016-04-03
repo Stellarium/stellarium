@@ -92,7 +92,7 @@ void BookmarksDialog::setBookmarksHeaderNames()
 {
 	QStringList headerStrings;
 	headerStrings << "UUID"; // Hide the column
-	headerStrings << q_("Name of object");
+	headerStrings << q_("English name of object");
 	headerStrings << q_("Date and Time");	
 	headerStrings << q_("Location of observer");
 
@@ -130,8 +130,8 @@ void BookmarksDialog::addBookmarkButtonPressed()
 	const QList<StelObjectP>& selected = objectMgr->getSelectedObject();
 	if (!selected.isEmpty())
 	{
-		QString name = selected[0]->getNameI18n();
-		if (name.isEmpty() && selected[0]->getType()=="Nebula")
+		QString name = selected[0]->getEnglishName();
+		if (selected[0]->getType()=="Nebula")
 			name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
 
 		if (!name.isEmpty()) // Don't allow adding objects without name!
@@ -221,7 +221,7 @@ void BookmarksDialog::goToBookmark(QString uuid)
 		}
 
 		objectMgr->unSelect();
-		if (objectMgr->findAndSelectI18n(bm.name) || objectMgr->findAndSelect(bm.name))
+		if (objectMgr->findAndSelect(bm.name))
 		{
 			const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 			if (!newSelected.empty())
