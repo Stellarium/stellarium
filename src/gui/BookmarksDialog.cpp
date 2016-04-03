@@ -197,7 +197,7 @@ void BookmarksDialog::clearBookmarksButtonPressed()
 
 void BookmarksDialog::goToBookmarkButtonPressed()
 {
-	goToBookmark(bookmarksListModel->index(ui->bookmarksTreeView->currentIndex().row(), 0).data().toString());
+	goToBookmark(bookmarksListModel->index(ui->bookmarksTreeView->currentIndex().row(), ColumnUUID).data().toString());
 }
 
 void BookmarksDialog::selectCurrentBookmark(const QModelIndex &modelIdx)
