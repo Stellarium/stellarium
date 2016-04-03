@@ -92,7 +92,7 @@ void BookmarksDialog::setBookmarksHeaderNames()
 {
 	QStringList headerStrings;
 	headerStrings << "UUID"; // Hide the column
-	headerStrings << q_("English name of object");
+	headerStrings << q_("Object");
 	headerStrings << q_("Date and Time");	
 	headerStrings << q_("Location of observer");
 
@@ -180,7 +180,7 @@ void BookmarksDialog::addBookmarkButtonPressed()
 void BookmarksDialog::removeBookmarkButtonPressed()
 {
 	int number = ui->bookmarksTreeView->currentIndex().row();
-	QString uuid = bookmarksListModel->index(number, 0).data().toString();
+	QString uuid = bookmarksListModel->index(number, ColumnUUID).data().toString();
 	bookmarksListModel->removeRow(number);
 	bookmarksCollection.remove(uuid);
 	saveBookmarks();
