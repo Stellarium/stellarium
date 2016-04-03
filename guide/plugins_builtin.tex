@@ -81,8 +81,7 @@ url & string & URL of bright novae catalog \tabularnewline
 \subsection{Format of bright novae catalog}
 \label{sec:plugins:BrightNovae:format}
 
-To add a new nova, open a new line after line 5 and paste the following,
-note commas and brackets, they are important:
+To add a new nova, open a new line after line 5 and paste the following, note commas and brackets, they are important:
 
 \begin{configfile}
 "Nova designation":
@@ -154,6 +153,111 @@ Note that when you first enable compass marks, the cardinal points will
 be turned off. You can have both active at once, but there is a small
 bug which means you have to press \key{Q} \emph{two times} to
 re-enable cardinal points after enabling the compass markings.
+
+\section{Pulsars Plugin}
+\label{sec:plugins:Pulsars}
+
+This plugin plots the position of various pulsars, with object information about each one. Pulsar data is derived from \textit{The ATNF Pulsar Catalogue} (Manchester, R. N., Hobbs, G. B., Teoh, A. \& Hobbs, M., Astron. J., 129, 1993-2006 (2005) (\href{http://arxiv.org/abs/astro-ph/0412641}{astro-ph/0412641})).
+
+\begin{figure}[h]
+%\centering\includegraphics[scale=0.6]{NovaCygni1975wiki.jpg}
+\includegraphics[width=\textwidth]{psr_j0332_5434.jpg}
+\label{fig:PSR_J0332-5434}
+\caption{PSR J0332-5434}
+\end{figure}
+
+\subsection{Using the Pulsars plugin}
+\label{sec:plugins:Pulsars:using}
+
+\begin{enumerate}
+\item Enable the tool by clicking the tool-bar button ``Load at startup''
+\item Find the pulsar by their designation (\emph{PSR J0437-4715} as example)
+\end{enumerate}
+
+\subsection{Section \big[Pulsars\big] in config.ini file}
+\label{sec:plugins:Pulsars:config}
+
+To add a new nova, open a new line after line 5 and paste the following, note commas and brackets, they are important:
+
+\begin{longtabu} to \textwidth {l|l|X}
+\toprule
+\emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
+\midrule
+last\_update & string & Date and time of last update\tabularnewline
+\midrule
+update\_frequency\_days & int & Frequency of updates, in days\tabularnewline
+\midrule
+updates\_enable & bool & Enable updates of pulsars catalog from Internet \tabularnewline
+\midrule
+url & string & URL of pulsars catalog \tabularnewline
+\midrule
+enable\_at\_startup & bool & Enable displaying of pulsars at startup of planetarium \tabularnewline
+\midrule
+distribution\_enabled & bool & Enable distribution mode for the pulsars \tabularnewline
+\midrule
+flag\_show\_pulsars\_button & bool & Enable displaying pulsars button on toolbar \tabularnewline
+\midrule
+marker\_color & R,G,B & Color for marker of the pulsars \tabularnewline
+\midrule
+glitch\_color & R,G,B & Color for marker of the pulsars with glitches \tabularnewline
+\midrule
+use\_separate\_colors & bool & Use separate colors for different types of the pulsars \tabularnewline
+\bottomrule
+\end{longtabu}
+
+\subsection{Format of pulsars catalog}
+\label{sec:plugins:Pulsars:format}
+
+To add a new nova, open a new line after line 5 and paste the following, note commas and brackets, they are important:
+
+\newpage
+
+\begin{configfile}
+"Pulsar designation":
+{
+    "RA": "Right ascension (J2000)",
+    "DE": "Declination (J2000)",
+    "notes": "type of pulsar",
+    "distance": value of distance based on electron density 
+                model (kpc),
+    "period": value of barycentric period of the pulsar (s),
+    "parallax": value of annular parallax (mas),
+    "bperiod": value of binary period of pulsar (days),
+    "pderivative": value of time derivative of barcycentric 
+                   period,
+    "dmeasure": value of dispersion measure (cm^-3 pc),
+    "frequency": value of barycentric rotation frequency (Hz),
+    "pfrequency": value of time derivative of barycentric 
+                  rotation frequency (s^-2)
+    "eccentricity": value of eccentricity,                   
+    "w50": value of profile width at 50% of peak (ms),
+    "s400": value of time averaged flux density at 
+            400 MHz (mJy),
+    "s600": value of time averaged flux density at 
+            600 MHz (mJy),
+    "s1400": value of time averaged flux density at 
+             1400 MHz (mJy)    
+},
+
+\end{configfile}
+
+\newpage
+\noindent For example, the record for \textbf{PSR J0014+4746} looks like:
+\begin{configfile}
+"PSR J0014+4746":
+{
+    "distance": 1.82,
+    "dmeasure": 30.85,
+    "frequency": 0.805997239145,
+    "pfrequency": -3.6669E-16,
+    "w50": 88.7,
+    "s400": 14,
+    "s600": 9,
+    "s1400": 3,
+    "RA": "00h14m17.75s",
+    "DE": "47d46m33.4s"
+},
+\end{configfile}
 
 \section{Text User Interface Plugin}
 \label{sec:plugins:TUI}
