@@ -128,6 +128,10 @@ public:
 
 	void setProperName(QString name) { englishName = name; }
 
+	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced)
+	//! @return a designation
+	QString getDSODesignation();
+
 private:
 	friend struct DrawNebulaFuncObject;
 	

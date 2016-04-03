@@ -740,6 +740,21 @@ NebulaP NebulaMgr::searchCed(QString Ced)
 	return NebulaP();
 }
 
+QString NebulaMgr::getLatestSelectedDSODesignation()
+{
+	QString result = "";
+
+	const QList<StelObjectP> selected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Nebula");
+	if (!selected.empty())
+	{
+		foreach (const NebulaP& n, dsoArray)
+			if (n==selected[0])
+				result = n->getDSODesignation(); // Get designation for latest selected DSO
+	}
+
+	return result;
+}
+
 void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool decimal=false)
 {
 	QFile dsoIn(in);
