@@ -151,7 +151,10 @@ void BookmarksDialog::addBookmarkButtonPressed()
 			if (locationFlag)
 			{
 				StelLocation loc = core->getCurrentLocation();
-				Location = QString("%1, %2").arg(loc.name, loc.country);
+				if (loc.name.isEmpty())
+					Location = QString("%1, %2").arg(loc.latitude).arg(loc.longitude);
+				else
+					Location = QString("%1, %2").arg(loc.name).arg(loc.country);
 			}
 
 			int lastRow = bookmarksListModel->rowCount();
