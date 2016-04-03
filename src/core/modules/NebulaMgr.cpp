@@ -502,12 +502,13 @@ NebulaP NebulaMgr::search(const QString& name)
 	}
 
 	// If no match found, try search by catalog reference
-	static QRegExp catNumRx("^(M|NGC|IC|C|B|VDB|RCW|LDN|LBN|CR|MEL|PGC|UGC)\\s*(\\d+)$");
+	static QRegExp catNumRx("^(DSO|M|NGC|IC|C|B|VDB|RCW|LDN|LBN|CR|MEL|PGC|UGC)\\s*(\\d+)$");
 	if (catNumRx.exactMatch(uname))
 	{
 		QString cat = catNumRx.capturedTexts().at(1);
 		int num = catNumRx.capturedTexts().at(2).toInt();
 
+		if (cat == "DSO") return searchDSO(num); // special case
 		if (cat == "M") return searchM(num);
 		if (cat == "NGC") return searchNGC(num);
 		if (cat == "IC") return searchIC(num);
@@ -1340,6 +1341,18 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 {
 	QString objw = name.toUpper();
 
+	// Search by DSO numbers (possible formats are "DSO31" or "DSO 31")
+	if (objw.startsWith("DSO"))
+	{
+		static QRegExp catNumRx("^(DSO)\\s*(\\d+)$");
+		if (catNumRx.exactMatch(objw))
+		{
+			int num = catNumRx.capturedTexts().at(2).toInt();
+			if (dsoIndex.contains(num))
+				return qSharedPointerCast<StelObject>(dsoIndex[num]);
+		}
+	}
+
 	// Search by NGC numbers (possible formats are "NGC31" or "NGC 31")
 	if (objw.startsWith("NGC"))
 	{
@@ -1842,7 +1855,21 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	QStringList result;
 	if (maxNbItem==0) return result;
 
-	 QString objw = objPrefix.toUpper();
+	QString objw = objPrefix.toUpper();
+
+	// Search by DSO numbers (possible formats are "DSO31" or "DSO 31")
+	if (objw.size()>=1 && objw.left(3)=="DSO")
+	{
+		static QRegExp catNumRx("^(DSO)\\s*(\\d+)$");
+		if (catNumRx.exactMatch(objw))
+		{
+			int num = catNumRx.capturedTexts().at(2).toInt();
+			if (dsoIndex.contains(num))
+				result << QString("DSO %1").arg(num);
+		}
+	}
+
+
 	// Search by Messier objects number (possible formats are "M31" or "M 31")
 	if (objw.size()>=1 && objw.left(1)=="M" && objw.left(2)!="ME")
 	{
