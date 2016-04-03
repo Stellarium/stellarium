@@ -24,6 +24,7 @@
 #include <QStandardItemModel>
 #include <QMap>
 #include <QDir>
+#include <QUuid>
 
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
@@ -32,10 +33,7 @@ class Ui_bookmarksDialogForm;
 
 struct bookmark
 {
-	int number;
 	QString name;
-	double RA;
-	double Dec;
 	QString jd;
 	QString location;
 };
@@ -61,16 +59,12 @@ private slots:
 	void addBookmarkButtonPressed();
 	void removeBookmarkButtonPressed();
 	void goToBookmarkButtonPressed();
-
-	void getCurrentObjectInfo();
-	void getCenterInfo();
+	void clearBookmarksButtonPressed();
 
 private:
 	enum BookmarksColumns {
-		ColumnSlot = 0,		//! slot number
+		ColumnUUID,		//! UUID of bookmark
 		ColumnName,		//! name of bookmark
-		ColumnRA,		//! right ascension (J2000.0)
-		ColumnDec,		//! declination (J2000.0)
 		ColumnDate,		//! date and time (optional)
 		ColumnLocation,		//! location (optional)
 		ColumnCount		//! total number of columns
@@ -86,7 +80,7 @@ private:
 	//! Update header names for bookmarks table
 	void setBookmarksHeaderNames();
 
-	void addModelRow(int number, QString name, QString RA, QString Dec, QString date = "", QString Location = "");
+	void addModelRow(int number, QString uuid, QString name, QString date = "", QString Location = "");
 
 	void loadBookmarks();
 	void saveBookmarks();
