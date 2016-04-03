@@ -650,41 +650,47 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 
 	QString str = getNameI18n();
 	if (str.isEmpty())
-	{
-		// On screen label: one only, priority as given here.
-		if (catalogFilters&CatM && M_nb>0)
-			str = QString("M %1").arg(M_nb);
-		else if (catalogFilters&CatC && C_nb>0)
-			str = QString("C %1").arg(C_nb);
-		else if (catalogFilters&CatNGC && NGC_nb>0)
-			str = QString("NGC %1").arg(NGC_nb);
-		else if (catalogFilters&CatIC && IC_nb>0)
-			str = QString("IC %1").arg(IC_nb);
-		else if (catalogFilters&CatB && B_nb>0)
-			str = QString("B %1").arg(B_nb);
-		else if (catalogFilters&CatSh2 && Sh2_nb>0)
-			str = QString("Sh 2-%1").arg(Sh2_nb);
-		else if (catalogFilters&CatVdB && VdB_nb>0)
-			str = QString("VdB %1").arg(VdB_nb);
-		else if (catalogFilters&CatRCW && RCW_nb>0)
-			str = QString("RCW %1").arg(RCW_nb);
-		else if (catalogFilters&CatLDN && LDN_nb>0)
-			str = QString("LDN %1").arg(LDN_nb);
-		else if (catalogFilters&CatLBN && LBN_nb > 0)
-			str = QString("LBN %1").arg(LBN_nb);
-		else if (catalogFilters&CatCr && Cr_nb > 0)
-			str = QString("Cr %1").arg(Cr_nb);
-		else if (catalogFilters&CatMel && Mel_nb > 0)
-			str = QString("Mel %1").arg(Mel_nb);
-		else if (catalogFilters&CatPGC && PGC_nb > 0)
-			str = QString("PGC %1").arg(PGC_nb);
-		else if (catalogFilters&CatUGC && UGC_nb > 0)
-			str = QString("UGC %1").arg(UGC_nb);
-		else if (catalogFilters&CatCed && !Ced_nb.isEmpty())
-			str = QString("Ced %1").arg(Ced_nb);
-	}
+		str = getDSODesignation();
 
 	sPainter.drawText(XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);
+}
+
+QString Nebula::getDSODesignation()
+{
+	QString str = "";
+	// Get designation for DSO with priority as given here.
+	if (catalogFilters&CatM && M_nb>0)
+		str = QString("M %1").arg(M_nb);
+	else if (catalogFilters&CatC && C_nb>0)
+		str = QString("C %1").arg(C_nb);
+	else if (catalogFilters&CatNGC && NGC_nb>0)
+		str = QString("NGC %1").arg(NGC_nb);
+	else if (catalogFilters&CatIC && IC_nb>0)
+		str = QString("IC %1").arg(IC_nb);
+	else if (catalogFilters&CatB && B_nb>0)
+		str = QString("B %1").arg(B_nb);
+	else if (catalogFilters&CatSh2 && Sh2_nb>0)
+		str = QString("Sh 2-%1").arg(Sh2_nb);
+	else if (catalogFilters&CatVdB && VdB_nb>0)
+		str = QString("VdB %1").arg(VdB_nb);
+	else if (catalogFilters&CatRCW && RCW_nb>0)
+		str = QString("RCW %1").arg(RCW_nb);
+	else if (catalogFilters&CatLDN && LDN_nb>0)
+		str = QString("LDN %1").arg(LDN_nb);
+	else if (catalogFilters&CatLBN && LBN_nb > 0)
+		str = QString("LBN %1").arg(LBN_nb);
+	else if (catalogFilters&CatCr && Cr_nb > 0)
+		str = QString("Cr %1").arg(Cr_nb);
+	else if (catalogFilters&CatMel && Mel_nb > 0)
+		str = QString("Mel %1").arg(Mel_nb);
+	else if (catalogFilters&CatPGC && PGC_nb > 0)
+		str = QString("PGC %1").arg(PGC_nb);
+	else if (catalogFilters&CatUGC && UGC_nb > 0)
+		str = QString("UGC %1").arg(UGC_nb);
+	else if (catalogFilters&CatCed && !Ced_nb.isEmpty())
+		str = QString("Ced %1").arg(Ced_nb);
+
+	return str;
 }
 
 void Nebula::readDSO(QDataStream &in)

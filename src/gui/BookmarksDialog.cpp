@@ -29,6 +29,7 @@
 #include "StelFileMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "AngleSpinBox.hpp"
+#include "NebulaMgr.hpp"
 
 #include "BookmarksDialog.hpp"
 #include "ui_bookmarksDialog.h"
@@ -129,6 +130,9 @@ void BookmarksDialog::addBookmarkButtonPressed()
 	if (!selected.isEmpty())
 	{
 		QString name = selected[0]->getNameI18n();
+		if (name.isEmpty() && selected[0]->getType()=="Nebula")
+			name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
+
 		//TODO: Include a special case for DSO objects without proper names
 		if (!name.isEmpty())
 		{
