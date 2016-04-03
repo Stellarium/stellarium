@@ -61,6 +61,8 @@ private slots:
 	void goToBookmarkButtonPressed();
 	void clearBookmarksButtonPressed();
 
+	void selectCurrentBookmark(const QModelIndex &modelIdx);
+
 private:
 	enum BookmarksColumns {
 		ColumnUUID,		//! UUID of bookmark
@@ -84,6 +86,7 @@ private:
 
 	void loadBookmarks();
 	void saveBookmarks();
+	void goToBookmark(QString uuid);
 };
 
 

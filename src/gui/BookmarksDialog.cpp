@@ -73,6 +73,7 @@ void BookmarksDialog::createDialogContent()
 	connect(ui->removeBookmarkButton, SIGNAL(clicked()), this, SLOT(removeBookmarkButtonPressed()));
 	connect(ui->goToButton, SIGNAL(clicked()), this, SLOT(goToBookmarkButtonPressed()));
 	connect(ui->clearBookmarksButton, SIGNAL(clicked()), this, SLOT(clearBookmarksButtonPressed()));
+	connect(ui->bookmarksTreeView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentBookmark(QModelIndex)));
 
 	//Initializing the list of bookmarks
 	bookmarksListModel->setColumnCount(ColumnCount);
@@ -196,8 +197,16 @@ void BookmarksDialog::clearBookmarksButtonPressed()
 
 void BookmarksDialog::goToBookmarkButtonPressed()
 {
-	QString uuid = bookmarksListModel->index(ui->bookmarksTreeView->currentIndex().row(), 0).data().toString();
+	goToBookmark(bookmarksListModel->index(ui->bookmarksTreeView->currentIndex().row(), 0).data().toString());
+}
 
+void BookmarksDialog::selectCurrentBookmark(const QModelIndex &modelIdx)
+{
+	goToBookmark(modelIdx.sibling(modelIdx.row(), ColumnUUID).data().toString());
+}
+
+void BookmarksDialog::goToBookmark(QString uuid)
+{
 	if (!uuid.isEmpty())
 	{
 		bookmark bm = bookmarksCollection.value(uuid);
