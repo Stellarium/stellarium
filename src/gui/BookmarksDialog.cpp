@@ -90,7 +90,7 @@ void BookmarksDialog::createDialogContent()
 void BookmarksDialog::setBookmarksHeaderNames()
 {
 	QStringList headerStrings;
-	headerStrings << "#";
+	headerStrings << "UUID"; // Hide the column
 	headerStrings << q_("Name of object");
 	headerStrings << q_("Date and Time");	
 	headerStrings << q_("Location of observer");
@@ -133,8 +133,7 @@ void BookmarksDialog::addBookmarkButtonPressed()
 		if (name.isEmpty() && selected[0]->getType()=="Nebula")
 			name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
 
-		//TODO: Include a special case for DSO objects without proper names
-		if (!name.isEmpty())
+		if (!name.isEmpty()) // Don't allow adding objects without name!
 		{
 			bool dateTimeFlag = ui->dateTimeCheckBox->isChecked();
 			bool locationFlag = ui->locationCheckBox->isChecked();
@@ -299,7 +298,7 @@ void BookmarksDialog::saveBookmarks()
 
 	//Convert the tree to JSON
 	StelJsonParser::write(bmList, &jsonFile);
-	jsonFile.flush();//Is this necessary?
+	jsonFile.flush();
 	jsonFile.close();
 
 }
