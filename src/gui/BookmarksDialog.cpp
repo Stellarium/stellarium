@@ -264,12 +264,14 @@ void BookmarksDialog::loadBookmarks()
 
 		QString JDs = "";
 
-		bm.name		= bookmarkData.value("name").toString();
-		bm.nameI18n	= bookmarkData.value("nameI18n").toString();
-		QString JD	= bookmarkData.value("jd").toString();
+		bm.name = bookmarkData.value("name").toString();
+		QString nameI18n = bookmarkData.value("nameI18n").toString();
+		if (!nameI18n.isEmpty())
+			bm.nameI18n = nameI18n;
+		QString JD = bookmarkData.value("jd").toString();
 		if (!JD.isEmpty())
 		{
-			bm.jd	= JD;
+			bm.jd = JD;
 			JDs = StelUtils::julianDayToISO8601String(JD.toDouble() + StelUtils::getGMTShiftFromQT(JD.toDouble())/24.).replace("T", " ");
 		}
 		QString Location = bookmarkData.value("location").toString();
