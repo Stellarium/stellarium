@@ -83,7 +83,7 @@ void BookmarksDialog::createDialogContent()
 	ui->bookmarksTreeView->header()->setSectionsMovable(false);
 	ui->bookmarksTreeView->header()->setSectionResizeMode(ColumnName, QHeaderView::ResizeToContents);
 	ui->bookmarksTreeView->header()->setStretchLastSection(true);
-	ui->bookmarksTreeView->hideColumn(0);
+	ui->bookmarksTreeView->hideColumn(ColumnUUID);
 
 	loadBookmarks();
 }
@@ -93,13 +93,14 @@ void BookmarksDialog::setBookmarksHeaderNames()
 	QStringList headerStrings;
 	headerStrings << "UUID"; // Hide the column
 	headerStrings << q_("Object");
+	headerStrings << q_("Localized name");
 	headerStrings << q_("Date and Time");	
 	headerStrings << q_("Location of observer");
 
 	bookmarksListModel->setHorizontalHeaderLabels(headerStrings);
 }
 
-void BookmarksDialog::addModelRow(int number, QString uuid, QString name, QString Date, QString Location)
+void BookmarksDialog::addModelRow(int number, QString uuid, QString name, QString nameI18n, QString Date, QString Location)
 {
 	QStandardItem* tempItem = 0;
 
@@ -111,6 +112,10 @@ void BookmarksDialog::addModelRow(int number, QString uuid, QString name, QStrin
 	tempItem->setEditable(false);
 	bookmarksListModel->setItem(number, ColumnName, tempItem);
 
+	tempItem = new QStandardItem(nameI18n);
+	tempItem->setEditable(false);
+	bookmarksListModel->setItem(number, ColumnNameI18n, tempItem);
+
 	tempItem = new QStandardItem(Date);
 	tempItem->setEditable(false);
 	bookmarksListModel->setItem(number, ColumnDate, tempItem);
@@ -121,7 +126,7 @@ void BookmarksDialog::addModelRow(int number, QString uuid, QString name, QStrin
 
 	for(int i = 0; i < ColumnCount; ++i)
 	{
-	    ui->bookmarksTreeView->resizeColumnToContents(i);
+		ui->bookmarksTreeView->resizeColumnToContents(i);
 	}
 }
 
@@ -130,7 +135,8 @@ void BookmarksDialog::addBookmarkButtonPressed()
 	const QList<StelObjectP>& selected = objectMgr->getSelectedObject();
 	if (!selected.isEmpty())
 	{
-		QString name = selected[0]->getEnglishName();
+		QString name	 = selected[0]->getEnglishName();
+		QString nameI18n = selected[0]->getNameI18n();
 		if (selected[0]->getType()=="Nebula")
 			name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
 
@@ -161,10 +167,12 @@ void BookmarksDialog::addBookmarkButtonPressed()
 			int lastRow = bookmarksListModel->rowCount();
 
 			QString uuid = QUuid::createUuid().toString();
-			addModelRow(lastRow, uuid, name, JDs, Location);
+			addModelRow(lastRow, uuid, name, nameI18n, JDs, Location);
 
 			bookmark bm;
 			bm.name	= name;
+			if (!nameI18n.isEmpty())
+				bm.nameI18n = nameI18n;
 			if (!JDs.isEmpty())
 				bm.jd	= QString::number(JD, 'f', 6);
 			if (!Location.isEmpty())
@@ -191,7 +199,7 @@ void BookmarksDialog::clearBookmarksButtonPressed()
 	bookmarksListModel->clear();
 	bookmarksCollection.clear();
 	setBookmarksHeaderNames();
-	ui->bookmarksTreeView->hideColumn(0);
+	ui->bookmarksTreeView->hideColumn(ColumnUUID);
 	saveBookmarks();
 }
 
@@ -257,6 +265,7 @@ void BookmarksDialog::loadBookmarks()
 		QString JDs = "";
 
 		bm.name		= bookmarkData.value("name").toString();
+		bm.nameI18n	= bookmarkData.value("nameI18n").toString();
 		QString JD	= bookmarkData.value("jd").toString();
 		if (!JD.isEmpty())
 		{
@@ -268,7 +277,7 @@ void BookmarksDialog::loadBookmarks()
 			bm.location = Location;
 
 		bookmarksCollection.insert(bookmarkKey, bm);
-		addModelRow(i, bookmarkKey, bm.name, JDs, Location);
+		addModelRow(i, bookmarkKey, bm.name, bm.nameI18n, JDs, Location);
 		i++;
 	}
 }
@@ -297,6 +306,8 @@ void BookmarksDialog::saveBookmarks()
 	    bookmark sp = i.value();
 	    QVariantMap bm;
 	    bm.insert("name",	sp.name);
+	    if (!sp.nameI18n.isEmpty())
+		    bm.insert("nameI18n", sp.nameI18n);
 	    if (!sp.jd.isEmpty())
 		    bm.insert("jd", sp.jd);
 	    if (!sp.location.isEmpty())

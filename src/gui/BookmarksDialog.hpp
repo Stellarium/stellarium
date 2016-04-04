@@ -34,6 +34,7 @@ class Ui_bookmarksDialogForm;
 struct bookmark
 {
 	QString name;
+	QString nameI18n;
 	QString jd;
 	QString location;
 };
@@ -66,7 +67,8 @@ private slots:
 private:
 	enum BookmarksColumns {
 		ColumnUUID,		//! UUID of bookmark
-		ColumnName,		//! name of bookmark
+		ColumnName,		//! name or designation of object
+		ColumnNameI18n,		//! Localized name of object
 		ColumnDate,		//! date and time (optional)
 		ColumnLocation,		//! location (optional)
 		ColumnCount		//! total number of columns
@@ -82,7 +84,7 @@ private:
 	//! Update header names for bookmarks table
 	void setBookmarksHeaderNames();
 
-	void addModelRow(int number, QString uuid, QString name, QString date = "", QString Location = "");
+	void addModelRow(int number, QString uuid, QString name, QString nameI18n = "", QString date = "", QString Location = "");
 
 	void loadBookmarks();
 	void saveBookmarks();
