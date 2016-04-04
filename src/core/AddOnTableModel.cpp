@@ -27,6 +27,9 @@ AddOnTableModel::AddOnTableModel(QHash<QString, AddOn*> addons, QObject* parent)
 	: QAbstractTableModel(parent)
 	, m_addons(addons)
 {
+	// remove the catalog of add-ons from the table model
+	m_addons.remove("addons");
+
 	m_iColumns << Title << Type << Checkbox;
 }
 
@@ -49,9 +52,7 @@ QVariant AddOnTableModel::data(const QModelIndex &index, int role) const
 		return Qt::AlignCenter;
 	}
 
-	if (!index.isValid() ||
-		index.row() < 0 ||
-		role != Qt::DisplayRole)
+	if (!index.isValid() || index.row() < 0 || role != Qt::DisplayRole)
 	{
 		return QVariant();
 	}
