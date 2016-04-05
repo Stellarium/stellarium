@@ -1,17 +1,20 @@
-\chapterimage{chapter-t1-bg} % Chapter heading image
+%\chapterimage{chapter-t1-bg} % Chapter heading image
 
-\chapter{Stellarium Reference}\label{stellarium-reference}
-
-\section{Configuration File}\label{configuration-file}
-See \href{Advanced_Use\#The_Main_Configuration_File}{Advanced Use, The
+\chapter{Configuration File}
+\label{ch:ConfigurationFile}
+See \ref{ch:AdvancedUse:TheMainConfigurationFile}{Advanced Use, The
 Main Configuration File} for information about this file, including its
-default installed location, name, and command line options that can
-effect how it is processed.
+default installed location, and command line options that can
+affect how it is processed.
 
-Deprecate parameters marked by gray background. Possible new parameters
-marked by yellow background.
+%Deprecated parameters are marked by gray background. 
+%Possible new parameters are marked by yellow background.
+%% GZ This is no longer true. Reactivate somehow? 
 
-\subsection{Section \big[astro\big]}\label{section-astro}
+The file \file{config.ini} (or a file which you can load instead with the \file{-\/-config <file>} option) is structured into the following parts.
+
+\section{\big[astro\big]}
+\label{sec:config.ini:astro}
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
@@ -131,231 +134,181 @@ objects. Default value: \emph{false}.\tabularnewline
 \bottomrule
 \end{longtabu}
 
-\subsection{Section \big[color\big]}\label{section-color}
+\section{\big[color\big]}
+\label{sec:config.ini:color}
+
+This section defines the RGB colors for the various objects, lines,
+grids, labels etc. Values are given in float from 0 to
+1. e.g. \emph{1.0,1.0,1.0} for white, or \emph{1,0,0} for red. Leave
+no whitespace between the numbers!
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
 \emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
 \midrule
-default\_color & float R,G,B & Sets the default
-colour in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0}
-for white. Default value: \emph{0.5,0.5,0.7}. \tabularnewline
+default\_color & float R,G,B & default colour.  Default value: \emph{0.5,0.5,0.7}. \tabularnewline
 \midrule
-azimuthal\_color & float R,G,B & Sets the
-colour of the azimuthal grid in RGB values, where 1 is the maximum, e.g.
-\emph{1.0,1.0,1.0} for white. Default value: \emph{0.3,0.2,0.1}.\tabularnewline
+azimuthal\_color & float R,G,B & colour of the azimuthal grid. Default value: \emph{0.3,0.2,0.1}.\tabularnewline
 \midrule
-equatorial\_color & float R,G,B & Sets the
-colour of the equatorial grid (on date) in RGB values, where 1 is the
-maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.2,0.3,0.8}.\tabularnewline
+equatorial\_color & float R,G,B & colour of the equatorial grid (of date). Default value: \emph{0.2,0.3,0.8}.\tabularnewline
 \midrule
-equatorial\_J2000\_color & float R,G,B & Sets
-the colour of the equatorial grid (J2000) in RGB values, where 1 is the
-maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.1,0.1,0.5 }.\tabularnewline
+equatorial\_J2000\_color & float R,G,B & colour of the equatorial grid (J2000). Default value: \emph{0.1,0.1,0.5}.\tabularnewline
 \midrule
-galactic\_color & float R,G,B & Sets the colour
-of the galactic grid in RGB values, where 1 is the maximum, e.g.
-\emph{1.0,1.0,1.0} for white. Default value: \emph{0.0,0.3,0.2}.\tabularnewline
+galactic\_color & float R,G,B & colour of the galactic grid. Default value: \emph{0.0,0.3,0.2}.\tabularnewline
 \midrule
-galactic\_equator\_color & float R,G,B & Sets the
-colour of the galactic equator line in RGB values, where 1 is the
-maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.5,0.3,0.1}. \tabularnewline
+galactic\_equator\_color & float R,G,B & colour of the galactic equator line. Default value: \emph{0.5,0.3,0.1}. \tabularnewline
 \midrule
-equator\_color & float R,G,B & Sets the
-colour of the equatorial line in RGB values, where 1 is the maximum,
-e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.3,0.5,1.0}. \tabularnewline
+equator\_color & float R,G,B & colour of the equatorial line. Default value: \emph{0.3,0.5,1.0}. \tabularnewline
 \midrule
-ecliptic\_color & float R,G,B & Sets the
-colour of the ecliptic line (J2000) in RGB values, where 1 is the
-maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.9,0.6,0.2}. \tabularnewline
+ecliptic\_color & float R,G,B & colour of the ecliptic line (J2000). Default value: \emph{0.9,0.6,0.2}. \tabularnewline
 \midrule
-ecliptic\_J2000\_color & float R,G,B & Sets the
-colour of the ecliptic grid (J2000) in RGB values, where 1 is the
-maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.7,0.2,0.2}. \tabularnewline
+ecliptic\_J2000\_color & float R,G,B & colour of the ecliptic grid (J2000). Default value: \emph{0.7,0.2,0.2}. \tabularnewline
 \midrule
-meridian\_color & float R,G,B & Sets the
-colour of the meridian line in RGB values, where 1 is the maximum, e.g.
-\emph{1.0,1.0,1.0} for white. Default value: \emph{0.2,0.6,0.2}. \tabularnewline
+meridian\_color & float R,G,B & colour of the meridian line. Default value: \emph{0.2,0.6,0.2}. \tabularnewline
 \midrule
-horizon\_color & float R,G,B & Sets the colour
-of the horizon line in RGB values, where 1 is the maximum, e.g.
-\emph{1.0,1.0,1.0} for white. Default value: \emph{0.2,0.6,0.2}. \tabularnewline
+horizon\_color & float R,G,B & colour of the horizon line. Default value: \emph{0.2,0.6,0.2}. \tabularnewline
 \midrule
-const\_lines\_color & float R,G,B & Sets the
-colour of the constellation lines in RGB values, where 1 is the maximum,
-e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.2,0.2,0.6}. \tabularnewline
+const\_lines\_color & float R,G,B & colour of the constellation lines. Default value: \emph{0.2,0.2,0.6}. \tabularnewline
 \midrule
-const\_names\_color & float R,G,B & Sets the
-colour of the constellation names in RGB values, where 1 is the maximum,
-e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.4,0.6,0.9}. \tabularnewline
+const\_names\_color & float R,G,B & colour of the constellation names. Default value: \emph{0.4,0.6,0.9}. \tabularnewline
 \midrule
-const\_boundary\_color & float R,G,B & Sets
-the colour of the constellation boundaries in RGB values, where 1 is the
-maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.3,0.1,0.1}. \tabularnewline
+const\_boundary\_color & float R,G,B & colour of the constellation boundaries. Default value: \emph{0.3,0.1,0.1}. \tabularnewline
 \midrule
-star\_label\_color & float R,G,B & Sets the
-colour of the star labels in RGB values, where 1 is the maximum, e.g.
-\emph{1.0,1.0,1.0} for white. Default value: \emph{0.4,0.3,0.5}. \tabularnewline
+star\_label\_color & float R,G,B & colour of the star labels. Default value: \emph{0.4,0.3,0.5}. \tabularnewline
 \midrule
-cardinal\_color & float R,G,B & Sets the
-colour of the cardinal points in RGB values, where 1 is the maximum,
-e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.8,0.2,0.1}. \tabularnewline
+cardinal\_color & float R,G,B &  colour of the cardinal points. Default value: \emph{0.8,0.2,0.1}. \tabularnewline
 \midrule
-planet\_names\_color & float R,G,B & Sets the
-colour of the planet names in RGB values, where 1 is the maximum, e.g.
-\emph{1.0,1.0,1.0} for white. Default value: \emph{0.5,0.5,0.7}. \tabularnewline
+planet\_names\_color & float R,G,B & colour of the planet names. Default value: \emph{0.5,0.5,0.7}. \tabularnewline
 \midrule
-planet\_orbits\_color & float R,G,B & Sets
-the colour of the orbits in RGB values, where 1 is the maximum, e.g.
-\emph{1.0,1.0,1.0} for white. Default value: \emph{0.7,0.2,0.2}. \tabularnewline
+planet\_orbits\_color & float R,G,B & colour of the orbits. Default value: \emph{0.7,0.2,0.2}. \tabularnewline
 \midrule
-planet\_pointers\_color & float R,G,B & Sets the
-colour of the planet pointers in RGB values, where 1 is the maximum,
-e.g. 1.0,1.0,1.0 for white. Default value: \emph{1.0,0.3,0.3}. \tabularnewline
+planet\_pointers\_color & float R,G,B & colour of the planet pointers. Default value: \emph{1.0,0.3,0.3}. \tabularnewline
 \midrule
-object\_trails\_color & float R,G,B & Sets
-the colour of the planet trails in RGB values, where 1 is the maximum,
-e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{1.0,0.7,0.0}. \tabularnewline
+object\_trails\_color & float R,G,B & colour of the planet trails. Default value: \emph{1.0,0.7,0.0}. \tabularnewline
 \midrule
-telescope\_circle\_color & float R,G,B & Sets
-the colour of the telescope location indicator. RGB values, where 1 is
-the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.6,0.4,0.0}. \tabularnewline
+telescope\_circle\_color & float R,G,B & colour of the telescope location indicator. Default value: \emph{0.6,0.4,0.0}. \tabularnewline
 \midrule
-telescope\_label\_color & float R,G,B & Sets
-the colour of the telescope location label. RGB values, where 1 is the
-maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.6,0.4,0.0}. \tabularnewline
+telescope\_label\_color & float R,G,B & colour of the telescope location label. Default value: \emph{0.6,0.4,0.0}. \tabularnewline
 \midrule
-script\_console\_keyword\_color & float R,G,B & Sets the colour of the keywords in the script console. RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{1.0,0.0,1.0}. \tabularnewline
+script\_console\_keyword\_color & float R,G,B & colour of the keywords in the script console. Default value: \emph{1.0,0.0,1.0}. \tabularnewline
 \midrule
-script\_console\_module\_color & float R,G,B & Sets the colour of the modules in the script console. RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.0,1.0,1.0}. \tabularnewline
+script\_console\_module\_color & float R,G,B & colour of the modules in the script console. Default value: \emph{0.0,1.0,1.0}. \tabularnewline
 \midrule
-script\_console\_comment\_color & float R,G,B & Sets the colour of the comments in the script console. RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{1.0,1.0,0.0}. \tabularnewline
+script\_console\_comment\_color & float R,G,B & colour of the comments in the script console. Default value: \emph{1.0,1.0,0.0}. \tabularnewline
 \midrule
-script\_console\_function\_color & float R,G,B & Sets the colour of the functions in the script console. RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.0,1.0,0.0}. \tabularnewline
+script\_console\_function\_color & float R,G,B & colour of the functions in the script console. Default value: \emph{0.0,1.0,0.0}. \tabularnewline
 \midrule
-script\_console\_constant\_color & float R,G,B & Sets the colour of the constants in the script console. RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{1.0,0.5,0.5}. \tabularnewline
+script\_console\_constant\_color & float R,G,B & colour of the constants in the script console. Default value: \emph{1.0,0.5,0.5}. \tabularnewline
 \midrule
-daylight\_text\_color & float R,G,B & Sets the colour of the info text at daylight. RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.0,0.0,0.0}. \tabularnewline
+daylight\_text\_color & float R,G,B & colour of the info text at daylight. Default value: \emph{0.0,0.0,0.0}. \tabularnewline
 \midrule
-dso\_label\_color & float R,G,B & Sets the colour of the deep-sky objects labels in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.2,0.6,0.7}. \tabularnewline
+dso\_label\_color & float R,G,B & colour of the deep-sky objects labels. Default value: \emph{0.2,0.6,0.7}. \tabularnewline
 \midrule
-dso\_circle\_color & float R,G,B & Sets the colour of the deep-sky objects symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{1.0,0.7,0.2}. \tabularnewline
+dso\_circle\_color & float R,G,B & colour of the deep-sky objects symbols. Default value: \emph{1.0,0.7,0.2}. \tabularnewline
 \midrule
-dso\_galaxy\_color & float R,G,B & Sets the colour of the galaxies symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{1.0,0.2,0.2}. \tabularnewline
+dso\_galaxy\_color & float R,G,B & colour of the galaxies symbols. Default value: \emph{1.0,0.2,0.2}. \tabularnewline
 \midrule
-dso\_radio\_galaxy\_color & float R,G,B & Sets the colour of the radio galaxies symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.3,0.3,0.3}. \tabularnewline
+dso\_radio\_galaxy\_color & float R,G,B & colour of the radio galaxies symbols. Default value: \emph{0.3,0.3,0.3}. \tabularnewline
 \midrule
-dso\_active\_galaxy\_color & float R,G,B & Sets the colour of the active galaxies symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{1.0,0.5,0.2}. \tabularnewline
+dso\_active\_galaxy\_color & float R,G,B & colour of the active galaxies symbols. Default value: \emph{1.0,0.5,0.2}. \tabularnewline
 \midrule
-dso\_interacting\_galaxy\_color & float R,G,B & Sets the colour of the interacting galaxies symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.2,0.5,1.0}. \tabularnewline
+dso\_interacting\_galaxy\_color & float R,G,B & colour of the interacting galaxies symbols. Default value: \emph{0.2,0.5,1.0}. \tabularnewline
 \midrule
-dso\_quasar\_color & float R,G,B & Sets the colour of the quasars symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{1.0,0.2,0.2}. \tabularnewline
+dso\_quasar\_color & float R,G,B & colour of the quasars symbols. Default value: \emph{1.0,0.2,0.2}. \tabularnewline
 \midrule
-dso\_possible\_quasar\_color & float R,G,B & Sets the colour of the possible quasars symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{1.0,0.2,0.2}. \tabularnewline
+dso\_possible\_quasar\_color & float R,G,B & colour of the possible quasars symbols. Default value: \emph{1.0,0.2,0.2}. \tabularnewline
 \midrule
-dso\_bl\_lac\_color & float R,G,B & Sets the colour of the BL Lac objects symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{1.0,0.2,0.2}. \tabularnewline
+dso\_bl\_lac\_color & float R,G,B & colour of the BL Lac objects symbols. Default value: \emph{1.0,0.2,0.2}. \tabularnewline
 \midrule
-dso\_blazar\_color & float R,G,B & Sets the colour of the blazars symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{1.0,0.2,0.2}. \tabularnewline
+dso\_blazar\_color & float R,G,B & colour of the blazars symbols. Default value: \emph{1.0,0.2,0.2}. \tabularnewline
 \midrule
-dso\_nebula\_color & float R,G,B & Sets the colour of the nebulae symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.1,1.0,0.1}. \tabularnewline
+dso\_nebula\_color & float R,G,B & colour of the nebulae symbols. Default value: \emph{0.1,1.0,0.1}. \tabularnewline
 \midrule
-dso\_planetary\_nebula\_color & float R,G,B & Sets the colour of the planetary nebulae symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.1,1.0,0.1}. \tabularnewline
+dso\_planetary\_nebula\_color & float R,G,B & colour of the planetary nebulae symbols. Default value: \emph{0.1,1.0,0.1}. \tabularnewline
 \midrule
-dso\_reflection\_nebula\_color & float R,G,B & Sets the colour of the reflection nebulae symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.1,1.0,0.1}. \tabularnewline
+dso\_reflection\_nebula\_color & float R,G,B & colour of the reflection nebulae symbols. Default value: \emph{0.1,1.0,0.1}. \tabularnewline
 \midrule
-dso\_bipolar\_nebula\_color & float R,G,B & Sets the colour of the bipolar nebulae symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.1,1.0,0.1}. \tabularnewline
+dso\_bipolar\_nebula\_color & float R,G,B & colour of the bipolar nebulae symbols. Default value: \emph{0.1,1.0,0.1}. \tabularnewline
 \midrule
-dso\_emission\_nebula\_color & float R,G,B & Sets the colour of the emission nebulae symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.1,1.0,0.1}. \tabularnewline
+dso\_emission\_nebula\_color & float R,G,B & colour of the emission nebulae symbols. Default value: \emph{0.1,1.0,0.1}. \tabularnewline
 \midrule
-dso\_dark\_nebula\_color & float R,G,B & Sets the colour of the dark nebulae symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.3,0.3,0.3}. \tabularnewline
+dso\_dark\_nebula\_color & float R,G,B & colour of the dark nebulae symbols. Default value: \emph{0.3,0.3,0.3}. \tabularnewline
 \midrule
-dso\_hydrogen\_region\_color & float R,G,B & Sets the colour of the hydrogen regions symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.1,1.0,0.1}. \tabularnewline
+dso\_hydrogen\_region\_color & float R,G,B & colour of the hydrogen regions symbols. Default value: \emph{0.1,1.0,0.1}. \tabularnewline
 \midrule
-dso\_supernova\_remnant\_color & float R,G,B & Sets the colour of the supernovae remnants symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.1,1.0,0.1}. \tabularnewline
+dso\_supernova\_remnant\_color & float R,G,B & colour of the supernovae remnants symbols. Default value: \emph{0.1,1.0,0.1}. \tabularnewline
 \midrule
-dso\_interstellar\_matter\_color & float R,G,B & Sets the colour of the interstellar matter symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.1,1.0,0.1}. \tabularnewline
+dso\_interstellar\_matter\_color & float R,G,B & colour of the interstellar matter symbols. Default value: \emph{0.1,1.0,0.1}. \tabularnewline
 \midrule
-dso\_cluster\_with\_nebulosity\_color & float R,G,B & Sets the colour of the clusters associated with nebulosity
-symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0}
-for white. Default value: \emph{0.1,1.0,0.1}. \tabularnewline
+dso\_cluster\_with\_nebulosity\_color & float R,G,B & colour of the clusters associated with nebulosity symbols. Default value: \emph{0.1,1.0,0.1}. \tabularnewline
 \midrule
-dso\_molecular\_cloud\_color & float R,G,B & Sets the colour of the molecular clouds symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.1,1.0,0.1}. \tabularnewline
+dso\_molecular\_cloud\_color & float R,G,B & colour of the molecular clouds symbols. Default value: \emph{0.1,1.0,0.1}. \tabularnewline
 \midrule
-dso\_possible\_planetary\_nebula\_color & float R,G,B & Sets the colour of the possible planetary nebulae symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.1,1.0,0.1 }. \tabularnewline
+dso\_possible\_planetary\_nebula\_color & float R,G,B & colour of the possible planetary nebulae symbols. Default value: \emph{0.1,1.0,0.1 }. \tabularnewline
 \midrule
-dso\_protoplanetary\_nebula\_color & float R,G,B & Sets the colour of the protoplanetary nebulae symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{0.1,1.0,0.1}. \tabularnewline
+dso\_protoplanetary\_nebula\_color & float R,G,B & colour of the protoplanetary nebulae symbols. Default value: \emph{0.1,1.0,0.1}. \tabularnewline
 \midrule
-dso\_cluster\_color & float R,G,B & Sets the colour of the star clusters symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{1.0,1.0,0.1}. \tabularnewline
+dso\_cluster\_color & float R,G,B & colour of the star clusters symbols. Default value: \emph{1.0,1.0,0.1}. \tabularnewline
 \midrule
-dso\_open\_cluster\_color & float R,G,B & Sets the colour of the open star clusters symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{1.0,1.0,0.1}. \tabularnewline
+dso\_open\_cluster\_color & float R,G,B & colour of the open star clusters symbols. Default value: \emph{1.0,1.0,0.1}. \tabularnewline
 \midrule
-dso\_globular\_cluster\_color & float R,G,B & Sets the colour of the globular star clusters symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{1.0,1.0,0.1}. \tabularnewline
+dso\_globular\_cluster\_color & float R,G,B & colour of the globular star clusters symbols. Default value: \emph{1.0,1.0,0.1}. \tabularnewline
 \midrule
-dso\_stellar\_association\_color & float R,G,B & Sets the colour of the stellar associations symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{1.0,1.0,0.1}. \tabularnewline
+dso\_stellar\_association\_color & float R,G,B & colour of the stellar associations symbols. Default value: \emph{1.0,1.0,0.1}. \tabularnewline
 \midrule
-dso\_star\_cloud\_color & float R,G,B & Sets the colour of the star clouds symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{1.0,1.0,0.1}. \tabularnewline
+dso\_star\_cloud\_color & float R,G,B & colour of the star clouds symbols. Default value: \emph{1.0,1.0,0.1}. \tabularnewline
 \midrule
-dso\_star\_color & float R,G,B & Sets the colour of the star symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{1.0,0.7,0.2}. \tabularnewline
+dso\_star\_color & float R,G,B & colour of the star symbols. Default value: \emph{1.0,0.7,0.2}. \tabularnewline
 \midrule
-dso\_emission\_object\_color & float R,G,B & Sets the colour of the emission objects symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{1.0,0.7,0.2}. \tabularnewline
+dso\_emission\_object\_color & float R,G,B & colour of the emission objects symbols. Default value: \emph{1.0,0.7,0.2}. \tabularnewline
 \midrule
-dso\_young\_stellar\_object\_color & float R,G,B & Sets the colour of the young stellarium objects symbols in RGB values, where 1 is the maximum, e.g. \emph{1.0,1.0,1.0} for white. Default value: \emph{1.0,0.7,0.2}. \tabularnewline
+dso\_young\_stellar\_object\_color & float R,G,B & colour of the young stellar objects symbols. Default value: \emph{1.0,0.7,0.2}. \tabularnewline
 \bottomrule
 \end{longtabu}
 
-\subsection{Section \big[custom\_selected\_info\big]}\label{section-custom-selected-info}
+\section{\big[custom\_selected\_info\big]}
+\label{sec:config.ini:custom_selected_info}
+
+You can fine-tune the bits of information to display for the selected object in this section. Set the entry to \emph{true} to display it.
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
 \emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
 \midrule
-flag\_show\_absolutemagnitude & bool & If \emph{true},
-Stellarium will be show absolute magnitude for objects.\tabularnewline
+flag\_show\_absolutemagnitude & bool & absolute magnitude for objects.\tabularnewline
 \midrule
-flag\_show\_altaz & bool & If \emph{true}, Stellarium will be
-show horizontal coordinates for objects.\tabularnewline
+flag\_show\_altaz & bool & horizontal coordinates for objects.\tabularnewline
 \midrule
-flag\_show\_catalognumber & bool & If \emph{true}, Stellarium
-will be show catalog designations for objects.\tabularnewline
+flag\_show\_catalognumber & bool & catalog designations for objects.\tabularnewline
 \midrule
-flag\_show\_distance & bool & If \emph{true}, Stellarium will
-be show distance to object.\tabularnewline
+flag\_show\_distance & bool & distance to object.\tabularnewline
 \midrule
-flag\_show\_extra & bool & If \emph{true}, Stellarium will be
-show extra info for object.\tabularnewline
+flag\_show\_extra & bool & extra info for object.\tabularnewline
 \midrule
-flag\_show\_hourangle & bool & If \emph{true}, Stellarium will
-be show hour angles for object.\tabularnewline
+flag\_show\_hourangle & bool & hour angle for object.\tabularnewline
 \midrule
-flag\_show\_magnitude & bool & If \emph{true}, Stellarium will
-be show magnitude for object.\tabularnewline
+flag\_show\_magnitude & bool & magnitude for object.\tabularnewline
 \midrule
-flag\_show\_name & bool & If \emph{true}, Stellarium will be
-show common name for object.\tabularnewline
+flag\_show\_name & bool & common name for object.\tabularnewline
 \midrule
-flag\_show\_radecj2000 & bool & If \emph{true}, Stellarium
-will be show geocentrical equatorial coordinates (J2000) of
-object.\tabularnewline
+flag\_show\_radecj2000 & bool & equatorial coordinates (J2000) of object.\tabularnewline
 \midrule
-flag\_show\_radecofdate & bool & If \emph{true}, Stellarium
-will be show geocentrical equatorial coordinates (of date) of
-object.\tabularnewline
+flag\_show\_radecofdate & bool & equatorial coordinates (of date) of object.\tabularnewline
 \midrule
-flag\_show\_size & bool & If \emph{true}, Stellarium will be
-show size of object.\tabularnewline
+flag\_show\_size & bool & size of object.\tabularnewline
 \midrule
-flag\_show\_galcoord & bool & If \emph{true}, Stellarium will
-be show galactic coordinates of object.\tabularnewline
+flag\_show\_galcoord & bool & galactic coordinates (System~II) of object.\tabularnewline
 \midrule
-flag\_show\_eclcoord & bool & If \emph{true}, Stellarium will
-be show ecliptic coordinates (J2000) of object.\tabularnewline
+flag\_show\_eclcoord & bool & ecliptic coordinates (J2000 and of date) of object.\tabularnewline
 \midrule
-flag\_show\_type & bool & If \emph{true}, Stellarium will be
-show type of object.\tabularnewline
+flag\_show\_type & bool & type of object\tabularnewline
 \bottomrule
 \end{longtabu}
 
-\subsection{Section \big[custom\_time\_correction\big]}\label{section-custom-time-correction}
+%% TODO: Maybe separate flag_show_eclcoord and flag_show_eclcoordj2000?
+
+\section{\big[custom\_time\_correction\big]}
+\label{sec:config.ini:custom_time_correction}
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
@@ -371,7 +324,8 @@ year & int & Year for custom equation of DeltaT\tabularnewline
 \bottomrule
 \end{longtabu}
 
-\subsection{Section \big[devel\big]}\label{section-devel}
+\section{\big[devel\big]}
+\label{sec:config.ini:devel}
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
@@ -387,48 +341,48 @@ catalog. Default value: \emph{true}.\tabularnewline
 \bottomrule
 \end{longtabu}
 
-\subsection{Section
-\big[dso\_catalog\_filters\big]}\label{section-dso-catalog-filters}
+\section{\big[dso\_catalog\_filters\big]}
+\label{sec:config.ini:dso_catalog_filters}
+In this section you can fine-tune which of the deep-sky catalogs should be activated on startup.
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
 \emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
 \midrule
-flag\_show\_ngc & bool & Set to \emph{true} to displaying New General Catalogue (NGC). Default value: \emph{true}. \tabularnewline
+flag\_show\_ngc & bool & New General Catalogue (NGC). Default value: \emph{true}. \tabularnewline
 \midrule
-flag\_show\_ic & bool & Set to \emph{true} to
-displaying Index Catalogue (IC). Default value: \emph{true}. \tabularnewline
+flag\_show\_ic  & bool & Index Catalogue (IC). Default value: \emph{true}. \tabularnewline
 \midrule
-flag\_show\_m & bool & Set to \emph{true} to displaying Messier Catalog (M). Default value: \emph{true}. \tabularnewline
+flag\_show\_m   & bool & Messier Catalog (M). Default value: \emph{true}. \tabularnewline
 \midrule
-flag\_show\_c & bool & Set to \emph{true} to displaying Caldwell Catalogue (C). Default value: \emph{false}. \tabularnewline
+flag\_show\_c   & bool & Caldwell Catalogue (C). Default value: \emph{false}. \tabularnewline
 \midrule
-flag\_show\_b & bool & Set to \emph{true} to displaying Barnard Catalogue (B). Default value: \emph{false}. \tabularnewline
+flag\_show\_b   & bool & Barnard Catalogue (B). Default value: \emph{false}. \tabularnewline
 \midrule
-flag\_show\_sh2 & bool & Set to \emph{true} to displaying Sharpless Catalogue (Sh2). Default value: \emph{false}. \tabularnewline
+flag\_show\_sh2 & bool & Sharpless Catalogue (Sh2). Default value: \emph{false}. \tabularnewline
 \midrule
-flag\_show\_vdb & bool & Set to \emph{true} to displaying Van den Bergh Catalogue of reflection nebulae (VdB). Default value: \emph{false}. \tabularnewline
+flag\_show\_vdb & bool & Van den Bergh Catalogue of reflection nebulae (VdB). Default value: \emph{false}. \tabularnewline
 \midrule
-flag\_show\_rcw & bool & Set to \emph{true} to displaying a catalogue of H$\alpha$-emission regions in the southern Milky Way (RCW). Default value: \emph{false}. \tabularnewline
+flag\_show\_rcw & bool & The RCW catalogue of H$\alpha$-emission regions in the southern Milky Way. Default value: \emph{false}. \tabularnewline
 \midrule
-flag\_show\_lbn & bool & Set to \emph{true} to displaying Lynds' Catalogue of Bright Nebulae (LBN). Default value: \emph{false}. \tabularnewline
+flag\_show\_lbn & bool & Lynds' Catalogue of Bright Nebulae (LBN). Default value: \emph{false}. \tabularnewline
 \midrule
-flag\_show\_ldn & bool & Set to \emph{true} to displaying Lynds' Catalogue of Dark Nebulae (LDN). Default value: \emph{false}. \tabularnewline
+flag\_show\_ldn & bool & Lynds' Catalogue of Dark Nebulae (LDN). Default value: \emph{false}. \tabularnewline
 \midrule
-flag\_show\_cr & bool & Set to \emph{true} to displaying Collinder Catalogue (Cr). Default value: \emph{false}. \tabularnewline
+flag\_show\_cr  & bool & Collinder Catalogue (Cr). Default value: \emph{false}. \tabularnewline
 \midrule
-flag\_show\_mel & bool & Set to \emph{true} to displaying Melotte Catalogue of Deep Sky Objects (Mel). Default value: \emph{false}. \tabularnewline
+flag\_show\_mel & bool & Melotte Catalogue of Deep Sky Objects (Mel). Default value: \emph{false}. \tabularnewline
 \midrule
-flag\_show\_pgc & bool & Set to \emph{true} to displaying HYPERLEDA. I. Catalog of galaxies (PGC). Default value: \emph{false}. \tabularnewline
+flag\_show\_pgc & bool & HYPERLEDA. I. Catalog of galaxies (PGC). Default value: \emph{false}. \tabularnewline
 \midrule
-flag\_show\_ced & bool & Set to \emph{true} to displaying Cederblad Catalog of bright diffuse Galactic nebulae (Ced). Default value: \emph{false}. \tabularnewline
+flag\_show\_ced & bool & Cederblad Catalog of bright diffuse Galactic nebulae (Ced). Default value: \emph{false}. \tabularnewline
 \midrule
-flag\_show\_ugc & bool & Set to \emph{true} to displaying The Uppsala General Catalogue of Galaxies (UGC). Default value: \emph{false}. \tabularnewline
+flag\_show\_ugc & bool & The Uppsala General Catalogue of Galaxies (UGC). Default value: \emph{false}. \tabularnewline
 \bottomrule
 \end{longtabu}
 
-\subsection{Section
-\big[dso\_type\_filters\big]}\label{section-dsoux5ftypeux5ffilters}
+\section{\big[dso\_type\_filters\big]}
+\label{section-dsoux5ftypeux5ffilters}
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
@@ -466,7 +420,7 @@ displaying other deep-sky objects. Default value: \emph{true}. \tabularnewline
 \bottomrule
 \end{longtabu}
 
-\subsection{Section \big[gui\big]}\label{section-gui}
+\section{\big[gui\big]}\label{section-gui}
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
@@ -549,8 +503,7 @@ display GUI\tabularnewline
 \bottomrule
 \end{longtabu}
 
-\subsection{Section
-\big[init\_location\big]}\label{section-init-location}
+\section{\big[init\_location\big]}\label{section-init-location}
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
@@ -568,7 +521,7 @@ stellarium.\tabularnewline
 \bottomrule
 \end{longtabu}
 
-\subsection{Section \big[landscape\big]}\label{section-landscape}
+\section{\big[landscape\big]}\label{section-landscape}
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
@@ -601,7 +554,7 @@ pressure\_mbar & float & Set atmospheric pressure
 \bottomrule
 \end{longtabu}
 
-\subsection{Section \big[localization\big]}\label{section-localization}
+\section{\big[localization\big]}\label{section-localization}
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
@@ -633,7 +586,7 @@ mode: can be \emph{system\_default}, \emph{mmddyyyy}, \emph{ddmmyyyy} or
 \bottomrule
 \end{longtabu}
 
-\subsection{Section \big[main\big]}\label{section-main}
+\section{\big[main\big]}\label{section-main}
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
@@ -662,7 +615,7 @@ developers only!\tabularnewline
 \bottomrule
 \end{longtabu}
 
-\subsection{Section \big[navigation\big]}\label{section-navigation}
+\section{\big[navigation\big]}\label{section-navigation}
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
@@ -727,61 +680,57 @@ correction.\tabularnewline
 \bottomrule
 \end{longtabu}
 
-\subsection{Section
-\big[plugins\_load\_at\_startup\big]}\label{section-plugins-load-at-startup}
+\section{\big[plugins\_load\_at\_startup\big]}
+\label{sec:Reference:section-plugins-load-at-startup}
+
+This section lists which plugins are loaded at startup (those with
+\emph{true} values). Each plugin can add another section with its own
+content, which is described in the respective plugin documentation,
+see \ref{ch:Plugins}. You activate loading of plugins in the \key{F2}
+settings dialog, tab ``Plugins''. After selection of which plugins to
+load, you must restart Stellarium.
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
-\emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
+\emph{ID} & \emph{Type} & \emph{Description}\\
 \midrule
-AngleMeasure & bool & If \emph{true}, Stellarium will be load
-Angle Measure plugin at startup.\tabularnewline
+AngleMeasure & bool & Angle Measure plugin\\
 \midrule
-CompassMarks & bool & If \emph{true}, Stellarium will be load
-Compass Marks plugin at startup.\tabularnewline
+CompassMarks & bool & Compass Marks plugin\\
 \midrule
-Exoplanets & bool & If \emph{true}, Stellarium will be load
-Exoplanets plugin at startup.\tabularnewline
+Exoplanets & bool & Exoplanets plugin \\
 \midrule
-Observability & bool & If \emph{true}, Stellarium will be load
-Observability Analysis plugin at startup.\tabularnewline
+Observability & bool & Observability Analysis\\
 \midrule
-Oculars & bool & If \emph{true}, Stellarium will be load
-Oculars plugin at startup.\tabularnewline
+Oculars & bool & Oculars plugin \\
 \midrule
-Pulsars & bool & If \emph{true}, Stellarium will be load
-Pulsars plugin at startup.\tabularnewline
+Pulsars & bool & Pulsars plugin \\
 \midrule
-Quasars & bool & If \emph{true}, Stellarium will be load
-Quasars plugin at startup.\tabularnewline
+Quasars & bool & Quasars plugin \\
 \midrule
-Satellites & bool & If \emph{true}, Stellarium will be load
-Satellites plugin at startup.\tabularnewline
+Satellites & bool & Satellites plugin \\
 \midrule
-SolarSystemEditor & bool & If \emph{true}, Stellarium will be
-load Solar System Editor plugin at startup.\tabularnewline
+SolarSystemEditor & bool & Solar System Editor plugin\\
 \midrule
-Supernovae & bool & If \emph{true}, Stellarium will be load
-Historical Supernovae plugin at startup.\tabularnewline
+Supernovae & bool & Historical Supernovae plugin \\
 \midrule
-TelescopeControl & bool & If \emph{true}, Stellarium will be
-load Telescope Control plugin at startup.\tabularnewline
+TelescopeControl & bool & Telescope Control plugin \\
 \midrule
-TextUserInterface & bool & If \emph{true}, Stellarium will be
-load Text User Interface plugin at startup.\tabularnewline
+TextUserInterface & bool & Text User Interface plugin \\
 \midrule
-TimeZoneConfiguration & bool & If \emph{true}, Stellarium will
-be load Time Zone plugin at startup.\tabularnewline
+TimeZoneConfiguration & bool & Time Zone plugin \\
 \midrule
-Novae & bool & If \emph{true}, Stellarium will be load Bright
-Novae plugin at startup.\tabularnewline
+Novae & bool & Bright Novae plugin \\
 \midrule
-Scenery3dMgr & bool & If \emph{true}, Stellarium will be load
-Scenery 3D plugin at startup.\tabularnewline
+Scenery3dMgr & bool & Scenery 3D plugin \\
 \bottomrule
 \end{longtabu}
 
-\subsection{Section \big[projection\big]}\label{section-projection}
+\section{\big[projection\big]}\label{section-projection}
+
+This section contains the projection of your choice and several
+advanced settings important if you run Stellarium on a single screen,
+multi-projection, dome projection, or other setups.
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
@@ -789,24 +738,27 @@ Scenery 3D plugin at startup.\tabularnewline
 \midrule
 type & string & Sets projection mode. Values: \emph{ProjectionPerspective,
 ProjectionEqualArea, ProjectionStereographic, ProjectionFisheye,
-ProjectionHammer, ProjectionCylinder, ProjectionMercator} or
-\emph{ProjectionOrthographic}.\tabularnewline
+ProjectionHammer, ProjectionCylinder, ProjectionMercator},
+\emph{ProjectionOrthographic}, or \emph{StelProjectorSinusoidal}.\tabularnewline
 \midrule
 viewport & string & How the view-port looks. Values:
-\emph{none, disk}.\tabularnewline
+\emph{none} (regular rectangular screen), \emph{disk} (circular screen, useful for planetarium setup).\tabularnewline
 \midrule
-viewportMask & string & How the view-port looks. Values:
-\emph{none}.\tabularnewline
+viewportMask & string & How the view-port looks. Values: \emph{none}.\tabularnewline
 \midrule
-flag\_use\_gl\_point\_sprite & bool & \tabularnewline
+flag\_use\_gl\_point\_sprite & bool & (deprecated.)\  \tabularnewline
 \midrule
 flip\_horz & bool & \tabularnewline
 \midrule
 flip\_vert & bool & \tabularnewline
+\midrule
+viewport\_center\_offset\_x & float & [-0.5\ldots+0.5] Usually 0. \\
+\midrule
+viewport\_center\_offset\_y & float & [-0.5\ldots+0.5] Use negative values to move the horizon lower. \\
 \bottomrule
 \end{longtabu}
 
-\subsection{Section \big[proxy\big]}\label{section-proxy}
+\section{\big[proxy\big]}\label{section-proxy}
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
@@ -822,7 +774,7 @@ password & string & Password for proxy. E.g. \emph{xxxxx}\tabularnewline
 \bottomrule
 \end{longtabu}
 
-\subsection{Section \big[scripts\big]}\label{section-scripts}
+\section{\big[scripts\big]}\label{section-scripts}
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
@@ -834,7 +786,7 @@ scripting\_allow\_write\_files & bool &\tabularnewline
 \bottomrule
 \end{longtabu}
 
-\subsection{Section \big[search\big]}\label{section-search}
+\section{\big[search\big]}\label{section-search}
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
@@ -851,8 +803,7 @@ galactic. \emph{Default value:} equatorialJ2000.\tabularnewline
 \bottomrule
 \end{longtabu}
 
-\subsection{Section
-\big[spheric\_mirror\big]}\label{section-sphericux5fmirror}
+\section{\big[spheric\_mirror\big]}\label{section-sphericux5fmirror}
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
@@ -898,7 +849,7 @@ scaling\_factor & float & \tabularnewline
 \bottomrule
 \end{longtabu}
 
-\subsection{Section \big[stars\big]}\label{section-stars}
+\section{\big[stars\big]}\label{section-stars}
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
@@ -935,7 +886,7 @@ bortle scale. Typical value: \emph{3}.\tabularnewline
 \bottomrule
 \end{longtabu}
 
-\subsection{Section \big[tui\big]}\label{section-tui}
+\section{\big[tui\big]}\label{section-tui}
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
@@ -951,7 +902,7 @@ flag\_show\_tui\_short\_obj\_info & bool & set to \emph{true} if you want to see
 \bottomrule
 \end{longtabu}
 
-\subsection{Section \big[video\big]}\label{section-video}
+\section{\big[video\big]}\label{section-video}
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
@@ -977,68 +928,72 @@ maximum\_fps & int & Sets the maximum number of frames per second to display at.
 \bottomrule
 \end{longtabu}
 
-\subsection{Section \big[viewing\big]}\label{section-viewing}
+\section{\big[viewing\big]}\label{section-viewing}
+This section defines which objects, labels, lines, grids etc.\ you want to see on startup. Set those to \emph{true}.
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
 \emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
 \midrule
-atmosphere\_fade\_duration & float & Sets the time it takes for
-the atmosphere to fade when de-selected\tabularnewline
+atmosphere\_fade\_duration & float & Sets the time (seconds) it takes for the atmosphere to fade when de-selected\tabularnewline
 \midrule
-flag\_constellation\_drawing & bool & Set to \emph{true} if you want to see the constellation line drawing on start-up\tabularnewline
+flag\_constellation\_drawing & bool & constellation line drawing\tabularnewline
 \midrule
-flag\_constellation\_name & bool & Set to \emph{true} if you want to see the constellation names on start-up\tabularnewline
+flag\_constellation\_name & bool & constellation names\tabularnewline
 \midrule
-flag\_constellation\_art & bool & Set to \emph{true} if you want to see the constellation art on start-up\tabularnewline
+flag\_constellation\_art & bool & constellation art\tabularnewline
 \midrule
-flag\_constellation\_boundaries & bool & Set to \emph{true} if you want to see the constellation boundaries on start-up\tabularnewline
+flag\_constellation\_boundaries & bool & constellation boundaries \tabularnewline
 \midrule
-flag\_constellation\_isolate\_selected & bool & When set to \emph{true}, constellation lines, boundaries and art will be limited to the constellation of the selected star, if that star is ''on'' one of the constellation lines.\tabularnewline
+flag\_constellation\_isolate\_selected & bool & When \emph{true}, constellation lines, boundaries and art will be limited to the constellation of the selected star, if that star is ``on'' one of the constellation lines.\tabularnewline
 \midrule
 flag\_constellation\_pick & bool & Set to \emph{true} if you only want to see the line drawing, art and name of the selected constellation star\tabularnewline
 \midrule
 flag\_isolated\_trails & bool & Set to \emph{true} if you only want to see the tail line drawing of the selected planets (asteroids, comets, moons)\tabularnewline
 \midrule
-flag\_azimutal\_grid & bool & Set to \emph{true} if you want to see the azimuthal grid on start-up\tabularnewline
+flag\_azimutal\_grid & bool & azimuthal grid \tabularnewline
 \midrule
-flag\_equatorial\_grid & bool & Set to \emph{true} if you want to see the equatorial grid (on date) on start-up\tabularnewline
+flag\_equatorial\_grid & bool & equatorial grid (of date) \tabularnewline
 \midrule
-flag\_equatorial\_J2000\_grid & bool & Set to \emph{true} if you want to see the equatorial grid (J2000) on start-up\tabularnewline
+flag\_equatorial\_J2000\_grid & bool & equatorial grid (J2000) \tabularnewline
 \midrule
-flag\_ecliptic\_J2000\_grid & bool & Set to \emph{true} if you want to see the ecliptic grid (J2000) on start-up\tabularnewline
+flag\_ecliptic\_J2000\_grid & bool & ecliptic grid (J2000) \tabularnewline
 \midrule
-flag\_galactic\_grid & bool & Set to \emph{true} if you want to see the galactic grid on start-up\tabularnewline
+flag\_galactic\_grid & bool & galactic grid (System~II)\tabularnewline
 \midrule
-flag\_galactic\_plane\_line & bool & Set to \emph{true} if you want to see the galactic plane line on start-up\tabularnewline
+flag\_galactic\_equator\_line & bool & galactic equator line \tabularnewline
 \midrule
-flag\_equator\_line & bool & Set to \emph{true} if you want to see the equator line on start-up\tabularnewline
+flag\_equator\_J2000\_line & bool & equator line (J2000) \tabularnewline
 \midrule
-flag\_ecliptic\_line & bool & Set to \emph{true} if you want to see the ecliptic line (J2000) on start-up\tabularnewline
+flag\_equator\_line & bool & equator line \tabularnewline
 \midrule
-flag\_meridian\_line & bool & Set to \emph{true} if you want to see the meridian line on start-up\tabularnewline
+flag\_ecliptic\_line & bool & ecliptic line (of date) \tabularnewline
 \midrule
-flag\_cardinal\_points & bool & Set to \emph{false} if you don't want to see the cardinal points\tabularnewline
+flag\_ecliptic\_J2000\_line & bool & ecliptic line (J2000) \tabularnewline
 \midrule
-flag\_gravity\_labels & bool & Set to \emph{true} if you want labels to undergo gravity (top side of text points toward zenithzenith). Useful with dome projection.\tabularnewline
+flag\_meridian\_line & bool & meridian line \tabularnewline
 \midrule
-flag\_moon\_scaled & bool & Change to \emph{false} if you want to see the real moon size on start-up\tabularnewline
+flag\_cardinal\_points & bool & cardinal points\tabularnewline
+\midrule
+flag\_gravity\_labels & bool & Set to \emph{true} if you want labels to undergo gravity (top side of text points toward zenith). Useful with dome projection.\tabularnewline
+\midrule
+flag\_moon\_scaled & bool & Change to \emph{false} if you want to see the real moon size \tabularnewline
 \midrule
 moon\_scale & float & Sets the moon scale factor, to correlate to our perception of the moon's size. Typical value: \emph{4}\tabularnewline
 \midrule
-constellation\_art\_intensity & float & This number multiplies the brightness of the constellation art images. Typical value: \emph{0.5}\tabularnewline
+constellation\_art\_intensity & float & brightness [0\ldots1] of the constellation art images. Typical value: \emph{0.5}\tabularnewline
 \midrule
-constellation\_art\_fade\_duration & float & Sets the amount of time the constellation art takes to fade in or out, in seconds. Typical value: \emph{1.5}\tabularnewline
+constellation\_art\_fade\_duration & float & time the constellation art takes to fade in or out, in seconds. Typical value: \emph{1.5}\tabularnewline
 \midrule
-constellation\_font\_size & int & Set font size for constellation labels\tabularnewline
+constellation\_font\_size & int & font size for constellation labels\tabularnewline
 \midrule
-constellation\_line\_thickness & float & Set the thickness of lines of the constellations\tabularnewline
+constellation\_line\_thickness & float & thickness of lines of the constellations [1\ldots5]. Typical value: \emph{1}\tabularnewline
 \midrule
-flag\_night & bool & Enable night mode on startup\tabularnewline
+flag\_night & bool & Enable night mode (red-only mode) on startup\tabularnewline
 \midrule
-light\_pollution\_luminance & float & Sets the level of the light pollution simulation\tabularnewline
+light\_pollution\_luminance & float & Sets the level of the light pollution simulation\tabularnewline %% TODO: WHAT IS THIS?
 \midrule
-use\_luminance\_adaptation & bool & Enable dynamic eye adaptation.\tabularnewline
+use\_luminance\_adaptation & bool & Enable dynamic eye adaptation.\tabularnewline %% TODO: DESCRIBE!
 \midrule
 flag\_isolated\_trails & float & Change to \emph{false} if you want to see the trails for all celestial bodies from Solar system.\tabularnewline
 \midrule
@@ -1046,38 +1001,6 @@ flag\_isolated\_orbits & float & Change to \emph{false} if you want to see orbit
 \bottomrule
 \end{longtabu}
 
-\section{Accuracy}
-\label{sec:Accuracy}
-Stellarium uses the VSOP87
-method\footnote{\url{http://vizier.cfa.harvard.edu/viz-bin/ftp-index?/ftp/cats/VI/81}}
-to calculate the variation in position of the planets over time.
-
-As with other methods, the accuracy of the calculations vary according
-to the planet and the time for which one makes the calculation. Reasons
-for these inaccuracies include the fact that the motion of the planet
-isn't as predictable as Newtonian mechanics would have us believe.
-
-As far as Stellarium is concerned, the user should bear in mind the
-following properties of the VSOP87 method. Accuracy values here are
-positional as observed from Earth.
-
-\begin{longtabu} to \textwidth {X|l|X}
-\toprule
-\emph{Object(s)} & \emph{Method} & \emph{Notes}\tabularnewline
-\midrule
-Mercury, Venus, Earth-Moon barycenter, Mars & VSOP87 & Accuracy is 1 arc-second from 2000 B.C. -- 6000 A.D.\\
-\midrule
-Jupiter, Saturn & VSOP87 & Accuracy is 1 arc-second from 0 A.D. -- 4000 A.D.\\
-\midrule
-Uranus, Neptune & VSOP87 & Accuracy is 1 arc-second from 4000 B.C -- 8000 A.D.\\
-\midrule
-Pluto & ? & Pluto's position is valid only from 1885 A.D. -- 2099 A.D.\\
-\midrule
-Earth's Moon & ELP2000-82B & Unsure about interval of validity or accuracy at time of writing. Possibly valid from 1828 A.D. to 2047 A.D.\\
-\midrule
-Galilean satellites & L2 & Valid from 500 A.D -- 3500 A.D.\\
-\bottomrule
-\end{longtabu}
 
 
 
