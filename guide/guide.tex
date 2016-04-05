@@ -52,6 +52,11 @@
 %\DefineVerbatimEnvironment{commands}{\begin{wBox}\begin{Verbatim}}{\end{Verbatim}\end{wBox}}
 %\lstnewenvironment{commands}{\begin{wBox}\lstset{basicstyle=\ttfamily}\begin{lstlisting}}{\end{lstlisting}\end{wBox}}
 
+%% GZ Some commands which can be used later, like version number etc.
+
+\newcommand{\StelVersion}{0.15.0}
+\newcommand{\DocumentEdition}{1}
+
 \begin{document}
 
 %----------------------------------------------------------------------------------------
@@ -195,7 +200,7 @@
 \include{astronomical_phenomena}
 
 %----------------------------------------------------------------------------------------
-%	CHAPTER X (Sky Guide)
+%	CHAPTER X (A Short Sky Guide)
 %----------------------------------------------------------------------------------------
 
 \include{sky_guide}
@@ -212,18 +217,23 @@
 
 \appendix
 \part{Appendices}
-
+\chapterimage{chapter-t1-bg} % Chapter heading image
 
 %----------------------------------------------------------------------------------------
-%	CHAPTER X (Stellarium Reference)
+%	CHAPTER X (config.ini)
 %----------------------------------------------------------------------------------------
 
-\include{reference}
+\include{config_ini}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER X (Accuracy, and some notes about used algorithms.)
+%----------------------------------------------------------------------------------------
+
+\include{accuracy}
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER X (Star Catalogue)
 %----------------------------------------------------------------------------------------
-\chapterimage{chapter-t1-bg} % Chapter heading image
 
 \include{star_catalogue}
 
@@ -237,7 +247,7 @@
 %	CHAPTER X (License)
 %----------------------------------------------------------------------------------------
 
-\chapterimage{chapter-t1-bg} % Chapter heading image
+%\chapterimage{chapter-t1-bg} % Chapter heading image
 \include{license}
 
 %----------------------------------------------------------------------------------------
