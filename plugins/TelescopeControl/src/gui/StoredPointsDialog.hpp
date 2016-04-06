@@ -33,7 +33,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelUtils.hpp"
 
-#include <AngleSpinBox.hpp>
+#include "AngleSpinBox.hpp"
 
 class Ui_StoredPoints;
 

@@ -72,6 +72,7 @@ SolarSystem::SolarSystem()
 	, flagIsolatedTrails(true)
 	, flagIsolatedOrbits(true)
 	, allTrails(NULL)
+	, conf(StelApp::getInstance().getSettings())
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getBaseFontSize());
 	setObjectName("SolarSystem");
@@ -127,7 +128,6 @@ double SolarSystem::getCallOrder(StelModuleActionName actionName) const
 // Init and load the solar system data
 void SolarSystem::init()
 {
-	conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
 	Planet::init();

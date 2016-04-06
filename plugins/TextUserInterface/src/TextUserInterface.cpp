@@ -660,7 +660,7 @@ void TextUserInterface::handleKeys(QKeyEvent* event)
 		return;
 	}
 
-	if (event->type()==QEvent::KeyPress && event->key()==Qt::Key_M)
+	if (event->type()==QEvent::KeyPress && event->key()==Qt::Key_QuoteLeft)
 	{
 		tuiActive = ! tuiActive;
 		dummyDialog.close();
