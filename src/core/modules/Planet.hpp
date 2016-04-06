@@ -366,7 +366,7 @@ protected:
 	static bool flagCustomGrsSettings;	// Is enabled usage of custom settings for calculation of position of Great Red Spot?
 	static double customGrsJD;		// Initial JD for calculation of position of Great Red Spot
 	static int customGrsLongitude;		// Longitude of Great Red Spot (System II, degrees)
-	static double customGrsDrift;		// Drift of Great Red Spot position (degrees per month)
+	static double customGrsDrift;		// Annual drift of Great Red Spot position (degrees)
 	
 	// Shader-related variables
 	struct PlanetShaderVars {

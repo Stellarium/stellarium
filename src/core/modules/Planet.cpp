@@ -56,7 +56,7 @@ bool Planet::permanentDrawingOrbits = false;
 
 bool Planet::flagCustomGrsSettings = false;
 double Planet::customGrsJD = 2456908.;
-double Planet::customGrsDrift = 1.25;
+double Planet::customGrsDrift = 15.21875;
 int Planet::customGrsLongitude = 216;
 
 QOpenGLShaderProgram* Planet::planetShaderProgram=NULL;
@@ -731,7 +731,7 @@ double Planet::getSiderealTime(double JD, double JDE) const
 		// GRS longitude was at 2014-09-08 216d with a drift of 1.25d every month
 		double longitudeGRS = 0.;
 		if (flagCustomGrsSettings)
-			longitudeGRS = customGrsLongitude + customGrsDrift*(JDE - customGrsJD)/30;
+			longitudeGRS = customGrsLongitude + customGrsDrift*(JDE - customGrsJD)/365.25;
 		else
 			longitudeGRS=216+1.25*( JDE - 2456908)/30;
 		// qDebug() << "Jupiter: CM2 = " << cm2 << " longitudeGRS = " << longitudeGRS << " --> rotation = " << (cm2 - longitudeGRS);

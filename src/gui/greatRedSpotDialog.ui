@@ -151,19 +151,19 @@
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
         <property name="decimals">
-         <number>4</number>
+         <number>5</number>
         </property>
         <property name="minimum">
-         <double>-10.000000000000000</double>
+         <double>-90.000000000000000</double>
         </property>
         <property name="maximum">
-         <double>10.000000000000000</double>
+         <double>90.000000000000000</double>
         </property>
         <property name="singleStep">
          <double>0.000100000000000</double>
         </property>
         <property name="value">
-         <double>1.250000000000000</double>
+         <double>15.218750000000000</double>
         </property>
        </widget>
       </item>
@@ -202,7 +202,7 @@
          <set>Qt::ImhNone</set>
         </property>
         <property name="text">
-         <string>Drift of GRS (degrees per month):</string>
+         <string>Annual drift (degrees):</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>

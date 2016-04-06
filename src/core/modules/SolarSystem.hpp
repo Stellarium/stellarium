@@ -315,10 +315,10 @@ public slots:
 	//! @return a longitude (degrees)
 	int getCustomGrsLongitude();
 
-	//! Set speed of drift for Great Red Spot (System II is used)
-	//! @param drift (degrees per month)
+	//! Set speed of annual drift for Great Red Spot (System II is used)
+	//! @param annual drift (degrees)
 	void setCustomGrsDrift(double drift);
-	//! Get speed of drift for Great Red Spot (System II is used)
+	//! Get speed of annual drift for Great Red Spot (System II is used)
 	double getCustomGrsDrift();
 
 	//! Set initial JD for calculation of position of Great Red Spot
