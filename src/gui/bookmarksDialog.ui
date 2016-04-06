@@ -167,6 +167,9 @@
           <layout class="QHBoxLayout" name="horizontalLayout_7">
            <item>
             <widget class="QPushButton" name="addBookmarkButton">
+             <property name="toolTip">
+              <string>Add selected object to bookmarks</string>
+             </property>
              <property name="text">
               <string>&amp;Add bookmark</string>
              </property>
