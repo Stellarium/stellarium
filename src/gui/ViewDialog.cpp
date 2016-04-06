@@ -517,6 +517,8 @@ void ViewDialog::setFlagCustomGrsSettings(bool b)
 {
 	GETSTELMODULE(SolarSystem)->setFlagCustomGrsSettings(b);
 	ui->pushButtonGrsDetails->setEnabled(b);
+	if (!b)
+		greatRedSpotDialog->setVisible(false);
 }
 
 void ViewDialog::populateLandscapeMinimalBrightness()
