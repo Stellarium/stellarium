@@ -362,6 +362,11 @@ protected:
 	static StelTextureSP hintCircleTex;	
 	static QMap<PlanetType, QString> pTypeMap; // Maps fast type to english name.
 	static QMap<ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;
+
+	static bool flagCustomGrsSettings;	// Is enabled usage of custom settings for calculation of position of Great Red Spot?
+	static double customGrsJD;		// Initial JD for calculation of position of Great Red Spot
+	static int customGrsLongitude;		// Longitude of Great Red Spot (System II, degrees)
+	static double customGrsDrift;		// Drift of Great Red Spot position (degrees per month)
 	
 	// Shader-related variables
 	struct PlanetShaderVars {
