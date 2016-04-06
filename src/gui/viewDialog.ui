@@ -792,6 +792,24 @@
               </widget>
              </item>
              <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_15">
+               <item>
+                <widget class="QCheckBox" name="customGrsSettingsCheckBox">
+                 <property name="text">
+                  <string>Use custom settings of GRS:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButtonGrsDetails">
+                 <property name="text">
+                  <string>GRS details...</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
               <layout class="QHBoxLayout" name="planetLimMagHorizontalLayout">
                <item>
                 <widget class="QCheckBox" name="planetLimitMagnitudeCheckBox">
@@ -2624,12 +2642,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
