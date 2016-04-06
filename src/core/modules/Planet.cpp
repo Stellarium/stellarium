@@ -54,6 +54,11 @@ StelTextureSP Planet::texEarthShadow;
 
 bool Planet::permanentDrawingOrbits = false;
 
+bool Planet::flagCustomGrsSettings = false;
+double Planet::customGrsJD = 2456908.;
+double Planet::customGrsDrift = 15.21875;
+int Planet::customGrsLongitude = 216;
+
 QOpenGLShaderProgram* Planet::planetShaderProgram=NULL;
 Planet::PlanetShaderVars Planet::planetShaderVars;
 QOpenGLShaderProgram* Planet::ringPlanetShaderProgram=NULL;
@@ -709,7 +714,7 @@ double Planet::getSiderealTime(double JD, double JDE) const
 	double wholeRotations = floor(rotations);
 	double remainder = rotations - wholeRotations;
 
-	if (englishName=="Jupiter" && re.offset < 0.0)
+	if (englishName=="Jupiter")
 	{
 		// http://www.projectpluto.com/grs_form.htm
 		// CM( System II) =  181.62 + 870.1869147 * jd + correction [870d rotation every day]
@@ -724,7 +729,11 @@ double Planet::getSiderealTime(double JD, double JDE) const
 		// http://www.skyandtelescope.com/observing/transit-times-of-jupiters-great-red-spot/ writes:
 		// The predictions assume the Red Spot was at Jovian System II longitude 216° in September 2014 and continues to drift 1.25° per month, based on historical trends noted by JUPOS.
 		// GRS longitude was at 2014-09-08 216d with a drift of 1.25d every month
-		double longitudeGRS=216+1.25*( JDE - 2456908)/30;
+		double longitudeGRS = 0.;
+		if (flagCustomGrsSettings)
+			longitudeGRS = customGrsLongitude + customGrsDrift*(JDE - customGrsJD)/365.25;
+		else
+			longitudeGRS=216+1.25*( JDE - 2456908)/30;
 		// qDebug() << "Jupiter: CM2 = " << cm2 << " longitudeGRS = " << longitudeGRS << " --> rotation = " << (cm2 - longitudeGRS);
 		return cm2 - longitudeGRS + 25.; // + 25 = Jupiter Texture not 0d
 		// To verify:

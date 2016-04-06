@@ -24,6 +24,7 @@
 #include "AddRemoveLandscapesDialog.hpp"
 #include "AtmosphereDialog.hpp"
 #include "StelAddOnMgr.hpp"
+#include "GreatRedSpotDialog.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelSkyCultureMgr.hpp"
@@ -63,6 +64,7 @@ ViewDialog::ViewDialog(QObject* parent) : StelDialog(parent)
 	ui = new Ui_viewDialogForm;
 	addRemoveLandscapesDialog = NULL;
 	atmosphereDialog=NULL;
+	greatRedSpotDialog=NULL;
 }
 
 ViewDialog::~ViewDialog()
@@ -73,6 +75,8 @@ ViewDialog::~ViewDialog()
 	addRemoveLandscapesDialog = NULL;
 	delete atmosphereDialog;
 	atmosphereDialog = NULL;
+	delete greatRedSpotDialog;
+	greatRedSpotDialog = NULL;
 }
 
 void ViewDialog::retranslate()
@@ -221,6 +225,11 @@ void ViewDialog::createDialogContent()
 	connect(ui->planetLimitMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)), drawer, SLOT(setCustomPlanetMagnitudeLimit(double)));
 	ui->planetsLabelsHorizontalSlider->setValue((int)(ssmgr->getLabelsAmount()*10.f));
 	connect(ui->planetsLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(planetsLabelsValueChanged(int)));
+	bool grsFlag = ssmgr->getFlagCustomGrsSettings();
+	ui->customGrsSettingsCheckBox->setChecked(grsFlag);
+	connect(ui->customGrsSettingsCheckBox, SIGNAL(toggled(bool)), this, SLOT(setFlagCustomGrsSettings(bool)));
+	ui->pushButtonGrsDetails->setEnabled(grsFlag);
+	connect(ui->pushButtonGrsDetails, SIGNAL(clicked()), this, SLOT(showGreatRedSpotDialog()));
 
 	// Shooting stars section
 	connect(mmgr, SIGNAL(zhrChanged(int)), this, SLOT(setZHR(int)));
@@ -505,6 +514,14 @@ void ViewDialog::setFlagLandscapeUseMinimalBrightness(bool b)
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	lmgr->setFlagLandscapeUseMinimalBrightness(b);
 	populateLandscapeMinimalBrightness();
+}
+
+void ViewDialog::setFlagCustomGrsSettings(bool b)
+{
+	GETSTELMODULE(SolarSystem)->setFlagCustomGrsSettings(b);
+	ui->pushButtonGrsDetails->setEnabled(b);
+	if (!b)
+		greatRedSpotDialog->setVisible(false);
 }
 
 void ViewDialog::populateLandscapeMinimalBrightness()
@@ -798,6 +815,13 @@ void ViewDialog::showAtmosphereDialog()
 	atmosphereDialog->setVisible(true);
 }
 
+void ViewDialog::showGreatRedSpotDialog()
+{
+	if(greatRedSpotDialog == NULL)
+		greatRedSpotDialog = new GreatRedSpotDialog();
+
+	greatRedSpotDialog->setVisible(true);
+}
 
 void ViewDialog::setZHR(int zhr)
 {
