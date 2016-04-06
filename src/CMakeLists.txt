@@ -330,6 +330,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/AddRemoveLandscapesDialog.cpp
           gui/AtmosphereDialog.hpp
           gui/AtmosphereDialog.cpp
+          gui/GreatRedSpotDialog.hpp
+          gui/GreatRedSpotDialog.cpp
           gui/CustomDeltaTEquationDialog.hpp
           gui/CustomDeltaTEquationDialog.cpp
           gui/AstroCalcDialog.hpp
@@ -348,6 +350,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/searchDialogGui.ui
           gui/configurationDialog.ui
           gui/atmosphereDialog.ui
+          gui/greatRedSpotDialog.ui
           gui/customDeltaTEquationDialog.ui
           gui/astroCalcDialog.ui
           gui/addRemoveLandscapesDialog.ui
