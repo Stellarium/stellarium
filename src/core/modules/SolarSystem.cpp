@@ -133,7 +133,7 @@ double SolarSystem::getCallOrder(StelModuleActionName actionName) const
 // Init and load the solar system data
 void SolarSystem::init()
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
+	conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
 	Planet::init();
@@ -161,6 +161,12 @@ void SolarSystem::init()
 	setFlagIsolatedTrails(conf->value("viewing/flag_isolated_trails", true).toBool());
 	setFlagIsolatedOrbits(conf->value("viewing/flag_isolated_orbits", true).toBool());
 	setFlagPermanentOrbits(conf->value("astro/flag_permanent_orbits", false).toBool());
+
+	// Settings for calculation of position of Great Red Spot on Jupiter
+	setFlagCustomGrsSettings(conf->value("astro/flag_grs_custom", false).toBool());
+	setCustomGrsLongitude(conf->value("astro/grs_longitude", 216).toInt());
+	setCustomGrsDrift(conf->value("astro/grs_drift", 1.25).toDouble());
+	setCustomGrsJD(conf->value("astro/grs_jd", 2456908.).toDouble());
 
 	recreateTrails();
 
@@ -1787,7 +1793,55 @@ QString SolarSystem::getApparentMagnitudeAlgorithmOnEarth() const
 
 void SolarSystem::setFlagPermanentOrbits(bool b)
 {
-	Planet::permanentDrawingOrbits=b;
+	Planet::permanentDrawingOrbits=b;	
+}
+
+void SolarSystem::setFlagCustomGrsSettings(bool b)
+{
+	Planet::flagCustomGrsSettings=b;
+	// automatic saving of the setting
+	conf->setValue("astro/flag_grs_custom", b);
+}
+
+bool SolarSystem::getFlagCustomGrsSettings()
+{
+	return Planet::flagCustomGrsSettings;
+}
+
+void SolarSystem::setCustomGrsLongitude(int longitude)
+{
+	Planet::customGrsLongitude = longitude;
+	// automatic saving of the setting
+	conf->setValue("astro/grs_longitude", longitude);
+}
+
+int SolarSystem::getCustomGrsLongitude()
+{
+	return Planet::customGrsLongitude;
+}
+
+void SolarSystem::setCustomGrsDrift(double drift)
+{
+	Planet::customGrsDrift = drift;
+	// automatic saving of the setting
+	conf->setValue("astro/grs_drift", drift);
+}
+
+double SolarSystem::getCustomGrsDrift()
+{
+	return Planet::customGrsDrift;
+}
+
+void SolarSystem::setCustomGrsJD(double JD)
+{
+	Planet::customGrsJD = JD;
+	// automatic saving of the setting
+	conf->setValue("astro/grs_jd", JD);
+}
+
+double SolarSystem::getCustomGrsJD()
+{
+	return Planet::customGrsJD;
 }
 
 double SolarSystem::getEclipseFactor(const StelCore* core) const
