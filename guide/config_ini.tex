@@ -8,7 +8,7 @@
 %\chapterimage{chapter-t1-bg} % Chapter heading image
 
 \chapter{Configuration File}
-\label{ch:ConfigurationFile}
+\label{sec:config.ini}
 See \ref{ch:AdvancedUse:TheMainConfigurationFile}{Advanced Use, The
 Main Configuration File} for information about this file, including its
 default installed location, and command line options that can
@@ -19,7 +19,7 @@ affect how it is processed.
 %% GZ This is no longer true. Reactivate somehow? 
 
 The file \file{config.ini} (or a file which you can load instead with
-the \file{-\/-config <file>} option) is structured into the following
+the \command{-\/-config <file>} option) is structured into the following
 parts. In addition, plugins can add a section named like the plugin
 (Exception: The Text User Interface plugin's section is named [tui]
 for historical reasons).
@@ -296,7 +296,8 @@ last\_location    & string & Coordinates of last used location in stellarium.\\\
 \section{\big[landscape\big]}\label{sec:config.ini:landscape}
 
 \begin{longtabu} to \textwidth {l|l|X}\toprule
-\emph{ID} & \emph{Type} & \emph{Description}\\
+\emph{ID} & \emph{Type} & \emph{Description}\\\midrule
+atmosphere\_fade\_duration      & float & Sets the time (seconds) it takes for the atmosphere to fade when de-selected\\\midrule
 flag\_landscape                 & bool & Set to false if you don't want to see the landscape at all\\\midrule
 flag\_fog                       & bool & Set to \emph{false} if you don't want to see fog on start-up\\\midrule
 flag\_atmosphere                & bool & Set to \emph{false} if you don't want to see atmosphere on start-up\\\midrule
@@ -440,8 +441,8 @@ password   & string & Password for proxy. E.g. \emph{xxxxx}\\\bottomrule
 
 \section{\big[scripts\big]}\label{sec:config.ini:scripts}
 
-\begin{longtabu} to \textwidth {l|l|X}\toprule
-\emph{ID}                  & \emph{Type} & \emph{Description}\\\midrule
+\begin{longtabu} to \textwidth {l|l|l|X}\toprule
+\emph{ID}                  & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
 startup\_script                & string & startup.ssc & name of script executed on program start\\\bottomrule 
 %% These are unused as on 0.15pre.
 %flag\_script\_allow\_ui        & bool &\\\midrule
@@ -557,7 +558,6 @@ toggled with hotkeys or switched in the GUI.
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
 \emph{ID} & \emph{Type} & \emph{Description}\\\midrule
-atmosphere\_fade\_duration      & float & Sets the time (seconds) it takes for the atmosphere to fade when de-selected\\\midrule
 flag\_constellation\_drawing    & bool  & Display constellation line drawing\\\midrule
 flag\_constellation\_name       & bool  & Display constellation names\\\midrule
 flag\_constellation\_art        & bool  & Display constellation art\\\midrule
@@ -566,6 +566,7 @@ flag\_constellation\_isolate\_selected  & bool & If \emph{true}, constellation l
                                                  if that star is ``on'' one of the constellation lines.\\\midrule
 flag\_constellation\_pick     & bool & Set to \emph{true} if you only want to see the line drawing, art and name of the selected constellation star\\\midrule
 flag\_isolated\_trails        & bool & Set to \emph{true} if you only want to see the trail line drawn for the selected planet (asteroid, comet, moon)\\\midrule
+flag\_isolated\_orbits        & bool & Set to \emph{true} if you want to see orbits only for selected planet and their moons.\\\midrule
 flag\_azimutal\_grid          & bool & Display azimuthal grid \\\midrule
 flag\_equatorial\_grid        & bool & Display equatorial grid (of date) \\\midrule
 flag\_equatorial\_J2000\_grid & bool & Display equatorial grid (J2000) \\\midrule
@@ -591,9 +592,7 @@ constellation\_font\_size          & int   & font size for constellation labels\
 constellation\_line\_thickness     & float & thickness of lines of the constellations [1\ldots5]. Typical value: \emph{1}\\\midrule
 flag\_night                        & bool  & Enable night mode (red-only mode) on startup\\\midrule
 light\_pollution\_luminance        & float & Sets the level of the light pollution simulation\\\midrule %% TODO: WHAT IS THIS?
-use\_luminance\_adaptation         & bool  & Enable dynamic eye adaptation.\\\midrule %% TODO: DESCRIBE!
-flag\_isolated\_trails             & float & Change to \emph{false} if you want to see the trails for all celestial bodies from Solar system.\\\midrule
-flag\_isolated\_orbits             & float & Change to \emph{false} if you want to see orbits for selected planet and their moons.\\
+use\_luminance\_adaptation         & bool  & Enable dynamic eye adaptation.\\ %% TODO: DESCRIBE!
 \bottomrule
 \end{longtabu}
 
