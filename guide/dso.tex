@@ -1,31 +1,32 @@
 %% Stellarium User Guide
 
-\chapter{Deep-Sky Objects}\label{deep-sky-objects}
+\chapter{Deep-Sky Objects}%\label{deep-sky-objects}
+\label{ch:dso}
 
 Extended objects are those which are external to the solar system, and
-are not point-sources like stars. Extended objects include galaxies,
-planetary nebulae and star clusters. These objects may or may not have
-images associated with them. Stellarium also comes with a catalogue with
-over 14,000 extended objects containing the combined data from many
-catalogues, with 190 images.
+are not point-sources like stars. These are generally known as
+\indexterm{deep-sky objects} or DSO. Extended objects include
+galaxies, planetary nebulae and star clusters. These objects may or
+may not have images associated with them. Stellarium also comes with a
+catalogue with over 14,000 extended objects containing the combined
+data from many catalogues, with 190 images.
 
-Since to version 0.10.0 Stellarium uses new method of displaying
+Since version 0.10.0 Stellarium uses new method of displaying
 textures using the ``json'' cataloguing system. At the same time the
-Simbad online catalogue was added to the search feature making it
-largely redundant and used now only as a first search point or if there
+Simbad online catalogue was added to the search feature, making the catalog
+somewhat redundant and used now only as a first search point or if there
 is no internet connection.
 
 If the object has a name (not just a catalogue number), you should add
-one or more records to the \texttt{.../nebulae/default/names.dat} file
-(where \texttt{...} is either the installation directory or the user
-directory). See section
+one or more records to the \file{.../nebulae/default/names.dat} file
+(where \file{...} is either the installation directory or the user
+directory). See section~\ref{dso:modifyingNamesDat}
 \emph{\protect\hyperlink{Modifyingux5fnames.dat}{Modifying names.dat}}
 for details of the file format.
 
 If you wish to associate a texture (image) with the object, you must now
-add a record to the \texttt{.../nebulae/default/textures.json} file. See
-section \emph{\protect\hyperlink{Modifyingux5ftextures.json}{Modifying
-textures.json}} for details of the file format.
+add a record to the \file{.../nebulae/default/textures.json} file. See
+section~\ref{dso:modTexturesJson} for details of the file format.
 
 Nebula images should have dimensions which are integer powers of two,
 i.e. 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024 ... pixels along each
@@ -33,17 +34,18 @@ side. If this requirement is not met, your textures may not be visible,
 or graphics performance may be seriously impacted. PNG or JPG formats
 are both supported.
 
-\section{GUI for manage by Deep-Sky
-Objects}\label{gui-for-manage-by-deep-sky-objects}
+\section{GUI for managing Deep-Sky Objects}%\label{gui-for-manage-by-deep-sky-objects}
+\label{sec:dso:gui}
 
 \begin{figure}[h]
 \centering\includegraphics{DSO_GUI}
 %\caption{Figure caption}
 \end{figure}
 
-\section{Stellarium DSO Catalog}\label{stellarium-dso-catalog}
+\section{Stellarium DSO Catalog}%\label{stellarium-dso-catalog}
+\label{sec:dso:catalog}
 
-Stellarium DSO Catalog is contains over 1400 objects and he available
+Stellarium's DSO Catalog contains over 1400 objects and is available
 for end users as collection of files:
 
 \begin{itemize}
@@ -63,44 +65,29 @@ ASCII file can be converted into binary format through enabling option
 file. The file \texttt{catalog.txt} should be put to the directory
 \texttt{.../nebulae/default/}.
 
-Stellarium DSO Catalog contains data and supported the designations for
+Stellarium DSO Catalog contains data and supports the designations for
 follow catalogues:
 
-\begin{itemize}
-\item
-  New General Catalogue (NGC)
-\item
-  Index Catalogue (IC)
-\item
-  Messier Catalog (M)
-\item
-  Caldwell Catalogue (C)
-\item
-  Barnard Catalogue (B)
-\item
-  Sharpless Catalogue (Sh2)
-\item
-  Van den Bergh Catalogue of reflection nebulae (VdB)
-\item
-  A catalogue of H$\alpha$-emission regions in the southern Milky Way (RCW)
-\item
-  Lynds' Catalogue of Dark Nebulae (LDN)
-\item
-  Lynds' Catalogue of Bright Nebulae (LBN)
-\item
-  Collinder Catalogue (Cr)
-\item
-  Melotte Catalogue of Deep Sky Objects (Mel)
-\item
-  HYPERLEDA. I. Catalog of galaxies (PGC)\footnote{Partial support}
-\item
-  The Uppsala General Catalogue of Galaxies (UGC)\footnote{Partial
-    support}
-\item
-  Cederblad Catalog of bright diffuse Galactic nebulae (Ced)
-\end{itemize}
+\begin{description}
+\item[NGC]  New General Catalogue 
+\item[IC] Index Catalogue 
+\item[M] Messier Catalog
+\item[C] Caldwell Catalogue 
+\item[B] Barnard Catalogue 
+\item[Sh2] Sharpless Catalogue 
+\item[VdB] Van den Bergh Catalogue of reflection nebulae 
+\item[RCW]  A catalogue of H$\alpha$-emission regions in the southern Milky Way 
+\item[LDN]  Lynds' Catalogue of Dark Nebulae 
+\item[LBN]  Lynds' Catalogue of Bright Nebulae 
+\item[Cr] Collinder Catalogue 
+\item[Mel]  Melotte Catalogue of Deep Sky Objects 
+\item[PGC]  HYPERLEDA. I. Catalog of galaxies \footnote{Partial support}
+\item[UGC]  The Uppsala General Catalogue of Galaxies \footnote{Partial    support}
+\item[Ced]  Cederblad Catalog of bright diffuse Galactic nebulae 
+\end{description}
 
-\section{Modifying catalog.dat}\label{modifying-catalog.dat}
+
+\subsection{Modifying catalog.dat}\label{modifying-catalog.dat}
 
 This section is described inner structure of files \texttt{catalog.dat}
 (has binary format) and \texttt{catalog.txt} (has ASCII format).
@@ -160,7 +147,7 @@ nebulae)\tabularnewline
 \bottomrule
 \end{longtabu}
 
-\subsection{Types of Objects}\label{types-of-objects}
+\subsubsection{Types of Objects}\label{types-of-objects}
 
 Possible values for type of objects in the file \texttt{catalog.dat}.
 
@@ -207,10 +194,11 @@ Objects} etc.\tabularnewline
 \bottomrule
 \end{longtabu}
 
-\section{Modifying names.dat}\label{modifying-names.dat}
+\subsection{Modifying names.dat}%\label{modifying-names.dat}
+\label{sec:dso:modifyingNamesDat}
 
-Each line in the \texttt{names.dat} file contains one record. A record
-relates an extended object catalogue number (from \texttt{catalog.dat})
+Each line in the \file{names.dat} file contains one record. A record
+relates an extended object catalogue number (from \file{catalog.dat})
 with a name. A single catalogue number may have more than one record in
 this file.
 
@@ -229,7 +217,8 @@ The record structure is as follows:
 If an object has more than one record in the \texttt{names.dat} file,
 the last record in the file will be used for the nebula label.
 
-\section{Modifying textures.json}\label{modifying-textures.json}
+\subsection{Modifying textures.json}%\label{modifying-textures.json}
+\label{sec:dso:modifyingTexturesJson}
 
 This file is used to describe each nebula image. The file structure
 follows the JSON format, a detailed description of which may be found at
@@ -330,12 +319,11 @@ display will limit the size to about 1 degree before distortion becomes
 evident. Larger displays can be sectioned into a mosaic of smaller
 textures for a more accurate display
 
-\section{Adding Extra Nebulae
-Images}\label{adding-extra-nebulae-images}
+\section{Adding Extra Nebulae Images}%\label{adding-extra-nebulae-images}
+\label{sec:dso:adding_images}
 
-\subsection{\texorpdfstring{Preparing a photo for inclusion to the
-\texttt{textures.json}
-file}{Preparing a photo for inclusion to the textures.json file}}\label{preparing-a-photo-for-inclusion-to-the-textures.json-file}
+\subsection{\texorpdfstring{Preparing a photo for inclusion to the \file{textures.json} file}{Preparing a photo for inclusion to the textures.json file}}
+\label{sec:dso:preparing-a-photo}
 
 \begin{figure}[h]
 \centering\includegraphics{nebula-display}
@@ -347,9 +335,9 @@ Stellarium as a screen backdrop. Then when you have the picture you will
 need align it so that north is directly up and not inverted side to side
 or up and down as can happen with photos taken with a diagonal mirror in
 the path. Next you will need to crop the picture, setting the main
-feature at the centre and making the cropped size a factor of 2n eg. 64,
+feature at the centre and making the cropped size a factor of $2^n$ eg. 64,
 128, 256, 512 or 1024 pixels square. When cropping make sure you leave
-at least five prominent background stars
+at least five prominent background stars.
 
 The next step is to process your photo to make the background
 black,black. This will ensure that your background will meld with the
@@ -362,7 +350,7 @@ at least 6 known GSC stars that can be identified. That is why the
 cropping with plenty of stars was necessary. When the plate is solved
 you will need to find the J2000 coordinates of the corners and convert
 them to decimal values to form the world coordinates in the
-\texttt{textures.json} file.
+\file{textures.json} file.
 
 \begin{figure}[h]
 \centering\includegraphics{EQ-Decimal.jpg}
@@ -381,7 +369,7 @@ from
 \end{figure}
 
 Here is a second program written in Qb64(gl)that will perform the same
-task but allow manipulation of the epochs.
+task but allows manipulation of the epochs.
 \url{http://barry.sarcasmogerdes.com/stellarium/uploads/writejsoninsert.zip}
 
 \subsection{Plate Solving}\label{plate-solving}
