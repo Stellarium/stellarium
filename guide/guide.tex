@@ -48,6 +48,7 @@
 \input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
 %\usepackage{fancyvrb}
 \usepackage{marvosym}% For the Zodiac symbols, \Aries etc. 
+\usepackage{tocvsec2} % Allows fine-tuning TOC depth. (to suppress GPL sections in TOC but have them still numbered)
 %\newenvironment{commands}{\begin{wBox}\begin{Verbatim}}{\end{Verbatim}\end{wBox}}
 %\DefineVerbatimEnvironment{commands}{\begin{wBox}\begin{Verbatim}}{\end{Verbatim}\end{wBox}}
 %\lstnewenvironment{commands}{\begin{wBox}\lstset{basicstyle=\ttfamily}\begin{lstlisting}}{\end{lstlisting}\end{wBox}}
@@ -58,7 +59,7 @@
 \newcommand{\DocumentEdition}{1}
 
 \begin{document}
-
+\maxtocdepth{subsection}
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
@@ -232,16 +233,22 @@ License''.\\ % License information
 \include{config_ini}
 
 %----------------------------------------------------------------------------------------
-%	CHAPTER X (Accuracy, and some notes about used algorithms.)
+%	CHAPTER B (Bortle Scale) -- N.B. Try to keep this as Appendix "B" [for Bortle]
 %----------------------------------------------------------------------------------------
 
-\include{accuracy}
+\include{ref_bortle_scale}
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER X (Star Catalogue)
 %----------------------------------------------------------------------------------------
 
 \include{star_catalogue}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER X (Accuracy, and some notes about used algorithms.)
+%----------------------------------------------------------------------------------------
+
+\include{accuracy}
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER X (Acknowledgements)
@@ -254,8 +261,9 @@ License''.\\ % License information
 %----------------------------------------------------------------------------------------
 
 %\chapterimage{chapter-t1-bg} % Chapter heading image
+\settocdepth{chapter}
 \include{license}
-
+\resettocdepth
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
