@@ -165,7 +165,7 @@ void SolarSystem::init()
 	// Settings for calculation of position of Great Red Spot on Jupiter
 	setFlagCustomGrsSettings(conf->value("astro/flag_grs_custom", false).toBool());
 	setCustomGrsLongitude(conf->value("astro/grs_longitude", 216).toInt());
-	setCustomGrsDrift(conf->value("astro/grs_drift", 1.25).toDouble());
+	setCustomGrsDrift(conf->value("astro/grs_drift", 15.21875).toDouble());
 	setCustomGrsJD(conf->value("astro/grs_jd", 2456908.).toDouble());
 
 	recreateTrails();
