@@ -1,7 +1,14 @@
+%% Part of Stellarium User Guide
+%% Status:
+%% 2015-12-30 taken from wiki
+%% 2016-04-06 GZ reformatted a bit. 
+%% TODO: document the more obscure entries. Add links to the respective chapters.
+%% TODO: remove unused entries, add new ones.  
+
 %\chapterimage{chapter-t1-bg} % Chapter heading image
 
 \chapter{Configuration File}
-\label{ch:ConfigurationFile}
+\label{sec:config.ini}
 See \ref{ch:AdvancedUse:TheMainConfigurationFile}{Advanced Use, The
 Main Configuration File} for information about this file, including its
 default installed location, and command line options that can
@@ -11,86 +18,63 @@ affect how it is processed.
 %Possible new parameters are marked by yellow background.
 %% GZ This is no longer true. Reactivate somehow? 
 
-The file \file{config.ini} (or a file which you can load instead with the \file{-\/-config <file>} option) is structured into the following parts.
+The file \file{config.ini} (or a file which you can load instead with
+the \command{-\/-config <file>} option) is structured into the following
+parts. In addition, plugins can add a section named like the plugin
+(Exception: The Text User Interface plugin's section is named [tui]
+for historical reasons).
 
 \section{\big[astro\big]}
 \label{sec:config.ini:astro}
 
-\begin{longtabu} to \textwidth {l|l|X}
+This section includes settings for the commonly displayed objects.
+
+\begin{longtabu} to \textwidth {l|l|l|X}
 \toprule
-\emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
-\midrule
-apparent\_magnitude\_algorithm & string & Set algorithm for computation of apparent magnitude of the planets. Possible
-values: \emph{Planesas}, \emph{Mueller}, \emph{Harris} and
-\emph{Generic}\footnote{Available since version 0.13.3}.  Default value: \emph{Harris}.\\
-\midrule
-nebula\_magnitude\_limit & float & Value of limiting magnitude for the deep-sky objects. Default value: \emph{8.5}.\tabularnewline
-star\_magnitude\_limit & float & Value of limiting magnitude for the stars. Sometimes you don't want to display more stars when zooming in. \tabularnewline
-\midrule
-flag\_nebula\_magnitude\_limit & bool & Set to \emph{true} to activate limit for showing deep-sky objects. Default value: \emph{false}.\tabularnewline
-\midrule
-flag\_star\_magnitude\_limit & bool & Set to \emph{true} to activate limit for showing stars\tabularnewline
-\midrule
-flag\_extinction\_below\_horizon & bool & Set to \emph{true} to apply extinction effects to sky below horizon\tabularnewline
-\midrule
-extinction\_mode\_below\_horizon & string & Set extinction mode for atmosphere below horizon. Possible values: \emph{zero},
-\emph{mirror} and \emph{max}. Default value is \emph{zero}.\tabularnewline
-\midrule
-flag\_stars & bool & Set to \emph{false} to hide the stars on start-up\tabularnewline
-\midrule
-flag\_star\_name & bool & Set to \emph{false} to hide the star labels on start-up\tabularnewline
-\midrule
-flag\_planets & bool & Set to \emph{false} to hide the planet labels on start-up\tabularnewline
-\midrule
-flag\_planets\_hints & bool & Set to \emph{false} to hide the planet hints on start-up (names and circular highlights)\tabularnewline
-\midrule
-flag\_planets\_orbits & bool & Set to \emph{true} to show the planet orbits on start-up\tabularnewline
-\midrule
-flag\_permanent\_orbits & bool & Set to \emph{true} to show the orbit of planet, when planet is out of the viewport also.\tabularnewline
-\midrule
-flag\_planets\_pointers & bool & Set to \emph{true} to show the planet pointer markers on start-up\tabularnewline
-\midrule
-flag\_light\_travel\_time & bool & Set to \emph{true} to improve accuracy in the movement of the planets by compensating for the
-time it takes for light to travel. This has a slight impact on performance, but is essential e.g.\ for Jupiter's moons.\tabularnewline
-\midrule
-flag\_object\_trails & bool & Turns on and off drawing of object trails (which show the movement of the planets over time)\tabularnewline
-\midrule
-flag\_nebula & bool & Set to \emph{false} to hide the nebulae on start-up. Default value: \emph{true}.\tabularnewline
-\midrule
-flag\_nebula\_name & bool & Set to \emph{true} to show the nebula labels on start-up. Default value: \emph{false}.\tabularnewline
-\midrule
-flag\_nebula\_long\_name & bool & Set to \emph{true} to show the nebula long labels on start-up.\tabularnewline
-\midrule
-flag\_nebula\_display\_no\_texture & bool & Set to \emph{true} to suppress displaying of nebula textures. Default value: \emph{false}.\tabularnewline
-\midrule
-nebula\_hints\_amount & float & Sets the amount of hints [0\ldots10]. Default value: \emph{3.0}.\tabularnewline
-\midrule
-nebula\_labels\_amount & float & Sets the amount of labels [0\ldots10]. Default value: \emph{3.0}.\tabularnewline
-\midrule
-flag\_milky\_way & bool & Set to \emph{false} to hide the Milky Way. Default value: \emph{true}.\tabularnewline
-\midrule
-milky\_way\_intensity & float & Sets the relative brightness with which the milky way is drawn. Typical [1\ldots10]. Default value: \emph{1.0}.\tabularnewline
-\midrule
-flag\_zodiacal\_light & bool & Set to \emph{false} to hide the zodiacal light\tabularnewline
-\midrule
-zodiacal\_light\_intensity & float & Sets the relative brightness with which the zodiacal light is drawn. Default value: \emph{1.0}.\tabularnewline
-\midrule
-max\_mag\_nebula\_name & float & Sets the magnitude of the nebulae whose name is shown. Typical value: \emph{8}\tabularnewline
-\midrule
+\emph{ID} & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
+apparent\_magnitude\_algorithm & string & Harris & Set algorithm for computation of apparent magnitude of the planets. 
+                                                   Possible values: \emph{Planesas}, \emph{Mueller}, \emph{Harris} 
+                                                   and \emph{Generic}\footnote{Available since version 0.13.3}.\\\midrule
+nebula\_magnitude\_limit         & float & 8.5  & Value of limiting magnitude for the deep-sky objects.\\
+star\_magnitude\_limit           & float &      & Value of limiting magnitude for the stars. 
+                                                  Sometimes you don't want to display more stars when zooming in. \\\midrule
+flag\_nebula\_magnitude\_limit   & bool & false & Set to \emph{true} to activate limit for showing deep-sky objects.\\\midrule
+flag\_star\_magnitude\_limit     & bool &       & Set to \emph{true} to activate limit for showing stars\\\midrule
+%% STILL USED?
+flag\_extinction\_below\_horizon & bool &       & Set to \emph{true} to apply extinction effects to sky below horizon\\\midrule
+extinction\_mode\_below\_horizon & string & zero & Set extinction mode for atmosphere below horizon. 
+                                                   Possible values: \emph{zero}, \emph{mirror} and \emph{max}.\\\midrule
+flag\_stars               & bool & true  & Set to \emph{false} to hide the stars on start-up\\\midrule
+flag\_star\_name          & bool & true  & Set to \emph{false} to hide the star labels on start-up\\\midrule
+flag\_planets             & bool & true  & Set to \emph{false} to hide the planet labels on start-up\\\midrule
+flag\_planets\_hints      & bool & true  & Set to \emph{false} to hide the planet hints on startup (names and circular highlights)\\\midrule
+flag\_planets\_orbits     & bool & false & Set to \emph{true} to show the planet orbits on startup\\\midrule
+flag\_permanent\_orbits   & bool & false & Set to \emph{true} to show the orbit of planet, when planet is out of the viewport also.\\\midrule
+flag\_planets\_pointers   & bool & false & Set to \emph{true} to show the planet pointer markers on startup\\\midrule
+flag\_light\_travel\_time & bool & true  & Should be \emph{true} to improve accuracy in the movement of the planets by compensating 
+                                           for the time it takes for light to travel. This has a slight impact on performance, 
+                                           but is essential e.g.\ for Jupiter's moons.\\\midrule
+flag\_object\_trails      & bool & false & Turns on and off drawing of object trails (which show the movement of the planets over time)\\\midrule
+flag\_nebula              & bool & true  & Set to \emph{false} to hide the nebulae on start-up. \\\midrule
+flag\_nebula\_name        & bool & false & Set to \emph{true} to show the nebula labels on start-up. \\\midrule
+flag\_nebula\_long\_name  & bool &       & Set to \emph{true} to show the nebula long labels on start-up.\\\midrule
+%% TODO: Still Used?
+flag\_nebula\_display\_no\_texture & bool  & false & Set to \emph{true} to suppress displaying of nebula textures. \\\midrule
+nebula\_hints\_amount              & float & 3.0   & Sets the amount of hints [0\ldots10]. \\\midrule
+nebula\_labels\_amount             & float & 3.0   & Sets the amount of labels [0\ldots10].\\\midrule
+flag\_milky\_way                   & bool  & true  & Set to \emph{false} to hide the Milky Way.\\\midrule
+milky\_way\_intensity              & float & 1.0   & Sets the relative brightness with which the milky way is drawn. Typical [1\ldots3]. \\\midrule
+flag\_zodiacal\_light              & bool  & true  & Set to \emph{false} to hide the zodiacal light\\\midrule
+zodiacal\_light\_intensity         & float & 1.0   & Sets the relative brightness with which the zodiacal light is drawn. \\\midrule
+max\_mag\_nebula\_name             & float & 8.0   & Sets the magnitude of the nebulae whose name is shown. \\\midrule
 %% GZ The following indeed exists, but as of 0.15pre does nothing useful inside the program. TODO take out?
-%nebula\_scale & float & Sets how much to scale nebulae. a setting of \emph{1} will display nebulae at normal size. Default value: \emph{1.0}.\tabularnewline
-%\midrule
+%nebula\_scale & float & Sets how much to scale nebulae. a setting of \emph{1} will display nebulae at normal size. Default value: \emph{1.0}.\\\midrule
 %% GZ NOT USED
-%flag\_bright\_nebulae & bool & Set to \emph{true} to increase nebulae brightness to enhance viewing (less realistic)\tabularnewline
-%\midrule
-%flag\_nebula\_ngc & bool & Enables/disables display of all NGC objects\tabularnewline
-%\midrule
-flag\_nebula\_hints\_proportional & bool & Enables/disables proportional markers for deep-sky objects. Default value: \emph{false}.\tabularnewline
-\midrule
-flag\_surface\_brightness\_usage & bool & Enables/disables usage surface brightness for markers for deep-sky objects. Default value: \emph{false}.\tabularnewline
-\midrule
-flag\_use\_type\_filter & bool & Enables/disables usage of the type filters for deep-sky objects. Default value: \emph{false}.\tabularnewline
-\bottomrule
+%flag\_bright\_nebulae & bool & Set to \emph{true} to increase nebulae brightness to enhance viewing (less realistic)\\\midrule
+%flag\_nebula\_ngc & bool & Enables/disables display of all NGC objects\\\midrule
+flag\_nebula\_hints\_proportional & bool & false &Enables/disables proportional markers for deep-sky objects. \\\midrule
+flag\_surface\_brightness\_usage  & bool & false &Enables/disables usage surface brightness for markers for deep-sky objects.\\\midrule
+flag\_use\_type\_filter           & bool & false &Enables/disables usage of the type filters for deep-sky objects. \\\bottomrule
 \end{longtabu}
 
 \section{\big[color\big]}
@@ -103,7 +87,7 @@ no whitespace between the numbers!
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
-\emph{ID} & \emph{Default} & \emph{Colour of the\ldots}\tabularnewline
+\emph{ID} & \emph{Default} & \emph{Colour of the\ldots}\\
 \midrule
 default\_color           & 0.5,0.5,0.7 & default colour.\\\midrule
 azimuthal\_color         & 0.3,0.2,0.1 &  azimuthal grid. \\\midrule
@@ -172,38 +156,22 @@ dso\_young\_stellar\_object\_color      & 1.0,0.7,0.2 & young stellar objects sy
 
 You can fine-tune the bits of information to display for the selected object in this section. Set the entry to \emph{true} to display it.
 
-\begin{longtabu} to \textwidth {l|l|X}
-\toprule
-\emph{ID} & \emph{Type} & \emph{Description}\\
-\midrule
-flag\_show\_absolutemagnitude & bool & absolute magnitude for objects.\\
-\midrule
-flag\_show\_altaz & bool & horizontal coordinates for objects.\\
-\midrule
-flag\_show\_catalognumber & bool & catalog designations for objects.\\
-\midrule
-flag\_show\_distance & bool & distance to object.\\
-\midrule
-flag\_show\_extra & bool & extra info for object.\\
-\midrule
-flag\_show\_hourangle & bool & hour angle for object.\\
-\midrule
-flag\_show\_magnitude & bool & magnitude for object.\\
-\midrule
-flag\_show\_name & bool & common name for object.\\
-\midrule
-flag\_show\_radecj2000 & bool & equatorial coordinates (J2000) of object.\\
-\midrule
-flag\_show\_radecofdate & bool & equatorial coordinates (of date) of object.\\
-\midrule
-flag\_show\_size & bool & size of object.\\
-\midrule
-flag\_show\_galcoord & bool & galactic coordinates (System~II) of object.\\
-\midrule
-flag\_show\_eclcoord & bool & ecliptic coordinates (J2000 and of date) of object.\\
-\midrule
-flag\_show\_type & bool & type of object\\
-\bottomrule
+\begin{longtabu} to \textwidth {l|l|X}\toprule
+\emph{ID} & \emph{Type} & \emph{Description}\\\midrule
+flag\_show\_absolutemagnitude & bool & absolute magnitude for objects.\\\midrule
+flag\_show\_altaz             & bool & horizontal coordinates for objects.\\\midrule
+flag\_show\_catalognumber     & bool & catalog designations for objects.\\\midrule
+flag\_show\_distance          & bool & distance to object.\\\midrule
+flag\_show\_extra             & bool & extra info for object.\\\midrule
+flag\_show\_hourangle         & bool & hour angle for object.\\\midrule
+flag\_show\_magnitude         & bool & magnitude for object.\\\midrule
+flag\_show\_name              & bool & common name for object.\\\midrule
+flag\_show\_radecj2000        & bool & equatorial coordinates (J2000) of object.\\\midrule
+flag\_show\_radecofdate       & bool & equatorial coordinates (of date) of object.\\\midrule
+flag\_show\_size              & bool & size of object.\\\midrule
+flag\_show\_galcoord          & bool & galactic coordinates (System~II) of object.\\\midrule
+flag\_show\_eclcoord          & bool & ecliptic coordinates (J2000 and of date) of object.\\\midrule
+flag\_show\_type              & bool & type of object\\\bottomrule
 \end{longtabu}
 
 %% TODO: Maybe separate flag_show_eclcoord and flag_show_eclcoordj2000?
@@ -211,504 +179,293 @@ flag\_show\_type & bool & type of object\\
 \section{\big[custom\_time\_correction\big]}
 \label{sec:config.ini:custom_time_correction}
 
-\begin{longtabu} to \textwidth {l|l|X}
-\toprule
-\emph{ID} & \emph{Type} & \emph{Description}\\
-\midrule
-coefficients & {[}float,float,float{]} & Coefficients for
-custom equation of DeltaT\\
-\midrule
-ndot & float & n-dot value for custom equation of
-DeltaT\\
-\midrule
-year & int & Year for custom equation of DeltaT\\
-\bottomrule
+Stellarium allows experiments with $\Delta T$. See \ref{sec:DeltaT} for details.
+
+\begin{longtabu} to \textwidth {l|l|X}\toprule
+\emph{ID}    & \emph{Type} & \emph{Description}\\\midrule
+coefficients & [float,float,float] & Coefficients for custom equation of DeltaT\\\midrule
+ndot & float & n-dot value for custom equation of DeltaT\\\midrule
+year & int   & Year for custom equation of DeltaT\\\bottomrule
 \end{longtabu}
 
 \section{\big[devel\big]}
 \label{sec:config.ini:devel}
 
-\begin{longtabu} to \textwidth {l|l|X}
-\toprule
-\emph{ID} & \emph{Type} & \emph{Description}\\
-\midrule
-convert\_dso\_catalog & bool & Set to
-\emph{true} to convert \texttt{catalog.txt} file into
-\texttt{catalog.dat} file. Default value: \emph{false}.\\
-\midrule
-convert\_dso\_decimal\_coord & bool & Set to
-\emph{true} to use decimal values for coordinates in source
-catalog. Default value: \emph{true}.\\
-\bottomrule
+This section is for developers only. 
+%% TODO: Still it has to be documented!
+
+\begin{longtabu} to \textwidth {l|l|X}\toprule
+\emph{ID}              & \emph{Type} & \emph{Description}\\\midrule
+convert\_dso\_catalog        & bool & Set to \emph{true} to convert file \file{catalog.txt} 
+                                      into file \file{catalog.dat}. Default value: \emph{false}.\\\midrule
+convert\_dso\_decimal\_coord & bool & Set to \emph{true} to use decimal values for coordinates 
+                                      in source catalog. Default value: \emph{true}.\\\bottomrule
 \end{longtabu}
 
 \section{\big[dso\_catalog\_filters\big]}
 \label{sec:config.ini:dso_catalog_filters}
-In this section you can fine-tune which of the deep-sky catalogs should be activated on startup.
+In this section you can fine-tune which of the deep-sky catalogs should be selected on startup.
 
-\begin{longtabu} to \textwidth {l|l|X}
-\toprule
-\emph{ID} & \emph{Type} & \emph{Description}\\
-\midrule
-flag\_show\_ngc & bool & New General Catalogue (NGC). Default value: \emph{true}. \\
-\midrule
-flag\_show\_ic  & bool & Index Catalogue (IC). Default value: \emph{true}. \\
-\midrule
-flag\_show\_m   & bool & Messier Catalog (M). Default value: \emph{true}. \\
-\midrule
-flag\_show\_c   & bool & Caldwell Catalogue (C). Default value: \emph{false}. \\
-\midrule
-flag\_show\_b   & bool & Barnard Catalogue (B). Default value: \emph{false}. \\
-\midrule
-flag\_show\_sh2 & bool & Sharpless Catalogue (Sh2). Default value: \emph{false}. \\
-\midrule
-flag\_show\_vdb & bool & Van den Bergh Catalogue of reflection nebulae (VdB). Default value: \emph{false}. \\
-\midrule
-flag\_show\_rcw & bool & The RCW catalogue of H$\alpha$-emission regions in the southern Milky Way. Default value: \emph{false}. \\
-\midrule
-flag\_show\_lbn & bool & Lynds' Catalogue of Bright Nebulae (LBN). Default value: \emph{false}. \\
-\midrule
-flag\_show\_ldn & bool & Lynds' Catalogue of Dark Nebulae (LDN). Default value: \emph{false}. \\
-\midrule
-flag\_show\_cr  & bool & Collinder Catalogue (Cr). Default value: \emph{false}. \\
-\midrule
-flag\_show\_mel & bool & Melotte Catalogue of Deep Sky Objects (Mel). Default value: \emph{false}. \\
-\midrule
-flag\_show\_pgc & bool & HYPERLEDA. I. Catalog of galaxies (PGC). Default value: \emph{false}. \\
-\midrule
-flag\_show\_ced & bool & Cederblad Catalog of bright diffuse Galactic nebulae (Ced). Default value: \emph{false}. \\
-\midrule
-flag\_show\_ugc & bool & The Uppsala General Catalogue of Galaxies (UGC). Default value: \emph{false}. \\
-\bottomrule
+\begin{longtabu} to \textwidth {l|l|l|X}\toprule
+\emph{ID} & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
+flag\_show\_ngc & bool & true  & New General Catalogue (NGC). \\\midrule
+flag\_show\_ic  & bool & true  & Index Catalogue (IC). \\\midrule
+flag\_show\_m   & bool & true  & Messier Catalog (M). \\\midrule
+flag\_show\_c   & bool & false & Caldwell Catalogue (C). \\\midrule
+flag\_show\_b   & bool & false & Barnard Catalogue (B). \\\midrule
+flag\_show\_sh2 & bool & false & Sharpless Catalogue (Sh-II). \\\midrule
+flag\_show\_vdb & bool & false & Van den Bergh Catalogue of reflection nebulae (VdB). \\\midrule
+flag\_show\_rcw & bool & false & The RCW catalogue of H$\alpha$-emission regions in the southern Milky Way. \\\midrule
+flag\_show\_lbn & bool & false & Lynds' Catalogue of Bright Nebulae (LBN). \\\midrule
+flag\_show\_ldn & bool & false & Lynds' Catalogue of Dark Nebulae (LDN). \\\midrule
+flag\_show\_cr  & bool & false & Collinder Catalogue (Cr). \\\midrule
+flag\_show\_mel & bool & false & Melotte Catalogue of Deep Sky Objects (Mel).  \\\midrule
+flag\_show\_pgc & bool & false & HYPERLEDA. I. Catalog of galaxies (PGC). \\\midrule
+flag\_show\_ced & bool & false & Cederblad Catalog of bright diffuse Galactic nebulae (Ced). \\\midrule
+flag\_show\_ugc & bool & false & The Uppsala General Catalogue of Galaxies (UGC). \\\bottomrule
 \end{longtabu}
 
 \section{\big[dso\_type\_filters\big]}
-\label{section-dsoux5ftypeux5ffilters}
+\label{sec:config.ini:dso_type_filters}
 
-\begin{longtabu} to \textwidth {l|l|X}
+\begin{longtabu} to \textwidth {l|l|l|X}\toprule
+\emph{ID} & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
+flag\_show\_galaxies              & bool & true & display galaxies.\\\midrule
+flag\_show\_active\_galaxies      & bool & true & display active galaxies. \\\midrule
+flag\_show\_interacting\_galaxies & bool & true & display interacting galaxies.  \\\midrule
+flag\_show\_clusters              & bool & true & display star clusters.  \\\midrule
+flag\_show\_bright\_nebulae       & bool & true & display bright nebulae.  \\\midrule
+flag\_show\_dark\_nebulae         & bool & true & display dark nebulae.  \\\midrule
+flag\_show\_planetary\_nebulae    & bool & true & display planetary nebulae.  \\\midrule
+flag\_show\_hydrogen\_regions     & bool & true & display hydrogen regions. \\\midrule
+flag\_show\_supernova\_remnants   & bool & true & display supernovae remnants. \\\midrule
+flag\_show\_other                 & bool & true & display other deep-sky objects.  \\\bottomrule
+\end{longtabu}
+
+\section{\big[gui\big]}\label{sec:config.ini:gui}
+
+\begin{longtabu} to \textwidth {l|l|l|X}
 \toprule
-\emph{ID} & \emph{Type} & \emph{Description}\\
-\midrule
-flag\_show\_galaxies & bool & Set to \emph{true}
-to displaying galaxies. Default value: \emph{true}. \\
-\midrule
-flag\_show\_active\_galaxies & bool & Set to
-\emph{true} to displaying active galaxies. Default value: \emph{true}. \\
-\midrule
-flag\_show\_interacting\_galaxies & bool & Set
-to \emph{true} to displaying interacting galaxies. Default value: \emph{true}. \\
-\midrule
-flag\_show\_clusters & bool & Set to \emph{true}
-to displaying star clusters. Default value: \emph{true}. \\
-\midrule
-flag\_show\_bright\_nebulae & bool & Set to
-\emph{true} to displaying bright nebulae. Default value: \emph{true}. \\
-\midrule
-flag\_show\_dark\_nebulae & bool & Set to
-\emph{true} to displaying dark nebulae. Default value: \emph{true}. \\
-\midrule
-flag\_show\_planetary\_nebulae & bool & Set to
-\emph{true} to displaying planetary nebulae. Default value: \emph{true}. \\
-\midrule
-flag\_show\_hydrogen\_regions & bool & Set to
-\emph{true} to displaying hydrogen regions. Default value: \emph{true}. \\
-\midrule
-flag\_show\_supernova\_remnants & bool & Set to
-\emph{true} to displaying supernovae remnants. Default value: \emph{true}. \\
-\midrule
-flag\_show\_other & bool & Set to \emph{true} to
-displaying other deep-sky objects. Default value: \emph{true}. \\
+\emph{ID} & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
+base\_font\_size & int    & 13 & Sets the font size. Typical value: \emph{15}\\\midrule
+base\_font\_name & string & Verdana (Windows)    & Selects the name for base font\\
+                 &        & DejaVu Sans (others) & \\\midrule
+%safe\_font\_name & string & Selects the name for safe font, e.g. \emph{Verdana}\\\midrule
+base\_font\_file & string & & Selects the name for font file, e.g. \emph{DejaVuSans.ttf}\\\midrule
+flag\_show\_fps                 & bool   & true & see at how many frames per second Stellarium is rendering\\\midrule
+flag\_show\_fov                 & bool   & true & see how many degrees your vertical field of view is\\\midrule
+%% TODO: Is this required? timeout=0 also keeps cursor visible.
+flag\_mouse\_cursor\_timeout    & bool  & true  & Set to \emph{false} if you want to have cursor visible at all times.\\\midrule
+mouse\_cursor\_timeout          & float & 10    & Set to \emph{0} if you want to keep the mouse cursor visible at all times. 
+                                                  non-0 values mean the cursor will be hidden after that many seconds of inactivity\\\midrule
+flag\_show\_flip\_buttons       & bool  & false & Enables/disables display of the image flipping buttons in the main 
+                                                  toolbar (see section \ref{imageflipping})\\\midrule
+flag\_show\_nebulae\_background\_button & bool & false & Set to \emph{true} if you want to have access to the 
+                                                         button for enabling/disabling backgrounds for deep-sky objects\\\midrule
+flag\_use\_degrees              & bool   &&\\\midrule
+selected\_object\_info          & string & all  & Values: \emph{all}, \emph{short}, \emph{none}, 
+                                                  and \emph{custom} (since V0.12.0; see~\ref{sec:config.ini:}).\\\midrule
+auto\_hide\_horizontal\_toolbar & bool   & true & Set to \emph{true} if you want auto hide the horizontal toolbar.\\\midrule
+auto\_hide\_vertical\_toolbar   & bool   & true & Set to \emph{true} if you want auto hide the vertical toolbar.\\\midrule
+%% NO LONGER HERE!
+%day\_key\_mode                  & string & Specifies the amount of time which is added and subtracted when the 
+%                                                    {[} {]} - and = keys are pressed - calendar days, or sidereal days. 
+%                                                    This option only makes sense for Digitalis planetariums. %% WHY?
+%                                                    Values: \emph{calendar} or \emph{sidereal}\\\midrule
+flag\_use\_window\_transparency & bool   & false & If \emph{false}, show menu bars opaque\\\midrule
+flag\_show\_datetime            & bool   & true  & If \emph{true}, display date and time in the bottom bar\\\midrule
+flag\_time\_jd                  & bool   & false & If \emph{true}, use JD format for time in the bottom bar\\\midrule
+flag\_show\_location            & bool   & true  & If \emph{true}, display location in the bottom bar\\\midrule
+flag\_fov\_dms                  & bool   & false & If \emph{true}, using DMS format for FOV in the bottom bar\\\midrule
+flag\_show\_decimal\_degrees    & bool   & false & If \emph{true}, use decimal degrees for coordinates\\\midrule
+flag\_use\_azimuth\_from\_south & bool   & false & If \emph{true}, calculate azimuth from south towards west 
+                                                   (as in some astronomical literature)\\\midrule
+flag\_show\_gui                 & bool   & false & If \emph{true}, display GUI\\\bottomrule
+\end{longtabu}
+
+\section{\big[init\_location\big]}\label{sec:config.ini:init_location}
+
+\begin{longtabu} to \textwidth {l|l|X}\toprule
+\emph{ID} & \emph{Type} & \emph{Description}\\\midrule
+landscape\_name   & string & Sets the landscape you see. Built-in options are \emph{garching, geneva, grossmugl, guereins, 
+                             hurricane, jupiter, mars, moon, neptune, ocean, saturn, trees, uranus, zero}.\\\midrule
+location          & string & Name of location on which to start stellarium.\\\midrule
+last\_location    & string & Coordinates of last used location in stellarium.\\\bottomrule
+\end{longtabu}
+
+\section{\big[landscape\big]}\label{sec:config.ini:landscape}
+
+\begin{longtabu} to \textwidth {l|l|X}\toprule
+\emph{ID} & \emph{Type} & \emph{Description}\\\midrule
+atmosphere\_fade\_duration      & float & Sets the time (seconds) it takes for the atmosphere to fade when de-selected\\\midrule
+flag\_landscape                 & bool & Set to false if you don't want to see the landscape at all\\\midrule
+flag\_fog                       & bool & Set to \emph{false} if you don't want to see fog on start-up\\\midrule
+flag\_atmosphere                & bool & Set to \emph{false} if you don't want to see atmosphere on start-up\\\midrule
+flag\_landscape\_sets\_location & bool & Set to \emph{true} if you want Stellarium to modify the observer location 
+                                         when a new landscape is selected (changes planet and longitude/latitude/altitude 
+                                         if location data is available in the landscape.ini file)\\\midrule
+minimal\_brightness                  & float & Set minimal brightness for landscapes. [0\ldots1] Typical value: \emph{0.01}\\\midrule
+atmospheric\_extinction\_coefficient & float & Set atmospheric extinction coefficient $k$ [mag/airmass]\\\midrule
+temperature\_C                       & float & Set atmospheric temperature [Celsius]\\\midrule
+pressure\_mbar                       & float & Set atmospheric pressure [mbar]\\\bottomrule
+\end{longtabu}
+
+\section{\big[localization\big]}\label{sec:config.ini:localization}
+
+\begin{longtabu} to \textwidth {l|l|X}\toprule
+\emph{ID} & \emph{Type} & \emph{Description}\\\midrule
+sky\_culture & string & Sets the sky culture to use. E.g. \emph{western, polynesian, egyptian, chinese, 
+                        lakota, navajo, inuit, korean, norse, tupi, maori, aztec, sami}.\\\midrule
+sky\_locale & string & Sets language used for names of objects in the sky (e.g. planets). 
+                       The value is a short locale code, e.g. \emph{en, de, en\_GB}\\\midrule
+app\_locale & string & Sets language used for Stellarium's user interface. 
+                       The value is a short locale code, e.g. \emph{en, de, en\_GB}.\\\midrule
+time\_zone & string  & Sets the time zone. Valid values: \emph{system\_default}, 
+                       or some region/location combination, e.g. \emph{Pacific/Marquesas}\\\midrule
+time\_display\_format & string & time display format: can be \emph{system\_default}, \emph{24h} or \emph{12h}.\\\midrule
+date\_display\_format & string & date display format: can be \emph{system\_default}, \emph{mmddyyyy}, \emph{ddmmyyyy} or \emph{yyyymmdd} (ISO8601).\\\bottomrule
+\end{longtabu}
+
+\section{\big[main\big]}\label{sec:config.ini:main}
+
+\begin{longtabu} to \textwidth {l|l|X}\toprule
+\emph{ID}                 & \emph{Type} & \emph{Description}\\\midrule
+invert\_screenshots\_colors & bool & If \emph{true}, Stellarium will saving the screenshorts with inverted colors.\\\midrule
+restore\_defaults           & bool & If \emph{true}, Stellarium will restore default settings at startup. 
+                                     This is equivalent to calling Stellarium with the \command{--restore-defaults} option.\\\midrule
+screenshot\_dir             & string & Path for saving screenshots\\\midrule
+version                     & string & Version of Stellarium. This parameter may be used to detect necessary changes in config.ini file, do not edit.\\\midrule
+use\_separate\_output\_file & bool   & Set to \emph{true} if you want to create a new file for script output for each start of Stellarium\\\midrule
+check\_requirements         & bool   & Set to \emph{false} if you want to disable and permanently ignore checking hardware requirements at startup. 
+                                       Expect problems if hardware is below requirements!\\
 \bottomrule
 \end{longtabu}
 
-\section{\big[gui\big]}\label{section-gui}
+\section{\big[navigation\big]}\label{sec:config.ini:navigation}
 
-\begin{longtabu} to \textwidth {l|l|X}
-\toprule
-\emph{ID} & \emph{Type} & \emph{Description}\\
-\midrule
-base\_font\_size & int & Sets the font size. Typical value:
-\emph{15}\\
-\midrule
-base\_font\_name & string & Selects the name for base font, e.g. \emph{DejaVu
-Sans}\\
-\midrule
-safe\_font\_name & string & Selects the name for safe font,
-e.g. \emph{Verdana}\\
-\midrule
-base\_font\_file & string & Selects the name for font file,
-e.g. \emph{DejaVuSans.ttf}\\
-\midrule
-flag\_show\_fps & bool & Set to \emph{false} if you don't
-want to see at how many frames per second Stellarium is
-rendering\\
-\midrule
-flag\_show\_fov & bool & Set to \emph{false} if you don't
-want to see how many degrees your field of view is\\
-\midrule
-flag\_mouse\_cursor\_timeout & float & Set to \emph{0} if you
-want to keep the mouse cursor visible at all times. non-0 values mean
-the cursor will be hidden after that many seconds of
-inactivity\\
-\midrule
-flag\_show\_flip\_buttons & bool & Enables/disables display of
-the image flipping buttons in the main toolbar (see section
-\ref{imageflipping})\\
-\midrule
-flag\_show\_nebulae\_background\_button & bool & Set to
-\emph{true} if you want to have access to the button for
-enabling/disabling backgrounds for deep-sky objects\\
-\midrule
-flag\_use\_degrees & bool &\\
-\midrule
-selected\_object\_info & string & Values: \emph{all},
-\emph{short} and \emph{none}. Value \emph{custom} added since version
-0.12.0.\\
-\midrule
-auto\_hide\_horizontal\_toolbar & bool & Set to \emph{true} if
-you want auto hide the horizontal toolbar.\\
-\midrule
-auto\_hide\_vertical\_toolbar & bool & Set to \emph{true} if
-you want auto hide the vertical toolbar.\\
-\midrule
-day\_key\_mode & string & Specifies the amount of time which is
-added and subtracted when the {[} {]} - and = keys are pressed -
-calendar days, or sidereal days. This option only makes sense for
-Digitalis planetariums. Values: \emph{calendar} or
-\emph{sidereal}\\
-\midrule
-flag\_use\_window\_transparency & bool & Set to \emph{false}
-if you want see the opacity for bars\\
-\midrule
-flag\_show\_datetime & bool & Set to \emph{true} if you want
-display date and time in the bottom bar\\
-\midrule
-flag\_time\_jd & bool & Set to \emph{true} if you want using
-JD format for time in the bottom bar\\
-\midrule
-flag\_show\_location & bool & Set to \emph{true} if you want
-display location in the bottom bar\\
-\midrule
-flag\_fov\_dms & bool & Set to \emph{true} if you want using
-DMS format for FOV in the bottom bar\\
-\midrule
-flag\_show\_decimal\_degrees & bool & Set to \emph{true} if
-you want use decimal degrees for coordinates\\
-\midrule
-flag\_use\_azimuth\_from\_south & bool & Set to \emph{true} if
-you want calculate azimuth from south towards west (as in old
-astronomical literature)\\
-\midrule
-flag\_show\_gui & bool & Set to \emph{true} if you want
-display GUI\\
-\bottomrule
-\end{longtabu}
+This section controls much of the look\&feel of Stellarium. Be careful if you change something here.
 
-\section{\big[init\_location\big]}\label{section-init-location}
+%% TODO: improve description of the various zoom settings.
 
-\begin{longtabu} to \textwidth {l|l|X}
-\toprule
-\emph{ID} & \emph{Type} & \emph{Description}\\
-\midrule
-landscape\_name & string & Sets the landscape you see.
-Other options are \emph{garching, guereins, trees, moon, ocean,
-hurricane, hogerielen}\\
-\midrule
-location & string & Name of location on which to start
-stellarium.\\
-\midrule
-last\_location & string & Coordinates of last used location in
-stellarium.\\
-\bottomrule
-\end{longtabu}
-
-\section{\big[landscape\big]}\label{section-landscape}
-
-\begin{longtabu} to \textwidth {l|l|X}
-\toprule
-\emph{ID} & \emph{Type} & \emph{Description}\\
-flag\_landscape & bool & Set to false if you don't want to
-see the landscape at all\\
-\midrule
-flag\_fog & bool & Set to \emph{false} if you don't want to
-see fog on start-up\\
-\midrule
-flag\_atmosphere & bool & Set to \emph{false} if you don't
-want to see atmosphere on start-up\\
-\midrule
-flag\_landscape\_sets\_location & bool & Set to \emph{true}
-if you want Stellarium to modify the observer location when a new
-landscape is selected (changes planet and longitude/latitude/altitude if
-that data is available in the landscape.ini file)\\
-\midrule
-minimal\_brightness & float & Set minimal brightness for
-landscapes. Typical value: \emph{0.01}\\
-\midrule
-atmospheric\_extinction\_coefficient & float & Set atmospheric
-extinction coefficient\\
-\midrule
-temperature\_C & float & Set atmospheric temperature
-(Celsius)\\
-\midrule
-pressure\_mbar & float & Set atmospheric pressure
-(mbar)\\
-\bottomrule
-\end{longtabu}
-
-\section{\big[localization\big]}\label{section-localization}
-
-\begin{longtabu} to \textwidth {l|l|X}
-\toprule
-\emph{ID} & \emph{Type} & \emph{Description}\\
-\midrule
-sky\_culture & string & Sets the sky culture to use. E.g.
-\emph{western, polynesian, egyptian, chinese, lakota, navajo, inuit,
-korean, norse, tupi, maori, aztec, sami}.\\
-\midrule
-sky\_locale & string & Sets language used for names of
-objects in the sky (e.g. planets). The value is a short locale code,
-e.g. \emph{en, de, en\_GB}\\
-\midrule
-app\_locale & string & Sets language used for Stellarium's
-user interface. The value is a short locale code, e.g. \emph{en, de,
-en\_GB}.\\
-\midrule
-time\_zone & string & Sets the time zone. Valid values:
-\emph{system\_default}, or some region/location combination, e.g.
-\emph{Pacific/Marquesas}\\
-\midrule
-time\_display\_format & string & Set the time display format
-mode: can be \emph{system\_default}, \emph{24h} or
-\emph{12h}.\\
-\midrule
-date\_display\_format & string & Set the date display format
-mode: can be \emph{system\_default}, \emph{mmddyyyy}, \emph{ddmmyyyy} or
-\emph{yyyymmdd} (ISO8601).\\
-\bottomrule
-\end{longtabu}
-
-\section{\big[main\big]}\label{section-main}
-
-\begin{longtabu} to \textwidth {l|l|X}
-\toprule
-\emph{ID} & \emph{Type} & \emph{Description}\\
-\midrule
-invert\_screenshots\_colors & bool & If \emph{true},
-Stellarium will saving the screenshorts with inverted
-colors.\\
-\midrule
-restore\_defaults & bool & If \emph{true}, Stellarium will be
-restore default settings at startup.\\
-\midrule
-screenshot\_dir & string & Path for saving
-screenshots\\
-\midrule
-version & string & Version of Stellarium. This parameter
-using for updating config.ini file\\
-\midrule
-use\_separate\_output\_file & bool & Set to \emph{true} if you
-want to create a new file for output for each start of
-Stellarium\\
-\midrule
-check\_requirements & bool & Set to \emph{false} if you want
-to disable checking hardware requirements at startup. This options for
-developers only!\\
-\bottomrule
-\end{longtabu}
-
-\section{\big[navigation\big]}\label{section-navigation}
-
-\begin{longtabu} to \textwidth {l|l|X}
-\toprule
-\emph{ID} & \emph{Type} & \emph{Description}\\
-\midrule
-preset\_sky\_time & float & Preset sky time used by the
-dome version. Unit is Julian Day. Typical value:
-\emph{2451514.250011573}\\
-\midrule
-startup\_time\_mode & string & Set the start-up time mode,
-can be \emph{actual} (start with current real world time), or
-\emph{Preset} (start at time defined by
-preset\_sky\_time)\\
-\midrule
-flag\_enable\_zoom\_keys & bool & Set to \emph{false} if
-you want to disable the zoom\\
-\midrule
-flag\_manual\_zoom & bool & Set to'' false'' for normal
-zoom behaviour as described in this guide. When set to true, the auto
-zoom feature only moves in a small amount and must be pressed many
-times\\
-\midrule
-flag\_enable\_move\_keys & bool & Set to \emph{false} if
-you want to disable the arrow keys\\
-\midrule
-flag\_enable\_mouse\_navigation & bool & Set to
-\emph{false} if you want to disable the mouse navigation.\\
-\midrule
-init\_fov & float & Initial field of view, in degrees,
-typical value:'' 60''\\
-\midrule
-init\_view\_pos & floats & Initial viewing direction. This
-is a vector with x,y,z-coordinates. x being N-S (S +ve), y being E-W (E
-+ve), z being up-down (up +ve). Thus to look South at the horizon use
-\emph{1,0,0}. To look Northwest and up at $45\degree$, use \emph{-1,-1,1} and so
-on.\\
-\midrule
-auto\_move\_duration & float & Duration for the program to
-move to point at an object when the space bar is pressed. Typical value:
-\emph{1.4}\\
-\midrule
-mouse\_zoom & float & Sets the mouse zoom amount
-(mouse-wheel)\\
-\midrule
-move\_speed & float & Sets the speed of
-movement\\
-\midrule
-zoom\_speed & float & Sets the zoom speed\\
-\midrule
-viewing\_mode & string & If set to \emph{horizon}, the
-viewing mode simulate an alt/azi mount, if set to \emph{equator}, the
-viewing mode simulates an equatorial mount\\
-\midrule
-flag\_manual\_zoom & bool & Set to \emph{true} if you want
-to auto-zoom in incrementally.\\
-\midrule
-auto\_zoom\_out\_resets\_direction & bool & Set to
-\emph{true} if you want to auto-zoom restoring direction.\\
-\midrule
-time\_correction\_algorithm & string & Algorithm of DeltaT
-correction.\\
-\bottomrule
+\begin{longtabu} to \textwidth {l|l|X}\toprule
+\emph{ID}              & \emph{Type} & \emph{Description}\\\midrule
+preset\_sky\_time        & float & Preset sky time used by the dome version. Unit is Julian Day. Typical value: \emph{2451514.250011573}\\\midrule
+startup\_time\_mode      & string & Set the start-up time mode, can be \emph{actual} (start with current real world time), 
+                                    or \emph{Preset} (start at time defined by preset\_sky\_time)\\\midrule
+flag\_enable\_zoom\_keys & bool & Set to \emph{false} if you want to disable the zoom\\\midrule
+flag\_manual\_zoom       & bool & Set to \emph{false} for normal zoom behaviour as described in this guide. 
+                                  When set to true, the auto zoom feature only moves in a small amount and must be pressed many times\\\midrule
+flag\_enable\_move\_keys & bool & Set to \emph{false} if you want to disable the arrow keys\\\midrule
+flag\_enable\_mouse\_navigation & bool & Set to \emph{false} if you want to disable the mouse navigation.\\\midrule
+init\_fov                       & float & Initial field of view, in degrees, typical value:'' 60''\\\midrule
+init\_view\_pos                 & floats & Initial viewing direction. This is a vector with x,y,z-coordinates. x being N-S (S +ve), 
+                                  y being E-W (E +ve), z being up-down (up +ve). Thus to look South at the horizon use \emph{1,0,0}. 
+                                  To look Northwest and up at $45\degree$, use \emph{-1,-1,1} and so on.\\\midrule
+auto\_move\_duration            & float & Duration for the program to move to point at an object when the space bar is pressed. Typical value: \emph{1.4}\\\midrule
+mouse\_zoom                     & float & Sets the mouse zoom amount (mouse-wheel)\\\midrule
+move\_speed                     & float & Sets the speed of movement\\\midrule
+zoom\_speed                     & float & Sets the zoom speed\\\midrule
+viewing\_mode                   & string & If set to \emph{horizon}, the viewing mode simulate an alt/azi mount, 
+                                           if set to \emph{equator}, the viewing mode simulates an equatorial mount\\\midrule
+flag\_manual\_zoom              & bool & Set to \emph{true} if you want to auto-zoom in incrementally.\\\midrule
+auto\_zoom\_out\_resets\_direction & bool & Set to \emph{true} if you want to auto-zoom restoring direction.\\\midrule
+time\_correction\_algorithm     & string  & Algorithm of DeltaT correction.\\\bottomrule %% TODO: list values! And write ref. chapter!
 \end{longtabu}
 
 \section{\big[plugins\_load\_at\_startup\big]}
-\label{sec:Reference:section-plugins-load-at-startup}
+\label{sec:config.ini:plugins_load_at_startup}
 
 This section lists which plugins are loaded at startup (those with
-\emph{true} values). Each plugin can add another section with its own
-content, which is described in the respective plugin documentation,
-see \ref{ch:Plugins}. You activate loading of plugins in the \key{F2}
-settings dialog, tab ``Plugins''. After selection of which plugins to
-load, you must restart Stellarium.
+\emph{true} values). Each plugin can add another section into this
+file with its own content, which is described in the respective plugin
+documentation, see \ref{ch:Plugins}. You activate loading of plugins
+in the \key{F2} settings dialog, tab ``Plugins''. After selection of
+which plugins to load, you must restart Stellarium.
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
-\emph{ID} & \emph{Type} & \emph{Description}\\
-\midrule
-AngleMeasure & bool & Angle Measure plugin\\
-\midrule
-CompassMarks & bool & Compass Marks plugin\\
-\midrule
-Exoplanets & bool & Exoplanets plugin \\
-\midrule
-Observability & bool & Observability Analysis\\
-\midrule
-Oculars & bool & Oculars plugin \\
-\midrule
-Pulsars & bool & Pulsars plugin \\
-\midrule
-Quasars & bool & Quasars plugin \\
-\midrule
-Satellites & bool & Satellites plugin \\
-\midrule
-SolarSystemEditor & bool & Solar System Editor plugin\\
-\midrule
-Supernovae & bool & Historical Supernovae plugin \\
-\midrule
-TelescopeControl & bool & Telescope Control plugin \\
-\midrule
-TextUserInterface & bool & Text User Interface plugin \\
-\midrule
-TimeZoneConfiguration & bool & Time Zone plugin \\
-\midrule
-Novae & bool & Bright Novae plugin \\
-\midrule
-Scenery3dMgr & bool & Scenery 3D plugin \\
-\bottomrule
+\emph{ID} & \emph{Type} & \emph{Description}\\\midrule
+AngleMeasure          & bool & Angle Measure plugin\\\midrule
+ArchaeoLines          & bool & ArchaeoLines plugin\\\midrule
+CompassMarks          & bool & Compass Marks plugin\\\midrule
+MeteorShowers         & bool & Meteor Showers plugin \\\midrule
+Exoplanets            & bool & Exoplanets plugin \\\midrule
+Observability         & bool & Observability Analysis\\\midrule
+Oculars               & bool & Oculars plugin \\\midrule
+Pulsars               & bool & Pulsars plugin \\\midrule
+Quasars               & bool & Quasars plugin \\\midrule
+Satellites            & bool & Satellites plugin \\\midrule
+SolarSystemEditor     & bool & Solar System Editor plugin\\\midrule
+Supernovae            & bool & Historical Supernovae plugin \\\midrule
+TelescopeControl      & bool & Telescope Control plugin \\\midrule
+TextUserInterface     & bool & Text User Interface plugin \\\midrule
+TimeZoneConfiguration & bool & Time Zone plugin \\\midrule
+Novae                 & bool & Bright Novae plugin \\\midrule
+Scenery3dMgr          & bool & Scenery 3D plugin \\\bottomrule
 \end{longtabu}
 
-\section{\big[projection\big]}\label{section-projection}
+\section{\big[projection\big]}\label{sec:config.ini:projection}
 
 This section contains the projection of your choice and several
 advanced settings important if you run Stellarium on a single screen,
 multi-projection, dome projection, or other setups.
 
-\begin{longtabu} to \textwidth {l|l|X}
-\toprule
-\emph{ID} & \emph{Type} & \emph{Description}\\
-\midrule
+\begin{longtabu} to \textwidth {l|l|X}\toprule
+\emph{ID} & \emph{Type} & \emph{Description}\\\midrule
 type & string & Sets projection mode. Values: \emph{ProjectionPerspective,
-ProjectionEqualArea, ProjectionStereographic, ProjectionFisheye,
-ProjectionHammer, ProjectionCylinder, ProjectionMercator},
-\emph{ProjectionOrthographic}, or \emph{StelProjectorSinusoidal}.\\
-\midrule
-viewport & string & How the view-port looks. Values:
-\emph{none} (regular rectangular screen), \emph{disk} (circular screen, useful for planetarium setup).\\
-\midrule
-viewportMask & string & How the view-port looks. Values: \emph{none}.\\
-\midrule
-flag\_use\_gl\_point\_sprite & bool & (deprecated.)\  \\
-\midrule
-flip\_horz & bool & \\
-\midrule
-flip\_vert & bool & \\
-\midrule
-viewport\_center\_offset\_x & float & [-0.5\ldots+0.5] Usually 0. \\
-\midrule
+                ProjectionEqualArea, ProjectionStereographic, ProjectionFisheye,
+                ProjectionHammer, ProjectionCylinder, ProjectionMercator,
+                ProjectionOrthographic}, or \emph{StelProjectorSinusoidal}.\\\midrule
+viewport & string & How the view-port looks. Values: \emph{none} (regular rectangular screen), 
+                    \emph{disk} (circular screen, useful for planetarium setup).\\\midrule
+viewportMask & string & How the view-port looks. Values: \emph{none}.\\\midrule %% TODO: DESCRIBE HOW TO USE!
+% UNUSED in 0.15
+%flag\_use\_gl\_point\_sprite & bool & (deprecated.)\  \\\midrule
+flip\_horz                   & bool & \\\midrule
+flip\_vert                   & bool & \\\midrule
+viewport\_center\_offset\_x & float & [-0.5\ldots+0.5] Usually 0. \\\midrule
 viewport\_center\_offset\_y & float & [-0.5\ldots+0.5] Use negative values to move the horizon lower. \\
 \bottomrule
 \end{longtabu}
 
-\section{\big[proxy\big]}\label{section-proxy}
+\section{\big[proxy\big]}\label{sec:config.ini:proxy}
+%% TODO: What does this do?
 
-\begin{longtabu} to \textwidth {l|l|X}
-\toprule
-\emph{ID} & \emph{Type} & \emph{Description}\\
-\midrule
-host\_name & string & Name of host for proxy. E.g. \emph{proxy.org}\\
-\midrule
-port & int & Port of proxy. E.g. \emph{8080}\\
-\midrule
-user & string & Username for proxy. E.g. \emph{michael\_knight}\\
-\midrule
-password & string & Password for proxy. E.g. \emph{xxxxx}\\
+\begin{longtabu} to \textwidth {l|l|X}\toprule
+\emph{ID}  & \emph{Type} & \emph{Description}\\\midrule
+host\_name & string & Name of host for proxy. E.g. \emph{proxy.org}\\\midrule
+port       & int    & Port of proxy. E.g. \emph{8080}\\\midrule
+user       & string & Username for proxy. E.g. \emph{michael\_knight}\\\midrule
+password   & string & Password for proxy. E.g. \emph{xxxxx}\\\bottomrule
+\end{longtabu}
+
+\section{\big[scripts\big]}\label{sec:config.ini:scripts}
+
+\begin{longtabu} to \textwidth {l|l|l|X}\toprule
+\emph{ID}                  & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
+startup\_script                & string & startup.ssc & name of script executed on program start\\\bottomrule 
+%% These are unused as on 0.15pre.
+%flag\_script\_allow\_ui        & bool &\\\midrule
+%scripting\_allow\_write\_files & bool &\\\bottomrule
+\end{longtabu}
+
+\section{\big[search\big]}\label{sec:config.ini:search}
+
+\begin{longtabu} to \textwidth {l|l|X}\toprule
+\emph{ID} & \emph{Type} & \emph{Description}\\\midrule
+flag\_search\_online & bool   & If \emph{true}, Stellarium will be use SIMBAD for search.\\\midrule
+simbad\_server\_url  & string & URL for SIMBAD mirror\\\midrule
+flag\_start\_words   & bool   & If \emph{false}, Stellarium will be search phrase only from start of words\\\midrule
+coordinate\_system   & string & Specifies the coordinate system. 
+                                \emph{Possible values:} equatorialJ2000, equatorial, horizontal, galactic. \emph{Default value:} equatorialJ2000.\\
 \bottomrule
 \end{longtabu}
 
-\section{\big[scripts\big]}\label{section-scripts}
-
-\begin{longtabu} to \textwidth {l|l|X}
-\toprule
-\emph{ID} & \emph{Type} & \emph{Description}\\
-\midrule
-flag\_script\_allow\_ui & bool &\\
-\midrule
-scripting\_allow\_write\_files & bool &\\
-\bottomrule
-\end{longtabu}
-
-\section{\big[search\big]}\label{section-search}
-
-\begin{longtabu} to \textwidth {l|l|X}
-\toprule
-\emph{ID} & \emph{Type} & \emph{Description}\\
-\midrule
-flag\_search\_online & bool & If \emph{true}, Stellarium will be use SIMBAD for search.\\
-\midrule
-simbad\_server\_url & string & URL for SIMBAD mirror\\
-\midrule
-flag\_start\_words & bool & If \emph{false}, Stellarium will be search phrase only from start of words\\
-\midrule
-coordinate\_system & string & Specifies the coordinate system. \emph{Possible values:} equatorialJ2000, equatorial, horizontal,
-galactic. \emph{Default value:} equatorialJ2000.\\
-\bottomrule
-\end{longtabu}
-
-\section{\big[spheric\_mirror\big]}\label{section-sphericux5fmirror}
+\section{\big[spheric\_mirror\big]}\label{sec:config.ini:spheric_mirror}
 
 Stellarium can be used in planetarium domes. You can use a projector with a hemispheric mirror with geometric properties given in this section. 
-Note: These functions are only rarely use, some may not work as expected.
-%% TODO: Make sure we can remove this note! 
+Note: These functions are only rarely used, some may not work as expected.
+%% TODO: Make sure we can remove this note! Maybe add a chapter in the ``Advanced setup'' part?
  
 \begin{longtabu} to \textwidth {l|l|l|X}\toprule
 \emph{ID} & \emph{Type} & \emph{Default}&\emph{Description}\\\midrule
@@ -743,8 +500,9 @@ viewportCenterY       & float && projected image center Y, pixels\\\midrule
 \bottomrule
 \end{longtabu}
 
-\section{\big[stars\big]}\label{section-stars}
+\section{\big[stars\big]}\label{sec:config.ini:stars}
 
+This section controls how stars are rendered.
 %% TODO: Explain what we mean with "magnitude conversion routine"!
 
 \begin{longtabu} to \textwidth {l|l|X}\toprule
@@ -759,7 +517,7 @@ labels\_amount           & float       & amount of labels. Typical value: \emph{
 init\_bortle\_scale      & int         & initial value of light pollution on the Bortle scale. Typical value: \emph{3}.\\\bottomrule
 \end{longtabu}
 
-\section{\big[tui\big]}\label{section-tui}
+\section{\big[tui\big]}\label{sec:config.ini:tui}
 
 The built-in text user interface (TUI) plugin (see chapter~\ref{ch:TextUserInterface}) is most useful for planetariums. You can even configure a system shutdown command. 
 For historical reasons, the section is not called [TextUserInterface] but simply [tui].
@@ -777,40 +535,29 @@ flag\_show\_tui\_short\_obj\_info   & bool&    &set to \emph{true} if you want t
 tui\_admin\_shutdown\_command       & string  && e.g.\ for Linux: ``shutdown --poweroff +2'' \\\bottomrule
 \end{longtabu}
 
-\section{\big[video\big]}\label{section-video}
+\section{\big[video\big]}\label{sec:config.ini:video}
 
-\begin{longtabu} to \textwidth {l|l|X}
-\toprule
-\emph{ID} & \emph{Type} & \emph{Description}\\
-\midrule
-fullscreen & bool & If \emph{true}, Stellarium will start
-up in full-screen mode. If \emph{false}, Stellarium will start in
-windowed mode\\
-\midrule
-screen\_w & int & Sets the display width when in windowed mode. Value in pixels, e.g. \emph{1024}\\
-\midrule
-screen\_h & int & Sets the display height when in windowed mode. Value in pixels, e.g. \emph{768}\\
-\midrule
-screen\_x & int & Value in pixels, e.g. \emph{0}\\
-\midrule
-screen\_y & int & Value in pixels, e.g. \emph{0}\\
-\midrule
-viewport\_effect & string & This is used when the spheric mirror display mode is activated. Values include \emph{none} and \emph{sphericMirrorDistorter}.\\
-\midrule
-minimum\_fps & int & Sets the minimum number of frames per second to display at (hardware performance permitting)\\
-\midrule
-maximum\_fps & int & Sets the maximum number of frames per second to display at. This is useful to reduce power consumption in laptops.\\
-\bottomrule
+\begin{longtabu} to \textwidth {l|l|X}\toprule
+\emph{ID}  & \emph{Type} & \emph{Description}\\\midrule
+fullscreen       & bool   & If \emph{true}, Stellarium will start up in full-screen mode, else windowed mode\\\midrule
+screen\_w        & int    & Display width when in windowed mode. Value in pixels, e.g. \emph{1024}\\\midrule
+screen\_h        & int    & Display height when in windowed mode. Value in pixels, e.g. \emph{768}\\\midrule
+screen\_x        & int    & Horizontal position of the top-left corner in windowed mode. Value in pixels, e.g. \emph{0}\\\midrule
+screen\_y        & int    & Vertical   position of the top-left corner in windowed mode. Value in pixels, e.g. \emph{0}\\\midrule
+viewport\_effect & string & This is used when the spheric mirror display mode is activated. Values include \emph{none} and \emph{sphericMirrorDistorter}.\\\midrule
+minimum\_fps     & int    & Sets the minimum number of frames per second to display at (hardware performance permitting)\\\midrule
+maximum\_fps     & int    & Sets the maximum number of frames per second to display at. This is useful to reduce power consumption in laptops.\\\bottomrule
 \end{longtabu}
 
-\section{\big[viewing\big]}\label{section-viewing}
+\section{\big[viewing\big]}\label{sec:config.ini:viewing}
 
-This section defines which objects, labels, lines, grids etc.\ you want to see on startup. Set those to \emph{true}. Most items can be toggled with hotkeys or switched in the GUI.
+This section defines which objects, labels, lines, grids etc.\ you
+want to see on startup. Set those to \emph{true}. Most items can be
+toggled with hotkeys or switched in the GUI.
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
 \emph{ID} & \emph{Type} & \emph{Description}\\\midrule
-atmosphere\_fade\_duration      & float & Sets the time (seconds) it takes for the atmosphere to fade when de-selected\\\midrule
 flag\_constellation\_drawing    & bool  & Display constellation line drawing\\\midrule
 flag\_constellation\_name       & bool  & Display constellation names\\\midrule
 flag\_constellation\_art        & bool  & Display constellation art\\\midrule
@@ -819,6 +566,7 @@ flag\_constellation\_isolate\_selected  & bool & If \emph{true}, constellation l
                                                  if that star is ``on'' one of the constellation lines.\\\midrule
 flag\_constellation\_pick     & bool & Set to \emph{true} if you only want to see the line drawing, art and name of the selected constellation star\\\midrule
 flag\_isolated\_trails        & bool & Set to \emph{true} if you only want to see the trail line drawn for the selected planet (asteroid, comet, moon)\\\midrule
+flag\_isolated\_orbits        & bool & Set to \emph{true} if you want to see orbits only for selected planet and their moons.\\\midrule
 flag\_azimutal\_grid          & bool & Display azimuthal grid \\\midrule
 flag\_equatorial\_grid        & bool & Display equatorial grid (of date) \\\midrule
 flag\_equatorial\_J2000\_grid & bool & Display equatorial grid (J2000) \\\midrule
@@ -834,6 +582,7 @@ flag\_meridian\_line          & bool & Display meridian line \\\midrule
 flag\_prime\_vertical\_line   & bool & Display Prime Vertical line (East-Zenith-West) \\\midrule
 flag\_colure\_lines           & bool & Display colure lines (Celestial Pole-\Aries/\Cancer/\Libra/\Capricorn) \\\midrule
 flag\_cardinal\_points        & bool & Display cardinal points\\\midrule
+% TODO: This should go into the projection group:
 flag\_gravity\_labels         & bool & Set to \emph{true} if you want labels to undergo gravity (top side of text points toward zenith). Useful with dome projection.\\\midrule
 flag\_moon\_scaled            & bool & Set to \emph{false} if you want to see the real moon size \\\midrule
 moon\_scale                   & float & Sets the moon scale factor, sometimes useful to correlate to our perception of the moon's size. Typical value: \emph{4}\\\midrule
@@ -843,9 +592,7 @@ constellation\_font\_size          & int   & font size for constellation labels\
 constellation\_line\_thickness     & float & thickness of lines of the constellations [1\ldots5]. Typical value: \emph{1}\\\midrule
 flag\_night                        & bool  & Enable night mode (red-only mode) on startup\\\midrule
 light\_pollution\_luminance        & float & Sets the level of the light pollution simulation\\\midrule %% TODO: WHAT IS THIS?
-use\_luminance\_adaptation         & bool  & Enable dynamic eye adaptation.\\\midrule %% TODO: DESCRIBE!
-flag\_isolated\_trails             & float & Change to \emph{false} if you want to see the trails for all celestial bodies from Solar system.\\\midrule
-flag\_isolated\_orbits             & float & Change to \emph{false} if you want to see orbits for selected planet and their moons.\\
+use\_luminance\_adaptation         & bool  & Enable dynamic eye adaptation.\\ %% TODO: DESCRIBE!
 \bottomrule
 \end{longtabu}
 

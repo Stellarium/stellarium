@@ -48,7 +48,6 @@ the Milky Way galaxy (Fig.~\ref{fig:NovaCygni1975}).
 %Cygni 1975}}, also known as \textbf{V1500 Cyg}):
 
 \begin{figure}[h]
-%\centering\includegraphics[scale=0.6]{NovaCygni1975wiki.jpg}
 \includegraphics[width=\textwidth]{NovaCygni1975wiki.jpg}
 \label{fig:NovaCygni1975}
 \caption{Nova Cygni 1975 (also known as \textbf{V1500 Cyg})}
@@ -68,18 +67,12 @@ the Milky Way galaxy (Fig.~\ref{fig:NovaCygni1975}).
 You can edit \file{config.ini} file by yourself for changes of the
 settings for the Bright Novae plugin -- just make it carefully!
 
-\begin{longtabu} to \textwidth {l|l|X}
-\toprule
-\emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
-\midrule
-last\_update & string & Date and time of last update\tabularnewline
-\midrule
-update\_frequency\_days & int & Frequency of updates, in days\tabularnewline
-\midrule
-updates\_enable & bool & Enable updates of bright novae catalog from Internet \tabularnewline
-\midrule
-url & string & URL of bright novae catalog \tabularnewline
-\bottomrule
+\begin{longtabu} to \textwidth {l|l|X}\toprule
+\emph{ID}            & \emph{Type} & \emph{Description}\\\midrule
+last\_update            & string & Date and time of last update\\\midrule
+update\_frequency\_days & int    & Frequency of updates, in days\\\midrule
+updates\_enable         & bool   & Enable updates of bright novae catalog from Internet \\\midrule
+url                     & string & URL of bright novae catalog \\\bottomrule
 \end{longtabu}
 
 \section{Format of bright novae catalog}
@@ -100,11 +93,10 @@ To add a new nova, open a new line after line 5 and paste the following, note co
     "m6": Time to decline by 6mag from maximum (in days),
     "m9": Time to decline by 9mag from maximum (in days),
     "distance": value of distance between nova and 
-                Earth (in thousand of Light Years),
+                Earth (in thousands of Light Years),
     "RA": "Right ascension (J2000)",
     "Dec": "Declination (J2000)"
 },
-
 \end{configfile}
 
 \newpage
@@ -131,8 +123,8 @@ To add a new nova, open a new line after line 5 and paste the following, note co
 \label{sec:plugins:BrightNovae:lightcurves}
 
 This plugin uses a very simple model for calculation of light curves for
-novae stars. This model is based on time for decay by \emph{N}
-magnitudes from the maximum value, where \emph{N} is 2, 3, 6 and 9. If a
+novae stars. This model is based on time for decay by $N$
+magnitudes from the maximum value, where $N$ is 2, 3, 6 and 9. If a
 nova has no values for decay of magnitude then this plugin will use
 generalized values for it.
 
@@ -164,7 +156,6 @@ re-enable cardinal points after enabling the compass markings.
 This plugin plots the position of various pulsars, with object information about each one. Pulsar data is derived from \textit{The ATNF Pulsar Catalogue} (Manchester, R. N., Hobbs, G. B., Teoh, A. \& Hobbs, M., Astron. J., 129, 1993-2006 (2005) (\href{http://arxiv.org/abs/astro-ph/0412641}{astro-ph/0412641})).
 
 \begin{figure}[h]
-%\centering\includegraphics[scale=0.6]{NovaCygni1975wiki.jpg}
 \includegraphics[width=\textwidth]{psr_j0332_5434.jpg}
 \label{fig:PSR_J0332-5434}
 \caption{PSR J0332-5434}
@@ -181,38 +172,24 @@ This plugin plots the position of various pulsars, with object information about
 \section{Section \big[Pulsars\big] in config.ini file}
 \label{sec:plugins:Pulsars:config}
 
-To add a new nova, open a new line after line 5 and paste the following, note commas and brackets, they are important:
-
-\begin{longtabu} to \textwidth {l|l|X}
-\toprule
-\emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
-\midrule
-last\_update & string & Date and time of last update\tabularnewline
-\midrule
-update\_frequency\_days & int & Frequency of updates, in days\tabularnewline
-\midrule
-updates\_enable & bool & Enable updates of pulsars catalog from Internet \tabularnewline
-\midrule
-url & string & URL of pulsars catalog \tabularnewline
-\midrule
-enable\_at\_startup & bool & Enable displaying of pulsars at startup of planetarium \tabularnewline
-\midrule
-distribution\_enabled & bool & Enable distribution mode for the pulsars \tabularnewline
-\midrule
-flag\_show\_pulsars\_button & bool & Enable displaying pulsars button on toolbar \tabularnewline
-\midrule
-marker\_color & R,G,B & Color for marker of the pulsars \tabularnewline
-\midrule
-glitch\_color & R,G,B & Color for marker of the pulsars with glitches \tabularnewline
-\midrule
-use\_separate\_colors & bool & Use separate colors for different types of the pulsars \tabularnewline
-\bottomrule
+\begin{longtabu} to \textwidth {l|l|X}\toprule
+\emph{ID}               & \emph{Type} & \emph{Description}\\\midrule
+last\_update                & string & Date and time of last update\\\midrule
+update\_frequency\_days     & int    & Frequency of updates, in days\\\midrule
+updates\_enable             & bool   & Enable updates of pulsars catalog from Internet \\\midrule
+url                         & string & URL of pulsars catalog \\\midrule
+enable\_at\_startup         & bool   & Enable displaying of pulsars at startup of Stellarium \\\midrule
+distribution\_enabled       & bool   & Enable distribution mode for the pulsars \\\midrule
+flag\_show\_pulsars\_button & bool   & Enable displaying pulsars button on toolbar \\\midrule
+marker\_color               & R,G,B  & Color for marker of the pulsars \\\midrule
+glitch\_color               & R,G,B  & Color for marker of the pulsars with glitches \\\midrule
+use\_separate\_colors       & bool   & Use separate colors for different types of the pulsars \\\bottomrule
 \end{longtabu}
 
 \section{Format of pulsars catalog}
 \label{sec:plugins:Pulsars:format}
 
-To add a new nova, open a new line after line 5 and paste the following, note commas and brackets, they are important:
+To add a new pulsar, open a new line after line 5 and paste the following, note commas and brackets, they are important:
 
 %\newpage
 

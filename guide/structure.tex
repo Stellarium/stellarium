@@ -63,6 +63,8 @@
 
 %% File names. 
 \newcommand{\file}[1]{\texttt{#1}}
+%% console commands, CLI arguments, etc.
+\newcommand{\command}[1]{\texttt{#1}}
 %% Keypress buttons. This is just a font change now, but can be a boxed key or such.
 \newcommand{\key}[1]{\textbf{\textsf{#1}}}
 %% Person names. In some places they have been italicised, in others bold. Make them appear the same with this, and add them to the index:
@@ -97,6 +99,28 @@
                              }{}%
 
 
+%% Allow chapter authors where this seems appropriate.
+%% From http://tex.stackexchange.com/questions/156862/displaying-author-for-each-chapter-in-book
+\usepackage{suffix}
+
+\newcommand\chapterauthor[1]{\authortoc{#1}\printchapterauthor{#1}}
+\WithSuffix\newcommand\chapterauthor*[1]{\printchapterauthor{#1}}
+
+\makeatletter
+\newcommand{\printchapterauthor}[1]{%
+  {\parindent0pt\vspace*{-25pt}%
+  \linespread{1.1}\large\scshape#1%
+  \par\nobreak\vspace*{35pt}}
+  \@afterheading%
+}
+\newcommand{\authortoc}[1]{%
+  \addtocontents{toc}{\vskip-10pt}%
+  \addtocontents{toc}{%
+    \protect\contentsline{chapter}%
+    {\hskip1.3em\mdseries\scshape\protect\scriptsize#1}{}{}}
+  \addtocontents{toc}{\vskip5pt}%
+}
+\makeatother
 
 %----------------------------------------------------------------------------------------
 %	FONTS
@@ -104,7 +128,7 @@
 
 \usepackage{avant} % Use the Avantgarde font for headings
 %\usepackage{times} % Use the Times font for headings
-\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Sym­bol, Chancery and Com­puter Modern fonts
+\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Symbol, Chancery and Computer Modern fonts
 
 \usepackage{microtype} % Slightly tweak font spacing for aesthetics
 \usepackage[utf8]{inputenc} % Required for including letters with accents
