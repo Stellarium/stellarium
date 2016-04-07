@@ -255,79 +255,47 @@ will always be used.
 Stellarium's behaviour can be modified by providing parameters to the
 program when it is called via the command line. See table for a full list:
 
-\begin{longtabu} to \textwidth {l|l|X}
-\toprule
-\emph{Option} & \emph{Option Parameter} & \emph{Description}\tabularnewline
-\midrule
--\/-help or -h & {[}none{]} & Print a quick command line help message, and exit. \tabularnewline
-\midrule
--\/-version or -v & {[}none{]} & Print the program name and version information, and exit. \tabularnewline
-\midrule
--\/-config-file or -c & config file name & Specify the configuration file name. The default value is \texttt{config.ini}.
+\begin{longtabu} to \textwidth {l|l|X}\toprule
+\emph{Option}         & \emph{Option Parameter} & \emph{Description}\\\midrule
+-\/-help or -h        & {[}none{]}       & Print a quick command line help message, and exit. \\\midrule
+-\/-version or -v     & {[}none{]}       & Print the program name and version information, and exit. \\\midrule
+-\/-config-file or -c & config file name & Specify the configuration file name. The default value is \file{config.ini}.
 
 The parameter can be a full path (which will be used verbatim) or a partial path.
 
 Partial paths will be searched for inside the regular search paths
-unless they start with a ``\texttt{.}'', which may be used to explicitly
+unless they start with a ``\file{.}'', which may be used to explicitly
 specify a file in the current directory or similar.
 
-For example, using the option \texttt{-c\ my\_config.ini} would resolve
-to the file
-\texttt{\textless{}user\ directory\textgreater{}/my\_config.ini} whereas
-\texttt{-c\ ./my\_config.ini} can be used to explicitly say the file
-\texttt{my\_config.ini} in the current working directory.
-\tabularnewline
-\midrule
--\/-restore-defaults & {[}none{]} & If this option is specified
-Stellarium will start with the default configuration. Note: The old
-configuration file will be overwritten. \tabularnewline
-\midrule
--\/-user-dir & path & Specify the user data directory. \tabularnewline
-\midrule
--\/-screenshot-dir & path & Specify the directory to which screenshots will be saved. \tabularnewline
-\midrule
--\/-full-screen & yes or no & Over-rides the full screen setting in the config file. \tabularnewline
-\midrule
--\/-home-planet & planet & Specify observer planet (English name). \tabularnewline
-\midrule
--\/-altitude & altitude & Specify observer altitude in meters. \tabularnewline
-\midrule
--\/-longitude & longitude & Specify latitude, e.g. +53d58'16.65" \tabularnewline
-\midrule
--\/-latitude & latitude & Specify longitude, e.g. -1d4'27.48" \tabularnewline
-\midrule
--\/-list-landscapes & {[}none{]} & Print a list of available landscape IDs and exit. \tabularnewline
-\midrule
--\/-landscape & landscape ID & Start using landscape whose ID matches
-the passed parameter (dir name for landscape). \tabularnewline
-\midrule
--\/-sky-date & date & The initial date in \texttt{yyyymmdd} format. \tabularnewline
-\midrule
--\/-sky-time & time & The initial time in \texttt{hh:mm:ss} format. \tabularnewline
-\midrule
--\/-startup-script & script name & The name of a script to run after the program has started. \tabularnewline
-\midrule
--\/-fov & angle & The initial field of view in degrees. \tabularnewline
-\midrule
--\/-projection-type & ptype & The initial projection type (e.g. \texttt{perspective}). \tabularnewline
-\midrule
--\/-dump-opengl-details or -d & {[}none{]} & Dump information about OpenGL support to logfile. Use this is you have graphics problems and
-want to send a bug report. \tabularnewline
-\midrule
--\/-angle-mode or -a & {[}none{]} & Use ANGLE as OpenGL ES2 rendering engine (autodetect Direct3D version).\footnote{On Windows only}\tabularnewline
-\midrule
--\/-angle-d3d9 or -9 & {[}none{]} & Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\tabularnewline
-\midrule
--\/-angle-d3d11 & {[}none{]} & Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\tabularnewline
-\midrule
--\/-angle-warp & {[}none{]} & Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\tabularnewline
-\midrule
--\/-mesa-mode or -m & {[}none{]} & Use MESA as software OpenGL rendering engine.\footnotemark[1]\tabularnewline
-\midrule
--\/-safe-mode or -s & {[}none{]} & Synonymous to -\/-mesa-mode.\footnotemark[1]\tabularnewline
-\midrule
--\/-fix-text or -t & {[}none{]} & Alternative way of creating the Info text, required on some systems.\footnote{E.g., Raspberry Pi 2}\tabularnewline
-\bottomrule
+For example, using the option \texttt{-c\ my\_config.ini} would resolve to the file
+\file{\textless{}user\ directory\textgreater{}/my\_config.ini} whereas
+\file{-c\ ./my\_config.ini} can be used to explicitly say the file
+\file{my\_config.ini} in the current working directory.\\\midrule
+-\/-restore-defaults & {[}none{]} & Stellarium will start with the default configuration. 
+                                    Note: The old configuration file will be overwritten. \\\midrule
+-\/-user-dir         & path       & Specify the user data directory. \\\midrule
+-\/-screenshot-dir   & path       & Specify the directory to which screenshots will be saved. \\\midrule
+-\/-full-screen      & yes or no  & Over-rides the full screen setting in the config file. \\\midrule
+-\/-home-planet      & planet     & Specify observer planet (English name). \\\midrule
+-\/-altitude         & altitude   & Specify observer altitude in meters. \\\midrule
+-\/-longitude        & longitude  & Specify latitude, e.g. +53d58'16.65" \\\midrule
+-\/-latitude         & latitude   & Specify longitude, e.g. -1d4'27.48" \\\midrule
+-\/-list-landscapes  & {[}none{]} & Print a list of available landscape IDs and exit. \\\midrule
+-\/-landscape        & landscape ID & Start using landscape whose ID matches the passed parameter (dir name of landscape). \\\midrule
+-\/-sky-date         & date       & The initial date in \texttt{yyyymmdd} format. \\\midrule
+-\/-sky-time         & time       & The initial time in \texttt{hh:mm:ss} format. \\\midrule
+-\/-startup-script   & script name & The name of a script to run after the program has started. \\\midrule
+-\/-fov              & angle      & The initial field of view in degrees. \\\midrule
+-\/-projection-type  & ptype      & The initial projection type (e.g. \texttt{perspective}). \\\midrule
+-\/-dump-opengl-details or -d     & {[}none{]} & Dump information about OpenGL support to logfile. 
+                                                 Use this is you have graphics problems and want to send a bug report. \\\midrule
+-\/-angle-mode or -a & {[}none{]} & Use ANGLE as OpenGL ES2 rendering engine (autodetect Direct3D version).\footnote{On Windows only}\\\midrule
+-\/-angle-d3d9 or -9 & {[}none{]} & Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\\\midrule
+-\/-angle-d3d11      & {[}none{]} & Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\\\midrule
+-\/-angle-warp       & {[}none{]} & Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\\\midrule
+-\/-mesa-mode or -m  & {[}none{]} & Use MESA as software OpenGL rendering engine.\footnotemark[1]\\\midrule
+-\/-safe-mode or -s  & {[}none{]} & Synonymous to -\/-mesa-mode.\footnotemark[1]\\\midrule
+-\/-fix-text or -t   & {[}none{]} & Alternative way of creating the Info text, required on some systems.\footnote{E.g., Raspberry Pi 2}\\\bottomrule
 \end{longtabu}
 
 \noindent \newFeature{0.15} If you want to avoid adding the same
@@ -348,8 +316,8 @@ stellarium --config-file=configuration_one.ini
 stellarium -c configuration_one.ini
 \end{commands}
 
-\item To list the available landscapes, and then to start using the
-  landscape with the ID, ``ocean''
+\item To list the available landscapes, and then start using the
+  landscape with the ID ``ocean''
 \begin{commands}
 stellarium --list-landscapes 
 stellarium --landscape=ocean
