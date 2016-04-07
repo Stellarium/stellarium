@@ -181,20 +181,19 @@ system). The name of the configuration file is
 
 The configuration file is a regular text file, so all you need to edit
 it is a text editor like \emph{Notepad} on Windows, \emph{Text Edit} on
-the Mac, or \emph{nano/vi/gedit} etc.\ on Linux.
+the Mac, or \emph{nano/vi/gedit/emacs/leafpad} etc.\ on Linux.
 
 %The following sub-sections contain details on how to make commonly used
 %modifications to the configuration file. 
-A complete list of
-configuration file options and values may be found in the appendix,
-\ref{sec:ConfigurationFile} Configuration File.
+A complete list of configuration file options and values may be found
+in appendix~\ref{sec:config.ini} Configuration File.
 
 \chapter{Command Line Options}
 \label{command-line-options}
 \label{sec:CommandLineOptions}
 
 Stellarium's behaviour can be modified by providing parameters to the
-program when it is run, via the command line. See table for a full list:
+program when it is called via the command line. See table for a full list:
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
@@ -237,7 +236,7 @@ configuration file will be overwritten. \tabularnewline
 \midrule
 -\/-latitude & latitude & Specify longitude, e.g. -1d4'27.48" \tabularnewline
 \midrule
--\/-list-landscapes & {[}none{]} & Print a list of available landscape IDs. \tabularnewline
+-\/-list-landscapes & {[}none{]} & Print a list of available landscape IDs and exit. \tabularnewline
 \midrule
 -\/-landscape & landscape ID & Start using landscape whose ID matches
 the passed parameter (dir name for landscape). \tabularnewline
@@ -255,13 +254,13 @@ the passed parameter (dir name for landscape). \tabularnewline
 -\/-dump-opengl-details or -d & {[}none{]} & Dump information about OpenGL support to logfile. Use this is you have graphics problems and
 want to send a bug report. \tabularnewline
 \midrule
--\/-angle-mode or -a & {[}none{]} & Use ANGLE as OpenGL ES2 rendering engine (autodetect driver).\footnote{On Windows only}\tabularnewline
+-\/-angle-mode or -a & {[}none{]} & Use ANGLE as OpenGL ES2 rendering engine (autodetect Direct3D version).\footnote{On Windows only}\tabularnewline
 \midrule
 -\/-angle-d3d9 or -9 & {[}none{]} & Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\tabularnewline
 \midrule
 -\/-angle-d3d11 & {[}none{]} & Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\tabularnewline
 \midrule
--\/-angle-warp & {[}none{]} & Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine.\footnotemark[4]\tabularnewline
+-\/-angle-warp & {[}none{]} & Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\tabularnewline
 \midrule
 -\/-mesa-mode or -m & {[}none{]} & Use MESA as software OpenGL rendering engine.\footnotemark[1]\tabularnewline
 \midrule
@@ -298,7 +297,7 @@ stellarium --landscape=ocean
 \end{itemize}
 
 %% GZ found in 2015:
-\noindent Note that console output (like \texttt{--list-landscapes}) on Windows is not possible. 
+\noindent Note that console output (like \command{-\/-list-landscapes}) on Windows is not possible. 
 
 \chapter{Getting Extra Data}
 \label{sec:ExtraData}
