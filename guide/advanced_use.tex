@@ -153,7 +153,7 @@ and directories within the user directory, leaving the installation
 directory unchanged. In this manner different users on a multi-user
 system can customise Stellarium without affecting the other users. 
 
-\chapter{The Main Configuration File}
+\section{The Main Configuration File}
 \label{the-main-configuration-file}
 \label{sec:ConfigurationFile}
 
@@ -187,6 +187,66 @@ the Mac, or \emph{nano/vi/gedit/emacs/leafpad} etc.\ on Linux.
 %modifications to the configuration file. 
 A complete list of configuration file options and values may be found
 in appendix~\ref{sec:config.ini} Configuration File.
+
+
+
+\section{Getting Extra Data}
+\label{sec:ExtraData}
+
+Stellarium is packaged with over 600 thousand stars in the normal
+program download, but much larger star catalogues may be downloaded
+in the \emph{Tools} tab of the \emph{Configuration} dialog.
+
+
+\subsection{Alternative Planet Ephemerides: DE430, DE431}
+\label{sec:ExtraData:ephemerides}
+
+\newFeature{0.15}
+By default, Stellarium uses the \indexterm{VSOP87} planetary theory,
+an analytical solution which is able to deliver planetary positions
+for any input date. However, its use is recommended only for the year
+range $-4000\ldots+8000$. Outside this range, it seems to be usable
+for a few more millennia without too great errors, but with degrading accuracy. 
+
+Since V0.15 you can install extra data files which allow access to the
+numerical integration runs \indexterm{DE430} and \indexterm{DE431}
+from NASA's Jet Propulsion Laboratory (JPL). The data files have to be
+downloaded separately, and most users will likely not need them. DE430
+provides highly accurate data for the years $+1550\ldots+2650$, while
+DE431 covers years $-13000\ldots+17000$, which allows e.g.\ 
+archaeoastronomical research on Mesolithic landscapes. Outside these
+year ranges, positional computation falls back to VSOP87.
+
+To enable use of these data, download the files from
+JPL\footnote{\url{ftp://ssd.jpl.nasa.gov/pub/eph/planets/Linux/}. (Also
+  download from this directory if you are not running Linux!)}:
+
+\begin{description}
+\item[DE430] \file{linux\_p1550p2650.430} (md5 hash 707c4262533d52d59abaaaa5e69c5738)
+\item[DE431] \file{lnxm13000p17000.431} (md5 hash fad0f432ae18c330f9e14915fbf8960a)
+\end{description}
+
+
+The files can be placed in a folder named \file{ephem} inside either
+the \emph{installation directory} or the \emph{user directory}
+(see \ref{sec:FilesAndDirectories:DirectoryStructure}). Alternatively,
+if you have them already stored elsewhere, you may add the path to
+\file{config.ini} like:
+
+\begin{configfile}
+[astro]
+de430_path = C:/Astrodata/JPL_DE43x/linux_p1550p2650.430
+de431_path = C:/Astrodata/JPL_DE43x/lnxm13000p17000.431
+\end{configfile}
+
+For fast access avoid storing them on a network drive or USB pendrive!
+
+You activate use of either ephemeris in the configuration panel
+(\key{F2}). If you activate both, preference will be given for DE430
+if the simulation time allows it. Outside of the valid times, VSOP87
+will always be used.
+
+
 
 \chapter{Command Line Options}
 \label{command-line-options}
@@ -298,162 +358,6 @@ stellarium --landscape=ocean
 
 %% GZ found in 2015:
 \noindent Note that console output (like \command{-\/-list-landscapes}) on Windows is not possible. 
-
-\chapter{Getting Extra Data}
-\label{sec:ExtraData}
-
-Stellarium is packaged with over 600 thousand stars in the normal
-program download, but much larger star catalogues may be downloaded
-in the \emph{Tools} tab of the \emph{Configuration} dialog.
-
-
-\section{Alternative Planet Ephemerides: DE430, DE431}
-\label{sec:ExtraData:ephemerides}
-
-\newFeature{0.15}
-By default, Stellarium uses the \indexterm{VSOP87} planetary theory,
-an analytical solution which is able to deliver planetary positions
-for any input date. However, its use is recommended only for the year
-range $-4000\ldots+8000$. Outside this range, it seems to be usable
-for a few more millennia without too great errors, but with degrading accuracy. 
-
-Since V0.15 you can install extra data files which allow access to the
-numerical integration runs \indexterm{DE430} and \indexterm{DE431}
-from NASA's Jet Propulsion Laboratory (JPL). The data files have to be
-downloaded separately, and most users will likely not need them. DE430
-provides highly accurate data for the years $+1550\ldots+2650$, while
-DE431 covers years $-13000\ldots+17000$, which allows e.g.\ 
-archaeoastronomical research on Mesolithic landscapes. Outside these
-year ranges, positional computation falls back to VSOP87.
-
-To enable use of these data, download the files from
-JPL\footnote{\url{ftp://ssd.jpl.nasa.gov/pub/eph/planets/Linux/}. (Also
-  download from this directory if you are not running Linux!)}:
-
-\begin{description}
-\item[DE430] \file{linux\_p1550p2650.430} (md5 hash 707c4262533d52d59abaaaa5e69c5738)
-\item[DE431] \file{lnxm13000p17000.431} (md5 hash fad0f432ae18c330f9e14915fbf8960a)
-\end{description}
-
-
-The files can be placed in a folder named \file{ephem} inside either
-the \emph{installation directory} or the \emph{user directory}
-(see \ref{sec:FilesAndDirectories:DirectoryStructure}). Alternatively,
-if you have them already stored elsewhere, you may add the path to
-\file{config.ini} like:
-
-\begin{configfile}
-[astro]
-de430_path = C:/Astrodata/JPL_DE43x/linux_p1550p2650.430
-de431_path = C:/Astrodata/JPL_DE43x/lnxm13000p17000.431
-\end{configfile}
-
-For fast access avoid storing them on a network drive or USB pendrive!
-
-You activate use of either ephemeris in the configuration panel
-(\key{F2}). If you activate both, preference will be given for DE430
-if the simulation time allows it. Outside of the valid times, VSOP87
-will always be used.
-
-
-\chapter{Visual Effects}
-\label{ch:VisualEffects}
-
-%% GZ TODO This is the only section here? Maybe the Bortle table should go to References Appendix, and this chapter be removed.
-
-\section{Light Pollution}
-\label{sec:LightPollution}
-
-Stellarium can simulate light pollution, which is controlled from the
-light pollution section of the \emph{Sky} tab of the \emph{View} window.
-Light pollution levels are set using a numerical value between 1 and 9
-which corresponds to the \emph{Bortle Dark Sky Scale}.
-
-%% GZ TODO: What is the relevance of the ``Colour'' entry in this table? Taken from some article with colored map?
-\subsection{Excellent dark sky site}
-\textbf{Level:} 1 \\
-\textbf{Colour:} black \\
-\textbf{Limiting magnitude (eye):} 7.6 -- 8.0
-
-Zodiacal light, gegenschein, zodiacal band visible; M33 direct vision naked-eye object; Scorpius and Sagittarius regions of the Milky Way cast obvious shadows on the ground; Airglow is readily visible; Jupiter and Venus affect dark adaptation; surroundings basically invisible.
-
-\subsection{Typical truly dark site}
-\textbf{Level:} 2 \\
-\textbf{Colour:} grey \\
-\textbf{Limiting magnitude (eye):} 7.1 -- 7.5
-
-Airglow weakly visible near horizon; M33 easily seen with naked eye; highly structured Summer Milky Way; distinctly yellowish zodiacal light bright enough to cast shadows at dusk and dawn; clouds only visible as dark holes; surroundings still only barely visible silhouetted against the sky; many Messier globular clusters still distinct naked-eye objects.
-
-\subsection{Rural sky}
-\textbf{Level:} 3 \\
-\textbf{Colour:} blue \\
-\textbf{Limiting magnitude (eye):} 6.6 -- 7.0
-
-Some light pollution evident at the horizon; clouds illuminated near horizon, dark overhead; Milky Way still appears complex; M15, M4, M5, M22 distinct naked-eye objects; M33 easily visible with averted vision; zodiacal light striking in spring and
-autumn, color still visible; nearer surroundings vaguely visible.
-
-\subsection{Rural/suburban transition}
-\textbf{Level:} 4 \\
-\textbf{Colour:} green/yellow \\
-\textbf{Limiting magnitude (eye):} 6.1 -- 6.5
-
-Light pollution domes visible in various directions over the horizon; zodiacal light is still visible, but not even halfway extending to the zenith at dusk or dawn; Milky Way above the horizon still impressive, but lacks most of the finer details; M33 a difficult averted vision object, only visible when higher than 55$\degree$; clouds illuminated in the directions of the light sources, but still dark overhead; surroundings clearly visible, even at a distance.
-
-\subsection{Suburban sky}
-\textbf{Level:} 5 \\
-\textbf{Colour:} orange \\
-\textbf{Limiting magnitude (eye):} 5.6 -- 6.0
-
-Only hints of zodiacal light are seen on the best nights in autumn and spring; Milky Way is very weak or invisible near the horizon and looks washed out overhead; 
-light sources visible in most, if not all, directions; clouds are noticeably brighter than the sky.
-
-\subsection{Bright suburban sky}
-\textbf{Level:} 6 \\
-\textbf{Colour:} red \\
-\textbf{Limiting magnitude (eye):} 5.1 -- 5.5
-
-Zodiacal light is invisible; Milky Way only visible near the zenith; sky within 35$\degree$ from the horizon glows grayish white; clouds anywhere in the sky appear fairly bright; 
-surroundings easily visible; M33 is impossible to see without at least binoculars, M31 is modestly apparent to the unaided eye.
-
-\subsection{Suburban/urban transition}
-\textbf{Level:} 7 \\
-\textbf{Colour:} red \\
-\textbf{Limiting magnitude (eye):} 5.0 at best
-
-Entire sky has a grayish-white hue; strong light sources evident in all directions; Milky Way invisible; 
-M31 and M44 may be glimpsed with the naked eye, but are very indistinct; clouds are brightly lit; 
-even in moderate-sized telescopes the brightest Messier objects are only ghosts of their true selves.
-
-\subsection{City sky}
-\textbf{Level:} 8 \\
-\textbf{Colour:} white \\
-\textbf{Limiting magnitude (eye):} 4.5 at best
-
-Sky glows white or orange --- you can easily read; M31 and M44 are barely glimpsed by an experienced observer on good nights; 
-even with telescope, only bright Messier objects can be detected; stars forming familiar constellation patterns may be weak or completely invisible.
-
-\subsection{Inner City sky}
-\textbf{Level:} 9 \\
-\textbf{Colour:} white \\
-\textbf{Limiting magnitude (eye):} 4.0 at best
-
-Sky is brilliantly lit with many stars forming constellations invisible and many weaker constellations invisible; 
-aside from Pleiades, no Messier object is visible to the naked eye; 
-only objects to provide fairly pleasant views are the Moon, the Planets and a few of the brightest star clusters.
-
-\chapter{Taking Screenshots}\label{taking-screenshots}
-
-You can save what is on the screen to a file by pressing
-\textbf{Control-S}. Screenshots are taken in \emph{.png} format, and
-have filenames something like this: \emph{stellarium-000.png},
-\emph{stellariuim-001.png} (the number increments to prevent
-over-writing existing files).
-
-Stellarium creates screenshots in a directory depending on
-your system type, see section
-\ref{sec:FilesAndDirectories} Files and Directories.
-
-
 
 %%% Local Variables: 
 %%% mode: latex
