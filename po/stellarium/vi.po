@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-07 01:01+0700\n"
-"PO-Revision-Date: 2016-03-17 12:56+0000\n"
+"PO-Revision-Date: 2016-04-08 02:52+0000\n"
 "Last-Translator: Lê Văn Bách <levanbach1994ag@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-04-07 05:32+0000\n"
-"X-Generator: Launchpad (build 17972)\n"
+"X-Launchpad-Export-Date: 2016-04-08 05:20+0000\n"
+"X-Generator: Launchpad (build 17990)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:904 src/core/modules/LandscapeMgr.cpp:414
@@ -319,7 +319,7 @@ msgstr "kpc"
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:298
 msgid "ly"
-msgstr ""
+msgstr "n.a.s"
 
 #: src/core/modules/Nebula.cpp:300
 #, qt-format
@@ -2261,7 +2261,7 @@ msgstr "Cửa sổ AstroCalc"
 
 #: src/gui/StelGui.cpp:220
 msgid "Bookmarks window"
-msgstr ""
+msgstr "Cửa sổ đánh dấu"
 
 #: src/gui/StelGui.cpp:221
 msgid "Copy selected object information to clipboard"
@@ -2763,11 +2763,11 @@ msgstr "Đối tượng"
 
 #: src/gui/BookmarksDialog.cpp:96
 msgid "Localized name"
-msgstr ""
+msgstr "Tên địa phương"
 
 #: src/gui/BookmarksDialog.cpp:98
 msgid "Location of observer"
-msgstr ""
+msgstr "Vị trí của người quan sát"
 
 #: src/StelMainView.cpp:462 src/StelMainView.cpp:477
 msgid ""
@@ -3433,7 +3433,7 @@ msgstr "Trái Đất và các hành tinh khác nhìn từ Ceres"
 #. TRANSLATORS: Name of script
 #: src/translations.h:290
 msgid "Messier Objects Tour"
-msgstr ""
+msgstr "Hành trình các vật thể Messier"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:296
@@ -3608,7 +3608,7 @@ msgstr ""
 
 #: src/translations.h:321
 msgid "A tour of Messier Objects"
-msgstr ""
+msgstr "Một hành trình của các vật thể Messier"
 
 #: src/translations.h:325
 msgid "Andorra"
@@ -5082,11 +5082,11 @@ msgstr "Dựa theo tốc độ ánh sáng"
 
 #: src/ui_viewDialog.h:1632
 msgid "Use custom settings of GRS:"
-msgstr ""
+msgstr "Sử dụng các cài đặt tùy chỉnh của Vết Đỏ Lớn"
 
 #: src/ui_viewDialog.h:1633
 msgid "GRS details..."
-msgstr ""
+msgstr "Chi tiết Vết Đỏ Lớn..."
 
 #: src/ui_viewDialog.h:1635
 msgid "Limit the magnitude of solar system objects"
@@ -6098,15 +6098,15 @@ msgstr ""
 
 #: src/ui_greatRedSpotDialog.h:162
 msgid "Great Red Spot Details"
-msgstr ""
+msgstr "Chi tiết Vết Đỏ Lớn"
 
 #: src/ui_greatRedSpotDialog.h:164
 msgid "Custom settings for position of GRS on Jupiter"
-msgstr ""
+msgstr "Các cài đặt tùy chỉnh cho vị trí của Vết Đỏ Lớn trên Mộc Tinh"
 
 #: src/ui_greatRedSpotDialog.h:171
 msgid "Date and Time (UTC):"
-msgstr ""
+msgstr "Ngày và Giờ (UTC):"
 
 #: src/ui_greatRedSpotDialog.h:172 src/ui_astroCalcDialog.h:384
 #: src/ui_astroCalcDialog.h:386
@@ -6119,7 +6119,7 @@ msgstr ""
 
 #: src/ui_greatRedSpotDialog.h:174
 msgid "Longitude of GRS (degrees):"
-msgstr ""
+msgstr "Kinh độ của Vết Đỏ Lớn (độ):"
 
 #: src/ui_scriptConsole.h:346
 msgid "Script console"
@@ -6201,7 +6201,7 @@ msgstr "tính toán lịch thiên văn"
 
 #: src/ui_astroCalcDialog.h:388
 msgid "Cleanup ephemerides"
-msgstr ""
+msgstr "Lịch thiên văn thu gọn"
 
 #: src/ui_astroCalcDialog.h:389
 msgid "Ephemeris"
@@ -6241,35 +6241,35 @@ msgstr "AstroCalc"
 
 #: src/ui_bookmarksDialog.h:174
 msgid "Bookmarks"
-msgstr ""
+msgstr "Đánh dấu"
 
 #: src/ui_bookmarksDialog.h:176
 msgid "Add date and time"
-msgstr ""
+msgstr "Thêm ngày và giờ"
 
 #: src/ui_bookmarksDialog.h:177
 msgid "Add location"
-msgstr ""
+msgstr "Thêm vị trí"
 
 #: src/ui_bookmarksDialog.h:179
 msgid "Add selected object to bookmarks"
-msgstr ""
+msgstr "Thêm đối tượng được lựa chọn để đánh dấu"
 
 #: src/ui_bookmarksDialog.h:181
 msgid "&Add bookmark"
-msgstr ""
+msgstr "&Thêm đánh dấu"
 
 #: src/ui_bookmarksDialog.h:182
 msgid "&Remove bookmark"
-msgstr ""
+msgstr "&Bỏ đánh dấu"
 
 #: src/ui_bookmarksDialog.h:183
 msgid "Clear bookmarks"
-msgstr ""
+msgstr "Xóa đánh dấu"
 
 #: src/ui_bookmarksDialog.h:184
 msgid "&Go to..."
-msgstr ""
+msgstr "&Đi tới..."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:138
@@ -9875,16 +9875,20 @@ msgid ""
 "From the latin <em>Veritas</em>, truth. The ablative form means <em>where "
 "there is truth</em>."
 msgstr ""
+"Từ tiếng La tinh <em>Veritas</em>, sự thật. Hình thức công cụ nghĩa là "
+"<em>nơi có sự thật</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
 msgid ""
 "From the latin <em>Spes</em>, hope. The ablative form means <em>where there "
 "is hope</em>."
 msgstr ""
+"Từ tiếng La tinh <em>Spes</em>, hy vọng. Hình thức công cụ nghĩa là <em>nơi "
+"có hy vọng</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
 msgid "Musica is Latin for <em>music</em>."
-msgstr ""
+msgstr "Musica là từ La tinh cho <em>âm nhạc</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:188
 msgid ""
@@ -9892,6 +9896,9 @@ msgid ""
 "legend, his life was saved at sea by dolphins after attracting their "
 "attention by the playing of his kithara."
 msgstr ""
+"Arion là một thiên tài của thơ ca và âm nhạc ở Hy Lạp cổ đại. Theo truyền "
+"thuyết, cuộc sống của ông ấy được cứu vớt trên biển bởi những con cá heo sau "
+"khi thu hút sự chú ý của chúng bằng việc chơi kithara của mình."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
 msgid "Fafnir was a Norse mythological dwarf who turned into a dragon."
@@ -9907,30 +9914,39 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
 msgid "Chalawan is a mythological crocodile king from a Thai folktale."
 msgstr ""
+"Chalawan là vua cá sấu trong thần thoại đến từ truyện dân gian Thái Lan."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
 msgid ""
 "Taphao Thong is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr ""
+"Taphao Thong là một trong hai người chị có liên quan đến truyện dân gian "
+"Thái Lan của Chalawan."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
 msgid ""
 "Taphao Kae is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr ""
+"Taphao Kae là một trong hai người chị có liên quan đến truyện dân gian Thái "
+"Lan của Chalawan."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid ""
 "Helvetios is Celtic for <em>the Helvetian</em> and refers to the Celtic "
 "tribe that lived in Switzerland during antiquity."
 msgstr ""
+"Helvetios là tiếng Celtic cho <em>Người Thụy Sĩ</em> và đề cập đến các bộ "
+"lạc Celtic đã sống ở Thụy Sĩ trong suốt thời cổ đại."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
 msgid ""
 "Dimidium is Latin for <em>half</em>, referring to the planet's mass of at "
 "least half the mass of Jupiter."
 msgstr ""
+"Dimidium là từ La tinh cho <em>một nửa</em>, đề cập đến khối lượng của hành "
+"tinh của ít nhất một nửa khối lượng của Mộc Tinh."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
 msgid ""
@@ -9938,6 +9954,9 @@ msgid ""
 "who proposed the heliocentric model of the solar system in his book <em>De "
 "revolutionibus orbium coelestium</em>."
 msgstr ""
+"Nicolaus Copernicus hay Mikolaj Kopernik (1473-1543) là một nhà thiên văn "
+"học người Ba Lan người đã đề xuất mô hình nhật tâm của hệ Mặt Trời trong "
+"quyển sách của ông ấy <em> De revolutionibus orbium coelestium</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid ""
@@ -9947,6 +9966,11 @@ msgid ""
 "satellites of Jupiter, and the reported the first telescopic observations of "
 "the phases of Venus, among other discoveries."
 msgstr ""
+"Galileo Galilei (1564-1642) là một nhà thiên văn học và vật lý người Ý "
+"thường được gọi là <em>cha đẻ của thiên văn quan sát</em> và <em>cha đẻ của "
+"vật lý hiện đại<em>. Sử dụng một chiếc kính thiên văn, ông ấy đã khám phá ra "
+"bốn vệ tinh lớn nhất của Mộc Tinh, và các quan sát qua kính thiên văn đầu "
+"tiên được ghi chép của các pha của Kim Tinh, trong số những khám phá khác."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
 msgid ""
@@ -9955,6 +9979,10 @@ msgid ""
 "observations were critical to Kepler's formulation of his three laws of "
 "planetary motion."
 msgstr ""
+"Tycho Brahe (1546-1601) là một nhà thiên văn học và quý tộc người Đan Mạch "
+"người đã ghi chép chính xác các quan sát thiên văn của những ngôi sao và "
+"hành tinh. Những quan sát này là rất quan trọng để xây dựng ba định luật về "
+"chuyển động hành tinh của Kepler."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid ""
@@ -9962,6 +9990,8 @@ msgid ""
 "maker who is often attributed with the invention of the refracting telescope "
 "in 1608."
 msgstr ""
+"Hans Lipperhey (1570-1619) là một nhà chế tạo thấu kính người Đức-Hà Lan "
+"người thường được gán với phát minh ra kính thiên văn khúc xạ vào năm 1608)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid ""
@@ -9969,6 +9999,9 @@ msgid ""
 "attributed with invention of the microscope, and more controversially with "
 "the invention of the telescope."
 msgstr ""
+"Jacharias Janssen (1580s-1630s) là một nhà chế tạo kính người Hà Lan người "
+"thường được gán với phát minh kính hiển vi, và tranh cãi nhiều hơn với phát "
+"minh kính thiên văn."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid ""
