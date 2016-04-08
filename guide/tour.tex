@@ -1,0 +1,244 @@
+% Status info:
+% M. Gates	2006-2009
+% A. Wolf	2011-2014
+% B. Gerdes	2013
+% Additions inserted from wiki 2015-12-26
+% Content OK for 0.12.4.
+% 2016-04 GZ started restructuring
+% TODO: typo&grammar check
+
+%\chapterimage{chapter-t2-bg} % Chapter heading image (now in guide.tex)
+
+\chapter{A First Tour}
+\label{ch:tour}
+
+
+\begin{figure}[tbh]\centering
+\includegraphics[width=0.95\textwidth,trim=0 0 0 30,clip]{001}
+\caption{Stellarium main view. (Combination of day and night views.)}
+\label{fig:001}
+\end{figure}
+
+\noindent When Stellarium first starts, we see a green meadow under a
+sky. Depending on the time of day, it is either a day or night
+scene. If you are connected to the Internet, an automatic lookup will
+attempt to detect your approximate position.\footnote{See
+  section~\ref{sec:gui:location} if you want to switch this off.}
+
+At the bottom left of the screen, you can see the status bar. This shows
+the current observer location, field of view (FOV), graphics performance
+in frames per second (FPS) and the current simulation date and time.
+If you move the mouse over the status bar, it will move up to reveal a
+tool bar which gives quick control over the program.
+
+The rest of the view is devoted to rendering a realistic scene including
+a panoramic landscape and the sky. If the simulation time and observer
+location are such that it is night time, you will see stars, planets and
+the moon in the sky, all in the correct positions.
+
+You can drag with the mouse on the sky to look around or use the cursor
+keys. You can zoom with the mouse wheel or the page up/page down keys.
+
+Much of Stellarium can be controlled very intuitively with the
+mouse. Many settings can additionally be switched with hotkeys. We
+will present the default hotkeys in this guide. However, hotkeys can
+be reconfigured to match your taste (See~\ref{sec:Hotkeys}).
+
+The way Stellarium is shown on the screen is primarily governed by the
+menus. These are accessed by dragging the mouse to the left or bottom
+edge of the screen, where the menus will slide out.
+
+
+\section{Time Travel}
+\label{sec:tour:timeTravel}
+
+When Stellarium starts up, it sets its clock to the same time and date
+as the system clock. However, Stellarium's clock is not fixed to same
+time and date as the system clock, or indeed to the same speed. We may
+tell Stellarium to change how fast time should pass, and even make time
+go backwards! So the first thing we shall do is to travel into the
+future! Let's take a look at the time control buttons on the right hand
+ride of the tool-bar. If you hover the mouse cursor over the buttons, a
+short description of the button's purpose and keyboard shortcut will
+appear.\footnote{Unfortunately, on Windows~7 and later, with NVidia and AMD GPUs, these tooltips often do not work.}
+
+\newcommand{\guibutton[2]}[0.45]{\includegraphics[scale=#1]{#2}}
+\begin{table}[h]
+\centering
+\begin{tabular}{c c l}\toprule
+\emph{Button} & \emph{Shortcut key} & \emph{Description}\\\midrule
+\guibutton[0.75]{bt_timerate_decrease} & \key{J} & Decrease the rate at which time passes \\
+\guibutton[0.75]{bt_timerate_normal}   & \key{K} & Make time pass as normal \\
+\guibutton[0.75]{bt_timerate_increase} & \key{L} & Increase the rate at which time passes \\
+\guibutton[0.75]{bt_time_normal}       & \key{8} & Return to the current time \& date \\
+\bottomrule
+\end{tabular}
+\caption{Time Travel}
+\end{table}
+
+OK, so lets go see the future! Click the mouse once on the increase time
+speed button \guibutton{bt_timerate_increase}. 
+Not a whole lot seems to happen. However, take a look at the clock in
+the status bar. You should see the time going by faster than a normal
+clock! Click the button a second time. Now the time is going by faster
+than before. If it's night time, you might also notice that the stars
+have started to move slightly across the sky. If it's daytime you might
+be able to see the sun moving (but it's less apparent than the movement
+of the stars). Increase the rate at which time passes again by clicking
+on the button a third time. Now time is really flying!
+
+Let time move on at this fast speed for a little while. Notice how the
+stars move across the sky. If you wait a little while, you'll see the
+Sun rising and setting. It's a bit like a time-lapse movie. 
+
+Stellarium not only allows for moving forward through time -- you can
+go backwards too! Click on the real time speed button
+\guibutton{bt_timerate_normal}.  The stars and/or the
+Sun should stop scooting across the sky. Now press the decrease time
+speed button \guibutton{bt_timerate_decrease} once. Look
+at the clock. Time has stopped. Click the Decrease time speed button
+four or five more times. Now we're falling back through time at quite
+a rate (about one day every ten seconds!).
+
+Enough time travel for now. Wait until it's night time, and then click
+the Real time speed button. With a little luck you will now be looking
+at the night sky.
+
+\section{Moving Around the Sky}
+\label{sec:tour:moving}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ll}\toprule
+\emph{Key}          & \emph{Description}\\\midrule
+Cursor keys         & Pan the view left, right, up and down \\
+Page up / Page down & Zoom in and out \\
+Backslash (\key{\textbackslash{}}) & Auto-zoom out to original field of view \\
+Left mouse button                  & Select an object in the sky \\
+Right mouse button                 & Clear selected object \\
+Mouse wheel                        & Zoom in and out \\ 
+\key{Space}                        & Centre view on selected object \\
+Forward-slash (\key{/})            & Auto-zoom in to selected object \\
+\bottomrule
+\end{tabular}
+\caption{Moving Around the Sky}
+\label{tab:tour:moving}
+\end{table}
+
+As well as travelling through time, Stellarium lets to look around the
+sky freely, and zoom in and out. There are several ways to accomplish
+this listed in table~\ref{tab:tour:moving}.
+
+Let's try it. Use the cursors to move around left, right, up and down.
+Zoom in a little using the \key{Page Up} key, and back out again using the
+\key{Page Down}. Press the \key{\textbackslash} key and see how Stellarium returns to the
+original field of view (how ``zoomed in'' the view is), and direction of
+view.
+%% TODO Is this still original behaviour? On German Kbd, this does not work anyways, backslash is a AltGr-combination.
+
+It's also possible to move around using the mouse. If you left-click and
+drag somewhere on the sky, you can pull the view around.
+
+Another method of moving is to select some object in the sky (left-click
+on the object), and press the \key{Space} key to centre the view on that
+object. Similarly, selecting an object and pressing the forward-slash
+key \key{/} will centre on the object and zoom right in on it.
+
+The forward-slash \key{/} and backslash \key{\textbackslash} keys auto-zoom in an out to different
+zoom levels depending on what is selected. If the object selected is a planet
+or moon in a \emph{sub-system} with a lot of moons (e.g.\ Jupiter), the
+initial zoom in will go to an intermediate level where the whole
+sub-system should be visible. A second zoom will go to the full zoom
+level on the selected object. Similarly, if you are fully zoomed in on a
+moon of Jupiter, the first auto-zoom out will go to the sub-system zoom
+level. Subsequent auto-zoom out will fully zoom out and return the
+initial direction of view. For objects that are not part of a
+sub-system, the initial auto-zoom in will zoom right in on the selected
+object (the exact field of view depending on the size/type of the
+selected object), and the initial auto-zoom out will return to the
+initial FOV and direction of view.
+
+\section{The Main Tool Bar}
+\label{sec:tour:toolbar}
+
+\begin{figure}[htb]
+\centering\includegraphics[width=0.9\textwidth]{002}
+\caption{Night scene with constellation artwork and moon.}
+\label{fig:002}
+\end{figure}
+
+Stellarium can do a whole lot more than just draw the stars. Figure~\ref{fig:002}
+shows some of Stellarium's visual effects including constellation
+line and boundary drawing, constellation art, planet hints, and
+atmospheric halo around the bright Moon. The controls in the main tool-bar
+provide a mechanism for turning on and off the visual effects.
+
+When the mouse if moved to the bottom left of the screen, a second
+tool-bar becomes visible. All the buttons in this side tool-bar open
+and close dialog boxes which contain controls for further
+configuration of the program. The dialogs will be described in the
+next chapter.
+
+
+Table~\ref{tab:tour:buttons} describes the operations of buttons
+on the main tool-bar and the side tool-bar, and gives their default
+keyboard shortcuts.
+
+%% TODO: Check default keys!
+
+\begin{longtabu} to \textwidth {lllX}\toprule
+\emph{Feature}           & \emph{Button} & \emph{Key} & \emph{Description}\\\midrule
+Constellations           & \guibutton[0.75]{bt_constellation}     & \key{C} & Draw constellations as ``stick figures'' \\
+Constellation Names      & \guibutton[0.75]{bt_constellation_name}& \key{V} & Draw name of the constellations \\
+Constellation Art        & \guibutton[0.75]{bt_constellation_art} & \key{R} & Superimpose artistic representations of the constellations \\
+Equatorial Grid          & \guibutton[0.75]{bt_eq_grid}           & \key{E} & Draw grid lines for the RA/Dec coordinate system \\
+Azimuth Grid             & \guibutton[0.75]{bt_az_grid}           & \key{Z} & Draw grid lines for the Alt/Azi coordinate system \\
+Toggle Ground            & \guibutton[0.75]{bt_ground}            & \key{G} & Toggle drawing of the ground. Turn this off to see objects that are below the horizon. \\
+Toggle Cardinal Points   & \guibutton[0.75]{bt_cardinal}          & \key{Q} & Toggle marking of the North, South, East and West points on the horizon. \\
+Toggle Atmosphere        & \guibutton[0.75]{bt_atmosphere}        & \key{A} & Toggle atmospheric effects. Most notably makes the stars visible in the daytime.  \\
+Deep-Sky Objects         & \guibutton[0.75]{bt_nebulae}           & \key{D} & Toggle marking the positions of Deep-Sky Objects. \\
+Planet Hints             & \guibutton[0.75]{bt_planets}           & \key{P} & Toggle indicators to show the position of planets. \\
+Coordinate System        & \guibutton[0.75]{bt_coord_type}        & \key{Enter} & Toggle between Alt/Azi \& RA/Dec coordinate systems. \\
+Goto                     & \guibutton[0.75]{bt_goto}              & \key{Space} & Center the view on the selected object \\
+Night Mode               & \guibutton[0.75]{bt_night_mode}        & \key{Ctrl+N} & Toggle ``night mode'', which changes the coloring of same display elements to be easier on the dark-adapted eye. \\
+Nebula background images & \guibutton[0.75]{bt_DSS}        & [none] & Toggle ``nebula background images'', which turns the Textures on or off. \\
+Full Screen Mode         & \guibutton[0.75]{bt_fullscreen} & \key{F11} & Toggle full screen mode. \\
+Flip view (horizontal)   & \guibutton[0.75]{bt_fliph}      & \key{Ctrl+Shift+H} & Flip the image in the horizontal plane. Note this button is not enable by default. See section {[}sec:imageflipping{]} \\
+Flip view (vertical)     & \guibutton[0.75]{bt_flipv}      & \key{Ctrl+Shift+V} & Flip the image in the vertical plane. Note this button is not enable by default. See section {[}sec:imageflipping{]} \\
+Quit Stellarium          & \guibutton[0.75]{bt_quit}       & \key{Ctrl-Q} & Close Stellarium.\\
+                         &                                 & \key{CMD-Q}  & on Mac OS X\\
+Help Window              & \guibutton[0.5]{btd_help}       & \key{F1} & Show the help window, with key bindings and other useful information \\
+Configuration Window     & \guibutton[0.5]{btd_config}     & \key{F2} & Show the configuration window \\ 
+Search Window            & \guibutton[0.5]{btd_find}       & \key{F3} or \key{Ctrl+F} & Show the object search window \\
+View Window              & \guibutton[0.5]{btd_view}       & \key{F4} & Show the view window \\
+Time Window              & \guibutton[0.5]{btd_time}       & \key{F5} & Show the time window \\
+Location Window          & \guibutton[0.5]{btd_location}   & \key{F6} & Show the observer location window (map) \\
+\bottomrule
+\caption{Stellarium's standard menu buttons}
+\label{tab:tour:buttons}
+\end{longtabu}
+
+
+\section{Taking Screenshots}
+\label{sec:tour:screenshots}
+
+You can save what is on the screen to a file by pressing
+\key{Control-S}. Screenshots are taken in \file{.png} format, and
+have filenames like \file{stellarium-000.png},
+\file{stellarium-001.png} (the number increments to prevent
+over-writing existing files).
+
+Stellarium creates screenshots in a directory depending on
+your operating system, see section
+\ref{sec:Directories} Files and Directories.
+
+
+
+
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "guide"
+%%% End: 
