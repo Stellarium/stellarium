@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-07 01:01+0700\n"
-"PO-Revision-Date: 2016-04-08 02:52+0000\n"
+"PO-Revision-Date: 2016-04-09 04:58+0000\n"
 "Last-Translator: Lê Văn Bách <levanbach1994ag@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-04-08 05:20+0000\n"
+"X-Launchpad-Export-Date: 2016-04-09 05:16+0000\n"
 "X-Generator: Launchpad (build 17990)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -6115,7 +6115,7 @@ msgstr "năm.tháng.ngày giờ:phút"
 
 #: src/ui_greatRedSpotDialog.h:173
 msgid "Annual drift (degrees):"
-msgstr ""
+msgstr "Sự trôi dạt hàng năm (độ):"
 
 #: src/ui_greatRedSpotDialog.h:174
 msgid "Longitude of GRS (degrees):"
@@ -9910,6 +9910,8 @@ msgid ""
 "Orbitar is a contrived word paying homage to the space launch and orbital "
 "operations of NASA."
 msgstr ""
+"Orbitar là một từ được sắp xếp để bày tỏ sự tôn kính tới hoạt động phóng "
+"không gian và quỹ đạo của NASA."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
 msgid "Chalawan is a mythological crocodile king from a Thai folktale."
@@ -10009,6 +10011,9 @@ msgid ""
 "ethnographer, and translator, who is attributed with the first drawing of "
 "the Moon through telescopic observations."
 msgstr ""
+"Thomas Harriot (ca. 1560-1621) là một nhà thiên văn học, nhà toán học, nhà "
+"dân tộc học, dịch giả người Anh, người được gắn với bức vẽ đầu tiên về Mặt "
+"Trăng thông qua các quan sát bằng kính thiên văn."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid ""
@@ -10016,6 +10021,9 @@ msgid ""
 "enshrine Amaterasu, the Shinto goddess of the Sun, born from the left eye of "
 "the god Izanagi."
 msgstr ""
+"<em>Amateru</em> là một tên gọi chung trong tiếng Nhật của các đền thờ khi "
+"họ cất giữ Amaterasu, nữ thần Mặt Trời Shinto, được sinh ra từ mắt trái của "
+"thần Izanagi."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid ""
@@ -10023,12 +10031,17 @@ msgid ""
 "was head of the Neo-Platonic school at Alexandria in the early 5th century, "
 "until murdered by a Christian mob in 415."
 msgstr ""
+"Hypatia là một nhà thiên văn học, toán học và triết học nổi tiếng người Hy "
+"Lạp. Bà ấy là người đứng đầu của trường Neo-Platonic ở Alexandria vào đầu "
+"thế kỉ 5, cho đến khi bị ám sát bởi một nhóm Ki tô giáo cực hữu vào năm 415."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid ""
 "Ran is the Norse goddess of the sea, who stirs up the waves and captures "
 "sailors with her net."
 msgstr ""
+"Ran là nữ thần biển của Na uy, khuấy động những con sóng và bắt giữ những "
+"thủy thủ bằng lưới của bà ấy."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 msgid ""
@@ -10036,24 +10049,30 @@ msgid ""
 "<em>Ran</em> both represent the <em>Jotuns</em> who reign in the outer "
 "Universe; together they had nine daughters."
 msgstr ""
+"AEgir là chồng của Ran, thần nhân cách của đại dương. <em>AEgir</em> và "
+"<em>Ran</em> cả hai thay mặt <em>Jotuns</em> người trị vì trong vũ trụ bên "
+"ngoài; họ đã có cùng nhau chín người con gái."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
 msgid ""
 "Ancient Semitic name and modern Arabic name for the city of Palmyra, a "
 "UNESCO World Heritage Site."
 msgstr ""
+"Tên Semitic cổ đại và tên Ả Rập hiện đại cho thành phố Palmyra, một Di sản "
+"Văn hóa Thế giới của UNESCO."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid "Dagon was a Semitic deity, often represented as half-man, half-fish."
 msgstr ""
+"Dagon là một vị thần Semitic, thường được thể hiện như nửa người, nửa cá."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
 msgid "Tonatiuh was the Aztec god of the Sun."
-msgstr ""
+msgstr "Tonatiuh là thần Mặt Trời của người Aztec."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 msgid "Meztli was the Aztec goddess of the Moon."
-msgstr ""
+msgstr "Meztli là nữ thần Mặt Trăng của người Aztec"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
 msgid ""
@@ -10061,16 +10080,21 @@ msgid ""
 "Celtic mythologies of Ireland and Scotland, and may be related to the Gallo-"
 "Roman deity <em>Ogmios</em>."
 msgstr ""
+"Ogma là một vị thần hùng biện, viết, và thể lực tuyệt vời trong thần thoại "
+"Celtic của Ai-len và Xcot-len, và có lẽ liên quan đến vị thần Gallo-Roman "
+"<em>Ogmios</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
 msgid "Smertrios was a Gallic deity of war."
-msgstr ""
+msgstr "Smertrios là một vị thần chiến tranh Gallic"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
 msgid ""
 "Intercrus means <em>between the legs</em> in Latin style, referring to the "
 "star's position in the constellation Ursa Major."
 msgstr ""
+"Intercrus nghĩa là <em>giữa hai chân</em> trong phong cách La tinh, đề cập "
+"đến vị trí của ngôi sao trong chòm Gấu Lớn."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
 msgid "Arkas was the son of Callisto (Ursa Major) in Greek mythology."
@@ -10081,30 +10105,41 @@ msgid ""
 "Miguel de Cervantes Saavedra (1547-1616) was a famous Spanish writer and "
 "author of <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr ""
+"Miguel de Cervantes Saavedra (1547-1616) là một nhà văn nổi tiếng người Tây "
+"Ban Nha và là tác giả của <em>El Ingenioso Hidalgo Don Quixote de la "
+"Mancha</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
 msgid ""
 "Lead fictional character from Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
+"Nhân vật hư cấu hàng đầu từ <em>El Ingenioso Hidalgo Don Quixote de la "
+"Manch</em> của Cervantes."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
 msgid ""
 "Fictional character and love interest of Don Quijote (or Quixote) in "
 "Cervantes's <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr ""
+"Nhân vật hư cấu và người yêu của Don Quijote (hoặc Quixote) trong <em>El "
+"Ingenioso Hidalgo Don Quixote de la Mancha</em> của Cervantes."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
 msgid ""
 "Fictional horse of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
+"Con ngựa hư cấu của Don Quijote trong <em>El Ingenioso Hidalgo Don Quixote "
+"de la Mancha</em> của Cervantes."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
 msgid ""
 "Fictional squire of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
+"Người cận vệ hư cấu của Don Quijote trong <em>El Ingenioso Hidalgo Don "
+"Quixote de la Mancha</em> của Cervantes."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
 msgid ""
@@ -10112,28 +10147,37 @@ msgid ""
 "Thestius. Leda was a Greek queen, mother of Pollux and of his twin Castor, "
 "and of Helen and Clytemnestra."
 msgstr ""
+"Thestias là họ của Leda và chị của cô ấy Althaea, con gái của Thestius. Leda "
+"là nữ hoàng Hy Lạp, mẹ của Pollux và anh em song sinh của Castor của anh ấy, "
+"và của Helen và Clytemnestra."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
 msgid ""
 "Lich is a fictional undead creature known for controlling other undead "
 "creatures with magic."
 msgstr ""
+"Lich là một sinh vật bất tử hư cấu được biết đến với sự điều khiển các sinh "
+"vật bất tử khác bằng phép thuật."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 msgid "Draugr refers to undead creatures in Norse mythology."
-msgstr ""
+msgstr "Draugr đề cập đến các sinh vật bất tử trong thần thoại Na uy."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
 msgid ""
 "Poltergeist is a name for supernatural beings that create physical "
 "disturbances, from German for <em>noisy ghost</em>."
 msgstr ""
+"Poltergeist là tên các sinh vật siêu nhiên tạo ra các rối loạn thể chất, từ "
+"Đức cho <em>ma ồn ào</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
 msgid ""
 "Phobetor is a Greek mythological deity of nightmares, the son of Nyx, the "
 "primordial deity of night."
 msgstr ""
+"Phobetor là một vị thần ác mộng trong thần thoại Hy Lạp, con trai của Nyx, "
+"vị thần bóng đêm nguyên thủy."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
 msgid ""
@@ -10142,6 +10186,10 @@ msgid ""
 "point of contact between two civilizations (Spanish and Arab) and two "
 "continents (Europe and Africa) after the 8th century."
 msgstr ""
+"Titawin (còn được gọi là Thành phố Medina của Tetouan) là một khu định cư ở "
+"miền bắc Morocco và Di sản thế giới của UNESCO. Trong lịch sử nó là một điểm "
+"quan trọng của sự tiếp xúc giữa hai nền văn minh (Tây Ban Nha và Ả Rập) và "
+"hai châu lục (châu Âu và châu Phi) sau thế kỷ thứ 8."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
 msgid ""
@@ -10150,6 +10198,10 @@ msgid ""
 "Cordova in Andalusia (modern Spain), and wrote an influential treatise on "
 "the uses of the astrolabe."
 msgstr ""
+"Saffar được đặt tên cho Abu al-Qasim Ahmed Ibn-Abd Allah Ibn-Omar al Ghafiqi "
+"Ibn al-Saffar, người đã dạy số học, hình học, và thiên văn học tại Cordova "
+"thế kỷ 11 ở Andalusia (Tây Ban Nha ngày nay), và đã viết một luận án có ảnh "
+"hưởng dựa trên việc sử dụng các đồng hồ thiên văn."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
 msgid ""
@@ -10157,6 +10209,10 @@ msgid ""
 "<em>Ibn al-Samh</em>), a noted 11th century astronomer and mathematician in "
 "the school of al Majriti in Cordova (Andalusia, now modern Spain)."
 msgstr ""
+"Samh được đặt tên cho Abu al-Qasim 'Asbagh ibn Muhammad ibn al-Samh al-Mahri "
+"(hoặc <em>Ibn al-Samh</em>), một nhà thiên văn học và toán học được ghi nhận "
+"vào thế kỉ 11 ở ngôi trường của al Majriti ở Cordova (Andalusia, bây giờ là "
+"Tây Ban Nha)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
 msgid ""
@@ -10164,6 +10220,9 @@ msgid ""
 "mathematician, astronomer, scholar, and teacher in 10th century and early "
 "11th century Andalusia (modern Spain)."
 msgstr ""
+"Majriti được đặt tên cho Abu al-Qasim al-Qurtubi al-Majriti, một nhà toán "
+"học, thiên văn học, học giả, và giáo viên nổi tiếng ở thế kỉ 10 và đầu 11 ở "
+"Andalusia (Tây Ban Nha ngày nay)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
 msgid ""
@@ -10172,6 +10231,10 @@ msgid ""
 "in the world even today. The constellation Aquila represents an eagle - a "
 "popular symbol of liberty."
 msgstr ""
+"Libertas là từ tiếng La tinh của <em>Liberty</em>. Liberty đề cập đến quyền "
+"tự do về xã hội và chính trí, và một lời nhắc nhở rằng có những người mất tự "
+"do trong thế giới ngày nay. Chòm sao Aquila đại diện cho một con đại bàng - "
+"một biểu tượng phổ biến của tự do."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
 msgid ""
@@ -10179,6 +10242,9 @@ msgid ""
 "mental strength in the face of adversity, as embodied by the eagle "
 "(represented by the constellation Aquila)."
 msgstr ""
+"Fortitudo là từ tiếng La tinh của <em>fortitude</em>. Fortitude nghĩa là  "
+"sức mạnh tình cảm và tinh thần khi đối mặt với nghịch cảnh, như thể hiện bởi "
+"những con đại bàng (đại diện bởi chòm sao Aquila)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
@@ -10190,18 +10256,24 @@ msgid ""
 "These names are modified based on the original proposals, to be consistent "
 "with the IAU rules."
 msgstr ""
+"Những tên này được sửa đổi dựa trên các đề xuất ban đầu, để phù hợp với các "
+"quy tắc của IAU."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 msgid ""
 "The original name proposed, <em>Veritas</em>, is that of an asteroid "
 "important for the study of the solar system."
 msgstr ""
+"Tên ban đầu được đề xuất; <em>Vertitas</em>, là của một tiểu hành tinh quan "
+"trọng cho việc nghiên cứu hệ mặt trời."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
 msgid ""
 "The name originally proposed, <em>Amaterasu</em>, is already used for an "
 "asteroid."
 msgstr ""
+"Tên ban đầu được đề xuất, <em>Amaterasu</em>, thì được dùng cho một tiểu "
+"hành tinh rồi."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
 msgid ""
@@ -10210,10 +10282,13 @@ msgid ""
 "<em>Aegir</em>, has been attributed to one of Saturn's satellites, "
 "discovered in 2004."
 msgstr ""
+"Lưu ý sự khác nhau về đánh máy giữa <em>AEgir</em> và <em>Aegir</em>, phiên "
+"âm Na uy. Cùng tên, với cách đánh viết <em>Aegir</em>, được gắn với một "
+"trong những vệ tinh của Thổ Tinh, được khám phá vào năm 2004."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
 msgid "<em>Ogmios</em> is a name already attributed to an asteroid."
-msgstr ""
+msgstr "<em>Ogmios</em> là một cái tên được gán với một tiểu hành tinh rồi."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 msgid ""
@@ -10221,6 +10296,9 @@ msgid ""
 "asteroid and to one of Jupiter's satellites. The name <em>Althaea</em> is "
 "also attributed to an asteroid."
 msgstr ""
+"Tên được đề xuất ban đầu <em>Leda</em> thì được gán cho một tiểu hành tinh "
+"và là một trong những vệ tinh của Mộc Tinh. Cái tên <em>Althaea</em> thì "
+"cũng được gán cho một tiểu hành tinh."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
 msgid ""
@@ -10229,6 +10307,10 @@ msgid ""
 "<em>Lippershey</em> (with an <em>s</em>) results in fact from a "
 "typographical error dating back from 1831, thus should be avoided."
 msgstr ""
+"Cách viết ban đầu của <em>Lippershey</em> đã được sửa lại thành "
+"<em>Lipperhey</em> vào ngày 15.01.2016. Cách viết thường thấy "
+"<em>Lippershey</em> (với một chữ <em>s</em>) kết quả trong thực tế từ một "
+"lỗi đánh máy có từ năm 1831, do đó nên tránh."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
 msgid "Additional info"
@@ -10253,10 +10335,11 @@ msgstr "Chỉ số tường đồng với Trái đất"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
 msgid "Final Results of NameExoWorlds Public Vote Released"
 msgstr ""
+"Kết quả cuối cùng của cuộc bỏ phiếu công khai NameExoWords được phát hành"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
 msgid "NameExoWorlds website"
-msgstr ""
+msgstr "trang web NameExWords"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
 msgid "General professional Web sites relevant to extrasolar planets"
@@ -11513,12 +11596,12 @@ msgstr "χ-Orionids"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:155
 msgid "Sextantids"
-msgstr ""
+msgstr "Sextantids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:157
 msgid "November Orionids"
-msgstr ""
+msgstr "November Orionids"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:161
