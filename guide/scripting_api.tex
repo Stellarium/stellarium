@@ -341,3 +341,79 @@ Get the current sky language.
 
 \paragraph{Returns}
 Two letter language code, e.g. ``en'', or ``de'' and so on.
+
+\section{ConstellationMgr}
+\label{sec:ScriptingAPI:ConstellationMgr}
+Display and manage the constellations. It can display constellations lines, names, art textures and boundaries. It also supports several different sky cultures.
+
+\section{GridLinesMgr}
+\label{sec:ScriptingAPI:GridLinesMgr}
+The GridLinesMgr controls the drawing of the Azimuthal, Equatorial, Ecliptical and Galactic Grids, as well as the great circles: Meridian Line, Ecliptic Lines of J2000.0 and date, Equator Line (of J2000.0 and date), Precession Circles, and a special line marking conjunction or opposition in ecliptical longitude (of date).
+
+\section{LabelMgr}
+\label{sec:ScriptingAPI:LabelMgr}
+Allows for creation of custom labels on objects or coordinates. Because this class is intended for use in scripting (although other uses are also fine), all label types and so on are specified by QString descriptions. The labels are painted very late, i.e. also sky object labels will be written over the landscape.
+
+\section{LandscapeMgr}
+\label{sec:ScriptingAPI:LandscapeMgr}
+Manages all the rendering at the level of the observer's surroundings. This includes landscape textures, fog, atmosphere and cardinal points. I decided to put all these elements together in a single class because they are inherently linked, especially when we start moving the observer in altitude.
+
+\section{SporadicMeteorMgr}
+\label{sec:ScriptingAPI:SporadicMeteorMgr}
+Simulates a sporadic meteor shower, with a random color and a random radiant.
+
+\section{NebulaMgr}
+\label{sec:ScriptingAPI:NebulaMgr}
+Manage a collection of nebulae. This class is used to display the deep-sky catalog with information, and textures for some of them.
+
+\section{ScreenImageMgr}
+\label{sec:ScriptingAPI:ScreenImageMgr}
+Module for managing images for scripting. Images are identified by a string ID which is passed to ScreenImageMgr members when it is necessary to specify an image to work with. Member functions in this class which modify the state of the class are all mediated through the signal/slot mechanism to ensure such operations happen in the main thread where images are drawn, and not in the script thread.
+
+\section{SolarSystem}
+\label{sec:ScriptingAPI:SolarSystem}
+This StelObjectModule derivative is used to model SolarSystem bodies. This includes the Major Planets, Minor Planets and Comets.
+
+\section{StarMgr}
+\label{sec:ScriptingAPI:StarMgr}
+
+Stores the star catalogue data.
+
+Used to render the stars themselves, as well as determine the color table and render the labels of those stars with names for a given SkyCulture.
+
+The celestial sphere is split into zones, which correspond to the triangular faces of a geodesic sphere. The number of zones (faces) depends on the level of sub-division of this sphere. The lowest level, 0, is an icosahedron (20 faces), subsequent levels, L, of sub-division give the number of zones, n as:
+
+\begin{equation}
+n=20 x 4^L
+\end{equation}
+
+Stellarium uses levels 0 to 7 in the existing star catalogues. Star Data Records contain the position of a star as an offset from the central position of the zone in which that star is located, thus it is necessary to determine the vector from the observer to the centre of a zone, and add the star's offsets to find the absolute position of the star on the celestial sphere.
+
+This position for a star is expressed as a 3-dimensional vector which points from the observer (at the centre of the geodesic sphere) to the position of the star as observed on the celestial sphere.
+
+\section{StelAudioMgr}
+\label{sec:ScriptingAPI:StelAudioMgr}
+
+\section{StelVideoMgr}
+\label{sec:ScriptingAPI:StelVideoMgr}
+
+A scriptable way to show videos embedded in the screen.
+
+After experimental support with Qt4/Phonon library, this feature is back. Videos can be scaled, paused, placed and relocated (shifted) on screen. Setting opacity seems not to do much unless setting it to zero, the video is then simply invisible. Therefore smooth fading in/out or setting a semitransparent overlay does not work, but there is now an intro/end animation available: zooming out from a pixel position to a player frame position, and returning to that spot close to end of video playback.
+
+However, support for multimedia content depends on the operating system, installed codecs, and completeness of the QtMultimedia system support, so some features or video formats may not work for you (test video and re-code it if necessary).
+
+\section{StelMovementMgr}
+\label{sec:ScriptingAPI:StelMovementMgr}
+
+Manages the head movements and zoom operations.
+
+\section{StelSkyDrawer}
+\label{sec:ScriptingAPI:StelSkyDrawer}
+
+Provide a set of methods used to draw sky objects taking into account eyes adaptation, zoom level, instrument model and artificially set magnitude limits.
+
+\section{StelSkyLayerMgr}
+\label{sec:ScriptingAPI:StelSkyLayerMgr}
+
+Manage the sky background images, including DSS and deep sky objects images.
