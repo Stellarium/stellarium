@@ -461,6 +461,8 @@ innerbottommargin=5pt]{cBox}
 %	PART HEADINGS
 %----------------------------------------------------------------------------------------
 
+\newcommand{\StelTOCdepth}{1}% reset this to 0 before appendix!
+
 % numbered part in the table of contents
 \newcommand{\@mypartnumtocformat}[2]{%
 \setlength\fboxsep{0pt}%
@@ -491,8 +493,8 @@ innerbottommargin=5pt]{cBox}
 \node at (current page.north west){\begin{tikzpicture}[remember picture,overlay]%	
 \fill[ocre!20](0cm,0cm) rectangle (\paperwidth,-\paperheight);
 \node[anchor=north] at (4cm,-3.25cm){\color{ocre!40}\fontsize{220}{100}\sffamily\bfseries\@Roman\c@part}; 
-\node[anchor=south east] at (\paperwidth-1cm,-\paperheight+1cm){\parbox[t][][t]{8.5cm}{
-\printcontents{l}{0}{\setcounter{tocdepth}{1}}%
+\node[anchor=south east] at (\paperwidth-1cm,-\paperheight+1cm){\parbox[t][][t]{10.5cm}{% GZ: was 8.5cm, but Appendix has longer names.
+\printcontents{l}{0}{\setcounter{tocdepth}{\StelTOCdepth}}% %% GZ TODO: Make tocdepth0 for Appendix, 1 before.
 }};
 \node[anchor=north east] at (\paperwidth-1.5cm,-3.25cm){\parbox[t][][t]{15cm}{\strut\raggedleft\color{white}\fontsize{30}{30}\sffamily\bfseries#2}};
 \end{tikzpicture}};
@@ -572,8 +574,18 @@ innerbottommargin=5pt]{cBox}
 %----------------------------------------------------------------------------------------
 
 \usepackage{hyperref}
-\hypersetup{hidelinks,backref=true,pagebackref=true,hyperindex=true,colorlinks=false,breaklinks=true,urlcolor= ocre,bookmarks=true,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
-%% GZ Maybe in some other style, but links should be visible. 
+\hypersetup{hidelinks,backref=true,pagebackref=true,hyperindex=true,colorlinks=false,breaklinks=true,urlcolor= ocre,
+            pdfpagemode=UseOutlines,bookmarks=true,bookmarksopen=true,%bookmarksopenlevel=1,bookmarksnumbered,
+            pdfview=Fit,pdfstartview=Fit,pdfpagelayout=TwoPageRight,
+            pdfduplex=true,%does nothing? 
+            pdfsubject={Stellarium is a multi-platform open-source desktop planetarium. This document describes version 0.15+ (2016)},
+            %pdfcreator={PDFLaTeX},
+            pdfproducer={Stellarium team}, 
+            pdfkeywords={Stellarium Manual}, 
+            pdftitle={Stellarium User Guide},pdfdisplaydoctitle=true,
+            pdfauthor={M. Gates, B. Gerdes, A. Wolf, G. Zotti}% 
+            }
+%% GZ TODO Maybe in some other style, but links should be visible. 
 %\hypersetup{backref=true,pagebackref=true,hyperindex=true,colorlinks=true,breaklinks=true,urlcolor=blue,bookmarks=true,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
 \usepackage{bookmark}
 \bookmarksetup{
