@@ -63,6 +63,10 @@
 
 %% File names. 
 \newcommand{\file}[1]{\texttt{#1}}
+%% Parameters.
+\newcommand{\parameter}[1]{\texttt{#1}}
+%% Map keys.
+\newcommand{\keymap}[1]{\texttt{#1}}
 %% console commands, CLI arguments, etc.
 \newcommand{\command}[1]{\texttt{#1}}
 %% Keypress buttons. This is just a font change now, but can be a boxed key or such.
@@ -98,7 +102,19 @@
 \lstnewenvironment{configfile}{\lstset{language=sh,basicstyle=\ttfamily\small,%
                                    backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
-
+\lstnewenvironment{script}{\lstset{language=PHP,%
+								   basicstyle=\ttfamily\small,%
+                                   backgroundcolor=\color{black!5},%
+                                   frame=leftline,%
+                                   keepspaces=true,%
+                                   rulecolor=\color{blue},%
+                                   showstringspaces=false,
+								   keywordstyle=\bfseries\color{green!40!black},%
+                                   commentstyle=\itshape\color{purple!40!black},%
+                                   identifierstyle=\color{blue},%
+                                   stringstyle=\color{orange},%
+                                   framerule=1pt}%
+                             }{}%
 
 %% Allow chapter authors where this seems appropriate.
 %% From http://tex.stackexchange.com/questions/156862/displaying-author-for-each-chapter-in-book

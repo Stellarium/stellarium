@@ -3,7 +3,10 @@
 %%         2016-04-05 GZ changed to have 1 chapter per plugin for a better structure. This file may be split up later. 
 %% TODO: All plugins! And give a better structure than just by alphabet.
 
-\chapter{Angle Measure Plugin}
+\chapter{Built-in Plugins}
+Since version 0.10.3, Stellarium's packages include a number of plug-ins.
+
+\section{Angle Measure Plugin}
 \label{sec:plugins:AngleMeasure}
 
 %\url{http://porpoisehead.net/images/plugin-angle-measure.jpg}
@@ -19,7 +22,7 @@ end, pointing at a \emph{photograph} of Saturn at the other end of the
 lab. We measured. We calculated. We wished we were in Hawaii. A picture
 is worth a thousand words.}
 
-\section{Using the plugin}
+\subsection{Using the plugin}
 \label{sec:plugins:AngleMeasure:using}
 
 \begin{enumerate}
@@ -37,8 +40,9 @@ is worth a thousand words.}
   or press \textbf{control-A} on the keyboard.
 \end{enumerate}
 
+\newpage
 
-\chapter{Bright Novae Plugin}
+\section{Bright Novae Plugin}
 \label{sec:plugins:BrightNovae}
 
 The Bright Novae plugin provides visualization of some bright novae in
@@ -53,7 +57,7 @@ the Milky Way galaxy (Fig.~\ref{fig:NovaCygni1975}).
 \caption{Nova Cygni 1975 (also known as \textbf{V1500 Cyg})}
 \end{figure}
 
-\section{Using the Bright Novae plugin}
+\subsection{Using the Bright Novae plugin}
 \label{sec:plugins:BrighrNovae:using}
 
 \begin{enumerate}
@@ -61,7 +65,7 @@ the Milky Way galaxy (Fig.~\ref{fig:NovaCygni1975}).
 \item Set date and time (30 August 1975 year for \emph{Nova Cygni 1975} as example\footnote{\url{http://en.wikipedia.org/wiki/V1500_Cygni}})
 \end{enumerate}
 
-\section{Section \big[Novae\big] in config.ini file}
+\subsection{Section \big[Novae\big] in config.ini file}
 \label{sec:plugins:BrightNovae:config}
 
 You can edit \file{config.ini} file by yourself for changes of the
@@ -75,7 +79,7 @@ updates\_enable         & bool   & Enable updates of bright novae catalog from I
 url                     & string & URL of bright novae catalog \\\bottomrule
 \end{longtabu}
 
-\section{Format of bright novae catalog}
+\subsection{Format of bright novae catalog}
 \label{sec:plugins:BrightNovae:format}
 
 To add a new nova, open a new line after line 5 and paste the following, note commas and brackets, they are important:
@@ -99,7 +103,6 @@ To add a new nova, open a new line after line 5 and paste the following, note co
 },
 \end{configfile}
 
-\newpage
 \noindent For example, the record for \textbf{Nova Cygni 1975} (\textbf{V1500 Cyg}) looks like:
 \begin{configfile}
 "V1500 Cyg":
@@ -119,7 +122,7 @@ To add a new nova, open a new line after line 5 and paste the following, note co
 },
 \end{configfile}
 
-\section{Light curves}
+\subsection{Light curves}
 \label{sec:plugins:BrightNovae:lightcurves}
 
 This plugin uses a very simple model for calculation of light curves for
@@ -128,7 +131,9 @@ magnitudes from the maximum value, where $N$ is 2, 3, 6 and 9. If a
 nova has no values for decay of magnitude then this plugin will use
 generalized values for it.
 
-\chapter{Compass Marks Plugin}
+\newpage
+
+\section{Compass Marks Plugin}
 \label{sec:plugins:CompassMarks}
 
 %\url{http://porpoisehead.net/images/plugin-compass-marks.jpg}
@@ -139,7 +144,7 @@ Compass Marks takes this idea and extends it to add markings every few
 degrees along the horizon, and includes compass bearing values in
 degrees.
 
-\section{Using the plugin}
+\subsection{Using the plugin}
 \label{sec:plugins:CompassMarks:using}
 
 There is a tool bar button for toggling the compass markings, or you can
@@ -150,10 +155,182 @@ be turned off. You can have both active at once, but there is a small
 bug which means you have to press \key{Q} \emph{two times} to
 re-enable cardinal points after enabling the compass markings.
 
-\chapter{Pulsars Plugin}
+\newpage
+
+\section{Equation of Time Plugin}
+\label{sec:plugins:EquationOfTime}
+The Equation of Time plugin shows the solution of the equation of time (Fig.~\ref{fig:EqOfTime}).
+
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{EquationOfTime-plugin.jpg}
+\label{fig:EqOfTime}
+\caption{Interface of Equation of Time plugin}
+\end{figure}
+
+The equation of time describes the discrepancy between two kinds of solar time. These are apparent solar time, which directly tracks the motion of the sun, and mean solar time, which tracks a fictitious ``mean'' sun with noons 24 hours apart. There is no universally accepted definition of the sign of the equation of time. Some publications show it as positive when a sundial is ahead of a clock; others when the clock is ahead of the sundial. In the English-speaking world, the former usage is the more common, but is not always followed. Anyone who makes use of a published table or graph should first check its sign usage.
+
+\subsection{Using the Equation of Time plugin}
+\label{sec:plugins:EquationOfTime:using}
+
+\begin{enumerate}
+\item Enable the tool by clicking the tool-bar button ``Load at startup''.
+\item Click on the Equation of Time button on the bottom toolbar for displaying solution for equation of time on top of the screen.
+\end{enumerate}
+
+\subsection{Section \big[EquationOfTime\big] in config.ini file}
+\label{sec:plugins:EquationOfTime:config}
+
+You can edit \file{config.ini} file by yourself for changes of the
+settings for the Equation of Time plugin -- just make it carefully!
+
+\begin{longtabu} to \textwidth {l|l|X}\toprule
+\emph{ID}            & \emph{Type} & \emph{Description}\\\midrule
+enable\_at\_startup  & bool & Display solution of the equation of time at startup of the planetarium\\\midrule
+flag\_use\_ms\_format & bool & Set format for the displayed solution - minutes and seconds and decimal minutes\\\midrule
+flag\_use\_inverted\_value & bool & Change sign of the equation of time \\\midrule
+flag\_show\_button & bool & Enable displaying plugin button on the bottom toolbar\\\midrule
+text\_color & R,G,B & Color of font for the displayed solution of the equation of time\\\midrule
+font\_size & int & Font size for the displayed solution of the equation of time \\\bottomrule
+\end{longtabu}
+
+\newpage
+
+\section{Historical Supernovae Plugin}
+\label{sec:plugins:HistoricalSupernovae}
+The Historical Supernovae plugin provides visualization of some bright historical supernovae (Fig.~\ref{fig:SN1604}) from table below\footnote{List of supernovae in default catalog.}.
+
+\begin{longtabu} to \textwidth {l|l|l|l|X}\toprule
+\emph{Supernova}            & \emph{Date of max. brightness} & \emph{Max. apparent mag.} & \emph{Type} & \emph{Name} \\\midrule
+SN 185A\footnote{\url{https://en.wikipedia.org/wiki/SN_185}} & 7 December & -6.0 & Ia & \\\midrule
+SN 386A & 24 April & 1.5 & II & \\\midrule
+SN 1006A\footnote{\url{https://en.wikipedia.org/wiki/SN_1006}} & 29 April & -7.5 & I & \\\midrule
+SN 1054A\footnote{\url{https://en.wikipedia.org/wiki/SN_1054}} & 3 July & -6.0 & II & \\\midrule
+SN 1181A\footnote{\url{https://en.wikipedia.org/wiki/SN_1181}} & 4 August & -2.0 & II & \\\midrule
+SN 1572A\footnote{\url{https://en.wikipedia.org/wiki/SN_1572}} & 5 November & -4.0 & I & Tycho's Supernova\\\midrule
+SN 1604A\footnote{\url{https://en.wikipedia.org/wiki/SN_1604}} & 8 October & -2.0 & I & Kepler's Supernova\\\midrule
+SN 1680A\footnote{\url{https://en.wikipedia.org/wiki/Cassiopeia_A}} & 15 August & 6.0 & IIb & Cassiopeia A\\\midrule
+SN 1885A\footnote{\url{https://en.wikipedia.org/wiki/S_Andromedae}} & 17 August & 5.8 & IPec & S Andromedae\\\midrule
+SN 1895B & 5 July & 8.0 & I & \\\midrule
+SN 1920A & 17 December & 11.7 & II & \\\midrule
+SN 1921C & 11 December & 11.0 & I & \\\midrule
+SN 1937C & 21 August & 8.5 & Ia & \\\midrule
+SN 1960F & 21 April & 11.6 & Ia & \\\midrule
+SN 1960R & 19 December & 12.0 & I & \\\midrule
+SN 1961H & 8 May & 11.8 & Ia & \\\midrule
+SN 1962M & 26 November & 11.5 & II & \\\midrule
+SN 1966J & 2 December & 11.3 & I & \\\midrule
+SN 1968L & 12 July & 11.9 & IIP & \\\midrule
+SN 1970G & 30 July & 11.4 & IIL & \\\midrule
+SN 1971I & 29 May & 11.9 & Ia & \\\midrule
+SN 1972E\footnote{\url{https://en.wikipedia.org/wiki/SN1972e}} & 8 May & 8.4 & Ia & \\\midrule
+SN 1979C & 15 April & 11.6 & IIL & \\\midrule
+SN 1980K & 31 October & 11.6 & IIL & \\\midrule
+SN 1981B & 9 March & 12.0 & Ia & \\\midrule
+SN 1983N & 17 July & 11.4 & Ib & \\\midrule
+SN 1987A\footnote{\url{https://en.wikipedia.org/wiki/SN_1987A}} & 24 February & 2.9 & IIPec & \\\midrule
+SN 1989B & 6 February & 11.9 & Ia & \\\midrule
+SN 1991T & 26 April & 11.6 & IaPec & \\\midrule
+SN 1993J\footnote{\url{https://en.wikipedia.org/wiki/SN_1993J}} & 30 March & 10.8 & IIb & \\\midrule
+SN 1994D & 31 March & 11.8 & Ia & \\\midrule
+SN 1998bu & 21 May & 11.9 & Ia & \\\midrule
+SN 2004dj & 31 July & 11.3 & IIP & \\\midrule
+SN 2011fe\footnote{\url{https://en.wikipedia.org/wiki/SN_2011fe}} & 13 September & 10.06 & Ia & \\\midrule
+SN 2013aa & 13 February	& 11.9 & Ia & \\\bottomrule
+\end{longtabu}
+
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{sn1604wiki.jpg}
+\label{fig:SN1604}
+\caption{Supernova 1604 (also known as \textbf{Kepler's Supernova}, \textbf{Kepler's Nova} or \textbf{Kepler's Star}}
+\end{figure}
+
+\subsection{Using the Historical Supernovae plugin}
+\label{sec:plugins:HistoricalSupernovae:using}
+
+\begin{enumerate}
+\item Enable the tool by clicking the tool-bar button ``Load at startup''.
+\item Set date and time (29 April 1006 year for \emph{SN 1006A} as example\footnotemark[4]).
+\end{enumerate}
+
+\subsection{Section \big[Supernovae\big] in config.ini file}
+\label{sec:plugins:HistoricalSupernovae:config}
+
+You can edit \file{config.ini} file by yourself for changes of the
+settings for the Historical Supernovae plugin -- just make it carefully!
+
+\begin{longtabu} to \textwidth {l|l|X}\toprule
+\emph{ID}            & \emph{Type} & \emph{Description}\\\midrule
+last\_update            & string & Date and time of last update\\\midrule
+update\_frequency\_days & int    & Frequency of updates, in days\\\midrule
+updates\_enable         & bool   & Enable updates of bright novae catalog from Internet \\\midrule
+url                     & string & URL of bright novae catalog \\\bottomrule
+\end{longtabu}
+
+\subsection{Format of historical supernovae catalog}
+\label{sec:plugins:HistoricalSupernovae:format}
+
+To add a new nova, open a new line after line 5 and paste the following, note commas and brackets, they are important:
+
+\begin{configfile}
+"Supernova designation":
+{
+    "type": "type of supernova",
+    "maxMagnitude": value of maximal visual magnitude,
+    "peakJD": JD for maximal visual magnitude,
+    "alpha": "Right ascension (J2000)",
+    "delta": "Declination (J2000)",
+    "distance": value of distance between supernova and 
+                Earth (in thousands of Light Years),
+    "note": "notes for supernova"
+},
+\end{configfile}
+
+\noindent For example, the record for \textbf{SN 1604A} (\textbf{Kepler's Supernova}) looks like:
+\begin{configfile}
+"1604A":
+{
+    "type": "I",
+    "maxMagnitude": -2,
+    "peakJD": 2307190,
+    "alpha": "17h30m36.00s",
+    "delta": "-21d29m00.0s",
+    "distance": 14,
+    "note": "Kepler's Supernova"
+},
+\end{configfile}
+
+\newpage
+\subsection{Light curves}
+\label{sec:plugins:HistoricalSupernovae:lightcurves}
+
+In this plugin implemented simple model of light curves for different supernovae. Typical view of light curve for supernova type I you can see on Fig.~\ref{fig:SNTypeI} (bottom scale in days) and this model used for plugin.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=250px]{sn_type_I.jpg}
+\end{center}
+\label{fig:SNTypeI}
+\caption{Light Curve of Supernova Type I}
+\end{figure}
+
+For supernova type II we use typical light curve with plato, which you can see on Fig.~\ref{fig:SNTypeII} (bottom scale in days).
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=260px]{sn_type_II.jpg}
+\end{center}
+\label{fig:SNTypeII}
+\caption{Light Curve of Supernova Type II}
+\end{figure}
+
+On both images for light curves of maximum brightness marked as day 0.
+
+\newpage
+
+\section{Pulsars Plugin}
 \label{sec:plugins:Pulsars}
 
-This plugin plots the position of various pulsars, with object information about each one. Pulsar data is derived from \textit{The ATNF Pulsar Catalogue} (Manchester, R. N., Hobbs, G. B., Teoh, A. \& Hobbs, M., Astron. J., 129, 1993-2006 (2005) (\href{http://arxiv.org/abs/astro-ph/0412641}{astro-ph/0412641})).
+This plugin plots the position of various pulsars, with object information about each one. Pulsar data is derived from \textit{The ATNF Pulsar Catalogue} (Manchester, R. N., Hobbs, G. B., Teoh, A. \& Hobbs, M., Astron. J., 129, 1993-2006 (2005)\footnote{\url{http://arxiv.org/abs/astro-ph/0412641}}).
 
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{psr_j0332_5434.jpg}
@@ -161,7 +338,7 @@ This plugin plots the position of various pulsars, with object information about
 \caption{PSR J0332-5434}
 \end{figure}
 
-\section{Using the Pulsars plugin}
+\subsection{Using the Pulsars plugin}
 \label{sec:plugins:Pulsars:using}
 
 \begin{enumerate}
@@ -169,7 +346,7 @@ This plugin plots the position of various pulsars, with object information about
 \item Find the pulsar by their designation (\emph{PSR J0437-4715} as example)
 \end{enumerate}
 
-\section{Section \big[Pulsars\big] in config.ini file}
+\subsection{Section \big[Pulsars\big] in config.ini file}
 \label{sec:plugins:Pulsars:config}
 
 \begin{longtabu} to \textwidth {l|l|X}\toprule
@@ -186,7 +363,7 @@ glitch\_color               & R,G,B  & Color for marker of the pulsars with glit
 use\_separate\_colors       & bool   & Use separate colors for different types of the pulsars \\\bottomrule
 \end{longtabu}
 
-\section{Format of pulsars catalog}
+\subsection{Format of pulsars catalog}
 \label{sec:plugins:Pulsars:format}
 
 To add a new pulsar, open a new line after line 5 and paste the following, note commas and brackets, they are important:
@@ -240,9 +417,9 @@ To add a new pulsar, open a new line after line 5 and paste the following, note 
 },
 \end{configfile}
 
+\newpage
 
-
-\chapter{Text User Interface}
+\section{Text User Interface}
 \label{sec:plugins:TextUserInterface}
 
 %\url{http://porpoisehead.net/images/plugin-tui.jpg}
@@ -255,7 +432,7 @@ interface. This plugin re-implements the ``TUI'', as it was known. Full
 list of the commands for the TUI plugin you can read in the section
 \href{TUI_Commands}{TUI Commands}.
 
-\section{Using the Text User Interface}
+\subsection{Using the Text User Interface}
 \label{sec:plugins:TUI:using}
 
 \begin{enumerate}
@@ -275,7 +452,7 @@ list of the commands for the TUI plugin you can read in the section
   on the keyboard.
 \end{enumerate}
 
-\section{TUI Commands}
+\subsection{TUI Commands}
 \label{sec:plugins:TUI:commands}
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule

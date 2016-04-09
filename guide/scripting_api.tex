@@ -1,0 +1,343 @@
+\chapter{Scripting API}
+\label{ch:ScriptingAPI}
+
+Interation with Stellarium-specific functionality is done by calling the \textbf{public slots} of instances of a group of Stellarium's core classes.
+
+\section{core}
+\label{sec:ScriptingAPI:core}
+Provide script API for Stellarium global functions.
+
+\subsection{void core.clear(QString state)}
+\label{sec:ScriptingAPI:core:clear}
+Clear the display options, setting a ``standard'' view.
+
+\paragraph{Parameters}
+\begin{itemize}
+\item \parameter{state} the name of a preset state.
+\end{itemize}
+
+\paragraph{Preset states}
+\begin{itemize}
+\item \keymap{natural}: azimuthal mount, atmosphere, landscape, no lines, labels or markers
+\item \keymap{starchart}: equatorial mount, constellation lines, no landscape, atmosphere etc. labels and markers on.
+\item \keymap{deepspace}: like starchart, but no planets, no eq.grid, no markers, no lines.
+\item \keymap{galactic}: like deepspace, but in galactic coordinate system.
+\end{itemize}
+
+\paragraph{Default value}
+Default value of parameter is \keymap{natural}.
+
+\subsection{void core.debug(QString s)}
+\label{sec:ScriptingAPI:core:debug}
+Print a debugging message to the console.
+
+\paragraph{Parameters}
+\begin{itemize}
+\item \parameter{s} the message to be displayed on the console.
+\end{itemize}
+
+\subsection{void core.dropSound(QString id)}
+\label{sec:ScriptingAPI:core:dropSound}
+Drop a sound from memory.
+
+You should do this before the end of your script.
+\paragraph{Parameters}
+\begin{itemize}
+\item \parameter{id} the message to be displayed on the consolethe identifier used when loadSound was called.
+\end{itemize}
+
+\subsection{void core.dropVideo(QString id)}
+\label{sec:ScriptingAPI:core:dropVideo}
+Drop a video from memory.
+
+You should do this before the end of your script.
+
+\paragraph{Parameters}
+\begin{itemize}
+\item \parameter{id} the identifier used when loadVideo() was called.
+\end{itemize}
+
+\subsection{void core.exit()}
+\label{sec:ScriptingAPI:core:exit}
+Stop the script.
+
+\subsection{QStringList core.getAllSkyCultureIDs()}
+\label{sec:ScriptingAPI:core:getAllSkyCultureIDs}
+Get a list of Sky Culture IDs.
+
+\paragraph{Returns}
+A list of valid sky culture IDs.
+
+\subsection{QString core.getAppLanguage()}
+\label{sec:ScriptingAPI:core:getAppLanguage}
+Get the current application language.
+
+\paragraph{Returns}
+Two letter language code, e.g. ``en'', or ``de'' and so on.
+
+\subsection{QString core.getDate(QString spec)}
+\label{sec:ScriptingAPI:core:getDate}
+Get the simulation date and time as a string in ISO format, e.g. ``2008-03-24T13:21:01''
+
+\paragraph{Parameters}
+\begin{itemize}
+\item \parameter{spec} if \keymap{utc}, the returned string's timezone is UTC, else it is local time.
+\end{itemize}
+
+\paragraph{Default value}
+Default value of parameter is \keymap{utc}.
+
+\subsection{QString core.getDeltaT()}
+\label{sec:ScriptingAPI:core:getDeltaT}
+Get the $\Delta T$ for the simulation date and time as a string in HMS format, e.g. ``0h1m68.2s''
+
+\paragraph{Returns}
+The $\Delta T$ for current simulation time.
+
+\subsection{QString core.getDeltaTAlgorithm()}
+\label{sec:ScriptingAPI:core:getDeltaTAlgorithm}
+Get the $\Delta T$ equation name for the simulation date and time as a string.
+
+\paragraph{Returns}
+Name of the $\Delta T$ equation.
+
+\subsection{bool core.getDiskViewport()}
+\label{sec:ScriptingAPI:core:getDiskViewport}
+Get the status of the disk viewport.
+
+\paragraph{Returns}
+A \keymap{true} if the disk view port is currently enabled.
+
+\subsection{bool core.getFlagGravityLabels()}
+\label{sec:ScriptingAPI:core:getFlagGravityLabels}
+Get the current status of the gravity labels option.
+
+\paragraph{Returns}
+A \keymap{true} if gravity labels are enabled, else \keymap{false}.
+
+\subsection{double core.getJDay()}
+\label{sec:ScriptingAPI:core:getJDay}
+Get the current date as Julian Day number.
+
+\paragraph{Returns}
+The Julian Day number.
+
+\subsection{float core.getMaxFps()}
+\label{sec:ScriptingAPI:core:getMaxFps}
+Get the current maximum frames per second.
+
+\paragraph{Returns}
+The current maximum frames per secon setting.
+
+\subsection{double core.getMilkyWayIntensity()}
+\label{sec:ScriptingAPI:core:getMilkyWayIntensity}
+Get Milky Way intensity.
+
+\paragraph{Returns}
+Value of Milky Way intensity, e.g. ``1.2''.
+
+\subsection{float core.getMinFps()}
+\label{sec:ScriptingAPI:core:getMinFps}
+Get the current minimum frames per second.
+
+\paragraph{Returns}
+The current minimum frames per secon setting.
+
+\subsection{double core.getMJDay()}
+\label{sec:ScriptingAPI:core:getMJDay}
+Get the current date as Modified Julian Day.
+
+\paragraph{Returns}
+The Modified Julian Day.
+
+\subsection{QString core.getMountMode()}
+\label{sec:ScriptingAPI:core:getMountMode}
+Get the mount mode as a string.
+
+\paragraph{Returns}
+An ``equatorial'' or ``azimuthal''.
+
+\subsection{bool core.getNightMode()}
+\label{sec:ScriptingAPI:core:getNightMode}
+Get the current status of Night Mode.
+
+\paragraph{Returns}
+A \texttt{true} if night mode is currently set.
+
+\subsection{QVariantMap core.getObjectInfo(QString name)}
+\label{sec:ScriptingAPI:core:getObjectInfo}
+Fetch a map with data about an object's position, magnitude and so on.
+
+\paragraph{Parameters}
+\begin{itemize}
+\item \parameter{name} is the English name of the object for which data will be returned.
+\end{itemize}
+
+\paragraph{Returns}
+A map of object data. Keys:
+\begin{itemize}
+\item \keymap{altitude}: apparent altitude angle in decimal degrees;
+\item \keymap{azimuth}: apparent azimuth angle in decimal degrees;
+\item \keymap{altitude-geometric}: geometric altitude angle in decimal degrees;
+\item \keymap{azimuth-geometric}: geometric azimuth angle in decimal degrees;
+\item \keymap{ra}: right ascension angle (current date frame) in decimal degrees;
+\item \keymap{dec}: declination angle (current date frame) in decimal degrees;
+\item \keymap{raJ2000}: right ascension angle (J2000 frame) in decimal degrees;
+\item \keymap{decJ2000}: declination angle (J2000 frame) in decimal degrees;
+\item \keymap{glong}: galactic longitude in decimal degrees;
+\item \keymap{glat}: galactic latitude in decimal degrees;
+\item \keymap{elong}: ecliptic longitude in decimal degrees\footnote[1]{On Earth only!};
+\item \keymap{elat}: ecliptic latitude in decimal degrees\footnotemark[1];
+\item \keymap{elongJ2000}: ecliptic longitude (J2000 frame) in decimal degrees\footnotemark[1];
+\item \keymap{elatJ2000}: ecliptic latitude (J2000 frame) in decimal degrees\footnotemark[1];
+\item \keymap{vmag}: visual magnitude;
+\item \keymap{vmage}: visual magnitude (extincted);
+\item \keymap{size}: angular size in radians;
+\item \keymap{size-dd}: angular size in decimal degrees;
+\item \keymap{size-deg}: angular size in decimal degrees (formatted string);
+\item \keymap{size-dms}: angular size in DMS format;
+\item \keymap{localized-name}: localized name;
+\item \keymap{distance}: distance to object in AU\footnote[2]{For Solar system objects only!};
+\item \keymap{phase}: phase of object\footnotemark[2];
+\item \keymap{illumination}: phase of object in percentages\footnotemark[2];
+\item \keymap{phase-angle}: phase angle of object in radians\footnotemark[2];
+\item \keymap{phase-angle-dms}: phase angle of object in DMS\footnotemark[2];
+\item \keymap{phase-angle-deg}: phase angle of object in decimal degrees\footnotemark[2];
+\item \keymap{elongation}: elongation of object in radians\footnotemark[2];
+\item \keymap{elongation-dms}: elongation of object in DMS\footnotemark[2];
+\item \keymap{elongation-deg}: elongation of object in decimal degrees\footnotemark[2].
+\end{itemize}
+
+\subsection{QString core.getObserverLocation()}
+\label{sec:ScriptingAPI:core:getObserverLocation}
+Get the ID of the current observer location.
+
+\subsection{QVariantMap core.getObserverLocationInfo()}
+\label{sec:ScriptingAPI:core:getObserverLocationInfo}
+Get the info of the current observer location.
+
+\paragraph{Returns}
+A map of object data. Keys:
+\begin{itemize}
+\item \keymap{altitude}: altitude in meters;
+\item \keymap{longitude}: longitude in decimal degrees;
+\item \keymap{latitude}: latitude in decimal degrees;
+\item \keymap{planet}: name of planet;
+\item \keymap{location}: city and country;
+\item \keymap{sidereal-year}: duration of the sidereal year on the planet in Earth's days;
+\item \keymap{sidereal-day}: duration of the sidereal day on the planet in Earth's hours;
+\item \keymap{solar-day}: duration of the mean solar day on the planet in Earth's hours;
+\item \keymap{local-sidereal-time}: local sidereal time on the planet in hours;
+\item \keymap{local-sidereal-time-hms}: local sidereal time on the planet in hours in HMS format.
+\end{itemize}
+
+\subsection{QString core.getProjectionMode()}
+\label{sec:ScriptingAPI:core:getProjectionMode}
+Get the current projection mode ID string.
+
+\paragraph{Returns}
+The string which identifies the current projection mode. For a list of possibl results, see section \ref{sec:ScriptingAPI:core:setProjectionMode()}.
+
+\subsection{int core.getScreenHeight()}
+\label{sec:ScriptingAPI:core:getScreenHeight}
+Get the screen height (actually, height of Stellarium main view) in pixels.
+
+\paragraph{Returns}
+The screen height in pixels.
+
+\subsection{int core.getScreenWidth()}
+\label{sec:ScriptingAPI:core:getScreenWidth}
+The screen width (actually, width of Stellarium main view) in pixels
+
+\paragraph{Returns}
+Get the screen width in pixels.
+
+\subsection{QVariantMap core.getScreenXYFromAltAzi(QString altitude, QString azimuth)}
+\label{sec:ScriptingAPI:core:getScreenXYFromAltAzi}
+Get screen coordinates from some specified altitude and azimuth angles may be specified in a format recognised by \href{http://www.stellarium.org/doc/head/namespaceStelUtils.html#acd88f8194549c7d46656952428720427}{StelUtils::getDecAngle()}.
+
+\paragraph{Parameters}
+\begin{itemize}
+\item \parameter{altitude} the altitude angle;
+\item \parameter{azimuth} the azimuth angle;
+\end{itemize}
+
+\paragraph{Returns}
+A map of object data. Keys:
+\begin{itemize}
+\item \keymap{x} x coordinate on the screen;
+\item \keymap{y} y coordinate on the screen;
+\end{itemize}
+
+\subsection{double core.getScriptRate()}
+\label{sec:ScriptingAPI:core:getScriptRate}
+Get the script execution rate as a multiple of normal execution speed.
+
+\paragraph{Returns}
+The current script execution rate.
+
+\subsection{QVariantMap core.getSelectedObjectInfo()}
+\label{sec:ScriptingAPI:core:getSelectedObjectInfo}
+Fetch a map with data about an latest selected object's position, magnitude and so on.
+\paragraph{Returns}
+A map of object data. Keys:
+\begin{itemize}
+\item \keymap{altitude}: apparent altitude angle in decimal degrees;
+\item \keymap{azimuth}: apparent azimuth angle in decimal degrees;
+\item \keymap{altitude-geometric}: geometric altitude angle in decimal degrees;
+\item \keymap{azimuth-geometric}: geometric azimuth angle in decimal degrees;
+\item \keymap{ra}: right ascension angle (current date frame) in decimal degrees;
+\item \keymap{dec}: declination angle (current date frame) in decimal degrees;
+\item \keymap{raJ2000}: right ascension angle (J2000 frame) in decimal degrees;
+\item \keymap{decJ2000}: declination angle (J2000 frame) in decimal degrees;
+\item \keymap{glong}: galactic longitude in decimal degrees;
+\item \keymap{glat}: galactic latitude in decimal degrees;
+\item \keymap{elong}: ecliptic longitude in decimal degrees\footnote[1]{On Earth only!};
+\item \keymap{elat}: ecliptic latitude in decimal degrees\footnotemark[1];
+\item \keymap{elongJ2000}: ecliptic longitude (J2000 frame) in decimal degrees\footnotemark[1];
+\item \keymap{elatJ2000}: ecliptic latitude (J2000 frame) in decimal degrees\footnotemark[1];
+\item \keymap{vmag}: visual magnitude;
+\item \keymap{vmage}: visual magnitude (extincted);
+\item \keymap{size}: angular size in radians;
+\item \keymap{size-dd}: angular size in decimal degrees;
+\item \keymap{size-deg}: angular size in decimal degrees (formatted string);
+\item \keymap{size-dms}: angular size in DMS format;
+\item \keymap{localized-name}: localized name;
+\item \keymap{distance}: distance to object in AU\footnote[2]{For Solar system objects only!};
+\item \keymap{phase}: phase of object\footnotemark[2];
+\item \keymap{illumination}: phase of object in percentages\footnotemark[2];
+\item \keymap{phase-angle}: phase angle of object in radians\footnotemark[2];
+\item \keymap{phase-angle-dms}: phase angle of object in DMS\footnotemark[2];
+\item \keymap{phase-angle-deg}: phase angle of object in decimal degrees\footnotemark[2];
+\item \keymap{elongation}: elongation of object in radians\footnotemark[2];
+\item \texttt{elongation-dms}: elongation of object in DMS\footnotemark[2];
+\item \keymap{elongation-deg}: elongation of object in decimal degrees\footnotemark[2].
+\end{itemize}
+
+\subsection{QString core.getSkyCulture()}
+\label{sec:ScriptingAPI:core:getSkyCulture}
+Find out the current sky culture.
+
+\paragraph{Returns}
+The ID of the current sky culture (i.e. the name of the directory in which the curret sky cultures files are found, e.g. ``western'').
+
+\subsection{QString core.getSkyCultureName()}
+\label{sec:ScriptingAPI:core:getSkyCultureName}
+Find out the current sky culture and get it English name.
+
+\paragraph{Returns}
+The English name of the current sky culture.
+
+\subsection{QString core.getSkyCultureNameI18n()}
+\label{sec:ScriptingAPI:core:getSkyCultureNameI18n}
+Find out the current sky culture and get it localized name.
+
+\paragraph{Returns}
+The translated name of the current sky culture.
+
+\subsection{QString core.getSkyLanguage()}
+\label{sec:ScriptingAPI:core:getSkyLanguage}
+Get the current sky language.
+
+\paragraph{Returns}
+Two letter language code, e.g. ``en'', or ``de'' and so on.
