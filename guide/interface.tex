@@ -99,7 +99,7 @@ where you are. You only need to do this once -- Stellarium can save your
 location so you won't need to set it again until you move.
 
 \newFeature{0.13.1}
-After installation, Stellarium uses a lookup service which tries to
+After installation, Stellarium uses an online service which tries to
 find your approximate location based on the IP address you are
 using. This seems very practical, but if you feel this causes privacy
 issues, you may want to switch this feature off. You should consider
@@ -131,22 +131,32 @@ as default'' checkbox, and close the location window.
 
 The configuration window contains general program settings, and many
 other settings which do not concern specific display options. Press
-the tool button or \key{F2} to open.
+the tool button \guibutton[0.35]{btd_config} or \key{F2} to open.
 
-\begin{figure}[h]
-\centering\includegraphics[scale=0.68]{config_dialog_main_tab}
+
+\subsection{The Main Tab}
+\label{sec:gui:configuration:main}
+
+
+\begin{figure}[p]
+\centering\includegraphics[scale=0.55]{config_dialog_main_tab}
 \caption{Configuration Window: Main Tab}
 \label{fig:gui:configuration:main}
 \end{figure}
+
+
 
 The Main tab in the configuration window provides controls for changing
 the program language, how much information is shown about selected sky
 objects, and provides a button for saving the current program
 configuration.
 
-\begin{figure}[h]
-\centering\includegraphics[scale=0.68]{config_dialog_info_tab}
-%\caption{Figure caption}
+\subsection{The Information Tab}
+\label{sec:gui:configuration:info}
+
+
+\begin{figure}[p]
+\centering\includegraphics[scale=0.55]{config_dialog_info_tab}
 \caption{Configuration Window: Information Tab}
 \label{fig:gui:configuration:info}
 \end{figure}
@@ -159,32 +169,43 @@ displayed on a selected object.
 level of the stored data
 \end{itemize}
 
-\begin{figure}[h]
-\centering\includegraphics[scale=0.68]{config_dialog_navigation_tab}
-%\caption{Figure caption}
+\subsection{The Navigation Tab}
+\label{sec:gui:configuration:nav}
+
+
+\begin{figure}[p]
+\centering\includegraphics[scale=0.55]{config_dialog_navigation_tab}
+\caption{Configuration Window: Navigation Tab}
 \label{fig:gui:configuration:nav}
 \end{figure}
 
-The Navigation tab allows for enabling/disabling of keyboard shortcuts
-for panning and zooming the main view, and also how to specify what
-simulation time should be used when the program starts:
+The Navigation tab (Fig.~\ref{fig:gui:configuration:nav}) allows for
+enabling/disabling of keyboard shortcuts for panning and zooming the
+main view, and also how to specify what simulation time should be used
+when the program starts:
 
 \begin{description}
-\item[System date and time]: Stellarium will start with
+\item[System date and time] Stellarium will start with
   the simulation time equal to the operating system clock.
-\item[System date at]: Stellarium will start with the
+\item[System date at] Stellarium will start with the
   same date as the operating system clock, but the time will be fixed at
   the specified value. This is a useful setting for those people who use
   Stellarium during the day to plan observing sessions for the upcoming
   evening.
-\item[Other]: some fixed time can be chosen which will
+\item[Other] some fixed time can be chosen which will
   be used every time Stellarium starts.
 \end{description}
 
-\begin{figure}[h]
-\centering\includegraphics[scale=0.68]{config_dialog_tools_tab}
-%\caption{Figure caption}
+\subsection{The Tools Tab}
+\label{sec:gui:configuration:tools}
+
+
+\begin{figure}[p]
+\centering\includegraphics[scale=0.55]{config_dialog_tools_tab}
+\caption{Configuration Window: Tools Tab}
+\label{fig:gui:configuration:tools}
 \end{figure}
+
 
 The Tools tab of the configuration window contains miscellaneous utility
 features:
@@ -216,17 +237,18 @@ features:
 \label{sec:gui:scripts}
 
 
-\begin{figure}[h]
-\centering\includegraphics[scale=0.68]{config_dialog_scripts_tab}
-%\caption{Figure caption}
-\label{fig:gui:scripts}
+\begin{figure}[p]
+\centering\includegraphics[scale=0.55]{config_dialog_scripts_tab}
+\caption{Configuration Window: Scripts Tab}
+\label{fig:gui:configuration:scripts}
 \end{figure}
 
-The Scripts tab allows the selection of pre-assembled scripts bundled
-with Stellarium that can be run. This list can be expanded by your own
-scripts as required. See
-\ref{sec:FilesAndDirectories:DirectoryStructure} where to store your
-own scripts.
+The Scripts tab (Fig.~\ref{fig:gui:scripts}) allows the selection of
+pre-assembled scripts bundled with Stellarium that can be run. This
+list can be expanded by your own scripts as required. See
+section~\ref{sec:FilesAndDirectories:DirectoryStructure} where to
+store your own scripts, and chapter~\ref{ch:scripting} for an
+introduction to the scripting capabilities and language.
 
 When a script is selected it can be run by pressing the arrow button
 and stopped with the stop button. With some scripts the stop button is
@@ -240,18 +262,22 @@ platform and may not work.
 
 
 \subsection{The Plugins Tab }
-\label{sec:gui:plugins}
+\label{sec:gui:configuration:plugins}
 
 
-\begin{figure}[h]
-\centering\includegraphics[scale=0.68]{config_dialog_plugins_tab}
+\begin{figure}[p]
+\centering\includegraphics[scale=0.55]{config_dialog_plugins_tab}
 \caption{Configuration Window: Plugins}
 \label{fig:gui:plugins}
 \end{figure}
 
-Plug ins need to be enabled at start up to be available
-as shown on the bar. This allows for the selection of the plugins that
-you wish to be enabled at this time:
+Plugins (see chapter~\ref{ch:plugins} for an introduction) can be
+enabled here (Fig.~\ref{fig:gui:plugins}) to be loaded the next time
+you start Stellarium.  Many plugins allow additional configuration
+which will be available again on this tab.
+
+
+
 
 \section{The View Settings Window}\label{the-view-settings-window}
 
