@@ -337,6 +337,26 @@ QString StelLocaleMgr::sDateFormatToString(SDateFormat df) const
 	return "system_default";
 }
 
+QString StelLocaleMgr::getQtDateFormatStr() const
+{
+	QString dfmt;
+	switch (dateFormat) {
+		case SDateDDMMYYYY:
+			dfmt = "dd.MM.yyyy";
+			break;
+		case SDateMMDDYYYY:
+			dfmt = "MM.dd.yyyy";
+			break;
+		case SDateYYYYMMDD:
+			dfmt = "yyyy.MM.dd";
+			break;
+		default:
+			dfmt = "yyyy.MM.dd";
+			break;
+	}
+	return dfmt;
+}
+
 void StelLocaleMgr::setCustomTzName(const QString& tzname)
 {
 	customTzName = tzname;
