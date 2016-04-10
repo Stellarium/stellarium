@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-07 01:01+0700\n"
-"PO-Revision-Date: 2016-03-28 09:03+0000\n"
+"PO-Revision-Date: 2016-04-09 09:06+0000\n"
 "Last-Translator: Tiago S. <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-04-07 05:28+0000\n"
-"X-Generator: Launchpad (build 17972)\n"
+"X-Launchpad-Export-Date: 2016-04-10 05:15+0000\n"
+"X-Generator: Launchpad (build 17990)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:904 src/core/modules/LandscapeMgr.cpp:414
@@ -319,7 +319,7 @@ msgstr "kpc"
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:298
 msgid "ly"
-msgstr ""
+msgstr "al"
 
 #: src/core/modules/Nebula.cpp:300
 #, qt-format
@@ -2274,7 +2274,7 @@ msgstr "Janela da calculadora astronómica"
 
 #: src/gui/StelGui.cpp:220
 msgid "Bookmarks window"
-msgstr ""
+msgstr "Janela dos favoritos"
 
 #: src/gui/StelGui.cpp:221
 msgid "Copy selected object information to clipboard"
@@ -2777,11 +2777,11 @@ msgstr "Objeto"
 
 #: src/gui/BookmarksDialog.cpp:96
 msgid "Localized name"
-msgstr ""
+msgstr "Nome localizado"
 
 #: src/gui/BookmarksDialog.cpp:98
 msgid "Location of observer"
-msgstr ""
+msgstr "Localização do observador"
 
 #: src/StelMainView.cpp:462 src/StelMainView.cpp:477
 msgid ""
@@ -3452,7 +3452,7 @@ msgstr "Terra e outros planetas a partir de Ceres"
 #. TRANSLATORS: Name of script
 #: src/translations.h:290
 msgid "Messier Objects Tour"
-msgstr ""
+msgstr "Visita aos Objetos de Messier"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:296
@@ -3631,7 +3631,7 @@ msgstr ""
 
 #: src/translations.h:321
 msgid "A tour of Messier Objects"
-msgstr ""
+msgstr "Uma visita guiada aos Objetos de Messier"
 
 #: src/translations.h:325
 msgid "Andorra"
@@ -5112,11 +5112,11 @@ msgstr "Simular velocidade luz"
 
 #: src/ui_viewDialog.h:1632
 msgid "Use custom settings of GRS:"
-msgstr ""
+msgstr "Utilizar definições personalizadas do GPV:"
 
 #: src/ui_viewDialog.h:1633
 msgid "GRS details..."
-msgstr ""
+msgstr "Detalhes do GPV..."
 
 #: src/ui_viewDialog.h:1635
 msgid "Limit the magnitude of solar system objects"
@@ -6136,15 +6136,15 @@ msgstr ""
 
 #: src/ui_greatRedSpotDialog.h:162
 msgid "Great Red Spot Details"
-msgstr ""
+msgstr "Detalhes do Grande Ponto Vermelho"
 
 #: src/ui_greatRedSpotDialog.h:164
 msgid "Custom settings for position of GRS on Jupiter"
-msgstr ""
+msgstr "Definições personalizadas da posição do GPV em Júpiter"
 
 #: src/ui_greatRedSpotDialog.h:171
 msgid "Date and Time (UTC):"
-msgstr ""
+msgstr "Data e Tempo (UTC):"
 
 #: src/ui_greatRedSpotDialog.h:172 src/ui_astroCalcDialog.h:384
 #: src/ui_astroCalcDialog.h:386
@@ -6153,11 +6153,11 @@ msgstr "aaaa.mm.dd hh:mm"
 
 #: src/ui_greatRedSpotDialog.h:173
 msgid "Annual drift (degrees):"
-msgstr ""
+msgstr "Annual drift (graus):"
 
 #: src/ui_greatRedSpotDialog.h:174
 msgid "Longitude of GRS (degrees):"
-msgstr ""
+msgstr "Longitude do GPV (graus):"
 
 #: src/ui_scriptConsole.h:346
 msgid "Script console"
@@ -6279,35 +6279,35 @@ msgstr "Calculadora Astronómica"
 
 #: src/ui_bookmarksDialog.h:174
 msgid "Bookmarks"
-msgstr ""
+msgstr "Favoritos"
 
 #: src/ui_bookmarksDialog.h:176
 msgid "Add date and time"
-msgstr ""
+msgstr "Adicionar a data e hora"
 
 #: src/ui_bookmarksDialog.h:177
 msgid "Add location"
-msgstr ""
+msgstr "Adicionar localização"
 
 #: src/ui_bookmarksDialog.h:179
 msgid "Add selected object to bookmarks"
-msgstr ""
+msgstr "Adicionar o objecto seleccionado aos favoritos"
 
 #: src/ui_bookmarksDialog.h:181
 msgid "&Add bookmark"
-msgstr ""
+msgstr "&Adicionar marcador"
 
 #: src/ui_bookmarksDialog.h:182
 msgid "&Remove bookmark"
-msgstr ""
+msgstr "&Remover marcador"
 
 #: src/ui_bookmarksDialog.h:183
 msgid "Clear bookmarks"
-msgstr ""
+msgstr "Limpar os marcadores"
 
 #: src/ui_bookmarksDialog.h:184
 msgid "&Go to..."
-msgstr ""
+msgstr "&Ir Para..."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:138

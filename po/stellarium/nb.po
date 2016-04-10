@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-07 01:01+0700\n"
-"PO-Revision-Date: 2016-04-08 17:48+0000\n"
+"PO-Revision-Date: 2016-04-09 16:04+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-04-09 05:16+0000\n"
+"X-Launchpad-Export-Date: 2016-04-10 05:15+0000\n"
 "X-Generator: Launchpad (build 17990)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
@@ -2150,7 +2150,7 @@ msgstr "Gjenoppta skriptkjøring"
 
 #: src/gui/StelGui.cpp:209
 msgid "Script console window"
-msgstr "Skript-konsollvindu"
+msgstr "Skriptkonsoll"
 
 #: src/gui/StelGui.cpp:212
 msgid "Help window"
@@ -2178,7 +2178,7 @@ msgstr "Stedsvalg"
 
 #: src/gui/StelGui.cpp:218
 msgid "Shortcuts window"
-msgstr "Snarveivindu"
+msgstr "Tastesnarveier"
 
 #: src/gui/StelGui.cpp:219
 msgid "AstroCalc window"
@@ -3448,6 +3448,7 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 261 events in all!"
 msgstr ""
+"Skjermbeskytter med diverse hendelser i solsystemet. 261 begivenheter i alt!"
 
 #: src/translations.h:312
 msgid "A tour of the western constellations."
@@ -4572,7 +4573,7 @@ msgstr "Ignorer"
 
 #: src/ui_dateTimeDialogGui.h:380
 msgid "Date and Time in Gregorian calendar"
-msgstr "Dato og tid i gregoriansk kalender"
+msgstr "Dato og klokkeslett i gregoriansk kalender"
 
 #: src/ui_dateTimeDialogGui.h:382 src/ui_dateTimeDialogGui.h:387
 msgid "Julian Day"
@@ -4986,11 +4987,11 @@ msgstr "Simuler lyshastighet"
 
 #: src/ui_viewDialog.h:1632
 msgid "Use custom settings of GRS:"
-msgstr "Bruk tilpassede innstillinger for den røde flekk:"
+msgstr "Tilpass innstillinger for Jupiters røde flekk:"
 
 #: src/ui_viewDialog.h:1633
 msgid "GRS details..."
-msgstr "Detaljer for Jupiters røde flekk..."
+msgstr "Detaljer..."
 
 #: src/ui_viewDialog.h:1635
 msgid "Limit the magnitude of solar system objects"
@@ -5656,7 +5657,7 @@ msgstr "Dato og klokkeslett ved oppstart"
 
 #: src/ui_configurationDialog.h:1198
 msgid "Use a specific date and time when Stellarium starts up"
-msgstr "Bruk en spesifikk dato og tid når Stellarium starter opp"
+msgstr "Bruk spesifikk dato og klokkeslett når Stellarium starter opp"
 
 #: src/ui_configurationDialog.h:1200
 msgid "Other:"
@@ -5672,11 +5673,11 @@ msgstr "Bruk gjeldende"
 
 #: src/ui_configurationDialog.h:1206
 msgid "Starts Stellarium at system clock date and time"
-msgstr "Start Stellarium med systemets dato og klokkeslett"
+msgstr "Starter Stellarium med systemets dato og klokkeslett"
 
 #: src/ui_configurationDialog.h:1208
 msgid "System date and time"
-msgstr "Systemets tid og dato"
+msgstr "Systemets dato og klokkeslett"
 
 #: src/ui_configurationDialog.h:1210
 msgid ""
