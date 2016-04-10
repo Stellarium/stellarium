@@ -1238,7 +1238,11 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 
 		num = 0;
 		istr >> num;
-		if(num == 0) continue;  // empty line
+		if(num == 0) // empty line
+		{
+			points->clear();
+			continue;
+		}
 
 		for (j=0;j<num;j++)
 		{

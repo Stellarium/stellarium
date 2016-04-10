@@ -305,6 +305,10 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 			{
 				m_activeMeteors.append(m);
 			}
+			else
+			{
+				delete m;
+			}
 		}
 	}
 }
