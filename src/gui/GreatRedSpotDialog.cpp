@@ -16,10 +16,16 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
+#include <QDesktopServices>
+#include <QUrl>
+#include <QSettings>
+
 #include "StelApp.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelUtils.hpp"
+#include "StelLocaleMgr.hpp"
 #include "GreatRedSpotDialog.hpp"
+
 #include "ui_greatRedSpotDialog.h"
 
 GreatRedSpotDialog::GreatRedSpotDialog()
@@ -56,13 +62,22 @@ void GreatRedSpotDialog::createDialogContent()
 	ui->driftDoubleSpinBox->setValue(ss->getCustomGrsDrift());
 	connect(ui->driftDoubleSpinBox, SIGNAL(valueChanged(double)), ss, SLOT(setCustomGrsDrift(double)));
 
-	//TODO: sync format with the main date and time format
-	ui->jdDateTimeEdit->setDisplayFormat("yyyy.MM.dd hh:mm");
+	const StelLocaleMgr& locmgr = StelApp::getInstance().getLocaleMgr();
+	QString fmt = QString("%1 hh:mm").arg(locmgr.getQtDateFormatStr());
+	ui->jdDateTimeEdit->setDisplayFormat(fmt);
 	ui->jdDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(ss->getCustomGrsJD()));
 	connect(ui->jdDateTimeEdit, SIGNAL(dateTimeChanged(QDateTime)), this, SLOT(setGrsJD(QDateTime)));
+
+	connect(ui->recentGrsMeasurementPushButton, SIGNAL(clicked(bool)), this, SLOT(openRecentGrsMeasurement()));
 }
 
 void GreatRedSpotDialog::setGrsJD(QDateTime dt)
 {
 	GETSTELMODULE(SolarSystem)->setCustomGrsJD(StelUtils::qDateTimeToJd(dt));
+}
+
+void GreatRedSpotDialog::openRecentGrsMeasurement()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	QDesktopServices::openUrl(QUrl(conf->value("astro/grs_measurements_url", "http://jupos.privat.t-online.de/rGrs.htm").toString()));
 }

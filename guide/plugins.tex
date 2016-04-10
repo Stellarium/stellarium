@@ -21,24 +21,19 @@ and DON'T need to be downloaded separately.
 To enable a plugin:
 
 \begin{enumerate}
-\item
-  Open the \textbf{Configuration dialog} (press \key{F2} or use the left tool
-  bar button)
-\item
-  Select the \textbf{Plugins} tab
-\item
-  Select the plugin you want to enable from the list
-\item
-  Check the \textbf{Load at startup} option
-\item
-  Restart Stellarium
+\item Open the \textbf{Configuration dialog} (press \key{F2} or use
+  the left tool bar button \guibutton[0.35]{btd_config})
+\item Select the \textbf{Plugins} tab
+\item Select the plugin you want to enable from the list
+\item Check the \textbf{Load at startup} option
+\item Restart Stellarium
 \end{enumerate}
 
-If the plugin has configuration options, the \textbf{configuration}
-button will be enabled when the plugin has been loaded and clicking it
-will open the plugin's configuration dialog. When you only just
-activated loading of a plugin, you must restart Stellarium to access
-the plugin's configuration dialog.
+\noindent If the plugin has configuration options, the
+\textbf{configuration} button will be enabled when the plugin has been
+loaded and clicking it will open the plugin's configuration
+dialog. When you only just activated loading of a plugin, you must
+restart Stellarium to access the plugin's configuration dialog.
 
 \section{Data for plugins}
 \label{sec:Plugins:DataForPlugins}
@@ -49,7 +44,7 @@ course, each plugin has a specific format of data for the own catalogs, and
 you should read documentation for the plugin before editing of its catalog.
 
 You can read some common instructions for editing catalogs of plugins
-below. In this example we use file \file{catalog.json} for
+below. In this example we use file name \file{catalog.json} for
 identification of catalog for a typical plugin.
 
 You can modify the \file{catalog.json} files manually using a text
@@ -70,26 +65,15 @@ directory\footnote{This is a hidden folder, so in order to find it you
   and folders.} which contains \file{catalog.json} file is something
 like:
 
-\begin{itemize}
-\item
-  C:\textbackslash Users\textbackslash\textbf{UserName}\textbackslash AppData\textbackslash Roaming\textbackslash Stellarium\textbackslash modules\textbackslash \textit{PluginName}\\ (Windows)
-\item
-  \textbf{HomeDirectory}/Library/Preferences/Stellarium/modules/\textit{PluginName}\\ (Mac OS X)
-\item
-  \textasciitilde{}/.stellarium/modules/\textit{PluginName}\\ (Linux and UNIX-like OS)
-\end{itemize}
+\begin{description}
+\item[Windows]
+  C:\textbackslash Users\textbackslash\textbf{UserName}\textbackslash AppData\textbackslash Roaming\textbackslash Stellarium\textbackslash modules\textbackslash \textit{PluginName}
+\item[Mac OS X]
+  \textbf{HomeDirectory}/Library/Preferences/Stellarium/modules/\textit{PluginName}
+\item[Linux and UNIX-like OS]
+  \textasciitilde{}/.stellarium/modules/\textit{PluginName}
+\end{description}
 
-\section{How you can help}
-\label{sec:Plugins:HowYouCanHelp}
-
-We welcome bug reports, feature requests and feedback through the
-usual channels (trackers, forums and so on):
-\begin{itemize}
-\item Bug tracker --- \url{https://bugs.launchpad.net/stellarium}
-\item Questions for Stellarium --- \url{https://answers.launchpad.net/stellarium}
-\item Feedback forum --- \url{https://sourceforge.net/p/stellarium/discussion/278769/}
-\item Blueprints for Stellarium --- \url{https://blueprints.launchpad.net/stellarium}
-\end{itemize}
 
 
 %%% Local Variables: 

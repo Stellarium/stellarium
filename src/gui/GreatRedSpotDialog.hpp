@@ -40,6 +40,7 @@ public slots:
 
 private slots:
 	void setGrsJD(QDateTime dt);
+	void openRecentGrsMeasurement();
 
 protected:
         //! Initialize the dialog widgets and connect the signals/slots.

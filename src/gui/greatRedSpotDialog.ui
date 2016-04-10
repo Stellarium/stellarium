@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>378</width>
-    <height>190</height>
+    <width>327</width>
+    <height>201</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -130,21 +130,22 @@
       <bool>true</bool>
      </property>
      <property name="title">
-      <string>Custom settings for position of GRS on Jupiter</string>
+      <string>Custom settings for position of GRS</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
+      <item row="4" column="0">
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
       <item row="1" column="1">
        <widget class="QDoubleSpinBox" name="driftDoubleSpinBox">
         <property name="alignment">
@@ -164,19 +165,6 @@
         </property>
         <property name="value">
          <double>15.218750000000000</double>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="jdLabel">
-        <property name="toolTip">
-         <string/>
-        </property>
-        <property name="whatsThis">
-         <string>Extinction is the loss of star brightness due to Earth's atmosphere. It is given in mag/airmass, where airmass is number of atmospheres light has to pass. (zenith: 1; horizon: about 40)</string>
-        </property>
-        <property name="text">
-         <string>Date and Time (UTC):</string>
         </property>
        </widget>
       </item>
@@ -209,22 +197,6 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
-       <spacer name="verticalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Expanding</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
       <item row="0" column="0">
        <widget class="QLabel" name="longitudeLabel">
         <property name="text">
@@ -242,6 +214,32 @@
         </property>
         <property name="value">
          <number>216</number>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="jdLabel">
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="whatsThis">
+         <string>Extinction is the loss of star brightness due to Earth's atmosphere. It is given in mag/airmass, where airmass is number of atmospheres light has to pass. (zenith: 1; horizon: about 40)</string>
+        </property>
+        <property name="text">
+         <string>Date and Time (UTC):</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0" colspan="2">
+       <widget class="QPushButton" name="recentGrsMeasurementPushButton">
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="text">
+         <string>Get the recent GRS measurement</string>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
         </property>
        </widget>
       </item>
