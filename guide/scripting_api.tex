@@ -38,9 +38,8 @@ Print a debugging message to the console.
 
 \subsection{void core.dropSound(QString id)}
 \label{sec:ScriptingAPI:core:dropSound}
-Drop a sound from memory.
+Drop a sound from memory. You should do this before the end of your script.
 
-You should do this before the end of your script.
 \paragraph{Parameters}
 \begin{itemize}
 \item \parameter{id} the message to be displayed on the consolethe identifier used when loadSound was called.
@@ -48,9 +47,7 @@ You should do this before the end of your script.
 
 \subsection{void core.dropVideo(QString id)}
 \label{sec:ScriptingAPI:core:dropVideo}
-Drop a video from memory.
-
-You should do this before the end of your script.
+Drop a video from memory. You should do this before the end of your script.
 
 \paragraph{Parameters}
 \begin{itemize}
@@ -341,6 +338,272 @@ Get the current sky language.
 
 \paragraph{Returns}
 Two letter language code, e.g. ``en'', or ``de'' and so on.
+
+\subsection{double core.getTimeRate()}
+\label{sec:ScriptingAPI:core:getTimeRate}
+Get simulation time rate.
+
+\paragraph{Returns}
+time speed as a multiple of real time.
+
+\subsection{qint64 core.getVideoDuration(QString id)}
+\label{sec:ScriptingAPI:core:getVideoDuration}
+Get the duration of a loaded video, or -1.
+
+\paragraph{Parameters}
+\begin{itemize}
+\item \parameter{id} the identifier used when loadVideo() was called.
+\end{itemize}
+
+\subsection{qint64 core.getVideoPosition(QString id)}
+\label{sec:ScriptingAPI:core:getVideoPosition}
+Get the current position of a loaded video, or -1.
+
+\paragraph{Parameters}
+\begin{itemize}
+\item \parameter{id} the identifier used when loadVideo() was called.
+\end{itemize}
+
+\subsection{double core.getViewAltitudeAngle()}
+\label{sec:ScriptingAPI:core:getViewAltitudeAngle}
+Get the current viewing direction altitude angle at center of view.
+
+\paragraph{Returns}
+The altitude angle in decimal degrees. 0 is horizon, zenith is 180, nadir = -180.
+
+\subsection{double core.getViewAzimuthAngle()}
+\label{sec:ScriptingAPI:core:getViewAzimuthAngle}
+Get the current viewing direction azimuth angle at center of view.
+
+\paragraph{Returns}
+The azimuth angle in decimal degrees as a compass bearing i.e. 0 is North, 90 is East, 180 is South, 270 is West.
+
+\subsection{double core.getViewDecAngle()}
+\label{sec:ScriptingAPI:core:getViewDecAngle}
+Get the current viewing direction Declination angle at center of view.
+
+\paragraph{Returns}
+The Declination angle in decimal degrees. The value returned falls in the range -180..180.
+
+\subsection{double core.getViewDecJ2000Angle()}
+\label{sec:ScriptingAPI:core:getViewDecJ2000Angle}
+Get the current viewing direction Declination angle in J2000 frame at center of view.
+
+\paragraph{Returns}
+The Declination angle in J2000 frame in decimal degrees.
+
+\subsection{double core.getViewRaAngle()}
+\label{sec:ScriptingAPI:core:getViewRaAngle}
+Get the current viewing direction Right Ascension at center of view.
+
+\paragraph{Returns}
+The Right Ascension angle in decimal degrees. The value returned falls in the range 0..360.
+
+\subsection{double core.getViewRaJ2000Angle()}
+\label{sec:ScriptingAPI:core:getViewRaJ2000Angle}
+Get the current viewing direction Right Ascension in J2000 frame at center of view.
+
+\paragraph{Returns}
+The Right Ascension angle in J2000 frame in decimal degrees.
+
+\subsection{double core.getZodiacalLightIntensity()}
+\label{sec:ScriptingAPI:core:getZodiacalLightIntensity}
+Get Zodiacal Light intensity.
+
+\paragraph{Returns}
+Value of Zodiacal Light intensity, e.g. ``1.2''.
+
+\subsection{void core.goHome()}
+\label{sec:ScriptingAPI:core:goHome}
+Go to defaults position and direction of view.
+
+\subsection{bool core.isRealTime()}
+\label{sec:ScriptingAPI:core:isRealTime}
+Get the simulation time and rate state -- is it ``real time''.
+
+\paragraph{Returns}
+A \keymap{true} if the time rate is normal, and the simulation time is real time, else return \keymap{false}.
+
+\subsection{double core.jdFromDateString(QString dt, QString spec)}
+\label{sec:ScriptingAPI:core:jdFromDateString}
+For use in setDate and waitFor. For parameter descriptions see section~\ref{sec:ScriptingAPI:core:setDate}.
+
+\paragraph{Returns}
+Julian day.
+
+\subsection{void core.loadSkyImage(QString id, QString filename, double ra0, double dec0, double ra1, double dec1, double ra2, double dec2, double ra3, double dec3, double minRes, double maxBright, bool visible)}
+\label{sec:ScriptingAPI:core:loadSkyImage}
+Load an image which will have sky coordinates.
+
+\paragraph{Parameters}
+\begin{itemize}
+\item \parameter{id} a string ID to be used when referring to this image (e.g. when changing the displayed status or deleting it.
+\item \parameter{filename} the file name of the image. If a relative path is specified, ``scripts/'' will be prefixed before the image is searched for using StelFileMgr.
+\item \parameter{ra0} The right ascension of the first corner of the image in degrees (J2000.0).
+\item \parameter{dec0} The declination of the first corner of the image in degrees (J2000.0).
+\item \parameter{ra1} The right ascension of the second corner of the image in degrees (J2000.0).
+\item \parameter{dec1} 	The declination of the second corner of the image in degrees (J2000.0).
+\item \parameter{ra2} The right ascension of the third corner of the image in degrees (J2000.0).
+\item \parameter{dec2} The declination of the third corner of the image in degrees (J2000.0).
+\item \parameter{ra3} The right ascension of the fourth corner of the image in degrees (J2000.0).
+\item \parameter{dec3} The declination of the fourth corner of the image in degrees (J2000.0)
+\item \parameter{minRes} The minimum resolution setting for the image.
+\item \parameter{maxBright} The maximum brightness setting for the image.
+\item \parameter{visible} The initial visibility of the image.
+\end{itemize}
+
+\paragraph{Default values}
+\begin{itemize}
+\item \parameter{minRes}: 2.5
+\item \parameter{maxBright}: 14
+\item \parameter{visible}: true
+\end{itemize}
+
+\subsection{void core.loadSkyImage(QString id, QString filename, QString ra0, QString dec0, QString ra1, QString dec1, QString ra2, QString dec2, QString ra3, QString dec3, double minRes, double maxBright, bool visible)}
+\label{sec:ScriptingAPI:core:loadSkyImageStr}
+Convenience function which allows the user to provide RA and DEC angles as strings (e.g. ``12d 14m 8s'' or ``5h 26m 8s'' -- formats accepted by StelUtils::getDecAngle()).
+
+\paragraph{Parameters}
+\begin{itemize}
+\item \parameter{id} a string ID to be used when referring to this image (e.g. when changing the displayed status or deleting it.
+\item \parameter{filename} the file name of the image. If a relative path is specified, ``scripts/'' will be prefixed before the image is searched for using StelFileMgr.
+\item \parameter{ra0} The right ascension of the first corner of the image in degrees (J2000.0).
+\item \parameter{dec0} The declination of the first corner of the image in degrees (J2000.0).
+\item \parameter{ra1} The right ascension of the second corner of the image in degrees (J2000.0).
+\item \parameter{dec1} 	The declination of the second corner of the image in degrees (J2000.0).
+\item \parameter{ra2} The right ascension of the third corner of the image in degrees (J2000.0).
+\item \parameter{dec2} The declination of the third corner of the image in degrees (J2000.0).
+\item \parameter{ra3} The right ascension of the fourth corner of the image in degrees (J2000.0).
+\item \parameter{dec3} The declination of the fourth corner of the image in degrees (J2000.0)
+\item \parameter{minRes} The minimum resolution setting for the image.
+\item \parameter{maxBright} The maximum brightness setting for the image.
+\item \parameter{visible} The initial visibility of the image.
+\end{itemize}
+
+\paragraph{Default values}
+\begin{itemize}
+\item \parameter{minRes}: 2.5
+\item \parameter{maxBright}: 14
+\item \parameter{visible}: true
+\end{itemize}
+
+\subsection{void core.loadSkyImage(QString id, QString filename, double ra, double dec, double angSize, double rotation, double minRes, double maxBright, bool visible)}
+\label{sec:ScriptingAPI:core:loadSkyImage1}
+Convenience function which allows loading of a sky image based on a central coordinate, angular size and rotation.
+
+\paragraph{Parameters}
+\begin{itemize}
+\item \parameter{id} a string ID to be used when referring to this image (e.g. when changing the displayed status or deleting it.
+\item \parameter{filename} the file name of the image. If a relative path is specified, ``scripts/'' will be prefixed before the image is searched for using StelFileMgr.
+\item \parameter{ra} The right ascension of the center of the image in J2000 frame degrees.
+\item \parameter{dec} The declination of the center of the image in J2000 frame degrees.
+\item \parameter{angSize} The angular size of the image in arc minutes.
+\item \parameter{rotation} 	The clockwise rotation angle of the image in degrees.
+\item \parameter{minRes} The minimum resolution setting for the image.
+\item \parameter{maxBright} The maximum brightness setting for the image.
+\item \parameter{visible} The initial visibility of the image.
+\end{itemize}
+
+\paragraph{Default values}
+\begin{itemize}
+\item \parameter{minRes}: 2.5
+\item \parameter{maxBright}: 14
+\item \parameter{visible}: true
+\end{itemize}
+
+\subsection{void core.loadSkyImage(QString id, QString filename, QString ra, QString dec, double angSize, double rotation, double minRes, double maxBright, bool visible)}
+\label{sec:ScriptingAPI:core:loadSkyImageStr1}
+Convenience function which allows loading of a sky image based on a central coordinate, angular size and rotation. Parameters are the same as the version of this function which takes double values for the ra and dec, except here text expressions of angles may be used.
+
+\paragraph{Parameters}
+\begin{itemize}
+\item \parameter{id} a string ID to be used when referring to this image (e.g. when changing the displayed status or deleting it.
+\item \parameter{filename} the file name of the image. If a relative path is specified, ``scripts/'' will be prefixed before the image is searched for using StelFileMgr.
+\item \parameter{ra} The right ascension of the center of the image in J2000 frame degrees.
+\item \parameter{dec} The declination of the center of the image in J2000 frame degrees.
+\item \parameter{angSize} The angular size of the image in arc minutes.
+\item \parameter{rotation} 	The clockwise rotation angle of the image in degrees.
+\item \parameter{minRes} The minimum resolution setting for the image.
+\item \parameter{maxBright} The maximum brightness setting for the image.
+\item \parameter{visible} The initial visibility of the image.
+\end{itemize}
+
+\paragraph{Default values}
+\begin{itemize}
+\item \parameter{minRes}: 2.5
+\item \parameter{maxBright}: 14
+\item \parameter{visible}: true
+\end{itemize}
+
+\subsection{void core.loadSkyImageAltAz(QString id, QString filename, double alt, double azi, double angSize, double rotation, double minRes, double maxBright, bool visible)}
+\label{sec:ScriptingAPI:core:loadSkyImageAltAz}
+Convenience function which allows loading of a sky image based on a central alt-azimuthal coordinate, angular size and rotation.
+
+\paragraph{Parameters}
+\begin{itemize}
+\item \parameter{id} a string ID to be used when referring to this image (e.g. when changing the displayed status or deleting it.
+\item \parameter{filename} the file name of the image. If a relative path is specified, ``scripts/'' will be prefixed before the image is searched for using StelFileMgr.
+\item \parameter{alt} The altitude angle of the center of the image in degrees.
+\item \parameter{azi} The azimuth angle of the center of the image in degrees.
+\item \parameter{angSize} The angular size of the image in arc minutes.
+\item \parameter{rotation} 	The clockwise rotation angle of the image in degrees.
+\item \parameter{minRes} The minimum resolution setting for the image.
+\item \parameter{maxBright} The maximum brightness setting for the image.
+\item \parameter{visible} The initial visibility of the image.
+\end{itemize}
+
+\paragraph{Default values}
+\begin{itemize}
+\item \parameter{minRes}: 2.5
+\item \parameter{maxBright}: 14
+\item \parameter{visible}: true
+\end{itemize}
+
+\subsection{void core.loadSound(QString filename, QString id)}
+\label{sec:ScriptingAPI:core:loadSound}
+Load a sound from a file.
+
+\paragraph{Parameters}
+\begin{itemize}
+\item \parameter{filename} the name of the file to load.
+\item \parameter{id} the identifier which will be used to refer to the sound when calling playSound, pauseSound, stopSound and dropSound.
+\end{itemize}
+
+\subsection{void core.loadVideo(QString filename, QString id, float x, float y, bool show, float alpha)}
+\label{sec:ScriptingAPI:core:loadVideo}
+Load a video from a file.
+
+\paragraph{Parameters}
+\begin{itemize}
+\item \parameter{filename} the name of the file to load, relative to the scripts directory.
+\item \parameter{id} the identifier which will be used to refer to the video when calling playVideo(), pauseVideo(), stopVideo(), dropVideo() etc.
+\item \parameter{x} the x-coordinate (pixels from left) for the video frame.
+\item \parameter{y} the y-coordinate (pixels from top) for the video frame.
+\item \parameter{show} the visibility state for the video. (Optional since V0.15) You should load a video with show=true (or leave default), to start it immediately in native size. Else set show=false, and then call resizeVideo(), playVideo() or use playVideoPopout().
+\item \parameter{alpha} the initial alpha value of the video, defaults to 1.
+\end{itemize}
+
+\paragraph{Default values}
+\begin{itemize}
+\item \parameter{show}: true
+\item \parameter{alpha}: 1.0
+\end{itemize}
+
+\subsection{void core.moveToAltAzi(QString alt, QString azi, float duration)}
+\label{sec:ScriptingAPI:core:moveToAltAzi}
+Move the current viewing direction to some specified altitude and azimuth angles may be specified in a format recognised by StelUtils::getDecAngle().
+
+\paragraph{Parameters}
+\begin{itemize}
+\item \parameter{alt} the altitude angle.
+\item \parameter{azi} the azimuth angle.
+\item \parameter{duration} the duration of the movement in seconds.
+\end{itemize}
+
+\paragraph{Default value}
+\begin{itemize}
+\item \parameter{duration}: 1.0
+\end{itemize}
 
 \section{ConstellationMgr}
 \label{sec:ScriptingAPI:ConstellationMgr}
