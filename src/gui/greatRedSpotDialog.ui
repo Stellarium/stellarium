@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>327</width>
-    <height>184</height>
+    <height>201</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -177,7 +177,7 @@
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
         <property name="displayFormat">
-         <string>yyyy.MM.dd</string>
+         <string>yyyy.MM.dd hh:mm</string>
         </property>
         <property name="calendarPopup">
          <bool>true</bool>
@@ -226,7 +226,7 @@
          <string>Extinction is the loss of star brightness due to Earth's atmosphere. It is given in mag/airmass, where airmass is number of atmospheres light has to pass. (zenith: 1; horizon: about 40)</string>
         </property>
         <property name="text">
-         <string>Date:</string>
+         <string>Date and Time (UTC):</string>
         </property>
        </widget>
       </item>

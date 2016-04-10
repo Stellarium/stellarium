@@ -63,7 +63,8 @@ void GreatRedSpotDialog::createDialogContent()
 	connect(ui->driftDoubleSpinBox, SIGNAL(valueChanged(double)), ss, SLOT(setCustomGrsDrift(double)));
 
 	const StelLocaleMgr& locmgr = StelApp::getInstance().getLocaleMgr();
-	ui->jdDateTimeEdit->setDisplayFormat(locmgr.getQtDateFormatStr());
+	QString fmt = QString("%1 hh:mm").arg(locmgr.getQtDateFormatStr());
+	ui->jdDateTimeEdit->setDisplayFormat(fmt);
 	ui->jdDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(ss->getCustomGrsJD()));
 	connect(ui->jdDateTimeEdit, SIGNAL(dateTimeChanged(QDateTime)), this, SLOT(setGrsJD(QDateTime)));
 
