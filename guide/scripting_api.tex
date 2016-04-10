@@ -617,6 +617,95 @@ The GridLinesMgr controls the drawing of the Azimuthal, Equatorial, Ecliptical a
 \label{sec:ScriptingAPI:LabelMgr}
 Allows for creation of custom labels on objects or coordinates. Because this class is intended for use in scripting (although other uses are also fine), all label types and so on are specified by QString descriptions. The labels are painted very late, i.e. also sky object labels will be written over the landscape.
 
+\subsection{int LabelMgr.labelObject(QString text, QString objectName, bool visible, float fontSize, QString fontColor, QString side, double labelDistance, QString style)}
+\label{sec:ScriptingAPI:LabelMgr:labelObject}
+Create a label which is attached to a StelObject.
+
+\paragraph{Parameters}
+\begin{description}[align=right,labelwidth=3cm,leftmargin=3.2cm]
+\item[\parameter{text}] the text to display.
+\item[\parameter{objectName}] the English name of the object to attach to.
+\item[\parameter{visible}] if \keymap{true}, the label starts displayed, else it starts hidden.
+\item[\parameter{fontSize}] size of the font to use.
+\item[\parameter{fontColor}] HTML-like color spec, e.g. ``\#ffff00'' for yellow.
+\item[\parameter{side}] where the label appears in relation to object: \begin{itemize}
+\item ``N'' = above object on screen
+\item ``S'' = below object on screen
+\item ``E'' = to the right of the object on screen
+\item ``W'' = to the left of the object on screen
+\item ``NE'', ``NW'', ``SE'', ``SW'' work too.
+\end{itemize}
+\item[\parameter{labelDistance}] 
+\item[\parameter{style}] 
+\end{description}
+
+\paragraph{Default values}
+\begin{description}[align=right,labelwidth=3cm,leftmargin=3.2cm]
+\item[\parameter{visible}] true
+\item[\parameter{fontSize}] 14
+\item[\parameter{fontColor}] ``\#999999''
+\item[\parameter{side}] ``E''
+\item[\parameter{labelDistance}] -1.0
+\item[\parameter{style}] ``TextOnly''
+\end{description}
+
+\paragraph{Returns}
+A unique ID which can be used to refer to the label. returns -1 if the label could not be created (e.g. object not found).
+
+\subsection{int LabelMgr.labelHorizon(QString text, float az, float alt, bool visible, float fontSize, QString fontColor)}
+\label{sec:ScriptingAPI:LabelMgr:labelHorizon}
+Create a label in azimuthal coordinate system. Can be used e.g. to show landscape features.
+
+\paragraph{Parameters}
+\begin{description}[align=right,labelwidth=3cm,leftmargin=3.2cm]
+\item[\parameter{text}] the text to display.
+\item[\parameter{az}] azimuth, degrees.
+\item[\parameter{alt}] altitude, degrees.
+\item[\parameter{visible}] if \keymap{true}, the label starts displayed, else it starts hidden.
+\item[\parameter{fontSize}] size of the font to use.
+\item[\parameter{fontColor}] HTML-like color spec, e.g. ``\#ffff00'' for yellow.
+\end{description}
+
+\subsection{int LabelMgr.labelScreen(QString text, int x, int y, bool visible, float fontSize, QString fontColor)}
+\label{sec:ScriptingAPI:LabelMgr:labelScreen}
+Create a label at fixed screen coordinates.
+
+\paragraph{Parameters}
+\begin{description}[align=right,labelwidth=3cm,leftmargin=3.2cm]
+\item[\parameter{text}] the text to display.
+\item[\parameter{x}] the horizontal position on the screen, in pixels, from the left of the screen.
+\item[\parameter{y}] the vertical position on the screen, in pixels, from the top of the screen.
+\item[\parameter{visible}] if \keymap{true}, the label starts displayed, else it starts hidden.
+\item[\parameter{fontSize}] size of the font to use.
+\item[\parameter{fontColor}] HTML-like color spec, e.g. ``\#ffff00'' for yellow.
+\end{description}
+
+\subsection{bool LabelMgr.getLabelShow(int id)}
+\label{sec:ScriptingAPI:LabelMgr:getLabelShow}
+Find out if a label identified by id is presently shown.
+
+\subsection{void LabelMgr.setLabelShow(int id, bool show)}
+\label{sec:ScriptingAPI:LabelMgr:setLabelShow}
+Set a label identified by id to be shown or not.
+
+\subsection{void LabelMgr.setLabelText(int id, QString newText)}
+\label{sec:ScriptingAPI:LabelMgr:setLabelText}
+Set text of label identified by id to be newText.
+
+\subsection{bool LabelMgr.deleteLabel(int id)}
+\label{sec:ScriptingAPI:LabelMgr:deleteLabel}
+Delete a label by the ID which was returned from addLabel...
+
+\paragraph{Returns}
+A \keymap{true} if the id existed and was deleted, else \keymap{false}
+
+\subsection{int LabelMgr.deleteAllLabels()}
+\label{sec:ScriptingAPI:LabelMgr:deleteAllLabels}
+Delete all labels.
+
+\paragraph{Returns}
+The number of labels deleted.
+
 \section{LandscapeMgr}
 \label{sec:ScriptingAPI:LandscapeMgr}
 Manages all the rendering at the level of the observer's surroundings. This includes landscape textures, fog, atmosphere and cardinal points. I decided to put all these elements together in a single class because they are inherently linked, especially when we start moving the observer in altitude.
@@ -647,12 +736,74 @@ Used to render the stars themselves, as well as determine the color table and re
 The celestial sphere is split into zones, which correspond to the triangular faces of a geodesic sphere. The number of zones (faces) depends on the level of sub-division of this sphere. The lowest level, 0, is an icosahedron (20 faces), subsequent levels, L, of sub-division give the number of zones, n as:
 
 \begin{equation}
-n=20 x 4^L
+n=20 \cdot 4^L
 \end{equation}
 
 Stellarium uses levels 0 to 7 in the existing star catalogues. Star Data Records contain the position of a star as an offset from the central position of the zone in which that star is located, thus it is necessary to determine the vector from the observer to the centre of a zone, and add the star's offsets to find the absolute position of the star on the celestial sphere.
 
 This position for a star is expressed as a 3-dimensional vector which points from the observer (at the centre of the geodesic sphere) to the position of the star as observed on the celestial sphere.
+
+\subsection{void StarMgr.setLabelColor(Vec3f c)}
+\label{sec:ScriptingAPI:StarMgr:setLabelColor}
+Set the color used to label bright stars.
+
+\paragraph{Parameters}
+\begin{description}[align=right,labelwidth=3cm,leftmargin=3.2cm]
+\item[\parameter{c}] The color of the bright stars labels.
+\end{description}
+
+\noindent Example of usage in scripts:
+\begin{script}
+StarMgr.setLabelColor(Vec3f(1.0,0.0,0.0));
+\end{script}
+
+\subsection{Vec3f StarMgr.getLabelColor()}
+\label{sec:ScriptingAPI:StarMgr:getLabelColor}
+Get the current color used to label bright stars.
+
+\subsection{void StarMgr.setFlagStars(bool b)}
+\label{sec:ScriptingAPI:StarMgr:setFlagStars}
+Set display flag for Stars.
+
+\subsection{bool StarMgr.getFlagStars()}
+\label{sec:ScriptingAPI:StarMgr:getFlagStars}
+Get display flag for Stars.
+
+\subsection{void StarMgr.setFlagLabels(bool b)}
+\label{sec:ScriptingAPI:StarMgr:setFlagLabels}
+Set display flag for Star names (labels).
+
+\subsection{bool StarMgr.getFlagLabels()}
+\label{sec:ScriptingAPI:StarMgr:getFlagLabels}
+Get display flag for Star names (labels).
+
+\subsection{void StarMgr.setLabelsAmount(float a)}
+\label{sec:ScriptingAPI:StarMgr:setLabelsAmount}
+Set the amount of star labels. The real amount is also proportional with FOV. The limit is set in function of the stars magnitude.
+
+\paragraph{Parameters}
+\begin{description}[align=right,labelwidth=3cm,leftmargin=3.2cm]
+\item[\parameter{a}] the amount between 0 and 10. 0 is no labels, 10 is maximum of labels.
+\end{description}
+
+\subsection{float StarMgr.getLabelsAmount()}
+\label{sec:ScriptingAPI:StarMgr:getLabelsAmount}
+Get the amount of star labels. The real amount is also proportional with FOV.
+
+\paragraph{Returns}
+The amount between 0 and 10. 0 is no labels, 10 is maximum of labels.
+
+\subsection{void StarMgr.setFontSize(float newFontSize)}
+\label{sec:ScriptingAPI:StarMgr:setFontSize}
+Define font size to use for star names display.
+
+\subsection{void StarMgr.setFlagSciNames(bool f)}
+\label{sec:ScriptingAPI:StarMgr:setFlagSciNames}
+Show scientific or catalog names on stars without common names.
+
+\subsection{bool StarMgr.getFlagSciNames()}
+\label{sec:ScriptingAPI:StarMgr:getFlagSciNames}
+Get flag for showing a scientific or catalog names on stars without common names.
 
 \section{StelAudioMgr}
 \label{sec:ScriptingAPI:StelAudioMgr}
