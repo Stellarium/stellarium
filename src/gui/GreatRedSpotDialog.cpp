@@ -23,6 +23,7 @@
 #include "StelApp.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelUtils.hpp"
+#include "StelLocaleMgr.hpp"
 #include "GreatRedSpotDialog.hpp"
 
 #include "ui_greatRedSpotDialog.h"
@@ -61,8 +62,8 @@ void GreatRedSpotDialog::createDialogContent()
 	ui->driftDoubleSpinBox->setValue(ss->getCustomGrsDrift());
 	connect(ui->driftDoubleSpinBox, SIGNAL(valueChanged(double)), ss, SLOT(setCustomGrsDrift(double)));
 
-	//TODO: sync format with the main date format
-	ui->jdDateTimeEdit->setDisplayFormat("yyyy.MM.dd");
+	const StelLocaleMgr& locmgr = StelApp::getInstance().getLocaleMgr();
+	ui->jdDateTimeEdit->setDisplayFormat(locmgr.getQtDateFormatStr());
 	ui->jdDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(ss->getCustomGrsJD()));
 	connect(ui->jdDateTimeEdit, SIGNAL(dateTimeChanged(QDateTime)), this, SLOT(setGrsJD(QDateTime)));
 
@@ -77,6 +78,5 @@ void GreatRedSpotDialog::setGrsJD(QDateTime dt)
 void GreatRedSpotDialog::openRecentGrsMeasurement()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
-	QString url = conf->value("astro/grs_measurements_url", "http://jupos.privat.t-online.de/rGrs.htm").toString();
-	QDesktopServices::openUrl(QUrl(url));
+	QDesktopServices::openUrl(QUrl(conf->value("astro/grs_measurements_url", "http://jupos.privat.t-online.de/rGrs.htm").toString()));
 }
