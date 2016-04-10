@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-10 16:01+0700\n"
+"POT-Creation-Date: 2016-04-10 18:06+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5841,9 +5841,9 @@ msgstr ""
 msgid "Custom settings for position of GRS"
 msgstr ""
 
-#: src/ui_greatRedSpotDialog.h:171 src/ui_astroCalcDialog.h:393
-#: src/ui_astroCalcDialog.h:395
-msgid "yyyy.MM.dd"
+#: src/ui_greatRedSpotDialog.h:171 src/ui_astroCalcDialog.h:384
+#: src/ui_astroCalcDialog.h:386
+msgid "yyyy.MM.dd hh:mm"
 msgstr ""
 
 #: src/ui_greatRedSpotDialog.h:172
@@ -5855,10 +5855,7 @@ msgid "Longitude of GRS (degrees):"
 msgstr ""
 
 #: src/ui_greatRedSpotDialog.h:180
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:459
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:463
-#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
-msgid "Date:"
+msgid "Date and Time (UTC):"
 msgstr ""
 
 #: src/ui_greatRedSpotDialog.h:184
@@ -5934,10 +5931,6 @@ msgstr ""
 msgid "From:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:384 src/ui_astroCalcDialog.h:386
-msgid "yyyy.MM.dd hh:mm"
-msgstr ""
-
 #: src/ui_astroCalcDialog.h:385 src/ui_astroCalcDialog.h:394
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
@@ -5961,6 +5954,10 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:391
 msgid "and"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:393 src/ui_astroCalcDialog.h:395
+msgid "yyyy.MM.dd"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:396
@@ -8161,6 +8158,12 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:462
 msgid "Time of change:"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:459
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:463
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
+msgid "Date:"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:460
