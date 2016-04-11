@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-04-07 01:01+0700\n"
+"POT-Creation-Date: 2016-04-10 18:06+0700\n"
 "PO-Revision-Date: 2016-03-26 23:16+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-04-07 05:20+0000\n"
-"X-Generator: Launchpad (build 17972)\n"
+"X-Launchpad-Export-Date: 2016-04-11 05:18+0000\n"
+"X-Generator: Launchpad (build 17990)\n"
 "Language: gd\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -6114,7 +6114,7 @@ msgstr "Brùthadh (mbar):"
 msgid "Temperature (C):"
 msgstr "Teòthachad (C):"
 
-#: src/ui_atmosphereDialog.h:184 src/ui_greatRedSpotDialog.h:169
+#: src/ui_atmosphereDialog.h:184 src/ui_greatRedSpotDialog.h:178
 msgid ""
 "Extinction is the loss of star brightness due to Earth's atmosphere. It is "
 "given in mag/airmass, where airmass is number of atmospheres light has to "
@@ -6131,29 +6131,33 @@ msgid ""
 "for murky conditions."
 msgstr ""
 
-#: src/ui_greatRedSpotDialog.h:162
+#: src/ui_greatRedSpotDialog.h:168
 msgid "Great Red Spot Details"
 msgstr ""
 
-#: src/ui_greatRedSpotDialog.h:164
-msgid "Custom settings for position of GRS on Jupiter"
+#: src/ui_greatRedSpotDialog.h:170
+msgid "Custom settings for position of GRS"
 msgstr ""
 
-#: src/ui_greatRedSpotDialog.h:171
-msgid "Date and Time (UTC):"
-msgstr ""
-
-#: src/ui_greatRedSpotDialog.h:172 src/ui_astroCalcDialog.h:384
+#: src/ui_greatRedSpotDialog.h:171 src/ui_astroCalcDialog.h:384
 #: src/ui_astroCalcDialog.h:386
 msgid "yyyy.MM.dd hh:mm"
 msgstr "yyyy.MM.dd hh:mm"
 
-#: src/ui_greatRedSpotDialog.h:173
+#: src/ui_greatRedSpotDialog.h:172
 msgid "Annual drift (degrees):"
 msgstr ""
 
-#: src/ui_greatRedSpotDialog.h:174
+#: src/ui_greatRedSpotDialog.h:173
 msgid "Longitude of GRS (degrees):"
+msgstr ""
+
+#: src/ui_greatRedSpotDialog.h:180
+msgid "Date and Time (UTC):"
+msgstr ""
+
+#: src/ui_greatRedSpotDialog.h:184
+msgid "Get the recent GRS measurement"
 msgstr ""
 
 #: src/ui_scriptConsole.h:346
