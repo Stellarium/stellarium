@@ -36,13 +36,20 @@ a panoramic landscape and the sky. If the simulation time and observer
 location are such that it is night time, you will see stars, planets and
 the moon in the sky, all in the correct positions.
 
-You can drag with the mouse on the sky to look around or use the cursor
-keys. You can zoom with the mouse wheel or the page up/page down keys.
+You can drag with the mouse on the sky to look around or use the
+cursor keys. You can zoom with the mouse wheel or the \key{Page
+  \arrowkeyup} or \key{Page \arrowkeydown} keys.
 
 Much of Stellarium can be controlled very intuitively with the
-mouse. Many settings can additionally be switched with hotkeys. We
-will present the default hotkeys in this guide. However, hotkeys can
-be reconfigured to match your taste (See~\ref{sec:Hotkeys}).
+mouse. Many settings can additionally be switched with shortcut keys
+(hotkeys).  Advanced users will learn to use these shortcut
+keys. Sometimes a key combination will be used. For example, you can
+quit Stellarium by pressing \key{\ctrl+Q} on Windows and Linux, and
+\key{\cmdmac+Q} on Mac OS X.  For simplicity, we will show only the
+Windows/Linux version. We will present the default hotkeys in this
+guide. However, almost all hotkeys can be reconfigured to match your
+taste (See~\ref{sec:gui:help:hotkeys}).
+
 
 The way Stellarium is shown on the screen is primarily governed by the
 menus. These are accessed by dragging the mouse to the left or bottom
@@ -53,31 +60,33 @@ edge of the screen, where the menus will slide out.
 \label{sec:tour:timeTravel}
 
 When Stellarium starts up, it sets its clock to the same time and date
-as the system clock. However, Stellarium's clock is not fixed to same
+as the system clock. However, Stellarium's clock is not fixed to the same
 time and date as the system clock, or indeed to the same speed. We may
 tell Stellarium to change how fast time should pass, and even make time
 go backwards! So the first thing we shall do is to travel into the
 future! Let's take a look at the time control buttons on the right hand
 ride of the tool-bar. If you hover the mouse cursor over the buttons, a
 short description of the button's purpose and keyboard shortcut will
-appear.\footnote{Unfortunately, on Windows~7 and later, with NVidia and AMD GPUs, these tooltips often do not work.}
+appear.
 
-\newcommand{\guibutton[2]}[0.45]{\includegraphics[scale=#1]{#2}}
+% show small icon in-line. Lower by #2. Optional #1 is scale of icon. Use 0.45 for dialog icons, 0.75 for lower bar buttons.
+% Note that it's not possible to use \baselineskip. In Tabular environments this seems to be 0.
+\newcommand{\guibutton[3]}[0.45]{\raisebox{-#2mm}{\fbox{\includegraphics[scale=#1]{#3}}}}
 \begin{table}[h]
 \centering
 \begin{tabular}{c c l}\toprule
 \emph{Button} & \emph{Shortcut key} & \emph{Description}\\\midrule
-\guibutton[0.75]{bt_timerate_decrease} & \key{J} & Decrease the rate at which time passes \\
-\guibutton[0.75]{bt_timerate_normal}   & \key{K} & Make time pass as normal \\
-\guibutton[0.75]{bt_timerate_increase} & \key{L} & Increase the rate at which time passes \\
-\guibutton[0.75]{bt_time_normal}       & \key{8} & Return to the current time \& date \\
+\guibutton[0.75]{2.25}{bt_timerate_decrease} & \key{J} & Decrease the rate at which time passes \\
+\guibutton[0.75]{2.25}{bt_timerate_normal}   & \key{K} & Make time pass as normal \\
+\guibutton[0.75]{2.25}{bt_timerate_increase} & \key{L} & Increase the rate at which time passes \\
+\guibutton[0.75]{2.25}{bt_time_normal}       & \key{8} & Return to the current time \& date \\
 \bottomrule
 \end{tabular}
 \caption{Time Travel}
 \end{table}
 
 OK, so lets go see the future! Click the mouse once on the increase time
-speed button \guibutton{bt_timerate_increase}. 
+speed button \guibutton{0.6}{bt_timerate_increase}. 
 Not a whole lot seems to happen. However, take a look at the clock in
 the status bar. You should see the time going by faster than a normal
 clock! Click the button a second time. Now the time is going by faster
@@ -93,12 +102,21 @@ Sun rising and setting. It's a bit like a time-lapse movie.
 
 Stellarium not only allows for moving forward through time -- you can
 go backwards too! Click on the real time speed button
-\guibutton{bt_timerate_normal}.  The stars and/or the
+\guibutton{0.6}{bt_timerate_normal}.  The stars and/or the
 Sun should stop scooting across the sky. Now press the decrease time
-speed button \guibutton{bt_timerate_decrease} once. Look
+speed button \guibutton{0.6}{bt_timerate_decrease} once. Look
 at the clock. Time has stopped. Click the Decrease time speed button
 four or five more times. Now we're falling back through time at quite
 a rate (about one day every ten seconds!).
+
+\subsection*{Time Dragging}
+\label{sec:tour:timeDrag}
+
+Another way to quickly change time is \indexterm{time dragging}. Press
+\keys{\ctrl+\space} and slide the mouse right to go forward, or left
+to go backward.
+%% TODO: Apparently stopping or setting to Normal speed is a bit buggy. How to fix that properly?
+
 
 Enough time travel for now. Wait until it's night time, and then click
 the Real time speed button. With a little luck you will now be looking
@@ -186,33 +204,32 @@ keyboard shortcuts.
 
 %% TODO: Check default keys!
 
-\begin{longtabu} to \textwidth {lllX}\toprule
+\begin{longtabu} to \textwidth {llcX}\toprule
 \emph{Feature}           & \emph{Button} & \emph{Key} & \emph{Description}\\\midrule
-Constellations           & \guibutton[0.75]{bt_constellation}     & \key{C} & Draw constellations as ``stick figures'' \\
-Constellation Names      & \guibutton[0.75]{bt_constellation_name}& \key{V} & Draw name of the constellations \\
-Constellation Art        & \guibutton[0.75]{bt_constellation_art} & \key{R} & Superimpose artistic representations of the constellations \\
-Equatorial Grid          & \guibutton[0.75]{bt_eq_grid}           & \key{E} & Draw grid lines for the RA/Dec coordinate system \\
-Azimuth Grid             & \guibutton[0.75]{bt_az_grid}           & \key{Z} & Draw grid lines for the Alt/Azi coordinate system \\
-Toggle Ground            & \guibutton[0.75]{bt_ground}            & \key{G} & Toggle drawing of the ground. Turn this off to see objects that are below the horizon. \\
-Toggle Cardinal Points   & \guibutton[0.75]{bt_cardinal}          & \key{Q} & Toggle marking of the North, South, East and West points on the horizon. \\
-Toggle Atmosphere        & \guibutton[0.75]{bt_atmosphere}        & \key{A} & Toggle atmospheric effects. Most notably makes the stars visible in the daytime.  \\
-Deep-Sky Objects         & \guibutton[0.75]{bt_nebulae}           & \key{D} & Toggle marking the positions of Deep-Sky Objects. \\
-Planet Hints             & \guibutton[0.75]{bt_planets}           & \key{P} & Toggle indicators to show the position of planets. \\
-Coordinate System        & \guibutton[0.75]{bt_coord_type}        & \key{Enter} & Toggle between Alt/Azi \& RA/Dec coordinate systems. \\
-Goto                     & \guibutton[0.75]{bt_goto}              & \key{Space} & Center the view on the selected object \\
-Night Mode               & \guibutton[0.75]{bt_night_mode}        & \key{Ctrl+N} & Toggle ``night mode'', which changes the coloring of same display elements to be easier on the dark-adapted eye. \\
-Nebula background images & \guibutton[0.75]{bt_DSS}        & [none] & Toggle ``nebula background images'', which turns the Textures on or off. \\
-Full Screen Mode         & \guibutton[0.75]{bt_fullscreen} & \key{F11} & Toggle full screen mode. \\
-Flip view (horizontal)   & \guibutton[0.75]{bt_fliph}      & \key{Ctrl+Shift+H} & Flip the image in the horizontal plane. Note this button is not enable by default. See section {[}sec:imageflipping{]} \\
-Flip view (vertical)     & \guibutton[0.75]{bt_flipv}      & \key{Ctrl+Shift+V} & Flip the image in the vertical plane. Note this button is not enable by default. See section {[}sec:imageflipping{]} \\
-Quit Stellarium          & \guibutton[0.75]{bt_quit}       & \key{Ctrl-Q} & Close Stellarium.\\
-                         &                                 & \key{CMD-Q}  & on Mac OS X\\
-Help Window              & \guibutton[0.5]{btd_help}       & \key{F1} & Show the help window, with key bindings and other useful information \\
-Configuration Window     & \guibutton[0.5]{btd_config}     & \key{F2} & Show the configuration window \\ 
-Search Window            & \guibutton[0.5]{btd_find}       & \key{F3} or \key{Ctrl+F} & Show the object search window \\
-View Window              & \guibutton[0.5]{btd_view}       & \key{F4} & Show the view window \\
-Time Window              & \guibutton[0.5]{btd_time}       & \key{F5} & Show the time window \\
-Location Window          & \guibutton[0.5]{btd_location}   & \key{F6} & Show the observer location window (map) \\
+Constellations           & \guibutton[0.75]{2.5}{bt_constellation}     & \key{C} & Draw constellations as ``stick figures'' \\
+Constellation Names      & \guibutton[0.75]{2.5}{bt_constellation_name}& \key{V} & Draw name of the constellations \\
+Constellation Art        & \guibutton[0.75]{2.5}{bt_constellation_art} & \key{R} & Superimpose artistic representations of the constellations \\
+Equatorial Grid          & \guibutton[0.75]{2.5}{bt_eq_grid}           & \key{E} & Draw grid lines for the RA/Dec coordinate system \\
+Azimuth Grid             & \guibutton[0.75]{2.5}{bt_az_grid}           & \key{Z} & Draw grid lines for the Alt/Azi coordinate system \\
+Toggle Ground            & \guibutton[0.75]{2.5}{bt_ground}            & \key{G} & Toggle drawing of the ground. Turn this off to see objects that are below the horizon. \\
+Toggle Cardinal Points   & \guibutton[0.75]{2.5}{bt_cardinal}          & \key{Q} & Toggle marking of the North, South, East and West points on the horizon. \\
+Toggle Atmosphere        & \guibutton[0.75]{2.5}{bt_atmosphere}        & \key{A} & Toggle atmospheric effects. Most notably makes the stars visible in the daytime.  \\
+Deep-Sky Objects         & \guibutton[0.75]{2.5}{bt_nebulae}           & \key{D} & Toggle marking the positions of Deep-Sky Objects. \\
+Planet Hints             & \guibutton[0.75]{2.5}{bt_planets}           & \key{P} & Toggle indicators to show the position of planets. \\
+Coordinate System        & \guibutton[0.75]{2.5}{bt_coord_type}        & \key{\ctrl+M} & Toggle between Alt/Azi \& RA/Dec coordinate systems. \\
+Goto                     & \guibutton[0.75]{2.5}{bt_goto}              & \key{\Space} & Center the view on the selected object \\
+Night Mode               & \guibutton[0.75]{2.5}{bt_night_mode}        & \key{\ctrl+N} & Toggle ``night mode'', which changes the coloring of same display elements to be easier on the dark-adapted eye. \\
+Nebula images            & \guibutton[0.75]{2.5}{bt_DSS}        & [none] & Toggle ``nebula images''. This button must be enabled first, see section~\ref{sec:gui:configuration:tools}\\
+Full Screen Mode         & \guibutton[0.75]{2.5}{bt_fullscreen} & \key{F11} & Toggle full screen mode. \\
+Flip view (horizontal)   & \guibutton[0.75]{2.5}{bt_fliph}      & \key{\ctrl+Shift+H} & Flip the image in the horizontal plane. This button must be enabled first, see section~\ref{sec:gui:configuration:tools} \\
+Flip view (vertical)     & \guibutton[0.75]{2.5}{bt_flipv}      & \key{\ctrl+Shift+V} & Flip the image in the vertical plane. This button must be enabled first, see section~\ref{sec:gui:configuration:tools} \\
+Quit Stellarium          & \guibutton[0.75]{2.5}{bt_quit}       & \key{\ctrl+Q} & Close Stellarium.\\
+Help Window              & \guibutton[0.5]{2.5}{btd_help}       & \key{F1} & Show the help window, with key bindings and other useful information \\
+Configuration Window     & \guibutton[0.5]{2.5}{btd_config}     & \key{F2} & Show the configuration window \\ 
+Search Window            & \guibutton[0.5]{2.5}{btd_find}       & \key{F3} or \key{Ctrl+F} & Show the object search window \\
+View Window              & \guibutton[0.5]{2.5}{btd_view}       & \key{F4} & Show the view window \\
+Time Window              & \guibutton[0.5]{2.5}{btd_time}       & \key{F5} & Show the time window \\
+Location Window          & \guibutton[0.5]{2.5}{btd_location}   & \key{F6} & Show the observer location window (map) \\
 \bottomrule
 \caption{Stellarium's standard menu buttons}
 \label{tab:tour:buttons}
@@ -223,10 +240,10 @@ Location Window          & \guibutton[0.5]{btd_location}   & \key{F6} & Show the
 \label{sec:tour:screenshots}
 
 You can save what is on the screen to a file by pressing
-\key{Control-S}. Screenshots are taken in \file{.png} format, and
+\key{\ctrl+S}. Screenshots are taken in \file{.png} format, and
 have filenames like \file{stellarium-000.png},
 \file{stellarium-001.png} (the number increments to prevent
-over-writing existing files).
+overwriting existing files).
 
 Stellarium creates screenshots in a directory depending on
 your operating system, see section
