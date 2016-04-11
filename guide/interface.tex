@@ -15,21 +15,26 @@
 
 This chapter describes the dialog windows which can be accessed from the left menu bar.
 
-Most of Stellarium's settings can be changed using the configuration
-window and the view window. To open the configuration window, click the
-button on the left side toolbar or press \key{F2}. To open the view window
-click the button on the left side toolbar or press \key{F4}.
-
-Some options may only be configured by editing the configuration file.
-See \ref{sec:ConfigurationFile} The Main Configuration File for more
-details.
-
+Most of Stellarium's settings can be changed using the view window
+(press \guibutton[0.35]{2}{btd_view} or \key{F4}) and the
+configuration window (\guibutton[0.35]{2}{btd_config} or
+\key{F2}). Most settings have short labels. To learn more about some
+settings, more information is available as \emph{tooltips}, small text
+boxes which appear when you hover the mouse cursor over a
+button.\footnote{Unfortunately, on Windows~7 and later, with NVidia
+  and AMD GPUs, these tooltips often do not work.}
 
 \newFeature{0.15} You can drag the
 windows around, and the position will be used again when you restart
 Stellarium. If this would mean the window is off-screen (because you
 start in windowed mode, or with a different screen), the window will
 be moved so that at least a part is visible.
+
+Some options are really rarely changed and therefore may only be
+configured by editing the configuration file.  See
+\ref{sec:ConfigurationFile} The Main Configuration File for more
+details.
+
 
 
 \section{Setting the Date and Time}
@@ -42,7 +47,7 @@ be moved so that at least a part is visible.
 \end{figure}
 
 In addition to the time rate control buttons on the main toolbar, you
-can use the date and time window (open with the ``clock'' button or \key{F5}) to set the simulation time. The values
+can use the date and time window (open with the \guibutton[0.35]{2}{btd_time} button or \key{F5}) to set the simulation time. The values
 for year, month, day, hour, minutes and seconds may be modified by
 typing new values, by clicking the up and down arrows above and below
 the values, and by using the mouse wheel.
@@ -121,7 +126,7 @@ can set your location:
   data.
 \end{enumerate}
 
-Once you're happy that the location is set correctly, click on the ``use
+\noindent Once you're happy that the location is set correctly, click on the ``use
 as default'' checkbox, and close the location window.
 
 
@@ -131,7 +136,7 @@ as default'' checkbox, and close the location window.
 
 The configuration window contains general program settings, and many
 other settings which do not concern specific display options. Press
-the tool button \guibutton[0.35]{btd_config} or \key{F2} to open.
+the tool button \guibutton[0.35]{2}{btd_config} or \key{F2} to open.
 
 
 \subsection{The Main Tab}
@@ -162,7 +167,7 @@ configuration.
 \end{figure}
 
 The Information tab allows you to set the type and amount of information
-displayed on a selected object.
+displayed about a selected object.
 \begin{itemize}
 \item Ticking or unticking the relevant boxes will control this.
 \item The information displays in various colours depending on the type and
@@ -207,7 +212,7 @@ when the program starts:
 \end{figure}
 
 
-The Tools tab of the configuration window contains miscellaneous utility
+The Tools tab (Fig.~\ref{fig:gui:configuration:tools}) contains miscellaneous utility
 features:
 
 \begin{description}
@@ -243,7 +248,7 @@ features:
 \label{fig:gui:configuration:scripts}
 \end{figure}
 
-The Scripts tab (Fig.~\ref{fig:gui:scripts}) allows the selection of
+The Scripts tab (Fig.~\ref{fig:gui:configuration:scripts}) allows the selection of
 pre-assembled scripts bundled with Stellarium that can be run. This
 list can be expanded by your own scripts as required. See
 section~\ref{sec:FilesAndDirectories:DirectoryStructure} where to
@@ -279,20 +284,22 @@ which will be available again on this tab.
 
 
 
-\section{The View Settings Window}\label{the-view-settings-window}
+\section{The View Settings Window}
+\label{sec:gui:view}
 
 The View settings window controls many display features of Stellarium
 which are not available via the main toolbar.
 
-\subsection{Sky Tab}\label{sky-tab}
+\subsection{Sky Tab}
+\label{sec:gui:view:sky}
 
-\begin{figure}[h]
+\begin{figure}[t]
 \centering\includegraphics[scale=0.68]{view_dialog_sky_tab}
 \caption{View Settings Window: Sky Tab}
-\label{fig:viewwinskytab}
+\label{fig:gui:view:sky}
 \end{figure}
 
-The Sky tab of the View window (Fig.~\ref{fig:viewwinskytab}) contains settings
+The Sky tab of the View window (Fig.~\ref{fig:gui:view:sky}) contains settings
 for changing the general appearane of the main sky view. Some
 hightlights:
 
@@ -335,11 +342,13 @@ hightlights:
 
 
 
-\subsection{Markings Tab}\label{marking-tab}
+\subsection{Markings Tab}
+\label{sec:gui:view:markings}
 
-\begin{figure}[h]
+\begin{figure}[t]
 \centering\includegraphics[scale=0.68]{view_dialog_markings_tab}
-%\caption{Figure caption}
+\caption{View Settings Window: Markings Tab}
+\label{fig:gui:view:markings}
 \end{figure}
 
 The Markings tab of the View window controls the following features:
@@ -384,11 +393,13 @@ The Markings tab of the View window controls the following features:
   \end{description}
 \end{description}
 
-\subsection{Landscape Tab}\label{landscape-tab}
+\subsection{Landscape Tab}
+\label{sec:gui:view:landscape}
 
-\begin{figure}[h]
+\begin{figure}[t]
 \centering\includegraphics[scale=0.68]{view_dialog_landscape_tab}
-%\caption{Figure caption}
+\caption{View Settings Window: Landscape Tab}
+\label{fig:gui:view:landscape}
 \end{figure}
 
 The Landscape tab of the View window controls the landscape graphics
@@ -416,11 +427,13 @@ The controls at the bottom right of the window operate as follows:
   landscape will be the one used when Stellarium starts.
 \end{description}
 
-\subsubsection{Starlore Tab}\label{starlore-tab}
+\subsection{Starlore Tab}
+\label{sec:gui:view:starlore}
 
-\begin{figure}[h]
+\begin{figure}[t]
 \centering\includegraphics[scale=0.68]{view_dialog_starlore_tab}
-%\caption{Figure caption}
+\caption{View Settings Window: Starlore Tab}
+\label{fig:gui:view:starlore}
 \end{figure}
 
 The Starlore tab of the View window controls what culture's
@@ -432,10 +445,29 @@ do not.
 \section{The Object Search Window}
 \label{sec:gui:search}
 
-\begin{figure}[h]
-\centering\includegraphics{search_dialog}
-\caption{The Object Search Window}
+\begin{figure}[p]
+\centering\includegraphics[scale=0.7]{search_dialog}
+\caption{The Search Window: Objects}
 \label{fig:gui:search}
+\end{figure}
+
+\begin{figure}[p]
+\centering\includegraphics[scale=0.7]{search_dialog_position}
+\caption{The Search Window: Positions}
+\label{fig:gui:search:position}
+\end{figure}
+
+\begin{figure}[p]
+\centering\includegraphics[scale=0.7]{search_dialog_list}
+\caption{The Search Window: Lists}
+\label{fig:gui:search:position}
+\end{figure}
+
+
+\begin{figure}[p]
+\centering\includegraphics[scale=0.7]{search_dialog_option}
+\caption{The Search Window: Options}
+\label{fig:gui:search:options}
 \end{figure}
 
 The Object Search window provides a convenient way to locate objects in
@@ -457,20 +489,10 @@ now would go to Mars, but we want Mimas. We can either press \key{TAB} twice
 to highlight Mimas and then hit \key{RETURN}, or we can continue to type the
 name until it is the first/only object in the list.
 
-\begin{figure}[h]
-\centering\includegraphics{search_dialog_position}
-\caption{The Search Window: Positions}
-\label{fig:gui:search:position}
-\end{figure}
 
 The Position tab provides a convenient way to enter a user set
 of coordinates.
 
-\begin{figure}[h]
-\centering\includegraphics{search_dialog_list}
-\caption{The Search Window: Lists}
-\label{fig:gui:search:position}
-\end{figure}
 
 The List Search tab allows selection of an object from predefined
 sets.  The number of choices is governed by the loaded plug
@@ -478,12 +500,6 @@ ins. Simply scroll down the first window to select the type. The name
 of an object can then be selected from the list. Press \key{enter} and
 stelarium will go to that object.
 
-
-\begin{figure}[h]
-\centering\includegraphics{search_dialog_option}
-\caption{The Search Window: Options}
-\label{fig:gui:search:options}
-\end{figure}
 
 The Options tab provides a few settings to fine-tune your search experience.
 When the name of an object to find is typed in the object
@@ -498,37 +514,48 @@ selected from the scroll window.
 \section{Help Window}
 \index{sec:gui:help}
 
-\begin{figure}[h]
-\centering\includegraphics{help_dialog}
+\begin{figure}[htbp]
+\centering\includegraphics[scale=0.6]{help_dialog}
 \caption{Help Window}
 \label{fig:gui:help}
 \end{figure}
 
-The Help window lists all of Stellarium's key-strokes. Note that some
+\noindent The Help window lists all of Stellarium's key-strokes. Note that some
 features are only available as key strokes, so it's a good idea to have
 a browse of the information in this window.
 
-\begin{figure}[h]
-\centering\includegraphics{help_dialog_about}
-%\caption{Help Window}
+\subsection{Editing Shortcut Keys}
+\label{sec:gui:help:hotkeys}
+
+You can edit the shortcut keys here. Each available function can be
+configured with up to two key combinations. You may want to
+reconfigure keys for example if you have a non-English keyboard layout
+and some keys either do not work at all, or feel unintuitive for you,
+or if you have other software and want to use the same hotkeys for
+similar functions. Simply select the function and click with the mouse
+into the edit field, then press your key of choice. If the key has
+been taken already, a message will tell you.
+
+
+\begin{figure}[htbp]
+\centering\includegraphics[scale=0.6]{help_dialog_about}
 \caption{Help Window: About}
 \label{fig:gui:help:about}
 \end{figure}
 
-The About tab in this window will show licensing information, and a list
+The About tab (Fig.~\ref{fig:gui:help:about}) shows version and licensing information, and a list
 of people who helped to produce the program.
 
-\begin{figure}[h]
-\centering\includegraphics{help_dialog_log}
-%\caption{Help Window}
+\begin{figure}[htbp]
+\centering\includegraphics[scale=0.6]{help_dialog_log}
 \caption{Help Window: Logfile}
 \label{fig:gui:help:log}
 \end{figure}
 
-The help window log tab shows the loading instructions carried out when
+The log tab (Fig.~\ref{fig:gui:help:log}) shows messages like the loading confirmations carried out when
 stellarium runs. It is useful to locate the files that stellarium writes
 to your computer. The same information is written to  the file \file{log.txt} that you will
-find in your user area (see~\ref{sec:Directories}).
+find in your user directory (see~\ref{sec:Directories}).
 
 
 
