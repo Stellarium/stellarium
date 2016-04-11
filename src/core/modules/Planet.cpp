@@ -619,9 +619,9 @@ void Planet::computePosition(const double dateJDE)
 	{
 		// calculate actual Planet position
 		coordFunc(dateJDE, eclipticPos, userDataPtr);
-		// XXX: do we need to do that even when the orbit is not visible?
-		for( int d=0; d<ORBIT_SEGMENTS; d++ )
-			orbit[d]=getHeliocentricPos(orbitP[d]);
+		if (orbitFader.getInterstate()>0.000001)
+			for( int d=0; d<ORBIT_SEGMENTS; d++ )
+				orbit[d]=getHeliocentricPos(orbitP[d]);
 		lastJDE = dateJDE;
 	}
 
