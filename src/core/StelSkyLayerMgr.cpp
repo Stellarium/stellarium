@@ -383,15 +383,19 @@ bool StelSkyLayerMgr::loadSkyImageAltAz(const QString& id, const QString& filena
 void StelSkyLayerMgr::showLayer(const QString& id, bool b)
 {
 	if (allSkyLayers.contains(id))
-		if (allSkyLayers.value(id)!=NULL)
+	{
+		if (allSkyLayers[id]!=NULL)
 			allSkyLayers[id]->show = b;
+	}
 }
 
 bool StelSkyLayerMgr::getShowLayer(const QString& id) const
 {
 	if (allSkyLayers.contains(id))
-		if (allSkyLayers.value(id)!=NULL)
-			return allSkyLayers.value(id)->show;
+	{
+		if (allSkyLayers[id]!=NULL)
+			return allSkyLayers[id]->show;
+	}
 	return false;
 }
 

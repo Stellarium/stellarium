@@ -525,7 +525,7 @@ void Planet::computePosition(const double dateJDE)
 
 			for( int d=0; d<ORBIT_SEGMENTS; d++ )
 			{
-				if(d + delta_points >= ORBIT_SEGMENTS )
+				if(d + delta_points >= ORBIT_SEGMENTS-1 )
 				{
 					// calculate new points
 					calc_date = new_date + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
@@ -545,6 +545,7 @@ void Planet::computePosition(const double dateJDE)
 				}
 				else
 				{
+
 					orbitP[d] = orbitP[d+delta_points];
 					orbit[d] = getHeliocentricPos(orbitP[d]);
 				}
