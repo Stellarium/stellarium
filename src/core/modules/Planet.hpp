@@ -231,7 +231,7 @@ public:
 	Vec3d getEclipticPos() const;
 
 	// Return the heliocentric ecliptical position
-	Vec3d getHeliocentricEclipticPos() const;
+	Vec3d getHeliocentricEclipticPos() const {return getHeliocentricPos(eclipticPos);}
 
 	// Return the heliocentric transformation for local coordinate
 	Vec3d getHeliocentricPos(Vec3d) const;

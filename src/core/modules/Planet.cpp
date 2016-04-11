@@ -781,22 +781,6 @@ Vec3d Planet::getEclipticPos() const
 	return eclipticPos;
 }
 
-// Return the heliocentric ecliptical position (Vsop87)
-Vec3d Planet::getHeliocentricEclipticPos() const
-{
-	Vec3d pos = eclipticPos;
-	PlanetP pp = parent;
-	if (pp)
-	{
-		while (pp->parent)
-		{
-			pos += pp->eclipticPos;
-			pp = pp->parent;
-		}
-	}
-	return pos;
-}
-
 // Return heliocentric coordinate of p
 Vec3d Planet::getHeliocentricPos(Vec3d p) const
 {
