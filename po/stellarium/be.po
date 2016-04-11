@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-07 01:01+0700\n"
+"POT-Creation-Date: 2016-04-10 18:06+0700\n"
 "PO-Revision-Date: 2016-04-08 05:04+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-04-09 05:16+0000\n"
+"X-Launchpad-Export-Date: 2016-04-11 05:15+0000\n"
 "X-Generator: Launchpad (build 17990)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -6070,7 +6070,7 @@ msgstr "Ціск (мбар):"
 msgid "Temperature (C):"
 msgstr "Тэмпэратура (C):"
 
-#: src/ui_atmosphereDialog.h:184 src/ui_greatRedSpotDialog.h:169
+#: src/ui_atmosphereDialog.h:184 src/ui_greatRedSpotDialog.h:178
 msgid ""
 "Extinction is the loss of star brightness due to Earth's atmosphere. It is "
 "given in mag/airmass, where airmass is number of atmospheres light has to "
@@ -6092,30 +6092,34 @@ msgstr ""
 "Выкарыстоўвай каля 0,12 для велічных горных вяршынь, 0,2 для добрага "
 "вясковага краявіду, 0,35 для пахмурных умоваў."
 
-#: src/ui_greatRedSpotDialog.h:162
+#: src/ui_greatRedSpotDialog.h:168
 msgid "Great Red Spot Details"
 msgstr "Падрабязнасьці Вялікай чырвонай плямы"
 
-#: src/ui_greatRedSpotDialog.h:164
-msgid "Custom settings for position of GRS on Jupiter"
-msgstr "Свае настройкі становішча ВЧП на Юпітэры"
+#: src/ui_greatRedSpotDialog.h:170
+msgid "Custom settings for position of GRS"
+msgstr ""
 
-#: src/ui_greatRedSpotDialog.h:171
-msgid "Date and Time (UTC):"
-msgstr "Дата й час (UTC):"
-
-#: src/ui_greatRedSpotDialog.h:172 src/ui_astroCalcDialog.h:384
+#: src/ui_greatRedSpotDialog.h:171 src/ui_astroCalcDialog.h:384
 #: src/ui_astroCalcDialog.h:386
 msgid "yyyy.MM.dd hh:mm"
 msgstr "гггг.мм.дд гг:хх"
 
-#: src/ui_greatRedSpotDialog.h:173
+#: src/ui_greatRedSpotDialog.h:172
 msgid "Annual drift (degrees):"
 msgstr "Гадавы дрэйф (у ґрадусах):"
 
-#: src/ui_greatRedSpotDialog.h:174
+#: src/ui_greatRedSpotDialog.h:173
 msgid "Longitude of GRS (degrees):"
 msgstr "Даўгата ВЧП (у ґрадусах):"
+
+#: src/ui_greatRedSpotDialog.h:180
+msgid "Date and Time (UTC):"
+msgstr "Дата й час (UTC):"
+
+#: src/ui_greatRedSpotDialog.h:184
+msgid "Get the recent GRS measurement"
+msgstr ""
 
 #: src/ui_scriptConsole.h:346
 msgid "Script console"
