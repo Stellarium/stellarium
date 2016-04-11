@@ -525,7 +525,7 @@ void Planet::computePosition(const double dateJDE)
 
 			for( int d=0; d<ORBIT_SEGMENTS; d++ )
 			{
-				if(d + delta_points >= ORBIT_SEGMENTS )
+				if(d + delta_points >= ORBIT_SEGMENTS-1 )
 				{
 					// calculate new points
 					calc_date = new_date + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
@@ -545,6 +545,7 @@ void Planet::computePosition(const double dateJDE)
 				}
 				else
 				{
+
 					orbitP[d] = orbitP[d+delta_points];
 					orbit[d] = getHeliocentricPos(orbitP[d]);
 				}
@@ -618,9 +619,9 @@ void Planet::computePosition(const double dateJDE)
 	{
 		// calculate actual Planet position
 		coordFunc(dateJDE, eclipticPos, userDataPtr);
-		// XXX: do we need to do that even when the orbit is not visible?
-		for( int d=0; d<ORBIT_SEGMENTS; d++ )
-			orbit[d]=getHeliocentricPos(orbitP[d]);
+		if (orbitFader.getInterstate()>0.000001)
+			for( int d=0; d<ORBIT_SEGMENTS; d++ )
+				orbit[d]=getHeliocentricPos(orbitP[d]);
 		lastJDE = dateJDE;
 	}
 
@@ -778,22 +779,6 @@ double Planet::getMeanSolarDay() const
 Vec3d Planet::getEclipticPos() const
 {
 	return eclipticPos;
-}
-
-// Return the heliocentric ecliptical position (Vsop87)
-Vec3d Planet::getHeliocentricEclipticPos() const
-{
-	Vec3d pos = eclipticPos;
-	PlanetP pp = parent;
-	if (pp)
-	{
-		while (pp->parent)
-		{
-			pos += pp->eclipticPos;
-			pp = pp->parent;
-		}
-	}
-	return pos;
 }
 
 // Return heliocentric coordinate of p
