@@ -59,7 +59,6 @@
 \newcommand{\DocumentEdition}{1}
 
 \begin{document}
-\maxtocdepth{subsection}
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
@@ -154,7 +153,7 @@ License''.\\ % License information
 
 
 %----------------------------------------------------------------------------------------
-%	CHAPTER 4 (was called Configuration, but is really an in-depth description of the panels.)
+%	CHAPTER 4 (was called Configuration, but is really an in-depth description of the GUI panels.)
 %----------------------------------------------------------------------------------------
 
 \include{interface}
@@ -182,6 +181,7 @@ License''.\\ % License information
 \chapterimage{chapter-t3-bg} % Chapter heading image
 \input{plugins}
 \input{plugins_builtin}
+%%TODO: Satellites, MeteorShowers, Scenery3D&ArchaeoLines, TelescopeControl, Oculars
 \input{plugins_external} %% This must be written...
 \input{scripting}
 
@@ -214,6 +214,8 @@ License''.\\ % License information
 %----------------------------------------------------------------------------------------
 \chapterimage{chapter-t4-bg} % Chapter heading image
 \include{exercises}
+
+%% TODO: Chapter "Stellarium at the Telescope"
 
 %----------------------------------------------------------------------------------------
 %	PART V
@@ -254,7 +256,7 @@ License''.\\ % License information
 %	CHAPTER E (Accuracy, and some notes about used algorithms.)
 %----------------------------------------------------------------------------------------
 
-\include{accuracy}
+\include{accuracy}%% This could go to the front as section of a chapter "Scientific Use"
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER F (Acknowledgements)
@@ -267,9 +269,7 @@ License''.\\ % License information
 %----------------------------------------------------------------------------------------
 
 %\chapterimage{chapter-t1-bg} % Chapter heading image
-\settocdepth{chapter}
 \include{license}
-\resettocdepth
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------

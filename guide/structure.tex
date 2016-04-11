@@ -19,7 +19,6 @@
 %----------------------------------------------------------------------------------------
 %	VARIOUS REQUIRED PACKAGES AND CONFIGURATIONS
 %----------------------------------------------------------------------------------------
-
 \usepackage[top=3cm,bottom=3cm,left=3cm,right=3cm,headsep=10pt,a4paper]{geometry} % Page margins
 
 \usepackage{graphicx} % Required for including pictures
@@ -56,8 +55,6 @@
   {\m@th\ensuremath{_{\mbox{\fontsize\sf@size\z@#1}}}}}
 \makeatother
 
-\usepackage{newunicodechar}
-\newunicodechar{°}{\degree}
 
 %% GZ: some typesetting macros given here once are better than immediate formatting.
 
@@ -69,8 +66,7 @@
 \newcommand{\keymap}[1]{\texttt{#1}}
 %% console commands, CLI arguments, etc.
 \newcommand{\command}[1]{\texttt{#1}}
-%% Keypress buttons. This is just a font change now, but can be a boxed key or such.
-\newcommand{\key}[1]{\textbf{\textsf{#1}}}
+
 \newcommand{\button}[1]{\textbf{\textsf{#1}}}% Will become a boxed text, representing a GUI button label.
 %% Person names. In some places they have been italicised, in others bold. Make them appear the same with this, and add them to the index:
 \newcommand{\name}[1]{\textsc{#1}\index{#1}}
@@ -150,6 +146,8 @@
 \usepackage{microtype} % Slightly tweak font spacing for aesthetics
 \usepackage[utf8]{inputenc} % Required for including letters with accents
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{newunicodechar} % Must be loaded after [utf8]inputenc
+\newunicodechar{°}{\degree}
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY AND INDEX
@@ -593,7 +591,7 @@ innerbottommargin=5pt]{cBox}
 \hypersetup{hidelinks,backref=true,pagebackref=true,hyperindex=true,colorlinks=false,breaklinks=true,urlcolor= ocre,
             pdfpagemode=UseOutlines,bookmarks=true,bookmarksopen=true,%bookmarksopenlevel=1,bookmarksnumbered,
             pdfview=Fit,pdfstartview=Fit,pdfpagelayout=TwoPageRight,
-            pdfduplex=true,%does nothing? 
+            pdfduplex=DuplexFlipLongEdge,
             pdfsubject={Stellarium is a multi-platform open-source desktop planetarium. This document describes version 0.15+ (2016)},
             %pdfcreator={PDFLaTeX},
             pdfproducer={Stellarium team}, 
@@ -616,3 +614,9 @@ addtohook={%
 \fi
 }
 }
+
+\usepackage[os=win]{menukeys}% For the menu, keycaps, etc. This reqiures the updated catoptions.sty.
+%% Keypress buttons. This is just a font change now, but can be a boxed key or such.
+%\newcommand{\key}[1]{\textbf{\textsf{\small #1}}}
+% Prefer using menukeys. 
+\newcommand{\key}[1]{\keys{#1}}
