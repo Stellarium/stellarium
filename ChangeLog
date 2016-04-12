@@ -1,3 +1,15 @@
+0.14.3 [2016-03-20]
+Bugfix release:
+- Added Bengali description for landscapes (LP: #1548627)
+- Added background transparency in Oculars plugin (LP: #1511393)
+- Fixed serial port issue on Windows version (LP: #1543813)
+- Fixed MESA mode on Windows (LP: #1509735)
+- Fixed Stellarium crashes in ocular view of Saturn/Neptune/Uranus (LP: #1495232)
+- Fixed artifacts in rendering of Mercury in the Sun (LP: #1533647)
+- Fixed loading scenes for Scenery 3D plugin (LP: #1533069)
+- Fixed movement of radiant when time is switched manually (LP: #1535950)
+- Fixed changing name of planet (LP: #1548008)
+
 0.14.2 [2016-01-08]
 Bugfix release:
 - Reduce planet brightness in daylight (LP: #1503248)

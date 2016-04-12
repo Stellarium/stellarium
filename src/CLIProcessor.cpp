@@ -58,6 +58,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  << "                          (esp. multimedia handling)\n"
 			  << "--compat33 (or -C)      : Request OpenGL 3.3 Compatibility Profile\n"
 			  << "                          May help for certain driver configurations. Mac?\n"
+			  << "--fix-text (or -t)      : May fix text rendering problems\n"
 			#ifdef Q_OS_WIN
 			  << "--angle-mode (or -a)    : Use ANGLE as OpenGL ES2 rendering engine (autodetect driver)\n"
 			  << "--angle-d3d9 (or -9)    : Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine\n"
@@ -98,7 +99,10 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 	{
 		qApp->setProperty("onetime_compat33", true);
 	}
-
+	if (argsGetOption(argList, "-t", "--fix-text"))
+	{
+		qApp->setProperty("text_texture", true); // Will be observed in StelPainter::drawText()
+	}
 	#ifdef Q_OS_WIN
 	if (argsGetOption(argList, "-s", "--safe-mode"))
 	{

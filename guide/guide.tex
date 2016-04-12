@@ -47,60 +47,18 @@
 
 \input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
 %\usepackage{fancyvrb}
-\usepackage{color}
-\usepackage{listings}
+\usepackage{marvosym}% For the Zodiac symbols, \Aries etc. 
+\usepackage{tocvsec2} % Allows fine-tuning TOC depth. (to suppress GPL sections in TOC but have them still numbered)
+%\newenvironment{commands}{\begin{wBox}\begin{Verbatim}}{\end{Verbatim}\end{wBox}}
+%\DefineVerbatimEnvironment{commands}{\begin{wBox}\begin{Verbatim}}{\end{Verbatim}\end{wBox}}
+%\lstnewenvironment{commands}{\begin{wBox}\lstset{basicstyle=\ttfamily}\begin{lstlisting}}{\end{lstlisting}\end{wBox}}
 
-% Emergency definition as this is not in MiKTeX.
-\makeatletter
-%\DeclareRobustCommand*
-\providecommand\textsubscript[1]{%
-  \@textsubscript{\selectfont#1}}
-\def\@textsubscript#1{%
-  {\m@th\ensuremath{_{\mbox{\fontsize\sf@size\z@#1}}}}}
-\makeatother
-
-
-%% GZ Somme commands which can be used later, like version number etc.
-%% Also, some typesetting macros given here once are better than immediate formatting.
+%% GZ Some commands which can be used later, like version number etc.
 
 \newcommand{\StelVersion}{0.15.0}
 \newcommand{\DocumentEdition}{1}
 
-%% File names. 
-\newcommand{\file}[1]{\texttt{#1}}
-%% Keypress buttons. This is just a font change now, but can be a boxed key or such.
-\newcommand{\key}[1]{\textbf{\textsf{#1}}}
-%% Person names. In some places they have been italicised, in others bold. Make them appear the same with this, and add them to the index:
-\newcommand{\name}[1]{\textsc{#1}\index{#1}}
-%% Some new term that is presented here with emphasis and also goes immediately to the index. 
-\newcommand{\indexterm}[1]{\emph{#1}\index{#1}}
-
-%% A few units. Add what you need in the same style here.
-\newcommand{\cm}{\ensuremath{\,\mathrm{cm}}}
-\newcommand{\mm}{\ensuremath{\,\mathrm{mm}}}
-\newcommand{\km}{\ensuremath{\,\mathrm{km}}}
-\newcommand{\um}{\ensuremath{\,\mathrm{\mu m}}}
-\newcommand{\AU}{\ensuremath{\,\mathrm{AU}}}
-\newcommand{\LY}{\ensuremath{\,\mathrm{LY}}}
-\newcommand{\pc}{\ensuremath{\,\mathrm{pc}}}
-\newcommand{\kpc}{\ensuremath{\,\mathrm{kpc}}}
-\newcommand{\Mpc}{\ensuremath{\,\mathrm{Mpc}}}
-
-%\newenvironment{commands}{\begin{wBox}\begin{Verbatim}}{\end{Verbatim}\end{wBox}}
-%\DefineVerbatimEnvironment{commands}{\begin{wBox}\begin{Verbatim}}{\end{Verbatim}\end{wBox}}
-%\lstnewenvironment{commands}{\begin{wBox}\lstset{basicstyle=\ttfamily}\begin{lstlisting}}{\end{lstlisting}\end{wBox}}
-\lstnewenvironment{commands}{\lstset{language=sh,basicstyle=\ttfamily\small,%
-                                     backgroundcolor=\color{black!5},frame=leftline,rulecolor=\color{blue},framerule=1pt}%
-                             }{}%
-\lstnewenvironment{configfile}{\lstset{language=sh,basicstyle=\ttfamily\small,%
-                                   backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
-                             }{}%
-
-
-
-
 \begin{document}
-
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
@@ -139,7 +97,13 @@
 
 \noindent \textsc{stellarium.org}\\ % URL
 
-\noindent Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License, Version 1.2 or any later version published by the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. A copy of the license is included in section~\ref{ch:License} entitled ``GNU Free Documentation License''.\\ % License information
+\noindent Permission is granted to copy, distribute and/or modify this
+document under the terms of the GNU Free Documentation License,
+Version 1.2 or any later version published by the Free Software
+Foundation; with no Invariant Sections, no Front-Cover Texts, and no
+Back-Cover Texts. A copy of the license is included in
+appendix~\ref{ch:License} entitled ``GNU Free Documentation
+License''.\\ % License information
 
 \noindent \textit{A draft of version 0.15.0-1, \today} % Printing/edition date
 
@@ -182,17 +146,17 @@
 \include{start}
 
 %----------------------------------------------------------------------------------------
-%	CHAPTER 3 (Interface Guide)
+%	CHAPTER 3 (was called Interface Guide, but is just a first tour.)
 %----------------------------------------------------------------------------------------
 
-\include{interface_guide}
+\include{tour}
 
 
 %----------------------------------------------------------------------------------------
-%	CHAPTER 4 (Configuration)
+%	CHAPTER 4 (was called Configuration, but is really an in-depth description of the GUI panels.)
 %----------------------------------------------------------------------------------------
 
-\include{configuration}
+\include{interface}
 
 %----------------------------------------------------------------------------------------
 %	PART II
@@ -213,19 +177,17 @@
 %----------------------------------------------------------------------------------------
 %	PART III
 %----------------------------------------------------------------------------------------
-
 \part{Extending Stellarium}
 \chapterimage{chapter-t3-bg} % Chapter heading image
 \input{plugins}
-\chapterimage{chapter-bg.png} % Chapter heading image
 \input{plugins_builtin}
-%\input{plugins_external} %% This must be written...
+%%TODO: Satellites, MeteorShowers, Scenery3D&ArchaeoLines, TelescopeControl, Oculars
+\input{plugins_external} %% This must be written...
 \input{scripting}
 
 %----------------------------------------------------------------------------------------
 %	PART IV
 %----------------------------------------------------------------------------------------
-
 \part{Practical Astronomy}
 
 
@@ -242,7 +204,7 @@
 \include{astronomical_phenomena}
 
 %----------------------------------------------------------------------------------------
-%	CHAPTER X (Sky Guide)
+%	CHAPTER X (A Short Sky Guide)
 %----------------------------------------------------------------------------------------
 
 \include{sky_guide}
@@ -253,40 +215,61 @@
 \chapterimage{chapter-t4-bg} % Chapter heading image
 \include{exercises}
 
+%% TODO: Chapter "Stellarium at the Telescope"
+
 %----------------------------------------------------------------------------------------
 %	PART V
 %----------------------------------------------------------------------------------------
 
 \appendix
+%% GZ reset counter to avoid section entries in Appendix.
+\renewcommand{\StelTOCdepth}{0}% reset this to 0 before appendix!
+
 \part{Appendices}
-
-
-%----------------------------------------------------------------------------------------
-%	CHAPTER X (Stellarium Reference)
-%----------------------------------------------------------------------------------------
-
-\include{reference}
-
-%----------------------------------------------------------------------------------------
-%	CHAPTER X (Star Catalogue)
-%----------------------------------------------------------------------------------------
 \chapterimage{chapter-t1-bg} % Chapter heading image
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER A (config.ini)
+%----------------------------------------------------------------------------------------
+
+\include{config_ini}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER B (Bortle Scale) -- N.B. Try to keep this as Appendix "B" [for Bortle]
+%----------------------------------------------------------------------------------------
+
+\include{ref_bortle_scale}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER C (Star Catalogue)
+%----------------------------------------------------------------------------------------
 
 \include{star_catalogue}
 
 %----------------------------------------------------------------------------------------
-%	CHAPTER X (Acknowledgements)
+%	CHAPTER D (Scripting API.)
+%----------------------------------------------------------------------------------------
+
+\include{scripting_api}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER E (Accuracy, and some notes about used algorithms.)
+%----------------------------------------------------------------------------------------
+
+\include{accuracy}%% This could go to the front as section of a chapter "Scientific Use"
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER F (Acknowledgements)
 %----------------------------------------------------------------------------------------
 
 \include{acknowledgements}
 
 %----------------------------------------------------------------------------------------
-%	CHAPTER X (License)
+%	CHAPTER G (License)
 %----------------------------------------------------------------------------------------
 
-\chapterimage{chapter-t1-bg} % Chapter heading image
+%\chapterimage{chapter-t1-bg} % Chapter heading image
 \include{license}
-
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------

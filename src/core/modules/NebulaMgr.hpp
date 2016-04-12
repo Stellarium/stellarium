@@ -151,6 +151,11 @@ public:
 
 	bool objectInDisplayedCatalog(NebulaP n);
 
+	//! Get designation for latest selected DSO with priority
+	//! @note using for bookmarks feature as example
+	//! @return a designation
+	QString getLatestSelectedDSODesignation();
+
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 public slots:

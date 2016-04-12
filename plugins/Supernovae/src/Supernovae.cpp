@@ -729,3 +729,25 @@ QString Supernovae::getSupernovaeList()
 
 	return out.join(", ");
 }
+
+void Supernovae::reloadCatalog(void)
+{
+	bool hasSelection = false;
+	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
+	// Whether any supernova are selected? Save the current selection...
+	const QList<StelObjectP> selectedObject = objMgr->getSelectedObject("Supernova");
+	if (!selectedObject.isEmpty())
+	{
+		// ... unselect current supernova.
+		hasSelection = true;
+		objMgr->unSelect();
+	}
+
+	readJsonFile();
+
+	if (hasSelection)
+	{
+		// Restore selection...
+		objMgr->setSelectedObject(selectedObject);
+	}
+}

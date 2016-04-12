@@ -31,7 +31,8 @@
 #include <QSettings>
 #include <QTextDocument>
 
-InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
+InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
+	infoPixmap(NULL)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
@@ -88,6 +89,64 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 		qWarning() << "config.ini option gui/selected_object_info is invalid, using \"all\"";
 		infoTextFilters = StelObject::InfoStringGroup(StelObject::AllInfo);
 	}
+	if (qApp->property("text_texture")==true) // CLI option -t given?
+		infoPixmap=new QGraphicsPixmapItem(this);
+}
+
+InfoPanel::~InfoPanel()
+{
+	if (infoPixmap)
+	{
+		delete infoPixmap;
+		infoPixmap=NULL;
+	}
+}
+
+// A hackish fix for broken OpenGL font situations like RasPi2 VC4 as of 2016-03-26.
+// strList is the text-only representation of InfoPanel.toPlainText(), pre-split into a stringlist.
+// It is assumed: The h2 element (1-2 lines) has been broken into 1-2 lines and a line "ENDHEAD", rest follows line-by-line.
+// The header lines are shown in bold large font, the rest in normal size.
+// There is no bold or other font mark-up, but that should be acceptable.
+QPixmap getInfoPixmap(const QStringList& strList, QFont font, QColor color)
+{
+	// Render the text str into a QPixmap.
+	// search longest string.
+	int maxLenIdx=0; int maxLen=0;
+	for (int i = 0; i < strList.size(); ++i)
+	{
+		if (strList.at(i).length() > maxLen)
+		{
+			maxLen=strList.at(i).length();
+			maxLenIdx=i;
+		}
+	}
+	QFont titleFont(font);
+	titleFont.setBold(true);
+	titleFont.setPixelSize(font.pixelSize()+7);
+
+	QRect strRect = QFontMetrics(titleFont).boundingRect(strList.at(maxLenIdx));
+	int w = strRect.width()+1+(int)(0.02f*strRect.width());
+	int h = strRect.height()*strList.count()+8;
+
+	QPixmap strPixmap(w, h);
+	strPixmap.fill(Qt::transparent);
+	QPainter painter(&strPixmap);
+	font.setStyleStrategy(QFont::NoAntialias); // else: font problems on RasPi20160326
+	//painter.setRenderHints(QPainter::TextAntialiasing);
+	painter.setPen(color);
+	painter.setFont(titleFont);
+	int txtOffset=0; // to separate heading from rest of text.
+	for (int i = 0; i < strList.size(); ++i)
+	{
+		if (strList.at(i).startsWith( "ENDHEAD"))
+		{
+			painter.setFont(font);
+			txtOffset=8;
+		}
+		else
+			painter.drawText(-strRect.x()+1, -strRect.y()+i*(painter.font().pixelSize()+2)+txtOffset, strList.at(i));
+	}
+	return strPixmap;
 }
 
 void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
@@ -96,12 +155,39 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 	{
 		if (!document()->isEmpty())
 			document()->clear();
+		if (qApp->property("text_texture")==true) // CLI option -t given?
+			infoPixmap->setVisible(false);
 	}
 	else
 	{
 		// just print details of the first item for now
 		QString s = selected[0]->getInfoString(StelApp::getInstance().getCore(), infoTextFilters);
 		setHtml(s);
+		if (qApp->property("text_texture")==true) // CLI option -t given?
+		{
+			// Extract color from HTML.
+			QRegExp colorRegExp("<font color=(#[0-9a-f]{6,6})>");
+			int colorInt=colorRegExp.indexIn(s);
+			QString colorStr;
+
+			if (colorInt>-1)
+				colorStr=colorRegExp.cap(1);
+			else
+				colorStr="#ffffff";
+
+			QColor infoColor(colorStr);
+			// inject a marker word in the infostring to mark end of header.
+			// In case no header exists, put it after the color tag (first closing brace).
+			int endHead=s.indexOf("</h2>")+5;
+			if (endHead==4)
+				endHead=s.indexOf(">")+1;
+			s.insert(endHead, QString("ENDHEAD<br/>"));
+			setHtml(s);
+			infoPixmap->setPixmap(getInfoPixmap(getSelectedText().split("\n"), this->font(), infoColor));
+			// setting visible=false would hide also the child QGraphicsPixmapItem...
+			setHtml("");
+			infoPixmap->setVisible(true);
+		}
 	}
 }
 

@@ -1,4 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% THIS FILE HAS BEEN MODIFIED FOR USE IN STELLARIUM
 % The Legrand Orange Book
 % Structural Definitions File
 % Version 2.0 (9/2/15)
@@ -18,7 +19,6 @@
 %----------------------------------------------------------------------------------------
 %	VARIOUS REQUIRED PACKAGES AND CONFIGURATIONS
 %----------------------------------------------------------------------------------------
-
 \usepackage[top=3cm,bottom=3cm,left=3cm,right=3cm,headsep=10pt,a4paper]{geometry} % Page margins
 
 \usepackage{graphicx} % Required for including pictures
@@ -39,8 +39,101 @@
 \usepackage{xcolor} % Required for specifying colors by name
 \definecolor{ocre}{RGB}{51,153,255} % Define the color used for highlighting throughout the book
 
-\usepackage{newunicodechar}
-\newunicodechar{°}{\degree}
+\usepackage{color}
+\usepackage{listings}
+
+%----------------------------------------------------------------------------------------
+%	NEW COMMANDS AND ADDITIONS
+%----------------------------------------------------------------------------------------
+
+% Emergency definition as this is not in MiKTeX.
+\makeatletter
+%\DeclareRobustCommand*
+\providecommand\textsubscript[1]{%
+  \@textsubscript{\selectfont#1}}
+\def\@textsubscript#1{%
+  {\m@th\ensuremath{_{\mbox{\fontsize\sf@size\z@#1}}}}}
+\makeatother
+
+
+%% GZ: some typesetting macros given here once are better than immediate formatting.
+
+%% File names. 
+\newcommand{\file}[1]{\texttt{#1}}
+%% Parameters.
+\newcommand{\parameter}[1]{\texttt{#1}}
+%% Map keys.
+\newcommand{\keymap}[1]{\texttt{#1}}
+%% console commands, CLI arguments, etc.
+\newcommand{\command}[1]{\texttt{#1}}
+
+\newcommand{\button}[1]{\textbf{\textsf{#1}}}% Will become a boxed text, representing a GUI button label.
+%% Person names. In some places they have been italicised, in others bold. Make them appear the same with this, and add them to the index:
+\newcommand{\name}[1]{\textsc{#1}\index{#1}}
+%% Some new term that is presented here with emphasis and also goes immediately to the index. 
+\newcommand{\indexterm}[1]{\emph{#1}\index{#1}}
+
+%% A command to show the version number when a feature was introduced in the margin. Give only the version number. TODO Decide on formatting etc.
+\newcommand{\newFeature}[1]{\marginpar{#1}}
+
+%% A few units. Add what you need in the same style here.
+\newcommand{\cm}{\ensuremath{\,\mathrm{cm}}}
+\newcommand{\mm}{\ensuremath{\,\mathrm{mm}}}
+\newcommand{\km}{\ensuremath{\,\mathrm{km}}}
+\newcommand{\um}{\ensuremath{\,\mathrm{\mu m}}}
+\newcommand{\AU}{\ensuremath{\,\mathrm{AU}}}
+\newcommand{\LY}{\ensuremath{\,\mathrm{LY}}}
+\newcommand{\pc}{\ensuremath{\,\mathrm{pc}}}
+\newcommand{\kpc}{\ensuremath{\,\mathrm{kpc}}}
+\newcommand{\Mpc}{\ensuremath{\,\mathrm{Mpc}}}
+\newcommand{\Hz}{\ensuremath{\,\mathrm{Hz}}}
+\newcommand{\MHz}{\ensuremath{\,\mathrm{MHz}}}
+\newcommand{\mJy}{\ensuremath{\,\mathrm{mJy}}}
+\newcommand{\kg}{\ensuremath{\,\mathrm{kg}}}
+\newcommand{\g}{\ensuremath{\,\mathrm{g}}}
+
+\lstnewenvironment{commands}{\lstset{language=sh,basicstyle=\ttfamily\small,%
+                                     backgroundcolor=\color{black!5},frame=leftline,rulecolor=\color{blue},framerule=1pt}%
+                             }{}%
+\lstnewenvironment{configfile}{\lstset{language=sh,basicstyle=\ttfamily\small,%
+                                   backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
+                             }{}%
+\lstnewenvironment{script}{\lstset{language=PHP,%
+								   basicstyle=\ttfamily\small,%
+                                   backgroundcolor=\color{black!5},%
+                                   frame=leftline,%
+                                   keepspaces=true,%
+                                   rulecolor=\color{blue},%
+                                   showstringspaces=false,
+								   keywordstyle=\bfseries\color{green!40!black},%
+                                   commentstyle=\itshape\color{purple!40!black},%
+                                   identifierstyle=\color{blue},%
+                                   stringstyle=\color{orange},%
+                                   framerule=1pt}%
+                             }{}%
+
+%% Allow chapter authors where this seems appropriate.
+%% From http://tex.stackexchange.com/questions/156862/displaying-author-for-each-chapter-in-book
+\usepackage{suffix}
+
+\newcommand\chapterauthor[1]{\authortoc{#1}\printchapterauthor{#1}}
+\WithSuffix\newcommand\chapterauthor*[1]{\printchapterauthor{#1}}
+
+\makeatletter
+\newcommand{\printchapterauthor}[1]{%
+  {\parindent0pt\vspace*{-25pt}%
+  \linespread{1.1}\large\scshape#1%
+  \par\nobreak\vspace*{35pt}}
+  \@afterheading%
+}
+\newcommand{\authortoc}[1]{%
+  \addtocontents{toc}{\vskip-10pt}%
+  \addtocontents{toc}{%
+    \protect\contentsline{chapter}%
+    {\hskip1.3em\mdseries\scshape\protect\scriptsize#1}{}{}}
+  \addtocontents{toc}{\vskip5pt}%
+}
+\makeatother
 
 %----------------------------------------------------------------------------------------
 %	FONTS
@@ -48,11 +141,13 @@
 
 \usepackage{avant} % Use the Avantgarde font for headings
 %\usepackage{times} % Use the Times font for headings
-\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Sym­bol, Chancery and Com­puter Modern fonts
+\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Symbol, Chancery and Computer Modern fonts
 
 \usepackage{microtype} % Slightly tweak font spacing for aesthetics
 \usepackage[utf8]{inputenc} % Required for including letters with accents
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{newunicodechar} % Must be loaded after [utf8]inputenc
+\newunicodechar{°}{\degree}
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY AND INDEX
@@ -380,6 +475,8 @@ innerbottommargin=5pt]{cBox}
 %	PART HEADINGS
 %----------------------------------------------------------------------------------------
 
+\newcommand{\StelTOCdepth}{1}% reset this to 0 before appendix!
+
 % numbered part in the table of contents
 \newcommand{\@mypartnumtocformat}[2]{%
 \setlength\fboxsep{0pt}%
@@ -410,8 +507,8 @@ innerbottommargin=5pt]{cBox}
 \node at (current page.north west){\begin{tikzpicture}[remember picture,overlay]%	
 \fill[ocre!20](0cm,0cm) rectangle (\paperwidth,-\paperheight);
 \node[anchor=north] at (4cm,-3.25cm){\color{ocre!40}\fontsize{220}{100}\sffamily\bfseries\@Roman\c@part}; 
-\node[anchor=south east] at (\paperwidth-1cm,-\paperheight+1cm){\parbox[t][][t]{8.5cm}{
-\printcontents{l}{0}{\setcounter{tocdepth}{1}}%
+\node[anchor=south east] at (\paperwidth-1cm,-\paperheight+1cm){\parbox[t][][t]{10.5cm}{% GZ: was 8.5cm, but Appendix has longer names.
+\printcontents{l}{0}{\setcounter{tocdepth}{\StelTOCdepth}}% %% GZ TODO: Make tocdepth0 for Appendix, 1 before.
 }};
 \node[anchor=north east] at (\paperwidth-1.5cm,-3.25cm){\parbox[t][][t]{15cm}{\strut\raggedleft\color{white}\fontsize{30}{30}\sffamily\bfseries#2}};
 \end{tikzpicture}};
@@ -491,9 +588,19 @@ innerbottommargin=5pt]{cBox}
 %----------------------------------------------------------------------------------------
 
 \usepackage{hyperref}
-%\hypersetup{hidelinks,backref=true,pagebackref=true,hyperindex=true,colorlinks=false,breaklinks=true,urlcolor= ocre,bookmarks=true,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
-%% GZ Maybe in some other style, but links should be visible. 
-\hypersetup{backref=true,pagebackref=true,hyperindex=true,colorlinks=true,breaklinks=true,urlcolor=blue,bookmarks=true,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
+\hypersetup{hidelinks,backref=true,pagebackref=true,hyperindex=true,colorlinks=false,breaklinks=true,urlcolor= ocre,
+            pdfpagemode=UseOutlines,bookmarks=true,bookmarksopen=true,%bookmarksopenlevel=1,bookmarksnumbered,
+            pdfview=Fit,pdfstartview=Fit,pdfpagelayout=TwoPageRight,
+            pdfduplex=DuplexFlipLongEdge,
+            pdfsubject={Stellarium is a multi-platform open-source desktop planetarium. This document describes version 0.15+ (2016)},
+            %pdfcreator={PDFLaTeX},
+            pdfproducer={Stellarium team}, 
+            pdfkeywords={Stellarium Manual}, 
+            pdftitle={Stellarium User Guide},pdfdisplaydoctitle=true,
+            pdfauthor={M. Gates, B. Gerdes, A. Wolf, G. Zotti}% 
+            }
+%% GZ TODO Maybe in some other style, but links should be visible. 
+%\hypersetup{backref=true,pagebackref=true,hyperindex=true,colorlinks=true,breaklinks=true,urlcolor=blue,bookmarks=true,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
 \usepackage{bookmark}
 \bookmarksetup{
 open,
@@ -507,3 +614,9 @@ addtohook={%
 \fi
 }
 }
+
+\usepackage[os=win]{menukeys}% For the menu, keycaps, etc. This reqiures the updated catoptions.sty.
+%% Keypress buttons. This is just a font change now, but can be a boxed key or such.
+%\newcommand{\key}[1]{\textbf{\textsf{\small #1}}}
+% Prefer using menukeys. 
+\newcommand{\key}[1]{\keys{#1}}
