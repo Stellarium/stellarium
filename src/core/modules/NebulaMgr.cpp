@@ -760,6 +760,21 @@ NebulaP NebulaMgr::searchCed(QString Ced)
 	return NebulaP();
 }
 
+QString NebulaMgr::getLatestSelectedDSODesignation()
+{
+	QString result = "";
+
+	const QList<StelObjectP> selected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Nebula");
+	if (!selected.empty())
+	{
+		foreach (const NebulaP& n, dsoArray)
+			if (n==selected[0])
+				result = n->getDSODesignation(); // Get designation for latest selected DSO
+	}
+
+	return result;
+}
+
 void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool decimal=false)
 {
 	QFile dsoIn(in);
@@ -1863,7 +1878,8 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	QStringList result;
 	if (maxNbItem==0) return result;
 
-	 QString objw = objPrefix.toUpper();
+	QString objw = objPrefix.toUpper();
+
 	// Search by Messier objects number (possible formats are "M31" or "M 31")
 	if (objw.size()>=1 && objw.left(1)=="M" && objw.left(2)!="ME")
 	{

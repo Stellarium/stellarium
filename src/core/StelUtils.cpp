@@ -686,7 +686,6 @@ QDateTime jdToQDateTime(const double& jd)
 	return result;
 }
 
-
 void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 {
 	/*

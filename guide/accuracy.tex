@@ -1,0 +1,50 @@
+%% Stellarium user guide.
+%% State: 2015-12 wiki->Guide. Was called Precision, but this is wrong.
+%% 2016-04 GZ Typofixes, made proper chapter from this. 
+%% TODO: (GZ) I am not sure about the 1-arcsecond accuracy of VSOP! More should be written with due diligence.
+
+%\chapterimage{chapter-t1-bg} % Chapter heading image
+
+
+\chapter{Accuracy}
+\label{ch:Accuracy}
+Stellarium uses the VSOP87
+method\footnote{\url{http://vizier.cfa.harvard.edu/viz-bin/ftp-index?/ftp/cats/VI/81}}
+to calculate the positions of the planets over time.
+
+As with other methods, the accuracy of the calculations vary according
+to the planet and the time for which one makes the calculation. Reasons
+for these inaccuracies include the fact that the motion of the planet
+isn't as predictable as Newtonian mechanics would have us believe.
+
+As far as Stellarium is concerned, the user should bear in mind the
+following properties of the VSOP87 method. Accuracy values here are
+positional as observed from Earth.
+
+\begin{longtabu} to \textwidth {X|l|X}
+\toprule
+\emph{Object(s)} & \emph{Method} & \emph{Notes}\tabularnewline
+\midrule
+Mercury, Venus, Earth-Moon barycenter, Mars & VSOP87 & Accuracy is 1 arc-second from 2000 B.C. -- 6000 A.D.\\
+\midrule
+Jupiter, Saturn                             & VSOP87 & Accuracy is 1 arc-second from 0 A.D. -- 4000 A.D.\\
+\midrule
+Uranus, Neptune                             & VSOP87 & Accuracy is 1 arc-second from 4000 B.C. -- 8000 A.D.\\
+\midrule
+Pluto                                       & ?      & Pluto's position is valid only from 1885 A.D. -- 2099 A.D.\\
+\midrule
+Earth's Moon                                & ELP2000-82B & Unsure about interval of validity or accuracy at time of writing. Possibly valid from 1828 A.D. to 2047 A.D.\\
+\midrule
+Galilean satellites                         & L2     & Valid from 500 A.D. -- 3500 A.D.\\
+\bottomrule
+\end{longtabu}
+
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-PDF-mode: t
+%%% TeX-master: "guide"
+%%% End: 
+

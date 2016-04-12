@@ -146,14 +146,14 @@ void TextUserInterface::init()
 	TuiNode* m1 = new TuiNode(N_("Location"));
 	TuiNode* m1_1 = new TuiNodeDouble(N_("Latitude:"),
 	                                  this, SLOT(setLatitude(double)),
-	                                  getLatitude(), -180, 180, 0.5, m1);
+					  getLatitude(), -90, 90, 0.5, m1);
 	TuiNode* m1_2 = new TuiNodeDouble(N_("Longitude:"),
 	                                  this, SLOT(setLongitude(double)),
 	                                  getLongitude(), -180, 180, 0.5, m1, m1_1);
 	TuiNode* m1_3 = new TuiNodeInt(N_("Altitude:"),
 	                               this, SLOT(setAltitude(int)),
 	                               core->getCurrentLocation().altitude,
-	                               -200, 200000, 100, m1, m1_2);
+				       -450, 200000, 100, m1, m1_2);
 	
 	// TODO: Now new Solar System bodies can be added at runtime, so the list
 	// needs to be populated every time this happens. --BM
@@ -660,7 +660,7 @@ void TextUserInterface::handleKeys(QKeyEvent* event)
 		return;
 	}
 
-	if (event->type()==QEvent::KeyPress && event->key()==Qt::Key_M)
+	if (event->type()==QEvent::KeyPress && (event->modifiers() & Qt::AltModifier) &&  event->key()==Qt::Key_T)
 	{
 		tuiActive = ! tuiActive;
 		dummyDialog.close();

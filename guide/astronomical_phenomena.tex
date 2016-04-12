@@ -1,72 +1,84 @@
-\chapterimage{chapter-t4-bg} % Chapter heading image
+%\chapterimage{chapter-t4-bg} % Chapter heading image (Now given in Master document)
+
+%% Part of Stellarium User Guide
+%% 2015-12 wiki->LaTeX
+%% 2016-04-05 GZ fixed Grammar/spelling, a few enhancements, updated labels.
+
 
 \chapter{Astronomical Phenomena}
+\chapterauthor*{Barry Gerdes, with additions by Georg Zotti}
+\label{ch:Phenomena}
 
 This chapter focuses on the observational side of astronomy --- what we
 see when we look at the sky.
 
-\section{The Sun}\label{the-sun}
+\section{The Sun}
+\label{sec:Phenomena:sun}
 
 Without a doubt, the most prominent object in the sky is the Sun. The
-Sun is so bright that when it is in the sky, it's light is scattered by
+Sun is so bright that when it is in the sky, its light is scattered by
 the atmosphere to such an extent that almost all other objects in the
 sky are rendered invisible.
 
-The Sun is a star like many others but it is much closer to the Earth at
-approximately 150 million kilometres. The next nearest star, Proxima
-Centuri is approximately 260,000 times further away from us than the
-Sun! The Sun is also known as \emph{Sol}, it's Latin name.
+The Sun is a star like many others but it is much closer to the Earth
+at approximately 150 million kilometres (a distance also called
+1~Astronomical Unit). The next nearest star, Proxima Centauri is
+approximately 260,000 times further away from us than the Sun! The Sun
+is also known by its Latin name, \emph{Sol}.
 
 Over the course of a year, the Sun appears to move round the celestial
 sphere in a great circle known as the \emph{ecliptic}. Stellarium can
 draw the ecliptic on the sky. To toggle drawing of the ecliptic, press
-the 4 or , key.
+the \key{,} key.
 
 \emph{WARNING: Looking at the Sun can permanently damage the eye. Never
 look at the Sun without using the proper filters! By far the safest way
 to observe the Sun it to look at it on a computer screen, courtesy of
 Stellarium!}
 
-\section{Stars}\label{stars}
+\section{Stars}
+\label{sec:Phenomena:stars}
 
 The Sun is just one of billions of stars. Even though many stars have a
-much greater absolute magnitude than the Sun (the give out more light),
+much greater absolute magnitude than the Sun (they give out more light),
 they have an enormously smaller apparent magnitude due to their large
 distance. Stars have a variety of forms --- different sizes,
 brightnesses, temperatures, and colours. Measuring the position,
 distance and attributes of the stars is known as \emph{astrometry}, and
 is a major part of observational astronomy.
 
-\subsection{Multiple Star Systems}\label{multiple-star-systems}
+\subsection{Multiple Star Systems}
+\label{sec:Phenomena:multipleStars}
 
-Many stars have a stellar companions. As many as six stars can be found
-orbiting one-another in close association. Such associations are known a
+Many stars have stellar companions. As many as six stars can be found
+orbiting one-another in close associations known as
 \emph{multiple star systems} --- \emph{binary systems} being the most
 common with two stars. Multiple star systems are more common than
 solitary stars, putting our Sun in the minority group.
 
-Sometimes multiple stars orbit one-another in a way that means one will
-periodically eclipse the other. These \emph{eclipsing binaries} or
+Sometimes multiple stars orbit each other in a way that means one will
+periodically eclipse the other. These are \emph{eclipsing binaries} or
 \emph{Algol variables}.
 
-\subsection{Optical Doubles \& Optical Multiples}\label{optical-doubles-optical-multiples}
+\subsubsection{Optical Doubles \& Optical Multiples}
+\label{sec:Phenomena:multipleStars:optical}
 
 Sometimes two or more stars appear to be very close to one another in
 the sky, but in fact have great separation, being aligned from the point
 of view of the observer but of different distances. Such pairings are
 known as \emph{optical doubles} and \emph{optical multiples}.
 
-\subsection{Constellations}\label{constellations}
+\subsection{Constellations}
+\label{sec:Phenomena:Constellations}
 
 The constellations are groupings of stars that are visually close to one
 another in the sky. The actual groupings are fairly arbitrary ---
-different cultures have group stars together into different
+different cultures have grouped stars together into different
 constellations. In many cultures, the various constellations have been
 associated with mythological entities. As such people have often
-projected pictures into the skies as can be seen in figure
-{[}fig:ursamajor{]} which shows the constellation of Ursa Major. On the
+projected pictures into the skies as can be seen in figure~\ref{fig:ursamajor} which shows the constellation of Ursa Major. On the
 left is a picture with the image of the mythical Great Bear, on the
-right only a line-art version is shown. The seven bright stars of Ursa
+right only a line-art version (or \emph{stick figure}) is shown. The seven bright stars of Ursa
 Major are widely recognised, known variously as ``the plough'', the
 ``pan-handle'', and the ``big dipper''. This sub-grouping is known as an
 \emph{asterism} --- a distinct grouping of stars. On the right, the
@@ -75,449 +87,102 @@ remains.
 
 \begin{figure}[h]
 \centering\includegraphics[scale=0.8]{uma}
-%\caption{Figure caption}
+\caption{Ursa Major}
+\label{fig:ursamajor}
 \end{figure}
+
 
 Stellarium can draw both constellation diagrams and artistic
 representations of the constellations. Multiple sky cultures are
-supported: Western, Polynesian, Egyptian and Chinese constellations are
+supported: Western, Polynesian, Egyptian, Chinese, and several other sky cultures are
 available, although at time of writing the non-Western constellations
 are not complete, and as yet there are no artistic representations of
 these sky-cultures.
 
 Aside from historical and mythological value, to the modern astronomer
-the constellations provide a way to segment the sky for the purposes of
-describing locations of objects, indeed one of the first tasks for an
-amateur observer is \emph{learning the constellations} --- the process
-of becoming familiar with the relative positions of the constellations,
-at what time of year a constellation is visible, and in which
-constellations observationally interesting objects reside.
-Internationally, astronomers have adopted the Western (Greek/Roman)
-constellations as a common system for segmenting the sky. As such some
-formalisation has been adopted, each constellation having a \emph{proper
-name}, which is in Latin, and a three letter abbreviation of that name.
-For example, Ursa Major has the abbreviation UMa.
+the constellations provide a way to segment the sky for the purposes
+of describing locations of objects, indeed one of the first tasks for
+an amateur observer is \emph{learning the constellations} --- the
+process of becoming familiar with the relative positions of the
+constellations, at what time of year a constellation is visible, and
+in which constellations observationally interesting objects reside.
+Internationally, astronomers have adopted 88 ``Western''
+constellations as a common system for segmenting the sky. They are
+based on Greek/Roman mythology, but with several additions from
+Renaissance and later centuries.  As such some formalisation has been
+adopted, each constellation having a \emph{proper name}, which is in
+Latin, and a three letter abbreviation of that name.  For example,
+Ursa Major has the abbreviation UMa. Also, each ``Western''
+constellation has clearly defined boundaries, which you can draw in
+Stellarium when you press the \key{B} key\footnote{These boundaries or
+  borders have been drawn using star maps from 1875. Due to the effect
+  of \emph{precession}, these borders are no longer parallel to
+  today's coordinates.}. On the other hand, the shapes of mythological
+figures, and also stick figures, have not been canonized, so you will
+find deviations between Stellarium and printed atlases.
 
-\subsection{Star Names}\label{star-names}
+\subsection{Star Names}
+\label{sec:Phenomena:StarNames}
 
 Stars can have many names. The brighter stars often have \emph{common
 names} relating to mythical characters from the various traditions. For
 example the brightest star in the sky, Sirius is also known as The Dog
 Star (the name Canis Major --- the constellation Sirius is found in ---
-is Latin for ``The Great Dog'').
+is Latin for ``The Great Dog''). 
+
+Most bright names have been given names in antiquity. \name{Ptolemy}'s most
+influential book, the \emph{Syntaxis}, was translated to the Arab
+language in the age of early Muslim scientists. When, centuries later,
+the translation, called \emph{Almagest}, was re-introduced to the
+re-awakening European science, those names, which often only designated
+the position of the star within the figure, were taken from the books,
+often misspelled, and used henceforth as proper names.
+
+A few more proper names have been added later, sometimes dedicatory
+names added by court astronomers into their maps. There are also 3
+stars named after the victims of the Apollo~1 disaster in 1967.
+Today, the International Astronomical Union (IAU) is the only
+scientifically accepted authority which can give proper names to
+stars. Some companies offer a paid name service for commemoration or
+dedication of a star for deceased relatives or such, but all you get
+here is a piece of paper with coordinates of (usually) an unremarkably
+dim star only visible in a telescope, and a name to remember, stored
+(at best) in the company's database.
 
 There are several more formal naming conventions that are in common use.
 
 \subsubsection{Bayer Designation}
-\label{sec:concept:Bayer}
+\label{sec:Phenomena:StarNames:Bayer}
 \index{Bayer}
 
-German astronomer \emph{Johann Bayer} devised one such system in the
-16-17th century. His scheme names the stars according to the
-constellation in which they lie prefixed by a lower case Greek letter,
-starting at $\alpha$ for (usually) the brightest star in the constellation and proceeding with $\beta, \gamma, ...$ in descending order of apparent magnitude. For example,
-such a \emph{Bayer Designation} for Sirius is ``$\alpha$ Canis Majoris'' (note
-that the genitive form of the constellation name is used). There are
-some exceptions to the descending magnitude ordering, and some multiple
-stars (both real and optical) are named with a numerical superscript
-after the Greek letter, e.g. $\pi$\textsuperscript{1}...
-$\pi$\textsuperscript{6} Orionis.
+German astronomer \name{Johann Bayer} devised one such system for his
+atlas, the \emph{Uranographia}, first published in 1603. His scheme
+names the stars according to the constellation in which they lie
+prefixed by a lower case Greek letter, starting at $\alpha$ for
+(usually) the brightest star in the constellation and proceeding with
+$\beta, \gamma, \ldots$ in descending order of apparent magnitude. For
+example, such a \emph{Bayer Designation} for Sirius is ``$\alpha$
+Canis Majoris'' (note that the genitive form of the constellation name
+is used; today also the short form $\alpha$ CMa is in use). There are
+some exceptions to the descending magnitude ordering, and some
+multiple stars (both real and optical) are named with a numerical
+superscript after the Greek letter, e.g.\ $\pi^1$...  $\pi^6$ Orionis.
 
 \subsubsection{Flamsteed Designation}
-\label{sec:concepts:Flamsteed}
+\label{sec:Phenomena:StarNames:Flamsteed}
 \index{Flamsteed}
 
-English astronomer \emph{John Flamsteed} numbered stars in each
-constellation in order of increasing right ascension followed by the
-form of the constellation name, for example ``61 Cygni''.
-
-\subsubsection{Catalogues}\label{catalogues}
-
-As described in section \href{Star_Catalogue}{star catalogue}, various
-star catalogues assign numbers to stars, which are often used in
-addition to other names. Stellarium gets it's star data from the
-Hipparcos catalogue, and as such stars in Stellarium are generally
-referred to with their Hipparcos number, e.g. ``HP 62223''. Figure
-{[}fig:starnames{]} shows the information Stellarium displays when a
-star is selected. At the top, the common name and Flamsteed designation
-are shown, followed by the RA/Dec coordinates, apparent magnitude,
-distance and Hipparcos number.
-
-\begin{figure}[h]
-\centering\includegraphics{names}
-%\caption{Figure caption}
-\end{figure}
-
-\subsection{Spectral Type \& Luminosity
-Class}\label{spectral-type-luminosity-class}
-
-Stars have many different colours. Seen with the naked eye most appear
-to be white, but this is due to the response of the eye --- at low light
-levels the eye is not sensitive to colour. Typically the unaided eye can
-start to see differences in colour only for stars that have apparent
-magnitude brighter than 1. Betelgeuse, for example has a distinctly red
-tinge to it, and Sirius appears to be blue.
-
-By splitting the light from a star using a prism attached to a telescope
-and measuring the relative intensities of the colours of light the star
-emits --- the \emph{spectra} --- a great deal of interesting information
-can be discovered about a star including its surface temperature, and
-the presence of various elements in its atmosphere.
-
-\begin{longtable}[c]{@{}lll@{}}
-\toprule
-Spectral Type & Surface Temperature ($\degree$K) & Star Colour\tabularnewline
-O & 28,000---50,000 & Blue\tabularnewline
-B & 10,000---28,000 & Blue-white\tabularnewline
-A & 7,500---10,000 & White-blue\tabularnewline
-F & 6,000---7,500 & Yellow-white\tabularnewline
-G & 4,900---6,000 & Yellow\tabularnewline
-K & 3,500---4,900 & Orange\tabularnewline
-M & 2,000---3,500 & Red\tabularnewline
-\bottomrule
-\end{longtable}
-
-Astronomers groups stars with similar spectra into \emph{spectral
-types}, denoted by one of the following letters: O, B, A, F, G, K and M.
-Type O stars have a high surface temperature (up to around 50,000$\degree$K)
-while the at other end of the scale, the M stars are red and have a much
-cooler surface temperature, typically 3000$\degree$K. The Sun is a type G star with a surface temperature of around 5,500$\degree$K. Spectral types may be further sub-divided using a numerical suffixes ranging from 0-9 where 0 is the hottest and 9 is the coolest. Table {[}fig:spectraltype{]} shows the details of the various spectral types.
-
-For about 90\% of stars, the absolute magnitude increases as the
-spectral type tends to the O (hot) end of the scale. Thus the whiter,
-hotter stars tend to have a greater luminosity. These stars are called
-\emph{main sequence} stars. There are however a number of stars that
-have spectral type at the M end of the scale, and yet they have a high
-absolute magnitude. These stars have a very large size, and consequently
-are known as \emph{giants}, the largest of these known as
-\emph{super-giants}.
-
-There are also stars whose absolute magnitude is very low regardless of
-the spectral class. These are known as \emph{dwarf stars}, among them
-\emph{white dwarfs} and \emph{brown dwarfs}.
-
-A \emph{luminosity class} is an indication of the type of star ---
-whether it is main sequence, a giant or a dwarf. Luminosity classes are
-denoted by a number in roman numerals, as described in table
-{[}fig:luminosityclass{]}.
-
-\begin{longtable}[c]{@{}ll@{}}
-\toprule
-\emph{Luminosity class} & \emph{Description}\tabularnewline
-Ia, Ib & Super-giants\tabularnewline
-II & Bright giants\tabularnewline
-III & Normal giants\tabularnewline
-IV & Sub-giants\tabularnewline
-V & Main sequence\tabularnewline
-VI & Sub-dwarfs\tabularnewline
-VII & White-dwarfs\tabularnewline
-\bottomrule
-\end{longtable}
-
-Plotting the luminosity of stars against their spectral type/surface
-temperature, gives a diagram called a Hertzsprung-Russell diagram (after
-the two astronomers \emph{Ejnar Hertzsprung} and \emph{Henry Norris
-Russell} who devised it). A slight variation of this is shown in figure~\ref{fig:colourmag} (which is technically a colour/magnitude plot).
-
-\begin{figure}[tp]
-\centering\includegraphics[width=\textwidth]{colour_magnitude_graph}
-\label{fig:colourmag}
-\caption{Hertzsprung-Russell Diagram}
-\end{figure}
-
-\subsection{Variables}\label{variables}
-
-Most stars are of nearly constant luminosity. The Sun is a good example
-of one which goes through relatively little variation in brightness
-(usually about 0.1\% over an 11 year solar cycle). Many stars, however,
-undergo significant variations in luminosity, and these are known as
-\emph{variable stars}. There are many types of variable stars falling
-into two categories \emph{intrinsic} and \emph{extrinsic}.
-
-Intrinsic variables are stars which have intrinsic variations in
-brightness, that is the star itself gets brighter and dimmer. There are
-several types of intrinsic variables, probably the best-known and more
-important of which is the Cepheid variable whose luminosity is related
-to the period with which it's brightness varies. Since the luminosity
-(and therefore absolute magnitude) can be calculated, Cepheid variables
-may be used to determine the distance of the star when the annual
-parallax is too small to be a reliable guide.
-
-Extrinsic variables are stars of constant brightness that show changes
-in brightness as seen from the Earth. These include rotating variables,
-or stars whose apparent brightness change due to rotation, and eclipsing
-binaries.
-
-\section{Our Moon}\label{our-moon}
-
-The Moon is the large satellite which orbits the Earth approximately
-every 28 days. It is seen as a large bright disc in the early night sky
-that rises later each day and changes shape into a crescent until it
-disappears near the Sun. After this it rises during the day then gets
-larger until it again becomes a large bright disc again.
-
-\subsection{Phases of the Moon}\label{phases-of-the-moon}
-
-As the moon moves round its orbit, the amount that is illuminated by the
-sun as seen from a vantage point on Earth changes. The result of this is
-that approximately once per orbit, the moon's face gradually changes
-from being totally in shadow to being fully illuminated and back to
-being in shadow again. This process is divided up into various phases as
-described in table {[}tab:moonphases{]}.
-
-\section{The Major Planets}\label{the-major-planets}
-
-Unlike the stars whose relative positions remain more or less constant,
-the planets seem to move across the sky over time (the word ``planet''
-comes from the Greek for ``wanderer''). The planets are, like the Earth,
-massive bodies that are in orbit around the Sun. Until 2006 there was no
-formal definition of a planet leading to some confusion about the
-classification for some bodies widely regarded as being planets, but
-which didn't seem to fit with the others.
-
-In 2006 the International Astronomical Union defined a planet as a
-celestial body that, within the Solar System:
-
-\begin{enumerate}
-\item
-  is in orbit around the Sun
-\item
-  has sufficient mass for its self-gravity to overcome rigid body forces
-  so that it assumes a hydrostatic equilibrium (nearly round) shape; and
-\item
-  has cleared the neighbourhood around its orbit
-\end{enumerate}
-
-or within another system:
-
-\begin{enumerate}
-\item
-  is in orbit around a star or stellar remnants
-\item
-  has a mass below the limiting mass for thermonuclear fusion of
-  deuterium; and
-\item
-  is above the minimum mass/size requirement for planetary status in the
-  Solar System.
-\end{enumerate}
-
-Moving from the Sun outwards, the major planets are: Mercury, Venus,
-Earth, Mars, Jupiter, Saturn, Uranus and Neptune. Since the formal
-definition of a planet in 2006 Pluto has been relegated to having the
-status of \emph{dwarf planet} along with bodies such as Ceres and Eris.
-See figure
-
-\subsection{Terrestrial Planets}\label{terrestrial-planets}
-
-The planets closest to the sun are called collectively the
-\emph{terrestrial} planets. The terrestrial planets are: Mercury, Venus,
-Earth and Mars.
-
-The terrestrial planets are relatively small, comparatively dense, and
-have solid rocky surface. Most of their mass is made from solid matter,
-which is mostly rocky and/or metallic in nature.
-
-\subsection{Jovian Planets}\label{jovian-planets}
-
-Jupiter, Saturn, Uranus and Neptune make up the Jovian planets. They are
-much more massive than the terrestrial planets, and do not have a solid
-surface. Jupiter is the largest of all the planets with a mass over 300
-times that of the Earth!
-
-The Jovian planets do not have a solid surface - the vast majority of
-their mass being in gaseous form (although they may have rocky or
-metallic cores). Because of this, they have an average density which is
-much less than the terrestrial planets. Saturn's mean density is only
-about 0.7 g/cm\textsuperscript{3} - it would float in water!
-
-\section{The Minor Planets}\label{the-minor-planets}
-
-As well as the Major Planets, the solar system also contains innumerable
-smaller bodies in orbit around the Sun. These are generally classed as
-the \emph{minor planets}, or \emph{planetoids}, and include
-\emph{asteroids}, and {[}sometimes?{]} comets.
-
-\subsection{Asteroids}\label{asteroids}
-
-Asteroids are celestial bodies orbiting the Sun in more or less regular
-orbits mostly between Mars and Jupiter. They are generally rocky bodies
-like the inner (terrestrial) planets, but of much smaller size. There
-are countless in number ranging in size from about ten meters to
-thousands of kilometres.
-
-\subsection{Comets}\label{comets}
-
-A comet is a small body in the solar system that orbits the Sun and (at
-least occasionally) exhibits a coma (or atmosphere) and/or a tail.
-
-Comets have a very eccentric orbit (very elliptical), and as such spend
-most of their time a very long way from the Sun. Comets are composed of
-rock, dust and ices. When they come close to the Sun, the heat
-evaporates the ices, causing a gaseous release. This gas, and loose
-material which comes away from the body of the comet is swept away from
-the Sun by the Solar wind, forming the tail.
-
-Comets whose orbit brings them close to the Sun more frequently than
-every 200 years are considered to be \emph{short period} comets, the
-most famous of which is probably Comet Halley, named after the British
-astronomer Edmund Halley, which has an orbital period of roughly 76
-years.
-
-\section{Galaxies}\label{galaxies}
-
-Stars, it seems, are gregarious - they like to live together in groups.
-These groups are called galaxies. The number of stars in a typical
-galaxy is literally astronomical - many \emph{billions} - sometimes ever
-\emph{hundreds of billions} of stars!
-
-Our own star, the sun, is part of a galaxy. When we look up at the night
-sky, all the stars we can see are in the same galaxy. We call our own
-galaxy the Milky Way (or sometimes simply ``the Galaxy'').
-
-Other galaxies appear in the sky as dim fuzzy blobs. Only four are
-normally visible to the naked eye. The Andromeda galaxy (M31) visible in
-the Northern hemisphere, the two Magellanic clouds, visible in the
-Southern hemisphere, and the home galaxy Milky Way, visible in parts
-from north and south under dark skies.
-
-There are thought to be billions of galaxies in the universe comprised
-of an unimaginably large number of stars.
-
-The vast majority of galaxies are so far away that they are very dim,
-and cannot be seen without large telescopes, but there are dozens of
-galaxies which may be observed in medium to large sized amateur
-instruments. Stellarium includes images of many galaxies, including the
-Andromeda galaxy (M31), the Pinwheel Galaxy (M101), the Sombrero Galaxy
-(M104) and many others.
-
-Astronomers classify galaxies according to their appearance. Some
-classifications include \emph{spiral galaxies}, \emph{elliptical
-galaxies}, \emph{lenticular galaxies} and \emph{irregular galaxies}.
-
-\section{The Milky Way}\label{the-milky-way}
-
-It's a little hard to work out what our galaxy would look like from far
-away, because when we look up at the night sky, we are seeing it from
-the inside. All the stars we can see are part of the Milky Way, and we
-can see them in every direction. However, there is some structure. There
-is a higher density of stars in particular places.
-
-There is a band of very dense stars running right round the sky in huge
-irregular stripe. Most of these stars are very dim, but the overall
-effect is that on very dark clear nights we can see a large, beautiful
-area of diffuse light in the sky. It is this for which we name our
-galaxy.
-
-The reason for this effect is that our galaxy is somewhat like a disc,
-and we are off to one side. Thus when we look towards the centre of the
-disc, we see more a great concentration of stars (there are more star in
-that direction). As we look out away from the centre of the disc we see
-fewer stars - we are staring out into the void between galaxies!
-
-\section{Nebulae}\label{nebulae}
-
-Seen with the naked eye, binoculars or a small telescope, a
-\emph{nebula} (plural \emph{nebulae}) are fuzzy patches on the sky.
-Historically, the term referred to any extended object, but the modern
-definition excludes some types of object such as galaxies.
-
-Observationally, nebulae are popular objects for amateur astronomers -
-they exhibit complex structure, spectacular colours and a wide variety
-of forms. Many nebulae are bright enough to be seen using good
-binoculars or small to medium sized telescopes, and are a very
-photogenic subject for astro-photographers.
-
-Nebulae are associated with a variety of phenomena, some being clouds of
-interstellar dust and gas in the process of collapsing under gravity,
-some being envelopes of gas thrown off during a supernova event (so
-called \emph{supernova remnants}), yet others being the remnants of
-solar systems around dead stars (\emph{planetary nebulae}).
-
-Examples of nebulae for which Stellarium has images include the Crab
-Nebula (M1), which is a supernova remnant and the Dumbbell Nebula (M27)
-which is a planetary nebula.
-
-\section{Meteoroids}\label{meteoroids}
-
-These objects are small pieces of space debris left over from the early
-days of the solar system that orbit the Sun. They come in a variety of
-shapes, sizes an compositions, ranging from microscopic dust particles
-up to about ten meters across.
-
-Sometimes these objects collide with the Earth. The closing speed of
-these collisions is generally extremely high (tens or kilometres per
-second). When such an object ploughs through the Earth's atmosphere, a
-large amount of kinetic energy is converted into heat and light, and a
-visible flash or streak can often be seen with the naked eye. Even the
-smallest particles can cause these events which are commonly known as
-\emph{shooting stars}.
-
-While smaller objects tend to burn up in the atmosphere, larger, denser
-objects can penetrate the atmosphere and strike the surface of the
-planet, sometimes leaving meteor craters.
-
-Sometimes the angle of the collision means that larger objects pass
-through the atmosphere but do not strike the Earth. When this happens,
-spectacular fireballs are sometimes seen.
-
-\emph{Meteoroids} is the name given to such objects when they are
-floating in space.
-
-A \emph{Meteor} is the name given to the visible atmospheric phenomenon.
-
-\emph{Meteorites} is the name given to objects that penetrate the
-atmosphere and land on the surface.
-
-\section{Eclipses}\label{eclipses}
-
-Eclipses occur when an apparently large celestial body (planet, moon
-etc.) moves between the observer (that's you!) and a more distant object
-- the more distant object being eclipsed by the nearer one.
-
-\subsection{Solar Eclipses}\label{solar-eclipses}
-
-Solar eclipses occur when our Moon moves between the Earth and the Sun.
-This happens when the inclined orbit of the Moon causes its path to
-cross our line of sight to the Sun. In essence it is the observer
-falling under the shadow of the moon.
-
-There are three types of solar eclipses:
-
-\textbf{Partial} The Moon only covers part of the Sun's surface.
-
-\textbf{Total} The Moon completely obscures the Sun's surface.
-
-\textbf{Annular} The Moon is at aphelion (furthest from Earth in its
-elliptic orbit) and its disc is too small to completely cover the Sun.
-In this case most of the Sun's disc is obscured - all except a thin ring
-around the edge.
-
-\subsection{Lunar Eclipses}\label{lunar-eclipses}
-
-Lunar eclipses occur when the Earth moves between the Sun and the Moon,
-and the Moon is in the Earth's shadow. They occur under the same basic
-conditions as the solar eclipse but can occur more often because the
-Earth's shadow is so much larger than the Moon's.
-
-Total lunar eclipses are more noticeable than partial eclipses because
-the Moon moves fully into the Earth's shadow and there is very
-noticeable darkening. However, the Earth's atmosphere refracts light
-(bends it) in such a way that some sunlight can still fall on the Moon's
-surface even during total eclipses. In this case there is often a marked
-reddening of the light as it passes through the atmosphere, and this can
-make the Moon appear a deep red colour.
-
-\section{Catalogues}\label{catalogues-1}
-
-Astronomers have made various catalogues of objects in the heavens.
-Stellarium makes use of several well known astronomical catalogues.
-
-\subsection{Hipparcos}\label{hipparcos}
+English astronomer \name{John Flamsteed} numbered stars in each
+constellation in order of increasing right ascension followed by the genitive
+form of the constellation name, for example ``61 Cygni'' (or short: ``61 Cyg'').
+
+\subsubsection{Hipparcos}
+\label{sec:Phenomena:StarNames:Hipparcos}
 
 Hipparcos (for High Precision Parallax Collecting Satellite) was an
 astrometry mission of the European Space Agency (ESA) dedicated to the
 measurement of stellar parallax and the proper motions of stars. The
-project was named in honour of the Greek astronomer Hipparchus.
+project was named in honour of the Greek astronomer \name{Hipparchus}.
 
 Ideas for such a mission dated from 1967, with the mission accepted by
 ESA in 1980. The satellite was launched by an Ariane 4 on 8 August 1989.
@@ -554,15 +219,391 @@ traditional names for many of the brighter stars. The stars tab of the
 search window allows for searching based on a Hipparcos Catalogue number
 (as well as traditional names), e.g. the star Sadalmelik in the
 constellation of Aquarius can be found by searching for the name, or
-it's Hipparcos number, 109074.
+its Hipparcos number, 109074.
 
-\subsection{The Messier Objects}\label{the-messier-objects}
+%
+%\subsubsection{Catalogues}
+%\label{sec:Phenomena:StarNames:Catalogues}
+%
+%As described in section~\ref{ch:Catalogues}, various star
+%catalogues assign numbers to stars, which are often used in addition
+%to other names. Stellarium gets its star data from the Hipparcos
+%catalogue, and as such stars in Stellarium are generally referred to
+%with their Hipparcos number,
+%e.g.\ ``HIP~62223''. 
+
+Figure~\ref{fig:starnames} shows the information
+Stellarium displays when a star is selected. At the top, the common
+name, Bayer/Flamsteed designations and Hipparcos number are shown,
+followed by the RA/Dec coordinates, apparent magnitude, distance and
+other data.
+
+\begin{figure}[h]
+\centering\includegraphics{names}
+\caption{Star Names and Data}
+\label{fig:starnames}
+\end{figure}
+
+\subsection{Spectral Type \& Luminosity Class}
+\label{sec:Phenomena:SpectralTypeLuminosityClass}
+
+Stars have many different colours. Seen with the naked eye most appear
+to be white, but this is due to the response of the eye --- at low
+light levels the eye is not sensitive to colour. Typically the unaided
+eye can start to see differences in colour only for stars that have
+apparent magnitude brighter than 1. Betelgeuse, for example has a
+distinctly red tinge to it, and Sirius appears to be blue, while Vega
+is the prototype ``white'' star.
+
+By splitting the light from a star using a prism attached to a telescope
+and measuring the relative intensities of the colours of light the star
+emits --- the \emph{spectrum} --- a great deal of interesting information
+can be discovered about a star including its surface temperature, and
+the presence of various elements in its atmosphere.
+
+\begin{longtable}[c]{lll}
+\toprule
+Spectral Type & Surface Temperature (K) & Star Colour\\
+O & 28,000---50,000 & Blue\\
+B & 10,000---28,000 & Blue-white\\
+A & 7,500---10,000 & White-blue\\
+F & 6,000---7,500 & Yellow-white\\
+G & 4,900---6,000 & Yellow\\
+K & 3,500---4,900 & Orange\\
+M & 2,000---3,500 & Red\\
+\bottomrule
+\caption{Spectral Types}
+\label{tab:spectraltype}
+\end{longtable}
+
+Astronomers groups stars with similar spectra into \emph{spectral
+  types}, denoted by one of the following letters: O, B, A, F, G, K
+and M.\footnote{The classic mnemonic for students of astrophysics
+  says: ``Oh, Be A Fine Girl, Kiss Me''.}  Type O stars have a high
+surface temperature (up to around 50,000~K) while the at other end of
+the scale, the M stars are red and have a much cooler surface
+temperature, typically 3000~K. The Sun is a type G star with a surface
+temperature of around 5,500~K. Spectral types may be further
+sub-divided using a numerical suffix ranging from 0-9 where 0 is the
+hottest and 9 is the coolest. Table~\ref{tab:spectraltype} shows the
+details of the various spectral types.
+
+For about 90\% of stars, the absolute magnitude increases as the
+spectral type tends to the O (hot) end of the scale. Thus the whiter,
+hotter stars tend to have a greater luminosity. These stars are called
+\emph{main sequence} stars. There are however a number of stars that
+have spectral type at the M end of the scale, and yet they have a high
+absolute magnitude. These stars are close to the ends of their lives
+and have a very large size, and consequently are known as
+\emph{giants}, the largest of these known as \emph{super-giants}.
+
+There are also stars whose absolute magnitude is very low regardless
+of the spectral class. These are known as \emph{dwarf stars}, among
+them \emph{white dwarfs} (dying stars) and \emph{brown dwarfs}
+(``failed stars'').
+
+The \emph{luminosity class} is an indication of the type of star ---
+whether it is main sequence, a giant or a dwarf. Luminosity classes are
+denoted by a number in roman numerals, as described in table~\ref{tab:luminosityclass}.
+
+\begin{longtable}[c]{ll}
+\toprule
+\emph{Luminosity class} & \emph{Description}\\
+Ia, Ib & Super-giants\\
+II     & Bright giants\\
+III    & Normal giants\\
+IV     & Sub-giants\\
+V      & Main sequence\\
+VI     & Sub-dwarfs\\
+VII    & White-dwarfs\\
+\bottomrule
+\caption{Luminosity Classification}
+\label{tab:luminosityclass}
+\end{longtable}
+
+Plotting the luminosity of stars against their spectral type/surface
+temperature gives a diagram called a Hertzsprung-Russell diagram (after
+the two astronomers \name{Ejnar Hertzsprung} and \name{Henry Norris
+Russell} who devised it). A slight variation of this is shown in figure~\ref{fig:colourmag} (which is technically a colour/magnitude plot).
+
+\begin{figure}[tp]
+\centering\includegraphics[width=\textwidth]{colour_magnitude_graph}
+\caption{Hertzsprung-Russell Diagram}
+\label{fig:colourmag}
+\end{figure}
+
+\subsection{Variable Stars}
+\label{sec:Phenomena:variableStars}
+
+Most stars are of nearly constant luminosity. The Sun is a good example
+of one which goes through relatively little variation in brightness
+(usually about 0.1\% over an 11 year solar cycle). Many stars, however,
+undergo significant variations in luminosity, and these are known as
+\emph{variable stars}. There are many types of variable stars falling
+into two categories, \emph{intrinsic} and \emph{extrinsic}.
+
+Intrinsic variables are stars which have intrinsic variations in
+brightness, that is, the star itself gets brighter and dimmer. There
+are several types of intrinsic variables, probably the best-known and
+most important of which is the Cepheid variable whose luminosity is
+related to the period with which its brightness varies. Since the
+luminosity (and therefore absolute magnitude) can be calculated,
+Cepheid variables may be used to determine the distance of the star
+when the annual parallax is too small to be a reliable guide. This is
+especially welcome because they are giant stars, and so they are even
+visible in neighboring galaxies.
+
+Extrinsic variables are stars of constant brightness that show changes
+in brightness as seen from the Earth. These include rotating variables,
+stars whose apparent brightness change due to rotation, and eclipsing
+binaries.
+
+\section{Our Moon}
+\label{sec:Moon}
+
+The Moon is the large satellite which orbits the Earth approximately
+every 28 days. It is seen as a large bright disc in the early night sky
+that rises later each day and changes shape into a crescent until it
+disappears near the Sun. After this it rises during the day then gets
+larger until it again becomes a large bright disc again.
+
+\subsection{Phases of the Moon}
+\label{sec:Moon:Phases}
+
+As the moon moves round its orbit, the amount that is illuminated by the
+sun as seen from a vantage point on Earth changes. The result of this is
+that approximately once per orbit, the moon's face gradually changes
+from being totally in shadow to being fully illuminated and back to
+being in shadow again. This process is divided up into various phases as
+described in table~\ref{tab:moonphases}.
+
+\begin{longtabu} to \textwidth {l|X}
+\toprule
+New Moon&The moon's disc is fully in shadow, or there is just a slither of illuminated surface on the edge.\\
+Waxing Crescent& Less than half the disc is illuminated, but more is illuminated each night.\\
+First Quarter& Approximately half the disc is illuminated, and increasing each night.\\
+Waxing Gibbous& More than half of the disc is illuminated, and still increasing each night.\\
+Full Moon& The whole disc of the moon is illuminated.\\
+Waning Gibbous& More than half of the disc is illuminated, but the amount gets smaller each night.\\
+Last Quarter & Approximately half the disc is illuminated, but this gets less each night.\\
+Waning Crescent& Less than half the disc of the moon is illuminated, and this gets less each night.\\
+\bottomrule
+\caption{Lunar Phases}
+\label{tab:moonphases}
+\end{longtabu}
+
+
+\section{The Major Planets}
+\label{sec:Planets}
+
+Unlike the stars whose relative positions remain more or less constant,
+the planets seem to move across the sky over time (the word ``planet''
+comes from the Greek for ``wanderer''). The planets are siblings of the Earth,
+massive bodies that are in orbit around the Sun. Until 2006 there was no
+formal definition of a planet, leading to some confusion about the
+classification for some bodies traditionally regarded as being planets, but
+which didn't seem to fit with the others.
+
+In 2006 the International Astronomical Union defined a planet as a
+celestial body that, within the Solar System:
+
+\begin{enumerate}
+\item
+  is in orbit around the Sun
+\item
+  has sufficient mass for its self-gravity to overcome rigid body forces
+  so that it assumes a hydrostatic equilibrium (nearly round) shape; and
+\item
+  has cleared the neighbourhood around its orbit
+\end{enumerate}
+
+or within another system:
+
+\begin{enumerate}
+\item
+  is in orbit around a star or stellar remnants
+\item
+  has a mass below the limiting mass for thermonuclear fusion of
+  deuterium; and
+\item
+  is above the minimum mass/size requirement for planetary status in the
+  Solar System.
+\end{enumerate}
+
+Moving from the Sun outwards, the 8 major planets are: Mercury, Venus,
+Earth, Mars, Jupiter, Saturn, Uranus and Neptune. Since the formal
+definition of a planet in 2006 Pluto has been relegated to having the
+status of \emph{dwarf planet}, along with bodies such as Ceres and Eris.
+See figure~\ref{fig:planets}.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.9\linewidth]{pictures/the_planets.jpg}
+  \caption{The Planets}
+  \label{fig:planets}
+\end{figure}
+
+
+\subsection{Terrestrial Planets}%\label{terrestrial-planets}
+
+The planets closest to the sun are called collectively the
+\emph{terrestrial planets}. The terrestrial planets are: Mercury, Venus,
+Earth and Mars.
+
+The terrestrial planets are relatively small, comparatively dense, and
+have solid rocky surface. Most of their mass is made from solid matter,
+which is mostly rocky and/or metallic in nature.
+
+\subsection{Jovian Planets}%\label{jovian-planets}
+
+Jupiter, Saturn, Uranus and Neptune make up the \emph{Jovian planets},
+also called \emph{gas giants}. They are much more massive than the
+terrestrial planets, and do not have a solid surface. Jupiter is the
+largest of all the planets with a diameter of about 12, and mass over
+300 times that of the Earth!
+
+The Jovian planets do not have a solid surface -- the vast majority of
+their mass being in gaseous form (although they may have rocky or
+metallic cores). Because of this, they have an average density which is
+much less than the terrestrial planets. Saturn's mean density is only
+about $0.7 \g/\cm^3$ -- it would float in water!
+
+\section{The Minor Bodies}%\label{the-minor-planets}
+
+As well as the Major Planets, the solar system also contains
+innumerable smaller bodies in orbit around the Sun. These are
+generally the \emph{dwarf planets} (Ceres, Pluto, Eris), the other
+\emph{minor planets}, also known as \emph{planetoids} or
+\emph{asteroids}, and comets.
+
+\subsection{Asteroids}
+\label{sec:Phenomena:Asteroids}
+
+Asteroids are celestial bodies orbiting the Sun in more or less regular
+orbits mostly between Mars and Jupiter. They are generally rocky bodies
+like the inner (terrestrial) planets, but of much smaller size. They
+are countless in number ranging in size from about ten meters to
+hundreds of kilometres.
+
+\subsection{Comets}
+\label{sec:Phenomena:Comets}
+
+A comet is a small body in the solar system that orbits the Sun and (at
+least occasionally) exhibits a coma (or atmosphere) and/or a tail.
+
+Most comets have a very eccentric orbit (featuring a highly flattened
+ellipse, or even a parabolic track), and as such spend most of their
+time a very long way from the Sun. Comets are composed of rock, dust
+and ices. When they come close to the Sun, the heat evaporates the
+ices, causing a gaseous release. This gas and loose material which
+comes away from the body of the comet is swept away from the Sun by
+the Solar wind, forming the tail.
+
+Most larger comets exhibit two kinds of tail: a straight gas tail
+(often blue-green in photographs), and a wider, occasionally curved
+dust tail (reflecting whitish sunlight).
+
+Comets whose orbit brings them close to the Sun more frequently than
+every 200 years are considered to be \emph{short period} comets, the
+most famous of which is probably Comet Halley, named after the British
+astronomer \name{Edmund Halley}, which has an orbital period of
+roughly 76~years.
+
+\section{Meteoroids}\label{meteoroids}
+
+These objects are small pieces of space debris left over from the early
+days of the solar system that orbit the Sun. They come in a variety of
+shapes, sizes an compositions, ranging from microscopic dust particles
+up to about ten meters across.
+
+Sometimes these objects collide with the Earth. The closing speed of
+these collisions is generally extremely high (tens of kilometres per
+second). When such an object ploughs through the Earth's atmosphere, a
+large amount of kinetic energy is converted into heat and light, and a
+visible flash or streak can often be seen with the naked eye. Even the
+smallest particles can cause these events which are commonly known as
+\emph{shooting stars}.
+
+While smaller objects tend to burn up in the atmosphere, larger, denser
+objects can penetrate the atmosphere and strike the surface of the
+planet, sometimes leaving meteor craters.
+
+Sometimes the angle of the collision means that larger objects pass
+through the atmosphere but do not strike the Earth. When this happens,
+spectacular fireballs are sometimes seen.
+
+\emph{Meteoroids} is the name given to such objects when they are
+floating in space.
+
+A \emph{Meteor} is the name given to the visible atmospheric phenomenon.
+
+\emph{Meteorites} is the name given to objects that penetrate the
+atmosphere and land on the surface.
+
+In some nights over the year you can observe increased meteorite
+activity. Those meteors seem to come from a certain point in the sky,
+the \emph{Radiant}. But what we see is similar to driving through a
+mosquito swarm which all seem to come head-on. Earth itself moves
+through space, and sweeps up a dense cloud of particles which
+originates from a comet's tail. Stellarium's Meteor Shower plugin (see
+section~\ref{sec:Plugin:MeteorShowers}) can help you planning your next
+meteor observing night.
+
+
+\section{The Milky Way}
+\label{sec:Phenomena:MilkyWay}
+
+There is a band of very dense stars running right round the sky in huge
+irregular stripe. Most of these stars are very dim, but the overall
+effect is that on very dark clear nights we can see a large, beautiful
+area of diffuse light in the sky. It is this for which we name our
+galaxy the \emph{Milky Way}.
+
+The reason for this effect is that our galaxy is somewhat like a disc,
+and we are off to one side. Thus when we look towards the centre of the
+disc, we see more a great concentration of stars (there are more star in
+that direction). As we look out away from the centre of the disc we see
+fewer stars - we are staring out into the void between galaxies!
+
+It's a little hard to work out what our galaxy would look like from far
+away, because when we look up at the night sky, we are seeing it from
+the inside. All the stars we can see are part of the Milky Way, and we
+can see them in every direction. However, there is some structure. There
+is a higher density of stars in particular places.
+
+\section{Nebulae}
+\label{sec:Phenomena:Nebulae}
+
+Seen with the naked eye, binoculars or a small telescope, a
+\emph{nebula} (plural \emph{nebulae}) is a fuzzy patch on the sky.
+Historically, the term referred to any extended object, but the modern
+definition excludes some types of object such as galaxies.
+
+Observationally, nebulae are popular objects for amateur astronomers
+-- they exhibit complex structure, spectacular colours (in most cases
+only visible in color photography) and a wide variety of forms. Many
+nebulae are bright enough to be seen using good binoculars or small to
+medium sized telescopes, and are a very photogenic subject for
+astro-photographers.
+
+Nebulae are associated with a variety of phenomena, some being clouds of
+interstellar dust and gas in the process of collapsing under gravity,
+some being envelopes of gas thrown off during a supernova event (so
+called \emph{supernova remnants}), yet others being the remnants of
+dumped outer layers around dying stars (\emph{planetary nebulae}).
+
+Examples of nebulae for which Stellarium has images include the Crab
+Nebula (M1), which is a supernova remnant, and the Dumbbell Nebula
+(M27) and the Ring Nebula (M57) which are planetary nebulae.
+
+\subsection{The Messier Objects}
+\label{sec:Phenomena:Messier}
 
 The \emph{Messier} objects are a set of astronomical objects catalogued
-by Charles Messier in his catalogue of \emph{Nebulae and Star Clusters}
+by \name{Charles Messier} in his catalogue of \emph{Nebulae and Star Clusters}
 first published in 1774. The original motivation behind the catalogue
 was that Messier was a comet hunter, and was frustrated by objects which
-resembled but were not comets. He therefore compiled a list of these
+resembled but were not comets. He therefore compiled a list of these annoying 
 objects.
 
 The first edition covered 45 objects numbered M1 to M45. The total list
@@ -582,48 +623,152 @@ over a single night.
 
 Stellarium includes images of many Messier objects.
 
+
+\section{Galaxies}
+\label{sec:Phenomena:Galaxies}
+
+Stars, it seems, are gregarious -- they like to live together in groups.
+These groups are called galaxies. The number of stars in a typical
+galaxy is literally astronomical -- many \emph{billions} -- sometimes over
+\emph{hundreds of billions} of stars!
+
+Our own star, the sun, is part of a galaxy. When we look up at the
+night sky, all the stars we can see are in the same galaxy. We call
+our own galaxy the Milky Way (or sometimes simply ``the
+Galaxy''\footnote{Which means closely the same thing, the word
+  deriving from Greek \emph{gala}=Milk.}).
+
+Other galaxies appear in the sky as dim fuzzy blobs. Only four are
+normally visible to the naked eye. The Andromeda galaxy (M31) visible in
+the Northern hemisphere, the two Magellanic clouds, visible in the
+Southern hemisphere, and the home galaxy Milky Way, visible in parts
+from north and south under dark skies.
+
+There are thought to be billions of galaxies in the universe comprised
+of an unimaginably large number of stars.
+
+The vast majority of galaxies are so far away that they are very dim,
+and cannot be seen without large telescopes, but there are dozens of
+galaxies which may be observed in medium to large sized amateur
+instruments. Stellarium includes images of many galaxies, including the
+Andromeda galaxy (M31), the Pinwheel Galaxy (M101), the Sombrero Galaxy
+(M104) and many others.
+
+Astronomers classify galaxies according to their appearance. Some
+classifications include \emph{spiral galaxies}, \emph{elliptical
+galaxies}, \emph{lenticular galaxies} and \emph{irregular galaxies}.
+
+
+
+\section{Eclipses}
+\label{sec:Eclipses}
+
+Eclipses occur when an apparently large celestial body (planet, moon
+etc.) moves between the observer (that's you!) and a more distant object
+-- the more distant object being eclipsed by the nearer one.
+
+\subsection{Solar Eclipses}
+\label{sec:Eclipses:solar}
+
+Solar eclipses occur when our Moon moves between the Earth and the Sun.
+This happens when the inclined orbit of the Moon causes its path to
+cross our line of sight to the Sun. In essence it is the observer
+falling under the shadow of the moon.
+
+There are three types of solar eclipses:
+
+\textbf{Partial} The Moon only covers part of the Sun's surface.
+
+\textbf{Total} The Moon completely obscures the Sun's surface.
+
+\textbf{Annular} The Moon is at aphelion (furthest from Earth in its
+elliptic orbit) and its disc is too small to completely cover the Sun.
+In this case most of the Sun's disc is obscured -- all except a thin ring
+around the edge.
+
+\subsection{Lunar Eclipses}
+\label{sec:Eclipses:lunar}
+
+Lunar eclipses occur when the Earth moves between the Sun and the Moon,
+and the Moon is in the Earth's shadow. They occur under the same basic
+conditions as the solar eclipse but can occur more often because the
+Earth's shadow is so much larger than the Moon's.
+
+Total lunar eclipses are more noticeable than partial eclipses because
+the Moon moves fully into the Earth's shadow and there is very
+noticeable darkening. However, the Earth's atmosphere refracts light
+(bends it) in such a way that some sunlight can still fall on the Moon's
+surface even during total eclipses. In this case there is often a marked
+reddening of the light as it passes through the atmosphere, and this can
+make the Moon appear a deep red colour.
+
+
+
+
+
+
 \section{Observing Hints}\label{observing-hints}
 
-When star-gazing, there's a few little things which make a lot of
+When stargazing, there's a few little things which make a lot of
 difference, and are worth taking into account.
 
-\textbf{Dark skies} For many people getting away from light pollution
+\begin{description}
+\item[Dark skies] For many people getting away from light pollution
 isn't an easy thing. At best it means a drive away from the towns, and
 for many the only chance to see a sky without significant glow from
 street lighting is on vacation. If you can't get away from the cities
 easily, make the most of it when you are away.
 
-\textbf{Wrap up warm} The best observing conditions are the same
+\item[Wrap up warm] The best observing conditions are the same
 conditions that make for cold nights, even in the summer time. Observing
 is not a strenuous physical activity, so you will feel the cold a lot
 more than if you were walking around. Wear a lot of warm clothing, don't
-sit/lie on the floor (at least use a camping mat... consider taking a
+sit/lie on the floor (at least use a camping mat, consider taking a
 deck-chair), and take a flask of hot drink.
 
-\textbf{Dark adaptation} The true majesty of the night sky only becomes
-apparent when the eye has had time to become accustomed to the dark.
-This process, known as dark adaptation, can take up to half and hour,
-and as soon as the observer sees a bright light they must start the
-process over. Red light doesn't compromise dark adaptation as much as
-white light, so use a red torch if possible (and one that is as dim as
-you can manage with). A single red LED light is ideal.
+\item[Dark adaptation] The true majesty of the night sky only
+becomes apparent when the eye has had time to become accustomed to the
+dark.  This process, known as dark adaptation, can take up to half an
+hour, and as soon as the observer sees a bright light they must start
+the process over. Red light doesn't compromise dark adaptation as much
+as white light, so use a red torch if possible (and one that is as dim
+as you can manage with). A dim single red LED light is ideal, also to
+have enough light to take notes.
 
-\textbf{The Moon} Unless you're particularly interested in observing the
+\item[The Moon] Unless you're particularly interested in observing the
 Moon on a given night, it can be a nuisance---it can be so bright as
 to make observation of dimmer objects such as nebulae impossible. When
 planning what you want to observe, take the phase and position of the
 Moon into account. Of course Stellarium is the ideal tool for finding
 this out!
 
-\textbf{Averted vision} A curious fact about the eye is that it is more
+\item[Averted vision] A curious fact about the eye is that it is more
 sensitive to dim light towards the edge of the field of view. If an
 object is slightly too dim to see directly, looking slightly off to the
 side but concentrating on the object's location can often reveal it.
 
-\textbf{Angular distance} Learn how to estimate angular distances. Learn
-the angular distances described in section~\ref{sec:concepts:units:angles:handyAngles}. If you
-have a pair of binoculars, find out the angular distance across the
-field of view and use this as a standard measure.
+\item[Angular distance] Learn how to estimate angular distances. Learn
+  the angular distances described in
+  section~\ref{sec:Concepts:Angles:HandyAngles}. If you have a pair of
+  binoculars, find out the angular distance across the field of view
+  and use this as a standard measure.
+\end{description}
+
+
+\subsection{Light Pollution}
+\label{sec:LightPollution}
+
+An ugly side effect of civilisation is a steady increase in outdoor
+illumination. Many people think it increases safety, but while this
+statement can be questioned, one definite result, aside from
+environmental issues like dangers for the nocturnal fauna, are ever
+worsening conditions for astronomical observations or just enjoyment
+of the night sky. 
+
+Stellarium can simulate light pollution, which is controlled from the
+light pollution section of the \emph{Sky} tab of the \emph{View} window.
+Light pollution levels are set using a numerical value between 1 and 9
+which corresponds to the \emph{Bortle Dark Sky Scale} (see Appendix~\ref{ch:BortleScale}).
 
 
 %%% Local Variables: 

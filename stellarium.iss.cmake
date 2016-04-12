@@ -34,18 +34,18 @@ ChangesAssociations=yes
 Compression=lzma2/max
 
 [Files]
-Source: "@CMAKE_INSTALL_PREFIX@\bin\stellarium.exe"; DestDir: "{app}"
+Source: "@CMAKE_INSTALL_PREFIX@\bin\stellarium.exe"; Flags: ignoreversion; DestDir: "{app}"
 @STELMAINLIB@
 @MESALIB@
 @REDIST_FILES@
-Source: "stellarium.url"; DestDir: "{app}"
-Source: "stellarium-guide.url"; DestDir: "{app}"
-Source: "stellarium-devdocs.url"; DestDir: "{app}"
-Source: "README"; DestDir: "{app}"; Flags: isreadme; DestName: "README.rtf"
-Source: "INSTALL"; DestDir: "{app}"; DestName: "INSTALL.rtf"
-Source: "COPYING"; DestDir: "{app}"; DestName: "GPL.rtf"
-Source: "AUTHORS"; DestDir: "{app}"; DestName: "AUTHORS.rtf"
-Source: "ChangeLog"; DestDir: "{app}"; DestName: "ChangeLog.rtf"
+Source: "stellarium.url"; Flags: ignoreversion; DestDir: "{app}"
+Source: "stellarium-guide.url"; Flags: ignoreversion; DestDir: "{app}"
+Source: "stellarium-devdocs.url"; Flags: ignoreversion; DestDir: "{app}"
+Source: "README"; DestDir: "{app}"; Flags: isreadme ignoreversion; DestName: "README.rtf"
+Source: "INSTALL"; DestDir: "{app}"; Flags: ignoreversion; DestName: "INSTALL.rtf"
+Source: "COPYING"; DestDir: "{app}"; Flags: ignoreversion; DestName: "GPL.rtf"
+Source: "AUTHORS"; DestDir: "{app}"; Flags: ignoreversion; DestName: "AUTHORS.rtf"
+Source: "ChangeLog"; DestDir: "{app}"; Flags: ignoreversion; DestName: "ChangeLog.rtf"
 Source: "@QtCore_location@"; DestDir: "{app}";
 Source: "@QtGui_location@"; DestDir: "{app}";
 Source: "@QtOpenGL_location@"; DestDir: "{app}";
@@ -61,8 +61,8 @@ Source: "@QtPrintSupport_location@"; DestDir: "{app}";
 @ISS_ANGLE_LIBS@
 @ISS_ICU_LIBS@
 @ISS_QT_PLUGINS@
-@ISS_MULTIMEDIA_PLUGINS@
-Source: "@CMAKE_INSTALL_PREFIX@\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs
+; Stellarium's stuff
+Source: "@CMAKE_INSTALL_PREFIX@\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs ignoreversion
 
 [Tasks]
 Name: desktopicon; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
@@ -166,8 +166,13 @@ const
   INSTALLSTATE_ABSENT = 2;       // The product is installed for a different user.
   INSTALLSTATE_DEFAULT = 5;      // The product is installed for the current user.
 
-  VC_REDIST_X86 = '{13A4EE12-23EA-3371-91EE-EFB36DDFFF3E}'; //Microsoft.VS.VC_RuntimeMinimumVSU_x86,v12
-  VC_REDIST_X64 = '{A749D8E6-B613-3BE3-8F5F-045C84EBA29B}'; //Microsoft.VS.VC_RuntimeMinimumVSU_amd64,v12
+  // Visual C++ 2013 Redistributable 12.0.21005
+  VC_REDIST_X86 = '{13A4EE12-23EA-3371-91EE-EFB36DDFFF3E}';
+  VC_REDIST_X64 = '{A749D8E6-B613-3BE3-8F5F-045C84EBA29B}';
+  
+  // Visual C++ 2015 Redistributable 14.0.23506
+  // VC_REDIST_X86 = '{23daf363-3020-4059-b3ae-dc4ad39fed19}';
+  // VC_REDIST_X64 = '{3ee5e5bb-b7cc-4556-8861-a00a82977d6c}';
 
 function MsiQueryProductState(szProduct: string): INSTALLSTATE; 
   external 'MsiQueryProductState{#AW}@msi.dll stdcall';

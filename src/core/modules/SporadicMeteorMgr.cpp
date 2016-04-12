@@ -107,6 +107,10 @@ void SporadicMeteorMgr::update(double deltaTime)
 			{
 				activeMeteors.append(m);
 			}
+			else
+			{
+				delete m;
+			}
 		}
 	}
 }

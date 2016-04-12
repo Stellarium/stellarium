@@ -29,6 +29,7 @@ class QListWidgetItem;
 
 class AddRemoveLandscapesDialog;
 class AtmosphereDialog;
+class GreatRedSpotDialog;
 
 class ViewDialog : public StelDialog
 {
@@ -59,11 +60,19 @@ private slots:
 	void setCurrentCultureAsDefault(void);
 	void updateDefaultSkyCulture();
 	void updateDefaultLandscape();
+	void setFlagCustomGrsSettings(bool b);
+	//! Update the widget to make sure it is synchrone if a value was changed programmatically
+	//! This function should be called repeatidly with e.g. a timer
+	// NO LONGER NEEDED!
+	//void updateFromProgram();
 
 	void showAddRemoveLandscapesDialog();
         void showAtmosphereDialog();
+	void showGreatRedSpotDialog();
 
 	void setLightPollutionSpinBoxStatus();
+	// Two new from the unwanted trunk-rework Not sure if we need them at all?
+	void populateLightPollution();
 
 	// WHAT IS THE SKY LAYER? hidden, under development?
 	void populateSkyLayersList();
@@ -86,6 +95,7 @@ private:
 
 	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;
 	AtmosphereDialog * atmosphereDialog;
+	GreatRedSpotDialog * greatRedSpotDialog;
 };
 
 #endif // _VIEWDIALOG_HPP_

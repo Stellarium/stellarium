@@ -1296,14 +1296,14 @@ TOC_EXPAND             = NO
 # The default value is: NO.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-GENERATE_QHP           = NO
+GENERATE_QHP           = YES
 
 # If the QHG_LOCATION tag is specified, the QCH_FILE tag can be used to specify
 # the file name of the resulting .qch file. The path specified is relative to
 # the HTML output folder.
 # This tag requires that the tag GENERATE_QHP is set to YES.
 
-QCH_FILE               =
+QCH_FILE               = ../stellarium.qch
 
 # The QHP_NAMESPACE tag specifies the namespace to use when generating Qt Help
 # Project output. For more information please see Qt Help Project / Namespace
@@ -1350,7 +1350,7 @@ QHP_SECT_FILTER_ATTRS  =
 # generated .qhp file.
 # This tag requires that the tag GENERATE_QHP is set to YES.
 
-QHG_LOCATION           =
+QHG_LOCATION           = qhelpgenerator
 
 # If the GENERATE_ECLIPSEHELP tag is set to YES, additional index files will be
 # generated, together with the HTML files, they form an Eclipse help plugin. To
