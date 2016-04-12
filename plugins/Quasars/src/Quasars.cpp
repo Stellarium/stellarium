@@ -806,3 +806,25 @@ void Quasars::setMarkerColor(QString c)
 {
 	Quasar::markerColor = StelUtils::strToVec3f(c);
 }
+
+void Quasars::reloadCatalog(void)
+{
+	bool hasSelection = false;
+	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
+	// Whether any quasar are selected? Save the current selection...
+	const QList<StelObjectP> selectedObject = objMgr->getSelectedObject("Quasar");
+	if (!selectedObject.isEmpty())
+	{
+		// ... unselect current quasar.
+		hasSelection = true;
+		objMgr->unSelect();
+	}
+
+	readJsonFile();
+
+	if (hasSelection)
+	{
+		// Restore selection...
+		objMgr->setSelectedObject(selectedObject);
+	}
+}

@@ -1,3 +1,12 @@
+% Status info:
+% M. Gates	2006-2009
+% A. Wolf	2011-2015
+% ArdWar	2012
+% B. Gerdes	2013
+% TODO insert further additions from wiki?
+% Content OK for 0.15+.
+% GZ: typo&grammar check 20160329
+
 \chapter{Files and Directories}
 \label{sec:FilesAndDirectories}
 
@@ -11,7 +20,7 @@ looks in the \emph{user directory} for the account which is running
 Stellarium. If the file is not found there, Stellarium looks in the
 \emph{installation directory}\footnote{The installation directory was
   referred to as the config root directory in previous versions of this
-  guide}. Thus it is possible for Stellarium to be installed as an
+  guide}. Thus it is possible for Stellarium to be installed by an
 administrative user and yet have a writable configuration file for
 non-administrative users. Another benefit of this method is on
 multi-user systems: Stellarium can be installed by the administrator,
@@ -57,12 +66,11 @@ C:\Users\Bob Dobbs\AppData\Roaming\Stellarium\
 \item[screenshot save directory] Screenshots will be saved to the
   \file{Pictures/Stellarium} directory, although this can be changed with a command line option (see
   section~\ref{sec:CommandLineOptions}\footnote{Windows Vista users who do not run Stellarium with
-    administrator priviliges should adjust the shortcut in the start
+    administrator privileges should adjust the shortcut in the start
     menu to specify a different directory for screenshots as the Desktop
-    directory is not writable for normal progams. 
+    directory is not writable for normal programs. 
     Stellarium includes a GUI option to specify the screenshot
     directory.}).
-
 \end{description}
 
 \subsection{Mac OS X}
@@ -70,13 +78,13 @@ C:\Users\Bob Dobbs\AppData\Roaming\Stellarium\
 
 \begin{description}
 \item[installation directory] This is found inside the application
-  bundle, \file{Stellarium.app}. See the \emph{Inside Application
+  bundle, \file{Stellarium.app}. See \emph{Inside Application
     Bundles}\footnote{\url{http://www.mactipsandtricks.com/articles/Wiley_HT_appBundles.lasso}}
   for more information.
-\item[user directory] This is the
+\item[user directory] This is the sub-directory 
   \file{Library/Preferences/Stellarium/} (or
   \file{\textasciitilde{}/Library/Application\ Support/Stellarium} on
-  newest versions of Mac OS X) sub-directory of the users home
+  newest versions of Mac OS X) of the user's home
   directory.
 \item[screenshot save directory] Screenshots are saved to the user's
   Desktop.
@@ -87,12 +95,12 @@ C:\Users\Bob Dobbs\AppData\Roaming\Stellarium\
 
 \begin{description}
 \item[installation directory] This is in the
-  \texttt{share/stellarium} sub-directory of the installation prefix,
-  i.e. usually \file{/usr/share/stellarium} or
+  \file{share/stellarium} sub-directory of the installation prefix,
+  i.e., usually \file{/usr/share/stellarium} or
   \file{/usr/local/share/stellarium/}.
-\item[user directory] This is the \texttt{.stellarium} sub-directory
-  of users home directory, i.e. \texttt{\textasciitilde{}/.stellarium/}.
-\item[screenshot save directory] Screenshots are saved to the users
+\item[user directory] This is the \file{.stellarium} sub-directory
+  of user's home directory, i.e., \file{\textasciitilde{}/.stellarium/}.
+\item[screenshot save directory] Screenshots are saved to the user's
   home directory.
 \end{description}
 
@@ -105,28 +113,31 @@ following sub-directories.
 
 \begin{description}
 \item[\file{landscapes/}] contains data files and textures used for
-  Stellarium's various landscapes. Each landscape has it's own
+  Stellarium's various landscapes. Each landscape has its own
   sub-directory. The name of this sub-directory is called the
   \emph{landscape ID}, which is used to specify the default landscape in
-  the main configuration file.
+  the main configuration file, or in script commands.
 \item[\file{skycultures/}] contains constellations, common star names and
   constellation artwork for Stellarium's many sky cultures. Each culture
-  has it's own sub-directory in the skycultures directory.
+  has its own sub-directory in the skycultures directory.
 \item[\file{nebulae/}] contains data and image files for nebula textures.
-  In future Stellarium will be able to support multiple sets of nebula
+  In the future Stellarium may be able to support multiple sets of nebula
   images and switch between them at runtime. This feature is not
-  implemented for version 0.9.1, although the directory structure is in
-  place - each set of nebula textures has it's own sub-directory in the
+  implemented for version~\StelVersion, although the directory structure is in
+  place - each set of nebula textures has its own sub-directory in the
   nebulae directory.
-\item[\file{stars/}] contains Stellarium's star catalogues. In future
-  Stellarium will be able to support multiple star catalogues and switch
-  between them at runtime. This feature is not implemented for version
-  0.10.0, although the directory structure is in place - each star
-  catalogue has it's own sub-directory in the stars directory.
+  %% TODO: Update this if no longer valid.
+\item[\file{stars/}] contains Stellarium's star catalogues. In the
+  future Stellarium may be able to support multiple star catalogues
+  and switch between them at runtime. This feature is not implemented
+  for version~\StelVersion, although the directory structure is in
+  place -- each star catalogue has its own sub-directory in the stars
+  directory.
+  %% TODO: Update this if no longer valid. 
 \item[\file{data/}] contains miscellaneous data files including fonts,
-  solar system data, city locations etc.
+  solar system data, city locations, etc.
 \item[\file{textures/}] contains miscellaneous texture files, such as the
-  graphics for the toolbar buttons, planet texture maps etc.
+  graphics for the toolbar buttons, planet texture maps, etc.
 \item[\file{ephem/}] (optional) may contain data files for planetary
   ephemerides DE430 and DE431 (see~\ref{sec:ExtraData:ephemerides}).
 \end{description}
@@ -137,161 +148,60 @@ possible to override settings which are part of the main Stellarium
 installation by copying the relevant file to the user area and modifying
 it there.
 
-It is also possible to add new landscapes by creating the relevant files
+It is recommended to add new landscapes or sky cultures by creating the relevant files
 and directories within the user directory, leaving the installation
 directory unchanged. In this manner different users on a multi-user
-system can customise Stellarium without affecting the other users.
+system can customise Stellarium without affecting the other users. 
 
-\chapter{The Main Configuration File}\label{the-main-configuration-file}
+\section{The Main Configuration File}
+%\label{the-main-configuration-file}
 \label{sec:ConfigurationFile}
 
-The main configuration file is read each time Stellarium starts up, and
+The main configuration file is read each time Stellarium starts, and
 settings such as the observer's location and display preferences are
 taken from it. Ideally this mechanism should be totally transparent to
-the user - anything that is configurable should be configured ``in'' the
+the user -- anything that is configurable should be configured ``in'' the
 program GUI. However, at time of writing Stellarium isn't quite complete
-in this respect, despite improvements in version 0.10.0. Some settings
+in this respect, despite improvements in each version. Some settings, 
+esp.\ color values for lines, grids, etc.\ 
 can only be changed by directly editing the configuration file. This
 section describes some of the settings a user may wish to modify in this
 way, and how to do it.
 
 If the configuration file does not exist in the \emph{user directory}
-when Stellarium is started (e.g. the first time the user starts the
+when Stellarium is started (e.g., the first time the user starts the
 program), one will be created with default values for all settings
-(refer to section \href{Advanced_Use\#Files_and_Directories}{Files and
-Directories} for the location of the user directory on your operating
+(refer to section~\ref{sec:FilesAndDirectories} Files and
+Directories for the location of the user directory on your operating
 system). The name of the configuration file is
-\texttt{config.ini}\footnote{It is possible to specify a different name
+\file{config.ini}\footnote{It is possible to specify a different name
   for the main configuration file using the \texttt{-\/-config-file}
-  command line option. See section
-  \href{Advanced_Use\#Command_Line_Options}{Command Line Options} for
-  details.}.
+  command line option. See section~\ref{sec:CommandLineOptions} Command 
+  Line Options for details.}.
 
 The configuration file is a regular text file, so all you need to edit
 it is a text editor like \emph{Notepad} on Windows, \emph{Text Edit} on
-the Mac, or \emph{nano/vi/gedit} etc. on Linux.
+the Mac, or \emph{nano/vi/gedit/emacs/leafpad} etc.\ on Linux.
 
-The following sub-sections contain details on how to make commonly used
-modifications to the configuration file. A complete list of
-configuration file options and values may be found in the appendix,
-\href{Configuration_file}{Configuration file}.
+%The following sub-sections contain details on how to make commonly used
+%modifications to the configuration file. 
+A complete list of configuration file options and values may be found
+in appendix~\ref{sec:config.ini} Configuration File.
 
-\chapter{Command Line Options}\label{command-line-options}
-\label{sec:CommandLineOptions}
 
-Stellarium's behaviour can be modified by providing parameters to the
-program when it is run, via the command line. See table for a full list:
 
-\begin{longtabu} to \textwidth {l|l|X}
-\toprule
-\emph{Option} & \emph{Option Parameter} & \emph{Description}\tabularnewline
-\midrule
--\/-help or -h & {[}none{]} & Print a quick command line help message and exit. \tabularnewline
-\midrule
--\/-version or -v & {[}none{]} & Print the program name and version information, and exit. \tabularnewline
-\midrule
--\/-config-file or -c & config file name & Specify the configuration file name. The default value is \texttt{config.ini}.
-
-The parameter can be a full path (which will be used verbatim) or a partial path.
-
-Partial paths will be searched for inside the regular search paths
-unless they start with a ``\texttt{.}'', which may be used to explicitly
-specify a file in the current directory or similar.
-
-For example, using the option \texttt{-c\ my\_config.ini} would resolve
-to the file
-\texttt{\textless{}user\ directory\textgreater{}/my\_config.ini} whereas
-\texttt{-c\ ./my\_config.ini} can be used to explicitly say the file
-\texttt{my\_config.ini} in the current working directory.
-\tabularnewline
-\midrule
--\/-restore-defaults & {[}none{]} & If this option is specified
-Stellarium will start with the default configuration. Note: The old
-configuration file will be overwritten. \tabularnewline
-\midrule
--\/-user-dir & path & Specify the user data directory. \tabularnewline
-\midrule
--\/-screenshot-dir & path & Specify the directory to which screenshots will be saved. \tabularnewline
-\midrule
--\/-full-screen & yes or no & Over-rides the full screen setting in the config file. \tabularnewline
-\midrule
--\/-home-planet & planet & Specify observer planet (English name). \tabularnewline
-\midrule
--\/-altitude & altitude & Specify observer altitude in meters. \tabularnewline
-\midrule
--\/-longitude & longitude & Specify latitude, e.g. +53d58'16.65" \tabularnewline
-\midrule
--\/-latitude & latitude & Specify longitude, e.g. -1d4'27.48" \tabularnewline
-\midrule
--\/-list-landscapes & {[}none{]} & Print a list of available landscape IDs. \tabularnewline
-\midrule
--\/-landscape & landscape ID & Start using landscape whose ID matches
-the passed parameter (dir name for landscape). \tabularnewline
-\midrule
--\/-sky-date & date & The initial date in \texttt{yyyymmdd} format. \tabularnewline
-\midrule
--\/-sky-time & time & The initial time in \texttt{hh:mm:ss} format. \tabularnewline
-\midrule
--\/-startup-script & script name & The name of a script to run after the program has started. \tabularnewline
-\midrule
--\/-fov & angle & The initial field of view in degrees. \tabularnewline
-\midrule
--\/-projection-type & ptype & The initial projection type (e.g. \texttt{perspective}). \tabularnewline
-\midrule
--\/-dump-opengl-details or -d & {[}none{]} & Dump information about
-OpenGL support to logfile. Use this is you have graphics problems and
-want to send a bug report. \tabularnewline
-\midrule
--\/-angle-mode or -a & {[}none{]} & Use ANGLE as OpenGL ES2 rendering
-engine (autodetect driver).\footnote{On Windows only}\tabularnewline
-\midrule
--\/-angle-d3d9 or -9 & {[}none{]} & Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine.\footnotemark[4]\tabularnewline
-\midrule
--\/-angle-d3d11 & {[}none{]} & Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine.\footnotemark[4]\tabularnewline
-\midrule
--\/-angle-warp & {[}none{]} & Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine.\footnotemark[4]\tabularnewline
-\midrule
--\/-mesa-mode or -m & {[}none{]} & Use MESA as software OpenGL rendering engine.\footnotemark[4]\tabularnewline
-\midrule
--\/-safe-mode or -s & {[}none{]} & Synonymous to -\/-mesa-mode.\footnotemark[4]\tabularnewline
-\bottomrule
-\end{longtabu}
-
-\section{Examples}\label{examples}
-\label{sec:CommandLineOptions:Examples}
-
-\begin{itemize}
-\item To start Stellarium using the configuration file,
-  \file{configuration\_one.ini} situated in the user directory (use either of
-  these):
-
-\begin{commands}
-stellarium --config-file=configuration_one.ini
-stellarium -c configuration_one.ini
-\end{commands}
-
-\item To list the available landscapes, and then to start using the
-  landscape with the ID, ``ocean''
-\begin{commands}
-stellarium --list-landscapes 
-stellarium --landscape=ocean
-\end{commands}
-\end{itemize}
-
-%% GZ found in 2015:
-\noindent Note that console output (like \texttt{--list-landscapes}) on Windows is not possible. 
-
-\chapter{Getting Extra Data}\label{getting-extra-star-data}
+\section{Getting Extra Data}
+\label{sec:ExtraData}
 
 Stellarium is packaged with over 600 thousand stars in the normal
 program download, but much larger star catalogues may be downloaded
-using the tool which is in the \emph{Tools} tab of the
-\emph{Configuration} dialog.
+in the \emph{Tools} tab of the \emph{Configuration} dialog.
 
 
-\section{Alternative Planet Ephemerides: DE430, DE431}
+\subsection{Alternative Planet Ephemerides: DE430, DE431}
 \label{sec:ExtraData:ephemerides}
 
+\newFeature{0.15}
 By default, Stellarium uses the \indexterm{VSOP87} planetary theory,
 an analytical solution which is able to deliver planetary positions
 for any input date. However, its use is recommended only for the year
@@ -329,7 +239,7 @@ de430_path = C:/Astrodata/JPL_DE43x/linux_p1550p2650.430
 de431_path = C:/Astrodata/JPL_DE43x/lnxm13000p17000.431
 \end{configfile}
 
-For fast access avoid storing them on a network drive os USB pendrive!
+For fast access avoid storing them on a network drive or USB pendrive!
 
 You activate use of either ephemeris in the configuration panel
 (\key{F2}). If you activate both, preference will be given for DE430
@@ -337,94 +247,85 @@ if the simulation time allows it. Outside of the valid times, VSOP87
 will always be used.
 
 
-\chapter{Visual Effects}\label{visual-effects}
 
-\section{Light Pollution}\label{light-pollution}
+\chapter{Command Line Options}
+\label{command-line-options}
+\label{sec:CommandLineOptions}
 
-Stellarium can simulate light pollution, which is controlled from the
-light pollution section of the \emph{Sky} tab of the \emph{View} window.
-Light pollution levels are set using an numerical value between 1 and 9
-which corresponds to the \emph{Bortle Dark Sky Scale}.
+Stellarium's behaviour can be modified by providing parameters to the
+program when it is called via the command line. See table for a full list:
 
-\subsection{Excellent dark sky site}
-\textbf{Level:} 1 \\
-\textbf{Colour:} black \\
-\textbf{Limiting magnitude (eye):} 7.6 -- 8.0
+\begin{longtabu} to \textwidth {l|l|X}\toprule
+\emph{Option}         & \emph{Option Parameter} & \emph{Description}\\\midrule
+-\/-help or -h        & {[}none{]}       & Print a quick command line help message, and exit. \\\midrule
+-\/-version or -v     & {[}none{]}       & Print the program name and version information, and exit. \\\midrule
+-\/-config-file or -c & config file name & Specify the configuration file name. The default value is \file{config.ini}.
 
-Zodiacal light, gegenschein, zodiacal band visible; M33 direct vision naked-eye object; Scorpius and Sagittarius regions of the Milky Way cast obvious shadows on the ground; Airglow is readily visible; Jupiter and Venus affect dark adaptation; surroundings basically invisible.
+The parameter can be a full path (which will be used verbatim) or a partial path.
 
-\subsection{Typical truly dark site}
-\textbf{Level:} 2 \\
-\textbf{Colour:} grey \\
-\textbf{Limiting magnitude (eye):} 7.1 -- 7.5
+Partial paths will be searched for inside the regular search paths
+unless they start with a ``\file{.}'', which may be used to explicitly
+specify a file in the current directory or similar.
 
-Airglow weakly visible near horizon; M33 easily seen with naked eye; highly structured Summer Milky Way; distinctly yellowish zodiacal light bright enough to cast shadows at dusk and dawn; clouds only visible as dark holes; surroundings still only barely visible silhouetted against the sky; many Messier globular clusters still distinct naked-eye objects.
+For example, using the option \texttt{-c\ my\_config.ini} would resolve to the file
+\file{\textless{}user\ directory\textgreater{}/my\_config.ini} whereas
+\file{-c\ ./my\_config.ini} can be used to explicitly say the file
+\file{my\_config.ini} in the current working directory.\\\midrule
+-\/-restore-defaults & {[}none{]} & Stellarium will start with the default configuration. 
+                                    Note: The old configuration file will be overwritten. \\\midrule
+-\/-user-dir         & path       & Specify the user data directory. \\\midrule
+-\/-screenshot-dir   & path       & Specify the directory to which screenshots will be saved. \\\midrule
+-\/-full-screen      & yes or no  & Over-rides the full screen setting in the config file. \\\midrule
+-\/-home-planet      & planet     & Specify observer planet (English name). \\\midrule
+-\/-altitude         & altitude   & Specify observer altitude in meters. \\\midrule
+-\/-longitude        & longitude  & Specify latitude, e.g. +53d58'16.65" \\\midrule
+-\/-latitude         & latitude   & Specify longitude, e.g. -1d4'27.48" \\\midrule
+-\/-list-landscapes  & {[}none{]} & Print a list of available landscape IDs and exit. \\\midrule
+-\/-landscape        & landscape ID & Start using landscape whose ID matches the passed parameter (dir name of landscape). \\\midrule
+-\/-sky-date         & date       & The initial date in \texttt{yyyymmdd} format. \\\midrule
+-\/-sky-time         & time       & The initial time in \texttt{hh:mm:ss} format. \\\midrule
+-\/-startup-script   & script name & The name of a script to run after the program has started. \\\midrule
+-\/-fov              & angle      & The initial field of view in degrees. \\\midrule
+-\/-projection-type  & ptype      & The initial projection type (e.g. \texttt{perspective}). \\\midrule
+-\/-dump-opengl-details or -d     & {[}none{]} & Dump information about OpenGL support to logfile. 
+                                                 Use this is you have graphics problems and want to send a bug report. \\\midrule
+-\/-angle-mode or -a & {[}none{]} & Use ANGLE as OpenGL ES2 rendering engine (autodetect Direct3D version).\footnote{On Windows only}\\\midrule
+-\/-angle-d3d9 or -9 & {[}none{]} & Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\\\midrule
+-\/-angle-d3d11      & {[}none{]} & Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\\\midrule
+-\/-angle-warp       & {[}none{]} & Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\\\midrule
+-\/-mesa-mode or -m  & {[}none{]} & Use MESA as software OpenGL rendering engine.\footnotemark[1]\\\midrule
+-\/-safe-mode or -s  & {[}none{]} & Synonymous to -\/-mesa-mode.\footnotemark[1]\\\midrule
+-\/-fix-text or -t   & {[}none{]} & Alternative way of creating the Info text, required on some systems.\footnote{E.g., Raspberry Pi 2}\\\bottomrule
+\end{longtabu}
 
-\subsection{Rural sky}
-\textbf{Level:} 3 \\
-\textbf{Colour:} blue \\
-\textbf{Limiting magnitude (eye):} 6.6 -- 7.0
+\noindent \newFeature{0.15} If you want to avoid adding the same
+switch every time when you start Stellarium from the command line, you
+can also set an environment variable \file{STEL\_OPTS} with your
+default options. 
 
-Some light pollution evident at the horizon; clouds illuminated near horizon, dark overhead; Milky Way still appears complex; M15, M4, M5, M22 distinct naked-eye objects; M33 easily visible with averted vision; zodiacal light striking in spring and
-autumn, color still visible; nearer surroundings vaguely visible.
+\section{Examples}
+\label{sec:CommandLineOptions:Examples}
 
-\subsection{Rural/suburban transition}
-\textbf{Level:} 4 \\
-\textbf{Colour:} green/yellow \\
-\textbf{Limiting magnitude (eye):} 6.1 -- 6.5
+\begin{itemize}
+\item To start Stellarium using the configuration file,
+  \file{configuration\_one.ini} situated in the user directory (use either of
+  these):
 
-Light pollution domes visible in various directions over the horizon; zodiacal light is still visible, but not even halfway extending to the zenith at dusk or dawn; Milky Way above the horizon still impressive, but lacks most of the finer details; M33 a difficult averted vision object, only visible when higher than 55$\degree$; clouds illuminated in the directions of the light sources, but still dark overhead; surroundings clearly visible, even at a distance.
+\begin{commands}
+stellarium --config-file=configuration_one.ini
+stellarium -c configuration_one.ini
+\end{commands}
 
-\subsection{Suburban sky}
-\textbf{Level:} 5 \\
-\textbf{Colour:} orange \\
-\textbf{Limiting magnitude (eye):} 5.6 -- 6.0
+\item To list the available landscapes, and then start using the
+  landscape with the ID ``ocean''
+\begin{commands}
+stellarium --list-landscapes 
+stellarium --landscape=ocean
+\end{commands}
+\end{itemize}
 
-Only hints of zodiacal light are seen on the best nights in autumn and spring; Milky Way is very weak or invisible near the horizon and looks washed out overhead; light sources visible in most, if not all, directions; clouds are noticeably brighter than the sky.
-
-\subsection{Bright suburban sky}
-\textbf{Level:} 6 \\
-\textbf{Colour:} red \\
-\textbf{Limiting magnitude (eye):} 5.1 -- 5.5
-
-Zodiacal light is invisible; Milky Way only visible near the zenith; sky within 35$\degree$ from the horizon glows grayish white; clouds anywhere in the sky appear fairly bright; surroundings easily visible; M33 is impossible to see
-without at least binoculars, M31 is modestly apparent to the unaided eye.
-
-\subsection{Suburban/urban transition}
-\textbf{Level:} 7 \\
-\textbf{Colour:} red \\
-\textbf{Limiting magnitude (eye):} 5.0 at best
-
-Entire sky has a grayish-white hue; strong light sources evident in all directions; Milky Way invisible; M31 and M44 may be glimpsed with the naked eye, but are very indistinct; clouds are brightly lit; even in moderate-sized telescopes the brightest Messier objects are only ghosts of their true selves.
-
-\subsection{City sky}
-\textbf{Level:} 8 \\
-\textbf{Colour:} white \\
-\textbf{Limiting magnitude (eye):} 4.5 at best
-
-Sky glows white or orange --- you can easily read; M31 and M44 are barely glimpsed by an experienced observer on good nights; even with telescope, only bright Messier objects can be detected; stars forming familiar constellation patterns may be weak or completely invisible.
-
-\subsection{Inner City sky}
-\textbf{Level:} 9 \\
-\textbf{Colour:} white \\
-\textbf{Limiting magnitude (eye):} 4.0 at best
-
-Sky is brilliantly lit with many stars forming constellations invisible and many weaker
-constellations invisible; aside from Pleiades, no Messier object is visible to the naked eye; only objects to provide fairly pleasant views are the Moon, the Planets and a few of the brightest star clusters.
-
-\chapter{Taking Screenshots}\label{taking-screenshots}
-
-You can save what is on the screen to a file by pressing
-\textbf{Control-S}. Screenshots are taken in \emph{.png} format, and
-have filenames something like this: \emph{stellarium-000.png},
-\emph{stellariuim-001.png} (the number increments to prevent
-over-writing existing files).
-
-Stellarium creates screenshots in different directories depending in
-your system type, see section
-\href{Advanced_Use\#Files_and_Directories}{Files and Directories}.
-
-
+%% GZ found in 2015:
+\noindent Note that console output (like \command{-\/-list-landscapes}) on Windows is not possible. 
 
 %%% Local Variables: 
 %%% mode: latex

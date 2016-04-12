@@ -89,8 +89,11 @@ public:
 	//! - "yyyymmdd"
 	//!
 	//! These values correspond to the similarly named values in the SDateFormat enum.
-	QString getDateFormatStr(void) const {return sDateFormatToString(dateFormat);}
+	QString getDateFormatStr(void) const {return sDateFormatToString(dateFormat);}	
 	void setDateFormatStr(const QString& df) {dateFormat=stringToSDateFormat(df);}
+
+	//! Get the format string which describes the current date format (Qt style).
+	QString getQtDateFormatStr(void) const;
 	
 	//! Set the time zone.
 	//! @param tZ the time zone string as parsed from the TZ environment 
@@ -108,8 +111,8 @@ public:
 	//! @enum SDateFormat
 	//! The date display format.
 	enum SDateFormat {
-		SDateMMDDYYYY,	//!< e.g. "07-05-1998" for July 5th 1998
-		SDateDDMMYYYY,	//!< e.g. "05-07-1998" for July 5th 1998
+		SDateMMDDYYYY,		//!< e.g. "07-05-1998" for July 5th 1998
+		SDateDDMMYYYY,		//!< e.g. "05-07-1998" for July 5th 1998
 		SDateSystemDefault,	//!< Use the system default date format
 		SDateYYYYMMDD		//!< e.g. "1998-07-05" for July 5th 1998
 	};

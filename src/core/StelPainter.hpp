@@ -72,7 +72,6 @@ public:
 
 	//! Fill with black around the viewport.
 	void drawViewportShape(void);
-	void drawViewportShape(const GLfloat innerRadius);
 
 	//! Draw the string at the given position and angle with the given font.
 	//! If the gravity label flag is set, uses drawTextGravity180.
@@ -302,6 +301,10 @@ private:
 		bool blend;
 		int blendSrcRGB, blendDstRGB, blendSrcAlpha, blendDstAlpha;
 	};
+
+	// From text-use-opengl-buffer
+	static QCache<QByteArray, struct StringTexture> texCache;
+	struct StringTexture* getTexTexture(const QString& str, int pixelSize);
 
 	//! Struct describing one opengl array
 	typedef struct ArrayDesc

@@ -60,6 +60,7 @@
 #include "ViewDialog.hpp"
 #include "ShortcutsDialog.hpp"
 #include "AstroCalcDialog.hpp"
+#include "BookmarksDialog.hpp"
 
 #include <QDebug>
 #include <QTimeLine>
@@ -95,6 +96,7 @@ StelGui::StelGui()
 	, scriptConsole(0)
 #endif
 	, astroCalcDialog(0)
+	, bookmarksDialog(0)
 	, flagShowFlipButtons(false)
 	, flipVert(NULL)
 	, flipHoriz(NULL)
@@ -158,6 +160,11 @@ StelGui::~StelGui()
 		delete astroCalcDialog;
 		astroCalcDialog = NULL;
 	}
+	if (bookmarksDialog)
+	{
+		delete bookmarksDialog;
+		bookmarksDialog = NULL;
+	}
 }
 
 void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
@@ -177,6 +184,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	scriptConsole = new ScriptConsole(atopLevelGraphicsWidget);
 #endif
 	astroCalcDialog = new AstroCalcDialog(atopLevelGraphicsWidget);
+	bookmarksDialog = new BookmarksDialog(atopLevelGraphicsWidget);
 
 	///////////////////////////////////////////////////////////////////////
 	// Create all the main actions of the program, associated with shortcuts
@@ -209,6 +217,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	actionsMgr->addAction("actionShow_Location_Window_Global", windowsGroup, N_("Location window"), locationDialog, "visible", "F6", "", true);
 	actionsMgr->addAction("actionShow_Shortcuts_Window_Global", windowsGroup, N_("Shortcuts window"), shortcutsDialog, "visible", "F7", "", true);
 	actionsMgr->addAction("actionShow_AstroCalc_Window_Global", windowsGroup, N_("AstroCalc window"), astroCalcDialog, "visible", "F10", "Alt+A", true);
+	actionsMgr->addAction("actionShow_Bookmarks_Window_Global", windowsGroup, N_("Bookmarks window"), bookmarksDialog, "visible", "Alt+B", "", true);
 	actionsMgr->addAction("actionSave_Copy_Object_Information_Global", miscGroup, N_("Copy selected object information to clipboard"), this, "copySelectedObjectInfo()", "Ctrl+C", "", true);	
 
 	QSettings* conf = StelApp::getInstance().getSettings();

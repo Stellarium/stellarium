@@ -164,13 +164,20 @@ int main(int argc, char **argv)
 	// Init the file manager
 	StelFileMgr::init();
 
-	// Log command line arguments
+	// Log command line arguments.
 	QString argStr;
 	QStringList argList;
 	for (int i=0; i<argc; ++i)
 	{
 		argList << argv[i];
 		argStr += QString("%1 ").arg(argv[i]);
+	}
+	// add contents of STEL_OPTS environment variable.
+	QString envStelOpts(qgetenv("STEL_OPTS").constData());
+	if (envStelOpts.length()>0)
+	{
+		argList+= envStelOpts.split(" ");
+		argStr += " " + envStelOpts;
 	}
 	// Parse for first set of CLI arguments - stuff we want to process before other
 	// output, such as --help and --version

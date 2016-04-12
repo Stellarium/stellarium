@@ -42,6 +42,7 @@ class SearchDialog;
 class ViewDialog;
 class ShortcutsDialog;
 class AstroCalcDialog;
+class BookmarksDialog;
 #ifdef ENABLE_SCRIPT_CONSOLE
 class ScriptConsole;
 #endif
@@ -191,6 +192,7 @@ private:
 	ScriptConsole* scriptConsole;
 #endif
 	AstroCalcDialog* astroCalcDialog;
+	BookmarksDialog* bookmarksDialog;
 
 	bool flagShowFlipButtons;
 	StelButton* flipVert;

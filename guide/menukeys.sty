@@ -1,0 +1,878 @@
+%%
+%% This is file `menukeys.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% menukeys.dtx  (with options: `package')
+%% 
+%% This is a generated file.
+%% 
+%% Copyright (C) 2013 by Tobias Weh
+%%                       www.tobias-weh.de
+%% 
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.2 of this license or (at your option) any later
+%% version. The latest version of this license is in:
+%% 
+%%   http://www.latex-project.org/lppl.txt
+%% 
+%% and version 1.2 or later is part of all distributions of
+%% LaTeX version 1999/12/01 or later.
+%% 
+\NeedsTeXFormat{LaTeX2e}[2009/01/01]
+\ProvidesPackage{menukeys}
+  [2014/03/10 v1.3 a package to format menus paths and shortcuts]
+\RequirePackage{xparse}
+\RequirePackage{xstring}
+\RequirePackage{etoolbox}
+\RequirePackage{tikz}
+   \usetikzlibrary{calc,shapes.symbols,shadows}
+\RequirePackage{xcolor}
+\RequirePackage{adjustbox}
+\RequirePackage{relsize}
+\RequirePackage{catoptions}[2011/12/07]
+\newcommand*{\tw@mk@error}[2][Please consult the manual for more information.]{%
+   \PackageError{menukeys}{#2}{#1}%
+}
+\newcommand*{\tw@mk@warning}[1]{%
+   \PackageWarning{menukeys}{#1}%
+}
+\newcommand*{\tw@mk@warning@noline}[1]{%
+   \PackageWarningNoLine{menukeys}{#1}%
+}
+\def\tw@mk@tempa{}
+\def\tw@mk@tempb{}
+\DeclareDocumentCommand{\tw@mk@gobble@args}{m}{%
+   \RenewDocumentCommand{\tw@mk@tempa}{#1}{}%
+   \tw@mk@tempa%
+}
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+  family=tw@mk,
+  prefix=tw@mk@
+}
+\DeclareBoolOption[true]{definemenumacros}
+\DeclareBoolOption[true]{definekeys}
+\DeclareStringOption[mac]{os}
+\DeclareStringOption[symbols]{mackeys}
+\ProcessKeyvalOptions{tw@mk}\relax
+\IfSubStr{.mac.win.}{.\tw@mk@os.}{}{%
+   \tw@mk@error{Unknown value for option 'os'\MessageBreak
+   Possible values are 'mac' or 'win'.}%
+}
+\IfSubStr{.symbols.text.}{.\tw@mk@mackeys.}{}{%
+   \tw@mk@error{Unknown value for option 'mackeys'\MessageBreak
+   Possible values are 'symbols' or 'text'.}%
+}
+\newcommand*{\tw@make@color@theme}[5]{%
+   \definecolor{tw@color@theme@#1@bg}{#2}{#3}%
+   \definecolor{tw@color@theme@#1@br}{#2}{#4}%
+   \definecolor{tw@color@theme@#1@txt}{#2}{#5}%
+}
+\newcommand*{\newmenucolortheme}[5]{%
+   \@ifundefinedcolor{tw@color@theme@#1@bg}{%
+      \tw@make@color@theme{#1}{#2}{#3}{#4}{#5}
+   }{%
+      \tw@mk@error{Color theme '#1' already defined!\MessageBreak
+      Use \string\renewmenucolortheme\space instead.}
+   }
+}
+\let\renewmenucolortheme\tw@make@color@theme
+\newcommand*{\changemenucolor}[4]{%
+   \IfSubStr{ bg br txt }{ #2 }{%
+      \definecolor{tw@color@theme@#1@#2}{#3}{#4}%
+   }{%
+      \tw@mk@error{No such color element ('#2')!\MessageBreak
+      Possible values are bg, br and txt.}
+   }%
+}
+\newcommand*{\copymenucolortheme}[2]{%
+   \@ifundefinedcolor{tw@color@theme@#1@bg}{%
+      \colorlet{tw@color@theme@#1@bg}{tw@color@theme@#2@bg}%
+      \colorlet{tw@color@theme@#1@br}{tw@color@theme@#2@br}%
+      \colorlet{tw@color@theme@#1@txt}{tw@color@theme@#2@txt}%
+   }{%
+      \tw@mk@error{Color theme '#1' already defined!\MessageBreak
+      Use \string\renewmenucolortheme\space instead.}
+   }
+}
+\newcommand{\changemenucolortheme}[2]{%
+   \ifcsundef{tw@style@#1@pre}{%
+      \tw@mk@error{Style '#1' undefined!\MessageBreak
+      Maybe you misspelled it?}%
+   }{%
+      \@ifundefinedcolor{tw@color@theme@#2@bg}{%
+         \tw@mk@error{Color theme '#2' is not defined!}%
+      }{%
+         \csdef{tw@style@#1@color@theme}{#2}%
+      }%
+   }%
+}
+\newcommand{\usemenucolor}[1]{%
+   tw@color@theme@\tw@current@color@theme @#1%
+}
+\tw@make@color@theme{gray}{gray}{0.95}{0.3}{0}
+\tw@make@color@theme{blacknwhite}{gray}{1}{0}{0}
+\newcommand{\tw@default@sep}{%
+   \hspace{0.2em plus 0.1em minus 0.5em}%
+}
+\newcommand{\tw@default@pre}{}
+\newcommand{\tw@default@post}{}
+\DeclareDocumentCommand{\tw@declare@style@simple}{%
+   s m O{\tw@default@pre} m O{\tw@default@sep} O{\tw@default@post} m
+}{%
+   \csdef{tw@style@#2@color@theme}{#7}%
+   \csdef{tw@style@#2@pre}{#3}%
+   \csdef{tw@style@#2@sep}{#5}%
+   \csdef{tw@style@#2@post}{#6}%
+   \IfBooleanTF{#1}{%
+      \csdef{tw@style@#2@single}{#4}%
+      \csdef{tw@style@#2@first}{#4}%
+      \csdef{tw@style@#2@mid}{#4}%
+      \csdef{tw@style@#2@last}{#4}%
+   }{%
+      \csdef{tw@style@#2@single}{%
+         \tikz[baseline=(tw@node.base)]{%
+         \node(tw@node)[#4]{\strut\CurrentMenuElement};}}%
+      \csdef{tw@style@#2@first}{%
+         \tikz[baseline=(tw@node.base)]{%
+         \node(tw@node)[#4]{\strut\CurrentMenuElement};}}%
+      \csdef{tw@style@#2@mid}{%
+         \tikz[baseline=(tw@node.base)]{%
+         \node(tw@node)[#4]{\strut\CurrentMenuElement};}}%
+      \csdef{tw@style@#2@last}{%
+         \tikz[baseline=(tw@node.base)]{%
+         \node(tw@node)[#4]{\strut\CurrentMenuElement};}}%
+   }%
+}
+\DeclareDocumentCommand{\tw@declare@sytle@extra@args}{%
+   O{\tw@default@post} m
+}{%
+   \csdef{tw@style@\tw@current@style @post}{#1}%
+   \csdef{tw@style@\tw@current@style @color@theme}{#2}%
+}
+\DeclareDocumentCommand{\tw@declare@style}{%
+   s m O{\tw@default@pre} m O{\tw@default@sep} m m m
+}{%
+   \def\tw@current@style{#2}
+   \csdef{tw@style@#2@pre}{#3}%
+   \csdef{tw@style@#2@sep}{#5}%
+   \IfBooleanTF{#1}{%
+      \csdef{tw@style@#2@single}{#8}%
+      \csdef{tw@style@#2@first}{#4}%
+      \csdef{tw@style@#2@mid}{#6}%
+      \csdef{tw@style@#2@last}{#7}%
+   }{%
+      \csdef{tw@style@#2@single}{%
+         \tikz[baseline=(tw@node.base)]{%
+         \node(tw@node)[#8]{\strut\CurrentMenuElement};}}%
+      \csdef{tw@style@#2@first}{%
+         \tikz[baseline=(tw@node.base)]{%
+         \node(tw@node)[#4]{\strut\CurrentMenuElement};}}%
+      \csdef{tw@style@#2@mid}{%
+         \tikz[baseline=(tw@node.base)]{%
+         \node(tw@node)[#6]{\strut\CurrentMenuElement};}}%
+      \csdef{tw@style@#2@last}{%
+         \tikz[baseline=(tw@node.base)]{%
+         \node(tw@node)[#7]{\strut\CurrentMenuElement};}}%
+   }%
+   \tw@declare@sytle@extra@args%
+}
+\NewDocumentCommand{\newmenustylesimple}{s m}{%
+   \ifcsundef{tw@style@#2@pre}{%
+      \IfBooleanTF{#1}{%
+         \tw@declare@style@simple*{#2}%
+      }{%
+         \tw@declare@style@simple{#2}%
+      }%
+   }{%
+      \tw@mk@error{Style '#2' already defined!\MessageBreak
+      Use \string\renewmenustylesimple\space instead.}%
+      \tw@mk@gobble@args{o m o o m}%
+   }%
+}
+\NewDocumentCommand{\renewmenustylesimple}{s m}{%
+   \IfBooleanTF{#1}{%
+      \tw@declare@style@simple*{#2}%
+   }{%
+     \tw@declare@style@simple{#2}%
+   }%
+}
+\NewDocumentCommand{\providemenustylesimple}{s m}{%
+   \ifcsundef{tw@style@#2@pre}{%
+      \IfBooleanTF{#1}{%
+         \tw@declare@style@simple*{#2}%
+      }{%
+         \tw@declare@style@simple{#2}%
+      }%
+   }{%
+      \tw@mk@warning{Trying to provide style '#2' failed,\MessageBreak
+      because it's already defined.\MessageBreak
+      You may use \string\renewmenustylesimple\space instead.}%
+      \tw@mk@gobble@args{o m o o m}%
+   }%
+}
+
+\NewDocumentCommand{\newmenustyle}{s m}{%
+   \ifcsundef{tw@style@#2@pre}{%
+      \IfBooleanTF{#1}{%
+         \tw@declare@style*{#2}%
+      }{%
+         \tw@declare@style{#2}%
+      }%
+   }{%
+      \tw@mk@error{Style '#2' already defined!\MessageBreak
+      Use \string\renewmenustyle\space instead.}%
+      \tw@mk@gobble@args{o m o m m m o m}%
+   }%
+}
+\NewDocumentCommand{\renewmenustyle}{s m}{%
+   \IfBooleanTF{#1}{%
+      \tw@declare@style*{#2}%
+   }{%
+     \tw@declare@style{#2}%
+   }%
+}
+\NewDocumentCommand{\providemenustyle}{s m}{%
+   \ifcsundef{tw@style@#2@pre}{%
+      \IfBooleanTF{#1}{%
+         \tw@declare@style*{#2}%
+      }{%
+         \tw@declare@style{#2}%
+      }%
+   }{%
+      \tw@mk@warning{Trying to provide style #2 failed,\MessageBreak
+      because it's already defined.\MessageBreak
+      You may use \string\renewmenustyle\space instead.}%
+      \tw@mk@gobble@args{o m o m m m o m}%
+   }%
+}
+\newcommand*{\copymenustyle}[2]{%
+   \ifcsundef{tw@style@#1@pre}{%
+      \ifcsundef{tw@style@#2@pre}{%
+         \tw@mk@error{Can't copy not existing style ('#2')!}%
+      }{%
+         \csletcs{tw@style@#1@pre}{tw@style@#2@pre}%
+         \csletcs{tw@style@#1@post}{tw@style@#2@post}%
+         \csletcs{tw@style@#1@sep}{tw@style@#2@sep}%
+         \csletcs{tw@style@#1@single}{tw@style@#2@single}%
+         \csletcs{tw@style@#1@first}{tw@style@#2@first}%
+         \csletcs{tw@style@#1@mid}{tw@style@#2@mid}%
+         \csletcs{tw@style@#1@last}{tw@style@#2@last}%
+         \csletcs{tw@style@#1@color@theme}{tw@style@#2@color@theme}
+      }%
+   }{%
+      \tw@mk@error{Style '#1' already exists!}%
+   }%
+}
+\NewDocumentCommand{\changemenuelement}{s m m m}{%
+   \ifcsundef{tw@style@#2@pre}{%
+      \tw@mk@error{Style '#2' undefined.}%
+   }{%
+      \IfSubStr{ single first middle last pre post sep }{ #3 }{%
+         \IfBooleanTF{#1}{%
+            \csdef{tw@style@#2@#3}{#4}%
+         }{%
+            \IfSubStr{ pre post sep }{ #3 }{%
+               \csdef{tw@style@#2@#3}{#4}%
+            }{%
+            \csdef{tw@style@#2@#3}{%
+               \tikz[baseline=(tw@node.base)]{%
+               \node(tw@node)[#4]{\strut\CurrentMenuElement};}}%
+            }%
+         }%
+      }{\tw@mk@error{No element '#3'. Possible values are\MessageBreak
+        single, first, middle, last, pre, post or sep.}}%
+   }%
+}
+\tikzset{tw@set@tikz@colors/.style={%
+   draw=\usemenucolor{br},
+   fill=\usemenucolor{bg},
+   text=\usemenucolor{txt},
+}}
+\tikzset{tw@menus@base/.style={%
+   tw@set@tikz@colors,
+   rounded corners=0.15ex,
+   inner sep=0pt,
+   inner xsep=2pt,
+   text height=1.825ex,
+   text depth=0.7ex,
+   minimum width=1.5em,
+   font=\relsize{-1}\sffamily,
+   signal,
+   signal to=nowhere,
+   signal pointer angle=110,
+}}
+\tw@declare@style*{menus}{%
+   \tikz[baseline={($(tw@node.base)+(0,-0.2ex)$)}]{%
+      \node(tw@node)[tw@menus@base,signal to=east]%
+      {\strut\CurrentMenuElement};}%
+}[\hspace{-0.2em}\hspace{0em plus 0.1em minus 0.05em}]%
+{%
+   \tikz[baseline={($(tw@node.base)+(0,-0.2ex)$)}]{%
+      \node(tw@node)[tw@menus@base,signal from=west,signal to=east]%
+      {\strut\CurrentMenuElement};}%
+}{%
+   \tikz[baseline={($(tw@node.base)+(0,-0.2ex)$)}]{%
+      \node(tw@node)[tw@menus@base,signal from=west,]%
+      {\strut\CurrentMenuElement};}%
+}{%
+   \tikz[baseline={($(tw@node.base)+(0,-0.2ex)$)}]{%
+      \node(tw@node)[tw@menus@base]{\strut\CurrentMenuElement};}%
+}{gray}
+
+\tikzset{tw@roundedmenus@base/.style={%
+   tw@set@tikz@colors,
+   rounded corners=0.3ex,
+   inner sep=0pt,
+   inner xsep=2pt,
+   text height=1.825ex,
+   text depth=0.7ex,
+   minimum width=1.5em,
+   font=\relsize{-1}\sffamily,
+   signal,
+   signal to=nowhere,
+   signal pointer angle=110,
+}}
+\tw@declare@style*{roundedmenus}{%
+   \tikz[baseline={($(tw@node.base)+(0,-0.2ex)$)}]{%
+      \node(tw@node)[tw@roundedmenus@base,signal to=east]%
+      {\strut\CurrentMenuElement};}%
+}[\hspace{-0.2em}\hspace{0em plus 0.1em minus 0.05em}]%
+{%
+   \tikz[baseline={($(tw@node.base)+(0,-0.2ex)$)}]{%
+      \node(tw@node)[tw@roundedmenus@base,signal from=west,signal to=east]%
+      {\strut\CurrentMenuElement};}%
+}{%
+   \tikz[baseline={($(tw@node.base)+(0,-0.2ex)$)}]{%
+      \node(tw@node)[tw@roundedmenus@base,signal from=west,]%
+      {\strut\CurrentMenuElement};}%
+}{%
+   \tikz[baseline={($(tw@node.base)+(0,-0.2ex)$)}]{%
+      \node(tw@node)[tw@roundedmenus@base]{\strut\CurrentMenuElement};}%
+}{gray}
+
+\tikzset{tw@angularmenus@base/.style={%
+   tw@set@tikz@colors,
+   inner sep=0pt,
+   inner xsep=2pt,
+   text height=1.825ex,
+   text depth=0.7ex,
+   minimum width=1.5em,
+   font=\relsize{-1}\sffamily,
+   signal,
+   signal to=nowhere,
+   signal pointer angle=110,
+}}
+\tw@declare@style*{angularmenus}{%
+   \tikz[baseline={($(tw@node.base)+(0,-0.2ex)$)}]{%
+      \node(tw@node)[tw@angularmenus@base,signal to=east]%
+      {\strut\CurrentMenuElement};}%
+}[\hspace{-0.2em}\hspace{0em plus 0.1em minus 0.05em}]%
+{%
+   \tikz[baseline={($(tw@node.base)+(0,-0.2ex)$)}]{%
+      \node(tw@node)[tw@angularmenus@base,signal from=west,signal to=east]%
+      {\strut\CurrentMenuElement};}%
+}{%
+   \tikz[baseline={($(tw@node.base)+(0,-0.2ex)$)}]{%
+      \node(tw@node)[tw@angularmenus@base,signal from=west,]%
+      {\strut\CurrentMenuElement};}%
+}{%
+   \tikz[baseline={($(tw@node.base)+(0,-0.2ex)$)}]{%
+      \node(tw@node)[tw@angularmenus@base]{\strut\CurrentMenuElement};}%
+}{gray}
+
+\tikzset{tw@roundedkeys@base/.style={%
+   tw@set@tikz@colors,
+   rounded corners=0.3ex,
+   inner sep=0pt,
+   inner xsep=2pt,
+   text height=1.825ex,
+   text depth=0.7ex,
+   minimum width=1.5em,
+   font=\relsize{-1}\sffamily,
+}}
+\tw@declare@style@simple*{roundedkeys}{%
+   \tikz[baseline={($(tw@node.base)+(0,-0.2ex)$)}]{%
+      \node(tw@node)[tw@roundedkeys@base]{\strut\CurrentMenuElement};}%
+}[%
+   \hspace{0.1em plus 0.1em minus 0.05em}%
+   \raisebox{0.25ex}{\sffamily\relsize{-2}+}%
+   \hspace{0.1em plus 0.1em minus 0.05em}%
+]{gray}
+
+\tikzset{tw@shadowedroundedkeys@base/.style={%
+   tw@set@tikz@colors,
+   rounded corners=0.3ex,
+   inner sep=0pt,
+   inner xsep=2pt,
+   text height=1.825ex,
+   text depth=0.7ex,
+   minimum width=1.5em,
+   font=\relsize{-1}\sffamily,
+   general shadow={%
+      shadow xshift=.2ex, shadow yshift=-.15ex,
+      fill=black,
+   },
+}}
+\tw@declare@style@simple*{shadowedroundedkeys}{%
+   \tikz[baseline={($(tw@node.base)+(0,-0.2ex)$)}]{%
+      \node(tw@node)[tw@shadowedroundedkeys@base]{\strut\CurrentMenuElement};}%
+}[%
+   \hspace{0.2ex}\hspace{0.1em plus 0.1em minus 0.05em}%
+   \raisebox{0.25ex}{\sffamily\relsize{-2}+}%
+   \hspace{0.1em plus 0.1em minus 0.05em}%
+][\hspace{0.2ex}]{gray}
+
+\tikzset{tw@angularkeys@base/.style={%
+   tw@set@tikz@colors,
+   inner sep=0pt,
+   inner xsep=2pt,
+   text height=1.825ex,
+   text depth=0.7ex,
+   minimum width=1.5em,
+   font=\relsize{-1}\sffamily,
+}}
+\tw@declare@style@simple*{angularkeys}{%
+   \tikz[baseline={($(tw@node.base)+(0,-0.2ex)$)}]{%
+      \node(tw@node)[tw@angularkeys@base]{\strut\CurrentMenuElement};}%
+}[%
+   \hspace{0.1em plus 0.1em minus 0.05em}%
+   \raisebox{0.25ex}{\sffamily\relsize{-2}+}%
+   \hspace{0.1em plus 0.1em minus 0.05em}%
+]{gray}
+
+\tikzset{tw@shadowedangularkeys@base/.style={%
+   tw@set@tikz@colors,
+   inner sep=0pt,
+   inner xsep=2pt,
+   text height=1.825ex,
+   text depth=0.7ex,
+   minimum width=1.5em,
+   font=\relsize{-1}\sffamily,
+   general shadow={%
+      shadow xshift=.2ex, shadow yshift=-.15ex,
+      fill=black,
+   },
+}}
+\tw@declare@style@simple*{shadowedangularkeys}{%
+   \tikz[baseline={($(tw@node.base)+(0,-0.2ex)$)}]{%
+      \node(tw@node)[tw@shadowedangularkeys@base]{\strut\CurrentMenuElement};}%
+}[%
+   \hspace{0.2ex}\hspace{0.1em plus 0.1em minus 0.05em}%
+   \raisebox{0.25ex}{\sffamily\relsize{-2}+}%
+   \hspace{0.1em plus 0.1em minus 0.05em}%
+][\hspace{0.2ex}]{gray}
+
+\tikzset{tw@typewriterkeys@base/.style={%
+   tw@set@tikz@colors,
+   shape=circle,
+   minimum size=2ex,
+   inner sep=0.5pt, outer sep=1pt,
+   font=\ttfamily\relsize{-1},
+}}
+\tw@declare@style@simple*{typewriterkeys}{%
+   \def\tw@typewriterkeys@curr@elem{%
+      \maxsizebox*{2ex}{2ex}{\CurrentMenuElement}%
+   }%
+   \begin{tikzpicture}[baseline={($(tw@node.south)+(0,0.8ex)$)}]%
+      \node(tw@node)[%
+         tw@typewriterkeys@base, inner sep=1.25pt, line width=0.6pt%
+      ]{\tw@typewriterkeys@curr@elem};
+      \node[tw@typewriterkeys@base]{\tw@typewriterkeys@curr@elem};
+   \end{tikzpicture}%
+}[%
+   \hspace{0.2ex}\hspace{0.1em plus 0.1em minus 0.05em}%
+   \raisebox{0.25ex}{\sffamily\relsize{-2}+}%
+   \hspace{0.1em plus 0.1em minus 0.05em}%
+]{blacknwhite}
+
+\tw@declare@style@simple*{paths}{%
+   {\ttfamily\CurrentMenuElement}%
+}[%
+   \hspace{0.2em plus 0.1em}%
+   \raisebox{0.08ex}{%
+      \tikz{\fill[\usemenucolor{txt}] (0,0) -- (0.5ex,0.5ex)%
+                -- (0,1ex) -- cycle;}%
+   }%
+   \hspace{0.2em plus 0.1em}%
+]{blacknwhite}
+
+\newcounter{tw@hyphen@char@num}
+\newif\if@tw@hyphenatepaths@warnig
+\@tw@hyphenatepaths@warnigtrue
+\tw@declare@style@simple*{hyphenatepaths}{%
+   {\ttfamily
+    \IfStrEq{T1}{\encodingdefault}{%
+       \setcounter{tw@hyphen@char@num}{23}%
+    }{%
+       \IfStrEq{OT1}{\encodingdefault}{%
+          \setcounter{tw@hyphen@char@num}{255}%
+       }{%
+          \if@tw@hyphenatepaths@warnig%
+          \tw@mk@warning{The hyphenatepaths styles will probably only\MessageBreak
+          work with T1 or OT1 encoding.}%
+          \fi\global\@tw@hyphenatepaths@warnigfalse%
+       }%
+    }%
+    \hyphenchar\font=\value{tw@hyphen@char@num}\relax
+    \CurrentMenuElement}%
+}[%
+   \hspace{0.2em plus 0.1em}%
+   \raisebox{0.08ex}{%
+      \tikz{\fill[\usemenucolor{txt}] (0,0) -- (0.5ex,0.5ex)%
+                -- (0,1ex) -- cycle;}%
+   }%
+   \hspace{0.2em plus 0.1em}%
+]{blacknwhite}
+
+\newcommand*{\drawtikzfolder}[1][white]{%
+   \begin{tikzpicture}[rounded corners=0.02ex,scale=0.7]
+      \draw (0,0) -- (1em,0) -- (1em,1.5ex) -- (0.5em,1.5ex) -- %
+            (0.4em,1.7ex) -- (0.1em,1.7ex) -- (0,1.5ex) -- cycle;
+      \draw [fill=#1] (0,0) -- (1em,0) -- (0.85em,1.15ex) -- %
+            ++(-1em,0) -- cycle;
+   \end{tikzpicture}%
+}
+
+\copymenustyle{pathswithfolder}{paths}
+\changemenuelement{pathswithfolder}{pre}{%
+   \textcolor{\usemenucolor{txt}}{\drawtikzfolder}%
+   \hspace{0.2em plus 0.1em}%
+}
+
+\copymenustyle{pathswithblackfolder}{paths}
+\changemenuelement{pathswithblackfolder}{pre}{%
+   \textcolor{\usemenucolor{txt}}{\drawtikzfolder[\usemenucolor{txt}]}%
+   \hspace{0.2em plus 0.1em}%
+}
+
+\copymenustyle{hyphenatepathswithfolder}{hyphenatepaths}
+\changemenuelement{hyphenatepathswithfolder}{pre}{%
+   \textcolor{\usemenucolor{txt}}{\drawtikzfolder}%
+   \hspace{0.2em plus 0.1em}%
+}
+
+\copymenustyle{hyphenatepathswithblackfolder}{hyphenatepaths}
+\changemenuelement{hyphenatepathswithblackfolder}{pre}{%
+   \textcolor{\usemenucolor{txt}}{\drawtikzfolder[\usemenucolor{txt}]}%
+   \hspace{0.2em plus 0.1em}%
+}
+\edef\tw@default@input@sep{,}
+\def\CurrentMenuElement{}
+\begingroup
+\lccode`\,=1
+\lowercase{\endgroup
+  \robust@def*\tw@mk@test@input@sep#1{%
+    \xifinsetTF{,\cpttrimspaces{#1},}{,bslash,backslash,directory,location,}%
+  }%
+}
+\NewDocumentCommand{\tw@define@menu@macro}{%
+   m O{\tw@default@input@sep} m
+}{%
+   \ifcsundef{tw@style@#3@sep}{%
+      \tw@mk@error{Can't define menu macro \string#1\space,\MessageBreak
+      because the style '#3' is not available!}
+   }{%
+      \csdef{tw@parse@menu@list@\expandafter\@gobble\string#1}##1{%
+         \iflastindris
+            \ifnum\indrisnr=\@ne
+                \def\CurrentMenuElement{##1}%
+                \@nameuse{tw@style@#3@single}%
+            \else
+                \def\CurrentMenuElement{##1}%
+                \@nameuse{tw@style@#3@sep}\@nameuse{tw@style@#3@last}%
+            \fi
+         \else
+            \ifnum\indrisnr=\@ne
+               \def\CurrentMenuElement{##1}%
+               \@nameuse{tw@style@#3@first}%
+            \else
+               \def\CurrentMenuElement{##1}%
+               \@nameuse{tw@style@#3@sep}\@nameuse{tw@style@#3@mid}%
+            \fi
+         \fi
+      }%
+      \expandafter\newcommand\csname\expandafter\@gobble\string#1\endcsname[2][#2]{%
+         \leavevmode%
+         {\def\tw@current@color@theme{\csname tw@style@#3@color@theme\endcsname}%
+         \@nameuse{tw@style@#3@pre}%
+         \tw@mk@test@input@sep{##1}{%
+            \edef\tw@menu@list{\detokenize{##2}}\edef\tw@mk@tempa{\@backslashchar}%
+         }{%
+            \edef\tw@menu@list{\unexpanded{##2}}\edef\tw@mk@tempa{\cpttrimspaces{##1}}%
+         }%
+         {\letcs{\tw@mk@tempb}{tw@parse@menu@list@\expandafter\@gobble\string#1}%
+         \cptexpanded{\indrisloop*[\tw@mk@tempa]}\tw@menu@list\tw@mk@tempb}%
+         \@nameuse{tw@style@#3@post}}%
+      }%
+   }%
+}
+\edef\cpt@parserlist{\cpt@parserlist\@backslashchar}
+\NewDocumentCommand{\newmenumacro}{m O{\tw@default@input@sep} m}{%
+   \ifcsundef{\expandafter\@gobble\string#1}{%
+      \tw@define@menu@macro{#1}[#2]{#3}%
+      \expandafter\cptrobustify\csname\expandafter\@gobble\string#1\endcsname
+   }{
+      \tw@mk@error{Menu macro '\string#1' already defined!\MessageBreak
+      Use \string\renewmenustyle\space instead.}
+   }%
+}
+\NewDocumentCommand{\renewmenumacro}{m O{\tw@default@input@sep} m}{%
+   \cslet{\expandafter\@gobble\string#1}{\relax}%
+   \tw@define@menu@macro{#1}[#2]{#3}%
+}
+\NewDocumentCommand{\providemenumacro}{m O{\tw@default@input@sep} m}{%
+   \ifcsundef{\expandafter\@gobble\string#1}{%
+      \tw@define@menu@macro{#1}[#2]{#3}%
+   }{
+      \tw@mk@warning{Menu macro '\string#1' already defined!\MessageBreak
+      Use \string\renewmenustyle\space to redefine it.}
+   }%
+}
+\iftw@mk@definemenumacros
+\newmenumacro{\menu}[>]{menus}
+\newmenumacro{\directory}[/]{paths}
+\newmenumacro{\keys}[+]{roundedkeys}
+\fi
+\iftw@mk@definekeys
+\NewDocumentCommand{\tw@make@key@box}{m m}{%
+   \csdef{tw@mk@#1}{%
+      #2%
+   }%
+}
+\NewDocumentCommand{\tw@make@key@macro}{s m}{%
+   \IfBooleanTF{#1}{%
+      \expandafter\providecommand\csname\expandafter\@gobble\string#2\endcsname{%
+         \expandonce{\maxsizebox{!}{1.8ex}{%
+            \@nameuse{tw@mk@\expandafter\@gobble\string#2@\tw@mk@os}}%
+         }%
+      }%
+      \expandafter\providecommand\csname\expandafter\@gobble\string#2mac\endcsname{%
+         \expandonce{\maxsizebox{!}{1.8ex}{%
+            \@nameuse{tw@mk@\expandafter\@gobble\string#2@mac}}%
+         }%
+      }%
+      \expandafter\providecommand\csname\expandafter\@gobble\string#2win\endcsname{%
+         \expandonce{\maxsizebox{!}{1.8ex}{%
+            \@nameuse{tw@mk@\expandafter\@gobble\string#2@win}}%
+         }%
+      }%
+   }{%
+      \expandafter\providecommand\csname\expandafter\@gobble\string#2\endcsname{%
+         \expandonce{\maxsizebox{!}{1.8ex}{%
+            \@nameuse{tw@mk@\expandafter\@gobble\string#2}}%
+         }%
+      }%
+   }%
+}
+\newcommand*{\tw@define@mackey}[2]{%
+   \IfStrEq{text}{\tw@mk@mackeys}{#1}{%
+      \IfStrEq{symbols}{\tw@mk@mackeys}{#2}{}%
+   }%
+}
+\tikzset{
+   menukeys key symbol/.style={
+      rounded corners=0pt,
+      line width=0.1ex,
+      baseline={(0,0)},
+   },
+   menukeys thick/.style={line width=0.25ex},
+}
+\normalsize
+\tw@make@key@box{shift}{%
+   \begin{tikzpicture}[yshift=-0.1ex,menukeys key symbol]
+      \draw (0.3ex,0) -- (1.1ex,0) -- (1.1ex,1.2ex) -- %
+            (1.5ex,1.2ex) -- (0.7ex,1.9ex) -- (-0.1ex,1.2ex) -- %
+            (0.3ex,1.2ex) -- cycle;
+   \end{tikzpicture}%
+}
+\tw@make@key@macro{\shift}
+\tw@make@key@box{capslock@mac}{%
+   \begin{tikzpicture}[yshift=-0.1ex,menukeys key symbol]
+      \draw (0.3ex,0.7ex) -- (1.1ex,0.7ex) -- (1.1ex,1.2ex) -- %
+            (1.5ex,1.2ex) -- (0.7ex,1.9ex) -- (-0.1ex,1.2ex) -- %
+            (0.3ex,1.2ex) -- cycle;
+      \draw (0.3ex,0) rectangle (1.1ex,0.4ex);
+   \end{tikzpicture}%
+}
+\tw@make@key@box{capslock@win}{%
+   \begin{tikzpicture}[yscale=-1,yshift=-1.8ex,menukeys key symbol]
+      \draw (0.3ex,0) -- (1.1ex,0) -- (1.1ex,1.2ex) -- %
+            (1.5ex,1.2ex) -- (0.7ex,1.9ex) -- (-0.1ex,1.2ex) -- %
+            (0.3ex,1.2ex) -- cycle;
+   \end{tikzpicture}%
+}
+\tw@make@key@macro*{\capslock}
+\tw@make@key@box{tab@mac}{%
+   \begin{tikzpicture}[yshift=0.6ex,menukeys key symbol]
+      \draw [->] (0,0) -- (1em,0);
+      \draw (1em,-0.35ex) -- (1em,0.35ex);
+   \end{tikzpicture}%
+}
+\tw@make@key@box{tab@win}{%
+   \begin{tikzpicture}[yshift=0.1ex,menukeys key symbol]
+      \draw [->] (0.2em,0) -- (1.2em,0);
+      \draw (1.2em,-0.35ex) -- (1.2em,0.35ex);
+      \draw [<-] (0,1ex) -- (1em,1ex);
+      \draw (0,0.65ex) -- (0,1.35ex);
+   \end{tikzpicture}%
+}
+\tw@make@key@macro*{\tab}
+
+\def\tw@mk@esc@win{Esc}
+\tw@define@mackey{%
+   \def\tw@mk@esc@mac{esc}
+}{%
+   \tw@make@key@box{esc@mac}{%
+      \begin{tikzpicture}[yshift=-0.1ex,menukeys key symbol]
+         \draw [->] (0.5ex,0.5ex) -- ++(45:1.1ex);
+         \draw (0.5ex,0.5ex) ++(15:0.6ex) arc (15:-285:0.6ex);
+      \end{tikzpicture}%
+   }%
+}
+\tw@make@key@macro*{\esc}
+
+\providecommand\ctrlname{Ctrl}
+\def\tw@mk@ctrl@win{\ctrlname}
+\def\tw@mk@ctrl@mac{ctrl}
+\tw@make@key@macro*{\ctrl}
+
+\def\tw@mk@Alt@win{Alt}
+\tw@define@mackey{%
+   \def\tw@mk@Alt@mac{alt}%
+}{%
+   \tw@make@key@box{Alt@mac}{%
+      \begin{tikzpicture}[yshift=-0.1ex,menukeys key symbol]
+         \draw (0,1ex) -- (0.5ex,1ex) -- (1ex,0.3ex) -- (1.8ex,0.3ex);
+         \draw (0.8ex,1ex) -- (1.8ex,1ex);
+      \end{tikzpicture}%
+   }%
+}
+\tw@make@key@macro*{\Alt}
+
+\providecommand*{\AltGr}{Alt\,Gr}
+
+\def\tw@mk@cmd@win{%
+   \tw@mk@warning{'\string\cmd' only for Mac!}%
+}
+\tw@define@mackey{%
+   \def\tw@mk@cmd@mac{cmd}%
+}{%
+   \tw@make@key@box{cmd@mac}{%
+      \begin{tikzpicture}[yshift=-0.15ex,menukeys key symbol]
+         \draw (0.5ex,0.7ex) -- (0.5ex,1.25ex) arc (0:270:0.25ex) -- %
+               (1.25ex,1ex) arc (-90:180:0.25ex) -- (1ex,0.25ex) %
+               arc (-180:90:0.25ex) -- (0.25ex,0.5ex) arc (90:360:0.25ex) %
+               -- cycle;
+      \end{tikzpicture}%
+   }%
+}
+\tw@make@key@macro*{\cmd}
+
+\providecommand*{\Space}{\expandonce{\rule{3em}{0pt}}}
+\newcommand{\spacename}{Space}
+\providecommand*{\SPACE}{\expandonce{\rule{2em}{0pt}\spacename\rule{2em}{0pt}}}
+
+\tw@make@key@box{return@mac}{%
+   \begin{tikzpicture}[yshift=0.25ex,menukeys key symbol]
+      \draw [->, rounded corners=0.2ex] (1.25ex,1ex) -| %
+            (2ex,0) -- (0,0);
+   \end{tikzpicture}%
+}
+\tw@make@key@box{return@win}{%
+   \begin{tikzpicture}[menukeys key symbol]
+      \draw [->] (1ex,1.25ex) |- (0,0);
+   \end{tikzpicture}%
+}
+\tw@make@key@macro*{\return}
+
+\def\tw@mk@enter@win{Enter}
+\tw@make@key@box{enter@mac}{%
+   \begin{tikzpicture}[menukeys key symbol]
+      \draw (0,0) -- (0.5ex,0.5ex) -- (1ex,0);
+      \draw (0,0.55ex) -- (1ex,0.55ex);
+   \end{tikzpicture}%
+}
+\tw@make@key@macro*{\enter}
+
+\def\tw@mk@winmenu@mac{%
+   \tw@mk@warning{'\string\winmenu' only for Windows!}%
+}
+\tw@make@key@box{winmenu@win}{%
+   \begin{tikzpicture}[yshift=-0.2ex,menukeys key symbol]
+      \draw (0,0) rectangle (1.5ex,1.8ex);
+      \draw (0.25ex,1.4ex) -- ++(1ex,0);
+      \draw (0.25ex,1ex) -- ++(1ex,0);
+      \draw (0.25ex,0.6ex) -- ++(1ex,0);
+   \end{tikzpicture}%
+}
+\tw@make@key@macro*{\winmenu}
+
+\tw@make@key@box{backspace}{%
+   \begin{tikzpicture}[yshift=0.65ex,menukeys key symbol]
+      \draw [<-,menukeys thick] (0,0) -- (1.35em,0);
+   \end{tikzpicture}%
+}
+\tw@make@key@macro{\backspace}
+
+\providecommand{\delname}{Del.}
+\def\tw@mk@del@win{\delname}
+\tw@define@mackey{%
+   \def\tw@mk@del@mac{\delname}%
+}{%
+   \tw@make@key@box{del@mac}{%
+      \begin{tikzpicture}[yshift=0.2ex,menukeys key symbol]
+         \draw (0,0) -- (1.5ex,0) -- (2ex,0.5ex) --%
+               (1.5ex,1ex) -- (0,1ex) -- cycle;
+         \draw (0.5ex,0.2ex) -- (1.1ex,0.8ex);
+         \draw (0.5ex,0.8ex) -- (1.1ex,0.2ex);
+      \end{tikzpicture}%
+   }%
+}
+\tw@make@key@macro*{\del}
+\tw@make@key@box{arrowkeyup}{%
+   \begin{tikzpicture}[yshift=-0.2ex,menukeys key symbol]
+      \draw [->] (0,0) -- (0,0.8em);
+   \end{tikzpicture}%
+}
+\tw@make@key@macro{\arrowkeyup}
+
+\tw@make@key@box{arrowkeydown}{%
+   \begin{tikzpicture}[yshift=0.7em,menukeys key symbol]
+      \draw [->] (0,0) -- (0,-0.8em);
+   \end{tikzpicture}%
+}
+\tw@make@key@macro{\arrowkeydown}
+
+\tw@make@key@box{arrowkeyright}{%
+   \begin{tikzpicture}[yshift=0.5ex,menukeys key symbol]
+      \draw [->] (0,0) -- (0.8em,0);
+   \end{tikzpicture}%
+}
+\tw@make@key@macro{\arrowkeyright}
+
+\tw@make@key@box{arrowkeyleft}{%
+   \begin{tikzpicture}[yshift=0.5ex,menukeys key symbol]
+      \draw [->] (0,0) -- (-0.8em,0);
+   \end{tikzpicture}%
+}
+\tw@make@key@macro{\arrowkeyleft}
+\newcommand{\arrowkey}[1]{%
+   \IfStrEq{^}{#1}{\arrowkeyup}{%
+      \IfStrEq{v}{#1}{\arrowkeydown}{%
+         \IfStrEq{<}{#1}{\arrowkeyleft}{%
+            \IfStrEq{>}{#1}{\arrowkeyright}{%
+               \tw@mk@error{Wrong value '#1' for \string\arrowkey\MessageBreak
+               Possible values are '^', 'v', '<' or '>'}%
+            }%
+         }%
+      }%
+   }%
+}
+\fi
+\endinput
+%%
+%% End of file `menukeys.sty'.

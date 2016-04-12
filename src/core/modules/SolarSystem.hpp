@@ -345,6 +345,29 @@ public slots:
 	//! Get the current value of the flag which enables showing of isolated orbits for selected objects only or not.
 	bool getFlagIsolatedOrbits(void) const;
 
+	//! Set flag which determines if custom settings is using for Great Red Spot on Jupiter
+	void setFlagCustomGrsSettings(bool b);
+	//! Get the current value of the flag which determines if custom settings for Great Red Spot on Jupiter is used or not.
+	bool getFlagCustomGrsSettings();
+
+	//! Set longitude of Great Red Spot (System II is used)
+	//! @param longitude (degrees)
+	void setCustomGrsLongitude(int longitude);
+	//! Get longitude of Great Red Spot (System II is used)
+	//! @return a longitude (degrees)
+	int getCustomGrsLongitude();
+
+	//! Set speed of annual drift for Great Red Spot (System II is used)
+	//! @param annual drift (degrees)
+	void setCustomGrsDrift(double drift);
+	//! Get speed of annual drift for Great Red Spot (System II is used)
+	double getCustomGrsDrift();
+
+	//! Set initial JD for calculation of position of Great Red Spot
+	//! @param JD
+	void setCustomGrsJD(double JD);
+	//! Get initial JD for calculation of position of Great Red Spot
+	double getCustomGrsJD();
 signals:
 	void flagIsolatedOrbitsChanged(bool b);
 	void flagIsolatedTrailsChanged(bool b);
@@ -490,6 +513,7 @@ private:
 
 	class TrailGroup* allTrails;
 	StelGui* gui;
+	QSettings* conf;
 	LinearFader trailFader;
 	Vec3f trailColor;
 	Vec3f pointerColor;

@@ -23,6 +23,7 @@
 #include "ui_viewDialog.h"
 #include "AddRemoveLandscapesDialog.hpp"
 #include "AtmosphereDialog.hpp"
+#include "GreatRedSpotDialog.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelSkyCultureMgr.hpp"
@@ -62,6 +63,7 @@ ViewDialog::ViewDialog(QObject* parent) : StelDialog(parent)
 	ui = new Ui_viewDialogForm;
 	addRemoveLandscapesDialog = NULL;
 	atmosphereDialog=NULL;
+	greatRedSpotDialog=NULL;
 }
 
 ViewDialog::~ViewDialog()
@@ -72,6 +74,8 @@ ViewDialog::~ViewDialog()
 	addRemoveLandscapesDialog = NULL;
 	delete atmosphereDialog;
 	atmosphereDialog = NULL;
+	delete greatRedSpotDialog;
+	greatRedSpotDialog = NULL;
 }
 
 void ViewDialog::retranslate()
@@ -128,6 +132,13 @@ void ViewDialog::createDialogContent()
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	populateLists();
+
+	// Note: GZ had a day of "fun" on 20160411-12 sorting out the merge with the restructured method from trunk.
+	// I had to check whether all entries from re-arranged trunk are present in the property-enabled versions here.
+	// I hope I have everything working again.
+	// TODO: New method: populateLightPollution may be useful. Make sure it is.
+	// Jupiter's GRS must become property, and recheck the other "from trunk" entries.
+
 	connectDoubleProperty(ui->viewportOffsetSpinBox, "prop_StelMovementMgr_viewportVerticalOffsetTarget");
 
 	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)),&StelApp::getInstance().getSkyCultureMgr(),SLOT(setCurrentSkyCultureNameI18(QString)));
@@ -150,7 +161,11 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxProportionalHints, "prop_NebulaMgr_hintsProportional");
 	connectBoolProperty(ui->checkBoxSurfaceBrightnessUsage, "prop_NebulaMgr_flagSurfaceBrightnessUsage");
 
+	// From Trunk, but seems OK here. It was close to end before.
+	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
+
 	// Stars section
+	connectGroupBox(ui->starGroupBox, "actionShow_Stars"); // NEW FROM TRUNK
 	connectBoolProperty(ui->starTwinkleCheckBox, "prop_SkyDrawer_flagTwinkle");
 	connectDoubleProperty(ui->starScaleRadiusDoubleSpinBox,"prop_SkyDrawer_absoluteStarScale");
 	connectDoubleProperty(ui->starRelativeScaleDoubleSpinBox, "prop_SkyDrawer_relativeStarScale");
@@ -171,7 +186,8 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->nebulaLimitMagnitudeDoubleSpinBox,"prop_SkyDrawer_customNebulaMagLimit");
 
 	// Planets section
-	connectCheckBox(ui->showPlanetCheckBox, "actionShow_Planets");
+	//connectCheckBox(ui->showPlanetCheckBox, "actionShow_Planets"); // ui element MAY HAVE BEEN RENAMED IN TRUNK?
+	connectGroupBox(ui->planetsGroupBox, "actionShow_Planets"); // THIS ONE FROM TRUNK
 	connectCheckBox(ui->planetMarkerCheckBox, "actionShow_Planets_Hints");
 
 	connectBoolProperty(ui->planetScaleMoonCheckBox, "prop_SolarSystem_flagMoonScale");
@@ -181,6 +197,16 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->planetIsolatedOrbitCheckBox, "prop_SolarSystem_flagIsolatedOrbits");
 	connectBoolProperty(ui->planetIsolatedTrailsCheckBox, "prop_SolarSystem_flagIsolatedTrails");
 	connectBoolProperty(ui->planetLightSpeedCheckBox, "prop_SolarSystem_flagLightTravelTime");
+
+	// NEW SECTION FROM TRUNK: GreatRedSpot (Jupiter)
+	// TODO: put under Properties system!
+	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
+	Q_ASSERT(ssmgr);
+	bool grsFlag = ssmgr->getFlagCustomGrsSettings();
+	ui->customGrsSettingsCheckBox->setChecked(grsFlag);
+	connect(ui->customGrsSettingsCheckBox, SIGNAL(toggled(bool)), this, SLOT(setFlagCustomGrsSettings(bool)));
+	ui->pushButtonGrsDetails->setEnabled(grsFlag);
+	connect(ui->pushButtonGrsDetails, SIGNAL(clicked()), this, SLOT(showGreatRedSpotDialog()));
 
 	// Shooting stars section
 	SporadicMeteorMgr* mmgr = GETSTELMODULE(SporadicMeteorMgr);
@@ -209,6 +235,7 @@ void ViewDialog::createDialogContent()
 
 	// Landscape section
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
+	Q_ASSERT(lmgr);
 	connectCheckBox(ui->showGroundCheckBox, "actionShow_Ground");
 	connectCheckBox(ui->showFogCheckBox, "actionShow_Fog");
 	connectGroupBox(ui->atmosphereGroupBox, "actionShow_Atmosphere");
@@ -233,23 +260,30 @@ void ViewDialog::createDialogContent()
 	connect(lmgr,SIGNAL(defaultLandscapeChanged(QString)),this,SLOT(updateDefaultLandscape()));
 	updateDefaultLandscape();
 
-	connect(GETSTELMODULE(LandscapeMgr), SIGNAL(landscapesChanged()), this, SLOT(populateLists()));
+	connect(lmgr, SIGNAL(landscapesChanged()), this, SLOT(populateLists()));
 	connect(ui->pushButtonAddRemoveLandscapes, SIGNAL(clicked()), this, SLOT(showAddRemoveLandscapesDialog()));
 
 	// Light pollution
 	StelSkyDrawer* drawer = StelApp::getInstance().getCore()->getSkyDrawer();
-	setLightPollutionSpinBoxStatus();
+	// TODO: In trunk, populateLightPollution has been added, while socis has setLightPollutionSpinBoxStatus.
+	// The trunk version also sets value of the spinbox, this seems more complete.
+	//setLightPollutionSpinBoxStatus();
+	populateLightPollution();
 	ui->useLocationDataCheckBox->setChecked(lmgr->getFlagUseLightPollutionFromDatabase());
 	connect(ui->useLocationDataCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagUseLightPollutionFromDatabase(bool)));
 	connect(lmgr, SIGNAL(lightPollutionUsageChanged(bool)), ui->useLocationDataCheckBox, SLOT(setChecked(bool)));
-	connect(lmgr, SIGNAL(lightPollutionUsageChanged(bool)), this, SLOT(setLightPollutionSpinBoxStatus()));
+	// TODO: Decide which is better?
+	//connect(lmgr, SIGNAL(lightPollutionUsageChanged(bool)), this, SLOT(setLightPollutionSpinBoxStatus()));
+	connect(lmgr, SIGNAL(lightPollutionUsageChanged(bool)), this, SLOT(populateLightPollution()));
+
 
 	ui->lightPollutionSpinBox->setValue(drawer->getBortleScaleIndex());
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), drawer, SLOT(setBortleScaleIndex(int)));
 	connect(drawer, SIGNAL(bortleScaleIndexChanged(int)), ui->lightPollutionSpinBox, SLOT(setValue(int)));
 	connect(drawer, SIGNAL(bortleScaleIndexChanged(int)), this, SLOT(setBortleScaleToolTip(int)));
 
-	connectBoolProperty(ui->autoChangeLandscapesCheckBox,"prop_LandscapeMgr_flagLandscapeAutoSelection");
+	// TODO Merge trouble: This has vanished in the merge on 20160411.
+	//connectBoolProperty(ui->autoChangeLandscapesCheckBox,"prop_LandscapeMgr_flagLandscapeAutoSelection");
 	
 	// atmosphere details
 	connect(ui->pushButtonAtmosphereDetails, SIGNAL(clicked()), this, SLOT(showAtmosphereDialog()));
@@ -296,10 +330,10 @@ void ViewDialog::createDialogContent()
 	connectIntProperty(ui->skyCultureNamesStyleComboBox,"prop_ConstellationMgr_constellationDisplayStyle");
 
 	// Sky layers. This not yet finished and not visible in releases.
+	// TODO: These 4 lines are commented away in trunk.
 	populateSkyLayersList();
 	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(populateSkyLayersList()));
 	connect(ui->skyLayerListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyLayersSelectionChanged(const QString&)));
-	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 	connect(ui->skyLayerEnableCheckBox, SIGNAL(stateChanged(int)), this, SLOT(skyLayersEnabledChanged(int)));
 
 	updateTabBarListWidgetWidth();
@@ -443,6 +477,38 @@ void ViewDialog::updateSelectedTypesCheckBoxes()
 	ui->checkBoxOtherType->setChecked(flags & Nebula::TypeOther);
 }
 
+void ViewDialog::setFlagCustomGrsSettings(bool b)
+{
+	GETSTELMODULE(SolarSystem)->setFlagCustomGrsSettings(b);
+	ui->pushButtonGrsDetails->setEnabled(b);
+	if (!b)
+		greatRedSpotDialog->setVisible(false);
+}
+
+
+// 20160411. New function introduced with trunk merge. Not sure yet if useful or bad with property connections?.
+void ViewDialog::populateLightPollution()
+{
+	StelCore *core = StelApp::getInstance().getCore();
+	LandscapeMgr *lmgr = GETSTELMODULE(LandscapeMgr);
+	int bIdx = core->getSkyDrawer()->getBortleScaleIndex();
+	if (lmgr->getFlagUseLightPollutionFromDatabase())
+	{
+		StelLocation loc = core->getCurrentLocation();
+		bIdx = loc.bortleScaleIndex;
+		if (!loc.planetName.contains("Earth")) // location not on Earth...
+			bIdx = 1;
+		if (bIdx<1) // ...or it observatory, or it unknown location
+			bIdx = loc.DEFAULT_BORTLE_SCALE_INDEX;
+		ui->lightPollutionSpinBox->setEnabled(false);
+	}
+	else
+		ui->lightPollutionSpinBox->setEnabled(true);
+
+	ui->lightPollutionSpinBox->setValue(bIdx);
+	setBortleScaleToolTip(bIdx);
+}
+// The version from socis only enables the spinbox without setting its value. TODO: Decide which is better?
 void ViewDialog::setLightPollutionSpinBoxStatus()
 {
 	LandscapeMgr *lmgr = GETSTELMODULE(LandscapeMgr);
@@ -677,52 +743,41 @@ void ViewDialog::showAtmosphereDialog()
 	atmosphereDialog->setVisible(true);
 }
 
+void ViewDialog::showGreatRedSpotDialog()
+{
+	if(greatRedSpotDialog == NULL)
+		greatRedSpotDialog = new GreatRedSpotDialog();
+
+	greatRedSpotDialog->setVisible(true);
+}
+
 void ViewDialog::updateZhrDescription(int zhr)
 {
-	switch (zhr)
-	{
-		case 0:
-			ui->zhrLabel->setText("<small><i>"+q_("No shooting stars")+"</i></small>");
-			break;
-		case 5:
-		case 6:
-		case 7:
-		case 8:
-		case 9:
-		case 10:
-			ui->zhrLabel->setText("<small><i>"+q_("Normal rate")+"</i></small>");
-			break;
-		case 25:
-			ui->zhrLabel->setText("<small><i>"+q_("Standard Orionids rate")+"</i></small>");
-			break;
-		case 100:
-			ui->zhrLabel->setText("<small><i>"+q_("Standard Perseids rate")+"</i></small>");
-			break;
-		case 120:
-			ui->zhrLabel->setText("<small><i>"+q_("Standard Geminids rate")+"</i></small>");
-			break;
-		case 200:
-			ui->zhrLabel->setText("<small><i>"+q_("Exceptional Perseid rate")+"</i></small>");
-			break;
-		case 1000:
-			ui->zhrLabel->setText("<small><i>"+q_("Meteor storm rate")+"</i></small>");
-			break;
-		case 6000:
-			ui->zhrLabel->setText("<small><i>"+q_("Exceptional Draconid rate")+"</i></small>");
-			break;
-		case 10000:
-			ui->zhrLabel->setText("<small><i>"+q_("Exceptional Leonid rate")+"</i></small>");
-			break;
-		case 144000:
-			ui->zhrLabel->setText("<small><i>"+q_("Very high rate (1966 Leonids)")+"</i></small>");
-			break;
-		case 240000:
-			ui->zhrLabel->setText("<small><i>"+q_("Highest rate ever (1833 Leonids)")+"</i></small>");
-			break;
-		default:
-			ui->zhrLabel->setText("");
-			break;
-	}
+	// GZ changed to small regions instead of hard "case" to better see a manual setting.
+	if (zhr==0)
+		ui->zhrLabel->setText("<small><i>"+q_("No shooting stars")+"</i></small>");
+	else if (zhr<=10)
+		ui->zhrLabel->setText("<small><i>"+q_("Normal rate")+"</i></small>");
+	else if ((zhr>=20) && (zhr<=30)) // was 25
+		ui->zhrLabel->setText("<small><i>"+q_("Standard Orionids rate")+"</i></small>");
+	else if ((zhr>=90) && (zhr<=110)) // was 100
+		ui->zhrLabel->setText("<small><i>"+q_("Standard Perseids rate")+"</i></small>");
+	else if ((zhr>=108) && (zhr<=132)) // was 120
+		ui->zhrLabel->setText("<small><i>"+q_("Standard Geminids rate")+"</i></small>");
+	else if ((zhr>=180) && (zhr<=220)) // was 200
+		ui->zhrLabel->setText("<small><i>"+q_("Exceptional Perseid rate")+"</i></small>");
+	else if ((zhr>=900) && (zhr<=1100)) // was 1000
+		ui->zhrLabel->setText("<small><i>"+q_("Meteor storm rate")+"</i></small>");
+	else if ((zhr>=5400) && (zhr<=6600)) // was 6000
+		ui->zhrLabel->setText("<small><i>"+q_("Exceptional Draconid rate")+"</i></small>");
+	else if ((zhr>=9000) && (zhr<=11000)) // was 10000
+		ui->zhrLabel->setText("<small><i>"+q_("Exceptional Leonid rate")+"</i></small>");
+	else if ((zhr>=130000) && (zhr<=160000)) // was 144000
+		ui->zhrLabel->setText("<small><i>"+q_("Very high rate (1966 Leonids)")+"</i></small>");
+	else if (zhr>=230000) // was 240000
+		ui->zhrLabel->setText("<small><i>"+q_("Highest rate ever (1833 Leonids)")+"</i></small>");
+	else
+		ui->zhrLabel->setText("");
 }
 
 void ViewDialog::setCurrentLandscapeAsDefault(void)
