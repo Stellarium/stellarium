@@ -69,9 +69,6 @@ ride of the tool-bar. If you hover the mouse cursor over the buttons, a
 short description of the button's purpose and keyboard shortcut will
 appear.
 
-% show small icon in-line. Lower by #2. Optional #1 is scale of icon. Use 0.45 for dialog icons, 0.75 for lower bar buttons.
-% Note that it's not possible to use \baselineskip. In Tabular environments this seems to be 0.
-\newcommand{\guibutton[3]}[0.45]{\raisebox{-#2mm}{\fbox{\includegraphics[scale=#1]{#3}}}}
 \begin{table}[h]
 \centering
 \begin{tabular}{c c l}\toprule

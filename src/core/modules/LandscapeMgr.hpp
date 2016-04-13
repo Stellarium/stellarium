@@ -104,6 +104,11 @@ class LandscapeMgr : public StelModule
 		   NOTIFY defaultMinimalBrightnessChanged
 		   )
 
+	Q_PROPERTY(bool flagAtmosphereAutoEnabling
+		   READ getFlagAtmosphereAutoEnable
+		   WRITE setFlagAtmosphereAutoEnable
+		   NOTIFY setFlagAtmosphereAutoEnableChanged
+		   )
 public:
 	LandscapeMgr();
 	virtual ~LandscapeMgr();
@@ -411,6 +416,7 @@ signals:
 	void flagLandscapeUseMinimalBrightnessChanged(const bool value);
 	void flagLandscapeSetsMinimalBrightnessChanged(const bool value);
 	void defaultMinimalBrightnessChanged(const double value);
+	void setFlagAtmosphereAutoEnableChanged(const bool enabled);
 
 	//! Emitted whenever the default landscape is changed
 	//! @param id the landscape id of the new default landscape

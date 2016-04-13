@@ -417,6 +417,7 @@ void LandscapeMgr::init()
 	addAction("actionShow_LandscapeLabels", displayGroup, N_("Labels"), "labelsDisplayed", "Ctrl+Shift+G");
 	addAction("actionShow_LightPollution_Database", displayGroup, N_("Light pollution data from locations database"), "databaseUsage");
 	registerProperty("prop_LandscapeMgr_flagLandscapeAutoSelection", "flagLandscapeAutoSelection");
+	registerProperty("prop_LandscapeMgr_flagAtmosphereAutoEnabling", "flagAtmosphereAutoEnabling");
 	registerProperty("prop_LandscapeMgr_flagLandscapeSetsLocation", "flagLandscapeSetsLocation");
 	registerProperty("prop_LandscapeMgr_flagLandscapeUseMinimalBrightness", "flagLandscapeUseMinimalBrightness");
 	registerProperty("prop_LandscapeMgr_flagLandscapeSetsMinimalBrightness", "flagLandscapeSetsMinimalBrightness");
@@ -665,7 +666,12 @@ bool LandscapeMgr::getFlagLandscapeAutoSelection() const
 
 void LandscapeMgr::setFlagAtmosphereAutoEnable(bool b)
 {
-	flagAtmosphereAutoEnabling = b;
+	if(b != flagAtmosphereAutoEnabling)
+	{
+		flagAtmosphereAutoEnabling = b;
+		emit setFlagAtmosphereAutoEnableChanged(b);
+	}
+
 }
 
 bool LandscapeMgr::getFlagAtmosphereAutoEnable() const
