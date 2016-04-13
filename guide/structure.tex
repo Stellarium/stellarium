@@ -60,14 +60,22 @@
 
 %% File names. 
 \newcommand{\file}[1]{\texttt{#1}}
-%% Parameters.
+%% Parameters for some programs. Only tt seems meaningful.
 \newcommand{\parameter}[1]{\texttt{#1}}
 %% Map keys.
 \newcommand{\keymap}[1]{\texttt{#1}}
 %% console commands, CLI arguments, etc.
 \newcommand{\command}[1]{\texttt{#1}}
+%% Names of 3rd-party software products like Photoshop, Sketchup etc. Not for OS names, they are too common. 
+\newcommand{\program}[1]{\textsf{\textbf{\small #1}}}
 
-\newcommand{\button}[1]{\textbf{\textsf{#1}}}% Will become a boxed text, representing a GUI button label.
+
+% show small icon in-line. Lower by #2. Optional #1 is scale of icon. Use 0.45 for dialog icons, 0.75 for lower bar buttons.
+% Note that it's not possible to use \baselineskip. In Tabular environments this seems to be 0.
+\newcommand{\guibutton[3]}[0.45]{\raisebox{-#2mm}{\fbox{\includegraphics[scale=#1]{#3}}}}
+
+% Will become a boxed text, representing a GUI button label.
+\newcommand{\button}[1]{\textbf{\textsf{\fbox{#1}}}}
 %% Person names. In some places they have been italicised, in others bold. Make them appear the same with this, and add them to the index:
 \newcommand{\name}[1]{\textsc{#1}\index{#1}}
 %% Some new term that is presented here with emphasis and also goes immediately to the index. 
@@ -95,7 +103,7 @@
 \lstnewenvironment{commands}{\lstset{language=sh,basicstyle=\ttfamily\small,%
                                      backgroundcolor=\color{black!5},frame=leftline,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
-\lstnewenvironment{configfile}{\lstset{language=sh,basicstyle=\ttfamily\small,%
+\lstnewenvironment{configfile}[1][\small]{\lstset{language=sh,basicstyle=\ttfamily#1,%
                                    backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
 \lstnewenvironment{script}{\lstset{language=PHP,%
