@@ -282,7 +282,7 @@ void ViewDialog::createDialogContent()
 	connect(drawer, SIGNAL(bortleScaleIndexChanged(int)), ui->lightPollutionSpinBox, SLOT(setValue(int)));
 	connect(drawer, SIGNAL(bortleScaleIndexChanged(int)), this, SLOT(setBortleScaleToolTip(int)));
 
-	// TODO Merge trouble: This has vanished in the merge on 20160411.
+	// Note: This has vanished in the merge on 20160411. -- Ah, moved to ConfigurationDialog.
 	//connectBoolProperty(ui->autoChangeLandscapesCheckBox,"prop_LandscapeMgr_flagLandscapeAutoSelection");
 	
 	// atmosphere details
