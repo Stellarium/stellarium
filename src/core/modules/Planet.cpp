@@ -55,8 +55,8 @@ StelTextureSP Planet::texEarthShadow;
 bool Planet::permanentDrawingOrbits = false;
 
 bool Planet::flagCustomGrsSettings = false;
-double Planet::customGrsJD = 2456908.;
-double Planet::customGrsDrift = 15.21875;
+double Planet::customGrsJD = 2456901.5;
+double Planet::customGrsDrift = 15.;
 int Planet::customGrsLongitude = 216;
 
 QOpenGLShaderProgram* Planet::planetShaderProgram=NULL;
@@ -736,7 +736,7 @@ double Planet::getSiderealTime(double JD, double JDE) const
 		else
 			longitudeGRS=216+1.25*( JDE - 2456908)/30;
 		// qDebug() << "Jupiter: CM2 = " << cm2 << " longitudeGRS = " << longitudeGRS << " --> rotation = " << (cm2 - longitudeGRS);
-		return cm2 - longitudeGRS + 25.; // + 25 = Jupiter Texture not 0d
+		return cm2 - longitudeGRS + 50.; // Jupiter Texture not 0d
 		// To verify:
 		// GRS at 2015-02-26 23:07 UT on picture at https://maximusphotography.files.wordpress.com/2015/03/jupiter-febr-26-2015.jpg
 		//        2014-02-25 19:03 UT    http://www.damianpeach.com/jup1314/2014_02_25rgb0305.jpg

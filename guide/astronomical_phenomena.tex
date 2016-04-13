@@ -257,13 +257,15 @@ is the prototype ``white'' star.
 
 By splitting the light from a star using a prism attached to a telescope
 and measuring the relative intensities of the colours of light the star
-emits --- the \emph{spectrum} --- a great deal of interesting information
+emits --- the \indexterm{spectrum} --- a great deal of interesting information
 can be discovered about a star including its surface temperature, and
 the presence of various elements in its atmosphere.
 
-\begin{longtable}[c]{lll}
+\begin{table}[htb]
+  \centering
+  \begin{tabular}{lll}
 \toprule
-Spectral Type & Surface Temperature (K) & Star Colour\\
+\emph{Spectral Type} & \emph{Surface Temperature (K)} & \emph{Star Colour}\\
 O & 28,000---50,000 & Blue\\
 B & 10,000---28,000 & Blue-white\\
 A & 7,500---10,000 & White-blue\\
@@ -271,12 +273,13 @@ F & 6,000---7,500 & Yellow-white\\
 G & 4,900---6,000 & Yellow\\
 K & 3,500---4,900 & Orange\\
 M & 2,000---3,500 & Red\\
-\bottomrule
-\caption{Spectral Types}
-\label{tab:spectraltype}
-\end{longtable}
+\bottomrule    
+  \end{tabular}
+  \caption{Spectral Types}
+  \label{tab:spectraltype}
+\end{table}
 
-Astronomers groups stars with similar spectra into \emph{spectral
+Astronomers groups stars with similar spectra into \indexterm{spectral
   types}, denoted by one of the following letters: O, B, A, F, G, K
 and M.\footnote{The classic mnemonic for students of astrophysics
   says: ``Oh, Be A Fine Girl, Kiss Me''.}  Type O stars have a high
@@ -291,22 +294,24 @@ details of the various spectral types.
 For about 90\% of stars, the absolute magnitude increases as the
 spectral type tends to the O (hot) end of the scale. Thus the whiter,
 hotter stars tend to have a greater luminosity. These stars are called
-\emph{main sequence} stars. There are however a number of stars that
+\indexterm{main sequence} stars. There are however a number of stars that
 have spectral type at the M end of the scale, and yet they have a high
 absolute magnitude. These stars are close to the ends of their lives
 and have a very large size, and consequently are known as
-\emph{giants}, the largest of these known as \emph{super-giants}.
+\indexterm{giants}, the largest of these known as \indexterm{super-giants}.
 
 There are also stars whose absolute magnitude is very low regardless
-of the spectral class. These are known as \emph{dwarf stars}, among
-them \emph{white dwarfs} (dying stars) and \emph{brown dwarfs}
+of the spectral class. These are known as \indexterm{dwarf stars}, among
+them \indexterm{white dwarfs} (dying stars) and \indexterm{brown dwarfs}
 (``failed stars'').
 
-The \emph{luminosity class} is an indication of the type of star ---
+The \indexterm{luminosity class} is an indication of the type of star ---
 whether it is main sequence, a giant or a dwarf. Luminosity classes are
 denoted by a number in roman numerals, as described in table~\ref{tab:luminosityclass}.
 
-\begin{longtable}[c]{ll}
+\begin{table}[htb]
+  \centering
+  \begin{tabular}{lll}
 \toprule
 \emph{Luminosity class} & \emph{Description}\\
 Ia, Ib & Super-giants\\
@@ -317,14 +322,17 @@ V      & Main sequence\\
 VI     & Sub-dwarfs\\
 VII    & White-dwarfs\\
 \bottomrule
+\end{tabular}
 \caption{Luminosity Classification}
 \label{tab:luminosityclass}
-\end{longtable}
+\end{table}
 
 Plotting the luminosity of stars against their spectral type/surface
-temperature gives a diagram called a Hertzsprung-Russell diagram (after
-the two astronomers \name{Ejnar Hertzsprung} and \name{Henry Norris
-Russell} who devised it). A slight variation of this is shown in figure~\ref{fig:colourmag} (which is technically a colour/magnitude plot).
+temperature gives a diagram called a Hertzsprung-Russell diagram
+(after the two astronomers \name{Ejnar Hertzsprung} and \name{Henry
+  Norris Russell} who devised it). A slight variation of this is shown
+in figure~\ref{fig:colourmag} (which is technically a colour/magnitude
+plot).
 
 \begin{figure}[tp]
 \centering\includegraphics[width=\textwidth]{colour_magnitude_graph}
@@ -755,7 +763,7 @@ side but concentrating on the object's location can often reveal it.
 \end{description}
 
 
-\subsection{Light Pollution}
+\section{Light Pollution}
 \label{sec:LightPollution}
 
 An ugly side effect of civilisation is a steady increase in outdoor
@@ -766,9 +774,84 @@ worsening conditions for astronomical observations or just enjoyment
 of the night sky. 
 
 Stellarium can simulate light pollution, which is controlled from the
-light pollution section of the \emph{Sky} tab of the \emph{View} window.
-Light pollution levels are set using a numerical value between 1 and 9
-which corresponds to the \emph{Bortle Dark Sky Scale} (see Appendix~\ref{ch:BortleScale}).
+light pollution section of the \emph{Sky} tab of the \emph{View}
+window.  Light pollution levels are set using a numerical value
+between 1 and 9 which corresponds to the \emph{Bortle Dark Sky Scale}
+(see Appendix~\ref{ch:BortleScale}).  In addition, local variations of
+the amount of light pollution can be included in a light pollution
+layer in the landscapes, see
+section~\ref{ch:landscapes} for details.
+
+%% Refraction section by GZotti 2016-04-12
+\section{Atmospheric Refraction}
+\label{sec:concepts:Refraction}
+
+\begin{figure}[tb]
+\centering\includegraphics[width=\textwidth]{gz_refraction}
+\caption{Refraction. The figure shows corrective values (degrees)
+  which are subtracted from observed altitudes (left side) to reach
+  geometric altitudes, or values to be added to computed values (right
+  side). The models used are not directly inverse operations.}
+\label{fig:Refraction}
+\end{figure}
+
+\indexterm{Atmospheric Refraction} is a lifting effect of our
+atmosphere which can be observed by the fact that objects close to the
+horizon appear higher than they should be if computed only with
+spherical trigonometry. Stellarium simulates refraction for
+terrestrial locations when the atmosphere is switched on. Refraction
+depends on air pressure and temperature. Figure~\ref{fig:Refraction}
+has been created from the same formulae that are employed in
+Stellarium. You can see how fast refraction grows very close to the
+mathematical horizon.
+
+Note that these models can only give approximate conditions. There are
+many weird effects in the real atmosphere, when temperature inversion
+layers can create light ducts, cause double sunsets etc.
+
+Also note that the models give meaningful results only for altitudes
+above approximately $-2\degree$. Below that, in nature, there is
+always ground which blocks our view. In Stellarium you can switch off
+the ground, and you can observe a sunset with a strange egg-shaped sun
+below the horizon. This is of course nonsense. Stellarium is also not
+able to properly recreate the atmospheric distortions as seen from a
+stratosphere balloon, where the height of earth's surface is several
+degrees below the mathematical horizon.
+
+%% Refraction section by GZotti 2016-04-12
+\section{Atmospheric Extinction}
+\label{sec:concepts:Extinction}
+
+\begin{figure}[tb]
+\centering\includegraphics[width=\textwidth]{gz_extinctionmag}
+\caption{Airmass and Extinction.  The figure shows Airmass (blue)
+  along the line of sight in the altitude labeled on the left side.
+  The green curves show how many magnitudes an object is dimmed down,
+  depending on extinction factor $k$ (called $k_v$ in the figure). The
+  red curves indicate at which altitude a star of given magnitude can
+  be seen with good eyesight, again depending on $k$. The black dots
+  are observed values found in the literature.}
+\label{fig:Extinction}
+\end{figure}
+
+\indexterm{Atmospheric Extinction} is the attenuation of light of a
+celestial body by Earth's atmosphere. In the last split-second of its
+travel into our eyes or detectors, light from outer space has to pass
+our atmosphere, through layers of mixed gas, water vapour and dust. If
+a star is in the zenith, its light must pass one \indexterm{air mass}
+and is reduced by whatever amount of water and dust is above you. When
+the star is on the horizon, it has to pass about 40 times longer
+through the atmosphere: 40 air masses (Fig.~\ref{fig:Extinction}. The
+number of air masses increases fast in low altitudes, this is why we
+see so few stars along the horizon. Usually blue light is extinguished
+more, this is why the sun and moon (and brigher stars) appear reddish
+on the horizon.
+
+Stellarium can simulate extinction, and you can set the opacity of
+your atmosphere with a global factor $k$, the \emph{magnitude loss per
+  airmass} (see section~\ref{sec:gui:view:sky:atmosphere}). The best
+mountaintop sites may have $k=0.15$, while $k=0.25$ seems a value
+usable for good locations in lower altitudes.
 
 
 %%% Local Variables: 

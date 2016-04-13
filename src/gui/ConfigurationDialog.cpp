@@ -295,12 +295,15 @@ void ConfigurationDialog::createDialogContent()
 	ui->invertScreenShotColorsCheckBox->setChecked(StelMainView::getInstance().getFlagInvertScreenShotColors());
 	connect(ui->invertScreenShotColorsCheckBox, SIGNAL(toggled(bool)), &StelMainView::getInstance(), SLOT(setFlagInvertScreenShotColors(bool)));
 
-	LandscapeMgr *lmgr = GETSTELMODULE(LandscapeMgr);
-	ui->autoEnableAtmosphereCheckBox->setChecked(lmgr->getFlagAtmosphereAutoEnable());
-	connect(ui->autoEnableAtmosphereCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagAtmosphereAutoEnable(bool)));
+	//LandscapeMgr *lmgr = GETSTELMODULE(LandscapeMgr);
+	//ui->autoEnableAtmosphereCheckBox->setChecked(lmgr->getFlagAtmosphereAutoEnable());
+	//connect(ui->autoEnableAtmosphereCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagAtmosphereAutoEnable(bool)));
+	connectBoolProperty(ui->autoEnableAtmosphereCheckBox,"prop_LandscapeMgr_flagAtmosphereAutoEnabling");
 
-	ui->autoChangeLandscapesCheckBox->setChecked(lmgr->getFlagLandscapeAutoSelection());
-	connect(ui->autoChangeLandscapesCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeAutoSelection(bool)));
+	//ui->autoChangeLandscapesCheckBox->setChecked(lmgr->getFlagLandscapeAutoSelection());
+	//connect(ui->autoChangeLandscapesCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeAutoSelection(bool)));
+	connectBoolProperty(ui->autoChangeLandscapesCheckBox,"prop_LandscapeMgr_flagLandscapeAutoSelection");
+
 
 	// script tab controls
 	#ifndef DISABLE_SCRIPTING
