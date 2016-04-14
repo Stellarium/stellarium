@@ -155,6 +155,8 @@ class Translations
 		N_("Melotte Catalogue");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Dwarf galaxies");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Herschel 400 Catalogue");
 		
 		// =====================================================================
 		// List of stars types
