@@ -288,6 +288,12 @@ class Translations
 		N_("Earth and other Planets from Ceres");
 		// TRANSLATORS: Name of script
 		N_("Messier Objects Tour");
+		// TRANSLATORS: Name of script
+		N_("Binocular Highlights");
+		// TRANSLATORS: Name of script
+		N_("20 Fun Naked-Eye Double Stars");
+		// TRANSLATORS: Name of script
+		N_("List of largest known stars");
 		
 		// =====================================================================
 		// Script descriptions
@@ -319,6 +325,9 @@ class Translations
 		N_("Earth Greatest Elongations and Transits from Callisto 2000-3000. Why Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's moons, Callisto will be the one.");
 		N_("Earth the other visible Planet's Greatest Elongations and Oppositions from Ceres 2000-3000");
 		N_("A tour of Messier Objects");
+		N_("Tours around interesting objects, which accessible to observation with binoculars. The data for the script are taken from the eponymous book by Gary Seronik.");
+		N_("This script help you make an excursion around 20 fun double stars. The list has been collected by Jerry Lodriguss and published in Sky & Telescope 09/2014. Data taken from his website, http://www.astropix.com/doubles/");
+		N_("This script help you make an excursion around largest known stars.");
 		
 		// =====================================================================
 		// List of countries
