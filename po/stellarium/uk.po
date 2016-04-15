@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-14 10:07+0700\n"
-"PO-Revision-Date: 2016-04-10 10:31+0000\n"
+"POT-Creation-Date: 2016-04-14 14:11+0700\n"
+"PO-Revision-Date: 2016-04-14 17:51+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-04-14 05:34+0000\n"
-"X-Generator: Launchpad (build 17990)\n"
+"X-Launchpad-Export-Date: 2016-04-15 05:34+0000\n"
+"X-Generator: Launchpad (build 17995)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
 "X-Poedit-Language: Ukrainian\n"
@@ -3135,374 +3135,379 @@ msgstr "Каталог Мелотта"
 msgid "Dwarf galaxies"
 msgstr "Карликові галактики"
 
+#. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+#: src/translations.h:159
+msgid "Herschel 400 Catalogue"
+msgstr "Каталог 400 зірок Гершеля"
+
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/translations.h:162
+#: src/translations.h:164
 msgid "Interesting double stars"
 msgstr "Цікаві подвійні зірки"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/translations.h:164
+#: src/translations.h:166
 msgid "Interesting variable stars"
 msgstr "Цікаві змінні зірки"
 
-#: src/translations.h:168
+#: src/translations.h:170
 msgid "Arabic"
 msgstr "Арабська"
 
-#: src/translations.h:169
+#: src/translations.h:171
 msgid "Arabic Moon Stations"
 msgstr "Арабські фази місяця"
 
-#: src/translations.h:170
+#: src/translations.h:172
 msgid "Aztec"
 msgstr "Ацтецька"
 
-#: src/translations.h:171
+#: src/translations.h:173
 msgid "Boorong"
 msgstr "Австралійська"
 
-#: src/translations.h:172
+#: src/translations.h:174
 msgid "Chinese"
 msgstr "Китайська"
 
-#: src/translations.h:173
+#: src/translations.h:175
 msgid "Egyptian"
 msgstr "Єгипетська"
 
-#: src/translations.h:174
+#: src/translations.h:176
 msgid "Inuit"
 msgstr "Ескімоська"
 
-#: src/translations.h:175
+#: src/translations.h:177
 msgid "Indian Vedic"
 msgstr "Індійська ведична"
 
-#: src/translations.h:176
+#: src/translations.h:178
 msgid "Japanese Moon Stations"
 msgstr "Японські місячні станції"
 
-#: src/translations.h:177
+#: src/translations.h:179
 msgid "Korean"
 msgstr "Корейська"
 
-#: src/translations.h:178
+#: src/translations.h:180
 msgid "Lakota"
 msgstr "Лакота"
 
-#: src/translations.h:179
+#: src/translations.h:181
 msgid "Maori"
 msgstr "Маорійська"
 
-#: src/translations.h:180
+#: src/translations.h:182
 msgid "Mongolian"
 msgstr "Монгольська"
 
-#: src/translations.h:181
+#: src/translations.h:183
 msgid "Navajo"
 msgstr "Навахо"
 
-#: src/translations.h:182
+#: src/translations.h:184
 msgid "Norse"
 msgstr "Скандинавська"
 
-#: src/translations.h:183
+#: src/translations.h:185
 msgid "Polynesian"
 msgstr "Полінезійська"
 
-#: src/translations.h:184
+#: src/translations.h:186
 msgid "Romanian"
 msgstr "Румунська"
 
-#: src/translations.h:185
+#: src/translations.h:187
 msgid "Sami"
 msgstr "Саамська"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:187
+#: src/translations.h:189
 msgid "Siberian"
 msgstr "Сибірська"
 
-#: src/translations.h:188
+#: src/translations.h:190
 msgid "Tukano"
 msgstr "Туканська"
 
-#: src/translations.h:189
+#: src/translations.h:191
 msgid "Tupi-Guarani"
 msgstr "Тупі-Гуарані"
 
-#: src/translations.h:190
+#: src/translations.h:192
 msgid "Tongan"
 msgstr "Тонга"
 
-#: src/translations.h:191
+#: src/translations.h:193
 msgid "Western"
 msgstr "Західна"
 
-#: src/translations.h:192
+#: src/translations.h:194
 msgid "Western (H.A.Rey)"
 msgstr "Західні (H.A. Rey)"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:198
+#: src/translations.h:200
 msgid "Guereins"
 msgstr "Геран"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:200
+#: src/translations.h:202
 msgid "Trees"
 msgstr "Дерева"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:202 plugins/ArchaeoLines/src/ArchaeoLines.cpp:782
+#: src/translations.h:204 plugins/ArchaeoLines/src/ArchaeoLines.cpp:782
 msgid "Moon"
 msgstr "Місяць"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:204
+#: src/translations.h:206
 msgid "Hurricane"
 msgstr "Буря"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:206
+#: src/translations.h:208
 msgid "Ocean"
 msgstr "Океан"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:208
+#: src/translations.h:210
 msgid "Garching"
 msgstr "Ґаршінґ"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:210 plugins/ArchaeoLines/src/ArchaeoLines.cpp:794
+#: src/translations.h:212 plugins/ArchaeoLines/src/ArchaeoLines.cpp:794
 msgid "Mars"
 msgstr "Марс"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:212 plugins/ArchaeoLines/src/ArchaeoLines.cpp:797
+#: src/translations.h:214 plugins/ArchaeoLines/src/ArchaeoLines.cpp:797
 msgid "Jupiter"
 msgstr "Юпітер"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:214 plugins/ArchaeoLines/src/ArchaeoLines.cpp:800
+#: src/translations.h:216 plugins/ArchaeoLines/src/ArchaeoLines.cpp:800
 msgid "Saturn"
 msgstr "Сатурн"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:216
+#: src/translations.h:218
 msgid "Uranus"
 msgstr "Уран"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:218
+#: src/translations.h:220
 msgid "Neptune"
 msgstr "Нептун"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:220
+#: src/translations.h:222
 msgid "Geneva"
 msgstr "Женева"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:222
+#: src/translations.h:224
 msgid "Grossmugl"
 msgstr "Ґроссмугль"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:224
+#: src/translations.h:226
 msgid "Zero Horizon"
 msgstr "Нульовий горизонт"
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:229
+#: src/translations.h:231
 msgid "Vienna Sterngarten"
 msgstr "Віденський Sterngarten"
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:231
+#: src/translations.h:233
 msgid "Testscene"
 msgstr "Тестова сцена"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:236
+#: src/translations.h:238
 msgid "Landscape Tour"
 msgstr "Мандрівка ландшафтами"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:238
+#: src/translations.h:240
 msgid "Partial Lunar Eclipse"
 msgstr "Часткове місячне затемнення"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:240
+#: src/translations.h:242
 msgid "Total Lunar Eclipse"
 msgstr "Повне місячне затемнення"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:242
+#: src/translations.h:244
 msgid "Screensaver"
 msgstr "Зберігач екрана"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:244
+#: src/translations.h:246
 msgid "Solar Eclipse 2009"
 msgstr "Сонячне затемнення 2009 року"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:246
+#: src/translations.h:248
 msgid "Startup Script"
 msgstr "Скрипт запуску"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:248
+#: src/translations.h:250
 msgid "Zodiac"
 msgstr "Зодіак"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:250
+#: src/translations.h:252
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "Потрійний схід і захід Сонця на Меркурії"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:252
+#: src/translations.h:254
 msgid "Double eclipse from Deimos in 2017"
 msgstr "Подвійне затемнення з Деймоса у 2017 році"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:254
+#: src/translations.h:256
 msgid "Double eclipse from Deimos in 2031"
 msgstr "Подвійне затемнення з Деймоса у 2031 році"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:256
+#: src/translations.h:258
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr "Затемнення з Олімпа (10 січня 2068 року)"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:258
+#: src/translations.h:260
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "Затемнення Землі і Юпітера у 2048 році"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:260
+#: src/translations.h:262
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "Три проходження та подвійне затемнення з Деймоса у 2027 році"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:262
+#: src/translations.h:264
 msgid "Solar System Screensaver"
 msgstr "Зберігач екрана «Сонячна система»"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:264
+#: src/translations.h:266
 msgid "Constellations Tour"
 msgstr "Тур сузір’ями"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:266
+#: src/translations.h:268
 msgid "Sun from different planets"
 msgstr "Вигляд Сонця з різних планет"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:268
+#: src/translations.h:270
 msgid "Earth best views from other bodies"
 msgstr "Найкращі види Землі з інших небесних тіл"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:270
+#: src/translations.h:272
 msgid "Transit of Venus"
 msgstr "Кульмінація Венери"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:272
+#: src/translations.h:274
 msgid "Analemma"
 msgstr "Аналема"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:274
+#: src/translations.h:276
 msgid "Sky Culture Tour"
 msgstr "Огляд картин зоряного неба"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:276
+#: src/translations.h:278
 msgid "Earth Events from Mercury"
 msgstr "Події, пов’язані з Землею, з Меркурія"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:278
+#: src/translations.h:280
 msgid "Earth Events from a floating city on Venus"
 msgstr "Події із Землею із літаючого міста на Венері"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:280
+#: src/translations.h:282
 msgid "Earth Events from Mars"
 msgstr "Події, пов’язані з Землею, з Марса"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:282
+#: src/translations.h:284
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr ""
 "Найвизначніші елонгації та протистояння Землі та інших планет з Марса"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:284
+#: src/translations.h:286
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr ""
 "Моменти найбільшої елонгації та кульмінації Землі та Марса з Каллісто"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:286
+#: src/translations.h:288
 msgid "Tycho's Supernova"
 msgstr "Наднова Тіхо"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:288
+#: src/translations.h:290
 msgid "Earth and other Planets from Ceres"
 msgstr "Земля та інші планети з Церери"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:290
+#: src/translations.h:292
 msgid "Messier Objects Tour"
 msgstr "Екскурсія об’єктами Месьє"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:292
-msgid "Binocular Highlights"
-msgstr ""
-
-#. TRANSLATORS: Name of script
 #: src/translations.h:294
-msgid "20 Fun Naked-Eye Double Stars"
-msgstr ""
+msgid "Binocular Highlights"
+msgstr "Найцікавіше у бінокль"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:296
+msgid "20 Fun Naked-Eye Double Stars"
+msgstr "20 цікавих подвійних зірок, видимих неозброєним оком"
+
+#. TRANSLATORS: Name of script
+#: src/translations.h:298
 msgid "List of largest known stars"
-msgstr ""
+msgstr "Список найбільших відомих зірок"
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:302
+#: src/translations.h:304
 msgid "Look around each installed landscape."
 msgstr "Оглянути всі доступні ландшафти."
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:304
+#: src/translations.h:306
 msgid "Look at each installed sky culture."
 msgstr "Огляд всіх встановлених картин зоряного неба."
 
-#: src/translations.h:305
+#: src/translations.h:307
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Скрипт демонстрації часткового місячного затемнення."
 
-#: src/translations.h:306
+#: src/translations.h:308
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Скрипт демонстрації повного місячного затемнення."
 
-#: src/translations.h:307
+#: src/translations.h:309
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "Повільна нескічненна мандрівка небом з оглядом випадкових об’єктів."
 
-#: src/translations.h:308
+#: src/translations.h:310
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -3510,11 +3515,11 @@ msgstr ""
 "Скрипт демонстрації повного сонячного затемнення, яке сталося у 2009 році "
 "(місце: Рангпур, Бангладеш)"
 
-#: src/translations.h:309
+#: src/translations.h:311
 msgid "Script which runs automatically at startup"
 msgstr "Скрипт, який виконується автоматично під час запуску"
 
-#: src/translations.h:310
+#: src/translations.h:312
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -3523,7 +3528,7 @@ msgstr ""
 "Цей скрипт показує сузір’я Зодіаку. До Зодіаку належать сузір’я, які "
 "перебувають на лінії, якою протягом року рухається небесною сферою Сонце."
 
-#: src/translations.h:311
+#: src/translations.h:313
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -3531,7 +3536,7 @@ msgstr ""
 "Через певні особливості орбіти та обертання Меркурія у певних областях схід "
 "та захід Сонця може траплятися тричі протягом одного меркуріанського дня."
 
-#: src/translations.h:312
+#: src/translations.h:314
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -3540,7 +3545,7 @@ msgstr ""
 "затемнює Сонце першим. Затемнення відбудеться між сузір’ями Скорпіона і "
 "Стрільця 26 квітня 2017 року."
 
-#: src/translations.h:313
+#: src/translations.h:315
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -3549,11 +3554,11 @@ msgstr ""
 "затемнює Сонце першим. Затемнення відбудеться між сузір’ями Скорпіона і "
 "Стрільця 23 липня 2031 року."
 
-#: src/translations.h:314
+#: src/translations.h:316
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr "Затемнення Сонця Фобосом, вигляд з гори Олімп, 10 січня 2068 року."
 
-#: src/translations.h:315
+#: src/translations.h:317
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
@@ -3564,7 +3569,7 @@ msgstr ""
 "явищем. Це показ затемнення, яке станеться 23 січня 2048 року у режимі "
 "реального часу."
 
-#: src/translations.h:316
+#: src/translations.h:318
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -3579,39 +3584,39 @@ msgstr ""
 "диска Марса і потрапляє до тіні Марса з притлумленням свічення, щоб потім "
 "знову засвітитися."
 
-#: src/translations.h:317
+#: src/translations.h:319
 msgid ""
 "Screensaver of various happenings in the Solar System. 261 events in all!"
 msgstr ""
 "Зберігач екрана із записом різноманітних подій у Сонячній системі. 261 запис!"
 
-#: src/translations.h:318
+#: src/translations.h:320
 msgid "A tour of the western constellations."
 msgstr "Тур класичною системою сузір’їв."
 
-#: src/translations.h:319
+#: src/translations.h:321
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "Вигляд Сонця з великих планет Сонячної системи та Плутона."
 
-#: src/translations.h:320
+#: src/translations.h:322
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "Найкращі миттєвості спостереження Землі з тіл Сонячної системи протягом 21 "
 "сторіччя."
 
-#: src/translations.h:321
+#: src/translations.h:323
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 "Транзит Венери, спостереження з Сіднею, Австралія, 6 червня 2012 року."
 
-#: src/translations.h:322
+#: src/translations.h:324
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr "Показ аналеми — шляху Сонця небом протягом року."
 
-#: src/translations.h:323
+#: src/translations.h:325
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -3619,7 +3624,7 @@ msgstr ""
 "Спалах наднової, який спостерігав Тихо Браґе у 1572 році. Для перегляду має "
 "бути увімкнено додаток показу наднових."
 
-#: src/translations.h:324
+#: src/translations.h:326
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
@@ -3627,7 +3632,7 @@ msgstr ""
 "Найвизначніші елонгації та протистояння Землі та інших планет з Марса, "
 "2000–3000"
 
-#: src/translations.h:325
+#: src/translations.h:327
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -3640,7 +3645,7 @@ msgstr ""
 "людство колись вирішить колонізувати ці супутники, єдиним придатним для "
 "життя буде саме Каллісто."
 
-#: src/translations.h:326
+#: src/translations.h:328
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
@@ -3648,1017 +3653,1024 @@ msgstr ""
 "Найвизначніші елонгації та протистояння Землі та інших планет з Церери, "
 "2000–3000"
 
-#: src/translations.h:327
+#: src/translations.h:329
 msgid "A tour of Messier Objects"
 msgstr "Екскурсія об’єктами Месьє"
 
-#: src/translations.h:328
+#: src/translations.h:330
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
 "Gary Seronik."
 msgstr ""
+"Огляд цікавих об’єктів, які можна спостерігати за допомогою бінокля. Дані "
+"для скрипту запозичено із книги Ґері Сероніка із тією самою назвою."
 
-#: src/translations.h:329
+#: src/translations.h:331
 msgid ""
 "This script help you make an excursion around 20 fun double stars. The list "
 "has been collected by Jerry Lodriguss and published in Sky & Telescope "
 "09/2014. Data taken from his website, http://www.astropix.com/doubles/"
 msgstr ""
+"За допомогою цього скрипту ви зможете здійснити огляд 20 найцікавіших "
+"подвійних зірок. Список було зібрано Джері Лодріґасом і опубліковано у "
+"журналі «Sky & Telescope», №9 за 2014 рік. Дані запозичено із сайта автора, "
+"http://www.astropix.com/doubles/"
 
-#: src/translations.h:330
+#: src/translations.h:332
 msgid "This script help you make an excursion around largest known stars."
 msgstr ""
+"За допомогою цього скрипту ви зможете оглянути найбільші відомі зірки."
 
-#: src/translations.h:334
+#: src/translations.h:336
 msgid "Andorra"
 msgstr "Андорра"
 
-#: src/translations.h:335
+#: src/translations.h:337
 msgid "United Arab Emirates"
 msgstr "Об’єднані Арабські Емірати"
 
-#: src/translations.h:336
+#: src/translations.h:338
 msgid "Afghanistan"
 msgstr "Афганістан"
 
-#: src/translations.h:337
+#: src/translations.h:339
 msgid "Antigua and Barbuda"
 msgstr "Антигуа і Барбуда"
 
-#: src/translations.h:338
+#: src/translations.h:340
 msgid "Anguilla"
 msgstr "Ангілья"
 
-#: src/translations.h:339
+#: src/translations.h:341
 msgid "Albania"
 msgstr "Албанія"
 
-#: src/translations.h:340
+#: src/translations.h:342
 msgid "Armenia"
 msgstr "Вірменія"
 
-#: src/translations.h:341
+#: src/translations.h:343
 msgid "Netherlands Antilles"
 msgstr "Нідерландські Антильські Острови"
 
-#: src/translations.h:342
+#: src/translations.h:344
 msgid "Angola"
 msgstr "Ангола"
 
-#: src/translations.h:343
+#: src/translations.h:345
 msgid "Antarctica"
 msgstr "Антарктида"
 
-#: src/translations.h:344
+#: src/translations.h:346
 msgid "Argentina"
 msgstr "Аргентина"
 
-#: src/translations.h:345
+#: src/translations.h:347
 msgid "American Samoa"
 msgstr "Американське Самоа"
 
-#: src/translations.h:346
+#: src/translations.h:348
 msgid "Austria"
 msgstr "Австрія"
 
-#: src/translations.h:347
+#: src/translations.h:349
 msgid "Australia"
 msgstr "Австралія"
 
-#: src/translations.h:348
+#: src/translations.h:350
 msgid "Aruba"
 msgstr "Аруба"
 
-#: src/translations.h:349
+#: src/translations.h:351
 msgid "Azerbaijan"
 msgstr "Азербайджан"
 
-#: src/translations.h:350
+#: src/translations.h:352
 msgid "Bosnia and Herzegowina"
 msgstr "Боснія та Герцеговина"
 
-#: src/translations.h:351
+#: src/translations.h:353
 msgid "Barbados"
 msgstr "Барбадос"
 
-#: src/translations.h:352
+#: src/translations.h:354
 msgid "Bangladesh"
 msgstr "Бангладеш"
 
-#: src/translations.h:353
+#: src/translations.h:355
 msgid "Belgium"
 msgstr "Бельгія"
 
-#: src/translations.h:354
+#: src/translations.h:356
 msgid "Burkina Faso"
 msgstr "Буркіна-Фасо"
 
-#: src/translations.h:355
+#: src/translations.h:357
 msgid "Bulgaria"
 msgstr "Болгарія"
 
-#: src/translations.h:356
+#: src/translations.h:358
 msgid "Bahrain"
 msgstr "Бахрейн"
 
-#: src/translations.h:357
+#: src/translations.h:359
 msgid "Burundi"
 msgstr "Бурунді"
 
-#: src/translations.h:358
+#: src/translations.h:360
 msgid "Benin"
 msgstr "Бенін"
 
-#: src/translations.h:359
+#: src/translations.h:361
 msgid "Bermuda"
 msgstr "Бермуди"
 
-#: src/translations.h:360
+#: src/translations.h:362
 msgid "Brunei Darussalam"
 msgstr "Бруней"
 
-#: src/translations.h:361
+#: src/translations.h:363
 msgid "Bolivia"
 msgstr "Болівія"
 
-#: src/translations.h:362
+#: src/translations.h:364
 msgid "Brazil"
 msgstr "Бразилія"
 
-#: src/translations.h:363
+#: src/translations.h:365
 msgid "Bahamas"
 msgstr "Багамські острови"
 
-#: src/translations.h:364
+#: src/translations.h:366
 msgid "Bhutan"
 msgstr "Бутан"
 
-#: src/translations.h:365
+#: src/translations.h:367
 msgid "Bouvet Island"
 msgstr "Острів Буве"
 
-#: src/translations.h:366
+#: src/translations.h:368
 msgid "Botswana"
 msgstr "Ботсвана"
 
-#: src/translations.h:367
+#: src/translations.h:369
 msgid "Belarus"
 msgstr "Білорусь"
 
-#: src/translations.h:368
+#: src/translations.h:370
 msgid "Belize"
 msgstr "Беліз"
 
-#: src/translations.h:369
+#: src/translations.h:371
 msgid "Canada"
 msgstr "Канада"
 
-#: src/translations.h:370
+#: src/translations.h:372
 msgid "Cocos Islands"
 msgstr "Кокосові острови"
 
-#: src/translations.h:371
+#: src/translations.h:373
 msgid "Democratic Republic of the Congo"
 msgstr "Демократична республіка Конго"
 
-#: src/translations.h:372
+#: src/translations.h:374
 msgid "Central African Republic"
 msgstr "Центральноафриканська Республіка"
 
-#: src/translations.h:373
+#: src/translations.h:375
 msgid "Republic of the Congo"
 msgstr "Республіка Конго"
 
-#: src/translations.h:374
+#: src/translations.h:376
 msgid "Switzerland"
 msgstr "Швейцарія"
 
-#: src/translations.h:375
+#: src/translations.h:377
 msgid "Cote d'Ivoire"
 msgstr "Кот д’Івуар"
 
-#: src/translations.h:376
+#: src/translations.h:378
 msgid "Cook Islands"
 msgstr "Острови Кука"
 
-#: src/translations.h:377
+#: src/translations.h:379
 msgid "Chile"
 msgstr "Чилі"
 
-#: src/translations.h:378
+#: src/translations.h:380
 msgid "Cameroon"
 msgstr "Камерун"
 
-#: src/translations.h:379
+#: src/translations.h:381
 msgid "China"
 msgstr "Китай"
 
-#: src/translations.h:380
+#: src/translations.h:382
 msgid "Colombia"
 msgstr "Колумбія"
 
-#: src/translations.h:381
+#: src/translations.h:383
 msgid "Costa Rica"
 msgstr "Коста-Рика"
 
-#: src/translations.h:382
+#: src/translations.h:384
 msgid "Serbia and Montenegro"
 msgstr "Сербія і Чорногорія"
 
-#: src/translations.h:383
+#: src/translations.h:385
 msgid "Montenegro"
 msgstr "Чорногорія"
 
-#: src/translations.h:384
+#: src/translations.h:386
 msgid "Cuba"
 msgstr "Куба"
 
-#: src/translations.h:385
+#: src/translations.h:387
 msgid "Cape Verde"
 msgstr "Кабо-Верде"
 
-#: src/translations.h:386
+#: src/translations.h:388
 msgid "Christmas Island"
 msgstr "Острів Різдва"
 
-#: src/translations.h:387
+#: src/translations.h:389
 msgid "Cyprus"
 msgstr "Кіпр"
 
-#: src/translations.h:388
+#: src/translations.h:390
 msgid "Czech Republic"
 msgstr "Чеська республіка"
 
-#: src/translations.h:389
+#: src/translations.h:391
 msgid "Germany"
 msgstr "Німеччина"
 
-#: src/translations.h:390
+#: src/translations.h:392
 msgid "Djibouti"
 msgstr "Джибуті"
 
-#: src/translations.h:391
+#: src/translations.h:393
 msgid "Denmark"
 msgstr "Данія"
 
-#: src/translations.h:392
+#: src/translations.h:394
 msgid "Dominica"
 msgstr "Домініка"
 
-#: src/translations.h:393
+#: src/translations.h:395
 msgid "Dominican Republic"
 msgstr "Домініканська республіка"
 
-#: src/translations.h:394
+#: src/translations.h:396
 msgid "Algeria"
 msgstr "Алжир"
 
-#: src/translations.h:395
+#: src/translations.h:397
 msgid "Ecuador"
 msgstr "Еквадор"
 
-#: src/translations.h:396
+#: src/translations.h:398
 msgid "Estonia"
 msgstr "Естонія"
 
-#: src/translations.h:397
+#: src/translations.h:399
 msgid "Egypt"
 msgstr "Єгипет"
 
-#: src/translations.h:398
+#: src/translations.h:400
 msgid "Western Sahara"
 msgstr "Західна Сахара"
 
-#: src/translations.h:399
+#: src/translations.h:401
 msgid "Eritrea"
 msgstr "Еритрея"
 
-#: src/translations.h:400
+#: src/translations.h:402
 msgid "Spain"
 msgstr "Іспанія"
 
-#: src/translations.h:401
+#: src/translations.h:403
 msgid "Ethiopia"
 msgstr "Ефіопія"
 
-#: src/translations.h:402
+#: src/translations.h:404
 msgid "Finland"
 msgstr "Фінляндія"
 
-#: src/translations.h:403
+#: src/translations.h:405
 msgid "Fiji"
 msgstr "Фіджі"
 
-#: src/translations.h:404
+#: src/translations.h:406
 msgid "Falkland Islands"
 msgstr "Фолклендські острови"
 
-#: src/translations.h:405
+#: src/translations.h:407
 msgid "Micronesia"
 msgstr "Мікронезія"
 
-#: src/translations.h:406
+#: src/translations.h:408
 msgid "Faroe Islands"
 msgstr "Фарерські острови"
 
-#: src/translations.h:407
+#: src/translations.h:409
 msgid "France"
 msgstr "Франція"
 
-#: src/translations.h:408
+#: src/translations.h:410
 msgid "Gabon"
 msgstr "Габон"
 
-#: src/translations.h:409
+#: src/translations.h:411
 msgid "United Kingdom"
 msgstr "Великобританія"
 
-#: src/translations.h:410
+#: src/translations.h:412
 msgid "Grenada"
 msgstr "Гренада"
 
-#: src/translations.h:411
+#: src/translations.h:413
 msgid "Georgia"
 msgstr "Грузія"
 
-#: src/translations.h:412
+#: src/translations.h:414
 msgid "French Guiana"
 msgstr "Французька Гвіана"
 
-#: src/translations.h:413
+#: src/translations.h:415
 msgid "Ghana"
 msgstr "Гана"
 
-#: src/translations.h:414
+#: src/translations.h:416
 msgid "Gibraltar"
 msgstr "Гібралтар"
 
-#: src/translations.h:415
+#: src/translations.h:417
 msgid "Greenland"
 msgstr "Гренландія"
 
-#: src/translations.h:416
+#: src/translations.h:418
 msgid "Gambia"
 msgstr "Гамбія"
 
-#: src/translations.h:417
+#: src/translations.h:419
 msgid "Guinea"
 msgstr "Гвінея"
 
-#: src/translations.h:418
+#: src/translations.h:420
 msgid "Guadeloupe"
 msgstr "Гваделупа"
 
-#: src/translations.h:419
+#: src/translations.h:421
 msgid "Equatorial Guinea"
 msgstr "Екваторіальна Гвінея"
 
-#: src/translations.h:420
+#: src/translations.h:422
 msgid "Greece"
 msgstr "Греція"
 
-#: src/translations.h:421
+#: src/translations.h:423
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Південна Георгія і Південні Сандвічеві Острови"
 
-#: src/translations.h:422
+#: src/translations.h:424
 msgid "Guatemala"
 msgstr "Гватемала"
 
-#: src/translations.h:423
+#: src/translations.h:425
 msgid "Guam"
 msgstr "Гуам"
 
-#: src/translations.h:424
+#: src/translations.h:426
 msgid "Guinea-Bissau"
 msgstr "Гвінея-Бісау"
 
-#: src/translations.h:425
+#: src/translations.h:427
 msgid "Guyana"
 msgstr "Гайяна"
 
-#: src/translations.h:426
+#: src/translations.h:428
 msgid "Hong Kong"
 msgstr "Гонконг"
 
-#: src/translations.h:427
+#: src/translations.h:429
 msgid "Heard Island and McDonald Islands"
 msgstr "Острови Херд і Мак-Дональд"
 
-#: src/translations.h:428
+#: src/translations.h:430
 msgid "Honduras"
 msgstr "Гондурас"
 
-#: src/translations.h:429
+#: src/translations.h:431
 msgid "Croatia"
 msgstr "Хорватія"
 
-#: src/translations.h:430
+#: src/translations.h:432
 msgid "Haiti"
 msgstr "Гаїті"
 
-#: src/translations.h:431
+#: src/translations.h:433
 msgid "Hungary"
 msgstr "Угорщина"
 
-#: src/translations.h:432
+#: src/translations.h:434
 msgid "Indonesia"
 msgstr "Індонезія"
 
-#: src/translations.h:433
+#: src/translations.h:435
 msgid "Ireland"
 msgstr "Ірландія"
 
-#: src/translations.h:434
+#: src/translations.h:436
 msgid "Israel"
 msgstr "Ізраїль"
 
-#: src/translations.h:435
+#: src/translations.h:437
 msgid "India"
 msgstr "Індія"
 
-#: src/translations.h:436
+#: src/translations.h:438
 msgid "British Indian Ocean Territory"
 msgstr "Британські Території в Індійському океані"
 
-#: src/translations.h:437
+#: src/translations.h:439
 msgid "Iraq"
 msgstr "Ірак"
 
-#: src/translations.h:438
+#: src/translations.h:440
 msgid "Iran"
 msgstr "Іран"
 
-#: src/translations.h:439
+#: src/translations.h:441
 msgid "Iceland"
 msgstr "Ісландія"
 
-#: src/translations.h:440
+#: src/translations.h:442
 msgid "Italy"
 msgstr "Італія"
 
-#: src/translations.h:441
+#: src/translations.h:443
 msgid "Jamaica"
 msgstr "Ямайка"
 
-#: src/translations.h:442
+#: src/translations.h:444
 msgid "Jordan"
 msgstr "Йорданія"
 
-#: src/translations.h:443
+#: src/translations.h:445
 msgid "Japan"
 msgstr "Японія"
 
-#: src/translations.h:444
+#: src/translations.h:446
 msgid "Kenya"
 msgstr "Кенія"
 
-#: src/translations.h:445
+#: src/translations.h:447
 msgid "Kyrgyzstan"
 msgstr "Киргизстан"
 
-#: src/translations.h:446
+#: src/translations.h:448
 msgid "Cambodia"
 msgstr "Камбоджа"
 
-#: src/translations.h:447
+#: src/translations.h:449
 msgid "Kiribati"
 msgstr "Кірибаті"
 
-#: src/translations.h:448
+#: src/translations.h:450
 msgid "Comoros"
 msgstr "Коморські острови"
 
-#: src/translations.h:449
+#: src/translations.h:451
 msgid "Saint Kitts and Nevis"
 msgstr "Сент-Кітс і Невіс"
 
-#: src/translations.h:450
+#: src/translations.h:452
 msgid "Democratic People's Republic of Korea"
 msgstr "Корейська Народно-Демократична Республіка"
 
-#: src/translations.h:451
+#: src/translations.h:453
 msgid "Republic of Korea"
 msgstr "Республіка Корея"
 
-#: src/translations.h:452
+#: src/translations.h:454
 msgid "Kuwait"
 msgstr "Кувейт"
 
-#: src/translations.h:453
+#: src/translations.h:455
 msgid "Cayman Islands"
 msgstr "Кайманові острови"
 
-#: src/translations.h:454
+#: src/translations.h:456
 msgid "Kazakhstan"
 msgstr "Казахстан"
 
-#: src/translations.h:455
+#: src/translations.h:457
 msgid "Lao"
 msgstr "Лаос"
 
-#: src/translations.h:456
+#: src/translations.h:458
 msgid "Lebanon"
 msgstr "Ліван"
 
-#: src/translations.h:457
+#: src/translations.h:459
 msgid "Saint Lucia"
 msgstr "Сент-Люсія"
 
-#: src/translations.h:458
+#: src/translations.h:460
 msgid "Liechtenstein"
 msgstr "Ліхтенштейн"
 
-#: src/translations.h:459
+#: src/translations.h:461
 msgid "Sri Lanka"
 msgstr "Шрі-Ланка"
 
-#: src/translations.h:460
+#: src/translations.h:462
 msgid "Liberia"
 msgstr "Ліберія"
 
-#: src/translations.h:461
+#: src/translations.h:463
 msgid "Lesotho"
 msgstr "Лесото"
 
-#: src/translations.h:462
+#: src/translations.h:464
 msgid "Lithuania"
 msgstr "Литва"
 
-#: src/translations.h:463
+#: src/translations.h:465
 msgid "Luxembourg"
 msgstr "Люксембург"
 
-#: src/translations.h:464
+#: src/translations.h:466
 msgid "Latvia"
 msgstr "Латвія"
 
-#: src/translations.h:465
+#: src/translations.h:467
 msgid "Libyan Arab Jamahiriya"
 msgstr "Лівійська Арабська Джамахірія"
 
-#: src/translations.h:466
+#: src/translations.h:468
 msgid "Morocco"
 msgstr "Марокко"
 
-#: src/translations.h:467
+#: src/translations.h:469
 msgid "Monaco"
 msgstr "Монако"
 
-#: src/translations.h:468
+#: src/translations.h:470
 msgid "Moldova"
 msgstr "Молдова"
 
-#: src/translations.h:469
+#: src/translations.h:471
 msgid "Madagascar"
 msgstr "Мадагаскар"
 
-#: src/translations.h:470
+#: src/translations.h:472
 msgid "Marshall Islands"
 msgstr "Маршаллові острови"
 
-#: src/translations.h:471
+#: src/translations.h:473
 msgid "Macedonia"
 msgstr "Македонія"
 
-#: src/translations.h:472
+#: src/translations.h:474
 msgid "Mali"
 msgstr "Малі"
 
-#: src/translations.h:473
+#: src/translations.h:475
 msgid "Myanmar"
 msgstr "М’янма"
 
-#: src/translations.h:474
+#: src/translations.h:476
 msgid "Mongolia"
 msgstr "Монголія"
 
-#: src/translations.h:475
+#: src/translations.h:477
 msgid "Macau"
 msgstr "Макао"
 
-#: src/translations.h:476
+#: src/translations.h:478
 msgid "Northern Mariana Islands"
 msgstr "Північні Маріанські Острови"
 
-#: src/translations.h:477
+#: src/translations.h:479
 msgid "Martinique"
 msgstr "Мартиніка"
 
-#: src/translations.h:478
+#: src/translations.h:480
 msgid "Mauritania"
 msgstr "Мавританія"
 
-#: src/translations.h:479
+#: src/translations.h:481
 msgid "Montserrat"
 msgstr "Монтсеррат"
 
-#: src/translations.h:480
+#: src/translations.h:482
 msgid "Malta"
 msgstr "Мальта"
 
-#: src/translations.h:481
+#: src/translations.h:483
 msgid "Mauritius"
 msgstr "Маврикій"
 
-#: src/translations.h:482
+#: src/translations.h:484
 msgid "Maldives"
 msgstr "Мальдіви"
 
-#: src/translations.h:483
+#: src/translations.h:485
 msgid "Malawi"
 msgstr "Малаві"
 
-#: src/translations.h:484
+#: src/translations.h:486
 msgid "Mexico"
 msgstr "Мексика"
 
-#: src/translations.h:485
+#: src/translations.h:487
 msgid "Malaysia"
 msgstr "Малайзія"
 
-#: src/translations.h:486
+#: src/translations.h:488
 msgid "Mozambique"
 msgstr "Мозамбік"
 
-#: src/translations.h:487
+#: src/translations.h:489
 msgid "Namibia"
 msgstr "Намібія"
 
-#: src/translations.h:488
+#: src/translations.h:490
 msgid "New Caledonia"
 msgstr "Нова Каледонія"
 
-#: src/translations.h:489
+#: src/translations.h:491
 msgid "Niger"
 msgstr "Нігер"
 
-#: src/translations.h:490
+#: src/translations.h:492
 msgid "Norfolk Island"
 msgstr "Острів Норфолк"
 
-#: src/translations.h:491
+#: src/translations.h:493
 msgid "Nigeria"
 msgstr "Нігерія"
 
-#: src/translations.h:492
+#: src/translations.h:494
 msgid "Nicaragua"
 msgstr "Нікарагуа"
 
-#: src/translations.h:493
+#: src/translations.h:495
 msgid "Netherlands"
 msgstr "Нідерланди"
 
-#: src/translations.h:494
+#: src/translations.h:496
 msgid "Norway"
 msgstr "Норвегія"
 
-#: src/translations.h:495
+#: src/translations.h:497
 msgid "Nepal"
 msgstr "Непал"
 
-#: src/translations.h:496
+#: src/translations.h:498
 msgid "Nauru"
 msgstr "Науру"
 
-#: src/translations.h:497
+#: src/translations.h:499
 msgid "Niue"
 msgstr "Ніуе"
 
-#: src/translations.h:498
+#: src/translations.h:500
 msgid "New Zealand"
 msgstr "Нова Зеландія"
 
-#: src/translations.h:499
+#: src/translations.h:501
 msgid "Oman"
 msgstr "Оман"
 
-#: src/translations.h:500
+#: src/translations.h:502
 msgid "Panama"
 msgstr "Панама"
 
-#: src/translations.h:501
+#: src/translations.h:503
 msgid "Peru"
 msgstr "Перу"
 
-#: src/translations.h:502
+#: src/translations.h:504
 msgid "French Polynesia"
 msgstr "Французька Полінезія"
 
-#: src/translations.h:503
+#: src/translations.h:505
 msgid "Papua New Guinea"
 msgstr "Папуа-Нова Гвінея"
 
-#: src/translations.h:504
+#: src/translations.h:506
 msgid "Philippines"
 msgstr "Філіппіни"
 
-#: src/translations.h:505
+#: src/translations.h:507
 msgid "Pakistan"
 msgstr "Пакистан"
 
-#: src/translations.h:506
+#: src/translations.h:508
 msgid "Poland"
 msgstr "Польща"
 
-#: src/translations.h:507
+#: src/translations.h:509
 msgid "Saint Pierre and Miquelon"
 msgstr "Сен-П'єр і Мікелон"
 
-#: src/translations.h:508
+#: src/translations.h:510
 msgid "Pitcairn"
 msgstr "Піткерн"
 
-#: src/translations.h:509
+#: src/translations.h:511
 msgid "Puerto Rico"
 msgstr "Пуерто-Рико"
 
-#: src/translations.h:510
+#: src/translations.h:512
 msgid "Palestinian Territories"
 msgstr "Палестинська територія"
 
-#: src/translations.h:511
+#: src/translations.h:513
 msgid "Portugal"
 msgstr "Португалія"
 
-#: src/translations.h:512
+#: src/translations.h:514
 msgid "Palau"
 msgstr "Палау"
 
-#: src/translations.h:513
+#: src/translations.h:515
 msgid "Paraguay"
 msgstr "Парагвай"
 
-#: src/translations.h:514
+#: src/translations.h:516
 msgid "Qatar"
 msgstr "Катар"
 
-#: src/translations.h:515
+#: src/translations.h:517
 msgid "Réunion"
 msgstr "Реюньйон"
 
-#: src/translations.h:516
+#: src/translations.h:518
 msgid "Romania"
 msgstr "Румунія"
 
-#: src/translations.h:517
+#: src/translations.h:519
 msgid "Serbia"
 msgstr "Сербія"
 
-#: src/translations.h:518
+#: src/translations.h:520
 msgid "Russian Federation"
 msgstr "Російська Федерація"
 
-#: src/translations.h:519
+#: src/translations.h:521
 msgid "Rwanda"
 msgstr "Руанда"
 
-#: src/translations.h:520
+#: src/translations.h:522
 msgid "Saudi Arabia"
 msgstr "Саудівська Аравія"
 
-#: src/translations.h:521
+#: src/translations.h:523
 msgid "Solomon Islands"
 msgstr "Соломонові Острови"
 
-#: src/translations.h:522
+#: src/translations.h:524
 msgid "Seychelles"
 msgstr "Сейшели"
 
-#: src/translations.h:523
+#: src/translations.h:525
 msgid "Sudan"
 msgstr "Судан"
 
-#: src/translations.h:524
+#: src/translations.h:526
 msgid "Sweden"
 msgstr "Швеція"
 
-#: src/translations.h:525
+#: src/translations.h:527
 msgid "Singapore"
 msgstr "Сінгапур"
 
-#: src/translations.h:526
+#: src/translations.h:528
 msgid "Saint Helena"
 msgstr "Острів Святої Єлени"
 
-#: src/translations.h:527
+#: src/translations.h:529
 msgid "Slovenia"
 msgstr "Словенія"
 
-#: src/translations.h:528
+#: src/translations.h:530
 msgid "Svalbard and Jan Mayen"
 msgstr "Острови Свальбард і Ян Маєн"
 
-#: src/translations.h:529
+#: src/translations.h:531
 msgid "Slovakia"
 msgstr "Словаччина"
 
-#: src/translations.h:530
+#: src/translations.h:532
 msgid "Sierra Leone"
 msgstr "Сьєрра-Леоне"
 
-#: src/translations.h:531
+#: src/translations.h:533
 msgid "San Marino"
 msgstr "Сан-Марино"
 
-#: src/translations.h:532
+#: src/translations.h:534
 msgid "Senegal"
 msgstr "Сенегал"
 
-#: src/translations.h:533
+#: src/translations.h:535
 msgid "Somalia"
 msgstr "Сомалі"
 
-#: src/translations.h:534
+#: src/translations.h:536
 msgid "Suriname"
 msgstr "Суринам"
 
-#: src/translations.h:535
+#: src/translations.h:537
 msgid "Sao Tome and Principe"
 msgstr "Сан-Томе і Принсипі"
 
-#: src/translations.h:536
+#: src/translations.h:538
 msgid "El Salvador"
 msgstr "Сальвадор"
 
-#: src/translations.h:537
+#: src/translations.h:539
 msgid "Syrian Arab Republic"
 msgstr "Сирійська Арабська Республіка"
 
-#: src/translations.h:538
+#: src/translations.h:540
 msgid "Swaziland"
 msgstr "Свазіленд"
 
-#: src/translations.h:539
+#: src/translations.h:541
 msgid "Turks and Caicos Islands"
 msgstr "Острови Теркс і Кайкос"
 
-#: src/translations.h:540
+#: src/translations.h:542
 msgid "Chad"
 msgstr "Чад"
 
-#: src/translations.h:541
+#: src/translations.h:543
 msgid "French Southern Territories"
 msgstr "Французькі Південні Території"
 
-#: src/translations.h:542
+#: src/translations.h:544
 msgid "Togo"
 msgstr "Того"
 
-#: src/translations.h:543
+#: src/translations.h:545
 msgid "Thailand"
 msgstr "Таїланд"
 
-#: src/translations.h:544
+#: src/translations.h:546
 msgid "Tajikistan"
 msgstr "Таджикистан"
 
-#: src/translations.h:545
+#: src/translations.h:547
 msgid "Tokelau"
 msgstr "Токелау"
 
-#: src/translations.h:546
+#: src/translations.h:548
 msgid "East Timor"
 msgstr "Східний Тимор"
 
-#: src/translations.h:547
+#: src/translations.h:549
 msgid "Turkmenistan"
 msgstr "Туркменістан"
 
-#: src/translations.h:548
+#: src/translations.h:550
 msgid "Tunisia"
 msgstr "Туніс"
 
-#: src/translations.h:549
+#: src/translations.h:551
 msgid "Tonga"
 msgstr "Тонга"
 
-#: src/translations.h:550
+#: src/translations.h:552
 msgid "Turkey"
 msgstr "Туреччина"
 
-#: src/translations.h:551
+#: src/translations.h:553
 msgid "Trinidad and Tobago"
 msgstr "Тринідад та Тобаго"
 
-#: src/translations.h:552
+#: src/translations.h:554
 msgid "Tuvalu"
 msgstr "Тувалу"
 
-#: src/translations.h:553
+#: src/translations.h:555
 msgid "Taiwan"
 msgstr "Тайвань"
 
-#: src/translations.h:554
+#: src/translations.h:556
 msgid "Tanzania"
 msgstr "Танзанія"
 
-#: src/translations.h:555
+#: src/translations.h:557
 msgid "Ukraine"
 msgstr "Україна"
 
-#: src/translations.h:556
+#: src/translations.h:558
 msgid "Uganda"
 msgstr "Уганда"
 
-#: src/translations.h:557
+#: src/translations.h:559
 msgid "United States Minor Outlying Islands"
 msgstr "Американські Малі Віддалені Острови"
 
-#: src/translations.h:558
+#: src/translations.h:560
 msgid "United States"
 msgstr "США"
 
-#: src/translations.h:559
+#: src/translations.h:561
 msgid "Uruguay"
 msgstr "Уругвай"
 
-#: src/translations.h:560
+#: src/translations.h:562
 msgid "Uzbekistan"
 msgstr "Узбекистан"
 
-#: src/translations.h:561
+#: src/translations.h:563
 msgid "Vatican City State"
 msgstr "Місто-держава Ватикан"
 
-#: src/translations.h:562
+#: src/translations.h:564
 msgid "Saint Vincent and the Grenadines"
 msgstr "Сент-Вінсент і Гренадини"
 
-#: src/translations.h:563
+#: src/translations.h:565
 msgid "Venezuela"
 msgstr "Венесуела"
 
-#: src/translations.h:564
+#: src/translations.h:566
 msgid "British Virgin Islands"
 msgstr "Віргінські острови (Британія)"
 
-#: src/translations.h:565
+#: src/translations.h:567
 msgid "United States Virgin Islands"
 msgstr "Американські Віргінські Острови"
 
-#: src/translations.h:566
+#: src/translations.h:568
 msgid "Viet Nam"
 msgstr "В'єтнам"
 
-#: src/translations.h:567
+#: src/translations.h:569
 msgid "Vanuatu"
 msgstr "Вануату"
 
-#: src/translations.h:568
+#: src/translations.h:570
 msgid "Wallis and Futuna"
 msgstr "Уолліс і Футуна"
 
-#: src/translations.h:569
+#: src/translations.h:571
 msgid "Samoa"
 msgstr "Самоа"
 
-#: src/translations.h:570
+#: src/translations.h:572
 msgid "Yemen"
 msgstr "Ємен"
 
-#: src/translations.h:571
+#: src/translations.h:573
 msgid "Mayotte"
 msgstr "Майотта"
 
-#: src/translations.h:572
+#: src/translations.h:574
 msgid "Yugoslavia"
 msgstr "Югославія"
 
-#: src/translations.h:573
+#: src/translations.h:575
 msgid "South Africa"
 msgstr "Південна Африка"
 
-#: src/translations.h:574
+#: src/translations.h:576
 msgid "Zambia"
 msgstr "Замбія"
 
-#: src/translations.h:575
+#: src/translations.h:577
 msgid "Zimbabwe"
 msgstr "Зімбабве"
 
-#: src/translations.h:579
+#: src/translations.h:581
 msgid "&Undo"
 msgstr "&Вернути"
 
-#: src/translations.h:580
+#: src/translations.h:582
 msgid "&Redo"
 msgstr "&Повторити"
 
-#: src/translations.h:581
+#: src/translations.h:583
 msgid "Cu&t"
 msgstr "Ви&різати"
 
-#: src/translations.h:582
+#: src/translations.h:584
 msgid "&Copy"
 msgstr "&Копіювати"
 
-#: src/translations.h:583
+#: src/translations.h:585
 msgid "&Paste"
 msgstr "&Вставити"
 
-#: src/translations.h:584 src/ui_locationDialogGui.h:432
+#: src/translations.h:586 src/ui_locationDialogGui.h:432
 #: plugins/Oculars/src/ui_ocularDialog.h:1189
 #: plugins/Oculars/src/ui_ocularDialog.h:1199
 #: plugins/Oculars/src/ui_ocularDialog.h:1206
@@ -4666,64 +4678,64 @@ msgstr "&Вставити"
 msgid "Delete"
 msgstr "Стерти"
 
-#: src/translations.h:585
+#: src/translations.h:587
 msgid "Select All"
 msgstr "Позначити все"
 
-#: src/translations.h:586
+#: src/translations.h:588
 msgid "Look in:"
 msgstr "Місце пошуку:"
 
-#: src/translations.h:587
+#: src/translations.h:589
 msgid "Directory:"
 msgstr "Каталог:"
 
-#: src/translations.h:588
+#: src/translations.h:590
 msgid "Folder"
 msgstr "Тека"
 
-#: src/translations.h:589
+#: src/translations.h:591
 msgid "&Choose"
 msgstr "Ви&брати"
 
-#: src/translations.h:590 src/ui_configurationDialog.h:1290
+#: src/translations.h:592 src/ui_configurationDialog.h:1290
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: src/translations.h:591
+#: src/translations.h:593
 msgid "Files of type:"
 msgstr "Файли типу:"
 
-#: src/translations.h:592
+#: src/translations.h:594
 msgid "Date Modified"
 msgstr "Остання зміна"
 
-#: src/translations.h:593
+#: src/translations.h:595
 msgid "Directories"
 msgstr "Каталоги"
 
-#: src/translations.h:594
+#: src/translations.h:596
 msgid "Computer"
 msgstr "Комп’ютер"
 
-#: src/translations.h:595
+#: src/translations.h:597
 msgid "&Open"
 msgstr "Від&крити"
 
-#: src/translations.h:596
+#: src/translations.h:598
 msgid "File &name:"
 msgstr "Н&азва файла:"
 
-#: src/translations.h:597
+#: src/translations.h:599
 msgid "Copy &Link Location"
 msgstr "Скопіювати &адресу посилання"
 
-#: src/translations.h:598
+#: src/translations.h:600
 msgid "Abort"
 msgstr "Перервати"
 
-#: src/translations.h:599
+#: src/translations.h:601
 msgid "Ignore"
 msgstr "Ігнорувати"
 
