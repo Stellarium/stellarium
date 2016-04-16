@@ -1,0 +1,42 @@
+//
+// Name: Best objects in the New General Catalog
+// Author: Alexander Wolf
+// License: Public Domain
+// Version: 1.0
+// Description: This list by A.J. Crayon and Steve Coe is used by members of the Saguaro Astronomy Club of Phoenix, AZ. for the Best of the NGC achievement award.
+//
+
+// List of best objects
+var objlist = [891, 7662, 6781, 7009, 7293, 772, 1907, 1931, 1501, 2403, 2655, 
+	       185, 281, 457, 663, 7789, 5128, 5139, 40, 6939, 6946, 7129, 246,
+	       936, 2359, 4274, 4414, 4494, 4559, 4565, 4725, 4361, 4111, 4214,
+	       4244, 4449, 4490, 4631, 4656, 5005, 5033, 6819, 6826, 6960, 6992,
+	       7000, 7027, 5907, 6503, 6543, 1232, 1535, 2158, 2392, 6207, 6210,
+	       3242, 7209, 7243, 2903, 3384, 3521, 3607, 3628, 3344, 3432, 2683,
+	       2244, 2261, 6369, 6572, 6633, 1788, 1973, 2024, 2022, 2194, 7331,
+	       869, 884, 1023, 1491, 2438, 2440, 2539, 253, 6712, 3115, 6445,
+	       6520, 6818, 2841, 3079, 3077, 3184, 3675, 3877, 3941, 4026, 4088,
+	       4605, 4216, 4388, 4438, 4526, 4535, 4567, 4699, 4762, 5746, 6940
+	      ];
+
+core.clear("deepspace");
+NebulaMgr.setFlagHints(true);
+var id = LabelMgr.labelScreen("Best objects in the New General Catalog", 20, 20, false, 24, "#00AAFF");
+LabelMgr.setLabelShow(id, true);
+core.wait(5);
+LabelMgr.setLabelShow(id, false);
+LabelMgr.deleteLabel(id);
+
+for (i=0; i<objlist.length; i++)
+{
+	ngc = "NGC " + objlist[i];
+	core.selectObjectByName(ngc, true);
+	StelMovementMgr.setFlagTracking(true);
+	StelMovementMgr.autoZoomIn(2);
+	core.wait(5);
+
+	StelMovementMgr.zoomTo(30, 5);
+	core.wait(5);
+}
+core.clear("natural");
+core.goHome();

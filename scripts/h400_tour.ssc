@@ -1,0 +1,67 @@
+//
+// Name: Herschel 400 Tour
+// License: Public Domain
+// Author: Alexander Wolf
+// Description: A tour around objects from the Herschel 400 Catalogue
+
+include("common_objects.inc");
+
+var color="#00AAFF";
+core.clear("deepspace");
+core.setGuiVisible(false);
+StelMovementMgr.setFlagTracking(true);
+
+var id = LabelMgr.labelScreen("The Herschel 400 Catalogue", 20, 20, false, 30, color);
+var info1 = LabelMgr.labelScreen("The Herschel 400 is a subset of John Herschel's General Catalogue of Nebulae and Clusters", 20, 60, false, 20, color);
+var info2 = LabelMgr.labelScreen("published in 1864 of 5,000 objects, and hence also of the New General Catalogue.", 20, 85, false, 20, color);
+var stat1 = LabelMgr.labelScreen("Vital statistics:", 20, 120, false, 16, color);
+var stat2 = LabelMgr.labelScreen("* The catalogue contains 400 objects", 20, 140, false, 16, color);
+var stat3 = LabelMgr.labelScreen("* All objects are from the NGC", 20, 160, false, 16, color);
+var stat4 = LabelMgr.labelScreen("* All visible in mid northern latitudes", 20, 180, false, 16, color);
+var stat5 = LabelMgr.labelScreen("* All visible in 150 mm (6\") or larger telescopes", 20, 200, false, 16, color);
+
+LabelMgr.setLabelShow(id, true);
+LabelMgr.setLabelShow(info1, true);
+LabelMgr.setLabelShow(info2, true);
+LabelMgr.setLabelShow(stat1, true);
+LabelMgr.setLabelShow(stat2, true);
+LabelMgr.setLabelShow(stat3, true);
+LabelMgr.setLabelShow(stat4, true);
+LabelMgr.setLabelShow(stat5, true);
+core.wait(10);
+LabelMgr.setLabelShow(id, false);
+LabelMgr.setLabelShow(info1, false);
+LabelMgr.setLabelShow(info2, false);
+LabelMgr.setLabelShow(stat1, false);
+LabelMgr.setLabelShow(stat2, false);
+LabelMgr.setLabelShow(stat3, false);
+LabelMgr.setLabelShow(stat4, false);
+LabelMgr.setLabelShow(stat5, false);
+LabelMgr.deleteLabel(id);
+LabelMgr.deleteLabel(info1);
+LabelMgr.deleteLabel(info2);
+LabelMgr.deleteLabel(stat1);
+LabelMgr.deleteLabel(stat2);
+LabelMgr.deleteLabel(stat3);
+LabelMgr.deleteLabel(stat4);
+LabelMgr.deleteLabel(stat5);
+
+NebulaMgr.setFlagShow(true);
+NebulaMgr.setFlagHints(true);
+
+for (i=0; i<herschel400.length; i++)
+{
+	core.selectObjectByName(ngc, true);
+	id = LabelMgr.labelScreen(herschel400[i], 20, 20, false, 30, color);
+	LabelMgr.setLabelShow(id, true);
+	StelMovementMgr.autoZoomIn(5);
+	core.wait(10);
+	LabelMgr.setLabelShow(id, false);
+	StelMovementMgr.zoomTo(40,2);
+	core.wait(3);	
+}
+
+core.clear("natural");
+core.setGuiVisible(true);
+core.goHome();
+

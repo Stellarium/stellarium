@@ -1285,21 +1285,6 @@ void SolarSystem::updateI18n()
 		p->translateName(trans);
 }
 
-QString SolarSystem::getPlanetHashString(void)
-{
-	QString str;
-	QTextStream oss(&str);
-	foreach (const PlanetP& p, systemPlanets)
-	{
-		if (!p->getParent().isNull() && p->getParent()->getEnglishName() != "Sun")
-		{
-			oss << p->getParent()->getEnglishName() << " : ";
-		}
-		oss << p->getEnglishName() << endl;
-	}
-	return str;
-}
-
 void SolarSystem::setFlagTrails(bool b)
 {
 	trailFader = b;
