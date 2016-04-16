@@ -298,6 +298,10 @@ class Translations
 		N_("List of largest known stars");
 		// TRANSLATORS: Name of script
 		N_("Herschel 400 Tour");
+		// TRANSLATORS: Name of script
+		N_("Binosky: Deep Sky Objects for Binoculars");
+		// TRANSLATORS: Name of script
+		N("The Jack Bennett Catalog");
 		
 		// =====================================================================
 		// Script descriptions
@@ -333,6 +337,8 @@ class Translations
 		N_("This script help you make an excursion around 20 fun double stars. The list has been collected by Jerry Lodriguss and published in Sky & Telescope 09/2014. Data taken from his website, http://www.astropix.com/doubles/");
 		N_("This script help you make an excursion around largest known stars.");
 		N_("A tour around objects from the Herschel 400 Catalogue");
+		N_("Ben Crowell has created Binosky, an observing list of Deep Sky Objects for Binoculars. In the script we give a list of these 31 objects, ordered by Right Ascension (2000.0).");
+		N_("The Jack Bennett Catalog of Southern Deep-Sky Objects. The Bennett catalog was contributed by Auke Slotegraaf.");
 		
 		// =====================================================================
 		// List of countries
