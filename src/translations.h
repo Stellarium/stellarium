@@ -230,7 +230,7 @@ class Translations
 		// TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
 		N_("Vienna Sterngarten");
 		// TRANSLATORS: Name of 3D scene
-		N_("Testscene")
+		N_("Testscene");
 		
 		// =====================================================================
 		// Script names
@@ -296,6 +296,8 @@ class Translations
 		N_("20 Fun Naked-Eye Double Stars");
 		// TRANSLATORS: Name of script
 		N_("List of largest known stars");
+		// TRANSLATORS: Name of script
+		N_("Herschel 400 Tour");
 		
 		// =====================================================================
 		// Script descriptions
@@ -330,6 +332,7 @@ class Translations
 		N_("Tours around interesting objects, which accessible to observation with binoculars. The data for the script are taken from the eponymous book by Gary Seronik.");
 		N_("This script help you make an excursion around 20 fun double stars. The list has been collected by Jerry Lodriguss and published in Sky & Telescope 09/2014. Data taken from his website, http://www.astropix.com/doubles/");
 		N_("This script help you make an excursion around largest known stars.");
+		N_("A tour around objects from the Herschel 400 Catalogue");
 		
 		// =====================================================================
 		// List of countries
