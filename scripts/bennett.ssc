@@ -1,0 +1,66 @@
+//
+// Name: The Jack Bennett Catalog
+// Author: Alexander Wolf
+// License: Public Domain
+// Version: 1.0
+// Description: The Jack Bennett Catalog of Southern Deep-Sky Objects. The Bennett catalog was contributed by Auke Slotegraaf.
+//
+
+// List of Bennett's objects
+var objlist = [["NGC 55", "Ben 1"], ["NGC 104", "Ben 2"], ["NGC 247", "Ben 3"], ["NGC 253", "Ben 4"], ["NGC 288", "Ben 5"], 
+	       ["NGC 300", "Ben 6"], ["NGC 362", "Ben 7"], ["NGC 613", "Ben 8"], ["NGC 1068", "Ben 9"], ["NGC 1097", "Ben 10"],
+	       ["NGC 1232", "Ben 10a"], ["NGC 1261", "Ben 11"], ["NGC 1291", "Ben 12"], ["NGC 1313", "Ben 13"], ["NGC 1316", "Ben 14"],
+	       ["NGC 1350", "Ben 14a"], ["NGC 1360", "Ben 15"], ["NGC 1365", "Ben 16"], ["NGC 1380", "Ben 17"], ["NGC 1387", "Ben 18"],
+	       ["NGC 1399", "Ben 19"], ["NGC 1398", "Ben 19a"], ["NGC 1404", "Ben 20"], ["NGC 1433", "Ben 21"], ["NGC 1512", "Ben 21a"],
+	       ["NGC 1535", "Ben 22"], ["NGC 1549", "Ben 23"], ["NGC 1553", "Ben 24"], ["NGC 1566", "Ben 25"], ["NGC 1617", "Ben 25a"],
+	       ["NGC 1672", "Ben 26"], ["NGC 1763", "Ben 27"], ["NGC 1783", "Ben 28"], ["NGC 1792", "Ben 29"], ["NGC 1818", "Ben 30"],
+	       ["NGC 1808", "Ben 31"], ["NGC 1851", "Ben 32"], ["NGC 1866", "Ben 33"], ["NGC 1904", "Ben 34"], ["NGC 2070", "Ben 35"],
+	       ["NGC 2214", "Ben 36"], ["NGC 2243", "Ben 36a"], ["NGC 2298", "Ben 37"], ["NGC 2467", "Ben 37a"], ["NGC 2489", "Ben 38"],
+	       ["NGC 2506", "Ben 39"], ["NGC 2627", "Ben 40"], ["NGC 2671", "Ben 40a"], ["NGC 2808", "Ben 41"], ["NGC 2972", "Ben 41a"],
+	       ["NGC 2997", "Ben 41b"], ["NGC 3115", "Ben 42"], ["NGC 3132", "Ben 43"], ["NGC 3201", "Ben 44"], ["NGC 3242", "Ben 45"],
+	       ["NGC 3621", "Ben 46"], ["Mel 105", "Ben 47"], ["NGC 3960", "Ben 48"], ["NGC 3923", "Ben 49"], ["NGC 4372", "Ben 50"],
+	       ["NGC 4590", "Ben 51"], ["NGC 4594", "Ben 52"], ["NGC 4697", "Ben 53"], ["NGC 4699", "Ben 54"], ["NGC 4753", "Ben 55"],
+	       ["NGC 4833", "Ben 56"], ["NGC 4945", "Ben 57"], ["NGC 4976", "Ben 58"], ["NGC 5061", "Ben 59"], ["NGC 5068", "Ben 59a"],
+	       ["NGC 5128", "Ben 60"], ["NGC 5139", "Ben 61"], ["NGC 5189", "Ben 62"], ["NGC 5236", "Ben 63"], ["NGC 5253", "Ben 63a"],
+	       ["NGC 5286", "Ben 64"], ["NGC 5617", "Ben 65"], ["NGC 5634", "Ben 66"], ["NGC 5824", "Ben 67"], ["NGC 5897", "Ben 68"],
+	       ["NGC 5927", "Ben 69"], ["NGC 5986", "Ben 70"], ["NGC 5999", "Ben 71"], ["NGC 6005", "Ben 72"], ["Cr 259", "Ben 72a"],
+	       ["NGC 6093", "Ben 73"], ["NGC 6101", "Ben 74"], ["NGC 6121", "Ben 75"], ["NGC 6134", "Ben 76"], ["NGC 6144", "Ben 77"],
+	       ["NGC 6139", "Ben 78"], ["NGC 6171", "Ben 79"], ["NGC 6167", "Ben 79a"], ["NGC 6192", "Ben 79b"], ["NGC 6218", "Ben 80"],
+	       ["NGC 6216", "Ben 81"], ["NGC 6235", "Ben 82"], ["NGC 6254", "Ben 83"], ["NGC 6253", "Ben 84"], ["NGC 6266", "Ben 85"],
+	       ["NGC 6273", "Ben 86"], ["NGC 6284", "Ben 87"], ["NGC 6287", "Ben 88"], ["NGC 6293", "Ben 89"], ["NGC 6304", "Ben 90"],
+	       ["NGC 6316", "Ben 91"], ["NGC 6318", "Ben 91a"], ["NGC 6333", "Ben 92"], ["NGC 6356", "Ben 92"], ["NGC 6352", "Ben 94"],
+	       ["NGC 6362", "Ben 95"], ["NGC 6388", "Ben 96"], ["NGC 6402", "Ben 97"], ["NGC 6397", "Ben 98"], ["NGC 6440", "Ben 98a"],
+	       ["NGC 6445", "Ben 98b"], ["NGC 6441", "Ben 99"], ["NGC 6496", "Ben 100"], ["NGC 6522", "Ben 101"], ["NGC 6528", "Ben 102"],
+	       ["NGC 6544", "Ben 103"], ["NGC 6541", "Ben 104"], ["NGC 6553", "Ben 105"], ["NGC 6569", "Ben 106"], ["NGC 6584", "Ben 107"],
+	       ["NGC 6603", "Ben 107a"], ["NGC 6618", "Ben 108"], ["NGC 6624", "Ben 109"], ["NGC 6626", "Ben 110"], ["NGC 6638", "Ben 111"],
+	       ["NGC 6637", "Ben 112"], ["NGC 6642", "Ben 112a"], ["NGC 6652", "Ben 113"], ["NGC 6656", "Ben 114"], ["NGC 6681", "Ben 115"],
+	       ["NGC 6705", "Ben 116"], ["NGC 6712", "Ben 117"], ["NGC 6715", "Ben 118"], ["NGC 6723", "Ben 119"], ["NGC 6744", "Ben 120"],
+	       ["NGC 6752", "Ben 121"], ["NGC 6809", "Ben 122"], ["NGC 6818", "Ben 123"], ["NGC 6864", "Ben 124"], ["NGC 6981", "Ben 125"],
+	       ["NGC 7009", "Ben 126"], ["NGC 7089", "Ben 127"], ["NGC 7099", "Ben 128"], ["NGC 7293", "Ben 129"], ["NGC 7410", "Ben 129a"],
+	       ["IC 1459", "Ben 129b"], ["NGC 7793", "Ben 130"]
+	      ];
+
+core.clear("deepspace");
+NebulaMgr.setFlagHints(true);
+var id = LabelMgr.labelScreen("The Jack Bennett Catalog of Southern Deep-Sky Objects", 20, 20, false, 24, "#00AAFF");
+LabelMgr.setLabelShow(id, true);
+core.wait(5);
+LabelMgr.setLabelShow(id, false);
+LabelMgr.deleteLabel(id);
+
+for (i=0; i<objlist.length; i++)
+{
+	core.selectObjectByName(objlist[i][0], true);
+	p = core.getScreenWidth()/2 - 20;
+	id = LabelMgr.labelScreen(objlist[i][1], p, 20, false, 22, "#00AAFF");
+	LabelMgr.setLabelShow(id, true);
+	StelMovementMgr.setFlagTracking(true);
+	StelMovementMgr.autoZoomIn(2);
+	core.wait(5);
+
+	LabelMgr.setLabelShow(id, false);
+	StelMovementMgr.zoomTo(30, 5);
+	core.wait(5);
+}
+core.clear("natural");
+core.goHome();
