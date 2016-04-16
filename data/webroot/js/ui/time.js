@@ -89,8 +89,8 @@ define(["jquery", "api/time", "api/actions", "jquery-ui"], function($, timeApi, 
 		var $items = $("#timejumplist li");
 		$items.each(function(){
 			var $this = $(this);
-			$this.prepend($("<button>",{value: $this.data("next"), class:"stelaction button32 icon32 btTimeForward"}));
-			$this.prepend($("<button>",{value: $this.data("prev"), class:"stelaction button32 icon32 btTimeRewind"}));
+			$this.prepend($("<button>",{name: $this.data("next"), class:"stelaction button32 icon32 btTimeForward"}));
+			$this.prepend($("<button>",{name: $this.data("prev"), class:"stelaction button32 icon32 btTimeRewind"}));
 		});
 	}
 
