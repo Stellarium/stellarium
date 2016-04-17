@@ -360,35 +360,35 @@ void StelGuiItem::resizeEvent(QGraphicsSceneResizeEvent* event)
 class StelQOpenGLWidget : public QOpenGLWidget
 {
 public:
-    StelQOpenGLWidget(QWidget* parent) : QOpenGLWidget(parent)
-    {
-	// TODO: Unclear if tese attributes make sense?
-	setAttribute(Qt::WA_PaintOnScreen);
-	setAttribute(Qt::WA_NoSystemBackground);
-	setAttribute(Qt::WA_OpaquePaintEvent);
-    }
+	StelQOpenGLWidget(QWidget* parent) : QOpenGLWidget(parent)
+	{
+		// TODO: Unclear if tese attributes make sense?
+		setAttribute(Qt::WA_PaintOnScreen);
+		setAttribute(Qt::WA_NoSystemBackground);
+		setAttribute(Qt::WA_OpaquePaintEvent);
+	}
 
 protected:
-    virtual void initializeGL()
-    {
-	qDebug() << "It appears this was never called?";
-	qDebug() << "OpenGL supported version: " << QString((char*)glGetString(GL_VERSION));
+	virtual void initializeGL()
+	{
+		qDebug() << "It appears this was never called?";
+		qDebug() << "OpenGL supported version: " << QString((char*)glGetString(GL_VERSION));
 
-	QOpenGLWidget::initializeGL();
-	this->makeCurrent(); // Do we need this?
-	// GZ I have no idea how to proceed, sorry.
-	QSurfaceFormat format=this->format();
-	qDebug() << "Current Format: " << this->format();
-	// TODO: Test something? The old tests may be obsolete as all OpenGL2 formats/contexts have these?
-    }
-    virtual void paintGL()
-    {
-	// TODO: what shall this do exactly?
-    }
-    virtual void resizeGL()
-    {
-	// TODO: what shall this do exactly?
-    }
+		QOpenGLWidget::initializeGL();
+		this->makeCurrent(); // Do we need this?
+		// GZ I have no idea how to proceed, sorry.
+		QSurfaceFormat format=this->format();
+		qDebug() << "Current Format: " << this->format();
+		// TODO: Test something? The old tests may be obsolete as all OpenGL2 formats/contexts have these?
+	}
+	virtual void paintGL()
+	{
+		// TODO: what shall this do exactly?
+	}
+	virtual void resizeGL()
+	{
+		// TODO: what shall this do exactly?
+	}
 
 };
 
@@ -650,7 +650,7 @@ void StelMainView::updateNightModeProperty()
 // Work in progress, as long as we get reports about bad systems or until OpenGL startup is finalized and safe.
 // Several tests do not apply to MacOS X.
 #if STEL_USE_NEW_OPENGL_WIDGETS
-	void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, StelQOpenGLWidget* glWidget) const;
+	void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, StelQOpenGLWidget* glWidget) const
 #else
 	void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, StelQGLWidget* glWidget) const
 #endif
