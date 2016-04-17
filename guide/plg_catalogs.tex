@@ -778,18 +778,36 @@ settings for the Navigational Stars plugin -- just make it carefully!
 navstars\_color          & R,G,B & Color of markers of navigational stars  \\\bottomrule
 \end{longtabu}
 
-
+\newpage
 \section{Satellites Plugin}
 \label{sec:plugins:Satellites}
 
+%% GZ: Found on Wiki on 2016-04 with a deprecation note. Still better than nothing!
+%% Original URL: http://www.stellarium.org/wiki/index.php/Satellites_plugin
+%% TODO: Update from there or write new.
 
-The Satellites plugin displays the positions of artifical satellites
+\noindent The Satellites plugin displays the positions of artifical satellites
 in Earth's orbit based on a catalog of orbital data. It allows
 automatic updates from online sources and manages a list of update
 file URLs.
 
 To calculate satellite positions, the plugin uses an implementation of
-the SGP4/SDP4 algorithms (J.L. Canales' gsat library).
+the SGP4/SDP4 algorithms (J.L. Canales' \program{gsat} library), using
+as its input data in NORAD's two-line element set
+(TLE\footnote{TLE: \url{https://en.wikipedia.org/wiki/Two-line_element_set}})
+format. Lists with TLEs for hundreds of satellites are available
+online and are regularly updated. The plugin downloads the lists
+prepared by \url{http://celestrak.com} to keep itself up-to-date, but the users can
+specify other sources online or load updates from local files.
+
+If enabled (see
+section~\ref{sec:Plugins:EnablingPlugins}), just click on the
+Satellite button \guibutton{0.6}{bt_hint}  on the bottom
+toolbar to display markers for the satellites.
+
+It should now be possible to search for artificial satellites using
+the regular search dialog (\key{F3}). Note that at any given time, most
+Satellites will be below the horizon.
 
 \subsection{Satellite Properties}
 \label{sec:plugins:Satellites:properties}
@@ -820,6 +838,59 @@ The satellite catalog is stored on the disk in JSON\footnote{\url{http://www.jso
 format, in a file named \file{satellites.json}. A default copy is embedded in the
 plug-in at compile time. A working copy is kept in the user data directory.
 
+%   Used in Satellites plug-in 0.7.1 and later (Stellarium 0.11.2 and later) 
+
+To add a new satellite, open a new line after line 5 and paste the following, note commas and brackets, they are important:
+\begin{configfile}[\scriptsize]
+"NORAD number": 
+{
+  "name": "name of the satellite"
+  "description": "description goes here",
+  "comms": [
+     {
+  	"description": "downlink 1",
+  	"frequency": 437.49,
+  	"modulation": "AFSK 1200 bps"
+     },
+     {
+  	"description": "downlink 2",
+  	"frequency": 145.825
+     }
+              ],
+  "groups": ["group1", "group2"],
+  "tle1": "1 12345U 90005D   09080.85236265  .00000014  00000-0  20602-4 0  5632",
+  "tle2": "2 12345 98.2700  53.2702 0011918  71.1776 289.0705 14.31818920   653",
+  "visible": true
+},
+\end{configfile}
+Explanation of the fields:
+
+\begin{description}
+\item[NORAD number]  required parameter, surrounded by double quotes (\texttt{"}),
+followed by a colon (\texttt{:}). It is used internally to identify the
+satellite. You should replace the text \texttt{"NORAD number"} with the first
+number on both lines of the TLE set (in this case, \texttt{"12345"}). It must
+match the number of the satellite in the source you are adding from if
+you want the TLE to be automatically updated.
+\end{description}
+The remaining parameters should be listed between two curly brackets and the closing curly bracket must be followed by a comma to separate it from the next satellite in the list:
+
+\begin{description}
+\item[name] required parameter. It will be displayed on the screen and used
+when searching for the satellite with the Find window. Use the
+description field for a more readable name if you like. (The
+description field can accept HTML tags such as \texttt{<br/>} (new line), \texttt{<b></b>} (bold), etc.)
+
+\item[description] optional parameter, double quoted. Appears when you click on the satellite
+\item[comms] optional parameter, square bracketed list of curly bracketed communications information.
+\item[groups]  optional parameter, comma separated list of double quoted group names contained in square brackets. Used for grouping satellites in the drop down box on the config (see above)
+\item[tle1]  required parameter, line 1 of the TLE, must be contained in double quotes and begin with \texttt{"1 "}
+\item[tle2]  required parameter, line 2 of the TLE, must be contained in double quotes and begin with \texttt{"2 "}
+\item[visible]  required parameter, set to true if you want to see it, this can be toggled from the configuration window once the satellite is loaded. 
+\end{description}
+You can edit the tags for a satellite, modify the description and comms data, and even add new satellites. 
+
+
 \subsection{Configuration}
 \label{sec:plugins:Satellites:configuration}
 
@@ -828,6 +899,15 @@ The plug-in's configuration data is stored in Stellarium's main configuration
 file.
 
 
+\subsection{Sources for TLE data}
+
+\begin{description}
+\item[Celestrak]\footnote{\url{http://celestrak.com/NORAD/elements/}} used as default update source, it also has TLE lists
+  beyond those included by default in Satellite plug-in
+\item[TLE.info]\footnote{\url{http://www.tle.info/joomla/index.php}}
+\item[Space Track]\footnote{\url{http://www.space-track.org/}} the definitive source, requires signup, operated by
+  United States Department of Defense
+\end{description}
 
 %%% Local Variables: 
 %%% mode: latex
