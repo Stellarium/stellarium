@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-14 14:11+0700\n"
+"POT-Creation-Date: 2016-04-16 19:35+0700\n"
 "PO-Revision-Date: 2016-01-11 01:30+0000\n"
 "Last-Translator: Sabrina <smcanato@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-04-15 05:35+0000\n"
+"X-Launchpad-Export-Date: 2016-04-17 05:35+0000\n"
 "X-Generator: Launchpad (build 17995)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -3472,30 +3472,50 @@ msgstr ""
 msgid "List of largest known stars"
 msgstr ""
 
-#. TRANSLATORS: Description of the landscape tour script.
+#. TRANSLATORS: Name of script
+#: src/translations.h:300
+msgid "Herschel 400 Tour"
+msgstr ""
+
+#. TRANSLATORS: Name of script
+#: src/translations.h:302
+msgid "Binosky: Deep Sky Objects for Binoculars"
+msgstr ""
+
+#. TRANSLATORS: Name of script
 #: src/translations.h:304
+msgid "The Jack Bennett Catalog"
+msgstr ""
+
+#. TRANSLATORS: Name of script
+#: src/translations.h:306
+msgid "Best objects in the New General Catalog"
+msgstr ""
+
+#. TRANSLATORS: Description of the landscape tour script.
+#: src/translations.h:312
 msgid "Look around each installed landscape."
 msgstr "Visualização de cada uma das paisagens instaladas."
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:306
+#: src/translations.h:314
 msgid "Look at each installed sky culture."
 msgstr "Observe cada cultura celeste instalada."
 
-#: src/translations.h:307
+#: src/translations.h:315
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Apresentação que demonstra um eclipse lunar parcial."
 
-#: src/translations.h:308
+#: src/translations.h:316
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Apresentação que demonstra um eclipse lunar total."
 
-#: src/translations.h:309
+#: src/translations.h:317
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr ""
 "Uma excursão lenta e infinita pelo céu, olhando para objetos aleatórios."
 
-#: src/translations.h:310
+#: src/translations.h:318
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -3503,11 +3523,11 @@ msgstr ""
 "Uma apresentação que demonstra um eclipse solar total que ocorreu em 2009 "
 "(local: Rangpur, no Bangladeche)."
 
-#: src/translations.h:311
+#: src/translations.h:319
 msgid "Script which runs automatically at startup"
 msgstr "Uma apresentação que é executada automaticamente ao iniciar."
 
-#: src/translations.h:312
+#: src/translations.h:320
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -3517,7 +3537,7 @@ msgstr ""
 "constelações que se encontram ao longo da linha que o Sol percorre na esfera "
 "celeste no decorrer de um ano."
 
-#: src/translations.h:313
+#: src/translations.h:321
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -3526,7 +3546,7 @@ msgstr ""
 "pontos, o Sol nascerá e pôr-se-á em três diferentes horários em um dia "
 "mercuriano."
 
-#: src/translations.h:314
+#: src/translations.h:322
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -3534,7 +3554,7 @@ msgstr ""
 "Pouco antes de Marte eclipsar o Sol, Fobos sai de trás e o eclipsa primeiro. "
 "Ocorre entre Escorpião e Sagitário em 26 de abril de 2017."
 
-#: src/translations.h:315
+#: src/translations.h:323
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -3542,12 +3562,12 @@ msgstr ""
 "Pouco antes de Marte eclipsar o Sol, Fobos sai de trás e o eclipsa primeiro. "
 "Ocorre entre Touro e Gêmeos em 23 de julho de 2031."
 
-#: src/translations.h:316
+#: src/translations.h:324
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
 "Fobos eclipsa o Sol, como visto do Monte Olimpo, em 10 de janeiro de 2068."
 
-#: src/translations.h:317
+#: src/translations.h:325
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
@@ -3557,7 +3577,7 @@ msgstr ""
 "Júpiter. Entretanto, as ocultações de ambos os planetas no mesmo dia são "
 "muito raras. Eis uma que ocorre em 23 de janeiro de 2048, em velocidade real."
 
-#: src/translations.h:318
+#: src/translations.h:326
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -3573,33 +3593,33 @@ msgstr ""
 "Quando Fobos emerge de Marte, ele ainda está eclipsado e escurecido na "
 "sombra de Marte, ficando iluminado apenas mais tarde."
 
-#: src/translations.h:319
+#: src/translations.h:327
 msgid ""
 "Screensaver of various happenings in the Solar System. 261 events in all!"
 msgstr ""
 
-#: src/translations.h:320
+#: src/translations.h:328
 msgid "A tour of the western constellations."
 msgstr "Uma excursão pelas constelações ocidentais."
 
-#: src/translations.h:321
+#: src/translations.h:329
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr ""
 "Olhe para o Sol a partir de grandes planetas do sistema solar e de Plutão."
 
-#: src/translations.h:322
+#: src/translations.h:330
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "As melhores vistas da Terra a partir de outros corpos celestes no século XXI."
 
-#: src/translations.h:323
+#: src/translations.h:331
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 "O trânsito de Vênus, como visto de Sidnei, na Austrália, em 06 de junho de "
 "2012."
 
-#: src/translations.h:324
+#: src/translations.h:332
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
@@ -3607,7 +3627,7 @@ msgstr ""
 "Uma demonstração do analema – o caminho que o Sol percorre no céu no "
 "decorrer do ano."
 
-#: src/translations.h:325
+#: src/translations.h:333
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -3615,7 +3635,7 @@ msgstr ""
 "Lampejo da supernova que foi observada por Tycho Brahe no ano de 1572. O "
 "complemento de supernovas deve estar ativado."
 
-#: src/translations.h:326
+#: src/translations.h:334
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
@@ -3623,7 +3643,7 @@ msgstr ""
 "As maiores elongações e oposições da Terra e outros planetas a partir de "
 "Marte 2000-3000"
 
-#: src/translations.h:327
+#: src/translations.h:335
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -3635,7 +3655,7 @@ msgstr ""
 "único fora do cinturão de radiação de Júpiter. Por isso, se algum dia os "
 "seres humanos colonizarem uma lua de Júpiter, ela será Calisto."
 
-#: src/translations.h:328
+#: src/translations.h:336
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
@@ -3643,1017 +3663,1040 @@ msgstr ""
 "As maiores elongações e oposições da Terra e outros planetas a partir de "
 "Ceres 2000-3000"
 
-#: src/translations.h:329
+#: src/translations.h:337
 msgid "A tour of Messier Objects"
 msgstr ""
 
-#: src/translations.h:330
+#: src/translations.h:338
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
 "Gary Seronik."
 msgstr ""
 
-#: src/translations.h:331
+#: src/translations.h:339
 msgid ""
 "This script help you make an excursion around 20 fun double stars. The list "
 "has been collected by Jerry Lodriguss and published in Sky & Telescope "
 "09/2014. Data taken from his website, http://www.astropix.com/doubles/"
 msgstr ""
 
-#: src/translations.h:332
+#: src/translations.h:340
 msgid "This script help you make an excursion around largest known stars."
 msgstr ""
 
-#: src/translations.h:336
+#: src/translations.h:341
+msgid "A tour around objects from the Herschel 400 Catalogue"
+msgstr ""
+
+#: src/translations.h:342
+msgid ""
+"Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
+"Binoculars. In the script we give a list of these 31 objects, ordered by "
+"Right Ascension (2000.0)."
+msgstr ""
+
+#: src/translations.h:343
+msgid ""
+"The Jack Bennett Catalog of Southern Deep-Sky Objects. The Bennett catalog "
+"was contributed by Auke Slotegraaf."
+msgstr ""
+
+#: src/translations.h:344
+msgid ""
+"This list by A.J. Crayon and Steve Coe is used by members of the Saguaro "
+"Astronomy Club of Phoenix, AZ. for the Best of the NGC achievement award."
+msgstr ""
+
+#: src/translations.h:348
 msgid "Andorra"
 msgstr "Andorra"
 
-#: src/translations.h:337
+#: src/translations.h:349
 msgid "United Arab Emirates"
 msgstr "Emirados Árabes Unidos"
 
-#: src/translations.h:338
+#: src/translations.h:350
 msgid "Afghanistan"
 msgstr "Afeganistão"
 
-#: src/translations.h:339
+#: src/translations.h:351
 msgid "Antigua and Barbuda"
 msgstr "Antígua e Barbuda"
 
-#: src/translations.h:340
+#: src/translations.h:352
 msgid "Anguilla"
 msgstr "Anguilha"
 
-#: src/translations.h:341
+#: src/translations.h:353
 msgid "Albania"
 msgstr "Albânia"
 
-#: src/translations.h:342
+#: src/translations.h:354
 msgid "Armenia"
 msgstr "Armênia"
 
-#: src/translations.h:343
+#: src/translations.h:355
 msgid "Netherlands Antilles"
 msgstr "Antilhas Holandesas"
 
-#: src/translations.h:344
+#: src/translations.h:356
 msgid "Angola"
 msgstr "Angola"
 
-#: src/translations.h:345
+#: src/translations.h:357
 msgid "Antarctica"
 msgstr "Antártida"
 
-#: src/translations.h:346
+#: src/translations.h:358
 msgid "Argentina"
 msgstr "Argentina"
 
-#: src/translations.h:347
+#: src/translations.h:359
 msgid "American Samoa"
 msgstr "Samoa Americana"
 
-#: src/translations.h:348
+#: src/translations.h:360
 msgid "Austria"
 msgstr "Áustria"
 
-#: src/translations.h:349
+#: src/translations.h:361
 msgid "Australia"
 msgstr "Austrália"
 
-#: src/translations.h:350
+#: src/translations.h:362
 msgid "Aruba"
 msgstr "Aruba"
 
-#: src/translations.h:351
+#: src/translations.h:363
 msgid "Azerbaijan"
 msgstr "Azerbaijão"
 
-#: src/translations.h:352
+#: src/translations.h:364
 msgid "Bosnia and Herzegowina"
 msgstr "Bósnia e Herzegovina"
 
-#: src/translations.h:353
+#: src/translations.h:365
 msgid "Barbados"
 msgstr "Barbados"
 
-#: src/translations.h:354
+#: src/translations.h:366
 msgid "Bangladesh"
 msgstr "Bangladeche"
 
-#: src/translations.h:355
+#: src/translations.h:367
 msgid "Belgium"
 msgstr "Bélgica"
 
-#: src/translations.h:356
+#: src/translations.h:368
 msgid "Burkina Faso"
 msgstr "Burquina Fasso"
 
-#: src/translations.h:357
+#: src/translations.h:369
 msgid "Bulgaria"
 msgstr "Bulgária"
 
-#: src/translations.h:358
+#: src/translations.h:370
 msgid "Bahrain"
 msgstr "Barém"
 
-#: src/translations.h:359
+#: src/translations.h:371
 msgid "Burundi"
 msgstr "Burundi"
 
-#: src/translations.h:360
+#: src/translations.h:372
 msgid "Benin"
 msgstr "Benim"
 
-#: src/translations.h:361
+#: src/translations.h:373
 msgid "Bermuda"
 msgstr "Bermudas"
 
-#: src/translations.h:362
+#: src/translations.h:374
 msgid "Brunei Darussalam"
 msgstr "Brunei"
 
-#: src/translations.h:363
+#: src/translations.h:375
 msgid "Bolivia"
 msgstr "Bolívia"
 
-#: src/translations.h:364
+#: src/translations.h:376
 msgid "Brazil"
 msgstr "Brasil"
 
-#: src/translations.h:365
+#: src/translations.h:377
 msgid "Bahamas"
 msgstr "Baamas"
 
-#: src/translations.h:366
+#: src/translations.h:378
 msgid "Bhutan"
 msgstr "Butão"
 
-#: src/translations.h:367
+#: src/translations.h:379
 msgid "Bouvet Island"
 msgstr "Ilha Bouvet"
 
-#: src/translations.h:368
+#: src/translations.h:380
 msgid "Botswana"
 msgstr "Botsuana"
 
-#: src/translations.h:369
+#: src/translations.h:381
 msgid "Belarus"
 msgstr "Bielorrússia"
 
-#: src/translations.h:370
+#: src/translations.h:382
 msgid "Belize"
 msgstr "Belize"
 
-#: src/translations.h:371
+#: src/translations.h:383
 msgid "Canada"
 msgstr "Canadá"
 
-#: src/translations.h:372
+#: src/translations.h:384
 msgid "Cocos Islands"
 msgstr "Ilhas Cocos"
 
-#: src/translations.h:373
+#: src/translations.h:385
 msgid "Democratic Republic of the Congo"
 msgstr "República Democrática do Congo"
 
-#: src/translations.h:374
+#: src/translations.h:386
 msgid "Central African Republic"
 msgstr "República Centro-Africana"
 
-#: src/translations.h:375
+#: src/translations.h:387
 msgid "Republic of the Congo"
 msgstr "República do Congo"
 
-#: src/translations.h:376
+#: src/translations.h:388
 msgid "Switzerland"
 msgstr "Suíça"
 
-#: src/translations.h:377
+#: src/translations.h:389
 msgid "Cote d'Ivoire"
 msgstr "Costa do Marfim"
 
-#: src/translations.h:378
+#: src/translations.h:390
 msgid "Cook Islands"
 msgstr "Ilhas Cook"
 
-#: src/translations.h:379
+#: src/translations.h:391
 msgid "Chile"
 msgstr "Chile"
 
-#: src/translations.h:380
+#: src/translations.h:392
 msgid "Cameroon"
 msgstr "Camarões"
 
-#: src/translations.h:381
+#: src/translations.h:393
 msgid "China"
 msgstr "China"
 
-#: src/translations.h:382
+#: src/translations.h:394
 msgid "Colombia"
 msgstr "Colômbia"
 
-#: src/translations.h:383
+#: src/translations.h:395
 msgid "Costa Rica"
 msgstr "Costa Rica"
 
-#: src/translations.h:384
+#: src/translations.h:396
 msgid "Serbia and Montenegro"
 msgstr "Sérvia e Montenegro"
 
-#: src/translations.h:385
+#: src/translations.h:397
 msgid "Montenegro"
 msgstr ""
 
-#: src/translations.h:386
+#: src/translations.h:398
 msgid "Cuba"
 msgstr "Cuba"
 
-#: src/translations.h:387
+#: src/translations.h:399
 msgid "Cape Verde"
 msgstr "Cabo Verde"
 
-#: src/translations.h:388
+#: src/translations.h:400
 msgid "Christmas Island"
 msgstr "Ilha do Natal"
 
-#: src/translations.h:389
+#: src/translations.h:401
 msgid "Cyprus"
 msgstr "Chipre"
 
-#: src/translations.h:390
+#: src/translations.h:402
 msgid "Czech Republic"
 msgstr "República Checa"
 
-#: src/translations.h:391
+#: src/translations.h:403
 msgid "Germany"
 msgstr "Alemanha"
 
-#: src/translations.h:392
+#: src/translations.h:404
 msgid "Djibouti"
 msgstr "Jibuti"
 
-#: src/translations.h:393
+#: src/translations.h:405
 msgid "Denmark"
 msgstr "Dinamarca"
 
-#: src/translations.h:394
+#: src/translations.h:406
 msgid "Dominica"
 msgstr "Dominica"
 
-#: src/translations.h:395
+#: src/translations.h:407
 msgid "Dominican Republic"
 msgstr "República Dominicana"
 
-#: src/translations.h:396
+#: src/translations.h:408
 msgid "Algeria"
 msgstr "Argélia"
 
-#: src/translations.h:397
+#: src/translations.h:409
 msgid "Ecuador"
 msgstr "Equador"
 
-#: src/translations.h:398
+#: src/translations.h:410
 msgid "Estonia"
 msgstr "Estônia"
 
-#: src/translations.h:399
+#: src/translations.h:411
 msgid "Egypt"
 msgstr "Egito"
 
-#: src/translations.h:400
+#: src/translations.h:412
 msgid "Western Sahara"
 msgstr "Saara Ocidental"
 
-#: src/translations.h:401
+#: src/translations.h:413
 msgid "Eritrea"
 msgstr "Eritreia"
 
-#: src/translations.h:402
+#: src/translations.h:414
 msgid "Spain"
 msgstr "Espanha"
 
-#: src/translations.h:403
+#: src/translations.h:415
 msgid "Ethiopia"
 msgstr "Etiópia"
 
-#: src/translations.h:404
+#: src/translations.h:416
 msgid "Finland"
 msgstr "Finlândia"
 
-#: src/translations.h:405
+#: src/translations.h:417
 msgid "Fiji"
 msgstr "Fiji"
 
-#: src/translations.h:406
+#: src/translations.h:418
 msgid "Falkland Islands"
 msgstr "Ilhas Malvinas"
 
-#: src/translations.h:407
+#: src/translations.h:419
 msgid "Micronesia"
 msgstr "Micronésia"
 
-#: src/translations.h:408
+#: src/translations.h:420
 msgid "Faroe Islands"
 msgstr "Ilhas Faroé"
 
-#: src/translations.h:409
+#: src/translations.h:421
 msgid "France"
 msgstr "França"
 
-#: src/translations.h:410
+#: src/translations.h:422
 msgid "Gabon"
 msgstr "Gabão"
 
-#: src/translations.h:411
+#: src/translations.h:423
 msgid "United Kingdom"
 msgstr "Reino Unido"
 
-#: src/translations.h:412
+#: src/translations.h:424
 msgid "Grenada"
 msgstr "Granada"
 
-#: src/translations.h:413
+#: src/translations.h:425
 msgid "Georgia"
 msgstr "Geórgia"
 
-#: src/translations.h:414
+#: src/translations.h:426
 msgid "French Guiana"
 msgstr "Guiana Francesa"
 
-#: src/translations.h:415
+#: src/translations.h:427
 msgid "Ghana"
 msgstr "Gana"
 
-#: src/translations.h:416
+#: src/translations.h:428
 msgid "Gibraltar"
 msgstr "Gibraltar"
 
-#: src/translations.h:417
+#: src/translations.h:429
 msgid "Greenland"
 msgstr "Groenlândia"
 
-#: src/translations.h:418
+#: src/translations.h:430
 msgid "Gambia"
 msgstr "Gâmbia"
 
-#: src/translations.h:419
+#: src/translations.h:431
 msgid "Guinea"
 msgstr "Guiné"
 
-#: src/translations.h:420
+#: src/translations.h:432
 msgid "Guadeloupe"
 msgstr "Guadalupe"
 
-#: src/translations.h:421
+#: src/translations.h:433
 msgid "Equatorial Guinea"
 msgstr "Guiné Equatorial"
 
-#: src/translations.h:422
+#: src/translations.h:434
 msgid "Greece"
 msgstr "Grécia"
 
-#: src/translations.h:423
+#: src/translations.h:435
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Ilhas Geórgia do Sul e Sanduíche do Sul"
 
-#: src/translations.h:424
+#: src/translations.h:436
 msgid "Guatemala"
 msgstr "Guatemala"
 
-#: src/translations.h:425
+#: src/translations.h:437
 msgid "Guam"
 msgstr "Guam"
 
-#: src/translations.h:426
+#: src/translations.h:438
 msgid "Guinea-Bissau"
 msgstr "Guiné-Bissau"
 
-#: src/translations.h:427
+#: src/translations.h:439
 msgid "Guyana"
 msgstr "Guiana"
 
-#: src/translations.h:428
+#: src/translations.h:440
 msgid "Hong Kong"
 msgstr "Hongue Congue"
 
-#: src/translations.h:429
+#: src/translations.h:441
 msgid "Heard Island and McDonald Islands"
 msgstr "Ilha Heard e Ilhas McDonald"
 
-#: src/translations.h:430
+#: src/translations.h:442
 msgid "Honduras"
 msgstr "Honduras"
 
-#: src/translations.h:431
+#: src/translations.h:443
 msgid "Croatia"
 msgstr "Croácia"
 
-#: src/translations.h:432
+#: src/translations.h:444
 msgid "Haiti"
 msgstr "Haiti"
 
-#: src/translations.h:433
+#: src/translations.h:445
 msgid "Hungary"
 msgstr "Hungria"
 
-#: src/translations.h:434
+#: src/translations.h:446
 msgid "Indonesia"
 msgstr "Indonésia"
 
-#: src/translations.h:435
+#: src/translations.h:447
 msgid "Ireland"
 msgstr "Irlanda"
 
-#: src/translations.h:436
+#: src/translations.h:448
 msgid "Israel"
 msgstr "Israel"
 
-#: src/translations.h:437
+#: src/translations.h:449
 msgid "India"
 msgstr "Índia"
 
-#: src/translations.h:438
+#: src/translations.h:450
 msgid "British Indian Ocean Territory"
 msgstr "Território Britânico do Oceano Índico"
 
-#: src/translations.h:439
+#: src/translations.h:451
 msgid "Iraq"
 msgstr "Iraque"
 
-#: src/translations.h:440
+#: src/translations.h:452
 msgid "Iran"
 msgstr "Irã"
 
-#: src/translations.h:441
+#: src/translations.h:453
 msgid "Iceland"
 msgstr "Islândia"
 
-#: src/translations.h:442
+#: src/translations.h:454
 msgid "Italy"
 msgstr "Itália"
 
-#: src/translations.h:443
+#: src/translations.h:455
 msgid "Jamaica"
 msgstr "Jamaica"
 
-#: src/translations.h:444
+#: src/translations.h:456
 msgid "Jordan"
 msgstr "Jordânia"
 
-#: src/translations.h:445
+#: src/translations.h:457
 msgid "Japan"
 msgstr "Japão"
 
-#: src/translations.h:446
+#: src/translations.h:458
 msgid "Kenya"
 msgstr "Quênia"
 
-#: src/translations.h:447
+#: src/translations.h:459
 msgid "Kyrgyzstan"
 msgstr "Quirguistão"
 
-#: src/translations.h:448
+#: src/translations.h:460
 msgid "Cambodia"
 msgstr "Camboja"
 
-#: src/translations.h:449
+#: src/translations.h:461
 msgid "Kiribati"
 msgstr "Quiribati"
 
-#: src/translations.h:450
+#: src/translations.h:462
 msgid "Comoros"
 msgstr "Comores"
 
-#: src/translations.h:451
+#: src/translations.h:463
 msgid "Saint Kitts and Nevis"
 msgstr "São Cristóvão e Neves"
 
-#: src/translations.h:452
+#: src/translations.h:464
 msgid "Democratic People's Republic of Korea"
 msgstr "Coreia do Norte"
 
-#: src/translations.h:453
+#: src/translations.h:465
 msgid "Republic of Korea"
 msgstr "Coreia do Sul"
 
-#: src/translations.h:454
+#: src/translations.h:466
 msgid "Kuwait"
 msgstr "Quaite"
 
-#: src/translations.h:455
+#: src/translations.h:467
 msgid "Cayman Islands"
 msgstr "Ilhas Caimã"
 
-#: src/translations.h:456
+#: src/translations.h:468
 msgid "Kazakhstan"
 msgstr "Cazaquistão"
 
-#: src/translations.h:457
+#: src/translations.h:469
 msgid "Lao"
 msgstr "Laos"
 
-#: src/translations.h:458
+#: src/translations.h:470
 msgid "Lebanon"
 msgstr "Líbano"
 
-#: src/translations.h:459
+#: src/translations.h:471
 msgid "Saint Lucia"
 msgstr "Santa Lúcia"
 
-#: src/translations.h:460
+#: src/translations.h:472
 msgid "Liechtenstein"
 msgstr "Listenstaine"
 
-#: src/translations.h:461
+#: src/translations.h:473
 msgid "Sri Lanka"
 msgstr "Seri-Lanca"
 
-#: src/translations.h:462
+#: src/translations.h:474
 msgid "Liberia"
 msgstr "Libéria"
 
-#: src/translations.h:463
+#: src/translations.h:475
 msgid "Lesotho"
 msgstr "Lesoto"
 
-#: src/translations.h:464
+#: src/translations.h:476
 msgid "Lithuania"
 msgstr "Lituânia"
 
-#: src/translations.h:465
+#: src/translations.h:477
 msgid "Luxembourg"
 msgstr "Luxemburgo"
 
-#: src/translations.h:466
+#: src/translations.h:478
 msgid "Latvia"
 msgstr "Letônia"
 
-#: src/translations.h:467
+#: src/translations.h:479
 msgid "Libyan Arab Jamahiriya"
 msgstr "Líbia"
 
-#: src/translations.h:468
+#: src/translations.h:480
 msgid "Morocco"
 msgstr "Marrocos"
 
-#: src/translations.h:469
+#: src/translations.h:481
 msgid "Monaco"
 msgstr "Mônaco"
 
-#: src/translations.h:470
+#: src/translations.h:482
 msgid "Moldova"
 msgstr "Moldávia"
 
-#: src/translations.h:471
+#: src/translations.h:483
 msgid "Madagascar"
 msgstr "Madagáscar"
 
-#: src/translations.h:472
+#: src/translations.h:484
 msgid "Marshall Islands"
 msgstr "Ilhas Marechal"
 
-#: src/translations.h:473
+#: src/translations.h:485
 msgid "Macedonia"
 msgstr "Macedônia"
 
-#: src/translations.h:474
+#: src/translations.h:486
 msgid "Mali"
 msgstr "Mali"
 
-#: src/translations.h:475
+#: src/translations.h:487
 msgid "Myanmar"
 msgstr "Mianmar"
 
-#: src/translations.h:476
+#: src/translations.h:488
 msgid "Mongolia"
 msgstr "Mongólia"
 
-#: src/translations.h:477
+#: src/translations.h:489
 msgid "Macau"
 msgstr "Macau"
 
-#: src/translations.h:478
+#: src/translations.h:490
 msgid "Northern Mariana Islands"
 msgstr "Ilhas Marianas Setentrionais"
 
-#: src/translations.h:479
+#: src/translations.h:491
 msgid "Martinique"
 msgstr "Martinica"
 
-#: src/translations.h:480
+#: src/translations.h:492
 msgid "Mauritania"
 msgstr "Mauritânia"
 
-#: src/translations.h:481
+#: src/translations.h:493
 msgid "Montserrat"
 msgstr "Monserrate"
 
-#: src/translations.h:482
+#: src/translations.h:494
 msgid "Malta"
 msgstr "Malta"
 
-#: src/translations.h:483
+#: src/translations.h:495
 msgid "Mauritius"
 msgstr "Maurício"
 
-#: src/translations.h:484
+#: src/translations.h:496
 msgid "Maldives"
 msgstr "Maldivas"
 
-#: src/translations.h:485
+#: src/translations.h:497
 msgid "Malawi"
 msgstr "Maláui"
 
-#: src/translations.h:486
+#: src/translations.h:498
 msgid "Mexico"
 msgstr "México"
 
-#: src/translations.h:487
+#: src/translations.h:499
 msgid "Malaysia"
 msgstr "Malásia"
 
-#: src/translations.h:488
+#: src/translations.h:500
 msgid "Mozambique"
 msgstr "Moçambique"
 
-#: src/translations.h:489
+#: src/translations.h:501
 msgid "Namibia"
 msgstr "Namíbia"
 
-#: src/translations.h:490
+#: src/translations.h:502
 msgid "New Caledonia"
 msgstr "Nova Caledônia"
 
-#: src/translations.h:491
+#: src/translations.h:503
 msgid "Niger"
 msgstr "Níger"
 
-#: src/translations.h:492
+#: src/translations.h:504
 msgid "Norfolk Island"
 msgstr "Ilha de Norfolque"
 
-#: src/translations.h:493
+#: src/translations.h:505
 msgid "Nigeria"
 msgstr "Nigéria"
 
-#: src/translations.h:494
+#: src/translations.h:506
 msgid "Nicaragua"
 msgstr "Nicarágua"
 
-#: src/translations.h:495
+#: src/translations.h:507
 msgid "Netherlands"
 msgstr "Países Baixos"
 
-#: src/translations.h:496
+#: src/translations.h:508
 msgid "Norway"
 msgstr "Noruega"
 
-#: src/translations.h:497
+#: src/translations.h:509
 msgid "Nepal"
 msgstr "Nepal"
 
-#: src/translations.h:498
+#: src/translations.h:510
 msgid "Nauru"
 msgstr "Nauru"
 
-#: src/translations.h:499
+#: src/translations.h:511
 msgid "Niue"
 msgstr "Niuê"
 
-#: src/translations.h:500
+#: src/translations.h:512
 msgid "New Zealand"
 msgstr "Nova Zelândia"
 
-#: src/translations.h:501
+#: src/translations.h:513
 msgid "Oman"
 msgstr "Omã"
 
-#: src/translations.h:502
+#: src/translations.h:514
 msgid "Panama"
 msgstr "Panamá"
 
-#: src/translations.h:503
+#: src/translations.h:515
 msgid "Peru"
 msgstr "Peru"
 
-#: src/translations.h:504
+#: src/translations.h:516
 msgid "French Polynesia"
 msgstr "Polinésia Francesa"
 
-#: src/translations.h:505
+#: src/translations.h:517
 msgid "Papua New Guinea"
 msgstr "Papua Nova Guiné"
 
-#: src/translations.h:506
+#: src/translations.h:518
 msgid "Philippines"
 msgstr "Filipinas"
 
-#: src/translations.h:507
+#: src/translations.h:519
 msgid "Pakistan"
 msgstr "Paquistão"
 
-#: src/translations.h:508
+#: src/translations.h:520
 msgid "Poland"
 msgstr "Polônia"
 
-#: src/translations.h:509
+#: src/translations.h:521
 msgid "Saint Pierre and Miquelon"
 msgstr "São Pedro e Miquelão"
 
-#: src/translations.h:510
+#: src/translations.h:522
 msgid "Pitcairn"
 msgstr "Ilhas Picárnia"
 
-#: src/translations.h:511
+#: src/translations.h:523
 msgid "Puerto Rico"
 msgstr "Porto Rico"
 
-#: src/translations.h:512
+#: src/translations.h:524
 msgid "Palestinian Territories"
 msgstr "Territórios Palestinos"
 
-#: src/translations.h:513
+#: src/translations.h:525
 msgid "Portugal"
 msgstr "Portugal"
 
-#: src/translations.h:514
+#: src/translations.h:526
 msgid "Palau"
 msgstr "Palau"
 
-#: src/translations.h:515
+#: src/translations.h:527
 msgid "Paraguay"
 msgstr "Paraguai"
 
-#: src/translations.h:516
+#: src/translations.h:528
 msgid "Qatar"
 msgstr "Catar"
 
-#: src/translations.h:517
+#: src/translations.h:529
 msgid "Réunion"
 msgstr "Reunião"
 
-#: src/translations.h:518
+#: src/translations.h:530
 msgid "Romania"
 msgstr "Romênia"
 
-#: src/translations.h:519
+#: src/translations.h:531
 msgid "Serbia"
 msgstr "Sérvia"
 
-#: src/translations.h:520
+#: src/translations.h:532
 msgid "Russian Federation"
 msgstr "Rússia"
 
-#: src/translations.h:521
+#: src/translations.h:533
 msgid "Rwanda"
 msgstr "Ruanda"
 
-#: src/translations.h:522
+#: src/translations.h:534
 msgid "Saudi Arabia"
 msgstr "Arábia Saudita"
 
-#: src/translations.h:523
+#: src/translations.h:535
 msgid "Solomon Islands"
 msgstr "Ilhas Salomão"
 
-#: src/translations.h:524
+#: src/translations.h:536
 msgid "Seychelles"
 msgstr "Seicheles"
 
-#: src/translations.h:525
+#: src/translations.h:537
 msgid "Sudan"
 msgstr "Sudão"
 
-#: src/translations.h:526
+#: src/translations.h:538
 msgid "Sweden"
 msgstr "Suécia"
 
-#: src/translations.h:527
+#: src/translations.h:539
 msgid "Singapore"
 msgstr "Singapura"
 
-#: src/translations.h:528
+#: src/translations.h:540
 msgid "Saint Helena"
 msgstr "Santa Helena"
 
-#: src/translations.h:529
+#: src/translations.h:541
 msgid "Slovenia"
 msgstr "Eslovênia"
 
-#: src/translations.h:530
+#: src/translations.h:542
 msgid "Svalbard and Jan Mayen"
 msgstr "Svalbard e Jan Mayen"
 
-#: src/translations.h:531
+#: src/translations.h:543
 msgid "Slovakia"
 msgstr "Eslováquia"
 
-#: src/translations.h:532
+#: src/translations.h:544
 msgid "Sierra Leone"
 msgstr "Serra Leoa"
 
-#: src/translations.h:533
+#: src/translations.h:545
 msgid "San Marino"
 msgstr "São Marinho"
 
-#: src/translations.h:534
+#: src/translations.h:546
 msgid "Senegal"
 msgstr "Senegal"
 
-#: src/translations.h:535
+#: src/translations.h:547
 msgid "Somalia"
 msgstr "Somália"
 
-#: src/translations.h:536
+#: src/translations.h:548
 msgid "Suriname"
 msgstr "Suriname"
 
-#: src/translations.h:537
+#: src/translations.h:549
 msgid "Sao Tome and Principe"
 msgstr "São Tomé e Príncipe"
 
-#: src/translations.h:538
+#: src/translations.h:550
 msgid "El Salvador"
 msgstr "El Salvador"
 
-#: src/translations.h:539
+#: src/translations.h:551
 msgid "Syrian Arab Republic"
 msgstr "Síria"
 
-#: src/translations.h:540
+#: src/translations.h:552
 msgid "Swaziland"
 msgstr "Suazilândia"
 
-#: src/translations.h:541
+#: src/translations.h:553
 msgid "Turks and Caicos Islands"
 msgstr "Ilhas Turcas e Caicos"
 
-#: src/translations.h:542
+#: src/translations.h:554
 msgid "Chad"
 msgstr "Chade"
 
-#: src/translations.h:543
+#: src/translations.h:555
 msgid "French Southern Territories"
 msgstr "Territórios Austrais Franceses"
 
-#: src/translations.h:544
+#: src/translations.h:556
 msgid "Togo"
 msgstr "Togo"
 
-#: src/translations.h:545
+#: src/translations.h:557
 msgid "Thailand"
 msgstr "Tailândia"
 
-#: src/translations.h:546
+#: src/translations.h:558
 msgid "Tajikistan"
 msgstr "Tadjiquistão"
 
-#: src/translations.h:547
+#: src/translations.h:559
 msgid "Tokelau"
 msgstr "Toquelau"
 
-#: src/translations.h:548
+#: src/translations.h:560
 msgid "East Timor"
 msgstr "Timor-Leste"
 
-#: src/translations.h:549
+#: src/translations.h:561
 msgid "Turkmenistan"
 msgstr "Turcomenistão"
 
-#: src/translations.h:550
+#: src/translations.h:562
 msgid "Tunisia"
 msgstr "Tunísia"
 
-#: src/translations.h:551
+#: src/translations.h:563
 msgid "Tonga"
 msgstr "Tonga"
 
-#: src/translations.h:552
+#: src/translations.h:564
 msgid "Turkey"
 msgstr "Turquia"
 
-#: src/translations.h:553
+#: src/translations.h:565
 msgid "Trinidad and Tobago"
 msgstr "Trindade e Tobago"
 
-#: src/translations.h:554
+#: src/translations.h:566
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
-#: src/translations.h:555
+#: src/translations.h:567
 msgid "Taiwan"
 msgstr "Taiuã"
 
-#: src/translations.h:556
+#: src/translations.h:568
 msgid "Tanzania"
 msgstr "Tanzânia"
 
-#: src/translations.h:557
+#: src/translations.h:569
 msgid "Ukraine"
 msgstr "Ucrânia"
 
-#: src/translations.h:558
+#: src/translations.h:570
 msgid "Uganda"
 msgstr "Uganda"
 
-#: src/translations.h:559
+#: src/translations.h:571
 msgid "United States Minor Outlying Islands"
 msgstr "Ilhas Menores Distantes dos Estados Unidos"
 
-#: src/translations.h:560
+#: src/translations.h:572
 msgid "United States"
 msgstr "Estados Unidos"
 
-#: src/translations.h:561
+#: src/translations.h:573
 msgid "Uruguay"
 msgstr "Uruguai"
 
-#: src/translations.h:562
+#: src/translations.h:574
 msgid "Uzbekistan"
 msgstr "Uzbequistão"
 
-#: src/translations.h:563
+#: src/translations.h:575
 msgid "Vatican City State"
 msgstr "Vaticano"
 
-#: src/translations.h:564
+#: src/translations.h:576
 msgid "Saint Vincent and the Grenadines"
 msgstr "São Vicente e Granadinas"
 
-#: src/translations.h:565
+#: src/translations.h:577
 msgid "Venezuela"
 msgstr "Venezuela"
 
-#: src/translations.h:566
+#: src/translations.h:578
 msgid "British Virgin Islands"
 msgstr "Ilhas Virgens Britânicas"
 
-#: src/translations.h:567
+#: src/translations.h:579
 msgid "United States Virgin Islands"
 msgstr "Ilhas Virgens dos Estados Unidos"
 
-#: src/translations.h:568
+#: src/translations.h:580
 msgid "Viet Nam"
 msgstr "Vietnã"
 
-#: src/translations.h:569
+#: src/translations.h:581
 msgid "Vanuatu"
 msgstr "Vanuatu"
 
-#: src/translations.h:570
+#: src/translations.h:582
 msgid "Wallis and Futuna"
 msgstr "Wallis e Futuna"
 
-#: src/translations.h:571
+#: src/translations.h:583
 msgid "Samoa"
 msgstr "Samoa"
 
-#: src/translations.h:572
+#: src/translations.h:584
 msgid "Yemen"
 msgstr "Iêmen"
 
-#: src/translations.h:573
+#: src/translations.h:585
 msgid "Mayotte"
 msgstr "Maiote"
 
-#: src/translations.h:574
+#: src/translations.h:586
 msgid "Yugoslavia"
 msgstr "Iugoslávia"
 
-#: src/translations.h:575
+#: src/translations.h:587
 msgid "South Africa"
 msgstr "África do Sul"
 
-#: src/translations.h:576
+#: src/translations.h:588
 msgid "Zambia"
 msgstr "Zâmbia"
 
-#: src/translations.h:577
+#: src/translations.h:589
 msgid "Zimbabwe"
 msgstr "Zimbábue"
 
-#: src/translations.h:581
+#: src/translations.h:593
 msgid "&Undo"
 msgstr "&Desfazer"
 
-#: src/translations.h:582
+#: src/translations.h:594
 msgid "&Redo"
 msgstr "&Refazer"
 
-#: src/translations.h:583
+#: src/translations.h:595
 msgid "Cu&t"
 msgstr "Recor&tar"
 
-#: src/translations.h:584
+#: src/translations.h:596
 msgid "&Copy"
 msgstr "&Copiar"
 
-#: src/translations.h:585
+#: src/translations.h:597
 msgid "&Paste"
 msgstr "Co&lar"
 
-#: src/translations.h:586 src/ui_locationDialogGui.h:432
+#: src/translations.h:598 src/ui_locationDialogGui.h:432
 #: plugins/Oculars/src/ui_ocularDialog.h:1189
 #: plugins/Oculars/src/ui_ocularDialog.h:1199
 #: plugins/Oculars/src/ui_ocularDialog.h:1206
@@ -4661,64 +4704,64 @@ msgstr "Co&lar"
 msgid "Delete"
 msgstr "Excluir"
 
-#: src/translations.h:587
+#: src/translations.h:599
 msgid "Select All"
 msgstr "Selecionar tudo"
 
-#: src/translations.h:588
+#: src/translations.h:600
 msgid "Look in:"
 msgstr "Procurar em:"
 
-#: src/translations.h:589
+#: src/translations.h:601
 msgid "Directory:"
 msgstr "Pasta:"
 
-#: src/translations.h:590
+#: src/translations.h:602
 msgid "Folder"
 msgstr "Pasta"
 
-#: src/translations.h:591
+#: src/translations.h:603
 msgid "&Choose"
 msgstr "&Escolher"
 
-#: src/translations.h:592 src/ui_configurationDialog.h:1290
+#: src/translations.h:604 src/ui_configurationDialog.h:1290
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/translations.h:593
+#: src/translations.h:605
 msgid "Files of type:"
 msgstr "Arquivos do tipo:"
 
-#: src/translations.h:594
+#: src/translations.h:606
 msgid "Date Modified"
 msgstr "Data de modificação"
 
-#: src/translations.h:595
+#: src/translations.h:607
 msgid "Directories"
 msgstr "Pastas"
 
-#: src/translations.h:596
+#: src/translations.h:608
 msgid "Computer"
 msgstr "Computador"
 
-#: src/translations.h:597
+#: src/translations.h:609
 msgid "&Open"
 msgstr "&Abrir"
 
-#: src/translations.h:598
+#: src/translations.h:610
 msgid "File &name:"
 msgstr "&Nome do arquivo:"
 
-#: src/translations.h:599
+#: src/translations.h:611
 msgid "Copy &Link Location"
 msgstr "Copiar a localização do &link"
 
-#: src/translations.h:600
+#: src/translations.h:612
 msgid "Abort"
 msgstr "Cancelar"
 
-#: src/translations.h:601
+#: src/translations.h:613
 msgid "Ignore"
 msgstr "Ignorar"
 
