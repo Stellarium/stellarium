@@ -14,12 +14,42 @@ separately: StellariumScope (section~\ref{sec:plugins:StellariumScope}).
 \section{Oculars Plugin}
 \label{sec:plugins:Oculars}
 
-TODO
+This places a window on the screen that corresponds to the view
+through a telescope or on a camera. It reads from an editable data
+base.
+
+When this plug in is active a circular view will appear around the
+selected object depicting what would be seen by the viewing object. On
+the top right hand side of the screen a menu will appear that can be
+used to select the viewing device, e.g., Camera, Eyepiece, Barlow type
+lenses, etc. This menu is filled with items from the \file{ocular.ini}
+file in the \file{modules/oculars} folder. This file can be edited
+from the Plugin's menu screen or with a text editor.
+
+%TODO: Details?
 
 \section{TelescopeControl Plugin}
 \label{sec:plugins:TelescopeControl}
 
-TODO
+Stellarium has a simple control mechanism for motorised telescope
+mounts. The user selects an object (i.e. by clicking on something -- a
+planet, a star etc.) and presses the telescope go-to key 
+%(see section \ref{sec:plugins:telescopeControl:goto})  <<<<<<<<<<<<<<<<<< YES, WHERE?
+and the telescope will be guided to the object.
+
+Multiple telescopes may be controlled simultaneously. 
+
+%TODO Details?
+
+The control interface uses the Meade or the Celestron protocol and
+most telescopes use either one or the other so many different brands
+of telescopes can be controlled. There is a third party Telescope
+control system going under the name of ASCOM. They provide an
+interface to stellarium and then translate the control into many other
+forms (see section~\ref{sec:plugins:StellariumScope}).
+
+
+\paragraph{WARNING}: \emph{Stellarium will not prevent your telescope from being pointed at the Sun. It is up to you to ensure proper filtering and safety measures are applied!}
 
 \section{StellariumScope plugin}
 \label{sec:plugins:StellariumScope}
