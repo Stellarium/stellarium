@@ -24,6 +24,13 @@
 \section{ArchaeoLines Plugin}
 \label{sec:plugin:ArchaeoLines}
 
+\begin{figure}[ht]
+\includegraphics[width=\textwidth]{ArchaeoLines.jpg}
+\caption{Declination Lines provided by the ArchaeoLines plugin}
+\label{fig:plugin:ArchaeoLines}
+\end{figure}
+
+
 \subsection{Introduction}
 \label{sec:plugin:ArchaeoLines:Introduction}
 
@@ -31,9 +38,10 @@ In the archaeoastronomical literature, several astronomically derived
 orientation schemes are prevalent. Often prehistorical and historical
 buildings are described as having been built with a main axis pointing
 to a sunrise on summer or winter solstice. There can hardly be a
-better tool than Scenery3D (see chapter~\ref{ch:scenery3d}) to investigate a 3D model of such a
-building, and this plugin is a further tool in the archaeoastronomer's
-portfolio.
+better tool than Scenery3D (see chapter~\ref{ch:scenery3d}) to
+investigate a 3D model of such a building, and this plugin has been
+introduced in version 0.13.3 as a further tool in the
+archaeoastronomer's toolbox.
 
 When activated (see section~\ref{sec:Plugins:EnablingPlugins}), there
 is a tool bar button \guibutton{0.6}{bt_archaeolines} (in the
@@ -97,6 +105,40 @@ In addition, you can select the color of the lines by clicking on the
 color swatches.\footnote{Unfortunately, on Windows, the color dialog hides
 behind the Stellarium window when in fullscreen mode. So, before
 editing line colors, please leave fullscreen mode!}
+
+\subsection*{Section [ArchaeoLines] in config.ini file}
+
+Apart from changing settings using the plugin configuration dialog,
+you can also edit \file{config.ini} file by yourself for changes of the
+settings for the ArchaeoLines plugin -- just make it carefully!
+
+\begin{longtabu} {l|l|l}\toprule
+\emph{ID}                   &\emph{Type} & \emph{Default}  \\\midrule
+enable\_at\_startup         &bool        & false           \\\midrule
+color\_equinox              &float R,G,B & 1.00,1.00,0.5   \\\midrule
+color\_solstices            &float R,G,B & 1.00,1.00,0.25  \\\midrule
+color\_crossquarters        &float R,G,B & 1.00,0.75,0.25  \\\midrule
+color\_major\_standstill    &float R,G,B & 0.25,1.00,0.25  \\\midrule
+color\_minor\_standstill    &float R,G,B & 0.20,0.75,0.20  \\\midrule
+color\_zenith\_passage      &float R,G,B & 1.00,0.75,0.75  \\\midrule
+color\_nadir\_passage       &float R,G,B & 1.00,0.75,0.75  \\\midrule
+color\_selected\_object     &float R,G,B & 1.00,1.00,1.00  \\\midrule
+color\_current\_sun         &float R,G,B & 1.00,1.00,0.75  \\\midrule
+color\_current\_moon        &float R,G,B & 0.50,1.00,0.50  \\\midrule
+color\_current\_planet      &float R,G,B & 0.25,0.80,1.00  \\\midrule
+show\_equinox               &bool        & true  \\\midrule
+show\_solstices             &bool        & true  \\\midrule
+show\_crossquarters         &bool        & true  \\\midrule
+show\_major\_standstills    &bool        & true  \\\midrule
+show\_minor\_standstills    &bool        & true  \\\midrule
+show\_zenith\_passage       &bool        & true  \\\midrule
+show\_nadir\_passage        &bool        & true  \\\midrule
+show\_selected\_object      &bool        & true  \\\midrule
+show\_current\_sun          &bool        & true  \\\midrule
+show\_current\_moon         &bool        & true  \\\midrule
+show\_current\_planet       &bool        & true  \\\bottomrule
+\end{longtabu}
+
 
 % \section{Adding Sky Cultures}
 % \label{sec:SkyCultures}
