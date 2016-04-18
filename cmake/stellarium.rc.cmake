@@ -1,4 +1,4 @@
-stellarium-icon ICON "stellarium.ico"
+stellarium-icon ICON "@CMAKE_SOURCE_DIR@/data/stellarium.ico"
 1 VERSIONINFO
 FILEVERSION     @PACKAGE_VERSION_RC@
 PRODUCTVERSION  @PACKAGE_VERSION_RC@

@@ -435,13 +435,12 @@ ENDIF()
 
 IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
      IF(RC_COMPILER_PATH)
-          ADD_CUSTOM_COMMAND(OUTPUT ${CMAKE_BINARY_DIR}/stellarium-rc.o
-                    COMMAND ${RC_COMPILER_PATH} ${CMAKE_SOURCE_DIR}/data/stellarium.rc ${CMAKE_BINARY_DIR}/stellarium-rc.o
-                    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/data)
-          SET(stellarium_exe_SRCS ${stellarium_exe_SRCS} ${CMAKE_BINARY_DIR}/stellarium-rc.o)
+          ADD_CUSTOM_COMMAND(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/stellarium-rc.o
+                    COMMAND ${RC_COMPILER_PATH} ${CMAKE_CURRENT_BINARY_DIR}/stellarium.rc ${CMAKE_CURRENT_BINARY_DIR}/stellarium-rc.o)
+          SET(stellarium_exe_SRCS ${stellarium_exe_SRCS} ${CMAKE_CURRENT_BINARY_DIR}/stellarium-rc.o)
      ELSE()
           IF(MSVC)
-               SET(stellarium_exe_SRCS ${stellarium_exe_SRCS} ${CMAKE_SOURCE_DIR}/data/stellarium.rc)
+               SET(stellarium_exe_SRCS ${stellarium_exe_SRCS} ${CMAKE_CURRENT_BINARY_DIR}/stellarium.rc)
           ENDIF()
      ENDIF()
 ENDIF()
@@ -485,7 +484,7 @@ ADD_DEPENDENCIES(stellarium AllStaticPlugins)
 IF(MSVC)
      ADD_CUSTOM_COMMAND(TARGET stellarium
           POST_BUILD
-          COMMAND "mt.exe" -nologo -manifest ${CMAKE_SOURCE_DIR}/stellarium.exe.manifest -outputresource:$<TARGET_FILE:stellarium>
+          COMMAND "mt.exe" -nologo -manifest ${CMAKE_SOURCE_DIR}/data/stellarium.exe.manifest -outputresource:$<TARGET_FILE:stellarium>
           COMMENT "Adding manifest..."
           VERBATIM
      )
