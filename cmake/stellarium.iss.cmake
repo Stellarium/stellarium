@@ -5,8 +5,8 @@
 [Setup]
 @ISS_ARCHITECTURE_SPECIFIC@
 DisableStartupPrompt=yes
-WizardSmallImageFile=@CMAKE_SOURCE_DIR@/data/icon.bmp
-WizardImageFile=@CMAKE_SOURCE_DIR@/data/splash.bmp
+WizardSmallImageFile=@CMAKE_SOURCE_DIR@\data\icon.bmp
+WizardImageFile=@CMAKE_SOURCE_DIR@\data\splash.bmp
 WizardImageStretch=no
 WizardImageBackColor=clBlack
 AppName=Stellarium
@@ -19,15 +19,15 @@ AppSupportURL=http://www.stellarium.org/
 AppUpdatesURL=http://www.stellarium.org/
 VersionInfoVersion=@PACKAGE_VERSION@
 MinVersion=0,@MIN_VERSION@
-SetupIconFile=@CMAKE_SOURCE_DIR@/data/stellarium.ico
+SetupIconFile=@CMAKE_SOURCE_DIR@\data\stellarium.ico
 OutputBaseFilename=stellarium-@PACKAGE_VERSION@-@ISS_PACKAGE_PLATFORM@
-OutputDir=@CMAKE_SOURCE_DIR@/installers
+OutputDir=@CMAKE_SOURCE_DIR@\installers
 ; In 64-bit mode, {pf} is equivalent to {pf64},
 ; see http://www.jrsoftware.org/ishelp/index.php?topic=32vs64bitinstalls
-DefaultDirName={pf}/Stellarium
+DefaultDirName={pf}\Stellarium
 DefaultGroupName=Stellarium
-UninstallDisplayIcon={app}/data/stellarium.ico
-LicenseFile=COPYING
+UninstallDisplayIcon={app}\data\stellarium.ico
+LicenseFile=@CMAKE_SOURCE_DIR@\COPYING
 ChangesAssociations=yes
 ; LZMA2/max required 95 MB RAM for compression and 8 MB RAM for decompression
 ; Using LZMA2/max algorithm reduces size of package on ~10%
@@ -38,14 +38,14 @@ Source: "@CMAKE_INSTALL_PREFIX@\bin\stellarium.exe"; Flags: ignoreversion; DestD
 @STELMAINLIB@
 @MESALIB@
 @REDIST_FILES@
-Source: "@CMAKE_SOURCE_DIR@/data/stellarium.url"; Flags: ignoreversion; DestDir: "{app}"
-Source: "@CMAKE_SOURCE_DIR@/data/stellarium-guide.url"; Flags: ignoreversion; DestDir: "{app}"
-Source: "@CMAKE_SOURCE_DIR@/data/stellarium-devdocs.url"; Flags: ignoreversion; DestDir: "{app}"
-Source: "@CMAKE_SOURCE_DIR@/README"; DestDir: "{app}"; Flags: isreadme ignoreversion; DestName: "README.rtf"
-Source: "@CMAKE_SOURCE_DIR@/INSTALL"; DestDir: "{app}"; Flags: ignoreversion; DestName: "INSTALL.rtf"
-Source: "@CMAKE_SOURCE_DIR@/COPYING"; DestDir: "{app}"; Flags: ignoreversion; DestName: "GPL.rtf"
-Source: "@CMAKE_SOURCE_DIR@/AUTHORS"; DestDir: "{app}"; Flags: ignoreversion; DestName: "AUTHORS.rtf"
-Source: "@CMAKE_SOURCE_DIR@/ChangeLog"; DestDir: "{app}"; Flags: ignoreversion; DestName: "ChangeLog.rtf"
+Source: "@CMAKE_SOURCE_DIR@\data\stellarium.url"; Flags: ignoreversion; DestDir: "{app}"
+Source: "@CMAKE_SOURCE_DIR@\data\stellarium-guide.url"; Flags: ignoreversion; DestDir: "{app}"
+Source: "@CMAKE_SOURCE_DIR@\data\stellarium-devdocs.url"; Flags: ignoreversion; DestDir: "{app}"
+Source: "@CMAKE_SOURCE_DIR@\README"; DestDir: "{app}"; Flags: isreadme ignoreversion; DestName: "README.rtf"
+Source: "@CMAKE_SOURCE_DIR@\INSTALL"; DestDir: "{app}"; Flags: ignoreversion; DestName: "INSTALL.rtf"
+Source: "@CMAKE_SOURCE_DIR@\COPYING"; DestDir: "{app}"; Flags: ignoreversion; DestName: "GPL.rtf"
+Source: "@CMAKE_SOURCE_DIR@\AUTHORS"; DestDir: "{app}"; Flags: ignoreversion; DestName: "AUTHORS.rtf"
+Source: "@CMAKE_SOURCE_DIR@\ChangeLog"; DestDir: "{app}"; Flags: ignoreversion; DestName: "ChangeLog.rtf"
 Source: "@QtCore_location@"; DestDir: "{app}";
 Source: "@QtGui_location@"; DestDir: "{app}";
 Source: "@QtOpenGL_location@"; DestDir: "{app}";
@@ -62,7 +62,7 @@ Source: "@QtPrintSupport_location@"; DestDir: "{app}";
 @ISS_ICU_LIBS@
 @ISS_QT_PLUGINS@
 ; Stellarium's stuff
-Source: "@CMAKE_INSTALL_PREFIX@/share/stellarium/*"; DestDir: "{app}\"; Flags: recursesubdirs ignoreversion
+Source: "@CMAKE_INSTALL_PREFIX@\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs ignoreversion
 
 [Tasks]
 Name: desktopicon; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
@@ -78,7 +78,7 @@ Name: removelandscapes; Description: "{cm:RemoveUILandscapes}"; GroupDescription
 [Run]
 ;An option to start Stellarium after setup has finished
 @REDIST_RUN@
-Filename: "{app}/stellarium.exe"; Description: "{cm:LaunchProgram,Stellarium}"; Flags: postinstall nowait skipifsilent unchecked
+Filename: "{app}\stellarium.exe"; Description: "{cm:LaunchProgram,Stellarium}"; Flags: postinstall nowait skipifsilent unchecked
 
 [InstallDelete]
 ;The old log file in all cases
@@ -123,33 +123,33 @@ Root: HKCR; Subkey: "Stellarium.Script\shell\open\command"; ValueType: string; V
 ; Recommended use Inno Setup 5.5.3+
 [Languages]
 ; Official translations of GUI of Inno Setup + translation Stellarium specific lines
-Name: "en"; MessagesFile: "compiler:Default.isl,util\ISL\EnglishCM.isl"
-Name: "ca"; MessagesFile: "compiler:Languages\Catalan.isl,util\ISL\CatalanCM.isl"
+Name: "en"; MessagesFile: "compiler:Default.isl,@CMAKE_SOURCE_DIR@\util\ISL\EnglishCM.isl"
+Name: "ca"; MessagesFile: "compiler:Languages\Catalan.isl,@CMAKE_SOURCE_DIR@\util\ISL\CatalanCM.isl"
 Name: "co"; MessagesFile: "compiler:Languages\Corsican.isl"
 Name: "cs"; MessagesFile: "compiler:Languages\Czech.isl"
 Name: "da"; MessagesFile: "compiler:Languages\Danish.isl"
 Name: "nl"; MessagesFile: "compiler:Languages\Dutch.isl"
 Name: "fi"; MessagesFile: "compiler:Languages\Finnish.isl"
-Name: "fr"; MessagesFile: "compiler:Languages\French.isl,util\ISL\FrenchCM.isl"
+Name: "fr"; MessagesFile: "compiler:Languages\French.isl,@CMAKE_SOURCE_DIR@\util\ISL\FrenchCM.isl"
 Name: "de"; MessagesFile: "compiler:Languages\German.isl"
 Name: "el"; MessagesFile: "compiler:Languages\Greek.isl"
 Name: "he"; MessagesFile: "compiler:Languages\Hebrew.isl"
 Name: "hu"; MessagesFile: "compiler:Languages\Hungarian.isl"
 Name: "it"; MessagesFile: "compiler:Languages\Italian.isl"
 Name: "ja"; MessagesFile: "compiler:Languages\Japanese.isl"
-Name: "no"; MessagesFile: "compiler:Languages\Norwegian.isl,util\ISL\NorwegianCM.isl"
+Name: "no"; MessagesFile: "compiler:Languages\Norwegian.isl,@CMAKE_SOURCE_DIR@\util\ISL\NorwegianCM.isl"
 Name: "pl"; MessagesFile: "compiler:Languages\Polish.isl"
-Name: "pt_BR"; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl,util\ISL\BrazilianPortugueseCM.isl"
+Name: "pt_BR"; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl,@CMAKE_SOURCE_DIR@\util\ISL\BrazilianPortugueseCM.isl"
 Name: "pt"; MessagesFile: "compiler:Languages\Portuguese.isl"
-Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl,util\ISL\RussianCM.isl"
+Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl,@CMAKE_SOURCE_DIR@\util\ISL\RussianCM.isl"
 Name: "sr"; MessagesFile: "compiler:Languages\SerbianCyrillic.isl"
 Name: "sl"; MessagesFile: "compiler:Languages\Slovenian.isl"
 Name: "es"; MessagesFile: "compiler:Languages\Spanish.isl"
-Name: "uk"; MessagesFile: "compiler:Languages\Ukrainian.isl,util\ISL\UkrainianCM.isl"
+Name: "uk"; MessagesFile: "compiler:Languages\Ukrainian.isl,@CMAKE_SOURCE_DIR@\util\ISL\UkrainianCM.isl"
 ; Unofficial translations of GUI of Inno Setup
-Name: "bg"; MessagesFile: "util\ISL\Bulgarian.isl,util\ISL\BulgarianCM.isl"
-Name: "bs"; MessagesFile: "util\ISL\Bosnian.isl,util\ISL\BosnianCM.isl"
-Name: "gla"; MessagesFile: "util\ISL\ScotsGaelic.isl"
+Name: "bg"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\Bulgarian.isl,@CMAKE_SOURCE_DIR@\util\ISL\BulgarianCM.isl"
+Name: "bs"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\Bosnian.isl,@CMAKE_SOURCE_DIR@\util\ISL\BosnianCM.isl"
+Name: "gla"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\ScotsGaelic.isl"
 
 [Code]
 #IFDEF UNICODE

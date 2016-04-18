@@ -492,9 +492,8 @@ IF(WIN32)
         # Add installer target
         ADD_CUSTOM_TARGET(
                stellarium-installer
-               # COMMAND ${CMAKE_MAKE_PROGRAM} install
                COMMAND ${ISS_COMPILER_PATH} "${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss"
-               COMMENT "Making the Windows installer package."
+               COMMENT "Making an installer package for Windows..."
                VERBATIM
         )
     ELSE()
