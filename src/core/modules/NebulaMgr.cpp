@@ -2342,11 +2342,12 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 				 << 6939 << 6940 << 6946 << 7000 << 7006 << 7008 << 7009 << 7044 << 7062 << 7086
 				 << 7128 << 7142 << 7160 << 7209 << 7217 << 7243 << 7296 << 7331 << 7380 << 7448
 				 << 7479 << 7510 << 7606 << 7662 << 7686 << 7723 << 7727 << 7789 << 7790 << 7814;
-			for(int i=0;i<h400list.size();i++)
+			for (int i=0; i < h400list.size(); i++)
 				result << QString("NGC %1").arg(h400list.at(i));
 			}
+			break;
 		default:
-			foreach(const NebulaP& n, dsoArray)
+			foreach (const NebulaP& n, dsoArray)
 			{
 				if (n->nType==type)
 				{
