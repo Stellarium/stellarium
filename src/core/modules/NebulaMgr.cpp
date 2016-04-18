@@ -2229,7 +2229,6 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 						result << QString("M %1").arg(n->M_nb);
 					else if (n->C_nb>0)
 						result << QString("C %1").arg(n->C_nb);
-
 				}
 			}
 			break;
@@ -2290,17 +2289,17 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 			}
 			break;
 		case 150: // Dwarf galaxies
-			{
+		{
 			QStringList dwarfGalaxies;
 			dwarfGalaxies  << "PGC 3589" << "PGC 3792" << "PGC 6830" << "PGC 10074" << "PGC 19441"
 				       << "PGC 28913" << "PGC 29194" << "PGC 29653" << "PGC 50779" << "PGC 54074"
 				       << "PGC 60095" << "PGC 63287" << "PGC 69519" << "PGC 88608" << "PGC 2807155"
 				       << "PGC 3097691";
 			result = dwarfGalaxies;
-			}
 			break;
+		}
 		case 151: // Herschel 400 Catalogue
-			{
+		{
 			QList<int> h400list;
 			h400list <<   40 <<  129 <<  136 <<  157 <<  185 <<  205 <<  225 <<  246 <<  247 <<  253
 				 <<  278 <<  288 <<  381 <<  404 <<  436 <<  457 <<  488 <<  524 <<  559 <<  584
@@ -2344,9 +2343,10 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 				 << 7479 << 7510 << 7606 << 7662 << 7686 << 7723 << 7727 << 7789 << 7790 << 7814;
 			for (int i=0; i < h400list.size(); i++)
 				result << QString("NGC %1").arg(h400list.at(i));
-			}
 			break;
+		}
 		default:
+		{
 			foreach (const NebulaP& n, dsoArray)
 			{
 				if (n->nType==type)
@@ -2386,6 +2386,7 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 				}
 			}
 			break;
+		}
 	}
 
 	result.removeDuplicates();
