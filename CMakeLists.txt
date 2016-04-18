@@ -488,13 +488,13 @@ IF(WIN32)
     SET(ISS_COMPILER_FILENAME "ISCC.exe")
     FIND_FILE(ISS_COMPILER_PATH ${ISS_COMPILER_FILENAME})
     IF(ISS_COMPILER_PATH)
-        MESSAGE(STATUS "Using Inno Setup Compiler from: ${ISS_COMPILER_PATH}")
+        MESSAGE(STATUS "Found Inno Setup (.iss) compiler: ${ISS_COMPILER_PATH}")
         # Add installer target
         ADD_CUSTOM_TARGET(
                stellarium-installer
                COMMAND ${CMAKE_MAKE_PROGRAM} install
                COMMAND ${ISS_COMPILER_PATH} "${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss"
-               COMMENT "making the Windows installer package."
+               COMMENT "Making the Windows installer package."
                VERBATIM
         )
     ELSE()
