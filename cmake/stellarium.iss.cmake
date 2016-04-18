@@ -5,8 +5,8 @@
 [Setup]
 @ISS_ARCHITECTURE_SPECIFIC@
 DisableStartupPrompt=yes
-WizardSmallImageFile=@CMAKE_SOURCE_DIR@\data\icon.bmp
-WizardImageFile=@CMAKE_SOURCE_DIR@\data\splash.bmp
+WizardSmallImageFile=@CMAKE_SOURCE_DIR@/data/icon.bmp
+WizardImageFile=@CMAKE_SOURCE_DIR@/data/splash.bmp
 WizardImageStretch=no
 WizardImageBackColor=clBlack
 AppName=Stellarium
@@ -19,14 +19,14 @@ AppSupportURL=http://www.stellarium.org/
 AppUpdatesURL=http://www.stellarium.org/
 VersionInfoVersion=@PACKAGE_VERSION@
 MinVersion=0,@MIN_VERSION@
-SetupIconFile=@CMAKE_SOURCE_DIR@\data\stellarium.ico
+SetupIconFile=@CMAKE_SOURCE_DIR@/data/stellarium.ico
 OutputBaseFilename=stellarium-@PACKAGE_VERSION@-@ISS_PACKAGE_PLATFORM@
-OutputDir=@CMAKE_SOURCE_DIR@\installers
+OutputDir=@CMAKE_SOURCE_DIR@/installers
 ; In 64-bit mode, {pf} is equivalent to {pf64},
 ; see http://www.jrsoftware.org/ishelp/index.php?topic=32vs64bitinstalls
-DefaultDirName={pf}\Stellarium
+DefaultDirName={pf}/Stellarium
 DefaultGroupName=Stellarium
-UninstallDisplayIcon={app}\data\stellarium.ico
+UninstallDisplayIcon={app}/data/stellarium.ico
 LicenseFile=COPYING
 ChangesAssociations=yes
 ; LZMA2/max required 95 MB RAM for compression and 8 MB RAM for decompression
@@ -38,14 +38,14 @@ Source: "@CMAKE_INSTALL_PREFIX@\bin\stellarium.exe"; Flags: ignoreversion; DestD
 @STELMAINLIB@
 @MESALIB@
 @REDIST_FILES@
-Source: "@CMAKE_SOURCE_DIR@\data\stellarium.url"; Flags: ignoreversion; DestDir: "{app}"
-Source: "@CMAKE_SOURCE_DIR@\data\stellarium-guide.url"; Flags: ignoreversion; DestDir: "{app}"
-Source: "@CMAKE_SOURCE_DIR@\data\stellarium-devdocs.url"; Flags: ignoreversion; DestDir: "{app}"
-Source: "@CMAKE_SOURCE_DIR@\README"; DestDir: "{app}"; Flags: isreadme ignoreversion; DestName: "README.rtf"
-Source: "@CMAKE_SOURCE_DIR@\INSTALL"; DestDir: "{app}"; Flags: ignoreversion; DestName: "INSTALL.rtf"
-Source: "@CMAKE_SOURCE_DIR@\COPYING"; DestDir: "{app}"; Flags: ignoreversion; DestName: "GPL.rtf"
-Source: "@CMAKE_SOURCE_DIR@\AUTHORS"; DestDir: "{app}"; Flags: ignoreversion; DestName: "AUTHORS.rtf"
-Source: "@CMAKE_SOURCE_DIR@\ChangeLog"; DestDir: "{app}"; Flags: ignoreversion; DestName: "ChangeLog.rtf"
+Source: "@CMAKE_SOURCE_DIR@/data/stellarium.url"; Flags: ignoreversion; DestDir: "{app}"
+Source: "@CMAKE_SOURCE_DIR@/data/stellarium-guide.url"; Flags: ignoreversion; DestDir: "{app}"
+Source: "@CMAKE_SOURCE_DIR@/data/stellarium-devdocs.url"; Flags: ignoreversion; DestDir: "{app}"
+Source: "@CMAKE_SOURCE_DIR@/README"; DestDir: "{app}"; Flags: isreadme ignoreversion; DestName: "README.rtf"
+Source: "@CMAKE_SOURCE_DIR@/INSTALL"; DestDir: "{app}"; Flags: ignoreversion; DestName: "INSTALL.rtf"
+Source: "@CMAKE_SOURCE_DIR@/COPYING"; DestDir: "{app}"; Flags: ignoreversion; DestName: "GPL.rtf"
+Source: "@CMAKE_SOURCE_DIR@/AUTHORS"; DestDir: "{app}"; Flags: ignoreversion; DestName: "AUTHORS.rtf"
+Source: "@CMAKE_SOURCE_DIR@/ChangeLog"; DestDir: "{app}"; Flags: ignoreversion; DestName: "ChangeLog.rtf"
 Source: "@QtCore_location@"; DestDir: "{app}";
 Source: "@QtGui_location@"; DestDir: "{app}";
 Source: "@QtOpenGL_location@"; DestDir: "{app}";
@@ -62,7 +62,7 @@ Source: "@QtPrintSupport_location@"; DestDir: "{app}";
 @ISS_ICU_LIBS@
 @ISS_QT_PLUGINS@
 ; Stellarium's stuff
-Source: "@CMAKE_INSTALL_PREFIX@\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs ignoreversion
+Source: "@CMAKE_INSTALL_PREFIX@/share/stellarium/*"; DestDir: "{app}\"; Flags: recursesubdirs ignoreversion
 
 [Tasks]
 Name: desktopicon; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
@@ -78,7 +78,7 @@ Name: removelandscapes; Description: "{cm:RemoveUILandscapes}"; GroupDescription
 [Run]
 ;An option to start Stellarium after setup has finished
 @REDIST_RUN@
-Filename: "{app}\stellarium.exe"; Description: "{cm:LaunchProgram,Stellarium}"; Flags: postinstall nowait skipifsilent unchecked
+Filename: "{app}/stellarium.exe"; Description: "{cm:LaunchProgram,Stellarium}"; Flags: postinstall nowait skipifsilent unchecked
 
 [InstallDelete]
 ;The old log file in all cases
