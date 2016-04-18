@@ -310,7 +310,7 @@ IF(WIN32)
        SET(PACKAGE_VERSION_RC "${PACKAGE_VERSION}")
     ENDIF()
     STRING(REGEX REPLACE "([.]+)" "," PACKAGE_VERSION_RC ${PACKAGE_VERSION_RC})
-    CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/data/stellarium.rc.cmake ${CMAKE_SOURCE_DIR}/data/stellarium.rc @ONLY)
+    CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/cmake/stellarium.rc.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium.rc @ONLY)
 
     #######################################################
     ### [Optional] Embed icon in the Windows executable ###
@@ -419,25 +419,19 @@ IF(WIN32)
     IF(ENABLE_MEDIA)
     	SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${QT5_LIBS}/../plugins/mediaservice/dsengine.dll\"; DestDir: \"{app}/mediaservice/\";\nSource: \"${QT5_LIBS}/../plugins/mediaservice/qtmedia_audioengine.dll\"; DestDir: \"{app}/mediaservice/\";\nSource: \"${QT5_LIBS}/../plugins/playlistformats/qtmultimedia_m3u.dll\"; DestDir: \"{app}/playlistformats/\";")
     ENDIF()
-
-    CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium.iss.cmake ${CMAKE_SOURCE_DIR}/stellarium.iss @ONLY)
-    CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium-patch.iss.cmake ${CMAKE_SOURCE_DIR}/stellarium-patch.iss @ONLY)
 ENDIF()
 
-IF(APPLE)
-    CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/data/Info.plist.cmake ${CMAKE_SOURCE_DIR}/data/Info.plist @ONLY)
-ENDIF()
 
 IF(CMAKE_BUILD_TYPE STREQUAL "Release" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
     ADD_DEFINITIONS(-DQT_NO_DEBUG)
     ADD_DEFINITIONS(-DNDEBUG)
 ENDIF()
 
-CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/data/default_config.ini.cmake ${CMAKE_SOURCE_DIR}/data/default_config.ini @ONLY)
+CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/cmake/default_config.ini.cmake ${CMAKE_SOURCE_DIR}/data/default_config.ini @ONLY)
 
 ########### uninstall files ###############
 CONFIGURE_FILE(
-    "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/cmake_uninstall.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
     IMMEDIATE @ONLY)
 
@@ -473,31 +467,52 @@ IF(GENERATE_PACKAGE_TARGET)
     INCLUDE(CPack)
 ENDIF()
 
-########### Macosx Bundling ###############
+########### OS X Bundling ###############
 IF(APPLE)
-     # ${Qt5Core_INCLUDE_DIRS} is a list; I'm expecting the first entry to always be QtCore.framework.
-     ADD_CUSTOM_TARGET(
-          mac_app
-          python util/mac_app.py ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} ${CMAKE_BUILD_TYPE} ${Qt5Core_INCLUDE_DIRS} 
-          DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/Stellarium.app
-          WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-          COMMENT "making the macosx bundle."
-          VERBATIM
-     )
+    CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/cmake/Info.plist.cmake ${CMAKE_SOURCE_DIR}/data/Info.plist @ONLY)
+
+    # ${Qt5Core_INCLUDE_DIRS} is a list; I'm expecting the first entry to always be QtCore.framework.
+    ADD_CUSTOM_TARGET(
+        mac_app
+        python util/mac_app.py ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} ${CMAKE_BUILD_TYPE} ${Qt5Core_INCLUDE_DIRS} 
+        DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/Stellarium.app
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+        COMMENT "making the macosx bundle."
+        VERBATIM
+    )
 ENDIF()
 
+########### Windows packaging ###############
+IF(WIN32)
+    CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/cmake/stellarium.iss.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss @ONLY)
+    FIND_PROGRAM(ISS_COMPILER NAMES iscc ISCC 
+                 HINTS "C:/Program Files (x86)/Inno Setup 5" "C:/Program Files/Inno Setup 5")
+    IF(NOT ISS_COMPILER)
+        MESSAGE(WARNING "Inno Setup Compiler not found. You won't be able to build setup files.")
+    ELSE()
+        MESSAGE(STATUS "Using Inno Setup Compiler from: ${ISS_COMPILER}")
+        # Add installer target
+        ADD_CUSTOM_TARGET(
+               stellarium-installer
+               COMMAND ${CMAKE_MAKE_PROGRAM} install
+               COMMAND ${ISS_COMPILER} "${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss"
+               COMMENT "making the Windows installer package."
+               VERBATIM
+        )
+    ENDIF()
+ENDIF()
 
 ########### Generate doxygen doc ###############
-CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/Doxyfile.cmake ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/Doxyfile.cmake ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
 ADD_CUSTOM_TARGET(apidoc doxygen ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generate the doxygen documentation into the doc directory.")
-CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/Doxyfile-plugins.cmake ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile-plugins @ONLY)
+CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/Doxyfile-plugins.cmake ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile-plugins @ONLY)
 ADD_CUSTOM_TARGET(apidoc-plugins doxygen ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile-plugins WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generate the doxygen documentation into the doc-plugins directory.")
 
 ##################### Generate translation copying script ######################
 IF(WIN32)
     STRING(REPLACE "/" "\\" PROJECT_SOURCE_DIR_WINPATH ${PROJECT_SOURCE_DIR})
     STRING(REPLACE "/" "\\" PROJECT_BINARY_DIR_WINPATH ${PROJECT_BINARY_DIR})
-    CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/util/copy-translations.bat.cmake ${PROJECT_SOURCE_DIR}/util/copy-translations.bat @ONLY NEWLINE_STYLE WIN32)
+    CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/copy-translations.bat.cmake ${PROJECT_SOURCE_DIR}/util/copy-translations.bat @ONLY NEWLINE_STYLE WIN32)
 ENDIF() 
 
 
