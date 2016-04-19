@@ -39,7 +39,7 @@ class StelObject : public StelRegionObject
 	Q_GADGET
 	Q_FLAGS(InfoStringGroupFlags InfoStringGroup)
 public:
-	//! @enum InfoStringGroup used as named bitfield flags as specifiers to
+	//! Used as named bitfield flags as specifiers to
 	//! filter results of getInfoString. The precise definition of these should
 	//! be documented in the getInfoString documentation for the derived classes
 	//! for all specifiers which are defined in that derivative.

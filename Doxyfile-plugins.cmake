@@ -2025,8 +2025,10 @@ SKIP_FUNCTION_MACROS   = YES
 # run, you must also specify the path to the tagfile here.
 
 TAGFILES               = stellarium.tag=../../doc/@VERSION@ \
-                         stellariumPlugins.tag=../../doc-plugins/@VERSION@ \
-                         qt.tag=http://doc.qt.io/qt-5/
+                         qt.tag=http://doc.qt.io/qt-5/ \
+                         qtcore.tags=http://doc.qt.io/qt-5/ \
+                         qtgui.tags=http://doc.qt.io/qt-5/ \
+                         qtwidgets.tags=http://doc.qt.io/qt-5/
 
 # When a file name is specified after GENERATE_TAGFILE, doxygen will create a
 # tag file that is based on the input files it reads. See section "Linking to
