@@ -46,7 +46,9 @@ class StelSkyDrawer : public QObject
 {
 	Q_OBJECT
 
+	//! Sets how much brighter stars will be bigger than fainter stars
 	Q_PROPERTY(double relativeStarScale READ getRelativeStarScale WRITE setRelativeStarScale NOTIFY relativeStarScaleChanged)
+	//! The absolute star brightness scale
 	Q_PROPERTY(double absoluteStarScale READ getAbsoluteStarScale WRITE setAbsoluteStarScale NOTIFY absoluteStarScaleChanged)
 	Q_PROPERTY(double twinkleAmount READ getTwinkleAmount WRITE setTwinkleAmount NOTIFY twinkleAmountChanged)
 	Q_PROPERTY(bool flagTwinkle READ getFlagTwinkle WRITE setFlagTwinkle NOTIFY flagTwinkleChanged)

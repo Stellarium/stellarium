@@ -17,7 +17,9 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-//! @file This is a private header for some StelDialog implementation classes, which require MOC'cing
+//! @file
+//! This is a private header for some StelDialog implementation classes, which require MOC'cing
+//! Other classes should not include this header.
 
 #ifndef _STELDIALOG_P_HPP_
 #define _STELDIALOG_P_HPP_

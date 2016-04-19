@@ -24,14 +24,28 @@
 #include <QKeySequence>
 #include <QList>
 
+//! Wrapper around a QObject Slot or a boolean Q_PROPERTY, allowing the slot to be called using this action object.
+//! The action object can be identified by a unique string, and found through StelActionMgr::findAction.
+//! Use StelActionMgr::addAction to define a new action.
+//! In StelModule subclasses, one can also use StelModule::addAction for convenience.
+//!
+//! StelAction objects are mainly used for user interaction. They automatically show up in the hotkey configuration dialog
+//! (ShortcutsDialog). If you want to have a named reference to arbitrary Q_PROPERTY types (not just bool), you could use
+//! a StelProperty registered through the StelPropertyMgr instead.
 class StelAction : public QObject
 {
 	Q_OBJECT
 public:
-	friend class StelActionMgr;
+	//! For a StelAction connected to a boolean Q_PROPERTY, this reads/sets its value
 	Q_PROPERTY(bool checked READ isChecked WRITE setChecked NOTIFY toggled)
+	//! If this is true, this StelAction can toggle a boolean Q_PROPERTY.
+	//! This means the @ref checked property as well as the toggle() function may be used
+	//! If false, the StelAction represents a simple argumentless slot call. Using @ref checked or toggle() may
+	//! result in an error.
+	Q_PROPERTY(bool checkable READ isCheckable)
 
-	//! Don't use this constructor, this is just there to ease the migration from QAction.
+	//! @warning Don't use this constructor, this is just there to ease the migration from QAction.
+	//! @deprecated Use StelActionMgr::addAction to register a new action
 	StelAction(QObject *parent)
 		: QObject(parent)
 		, checkable(false)
@@ -44,20 +58,11 @@ public:
 	#endif
 	{}
 
-	StelAction(const QString& actionId,
-	           const QString& groupId,
-	           const QString& text,
-	           const QString& primaryKey="",
-	           const QString& altKey="",
-	           bool global=false);
-	//! Connect the action to an object property or slot.
-	//! @param slot A property or a slot name.  The slot can either have the signature `func()`, and in that
-	//! case the action is made not checkable, or have the signature `func(bool)` and in that case the action
-	//! is made checkable.  When linked to a property the action is always made checkable.
-	void connectToObject(QObject* obj, const char* slot);
-	//! Don't use setCheckable, connectToObject can automatically determine if the action is checkable or not.
+	//! @warning Don't use setCheckable, connectToObject can automatically determine if the action is checkable or not.
 	//! This is just there to ease the migration from QAction.
+	//! @deprecated Do not use
 	void setCheckable(bool value) {checkable = value; emit changed();}
+
 	bool isCheckable() const {return checkable;}
 	bool isChecked() const {return checked;}
 	bool isGlobal() const {return global;}
@@ -77,11 +82,31 @@ signals:
 	void changed();
 public slots:
 	void setChecked(bool);
+	//! If the action is @ref checkable, toggle() is called.
+	//! Otherwise, the connected slot is invoked.
 	void trigger();
+	//! If the action is @ref checkable, this toggles the value of
+	//! the connected boolean property.
+	//! @warning If used on a non-checkable action, the program may crash.
 	void toggle();
 private slots:
 	void propertyChanged(bool);
 private:
+	friend class StelActionMgr;
+
+	//! Constructor is used by StelActionMgr
+	StelAction(const QString& actionId,
+		   const QString& groupId,
+		   const QString& text,
+		   const QString& primaryKey="",
+		   const QString& altKey="",
+		   bool global=false);
+	//! Connect the action to an object property or slot.
+	//! @param slot A property or a slot name.  The slot can either have the signature `func()`, and in that
+	//! case the action is made not checkable, or have the signature `func(bool)` and in that case the action
+	//! is made checkable.  When linked to a property the action is always made checkable.
+	void connectToObject(QObject* obj, const char* slot);
+
 	bool checkable;
 	bool checked;
 	QString group;
@@ -106,6 +131,7 @@ private:
 #endif
 };
 
+//! Manager for StelAction instances. Allows registration of new actions, and finding an existing one by name.
 class StelActionMgr : public QObject
 {
 	Q_OBJECT
@@ -144,7 +170,9 @@ public:
 	void restoreDefaultShortcuts();
 
 signals:
-	//! Emitted when any action is toggled
+	//! Emitted when any action registered with this StelActionMgr is toggled
+	//! @param id The id of the action that was toggled
+	//! @param value The new value of the action
 	void actionToggled(const QString& id, bool value);
 
 public slots:
