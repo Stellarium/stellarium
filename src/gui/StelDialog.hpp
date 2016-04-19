@@ -29,16 +29,15 @@ class QDoubleSpinBox;
 class QSlider;
 class StelAction;
 
-//! @class StelDialog
 //! Base class for all the GUI windows in Stellarium.
 //! 
 //! Windows in Stellarium are actually basic QWidgets that have to be wrapped in
 //! a QGraphicsProxyWidget (CustomProxy) to be displayed by StelMainView
-//! (which is derived from QGraphicsView). See the Qt documentation for details.
+//! (which is derived from QGraphicsView). See the %Qt documentation for details.
 //! 
 //! The base widget needs to be populated with controls in the implementation
 //! of the createDialogContent() function. This can be done either manually, or
-//! by using a .ui file. See the Qt documentation on using Qt Designer .ui files
+//! by using a .ui file. See the %Qt documentation on using %Qt Designer .ui files
 //! for details.
 //! 
 //! The createDialogContent() function itself is called automatically the first
@@ -56,6 +55,15 @@ class StelAction;
 //! If the dialog is called and the stored location is off-screen, the dialog is
 //! shifted to become visible.
 //!
+//! ## StelProperty and StelAction
+//! The StelDialog base class provides multiple helper functions that allow easy
+//! two-way binding of widgets to specific StelAction or StelProperty instances. These functions are:
+//! - \ref connectCheckBox to connect a StelAction to a QAbstractButton (includes QCheckBox)
+//! - \ref connectIntProperty to connect a StelProperty to a QSpinBox or QComboBox
+//! - \ref connectDoubleProperty to connect a StelProperty to a QDoubleSpinBox or QSlider
+//! - \ref connectBoolProperty to connect a StelProperty to a QAbstractButton (includes QCheckBox)
+//! Take care that a valid property name is used and it represents a property that can be converted to
+//! the required data type, or the program will crash at runtime when the function is called
 class StelDialog : public QObject
 {
 	Q_OBJECT
@@ -64,6 +72,7 @@ public:
 	StelDialog(QObject* parent=NULL);
 	virtual ~StelDialog();
 
+	//! Returns true if the dialog contents have been constructed and are currently shown
 	bool visible() const;
 
 public slots:
@@ -98,18 +107,30 @@ protected:
 
 	//! Helper function to connect a QSpinBox to an integer StelProperty.
 	//! @note This method also works with flag/enum types
+	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
+	//! to the required datatype, the application will crash
 	static void connectIntProperty(QSpinBox* spinBox, const QString& propName);
 	//! Helper function to connect a QComboBox to an integer StelProperty.
 	//! The property is mapped to the selected index of the combobox.
 	//! @note This method also works with flag/enum types
+	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
+	//! to the required datatype, the application will crash
 	static void connectIntProperty(QComboBox* comboBox, const QString& propName);
 	//! Helper function to connect a QDoubleSpinBox to an double or float StelProperty
+	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
+	//! to the required datatype, the application will crash
 	static void connectDoubleProperty(QDoubleSpinBox* spinBox, const QString& propName);
 	//! Helper function to connect a QSlider to an double or float StelProperty
+	//! @param slider The slider which should be connected
+	//! @param propName The id of the StelProperty which should be connected
 	//! @param minValue the double value associated with the minimal slider position
 	//! @param maxValue the double value associated with the maximal slider position
+	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
+	//! to the required datatype, the application will crash
 	static void connectDoubleProperty(QSlider* slider, const QString& propName, double minValue, double maxValue);
 	//! Helper function to connect a checkbox to a bool StelProperty
+	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
+	//! to the required datatype, the application will crash
 	static void connectBoolProperty(QAbstractButton* checkBox, const QString& propName);
 
 	//! The main dialog
