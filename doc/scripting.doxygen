@@ -63,11 +63,15 @@ core.wait(...);
    - ScreenImageMgr
    - SolarSystem
    - StarMgr
+   - StelActionMgr
    - StelAudioMgr
    - StelVideoMgr
    - StelMovementMgr
+   - StelSkyCultureMgr
    - StelSkyDrawer
    - StelSkyLayerMgr
+   - MilkyWay
+   - ZodiacalLight
    .
   For example, to access LandscapeMgr::setFlagAtmosphere(), use the scripting
   command: 
@@ -75,6 +79,26 @@ core.wait(...);
 LandscapeMgr.setFlagAtmosphere(true);
 \endcode
 \note All of these except for StelSkyDrawer are StelModule classes.
+
+- The public slots for each of the following classes of the plugins are available 
+in the scripting engine too:
+   - @ref AngleMeasure
+   - @ref CompassMarks
+   - @ref Oculars 
+   - @ref Satellites
+   - @ref HistoricalSupernovae
+   - @ref Quasars
+   - @ref Pulsars 
+   - @ref Exoplanets
+   - @ref Observability
+   - @ref BrightNovae
+   - @ref EquationOfTime 
+   - @ref FieldOfView
+   - @ref NavigationalStars 
+   - @ref MeteorShowersMgr
+   - @ref PointerCoordinates
+   - @ref ArchaeoLines
+
 
 @section include_scripts Includes
 
