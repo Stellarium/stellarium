@@ -802,8 +802,7 @@ RECURSIVE              = YES
 # Note that relative paths are relative to the directory from which doxygen is
 # run.
 
-EXCLUDE                = @PROJECT_SOURCE_DIR@/src/core/external \
-                         @PROJECT_SOURCE_DIR@/doc/mainpage-plugins.doxygen
+EXCLUDE                = @PROJECT_SOURCE_DIR@/src/core/external 
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or
 # directories that are symbolic links (a Unix file system feature) are excluded
