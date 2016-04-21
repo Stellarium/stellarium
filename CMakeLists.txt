@@ -504,8 +504,6 @@ ENDIF()
 ########### Generate doxygen doc ###############
 CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/Doxyfile.cmake ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
 ADD_CUSTOM_TARGET(apidoc doxygen ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generate the doxygen documentation into the doc directory.")
-CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/Doxyfile-plugins.cmake ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile-plugins @ONLY)
-ADD_CUSTOM_TARGET(apidoc-plugins doxygen ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile-plugins WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generate the doxygen documentation into the doc-plugins directory.")
 
 ##################### Generate translation copying script ######################
 IF(WIN32)

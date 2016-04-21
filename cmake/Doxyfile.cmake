@@ -764,6 +764,7 @@ WARN_LOGFILE           =
 # Note: If this tag is empty the current directory is searched.
 
 INPUT                  = @PROJECT_SOURCE_DIR@/src/ \
+                         @PROJECT_SOURCE_DIR@/plugins/ \
                          @PROJECT_SOURCE_DIR@/doc/
 
 # This tag can be used to specify the character encoding of the source files
@@ -2025,9 +2026,7 @@ SKIP_FUNCTION_MACROS   = YES
 # the path). If a tag file is not located in the directory in which doxygen is
 # run, you must also specify the path to the tagfile here.
 
-TAGFILES               = stellarium.tag=../../doc/@VERSION@ \
-                         stellariumPlugins.tag=../../doc-plugins/@VERSION@ \
-                         qt.tag=http://doc.qt.io/qt-5/
+TAGFILES               = qt.tag=http://doc.qt.io/qt-5/
 
 # When a file name is specified after GENERATE_TAGFILE, doxygen will create a
 # tag file that is based on the input files it reads. See section "Linking to
