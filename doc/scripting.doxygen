@@ -82,23 +82,23 @@ LandscapeMgr.setFlagAtmosphere(true);
 
 - The public slots for each of the following classes of the plugins are available 
 in the scripting engine too:
-   - @ref AngleMeasure
-   - @ref CompassMarks
-   - @ref Oculars 
-   - @ref Satellites
-   - @ref HistoricalSupernovae
-   - @ref Quasars
-   - @ref Pulsars 
-   - @ref Exoplanets
-   - @ref Observability
-   - @ref BrightNovae
-   - @ref EquationOfTime 
-   - @ref FieldOfView
-   - @ref NavigationalStars 
-   - @ref MeteorShowersMgr
-   - @ref PointerCoordinates
-   - @ref ArchaeoLines
-
+   - AngleMeasure
+   - CompassMarks
+   - Oculars
+   - Satellites
+   - Supernovae
+   - Quasars
+   - Pulsars
+   - Exoplanets
+   - Observability
+   - Novae
+   - EquationOfTime
+   - FOV
+   - NavStars
+   - MeteorShowersMgr
+   - PointerCoordinates
+   - ArchaeoLines
+   .
 
 @section include_scripts Includes
 
