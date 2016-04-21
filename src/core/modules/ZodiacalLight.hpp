@@ -81,14 +81,24 @@ public slots:
 	//! Get Zodiacal Light intensity.
 	double getIntensity() const {return intensity;}
 	//! Set Zodiacal Light intensity.
+	//! @param aintensity intensity of Zodiacal Light
 	void setIntensity(double aintensity) {intensity = aintensity;}
 	
 	//! Get the color used for rendering the Zodiacal Light
 	Vec3f getColor() const {return color;}
 	//! Sets the color to use for rendering the Zodiacal Light
+	//! @param c The color to use for rendering the Zodiacal Light
+	//! @code
+	//! // example of usage in scripts
+	//! ZodiacalLight.setColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setColor(const Vec3f& c) {color=c;}
 	
 	//! Sets whether to show the Zodiacal Light
+	//! @code
+	//! // example of usage in scripts
+	//! ZodiacalLight.setFlagShow(true);
+	//! @endcode
 	void setFlagShow(bool b);
 	//! Gets whether the Zodiacal Light is displayed
 	bool getFlagShow(void) const;
