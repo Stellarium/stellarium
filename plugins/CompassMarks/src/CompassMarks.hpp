@@ -55,22 +55,26 @@ public:
 	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
-	bool getCompassMarks() const {return markFader;}
-
-public slots:
-	void setCompassMarks(bool b);
-
 	//! Load the plug-in's settings from the configuration file.
 	//! Settings are kept in the "CompassMarks" section in Stellarium's
 	//! configuration file. If no such section exists, it will load default
 	//! values.
-	//! @see saveSettings(), restoreDefaultSettings()
+	//! @see restoreDefaultSettings()
 	void loadConfiguration();
 
 	void restoreDefaultConfiguration();
 
+public slots:
+	//! Get flag for displaying a ring of marks indicating azimuth on the horizon.
+	bool getCompassMarks() const {return markFader;}
+
+	//! Define whether a ring of azimuth marks on the horizon should be visible.
+	//! @param b if true, the ring of azimuth marks is visible, else not
+	void setCompassMarks(bool b);	
+
 signals:
 	void compassMarksChanged(bool);
+
 private slots:
 	void cardinalPointsChanged(bool b);
 
