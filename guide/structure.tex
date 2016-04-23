@@ -127,6 +127,9 @@
 \newcommand\chapterauthor[1]{\authortoc{#1}\printchapterauthor{#1}}
 \WithSuffix\newcommand\chapterauthor*[1]{\printchapterauthor{#1}}
 
+\newcommand\sectionauthor[1]{\authortoc{#1}\printsectionauthor{#1}}
+\WithSuffix\newcommand\sectionauthor*[1]{\printsectionauthor{#1}}
+
 \makeatletter
 \newcommand{\printchapterauthor}[1]{%
   {\parindent0pt\vspace*{-25pt}%
@@ -141,6 +144,13 @@
     {\hskip1.3em\mdseries\scshape\protect\scriptsize#1}{}{}}
   \addtocontents{toc}{\vskip5pt}%
 }
+\newcommand{\printsectionauthor}[1]{%
+  {\parindent0pt\vspace*{-5pt}%
+  \linespread{1.1}\large\scshape#1%
+  \par\nobreak\vspace*{15pt}}
+  \@afterheading%
+}
+
 \makeatother
 
 %----------------------------------------------------------------------------------------
