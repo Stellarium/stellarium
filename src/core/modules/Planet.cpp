@@ -545,7 +545,6 @@ void Planet::computePosition(const double dateJDE)
 				}
 				else
 				{
-
 					orbitP[d] = orbitP[d+delta_points];
 					orbit[d] = getHeliocentricPos(orbitP[d]);
 				}
