@@ -196,11 +196,6 @@ void TelescopeControl::init()
 	}
 	
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
-	
-	//Initialize style, as it is not called at startup:
-	//(necessary to initialize the reticle/label/circle colors)
-	setStelStyle(StelApp::getInstance().getCurrentStelStyle());
-	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 }
 
 void TelescopeControl::translateActionDescriptions()
@@ -307,24 +302,6 @@ void TelescopeControl::draw(StelCore* core)
 
 	if(GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(prj, core, sPainter);
-}
-
-void TelescopeControl::setStelStyle(const QString& section)
-{
-	if (section == "night_color")
-	{
-		setLabelColor(labelNightColor);
-		setReticleColor(reticleNightColor);
-		setCircleColor(circleNightColor);
-	}
-	else
-	{
-		setLabelColor(labelNormalColor);
-		setReticleColor(reticleNormalColor);
-		setCircleColor(circleNormalColor);
-	}
-
-	telescopeDialog->updateStyle();
 }
 
 double TelescopeControl::getCallOrder(StelModuleActionName actionName) const
@@ -633,12 +610,9 @@ void TelescopeControl::loadConfiguration()
 #endif
 
 	//Load colours
-	reticleNormalColor = StelUtils::strToVec3f(settings->value("color_telescope_reticles", "0.6,0.4,0").toString());
-	reticleNightColor = StelUtils::strToVec3f(settings->value("night_color_telescope_reticles", "0.5,0,0").toString());
-	labelNormalColor = StelUtils::strToVec3f(settings->value("color_telescope_labels", "0.6,0.4,0").toString());
-	labelNightColor = StelUtils::strToVec3f(settings->value("night_color_telescope_labels", "0.5,0,0").toString());
-	circleNormalColor = StelUtils::strToVec3f(settings->value("color_telescope_circles", "0.6,0.4,0").toString());
-	circleNightColor = StelUtils::strToVec3f(settings->value("night_color_telescope_circles", "0.5,0,0").toString());
+	setReticleColor(StelUtils::strToVec3f(settings->value("color_telescope_reticles", "0.6,0.4,0").toString()));
+	setLabelColor(StelUtils::strToVec3f(settings->value("color_telescope_labels", "0.6,0.4,0").toString()));
+	setCircleColor(StelUtils::strToVec3f(settings->value("color_telescope_circles", "0.6,0.4,0").toString()));
 
 	//Load server executables flag and directory
 	useServerExecutables = settings->value("flag_use_server_executables", false).toBool();
@@ -680,12 +654,9 @@ void TelescopeControl::saveConfiguration()
 	settings->setValue("flag_telescope_circles", getFlagTelescopeCircles());
 
 	//Save colours
-	settings->setValue("color_telescope_reticles", QString("%1,%2,%3").arg(reticleNormalColor[0], 0, 'f', 2).arg(reticleNormalColor[1], 0, 'f', 2).arg(reticleNormalColor[2], 0, 'f', 2));
-	settings->setValue("night_color_telescope_reticles", QString("%1,%2,%3").arg(reticleNightColor[0], 0, 'f', 2).arg(reticleNightColor[1], 0, 'f', 2).arg(reticleNightColor[2], 0, 'f', 2));
-	settings->setValue("color_telescope_labels", QString("%1,%2,%3").arg(labelNormalColor[0], 0, 'f', 2).arg(labelNormalColor[1], 0, 'f', 2).arg(labelNormalColor[2], 0, 'f', 2));
-	settings->setValue("night_color_telescope_labels", QString("%1,%2,%3").arg(labelNightColor[0], 0, 'f', 2).arg(labelNightColor[1], 0, 'f', 2).arg(labelNightColor[2], 0, 'f', 2));
-	settings->setValue("color_telescope_circles", QString("%1,%2,%3").arg(circleNormalColor[0], 0, 'f', 2).arg(circleNormalColor[1], 0, 'f', 2).arg(circleNormalColor[2], 0, 'f', 2));
-	settings->setValue("night_color_telescope_circles", QString("%1,%2,%3").arg(circleNightColor[0], 0, 'f', 2).arg(circleNightColor[1], 0, 'f', 2).arg(circleNightColor[2], 0, 'f', 2));
+	settings->setValue("color_telescope_reticles", StelUtils::vec3fToHtmlColor(getReticleColor()));
+	settings->setValue("color_telescope_labels", StelUtils::vec3fToHtmlColor(getLabelColor()));
+	settings->setValue("color_telescope_circles", StelUtils::vec3fToHtmlColor(getCircleColor()));
 
 	//Save telescope server executables flag and directory
 	settings->setValue("flag_use_server_executables", useServerExecutables);
@@ -702,6 +673,16 @@ void TelescopeControl::saveConfiguration()
 	settings->setValue("flag_enable_telescope_logs", useTelescopeServerLogs);
 
 	settings->endGroup();
+
+	// Remove outdated config items
+	if (settings->contains("TelescopeControl/night_color_telescope_reticles"))
+		settings->remove("TelescopeControl/night_color_telescope_reticles");
+
+	if (settings->contains("TelescopeControl/night_color_telescope_labels"))
+		settings->remove("TelescopeControl/night_color_telescope_labels");
+
+	if (settings->contains("TelescopeControl/night_color_telescope_circles"))
+		settings->remove("TelescopeControl/night_color_telescope_circles");
 }
 
 void TelescopeControl::saveTelescopes()
