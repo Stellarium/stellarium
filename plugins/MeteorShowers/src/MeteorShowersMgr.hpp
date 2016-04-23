@@ -23,6 +23,7 @@
 #include <QNetworkReply>
 
 #include "StelGuiItems.hpp"
+#include "StelTextureMgr.hpp"
 #include "StelObjectModule.hpp"
 
 #define MS_CATALOG_VERSION 1
@@ -93,49 +94,8 @@ public:
 	void setEnablePlugin(const bool& b);
 	bool getEnablePlugin() { return m_enablePlugin; }
 
-	//! True if user wants to see the active radiants only.
-	bool getActiveRadiantOnly() { return m_activeRadiantOnly; }
-
-	//! Get the status of the enable button on the toolbar.
-	//! @return true if it's visible
-	bool getShowEnableButton() { return m_showEnableButton; }
-
-	//! Get the status of the search button on the toolbar.
-	//! @return true if it's visible
-	bool getShowSearchButton() { return m_showSearchButton; }
-
-	//! Set the color of the active radiant based on generic data.
-	void setColorARG(const Vec3f& rgb);
-	Vec3f getColorARG() { return m_colorARG; }
-
-	//! Set the color of the active radiant based on confirmed data.
-	void setColorARC(const Vec3f& rgb);
-	Vec3f getColorARC() { return m_colorARC; }
-
-	//! Set the color of the inactive radiant.
-	void setColorIR(const Vec3f& rgb);
-	Vec3f getColorIR() { return m_colorIR; }
-
-	//! True if the plugin is enabled at Stellarium startup.
-	bool getEnableAtStartup() { return m_enableAtStartup; }
-
-	//! Set the font size (used on radiant labels).
-	int getFontSize() { return m_font.pixelSize(); }
-
 	//! Get the font.
 	QFont getFont() { return m_font; }
-
-	//! Enable/disable radiant labels
-	bool getEnableLabels() { return m_enableLabels; }
-
-	//! Enable/disable radiant marker.
-	bool getEnableMarker() { return m_enableMarker; }
-
-	//! Gets the update frequency in hours.
-	int getUpdateFrequencyHours() { return m_updateFrequencyHours; }
-
-	//! Enable/disable catalog updates from the internet.
-	bool getEnableAutoUpdates() { return m_enableAutoUpdates; }
 
 	//! Set the URL for downloading the meteor showers catalog.
 	void setUrl(const QString& url);
@@ -183,30 +143,62 @@ signals:
 public slots:
 	//! Enable the meteor showers plugin at Stellarium startup.
 	void setEnableAtStartup(const bool& b);
+	//! True if the plugin is enabled at Stellarium startup.
+	bool getEnableAtStartup() { return m_enableAtStartup; }
 
 	//! Show/hide the button that enable/disable the meteor showers plugin.
 	void setShowEnableButton(const bool& show);
+	//! Get the status of the enable button on the toolbar.
+	//! @return true if it's visible
+	bool getShowEnableButton() { return m_showEnableButton; }
 
 	//! Show/hide the button that opens the search dialog.
 	void setShowSearchButton(const bool& show);
+	//! Get the status of the search button on the toolbar.
+	//! @return true if it's visible
+	bool getShowSearchButton() { return m_showSearchButton; }
 
 	//! Enable/disable radiant marker.
 	void setEnableMarker(const bool& b);
+	//! Enable/disable radiant marker.
+	bool getEnableMarker() { return m_enableMarker; }
 
 	//! True if user wants to see the active radiants only.
 	void setActiveRadiantOnly(const bool& b);
+	//! True if user wants to see the active radiants only.
+	bool getActiveRadiantOnly() { return m_activeRadiantOnly; }
 
 	//! Enable/disable radiant labels
 	void setEnableLabels(const bool& b);
+	//! Enable/disable radiant labels
+	bool getEnableLabels() { return m_enableLabels; }
 
 	//! Set the font size (used on radiant labels).
 	void setFontSize(int pixelSize);
+	//! Set the font size (used on radiant labels).
+	int getFontSize() { return m_font.pixelSize(); }
 
 	//! Set the update frequency in hours.
 	void setUpdateFrequencyHours(const int& hours);
+	//! Gets the update frequency in hours.
+	int getUpdateFrequencyHours() { return m_updateFrequencyHours; }
 
 	//! Enable/disable automatic catalog updates from the internet.
 	void setEnableAutoUpdates(const bool& b);
+	//! Enable/disable catalog updates from the internet.
+	bool getEnableAutoUpdates() { return m_enableAutoUpdates; }
+
+	//! Set the color of the active radiant based on generic data.
+	void setColorARG(const Vec3f& rgb);
+	Vec3f getColorARG() { return m_colorARG; }
+
+	//! Set the color of the active radiant based on confirmed data.
+	void setColorARC(const Vec3f& rgb);
+	Vec3f getColorARC() { return m_colorARC; }
+
+	//! Set the color of the inactive radiant.
+	void setColorIR(const Vec3f& rgb);
+	Vec3f getColorIR() { return m_colorIR; }
 
 	//! Download the Meteor Showers catalog from the Internet.
 	void updateCatalog();
