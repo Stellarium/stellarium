@@ -106,6 +106,8 @@ bool StelDialog::visible() const
 
 void StelDialog::setVisible(bool v)
 {
+	if(v == visible())
+		return;
 	if (v)
 	{
 		QSize screenSize = StelMainView::getInstance().size();
@@ -123,80 +125,78 @@ void StelDialog::setVisible(bool v)
 				newPos.setY(screenSize.height() - dialog->size().height());
 			if (newPos != dialog->pos())
 				proxy->setPos(newPos);
-
-			proxy->setFocus();
-			return;
 		}
-
-		QGraphicsWidget* parent = qobject_cast<QGraphicsWidget*>(this->parent());
-		dialog = new QDialog(NULL);
-		// dialog->setParent(parent);
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		Q_ASSERT(gui);
-		//dialog->setAttribute(Qt::WA_OpaquePaintEvent, true);
-		connect(dialog, SIGNAL(rejected()), this, SLOT(close()));
-		createDialogContent();
-		dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
-
-		// Ensure that tooltip get rendered in red in night mode.
-		connect(&StelApp::getInstance(), SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty()));
-		updateNightModeProperty();
-
-		proxy = new CustomProxy(parent, Qt::Tool);
-		proxy->setWidget(dialog);
-		QSizeF size = proxy->size();
-
-		int newX, newY;
-		QPoint storedPos;
-
-		// Retrieve panel locations from config.ini, but shift if required to a visible position.
-		// else centre dialog according to current window size.
-		QSettings *conf=StelApp::getInstance().getSettings();
-		Q_ASSERT(conf);
-		QString confNamePt="DialogPositions/" + dialogName;
-		QString storedPosString=conf->value(confNamePt,
-						    QString("%1,%2")
-						    .arg((int)((screenSize.width()  - size.width() )/2))
-						    .arg((int)((screenSize.height() - size.height())/2)))
-				.toString();
-		QStringList posList=storedPosString.split(",");
-		if (posList.length()==2)
+		else
 		{
-			newX=posList.at(0).toInt();
-			newY=posList.at(1).toInt();
+			QGraphicsWidget* parent = qobject_cast<QGraphicsWidget*>(this->parent());
+			dialog = new QDialog(NULL);
+			// dialog->setParent(parent);
+			StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+			Q_ASSERT(gui);
+			//dialog->setAttribute(Qt::WA_OpaquePaintEvent, true);
+			connect(dialog, SIGNAL(rejected()), this, SLOT(close()));
+			createDialogContent();
+			dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
+
+			// Ensure that tooltip get rendered in red in night mode.
+			connect(&StelApp::getInstance(), SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty()));
+			updateNightModeProperty();
+
+			proxy = new CustomProxy(parent, Qt::Tool);
+			proxy->setWidget(dialog);
+			QSizeF size = proxy->size();
+
+			int newX, newY;
+
+			// Retrieve panel locations from config.ini, but shift if required to a visible position.
+			// else centre dialog according to current window size.
+			QSettings *conf=StelApp::getInstance().getSettings();
+			Q_ASSERT(conf);
+			QString confNamePt="DialogPositions/" + dialogName;
+			QString storedPosString=conf->value(confNamePt,
+							    QString("%1,%2")
+							    .arg((int)((screenSize.width()  - size.width() )/2))
+							    .arg((int)((screenSize.height() - size.height())/2)))
+					.toString();
+			QStringList posList=storedPosString.split(",");
+			if (posList.length()==2)
+			{
+				newX=posList.at(0).toInt();
+				newY=posList.at(1).toInt();
+			}
+			else	// in case there is an invalid string?
+			{
+				newX=(int)((screenSize.width()  - size.width() )/2);
+				newY=(int)((screenSize.height() - size.height())/2);
+			}
+
+			if (newX>=screenSize.width())
+				newX= (screenSize.width()  - dialog->size().width());
+			if (newY>=screenSize.height())
+				newY= (screenSize.height() - dialog->size().height());
+
+			// Make sure that the window's title bar is accessible
+			if (newY <-0)
+				newY = 0;
+			proxy->setPos(newX, newY);
+			proxy->setWindowFrameMargins(2,0,2,2);
+			// (this also changes the bounding rectangle size)
+
+			// The caching is buggy on all plateforms with Qt 4.5.2
+			proxy->setCacheMode(QGraphicsItem::ItemCoordinateCache);
+
+			proxy->setZValue(100);
+			StelMainView::getInstance().scene()->setActiveWindow(proxy);
 		}
-		else	// in case there is an invalid string?
-		{
-			newX=(int)((screenSize.width()  - size.width() )/2);
-			newY=(int)((screenSize.height() - size.height())/2);
-		}
-
-		if (newX>=screenSize.width())
-			newX= (screenSize.width()  - dialog->size().width());
-		if (newY>=screenSize.height())
-			newY= (screenSize.height() - dialog->size().height());
-
-		// Make sure that the window's title bar is accessible
-		if (newY <-0)
-			newY = 0;
-		proxy->setPos(newX, newY);
-		proxy->setWindowFrameMargins(2,0,2,2);
-		// (this also changes the bounding rectangle size)
-
-		// The caching is buggy on all plateforms with Qt 4.5.2
-		proxy->setCacheMode(QGraphicsItem::ItemCoordinateCache);
-
-		proxy->setZValue(100);
-		StelMainView::getInstance().scene()->setActiveWindow(proxy);
 		proxy->setFocus();
 	}
 	else
 	{
 		dialog->hide();
-		emit visibleChanged(false);
 		//proxy->clearFocus();
 		StelMainView::getInstance().focusSky();
 	}
+	emit visibleChanged(v);
 }
 
 void StelDialog::connectCheckBox(QAbstractButton *checkBox, const QString &actionName)
