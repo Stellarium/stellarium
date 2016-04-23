@@ -485,7 +485,7 @@ ADD_DEPENDENCIES(stellarium AllStaticPlugins)
 IF(MSVC)
      ADD_CUSTOM_COMMAND(TARGET stellarium
           POST_BUILD
-          COMMAND "mt.exe" -nologo -manifest ${CMAKE_SOURCE_DIR}/data/stellarium.exe.manifest -outputresource:$<TARGET_FILE:stellarium>
+          COMMAND "mt.exe" -nologo -manifest ${PROJECT_SOURCE_DIR}/data/stellarium.exe.manifest -outputresource:$<TARGET_FILE:stellarium>
           COMMENT "Adding manifest..."
           VERBATIM
      )
