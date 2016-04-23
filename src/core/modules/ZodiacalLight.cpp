@@ -114,6 +114,7 @@ void ZodiacalLight::update(double deltaTime)
 void ZodiacalLight::setFlagShow(bool b)
 {
 	*fader = b;
+	emit zodiacalLightDisplayedChanged(b);
 }
 
 bool ZodiacalLight::getFlagShow() const
