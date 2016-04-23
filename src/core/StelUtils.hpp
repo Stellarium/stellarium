@@ -656,6 +656,12 @@ namespace StelUtils
 	//! @return decimal year
 	double getDecYear(const int year, const int month, const int day);
 
+	//! Comparison two string versions and return a result in range -1,0,1
+	//! @param v1 string for version 1
+	//! @param v2 string for version 2
+	//! @return result (-1: v1<v2; 0: v1==v2; 1: v1>v2)
+	int compareVersions(const QString v1, const QString v2);
+
 	//! Uncompress gzip or zlib compressed data.
 	QByteArray uncompress(const QByteArray& data);
 
