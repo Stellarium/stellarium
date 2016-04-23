@@ -20,56 +20,54 @@
 #ifndef _STELACTIONMGR_HPP_
 #define _STELACTIONMGR_HPP_
 
-#include <QObject>
+#include "StelPropertyMgr.hpp"
 #include <QKeySequence>
 #include <QList>
 
-//! Wrapper around a QObject Slot or a boolean Q_PROPERTY, allowing the slot to be called using this action object.
+//! Wrapper around a QObject slot (argumentless or with a single bool parameter) or a bool Q_PROPERTY,
+//! allowing the slot to be called/property to be toggled using this action object.
 //! The action object can be identified by a unique string, and found through StelActionMgr::findAction.
 //! Use StelActionMgr::addAction to define a new action.
 //! In StelModule subclasses, one can also use StelModule::addAction for convenience.
 //!
-//! StelAction objects are mainly used for user interaction. They automatically show up in the hotkey configuration dialog
-//! (ShortcutsDialog). If you want to have a named reference to arbitrary Q_PROPERTY types (not just bool), you could use
-//! a StelProperty registered through the StelPropertyMgr instead.
+//! StelAction objects are intended for user interaction. They automatically show up in the hotkey configuration dialog
+//! (ShortcutsDialog), and can be bound to interface buttons (StelButton).
+//!
+//! StelAction internally uses a StelProperty, if it can do so. This requires binding to a boolean Q_PROPERTY that has a NOTIFY signal.
+//! A new StelProperty with the name of the action is registered automatically in this case. If the Q_PROPERTY has no notify signal, or
+//! StelAction is directly connected to a slot, the current boolean state of the action must be tracked by StelAction itself,
+//! possibly leading to de-sync if the state is changed outside of StelAction. Therefore using Q_PROPERTY with NOTIFY is recommended,
+//! if possible.
+//! @note If you want to have a globally accessible reference to arbitrary Q_PROPERTY instances (not just bool),
+//! or don't want to expose the property to the user you could use a StelProperty directly registered through the StelPropertyMgr instead.
+//! @see StelActionMgr, StelProperty
 class StelAction : public QObject
 {
 	Q_OBJECT
 public:
-	//! For a StelAction connected to a boolean Q_PROPERTY, this reads/sets its value
+	//! When the StelAction is @ref checkable, this may be used to get/set the current value.
+	//! Note that the @ref toggled signal may not be emitted on all changes of the connected property
+	//! @warning If used on a non-checkable action, the program may crash.
 	Q_PROPERTY(bool checked READ isChecked WRITE setChecked NOTIFY toggled)
-	//! If this is true, this StelAction can toggle a boolean Q_PROPERTY.
+	//! If this is true, this StelAction can be toggled.
+	//! This is the case when connected to a boolean Q_PROPERTY, or a boolean slot (i.e. func(bool), etc).
 	//! This means the @ref checked property as well as the toggle() function may be used
 	//! If false, the StelAction represents a simple argumentless slot call. Using @ref checked or toggle() may
 	//! result in an error.
 	Q_PROPERTY(bool checkable READ isCheckable)
 
-	//! @warning Don't use this constructor, this is just there to ease the migration from QAction.
-	//! @deprecated Use StelActionMgr::addAction to register a new action
-	StelAction(QObject *parent)
-		: QObject(parent)
-		, checkable(false)
-		, checked(false)
-		, global(false)
-		, target(NULL)
-		, property(NULL)
-	#ifndef USE_QUICKVIEW
-		, qAction(NULL)
-	#endif
-	{}
-
-	//! @warning Don't use setCheckable, connectToObject can automatically determine if the action is checkable or not.
-	//! This is just there to ease the migration from QAction.
-	//! @deprecated Do not use
-	void setCheckable(bool value) {checkable = value; emit changed();}
-
-	bool isCheckable() const {return checkable;}
-	bool isChecked() const {return checked;}
+	//! @see checkable
+	bool isCheckable() const {return isBoolSlot || boolProperty;}
+	//! @see checked
+	bool isChecked() const {return isBoolSlot ? boolSlotState : (boolProperty ? boolProperty->getValue().toBool() : false); }
 	bool isGlobal() const {return global;}
+	//! Defines the key-combination used to call this action
 	void setShortcut(const QString& key);
+	//! Defines an alternative key-combination
 	void setAltShortcut(const QString& key);
 	QKeySequence::SequenceMatch matches(const QKeySequence& seq) const;
 
+	//! The ID of this action. Must be unique.
 	QString getId() const {return objectName();}
 	QString getGroup() const {return group;}
 	const QKeySequence getShortcut() const {return keySequence;}
@@ -77,10 +75,19 @@ public:
 	QString getText() const;
 	void setText(const QString& value) {text = value; emit changed();}
 signals:
+	//! Emitted when the boolean state of this StelAction changes.
+	//! When the action is connected to a StelProperty,
+	//! this is equivalent to the StelProperty::valueChanged signal.
+	//! In the other cases, this state may not always be emitted correctly
+	//! (i.e. when the state changes through other mechanisms than StelAction)
 	void toggled(bool);
+	//! Emitted after an argumentless slot has been called
 	void triggered();
+	//! Emitted when additional data associated with this action changed (i.e. shortcuts, text,...)
 	void changed();
 public slots:
+	//! @see checked
+	//! @warning If used on a non-checkable action, the program may crash.
 	void setChecked(bool);
 	//! If the action is @ref checkable, toggle() is called.
 	//! Otherwise, the connected slot is invoked.
@@ -105,10 +112,12 @@ private:
 	//! @param slot A property or a slot name.  The slot can either have the signature `func()`, and in that
 	//! case the action is made not checkable, or have the signature `func(bool)` and in that case the action
 	//! is made checkable.  When linked to a property the action is always made checkable.
-	void connectToObject(QObject* obj, const char* slot);
+	void connectToObject(QObject* target, const char* slot);
 
-	bool checkable;
-	bool checked;
+	bool isBoolSlot;
+	//The current state for boolean slots and properties without NOTIFY signals
+	bool boolSlotState;
+
 	QString group;
 	QString text;
 	bool global;
@@ -118,6 +127,9 @@ private:
 	const QKeySequence defaultAltKeySequence;
 	QObject* target;
 	const char* property;
+	//If the StelAction is connected to a boolean property with a NOTIFY signal, a StelProperty is used for the connection
+	StelProperty* boolProperty;
+	QMetaMethod slot;
 
 	// Currently, there is no proper way to handle shortcuts with non latin
 	// keyboards layouts.  So for the moment, if we don't use QuickView, we
@@ -140,9 +152,8 @@ public:
 	~StelActionMgr();
 	//! Create and add a new StelAction, connected to an object property or slot.
 	//! @param id Global identifier.
-	//!	@param groupId Group identifier.
+	//! @param groupId Group identifier.
 	//! @param text Short human-readable description in English.
-	//! @param shortcut Default shortcut.
 	//! @param target The QObject the action is linked to.
 	//! @param slot The target slot or property that the action will trigger.
 	//!             Either a slot name of the form 'func()' and in that case the
@@ -150,6 +161,9 @@ public:
 	//!             'func(bool)' and in that case the action is made checkable,
 	//!             or a property name and in that case the action is made
 	//!             checkable.
+	//! @param shortcut Default shortcut/key combination for this action
+	//! @param altShortcut Alternative shortcut
+	//! @param global determines QAction shortcut context (not necessary anymore?)
 	StelAction* addAction(const QString& id, const QString& groupId, const QString& text,
 						  QObject* target, const char* slot,
 						  const QString& shortcut="", const QString& altShortcut="",

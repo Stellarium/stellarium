@@ -24,8 +24,8 @@
 
 class StelProperty;
 
-//! Abstract base class for the property proxies which allow reacting to the
-//! StelProperty::changed event using a specific type, instead using the QVariant version.
+//! Abstract base class for a StelProperty proxy implementation, which allow reacting to the
+//! StelProperty::changed event using a specific type instead of reacting to the QVariant version.
 //! This is required for some connections such as in the UI.
 //! The intented use is to subclass this class and implement the onPropertyChanged() slot,
 //! re-emitting the "changed" event with a type-converted value.
@@ -88,7 +88,17 @@ signals:
 //! similar to how StelAction works with boolean properties - but with arbitrary data.
 //! The use of this class allows easy access to non-boolean Stellarium settings
 //! for GUI data-binding (see StelDialog for binding functions) and enables external interfaces, such scripting or
-//! the @ref remoteControl plugin to access and change the property dynamically.
+//! the @ref remoteControl plugin to access and change the property dynamically. The main differences to StelAction are:
+//! - StelAction is primarily intended for user actions through keyboard shortcuts and/or GUI buttons.
+//!   StelProperty is not intended to be directly used/configurable by users, but rather as a development tool.
+//! - StelProperty always requires a Q_PROPERTY (including a NOTIFY signal), while StelAction can work directly with
+//!   argumentless or boolean slots (i.e. func(), func(bool))
+//! - StelAction actually registers and uses a StelProperty internally, if possible. This is the case when
+//!   connected to a bool Q_PROPERTY with a NOTIFY signal. The created StelProperty has the same ID as the StelAction.
+//! - StelProperty uses the NOTIFY handler to find out when the value changes, even if the change originated outside
+//!   in non-StelProperty code by calling the WRITE slot directly.
+//!   StelAction (if not using a StelProperty, as explained in the previous point) has to track boolean states on its own,
+//!   so there may be a mismatch between the state as StelAction sees it and the real state in some cases
 //!
 //! To register a new StelProperty, use the StelPropertyMgr, which can be retrieved using StelApp::getStelPropertyManager().
 //! In StelModule subclasses, one can also use StelModule::registerProperty for convenience.
@@ -126,7 +136,11 @@ signals:
 //!			qDebug()<<prop;
 //!		}
 //!	public slots:
+//!		//Returns the current awesomeProperty value
 //!		int getAwesomeProperty() const { return prop; }
+//!
+//!		//Sets the awesomeProperty
+//!		//Don't forget to emit the NOTIFY signal if the value actually changed!
 //!		void setAwesomeProperty(int val) { if(val!=prop) { prop = val; emit awesomePropertyChanged(val); } }
 //!	signals:
 //!		void awesomePropertyChanged(int newVal);
@@ -158,8 +172,8 @@ signals:
 //!
 //! @note Good candidates for a StelProperty are properties that do not change too often. This includes most settings
 //! configurable through the GUI. Bad examples are properties which potentially change very often (e.g. each frame), such as the
-//! current view vector, field of view etc. They may cause considerable overhead if used.
-//! @sa StelPropertyMgr, StelDialog
+//! current view vector, field of view etc. They may cause considerable overhead if used, and therefore should be avoided.
+//! @sa StelPropertyMgr, StelDialog, StelAction
 class StelProperty : public QObject
 {
 	friend class StelPropertyMgr;
@@ -191,10 +205,10 @@ public slots:
 signals:
 	//! Emitted when the value of the property changed
 	void changed(const QVariant& newValue);
-private slots:
+protected slots:
 	//! Reacts to NOTIFY signals from the object, and emits the changed signal
 	void propertyChanged();
-private:
+protected:
 	StelProperty(const QString& id,QObject* target, const char* propId);
 
 	QObject* target;
