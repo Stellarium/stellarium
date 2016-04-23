@@ -1,20 +1,20 @@
-# Asturian translation for stellarium
-# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# Berber (Other) translation for stellarium
+# Copyright (c) 2016 Rosetta Contributors and Canonical Ltd 2016
 # This file is distributed under the same license as the stellarium package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-04-16 19:35+0700\n"
-"PO-Revision-Date: 2013-07-29 23:06+0000\n"
-"Last-Translator: ivarela <ivarela@ubuntu.com>\n"
-"Language-Team: Asturian <ast@li.org>\n"
+"PO-Revision-Date: 2016-04-22 12:39+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Berber (Other) <ber@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-04-17 05:18+0000\n"
+"X-Launchpad-Export-Date: 2016-04-23 05:14+0000\n"
 "X-Generator: Launchpad (build 17995)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -24,32 +24,32 @@ msgstr ""
 #: src/core/StelApp.cpp:502 src/core/StelCore.cpp:210
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:557
 msgid "Display Options"
-msgstr "Opciones de visualización"
+msgstr ""
 
 #: src/core/modules/ConstellationMgr.cpp:136
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Constellation lines"
-msgstr "Llinies de constelaciones"
+msgstr ""
 
 #: src/core/modules/ConstellationMgr.cpp:137
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:290
 msgid "Constellation art"
-msgstr "Figures de constelaciones"
+msgstr ""
 
 #: src/core/modules/ConstellationMgr.cpp:138
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Constellation labels"
-msgstr "Nomes de constelaciones"
+msgstr ""
 
 #: src/core/modules/ConstellationMgr.cpp:139
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:291
 msgid "Constellation boundaries"
-msgstr "Llendes de constelaciones"
+msgstr ""
 
 #: src/core/modules/StarMgr.cpp:376 src/ui_viewDialog.h:1589
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:246
 msgid "Stars"
-msgstr "Estrelles"
+msgstr ""
 
 #: src/core/modules/StarMgr.cpp:377
 msgid "Stars labels"
@@ -57,7 +57,7 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:599 src/ui_viewDialog.h:1780
 msgid "Meridian"
-msgstr "Meridianu"
+msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:603
 msgid "Ecliptic of J2000.0"
@@ -73,7 +73,7 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:615
 msgid "Equator"
-msgstr "Ecuador"
+msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:620
 msgid "Precession Circle"
@@ -81,7 +81,7 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:624 src/ui_viewDialog.h:1768
 msgid "Horizon"
-msgstr "Horizonte"
+msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:628
 msgid "Galactic Equator"
@@ -108,17 +108,17 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:905
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial grid"
-msgstr "Cuadrícula Ecuatorial"
+msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:906 src/ui_viewDialog.h:1744
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Azimuthal grid"
-msgstr "Cuadrícula Azimutal"
+msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:907
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:347
 msgid "Ecliptic line"
-msgstr "Llinia Eclíptica"
+msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:908
 msgid "Ecliptic J2000 line"
@@ -127,7 +127,7 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:909
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Equator line"
-msgstr "Llinia Ecuatorial"
+msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:910
 msgid "Equator J2000 line"
@@ -136,7 +136,7 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:911
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Meridian line"
-msgstr "Llinia Meridiana"
+msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:912
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:377
@@ -146,7 +146,7 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:913
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Equatorial J2000 grid"
-msgstr "Cuadrícula Ecuatorial J2000"
+msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:914
 msgid "Ecliptic J2000 grid"
@@ -159,7 +159,7 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:916 src/ui_viewDialog.h:1748
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:382
 msgid "Galactic grid"
-msgstr "Cuadrícula Galáctica"
+msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:917 src/ui_viewDialog.h:1772
 msgid "Galactic equator"
@@ -180,20 +180,20 @@ msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1607
 msgid "Atmosphere"
-msgstr "Atmósfera"
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:416
 msgid "Fog"
-msgstr "Borrina"
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:417 src/ui_viewDialog.h:1776
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:304
 msgid "Cardinal points"
-msgstr "Puntos cardinales"
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:418
 msgid "Ground"
-msgstr "Suelu"
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:419
 msgid "Illumination"
@@ -207,16 +207,16 @@ msgstr ""
 #: src/core/modules/LandscapeMgr.cpp:672
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:448
 msgid "Author: "
-msgstr "Autor: "
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:678
 msgid "Location: "
-msgstr "Allugamientu: "
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:681
 #, qt-format
 msgid ", %1 m"
-msgstr ", %1 m"
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:686 src/ui_astroCalcDialog.h:380
 msgid "Celestial body:"
@@ -230,7 +230,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:269
 #, qt-format
 msgid "Type: <b>%1</b>"
-msgstr "Tipu: <b>%1</b>"
+msgstr ""
 
 #: src/core/modules/Nebula.cpp:190 src/core/modules/Comet.cpp:176
 #: plugins/Novae/src/Nova.cpp:133 plugins/Pulsars/src/Pulsar.cpp:166
@@ -261,7 +261,7 @@ msgstr ""
 #: plugins/Quasars/src/Quasar.cpp:109 plugins/Exoplanets/src/Exoplanet.cpp:283
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
-msgstr "Magnitú: <b>%1</b>"
+msgstr ""
 
 #: src/core/modules/Nebula.cpp:211
 msgid " (Photometric system: B)"
@@ -286,7 +286,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:239
 #, qt-format
 msgid "Size: %1"
-msgstr "Tamañu: %1"
+msgstr ""
 
 #: src/core/modules/Nebula.cpp:242
 #, qt-format
@@ -334,7 +334,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:325 src/core/modules/StarWrapper.cpp:241
 #, qt-format
 msgid "Parallax: %1\""
-msgstr "Paralaxe: %1\""
+msgstr ""
 
 #: src/core/modules/Nebula.cpp:329
 msgid "Morphological description: "
@@ -718,7 +718,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:198 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
-msgstr "Magnitú Absoluta: %1"
+msgstr ""
 
 #: src/core/modules/Planet.cpp:255 src/core/modules/MinorPlanet.cpp:248
 #: src/core/modules/Comet.cpp:224
@@ -741,7 +741,7 @@ msgstr ""
 #: src/core/modules/MinorPlanet.cpp:266 src/core/modules/MinorPlanet.cpp:268
 #, qt-format
 msgid "Apparent diameter: %1"
-msgstr "Diámetru aparente: %1"
+msgstr ""
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 #: src/core/modules/Planet.cpp:305 src/core/modules/MinorPlanet.cpp:276
@@ -838,22 +838,22 @@ msgstr ""
 #: src/core/modules/SolarSystem.cpp:190 src/gui/AstroCalcDialog.cpp:455
 #: src/translations.h:62
 msgid "Planets"
-msgstr "Planetes"
+msgstr ""
 
 #: src/core/modules/SolarSystem.cpp:191
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:309
 msgid "Planet labels"
-msgstr "Etiquetes de planetes"
+msgstr ""
 
 #: src/core/modules/SolarSystem.cpp:192
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:313
 msgid "Planet orbits"
-msgstr "Órbites de planetes"
+msgstr ""
 
 #: src/core/modules/SolarSystem.cpp:193
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Planet trails"
-msgstr "Rastros de planetes"
+msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:155
 msgid "eruptive variable star"
@@ -902,7 +902,7 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:293
 #, qt-format
 msgid "Spectral Type: %1"
-msgstr "Tipu espectral: %1"
+msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:244
 #, qt-format
@@ -939,7 +939,7 @@ msgstr ""
 
 #: src/core/StelApp.cpp:502
 msgid "Night mode"
-msgstr "Mou nocherniegu"
+msgstr ""
 
 #. TRANSLATORS: name of object
 #: src/core/StelCore.cpp:208 src/gui/StelGui.cpp:197
@@ -948,47 +948,47 @@ msgstr "Mou nocherniegu"
 #: src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:173
 msgid "Date and Time"
-msgstr "Data y hora"
+msgstr ""
 
 #: src/core/StelCore.cpp:209 src/core/StelMovementMgr.cpp:155
 msgid "Movement and Selection"
-msgstr "Movimientu y Seleición"
+msgstr ""
 
 #: src/core/StelCore.cpp:212
 msgid "Increase time speed"
-msgstr "Aumentar velocidá del tiempu"
+msgstr ""
 
 #: src/core/StelCore.cpp:213
 msgid "Decrease time speed"
-msgstr "Amenorgar velocidá del tiempu"
+msgstr ""
 
 #: src/core/StelCore.cpp:214
 msgid "Increase time speed (a little)"
-msgstr "Aumentar la velocidá del tiempu (un poco)"
+msgstr ""
 
 #: src/core/StelCore.cpp:215
 msgid "Decrease time speed (a little)"
-msgstr "Amenorgar la velocidá del tiempu (un poco)"
+msgstr ""
 
 #: src/core/StelCore.cpp:216
 msgid "Set normal time rate"
-msgstr "Afitar ritmu normal de tiempu"
+msgstr ""
 
 #: src/core/StelCore.cpp:217
 msgid "Set time rate to zero"
-msgstr "Afitar ritmu de tiempu a cero"
+msgstr ""
 
 #: src/core/StelCore.cpp:218
 msgid "Set time to now"
-msgstr "Afitar data y hora actual"
+msgstr ""
 
 #: src/core/StelCore.cpp:219
 msgid "Add 1 solar hour"
-msgstr "Añedir 1 hora solar"
+msgstr ""
 
 #: src/core/StelCore.cpp:220
 msgid "Add 1 solar day"
-msgstr "Añedir 1 día solar"
+msgstr ""
 
 #: src/core/StelCore.cpp:221
 msgid "Add 7 solar days"
@@ -996,11 +996,11 @@ msgstr ""
 
 #: src/core/StelCore.cpp:222
 msgid "Subtract 1 solar hour"
-msgstr "Restar 1 hora solar"
+msgstr ""
 
 #: src/core/StelCore.cpp:223
 msgid "Subtract 1 solar day"
-msgstr "Restar 1 día solar"
+msgstr ""
 
 #: src/core/StelCore.cpp:224
 msgid "Subtract 7 solar days"
@@ -1008,7 +1008,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:225
 msgid "Add 1 sidereal day"
-msgstr "Añedir 1 día sideral"
+msgstr ""
 
 #: src/core/StelCore.cpp:226
 msgid "Add 1 sidereal year"
@@ -1072,7 +1072,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:241
 msgid "Subtract 1 sidereal day"
-msgstr "Restar 1 día sideral"
+msgstr ""
 
 #: src/core/StelCore.cpp:242
 msgid "Subtract 1 sidereal year"
@@ -1136,7 +1136,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:258
 msgid "Set home planet to selected planet"
-msgstr "Afitar el planeta seleicionáu como aniciu"
+msgstr ""
 
 #: src/core/StelCore.cpp:259
 msgid "Go to home"
@@ -1144,11 +1144,11 @@ msgstr ""
 
 #: src/core/StelCore.cpp:261
 msgid "Flip scene horizontally"
-msgstr "Invertir vista horizontalmente"
+msgstr ""
 
 #: src/core/StelCore.cpp:262
 msgid "Flip scene vertically"
-msgstr "Invertir vista verticalmente"
+msgstr ""
 
 #: src/core/StelCore.cpp:1662
 msgid "Correction is disabled. Use only if you know what you are doing!"
@@ -1419,36 +1419,31 @@ msgstr ""
 
 #: src/core/StelProjector.cpp:130
 msgid "Maximum FOV: "
-msgstr "Campu de Visión Máximu: "
+msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:27
 msgid "Perspective"
-msgstr "Perspeutiva"
+msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:32
 msgid ""
 "Perspective projection keeps the horizon a straight line. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
-"La proyeición en perspeutiva permite caltener l'horizonte en llinia recta. "
-"El nome matemáticu d'esta proyeición ye <i>proyeición gnomónica<i>."
 
 #: src/core/StelProjectorClasses.cpp:86
 msgid "Equal Area"
-msgstr "Área equivalente"
+msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:91
 msgid ""
 "The full name of this projection method is, <i>Lambert azimuthal equal-area "
 "projection</i>. It preserves the area but not the angle."
 msgstr ""
-"El nome completu d'esti sistema de proyeición ye <i>Proyeición azimutal "
-"equivalente de Lambert</i>. Les árees nun sufren deformación denguna, anque "
-"nun ocurre lo mesmo colos ángulos."
 
 #: src/core/StelProjectorClasses.cpp:143
 msgid "Stereographic"
-msgstr "Estereográfica"
+msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:148
 msgid ""
@@ -1456,13 +1451,10 @@ msgid ""
 "known as the planisphere projection. It preserves the angles at which curves "
 "cross each other but it does not preserve area."
 msgstr ""
-"La proyeición estereográfica conozse dende l'antigüedá y nun principiu "
-"denomábase proyeición planisférica. Los ángulos nos que se corten les curves "
-"apaecen ensin deformación, pero les árees nun se caltienen proporcionales."
 
 #: src/core/StelProjectorClasses.cpp:197
 msgid "Fish-eye"
-msgstr "Güeyu de pexe"
+msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:202
 msgid ""
@@ -1471,38 +1463,30 @@ msgid ""
 "centre of the field of view (like the distortions seen with very wide angle "
 "camera lenses)."
 msgstr ""
-"Na proyeición de güeyu de pexe o <i>proyeición azimutal equidistante</i>, "
-"les llinies rectes conviértense en curves cuando apaecen a una distancia "
-"angular considerable respeuto del centru del campu de visión (mesmo que la "
-"distorsión producida con una lente fotográfica de tipu gran angular potente)."
 
 #: src/core/StelProjectorClasses.cpp:257
 msgid "Hammer-Aitoff"
-msgstr "Hammer-Aitoff"
+msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:262
 msgid ""
 "The Hammer projection is an equal-area map projection, described by Ernst "
 "Hammer in 1892 and directly inspired by the Aitoff projection."
 msgstr ""
-"La proyeición Hammer ye una proyeición d'área equivalente, descrita por "
-"Ernst Hammer en 1892 y direutamente inspirada pola proyeición Aitoff."
 
 #: src/core/StelProjectorClasses.cpp:311
 msgid "Cylinder"
-msgstr "Cilindru"
+msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:316
 msgid ""
 "The full name of this projection mode is <i>cylindrical equidistant "
 "projection</i>. With this projection all parallels are equally spaced."
 msgstr ""
-"El nome completu d'esti tipu de proyeición ye <i>proyeición cilíndrica "
-"equidistante</i>. Nellam tolos paralelos son equidistantes."
 
 #: src/core/StelProjectorClasses.cpp:358
 msgid "Mercator"
-msgstr "Mercator"
+msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:363
 msgid ""
@@ -1513,15 +1497,13 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:410
 msgid "Orthographic"
-msgstr "Ortográfica"
+msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:415
 msgid ""
 "Orthographic projection is related to perspective projection, but the point "
 "of perspective is set to an infinite distance."
 msgstr ""
-"La proyeición ortográfica ta relacionada cola proyeición en perspeutiva, "
-"pero'l puntu de vista asítiase nel infinitu."
 
 #: src/core/StelProjectorClasses.cpp:461
 msgid "Sinusoidal"
@@ -1548,7 +1530,7 @@ msgstr ""
 #: src/core/StelObject.cpp:165 src/core/StelObject.cpp:168
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
-msgstr "Ángulu horariu/DE: %1/%2"
+msgstr ""
 
 #: src/core/StelObject.cpp:152 src/core/StelObject.cpp:155
 #: src/core/StelObject.cpp:186 src/core/StelObject.cpp:188
@@ -1559,7 +1541,7 @@ msgstr ""
 #: src/core/StelObject.cpp:193 src/core/StelObject.cpp:195
 #, qt-format
 msgid "Az/Alt: %1/%2"
-msgstr "Az/Alt: %1/%2"
+msgstr ""
 
 #: src/core/StelObject.cpp:214 src/core/StelObject.cpp:216
 #: src/core/StelObject.cpp:226 src/core/StelObject.cpp:228
@@ -1592,27 +1574,27 @@ msgstr ""
 #: src/core/StelMovementMgr.cpp:156 src/gui/StelGui.cpp:199
 #: src/StelMainView.cpp:556
 msgid "Miscellaneous"
-msgstr "Dellos"
+msgstr ""
 
 #: src/core/StelMovementMgr.cpp:156
 msgid "Switch between equatorial and azimuthal mount"
-msgstr "Alternar ente montura ecuatorial y azimutal"
+msgstr ""
 
 #: src/core/StelMovementMgr.cpp:157
 msgid "Center on selected object"
-msgstr "Centrar nel oxetu seleicionáu"
+msgstr ""
 
 #: src/core/StelMovementMgr.cpp:158
 msgid "Zoom in on selected object"
-msgstr "Facer zoom nel oxetu seleicionáu"
+msgstr ""
 
 #: src/core/StelMovementMgr.cpp:159
 msgid "Zoom out"
-msgstr "Alloñar zoom"
+msgstr ""
 
 #: src/core/StelMovementMgr.cpp:160
 msgid "Track object"
-msgstr "Siguir oxetu"
+msgstr ""
 
 #: src/core/StelMovementMgr.cpp:162
 msgid "Look towards East"
@@ -1656,26 +1638,26 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:507
 msgid "Select screenshot directory"
-msgstr "Seleiciona'l direutoriu pa captures de pantalla"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:805
 #, qt-format
 msgid "Startup FOV: %1%2"
-msgstr "Campu de visión d'aniciu: %1%2"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:813
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
-msgstr "Puntu de vista al aniciu Az/Alt: %1 %2"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:875
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
 msgid "Authors"
-msgstr "Autores"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:876 src/gui/ViewDialog.cpp:696
 msgid "Contact"
-msgstr "Contautu"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:878
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
@@ -1704,11 +1686,11 @@ msgstr ""
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:186
 msgid "Author"
-msgstr "Autor"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:965
 msgid "License"
-msgstr "Llicencia"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:969
 msgid "Shortcut"
@@ -1716,19 +1698,17 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:993
 msgid "Running script: "
-msgstr "Script corriendo: "
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1000
 msgid "Running script: [none]"
-msgstr "Script corriendo: [nengún]"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1065
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
 msgstr ""
-"¡Finó la descarga de los catálogos nuevos d'estrelles!\n"
-"Reanicia Stellarium p'amosalos."
 
 #: src/gui/ConfigurationDialog.cpp:1069
 msgid "All available star catalogs have been installed."
@@ -1737,7 +1717,7 @@ msgstr ""
 #: src/gui/ConfigurationDialog.cpp:1074
 #, qt-format
 msgid "Get catalog %1 of %2"
-msgstr "Obtener catálogu %1 de %2"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1081
 #, qt-format
@@ -1745,8 +1725,6 @@ msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr ""
-"Descargando %1...\n"
-"(Pues zarrar esta ventana)."
 
 #: src/gui/ConfigurationDialog.cpp:1088
 #, qt-format
@@ -1755,9 +1733,6 @@ msgid ""
 "Star count: %2 Million\n"
 "Magnitude range: %3 - %4"
 msgstr ""
-"Tamañu de la descarga: %1MB\n"
-"Cuenta d'estrelles: %2 Millones\n"
-"Rangu de Magnitú: %3 - %4"
 
 #: src/gui/ConfigurationDialog.cpp:1131 src/gui/ConfigurationDialog.cpp:1167
 #, qt-format
@@ -1765,12 +1740,10 @@ msgid ""
 "Error downloading %1:\n"
 "%2"
 msgstr ""
-"Fallu descargando %1:\n"
-"%2"
 
 #: src/gui/ConfigurationDialog.cpp:1220
 msgid "Verifying file integrity..."
-msgstr "Verificando la integridá del ficheru..."
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1224
 #, qt-format
@@ -1778,8 +1751,6 @@ msgid ""
 "Error downloading %1:\n"
 "File is corrupted."
 msgstr ""
-"Fallu descargando %1:\n"
-"El ficheru ta corruptu."
 
 #: src/gui/ConfigurationDialog.cpp:1270 src/gui/ConfigurationDialog.cpp:1279
 msgid "Available"
@@ -1800,111 +1771,111 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1356
 msgid "Schoch (1931)"
-msgstr "Schoch (1931)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1357
 msgid "Clemence (1948)"
-msgstr "Clemence (1948)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1358
 msgid "IAU (1952)"
-msgstr "IAU (1952)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1359
 msgid "Astronomical Ephemeris (1960)"
-msgstr "Astronomical Ephemeris (1960)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1360
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
-msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1361
 msgid "Muller & Stephenson (1975)"
-msgstr "Muller & Stephenson (1975)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1362
 msgid "Stephenson (1978)"
-msgstr "Stephenson (1978)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1363
 msgid "Schmadel & Zech (1979)"
-msgstr "Schmadel & Zech (1979)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1364
 msgid "Morrison & Stephenson (1982)"
-msgstr "Morrison & Stephenson (1982)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1365
 msgid "Stephenson & Morrison (1984)"
-msgstr "Stephenson & Morrison (1984)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1366
 msgid "Stephenson & Houlden (1986)"
-msgstr "Stephenson & Houlden (1986)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1367
 msgid "Espenak (1987, 1989)"
-msgstr "Espenak (1987, 1989)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1368
 msgid "Borkowski (1988)"
-msgstr "Borkowski (1988)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1369
 msgid "Schmadel & Zech (1988)"
-msgstr "Schmadel & Zech (1988)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1370
 msgid "Chapront-Touze & Chapront (1991)"
-msgstr "Chapront-Touze & Chapront (1991)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1371
 msgid "Stephenson & Morrison (1995)"
-msgstr "Stephenson & Morrison (1995)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1372
 msgid "Stephenson (1997)"
-msgstr "Stephenson (1997)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1374
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
-msgstr "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1375
 msgid "JPL Horizons"
-msgstr "JPL Horizons"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1376
 msgid "Meeus & Simons (2000)"
-msgstr "Meeus & Simons (2000)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1377
 msgid "Montenbruck & Pfleger (2000)"
-msgstr "Montenbruck & Pfleger (2000)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1378
 msgid "Reingold & Dershowitz (2002, 2007)"
-msgstr "Reingold & Dershowitz (2002, 2007)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1379
 msgid "Morrison & Stephenson (2004, 2005)"
-msgstr "Morrison & Stephenson (2004, 2005)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1381
 msgid "Espenak & Meeus (2006)"
-msgstr "Espenak & Meeus (2006)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1384
 msgid "Reijs (2006)"
-msgstr "Reijs (2006)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1385
 msgid "Banjevic (2006)"
-msgstr "Banjevic (2006)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1386
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
-msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1387
 msgid "Khalid, Sultana & Zaidi (2014)"
@@ -1913,59 +1884,59 @@ msgstr ""
 #: src/gui/ConfigurationDialog.cpp:1388
 #, qt-format
 msgid "Custom equation of %1T"
-msgstr "Ecuación personalizada de %1T"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:133
 msgid "Stellarium Help"
-msgstr "Ayuda de Stellarium"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:138 src/gui/HelpDialog.cpp:143
 msgid "Keys"
-msgstr "Tecles"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:140 src/gui/HelpDialog.cpp:212
 msgid "Further Reading"
-msgstr "Llectures complementaries"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:147
 msgid "Pan view around the sky"
-msgstr "Treslladar vista pel cielu"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:148
 msgid "Arrow keys & left mouse drag"
-msgstr "Fleches del tecláu y arrastre del mur"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:150
 msgid "Zoom in/out"
-msgstr "Averar/alloñar zoom"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:152
 msgid "Page Up/Down"
-msgstr "Páxina Alantre/Atrás"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:154
 msgid "CTRL + Up/Down"
-msgstr "CTRL + Arriba/Abaxo"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:157
 msgid "Select object"
-msgstr "Seleicionar oxetu"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:158
 msgid "Left click"
-msgstr "Clic izquierdu"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:166
 msgid "Clear selection"
-msgstr "Llimpiar seleición"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:167
 msgid "Right click"
-msgstr "Clic drechu"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:169
 msgid "CTRL + Left click"
-msgstr "CTRL + Clic izq"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:174
 #, qt-format
@@ -1979,16 +1950,15 @@ msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
 msgstr ""
-"Los enllaces siguientes son a web esternes y van abrise nel restolador web:\n"
 
 #: src/gui/HelpDialog.cpp:214
 msgid "The Stellarium User Guide"
-msgstr "Guía d'Usuariu de Stellarium"
+msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:218
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-msgstr "{Entrugues frecuentes} tocante a Stellarium. Y tamién respuestes."
+msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:223
@@ -1996,8 +1966,6 @@ msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
 msgstr ""
-"{Wiki de Stellarium}: Información xeneral. Equí tamién pues alcontrar "
-"paisaxes y scripts creaos polos usuarios."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:228
@@ -2005,8 +1973,6 @@ msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
 msgstr ""
-"{Support ticket system} - Si necesites ayuda tocante al usu de Stellarium "
-"manda equí una pitición d'asistencia ya intentaremos ayudate."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:233
@@ -2015,33 +1981,30 @@ msgid ""
 "properly or is missing and is not listed in the tracker, you can open bug "
 "reports here."
 msgstr ""
-"{Sistema d'informe de fallos y pitición de carauterístiques} -Si dalgo nun "
-"funciona o falta y nun ta llistao nel rastreador, pues poner un informe de "
-"fallos equí."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:238
 msgid "{Forums} - discuss Stellarium with other users."
-msgstr "{Foros}: comentarios sobre Stellarium con otros usuarios."
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:295
 msgid "Developers"
-msgstr "Desendolcadores"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:296
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
-msgstr "Coordinador del proyeutu y desendolcador líder: %1"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:297
 #, qt-format
 msgid "Doc author/developer: %1"
-msgstr "Doc autor/desendolcador: %1"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:298
 #, qt-format
 msgid "Graphic/other designer: %1"
-msgstr "Diseñador gráficu/otru: %1"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:299 src/gui/HelpDialog.cpp:300
 #: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
@@ -2051,7 +2014,7 @@ msgstr "Diseñador gráficu/otru: %1"
 #: src/gui/HelpDialog.cpp:313 src/gui/HelpDialog.cpp:314
 #, qt-format
 msgid "Developer: %1"
-msgstr "Desendolcador: %1"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:307
 #, qt-format
@@ -2076,7 +2039,7 @@ msgstr ""
 #: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
 #, qt-format
 msgid "OSX Developer: %1"
-msgstr "Desendolcador d'OSX: %1"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:317
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
@@ -2093,23 +2056,23 @@ msgstr ""
 
 #: src/gui/StelGui.cpp:198
 msgid "Windows"
-msgstr "Ventanes"
+msgstr ""
 
 #: src/gui/StelGui.cpp:200
 msgid "Quit"
-msgstr "Colar"
+msgstr ""
 
 #: src/gui/StelGui.cpp:201
 msgid "Speed up the script execution rate"
-msgstr "Acelera la velocidá del script que ta corriendo"
+msgstr ""
 
 #: src/gui/StelGui.cpp:202
 msgid "Slow down the script execution rate"
-msgstr "Ralentiza la velocidá del script que ta corriendo"
+msgstr ""
 
 #: src/gui/StelGui.cpp:203
 msgid "Set the normal script execution rate"
-msgstr "Afita la velocidá normal del script que ta corriendo"
+msgstr ""
 
 #: src/gui/StelGui.cpp:204
 msgid "Stop script execution"
@@ -2125,31 +2088,31 @@ msgstr ""
 
 #: src/gui/StelGui.cpp:209
 msgid "Script console window"
-msgstr "Ventana de consola de scripts"
+msgstr ""
 
 #: src/gui/StelGui.cpp:212
 msgid "Help window"
-msgstr "Ventana d'ayuda"
+msgstr ""
 
 #: src/gui/StelGui.cpp:213
 msgid "Configuration window"
-msgstr "Ventana de configuración"
+msgstr ""
 
 #: src/gui/StelGui.cpp:214 src/ui_searchDialogGui.h:615
 msgid "Search window"
-msgstr "Ventana de gueta"
+msgstr ""
 
 #: src/gui/StelGui.cpp:215
 msgid "Sky and viewing options window"
-msgstr "Ventana d'opciones del cielu y de vista"
+msgstr ""
 
 #: src/gui/StelGui.cpp:216
 msgid "Date/time window"
-msgstr "Ventana de data/hora"
+msgstr ""
 
 #: src/gui/StelGui.cpp:217
 msgid "Location window"
-msgstr "Ventana d'allugamientu"
+msgstr ""
 
 #: src/gui/StelGui.cpp:218
 msgid "Shortcuts window"
@@ -2169,24 +2132,24 @@ msgstr ""
 
 #: src/gui/StelGui.cpp:227
 msgid "Auto hide horizontal button bar"
-msgstr "Anubrir automáticamente la barra horizontal de botones"
+msgstr ""
 
 #: src/gui/StelGui.cpp:228
 msgid "Auto hide vertical button bar"
-msgstr "Anubrir automáticamente la barra vertical de botones"
+msgstr ""
 
 #: src/gui/StelGui.cpp:231
 msgid "Toggle visibility of GUI"
-msgstr "Cambiar la visibilidá de la GUI"
+msgstr ""
 
 #: src/gui/StelGuiItems.cpp:317 src/gui/StelGuiItems.cpp:832
 msgid "Space"
-msgstr "Espaciu"
+msgstr ""
 
 #: src/gui/StelGuiItems.cpp:655
 #, c-format, qt-format
 msgid "%1m"
-msgstr "%1m"
+msgstr ""
 
 #: src/gui/StelGuiItems.cpp:687
 #, qt-format
@@ -2268,15 +2231,15 @@ msgstr ""
 
 #: src/gui/ViewDialog.cpp:745
 msgid "No description"
-msgstr "Ensin descripción"
+msgstr ""
 
 #: src/gui/ViewDialog.cpp:845
 msgid "No shooting stars"
-msgstr "Ensin estrelles fugaces"
+msgstr ""
 
 #: src/gui/ViewDialog.cpp:853
 msgid "Normal rate"
-msgstr "Tasa normal"
+msgstr ""
 
 #: src/gui/ViewDialog.cpp:856
 msgid "Standard Orionids rate"
@@ -2284,7 +2247,7 @@ msgstr ""
 
 #: src/gui/ViewDialog.cpp:859
 msgid "Standard Perseids rate"
-msgstr "Tasa normal de les Perseides"
+msgstr ""
 
 #: src/gui/ViewDialog.cpp:862
 msgid "Standard Geminids rate"
@@ -2304,7 +2267,7 @@ msgstr ""
 
 #: src/gui/ViewDialog.cpp:874
 msgid "Exceptional Leonid rate"
-msgstr "Tasa esceicional de les Leónides"
+msgstr ""
 
 #: src/gui/ViewDialog.cpp:877
 msgid "Very high rate (1966 Leonids)"
@@ -2316,29 +2279,29 @@ msgstr ""
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:114
 msgid "Select a ZIP archive that contains a Stellarium landscape"
-msgstr "Seleiciona un ficheru ZIP que tenga un paisaxe de Stellarium"
+msgstr ""
 
 #. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
 #: src/gui/AddRemoveLandscapesDialog.cpp:116
 msgid "ZIP archives"
-msgstr "Fciheros ZIP"
+msgstr ""
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:129
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
-msgstr "Instalóse correutamente Paisaxe \"%1\""
+msgstr ""
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:130
 #: src/gui/AddRemoveLandscapesDialog.cpp:157
 msgid "Success"
-msgstr "Ésitu"
+msgstr ""
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:143
 #: src/gui/AddRemoveLandscapesDialog.cpp:213
 #: src/gui/AddRemoveLandscapesDialog.cpp:222
 #: src/gui/AddRemoveLandscapesDialog.cpp:230
 msgid "No landscape was installed."
-msgstr "Nun s'instaló nengún paisaxe"
+msgstr ""
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:144
 #: src/gui/AddRemoveLandscapesDialog.cpp:168
@@ -2347,49 +2310,47 @@ msgstr "Nun s'instaló nengún paisaxe"
 #: src/gui/AddRemoveLandscapesDialog.cpp:231
 #: src/gui/AddRemoveLandscapesDialog.cpp:241
 msgid "Error!"
-msgstr "¡Fallu!"
+msgstr ""
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:156
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
-msgstr "Paisaxe \"%1\" desanicióse con ésitu."
+msgstr ""
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:167
 #: src/gui/AddRemoveLandscapesDialog.cpp:237
 msgid "The selected landscape could not be (completely) removed."
-msgstr "El paisaxe seleicionáu pue ser que nun quede desaniciáu dafechu"
+msgstr ""
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:190
 #, qt-format
 msgid "Size on disk: %1 MiB"
-msgstr "Tamañu en discu: %1 MiB"
+msgstr ""
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
 #: src/gui/AddRemoveLandscapesDialog.cpp:216
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
-msgstr "Stellarium nun pue abrir pa lleer o escribir %1"
+msgstr ""
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:222
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
 msgstr ""
-"El ficheru seleicionáu nun ye un archivador ZIP o nun tien un paisaxe de "
-"Stellarium."
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
 #: src/gui/AddRemoveLandscapesDialog.cpp:229
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
-msgstr "Yá hai un paisaxe col mesmu nome o identificación (%1)."
+msgstr ""
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
 #: src/gui/AddRemoveLandscapesDialog.cpp:240
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
-msgstr "Pues desanicialu manualmente esborrando el direutoriu: %1"
+msgstr ""
 
 #: src/gui/ScriptConsole.cpp:76
 msgid "quickrun..."
@@ -2528,7 +2489,7 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:323
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:185
 msgid "Name"
-msgstr "Nome"
+msgstr ""
 
 #. TRANSLATORS: right ascension
 #: src/gui/AstroCalcDialog.cpp:137 src/gui/AstroCalcDialog.cpp:254
@@ -2600,7 +2561,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:456 src/translations.h:66
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
-msgstr "Asteroides"
+msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:457 src/translations.h:70
@@ -2611,7 +2572,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:458 src/translations.h:64
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
-msgstr "Cometes"
+msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:459 src/translations.h:72
@@ -2659,7 +2620,7 @@ msgstr ""
 
 #: src/gui/BookmarksDialog.cpp:95 src/ui_searchDialogGui.h:699
 msgid "Object"
-msgstr "Oxetu"
+msgstr ""
 
 #: src/gui/BookmarksDialog.cpp:96
 msgid "Localized name"
@@ -2681,11 +2642,11 @@ msgstr ""
 
 #: src/StelMainView.cpp:556
 msgid "Save screenshot"
-msgstr "Guardar la captura de pantalla"
+msgstr ""
 
 #: src/StelMainView.cpp:557
 msgid "Full-screen mode"
-msgstr "Mou pantalla completa"
+msgstr ""
 
 #: src/StelMainView.cpp:710
 msgid ""
@@ -2733,39 +2694,39 @@ msgstr ""
 
 #: src/translations.h:34
 msgid "N"
-msgstr "N"
+msgstr ""
 
 #: src/translations.h:35
 msgid "S"
-msgstr "S"
+msgstr ""
 
 #: src/translations.h:36
 msgid "E"
-msgstr "E"
+msgstr ""
 
 #: src/translations.h:37
 msgid "W"
-msgstr "W"
+msgstr ""
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:44
 msgid "planet"
-msgstr "planeta"
+msgstr ""
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:46
 msgid "comet"
-msgstr "cometa"
+msgstr ""
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:48
 msgid "asteroid"
-msgstr "asteroide"
+msgstr ""
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:50
 msgid "moon"
-msgstr "lluna"
+msgstr ""
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:52
@@ -2800,7 +2761,7 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:80
 msgid "Constellations"
-msgstr "ConstelacioneS"
+msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:85
@@ -3004,7 +2965,7 @@ msgstr ""
 
 #: src/translations.h:170
 msgid "Arabic"
-msgstr "Árabe"
+msgstr ""
 
 #: src/translations.h:171
 msgid "Arabic Moon Stations"
@@ -3012,7 +2973,7 @@ msgstr ""
 
 #: src/translations.h:172
 msgid "Aztec"
-msgstr "Azteca"
+msgstr ""
 
 #: src/translations.h:173
 msgid "Boorong"
@@ -3020,15 +2981,15 @@ msgstr ""
 
 #: src/translations.h:174
 msgid "Chinese"
-msgstr "Chinu"
+msgstr ""
 
 #: src/translations.h:175
 msgid "Egyptian"
-msgstr "Exipciu"
+msgstr ""
 
 #: src/translations.h:176
 msgid "Inuit"
-msgstr "Inuit"
+msgstr ""
 
 #: src/translations.h:177
 msgid "Indian Vedic"
@@ -3040,15 +3001,15 @@ msgstr ""
 
 #: src/translations.h:179
 msgid "Korean"
-msgstr "Coreanu"
+msgstr ""
 
 #: src/translations.h:180
 msgid "Lakota"
-msgstr "Lakota"
+msgstr ""
 
 #: src/translations.h:181
 msgid "Maori"
-msgstr "Maorí"
+msgstr ""
 
 #: src/translations.h:182
 msgid "Mongolian"
@@ -3056,15 +3017,15 @@ msgstr ""
 
 #: src/translations.h:183
 msgid "Navajo"
-msgstr "Navayu"
+msgstr ""
 
 #: src/translations.h:184
 msgid "Norse"
-msgstr "Nórdicu"
+msgstr ""
 
 #: src/translations.h:185
 msgid "Polynesian"
-msgstr "Polinesiu"
+msgstr ""
 
 #: src/translations.h:186
 msgid "Romanian"
@@ -3072,7 +3033,7 @@ msgstr ""
 
 #: src/translations.h:187
 msgid "Sami"
-msgstr "Sami"
+msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:189
@@ -3085,7 +3046,7 @@ msgstr ""
 
 #: src/translations.h:191
 msgid "Tupi-Guarani"
-msgstr "Tupí-guaraní"
+msgstr ""
 
 #: src/translations.h:192
 msgid "Tongan"
@@ -3093,7 +3054,7 @@ msgstr ""
 
 #: src/translations.h:193
 msgid "Western"
-msgstr "Occidental"
+msgstr ""
 
 #: src/translations.h:194
 msgid "Western (H.A.Rey)"
@@ -3107,22 +3068,22 @@ msgstr ""
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:202
 msgid "Trees"
-msgstr "Árboles"
+msgstr ""
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:204 plugins/ArchaeoLines/src/ArchaeoLines.cpp:782
 msgid "Moon"
-msgstr "Lluna"
+msgstr ""
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
 #: src/translations.h:206
 msgid "Hurricane"
-msgstr "Huracán"
+msgstr ""
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:208
 msgid "Ocean"
-msgstr "Océanu"
+msgstr ""
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
 #: src/translations.h:210
@@ -3132,27 +3093,27 @@ msgstr ""
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:212 plugins/ArchaeoLines/src/ArchaeoLines.cpp:794
 msgid "Mars"
-msgstr "Marte"
+msgstr ""
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:214 plugins/ArchaeoLines/src/ArchaeoLines.cpp:797
 msgid "Jupiter"
-msgstr "Xúpiter"
+msgstr ""
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:216 plugins/ArchaeoLines/src/ArchaeoLines.cpp:800
 msgid "Saturn"
-msgstr "Saturnu"
+msgstr ""
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:218
 msgid "Uranus"
-msgstr "Uranu"
+msgstr ""
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:220
 msgid "Neptune"
-msgstr "Neptunu"
+msgstr ""
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:222
@@ -3197,7 +3158,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:244
 msgid "Screensaver"
-msgstr "Salvapantallas"
+msgstr ""
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:246
@@ -3212,7 +3173,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:250
 msgid "Zodiac"
-msgstr "Zodiacu"
+msgstr ""
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:252
@@ -3534,159 +3495,159 @@ msgstr ""
 
 #: src/translations.h:348
 msgid "Andorra"
-msgstr "Andorra"
+msgstr ""
 
 #: src/translations.h:349
 msgid "United Arab Emirates"
-msgstr "Emiratos Árabes Xuníos"
+msgstr ""
 
 #: src/translations.h:350
 msgid "Afghanistan"
-msgstr "Afganistán"
+msgstr ""
 
 #: src/translations.h:351
 msgid "Antigua and Barbuda"
-msgstr "Antigua y Barbuda"
+msgstr ""
 
 #: src/translations.h:352
 msgid "Anguilla"
-msgstr "Anguila"
+msgstr ""
 
 #: src/translations.h:353
 msgid "Albania"
-msgstr "Albania"
+msgstr ""
 
 #: src/translations.h:354
 msgid "Armenia"
-msgstr "Armenia"
+msgstr ""
 
 #: src/translations.h:355
 msgid "Netherlands Antilles"
-msgstr "Antilles Holandeses"
+msgstr ""
 
 #: src/translations.h:356
 msgid "Angola"
-msgstr "Angola"
+msgstr ""
 
 #: src/translations.h:357
 msgid "Antarctica"
-msgstr "Antártida"
+msgstr ""
 
 #: src/translations.h:358
 msgid "Argentina"
-msgstr "Arxentina"
+msgstr ""
 
 #: src/translations.h:359
 msgid "American Samoa"
-msgstr "Samoa Americana"
+msgstr ""
 
 #: src/translations.h:360
 msgid "Austria"
-msgstr "Austria"
+msgstr ""
 
 #: src/translations.h:361
 msgid "Australia"
-msgstr "Australia"
+msgstr ""
 
 #: src/translations.h:362
 msgid "Aruba"
-msgstr "Aruba"
+msgstr ""
 
 #: src/translations.h:363
 msgid "Azerbaijan"
-msgstr "Azerbaixán"
+msgstr ""
 
 #: src/translations.h:364
 msgid "Bosnia and Herzegowina"
-msgstr "Bosnia and Herzegowina"
+msgstr ""
 
 #: src/translations.h:365
 msgid "Barbados"
-msgstr "Barbados"
+msgstr ""
 
 #: src/translations.h:366
 msgid "Bangladesh"
-msgstr "Bangladesh"
+msgstr ""
 
 #: src/translations.h:367
 msgid "Belgium"
-msgstr "Bélxica"
+msgstr ""
 
 #: src/translations.h:368
 msgid "Burkina Faso"
-msgstr "Burkina Faso"
+msgstr ""
 
 #: src/translations.h:369
 msgid "Bulgaria"
-msgstr "Bulgaria"
+msgstr ""
 
 #: src/translations.h:370
 msgid "Bahrain"
-msgstr "Baḥréin"
+msgstr ""
 
 #: src/translations.h:371
 msgid "Burundi"
-msgstr "Burundi"
+msgstr ""
 
 #: src/translations.h:372
 msgid "Benin"
-msgstr "Benin"
+msgstr ""
 
 #: src/translations.h:373
 msgid "Bermuda"
-msgstr "Bermuda"
+msgstr ""
 
 #: src/translations.h:374
 msgid "Brunei Darussalam"
-msgstr "Brunei Darussalam"
+msgstr ""
 
 #: src/translations.h:375
 msgid "Bolivia"
-msgstr "Bolivia"
+msgstr ""
 
 #: src/translations.h:376
 msgid "Brazil"
-msgstr "Brazil"
+msgstr ""
 
 #: src/translations.h:377
 msgid "Bahamas"
-msgstr "Bahamas"
+msgstr ""
 
 #: src/translations.h:378
 msgid "Bhutan"
-msgstr "Bhutan"
+msgstr ""
 
 #: src/translations.h:379
 msgid "Bouvet Island"
-msgstr "Bouvet Island"
+msgstr ""
 
 #: src/translations.h:380
 msgid "Botswana"
-msgstr "Botswana"
+msgstr ""
 
 #: src/translations.h:381
 msgid "Belarus"
-msgstr "Belarus"
+msgstr ""
 
 #: src/translations.h:382
 msgid "Belize"
-msgstr "Belize"
+msgstr ""
 
 #: src/translations.h:383
 msgid "Canada"
-msgstr "Canada"
+msgstr ""
 
 #: src/translations.h:384
 msgid "Cocos Islands"
-msgstr "Cocos Islands"
+msgstr ""
 
 #: src/translations.h:385
 msgid "Democratic Republic of the Congo"
-msgstr "Democratic Republic of the Congo"
+msgstr ""
 
 #: src/translations.h:386
 msgid "Central African Republic"
-msgstr "Central African Republic"
+msgstr ""
 
 #: src/translations.h:387
 msgid "Republic of the Congo"
@@ -3694,39 +3655,39 @@ msgstr ""
 
 #: src/translations.h:388
 msgid "Switzerland"
-msgstr "Switzerland"
+msgstr ""
 
 #: src/translations.h:389
 msgid "Cote d'Ivoire"
-msgstr "Cote d'Ivoire"
+msgstr ""
 
 #: src/translations.h:390
 msgid "Cook Islands"
-msgstr "Cook Islands"
+msgstr ""
 
 #: src/translations.h:391
 msgid "Chile"
-msgstr "Chile"
+msgstr ""
 
 #: src/translations.h:392
 msgid "Cameroon"
-msgstr "Cameroon"
+msgstr ""
 
 #: src/translations.h:393
 msgid "China"
-msgstr "China"
+msgstr ""
 
 #: src/translations.h:394
 msgid "Colombia"
-msgstr "Colombia"
+msgstr ""
 
 #: src/translations.h:395
 msgid "Costa Rica"
-msgstr "Costa Rica"
+msgstr ""
 
 #: src/translations.h:396
 msgid "Serbia and Montenegro"
-msgstr "Serbia and Montenegro"
+msgstr ""
 
 #: src/translations.h:397
 msgid "Montenegro"
@@ -3734,771 +3695,771 @@ msgstr ""
 
 #: src/translations.h:398
 msgid "Cuba"
-msgstr "Cuba"
+msgstr ""
 
 #: src/translations.h:399
 msgid "Cape Verde"
-msgstr "Cape Verde"
+msgstr ""
 
 #: src/translations.h:400
 msgid "Christmas Island"
-msgstr "Christmas Island"
+msgstr ""
 
 #: src/translations.h:401
 msgid "Cyprus"
-msgstr "Cyprus"
+msgstr ""
 
 #: src/translations.h:402
 msgid "Czech Republic"
-msgstr "Czech Republic"
+msgstr ""
 
 #: src/translations.h:403
 msgid "Germany"
-msgstr "Germany"
+msgstr ""
 
 #: src/translations.h:404
 msgid "Djibouti"
-msgstr "Djibouti"
+msgstr ""
 
 #: src/translations.h:405
 msgid "Denmark"
-msgstr "Denmark"
+msgstr ""
 
 #: src/translations.h:406
 msgid "Dominica"
-msgstr "Dominica"
+msgstr ""
 
 #: src/translations.h:407
 msgid "Dominican Republic"
-msgstr "Dominican Republic"
+msgstr ""
 
 #: src/translations.h:408
 msgid "Algeria"
-msgstr "Algeria"
+msgstr ""
 
 #: src/translations.h:409
 msgid "Ecuador"
-msgstr "Ecuador"
+msgstr ""
 
 #: src/translations.h:410
 msgid "Estonia"
-msgstr "Estonia"
+msgstr ""
 
 #: src/translations.h:411
 msgid "Egypt"
-msgstr "Egypt"
+msgstr ""
 
 #: src/translations.h:412
 msgid "Western Sahara"
-msgstr "Western Sahara"
+msgstr ""
 
 #: src/translations.h:413
 msgid "Eritrea"
-msgstr "Eritrea"
+msgstr ""
 
 #: src/translations.h:414
 msgid "Spain"
-msgstr "Spain"
+msgstr ""
 
 #: src/translations.h:415
 msgid "Ethiopia"
-msgstr "Ethiopia"
+msgstr ""
 
 #: src/translations.h:416
 msgid "Finland"
-msgstr "Finland"
+msgstr ""
 
 #: src/translations.h:417
 msgid "Fiji"
-msgstr "Fiji"
+msgstr ""
 
 #: src/translations.h:418
 msgid "Falkland Islands"
-msgstr "Falkland Islands"
+msgstr ""
 
 #: src/translations.h:419
 msgid "Micronesia"
-msgstr "Micronesia"
+msgstr ""
 
 #: src/translations.h:420
 msgid "Faroe Islands"
-msgstr "Faroe Islands"
+msgstr ""
 
 #: src/translations.h:421
 msgid "France"
-msgstr "France"
+msgstr ""
 
 #: src/translations.h:422
 msgid "Gabon"
-msgstr "Gabon"
+msgstr ""
 
 #: src/translations.h:423
 msgid "United Kingdom"
-msgstr "United Kingdom"
+msgstr ""
 
 #: src/translations.h:424
 msgid "Grenada"
-msgstr "Grenada"
+msgstr ""
 
 #: src/translations.h:425
 msgid "Georgia"
-msgstr "Georgia"
+msgstr ""
 
 #: src/translations.h:426
 msgid "French Guiana"
-msgstr "French Guiana"
+msgstr ""
 
 #: src/translations.h:427
 msgid "Ghana"
-msgstr "Ghana"
+msgstr ""
 
 #: src/translations.h:428
 msgid "Gibraltar"
-msgstr "Gibraltar"
+msgstr ""
 
 #: src/translations.h:429
 msgid "Greenland"
-msgstr "Greenland"
+msgstr ""
 
 #: src/translations.h:430
 msgid "Gambia"
-msgstr "Gambia"
+msgstr ""
 
 #: src/translations.h:431
 msgid "Guinea"
-msgstr "Guinea"
+msgstr ""
 
 #: src/translations.h:432
 msgid "Guadeloupe"
-msgstr "Guadeloupe"
+msgstr ""
 
 #: src/translations.h:433
 msgid "Equatorial Guinea"
-msgstr "Equatorial Guinea"
+msgstr ""
 
 #: src/translations.h:434
 msgid "Greece"
-msgstr "Greece"
+msgstr ""
 
 #: src/translations.h:435
 msgid "South Georgia and the South Sandwich Islands"
-msgstr "South Georgia and the South Sandwich Islands"
+msgstr ""
 
 #: src/translations.h:436
 msgid "Guatemala"
-msgstr "Guatemala"
+msgstr ""
 
 #: src/translations.h:437
 msgid "Guam"
-msgstr "Guam"
+msgstr ""
 
 #: src/translations.h:438
 msgid "Guinea-Bissau"
-msgstr "Guinea-Bissau"
+msgstr ""
 
 #: src/translations.h:439
 msgid "Guyana"
-msgstr "Guyana"
+msgstr ""
 
 #: src/translations.h:440
 msgid "Hong Kong"
-msgstr "Hong Kong"
+msgstr ""
 
 #: src/translations.h:441
 msgid "Heard Island and McDonald Islands"
-msgstr "Heard Island and McDonald Islands"
+msgstr ""
 
 #: src/translations.h:442
 msgid "Honduras"
-msgstr "Honduras"
+msgstr ""
 
 #: src/translations.h:443
 msgid "Croatia"
-msgstr "Croatia"
+msgstr ""
 
 #: src/translations.h:444
 msgid "Haiti"
-msgstr "Haiti"
+msgstr ""
 
 #: src/translations.h:445
 msgid "Hungary"
-msgstr "Hungary"
+msgstr ""
 
 #: src/translations.h:446
 msgid "Indonesia"
-msgstr "Indonesia"
+msgstr ""
 
 #: src/translations.h:447
 msgid "Ireland"
-msgstr "Ireland"
+msgstr ""
 
 #: src/translations.h:448
 msgid "Israel"
-msgstr "Israel"
+msgstr ""
 
 #: src/translations.h:449
 msgid "India"
-msgstr "India"
+msgstr ""
 
 #: src/translations.h:450
 msgid "British Indian Ocean Territory"
-msgstr "British Indian Ocean Territory"
+msgstr ""
 
 #: src/translations.h:451
 msgid "Iraq"
-msgstr "Iraq"
+msgstr ""
 
 #: src/translations.h:452
 msgid "Iran"
-msgstr "Iran"
+msgstr ""
 
 #: src/translations.h:453
 msgid "Iceland"
-msgstr "Iceland"
+msgstr ""
 
 #: src/translations.h:454
 msgid "Italy"
-msgstr "Italy"
+msgstr ""
 
 #: src/translations.h:455
 msgid "Jamaica"
-msgstr "Jamaica"
+msgstr ""
 
 #: src/translations.h:456
 msgid "Jordan"
-msgstr "Jordan"
+msgstr ""
 
 #: src/translations.h:457
 msgid "Japan"
-msgstr "Japan"
+msgstr ""
 
 #: src/translations.h:458
 msgid "Kenya"
-msgstr "Kenya"
+msgstr ""
 
 #: src/translations.h:459
 msgid "Kyrgyzstan"
-msgstr "Kyrgyzstan"
+msgstr ""
 
 #: src/translations.h:460
 msgid "Cambodia"
-msgstr "Cambodia"
+msgstr ""
 
 #: src/translations.h:461
 msgid "Kiribati"
-msgstr "Kiribati"
+msgstr ""
 
 #: src/translations.h:462
 msgid "Comoros"
-msgstr "Comoros"
+msgstr ""
 
 #: src/translations.h:463
 msgid "Saint Kitts and Nevis"
-msgstr "Saint Kitts and Nevis"
+msgstr ""
 
 #: src/translations.h:464
 msgid "Democratic People's Republic of Korea"
-msgstr "Democratic People's Republic of Korea"
+msgstr ""
 
 #: src/translations.h:465
 msgid "Republic of Korea"
-msgstr "Republic of Korea"
+msgstr ""
 
 #: src/translations.h:466
 msgid "Kuwait"
-msgstr "Kuwait"
+msgstr ""
 
 #: src/translations.h:467
 msgid "Cayman Islands"
-msgstr "Cayman Islands"
+msgstr ""
 
 #: src/translations.h:468
 msgid "Kazakhstan"
-msgstr "Kazakhstan"
+msgstr ""
 
 #: src/translations.h:469
 msgid "Lao"
-msgstr "Lao"
+msgstr ""
 
 #: src/translations.h:470
 msgid "Lebanon"
-msgstr "Lebanon"
+msgstr ""
 
 #: src/translations.h:471
 msgid "Saint Lucia"
-msgstr "Saint Lucia"
+msgstr ""
 
 #: src/translations.h:472
 msgid "Liechtenstein"
-msgstr "Liechtenstein"
+msgstr ""
 
 #: src/translations.h:473
 msgid "Sri Lanka"
-msgstr "Sri Lanka"
+msgstr ""
 
 #: src/translations.h:474
 msgid "Liberia"
-msgstr "Liberia"
+msgstr ""
 
 #: src/translations.h:475
 msgid "Lesotho"
-msgstr "Lesotho"
+msgstr ""
 
 #: src/translations.h:476
 msgid "Lithuania"
-msgstr "Lithuania"
+msgstr ""
 
 #: src/translations.h:477
 msgid "Luxembourg"
-msgstr "Luxembourg"
+msgstr ""
 
 #: src/translations.h:478
 msgid "Latvia"
-msgstr "Latvia"
+msgstr ""
 
 #: src/translations.h:479
 msgid "Libyan Arab Jamahiriya"
-msgstr "Libyan Arab Jamahiriya"
+msgstr ""
 
 #: src/translations.h:480
 msgid "Morocco"
-msgstr "Morocco"
+msgstr ""
 
 #: src/translations.h:481
 msgid "Monaco"
-msgstr "Monaco"
+msgstr ""
 
 #: src/translations.h:482
 msgid "Moldova"
-msgstr "Moldova"
+msgstr ""
 
 #: src/translations.h:483
 msgid "Madagascar"
-msgstr "Madagascar"
+msgstr ""
 
 #: src/translations.h:484
 msgid "Marshall Islands"
-msgstr "Marshall Islands"
+msgstr ""
 
 #: src/translations.h:485
 msgid "Macedonia"
-msgstr "Macedonia"
+msgstr ""
 
 #: src/translations.h:486
 msgid "Mali"
-msgstr "Mali"
+msgstr ""
 
 #: src/translations.h:487
 msgid "Myanmar"
-msgstr "Myanmar"
+msgstr ""
 
 #: src/translations.h:488
 msgid "Mongolia"
-msgstr "Mongolia"
+msgstr ""
 
 #: src/translations.h:489
 msgid "Macau"
-msgstr "Macau"
+msgstr ""
 
 #: src/translations.h:490
 msgid "Northern Mariana Islands"
-msgstr "Northern Mariana Islands"
+msgstr ""
 
 #: src/translations.h:491
 msgid "Martinique"
-msgstr "Martinique"
+msgstr ""
 
 #: src/translations.h:492
 msgid "Mauritania"
-msgstr "Mauritania"
+msgstr ""
 
 #: src/translations.h:493
 msgid "Montserrat"
-msgstr "Montserrat"
+msgstr ""
 
 #: src/translations.h:494
 msgid "Malta"
-msgstr "Malta"
+msgstr ""
 
 #: src/translations.h:495
 msgid "Mauritius"
-msgstr "Mauritius"
+msgstr ""
 
 #: src/translations.h:496
 msgid "Maldives"
-msgstr "Maldives"
+msgstr ""
 
 #: src/translations.h:497
 msgid "Malawi"
-msgstr "Malawi"
+msgstr ""
 
 #: src/translations.h:498
 msgid "Mexico"
-msgstr "Mexico"
+msgstr ""
 
 #: src/translations.h:499
 msgid "Malaysia"
-msgstr "Malaysia"
+msgstr ""
 
 #: src/translations.h:500
 msgid "Mozambique"
-msgstr "Mozambique"
+msgstr ""
 
 #: src/translations.h:501
 msgid "Namibia"
-msgstr "Namibia"
+msgstr ""
 
 #: src/translations.h:502
 msgid "New Caledonia"
-msgstr "New Caledonia"
+msgstr ""
 
 #: src/translations.h:503
 msgid "Niger"
-msgstr "Niger"
+msgstr ""
 
 #: src/translations.h:504
 msgid "Norfolk Island"
-msgstr "Norfolk Island"
+msgstr ""
 
 #: src/translations.h:505
 msgid "Nigeria"
-msgstr "Nigeria"
+msgstr ""
 
 #: src/translations.h:506
 msgid "Nicaragua"
-msgstr "Nicaragua"
+msgstr ""
 
 #: src/translations.h:507
 msgid "Netherlands"
-msgstr "Netherlands"
+msgstr ""
 
 #: src/translations.h:508
 msgid "Norway"
-msgstr "Norway"
+msgstr ""
 
 #: src/translations.h:509
 msgid "Nepal"
-msgstr "Nepal"
+msgstr ""
 
 #: src/translations.h:510
 msgid "Nauru"
-msgstr "Nauru"
+msgstr ""
 
 #: src/translations.h:511
 msgid "Niue"
-msgstr "Niue"
+msgstr ""
 
 #: src/translations.h:512
 msgid "New Zealand"
-msgstr "New Zealand"
+msgstr ""
 
 #: src/translations.h:513
 msgid "Oman"
-msgstr "Oman"
+msgstr ""
 
 #: src/translations.h:514
 msgid "Panama"
-msgstr "Panama"
+msgstr ""
 
 #: src/translations.h:515
 msgid "Peru"
-msgstr "Peru"
+msgstr ""
 
 #: src/translations.h:516
 msgid "French Polynesia"
-msgstr "French Polynesia"
+msgstr ""
 
 #: src/translations.h:517
 msgid "Papua New Guinea"
-msgstr "Papua New Guinea"
+msgstr ""
 
 #: src/translations.h:518
 msgid "Philippines"
-msgstr "Philippines"
+msgstr ""
 
 #: src/translations.h:519
 msgid "Pakistan"
-msgstr "Pakistan"
+msgstr ""
 
 #: src/translations.h:520
 msgid "Poland"
-msgstr "Poland"
+msgstr ""
 
 #: src/translations.h:521
 msgid "Saint Pierre and Miquelon"
-msgstr "Saint Pierre and Miquelon"
+msgstr ""
 
 #: src/translations.h:522
 msgid "Pitcairn"
-msgstr "Pitcairn"
+msgstr ""
 
 #: src/translations.h:523
 msgid "Puerto Rico"
-msgstr "Puerto Rico"
+msgstr ""
 
 #: src/translations.h:524
 msgid "Palestinian Territories"
-msgstr "Palestinian Territories"
+msgstr ""
 
 #: src/translations.h:525
 msgid "Portugal"
-msgstr "Portugal"
+msgstr ""
 
 #: src/translations.h:526
 msgid "Palau"
-msgstr "Palau"
+msgstr ""
 
 #: src/translations.h:527
 msgid "Paraguay"
-msgstr "Paraguay"
+msgstr ""
 
 #: src/translations.h:528
 msgid "Qatar"
-msgstr "Qatar"
+msgstr ""
 
 #: src/translations.h:529
 msgid "Réunion"
-msgstr "Réunion"
+msgstr ""
 
 #: src/translations.h:530
 msgid "Romania"
-msgstr "Romania"
+msgstr ""
 
 #: src/translations.h:531
 msgid "Serbia"
-msgstr "Serbia"
+msgstr ""
 
 #: src/translations.h:532
 msgid "Russian Federation"
-msgstr "Russian Federation"
+msgstr ""
 
 #: src/translations.h:533
 msgid "Rwanda"
-msgstr "Rwanda"
+msgstr ""
 
 #: src/translations.h:534
 msgid "Saudi Arabia"
-msgstr "Saudi Arabia"
+msgstr ""
 
 #: src/translations.h:535
 msgid "Solomon Islands"
-msgstr "Solomon Islands"
+msgstr ""
 
 #: src/translations.h:536
 msgid "Seychelles"
-msgstr "Seychelles"
+msgstr ""
 
 #: src/translations.h:537
 msgid "Sudan"
-msgstr "Sudan"
+msgstr ""
 
 #: src/translations.h:538
 msgid "Sweden"
-msgstr "Sweden"
+msgstr ""
 
 #: src/translations.h:539
 msgid "Singapore"
-msgstr "Singapore"
+msgstr ""
 
 #: src/translations.h:540
 msgid "Saint Helena"
-msgstr "Saint Helena"
+msgstr ""
 
 #: src/translations.h:541
 msgid "Slovenia"
-msgstr "Slovenia"
+msgstr ""
 
 #: src/translations.h:542
 msgid "Svalbard and Jan Mayen"
-msgstr "Svalbard and Jan Mayen"
+msgstr ""
 
 #: src/translations.h:543
 msgid "Slovakia"
-msgstr "Slovakia"
+msgstr ""
 
 #: src/translations.h:544
 msgid "Sierra Leone"
-msgstr "Sierra Leone"
+msgstr ""
 
 #: src/translations.h:545
 msgid "San Marino"
-msgstr "San Marino"
+msgstr ""
 
 #: src/translations.h:546
 msgid "Senegal"
-msgstr "Senegal"
+msgstr ""
 
 #: src/translations.h:547
 msgid "Somalia"
-msgstr "Somalia"
+msgstr ""
 
 #: src/translations.h:548
 msgid "Suriname"
-msgstr "Suriname"
+msgstr ""
 
 #: src/translations.h:549
 msgid "Sao Tome and Principe"
-msgstr "Sao Tome and Principe"
+msgstr ""
 
 #: src/translations.h:550
 msgid "El Salvador"
-msgstr "El Salvador"
+msgstr ""
 
 #: src/translations.h:551
 msgid "Syrian Arab Republic"
-msgstr "Syrian Arab Republic"
+msgstr ""
 
 #: src/translations.h:552
 msgid "Swaziland"
-msgstr "Swaziland"
+msgstr ""
 
 #: src/translations.h:553
 msgid "Turks and Caicos Islands"
-msgstr "Turks and Caicos Islands"
+msgstr ""
 
 #: src/translations.h:554
 msgid "Chad"
-msgstr "Chad"
+msgstr ""
 
 #: src/translations.h:555
 msgid "French Southern Territories"
-msgstr "French Southern Territories"
+msgstr ""
 
 #: src/translations.h:556
 msgid "Togo"
-msgstr "Togo"
+msgstr ""
 
 #: src/translations.h:557
 msgid "Thailand"
-msgstr "Thailand"
+msgstr ""
 
 #: src/translations.h:558
 msgid "Tajikistan"
-msgstr "Tajikistan"
+msgstr ""
 
 #: src/translations.h:559
 msgid "Tokelau"
-msgstr "Tokelau"
+msgstr ""
 
 #: src/translations.h:560
 msgid "East Timor"
-msgstr "East Timor"
+msgstr ""
 
 #: src/translations.h:561
 msgid "Turkmenistan"
-msgstr "Turkmenistan"
+msgstr ""
 
 #: src/translations.h:562
 msgid "Tunisia"
-msgstr "Tunisia"
+msgstr ""
 
 #: src/translations.h:563
 msgid "Tonga"
-msgstr "Tonga"
+msgstr ""
 
 #: src/translations.h:564
 msgid "Turkey"
-msgstr "Turkey"
+msgstr ""
 
 #: src/translations.h:565
 msgid "Trinidad and Tobago"
-msgstr "Trinidad and Tobago"
+msgstr ""
 
 #: src/translations.h:566
 msgid "Tuvalu"
-msgstr "Tuvalu"
+msgstr ""
 
 #: src/translations.h:567
 msgid "Taiwan"
-msgstr "Taiwan"
+msgstr ""
 
 #: src/translations.h:568
 msgid "Tanzania"
-msgstr "Tanzania"
+msgstr ""
 
 #: src/translations.h:569
 msgid "Ukraine"
-msgstr "Ukraine"
+msgstr ""
 
 #: src/translations.h:570
 msgid "Uganda"
-msgstr "Uganda"
+msgstr ""
 
 #: src/translations.h:571
 msgid "United States Minor Outlying Islands"
-msgstr "United States Minor Outlying Islands"
+msgstr ""
 
 #: src/translations.h:572
 msgid "United States"
-msgstr "United States"
+msgstr ""
 
 #: src/translations.h:573
 msgid "Uruguay"
-msgstr "Uruguay"
+msgstr ""
 
 #: src/translations.h:574
 msgid "Uzbekistan"
-msgstr "Uzbekistan"
+msgstr ""
 
 #: src/translations.h:575
 msgid "Vatican City State"
-msgstr "Vatican City State"
+msgstr ""
 
 #: src/translations.h:576
 msgid "Saint Vincent and the Grenadines"
-msgstr "Saint Vincent and the Grenadines"
+msgstr ""
 
 #: src/translations.h:577
 msgid "Venezuela"
-msgstr "Venezuela"
+msgstr ""
 
 #: src/translations.h:578
 msgid "British Virgin Islands"
-msgstr "British Virgin Islands"
+msgstr ""
 
 #: src/translations.h:579
 msgid "United States Virgin Islands"
-msgstr "United States Virgin Islands"
+msgstr ""
 
 #: src/translations.h:580
 msgid "Viet Nam"
-msgstr "Viet Nam"
+msgstr ""
 
 #: src/translations.h:581
 msgid "Vanuatu"
-msgstr "Vanuatu"
+msgstr ""
 
 #: src/translations.h:582
 msgid "Wallis and Futuna"
-msgstr "Wallis and Futuna"
+msgstr ""
 
 #: src/translations.h:583
 msgid "Samoa"
-msgstr "Samoa"
+msgstr ""
 
 #: src/translations.h:584
 msgid "Yemen"
-msgstr "Yemen"
+msgstr ""
 
 #: src/translations.h:585
 msgid "Mayotte"
-msgstr "Mayotte"
+msgstr ""
 
 #: src/translations.h:586
 msgid "Yugoslavia"
-msgstr "Yugoslavia"
+msgstr ""
 
 #: src/translations.h:587
 msgid "South Africa"
-msgstr "South Africa"
+msgstr ""
 
 #: src/translations.h:588
 msgid "Zambia"
-msgstr "Zambia"
+msgstr ""
 
 #: src/translations.h:589
 msgid "Zimbabwe"
-msgstr "Zimbabwe"
+msgstr ""
 
 #: src/translations.h:593
 msgid "&Undo"
@@ -4526,7 +4487,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:1206
 #: plugins/Oculars/src/ui_ocularDialog.h:1223
 msgid "Delete"
-msgstr "Esborrar"
+msgstr ""
 
 #: src/translations.h:599
 msgid "Select All"
@@ -4551,7 +4512,7 @@ msgstr ""
 #: src/translations.h:604 src/ui_configurationDialog.h:1290
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "Cancel"
-msgstr "Desaniciar"
+msgstr ""
 
 #: src/translations.h:605
 msgid "Files of type:"
@@ -4604,15 +4565,15 @@ msgstr ""
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Help"
-msgstr "Ayuda"
+msgstr ""
 
 #: src/ui_helpDialogGui.h:285
 msgid "About"
-msgstr "Tocante a"
+msgstr ""
 
 #: src/ui_helpDialogGui.h:287 src/ui_scriptConsole.h:375
 msgid "Log"
-msgstr "Rexistru"
+msgstr ""
 
 #: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1188
 msgid "Edit keyboard shortcuts..."
@@ -4620,12 +4581,12 @@ msgstr ""
 
 #: src/ui_helpDialogGui.h:291
 msgid "Refresh"
-msgstr "Refrescar"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:403
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 msgid "Location"
-msgstr "Allugamientu"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:407 src/ui_locationDialogGui.h:410
 msgid ""
@@ -4642,38 +4603,36 @@ msgstr ""
 
 #: src/ui_locationDialogGui.h:417
 msgid "Current location information"
-msgstr "Información del allugamientu actual"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:418
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:147
 msgid "Latitude:"
-msgstr "Llatitú:"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:420 src/ui_locationDialogGui.h:424
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
 msgstr ""
-"Pues inxertar valores en graos decimales o usando'l formatu gms, por exemplu "
-"+1d 12m 8s"
 
 #: src/ui_locationDialogGui.h:422
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:150
 msgid "Longitude:"
-msgstr "Llonxitú:"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:426
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:153
 msgid "Altitude:"
-msgstr "Altitú:"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:428
 msgid "Enter the altitude in meter"
-msgstr "Inxerta l'altitú en metros"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:430
 msgid " m"
-msgstr " m"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:431
 msgid "Return to default location"
@@ -4681,23 +4640,23 @@ msgstr ""
 
 #: src/ui_locationDialogGui.h:433
 msgid "Add to list"
-msgstr "Amestar a la llista"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:434
 msgid "Name/City:"
-msgstr "Nome/Ciudá:"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:435
 msgid "New Location"
-msgstr "Allugamientu Nuevu"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:436
 msgid "Country:"
-msgstr "País:"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:437
 msgid "Planet:"
-msgstr "Planeta:"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:438
 msgid "Use current location as default"
@@ -4709,7 +4668,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:614
 msgid "Find Object"
-msgstr "Guetar Oxetu"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:618 src/ui_searchDialogGui.h:622
 msgid "Use tab key for select of found items"
@@ -4717,99 +4676,99 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:627
 msgid "iota"
-msgstr "iota"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:630
 msgid "alpha"
-msgstr "alpha"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:633
 msgid "beta"
-msgstr "beta"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:636
 msgid "gamma"
-msgstr "gamma"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:639
 msgid "delta"
-msgstr "delta"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:642
 msgid "epsilon"
-msgstr "epsilon"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:645
 msgid "zeta"
-msgstr "zeta"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:648
 msgid "eta"
-msgstr "eta"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:651
 msgid "theta"
-msgstr "theta"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:654
 msgid "kappa"
-msgstr "kappa"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:657
 msgid "lambda"
-msgstr "lambda"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:660
 msgid "mu"
-msgstr "mu"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:663
 msgid "nu"
-msgstr "nu"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:666
 msgid "xi"
-msgstr "xi"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:669
 msgid "omicron"
-msgstr "omicron"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:672
 msgid "pi"
-msgstr "pi"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:675
 msgid "rho"
-msgstr "rho"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:678
 msgid "sigma"
-msgstr "sigma"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:681
 msgid "tau"
-msgstr "tau"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:684
 msgid "upsilon"
-msgstr "upsilon"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:687
 msgid "phi"
-msgstr "phi"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:690
 msgid "chi"
-msgstr "chi"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:693
 msgid "psi"
-msgstr "psi"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:696
 msgid "omega"
-msgstr "omega"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:698
 msgid "Greek letters for Bayer designations"
@@ -4827,7 +4786,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:704
 msgid "Position"
-msgstr "Posición"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:706
 msgid "Some objects may be found after activation respective plug-ins"
@@ -4835,7 +4794,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:708
 msgid "names in English"
-msgstr "nomes en Inglés"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:709
 msgid "Search in list..."
@@ -4844,7 +4803,7 @@ msgstr ""
 #: src/ui_searchDialogGui.h:710
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Lists"
-msgstr "Llistes"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:711
 msgid "On-line astronomical database SIMBAD"
@@ -4856,7 +4815,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:713
 msgid "Server:"
-msgstr "Sirvidor:"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:714
 msgid "Search options"
@@ -4871,21 +4830,21 @@ msgstr ""
 #: src/ui_configurationDialog.h:1291 src/ui_configurationDialog.h:1302
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
-msgstr "Opciones"
+msgstr ""
 
 #: src/ui_viewDialog.h:1587
 msgid "View"
-msgstr "Ver"
+msgstr ""
 
 #: src/ui_viewDialog.h:1590
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:259
 msgid "Absolute scale:"
-msgstr "Escala absoluta:"
+msgstr ""
 
 #: src/ui_viewDialog.h:1591
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:253
 msgid "Relative scale:"
-msgstr "Escala relativa:"
+msgstr ""
 
 #: src/ui_viewDialog.h:1592
 msgid "Milky Way brightness:"
@@ -4898,7 +4857,7 @@ msgstr ""
 #: src/ui_viewDialog.h:1594
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:265
 msgid "Twinkle:"
-msgstr "Brillu"
+msgstr ""
 
 #: src/ui_viewDialog.h:1596
 msgid "Limit the magnitude of stars"
@@ -4911,19 +4870,18 @@ msgstr ""
 #: src/ui_viewDialog.h:1600
 msgid "Dim faint stars when a very bright object is visible"
 msgstr ""
-"Escurecer les estrelles débiles cuando un oxetu mui rellumante ye visible"
 
 #: src/ui_viewDialog.h:1602
 msgid "Dynamic eye adaptation"
-msgstr "Adaptación visual dinámica"
+msgstr ""
 
 #: src/ui_viewDialog.h:1603 src/ui_viewDialog.h:1642 src/ui_viewDialog.h:1709
 msgid "Labels and Markers"
-msgstr "Etiquetes y Marcadores"
+msgstr ""
 
 #: src/ui_viewDialog.h:1605
 msgid "Show atmosphere"
-msgstr "Amosar atmósfera"
+msgstr ""
 
 #: src/ui_viewDialog.h:1609
 msgid ""
@@ -4956,11 +4914,11 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1618
 msgid "Show planet markers"
-msgstr "Amosar marcadores de planetes"
+msgstr ""
 
 #: src/ui_viewDialog.h:1619
 msgid "Show planet orbits"
-msgstr "Amosar órbites planetaries"
+msgstr ""
 
 #: src/ui_viewDialog.h:1621
 msgid ""
@@ -4990,7 +4948,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1631
 msgid "Simulate light speed"
-msgstr "Simular velocidá de la lluz"
+msgstr ""
 
 #: src/ui_viewDialog.h:1632
 msgid "Use custom settings of GRS:"
@@ -5018,7 +4976,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1646
 msgid "Shooting Stars"
-msgstr "Estrelles a la Fuga"
+msgstr ""
 
 #: src/ui_viewDialog.h:1648
 msgid "Hourly zenith rate"
@@ -5027,7 +4985,7 @@ msgstr ""
 #: src/ui_viewDialog.h:1650
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
-msgstr "ZHR:"
+msgstr ""
 
 #: src/ui_viewDialog.h:1652
 msgid "Display objects from catalogs"
@@ -5098,7 +5056,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1702
 msgid "Other"
-msgstr "Otru"
+msgstr ""
 
 #: src/ui_viewDialog.h:1704
 msgid "Planetary Nebulae"
@@ -5145,7 +5103,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1724
 msgid "Celestial Sphere"
-msgstr "Esfera Celeste"
+msgstr ""
 
 #: src/ui_viewDialog.h:1726
 msgid "Equatorial coordinates of J2000.0."
@@ -5265,7 +5223,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1797
 msgid "Projection"
-msgstr "Proyeición"
+msgstr ""
 
 #: src/ui_viewDialog.h:1798
 msgid "Vertical viewport offset"
@@ -5273,15 +5231,15 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1800
 msgid "Show ground"
-msgstr "Amosar suelu"
+msgstr ""
 
 #: src/ui_viewDialog.h:1801
 msgid "Use this landscape as default"
-msgstr "Usar esti paisaxe como predetermináu"
+msgstr ""
 
 #: src/ui_viewDialog.h:1802
 msgid "Use associated planet and position"
-msgstr "Usar posición y planeta asociáu"
+msgstr ""
 
 #: src/ui_viewDialog.h:1803
 msgid "Show landscape labels"
@@ -5289,7 +5247,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1804
 msgid "Show fog"
-msgstr "Amosar borrina"
+msgstr ""
 
 #: src/ui_viewDialog.h:1806
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
@@ -5322,15 +5280,15 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1820
 msgid "Add/remove landscapes..."
-msgstr "Amestar/desaniciar paisaxes..."
+msgstr ""
 
 #: src/ui_viewDialog.h:1822
 msgid "Use this sky culture as default"
-msgstr "Usar esta cultura estelar como predeterminada"
+msgstr ""
 
 #: src/ui_viewDialog.h:1823
 msgid "Show labels"
-msgstr "Amosar etiquetes"
+msgstr ""
 
 #: src/ui_viewDialog.h:1825
 msgid "Select if you want names abbreviated, original or translated"
@@ -5358,15 +5316,15 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1837
 msgid "Show boundaries"
-msgstr "Amosar llendes"
+msgstr ""
 
 #: src/ui_viewDialog.h:1839
 msgid "Visible"
-msgstr "Visible"
+msgstr ""
 
 #: src/ui_viewDialog.h:1844
 msgid "Sky"
-msgstr "Cielu"
+msgstr ""
 
 #: src/ui_viewDialog.h:1846
 msgctxt "Deep-Sky Objects"
@@ -5379,21 +5337,21 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1851
 msgid "Markings"
-msgstr "Marques"
+msgstr ""
 
 #: src/ui_viewDialog.h:1853
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:433
 msgid "Landscape"
-msgstr "Paisaxe"
+msgstr ""
 
 #: src/ui_viewDialog.h:1855
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:229
 msgid "Starlore"
-msgstr "Mitoloxía"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1087
 msgid "Configuration"
-msgstr "Configuración"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1089
 msgid "Language settings"
@@ -5446,15 +5404,13 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1107
 msgid "Default options"
-msgstr "Opciones predeterminaes"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1109
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
 msgstr ""
-"Guardar la configuración d'esta sesión pa que sea la mesma la próxima vez "
-"qu'anicies Stellarium"
 
 #: src/ui_configurationDialog.h:1111
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
@@ -5462,17 +5418,17 @@ msgstr ""
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:281
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:356
 msgid "Save settings"
-msgstr "Guardar preferencies"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1113
 msgid "Restore the default settings that came with Stellarium"
-msgstr "Restaurar la configuración predeterminada de Stellarium"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1115 plugins/FOV/src/ui_fovWindow.h:408
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:282
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:357
 msgid "Restore defaults"
-msgstr "Restaurar valores predeterminaos"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1116
 msgid ""
@@ -5480,46 +5436,43 @@ msgid ""
 "current options includes the current FOV and direction of view for use at "
 "next startup."
 msgstr ""
-"Pa restaurar les opciones predeterminaes hai que reaniciar Stellarium. "
-"Guarda toles opciones actuales, incluyíu FOV y la direición de vista pa "
-"usales nel siguiente aniciu."
 
 #: src/ui_configurationDialog.h:1118
 msgid "The width of your view when Stellarium starts"
-msgstr "Anchor de vista cuando s'anicia Stellarium"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1121
 msgid "The direction you're looking when Stellarium starts"
-msgstr "La direición de la vista de Stellarium al aniciar"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1123 src/ui_configurationDialog.h:1313
 msgid "Selected object information"
-msgstr "Información del oxetu seleicionáu"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1125
 msgid "Display all information available"
-msgstr "Amosar tola información disponible"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1127
 msgid "All available"
-msgstr "Toos disponibles"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1129
 msgid "Display no information"
-msgstr "Nun amosar información"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1131 plugins/Oculars/src/Oculars.cpp:2297
 #: plugins/Observability/src/Observability.cpp:205
 msgid "None"
-msgstr "Nengún"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1133
 msgid "Display less information"
-msgstr "Amosar menos información"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1135
 msgid "Short"
-msgstr "Curtiu"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1137
 msgid "Display user settings information"
@@ -5597,7 +5550,7 @@ msgstr ""
 #: src/ui_configurationDialog.h:1173
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:169
 msgid "Altitude/Azimuth"
-msgstr "Altitú/Azimut"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1174
 msgid "Distance"
@@ -5613,48 +5566,48 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1179
 msgid "Control"
-msgstr "Control"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1181
 msgid "Allow keyboard to pan and zoom"
-msgstr "Activar alloñar y averar col tecláu"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1183
 msgid "Enable keyboard navigation"
-msgstr "Activar navegación col tecláu"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1185
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr "Activar desplazar (calcar y arrastrar) y zoom (rueda) col mur"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1187
 msgid "Enable mouse navigation"
-msgstr "Activar navegación col mur"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1190
 msgid "Hides the mouse cursor when inactive"
-msgstr "Anubrir el cursor del mur cuando tea inactivu"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1192
 msgid "Mouse cursor timeout:"
-msgstr "Duración del cursor del mur:"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1194
 msgid "seconds"
-msgstr "segundos"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1196
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:192
 msgid "Startup date and time"
-msgstr "Data y hora nel aniciu"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1198
 msgid "Use a specific date and time when Stellarium starts up"
-msgstr "Usar data y hora específica cuando Stellarium anicia"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1200
 msgid "Other:"
-msgstr "Otru:"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1202
 msgid "Use current local date and time"
@@ -5662,27 +5615,25 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1204
 msgid "use current"
-msgstr "usar actual"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1206
 msgid "Starts Stellarium at system clock date and time"
-msgstr "Aniciar Stellarium cola hora y data del sistema"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1208
 msgid "System date and time"
-msgstr "Data y hora del sistema"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1210
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr ""
-"Afitar l'horariu de simulación a la siguiente instancia d'esta hora del día "
-"cuando Stellarium anicia"
 
 #: src/ui_configurationDialog.h:1212
 msgid "System date at:"
-msgstr "Data del sistema en:"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1213
 msgid "Time correction"
@@ -5694,43 +5645,41 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1218
 msgid "Planetarium options"
-msgstr "Opciones del planetariu"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1220
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
 msgstr ""
-"Úsase una distorsión d'espeyu esféricu cuando se proyeuta Stellarium nun "
-"espeyu esféricu de sistemes planetarios de baxu costu."
 
 #: src/ui_configurationDialog.h:1222
 msgid "Spheric mirror distortion"
-msgstr "Distorsión d'espeyu esféricu"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1224
 msgid "Mask out everything outside a central circle in the main view"
-msgstr "Anubrir tolo que tea fuera del círculu central na vista principal"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1226
 msgid "Disc viewport"
-msgstr "Ventana de discu"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1228 src/ui_configurationDialog.h:1231
 msgid "Hide other constellations when you click one"
-msgstr "Anubrir otres constelaciones cuando seleicione una"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1233
 msgid "Select single constellation"
-msgstr "Seleicionar una constelación"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1235
 msgid "Align labels with the horizon"
-msgstr "Alliniar etiquetes col horizonte"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1237
 msgid "Gravity labels"
-msgstr "Etiquetes de gravedá"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1239
 msgid "Toggle display backgrounds of the nebulae."
@@ -5742,11 +5691,11 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1243
 msgid "Toggle vertical and horizontal image flip buttons."
-msgstr "Intercambiar los botones de xiru d'imaxe vertical y horizontal."
+msgstr ""
 
 #: src/ui_configurationDialog.h:1245
 msgid "Show flip buttons"
-msgstr "Amosar los botones de xiru"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1247
 msgid ""
@@ -5797,13 +5746,10 @@ msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr ""
-"Al activalo, la tecla de \"Alloñar zoom automáticamente\" tamién volverá a "
-"la direición de la vista d'aniciu"
 
 #: src/ui_configurationDialog.h:1269
 msgid "Auto zoom out returns to initial direction of view"
 msgstr ""
-"Alloñar zoom automáticamente vuelve a la direición de la vista d'aniciu"
 
 #: src/ui_configurationDialog.h:1271
 msgid "Automatic change of landscape when planet is changed"
@@ -5815,118 +5761,116 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1274
 msgid "Screenshots"
-msgstr "Captures de pantalla"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1275
 msgid "Screenshot Directory"
-msgstr "Direutoriu de captures de pantalla"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1277
 msgid "Invert colors"
-msgstr "Invertir colores"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1278
 msgid "Star catalog updates"
-msgstr "Anovamientos de catálogos d'estrelles"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1280
 msgid "Click here to start downloading"
-msgstr "Calca equí pa entamar a descargar"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1282
 msgid "Download this file to view even more stars"
-msgstr "Descarga esti ficheru pa ver entá más estrelles"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1284
 msgid "Restart the download"
-msgstr "Reaniciar la descarga"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1286
 msgid "Retry"
-msgstr "Reintentar"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1288
 msgid "Stop the download. You can always restart it later"
-msgstr "Parar la descarga. Pues reaniciala llueu si quies"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1293
 msgid "Close window when script runs"
-msgstr "Zarrar ventana cuando s'execute un script"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1295
 msgid "Run the selected script"
-msgstr "Executar el script seleicionáu"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1299
 msgid "Stop a running script"
-msgstr "Parar un srcipt que ta corriendo"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1303
 msgid "Load at startup"
-msgstr "Cargar al aniciu"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1304
 msgid "configure"
-msgstr "configurar"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1309
 msgid "Main"
-msgstr "Principal"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1311
 msgid "Information"
-msgstr "Información"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1316
 msgid "Navigation"
-msgstr "Navegación"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1318
 msgid "Tools"
-msgstr "Ferramientes"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1320
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:486
 msgid "Scripts"
-msgstr "Scripts"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1322
 msgid "Plugins"
-msgstr "Plugins"
+msgstr ""
 
 #: src/ui_addRemoveLandscapesDialog.h:265
 msgid "Add/Remove Landscapes"
-msgstr "Amestar/Desaniciar Paisaxes"
+msgstr ""
 
 #: src/ui_addRemoveLandscapesDialog.h:267
 msgid "Add a new landscape"
-msgstr "Amestar un paisaxe nuevu"
+msgstr ""
 
 #: src/ui_addRemoveLandscapesDialog.h:268
 msgid "Install a new landscape from a ZIP archive..."
-msgstr "Instalar un paisaxe nuevu dende un archivador ZIP..."
+msgstr ""
 
 #: src/ui_addRemoveLandscapesDialog.h:269
 msgid "Switch to the new landscape after installation"
-msgstr "Cambiar al paisaxe nuevu dempués de la instalación"
+msgstr ""
 
 #: src/ui_addRemoveLandscapesDialog.h:272
 msgid "Remove an installed landscape"
-msgstr "Desaniciar un paisaxe instaláu"
+msgstr ""
 
 #: src/ui_addRemoveLandscapesDialog.h:274
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid "Remove"
-msgstr "Desaniciar"
+msgstr ""
 
 #: src/ui_addRemoveLandscapesDialog.h:275
 msgid ""
 "WARNING: Removing the selected landscape means deleting its files. This "
 "operation is irreversible."
 msgstr ""
-"CUIDÁU: Desaniciar el paisaxe seleicionáu implica esborrar los ficheros. "
-"Esta operación nun tien vuelta atrás."
 
 #: src/ui_shortcutsDialog.h:195
 msgid "Keyboard Shortcuts"
@@ -6052,7 +5996,7 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:381 plugins/TelescopeControl/src/ui_slewDialog.h:327
 msgid "..."
-msgstr "..."
+msgstr ""
 
 #: src/ui_astroCalcDialog.h:377
 msgid "Planetary positions every 5 minutes."
@@ -6156,15 +6100,15 @@ msgstr ""
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:138
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:232
 msgid "Angle Measure"
-msgstr "Midida d'Ángulos"
+msgstr ""
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:60
 msgid "Provides an angle measurement tool"
-msgstr "Apurre una ferramienta de midida d'ángulos"
+msgstr ""
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:138
 msgid "Angle measure"
-msgstr "Midida d'ángulos"
+msgstr ""
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:527
@@ -6374,20 +6318,20 @@ msgstr ""
 #: plugins/CompassMarks/src/CompassMarks.cpp:53
 #: plugins/CompassMarks/src/CompassMarks.cpp:96
 msgid "Compass Marks"
-msgstr "Marques de Brúxula"
+msgstr ""
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:56
 msgid "Displays compass bearing marks along the horizon"
-msgstr "Amuesa les marques de brúxula a lo llargo l'horizonte"
+msgstr ""
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:96
 msgid "Compass marks"
-msgstr "Marques de brúxula"
+msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:81 plugins/Oculars/src/Oculars.cpp:1483
 #: plugins/Oculars/src/ui_ocularDialog.h:1160
 msgid "Oculars"
-msgstr "Oculares"
+msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:84
 msgid ""
@@ -6451,11 +6395,11 @@ msgstr ""
 #: plugins/Oculars/src/Oculars.cpp:1484
 #: plugins/Oculars/src/ui_ocularDialog.h:1162
 msgid "Ocular view"
-msgstr "Vista ocular"
+msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1500
 msgid "Oculars popup menu"
-msgstr "Menú flotante d'oculares"
+msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1501
 msgid "Show crosshairs"
@@ -7015,34 +6959,30 @@ msgstr ""
 #: plugins/Satellites/src/Satellites.cpp:142
 #: plugins/Satellites/src/ui_satellitesDialog.h:777
 msgid "Satellites"
-msgstr "Satélites"
+msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:71
 msgid ""
 "Prediction of artificial satellite positions in Earth orbit based on NORAD "
 "TLE data"
 msgstr ""
-"Predicción de la posición de los satélites artificiales n'órbita terrestre "
-"según la base de datos NORAD TLE"
 
 #: plugins/Satellites/src/Satellites.cpp:143
 msgid "Satellite hints"
-msgstr "Posiciones de satélites"
+msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:144
 msgid "Satellite labels"
-msgstr "Etiquetes de satélites"
+msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:145
 msgid "Satellites configuration window"
-msgstr "Configuración de la ventana de satélites"
+msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:177
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr ""
-"El ficheru satellites.json yá nun ye compatible - usando'l ficheru por "
-"defeutu."
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
 #: plugins/Satellites/src/Satellites.cpp:1792
@@ -7717,31 +7657,29 @@ msgstr ""
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:169
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:178
 msgid "Telescope Control"
-msgstr "Control de Telescopiu"
+msgstr ""
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:81
 msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
 "computerized mount (a \"GoTo telescope\")."
 msgstr ""
-"Esti plug-in manda mensaxes \"slew\" a un telescopiu nun computerizáu (un "
-"telescopiu \"GoTo\")."
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:162
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:216
 #, qt-format
 msgid "Move telescope #%1 to selected object"
-msgstr "Mover telescopiu #%1 al oxetu seleicionáu"
+msgstr ""
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:168
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:220
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
-msgstr "Mover telescopiu #%1 al puntu nel centru de la pantalla"
+msgstr ""
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:178
 msgid "Move a telescope to a given set of coordinates"
-msgstr "Mover el telescopiu a les coordenaes definíes"
+msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:197
 msgid "Add New Telescope"
@@ -7930,7 +7868,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:331
 msgid "&HMS"
-msgstr "&HMS"
+msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:333
 msgid "Degrees-minutes-seconds format"
@@ -7938,7 +7876,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "&DMS"
-msgstr "&DMS"
+msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:337
 msgid "Decimal degrees"
@@ -7946,7 +7884,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:339
 msgid "D&ecimal"
-msgstr "D&ecimal"
+msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:340
 msgid "&Slew"
@@ -8072,7 +8010,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:394
 msgid "Telescopes Controlled"
@@ -8096,7 +8034,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
 msgid "GUI"
-msgstr "GUI"
+msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:410
 msgid "Show telescope labels"
@@ -8112,7 +8050,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
 msgid "Files"
-msgstr "Ficheros"
+msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Log telescope driver messages to files"
@@ -8140,7 +8078,7 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
-msgstr "Estaya Horaria"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:44
 msgid ""
@@ -8148,117 +8086,114 @@ msgid ""
 "configuration file. Allows setting the time zone and changing the way the "
 "time and the date are displayed in the bottom bar."
 msgstr ""
-"Un interfaz amañosu pa configurar les opciones más anubríes de Stellarium. "
-"Permite configurar la estaya horaria y camudar cómo s'amuesen la data y la "
-"hora na barra d'abaxo."
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:713
 msgid "January"
-msgstr "Xineru"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:713
 msgid "February"
-msgstr "Febreru"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:713
 msgid "March"
-msgstr "Marzu"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:713
 msgid "April"
-msgstr "Abril"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:713
 msgid "May"
-msgstr "Mayu"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:713
 msgid "June"
-msgstr "Xunu"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:713
 msgid "July"
-msgstr "Xunetu"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:713
 msgid "August"
-msgstr "Agostu"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:713
 msgid "September"
-msgstr "Setiembre"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:713
 msgid "October"
-msgstr "Ochobre"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:254
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:713
 msgid "November"
-msgstr "Payares"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:255
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:713
 msgid "December"
-msgstr "Avientu"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:267
 msgid "First week"
-msgstr "Primer selmana"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:268
 msgid "Second week"
-msgstr "Segunda selmana"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:269
 msgid "Third week"
-msgstr "Tercer selmana"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:270
 msgid "Fourth week"
-msgstr "Cuarta selmana"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:271
 msgid "Last week"
-msgstr "Cabera selmana"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:280
 msgid "Sunday"
-msgstr "Domingu"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:281
 msgid "Monday"
-msgstr "Llunes"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:282
 msgid "Tuesday"
-msgstr "Martes"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:283
 msgid "Wednesday"
-msgstr "Miércoles"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:284
 msgid "Thursday"
-msgstr "Xueves"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:285
 msgid "Friday"
-msgstr "Vienres"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:286
 msgid "Saturday"
-msgstr "Sábadu"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:106
 msgid "Time Zone plug-in"
@@ -8303,7 +8238,7 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:457
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:461
 msgid "Day:"
-msgstr "Día:"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:462
@@ -8314,7 +8249,7 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:463
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
 msgid "Date:"
-msgstr "Data:"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:460
 msgid "Daylight saving time end"
@@ -8374,40 +8309,38 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
 msgid "12-hour format"
-msgstr "Formatu 12-hores"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
 msgid "24-hour format"
-msgstr "Formatu 24-hores"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:200
 msgid "Date display format"
-msgstr "Formatu de data"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:401
 msgid "yyyy-mm-dd (ISO 8601)"
-msgstr "aaaa-mm-dd (ISO 8601)"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:402
 msgid "dd-mm-yyyy"
-msgstr "dd-mm-aaaa"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:403
 msgid "mm-dd-yyyy"
-msgstr "mm-dd-aaaa"
+msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:90
 msgid "Text User Interface"
-msgstr "Interfaz d'Usuariu de Testu"
+msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:93
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
 msgstr ""
-"Implementación del plugin d'Interfaz d'Usuariu de Testu serie 0.9.x, "
-"emplegáu en planetarios"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Solar System body"
@@ -8432,7 +8365,7 @@ msgstr ""
 #. TRANSLATORS: The current system time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:189
 msgid "system"
-msgstr "sistema"
+msgstr ""
 
 #. TRANSLATORS: A pre-set time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:191
@@ -8441,37 +8374,37 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:199
 msgid "mmddyyyy"
-msgstr "mmddaaaa"
+msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:199
 msgid "ddmmyyyy"
-msgstr "ddmmaaaa"
+msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:199
 msgid "yyyymmdd"
-msgstr "aaaammdd"
+msgstr ""
 
 #. TRANSLATORS: 12-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:208
 msgid "12h"
-msgstr "12h"
+msgstr ""
 
 #. TRANSLATORS: 24-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:210
 msgid "24h"
-msgstr "24h"
+msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:235
 msgid "Language"
-msgstr "Llingua"
+msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:249
 msgid "Show stars"
-msgstr "Amosar estrelles"
+msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:277
 msgid "Colors"
-msgstr "Colores"
+msgstr ""
 
 #. TRANSLATORS: Refers to constellation art
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
@@ -8480,7 +8413,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:353
 msgid "Nebula names"
-msgstr "Nomes nebuloses"
+msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:357
 msgid "Nebula hints"
@@ -8508,11 +8441,11 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:426
 msgid "Effects"
-msgstr "Efeutos"
+msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:440
 msgid "Manual zoom"
-msgstr "Zoom manual"
+msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:445
 msgid "Magnitude scaling multiplier"
@@ -8552,12 +8485,12 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:498
 msgid "CD/DVD script"
-msgstr "script CD/DVD"
+msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:506
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:510
 msgid "Administration"
-msgstr "Alministración"
+msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:515
 msgid "Load default configuration"
@@ -8577,12 +8510,12 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:72
 msgid "On"
-msgstr "On"
+msgstr ""
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:489
 msgid "Off"
-msgstr "Off"
+msgstr ""
 
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:109
 #, qt-format
@@ -8596,7 +8529,7 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:57
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:120
 msgid "Solar System Editor"
-msgstr "Editor del Sistema Solar"
+msgstr ""
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:60
 msgid ""
@@ -8642,7 +8575,7 @@ msgstr ""
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:100
 msgid "website"
-msgstr "páxina web"
+msgstr ""
 
 #. TRANSLATORS: IAU = International Astronomical Union
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:104
@@ -8660,15 +8593,15 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:511
 msgid "Import data"
-msgstr "Importar datos"
+msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:513
 msgid "Select the type"
-msgstr "Seleicionar el tipu"
+msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:516
 msgid "Select the source"
-msgstr "Seleicionar la fonte"
+msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:517
 msgid "Download a list of objects from the Internet"
@@ -9393,7 +9326,7 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:314
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:779
 msgid "Sun"
-msgstr "Sol"
+msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:314
 #: plugins/Exoplanets/src/Exoplanet.cpp:326
@@ -9411,11 +9344,11 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:324
 msgid "Period"
-msgstr "Periodu"
+msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:324
 msgid "days"
-msgstr "díes"
+msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:325
 #: plugins/Exoplanets/src/Exoplanet.cpp:326
@@ -10127,77 +10060,77 @@ msgstr ""
 #: plugins/Observability/src/Observability.cpp:174
 msgctxt "short month name"
 msgid "Jan"
-msgstr "Xin"
+msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:175
 msgctxt "short month name"
 msgid "Feb"
-msgstr "Feb"
+msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:176
 msgctxt "short month name"
 msgid "Mar"
-msgstr "Mar"
+msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:177
 msgctxt "short month name"
 msgid "Apr"
-msgstr "Abr"
+msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:178
 msgctxt "short month name"
 msgid "May"
-msgstr "May"
+msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:179
 msgctxt "short month name"
 msgid "Jun"
-msgstr "Xun"
+msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:180
 msgctxt "short month name"
 msgid "Jul"
-msgstr "Xnt"
+msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:181
 msgctxt "short month name"
 msgid "Aug"
-msgstr "Ago"
+msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:182
 msgctxt "short month name"
 msgid "Sep"
-msgstr "Set"
+msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:183
 msgctxt "short month name"
 msgid "Oct"
-msgstr "Och"
+msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:184
 msgctxt "short month name"
 msgid "Nov"
-msgstr "Pay"
+msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:185
 msgctxt "short month name"
 msgid "Dec"
-msgstr "Avi"
+msgstr ""
 
 #. TRANSLATORS: Short for "hours".
 #: plugins/Observability/src/Observability.cpp:188
 msgid "h"
-msgstr "h"
+msgstr ""
 
 #. TRANSLATORS: Short for "minutes".
 #: plugins/Observability/src/Observability.cpp:190
 msgid "m"
-msgstr "m"
+msgstr ""
 
 #. TRANSLATORS: Short for "seconds".
 #: plugins/Observability/src/Observability.cpp:192
 msgid "s"
-msgstr "s"
+msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:193
 #, qt-format
@@ -10221,7 +10154,7 @@ msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:197
 msgid "Circumpolar."
-msgstr "Circumpolar."
+msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:198
 msgid "No rise."
@@ -10299,22 +10232,22 @@ msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:217
 msgid "TODAY:"
-msgstr "GUEI:"
+msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:218
 msgid "THIS YEAR:"
-msgstr "ESTI AÑU:"
+msgstr ""
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:220
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
-msgstr "Lluna llena anterior: %1 %2 a les %3%4 "
+msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:221
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
-msgstr "Siguiente lluna llena: %1 %2 a les %3:%4. "
+msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:236
 #: plugins/Observability/src/Observability.cpp:237
@@ -12101,11 +12034,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:788
 msgid "Mercury"
-msgstr "Mercuriu"
+msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:791
 msgid "Venus"
-msgstr "Venus"
+msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:184
 msgid "ArchaeoLines Plug-in"
@@ -12286,576 +12219,3 @@ msgstr ""
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:358
 msgid "Current Planet: Saturn"
 msgstr ""
-
-#~ msgid "Planet: "
-#~ msgstr "Planeta: "
-
-#~ msgid "Ecliptic"
-#~ msgstr "Eclíptica"
-
-#~ msgid "Unknown"
-#~ msgstr "Desconocíu"
-
-#~ msgid "Undocumented type"
-#~ msgstr "Tipu non documentáu"
-
-#~ msgid "Cluster associated with nebulosity"
-#~ msgstr "Cúmulu asociáu con nebulosidá"
-
-#~ msgid "Planetary nebula"
-#~ msgstr "Nebulosa planetaria"
-
-#~ msgid "Nebula"
-#~ msgstr "Nebulosa"
-
-#~ msgid "Globular cluster"
-#~ msgstr "Cúmulu globular"
-
-#~ msgid "Open cluster"
-#~ msgstr "Cúmulu abiertu"
-
-#~ msgid "Galaxy"
-#~ msgstr "Galaxa"
-
-#, no-c-format, qt-format
-#~ msgid "Distance: %1AU"
-#~ msgstr "Distancia: %1AU"
-
-#, qt-format
-#~ msgid "Distance: %1 Light Years"
-#~ msgstr "Distancia: %1 años lluz"
-
-#, qt-format
-#~ msgid "Magnitude: <b>%1</b> (B-V: %2)"
-#~ msgstr "Magnitú: <b>%1</b> (B-V: %2)"
-
-#~ msgid ""
-#~ "The mercator projection is one of the most used world map projection. It "
-#~ "preserves direction and shapes but distorts size, in an increasing degree "
-#~ "away from the equator."
-#~ msgstr ""
-#~ "La proyeición Mercator ye una de les más emplegaes en tol mundu pa crear "
-#~ "mapes. Les direiciones y los contornos apaecen ensin deformación pero les "
-#~ "distancies defórmense de mou creciente según se consideren puntos cada vez "
-#~ "más alloñaos del ecuador."
-
-#, qt-format
-#~ msgid "RA/DE (of date): %1/%2"
-#~ msgstr "RA/DE (de data): %1/%2"
-
-#, qt-format
-#~ msgid "RA/DE (J2000): %1/%2"
-#~ msgstr "RA/DE (J2000): %1/%2"
-
-#~ msgid "Finished downloading all star catalogs!"
-#~ msgstr "¡Finó la descarga de tolos catálogos d'estrelles!"
-
-#~ msgid "When a Script is Running"
-#~ msgstr "Cuando ta corriendo un Script"
-
-#~ msgid "Nebulas background images"
-#~ msgstr "Imáxenes de fondu de nebuloses"
-
-#~ msgid "Planets labels"
-#~ msgstr "Etiquetes de plantetes"
-
-#~ msgid "Nebulas"
-#~ msgstr "Nebuloses"
-
-#~ msgid "Add 1 solar week"
-#~ msgstr "Añedir 1 selmana solar"
-
-#~ msgid "Subtract 1 sidereal week"
-#~ msgstr "Restar 1 selmana sideral"
-
-#~ msgid "Subtract 1 solar week"
-#~ msgstr "Restar 1 selmana solar"
-
-#~ msgid "Add 1 sidereal week"
-#~ msgstr "Añedir 1 selmana sideral"
-
-#~ msgid "Highest rate ever (1966 Leonids)"
-#~ msgstr "Tasa máxima algamada (1996 Leónides)"
-
-#~ msgid "This system does not support OpenGL."
-#~ msgstr "Esti sistema nun permite OpenGL."
-
-#~ msgid "Phobos"
-#~ msgstr "Fobos"
-
-#~ msgid "Deimos"
-#~ msgstr "Deimos"
-
-#~ msgid "Earth"
-#~ msgstr "Tierra"
-
-#~ msgid "Ceres"
-#~ msgstr "Ceres"
-
-#~ msgid "Callisto"
-#~ msgstr "Calistu"
-
-#~ msgid "Mimas"
-#~ msgstr "Mimes"
-
-#~ msgid "Ganymede"
-#~ msgstr "Ganímedes"
-
-#~ msgid "Europa"
-#~ msgstr "Europa"
-
-#~ msgid "Io"
-#~ msgstr "Io"
-
-#~ msgid "Juno"
-#~ msgstr "Juno"
-
-#~ msgid "Vesta"
-#~ msgstr "Vesta"
-
-#~ msgid "Pallas"
-#~ msgstr "Palas"
-
-#~ msgid "Dione"
-#~ msgstr "Dione"
-
-#~ msgid "Rhea"
-#~ msgstr "Rhea"
-
-#~ msgid "Enceladus"
-#~ msgstr "Encéladu"
-
-#~ msgid "Tethys"
-#~ msgstr "Tetis"
-
-#~ msgid "Titan"
-#~ msgstr "Titán"
-
-#~ msgid "Hyperion"
-#~ msgstr "Hiperión"
-
-#~ msgid "Iapetus"
-#~ msgstr "Xapetu"
-
-#~ msgid "Titania"
-#~ msgstr "Titania"
-
-#~ msgid "Umbriel"
-#~ msgstr "Umbriel"
-
-#~ msgid "Miranda"
-#~ msgstr "Miranda"
-
-#~ msgid "Eris"
-#~ msgstr "Eris"
-
-#~ msgid "Oberon"
-#~ msgstr "Oberón"
-
-#~ msgid "Charon"
-#~ msgstr "Caronte"
-
-#~ msgid "Pluto"
-#~ msgstr "Plutón"
-
-#~ msgid "Solar System Observer"
-#~ msgstr "Observador del Sistema Solar"
-
-#~ msgid "Ariel"
-#~ msgstr "Ariel"
-
-#~ msgid "Eros"
-#~ msgstr "Eros"
-
-#~ msgid "Chiron"
-#~ msgstr "Quirón"
-
-#~ msgid "Amor"
-#~ msgstr "Amor"
-
-#~ msgid "Hygiea"
-#~ msgstr "Hixa"
-
-#~ msgid "Metis"
-#~ msgstr "Metis"
-
-#~ msgid "Apophis"
-#~ msgstr "Apofis"
-
-#~ msgid "Iris"
-#~ msgstr "Iris"
-
-#~ msgid "Flora"
-#~ msgstr "Flora"
-
-#~ msgid "Astraea"
-#~ msgstr "Astrea"
-
-#~ msgid "Hebe"
-#~ msgstr "Hebe"
-
-#~ msgid "Hektor"
-#~ msgstr "Héctor"
-
-#~ msgid "Set Location "
-#~ msgstr "Afitar Allugamientu "
-
-#~ msgid "Set Time "
-#~ msgstr "Afitar Hora "
-
-#~ msgid "General "
-#~ msgstr "Xeneral "
-
-#~ msgid "Stars "
-#~ msgstr "Estrelles "
-
-#~ msgid "Effects "
-#~ msgstr "Efeutos "
-
-#~ msgid "Administration "
-#~ msgstr "Alministración "
-
-#~ msgid "Colors "
-#~ msgstr "Colores "
-
-#~ msgid "Scripts "
-#~ msgstr "Scripts "
-
-#~ msgid "Longitude: "
-#~ msgstr "Llonxitú: "
-
-#~ msgid "Latitude: "
-#~ msgstr "Llatitú: "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "Cuerpu del Sistema Solar: "
-
-#~ msgid "Altitude (m): "
-#~ msgstr "Altitú (m): "
-
-#~ msgid "Sidereal"
-#~ msgstr "Sideral"
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "Afitar Zona Horaria: "
-
-#~ msgid "Sky Time: "
-#~ msgstr "Hora Sideral: "
-
-#~ msgid "Calendar"
-#~ msgstr "Calendariu"
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr "Hora sideral afitada: "
-
-#~ msgid "Constellation Lines"
-#~ msgstr "Llinies de Constelaciones"
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "Magnitú Másima a Etiquetar: "
-
-#~ msgid "Twinkling: "
-#~ msgstr "Centelléu: "
-
-#~ msgid "Star Value Multiplier: "
-#~ msgstr "Multiplicador del Valor Estelar: "
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "Multiplicador de la Magintú Tamañu: "
-
-#~ msgid "Show: "
-#~ msgstr "Amosar: "
-
-#~ msgid "Sky Language: "
-#~ msgstr "Llingua Estelar: "
-
-#~ msgid "Sky Culture: "
-#~ msgstr "Cielu según Cultura: "
-
-#~ msgid "Date Display Format: "
-#~ msgstr "Formatu de Data: "
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Magnitú Llímite: "
-
-#~ msgid "Planet Trails"
-#~ msgstr "Trazes de Planetes"
-
-#~ msgid "Constellation Names"
-#~ msgstr "Nomes de Constelaciones"
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "Intensidá de Figures de Constelaciones"
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "Cuadrícula Ecuatorial"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "Cuadrícula Azimutal"
-
-#~ msgid "Meridian Line"
-#~ msgstr "Llinia del Meridianu"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "Órbites Planetaries"
-
-#~ msgid "Planet Names"
-#~ msgstr "Nomes de los Planetes"
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "Rellumu de la Vía Lláctea: "
-
-#~ msgid "Light Pollution Luminance: "
-#~ msgstr "Rellumu de la Contaminación Llumínica: "
-
-#~ msgid "Landscape: "
-#~ msgstr "Paisaxe: "
-
-#~ msgid "Manual zoom: "
-#~ msgstr "Zoom Manual: "
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "Regla de Tamañu d'Oxetos: "
-
-#~ msgid "Magnitude Scaling Multiplier: "
-#~ msgstr "Multiplicador de la Escala de la Magnitú: "
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "Llinia Eclíptica"
-
-#~ msgid "Equator Line"
-#~ msgstr "Llinia Ecuatorial"
-
-#~ msgid "Nebula Circles"
-#~ msgstr "Círculos de Nebuloses"
-
-#~ msgid "Nebula Names"
-#~ msgstr "Nomes de Nebuloses"
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "Llímite de Tiempu del Cursor: "
-
-#~ msgid "Correct for light travel time: "
-#~ msgstr "Correxir según retardu de la lluz: "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "Magnitú Máxima de Nebuloses a Etiquetar: "
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "Duración del Zoom: "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "Script CD/DVD: "
-
-#~ msgid "Local Script: "
-#~ msgstr "Script llocal: "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "Flecha de cursor abaxo pa cargar la llista."
-
-#~ msgid "USB Script: "
-#~ msgstr "Script USB: "
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr "Cargar Configuración Predeterminada: "
-
-#~ msgid "Select and exit to run."
-#~ msgstr "Seleiciona y sal pa executar."
-
-#~ msgid ":"
-#~ msgstr ":"
-
-#~ msgid "/"
-#~ msgstr "/"
-
-#~ msgid "Shut Down: "
-#~ msgstr "Apagar: "
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr "Guardar la Configuración Actual como Predeterminada: "
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "Afitar UI Llocal: "
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "Anovar per Internet: "
-
-#~ msgid "Cardinal Points"
-#~ msgstr "Puntos Cardinales"
-
-#~ msgid "Time Display Format: "
-#~ msgstr "Formatu d'Hora: "
-
-#~ msgid "Preset Time"
-#~ msgstr "Hora Afitada"
-
-#~ msgid "Actual Time"
-#~ msgstr "Hora Actual"
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "Hora Sideral al Aniciu: "
-
-#~ msgid "Use as default"
-#~ msgstr "Usar como predetermináu"
-
-#~ msgid "RA/Dec (J2000):"
-#~ msgstr "RA/Dec (J2000):"
-
-#~ msgid "Show planets"
-#~ msgstr "Amosar planetes"
-
-#~ msgid "Planets and satellites"
-#~ msgstr "Planetes y satélites"
-
-#~ msgid "10"
-#~ msgstr "10"
-
-#~ msgid "80"
-#~ msgstr "80"
-
-#~ msgid "Light pollution: "
-#~ msgstr "Contaminación llumínica "
-
-#~ msgid "Hourly zenith rate:"
-#~ msgstr "Tasa horaria cenital:"
-
-#~ msgid "0"
-#~ msgstr "0"
-
-#~ msgid "Scale Moon"
-#~ msgstr "Lluna a Escala"
-
-#~ msgid "10000"
-#~ msgstr "10000"
-
-#~ msgid "144000"
-#~ msgstr "144000"
-
-#~ msgid "Show lines"
-#~ msgstr "Amosar llinies"
-
-#~ msgid "Show art"
-#~ msgstr "Amosar figures"
-
-#~ msgid "Startup FOV: XX"
-#~ msgstr "Campu de visión (FOV) al aniciu: XX"
-
-#~ msgid "Startup direction of view: xxxx"
-#~ msgstr "Direición de la vista d'aniciu: xxx"
-
-#~ msgid "Art brightness: "
-#~ msgstr "Rellumu de les figures: "
-
-#~ msgid "Mouse cursor timeout (seconds):"
-#~ msgstr "Tiempu de visión del cursor (segundos):"
-
-#~ msgid "Get catalog x of y"
-#~ msgstr "Obtener catálogu x de y"
-
-#~ msgid "xxx"
-#~ msgstr "xxx"
-
-#~ msgid ""
-#~ "An interface for adding asteroids and comets to Stellarium. It can download "
-#~ "object lists from the Minor Planet Center's website and perform searches in "
-#~ "its online database. Still a work in progress."
-#~ msgstr ""
-#~ "Una interfaz p'amestar asteroides y cometes a Stellarium. Pue descargar "
-#~ "llistes d'oxetos y buscalos en \"Minor Planet Center\". Ta tovía en "
-#~ "desendolque."
-
-#~ msgid "Plugin Key Bindings"
-#~ msgstr "Botones de Complementos"
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "Llendes de Constelaciones"
-
-#~ msgid "Phoebe"
-#~ msgstr "Febe"
-
-#~ msgid "Day keys: "
-#~ msgstr "Tipu de díes: "
-
-#~ msgid "Form"
-#~ msgstr "Forma"
-
-#~ msgid "Thebe"
-#~ msgstr "Thebe"
-
-#~ msgid "Leda"
-#~ msgstr "Leda"
-
-#~ msgid "Ananke"
-#~ msgstr "Ananke"
-
-#~ msgid "Pasiphae"
-#~ msgstr "Pasiphae"
-
-#~ msgid "Lysithea"
-#~ msgstr "Lysithea"
-
-#~ msgid "Carme"
-#~ msgstr "Carme"
-
-#~ msgid "Amalthea"
-#~ msgstr "Amaltea"
-
-#~ msgid "Sinope"
-#~ msgstr "Sinope"
-
-#~ msgid "Himalia"
-#~ msgstr "Himalia"
-
-#~ msgid "Elara"
-#~ msgstr "Elara"
-
-#~ msgid "Larissa"
-#~ msgstr "Larissa"
-
-#~ msgid "Halimede"
-#~ msgstr "Halimede"
-
-#~ msgid "Galatea"
-#~ msgstr "Galatea"
-
-#~ msgid "Despina"
-#~ msgstr "Despina"
-
-#~ msgid "Thalassa"
-#~ msgstr "Thalassa"
-
-#~ msgid "Naiad"
-#~ msgstr "Náyade"
-
-#~ msgid "Nereid"
-#~ msgstr "Nereida"
-
-#~ msgid "Triton"
-#~ msgstr "Tritón"
-
-#~ msgid "Adrastea"
-#~ msgstr "Adrastea"
-
-#~ msgid "Proteus"
-#~ msgstr "Protéu"
-
-#~ msgid "Sao"
-#~ msgstr "Sao"
-
-#~ msgid "Laomedeia"
-#~ msgstr "Laomedeia"
-
-#~ msgid "Neso"
-#~ msgstr "Neso"
-
-#~ msgid "Psamathe"
-#~ msgstr "Psamathe"
-
-#~ msgid "Galactic Plane"
-#~ msgstr "Planu Galácticu"
-
-#~ msgid "Find Object or Position"
-#~ msgstr "Atopar Oxetu o Posición"
-
-#~ msgid "Program language"
-#~ msgstr "Llingua del programa"
