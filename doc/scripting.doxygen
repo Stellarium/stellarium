@@ -86,16 +86,14 @@ in the scripting engine too:
    - CompassMarks
    - Oculars
    - Satellites
-   - Supernovae
    - Quasars
    - Pulsars
    - Exoplanets
    - Observability
-   - Novae
    - EquationOfTime
    - FOV
    - NavStars
-   - MeteorShowersMgr
+   - MeteorShowersMgr (The public slots in this class are available via an object named \b MeteorShowers)
    - PointerCoordinates
    - ArchaeoLines
    .
