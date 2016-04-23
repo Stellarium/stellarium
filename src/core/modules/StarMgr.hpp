@@ -163,12 +163,12 @@ public slots:
 	Vec3f getLabelColor(void) const {return labelColor;}
 
 	//! Set display flag for Stars.
-	void setFlagStars(bool b) {starsFader=b;}
+	void setFlagStars(bool b) {starsFader=b; emit starsDisplayedChanged(b);}
 	//! Get display flag for Stars
 	bool getFlagStars(void) const {return starsFader==true;}
 
 	//! Set display flag for Star names (labels).
-	void setFlagLabels(bool b) {labelsFader=b;}
+	void setFlagLabels(bool b) {labelsFader=b; emit starLabelsDisplayedChanged(b);}
 	//! Get display flag for Star names (labels).
 	bool getFlagLabels(void) const {return labelsFader==true;}
 
