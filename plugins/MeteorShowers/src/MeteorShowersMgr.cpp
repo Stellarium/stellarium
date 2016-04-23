@@ -33,7 +33,6 @@
 #include "StelGui.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelProgressController.hpp"
-#include "StelTextureMgr.hpp"
 #include "StelUtils.hpp"
 #include "SporadicMeteorMgr.hpp"
 

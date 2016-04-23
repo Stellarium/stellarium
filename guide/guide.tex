@@ -156,7 +156,7 @@ License''.\\ % License information
 %	CHAPTER 4 (was called Configuration, but is really an in-depth description of the GUI panels.)
 %----------------------------------------------------------------------------------------
 
-\include{interface}
+\include{ch_interface}
 
 %----------------------------------------------------------------------------------------
 %	PART II
@@ -169,22 +169,23 @@ License''.\\ % License information
 %----------------------------------------------------------------------------------------
 \chapterimage{chapter-t3-bg} % Chapter heading image
 
-\input{advanced_use}
-\input{landscapes}
-\input{dso} %% Maybe DSO is more a reference chapter? --> Appendix in this case? Or split?
-
+\include{ch_advanced_use}
+\include{ch_landscapes}
+\include{ch_dso} %% Maybe DSO is more a reference chapter? --> Appendix in this case? Or split?
+\include{ch_skycultures}
 
 %----------------------------------------------------------------------------------------
 %	PART III
 %----------------------------------------------------------------------------------------
 \part{Extending Stellarium}
 \chapterimage{chapter-t3-bg} % Chapter heading image
-\input{plugins}
-\input{plugins_builtin}
-\input{plg_scenery3d}
-%%TODO: Satellites, MeteorShowers, Scenery3D&ArchaeoLines, TelescopeControl, Oculars
-\input{plugins_external} %% This must be written...
-\input{scripting}
+\include{plugins}
+\include{plg_interfaces} % TUI, RemoteControl, (2017: D-BUS?)
+\include{plg_catalogs}
+\include{plg_ArchaeoLines}
+\include{plg_scenery3d} % move to historical.
+\include{plg_atTheTelescope} % TODO: TelescopeControl, Oculars, various hardware projects with Raspberry, Arduino, ...
+\include{scripting}
 
 %----------------------------------------------------------------------------------------
 %	PART IV
@@ -195,25 +196,25 @@ License''.\\ % License information
 %	CHAPTER X (Astronomical Concepts)
 %----------------------------------------------------------------------------------------
 \chapterimage{chapter-t4-bg} % Chapter heading image
-\include{astronomical_concepts}
+\include{ch_astronomical_concepts}
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER X (Astronomical Phenomena)
 %----------------------------------------------------------------------------------------
 
-\include{astronomical_phenomena}
+\include{ch_astronomical_phenomena}
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER X (A Short Sky Guide)
 %----------------------------------------------------------------------------------------
 
-\include{sky_guide}
+\include{ch_sky_guide}
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER X (Exercises)
 %----------------------------------------------------------------------------------------
 \chapterimage{chapter-t4-bg} % Chapter heading image
-\include{exercises}
+\include{ch_exercises}
 
 %% TODO: Chapter "Stellarium at the Telescope"
 
@@ -232,44 +233,50 @@ License''.\\ % License information
 %	CHAPTER A (config.ini)
 %----------------------------------------------------------------------------------------
 
-\include{config_ini}
+\include{app_config_ini}
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER B (Bortle Scale) -- N.B. Try to keep this as Appendix "B" [for Bortle]
 %----------------------------------------------------------------------------------------
 
-\include{ref_bortle_scale}
+\include{app_bortle_scale}
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER C (Star Catalogue)
 %----------------------------------------------------------------------------------------
 
-\include{star_catalogue}
+\include{app_star_catalogue}
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER D (Scripting API.)
 %----------------------------------------------------------------------------------------
 
-\include{scripting_api}
+\include{app_scripting_api}
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER E (Accuracy, and some notes about used algorithms.)
 %----------------------------------------------------------------------------------------
 
-\include{accuracy}%% This could go to the front as section of a chapter "Scientific Use"
+\include{app_accuracy}%% This could go to the front as section of a chapter "Scientific Use"
 
 %----------------------------------------------------------------------------------------
-%	CHAPTER F (Acknowledgements)
+%	CHAPTER F (Acknowledgements) 
 %----------------------------------------------------------------------------------------
 
-\include{acknowledgements}
+\include{app_acknowledgements}
 
 %----------------------------------------------------------------------------------------
-%	CHAPTER G (License)
+%	CHAPTER G (License) -- N.B. "G" for GNU sounds also good.
 %----------------------------------------------------------------------------------------
 
-%\chapterimage{chapter-t1-bg} % Chapter heading image
-\include{license}
+\include{app_license}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER H (Hotkeys) -- N.B. "H" :-)
+%----------------------------------------------------------------------------------------
+
+\include{app_hotkeys}
+
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------

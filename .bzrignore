@@ -5,8 +5,6 @@ installers
 CMakeLists.txt.user
 Stellarium.bat
 stellarium.iss
-stellarium-patch.iss
-stellarium.exe.manifest
 ./doc/qt.tag
 ./locale
 ./util/locations-editor/Makefile
@@ -14,8 +12,7 @@ stellarium.exe.manifest
 ./util/locations-editor/locations-editor.pro.user
 ./util/copy-translations.bat
 ./plugins/Observability/doc
-default_config.ini
-updates.json
+data/default_config.ini
 data/Info.plist
 guide/*.aux
 guide/*.log

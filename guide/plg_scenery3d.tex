@@ -560,31 +560,6 @@ photo (landscape) as \texttt{start\_...} coordinates, or the correct coordinates
 and some carefully selected \texttt{start\_az\_alt\_fov} in case of certain view
 corridors (temple axes, \ldots).
 
-\subsection{Predefined views}
-You can also distribute some predefined views with your model in a
-\file{viewpoints.ini} file. See the provided ``Sterngarten'' scene for an
-example. These entries are not editable by the user through the interface. The
-user can always save his own views, they will be saved into the file
-\file{userviews.ini} in the user's Stellarium user directory, and are editable.
-
-\begin{configfile}[\scriptsize]
-[StoredViews]
-size=<int>              Defines how many entries are in this file. 
-                        Prefix each entry with its index!
-1/label=<string>        The name of this entry
-1/description=<string>  A description of this entry (can include HTML)
-1/position=<x,y,z,h>    The x,y,z grid coordinates 
-                        (like orig_* or start_* in scenery3d.ini) 
-                        + the current eye height h
-1/view_fov=<az_deg,alt_deg,fov_deg>  The view direction + FOV
-                                     (like start_az_alt_fov in scenery3d.ini)
-; an example for a second entry (note the 2 at the beginning of each line!)
-2/label       = Signs
-2/description = Two signs that describe the Sterngarten
-2/position    = 593155.2421,5333348.6304,325.7295809038,0.8805
-2/view_fov    = 84.315399,-8.187078,83.000000
-\end{configfile}
-
 \subsection{Concatenating OBJ files}
 \label{sec:scenery3d:concatenating}
 
@@ -651,7 +626,7 @@ be able to step on it, or to declare \texttt{ground=NULL} for a
 constant-height ground. Run Stellarum once and adjust the
 \texttt{start\_N}, \texttt{start\_E} and \texttt{zero\_ground\_height}.
 
-\subsubsection{Rotating OBJs with recognized survey points}
+\subsection{Rotating OBJs with recognized survey points}
 \label{sec:scenery3d:RotatingOBJ}
 
 If you have survey points measured in a survey grid plus a photomodel
@@ -663,6 +638,32 @@ points. However, this involves more math than can be described here;
 if you came that far, you likely know the required steps.  Here it
 really helps if you know how to operate automatic text processors like
 \program{AWK}.
+
+\section{Predefined views}
+You can also distribute some predefined views with your model in a
+\file{viewpoints.ini} file. See the provided ``Sterngarten'' scene for an
+example. These entries are not editable by the user through the interface. The
+user can always save his own views, they will be saved into the file
+\file{userviews.ini} in the user's Stellarium user directory, and are editable.
+
+\begin{configfile}[\scriptsize]
+[StoredViews]
+size=<int>              Defines how many entries are in this file. 
+                        Prefix each entry with its index!
+1/label=<string>        The name of this entry
+1/description=<string>  A description of this entry (can include HTML)
+1/position=<x,y,z,h>    The x,y,z grid coordinates 
+                        (like orig_* or start_* in scenery3d.ini) 
+                        + the current eye height h
+1/view_fov=<az_deg,alt_deg,fov_deg>  The view direction + FOV
+                                     (like start_az_alt_fov in scenery3d.ini)
+; an example for a second entry (note the 2 at the beginning of each line!)
+2/label       = Signs
+2/description = Two signs that describe the Sterngarten
+2/position    = 593155.2421,5333348.6304,325.7295809038,0.8805
+2/view_fov    = 84.315399,-8.187078,83.000000
+\end{configfile}
+
 
 \section*{Authors and Acknowledgements}
 \label{sec:scenery3d:Acknowledgments}

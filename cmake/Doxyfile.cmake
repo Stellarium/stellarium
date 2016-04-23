@@ -58,7 +58,7 @@ PROJECT_LOGO           = @PROJECT_SOURCE_DIR@/doc/images/stellarium-logo.png
 # entered, it will be relative to the location where doxygen was started. If
 # left blank the current directory will be used.
 
-OUTPUT_DIRECTORY       = doc-plugins
+OUTPUT_DIRECTORY       = doc
 
 # If the CREATE_SUBDIRS tag is set to YES, then doxygen will create 4096 sub-
 # directories (in 2 levels) under the output directory of each output format and
@@ -360,7 +360,7 @@ DISTRIBUTE_GROUP_DOC   = NO
 # \nosubgrouping command.
 # The default value is: YES.
 
-SUBGROUPING            = YES
+SUBGROUPING            = NO
 
 # When the INLINE_GROUPED_CLASSES tag is set to YES, classes, structs and unions
 # are shown inside the group in which they are included (e.g. using \ingroup)
@@ -431,13 +431,13 @@ EXTRACT_PRIVATE        = NO
 # scope will be included in the documentation.
 # The default value is: NO.
 
-EXTRACT_PACKAGE        = NO
+EXTRACT_PACKAGE        = YES
 
 # If the EXTRACT_STATIC tag is set to YES all static members of a file will be
 # included in the documentation.
 # The default value is: NO.
 
-EXTRACT_STATIC         = NO
+EXTRACT_STATIC         = YES
 
 # If the EXTRACT_LOCAL_CLASSES tag is set to YES classes (and structs) defined
 # locally in source files will be included in the documentation. If set to NO
@@ -445,7 +445,7 @@ EXTRACT_STATIC         = NO
 # for Java sources.
 # The default value is: YES.
 
-EXTRACT_LOCAL_CLASSES  = NO
+EXTRACT_LOCAL_CLASSES  = YES
 
 # This flag is only useful for Objective-C code. When set to YES local methods,
 # which are defined in the implementation section but not in the interface are
@@ -453,7 +453,7 @@ EXTRACT_LOCAL_CLASSES  = NO
 # included.
 # The default value is: NO.
 
-EXTRACT_LOCAL_METHODS  = NO
+EXTRACT_LOCAL_METHODS  = YES
 
 # If this flag is set to YES, the members of anonymous namespaces will be
 # extracted and appear in the documentation as a namespace called
@@ -462,7 +462,7 @@ EXTRACT_LOCAL_METHODS  = NO
 # are hidden.
 # The default value is: NO.
 
-EXTRACT_ANON_NSPACES   = NO
+EXTRACT_ANON_NSPACES   = YES
 
 # If the HIDE_UNDOC_MEMBERS tag is set to YES, doxygen will hide all
 # undocumented members inside documented classes or files. If set to NO these
@@ -485,7 +485,7 @@ HIDE_UNDOC_CLASSES     = NO
 # included in the documentation.
 # The default value is: NO.
 
-HIDE_FRIEND_COMPOUNDS  = YES
+HIDE_FRIEND_COMPOUNDS  = NO
 
 # If the HIDE_IN_BODY_DOCS tag is set to YES, doxygen will hide any
 # documentation blocks found inside the body of a function. If set to NO these
@@ -682,7 +682,7 @@ FILE_VERSION_FILTER    =
 # DoxygenLayout.xml, doxygen will parse it automatically even if the LAYOUT_FILE
 # tag is left empty.
 
-LAYOUT_FILE            = @PROJECT_SOURCE_DIR@/doc/DoxygenPluginsLayout.xml
+LAYOUT_FILE            = @PROJECT_SOURCE_DIR@/doc/DoxygenLayout.xml
 
 # The CITE_BIB_FILES tag can be used to specify one or more bib files containing
 # the reference definitions. This must be a list of .bib files. The .bib
@@ -763,8 +763,9 @@ WARN_LOGFILE           =
 # spaces.
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = @PROJECT_SOURCE_DIR@/plugins/ \
-                         @PROJECT_SOURCE_DIR@/doc/mainpage-plugins.doxygen
+INPUT                  = @PROJECT_SOURCE_DIR@/src/ \
+                         @PROJECT_SOURCE_DIR@/plugins/ \
+                         @PROJECT_SOURCE_DIR@/doc/
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -801,7 +802,7 @@ RECURSIVE              = YES
 # Note that relative paths are relative to the directory from which doxygen is
 # run.
 
-EXCLUDE                = @PROJECT_SOURCE_DIR@/src/core/external
+EXCLUDE                = @PROJECT_SOURCE_DIR@/src/core/external 
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or
 # directories that are symbolic links (a Unix file system feature) are excluded
@@ -1168,7 +1169,7 @@ HTML_TIMESTAMP         = YES
 # The default value is: NO.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_DYNAMIC_SECTIONS  = NO
+HTML_DYNAMIC_SECTIONS  = YES
 
 # With HTML_INDEX_NUM_ENTRIES one can control the preferred number of entries
 # shown in the various tree structured indices initially; the user can expand
@@ -1203,7 +1204,7 @@ GENERATE_DOCSET        = NO
 # The default value is: Doxygen generated docs.
 # This tag requires that the tag GENERATE_DOCSET is set to YES.
 
-DOCSET_FEEDNAME        = "Stellarium Plugins Developers Documentation"
+DOCSET_FEEDNAME        = "Stellarium Developers Documentation"
 
 # This tag specifies a string that should uniquely identify the documentation
 # set bundle. This should be a reverse domain-name style string, e.g.
@@ -1295,14 +1296,14 @@ TOC_EXPAND             = NO
 # The default value is: NO.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-GENERATE_QHP           = NO
+GENERATE_QHP           = YES
 
 # If the QHG_LOCATION tag is specified, the QCH_FILE tag can be used to specify
 # the file name of the resulting .qch file. The path specified is relative to
 # the HTML output folder.
 # This tag requires that the tag GENERATE_QHP is set to YES.
 
-QCH_FILE               =
+QCH_FILE               = ../stellarium.qch
 
 # The QHP_NAMESPACE tag specifies the namespace to use when generating Qt Help
 # Project output. For more information please see Qt Help Project / Namespace
@@ -1319,7 +1320,7 @@ QHP_NAMESPACE          = org.stellarium
 # The default value is: doc.
 # This tag requires that the tag GENERATE_QHP is set to YES.
 
-QHP_VIRTUAL_FOLDER     = doc-plugins
+QHP_VIRTUAL_FOLDER     = doc
 
 # If the QHP_CUST_FILTER_NAME tag is set, it specifies the name of a custom
 # filter to add. For more information please see Qt Help Project / Custom
@@ -1349,7 +1350,7 @@ QHP_SECT_FILTER_ATTRS  =
 # generated .qhp file.
 # This tag requires that the tag GENERATE_QHP is set to YES.
 
-QHG_LOCATION           =
+QHG_LOCATION           = qhelpgenerator
 
 # If the GENERATE_ECLIPSEHELP tag is set to YES, additional index files will be
 # generated, together with the HTML files, they form an Eclipse help plugin. To
@@ -1986,7 +1987,7 @@ INCLUDE_FILE_PATTERNS  =
 # recursively expanded use the := operator instead of the = operator.
 # This tag requires that the tag ENABLE_PREPROCESSING is set to YES.
 
-PREDEFINED             =
+PREDEFINED             = 
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then this
 # tag can be used to specify a list of macro names that should be expanded. The
@@ -2024,8 +2025,7 @@ SKIP_FUNCTION_MACROS   = YES
 # the path). If a tag file is not located in the directory in which doxygen is
 # run, you must also specify the path to the tagfile here.
 
-TAGFILES               = stellarium.tag=../../doc/@VERSION@ \
-                         qt.tag=http://doc.qt.io/qt-5/ \
+TAGFILES               = qt.tag=http://doc.qt.io/qt-5/
                          qtcore.tags=http://doc.qt.io/qt-5/ \
                          qtgui.tags=http://doc.qt.io/qt-5/ \
                          qtwidgets.tags=http://doc.qt.io/qt-5/
@@ -2034,7 +2034,7 @@ TAGFILES               = stellarium.tag=../../doc/@VERSION@ \
 # tag file that is based on the input files it reads. See section "Linking to
 # external documentation" for more information about the usage of tag files.
 
-GENERATE_TAGFILE       = stellariumPlugins.tag
+GENERATE_TAGFILE       = stellarium.tag
 
 # If the ALLEXTERNALS tag is set to YES all external class will be listed in the
 # class index. If set to NO only the inherited external classes will be listed.
