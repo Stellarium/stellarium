@@ -209,9 +209,17 @@ public slots:
 
 	//! Set the font size (used on radiant labels).
 	//! @param pixelSize size of font
+	//! @code
+	//! // example of usage in scripts
+	//! MeteorShowers.setFontSize(15);
+	//! @endcode
 	void setFontSize(int pixelSize);
 	//! Set the font size (used on radiant labels).
 	//! @return size of font
+	//! @code
+	//! // example of usage in scripts
+	//! var size = MeteorShowers.getFontSize();
+	//! @endcode
 	int getFontSize() { return m_font.pixelSize(); }
 
 	//! Set the update frequency in hours.
