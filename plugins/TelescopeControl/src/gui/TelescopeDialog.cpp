@@ -358,8 +358,7 @@ void TelescopeDialog::setAboutText()
 	helpPage += "<li>" + q_("On Linux, serial ports /dev/ttyS0 to /dev/ttyS3 and USB ports /dev/ttyUSB0 to /dev/ttyUSB3;") + "</li>";
 	helpPage += "<li>" + q_("On Mac OS X, the list is empty as it names its ports in a peculiar way.") + "</li></ul>";
 	helpPage += "<p>" + q_("If you are using an USB cable, the default serial port of your telescope most probably is not in the list of suggestions.") + "</p>";
-	helpPage += "<p>" + q_("To list all valid serial port names in Mac OS X, open a terminal and type:") + "<br />";
-	helpPage += "<pre>ls /dev/*</pre></p>";
+	helpPage += "<p>" + q_("To list all valid serial port names in Mac OS X, open a terminal and type:") + "<br /><samp>ls /dev/*</samp></p>";
 	helpPage += "<p>" + q_("This will list all devices, the full name of your serial port should be somewhere in the list (for example, '/dev/cu.usbserial-FTDFZVMK').") + "</p>";
 	helpPage += "<p>" + QString(q_("<b>Device model</b>: see %1Supported devices%2 below.")).arg("<a href=\"#devices\">").arg("</a>") + "</p>";
 	helpPage += "<p><a href=\"#top\"><small>[" + q_("Back to top") + "]</small></a></p>";
