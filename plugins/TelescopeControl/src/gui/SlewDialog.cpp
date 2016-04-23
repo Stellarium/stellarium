@@ -90,7 +90,7 @@ void SlewDialog::createDialogContent()
 	// remove point
 	connect(storedPointsDialog, SIGNAL(removeStoredPoint(int)), this, SLOT(removeStoredPointFromComboBox(int)));
 	// clean points
-	connect(storedPointsDialog, SIGNAL(cleanStoredPoints()), this, SLOT(cleanStoredPointsFromComboBox()));
+	connect(storedPointsDialog, SIGNAL(clearStoredPoints()), this, SLOT(clearStoredPointsFromComboBox()));
 
 
 	updateTelescopeList();
@@ -284,7 +284,7 @@ void SlewDialog::removeStoredPointFromComboBox(int number)
 	savePointsToFile();
 }
 
-void SlewDialog::cleanStoredPointsFromComboBox()
+void SlewDialog::clearStoredPointsFromComboBox()
 {
 	ui->comboBoxStoredPoints->blockSignals(true);
 	ui->comboBoxStoredPoints->clear();

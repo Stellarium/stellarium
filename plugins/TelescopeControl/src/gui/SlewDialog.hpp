@@ -86,7 +86,7 @@ private slots:
 	void editStoredPoints();
 	void addStoredPointToComboBox(int number, QString name, double radiansRA, double radiansDec);
 	void removeStoredPointFromComboBox(int number);
-	void cleanStoredPointsFromComboBox();
+	void clearStoredPointsFromComboBox();
 	//! Sets the input fields to selected point info
 	void getStoredPointInfo();
 
