@@ -142,62 +142,129 @@ signals:
 
 public slots:
 	//! Enable the meteor showers plugin at Stellarium startup.
+	//! @param b boolean flag
 	void setEnableAtStartup(const bool& b);
 	//! True if the plugin is enabled at Stellarium startup.
+	//! @return true if it's enabled at startup
 	bool getEnableAtStartup() { return m_enableAtStartup; }
 
 	//! Show/hide the button that enable/disable the meteor showers plugin.
+	//! @param b boolean flag
 	void setShowEnableButton(const bool& show);
 	//! Get the status of the enable button on the toolbar.
 	//! @return true if it's visible
 	bool getShowEnableButton() { return m_showEnableButton; }
 
 	//! Show/hide the button that opens the search dialog.
+	//! @param b boolean flag
 	void setShowSearchButton(const bool& show);
 	//! Get the status of the search button on the toolbar.
 	//! @return true if it's visible
 	bool getShowSearchButton() { return m_showSearchButton; }
 
 	//! Enable/disable radiant marker.
+	//! @param b boolean flag
+	//! @code
+	//! // example of usage in scripts
+	//! MeteorShowers.setEnableMarker(true);
+	//! @endcode
 	void setEnableMarker(const bool& b);
 	//! Enable/disable radiant marker.
+	//! @return true if radiant markers visible
+	//! @code
+	//! // example of usage in scripts
+	//! var flag = MeteorShowers.getEnableMarker();
+	//! @endcode
 	bool getEnableMarker() { return m_enableMarker; }
 
 	//! True if user wants to see the active radiants only.
+	//! @param b boolean flag
+	//! @code
+	//! // example of usage in scripts
+	//! MeteorShowers.setActiveRadiantOnly(true);
+	//! @endcode
 	void setActiveRadiantOnly(const bool& b);
 	//! True if user wants to see the active radiants only.
+	//! @return true if only active radiants are visible
+	//! @code
+	//! // example of usage in scripts
+	//! var flag = MeteorShowers.getActiveRadiantOnly();
+	//! @endcode
 	bool getActiveRadiantOnly() { return m_activeRadiantOnly; }
 
 	//! Enable/disable radiant labels
+	//! @param b boolean flag
+	//! @code
+	//! // example of usage in scripts
+	//! MeteorShowers.setEnableLabels(true);
+	//! @endcode
 	void setEnableLabels(const bool& b);
 	//! Enable/disable radiant labels
+	//! @return true if radiant labels visible
+	//! @code
+	//! // example of usage in scripts
+	//! var flag = MeteorShowers.getEnableLabels();
+	//! @endcode
 	bool getEnableLabels() { return m_enableLabels; }
 
 	//! Set the font size (used on radiant labels).
+	//! @param pixelSize size of font
 	void setFontSize(int pixelSize);
 	//! Set the font size (used on radiant labels).
+	//! @return size of font
 	int getFontSize() { return m_font.pixelSize(); }
 
 	//! Set the update frequency in hours.
+	//! @param hours update frequency in hours
 	void setUpdateFrequencyHours(const int& hours);
 	//! Gets the update frequency in hours.
+	//! @return update frequency in hours
 	int getUpdateFrequencyHours() { return m_updateFrequencyHours; }
 
 	//! Enable/disable automatic catalog updates from the internet.
+	//! @param b boolean flag
 	void setEnableAutoUpdates(const bool& b);
 	//! Enable/disable catalog updates from the internet.
+	//! @return true if auto updates is enabled
 	bool getEnableAutoUpdates() { return m_enableAutoUpdates; }
 
 	//! Set the color of the active radiant based on generic data.
+	//! @code
+	//! // example of usage in scripts
+	//! MeteorShowers.setColorARG(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setColorARG(const Vec3f& rgb);
+	//! @return color of markers of the active radiants based on generic data.
+	//! @code
+	//! // example of usage in scripts
+	//! color = MeteorShowers.getColorARG();
+	//! @endcode
 	Vec3f getColorARG() { return m_colorARG; }
 
 	//! Set the color of the active radiant based on confirmed data.
+	//! @code
+	//! // example of usage in scripts
+	//! MeteorShowers.setColorARC(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setColorARC(const Vec3f& rgb);
+	//! @return color of markers of the active radiants based on confirmed data.
+	//! @code
+	//! // example of usage in scripts
+	//! color = MeteorShowers.getColorARC();
+	//! @endcode
 	Vec3f getColorARC() { return m_colorARC; }
 
 	//! Set the color of the inactive radiant.
+	//! @code
+	//! // example of usage in scripts
+	//! MeteorShowers.setColorIR(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setColorIR(const Vec3f& rgb);
+	//! @return color of markers of the inactive radiants.
+	//! @code
+	//! // example of usage in scripts
+	//! color = MeteorShowers.getColorIR();
+	//! @endcode
 	Vec3f getColorIR() { return m_colorIR; }
 
 	//! Download the Meteor Showers catalog from the Internet.
