@@ -179,55 +179,45 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	QPixmap naOff(":/graphicGui/btTimeForward-off.png");
 	QPixmap nextArrowOff = naOff.scaledToHeight(scale, Qt::SmoothTransformation);
 
-	StelAction* defaultAction = new StelAction(this);
-	defaultAction->setCheckable(false);
 	prevOcularButton = new StelButton(ocularControls,
 	                                  prevArrow,
 	                                  prevArrowOff,
-	                                  QPixmap(),
-	                                  defaultAction);
+					  QPixmap());
 	prevOcularButton->setToolTip(q_("Previous ocular"));
 	nextOcularButton = new StelButton(ocularControls,
 	                                  nextArrow,
 	                                  nextArrowOff,
-	                                  QPixmap(),
-	                                  defaultAction);
+					  QPixmap());
 	nextOcularButton->setToolTip(q_("Next ocular"));
 	prevLensButton = new StelButton(lensControls,
                                       prevArrow,
                                       prevArrowOff,
-                                      QPixmap(),
-                                      defaultAction);
+				      QPixmap());
 	prevLensButton->setToolTip(q_("Previous lens"));
 	nextLensButton = new StelButton(lensControls,
                                       nextArrow,
                                       nextArrowOff,
-                                      QPixmap(),
-                                      defaultAction);
+				      QPixmap());
 	nextLensButton->setToolTip(q_("Next lens"));
 	prevCcdButton = new StelButton(ccdControls,
 	                               prevArrow,
 	                               prevArrowOff,
-	                               QPixmap(),
-	                               defaultAction);
+				       QPixmap());
 	prevCcdButton->setToolTip(q_("Previous CCD frame"));
 	nextCcdButton = new StelButton(ccdControls,
 	                               nextArrow,
 	                               nextArrowOff,
-	                               QPixmap(),
-	                               defaultAction);
+				       QPixmap());
 	nextCcdButton->setToolTip(q_("Next CCD frame"));
 	prevTelescopeButton = new StelButton(telescopeControls,
 	                                     prevArrow,
 	                                     prevArrowOff,
-	                                     QPixmap(),
-	                                     defaultAction);
+					     QPixmap());
 	prevTelescopeButton->setToolTip(q_("Previous telescope"));
 	nextTelescopeButton = new StelButton(telescopeControls,
 	                                     nextArrow,
 	                                     nextArrowOff,
-	                                     QPixmap(),
-	                                     defaultAction);
+					     QPixmap());
 	nextTelescopeButton->setToolTip(q_("Next telescope"));
 
 	connect(nextOcularButton, SIGNAL(triggered()),
@@ -259,7 +249,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                                        pOn,
 	                                        pOff,
 	                                        pHover,
-	                                        defaultAction,
+						NULL,
 	                                        true);
 	rotateCcdMinus15Button->setToolTip(q_("Rotate the sensor frame 15 degrees counterclockwise"));
 
@@ -272,7 +262,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                                       pOn,
 	                                       pOff,
 	                                       pHover,
-					       defaultAction,
+					       NULL,
 					       true);
 	rotateCcdMinus5Button->setToolTip(q_("Rotate the sensor frame 5 degrees counterclockwise"));
 
@@ -285,7 +275,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 					       pOn,
 					       pOff,
 	                                       pHover,
-					       defaultAction,
+					       NULL,
 					       true);
 	rotateCcdMinus1Button->setToolTip(q_("Rotate the sensor frame 1 degree counterclockwise"));
 
@@ -298,7 +288,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                                        pOn,
 	                                        pOff,
 	                                        pHover,
-						defaultAction,
+						NULL,
 						true);
 	resetCcdRotationButton->setToolTip(q_("Reset the sensor frame rotation"));
 
@@ -311,7 +301,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 					      pOn,
 					      pOff,
 					      pHover,
-					      defaultAction,
+					      NULL,
 					      true);
 	rotateCcdPlus1Button->setToolTip(q_("Rotate the sensor frame 1 degree clockwise"));
 
@@ -324,7 +314,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 					      pOn,
 					      pOff,
 					      pHover,
-					      defaultAction,
+					      NULL,
 					      true);
 	rotateCcdPlus5Button->setToolTip(q_("Rotate the sensor frame 5 degrees clockwise"));
 
@@ -337,7 +327,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 					       pOn,
 					       pOff,
 	                                       pHover,
-					       defaultAction,
+					       NULL,
 					       true);
 	rotateCcdPlus15Button->setToolTip(q_("Rotate the sensor frame 15 degrees clockwise"));
 

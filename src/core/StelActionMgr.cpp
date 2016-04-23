@@ -39,8 +39,8 @@ StelAction::StelAction(const QString& actionId,
 					   const QString& altKey,
 					   bool global):
 	QObject(StelApp::getInstance().getStelActionManager()),
-	checkable(false),
-	checked(false),
+	isBoolSlot(false),
+	boolSlotState(false),
 	group(groupId),
 	text(text),
 	global(global),
@@ -49,7 +49,8 @@ StelAction::StelAction(const QString& actionId,
 	defaultKeySequence(primaryKey),
 	defaultAltKeySequence(altKey),
 	target(NULL),
-	property(NULL)
+	property(NULL),
+	boolProperty(NULL)
 #ifndef USE_QUICKVIEW
 	,qAction(NULL)
 #endif
@@ -104,71 +105,94 @@ QString StelAction::getText() const
 
 void StelAction::setChecked(bool value)
 {
-	Q_ASSERT(checkable);
-	if (value == checked)
+	Q_ASSERT(isBoolSlot || boolProperty);
+	if (value == isChecked()) //dont do anything if value would not change
 		return;
-	checked = value;
-	if (target)
-		target->setProperty(property, checked);
-	emit toggled(checked);
+	if(boolProperty)
+		boolProperty->setValue(value); //this will emit toggled() through NOTIFY
+	else
+	{
+		boolSlotState = value;
+		if (property) //i.e. old-style property without NOTIFY
+			target->setProperty(property, value);
+		else if(isBoolSlot)
+		{
+			//call a boolean slot
+			slot.invoke(target,Q_ARG(bool,value));
+		}
+		emit toggled(value);
+	}
 }
 
 void StelAction::toggle()
 {
-	setChecked(!checked);
+	setChecked(!isChecked());
 }
 
 void StelAction::trigger()
 {
-	if (checkable)
+	if (isCheckable())
 		toggle();
 	else
+	{
+		//parameterless slot call
+		slot.invoke(target);
 		emit triggered();
+	}
 }
 
 void StelAction::connectToObject(QObject* obj, const char* slot)
 {
+	target = obj;
 	QVariant prop = obj->property(slot);
-	if (prop.isValid()) // Connect to a property.
+	if (prop.isValid()) // Connect to a bool property, use a StelProperty if possible
 	{
-		checkable = true;
-		target = obj;
-		property = slot;
-		checked = prop.toBool();
+		Q_ASSERT(prop.type() == QVariant::Bool);
+
 		// Listen to the property notified signal if there is one.
 		int propIndex = obj->metaObject()->indexOfProperty(slot);
 		QMetaProperty metaProp = obj->metaObject()->property(propIndex);
-		int slotIndex = metaObject()->indexOfMethod("propertyChanged(bool)");
-		if (metaProp.hasNotifySignal())
-			connect(obj, metaProp.notifySignal(), this, metaObject()->method(slotIndex));
+
+		if(metaProp.hasNotifySignal())
+		{
+			//can use a StelProperty for the connection, property name is action name
+			boolProperty = StelApp::getInstance().getStelPropertyManager()->registerProperty(objectName(),obj,slot);
+			StelPropertyBoolProxy* prox = new StelPropertyBoolProxy(boolProperty,this);
+			connect(prox,SIGNAL(propertyChanged(bool)),this,SLOT(propertyChanged(bool)));
+		}
+		else
+		{
+			//must use old-style manual tracking of current state
+			isBoolSlot = true;
+			boolSlotState = prop.toBool();
+			property = slot;
+		}
+
 		return;
 	}
+
+	//now, check if its a slot
 	int slotIndex = obj->metaObject()->indexOfMethod(slot);
-	if (obj->metaObject()->method(slotIndex).parameterCount() == 1)
+	Q_ASSERT(slotIndex>=0);
+	this->slot = obj->metaObject()->method(slotIndex);
+	if (this->slot.parameterCount() == 1)
 	{
 		// connect to a boolean slot.
 		Q_ASSERT(obj->metaObject()->method(slotIndex).parameterType(0) == QMetaType::Bool);
-		checkable = true;
-		int signalIndex = metaObject()->indexOfMethod("toggled(bool)");
-		connect(this, metaObject()->method(signalIndex), obj, obj->metaObject()->method(slotIndex));
+		isBoolSlot = true;
+		// no way to determine current value, so assume current val is false
 	}
 	else
 	{
 		// connect to a slot.
 		Q_ASSERT(obj->metaObject()->method(slotIndex).parameterCount() == 0);
-		checkable = false;
-		int signalIndex = metaObject()->indexOfMethod("triggered()");
-		connect(this, metaObject()->method(signalIndex), obj, obj->metaObject()->method(slotIndex));
 	}
 	emit changed();
 }
 
 void StelAction::propertyChanged(bool value)
 {
-	if (value == checked)
-		return;
-	checked	= value;
-	emit toggled(checked);
+	emit toggled(value);
 }
 
 QKeySequence::SequenceMatch StelAction::matches(const QKeySequence& seq) const
