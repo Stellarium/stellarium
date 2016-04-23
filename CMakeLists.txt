@@ -484,7 +484,7 @@ ENDIF()
 
 ########### Windows packaging ###############
 IF(WIN32)
-    CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/cmake/stellarium.iss.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss @ONLY)
+    CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/stellarium.iss.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss @ONLY)
     SET(ISS_COMPILER_FILENAME "ISCC.exe")
     FIND_FILE(ISS_COMPILER_PATH ${ISS_COMPILER_FILENAME})
     IF(ISS_COMPILER_PATH)
