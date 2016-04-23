@@ -2269,6 +2269,24 @@ double getDecYear(const int year, const int month, const int day)
 	return year+((month-1)*30.5+day/31.*30.5)/366;
 }
 
+int compareVersions(const QString v1, const QString v2)
+{
+	// result (-1: v1<v2; 0: v1==v2; 1: v1>v2)
+	int result = 0;
+	QStringList v1s = v1.split(".");
+	QStringList v2s = v2.split(".");
+	int ver1 = v1s.at(0).toInt()*1000 + v1s.at(1).toInt()*100 + v1s.at(2).toInt();
+	int ver2 = v2s.at(0).toInt()*1000 + v2s.at(1).toInt()*100 + v2s.at(2).toInt();
+	if (ver1<ver2)
+		result = -1;
+	else if (ver1 == ver2)
+		result = 0;
+	else if (ver1 > ver2)
+		result = 1;
+
+	return result;
+}
+
 //! Uncompress gzip or zlib compressed data.
 QByteArray uncompress(const QByteArray& data)
 {
