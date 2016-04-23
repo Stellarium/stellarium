@@ -25,10 +25,6 @@ Print program name and version and exit.
 
 Print a brief synopsis of program options and exit.
 
-=item B<--safe-mode>
-
-Do not use OpenGL2 features (such as shaders). Useful on systems that report support for OpenGL 2, but its implementation is buggy. Used as a work-around for the "broken fonts" bug.
-
 =item B<-c, --config-file> I<file>
 
 Use I<file> for the config filename instead of the default F<config.ini>.
@@ -37,6 +33,19 @@ Use I<file> for the config filename instead of the default F<config.ini>.
 
 Use I<dir> instead of the default user data directory (F<$HOME/.stellarium/>
 on *nix operating systems).
+
+=item B<--verbose>
+
+Even more diagnostic output in logfile (esp. multimedia handling).
+
+=item B<-t, --fix-text>
+
+May fix text rendering problems.
+
+=item B<-d, --dump-opengl-details>
+
+Dump information about OpenGL support to logfile. Use this is you have 
+graphics problems and want to send a bug report.
 
 =item B<-f, --full-screen> I<yes|no>
 
@@ -48,6 +57,10 @@ default for subsequent invocations of Stellarium.
 
 Set the directory into which screenshots will be saved to I<dir>, 
 instead of the default (which is $HOME on *nix operating systems).
+
+=item B<--startup-script> I<script>
+
+Specify name of startup script.
 
 =item B<--home-planet> I<planet-name>
 
@@ -98,6 +111,10 @@ Specify the field of view (I<fov> degrees).
 
 Specify projection type, I<p>.  Permitted values of I<p> are: equalarea, 
 stereographic, fisheye, cylinder, mercator, perspective, and orthographic.
+
+=item B<--restore-defaults>
+
+Delete existing config.ini and use defaults.
 
 =back
 

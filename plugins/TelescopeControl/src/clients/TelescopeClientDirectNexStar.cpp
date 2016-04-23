@@ -74,9 +74,7 @@ TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, 
 	
 	#ifdef Q_OS_WIN
 	if(serialDeviceName.right(serialDeviceName.size() - 3).toInt() > 9)
-		serialDeviceName = "\\\\.\\" + serialDeviceName;//"\\.\COMxx", not sure if it will work
-	else
-		serialDeviceName = serialDeviceName;
+		serialDeviceName = "\\\\.\\" + serialDeviceName; // "\\.\COMxx", not sure if it will work
 	#endif //Q_OS_WIN
 	
 	//Try to establish a connection to the telescope
