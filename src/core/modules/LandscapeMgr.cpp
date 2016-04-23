@@ -399,6 +399,10 @@ void LandscapeMgr::init()
 	setFlagIllumination(conf->value("landscape/flag_enable_illumination_layer", true).toBool());
 	setFlagLabels(conf->value("landscape/flag_enable_labels", true).toBool());
 
+	// Load colors from config file
+	QString defaultColor = conf->value("color/default_color").toString();
+	setColorCardinalPoints(StelUtils::strToVec3f(conf->value("color/cardinal_color", defaultColor).toString()));
+
 	bool ok =true;
 	setAtmosphereBortleLightPollution(conf->value("stars/init_bortle_scale",3).toInt(&ok));
 	if (!ok)
@@ -409,7 +413,6 @@ void LandscapeMgr::init()
 	}
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
-	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Atmosphere", displayGroup, N_("Atmosphere"), "atmosphereDisplayed", "A");
@@ -418,15 +421,6 @@ void LandscapeMgr::init()
 	addAction("actionShow_Ground", displayGroup, N_("Ground"), "landscapeDisplayed", "G");
 	addAction("actionShow_LandscapeIllumination", displayGroup, N_("Illumination"), "illuminationDisplayed", "Shift+G");
 	addAction("actionShow_LandscapeLabels", displayGroup, N_("Labels"), "labelsDisplayed", "Ctrl+Shift+G");
-}
-
-void LandscapeMgr::setStelStyle(const QString& section)
-{
-	// Load colors from config file
-	QSettings* conf = StelApp::getInstance().getSettings();
-
-	QString defaultColor = conf->value(section+"/default_color").toString();
-	setColorCardinalPoints(StelUtils::strToVec3f(conf->value(section+"/cardinal_color", defaultColor).toString()));
 }
 
 bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeLocationDuration)
