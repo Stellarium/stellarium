@@ -258,10 +258,11 @@ void TelescopeDialog::setAboutText()
 	aboutPage += "<p>" + q_("This plug-in is based on and reuses a lot of code under the GNU General Public License and version Lesser General Public License from:") + "</p><ul>";
 	aboutPage += "<li>" + q_("the Telescope, TelescopeDummy, TelescopeTcp and TelescopeMgr classes in Stellarium's code (the client side of Stellarium's original telescope control feature);") + "</li>";
 	aboutPage += "<li>" + q_("the telescope server core code (licensed under the LGPL)") + "</li>";
-	aboutPage += "<li>" + q_("the TelescopeServerLx200 telescope server core code (originally licensed under the LGPL); author of all of the above - the client, the server core, and the LX200 server, along with the Stellarium telescope control network protocol (over TCP/IP), is <b>Johannes Gajdosik</b>.") + "</li>";
-	aboutPage += "<li>" + q_("the TelescopeServerNexStar telescope server core code (originally licensed under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>.") + "</li>";
+	aboutPage += "<li>" + q_("the TelescopeServerLx200 telescope server core code (originally licensed under the LGPL)");
+	aboutPage += "<br/>" + q_("Author of all of the above - the client, the server core, and the LX200 server, along with the Stellarium telescope control network protocol (over TCP/IP), is <b>Johannes Gajdosik</b>.") + "</li>";
+	aboutPage += "<li>" + q_("the TelescopeServerNexStar telescope server core code (originally licensed under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>.") + "</li></ul>";
 
-	aboutPage += "</ul><h3>" + q_("Links") + "</h3>";
+	aboutPage += "<h3>" + q_("Links") + "</h3>";
 	aboutPage += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Telescope Control plug-in") + "</p>";
 	aboutPage += "<p><ul>";
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
