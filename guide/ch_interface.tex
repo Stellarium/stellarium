@@ -435,11 +435,11 @@ The Markings tab of the View window controls the following features:
 \end{figure}
 
 The Landscape tab of the View window controls the landscape graphics
-(ground). To change the landscape graphics, select a landscape from the
+(the horizon which surrounds you). To change the landscape graphics, select a landscape from the
 list on the left side of the window. A description of the landscape will
 be shown on the right.
 
-Note that while landscape can include information about where the
+Note that while a landscape  can include information about where the
 landscape graphics were taken (planet, longitude, latitude and
 altitude), this location does not have to be the same as the location
 selected in the Location window, although you can set up Stellarium such
@@ -449,7 +449,7 @@ The controls at the bottom right of the window operate as follows:
 
 \begin{description}
 \item[Show ground] This turns on and off landscape rendering (same
-  as the button in the main tool-bar).
+  as the button \guibutton{0.6}{bt_ground} in the main tool-bar).
 \item[Show\_fog] This turns on and off rendering of a band of
   fog/haze along the horizon.
 \item[Use associated planet and position] When enabled, selecting a
@@ -457,7 +457,29 @@ The controls at the bottom right of the window operate as follows:
 \item[Use this landscape as default] Selecting this option will save
   the landscape into the program configuration file so that the current
   landscape will be the one used when Stellarium starts.
+\item[Minimal brightness] Use some minimal brightness
+  setting. Moonless night on very dark locations may appear too dark
+  on your screen. You may want to configure some minimal brightness
+  here.
+\item[from landscape, if given] Landscape authors may decide to
+  provide such a minimal brightness value in the \file{landscape.ini}
+  file.
+\item[Show landscape labels] Landscapes can be configured with a
+  gazetteer of interesting points, e.g., mountain peaks, which can be
+  labeled with this option.
+\item[Show illumination] to reflect the ugly developments of our
+  civilisation landscapes can be configured with a layer of light
+  pollution, e.g. streetlamps, bright windows, or the sky glow of a
+  nearby city. This layer, if present, will be mixed in when it is
+  dark enough.
 \end{description}
+
+\noindent Using the button \menu{Add/remove landscapes\ldots}, you can also
+install new landscapes from ZIP files which you can download e.g.\
+from the Stellarium
+website\footnote{\url{http://stellarium.org/wiki/index.php/Landscapes}}
+or create yourself (see ch.~\ref{ch:landscapes} Landscapes), or remove
+these custom landscapes.
 
 \subsection{Starlore Tab}
 \label{sec:gui:view:starlore}
@@ -470,8 +492,28 @@ The controls at the bottom right of the window operate as follows:
 
 The Starlore tab of the View window controls what culture's
 constellations and bright star names will be used in the main display.
-Some cultures have constellation art (Western and Inuit), and the rest
-do not.
+Some cultures have constellation art (e.g., Western and Inuit), and the rest
+do not. Configurable options include
+\begin{description}
+\item[Use this skyculture as default] Activate this option to load
+  this skyculture when Stellarium starts.
+\item[Show labels] Activate display of constellation labels, like
+  \guibutton{0.6}{bt_constellation_name} or \keys{V}. You can further
+  select whether you want to display abbreviated, original or
+  translated names.
+\item[Show lines with thickness\ldots] Activate display of stick
+  figures, like \guibutton{0.6}{bt_constellation} or \keys{C}, and you
+  can configure line thickness here.
+\item[Show boundaries] Activate display of constellation boundaries,
+  like \keys{B}. Currently, boundaries have been defined only for
+  ``Western'' skycultures.
+\item[Use native names for planets] If provided, show the planet names
+  as used in this skyculture (also shows modern planet name for
+  reference). %% TODO THIS FEATURE NEEDS SOME REWORK!
+\item[Show art in brightness\ldots] Activate display of constellation
+  art (if available), like \guibutton{0.6}{bt_constellation_art} or
+  \keys{R}. You can also select the brightness here.
+\end{description}
 
 
 \section{The Object Search Window}

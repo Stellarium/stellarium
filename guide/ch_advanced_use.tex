@@ -63,6 +63,18 @@ Dobbs'', the user directory will be:
 C:\Users\Bob Dobbs\AppData\Roaming\Stellarium\
 \end{commands}
 
+The user data directory is unfortunately hidden by default. To make it accessible in the Windows file
+explorer, open an \program{Explorer} window and select \menu{Organize... > Folder and
+search options}. Make sure folders marked as hidden are now 
+displayed. Also, deselect the checkbox to ``hide known file name
+endings''.\footnote{This is a very confusing default setting and in fact
+  a security risk: Consider you receive an email with some file
+  \file{funny.png.exe} attached. Your explorer displays this as
+  \file{funny.png}. You double-click it, expecting to open some image
+  browser with a funny image. However, you start some unknown program
+  instead, and running this \file{.exe} executable program may turn
+  out to be anything but funny!}
+
 \item[screenshot save directory] Screenshots will be saved to the
   \file{Pictures/Stellarium} directory, although this can be changed with a command line option (see
   section~\ref{sec:CommandLineOptions}\footnote{Windows Vista users who do not run Stellarium with
@@ -98,8 +110,11 @@ C:\Users\Bob Dobbs\AppData\Roaming\Stellarium\
   \file{share/stellarium} sub-directory of the installation prefix,
   i.e., usually \file{/usr/share/stellarium} or
   \file{/usr/local/share/stellarium/}.
-\item[user directory] This is the \file{.stellarium} sub-directory
-  of user's home directory, i.e., \file{\textasciitilde{}/.stellarium/}.
+\item[user directory] This is the \file{.stellarium} sub-directory of
+  user's home directory, i.e.,
+  \file{\textasciitilde{}/.stellarium/}. This is a hidden folder, so
+  if you are using a graphical file browser, you may want to change
+  its settings to ``display hidden folders''.
 \item[screenshot save directory] Screenshots are saved to the user's
   home directory.
 \end{description}
