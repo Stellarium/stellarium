@@ -68,6 +68,7 @@
 \newcommand{\command}[1]{\texttt{#1}}
 %% Names of 3rd-party software products like Photoshop, Sketchup etc. Not for OS names, they are too common. 
 \newcommand{\program}[1]{\textsf{\textbf{\small #1}}}
+\newcommand{\var}[1]{\texttt{#1}} %% variable name
 
 
 % show small icon in-line. Lower by #2. Optional #1 is scale of icon. Use 0.45 for dialog icons, 0.75 for lower bar buttons.
@@ -75,7 +76,7 @@
 \newcommand{\guibutton[3]}[0.45]{\raisebox{-#2mm}{\fbox{\includegraphics[scale=#1]{#3}}}}
 
 % Will become a boxed text, representing a GUI button label.
-\newcommand{\button}[1]{\textbf{\textsf{\fbox{#1}}}}
+\newcommand{\button}[1]{\textbf{\textsf{\fbox{\scriptsize #1}}}}
 %% Person names. In some places they have been italicised, in others bold. Make them appear the same with this, and add them to the index:
 \newcommand{\name}[1]{\textsc{#1}\index{#1}}
 %% Some new term that is presented here with emphasis and also goes immediately to the index. 
@@ -99,6 +100,7 @@
 \newcommand{\mJy}{\ensuremath{\,\mathrm{mJy}}}
 \newcommand{\kg}{\ensuremath{\,\mathrm{kg}}}
 \newcommand{\g}{\ensuremath{\,\mathrm{g}}}
+\newcommand{\px}{\ensuremath{\mathrm{px}}} % pixels
 
 \lstnewenvironment{commands}{\lstset{language=sh,basicstyle=\ttfamily\small,%
                                      backgroundcolor=\color{black!5},frame=leftline,rulecolor=\color{blue},framerule=1pt}%
@@ -638,3 +640,7 @@ addtohook={%
 %\newcommand{\key}[1]{\textbf{\textsf{\small #1}}}
 % Prefer using menukeys. 
 \newcommand{\key}[1]{\keys{#1}}
+
+\renewcommand{\topfraction}{0.9}
+
+\definecolor{light-gray}{gray}{0.90}
