@@ -102,6 +102,7 @@ void OcularDialog::retranslate()
 {
 	if (dialog) {
 		ui->retranslateUi(dialog);
+		initAboutText();
 	}
 }
 
