@@ -1,8 +1,9 @@
 %% Part of Stellarium User Guide
 %% History: 
 %% 2016-04-24 Adapted from GZ's course given at SEAC2015 in Rome.
-%% State: Current for 0.15
-%% TODO: One short section 
+%% 2016-04-25 Added section on making Nadir image for old_style landscape.
+%% State: Current for 0.15.
+
 
 \chapter{Landscapes}
 \label{ch:landscapes}
@@ -368,7 +369,7 @@ decorative purpose). The side textures are mapped onto curved
   \centering
    \includegraphics[width=10cm]{Rosenburg-Demo.png}
    \caption{Old\_style landscape: eight parts delivering a
-     high-resolution panorama. The bottom texture, drawn on a flat
+     high-resolution panorama. The bottom (ground) texture, drawn on a flat
      plane, is not shown here.}
   \label{fig:landscapes:oldStyle}
 \end{figure}
@@ -554,9 +555,16 @@ becomes a circle that just touches the edges of the image. The
 remaining areas of the image (the corners outside the circle) are not
 used.
 
-The image file should be saved in PNG format with alpha
-transparency. Whereever the image is transparent  Stellarium
-will render the sky.
+\begin{figure}[t]
+\centering\includegraphics[scale=3.0]{trees_512}
+\caption{Texture for the \landscape{Trees} Fisheye landscape.}
+\label{fig:landscapes:Fisheye}
+\end{figure}
+
+
+The image file (Fig.~\ref{fig:landscapes:Fisheye}) should be saved in
+PNG format with alpha transparency. Whereever the image is transparent
+Stellarium will render the sky.
 
 The \file{landscape.ini} file for a fish-eye type landscape looks like
 this (this example is based on the \landscape{Trees} landscape which
@@ -718,7 +726,8 @@ on photographs taken on adjacent but separate positions.
 Often however, both the upper half of the observer's environment (the
 sky) and the ground the photographer is standing on, are regarded of
 lesser importance, and only a series of laterally adjacent photographs
-is taken and combined into a cylindrical or spherical ring that shows the landscape horizon, i.e.,  where ground and sky meet. If the
+is taken and combined into a cylindrical or spherical ring that shows 
+the landscape horizon, i.e.,  where ground and sky meet. If the
 closest object of interest is farther away that a few metres,
 requirements on parallax avoidance are far less critical, and the author
 has taken lots of landscape panoramas with a camera on the usual
@@ -733,8 +742,8 @@ camera!
 
 The images should match in brightness and white balance. If you can
 shoot in RAW, do so to be able to change white balance later. If the
-camera can only create JPG, ensure you have a fitting white balance
-fixed and not ``auto'', because this may find different settings and
+camera can only create JPG, ensure you have set the camera to a suitable white balance
+before taking the photos and not to ``auto'', because this may find different settings and
 thus give colour mismatches. Exposure brightness differences can be
 largely removed during stitching, but good, well-exposed original
 shots always give better results.
@@ -868,12 +877,13 @@ The graphical user interface (GUI) consists of a main menu, symbols, and 4 tabs.
 \label{sec:landscapes:Optimisation}
 
 
-Now the (usually) longest part begins: Iterative optimisation. If your
-images were taken on a panorama tripod head, there should only be very
-few bad matchpoints, e.g.\ those found on persons or
-clouds\footnote{You should have created control points with the
-  \program{Celeste} option!} which have moved between photos. For handheld
-photos, the following considerations should be observed.
+Now the (usually) longest part begins: Iterative optimisation of the
+photo matchpoints. If your images were taken on a panorama tripod
+head, there should only be very few bad matchpoints, e.g.\ those found
+on persons or clouds\footnote{You should have created control points
+  with the \program{Celeste} option!} which have moved between
+photos. For handheld photos, the following considerations should be
+observed.
 
 The most important line which we want to create in all perfection is the visible
 horizon, where sky and earth meet. The foreground, usually grassy or
@@ -905,7 +915,7 @@ In case you took your photos not on a tripod and moved too much, you
 may even want to play with the translation options, but errors will be
 increasingly hard to avoid.
 
-\paragraph{Using Straight Edges}
+\paragraph{Using Straight Edges as Guides}
 If the panorama contains straight lines like vertical edges of
 buildings, these can be used to automatically get a correctly levelled
 horizon: Vertical lines are mapped to vertical lines in
@@ -1109,13 +1119,17 @@ calibration grid, see section~\ref{sec:landscapes:FinalCalibration}.
 \subsection{ImageMagick}
 \label{sec:landscapes:ImageMagick}
 
-\program{ImageMagick} (\program{IM})\footnote{\url{http://www.imagemagick.org/}} can be described as ``Swiss Army Knife of image
-manipulation''. It can do most operations usually applied to images in
-a GUI program, but is called from the command line. This allows also
-to include \program{IM} in your own \file{.BAT} scripts. We will use it to do our final
-cut and resize operations. I cannot give an exhaustive tutorial about
-more than a few of \program{IM}'s functions, but the commands given here should be
-enough for our purpose.
+\program{ImageMagick}
+(\program{IM})\footnote{\url{http://www.imagemagick.org/}} can be
+described as ``Swiss Army Knife of image manipulation''. It can do
+most operations usually applied to images in a GUI program, but is
+called from the command line. This allows also to include \program{IM}
+in your own command scripts\footnote{These may typically be
+  \file{.BAT} files on Windows, or various shell scripts on Linux or
+  Mac.}. We will use it to do our final cut and resize operations. I
+cannot give an exhaustive tutorial about more than a few of
+\program{IM}'s functions, but the commands given here should be enough
+for our purpose.
 
 To open a command window (console, a.k.a.\ DOS window), press the
 Windows key and enter \texttt{cmd}, then press \key{\return}. (On Linux and Mac, you
@@ -1140,12 +1154,12 @@ size $4096\times2048$, but where you have seen that nothing interesting
 is in the image above 11.25\degree. This means we can cut away the sky area
 and compress the image to $4096\times1024$ to save graphics memory.\footnote{Most
 modern graphics cards no longer require the ``powers of two''
-image sizes, but we keep this practice to increase compatibility.} Note
-that cutting away the top part of the panorama was introduced for
-version 0.13, so if you are bound (by old/weak hardware) to continue
-using the 0.12 series, you must use the full-size panorama with
-transparent sky, and are likely limited to textures of
-max.\ $2048\times2048$ pixels.
+image sizes, but we keep this practice to increase compatibility.} 
+% Note that cutting away the top part of the panorama was introduced
+% for version 0.13, so if you are bound (by old/weak hardware) to
+% continue using the 0.12 series, you must use the full-size panorama
+% with transparent sky, and are likely limited to textures of max.\
+% $2048\times2048$ pixels.
 
 To understand the numbers in the example, consider that in a panorama
 image of $4096\times2048$ pixels, 1024 pixels represent 90°,
@@ -1219,8 +1233,64 @@ forget to read off top and bottom lines (altitudes in degrees) from
 your grid, the vertical extent will form the \var{decor\_alt\_angle}, and
 the bottom line the \var{decor\_angle\_shift} entries in this file.
 
-\paragraph{Creating a ground image for a high-resolution panorama}
-TODO. In principle, use Hugin, but orient the final image down.
+\paragraph{Creating a ground image for old\_style landscapes}
+When you want a good ground image for an \var{old\_style} landscape
+from your panorama and not just fill the \var{groundtex} with
+a monochrome texture or a map, you have to create a ground view in
+\program{Hugin}. But you may have already created a huge pano! This
+can also be used as source image, and a ground shot can be extracted
+with a reversed operation. In principle, all you need to know is the
+field of view around the
+nadir. Figure~\ref{fig:landscape:oldStyle:ground_pto} shows a simple
+configuration file.
+
+\begin{figure}[ht]
+  \centering
+\begin{configfile}
+# hugin project file
+#hugin_ptoversion 2
+p f0 w2048 h2048 v92 E0 R0 n"TIFF_m c:LZW r:CROP" 
+m g1 i0 f0 m2 p0.00784314
+
+# image lines
+#-hugin  cropFactor=1
+i w16384 h8192 f4 v360 Ra0 Rb0 Rc0 Rd0 Re0 Eev0 Er1 Eb1 r0 
+  p90 y0 TrX0 TrY0 TrZ0 Tpy0 Tpp0 j0 a0 b0 c0 d0 e0 g0 t0 
+  Va1 Vb0 Vc0 Vd0 Vx0 Vy0  Vm5 n"Eqirect_Pano360.png" 
+\end{configfile}
+\caption{Project file \file{ground.pto} usable to create the ground image with
+  \program{Hugin} or, on the command line, its \program{nona}
+  stitcher. The last line, starting with \texttt{i}, has been wrapped,
+  but must be 1 line.}
+  \label{fig:landscape:oldStyle:ground_pto}
+\end{figure}
+
+
+Say, the side panels extend down to \var{decor\_angle\_shift=-44}
+degrees, which means you must close the ground with a Nadir
+$FoV=2\times(90-44)=92$. For maximum compatibility, we will again make
+an image of width and height both 2048\px. These values can be found
+in the \texttt{p} line in
+Figure~\ref{fig:landscape:oldStyle:ground_pto}.  The \texttt{i} line
+describes the input image, which is our full equirectangular pano of
+width \texttt{w}$=16384$ and height \texttt{h}$=8192$. The last
+argument of that line is the image file name.
+
+For processing, we do not use the \program{Hugin} GUI, but simply the
+command line. The actual program to call is \program{nona}.  If your
+stitched panorama is a 16-bit TIFF, \program{nona} will also make a
+16-bit image, but our textures are limited to 8-bit PNGs. We apply our
+most useful tool, \program{convert} from the \program{ImageMagick}
+suite.
+
+\begin{commands}
+nona -v -m PNG  ground.pto -o ground.png 
+convert ground.png -depth 8 ground_8bit.png
+\end{commands}
+
+The file \file{ground\_8bit.png} is then used in the \var{groundtex}
+field on \file{landscape.ini}.
+
 
 \subsection{Final Calibration}
 \label{sec:landscapes:FinalCalibration}
@@ -1263,21 +1333,21 @@ cursor keys over the grid, and align the outline of the photo
 horizon's southern point with the measured line. Now it's time to
 estimate the quality of the panorama.
 
-In the Hugin \menu{Photos} tab, select the \menu{Positions} view on
+In \program{Hugin}'s \menu{Photos} tab, select the \menu{Positions} view on
 the right side. Now you see ``Yaw'', ``Pitch'' and ``Roll'' values of
 camera-to-world orientation listed in the photos list. It should now
 be possible, by changing the values \emph{only for the anchor image}
 and re-optimizing, to come to a panorama with only minimal error. In
 the process, start with Optimising \menu{Positions> incremental from
   anchor}, then go for view and barrel optimisation, and so on. Always
-try to remove match points which have large error and are irrelevant
+try to remove foreground match points which have large error and are irrelevant
 for the task to match the horizon. Those are especially cross-matches
 of horizon and subhorizon rows of images. Only vertically and
 horizontally adjacent images should be required to match. For handheld
-panoramas, also adjacent images in the non-horizontal rows are usually
+panoramas, also links between adjacent images in the non-horizontal rows are usually
 too erroneous to be useful, just remove these match points. Use the
 \menu{Layout} tab in the Fast Panorama Preview to see the relations
-between images (Fig.~\ref{fig:FastPanoPreview}). Red lines have big
+between images (Fig.~\ref{fig:FastPanoPreview}): Red lines have big
 errors, green lines are good, thin gray lines indicate possible
 overlap without specified match points. After each optimisation step,
 export a new pano image, load as layer in \program{GIMP}, and check
@@ -1317,11 +1387,11 @@ Within a few rounds of adjustments, panorama creation, adding as layer
 in the image editor, and comparing to the reference data, you should
 achieve a match to fit your needs.
 
-In case you have take photographs in several rings, you may have to
+In case you have taken photographs in several rings but without a panorama tripod, you may have to
 first align only the horizontal images (deselect the lower images to
 exclude from optimisation), and when the horizon ring is aligned
 perfectly, deactivate further optimisation in \program{Hugin} for those photos
-while ``attaching'' the lower photos. In \program{Hugin}'s \menu{Photos} tab,
+while ``attaching'' (optimising) the lower photos. In \program{Hugin}'s \menu{Photos} tab,
 select \menu{Optimise> Geometric> Custom Parameters}. This opens an
 extra tab \menu{Optimiser}, where you can fine-tune your needs: Switch
 off all variables for the photos in the horizon ring, and make sure
@@ -1446,7 +1516,7 @@ The possibilities seem limited only by your time and skills!
 \label{sec:landscapes:otherSoftware}
 
 Here is a short collection of other useful programs for (panorama)
-image manipulation and other tasks.
+image manipulation and other tasks on Windows.
 
 
 \subsection{IrfanView}
