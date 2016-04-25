@@ -1,12 +1,10 @@
 
 ########### install files ###############
 
-# install textures info (JSON and FAB)
-INSTALL(FILES textures.json nebula_textures.fab DESTINATION share/${PACKAGE}/nebulae/default )
-
-# install DSO catalogs and textures
+# install DSO catalog and textures
 INSTALL(DIRECTORY ./ DESTINATION share/${PACKAGE}/nebulae/default 
 	FILES_MATCHING 
 	PATTERN "*.dat"
 	PATTERN "*.png"
+	PATTERN "*.json"
 	PATTERN "CMakeFiles" EXCLUDE )
