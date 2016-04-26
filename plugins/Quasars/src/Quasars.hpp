@@ -155,10 +155,6 @@ public:
 	//! @param b if true, updates will be enabled, else they will be disabled
 	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
 
-	bool getDisplayMode(void);
-	void setDisplayMode(bool b);
-	QString getMarkerColor(void);
-	void setMarkerColor(QString c);
 	void setEnableAtStartup(bool b) { enableAtStartup=b; }
 	bool getEnableAtStartup(void) { return enableAtStartup; }
 
@@ -175,9 +171,6 @@ public:
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
 
-	//! Get count of quasars from catalog
-	int getCountQuasars(void) {return QsrCount;}
-
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(Quasars::UpdateState state);
@@ -190,18 +183,38 @@ public slots:
 	//! module.ini file and update the local JSON file.
 	void updateJSON(void);
 
+	//! Enable/disable display of markers of quasars
+	//! @param b boolean flag
 	void setFlagShowQuasars(bool b) { flagShowQuasars=b; }
+	//! Get status to display of markers of quasars
+	//! @return true if it's visible
 	bool getFlagShowQuasars(void) { return flagShowQuasars; }
 
 	//! Define whether the button toggling quasars should be visible
 	void setFlagShowQuasarsButton(bool b);
 	bool getFlagShowQuasarsButton(void) { return flagShowQuasarsButton; }
 
-	//! Display a message. This is used for plugin-specific warnings and such
-	void displayMessage(const QString& message, const QString hexColor="#999999");
-	void messageTimeout(void);
+	//! Get count of quasars from catalog
+	//! @return count of quasars
+	int getCountQuasars(void) {return QsrCount;}
 
-	void reloadCatalog(void);
+	//! Get status to display of distribution of pulsars
+	//! @return true if distribution of pulsars is enabled
+	bool getDisplayMode(void);
+	//! Enable/disable display of distribution of pulsars
+	//! @param b (set true for display quasars as markers)
+	void setDisplayMode(bool b);
+
+	//! Get color for quasars markers
+	//! @return color
+	Vec3f getMarkerColor(void);
+	//! Set color for quasars markers
+	//! @param c color
+	//! @code
+	//! // example of usage in scripts
+	//! Quasars.setMarkerColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setMarkerColor(const Vec3f& c);
 
 private:
 	// Font used for displaying our text
@@ -276,6 +289,11 @@ private slots:
 	void checkForUpdate(void);
 	void updateDownloadComplete(QNetworkReply* reply);
 
+	//! Display a message. This is used for plugin-specific warnings and such
+	void displayMessage(const QString& message, const QString hexColor="#999999");
+	void messageTimeout(void);
+
+	void reloadCatalog(void);
 };
 
 
