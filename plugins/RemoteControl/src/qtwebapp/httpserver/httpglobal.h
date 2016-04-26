@@ -20,7 +20,10 @@
     #define DECLSPEC
 #endif
 
-/** Get the library version number */
+/**
+ @ingroup qtWebApp
+ Get the library version number
+*/
 DECLSPEC const char* getQtWebAppLibVersion();
 
 #endif // HTTPGLOBAL_H

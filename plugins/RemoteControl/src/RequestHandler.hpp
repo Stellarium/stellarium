@@ -48,6 +48,7 @@ public:
 	//! LocationSearchService | \c locationsearch
 	//! ViewService           | \c view
 	RequestHandler(const StaticFileControllerSettings& settings, QObject* parent = 0);
+	//! The internal APIController, and all registered services are deleted
 	virtual ~RequestHandler();
 
 	//! Called in the main thread each frame, only passed on to APIController::update

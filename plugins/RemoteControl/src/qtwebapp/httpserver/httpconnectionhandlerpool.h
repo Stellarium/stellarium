@@ -9,7 +9,8 @@
 #include "httpconnectionhandler.h"
 
 /**
- * Contains all settings for the connection handler pool and the child connection handlers.
+  @ingroup qtWebApp
+  Contains all settings for the connection handler pool and the child connection handlers.
  */
 struct HttpConnectionHandlerPoolSettings : public HttpConnectionHandlerSettings
 {
@@ -31,6 +32,7 @@ struct HttpConnectionHandlerPoolSettings : public HttpConnectionHandlerSettings
 };
 
 /**
+  @ingroup qtWebApp
   Pool of http connection handlers. The size of the pool grows and
   shrinks on demand.
   <p>

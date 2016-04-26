@@ -16,6 +16,7 @@
 #include "httpglobal.h"
 
 /**
+  @ingroup qtWebApp
   This object represents a single HTTP request. It reads the request
   from a TCP socket and provides getters for the individual parts
   of the request.

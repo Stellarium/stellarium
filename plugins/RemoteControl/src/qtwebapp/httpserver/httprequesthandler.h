@@ -11,6 +11,7 @@
 #include "httpresponse.h"
 
 /**
+  @ingroup qtWebApp
    The request handler generates a response for each HTTP request. Web Applications
    usually have one central request handler that maps incoming requests to several
    controllers (servlets) based on the requested path.
