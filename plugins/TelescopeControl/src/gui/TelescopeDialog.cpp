@@ -255,7 +255,7 @@ void TelescopeDialog::setAboutText()
 	aboutPage += "<tr><td>Bogdan Marinov &lt;bogdan.marinov84@gmail.com&gt; (" + q_("Plug-in and GUI programming") + ")</td></tr>";
 	aboutPage += "</table>";
 
-	aboutPage += "<p>" + q_("This plug-in is based on and reuses a lot of code under the GNU General Public License and version 2.1 of the GNU Lesser General Public License:") + "</p><ul>";
+	aboutPage += "<p>" + q_("This plug-in is based on and reuses a lot of code under the GNU General Public License:") + "</p><ul>";
 	aboutPage += "<li>" + q_("the Telescope, TelescopeDummy, TelescopeTcp and TelescopeMgr classes in Stellarium's code (the client side of Stellarium's original telescope control feature);") + "</li>";
 	aboutPage += "<li>" + q_("the telescope server core code (licensed under the LGPL)") + "</li>";
 	aboutPage += "<li>" + q_("the TelescopeServerLx200 telescope server core code (originally licensed under the LGPL)");
