@@ -13,7 +13,10 @@
 #include "httpconnectionhandlerpool.h"
 #include "httprequesthandler.h"
 
-/** Contains all settings for HttpListener and supporting classes. */
+/**
+ @ingroup qtWebApp
+ Contains all settings for HttpListener and supporting classes.
+*/
 struct HttpListenerSettings : public HttpConnectionHandlerPoolSettings
 {
 	HttpListenerSettings()
@@ -27,6 +30,7 @@ struct HttpListenerSettings : public HttpConnectionHandlerPoolSettings
 };
 
 /**
+  @ingroup qtWebApp
   Listens for incoming TCP connections and and passes all incoming HTTP requests to your implementation of HttpRequestHandler,
   which processes the request and generates the response (usually a HTML document).
   <p>
@@ -50,7 +54,6 @@ struct HttpListenerSettings : public HttpConnectionHandlerPoolSettings
   @see HttpConnectionHandler for description of the readTimeout
   @see HttpRequest for description of config settings maxRequestSize and maxMultiPartSize
 */
-
 class DECLSPEC HttpListener : public QTcpServer {
     Q_OBJECT
     Q_DISABLE_COPY(HttpListener)

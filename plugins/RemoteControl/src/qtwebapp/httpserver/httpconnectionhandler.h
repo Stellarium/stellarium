@@ -16,14 +16,20 @@
 #include "httprequest.h"
 #include "httprequesthandler.h"
 
-/** Alias type definition, for compatibility to different Qt versions */
+/**
+  @ingroup qtWebApp
+  Alias type definition, for compatibility to different Qt versions
+*/
 #if QT_VERSION >= 0x050000
     typedef qintptr tSocketDescriptor;
 #else
     typedef int tSocketDescriptor;
 #endif
 
-/** Alias for QSslConfiguration if OpenSSL is not supported */
+/**
+  @ingroup qtWebApp
+  Alias for QSslConfiguration if OpenSSL is not supported
+*/
 #ifdef QT_NO_OPENSSL
 typedef QObject HttpSslConfiguration;
 #else
@@ -31,6 +37,7 @@ typedef QSslConfiguration HttpSslConfiguration;
 #endif
 
 /**
+  @ingroup qtWebApp
   Contains all settings for the connection handler
  */
 struct HttpConnectionHandlerSettings {
@@ -48,6 +55,7 @@ struct HttpConnectionHandlerSettings {
 
 
 /**
+  @ingroup qtWebApp
   The connection handler accepts incoming connections and dispatches incoming requests to to a
   request mapper. Since HTTP clients can send multiple requests before waiting for the response,
   the incoming requests are queued and processed one after the other.
