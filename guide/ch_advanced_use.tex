@@ -169,19 +169,20 @@ directory unchanged. In this manner different users on a multi-user
 system can customise Stellarium without affecting the other users. 
 
 \section{The Main Configuration File}
-%\label{the-main-configuration-file}
 \label{sec:ConfigurationFile}
 
 The main configuration file is read each time Stellarium starts, and
 settings such as the observer's location and display preferences are
 taken from it. Ideally this mechanism should be totally transparent to
-the user -- anything that is configurable should be configured ``in'' the
-program GUI. However, at time of writing Stellarium isn't quite complete
-in this respect, despite improvements in each version. Some settings, 
-esp.\ color values for lines, grids, etc.\ 
-can only be changed by directly editing the configuration file. This
-section describes some of the settings a user may wish to modify in this
-way, and how to do it.
+the user -- anything that is configurable should be configured ``in''
+the program GUI. However, at time of writing Stellarium isn't quite
+complete in this respect, despite improvements in each version. Some
+settings, esp.\ color values for lines, grids, etc.\ can only be
+changed by directly editing the configuration file.\footnote{Color
+  values can be edited interactively by the Text User Interface plugin
+  (see~\ref{sec:plugins:TextUserInterface}).} This section describes
+some of the settings a user may wish to modify in this way, and how to
+do it.
 
 If the configuration file does not exist in the \emph{user directory}
 when Stellarium is started (e.g., the first time the user starts the
@@ -195,8 +196,8 @@ system). The name of the configuration file is
   Line Options for details.}.
 
 The configuration file is a regular text file, so all you need to edit
-it is a text editor like \emph{Notepad} on Windows, \emph{Text Edit} on
-the Mac, or \emph{nano/vi/gedit/emacs/leafpad} etc.\ on Linux.
+it is a text editor like \program{Notepad} on Windows, \program{Text Edit} on
+the Mac, or \program{nano}/\program{vi}/\program{gedit}/\program{emacs}/\program{leafpad} etc.\ on Linux.
 
 %The following sub-sections contain details on how to make commonly used
 %modifications to the configuration file. 
@@ -266,7 +267,7 @@ will always be used.
 
 
 \chapter{Command Line Options}
-\label{command-line-options}
+%\label{command-line-options}
 \label{sec:CommandLineOptions}
 
 Stellarium's behaviour can be modified by providing parameters to the
