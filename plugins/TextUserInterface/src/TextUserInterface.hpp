@@ -73,6 +73,7 @@ private slots:
 	void setTimeFormat(QString format);
 	void setSkyCulture(QString i18);
 	void setAppLanguage(QString lang);
+	void setSkyLanguage(QString lang);
 	void saveDefaultSettings(void);
 	void shutDown(void);
 	void setBortleScale(int bortle);
