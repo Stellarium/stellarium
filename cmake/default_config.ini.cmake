@@ -163,7 +163,6 @@ script_console_function_color       = 0.0,1.0,0.0
 script_console_constant_color       = 1.0,0.5,0.5
 
 [tui]
-flag_enable_tui_menu                = true
 flag_show_gravity_ui                = false
 flag_show_tui_datetime              = false
 flag_show_tui_short_obj_info        = false
