@@ -108,7 +108,7 @@
 \lstnewenvironment{configfile}[1][\small]{\lstset{language=sh,basicstyle=\ttfamily#1,%
                                    backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
-\lstnewenvironment{script}{\lstset{language=PHP,%
+\lstnewenvironment{script}{\lstset{language=HTML,%
 								   basicstyle=\ttfamily\small,%
                                    backgroundcolor=\color{black!5},%
                                    frame=leftline,%
@@ -608,8 +608,9 @@ innerbottommargin=5pt]{cBox}
 %----------------------------------------------------------------------------------------
 
 \usepackage{hyperref}
-\hypersetup{hidelinks,backref=true,pagebackref=true,hyperindex=true,colorlinks=false,breaklinks=true,urlcolor= ocre,
-            pdfpagemode=UseOutlines,bookmarks=true,bookmarksopen=true,%bookmarksopenlevel=1,bookmarksnumbered,
+\hypersetup{hidelinks,%backref=true,pagebackref=true,hyperindex=true, %% 3 latter are default, produce warnings if specified again.
+            colorlinks=false,breaklinks=true,urlcolor= ocre,
+            pdfpagemode=UseOutlines,bookmarksopen=true,%bookmarks=true,bookmarksopenlevel=1,bookmarksnumbered,
             pdfview=Fit,pdfstartview=Fit,pdfpagelayout=TwoPageRight,
             pdfduplex=DuplexFlipLongEdge,
             pdfsubject={Stellarium is a multi-platform open-source desktop planetarium. This document describes version 0.15+ (2016)},
