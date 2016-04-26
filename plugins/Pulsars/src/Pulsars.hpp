@@ -156,15 +156,6 @@ public:
 	//! @param b if true, updates will be enabled, else they will be disabled
 	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
 
-	bool getDisplayMode(void);
-	void setDisplayMode(bool b);
-
-	bool getGlitchFlag(void);
-	void setGlitchFlag(bool b);
-
-	QString getMarkerColor(bool mtype = true);
-	void setMarkerColor(QString c, bool mtype = true);
-
 	void setEnableAtStartup(bool b) { enableAtStartup=b; }
 	bool getEnableAtStartup(void) { return enableAtStartup; }
 
@@ -181,9 +172,6 @@ public:
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
 
-	//! Get count of pulsars from catalog
-	int getCountPulsars(void) {return PsrCount;}
-
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(Pulsars::UpdateState state);
@@ -192,22 +180,51 @@ signals:
 	void jsonUpdateComplete(void);
 
 public slots:
-	//! Download JSON from web recources described in the module section of the
-	//! module.ini file and update the local JSON file.
-	void updateJSON(void);
-
-	void setFlagShowPulsars(bool b) { flagShowPulsars=b; }
-	bool getFlagShowPulsars(void) { return flagShowPulsars; }
-
-	//! Display a message. This is used for plugin-specific warnings and such
-	void displayMessage(const QString& message, const QString hexColor="#999999");
-	void messageTimeout(void);
-
 	//! Define whether the button toggling pulsars should be visible
 	void setFlagShowPulsarsButton(bool b);
 	bool getFlagShowPulsarsButton(void) { return flagShowPulsarsButton; }
 
-	void reloadCatalog(void);
+	//! Enable/disable display of markers of pulsars
+	//! @param b boolean flag
+	void setFlagShowPulsars(bool b) { flagShowPulsars=b; }
+	//! Get status to display of markers of pulsars
+	//! @return true if it's visible
+	bool getFlagShowPulsars(void) { return flagShowPulsars; }
+
+	//! Get status to display of distribution of pulsars
+	//! @return true if distribution of pulsars is enabled
+	bool getDisplayMode(void);
+	//! Enable/disable display of distribution of pulsars
+	//! @param b
+	void setDisplayMode(bool b);
+
+	//! Get status for usage of separate color for pulsars with glitches
+	//! @return true if separate color is used for pulsars with glitches
+	bool getGlitchFlag(void);
+	//! Enable/disable the use of a separate color for pulsars with glitches
+	//! @param boolean flag
+	void setGlitchFlag(bool b);
+
+	//! Get color for pulsars markers
+	//! @param mtype set false if you want get color of pulsars with glitches
+	//! @return color
+	Vec3f getMarkerColor(bool mtype = true);
+	//! Set color for pulsars markers
+	//! @param c color
+	//! @param mtype set false if you want set color for pulsars with glitches
+	//! @code
+	//! // example of usage in scripts
+	//! Pulsars.setMarkerColor(Vec3f(1.0,0.0,0.0), true);
+	//! @endcode
+	void setMarkerColor(const Vec3f& c, bool mtype = true);
+
+	//! Get count of pulsars from catalog
+	//! @return count of pulsars
+	int getCountPulsars(void) {return PsrCount;}
+
+	//! Download JSON from web recources described in the module section of the
+	//! module.ini file and update the local JSON file.
+	void updateJSON(void);
 
 private:
 	// Font used for displaying our text
@@ -283,6 +300,11 @@ private slots:
 	void checkForUpdate(void);
 	void updateDownloadComplete(QNetworkReply* reply);
 
+	void reloadCatalog(void);
+
+	//! Display a message. This is used for plugin-specific warnings and such
+	void displayMessage(const QString& message, const QString hexColor="#999999");
+	void messageTimeout(void);
 };
 
 

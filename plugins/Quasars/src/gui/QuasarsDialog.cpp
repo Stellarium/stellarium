@@ -230,7 +230,7 @@ void QuasarsDialog::updateCompleteReceiver(void)
 
 void QuasarsDialog::restoreDefaults(void)
 {
-	qDebug() << "Quasars::restoreDefaults";
+	qDebug() << "[Quasars] Restore defaults...";
 	qsr->restoreDefaults();
 	qsr->readSettingsFromConfig();
 	updateGuiFromSettings();
