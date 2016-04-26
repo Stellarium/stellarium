@@ -198,6 +198,7 @@ updates\_enable         & bool   & Enable updates of bright novae catalog from I
 url                     & string & URL of bright novae catalog \\\bottomrule
 \end{longtabu}
 
+\newpage
 \subsection{Format of historical supernovae catalog}
 \label{sec:plugins:HistoricalSupernovae:format}
 
@@ -359,6 +360,7 @@ habitable\_exoplanet\_marker\_color  & R,G,B & Color for marker of star with pla
  \\\bottomrule
 \end{longtabu}
 
+\newpage
 \subsection{Format of exoplanets catalog}
 \label{sec:plugins:Exoplanets:format}
 
@@ -468,9 +470,7 @@ To add a new exoplanet system, open a new line after line 5 and paste the follow
 
 \noindent This plugin plots the position of various pulsars, with object
 information about each one. Pulsar data is derived from \textit{The
-  ATNF Pulsar Catalogue} (Manchester, R. N., Hobbs, G. B., Teoh, A. \&
-Hobbs, M., Astron. J., 129, 1993-2006
-(2005)\footnote{\url{http://arxiv.org/abs/astro-ph/0412641}}).
+  ATNF Pulsar Catalogue}\cite{2005AJ....129.1993M}.
 
 If enabled (see section~\ref{sec:Plugins:EnablingPlugins}), use the
 \guibutton{0.6}{btPulsars-off} button to activate display of
@@ -497,12 +497,11 @@ glitch\_color               & R,G,B  & Color for marker of the pulsars with glit
 use\_separate\_colors       & bool   & Use separate colors for different types of the pulsars \\\bottomrule
 \end{longtabu}
 
+\newpage
 \subsection{Format of pulsars catalog}
 \label{sec:plugins:Pulsars:format}
 
 To add a new pulsar, open a new line after line 5 and paste the following, note commas and brackets, they are important:
-
-%\newpage
 
 \begin{configfile}
 "Pulsar designation":
@@ -550,17 +549,19 @@ To add a new pulsar, open a new line after line 5 and paste the following, note 
 },
 \end{configfile}
 
+\newpage
 \section{Quasars Plugin}
 \label{sec:plugins:Quasars}
 
-%\begin{figure}[ht]
-%\includegraphics[width=\textwidth]{psr_j0332_5434.jpg}
-%\label{fig:plugin:Quasars}
-%\caption{PSR J0332-5434}
-%\end{figure}
+\noindent The Quasars plugin provides visualization of some quasars brighter than 16 visual magnitude. A catalogue of quasars compiled from \textit{Quasars and Active Galactic Nuclei} (13th Ed.)\cite{2010A&A...518A..10V}.
 
-\noindent This plugin plots the position of various quasars, with object
-information about each one. Quasar data is derived from \textit{WHICH Catalogue} 
+\begin{figure}[ht]
+\includegraphics[width=\textwidth]{qso_3c_249_1.jpg}
+\label{fig:plugin:Quasars}
+\caption{3C 249.1, also known as LEDA 2821945 or 4C 77.09}
+\end{figure}
+
+
 %% TODO follow scheme from Pulsars above. Add a section about QSOs in astornomical phenomena (after galaxies) and add reference from here.
 
 
@@ -568,6 +569,53 @@ If enabled (see section~\ref{sec:Plugins:EnablingPlugins}), use the
 \guibutton{0.6}{btQuasars-off} button to activate display of
 quasars. The GUI allows a few configuration options.  You can also
 find a quasar (\key{F3}) by its designation (e.g., \emph{3C 273}).
+
+\subsection{Section \big[Quasars\big] in config.ini file}
+\label{sec:plugins:Quasars:config}
+
+\begin{longtabu} to \textwidth {l|l|X}\toprule
+\emph{ID}               & \emph{Type} & \emph{Description}\\\midrule
+last\_update                & string & Date and time of last update\\\midrule
+update\_frequency\_days     & int    & Frequency of updates, in days\\\midrule
+updates\_enable             & bool   & Enable updates of quasars catalog from Internet \\\midrule
+url                         & string & URL of quasars catalog \\\midrule
+enable\_at\_startup         & bool   & Enable displaying of quasars at startup of Stellarium \\\midrule
+distribution\_enabled       & bool   & Enable distribution mode for the quasars \\\midrule
+flag\_show\_quasars\_button & bool   & Enable displaying quasars button on toolbar \\\midrule
+marker\_color               & R,G,B  & Color for marker of the quasars \\\bottomrule
+\end{longtabu}
+
+\newpage
+\subsection{Format of quasars catalog}
+\label{sec:plugins:Quasars:format}
+
+To add a new quasar, open a new line after line 5 and paste the following, note commas and brackets, they are important:
+
+\begin{configfile}
+"Quasar designation":
+{
+    "RA": "Right ascension (J2000)",
+    "DE": "Declination (J2000)",
+    "Amag": value of absolute magnitude,
+    "Vmag": value of visual magnitude,
+    "z": value of Z (redshift),
+    "bV": value of B-V colour
+},
+\end{configfile}
+
+%\newpage
+\noindent For example, the record for \textbf{3C 249.1} looks like:
+\begin{configfile}
+"3C 249.1":
+{
+    "RA": "11h04m13.8s",
+    "DE": "+76d58m58s",
+    "Amag": -25.1,
+    "Vmag": 15.72,
+    "z": 0.313,
+    "bV": -0.02
+},
+\end{configfile}
 
 
 \newpage
@@ -663,6 +711,7 @@ colorARR               & R,G,B & Color for marker of active meteor showers with 
 colorIR               & R,G,B & Color for marker of inactive meteor showers \\\bottomrule
 \end{longtabu}
 
+\newpage
 \subsection{Format of Meteor Showers catalog}
 \label{sec:plugins:MeteorShowers:format}
 
