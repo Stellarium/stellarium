@@ -14,7 +14,10 @@
 #include <QString>
 #include "templateglobal.h"
 
-/** Interface for Template::translate calls. */
+/**
+ * @ingroup qtWebApp
+ * Interface for Template::translate calls.
+*/
 class ITemplateTranslationProvider
 {
 public:

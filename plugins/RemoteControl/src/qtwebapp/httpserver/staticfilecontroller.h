@@ -13,7 +13,10 @@
 #include "httpresponse.h"
 #include "httprequesthandler.h"
 
-/** Contains all the settings for the StaticFileController */
+/**
+ * @ingroup qtWebApp
+ * Contains all the settings for the StaticFileController
+*/
 struct StaticFileControllerSettings
 {
 	StaticFileControllerSettings()
@@ -36,6 +39,7 @@ struct StaticFileControllerSettings
 
 
 /**
+  @ingroup qtWebApp
   Delivers static files. It is usually called by the applications main request handler when
   the caller requests a path that is mapped to static files.
   <p>

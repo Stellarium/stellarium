@@ -13,6 +13,7 @@
 #include "httpcookie.h"
 
 /**
+  @ingroup qtWebApp
   This object represents a HTTP response, used to return something to the web client.
   <p>
   <code><pre>

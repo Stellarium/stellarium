@@ -24,6 +24,14 @@
 #include "StelLocationMgr.hpp"
 #include <QMutex>
 
+//! @ingroup remoteControl
+//! Provides predefined location search functionality, using the StelLocationMgr.
+//!
+//! ## Service methods
+//! @copydetails getImpl()
+//!
+//! @sa LocationService
+//! @note This service supports threaded operation
 class LocationSearchService : public AbstractAPIService
 {
 	Q_OBJECT
@@ -32,9 +40,20 @@ public:
 
 	virtual ~LocationSearchService() {}
 
-	//! we work on a copy of the StelLocationMgr, to prevent hitches as the web user is typing
+	//! We work on a copy of the StelLocationMgr, to prevent hitches as the web user is typing
+	//! @returns true
 	bool supportsThreadedOperation() const Q_DECL_OVERRIDE { return true; }
 protected:
+	//! @brief Implements the GET method.
+	//! @details
+	//! ### GET operations
+	//! #### search
+	//! Parameters: <tt>term (String)</tt>\n
+	//! Searches the \p term in the list of predefined locations of the StelLocationMgr, and returns a JSON string array of the results.
+	//! #### nearby
+	//! Parameters: <tt>[planet (String)] [latitude (Number)] [longitude (Number)] [radius (Number)]</tt>\n
+	//! Searches near the location defined by \p planet, \p latitude and \p longitude for predefined locations (inside the given \p radius)
+	//! using StelLocationMgr::pickLocationsNearby, returns a JSON string array.
 	virtual void getImpl(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
 private slots:
 	// connected to the main location manager in the main thread

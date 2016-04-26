@@ -35,44 +35,9 @@ class RemoteControlDialog;
 class HttpListener;
 class RequestHandler;
 
-//! @defgroup remoteControl Remote Control plug-in
-//! @brief Control Stellarium through your web browser!
-//!
-//! The %RemoteControl plugin provides a remote control using a webserver interface, usable for single or even synchronized cluster of clients (via the RemoteSync plugin).
-//! You can either connect via (JavaScript enabled) web browser (recommended in 2016: <a href="https://mozilla.org/firefox">Firefox</a>, <a href="https://www.google.com/chrome/">Chrome</a>) to a
-//! configurable port (default: 8090) as in
-//! http://localhost:8090[/index.html]
-//! or for alternative GUI which may be better suited for smaller 7inch screens,
-//! http://localhost:8090/tablet7in.html
-//! The web data for the interface resides in the /data/webroot directory inside the installation directory, and can be customized with
-//! some knowledge of HTML, CSS and maybe JavaScript (not necessary for basic functionality, only when more complex additions are required).
-//! Alternative or derived HTML control GUIs must be placed into the same folder,
-//! the web server cannot read data in the private Stellarium user directory.
-//!
-//! This plugin makes extensive use of the StelProperty system introduced with it. This allows not only to trigger actions,
-//! but also set QVariant values, which is enough to control many things in the program.
-//! A few dedicated modules have been implemented closely following the existing GUI for view motion, location setting,
-//! landscape and skyculture selection, searching objects, etc.
-//! It is possible to define simple action or property control interfaces which are only shown for activated plugins.
-//!
-//! It is also possible to send commands via commandline, e.g..
-//! @code
-//! wget -q --post-data 'id=double_stars.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&amp;1
-//! curl --data 'id=double_stars.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&amp;1
-//! curl -d     'id=double_stars.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&amp;1
-//! @endcode
-//! This allows triggering automatic show setups for museums etc.
-//!
-//! @author Florian Schaukowitsch, Georg Zotti
-//! @note This plugin includes parts of the QtWebApp web server by Stefan Frings (http://stefanfrings.de/qtwebapp/index-en.html), used under the LGPL
-//! @note This plugin has been developed as project of ESA SoCiS 2015 (http://sophia.estec.esa.int/socis/)
-//!
-//! TODO: Complete this documentation.
-//! @{
-//!
-
+//! @ingroup remoteControl
 //! Main class of the %RemoteControl plug-in, implementing the StelModule interface.
-//! Manages the settings and the starting/stopping of the web server.
+//! Manages the settings and the starting/stopping of the <a href="http://stefanfrings.de/qtwebapp/index-en.html">QtWebApp</a> web server.
 //! The RequestHandler class is used for request processing.
 //! @author Florian Schaukowitsch
 class RemoteControl : public StelModule
@@ -120,11 +85,19 @@ public:
 
 public slots:
 	//property setters
+	//! Starts/stops the web server
 	void setFlagEnabled(bool b);
+	//! If true, the server is automatically started when init() is called
 	void setFlagAutoStart(bool b);
+	//! If true, the password from setPassword() is required for all web requests
 	void setFlagUsePassword(bool b);
 
+	//! Sets the password that is optionally enabled with setFlagUsePassword().
+	//! The password is required by RequestHandler for all HTTP requests.
+	//! Basic HTTP auth is used, without a user name.
 	void setPassword(const QString& password);
+	//! Sets the port where the server listens. Must be done before startServer() is called,
+	//! or restart the server to use the new setting.
 	void setPort(const int port);
 
 	//! Load the plug-in's settings from the configuration file.
@@ -148,7 +121,7 @@ public slots:
 	//! Uses the RequestHandler class for processing.
 	//! @see RequestHandler
 	void startServer();
-	//! Stops the HTTP server
+	//! Stops the HTTP server gracefully
 	void stopServer();
 
 signals:
@@ -190,7 +163,8 @@ private:
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
-//! This class is used by Qt to manage a plug-in interface
+//! @ingroup remoteControl
+//! This class defines the plugin interface with the main Stellarium program
 class RemoteControlStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
@@ -200,8 +174,6 @@ public:
 	virtual StelModule* getStelModule() const;
 	virtual StelPluginInfo getPluginInfo() const;
 };
-
-//! @}
 
 #endif /*REMOTECONTROL_HPP_*/
 
