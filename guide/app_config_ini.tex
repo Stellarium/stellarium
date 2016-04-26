@@ -9,7 +9,7 @@
 
 \chapter{Configuration File}
 \label{sec:config.ini}
-See \ref{ch:AdvancedUse:TheMainConfigurationFile}{Advanced Use, The
+See \ref{sec:ConfigurationFile}{The
 Main Configuration File} for information about this file, including its
 default installed location, and command line options that can
 affect how it is processed.
@@ -259,12 +259,12 @@ flag\_mouse\_cursor\_timeout    & bool  & true  & Set to \emph{false} if you wan
 mouse\_cursor\_timeout          & float & 10    & Set to \emph{0} if you want to keep the mouse cursor visible at all times. 
                                                   non-0 values mean the cursor will be hidden after that many seconds of inactivity\\\midrule
 flag\_show\_flip\_buttons       & bool  & false & Enables/disables display of the image flipping buttons in the main 
-                                                  toolbar (see section \ref{imageflipping})\\\midrule
+                                                  toolbar (see section \ref{sec:gui:configuration:tools})\\\midrule
 flag\_show\_nebulae\_background\_button & bool & false & Set to \emph{true} if you want to have access to the 
                                                          button for enabling/disabling backgrounds for deep-sky objects\\\midrule
 flag\_use\_degrees              & bool   &&\\\midrule
 selected\_object\_info          & string & all  & Values: \emph{all}, \emph{short}, \emph{none}, 
-                                                  and \emph{custom} (since V0.12.0; see~\ref{sec:config.ini:}).\\\midrule
+                                                  and \emph{custom} (since V0.12.0; see~\ref{sec:gui:configuration:info}).\\\midrule
 auto\_hide\_horizontal\_toolbar & bool   & true & Set to \emph{true} if you want auto hide the horizontal toolbar.\\\midrule
 auto\_hide\_vertical\_toolbar   & bool   & true & Set to \emph{true} if you want auto hide the vertical toolbar.\\\midrule
 %% NO LONGER HERE!
@@ -519,8 +519,8 @@ init\_bortle\_scale      & int         & initial value of light pollution on the
 
 \section{\big[tui\big]}\label{sec:config.ini:tui}
 
-The built-in text user interface (TUI) plugin (see chapter~\ref{ch:TextUserInterface}) is most useful for planetariums. You can even configure a system shutdown command. 
-For historical reasons, the section is not called [TextUserInterface] but simply [tui].
+The built-in text user interface (TUI) plugin (see chapter~\ref{sec:plugins:TextUserInterface}) is most useful for planetariums. You can even configure a system shutdown command. 
+For historical reasons, the section is not called \texttt{[TextUserInterface]} but simply \texttt{[tui]}.
 %% TODO: Move to TUI plugin chapter?
 
 \begin{longtabu} to \textwidth {l|l|l|X}\toprule
