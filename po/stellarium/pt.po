@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-25 22:44+0700\n"
+"POT-Creation-Date: 2016-04-26 22:45+0700\n"
 "PO-Revision-Date: 2016-04-25 13:33+0000\n"
 "Last-Translator: Tiago S. <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-04-26 05:32+0000\n"
+"X-Launchpad-Export-Date: 2016-04-27 05:33+0000\n"
 "X-Generator: Launchpad (build 17995)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:140 src/core/modules/StarMgr.cpp:378
@@ -27,27 +27,26 @@ msgid "Display Options"
 msgstr "Opções de Visualização"
 
 #: src/core/modules/ConstellationMgr.cpp:141
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:280
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
 msgid "Constellation lines"
 msgstr "Linhas da constelação"
 
 #: src/core/modules/ConstellationMgr.cpp:142
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:290
 msgid "Constellation art"
 msgstr "Arte da constelação"
 
 #: src/core/modules/ConstellationMgr.cpp:143
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:285
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Constellation labels"
 msgstr "Legendas da constelação"
 
 #: src/core/modules/ConstellationMgr.cpp:144
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:291
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Constellation boundaries"
 msgstr "Limites de constelação"
 
 #: src/core/modules/StarMgr.cpp:379 src/ui_viewDialog.h:1589
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:246
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:253
 msgid "Stars"
 msgstr "Estrelas"
 
@@ -106,17 +105,17 @@ msgid "Solstitial Colure"
 msgstr "Coluro Solstícial"
 
 #: src/core/modules/GridLinesMgr.cpp:923
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:332
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:339
 msgid "Equatorial grid"
 msgstr "Grelha Equatorial"
 
 #: src/core/modules/GridLinesMgr.cpp:924 src/ui_viewDialog.h:1744
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:327
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:334
 msgid "Azimuthal grid"
 msgstr "Grelha azimutal"
 
 #: src/core/modules/GridLinesMgr.cpp:925
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:347
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Ecliptic line"
 msgstr "Linha eclíptica"
 
@@ -125,7 +124,7 @@ msgid "Ecliptic J2000 line"
 msgstr "Linha da eclíptica J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:927
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:342
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Equator line"
 msgstr "Linha do equador"
 
@@ -134,17 +133,17 @@ msgid "Equator J2000 line"
 msgstr "Linha do equador J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:929
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:322
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:329
 msgid "Meridian line"
 msgstr "Linha do meridiano"
 
 #: src/core/modules/GridLinesMgr.cpp:930
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:377
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:390
 msgid "Horizon line"
 msgstr "Linha do horizonte"
 
 #: src/core/modules/GridLinesMgr.cpp:931
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:337
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:344
 msgid "Equatorial J2000 grid"
 msgstr "Grelha equatorial J2000"
 
@@ -157,7 +156,7 @@ msgid "Ecliptic grid"
 msgstr "Grelha eclíptica"
 
 #: src/core/modules/GridLinesMgr.cpp:934 src/ui_viewDialog.h:1748
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:382
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Galactic grid"
 msgstr "Grelha galáctica"
 
@@ -166,7 +165,7 @@ msgid "Galactic equator"
 msgstr "Equador galáctico"
 
 #: src/core/modules/GridLinesMgr.cpp:936
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:392
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:405
 msgid "Opposition/conjunction longitude line"
 msgstr "Linha da longitude de oposição/conjunção"
 
@@ -187,7 +186,7 @@ msgid "Fog"
 msgstr "Nevoeiro"
 
 #: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:1776
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:304
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:311
 msgid "Cardinal points"
 msgstr "Pontos cardeais"
 
@@ -841,17 +840,17 @@ msgid "Planets"
 msgstr "Planetas"
 
 #: src/core/modules/SolarSystem.cpp:197
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:309
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:316
 msgid "Planet labels"
 msgstr "Identificações dos planetas"
 
 #: src/core/modules/SolarSystem.cpp:198
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:313
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Planet orbits"
 msgstr "Órbitas planetárias"
 
 #: src/core/modules/SolarSystem.cpp:199
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:317
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:324
 msgid "Planet trails"
 msgstr "Rastos dos planetas"
 
@@ -5084,12 +5083,12 @@ msgid "View"
 msgstr "Ver"
 
 #: src/ui_viewDialog.h:1590
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:259
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:266
 msgid "Absolute scale:"
 msgstr "Escala absoluta:"
 
 #: src/ui_viewDialog.h:1591
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:253
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Relative scale:"
 msgstr "Escala relativa:"
 
@@ -5102,7 +5101,7 @@ msgid "Zodiacal Light brightness:"
 msgstr "Brilho da Luz Zodiacal:"
 
 #: src/ui_viewDialog.h:1594
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:265
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:272
 msgid "Twinkle:"
 msgstr "Cintilação:"
 
@@ -5147,7 +5146,7 @@ msgstr ""
 "localizações"
 
 #: src/ui_viewDialog.h:1612
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:428
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
 msgid "Light pollution:"
 msgstr "Poluição luminosa:"
 
@@ -5622,7 +5621,7 @@ msgid "Markings"
 msgstr "Marcadores"
 
 #: src/ui_viewDialog.h:1853
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:433
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:445
 msgid "Landscape"
 msgstr "Paisagem"
 
@@ -6056,6 +6055,7 @@ msgstr ""
 "inicial de visualização"
 
 #: src/ui_configurationDialog.h:1269
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:457
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "A redução automática devolve a direcção inicial da visualização"
 
@@ -6140,7 +6140,7 @@ msgid "Tools"
 msgstr "Ferramentas"
 
 #: src/ui_configurationDialog.h:1320
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:486
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:497
 msgid "Scripts"
 msgstr "Scripts"
 
@@ -8166,10 +8166,8 @@ msgstr "Programação de complementos e do GUI"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
 msgid ""
 "This plug-in is based on and reuses a lot of code under the GNU General "
-"Public License and version Lesser General Public License from:"
+"Public License:"
 msgstr ""
-"Este complemento é baseado e reutiliza muito códio com a licença GNU General "
-"Public License e  Lesser General Public License de:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:259
 msgid ""
@@ -9591,116 +9589,104 @@ msgid "24h"
 msgstr "24h"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:235
-msgid "Language"
-msgstr "Língua"
+msgid "Sky Language"
+msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:249
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:241
+msgid "App Language"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:256
 msgid "Show stars"
 msgstr "Mostrar Estrelas"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:277
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:284
 msgid "Colors"
 msgstr "Cores"
 
 #. TRANSLATORS: Refers to constellation art
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:297
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:299
 msgid "Art brightness:"
 msgstr "Brilho das imagens:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:353
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:359
+msgid "Ecliptic line (J2000)"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Nebula names"
 msgstr "Rótulos das nebulosas"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:357
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:370
 msgid "Nebula hints"
 msgstr "Indicações de nebulosas"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:361
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:374
 msgid "Galaxy hints"
 msgstr "Indicações de galáxias"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:365
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:378
 msgid "Bright nebulae hints"
 msgstr "Indicações de nebulosas luminosas"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:369
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:382
 msgid "Dark nebulae hints"
 msgstr "Indicações de nebulosas escuras"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:373
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:386
 msgid "Clusters hints"
 msgstr "Indicações de aglomerados"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:387
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:400
 msgid "Galactic equator line"
 msgstr "Linha do Equador galáctico"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:426
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:438
 msgid "Effects"
 msgstr "Efeitos"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
-msgid "Manual zoom"
-msgstr "Ampliação manual"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:445
-msgid "Magnitude scaling multiplier"
-msgstr "Multiplicador da escala de magnitude"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:447
-msgid "Milky Way intensity:"
-msgstr "Intensidade da Via Láctea:"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:453
-msgid "Zodiacal light intensity:"
-msgstr "Intensidade da luz zodiacal"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:459
-msgid "Nebula label frequency:"
-msgstr "Frequência dos rótulos das nebulosas:"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:460
-msgid "Zoom duration:"
-msgstr "Duração da ampliação:"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:466
-msgid "Cursor timeout:"
-msgstr "Tempo limite para o ponteiro ser ocultado:"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:467
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:451
 msgid "Setting landscape sets location"
 msgstr "Ao definir a paisagem é definida a localização"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:489
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:462
+msgid "Zoom duration:"
+msgstr "Duração da ampliação:"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:469
+msgid "Milky Way intensity:"
+msgstr "Intensidade da Via Láctea:"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:475
+msgid "Zodiacal light intensity:"
+msgstr "Intensidade da luz zodiacal"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:500
 msgid "Run local script"
 msgstr "Executar uma apresentação local"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:495
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:506
 msgid "Stop running script"
 msgstr "Parar de executar a apresentação"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:498
-msgid "CD/DVD script"
-msgstr "Apresentação de CD/DVD"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:506
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:510
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:517
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:520
 msgid "Administration"
 msgstr "Administração"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:515
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:525
 msgid "Load default configuration"
 msgstr "Carregar a configuração padrão"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:516
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:526
 msgid "Save current configuration"
 msgstr "Guardar a configuração actual"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:519
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:529
 msgid "Shut down"
 msgstr "Encerrar"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:595
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:605
 msgid "[no TUI node]"
 msgstr "[nenhum nodo de interface textual]"
 
@@ -10524,47 +10510,47 @@ msgid "Exoplanets configuration window"
 msgstr "Janela de configuração de exoplanetas"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:959
+#: plugins/Exoplanets/src/Exoplanets.cpp:958
 msgid "Hot"
 msgstr "Quente"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:961
+#: plugins/Exoplanets/src/Exoplanets.cpp:960
 msgid "Warm"
 msgstr "Morna"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:963
+#: plugins/Exoplanets/src/Exoplanets.cpp:962
 msgid "Cold"
 msgstr "Fria"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:966
+#: plugins/Exoplanets/src/Exoplanets.cpp:965
 msgid "Miniterran"
 msgstr "Miniterrano"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:968
+#: plugins/Exoplanets/src/Exoplanets.cpp:967
 msgid "Subterran"
 msgstr "Subterrano"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:970
+#: plugins/Exoplanets/src/Exoplanets.cpp:969
 msgid "Terran"
 msgstr "Terrano"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:972
+#: plugins/Exoplanets/src/Exoplanets.cpp:971
 msgid "Superterran"
 msgstr "Superterrano"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:974
+#: plugins/Exoplanets/src/Exoplanets.cpp:973
 msgid "Jovian"
 msgstr "Joviano"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:976
+#: plugins/Exoplanets/src/Exoplanets.cpp:975
 msgid "Neptunian"
 msgstr "Neptuniano"
 
@@ -13872,6 +13858,9 @@ msgstr "Planeta Atual: Saturno"
 #~ msgid "Cardinal Points"
 #~ msgstr "Pontos Cardeais"
 
+#~ msgid "Language"
+#~ msgstr "Língua"
+
 #~ msgid "Date & Time"
 #~ msgstr "Data e Hora"
 
@@ -14623,6 +14612,21 @@ msgstr "Planeta Atual: Saturno"
 #~ msgid "NORAD two line element orbit data"
 #~ msgstr "Informações orbitais do NORAD com elementos de duas linhas"
 
+#~ msgid "Magnitude scaling multiplier"
+#~ msgstr "Multiplicador da escala de magnitude"
+
+#~ msgid "Manual zoom"
+#~ msgstr "Ampliação manual"
+
+#~ msgid "Cursor timeout:"
+#~ msgstr "Tempo limite para o ponteiro ser ocultado:"
+
+#~ msgid "Nebula label frequency:"
+#~ msgstr "Frequência dos rótulos das nebulosas:"
+
+#~ msgid "CD/DVD script"
+#~ msgstr "Apresentação de CD/DVD"
+
 #~ msgid ""
 #~ "A plugin that shows some historical supernovae brighter than 10 visual "
 #~ "magnitude."
@@ -15311,3 +15315,10 @@ msgstr "Planeta Atual: Saturno"
 
 #~ msgid "Show Solar System objects"
 #~ msgstr "Mostrar os objectos do sistema solar"
+
+#~ msgid ""
+#~ "This plug-in is based on and reuses a lot of code under the GNU General "
+#~ "Public License and version Lesser General Public License from:"
+#~ msgstr ""
+#~ "Este complemento é baseado e reutiliza muito códio com a licença GNU General "
+#~ "Public License e  Lesser General Public License de:"

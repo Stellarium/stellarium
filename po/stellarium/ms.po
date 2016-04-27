@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-25 22:44+0700\n"
+"POT-Creation-Date: 2016-04-26 22:45+0700\n"
 "PO-Revision-Date: 2016-02-11 19:37+0000\n"
 "Last-Translator: Asrapsirap <kidzi.14@gmail.com>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-04-26 05:30+0000\n"
+"X-Launchpad-Export-Date: 2016-04-27 05:30+0000\n"
 "X-Generator: Launchpad (build 17995)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:140 src/core/modules/StarMgr.cpp:378
@@ -27,27 +27,26 @@ msgid "Display Options"
 msgstr "Pilihan Paparan"
 
 #: src/core/modules/ConstellationMgr.cpp:141
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:280
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
 msgid "Constellation lines"
 msgstr "Garis Buruj"
 
 #: src/core/modules/ConstellationMgr.cpp:142
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:290
 msgid "Constellation art"
 msgstr "Seni Buruj"
 
 #: src/core/modules/ConstellationMgr.cpp:143
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:285
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Constellation labels"
 msgstr "Label Buruj"
 
 #: src/core/modules/ConstellationMgr.cpp:144
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:291
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Constellation boundaries"
 msgstr "Sempadan Buruj"
 
 #: src/core/modules/StarMgr.cpp:379 src/ui_viewDialog.h:1589
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:246
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:253
 msgid "Stars"
 msgstr "Bintang"
 
@@ -106,17 +105,17 @@ msgid "Solstitial Colure"
 msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:923
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:332
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:339
 msgid "Equatorial grid"
 msgstr "Grid Khatulistiwa"
 
 #: src/core/modules/GridLinesMgr.cpp:924 src/ui_viewDialog.h:1744
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:327
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:334
 msgid "Azimuthal grid"
 msgstr "Grid azimut"
 
 #: src/core/modules/GridLinesMgr.cpp:925
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:347
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Ecliptic line"
 msgstr "Garis Ekliptik"
 
@@ -125,7 +124,7 @@ msgid "Ecliptic J2000 line"
 msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:927
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:342
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Equator line"
 msgstr "Garis khatulistiwa"
 
@@ -134,17 +133,17 @@ msgid "Equator J2000 line"
 msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:929
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:322
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:329
 msgid "Meridian line"
 msgstr "Garis Meridian"
 
 #: src/core/modules/GridLinesMgr.cpp:930
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:377
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:390
 msgid "Horizon line"
 msgstr "Garis horizon"
 
 #: src/core/modules/GridLinesMgr.cpp:931
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:337
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:344
 msgid "Equatorial J2000 grid"
 msgstr "Grid khatulistiwa J2000"
 
@@ -157,7 +156,7 @@ msgid "Ecliptic grid"
 msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:934 src/ui_viewDialog.h:1748
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:382
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Galactic grid"
 msgstr "Grid Galaksi"
 
@@ -166,7 +165,7 @@ msgid "Galactic equator"
 msgstr "Khatulistiwa galaktik"
 
 #: src/core/modules/GridLinesMgr.cpp:936
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:392
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:405
 msgid "Opposition/conjunction longitude line"
 msgstr ""
 
@@ -187,7 +186,7 @@ msgid "Fog"
 msgstr "Kabus"
 
 #: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:1776
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:304
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:311
 msgid "Cardinal points"
 msgstr "Titil Kardinal"
 
@@ -841,17 +840,17 @@ msgid "Planets"
 msgstr "Planet"
 
 #: src/core/modules/SolarSystem.cpp:197
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:309
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:316
 msgid "Planet labels"
 msgstr "Label planet"
 
 #: src/core/modules/SolarSystem.cpp:198
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:313
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Planet orbits"
 msgstr "Orbit planet"
 
 #: src/core/modules/SolarSystem.cpp:199
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:317
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:324
 msgid "Planet trails"
 msgstr "Jejak planet"
 
@@ -5033,12 +5032,12 @@ msgid "View"
 msgstr "Papar"
 
 #: src/ui_viewDialog.h:1590
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:259
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:266
 msgid "Absolute scale:"
 msgstr "Skala Mutlak:"
 
 #: src/ui_viewDialog.h:1591
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:253
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Relative scale:"
 msgstr "Skala Relatif:"
 
@@ -5051,7 +5050,7 @@ msgid "Zodiacal Light brightness:"
 msgstr ""
 
 #: src/ui_viewDialog.h:1594
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:265
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:272
 msgid "Twinkle:"
 msgstr "Kerlipan:"
 
@@ -5092,7 +5091,7 @@ msgid "Light pollution data from locations database"
 msgstr "Data pencemaran cahaya dari pangkalan data lokasi"
 
 #: src/ui_viewDialog.h:1612
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:428
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
 msgid "Light pollution:"
 msgstr "Pencemaran cahaya:"
 
@@ -5538,7 +5537,7 @@ msgid "Markings"
 msgstr "Penanda"
 
 #: src/ui_viewDialog.h:1853
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:433
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:445
 msgid "Landscape"
 msgstr "Landskap"
 
@@ -5959,6 +5958,7 @@ msgstr ""
 "arah pandangan asal"
 
 #: src/ui_configurationDialog.h:1269
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:457
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Zum keluar secara automatik dikembalikan kepada arah paparan asal"
 
@@ -6043,7 +6043,7 @@ msgid "Tools"
 msgstr "Alatan"
 
 #: src/ui_configurationDialog.h:1320
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:486
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:497
 msgid "Scripts"
 msgstr "Skrip"
 
@@ -8037,7 +8037,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
 msgid ""
 "This plug-in is based on and reuses a lot of code under the GNU General "
-"Public License and version Lesser General Public License from:"
+"Public License:"
 msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:259
@@ -9452,116 +9452,104 @@ msgid "24h"
 msgstr "24j"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:235
-msgid "Language"
-msgstr "Bahasa"
+msgid "Sky Language"
+msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:249
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:241
+msgid "App Language"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:256
 msgid "Show stars"
 msgstr "Papar bintang"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:277
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:284
 msgid "Colors"
 msgstr "Warna"
 
 #. TRANSLATORS: Refers to constellation art
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:297
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:299
 msgid "Art brightness:"
 msgstr "Kecerahan seni:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:353
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:359
+msgid "Ecliptic line (J2000)"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Nebula names"
 msgstr "Nama Nebula"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:357
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:370
 msgid "Nebula hints"
 msgstr "Pembayang Nebula"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:361
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:374
 msgid "Galaxy hints"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:365
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:378
 msgid "Bright nebulae hints"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:369
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:382
 msgid "Dark nebulae hints"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:373
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:386
 msgid "Clusters hints"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:387
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:400
 msgid "Galactic equator line"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:426
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:438
 msgid "Effects"
 msgstr "Kesan"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
-msgid "Manual zoom"
-msgstr "Zum manual"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:445
-msgid "Magnitude scaling multiplier"
-msgstr "Pendarab penskalaan magnitud"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:447
-msgid "Milky Way intensity:"
-msgstr "Keamatan Bima Sakti:"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:453
-msgid "Zodiacal light intensity:"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:459
-msgid "Nebula label frequency:"
-msgstr "Kekerapan label Nebula:"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:460
-msgid "Zoom duration:"
-msgstr "Tempoh zum:"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:466
-msgid "Cursor timeout:"
-msgstr "Had masa tamat kursor:"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:467
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:451
 msgid "Setting landscape sets location"
 msgstr "Menetapkan lokasi set lanskap"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:489
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:462
+msgid "Zoom duration:"
+msgstr "Tempoh zum:"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:469
+msgid "Milky Way intensity:"
+msgstr "Keamatan Bima Sakti:"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:475
+msgid "Zodiacal light intensity:"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:500
 msgid "Run local script"
 msgstr "Jalankan skrip setempat"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:495
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:506
 msgid "Stop running script"
 msgstr "Henti menjalankan skrip"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:498
-msgid "CD/DVD script"
-msgstr "Skrip CD/DVD"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:506
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:510
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:517
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:520
 msgid "Administration"
 msgstr "Pentadbiran"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:515
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:525
 msgid "Load default configuration"
 msgstr "Muat konfigurasi lalai"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:516
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:526
 msgid "Save current configuration"
 msgstr "Simpan konfigurasi semasa"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:519
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:529
 msgid "Shut down"
 msgstr "Matikan"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:595
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:605
 msgid "[no TUI node]"
 msgstr "[tiada nod TUI]"
 
@@ -10375,47 +10363,47 @@ msgid "Exoplanets configuration window"
 msgstr "Tetingkap konfigurasi eksoplanet"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:959
+#: plugins/Exoplanets/src/Exoplanets.cpp:958
 msgid "Hot"
 msgstr "Panas"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:961
+#: plugins/Exoplanets/src/Exoplanets.cpp:960
 msgid "Warm"
 msgstr ""
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:963
+#: plugins/Exoplanets/src/Exoplanets.cpp:962
 msgid "Cold"
 msgstr "Dingin"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:966
+#: plugins/Exoplanets/src/Exoplanets.cpp:965
 msgid "Miniterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:968
+#: plugins/Exoplanets/src/Exoplanets.cpp:967
 msgid "Subterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:970
+#: plugins/Exoplanets/src/Exoplanets.cpp:969
 msgid "Terran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:972
+#: plugins/Exoplanets/src/Exoplanets.cpp:971
 msgid "Superterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:974
+#: plugins/Exoplanets/src/Exoplanets.cpp:973
 msgid "Jovian"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:976
+#: plugins/Exoplanets/src/Exoplanets.cpp:975
 msgid "Neptunian"
 msgstr ""
 
@@ -13997,6 +13985,24 @@ msgstr ""
 
 #~ msgid "TLE data:"
 #~ msgstr "Data TLE:"
+
+#~ msgid "Language"
+#~ msgstr "Bahasa"
+
+#~ msgid "Magnitude scaling multiplier"
+#~ msgstr "Pendarab penskalaan magnitud"
+
+#~ msgid "Manual zoom"
+#~ msgstr "Zum manual"
+
+#~ msgid "Cursor timeout:"
+#~ msgstr "Had masa tamat kursor:"
+
+#~ msgid "Nebula label frequency:"
+#~ msgstr "Kekerapan label Nebula:"
+
+#~ msgid "CD/DVD script"
+#~ msgstr "Skrip CD/DVD"
 
 #~ msgid ""
 #~ "A plugin that shows some historical supernovae brighter than 10 visual "
