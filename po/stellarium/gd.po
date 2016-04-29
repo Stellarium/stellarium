@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-04-26 22:45+0700\n"
-"PO-Revision-Date: 2016-04-27 09:07+0000\n"
+"PO-Revision-Date: 2016-04-28 21:24+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-04-28 05:19+0000\n"
+"X-Launchpad-Export-Date: 2016-04-29 05:15+0000\n"
 "X-Generator: Launchpad (build 17995)\n"
 "Language: gd\n"
 
@@ -6238,7 +6238,7 @@ msgstr "Brùthadh (mbar):"
 
 #: src/ui_atmosphereDialog.h:179
 msgid "Temperature (C):"
-msgstr "Teòthachad (C):"
+msgstr "Teòthachd (C):"
 
 #: src/ui_atmosphereDialog.h:184 src/ui_greatRedSpotDialog.h:178
 msgid ""
@@ -8202,6 +8202,8 @@ msgid ""
 "This plug-in is based on and reuses a lot of code under the GNU General "
 "Public License:"
 msgstr ""
+"Tha am plugan seo stèidhichte air 's a' cleachdadh torr chòd fo cheadachas "
+"GNU General Public License:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:259
 msgid ""
@@ -9840,11 +9842,11 @@ msgstr "24u"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:235
 msgid "Sky Language"
-msgstr ""
+msgstr "Cànan an speura"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "App Language"
-msgstr ""
+msgstr "Cànan na h-aplacaid"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:256
 msgid "Show stars"
@@ -9861,7 +9863,7 @@ msgstr "Lùth na h-ealaine:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:359
 msgid "Ecliptic line (J2000)"
-msgstr ""
+msgstr "Loidhne èiclipteach (J2000)"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Nebula names"
@@ -10627,36 +10629,43 @@ msgstr "Nòta: %1"
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
+"pulsar x-ghathach neo-riaghailteach no ath-gathadair gamma bog 's "
+"mhothaicheadh dha fhrith-bhualadh"
 
 #: plugins/Pulsars/src/Pulsar.cpp:332
 msgid "has one or more binary companions"
-msgstr ""
+msgstr "tha companach bìnearaidh no dhà aige"
 
 #: plugins/Pulsars/src/Pulsar.cpp:337
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr ""
+"le eimisean frith-bhualaidh o thriceadan rèidio gu thriceadan fo-dhearga no "
+"nas àirde"
 
 #: plugins/Pulsars/src/Pulsar.cpp:342
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr ""
+"le eimisean frith-bhualaidh air triceadan fo-dhearga no nas àirde a-mhàin"
 
 #: plugins/Pulsars/src/Pulsar.cpp:347
 msgid "with pulsed emission in the radio band"
-msgstr ""
+msgstr "le eimisean frith-bhualaidh sa bhann rèidio"
 
 #: plugins/Pulsars/src/Pulsar.cpp:352
 msgid "with intermittently pulsed radio emission"
-msgstr ""
+msgstr "le eimisean frith-bhualaidh rèidio eadaramhach"
 
 #: plugins/Pulsars/src/Pulsar.cpp:357
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
 msgstr ""
+"reul neodroin iomallach le eimisean frith-bhualaidh teasa ach cha "
+"mhothaicheadh dha dh'eimisean rèidio"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:127
 msgid "Pulsars Plug-in"
-msgstr ""
+msgstr "Plugan nam pulsaran"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
 #, qt-format
@@ -10665,19 +10674,22 @@ msgid ""
 "Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
 "(%1astro-ph/0412641%2))."
 msgstr ""
+"Tha dàta nam pulsaran 'ga thogail o \"The ATNF Pulsar Catalogue\"  "
+"(Manchester, R. N., Hobbs, G. B., Teoh, A. ⁊ Hobbs, M., Astron. J., 129, "
+"1993-2006 (2005) (%1astro-ph/0412641%2))."
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
 #, qt-format
 msgid "Current catalog contains info about %1 pulsars."
-msgstr ""
+msgstr "Tha fiosrachadh air %1 pulsar sa chatalog làithreach."
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
 msgid "Note"
-msgstr ""
+msgstr "An aire"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:139
 msgid "pulsar identifiers have the prefix 'PSR'"
-msgstr ""
+msgstr "Tha ro-leasachan \"PSR\" air aithnichearan nam pulsaran"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 msgid "Acknowledgment"
@@ -10689,7 +10701,7 @@ msgstr "Vladimir Samodourov"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:145
 msgid "Pushchino Radio Astronomy Observatory"
-msgstr ""
+msgstr "Pushchino Radio Astronomy Observatory"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:148
 msgid "Maciej Serylak"
@@ -10697,7 +10709,7 @@ msgstr "Maciej Serylak"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
 msgid "Nancay Radioastronomical Observatory"
-msgstr ""
+msgstr "Nancay Radioastronomical Observatory"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:151
 msgid "in France"
@@ -10705,31 +10717,31 @@ msgstr "san Fhraing"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:252
 msgid "Pulsars is updated"
-msgstr ""
+msgstr "Chaidh na pulsaran ùrachadh"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:264
 msgid "Pulsars Plug-in Configuration"
-msgstr ""
+msgstr "Rèiteachadh aig plugan nam pulsaran"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:272
 msgid "Settings for pulsars"
-msgstr ""
+msgstr "Roghainnean nam pulsaran"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:274
 msgid "Plot all pulsars without labels"
-msgstr ""
+msgstr "Tarraing gach pulsar gun leubail"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:276
 msgid "Enable display of distribution for pulsars"
-msgstr ""
+msgstr "Cuir sealladh sgaoileadh nam pulsaran an comas"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:278
 msgid "Show pulsars button on toolbar"
-msgstr ""
+msgstr "Seall putan nam pulsaran air a' bhàr-inneal"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:279
 msgid "Use separate color for pulsars with glitches"
-msgstr ""
+msgstr "Cleachd dath fa leth dha phulsaran aig a bheil clisgeadh"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:74
 #: plugins/Exoplanets/src/Exoplanets.cpp:169
@@ -10742,6 +10754,9 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
 msgstr ""
+"Tarraingidh am plugan seo ionad nan reultan aig a bheil exo-phlanaid. Tha "
+"dàta nan exo-phlanaid 'ga thogail o \"Extrasolar Planets Encyclopaedia\" air "
+"exoplanet.eu"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:169
 msgid "Show exoplanets"
@@ -10759,42 +10774,42 @@ msgstr "Teth"
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:960
 msgid "Warm"
-msgstr ""
+msgstr "Blàth"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:962
 msgid "Cold"
-msgstr ""
+msgstr "Fuar"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:965
 msgid "Miniterran"
-msgstr ""
+msgstr "Meanbh-thalamhach"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:967
 msgid "Subterran"
-msgstr ""
+msgstr "Fo-thalamhach"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:969
 msgid "Terran"
-msgstr ""
+msgstr "Talamhach"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:971
 msgid "Superterran"
-msgstr ""
+msgstr "Os-thalamhach"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:973
 msgid "Jovian"
-msgstr ""
+msgstr "Blioghach"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:975
 msgid "Neptunian"
-msgstr ""
+msgstr "Neaptunach"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:269
 msgid "planetary system"
@@ -10802,12 +10817,12 @@ msgstr "siostam phlanaidean"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:306
 msgid "Metallicity"
-msgstr ""
+msgstr "Meatailteachd"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:310
 #: plugins/Exoplanets/src/Exoplanet.cpp:325
 msgid "Mass"
-msgstr ""
+msgstr "Tomad"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:310
 #: plugins/Exoplanets/src/Exoplanet.cpp:314
@@ -10823,7 +10838,7 @@ msgstr "Rèideas"
 #: plugins/Exoplanets/src/Exoplanet.cpp:318
 #, qt-format
 msgid "Effective temperature: %1 K"
-msgstr ""
+msgstr "Teothachd èifeachdach: %1 K"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:322
 msgid "Exoplanet"
@@ -10840,7 +10855,7 @@ msgstr "latha"
 #: plugins/Exoplanets/src/Exoplanet.cpp:325
 #: plugins/Exoplanets/src/Exoplanet.cpp:326
 msgid "Jup"
-msgstr ""
+msgstr "Bliogh"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:327
 msgid "Semi-Major Axis"
@@ -10852,33 +10867,33 @@ msgstr "AU"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:328
 msgid "Eccentricity"
-msgstr ""
+msgstr "Neo-mheadhanachd"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:329
 msgid "Inclination"
-msgstr ""
+msgstr "Claonadh"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:330
 msgid "Angle Distance"
-msgstr ""
+msgstr "Astar ceàrna"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:331
 msgid "Discovered year"
-msgstr ""
+msgstr "Bliadhna an luirg"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:332
 msgid "Planetary class"
-msgstr ""
+msgstr "Clas planaideach"
 
 #. TRANSLATORS: Full phrase is "Equilibrium Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:334
 msgid "Equilibrium temp."
-msgstr ""
+msgstr "Teòthachd co-chothr."
 
 #. TRANSLATORS: ESI = Earth Similarity Index
 #: plugins/Exoplanets/src/Exoplanet.cpp:336
 msgid "ESI"
-msgstr ""
+msgstr "ESI"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
 msgid "Exoplanets Plug-in"
@@ -10890,6 +10905,8 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
 msgstr ""
+"Tarraingidh am plugan seo ionad nan reultan aig a bheil exo-phlanaid. Tha "
+"dàta nan exo-phlanaid 'ga thogail o \"%1Extrasolar Planets Encyclopaedia%2\""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:148
 #, qt-format
@@ -10898,6 +10915,9 @@ msgid ""
 "from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
 msgstr ""
+"Chaidh an liosta dhe na h-exo-phlanaidean le coltas àiteachail 's an dàta "
+"mun dèidhinn a thogail o \"%1The Habitable Exoplanets Catalog%3\" le "
+"%2Planetary Habitability Laboratory%3."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:150
 #, qt-format
@@ -10906,6 +10926,8 @@ msgid ""
 "altogether have %2 exoplanets (including %3 potentially habitable "
 "exoplanets)."
 msgstr ""
+"Tha mu %1 siostam phlanaidean sa chatalog làithreach le %2 exo-planaid uile "
+"gu lèir aca (a' gabhail a-steach %3 exo-phlanaid le coltas àiteachail)."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:161
@@ -10915,6 +10937,8 @@ msgid ""
 "If you want to read full information about the plugin, its history and "
 "format of the catalog you can %1get info here%2."
 msgstr ""
+"Nam bu toigh leat fiosrachadh slàn mun phlugan seo, eachdraidh agus fòrmat "
+"a' chataloig a leughadh, gheibh thu fiosrachadh %1an-seo%2."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgid "Potential habitable exoplanets"
@@ -10925,10 +10949,12 @@ msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
 msgstr ""
+"Seallaidh am plugan seo exo-phlanaidean le coltas àiteachail (comharra "
+"orainds) agus beagan fiosrachaidh mu na planaidean ud."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
 msgid "Planetary Class"
-msgstr ""
+msgstr "Clas planaideach"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
 msgid ""
@@ -10936,10 +10962,14 @@ msgid ""
 "zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, "
 "jovian, neptunian) (Earth = G-Warm Terran)."
 msgstr ""
+"Seòrsachadh nam planaid a-rèir seòrsa speictreach na rèile òstair (F, G, K, "
+"M), roinn àiteachail (teth, blàth, fuar) agus meud (meanbh-thalamhach, fo-"
+"thalamhach, talamhach, os-thalamhach, blioghach, neaptunach) (An Talamh = G-"
+"blàth Talamhach)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
 msgid "Equilibrium Temperature"
-msgstr ""
+msgstr "Teòthachd co-chothromach"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
 msgid ""
@@ -10948,10 +10978,16 @@ msgid ""
 "body being heated only by its parent star (assuming a 0.3 bond albedo). As "
 "example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."
 msgstr ""
+"'S e teòthachd theòirigeach ann an (°C) a th' ann an teòthachd co-"
+"chothromach na planaid a bhiodh air a' phlanaid nan robhar a' beachdachadh "
+"oirre mura b' e ach bodhaig dhubh a bh' innte nach rachadh a bhlàthachadh "
+"ach le a reul pàraint (a' gabhail ort gur 0.3 a h-albedo Bhond). Mar "
+"eisimpleir, 's e -18.15°C (255 K) a th' ann an teòthachd co-chothromach na "
+"Talmhainn."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
 msgid "Earth Similarity Index (ESI)"
-msgstr ""
+msgstr "Inneacs na coltachd Talmhainn (ESI)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
 msgid ""
@@ -10959,32 +10995,41 @@ msgid ""
 "like. ESI depends on the planet's radius, density, escape velocity, and "
 "surface temperature."
 msgstr ""
+"Dè cho coltach 's a tha i an coimeas na Talmhainn air sgèile o 0 gu 1, le 1 "
+"as coltaiche ris an Talamh. Tha ESI a-rèir rèideas, dùmhlachd, luaths "
+"teichidh, agus teothachd uachdair na planaide."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "Proper names"
-msgstr ""
+msgstr "Ainmean sònrachaidh"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
 msgid ""
 "In December 2015, the International Astronomical Union (IAU) has officially "
 "approved names for several exoplanets after a public vote."
 msgstr ""
+"Dh'aontaich International Astronomical Union (IAU) ri aimnean oifigeil air "
+"cuid a dh'exo-planaidean às dèidh bhòtaidh phoblaich san Dùmhlachd 2015."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
 msgid ""
 "From the latin <em>Veritas</em>, truth. The ablative form means <em>where "
 "there is truth</em>."
 msgstr ""
+"On fhacal Laideann <em>Veritas</em> air a bheil an ciall \"fìrinn\". Is "
+"ciall dhan chruth ablatach <em>far a bheil fìrinn ann</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
 msgid ""
 "From the latin <em>Spes</em>, hope. The ablative form means <em>where there "
 "is hope</em>."
 msgstr ""
+"On fhacal Laideann <em>Spes</em> air a bheil an ciall \"dòchas\". Is ciall "
+"dhan chruth ablatach <em>far a bheil dòchas ann</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
 msgid "Musica is Latin for <em>music</em>."
-msgstr ""
+msgstr "'S e am facal Laidinn air <em>ceòl</em> a th' ann am Musica."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:188
 msgid ""
@@ -10992,44 +11037,62 @@ msgid ""
 "legend, his life was saved at sea by dolphins after attracting their "
 "attention by the playing of his kithara."
 msgstr ""
+"'S e duine le sàr-chomas air bàrdachd is ceòl a bh' ann an Arion ri linn na "
+"Grèige àrsaidh. A-rèir an t-seanchais, chaidh a bheatha a shàbhaladh air a' "
+"mhuir le leumadairean nuair a ghlac e an aire le seinn air a' kithara aige."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
 msgid "Fafnir was a Norse mythological dwarf who turned into a dragon."
 msgstr ""
+"'S e troich sheann-sgeulach Lochlannach a' bhann am Fafnir a chaidh 'na "
+"dhràgon."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:190
 msgid ""
 "Orbitar is a contrived word paying homage to the space launch and orbital "
 "operations of NASA."
 msgstr ""
+"'S e facal ùr a th' an an Orbitar a bheir urram dhan t-siubhal-fhànais is "
+"obair timcheall air an Talamh le NASA."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
 msgid "Chalawan is a mythological crocodile king from a Thai folktale."
 msgstr ""
+"'S e rìgh crogaill miotasach o bheul-aithris nan Tàidh a th' ann an Chalawan."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
 msgid ""
 "Taphao Thong is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr ""
+"'S e tè dhe dà pheathar a tha co-cheangailte ri sgeulachd Chalawan nan Tàidh "
+"a th' ann an Taphao Thong."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
 msgid ""
 "Taphao Kae is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr ""
+"'S e tè dhe dà pheathar a tha co-cheangailte ri sgeulachd Chalawan nan Tàidh "
+"a th' ann an Taphao Kae."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid ""
 "Helvetios is Celtic for <em>the Helvetian</em> and refers to the Celtic "
 "tribe that lived in Switzerland during antiquity."
 msgstr ""
+"'S e am facal Ceilteach air <em>an Eilbheiseach</em> a th' ann an Helvetios "
+"a bheir iomradh dha chinneadh Ceilteach a bhiodh a' fuireach far a bheil an "
+"t-Eilbheis san latha an-diugh  ri linn àrsaidh."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
 msgid ""
 "Dimidium is Latin for <em>half</em>, referring to the planet's mass of at "
 "least half the mass of Jupiter."
 msgstr ""
+"'S e am facal Laidinn air <em>leth</em> a th' ann an Dimidium a bheir "
+"iomradh air tomad na planaide a tha co-dhiù leth-thomad dhe thomad a' "
+"Bhliogh."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
 msgid ""
@@ -11037,6 +11100,9 @@ msgid ""
 "who proposed the heliocentric model of the solar system in his book <em>De "
 "revolutionibus orbium coelestium</em>."
 msgstr ""
+"'S e reul-eòlaiche Pòlainneach a bh' ann an Nicolaus Copernicus no Mikołaj "
+"Kopernik (1473-1543) a mhol am mòideal grian-mheadhanach dhen rian-grèine "
+"san leabhar <em>De revolutionibus orbium coelestium</em> aige."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid ""
@@ -11046,6 +11112,11 @@ msgid ""
 "satellites of Jupiter, and the reported the first telescopic observations of "
 "the phases of Venus, among other discoveries."
 msgstr ""
+"'S e reul-eòlaiche is nàdar-fheallsanach a bh' ann an Galileo Galilei (1564-"
+"1642) air cn cuirear <em>athair an reul-eòlais amhairc</em> agus <em>athair "
+"nua-fhiosaigs</em> gu tric cuideachd. Am measg na lorg e, tha e na ceithir "
+"saidealan as motha aig a' Bhliogh a lorg e le prosbaig, a' chiad amharc air "
+"solas na Rìbhinne le prosbaig agus a bharrachd."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
 msgid ""
@@ -11298,7 +11369,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
 msgid "Additional info"
-msgstr ""
+msgstr "Barrachd fiosrachaidh"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
 msgid "Circumstellar habitable zone"
