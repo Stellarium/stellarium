@@ -24,6 +24,12 @@
 
 class StelActionMgr;
 
+//! @ingroup remoteControl
+//! Provides services related to StelAction.
+//! See also the StelAction related operations of MainService.
+//!
+//! @see \ref rcStelActionService
+//!
 class StelActionService : public AbstractAPIService
 {
 	Q_OBJECT
@@ -33,7 +39,11 @@ public:
 	virtual ~StelActionService() {}
 
 protected:
+	//! @brief Implements the HTTP GET method
+	//! @see \ref rcStelActionServiceGET
 	virtual void getImpl(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
+	//! @brief Implements the HTTP POST method
+	//! @see \ref rcStelActionServicePOST
 	virtual void postImpl(const QByteArray &operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response) Q_DECL_OVERRIDE;
 private:
 	StelActionMgr* actionMgr;

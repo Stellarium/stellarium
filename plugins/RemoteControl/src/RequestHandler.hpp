@@ -34,19 +34,9 @@ class RequestHandler : public HttpRequestHandler
 	Q_OBJECT
 public:
 	//! Constructs the request handler. This also creates an StaticFileController for the \c webroot folder,
-	//! and an APIController. The services are also registered here, using the following paths:
+	//! and an APIController.
 	//!
-	//! Service               | Path
-	//! --------------------- | ---------
-	//! MainService           | \c main
-	//! ObjectService         | \c objects
-	//! ScriptService         | \c scripts
-	//! SimbadService         | \c simbad
-	//! StelActionService     | \c stelaction
-	//! StelPropertyService   | \c stelproperty
-	//! LocationService       | \c location
-	//! LocationSearchService | \c locationsearch
-	//! ViewService           | \c view
+	//! To see the default services that are registered here, see \ref rcApiReference.
 	RequestHandler(const StaticFileControllerSettings& settings, QObject* parent = 0);
 	//! The internal APIController, and all registered services are deleted
 	virtual ~RequestHandler();

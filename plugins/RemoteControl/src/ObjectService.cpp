@@ -86,7 +86,7 @@ void ObjectService::getImpl(const QByteArray& operation, const APIParameters &pa
 			return;
 		}
 
-		qDebug()<<"Search string"<<str;
+		//qDebug()<<"Search string"<<str;
 
 		QStringList results;
 		QMetaObject::invokeMethod(this,"performSearch",SERVICE_DEFAULT_INVOKETYPE,

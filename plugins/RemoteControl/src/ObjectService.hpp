@@ -28,6 +28,10 @@
 class StelCore;
 class StelObjectMgr;
 
+//! @ingroup remoteControl
+//! Provides operations to look up objects in the Stellarium catalogs
+//!
+//! @see \ref rcObjectService
 class ObjectService : public AbstractAPIService
 {
 	Q_OBJECT
@@ -37,6 +41,8 @@ public:
 	virtual ~ObjectService() {}
 
 protected:
+	//! @brief Implements the HTTP GET method
+	//! @see \ref rcObjectServiceGET
 	virtual void getImpl(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
 
 private slots:
