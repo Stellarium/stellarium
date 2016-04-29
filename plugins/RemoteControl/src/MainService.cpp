@@ -65,20 +65,21 @@ MainService::MainService(const QByteArray &serviceName, QObject *parent)
 
 void MainService::update(double deltaTime)
 {
+	bool xZero = qFuzzyIsNull(moveX);
+	bool yZero = qFuzzyIsNull(moveY);
+
 	//prevent sudden disconnects from moving endlessly
 	if((QDateTime::currentMSecsSinceEpoch() - lastMoveUpdateTime) > 1000)
 	{
-		if(moveX != 0 || moveY != 0)
-			qDebug()<<"timeout";
-		moveX = moveY = 0;
+		if(!xZero || !yZero)
+			qDebug()<<"[MainService] move timeout";
+		moveX = moveY = .0f;
 	}
 
 	//Similar to StelMovementMgr::updateMotion
 
-	if(moveX!=0 || moveY !=0)
+	if(!xZero || !yZero)
 	{
-		//qDebug()<<"move"<<moveX<<moveY;
-
 		double currentFov = mvmgr->getCurrentFov();
 		// the more it is zoomed, the lower the moving speed is (in angle)
 		double depl=0.00025*deltaTime*1000*currentFov;
@@ -367,14 +368,14 @@ void MainService::postImpl(const QByteArray& operation, const APIParameters &par
 		QString ys = QString::fromUtf8(parameters.value("y"));
 
 		bool xOk,yOk;
-		int x = xs.toInt(&xOk);
-		int y = ys.toInt(&yOk);
+		float x = xs.toInt(&xOk);
+		float y = ys.toInt(&yOk);
 
 		if(xOk || yOk)
 		{
 			QMetaObject::invokeMethod(this,"updateMovement", SERVICE_DEFAULT_INVOKETYPE,
-						  Q_ARG(int,x),
-						  Q_ARG(int,y),
+						  Q_ARG(float,x),
+						  Q_ARG(float,y),
 						  Q_ARG(bool,xOk),
 						  Q_ARG(bool,yOk));
 
@@ -462,7 +463,7 @@ void MainService::focusPosition(const Vec3d &pos)
 	mvmgr->moveToJ2000(pos, mvmgr->getAutoMoveDuration());
 }
 
-void MainService::updateMovement(int x, int y, bool xUpdated, bool yUpdated)
+void MainService::updateMovement(float x, float y, bool xUpdated, bool yUpdated)
 {
 	if(xUpdated)
 	{

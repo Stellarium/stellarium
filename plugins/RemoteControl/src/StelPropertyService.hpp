@@ -23,6 +23,12 @@
 #include "AbstractAPIService.hpp"
 #include "StelPropertyMgr.hpp"
 
+//! @ingroup remoteControl
+//! Provides services related to StelProperty.
+//! See also the StelProperty related operations of MainService.
+//!
+//! @see \ref rcStelPropertyService
+//!
 class StelPropertyService : public AbstractAPIService
 {
 	Q_OBJECT
@@ -31,7 +37,11 @@ public:
 
 	virtual ~StelPropertyService() {}
 protected:
+	//! @brief Implements the HTTP GET method
+	//! @see \ref rcStelPropertyServiceGET
 	virtual void getImpl(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
+	//! @brief Implements the HTTP POST method
+	//! @see \ref rcStelPropertyServicePOST
 	virtual void postImpl(const QByteArray &operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response) Q_DECL_OVERRIDE;
 private:
 	StelPropertyMgr* propMgr;

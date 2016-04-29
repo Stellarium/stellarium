@@ -19,8 +19,9 @@
 
 /*!
 @defgroup remoteControl Remote Control Plug-in
-@brief Control Stellarium through your web browser!
+@brief Control Stellarium through your web browser! For more information, see @ref remoteControlDoc.
 
+@page remoteControlDoc Remote Control Plug-in documentation
 The %RemoteControl plugin provides a remote control using a webserver interface, usable for single or even synchronized cluster of clients (via the RemoteSync plugin).
 You can simply connect via web browser to a
 configurable port (default: 8090) of your computer. To use it locally, you can use
@@ -29,7 +30,7 @@ or for a slightly modified GUI which may be better suited for smaller 7inch scre
 http://localhost:8090/tablet7in.html.
 Your web browser has to support JavaScript and HTML5 (recommended in 2016: <a href="https://mozilla.org/firefox">Firefox</a>, <a href="https://www.google.com/chrome/">Chrome</a>).
 
-The web data for the interface resides in the /data/webroot directory inside the installation directory (<tt>share/stellarium/data/webroot on Linux</tt>), and can be customized with
+The web data for the interface resides in the <tt>/data/webroot</tt> directory inside the installation directory (<tt>share/stellarium/data/webroot</tt> on Linux), and can be customized with
 some knowledge of HTML, CSS and maybe JavaScript (not necessary for basic functionality, only when more complex additions are required).
 Alternative or derived HTML control GUIs must be placed into the same folder,
 the web server for now cannot read data from the private Stellarium user directory (<tt>~/.stellarium</tt>, <tt>\%APPDATA\%\\stellarium</tt>).
@@ -50,8 +51,8 @@ curl -d     'id=double_stars.ssc' http://localhost:8090/api/scripts/run >/dev/nu
 This allows triggering automatic show setups for museums etc.
 
 The entry point of the plugin is the RemoteControl class.
-- To see how the HTTP API looks like (i.e. if you want to access it without using the web interface), see @ref remoteControlApi.
-- To see how the web interface works (i.e. if you want to modify it or add new controls), see @ref remoteControlWeb.
+- To see how the HTTP API looks like (i.e. if you want to extend it or access it without using the web interface), see @subpage remoteControlApi.
+- To see how the web interface works (i.e. if you want to modify it or add new controls), see @subpage remoteControlWeb.
 
 @author Florian Schaukowitsch, Georg Zotti
 @note This plugin includes parts of the \ref qtWebApp by Stefan Frings, used under the LGPL

@@ -75,7 +75,7 @@ void ViewService::getImpl(const QByteArray &operation, const APIParameters &para
 
 		response.writeJSON(QJsonDocument(obj));
 	}
-	else if (operation=="landscapedescription/")
+	else if (operation.startsWith("landscapedescription/"))
 	{
 		int startidx = operation.indexOf('/');
 		//get the path after the name and map it to the landscapes' directory

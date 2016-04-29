@@ -33,7 +33,7 @@ class APIController;
 //! \addtogroup remoteControl
 //! @{
 
-//! Thread-safe version of HttpResponse that can be passed around through invokeMethod.
+//! Thread-safe version of HttpResponse that can be passed around through QMetaObject::invokeMethod.
 //! It contains the data that will be sent back to the client in the HTTP thread, when control returns to the APIController.
 struct APIServiceResponse
 {
@@ -127,6 +127,7 @@ protected:
 	//! @param operation The operation string of the request (i.e. the part of the request URL after the service name, without parameters)
 	//! @param parameters The extracted service parameters (extracted from the URL)
 	//! @param response The response object, write your response into this
+	//! @note The thread this is called in depends on the supportThreadedOperation() return value
 	virtual void getImpl(const QByteArray& operation, const APIParameters& parameters, APIServiceResponse& response);
 	//! Subclasses should implement this to define reactions to HTTP POST requests.
 	//! POST requests generally should change data or perform some action.
@@ -135,6 +136,7 @@ protected:
 	//! @param parameters The extracted service parameters (extracted from the URL, and form data, if applicable)
 	//! @param data The unmodified data as sent from the client
 	//! @param response The response object, write your response into this
+	//! @note The thread this is called in depends on the supportThreadedOperation() return value
 	virtual void postImpl(const QByteArray& operation, const APIParameters& parameters, const QByteArray& data, APIServiceResponse& response);
 
 	//! This defines the connection type QMetaObject::invokeMethod has to use inside a service: either Qt::DirectConnection for main thread handling, or
