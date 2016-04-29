@@ -26,6 +26,10 @@ class StelCore;
 class LandscapeMgr;
 class StelSkyCultureMgr;
 
+//! @ingroup remoteControl
+//! Provides services related to the view (landscape, sky culture, projection).
+//!
+//! @see \ref rcViewService
 class ViewService : public AbstractAPIService
 {
 	Q_OBJECT
@@ -35,8 +39,11 @@ public:
 	virtual ~ViewService() {}
 
 protected:
-
+	//! @brief Implements the HTTP GET operations
+	//! @see \ref rcViewServiceGET
 	virtual void getImpl(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
+	//! @brief Implements the HTTP POST operations
+	//! @see \ref rcViewServicePOST
 	virtual void postImpl(const QByteArray &operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response) Q_DECL_OVERRIDE;
 private:
 	QString wrapHtml(QString& data,const QString& title) const;

@@ -24,6 +24,10 @@
 
 class StelScriptMgr;
 
+//! @ingroup remoteControl
+//! Contains services related to script execution
+//!
+//! @see \ref rcScriptService
 class ScriptService : public AbstractAPIService
 {
 	Q_OBJECT
@@ -33,7 +37,11 @@ public:
 	virtual ~ScriptService() {}
 
 protected:
+	//! @brief Implements the HTTP GET method
+	//! @see \ref rcScriptServiceGET
 	virtual void getImpl(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
+	//! @brief Implements the HTTP POST method
+	//! @see \ref rcScriptServicePOST
 	virtual void postImpl(const QByteArray &operation, const APIParameters& parameters, const QByteArray &data, APIServiceResponse &response) Q_DECL_OVERRIDE;
 private:
 	StelScriptMgr* scriptMgr;

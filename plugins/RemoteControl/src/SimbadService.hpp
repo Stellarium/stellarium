@@ -25,6 +25,11 @@
 class StelCore;
 class StelObjectMgr;
 
+//! @ingroup remoteControl
+//! Allows SIMBAD object lookups like SearchDialog uses.
+//!
+//! @see \ref rcSimbadService
+//! @note This service supports threaded operation.
 class SimbadService : public AbstractAPIService
 {
 	Q_OBJECT
@@ -36,6 +41,8 @@ public:
 	//! Simbad lookups dont block the main thread
 	bool supportsThreadedOperation() const Q_DECL_OVERRIDE { return true; }
 protected:
+	//! @brief Implements the HTTP GET method
+	//! @see \ref rcSimbadServiceGET
 	virtual void getImpl(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
 private:
 	QString simbadServerUrl;
