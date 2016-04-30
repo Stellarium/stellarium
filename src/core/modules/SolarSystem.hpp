@@ -426,9 +426,6 @@ private slots:
 	//! Called when a new object is selected.
 	void selectedObjectChange(StelModule::StelModuleSelectAction action);
 
-	//! Load a color scheme
-	void setStelStyle(const QString& section);
-
 	//! Called when the sky culture is updated.
 	//! Loads native names of planets for a given sky culture.
 	//! @param skyCultureDir the name of the directory containing the sky culture to use.

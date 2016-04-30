@@ -368,7 +368,7 @@ void ExoplanetsDialog::updateStateReceiver(Exoplanets::UpdateState state)
 
 void ExoplanetsDialog::updateCompleteReceiver(void)
 {
-	qDebug() << "Exoplanets: updating of catalog is complete";
+	qDebug() << "[Exoplanets] Updating of catalog is complete";
         ui->nextUpdateLabel->setText(QString(q_("Exoplanets is updated")));
 	// display the status for another full interval before refreshing status
 	updateTimer->start();
@@ -379,7 +379,7 @@ void ExoplanetsDialog::updateCompleteReceiver(void)
 
 void ExoplanetsDialog::restoreDefaults(void)
 {
-	qDebug() << "Exoplanets::restoreDefaults";
+	qDebug() << "[Exoplanets] Restore defaults...";
 	ep->restoreDefaults();
 	ep->loadConfiguration();
 	updateGuiFromSettings();

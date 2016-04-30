@@ -68,6 +68,7 @@
 \newcommand{\command}[1]{\texttt{#1}}
 %% Names of 3rd-party software products like Photoshop, Sketchup etc. Not for OS names, they are too common. 
 \newcommand{\program}[1]{\textsf{\textbf{\small #1}}}
+\newcommand{\var}[1]{\texttt{#1}} %% variable name
 
 
 % show small icon in-line. Lower by #2. Optional #1 is scale of icon. Use 0.45 for dialog icons, 0.75 for lower bar buttons.
@@ -75,7 +76,7 @@
 \newcommand{\guibutton[3]}[0.45]{\raisebox{-#2mm}{\fbox{\includegraphics[scale=#1]{#3}}}}
 
 % Will become a boxed text, representing a GUI button label.
-\newcommand{\button}[1]{\textbf{\textsf{\fbox{#1}}}}
+\newcommand{\button}[1]{\textbf{\textsf{\fbox{\scriptsize #1}}}}
 %% Person names. In some places they have been italicised, in others bold. Make them appear the same with this, and add them to the index:
 \newcommand{\name}[1]{\textsc{#1}\index{#1}}
 %% Some new term that is presented here with emphasis and also goes immediately to the index. 
@@ -99,6 +100,7 @@
 \newcommand{\mJy}{\ensuremath{\,\mathrm{mJy}}}
 \newcommand{\kg}{\ensuremath{\,\mathrm{kg}}}
 \newcommand{\g}{\ensuremath{\,\mathrm{g}}}
+\newcommand{\px}{\ensuremath{\mathrm{px}}} % pixels
 
 \lstnewenvironment{commands}{\lstset{language=sh,basicstyle=\ttfamily\small,%
                                      backgroundcolor=\color{black!5},frame=leftline,rulecolor=\color{blue},framerule=1pt}%
@@ -106,7 +108,7 @@
 \lstnewenvironment{configfile}[1][\small]{\lstset{language=sh,basicstyle=\ttfamily#1,%
                                    backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
-\lstnewenvironment{script}{\lstset{language=PHP,%
+\lstnewenvironment{script}{\lstset{language=HTML,%
 								   basicstyle=\ttfamily\small,%
                                    backgroundcolor=\color{black!5},%
                                    frame=leftline,%
@@ -127,6 +129,9 @@
 \newcommand\chapterauthor[1]{\authortoc{#1}\printchapterauthor{#1}}
 \WithSuffix\newcommand\chapterauthor*[1]{\printchapterauthor{#1}}
 
+\newcommand\sectionauthor[1]{\authortoc{#1}\printsectionauthor{#1}}
+\WithSuffix\newcommand\sectionauthor*[1]{\printsectionauthor{#1}}
+
 \makeatletter
 \newcommand{\printchapterauthor}[1]{%
   {\parindent0pt\vspace*{-25pt}%
@@ -141,6 +146,13 @@
     {\hskip1.3em\mdseries\scshape\protect\scriptsize#1}{}{}}
   \addtocontents{toc}{\vskip5pt}%
 }
+\newcommand{\printsectionauthor}[1]{%
+  {\parindent0pt\vspace*{-5pt}%
+  \linespread{1.1}\large\scshape#1%
+  \par\nobreak\vspace*{15pt}}
+  \@afterheading%
+}
+
 \makeatother
 
 %----------------------------------------------------------------------------------------
@@ -162,7 +174,7 @@
 %----------------------------------------------------------------------------------------
 
 \usepackage[style=alphabetic,citestyle=numeric,sorting=nyt,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
-\addbibresource{bibliography.bib} % BibTeX bibliography file
+\addbibresource{guide.bib} % BibTeX bibliography file
 \defbibheading{bibempty}{}
 
 \usepackage{calc} % For simpler calculation - used for spacing the index letter headings correctly
@@ -596,8 +608,9 @@ innerbottommargin=5pt]{cBox}
 %----------------------------------------------------------------------------------------
 
 \usepackage{hyperref}
-\hypersetup{hidelinks,backref=true,pagebackref=true,hyperindex=true,colorlinks=false,breaklinks=true,urlcolor= ocre,
-            pdfpagemode=UseOutlines,bookmarks=true,bookmarksopen=true,%bookmarksopenlevel=1,bookmarksnumbered,
+\hypersetup{hidelinks,%backref=true,pagebackref=true,hyperindex=true, %% 3 latter are default, produce warnings if specified again.
+            colorlinks=false,breaklinks=true,urlcolor= ocre,
+            pdfpagemode=UseOutlines,bookmarksopen=true,%bookmarks=true,bookmarksopenlevel=1,bookmarksnumbered,
             pdfview=Fit,pdfstartview=Fit,pdfpagelayout=TwoPageRight,
             pdfduplex=DuplexFlipLongEdge,
             pdfsubject={Stellarium is a multi-platform open-source desktop planetarium. This document describes version 0.15+ (2016)},
@@ -605,7 +618,7 @@ innerbottommargin=5pt]{cBox}
             pdfproducer={Stellarium team}, 
             pdfkeywords={Stellarium Manual}, 
             pdftitle={Stellarium User Guide},pdfdisplaydoctitle=true,
-            pdfauthor={M. Gates, B. Gerdes, A. Wolf, G. Zotti}% 
+            pdfauthor={M. Gates, A. Wolf, G. Zotti, B. Gerdes}% 
             }
 %% GZ TODO Maybe in some other style, but links should be visible. 
 %\hypersetup{backref=true,pagebackref=true,hyperindex=true,colorlinks=true,breaklinks=true,urlcolor=blue,bookmarks=true,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
@@ -628,3 +641,7 @@ addtohook={%
 %\newcommand{\key}[1]{\textbf{\textsf{\small #1}}}
 % Prefer using menukeys. 
 \newcommand{\key}[1]{\keys{#1}}
+
+\renewcommand{\topfraction}{0.9}
+
+\definecolor{light-gray}{gray}{0.90}

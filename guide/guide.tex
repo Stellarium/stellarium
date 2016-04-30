@@ -73,7 +73,7 @@
 \draw[anchor=north] (midpoint) node [fill=ocre!30!white,fill opacity=0.6,text opacity=1,inner sep=1cm]%
      {\Huge\centering\bfseries\sffamily\parbox[c][][t]{\paperwidth}%
                                               {\centering Stellarium User Guide\\[18pt] % Book title
-                                              {\Large Matthew Gates, Alexander Wolf, Barry Gerdes, Georg Zotti}\\[15pt]% Author names
+                                              {\Large Matthew Gates, Alexander Wolf, Georg Zotti, Barry Gerdes}\\[15pt]% Author names
                                               {\Large Version \StelVersion-\DocumentEdition}\\[15pt]% Version like 0.15.0-1
                                               {\Large 2016}% Year
                                              }}; % 
@@ -104,6 +104,13 @@ Foundation; with no Invariant Sections, no Front-Cover Texts, and no
 Back-Cover Texts. A copy of the license is included in
 appendix~\ref{ch:License} entitled ``GNU Free Documentation
 License''.\\ % License information
+
+\small{\noindent \textit{All trademarks, third party brands, product names, trade names,
+corporate names and company names mentioned may be trademarks of their
+respective owners or registered trademarks of other companies and are
+used for purposes of explanation and to the readers' benefit, without
+implying a violation of copyright law.}}\\
+
 
 \noindent \textit{A draft of version 0.15.0-1, \today} % Printing/edition date
 
@@ -170,10 +177,11 @@ License''.\\ % License information
 \chapterimage{chapter-t3-bg} % Chapter heading image
 
 \include{ch_advanced_use}
-\include{ch_landscapes}
+%% GZ I propose to  replace the old chapter with course notes I have developed in late 2015. To get the old version, activate next line instead.
+%\include{ch_landscapes}
+\include{ch_landscapes_gz}
 \include{ch_dso} %% Maybe DSO is more a reference chapter? --> Appendix in this case? Or split?
 \include{ch_skycultures}
-
 %----------------------------------------------------------------------------------------
 %	PART III
 %----------------------------------------------------------------------------------------
@@ -185,7 +193,7 @@ License''.\\ % License information
 \include{plg_ArchaeoLines}
 \include{plg_scenery3d} % move to historical.
 \include{plg_atTheTelescope} % TODO: TelescopeControl, Oculars, various hardware projects with Raspberry, Arduino, ...
-\include{scripting}
+\include{ch_scripting}
 
 %----------------------------------------------------------------------------------------
 %	PART IV
@@ -246,12 +254,6 @@ License''.\\ % License information
 %----------------------------------------------------------------------------------------
 
 \include{app_star_catalogue}
-
-%----------------------------------------------------------------------------------------
-%	CHAPTER D (Scripting API.)
-%----------------------------------------------------------------------------------------
-
-\include{app_scripting_api}
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER E (Accuracy, and some notes about used algorithms.)

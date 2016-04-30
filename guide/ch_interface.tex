@@ -211,6 +211,18 @@ when the program starts:
 \label{fig:gui:configuration:tools}
 \end{figure}
 
+\begin{figure}[p]
+\centering\includegraphics[scale=0.55]{config_dialog_scripts_tab}
+\caption{Configuration Window: Scripts Tab}
+\label{fig:gui:configuration:scripts}
+\end{figure}
+
+\begin{figure}[p]
+\centering\includegraphics[scale=0.55]{config_dialog_plugins_tab}
+\caption{Configuration Window: Plugins}
+\label{fig:gui:plugins}
+\end{figure}
+
 
 The Tools tab (Fig.~\ref{fig:gui:configuration:tools}) contains miscellaneous utility
 features:
@@ -242,12 +254,6 @@ features:
 \label{sec:gui:scripts}
 
 
-\begin{figure}[p]
-\centering\includegraphics[scale=0.55]{config_dialog_scripts_tab}
-\caption{Configuration Window: Scripts Tab}
-\label{fig:gui:configuration:scripts}
-\end{figure}
-
 The Scripts tab (Fig.~\ref{fig:gui:configuration:scripts}) allows the selection of
 pre-assembled scripts bundled with Stellarium that can be run. This
 list can be expanded by your own scripts as required. See
@@ -270,13 +276,7 @@ platform and may not work.
 \label{sec:gui:configuration:plugins}
 
 
-\begin{figure}[p]
-\centering\includegraphics[scale=0.55]{config_dialog_plugins_tab}
-\caption{Configuration Window: Plugins}
-\label{fig:gui:plugins}
-\end{figure}
-
-Plugins (see chapter~\ref{ch:plugins} for an introduction) can be
+Plugins (see chapter~\ref{ch:Plugins} for an introduction) can be
 enabled here (Fig.~\ref{fig:gui:plugins}) to be loaded the next time
 you start Stellarium.  Many plugins allow additional configuration
 which will be available again on this tab.
@@ -300,7 +300,7 @@ which are not available via the main toolbar.
 \end{figure}
 
 The Sky tab of the View window (Fig.~\ref{fig:gui:view:sky}) contains settings
-for changing the general appearane of the main sky view. Some
+for changing the general appearance of the main sky view. Some
 hightlights:
 
 \begin{description}
@@ -348,6 +348,31 @@ you can set atmospheric pressure and temperature which influence
 refraction (see section~\ref{sec:concepts:Refraction}), and the
 opacity factor for extinction, \emph{magnitude loss per airmass} $k$
 (see section~\ref{sec:concepts:Extinction}).
+
+
+\subsection{DSO Tab}
+\label{sec:gui:view:dso}
+
+\begin{figure}[t]
+\includegraphics[width=\textwidth,trim=0 100 0 0,clip]{DSO_GUI}
+\caption{View Settings Window: DSO Tab}
+\label{fig:gui:view:dso}
+\end{figure}
+
+
+\indexterm{Deep-sky objects} or DSO are extended objects which are
+external to the solar system, and are not point-sources like stars.
+DSO include galaxies, planetary nebulae and star clusters. These
+objects may or may not have images associated with them. Stellarium
+comes with a catalogue with over 14,000 extended objects containing
+the combined data from many catalogues, with 190 images.  The DSO tab
+(Fig.~\ref{fig:gui:view:dso}) allows you to specify which catalogs or
+which object types you are interested in. See chapter~\ref{ch:DSO} for
+details about the catalog, and how to extend it with your own photographs.
+
+
+
+
 
 \subsection{Markings Tab}
 \label{sec:gui:view:markings}
@@ -410,11 +435,11 @@ The Markings tab of the View window controls the following features:
 \end{figure}
 
 The Landscape tab of the View window controls the landscape graphics
-(ground). To change the landscape graphics, select a landscape from the
+(the horizon which surrounds you). To change the landscape graphics, select a landscape from the
 list on the left side of the window. A description of the landscape will
 be shown on the right.
 
-Note that while landscape can include information about where the
+Note that while a landscape  can include information about where the
 landscape graphics were taken (planet, longitude, latitude and
 altitude), this location does not have to be the same as the location
 selected in the Location window, although you can set up Stellarium such
@@ -424,7 +449,7 @@ The controls at the bottom right of the window operate as follows:
 
 \begin{description}
 \item[Show ground] This turns on and off landscape rendering (same
-  as the button in the main tool-bar).
+  as the button \guibutton{0.6}{bt_ground} in the main tool-bar).
 \item[Show\_fog] This turns on and off rendering of a band of
   fog/haze along the horizon.
 \item[Use associated planet and position] When enabled, selecting a
@@ -432,7 +457,29 @@ The controls at the bottom right of the window operate as follows:
 \item[Use this landscape as default] Selecting this option will save
   the landscape into the program configuration file so that the current
   landscape will be the one used when Stellarium starts.
+\item[Minimal brightness] Use some minimal brightness
+  setting. Moonless night on very dark locations may appear too dark
+  on your screen. You may want to configure some minimal brightness
+  here.
+\item[from landscape, if given] Landscape authors may decide to
+  provide such a minimal brightness value in the \file{landscape.ini}
+  file.
+\item[Show landscape labels] Landscapes can be configured with a
+  gazetteer of interesting points, e.g., mountain peaks, which can be
+  labeled with this option.
+\item[Show illumination] to reflect the ugly developments of our
+  civilisation landscapes can be configured with a layer of light
+  pollution, e.g. streetlamps, bright windows, or the sky glow of a
+  nearby city. This layer, if present, will be mixed in when it is
+  dark enough.
 \end{description}
+
+\noindent Using the button \menu{Add/remove landscapes\ldots}, you can also
+install new landscapes from ZIP files which you can download e.g.\
+from the Stellarium
+website\footnote{\url{http://stellarium.org/wiki/index.php/Landscapes}}
+or create yourself (see ch.~\ref{ch:landscapes} Landscapes), or remove
+these custom landscapes.
 
 \subsection{Starlore Tab}
 \label{sec:gui:view:starlore}
@@ -445,8 +492,28 @@ The controls at the bottom right of the window operate as follows:
 
 The Starlore tab of the View window controls what culture's
 constellations and bright star names will be used in the main display.
-Some cultures have constellation art (Western and Inuit), and the rest
-do not.
+Some cultures have constellation art (e.g., Western and Inuit), and the rest
+do not. Configurable options include
+\begin{description}
+\item[Use this skyculture as default] Activate this option to load
+  this skyculture when Stellarium starts.
+\item[Show labels] Activate display of constellation labels, like
+  \guibutton{0.6}{bt_constellation_name} or \keys{V}. You can further
+  select whether you want to display abbreviated, original or
+  translated names.
+\item[Show lines with thickness\ldots] Activate display of stick
+  figures, like \guibutton{0.6}{bt_constellation} or \keys{C}, and you
+  can configure line thickness here.
+\item[Show boundaries] Activate display of constellation boundaries,
+  like \keys{B}. Currently, boundaries have been defined only for
+  ``Western'' skycultures.
+\item[Use native names for planets] If provided, show the planet names
+  as used in this skyculture (also shows modern planet name for
+  reference). %% TODO THIS FEATURE NEEDS SOME REWORK!
+\item[Show art in brightness\ldots] Activate display of constellation
+  art (if available), like \guibutton{0.6}{bt_constellation_art} or
+  \keys{R}. You can also select the brightness here.
+\end{description}
 
 
 \section{The Object Search Window}
@@ -467,7 +534,7 @@ do not.
 \begin{figure}[p]
 \centering\includegraphics[scale=0.7]{search_dialog_list}
 \caption{The Search Window: Lists}
-\label{fig:gui:search:position}
+\label{fig:gui:search:lists}
 \end{figure}
 
 
@@ -479,33 +546,33 @@ do not.
 
 The Object Search window provides a convenient way to locate objects in
 the sky. Simply type in the name of an object to find, and then click
-the \button{go} button or press \key{return}. Stellarium will point you at that
+the \button{go} button or press \key{\return}. Stellarium will point you at that
 object in the sky.
 
 As you type, Stellarium will make a list of objects which begin with
 what you have typed so far. The first of the list of matching objects
-will be highlighted. If you press the \key{TAB} key, the selection will change
-to the next item in the list. Hitting the \key{RETURN} key will go to the
+will be highlighted. If you press the \key{\tab} key, the selection will change
+to the next item in the list. Hitting the \key{\return} key will go to the
 currently highlighted object and close the search dialog.
 
 For example, suppose we want to locate Mimas (a moon of Saturn). After
 typing the first letter of the name, \emph{m}, Stellarium makes a list
 of objects whose name begins with M: Mars, Mercury, Mimas, Miranda,
-Moon. The first item in this list, Mars, is highlighted. Pressing \key{return}
-now would go to Mars, but we want Mimas. We can either press \key{TAB} twice
-to highlight Mimas and then hit \key{RETURN}, or we can continue to type the
+Moon. The first item in this list, Mars, is highlighted. Pressing \key{\return}
+now would go to Mars, but we want Mimas. We can either press \key{\tab} twice
+to highlight Mimas and then hit \key{\return}, or we can continue to type the
 name until it is the first/only object in the list.
 
 
-The Position tab provides a convenient way to enter a user set
+The Position tab provides a convenient way to enter a set
 of coordinates.
 
 
 The List Search tab allows selection of an object from predefined
 sets.  The number of choices is governed by the loaded plug
 ins. Simply scroll down the first window to select the type. The name
-of an object can then be selected from the list. Press \key{enter} and
-stelarium will go to that object.
+of an object can then be selected from the list. Press \key{\return} and
+Stellarium will go to that object.
 
 
 The Options tab provides a few settings to fine-tune your search experience.

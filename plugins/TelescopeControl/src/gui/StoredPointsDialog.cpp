@@ -50,6 +50,7 @@ void StoredPointsDialog::createDialogContent()
 
 	connect(ui->pushButtonAddPoint,   SIGNAL(clicked()), this, SLOT(buttonAddPressed()));
 	connect(ui->pushButtonRemovePoint,SIGNAL(clicked()), this, SLOT(buttonRemovePressed()));
+	connect(ui->pushButtonClearList,  SIGNAL(clicked()), this, SLOT(buttonClearPressed()));
 
 	connect(ui->pushButtonCurrent, SIGNAL(clicked()), this, SLOT(getCurrentObjectInfo()));
 	connect(ui->pushButtonCenter, SIGNAL(clicked()), this, SLOT(getCenterInfo()));
@@ -123,6 +124,13 @@ void StoredPointsDialog::buttonRemovePressed()
 	storedPointsListModel->removeRow(number);
 
 	emit removeStoredPoint(number);
+}
+
+void StoredPointsDialog::buttonClearPressed()
+{
+	storedPointsListModel->clear();
+
+	emit clearStoredPoints();
 }
 
 void StoredPointsDialog::addModelRow(int number, QString name, QString RA, QString Dec)

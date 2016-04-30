@@ -101,7 +101,7 @@ equator is the line half way between the Earth's poles.
 \subsection{Altitude/Azimuth Coordinates}
 \label{sec:Concepts:AltAz}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering\includegraphics[scale=1.8]{cs_azi}
 \caption{Altitude/Azimuth (Horizontal) Coordinate System}
 \label{fig:AltAz}
@@ -139,7 +139,7 @@ button on the main tool-bar to activate this grid, or press the \key{Z} key.
 \subsection{Right Ascension/Declination Coordinates}
 \label{sec:Concepts:Equatorial}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering\includegraphics[scale=1.8]{cs_equ}
 \caption{Equatorial Coordinates}
 \label{fig:EquatorialCoordinates}
@@ -210,7 +210,7 @@ context of the mind-boggling vastness of space.
 
 \subsection{Time}\label{time}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering\includegraphics[scale=2.2]{sidereal_day}
 \caption{Sidereal day}
 \label{fig:SiderealDay}
@@ -482,12 +482,12 @@ in the sky. In both cases, the exact numbers refer to the
 gravitational centres of the respective bodies. However, we are
 sitting on Earth's surface, so the observed planet will be seen in a
 slightly shifted location. The amount for objects in the inner solar
-system is usually just a few arcseconds and indeed negligible when we
+system is usually just a few arcseconds and is mostly negligible when we
 just want to find an object. But it makes a difference when it comes
 to observations of stellar occultations by planets or asteroids. Such
-a body may measure only a few tens of kilometres, so the shadow track
+a body may measure only a few tens of kilometres, and the shadow track
 which it leaves on Earth's surface is of approximately the same
-size.\footnote{Unfortunately Stellarium (as of V0.14) is not accurate
+size.\footnote{Unfortunately Stellarium (as of V0.15) is not accurate
   enough to reliably compute such occultations. Even a deviation of
   0.5 arcseconds is too much here.}
 
@@ -560,7 +560,7 @@ Note however some limitations:
 \item Stellarium will stop at $\pm 100.000$ years. This limit may be
   still suitable for the stellar locations. The planetary locations
   are not trustworthy outside of a much closer temporal window (see
-  section~\ref{sec:Accuracy}). You cannot simulate the sky over the
+  section~\ref{ch:Accuracy}). You cannot simulate the sky over the
   dinosaurs or such things.
 \item Proper motion is only modelled by the linear components. True 3D
   motion in space requires more computation, which would slow down the
