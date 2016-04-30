@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-24 04:02+0700\n"
-"PO-Revision-Date: 2016-04-21 03:01+0000\n"
+"POT-Creation-Date: 2016-04-26 22:45+0700\n"
+"PO-Revision-Date: 2016-04-29 01:28+0000\n"
 "Last-Translator: Lê Văn Bách <levanbach1994ag@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-04-24 05:33+0000\n"
+"X-Launchpad-Export-Date: 2016-04-30 05:13+0000\n"
 "X-Generator: Launchpad (build 17995)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:140 src/core/modules/StarMgr.cpp:378
@@ -27,27 +27,26 @@ msgid "Display Options"
 msgstr "Hiển thị các tuỳ chọn"
 
 #: src/core/modules/ConstellationMgr.cpp:141
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:280
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
 msgid "Constellation lines"
 msgstr "Các đường liên kết chòm sao"
 
 #: src/core/modules/ConstellationMgr.cpp:142
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:290
 msgid "Constellation art"
 msgstr "Hình vẽ chòm sao"
 
 #: src/core/modules/ConstellationMgr.cpp:143
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:285
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Constellation labels"
 msgstr "Tên của các chòm sao"
 
 #: src/core/modules/ConstellationMgr.cpp:144
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:291
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Constellation boundaries"
 msgstr "Ranh giới các chòm sao"
 
 #: src/core/modules/StarMgr.cpp:379 src/ui_viewDialog.h:1589
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:246
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:253
 msgid "Stars"
 msgstr "Các vì sao"
 
@@ -106,17 +105,17 @@ msgid "Solstitial Colure"
 msgstr "Đường phân chi điểm chí"
 
 #: src/core/modules/GridLinesMgr.cpp:923
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:332
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:339
 msgid "Equatorial grid"
 msgstr "Lưới xích đạo"
 
 #: src/core/modules/GridLinesMgr.cpp:924 src/ui_viewDialog.h:1744
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:327
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:334
 msgid "Azimuthal grid"
 msgstr "Lưới phương vị"
 
 #: src/core/modules/GridLinesMgr.cpp:925
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:347
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Ecliptic line"
 msgstr "Đường hoàng đạo"
 
@@ -125,7 +124,7 @@ msgid "Ecliptic J2000 line"
 msgstr "Đương Hoàng đạo J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:927
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:342
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Equator line"
 msgstr "Đường Xích đạo"
 
@@ -134,17 +133,17 @@ msgid "Equator J2000 line"
 msgstr "Đường xích đạo J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:929
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:322
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:329
 msgid "Meridian line"
 msgstr "Đường kinh tuyến"
 
 #: src/core/modules/GridLinesMgr.cpp:930
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:377
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:390
 msgid "Horizon line"
 msgstr "Đường chân trời"
 
 #: src/core/modules/GridLinesMgr.cpp:931
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:337
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:344
 msgid "Equatorial J2000 grid"
 msgstr "Lưới xích đạo J2000"
 
@@ -157,7 +156,7 @@ msgid "Ecliptic grid"
 msgstr "Lưới Hoàng đạo"
 
 #: src/core/modules/GridLinesMgr.cpp:934 src/ui_viewDialog.h:1748
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:382
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Galactic grid"
 msgstr "Lưới Ngân hà"
 
@@ -166,7 +165,7 @@ msgid "Galactic equator"
 msgstr "Xích đạo thiên hà"
 
 #: src/core/modules/GridLinesMgr.cpp:936
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:392
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:405
 msgid "Opposition/conjunction longitude line"
 msgstr "Đường kinh độ đối lập/giao hội"
 
@@ -187,7 +186,7 @@ msgid "Fog"
 msgstr "Sương mù"
 
 #: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:1776
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:304
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:311
 msgid "Cardinal points"
 msgstr "Điểm phương hướng"
 
@@ -841,17 +840,17 @@ msgid "Planets"
 msgstr "Hành tinh"
 
 #: src/core/modules/SolarSystem.cpp:197
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:309
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:316
 msgid "Planet labels"
 msgstr "Tên hành tinh"
 
 #: src/core/modules/SolarSystem.cpp:198
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:313
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Planet orbits"
 msgstr "Quỹ đạo hành tinh"
 
 #: src/core/modules/SolarSystem.cpp:199
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:317
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:324
 msgid "Planet trails"
 msgstr "Vết các hành tinh"
 
@@ -1773,7 +1772,7 @@ msgstr "Liên hệ"
 
 #: src/gui/ConfigurationDialog.cpp:878
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
-#: plugins/Oculars/src/gui/OcularDialog.cpp:547
+#: plugins/Oculars/src/gui/OcularDialog.cpp:548
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:408
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:252
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:120
@@ -1789,7 +1788,7 @@ msgstr "Phiên bản"
 
 #: src/gui/ConfigurationDialog.cpp:961
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:548
+#: plugins/Oculars/src/gui/OcularDialog.cpp:549
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
 #: plugins/Novae/src/gui/NovaeDialog.cpp:120
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:120
@@ -2180,7 +2179,7 @@ msgstr "Người phát triển OSX: %1"
 
 #: src/gui/HelpDialog.cpp:317
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
-#: plugins/Oculars/src/gui/OcularDialog.cpp:549
+#: plugins/Oculars/src/gui/OcularDialog.cpp:550
 msgid "Contributors"
 msgstr "Người đóng góp"
 
@@ -2625,7 +2624,7 @@ msgstr "Năm"
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:135 src/ui_configurationDialog.h:1141
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:450
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:96
 #: plugins/Exoplanets/src/Exoplanet.cpp:323
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:185
@@ -2649,7 +2648,7 @@ msgstr "Độ lớn"
 
 #. TRANSLATORS: type of object
 #: src/gui/AstroCalcDialog.cpp:143 src/ui_configurationDialog.h:1161
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:448
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
 msgid "Type"
 msgstr "Loại"
 
@@ -5058,12 +5057,12 @@ msgid "View"
 msgstr "Xem"
 
 #: src/ui_viewDialog.h:1590
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:259
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:266
 msgid "Absolute scale:"
 msgstr "Tỷ lệ tuyệt đối:"
 
 #: src/ui_viewDialog.h:1591
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:253
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Relative scale:"
 msgstr "Tỷ lệ thay thế:"
 
@@ -5076,7 +5075,7 @@ msgid "Zodiacal Light brightness:"
 msgstr "Độ sáng ánh sáng hoàng đạo"
 
 #: src/ui_viewDialog.h:1594
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:265
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:272
 msgid "Twinkle:"
 msgstr "Nhấp nháy:"
 
@@ -5117,7 +5116,7 @@ msgid "Light pollution data from locations database"
 msgstr "Dữ liệu ô nhiễm ánh sáng từ cơ sở dữ liệu địa điểm"
 
 #: src/ui_viewDialog.h:1612
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:428
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
 msgid "Light pollution:"
 msgstr "Ô nhiễm ánh sáng:"
 
@@ -5587,7 +5586,7 @@ msgid "Markings"
 msgstr "Đánh dấu"
 
 #: src/ui_viewDialog.h:1853
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:433
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:445
 msgid "Landscape"
 msgstr "Khung cảnh"
 
@@ -6019,6 +6018,7 @@ msgstr ""
 "nhìn ban đầu"
 
 #: src/ui_configurationDialog.h:1269
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:457
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Tự động thu nhỏ về hướng nhìn ban đầu"
 
@@ -6103,7 +6103,7 @@ msgid "Tools"
 msgstr "Công cụ"
 
 #: src/ui_configurationDialog.h:1320
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:486
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:497
 msgid "Scripts"
 msgstr "Nguyên bản"
 
@@ -6448,7 +6448,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:446
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:264
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:139
 #: plugins/Novae/src/gui/NovaeDialog.cpp:136
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
@@ -6461,7 +6461,7 @@ msgstr "Liên kết"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:447
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:140
 #: plugins/Novae/src/gui/NovaeDialog.cpp:137
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
@@ -6479,7 +6479,7 @@ msgstr ""
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:103
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:450
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
 #: plugins/Novae/src/gui/NovaeDialog.cpp:140
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
@@ -6494,7 +6494,7 @@ msgstr "Nếu bạn có câu hỏi, bạn có thể %1nhận câu trả lời �
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:452
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:270
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:271
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:145
 #: plugins/Novae/src/gui/NovaeDialog.cpp:142
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:135
@@ -6509,7 +6509,7 @@ msgstr "Báo cáo lỗi có thể được thực hiện %1ở đây%2"
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:107
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:454
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:272
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:273
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:147
 #: plugins/Novae/src/gui/NovaeDialog.cpp:144
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
@@ -6978,39 +6978,39 @@ msgstr ""
 "này"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:530
+#: plugins/Oculars/src/gui/OcularDialog.cpp:531
 msgid "tFOV:"
 msgstr "Trường nhìn thực"
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:532
+#: plugins/Oculars/src/gui/OcularDialog.cpp:533
 msgid "Magnification factor:"
 msgstr "Hệ số phóng đại:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:536
+#: plugins/Oculars/src/gui/OcularDialog.cpp:537
 #: plugins/Oculars/src/ui_ocularDialog.h:1191
 msgid "aFOV:"
 msgstr "Trường nhìn biểu kiến:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:537
+#: plugins/Oculars/src/gui/OcularDialog.cpp:538
 #: plugins/Oculars/src/ui_ocularDialog.h:1192
 #: plugins/Oculars/src/ui_ocularDialog.h:1225
 msgid "Focal length:"
 msgstr "Tiêu cự:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:546
+#: plugins/Oculars/src/gui/OcularDialog.cpp:547
 msgid "Oculars Plug-in"
 msgstr "Bổ trợ Trực quan"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:549
+#: plugins/Oculars/src/gui/OcularDialog.cpp:550
 msgid "Barlow lens feature"
 msgstr "Tính năng ống kính Barlow"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:553
+#: plugins/Oculars/src/gui/OcularDialog.cpp:554
 msgid "Overview"
 msgstr "Tổng quan"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:555
+#: plugins/Oculars/src/gui/OcularDialog.cpp:556
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece.  "
 "This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -7022,26 +7022,43 @@ msgstr ""
 "kính thiên văn, tốt như cảm biến CCD. Lần đầu tiên bạn chạy ứng dụng sẽ đưa "
 "đến một vài mẫu để có được sự bắt đầu của bạn."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:556
-msgid ""
-"You can choose to scale the image you see on the screen.  This is intended "
-"to show you a better comparison of what one eyepiece/telescope combination "
-"will be like as compared to another.  The same eyepiece in two different "
-"telescopes of differing focal length will produce two different exit "
-"circles, changing the view someone.  The trade-off of this is that, with the "
-"image scaled, a good deal of the screen can be wasted.  Therefore I "
-"recommend that you leave it off, unless you feel you have a need of it."
-msgstr ""
-"Bạn có thể chọn để mở rộng các hình ảnh mà bạn nhìn thấy trên màn hình. Điều "
-"này được dự định để cho bạn thấy một so sánh tốt hơn về những gì của một sự "
-"kết hợp kính mắt/kính thiên văn sẽ như thế nào khi so sánh với nhau. Thị "
-"kính giống nhau trong hai kính thiên văn khác nhau của độ dài tiêu cự khác "
-"nhau sẽ tạo ra hai vòng tròn xuất cảnh khác nhau, thay đổi quan điểm một "
-"người nào đó. Thương mại-off của việc này là, với hình ảnh thu nhỏ, một việc "
-"tốt của màn hình có thể bị lãng phí. Vì vậy, tôi khuyên bạn nên để nó đi, "
-"trừ khi bạn cảm thấy bạn có một nhu cầu của nó."
-
 #: plugins/Oculars/src/gui/OcularDialog.cpp:557
+msgid "You can choose to scale the image you see on the screen."
+msgstr "Bạn có thể chọn tỉ lệ hình ảnh mà bạn nhìn thấy trên màn hình."
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:558
+msgid ""
+"This is intended to show you a better comparison of what one "
+"eyepiece/telescope combination will be like when compared to another."
+msgstr ""
+"Điều này được dự định để cho bạn thấy một so sánh tốt hơn về những gì một "
+"thị kính / kính thiên văn kết hợp sẽ như thế nào khi so sánh với nhau."
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:559
+msgid ""
+"The same eyepiece in two different telescopes of differing focal length will "
+"produce two different exit pupils, changing the view somewhat."
+msgstr ""
+"Thị kính giống nhau trong hai kính thiên văn khác nhau của độ dài tiêu cự "
+"khác nhau sẽ cho ra hai độ mở thị kính khác nhau, thay đổi phần nào ánh nhìn."
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:560
+msgid ""
+"The trade-off of this is that, with the image scaled, a large part of the "
+"screen can be wasted."
+msgstr ""
+"Sự đánh đổi của điều này là đây, với hình ảnh thu nhỏ, một phần lớn của màn "
+"hình có thể bị lãng phí."
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:561
+msgid ""
+"Therefore I recommend that you leave it off, unless you feel you have a need "
+"of it."
+msgstr ""
+"Vì vậy, tôi khuyên bạn nên bỏ nó đi, trừ khi bạn cảm thấy có một nhu cầu về "
+"nó."
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:562
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
@@ -7051,7 +7068,7 @@ msgstr ""
 "muốn cái này đồng quy ra hướng Bắc. Tôi đã không thể làm được điều này. Vì "
 "thể hiện tại nó đồng quy về phía trên cùng của màn hinh."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:558
+#: plugins/Oculars/src/gui/OcularDialog.cpp:563
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -7064,30 +7081,30 @@ msgstr ""
 "của 0.5%1, 2.0%1, và 4.0%1, giúp bạn thấy những gì mà bạn mong đợi để nhìn "
 "thấy với mắt thường thông qua ống nhắm Telrad (hoặc tương tự)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:559
+#: plugins/Oculars/src/gui/OcularDialog.cpp:564
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr ""
 "Nếu bạn tìm thấy bất kí vấn đề nào, vui lòng cho tôi biết. Hãy thưởng thức!"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:562
+#: plugins/Oculars/src/gui/OcularDialog.cpp:567
 msgid "Hot Keys"
 msgstr "Phím nóng"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:563
+#: plugins/Oculars/src/gui/OcularDialog.cpp:568
 msgid "The plug-in's key bindings can be edited in the General Tab."
 msgstr ""
 "Tổ hợp phím của phần bổ trợ có thể được chỉnh sửa trong tab tổng quan."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:577
 #: plugins/Oculars/src/gui/OcularDialog.cpp:582
+#: plugins/Oculars/src/gui/OcularDialog.cpp:587
 msgid "[no key defined]"
 msgstr "[Không có từ khóa được định nghĩa]"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:586
+#: plugins/Oculars/src/gui/OcularDialog.cpp:591
 msgid "Switches on/off the ocular overlay."
 msgstr "Chuyển đổi mở/tắt lớp phủ mắt kính"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:590
+#: plugins/Oculars/src/gui/OcularDialog.cpp:595
 msgid "Opens the pop-up navigation menu."
 msgstr "Mở trình đơn điều hướng tự động."
 
@@ -8094,13 +8111,15 @@ msgstr "Phần bổ trợ Điều khiển kính thiên văn"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:255
 msgid "Plug-in and GUI programming"
-msgstr ""
+msgstr "Lập trình bổ trợ và giao diện đồ họa"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
 msgid ""
 "This plug-in is based on and reuses a lot of code under the GNU General "
-"Public License and version Lesser General Public License from:"
+"Public License:"
 msgstr ""
+"Phần bổ trợ này được dựa trên và tái sử dụng nhiều mã theo giấy phép GNU "
+"General Public:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:259
 msgid ""
@@ -8111,24 +8130,35 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:260
 msgid "the telescope server core code (licensed under the LGPL)"
-msgstr ""
+msgstr "mã lõi máy chủ kính thiên văn ("
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:261
 msgid ""
 "the TelescopeServerLx200 telescope server core code (originally licensed "
-"under the LGPL); author of all of the above - the client, the server core, "
-"and the LX200 server, along with the Stellarium telescope control network "
-"protocol (over TCP/IP), is <b>Johannes Gajdosik</b>."
+"under the LGPL)"
 msgstr ""
+"mã lõi máy chủ kính thiên văn TelescopeServerLx200 (theo giấy phép gốc LGPL)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:262
+msgid ""
+"Author of all of the above - the client, the server core, and the LX200 "
+"server, along with the Stellarium telescope control network protocol (over "
+"TCP/IP), is <b>Johannes Gajdosik</b>."
+msgstr ""
+"Tác giả của tất cả bên trên - khách hàng, lõi máy chủ, và máy chủ LX200, "
+"cùng với các giao thức mạng điều khiển kính thiên văn Stellarium (qua giao "
+"thức TCP/IP), là <b>Johannes Gajdosik</b>."
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:263
 msgid ""
 "the TelescopeServerNexStar telescope server core code (originally licensed "
 "under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>."
 msgstr ""
+"mã lõi máy chủ kính thiên văn TelescopeServerNexStar (theo giấy phép gốc "
+"LGPL, dựa trên TelescopeServerLx200) bởi <b>Michael Heinz</b>."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:274
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:275
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:149
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:162
 #, qt-format
@@ -8139,90 +8169,92 @@ msgstr ""
 "Nếu bạn muốn đọc thông tin đầy đủ vệ phần bổ trợ này, lịch sử và định dạng "
 "danh mục của nó, bạn có thể %1lấy thông tin ở đây%2"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:278
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:279
 #, qt-format
 msgid ""
 "A more complete and up-to-date documentation for this plug-in can be found "
 "on the %1Telescope Control%2 page in the Stellarium Wiki."
 msgstr ""
-
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:279
-msgid "Contents"
-msgstr ""
+"Một tài liệu hoàn chỉnh và cập nhật hơn cho phần bổ trợ này có thể được tìm "
+"thấy trên trang %1Điều khiển kính thiên văn%2 trong Stellarium Wiki."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:295
-msgid "Abilities and limitations"
-msgstr ""
+msgid "Contents"
+msgstr "Nội dung"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:303
-msgid "The original telescope control feature"
-msgstr ""
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
+msgid "Abilities and limitations"
+msgstr "Khả năng và hạn chế"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:282
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:307
-msgid "Using this plug-in"
-msgstr ""
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
+msgid "The original telescope control feature"
+msgstr "Tình năng điều khiển kính thiên văn gốc"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:320
-msgid "Main window ('Telescopes')"
-msgstr ""
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
+msgid "Using this plug-in"
+msgstr "Sử dụng phần bổ trợ này"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:335
-msgid "Telescope configuration window"
-msgstr ""
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:321
+msgid "Main window ('Telescopes')"
+msgstr "Cửa sổ chính ('Kính thiên văn')"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:337
-msgid "Connection type"
-msgstr ""
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:336
+msgid "Telescope configuration window"
+msgstr "Cửa sổ cấu hình kính thiên văn"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:286
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:345
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:338
+msgid "Connection type"
+msgstr "Kiểu kết nối"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:346
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:473
 msgid "Telescope properties"
 msgstr "Tính chất kính thiên văn"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:353
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:354
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:487
 msgid "Device settings"
 msgstr "Cài đặt thiết bị"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:366
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:289
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:367
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
 msgid "Connection settings"
 msgstr "Cài đặt kết nối"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:289
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:376
-msgid "Field of view indicators"
-msgstr ""
-
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:384
-msgid "'Slew telescope to' window"
-msgstr ""
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:377
+msgid "Field of view indicators"
+msgstr "Chỉ thị trường nhìn"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
-msgid "Telescope commands"
-msgstr ""
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:385
+msgid "'Slew telescope to' window"
+msgstr "Cửa sổ 'xoay kính thiên văn để'"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:409
-msgid "Supported devices"
-msgstr ""
+msgid "Telescope commands"
+msgstr "Điều khiển kính thiên văn"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:293
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:425
-msgid "Virtual telescope"
-msgstr ""
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:410
+msgid "Supported devices"
+msgstr "Thiết bị được hỗ trợ"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:294
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:426
+msgid "Virtual telescope"
+msgstr "Kính thiên văn ảo"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:297
 msgid ""
 "This plug-in allows Stellarium to send only '<b>slew</b>' ('go to') commands "
 "to the device and to receive its current position. It cannot issue any other "
@@ -8230,241 +8262,293 @@ msgid ""
 "and similar situations. (To abort a slew, you can start another one to a "
 "safe position.)"
 msgstr ""
+"Phần bổ trợ này cho phép Stellarium chỉ gửi lệnh '<b>xoay</b>' ('đi đến') "
+"tới thiết bị và nhận vị trí hiện tại của nó. Nó không thể phát hành bất kì "
+"lệnh nào khác, vì thế người dùng nên biết về khả năng va chạm đỉnh điểm và "
+"những tình huống tương tự. (Để hủy bỏ xoay, bạn có thể bắt đầu mộtcái khác "
+"đến một vị trí an toàn.)"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:297
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:298
 msgid ""
 "As of the current version, this plug-in doesn't allow satellite tracking, "
 "and is not very suitable for lunar or planetary observations."
 msgstr ""
+"Như các phiên bản hiện tại, phần bổ trợ này không cho phép theo dõi vệ tinh, "
+"và thích hợp lắm cho việc quan sát mặt trăng hoặc hành tinh."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:298
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:299
 msgid ""
 "WARNING: Stellarium CANNOT prevent your telescope from being pointed at the "
 "Sun."
 msgstr ""
+"CẢNH BÁO: Stellarium KHÔNG THỂ ngăn kính viễn vọng của bạn không bị chỉ vào "
+"mặt trời."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:299
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
 msgid ""
 "Never point your telescope at the Sun without a proper solar filter "
 "installed. The powerful light amplified by the telescope WILL cause "
 "irreversible damage to your eyes and/or your equipment."
 msgstr ""
+"Không bao giờ chỉ kính viễn vọng tại Sun mà không có một bộ lọc mặt trời "
+"thích hợp được cài đặt. Ánh sáng mạnh mẽ khuếch đại bằng kính thiên văn SẼ "
+"gây ra thiệt hại không thể đảo ngược để đôi mắt của bạn và/hoặc thiết bị của "
+"bạn."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:301
 msgid ""
 "Even if you don't do it deliberately, a slew during daylight hours may cause "
 "your telescope to point at the sun on its way to the given destination, so "
 "it is strongly recommended to avoid using the telescope control feature "
 "before sunset without appropriate protection."
 msgstr ""
+"Thậm chí nếu bạn không làm điều đó cố ý, một loạt ánh nắng ban ngày có thể "
+"gây ra kính viễn vọng của bạn để trỏ vào mặt trời trên đường đến đích nhất "
+"định, vì vậy nó được khuyến khích mạnh mẽ để tránh sử dụng các tính năng "
+"điều khiển kính thiên văn trước khi mặt trời lặn mà không bảo vệ thích hợp."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:301
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:305
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:333
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:343
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:351
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:364
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:374
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:382
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:394
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:407
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:423
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:429
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:306
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:319
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:334
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:344
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:352
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:365
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:375
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:383
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:395
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:408
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:424
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:430
 msgid "Back to top"
-msgstr ""
+msgstr "Lên đầu trang"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:305
 msgid ""
 "As of Stellarium 0.10.5, the original telescope control feature has been "
 "removed. There is no longer a way to control a telescope with Stellarium "
 "without this plug-in."
 msgstr ""
+"Cũng như Stellarium 0.10.5, tính năng điều khiển kính thiên văn gốc được "
+"xóa. Không còn cách để điều khiển một chiếc kính thiên văn mà không có phần "
+"bổ trợ này."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:309
 msgid ""
 "Here are two general ways to control a device with this plug-in, depending "
 "on the situation:"
 msgstr ""
+"Dưới đây là hai cách thức chung để điều khiển một thiết bị với phần bổ trợ "
+"này, tùy thuộc vào tình hình:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:309
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
 msgid "DIRECT CONNECTION"
-msgstr ""
+msgstr "KẾT NỐI TRỰC TIẾP"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:309
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
 #, qt-format
 msgid ""
 "A %1device supported by the plug-in%2 is connected with a cable to the "
 "computer running Stellarium;"
 msgstr ""
-
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
-msgid "INDIRECT CONNECTION"
-msgstr ""
+"Một %1thiết bị được hỗ trợ bởi các phần bổ trợ%2 được kết nối bằng cáp với "
+"máy tính chạy Stellarium;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:311
+msgid "INDIRECT CONNECTION"
+msgstr "KẾT NỐI GIÁN TIẾP"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:312
 #, qt-format
 msgid ""
 "A device is connected to the same computer but it is driven by a %1stand-"
 "alone telescope server program%2 or a %3third-party application%4 <b>that "
 "can 'talk' to Stellarium</b>;"
 msgstr ""
+"Một thiết bị được kết nối với cùng một máy tinh nhưng được thúc đẩy bởi một "
+"%1chương trình kính thiên văn độc lập%2 hoặc một %3ứng dụng bên thứ ba%4 "
+"<b>có thể 'nói chuyện' với Stellarium</b>;"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:312
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:313
 msgid ""
 "A device is connected to a remote computer and the software that drives it "
 "can 'talk' to Stellarium <i>over the network</i>; this software can be "
 "either one of Stellarium's stand-alone telescope servers, or a third party "
 "application."
 msgstr ""
+"Một thiết bị được kết nối với một máy tính từ xa và các phần mềm mà các ổ "
+"đĩa nó có thể 'nói chuyện' với Stellarium <i>trên mạng</i>; phần mềm này có "
+"thể là một trong những máy chủ kính thiên văn độc lập của Stellarium, hoặc "
+"một ứng dụng của bên thứ ba."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:313
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
 #, qt-format
 msgid ""
 "Most older telescopes use cables that connect to a %1serial port%2 (RS-232), "
 "the newer ones use %3USB%4 (Universal Serial Bus)."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:315
 msgid ""
 "On Linux and Max OS X both cases are handled identically by the plug-in. On "
 "Windows, a USB connection may require a 'virtual serial port' software, if "
 "it is not supplied with the cable or the telescope."
 msgstr ""
+"Trên Linux và Max OS X cả hai trường hợp được xử lý giống nhau bởi các phần "
+"bổ trợ. Trên Windows, kết nối USB có thể yêu cầu một phần mềm 'cổng nối tiếp "
+"ảo', nếu nó không được cung cấp với cáp hay kính thiên văn."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:315
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:316
 msgid ""
 "Such a software creates a virtual ('fake') COM port that corresponds to the "
 "real USB port so it can be used by the plug-in."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:316
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
 msgid ""
 "On all three platforms, if the computer has no 'classic' serial ports and "
 "the telescope can connect only to a serial port, a serial-to-USB (RS-232-to-"
 "USB) adapter may be necessary."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid ""
 "Telescope set-up (setting geographical coordinates, performing alignment, "
 "etc.) should be done before connecting the telescope to Stellarium."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:321
-msgid "The plug-in's main window can be opened:"
-msgstr ""
-
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
+msgid "The plug-in's main window can be opened:"
+msgstr "Cửa sổ chính của phần bổ trợ này có thể được mở:"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:323
 msgid ""
 "By pressing the 'configure' button for the plug-in in the 'Plugins' tab of "
 "Stellarium's Configuration window (opened by pressing <b>F2</b> or the "
 "respective button in the left toolbar)."
 msgstr ""
+"Bằng cách nhấn vào nút 'cấu hình' cho các phần bổ trợ trong thẻ 'Phần bổ "
+"trợ' của cửa sổ Cấu hình Stellarium (đươc mở bằng cách nhấn <b>F2</b> hoặc "
+"các nút tương ứng trên thanh công cụ bên trái)."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:323
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:324
 #, qt-format
 msgid ""
 "By pressing the 'Configure telescopes...' button in the %1'Slew to' window%2 "
 "(opened by pressing <b>Ctrl+0</b> or the respective button on the bottom "
 "toolbar)."
 msgstr ""
+"Bằng cách nhấn nút 'Cấu hình kính thiên văn...' trong %1cửa sổ 'Xoay đến'%2 "
+"(được mở bằng cách nhấn <b>Ctrl+0</b> hoặc nút tương ứng trên thanh công cụ "
+"phía dưới)."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:324
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:325
 msgid ""
 "The <b>Telescopes</b> tab displays a list of the telescope connections that "
 "have been set up:"
 msgstr ""
+"Thẻ <b>Kính thiên văn</b> hiển thị một danh sách của các kết nối kính thiên "
+"văn đã được cài đặt:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:325
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:326
 msgid ""
 "The number (<b>#</b>) column shows the number used to control this "
 "telescope. For example, for telescope #2, the shortcut is Ctrl+2."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:326
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:327
 msgid ""
 "The <b>Status</b> column indicates if this connection is currently active or "
 "not. Unfortunately, there are some cases in which 'Connected' is displayed "
 "when no working connection exists."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:327
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:328
 msgid "The <b>Type</b> field indicates what kind of connection is this:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:328
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:329
 #, qt-format
 msgid "<b>virtual</b> means a %1virtual telescope%2;"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:329
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:330
 #, qt-format
 msgid ""
 "<b>local, Stellarium</b> means a DIRECT connection to the telescope (see "
 "%1above%2);"
 msgstr ""
+"<b>địa phương, Stellarium</b> nghĩa là một kết nối trực tiếp đến kính thiên "
+"văn (xem %1ở trên%2);"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:330
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:331
 msgid ""
 "<b>local, external</b> means an INDIRECT connection to a program running on "
 "the same computer;"
 msgstr ""
+"<b>địa phương, bên ngoài</b> nghĩa là một kết nối gián tiếp đến một chương "
+"trình đang chạy trên cùng máy tính;"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:331
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:332
 msgid ""
 "<b>remote, unknown</b> means an INDIRECT connection over a network to a "
 "remote machine."
 msgstr ""
+"<b>điều khiển từ xa, không xác định</b> nghĩa là kết nối gián tiếp trên mạng "
+"đến một chiếc máy điều khiển từ xa."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:332
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:333
 msgid ""
 "To set up a new telescope connection, press the <b>Add</b> button. To modify "
 "the configuration of an existing connection, select it in the list and press "
 "the <b>Configure</b> button. In both cases, a telescope connection "
 "configuration window will open."
 msgstr ""
+"Để kết nối một kính thiên văn mới, nhấn nút <b>Thêm</b>. Để chỉnh sửa cấu "
+"hình của một kết nối hiện tại, hãy chọn nó trong danh sách và nhấn nút "
+"<b>Cấu hình</b>. Trong cả hai trường hợp, một cửa sổ cấu hình kết nối kính "
+"thiên văn sẽ mở ra."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:338
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:339
 #, qt-format
 msgid ""
 "The topmost field represents the choice between the two types of connections "
 "(see %1above%2):"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:339
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:340
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:463
 msgid "Telescope controlled by:"
 msgstr "Kính thiên văn được điều khiển bởi:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:340
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:341
 msgid "<b>Stellarium, directly through a serial port</b> is the DIRECT case"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:341
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:342
 msgid "<b>External software or a remote computer</b> is the INDIRECT case"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:342
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:343
 #, qt-format
 msgid ""
 "<b>Nothing, just simulate one (a moving reticle)</b> is a %1virtual "
 "telescope%2 (no connection)"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:346
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:347
 msgid ""
 "<b>Name</b> is the label that will be displayed on the screen next to the "
 "telescope reticle."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:347
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:348
 msgid ""
 "<b>Connection delay</b>: If the movement of the telescope reticle on the "
 "screen is uneven, you can try increasing or decreasing this value."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:348
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:349
 msgid ""
 "<b>Coordinate system</b>: Some Celestron telescopes have had their firmware "
 "updated and now interpret the coordinates they receive as coordinates that "
@@ -8472,255 +8556,259 @@ msgid ""
 "override."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:349
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:350
 msgid ""
 "<b>Start/connect at startup</b>: Check this option if you want Stellarium to "
 "attempt to connect to the telescope immediately after it starts."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:350
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:351
 msgid ""
 "Otherwise, to start the telescope, you need to open the main window, select "
 "that telescope and press the 'Start/Connect' button."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:354
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:355
 #, qt-format
 msgid "This section is active only for DIRECT connections (see %1above%2)."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:355
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:356
 msgid "<b>Serial port</b> sets the serial port used by the telescope."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:356
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:357
 msgid "There is a pop-up box that suggests some default values:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:357
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:358
 msgid "On Windows, serial ports COM1 to COM10;"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:358
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:359
 msgid ""
 "On Linux, serial ports /dev/ttyS0 to /dev/ttyS3 and USB ports /dev/ttyUSB0 "
 "to /dev/ttyUSB3;"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:359
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:360
 msgid ""
 "On Mac OS X, the list is empty as it names its ports in a peculiar way."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:360
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:361
 msgid ""
 "If you are using an USB cable, the default serial port of your telescope "
 "most probably is not in the list of suggestions."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:361
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:362
 msgid ""
 "To list all valid serial port names in Mac OS X, open a terminal and type:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:362
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:363
 msgid ""
 "This will list all devices, the full name of your serial port should be "
 "somewhere in the list (for example, '/dev/cu.usbserial-FTDFZVMK')."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:363
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:364
 #, qt-format
 msgid "<b>Device model</b>: see %1Supported devices%2 below."
-msgstr ""
+msgstr "<b>Kiểu thiết bị</b>: xem %1Các thiết bị được hỗ trợ%2 bên dưới."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:367
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:368
 #, qt-format
 msgid "Both fields here refer to communication over a network (%1TCP/IP%2)."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:368
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:369
 #, qt-format
 msgid ""
 "Doing something with them is necessary only for INDIRECT connections  (see "
 "%1above%2)."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:369
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:370
 #, qt-format
 msgid ""
 "<b>Host</b> can be either a host name or an %1IPv4%2 address such as "
 "'127.0.0.1'. The default value of 'localhost' means 'this computer'."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:370
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:371
 msgid ""
 "<b>Port</b> refers to the TCP port used for communication. The default value "
 "depends on the telescope number and ranges between 10001 and 10009."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:371
-msgid "Both values are ignored for DIRECT connections."
-msgstr ""
-
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:372
+msgid "Both values are ignored for DIRECT connections."
+msgstr "Cả hai giá trị được bỏ qua cho các kết nối TRỰC TIẾP."
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:373
 msgid ""
 "For INDIRECT connections, modifying the default host name value makes sense "
 "only if you are attempting a remote connection over a network."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:373
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:374
 msgid ""
 "In this case, it should be the name or IP address of the computer that runs "
 "a program that runs the telescope."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:377
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:378
 msgid ""
 "A series of circles representing different fields of view can be added "
 "around the telescope marker. This is a relic from the times before the "
 "<strong>Oculars</strong> plug-in existed."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:378
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:379
 msgid ""
 "In the telescope configuration window, click on 'User Interface Settings'."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:379
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:380
 msgid ""
 "Mark the 'Use field of view indicators' option, then enter a list of values "
 "separated with comas in the field below."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:380
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
 msgid "The values are interpreted as degrees of arc."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:382
 #, qt-format
 msgid ""
 "This can be used in combination with a %1virtual telescope%2 to display a "
 "moving reticle with the Telrad circles."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:385
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:386
 msgid ""
 "The 'Slew telescope to' window can be opened by pressing <b>Ctrl+0</b> or "
 "the respective button in the bottom toolbar."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:386
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:387
 msgid ""
 "It contains two fields for entering celestial coordinates, selectors for the "
 "preferred format (Hours-Minutes-Seconds, Degrees-Minutes-Seconds, or Decimal "
 "degrees), a drop-down list and two buttons."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:387
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:388
 msgid ""
 "The drop-down list contains the names of the currently connected devices."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:388
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:389
 msgid ""
 "If no devices are connected, it will remain empty, and the 'Slew' button "
 "will be disabled."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:389
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:390
 msgid ""
 "Pressing the <b>Slew</b> button slews the selected device to the selected "
 "set of coordinates."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:390
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:391
 #, qt-format
 msgid ""
 "See the section about %1keyboard commands%2 below for other ways of "
 "controlling the device."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:391
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:392
 #, qt-format
 msgid ""
 "Pressing the <b>Configure telescopes...</b> button opens the %1main window%2 "
 "of the plug-in."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:392
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:393
 msgid ""
 "<b>TIP:</b> Inside the 'Slew' window, underlined letters indicate that "
 "pressing 'Alt + underlined letter' can be used instead of clicking."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:393
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:394
 msgid ""
 "For example, pressing <b>Alt+S</b> is equivalent to clicking the 'Slew' "
 "button, pressing <b>Alt+E</b> switches to decimal degree format, etc."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:396
-msgid "Sending commands"
-msgstr ""
-
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:397
+msgid "Sending commands"
+msgstr "Gửi các lệnh"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:398
 msgid ""
 "Once a telescope is successfully started/connected, Stellarium displays a "
 "telescope reticle labelled with the telescope's name on its current position "
 "in the sky."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:398
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:399
 msgid ""
 "The reticle is an object like every other in Stellarium - it can be selected "
 "with the mouse, it can be tracked and it appears as an object in the "
 "'Search' window."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:399
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:400
 msgid ""
 "<b>To point a device to an object:</b> Select an object (e.g. a star) and "
 "press the number of the device while holding down the <b>Ctrl</b> key."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:400
-msgid "For example, Ctrl+1 for telescope #1."
-msgstr ""
-
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:401
-msgid "This will move the telescope to the selected object."
-msgstr ""
+msgid "For example, Ctrl+1 for telescope #1."
+msgstr "Ví dụ, Ctrl+1 cho kính thiên văn #1."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:402
+msgid "This will move the telescope to the selected object."
+msgstr "Điều này sẽ di chuyển kính thiên văn đến đối tượng được chọn"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:403
 msgid ""
 "<b>To point a device to the center of the view:</b> Press the number of the "
 "device while holding down the <b>Alt</b> key."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:403
-msgid "For example, Alt+1 for telescope #1."
-msgstr ""
-
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:404
-msgid ""
-"This will slew the device to the point in the center of the current view."
-msgstr ""
+msgid "For example, Alt+1 for telescope #1."
+msgstr "Ví dụ, Alt+1 cho kính thiên văn #1."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:405
+msgid ""
+"This will slew the device to the point in the center of the current view."
+msgstr "Cái này sẽ xoay thiết bị tới điểm trung tâm của điểm nhìn hiện tại."
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:406
 msgid ""
 "If you move the view after issuing the command, the target won't change "
 "unless you issue another command."
 msgstr ""
+"Nếu bạn di chuyển điểm nhìn sau khi ra lệnh, mục tiêu sẽ không thay đổi trừ "
+"khi bạn thực hiện lệnh khác."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:406
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:407
 #, qt-format
 msgid ""
 "<b>To point a device to a given set of coordinates:</b> Use the %1'Slew to' "
 "window%2 (press <b>Ctrl+0</b>)."
 msgstr ""
+"<b>Để chỉ một thiết bị được cài đặt các tọa độ:</b> Sử dụng %1Cửa sổ 'Xoay "
+"đến'%2 (nhấn <b>Ctrl+0</b>)."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:410
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:411
 #, qt-format
 msgid ""
 "All devices listed in the %1'Device model' list%2 are convenience "
@@ -8728,44 +8816,50 @@ msgid ""
 "Meade Autostar controller) interface and the Celestron NexStar interface."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:411
-msgid "The device list contains the following:"
-msgstr ""
-
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:412
-msgid "Any device using the NexStar interface."
-msgstr ""
+msgid "The device list contains the following:"
+msgstr "Danh sách thiết bị chứa"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:413
+msgid "Any device using the NexStar interface."
+msgstr "Bất kỳ thiết bị sử dụng giao diện NexStar."
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:414
 msgid ""
 "A computerized telescope mount made by Losmandy (Meade LX-200/Autostar "
 "interface)."
 msgstr ""
-
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:414
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:417
-msgid "Any device using the LX-200/Autostar interface."
-msgstr ""
+"Một chiếc kính thiên văn kết nối máy tính được thực hiện bởi Losmandy (giao "
+"diện Meade LX-200/Autostar)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:415
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:418
+msgid "Any device using the LX-200/Autostar interface."
+msgstr "Bất kỳ"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:416
 msgid ""
 "The Meade ETX-70 telescope with the #494 Autostar controller and the #506 "
 "Connector Cable Set."
 msgstr ""
+"Kính thiên văn Meade ETX-70 với trình điều khiển Autostar #494 và Cáp kết "
+"nối #506."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:416
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:417
 #, qt-format
 msgid ""
 "According to the tester, it is a bit slow, so its default setting of "
 "%1'Connection delay'%2 is 1.5 seconds instead of 0.5 seconds."
 msgstr ""
+"Theo thử nghiệm, nó là một chút chậm, do đó cài đặt mặc định của %1'Độ trễ "
+"kết nối'%2 là 1,5 giây thay vì 0,5 giây."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:418
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:419
 msgid ""
 "The Sky-Watcher SynScan AZ GoTo mount is used in a number of telescopes."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:419
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:420
 msgid ""
 "<b>SynScan</b> is also the name of the hand controller used in other Sky-"
 "Watcher GoTo mounts, and it seems that any mount that uses a SynScan "
@@ -8773,11 +8867,11 @@ msgid ""
 "the NexStar protocol."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:420
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:421
 msgid "Argo Navis is a 'Digital Telescope Computer' by Wildcard Innovations."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:421
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:422
 msgid ""
 "It is an advanced digital setting circle that turns an ordinary telescope "
 "(for example, a dobsonian) into a 'Push To'' telescope (a telescope that "
@@ -8785,14 +8879,14 @@ msgid ""
 "itself)."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:422
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:423
 #, qt-format
 msgid ""
 "Just don't forget to set it to Meade compatibility mode and set the baud "
 "rate to 9600B%1."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:426
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:427
 msgid ""
 "If you want to test this plug-in without an actual device connected to the "
 "computer, choose <b>Nothing, just simulate one (a moving reticle)</b> in the "
@@ -8801,14 +8895,14 @@ msgid ""
 "the plug-in."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:427
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:428
 #, qt-format
 msgid ""
 "See the section above about %1field of view indicators%2 for a possible "
 "practical application (emulating 'Telrad' circles)."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:428
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:429
 #, qt-format
 msgid ""
 "This feature is equivalent to the 'Dummy' type of telescope supported by "
@@ -8816,16 +8910,16 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Symbol for "number"
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:445
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:446
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 msgid "#"
 msgstr "#"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:447
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:448
 msgid "Status"
 msgstr "Trạng thái"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:464
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:465
 #, qt-format
 msgid ""
 "To slew a connected telescope to an object (for example, a star), select "
@@ -8840,7 +8934,7 @@ msgstr ""
 "thiên văn."
 
 #. TRANSLATORS: Currently, it is very unlikely if not impossible to actually see this text. :)
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:471
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:472
 msgid ""
 "No device model descriptions are available. Stellarium will not be able to "
 "control a telescope on its own, but it is still possible to do it through an "
@@ -8851,65 +8945,65 @@ msgstr ""
 "thông qua một ứng dụng bên ngoài hoặc kết nối với một máy chủ từ xa."
 
 #. TRANSLATORS: The translated name of the Add button is automatically inserted.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:476
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:477
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
 msgstr "Nhấn nút \"%1\" để cài đặt kết nối một kính thiên văn mới"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:490
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:491
 msgid "local, Stellarium"
 msgstr "Địa phương, Stellarium"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:494
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:495
 msgid "local, external"
 msgstr "Địa phương, bên ngoài"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:498
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:499
 msgid "remote, unknown"
 msgstr "từ xa, không xác định"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:502
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:503
 msgid "virtual"
 msgstr "ảo"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:924
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:925
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
 msgid "Start"
 msgstr "Bắt đầu"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:925
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:926
 msgid "Start the selected local telescope"
 msgstr "Bắt đầu một kính thiên văn cục bộ được chọn"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:930
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:931
 msgid "Stop"
 msgstr "Dừng"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:931
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:932
 msgid "Stop the selected local telescope"
 msgstr "Dừng kính thiên văn cục bộ được chọn"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:936
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:937
 msgid "Connect"
 msgstr "Kết nối"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:937
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:938
 msgid "Connect to the selected telescope"
 msgstr "Kết nối tới kính thiên văn"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:942
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:943
 msgid "Disconnect"
 msgstr "Hủy kết nối"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:943
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:944
 msgid "Disconnect from the selected telescope"
 msgstr "Hủy kết nối với kính thiên văn được chọn"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:964
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:965
 msgid "Select a directory"
 msgstr "Chọn một hướng dẫn"
 
@@ -9025,7 +9119,7 @@ msgstr "Không có gì, chỉ là một cái mô phỏng (một đường chữ 
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:475
 msgid "Connection delay:"
-msgstr "Kết nối chậm"
+msgstr "Độ trễ kết nối:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:477
 msgid ""
@@ -9173,7 +9267,7 @@ msgstr "Xóa cái được chọn"
 
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:251
 msgid "Clear list"
-msgstr ""
+msgstr "Xóa danh sách"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
@@ -9514,116 +9608,104 @@ msgid "24h"
 msgstr "24 giờ"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:235
-msgid "Language"
-msgstr "Ngôn ngữ"
+msgid "Sky Language"
+msgstr "Ngôn ngữ bầu trời"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:249
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:241
+msgid "App Language"
+msgstr "Ngôn ngữ ứng dụng"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:256
 msgid "Show stars"
 msgstr "Thể hiện sao"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:277
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:284
 msgid "Colors"
 msgstr "Màu sắc"
 
 #. TRANSLATORS: Refers to constellation art
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:297
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:299
 msgid "Art brightness:"
 msgstr "Độ sáng hình vẽ"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:353
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:359
+msgid "Ecliptic line (J2000)"
+msgstr "Đường Hoàng đạo (J2000)"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Nebula names"
 msgstr "Tên tinh vân"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:357
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:370
 msgid "Nebula hints"
 msgstr "Gợi ý tinh vân"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:361
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:374
 msgid "Galaxy hints"
 msgstr "Gợi ý thiên hà"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:365
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:378
 msgid "Bright nebulae hints"
 msgstr "Gợi ý tinh vân sáng"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:369
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:382
 msgid "Dark nebulae hints"
 msgstr "Gợi ý tinh vân tối"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:373
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:386
 msgid "Clusters hints"
 msgstr "Gợi ý cụm sao"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:387
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:400
 msgid "Galactic equator line"
 msgstr "Đường xích đạo Ngân Hà"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:426
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:438
 msgid "Effects"
 msgstr "Hiệu ứng"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
-msgid "Manual zoom"
-msgstr "phóng to bằng tay"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:445
-msgid "Magnitude scaling multiplier"
-msgstr "Hệ số đo độ sáng"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:447
-msgid "Milky Way intensity:"
-msgstr "Cường độ Milky Way:"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:453
-msgid "Zodiacal light intensity:"
-msgstr "Cường độ ánh sáng hoàng đạo"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:459
-msgid "Nebula label frequency:"
-msgstr "Tần số nhãn tinh vân"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:460
-msgid "Zoom duration:"
-msgstr "Thời gian phóng to:"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:466
-msgid "Cursor timeout:"
-msgstr "Đỗ trễ con trỏ:"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:467
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:451
 msgid "Setting landscape sets location"
 msgstr "Đang cài đặt vị trí cài đặt cảnh quan"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:489
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:462
+msgid "Zoom duration:"
+msgstr "Thời gian phóng to:"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:469
+msgid "Milky Way intensity:"
+msgstr "Cường độ Milky Way:"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:475
+msgid "Zodiacal light intensity:"
+msgstr "Cường độ ánh sáng hoàng đạo"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:500
 msgid "Run local script"
 msgstr "Chạy lệnh nội bộ"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:495
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:506
 msgid "Stop running script"
 msgstr "Dừng lệnh nội bộ"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:498
-msgid "CD/DVD script"
-msgstr "Lệnh CD/DVD"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:506
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:510
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:517
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:520
 msgid "Administration"
 msgstr "Quản lý"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:515
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:525
 msgid "Load default configuration"
 msgstr "Tải cấu hình mặc định"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:516
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:526
 msgid "Save current configuration"
 msgstr "Lưu cấu hình mặc định"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:519
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:529
 msgid "Shut down"
 msgstr "Tắt"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:595
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:605
 msgid "[no TUI node]"
 msgstr "Không có nút giao diện văn bản"
 
@@ -10437,47 +10519,47 @@ msgid "Exoplanets configuration window"
 msgstr "Cửa sổ cấu hình ngoại hành tinh"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:959
+#: plugins/Exoplanets/src/Exoplanets.cpp:958
 msgid "Hot"
 msgstr "Nóng"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:961
+#: plugins/Exoplanets/src/Exoplanets.cpp:960
 msgid "Warm"
 msgstr "Ấm"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:963
+#: plugins/Exoplanets/src/Exoplanets.cpp:962
 msgid "Cold"
 msgstr "Lạnh"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:966
+#: plugins/Exoplanets/src/Exoplanets.cpp:965
 msgid "Miniterran"
 msgstr "Cỡ Thủy Tinh"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:968
+#: plugins/Exoplanets/src/Exoplanets.cpp:967
 msgid "Subterran"
 msgstr "Cỡ Hỏa Tinh"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:970
+#: plugins/Exoplanets/src/Exoplanets.cpp:969
 msgid "Terran"
 msgstr "Cỡ Trái Đất"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:972
+#: plugins/Exoplanets/src/Exoplanets.cpp:971
 msgid "Superterran"
 msgstr "Siêu Trái Đất"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:974
+#: plugins/Exoplanets/src/Exoplanets.cpp:973
 msgid "Jovian"
 msgstr "Cỡ Mộc Tinh"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:976
+#: plugins/Exoplanets/src/Exoplanets.cpp:975
 msgid "Neptunian"
 msgstr "Cỡ Thiên Vương Tinh"
 
@@ -13764,6 +13846,9 @@ msgstr "Hành tinh hiện tại: Thổ Tinh"
 #~ msgid "Sky Culture: "
 #~ msgstr "Chòm sao theo : "
 
+#~ msgid "Language"
+#~ msgstr "Ngôn ngữ"
+
 #~ msgid "Sky Language: "
 #~ msgstr "Ngôn ngữ cho giao diện bầu trời: "
 
@@ -14223,6 +14308,33 @@ msgstr "Hành tinh hiện tại: Thổ Tinh"
 #~ msgstr "Ngày Julian sửa đổi"
 
 #~ msgid ""
+#~ "You can choose to scale the image you see on the screen.  This is intended "
+#~ "to show you a better comparison of what one eyepiece/telescope combination "
+#~ "will be like as compared to another.  The same eyepiece in two different "
+#~ "telescopes of differing focal length will produce two different exit "
+#~ "circles, changing the view someone.  The trade-off of this is that, with the "
+#~ "image scaled, a good deal of the screen can be wasted.  Therefore I "
+#~ "recommend that you leave it off, unless you feel you have a need of it."
+#~ msgstr ""
+#~ "Bạn có thể chọn để mở rộng các hình ảnh mà bạn nhìn thấy trên màn hình. Điều "
+#~ "này được dự định để cho bạn thấy một so sánh tốt hơn về những gì của một sự "
+#~ "kết hợp kính mắt/kính thiên văn sẽ như thế nào khi so sánh với nhau. Thị "
+#~ "kính giống nhau trong hai kính thiên văn khác nhau của độ dài tiêu cự khác "
+#~ "nhau sẽ tạo ra hai vòng tròn xuất cảnh khác nhau, thay đổi quan điểm một "
+#~ "người nào đó. Thương mại-off của việc này là, với hình ảnh thu nhỏ, một việc "
+#~ "tốt của màn hình có thể bị lãng phí. Vì vậy, tôi khuyên bạn nên để nó đi, "
+#~ "trừ khi bạn cảm thấy bạn có một nhu cầu của nó."
+
+#~ msgid "Manual zoom"
+#~ msgstr "phóng to bằng tay"
+
+#~ msgid "Nebula label frequency:"
+#~ msgstr "Tần số nhãn tinh vân"
+
+#~ msgid "CD/DVD script"
+#~ msgstr "Lệnh CD/DVD"
+
+#~ msgid ""
 #~ "An interface for adding asteroids and comets to Stellarium. It can download "
 #~ "object lists from the Minor Planet Center's website and perform searches in "
 #~ "its online database. Still a work in progress."
@@ -14580,6 +14692,9 @@ msgstr "Hành tinh hiện tại: Thổ Tinh"
 #~ msgid "Galactic plane line"
 #~ msgstr "Đường kẻ mặt phẳng Ngân Hà"
 
+#~ msgid "Cursor timeout:"
+#~ msgstr "Đỗ trễ con trỏ:"
+
 #~ msgid "plutoid"
 #~ msgstr "plutoid"
 
@@ -14730,6 +14845,9 @@ msgstr "Hành tinh hiện tại: Thổ Tinh"
 
 #~ msgid "Startup direction of view: xxxx"
 #~ msgstr "Khởi động hướng nhìn: xxxx"
+
+#~ msgid "Magnitude scaling multiplier"
+#~ msgstr "Hệ số đo độ sáng"
 
 #~ msgid "Solar longitude is"
 #~ msgstr "Kinh độ mặt trời là"
