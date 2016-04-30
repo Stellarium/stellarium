@@ -24,8 +24,7 @@ various modules of Stellarium, and also activated plugins, can be
 called in scripts to calculate, move the scene, switch on and off
 display of objects, etc.  You can write text output into text files
 with the \command{output()} command.  You can call all public slots
-which are documented in the scripting documentation in
-appendix~\ref{ch:ScriptingAPI}.
+which are documented in the scripting API documentation\footnote{\url{http://www.stellarium.org/doc/0.15.0/scripting.html}}.
 
 
 \section{Script Console}
@@ -70,6 +69,37 @@ var label=LabelMgr.labelScreen("Hello Universe", 200, 200,
                                true, 20, "#ff0000");
 core.wait(3);
 LabelMgr.deleteLabel(label);
+\end{script}
+
+\section{Retrograde motion of Mars}
+\label{sec:scripting:RetrogradeMotionOfMars}
+A best way begin writing of scripts --- to set for itself a specific goal and try to achieve it with the help of few simple steps. Any complex script can split on simple parts or tasks, which may solve any newbies in scripting. 
+
+Let me explain it with examples.
+
+Imagine that you have set a goal to make the demonstration is very beautiful, but long enough phenomenon --- the retrograde motion of the planet Mars (Fig.~\ref{fig:scripting:mars2005}). 
+
+\begin{figure}[ht]
+\centering\includegraphics[width=300px]{Mars2005_tezel.jpg}
+\label{fig:scripting:mars2005}
+\caption{Retrograde motion of Mars in 2005. Credit \& Copyright: Tunc Tezel --- APOD: 2006 April 22 -- Z is for Mars.}
+\end{figure}
+
+\subsection{Script header...}
+Any ``complex'' script contains a few lines in first part of file, which contains an important data for humans --- name of script and him description --- and some rules for Stellarium.
+
+\begin{script}
+//
+// Name: Retrograde motion of Mars
+// Author: Alexander Wolf
+// License: Public Domain
+// Version: 1.0
+// Description: A demo of retrograde motion of Mars.
+//
+\end{script}
+.....
+\begin{script}
+core.setJD(2453552.0); // July 1, 2005
 \end{script}
 
 \section{More Examples}

@@ -247,18 +247,29 @@
        </layout>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButtonAddPoint">
-        <property name="text">
-         <string>Add point</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButtonRemovePoint">
-        <property name="text">
-         <string>Remove selected</string>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <item>
+         <widget class="QPushButton" name="pushButtonAddPoint">
+          <property name="text">
+           <string>Add point</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButtonRemovePoint">
+          <property name="text">
+           <string>Remove selected</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButtonClearList">
+          <property name="text">
+           <string>Clear list</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>

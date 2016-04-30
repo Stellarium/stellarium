@@ -62,6 +62,7 @@ public slots:
 private slots:
 	void buttonAddPressed();
 	void buttonRemovePressed();
+	void buttonClearPressed();
 
 	void getCurrentObjectInfo();
 	void getCenterInfo();
@@ -69,6 +70,8 @@ private slots:
 signals:
 	void addStoredPoint(int number, QString name, double radiansRA, double radiansDec);
 	void removeStoredPoint(int number);
+	void clearStoredPoints();
+
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();

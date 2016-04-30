@@ -126,6 +126,12 @@ void ConstellationMgr::init()
 		setConstellationDisplayStyle(constellationsTranslated);
 	}
 
+	// Load colors from config file
+	QString defaultColor = conf->value("color/default_color").toString();
+	setLinesColor(StelUtils::strToVec3f(conf->value("color/const_lines_color", defaultColor).toString()));
+	setBoundariesColor(StelUtils::strToVec3f(conf->value("color/const_boundary_color", "0.8,0.3,0.3").toString()));
+	setLabelsColor(StelUtils::strToVec3f(conf->value("color/const_names_color", defaultColor).toString()));
+
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);
 	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), 
@@ -133,7 +139,6 @@ void ConstellationMgr::init()
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(skyCultureChanged(const QString&)), this, SLOT(updateSkyCulture(const QString&)));
-	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Constellation_Lines", displayGroup, N_("Constellation lines"), "linesDisplayed", "C");
@@ -214,17 +219,6 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 		loadBoundaries(fic);
 
 	lastLoadedSkyCulture = skyCultureDir;
-}
-
-void ConstellationMgr::setStelStyle(const QString& section)
-{
-	QSettings* conf = StelApp::getInstance().getSettings();
-
-	// Load colors from config file
-	QString defaultColor = conf->value(section+"/default_color").toString();
-	setLinesColor(StelUtils::strToVec3f(conf->value(section+"/const_lines_color", defaultColor).toString()));
-	setBoundariesColor(StelUtils::strToVec3f(conf->value(section+"/const_boundary_color", "0.8,0.3,0.3").toString()));
-	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/const_names_color", defaultColor).toString()));
 }
 
 void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction action)

@@ -168,6 +168,13 @@ void SolarSystem::init()
 	setCustomGrsDrift(conf->value("astro/grs_drift", 15.).toDouble());
 	setCustomGrsJD(conf->value("astro/grs_jd", 2456901.5).toDouble());
 
+	// Load colors from config file
+	QString defaultColor = conf->value("color/default_color").toString();
+	setLabelsColor(StelUtils::strToVec3f(conf->value("color/planet_names_color", defaultColor).toString()));
+	setOrbitsColor(StelUtils::strToVec3f(conf->value("color/planet_orbits_color", defaultColor).toString()));
+	setTrailsColor(StelUtils::strToVec3f(conf->value("color/object_trails_color", defaultColor).toString()));
+	setPointersColor(StelUtils::strToVec3f(conf->value("color/planet_pointers_color", "1.0,0.3,0.3").toString()));
+
 	recreateTrails();
 
 	setFlagTrails(conf->value("astro/flag_object_trails", false).toBool());
@@ -184,7 +191,6 @@ void SolarSystem::init()
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(skyCultureChanged(QString)), this, SLOT(updateSkyCulture(QString)));
-	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Planets", displayGroup, N_("Planets"), "planetsDisplayed", "P");
@@ -289,7 +295,7 @@ void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
 		else
 		{
 			planetId = recRx.capturedTexts().at(1).trimmed();
-			nativeName = recRx.capturedTexts().at(2).trimmed();
+			nativeName = recRx.capturedTexts().at(3).trimmed(); // Use translatable text
 			planetNativeNamesMap[planetId] = nativeName;
 			readOk++;
 		}
@@ -1180,20 +1186,6 @@ void SolarSystem::draw(StelCore* core)
 			sPainter.drawSprite2dMode(win[0], win[1], size);
 		}
 	}
-}
-
-void SolarSystem::setStelStyle(const QString& section)
-{
-	// Load colors from config file
-	QSettings* conf = StelApp::getInstance().getSettings();
-	QString defaultColor = conf->value(section+"/default_color").toString();
-	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/planet_names_color", defaultColor).toString()));
-	setOrbitsColor(StelUtils::strToVec3f(conf->value(section+"/planet_orbits_color", defaultColor).toString()));
-	setTrailsColor(StelUtils::strToVec3f(conf->value(section+"/object_trails_color", defaultColor).toString()));
-	setPointersColor(StelUtils::strToVec3f(conf->value(section+"/planet_pointers_color", "1.0,0.3,0.3").toString()));
-
-	// Recreate the trails to apply new colors
-	recreateTrails();
 }
 
 PlanetP SolarSystem::searchByEnglishName(QString planetEnglishName) const
