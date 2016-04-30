@@ -292,7 +292,6 @@ public:
 	bool checkAndLoadCatalog(const QVariantMap& m);
 
 private slots:
-	void setStelStyle(const QString& section);
 	//! Translate text.
 	void updateI18n();
 

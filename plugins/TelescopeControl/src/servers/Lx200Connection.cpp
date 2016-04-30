@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
 using namespace std;
 
-#include <math.h>
+#include <cmath>
 
 
 Lx200Connection::Lx200Connection(Server &server, const char *serial_device) : SerialPort(server, serial_device)

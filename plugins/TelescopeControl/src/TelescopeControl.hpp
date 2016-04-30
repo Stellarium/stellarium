@@ -285,7 +285,6 @@ signals:
 	void clientDisconnected(int slot);
 
 private slots:
-	void setStelStyle(const QString& section);
 	//! Set translated keyboard shortcut descriptions.
 	void translateActionDescriptions();
 
@@ -304,19 +303,7 @@ private:
 	//! Colour currently used to draw telescope text labels
 	Vec3f labelColor;
 	//! Colour currently used to draw field of view circles
-	Vec3f circleColor;
-	//! Colour used to draw telescope reticles in normal mode, as set in the configuration file
-	Vec3f reticleNormalColor;
-	//! Colour used to draw telescope reticles in night mode, as set in the configuration file
-	Vec3f reticleNightColor;
-	//! Colour used to draw telescope labels in normal mode, as set in the configuration file
-	Vec3f labelNormalColor;
-	//! Colour used to draw telescope labels in night mode, as set in the configuration file
-	Vec3f labelNightColor;
-	//! Colour used to draw field of view circles in normal mode, as set in the configuration file
-	Vec3f circleNormalColor;
-	//! Colour used to draw field of view circles in night mode, as set in the configuration file
-	Vec3f circleNightColor;
+	Vec3f circleColor;	
 	
 	//! Font used to draw telescope text labels
 	QFont labelFont;

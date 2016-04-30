@@ -547,10 +547,6 @@ signals:
 	void hintsAmountChanged(double f);
 
 private slots:
-	//! Sets the colors of the Nebula labels and markers according to the
-	//! values in a configuration object
-	void setStelStyle(const QString& section);
-
 	//! Update i18 names from English names according to passed translator.
 	//! The translation is done using gettext with translated strings defined
 	//! in translations.h

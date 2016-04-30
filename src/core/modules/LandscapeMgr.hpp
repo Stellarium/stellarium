@@ -453,9 +453,6 @@ signals:
 	void currentLandscapeChanged(QString currentLandscapeID,QString currentLandscapeName);
 
 private slots:
-	//! Load a color scheme from a configuration object
-	void setStelStyle(const QString& section);
-
 	//! Set the light pollution following the Bortle Scale.
 	//! This should not be called from script code, use StelMainScriptAPI::setBortleScaleIndex if you want to change the light pollution.
 	void setAtmosphereBortleLightPollution(const int bIndex);

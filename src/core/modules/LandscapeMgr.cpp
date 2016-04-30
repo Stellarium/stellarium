@@ -399,6 +399,10 @@ void LandscapeMgr::init()
 	setFlagIllumination(conf->value("landscape/flag_enable_illumination_layer", true).toBool());
 	setFlagLabels(conf->value("landscape/flag_enable_labels", true).toBool());
 
+	// Load colors from config file
+	QString defaultColor = conf->value("color/default_color").toString();
+	setColorCardinalPoints(StelUtils::strToVec3f(conf->value("color/cardinal_color", defaultColor).toString()));
+
 	StelApp *app = &StelApp::getInstance();
 	//Bortle scale is managed by SkyDrawer
 	StelSkyDrawer* drawer = app->getCore()->getSkyDrawer();
@@ -406,7 +410,6 @@ void LandscapeMgr::init()
 	connect(app->getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(updateLocationBasedPollution(StelLocation)));
 	connect(drawer, SIGNAL(bortleScaleIndexChanged(int)), this, SLOT(setAtmosphereBortleLightPollution(int)));
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
-	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Atmosphere", displayGroup, N_("Atmosphere"), "atmosphereDisplayed", "A");
@@ -422,15 +425,6 @@ void LandscapeMgr::init()
 	registerProperty("prop_LandscapeMgr_flagLandscapeUseMinimalBrightness", "flagLandscapeUseMinimalBrightness");
 	registerProperty("prop_LandscapeMgr_flagLandscapeSetsMinimalBrightness", "flagLandscapeSetsMinimalBrightness");
 	registerProperty("prop_LandscapeMgr_defaultMinimalBrightness", "defaultMinimalBrightness");
-}
-
-void LandscapeMgr::setStelStyle(const QString& section)
-{
-	// Load colors from config file
-	QSettings* conf = StelApp::getInstance().getSettings();
-
-	QString defaultColor = conf->value(section+"/default_color").toString();
-	setColorCardinalPoints(StelUtils::strToVec3f(conf->value(section+"/cardinal_color", defaultColor).toString()));
 }
 
 bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeLocationDuration)
