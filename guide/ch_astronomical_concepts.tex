@@ -5,18 +5,21 @@
 %% TODO: Update the extra lines which can now be displayed in Stellarium. (Meridian, horizon, colures, ...) 
 
 \chapter{Astronomical Concepts}
-\chapterauthor*{Barry Gerdes}
+\chapterauthor*{Barry Gerdes, with additions by Georg Zotti}
 \label{ch:Concepts}
 
 This section includes some general notes on astronomy in an effort to
 outline some concepts that are helpful to understand features of
 Stellarium. Material here is only an overview, and the reader is
-encouraged to get hold of a couple of good books on the subject. A good
-place to start is a compact guide and ephemeris such as the
-\emph{National Audubon Society Field Guide to the Night Sky}\footnote{\url{http://www.amazon.com/National-Audubon-Society-Field-Series/dp/0679408525}}. Also recommended is a
-more complete textbook such as \emph{Universe}. %%{[}universe{]}. %% REF MISSING?
+encouraged to get hold of a couple of good books on the subject. A
+good place to start is a compact guide and ephemeris such as the
+\emph{National Audubon Society Field Guide to the Night
+  Sky}\footnote{\url{http://www.amazon.com/National-Audubon-Society-Field-Series/dp/0679408525}}. Also
+recommended is a more complete textbook such as
+\emph{Universe}. %%{[}universe{]}. %% REF MISSING?
 There are also some nice resources on the net, like the
-\emph{Wikibooks Astronomy book}\footnote{\url{http://en.wikibooks.org/wiki/Subject:Astronomy}}.
+\emph{Wikibooks Astronomy
+  book}\footnote{\url{http://en.wikibooks.org/wiki/Subject:Astronomy}}.
 
 \section{The Celestial Sphere}
 \label{sec:Concepts:CelestialSphere}
@@ -108,7 +111,7 @@ equator is the line half way between the Earth's poles.
 \end{figure}
 
 The \indexterm{Altitude/Azimuth} coordinate system (also called
-\indexterm{Horizontal Coordinate System})can be used to describe a
+\indexterm{Horizontal Coordinate System}) can be used to describe a
 direction of view (the \indexterm{azimuth} angle) and an angular
 height in the sky (the \indexterm{altitude} angle). The azimuth angle
 is measured clockwise round from due North\footnote{In some textbooks
@@ -133,8 +136,22 @@ describing the general position of stars and other objects in the sky --
 the altitude and azimuth values for a celestial object change with
 time and the location of the observer.
 
-Stellarium can draw grid lines for altitude/azimuth coordinates. Use the
+Stellarium can draw grid lines for altitude/azimuth coordinates. Use the \guibutton{0.6}{bt_az_grid}
 button on the main tool-bar to activate this grid, or press the \key{Z} key.
+
+In addition, the \indexterm{cardinal points} can be highlighted using
+the \guibutton{0.6}{bt_cardinal} button or \key{Q} key.
+
+There are a few great circles with special names which Stellarium can
+draw (see section~\ref{sec:gui:view:markings}).
+\begin{description}
+\item[Meridian] This is the vertical line which runs from the North
+  point towards the zenith and further to the South point.
+\item[(Mathematical) Horizon] This is the line exactly 90\degree\ away
+  from the zenith.
+\item[First Vertical] This is the vertical line which runs from the East
+  point towards the zenith and further to the West point.
+\end{description}
 
 \subsection{Right Ascension/Declination Coordinates}
 \label{sec:Concepts:Equatorial}
@@ -155,19 +172,132 @@ The Northern celestial pole has a declination of $\delta=90\degree$, the celesti
 equator has a declination of $\delta=0\degree$, and the Southern celestial pole has a declination of $\delta=-90\degree$.
 
 Right ascension is measured as an angle round from a point in the sky
-known as the \indexterm{First Point of Aries}, in the same way that longitude
-is measured around the Earth from Greenwich. Figure~\ref{fig:EquatorialCoordinates} illustrates
-RA/Dec coordinates.
+known as the \indexterm{First Point of Aries}, in the same way that
+longitude is measured around the Earth from
+Greenwich. Figure~\ref{fig:EquatorialCoordinates} illustrates RA/Dec
+coordinates. The angle $\alpha$ is usually expressed as time with
+minute and seconds, with 15\degree\ equalling one hour.
 
 Unlike Altitude/Azimuth coordinates, RA/Dec coordinates of a star do
-not change if the observer changes latitude, and do not change over
-the course of the day due to the rotation of the Earth (the story is
-complicated a little by precession (section~\ref{sec:Concepts:Precession}) and
-parallax (section~\ref{sec:Concepts:Parallax}). RA/Dec coordinates are
-frequently used in star catalogues such as the Hipparcos catalogue.
+not change if the observer changes latitude, and do not change
+noticeably over the course of the day due to the rotation of the
+Earth.  RA/Dec coordinates are generally used nowadays in star
+catalogues such as the Hipparcos catalogue.
 
-Stellarium can draw grid lines for RA/Dec coordinates. Use the button on
-the main tool-bar to activate this grid, or press the \key{E} key.
+
+However, the story is complicated a little by precession
+(section~\ref{sec:Concepts:Precession}) and parallax
+(section~\ref{sec:Concepts:Parallax}). Precession causes a slow drift
+of the coordinates almost parallel to the ecliptic, and therefore star
+catalogues always have to specify their \indexterm{equinox} of
+validity. Current catalogs and atlases use coordinates for J2000.0.
+
+
+Stellarium can draw grid lines for Equatorial coordinates. Use the
+button \guibutton{0.6}{bt_eq_grid} on the main tool-bar to activate
+this grid, or press the \key{E} key to draw the equatorial grid for
+the simulation time. The Markings dialog (\ref{sec:gui:view:markings})
+allows you to set also the grid for J2000.0 standard coordinates.
+
+In case you are observing from another celestial object, the
+equatorial coordinates use a system similar to the one referring to
+the earth-based coordinates, but parallel to the planet's rotational
+axis.
+
+There are again a few great circles with special names which
+Stellarium can draw in addition, both for simulation time and for
+J2000.0 (see section~\ref{sec:gui:view:markings}).
+\begin{description}
+\item[Celestial Equator] the line directly above the earth's (or more
+  generally, the observer's planet's) equator.
+\item[Colures] These are lines similar to meridian and first vertical
+  in the azimuthal system. The \emph{Equinoctial Colure} runs from the
+  North Celestial Pole NCP through the First Point of Aries \Aries,
+  South Celstial Pole SCP and First Point of Libra \Libra\, while the
+  \emph{Solstitial Colure} runs from the NCP through First Point of
+  Cancer \Cancer, SCP and First Point of Capricorn \Capricorn.
+\end{description}
+
+\subsection{Ecliptical Coordinates}
+\label{sec:Concepts:Ecliptical}
+
+The earth's orbit around the sun, i.e., the \indexterm{ecliptic},
+defines the ``equatorial line'' of this coordinate system, which is
+traditionally used when computing the coordinates for planets.
+
+The zero point of \indexterm{ecliptical longitude} $\lambda$ is the
+same as for equatorial coordinates, and the \indexterm{ecliptical
+  latitude} $\beta$ is counted positive towards the
+\indexterm{Northern Ecliptical Pole} NEP in the constellation of
+Draco.
+
+Moon and sun (and to a much lesser extent, the other planets) pull on
+the equatorial bulge and try to put Earth's axis normal to its orbital
+plane. Earth acts like a spinning top and evades this pull in a
+sideways motion, so that earth's axis seems to describe a small circle
+over a period of almost 26.000 years (see
+section~\ref{sec:Concepts:Precession}). 
+
+In addition, ecliptic obliquity against the equatorial coordinates,
+which mirrors the earth's axial tilt, slowly changes.
+
+Therefore, also for ecliptical coordinates is is required to specify
+which date the coordinates refer to.  Stellarium can draw two grids
+for Ecliptical coordinates. Use the \key{,} key to draw the ecliptic
+for the simulation time. The Markings dialog
+(\ref{sec:gui:view:markings}) allows you to show also a line for epoch
+J2000.0 and grids for the ecliptical coordinates for current epoch and
+epoch J2000.0. You can assign your own shortcut keys
+(section~\ref{sec:gui:help:hotkeys}) if you frequently operate with
+these coordinates.
+
+Since version 0.14.0 Stellarium can very accurately show the motions
+between the coordinate systems~\cite{2011AA:Vondrak}, and it is quite
+interesting to follow these motions for several millennia. To support
+such demonstrations, Stellarium can also draw the
+\indexterm{precession circles} between celestial and ecliptical poles
+(activate them in the Markings dialog
+(\ref{sec:gui:view:markings}). If you observe long enough, you will
+see that these circles vary in size, reflecting the changes in
+ecliptic obliquity.
+
+
+
+Many of the minor bodies are best observed around the times of their
+opposition.  Stellarium can display a great circle in the ecliptical
+coordinates which runs through the ecliptic poles and through the sun,
+thereby allowing to estimate opposition and conjunction. Activate
+display of this \indexterm{Opposition/Conjunction Line} in the Markings dialog
+(Labeled ``O./C. longitude''; \ref{sec:gui:view:markings}).
+
+
+It is interesting to note that star catalogs before \name{Tycho
+  Brahe}'s (1546--1601), most notably the one in \name{Ptolemy}'s
+\indexterm{Almagest}, used Ecliptical coordinates. The reason is
+simple: It was known since \name{Hipparch} that stellar coordinates
+slowly move along the ecliptic through \indexterm{precession}, and the
+correction to coordinates of a date of interest was a simple addition
+of a linear correction to the ecliptical longitude in the
+catalog. Changes of ecliptic obliquity was discovered much later.
+
+\subsection{Galactic Coordinates}
+\label{sec:Concepts:Galactic}
+
+The Milky Way appears to run along a great circle over the sky,
+mirroring the fact that the sun is a star in it. Coordinates for
+non-stellar objects which belong to the Milky Way like
+\indexterm{pulsars} or \indexterm{planetary nebulae} are often mapped
+in \indexterm{Galactic Coordinates}, where \indexterm{galactic longitude}
+$l$ and \indexterm{galactic latitude} $b$ are usually given in decimal
+degrees. Here, the zero point of galactic longitudes lies in the
+Galactic Center.
+
+Stellarium can also draw a galactic grid and the galactic equator by
+activating the respective options in the Markings dialog (see
+section~\ref{sec:gui:view:markings}). You can assign a keyboard
+shortcut if you frequently use these coordinates
+(see~\ref{sec:gui:help:hotkeys}).
+
 
 \section{Units}
 \label{sec:Concepts:Units}
@@ -261,6 +391,73 @@ revolution in the sky. Astronomers find \indexterm{sidereal time}
 useful when observing. This is the Right Ascension which is currently
 passing the meridian line.  When visiting observatories, look out for
 doctored alarm clocks that have been set to run in sidereal time!
+
+%\subsubsection{\texorpdfstring{$\mathbf{\Delta T}$}{Delta T}}
+\subsubsection{Delta T}
+\label{sec:Concepts:DeltaT}
+%% GZ 2016-05-01
+
+Until around 1900, the earth's rotation was regarded as perfect
+standard of time. There were 86400~seconds per mean solar day, and the
+accuracy of reproducing time with mechanical clocks only in this time
+started to become as good as the earth's rotation itself.
+
+Astronomers who computed solar eclipses reported in texts from
+antiquity wondered about a required time shift which they originally
+attributed to a yet-unknown ``secular acceleration of the lunar
+motion''. However, it turned out that indeed the gravitational effect
+of the moon which causes the tides also has effects on earth's
+rotation: the tides slowly break earth's rotational speed. The energy
+is also transferred to the moon, and the acceleration leads to the
+moon slowly moving away from the earth\footnote{No need to worry, the
+  moon recedes from the earth only a few centimeters per year as
+  measured with the laser reflectors left by the Apollo astronauts in
+  the 1970s. In a very far future, however, there will only be annular
+  solar eclipses as a consequence!}.
+
+This led to the introduction of a time named Ephemeris Time (ET) with
+progresses in the speed of the second in the year 1900, to be used for
+positional computation in our solar system, in addition to Greenwich
+Mean Time (GMT), from which all zone times and ``civil'' clock times were
+derived.
+
+The introduction of Atomic Clocks in the middle of the 20th century
+led to a redefinition of the (temporal) second, which has been
+de-coupled from earth's rotation. This time, the International Atomic
+Time TAI, is the basis for Terrestrial Time TT which can be
+considered as constantly progressing at constant speed\footnote{We
+  don't discuss relativity here. The advanced reader is referred to
+  the presentation in the Wikipedia,
+  \url{https://en.wikipedia.org/wiki/Delta_T}.}, and is used for
+computation of the planetary positions.
+
+Still, people living on earth prefer to have the mean solar noon
+governing the run of day and night. Therefore all forms of civil time
+is linked to Coordinated Universal Time UTC. Seconds in UTC and TAI
+are of equal length. The slow and irregular divergence between TAI and
+UTC is observed by a few standardisation institutes.  When necessary,
+a leap second can be introduced to the UTC to bring the earth's
+rotation back in sync so that the Mean Sun again culminates at noon.
+
+The difference $\Delta T=TT-UT$ (or ``Delta T'') describes the
+temporal offset which amounts already to more than a minute in the 21st
+century. There have been many attempts to properly model $\Delta T$,
+and Stellarium offers several models you can choose from in the
+configuration dialog (see
+section~\ref{sec:gui:configuration:nav}). The default, ``Espenak and
+Meeus (2006)'', is a widely accepted standard. But if you are a
+researcher and want to experiment with alternative models, you will
+hopefully like this feature. you can even specify your own data for
+$a$, $b$, $c$, $y$ and the secular term for lunar acceleration $n$
+(actually $dn/dt$ in units of
+$\mathrm{arcseconds}/\mathrm{century}^2$) if you can model $\Delta T$
+according to the formula
+\begin{eqnarray}
+  \label{eq:DeltaT:custom}
+  \Delta T &=& a+ b\cdot u + c \cdot u^2 \, \ \ \text{where}\\
+         u &=& \frac{\mathrm{year}-y}{100}
+\end{eqnarray}
+
 
 
 
@@ -410,11 +607,14 @@ and so on. Luminosity is related to absolute magnitude.
 \end{figure}
 
 As the Earth orbits the Sun throughout the year, the axis of rotation
-(the line running through the rotational poles of the Earth) seems
-to point towards the same position on the celestial sphere, as can be
-seen in figure~\ref{fig:Obliquity}. The angle between the axis
-of rotation and the perpendicular of the orbital plane is called the
-\indexterm{obliquity of the ecliptic}. It is currently about $23\degree27'$.
+(the line running through the rotational poles of the Earth) seems to
+point towards the same position on the celestial sphere, as can be
+seen in figure~\ref{fig:Obliquity}. The angle between the axis of
+rotation and the perpendicular of the orbital plane is called the
+\indexterm{obliquity of the ecliptic}. It is currently about
+$23\degree27'$ and is the angle between equatorial coordinates
+(\ref{sec:Concepts:Equatorial}) and ecliptical coordinates
+(\ref{sec:Concepts:Ecliptical}).
 
 \begin{figure}[htb]
 \centering\includegraphics[scale=2.0]{precession}
@@ -423,16 +623,19 @@ of rotation and the perpendicular of the orbital plane is called the
 \end{figure}
 
 
+
+
+
 Observed over very long periods of time the direction the axis of
 rotation points to does actually change. The angle between the axis of
 rotation and the orbital plane stays fairly constant, but the
 direction the axis points --- the position of the celestial pole ---
-transcribes a circle on the stars in the celestial sphere. The motion
+transcribes a figure similar to a circle on the stars in the celestial sphere. The motion
 is similar to the way in which a gyroscope slowly twists, as
 figure~\ref{fig:Precession} illustrates. This process is called
 \indexterm{precession}. The circles can be shown in Stellarium: From
 the View menu (\key{F4}), tab ``Markings'', switch on ``Precession
-Circles''.
+Circles'' (\ref{sec:gui:view:markings}).
 
 Precession is a slow process. The axis of rotation twists through a
 full $360\degree$ about once every 28,000 years. However, over these
