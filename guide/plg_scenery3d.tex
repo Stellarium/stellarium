@@ -43,9 +43,9 @@ sundials and other shadow casters in action, etc.
 \label{sec:scenery3d:Usage}
 
 
-You activate the plugin with the \emph{circular enclosure} button at screen
+You activate the plugin with the \emph{circular enclosure} button \guibutton{0.6}{bt_scenery3d_off} at screen
 bottom or by pressing \key{\ctrl+W}. The other button with circular enclosure and
-tool icon (or \key{\ctrl+\shift+W}) opens the settings dialog. Once loaded and
+tool icon  \guibutton{0.6}{bt_scenery3d_settings_off} (or \key{\ctrl+\shift+W}) opens the settings dialog. Once loaded and
 displaying, you can walk around pressing \key{\ctrl} plus cursor keys. Change eye
 height with \key{\ctrl+Page \arrowkeyup}/\key{\ctrl + Page \arrowkeydown} keys. Adding \key{\shift} key increases speed by 10,
 adding \key{\Alt} multiplies by 5 (pressing both keys multiplies by 50!). If you release \key{\ctrl} before
@@ -463,7 +463,7 @@ language code.
 \end{longtabu}
 
 \noindent Optional section to specify geographic longitude $\lambda$, latitude $\varphi$,
-and altitude. Required if \verb|coord/convergence_angle=from_grid|, else
+and altitude. The secton is required if \verb|coord/convergence_angle=from_grid|, else
 location is inherited from landscape.
 \begin{longtabu}to \textwidth {lX} 
 \multicolumn{2}{l}{\texttt{planet = Earth}}\\
@@ -521,11 +521,10 @@ vertical axis to be aligned with True North\footnote{Note that
   Sketchup's \emph{georeferencing dictionary} provides a NorthAngle
   entry, which is $360-\mathtt{convergence\_angle}$.}.
 
-\begin{verbatim}
+\begin{configfile}
 convergence_angle=from_grid|<double> 
 grid_meridian=<double>|+<int>d<int>'<float>"      
-\end{verbatim}
-
+\end{configfile}
 
 \noindent \texttt{grid\_meridian} is the central meridian $\lambda_0$ of grid
 zone, e.g.\ for UTM or Gauss-Kr\"uger, is only required to compute
@@ -533,9 +532,9 @@ convergence angle if \texttt{convergence\_angle=from\_grid}
 
 
 
-\begin{verbatim}
+\begin{configfile}
 zero_ground_height=<double> 
-\end{verbatim}
+\end{configfile}
 height of terrain outside \file{<Temple>\_ground.OBJ}, or if \verb|ground=NULL|.
 Allows smooth approach from outside.  This value is relative to the model
 origin, or typically close to zero, i.e.,  use a Z value in model coordinates,
@@ -594,11 +593,11 @@ Meshlab, and import just a stub required to georeference the model in
 \program{Sketchup}. 
 
 Now, how would you find the proper orientation? The easiest chance
-would be with a structure visible in the photo layer of Google
-Earth. So, start a new model and immediately \menu{add location} from the
-Google Earth interface. Then you can import the OBJ with TIG's importer
+would be with a structure visible in the photo layer of \program{Google
+Earth}. So, start a new model and immediately \menu{add location} from the
+\program{Google Earth} interface. Then you can import the OBJ with TIG's importer
 plugin.  If the imported model looks perfect, you may just place the
-model into the Sketchup landscape and export a complete landscape just
+model into the \program{Sketchup} landscape and export a complete landscape just
 like above. If not, or if you had to cut/simplify the OBJ to be able
 to import it, you can rotate/scale the OBJ (it must be grouped!). If
 you see a shadow in the photos, you may want to set the date/time of
@@ -608,17 +607,17 @@ texture. When you are satisfied with placement/orientation, you create
 a \file{scenery3d.ini} like above with the command
 \menu{Plugins>ASTROSIM/Stellarium scenery3d helpers>Create scenery3d.ini}.
 
-Then, you select the OBJ group, open \menu{Windows>Ruby Console} and call
+Then, you select the OBJ group, open the \menu{Windows>Ruby Console} and readout data by calling
 \menu{Plugins>ASTROSIM/Stellarium scenery3d helpers>Export transformation
 of selected group}.
 
 On the Ruby console, you will find a line of numbers (the $4\times4$
 transformation matrix) which you copy/paste (all in one line!) into the
 \file{[model]} section in \file{scenery3d.ini}.
-\begin{verbatim}
+\begin{configfile}
 obj2grid_trafo=<a11>,<a12>,<a13>,<a14>,<a21>,<a22>,<a23>,<a24>,
                <a31>,<a32>,<a33>,<a34>,<a41>,<a42>,<a43>,<a44>
-\end{verbatim}
+\end{configfile}
 You edit the \file{scenery3d.ini} to use your full (unmodified)
 \program{PhotoFly} model and, if you don't have a panorama, take \parameter{Zero Horizon}
 landscape as (no-)background. It depends on the model if you want to
@@ -640,11 +639,14 @@ really helps if you know how to operate automatic text processors like
 \program{AWK}.
 
 \section{Predefined views}
-You can also distribute some predefined views with your model in a
-\file{viewpoints.ini} file. See the provided ``Sterngarten'' scene for an
-example. These entries are not editable by the user through the interface. The
-user can always save his own views, they will be saved into the file
-\file{userviews.ini} in the user's Stellarium user directory, and are editable.
+You can also configure and distribute some predefined views with your
+model in a \file{viewpoints.ini} file. The viewpoints can be loaded
+and stored with the viewpoint dialog which you can call with the
+\guibutton{0.6}{bt_scenery3d_eyepoint_off} button. See the provided
+``Sterngarten'' scene for an example. These entries are not editable
+by the user through the interface. The user can always save his own
+views, they will be saved into the file \file{userviews.ini} in the
+user's Stellarium user directory, and are editable.
 
 \begin{configfile}[\scriptsize]
 [StoredViews]
@@ -678,15 +680,15 @@ improvements in integration, user interaction, \file{.ini} option handling,
 OBJ/MTL loader bugfixes and georeference testing by Georg Zotti.
 
 Andrei Borza in 2011/12 further improved rendering quality (shadow
-mapping, normal mapping) and speed
-\cite{Zotti-Neubauer:VSMM2012,Zotti-Neubauer:EuroMed2012,Zotti:2012:SpringerAA}.
+mapping, normal mapping) and
+speed~\cite{Zotti-Neubauer:VSMM2012,Zotti-Neubauer:EuroMed2012,Zotti:2012:SpringerAA}.
 
 In 2014/15,
 Florian Schaukowitsch adapted the code to work with Qt 5 and the 
 Stellarium 0.13 codebase, replaced the renderer with a more efficient, fully
 shader-based system, implemented various performance, quality and usability
 enhancements, and did some code cleanup. Both Andrei and Florian were again
-supervised by Michael Wimmer\cite{Zotti:CHNT2015,Zotti:SEAC2015}. % when they are published.
+supervised by Michael Wimmer~\cite{Zotti:CHNT2015,Zotti:SEAC2015}. % when they are published.
 
 This work has been originally created during the ASTROSIM project supported 2008-2012 by
 the Austrian Science Fund (FWF) under grant number P~21208-G19.
