@@ -517,6 +517,7 @@ most famous of which is probably Comet Halley, named after the British
 astronomer \name{Edmund Halley}, which has an orbital period of
 roughly 76~years.
 
+
 \section{Meteoroids}
 \label{sec:Phenomena:Meteoroids}
 
@@ -557,6 +558,22 @@ through space, and sweeps up a dense cloud of particles which
 originates from a comet's tail. Stellarium's Meteor Shower plugin (see
 section~\ref{sec:plugins:MeteorShowers}) can help you planning your next
 meteor observing night.
+
+\section{Zodiacal Light and \emph{Gegenschein}}
+\label{sec:Phenomena:ZodiacalLight}
+
+In very clear nights on the best observing sites, far away from the
+light pollution of our cities, you can observe a feeble glow also
+known as ``false twilight'' after evening twilight in the west, or
+before dawn in the east. The glow looks like a wedge of light along
+the ecliptic. Exactly opposite the sun, there is another dim glow that
+can be observed with dark-adapted eyes in perfect skies: the
+\emph{Gegenschein} (counterglow). 
+
+This is sunlight reflected off the same dust and meteoroids in the
+plane of our solar system which is the source of meteors. Stellarium's
+sky can show the Zodiacal light~\cite{Kwon:2004:ZodiacalLight}, but
+observe how quickly light pollution kills its visibility!
 
 
 \section{The Milky Way}
@@ -764,37 +781,33 @@ side but concentrating on the object's location can often reveal it.
 \end{description}
 
 
-\section{Light Pollution}
-\label{sec:LightPollution}
+%% The following 3 were grouped to reduce the part TOC sections. 
+\section{Atmospheric effects}
+\label{sec:phenomena:Atmosphere}
 
-An ugly side effect of civilisation is a steady increase in outdoor
-illumination. Many people think it increases safety, but while this
-statement can be questioned, one definite result, aside from
-environmental issues like dangers for the nocturnal fauna, are ever
-worsening conditions for astronomical observations or just enjoyment
-of the night sky. 
-
-Stellarium can simulate light pollution, which is controlled from the
-light pollution section of the \emph{Sky} tab of the \emph{View}
-window.  Light pollution levels are set using a numerical value
-between 1 and 9 which corresponds to the \emph{Bortle Dark Sky Scale}
-(see Appendix~\ref{ch:BortleScale}).  In addition, local variations of
-the amount of light pollution can be included in a light pollution
-layer in the landscapes, see
-section~\ref{ch:landscapes} for details.
 
 %% Refraction section by GZotti 2016-04-12
-\section{Atmospheric Refraction}
-\label{sec:concepts:Refraction}
+\subsection{Atmospheric Refraction}
+\label{sec:phenomena:Refraction}
 
-\begin{figure}[tb]
+%\begin{figure}[p]
+%\centering\includegraphics[angle=90,width=.8\textwidth]{gz_refraction}
+%\caption{Refraction. The figure shows corrective values (degrees)
+%  which are subtracted from observed altitudes (left side) to reach
+%  geometric altitudes, or values to be added to computed values (right
+%  side). The models used are not directly inverse operations.}
+%\label{fig:Refraction}
+%\end{figure}
+
+\begin{sidewaysfigure}%[p]
 \centering\includegraphics[width=\textwidth]{gz_refraction}
 \caption{Refraction. The figure shows corrective values (degrees)
   which are subtracted from observed altitudes (left side) to reach
   geometric altitudes, or values to be added to computed values (right
   side). The models used are not directly inverse operations.}
 \label{fig:Refraction}
-\end{figure}
+\end{sidewaysfigure}
+
 
 \indexterm{Atmospheric Refraction} is a lifting effect of our
 atmosphere which can be observed by the fact that objects close to the
@@ -820,8 +833,8 @@ stratosphere balloon, where the height of earth's surface is several
 degrees below the mathematical horizon.
 
 %% Refraction section by GZotti 2016-04-12
-\section{Atmospheric Extinction}
-\label{sec:concepts:Extinction}
+\subsection{Atmospheric Extinction}
+\label{sec:phenomena:Extinction}
 
 \begin{figure}[tb]
 \centering\includegraphics[width=\textwidth]{gz_extinctionmag}
@@ -853,6 +866,25 @@ your atmosphere with a global factor $k$, the \emph{magnitude loss per
   airmass} (see section~\ref{sec:gui:view:sky:atmosphere}). The best
 mountaintop sites may have $k=0.15$, while $k=0.25$ seems a value
 usable for good locations in lower altitudes.
+
+\subsection{Light Pollution}
+\label{sec:phenomena:LightPollution}
+
+An ugly side effect of civilisation is a steady increase in outdoor
+illumination. Many people think it increases safety, but while this
+statement can be questioned, one definite result, aside from
+environmental issues like dangers for the nocturnal fauna, are ever
+worsening conditions for astronomical observations or just enjoyment
+of the night sky. 
+
+Stellarium can simulate light pollution, which is controlled from the
+light pollution section of the \emph{Sky} tab of the \emph{View}
+window.  Light pollution levels are set using a numerical value
+between 1 and 9 which corresponds to the \emph{Bortle Dark Sky Scale}
+(see Appendix~\ref{ch:BortleScale}).  In addition, local variations of
+the amount of light pollution can be included in a light pollution
+layer in the landscapes, see
+section~\ref{ch:landscapes} for details.
 
 
 %%% Local Variables: 
