@@ -744,3 +744,25 @@ float Novae::getLowerLimitBrightness()
 	novaeJsonFile.close();
 	return lowerLimit;
 }
+
+void Novae::reloadCatalog(void)
+{
+	bool hasSelection = false;
+	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
+	// Whether any nova are selected? Save the current selection...
+	const QList<StelObjectP> selectedObject = objMgr->getSelectedObject("Nova");
+	if (!selectedObject.isEmpty())
+	{
+		// ... unselect current nova.
+		hasSelection = true;
+		objMgr->unSelect();
+	}
+
+	readJsonFile();
+
+	if (hasSelection)
+	{
+		// Restore selection...
+		objMgr->setSelectedObject(selectedObject);
+	}
+}

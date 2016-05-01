@@ -190,6 +190,8 @@ public slots:
 	void displayMessage(const QString& message, const QString hexColor="#999999");
 	void messageTimeout(void);
 
+	void reloadCatalog(void);
+
 private:
 	// Font used for displaying our text
 	QFont font;

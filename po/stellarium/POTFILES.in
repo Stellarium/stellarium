@@ -34,6 +34,7 @@ src/gui/SearchDialog.cpp
 src/gui/ShortcutsDialog.cpp
 src/gui/CustomDeltaTEquationDialog.cpp
 src/gui/AstroCalcDialog.cpp
+src/gui/BookmarksDialog.cpp
 src/main.cpp
 src/StelMainView.cpp
 
@@ -50,8 +51,10 @@ src/ui_configurationDialog.h
 src/ui_addRemoveLandscapesDialog.h
 src/ui_shortcutsDialog.h
 src/ui_atmosphereDialog.h
+src/ui_greatRedSpotDialog.h
 src/ui_scriptConsole.h
 src/ui_astroCalcDialog.h
+src/ui_bookmarksDialog.h
 
 # Plug-in translations
 # NOTE: Plugins should be enabled for building

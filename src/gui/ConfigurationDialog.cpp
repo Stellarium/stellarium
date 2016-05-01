@@ -579,6 +579,10 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/milky_way_intensity", GETSTELMODULE(MilkyWay)->getIntensity());
 	conf->setValue("astro/zodiacal_light_intensity", GETSTELMODULE(ZodiacalLight)->getIntensity());
 	conf->setValue("astro/flag_toast_survey", GETSTELMODULE(ToastMgr)->getFlagSurveyShow());
+	conf->setValue("astro/flag_grs_custom", ssmgr->getFlagCustomGrsSettings());
+	conf->setValue("astro/grs_longitude", ssmgr->getCustomGrsLongitude());
+	conf->setValue("astro/grs_drift", ssmgr->getCustomGrsDrift());
+	conf->setValue("astro/grs_jd", ssmgr->getCustomGrsJD());
 
 	// view dialog / markings tab settings
 	conf->setValue("viewing/flag_azimuthal_grid", glmgr->getFlagAzimuthalGrid());

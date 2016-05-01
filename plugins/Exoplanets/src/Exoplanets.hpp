@@ -156,18 +156,6 @@ public:
 	//! @param b if true, updates will be enabled, else they will be disabled
 	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
 
-	bool getDisplayMode(void);
-	void setDisplayMode(bool b);
-
-	bool getTimelineMode(void);
-	void setTimelineMode(bool b);
-
-	bool getHabitableMode(void);
-	void setHabitableMode(bool b);
-
-	QString getMarkerColor(bool habitable);
-	void setMarkerColor(QString c, bool h);
-
 	void setEnableAtStartup(bool b) { enableAtStartup=b; }
 	bool getEnableAtStartup(void) { return enableAtStartup; }
 
@@ -183,24 +171,6 @@ public:
 
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
-
-	//! Get count of planetary systems from catalog
-	int getCountPlanetarySystems(void) const
-	{
-		return PSCount;
-	}
-
-	//! Get count of exoplanets from catalog
-	int getCountAllExoplanets(void) const
-	{
-		return EPCountAll;
-	}
-
-	//! Get count of potentially habitable exoplanets from catalog
-	int getCountHabitableExoplanets(void) const
-	{
-		return EPCountPH;
-	}
 
 	QList<double> getExoplanetsData(int mode)
 	{
@@ -238,16 +208,71 @@ public slots:
 	//! module.ini file and update the local JSON file.
 	void updateJSON(void);
 
+	//! Enable/disable display of markers of exoplanetary systems
+	//! @param b boolean flag
 	void setFlagShowExoplanets(bool b) { flagShowExoplanets=b; }
+	//! Get status to display of markers of exoplanetary systems
+	//! @return true if it's visible
 	bool getFlagShowExoplanets(void) { return flagShowExoplanets; }
 
 	//! Define whether the button toggling exoplanets should be visible
 	void setFlagShowExoplanetsButton(bool b);
 	bool getFlagShowExoplanetsButton(void) { return flagShowExoplanetsButton; }
 
-	//! Display a message. This is used for plugin-specific warnings and such
-	void displayMessage(const QString& message, const QString hexColor="#999999");
-	void messageTimeout(void);
+	//! Get status to display of distribution of exoplanetary systems
+	//! @return true if distribution of exoplanetary systems is enabled
+	bool getDisplayMode(void);
+	//! Enable/disable display of distribution of exoplanetary systems
+	//! @param b
+	void setDisplayMode(bool b);
+
+	//! Get status to display of systems with exoplanets after their discovery
+	//! @return true if markers of exoplanetary systems are visible after discovery of exoplanets
+	bool getTimelineMode(void);
+	//! Enable/disable display of systems with exoplanets after their discovery only
+	//! @param b
+	void setTimelineMode(bool b);
+
+	//! Get status to display of exoplanetary systems with the potentially habitable exoplanets
+	//! @return true if systems with only potentially habitable exoplanets are visible
+	bool getHabitableMode(void);
+	//! Enable/disable display of exoplanetary systems with the potentially habitable exoplanets only
+	//! @param b
+	void setHabitableMode(bool b);
+
+	//! Get color for markers of exoplanetary systems
+	//! @param h set false if you want get color of markers of potentially habitable exoplanets
+	//! @return color
+	Vec3f getMarkerColor(bool habitable);
+	//! Set color for markers of exoplanetary systems
+	//! @param c color
+	//! @param h set true if you want set color for potentially habitable exoplanets
+	//! @code
+	//! // example of usage in scripts
+	//! Exoplanets.setMarkerColor(Vec3f(1.0,0.0,0.0), true);
+	//! @endcode
+	void setMarkerColor(const Vec3f& c, bool h);
+
+	//! Get count of planetary systems from catalog
+	//! @return count of planetary systems
+	int getCountPlanetarySystems(void) const
+	{
+		return PSCount;
+	}
+
+	//! Get count of exoplanets from catalog
+	//! @return count of all exoplanets
+	int getCountAllExoplanets(void) const
+	{
+		return EPCountAll;
+	}
+
+	//! Get count of potentially habitable exoplanets from catalog
+	//! @return count of potentially habitable exoplanets
+	int getCountHabitableExoplanets(void) const
+	{
+		return EPCountPH;
+	}
 
 private:
 	// Font used for displaying our text
@@ -329,6 +354,11 @@ private slots:
 	void checkForUpdate(void);
 	void updateDownloadComplete(QNetworkReply* reply);
 
+	//! Display a message. This is used for plugin-specific warnings and such
+	void displayMessage(const QString& message, const QString hexColor="#999999");
+	void messageTimeout(void);
+
+	void reloadCatalog(void);
 };
 
 

@@ -179,36 +179,40 @@ public slots:
 	bool getFlagLightTravelTime(void) const {return flagLightTravelTime;}
 
 	//! Set planet names font size.
+	//! @return font size
 	void setFontSize(float newFontSize);
 
 	//! Set the color used to draw planet labels.
-	//! @param c The color of the planet labels
+	//! @param c The color of the planet labels (R,G,B)
 	//! @code
 	//! // example of usage in scripts
 	//! SolarSystem.setLabelsColor(Vec3f(1.0,0.0,0.0));
 	//! @endcode
 	void setLabelsColor(const Vec3f& c);
 	//! Get the current color used to draw planet labels.
+	//! @return current color
 	const Vec3f& getLabelsColor(void) const;
 
 	//! Set the color used to draw planet orbit lines.
-	//! @param c The color of the planet orbit lines
+	//! @param c The color of the planet orbit lines (R,G,B)
 	//! @code
 	//! // example of usage in scripts
 	//! SolarSystem.setOrbitsColor(Vec3f(1.0,0.0,0.0));
 	//! @endcode
 	void setOrbitsColor(const Vec3f& c);
 	//! Get the current color used to draw planet orbit lines.
+	//! @return current color
 	Vec3f getOrbitsColor(void) const;
 
 	//! Set the color used to draw planet trails lines.
-	//! @param c The color of the planet trails lines
+	//! @param c The color of the planet trails lines (R,G,B)
 	//! @code
 	//! // example of usage in scripts
 	//! SolarSystem.setTrailsColor(Vec3f(1.0,0.0,0.0));
 	//! @endcode
 	void setTrailsColor(const Vec3f& c) {trailColor=c;}
 	//! Get the current color used to draw planet trails lines.
+	//! @return current color
 	Vec3f getTrailsColor() const {return trailColor;}
 
 	//! Set the color used to draw planet pointers.
@@ -219,6 +223,7 @@ public slots:
 	//! @endcode
 	void setPointersColor(const Vec3f& c) {pointerColor=c;}
 	//! Get the current color used to draw planet pointers.
+	//! @return current color
 	Vec3f getPointersColor() const {return pointerColor;}
 
 	//! Set flag which determines if Earth's moon is scaled or not.
@@ -267,13 +272,13 @@ public slots:
 
 	//! Set the algorithm for computation of apparent magnitudes for planets in case observer on the Earth.
 	//! Possible values:
-	//! * Planesas (algorithm provided by Pere Planesas (Observatorio Astronomico Nacional))
-	//! * Mueller (G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961])
-	//! * Harris (Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes)
+	//! @li @c Planesas (algorithm provided by Pere Planesas (Observatorio Astronomico Nacional))
+	//! @li @c Mueller (G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961])
+	//! @li @c Harris (Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes)
 	//! Details:
-	//! J. Meeus "Astronomical Algorithms" (2nd ed., with corrections as of August 10, 2009) p.283-286.
-	//! O. Montenbruck, T. Pfleger "Astronomy on the Personal Computer" (4th ed.) p.143-145.
-	//! Daniel L. Harris "Photometry and Colorimetry of Planets and Satellites" http://adsabs.harvard.edu/abs/1961plsa.book..272H
+	//! @li J. Meeus "Astronomical Algorithms" (2nd ed., with corrections as of August 10, 2009) p.283-286.
+	//! @li O. Montenbruck, T. Pfleger "Astronomy on the Personal Computer" (4th ed.) p.143-145.
+	//! @li Daniel L. Harris "Photometry and Colorimetry of Planets and Satellites" http://adsabs.harvard.edu/abs/1961plsa.book..272H
 	//! Hint: Default option in config.ini: astro/apparent_magnitude_algorithm = Harris
 	//! @param algorithm the case in-sensitive algorithm name
 	//! @note: The structure of algorithms is almost identical, just the numbers are different! You should activate
@@ -281,6 +286,7 @@ public slots:
 	void setApparentMagnitudeAlgorithmOnEarth(QString algorithm);
 
 	//! Get the algorithm used for computation of apparent magnitudes for planets in case  observer on the Earth
+	//! @see setApparentMagnitudeAlgorithmOnEarth()
 	QString getApparentMagnitudeAlgorithmOnEarth() const;
 
 	//! Set flag which enable use native names for planets or not.
@@ -302,6 +308,30 @@ public slots:
 	void setFlagIsolatedOrbits(bool b);
 	//! Get the current value of the flag which enables showing of isolated orbits for selected objects only or not.
 	bool getFlagIsolatedOrbits(void) const;
+
+	//! Set flag which determines if custom settings is using for Great Red Spot on Jupiter
+	void setFlagCustomGrsSettings(bool b);
+	//! Get the current value of the flag which determines if custom settings for Great Red Spot on Jupiter is used or not.
+	bool getFlagCustomGrsSettings();
+
+	//! Set longitude of Great Red Spot (System II is used)
+	//! @param longitude (degrees)
+	void setCustomGrsLongitude(int longitude);
+	//! Get longitude of Great Red Spot (System II is used)
+	//! @return a longitude (degrees)
+	int getCustomGrsLongitude();
+
+	//! Set speed of annual drift for Great Red Spot (System II is used)
+	//! @param annual drift (degrees)
+	void setCustomGrsDrift(double drift);
+	//! Get speed of annual drift for Great Red Spot (System II is used)
+	double getCustomGrsDrift();
+
+	//! Set initial JD for calculation of position of Great Red Spot
+	//! @param JD
+	void setCustomGrsJD(double JD);
+	//! Get initial JD for calculation of position of Great Red Spot
+	double getCustomGrsJD();
 
 public:
 	///////////////////////////////////////////////////////////////////////////
@@ -335,31 +365,17 @@ public:
 	//! Determines relative amount of sun visible from the observer's position.
 	double getEclipseFactor(const StelCore *core) const;
 
-	///////////////////////////////////////////////////////////////////////////////////////
-	// DEPRECATED
-	///////////////////////////////////////////////////////////////////////////////////////
-	//! Get a hash of locale and ssystem.ini names for use with the TUI.
-	//! @return A newline delimited hash of localized:standard planet names.
-	//! Planet translated name is PARENT : NAME
-	//! \deprecated ???
-	QString getPlanetHashString();
-
 	//! Compute the position and transform matrix for every element of the solar system.
 	//! @param observerPos Position of the observer in heliocentric ecliptic frame (Required for light travel time computation).
-	//! @param dateJDE the Julian Day in JDE (Ephemeris Time or equivalent)
-	//! \deprecated ??? In the "deprecated" section, but used in SolarSystem::init()
+	//! @param dateJDE the Julian Day in JDE (Ephemeris Time or equivalent)	
 	void computePositions(double dateJDE, const Vec3d& observerPos = Vec3d(0.));
 
-	//! Get the list of all the bodies of the solar system.
-	//! \deprecated Used in LandscapeMgr::update(), but commented out.
+	//! Get the list of all the bodies of the solar system.	
 	const QList<PlanetP>& getAllPlanets() const {return systemPlanets;}	
 
 private slots:
 	//! Called when a new object is selected.
 	void selectedObjectChange(StelModule::StelModuleSelectAction action);
-
-	//! Load a color scheme
-	void setStelStyle(const QString& section);
 
 	//! Called when the sky culture is updated.
 	//! Loads native names of planets for a given sky culture.
@@ -440,15 +456,13 @@ private:
 
 	class TrailGroup* allTrails;
 	StelGui* gui;
+	QSettings* conf;
 	LinearFader trailFader;
 	Vec3f trailColor;
 	Vec3f pointerColor;
 
 	QHash<QString, QString> planetNativeNamesMap;
 
-	//////////////////////////////////////////////////////////////////////////////////
-	// DEPRECATED
-	//////////////////////////////////////////////////////////////////////////////////
 	QList<Orbit*> orbits;           // Pointers on created elliptical orbits
 };
 

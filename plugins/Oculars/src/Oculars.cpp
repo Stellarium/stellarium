@@ -2059,7 +2059,7 @@ void Oculars::validateAndLoadIniFile()
 		if (ocularsVersion < MIN_OCULARS_INI_VERSION)
 		{
 			qWarning() << "Oculars::validateIniFile existing ini file version " << ocularsVersion
-								 << " too old to use; required version is " << MIN_OCULARS_INI_VERSION << ". Copying over new one.";
+				   << " too old to use; required version is " << MIN_OCULARS_INI_VERSION << ". Copying over new one.";
 			// delete last "old" file, if it exists
 			QFile deleteFile(ocularIniPath + ".old");
 			deleteFile.remove();

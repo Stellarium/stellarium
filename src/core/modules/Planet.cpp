@@ -54,6 +54,11 @@ StelTextureSP Planet::texEarthShadow;
 
 bool Planet::permanentDrawingOrbits = false;
 
+bool Planet::flagCustomGrsSettings = false;
+double Planet::customGrsJD = 2456901.5;
+double Planet::customGrsDrift = 15.;
+int Planet::customGrsLongitude = 216;
+
 QOpenGLShaderProgram* Planet::planetShaderProgram=NULL;
 Planet::PlanetShaderVars Planet::planetShaderVars;
 QOpenGLShaderProgram* Planet::ringPlanetShaderProgram=NULL;
@@ -520,7 +525,7 @@ void Planet::computePosition(const double dateJDE)
 
 			for( int d=0; d<ORBIT_SEGMENTS; d++ )
 			{
-				if(d + delta_points >= ORBIT_SEGMENTS )
+				if(d + delta_points >= ORBIT_SEGMENTS-1 )
 				{
 					// calculate new points
 					calc_date = new_date + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
@@ -613,9 +618,9 @@ void Planet::computePosition(const double dateJDE)
 	{
 		// calculate actual Planet position
 		coordFunc(dateJDE, eclipticPos, userDataPtr);
-		// XXX: do we need to do that even when the orbit is not visible?
-		for( int d=0; d<ORBIT_SEGMENTS; d++ )
-			orbit[d]=getHeliocentricPos(orbitP[d]);
+		if (orbitFader.getInterstate()>0.000001)
+			for( int d=0; d<ORBIT_SEGMENTS; d++ )
+				orbit[d]=getHeliocentricPos(orbitP[d]);
 		lastJDE = dateJDE;
 	}
 
@@ -709,7 +714,7 @@ double Planet::getSiderealTime(double JD, double JDE) const
 	double wholeRotations = floor(rotations);
 	double remainder = rotations - wholeRotations;
 
-	if (englishName=="Jupiter" && re.offset >= 0.0)
+	if (englishName=="Jupiter")
 	{
 		// http://www.projectpluto.com/grs_form.htm
 		// CM( System II) =  181.62 + 870.1869147 * jd + correction [870d rotation every day]
@@ -724,9 +729,13 @@ double Planet::getSiderealTime(double JD, double JDE) const
 		// http://www.skyandtelescope.com/observing/transit-times-of-jupiters-great-red-spot/ writes:
 		// The predictions assume the Red Spot was at Jovian System II longitude 216° in September 2014 and continues to drift 1.25° per month, based on historical trends noted by JUPOS.
 		// GRS longitude was at 2014-09-08 216d with a drift of 1.25d every month
-		double longitudeGRS=216+1.25*( JDE - 2456908)/30;
+		double longitudeGRS = 0.;
+		if (flagCustomGrsSettings)
+			longitudeGRS = customGrsLongitude + customGrsDrift*(JDE - customGrsJD)/365.25;
+		else
+			longitudeGRS=216+1.25*( JDE - 2456908)/30;
 		// qDebug() << "Jupiter: CM2 = " << cm2 << " longitudeGRS = " << longitudeGRS << " --> rotation = " << (cm2 - longitudeGRS);
-		return cm2 - longitudeGRS + 25.; // + 25 = Jupiter Texture not 0d
+		return cm2 - longitudeGRS + 50.; // Jupiter Texture not 0d
 		// To verify:
 		// GRS at 2015-02-26 23:07 UT on picture at https://maximusphotography.files.wordpress.com/2015/03/jupiter-febr-26-2015.jpg
 		//        2014-02-25 19:03 UT    http://www.damianpeach.com/jup1314/2014_02_25rgb0305.jpg
@@ -769,22 +778,6 @@ double Planet::getMeanSolarDay() const
 Vec3d Planet::getEclipticPos() const
 {
 	return eclipticPos;
-}
-
-// Return the heliocentric ecliptical position (Vsop87)
-Vec3d Planet::getHeliocentricEclipticPos() const
-{
-	Vec3d pos = eclipticPos;
-	PlanetP pp = parent;
-	if (pp)
-	{
-		while (pp->parent)
-		{
-			pos += pp->eclipticPos;
-			pp = pp->parent;
-		}
-	}
-	return pos;
 }
 
 // Return heliocentric coordinate of p

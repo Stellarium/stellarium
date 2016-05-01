@@ -29,6 +29,7 @@ class QListWidgetItem;
 
 class AddRemoveLandscapesDialog;
 class AtmosphereDialog;
+class GreatRedSpotDialog;
 
 class ViewDialog : public StelDialog
 {
@@ -62,12 +63,14 @@ private slots:
 	void setCurrentLandscapeAsDefault(void);
 	void setCurrentCultureAsDefault(void);
 	void setFlagLandscapeUseMinimalBrightness(bool b);
+	void setFlagCustomGrsSettings(bool b);
 	//! Update the widget to make sure it is synchrone if a value was changed programmatically
 	//! This function should be called repeatidly with e.g. a timer
 	void updateFromProgram();
 
 	void showAddRemoveLandscapesDialog();
         void showAtmosphereDialog();
+	void showGreatRedSpotDialog();
 
 	void populateLightPollution();
 	void populateLandscapeMinimalBrightness();
@@ -95,6 +98,7 @@ private:
 
 	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;
 	AtmosphereDialog * atmosphereDialog;
+	GreatRedSpotDialog * greatRedSpotDialog;
 };
 
 #endif // _VIEWDIALOG_HPP_

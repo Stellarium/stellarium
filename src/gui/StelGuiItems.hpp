@@ -179,6 +179,7 @@ private slots:
 private:
 	QTimeLine* hideTimeLine;
 	QGraphicsSimpleTextItem* helpLabel;
+	QGraphicsPixmapItem* helpLabelPixmap; // bad-graphics replacement.
 };
 
 // The button bar on the bottom containing actions toggle buttons
@@ -245,10 +246,19 @@ private:
 	void updateText(bool forceUpdatePos=false);
 	void updateButtonsGroups();
 	QRectF getButtonsBoundingRect() const;
+	// Elements which get displayed above the buttons:
 	QGraphicsSimpleTextItem* location;
 	QGraphicsSimpleTextItem* datetime;
 	QGraphicsSimpleTextItem* fov;
 	QGraphicsSimpleTextItem* fps;
+	// For bad graphics, show these instead. We can use location etc for font info.
+	// We use ad-hoc pixmaps instead if command-line arg. -t (--text-fix) is given.
+	QGraphicsPixmapItem* locationPixmap;
+	QGraphicsPixmapItem* datetimePixmap;
+	QGraphicsPixmapItem* fovPixmap;
+	QGraphicsPixmapItem* fpsPixmap;
+
+
 
 	struct ButtonGroup
 	{
@@ -283,6 +293,7 @@ private:
 	bool flagShowTZ;
 
 	QGraphicsSimpleTextItem* helpLabel;
+	QGraphicsPixmapItem* helpLabelPixmap; // bad-graphics replacement.
 };
 
 // The path around the bottom left button bars

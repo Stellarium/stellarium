@@ -7,7 +7,7 @@ IF(UNIX AND NOT WIN32)
 ADD_CUSTOM_TARGET(ManPages ALL)
 
 CONFIGURE_FILE(
-  ${CMAKE_CURRENT_SOURCE_DIR}/stellarium.pod.cmake
+  ${PROJECT_SOURCE_DIR}/cmake/stellarium.pod.cmake
   ${CMAKE_CURRENT_BINARY_DIR}/stellarium.pod
 )
 ADD_CUSTOM_COMMAND(
