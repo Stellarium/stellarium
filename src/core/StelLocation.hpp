@@ -58,15 +58,15 @@ public:
 	int population;
 	//! Location role code.
 	//! Possible values:
-	//! - \p C or \p B is a capital city
-	//! - \p R is a regional capital
-	//! - \p N is a normal city (any other type of settlement)
-	//! - \p O is an observatory
-	//! - \p L is a spacecraft lander
-	//! - \p I is a spacecraft impact
-	//! - \p A is a spacecraft crash
-	//! - \p X is an unknown or user-defined location (the default value).
-	//! - \p ! is an invalid location.
+	//! @li @p C or @p B is a capital city
+	//! @li @p R is a regional capital
+	//! @li @p N is a normal city (any other type of settlement)
+	//! @li @p O is an observatory
+	//! @li @p L is a spacecraft lander
+	//! @li @p I is a spacecraft impact
+	//! @li @p A is a spacecraft crash
+	//! @li @p X is an unknown or user-defined location (the default value).
+	//! @li @p ! is an invalid location.
 	QChar role;
 
 	//! Parse a location from a line serialization

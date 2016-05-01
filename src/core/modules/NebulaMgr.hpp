@@ -122,6 +122,11 @@ public:
 
 	bool objectInDisplayedCatalog(NebulaP n);
 
+	//! Get designation for latest selected DSO with priority
+	//! @note using for bookmarks feature as example
+	//! @return a designation
+	QString getLatestSelectedDSODesignation();
+
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 public slots:
@@ -498,10 +503,6 @@ public slots:
 	float getHintsAmount(void) const {return hintsAmount;}
 
 private slots:
-	//! Sets the colors of the Nebula labels and markers according to the
-	//! values in a configuration object
-	void setStelStyle(const QString& section);
-
 	//! Update i18 names from English names according to passed translator.
 	//! The translation is done using gettext with translated strings defined
 	//! in translations.h

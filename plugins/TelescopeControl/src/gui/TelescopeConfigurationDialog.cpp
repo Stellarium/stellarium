@@ -70,8 +70,16 @@ QStringList* TelescopeConfigurationDialog::listSerialPorts()
 {
 	// list real serial ports
 	QStringList *plist = new QStringList();
-	foreach (const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()) {
+	foreach (const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
+	{
+		#ifdef Q_OS_WIN
+		plist->append(serialPortInfo.portName()); // Use COM1 in the GUI instead \\.\COM1 naming
+		#else
 		plist->append(serialPortInfo.systemLocation());
+		#endif
+		qDebug() << "[TelescopeControl] port name:" << serialPortInfo.portName()
+			 << "; vendor identifier:" << serialPortInfo.vendorIdentifier()
+			 << "; product identifier:" << serialPortInfo.productIdentifier();
 	}
 
 // on linux find some virtual ports
