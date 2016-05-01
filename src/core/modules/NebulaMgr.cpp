@@ -175,6 +175,105 @@ void NebulaMgr::init()
 	setHintsProportional(conf->value("astro/flag_nebula_hints_proportional", false).toBool());
 	setFlagSurfaceBrightnessUsage(conf->value("astro/flag_surface_brightness_usage", false).toBool());
 
+	// Load colors from config file
+	// Upgrade config keys
+	if (conf->contains("color/nebula_label_color"))
+	{
+		conf->setValue("color/dso_label_color", conf->value("color/nebula_label_color", "0.4,0.3,0.5").toString());
+		conf->remove("color/nebula_label_color");
+	}
+	if (conf->contains("color/nebula_circle_color"))
+	{
+		conf->setValue("color/dso_circle_color", conf->value("color/nebula_circle_color", "0.8,0.8,0.1").toString());
+		conf->remove("color/nebula_circle_color");
+	}
+	if (conf->contains("color/nebula_galaxy_color"))
+	{
+		conf->setValue("color/dso_galaxy_color", conf->value("color/nebula_galaxy_color", "1.0,0.2,0.2").toString());
+		conf->remove("color/nebula_galaxy_color");
+	}
+	if (conf->contains("color/nebula_radioglx_color"))
+	{
+		conf->setValue("color/dso_radio_galaxy_color", conf->value("color/nebula_radioglx_color", "0.3,0.3,0.3").toString());
+		conf->remove("color/nebula_radioglx_color");
+	}
+	if (conf->contains("color/nebula_activeglx_color"))
+	{
+		conf->setValue("color/dso_active_galaxy_color", conf->value("color/nebula_activeglx_color", "1.0,0.5,0.2").toString());
+		conf->remove("color/nebula_activeglx_color");
+	}
+	if (conf->contains("color/nebula_intglx_color"))
+	{
+		conf->setValue("color/dso_interacting_galaxy_color", conf->value("color/nebula_intglx_color", "0.2,0.5,1.0").toString());
+		conf->remove("color/nebula_intglx_color");
+	}
+	if (conf->contains("color/nebula_brightneb_color"))
+	{
+		conf->setValue("color/dso_nebula_color", conf->value("color/nebula_brightneb_color", "0.1,1.0,0.1").toString());
+		conf->remove("color/nebula_brightneb_color");
+	}
+	if (conf->contains("color/nebula_darkneb_color"))
+	{
+		conf->setValue("color/dso_dark_nebula_color", conf->value("color/nebula_darkneb_color", "0.3,0.3,0.3").toString());
+		conf->remove("color/nebula_darkneb_color");
+	}
+	if (conf->contains("color/nebula_hregion_color"))
+	{
+		conf->setValue("color/dso_hydrogen_region_color", conf->value("color/nebula_hregion_color", "0.1,1.0,0.1").toString());
+		conf->remove("color/nebula_hregion_color");
+	}
+	if (conf->contains("color/nebula_snr_color"))
+	{
+		conf->setValue("color/dso_supernova_remnant_color", conf->value("color/nebula_snr_color", "0.1,1.0,0.1").toString());
+		conf->remove("color/nebula_snr_color");
+	}
+	if (conf->contains("color/nebula_cluster_color"))
+	{
+		conf->setValue("color/dso_cluster_color", conf->value("color/nebula_cluster_color", "0.8,0.8,0.1").toString());
+		conf->remove("color/nebula_cluster_color");
+	}
+
+	// Set colors for markers
+	setLabelsColor(StelUtils::strToVec3f(conf->value("color/dso_label_color", "0.2,0.6,0.7").toString()));
+	setCirclesColor(StelUtils::strToVec3f(conf->value("color/dso_circle_color", "1.0,0.7,0.2").toString()));
+
+	QString defaultGalaxyColor = conf->value("color/dso_galaxy_color", "1.0,0.2,0.2").toString();
+	setGalaxyColor(StelUtils::strToVec3f(defaultGalaxyColor));
+	setRadioGalaxyColor(StelUtils::strToVec3f(conf->value("color/dso_radio_galaxy_color", "0.3,0.3,0.3").toString()));
+	setActiveGalaxyColor(StelUtils::strToVec3f(conf->value("color/dso_active_galaxy_color", "1.0,0.5,0.2").toString()));
+	setInteractingGalaxyColor(StelUtils::strToVec3f(conf->value("color/dso_interacting_galaxy_color", "0.2,0.5,1.0").toString()));
+	setQuasarColor(StelUtils::strToVec3f(conf->value("color/dso_quasar_color", defaultGalaxyColor).toString()));
+	setPossibleQuasarColor(StelUtils::strToVec3f(conf->value("color/dso_possible_quasar_color", defaultGalaxyColor).toString()));
+	setBlLacObjectColor(StelUtils::strToVec3f(conf->value("color/dso_bl_lac_color", defaultGalaxyColor).toString()));
+	setBlazarColor(StelUtils::strToVec3f(conf->value("color/dso_blazar_color", defaultGalaxyColor).toString()));
+
+	QString defaultNebulaColor = conf->value("color/dso_nebula_color", "0.1,1.0,0.1").toString();
+	setNebulaColor(StelUtils::strToVec3f(defaultNebulaColor));
+	setPlanetaryNebulaColor(StelUtils::strToVec3f(conf->value("color/dso_planetary_nebula_color", defaultNebulaColor).toString()));
+	setReflectionNebulaColor(StelUtils::strToVec3f(conf->value("color/dso_reflection_nebula_color", defaultNebulaColor).toString()));
+	setBipolarNebulaColor(StelUtils::strToVec3f(conf->value("color/dso_bipolar_nebula_color", defaultNebulaColor).toString()));
+	setEmissionNebulaColor(StelUtils::strToVec3f(conf->value("color/dso_emission_nebula_color", defaultNebulaColor).toString()));
+	setDarkNebulaColor(StelUtils::strToVec3f(conf->value("color/dso_dark_nebula_color", "0.3,0.3,0.3").toString()));
+	setHydrogenRegionColor(StelUtils::strToVec3f(conf->value("color/dso_hydrogen_region_color", defaultNebulaColor).toString()));
+	setSupernovaRemnantColor(StelUtils::strToVec3f(conf->value("color/dso_supernova_remnant_color", defaultNebulaColor).toString()));
+	setInterstellarMatterColor(StelUtils::strToVec3f(conf->value("color/dso_interstellar_matter_color", defaultNebulaColor).toString()));
+	setClusterWithNebulosityColor(StelUtils::strToVec3f(conf->value("color/dso_cluster_with_nebulosity_color", defaultNebulaColor).toString()));
+	setMolecularCloudColor(StelUtils::strToVec3f(conf->value("color/dso_molecular_cloud_color", defaultNebulaColor).toString()));
+	setPossiblePlanetaryNebulaColor(StelUtils::strToVec3f(conf->value("color/dso_possible_planetary_nebula_color", defaultNebulaColor).toString()));
+	setProtoplanetaryNebulaColor(StelUtils::strToVec3f(conf->value("color/dso_protoplanetary_nebula_color", defaultNebulaColor).toString()));
+
+	QString defaultClusterColor = conf->value("color/dso_cluster_color", "1.0,1.0,0.1").toString();
+	setClusterColor(StelUtils::strToVec3f(defaultClusterColor));
+	setOpenClusterColor(StelUtils::strToVec3f(conf->value("color/dso_open_cluster_color", defaultClusterColor).toString()));
+	setGlobularClusterColor(StelUtils::strToVec3f(conf->value("color/dso_globular_cluster_color", defaultClusterColor).toString()));
+	setStellarAssociationColor(StelUtils::strToVec3f(conf->value("color/dso_stellar_association_color", defaultClusterColor).toString()));
+	setStarCloudColor(StelUtils::strToVec3f(conf->value("color/dso_star_cloud_color", defaultClusterColor).toString()));
+
+	QString defaultStellarColor = conf->value("color/dso_star_color", "1.0,0.7,0.2").toString();
+	setStarColor(StelUtils::strToVec3f(defaultStellarColor));
+	setEmissionObjectColor(StelUtils::strToVec3f(conf->value("color/dso_emission_object_color", defaultStellarColor).toString()));
+	setYoungStellarObjectColor(StelUtils::strToVec3f(conf->value("color/dso_young_stellar_object_color", defaultStellarColor).toString()));
+
 	// for DSO convertor (for developers!)
 	flagConverter = conf->value("devel/convert_dso_catalog", false).toBool();
 	flagDecimalCoordinates = conf->value("devel/convert_dso_decimal_coord", true).toBool();
@@ -259,8 +358,7 @@ void NebulaMgr::init()
 	updateI18n();
 	
 	StelApp *app = &StelApp::getInstance();
-	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
-	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));	
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
 	addAction("actionShow_Nebulas", N_("Display Options"), N_("Deep-sky objects"), "flagHintDisplayed", "D", "N");
@@ -384,110 +482,6 @@ void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 		sPainter.drawSprite2dMode(pos[0]+size/2, pos[1]+size/2, 10, -90);
 		sPainter.drawSprite2dMode(pos[0]+size/2, pos[1]-size/2, 10, -180);
 	}
-}
-
-void NebulaMgr::setStelStyle(const QString& section)
-{
-	// Load colors from config file
-	QSettings* conf = StelApp::getInstance().getSettings();
-
-	// Upgrade config keys
-	if (conf->contains(section+"/nebula_label_color"))
-	{
-		conf->setValue(section+"/dso_label_color", conf->value(section+"/nebula_label_color", "0.4,0.3,0.5").toString());
-		conf->remove(section+"/nebula_label_color");
-	}
-	if (conf->contains(section+"/nebula_circle_color"))
-	{
-		conf->setValue(section+"/dso_circle_color", conf->value(section+"/nebula_circle_color", "0.8,0.8,0.1").toString());
-		conf->remove(section+"/nebula_circle_color");
-	}
-	if (conf->contains(section+"/nebula_galaxy_color"))
-	{
-		conf->setValue(section+"/dso_galaxy_color", conf->value(section+"/nebula_galaxy_color", "1.0,0.2,0.2").toString());
-		conf->remove(section+"/nebula_galaxy_color");
-	}
-	if (conf->contains(section+"/nebula_radioglx_color"))
-	{
-		conf->setValue(section+"/dso_radio_galaxy_color", conf->value(section+"/nebula_radioglx_color", "0.3,0.3,0.3").toString());
-		conf->remove(section+"/nebula_radioglx_color");
-	}
-	if (conf->contains(section+"/nebula_activeglx_color"))
-	{
-		conf->setValue(section+"/dso_active_galaxy_color", conf->value(section+"/nebula_activeglx_color", "1.0,0.5,0.2").toString());
-		conf->remove(section+"/nebula_activeglx_color");
-	}
-	if (conf->contains(section+"/nebula_intglx_color"))
-	{
-		conf->setValue(section+"/dso_interacting_galaxy_color", conf->value(section+"/nebula_intglx_color", "0.2,0.5,1.0").toString());
-		conf->remove(section+"/nebula_intglx_color");
-	}
-	if (conf->contains(section+"/nebula_brightneb_color"))
-	{
-		conf->setValue(section+"/dso_nebula_color", conf->value(section+"/nebula_brightneb_color", "0.1,1.0,0.1").toString());
-		conf->remove(section+"/nebula_brightneb_color");
-	}
-	if (conf->contains(section+"/nebula_darkneb_color"))
-	{
-		conf->setValue(section+"/dso_dark_nebula_color", conf->value(section+"/nebula_darkneb_color", "0.3,0.3,0.3").toString());
-		conf->remove(section+"/nebula_darkneb_color");
-	}
-	if (conf->contains(section+"/nebula_hregion_color"))
-	{
-		conf->setValue(section+"/dso_hydrogen_region_color", conf->value(section+"/nebula_hregion_color", "0.1,1.0,0.1").toString());
-		conf->remove(section+"/nebula_hregion_color");
-	}
-	if (conf->contains(section+"/nebula_snr_color"))
-	{
-		conf->setValue(section+"/dso_supernova_remnant_color", conf->value(section+"/nebula_snr_color", "0.1,1.0,0.1").toString());
-		conf->remove(section+"/nebula_snr_color");
-	}
-	if (conf->contains(section+"/nebula_cluster_color"))
-	{
-		conf->setValue(section+"/dso_cluster_color", conf->value(section+"/nebula_cluster_color", "0.8,0.8,0.1").toString());
-		conf->remove(section+"/nebula_cluster_color");
-	}
-
-	// Set colors for markers
-	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/dso_label_color", "0.2,0.6,0.7").toString()));
-	setCirclesColor(StelUtils::strToVec3f(conf->value(section+"/dso_circle_color", "1.0,0.7,0.2").toString()));
-
-	QString defaultGalaxyColor = conf->value(section+"/dso_galaxy_color", "1.0,0.2,0.2").toString();
-	setGalaxyColor(StelUtils::strToVec3f(defaultGalaxyColor));
-	setRadioGalaxyColor(StelUtils::strToVec3f(conf->value(section+"/dso_radio_galaxy_color", "0.3,0.3,0.3").toString()));
-	setActiveGalaxyColor(StelUtils::strToVec3f(conf->value(section+"/dso_active_galaxy_color", "1.0,0.5,0.2").toString()));
-	setInteractingGalaxyColor(StelUtils::strToVec3f(conf->value(section+"/dso_interacting_galaxy_color", "0.2,0.5,1.0").toString()));
-	setQuasarColor(StelUtils::strToVec3f(conf->value(section+"/dso_quasar_color", defaultGalaxyColor).toString()));
-	setPossibleQuasarColor(StelUtils::strToVec3f(conf->value(section+"/dso_possible_quasar_color", defaultGalaxyColor).toString()));
-	setBlLacObjectColor(StelUtils::strToVec3f(conf->value(section+"/dso_bl_lac_color", defaultGalaxyColor).toString()));
-	setBlazarColor(StelUtils::strToVec3f(conf->value(section+"/dso_blazar_color", defaultGalaxyColor).toString()));
-
-	QString defaultNebulaColor = conf->value(section+"/dso_nebula_color", "0.1,1.0,0.1").toString();
-	setNebulaColor(StelUtils::strToVec3f(defaultNebulaColor));
-	setPlanetaryNebulaColor(StelUtils::strToVec3f(conf->value(section+"/dso_planetary_nebula_color", defaultNebulaColor).toString()));
-	setReflectionNebulaColor(StelUtils::strToVec3f(conf->value(section+"/dso_reflection_nebula_color", defaultNebulaColor).toString()));
-	setBipolarNebulaColor(StelUtils::strToVec3f(conf->value(section+"/dso_bipolar_nebula_color", defaultNebulaColor).toString()));
-	setEmissionNebulaColor(StelUtils::strToVec3f(conf->value(section+"/dso_emission_nebula_color", defaultNebulaColor).toString()));
-	setDarkNebulaColor(StelUtils::strToVec3f(conf->value(section+"/dso_dark_nebula_color", "0.3,0.3,0.3").toString()));
-	setHydrogenRegionColor(StelUtils::strToVec3f(conf->value(section+"/dso_hydrogen_region_color", defaultNebulaColor).toString()));
-	setSupernovaRemnantColor(StelUtils::strToVec3f(conf->value(section+"/dso_supernova_remnant_color", defaultNebulaColor).toString()));
-	setInterstellarMatterColor(StelUtils::strToVec3f(conf->value(section+"/dso_interstellar_matter_color", defaultNebulaColor).toString()));
-	setClusterWithNebulosityColor(StelUtils::strToVec3f(conf->value(section+"/dso_cluster_with_nebulosity_color", defaultNebulaColor).toString()));
-	setMolecularCloudColor(StelUtils::strToVec3f(conf->value(section+"/dso_molecular_cloud_color", defaultNebulaColor).toString()));
-	setPossiblePlanetaryNebulaColor(StelUtils::strToVec3f(conf->value(section+"/dso_possible_planetary_nebula_color", defaultNebulaColor).toString()));
-	setProtoplanetaryNebulaColor(StelUtils::strToVec3f(conf->value(section+"/dso_protoplanetary_nebula_color", defaultNebulaColor).toString()));
-
-	QString defaultClusterColor = conf->value(section+"/dso_cluster_color", "1.0,1.0,0.1").toString();
-	setClusterColor(StelUtils::strToVec3f(defaultClusterColor));
-	setOpenClusterColor(StelUtils::strToVec3f(conf->value(section+"/dso_open_cluster_color", defaultClusterColor).toString()));
-	setGlobularClusterColor(StelUtils::strToVec3f(conf->value(section+"/dso_globular_cluster_color", defaultClusterColor).toString()));
-	setStellarAssociationColor(StelUtils::strToVec3f(conf->value(section+"/dso_stellar_association_color", defaultClusterColor).toString()));
-	setStarCloudColor(StelUtils::strToVec3f(conf->value(section+"/dso_star_cloud_color", defaultClusterColor).toString()));
-
-	QString defaultStellarColor = conf->value(section+"/dso_star_color", "1.0,0.7,0.2").toString();
-	setStarColor(StelUtils::strToVec3f(defaultStellarColor));
-	setEmissionObjectColor(StelUtils::strToVec3f(conf->value(section+"/dso_emission_object_color", defaultStellarColor).toString()));
-	setYoungStellarObjectColor(StelUtils::strToVec3f(conf->value(section+"/dso_young_stellar_object_color", defaultStellarColor).toString()));
 }
 
 // Search by name
@@ -737,6 +731,21 @@ NebulaP NebulaMgr::searchCed(QString Ced)
 		if (n->Ced_nb.trimmed().toUpper() == Ced.trimmed().toUpper())
 			return n;
 	return NebulaP();
+}
+
+QString NebulaMgr::getLatestSelectedDSODesignation()
+{
+	QString result = "";
+
+	const QList<StelObjectP> selected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Nebula");
+	if (!selected.empty())
+	{
+		foreach (const NebulaP& n, dsoArray)
+			if (n==selected[0])
+				result = n->getDSODesignation(); // Get designation for latest selected DSO
+	}
+
+	return result;
 }
 
 void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool decimal=false)
@@ -1842,7 +1851,8 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	QStringList result;
 	if (maxNbItem==0) return result;
 
-	 QString objw = objPrefix.toUpper();
+	QString objw = objPrefix.toUpper();
+
 	// Search by Messier objects number (possible formats are "M31" or "M 31")
 	if (objw.size()>=1 && objw.left(1)=="M" && objw.left(2)!="ME")
 	{
@@ -2213,7 +2223,6 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 						result << QString("M %1").arg(n->M_nb);
 					else if (n->C_nb>0)
 						result << QString("C %1").arg(n->C_nb);
-
 				}
 			}
 			break;
@@ -2274,17 +2283,65 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 			}
 			break;
 		case 150: // Dwarf galaxies
-			{
+		{
 			QStringList dwarfGalaxies;
 			dwarfGalaxies  << "PGC 3589" << "PGC 3792" << "PGC 6830" << "PGC 10074" << "PGC 19441"
 				       << "PGC 28913" << "PGC 29194" << "PGC 29653" << "PGC 50779" << "PGC 54074"
 				       << "PGC 60095" << "PGC 63287" << "PGC 69519" << "PGC 88608" << "PGC 2807155"
 				       << "PGC 3097691";
 			result = dwarfGalaxies;
-			}
 			break;
+		}
+		case 151: // Herschel 400 Catalogue
+		{
+			QList<int> h400list;
+			h400list <<   40 <<  129 <<  136 <<  157 <<  185 <<  205 <<  225 <<  246 <<  247 <<  253
+				 <<  278 <<  288 <<  381 <<  404 <<  436 <<  457 <<  488 <<  524 <<  559 <<  584
+				 <<  596 <<  598 <<  613 <<  615 <<  637 <<  650 <<  654 <<  659 <<  663 <<  720
+				 <<  752 <<  772 <<  779 <<  869 <<  884 <<  891 <<  908 <<  936 << 1022 << 1023
+				 << 1027 << 1052 << 1055 << 1084 << 1245 << 1342 << 1407 << 1444 << 1501 << 1502
+				 << 1513 << 1528 << 1535 << 1545 << 1647 << 1664 << 1788 << 1817 << 1857 << 1907
+				 << 1931 << 1961 << 1964 << 1980 << 1999 << 2022 << 2024 << 2126 << 2129 << 2158
+				 << 2169 << 2185 << 2186 << 2194 << 2204 << 2215 << 2232 << 2244 << 2251 << 2264
+				 << 2266 << 2281 << 2286 << 2301 << 2304 << 2311 << 2324 << 2335 << 2343 << 2353
+				 << 2354 << 2355 << 2360 << 2362 << 2371 << 2372 << 2392 << 2395 << 2403 << 2419
+				 << 2420 << 2421 << 2422 << 2423 << 2438 << 2440 << 2479 << 2482 << 2489 << 2506
+				 << 2509 << 2527 << 2539 << 2548 << 2567 << 2571 << 2613 << 2627 << 2655 << 2681
+				 << 2683 << 2742 << 2768 << 2775 << 2782 << 2787 << 2811 << 2841 << 2859 << 2903
+				 << 2950 << 2964 << 2974 << 2976 << 2985 << 3034 << 3077 << 3079 << 3115 << 3147
+				 << 3166 << 3169 << 3184 << 3190 << 3193 << 3198 << 3226 << 3227 << 3242 << 3245
+				 << 3277 << 3294 << 3310 << 3344 << 3377 << 3379 << 3384 << 3395 << 3412 << 3414
+				 << 3432 << 3486 << 3489 << 3504 << 3521 << 3556 << 3593 << 3607 << 3608 << 3610
+				 << 3613 << 3619 << 3621 << 3626 << 3628 << 3631 << 3640 << 3655 << 3665 << 3675
+				 << 3686 << 3726 << 3729 << 3810 << 3813 << 3877 << 3893 << 3898 << 3900 << 3912
+				 << 3938 << 3941 << 3945 << 3949 << 3953 << 3962 << 3982 << 3992 << 3998 << 4026
+				 << 4027 << 4030 << 4036 << 4039 << 4041 << 4051 << 4085 << 4088 << 4102 << 4111
+				 << 4143 << 4147 << 4150 << 4151 << 4179 << 4203 << 4214 << 4216 << 4245 << 4251
+				 << 4258 << 4261 << 4273 << 4274 << 4278 << 4281 << 4293 << 4303 << 4314 << 4346
+				 << 4350 << 4361 << 4365 << 4371 << 4394 << 4414 << 4419 << 4429 << 4435 << 4438
+				 << 4442 << 4448 << 4449 << 4450 << 4459 << 4473 << 4477 << 4478 << 4485 << 4490
+				 << 4494 << 4526 << 4527 << 4535 << 4536 << 4546 << 4548 << 4550 << 4559 << 4565
+				 << 4570 << 4594 << 4596 << 4618 << 4631 << 4636 << 4643 << 4654 << 4656 << 4660
+				 << 4665 << 4666 << 4689 << 4697 << 4698 << 4699 << 4725 << 4753 << 4754 << 4762
+				 << 4781 << 4800 << 4845 << 4856 << 4866 << 4900 << 4958 << 4995 << 5005 << 5033
+				 << 5054 << 5195 << 5248 << 5273 << 5322 << 5363 << 5364 << 5466 << 5473 << 5474
+				 << 5557 << 5566 << 5576 << 5631 << 5634 << 5676 << 5689 << 5694 << 5746 << 5846
+				 << 5866 << 5897 << 5907 << 5982 << 6118 << 6144 << 6171 << 6207 << 6217 << 6229
+				 << 6235 << 6284 << 6287 << 6293 << 6304 << 6316 << 6342 << 6355 << 6356 << 6369
+				 << 6401 << 6426 << 6440 << 6445 << 6451 << 6514 << 6517 << 6520 << 6522 << 6528
+				 << 6540 << 6543 << 6544 << 6553 << 6568 << 6569 << 6583 << 6624 << 6629 << 6633
+				 << 6638 << 6642 << 6645 << 6664 << 6712 << 6755 << 6756 << 6781 << 6802 << 6818
+				 << 6823 << 6826 << 6830 << 6834 << 6866 << 6882 << 6885 << 6905 << 6910 << 6934
+				 << 6939 << 6940 << 6946 << 7000 << 7006 << 7008 << 7009 << 7044 << 7062 << 7086
+				 << 7128 << 7142 << 7160 << 7209 << 7217 << 7243 << 7296 << 7331 << 7380 << 7448
+				 << 7479 << 7510 << 7606 << 7662 << 7686 << 7723 << 7727 << 7789 << 7790 << 7814;
+			for (int i=0; i < h400list.size(); i++)
+				result << QString("NGC %1").arg(h400list.at(i));
+			break;
+		}
 		default:
-			foreach(const NebulaP& n, dsoArray)
+		{
+			foreach (const NebulaP& n, dsoArray)
 			{
 				if (n->nType==type)
 				{
@@ -2323,6 +2380,7 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 				}
 			}
 			break;
+		}
 	}
 
 	result.removeDuplicates();

@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
 using namespace std;
 
-#include <math.h>
+#include <cmath>
 
 #ifdef DEBUG5
 #include <QTextStream>

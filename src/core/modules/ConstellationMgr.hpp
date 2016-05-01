@@ -269,9 +269,6 @@ private slots:
 	//! @param action define whether to add to, replace, or remove from the existing selection
 	void selectedObjectChange(StelModule::StelModuleSelectAction action);
 
-	//! Load a color scheme
-	void setStelStyle(const QString& section);
-
 	//! Loads new constellation data and art if the SkyCulture has changed.
 	//! @param skyCultureDir the name of the directory containing the sky culture to use.
 	void updateSkyCulture(const QString& skyCultureDir);

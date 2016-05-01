@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-skycultures-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-03 21:55+0600\n"
-"PO-Revision-Date: 2016-02-23 19:11+0000\n"
+"POT-Creation-Date: 2016-04-24 03:54+0700\n"
+"PO-Revision-Date: 2016-04-24 11:13+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-03-04 05:12+0000\n"
-"X-Generator: Launchpad (build 17936)\n"
+"X-Launchpad-Export-Date: 2016-04-25 05:13+0000\n"
+"X-Generator: Launchpad (build 17995)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
 "X-Poedit-Language: Ukrainian\n"
@@ -916,8 +916,8 @@ msgid "Polarissima Australis"
 msgstr "Південна Полярна"
 
 #: nebulae/default/names.dat:70
-msgid "Beehive cluster"
-msgstr "Скупчення «Вулик»"
+msgid "Beehive cluster (Praesepe)"
+msgstr "Скупчення «Вулик» (Praesepe)"
 
 #: nebulae/default/names.dat:71
 msgid "Helix galaxy"
@@ -4370,38 +4370,38 @@ msgstr "Сиріус"
 
 #. TRANSLATORS: Native name of the Sun in Egyptian culture (English: God of Sun)
 #: skycultures/egyptian/planet_names.fab:2
-msgid "Amon-Ra"
-msgstr "Амон-Ра"
+msgid "Amon-Ra (Sun)"
+msgstr "Амон-Ра (Сонце)"
 
 #. TRANSLATORS: Native name of the Moon in Egyptian culture (English: The Traveler)
 #: skycultures/egyptian/planet_names.fab:4
-msgid "Khonsu"
-msgstr "Хонсу"
+msgid "Traveler (Moon)"
+msgstr "Мандрівник (Місяць)"
 
 #. TRANSLATORS: Native name of Mercury in Egyptian culture (English: Unknown)
 #: skycultures/egyptian/planet_names.fab:6
-msgid "Sebeg"
-msgstr "Себек"
+msgid "Sebeg (Mercury)"
+msgstr "Себек (Меркурій)"
 
 #. TRANSLATORS: Native name of Venus in Egyptian culture (English: Star that Crosses / The God of the Morning)
 #: skycultures/egyptian/planet_names.fab:8
-msgid "Seba-Djai"
-msgstr "Себа-Джай"
+msgid "Star that Crosses (Venus)"
+msgstr "Богиня Світанку (Венера)"
 
 #. TRANSLATORS: Native name of Mars in Egyptian culture (English: Red Horus)
 #: skycultures/egyptian/planet_names.fab:10
-msgid "Horus-Desher"
-msgstr "Гор-Дешер"
+msgid "Red Horus (Mars)"
+msgstr "Червоний Гор (Марс)"
 
 #. TRANSLATORS: Native name of Jupiter in Egyptian culture (English: Horus Who Binds the Two Lands)
 #: skycultures/egyptian/planet_names.fab:12
-msgid "Hor-tash-tawy"
-msgstr "Гор-таш-таві"
+msgid "Horus Who Binds the Two Lands (Jupiter)"
+msgstr "Гор, що пов’язує дві землі (Юпітер)"
 
 #. TRANSLATORS: Native name of Saturn in Egyptian culture (English: Horus, the Bull of Heaven)
 #: skycultures/egyptian/planet_names.fab:14
-msgid "Hor-ka-Pet"
-msgstr "Гор-ка-Пет"
+msgid "Horus, the Bull of Heaven (Saturn)"
+msgstr "Гор, Небесний Бик (Сатурн)"
 
 #: skycultures/inuit/constellation_names.eng.fab:1
 msgid "Two Sunbeams"
@@ -7911,8 +7911,8 @@ msgstr "Золотий стовп"
 
 #. TRANSLATORS: Native name of Venus in Siberian culture (in English words)
 #: skycultures/siberian/planet_names.fab:2
-msgid "Night Star"
-msgstr "Нічна зірка"
+msgid "Night Star (Venus)"
+msgstr "Нічна зірка (Венера)"
 
 #: skycultures/tongan/constellation_names.eng.fab:1
 msgid "Toloatonga"
@@ -7988,23 +7988,23 @@ msgstr "Мотулікі"
 
 #. TRANSLATORS: Native name of the Sun in Tongan culture
 #: skycultures/tongan/planet_names.fab:2
-msgid "La'a"
-msgstr "Ла’а"
+msgid "La'a (Sun)"
+msgstr "Ла’а (Сонце)"
 
 #. TRANSLATORS: Native name of the Moon in Tongan culture
 #: skycultures/tongan/planet_names.fab:4
-msgid "Mahina"
-msgstr "Махіна"
+msgid "Mahina (Moon)"
+msgstr "Махіна (Місяць)"
 
 #. TRANSLATORS: Native name of Venus in Tongan culture
 #: skycultures/tongan/planet_names.fab:6
-msgid "Tapukitea"
-msgstr "Тапукітеа"
+msgid "Tapukitea (Venus)"
+msgstr "Тапукітеа (Венера)"
 
 #. TRANSLATORS: Native name of Mars in Tongan culture
 #: skycultures/tongan/planet_names.fab:8
-msgid "Matamemea"
-msgstr "Матамемеа"
+msgid "Matamemea (Mars)"
+msgstr "Матамемеа (Марс)"
 
 #: skycultures/tukano/constellation_names.eng.fab:1
 msgid "Fer-de-lance (snake)"
@@ -9248,6 +9248,9 @@ msgstr "β Центавра"
 #~ msgid "Bear Paw galaxy"
 #~ msgstr "Галактика «Ведмежа лапа»"
 
+#~ msgid "Beehive cluster"
+#~ msgstr "Скупчення «Вулик»"
+
 #~ msgid "Black-eye galaxy"
 #~ msgstr "Галактика «Чорне око»"
 
@@ -9305,8 +9308,23 @@ msgstr "β Центавра"
 #~ msgid "Day"
 #~ msgstr "Дей"
 
+#~ msgid "La'a"
+#~ msgstr "Ла’а"
+
+#~ msgid "Mahina"
+#~ msgstr "Махіна"
+
+#~ msgid "Tapukitea"
+#~ msgstr "Тапукітеа"
+
+#~ msgid "Matamemea"
+#~ msgstr "Матамемеа"
+
 #~ msgid "Sulphur-crested white cockatoo"
 #~ msgstr "Білий какаду із жовтим гребінцем"
+
+#~ msgid "Night Star"
+#~ msgstr "Нічна зірка"
 
 #~ msgid "Horus, the Bull of Heaven"
 #~ msgstr "Гор, Бик небес"

@@ -128,6 +128,10 @@ public:
 
 	void setProperName(QString name) { englishName = name; }
 
+	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced)
+	//! @return a designation
+	QString getDSODesignation();
+
 private:
 	friend struct DrawNebulaFuncObject;
 	
@@ -258,7 +262,7 @@ private:
 	static Vec3f protoplanetaryNebulaColor;		// The color of protoplanetary nebula marker texture (NebPPN)
 	static Vec3f starColor;				// The color of star marker texture (NebStar)
 
-	static float circleScale;             // Define the scaling of the hints circle
+	static float circleScale;             // Define the scaling of the hints circle. Unused in 0.15. TODO: Remove this? I see no use. (GZ)
 	static bool drawHintProportional;     // scale hint with nebula size?
 	static bool surfaceBrightnessUsage;
 

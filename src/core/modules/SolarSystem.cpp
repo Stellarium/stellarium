@@ -74,6 +74,7 @@ SolarSystem::SolarSystem()
 	, flagIsolatedTrails(true)
 	, flagIsolatedOrbits(true)
 	, allTrails(NULL)
+	, conf(StelApp::getInstance().getSettings())
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getBaseFontSize());
 	setObjectName("SolarSystem");
@@ -133,7 +134,6 @@ double SolarSystem::getCallOrder(StelModuleActionName actionName) const
 // Init and load the solar system data
 void SolarSystem::init()
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
 	Planet::init();
@@ -162,6 +162,19 @@ void SolarSystem::init()
 	setFlagIsolatedOrbits(conf->value("viewing/flag_isolated_orbits", true).toBool());
 	setFlagPermanentOrbits(conf->value("astro/flag_permanent_orbits", false).toBool());
 
+	// Settings for calculation of position of Great Red Spot on Jupiter
+	setFlagCustomGrsSettings(conf->value("astro/flag_grs_custom", false).toBool());
+	setCustomGrsLongitude(conf->value("astro/grs_longitude", 216).toInt());
+	setCustomGrsDrift(conf->value("astro/grs_drift", 15.).toDouble());
+	setCustomGrsJD(conf->value("astro/grs_jd", 2456901.5).toDouble());
+
+	// Load colors from config file
+	QString defaultColor = conf->value("color/default_color").toString();
+	setLabelsColor(StelUtils::strToVec3f(conf->value("color/planet_names_color", defaultColor).toString()));
+	setOrbitsColor(StelUtils::strToVec3f(conf->value("color/planet_orbits_color", defaultColor).toString()));
+	setTrailsColor(StelUtils::strToVec3f(conf->value("color/object_trails_color", defaultColor).toString()));
+	setPointersColor(StelUtils::strToVec3f(conf->value("color/planet_pointers_color", "1.0,0.3,0.3").toString()));
+
 	recreateTrails();
 
 	setFlagTrails(conf->value("astro/flag_object_trails", false).toBool());
@@ -178,7 +191,6 @@ void SolarSystem::init()
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(skyCultureChanged(QString)), this, SLOT(updateSkyCulture(QString)));
-	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Planets", displayGroup, N_("Planets"), "planetsDisplayed", "P");
@@ -272,7 +284,7 @@ void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
 		else
 		{
 			planetId = recRx.capturedTexts().at(1).trimmed();
-			nativeName = recRx.capturedTexts().at(2).trimmed();
+			nativeName = recRx.capturedTexts().at(3).trimmed(); // Use translatable text
 			planetNativeNamesMap[planetId] = nativeName;
 			readOk++;
 		}
@@ -1165,20 +1177,6 @@ void SolarSystem::draw(StelCore* core)
 	}
 }
 
-void SolarSystem::setStelStyle(const QString& section)
-{
-	// Load colors from config file
-	QSettings* conf = StelApp::getInstance().getSettings();
-	QString defaultColor = conf->value(section+"/default_color").toString();
-	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/planet_names_color", defaultColor).toString()));
-	setOrbitsColor(StelUtils::strToVec3f(conf->value(section+"/planet_orbits_color", defaultColor).toString()));
-	setTrailsColor(StelUtils::strToVec3f(conf->value(section+"/object_trails_color", defaultColor).toString()));
-	setPointersColor(StelUtils::strToVec3f(conf->value(section+"/planet_pointers_color", "1.0,0.3,0.3").toString()));
-
-	// Recreate the trails to apply new colors
-	recreateTrails();
-}
-
 PlanetP SolarSystem::searchByEnglishName(QString planetEnglishName) const
 {
 	foreach (const PlanetP& p, systemPlanets)
@@ -1320,21 +1318,6 @@ void SolarSystem::updateI18n()
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	foreach (PlanetP p, systemPlanets)
 		p->translateName(trans);
-}
-
-QString SolarSystem::getPlanetHashString(void)
-{
-	QString str;
-	QTextStream oss(&str);
-	foreach (const PlanetP& p, systemPlanets)
-	{
-		if (!p->getParent().isNull() && p->getParent()->getEnglishName() != "Sun")
-		{
-			oss << p->getParent()->getEnglishName() << " : ";
-		}
-		oss << p->getEnglishName() << endl;		
-	}
-	return str;
 }
 
 void SolarSystem::setFlagTrails(bool b)
@@ -1787,7 +1770,55 @@ QString SolarSystem::getApparentMagnitudeAlgorithmOnEarth() const
 
 void SolarSystem::setFlagPermanentOrbits(bool b)
 {
-	Planet::permanentDrawingOrbits=b;
+	Planet::permanentDrawingOrbits=b;	
+}
+
+void SolarSystem::setFlagCustomGrsSettings(bool b)
+{
+	Planet::flagCustomGrsSettings=b;
+	// automatic saving of the setting
+	conf->setValue("astro/flag_grs_custom", b);
+}
+
+bool SolarSystem::getFlagCustomGrsSettings()
+{
+	return Planet::flagCustomGrsSettings;
+}
+
+void SolarSystem::setCustomGrsLongitude(int longitude)
+{
+	Planet::customGrsLongitude = longitude;
+	// automatic saving of the setting
+	conf->setValue("astro/grs_longitude", longitude);
+}
+
+int SolarSystem::getCustomGrsLongitude()
+{
+	return Planet::customGrsLongitude;
+}
+
+void SolarSystem::setCustomGrsDrift(double drift)
+{
+	Planet::customGrsDrift = drift;
+	// automatic saving of the setting
+	conf->setValue("astro/grs_drift", drift);
+}
+
+double SolarSystem::getCustomGrsDrift()
+{
+	return Planet::customGrsDrift;
+}
+
+void SolarSystem::setCustomGrsJD(double JD)
+{
+	Planet::customGrsJD = JD;
+	// automatic saving of the setting
+	conf->setValue("astro/grs_jd", JD);
+}
+
+double SolarSystem::getCustomGrsJD()
+{
+	return Planet::customGrsJD;
 }
 
 double SolarSystem::getEclipseFactor(const StelCore* core) const

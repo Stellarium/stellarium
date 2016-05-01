@@ -396,9 +396,6 @@ signals:
 	void errorRemoveManually(QString path);
 
 private slots:
-	//! Load a color scheme from a configuration object
-	void setStelStyle(const QString& section);
-
 	//! Translate labels to new language settings.
 	void updateI18n();	
 

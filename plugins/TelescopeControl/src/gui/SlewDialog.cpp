@@ -86,11 +86,12 @@ void SlewDialog::createDialogContent()
 
 	storedPointsDialog = new StoredPointsDialog;
 	// add point and remove
-	connect(storedPointsDialog, SIGNAL(addStoredPoint(int, QString, double, double)),
-		this, SLOT(addStoredPointToComboBox(int, QString, double, double)));
+	connect(storedPointsDialog, SIGNAL(addStoredPoint(int, QString, double, double)), this, SLOT(addStoredPointToComboBox(int, QString, double, double)));
 	// remove point
-	connect(storedPointsDialog, SIGNAL(removeStoredPoint(int)),
-		this, SLOT(removeStoredPointFromComboBox(int)));
+	connect(storedPointsDialog, SIGNAL(removeStoredPoint(int)), this, SLOT(removeStoredPointFromComboBox(int)));
+	// clean points
+	connect(storedPointsDialog, SIGNAL(clearStoredPoints()), this, SLOT(clearStoredPointsFromComboBox()));
+
 
 	updateTelescopeList();
 	updateStoredPointsList();
@@ -280,7 +281,16 @@ void SlewDialog::removeStoredPointFromComboBox(int number)
 	{
 		ui->comboBoxStoredPoints->removeItem(0);
 	}
-	this->savePointsToFile();
+	savePointsToFile();
+}
+
+void SlewDialog::clearStoredPointsFromComboBox()
+{
+	ui->comboBoxStoredPoints->blockSignals(true);
+	ui->comboBoxStoredPoints->clear();
+	ui->comboBoxStoredPoints->addItem(q_("Select one"));
+	ui->comboBoxStoredPoints->blockSignals(false);
+	savePointsToFile();
 }
 
 void SlewDialog::getStoredPointInfo()
