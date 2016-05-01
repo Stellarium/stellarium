@@ -309,8 +309,6 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showColuresLineCheckBox, "actionShow_Colure_Lines");
 
 	// Constellations
-	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
-	Q_ASSERT(cmgr);
 	connectCheckBox(ui->showConstellationLinesCheckBox, "actionShow_Constellation_Lines");
 	connectCheckBox(ui->showConstellationLabelsCheckBox, "actionShow_Constellation_Labels");
 	connectCheckBox(ui->showConstellationBoundariesCheckBox, "actionShow_Constellation_Boundaries");
