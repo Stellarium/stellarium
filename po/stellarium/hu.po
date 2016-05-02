@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-26 22:45+0700\n"
-"PO-Revision-Date: 2016-04-10 08:39+0000\n"
+"PO-Revision-Date: 2016-05-01 11:38+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-04-27 05:26+0000\n"
+"X-Launchpad-Export-Date: 2016-05-02 05:13+0000\n"
 "X-Generator: Launchpad (build 17995)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -100,11 +100,11 @@ msgstr "Elsődleges függőleges"
 
 #: src/core/modules/GridLinesMgr.cpp:641
 msgid "Equinoctial Colure"
-msgstr ""
+msgstr "Napéjegyenlőségi  kolur"
 
 #: src/core/modules/GridLinesMgr.cpp:645
 msgid "Solstitial Colure"
-msgstr ""
+msgstr "Napfordulói kolur"
 
 #: src/core/modules/GridLinesMgr.cpp:923
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:339
@@ -177,7 +177,7 @@ msgstr "Precessziós körök"
 
 #: src/core/modules/GridLinesMgr.cpp:939
 msgid "Colure Lines"
-msgstr ""
+msgstr "Kolur vonalak"
 
 #: src/core/modules/LandscapeMgr.cpp:418 src/ui_viewDialog.h:1607
 msgid "Atmosphere"
@@ -2767,7 +2767,7 @@ msgstr "Objektum"
 
 #: src/gui/BookmarksDialog.cpp:96
 msgid "Localized name"
-msgstr ""
+msgstr "Helyi név"
 
 #: src/gui/BookmarksDialog.cpp:98
 msgid "Location of observer"
@@ -3109,7 +3109,7 @@ msgstr "Törpe galaxisok"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:159
 msgid "Herschel 400 Catalogue"
-msgstr ""
+msgstr "Herschel 400 katalógus"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:164
@@ -3446,37 +3446,37 @@ msgstr "Messier objektumok túra"
 #. TRANSLATORS: Name of script
 #: src/translations.h:294
 msgid "Binocular Highlights"
-msgstr ""
+msgstr "Távcsöves érdekességek"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:296
 msgid "20 Fun Naked-Eye Double Stars"
-msgstr ""
+msgstr "20 érdekes, szabad szemes kettőscsillag"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:298
 msgid "List of largest known stars"
-msgstr ""
+msgstr "A legnagyobb ismert csillagok listája"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:300
 msgid "Herschel 400 Tour"
-msgstr ""
+msgstr "Herschel 400 túra"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:302
 msgid "Binosky: Deep Sky Objects for Binoculars"
-msgstr ""
+msgstr "Távcsöves mélyégi objektumok"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:304
 msgid "The Jack Bennett Catalog"
-msgstr ""
+msgstr "Jack Bennett katalógus"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:306
 msgid "Best objects in the New General Catalog"
-msgstr ""
+msgstr "A New General Catalog legjobb objektumai"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:312
@@ -3648,6 +3648,8 @@ msgid ""
 "binoculars. The data for the script are taken from the eponymous book by "
 "Gary Seronik."
 msgstr ""
+"Távcsővel felfedezhető érdekes égi objektumok. Az adatok Gary Seronik "
+"könyvéből származnak."
 
 #: src/translations.h:339
 msgid ""
@@ -3655,14 +3657,17 @@ msgid ""
 "has been collected by Jerry Lodriguss and published in Sky & Telescope "
 "09/2014. Data taken from his website, http://www.astropix.com/doubles/"
 msgstr ""
+"A szkript 20 érdekes kettőscsillagot mutat be.  A lista Jerry Lodriguss "
+"írásából ered, ami a Sky & Telescope 09/2014 számában jelent meg. Az adatok "
+"innen származnak:  http://www.astropix.com/doubles/"
 
 #: src/translations.h:340
 msgid "This script help you make an excursion around largest known stars."
-msgstr ""
+msgstr "A szkript a legnagyobb csillagokat járja körül."
 
 #: src/translations.h:341
 msgid "A tour around objects from the Herschel 400 Catalogue"
-msgstr ""
+msgstr "A Herschel 400 katalógus érdekes objektumai."
 
 #: src/translations.h:342
 msgid ""
@@ -3670,12 +3675,17 @@ msgid ""
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
 "Right Ascension (2000.0)."
 msgstr ""
+"A listát Ben Crowell állította össze, ami mélyégi objektumok listája "
+"távcsöves megfigyelés számára.    A szkript ezek közül 31 objektumot mutat "
+"be rektaszcenció szerinti sorrendben (2000.0)."
 
 #: src/translations.h:343
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects. The Bennett catalog "
 "was contributed by Auke Slotegraaf."
 msgstr ""
+"A Jack Bennett katalógus déli mélyégi objektumokat tartalmaz.   Auke "
+"Slotegraaf jóvoltából."
 
 #: src/translations.h:344
 msgid ""
@@ -5408,10 +5418,12 @@ msgstr "Elsődleges vertikális mutatása (É-Ny)"
 #: src/ui_viewDialog.h:1786
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
 msgstr ""
+"Kolurok mutatása (nagy körök a pólusokon és a napéjegyenlőségi vagy "
+"napfordulói pontokon)."
 
 #: src/ui_viewDialog.h:1788
 msgid "Colures"
-msgstr ""
+msgstr "Kolurok"
 
 #: src/ui_viewDialog.h:1790
 msgid ""
@@ -6174,7 +6186,7 @@ msgstr "éééé.hh.nn óó:pp"
 
 #: src/ui_greatRedSpotDialog.h:172
 msgid "Annual drift (degrees):"
-msgstr ""
+msgstr "Éves eltolódás (fok):"
 
 #: src/ui_greatRedSpotDialog.h:173
 msgid "Longitude of GRS (degrees):"
@@ -8092,12 +8104,12 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 msgid "Contents"
-msgstr ""
+msgstr "Tartalom"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
 msgid "Abilities and limitations"
-msgstr ""
+msgstr "Képességek és korlátok"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:282
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
@@ -8117,12 +8129,12 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:336
 msgid "Telescope configuration window"
-msgstr ""
+msgstr "Távcső beállítások"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:286
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:338
 msgid "Connection type"
-msgstr ""
+msgstr "Kapcsolat típusa"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:346
@@ -8154,17 +8166,17 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 msgid "Telescope commands"
-msgstr ""
+msgstr "Távcső parancsok"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:293
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:410
 msgid "Supported devices"
-msgstr ""
+msgstr "Támogatott eszközök"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:294
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:426
 msgid "Virtual telescope"
-msgstr ""
+msgstr "Virtuális távcső"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:297
 msgid ""
@@ -8180,12 +8192,16 @@ msgid ""
 "As of the current version, this plug-in doesn't allow satellite tracking, "
 "and is not very suitable for lunar or planetary observations."
 msgstr ""
+"A szkript jelenleg nem alkalmas műholdak követésére, így a Hold vagy a "
+"bolygók megfigyelésére sem."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:299
 msgid ""
 "WARNING: Stellarium CANNOT prevent your telescope from being pointed at the "
 "Sun."
 msgstr ""
+"FIGYELEM: a Stellarium nem tudja megakadályozni, hogy az Ön távcsöve "
+"közvetlenül a Nap felé irányuljon."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
 msgid ""
@@ -8193,6 +8209,9 @@ msgid ""
 "installed. The powerful light amplified by the telescope WILL cause "
 "irreversible damage to your eyes and/or your equipment."
 msgstr ""
+"Soha ne irányítsa a távcsövet a Nap irányába a megfelelő napszűrő nélkül.  A "
+"Nap erőteljes fénye a távcső által megsokszorozva visszafordíthatatlan "
+"károkat tud okozni az emberi szemben és a csillagászati berendezésekben."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:301
 msgid ""
@@ -8201,6 +8220,9 @@ msgid ""
 "it is strongly recommended to avoid using the telescope control feature "
 "before sunset without appropriate protection."
 msgstr ""
+"A távcső akár véletlenül vagy a kitűzött célra haladás közben is a Napra "
+"irányulhat.  Ezért erősen ajánlott, hogy a távcsövet csak napnyugta után "
+"használja!"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:306
@@ -8216,7 +8238,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:424
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:430
 msgid "Back to top"
-msgstr ""
+msgstr "Vissza a tetejére"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:305
 msgid ""
@@ -8233,7 +8255,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
 msgid "DIRECT CONNECTION"
-msgstr ""
+msgstr "Közvetlen összeköttetés"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
 #, qt-format
@@ -8244,7 +8266,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:311
 msgid "INDIRECT CONNECTION"
-msgstr ""
+msgstr "Indirekt összeköttetés"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:312
 #, qt-format
@@ -8268,6 +8290,8 @@ msgid ""
 "Most older telescopes use cables that connect to a %1serial port%2 (RS-232), "
 "the newer ones use %3USB%4 (Universal Serial Bus)."
 msgstr ""
+"A legtöbb régebbi távcső a %1soros  port%2-hoz (RS-232) csatlakozik, az "
+"újabbak %3USB%4  (Universal Serial Bus) kapcsolatot használnak."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:315
 msgid ""
@@ -8443,7 +8467,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:358
 msgid "On Windows, serial ports COM1 to COM10;"
-msgstr ""
+msgstr "Windows rendszeren a soros portok COM1 és COM10 között lehetnek;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:359
 msgid ""
@@ -8505,7 +8529,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:372
 msgid "Both values are ignored for DIRECT connections."
-msgstr ""
+msgstr "A közvetlen összeköttetés mindkét értéket figyelmen kívül hagyja."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:373
 msgid ""
@@ -8564,7 +8588,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:388
 msgid ""
 "The drop-down list contains the names of the currently connected devices."
-msgstr ""
+msgstr "A lenyíló lista tartalmazza a jelenleg csatlakozott eszközöket."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:389
 msgid ""
@@ -8606,7 +8630,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:397
 msgid "Sending commands"
-msgstr ""
+msgstr "Parancsok küldése"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:398
 msgid ""
@@ -8630,11 +8654,11 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:401
 msgid "For example, Ctrl+1 for telescope #1."
-msgstr ""
+msgstr "Például Ctrl+1  = távcső 1."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:402
 msgid "This will move the telescope to the selected object."
-msgstr ""
+msgstr "A távcsövet a kiválasztott objektumra mozgatja."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:403
 msgid ""
@@ -8644,7 +8668,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:404
 msgid "For example, Alt+1 for telescope #1."
-msgstr ""
+msgstr "Például Alt+1  = távcső 1"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:405
 msgid ""
@@ -9107,7 +9131,7 @@ msgstr "A kijelölt eltávolítása"
 
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:251
 msgid "Clear list"
-msgstr ""
+msgstr "Lista törlése"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
@@ -9445,11 +9469,11 @@ msgstr "24h"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:235
 msgid "Sky Language"
-msgstr ""
+msgstr "Az égbolt nyelve"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "App Language"
-msgstr ""
+msgstr "Nyelv alkalmazása"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:256
 msgid "Show stars"
