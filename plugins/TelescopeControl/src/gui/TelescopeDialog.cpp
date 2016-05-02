@@ -377,7 +377,7 @@ void TelescopeDialog::setAboutText()
 	helpPage += "<h4><a name=\"fovcircles\" />" + q_("Field of view indicators") + "</h4>";
 	helpPage += "<p>" + q_("A series of circles representing different fields of view can be added around the telescope marker. This is a relic from the times before the <strong>Oculars</strong> plug-in existed.") + "</p>";
 	helpPage += "<p>" + q_("In the telescope configuration window, click on 'User Interface Settings'.")
-		 + " " + q_("Mark the 'Use field of view indicators' option, then enter a list of values separated with comas in the field below.")
+		 + " " + q_("Mark the 'Use field of view indicators' option, then enter a list of values separated with commas in the field below.")
 		 + " " + q_("The values are interpreted as degrees of arc.") + "</p>";
 	helpPage += "<p>" + QString(q_("This can be used in combination with a %1virtual telescope%2 to display a moving reticle with the Telrad circles.")).arg("<a href=\"#virtual_telescope\">").arg("</a>") + "</p>";
 	helpPage += "<p><a href=\"#top\"><small>[" + q_("Back to top") + "]</small></a></p>";
