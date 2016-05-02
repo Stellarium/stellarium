@@ -449,7 +449,7 @@ Meeus (2006)'', is a widely accepted standard. But if you are a
 researcher and want to experiment with alternative models, you will
 hopefully like this feature. you can even specify your own data for
 $a$, $b$, $c$, $y$ and the secular term for lunar acceleration $n$
-(actually $dn/dt$ in units of
+(actually $\dot{n}=dn/dt$ in units of
 $\mathrm{arcseconds}/\mathrm{century}^2$) if you can model $\Delta T$
 according to the formula
 \begin{eqnarray}
@@ -459,67 +459,205 @@ according to the formula
 \end{eqnarray}
 
 \paragraph{List of equations of $\Delta T$ in Stellarium}
+The following list describes sources and a few details about the models for $\Delta T$ implemented in Stellarium.
 \begin{description}
 \item[Without correction.] Correction is disabled. Use only if you know what you are doing!
 
-\item[Schoch (1931).] This historical formula was obtained by C. Schoch~\cite{Schoch:1931} and was used by G. Henriksson in his article ``Einstein's Theory of Relativity Confirmed by Ancient Solar Eclipses''~\cite{2009ASPC..409..166H}. See for more in~\cite{Peters:2010}. The value of the secular term for lunar acceleration ($\dot{n}$) is $-29.68 ''/cy^2$.
+\item[Schoch (1931).] This historical formula was obtained by
+  C. Schoch~\cite{Schoch:1931} and was used by G. Henriksson in his
+  article ``Einstein's Theory of Relativity Confirmed by Ancient Solar
+  Eclipses''~\cite{2009ASPC..409..166H}. See for more
+  in~\cite{Peters:2010}.   $\dot{n}=-29.68''/\cy^2$.
 
-\item[Clemence (1948).] This empirical equation was published by G. M. Clemence in the article ``On the system of astronomical constants''~\cite{1948AJ.....53..169C}. Valid range of usage: between years 1681 and 1900. The value of the secular term for lunar acceleration ($\dot{n}$) is $-22.44 ''/cy^2$.
+\item[Clemence (1948).] This empirical equation was published by
+  G. M. Clemence in the article ``On the system of astronomical
+  constants''~\cite{1948AJ.....53..169C}. Valid range of usage:
+  between years 1681 and 1900. $\dot{n}=-22.44''/\cy^2$.
 
-\item[IAU (1952).] This formula is based on a study of post-1650 observations of the Sun, the Moon and the planets by Spencer Jones~\cite{1939MNRAS..99..541S} and used by Jean Meeus in his ``Astronomical Formulae for Calculators''. It was also adopted in the PC program SunTracker Pro. Valid range of usage: between years 1681 and 1936. The value of the secular term for lunar acceleration ($\dot{n}$) is $-22.44 ''/cy^2$.
+\item[IAU (1952).] This formula is based on a study of post-1650
+  observations of the Sun, the Moon and the planets by Spencer
+  Jones~\cite{1939MNRAS..99..541S} and used by Jean Meeus in his
+  ``Astronomical Formulae for Calculators''. It was also adopted in
+  the PC program \program{SunTracker Pro}. Valid range of usage: between years
+  1681 and 1936. $\dot{n}=-22.44''/\cy^2$.
 
-\item[Astronomical Ephemeris (1960).] This is a slightly modified version of the IAU~\cite{1939MNRAS..99..541S} formula which was adopted in the ``Astronomical Ephemeris''~\cite{ESAE:1961} and in the ``Canon of Solar Eclipses'' by Mucke \& Meeus~\cite{Mucke-Meeus:1983}. Valid range of usage: between years -500 and 2000. The value of the secular term for lunar acceleration ($\dot{n}$) is $-22.44 ''/cy^2$.
+\item[Astronomical Ephemeris (1960).] This is a slightly modified
+  version of the IAU~\cite{1939MNRAS..99..541S} formula which was
+  adopted in the ``Astronomical Ephemeris''~\cite{ESAE:1961} and in
+  the ``Canon of Solar Eclipses'' by Mucke \&
+  Meeus~\cite{Mucke-Meeus:1983}. Valid range of usage: between years
+  -500 and 2000. $\dot{n}=-22.44''/\cy^2$.
 
-\item[Tuckerman (1962, 1964) \& Goldstine (1973).] The tables of Tuckerman~\cite{Tuckerman:1962, Tuckerman:1964} list the positions of the Sun, the Moon and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same relation was also implicitly adopted in the syzygy tables of Goldstine~\cite{Goldstine:1973}. Valid range of usage: between years -600 and 1649. 
+\item[Tuckerman (1962, 1964) \& Goldstine (1973).] The tables of
+  Tuckerman~\cite{Tuckerman:1962, Tuckerman:1964} list the positions
+  of the Sun, the Moon and the planets at 5- and 10-day intervals from
+  601 BCE to 1649 CE. The same relation was also implicitly adopted in
+  the syzygy tables of Goldstine~\cite{Goldstine:1973}. Valid range of
+  usage: between years -600 and 1649.
 
-\item[Muller \& Stephenson (1975).] This equation was published by P. M. Muller and F. R. Stephenson in the article ``The accelerations of the earth and moon from early astronomical observations''~\cite{1975grhe.conf..459M}. Valid range of usage: between years -1375 and 1975. The value of the secular term for lunar acceleration ($\dot{n}$) is $-37.5 ''/cy^2$.
+\item[Muller \& Stephenson (1975).] This equation was published by
+  P. M. Muller and F. R. Stephenson in the article ``The accelerations
+  of the earth and moon from early astronomical
+  observations''~\cite{1975grhe.conf..459M}. Valid range of usage:
+  between years -1375 and 1975. $\dot{n}=-37.5''/\cy^2$.
 
-\item[Stephenson (1978).] This equation was published by F. R. Stephenson in the article ``Pre-Telescopic Astronomical Observations''~\cite{1978tfer.conf....5S}. The value of the secular term for lunar acceleration ($\dot{n}$) is $-30.0 ''/cy^2$.
+\item[Stephenson (1978).] This equation was published by
+  F. R. Stephenson in the article ``Pre-Telescopic Astronomical
+  Observations''~\cite{1978tfer.conf....5S}. $\dot{n}=-30.0''/\cy^2$.
 
-\item[Schmadel \& Zech (1979).] This 12th-order polynomial equation (outdated and superseded by Schmadel \& Zech (1988)) was published by L. D. Schmadel and G. Zech in the article ``Polynomial approximations for the correction delta T E.T.-U.T. in the period 1800-1975''~\cite{1979AcA....29..101S} as fit through data published by Brouwer~\cite{1952AJ.....57..125B}. Valid range of usage: between years 1800 and 1975, with meaningless values outside this range. The value of the secular term for lunar acceleration ($\dot{n}$) is $-23.8946 ''/cy^2$.
+\item[Schmadel \& Zech (1979).] This 12th-order polynomial equation
+  (outdated and superseded by Schmadel \& Zech (1988)) was published
+  by L. D. Schmadel and G. Zech in the article ``Polynomial
+  approximations for the correction delta T E.T.-U.T. in the period
+  1800-1975''~\cite{1979AcA....29..101S} as fit through data published
+  by Brouwer~\cite{1952AJ.....57..125B}. Valid range of usage: between
+  years 1800 and 1975, with meaningless values outside this range. 
+  $\dot{n}=-23.8946''/\cy^2$.
 
-\item[Morrison \& Stephenson (1982).] This algorithm~\cite{1982ASSL...96..173M} was adopted in P. Bretagnon \& L. Simon's ``Planetary Programs and Tables from -4000 to +2800''~\cite{Bretagnon-Simon:1986} and in the PC planetarium program RedShift. Valid range of usage: between years -4000 and 2800. The value of the secular term for lunar acceleration ($\dot{n}$) is $-26.0 ''/cy^2$.
+\item[Morrison \& Stephenson (1982).] This
+  algorithm~\cite{1982ASSL...96..173M} was adopted in P. Bretagnon \&
+  L. Simon's ``Planetary Programs and Tables from -4000 to
+  +2800''~\cite{Bretagnon-Simon:1986} and in the PC planetarium
+  program \program{RedShift}. Valid range of usage: between years -4000 and
+  2800. $\dot{n}=-26.0''/\cy^2$.
 
-\item[Stephenson \& Morrison (1984).] This formula was published by F. R. Stephenson and L. V. Morrison in the article ``Long-term changes in the rotation of the earth - 700 B.C. to A.D. 1980''~\cite{1984RSPTA.313...47S}. Valid range of usage: between years -391 and 1600. The value of the secular term for lunar acceleration ($\dot{n}$) is $-26.0 ''/cy^2$.
+\item[Stephenson \& Morrison (1984).] This formula was published by
+  F. R. Stephenson and L. V. Morrison in the article ``Long-term
+  changes in the rotation of the earth - 700 B.C. to
+  A.D. 1980''~\cite{1984RSPTA.313...47S}. Valid range of usage:
+  between years -391 and 1600. $\dot{n}=-26.0''/\cy^2$.
 
-\item[Stephenson \& Houlden (1986).] This algorithm~\cite{houlden1986supplement} is used in the PC planetarium program Guide 7. Valid range of usage: between years -600 and 1600. The value of the secular term for lunar acceleration ($\dot{n}$) is $-26.0 ''/cy^2$.
+\item[Stephenson \& Houlden (1986).] This
+  algorithm~\cite{houlden1986supplement} is used in the PC planetarium
+  program \program{Guide~7}. Valid range of usage: between years -600 and
+  1600.   $\dot{n}=-26.0''/\cy^2$.
 
-\item[Espenak (1987, 1989).] This algorithm was given by F. Espenak in his ``Fifty Year Canon of Solar Eclipses: 1986-2035''~\cite{Espenak:1987} and in his ``Fifty Year Canon of Lunar Eclipses: 1986-2035''~\cite{Espenak:1989}. Valid range of usage: between years 1950 and 2100. 
+\item[Espenak (1987, 1989).] This algorithm was given by F. Espenak in
+  his ``Fifty Year Canon of Solar Eclipses:
+  1986-2035''~\cite{Espenak:1987} and in his ``Fifty Year Canon of
+  Lunar Eclipses: 1986-2035''~\cite{Espenak:1989}. Valid range of
+  usage: between years 1950 and 2100.
 
-\item[Borkowski (1988).] This formula was obtained by K.M. Borkowski~\cite{1988A&A...205L...8B} from an analysis of 31 solar eclipse records dating between 2137 BCE and 1715 CE. Valid range of usage: between years -2136 and 1715. The value of the secular term for lunar acceleration ($\dot{n}$) is $-23.895 ''/cy^2$.
+\item[Borkowski (1988).] This formula was obtained by
+  K.M. Borkowski~\cite{1988A&A...205L...8B} from an analysis of 31
+  solar eclipse records dating between 2137 BCE and 1715 CE. Valid
+  range of usage: between years -2136 and 1715. $\dot{n}=-23.895''/\cy^2$.
 
-\item[Schmadel \& Zech (1988).] This 12th-order polynomial equation was published by L. D. Schmadel and G. Zech in the article ``Empirical Transformations from U.T. to E.T. for the Period 1800-1988''~\cite{1988AN....309..219S} as data fit through values given by Stephenson \& Morrison (1984). Valid range of usage: between years 1800 and 1988, with a mean error of less than one second, max. error 1.9s, and meaningless values outside this range. The value of the secular term for lunar acceleration ($\dot{n}$) is $-26.0 ''/cy^2$.
+\item[Schmadel \& Zech (1988).] This 12th-order polynomial equation
+  was published by L. D. Schmadel and G. Zech in the article
+  ``Empirical Transformations from U.T. to E.T. for the Period
+  1800-1988''~\cite{1988AN....309..219S} as data fit through values
+  given by Stephenson \& Morrison (1984). Valid range of usage:
+  between years 1800 and 1988, with a mean error of less than one
+  second, max. error 1.9s, and meaningless values outside this
+  range. $\dot{n}=-26.0''/\cy^2$.
 
-\item[Chapront-Touze \& Chapront (1991).] This formula was adopted by M. Chapront-Touze \& J. Chapront in the shortened version of the ELP 2000-85 lunar theory in their ``Lunar Tables and Programs from 4000 B.C. to A.D. 8000''~\cite{Chapront-Touze:1991}. The relations are based on those of Stephenson \& Morrison (1984), but slightly modified to make them compatible with the tidal acceleration parameter of $-23.8946 ''/cy^2$ adopted in the ELP 2000-85 lunar theory. 
+\item[Chapront-Touze \& Chapront (1991).] This formula was adopted by
+  M. Chapront-Touze \& J. Chapront in the shortened version of the ELP
+  2000-85 lunar theory in their ``Lunar Tables and Programs from 4000
+  B.C. to A.D. 8000''~\cite{Chapront-Touze:1991}. The relations are
+  based on those of Stephenson \& Morrison (1984), but slightly
+  modified to make them compatible with the tidal acceleration
+  parameter of $\dot{n}=-23.8946''/\cy^2$ adopted in the ELP 2000-85 lunar
+  theory.
 
-\item[Stephenson \& Morrison (1995).] This equation was published by F. R. Stephenson and L. V. Morrison in the article ``Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990''~\cite{1995RSPTA.351..165S}. Valid range of usage: between years -700 and 1600. The value of the secular term for lunar acceleration ($\dot{n}$) is $-26.0 ''/cy^2$.
+\item[Stephenson \& Morrison (1995).] This equation was published by
+  F. R. Stephenson and L. V. Morrison in the article ``Long-Term
+  Fluctuations in the Earth's Rotation: 700 BC to AD
+  1990''~\cite{1995RSPTA.351..165S}. Valid range of usage: between
+  years -700 and 1600. $\dot{n}=-26.0''/\cy^2$.
 
-\item[Stephenson (1997).] F. R. Stephenson published this formula in his book ``Historical Eclipses and Earth's Rotation''~\cite{Stephenson:1997}. Valid range of usage: between years -500 and 1600. The value of the secular term for lunar acceleration ($\dot{n}$) is $-26.0 ''/cy^2$.
+\item[Stephenson (1997).] F. R. Stephenson published this formula in
+  his book ``Historical Eclipses and Earth's
+  Rotation''~\cite{Stephenson:1997}. Valid range of usage: between
+  years -500 and 1600. $\dot{n}=-26.0''/\cy^2$.
 
-\item[Meeus (1998) (with Chapront, Chapront-Touze \& Francou (1997)).] From J. Meeus, ``Astronomical Algorithms''~\cite{AstronomicalAlgorithms:1998}, and widely used. Table for 1620..2000, and includes a variant of Chapront, Chapront-Touze \& Francou (1997) for dates outside 1620..2000. Valid range of usage: between years -400 and 2150. The value of the secular term for lunar acceleration ($\dot{n}$) is $-25.7376 ''/cy^2$.
+\item[Meeus (1998) (with Chapront, Chapront-Touze \& Francou (1997)).]
+  From J. Meeus, ``Astronomical
+  Algorithms''~\cite{AstronomicalAlgorithms:1998}, and widely
+  used. Table for 1620..2000, and includes a variant of Chapront,
+  Chapront-Touze \& Francou (1997) for dates outside 1620..2000. Valid
+  range of usage: between years -400 and 2150. $\dot{n}=-25.7376''/\cy^2$.
 
-\item[JPL Horizons.] The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory use this formula in their interactive website JPL Horizons\footnote{\url{http://ssd.jpl.nasa.gov/?horizons}}. Valid range of usage: between years -2999 and 1620, with zero values outside this range. The value of the secular term for lunar acceleration ($\dot{n}$) is $25.7376 ''/cy^2$.
+\item[JPL Horizons.] The JPL Solar System Dynamics Group of the NASA
+  Jet Propulsion Laboratory use this formula in their interactive
+  website JPL
+  Horizons\footnote{\url{http://ssd.jpl.nasa.gov/?horizons}}. Valid
+  range of usage: between years -2999 and 1620, with zero values
+  outside this range. $\dot{n}=-25.7376''/\cy^2$.
 
-\item[Meeus \& Simons (2000).] This polynome was published by J. Meeus and L. Simons in article ``Polynomial approximations to Delta T, 1620-2000 AD''~\cite{2000JBAA..110..323M}. Valid range of usage: between years 1620 and 2000, with zero values outside this range. The value of the secular term for lunar acceleration ($\dot{n}$) is $-25.7376 ''/cy^2$.
+\item[Meeus \& Simons (2000).] This polynome was published by J. Meeus
+  and L. Simons in article ``Polynomial approximations to Delta T,
+  1620-2000 AD''~\cite{2000JBAA..110..323M}. Valid range of usage:
+  between years 1620 and 2000, with zero values outside this
+  range. $\dot{n}=-25.7376''/\cy^2$.
 
-\item[Montenbruck \& Pfleger (2000).] The fourth edition of O. Montenbruck \& T. Pfleger's ``Astronomy on the Personal Computer''~\cite{Montenbruck-Pfleger:2000} provides simple 3rd-order polynomial data fits for the recent past. Valid range of usage: between years 1825 and 2005, with a typical 1-second accuracy and zero values outside this range. 
+\item[Montenbruck \& Pfleger (2000).] The fourth edition of
+  O. Montenbruck \& T. Pfleger's ``Astronomy on the Personal
+  Computer''~\cite{Montenbruck-Pfleger:2000} provides simple 3rd-order
+  polynomial data fits for the recent past. Valid range of usage:
+  between years 1825 and 2005, with a typical 1-second accuracy and
+  zero values outside this range.
 
-\item[Reingold \& Dershowitz (2002, 2007).] E. M. Reingold \& N. Dershowitz present this polynomial data fit in ``Calendrical Calculations''~\cite{Reingold-Dershowitz:2007} and in their ``Calendrical Tabulations''~\cite{Reingold-Dershowitz:2002}. It is based on Jean Meeus' ``Astronomical Algorithms''~\cite{AstronomicalAlgorithms:1991}.
+\item[Reingold \& Dershowitz (2002, 2007).] E. M. Reingold \&
+  N. Dershowitz present this polynomial data fit in ``Calendrical
+  Calculations''~\cite{Reingold-Dershowitz:2007} and in their
+  ``Calendrical Tabulations''~\cite{Reingold-Dershowitz:2002}. It is
+  based on Jean Meeus' ``Astronomical
+  Algorithms''~\cite{AstronomicalAlgorithms:1991}.
 
-\item[Morrison \& Stephenson (2004, 2005).] This important solution was published by L. V. Morrison and F. R. Stephenson in article ``Historical values of the Earth's clock error $\Delta T$ and the calculation of eclipses''~\cite{2004JHA....35..327M} with addendum~\cite{2005JHA....36..339M}. Valid range of usage: between years -1000 and 2000. The value of the secular term for lunar acceleration ($\dot{n}$) is $-26.0 ''/cy^2$.
+\item[Morrison \& Stephenson (2004, 2005).] This important solution
+  was published by L. V. Morrison and F. R. Stephenson in article
+  ``Historical values of the Earth's clock error $\Delta T$ and the
+  calculation of eclipses''~\cite{2004JHA....35..327M} with
+  addendum~\cite{2005JHA....36..339M}. Valid range of usage: between
+  years -1000 and 2000. $\dot{n}=-26.0''/\cy^2$.
 
-\item[Espenak \& Meeus (2006)] This solution by F. Espenak and J. Meeus, based on Morrison \& Stephenson~\cite{2004JHA....35..327M} and a polynomial fit through tabulated values for 1600-2000, is used for the NASA Eclipse Web Site\footnote{\url{http://eclipse.gsfc.nasa.gov/eclipse.html}} and in their ``Five Millennium Canon of Solar Eclipses: -1900 to +3000''~\cite{Espenak-Meeus:2006}. This formula is also used in the solar, lunar and planetary ephemeris program SOLEX. Valid range of usage: between years -1999 and 3000. The value of the secular term for lunar acceleration ($\dot{n}$) is $-25.858 ''/cy^2$\footnote{This solution is used by default.}.
+\item[Espenak \& Meeus (2006).] This solution by F. Espenak and
+  J. Meeus, based on Morrison \& Stephenson~\cite{2004JHA....35..327M}
+  and a polynomial fit through tabulated values for 1600-2000, is used
+  for the NASA Eclipse Web
+  Site\footnote{\url{http://eclipse.gsfc.nasa.gov/eclipse.html}} and
+  in their ``Five Millennium Canon of Solar Eclipses: -1900 to
+  +3000''~\cite{Espenak-Meeus:2006}. This formula is also used in the
+  solar, lunar and planetary ephemeris program \program{SOLEX}. Valid
+  range of usage: between years -1999 and
+  3000. $\dot{n}=-25.858''/\cy^2$\footnote{This solution is used by
+    default.}.
 
-\item[Reijs (2006).] From the Length of Day (LOD; as determined by Stephenson \& Morrison~\cite{2004JHA....35..327M}), Victor Reijs derived a $\Delta T$ formula by using a Simplex optimisation with a cosine and square function\footnote{\url{http://www.iol.ie/~geniet/eng/DeltaTeval.htm}}. This is based on a possible periodicy described by Stephenson~\cite{2004JHA....35..327M}. Valid range of usage: between years -1500 and 1100. The value of the secular term for lunar acceleration ($\dot{n}$) is $-26.0 ''/cy^2$.
+\item[Reijs (2006).] From the Length of Day (LOD; as determined by
+  Stephenson \& Morrison~\cite{2004JHA....35..327M}), Victor Reijs
+  derived a $\Delta T$ formula by using a Simplex optimisation with a
+  cosine and square
+  function\footnote{\url{http://www.iol.ie/~geniet/eng/DeltaTeval.htm}}. This
+  is based on a possible periodicy described by
+  Stephenson~\cite{2004JHA....35..327M}. Valid range of usage: between
+  years -1500 and 1100. $\dot{n}=-26.0''/\cy^2$.
 
-\item[Banjevic (2006).] This solution by B. Banjevic, based on Stephenson \& Morrison (1984)~\cite{1984RSPTA.313...47S}, was published in article ``Ancient eclipses and dating the fall of Babylon''~\cite{2006POBeo..80..251B}. Valid range of usage: between years -2020 and 1620, with zero values outside this range. The value of the secular term for lunar acceleration ($\dot{n}$) is $-26.0 ''/cy^2$.
+\item[Banjevic (2006).] This solution by B. Banjevic, based on
+  Stephenson \& Morrison (1984)~\cite{1984RSPTA.313...47S}, was
+  published in article ``Ancient eclipses and dating the fall of
+  Babylon''~\cite{2006POBeo..80..251B}. Valid range of usage: between
+  years -2020 and 1620, with zero values outside this range. 
+  $\dot{n}=-26.0''/\cy^2$.
 
-\item[Islam, Sadiq \& Qureshi (2008, 2013).] This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus \& Simons~\cite{2000JBAA..110..323M}, was published in article ``Error Minimization of Polynomial Approximation of DeltaT''~\cite{Islam-Sadiq-Qureshi:2008} and revisited by Sana Islam in 2013. Valid range of usage: between years 1620 and 2007, with zero values outside this range. 
+\item[Islam, Sadiq \& Qureshi (2008, 2013).] This solution by
+  S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus \&
+  Simons~\cite{2000JBAA..110..323M}, was published in article ``Error
+  Minimization of Polynomial Approximation of
+  DeltaT''~\cite{Islam-Sadiq-Qureshi:2008} and revisited by Sana Islam
+  in 2013. Valid range of usage: between years 1620 and 2007, with
+  zero values outside this range.
 
-\item[Khalid, Sultana \& Zaidi (2014).] This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, Mariam Sultana and Faheem Zaidi was published in ``Delta T: Polynomial Approximation of Time Period 1620-2013''~\cite{Khalid-Sultana-Zaidi:2014}. Valid range of usage: between years 1620 and 2013, with zero values outside this range. 
+\item[Khalid, Sultana \& Zaidi (2014).] This polynomial approximation
+  with 0.6 seconds of accuracy by M. Khalid, Mariam Sultana and Faheem
+  Zaidi was published in ``Delta T: Polynomial Approximation of Time
+  Period 1620-2013''~\cite{Khalid-Sultana-Zaidi:2014}. Valid range of
+  usage: between years 1620 and 2013, with zero values outside this
+  range.
 
-\item[Custom equation of $\Delta T$.] This is a quadratic formula for calculation of $\Delta T$ with coefficients defined by the user.
-
+\item[Custom equation of $\Delta T$.] This is a quadratic formula for
+  calculation of $\Delta T$ with coefficients defined by the user.
 \end{description}
 
 
