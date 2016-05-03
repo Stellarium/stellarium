@@ -511,8 +511,18 @@ IF(WIN32)
 ENDIF()
 
 ########### Generate doxygen doc ###############
-CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/Doxyfile.cmake ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
-ADD_CUSTOM_TARGET(apidoc doxygen ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generate the doxygen documentation into the doc directory.")
+FIND_PACKAGE(Doxygen)
+IF(DOXYGEN_FOUND)
+    IF(DOXYGEN_DOT_FOUND)
+        SET(HAVE_DOT "YES")
+        SET(DOT_PATH ${DOXYGEN_DOT_PATH})
+    ELSE()
+        SET(HAVE_DOT "NO")
+        SET(DOT_PATH "")
+    ENDIF()
+    CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/Doxyfile.cmake ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+    ADD_CUSTOM_TARGET(apidoc ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generate the doxygen documentation into the doc directory.")
+ENDIF()
 
 ##################### Generate translation copying script ######################
 IF(WIN32)
