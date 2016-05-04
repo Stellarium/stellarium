@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-26 22:45+0700\n"
-"PO-Revision-Date: 2016-05-01 06:45+0000\n"
+"POT-Creation-Date: 2016-05-03 13:06+0700\n"
+"PO-Revision-Date: 2016-05-03 08:38+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-02 05:13+0000\n"
+"X-Launchpad-Export-Date: 2016-05-04 05:28+0000\n"
 "X-Generator: Launchpad (build 17995)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:140 src/core/modules/StarMgr.cpp:378
@@ -3665,7 +3665,7 @@ msgstr ""
 
 #: src/translations.h:339
 msgid ""
-"This script help you make an excursion around 20 fun double stars. The list "
+"This script helps you make an excursion around 20 fun double stars. The list "
 "has been collected by Jerry Lodriguss and published in Sky & Telescope "
 "09/2014. Data taken from his website, http://www.astropix.com/doubles/"
 msgstr ""
@@ -3675,7 +3675,7 @@ msgstr ""
 "http://www.astropix.com/doubles/"
 
 #: src/translations.h:340
-msgid "This script help you make an excursion around largest known stars."
+msgid "This script helps you make an excursion around largest known stars."
 msgstr ""
 "Этот скрипт поможет вам совершить экскурсию по крупнейшим известным звёздам."
 
@@ -8275,6 +8275,12 @@ msgid ""
 "and similar situations. (To abort a slew, you can start another one to a "
 "safe position.)"
 msgstr ""
+"Этот плагин позволяет Stellarium'у отправлять только команды "
+"'<b>навести</b>' ('slew' или 'перейти к') на устройство и получать его "
+"текущее положение. Он не может выдавать какие-либо другие команды, так что "
+"пользователи должны быть осведомлены о возможности возникновения нештатных "
+"ситуаций типа столкновения монтировки. (Чтобы прервать наведение, вы можете "
+"запустить другое наведение в безопасное положение.)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:298
 msgid ""
@@ -8289,6 +8295,8 @@ msgid ""
 "WARNING: Stellarium CANNOT prevent your telescope from being pointed at the "
 "Sun."
 msgstr ""
+"ПРЕДУПРЕЖДЕНИЕ: Stellarium НЕ МОЖЕТ предотвратить наведение телескопа на "
+"Солнце."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
 msgid ""
@@ -8296,6 +8304,9 @@ msgid ""
 "installed. The powerful light amplified by the telescope WILL cause "
 "irreversible damage to your eyes and/or your equipment."
 msgstr ""
+"Никогда не направляйте телескоп на Солнце без соответствующего "
+"установленного солнечного фильтра. Мощный свет, усиленный телескопом, "
+"приведёт к необратимому повреждению ваших глаз и/или оборудования."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:301
 msgid ""
@@ -8371,6 +8382,10 @@ msgid ""
 "either one of Stellarium's stand-alone telescope servers, or a third party "
 "application."
 msgstr ""
+"Устройство подключается к удаленному компьютеру и программное обеспечение, "
+"которое им управляет, умеет 'говорить' со Stellarium'ом  <i>через сеть</i>; "
+"это программное обеспечение может быть либо одним из автономных серверов "
+"телескопов Stellarium, либо стороннее приложение."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
 #, qt-format
@@ -8378,6 +8393,9 @@ msgid ""
 "Most older telescopes use cables that connect to a %1serial port%2 (RS-232), "
 "the newer ones use %3USB%4 (Universal Serial Bus)."
 msgstr ""
+"Большинство старых телескопов используют кабели, которые подключаются к "
+"%1последовательному порту%2 (RS-232), более поздние используют %3USB%4 "
+"(Universal Serial Bus)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:315
 msgid ""
@@ -8385,12 +8403,19 @@ msgid ""
 "Windows, a USB connection may require a 'virtual serial port' software, if "
 "it is not supplied with the cable or the telescope."
 msgstr ""
+"На Linux и Max OS X оба случая обрабатываются одинаково с помощью плагина. В "
+"операционной системе Windows, соединение USB может потребовать программное "
+"обеспечение 'виртуальный последовательный порт', если он не входит в "
+"комплект с кабелем или телескопом."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:316
 msgid ""
 "Such a software creates a virtual ('fake') COM port that corresponds to the "
 "real USB port so it can be used by the plug-in."
 msgstr ""
+"Такое программное обеспечение создает виртуальный ( 'поддельный') COM-порт, "
+"который соответствует реальному порту USB, поэтому он может быть использован "
+"в плагине."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
 msgid ""
@@ -8398,12 +8423,19 @@ msgid ""
 "the telescope can connect only to a serial port, a serial-to-USB (RS-232-to-"
 "USB) adapter may be necessary."
 msgstr ""
+"На всех трех платформах, если компьютера не имеет 'классические' "
+"последовательные порты и телескоп может подключаться только к "
+"последовательному порту, может потребоваться адаптер serial-to-USB-адаптер "
+"(RS232-USB)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid ""
 "Telescope set-up (setting geographical coordinates, performing alignment, "
 "etc.) should be done before connecting the telescope to Stellarium."
 msgstr ""
+"Настройка телескопа (настройка географических координат, выполнение "
+"выравнивания и т.д.) должна быть сделана до подключения телескопа к "
+"Stellarium'у."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
 msgid "The plug-in's main window can be opened:"
@@ -8415,6 +8447,9 @@ msgid ""
 "Stellarium's Configuration window (opened by pressing <b>F2</b> or the "
 "respective button in the left toolbar)."
 msgstr ""
+"При нажатии на кнопку \"настроить\" плагина во вкладке 'Плагины' окна "
+"конфигурации Stellarium (открывается нажатием клавиши <b>F2</b> или "
+"соответствующей кнопки на левой панели инструментов)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:324
 #, qt-format
@@ -8423,6 +8458,9 @@ msgid ""
 "(opened by pressing <b>Ctrl+0</b> or the respective button on the bottom "
 "toolbar)."
 msgstr ""
+"При нажатии на кнопку 'Настроить телескопы...' в окне %1Навести телескоп "
+"на%2 (открывается при нажатии <b>Ctrl+0</b>  или соответствующей кнопки на "
+"нижней панели инструментов)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:325
 msgid ""
@@ -8437,6 +8475,8 @@ msgid ""
 "The number (<b>#</b>) column shows the number used to control this "
 "telescope. For example, for telescope #2, the shortcut is Ctrl+2."
 msgstr ""
+"Колонка номер (<b>#</b>) показывает номер, используемый для управления "
+"данным телескопом. Например, для телескопа #2, горячая клавиша будет Ctrl+2."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:327
 msgid ""
@@ -8444,6 +8484,9 @@ msgid ""
 "not. Unfortunately, there are some cases in which 'Connected' is displayed "
 "when no working connection exists."
 msgstr ""
+"Столбец <b>состояние</b> указывает установлено в данный момент активное "
+"соединение или нет. К сожалению, есть некоторые случаи, в которых "
+"'Подключено' отображается при отсутствии существующего рабочего соединения."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:328
 msgid "The <b>Type</b> field indicates what kind of connection is this:"
@@ -8487,6 +8530,8 @@ msgid ""
 "The topmost field represents the choice between the two types of connections "
 "(see %1above%2):"
 msgstr ""
+"Верхнее поле представляет собой выбор между двумя типами соединений (см "
+"%1выше%2):"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:340
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:463
@@ -8496,10 +8541,14 @@ msgstr "Телескоп управляется:"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:341
 msgid "<b>Stellarium, directly through a serial port</b> is the DIRECT case"
 msgstr ""
+"<b>Stellarium, непосредственно через последовательный порт</b> является "
+"случаем ПРЯМОГО подключения"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:342
 msgid "<b>External software or a remote computer</b> is the INDIRECT case"
 msgstr ""
+"<b>Внешнее программное обеспечение или удаленный компьютер</b> является "
+"случаем НЕПРЯМОГО подключения"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:343
 #, qt-format
@@ -8507,18 +8556,25 @@ msgid ""
 "<b>Nothing, just simulate one (a moving reticle)</b> is a %1virtual "
 "telescope%2 (no connection)"
 msgstr ""
+"<b>Ничего, просто симуляция (движущийся крест визирных линий)</b> является "
+"%1виртуальным телескопом%2 (нет соединения)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:347
 msgid ""
 "<b>Name</b> is the label that will be displayed on the screen next to the "
 "telescope reticle."
 msgstr ""
+"<b>Название</b> это метка, которая будет отображаться на экране рядом с "
+"крестом визирных линий телескопа."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:348
 msgid ""
 "<b>Connection delay</b>: If the movement of the telescope reticle on the "
 "screen is uneven, you can try increasing or decreasing this value."
 msgstr ""
+"<b>Задержка соединения</b>: Если движение креста визирных линий телескопа на "
+"экране не плавное, вы можете попробовать увеличить или уменьшить это "
+"значение."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:349
 msgid ""
@@ -8527,18 +8583,27 @@ msgid ""
 "use the equinox of the date (EOD, also known as JNow), making necessary this "
 "override."
 msgstr ""
+"<b>Система координат</b>: Некоторые телескопы Celestron имеют обновленную "
+"прошивку и теперь интерпретируют полученные координаты, как координаты "
+"равноденствия текущей даты (EOD, также известный как JNow), что делает "
+"необходимым это переопределение."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:350
 msgid ""
 "<b>Start/connect at startup</b>: Check this option if you want Stellarium to "
 "attempt to connect to the telescope immediately after it starts."
 msgstr ""
+"<b>Включить/подключиться при запуске</b>: Отметьте эту опцию, если вы "
+"хотите, чтобы Stellarium пытался подключиться к телескопу сразу после "
+"запуска."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:351
 msgid ""
 "Otherwise, to start the telescope, you need to open the main window, select "
 "that telescope and press the 'Start/Connect' button."
 msgstr ""
+"В противном случае, чтобы запустить телескоп, вам необходимо открыть главное "
+"окно, выбрать этот телескоп и нажать кнопку 'Подключить'."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:355
 #, qt-format
@@ -8548,6 +8613,8 @@ msgstr "Этот раздел активен только для ПРЯМОГО 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:356
 msgid "<b>Serial port</b> sets the serial port used by the telescope."
 msgstr ""
+"<b>Последовательный порт</b> устанавливает используемый телескопом "
+"последовательный порт."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:357
 msgid "There is a pop-up box that suggests some default values:"
@@ -8590,12 +8657,12 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:364
 #, qt-format
 msgid "<b>Device model</b>: see %1Supported devices%2 below."
-msgstr ""
+msgstr "<b>Модель устройства</b>: смотри %1поддерживаемые устройства%2 ниже."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:368
 #, qt-format
 msgid "Both fields here refer to communication over a network (%1TCP/IP%2)."
-msgstr ""
+msgstr "Оба поля здесь относятся к передаче по сети (%1TCP/IP%2)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:369
 #, qt-format
@@ -8648,7 +8715,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:380
 msgid ""
 "Mark the 'Use field of view indicators' option, then enter a list of values "
-"separated with comas in the field below."
+"separated with commas in the field below."
 msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
