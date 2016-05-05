@@ -47,11 +47,11 @@ You activate the plugin with the \emph{circular enclosure} button \guibutton{0.6
 bottom or by pressing \key{\ctrl+W}. The other button with circular enclosure and
 tool icon  \guibutton{0.6}{bt_scenery3d_settings_off} (or \key{\ctrl+\shift+W}) opens the settings dialog. Once loaded and
 displaying, you can walk around pressing \key{\ctrl} plus cursor keys. Change eye
-height with \key{\ctrl+Page \arrowkeyup}/\key{\ctrl + Page \arrowkeydown} keys. Adding \key{\shift} key increases speed by 10,
+height with \key{\ctrl+Page\,\arrowkeyup\,}/\key{\ctrl + Page\,\arrowkeydown\,} keys. Adding \key{\shift} key increases speed by 10,
 adding \key{\Alt} multiplies by 5 (pressing both keys multiplies by 50!). If you release \key{\ctrl} before
 the cursor key, animation will continue. (Press \key{\ctrl}+any cursor key to stop
-moving.)\footnote{I (GZ) had to change keyboard handling in the
-main program, somewhat breaking the plugin concept.}
+moving.)
+%\footnote{I (GZ) had to change keyboard handling in the main program, somewhat breaking the plugin concept.}
 
 Further key bindings exist which can be configured using the Stellarium default
 key-binding interface. Some options are also available in the Scenery3d dialog.
@@ -180,18 +180,18 @@ Geometry&Yes\\Lights&Yes\\Clay&No\\Photomatched&Yes\\DefaultUVs&No\\Instanced&No
   \label{fig:scenery3d:KerkytheaExportSettings}
 \end{table}
 
-One good exporter is available in the Kerkythea renderer project\footnote{
+One good exporter is available in the \program{Kerkythea} renderer project\footnote{
 Available at \url{http://www.kerkythea.net/cms/}}.  You need
 \program{SU2KT~3.17}
 or better, and \program{KT2OBJ~1.1.0} or better.  Deselect any selection, then
-export your model to the Kerkythea XML format with settings shown in
+export your model to the \program{Kerkythea} XML format with settings shown in
 \ref{fig:scenery3d:KerkytheaExportSettings}.
 (Or, with selection enabled, make sure settings are No-Yes-Yes-No-Yes-No-No.)  
-You do not have to launch Kerkythea unless you want to create nice renderings of
+You do not have to launch \program{Kerkythea} unless you want to create nice renderings of
 your model. 
 Then, use the \program{KT2OBJ} converter to create an OBJ.  You can delete the
 XML after the conversion.  Note that some texture coordinates may not be
-exported correctly. The setting Photomatched:Yes seems now to have
+exported correctly. The setting \texttt{Photomatched:Yes} seems now to have
 corrected this issue, esp. with distorted/manu\-ally shifted textures.
 
 Another free OBJ exporter has been made available by 
@@ -199,7 +199,7 @@ TIG: \file{OBJexporter.rb}\footnote{Available from
 \url{http://forums.sketchucation.com/viewtopic.php?f=323&t=33448}}. 
 This is the only OBJ exporter tested so far capable of handling large TIN landscapes
 ($>450.000$ triangles). 
-As of version 2.6 it seems to be the best OBJ exporter available for Sketchup. 
+As of version 2.6 it seems to be the best OBJ exporter available for \program{Sketchup}. 
 
 %As of version 1.6 it appears to have valid texture coordinates, but I have
 %experienced problems with black faces which need more
@@ -229,7 +229,7 @@ statements: \parameter{mtllib}, \parameter{usemtl}, \parameter{v}, \parameter{vn
 specification of relative positions) are not supported.
 
 A further recommendation for correct illumination is that all vertices should
-have vertex normals. Sketchup models exported with the Kerkythea or TIG plugins
+have vertex normals. \program{Sketchup} models exported with the \program{Kerkythea} or TIG plugins
 should have correct normals. If your model does not provide them, default
 normals can be reconstructed from the triangle edges, resulting in a faceted
 look.
@@ -245,7 +245,7 @@ objects with the same material into 1, it requires them to follow directly after
 each other in the OBJ). A simple guide to use \program{Blender} for this task follows:
 
 \begin{enumerate}
-\item Import from Wavefront (.obj) - you may need to change the forward/up axes for correct orientation, try -Y for forward and Z for up
+\item \menu{File>Import>Wavefront .obj} - you may need to change the forward/up axes for correct orientation, try -Y for forward and Z for up
 \item Select an object which has a shared material
 \item Press \key{\shift+L} and select 'By Material'
 \item Select 'Join' in the left (main) tool window
@@ -426,8 +426,8 @@ landscape called \file{Zero Horizon}.
 \noindent The \file{scenery3d.ini} may contain a simple scene description, but it is
 recommended to use the \emph{localizable} description format: in the scene's
 directory (which contains \file{scenery3d.ini}) create files in the format
-\file{description.<lang\_code>.utf8} which can contain arbitrary
-UTF-8--encoded HTML content. \parameter{<lang\_code>} stands for the ISO~639
+\file{description.<lang>.utf8} which can contain arbitrary
+UTF-8--encoded HTML content. \parameter{<lang>} stands for the ISO~639
 language code.
 
 \begin{longtabu}to \textwidth {lX} 
@@ -495,7 +495,7 @@ system, like UTM or Gauss-Kr\"uger.
 \end{longtabu}
 
 \noindent These entries describe the offset, in metres, of the model coordinates relative
-to coordinates in a geographic grid, like Gauss-Kr\"uger. If you have your model
+to coordinates in a geographic grid, like Gauss-Kr\"uger or UTM. If you have your model
 vertices specified in grid coordinates, do not specify \verb|orig_...| data, but
 please definitely add \verb|start_...| data, below.
 
@@ -571,7 +571,7 @@ the OBJ files \menu{File>Import>Wavefront .obj}, select them and press
 \menu{File>Export>Wavefront .obj}%
 \footnote{http://blender.stackexchange.com/questions/3352/merging-multiple-obj-files}.
 
-Verify the new model loads correctly, e.g.\ in Meshlab!
+Verify the new model loads correctly, e.g.\ in \program{Meshlab}\footnote{\url{www.meshlab.org}}!
 
 \subsection{Working with non-georeferenced OBJ files}
 \label{sec:scenery3d:NonGeoreferenced}
@@ -589,7 +589,7 @@ models in other applications, or you must find the correct
 transformation matrix.  Importing the OBJ in \program{Sketchup} may take a long
 time for detailed photo-generated models, and the texturing may
 suffer, so you can cut the model down to the minimum necessary e.g.\ in
-Meshlab, and import just a stub required to georeference the model in
+\program{Meshlab}, and import just a stub required to georeference the model in
 \program{Sketchup}. 
 
 Now, how would you find the proper orientation? The easiest chance
@@ -673,7 +673,7 @@ size=<int>              Defines how many entries are in this file.
 
 Scenery3d was conceived by Georg Zotti for the
 ASTROSIM\footnote{\url{http://astrosim.univie.ac.at}} project. A first
-prototype was implemented originally in 2010/2011 by Simon Parzer and
+prototype was implemented in 2010/2011 by Simon Parzer and
 Peter Neubauer as student work supervised by Michael Wimmer (TU Wien).
 Models for accuracy tests (Sterngarten, Testscene), and later
 improvements in integration, user interaction, \file{.ini} option handling,
@@ -684,8 +684,8 @@ mapping, normal mapping) and
 speed~\cite{Zotti-Neubauer:VSMM2012,Zotti-Neubauer:EuroMed2012,Zotti:2012:SpringerAA}.
 
 In 2014/15,
-Florian Schaukowitsch adapted the code to work with Qt 5 and the 
-Stellarium 0.13 codebase, replaced the renderer with a more efficient, fully
+Florian Schaukowitsch adapted the code to work with Qt~5 and the 
+Stellarium~0.13 codebase, replaced the renderer with a more efficient, fully
 shader-based system, implemented various performance, quality and usability
 enhancements, and did some code cleanup. Both Andrei and Florian were again
 supervised by Michael Wimmer~\cite{Zotti:CHNT2015,Zotti:SEAC2015}. % when they are published.
