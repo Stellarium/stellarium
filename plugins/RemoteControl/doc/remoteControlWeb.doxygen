@@ -38,7 +38,7 @@ and loaded using <a href="http://requirejs.org/">require.js</a>, which automatic
 
 \section remoteControlWebStructure File and directory structure
 
-Note that not all files are listed here, only those of special note.
+Note that not all files are listed here, only those of special interest.
 
 - webroot/ - root directory
     - index.html - Default interface, also mapped to the root folder
@@ -48,13 +48,32 @@ Note that not all files are listed here, only those of special note.
     - translate_files - Defines which files are passed through StelTranslator, see \ref remoteControlWebTranslation
     - iframestyle.css - defines the style for internal frames (landscape description, etc.)
     - /js/ - Contains the JavaScript files required for the interfaces
-        - main.js - This is the configuration file for require.js. Loads \ref rcMainuijs as main module.
+        - main.js - This is the configuration file for require.js. Loads \ref rcUiMainui as main module.
         - settings.js - Contains some configuration options for the web interface
-        - translationdata.js - Auto-generated file containing strings to translate through StelTranslator
+        - translationdata.js - Auto-generated file containing strings to translate through StelTranslator, see \ref remoteControlWebTranslation
         - /api/ - Contains .js modules that define the connection to the \ref remoteControlApi "RemoteControl API"
-            - \ref rcRemotecontroljs
+            - \ref rcApiRemotecontrol
+            - \ref rcApiActions
+            - \ref rcApiFlags
+            - \ref rcApiLocation
+            - \ref rcApiProperties
+            - \ref rcApiScripts
+            - \ref rcApiSearch
+            - \ref rcApiTime
+            - \ref rcApiUpdatequeue
+            - \ref rcApiViewcontrol
+            - \ref rcApiViewoptions
         - /ui/ - Contains UI-related .js modules which depend on the /api/ .js modules
-            - \ref rcMainuijs
+            - \ref rcUiMainui
+            - \ref rcUiActions
+            - \ref rcUiCombobox
+            - \ref rcUiJqueryuifixes
+            - \ref rcUiLocation
+            - \ref rcUiScripts
+            - \ref rcUiSearch
+            - \ref rcUiTime
+            - \ref rcUiViewcontrol
+            - \ref rcUiViewoptions
 
 \section remoteControlWebEdit Editing the interface
 
@@ -288,7 +307,7 @@ between pseudo-PHP style tags and the \c tr function to achieve the same effect 
 All files which are listed in the `webroot/translate_files` file will be parsed, and all `<?= tr("----")?>` tags will be
 replaced using the StelTranslator for the current application language.
 
-If you require translated strings through JavaScript, you should use the `tr` method of the \ref rcRemotecontroljs module,
+If you require translated strings through JavaScript, you should use the `tr` method of the \ref rcApiRemotecontrol module,
 which also works similar to the `q_()` macro. There is a special procedure for the JavaScript strings: the target
 \c RemoteControl-update-translationdata should be run whenever new JavaScript strings have been added.
 This updates the file `webroot/js/translationdata.js` with all current `tr()` strings. [Python](https://www.python.org/)
@@ -346,11 +365,201 @@ define(["jquery", "myawesomemodule"],function($, awesome) {
 });
 \endcode
 
-\subsubsection rcRemotecontroljs api/remotecontrol
+The UI modules can depend on the API modules and other UI modules.
+The API modules can depend on other API modules.
+Circular dependencies should of course be avoided.
 
-TODO
+\subsubsection rcApiRemotecontrol api/remotecontrol
 
-\subsubsection rcMainuijs ui/mainui
+This is the main API module, with no further dependencies on other API modules.
 
-TODO
+Its main function is that it provides automatic status updates by periodically polling (by default each second) the
+\c status operation of the MainService. Whenever this poll succeeds, the \c serverDataReceived custom event is emitted,
+with the JSON response of the server as \p data parameter. Other API modules should use this event, and process
+the data in which they are interested.
+It also keeps track of StelAction and StelProperty changes,
+and emits \c stelActionsChanged and/or \c stelPropertiesChanged, if necessary. Note that it does not process them further,
+this is the job of the \ref rcApiActions and \ref rcApiProperties modules, respectively.
+When the connection to the server is lost (i.e. the polling returned an error), the \c serverDataError event is sent.
+
+The other main function is that it provides the \c postCmd method, which is a simple wrapper around an AJAX POST call
+that is intended to be used by other modules to send commands to the server. It also includes the \c tr method used
+for [translating JS strings](\ref remoteControlWebTranslation).
+
+Finally, this module also processes the [plugin-specific sections](\ref remoteControlWebStelplugin) on load.
+
+\subsubsection rcApiActions api/actions
+
+Processes StelAction related events. Whenever it detects that boolean StelAction was changed, it emits two events:
+- A generic event \c stelActionChanged with the \c actionId as a parameter. This can be used when interested in ALL action changes
+    (like for a action list)
+- A specialied event `stelActionChanged:<actionId>` with the \c actionId as part of the event name.
+    This can be used when listening for a specific action only.
+
+On the first load of the interface, it loads a list of all actions (using the ActionService \c list operation) and emits the
+\c actionListLoaded event when this data is available.
+
+To execute/toggle an action, it provides the public \c executeAction method, which just requires the action ID as parameter.
+To find out whether an action is currently checked, use the \c isChecked method.
+
+\subsubsection rcApiFlags api/flags
+
+This is a utility module, which can be used to implement checkboxes for enum flag types, where each checkbox sets a
+specific bit of a single value. The module should be constructed with \c new, the constructor takes the parent element of a list of
+checkboxes (\c input of type checkbox) and a method which is called back when the internal value changes (i.e. the user clicks a checkbox). It provides the
+\c setValue method to set the current value and check the correct checkboxes. The bit value of each \c input should be specified
+as its \p value property, in hexadecimal string format (for example `0x0004`)
+
+\subsubsection rcApiLocation api/location
+
+Module which connects to the LocationService and the LocationSearchService.
+It emits the following events whenever the specified field changed:
+\c planetChanged,\c nameChanged, \c countryChanged, \c altitudeChanged, \c latitudeChanged, \c longitudeChanged, \c positionChanged (emitted when either lat or lon changed)
+
+It also has \c set methods for these fields.
+Furthermore, it provides \c performLocationSearch, which searches the predefined locations for a specific search string,
+and \c performNearbySearch, which searches predefined locations near a given lat/lon on the current planet.
+These methods take a callback parameter to notify the caller of the results.
+The \c setLocationById method can then be used to set the location to a result of these 2 methods.
+
+It also provides a \c loadCountryList and a \c loadPlanetList which load the specified lists and return the results with a callback.
+
+\subsubsection rcApiProperties api/properties
+
+Processes StelProperty related things. Like the \ref rcApiActions module, it emits 2 events when it detects a StelProperty changed:
+- A generic event \c stelPropertyChanged with the \c propertyId as a parameter. This can be used when interested in ALL property changes
+    (like for a list)
+- A specialied event `stelPropertyChanged:<propertyId>` with the \c propertyId as part of the event name.
+    This can be used when listening for a specific property only.
+
+It provides \c getStelProp and \c setStelProp methods which retrieve and set the value of a StelProperty,
+and also a \c setStelPropQueued convenience method to batch multiple fast interface changes (e.g. through a slider or spinner)
+into a single \c setStelProp call which is only executed after a small time has passed with no changes.
+
+It also emits the \c propertyListLoaded event when it first loads the full list of StelProperties with their type information.
+
+\subsubsection rcApiScripts api/scripts
+
+This module handles script execution (i.e. connection to the ScriptService). It provides the following methods:
+- \c loadScriptList - loads the list of all scripts, takes a callback to return this data
+- \c runScript - runs the specified script id
+- \c runDirectScript - directly runs the given script code
+- \c stopScript - stops a currently running script
+
+It also emits the \c activeScriptChanged event whenever it detects that the current script has changed or started/stopped
+
+\subsubsection rcApiSearch api/search
+
+Implements object search functionality, connecting to the ObjectService and the SimbadService. The following methods are provided:
+- \c loadObjectTypes - loads the list of object types, takes a callback
+- \c loadObjectList - loads the list of objects of a specified type, can return english or localized names
+- \c selectObjectByName - selects the object that matches the specified name
+- \c focusPosition - focuses the given coordinate (array of 3 numbers) in the J2000 frame
+- \c performSearch - performs an object lookup in Stellarium's internal catalog and Simbad. In addition to the search string,
+    2 callbacks must be given as parameters: one for the catalog results, and one for the simbad results. If a search is currently running,
+    it is aborted (meaning the callbacks won't be called for the old searches), allowing this method to be repeatedly called while
+    the user is typing. The Simbad search is only started after a small interval without typing, to reduce the overhead of the
+    external web requests.
+
+While a search is running, it emits \c simbadStateChange events to notify the UI of the current state of the lookup.
+
+\subsubsection rcApiTime api/time
+
+Contains time-related functions and conversions, similar to what StelCore does. This module keeps it's own sense of Stellariums current time,
+to provide an updated interface even between the \c status polls of the \ref rcApiRemotecontrol module.
+
+It provides following methods:
+- \c getCurrentTime - calculates the best guess to the current Stellarium simulation time. This depends on the information received with the last \c status poll,
+    the time since the last data was received and the time the last time change was performed
+- \c isRealTimeSpeed - true if the simulation time currently flows at the same rate as the real time (1 sec per sec).
+- \c jdayToDate - converts a jDay (single number) to Day/Month/Year format, this returns a JS object with \p day, \p month, \p year fields instead
+    of a JS Date object because of its limitations.
+- \c jdayToDate - returns the time component of the given jDay, as a JS object with \p hour, \p minute, \p second fields
+- \c dateTimeToJd - converts a time given in Y/M/D-H/MIN/S format to a jDay
+- \c dateTimeForRollover - like StelUtils::changeDateTimeForRollover
+- \c isTimeUpdatePending - if true, there is a time change which has not yet been sent to the server
+- \c increaseTimeRate - increases the Stellarium simulation time rate (like StelCore::increaseTimeSpeed)
+- \c decreaseTimeRate - decreases the Stellarium simulation time rate (like StelCore::decreaseTimeSpeed)
+- \c isRewind - returns true if the time currently flows backwards (at least at -0.99 sec / sec)
+- \c isFastForward - returns true if time currently is flowing faster than real time
+- \c isTimeNow - returns true if the current simulation time is very close to the actual system time
+- \c isTimeStopped - returns true if the simulation time rate is zero
+- \c togglePlayPause - toggles between timerates 0 and 1 sec/sec
+- \c setDateNow - sets the simulation time to the current system time
+- \c setJDay - sets the time to the specified JDay
+- \c setTimeFromTimeObj - sets the time from a "time object", containing both date and time in the following format
+\code
+{
+    date : {
+        year, month, day
+    },
+    time : {
+        hour, minute, second
+    }
+}
+\endcode
+- \c getTimeData - returns the current time data, containing the last response from the server (including timezone info, etc)
+    The event \c timeDataUpdated is sent whenever this changes.
+
+\subsubsection rcApiUpdatequeue api/updatequeue
+
+This implements a simple update queue class that updates the server after a specified interval if the user does nothing else inbetween.
+This is used to limit the rate at which updates are sent to the server. The \c UpdateQueue constructor takes an url and a callback for the result,
+and when the interface needs to send an update, \c enqueue can be called with the data to send.
+
+\subsubsection rcApiViewcontrol api/viewcontrol
+
+Implements the %FOV access and viewport movement methods. Use \c setFOV to set the %FOV, the \c fovChanged event is sent whenever the %FOV changes.
+There are \c moveRight, \c moveUp, \c moveUpRight etc. methods that allow the user to move the viewport. To stop the movement, use \c stopMovement.
+
+\subsubsection rcApiViewoptions api/viewoptions
+
+Implements the management of the current projection, landscape and skyculture. \c projectionChanged, \c landscapeChanged and \c skycultureChanged are emitted whenever they change.
+It also has \c loadProjectionList, \c setProjection, etc.
+
+\subsubsection rcUiMainui ui/mainui
+
+This is the main module of the interface. It lists all the other UI modules as a dependency.
+It starts of the update look of the \c rcApiRemotecontrol module, handles the automatic generation
+of the [special controls](\ref remoteControlWebUIClasses) and [connection of StelProperty controls](\ref remoteControlWebstelproperty),
+and performs smooth animation of the time controls. It also keeps track of the current interface tab the user is on, and
+restores it when the page is reloaded.
+
+\subsubsection rcUiActions ui/actions
+
+Implements the action list and the [StelAction buttons and checkboxes](\ref remoteControlWebstelaction).
+
+\subsubsection rcUiCombobox ui/combobox
+
+Implements a custom combobox control, on top of the jQuery UI \c autocomplete control. This is used for example in the location controls.
+
+\subsubsection rcUiJqueryuifixes ui/jqueryuifixes
+
+Includes some fixes to the standard jQuery UI control classes, especially for the spinner, to provide a unified
+change event, prevent non-numeric input and better touch support. This module is automatically loaded whenever other modules
+load the "jquery-ui" module.
+
+\subsubsection rcUiLocation ui/location
+
+Implements the location controls, such as the map which can be clicked and the comboboxes for the current location.
+
+\subsubsection rcUiScripts ui/scripts
+
+Implements the script list and shows the active script.
+
+\subsubsection rcUiSearch ui/search
+
+Implements the object search panel and the quick select buttons.
+
+\subsubsection rcUiTime ui/time
+
+Implements the time controls, the \c updateTimeDisplay method is called repeatedly as an animation by the \ref rcUiMainui module.
+
+\subsubsection rcUiViewcontrol ui/viewcontrol
+
+Implements the %FOV slider and the "virtual joystick" for the viewport movement.
+
+\subsubsection rcUiViewoptions ui/viewoptions
+
+Implements the projection, landscape and skyculture lists, and some minor things related to other view options.
 */
