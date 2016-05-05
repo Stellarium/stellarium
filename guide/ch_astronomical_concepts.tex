@@ -306,14 +306,14 @@ shortcut if you frequently use these coordinates
 \label{sec:Concepts:Distance}
 
 As \name{Douglas Adams} pointed out in the Hitchhiker's Guide to the
-Galaxy{[}hhg{]},
-
+Galaxy{\cite{THHG}},
 \begin{quote}
-  Space is big. You just won't believe how vastly, hugely,
+  Space [\ldots] is big. Really big. You just won't believe how vastly, hugely,
   mind-bogglingly big it is. I mean, you may think it's a long way
-  down the road to the chemist's, but that's just peanuts to
-  space.{[}hhg{]}
+  down the road to the chemist, but that's just peanuts to
+  space.[p.76]
 \end{quote}
+%
 Astronomers use a variety of units for distance that make sense in the
 context of the mind-boggling vastness of space.
 
@@ -391,6 +391,44 @@ revolution in the sky. Astronomers find \indexterm{sidereal time}
 useful when observing. This is the Right Ascension which is currently
 passing the meridian line.  When visiting observatories, look out for
 doctored alarm clocks that have been set to run in sidereal time!
+
+\subsection{Julian Day Number}
+\label{sec:Concepts:JulianDay}
+
+In the 19th century, astronomer \name{John Herschel} introduced the use of
+\indexterm{Julian Day} numbers (invented around the time of the Gregorian calendar
+reform). This is a simple continuous day count starting on January 1, -4712
+(4713 BC). There are no years, months etc., and the integral day
+number switches at noon, so during a single night of observation (in
+Europe) the date never changes. 
+
+The fractional part of the number is just the fraction of day that has
+elapsed since last noon. Given that a day has 86400~seconds, we should
+give a JD with 5 decimal places to capture the nearest second.
+
+This causes a problem for modern computers: even a ``double precision
+float'' can keep only about 13 decimal places. More than 2.4 million
+days have passed, so that e.g. January 1, 2000, 12:00UT is 2451545.0,
+which is an accurately storable number with 7 decimal places, but 12:34:56UT is computed as
+2451545.02426. A more accurate result would yield
+2451545.024259259259... So, for a field where sub-second accuracy
+became crucial like spacecraft operations, the \indexterm{Modified
+  Julian Date} (MJD) has been introduced. It is simply
+\begin{equation}
+  \label{eq:MJD}
+  MJD=JD-2400000.5. 
+\end{equation}
+This means, days start at midnight, and the (constant, in our era)
+decimal places of the ``big numbers'' at the begin of the number have
+been traded in for more decimal places at the end. 
+
+Don't put your expectations too high when you see MJD displayed
+(section~\ref{sec:gui:date}): Stellarium uses a double-precision
+floating point number for JD for internal timekeeping, and Stellarium's
+display of MJD is simply computed from it. So you cannot set temporal
+increments smaller than a second, and it hardly would make sense to
+expect more accuracy from the simulation algorithms.
+
 
 %\subsubsection{\texorpdfstring{$\mathbf{\Delta T}$}{Delta T}}
 \subsubsection{Delta T}
@@ -613,17 +651,16 @@ The following list describes sources and a few details about the models for $\De
   addendum~\cite{2005JHA....36..339M}. Valid range of usage: between
   years -1000 and 2000. $\dot{n}=-26.0''/\cy^2$.
 
-\item[Espenak \& Meeus (2006).] This solution by F. Espenak and
-  J. Meeus, based on Morrison \& Stephenson~\cite{2004JHA....35..327M}
-  and a polynomial fit through tabulated values for 1600-2000, is used
-  for the NASA Eclipse Web
-  Site\footnote{\url{http://eclipse.gsfc.nasa.gov/eclipse.html}} and
-  in their ``Five Millennium Canon of Solar Eclipses: -1900 to
+\item[Espenak \& Meeus (2006).] This solution\footnote{This solution
+    is used by default.} by F. Espenak and J. Meeus, based on Morrison
+  \& Stephenson~\cite{2004JHA....35..327M} and a polynomial fit
+  through tabulated values for 1600-2000, is used for the NASA Eclipse
+  Web Site\footnote{\url{http://eclipse.gsfc.nasa.gov/eclipse.html}}
+  and in their ``Five Millennium Canon of Solar Eclipses: -1900 to
   +3000''~\cite{Espenak-Meeus:2006}. This formula is also used in the
   solar, lunar and planetary ephemeris program \program{SOLEX}. Valid
   range of usage: between years -1999 and
-  3000. $\dot{n}=-25.858''/\cy^2$\footnote{This solution is used by
-    default.}.
+  3000. $\dot{n}=-25.858''/\cy^2$.
 
 \item[Reijs (2006).] From the Length of Day (LOD; as determined by
   Stephenson \& Morrison~\cite{2004JHA....35..327M}), Victor Reijs
