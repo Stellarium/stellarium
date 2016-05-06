@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 13:06+0700\n"
-"PO-Revision-Date: 2016-05-03 08:38+0000\n"
+"PO-Revision-Date: 2016-05-06 03:21+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-04 05:28+0000\n"
+"X-Launchpad-Export-Date: 2016-05-06 04:33+0000\n"
 "X-Generator: Launchpad (build 17995)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:140 src/core/modules/StarMgr.cpp:378
@@ -8338,6 +8338,9 @@ msgid ""
 "removed. There is no longer a way to control a telescope with Stellarium "
 "without this plug-in."
 msgstr ""
+"К версии 0.10.5 оригинальная функция управления телескопом была удалена. На "
+"данный момент нет способа управления телескопом из Stellarium без этого "
+"плагина."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:309
 msgid ""
@@ -8503,18 +8506,24 @@ msgid ""
 "<b>local, Stellarium</b> means a DIRECT connection to the telescope (see "
 "%1above%2);"
 msgstr ""
+"<b>локальное, Stellarium</b> означает ПРЯМОЕ подключение к телескопу (см "
+"%1выше%2);"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:331
 msgid ""
 "<b>local, external</b> means an INDIRECT connection to a program running on "
 "the same computer;"
 msgstr ""
+"<b>локальное, внешнее ПО</b> означает НЕПРЯМОЕ подключение к программе, "
+"работающей на этом же компьютере;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:332
 msgid ""
 "<b>remote, unknown</b> means an INDIRECT connection over a network to a "
 "remote machine."
 msgstr ""
+"<b>локальное, неизвестное</b>  означает НЕПРЯМОЕ подключение через сеть в "
+"удалённой машине."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:333
 msgid ""
@@ -8523,6 +8532,10 @@ msgid ""
 "the <b>Configure</b> button. In both cases, a telescope connection "
 "configuration window will open."
 msgstr ""
+"Чтобы настроить новое подключение телескопа, нажмите кнопку <b>Добавить</b>. "
+"Чтобы изменить конфигурацию существующего подключения, выберите его в списке "
+"и нажмите кнопку <b>Настройка</ b>. В обоих случаях откроется окно "
+"конфигурации подключения телескопа."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:339
 #, qt-format
@@ -8642,17 +8655,23 @@ msgid ""
 "If you are using an USB cable, the default serial port of your telescope "
 "most probably is not in the list of suggestions."
 msgstr ""
+"Если вы используете кабель USB, то скорее всего последовательный порт по "
+"умолчанию вашего телескопа не находится в списке предложений."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:362
 msgid ""
 "To list all valid serial port names in Mac OS X, open a terminal and type:"
 msgstr ""
+"Чтобы получить список всех допустимых имен последовательного порта в Mac OS "
+"X, откройте терминал и введите следующую команду:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:363
 msgid ""
 "This will list all devices, the full name of your serial port should be "
 "somewhere in the list (for example, '/dev/cu.usbserial-FTDFZVMK')."
 msgstr ""
+"Это будет список всех устройств и где-то в списке должно быть полное имя "
+"вашего последовательного порта (например, '/dev/cu.usbserial-FTDFZVMK')."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:364
 #, qt-format
@@ -8699,6 +8718,8 @@ msgid ""
 "In this case, it should be the name or IP address of the computer that runs "
 "a program that runs the telescope."
 msgstr ""
+"В этом случае, это должно быть имя или IP-адрес компьютера, на котором "
+"работает управляющая телескопом программа."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:378
 msgid ""
