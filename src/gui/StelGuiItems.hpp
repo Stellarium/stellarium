@@ -111,6 +111,8 @@ public:
 	//! Set the background pixmap of the button.
 	void setBackgroundPixmap(const QPixmap& newBackground);
 
+	void setFocusOnSky(bool b) { flagChangeFocus=b; }
+
 signals:
 	//! Triggered when the button state changes
 	void toggled(bool);
@@ -150,6 +152,7 @@ private:
 	QPixmap pixBackground;
 
 	int checked;
+	bool flagChangeFocus;
 
 	QTimeLine* timeLine;
 	class StelAction* action;
