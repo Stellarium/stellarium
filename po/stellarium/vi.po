@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-26 22:45+0700\n"
-"PO-Revision-Date: 2016-05-01 02:37+0000\n"
+"POT-Creation-Date: 2016-05-03 13:06+0700\n"
+"PO-Revision-Date: 2016-05-05 07:33+0000\n"
 "Last-Translator: Lê Văn Bách <levanbach1994ag@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-01 05:13+0000\n"
+"X-Launchpad-Export-Date: 2016-05-06 04:33+0000\n"
 "X-Generator: Launchpad (build 17995)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:140 src/core/modules/StarMgr.cpp:378
@@ -3662,20 +3662,20 @@ msgstr ""
 
 #: src/translations.h:339
 msgid ""
-"This script help you make an excursion around 20 fun double stars. The list "
+"This script helps you make an excursion around 20 fun double stars. The list "
 "has been collected by Jerry Lodriguss and published in Sky & Telescope "
 "09/2014. Data taken from his website, http://www.astropix.com/doubles/"
 msgstr ""
-"Kịch bản này giúp bạn tạo một chuyến tham quan xung quanh 20 ngôi sao đôi "
-"vui vẻ. Danh sách này được sưu tầm bởi Jerry Lodriguss và xuất bản trong Sky "
-"& Telescope 09/2014. Dữ liệu được lấy từ trang của anh ấy, "
+"Kịch bản này giúp bạn tạo một hành trình vòng quanh 20 ngôi sao đôi thú vị. "
+"Danh sách được sưu tầm bởi Jerry Lodriguss và xuất được xuất bản trong Sky & "
+"Telescope 09/2014. Dữ liệu được lấy từ website của ông ấy, "
 "http://www.astropix.com/doubles/"
 
 #: src/translations.h:340
-msgid "This script help you make an excursion around largest known stars."
+msgid "This script helps you make an excursion around largest known stars."
 msgstr ""
-"kịch bản này giúp bạn thực hiện một chuyến tham quan quanh các ngôi sao lớn "
-"nhất được biết đến."
+"Kịch bản này giúp bạn tạo một hành trình vòng quanh những ngôi sao lớn nhất "
+"đã được biết."
 
 #: src/translations.h:341
 msgid "A tour around objects from the Herschel 400 Catalogue"
@@ -8127,6 +8127,9 @@ msgid ""
 "Stellarium's code (the client side of Stellarium's original telescope "
 "control feature);"
 msgstr ""
+"Các lớp Telescope, TelescopeDummy, TelescopeTcp và TelescopeMgr trong mã của "
+"Stellarium (phía khách của tính năng điều khiển kính thiên văn gốc của "
+"Stellarium);"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:260
 msgid "the telescope server core code (licensed under the LGPL)"
@@ -8387,6 +8390,8 @@ msgid ""
 "Most older telescopes use cables that connect to a %1serial port%2 (RS-232), "
 "the newer ones use %3USB%4 (Universal Serial Bus)."
 msgstr ""
+"Hầu hết những kính thiên văn cũ hơn sử dụng cáp kết nối tới một %1cổng nối "
+"tiếp%2 (RS-232), những cái mới hơn sử dụng %3USB%4 (Universal Serial Bus)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:315
 msgid ""
@@ -8729,10 +8734,10 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:380
 msgid ""
 "Mark the 'Use field of view indicators' option, then enter a list of values "
-"separated with comas in the field below."
+"separated with commas in the field below."
 msgstr ""
-"Đánh dấu tùy chọn 'Sử dụng chỉ số trường nhìn', sau đó  nhập một danh sách "
-"giá trị tách rời với dấu phẩy trong phạm vi bên dưới."
+"Đánh dấu tùy chọn 'Sử dụng chỉ số trường nhìn', sau đó nhập danh sách các "
+"giá trị tách rời bởi dấu phẩy trong trường bên dưới."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
 msgid "The values are interpreted as degrees of arc."
@@ -8958,6 +8963,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:421
 msgid "Argo Navis is a 'Digital Telescope Computer' by Wildcard Innovations."
 msgstr ""
+"Argo Navis là một 'Máy tính Kính thiên văn Số' bởi sáng kiến Wildcard."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:422
 msgid ""
@@ -8966,6 +8972,10 @@ msgid ""
 "uses a computer to find targets and human power to move the telescope "
 "itself)."
 msgstr ""
+"Nó là một vòng tròn thiết lập kỹ thuật số tiên tiến có thể biến một kính "
+"thiên văn thông thường (ví dụ, một cái dobsonian) thành một  kính thiên văn "
+"\"Push To'' (một kính thiên văn có sử dụng một máy tính để tìm mục tiêu và "
+"nguồn nhân lực để tự di chuyển các kính thiên văn)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:423
 #, qt-format
@@ -8973,6 +8983,8 @@ msgid ""
 "Just don't forget to set it to Meade compatibility mode and set the baud "
 "rate to 9600B%1."
 msgstr ""
+"Chỉ cần đừng quên cài đặt nó vào  chế độ tương thích Meade và thiết lập tốc "
+"độ truyền đến 9600B%1."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:427
 msgid ""
@@ -8982,6 +8994,12 @@ msgid ""
 "will react in the same way as the reticle of a real telescope controlled by "
 "the plug-in."
 msgstr ""
+"Nếu bạn muốn kiểm tra phần bổ trợ này mà không có một thiết bị thực tế kết "
+"nối với máy tính, hãy chọn <b>Không có gì, chỉ là một cái mô phỏng  (một "
+"đường chữ thập di chuyển)</b> trong <b>Kính thiên văn được kiểm soát "
+"bởi:</b> . Nó sẽ hiển thị một đường chữ thập kính thiên văn rằng sẽ phản ứng "
+"theo cách tương tự như đường chữ thập của kính thiên văn thực sự được kiểm "
+"soát bởi phần bổ trợ."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:428
 #, qt-format
@@ -8989,6 +9007,8 @@ msgid ""
 "See the section above about %1field of view indicators%2 for a possible "
 "practical application (emulating 'Telrad' circles)."
 msgstr ""
+"Xem phần ở trên về %1chỉ số trường nhìn%2 cho một ứng dụng thực tế khả thi "
+"(mô phỏng vòng tròn 'Telgrad')."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:429
 #, qt-format
@@ -8996,6 +9016,8 @@ msgid ""
 "This feature is equivalent to the 'Dummy' type of telescope supported by "
 "%1Stellarium's original telescope control feature%2."
 msgstr ""
+"Tính năng này thì tương đương với loại 'Giả' của kính thiên văn được hỗ trợ "
+"bởi %1tính năng điều khiển kính thiên văn gốc của Stellarium%2."
 
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:446
