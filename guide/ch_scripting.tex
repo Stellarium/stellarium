@@ -37,7 +37,7 @@ debugging output is visible.
 \section{Includes}
 \label{sec:scripting:includes}
 
-Stellarium provides mechanism for splitting scripts into different
+Stellarium provides a mechanism for splitting scripts into different
 files. Typical functions or lists of variables can be stored in
 separate \file{.inc} files and used within other scripts through the
 \textbf{include()} command:
@@ -73,33 +73,162 @@ LabelMgr.deleteLabel(label);
 
 \section{Retrograde motion of Mars}
 \label{sec:scripting:RetrogradeMotionOfMars}
-A best way begin writing of scripts --- to set for itself a specific goal and try to achieve it with the help of few simple steps. Any complex script can split on simple parts or tasks, which may solve any newbies in scripting. 
+A good way begin writing of scripts: set yourself a specific
+goal and try to achieve it with the help of few simple steps. Any
+complex script can be split into simple parts or tasks, which may solve any
+newbie problems in scripting.
 
 Let me explain it with examples.
 
-Imagine that you have set a goal to make the demonstration is very beautiful, but long enough phenomenon --- the retrograde motion of the planet Mars (Fig.~\ref{fig:scripting:mars2005}). 
+Imagine that you have set a goal to make a demonstration of a  very
+beautiful, but longish phenomenon --- the retrograde motion of the
+planet Mars (Fig.~\ref{fig:Mars2005}).
 
-\begin{figure}[ht]
-\centering\includegraphics[width=300px]{Mars2005_tezel.jpg}
-\label{fig:scripting:mars2005}
-\caption{Retrograde motion of Mars in 2005. Credit \& Copyright: Tunc Tezel --- APOD: 2006 April 22 -- Z is for Mars.}
+\begin{figure}[tb]
+\centering\includegraphics[width=0.8\linewidth]{Mars2005_tezel.jpg}
+\caption{Retrograde motion of Mars in 2005. {\small(Credit \& Copyright: Tunc Tezel --- APOD: 2006 April 22 -- Z is for Mars.)}}
+\label{fig:Mars2005}
 \end{figure}
 
 \subsection{Script header...}
-Any ``complex'' script contains a few lines in first part of file, which contains an important data for humans --- name of script and him description --- and some rules for Stellarium.
+Any ``complex'' script contains a few lines in the first part 
+of the file, which contains important data for humans --- the 
+name of the script and its description --- and some rules for 
+Stellarium.
 
 \begin{script}
 //
 // Name: Retrograde motion of Mars
-// Author: Alexander Wolf
+// Author: John Doe
 // License: Public Domain
 // Version: 1.0
 // Description: A demo of retrograde motion of Mars.
 //
 \end{script}
-.....
+
+\subsection{A body of script...}
+At the first stage of writing of the script for demo of 
+retrograde motion of Mars we should set some limits for 
+our demo. For example we want see motion of Mars every 
+day during 250 days since $1^{th}$ October 2009. 
+Choosing for value of field of view and of the coordinates 
+of the center of the screen should be done at the this 
+stage also. 
+
+Let's add few lines of code into the script after header 
+and run it:
 \begin{script}
-core.setJD(2453552.0); // July 1, 2005
+core.setDate("2009-10-01T10:00:00");
+core.moveToRaDec("08h44m41s", "+18d09m13s",1);
+StelMovementMgr.zoomTo(40, 1);
+for (i=0; i<250; i++)
+{
+      core.setDate("+ 1 days");
+      core.wait(0.2);
+}
+\end{script}
+
+OK, Stellarium is doing something, but what exactly he 
+doing? The ground and atmosphere is enabled and any 
+motion of Mars is invisible. Let's add an another few 
+lines into the script (hiding the landscape and atmosphere) 
+after setting date and time:
+
+\begin{script}
+LandscapeMgr.setFlagLandscape(false);
+LandscapeMgr.setFlagAtmosphere(false);
+\end{script}
+
+Whole sky is moving now --- let's lock it! Add this line 
+after previous lines:
+\begin{script}
+StelMovementMgr.setFlagLockEquPos(true);
+\end{script}
+
+It looks better now, but what about cardinal points, 
+elements of GUI and some ``glitch of movement''? 
+Let's change the script:
+\begin{script}
+core.setDate("2009-10-01T10:00:00");
+LandscapeMgr.setFlagCardinalsPoints(false);
+LandscapeMgr.setFlagLandscape(false);
+LandscapeMgr.setFlagAtmosphere(false);
+core.setGuiVisible(false);
+core.moveToRaDec("08h44m41s", "+18d09m13s",1);
+StelMovementMgr.setFlagLockEquPos(true);
+StelMovementMgr.zoomTo(40, 1);
+core.wait(2);
+for (i=0; i<250; i++)
+{
+      core.setDate("+ 1 days");
+      core.wait(0.2);
+}
+core.setGuiVisible(true);
+\end{script}
+
+It's better, but let's draw the ``path'' of Mars! Add 
+those line before loop:
+\begin{script}
+core.selectObjectByName("Mars", false);
+SolarSystem.setFlagIsolatedTrails(true);
+SolarSystem.setFlagTrails(true);
+\end{script}
+
+Hmm... let's add few strings with info for users (insert 
+those lines after header):
+\begin{script}
+var color = "#ff9900";
+var info = LabelMgr.labelScreen("A motion of Mars", 20, 20, 
+           false, 24, color);
+var apx = LabelMgr.labelScreen("Setup best viewing angle, FOV 
+          and date/time.", 20, 50, false, 18, color);
+LabelMgr.setLabelShow(info, true);
+LabelMgr.setLabelShow(apx, true);
+core.wait(2);
+LabelMgr.setLabelShow(apx, false);
+\end{script}
+
+Let's add some improvements to display info for users --- 
+change in the loop:
+\begin{script}
+var label = LabelMgr.labelObject("  Normal motion, West to 
+            East", "Mars", true, 16, color, "SE");
+for (i=0; i<250; i++)
+{
+	core.setDate("+ 1 days");
+	if ((i % 10) == 0)
+	{
+		var strDate = "Day " + i;
+		LabelMgr.setLabelShow(apx, false);
+		var apx = LabelMgr.labelScreen(strDate, 20, 
+				  50, false, 16, color);
+		LabelMgr.setLabelShow(apx, true);
+	}
+	if (i == 75)
+	{
+		LabelMgr.deleteLabel(label);
+		label = LabelMgr.labelObject("  Retrograde or 
+		        opposite motion begins", "Mars", 
+		        true, 16, color, "SE");
+		core.wait(2);
+		LabelMgr.deleteLabel(label);
+		label = LabelMgr.labelObject("  Retrograde 
+		        motion", "Mars", true, 16, color, 
+		        "SE");
+	}
+	if (i == 160)
+	{
+		LabelMgr.deleteLabel(label);
+		label = LabelMgr.labelObject("  Normal motion 
+		        returns", "Mars", true, 16, color, 
+		        "SE");
+		core.wait(2);
+		LabelMgr.deleteLabel(label);
+		label = LabelMgr.labelObject("  Normal motion", 
+		        "Mars", true, 16, color, "SE");
+	}
+	core.wait(0.2);
+}
 \end{script}
 
 \section{More Examples}
