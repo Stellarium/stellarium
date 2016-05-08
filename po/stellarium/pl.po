@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-26 22:45+0700\n"
-"PO-Revision-Date: 2016-04-01 17:45+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"POT-Creation-Date: 2016-05-03 13:06+0700\n"
+"PO-Revision-Date: 2016-05-06 00:32+0000\n"
+"Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-04-27 05:32+0000\n"
-"X-Generator: Launchpad (build 17995)\n"
+"X-Launchpad-Export-Date: 2016-05-07 04:32+0000\n"
+"X-Generator: Launchpad (build 18025)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -1603,6 +1603,9 @@ msgid ""
 "preserves direction and shapes but distorts size, in an increasing degree "
 "away from the equator."
 msgstr ""
+"Odwzorowanie Merkatora jest jednym z najczęściej używanych odwzorowań mapy "
+"świata. Zachowuje kierunki i kształty, ale zniekształca rozmiary, coraz "
+"bardziej w miarę oddalania się od równika."
 
 #: src/core/StelProjectorClasses.cpp:410
 msgid "Orthographic"
@@ -1628,7 +1631,7 @@ msgid ""
 msgstr ""
 "Odwzorowanie sinusoidalne jest <i>pseudowalcowym odwzorowaniem "
 "równopowierzchniowym<i>, czasami nazywanym odwzorowaniem Sansona-Flamsteeda "
-"lub odwzorowaniem równopowierzchniowym Mercatora."
+"lub odwzorowaniem równopowierzchniowym Merkatora."
 
 #: src/core/StelObject.cpp:114
 msgctxt "coordinates for current epoch"
@@ -2269,7 +2272,7 @@ msgstr "Okno AstroCalc"
 
 #: src/gui/StelGui.cpp:220
 msgid "Bookmarks window"
-msgstr ""
+msgstr "Okno zakładek"
 
 #: src/gui/StelGui.cpp:221
 msgid "Copy selected object information to clipboard"
@@ -2663,7 +2666,7 @@ msgstr "Typ"
 #: src/gui/AstroCalcDialog.cpp:161
 #, qt-format
 msgid "Positions on %1"
-msgstr ""
+msgstr "Położenie obiektów - %1"
 
 #: src/gui/AstroCalcDialog.cpp:252
 msgid "JD"
@@ -2776,7 +2779,7 @@ msgstr ""
 
 #: src/gui/BookmarksDialog.cpp:98
 msgid "Location of observer"
-msgstr ""
+msgstr "Lokalizacja obserwatora"
 
 #: src/StelMainView.cpp:462 src/StelMainView.cpp:477
 msgid ""
@@ -3408,7 +3411,7 @@ msgstr "Analemma"
 #. TRANSLATORS: Name of script
 #: src/translations.h:276
 msgid "Sky Culture Tour"
-msgstr "Wycieczka przedstawiająca kultury nieba"
+msgstr "Przegląd kultur nieba"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:278
@@ -3450,22 +3453,22 @@ msgstr "Ziemia i inne planety widziane z Ceres"
 #. TRANSLATORS: Name of script
 #: src/translations.h:292
 msgid "Messier Objects Tour"
-msgstr ""
+msgstr "Wycieczka po obiektach Messiera"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:294
 msgid "Binocular Highlights"
-msgstr ""
+msgstr "Atrakcje widoczne przez lornetkę"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:296
 msgid "20 Fun Naked-Eye Double Stars"
-msgstr ""
+msgstr "20 fajnych gwiazd podwójnych widocznych gołym okiem"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:298
 msgid "List of largest known stars"
-msgstr ""
+msgstr "Lista największych znanych gwiazd"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:300
@@ -3475,7 +3478,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:302
 msgid "Binosky: Deep Sky Objects for Binoculars"
-msgstr ""
+msgstr "Binosky: Obiekty głębokiego nieba widoczne przez lornetkę"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:304
@@ -3655,7 +3658,7 @@ msgstr ""
 
 #: src/translations.h:337
 msgid "A tour of Messier Objects"
-msgstr ""
+msgstr "Podróż po obiektach Messiera"
 
 #: src/translations.h:338
 msgid ""
@@ -3663,17 +3666,24 @@ msgid ""
 "binoculars. The data for the script are taken from the eponymous book by "
 "Gary Seronik."
 msgstr ""
+"Podróż po interesujących obiektach, możliwych do obserwowania przez "
+"lornetkę. Dane użyte w skrypcie pochodzą z tytułowej książki Gary'ego "
+"Seronika."
 
 #: src/translations.h:339
 msgid ""
-"This script help you make an excursion around 20 fun double stars. The list "
+"This script helps you make an excursion around 20 fun double stars. The list "
 "has been collected by Jerry Lodriguss and published in Sky & Telescope "
 "09/2014. Data taken from his website, http://www.astropix.com/doubles/"
 msgstr ""
+"Ten skrypt zabierze cię na wycieczkę wokół 20 fajnych gwiazd podwójnych. Ich "
+"lista została zebrana przez Jerry'ego Lodrigussa i opublikowana w \"Sky & "
+"Telescope\" nr 09/2014. Dane pochodzą ze strony autora: "
+"http://www.astropix.com/doubles/"
 
 #: src/translations.h:340
-msgid "This script help you make an excursion around largest known stars."
-msgstr ""
+msgid "This script helps you make an excursion around largest known stars."
+msgstr "Ten skrypt umożliwia wycieczkę wokół największych znanych gwiazd."
 
 #: src/translations.h:341
 msgid "A tour around objects from the Herschel 400 Catalogue"
@@ -3685,6 +3695,9 @@ msgid ""
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
 "Right Ascension (2000.0)."
 msgstr ""
+"Ben Crowell stworzył Binosky - listę obiektów głębokiego nieba do obserwacji "
+"przez lornetkę. Skrypt zawiera listę tych 31 obiektów, uporządkowaną wg "
+"rektascensji (2000.0)."
 
 #: src/translations.h:343
 msgid ""
@@ -7060,7 +7073,7 @@ msgid ""
 msgstr ""
 "Możliwe jest wyświetlenie lub ukrycie celownika Telrad; jest to możliwe pod "
 "warunkiem, że nie jest włączony Widok przez okular. Funkcja ta wyświetla "
-"trzy współosiowe okręgi: 0.5%1, 2.0%1 i 4.0%1, które odpowiadają temu, co "
+"trzy współśrodkowe okręgi: 0.5%1, 2.0%1 i 4.0%1, które odpowiadają temu, co "
 "można zobaczyć gołym okiem przez celownik Telrad (lub podobny)."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:564
@@ -7287,7 +7300,7 @@ msgstr "Odwrócenie w pionie"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1229
 msgid "Equatorial Mount"
-msgstr "Montaż równikowy"
+msgstr "Montaż paralaktyczny"
 
 #: plugins/Satellites/src/Satellites.cpp:68
 #: plugins/Satellites/src/Satellites.cpp:142
@@ -7964,7 +7977,7 @@ msgstr "Grupy:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:776
 msgid "TLE set:"
-msgstr "Zapis TLE:"
+msgstr "Zestaw TLE:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:778
 msgid ""
@@ -8175,7 +8188,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
 msgid "Using this plug-in"
-msgstr ""
+msgstr "Używanie tej wtyczki"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:321
@@ -8269,6 +8282,11 @@ msgid ""
 "it is strongly recommended to avoid using the telescope control feature "
 "before sunset without appropriate protection."
 msgstr ""
+"Używając w czasie dnia funkcji obracania teleskopu możesz niechcący "
+"spowodować, że podczas ustawiania się na żądany obiekt teleskop skieruje się "
+"w stronę słońca. Zdecydowanie zaleca się więc, aby unikać korzystania z "
+"automatycznego sterowania teleskopem przed zachodem słońca, chyba że "
+"stosowane jest odpowiednie zabezpieczenie przed słońcem."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:306
@@ -8529,6 +8547,8 @@ msgid ""
 "If you are using an USB cable, the default serial port of your telescope "
 "most probably is not in the list of suggestions."
 msgstr ""
+"Jeśli używasz kabla USB, to domyślny port szeregowy teleskopu prawdopodobnie "
+"nie znajduje się na liście propozycji."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:362
 msgid ""
@@ -8602,7 +8622,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:380
 msgid ""
 "Mark the 'Use field of view indicators' option, then enter a list of values "
-"separated with comas in the field below."
+"separated with commas in the field below."
 msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
@@ -9955,7 +9975,7 @@ msgstr "w Rosji"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:192
 #, qt-format
 msgid "Next update: %1 days"
-msgstr "Następna aktualizacji: %1 dni"
+msgstr "Następna aktualizacja: %1 dni"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:215
 msgid "Historical supernovae is updated"
@@ -11062,7 +11082,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
 msgid "update: 16 April 2012"
-msgstr "aktualizacji: 16 kwietnia 2012"
+msgstr "aktualizacja: 16 kwietnia 2012 r."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
 msgid "The Exoplanet Data Explorer"
@@ -11417,7 +11437,7 @@ msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:213
 msgid "No Cosmical rise/set."
-msgstr "Brak kosmicznego wschodu/zachodu."
+msgstr "No Cosmical rise/set."
 
 #: plugins/Observability/src/Observability.cpp:214
 msgid "Observable during the whole year."
@@ -11789,7 +11809,7 @@ msgstr "Rozmiar czcionki:"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:97
 msgid "The current catalog of Meteor Showers is invalid!"
-msgstr ""
+msgstr "Bieżący katalog wtyczki Deszcze meteorów jest nieprawidłowy!"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:562
@@ -11815,7 +11835,7 @@ msgstr "Pokaż okno wyszukiwania"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:259
 msgid "Using the default Meteor Showers catalog."
-msgstr ""
+msgstr "Zostanie użyty domyślny katalog wtyczki Deszcze meteorów."
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:566
 msgid ""
@@ -11833,16 +11853,30 @@ msgid ""
 "year.</li><li><b>Inactive:</b> the radiant is inactive for the current sky "
 "date.</li></ul></p>"
 msgstr ""
+"<p>Ta wtyczka umożliwia symulację okresowych deszczów meteorów i "
+"wyświetlanie znaczników wszystkich radiantów aktywnych i "
+"nieaktywnych.</p><p>Klikając raz na znaczniku radiantu możesz wyświetlić "
+"szczegóły jego położenia i aktywności. Większość danych używanych przez tę "
+"wtyczkę pochodzi z oficjalnego katalogu <a "
+"href=\"http://imo.net\">International Meteor Organization</a>.</p><p>Używane "
+"są trzy rodzaje znaczników:<ul><li><b>Potwierdzony:</b> radiant jest "
+"aktywny, a jego dane zostały potwierdzone. Jest to zatem historyczny "
+"(faktycznie występujący w przeszłości) lub przewidywany deszcz "
+"meteorów.</li><li><b>Ogólny:</b> radiant jest aktywny, ale jego dane nie "
+"zostały potwierdzone. Może więc w rzeczywistości występować, lecz nie mamy "
+"właściwych danych o jego aktywności dla bieżącego "
+"roku.</li><li><b>Nieaktywny:</b> radiant jest nieaktywny dla bieżącej "
+"daty.</li></ul></p>"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:128
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:451
 msgid "Confirmed"
-msgstr ""
+msgstr "Potwierdzony"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:132
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:443
 msgid "Generic"
-msgstr ""
+msgstr "Ogólny"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:524
 msgid "generic data"
@@ -11850,7 +11884,7 @@ msgstr "dane ogólne"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:528
 msgid "confirmed data"
-msgstr ""
+msgstr "potwierdzone dane"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:532
 msgid "inactive"
@@ -12355,6 +12389,10 @@ msgid ""
 "official <a href=\"http://imo.net\">International Meteor Organization</a> "
 "catalog."
 msgstr ""
+"Klikając raz na znaczniku radiantu możesz wyświetlić szczegóły jego "
+"położenia i aktywności. Większość danych używanych przez tę wtyczkę pochodzi "
+"z oficjalnego katalogu <a href=\"http://imo.net\">International Meteor "
+"Organization</a>."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:230
 msgid ""
@@ -12366,6 +12404,14 @@ msgid ""
 "activity for the current year.</li><li><b>Inactive:</b> the radiant is "
 "inactive for the current sky date.</li></ul></p>"
 msgstr ""
+"<p>Używane są trzy rodzaje znaczników:<ul><li><b>Potwierdzony:</b> radiant "
+"jest aktywny, a jego dane zostały potwierdzone. Jest to zatem historyczny "
+"(faktycznie występujący w przeszłości) lub przewidywany deszcz "
+"meteorów.</li><li><b>Ogólny:</b> radiant jest aktywny, ale jego dane nie "
+"zostały potwierdzone. Może więc w rzeczywistości występować, lecz nie mamy "
+"właściwych danych o jego aktywności dla bieżącego "
+"roku.</li><li><b>Nieaktywny:</b> radiant jest nieaktywny dla bieżącej "
+"daty.</li></ul></p>"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:252
 msgid "Terms"
@@ -12532,15 +12578,15 @@ msgstr "Ustawienia ogólne"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:428
 msgid "Enable plugin at startup"
-msgstr ""
+msgstr "Włącz wtyczkę przy uruchamianiu programu"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:429
 msgid "Show a button to enable/disable the plugin"
-msgstr ""
+msgstr "Pokazuj przycisk włączania/wyłączania wtyczki"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:430
 msgid "Show a button to open the search panel"
-msgstr ""
+msgstr "Pokazuj przycisk otwierający panel wyszukiwania"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:433
 msgid "Show radiant marker"
@@ -12576,7 +12622,7 @@ msgstr "Nieaktywny"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:449
 msgid "Active Radiant - Confirmed Data"
-msgstr ""
+msgstr "Aktywny radiant - potwierdzone dane"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:453
 msgid "Enable automatic updates"
@@ -12650,12 +12696,12 @@ msgstr "Az/Wys"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:205
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
-msgstr ""
+msgstr "Dł./szer. gal."
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:224
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat"
-msgstr ""
+msgstr "Dł./szer. ekl."
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:243
 msgctxt "abbreviated in the plugin"
@@ -12665,7 +12711,7 @@ msgstr "Dł./Szer. ekl. (J2000.0)"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:261
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
-msgstr ""
+msgstr "Kąt godz. / Dekl."
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:111
 msgid "Pointer Coordinates plug-in"
@@ -12697,7 +12743,7 @@ msgstr "Rektascensja/Deklinacja"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:167
 msgid "Ecliptic Longitude/Latitude"
-msgstr ""
+msgstr "Długość/szerokość ekliptyczna"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:168
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
@@ -12705,7 +12751,7 @@ msgstr "Długość/Szerokość ekliptyczna (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:170
 msgid "Galactic Longitude/Latitude"
-msgstr ""
+msgstr "Długość/szerokość galaktyczna"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:200
 msgid "Coordinates of custom position:"
