@@ -702,7 +702,7 @@ void StelGui::setFlagShowDecimalDegrees(bool b)
 	if (searchDialog->visible())
 	{
 		// Update format of input fields if Search Dialog is open
-		searchDialog->populateCoordinateAxis();
+		searchDialog->populateCoordinateAxis();		
 	}
 }
 

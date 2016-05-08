@@ -1,6 +1,6 @@
 %% Stellarium User Guide
 
-\chapter{Deep-Sky Objects}%\label{deep-sky-objects}
+\chapter{Deep-Sky Objects}
 \label{ch:DSO}
 
 
@@ -21,7 +21,7 @@ add a record to the \file{.../nebulae/default/textures.json} file. See
 section~\ref{sec:dso:modifyingTexturesJson} for details of the file format.
 
 
-\section{Stellarium DSO Catalog}%\label{stellarium-dso-catalog}
+\section{Stellarium DSO Catalog}
 \label{sec:dso:catalog}
 
 Stellarium's DSO Catalog contains over 14000 objects and is available
@@ -51,21 +51,22 @@ follow catalogues:
 \item[\textbf{IC}] Index Catalogue 
 \item[\textbf{M}] Messier Catalog
 \item[\textbf{C}] Caldwell Catalogue 
-\item[\textbf{B}] Barnard Catalogue 
-\item[\textbf{Sh2}] Sharpless Catalogue 
-\item[\textbf{VdB}] Van den Bergh Catalogue of reflection nebulae 
-\item[\textbf{RCW}]  A catalogue of H$\alpha$-emission regions in the southern Milky Way 
-\item[\textbf{LDN}]  Lynds' Catalogue of Dark Nebulae 
-\item[\textbf{LBN}]  Lynds' Catalogue of Bright Nebulae 
-\item[\textbf{Cr}] Collinder Catalogue 
-\item[\textbf{Mel}]  Melotte Catalogue of Deep Sky Objects 
+\item[\textbf{B}] Barnard Catalogue~\cite{1927cdos.book.....B} 
+\item[\textbf{Sh2}] Sharpless Catalogue~\cite{1959ApJS....4..257S} 
+\item[\textbf{VdB}] Van den Bergh Catalogue of reflection nebulae~\cite{1966AJ.....71..990V} 
+\item[\textbf{RCW}]  A catalogue of H$\alpha$-emission regions in the southern Milky Way~\cite{1960MNRAS.121..103R} 
+\item[\textbf{LDN}]  Lynds' Catalogue of Dark Nebulae~\cite{1962ApJS....7....1L} 
+\item[\textbf{LBN}]  Lynds' Catalogue of Bright Nebulae~\cite{1965ApJS...12..163L} 
+\item[\textbf{Cr}] Collinder Catalogue~\cite{1931AnLun...2....1C} 
+\item[\textbf{Mel}]  Melotte Catalogue of Deep Sky Objects~\cite{1915MmRAS..60..175M} 
 \item[\textbf{PGC}]  HYPERLEDA. I. Catalog of galaxies\footnote{The PGC and UGC catalogues have a partial support}
 \item[\textbf{UGC}]  The Uppsala General Catalogue of Galaxies
-\item[\textbf{Ced}]  Cederblad Catalog of bright diffuse Galactic nebulae 
+\item[\textbf{Ced}]  Cederblad Catalog of bright diffuse Galactic nebulae~\cite{1946MeLuS.119....1C}
 \end{description}
 
+Cross-index data for Stellarium DSO Catalog is partially obtained from ``Merged catalogue of reflection nebulae''~\cite{2003A&A...399..141M}.
 
-\subsection{Modifying catalog.dat}%\label{modifying-catalog.dat}
+\subsection{Modifying catalog.dat}
 \label{sec:dso:modifyingCatalog.dat}
 
 This section describes the inner structure of the files \file{catalog.dat}
@@ -84,7 +85,7 @@ fields with \emph{tab} char as delimiter:
  3 & float   & Dec (decimal degrees)\\
  4 & float   & B magnitude\\
  5 & float   & V magnitude\\
- 6 & string  & Object type (See table  Types of Objects below).\\
+ 6 & string  & Object type (See section~\ref{sec:dso:types} for details).\\
  7 & string  & Morphological type of object\\
  8 & float   & Major axis size or radius (arcmin)\\
  9 & float   & Minor axis size (arcmin)\\
@@ -101,7 +102,7 @@ fields with \emph{tab} char as delimiter:
 20 & integer & C number (Caldwell Catalogue)\\
 21 & integer & B number (Barnard Catalogue)\\
 22 & integer & Sh2 number (Sharpless Catalogue)\\
-23 & integer & VdB number (Van den Bergh Catalogue of reflection nebulae)\\
+23 & integer & VdB number (van den Bergh Catalogue of reflection nebulae)\\
 24 & integer & RCW number (A catalogue of H$\alpha$-emission regions in the southern Milky Way)\\
 25 & integer & LDN number (Lynds' Catalogue of Dark Nebulae)\\
 26 & integer & LBN number (Lynds' Catalogue of Bright Nebulae)\\
@@ -113,7 +114,7 @@ fields with \emph{tab} char as delimiter:
 \bottomrule
 \end{longtabu}
 
-\subsubsection{Types of Objects}%\label{types-of-objects}
+\subsubsection{Types of Objects}
 \label{sec:dso:types}
 
 Possible values for type of objects in the file \texttt{catalog.dat}.
@@ -299,8 +300,8 @@ sure you leave at least six prominent background stars.
 The next step is to process your photo to make the background
 black, really black. This will ensure that your background will meld with the
 Stellarium background and not be noticed as gray square. Suitable programs to do all
-this are The Gimp\footnote{free in keeping with the Stellarium spirit; available from \url{http://www.gimp.org}} or
-Photoshop if you can afford it.
+this are \program{The GIMP}\footnote{free in keeping with the Stellarium spirit; available from \url{http://www.gimp.org}} or
+\program{Photoshop} if you can afford it.
 
 When you have your image prepared you will need to plate solve it using
 at least 6 known GSC stars that can be identified. That is why the
@@ -311,7 +312,7 @@ them to decimal values to form the world coordinates in the
 
 \begin{figure}[htb]
 \centering\includegraphics[width=\textwidth]{EQ-Decimal.jpg}
-\caption{Stellarium Textures Generator: A program to convert Equatorial coordinates into decimal
+\caption{\program{Stellarium Textures Generator}: A program to convert Equatorial coordinates into decimal
 form and write a \texttt{textures.json} insert}
 \label{fig:dso:STGen}
 \end{figure}
@@ -324,7 +325,7 @@ from
 
 \begin{figure}[ht]
 \centering\includegraphics[width=\textwidth]{pix-4.jpg}
-\caption{ReadDSS: A program to write a \file{textures.json} insert with epoch manipulation.}
+\caption{\program{ReadDSS}: A program to write a \file{textures.json} insert with epoch manipulation.}
 \label{fig:dso:ReadDSS}
 \end{figure}
 

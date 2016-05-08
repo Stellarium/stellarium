@@ -377,7 +377,7 @@ void TelescopeDialog::setAboutText()
 	helpPage += "<h4><a name=\"fovcircles\" />" + q_("Field of view indicators") + "</h4>";
 	helpPage += "<p>" + q_("A series of circles representing different fields of view can be added around the telescope marker. This is a relic from the times before the <strong>Oculars</strong> plug-in existed.") + "</p>";
 	helpPage += "<p>" + q_("In the telescope configuration window, click on 'User Interface Settings'.")
-		 + " " + q_("Mark the 'Use field of view indicators' option, then enter a list of values separated with comas in the field below.")
+		 + " " + q_("Mark the 'Use field of view indicators' option, then enter a list of values separated with commas in the field below.")
 		 + " " + q_("The values are interpreted as degrees of arc.") + "</p>";
 	helpPage += "<p>" + QString(q_("This can be used in combination with a %1virtual telescope%2 to display a moving reticle with the Telrad circles.")).arg("<a href=\"#virtual_telescope\">").arg("</a>") + "</p>";
 	helpPage += "<p><a href=\"#top\"><small>[" + q_("Back to top") + "]</small></a></p>";
@@ -419,7 +419,7 @@ void TelescopeDialog::setAboutText()
 	helpPage += "<dt><b>Sky-Watcher SynScan AZ mount</b></dt><dd>" + q_("The Sky-Watcher SynScan AZ GoTo mount is used in a number of telescopes.") + "</dd>";
 	helpPage += "<dt><b>Sky-Watcher SynScan (version 3 or later)</b></dt><dd>" + q_("<b>SynScan</b> is also the name of the hand controller used in other Sky-Watcher GoTo mounts, and it seems that any mount that uses a SynScan controller version 3.0 or greater is supported by the plug-in, as it uses the NexStar protocol.") + "</dd>";
 	helpPage += "<dt><b>Wildcard Innovations Argo Navis (Meade mode)</b></dt><dd>" + q_("Argo Navis is a 'Digital Telescope Computer' by Wildcard Innovations.")
-		 + " " + q_("It is an advanced digital setting circle that turns an ordinary telescope (for example, a dobsonian) into a 'Push To'' telescope (a telescope that uses a computer to find targets and human power to move the telescope itself).")
+		 + " " + q_("It is an advanced digital setting circle that turns an ordinary telescope (for example, a dobsonian) into a 'Push To' telescope (a telescope that uses a computer to find targets and human power to move the telescope itself).")
 		 + " " + QString(q_("Just don't forget to set it to Meade compatibility mode and set the baud rate to 9600B%1.")).arg("<sup><a href=\"http://www.iceinspace.com.au/forum/showpost.php?p=554948&amp;postcount=18\">1</a></sup>") + "</dd></dl>";
 	helpPage += "<p><a href=\"#top\"><small>[" + q_("Back to top") + "]</small></a></p>";
 

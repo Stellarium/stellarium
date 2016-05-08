@@ -52,41 +52,9 @@ for year, month, day, hour, minutes and seconds may be modified by
 typing new values, by clicking the up and down arrows above and below
 the values, and by using the mouse wheel.
 
-\subsection{Julian Day Number}
-\label{sec:gui:date:julian}
-
-In the 19th century, European astronomers have introduced the use of
-Julian Day numbers (invented around the time of the Gregorian calendar
-reform). This is a simple continuous day count starting on January 1, -4712
-(4713 BC). There are no years, months etc., and the integral day
-number switches at noon, so during a single night of observation (in
-Europe) the date never changes. 
-
-The fractional part of the number is just the fraction of day that has
-elapsed since last noon. Given that a day has 86400~seconds, we should
-give a JD with 5 decimal places to capture the nearest second.
-
-This causes a problem for modern computers: even a ``double precision
-float'' can keep only about 13 decimal places. More than 2.4 million
-days have passed, so that e.g. January 1, 2000, 12:00UT is 2451545.0,
-which is an accurately storable number with 7 decimal places, but 12:34:56UT is computed as
-2451545.02426. A more accurate result would yield
-2451545.024259259259... So, for a field where sub-second accuracy
-became crucial like spacecraft operations, the \indexterm{Modified
-  Julian Date} (MJD) has been introduced. It is simply
-\begin{equation}
-  \label{eq:MJD}
-  MJD=JD-2400000.5. 
-\end{equation}
-This means, days start at midnight, and the (constant, in our era)
-decimal places of the ``big numbers'' at the begin of the number have
-been traded in for more decimal places at the end. 
-
-Don't put your expectations too high when you see MJD displayed:
-Stellarium uses JD for internal timekeeping, and Stellarium's display
-of MJD is simply computed from it. So you cannot set temporal
-increments smaller than a second, and it hardly would make sense to
-expect more.
+The other tab in this window allows you to see or set
+\indexterm{Julian Day} and/or \indexterm{Modified Julian Day} numbers
+(see~\ref{sec:Concepts:JulianDay}).
 
 \section{Setting Your Location}
 \label{sec:gui:location}
@@ -200,6 +168,11 @@ when the program starts:
 \item[Other] some fixed time can be chosen which will
   be used every time Stellarium starts.
 \end{description}
+
+The lowest field allows selection of the correction model for the time
+correction $\Delta T$ (see section~\ref{sec:Concepts:DeltaT}). Default
+is ``Espenak and Meeus (2006)''. Please use other values only if you
+know what you are doing.
 
 \subsection{The Tools Tab}
 \label{sec:gui:configuration:tools}
@@ -345,9 +318,9 @@ hightlights:
 
 An auxiliary dialog contains detail settings for the atmosphere. Here
 you can set atmospheric pressure and temperature which influence
-refraction (see section~\ref{sec:concepts:Refraction}), and the
+refraction (see section~\ref{sec:phenomena:Refraction}), and the
 opacity factor for extinction, \emph{magnitude loss per airmass} $k$
-(see section~\ref{sec:concepts:Extinction}).
+(see section~\ref{sec:phenomena:Extinction}).
 
 
 \subsection{DSO Tab}
