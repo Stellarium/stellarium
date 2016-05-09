@@ -119,11 +119,7 @@ This operation can be polled every few moments to find out if some primary Stell
     },
     selectioninfo, //string that contains the information of the currently selected object, as returned by StelObject::getInfoString
     view : {
-        fov,		//current FOV
-        projection,	//current projection key
-        projectionStr,	//current projection string in current language
-        landscape,	//current landscape ID
-        skyculture	//current skyculture ID
+        fov		//current FOV
     },
 
     //the following is only inserted if an actionId parameter was given
@@ -459,20 +455,5 @@ Lists the available projection types as a JSON object of format
 
 \paragraph rcViewServiceProjectiondescription projectiondescription
 Returns the HTML description of the current projection (StelProjector::getHtmlSummary)
-
-\subsubsection rcViewServicePOST POST operations
-Implemented by ViewService::postImpl
-
-\paragraph rcViewServiceSetlandscape setlandscape
-Parameters: <tt>id (String)</tt>\n
-Sets the current landscape to the one identified by \p id.
-
-\paragraph rcViewServiceSetskyculture setskyculture
-Parameters: <tt>id (String)</tt>\n
-Sets the current sky culture to the one identified by \p id.
-
-\paragraph rcViewServiceSetprojection setprojection
-Parameters: <tt>type (String)</tt>\n
-Sets the current projection to the one identified by the \p type key.
 
 */

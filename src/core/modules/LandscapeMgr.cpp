@@ -425,6 +425,7 @@ void LandscapeMgr::init()
 	registerProperty("prop_LandscapeMgr_flagLandscapeUseMinimalBrightness", "flagLandscapeUseMinimalBrightness");
 	registerProperty("prop_LandscapeMgr_flagLandscapeSetsMinimalBrightness", "flagLandscapeSetsMinimalBrightness");
 	registerProperty("prop_LandscapeMgr_defaultMinimalBrightness", "defaultMinimalBrightness");
+	registerProperty("prop_LandscapeMgr_currentLandscapeID","currentLandscapeID");
 }
 
 bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeLocationDuration)

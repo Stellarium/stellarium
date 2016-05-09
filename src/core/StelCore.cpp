@@ -38,6 +38,7 @@
 #include "LandscapeMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
+#include "StelPropertyMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "EphemWrapper.hpp"
 #include "precession.h"
@@ -265,6 +266,10 @@ void StelCore::init()
 
 	actionsMgr->addAction("actionHorizontal_Flip", displayGroup, N_("Flip scene horizontally"), this, "flipHorz", "Ctrl+Shift+H", "", true);
 	actionsMgr->addAction("actionVertical_Flip", displayGroup, N_("Flip scene vertically"), this, "flipVert", "Ctrl+Shift+V", "", true);
+
+	StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
+	propMgr->registerProperty("prop_Core_currentProjectionType",this,"currentProjectionType");
+	propMgr->registerProperty("prop_Core_currentProjectionTypeKey",this,"currentProjectionTypeKey");
 }
 
 QString StelCore::getDefaultProjectionTypeKey() const
@@ -493,6 +498,7 @@ void StelCore::setCurrentProjectionType(ProjectionType type)
 		updateMaximumFov();
 
 		emit currentProjectionTypeChanged(type);
+		emit currentProjectionTypeKeyChanged(getCurrentProjectionTypeKey());
 	}
 }
 

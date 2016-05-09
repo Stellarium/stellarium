@@ -179,12 +179,16 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions", "
 			}
 			$(propApi).on("stelPropertyChanged:" + prop, function(evt, prop) {
 				self.val(prop.value);
+				self.data("currentSelection", prop.value);
 				//if this is a jquery UI selectmenu, we have to refresh
 				if (self.hasClass('selectmenu')) {
 					self.selectmenu("refresh");
 				}
 			});
-			self.val(propApi.getStelProp(prop));
+			var curVal = propApi.getStelProp(prop);
+			self.val(curVal);
+			//store the selection value also in the element itself
+			self.data("currentSelection", curVal);
 			self.on("change selectmenuchange", function(evt) {
 				propApi.setStelProp(prop, self.val());
 			});

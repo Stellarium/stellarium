@@ -47,6 +47,10 @@ public:
 class StelSkyCultureMgr : public QObject
 {
 	Q_OBJECT
+	Q_PROPERTY(QString currentSkyCultureID
+		   READ getCurrentSkyCultureID
+		   WRITE setCurrentSkyCultureID
+		   NOTIFY currentSkyCultureChanged)
 
 public:
 	StelSkyCultureMgr();
@@ -105,6 +109,9 @@ signals:
 	//! Emitted whenever the default sky culture changed.
 	//! @see setDefaultSkyCultureID
 	void defaultSkyCultureChanged(const QString& id);
+
+	//! Emitted when the current sky culture changes
+	void currentSkyCultureChanged(const QString& id);
 	
 private:
 	//! Get the culture name in English associated with a specified directory.

@@ -54,6 +54,9 @@ class StelCore : public QObject
 	Q_PROPERTY(bool flipVert READ getFlipVert WRITE setFlipVert)
 	Q_PROPERTY(bool flagUseNutation READ getUseNutation WRITE setUseNutation)
 	Q_PROPERTY(bool flagUseTopocentricCoordinates READ getUseTopocentricCoordinates WRITE setUseTopocentricCoordinates)
+	Q_PROPERTY(ProjectionType currentProjectionType READ getCurrentProjectionType WRITE setCurrentProjectionType NOTIFY currentProjectionTypeChanged)
+	//! This is just another way to access the projection type, by string instead of enum
+	Q_PROPERTY(QString currentProjectionTypeKey READ getCurrentProjectionTypeKey WRITE setCurrentProjectionTypeKey NOTIFY currentProjectionTypeKeyChanged STORED false)
 
 public:
 
@@ -641,6 +644,8 @@ signals:
 	void timeSyncOccurred(double jDay);
 	//! Emitted whenever the projection type changes
 	void currentProjectionTypeChanged(StelCore::ProjectionType newType);
+	//! Emitted whenever the projection type changes
+	void currentProjectionTypeKeyChanged(const QString& newValue);
 
 private:
 	StelToneReproducer* toneReproducer;		// Tones conversion between stellarium world and display device
