@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-03 13:06+0700\n"
-"PO-Revision-Date: 2015-02-26 18:17+0000\n"
+"POT-Creation-Date: 2016-05-08 12:58+0700\n"
+"PO-Revision-Date: 2016-05-08 19:28+0000\n"
 "Last-Translator: Serj Safarian <serjsafarian@gmail.com>\n"
 "Language-Team: Armenian <hy@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-04 05:14+0000\n"
-"X-Generator: Launchpad (build 17995)\n"
+"X-Launchpad-Export-Date: 2016-05-09 04:33+0000\n"
+"X-Generator: Launchpad (build 18025)\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 
 #: src/core/modules/ConstellationMgr.cpp:140 src/core/modules/StarMgr.cpp:378
@@ -25,26 +25,26 @@ msgstr ""
 #: src/core/StelApp.cpp:502 src/core/StelCore.cpp:210
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:557
 msgid "Display Options"
-msgstr "Ցուցադրման ընտրանքները"
+msgstr "Ցուցադրման ընտրանքներ"
 
 #: src/core/modules/ConstellationMgr.cpp:141
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:287
 msgid "Constellation lines"
-msgstr "Համաստեղությունների գծերը"
+msgstr "Համաստեղությունների գծեր"
 
 #: src/core/modules/ConstellationMgr.cpp:142
 msgid "Constellation art"
-msgstr "Համաստեղությունների պատկերները"
+msgstr "Համաստեղությունների պատկերներ"
 
 #: src/core/modules/ConstellationMgr.cpp:143
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Constellation labels"
-msgstr "Համաստեղությունների անվանումները"
+msgstr "Համաստեղությունների անվանումներ"
 
 #: src/core/modules/ConstellationMgr.cpp:144
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Constellation boundaries"
-msgstr "Համաստեղությունների սահմանները"
+msgstr "Համաստեղությունների սահմաններ"
 
 #: src/core/modules/StarMgr.cpp:379 src/ui_viewDialog.h:1589
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:253
@@ -61,15 +61,15 @@ msgstr "Միջօրեական"
 
 #: src/core/modules/GridLinesMgr.cpp:603
 msgid "Ecliptic of J2000.0"
-msgstr ""
+msgstr "Խավարածիրը J2000.0-ի դրությամբ"
 
 #: src/core/modules/GridLinesMgr.cpp:607
 msgid "Ecliptic of Date"
-msgstr ""
+msgstr "Խավարածիրն ըստ ամսաթվի"
 
 #: src/core/modules/GridLinesMgr.cpp:611
 msgid "Equator of J2000.0"
-msgstr ""
+msgstr "Հասարակածը J2000.0-ի դրությամբ"
 
 #: src/core/modules/GridLinesMgr.cpp:615
 msgid "Equator"
@@ -77,7 +77,7 @@ msgstr "Հասարակած"
 
 #: src/core/modules/GridLinesMgr.cpp:620
 msgid "Precession Circle"
-msgstr ""
+msgstr "Առաջընթացության շրջան"
 
 #: src/core/modules/GridLinesMgr.cpp:624 src/ui_viewDialog.h:1768
 msgid "Horizon"
@@ -85,7 +85,7 @@ msgstr "Հորիզոն"
 
 #: src/core/modules/GridLinesMgr.cpp:628
 msgid "Galactic Equator"
-msgstr ""
+msgstr "Գալակտիկական հասարակած"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:633 src/ui_viewDialog.h:1792
@@ -118,7 +118,7 @@ msgstr "Ազիմուտային ցանց"
 #: src/core/modules/GridLinesMgr.cpp:925
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Ecliptic line"
-msgstr "Խավարածիրը"
+msgstr "Խավարածիրի գիծ"
 
 #: src/core/modules/GridLinesMgr.cpp:926
 msgid "Ecliptic J2000 line"
@@ -127,7 +127,7 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:927
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Equator line"
-msgstr "Հասարակածի գիծը"
+msgstr "Հասարակածի գիծ"
 
 #: src/core/modules/GridLinesMgr.cpp:928
 msgid "Equator J2000 line"
@@ -136,12 +136,12 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:929
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:329
 msgid "Meridian line"
-msgstr "Միջօրեականի գիծը"
+msgstr "Միջօրեականի գիծ"
 
 #: src/core/modules/GridLinesMgr.cpp:930
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:390
 msgid "Horizon line"
-msgstr "Հորիզոնի գիծը"
+msgstr "Հորիզոնի գիծ"
 
 #: src/core/modules/GridLinesMgr.cpp:931
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:344
@@ -848,12 +848,12 @@ msgstr "Մոլորակների անվանումները"
 #: src/core/modules/SolarSystem.cpp:198
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Planet orbits"
-msgstr "Մոլորակների ուղեծիրները"
+msgstr "Մոլորակների ուղեծիրներ"
 
 #: src/core/modules/SolarSystem.cpp:199
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:324
 msgid "Planet trails"
-msgstr "Մոլորակների հետքերը"
+msgstr "Մոլորակների հետքեր"
 
 #: src/core/modules/StarWrapper.cpp:155
 msgid "eruptive variable star"
@@ -952,7 +952,7 @@ msgstr "Ամսաթիվը և ժամը"
 
 #: src/core/StelCore.cpp:209 src/core/StelMovementMgr.cpp:155
 msgid "Movement and Selection"
-msgstr "Տեղաշարժում եւ ընտրում"
+msgstr "Տեղաշարժում և ընտրում"
 
 #: src/core/StelCore.cpp:212
 msgid "Increase time speed"
@@ -972,7 +972,7 @@ msgstr "Դանդաղեցնել ժամանակի արագությունը (մի �
 
 #: src/core/StelCore.cpp:216
 msgid "Set normal time rate"
-msgstr "ժամանակի սովորական արագությունը"
+msgstr "ժամանակի սովորական արագություն"
 
 #: src/core/StelCore.cpp:217
 msgid "Set time rate to zero"
@@ -1547,7 +1547,7 @@ msgstr ""
 #: src/core/StelObject.cpp:165 src/core/StelObject.cpp:168
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
-msgstr "Ժամային անկյուն/Հակումը՝ %1/%2"
+msgstr "Ժամային անկյուն/Հակում՝ %1/%2"
 
 #: src/core/StelObject.cpp:152 src/core/StelObject.cpp:155
 #: src/core/StelObject.cpp:186 src/core/StelObject.cpp:188
@@ -1558,7 +1558,7 @@ msgstr ""
 #: src/core/StelObject.cpp:193 src/core/StelObject.cpp:195
 #, qt-format
 msgid "Az/Alt: %1/%2"
-msgstr "Ազիմուտը/Բարձրությունը՝ %1/%2"
+msgstr "Ազիմուտ/Բարձրություն՝ %1/%2"
 
 #: src/core/StelObject.cpp:214 src/core/StelObject.cpp:216
 #: src/core/StelObject.cpp:226 src/core/StelObject.cpp:228
@@ -1780,7 +1780,7 @@ msgid ""
 "File is corrupted."
 msgstr ""
 "Ներբեռնման սխալ %1՝\n"
-"Նշոցը վնասված է։"
+"Նիշքը վնասված է։"
 
 #: src/gui/ConfigurationDialog.cpp:1270 src/gui/ConfigurationDialog.cpp:1279
 msgid "Available"
@@ -1950,7 +1950,7 @@ msgstr "CTRL + Վերեւ/Ներքեւ"
 
 #: src/gui/HelpDialog.cpp:157
 msgid "Select object"
-msgstr "Ընտրե՛ք առարկա"
+msgstr "Ընտրեք առարկան"
 
 #: src/gui/HelpDialog.cpp:158
 msgid "Left click"
@@ -1958,7 +1958,7 @@ msgstr "Ձախ կտտոց"
 
 #: src/gui/HelpDialog.cpp:166
 msgid "Clear selection"
-msgstr "Մաքրե՛լ ընտրությունը"
+msgstr "Մաքրել ընտրությունը"
 
 #: src/gui/HelpDialog.cpp:167
 msgid "Right click"
@@ -2022,7 +2022,7 @@ msgstr ""
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:238
 msgid "{Forums} - discuss Stellarium with other users."
-msgstr "{Քննարկումներ}. քննարկե՛ք Stellarium֊ն այլոց հետ։"
+msgstr "{Քննարկումներ}. քննարկեք Stellarium֊ն այլոց հետ։"
 
 #: src/gui/HelpDialog.cpp:295
 msgid "Developers"
@@ -2031,7 +2031,7 @@ msgstr "Մշակողներ"
 #: src/gui/HelpDialog.cpp:296
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
-msgstr "Նախագծի համակարգող եւ գլխավոր մշակող՝ %1"
+msgstr "Նախագծի համակարգող և գլխավոր մշակող՝ %1"
 
 #: src/gui/HelpDialog.cpp:297
 #, qt-format
@@ -2076,7 +2076,7 @@ msgstr ""
 #: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
 #, qt-format
 msgid "OSX Developer: %1"
-msgstr "OSX Մշակող՝ %1"
+msgstr "OSX մշակող՝ %1"
 
 #: src/gui/HelpDialog.cpp:317
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
@@ -2141,7 +2141,7 @@ msgstr "Որոնման պատուհան"
 
 #: src/gui/StelGui.cpp:215
 msgid "Sky and viewing options window"
-msgstr "Երկնքի եւ դիտման ընտրանքների պատուհան"
+msgstr "Երկնքի և դիտման ընտրանքների պատուհան"
 
 #: src/gui/StelGui.cpp:216
 msgid "Date/time window"
@@ -2179,29 +2179,29 @@ msgstr "Ուղղաձիգ վահանակի ինքնաթաքցնում"
 msgid "Toggle visibility of GUI"
 msgstr "Ցույց տալ գործիքների վահանակը"
 
-#: src/gui/StelGuiItems.cpp:317 src/gui/StelGuiItems.cpp:832
+#: src/gui/StelGuiItems.cpp:322 src/gui/StelGuiItems.cpp:838
 msgid "Space"
 msgstr "Բացատ"
 
-#: src/gui/StelGuiItems.cpp:655
+#: src/gui/StelGuiItems.cpp:661
 #, c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/StelGuiItems.cpp:687
+#: src/gui/StelGuiItems.cpp:693
 #, qt-format
 msgid "planetocentric distance %1 km"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:689
+#: src/gui/StelGuiItems.cpp:695
 msgid "planetocentric observer"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:718
+#: src/gui/StelGuiItems.cpp:724
 msgid "Field of view"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:743
+#: src/gui/StelGuiItems.cpp:749
 msgid "Frames per second"
 msgstr ""
 
@@ -2268,7 +2268,7 @@ msgstr ""
 
 #: src/gui/ViewDialog.cpp:745
 msgid "No description"
-msgstr "Նկարագրություն չկա"
+msgstr "Առանց նկարագրության"
 
 #: src/gui/ViewDialog.cpp:845
 msgid "No shooting stars"
@@ -2276,7 +2276,7 @@ msgstr "Առանց ընկնող աստղերի"
 
 #: src/gui/ViewDialog.cpp:853
 msgid "Normal rate"
-msgstr "Սովորական ընթացքը"
+msgstr "Սովորական ընթացք"
 
 #: src/gui/ViewDialog.cpp:856
 msgid "Standard Orionids rate"
@@ -2316,7 +2316,7 @@ msgstr ""
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:114
 msgid "Select a ZIP archive that contains a Stellarium landscape"
-msgstr "Ընտրե՛ք ZIP պահոցը, որն պարունակում է Stellarium֊ի բնապատկերը"
+msgstr "Ընտրեք ZIP պահոցը, որն պարունակում է Stellarium֊ի բնապատկերը"
 
 #. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
 #: src/gui/AddRemoveLandscapesDialog.cpp:116
@@ -2347,7 +2347,7 @@ msgstr "Բնապատկերը չի տեղադրվել։"
 #: src/gui/AddRemoveLandscapesDialog.cpp:231
 #: src/gui/AddRemoveLandscapesDialog.cpp:241
 msgid "Error!"
-msgstr "Սխա՛լ"
+msgstr "Սխա՛լ։"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:156
 #, qt-format
@@ -2363,7 +2363,7 @@ msgstr "Ընտրված բնապատկերը անհնար է (լիովին) ջն�
 #: src/gui/AddRemoveLandscapesDialog.cpp:190
 #, qt-format
 msgid "Size on disk: %1 MiB"
-msgstr "Սկավառակի չափը՝ %1 MiB"
+msgstr "Սկավառակի չափը՝ %1 ՄիԲ"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
 #: src/gui/AddRemoveLandscapesDialog.cpp:216
@@ -2376,7 +2376,7 @@ msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
 msgstr ""
-"Ընտրված նշոցը ZIP պահոց չէ կամ չի պարունակում Stellarium֊ի բնապատկեր։"
+"Ընտրված նիշքը ZIP պահոց չէ կամ չի պարունակում Stellarium֊ի բնապատկեր։"
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
 #: src/gui/AddRemoveLandscapesDialog.cpp:229
@@ -2680,7 +2680,7 @@ msgstr ""
 
 #: src/StelMainView.cpp:556
 msgid "Save screenshot"
-msgstr "Պահել սքրինշոթը"
+msgstr "Պահպանել էկրանի պատկերը"
 
 #: src/StelMainView.cpp:557
 msgid "Full-screen mode"
@@ -2764,7 +2764,7 @@ msgstr ""
 #. TRANSLATORS: Type of object
 #: src/translations.h:50
 msgid "moon"
-msgstr "լուսին"
+msgstr "արբանյակ"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:52
@@ -3019,15 +3019,15 @@ msgstr ""
 
 #: src/translations.h:174
 msgid "Chinese"
-msgstr "Չիներեն"
+msgstr "Չինական"
 
 #: src/translations.h:175
 msgid "Egyptian"
-msgstr "Եգիպտերեն"
+msgstr "Եգիպտական"
 
 #: src/translations.h:176
 msgid "Inuit"
-msgstr "էսկիմոսերեն"
+msgstr "էսկիմոսական"
 
 #: src/translations.h:177
 msgid "Indian Vedic"
@@ -3039,7 +3039,7 @@ msgstr ""
 
 #: src/translations.h:179
 msgid "Korean"
-msgstr "Կորեերեն"
+msgstr "Կորեական"
 
 #: src/translations.h:180
 msgid "Lakota"
@@ -3047,7 +3047,7 @@ msgstr "Լակոտա"
 
 #: src/translations.h:181
 msgid "Maori"
-msgstr "Մաորի"
+msgstr "Մաորիական"
 
 #: src/translations.h:182
 msgid "Mongolian"
@@ -3059,11 +3059,11 @@ msgstr "Նավախո"
 
 #: src/translations.h:184
 msgid "Norse"
-msgstr "Նորվեգերեն"
+msgstr "Սկանդինավյան"
 
 #: src/translations.h:185
 msgid "Polynesian"
-msgstr "Պոլինեզերեն"
+msgstr "Պոլինեզյան"
 
 #: src/translations.h:186
 msgid "Romanian"
@@ -3071,7 +3071,7 @@ msgstr ""
 
 #: src/translations.h:187
 msgid "Sami"
-msgstr "Սաամերեն"
+msgstr "Սաամական"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:189
@@ -3092,7 +3092,7 @@ msgstr ""
 
 #: src/translations.h:193
 msgid "Western"
-msgstr "Արեվմտյան"
+msgstr "Արեւմտյան"
 
 #: src/translations.h:194
 msgid "Western (H.A.Rey)"
@@ -4668,7 +4668,7 @@ msgstr "Բարձրությունը՝"
 
 #: src/ui_locationDialogGui.h:428
 msgid "Enter the altitude in meter"
-msgstr "Նշե՛ք բարձրությունը մետրերով"
+msgstr "Նշեք բարձրությունը մետրերով"
 
 #: src/ui_locationDialogGui.h:430
 msgid " m"
@@ -4684,7 +4684,7 @@ msgstr "Ավելացնել ցանկին"
 
 #: src/ui_locationDialogGui.h:434
 msgid "Name/City:"
-msgstr "Անուն/Քաղաք՝"
+msgstr "Անվանում/Քաղաք՝"
 
 #: src/ui_locationDialogGui.h:435
 msgid "New Location"
@@ -4692,7 +4692,7 @@ msgstr "Նոր տեղադրություն"
 
 #: src/ui_locationDialogGui.h:436
 msgid "Country:"
-msgstr "Երկիրը՝"
+msgstr "Երկիր՝"
 
 #: src/ui_locationDialogGui.h:437
 msgid "Planet:"
@@ -4874,7 +4874,7 @@ msgstr "Ընտրանքներ"
 
 #: src/ui_viewDialog.h:1587
 msgid "View"
-msgstr "Դիտել"
+msgstr "Տեսք"
 
 #: src/ui_viewDialog.h:1590
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:266
@@ -4897,7 +4897,7 @@ msgstr ""
 #: src/ui_viewDialog.h:1594
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:272
 msgid "Twinkle:"
-msgstr "Առկայծումը՝"
+msgstr "Առկայծում՝"
 
 #: src/ui_viewDialog.h:1596
 msgid "Limit the magnitude of stars"
@@ -4917,7 +4917,7 @@ msgstr "Զգայունության հարաշարժ հարմարեցում"
 
 #: src/ui_viewDialog.h:1603 src/ui_viewDialog.h:1642 src/ui_viewDialog.h:1709
 msgid "Labels and Markers"
-msgstr "Պիտակներ եւ նշիչներ"
+msgstr "Պիտակներ և նշիչներ"
 
 #: src/ui_viewDialog.h:1605
 msgid "Show atmosphere"
@@ -5275,7 +5275,7 @@ msgstr "Ցույց տալ գետինը"
 
 #: src/ui_viewDialog.h:1801
 msgid "Use this landscape as default"
-msgstr "Օգտագործել այս բնապատկերը լռելյայն"
+msgstr "Լռելյայն օգտագործել այս բնապատկերը"
 
 #: src/ui_viewDialog.h:1802
 msgid "Use associated planet and position"
@@ -5324,7 +5324,7 @@ msgstr "Ավելացնել/ջնջել բնապատկերներ..."
 
 #: src/ui_viewDialog.h:1822
 msgid "Use this sky culture as default"
-msgstr "Օգտագործել երկնքի այս մշակույթը լռելյայն"
+msgstr "Լռելյայն օգտագործել երկնքի այս մշակույթը"
 
 #: src/ui_viewDialog.h:1823
 msgid "Show labels"
@@ -8484,9 +8484,8 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:422
 msgid ""
 "It is an advanced digital setting circle that turns an ordinary telescope "
-"(for example, a dobsonian) into a 'Push To'' telescope (a telescope that "
-"uses a computer to find targets and human power to move the telescope "
-"itself)."
+"(for example, a dobsonian) into a 'Push To' telescope (a telescope that uses "
+"a computer to find targets and human power to move the telescope itself)."
 msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:423
