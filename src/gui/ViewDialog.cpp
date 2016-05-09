@@ -139,10 +139,10 @@ void ViewDialog::createDialogContent()
 	// TODO: New method: populateLightPollution may be useful. Make sure it is.
 	// Jupiter's GRS must become property, and recheck the other "from trunk" entries.
 
-	connectDoubleProperty(ui->viewportOffsetSpinBox, "prop_StelMovementMgr_viewportVerticalOffsetTarget");
+	connectDoubleProperty(ui->viewportOffsetSpinBox, "prop_MovementMgr_viewportVerticalOffsetTarget");
 
 	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)),&StelApp::getInstance().getSkyCultureMgr(),SLOT(setCurrentSkyCultureNameI18(QString)));
-	connect(&StelApp::getInstance(), SIGNAL(skyCultureChanged(QString)), this, SLOT(skyCultureChanged()));
+	connect(&StelApp::getInstance().getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(skyCultureChanged()));
 	connect(ui->projectionListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(changeProjection(const QString&)));
 	connect(StelApp::getInstance().getCore(), SIGNAL(currentProjectionTypeChanged(StelCore::ProjectionType)),this,SLOT(projectionChanged()));
 

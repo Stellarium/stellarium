@@ -378,7 +378,7 @@
         </div>
         <div class="smallblock flex landscapeblock">
           <h3><?= tr("Current landscape")?></h3>
-          <select id="vo_landscapelist" class="scrollselect" size="5">
+          <select id="vo_landscapelist" class="scrollselect stelproperty" name="prop_LandscapeMgr_currentLandscapeID" size="5">
           </select>
           <iframe id="vo_landscapeinfo" class="flex-expand" src="/api/view/landscapedescription/"></iframe>
         </div>
@@ -405,7 +405,7 @@
         </div>
         <div class="smallblock flex landscapeblock">
           <h3><?= tr("Current sky culture")?></h3>
-          <select id="vo_skyculturelist" class="scrollselect" size="5">
+          <select id="vo_skyculturelist" class="scrollselect stelproperty" name="prop_SkyCultureMgr_currentSkyCultureID" size="5">
           </select>
           <iframe id="vo_skycultureinfo" class="flex-expand" src="/api/view/skyculturedescription/"></iframe>
         </div>
@@ -462,7 +462,7 @@
       <div id="tab_projection">
         <div class="smallblock flex landscapeblock">
           <h3><?= tr("Projection")?></h3>
-          <select id="vo_projectionlist" class="scrollselect" size="5">
+          <select id="vo_projectionlist" class="scrollselect stelproperty" name="prop_Core_currentProjectionTypeKey" size="5">
           </select>
           <iframe id="vo_projectioninfo" class="flex-expand" src="/api/view/projectiondescription"></iframe>
         </div>

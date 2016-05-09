@@ -786,13 +786,6 @@ void StelApp::updateI18n()
 #endif
 }
 
-// Update and reload sky culture informations everywhere in the program
-void StelApp::updateSkyCulture()
-{
-	QString skyCultureDir = getSkyCultureMgr().getCurrentSkyCultureID();
-	emit(skyCultureChanged(skyCultureDir));
-}
-
 // Return the time since when stellarium is running in second.
 double StelApp::getTotalRunTime()
 {

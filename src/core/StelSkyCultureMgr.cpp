@@ -23,6 +23,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelApp.hpp"
 #include "StelIniParser.hpp"
+#include "StelPropertyMgr.hpp"
 
 #include <QSettings>
 #include <QString>
@@ -62,6 +63,9 @@ void StelSkyCultureMgr::init()
 {
 	defaultSkyCultureID = StelApp::getInstance().getSettings()->value("localization/sky_culture", "western").toString();
 	setCurrentSkyCultureID(defaultSkyCultureID);
+
+	StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
+	propMgr->registerProperty("prop_SkyCultureMgr_currentSkyCultureID",this,"currentSkyCultureID");
 }
 
 //! Set the current sky culture from the passed directory
@@ -79,7 +83,8 @@ bool StelSkyCultureMgr::setCurrentSkyCultureID(const QString& cultureDir)
 	}
 	currentSkyCultureDir = cultureDir;
 	currentSkyCulture = dirToNameEnglish[cultureDir];
-	StelApp::getInstance().updateSkyCulture();
+
+	emit currentSkyCultureChanged(currentSkyCultureDir);
 	return true;
 }
 

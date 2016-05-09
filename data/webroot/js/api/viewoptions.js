@@ -2,30 +2,8 @@ define(["jquery", "./remotecontrol", "./flags", "./properties"], function($, rc,
     "use strict";
 
     //Private variables
-    var currentProjection;
-    var currentLandscape;
-    var currentSkyculture;
-
     var catalogFlags;
     var typeFlags;
-
-    //register server data handlers
-    $(rc).on("serverDataReceived", function(evt, data) {
-        if (currentProjection !== data.view.projection) {
-            currentProjection = data.view.projection;
-            $(publ).trigger("projectionChanged", [currentProjection, data.view.projectionStr]);
-        }
-
-        if (currentLandscape !== data.view.landscape) {
-            currentLandscape = data.view.landscape;
-            $(publ).trigger("landscapeChanged", currentLandscape);
-        }
-
-        if (currentSkyculture !== data.view.skyculture) {
-            currentSkyculture = data.view.skyculture;
-            $(publ).trigger("skycultureChanged", currentSkyculture);
-        }
-    });
 
     $(propApi).on("stelPropertyChanged:prop_NebulaMgr_catalogFilters", function(evt, data) {
         if (catalogFlags)
@@ -96,24 +74,6 @@ define(["jquery", "./remotecontrol", "./flags", "./properties"], function($, rc,
         registerTypeFlags: function(elem) {
             typeFlags = new Flags(elem, setDSOType);
             typeFlags.setValue(propApi.getStelProp("prop_NebulaMgr_typeFilters"));
-        },
-
-        setProjection: function(proj) {
-            rc.postCmd("/api/view/setprojection", {
-                type: proj
-            });
-        },
-
-        setLandscape: function(landscape) {
-            rc.postCmd("/api/view/setlandscape", {
-                id: landscape
-            });
-        },
-
-        setSkyculture: function(skyculture) {
-            rc.postCmd("/api/view/setskyculture", {
-                id: skyculture
-            });
         },
 
         setDSOCatalog: setDSOCatalog,

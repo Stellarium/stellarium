@@ -514,8 +514,7 @@ There are \c moveRight, \c moveUp, \c moveUpRight etc. methods that allow the us
 
 \subsubsection rcApiViewoptions api/viewoptions
 
-Implements the management of the current projection, landscape and skyculture. \c projectionChanged, \c landscapeChanged and \c skycultureChanged are emitted whenever they change.
-It also has \c loadProjectionList, \c setProjection, etc.
+Implements the loading of the projection, landscape and skyculture lists.
 
 \subsubsection rcUiMainui ui/mainui
 

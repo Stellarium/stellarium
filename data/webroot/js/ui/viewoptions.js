@@ -19,6 +19,10 @@ define(["jquery", "api/viewoptions", "api/actions", "api/properties", "jquery-ui
 		}
 
 		prev.after($projectionlist);
+
+		var curSel = $projectionlist.data("currentSelection");
+		if(curSel)
+			$projectionlist.val(curSel);
 	}
 
 	function fillLandscapeList(data) {
@@ -43,6 +47,10 @@ define(["jquery", "api/viewoptions", "api/actions", "api/properties", "jquery-ui
 			option.textContent = val[1];
 			$vo_landscapelist.append(option);
 		});
+
+		var curSel = $vo_landscapelist.data("currentSelection");
+		if(curSel)
+			$vo_landscapelist.val(curSel);
 	}
 
 	function fillSkycultureList(data) {
@@ -67,32 +75,16 @@ define(["jquery", "api/viewoptions", "api/actions", "api/properties", "jquery-ui
 			option.textContent = val[1];
 			$vo_skyculturelist.append(option);
 		});
+
+		var curSel = $vo_skyculturelist.data("currentSelection");
+		if(curSel)
+			$vo_skyculturelist.val(curSel);
 	}
 
 	function initControls() {
 		$vo_landscapelist = $("#vo_landscapelist");
 		$vo_skyculturelist = $("#vo_skyculturelist");
 		$vo_projectionlist = $("#vo_projectionlist");
-		$vo_projectionlist.change(function(event) {
-			if (this.selectedIndex >= 0) {
-				var proj = this.options[this.selectedIndex].value;
-				viewOptionApi.setProjection(proj);
-			}
-		});
-
-		$vo_landscapelist.change(function(event) {
-			if (this.selectedIndex >= 0) {
-				var ls = this.options[this.selectedIndex].value;
-				viewOptionApi.setLandscape(ls);
-			}
-		});
-
-		$vo_skyculturelist.change(function(evt) {
-			if (this.selectedIndex >= 0) {
-				var sc = this.options[this.selectedIndex].value;
-				viewOptionApi.setSkyculture(sc);
-			}
-		});
 
 		viewOptionApi.loadProjectionList(fillProjectionList);
 		viewOptionApi.loadLandscapeList(fillLandscapeList);
@@ -111,36 +103,29 @@ define(["jquery", "api/viewoptions", "api/actions", "api/properties", "jquery-ui
 		$("#landscape_flagLandscapeSetsMinimalBrightness").prop("disabled", !data.value);
 	});
 
-	$(actionApi).on("stelActionChanged:actionSet_Nebula_TypeFilterUsage", function(evt, data) {
-		$("#vo_dsotype > div input[type='checkbox']").prop("disabled", !data.isChecked);
-	});
-
-
-	$(viewOptionApi).on("projectionChanged", function(evt, proj) {
-		//this forces a reload of the iframe
-		$("#vo_projectioninfo").attr("src", function(i, val) {
+	$(propApi).on("stelPropertyChanged:prop_LandscapeMgr_currentLandscapeID", function(evt,data){
+		//reload iframe
+		$("#vo_landscapeinfo").attr("src", function(i, val) {
 			return val;
 		});
-
-		$vo_projectionlist.val(proj);
 	});
 
-	$(viewOptionApi).on("landscapeChanged", function(evt, landscape) {
-		//this forces a reload of the iframe
-		$("#vo_landscapeinfo").attr('src', function(i, val) {
-			return val;
-		});
-
-		$vo_landscapelist.val(landscape);
-	});
-
-	$(viewOptionApi).on("skycultureChanged", function(evt, skyculture) {
+	$(propApi).on("stelPropertyChanged:prop_SkyCultureMgr_currentSkyCultureID", function(evt,data){
 		//this forces a reload of the iframe
 		$("#vo_skycultureinfo").attr('src', function(i, val) {
 			return val;
 		});
+	});
 
-		$vo_skyculturelist.val(skyculture);
+	$(propApi).on("stelPropertyChanged:prop_Core_currentProjectionType", function(evt,data){
+		//this forces a reload of the iframe
+		$("#vo_projectioninfo").attr('src', function(i, val) {
+			return val;
+		});
+	});
+
+	$(actionApi).on("stelActionChanged:actionSet_Nebula_TypeFilterUsage", function(evt, data) {
+		$("#vo_dsotype > div input[type='checkbox']").prop("disabled", !data.isChecked);
 	});
 
 	$(initControls);
