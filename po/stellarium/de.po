@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-03 13:06+0700\n"
-"PO-Revision-Date: 2016-05-02 10:59+0000\n"
+"POT-Creation-Date: 2016-05-08 12:58+0700\n"
+"PO-Revision-Date: 2016-05-09 00:39+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-04 05:20+0000\n"
-"X-Generator: Launchpad (build 17995)\n"
+"X-Launchpad-Export-Date: 2016-05-09 04:38+0000\n"
+"X-Generator: Launchpad (build 18025)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:140 src/core/modules/StarMgr.cpp:378
 #: src/core/modules/GridLinesMgr.cpp:922 src/core/modules/LandscapeMgr.cpp:417
@@ -2293,29 +2293,29 @@ msgstr "Vertikale Schaltflächenleiste automatisch ausblenden"
 msgid "Toggle visibility of GUI"
 msgstr "Graphische Benutzeroberfläche ein/ausschalten"
 
-#: src/gui/StelGuiItems.cpp:317 src/gui/StelGuiItems.cpp:832
+#: src/gui/StelGuiItems.cpp:322 src/gui/StelGuiItems.cpp:838
 msgid "Space"
 msgstr "Leertaste"
 
-#: src/gui/StelGuiItems.cpp:655
+#: src/gui/StelGuiItems.cpp:661
 #, c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/StelGuiItems.cpp:687
+#: src/gui/StelGuiItems.cpp:693
 #, qt-format
 msgid "planetocentric distance %1 km"
 msgstr "Planetozentrischer Abstand: %1 km"
 
-#: src/gui/StelGuiItems.cpp:689
+#: src/gui/StelGuiItems.cpp:695
 msgid "planetocentric observer"
 msgstr "Planetozentrischer Beobachter"
 
-#: src/gui/StelGuiItems.cpp:718
+#: src/gui/StelGuiItems.cpp:724
 msgid "Field of view"
 msgstr "Sichtfeld"
 
-#: src/gui/StelGuiItems.cpp:743
+#: src/gui/StelGuiItems.cpp:749
 msgid "Frames per second"
 msgstr "Bilder pro Sekunde"
 
@@ -3688,10 +3688,14 @@ msgid ""
 "has been collected by Jerry Lodriguss and published in Sky & Telescope "
 "09/2014. Data taken from his website, http://www.astropix.com/doubles/"
 msgstr ""
+"Das Skript führt durch 20 bemerkenswerte Doppelsterne. Die Liste wurde von "
+"Jerry Lodriguss zusammengestellt und in Sky & Telescope 09/2014 "
+"veröffentlicht. Daten von seiner Website, http://www.astropix.com/doubles/"
 
 #: src/translations.h:340
 msgid "This script helps you make an excursion around largest known stars."
 msgstr ""
+"Dieses Skript hilft bei einer Vorstellung der größten bekannten Sterne."
 
 #: src/translations.h:341
 msgid "A tour around objects from the Herschel 400 Catalogue"
@@ -8764,6 +8768,8 @@ msgid ""
 "Mark the 'Use field of view indicators' option, then enter a list of values "
 "separated with commas in the field below."
 msgstr ""
+"Aktiviere die Option 'Gesichtsfeldmarkierungen benutzen', und dann die "
+"Werteliste (mit Komma getrennt) im Feld darunter."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
 msgid "The values are interpreted as degrees of arc."
@@ -8851,6 +8857,8 @@ msgid ""
 "For example, pressing <b>Alt+S</b> is equivalent to clicking the 'Slew' "
 "button, pressing <b>Alt+E</b> switches to decimal degree format, etc."
 msgstr ""
+"Zum Beispiel ist <b>Alt+S</b> gleichbedeutend wie ein Klick auf 'Schwenken', "
+"<b>Alt+E</b> schaltet auf Dezimalgrad, etc."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:397
 msgid "Sending commands"
@@ -9005,14 +9013,13 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:422
 msgid ""
 "It is an advanced digital setting circle that turns an ordinary telescope "
-"(for example, a dobsonian) into a 'Push To'' telescope (a telescope that "
-"uses a computer to find targets and human power to move the telescope "
-"itself)."
+"(for example, a dobsonian) into a 'Push To' telescope (a telescope that uses "
+"a computer to find targets and human power to move the telescope itself)."
 msgstr ""
-"Es handelt sich um einen fortschrittlichen digitalen Teilkreis (mit "
-"Encoder), das jedes herkömmliche Teleskop (z.B. Dobson) in ein \"PushTo\"-"
-"Teleskop verwandelt. (Sie müssen also das Teleskop händisch auf berechnete "
-"Zielkoordinaten bewegen.)"
+"Es ist ein moderner digitaler Teilkreis, der ein gewöhnliches Teleskop (z.B. "
+"einen Dobson) in ein 'PushTo'-Teleskop verwandelt (ein Teleskop mit Computer "
+"zur Objektsuche und Positionierungsunterstützung, aber händischer Bewegung "
+"des Teleskops)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:423
 #, qt-format
