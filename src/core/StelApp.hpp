@@ -141,9 +141,6 @@ public:
 	//! Update translations, font for GUI and sky everywhere in the program.
 	void updateI18n();
 
-	//! Update and reload sky culture informations everywhere in the program.
-	void updateSkyCulture();
-
 	//! Return the main configuration options
 	QSettings* getSettings() {return confSettings;}
 
@@ -251,7 +248,6 @@ signals:
 	void visionNightModeChanged(bool);
 	void colorSchemeChanged(const QString&);
 	void languageChanged();
-	void skyCultureChanged(const QString&);
 
 	//! Called just after a progress bar is added.
 	void progressBarAdded(const StelProgressController*);

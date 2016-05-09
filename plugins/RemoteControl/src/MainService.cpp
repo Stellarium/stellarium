@@ -210,13 +210,7 @@ void MainService::getImpl(const QByteArray& operation, const APIParameters &para
 			else if (fov>mvmgr->getMaxFov())
 				fov = mvmgr->getMaxFov();
 
-			QString str = core->getCurrentProjectionTypeKey();
-
 			obj2.insert("fov",fov);
-			obj2.insert("projection",str);
-			obj2.insert("projectionStr",core->projectionTypeKeyToNameI18n(str));
-			obj2.insert("landscape",lsMgr->getCurrentLandscapeID());
-			obj2.insert("skyculture",skyCulMgr->getCurrentSkyCultureID());
 
 			obj.insert("view",obj2);
 		}

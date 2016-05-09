@@ -103,11 +103,15 @@ class LandscapeMgr : public StelModule
 		   WRITE setDefaultMinimalBrightness
 		   NOTIFY defaultMinimalBrightnessChanged
 		   )
-
 	Q_PROPERTY(bool flagAtmosphereAutoEnabling
 		   READ getFlagAtmosphereAutoEnable
 		   WRITE setFlagAtmosphereAutoEnable
 		   NOTIFY setFlagAtmosphereAutoEnableChanged
+		   )
+	Q_PROPERTY(QString currentLandscapeID
+		   READ getCurrentLandscapeID
+		   WRITE setCurrentLandscapeID
+		   NOTIFY currentLandscapeChanged
 		   )
 public:
 	LandscapeMgr();
