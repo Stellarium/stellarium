@@ -183,14 +183,6 @@ void MainService::getImpl(const QByteArray& operation, const APIParameters &para
 			obj.insert("time",obj2);
 		}
 
-		//// Info about current script (same as ScriptService/status)
-		{
-			QJsonObject obj2;
-			obj2.insert("scriptIsRunning",scriptMgr->scriptIsRunning());
-			obj2.insert("runningScriptId",scriptMgr->runningScriptId());
-			obj.insert("script",obj2);
-		}
-
 		//// Info about selected object (only primary)
 		{
 			QString infoStr;

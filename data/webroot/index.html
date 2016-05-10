@@ -412,13 +412,15 @@
       </div>
       <!-- handled by ui/actions.js -->
       <div id="tab_actions">
-        <div class="flex">
-          <section id="scripts" class="block flex flex-column">
+        <div class="flex flex-wrap">
+          <section id="scripts" class="block flex flex-expand">
             <header><h2><?= tr("Scripts")?></h2></header>
-            <select id="scriptlist" class="scrollselect flex-expand" size="10">
-            </select>
-            <div class="textcenter"><?= tr("Active script:")?> <span id="activescript"><?= tr("-none-")?></span></div>
-            <div><button id="bt_runscript" disabled="disabled"><?= tr("Run selected script")?></button><button id="bt_stopscript" disabled="disabled"><?= tr("Stop current script")?></button></div>
+            <div class="flex flex-column">
+              <select id="scriptlist" class="scrollselect flex-expand" size="10"></select>
+              <div class="textcenter"><?= tr("Active script:")?> <span id="activescript"><?= tr("-none-")?></span></div>
+              <div><button id="bt_runscript" disabled="disabled"><?= tr("Run selected script")?></button><button id="bt_stopscript" disabled="disabled"><?= tr("Stop current script")?></button></div>
+            </div>
+            <iframe id="scriptinfo" class="flex-expand"></iframe>
           </section>
           <section id="stelaction" class="block flex flex-column">
             <header><h2><?= tr("Actions")?></h2></header>

@@ -1,4 +1,4 @@
-define(["jquery", "./remotecontrol"], function($, rc) {
+define(["jquery", "./remotecontrol", "./properties"], function($, rc, propApi) {
     "use strict";
 
     var activescript;
@@ -10,15 +10,8 @@ define(["jquery", "./remotecontrol"], function($, rc) {
         }
     }
 
-    $(rc).on("serverDataReceived", function(evt, data) {
-
-        if (data.script.scriptIsRunning) {
-            changeActiveScript(data.script.runningScriptId);
-        } else if (activescript) {
-            //a script was running before, but now is not
-            changeActiveScript(undefined);
-        }
-
+    $(propApi).on("stelPropertyChanged:prop_ScriptMgr_runningScriptId", function(evt, data) {
+        changeActiveScript(data.value);
     });
 
     //Public stuff
@@ -58,7 +51,7 @@ define(["jquery", "./remotecontrol"], function($, rc) {
 
         stopScript: function() {
             //change the local active script for improved responsiveness
-            changeActiveScript(undefined);
+            changeActiveScript("");
 
             //post a stop request
             rc.postCmd("/api/scripts/stop");

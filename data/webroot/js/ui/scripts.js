@@ -6,6 +6,7 @@ define(["jquery", "api/scripts", "api/remotecontrol"], function($, scriptApi, rc
 	var $bt_runscript;
 	var $bt_stopscript;
 	var $scriptlist;
+	var $scriptinfo;
 
 	function fillScriptList(data) {
 		//document must be ready
@@ -41,9 +42,10 @@ define(["jquery", "api/scripts", "api/remotecontrol"], function($, scriptApi, rc
 		$bt_runscript = $("#bt_runscript");
 		$bt_stopscript = $("#bt_stopscript");
 		$activescript = $("#activescript");
+		$scriptinfo = $("#scriptinfo");
 
 		var runscriptfn = function() {
-			var selection = $scriptlist.children("option").filter(":selected").val();
+			var selection = $scriptlist.val();
 			if (selection) {
 				scriptApi.runScript(selection);
 			}
@@ -51,6 +53,9 @@ define(["jquery", "api/scripts", "api/remotecontrol"], function($, scriptApi, rc
 
 		$scriptlist.change(function() {
 			var selection = $scriptlist.children("option").filter(":selected").val();
+
+			$scriptinfo.attr('src', "/api/scripts/info?html=true&id="+selection);
+
 
 			$bt_runscript.prop({
 				disabled: false

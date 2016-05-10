@@ -208,7 +208,7 @@ void HttpConnectionHandler::read()
         {
             readTimer.stop();
 #ifndef NDEBUG
-            qDebug("HttpConnectionHandler (%p): received request",this);
+	    //qDebug("HttpConnectionHandler (%p): received request",this);
 #endif
 
             // Copy the Connection:close header to the response
@@ -248,7 +248,7 @@ void HttpConnectionHandler::read()
             }
 
 #ifndef NDEBUG
-            qDebug("HttpConnectionHandler (%p): finished request",this);
+	    //qDebug("HttpConnectionHandler (%p): finished request",this);
 #endif
 
             // Find out whether the connection must be closed
