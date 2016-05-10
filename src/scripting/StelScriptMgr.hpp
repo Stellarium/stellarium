@@ -39,6 +39,8 @@ class ScriptConsole;
 class StelScriptMgr : public QObject
 {
 	Q_OBJECT
+
+	Q_PROPERTY(QString runningScriptId READ runningScriptId NOTIFY runningScriptIdChanged)
 		
 #ifdef ENABLE_SCRIPT_CONSOLE
 friend class ScriptConsole;
@@ -69,13 +71,19 @@ public:
 	//! Add all the StelModules into the script engine
 	void addModules();
 public slots:
+	//! Returns a HTML description of the specified script.
+	//! Includes name, author, description...
+	//! @param s the file name of the script whose HTML description is to be returned.
+	//! @param generateDocumentTags if true, the main wrapping document tags (<html><body>...</body></html>) are also generated
+	QString getHtmlDescription(const QString& s, bool generateDocumentTags=true) const;
+
 	//! Gets a single line name of the script. 
 	//! @param s the file name of the script whose name is to be returned.
 	//! @return text following a comment with Name: at the start.  If no 
 	//! such comment is found, the file name will be returned.  If the file
 	//! is not found or cannot be opened for some reason, an Empty string
 	//! will be returned.
-	const QString getName(const QString& s);
+	QString getName(const QString& s) const;
 
 	//! Gets the name of the script Author
 	//! @param s the file name of the script whose name is to be returned.
@@ -83,7 +91,7 @@ public slots:
 	//! such comment is found, "" is returned.  If the file
 	//! is not found or cannot be opened for some reason, an Empty string
 	//! will be returned.
-	const QString getAuthor(const QString& s);
+	QString getAuthor(const QString& s) const;
 
 	//! Gets the licensing terms for the script
 	//! @param s the file name of the script whose name is to be returned.
@@ -91,7 +99,7 @@ public slots:
 	//! such comment is found, "" is returned.  If the file
 	//! is not found or cannot be opened for some reason, an Empty string
 	//! will be returned.
-	const QString getLicense(const QString& s);
+	QString getLicense(const QString& s) const;
 
 	//! Gets a description of the script.
 	//! @param s the file name of the script whose name is to be returned.
@@ -100,7 +108,7 @@ public slots:
 	//! is found.  If no such comment is found, QString("") is returned.
 	//! If the file is not found or cannot be opened for some reason, an 
 	//! Empty string will be returned.
-	const QString getDescription(const QString& s);
+	QString getDescription(const QString& s) const;
 
 	//! Gets the default shortcut of the script.
 	//! @param s the file name of the script whose name is to be returned.
@@ -108,7 +116,7 @@ public slots:
 	//! If no such comment is found, QString("") is returned.
 	//! If the file is not found or cannot be opened for some reason, an
 	//! Empty string will be returned.
-	const QString getShortcut(const QString& s);
+	QString getShortcut(const QString& s) const;
 
 	//! Run the script located in the given file. In essence, this calls prepareScript and runPreprocessedScript.
 	//! @note This is a blocking call! The event queue is held up by calls of QCoreApplication::processEvents().
@@ -191,14 +199,16 @@ private slots:
 	//! Called at the end of the running threa
 	void scriptEnded();
 signals:
+	//! Emitted when the running script id changes (also on start/stop)
+	void runningScriptIdChanged(const QString& id);
 	//! Notification when a script starts running
 	void scriptRunning();
 	//! Notification when a script has stopped running 
 	void scriptStopped();
 	//! Notification of a script event - warnings, current execution line etc.
-	void scriptDebug(const QString&);	
+	void scriptDebug(const QString&) const;
 	//! Notification of a script event - output line.
-	void scriptOutput(const QString&);
+	void scriptOutput(const QString&) const;
 
 private:
 	// Utility functions for preprocessor
@@ -215,7 +225,7 @@ private:
 	//! @param notFoundText the text to be returned if the key is not found
 	//! @return the text following the id and : on a comment line near the top of 
 	//! the script file (i.e. before there is a non-comment line).
-	const QString getHeaderSingleLineCommentText(const QString& s, const QString& id, const QString& notFoundText="");	
+	QString getHeaderSingleLineCommentText(const QString& s, const QString& id, const QString& notFoundText="") const;
 	QScriptEngine engine;
 	
 	//! The thread in which scripts are run

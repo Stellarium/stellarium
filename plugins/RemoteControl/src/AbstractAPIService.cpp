@@ -145,4 +145,15 @@ void AbstractAPIService::postImpl(const QByteArray& operation, const QMultiMap<Q
 }
 
 
+QString AbstractAPIService::wrapHtml(QString &text, const QString &title) const
+{
+	const QString head = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n"
+				"<html><head>\n"
+				"<title>" + title + "</title>\n"
+				"<link type=\"text/css\" rel=\"stylesheet\" href=\"/iframestyle.css\">\n"
+				"<base target=\"_blank\">\n"
+				"</head><body>\n";
+	const QString tail = "</body></html>";
 
+	return text.prepend(head).append(tail);
+}
