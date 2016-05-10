@@ -113,10 +113,6 @@ This operation can be polled every few moments to find out if some primary Stell
         isTimeNow,	//if true, the Stellarium time equals the current real-world time
         timerate	//the current time rate (in secs)
     },
-    script : {
-        scriptIsRunning,	//boolean, true if a script is running
-        runningScriptId		//the ID of the running script
-    },
     selectioninfo, //string that contains the information of the currently selected object, as returned by StelObject::getInfoString
     view : {
         fov		//current FOV
@@ -234,8 +230,12 @@ Implemented by ScriptService::getImpl
 Lists all known script files, as a JSON string array.
 
 \paragraph rcScriptServiceInfo info
-Parameters: <tt>id (String)</tt>\n
-Returns information about the script identified by \p id. Returns a JSON object of format
+Parameters: <tt>id (String) [html (any type)] </tt>\n
+Returns information about the script identified by \p id.
+If the optional parameter \p html is present (its value is ignored),
+the info is formatted using StelScriptMgr::getHtmlDescription and
+suitable for inclusion into an \c iframe element,
+otherwise this operation returns a JSON object of format:
 @code{.js}
 {
     id,	//the script ID
@@ -249,13 +249,15 @@ Returns information about the script identified by \p id. Returns a JSON object 
 @endcode
 
 \paragraph rcScriptServiceStatus status
-Returns the current script status as a JSON object of format
+Returns the current script status as a JSON object of format:
 @code{.js}
 {
     scriptIsRunning,	//true if a script is running
     runningScriptId		//the currently running script ID
 }
 @endcode
+@note The StelScriptMgr also provides a StelProperty \c prop_ScriptMgr_runningScriptId that
+can be used to find out the active script.
 
 \subsubsection rcScriptServicePOST POST operations
 Implemented by ScriptService::postImpl

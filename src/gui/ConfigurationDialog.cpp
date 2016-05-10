@@ -953,26 +953,7 @@ void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 		return;	
 	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();	
 	//ui->scriptInfoBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
-	QString html = "<html><head></head><body>";
-	html += "<h2>" + q_(scriptMgr.getName(s).trimmed()) + "</h2>";
-	QString d = scriptMgr.getDescription(s).trimmed();
-	d.replace("\n", "<br />");
-	d.replace(QRegExp("\\s{2,}"), " ");
-	html += "<p>" + q_(d) + "</p>";
-	html += "<p>";
-	if (!scriptMgr.getAuthor(s).trimmed().isEmpty())
-	{
-		html += "<strong>" + q_("Author") + "</strong>: " + scriptMgr.getAuthor(s) + "<br />";
-	}
-	if (!scriptMgr.getLicense(s).trimmed().isEmpty())
-	{
-		html += "<strong>" + q_("License") + "</strong>: " + scriptMgr.getLicense(s) + "<br />";
-	}	
-	if (!scriptMgr.getShortcut(s).trimmed().isEmpty())
-	{
-		html += "<strong>" + q_("Shortcut") + "</strong>: " + scriptMgr.getShortcut(s);
-	}
-	html += "</p></body></html>";
+	QString html = scriptMgr.getHtmlDescription(s);
 	ui->scriptInfoBrowser->setHtml(html);	
 }
 

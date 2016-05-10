@@ -43,7 +43,6 @@ protected:
 	//! @see \ref rcViewServiceGET
 	virtual void getImpl(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
 private:
-	QString wrapHtml(QString& data,const QString& title) const;
 	StelCore* core;
 	LandscapeMgr* lsMgr;
 	StelSkyCultureMgr* skyCulMgr;

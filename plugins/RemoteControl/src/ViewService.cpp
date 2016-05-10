@@ -39,21 +39,6 @@ ViewService::ViewService(const QByteArray &serviceName, QObject *parent) : Abstr
 	skyCulMgr = &StelApp::getInstance().getSkyCultureMgr();
 }
 
-QString ViewService::wrapHtml(QString &text, const QString &title) const
-{
-	//because the html descriptions are often not compatible with "clean" HTML5 which is used for the main interface
-	//we explicitely set the doctype to 4.01 transitional for better results
-	const QString head = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n"
-				"<html><head>\n"
-				"<title>" + title + "</title>\n"
-				"<link type=\"text/css\" rel=\"stylesheet\" href=\"/iframestyle.css\">\n"
-				"<base target=\"_blank\">\n"
-				"</head><body>\n";
-	const QString tail = "</body></html>";
-
-	return text.prepend(head).append(tail);
-}
-
 void ViewService::getImpl(const QByteArray &operation, const APIParameters &parameters, APIServiceResponse &response)
 {
 	Q_UNUSED(parameters);

@@ -47,6 +47,14 @@ void ScriptService::getImpl(const QByteArray& operation, const APIParameters &pa
 			//retrieve detail about a single script
 			QString scriptId = QString::fromUtf8(parameters.value("id"));
 
+			if(parameters.contains("html"))
+			{
+				QString html = scriptMgr->getHtmlDescription(scriptId, false);
+				response.setHeader("Content-Type","text/html; charset=UTF-8");
+				response.setData(wrapHtml(html, scriptId).toUtf8());
+				return;
+			}
+
 			QJsonObject obj;
 			//if the script name is wrong, this will return empty strings
 			obj.insert("id",scriptId);
