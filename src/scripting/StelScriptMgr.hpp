@@ -74,7 +74,7 @@ public slots:
 	//! Returns a HTML description of the specified script.
 	//! Includes name, author, description...
 	//! @param s the file name of the script whose HTML description is to be returned.
-	//! @param generateDocumentTags if true, the main wrapping document tags (<html><body>...</body></html>) are also generated
+	//! @param generateDocumentTags if true, the main wrapping document tags (\<html\>\<body\>...\</body\>\</html\>) are also generated
 	QString getHtmlDescription(const QString& s, bool generateDocumentTags=true) const;
 
 	//! Gets a single line name of the script. 
