@@ -1819,11 +1819,11 @@ void Oculars::paintOcularMask(const StelCore *core)
 	radiusHigh=outerRadius-deltaRadius;
 	for (int i=0; i<=slices; i++)
 	{
-		vertices[i*2][0]= params.viewportCenter[0] + outerRadius*sinCache[i];
-		vertices[i*2][1]= params.viewportCenter[1] + outerRadius*cosCache[i];
+		vertices[i*2][0]= params.viewportCenter[0] * params.devicePixelsPerPixel + outerRadius*sinCache[i];
+		vertices[i*2][1]= params.viewportCenter[1] * params.devicePixelsPerPixel + outerRadius*cosCache[i];
 		vertices[i*2][2] = 0.0;
-		vertices[i*2+1][0]= params.viewportCenter[0] + radiusHigh*sinCache[i];
-		vertices[i*2+1][1]= params.viewportCenter[1] + radiusHigh*cosCache[i];
+		vertices[i*2+1][0]= params.viewportCenter[0] * params.devicePixelsPerPixel + radiusHigh*sinCache[i];
+		vertices[i*2+1][1]= params.viewportCenter[1] * params.devicePixelsPerPixel + radiusHigh*cosCache[i];
 		vertices[i*2+1][2] = 0.0;
 	}
 	painter.drawFromArray(StelPainter::TriangleStrip, (slices+1)*2, 0, false);
