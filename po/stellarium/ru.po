@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-08 12:58+0700\n"
-"PO-Revision-Date: 2016-05-08 06:07+0000\n"
+"PO-Revision-Date: 2016-05-11 11:13+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-09 04:47+0000\n"
+"X-Launchpad-Export-Date: 2016-05-12 05:14+0000\n"
 "X-Generator: Launchpad (build 18025)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:140 src/core/modules/StarMgr.cpp:378
@@ -8315,6 +8315,10 @@ msgid ""
 "it is strongly recommended to avoid using the telescope control feature "
 "before sunset without appropriate protection."
 msgstr ""
+"Даже если вы не делаете это сознательно, наведение вашего телескопа в "
+"дневное время на Солнце может произойти по пути к цели, поэтому настоятельно "
+"рекомендуется не пользоваться функцией управления телескопа до захода Солнца "
+"без соответствующей защиты."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:306
@@ -8569,7 +8573,7 @@ msgid ""
 "<b>Nothing, just simulate one (a moving reticle)</b> is a %1virtual "
 "telescope%2 (no connection)"
 msgstr ""
-"<b>Ничего, просто симуляция (движущийся крест визирных линий)</b> является "
+"<b>Ничего, просто симуляция (движущийся крест визирных нитей)</b> является "
 "%1виртуальным телескопом%2 (нет соединения)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:347
@@ -8578,14 +8582,14 @@ msgid ""
 "telescope reticle."
 msgstr ""
 "<b>Название</b> это метка, которая будет отображаться на экране рядом с "
-"крестом визирных линий телескопа."
+"крестом визирных нитей телескопа."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:348
 msgid ""
 "<b>Connection delay</b>: If the movement of the telescope reticle on the "
 "screen is uneven, you can try increasing or decreasing this value."
 msgstr ""
-"<b>Задержка соединения</b>: Если движение креста визирных линий телескопа на "
+"<b>Задержка соединения</b>: Если движение креста визирных нитей телескопа на "
 "экране не плавное, вы можете попробовать увеличить или уменьшить это "
 "значение."
 
@@ -8632,6 +8636,8 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:357
 msgid "There is a pop-up box that suggests some default values:"
 msgstr ""
+"Имеется выпадающий список, который подсказывает некоторые умолчаемые "
+"значения:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:358
 msgid "On Windows, serial ports COM1 to COM10;"
@@ -8648,7 +8654,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:360
 msgid ""
 "On Mac OS X, the list is empty as it names its ports in a peculiar way."
-msgstr ""
+msgstr "В Mac OS X этот список пуст из-за своеобразного названия портов."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:361
 msgid ""
@@ -8743,12 +8749,16 @@ msgstr ""
 msgid ""
 "In the telescope configuration window, click on 'User Interface Settings'."
 msgstr ""
+"В окне настройки телескопа, нажмите на ссылку 'Пользовательские настройки "
+"интерфейса '."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:380
 msgid ""
 "Mark the 'Use field of view indicators' option, then enter a list of values "
 "separated with commas in the field below."
 msgstr ""
+"Отметьте опцию 'Использовать индикатор поля зрения', а затем в поле ниже "
+"введите список значений, разделенных запятыми."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
 msgid "The values are interpreted as degrees of arc."
@@ -8760,12 +8770,16 @@ msgid ""
 "This can be used in combination with a %1virtual telescope%2 to display a "
 "moving reticle with the Telrad circles."
 msgstr ""
+"Это может быть использовано в комбинации с %1виртуальным телескопом%2 для "
+"отображения движущегося креста визирных линий с кругами Telrad."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:386
 msgid ""
 "The 'Slew telescope to' window can be opened by pressing <b>Ctrl+0</b> or "
 "the respective button in the bottom toolbar."
 msgstr ""
+"Окно 'Навести телескоп на' можно открыть, нажав комбинацию <b>Ctrl+0</b> или "
+"соответствующую кнопку в нижней панели инструментов."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:387
 msgid ""
@@ -8773,6 +8787,9 @@ msgid ""
 "preferred format (Hours-Minutes-Seconds, Degrees-Minutes-Seconds, or Decimal "
 "degrees), a drop-down list and two buttons."
 msgstr ""
+"Он содержит два поля для ввода небесных координат, селекторы для "
+"предпочтительного формата (Часы-Минуты-Секунды, градусы-минуты-секунды или "
+"десятичных долях градуса), выпадающий список и две кнопки."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:388
 msgid ""
@@ -8785,12 +8802,16 @@ msgid ""
 "If no devices are connected, it will remain empty, and the 'Slew' button "
 "will be disabled."
 msgstr ""
+"Если никаких устройств не подключено, то он останется пустым, а кнопка "
+"'Навести' будет отключена."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:390
 msgid ""
 "Pressing the <b>Slew</b> button slews the selected device to the selected "
 "set of coordinates."
 msgstr ""
+"При нажатии кнопки 'Навести' происходит наведение выбранного устройства на "
+"выбранный набор координат."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:391
 #, qt-format
@@ -8798,6 +8819,8 @@ msgid ""
 "See the section about %1keyboard commands%2 below for other ways of "
 "controlling the device."
 msgstr ""
+"Смотрите раздел о %1клавиатурых командах%2 ниже для других способов "
+"управления устройством."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:392
 #, qt-format
@@ -8805,18 +8828,24 @@ msgid ""
 "Pressing the <b>Configure telescopes...</b> button opens the %1main window%2 "
 "of the plug-in."
 msgstr ""
+"Нажатие на кнопку 'Настроить телескопы...' открывает %1основное окно%2 "
+"плагина."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:393
 msgid ""
 "<b>TIP:</b> Inside the 'Slew' window, underlined letters indicate that "
 "pressing 'Alt + underlined letter' can be used instead of clicking."
 msgstr ""
+"<b>СОВЕТ:</b> Внутри окна 'Наведение' подчеркнутые буквы указывают, что "
+"нажатие 'Alt + подчеркнутая буква' можно использовать вместо мыши."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:394
 msgid ""
 "For example, pressing <b>Alt+S</b> is equivalent to clicking the 'Slew' "
 "button, pressing <b>Alt+E</b> switches to decimal degree format, etc."
 msgstr ""
+"Например, нажатие <b>Alt+S</b> эквивалентно кликанью на кнопку 'Навести', "
+"нажатие <b>Alt+E</b> переключает к формату десятичных градусов и т.д."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:397
 msgid "Sending commands"
@@ -8828,6 +8857,8 @@ msgid ""
 "telescope reticle labelled with the telescope's name on its current position "
 "in the sky."
 msgstr ""
+"После того, как телескоп успешно запущен/подключен, Stellarium отображает "
+"подписанный крест визирных нитей телескопа на его текущей позиции в небе."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:399
 msgid ""
@@ -8835,12 +8866,17 @@ msgid ""
 "with the mouse, it can be tracked and it appears as an object in the "
 "'Search' window."
 msgstr ""
+"Крест визирных нитей является таким же объектом, как и любой другой объект в "
+"Stellarium - он может быть выбран с помощью мыши, он может быть отслежены и "
+"найден как объект в окне 'Поиск'."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:400
 msgid ""
 "<b>To point a device to an object:</b> Select an object (e.g. a star) and "
 "press the number of the device while holding down the <b>Ctrl</b> key."
 msgstr ""
+"<b>Для наведения устройства на объект: </b> выберите объект (например, "
+"звезду) и нажмите номер устройства, удерживая клавишу <b>Ctrl</b>."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:401
 msgid "For example, Ctrl+1 for telescope #1."
@@ -8855,6 +8891,8 @@ msgid ""
 "<b>To point a device to the center of the view:</b> Press the number of the "
 "device while holding down the <b>Alt</b> key."
 msgstr ""
+"<b>Для наведения устройства на центр поля зрения: </b> нажмите номер "
+"устройства, удерживая клавишу <b>Alt</b>."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:404
 msgid "For example, Alt+1 for telescope #1."
@@ -8863,13 +8901,15 @@ msgstr "Например Alt+1 для телескопа #1."
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:405
 msgid ""
 "This will slew the device to the point in the center of the current view."
-msgstr ""
+msgstr "Это наведёт устройство в точку центра текущего поля зрения."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:406
 msgid ""
 "If you move the view after issuing the command, the target won't change "
 "unless you issue another command."
 msgstr ""
+"Если изменить поле зрения после отправки команды, цель не изменится, если не "
+"отправить другую команду."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:407
 #, qt-format
@@ -8877,6 +8917,8 @@ msgid ""
 "<b>To point a device to a given set of coordinates:</b> Use the %1'Slew to' "
 "window%2 (press <b>Ctrl+0</b>)."
 msgstr ""
+"<b>Для наведения устройства на данный набор координат: </b> используйте "
+"%1окно 'Навести телескоп на'%2 (нажмите <b>Ctrl+0</b>)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:411
 #, qt-format
@@ -8885,6 +8927,9 @@ msgid ""
 "definitions using one of the two built-in interfaces: the Meade LX200 (the "
 "Meade Autostar controller) interface and the Celestron NexStar interface."
 msgstr ""
+"Все перечисленные устройства в списке %1Модель устройства%2 определены для "
+"удобства и используют один из двух встроенных интерфейсов: интерфейс Meade "
+"LX200 (контроллер Meade Autostar) и интерфейс Celestron NexStar."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:412
 msgid "The device list contains the following:"
@@ -8921,6 +8966,8 @@ msgid ""
 "According to the tester, it is a bit slow, so its default setting of "
 "%1'Connection delay'%2 is 1.5 seconds instead of 0.5 seconds."
 msgstr ""
+"По словам тестера, она немного медленнее, поэтому её установка %1'Задержки "
+"соединения по умолчанию'%2 составляет 1,5 секунды вместо 0,5 секунды."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:419
 msgid ""
@@ -8935,6 +8982,10 @@ msgid ""
 "controller version 3.0 or greater is supported by the plug-in, as it uses "
 "the NexStar protocol."
 msgstr ""
+"<b>SynScan</b> также является названием ручного контроллера монтировок Sky-"
+"Watcher GoTo, и кажется, что любая монтировка, использующая контроллер "
+"SynScan версии 3.0 или выше, поддерживается плагином благодаря использованию "
+"протокола NexStar."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:421
 msgid "Argo Navis is a 'Digital Telescope Computer' by Wildcard Innovations."
@@ -8948,6 +8999,10 @@ msgid ""
 "(for example, a dobsonian) into a 'Push To' telescope (a telescope that uses "
 "a computer to find targets and human power to move the telescope itself)."
 msgstr ""
+"Это усовершенствованный цифровой круг, который превращает обычный телескоп "
+"(к примеру, на монтировке Добсона) в 'Push To' телескоп (телескоп, который "
+"использует компьютер для нацеливания и человеческую силу для поворота самого "
+"телескопа)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:423
 #, qt-format
@@ -8966,6 +9021,11 @@ msgid ""
 "will react in the same way as the reticle of a real telescope controlled by "
 "the plug-in."
 msgstr ""
+"Если вы хотите проверить этот плагин без фактического устройства, "
+"подключенного к компьютеру, выберите пункт <b>Никакого, просто симулятор "
+"(движение визира)</b> в поле <b>Телескоп управляется:</b>. Он покажет крест "
+"визирных нитей телескопа, который будет реагировать таким же образом, как и "
+"визир управляемого плагином реального телескопа."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:428
 #, qt-format
@@ -8973,6 +9033,8 @@ msgid ""
 "See the section above about %1field of view indicators%2 for a possible "
 "practical application (emulating 'Telrad' circles)."
 msgstr ""
+"Смотри выше раздел об %1индикаторах поля зрения%2 для возможного "
+"практического применения (имитация кругов 'Telrad')."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:429
 #, qt-format
@@ -8980,6 +9042,8 @@ msgid ""
 "This feature is equivalent to the 'Dummy' type of telescope supported by "
 "%1Stellarium's original telescope control feature%2."
 msgstr ""
+"Эта функция эквивалентна телескопу типа  'Dummy' , поддерживаемой "
+"%1оригинальной функцией управления телескопом в Stellarium%2."
 
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:446
@@ -9184,7 +9248,7 @@ msgstr "Внешнее ПО или удалённый компьютер"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Nothing, just simulate one (a moving reticle)"
-msgstr "Никакого, просто симулятор (движение шаблона)"
+msgstr "Никакого, просто симулятор (движение визира)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:475
 msgid "Connection delay:"
@@ -9197,7 +9261,7 @@ msgid ""
 "Increase this value if the reticle is skipping."
 msgstr ""
 "Приблизительное время прохождения сигнала от телескопа до Stellarium'а.\n"
-"Увеличьте это значение если окулярная сетка игнорирует изменения."
+"Увеличьте это значение если крест визирных нитей игнорирует изменения."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:481
 msgid "J2000 (default)"
@@ -9249,7 +9313,8 @@ msgstr "Настройки интерфейса пользователя"
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Show circles with fixed angular size around the telescope reticle"
 msgstr ""
-"Показывать круги фиксированного углового размера рядом с окулярной сеткой."
+"Показывать круги фиксированного углового размера вокруг креста визирных "
+"нитей."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Use field of view indicators"
@@ -9297,7 +9362,7 @@ msgstr "Показывать название телескопа"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
 msgid "Show telescope reticles"
-msgstr "Показывать шаблон телескопа"
+msgstr "Показывать крест визирных нитей телескопа"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
 msgid "Show field of view indicators"
