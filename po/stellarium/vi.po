@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-03 13:06+0700\n"
+"POT-Creation-Date: 2016-05-08 12:58+0700\n"
 "PO-Revision-Date: 2016-05-05 07:33+0000\n"
 "Last-Translator: Lê Văn Bách <levanbach1994ag@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-06 04:33+0000\n"
-"X-Generator: Launchpad (build 17995)\n"
+"X-Launchpad-Export-Date: 2016-05-09 04:50+0000\n"
+"X-Generator: Launchpad (build 18025)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:140 src/core/modules/StarMgr.cpp:378
 #: src/core/modules/GridLinesMgr.cpp:922 src/core/modules/LandscapeMgr.cpp:417
@@ -2280,29 +2280,29 @@ msgstr "Tự động ẩn thanh nút dọc"
 msgid "Toggle visibility of GUI"
 msgstr "Chuyển đổi tầm nhìn của giao diện người dùng"
 
-#: src/gui/StelGuiItems.cpp:317 src/gui/StelGuiItems.cpp:832
+#: src/gui/StelGuiItems.cpp:322 src/gui/StelGuiItems.cpp:838
 msgid "Space"
 msgstr "Phím cách"
 
-#: src/gui/StelGuiItems.cpp:655
+#: src/gui/StelGuiItems.cpp:661
 #, c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/StelGuiItems.cpp:687
+#: src/gui/StelGuiItems.cpp:693
 #, qt-format
 msgid "planetocentric distance %1 km"
 msgstr "Khoảng cách hành tinh tâm %1 km"
 
-#: src/gui/StelGuiItems.cpp:689
+#: src/gui/StelGuiItems.cpp:695
 msgid "planetocentric observer"
 msgstr "Người quan sát hành tinh tâm"
 
-#: src/gui/StelGuiItems.cpp:718
+#: src/gui/StelGuiItems.cpp:724
 msgid "Field of view"
 msgstr "Góc nhìn"
 
-#: src/gui/StelGuiItems.cpp:743
+#: src/gui/StelGuiItems.cpp:749
 msgid "Frames per second"
 msgstr "Khung hình/giây"
 
@@ -8968,14 +8968,9 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:422
 msgid ""
 "It is an advanced digital setting circle that turns an ordinary telescope "
-"(for example, a dobsonian) into a 'Push To'' telescope (a telescope that "
-"uses a computer to find targets and human power to move the telescope "
-"itself)."
+"(for example, a dobsonian) into a 'Push To' telescope (a telescope that uses "
+"a computer to find targets and human power to move the telescope itself)."
 msgstr ""
-"Nó là một vòng tròn thiết lập kỹ thuật số tiên tiến có thể biến một kính "
-"thiên văn thông thường (ví dụ, một cái dobsonian) thành một  kính thiên văn "
-"\"Push To'' (một kính thiên văn có sử dụng một máy tính để tìm mục tiêu và "
-"nguồn nhân lực để tự di chuyển các kính thiên văn)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:423
 #, qt-format

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-03 13:06+0700\n"
+"POT-Creation-Date: 2016-05-08 12:58+0700\n"
 "PO-Revision-Date: 2016-04-26 20:24+0000\n"
 "Last-Translator: henrysky <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-04 05:33+0000\n"
-"X-Generator: Launchpad (build 17995)\n"
+"X-Launchpad-Export-Date: 2016-05-09 04:51+0000\n"
+"X-Generator: Launchpad (build 18025)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:140 src/core/modules/StarMgr.cpp:378
 #: src/core/modules/GridLinesMgr.cpp:922 src/core/modules/LandscapeMgr.cpp:417
@@ -2183,29 +2183,29 @@ msgstr "自動隱藏垂直工具欄"
 msgid "Toggle visibility of GUI"
 msgstr "切換顯示的圖形用戶界面"
 
-#: src/gui/StelGuiItems.cpp:317 src/gui/StelGuiItems.cpp:832
+#: src/gui/StelGuiItems.cpp:322 src/gui/StelGuiItems.cpp:838
 msgid "Space"
 msgstr "太空"
 
-#: src/gui/StelGuiItems.cpp:655
+#: src/gui/StelGuiItems.cpp:661
 #, c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/StelGuiItems.cpp:687
+#: src/gui/StelGuiItems.cpp:693
 #, qt-format
 msgid "planetocentric distance %1 km"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:689
+#: src/gui/StelGuiItems.cpp:695
 msgid "planetocentric observer"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:718
+#: src/gui/StelGuiItems.cpp:724
 msgid "Field of view"
 msgstr "視野範圍"
 
-#: src/gui/StelGuiItems.cpp:743
+#: src/gui/StelGuiItems.cpp:749
 msgid "Frames per second"
 msgstr "每秒格數"
 
@@ -8473,9 +8473,8 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:422
 msgid ""
 "It is an advanced digital setting circle that turns an ordinary telescope "
-"(for example, a dobsonian) into a 'Push To'' telescope (a telescope that "
-"uses a computer to find targets and human power to move the telescope "
-"itself)."
+"(for example, a dobsonian) into a 'Push To' telescope (a telescope that uses "
+"a computer to find targets and human power to move the telescope itself)."
 msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:423
