@@ -198,24 +198,26 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 
 	if (flags&Distance)
 	{
-		// GZ: Distance from sun should be added to all planets IMHO.
 		double distanceAu = getHeliocentricEclipticPos().length();
 		double distanceKm = AU * distanceAu;
-		if (distanceAu < 0.1)
+		if (englishName!="Sun")
 		{
-			// xgettext:no-c-format
-			oss << QString(q_("Distance from Sun: %1AU (%2 km)"))
-				   .arg(distanceAu, 0, 'f', 6)
-				   .arg(distanceKm, 0, 'f', 3);
+			if (distanceAu < 0.1)
+			{
+				// xgettext:no-c-format
+				oss << QString(q_("Distance from Sun: %1AU (%2 km)"))
+				       .arg(distanceAu, 0, 'f', 6)
+				       .arg(distanceKm, 0, 'f', 3);
+			}
+			else
+			{
+				// xgettext:no-c-format
+				oss << QString(q_("Distance from Sun: %1AU (%2 Mio km)"))
+				       .arg(distanceAu, 0, 'f', 3)
+				       .arg(distanceKm / 1.0e6, 0, 'f', 3);
+			}
+			oss << "<br>";
 		}
-		else
-		{
-			// xgettext:no-c-format
-			oss << QString(q_("Distance from Sun: %1AU (%2 Mio km)"))
-				   .arg(distanceAu, 0, 'f', 3)
-				   .arg(distanceKm / 1.0e6, 0, 'f', 3);
-		}
-		oss << "<br>";
 		distanceAu = getJ2000EquatorialPos(core).length();
 		distanceKm = AU * distanceAu;
 		if (distanceAu < 0.1)
