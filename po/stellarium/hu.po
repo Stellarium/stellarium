@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-08 12:58+0700\n"
-"PO-Revision-Date: 2016-05-06 17:51+0000\n"
+"PO-Revision-Date: 2016-05-15 08:09+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-09 04:40+0000\n"
+"X-Launchpad-Export-Date: 2016-05-16 05:20+0000\n"
 "X-Generator: Launchpad (build 18025)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -464,7 +464,7 @@ msgstr "ismeretlen számú tag"
 #: src/core/modules/Nebula.cpp:929
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
-msgstr ""
+msgstr "halmaz egy ködszerű folton belül"
 
 #: src/core/modules/Nebula.cpp:950
 msgctxt "Reflection Nebulae Brightness"
@@ -504,29 +504,29 @@ msgstr "ismeretlen fényességű reflexiós köd"
 #: src/core/modules/Nebula.cpp:974
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
-msgstr ""
+msgstr "megvilágító csillag a ködszerű folton belül"
 
 #: src/core/modules/Nebula.cpp:977
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
-msgstr ""
+msgstr "a csillag a  megvilágított ködszerű folton kívül"
 
 #: src/core/modules/Nebula.cpp:980
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
-msgstr ""
+msgstr "a csillag a  megvilágított ködszerű folt egyik sarkában"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
 #: src/core/modules/Nebula.cpp:985
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
-msgstr ""
+msgstr "a csillag a  megvilágított, szabálytalan ködszerű folton kívül"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
 #: src/core/modules/Nebula.cpp:991
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
-msgstr ""
+msgstr "megvilágított, szabálytalan ködszerű folt"
 
 #: src/core/modules/Nebula.cpp:995
 msgctxt "Reflection Nebulae Classification"
@@ -630,7 +630,7 @@ msgstr "sötét köd"
 
 #: src/core/modules/Nebula.cpp:1106
 msgid "cluster associated with nebulosity"
-msgstr ""
+msgstr "halmaz ködszerű folttal"
 
 #: src/core/modules/Nebula.cpp:1109
 msgid "bipolar nebula"
@@ -5171,7 +5171,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1633
 msgid "GRS details..."
-msgstr ""
+msgstr "GRS részletek"
 
 #: src/ui_viewDialog.h:1635
 msgid "Limit the magnitude of solar system objects"
@@ -6178,7 +6178,7 @@ msgstr "Nagy Vörös Folt részletek"
 
 #: src/ui_greatRedSpotDialog.h:170
 msgid "Custom settings for position of GRS"
-msgstr ""
+msgstr "Egyéni beállítások GRS pozícióhoz"
 
 #: src/ui_greatRedSpotDialog.h:171 src/ui_astroCalcDialog.h:384
 #: src/ui_astroCalcDialog.h:386
@@ -6191,7 +6191,7 @@ msgstr "Éves eltolódás (fok):"
 
 #: src/ui_greatRedSpotDialog.h:173
 msgid "Longitude of GRS (degrees):"
-msgstr ""
+msgstr "GRS hosszúság (fok):"
 
 #: src/ui_greatRedSpotDialog.h:180
 msgid "Date and Time (UTC):"
@@ -6199,7 +6199,7 @@ msgstr "Datum és idő (UTC):"
 
 #: src/ui_greatRedSpotDialog.h:184
 msgid "Get the recent GRS measurement"
-msgstr ""
+msgstr "Legfrissebb GRS mérés"
 
 #: src/ui_scriptConsole.h:346
 msgid "Script console"
@@ -6337,11 +6337,11 @@ msgstr "Kiválasztott objektum a könyvjelzőkhöz"
 
 #: src/ui_bookmarksDialog.h:181
 msgid "&Add bookmark"
-msgstr ""
+msgstr "Könyvjelző &hozzáadása"
 
 #: src/ui_bookmarksDialog.h:182
 msgid "&Remove bookmark"
-msgstr ""
+msgstr "Könyvjelző &törlése"
 
 #: src/ui_bookmarksDialog.h:183
 msgid "Clear bookmarks"
@@ -8322,6 +8322,9 @@ msgid ""
 "the telescope can connect only to a serial port, a serial-to-USB (RS-232-to-"
 "USB) adapter may be necessary."
 msgstr ""
+"Ha a számítógépnek nincsen soros portja és a távcső csak soros porton tud "
+"csatlakozni, akkor szükséges egy hardvereszköz, egy adapter, ami a soros "
+"portot USB-hez illeszti (RS-232 - USB)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid ""
@@ -8417,11 +8420,11 @@ msgstr "A távcső vezérlése:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:341
 msgid "<b>Stellarium, directly through a serial port</b> is the DIRECT case"
-msgstr ""
+msgstr "<b>Stellarium, közvetlen soros port</b> - DIREKT"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:342
 msgid "<b>External software or a remote computer</b> is the INDIRECT case"
-msgstr ""
+msgstr "<b>Külső szoftver vagy távoli számítógép</b>  - INDIREKT"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:343
 #, qt-format
@@ -8465,15 +8468,15 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:355
 #, qt-format
 msgid "This section is active only for DIRECT connections (see %1above%2)."
-msgstr ""
+msgstr "Ez a rész csak DIREKT kapcsolat esetén érvényes  (lásd %1fentebb%2)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:356
 msgid "<b>Serial port</b> sets the serial port used by the telescope."
-msgstr ""
+msgstr "<b>Soros port</b> a távcső által használt port kiválasztása."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:357
 msgid "There is a pop-up box that suggests some default values:"
-msgstr ""
+msgstr "Egy felugró ablak mutatja az alapértelmezett értékeket:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:358
 msgid "On Windows, serial ports COM1 to COM10;"
@@ -8495,6 +8498,8 @@ msgid ""
 "If you are using an USB cable, the default serial port of your telescope "
 "most probably is not in the list of suggestions."
 msgstr ""
+"Ha USB kábelt használunk, a lista valószínűleg nem fogja mutatni a távcső "
+"soros portját."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:362
 msgid ""
@@ -8573,7 +8578,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
 msgid "The values are interpreted as degrees of arc."
-msgstr ""
+msgstr "Az értékek ívfokot jelentenek."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:382
 #, qt-format
@@ -8605,6 +8610,8 @@ msgid ""
 "If no devices are connected, it will remain empty, and the 'Slew' button "
 "will be disabled."
 msgstr ""
+"Ha nem kapcsolódik eszköz, ez üres marad és az \"Elfordít\" (=\"Slew\") gomb "
+"nem él."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:390
 msgid ""
@@ -8708,7 +8715,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:412
 msgid "The device list contains the following:"
-msgstr ""
+msgstr "Az eszközlista az alábbiakat tartalmazza:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:413
 msgid "Any device using the NexStar interface."
@@ -9499,7 +9506,7 @@ msgstr "Rajzok fényessége"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:359
 msgid "Ecliptic line (J2000)"
-msgstr ""
+msgstr "A ekliptika vonala (J2000)"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Nebula names"
