@@ -1380,7 +1380,9 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	// Espenak & Meeus (2006) used by default
 	algorithms->addItem(q_("Espenak & Meeus (2006)").append(" *"), "EspenakMeeus");
 	// GZ: I want to try out some things. Something is still wrong with eclipses, see lp:1275092.
-	//algorithms->addItem(q_("Espenak & Meeus (2006) no extra moon acceleration"), "EspenakMeeusZeroMoonAccel");
+	#ifndef NDEBUG
+	algorithms->addItem(q_("Espenak & Meeus (2006) no extra moon acceleration"), "EspenakMeeusZeroMoonAccel");
+	#endif
 	algorithms->addItem(q_("Reijs (2006)"), "Reijs");
 	algorithms->addItem(q_("Banjevic (2006)"), "Banjevic");
 	algorithms->addItem(q_("Islam, Sadiq & Qureshi (2008, 2013)"), "IslamSadiqQureshi");
