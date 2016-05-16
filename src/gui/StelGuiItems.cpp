@@ -82,7 +82,7 @@ void StelButton::initCtor(const QPixmap& apixOn,
 	pixOff = apixOff;
 	pixHover = apixHover;
 	pixNoChange = apixNoChange;
-	noBckground = noBackground;
+	noBckground = !StelApp::getInstance().getSettings()->value("gui/flag_show_buttons_background", !noBackground).toBool();
 	isTristate_ = isTristate;
 	opacity = 1.;
 	hoverOpacity = 0.;
