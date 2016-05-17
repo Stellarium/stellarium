@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-08 12:58+0700\n"
+"POT-Creation-Date: 2016-05-16 19:34+0700\n"
 "PO-Revision-Date: 2016-05-09 10:12+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-10 05:13+0000\n"
+"X-Launchpad-Export-Date: 2016-05-17 05:32+0000\n"
 "X-Generator: Launchpad (build 18025)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -227,8 +227,8 @@ msgstr ", %1 м"
 msgid "Celestial body:"
 msgstr "Небесне тіло:"
 
-#: src/core/modules/Nebula.cpp:188 src/core/modules/Planet.cpp:225
-#: src/core/modules/MinorPlanet.cpp:212 src/core/modules/StarWrapper.cpp:53
+#: src/core/modules/Nebula.cpp:188 src/core/modules/Planet.cpp:226
+#: src/core/modules/MinorPlanet.cpp:213 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:181 src/core/modules/StarWrapper.cpp:184
 #: plugins/Satellites/src/Satellite.cpp:270
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
@@ -249,8 +249,8 @@ msgstr "Тип: <b>%1</b> (%2)"
 msgid "Opacity: <b>%1</b>"
 msgstr "Непрозорість: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:231
-#: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:182
+#: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:232
+#: src/core/modules/MinorPlanet.cpp:219 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:191
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
 #: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:278
@@ -259,7 +259,7 @@ msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Величина: <b>%1</b> (зменшилася до <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
-#: src/core/modules/Planet.cpp:234 src/core/modules/MinorPlanet.cpp:221
+#: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
 #: src/core/modules/Comet.cpp:185 src/core/modules/StarWrapper.cpp:63
 #: src/core/modules/StarWrapper.cpp:194
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
@@ -718,82 +718,94 @@ msgstr "невідомий тип"
 msgid "Deep-sky objects"
 msgstr "Віддалені об’єкти"
 
-#: src/core/modules/Planet.cpp:237 src/core/modules/MinorPlanet.cpp:231
-#: src/core/modules/MinorPlanet.cpp:235 src/core/modules/Comet.cpp:194
+#: src/core/modules/Planet.cpp:238 src/core/modules/MinorPlanet.cpp:232
+#: src/core/modules/MinorPlanet.cpp:236 src/core/modules/Comet.cpp:194
 #: src/core/modules/StarWrapper.cpp:198 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Абсолютна зіркова величина: %1"
 
-#: src/core/modules/Planet.cpp:255 src/core/modules/MinorPlanet.cpp:248
-#: src/core/modules/Comet.cpp:224
+#: src/core/modules/Planet.cpp:258 src/core/modules/MinorPlanet.cpp:251
+#: src/core/modules/Comet.cpp:208
+#, no-c-format, qt-format
+msgid "Distance from Sun: %1AU (%2 km)"
+msgstr "Відстань від Сонця: %1 а. о. (%2 км)"
+
+#: src/core/modules/Planet.cpp:265 src/core/modules/MinorPlanet.cpp:258
+#: src/core/modules/Comet.cpp:215
+#, no-c-format, qt-format
+msgid "Distance from Sun: %1AU (%2 Mio km)"
+msgstr "Відстань від Сонця: %1 а. о. (%2 млн. км)"
+
+#: src/core/modules/Planet.cpp:275 src/core/modules/MinorPlanet.cpp:268
+#: src/core/modules/Comet.cpp:226
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Відстань: %1 а.о. (%2 км)"
 
-#: src/core/modules/Planet.cpp:262 src/core/modules/MinorPlanet.cpp:255
-#: src/core/modules/Comet.cpp:231
+#: src/core/modules/Planet.cpp:282 src/core/modules/MinorPlanet.cpp:275
+#: src/core/modules/Comet.cpp:233
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "Відстань: %1а. о. (%2 млн. км)"
 
-#: src/core/modules/Planet.cpp:276 src/core/modules/Planet.cpp:280
+#: src/core/modules/Planet.cpp:296 src/core/modules/Planet.cpp:300
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "Видимий діаметр: %1, з кільцями: %2"
 
-#: src/core/modules/Planet.cpp:287 src/core/modules/Planet.cpp:289
-#: src/core/modules/MinorPlanet.cpp:266 src/core/modules/MinorPlanet.cpp:268
+#: src/core/modules/Planet.cpp:307 src/core/modules/Planet.cpp:309
+#: src/core/modules/MinorPlanet.cpp:286 src/core/modules/MinorPlanet.cpp:288
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Видимий діаметр: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:305 src/core/modules/MinorPlanet.cpp:276
+#: src/core/modules/Planet.cpp:325 src/core/modules/MinorPlanet.cpp:296
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "Сидеричний період: %1 днів (%2 a)"
 
-#: src/core/modules/Planet.cpp:308
+#: src/core/modules/Planet.cpp:328
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "Сидеричний день: %1"
 
-#: src/core/modules/Planet.cpp:309
+#: src/core/modules/Planet.cpp:329
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "Середній сонячний день: %1"
 
-#: src/core/modules/Planet.cpp:313
+#: src/core/modules/Planet.cpp:333
 msgid "The period of rotation is chaotic"
 msgstr "Період обертання є хаотичним"
 
-#: src/core/modules/Planet.cpp:323 src/core/modules/Planet.cpp:328
+#: src/core/modules/Planet.cpp:343 src/core/modules/Planet.cpp:348
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Фазовий кут: %1"
 
-#: src/core/modules/Planet.cpp:324 src/core/modules/Planet.cpp:329
+#: src/core/modules/Planet.cpp:344 src/core/modules/Planet.cpp:349
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Видовження: %1"
 
-#: src/core/modules/Planet.cpp:332
+#: src/core/modules/Planet.cpp:352
 #, qt-format
 msgid "Phase: %1"
 msgstr "Фаза: %1"
 
-#: src/core/modules/Planet.cpp:333
+#: src/core/modules/Planet.cpp:353
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Освітленість: %1%"
 
-#: src/core/modules/Planet.cpp:345
+#: src/core/modules/Planet.cpp:365
 #, qt-format
 msgid "Eclipse Factor: %1%"
 msgstr "Коефіцієнт затемнення: %1%"
 
-#: src/core/modules/MinorPlanet.cpp:205
+#: src/core/modules/MinorPlanet.cpp:206
 #, qt-format
 msgid "Provisional designation: %1"
 msgstr "Ймовірне позначення: %1"
@@ -808,33 +820,23 @@ msgctxt "type of comet"
 msgid "periodic"
 msgstr "періодична"
 
-#: src/core/modules/Comet.cpp:207
-#, no-c-format, qt-format
-msgid "Distance from Sun: %1AU (%2 km)"
-msgstr "Відстань від Сонця: %1 а. о. (%2 км)"
-
-#: src/core/modules/Comet.cpp:214
-#, no-c-format, qt-format
-msgid "Distance from Sun: %1AU (%2 Mio km)"
-msgstr "Відстань від Сонця: %1 а. о. (%2 млн. км)"
-
 #. TRANSLATORS: Sidereal (orbital) period for comets in Julian years (symbol: a)
-#: src/core/modules/Comet.cpp:244
+#: src/core/modules/Comet.cpp:246
 #, qt-format
 msgid "Sidereal period: %1 a"
 msgstr "Сидеричний період: %1 с. р."
 
-#: src/core/modules/Comet.cpp:249
+#: src/core/modules/Comet.cpp:251
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
 msgstr "Швидкість: %1 км/с"
 
-#: src/core/modules/Comet.cpp:260
+#: src/core/modules/Comet.cpp:262
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
 msgstr "Діаметр коми (приблизний): %1 км"
 
-#: src/core/modules/Comet.cpp:264
+#: src/core/modules/Comet.cpp:266
 #, no-c-format, qt-format
 msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "Довжина газового хвоста (приблизна): %1 млн. км"
@@ -2014,22 +2016,26 @@ msgid "Espenak & Meeus (2006)"
 msgstr "Espenak і Meeus (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1384
+msgid "Espenak & Meeus (2006) no extra moon acceleration"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:1386
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1385
+#: src/gui/ConfigurationDialog.cpp:1387
 msgid "Banjevic (2006)"
 msgstr "Баньєвич (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1386
+#: src/gui/ConfigurationDialog.cpp:1388
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq та Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1387
+#: src/gui/ConfigurationDialog.cpp:1389
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana та Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1388
+#: src/gui/ConfigurationDialog.cpp:1390
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Нетипове рівняння для %1T"
