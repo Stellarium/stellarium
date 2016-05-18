@@ -365,6 +365,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 		QString ipRegion = locMap.value("region_name").toString();
 		QString ipCity = locMap.value("city").toString();
 		QString ipCountry = locMap.value("country_name").toString(); // NOTE: Got a short name of country
+		QString ipCountryCode = locMap.value("country_code").toString();
 		QString ipTimeZone = locMap.value("time_zone").toString();
 		float latitude=locMap.value("latitude").toFloat();
 		float longitude=locMap.value("longitude").toFloat();
@@ -372,12 +373,10 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 		qDebug() << "Got location" << QString("%1, %2, %3 (%4, %5)").arg(ipCity).arg(ipRegion).arg(ipCountry).arg(latitude).arg(longitude) << "for IP" << locMap.value("ip").toString();
 
 		QString locLine= // we re-pack into a new line that will be parsed back by StelLocation...
-				QString("%1\t%2\t%3\t%4\t%5\t%6\t%7\t%8")
+				QString("%1\t%2\t%3\tX\t0\t%4\t%5\t0\t\t%6")
 				.arg(ipCity.isEmpty() ? QString("%1, %2").arg(latitude).arg(longitude) : ipCity)
 				.arg(ipRegion.isEmpty() ? "IPregion"  : ipRegion)
-				.arg(ipCountry.isEmpty() ? "IPcountry" : ipCountry)
-				.arg("X") // role: X=user-defined
-				.arg(0)   // population: unknown
+				.arg(ipCountryCode.isEmpty() ? "" : ipCountryCode.toLower())
 				.arg(latitude<0 ? QString("%1S").arg(-latitude, 0, 'f', 6) : QString("%1N").arg(latitude, 0, 'f', 6))
 				.arg(longitude<0 ? QString("%1W").arg(-longitude, 0, 'f', 6) : QString("%1E").arg(longitude, 0, 'f', 6))
 				.arg(ipTimeZone.isEmpty() ? "" : ipTimeZone);
