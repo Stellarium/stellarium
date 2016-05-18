@@ -542,12 +542,12 @@ void LocationDialog::updateDefaultLocationControls(bool currentIsDefault)
 void LocationDialog::ipQueryLocation(bool state)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
-	StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
 	if (state)
 	{
 		conf->setValue("init_location/location", "auto");
 		disconnectEditSignals();
 		resetCompleteList(); // in case we are on Moon/Mars, we must get list back to show all (earth) locations...
+		StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
 		locMgr.locationFromIP(); // This just triggers asynchronous lookup.
 		ui->useAsDefaultLocationCheckBox->setChecked(!state);
 		ui->pushButtonReturnToDefault->setEnabled(!state);
