@@ -13,23 +13,6 @@ IF(WIN32)
 	INSTALL(FILES ../plugins/Scenery3d/doc/Scenery3d.pdf DESTINATION share/${PACKAGE}/data)
 ENDIF(WIN32)
 ENDIF()
-	
-# install RemoteControl plugin stuff
-IF(USE_PLUGIN_REMOTECONTROL)
-	INSTALL(DIRECTORY webroot/ DESTINATION share/${PACKAGE}/data/webroot FILES_MATCHING
-		PATTERN "*.png" 
-		PATTERN "*.gif"
-		PATTERN "*.html"
-		PATTERN "*.js"
-		PATTERN "*.css"
-		PATTERN "*.eot"
-		PATTERN "*.svg"
-		PATTERN "*.ttf"
-		PATTERN "*.woff"
-		PATTERN "*.woff2"
-		PATTERN "translate_files"
-		PATTERN "*.ico")
-ENDIF()
 
 IF (BUILD_FOR_MAEMO)
 	INSTALL(FILES maemo/stellarium.desktop DESTINATION /usr/share/applications/hildon)
