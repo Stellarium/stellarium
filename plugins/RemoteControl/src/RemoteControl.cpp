@@ -117,9 +117,18 @@ void RemoteControl::init()
 
 	StaticFileControllerSettings settings;
 	//retrieve actual webroot through StelFileMgr
-	QString path = StelFileMgr::findFile("data/webroot",StelFileMgr::Directory);
+	//this prefers a webroot in user dir to the default one in the install dir
+	QString path = StelFileMgr::findFile("webroot",StelFileMgr::Directory);
+	if(path.isEmpty())
+	{
+		//webroot folder not found, probably running from IDE! try to use hardcoded path...
+		path = REMOTECONTROL_WEBROOT_PATH;
+	}
 	//make sure its absolute, otherwise QtWebApp will look relative to working dir
-	settings.path = QDir(path).absolutePath();
+	QDir dirPath(path);
+	if(!dirPath.exists())
+		qWarning()<<"[RemoteControl] Webroot folder invalid, can not use HTML interface";
+	settings.path = dirPath.absolutePath();
 #ifndef QT_NO_DEBUG
 	//"disable" cache for development
 	settings.cacheTime = 1;
