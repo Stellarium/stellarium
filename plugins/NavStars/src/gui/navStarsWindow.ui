@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>pointerCoordinatesWindowForm</class>
- <widget class="QWidget" name="pointerCoordinatesWindowForm">
+ <class>navStarsWindowForm</class>
+ <widget class="QWidget" name="navStarsWindowForm">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -87,7 +87,7 @@
       <item>
        <widget class="QLabel" name="stelWindowTitle">
         <property name="text">
-         <string>Pointer Coordinates</string>
+         <string>Navigational stars</string>
         </property>
        </widget>
       </item>
@@ -134,9 +134,9 @@
      <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="QWidget" name="tabCoordinates">
+     <widget class="QWidget" name="tabNavStars">
       <attribute name="title">
-       <string>Pointer Coordinates</string>
+       <string>Navigational stars</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayoutTimeZone">
        <property name="spacing">
@@ -155,7 +155,7 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="QGroupBox" name="groupBoxCoordinates">
+        <widget class="QGroupBox" name="groupBoxNavStars">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -163,7 +163,7 @@
           </size>
          </property>
          <property name="title">
-          <string>Pointer Coordinates</string>
+          <string>Set of navigational stars</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -182,81 +182,22 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QCheckBox" name="checkBoxEnableAtStartup">
-            <property name="text">
-             <string>Enable display of coordinates at startup</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="checkBoxShowButton">
-            <property name="text">
-             <string>Show plug-in button on toolbar</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
-            <item>
-             <widget class="QLabel" name="labelCoordinateSystem">
-              <property name="toolTip">
-               <string>Which coordinate system will be used for displaying</string>
-              </property>
-              <property name="text">
-               <string>Coordinates:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="coordinateSystemComboBox">
-              <property name="editable">
-               <bool>false</bool>
-              </property>
-              <property name="insertPolicy">
-               <enum>QComboBox::NoInsert</enum>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout">
-            <item>
-             <widget class="QLabel" name="labelFontSize">
-              <property name="text">
-               <string>Font size:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QSpinBox" name="spinBoxFontSize">
-              <property name="minimum">
-               <number>10</number>
-              </property>
-              <property name="maximum">
-               <number>50</number>
-              </property>
-              <property name="value">
-               <number>14</number>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
-            <item>
-             <widget class="QLabel" name="placeLabel">
+           <layout class="QGridLayout" name="gridLayout">
+            <item row="0" column="0">
+             <widget class="QLabel" name="nsSetLabel">
               <property name="toolTip">
                <string>Place of the string with coordinates of the mouse pointer</string>
               </property>
               <property name="text">
-               <string>Place of the string:</string>
+               <string>The current set:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
-            <item>
-             <widget class="QComboBox" name="placeComboBox">
+            <item row="0" column="1">
+             <widget class="QComboBox" name="nsSetComboBox">
               <property name="editable">
                <bool>false</bool>
               </property>
@@ -268,65 +209,23 @@
               </property>
              </widget>
             </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayoutCustomCoords">
-            <item>
-             <spacer name="horizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+            <item row="1" column="0">
+             <widget class="QLabel" name="labelNote">
+              <property name="text">
+               <string>Note:</string>
               </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelCustomCoords">
-              <property name="enabled">
-               <bool>true</bool>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
               </property>
              </widget>
             </item>
-            <item>
-             <widget class="QSpinBox" name="spinBoxX">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="toolTip">
-               <string>Coordinate X</string>
-              </property>
-              <property name="specialValueText">
+            <item row="1" column="1">
+             <widget class="QLabel" name="nsSetDescription">
+              <property name="text">
                <string/>
               </property>
-              <property name="minimum">
-               <number>1</number>
-              </property>
-              <property name="maximum">
-               <number>9999</number>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QSpinBox" name="spinBoxY">
-              <property name="enabled">
+              <property name="wordWrap">
                <bool>true</bool>
-              </property>
-              <property name="toolTip">
-               <string>Coordinate Y</string>
-              </property>
-              <property name="specialValueText">
-               <string/>
-              </property>
-              <property name="minimum">
-               <number>1</number>
-              </property>
-              <property name="maximum">
-               <number>9999</number>
               </property>
              </widget>
             </item>
@@ -346,7 +245,7 @@
            </spacer>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <layout class="QHBoxLayout" name="horizontalLayoutNsSettings">
             <item>
              <widget class="QPushButton" name="pushButtonSave">
               <property name="text">
