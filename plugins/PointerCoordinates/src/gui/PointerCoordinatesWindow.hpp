@@ -48,7 +48,7 @@ private:
 	Ui_pointerCoordinatesWindowForm* ui;
 	PointerCoordinates* coord;
 
-	void updateAboutText();
+	void setAboutHtml();
 	void populateValues();
 	void setCustomCoordinatesAccess(QString place);
 
