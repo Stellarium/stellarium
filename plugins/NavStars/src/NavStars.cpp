@@ -307,19 +307,19 @@ QString NavStars::getCurrentNavigationalStarsSetDescription() const
 		case AngloAmerican:
 		{
 			// TRANSLATORS: The emphasis tags mark a book title.
-			txt = q_("The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> jointly published by Her Majesty's Nautical Almanac Office and the US Naval Observatory since 1958; consequently, these stars are also used in navigational aids such as the 2102D Star Finder and Identifier.");
+			txt = q_("The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> jointly published by Her Majesty's Nautical Almanac Office and the US Naval Observatory since 1958; consequently, these stars are also used in navigational aids such as the <em>2102D Star Finder and Identifier</em>.");
 			break;
 		}
 		case French:
 		{
 			// TRANSLATORS: The emphasis tags mark a book title.
-			txt = q_("The 81 stars that are listed in French Nautical Almanac (Original French name is <em>%1</em>).").arg("Ephémérides Nautiques");
+			txt = q_("The 81 stars that are listed in the French Nautical Almanac (Original French title is <em>%1</em>).").arg("Ephémérides Nautiques");
 			break;
 		}
 		case Russian:
 		{
 			// TRANSLATORS: The emphasis tags mark a book title.
-			txt = q_("The 160 stars that are listed in Russian Nautical Almanac (Original Russian name is <em>%1</em>).").arg("Морской астрономический ежегодник");
+			txt = q_("The 160 stars that are listed in the Russian Nautical Almanac (Original Russian title is <em>%1</em>).").arg("Морской астрономический ежегодник");
 			break;
 		}
 	}
