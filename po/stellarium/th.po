@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-08 12:58+0700\n"
+"POT-Creation-Date: 2016-05-21 21:13+0700\n"
 "PO-Revision-Date: 2015-08-10 03:01+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-09 04:49+0000\n"
+"X-Launchpad-Export-Date: 2016-05-22 05:33+0000\n"
 "X-Generator: Launchpad (build 18025)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -223,8 +223,8 @@ msgstr ", %1 ม."
 msgid "Celestial body:"
 msgstr "วัตถุท้องฟ้า:"
 
-#: src/core/modules/Nebula.cpp:188 src/core/modules/Planet.cpp:225
-#: src/core/modules/MinorPlanet.cpp:212 src/core/modules/StarWrapper.cpp:53
+#: src/core/modules/Nebula.cpp:188 src/core/modules/Planet.cpp:226
+#: src/core/modules/MinorPlanet.cpp:213 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:181 src/core/modules/StarWrapper.cpp:184
 #: plugins/Satellites/src/Satellite.cpp:270
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
@@ -245,8 +245,8 @@ msgstr "ชนิด: <b>%1</b> (%2)"
 msgid "Opacity: <b>%1</b>"
 msgstr "ความทึบแสง: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:231
-#: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:182
+#: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:232
+#: src/core/modules/MinorPlanet.cpp:219 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:191
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
 #: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:278
@@ -255,7 +255,7 @@ msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "โชติมาตร: <b>%1</b> (จางลงไปที่: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
-#: src/core/modules/Planet.cpp:234 src/core/modules/MinorPlanet.cpp:221
+#: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
 #: src/core/modules/Comet.cpp:185 src/core/modules/StarWrapper.cpp:63
 #: src/core/modules/StarWrapper.cpp:194
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
@@ -714,82 +714,94 @@ msgstr ""
 msgid "Deep-sky objects"
 msgstr "วัตถุท้องฟ้าห้วงลึก"
 
-#: src/core/modules/Planet.cpp:237 src/core/modules/MinorPlanet.cpp:231
-#: src/core/modules/MinorPlanet.cpp:235 src/core/modules/Comet.cpp:194
+#: src/core/modules/Planet.cpp:238 src/core/modules/MinorPlanet.cpp:232
+#: src/core/modules/MinorPlanet.cpp:236 src/core/modules/Comet.cpp:194
 #: src/core/modules/StarWrapper.cpp:198 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "โชติมาตรสัมบูรณ์: %1"
 
-#: src/core/modules/Planet.cpp:255 src/core/modules/MinorPlanet.cpp:248
-#: src/core/modules/Comet.cpp:224
+#: src/core/modules/Planet.cpp:258 src/core/modules/MinorPlanet.cpp:251
+#: src/core/modules/Comet.cpp:208
+#, no-c-format, qt-format
+msgid "Distance from Sun: %1AU (%2 km)"
+msgstr "ระยะห่างจากดวงอาทิตย์: %1หน่วยดาราศาสตร์ (%2 กม.)"
+
+#: src/core/modules/Planet.cpp:265 src/core/modules/MinorPlanet.cpp:258
+#: src/core/modules/Comet.cpp:215
+#, no-c-format, qt-format
+msgid "Distance from Sun: %1AU (%2 Mio km)"
+msgstr "ระยะห่างจากดวงอาทิตย์: %1หน่วยดาราศาสตร์ (%2 ล้าน กม.)"
+
+#: src/core/modules/Planet.cpp:275 src/core/modules/MinorPlanet.cpp:268
+#: src/core/modules/Comet.cpp:226
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "ระยะห่าง: %1 หน่วยดาราศาสตร์ (%2 กม.)"
 
-#: src/core/modules/Planet.cpp:262 src/core/modules/MinorPlanet.cpp:255
-#: src/core/modules/Comet.cpp:231
+#: src/core/modules/Planet.cpp:282 src/core/modules/MinorPlanet.cpp:275
+#: src/core/modules/Comet.cpp:233
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "ระยะห่าง : %1AU (%2 ล้าน กม.)"
 
-#: src/core/modules/Planet.cpp:276 src/core/modules/Planet.cpp:280
+#: src/core/modules/Planet.cpp:296 src/core/modules/Planet.cpp:300
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "เส้นผ่านศูนย์กลางปรากฏ: %1, วงแหวน: %2"
 
-#: src/core/modules/Planet.cpp:287 src/core/modules/Planet.cpp:289
-#: src/core/modules/MinorPlanet.cpp:266 src/core/modules/MinorPlanet.cpp:268
+#: src/core/modules/Planet.cpp:307 src/core/modules/Planet.cpp:309
+#: src/core/modules/MinorPlanet.cpp:286 src/core/modules/MinorPlanet.cpp:288
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "เส้นผ่านศูนย์กลางปรากฏ: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:305 src/core/modules/MinorPlanet.cpp:276
+#: src/core/modules/Planet.cpp:325 src/core/modules/MinorPlanet.cpp:296
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "คาบดาราคติ: %1 วัน (%2 a)"
 
-#: src/core/modules/Planet.cpp:308
+#: src/core/modules/Planet.cpp:328
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "วันดาราคติ: %1"
 
-#: src/core/modules/Planet.cpp:309
+#: src/core/modules/Planet.cpp:329
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "วันสุริยคติปานกลาง: %1"
 
-#: src/core/modules/Planet.cpp:313
+#: src/core/modules/Planet.cpp:333
 msgid "The period of rotation is chaotic"
 msgstr "คาบการหมุนไม่แน่นอน"
 
-#: src/core/modules/Planet.cpp:323 src/core/modules/Planet.cpp:328
+#: src/core/modules/Planet.cpp:343 src/core/modules/Planet.cpp:348
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "มุมดิถี: %1"
 
-#: src/core/modules/Planet.cpp:324 src/core/modules/Planet.cpp:329
+#: src/core/modules/Planet.cpp:344 src/core/modules/Planet.cpp:349
 #, qt-format
 msgid "Elongation: %1"
 msgstr "มุมห่างจากดวงอาทิตย์: %1"
 
-#: src/core/modules/Planet.cpp:332
+#: src/core/modules/Planet.cpp:352
 #, qt-format
 msgid "Phase: %1"
 msgstr "ดิถี: %1"
 
-#: src/core/modules/Planet.cpp:333
+#: src/core/modules/Planet.cpp:353
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "ส่วนสว่าง: %1%"
 
-#: src/core/modules/Planet.cpp:345
+#: src/core/modules/Planet.cpp:365
 #, qt-format
 msgid "Eclipse Factor: %1%"
 msgstr ""
 
-#: src/core/modules/MinorPlanet.cpp:205
+#: src/core/modules/MinorPlanet.cpp:206
 #, qt-format
 msgid "Provisional designation: %1"
 msgstr "ชื่อชั่วคราว: %1"
@@ -804,33 +816,23 @@ msgctxt "type of comet"
 msgid "periodic"
 msgstr "มีคาบ"
 
-#: src/core/modules/Comet.cpp:207
-#, no-c-format, qt-format
-msgid "Distance from Sun: %1AU (%2 km)"
-msgstr "ระยะห่างจากดวงอาทิตย์: %1หน่วยดาราศาสตร์ (%2 กม.)"
-
-#: src/core/modules/Comet.cpp:214
-#, no-c-format, qt-format
-msgid "Distance from Sun: %1AU (%2 Mio km)"
-msgstr "ระยะห่างจากดวงอาทิตย์: %1หน่วยดาราศาสตร์ (%2 ล้าน กม.)"
-
 #. TRANSLATORS: Sidereal (orbital) period for comets in Julian years (symbol: a)
-#: src/core/modules/Comet.cpp:244
+#: src/core/modules/Comet.cpp:246
 #, qt-format
 msgid "Sidereal period: %1 a"
 msgstr "คาบดาราคติ: %1 a (ปีจูเลียน)"
 
-#: src/core/modules/Comet.cpp:249
+#: src/core/modules/Comet.cpp:251
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
 msgstr "อัตราเร็ว: %1 กม./วินาที"
 
-#: src/core/modules/Comet.cpp:260
+#: src/core/modules/Comet.cpp:262
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
 msgstr "ขนาดของโคม่า (โดยประมาณ): %1 กม."
 
-#: src/core/modules/Comet.cpp:264
+#: src/core/modules/Comet.cpp:266
 #, no-c-format, qt-format
 msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "ความยาวของหางแก๊ส (โดยประมาณ): %1 ล้าน กม."
@@ -1759,12 +1761,14 @@ msgstr "ติดต่อ"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:408
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:252
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:120
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:90
 #: plugins/Novae/src/gui/NovaeDialog.cpp:119
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:144
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:207
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:118
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:185
 msgid "Version"
 msgstr "รุ่น"
@@ -1773,12 +1777,14 @@ msgstr "รุ่น"
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
 #: plugins/Oculars/src/gui/OcularDialog.cpp:549
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:91
 #: plugins/Novae/src/gui/NovaeDialog.cpp:120
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:120
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:186
 msgid "Author"
 msgstr "ผู้สร้าง"
@@ -1973,22 +1979,26 @@ msgid "Espenak & Meeus (2006)"
 msgstr "Espenak & Meeus (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1384
+msgid "Espenak & Meeus (2006) no extra moon acceleration"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:1386
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1385
+#: src/gui/ConfigurationDialog.cpp:1387
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1386
+#: src/gui/ConfigurationDialog.cpp:1388
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1387
+#: src/gui/ConfigurationDialog.cpp:1389
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana & Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1388
+#: src/gui/ConfigurationDialog.cpp:1390
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "สมการ %1T ที่กำหนดเอง"
@@ -2104,50 +2114,51 @@ msgstr ""
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{กระทู้} - ถกปัญหากับผู้ใช้คนอื่น ๆ  เกี่ยวกับ Stellarium"
 
-#: src/gui/HelpDialog.cpp:295
+#: src/gui/HelpDialog.cpp:296
 msgid "Developers"
 msgstr "เหล่านักพัฒนา"
 
-#: src/gui/HelpDialog.cpp:296
+#: src/gui/HelpDialog.cpp:297
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "ผู้ร่วมโครงการและผู้พัฒนาหลัก: %1"
 
-#: src/gui/HelpDialog.cpp:297
+#: src/gui/HelpDialog.cpp:298
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "เจ้าของผลงาน/ผู้พัฒนา เอกสาร: %1"
 
-#: src/gui/HelpDialog.cpp:298
+#: src/gui/HelpDialog.cpp:299
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "นักออกแบบกราฟิก/อื่น ๆ: %1"
 
-#: src/gui/HelpDialog.cpp:299 src/gui/HelpDialog.cpp:300
-#: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
-#: src/gui/HelpDialog.cpp:303 src/gui/HelpDialog.cpp:304
-#: src/gui/HelpDialog.cpp:305 src/gui/HelpDialog.cpp:306
-#: src/gui/HelpDialog.cpp:311 src/gui/HelpDialog.cpp:312
-#: src/gui/HelpDialog.cpp:313 src/gui/HelpDialog.cpp:314
+#: src/gui/HelpDialog.cpp:300 src/gui/HelpDialog.cpp:301
+#: src/gui/HelpDialog.cpp:302 src/gui/HelpDialog.cpp:303
+#: src/gui/HelpDialog.cpp:304 src/gui/HelpDialog.cpp:305
+#: src/gui/HelpDialog.cpp:306 src/gui/HelpDialog.cpp:307
+#: src/gui/HelpDialog.cpp:308 src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:314 src/gui/HelpDialog.cpp:315
+#: src/gui/HelpDialog.cpp:316
 #, qt-format
 msgid "Developer: %1"
 msgstr "นักพัฒนา: %1"
 
-#: src/gui/HelpDialog.cpp:307
+#: src/gui/HelpDialog.cpp:309
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "การบูรณาการอย่างต่อเนื่อง: %1"
 
-#: src/gui/HelpDialog.cpp:308
+#: src/gui/HelpDialog.cpp:310
 #, qt-format
 msgid "Tester: %1"
 msgstr "ผู้ทดสอบ: %1"
 
-#: src/gui/HelpDialog.cpp:309
+#: src/gui/HelpDialog.cpp:311
 msgid "Former Developers"
 msgstr "นักพัฒนาเดิม"
 
-#: src/gui/HelpDialog.cpp:310
+#: src/gui/HelpDialog.cpp:312
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -2155,18 +2166,18 @@ msgstr ""
 "หลายคนเคยมีส่วนร่วมในการพัฒนา แต่ปัจจุบันไม่มีความเคลื่อนไหว "
 "ผลงานของพวกเขาเป็นประโยชน์ต่อโครงการ:"
 
-#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
+#: src/gui/HelpDialog.cpp:317 src/gui/HelpDialog.cpp:318
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "นักพัฒนา OSX: %1"
 
-#: src/gui/HelpDialog.cpp:317
+#: src/gui/HelpDialog.cpp:319
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
 #: plugins/Oculars/src/gui/OcularDialog.cpp:550
 msgid "Contributors"
 msgstr "ผู้ร่วมสมทบ"
 
-#: src/gui/HelpDialog.cpp:318
+#: src/gui/HelpDialog.cpp:320
 #, qt-format
 msgid ""
 "Several people have made contributions to the project and their work has "
@@ -5595,9 +5606,10 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1111
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
+#: plugins/NavStars/src/ui_navStarsWindow.h:211
 #: plugins/FOV/src/ui_fovWindow.h:391
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:281
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:356
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:299
 msgid "Save settings"
 msgstr "บันทึกการตั้งค่าต่าง ๆ"
 
@@ -5605,9 +5617,11 @@ msgstr "บันทึกการตั้งค่าต่าง ๆ"
 msgid "Restore the default settings that came with Stellarium"
 msgstr "คืนค่าเดิมที่มาพร้อมกับ Stellarium"
 
-#: src/ui_configurationDialog.h:1115 plugins/FOV/src/ui_fovWindow.h:408
+#: src/ui_configurationDialog.h:1115
+#: plugins/NavStars/src/ui_navStarsWindow.h:212
+#: plugins/FOV/src/ui_fovWindow.h:408
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:282
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:357
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
 msgid "Restore defaults"
 msgstr "คืนค่าเริ่มต้นเดิม"
 
@@ -5723,7 +5737,7 @@ msgid "Additional information"
 msgstr "รายละเอียดเพิ่มเติม"
 
 #: src/ui_configurationDialog.h:1169
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:166
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:198
 msgid "Hour angle/Declination"
 msgstr "มุมชั่วโมง/เดคลิเนชัน"
 
@@ -5732,7 +5746,7 @@ msgid "Horizontal coordinates"
 msgstr "พิกัดขอบฟ้า"
 
 #: src/ui_configurationDialog.h:1173
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:169
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:201
 msgid "Altitude/Azimuth"
 msgstr "มุมเงย/มุมทิศ"
 
@@ -6364,11 +6378,13 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:446
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:139
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:97
 #: plugins/Novae/src/gui/NovaeDialog.cpp:136
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:125
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:206
 msgid "Links"
 msgstr "ลิงก์"
@@ -6377,10 +6393,12 @@ msgstr "ลิงก์"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:447
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:140
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:98
 #: plugins/Novae/src/gui/NovaeDialog.cpp:137
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:207
 #, qt-format
 msgid ""
@@ -6395,11 +6413,13 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:450
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:101
 #: plugins/Novae/src/gui/NovaeDialog.cpp:140
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:156
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:210
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
@@ -6410,11 +6430,13 @@ msgstr "หากมีคำถาม คุณสามารถ%1ถามไ
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:452
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:271
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:145
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:103
 #: plugins/Novae/src/gui/NovaeDialog.cpp:142
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:135
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:158
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:311
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:212
 #, qt-format
 msgid "Bug reports can be made %1here%2."
@@ -6425,11 +6447,13 @@ msgstr "รายงานข้อผิดพลาดได้%1ที่น�
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:454
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:273
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:147
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:105
 #: plugins/Novae/src/gui/NovaeDialog.cpp:144
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:133
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:214
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
@@ -6515,6 +6539,7 @@ msgstr "คืนค่าเริ่มต้นเดิม"
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
+#: plugins/NavStars/src/ui_navStarsWindow.h:214
 #: plugins/Novae/src/ui_novaeDialog.h:244
 #: plugins/Quasars/src/ui_quasarsDialog.h:276
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:283
@@ -6523,7 +6548,7 @@ msgstr "คืนค่าเริ่มต้นเดิม"
 #: plugins/FOV/src/ui_fovWindow.h:410
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:284
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:462
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:359
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:302
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:365
 msgctxt "tab in plugin windows"
 msgid "About"
@@ -9210,7 +9235,6 @@ msgstr "โปรแกรมเสริมเขตเวลา"
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:109
 #: plugins/FOV/src/gui/FOVWindow.cpp:81
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:83
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:112
 #, qt-format
 msgid "Version %1"
 msgstr "รุ่น %1"
@@ -9881,6 +9905,97 @@ msgstr "ความถี่ในการปรับปรุง (วัน)
 msgid "[next update info]"
 msgstr "[ข้อมูลการปรับปรุงถัดไป]"
 
+#: plugins/NavStars/src/NavStars.cpp:51 plugins/NavStars/src/NavStars.cpp:111
+msgid "Navigational Stars"
+msgstr "ดาวฤกษ์ช่วยในการเดินหน"
+
+#: plugins/NavStars/src/NavStars.cpp:54
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:94
+msgid "This plugin marks navigational stars from selected set."
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:112
+msgid "Mark the navigational stars"
+msgstr "ทำเครื่องหมายดาวฤกษ์ช่วยในการเดินหน"
+
+#. TRANSLATORS: The emphasis tags mark a book title.
+#: plugins/NavStars/src/NavStars.cpp:310
+msgid ""
+"The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> "
+"jointly published by Her Majesty's Nautical Almanac Office and the US Naval "
+"Observatory since 1958; consequently, these stars are also used in "
+"navigational aids such as the 2102D Star Finder and Identifier."
+msgstr ""
+
+#. TRANSLATORS: The emphasis tags mark a book title.
+#: plugins/NavStars/src/NavStars.cpp:316
+#, qt-format
+msgid ""
+"The 81 stars that are listed in French Nautical Almanac (Original French "
+"name is <em>%1</em>)."
+msgstr ""
+
+#. TRANSLATORS: The emphasis tags mark a book title.
+#: plugins/NavStars/src/NavStars.cpp:322
+#, qt-format
+msgid ""
+"The 160 stars that are listed in Russian Nautical Almanac (Original Russian "
+"name is <em>%1</em>)."
+msgstr ""
+
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
+msgid "Navigational Stars Plug-in"
+msgstr ""
+
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:107
+#: plugins/Novae/src/gui/NovaeDialog.cpp:146
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:135
+#, qt-format
+msgid ""
+"If you want to read full information about this plugin, its history and "
+"catalog format, you can %1get info here%2."
+msgstr ""
+"หากคุณต้องการข้อมูลโดยละเอียด ประวัติ และรูปแบบของบัญชีในโปรแกรมเสริมนี้ "
+"คุณสามารถอ่านได้%1จากที่นี่%2"
+
+#. TRANSLATORS: Part of full phrase: Anglo-American set of navigational stars
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:143
+msgid "Anglo-American"
+msgstr ""
+
+#. TRANSLATORS: Part of full phrase: French set of navigational stars
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:145
+msgid "French"
+msgstr ""
+
+#. TRANSLATORS: Part of full phrase: Russian set of navigational stars
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:147
+msgid "Russian"
+msgstr ""
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:202
+#: plugins/NavStars/src/ui_navStarsWindow.h:213
+msgid "Navigational stars"
+msgstr ""
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:204
+msgid "Set of navigational stars"
+msgstr ""
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:206
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:288
+msgid "Place of the string with coordinates of the mouse pointer"
+msgstr "ตำแหน่งที่จะแสดงพิกัดของตัวชี้เมาส์"
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:208
+msgid "The current set:"
+msgstr ""
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:209
+msgid "Note:"
+msgstr ""
+
 #: plugins/Novae/src/Novae.cpp:71 plugins/Novae/src/Novae.cpp:142
 msgid "Bright Novae"
 msgstr "โนวาสว่าง"
@@ -9939,16 +10054,6 @@ msgid ""
 "If a nova has no values for decay of magnitude then this plugin will use "
 "generalized values for it."
 msgstr "ถ้าข้อมูลโนวาไม่มีค่าการลดความสว่าง โปรแกรมจะใช้ค่าทั่วไป"
-
-#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Novae/src/gui/NovaeDialog.cpp:146
-#, qt-format
-msgid ""
-"If you want to read full information about this plugin, its history and "
-"catalog format, you can %1get info here%2."
-msgstr ""
-"หากคุณต้องการข้อมูลโดยละเอียด ประวัติ และรูปแบบของบัญชีในโปรแกรมเสริมนี้ "
-"คุณสามารถอ่านได้%1จากที่นี่%2"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:212
 msgid "Novae is updated"
@@ -11620,29 +11725,6 @@ msgstr ""
 "Cartes du Ciel โปรแกรมเสริมนี้ช่วยให้ทำเช่นนั้นได้ "
 "คุณสามารถแก้ไขค่าและใช้แป้นพิมพ์เพื่อตั้งค่าขอบเขตภาพ มีหน่วยเป็นองศา"
 
-#: plugins/NavStars/src/NavStars.cpp:50 plugins/NavStars/src/NavStars.cpp:119
-msgid "Navigational Stars"
-msgstr "ดาวฤกษ์ช่วยในการเดินหน"
-
-#. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:54
-msgid ""
-"This plugin marks 58 navigational stars - Polaris and the 57 \"selected "
-"stars\" that are listed in <em>The Nautical Almanac</em> jointly published "
-"by Her Majesty's Nautical Almanac Office and the US Naval Observatory since "
-"1958; consequently, these stars are also used in navigational aids such as "
-"the 2102D Star Finder and Identifier."
-msgstr ""
-"โปรแกรมเสริมนี้จะทำเครื่องหมายดาวช่วยการเดินหนจำนวน 58 ดวง ได้แก่ ดาวโพลาริส "
-"(ดาวเหนือ) และดาวฤกษ์อีก 57 ดวง ซึ่งแสดงไว้ใน <em>The Nautical Almanac</em> "
-"เผยแพร่โดย Her Majesty's Nautical Almanac Office และ US Naval Observatory "
-"ตั้งแต่ ค.ศ. 1958 ดาวเหล่านี้ยังใช้ในเครื่องมือช่วยการเดินหน เช่น 2102D Star "
-"Finder and Identifier"
-
-#: plugins/NavStars/src/NavStars.cpp:120
-msgid "Mark the navigational stars"
-msgstr "ทำเครื่องหมายดาวฤกษ์ช่วยในการเดินหน"
-
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:56
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:97
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:258
@@ -11712,7 +11794,7 @@ msgid "Change sign of equation"
 msgstr "เปลี่ยนเครื่องมือของสมการ"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:280
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:343
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:286
 msgid "Font size:"
 msgstr "ขนาดตัวอักษร:"
 
@@ -12543,9 +12625,9 @@ msgstr "ผลลัพธ์"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:56
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:98
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:333
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:335
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:358
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:277
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:279
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:301
 msgid "Pointer Coordinates"
 msgstr "พิกัดของตัวชี้"
 
@@ -12592,83 +12674,79 @@ msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr "มุมชั่วโมง/เดคลิเนชัน"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:111
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:117
 msgid "Pointer Coordinates plug-in"
 msgstr "โปรแกรมเสริมพิกัดของตัวชี้"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:140
-msgid "The top center of the screen"
-msgstr "กึ่งกลางด้านบนของจอ"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
-msgid "In center of the top right half of the screen"
-msgstr "กึ่งกลางด้านบนในครึ่งขวาของจอ"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:142
-msgid "The right bottom corner of the screen"
-msgstr "ด้านล่างขวาของจอ"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:143
-msgid "Custom position"
-msgstr "ตำแหน่งที่กำหนดเอง"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:164
-msgid "Right ascension/Declination (J2000.0)"
-msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (J2000.0)"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
-msgid "Right ascension/Declination"
-msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:167
-msgid "Ecliptic Longitude/Latitude"
-msgstr "ลองจิจูด/ละติจูดฟ้า"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:168
-msgid "Ecliptic Longitude/Latitude (J2000.0)"
-msgstr "ลองจิจูด/ละติจูดฟ้า (J2000.0)"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:170
-msgid "Galactic Longitude/Latitude"
-msgstr "ลองจิจูด/ละติจูดดาราจักร"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:200
-msgid "Coordinates of custom position:"
-msgstr "พิกัดของตำแหน่งที่กำหนดเอง:"
-
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:336
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:122
 msgid "Show coordinates of the mouse cursor on the screen."
 msgstr "แสดงพิกัดของตัวชี้เมาส์บนหน้าจอ"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:337
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:172
+msgid "The top center of the screen"
+msgstr "กึ่งกลางด้านบนของจอ"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:173
+msgid "In center of the top right half of the screen"
+msgstr "กึ่งกลางด้านบนในครึ่งขวาของจอ"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:174
+msgid "The right bottom corner of the screen"
+msgstr "ด้านล่างขวาของจอ"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:175
+msgid "Custom position"
+msgstr "ตำแหน่งที่กำหนดเอง"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:196
+msgid "Right ascension/Declination (J2000.0)"
+msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (J2000.0)"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:197
+msgid "Right ascension/Declination"
+msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:199
+msgid "Ecliptic Longitude/Latitude"
+msgstr "ลองจิจูด/ละติจูดฟ้า"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:200
+msgid "Ecliptic Longitude/Latitude (J2000.0)"
+msgstr "ลองจิจูด/ละติจูดฟ้า (J2000.0)"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:202
+msgid "Galactic Longitude/Latitude"
+msgstr "ลองจิจูด/ละติจูดดาราจักร"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:232
+msgid "Coordinates of custom position:"
+msgstr "พิกัดของตำแหน่งที่กำหนดเอง:"
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:280
 msgid "Enable display of coordinates at startup"
 msgstr "เปิดใช้งานการแสดงพิกัดเมื่อเริ่มโปรแกรม"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:338
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:281
 msgid "Show plug-in button on toolbar"
 msgstr "แสดงปุ่มโปรแกรมเสริมบนแถบเครื่องมือ"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:340
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:283
 msgid "Which coordinate system will be used for displaying"
 msgstr "ระบบพิกัดใดที่จะใช้แสดง"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:342
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:285
 msgid "Coordinates:"
 msgstr "พิกัด:"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:345
-msgid "Place of the string with coordinates of the mouse pointer"
-msgstr "ตำแหน่งที่จะแสดงพิกัดของตัวชี้เมาส์"
-
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:347
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:290
 msgid "Place of the string:"
 msgstr "ตำแหน่ง:"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:349
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:292
 msgid "Coordinate X"
 msgstr "พิกัดในแกน X"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:353
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:296
 msgid "Coordinate Y"
 msgstr "พิกัดในแกน Y"
 
@@ -14649,6 +14727,19 @@ msgstr "ดาวเคราะห์ขณะนี้: ดาวเสาร�
 #~ "Screensaver of various happenings in the Solar System. 232 events in all!"
 #~ msgstr ""
 #~ "ภาพพักหน้าจอแสดงเหตุการณ์ต่าง ๆ ในระบบสุริยะ รวมทั้งหมด 232 เหตุการณ์ !"
+
+#~ msgid ""
+#~ "This plugin marks 58 navigational stars - Polaris and the 57 \"selected "
+#~ "stars\" that are listed in <em>The Nautical Almanac</em> jointly published "
+#~ "by Her Majesty's Nautical Almanac Office and the US Naval Observatory since "
+#~ "1958; consequently, these stars are also used in navigational aids such as "
+#~ "the 2102D Star Finder and Identifier."
+#~ msgstr ""
+#~ "โปรแกรมเสริมนี้จะทำเครื่องหมายดาวช่วยการเดินหนจำนวน 58 ดวง ได้แก่ ดาวโพลาริส "
+#~ "(ดาวเหนือ) และดาวฤกษ์อีก 57 ดวง ซึ่งแสดงไว้ใน <em>The Nautical Almanac</em> "
+#~ "เผยแพร่โดย Her Majesty's Nautical Almanac Office และ US Naval Observatory "
+#~ "ตั้งแต่ ค.ศ. 1958 ดาวเหล่านี้ยังใช้ในเครื่องมือช่วยการเดินหน เช่น 2102D Star "
+#~ "Finder and Identifier"
 
 #~ msgid ""
 #~ "This plugin can display potential habitable exoplanets (orange marker) and "

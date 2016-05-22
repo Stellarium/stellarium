@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-08 12:58+0700\n"
-"PO-Revision-Date: 2015-02-16 19:34+0000\n"
-"Last-Translator: Ali <aliofage@msn.com>\n"
+"POT-Creation-Date: 2016-05-21 21:13+0700\n"
+"PO-Revision-Date: 2016-05-15 22:34+0000\n"
+"Last-Translator: Ozan <akdalozan@gmail.com>\n"
 "Language-Team: <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-09 04:50+0000\n"
+"X-Launchpad-Export-Date: 2016-05-22 05:33+0000\n"
 "X-Generator: Launchpad (build 18025)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:140 src/core/modules/StarMgr.cpp:378
@@ -221,8 +221,8 @@ msgstr ", %1 metre"
 msgid "Celestial body:"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:188 src/core/modules/Planet.cpp:225
-#: src/core/modules/MinorPlanet.cpp:212 src/core/modules/StarWrapper.cpp:53
+#: src/core/modules/Nebula.cpp:188 src/core/modules/Planet.cpp:226
+#: src/core/modules/MinorPlanet.cpp:213 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:181 src/core/modules/StarWrapper.cpp:184
 #: plugins/Satellites/src/Satellite.cpp:270
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
@@ -243,8 +243,8 @@ msgstr ""
 msgid "Opacity: <b>%1</b>"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:231
-#: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:182
+#: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:232
+#: src/core/modules/MinorPlanet.cpp:219 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:191
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
 #: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:278
@@ -253,7 +253,7 @@ msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Parlaklık: <b>%1</b> (Sönümlenen değer: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
-#: src/core/modules/Planet.cpp:234 src/core/modules/MinorPlanet.cpp:221
+#: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
 #: src/core/modules/Comet.cpp:185 src/core/modules/StarWrapper.cpp:63
 #: src/core/modules/StarWrapper.cpp:194
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
@@ -295,7 +295,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:244
 #, qt-format
 msgid "Orientation angle: %1%2"
-msgstr ""
+msgstr "Yönlendirme açısı: %1%2"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:268 src/core/modules/StarWrapper.cpp:232
@@ -308,27 +308,27 @@ msgstr "Uzaklık: %1 ly"
 #. TRANSLATORS: Unit of measure for distance - megaparsecs
 #: src/core/modules/Nebula.cpp:289
 msgid "Mpc"
-msgstr ""
+msgstr "Mpc"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
 #: src/core/modules/Nebula.cpp:295
 msgid "kpc"
-msgstr ""
+msgstr "kpc"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:298
 msgid "ly"
-msgstr ""
+msgstr "ly"
 
 #: src/core/modules/Nebula.cpp:300
 #, qt-format
 msgid "Distance: %1 %2"
-msgstr ""
+msgstr "Mesafe: %1 %2"
 
 #: src/core/modules/Nebula.cpp:314
 #, qt-format
 msgid "Redshift: %1"
-msgstr ""
+msgstr "Kırmızıya Kayma: %1"
 
 #: src/core/modules/Nebula.cpp:325 src/core/modules/StarWrapper.cpp:241
 #, qt-format
@@ -337,7 +337,7 @@ msgstr "Iraklık açısı: %1\""
 
 #: src/core/modules/Nebula.cpp:329
 msgid "Morphological description: "
-msgstr ""
+msgstr "Morfolojik tanım "
 
 #: src/core/modules/Nebula.cpp:831
 msgctxt "Shapley–Sawyer Concentration Class"
@@ -472,27 +472,27 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:953
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
-msgstr ""
+msgstr "parlak"
 
 #: src/core/modules/Nebula.cpp:956
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
-msgstr ""
+msgstr "orta parlaklıkta"
 
 #: src/core/modules/Nebula.cpp:959
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
-msgstr ""
+msgstr "soluk"
 
 #: src/core/modules/Nebula.cpp:962
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
-msgstr ""
+msgstr "çok soluk"
 
 #: src/core/modules/Nebula.cpp:965
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
-msgstr ""
+msgstr "belirsiz parlaklıkta"
 
 #: src/core/modules/Nebula.cpp:968
 msgctxt "Reflection Nebulae Brightness"
@@ -533,15 +533,15 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1018
 msgid "circular form"
-msgstr ""
+msgstr "dairesel form"
 
 #: src/core/modules/Nebula.cpp:1021
 msgid "elliptical form"
-msgstr ""
+msgstr "eliptik form"
 
 #: src/core/modules/Nebula.cpp:1024
 msgid "irregular form"
-msgstr ""
+msgstr "düzensiz form"
 
 #: src/core/modules/Nebula.cpp:1027
 msgid "undocumented form"
@@ -549,7 +549,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1033
 msgid "amorphous structure"
-msgstr ""
+msgstr "biçimsiz yapı"
 
 #: src/core/modules/Nebula.cpp:1036
 msgid "conventional structure"
@@ -566,17 +566,17 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:1048
 msgctxt "HII region brightness"
 msgid "faintest"
-msgstr ""
+msgstr "en soluk"
 
 #: src/core/modules/Nebula.cpp:1051
 msgctxt "HII region brightness"
 msgid "moderate brightness"
-msgstr ""
+msgstr "orta parlaklıkta"
 
 #: src/core/modules/Nebula.cpp:1054
 msgctxt "HII region brightness"
 msgid "brightest"
-msgstr ""
+msgstr "en parlak"
 
 #: src/core/modules/Nebula.cpp:1057
 msgid "undocumented brightness"
@@ -584,11 +584,11 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1073
 msgid "galaxy"
-msgstr ""
+msgstr "galaksi"
 
 #: src/core/modules/Nebula.cpp:1076
 msgid "active galaxy"
-msgstr ""
+msgstr "aktif galaksi"
 
 #: src/core/modules/Nebula.cpp:1079
 msgid "radio galaxy"
@@ -616,15 +616,15 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1097
 msgid "nebula"
-msgstr ""
+msgstr "bulutsu"
 
 #: src/core/modules/Nebula.cpp:1100
 msgid "planetary nebula"
-msgstr ""
+msgstr "gezegenimsi bulutsu"
 
 #: src/core/modules/Nebula.cpp:1103
 msgid "dark nebula"
-msgstr ""
+msgstr "karanlık bulutsu"
 
 #: src/core/modules/Nebula.cpp:1106
 msgid "cluster associated with nebulosity"
@@ -648,7 +648,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1121
 msgid "supernova remnant"
-msgstr ""
+msgstr "süpernova kalıntısı"
 
 #: src/core/modules/Nebula.cpp:1124
 msgid "stellar association"
@@ -656,11 +656,11 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1127
 msgid "star cloud"
-msgstr ""
+msgstr "yıldız bulutu"
 
 #: src/core/modules/Nebula.cpp:1130
 msgid "interstellar matter"
-msgstr ""
+msgstr "yıldızlararası madde"
 
 #: src/core/modules/Nebula.cpp:1133
 msgid "emission object"
@@ -676,7 +676,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1142
 msgid "molecular cloud"
-msgstr ""
+msgstr "moleküler bulut"
 
 #: src/core/modules/Nebula.cpp:1145
 msgid "young stellar object"
@@ -712,82 +712,94 @@ msgstr ""
 msgid "Deep-sky objects"
 msgstr "Derin Uzay objeleri"
 
-#: src/core/modules/Planet.cpp:237 src/core/modules/MinorPlanet.cpp:231
-#: src/core/modules/MinorPlanet.cpp:235 src/core/modules/Comet.cpp:194
+#: src/core/modules/Planet.cpp:238 src/core/modules/MinorPlanet.cpp:232
+#: src/core/modules/MinorPlanet.cpp:236 src/core/modules/Comet.cpp:194
 #: src/core/modules/StarWrapper.cpp:198 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Mutlak Parlaklık: %1"
 
-#: src/core/modules/Planet.cpp:255 src/core/modules/MinorPlanet.cpp:248
-#: src/core/modules/Comet.cpp:224
+#: src/core/modules/Planet.cpp:258 src/core/modules/MinorPlanet.cpp:251
+#: src/core/modules/Comet.cpp:208
+#, no-c-format, qt-format
+msgid "Distance from Sun: %1AU (%2 km)"
+msgstr "Güneşten uzaklığı: %1AU (%2 km)"
+
+#: src/core/modules/Planet.cpp:265 src/core/modules/MinorPlanet.cpp:258
+#: src/core/modules/Comet.cpp:215
+#, no-c-format, qt-format
+msgid "Distance from Sun: %1AU (%2 Mio km)"
+msgstr "Güneşten uzaklığı: %1AU (%2 Mio km)"
+
+#: src/core/modules/Planet.cpp:275 src/core/modules/MinorPlanet.cpp:268
+#: src/core/modules/Comet.cpp:226
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Uzaklık: %1AU (%2 km)"
 
-#: src/core/modules/Planet.cpp:262 src/core/modules/MinorPlanet.cpp:255
-#: src/core/modules/Comet.cpp:231
+#: src/core/modules/Planet.cpp:282 src/core/modules/MinorPlanet.cpp:275
+#: src/core/modules/Comet.cpp:233
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "Mesafe: %1AU (%2 Mio km)"
 
-#: src/core/modules/Planet.cpp:276 src/core/modules/Planet.cpp:280
+#: src/core/modules/Planet.cpp:296 src/core/modules/Planet.cpp:300
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "Görünür çap: %1, halkayla beraber: %2"
 
-#: src/core/modules/Planet.cpp:287 src/core/modules/Planet.cpp:289
-#: src/core/modules/MinorPlanet.cpp:266 src/core/modules/MinorPlanet.cpp:268
+#: src/core/modules/Planet.cpp:307 src/core/modules/Planet.cpp:309
+#: src/core/modules/MinorPlanet.cpp:286 src/core/modules/MinorPlanet.cpp:288
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Görünürdeki Çap: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:305 src/core/modules/MinorPlanet.cpp:276
+#: src/core/modules/Planet.cpp:325 src/core/modules/MinorPlanet.cpp:296
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "Yörüngesindeki dolanım süresi: %1 gün (%2 a)"
 
-#: src/core/modules/Planet.cpp:308
+#: src/core/modules/Planet.cpp:328
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "Kendi etrafındaki dönüş süresi: %1"
 
-#: src/core/modules/Planet.cpp:309
+#: src/core/modules/Planet.cpp:329
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "Ortalama güneş günü: %1"
 
-#: src/core/modules/Planet.cpp:313
+#: src/core/modules/Planet.cpp:333
 msgid "The period of rotation is chaotic"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:323 src/core/modules/Planet.cpp:328
+#: src/core/modules/Planet.cpp:343 src/core/modules/Planet.cpp:348
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Faz Açısı: %1"
 
-#: src/core/modules/Planet.cpp:324 src/core/modules/Planet.cpp:329
+#: src/core/modules/Planet.cpp:344 src/core/modules/Planet.cpp:349
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Uzama: %1"
 
-#: src/core/modules/Planet.cpp:332
+#: src/core/modules/Planet.cpp:352
 #, qt-format
 msgid "Phase: %1"
 msgstr "Evre: %1"
 
-#: src/core/modules/Planet.cpp:333
+#: src/core/modules/Planet.cpp:353
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Aydınlamış: %%1"
 
-#: src/core/modules/Planet.cpp:345
+#: src/core/modules/Planet.cpp:365
 #, qt-format
 msgid "Eclipse Factor: %1%"
 msgstr ""
 
-#: src/core/modules/MinorPlanet.cpp:205
+#: src/core/modules/MinorPlanet.cpp:206
 #, qt-format
 msgid "Provisional designation: %1"
 msgstr ""
@@ -802,36 +814,26 @@ msgctxt "type of comet"
 msgid "periodic"
 msgstr "periyodik"
 
-#: src/core/modules/Comet.cpp:207
-#, no-c-format, qt-format
-msgid "Distance from Sun: %1AU (%2 km)"
-msgstr "Güneşten uzaklığı: %1AU (%2 km)"
-
-#: src/core/modules/Comet.cpp:214
-#, no-c-format, qt-format
-msgid "Distance from Sun: %1AU (%2 Mio km)"
-msgstr "Güneşten uzaklığı: %1AU (%2 Mio km)"
-
 #. TRANSLATORS: Sidereal (orbital) period for comets in Julian years (symbol: a)
-#: src/core/modules/Comet.cpp:244
+#: src/core/modules/Comet.cpp:246
 #, qt-format
 msgid "Sidereal period: %1 a"
 msgstr ""
 
-#: src/core/modules/Comet.cpp:249
+#: src/core/modules/Comet.cpp:251
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
 msgstr "Hız: %1 km/s"
 
-#: src/core/modules/Comet.cpp:260
+#: src/core/modules/Comet.cpp:262
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
 msgstr ""
 
-#: src/core/modules/Comet.cpp:264
+#: src/core/modules/Comet.cpp:266
 #, no-c-format, qt-format
 msgid "Gas tail length (estimate): %1 Mio km"
-msgstr ""
+msgstr "Gaz kuyruk uzunluğu(tahmini): %1 M km"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:196 src/gui/AstroCalcDialog.cpp:455
@@ -991,7 +993,7 @@ msgstr "1 gunes gunu ekle"
 
 #: src/core/StelCore.cpp:221
 msgid "Add 7 solar days"
-msgstr ""
+msgstr "7 güneş günü ekle"
 
 #: src/core/StelCore.cpp:222
 msgid "Subtract 1 solar hour"
@@ -1003,7 +1005,7 @@ msgstr "1 gunes gunu cikar"
 
 #: src/core/StelCore.cpp:224
 msgid "Subtract 7 solar days"
-msgstr ""
+msgstr "7 güneş günü çıkar"
 
 #: src/core/StelCore.cpp:225
 msgid "Add 1 sidereal day"
@@ -1139,7 +1141,7 @@ msgstr "Yerel gezegeni secilen secilen gezegene gore ayarla"
 
 #: src/core/StelCore.cpp:259
 msgid "Go to home"
-msgstr ""
+msgstr "Evet git"
 
 #: src/core/StelCore.cpp:261
 msgid "Flip scene horizontally"
@@ -1234,7 +1236,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:1698
 msgid "This algorithm is used in the PC planetarium program Guide 7."
-msgstr ""
+msgstr "Bu algoritma PC planetarium programında 7. Kılavuzda kullanışmıştır."
 
 #: src/core/StelCore.cpp:1701
 msgid ""
@@ -1346,7 +1348,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:1740
 msgid "Used by default."
-msgstr ""
+msgstr "Varsayılan olarak kullanılır."
 
 #: src/core/StelCore.cpp:1743
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
@@ -1585,7 +1587,7 @@ msgstr ""
 
 #: src/core/StelSkyLayerMgr.cpp:88
 msgid "Deep-sky objects background images"
-msgstr ""
+msgstr "Derin uzay nesneleri arkaplan fotoğrafı"
 
 #: src/core/StelMovementMgr.cpp:156 src/gui/StelGui.cpp:199
 #: src/StelMainView.cpp:556
@@ -1614,19 +1616,19 @@ msgstr "Cisim izle"
 
 #: src/core/StelMovementMgr.cpp:162
 msgid "Look towards East"
-msgstr ""
+msgstr "Doğuya bak"
 
 #: src/core/StelMovementMgr.cpp:163
 msgid "Look towards West"
-msgstr ""
+msgstr "Batıya bak"
 
 #: src/core/StelMovementMgr.cpp:164
 msgid "Look towards North"
-msgstr ""
+msgstr "Kuzeye bak"
 
 #: src/core/StelMovementMgr.cpp:165
 msgid "Look towards South"
-msgstr ""
+msgstr "Güneye bak"
 
 #: src/core/StelMovementMgr.cpp:166
 msgid "Look towards Zenith"
@@ -1682,12 +1684,14 @@ msgstr "İletişim"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:408
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:252
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:120
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:90
 #: plugins/Novae/src/gui/NovaeDialog.cpp:119
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:144
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:207
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:118
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:185
 msgid "Version"
 msgstr "Sürüm"
@@ -1696,12 +1700,14 @@ msgstr "Sürüm"
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
 #: plugins/Oculars/src/gui/OcularDialog.cpp:549
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:91
 #: plugins/Novae/src/gui/NovaeDialog.cpp:120
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:120
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:186
 msgid "Author"
 msgstr "Yazar"
@@ -1712,7 +1718,7 @@ msgstr "Lisans"
 
 #: src/gui/ConfigurationDialog.cpp:969
 msgid "Shortcut"
-msgstr ""
+msgstr "Kısayol"
 
 #: src/gui/ConfigurationDialog.cpp:993
 msgid "Running script: "
@@ -1781,11 +1787,11 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1270 src/gui/ConfigurationDialog.cpp:1279
 msgid "Available"
-msgstr ""
+msgstr "Kullanılabilir"
 
 #: src/gui/ConfigurationDialog.cpp:1272 src/gui/ConfigurationDialog.cpp:1281
 msgid "Not Available"
-msgstr ""
+msgstr "Kullanılabilir Değil"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1344
@@ -1893,22 +1899,26 @@ msgid "Espenak & Meeus (2006)"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1384
-msgid "Reijs (2006)"
-msgstr ""
-
-#: src/gui/ConfigurationDialog.cpp:1385
-msgid "Banjevic (2006)"
+msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1386
-msgid "Islam, Sadiq & Qureshi (2008, 2013)"
+msgid "Reijs (2006)"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1387
-msgid "Khalid, Sultana & Zaidi (2014)"
+msgid "Banjevic (2006)"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1388
+msgid "Islam, Sadiq & Qureshi (2008, 2013)"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:1389
+msgid "Khalid, Sultana & Zaidi (2014)"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:1390
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr ""
@@ -2024,50 +2034,51 @@ msgstr ""
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Forumlar}- Diğer kullanıcılarla Stellarium'u tartışın."
 
-#: src/gui/HelpDialog.cpp:295
+#: src/gui/HelpDialog.cpp:296
 msgid "Developers"
 msgstr "Geliştiriciler"
 
-#: src/gui/HelpDialog.cpp:296
+#: src/gui/HelpDialog.cpp:297
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Proje eşgüdüm sorumlusu ve baş geliştirici: %1"
 
-#: src/gui/HelpDialog.cpp:297
+#: src/gui/HelpDialog.cpp:298
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Dosya yazici/gelistirici: %1"
 
-#: src/gui/HelpDialog.cpp:298
+#: src/gui/HelpDialog.cpp:299
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Grafik/ diger tasarimci: %1"
 
-#: src/gui/HelpDialog.cpp:299 src/gui/HelpDialog.cpp:300
-#: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
-#: src/gui/HelpDialog.cpp:303 src/gui/HelpDialog.cpp:304
-#: src/gui/HelpDialog.cpp:305 src/gui/HelpDialog.cpp:306
-#: src/gui/HelpDialog.cpp:311 src/gui/HelpDialog.cpp:312
-#: src/gui/HelpDialog.cpp:313 src/gui/HelpDialog.cpp:314
+#: src/gui/HelpDialog.cpp:300 src/gui/HelpDialog.cpp:301
+#: src/gui/HelpDialog.cpp:302 src/gui/HelpDialog.cpp:303
+#: src/gui/HelpDialog.cpp:304 src/gui/HelpDialog.cpp:305
+#: src/gui/HelpDialog.cpp:306 src/gui/HelpDialog.cpp:307
+#: src/gui/HelpDialog.cpp:308 src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:314 src/gui/HelpDialog.cpp:315
+#: src/gui/HelpDialog.cpp:316
 #, qt-format
 msgid "Developer: %1"
 msgstr "Geliştirici:%1"
 
-#: src/gui/HelpDialog.cpp:307
+#: src/gui/HelpDialog.cpp:309
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:308
+#: src/gui/HelpDialog.cpp:310
 #, qt-format
 msgid "Tester: %1"
 msgstr "Tecrübe: %1"
 
-#: src/gui/HelpDialog.cpp:309
+#: src/gui/HelpDialog.cpp:311
 msgid "Former Developers"
-msgstr ""
+msgstr "Eski Geliştiriciler"
 
-#: src/gui/HelpDialog.cpp:310
+#: src/gui/HelpDialog.cpp:312
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -2075,18 +2086,18 @@ msgstr ""
 "Birkaç kişi önemli katkılarda bulunmuştu fakat artık aktif değiller.Onların "
 "emekleri bu projede önemli değişiklikler sağladı."
 
-#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
+#: src/gui/HelpDialog.cpp:317 src/gui/HelpDialog.cpp:318
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX gelistirici: %1"
 
-#: src/gui/HelpDialog.cpp:317
+#: src/gui/HelpDialog.cpp:319
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
 #: plugins/Oculars/src/gui/OcularDialog.cpp:550
 msgid "Contributors"
-msgstr ""
+msgstr "Katkıda bulunanlar"
 
-#: src/gui/HelpDialog.cpp:318
+#: src/gui/HelpDialog.cpp:320
 #, qt-format
 msgid ""
 "Several people have made contributions to the project and their work has "
@@ -2155,7 +2166,7 @@ msgstr "Konum penceresi"
 
 #: src/gui/StelGui.cpp:218
 msgid "Shortcuts window"
-msgstr ""
+msgstr "Kısayol penceresi"
 
 #: src/gui/StelGui.cpp:219
 msgid "AstroCalc window"
@@ -2163,7 +2174,7 @@ msgstr ""
 
 #: src/gui/StelGui.cpp:220
 msgid "Bookmarks window"
-msgstr ""
+msgstr "Yer imleri penceresi"
 
 #: src/gui/StelGui.cpp:221
 msgid "Copy selected object information to clipboard"
@@ -2201,11 +2212,11 @@ msgstr ""
 
 #: src/gui/StelGuiItems.cpp:724
 msgid "Field of view"
-msgstr ""
+msgstr "Görüş alanı"
 
 #: src/gui/StelGuiItems.cpp:749
 msgid "Frames per second"
-msgstr ""
+msgstr "Saniyedeki kare sayısı"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:565
@@ -2262,11 +2273,11 @@ msgstr ""
 
 #: src/gui/ViewDialog.cpp:620
 msgid "Native"
-msgstr ""
+msgstr "Doğal"
 
 #: src/gui/ViewDialog.cpp:621
 msgid "Translated"
-msgstr ""
+msgstr "Çevrildi"
 
 #: src/gui/ViewDialog.cpp:745
 msgid "No description"
@@ -2298,7 +2309,7 @@ msgstr ""
 
 #: src/gui/ViewDialog.cpp:868
 msgid "Meteor storm rate"
-msgstr ""
+msgstr "Göktaşı fırtınası oranı"
 
 #: src/gui/ViewDialog.cpp:871
 msgid "Exceptional Draconid rate"
@@ -2425,17 +2436,17 @@ msgstr ""
 #: src/gui/SearchDialog.cpp:237
 msgctxt "coordinate system"
 msgid "Equatorial"
-msgstr ""
+msgstr "Ekvatoryal"
 
 #: src/gui/SearchDialog.cpp:238
 msgctxt "coordinate system"
 msgid "Horizontal"
-msgstr ""
+msgstr "Yatay"
 
 #: src/gui/SearchDialog.cpp:239
 msgctxt "coordinate system"
 msgid "Galactic"
-msgstr ""
+msgstr "Galaktik"
 
 #: src/gui/SearchDialog.cpp:240
 msgctxt "coordinate system"
@@ -2453,7 +2464,7 @@ msgstr ""
 
 #: src/gui/SearchDialog.cpp:272
 msgid "Declination"
-msgstr ""
+msgstr "Eğim"
 
 #: src/gui/SearchDialog.cpp:280
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:945
@@ -2463,15 +2474,15 @@ msgstr ""
 #: src/gui/SearchDialog.cpp:283
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
 msgid "Altitude"
-msgstr ""
+msgstr "Yükseklik"
 
 #: src/gui/SearchDialog.cpp:293
 msgid "Longitude"
-msgstr ""
+msgstr "Boylam"
 
 #: src/gui/SearchDialog.cpp:296
 msgid "Latitude"
-msgstr ""
+msgstr "Enlem"
 
 #: src/gui/SearchDialog.cpp:607
 msgid "Simbad Lookup Error"
@@ -2491,7 +2502,7 @@ msgstr "Harvard Üniversitesi (ABD)"
 
 #: src/gui/SearchDialog.cpp:868
 msgid "Paste and Search"
-msgstr ""
+msgstr "Yapıştır ve Ara"
 
 #: src/gui/ShortcutsDialog.cpp:498
 msgid "Action"
@@ -2499,11 +2510,11 @@ msgstr ""
 
 #: src/gui/ShortcutsDialog.cpp:499 src/ui_shortcutsDialog.h:197
 msgid "Primary shortcut"
-msgstr ""
+msgstr "Birincil kısayol"
 
 #: src/gui/ShortcutsDialog.cpp:500 src/ui_shortcutsDialog.h:198
 msgid "Alternative shortcut"
-msgstr ""
+msgstr "Alternatif kısayol"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:136
 #, qt-format
@@ -2521,7 +2532,7 @@ msgstr ""
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:139
 msgid "year"
-msgstr ""
+msgstr "yıl"
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:135 src/ui_configurationDialog.h:1141
@@ -2551,7 +2562,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:143 src/ui_configurationDialog.h:1161
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
 msgid "Type"
-msgstr ""
+msgstr "Tür"
 
 #: src/gui/AstroCalcDialog.cpp:161
 #, qt-format
@@ -2564,39 +2575,39 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:399
 msgid "10 minutes"
-msgstr ""
+msgstr "10 dakika"
 
 #: src/gui/AstroCalcDialog.cpp:400
 msgid "1 hour"
-msgstr ""
+msgstr "1 saat"
 
 #: src/gui/AstroCalcDialog.cpp:401
 msgid "1 day"
-msgstr ""
+msgstr "1 gün"
 
 #: src/gui/AstroCalcDialog.cpp:402
 msgid "5 days"
-msgstr ""
+msgstr "5 gün"
 
 #: src/gui/AstroCalcDialog.cpp:403
 msgid "10 days"
-msgstr ""
+msgstr "10 gün"
 
 #: src/gui/AstroCalcDialog.cpp:404
 msgid "15 days"
-msgstr ""
+msgstr "15 gün"
 
 #: src/gui/AstroCalcDialog.cpp:405
 msgid "30 days"
-msgstr ""
+msgstr "30 gün"
 
 #: src/gui/AstroCalcDialog.cpp:406
 msgid "60 days"
-msgstr ""
+msgstr "60 gün"
 
 #: src/gui/AstroCalcDialog.cpp:454
 msgid "Solar system"
-msgstr ""
+msgstr "Güneş Sistemi"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:456 src/translations.h:66
@@ -2618,7 +2629,7 @@ msgstr "Kuyruklu yıldızlar"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:459 src/translations.h:72
 msgid "Dwarf planets"
-msgstr ""
+msgstr "Cüce gezegenler"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:460 src/translations.h:74
@@ -2641,15 +2652,15 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:477
 msgid "Object 1"
-msgstr ""
+msgstr "Nesne 1"
 
 #: src/gui/AstroCalcDialog.cpp:478
 msgid "Object 2"
-msgstr ""
+msgstr "Nesne 2"
 
 #: src/gui/AstroCalcDialog.cpp:479
 msgid "Separation"
-msgstr ""
+msgstr "Ayrışma"
 
 #: src/gui/AstroCalcDialog.cpp:635
 msgid "Conjunction"
@@ -2665,7 +2676,7 @@ msgstr "Cisim"
 
 #: src/gui/BookmarksDialog.cpp:96
 msgid "Localized name"
-msgstr ""
+msgstr "Yerelleştirilmiş isim"
 
 #: src/gui/BookmarksDialog.cpp:98
 msgid "Location of observer"
@@ -2676,6 +2687,8 @@ msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
 msgstr ""
+"Sistemde OpenGL 2 bulunamadı. Lütfen donanımızı yükseltın veya MESA veya "
+"daha eski bir sürümü kullanın"
 
 #: src/StelMainView.cpp:491
 msgid "Cannot acquire necessary OpenGL resources."
@@ -2699,6 +2712,8 @@ msgstr ""
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
+"Yetersiz OpenGL sürümü. Lütfen sürücülerinizi veya grafik donanımınızı "
+"güncelleştirin."
 
 #: src/StelMainView.cpp:755
 msgid ""
@@ -2706,32 +2721,33 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"DirectX/OpenGL ES altsisteminde sorun var. Ayrıntılar için günlüğe bakın."
 
 #: src/StelMainView.cpp:806
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
-msgstr ""
+msgstr "OpenGL/Mesa altsisteminde sorun var. Ayrıntılar için günlüğe bakın."
 
 #: src/StelMainView.cpp:862
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
-msgstr ""
+msgstr "OpenGL altsisteminde sorun var. Ayrıntılar için günlüğe bakın."
 
 #: src/StelMainView.cpp:903
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
-msgstr ""
+msgstr "OpenGL ES altsisteminde sorun var. Ayrıntılar için günlüğe bakın."
 
 #: src/StelMainView.cpp:1014
 #, qt-format
 msgid "Stellarium %1"
-msgstr ""
+msgstr "Stellarium %1"
 
 #: src/translations.h:34
 msgid "N"
@@ -2752,22 +2768,22 @@ msgstr "B"
 #. TRANSLATORS: Type of object
 #: src/translations.h:44
 msgid "planet"
-msgstr ""
+msgstr "gezegen"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:46
 msgid "comet"
-msgstr ""
+msgstr "kuyruklu yıldız"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:48
 msgid "asteroid"
-msgstr ""
+msgstr "asteroit"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:50
 msgid "moon"
-msgstr ""
+msgstr "ay"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:52
@@ -2777,7 +2793,7 @@ msgstr ""
 #. TRANSLATORS: Type of object
 #: src/translations.h:54
 msgid "dwarf planet"
-msgstr ""
+msgstr "cüce gezegen"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:56
@@ -2807,22 +2823,22 @@ msgstr "Takımyıldızları"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:85
 msgid "Bright galaxies"
-msgstr ""
+msgstr "Parlak galaksiler"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:87
 msgid "Open star clusters"
-msgstr ""
+msgstr "Açık yıldız kümeleri"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:89
 msgid "Globular star clusters"
-msgstr ""
+msgstr "Küresel yıldız kümeleri"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:91
 msgid "Nebulae"
-msgstr ""
+msgstr "Bulutsular"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:93
@@ -2902,7 +2918,7 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:123
 msgid "Interstellar matter"
-msgstr ""
+msgstr "Yıldızlararası madde"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:125
@@ -2987,12 +3003,12 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:157
 msgid "Dwarf galaxies"
-msgstr ""
+msgstr "Cüce galaksiler"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:159
 msgid "Herschel 400 Catalogue"
-msgstr ""
+msgstr "Herschel 400 Kataloğu"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:164
@@ -3054,7 +3070,7 @@ msgstr "Maori"
 
 #: src/translations.h:182
 msgid "Mongolian"
-msgstr ""
+msgstr "Moğolca"
 
 #: src/translations.h:183
 msgid "Navajo"
@@ -3070,7 +3086,7 @@ msgstr "Polinezya"
 
 #: src/translations.h:186
 msgid "Romanian"
-msgstr ""
+msgstr "Rumence"
 
 #: src/translations.h:187
 msgid "Sami"
@@ -3279,12 +3295,12 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:276
 msgid "Sky Culture Tour"
-msgstr ""
+msgstr "Gökyüzü Kültürü Turu"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:278
 msgid "Earth Events from Mercury"
-msgstr ""
+msgstr "Merkürden Dünya Olayları"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:280
@@ -3294,7 +3310,7 @@ msgstr ""
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:282
 msgid "Earth Events from Mars"
-msgstr ""
+msgstr "Marstan Dünya Olayları"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:284
@@ -3320,7 +3336,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:292
 msgid "Messier Objects Tour"
-msgstr ""
+msgstr "Dağınık Nesneler Turu"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:294
@@ -3330,17 +3346,17 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:296
 msgid "20 Fun Naked-Eye Double Stars"
-msgstr ""
+msgstr "20 Eğlenceli Çıplak Gözle Görülen İkiz Yıldızlar"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:298
 msgid "List of largest known stars"
-msgstr ""
+msgstr "Bilinen en büyük yıldızlar listesi"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:300
 msgid "Herschel 400 Tour"
-msgstr ""
+msgstr "Herschel 400 Turu"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:302
@@ -3350,12 +3366,12 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:304
 msgid "The Jack Bennett Catalog"
-msgstr ""
+msgstr "The Jack Bennett Kataloğu"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:306
 msgid "Best objects in the New General Catalog"
-msgstr ""
+msgstr "Yeni Genel Katalogtaki en iyi nesneler"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:312
@@ -5459,9 +5475,10 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1111
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
+#: plugins/NavStars/src/ui_navStarsWindow.h:211
 #: plugins/FOV/src/ui_fovWindow.h:391
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:281
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:356
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:299
 msgid "Save settings"
 msgstr "Ayarlari kaydet"
 
@@ -5469,9 +5486,11 @@ msgstr "Ayarlari kaydet"
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Stellarium ile gelen varsayılan ayarlara dön"
 
-#: src/ui_configurationDialog.h:1115 plugins/FOV/src/ui_fovWindow.h:408
+#: src/ui_configurationDialog.h:1115
+#: plugins/NavStars/src/ui_navStarsWindow.h:212
+#: plugins/FOV/src/ui_fovWindow.h:408
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:282
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:357
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
 msgid "Restore defaults"
 msgstr "Varsayilanlari geri yukle"
 
@@ -5587,7 +5606,7 @@ msgid "Additional information"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1169
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:166
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:198
 msgid "Hour angle/Declination"
 msgstr "Saat açısı/sapması"
 
@@ -5596,7 +5615,7 @@ msgid "Horizontal coordinates"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1173
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:169
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:201
 msgid "Altitude/Azimuth"
 msgstr "Yükseklik/Azimuth"
 
@@ -6222,11 +6241,13 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:446
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:139
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:97
 #: plugins/Novae/src/gui/NovaeDialog.cpp:136
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:125
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:206
 msgid "Links"
 msgstr "Bağlantılar"
@@ -6235,10 +6256,12 @@ msgstr "Bağlantılar"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:447
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:140
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:98
 #: plugins/Novae/src/gui/NovaeDialog.cpp:137
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:207
 #, qt-format
 msgid ""
@@ -6251,11 +6274,13 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:450
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:101
 #: plugins/Novae/src/gui/NovaeDialog.cpp:140
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:156
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:210
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
@@ -6266,11 +6291,13 @@ msgstr "Eğer sorunuz varsa, %1 buradan yanıt alabilirsiniz %2."
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:452
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:271
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:145
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:103
 #: plugins/Novae/src/gui/NovaeDialog.cpp:142
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:135
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:158
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:311
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:212
 #, qt-format
 msgid "Bug reports can be made %1here%2."
@@ -6281,11 +6308,13 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:454
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:273
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:147
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:105
 #: plugins/Novae/src/gui/NovaeDialog.cpp:144
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:133
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:214
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
@@ -6367,6 +6396,7 @@ msgstr "Öntanımlı ayarları geri yükle"
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
+#: plugins/NavStars/src/ui_navStarsWindow.h:214
 #: plugins/Novae/src/ui_novaeDialog.h:244
 #: plugins/Quasars/src/ui_quasarsDialog.h:276
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:283
@@ -6375,7 +6405,7 @@ msgstr "Öntanımlı ayarları geri yükle"
 #: plugins/FOV/src/ui_fovWindow.h:410
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:284
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:462
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:359
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:302
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:365
 msgctxt "tab in plugin windows"
 msgid "About"
@@ -9007,7 +9037,6 @@ msgstr "Zaman Dilimi eklentisi"
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:109
 #: plugins/FOV/src/gui/FOVWindow.cpp:81
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:83
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:112
 #, qt-format
 msgid "Version %1"
 msgstr "Sürüm %1"
@@ -9650,6 +9679,95 @@ msgstr ""
 msgid "[next update info]"
 msgstr ""
 
+#: plugins/NavStars/src/NavStars.cpp:51 plugins/NavStars/src/NavStars.cpp:111
+msgid "Navigational Stars"
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:54
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:94
+msgid "This plugin marks navigational stars from selected set."
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:112
+msgid "Mark the navigational stars"
+msgstr ""
+
+#. TRANSLATORS: The emphasis tags mark a book title.
+#: plugins/NavStars/src/NavStars.cpp:310
+msgid ""
+"The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> "
+"jointly published by Her Majesty's Nautical Almanac Office and the US Naval "
+"Observatory since 1958; consequently, these stars are also used in "
+"navigational aids such as the 2102D Star Finder and Identifier."
+msgstr ""
+
+#. TRANSLATORS: The emphasis tags mark a book title.
+#: plugins/NavStars/src/NavStars.cpp:316
+#, qt-format
+msgid ""
+"The 81 stars that are listed in French Nautical Almanac (Original French "
+"name is <em>%1</em>)."
+msgstr ""
+
+#. TRANSLATORS: The emphasis tags mark a book title.
+#: plugins/NavStars/src/NavStars.cpp:322
+#, qt-format
+msgid ""
+"The 160 stars that are listed in Russian Nautical Almanac (Original Russian "
+"name is <em>%1</em>)."
+msgstr ""
+
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
+msgid "Navigational Stars Plug-in"
+msgstr ""
+
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:107
+#: plugins/Novae/src/gui/NovaeDialog.cpp:146
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:135
+#, qt-format
+msgid ""
+"If you want to read full information about this plugin, its history and "
+"catalog format, you can %1get info here%2."
+msgstr ""
+
+#. TRANSLATORS: Part of full phrase: Anglo-American set of navigational stars
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:143
+msgid "Anglo-American"
+msgstr ""
+
+#. TRANSLATORS: Part of full phrase: French set of navigational stars
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:145
+msgid "French"
+msgstr ""
+
+#. TRANSLATORS: Part of full phrase: Russian set of navigational stars
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:147
+msgid "Russian"
+msgstr ""
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:202
+#: plugins/NavStars/src/ui_navStarsWindow.h:213
+msgid "Navigational stars"
+msgstr ""
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:204
+msgid "Set of navigational stars"
+msgstr ""
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:206
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:288
+msgid "Place of the string with coordinates of the mouse pointer"
+msgstr ""
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:208
+msgid "The current set:"
+msgstr ""
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:209
+msgid "Note:"
+msgstr ""
+
 #: plugins/Novae/src/Novae.cpp:71 plugins/Novae/src/Novae.cpp:142
 msgid "Bright Novae"
 msgstr ""
@@ -9702,14 +9820,6 @@ msgstr ""
 msgid ""
 "If a nova has no values for decay of magnitude then this plugin will use "
 "generalized values for it."
-msgstr ""
-
-#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Novae/src/gui/NovaeDialog.cpp:146
-#, qt-format
-msgid ""
-"If you want to read full information about this plugin, its history and "
-"catalog format, you can %1get info here%2."
 msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:212
@@ -11277,24 +11387,6 @@ msgid ""
 "All values in degrees."
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:50 plugins/NavStars/src/NavStars.cpp:119
-msgid "Navigational Stars"
-msgstr ""
-
-#. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:54
-msgid ""
-"This plugin marks 58 navigational stars - Polaris and the 57 \"selected "
-"stars\" that are listed in <em>The Nautical Almanac</em> jointly published "
-"by Her Majesty's Nautical Almanac Office and the US Naval Observatory since "
-"1958; consequently, these stars are also used in navigational aids such as "
-"the 2102D Star Finder and Identifier."
-msgstr ""
-
-#: plugins/NavStars/src/NavStars.cpp:120
-msgid "Mark the navigational stars"
-msgstr ""
-
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:56
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:97
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:258
@@ -11354,7 +11446,7 @@ msgid "Change sign of equation"
 msgstr ""
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:280
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:343
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:286
 msgid "Font size:"
 msgstr ""
 
@@ -12163,9 +12255,9 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:56
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:98
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:333
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:335
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:358
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:277
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:279
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:301
 msgid "Pointer Coordinates"
 msgstr ""
 
@@ -12212,83 +12304,79 @@ msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:111
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:117
 msgid "Pointer Coordinates plug-in"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:140
-msgid "The top center of the screen"
-msgstr ""
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
-msgid "In center of the top right half of the screen"
-msgstr ""
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:142
-msgid "The right bottom corner of the screen"
-msgstr ""
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:143
-msgid "Custom position"
-msgstr ""
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:164
-msgid "Right ascension/Declination (J2000.0)"
-msgstr ""
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
-msgid "Right ascension/Declination"
-msgstr ""
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:167
-msgid "Ecliptic Longitude/Latitude"
-msgstr ""
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:168
-msgid "Ecliptic Longitude/Latitude (J2000.0)"
-msgstr ""
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:170
-msgid "Galactic Longitude/Latitude"
-msgstr ""
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:200
-msgid "Coordinates of custom position:"
-msgstr ""
-
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:336
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:122
 msgid "Show coordinates of the mouse cursor on the screen."
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:337
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:172
+msgid "The top center of the screen"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:173
+msgid "In center of the top right half of the screen"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:174
+msgid "The right bottom corner of the screen"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:175
+msgid "Custom position"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:196
+msgid "Right ascension/Declination (J2000.0)"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:197
+msgid "Right ascension/Declination"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:199
+msgid "Ecliptic Longitude/Latitude"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:200
+msgid "Ecliptic Longitude/Latitude (J2000.0)"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:202
+msgid "Galactic Longitude/Latitude"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:232
+msgid "Coordinates of custom position:"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:280
 msgid "Enable display of coordinates at startup"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:338
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:281
 msgid "Show plug-in button on toolbar"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:340
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:283
 msgid "Which coordinate system will be used for displaying"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:342
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:285
 msgid "Coordinates:"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:345
-msgid "Place of the string with coordinates of the mouse pointer"
-msgstr ""
-
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:347
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:290
 msgid "Place of the string:"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:349
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:292
 msgid "Coordinate X"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:353
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:296
 msgid "Coordinate Y"
 msgstr ""
 
@@ -12589,7 +12677,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:269
 msgid "Saves energy and may increase subjective application performance."
-msgstr ""
+msgstr "Enerji tasarrufu sağlar ve uygulama performansını artırabilir."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:270
 msgid ""
@@ -12642,11 +12730,11 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:471
 msgid "3D Scenery"
-msgstr ""
+msgstr "3B manzara"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:473
 msgid "Set as default scene"
-msgstr ""
+msgstr "Öntanımlı manzarayı ayarla"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:474
 msgid "Load/save viewpoints"
@@ -12672,7 +12760,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:479
 msgid "Visual options"
-msgstr ""
+msgstr "Görsel seçenekler"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
 msgid "Per-Pixel lighting"
@@ -12680,11 +12768,11 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Shadows"
-msgstr ""
+msgstr "Gölgeler"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Simple shadows"
-msgstr ""
+msgstr "Basit gölgeler"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 msgid "Bump mapping"
@@ -12692,35 +12780,35 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 msgid "Cubemap size:"
-msgstr ""
+msgstr "Küp-Harita boyutu:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:485
 msgid "Shadowmap size:"
-msgstr ""
+msgstr "Gölge-Harita boyutu"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
 msgid "Filtering Quality:"
-msgstr ""
+msgstr "Filtreleme Kalitesi:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Hardware"
-msgstr ""
+msgstr "Donanım"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
 msgid "Low"
-msgstr ""
+msgstr "Düşük"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
 msgid "Low + Hardware"
-msgstr ""
+msgstr "Düşük + Donanım"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
 msgid "High (slow)"
-msgstr ""
+msgstr "Yüksek (yavaş)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
 msgid "High + Hardware (slow)"
-msgstr ""
+msgstr "Yüksek + Donanım (yavaş)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "PCSS"
@@ -12728,11 +12816,11 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
 msgid "Cubemapping mode:"
-msgstr ""
+msgstr "Küp Haritalama modu"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
 msgid "Full cubemap shadows"
-msgstr ""
+msgstr "Tam Küp-Harita gölgeleri"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
 msgid "Lazy cubemap re-rendering"
@@ -12740,7 +12828,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Interval:"
-msgstr ""
+msgstr "Mesafe:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
 msgid "Only update dominant face when moving"
@@ -12752,23 +12840,23 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
 msgid "Quality/Performance settings"
-msgstr ""
+msgstr "Kalite/Performans ayarları"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:212
 msgid "Stored views"
-msgstr ""
+msgstr "Kayıtlı görüntüler"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:214
 msgid "Load view"
-msgstr ""
+msgstr "Görüntüyü yükle"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:215
 msgid "Delete view"
-msgstr ""
+msgstr "Görüntüyü sil"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:216
 msgid "Add current view"
-msgstr ""
+msgstr "Seçili görüntüyü ekle"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:217
 msgid "Load/store with date"
@@ -12776,7 +12864,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:218
 msgid "Title:"
-msgstr ""
+msgstr "Başlık:"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:59
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:191
@@ -12790,11 +12878,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:755
 msgid "Equinox"
-msgstr ""
+msgstr "Ekinoks"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:758
 msgid "Solstice"
-msgstr ""
+msgstr "Gündönümü"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:761
 msgid "Crossquarter"
@@ -12819,7 +12907,7 @@ msgstr ""
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:776
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:360
 msgid "Selected Object"
-msgstr ""
+msgstr "Seçili Nesne"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:785
 msgid "error if you can read this"
@@ -12948,6 +13036,7 @@ msgstr ""
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:338
 msgid "To change colors you may have to leave fullscreen mode!"
 msgstr ""
+"Renkleri değiştirmek için tam ekran modunu terk etmek zorunda kalabilirsiniz!"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:339
 msgid "Equinox line (Equator)"
@@ -12963,7 +13052,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:343
 msgid "Change color"
-msgstr ""
+msgstr "Rengi Değiştir"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:345
 msgid "Major Lunar Standstill lines"
