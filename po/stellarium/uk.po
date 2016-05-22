@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-08 12:58+0700\n"
-"PO-Revision-Date: 2016-05-09 10:12+0000\n"
+"POT-Creation-Date: 2016-05-21 21:13+0700\n"
+"PO-Revision-Date: 2016-05-21 19:54+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-10 05:13+0000\n"
+"X-Launchpad-Export-Date: 2016-05-22 05:33+0000\n"
 "X-Generator: Launchpad (build 18025)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -227,8 +227,8 @@ msgstr ", %1 м"
 msgid "Celestial body:"
 msgstr "Небесне тіло:"
 
-#: src/core/modules/Nebula.cpp:188 src/core/modules/Planet.cpp:225
-#: src/core/modules/MinorPlanet.cpp:212 src/core/modules/StarWrapper.cpp:53
+#: src/core/modules/Nebula.cpp:188 src/core/modules/Planet.cpp:226
+#: src/core/modules/MinorPlanet.cpp:213 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:181 src/core/modules/StarWrapper.cpp:184
 #: plugins/Satellites/src/Satellite.cpp:270
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
@@ -249,8 +249,8 @@ msgstr "Тип: <b>%1</b> (%2)"
 msgid "Opacity: <b>%1</b>"
 msgstr "Непрозорість: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:231
-#: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:182
+#: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:232
+#: src/core/modules/MinorPlanet.cpp:219 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:191
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
 #: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:278
@@ -259,7 +259,7 @@ msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Величина: <b>%1</b> (зменшилася до <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
-#: src/core/modules/Planet.cpp:234 src/core/modules/MinorPlanet.cpp:221
+#: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
 #: src/core/modules/Comet.cpp:185 src/core/modules/StarWrapper.cpp:63
 #: src/core/modules/StarWrapper.cpp:194
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
@@ -718,82 +718,94 @@ msgstr "невідомий тип"
 msgid "Deep-sky objects"
 msgstr "Віддалені об’єкти"
 
-#: src/core/modules/Planet.cpp:237 src/core/modules/MinorPlanet.cpp:231
-#: src/core/modules/MinorPlanet.cpp:235 src/core/modules/Comet.cpp:194
+#: src/core/modules/Planet.cpp:238 src/core/modules/MinorPlanet.cpp:232
+#: src/core/modules/MinorPlanet.cpp:236 src/core/modules/Comet.cpp:194
 #: src/core/modules/StarWrapper.cpp:198 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Абсолютна зіркова величина: %1"
 
-#: src/core/modules/Planet.cpp:255 src/core/modules/MinorPlanet.cpp:248
-#: src/core/modules/Comet.cpp:224
+#: src/core/modules/Planet.cpp:258 src/core/modules/MinorPlanet.cpp:251
+#: src/core/modules/Comet.cpp:208
+#, no-c-format, qt-format
+msgid "Distance from Sun: %1AU (%2 km)"
+msgstr "Відстань від Сонця: %1 а. о. (%2 км)"
+
+#: src/core/modules/Planet.cpp:265 src/core/modules/MinorPlanet.cpp:258
+#: src/core/modules/Comet.cpp:215
+#, no-c-format, qt-format
+msgid "Distance from Sun: %1AU (%2 Mio km)"
+msgstr "Відстань від Сонця: %1 а. о. (%2 млн. км)"
+
+#: src/core/modules/Planet.cpp:275 src/core/modules/MinorPlanet.cpp:268
+#: src/core/modules/Comet.cpp:226
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Відстань: %1 а.о. (%2 км)"
 
-#: src/core/modules/Planet.cpp:262 src/core/modules/MinorPlanet.cpp:255
-#: src/core/modules/Comet.cpp:231
+#: src/core/modules/Planet.cpp:282 src/core/modules/MinorPlanet.cpp:275
+#: src/core/modules/Comet.cpp:233
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "Відстань: %1а. о. (%2 млн. км)"
 
-#: src/core/modules/Planet.cpp:276 src/core/modules/Planet.cpp:280
+#: src/core/modules/Planet.cpp:296 src/core/modules/Planet.cpp:300
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "Видимий діаметр: %1, з кільцями: %2"
 
-#: src/core/modules/Planet.cpp:287 src/core/modules/Planet.cpp:289
-#: src/core/modules/MinorPlanet.cpp:266 src/core/modules/MinorPlanet.cpp:268
+#: src/core/modules/Planet.cpp:307 src/core/modules/Planet.cpp:309
+#: src/core/modules/MinorPlanet.cpp:286 src/core/modules/MinorPlanet.cpp:288
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Видимий діаметр: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:305 src/core/modules/MinorPlanet.cpp:276
+#: src/core/modules/Planet.cpp:325 src/core/modules/MinorPlanet.cpp:296
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "Сидеричний період: %1 днів (%2 a)"
 
-#: src/core/modules/Planet.cpp:308
+#: src/core/modules/Planet.cpp:328
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "Сидеричний день: %1"
 
-#: src/core/modules/Planet.cpp:309
+#: src/core/modules/Planet.cpp:329
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "Середній сонячний день: %1"
 
-#: src/core/modules/Planet.cpp:313
+#: src/core/modules/Planet.cpp:333
 msgid "The period of rotation is chaotic"
 msgstr "Період обертання є хаотичним"
 
-#: src/core/modules/Planet.cpp:323 src/core/modules/Planet.cpp:328
+#: src/core/modules/Planet.cpp:343 src/core/modules/Planet.cpp:348
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Фазовий кут: %1"
 
-#: src/core/modules/Planet.cpp:324 src/core/modules/Planet.cpp:329
+#: src/core/modules/Planet.cpp:344 src/core/modules/Planet.cpp:349
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Видовження: %1"
 
-#: src/core/modules/Planet.cpp:332
+#: src/core/modules/Planet.cpp:352
 #, qt-format
 msgid "Phase: %1"
 msgstr "Фаза: %1"
 
-#: src/core/modules/Planet.cpp:333
+#: src/core/modules/Planet.cpp:353
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Освітленість: %1%"
 
-#: src/core/modules/Planet.cpp:345
+#: src/core/modules/Planet.cpp:365
 #, qt-format
 msgid "Eclipse Factor: %1%"
 msgstr "Коефіцієнт затемнення: %1%"
 
-#: src/core/modules/MinorPlanet.cpp:205
+#: src/core/modules/MinorPlanet.cpp:206
 #, qt-format
 msgid "Provisional designation: %1"
 msgstr "Ймовірне позначення: %1"
@@ -808,33 +820,23 @@ msgctxt "type of comet"
 msgid "periodic"
 msgstr "періодична"
 
-#: src/core/modules/Comet.cpp:207
-#, no-c-format, qt-format
-msgid "Distance from Sun: %1AU (%2 km)"
-msgstr "Відстань від Сонця: %1 а. о. (%2 км)"
-
-#: src/core/modules/Comet.cpp:214
-#, no-c-format, qt-format
-msgid "Distance from Sun: %1AU (%2 Mio km)"
-msgstr "Відстань від Сонця: %1 а. о. (%2 млн. км)"
-
 #. TRANSLATORS: Sidereal (orbital) period for comets in Julian years (symbol: a)
-#: src/core/modules/Comet.cpp:244
+#: src/core/modules/Comet.cpp:246
 #, qt-format
 msgid "Sidereal period: %1 a"
 msgstr "Сидеричний період: %1 с. р."
 
-#: src/core/modules/Comet.cpp:249
+#: src/core/modules/Comet.cpp:251
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
 msgstr "Швидкість: %1 км/с"
 
-#: src/core/modules/Comet.cpp:260
+#: src/core/modules/Comet.cpp:262
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
 msgstr "Діаметр коми (приблизний): %1 км"
 
-#: src/core/modules/Comet.cpp:264
+#: src/core/modules/Comet.cpp:266
 #, no-c-format, qt-format
 msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "Довжина газового хвоста (приблизна): %1 млн. км"
@@ -1801,12 +1803,14 @@ msgstr "Контакти"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:408
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:252
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:120
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:90
 #: plugins/Novae/src/gui/NovaeDialog.cpp:119
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:144
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:207
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:118
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:185
 msgid "Version"
 msgstr "Версія"
@@ -1815,12 +1819,14 @@ msgstr "Версія"
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
 #: plugins/Oculars/src/gui/OcularDialog.cpp:549
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:91
 #: plugins/Novae/src/gui/NovaeDialog.cpp:120
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:120
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:186
 msgid "Author"
 msgstr "Автор"
@@ -2014,22 +2020,26 @@ msgid "Espenak & Meeus (2006)"
 msgstr "Espenak і Meeus (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1384
+msgid "Espenak & Meeus (2006) no extra moon acceleration"
+msgstr "Espenak і Meeus (2006) без додаткового прискорення Місяця"
+
+#: src/gui/ConfigurationDialog.cpp:1386
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1385
+#: src/gui/ConfigurationDialog.cpp:1387
 msgid "Banjevic (2006)"
 msgstr "Баньєвич (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1386
+#: src/gui/ConfigurationDialog.cpp:1388
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq та Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1387
+#: src/gui/ConfigurationDialog.cpp:1389
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana та Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1388
+#: src/gui/ConfigurationDialog.cpp:1390
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Нетипове рівняння для %1T"
@@ -2147,50 +2157,51 @@ msgstr ""
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Forums} — обговоріть Stellarium з іншими користувачами."
 
-#: src/gui/HelpDialog.cpp:295
+#: src/gui/HelpDialog.cpp:296
 msgid "Developers"
 msgstr "Розробники"
 
-#: src/gui/HelpDialog.cpp:296
+#: src/gui/HelpDialog.cpp:297
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Координатор проекту і основний розробник: %1"
 
-#: src/gui/HelpDialog.cpp:297
+#: src/gui/HelpDialog.cpp:298
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Автор документації/розробник: %1"
 
-#: src/gui/HelpDialog.cpp:298
+#: src/gui/HelpDialog.cpp:299
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Створення графіки/інших елементів: %1"
 
-#: src/gui/HelpDialog.cpp:299 src/gui/HelpDialog.cpp:300
-#: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
-#: src/gui/HelpDialog.cpp:303 src/gui/HelpDialog.cpp:304
-#: src/gui/HelpDialog.cpp:305 src/gui/HelpDialog.cpp:306
-#: src/gui/HelpDialog.cpp:311 src/gui/HelpDialog.cpp:312
-#: src/gui/HelpDialog.cpp:313 src/gui/HelpDialog.cpp:314
+#: src/gui/HelpDialog.cpp:300 src/gui/HelpDialog.cpp:301
+#: src/gui/HelpDialog.cpp:302 src/gui/HelpDialog.cpp:303
+#: src/gui/HelpDialog.cpp:304 src/gui/HelpDialog.cpp:305
+#: src/gui/HelpDialog.cpp:306 src/gui/HelpDialog.cpp:307
+#: src/gui/HelpDialog.cpp:308 src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:314 src/gui/HelpDialog.cpp:315
+#: src/gui/HelpDialog.cpp:316
 #, qt-format
 msgid "Developer: %1"
 msgstr "Розробник: %1"
 
-#: src/gui/HelpDialog.cpp:307
+#: src/gui/HelpDialog.cpp:309
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "Неперервна інтеграція: %1"
 
-#: src/gui/HelpDialog.cpp:308
+#: src/gui/HelpDialog.cpp:310
 #, qt-format
 msgid "Tester: %1"
 msgstr "Перевірено: %1"
 
-#: src/gui/HelpDialog.cpp:309
+#: src/gui/HelpDialog.cpp:311
 msgid "Former Developers"
 msgstr "Колишні розробники"
 
-#: src/gui/HelpDialog.cpp:310
+#: src/gui/HelpDialog.cpp:312
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -2198,18 +2209,18 @@ msgstr ""
 "Дехто зробив значний внесок, але тепер не бере участі у розробці програми. "
 "Внесок цих людей значно вплинув на поточний стан проекту."
 
-#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
+#: src/gui/HelpDialog.cpp:317 src/gui/HelpDialog.cpp:318
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Розробник під OSX: %1"
 
-#: src/gui/HelpDialog.cpp:317
+#: src/gui/HelpDialog.cpp:319
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
 #: plugins/Oculars/src/gui/OcularDialog.cpp:550
 msgid "Contributors"
 msgstr "Учасники розробки"
 
-#: src/gui/HelpDialog.cpp:318
+#: src/gui/HelpDialog.cpp:320
 #, qt-format
 msgid ""
 "Several people have made contributions to the project and their work has "
@@ -5702,9 +5713,10 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1111
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
+#: plugins/NavStars/src/ui_navStarsWindow.h:211
 #: plugins/FOV/src/ui_fovWindow.h:391
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:281
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:356
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:299
 msgid "Save settings"
 msgstr "Зберегти параметри"
 
@@ -5712,9 +5724,11 @@ msgstr "Зберегти параметри"
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Відновити типові значення параметрів Stellarium"
 
-#: src/ui_configurationDialog.h:1115 plugins/FOV/src/ui_fovWindow.h:408
+#: src/ui_configurationDialog.h:1115
+#: plugins/NavStars/src/ui_navStarsWindow.h:212
+#: plugins/FOV/src/ui_fovWindow.h:408
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:282
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:357
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
 msgid "Restore defaults"
 msgstr "Відновити типові"
 
@@ -5830,7 +5844,7 @@ msgid "Additional information"
 msgstr "Додаткова інформація"
 
 #: src/ui_configurationDialog.h:1169
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:166
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:198
 msgid "Hour angle/Declination"
 msgstr "Годинний кут/Схилення"
 
@@ -5839,7 +5853,7 @@ msgid "Horizontal coordinates"
 msgstr "Горизонтальні координати"
 
 #: src/ui_configurationDialog.h:1173
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:169
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:201
 msgid "Altitude/Azimuth"
 msgstr "Висота/Азимут"
 
@@ -6489,11 +6503,13 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:446
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:139
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:97
 #: plugins/Novae/src/gui/NovaeDialog.cpp:136
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:125
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:206
 msgid "Links"
 msgstr "Посилання"
@@ -6502,10 +6518,12 @@ msgstr "Посилання"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:447
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:140
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:98
 #: plugins/Novae/src/gui/NovaeDialog.cpp:137
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:207
 #, qt-format
 msgid ""
@@ -6520,11 +6538,13 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:450
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:101
 #: plugins/Novae/src/gui/NovaeDialog.cpp:140
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:156
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:210
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
@@ -6535,11 +6555,13 @@ msgstr "Якщо у вас виникло питання, ви можете от
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:452
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:271
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:145
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:103
 #: plugins/Novae/src/gui/NovaeDialog.cpp:142
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:135
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:158
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:311
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:212
 #, qt-format
 msgid "Bug reports can be made %1here%2."
@@ -6550,11 +6572,13 @@ msgstr "Повідомити про помилки можна %1тут%2."
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:454
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:273
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:147
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:105
 #: plugins/Novae/src/gui/NovaeDialog.cpp:144
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:133
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:214
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
@@ -6640,6 +6664,7 @@ msgstr "Відновити параметри"
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
+#: plugins/NavStars/src/ui_navStarsWindow.h:214
 #: plugins/Novae/src/ui_novaeDialog.h:244
 #: plugins/Quasars/src/ui_quasarsDialog.h:276
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:283
@@ -6648,7 +6673,7 @@ msgstr "Відновити параметри"
 #: plugins/FOV/src/ui_fovWindow.h:410
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:284
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:462
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:359
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:302
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:365
 msgctxt "tab in plugin windows"
 msgid "About"
@@ -9583,7 +9608,6 @@ msgstr "Додаток «Часовий пояс»"
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:109
 #: plugins/FOV/src/gui/FOVWindow.cpp:81
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:83
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:112
 #, qt-format
 msgid "Version %1"
 msgstr "Версія %1"
@@ -10268,6 +10292,105 @@ msgstr "Частота оновлення (у днях):"
 msgid "[next update info]"
 msgstr "[дані щодо наступного оновлення]"
 
+#: plugins/NavStars/src/NavStars.cpp:51 plugins/NavStars/src/NavStars.cpp:111
+msgid "Navigational Stars"
+msgstr "Навігаційна зірка"
+
+#: plugins/NavStars/src/NavStars.cpp:54
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:94
+msgid "This plugin marks navigational stars from selected set."
+msgstr "Цей додаток позначає навігаційні зірки із вибраного вами набору."
+
+#: plugins/NavStars/src/NavStars.cpp:112
+msgid "Mark the navigational stars"
+msgstr "Позначати навігаційні зірки"
+
+#. TRANSLATORS: The emphasis tags mark a book title.
+#: plugins/NavStars/src/NavStars.cpp:310
+msgid ""
+"The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> "
+"jointly published by Her Majesty's Nautical Almanac Office and the US Naval "
+"Observatory since 1958; consequently, these stars are also used in "
+"navigational aids such as the 2102D Star Finder and Identifier."
+msgstr ""
+"57 «вибраних зірок», перелік яких наведено у <em>The Nautical Almanac</em>, "
+"який видається спільно Службою морських календарів Її Величності та Морською "
+"обсерваторією США з 1958 року; отже, ці зірки також використовуються для "
+"допоміжних навігаційних потреб у «2102D Star Finder and Identifier»."
+
+#. TRANSLATORS: The emphasis tags mark a book title.
+#: plugins/NavStars/src/NavStars.cpp:316
+#, qt-format
+msgid ""
+"The 81 stars that are listed in French Nautical Almanac (Original French "
+"name is <em>%1</em>)."
+msgstr ""
+"81 зірок, перелік яких наведено у французькому морському календарі (назва "
+"французькою — <em>%1</em>)."
+
+#. TRANSLATORS: The emphasis tags mark a book title.
+#: plugins/NavStars/src/NavStars.cpp:322
+#, qt-format
+msgid ""
+"The 160 stars that are listed in Russian Nautical Almanac (Original Russian "
+"name is <em>%1</em>)."
+msgstr ""
+"160 зірок, перелік яких наведено у російському морському календарі (назва "
+"російською — <em>%1</em>)."
+
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
+msgid "Navigational Stars Plug-in"
+msgstr "Додаток навігаційних зірок"
+
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:107
+#: plugins/Novae/src/gui/NovaeDialog.cpp:146
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:135
+#, qt-format
+msgid ""
+"If you want to read full information about this plugin, its history and "
+"catalog format, you can %1get info here%2."
+msgstr ""
+"Якщо вам хочеться дізнатися більше про цей додаток, його історію та формат "
+"каталогу, можете %1відвідати цю сторінку%2."
+
+#. TRANSLATORS: Part of full phrase: Anglo-American set of navigational stars
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:143
+msgid "Anglo-American"
+msgstr "англо-американський"
+
+#. TRANSLATORS: Part of full phrase: French set of navigational stars
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:145
+msgid "French"
+msgstr "французький"
+
+#. TRANSLATORS: Part of full phrase: Russian set of navigational stars
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:147
+msgid "Russian"
+msgstr "російський"
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:202
+#: plugins/NavStars/src/ui_navStarsWindow.h:213
+msgid "Navigational stars"
+msgstr "Навігаційні зірки"
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:204
+msgid "Set of navigational stars"
+msgstr "Набір навігаційних зірок"
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:206
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:288
+msgid "Place of the string with coordinates of the mouse pointer"
+msgstr "Розташування рядка координат вказівника миші"
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:208
+msgid "The current set:"
+msgstr "Поточний набір:"
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:209
+msgid "Note:"
+msgstr "Нотатка:"
+
 #: plugins/Novae/src/Novae.cpp:71 plugins/Novae/src/Novae.cpp:142
 msgid "Bright Novae"
 msgstr "Яскраві нові"
@@ -10332,16 +10455,6 @@ msgid ""
 msgstr ""
 "Якщо для нової немає значення зменшення величини, додаток використовує "
 "типові значення."
-
-#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Novae/src/gui/NovaeDialog.cpp:146
-#, qt-format
-msgid ""
-"If you want to read full information about this plugin, its history and "
-"catalog format, you can %1get info here%2."
-msgstr ""
-"Якщо вам хочеться дізнатися більше про цей додаток, його історію та формат "
-"каталогу, можете %1відвідати цю сторінку%2."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:212
 msgid "Novae is updated"
@@ -12156,29 +12269,6 @@ msgstr ""
 "допомогою додатка. Ви можете змінювати значення і використовувати натискання "
 "комбінацій клавіш для зміни поля зору. Усі значення вказано у градусах."
 
-#: plugins/NavStars/src/NavStars.cpp:50 plugins/NavStars/src/NavStars.cpp:119
-msgid "Navigational Stars"
-msgstr "Навігаційна зірка"
-
-#. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:54
-msgid ""
-"This plugin marks 58 navigational stars - Polaris and the 57 \"selected "
-"stars\" that are listed in <em>The Nautical Almanac</em> jointly published "
-"by Her Majesty's Nautical Almanac Office and the US Naval Observatory since "
-"1958; consequently, these stars are also used in navigational aids such as "
-"the 2102D Star Finder and Identifier."
-msgstr ""
-"За допомогою цього додатка програма може позначати 58 навігаційних зірок, — "
-"Полярну та 57 «вибраних зірок», — з каталогу <em>Календаря мореплавця</em>, "
-"який публікується спільно Офісом Календаря мореплавця Її Величності та "
-"Військово-морською обсерваторією США з 1958 року. Отже, ці зірки "
-"використовуються для здійснення навігації у 2102D Star Finder та Identifier."
-
-#: plugins/NavStars/src/NavStars.cpp:120
-msgid "Mark the navigational stars"
-msgstr "Позначати навігаційні зірки"
-
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:56
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:97
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:258
@@ -12247,7 +12337,7 @@ msgid "Change sign of equation"
 msgstr "Змінити знак рівняння"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:280
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:343
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:286
 msgid "Font size:"
 msgstr "Розмір шрифту:"
 
@@ -13115,9 +13205,9 @@ msgstr "Результати"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:56
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:98
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:333
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:335
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:358
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:277
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:279
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:301
 msgid "Pointer Coordinates"
 msgstr "Координати вказівника"
 
@@ -13165,83 +13255,79 @@ msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr "ПС/Схил"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:111
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:117
 msgid "Pointer Coordinates plug-in"
 msgstr "Додаток координат вказівника"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:140
-msgid "The top center of the screen"
-msgstr "Згори у центрі екрана"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
-msgid "In center of the top right half of the screen"
-msgstr "У центрі згори у правій половині екрана"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:142
-msgid "The right bottom corner of the screen"
-msgstr "У правому нижньому куті екрана"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:143
-msgid "Custom position"
-msgstr "Нетипова позиція"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:164
-msgid "Right ascension/Declination (J2000.0)"
-msgstr "Пряме сходження/Схилення (J2000.0)"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
-msgid "Right ascension/Declination"
-msgstr "Пряме сходження/Схилення"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:167
-msgid "Ecliptic Longitude/Latitude"
-msgstr "Екліптична довгота/широта"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:168
-msgid "Ecliptic Longitude/Latitude (J2000.0)"
-msgstr "Екліптична довгота/широта (J2000.0)"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:170
-msgid "Galactic Longitude/Latitude"
-msgstr "Галактична довгота/широта"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:200
-msgid "Coordinates of custom position:"
-msgstr "Координати нетипової позиції:"
-
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:336
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:122
 msgid "Show coordinates of the mouse cursor on the screen."
 msgstr "Показувати координати вказівника миші на екрані."
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:337
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:172
+msgid "The top center of the screen"
+msgstr "Згори у центрі екрана"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:173
+msgid "In center of the top right half of the screen"
+msgstr "У центрі згори у правій половині екрана"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:174
+msgid "The right bottom corner of the screen"
+msgstr "У правому нижньому куті екрана"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:175
+msgid "Custom position"
+msgstr "Нетипова позиція"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:196
+msgid "Right ascension/Declination (J2000.0)"
+msgstr "Пряме сходження/Схилення (J2000.0)"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:197
+msgid "Right ascension/Declination"
+msgstr "Пряме сходження/Схилення"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:199
+msgid "Ecliptic Longitude/Latitude"
+msgstr "Екліптична довгота/широта"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:200
+msgid "Ecliptic Longitude/Latitude (J2000.0)"
+msgstr "Екліптична довгота/широта (J2000.0)"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:202
+msgid "Galactic Longitude/Latitude"
+msgstr "Галактична довгота/широта"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:232
+msgid "Coordinates of custom position:"
+msgstr "Координати нетипової позиції:"
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:280
 msgid "Enable display of coordinates at startup"
 msgstr "Увімкнути показ координат під час запуску"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:338
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:281
 msgid "Show plug-in button on toolbar"
 msgstr "Показувати кнопку додатка на панелі інструментів"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:340
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:283
 msgid "Which coordinate system will be used for displaying"
 msgstr "Координатна система, яку буде використано для показу даних"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:342
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:285
 msgid "Coordinates:"
 msgstr "Координати:"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:345
-msgid "Place of the string with coordinates of the mouse pointer"
-msgstr "Розташування рядка координат вказівника миші"
-
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:347
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:290
 msgid "Place of the string:"
 msgstr "Розташування рядка:"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:349
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:292
 msgid "Coordinate X"
 msgstr "Координата X"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:353
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:296
 msgid "Coordinate Y"
 msgstr "Координата Y"
 
@@ -15440,6 +15526,19 @@ msgstr "Поточна планета: Сатурн"
 
 #~ msgid "Meteor Shower configuration window"
 #~ msgstr "Вікно налаштувань метеорних потоків"
+
+#~ msgid ""
+#~ "This plugin marks 58 navigational stars - Polaris and the 57 \"selected "
+#~ "stars\" that are listed in <em>The Nautical Almanac</em> jointly published "
+#~ "by Her Majesty's Nautical Almanac Office and the US Naval Observatory since "
+#~ "1958; consequently, these stars are also used in navigational aids such as "
+#~ "the 2102D Star Finder and Identifier."
+#~ msgstr ""
+#~ "За допомогою цього додатка програма може позначати 58 навігаційних зірок, — "
+#~ "Полярну та 57 «вибраних зірок», — з каталогу <em>Календаря мореплавця</em>, "
+#~ "який публікується спільно Офісом Календаря мореплавця Її Величності та "
+#~ "Військово-морською обсерваторією США з 1958 року. Отже, ці зірки "
+#~ "використовуються для здійснення навігації у 2102D Star Finder та Identifier."
 
 #~ msgid ""
 #~ "This plugin displays meteor showers and a marker for each active and "
