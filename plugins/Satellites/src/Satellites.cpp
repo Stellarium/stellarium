@@ -845,8 +845,8 @@ QVariantMap Satellites::createDataMap(void)
 	QVariantMap map;
 	QVariantList defHintCol;
 	defHintCol << Satellite::roundToDp(defaultHintColor[0],3)
-						 << Satellite::roundToDp(defaultHintColor[1],3)
-						 << Satellite::roundToDp(defaultHintColor[2],3);
+		   << Satellite::roundToDp(defaultHintColor[1],3)
+		   << Satellite::roundToDp(defaultHintColor[2],3);
 
 	map["creator"] = QString("Satellites plugin version %1 (updated)").arg(SATELLITES_PLUGIN_VERSION);
 	map["hintColor"] = defHintCol;
@@ -875,8 +875,7 @@ void Satellites::markLastUpdate()
 {
 	lastUpdate = QDateTime::currentDateTime();
 	QSettings* conf = StelApp::getInstance().getSettings();
-	conf->setValue("Satellites/last_update",
-	               lastUpdate.toString(Qt::ISODate));
+	conf->setValue("Satellites/last_update", lastUpdate.toString(Qt::ISODate));
 }
 
 QSet<QString> Satellites::getGroups() const
@@ -909,10 +908,10 @@ QHash<QString,QString> Satellites::getSatellites(const QString& group, Status vi
 			if ((group.isEmpty() || sat->groups.contains(group)) && ! result.contains(sat->id))
 			{
 				if (vis==Both ||
-						(vis==Visible && sat->displayed) ||
-						(vis==NotVisible && !sat->displayed) ||
-						(vis==OrbitError && !sat->orbitValid) ||
-						(vis==NewlyAdded && sat->isNew()))
+				   (vis==Visible && sat->displayed) ||
+				   (vis==NotVisible && !sat->displayed) ||
+				   (vis==OrbitError && !sat->orbitValid) ||
+				   (vis==NewlyAdded && sat->isNew()))
 					result.insert(sat->id, sat->name);
 			}
 		}
