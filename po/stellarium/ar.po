@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-16 19:34+0700\n"
+"POT-Creation-Date: 2016-05-21 21:13+0700\n"
 "PO-Revision-Date: 2015-11-30 04:20+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-17 05:15+0000\n"
+"X-Launchpad-Export-Date: 2016-05-22 05:15+0000\n"
 "X-Generator: Launchpad (build 18025)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:140 src/core/modules/StarMgr.cpp:378
@@ -1764,12 +1764,14 @@ msgstr "<P DIR=RTL>للمراسلة"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:408
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:252
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:120
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:90
 #: plugins/Novae/src/gui/NovaeDialog.cpp:119
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:144
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:207
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:118
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:185
 msgid "Version"
 msgstr "<P DIR=RTL>الإصدار<P DIR=RTL>"
@@ -1778,12 +1780,14 @@ msgstr "<P DIR=RTL>الإصدار<P DIR=RTL>"
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
 #: plugins/Oculars/src/gui/OcularDialog.cpp:549
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:91
 #: plugins/Novae/src/gui/NovaeDialog.cpp:120
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:120
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:186
 msgid "Author"
 msgstr "<P DIR=RTL><b>المؤلف</b>"
@@ -2113,50 +2117,51 @@ msgstr ""
 "{المنتديات}\n"
 " ناقش مواضيع ستيللاريوم مع المستخدمين الآخرين"
 
-#: src/gui/HelpDialog.cpp:295
+#: src/gui/HelpDialog.cpp:296
 msgid "Developers"
 msgstr "المطورون"
 
-#: src/gui/HelpDialog.cpp:296
+#: src/gui/HelpDialog.cpp:297
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "منسّق المشروع والمطوّر الرئيسي: %1"
 
-#: src/gui/HelpDialog.cpp:297
+#: src/gui/HelpDialog.cpp:298
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "مؤلف دليل الاستخدام/مطور : %1"
 
-#: src/gui/HelpDialog.cpp:298
+#: src/gui/HelpDialog.cpp:299
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "مصمم الرسومات/أخرى: %1"
 
-#: src/gui/HelpDialog.cpp:299 src/gui/HelpDialog.cpp:300
-#: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
-#: src/gui/HelpDialog.cpp:303 src/gui/HelpDialog.cpp:304
-#: src/gui/HelpDialog.cpp:305 src/gui/HelpDialog.cpp:306
-#: src/gui/HelpDialog.cpp:311 src/gui/HelpDialog.cpp:312
-#: src/gui/HelpDialog.cpp:313 src/gui/HelpDialog.cpp:314
+#: src/gui/HelpDialog.cpp:300 src/gui/HelpDialog.cpp:301
+#: src/gui/HelpDialog.cpp:302 src/gui/HelpDialog.cpp:303
+#: src/gui/HelpDialog.cpp:304 src/gui/HelpDialog.cpp:305
+#: src/gui/HelpDialog.cpp:306 src/gui/HelpDialog.cpp:307
+#: src/gui/HelpDialog.cpp:308 src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:314 src/gui/HelpDialog.cpp:315
+#: src/gui/HelpDialog.cpp:316
 #, qt-format
 msgid "Developer: %1"
 msgstr "المطور :%1"
 
-#: src/gui/HelpDialog.cpp:307
+#: src/gui/HelpDialog.cpp:309
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "تكامل مستمر: %1"
 
-#: src/gui/HelpDialog.cpp:308
+#: src/gui/HelpDialog.cpp:310
 #, qt-format
 msgid "Tester: %1"
 msgstr "فاحص: %1"
 
-#: src/gui/HelpDialog.cpp:309
+#: src/gui/HelpDialog.cpp:311
 msgid "Former Developers"
 msgstr "المطورون السابقون"
 
-#: src/gui/HelpDialog.cpp:310
+#: src/gui/HelpDialog.cpp:312
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -2164,18 +2169,18 @@ msgstr ""
 "عدة أشخاص كان لهم مساهمات مهمّة ولكن توقف نشاطهم. كان لأعمالهم أثر كبير على "
 "مشروع البرنامج:"
 
-#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
+#: src/gui/HelpDialog.cpp:317 src/gui/HelpDialog.cpp:318
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "مطور نظام %1 :OSX"
 
-#: src/gui/HelpDialog.cpp:317
+#: src/gui/HelpDialog.cpp:319
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
 #: plugins/Oculars/src/gui/OcularDialog.cpp:550
 msgid "Contributors"
 msgstr "المساهمون"
 
-#: src/gui/HelpDialog.cpp:318
+#: src/gui/HelpDialog.cpp:320
 #, qt-format
 msgid ""
 "Several people have made contributions to the project and their work has "
@@ -5613,9 +5618,10 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1111
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
+#: plugins/NavStars/src/ui_navStarsWindow.h:211
 #: plugins/FOV/src/ui_fovWindow.h:391
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:281
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:356
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:299
 msgid "Save settings"
 msgstr "احفظ الإعدادات"
 
@@ -5623,9 +5629,11 @@ msgstr "احفظ الإعدادات"
 msgid "Restore the default settings that came with Stellarium"
 msgstr "استرجع الإعدادات الافتراضية الأصلية كما كانت عند تركيب البرنامج"
 
-#: src/ui_configurationDialog.h:1115 plugins/FOV/src/ui_fovWindow.h:408
+#: src/ui_configurationDialog.h:1115
+#: plugins/NavStars/src/ui_navStarsWindow.h:212
+#: plugins/FOV/src/ui_fovWindow.h:408
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:282
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:357
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
 msgid "Restore defaults"
 msgstr "استرجع الإعدادات الافتراضية كما كانت عند تركيب البرنامج"
 
@@ -5741,7 +5749,7 @@ msgid "Additional information"
 msgstr "معلومات إضافية"
 
 #: src/ui_configurationDialog.h:1169
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:166
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:198
 msgid "Hour angle/Declination"
 msgstr "زاوية الساعة/الميل"
 
@@ -5750,7 +5758,7 @@ msgid "Horizontal coordinates"
 msgstr "الإحداثيات الأفقية"
 
 #: src/ui_configurationDialog.h:1173
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:169
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:201
 msgid "Altitude/Azimuth"
 msgstr "الارتفاع الزاوي/السمت"
 
@@ -6390,11 +6398,13 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:446
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:139
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:97
 #: plugins/Novae/src/gui/NovaeDialog.cpp:136
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:125
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:206
 msgid "Links"
 msgstr "<P DIR=RTL>روابط"
@@ -6403,10 +6413,12 @@ msgstr "<P DIR=RTL>روابط"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:447
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:140
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:98
 #: plugins/Novae/src/gui/NovaeDialog.cpp:137
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:207
 #, qt-format
 msgid ""
@@ -6421,11 +6433,13 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:450
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:101
 #: plugins/Novae/src/gui/NovaeDialog.cpp:140
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:156
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:210
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
@@ -6436,11 +6450,13 @@ msgstr "<P DIR=RTL>إذا كان لديك سؤال يمكنك %1الحصول ع�
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:452
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:271
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:145
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:103
 #: plugins/Novae/src/gui/NovaeDialog.cpp:142
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:135
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:158
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:311
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:212
 #, qt-format
 msgid "Bug reports can be made %1here%2."
@@ -6451,11 +6467,13 @@ msgstr "<P DIR=RTL> تستطيع التبليغ عن أخطاء البرنامج
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:454
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:273
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:147
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:105
 #: plugins/Novae/src/gui/NovaeDialog.cpp:144
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:133
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:214
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
@@ -6541,6 +6559,7 @@ msgstr "استرجع الإعدادات الأصلية"
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
+#: plugins/NavStars/src/ui_navStarsWindow.h:214
 #: plugins/Novae/src/ui_novaeDialog.h:244
 #: plugins/Quasars/src/ui_quasarsDialog.h:276
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:283
@@ -6549,7 +6568,7 @@ msgstr "استرجع الإعدادات الأصلية"
 #: plugins/FOV/src/ui_fovWindow.h:410
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:284
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:462
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:359
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:302
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:365
 msgctxt "tab in plugin windows"
 msgid "About"
@@ -9247,7 +9266,6 @@ msgstr "وظيفة تعديل المنطقة الزمنية"
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:109
 #: plugins/FOV/src/gui/FOVWindow.cpp:81
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:83
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:112
 #, qt-format
 msgid "Version %1"
 msgstr "الإصدار %1"
@@ -9922,6 +9940,97 @@ msgstr "حدّث كل (بالأيام)"
 msgid "[next update info]"
 msgstr "[معلومات التحديث القادم]"
 
+#: plugins/NavStars/src/NavStars.cpp:51 plugins/NavStars/src/NavStars.cpp:111
+msgid "Navigational Stars"
+msgstr "نجوم الملاحة"
+
+#: plugins/NavStars/src/NavStars.cpp:54
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:94
+msgid "This plugin marks navigational stars from selected set."
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:112
+msgid "Mark the navigational stars"
+msgstr "حدد نجوم الملاحة"
+
+#. TRANSLATORS: The emphasis tags mark a book title.
+#: plugins/NavStars/src/NavStars.cpp:310
+msgid ""
+"The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> "
+"jointly published by Her Majesty's Nautical Almanac Office and the US Naval "
+"Observatory since 1958; consequently, these stars are also used in "
+"navigational aids such as the 2102D Star Finder and Identifier."
+msgstr ""
+
+#. TRANSLATORS: The emphasis tags mark a book title.
+#: plugins/NavStars/src/NavStars.cpp:316
+#, qt-format
+msgid ""
+"The 81 stars that are listed in French Nautical Almanac (Original French "
+"name is <em>%1</em>)."
+msgstr ""
+
+#. TRANSLATORS: The emphasis tags mark a book title.
+#: plugins/NavStars/src/NavStars.cpp:322
+#, qt-format
+msgid ""
+"The 160 stars that are listed in Russian Nautical Almanac (Original Russian "
+"name is <em>%1</em>)."
+msgstr ""
+
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
+msgid "Navigational Stars Plug-in"
+msgstr ""
+
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:107
+#: plugins/Novae/src/gui/NovaeDialog.cpp:146
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:135
+#, qt-format
+msgid ""
+"If you want to read full information about this plugin, its history and "
+"catalog format, you can %1get info here%2."
+msgstr ""
+"<P DIR=RTL>إذا أردت معرفة المزيد عن هذه الإضافة وتاريخها وطريقة تنسيق الدليل "
+"فيها يمكنك %1 الحصول على المعلومات هنا %2."
+
+#. TRANSLATORS: Part of full phrase: Anglo-American set of navigational stars
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:143
+msgid "Anglo-American"
+msgstr ""
+
+#. TRANSLATORS: Part of full phrase: French set of navigational stars
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:145
+msgid "French"
+msgstr ""
+
+#. TRANSLATORS: Part of full phrase: Russian set of navigational stars
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:147
+msgid "Russian"
+msgstr ""
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:202
+#: plugins/NavStars/src/ui_navStarsWindow.h:213
+msgid "Navigational stars"
+msgstr ""
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:204
+msgid "Set of navigational stars"
+msgstr ""
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:206
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:288
+msgid "Place of the string with coordinates of the mouse pointer"
+msgstr "موضع عرض إحداثيات المؤشر"
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:208
+msgid "The current set:"
+msgstr ""
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:209
+msgid "Note:"
+msgstr ""
+
 #: plugins/Novae/src/Novae.cpp:71 plugins/Novae/src/Novae.cpp:142
 msgid "Bright Novae"
 msgstr "المستعرات اللامعة"
@@ -9983,16 +10092,6 @@ msgid ""
 msgstr ""
 "<P DIR=RTL>إذا لم يكن هناك قيمة معروفة لتناقص اللمعان فإن هذه الإضافة تستخدم "
 "قيمة عامة لها."
-
-#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Novae/src/gui/NovaeDialog.cpp:146
-#, qt-format
-msgid ""
-"If you want to read full information about this plugin, its history and "
-"catalog format, you can %1get info here%2."
-msgstr ""
-"<P DIR=RTL>إذا أردت معرفة المزيد عن هذه الإضافة وتاريخها وطريقة تنسيق الدليل "
-"فيها يمكنك %1 الحصول على المعلومات هنا %2."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:212
 msgid "Novae is updated"
@@ -11676,29 +11775,6 @@ msgstr ""
 "تغيير قيم حقل لرؤية واستخدام لوحة المفاتيح للضبط السريع لحقل الرؤية. كل "
 "القيم بالدرجات."
 
-#: plugins/NavStars/src/NavStars.cpp:50 plugins/NavStars/src/NavStars.cpp:119
-msgid "Navigational Stars"
-msgstr "نجوم الملاحة"
-
-#. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:54
-msgid ""
-"This plugin marks 58 navigational stars - Polaris and the 57 \"selected "
-"stars\" that are listed in <em>The Nautical Almanac</em> jointly published "
-"by Her Majesty's Nautical Almanac Office and the US Naval Observatory since "
-"1958; consequently, these stars are also used in navigational aids such as "
-"the 2102D Star Finder and Identifier."
-msgstr ""
-"<p dir=rtl>هذه الإضافة تضع علامات تحدد 58 نجماً يستخدمها البحارة وهي الجدي "
-"بالإضافة إلى 57 نجماً مختاراً كما هو موجود في في القائمة في التقويم البحري "
-"الذي ينشر مشاركة بين مكتب الملكة للتقويم البحري ومرصد البحرية الأمريكية منذ "
-"عام 1958 م؛ ولذلك فإن هذه النجوم تستخدم كأداة مساعدة في الملاحة مثل أداة "
-"البحث عن النجوم والتعرف عليها 2102D Star Finder and Identifier."
-
-#: plugins/NavStars/src/NavStars.cpp:120
-msgid "Mark the navigational stars"
-msgstr "حدد نجوم الملاحة"
-
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:56
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:97
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:258
@@ -11766,7 +11842,7 @@ msgid "Change sign of equation"
 msgstr "غيِّر إشارة المعادلة"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:280
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:343
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:286
 msgid "Font size:"
 msgstr "حجم الخط"
 
@@ -12623,9 +12699,9 @@ msgstr "النتائج"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:56
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:98
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:333
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:335
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:358
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:277
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:279
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:301
 msgid "Pointer Coordinates"
 msgstr "إحداثيات المؤشر"
 
@@ -12672,83 +12748,79 @@ msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr "‎الميل / زاوية الساعة‎"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:111
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:117
 msgid "Pointer Coordinates plug-in"
 msgstr "<P DIR=RTL>إضافة إحداثيات المؤشر"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:140
-msgid "The top center of the screen"
-msgstr "وسط أعلى الشاشة"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
-msgid "In center of the top right half of the screen"
-msgstr "وسط أعلى يمين الشاشة"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:142
-msgid "The right bottom corner of the screen"
-msgstr "الركن الأيمن السفلي من الشاشة"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:143
-msgid "Custom position"
-msgstr "موضع مختار"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:164
-msgid "Right ascension/Declination (J2000.0)"
-msgstr "(J2000) الميل / المطلع المستقيم"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
-msgid "Right ascension/Declination"
-msgstr "‎الميل / المطلع المستقيم‎"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:167
-msgid "Ecliptic Longitude/Latitude"
-msgstr "خط العرض الكسوفي/خط الطول الكسوفي"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:168
-msgid "Ecliptic Longitude/Latitude (J2000.0)"
-msgstr "(J2000) العرض الكسوفي / الطول الكسوفي"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:170
-msgid "Galactic Longitude/Latitude"
-msgstr "العرض المجرّي / الطول المجرّي"
-
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:200
-msgid "Coordinates of custom position:"
-msgstr "إحداثيات الموضع المختار"
-
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:336
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:122
 msgid "Show coordinates of the mouse cursor on the screen."
 msgstr "أظهر إحداثيات موقع المؤشر على الشاشة"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:337
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:172
+msgid "The top center of the screen"
+msgstr "وسط أعلى الشاشة"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:173
+msgid "In center of the top right half of the screen"
+msgstr "وسط أعلى يمين الشاشة"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:174
+msgid "The right bottom corner of the screen"
+msgstr "الركن الأيمن السفلي من الشاشة"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:175
+msgid "Custom position"
+msgstr "موضع مختار"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:196
+msgid "Right ascension/Declination (J2000.0)"
+msgstr "(J2000) الميل / المطلع المستقيم"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:197
+msgid "Right ascension/Declination"
+msgstr "‎الميل / المطلع المستقيم‎"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:199
+msgid "Ecliptic Longitude/Latitude"
+msgstr "خط العرض الكسوفي/خط الطول الكسوفي"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:200
+msgid "Ecliptic Longitude/Latitude (J2000.0)"
+msgstr "(J2000) العرض الكسوفي / الطول الكسوفي"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:202
+msgid "Galactic Longitude/Latitude"
+msgstr "العرض المجرّي / الطول المجرّي"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:232
+msgid "Coordinates of custom position:"
+msgstr "إحداثيات الموضع المختار"
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:280
 msgid "Enable display of coordinates at startup"
 msgstr "فعّل عرض الإحداثيات عند فتح البرنامج"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:338
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:281
 msgid "Show plug-in button on toolbar"
 msgstr "أظهر زر هذه الإضافة على الشريط السفلي"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:340
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:283
 msgid "Which coordinate system will be used for displaying"
 msgstr "اختر نظام الإحداثيات لعرض موقع المؤشر"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:342
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:285
 msgid "Coordinates:"
 msgstr "الإحداثيات"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:345
-msgid "Place of the string with coordinates of the mouse pointer"
-msgstr "موضع عرض إحداثيات المؤشر"
-
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:347
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:290
 msgid "Place of the string:"
 msgstr "موضع عرض الإحداثيات"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:349
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:292
 msgid "Coordinate X"
 msgstr "الإحداثي الأفقي"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:353
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:296
 msgid "Coordinate Y"
 msgstr "الإحداثي الرأسي"
 
@@ -14781,6 +14853,19 @@ msgstr "الكوكب الحالي: زحل"
 
 #~ msgid "Mean Surface Temperature"
 #~ msgstr "<p dir=rtl>متوسط درجة حرارة السطح"
+
+#~ msgid ""
+#~ "This plugin marks 58 navigational stars - Polaris and the 57 \"selected "
+#~ "stars\" that are listed in <em>The Nautical Almanac</em> jointly published "
+#~ "by Her Majesty's Nautical Almanac Office and the US Naval Observatory since "
+#~ "1958; consequently, these stars are also used in navigational aids such as "
+#~ "the 2102D Star Finder and Identifier."
+#~ msgstr ""
+#~ "<p dir=rtl>هذه الإضافة تضع علامات تحدد 58 نجماً يستخدمها البحارة وهي الجدي "
+#~ "بالإضافة إلى 57 نجماً مختاراً كما هو موجود في في القائمة في التقويم البحري "
+#~ "الذي ينشر مشاركة بين مكتب الملكة للتقويم البحري ومرصد البحرية الأمريكية منذ "
+#~ "عام 1958 م؛ ولذلك فإن هذه النجوم تستخدم كأداة مساعدة في الملاحة مثل أداة "
+#~ "البحث عن النجوم والتعرف عليها 2102D Star Finder and Identifier."
 
 #~ msgid "Show meteor showers"
 #~ msgstr "أظهر زخات الشهب"
