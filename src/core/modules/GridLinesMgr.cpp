@@ -628,7 +628,7 @@ void SkyLine::updateLabel()
 			label = q_("Galactic Equator");
 			break;
 		case LONGITUDE:
-			frameType = StelCore::FrameObservercentricEclipticOfDate; // For 0.14.2: Switch from Ecl2000 to FrameObservercentriEclipticOfDate
+			frameType = StelCore::FrameObservercentricEclipticJ2000;
 			// TRANSLATORS: Full term is "opposition/conjunction longitude"
 			label = q_("O./C. longitude");
 			break;
@@ -761,7 +761,6 @@ void SkyLine::draw(StelCore *core) const
 		meridianSphericalCap.n.set(1,0,0);
 		fpt.set(0,0,1);
 	}
-
 	if (line_type==LONGITUDE)
 	{
 		Vec3d coord;
