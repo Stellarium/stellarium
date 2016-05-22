@@ -228,6 +228,12 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 	SphericalPolygon aboveHorizonPolygon;
 	aboveHorizonPolygon.setContour(horiPoints);
 	horizonPolygon = allskyRegion.getSubtraction(aboveHorizonPolygon);
+	if (polygonInverted)
+	{
+		AllSkySphericalRegion allskyRegion2;
+		horizonPolygon = allskyRegion2.getSubtraction(horizonPolygon);
+		//horizonPolygon=&aboveHorizonPolygon;
+	}
 }
 
 #include <iostream>
