@@ -129,7 +129,7 @@ void MSSearchDialog::searchEvents()
 		treeItem->setText(ColumnName, r.name);
 		treeItem->setText(ColumnZHR, r.zhr);
 		treeItem->setText(ColumnDataType, r.type);
-		treeItem->setText(ColumnPeak, r.peak.toString("dd/MMM/yyyy"));
+		treeItem->setText(ColumnPeak, r.peak.toString("d MMMM yyyy"));
 	}
 
 	// adjust the column width
@@ -152,7 +152,7 @@ void MSSearchDialog::selectEvent(const QModelIndex &modelIndex)
 
 	// Change date
 	QString peak = modelIndex.sibling(modelIndex.row(), ColumnPeak).data().toString();
-	StelApp::getInstance().getCore()->setJD(QDate::fromString(peak, "dd/MMM/yyyy").toJulianDay());
+	StelApp::getInstance().getCore()->setJD(QDate::fromString(peak, "d MMMM yyyy").toJulianDay());
 	m_mgr->repaint();
 
 	// Find the object

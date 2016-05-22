@@ -339,6 +339,7 @@ void NavStars::populateNavigationalStarsSet(void)
 	switch(getCurrentNavigationalStarsSet())
 	{
 		case AngloAmerican:
+		{
 			// 57 "selected stars" from The Nautical Almanac.
 			starNumbers <<    677 <<   2081 <<   3179 <<   3419 <<   7588 <<   9884 <<  13847
 				    <<  14135 <<  15863 <<  21421 <<  24436 <<  24608 <<  25336 <<  25428
@@ -350,7 +351,9 @@ void NavStars::populateNavigationalStarsSet(void)
 				    <<  92855 <<  97649 << 100751 << 102098 << 107315 << 109268 << 113368
 				    << 113963;
 			break;
+		}
 		case French:
+		{
 			// 81 stars from French Nautical Almanac
 			// Original French name: Ephémérides Nautiques
 			starNumbers <<    677 <<    746 <<   1067 <<   2081 <<   3179 <<   3419 <<   4427
@@ -366,7 +369,9 @@ void NavStars::populateNavigationalStarsSet(void)
 				    <<  97649 << 100453 << 100751 << 102098 << 105199 << 107315 << 109268
 				    << 112122 << 113368 << 113881 << 113963;
 			break;
+		}
 		case Russian:
+		{
 			// 160 stars from Russian Nautical Almanac
 			// Original Russian name: Морской астрономический ежегодник.
 			starNumbers <<    677 <<    746 <<   1067 <<   2021 <<   2081 <<   3179 <<   3419
@@ -393,6 +398,7 @@ void NavStars::populateNavigationalStarsSet(void)
 				    << 100751 << 102098 << 102488 << 105199 << 107315 << 107556 << 109268
 				    << 110130 << 112122 << 113368 << 113881 << 113963 <<  11767;
 			break;
+		}
 	}
 
 	setNavStarsMarks(currentState);
