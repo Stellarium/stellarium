@@ -313,7 +313,7 @@ QString NavStars::getCurrentNavigationalStarsSetDescription() const
 		case French:
 		{
 			// TRANSLATORS: The emphasis tags mark a book title.
-			txt = q_("The 81 stars that are listed in the French Nautical Almanac (Original French title is <em>%1</em>).").arg("Ephémérides Nautiques");
+			txt = q_("The 81 stars that are listed in <em>%1</em> published by French Bureau des Longitudes.").arg("Ephémérides Nautiques");
 			break;
 		}
 		case Russian:
