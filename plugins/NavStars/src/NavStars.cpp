@@ -306,8 +306,8 @@ QString NavStars::getCurrentNavigationalStarsSetDescription() const
 	{
 		case AngloAmerican:
 		{
-			// TRANSLATORS: The emphasis tags mark a book title.
-			txt = q_("The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> jointly published by Her Majesty's Nautical Almanac Office and the US Naval Observatory since 1958; consequently, these stars are also used in navigational aids such as the <em>2102D Star Finder and Identifier</em>.");
+			// TRANSLATORS: The emphasis tags mark a title.
+			txt = q_("The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> jointly published by Her Majesty's Nautical Almanac Office and the US Naval Observatory since 1958; consequently, these stars are also used in navigational aids such as the <em>2102D Star Finder</em> and <em>Identifier</em>.");
 			break;
 		}
 		case French:
