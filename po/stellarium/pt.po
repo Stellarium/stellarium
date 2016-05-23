@@ -7,18 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-21 21:13+0700\n"
+"POT-Creation-Date: 2016-05-23 12:04+0700\n"
 "PO-Revision-Date: 2016-05-11 17:39+0000\n"
 "Last-Translator: Tiago S. <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-22 05:29+0000\n"
+"X-Launchpad-Export-Date: 2016-05-23 05:29+0000\n"
 "X-Generator: Launchpad (build 18025)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:140 src/core/modules/StarMgr.cpp:378
-#: src/core/modules/GridLinesMgr.cpp:922 src/core/modules/LandscapeMgr.cpp:417
+#: src/core/modules/GridLinesMgr.cpp:921 src/core/modules/LandscapeMgr.cpp:417
 #: src/core/modules/NebulaMgr.cpp:364 src/core/modules/SolarSystem.cpp:195
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:502 src/core/StelCore.cpp:210
@@ -91,7 +91,7 @@ msgstr "Equador Galáctico"
 msgid "O./C. longitude"
 msgstr "Longitude de O./C."
 
-#: src/core/modules/GridLinesMgr.cpp:637 src/core/modules/GridLinesMgr.cpp:938
+#: src/core/modules/GridLinesMgr.cpp:637 src/core/modules/GridLinesMgr.cpp:937
 #: src/ui_viewDialog.h:1784
 msgid "Prime Vertical"
 msgstr "Vertical Principal"
@@ -104,76 +104,76 @@ msgstr "Coluro Equinócial"
 msgid "Solstitial Colure"
 msgstr "Coluro Solstícial"
 
-#: src/core/modules/GridLinesMgr.cpp:923
+#: src/core/modules/GridLinesMgr.cpp:922
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:339
 msgid "Equatorial grid"
 msgstr "Grelha Equatorial"
 
-#: src/core/modules/GridLinesMgr.cpp:924 src/ui_viewDialog.h:1744
+#: src/core/modules/GridLinesMgr.cpp:923 src/ui_viewDialog.h:1744
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:334
 msgid "Azimuthal grid"
 msgstr "Grelha azimutal"
 
-#: src/core/modules/GridLinesMgr.cpp:925
+#: src/core/modules/GridLinesMgr.cpp:924
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Ecliptic line"
 msgstr "Linha eclíptica"
 
-#: src/core/modules/GridLinesMgr.cpp:926
+#: src/core/modules/GridLinesMgr.cpp:925
 msgid "Ecliptic J2000 line"
 msgstr "Linha da eclíptica J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:927
+#: src/core/modules/GridLinesMgr.cpp:926
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Equator line"
 msgstr "Linha do equador"
 
-#: src/core/modules/GridLinesMgr.cpp:928
+#: src/core/modules/GridLinesMgr.cpp:927
 msgid "Equator J2000 line"
 msgstr "Linha do equador J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:929
+#: src/core/modules/GridLinesMgr.cpp:928
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:329
 msgid "Meridian line"
 msgstr "Linha do meridiano"
 
-#: src/core/modules/GridLinesMgr.cpp:930
+#: src/core/modules/GridLinesMgr.cpp:929
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:390
 msgid "Horizon line"
 msgstr "Linha do horizonte"
 
-#: src/core/modules/GridLinesMgr.cpp:931
+#: src/core/modules/GridLinesMgr.cpp:930
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:344
 msgid "Equatorial J2000 grid"
 msgstr "Grelha equatorial J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:932
+#: src/core/modules/GridLinesMgr.cpp:931
 msgid "Ecliptic J2000 grid"
 msgstr "Grade eclíptica J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:933
+#: src/core/modules/GridLinesMgr.cpp:932
 msgid "Ecliptic grid"
 msgstr "Grelha eclíptica"
 
-#: src/core/modules/GridLinesMgr.cpp:934 src/ui_viewDialog.h:1748
+#: src/core/modules/GridLinesMgr.cpp:933 src/ui_viewDialog.h:1748
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Galactic grid"
 msgstr "Grelha galáctica"
 
-#: src/core/modules/GridLinesMgr.cpp:935 src/ui_viewDialog.h:1772
+#: src/core/modules/GridLinesMgr.cpp:934 src/ui_viewDialog.h:1772
 msgid "Galactic equator"
 msgstr "Equador galáctico"
 
-#: src/core/modules/GridLinesMgr.cpp:936
+#: src/core/modules/GridLinesMgr.cpp:935
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:405
 msgid "Opposition/conjunction longitude line"
 msgstr "Linha da longitude de oposição/conjunção"
 
-#: src/core/modules/GridLinesMgr.cpp:937
+#: src/core/modules/GridLinesMgr.cpp:936
 msgid "Precession Circles"
 msgstr "Círculos de Precessão"
 
-#: src/core/modules/GridLinesMgr.cpp:939
+#: src/core/modules/GridLinesMgr.cpp:938
 msgid "Colure Lines"
 msgstr "Linhas Coluro"
 
@@ -7395,92 +7395,92 @@ msgstr ""
 "omisso"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1792
+#: plugins/Satellites/src/Satellites.cpp:1791
 msgid "visual"
 msgstr "visual"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1794
+#: plugins/Satellites/src/Satellites.cpp:1793
 msgid "scientific"
 msgstr "científico"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1796
+#: plugins/Satellites/src/Satellites.cpp:1795
 msgid "communications"
 msgstr "de comunicação"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1798
+#: plugins/Satellites/src/Satellites.cpp:1797
 msgid "navigation"
 msgstr "navegação"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1800
+#: plugins/Satellites/src/Satellites.cpp:1799
 msgid "amateur"
 msgstr "amador"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1802
+#: plugins/Satellites/src/Satellites.cpp:1801
 msgid "weather"
 msgstr "meteorológico"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1804
+#: plugins/Satellites/src/Satellites.cpp:1803
 msgid "geostationary"
 msgstr "geoestacionário"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1806
+#: plugins/Satellites/src/Satellites.cpp:1805
 msgid "non-operational"
 msgstr "não operacional"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1808
+#: plugins/Satellites/src/Satellites.cpp:1807
 msgid "gps"
 msgstr "de posicionamento global (GPS)"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:1810
+#: plugins/Satellites/src/Satellites.cpp:1809
 msgid "glonass"
 msgstr "glonass"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:1812
+#: plugins/Satellites/src/Satellites.cpp:1811
 msgid "galileo"
 msgstr "galileo"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1814
+#: plugins/Satellites/src/Satellites.cpp:1813
 msgid "iridium"
 msgstr "Iridium"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:1816
+#: plugins/Satellites/src/Satellites.cpp:1815
 msgid "stations"
 msgstr "estações"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:1818
+#: plugins/Satellites/src/Satellites.cpp:1817
 msgid "education"
 msgstr "educacional"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:1820
+#: plugins/Satellites/src/Satellites.cpp:1819
 msgid "observatory"
 msgstr "observatório"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1831
+#: plugins/Satellites/src/Satellites.cpp:1830
 msgid "The Hubble Space Telescope"
 msgstr "O Telescópio Espacial Hubble"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1833
+#: plugins/Satellites/src/Satellites.cpp:1832
 msgid "The International Space Station"
 msgstr "A Estação Espacial Internacional"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1835
+#: plugins/Satellites/src/Satellites.cpp:1834
 msgid "China's first space station"
 msgstr "Primeira estação espacial da China"
 
@@ -10115,29 +10115,30 @@ msgstr ""
 msgid "Mark the navigational stars"
 msgstr "Marcar as estrelas navigacionais."
 
-#. TRANSLATORS: The emphasis tags mark a book title.
+#. TRANSLATORS: The emphasis tags mark a title.
 #: plugins/NavStars/src/NavStars.cpp:310
 msgid ""
 "The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> "
 "jointly published by Her Majesty's Nautical Almanac Office and the US Naval "
 "Observatory since 1958; consequently, these stars are also used in "
-"navigational aids such as the 2102D Star Finder and Identifier."
+"navigational aids such as the <em>2102D Star Finder</em> and "
+"<em>Identifier</em>."
 msgstr ""
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:316
 #, qt-format
 msgid ""
-"The 81 stars that are listed in French Nautical Almanac (Original French "
-"name is <em>%1</em>)."
+"The 81 stars that are listed in the French Nautical Almanac (Original French "
+"title is <em>%1</em>)."
 msgstr ""
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:322
 #, qt-format
 msgid ""
-"The 160 stars that are listed in Russian Nautical Almanac (Original Russian "
-"name is <em>%1</em>)."
+"The 160 stars that are listed in the Russian Nautical Almanac (Original "
+"Russian title is <em>%1</em>)."
 msgstr ""
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
@@ -10186,7 +10187,7 @@ msgid "Place of the string with coordinates of the mouse pointer"
 msgstr "Lugar da cadeia de caractéres com coordenadas do ponteiro do rato"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:208
-msgid "The current set:"
+msgid "Current set:"
 msgstr ""
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:209
@@ -12149,7 +12150,7 @@ msgid "The current catalog of Meteor Showers is invalid!"
 msgstr "O catálogo de chuvas de meteoros actual é inválido!"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:562
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:559
 msgid "Meteor Showers"
 msgstr "Chuva de Meteoros"
 
@@ -12174,7 +12175,7 @@ msgstr "Mostrar caixa de pesquisa"
 msgid "Using the default Meteor Showers catalog."
 msgstr "A utilizar o catálogo de meteoros padrão."
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:566
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:563
 msgid ""
 "<p>This plugin enables you to simulate periodic meteor showers and to "
 "display a marker for each active and inactive radiant.</p><p>By a single "
