@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-23 12:04+0700\n"
-"PO-Revision-Date: 2016-05-21 19:54+0000\n"
+"POT-Creation-Date: 2016-05-23 22:52+0700\n"
+"PO-Revision-Date: 2016-05-23 17:35+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-23 05:33+0000\n"
-"X-Generator: Launchpad (build 18025)\n"
+"X-Launchpad-Export-Date: 2016-05-24 05:33+0000\n"
+"X-Generator: Launchpad (build 18053)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
 "X-Poedit-Language: Ukrainian\n"
@@ -10314,14 +10314,19 @@ msgid ""
 "navigational aids such as the <em>2102D Star Finder</em> and "
 "<em>Identifier</em>."
 msgstr ""
+"57 «вибраних зірок» зі списку <em>Календаря мореплавця</em>, який видається "
+"спільно Офісом Календаря мореплавця Її Величності та Військово-морською "
+"обсерваторією США з 1958 року. Отже, ці зірки використовуються для "
+"здійснення навігації у  <em>2102D Star Finder</em> та <em>Identifier</em>."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:316
 #, qt-format
 msgid ""
-"The 81 stars that are listed in the French Nautical Almanac (Original French "
-"title is <em>%1</em>)."
+"The 81 stars that are listed in <em>%1</em> published by French Bureau des "
+"Longitudes."
 msgstr ""
+"81 зірок зі списку <em>%1</em>, опублікованого французьким Бюро довгот."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:322
@@ -10330,6 +10335,8 @@ msgid ""
 "The 160 stars that are listed in the Russian Nautical Almanac (Original "
 "Russian title is <em>%1</em>)."
 msgstr ""
+"160 зі списку російського «Календаря мореплавця» (назва російською — "
+"<em>%1</em>)."
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
 msgid "Navigational Stars Plug-in"
@@ -10378,7 +10385,7 @@ msgstr "Розташування рядка координат вказівни�
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:208
 msgid "Current set:"
-msgstr ""
+msgstr "Поточний набір"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:209
 msgid "Note:"

@@ -17,15 +17,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-23 12:04+0700\n"
-"PO-Revision-Date: 2016-05-22 08:40+0000\n"
+"POT-Creation-Date: 2016-05-23 22:52+0700\n"
+"PO-Revision-Date: 2016-05-23 20:37+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-23 05:20+0000\n"
-"X-Generator: Launchpad (build 18025)\n"
+"X-Launchpad-Export-Date: 2016-05-24 05:21+0000\n"
+"X-Generator: Launchpad (build 18053)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:140 src/core/modules/StarMgr.cpp:378
 #: src/core/modules/GridLinesMgr.cpp:921 src/core/modules/LandscapeMgr.cpp:417
@@ -10242,7 +10242,7 @@ msgstr "Étoiles pour navigation"
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:94
 msgid "This plugin marks navigational stars from selected set."
 msgstr ""
-"Ce plugin marque les étoiles utilisées en navigation de la collection "
+"Ce plugin marque les étoiles utilisées en navigation de la liste "
 "sélectionnée."
 
 #: plugins/NavStars/src/NavStars.cpp:112
@@ -10258,14 +10258,21 @@ msgid ""
 "navigational aids such as the <em>2102D Star Finder</em> and "
 "<em>Identifier</em>."
 msgstr ""
+"Les 57 étoiles qui sont mentionnées dans <em>The Nautical Almanac</em>, "
+"publié depuis 1958 conjointement par Her Majesty's Nautical Almanac Office "
+"et par le US Naval Observatory. Ces étoiles sont par conséquent utilisées "
+"également dans divers outils de navigation, par exemple le <em>2102D Star "
+"Finder</em> et <em>Identifier</em>."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:316
 #, qt-format
 msgid ""
-"The 81 stars that are listed in the French Nautical Almanac (Original French "
-"title is <em>%1</em>)."
+"The 81 stars that are listed in <em>%1</em> published by French Bureau des "
+"Longitudes."
 msgstr ""
+"Les 81 étoiles qui sont mentionnées dans les <em>%1</em> publiées par le "
+"Bureau des Longitudes français."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:322
@@ -10274,6 +10281,8 @@ msgid ""
 "The 160 stars that are listed in the Russian Nautical Almanac (Original "
 "Russian title is <em>%1</em>)."
 msgstr ""
+"Les 57 étoiles qui sont mentionnées dans l'almanach nautique russe (le titre "
+"original en russe est <em>%1</em>)."
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
 msgid "Navigational Stars Plug-in"
@@ -10313,7 +10322,7 @@ msgstr "Étoiles pour navigation"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:204
 msgid "Set of navigational stars"
-msgstr "Sélection d'étoiles pour navigation"
+msgstr "Liste d'étoiles pour navigation"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:206
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:288
@@ -10322,7 +10331,7 @@ msgstr "Position de l'affichage des coordonnées du pointeur"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:208
 msgid "Current set:"
-msgstr ""
+msgstr "Liste actuelle :"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:209
 msgid "Note:"
