@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-05-23 12:04+0700\n"
-"PO-Revision-Date: 2016-05-22 21:39+0000\n"
+"POT-Creation-Date: 2016-05-23 22:52+0700\n"
+"PO-Revision-Date: 2016-05-23 15:38+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-23 05:21+0000\n"
-"X-Generator: Launchpad (build 18025)\n"
+"X-Launchpad-Export-Date: 2016-05-24 05:22+0000\n"
+"X-Generator: Launchpad (build 18053)\n"
 "Language: gd\n"
 
 #: src/core/modules/ConstellationMgr.cpp:140 src/core/modules/StarMgr.cpp:378
@@ -73,7 +73,7 @@ msgstr "An crios-meadhain J2000.0"
 
 #: src/core/modules/GridLinesMgr.cpp:615
 msgid "Equator"
-msgstr "Crios-mheadhain"
+msgstr "Crios-meadhain"
 
 #: src/core/modules/GridLinesMgr.cpp:620
 msgid "Precession Circle"
@@ -211,7 +211,7 @@ msgstr "Ùghdar: "
 
 #: src/core/modules/LandscapeMgr.cpp:672
 msgid "Location: "
-msgstr "Àite: "
+msgstr "Ionad: "
 
 #: src/core/modules/LandscapeMgr.cpp:675
 #, qt-format
@@ -220,7 +220,7 @@ msgstr ", %1 m"
 
 #: src/core/modules/LandscapeMgr.cpp:680 src/ui_astroCalcDialog.h:380
 msgid "Celestial body:"
-msgstr ""
+msgstr "Bodhaig speurach:"
 
 #: src/core/modules/Nebula.cpp:188 src/core/modules/Planet.cpp:226
 #: src/core/modules/MinorPlanet.cpp:213 src/core/modules/StarWrapper.cpp:53
@@ -368,7 +368,7 @@ msgstr "teannachaidhean reultan meadhanach"
 #: src/core/modules/Nebula.cpp:848
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "rather loosely concentration of stars towards the center"
-msgstr "teannachadh reultan sgaoilte an comhair a' mheadhain"
+msgstr "teannachadh reultan caran sgaoilte an comhair a' mheadhain"
 
 #: src/core/modules/Nebula.cpp:851
 msgctxt "Shapley–Sawyer Concentration Class"
@@ -468,7 +468,7 @@ msgstr "tha an grioglachan am broinn neulachd"
 #: src/core/modules/Nebula.cpp:950
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
-msgstr "glè sholleir"
+msgstr "glè shoilleir"
 
 #: src/core/modules/Nebula.cpp:953
 msgctxt "Reflection Nebulae Brightness"
@@ -567,7 +567,7 @@ msgstr "structar neo-chlàraichte"
 #: src/core/modules/Nebula.cpp:1048
 msgctxt "HII region brightness"
 msgid "faintest"
-msgstr "as laige"
+msgstr "as fhainne"
 
 #: src/core/modules/Nebula.cpp:1051
 msgctxt "HII region brightness"
@@ -653,7 +653,7 @@ msgstr "iarmad mòr-nòbha"
 
 #: src/core/modules/Nebula.cpp:1124
 msgid "stellar association"
-msgstr "comann reultan"
+msgstr "comann reultail"
 
 #: src/core/modules/Nebula.cpp:1127
 msgid "star cloud"
@@ -703,7 +703,7 @@ msgstr "reul"
 
 #: src/core/modules/Nebula.cpp:1160
 msgid "object of unknown nature"
-msgstr "cuspair le tùs neo-chlàraichte"
+msgstr "cuspair le seòrsa neo-chlàraichte"
 
 #: src/core/modules/Nebula.cpp:1163
 msgid "undocumented type"
@@ -2283,7 +2283,7 @@ msgstr "Uinneag cinn-latha agus ama"
 
 #: src/gui/StelGui.cpp:217
 msgid "Location window"
-msgstr "Uinneag an àite"
+msgstr "Uinneag an ionaid"
 
 #: src/gui/StelGui.cpp:218
 msgid "Shortcuts window"
@@ -3034,12 +3034,12 @@ msgstr "Grioglachanan reultan"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:113
 msgid "Stellar associations"
-msgstr "Comainn reultan"
+msgstr "Comainn reultail"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:115
 msgid "Star clouds"
-msgstr "Grioglachanan reultan"
+msgstr "Grioglachain reultan"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:117
@@ -4850,27 +4850,28 @@ msgstr "Ath-nuadhaich"
 #: src/ui_locationDialogGui.h:403
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 msgid "Location"
-msgstr "Àite"
+msgstr "Ionad"
 
 #: src/ui_locationDialogGui.h:407 src/ui_locationDialogGui.h:410
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr ""
-"Cha ghabh liosta stannardach nan àitichean a-steach ach ainmean sa Bheurla "
+"Cha ghabh liosta stannardach nan ionadan a-steach ach ainmean sa Bheurla "
 "(gun sràcan!)"
 
 #: src/ui_locationDialogGui.h:414
 msgid "Reset location list to show all known locations"
 msgstr ""
-"Ath-shuidhich liosta nan àitichean gus a h-uile àite aithnichte a shealltainn"
+"Ath-shuidhich liosta nan ionadan gus a h-uile ionad as aithne dhuinn a "
+"shealltainn"
 
 #: src/ui_locationDialogGui.h:416
 msgid "Reset Location List"
-msgstr "Ath-shuidhich liosta nan àitichean"
+msgstr "Ath-shuidhich liosta nan ionadan"
 
 #: src/ui_locationDialogGui.h:417
 msgid "Current location information"
-msgstr "Fiosrachadh an àite làithrich"
+msgstr "Fiosrachadh an ionaid làithrich"
 
 #: src/ui_locationDialogGui.h:418
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:147
@@ -4905,7 +4906,7 @@ msgstr " m"
 
 #: src/ui_locationDialogGui.h:431
 msgid "Return to default location"
-msgstr "Till dhan àite thùsail"
+msgstr "Till dhan ionad tùsail"
 
 #: src/ui_locationDialogGui.h:433
 msgid "Add to list"
@@ -4917,7 +4918,7 @@ msgstr "Ainm/Baile:"
 
 #: src/ui_locationDialogGui.h:435
 msgid "New Location"
-msgstr "Àite ùr"
+msgstr "Ionad ùr"
 
 #: src/ui_locationDialogGui.h:436
 msgid "Country:"
@@ -4929,11 +4930,11 @@ msgstr "Planaid:"
 
 #: src/ui_locationDialogGui.h:438
 msgid "Use current location as default"
-msgstr "Cleachd an t-àite seo mar àite thùsail"
+msgstr "Cleachd an t-ionad seo mar an fhear tùsail"
 
 #: src/ui_locationDialogGui.h:439
 msgid "Get location from Network"
-msgstr "Faigh an àite on lìonra"
+msgstr "Faigh an t-ionad on lìonra"
 
 #: src/ui_searchDialogGui.h:614
 msgid "Find Object"
@@ -5143,7 +5144,7 @@ msgstr "Cuingich a' mheudachd:"
 #: src/ui_viewDialog.h:1600
 msgid "Dim faint stars when a very bright object is visible"
 msgstr ""
-"Doillerich reultan laga nuair a bhios cuspair glè shoilleir ri fhaicinn"
+"Doillerich reultan fanna nuair a bhios cuspair glè shoilleir ri fhaicinn"
 
 #: src/ui_viewDialog.h:1602
 msgid "Dynamic eye adaptation"
@@ -5162,12 +5163,12 @@ msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
 msgstr ""
-"Cleachd dàta air truailleadh solais o stòr-dàta nan àiteachan agus leig "
-"seachad na roghainnean airson truailleadh solais gu h-ìosail"
+"Cleachd dàta air truailleadh solais o stòr-dàta nan ionadan agus leig "
+"seachad na roghainnean airson truailleadh solais gu h-ìosal"
 
 #: src/ui_viewDialog.h:1611
 msgid "Light pollution data from locations database"
-msgstr "Dàta air truailleadh solais o stòr-dàta nan àiteachan"
+msgstr "Dàta air truailleadh solais o stòr-dàta nan ionadan"
 
 #: src/ui_viewDialog.h:1612
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:440
@@ -6516,8 +6517,8 @@ msgid ""
 msgstr ""
 "Gabhaidh na puingean tòiseachaidh is crìochnachaidh a cheangal ris an speur "
 "a' tionndadh agus faodaidh seo cuideachadh gus an daimh eadar an cruth-tìre "
-"agus cuspairean speurach a chumail (leis an dà chuidh dhiubh ceangailte) "
-"airson reul-leum Dobsonach."
+"agus cuspair speurach a chumail (leis an dà chuidh dhiubh ceangailte) airson "
+"reul-leum Dobsonach."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:97
 msgid ""
@@ -7215,11 +7216,12 @@ msgstr "Na cuir seo an comas ach nuair a chaidh cuspair a thaghadh"
 #: plugins/Oculars/src/ui_ocularDialog.h:1165
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
 msgstr ""
-"Cuir an sàs crìochan air meudachd nan reultan a-rèir fosgladh nam prosbaigean"
+"Cuir an sàs crìochan air a' mheudachd reultail a-rèir fosgladh nam "
+"prosbaigean"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1167
 msgid "Limit stellar magnitude"
-msgstr "Crìochan air meudachd nan reultan"
+msgstr "Cuingich a' mheudachd reultail"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1168
 msgid "Scale image circle"
@@ -10375,13 +10377,18 @@ msgid ""
 "navigational aids such as the <em>2102D Star Finder</em> and "
 "<em>Identifier</em>."
 msgstr ""
+"Seo \"taghadh nan 57 reul\" a tha air an liosta aig <em>The Nautical "
+"Almanac</em> a chaidh fhoillseachadh le Her Majesty's Nautical Almanac "
+"Office agus US Naval Observatory còmhla o 1958; mar toradh air sin, tha na "
+"reultan seo 'gan cleachdadh ann an innealan-iùil mar <em>2102D Star "
+"Finder</em> agus <em>Identifier</em>."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:316
 #, qt-format
 msgid ""
-"The 81 stars that are listed in the French Nautical Almanac (Original French "
-"title is <em>%1</em>)."
+"The 81 stars that are listed in <em>%1</em> published by French Bureau des "
+"Longitudes."
 msgstr ""
 
 #. TRANSLATORS: The emphasis tags mark a book title.
@@ -10391,6 +10398,8 @@ msgid ""
 "The 160 stars that are listed in the Russian Nautical Almanac (Original "
 "Russian title is <em>%1</em>)."
 msgstr ""
+"Seo an 160 reul air liosta an Almanaic Sheòladairich Ruisich (is <em>%1</em> "
+"an t-ainm tùsail a th' air san Ruisis)."
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
 msgid "Navigational Stars Plug-in"
@@ -10439,7 +10448,7 @@ msgstr "Far am bi sreang nan co-chomharran aig tomhaire na luchaige"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:208
 msgid "Current set:"
-msgstr ""
+msgstr "An taghadh làithreach:"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:209
 msgid "Note:"
@@ -13630,6 +13639,17 @@ msgid ""
 "parts supported by the Austrian Science Fund (FWF) project ASTROSIM (P 21208-"
 "G19). More: http://astrosim.univie.ac.at/</p>"
 msgstr ""
+"<p>Inneal-reandaraidh 3D a' bheulaibh. Coisich mu thimcheall, lorg is "
+"seachnaich cnapan-starra sa ghàrradh agad, lorg is taisbean co-thaobhaidhean "
+"reul-eòlach ann an teampaill, seall sgàilean air clachan-grèine is "
+"msaa.</p><p>Cleachd Ctrl + na h-iuchraichean saighde airson gluasad. Cleachd "
+"Ctrl + PgUp/PgDn gus àirde nan sùilean àrdachadh no ìsleachadh. Tha luaths "
+"a' ghluasaid co-cheangailte ris an raon-sheallaidh (mar sin sùm a-steach gus "
+"gleusadh mionaideach a dhèanamh). 'S urrainn dhut cumail a' gluasad ma "
+"leigeas tu às an iuchair Ctrl ron iuchair saighde.</p><p>Fhuair cuid dhe "
+"leasachadh a' phlugain seo taic o phròiseact ASTROSIM (P 21208-G19) aig "
+"Fonndas Saidheans an Ostair (FWF). Barrachd fiosrachaidh: "
+"http://astrosim.univie.ac.at/</p>"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:246
 msgid ""
