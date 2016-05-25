@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-23 22:52+0700\n"
+"POT-Creation-Date: 2016-05-25 00:05+0700\n"
 "PO-Revision-Date: 2016-05-23 17:35+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-24 05:33+0000\n"
+"X-Launchpad-Export-Date: 2016-05-25 05:34+0000\n"
 "X-Generator: Launchpad (build 18053)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -252,11 +252,9 @@ msgstr "Непрозорість: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:232
 #: src/core/modules/MinorPlanet.cpp:219 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:191
-#: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
-#: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:278
 #, qt-format
-msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "Величина: <b>%1</b> (зменшилася до <b>%2</b>)"
+msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
+msgstr ""
 
 #: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
 #: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
@@ -280,8 +278,8 @@ msgstr "Показник кольору (B — V): <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:224
 #, qt-format
-msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "Яскравість поверхні: <b>%1</b> (притлумлено до <b>%2</b>)"
+msgid "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
+msgstr ""
 
 #: src/core/modules/Nebula.cpp:230
 #, qt-format
@@ -10168,6 +10166,12 @@ msgstr "Вікно налаштовування показу відомих з �
 msgid "supernova"
 msgstr "наднова"
 
+#: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
+#: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:278
+#, qt-format
+msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
+msgstr "Величина: <b>%1</b> (зменшилася до <b>%2</b>)"
+
 #: plugins/Supernovae/src/Supernova.cpp:142
 #, qt-format
 msgid "Type of supernova: %1"
@@ -15539,6 +15543,10 @@ msgstr "Поточна планета: Сатурн"
 #~ "який публікується спільно Офісом Календаря мореплавця Її Величності та "
 #~ "Військово-морською обсерваторією США з 1958 року. Отже, ці зірки "
 #~ "використовуються для здійснення навігації у 2102D Star Finder та Identifier."
+
+#, qt-format
+#~ msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
+#~ msgstr "Яскравість поверхні: <b>%1</b> (притлумлено до <b>%2</b>)"
 
 #~ msgid ""
 #~ "This plugin displays meteor showers and a marker for each active and "
