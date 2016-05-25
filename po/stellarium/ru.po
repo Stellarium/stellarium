@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-23 22:52+0700\n"
-"PO-Revision-Date: 2016-05-23 16:03+0000\n"
+"POT-Creation-Date: 2016-05-25 00:05+0700\n"
+"PO-Revision-Date: 2016-05-24 18:12+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-24 05:30+0000\n"
+"X-Launchpad-Export-Date: 2016-05-25 05:30+0000\n"
 "X-Generator: Launchpad (build 18053)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:140 src/core/modules/StarMgr.cpp:378
@@ -246,11 +246,9 @@ msgstr "Непрозрачность: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:232
 #: src/core/modules/MinorPlanet.cpp:219 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:191
-#: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
-#: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:278
 #, qt-format
-msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "Звёздная величина: <b>%1</b> (ослаблена до <b>%2</b>)"
+msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
+msgstr "Звёздная величина: <b>%1</b> (после ослабления: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
 #: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
@@ -274,8 +272,8 @@ msgstr "Показатель цвета (B-V): <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:224
 #, qt-format
-msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "Поверхностная яркость:  <b>%1</b> (ослаблена до: <b>%2</b>)"
+msgid "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
+msgstr "Поверхностная яркость: <b>%1</b> (после ослабления: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:230
 #, qt-format
@@ -10115,6 +10113,12 @@ msgstr "Окно настройки плагина \"Исторические с
 msgid "supernova"
 msgstr "сверхновая"
 
+#: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
+#: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:278
+#, qt-format
+msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
+msgstr "Звёздная величина: <b>%1</b> (ослаблена до <b>%2</b>)"
+
 #: plugins/Supernovae/src/Supernova.cpp:142
 #, qt-format
 msgid "Type of supernova: %1"
@@ -15479,6 +15483,10 @@ msgstr "Текущая планета: Сатурн"
 #~ "публикуемого Офисом Морского Альманаха Ее Величества и Военно-морской "
 #~ "обсерваторией США с 1958 года; поэтому эти звезды также используются в "
 #~ "навигационных средствах, таких как 2102D Star Finder и Identifier."
+
+#, qt-format
+#~ msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
+#~ msgstr "Поверхностная яркость:  <b>%1</b> (ослаблена до: <b>%2</b>)"
 
 #~ msgid ""
 #~ "This plugin displays meteor showers and a marker for each active and "
