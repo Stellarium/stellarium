@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-05-23 22:52+0700\n"
-"PO-Revision-Date: 2016-05-23 15:38+0000\n"
+"POT-Creation-Date: 2016-05-25 00:05+0700\n"
+"PO-Revision-Date: 2016-05-24 18:21+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-24 05:22+0000\n"
+"X-Launchpad-Export-Date: 2016-05-25 05:22+0000\n"
 "X-Generator: Launchpad (build 18053)\n"
 "Language: gd\n"
 
@@ -247,11 +247,9 @@ msgstr "Trìd-dhoilleireachd: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:232
 #: src/core/modules/MinorPlanet.cpp:219 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:191
-#: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
-#: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:278
 #, qt-format
-msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "Meudachd: <b>%1</b> (crìonach: <b>%2</b>)"
+msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
+msgstr ""
 
 #: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
 #: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
@@ -265,7 +263,7 @@ msgstr "Meudachd: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:211
 msgid " (Photometric system: B)"
-msgstr " (Siostam foto-meatrach: B)"
+msgstr " (Siostam tomhais-shoillse: B)"
 
 #: src/core/modules/Nebula.cpp:217 src/core/modules/StarWrapper.cpp:68
 #: src/core/modules/StarWrapper.cpp:202 plugins/Quasars/src/Quasar.cpp:119
@@ -275,8 +273,8 @@ msgstr "Inneacs datha (B-V): <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:224
 #, qt-format
-msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "Soillearachd an uachdair: <b>%1</b> (crìonach: <b>%2</b>)"
+msgid "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
+msgstr ""
 
 #: src/core/modules/Nebula.cpp:230
 #, qt-format
@@ -747,33 +745,33 @@ msgstr "Astar: %1 AU (%2 mill km)"
 #: src/core/modules/Planet.cpp:296 src/core/modules/Planet.cpp:300
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr "Tras-tomhais san lèirsinn: %1, le fàinneachan: %2"
+msgstr "Tras-tomhais lèirsinneach: %1, le fàinneachan: %2"
 
 #: src/core/modules/Planet.cpp:307 src/core/modules/Planet.cpp:309
 #: src/core/modules/MinorPlanet.cpp:286 src/core/modules/MinorPlanet.cpp:288
 #, qt-format
 msgid "Apparent diameter: %1"
-msgstr "Tras-tomhais san lèirsinn: %1"
+msgstr "Tras-tomhais lèirsinneach: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 #: src/core/modules/Planet.cpp:325 src/core/modules/MinorPlanet.cpp:296
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
-msgstr "Ùine cuairt nan reul: %1 latha (%2 a)"
+msgstr "Ùine na cuairte reultaich: %1 latha (%2 a)"
 
 #: src/core/modules/Planet.cpp:328
 #, qt-format
 msgid "Sidereal day: %1"
-msgstr "Latha nan reul: %1"
+msgstr "Latha reultach: %1"
 
 #: src/core/modules/Planet.cpp:329
 #, qt-format
 msgid "Mean solar day: %1"
-msgstr "Latha grèine meadhanach: %1"
+msgstr "Latha-grèine meadhain: %1"
 
 #: src/core/modules/Planet.cpp:333
 msgid "The period of rotation is chaotic"
-msgstr "Tha ùine na cuairte coimeasgach"
+msgstr "Tha ùine na cuairte mì-riaghailteach"
 
 #: src/core/modules/Planet.cpp:343 src/core/modules/Planet.cpp:348
 #, qt-format
@@ -819,7 +817,7 @@ msgstr "cuairt chunbhalach"
 #: src/core/modules/Comet.cpp:246
 #, qt-format
 msgid "Sidereal period: %1 a"
-msgstr "Ùine cuairt nan reul: %1 a"
+msgstr "Ùine na cuairte reultaich: %1 a"
 
 #: src/core/modules/Comet.cpp:251
 #, no-c-format, qt-format
@@ -894,13 +892,13 @@ msgstr "Seòrsa: <b>%1, %2</b>"
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
 msgstr ""
-"Rainse a' mheudachd: <b>%1</b>%2<b>%3</b> (Siostam foto-thomhais: %4)"
+"Rainse a' mheudachd: <b>%1</b>%2<b>%3</b> (siostam tomhais-shoillse: %4)"
 
 #: src/core/modules/StarWrapper.cpp:222
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 msgstr ""
-"Rainse a' mheudachd: <b>%1</b>%2<b>%3/%4</b> (Siostam foto-thomhais: %5)"
+"Rainse a' mheudachd: <b>%1</b>%2<b>%3/%4</b> (siostam tomhais-shoillse: %5)"
 
 #: src/core/modules/StarWrapper.cpp:238
 #: plugins/Exoplanets/src/Exoplanet.cpp:293
@@ -988,39 +986,39 @@ msgstr "Suidhich an t-àm air an-dràsta"
 
 #: src/core/StelCore.cpp:219
 msgid "Add 1 solar hour"
-msgstr "Cuir uair grèine ris"
+msgstr "Cuir uair-ghrèine ris"
 
 #: src/core/StelCore.cpp:220
 msgid "Add 1 solar day"
-msgstr "Cuir latha grèine ris"
+msgstr "Cuir latha-grèine ris"
 
 #: src/core/StelCore.cpp:221
 msgid "Add 7 solar days"
-msgstr "Cuir 7 làithean grèine ris"
+msgstr "Cuir 7 làithean-grèine ris"
 
 #: src/core/StelCore.cpp:222
 msgid "Subtract 1 solar hour"
-msgstr "Thoir uair grèine air falbh"
+msgstr "Thoir uair-ghrèine air falbh"
 
 #: src/core/StelCore.cpp:223
 msgid "Subtract 1 solar day"
-msgstr "Thoir latha grèine air falbh"
+msgstr "Thoir latha-grèine air falbh"
 
 #: src/core/StelCore.cpp:224
 msgid "Subtract 7 solar days"
-msgstr "Thoir 7 làithean grèine air falbh"
+msgstr "Thoir 7 làithean-grèine air falbh"
 
 #: src/core/StelCore.cpp:225
 msgid "Add 1 sidereal day"
-msgstr "Cuir latha nan reul ris"
+msgstr "Cuir latha reultach ris"
 
 #: src/core/StelCore.cpp:226
 msgid "Add 1 sidereal year"
-msgstr "Cuir bliadhna nan reul ris"
+msgstr "Cuir bliadhna reultach ris"
 
 #: src/core/StelCore.cpp:227
 msgid "Add 100 sidereal years"
-msgstr "Cuir 100 bliadhna nan reul ris"
+msgstr "Cuir 100 bliadhna reultach ris"
 
 #: src/core/StelCore.cpp:228
 msgid "Add 1 synodic month"
@@ -1076,15 +1074,15 @@ msgstr "Cuir bliadhna Gaussach ris"
 
 #: src/core/StelCore.cpp:241
 msgid "Subtract 1 sidereal day"
-msgstr "Thoir latha nan reul air falbh"
+msgstr "Thoir latha reultach air falbh"
 
 #: src/core/StelCore.cpp:242
 msgid "Subtract 1 sidereal year"
-msgstr "Thoir bliadhna nan reul air falbh"
+msgstr "Thoir bliadhna reultach air falbh"
 
 #: src/core/StelCore.cpp:243
 msgid "Subtract 100 sidereal years"
-msgstr "Thoir 100 bhliadhna nan reul air falbh"
+msgstr "Thoir 100 bhliadhna reultach air falbh"
 
 #: src/core/StelCore.cpp:244
 msgid "Subtract 1 synodic month"
@@ -1496,7 +1494,7 @@ msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr ""
-"le meadhan mearachd dhe nas lugha na diog, mearachd as motha 1.9d agus "
+"le mearachd meadhain dhe nas lugha na diog, mearachd as motha 1.9d agus "
 "luachan gun chiall taobh a-muigh na rainse seo"
 
 #: src/core/StelCore.cpp:1856 src/core/StelCore.cpp:1861
@@ -1666,7 +1664,7 @@ msgstr "Ceàrn uarach/DE: %1/%2"
 #: src/core/StelObject.cpp:152 src/core/StelObject.cpp:155
 #: src/core/StelObject.cpp:186 src/core/StelObject.cpp:188
 msgid "(apparent)"
-msgstr "(san lèirsinn)"
+msgstr "(lèirsinneach)"
 
 #: src/core/StelObject.cpp:186 src/core/StelObject.cpp:188
 #: src/core/StelObject.cpp:193 src/core/StelObject.cpp:195
@@ -1691,12 +1689,12 @@ msgstr "Domhan-fhad/domhan-leud reul-chriosach: %1/%2"
 #: src/core/StelObject.cpp:253
 #, qt-format
 msgid "Mean Sidereal Time: %1"
-msgstr "Meadhan ùine cuairt nan reul: %1"
+msgstr "Ùine meadhain na cuairte reultaich: %1"
 
 #: src/core/StelObject.cpp:259
 #, qt-format
 msgid "Apparent Sidereal Time: %1"
-msgstr "Ùine cuairt nan reul san lèirsinn: %1"
+msgstr "Ùine lèirsinneach na cuairte reultaich: %1"
 
 #: src/core/StelSkyLayerMgr.cpp:88
 msgid "Deep-sky objects background images"
@@ -2752,7 +2750,7 @@ msgstr "Comaidean"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:459 src/translations.h:72
 msgid "Dwarf planets"
-msgstr "Troich-phlanaidean"
+msgstr "Fo-phlanaidean"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:460 src/translations.h:74
@@ -2934,7 +2932,7 @@ msgstr "pluitìno"
 #. TRANSLATORS: Type of object
 #: src/translations.h:54
 msgid "dwarf planet"
-msgstr "troich-phlanaid"
+msgstr "fo-phlanaid"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:56
@@ -3486,7 +3484,7 @@ msgstr "Turas air cuspairean Mhessier"
 #. TRANSLATORS: Name of script
 #: src/translations.h:294
 msgid "Binocular Highlights"
-msgstr "Nochdadh dà-shùileach"
+msgstr "Nochdadh prosbaige"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:296
@@ -3506,7 +3504,7 @@ msgstr "Turas Herschel 400"
 #. TRANSLATORS: Name of script
 #: src/translations.h:302
 msgid "Binosky: Deep Sky Objects for Binoculars"
-msgstr "Binosky: Cuspairean fad às dha dà-shùilich"
+msgstr "Binosky: Cuspairean fad às dha phrosbaigean"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:304
@@ -3617,11 +3615,11 @@ msgid ""
 msgstr ""
 "Ruithidh Phobos air beulaibh a' Chuirg agus trasnaidh e a' ghrian, tèid e "
 "troimhe agus tillidh e an aghaidh a' chuairteachaidh an uairsin agus "
-"trasnaidh e pàirt dhen ghrian a-rithist (chan fhaicear seo ach o leth dheas "
-"Dheimos) 's as dèidh seo, dubhraidh Corg a' ghrian gu tur fhad 's a tha "
-"Phobos a' trasnadh eadar Corg agus Deimos san dorchadas. Nuair a thig Phobos "
-"am follais on Chorg, bidh an dubhradh air fhathast agus e doilleir fo sgàil "
-"a' Chuirg 's cha shoillsich e ach an uairsin."
+"trasnaidh e pàirt dhen ghrian a-rithist (chan fhaicear seo ach o leth-"
+"chruinne deas Dheimos) 's as dèidh seo, dubhraidh Corg a' ghrian gu tur fhad "
+"'s a tha Phobos a' trasnadh eadar Corg agus Deimos san dorchadas. Nuair a "
+"thig Phobos am follais on Chorg, bidh an dubhradh air fhathast agus e "
+"doilleir fo sgàil a' Chuirg 's cha shoillsich e ach an uairsin."
 
 #: src/translations.h:327
 msgid ""
@@ -3706,7 +3704,7 @@ msgid ""
 "binoculars. The data for the script are taken from the eponymous book by "
 "Gary Seronik."
 msgstr ""
-"Turas air cuspairean inntinneach a chithear le dà-shùileach. Chaidh an dàta "
+"Turas air cuspairean inntinneach a chithear le prosbaig. Chaidh an dàta "
 "airson an sgriobt seo a thogail on leabhar \"Binocular Highlights\" le Gary "
 "Seronik."
 
@@ -3737,7 +3735,7 @@ msgid ""
 "Right Ascension (2000.0)."
 msgstr ""
 "Chruthaich Ben Crowell liosta Binosky, seo liosta amhairc dhe chuspairean "
-"fad às dha dhà-shùilich. Bheir sinn 31 dhe na cuspairean sin dhut leis an "
+"fad às dha phrosbaigean. Bheir sinn 31 dhe na cuspairean sin dhut leis an "
 "sgriobt seo, air an seòrsachadh a-rèir an dìridh dheis (2000.0)."
 
 #: src/translations.h:343
@@ -5214,7 +5212,7 @@ msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
 msgstr ""
-"cuir an roghainn seo à comas mur eil thu airson na lorgan fhaicinn airson "
+"Cuir an roghainn seo à comas mur eil thu airson na lorgan fhaicinn airson "
 "gabh ball na rian-grèine."
 
 #: src/ui_viewDialog.h:1627
@@ -5389,8 +5387,7 @@ msgstr "Cleachd oidheaman co-rèireach"
 msgid ""
 "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
-"Cuingich meudachd (airson amhairc gun taic / dà-shùileach) nan cuspairean "
-"fad às."
+"Cuingich meudachd (airson amhairc gun taic / prosbaig) nan cuspairean fad às."
 
 #: src/ui_viewDialog.h:1724
 msgid "Celestial Sphere"
@@ -6530,10 +6527,10 @@ msgid ""
 msgstr ""
 "Is cuimhne leam gun do rinn mi tomhas air meud Roinn Chassini nuair a bha mi "
 "'nam oileanach. Cha robh e cho glòrmhor agus a bhiodh tu an dùil... Bha "
-"sgothan ann... Bha an t-uisge ann... Bha seann-phrosbaigean aig dàrna taobh "
-"amharc-lainn a' tomhadh ri <em>dealbh-camara</em> Satairn aig taobh eile an "
-"amhairc-lainn. Rinn sinn tomhas. Rinn sin àireamhachadh. Bu mhiann leinn a "
-"bhith ann an Hawai'i."
+"sgothan ann... Bha an t-uisge ann... Bha seann-ghlainneachan-amhairc aig "
+"dàrna taobh amharc-lainn a' tomhadh ri <em>dealbh-camara</em> Satairn aig "
+"taobh eile an amharc-lainn. Rinn sinn tomhas. Rinn sin àireamhachadh. Bu "
+"mhiann leinn a bhith ann an Hawai'i."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:446
@@ -6739,9 +6736,9 @@ msgid ""
 "magnification and field of view are simulated.) It can also show a sensor "
 "frame and a Telrad sight."
 msgstr ""
-"Seallaidh seo an speur mar an robh thu a' coimhead air le lionsa prosbaige. "
-"(Cha dèid ach a' mheudachd is an raon-seallaidh atharrais.) 'S urrainn dha "
-"frèam mothaicheir is fradharc Telrad a shealltainn cuideachd."
+"Seallaidh seo an speur mar an robh thu a' coimhead air le lionsa glainne-"
+"amhairc. (Cha dèid ach a' mheudachd is an raon-seallaidh atharrais.) 'S "
+"urrainn dha frèam mothaicheir is fradharc Telrad a shealltainn cuideachd."
 
 #: plugins/Oculars/src/Oculars.cpp:941
 msgid "Please select an object before switching to ocular view."
@@ -6822,11 +6819,11 @@ msgstr "Rèitich plugan nan sùileach"
 
 #: plugins/Oculars/src/Oculars.cpp:1506
 msgid "Select next telescope"
-msgstr "Tagh an ath-phrosbaig"
+msgstr "Tagh an ath-ghlainne-amhairc"
 
 #: plugins/Oculars/src/Oculars.cpp:1508
 msgid "Select previous telescope"
-msgstr "Tagh a' phrosbaig roimhpe"
+msgstr "Tagh a' ghlainne-amhairc roimhpe"
 
 #: plugins/Oculars/src/Oculars.cpp:1510
 msgid "Select next eyepiece"
@@ -6887,7 +6884,7 @@ msgstr "Gun lionsa"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:740
 #, qt-format
 msgid "Telescope #%1"
-msgstr "Prosbaig %1"
+msgstr "Glainne-amhairc %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1966
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:823
@@ -6930,7 +6927,7 @@ msgstr "Mothaichear #%1: %2"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:744
 #, qt-format
 msgid "Telescope #%1: %2"
-msgstr "Prosbaig %1: %2"
+msgstr "Glainne-amhairc %1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:2293
 msgid "&Lens"
@@ -6954,7 +6951,7 @@ msgstr "A' p&hrosbaig roimhpe"
 
 #: plugins/Oculars/src/Oculars.cpp:2327
 msgid "&Next telescope"
-msgstr "A&n ath-phrosbaig"
+msgstr "A&n ath-ghlainne-amhairc"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:189
 msgid "Previous ocular"
@@ -6982,11 +6979,11 @@ msgstr "An t-ath-fhrèam CCD"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:225
 msgid "Previous telescope"
-msgstr "A' phrosbaig roimhpe"
+msgstr "A' ghlainne-amhairc roimhpe"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:231
 msgid "Next telescope"
-msgstr "An ath-phrosbaig"
+msgstr "An ath-ghlainne-amhairc"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:264
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
@@ -7048,33 +7045,34 @@ msgstr "Cuairteachadh: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:804
 msgid "Magnification provided by these binoculars"
-msgstr "Am meudachd a bheir an dà-shùileach seo dhut"
+msgstr "Am meudachd a bheir a' phrosbaig seo dhut"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:805
 msgid "Actual field of view provided by these binoculars"
-msgstr "An dearbh raon-seallaidh a bheir an dà-shùileach seo dhut"
+msgstr "An dearbh raon-seallaidh a bheir a' phrosbaig seo dhut"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:806
 msgid "Exit pupil provided by these binoculars"
-msgstr "Am fradharc fàgail a bheir an dà-shùileach seo dhut"
+msgstr "Am fradharc fàgail a bheir a' phrosbaig seo dhut"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:814
 msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr ""
-"Am meudachadh a bheir an co-mheasgachadh sùilich/lionsa/prosbaige seo dhut"
+"Am meudachadh a bheir an co-mheasgachadh sùilich/lionsa/glainne-amhairc seo "
+"dhut"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:815
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr ""
-"An dearbh raon-seallaidh a bheir an co-mheasgachadh sùilich/lionsa/prosbaige "
-"seo dhut"
+"An dearbh raon-seallaidh a bheir an co-mheasgachadh sùilich/lionsa/glainne-"
+"amhairc seo dhut"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:816
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
 msgstr ""
-"Am fradharc fàgail a bheir an co-mheasgachadh sùilich/lionsa/prosbaige seo "
-"dhut"
+"Am fradharc fàgail a bheir an co-mheasgachadh sùilich/lionsa/glainne-amhairc "
+"seo dhut"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:531
@@ -7118,9 +7116,9 @@ msgid ""
 msgstr ""
 "Tha fa-near a' plugain seo atharrais na chitheadh tu tro lionsa sùla. 'S "
 "urrainn dhut an còmhradh-rèiteachaidh seo a chleachdadh gus lionsaichean "
-"sùla, prosbaigean agus mothaichearan CCD a chur ris, atharrachadh no a "
-"sguabadh às. Thèid buill-eisimpleir a chur ris a' chiad turas a ruitheas tu "
-"an aplacaid seo ach am bi toiseach-tòiseachaidh agad."
+"sùla, glainneachan-amhairc agus mothaichearan CCD a chur ris, atharrachadh "
+"no a sguabadh às. Thèid buill-eisimpleir a chur ris a' chiad turas a "
+"ruitheas tu an aplacaid seo ach am bi toiseach-tòiseachaidh agad."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:557
 msgid "You can choose to scale the image you see on the screen."
@@ -7133,16 +7131,16 @@ msgid ""
 "eyepiece/telescope combination will be like when compared to another."
 msgstr ""
 "Tha seo ann ach an urrainn dhut coimeas nas fhearr a dhèanamh eadar dè bhios "
-"co-cheanglaidhean lionsa sùla/prosbaige diofraichte coltach."
+"co-cheanglaidhean lionsa sùla/glainne-amhairc diofraichte coltach."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:559
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will "
 "produce two different exit pupils, changing the view somewhat."
 msgstr ""
-"Bheir an t-aon lionsa sùla le dà phrosbaig air a bheil faide an fhòcais "
-"eadar-dhealaichte dhut fradharc fàgail eadar-dhealaichte, ag atharrachadh an "
-"t-seallaidh."
+"Bheir an t-aon lionsa sùla le dà ghlainne-amhairc air a bheil faide an "
+"fhòcais eadar-dhealaichte dhut fradharc fàgail eadar-dhealaichte, ag "
+"atharrachadh an t-seallaidh."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:560
 msgid ""
@@ -7216,8 +7214,8 @@ msgstr "Na cuir seo an comas ach nuair a chaidh cuspair a thaghadh"
 #: plugins/Oculars/src/ui_ocularDialog.h:1165
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
 msgstr ""
-"Cuir an sàs crìochan air a' mheudachd reultail a-rèir fosgladh nam "
-"prosbaigean"
+"Cuir an sàs crìochan air a' mheudachd reultail a-rèir fosgladh nan "
+"glainneachan-amhairc"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1167
 msgid "Limit stellar magnitude"
@@ -7310,7 +7308,7 @@ msgstr "Raon-stad:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1194
 msgid "Binoculars"
-msgstr "Dà-shùileach"
+msgstr "Prosbaig"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1195
 msgid "Has permanent cross-hairs"
@@ -7391,7 +7389,7 @@ msgstr "Ceàrn a' chuairteachaidh (ceum):"
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
-msgstr "Prosbaigean"
+msgstr "Glainneachan-amhairc"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1226
 msgid "Diameter:"
@@ -7520,7 +7518,7 @@ msgstr "amharc-lainn"
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:1830
 msgid "The Hubble Space Telescope"
-msgstr "Prosbaig fànas Hubble"
+msgstr "Glainne-amhairc fànas Hubble"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1832
@@ -8165,7 +8163,7 @@ msgstr "Tilg air falbh"
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:169
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:178
 msgid "Telescope Control"
-msgstr "Smachd prosbaig"
+msgstr "Smachd glainne-amhairc"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:81
 msgid ""
@@ -8173,32 +8171,32 @@ msgid ""
 "computerized mount (a \"GoTo telescope\")."
 msgstr ""
 "Leigidh am plugan seo le Stellarium àitheantan \"tionndaidh\" a chur gu "
-"prosbaig air sorchan coimpiutairichte (prosbaig \"GoTo\")."
+"glainne-amhairc air sorchan coimpiutairichte (glainne-amhairc \"GoTo\")."
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:162
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:211
 #, qt-format
 msgid "Move telescope #%1 to selected object"
-msgstr "Gluais prosbaig %1 gun chuspair a thagh thu"
+msgstr "Gluais glainne-amhairc %1 gun chuspair a thagh thu"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:168
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:215
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
 msgstr ""
-"Gluais prosbaig %1 gun phuing a tha ann am meadhan na sgrìn an-dràsta"
+"Gluais glainne-amhairc %1 gun phuing a tha ann am meadhan na sgrìn an-dràsta"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:178
 msgid "Move a telescope to a given set of coordinates"
-msgstr "Gluais prosbaig gu sheata co-chomharran sònraichte"
+msgstr "Gluais glainne-amhairc gu sheata co-chomharran sònraichte"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:205
 msgid "Add New Telescope"
-msgstr "Cuir prosbaig ùr ris"
+msgstr "Cuir glainne-amhairc ùr ris"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:215
 msgid "Configure Telescope"
-msgstr "Rèitich a' phrosbaig"
+msgstr "Rèitich a' ghlainne-amhairc"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:63
 msgid "N/A"
@@ -8226,7 +8224,7 @@ msgstr "Sguireadh dheth"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:251
 msgid "Telescope Control plug-in"
-msgstr "Plugan uidheam-smachd na prosbaig"
+msgstr "Plugan uidheam-smachd nan glainneachan-amhairc"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:255
 msgid "Plug-in and GUI programming"
@@ -8247,20 +8245,21 @@ msgid ""
 "control feature);"
 msgstr ""
 "na clasaichean Telescope, TelescopeDummy, TelescopeTcp agus TelescopeMgr ann "
-"an còd Stellarium (taobh a' chliant aig feart tùsail nam prosbaig aig "
-"Stellarium);"
+"an còd Stellarium (taobh a' chliant aig feart tùsail nan glainneachan-"
+"amhairc aig Stellarium);"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:260
 msgid "the telescope server core code (licensed under the LGPL)"
-msgstr "còd airson eitean frithealaiche phrosbaigean (fo cheadachas LGPL)"
+msgstr ""
+"còd airson eitean frithealaiche ghlainneachan-amhairc (fo cheadachas LGPL)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:261
 msgid ""
 "the TelescopeServerLx200 telescope server core code (originally licensed "
 "under the LGPL)"
 msgstr ""
-"còd airson eitean frithealaiche phrosbaigean TelescopeServerLx200 (fo "
-"cheadachas LGPL o thùs)"
+"còd airson eitean frithealaiche ghlainneachan-amhairc TelescopeServerLx200 "
+"(fo cheadachas LGPL o thùs)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:262
 msgid ""
@@ -8270,15 +8269,15 @@ msgid ""
 msgstr ""
 "Is <b>Johannes Gajdosik</b> an t-ùghdar aig a h-uile gin gu h-àrd - an "
 "cliant, eitean an fhrithealaiche agus frithealaiche LX200 cho math ri "
-"pròtacal lìonraidh Stellarium airson prosbaigean (thar TCP/IP)."
+"pròtacal lìonraidh Stellarium airson glainneachan-amhairc (thar TCP/IP)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:263
 msgid ""
 "the TelescopeServerNexStar telescope server core code (originally licensed "
 "under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>."
 msgstr ""
-"còd le <b>Michael Heinz</b> airson eitean frithealaiche phrosbaigean "
-"TelescopeServerNexStar (fo cheadachas LGPL o thùs, stàidhichte air "
+"còd le <b>Michael Heinz</b> airson eitean frithealaiche ghlainneachan-"
+"amhairc TelescopeServerNexStar (fo cheadachas LGPL o thùs, stèidhichte air "
 "TelescopeServerLx200)."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
@@ -8314,7 +8313,7 @@ msgstr "Comasan is cuingeachaidhean"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:282
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
 msgid "The original telescope control feature"
-msgstr "Feart tùsail gus prosbaigean a stiùireadh"
+msgstr "Feart tùsail gus glainneachan-amhairc a stiùireadh"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
@@ -8324,12 +8323,12 @@ msgstr "Cleachd am plugan seo"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:321
 msgid "Main window ('Telescopes')"
-msgstr "Prìomh-uinneag (\"Prosbaigean\")"
+msgstr "Prìomh-uinneag (\"Glainneachan-amhairc\")"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:336
 msgid "Telescope configuration window"
-msgstr "Uinneag rèiteachaidh nam prosbaigean"
+msgstr "Uinneag rèiteachaidh nan glainneachan-amhairc"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:286
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:338
@@ -8340,7 +8339,7 @@ msgstr "Seòrsa a' cheangail"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:346
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:473
 msgid "Telescope properties"
-msgstr "Roghainnean na prosbaig"
+msgstr "Roghainnean na glainne-amhairc"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:354
@@ -8362,11 +8361,11 @@ msgstr "Taisbeanairean an raoin seallaidh"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:385
 msgid "'Slew telescope to' window"
-msgstr "Uinneag \"Tionndaidh a' phrosbaig gu\""
+msgstr "Uinneag \"Tionndaidh a' ghlainne-amhairc gu\""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 msgid "Telescope commands"
-msgstr "Àitheantan prosbaige"
+msgstr "Àitheantan ghlainneachan-amhairc"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:293
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:410
@@ -8376,7 +8375,7 @@ msgstr "Uidheaman ris an cuir sinn taic"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:294
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:426
 msgid "Virtual telescope"
-msgstr "Prosbaig bhiortail"
+msgstr "Glainne-amhairc bhiortail"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:297
 msgid ""
@@ -8408,7 +8407,7 @@ msgid ""
 "Sun."
 msgstr ""
 "RABHADH: Chan urrainn dha Stellarium dèanamh cinnteach IDIR nach tomh a' "
-"phrosbaig ris a' ghrian."
+"ghlainne-amhairc ris a' ghrian."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
 msgid ""
@@ -8416,9 +8415,9 @@ msgid ""
 "installed. The powerful light amplified by the telescope WILL cause "
 "irreversible damage to your eyes and/or your equipment."
 msgstr ""
-"Na tomh a' phrosbaig agad ris a' ghrian idir gun chriathrag-grèine iomchaidh "
-"air. 'S ann gum mill an solas cumhachdach air a mheudachadh leis a' "
-"phrosbaig do shùilean agus/no an uidheamachd agad GU BUAN."
+"Na tomh a' ghlainne-amhairc agad ris a' ghrian idir gun chriathrag-grèine "
+"iomchaidh air. 'S ann GU BUAN a mhilleas an solas cumhachdach air a "
+"mheudachadh leis a' ghlainne-amhairc do shùilean agus/no an uidheamachd agad."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:301
 msgid ""
@@ -8428,9 +8427,9 @@ msgid ""
 "before sunset without appropriate protection."
 msgstr ""
 "Fiù 's mura dèan tu a dh'aona-ghnothaich e, le tionndadh air an latha, "
-"dh'fhaoidte gun tomh a' phrosbaig ris a' ghrian air slighe a' chinn-uidhe. "
-"Mar sin, mholamaid nach cleachd thu feart stiùireadh nam prosbaig idir ro "
-"laighe na grèine às aonais dìona iomchaidh."
+"dh'fhaoidte gun tomh a' ghlainne-amhairc ris a' ghrian air slighe a' chinn-"
+"uidhe. Mar sin, mholamaid nach cleachd thu feart stiùireadh nan glainneachan-"
+"amhairc idir ro laighe na grèine às aonais dìona iomchaidh."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:306
@@ -8454,9 +8453,10 @@ msgid ""
 "removed. There is no longer a way to control a telescope with Stellarium "
 "without this plug-in."
 msgstr ""
-"Chaidh feart tùsail airson stiùireadh nam prosbaig aig Stellarium a thoirt "
-"air falbh leis an tionndadh 0.10.5. Chan eil dòigh ann gus prosbaig a "
-"stiùireadh le Stellarium às aonais a' plugain seo a-nis."
+"Chaidh feart tùsail airson stiùireadh nan glainneachan-amhairc aig "
+"Stellarium a thoirt air falbh leis an tionndadh 0.10.5. Chan eil dòigh ann "
+"gus glainne-amhairc a stiùireadh le Stellarium às aonais a' plugain seo a-"
+"nis."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:309
 msgid ""
@@ -8491,8 +8491,8 @@ msgid ""
 "can 'talk' to Stellarium</b>;"
 msgstr ""
 "Tha uidheam ceangailte ris an aon choimpiutair ach dha e fo stiùireadh "
-"%1prògram frithealaiche phrosbaigean fa leth%2 no %3aplacaid treas-"
-"phartaidh%4 <b>a tha comasach air \"bruidhinn\" ri Stellarium</b>;"
+"%1prògram frithealaiche ghlainneachan-amhairc fa leth%2 no %3aplacaid treas-"
+"phàrtaidh%4 <b>a tha comasach air \"bruidhinn\" ri Stellarium</b>;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:313
 msgid ""
@@ -8503,8 +8503,8 @@ msgid ""
 msgstr ""
 "Tha uidheam ceangailte ri coimpiutair cèin agus tha am bathar-bog a tha 'ga "
 "stiùireadh comasach air \"bruidhinn\" ri Stellarium <i>thar an "
-"lìonraidh</i>; 's e fear dhe na frithealaichean phrosbaigean fa leth aig "
-"Stellarium a th' ann no aplacaid treas-phartaidh."
+"lìonraidh</i>; 's e fear dhe na frithealaichean ghlainneachan-amhairc fa "
+"leth aig Stellarium a th' ann no aplacaid treas-phàrtaidh."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
 #, qt-format
@@ -8512,8 +8512,9 @@ msgid ""
 "Most older telescopes use cables that connect to a %1serial port%2 (RS-232), "
 "the newer ones use %3USB%4 (Universal Serial Bus)."
 msgstr ""
-"Cleachdaidh a' mhòrchuid a phrosbaigean seana càball a cheanglas ri %1port "
-"sreathach%2 (RS-232) agus an fheadhainn ùra %3USB%4 (Universal Serial Bus)."
+"Cleachdaidh a' mhòrchuid a ghlainneachan-amhairc seana càball a cheanglas ri "
+"%1port sreathach%2 (RS-232) agus an fheadhainn ùra %3USB%4 (Universal Serial "
+"Bus)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:315
 msgid ""
@@ -8523,7 +8524,7 @@ msgid ""
 msgstr ""
 "Làimhsichidh am plugan cùisean air an aon dòigh air Linux is Max OS X. Air "
 "Windows, dh'fhaoidte gun iarr ceangal USB bathar-bog \"port sreathach "
-"bhiortail\" mura deach a sholar leis a' chàball no a' phrosbaig."
+"bhiortail\" mura deach a sholar leis a' chàball no a' ghlainne-amhairc."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:316
 msgid ""
@@ -8540,16 +8541,17 @@ msgid ""
 "USB) adapter may be necessary."
 msgstr ""
 "Air gach fear dhen trì ùrlaran, mur eil puirt sreathach \"sann-nòsach\" aig "
-"a' choimpiutair is mur urrainn dhan phrosbaig ceangal ach ri port sreathach, "
-"dh'fhaoidte gum bi feum air freagarraichear sreathach-ri-USB (RS-232-to-USB)."
+"a' choimpiutair is mur urrainn dhan ghlainne-amhairc ceangal ach ri port "
+"sreathach, dh'fhaoidte gum bi feum air freagarraichear sreathach-ri-USB (RS-"
+"232-to-USB)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid ""
 "Telescope set-up (setting geographical coordinates, performing alignment, "
 "etc.) should be done before connecting the telescope to Stellarium."
 msgstr ""
-"Bu chòir dhut a' phrosbaig a shuidheachadh (na co-chomharran cruinne a "
-"shuidheachadh, a gleusadh is msaa.) mus ceangail thu ri Stellarium i."
+"Bu chòir dhut a' ghlainne-amhairc a shuidheachadh (na co-chomharran cruinne "
+"a shuidheachadh, a gleusadh is msaa.) mus ceangail thu ri Stellarium i."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
 msgid "The plug-in's main window can be opened:"
@@ -8573,17 +8575,17 @@ msgid ""
 "(opened by pressing <b>Ctrl+0</b> or the respective button on the bottom "
 "toolbar)."
 msgstr ""
-"Le brùthadh air a' phutan \"Rèitich a' phrosbaig...\" san %1uinneag "
-"\"Tionndaidh a' phrosbaig gu\"%2 (fosglaidh tu sin le <b>Ctrl+0</b> no leis "
-"a' phutan iomchaidh air a' bhàr-inneal aig a' bhonn)."
+"Le brùthadh air a' phutan \"Rèitich a' ghlainne-amhairc...\" san %1uinneag "
+"\"Tionndaidh a' ghlainne-amhairc gu\"%2 (fosglaidh tu sin le <b>Ctrl+0</b> "
+"no leis a' phutan iomchaidh air a' bhàr-inneal aig a' bhonn)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:325
 msgid ""
 "The <b>Telescopes</b> tab displays a list of the telescope connections that "
 "have been set up:"
 msgstr ""
-"Seallaidh an taba <b>Prosbaigean</b> liosta dhe na ceanglaichean prosbaige a "
-"chaidh a shuidheachadh:"
+"Seallaidh an taba <b>Glainneachan-amhairc</b> liosta dhe na ceanglaichean "
+"glainne-amhairc a chaidh a shuidheachadh:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:326
 msgid ""
@@ -8591,8 +8593,8 @@ msgid ""
 "telescope. For example, for telescope #2, the shortcut is Ctrl+2."
 msgstr ""
 "Seallaidh colbh nan àireamh (<b>#</b>) an àireamh a chleachdas tu gus a' "
-"phrosbaig seo a stiùireadh. Mar eisimpleir, airson na prosbaige 2, 's e "
-"Ctrl+2 a tha san ath-ghoirid."
+"ghlainne-amhairc seo a stiùireadh. Mar eisimpleir, airson na glainne-amhairc "
+"2, 's e Ctrl+2 a tha san ath-ghoirid."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:327
 msgid ""
@@ -8613,7 +8615,7 @@ msgstr ""
 #, qt-format
 msgid "<b>virtual</b> means a %1virtual telescope%2;"
 msgstr ""
-"Is ciall dha <b>bhiortail</b> gur e %1prosbaig bhiortail%2 a th' ann;"
+"Is ciall dha <b>bhiortail</b> gur e %1glainne-amhairc bhiortail%2 a th' ann;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:330
 #, qt-format
@@ -8622,7 +8624,7 @@ msgid ""
 "%1above%2);"
 msgstr ""
 "Is ciall dha <b>ionadail, Stellarium</b> gu bheil ceangal DÌREACH dhan "
-"phrosbaig agad (faic %1gu h-àrd%2);"
+"ghlainne-amhairc agad (faic %1gu h-àrd%2);"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:331
 msgid ""
@@ -8647,10 +8649,10 @@ msgid ""
 "the <b>Configure</b> button. In both cases, a telescope connection "
 "configuration window will open."
 msgstr ""
-"Gus ceangal prosbaige ùr a shuidheachadh, brùth air a' phutan <b>Cuir "
+"Gus ceangal glainne-amhairc ùr a shuidheachadh, brùth air a' phutan <b>Cuir "
 "ris</b>. Gus an rèiteachadh aig ceangal a tha ann atharrachadh, tagh air an "
 "liosta e is brùth air a' phutan <b>Rèitich</b>. Fosglaidh an dà chuid "
-"uinneag rèiteachaidh airson ceangail prosbaige dhut."
+"uinneag rèiteachaidh airson ceangail glainne-amhairc dhut."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:339
 #, qt-format
@@ -8664,7 +8666,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:340
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:463
 msgid "Telescope controlled by:"
-msgstr "Tha a' phrosbaig 'ga stiùireadh le:"
+msgstr "Tha a' ghlainne-amhairc 'ga stiùireadh le:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:341
 msgid "<b>Stellarium, directly through a serial port</b> is the DIRECT case"
@@ -8683,8 +8685,8 @@ msgid ""
 "<b>Nothing, just simulate one (a moving reticle)</b> is a %1virtual "
 "telescope%2 (no connection)"
 msgstr ""
-"<b>Gin sam bith ach tè mas-fhìor (sgannan a' gluasad)</b>, seo %1prosbaig "
-"bhiortail%2 (chan eil ceangal ann)"
+"<b>Gin sam bith ach tè mas-fhìor (sgannan a' gluasad)</b>, seo %1glainne-"
+"amhairc bhiortail%2 (chan eil ceangal ann)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:347
 msgid ""
@@ -8692,15 +8694,15 @@ msgid ""
 "telescope reticle."
 msgstr ""
 "Is <b>Ainm</b> an leubail a thèid a shealltainn air an sgrìn ro taobh "
-"sgannan na prosbaige."
+"sgannan na glainne-amhairc."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:348
 msgid ""
 "<b>Connection delay</b>: If the movement of the telescope reticle on the "
 "screen is uneven, you can try increasing or decreasing this value."
 msgstr ""
-"<b>Dàil a' cheangail</b>: Mur eil gluasad sgannan na prosbaige rèidh air an "
-"sgrìn, feuch meudachadh no lùghdachadh an luach seo."
+"<b>Dàil a' cheangail</b>: Mur eil gluasad sgannan na glainne-amhairc rèidh "
+"air an sgrìn, feuch meudachadh no lùghdachadh an luach seo."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:349
 msgid ""
@@ -8710,10 +8712,10 @@ msgid ""
 "override."
 msgstr ""
 "<b>Siostam cho-chomharran</b>: Chaidh am bathar-an-sàs aig cuid a "
-"phrosbaigean Celestron ùrachadh is measaidh iad na co-chomharran a gheibh "
-"iad mar cho-chomharran a chleachdas an co-fhad-thràth aig a' cheann-là (EOD "
-"air a bheil JNow cuideachd) a-nis agus bi feum air an tar-àithn seo ri linn "
-"sin."
+"ghlainneachan-amhairc Celestron ùrachadh is measaidh iad na co-chomharran a "
+"gheibh iad mar cho-chomharran a chleachdas an co-fhad-thràth aig a' cheann-"
+"là (EOD air a bheil JNow cuideachd) a-nis agus bi feum air an tar-àithn seo "
+"ri linn sin."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:350
 msgid ""
@@ -8721,17 +8723,17 @@ msgid ""
 "attempt to connect to the telescope immediately after it starts."
 msgstr ""
 "<b>Tòisich/Ceangail leis an tòiseachadh</b>: Cuir comharra ris an roghainn "
-"seo ma tha thu airson 's gum feuch Stellarium ri ceangal ris a' phrosbaig "
-"seo sa bhad às dèidh a thòiseachadh."
+"seo ma tha thu airson 's gum feuch Stellarium ri ceangal ris a' ghlainne-"
+"amhairc seo sa bhad às dèidh a thòiseachadh."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:351
 msgid ""
 "Otherwise, to start the telescope, you need to open the main window, select "
 "that telescope and press the 'Start/Connect' button."
 msgstr ""
-"Mura chuir, gus a' phrosbaig a thòiseachadh, feumaidh tu a' phrìomh-uinneag "
-"fhosgladh, a' phrosbaig sin a thaghadh agus brùthadh air a' phutan "
-"\"Tòisich/Ceangail\"."
+"Mura chuir, gus a' ghlainne-amhairc a thòiseachadh, feumaidh tu a' phrìomh-"
+"uinneag fhosgladh, a' ghlainne-amhairc sin a thaghadh agus brùthadh air a' "
+"phutan \"Tòisich/Ceangail\"."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:355
 #, qt-format
@@ -8743,8 +8745,8 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:356
 msgid "<b>Serial port</b> sets the serial port used by the telescope."
 msgstr ""
-"Suidhichidh <b>Port sreathach</b> am port sreathach a chleachdas a' "
-"phrosbaig."
+"Suidhichidh <b>Port sreathach</b> am port sreathach a chleachdas a' ghlainne-"
+"amhairc."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:357
 msgid "There is a pop-up box that suggests some default values:"
@@ -8775,7 +8777,7 @@ msgid ""
 "most probably is not in the list of suggestions."
 msgstr ""
 "Ma tha thu a' cleachdadh càball USB, chan eil sinn an dùil gum bi am port "
-"sreathach bunaiteach aig a' phrosbaig agad air liosta nam molaidhean."
+"sreathach bunaiteach aig a' ghlainne-amhairc agad air liosta nam molaidhean."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:362
 msgid ""
@@ -8830,7 +8832,7 @@ msgid ""
 "depends on the telescope number and ranges between 10001 and 10009."
 msgstr ""
 "'S e port TCP a' chonaltraidh a th' ann am <b>Port</b>. Tha an luach tùsail "
-"a-rèir àireamh na prosbaige agus tha e eadar 10001 is 10009."
+"a-rèir àireamh na glainne-amhairc agus tha e eadar 10001 is 10009."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:372
 msgid "Both values are ignored for DIRECT connections."
@@ -8850,7 +8852,7 @@ msgid ""
 "a program that runs the telescope."
 msgstr ""
 "Ma dh'fheuchas, cleachd ainm no seòladh IP a' choimpiutair a tha a' ruith "
-"prògram a stiùiricheas a' phrosbaig."
+"prògram a stiùiricheas a' ghlainne-amhairc."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:378
 msgid ""
@@ -8859,15 +8861,15 @@ msgid ""
 "<strong>Oculars</strong> plug-in existed."
 msgstr ""
 "'S urrainn dhut sreath dhe chearcaill a riochdaicheas raointean seallaidh "
-"eadar-dhealaichte a chur timcheall air comharra na prosbaige. Seo seann-"
-"fheart on àm nach robh am plugan <strong>Sùilich</strong> ann fhathast."
+"eadar-dhealaichte a chur timcheall air comharra na glainne-amhairc. Seo "
+"seann-fheart on àm nach robh am plugan <strong>Sùilich</strong> ann fhathast."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:379
 msgid ""
 "In the telescope configuration window, click on 'User Interface Settings'."
 msgstr ""
-"Ann an uinneag rèiteachadh na prosbaige, briog air \"Roghainnean na h-eadar-"
-"aghaidh\"."
+"Ann an uinneag rèiteachadh na glainne-amhairc, briog air \"Roghainnean na h-"
+"eadar-aghaidh\"."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:380
 msgid ""
@@ -8888,7 +8890,7 @@ msgid ""
 "This can be used in combination with a %1virtual telescope%2 to display a "
 "moving reticle with the Telrad circles."
 msgstr ""
-"'S urrainn dhut seo a chleachdadh cuide ri %1prosbaig bhiortail%2 gus "
+"'S urrainn dhut seo a chleachdadh cuide ri %1glainne-amhairc bhiortail%2 gus "
 "sgannan le cearcaill Telrad a ghluaiseas a shealltainn."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:386
@@ -8896,8 +8898,9 @@ msgid ""
 "The 'Slew telescope to' window can be opened by pressing <b>Ctrl+0</b> or "
 "the respective button in the bottom toolbar."
 msgstr ""
-"Gabhaidh an uinneag \"Tionndaidh a' phrosbaig gu\" fhosgladh le brùthadh air "
-"<b>Ctrl+0</b> no air a' phutan iomchaidh air a' bhàr-inneal aig a' bhonn."
+"Gabhaidh an uinneag \"Tionndaidh a' ghlainne-amhairc gu\" fhosgladh le "
+"brùthadh air <b>Ctrl+0</b> no air a' phutan iomchaidh air a' bhàr-inneal aig "
+"a' bhonn."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:387
 msgid ""
@@ -8947,8 +8950,8 @@ msgid ""
 "Pressing the <b>Configure telescopes...</b> button opens the %1main window%2 "
 "of the plug-in."
 msgstr ""
-"Fosglaidh brùthadh air a' phutan <b>Rèitich a' phrosbaig...</b> %1prìomh-"
-"uinneag%2 a' phlugain."
+"Fosglaidh brùthadh air a' phutan <b>Rèitich a' ghlainne-amhairc...</b> "
+"%1prìomh-uinneag%2 a' phlugain."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:393
 msgid ""
@@ -8978,8 +8981,8 @@ msgid ""
 "telescope reticle labelled with the telescope's name on its current position "
 "in the sky."
 msgstr ""
-"Nuair a bhios prosbaig air a thòiseachadh/cheangal gu soirbheacheil, "
-"seallaidh Stellarium sgannan le ainm na prosbaige ris air an ionad "
+"Nuair a bhios glainne-amhairc air a thòiseachadh/cheangal gu soirbheachail, "
+"seallaidh Stellarium sgannan le ainm na glainne-amhairc ris air an ionad "
 "làithreach aige ris an speur."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:399
@@ -9003,11 +9006,11 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:401
 msgid "For example, Ctrl+1 for telescope #1."
-msgstr "Mar eisimpleir, Ctrl+1 airson prosbaig 1."
+msgstr "Mar eisimpleir, Ctrl+1 airson glainne-amhairc 1."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:402
 msgid "This will move the telescope to the selected object."
-msgstr "Gluaisidh seo a' phrosbaig dhan chuspair a thagh thu."
+msgstr "Gluaisidh seo a' ghlainne-amhairc dhan chuspair a thagh thu."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:403
 msgid ""
@@ -9019,7 +9022,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:404
 msgid "For example, Alt+1 for telescope #1."
-msgstr "Mar eisimpleir, Alt+1 airson prosbaig 1."
+msgstr "Mar eisimpleir, Alt+1 airson glainne-amhairc 1."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:405
 msgid ""
@@ -9070,7 +9073,7 @@ msgid ""
 "A computerized telescope mount made by Losmandy (Meade LX-200/Autostar "
 "interface)."
 msgstr ""
-"Sorchan prosbaige le comas coimpiutair a chaidh a dhèanamh le Losmandy "
+"Sorchan glainne-amhairc le comas coimpiutair a chaidh a dhèanamh le Losmandy "
 "(eadar-aghaidh Meade LX-200/Autostar)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:415
@@ -9083,8 +9086,8 @@ msgid ""
 "The Meade ETX-70 telescope with the #494 Autostar controller and the #506 "
 "Connector Cable Set."
 msgstr ""
-"Prosbaig Meade ETX-70 le uidheam-smachd Autostar #494 agus seata chàballan "
-"ceangail #506."
+"Glainne-amhairc Meade ETX-70 le uidheam-smachd Autostar #494 agus seata "
+"chàballan ceangail #506."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:417
 #, qt-format
@@ -9100,7 +9103,7 @@ msgid ""
 "The Sky-Watcher SynScan AZ GoTo mount is used in a number of telescopes."
 msgstr ""
 "Tha an sorchan Sky-Watcher SynScan AZ GoTo 'ga chleachdadh ann an uiread a "
-"phrosbaigean."
+"ghlainneachan-amhairc."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:420
 msgid ""
@@ -9126,10 +9129,10 @@ msgid ""
 "(for example, a dobsonian) into a 'Push To' telescope (a telescope that uses "
 "a computer to find targets and human power to move the telescope itself)."
 msgstr ""
-"'S e cearcall digiteach adhartach a chum rèiteachaidh a th' ann a nì "
-"prosbaig \"bhrùthaidh\" dhe phrosbaig àbhaisteach (can tè Dhobsonach), seo "
-"prosbaig a chleachdas coimpiutair gus amasan a lorg agus duine gus a' "
-"phrosbaig fhèin a ghluasad."
+"'S e cearcall digiteach adhartach a chum rèiteachaidh a th' ann a nì glainne-"
+"amhairc \"bhrùthaidh\" dhe ghlainne-amhairc àbhaisteach (can tè Dhobsonach), "
+"seo glainne-amhairc a chleachdas coimpiutair gus amasan a lorg agus duine "
+"gus a' ghlainne-amhairc fhèin a ghluasad."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:423
 #, qt-format
@@ -9150,9 +9153,9 @@ msgid ""
 msgstr ""
 "Ma tha thu airson am plugan seo a chur fo dheuchainn gun uidheam a cheangal "
 "ris a' choimpiutair, tagh <b>Gin sam bith ach tè mas-fhìor (sgannan a' "
-"gluasad)</b> san raon <b>Tha a' phrosbaig 'ga stiùireadh le:</b>. Seallaidh "
-"seo sgannan prosbaige a nì na rinneadh sgannan dearbh-phrosbaige fo smachd "
-"a' phlugain."
+"gluasad)</b> san raon <b>Tha a' ghlainne-amhairc 'ga stiùireadh le:</b>. "
+"Seallaidh seo sgannan glainne-amhairc a nì na rinneadh sgannan dearbh-"
+"ghlainne-amhairc fo smachd a' phlugain."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:428
 #, qt-format
@@ -9169,8 +9172,9 @@ msgid ""
 "This feature is equivalent to the 'Dummy' type of telescope supported by "
 "%1Stellarium's original telescope control feature%2."
 msgstr ""
-"Tha am feart soo co-ionnann ris an t-seòrsa prosbaige \"Dummy\" a chuir am "
-"%1 feart tùsail aig Stellarium gus prosbaigean a stiùireadh%2 ris."
+"Tha am feart seo co-ionnann ris an t-seòrsa glainne-amhairc \"caochaige\" a "
+"chuir am %1 feart tùsail aig Stellarium gus glainneachan-amhairc a "
+"stiùireadh%2 ris."
 
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:446
@@ -9190,11 +9194,11 @@ msgid ""
 "telescope's number. To slew it to the center of the current view, hold down "
 "the Alt key and press the key with that telescope's number."
 msgstr ""
-"Gus prosbaig ceangailte a thionndadh an comhair cuspair (can an comhair "
-"rèile), tagh an cuspair sin is an uairsin cum an t-iuchair %1 sìos agus "
-"brùth an t-iuchair le àireamh na prosbaige. Gus a thionndadh gu meadhan na "
-"seallaidh làithrich, cum iuchair Alt sìos agus brùth an iuchair le àireamh "
-"na prosbaige."
+"Gus glainne-amhairc cheangailte a thionndadh an comhair cuspair (can an "
+"comhair rèile), tagh an cuspair sin is an uairsin cum an iuchair %1 sìos "
+"agus brùth an iuchair le àireamh na glainne-amhairc. Gus a thionndadh gu "
+"meadhan na seallaidh làithrich, cum iuchair Alt sìos agus brùth an iuchair "
+"le àireamh na glainne-amhairc."
 
 #. TRANSLATORS: Currently, it is very unlikely if not impossible to actually see this text. :)
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:472
@@ -9204,14 +9208,15 @@ msgid ""
 "external application or to connect to a remote host."
 msgstr ""
 "Chan eil fiosrachadh ri fhaighinn air modail an uidheim. Chan urrainn dha "
-"Stellarium prosbaig a stiùireadh leis fhèin ach gabhaidh seo a dhèanamh le "
-"aplacaid air an taobh a-muigh no ceangal ri òstair cèin fhathast."
+"Stellarium glainne-amhairc a stiùireadh leis fhèin ach gabhaidh seo a "
+"dhèanamh le aplacaid air an taobh a-muigh no ceangal ri òstair cèin fhathast."
 
 #. TRANSLATORS: The translated name of the Add button is automatically inserted.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:477
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
-msgstr "Brùth air a' phutan \"%1\" gus ceangal prosbaige ùr a stèidheachadh."
+msgstr ""
+"Brùth air a' phutan \"%1\" gus ceangal glainne-amhairc ùr a stèidheachadh."
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:491
@@ -9240,7 +9245,7 @@ msgstr "Tòisich"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:926
 msgid "Start the selected local telescope"
-msgstr "Tòisich a' phrosbaig ionadail a thagh thu"
+msgstr "Tòisich a' ghlainne-amhairc ionadail a thagh thu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:931
 msgid "Stop"
@@ -9248,7 +9253,7 @@ msgstr "Cuir stad air"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:932
 msgid "Stop the selected local telescope"
-msgstr "Cuir stad air a' phrosbaig ionadail a thagh thu"
+msgstr "Cuir stad air a' ghlainne-amhairc ionadail a thagh thu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:937
 msgid "Connect"
@@ -9256,7 +9261,7 @@ msgstr "Ceangail"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:938
 msgid "Connect to the selected telescope"
-msgstr "Ceangail ris a' phrosbaig a thagh thu"
+msgstr "Ceangail ris a' ghlainne-amhairc a thagh thu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:943
 msgid "Disconnect"
@@ -9264,7 +9269,7 @@ msgstr "Dì-cheangail"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:944
 msgid "Disconnect from the selected telescope"
-msgstr "Dì-cheangail on phrosbaig a thagh thu"
+msgstr "Dì-cheangail on ghlainne-amhairc a thagh thu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:965
 msgid "Select a directory"
@@ -9286,7 +9291,7 @@ msgstr "Tagh aonan"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:319
 msgid "Slew telescope to"
-msgstr "Tionndaidh a' phrosbaig gu"
+msgstr "Tionndaidh a' ghlainne-amhairc gu"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:321
 msgid "There are no active devices."
@@ -9294,7 +9299,7 @@ msgstr "Chan eil uidheam gnìomhach ann."
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:322
 msgid "Slew telescope to coordinates"
-msgstr "Tionndaidh a' phrosbaig an comhair nan co-chomharran"
+msgstr "Tionndaidh a' ghlainne-amhairc an comhair nan co-chomharran"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:323
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:247
@@ -9346,19 +9351,19 @@ msgstr "&Tionndaidh"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "Configure &telescopes..."
-msgstr "Rèi&tich na prosbaigean..."
+msgstr "Rèi&tich na glainneachan-amhairc..."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:461
 msgid "Telescope Configuration"
-msgstr "Rèiteachadh nam prosbaig"
+msgstr "Rèiteachadh nan glainneachan-amhairc"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:465
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
 msgstr ""
-"Prosbaig ceangailte ris a' choimpiutair seo slighe puirt shreathaich agus "
-"'ga stiùireadh le Stellarium fhèin."
+"Glainne-amhairc ceangailte ris a' choimpiutair seo slighe puirt shreathaich "
+"agus 'ga stiùireadh le Stellarium fhèin."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:467
 msgid "Stellarium, directly through a serial port"
@@ -9369,8 +9374,8 @@ msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
 msgstr ""
-"Prosbaig fo smachd aplacaid taobh a-muigh, air a' choimpiutair seo no air "
-"uidheam cèin."
+"Glainne-amhairc fo smachd aplacaid taobh a-muigh, air a' choimpiutair seo no "
+"air uidheam cèin."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
 msgid "External software or a remote computer"
@@ -9390,7 +9395,7 @@ msgid ""
 "Stellarium.\n"
 "Increase this value if the reticle is skipping."
 msgstr ""
-"Tuairmse air an ùine a bheir e mus ruig siognailean an na prosbaige "
+"Tuairmse air an ùine a bheir e mus ruig na siognailean on ghlainne-amhairc "
 "Stellarium.\n"
 "Meudaich an luach seo ma tha an sgannan a' gearradh leuman."
 
@@ -9407,8 +9412,8 @@ msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr ""
-"Feuch ris a' phrosbaig seo a thòiseachadh gu fèin-obrachail no ceangal a "
-"dhèanamh rithe nuair a thòisicheas Stellarium"
+"Feuch ris a' ghlainne-amhairc seo a thòiseachadh gu fèin-obrachail no "
+"ceangal a dhèanamh rithe nuair a thòisicheas Stellarium"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
 msgid "Start/connect at startup"
@@ -9431,7 +9436,7 @@ msgid ""
 "Host name or IPv4 address of the machine that hosts the telescope server"
 msgstr ""
 "Ainm-òstair no seòladh IPv4 aig an uidheam a i òstadh air frithealaiche "
-"phrosbaigean"
+"ghlainneachan-amhairc"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:495
 msgid "TCP port:"
@@ -9443,7 +9448,8 @@ msgstr "Roghainnean na h-eadar-aghaidh"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Show circles with fixed angular size around the telescope reticle"
-msgstr "Seall cearcaill le meud ceàrnadh socraichte mu sgannan na prosbaige"
+msgstr ""
+"Seall cearcaill le meud ceàrnadh socraichte mu sgannan na glainne-amhairc"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Use field of view indicators"
@@ -9464,11 +9470,11 @@ msgstr "Ceart ma-thà"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:394
 msgid "Telescopes Controlled"
-msgstr "Prosbaigean gan stiùireadh"
+msgstr "Glainneachan-amhairc gan stiùireadh"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:397
 msgid "Configure the selected telescope"
-msgstr "Rèitich na prosbaigean a thagh thu"
+msgstr "Rèitich na glainneachan-amhairc a thagh thu"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
 msgid "Configure"
@@ -9476,11 +9482,11 @@ msgstr "Rèitich"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:401
 msgid "Add a new telescope"
-msgstr "Cuir prosbaig ùr ris"
+msgstr "Cuir glainne-amhairc ùr ris"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
 msgid "Remove the selected telescope"
-msgstr "Thoir air falbh a' phrosbaig a thagh thu"
+msgstr "Thoir air falbh a' ghlainne-amhairc a thagh thu"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
 msgid "GUI"
@@ -9488,11 +9494,11 @@ msgstr "Eadar-aghaidh"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:410
 msgid "Show telescope labels"
-msgstr "Seall leubailean prosbaige"
+msgstr "Seall leubailean glainne-amhairc"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
 msgid "Show telescope reticles"
-msgstr "Seall sgannanan prosbaige"
+msgstr "Seall sgannanan glainne-amhairc"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
 msgid "Show field of view indicators"
@@ -9505,13 +9511,14 @@ msgstr "Faidhlichean"
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Log telescope driver messages to files"
 msgstr ""
-"Cuir teachdaireachdan nan draibhearan prosbaige ris na faidhlichean loga"
+"Cuir teachdaireachdan nan draibhearan glainne-amhairc ris na faidhlichean "
+"loga"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
 msgid "Use telescope server executables (override built-in drivers)"
 msgstr ""
-"Cleachd faidhlichean so-ghnìomhaichte aig frithealaiche phrosbaigean (tar-"
-"àithn na draibhearan 'na bhroinn)"
+"Cleachd faidhlichean so-ghnìomhaichte aig frithealaiche ghlainneachan-"
+"amhairc (tar-àithn na draibhearan 'na bhroinn)"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Executables directory:"
@@ -10230,6 +10237,12 @@ msgstr "Uinneag rèiteachaidh nam mòr-nòbhathan eachdraidheil"
 msgid "supernova"
 msgstr "mòr-nòbha"
 
+#: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
+#: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:278
+#, qt-format
+msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
+msgstr "Meudachd: <b>%1</b> (crìonach: <b>%2</b>)"
+
 #: plugins/Supernovae/src/Supernova.cpp:142
 #, qt-format
 msgid "Type of supernova: %1"
@@ -10700,7 +10713,7 @@ msgstr "Reat call an lùiths leis an toinneadh sìos: %1 ergs/s"
 #: plugins/Pulsars/src/Pulsar.cpp:203
 #, qt-format
 msgid "Binary period of pulsar: %1 days"
-msgstr "Ùine na cuairte bìnearaidh a' phulsar: %1 là"
+msgstr "Ùine na cuairte càraidich a' phulsar: %1 là"
 
 #: plugins/Pulsars/src/Pulsar.cpp:207
 #, qt-format
@@ -10756,7 +10769,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/Pulsar.cpp:332
 msgid "has one or more binary companions"
-msgstr "tha companach bìnearaidh no dhà aige"
+msgstr "tha companach càraideach no dhà aige"
 
 #: plugins/Pulsars/src/Pulsar.cpp:337
 msgid "with pulsed emission from radio to infrared or higher frequencies"
@@ -11237,8 +11250,8 @@ msgstr ""
 "'S e reul-eòlaiche is nàdar-fheallsanach a bh' ann an Galileo Galilei (1564-"
 "1642) air cn cuirear <em>athair an reul-eòlais amhairc</em> agus <em>athair "
 "nua-fhiosaigs</em> gu tric cuideachd. Am measg na lorg e, tha e na ceithir "
-"saidealan as motha aig a' Bhliogh a lorg e le prosbaig, a' chiad amharc air "
-"solas na Rìbhinne le prosbaig agus a bharrachd."
+"saidealan as motha aig a' Bhliogh a lorg e le glainne-amhairc, a' chiad "
+"amharc air solas na Rìbhinne le glainne-amhairc agus a bharrachd."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
 msgid ""
@@ -11260,7 +11273,7 @@ msgid ""
 msgstr ""
 "'S e meiltear lionsaichean is dèanadair speuclairean Gearmailteach-Duitseach "
 "a bh' ann an Hans Lipperhey (1570-1619) agus tha mòran dhen bheachd gum b' "
-"esan a thionnsgnaich a' phrosbaig ath-raonaidh ann an 1608."
+"esan a thionnsgnaich a' ghlainne-amhairc ath-raonaidh ann an 1608."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid ""
@@ -11270,7 +11283,7 @@ msgid ""
 msgstr ""
 "'S e dèanadair speuclairean Duitseach a bh' ann an Jacharias Janssen (1580s-"
 "1630s) agus tha mòran dhen bheachd gum b' esan a thionnsgnaich am micreoscop "
-"agus cuid dhen bheachd gun do thionnsgnaich e a' phrosbaig cuideachd."
+"agus cuid dhen bheachd gun do thionnsgnaich e a' ghlainne-amhairc cuideachd."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid ""
@@ -11280,8 +11293,8 @@ msgid ""
 msgstr ""
 "'S e reul-eòlaiche, matamataigear, eòlaiche-dùthchais is eadar-theangaiche "
 "Sasannach a bh' ann an Thomas Harriot (ca. 1560-1621) agus thathar dhen "
-"bheachd gum b' easan a' chiad fhear a tharraing a' ghealaich le taic "
-"prosbaige."
+"bheachd gum b' easan a' chiad fhear a tharraing a' ghealaich le taic glainne-"
+"amhairc."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid ""
@@ -12109,7 +12122,7 @@ msgid ""
 "telescope mount)."
 msgstr ""
 "An àirde as ìsle a ghabhas faicinn (ri linn bheanntan, thogalaichean no "
-"sorchan prosbaige cuingichte)."
+"sorchan glainne-amhairc cuingichte)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
 msgid "Today ephemeris:"
@@ -12403,13 +12416,13 @@ msgid ""
 "first check its sign usage."
 msgstr ""
 "Mìnichidh an co-aontar seo an diofar eadar dà sheòrsa dhe dh'àm grèine. Is "
-"iadsan an t-àm grèine san lèirsinn a thracaicheas gluasad na grèine gu "
-"dìreach agus an t-àm grèine meadhanach a thracaicheas grian \"mas-fhìor\" le "
+"iadsan an t-àm-grèine lèirsinneach a thracaicheas gluasad na grèine gu "
+"dìreach agus an t-àm-grèine meadhain a thracaicheas grian \"mas-fhìor\" le "
 "gach meadhan-latha 24 uair a thìde o chàch a chèile. Chan eil mìneachadh ris "
 "a dh'aontaicheas a h-uile duine ann air soidhne co-aontar an ama. Seallaidh "
 "an dàrna cuid a dh'fhoillseachaidhean soidhne dearbh nuair a bhios a' ghrian-"
 "chlach air thoiseach an uaireadair agus an cuid eile nuair a bhios an t-"
-"uaireadair air toiseach na cloiche-grèine. Ann an saoghal na Beurla, tha an "
+"uaireadair air toiseach na grian-cloiche. Ann an saoghal na Beurla, tha an "
 "dàrna ghnàth as cumanta ach cha lean a h-uile duine ris. Bu chòir dha dhuine "
 "sam bith a chleachdas clàr no graf foillsichte sùil a thoirt air cleachdadh "
 "an t-soidhne an toiseach."
@@ -13078,7 +13091,7 @@ msgid ""
 "the constellation of Perseus."
 msgstr ""
 "'S e an t-ionad san speur on a thig na dreagan ann an sùilean neach-amhairc "
-"air a' phlanaid a th' ann an dealradh no dealradh san lèirsinn aig fras "
+"air a' phlanaid a th' ann an dealradh no dealradh lèirsinneach aig fras "
 "dhreagan. Mar eisimpleir, tha coltas gun dig dreagan Pherseus o ionad san "
 "reul-bhad Pherseus."
 
@@ -14752,6 +14765,10 @@ msgstr "A' phlanaid làithreach: Satarn"
 
 #~ msgid "Galactic plane line"
 #~ msgstr "Loidhne a' chòmhnaird reul-chriosaich"
+
+#, qt-format
+#~ msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
+#~ msgstr "Soillearachd an uachdair: <b>%1</b> (crìonach: <b>%2</b>)"
 
 #~ msgid "Nebula"
 #~ msgstr "Neul-reultan"

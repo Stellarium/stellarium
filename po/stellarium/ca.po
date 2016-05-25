@@ -10,14 +10,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-23 22:52+0700\n"
+"POT-Creation-Date: 2016-05-25 00:05+0700\n"
 "PO-Revision-Date: 2015-10-15 16:12+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-24 05:19+0000\n"
+"X-Launchpad-Export-Date: 2016-05-25 05:19+0000\n"
 "X-Generator: Launchpad (build 18053)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:140 src/core/modules/StarMgr.cpp:378
@@ -249,11 +249,9 @@ msgstr "Opacitat: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:232
 #: src/core/modules/MinorPlanet.cpp:219 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:191
-#: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
-#: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:278
 #, qt-format
-msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "Magnitud: <b>%1</b> (extincted to: <b>%2</b>)"
+msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
+msgstr ""
 
 #: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
 #: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
@@ -277,8 +275,8 @@ msgstr "Índex de color (B-V): <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:224
 #, qt-format
-msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "Brillantor superficial: <b>%1</b> (Extint a: <b>%2</b>)"
+msgid "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
+msgstr ""
 
 #: src/core/modules/Nebula.cpp:230
 #, qt-format
@@ -9903,6 +9901,12 @@ msgstr "Finestra de configuració de l'historia de les supernoves"
 msgid "supernova"
 msgstr "supernova"
 
+#: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
+#: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:278
+#, qt-format
+msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
+msgstr "Magnitud: <b>%1</b> (extincted to: <b>%2</b>)"
+
 #: plugins/Supernovae/src/Supernova.cpp:142
 #, qt-format
 msgid "Type of supernova: %1"
@@ -15076,6 +15080,10 @@ msgstr "Planeta actual: Saturn"
 #~ msgstr ""
 #~ "Salvapantalles de diversos esdeveniments en el Sistema Solar. 232 "
 #~ "esdeveniments en total!"
+
+#, qt-format
+#~ msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
+#~ msgstr "Brillantor superficial: <b>%1</b> (Extint a: <b>%2</b>)"
 
 #~ msgid ""
 #~ "Insufficient OpenGL version. Please update drivers, graphics hardware, or "

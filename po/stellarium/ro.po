@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-23 22:52+0700\n"
+"POT-Creation-Date: 2016-05-25 00:05+0700\n"
 "PO-Revision-Date: 2015-02-28 14:29+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-24 05:30+0000\n"
+"X-Launchpad-Export-Date: 2016-05-25 05:30+0000\n"
 "X-Generator: Launchpad (build 18053)\n"
 "100 > 19) || ((n % 100 == 0) && (n != 0))) ? 2: 1))\n"
 
@@ -247,11 +247,9 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:232
 #: src/core/modules/MinorPlanet.cpp:219 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:191
-#: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
-#: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:278
 #, qt-format
-msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "Magnitudine: <b>%1</b> (extins spre: <b>%2</b>)"
+msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
+msgstr ""
 
 #: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
 #: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
@@ -275,8 +273,8 @@ msgstr "Indexul culorilor(B-V): <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:224
 #, qt-format
-msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "Luminozitatea suprafetei: <b>%1</b> (extinsa la: <b>%2</b>)"
+msgid "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
+msgstr ""
 
 #: src/core/modules/Nebula.cpp:230
 #, qt-format
@@ -9852,6 +9850,12 @@ msgstr "Fereastra de configurare a Supernovelor Istorice"
 msgid "supernova"
 msgstr "supernova"
 
+#: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
+#: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:278
+#, qt-format
+msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
+msgstr "Magnitudine: <b>%1</b> (extins spre: <b>%2</b>)"
+
 #: plugins/Supernovae/src/Supernova.cpp:142
 #, qt-format
 msgid "Type of supernova: %1"
@@ -14403,6 +14407,10 @@ msgstr ""
 
 #~ msgid "Add 1 mean tropical century"
 #~ msgstr "Adaugă o medie a unui secol tropical"
+
+#, qt-format
+#~ msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
+#~ msgstr "Luminozitatea suprafetei: <b>%1</b> (extinsa la: <b>%2</b>)"
 
 #~ msgid "Oops... Stellarium can't check latest version."
 #~ msgstr "Stellarium nu poate verifica dacă aceasta este ultima versiune."
