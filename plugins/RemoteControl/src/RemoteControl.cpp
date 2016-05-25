@@ -266,23 +266,23 @@ void RemoteControl::restoreDefaultSettings()
 void RemoteControl::loadSettings()
 {
 	conf->beginGroup("RemoteControl");
-	setFlagAutoStart(conf->value("autoStart",true).toBool());
-	setFlagUsePassword(conf->value("usePassword",false).toBool());
-	setPassword(conf->value("password","").toString());
-	setPort(conf->value("port",8090).toInt());
-	minThreads = conf->value("minThreads",1).toInt();
-	maxThreads = conf->value("maxThreads",30).toInt();
+	setFlagAutoStart(conf->value("autostart", false).toBool()); // disable autostart for security reason
+	setFlagUsePassword(conf->value("use_password", false).toBool());
+	setPassword(conf->value("password", "").toString());
+	setPort(conf->value("port", 8090).toInt());
+	minThreads = conf->value("min_threads", 1).toInt();
+	maxThreads = conf->value("max_threads", 30).toInt();
 	conf->endGroup();
 }
 
 void RemoteControl::saveSettings()
 {
 	conf->beginGroup("RemoteControl");
-	conf->setValue("autoStart",autoStart);
-	conf->setValue("usePassword",usePassword);
-	conf->setValue("password",password);
-	conf->setValue("port",port);
-	conf->setValue("minThreads",minThreads);
-	conf->setValue("maxThreads",maxThreads);
+	conf->setValue("autostart", autoStart);
+	conf->setValue("use_password", usePassword);
+	conf->setValue("password", password);
+	conf->setValue("port", port);
+	conf->setValue("min_threads", minThreads);
+	conf->setValue("max_threads", maxThreads);
 	conf->endGroup();
 }
