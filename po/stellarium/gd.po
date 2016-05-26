@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-05-25 00:05+0700\n"
-"PO-Revision-Date: 2016-05-24 18:21+0000\n"
+"PO-Revision-Date: 2016-05-26 00:57+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-25 05:22+0000\n"
+"X-Launchpad-Export-Date: 2016-05-26 05:22+0000\n"
 "X-Generator: Launchpad (build 18053)\n"
 "Language: gd\n"
 
@@ -168,7 +168,7 @@ msgstr "An crios-meadhain reul-chriosach"
 #: src/core/modules/GridLinesMgr.cpp:935
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:405
 msgid "Opposition/conjunction longitude line"
-msgstr "Loidhne domhan-fhaid na comhaireachd 's an fhochair"
+msgstr "Loidhne domhan-fhaid na comhaireachd 's a' cho-nasgaidh"
 
 #: src/core/modules/GridLinesMgr.cpp:936
 msgid "Precession Circles"
@@ -220,7 +220,7 @@ msgstr ", %1 m"
 
 #: src/core/modules/LandscapeMgr.cpp:680 src/ui_astroCalcDialog.h:380
 msgid "Celestial body:"
-msgstr "Bodhaig speurach:"
+msgstr "Bodhaig nèamhaidh:"
 
 #: src/core/modules/Nebula.cpp:188 src/core/modules/Planet.cpp:226
 #: src/core/modules/MinorPlanet.cpp:213 src/core/modules/StarWrapper.cpp:53
@@ -496,7 +496,7 @@ msgstr "soilleireachd mì-chinnteach"
 #: src/core/modules/Nebula.cpp:968
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
-msgstr "soilleireachd neo-chlàraichte an neòil-reultan ath-thilgeil"
+msgstr "soilleireachd neo-chlàraichte nan deargan-doireann ath-thilgeil"
 
 #: src/core/modules/Nebula.cpp:974
 msgctxt "Reflection Nebulae Classification"
@@ -528,7 +528,7 @@ msgstr "an neulachd neònach soilleirichte"
 #: src/core/modules/Nebula.cpp:995
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
-msgstr "neul-reultan ath-thilgeil neo-chlàraichte"
+msgstr "deargan-doireannan ath-thilgeil neo-chlàraichte"
 
 #: src/core/modules/Nebula.cpp:1018
 msgid "circular form"
@@ -615,15 +615,15 @@ msgstr "grioglachan reultan cruinn"
 
 #: src/core/modules/Nebula.cpp:1097
 msgid "nebula"
-msgstr "neul-reultan"
+msgstr "deargan-doireann"
 
 #: src/core/modules/Nebula.cpp:1100
 msgid "planetary nebula"
-msgstr "neul-reultan planaid"
+msgstr "deargan-doireann planaideach"
 
 #: src/core/modules/Nebula.cpp:1103
 msgid "dark nebula"
-msgstr "neul-reultan dorcha"
+msgstr "deargan-doireann dorcha"
 
 #: src/core/modules/Nebula.cpp:1106
 msgid "cluster associated with nebulosity"
@@ -631,11 +631,11 @@ msgstr "grioglachan co-cheangailte ri neulachd"
 
 #: src/core/modules/Nebula.cpp:1109
 msgid "bipolar nebula"
-msgstr "neul-reultan dà-phòlarach"
+msgstr "deargan-doireann dà-phòlarach"
 
 #: src/core/modules/Nebula.cpp:1112
 msgid "emission nebula"
-msgstr "neul-reultan eimisein"
+msgstr "deargan-doireann eimisein"
 
 #: src/core/modules/Nebula.cpp:1115
 msgid "HII region"
@@ -643,7 +643,7 @@ msgstr "Raon HII"
 
 #: src/core/modules/Nebula.cpp:1118
 msgid "reflection nebula"
-msgstr "neòil-reultan ath-thilgidh"
+msgstr "deargan-doireann ath-thilgidh"
 
 #: src/core/modules/Nebula.cpp:1121
 msgid "supernova remnant"
@@ -687,11 +687,11 @@ msgstr "cuasar ma dh'fhaoidte"
 
 #: src/core/modules/Nebula.cpp:1151
 msgid "possible planetary nebula"
-msgstr "neul-reultan planaid ma dh'fhaoidte"
+msgstr "deargan-doireann planaideach ma dh'fhaoidte"
 
 #: src/core/modules/Nebula.cpp:1154
 msgid "protoplanetary nebula"
-msgstr "neul-reultan proto-phlanaid"
+msgstr "deargan-doireann proto-phlanaideach"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1157 src/core/modules/StarWrapper.cpp:53
@@ -771,7 +771,7 @@ msgstr "Latha-grèine meadhain: %1"
 
 #: src/core/modules/Planet.cpp:333
 msgid "The period of rotation is chaotic"
-msgstr "Tha ùine na cuairte mì-riaghailteach"
+msgstr "Tha ùine na cuairte coimeasgach"
 
 #: src/core/modules/Planet.cpp:343 src/core/modules/Planet.cpp:348
 #, qt-format
@@ -1022,7 +1022,7 @@ msgstr "Cuir 100 bliadhna reultach ris"
 
 #: src/core/StelCore.cpp:228
 msgid "Add 1 synodic month"
-msgstr "Cuir mìos co-fhochair ris"
+msgstr "Cuir mìos co-nasgach ris"
 
 #: src/core/StelCore.cpp:229
 msgid "Add 1 draconic month"
@@ -1086,7 +1086,7 @@ msgstr "Thoir 100 bhliadhna reultach air falbh"
 
 #: src/core/StelCore.cpp:244
 msgid "Subtract 1 synodic month"
-msgstr "Thoir mìos co-fhochair air falbh"
+msgstr "Thoir mìos co-nasgach air falbh"
 
 #: src/core/StelCore.cpp:245
 msgid "Subtract 1 draconic month"
@@ -1291,7 +1291,7 @@ msgid ""
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
 "Thionnsgnaich K.M. Borkowski (%1) an fhoirmle seo o sgrùdadh air 31 clàr air "
-"dubhaidhean na grèine eadar 2137 BCE agus 1715 CE."
+"dubhraidhean na grèine eadar 2137 BCE agus 1715 CE."
 
 #: src/core/StelCore.cpp:1707
 #, qt-format
@@ -1409,10 +1409,10 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 "O fhaide an latha (LOD; mar a chaidh lorg le Stephenson ⁊ Morrison (%2)), "
-"bhunaich Victor Reijs foirmle %1T, a' cleachdadh piseachadh Simplex "
-"optimisation le foincsean co-shìneis is ceàrnach. Tha seo stèidhichte air "
-"faid-ùine cunbhalach ma dh'fhaoidte mar a mhìnich Stephenson (%2). Tadhail "
-"%3an-seo%4 airson barrachd fiosrachaidh."
+"bhunaich Victor Reijs foirmle %1T, a' cleachdadh piseachadh Simplex le "
+"foincsean co-shìneis is ceàrnach. Tha seo stèidhichte air faid-ùine "
+"cunbhalach ma dh'fhaoidte mar a mhìnich Stephenson (%2). Tadhail %3an-seo%4 "
+"airson barrachd fiosrachaidh."
 
 #: src/core/StelCore.cpp:1740 src/core/StelCore.cpp:1743
 #, qt-format
@@ -1538,14 +1538,14 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:86
 msgid "Equal Area"
-msgstr "Raointean co-ionnan"
+msgstr "Farsaingeachd co-ionnan"
 
 #: src/core/StelProjectorClasses.cpp:91
 msgid ""
 "The full name of this projection method is, <i>Lambert azimuthal equal-area "
 "projection</i>. It preserves the area but not the angle."
 msgstr ""
-"Is <i>tilg-shealladh co-raonach azimuthach Lambert</i> ainm slàn an t-"
+"Is <i>tilg-shealladh co-fharsaingeach azimuthach Lambert</i> ainm slàn an t-"
 "seallaidh seo. Glèidhidh i a raon ach cha ghlèidh i an ceàrn."
 
 #: src/core/StelProjectorClasses.cpp:143
@@ -1560,7 +1560,7 @@ msgid ""
 msgstr ""
 "Bhiodhte eòlach air an tilg-shealladh stereografach o shean agus chuirte "
 "tilg-shealladh planisphere air o thùs. Glèidhidh e na ceàrnan leis an dèid "
-"na lùban thar càch a chèile ach cha ghlèidh e an raon."
+"na lùban thar càch a chèile ach cha ghlèidh e an fharsaingeachd."
 
 #: src/core/StelProjectorClasses.cpp:197
 msgid "Fish-eye"
@@ -1587,7 +1587,7 @@ msgid ""
 "The Hammer projection is an equal-area map projection, described by Ernst "
 "Hammer in 1892 and directly inspired by the Aitoff projection."
 msgstr ""
-"'S e sealladh mapa co-raonach a th' ann an tilg-shealladh Hammer a chaidh a "
+"'S e sealladh mapa co-fharsainga th' ann an tilg-shealladh Hammer a chaidh a "
 "mhìneachadh a' chiad turas le Ernst Hammer ann an 1892 agus a chaidh a "
 "bhrosnachadh le tilg-shealladh Aitoff."
 
@@ -1641,9 +1641,9 @@ msgid ""
 "projection</i>, sometimes called the Sanson–Flamsteed or the Mercator equal-"
 "area projection."
 msgstr ""
-"'S e <i>sealladh mapa co-raonach siolandrach fallsa</i> a tha san tilg-"
+"'S e <i>sealladh mapa co-fharsaingeach siolandrach fallsa</i> a tha san tilg-"
 "shealladh sìneis agus chuiridh cuid Sanson–Flamsteed no tilg-shealladh co-"
-"raonach Mhercator air cuideachd."
+"fharsaingeach Mhercator air cuideachd."
 
 #: src/core/StelObject.cpp:114
 msgctxt "coordinates for current epoch"
@@ -2785,7 +2785,7 @@ msgstr "Sgaradh"
 
 #: src/gui/AstroCalcDialog.cpp:635
 msgid "Conjunction"
-msgstr "Fochair"
+msgstr "Co-nasgadh"
 
 #: src/gui/AstroCalcDialog.cpp:639
 msgid "Opposition"
@@ -2977,17 +2977,17 @@ msgstr "Grioglachanan reultan cruinn"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:91
 msgid "Nebulae"
-msgstr "Neòil-reultan"
+msgstr "Deargan-doireannan"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:93
 msgid "Planetary nebulae"
-msgstr "Neòil-reultan planaid"
+msgstr "Deargan-doireannan planaideach"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:95
 msgid "Dark nebulae"
-msgstr "Neòil-reultan dorcha"
+msgstr "Deargan-doireannan dorcha"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:97
@@ -3002,7 +3002,7 @@ msgstr "Raointean HII"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:101
 msgid "Reflection nebulae"
-msgstr "Neòil-reultan ath‎-thilgidh"
+msgstr "Deargan-doireannan ath‎-thilgidh"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:103 src/ui_viewDialog.h:1706
@@ -3042,12 +3042,12 @@ msgstr "Grioglachain reultan"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:117
 msgid "Bipolar nebulae"
-msgstr "Neòil-reultan dà-phòlarach"
+msgstr "Deargan-doireannan dà-phòlarach"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:119
 msgid "Emission nebulae"
-msgstr "Neòil-eultan eimisein"
+msgstr "Deargan-doireann eimisein"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:121 src/ui_viewDialog.h:1699
@@ -3092,12 +3092,12 @@ msgstr "Cuasaran ma dh'fhaoidte"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:137
 msgid "Possible Planetary Nebulae"
-msgstr "Neòil-reultan planaid ma dh'fhaoidte"
+msgstr "Deargan-doireannan planaideach ma dh'fhaoidte"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:139
 msgid "Protoplanetary Nebulae"
-msgstr "Neòil-reultan proto-phlanaid"
+msgstr "Deargan-doireannan proto-phlanaid"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:141 src/ui_viewDialog.h:1663
@@ -3484,7 +3484,7 @@ msgstr "Turas air cuspairean Mhessier"
 #. TRANSLATORS: Name of script
 #: src/translations.h:294
 msgid "Binocular Highlights"
-msgstr "Nochdadh prosbaige"
+msgstr "Binocular Highlights"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:296
@@ -3504,7 +3504,7 @@ msgstr "Turas Herschel 400"
 #. TRANSLATORS: Name of script
 #: src/translations.h:302
 msgid "Binosky: Deep Sky Objects for Binoculars"
-msgstr "Binosky: Cuspairean fad às dha phrosbaigean"
+msgstr "Binosky: Cuspairean fad às dha dhà-shùilich"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:304
@@ -3559,7 +3559,7 @@ msgid ""
 "celestial sphere over the course of a year."
 msgstr ""
 "Seallaidh an sgriobt seo na reul-bhadan a' ghrian-chriosa. 'S e seo na reul-"
-"bhadan a tha air lorg na grèine thar na cruinne speuraiche rè bliadhna."
+"bhadan a tha air lorg na grèine thar na cruinne nèamhaidhe rè bliadhna."
 
 #: src/translations.h:321
 msgid ""
@@ -3704,7 +3704,7 @@ msgid ""
 "binoculars. The data for the script are taken from the eponymous book by "
 "Gary Seronik."
 msgstr ""
-"Turas air cuspairean inntinneach a chithear le prosbaig. Chaidh an dàta "
+"Turas air cuspairean inntinneach a chithear le dà-shùileach. Chaidh an dàta "
 "airson an sgriobt seo a thogail on leabhar \"Binocular Highlights\" le Gary "
 "Seronik."
 
@@ -5344,7 +5344,7 @@ msgstr "Eile"
 
 #: src/ui_viewDialog.h:1704
 msgid "Planetary Nebulae"
-msgstr "Neòil-reultan planaid"
+msgstr "Deargan-doireannan planaideach"
 
 #: src/ui_viewDialog.h:1705
 msgid "Galaxies"
@@ -5352,11 +5352,11 @@ msgstr "Reul-chriosan"
 
 #: src/ui_viewDialog.h:1707
 msgid "Dark Nebulae"
-msgstr "Neòil-reultan dorcha"
+msgstr "Deargan-doireannan dorcha"
 
 #: src/ui_viewDialog.h:1708
 msgid "Bright Nebulae"
-msgstr "Neòil-reultan soilleir"
+msgstr "Deargan-doireannan soilleir"
 
 #: src/ui_viewDialog.h:1711
 msgid "Hints"
@@ -5387,11 +5387,12 @@ msgstr "Cleachd oidheaman co-rèireach"
 msgid ""
 "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
-"Cuingich meudachd (airson amhairc gun taic / prosbaig) nan cuspairean fad às."
+"Cuingich meudachd (airson amhairc gun taic / dà-shùileach) nan cuspairean "
+"fad às."
 
 #: src/ui_viewDialog.h:1724
 msgid "Celestial Sphere"
-msgstr "Cruinne speurach"
+msgstr "Cruinne nèamhaidh"
 
 #: src/ui_viewDialog.h:1726
 msgid "Equatorial coordinates of J2000.0."
@@ -5436,7 +5437,7 @@ msgstr "Co-chomharran reul-chriosach, Siostam II (IAU 1958)."
 
 #: src/ui_viewDialog.h:1750
 msgid "Show celestial equator of J2000.0."
-msgstr "Seall a' chrios-meadhain speurach aig J2000.0."
+msgstr "Seall a' chrios-meadhain nèamhaidh aig J2000.0."
 
 #: src/ui_viewDialog.h:1752
 msgid "Equator (J2000)"
@@ -5445,7 +5446,7 @@ msgstr "An crios-meadhain (J2000)"
 #: src/ui_viewDialog.h:1754
 msgid "Show celestial equator of current planet and date."
 msgstr ""
-"Seall a' chrios-meadhain speurach aig a' phlanaid is ceann-là làithreach."
+"Seall a' chrios-meadhain nèamhaidh aig a' phlanaid is ceann-là làithreach."
 
 #: src/ui_viewDialog.h:1756
 msgid "Equator (of date)"
@@ -5502,9 +5503,9 @@ msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which "
 "passes through both ecliptic poles, the Sun and opposition point."
 msgstr ""
-"Loidhne domhan-fhaid na comhaireachd 's an fhochair - seo loidhne an domhan-"
-"fhaid èicliptich a thèid tron dà phòla èiclipteach, tron ghrian 's tro "
-"phuing na comhaireachd."
+"Loidhne domhan-fhaid na comhaireachd 's a' cho-nasgaidh - seo loidhne an "
+"domhan-fhaid èicliptich a thèid tron dà phòla èiclipteach, tron ghrian 's "
+"tro phuing na comhaireachd."
 
 #: src/ui_viewDialog.h:1794
 msgid ""
@@ -5858,7 +5859,7 @@ msgstr "Seòrsa a' chuspair (reul, planaid agus msaa.)"
 
 #: src/ui_configurationDialog.h:1163
 msgid "Spectral class, nebula type, etc."
-msgstr "Seòrsa speictreach, seòrsa neòil-reultan is msaa."
+msgstr "Seòrsa speictreach, seòrsa deargan-doirinn is msaa."
 
 #: src/ui_configurationDialog.h:1165
 msgid "Additional information"
@@ -6017,11 +6018,11 @@ msgstr "Leubailean iom-tharraing"
 
 #: src/ui_configurationDialog.h:1239
 msgid "Toggle display backgrounds of the nebulae."
-msgstr "Toglaich cùlaibhean taisbeanaidh nan neul-reultan."
+msgstr "Toglaich cùlaibhean taisbeanaidh nan deargan-doireann."
 
 #: src/ui_configurationDialog.h:1241
 msgid "Show nebula background button"
-msgstr "Seall putan cùlaibh nan neul-reultan"
+msgstr "Seall putan cùlaibh nan deargan-doireann"
 
 #: src/ui_configurationDialog.h:1243
 msgid "Toggle vertical and horizontal image flip buttons."
@@ -6514,8 +6515,8 @@ msgid ""
 msgstr ""
 "Gabhaidh na puingean tòiseachaidh is crìochnachaidh a cheangal ris an speur "
 "a' tionndadh agus faodaidh seo cuideachadh gus an daimh eadar an cruth-tìre "
-"agus cuspair speurach a chumail (leis an dà chuidh dhiubh ceangailte) airson "
-"reul-leum Dobsonach."
+"agus cuspair nèamhaidh a chumail (leis an dà chuidh dhiubh ceangailte) "
+"airson reul-leum Dobsonach."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:97
 msgid ""
@@ -7045,15 +7046,15 @@ msgstr "Cuairteachadh: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:804
 msgid "Magnification provided by these binoculars"
-msgstr "Am meudachd a bheir a' phrosbaig seo dhut"
+msgstr "Am meudachd a bheir an dà-shùileach seo dhut"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:805
 msgid "Actual field of view provided by these binoculars"
-msgstr "An dearbh raon-seallaidh a bheir a' phrosbaig seo dhut"
+msgstr "An dearbh raon-seallaidh a bheir an dà-shùileach seo dhut"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:806
 msgid "Exit pupil provided by these binoculars"
-msgstr "Am fradharc fàgail a bheir a' phrosbaig seo dhut"
+msgstr "Am fradharc fàgail a bheir an dà-shùileach seo dhut"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:814
 msgid "Magnification provided by this ocular/lens/telescope combination"
@@ -7308,7 +7309,7 @@ msgstr "Raon-stad:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1194
 msgid "Binoculars"
-msgstr "Prosbaig"
+msgstr "Dà-shùileach"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1195
 msgid "Has permanent cross-hairs"
@@ -8908,9 +8909,9 @@ msgid ""
 "preferred format (Hours-Minutes-Seconds, Degrees-Minutes-Seconds, or Decimal "
 "degrees), a drop-down list and two buttons."
 msgstr ""
-"Tha dà raon innte gus co-chomharran speurach a chur a-steach, roghnaichearan "
-"airson an fhòrmait as fhearr leat (uair-mionaid-diog, ceum-mionaid-diog no "
-"ceuman deicheach), liosta-theàrnaidh agus dà phutan."
+"Tha dà raon innte gus co-chomharran nèamhaidh a chur a-steach, "
+"roghnaichearan airson an fhòrmait as fhearr leat (uair-mionaid-diog, ceum-"
+"mionaid-diog no ceuman deicheach), liosta-theàrnaidh agus dà phutan."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:388
 msgid ""
@@ -9907,11 +9908,11 @@ msgstr "Loidhne èiclipteach (J2000)"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Nebula names"
-msgstr "Ainmean neul-reultan"
+msgstr "Ainmean dheargan-doireann"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:370
 msgid "Nebula hints"
-msgstr "Oidheaman neul-reultan"
+msgstr "Oidheaman dheargan-doireann"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:374
 msgid "Galaxy hints"
@@ -9919,11 +9920,11 @@ msgstr "Oidheaman an reul-chriosa"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:378
 msgid "Bright nebulae hints"
-msgstr "Oidheaman neul-reultan soilleir"
+msgstr "Oidheaman dheargan-doireann soilleir"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:382
 msgid "Dark nebulae hints"
-msgstr "Oidheaman neul-reultan dorcha"
+msgstr "Oidheaman dheargan-doireann dorcha"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:386
 msgid "Clusters hints"
@@ -10764,7 +10765,7 @@ msgstr "Nòta: %1"
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
-"pulsar x-ghathach neo-riaghailteach no ath-gathadair gamma bog 's "
+"pulsar x-ghathach neo-choitcheann no ath-gathadair gamma bog 's "
 "mhothaicheadh dha fhrith-bhualadh"
 
 #: plugins/Pulsars/src/Pulsar.cpp:332
@@ -12107,10 +12108,11 @@ msgid ""
 "and -18 degrees. This parameter is only used for the estimate of the range "
 "of observable epochs (see below)."
 msgstr ""
-"Thathar a' meas gum bi cuspair speura sam bith faicsinneach nuair a bhios a' "
-"ghrian nas ìsle na an àirde seo. Tha àirde a' ghlòmaidh reul-eòlaich eadar -"
-"12 's -18 ceuman mar as trice. Cha dèid am paramadair seo a chleachdadh ach "
-"a thaobh tuairmse air rainse nan ceann-aimsir faicsinneach (faic gu h-ìosal)."
+"Thathar a' meas gum bi cuspair nèamhaidh sam bith faicsinneach nuair a bhios "
+"a' ghrian nas ìsle na an àirde seo. Tha àirde a' ghlòmaidh reul-eòlaich "
+"eadar -12 's -18 ceuman mar as trice. Cha dèid am paramadair seo a "
+"chleachdadh ach a thaobh tuairmse air rainse nan ceann-aimsir faicsinneach "
+"(faic gu h-ìosal)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:143
 msgid "Horizon altitude:"
@@ -12199,9 +12201,9 @@ msgid ""
 "object."
 msgstr ""
 "Tachraidh seo nuair a bhios an sgaradh ceàrnach eadar a' ghrian agus an "
-"cuspair speura as motha. Mar as trice, bidh diofar dhe 180 ceum aig domhan-"
-"fhad meadhan-chriosach na grèine is a' chuspair aig an dearbh àm agus bidh "
-"a' ghrian 's an cuspair ann an comhaireachd. Nuair a bhios an sgaradh "
+"cuspair nèamhaidh as motha. Mar as trice, bidh diofar dhe 180 ceum aig "
+"domhan-fhad meadhan-chriosach na grèine is a' chuspair aig an dearbh àm agus "
+"bidh a' ghrian 's an cuspair ann an comhaireachd. Nuair a bhios an sgaradh "
 "ceàrnach as motha eadar cuspair 's a' ghrian (ge b' e an e planaid no reul a "
 "th' ann), bidh e air ionad as àirde mu mheadhan-oidhche agus air raon as "
 "duirche an speura aig an dì-chlaonadh ud. Mar sin, seo an oidhche \"as "
@@ -12230,14 +12232,14 @@ msgid ""
 "planets (which will not depend on the mere input of a twilight Sun elevation "
 "by the user) will be implemented in future versions of this plugin."
 msgstr ""
-"Àireamhaichidh am prògram seo an rainge dhe chinn-là nuair a bhios an "
-"cuspair speura os cionn na fàire rè cuid dhen oidhche co-dhiù. Measaidh am "
-"prògram mar \"oidhche\" an t-àm nuair a bhios a' ghrian fo àirde a' "
+"Àireamhaichidh am prògram seo an rainse dhe chinn-là nuair a bhios an "
+"cuspair nèamhaidh os cionn na fàire rè cuid dhen oidhche co-dhiù. Measaidh "
+"am prògram mar \"oidhche\" an t-àm nuair a bhios a' ghrian fo àirde a' "
 "ghlòmaidh (as urrainn dhut fhèin a shuidheachadh; faic gu h-àrd). Nuair a "
 "bhios na cuspairean suidhichte air an speur (no mas e planaidean air an "
 "taobh a-muigh a th' annta), faodaidh dà chruth a bhith air rainse cinn-"
-"aimsir na faicsinneachd: rainse o lata gu latha eile (can an 20mh dhen "
-"Fhaoilleach gun 15mh dhen t-Sultain) no air dà cheum (can on 1d dhen "
+"aimsir na faicsinneachd: rainse on dàrna latha gun latha eile (can an 20mh "
+"dhen Fhaoilleach gun 15mh dhen t-Sultain) no air dà cheum (can on 1d dhen "
 "Fhaoilleach gu cheann-là sònraichte agus o cheann-là eile gu 31mh dhen "
 "Dùbhlachd). San dàrna chruth, bidh a' chiad ceann-là (an 20mh den "
 "Fhaoilleach sa bhall-eisimpleir againn) faisg air \"èirigh heliacach na "
@@ -12247,7 +12249,7 @@ msgstr ""
 "dhen Dùbhlachd), bhiodh a' chiad ceann-là (an 20mh dhen Chèitean sa bhall-"
 "eisimpleir againn) faisg air an laighe heliacach agus an dàrna fear (an 21mh "
 "dhen t-Sultain sa bhall-eisimpleir againn) faisg air an èirigh heliacach. "
-"Thèid co-aontaran nas pongaile (nach bi a-màin an eisimeil air àirde na "
+"Thèid co-aontaran nas pongaile (nach bi a-mhàin an eisimeil air àirde na "
 "grèine air a' ghlòmadh a shònraich neach-cleachdaidh) airson tuairmse air "
 "èirigh/laighe heliacach nan reul 's nam planaidean a chruthachadh airson a' "
 "phlugain seo san àm ri teachd."
@@ -13069,14 +13071,14 @@ msgid ""
 "known as meteor outbursts and meteor storms, which may produce greater than "
 "1,000 meteors an hour."
 msgstr ""
-"'S e tachartas speura a th' ann am fras dhreagan nuair a chithear uiread dhe "
-"dhreagan a' tighinn 's a' dealradh on aon ionad air speur an oidhche. Thèid "
-"na dreagan seo adhbharachadh le sruthan sprùillich cosmach le meataroidean a "
-"thig a-steach dha dh'àile na Talmhainn uabhasach luath gu co-shìnteach. Tha "
-"a' mhòrchuid dhe na dreagan seo nas lugha na gràinne gainmhich agus thèid a' "
-"mhòrchuid dhiubh a shearg mur ruig iad uachdar na Talmhainn. Cuirear "
-"stoirmean dhreagan air frasan dhreagan a tha glè dhian no neo-àbhaisteach "
-"agus dh'fhaoidte gum bi corr is mìle dreag san uair annta."
+"'S e tachartas nèamhaidh a th' ann am fras dhreagan nuair a chithear uiread "
+"dhe dhreagan a' tighinn 's a' dealradh on aon ionad air speur an oidhche. "
+"Thèid na dreagan seo adhbharachadh le sruthan spruillich cosmach le "
+"meataroidean a thig a-steach dha dh'àile na Talmhainn uabhasach luath gu co-"
+"shìnteach. Tha a' mhòrchuid dhe na dreagan seo nas lugha na gràinne "
+"gainmhich agus thèid a' mhòrchuid dhiubh a shearg mur ruig iad uachdar na "
+"Talmhainn. Cuirear stoirmean dhreagan air frasan dhreagan a tha glè dhian no "
+"neo-àbhaisteach agus dh'fhaoidte gum bi corr is mìle dreag san uair annta."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:263
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:452
