@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-25 00:05+0700\n"
-"PO-Revision-Date: 2016-05-19 18:00+0000\n"
+"PO-Revision-Date: 2016-05-26 11:30+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-25 05:36+0000\n"
+"X-Launchpad-Export-Date: 2016-05-27 05:14+0000\n"
 "X-Generator: Launchpad (build 18053)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:140 src/core/modules/StarMgr.cpp:378
@@ -248,7 +248,7 @@ msgstr "Opacity: <b>%1</b>"
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:191
 #, qt-format
 msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
-msgstr ""
+msgstr "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
 #: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
@@ -273,7 +273,7 @@ msgstr "Color Index (B-V): <b>%1</b>"
 #: src/core/modules/Nebula.cpp:224
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
-msgstr ""
+msgstr "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:230
 #, qt-format
@@ -10188,7 +10188,7 @@ msgstr "Navigational Stars"
 #: plugins/NavStars/src/NavStars.cpp:54
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:94
 msgid "This plugin marks navigational stars from selected set."
-msgstr ""
+msgstr "This plugin marks navigational stars from selected set."
 
 #: plugins/NavStars/src/NavStars.cpp:112
 msgid "Mark the navigational stars"
@@ -10203,6 +10203,11 @@ msgid ""
 "navigational aids such as the <em>2102D Star Finder</em> and "
 "<em>Identifier</em>."
 msgstr ""
+"The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> "
+"jointly published by Her Majesty's Nautical Almanac Office and the US Naval "
+"Observatory since 1958; consequently, these stars are also used in "
+"navigational aids such as the <em>2102D Star Finder</em> and "
+"<em>Identifier</em>."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:316
@@ -10211,6 +10216,8 @@ msgid ""
 "The 81 stars that are listed in <em>%1</em> published by French Bureau des "
 "Longitudes."
 msgstr ""
+"The 81 stars that are listed in <em>%1</em> published by French Bureau des "
+"Longitudes."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:322
@@ -10219,10 +10226,12 @@ msgid ""
 "The 160 stars that are listed in the Russian Nautical Almanac (Original "
 "Russian title is <em>%1</em>)."
 msgstr ""
+"The 160 stars that are listed in the Russian Nautical Almanac (Original "
+"Russian title is <em>%1</em>)."
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
 msgid "Navigational Stars Plug-in"
-msgstr ""
+msgstr "Navigational Stars Plug-in"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:107
@@ -10239,26 +10248,26 @@ msgstr ""
 #. TRANSLATORS: Part of full phrase: Anglo-American set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:143
 msgid "Anglo-American"
-msgstr ""
+msgstr "Anglo-American"
 
 #. TRANSLATORS: Part of full phrase: French set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:145
 msgid "French"
-msgstr ""
+msgstr "French"
 
 #. TRANSLATORS: Part of full phrase: Russian set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:147
 msgid "Russian"
-msgstr ""
+msgstr "Russian"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:202
 #: plugins/NavStars/src/ui_navStarsWindow.h:213
 msgid "Navigational stars"
-msgstr ""
+msgstr "Navigational stars"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:204
 msgid "Set of navigational stars"
-msgstr ""
+msgstr "Set of navigational stars"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:206
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:288
@@ -10267,11 +10276,11 @@ msgstr "Place of the string with coordinates of the mouse pointer"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:208
 msgid "Current set:"
-msgstr ""
+msgstr "Current set:"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:209
 msgid "Note:"
-msgstr ""
+msgstr "Note:"
 
 #: plugins/Novae/src/Novae.cpp:71 plugins/Novae/src/Novae.cpp:142
 msgid "Bright Novae"
