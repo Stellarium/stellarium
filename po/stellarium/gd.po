@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-05-25 00:05+0700\n"
-"PO-Revision-Date: 2016-05-26 12:46+0000\n"
+"PO-Revision-Date: 2016-05-27 08:57+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-27 05:14+0000\n"
+"X-Launchpad-Export-Date: 2016-05-28 05:16+0000\n"
 "X-Generator: Launchpad (build 18053)\n"
 "Language: gd\n"
 
@@ -3504,7 +3504,7 @@ msgstr "Turas Herschel 400"
 #. TRANSLATORS: Name of script
 #: src/translations.h:302
 msgid "Binosky: Deep Sky Objects for Binoculars"
-msgstr "Binosky: Cuspairean fad às dha dhà-shùilich"
+msgstr "Binosky: Cuspairean fad às dha ghlainneachan dà-shùileach"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:304
@@ -3704,9 +3704,9 @@ msgid ""
 "binoculars. The data for the script are taken from the eponymous book by "
 "Gary Seronik."
 msgstr ""
-"Turas air cuspairean inntinneach a chithear le dà-shùileach. Chaidh an dàta "
-"airson an sgriobt seo a thogail on leabhar \"Binocular Highlights\" le Gary "
-"Seronik."
+"Turas air cuspairean inntinneach a chithear le glainne dhà-shùileach. Chaidh "
+"an dàta airson an sgriobt seo a thogail on leabhar \"Binocular Highlights\" "
+"le Gary Seronik."
 
 #: src/translations.h:339
 msgid ""
@@ -3735,8 +3735,8 @@ msgid ""
 "Right Ascension (2000.0)."
 msgstr ""
 "Chruthaich Ben Crowell liosta Binosky, seo liosta amhairc dhe chuspairean "
-"fad às dha dhà-shùilich. Bheir sinn 31 dhe na cuspairean sin dhut leis an "
-"sgriobt seo, air an seòrsachadh a-rèir an dìridh dheis (2000.0)."
+"fad às dha ghlainneachan dà-shùileach. Bheir sinn 31 dhe na cuspairean sin "
+"dhut leis an sgriobt seo, air an seòrsachadh a-rèir an dìridh dheis (2000.0)."
 
 #: src/translations.h:343
 msgid ""
@@ -5387,8 +5387,8 @@ msgstr "Cleachd oidheaman co-rèireach"
 msgid ""
 "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
-"Cuingich meudachd (airson amhairc gun taic / dà-shùileach) nan cuspairean "
-"fad às."
+"Cuingich meudachd (airson amhairc gun taic / glainne dhà-shùileach) nan "
+"cuspairean fad às."
 
 #: src/ui_viewDialog.h:1724
 msgid "Celestial Sphere"
@@ -7046,15 +7046,15 @@ msgstr "Cuairteachadh: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:804
 msgid "Magnification provided by these binoculars"
-msgstr "Am meudachd a bheir an dà-shùileach seo dhut"
+msgstr "Am meudachd a bheir an glainne dhà-shùileach seo dhut"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:805
 msgid "Actual field of view provided by these binoculars"
-msgstr "An dearbh raon-seallaidh a bheir an dà-shùileach seo dhut"
+msgstr "An dearbh raon-seallaidh a bheir an glainne dhà-shùileach seo dhut"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:806
 msgid "Exit pupil provided by these binoculars"
-msgstr "Am fradharc fàgail a bheir an dà-shùileach seo dhut"
+msgstr "Am fradharc fàgail a bheir an glainne dhà-shùileach seo dhut"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:814
 msgid "Magnification provided by this ocular/lens/telescope combination"
@@ -7309,7 +7309,7 @@ msgstr "Raon-stad:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1194
 msgid "Binoculars"
-msgstr "Dà-shùileach"
+msgstr "Glainne dhà-shùileach"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1195
 msgid "Has permanent cross-hairs"
