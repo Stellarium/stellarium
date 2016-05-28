@@ -7,20 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-21 21:13+0700\n"
+"POT-Creation-Date: 2016-05-25 00:05+0700\n"
 "PO-Revision-Date: 2016-04-11 17:51+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-22 05:17+0000\n"
-"X-Generator: Launchpad (build 18025)\n"
+"X-Launchpad-Export-Date: 2016-05-25 05:18+0000\n"
+"X-Generator: Launchpad (build 18053)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: src/core/modules/ConstellationMgr.cpp:140 src/core/modules/StarMgr.cpp:378
-#: src/core/modules/GridLinesMgr.cpp:922 src/core/modules/LandscapeMgr.cpp:417
+#: src/core/modules/GridLinesMgr.cpp:921 src/core/modules/LandscapeMgr.cpp:417
 #: src/core/modules/NebulaMgr.cpp:364 src/core/modules/SolarSystem.cpp:195
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:502 src/core/StelCore.cpp:210
@@ -93,7 +93,7 @@ msgstr "Ґаляктычны экватар"
 msgid "O./C. longitude"
 msgstr "Даўгата С/З"
 
-#: src/core/modules/GridLinesMgr.cpp:637 src/core/modules/GridLinesMgr.cpp:938
+#: src/core/modules/GridLinesMgr.cpp:637 src/core/modules/GridLinesMgr.cpp:937
 #: src/ui_viewDialog.h:1784
 msgid "Prime Vertical"
 msgstr "Галоўная вэртыкаль"
@@ -106,76 +106,76 @@ msgstr "Колур раўнадзенства"
 msgid "Solstitial Colure"
 msgstr "Колур сонцастаяньня"
 
-#: src/core/modules/GridLinesMgr.cpp:923
+#: src/core/modules/GridLinesMgr.cpp:922
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:339
 msgid "Equatorial grid"
 msgstr "Экватарыяльная сетка"
 
-#: src/core/modules/GridLinesMgr.cpp:924 src/ui_viewDialog.h:1744
+#: src/core/modules/GridLinesMgr.cpp:923 src/ui_viewDialog.h:1744
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:334
 msgid "Azimuthal grid"
 msgstr "Азімутальная сетка"
 
-#: src/core/modules/GridLinesMgr.cpp:925
+#: src/core/modules/GridLinesMgr.cpp:924
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Ecliptic line"
 msgstr "Лінія экліптыкі"
 
-#: src/core/modules/GridLinesMgr.cpp:926
+#: src/core/modules/GridLinesMgr.cpp:925
 msgid "Ecliptic J2000 line"
 msgstr "Лінія экліптыкі J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:927
+#: src/core/modules/GridLinesMgr.cpp:926
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Equator line"
 msgstr "Лінія экватару"
 
-#: src/core/modules/GridLinesMgr.cpp:928
+#: src/core/modules/GridLinesMgr.cpp:927
 msgid "Equator J2000 line"
 msgstr "Лінія экватара J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:929
+#: src/core/modules/GridLinesMgr.cpp:928
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:329
 msgid "Meridian line"
 msgstr "Лінія мэрыдыяну"
 
-#: src/core/modules/GridLinesMgr.cpp:930
+#: src/core/modules/GridLinesMgr.cpp:929
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:390
 msgid "Horizon line"
 msgstr "Лінія гарызонту"
 
-#: src/core/modules/GridLinesMgr.cpp:931
+#: src/core/modules/GridLinesMgr.cpp:930
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:344
 msgid "Equatorial J2000 grid"
 msgstr "Экватарыяльная сетка J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:932
+#: src/core/modules/GridLinesMgr.cpp:931
 msgid "Ecliptic J2000 grid"
 msgstr "Экліптычная сетка J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:933
+#: src/core/modules/GridLinesMgr.cpp:932
 msgid "Ecliptic grid"
 msgstr "Экліптычная сетка"
 
-#: src/core/modules/GridLinesMgr.cpp:934 src/ui_viewDialog.h:1748
+#: src/core/modules/GridLinesMgr.cpp:933 src/ui_viewDialog.h:1748
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Galactic grid"
 msgstr "Ґаляктычная сетка"
 
-#: src/core/modules/GridLinesMgr.cpp:935 src/ui_viewDialog.h:1772
+#: src/core/modules/GridLinesMgr.cpp:934 src/ui_viewDialog.h:1772
 msgid "Galactic equator"
 msgstr "Ґаляктычны экватар"
 
-#: src/core/modules/GridLinesMgr.cpp:936
+#: src/core/modules/GridLinesMgr.cpp:935
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:405
 msgid "Opposition/conjunction longitude line"
 msgstr "Лінія даўгаты супрацьстаяньня/злучэньня"
 
-#: src/core/modules/GridLinesMgr.cpp:937
+#: src/core/modules/GridLinesMgr.cpp:936
 msgid "Precession Circles"
 msgstr "Акружыны прэцэсіі"
 
-#: src/core/modules/GridLinesMgr.cpp:939
+#: src/core/modules/GridLinesMgr.cpp:938
 msgid "Colure Lines"
 msgstr "Лініі колураў"
 
@@ -248,11 +248,9 @@ msgstr "<bНепразрыстасьць: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:232
 #: src/core/modules/MinorPlanet.cpp:219 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:191
-#: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
-#: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:278
 #, qt-format
-msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "Велічыня: <b>%1</b> (згасла да: <b>%2</b>)"
+msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
+msgstr ""
 
 #: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
 #: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
@@ -276,8 +274,8 @@ msgstr "Каляровы індэкс (B-V): <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:224
 #, qt-format
-msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "Яркасьць паверхні: <b>%1</b> (згаслая да : <b>%2</b>)"
+msgid "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
+msgstr ""
 
 #: src/core/modules/Nebula.cpp:230
 #, qt-format
@@ -7337,92 +7335,92 @@ msgstr ""
 "прадвызначаны"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1792
+#: plugins/Satellites/src/Satellites.cpp:1791
 msgid "visual"
 msgstr "бачныя"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1794
+#: plugins/Satellites/src/Satellites.cpp:1793
 msgid "scientific"
 msgstr "навуковыя"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1796
+#: plugins/Satellites/src/Satellites.cpp:1795
 msgid "communications"
 msgstr "сувязі"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1798
+#: plugins/Satellites/src/Satellites.cpp:1797
 msgid "navigation"
 msgstr "навіґацыйныя"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1800
+#: plugins/Satellites/src/Satellites.cpp:1799
 msgid "amateur"
 msgstr "аматарскія"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1802
+#: plugins/Satellites/src/Satellites.cpp:1801
 msgid "weather"
 msgstr "мэтэараляґічныя"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1804
+#: plugins/Satellites/src/Satellites.cpp:1803
 msgid "geostationary"
 msgstr "ґеастацыянарныя"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1806
+#: plugins/Satellites/src/Satellites.cpp:1805
 msgid "non-operational"
 msgstr "нядзейныя"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1808
+#: plugins/Satellites/src/Satellites.cpp:1807
 msgid "gps"
 msgstr "GPS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:1810
+#: plugins/Satellites/src/Satellites.cpp:1809
 msgid "glonass"
 msgstr "ґлянас"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:1812
+#: plugins/Satellites/src/Satellites.cpp:1811
 msgid "galileo"
 msgstr "ґалілеа"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1814
+#: plugins/Satellites/src/Satellites.cpp:1813
 msgid "iridium"
 msgstr "Iridium"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:1816
+#: plugins/Satellites/src/Satellites.cpp:1815
 msgid "stations"
 msgstr "станцыі"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:1818
+#: plugins/Satellites/src/Satellites.cpp:1817
 msgid "education"
 msgstr "адукацыйныя"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:1820
+#: plugins/Satellites/src/Satellites.cpp:1819
 msgid "observatory"
 msgstr "абсэрваторыі"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1831
+#: plugins/Satellites/src/Satellites.cpp:1830
 msgid "The Hubble Space Telescope"
 msgstr "Касьмічны тэлескоп Габла"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1833
+#: plugins/Satellites/src/Satellites.cpp:1832
 msgid "The International Space Station"
 msgstr "Міжнародная касьмічная станцыя"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1835
+#: plugins/Satellites/src/Satellites.cpp:1834
 msgid "China's first space station"
 msgstr "Першая кітайская касьмічная станцыя"
 
@@ -9881,6 +9879,12 @@ msgstr "Вакно настаўленьняў гістарычных звышн�
 msgid "supernova"
 msgstr "звышновая"
 
+#: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
+#: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:278
+#, qt-format
+msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
+msgstr "Велічыня: <b>%1</b> (згасла да: <b>%2</b>)"
+
 #: plugins/Supernovae/src/Supernova.cpp:142
 #, qt-format
 msgid "Type of supernova: %1"
@@ -10015,29 +10019,30 @@ msgstr ""
 msgid "Mark the navigational stars"
 msgstr "Пазначыць навіґацыйныя зоркі"
 
-#. TRANSLATORS: The emphasis tags mark a book title.
+#. TRANSLATORS: The emphasis tags mark a title.
 #: plugins/NavStars/src/NavStars.cpp:310
 msgid ""
 "The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> "
 "jointly published by Her Majesty's Nautical Almanac Office and the US Naval "
 "Observatory since 1958; consequently, these stars are also used in "
-"navigational aids such as the 2102D Star Finder and Identifier."
+"navigational aids such as the <em>2102D Star Finder</em> and "
+"<em>Identifier</em>."
 msgstr ""
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:316
 #, qt-format
 msgid ""
-"The 81 stars that are listed in French Nautical Almanac (Original French "
-"name is <em>%1</em>)."
+"The 81 stars that are listed in <em>%1</em> published by French Bureau des "
+"Longitudes."
 msgstr ""
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:322
 #, qt-format
 msgid ""
-"The 160 stars that are listed in Russian Nautical Almanac (Original Russian "
-"name is <em>%1</em>)."
+"The 160 stars that are listed in the Russian Nautical Almanac (Original "
+"Russian title is <em>%1</em>)."
 msgstr ""
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
@@ -10086,7 +10091,7 @@ msgid "Place of the string with coordinates of the mouse pointer"
 msgstr "Месца радка з каардынатамі курсора мышы"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:208
-msgid "The current set:"
+msgid "Current set:"
 msgstr ""
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:209
@@ -12024,7 +12029,7 @@ msgid "The current catalog of Meteor Showers is invalid!"
 msgstr "Бягучы каталёґ мэтэорных плыняў няправільны!"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:562
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:559
 msgid "Meteor Showers"
 msgstr "Мэтэорныя плыні"
 
@@ -12049,7 +12054,7 @@ msgstr "Паказаць дыялёґ пошуку"
 msgid "Using the default Meteor Showers catalog."
 msgstr "Выкарыстаны прадвызначаны каталёґ мэтэорных плыняў."
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:566
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:563
 msgid ""
 "<p>This plugin enables you to simulate periodic meteor showers and to "
 "display a marker for each active and inactive radiant.</p><p>By a single "
@@ -15190,6 +15195,10 @@ msgstr "Бягучая плянэта: Сатурн"
 
 #~ msgid "Search Events"
 #~ msgstr "Шукаць падзеі"
+
+#, qt-format
+#~ msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
+#~ msgstr "Яркасьць паверхні: <b>%1</b> (згаслая да : <b>%2</b>)"
 
 #~ msgid ""
 #~ "This plugin marks 58 navigational stars - Polaris and the 57 \"selected "

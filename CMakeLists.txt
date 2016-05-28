@@ -41,19 +41,22 @@ ENDIF()
 
 # GZ I had seen that some releases (e.g. 0.13.3 Ubuntu/ARM) were not compiled with NDEBUG defined. Maybe a bug in compilatation setup? 
 # Hint from http://public.kitware.com/Bug/view.php?id=14292. Actually fixed with CMake 2.8.12, but maybe we have other effects?
-if(NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
-    add_definitions(-DQT_NO_DEBUG -DNDEBUG)
-endif()
+IF(NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
+    ADD_DEFINITIONS(-DQT_NO_DEBUG -DNDEBUG)
+ENDIF()
+
+IF(${CMAKE_BUILD_TYPE} STREQUAL "Debug" OR ${CMAKE_BUILD_TYPE} STREQUAL "RelWithDebInfo")
+ENDIF()
 
 # Add gprof build options if necessary.  Note gmon.out will be created in working directory when Stellarium is executed
-IF(${CMAKE_BUILD_TYPE} MATCHES "GProf")
+IF(${CMAKE_BUILD_TYPE} STREQUAL "GProf")
     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs")
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs")
     SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pg")
 ENDIF()
 
 # Add valgrind build options if necessary
-IF(${CMAKE_BUILD_TYPE} MATCHES "Valgrind")
+IF(${CMAKE_BUILD_TYPE} STREQUAL "Valgrind")
     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0 -g")
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g")
 ENDIF()
@@ -283,6 +286,13 @@ IF(UNIX AND NOT WIN32)
 ELSE()
     ADD_DEFINITIONS(-DINSTALL_DATADIR=".")
     ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="./locale")
+ENDIF()
+
+########### Set name of icon ############
+IF(STELLARIUM_RELEASE_BUILD)
+    SET(PACKAGE_ICON "stellarium")
+ELSE()
+    SET(PACKAGE_ICON "stellarium-gray")
 ENDIF()
 
 ########### Get revision number for non-release builds ###########
