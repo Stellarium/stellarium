@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>stellarium</string>
 	<key>CFBundleIconFile</key>
-	<string>Icon</string>
+	<string>@PACKAGE_ICON@</string>
 	<key>CFBundleIdentifier</key>
 	<string>org.stellarium.Stellarium</string>
 	<key>CFBundleName</key>
