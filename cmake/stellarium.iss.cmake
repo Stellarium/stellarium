@@ -19,7 +19,7 @@ AppSupportURL=http://www.stellarium.org/
 AppUpdatesURL=http://www.stellarium.org/
 VersionInfoVersion=@PACKAGE_VERSION@
 MinVersion=0,@MIN_VERSION@
-SetupIconFile=@CMAKE_SOURCE_DIR@\data\stellarium.ico
+SetupIconFile=@CMAKE_SOURCE_DIR@\data\@PACKAGE_ICON@.ico
 OutputBaseFilename=stellarium-@PACKAGE_VERSION@-@ISS_PACKAGE_PLATFORM@
 OutputDir=@CMAKE_SOURCE_DIR@\installers
 ; In 64-bit mode, {pf} is equivalent to {pf64},

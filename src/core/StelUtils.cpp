@@ -50,7 +50,9 @@ QString getApplicationVersion()
 #ifdef STELLARIUM_RELEASE_BUILD
 	return QString(PACKAGE_VERSION);
 #else
-	#ifdef BZR_REVISION
+	#if defined(BZR_REVISION) && defined(STELLARIUM_VERSION)
+	return QString(STELLARIUM_VERSION)+" (BZR r"+BZR_REVISION+")";
+	#elif defined(BZR_REVISION) && !defined(STELLARIUM_VERSION)
 	return QString(PACKAGE_VERSION)+" (BZR r"+BZR_REVISION+")";
 	#elif defined(STELLARIUM_VERSION)
 	return QString(STELLARIUM_VERSION);
