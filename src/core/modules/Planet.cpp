@@ -1554,9 +1554,10 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 	}
 
 	bool allowDrawHalo = true;
-	if (this!=ssm->getSun())
+	if ((this!=ssm->getSun()) && ((this !=ssm->getMoon() && core->getCurrentLocation().planetName=="Earth" )))
 	{
-		// Let's hide halo when inner planet between Sun and observer (or moon between planet and observer)
+		// Let's hide halo when inner planet between Sun and observer (or moon between planet and observer).
+		// Do not hide Earth's moon's halo below ~-45degrees when observing from earth.
 		Vec3d obj = getJ2000EquatorialPos(core);
 		Vec3d par = getParent()->getJ2000EquatorialPos(core);
 		double angle = obj.angle(par)*180.f/M_PI;
