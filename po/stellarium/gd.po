@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-05-25 00:05+0700\n"
-"PO-Revision-Date: 2016-05-27 08:57+0000\n"
+"PO-Revision-Date: 2016-05-28 18:24+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-28 05:16+0000\n"
+"X-Launchpad-Export-Date: 2016-05-29 05:15+0000\n"
 "X-Generator: Launchpad (build 18053)\n"
 "Language: gd\n"
 
@@ -801,7 +801,7 @@ msgstr "Factar an dubhraidh: %1%"
 #: src/core/modules/MinorPlanet.cpp:206
 #, qt-format
 msgid "Provisional designation: %1"
-msgstr "Ainm sealadach: %1"
+msgstr "Ainmeachadh sealadach: %1"
 
 #: src/core/modules/Comet.cpp:170
 msgctxt "type of comet"
@@ -1478,7 +1478,7 @@ msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
-"Seo foirmle ceàrnanach gus %1T àireamhachadh le co-èifeachdan a mhìnich an "
+"Seo foirmle cheàrnanach gus %1T àireamhachadh le co-èifeachdan a mhìnich an "
 "cleachdaiche."
 
 #: src/core/StelCore.cpp:1758 src/core/SimbadSearcher.cpp:133
@@ -1546,7 +1546,7 @@ msgid ""
 "projection</i>. It preserves the area but not the angle."
 msgstr ""
 "Is <i>tilg-shealladh co-fharsaingeach azimuthach Lambert</i> ainm slàn an t-"
-"seallaidh seo. Glèidhidh i a raon ach cha ghlèidh i an ceàrn."
+"seallaidh seo. Glèidhidh i an fharsaingeachd ach cha ghlèidh i an ceàrn."
 
 #: src/core/StelProjectorClasses.cpp:143
 msgid "Stereographic"
@@ -2739,7 +2739,7 @@ msgstr "Astaroidean"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:457 src/translations.h:70
 msgid "Plutinos"
-msgstr "Pluitìnothan"
+msgstr "Plùtothaich"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:458 src/translations.h:64
@@ -2927,7 +2927,7 @@ msgstr "gealach"
 #. TRANSLATORS: Type of object
 #: src/translations.h:52
 msgid "plutino"
-msgstr "pluitìno"
+msgstr "plùtothach"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:54
@@ -3289,7 +3289,7 @@ msgstr "Garching"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:212 plugins/ArchaeoLines/src/ArchaeoLines.cpp:794
 msgid "Mars"
-msgstr "Corg"
+msgstr "An Corg"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:214 plugins/ArchaeoLines/src/ArchaeoLines.cpp:797
@@ -3349,7 +3349,7 @@ msgstr "Leth-dhubhradh na gealaich"
 #. TRANSLATORS: Name of script
 #: src/translations.h:242
 msgid "Total Lunar Eclipse"
-msgstr "Dubhradh na gealaich slàn"
+msgstr "Dubhradh slàn na gealaich"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:244
@@ -3374,7 +3374,7 @@ msgstr "Grian-chrios"
 #. TRANSLATORS: Name of script
 #: src/translations.h:252
 msgid "Mercury Triple Sunrise and Sunset"
-msgstr "Èirigh is dol fodha na grèine triplichte air Mearcar"
+msgstr "Èirigh is dol fodha na grèine trìoblaichte air Mearcar"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:254
@@ -3532,7 +3532,7 @@ msgstr "Sgriobt gus leth-dhubhradh na gealaich a shealltainn."
 
 #: src/translations.h:316
 msgid "Script to demonstrate a total lunar eclipse."
-msgstr "Sgriobt gus dubhradh na gealaich slàn a shealltainn."
+msgstr "Sgriobt gus dubhradh slàn na gealaich a shealltainn."
 
 #: src/translations.h:317
 msgid "A slow, infinite tour of the sky, looking at random objects."
@@ -3545,7 +3545,7 @@ msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
-"Sgriobt a thaisbeanas dubhradh na grèine slàn a thachair ann an 2009 (o "
+"Sgriobt a thaisbeanas dubhradh slàn na grèine a thachair ann an 2009 (o "
 "Rangpur, Bangladais)."
 
 #: src/translations.h:319
@@ -3566,9 +3566,9 @@ msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr ""
-"Ri linn annasachdan ann an reul-chuairt is cuairteachadh Mearcair aig badan "
-"sònraichte, nì a' ghrian laighe 's èirigh aig 3 amannan eadar-dhealaichte "
-"san aon latha Mearcair."
+"Air sgàth 's gu bheil reul-chuairt is cuairteachadh Mearcair annasach aig "
+"badan sònraichte, nì a' ghrian laighe 's èirigh aig 3 amannan eadar-"
+"dhealaichte san aon latha Mearcair."
 
 #: src/translations.h:322
 msgid ""
@@ -3602,7 +3602,7 @@ msgid ""
 msgstr ""
 "'S ann tric a thèid an Talamh no am Bliogh a dubhradh le Phobos. Ach 's ann "
 "glè ainneamh a thachras an dà chuid air an aon latha. Seo mar a thachras e "
-"23mh dhen Fhaoilleach 2048. San astar fìrinneach."
+"23mh dhen Fhaoilleach 2048. San luaths fhìrinneach."
 
 #: src/translations.h:326
 msgid ""
@@ -3614,12 +3614,12 @@ msgid ""
 "light up later."
 msgstr ""
 "Ruithidh Phobos air beulaibh a' Chuirg agus trasnaidh e a' ghrian, tèid e "
-"troimhe agus tillidh e an aghaidh a' chuairteachaidh an uairsin agus "
-"trasnaidh e pàirt dhen ghrian a-rithist (chan fhaicear seo ach o leth-"
-"chruinne deas Dheimos) 's as dèidh seo, dubhraidh Corg a' ghrian gu tur fhad "
-"'s a tha Phobos a' trasnadh eadar Corg agus Deimos san dorchadas. Nuair a "
-"thig Phobos am follais on Chorg, bidh an dubhradh air fhathast agus e "
-"doilleir fo sgàil a' Chuirg 's cha shoillsich e ach an uairsin."
+"troimhe agus nì e ais-cheum an uairsin agus trasnaidh e pàirt dhen ghrian a-"
+"rithist (chan fhaicear seo ach o leth-chruinne deas Dheimos) 's as dèidh "
+"seo, dubhraidh Corg a' ghrian gu slàn fhad 's a tha Phobos a' trasnadh eadar "
+"Corg agus Deimos san dorchadas. Nuair a thig Phobos am follais on Chorg, "
+"bidh an dubhradh air fhathast agus e doilleir fo sgàil a' Chuirg 's cha "
+"shoillsich e ach an uairsin."
 
 #: src/translations.h:327
 msgid ""
@@ -3682,8 +3682,8 @@ msgid ""
 msgstr ""
 "Sìnidhean is trasnaidhean as motha aig an Talamh is planaidean eile o "
 "Challisto 2000-3000. Carson o Challisto? Uill, am measg nan 4 gealaichean "
-"Ghalileo, chan eil ach Callisto taobh a-muigh gathachadh a' Bhliogh. Mar "
-"sin, nan robh daoine airson tuineachadh air gealach a' Bhliogh, 's e "
+"Ghalileo, chan eil ach Callisto taobh a-muigh crios gathachaidh a' Bhliogh. "
+"Mar sin, nan robh daoine airson tuineachadh air gealach a' Bhliogh, 's e "
 "Callisto a bhios an tè."
 
 #: src/translations.h:336
@@ -5120,7 +5120,7 @@ msgstr "Sgèile dàimheach:"
 
 #: src/ui_viewDialog.h:1592
 msgid "Milky Way brightness:"
-msgstr "Lùth aig Slighe Chlann Uisnich:"
+msgstr "Soilleireachd Slighe Chlann Uisnich:"
 
 #: src/ui_viewDialog.h:1593
 msgid "Zodiacal Light brightness:"
@@ -5224,12 +5224,12 @@ msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
 msgstr ""
-"Cuir an roghainn seo an comas gus buaidh mas-fhìor dhen fhìor astar-solais "
-"fhaighinn (mholamaid seo)."
+"Cuir an roghainn seo an comas gus buaidh mas-fhìor dhe fhìor luaths an t-"
+"solais fhaighinn (mholamaid seo)."
 
 #: src/ui_viewDialog.h:1631
 msgid "Simulate light speed"
-msgstr "Coltas astar an t-solais"
+msgstr "Coltas luaths an t-solais"
 
 #: src/ui_viewDialog.h:1632
 msgid "Use custom settings of GRS:"
@@ -5387,8 +5387,8 @@ msgstr "Cleachd oidheaman co-rèireach"
 msgid ""
 "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
-"Cuingich meudachd (airson amhairc gun taic / glainne dhà-shùileach) nan "
-"cuspairean fad às."
+"Cuingich meudachd (airson luchd-amhairc gun taic / glainne dhà-shùileach) "
+"nan cuspairean fad às."
 
 #: src/ui_viewDialog.h:1724
 msgid "Celestial Sphere"
@@ -9900,7 +9900,7 @@ msgstr "Dathan"
 #. TRANSLATORS: Refers to constellation art
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:299
 msgid "Art brightness:"
-msgstr "Lùth na h-ealaine:"
+msgstr "Soilleireachd na h-ealaine:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:359
 msgid "Ecliptic line (J2000)"
@@ -9948,7 +9948,7 @@ msgstr "Faide an t-sùmaidh:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:469
 msgid "Milky Way intensity:"
-msgstr "Lùth aig Slighe Chlann Uisnich:"
+msgstr "Dèine Slighe Chlann Uisnich:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:475
 msgid "Zodiacal light intensity:"
@@ -10038,7 +10038,7 @@ msgid ""
 "English) or provisional designation."
 msgstr ""
 "Gabhaidh an dà chuid comaidean is astaroidean aithneachadh le an àireamh, an "
-"ainm (sa Bheurla) no an ainm sealadach."
+"ainm (sa Bheurla) no an ainmeachadh sealadach."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:169
 #, qt-format
@@ -10494,8 +10494,9 @@ msgid ""
 "You can find novae via search tool by entering designation of nova or its "
 "common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg')."
 msgstr ""
-"Lorgaidh tu nòbhathan leis an inneal-luirg nuair a chuireas tu a-steach ainm "
-"cataloig no coitcheann an nòbha (m.e. \"Nova Cygni 1975\" no \"V1500 Cyg\")."
+"Lorgaidh tu nòbhathan leis an inneal-luirg nuair a chuireas tu a-steach "
+"ainmeachadh no ainm coitcheann an nòbha (m.e. \"Nova Cygni 1975\" no \"V1500 "
+"Cyg\")."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:126
 msgid "This plugin allows you to see recent bright novae: "
