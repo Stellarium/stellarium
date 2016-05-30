@@ -177,11 +177,12 @@ class Translations
 		N_("Indian Vedic");
 		N_("Japanese Moon Stations");
 		N_("Korean");
-		N_("Lakota");
+		N_("Dakota/Lakota/Nakota");
 		N_("Maori");
 		N_("Mongolian");
 		N_("Navajo");
 		N_("Norse");
+		N_("Ojibwe");
 		N_("Polynesian");
 		N_("Romanian");
 		N_("Sami");
