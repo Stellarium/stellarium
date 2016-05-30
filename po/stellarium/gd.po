@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-05-25 00:05+0700\n"
-"PO-Revision-Date: 2016-05-28 18:24+0000\n"
+"PO-Revision-Date: 2016-05-29 09:37+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-29 05:15+0000\n"
+"X-Launchpad-Export-Date: 2016-05-30 05:14+0000\n"
 "X-Generator: Launchpad (build 18053)\n"
 "Language: gd\n"
 
@@ -5233,11 +5233,11 @@ msgstr "Coltas luaths an t-solais"
 
 #: src/ui_viewDialog.h:1632
 msgid "Use custom settings of GRS:"
-msgstr "Cleachd roghainnean gnàthaichte airson a' mhòr-bhad dheirg:"
+msgstr "Cleachd roghainnean gnàthaichte airson a' mhòr-bhaid dheirg:"
 
 #: src/ui_viewDialog.h:1633
 msgid "GRS details..."
-msgstr "Mion-fhiosrachadh a' mhòr-bhad dheirg..."
+msgstr "Mion-fhiosrachadh a' mhòr-bhaid dheirg..."
 
 #: src/ui_viewDialog.h:1635
 msgid "Limit the magnitude of solar system objects"
@@ -5976,19 +5976,20 @@ msgstr "Deasaich an co-aontar"
 
 #: src/ui_configurationDialog.h:1218
 msgid "Planetarium options"
-msgstr "Roghainnean planetarium"
+msgstr "Roghainnean amharc-lainn"
 
 #: src/ui_configurationDialog.h:1220
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
 msgstr ""
-"Thèid fiaradh sgàthain speurach a chleachdadh nuair a thèid Stellarium a "
-"phroiseactadh air sgathan speurach a bhios aig siostaman planetarium saora."
+"Thèid fiaradh sgàthain cruinn a chleachdadh nuair a thèid Stellarium a "
+"phroiseactadh air sgathan cruinn a bhios aig siostaman amharc-lann "
+"phlanaidean saora."
 
 #: src/ui_configurationDialog.h:1222
 msgid "Spheric mirror distortion"
-msgstr "Fiaradh sgathain speurach"
+msgstr "Fiaradh sgathain cruinn"
 
 #: src/ui_configurationDialog.h:1224
 msgid "Mask out everything outside a central circle in the main view"
@@ -6280,11 +6281,11 @@ msgstr ""
 
 #: src/ui_greatRedSpotDialog.h:168
 msgid "Great Red Spot Details"
-msgstr "Fiosrachadh a' mhòr-bhad dheirg"
+msgstr "Fiosrachadh a' mhòr-bhaid dheirg"
 
 #: src/ui_greatRedSpotDialog.h:170
 msgid "Custom settings for position of GRS"
-msgstr "Roghainnean gnàthaichte airson ionad a' mhòr-bhad dheirg"
+msgstr "Roghainnean gnàthaichte airson ionad a' mhòr-bhaid dheirg"
 
 #: src/ui_greatRedSpotDialog.h:171 src/ui_astroCalcDialog.h:384
 #: src/ui_astroCalcDialog.h:386
@@ -6297,7 +6298,7 @@ msgstr "Drioft bliadhnail (ceuman):"
 
 #: src/ui_greatRedSpotDialog.h:173
 msgid "Longitude of GRS (degrees):"
-msgstr "Domhan-fhad a' mhòr-bhad dheirg (ceuman):"
+msgstr "Domhan-fhad a' mhòr-bhaid dheirg (ceuman):"
 
 #: src/ui_greatRedSpotDialog.h:180
 msgid "Date and Time (UTC):"
@@ -6305,7 +6306,7 @@ msgstr "Ceann-là 's àm (UTC):"
 
 #: src/ui_greatRedSpotDialog.h:184
 msgid "Get the recent GRS measurement"
-msgstr "Faigh tomhas o chionn goirid air a' mhòr-bhad dheirg"
+msgstr "Faigh tomhas o chionn goirid air a' mhòr-bhad dhearg"
 
 #: src/ui_scriptConsole.h:346
 msgid "Script console"
@@ -6737,13 +6738,13 @@ msgid ""
 "magnification and field of view are simulated.) It can also show a sensor "
 "frame and a Telrad sight."
 msgstr ""
-"Seallaidh seo an speur mar an robh thu a' coimhead air le lionsa glainne-"
-"amhairc. (Cha dèid ach a' mheudachd is an raon-seallaidh atharrais.) 'S "
-"urrainn dha frèam mothaicheir is fradharc Telrad a shealltainn cuideachd."
+"Seallaidh seo an speur mar an robh thu a' coimhead air le gloinne-sùla na "
+"glainne-amhairc. (Cha dèid ach a' mheudachd is an raon-seallaidh atharrais.) "
+"'S urrainn dha frèam mothaicheir is fradharc Telrad a shealltainn cuideachd."
 
 #: plugins/Oculars/src/Oculars.cpp:941
 msgid "Please select an object before switching to ocular view."
-msgstr "Tagh cuspair mus gearr thu leum dha shealladh an t-sùileach."
+msgstr "Tagh cuspair mus gearr thu leum dha shealladh an t-sùilich."
 
 #: plugins/Oculars/src/Oculars.cpp:1051
 msgid "&Previous ocular"
@@ -6828,11 +6829,11 @@ msgstr "Tagh a' ghlainne-amhairc roimhpe"
 
 #: plugins/Oculars/src/Oculars.cpp:1510
 msgid "Select next eyepiece"
-msgstr "Tagh an ath-lionsa sùla"
+msgstr "Tagh an ath-gloinne-sùla"
 
 #: plugins/Oculars/src/Oculars.cpp:1512
 msgid "Select previous eyepiece"
-msgstr "Tagh an lionsa sùla roimhe"
+msgstr "Tagh a' ghloinne-sùla roimhpe"
 
 #: plugins/Oculars/src/Oculars.cpp:1697
 msgctxt "abbreviated in the plugin"
@@ -7037,7 +7038,7 @@ msgstr "Chan eil iomadachd iomchaidh"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:600
 msgid "Focal length of eyepiece"
-msgstr "Faid an fhòcais aig an lionsa sùla"
+msgstr "Faid an fhòcais aig a' ghloinne-sùla"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:693
 #, qt-format
@@ -7115,7 +7116,7 @@ msgid ""
 "and telescopes, as well as CCD Sensors.  Your first time running the app "
 "will populate some samples to get your started."
 msgstr ""
-"Tha fa-near a' plugain seo atharrais na chitheadh tu tro lionsa sùla. 'S "
+"Tha fa-near a' plugain seo atharrais na chitheadh tu tro ghloinne-sùla. 'S "
 "urrainn dhut an còmhradh-rèiteachaidh seo a chleachdadh gus lionsaichean "
 "sùla, glainneachan-amhairc agus mothaichearan CCD a chur ris, atharrachadh "
 "no a sguabadh às. Thèid buill-eisimpleir a chur ris a' chiad turas a "
@@ -7132,14 +7133,14 @@ msgid ""
 "eyepiece/telescope combination will be like when compared to another."
 msgstr ""
 "Tha seo ann ach an urrainn dhut coimeas nas fhearr a dhèanamh eadar dè bhios "
-"co-cheanglaidhean lionsa sùla/glainne-amhairc diofraichte coltach."
+"co-cheanglaidhean gloinne-sùla/glainne-amhairc diofraichte coltach."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:559
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will "
 "produce two different exit pupils, changing the view somewhat."
 msgstr ""
-"Bheir an t-aon lionsa sùla le dà ghlainne-amhairc air a bheil faide an "
+"Bheir an t-aon gloinne-sùla le dà ghlainne-amhairc air a bheil faide an "
 "fhòcais eadar-dhealaichte dhut fradharc fàgail eadar-dhealaichte, ag "
 "atharrachadh an t-seallaidh."
 
@@ -7178,9 +7179,9 @@ msgid ""
 msgstr ""
 "'S urrainn dhut fradharc-luirg Telrad a thoglachadh; cha ghabh seo a "
 "dhèanamh ach mur an do chuir thu an sealladh nan Sùileach air. Tarraingidh "
-"am feart seo trì chearcaill circles of 0.5%1, 2.0%1, is 4.0%1 a chuidicheas "
-"ach am faic thu air an robh thu an dùil leis an t-sùil lom tro fradharc "
-"Telrad (no fear coltach ris)."
+"am feart seo trì cearcaill cho-chearclach dhe 0.5%1, 2.0%1 is 4.0%1 a "
+"chuidicheas ach am faic thu air an robh thu an dùil leis an t-sùil lom tro "
+"fradharc Telrad (no fear coltach ris)."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:564
 msgid "If you find any issues, please let me know.  Enjoy!"
@@ -7282,7 +7283,7 @@ msgstr "Coitcheann"
 #: plugins/Oculars/src/ui_ocularDialog.h:1187
 #: plugins/Oculars/src/ui_ocularDialog.h:1196
 msgid "Eyepieces"
-msgstr "Lionsaichean sùla"
+msgstr "Gloinneachan-sùla"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1188
 #: plugins/Oculars/src/ui_ocularDialog.h:1198
@@ -12346,7 +12347,7 @@ msgid ""
 "<em>Cartes du Ciel</em> planetarium program."
 msgstr ""
 "Leigidh am plugan seo leat sùmadh ceum air cheum le ath-goiridean a' mheur-"
-"chlàir coltach ris a' phrògram amharc-lainn nam planaidean <em>Cartes du "
+"chlàir coltach ris a' phrògram amharc-lann phlanaidean <em>Cartes du "
 "Ciel</em>."
 
 #: plugins/FOV/src/FOV.cpp:83

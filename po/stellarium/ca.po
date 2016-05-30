@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-25 00:05+0700\n"
-"PO-Revision-Date: 2015-10-15 16:12+0000\n"
+"PO-Revision-Date: 2016-05-29 18:19+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-05-25 05:19+0000\n"
+"X-Launchpad-Export-Date: 2016-05-30 05:14+0000\n"
 "X-Generator: Launchpad (build 18053)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:140 src/core/modules/StarMgr.cpp:378
@@ -97,15 +97,15 @@ msgstr "Longitud o./c."
 #: src/core/modules/GridLinesMgr.cpp:637 src/core/modules/GridLinesMgr.cpp:937
 #: src/ui_viewDialog.h:1784
 msgid "Prime Vertical"
-msgstr ""
+msgstr "primer vertical"
 
 #: src/core/modules/GridLinesMgr.cpp:641
 msgid "Equinoctial Colure"
-msgstr ""
+msgstr "Colur equinoccial"
 
 #: src/core/modules/GridLinesMgr.cpp:645
 msgid "Solstitial Colure"
-msgstr ""
+msgstr "Colur solsticial"
 
 #: src/core/modules/GridLinesMgr.cpp:922
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:339
@@ -178,7 +178,7 @@ msgstr "Cercles de precessió"
 
 #: src/core/modules/GridLinesMgr.cpp:938
 msgid "Colure Lines"
-msgstr ""
+msgstr "Línies Colur"
 
 #: src/core/modules/LandscapeMgr.cpp:418 src/ui_viewDialog.h:1607
 msgid "Atmosphere"
@@ -251,7 +251,7 @@ msgstr "Opacitat: <b>%1</b>"
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:191
 #, qt-format
 msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
-msgstr ""
+msgstr "Magnitud: <b>%1</b> (després de l'extinció: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
 #: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
@@ -276,7 +276,7 @@ msgstr "Índex de color (B-V): <b>%1</b>"
 #: src/core/modules/Nebula.cpp:224
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
-msgstr ""
+msgstr "Brillantor superficial: <b>%1</b> (després de l'extinció: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:230
 #, qt-format
@@ -319,7 +319,7 @@ msgstr "kpc"
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:298
 msgid "ly"
-msgstr ""
+msgstr "al"
 
 #: src/core/modules/Nebula.cpp:300
 #, qt-format
@@ -1609,6 +1609,9 @@ msgid ""
 "preserves direction and shapes but distorts size, in an increasing degree "
 "away from the equator."
 msgstr ""
+"La projecció de Mercator és una de les projeccions de mapa del món més "
+"utilitzats. Conserva la direcció i forma, però distorsiona la mida, en un "
+"grau creixent a mesura que s'allunya de l'equador."
 
 #: src/core/StelProjectorClasses.cpp:410
 msgid "Orthographic"
@@ -1718,23 +1721,23 @@ msgstr "Segueix objecte"
 
 #: src/core/StelMovementMgr.cpp:162
 msgid "Look towards East"
-msgstr ""
+msgstr "Mirar cap a l'Est"
 
 #: src/core/StelMovementMgr.cpp:163
 msgid "Look towards West"
-msgstr ""
+msgstr "Mirar cap a l'Oest"
 
 #: src/core/StelMovementMgr.cpp:164
 msgid "Look towards North"
-msgstr ""
+msgstr "Mirar cap al Nord"
 
 #: src/core/StelMovementMgr.cpp:165
 msgid "Look towards South"
-msgstr ""
+msgstr "Mirar cap al Sud"
 
 #: src/core/StelMovementMgr.cpp:166
 msgid "Look towards Zenith"
-msgstr ""
+msgstr "Mirar cap al Zenit"
 
 #: src/core/SimbadSearcher.cpp:56
 msgid "Network error"
@@ -1891,11 +1894,11 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1270 src/gui/ConfigurationDialog.cpp:1279
 msgid "Available"
-msgstr ""
+msgstr "Disponible"
 
 #: src/gui/ConfigurationDialog.cpp:1272 src/gui/ConfigurationDialog.cpp:1281
 msgid "Not Available"
-msgstr ""
+msgstr "No disponible"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1344
@@ -2004,7 +2007,7 @@ msgstr "Espenak i Meeus (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1384
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
-msgstr ""
+msgstr "Espenak i Meeus (2006) cap acceleració addicional de la lluna"
 
 #: src/gui/ConfigurationDialog.cpp:1386
 msgid "Reijs (2006)"
@@ -2281,7 +2284,7 @@ msgstr "Finestra d'AstroCalc"
 
 #: src/gui/StelGui.cpp:220
 msgid "Bookmarks window"
-msgstr ""
+msgstr "Finestra de favorits"
 
 #: src/gui/StelGui.cpp:221
 msgid "Copy selected object information to clipboard"
@@ -2673,7 +2676,7 @@ msgstr "Tipus"
 #: src/gui/AstroCalcDialog.cpp:161
 #, qt-format
 msgid "Positions on %1"
-msgstr ""
+msgstr "Posicions a %1"
 
 #: src/gui/AstroCalcDialog.cpp:252
 msgid "JD"
@@ -2693,7 +2696,7 @@ msgstr "1 dia"
 
 #: src/gui/AstroCalcDialog.cpp:402
 msgid "5 days"
-msgstr ""
+msgstr "5 dies"
 
 #: src/gui/AstroCalcDialog.cpp:403
 msgid "10 days"
@@ -2701,7 +2704,7 @@ msgstr "10 dies"
 
 #: src/gui/AstroCalcDialog.cpp:404
 msgid "15 days"
-msgstr ""
+msgstr "15 dies"
 
 #: src/gui/AstroCalcDialog.cpp:405
 msgid "30 days"
@@ -2709,7 +2712,7 @@ msgstr "30 dies"
 
 #: src/gui/AstroCalcDialog.cpp:406
 msgid "60 days"
-msgstr ""
+msgstr "60 díes"
 
 #: src/gui/AstroCalcDialog.cpp:454
 msgid "Solar system"
@@ -2782,11 +2785,11 @@ msgstr "Objecte"
 
 #: src/gui/BookmarksDialog.cpp:96
 msgid "Localized name"
-msgstr ""
+msgstr "Nom traduït"
 
 #: src/gui/BookmarksDialog.cpp:98
 msgid "Location of observer"
-msgstr ""
+msgstr "Localització de l'observador"
 
 #: src/StelMainView.cpp:462 src/StelMainView.cpp:477
 msgid ""
@@ -3126,12 +3129,12 @@ msgstr "Catàleg Melotte"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:157
 msgid "Dwarf galaxies"
-msgstr ""
+msgstr "Galàxies nanes"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:159
 msgid "Herschel 400 Catalogue"
-msgstr ""
+msgstr "Catàleg Herschel 400"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:164
@@ -3462,7 +3465,7 @@ msgstr "Terra i altres Planetes des de Ceres"
 #. TRANSLATORS: Name of script
 #: src/translations.h:292
 msgid "Messier Objects Tour"
-msgstr ""
+msgstr "Tour d'objectes Messier"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:294
@@ -3472,32 +3475,32 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:296
 msgid "20 Fun Naked-Eye Double Stars"
-msgstr ""
+msgstr "Destacats amb binoculars"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:298
 msgid "List of largest known stars"
-msgstr ""
+msgstr "Llista d'estrelles més grans conegudes"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:300
 msgid "Herschel 400 Tour"
-msgstr ""
+msgstr "Tour Herschel 400"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:302
 msgid "Binosky: Deep Sky Objects for Binoculars"
-msgstr ""
+msgstr "Binosky: Objectes de cel profund per Prismàtics"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:304
 msgid "The Jack Bennett Catalog"
-msgstr ""
+msgstr "Catàleg de Jack Bennett"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:306
 msgid "Best objects in the New General Catalog"
-msgstr ""
+msgstr "Els millors objectes en el Nou Catàleg General"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:312
@@ -3602,6 +3605,8 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 261 events in all!"
 msgstr ""
+"Salvapantalles de diversos esdeveniments en el Sistema Solar. 261 "
+"esdeveniments en total!"
 
 #: src/translations.h:328
 msgid "A tour of the western constellations."
@@ -3668,7 +3673,7 @@ msgstr ""
 
 #: src/translations.h:337
 msgid "A tour of Messier Objects"
-msgstr ""
+msgstr "Un tour d'objectes Messier"
 
 #: src/translations.h:338
 msgid ""
