@@ -287,8 +287,13 @@ ENDIF()
 
 ########### Get revision number for non-release builds ###########
 IF(NOT STELLARIUM_RELEASE_BUILD)
-    #Hack until CMake detection for Bazaar is finished
-	execute_process(COMMAND bzr revno WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}  TIMEOUT 30 OUTPUT_VARIABLE BZR_REVISION OUTPUT_STRIP_TRAILING_WHITESPACE) 
+    # Hack until CMake detection for Bazaar is finished
+    # Possible expansion of hack: bzr version-info --custom --template="{branch_nick} r{revno}"
+    IF("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}.${CMAKE_PATCH_VERSION}" LESS 3.0.2)
+        EXEC_PROGRAM(bzr ARGS revno OUTPUT_VARIABLE BZR_REVISION)
+    ELSE()
+        EXECUTE_PROCESS(COMMAND bzr revno WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE BZR_REVISION OUTPUT_STRIP_TRAILING_WHITESPACE)
+    ENDIF()
     IF(BZR_REVISION)
         SET(PACKAGE_VERSION "bzr${BZR_REVISION}")
         ADD_DEFINITIONS(-DBZR_REVISION="${BZR_REVISION}")
@@ -318,8 +323,7 @@ IF(WIN32)
     IF(STELLARIUM_RELEASE_BUILD)
        SET(PACKAGE_VERSION_RC "${PACKAGE_VERSION},0")
     ELSE()
-    # This writes something like 0.15.0,4711. 
-       SET(PACKAGE_VERSION_RC "${VERSION},${BZR_REVISION}")
+       SET(PACKAGE_VERSION_RC "${PACKAGE_VERSION}")
     ENDIF()
     STRING(REGEX REPLACE "([.]+)" "," PACKAGE_VERSION_RC ${PACKAGE_VERSION_RC})
     CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/cmake/stellarium.rc.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium.rc @ONLY)
