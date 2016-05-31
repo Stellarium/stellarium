@@ -15,7 +15,7 @@ BEGIN
             VALUE "FileVersion",      "@PACKAGE_VERSION@\0"
             VALUE "LegalCopyright",   "Copyright (C) @COPYRIGHT_YEARS@ Stellarium team\0"
             VALUE "Info",             "http://www.stellarium.org/\0"
-            VALUE "ProductVersion",   "@PACKAGE_VERSION@\0"
+            VALUE "ProductVersion",   "@PACKAGE_VERSION_RC@\0"
             VALUE "ProductName",      "Stellarium\0"
             VALUE "InternalName",     "stellarium\0"
             VALUE "OriginalFilename", "stellarium.exe\0"
