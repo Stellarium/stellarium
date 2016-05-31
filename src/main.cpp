@@ -163,9 +163,7 @@ int main(int argc, char **argv)
 	QPixmap pixmap(StelFileMgr::findFile("data/splash.png"));
 	QSplashScreen splash(pixmap);
 	splash.show();
-	#ifndef STELLARIUM_RELEASE_BUILD
-	splash.showMessage(StelUtils::getApplicationVersion(), Qt::AlignLeft, Qt::white);
-	#endif
+	splash.showMessage(StelUtils::getApplicationVersion() , Qt::AlignLeft, Qt::white);
 	app.processEvents();
 
 	// Log command line arguments.

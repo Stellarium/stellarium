@@ -50,7 +50,7 @@ QString getApplicationVersion()
 #if defined(STELLARIUM_VERSION)
 	return QString(STELLARIUM_VERSION);
 #elif defined(BZR_REVISION)
-	return QString("%1.%2").arg(PACKAGE_VERSION).arg(BZR_REVISION);
+	return QString("%1.%2 [%3]").arg(PACKAGE_VERSION).arg(BZR_REVISION).arg(BZR_BRANCH);
 #else
 	return QString(PACKAGE_VERSION);
 #endif
