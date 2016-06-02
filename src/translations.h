@@ -178,6 +178,7 @@ class Translations
 		N_("Japanese Moon Stations");
 		N_("Korean");
 		N_("Dakota/Lakota/Nakota");
+		N_("Macedonian");
 		N_("Maori");
 		N_("Mongolian");
 		N_("Navajo");
