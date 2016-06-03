@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-02 10:31+0700\n"
+"POT-Creation-Date: 2016-06-03 23:41+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1426,7 +1426,8 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:32
 msgid ""
-"Perspective projection keeps the horizon a straight line. The mathematical "
+"Perspective projection maps the horizon and other great circles like "
+"equator, ecliptic, hour lines, etc. into straight lines. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
 
@@ -1436,7 +1437,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:91
 msgid ""
-"The full name of this projection method is, <i>Lambert azimuthal equal-area "
+"The full name of this projection method is <i>Lambert azimuthal equal-area "
 "projection</i>. It preserves the area but not the angle."
 msgstr ""
 
@@ -1446,9 +1447,9 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:148
 msgid ""
-"Stereographic projection is known since the antiquity and was originally "
-"known as the planisphere projection. It preserves the angles at which curves "
-"cross each other but it does not preserve area."
+"Stereographic projection is known since antiquity and was originally known "
+"as the planisphere projection. It preserves the angles at which curves cross "
+"each other but it does not preserve area."
 msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:197
