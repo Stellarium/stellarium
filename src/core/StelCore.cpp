@@ -24,7 +24,6 @@
 #include "StelToneReproducer.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelApp.hpp"
-#include "StelPropertyMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelGeodesicGrid.hpp"
 #include "StelMovementMgr.hpp"
@@ -85,6 +84,7 @@ StelCore::StelCore()
 	, de430Active(false)
 	, de431Active(false)
 {
+	setObjectName("StelCore");
 	registerMathMetaTypes();
 
 	toneReproducer = new StelToneReproducer();
@@ -204,8 +204,14 @@ void StelCore::init()
 	currentProjectorParams.fov = movementMgr->getInitFov();
 	StelApp::getInstance().getModuleMgr().registerModule(movementMgr);
 
+	StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
+
 	skyDrawer = new StelSkyDrawer(this);
 	skyDrawer->init();
+
+	propMgr->registerObject(skyDrawer);
+	propMgr->registerObject(this);
+
 
 	setCurrentProjectionTypeKey(getDefaultProjectionTypeKey());
 	updateMaximumFov();
@@ -266,10 +272,6 @@ void StelCore::init()
 
 	actionsMgr->addAction("actionHorizontal_Flip", displayGroup, N_("Flip scene horizontally"), this, "flipHorz", "Ctrl+Shift+H", "", true);
 	actionsMgr->addAction("actionVertical_Flip", displayGroup, N_("Flip scene vertically"), this, "flipVert", "Ctrl+Shift+V", "", true);
-
-	StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
-	propMgr->registerProperty("prop_Core_currentProjectionType",this,"currentProjectionType");
-	propMgr->registerProperty("prop_Core_currentProjectionTypeKey",this,"currentProjectionTypeKey");
 }
 
 QString StelCore::getDefaultProjectionTypeKey() const
@@ -1523,6 +1525,13 @@ void StelCore::registerMathMetaTypes()
 	qRegisterMetaType<Mat4f>();
 	qRegisterMetaType<Mat3d>();
 	qRegisterMetaType<Mat3f>();
+
+    //for debugging QVariants with these types, it helps if we register the string converters
+    QMetaType::registerConverter(&Vec3d::toString);
+    QMetaType::registerConverter(&Vec3f::toString);
+    QMetaType::registerConverter(&Vec4d::toString);
+    QMetaType::registerConverter(&Vec4f::toString);
+    QMetaType::registerConverter(&Vec4i::toString);
 }
 
 void StelCore::setStartupTimeMode(const QString& s)

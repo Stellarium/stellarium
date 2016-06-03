@@ -35,7 +35,6 @@
 #include "StelUtils.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
-#include "StelPropertyMgr.hpp"
 
 #include <QOpenGLContext>
 #include <QOpenGLShaderProgram>
@@ -67,6 +66,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	oldLum(-1.f),
 	big3dModelHaloRadius(150.f)
 {
+	setObjectName("StelSkyDrawer");
 	qsrand (QDateTime::currentMSecsSinceEpoch());
 	QSettings* conf = StelApp::getInstance().getSettings();
 	initColorTableFromConfigFile(conf);
@@ -193,28 +193,6 @@ void StelSkyDrawer::init()
 	starShaderVars.color = starShaderProgram->attributeLocation("color");
 	starShaderVars.texture = starShaderProgram->uniformLocation("tex");
 
-	//Add StelProperties
-	StelPropertyMgr* mgr = StelApp::getInstance().getStelPropertyManager();
-	mgr->registerProperty("prop_SkyDrawer_relativeStarScale",this,"relativeStarScale");
-	mgr->registerProperty("prop_SkyDrawer_absoluteStarScale",this,"absoluteStarScale");
-	mgr->registerProperty("prop_SkyDrawer_twinkleAmount",this,"twinkleAmount");
-	mgr->registerProperty("prop_SkyDrawer_flagTwinkle",this,"flagTwinkle");
-	mgr->registerProperty("prop_SkyDrawer_bortleScaleIndex",this,"bortleScaleIndex");
-
-	mgr->registerProperty("prop_SkyDrawer_flagStarMagnitudeLimit",this,"flagStarMagnitudeLimit");
-	mgr->registerProperty("prop_SkyDrawer_flagNebulaMagnitudeLimit",this,"flagNebulaMagnitudeLimit");
-	mgr->registerProperty("prop_SkyDrawer_flagPlanetMagnitudeLimit",this,"flagPlanetMagnitudeLimit");
-
-	mgr->registerProperty("prop_SkyDrawer_customStarMagLimit",this,"customStarMagLimit");
-	mgr->registerProperty("prop_SkyDrawer_customNebulaMagLimit",this,"customNebulaMagLimit");
-	mgr->registerProperty("prop_SkyDrawer_customPlanetMagLimit",this,"customPlanetMagLimit");
-
-	mgr->registerProperty("prop_SkyDrawer_flagLuminanceAdaptation",this,"flagLuminanceAdaptation");
-
-	mgr->registerProperty("prop_SkyDrawer_extinctionCoefficient",this,"extinctionCoefficient");
-	mgr->registerProperty("prop_SkyDrawer_atmosphereTemperature",this,"atmosphereTemperature");
-	mgr->registerProperty("prop_SkyDrawer_atmospherePressure",this,"atmospherePressure");
-			
 	update(0);
 }
 

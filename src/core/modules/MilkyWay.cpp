@@ -73,7 +73,6 @@ void MilkyWay::init()
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_MilkyWay", displayGroup, N_("Milky Way"), "flagMilkyWayDisplayed", "M");
-	registerProperty("prop_MilkyWay_intensity", "intensity");
 }
 
 

@@ -1,38 +1,13 @@
 #include "StelPropertyMgr.hpp"
 #include "StelApp.hpp"
-#include <QDebug>
+#include <QtDebug>
 
-StelProperty::StelProperty(const QString &id, QObject* target, const char* propId)
-	: QObject(StelApp::getInstance().getStelPropertyManager()),
-	  target(target)
+StelProperty::StelProperty(const QString &id, QObject *target, const QMetaProperty& prop)
+	: id(id), target(target), prop(prop)
 {
-	//check if this property name is already defined, print an error if it is
-	if(parent()->findChild<StelProperty*>(id,Qt::FindDirectChildrenOnly))
-	{
-		qFatal("Fatal error: StelProperty '%s' has already been registered!", id.toUtf8().constData());
-	}
 	setObjectName(id);
-
-	Q_ASSERT(target);
-	const QMetaObject* metaObj = target->metaObject();
-	int propIdx = metaObj->indexOfProperty(propId);
-	if(propIdx==-1)
-	{
-		qFatal("Fatal error: No Q_PROPERTY '%s' registered on class '%s'", propId, metaObj->className());
-	}
-
-	prop = metaObj->property(propIdx);
-	//check if the property is valid and has a NOTIFY signal
-	if(!prop.isValid())
-	{
-		qFatal("Fatal error: Q_PROPERTY '%s' on class '%s' has no READ or MEMBER definition", propId, metaObj->className());
-	}
-	if(!prop.hasNotifySignal())
-	{
-		qFatal("Fatal error: Q_PROPERTY '%s' on class '%s' has no NOTIFY signal", propId, metaObj->className());
-	}
-	//qDebug()<<prop.name()<<prop.type()<<prop.typeName();
-	connect(target, prop.notifySignal(), this, metaObject()->method(metaObject()->indexOfSlot("propertyChanged()")));
+	if(prop.hasNotifySignal())
+		connect(target,prop.notifySignal(),this,metaObject()->method(this->metaObject()->indexOfSlot("propertyChanged()")));
 }
 
 QVariant StelProperty::getValue() const
@@ -52,6 +27,11 @@ bool StelProperty::setValue(const QVariant &value) const
 bool StelProperty::isReadOnly() const
 {
 	return !prop.isWritable();
+}
+
+bool StelProperty::canNotify() const
+{
+    return prop.hasNotifySignal();
 }
 
 QMetaType::Type StelProperty::getType() const
@@ -81,28 +61,50 @@ StelPropertyMgr::~StelPropertyMgr()
 
 StelProperty* StelPropertyMgr::registerProperty(const QString& id, QObject* target, const char* propertyName)
 {
-	StelProperty* prop = new StelProperty(id,target,propertyName);
+	int idx = target->metaObject()->indexOfProperty(propertyName);
+	if(idx<0)
+		qFatal("Property '%s' missing on object '%s' for StelProperty '%s'",propertyName, qPrintable(target->objectName()), qPrintable(id));
+
+	return registerProperty(id,target,target->metaObject()->property(idx));
+}
+
+StelProperty* StelPropertyMgr::registerProperty(const QString &id, QObject *target,const QMetaProperty &prop)
+{
+	//check if the ID is already existing
+	if(propMap.contains(id))
+		qFatal("StelProperty with id '%s' already existing, please fix...",qPrintable(id));
+
+	StelProperty* stelProp = new StelProperty(id,target,prop);
+	stelProp->setParent(this);
+
+	//react to the property changed event
+	connect(stelProp,SIGNAL(changed(QVariant)),this,SLOT(onStelPropChanged(QVariant)));
+
 	//check if the property is valid, crash otherwise
 	//this may reveal if a qRegisterMetaType or similar is needed
-	QVariant value = prop->getValue();
+	QVariant value = stelProp->getValue();
 	if(!value.isValid())
 		qFatal("StelProperty %s can not be read. Missing READ or need to register MetaType?",id.toUtf8().constData());
 
-	connect(prop, SIGNAL(changed(QVariant)), this, SLOT(onStelPropChanged(QVariant)));
 	#ifndef NDEBUG
-	qDebug()<<"StelProperty"<<id<<"registered, value"<<value;
+    QString debugStr=(stelProp->isReadOnly()?"readonly":"readwrite");
+    if(stelProp->canNotify())
+        debugStr.append(" notify");
+    qDebug()<<"StelProperty"<<id<<"registered, properties:"<<debugStr<<", value:"<<value;
 	#endif
-	return prop;
+
+	propMap.insert(id,stelProp);
+	return stelProp;
 }
 
 QList<StelProperty*> StelPropertyMgr::getAllProperties() const
 {
-	return findChildren<StelProperty*>(QString(),Qt::FindDirectChildrenOnly);
+	return propMap.values();
 }
 
 StelProperty* StelPropertyMgr::getProperty(const QString &id) const
 {
-	StelProperty* prop = findChild<StelProperty*>(id,Qt::FindDirectChildrenOnly);
+	StelProperty* prop = propMap.value(id);
 	if(!prop)
 		qWarning()<<"StelProperty"<<id<<"not found";
 	return prop;
@@ -115,6 +117,72 @@ void StelPropertyMgr::onStelPropChanged(const QVariant &val)
 	qDebug()<<"StelProperty"<<prop->getId()<<"changed, value"<<val;
 	#endif
 	emit stelPropChanged(prop->getId(),val);
+}
+
+QStringList StelPropertyMgr::getPropertyList() const
+{
+	return propMap.keys();
+}
+
+void StelPropertyMgr::registerObject(QObject *obj)
+{
+	const QString name = obj->objectName();
+	//make sure an object name is set, and does not contain a dot
+	if(name.isEmpty() || name.contains('.'))
+		qFatal("[StelPropertyMgr] Object name '%s' is invalid, must be non-empty and without a dot", qPrintable(name));
+
+	if(!registeredObjects.contains(name))
+	{
+		//just a sanity check that we dont have the same object registered under a different name
+		Q_ASSERT(!registeredObjects.values().contains(obj));
+
+#ifndef NDEBUG
+		qDebug()<<"[StelPropertyMgr] Registering object"<<name;
+#endif
+
+		//iterate and store the static properties, dynamic ones are skipped
+		const QMetaObject* metaObj = obj->metaObject();
+		for(int i = metaObj->propertyOffset(); i < metaObj->propertyCount(); ++i)
+		{
+			QMetaProperty metaProp = metaObj->property(i);
+			QString propName = name +'.'+metaProp.name();
+			registerProperty(propName,obj,metaProp);
+		}
+
+		registeredObjects.insert(name,obj);
+	}
+}
+
+QVariant StelPropertyMgr::getStelPropertyValue(const QString &id) const
+{
+	StelProperty* prop = getProperty(id);
+	if(prop)
+	{
+		return prop->getValue();
+	}
+	//return an invalid qvariant
+	return QVariant();
+}
+
+bool StelPropertyMgr::setStelPropertyValue(const QString &id, const QVariant &value) const
+{
+	StelProperty* prop = getProperty(id);
+	if(prop)
+	{
+		return prop->setValue(value);
+	}
+	return false;
+}
+
+QMetaProperty StelPropertyMgr::getMetaProperty(const QString &id) const
+{
+	StelProperty* prop = getProperty(id);
+	if(prop)
+	{
+		return prop->getMetaProp();
+	}
+	//return an invalid metaprop
+	return QMetaProperty();
 }
 
 StelPropertyProxy::StelPropertyProxy(StelProperty *prop, QObject *parent)

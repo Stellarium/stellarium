@@ -413,16 +413,18 @@ void StelApp::init(QSettings* conf)
 	networkAccessManager->setCache(cache);
 	connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(reportFileDownloadFinished(QNetworkReply*)));
 
+	//create non-StelModule managers
+	propMgr = new StelPropertyMgr();
+	localeMgr = new StelLocaleMgr();
+	skyCultureMgr = new StelSkyCultureMgr();
+	propMgr->registerObject(skyCultureMgr);
+	planetLocationMgr = new StelLocationMgr();
+	actionMgr = new StelActionMgr();
+
 	// Stel Object Data Base manager
 	stelObjectMgr = new StelObjectMgr();
 	stelObjectMgr->init();
-	getModuleMgr().registerModule(stelObjectMgr);
-
-	localeMgr = new StelLocaleMgr();
-	skyCultureMgr = new StelSkyCultureMgr();
-	planetLocationMgr = new StelLocationMgr();
-	actionMgr = new StelActionMgr();
-	propMgr = new StelPropertyMgr();
+	getModuleMgr().registerModule(stelObjectMgr);	
 
 	localeMgr->init();
 

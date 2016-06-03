@@ -189,16 +189,16 @@
             <h3><?= tr("Stars")?></h3>
             <div class="table">
               <!-- inputs with stelproperty class are automatically connected by mainui.js -->
-              <p><label for="stars_absoluteScale"><?= tr("Absolute scale:")?></label><input id="stars_absoluteScale" class="spinner stelproperty" name="prop_SkyDrawer_absoluteStarScale" data-min="0" data-max="9" data-step="0.1" data-numberformat="n2"/></p>
-              <p><label for="stars_relativeScale"><?= tr("Relative scale:")?></label><input id="stars_relativeScale" class="spinner stelproperty" name="prop_SkyDrawer_relativeStarScale" data-min="0.25" data-max="5" data-step="0.05" data-numberformat="n2"/></p>
-              <p><label for="stars_milkywayintensity"><?= tr("Milky Way brightness:")?></label><input id="stars_milkywayintensity" class="spinner stelproperty" name="prop_MilkyWay_intensity" data-min="0" data-max="10" data-step="0.1" data-numberformat="n2"/></p>
-              <p><label for="stars_zodiacintensity"><?= tr("Zodiacal Light brightness:")?></label><input id="stars_zodiacintensity" class="spinner stelproperty" name="prop_ZodiacalLight_intensity" data-min="0" data-max="10" data-step="0.1" data-numberformat="n2"/></p>
-              <p><label><input class="stelproperty" name="prop_SkyDrawer_flagTwinkle" type="checkbox"/><?= tr("Twinkle:")?></label><input class="spinner stelproperty" name="prop_SkyDrawer_twinkleAmount" data-min="0" data-max="1.5" data-step="0.1" data-numberformat="n2"/></p>
-              <p><label><input class="stelproperty" name="prop_SkyDrawer_flagStarMagnitudeLimit" type="checkbox"/><?= tr("Limit magnitude:")?></label><input class="spinner stelproperty" name="prop_SkyDrawer_customStarMagLimit" data-min="0" data-max="21" data-step="0.1" data-numberformat="n2"/></p>
+              <p><label for="stars_absoluteScale"><?= tr("Absolute scale:")?></label><input id="stars_absoluteScale" class="spinner stelproperty" name="StelSkyDrawer.absoluteStarScale" data-min="0" data-max="9" data-step="0.1" data-numberformat="n2"/></p>
+              <p><label for="stars_relativeScale"><?= tr("Relative scale:")?></label><input id="stars_relativeScale" class="spinner stelproperty" name="StelSkyDrawer.relativeStarScale" data-min="0.25" data-max="5" data-step="0.05" data-numberformat="n2"/></p>
+              <p><label for="stars_milkywayintensity"><?= tr("Milky Way brightness:")?></label><input id="stars_milkywayintensity" class="spinner stelproperty" name="MilkyWay.intensity" data-min="0" data-max="10" data-step="0.1" data-numberformat="n2"/></p>
+              <p><label for="stars_zodiacintensity"><?= tr("Zodiacal Light brightness:")?></label><input id="stars_zodiacintensity" class="spinner stelproperty" name="ZodiacalLight.intensity" data-min="0" data-max="10" data-step="0.1" data-numberformat="n2"/></p>
+              <p><label><input class="stelproperty" name="StelSkyDrawer.flagTwinkle" type="checkbox"/><?= tr("Twinkle:")?></label><input class="spinner stelproperty" name="StelSkyDrawer.twinkleAmount" data-min="0" data-max="1.5" data-step="0.1" data-numberformat="n2"/></p>
+              <p><label><input class="stelproperty" name="StelSkyDrawer.flagStarMagnitudeLimit" type="checkbox"/><?= tr("Limit magnitude:")?></label><input class="spinner stelproperty" name="StelSkyDrawer.customStarMagLimit" data-min="0" data-max="21" data-step="0.1" data-numberformat="n2"/></p>
             </div>
-            <label><input class="stelproperty" name="prop_SkyDrawer_flagLuminanceAdaptation" type="checkbox"/><?= tr("Dynamic eye adaptation")?></label>
+            <label><input class="stelproperty" name="StelSkyDrawer.flagLuminanceAdaptation" type="checkbox"/><?= tr("Dynamic eye adaptation")?></label>
             <div class="flex flex-baseline">
-              <label><input type="checkbox" class="stelaction" name="actionShow_Stars_Labels"/><?= tr("Labels and Markers")?></label><div class="slider stelproperty flex-expand" data-prop="prop_StarMgr_labelsAmount" data-min="0" data-max="10" data-step="0.1"></div>
+              <label><input type="checkbox" class="stelaction" name="actionShow_Stars_Labels"/><?= tr("Labels and Markers")?></label><div class="slider stelproperty flex-expand" data-prop="StarMgr.labelsAmount" data-min="0" data-max="10" data-step="0.1"></div>
             </div>
           </div>
           <div class="smallblock blocklabel">
@@ -206,37 +206,37 @@
             <label><input type="checkbox" class="stelaction" name="actionShow_Planets" /><?= tr("Show Solar System objects")?></label>
             <label><input type="checkbox" class="stelaction" name="actionShow_Planets_Hints" /><?= tr("Show planet markers")?></label>
             <label><input type="checkbox" class="stelaction" name="actionShow_Planets_Orbits" /><?= tr("Show planet orbits")?></label>
-            <label><input class="stelproperty" name="prop_SolarSystem_flagIsolatedOrbits" type="checkbox"/><?= tr("Show orbit for selected planet")?></label>
-            <label><input class="stelproperty" name="prop_SolarSystem_flagIsolatedTrails" type="checkbox"/><?= tr("Show trail only for selected planet")?></label>
-            <label><input class="stelproperty" name="prop_SolarSystem_flagLightTravelTime" type="checkbox"/><?= tr("Simulate light speed")?></label>
+            <label><input class="stelproperty" name="SolarSystem.flagIsolatedOrbits" type="checkbox"/><?= tr("Show orbit for selected planet")?></label>
+            <label><input class="stelproperty" name="SolarSystem.flagIsolatedTrails" type="checkbox"/><?= tr("Show trail only for selected planet")?></label>
+            <label><input class="stelproperty" name="SolarSystem.flagLightTravelTime" type="checkbox"/><?= tr("Simulate light speed")?></label>
             <div class="table">
-              <p><label><input class="stelproperty" name="prop_SolarSystem_flagMoonScale" type="checkbox"/><?= tr("Scale Moon:")?></label><input class="spinner stelproperty" name="prop_SolarSystem_moonScale" data-min="1" data-max="20" data-step="0.1" data-numberformat="n2"/></p>
-              <p><label><input class="stelproperty" name="prop_SkyDrawer_flagPlanetMagnitudeLimit" type="checkbox"/><?= tr("Limit magnitude:")?></label><input class="spinner stelproperty" name="prop_SkyDrawer_customPlanetMagLimit" data-min="0" data-max="22" data-step="0.1" data-numberformat="n2"/></p>
+              <p><label><input class="stelproperty" name="SolarSystem.flagMoonScale" type="checkbox"/><?= tr("Scale Moon:")?></label><input class="spinner stelproperty" name="SolarSystem.moonScale" data-min="1" data-max="20" data-step="0.1" data-numberformat="n2"/></p>
+              <p><label><input class="stelproperty" name="StelSkyDrawer.flagPlanetMagnitudeLimit" type="checkbox"/><?= tr("Limit magnitude:")?></label><input class="spinner stelproperty" name="StelSkyDrawer.customPlanetMagLimit" data-min="0" data-max="22" data-step="0.1" data-numberformat="n2"/></p>
             </div>
-            <label><input class="stelproperty" name="prop_LandscapeMgr_flagLandscapeAutoSelection" type="checkbox"/><?= tr("Auto select landscapes")?></label>
+            <label><input class="stelproperty" name="LandscapeMgr.flagLandscapeAutoSelection" type="checkbox"/><?= tr("Auto select landscapes")?></label>
             <div class="flex flex-baseline">
-              <label><input type="checkbox" class="stelaction" name="actionShow_Planets_Labels"/><?= tr("Labels and Markers")?></label><div class="slider stelproperty flex-expand" data-prop="prop_SolarSystem_labelsAmount" data-min="0" data-max="10" data-step="0.1"></div>
+              <label><input type="checkbox" class="stelaction" name="actionShow_Planets_Labels"/><?= tr("Labels and Markers")?></label><div class="slider stelproperty flex-expand" data-prop="SolarSystem.labelsAmount" data-min="0" data-max="10" data-step="0.1"></div>
             </div>
           </div>
           <div class="smallblock">
             <h3><label><input type="checkbox" class="stelaction valign-middle" name="actionShow_Atmosphere"/><?= tr("Atmosphere")?></label></h3>
             <label><input type="checkbox" class="stelaction" name="actionShow_LightPollution_Database" /><?= tr("Light pollution data from locations database")?></label>
             <div class="table">
-              <p><label for="atmosphere_bortlescaleindex"><?= tr("Light pollution:")?></label><input id="atmosphere_bortlescaleindex" class="spinner stelproperty" name="prop_SkyDrawer_bortleScaleIndex" data-min="1" data-max="9" data-step="1" data-numberformat="n0"/></p>
+              <p><label for="atmosphere_bortlescaleindex"><?= tr("Light pollution:")?></label><input id="atmosphere_bortlescaleindex" class="spinner stelproperty" name="StelSkyDrawer.bortleScaleIndex" data-min="1" data-max="9" data-step="1" data-numberformat="n0"/></p>
             </div>
             <div id="vo_refraction" class="innerblock">
               <h3><?= tr("Refraction Settings")?></h3>
               <div class="table">
-                <p><label for="atmosphere_pressure"><?= tr("Pressure (mbar):")?></label><input id="atmosphere_pressure" class="spinner stelproperty" name="prop_SkyDrawer_atmospherePressure" data-min="0" data-max="1500" data-step="1" data-numberformat="n2"/></p>
-                <p><label for="atmosphere_temperature"><?= tr("Temperature (C):")?></label><input id="atmosphere_temperature" class="spinner stelproperty" name="prop_SkyDrawer_atmosphereTemperature" data-min="-100" data-max="100" data-step="1" data-numberformat="n1"/></p>
-                <p><label for="atmosphere_extinction"><?= tr("Extinction Coefficient:")?></label><input id="atmosphere_extinction" class="spinner stelproperty" name="prop_SkyDrawer_extinctionCoefficient" data-min="0" data-max="3" data-step="0.01" data-numberformat="n2"/></p>
+                <p><label for="atmosphere_pressure"><?= tr("Pressure (mbar):")?></label><input id="atmosphere_pressure" class="spinner stelproperty" name="StelSkyDrawer.atmospherePressure" data-min="0" data-max="1500" data-step="1" data-numberformat="n2"/></p>
+                <p><label for="atmosphere_temperature"><?= tr("Temperature (C):")?></label><input id="atmosphere_temperature" class="spinner stelproperty" name="StelSkyDrawer.atmosphereTemperature" data-min="-100" data-max="100" data-step="1" data-numberformat="n1"/></p>
+                <p><label for="atmosphere_extinction"><?= tr("Extinction Coefficient:")?></label><input id="atmosphere_extinction" class="spinner stelproperty" name="StelSkyDrawer.extinctionCoefficient" data-min="0" data-max="3" data-step="0.01" data-numberformat="n2"/></p>
               </div>
             </div>
             <div class="innerblock flex flex-baseline">
               <h3><?= tr("Shooting Stars")?></h3>
               <label><?= tr("ZHR:")?></label>
-              <div class="slider stelproperty flex-expand" data-prop="prop_SporadicMeteorMgr_zhr" data-min="0" data-max="240000" data-step="1"></div>
-              <span class="stelproperty" style="margin-left: 5px; min-width: 48px;" data-prop="prop_SporadicMeteorMgr_zhr"></span>
+              <div class="slider stelproperty flex-expand" data-prop="SporadicMeteorMgr.zhr" data-min="0" data-max="240000" data-step="1"></div>
+              <span class="stelproperty" style="margin-left: 5px; min-width: 48px;" data-prop="SporadicMeteorMgr.zhr"></span>
             </div>
           </div>
           <div class="smallblock flex">
@@ -346,14 +346,14 @@
           <div id="vo_dsolabels" class="smallblock blocklabel">
             <h3><label><input class="stelaction" type="checkbox" name="actionShow_Nebulas" /><?= tr("Labels and markers")?></label></h3>
             <div class="flex flex-baseline">
-              <label><?= tr("Labels")?></label><div class="slider stelproperty flex-expand" data-prop="prop_NebulaMgr_labelsAmount" data-min="0" data-max="10" data-step="0.1"></div>
+              <label><?= tr("Labels")?></label><div class="slider stelproperty flex-expand" data-prop="NebulaMgr.labelsAmount" data-min="0" data-max="10" data-step="0.1"></div>
             </div>
             <div class="flex flex-baseline">
-              <label><?= tr("Hints")?></label><div class="slider stelproperty flex-expand" data-prop="prop_NebulaMgr_hintsAmount" data-min="0" data-max="10" data-step="0.1"></div>
+              <label><?= tr("Hints")?></label><div class="slider stelproperty flex-expand" data-prop="NebulaMgr.hintsAmount" data-min="0" data-max="10" data-step="0.1"></div>
             </div>
-            <label><input class="stelproperty" name="prop_NebulaMgr_hintsProportional" type="checkbox"/><?= tr("Use proportional hints")?></label>
-            <label><input class="stelproperty" name="prop_NebulaMgr_flagSurfaceBrightnessUsage" type="checkbox"/><?= tr("Use surface brightness")?></label>
-            <p><label><input class="stelproperty" name="prop_SkyDrawer_flagNebulaMagnitudeLimit" type="checkbox"/><?= tr("Limit magnitude:")?></label><input class="spinner stelproperty" name="prop_SkyDrawer_customNebulaMagLimit" data-min="3" data-max="21" data-step="0.25" data-numberformat="n2"/></p>
+            <label><input class="stelproperty" name="NebulaMgr.hintsProportional" type="checkbox"/><?= tr("Use proportional hints")?></label>
+            <label><input class="stelproperty" name="NebulaMgr.flagSurfaceBrightnessUsage" type="checkbox"/><?= tr("Use surface brightness")?></label>
+            <p><label><input class="stelproperty" name="StelSkyDrawer.flagNebulaMagnitudeLimit" type="checkbox"/><?= tr("Limit magnitude:")?></label><input class="spinner stelproperty" name="StelSkyDrawer.customNebulaMagLimit" data-min="3" data-max="21" data-step="0.25" data-numberformat="n2"/></p>
           </div>
         </div>
       </div>
@@ -363,22 +363,22 @@
           <h3><?= tr("Options")?></h3>
           <div class="inline-block blocklabel">
             <label><input type="checkbox" class="stelaction" name="actionShow_Ground" /><?= tr("Show ground")?></label>
-            <label><input type="checkbox" class="stelproperty" name="prop_LandscapeMgr_flagLandscapeSetsLocation"/><?= tr("Use associated planet and position")?></label>
+            <label><input type="checkbox" class="stelproperty" name="LandscapeMgr.flagLandscapeSetsLocation"/><?= tr("Use associated planet and position")?></label>
             <label><input type="checkbox" class="stelaction" name="actionShow_Fog" /><?= tr("Show fog")?></label>
             <div class="flex flex-baseline">
-              <label><input type="checkbox" class="stelproperty" name="prop_LandscapeMgr_flagLandscapeUseMinimalBrightness"/><?= tr("Minimal brightness:")?></label>
-              <input id="landscape_defaultMinimalBrightness" class="flex-expand spinner stelproperty" name="prop_LandscapeMgr_defaultMinimalBrightness" data-min="0" data-max="1" data-step="0.01" data-numberformat="n2"/>
+              <label><input type="checkbox" class="stelproperty" name="LandscapeMgr.flagLandscapeUseMinimalBrightness"/><?= tr("Minimal brightness:")?></label>
+              <input id="landscape_defaultMinimalBrightness" class="flex-expand spinner stelproperty" name="LandscapeMgr.defaultMinimalBrightness" data-min="0" data-max="1" data-step="0.01" data-numberformat="n2"/>
             </div>
           </div>
           <div class="inline-block blocklabel">
             <label><input type="checkbox" class="stelaction" name="actionShow_LandscapeLabels" /><?= tr("Show landscape labels")?></label>
             <label><input type="checkbox" class="stelaction" name="actionShow_LandscapeIllumination" /><?= tr("Show illumination")?></label>
-            <label><input id="landscape_flagLandscapeSetsMinimalBrightness" type="checkbox" class="stelproperty" name="prop_LandscapeMgr_flagLandscapeSetsMinimalBrightness"/><?= tr("from landscape, if given")?></label>
+            <label><input id="landscape_flagLandscapeSetsMinimalBrightness" type="checkbox" class="stelproperty" name="LandscapeMgr.flagLandscapeSetsMinimalBrightness"/><?= tr("from landscape, if given")?></label>
           </div>
         </div>
         <div class="smallblock flex landscapeblock">
           <h3><?= tr("Current landscape")?></h3>
-          <select id="vo_landscapelist" class="scrollselect stelproperty" name="prop_LandscapeMgr_currentLandscapeID" size="5">
+          <select id="vo_landscapelist" class="scrollselect stelproperty" name="LandscapeMgr.currentLandscapeID" size="5">
           </select>
           <iframe id="vo_landscapeinfo" class="flex-expand" src="/api/view/landscapedescription/"></iframe>
         </div>
@@ -391,7 +391,7 @@
             <label><input type="checkbox" class="stelaction" name="actionShow_Constellation_Labels" /><?= tr("Show labels")?></label>
             <div class="flex flex-baseline">
               <label><input type="checkbox" class="stelaction" name="actionShow_Constellation_Lines" /><?= tr("Show lines with thickness")?></label>
-              <input class="flex-expand spinner stelproperty" name="prop_ConstellationMgr_constellationLineThickness" data-min="1" data-max="5" data-step="1" data-numberformat="n0"/>
+              <input class="flex-expand spinner stelproperty" name="ConstellationMgr.constellationLineThickness" data-min="1" data-max="5" data-step="1" data-numberformat="n0"/>
             </div>
           </div>
           <div class="inline-block blocklabel">
@@ -399,13 +399,13 @@
             <label><input type="checkbox" class="stelaction" name="actionShow_Skyculture_Nativenames" /><?= tr("Use native names for planets")?></label>
             <div class="flex flex-baseline">
               <label><input type="checkbox" class="stelaction" name="actionShow_Constellation_Art" /><?= tr("Show art in brightness")?></label>
-              <input class="flex-expand spinner stelproperty" name="prop_ConstellationMgr_artIntensity" data-min="0" data-max="1" data-step="0.05" data-numberformat="n2"/>
+              <input class="flex-expand spinner stelproperty" name="ConstellationMgr.artIntensity" data-min="0" data-max="1" data-step="0.05" data-numberformat="n2"/>
             </div>
           </div>
         </div>
         <div class="smallblock flex landscapeblock">
           <h3><?= tr("Current sky culture")?></h3>
-          <select id="vo_skyculturelist" class="scrollselect stelproperty" name="prop_SkyCultureMgr_currentSkyCultureID" size="5">
+          <select id="vo_skyculturelist" class="scrollselect stelproperty" name="StelSkyCultureMgr.currentSkyCultureID" size="5">
           </select>
           <iframe id="vo_skycultureinfo" class="flex-expand" src="/api/view/skyculturedescription/"></iframe>
         </div>
@@ -464,7 +464,7 @@
       <div id="tab_projection">
         <div class="smallblock flex landscapeblock">
           <h3><?= tr("Projection")?></h3>
-          <select id="vo_projectionlist" class="scrollselect stelproperty" name="prop_Core_currentProjectionTypeKey" size="5">
+          <select id="vo_projectionlist" class="scrollselect stelproperty" name="StelCore.currentProjectionTypeKey" size="5">
           </select>
           <iframe id="vo_projectioninfo" class="flex-expand" src="/api/view/projectiondescription"></iframe>
         </div>

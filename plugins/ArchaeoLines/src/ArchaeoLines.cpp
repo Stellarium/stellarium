@@ -220,8 +220,6 @@ void ArchaeoLines::init()
 	addAction("actionAL_showSelectedObjectLine",   section, N_("Show Line for Selected Object"),    "flagShowSelectedObject"  ); // No Shortcuts configured.
 	addAction("actionAL_showCurrentSunLine",       section, N_("Show Line for Current Sun"),        "flagShowCurrentSun"      ); // No Shortcuts configured.
 	addAction("actionAL_showCurrentMoonLine",      section, N_("Show Line for Current Moon"),       "flagShowCurrentMoon"     ); // No Shortcuts configured.
-
-	registerProperty("prop_ArchaeoLines_enumShowCurrentPlanet", "enumShowCurrentPlanet");
 }
 
 void ArchaeoLines::update(double deltaTime)

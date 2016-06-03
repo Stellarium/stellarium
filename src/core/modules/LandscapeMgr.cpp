@@ -419,13 +419,6 @@ void LandscapeMgr::init()
 	addAction("actionShow_LandscapeIllumination", displayGroup, N_("Illumination"), "illuminationDisplayed", "Shift+G");
 	addAction("actionShow_LandscapeLabels", displayGroup, N_("Labels"), "labelsDisplayed", "Ctrl+Shift+G");
 	addAction("actionShow_LightPollution_Database", displayGroup, N_("Light pollution data from locations database"), "databaseUsage");
-	registerProperty("prop_LandscapeMgr_flagLandscapeAutoSelection", "flagLandscapeAutoSelection");
-	registerProperty("prop_LandscapeMgr_flagAtmosphereAutoEnabling", "flagAtmosphereAutoEnabling");
-	registerProperty("prop_LandscapeMgr_flagLandscapeSetsLocation", "flagLandscapeSetsLocation");
-	registerProperty("prop_LandscapeMgr_flagLandscapeUseMinimalBrightness", "flagLandscapeUseMinimalBrightness");
-	registerProperty("prop_LandscapeMgr_flagLandscapeSetsMinimalBrightness", "flagLandscapeSetsMinimalBrightness");
-	registerProperty("prop_LandscapeMgr_defaultMinimalBrightness", "defaultMinimalBrightness");
-	registerProperty("prop_LandscapeMgr_currentLandscapeID","currentLandscapeID");
 }
 
 bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeLocationDuration)

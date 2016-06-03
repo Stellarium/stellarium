@@ -298,11 +298,11 @@ void ConfigurationDialog::createDialogContent()
 	//LandscapeMgr *lmgr = GETSTELMODULE(LandscapeMgr);
 	//ui->autoEnableAtmosphereCheckBox->setChecked(lmgr->getFlagAtmosphereAutoEnable());
 	//connect(ui->autoEnableAtmosphereCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagAtmosphereAutoEnable(bool)));
-	connectBoolProperty(ui->autoEnableAtmosphereCheckBox,"prop_LandscapeMgr_flagAtmosphereAutoEnabling");
+	connectBoolProperty(ui->autoEnableAtmosphereCheckBox,"LandscapeMgr.flagAtmosphereAutoEnabling");
 
 	//ui->autoChangeLandscapesCheckBox->setChecked(lmgr->getFlagLandscapeAutoSelection());
 	//connect(ui->autoChangeLandscapesCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeAutoSelection(bool)));
-	connectBoolProperty(ui->autoChangeLandscapesCheckBox,"prop_LandscapeMgr_flagLandscapeAutoSelection");
+	connectBoolProperty(ui->autoChangeLandscapesCheckBox,"LandscapeMgr.flagLandscapeAutoSelection");
 
 
 	// script tab controls
