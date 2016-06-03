@@ -29,7 +29,7 @@ QString StelProjectorPerspective::getNameI18() const
 
 QString StelProjectorPerspective::getDescriptionI18() const
 {
-	return q_("Perspective projection keeps the horizon a straight line. The mathematical name for this projection method is <i>gnomonic projection</i>.");
+	return q_("Perspective projection maps the horizon and other great circles like equator, ecliptic, hour lines, etc. into straight lines. The mathematical name for this projection method is <i>gnomonic projection</i>.");
 }
 
 bool StelProjectorPerspective::forward(Vec3f &v) const
@@ -88,7 +88,7 @@ QString StelProjectorEqualArea::getNameI18() const
 
 QString StelProjectorEqualArea::getDescriptionI18() const
 {
-	return q_("The full name of this projection method is, <i>Lambert azimuthal equal-area projection</i>. It preserves the area but not the angle.");
+	return q_("The full name of this projection method is <i>Lambert azimuthal equal-area projection</i>. It preserves the area but not the angle.");
 }
 
 bool StelProjectorEqualArea::forward(Vec3f &v) const
@@ -145,7 +145,7 @@ QString StelProjectorStereographic::getNameI18() const
 
 QString StelProjectorStereographic::getDescriptionI18() const
 {
-	return q_("Stereographic projection is known since the antiquity and was originally known as the planisphere projection. It preserves the angles at which curves cross each other but it does not preserve area.");
+	return q_("Stereographic projection is known since antiquity and was originally known as the planisphere projection. It preserves the angles at which curves cross each other but it does not preserve area.");
 }
 
 bool StelProjectorStereographic::forward(Vec3f &v) const
