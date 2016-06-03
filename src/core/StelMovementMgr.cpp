@@ -168,9 +168,6 @@ void StelMovementMgr::init()
 	viewportOffsetTimeline->setFrameRange(0, 100);
 	connect(viewportOffsetTimeline, SIGNAL(valueChanged(qreal)), this, SLOT(handleViewportOffsetMovement(qreal)));
 	targetViewportOffset.set(core->getViewportHorizontalOffset(), core->getViewportVerticalOffset());
-
-	registerProperty("prop_MovementMgr_viewportHorizontalOffsetTarget","viewportHorizontalOffsetTarget");
-	registerProperty("prop_MovementMgr_viewportVerticalOffsetTarget","viewportVerticalOffsetTarget");
 }
 
 void StelMovementMgr::setMountMode(MountMode m)

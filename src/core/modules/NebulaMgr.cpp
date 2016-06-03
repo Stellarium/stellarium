@@ -363,12 +363,6 @@ void NebulaMgr::init()
 
 	addAction("actionShow_Nebulas", N_("Display Options"), N_("Deep-sky objects"), "flagHintDisplayed", "D", "N");
 	addAction("actionSet_Nebula_TypeFilterUsage", N_("Display Options"), N_("Toggle DSO type filter"), "flagTypeFiltersUsage");
-	registerProperty("prop_NebulaMgr_typeFilters","typeFilters");
-	registerProperty("prop_NebulaMgr_catalogFilters", "catalogFilters");
-	registerProperty("prop_NebulaMgr_hintsProportional", "hintsProportional");
-	registerProperty("prop_NebulaMgr_flagSurfaceBrightnessUsage", "flagSurfaceBrightnessUsage");
-	registerProperty("prop_NebulaMgr_labelsAmount", "labelsAmount");
-	registerProperty("prop_NebulaMgr_hintsAmount", "hintsAmount");
 }
 
 struct DrawNebulaFuncObject

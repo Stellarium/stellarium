@@ -130,9 +130,6 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 	engine.setAgent(agent);
 
 	initActions();
-
-	StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
-	propMgr->registerProperty("prop_ScriptMgr_runningScriptId", this, "runningScriptId");
 }
 
 void StelScriptMgr::initActions()

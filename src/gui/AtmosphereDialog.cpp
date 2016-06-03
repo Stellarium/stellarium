@@ -52,7 +52,7 @@ void AtmosphereDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
-	connectDoubleProperty(ui->pressureDoubleSpinBox,"prop_SkyDrawer_atmospherePressure");
-	connectDoubleProperty(ui->temperatureDoubleSpinBox,"prop_SkyDrawer_atmosphereTemperature");
-	connectDoubleProperty(ui->extinctionDoubleSpinBox,"prop_SkyDrawer_extinctionCoefficient");
+	connectDoubleProperty(ui->pressureDoubleSpinBox,"StelSkyDrawer.atmospherePressure");
+	connectDoubleProperty(ui->temperatureDoubleSpinBox,"StelSkyDrawer.atmosphereTemperature");
+	connectDoubleProperty(ui->extinctionDoubleSpinBox,"StelSkyDrawer.extinctionCoefficient");
 }

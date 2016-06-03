@@ -578,9 +578,11 @@ QJsonObject MainService::getPropertyChangesSinceID(int changeId)
 			//this is either the initial state (-2) or
 			//something is "broken", probably from an existing web interface that reconnected after restart
 			//force a full reload
-			foreach(StelProperty* p, propMgr->getAllProperties())
+			const StelPropertyMgr::StelPropertyMap& map = propMgr->getPropertyMap();
+			for(StelPropertyMgr::StelPropertyMap::const_iterator it = map.constBegin();
+			    it!=map.constEnd();++it)
 			{
-				changes.insert(p->getId(), QJsonValue::fromVariant(p->getValue()));
+				changes.insert(it.key(), QJsonValue::fromVariant((*it)->getValue()));
 			}
 			newId = -1;
 		}
@@ -591,9 +593,11 @@ QJsonObject MainService::getPropertyChangesSinceID(int changeId)
 		{
 			//this is either the initial state (-2) or
 			//"broken" state again, force full reload
-			foreach(StelProperty* p, propMgr->getAllProperties())
+			const StelPropertyMgr::StelPropertyMap& map = propMgr->getPropertyMap();
+			for(StelPropertyMgr::StelPropertyMap::const_iterator it = map.constBegin();
+			    it!=map.constEnd();++it)
 			{
-				changes.insert(p->getId(), QJsonValue::fromVariant(p->getValue()));
+				changes.insert(it.key(), QJsonValue::fromVariant((*it)->getValue()));
 			}
 			newId = propCache.lastIndex();
 		}

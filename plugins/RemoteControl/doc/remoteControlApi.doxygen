@@ -256,7 +256,7 @@ Returns the current script status as a JSON object of format:
     runningScriptId		//the currently running script ID
 }
 @endcode
-@note The StelScriptMgr also provides a StelProperty \c prop_ScriptMgr_runningScriptId that
+@note The StelScriptMgr also provides a StelProperty \c StelScriptMgr.runningScriptId that
 can be used to find out the active script.
 
 \subsubsection rcScriptServicePOST POST operations

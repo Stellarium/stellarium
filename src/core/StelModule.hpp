@@ -53,7 +53,7 @@ class StelModule : public QObject
 	// This make this class compiled by the Qt moc compiler and for some unknown reasons makes it impossible to dynamically
 	// load plugins on windows.
 public:
-	StelModule() {;}
+	StelModule();
 
 	virtual ~StelModule() {;}
 
@@ -161,15 +161,6 @@ protected:
 	                            const char* slot,
 	                            const QString& shortcut="", const QString& altShortcut="") {
 		return addAction(id, groupId, text, this, slot, shortcut, altShortcut);
-	}
-
-	//! convenience method to register a property with the StelPropertyMgr
-	class StelProperty* registerProperty(const QString& id,QObject* target, const char* prop);
-
-	//! convenience method to register a property with the StelPropertyMgr
-	class StelProperty* registerProperty(const QString& id,const char* prop)
-	{
-		return registerProperty(id,this,prop);
 	}
 };
 

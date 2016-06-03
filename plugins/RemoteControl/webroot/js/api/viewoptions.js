@@ -5,23 +5,23 @@ define(["jquery", "./remotecontrol", "./flags", "./properties"], function($, rc,
     var catalogFlags;
     var typeFlags;
 
-    $(propApi).on("stelPropertyChanged:prop_NebulaMgr_catalogFilters", function(evt, data) {
+    $(propApi).on("stelPropertyChanged:NebulaMgr.catalogFilters", function(evt, data) {
         if (catalogFlags)
             catalogFlags.setValue(data.value);
     });
 
-    $(propApi).on("stelPropertyChanged:prop_NebulaMgr_typeFilters", function(evt, data) {
+    $(propApi).on("stelPropertyChanged:NebulaMgr.typeFilters", function(evt, data) {
         if (typeFlags)
             typeFlags.setValue(data.value);
     });
 
 
     function setDSOCatalog(flags) {
-        propApi.setStelProp("prop_NebulaMgr_catalogFilters", flags);
+        propApi.setStelProp("NebulaMgr.catalogFilters", flags);
     }
 
     function setDSOType(flags) {
-        propApi.setStelProp("prop_NebulaMgr_typeFilters", flags);
+        propApi.setStelProp("NebulaMgr.typeFilters", flags);
     }
 
     //Public stuff
@@ -68,12 +68,12 @@ define(["jquery", "./remotecontrol", "./flags", "./properties"], function($, rc,
 
         registerCatalogFlags: function(elem) {
             catalogFlags = new Flags(elem, setDSOCatalog);
-            catalogFlags.setValue(propApi.getStelProp("prop_NebulaMgr_catalogFilters"));
+            catalogFlags.setValue(propApi.getStelProp("NebulaMgr.catalogFilters"));
         },
 
         registerTypeFlags: function(elem) {
             typeFlags = new Flags(elem, setDSOType);
-            typeFlags.setValue(propApi.getStelProp("prop_NebulaMgr_typeFilters"));
+            typeFlags.setValue(propApi.getStelProp("NebulaMgr.typeFilters"));
         },
 
         setDSOCatalog: setDSOCatalog,
