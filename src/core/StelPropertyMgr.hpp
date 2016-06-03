@@ -101,7 +101,7 @@ signals:
 //! - StelProperty always requires a Q_PROPERTY while StelAction can also work directly with
 //!   argumentless or boolean slots (i.e. func(), func(bool))
 //! - StelAction actually registers and uses a StelProperty internally, if possible. This is the case when
-//!   connected to a bool Q_PROPERTY with a NOTIFY signal. The created StelProperty has the same ID as the StelAction.
+//!   connected to a bool Q_PROPERTY instead of a slot. The created StelProperty has the same ID as the StelAction.
 //! - StelProperty uses the NOTIFY handler to find out when the value changes, even if the change originated outside
 //!   in non-StelProperty code by calling the WRITE slot directly.
 //!   StelAction (if not using a StelProperty, as explained in the previous point) has to track boolean states on its own,
@@ -217,17 +217,17 @@ public slots:
 
 	//! Sets the value of the property. This can only be used if
 	//! isReadOnly is false, meaning a WRITE function is defined on the Q_PROPERTY.
-    //! Data type conversion is performed, if necessary, using the internal logic of
-    //! QVariant. This basically means that QVariant::canConvert() from the given value
-    //! to the actual data type of the Q_PROPERTY must be true for the operation to succeed.
+	//! Data type conversion is performed, if necessary, using the internal logic of
+	//! QVariant. This basically means that QVariant::canConvert() from the given value
+	//! to the actual data type of the Q_PROPERTY must be true for the operation to succeed.
 	//! @return true if the new value was successfully set
 	bool setValue(const QVariant& value) const;
 
 	//! If false, setValue can be used.
 	bool isReadOnly() const;
 
-    //! If true, the Q_PROPERTY has a NOTIFY signal and the changed() signal can be used
-    bool canNotify() const;
+	//! If true, the Q_PROPERTY has a NOTIFY signal and the changed() signal can be used
+	bool canNotify() const;
 
 	//! Returns the data type of the StelProperty
 	QMetaType::Type getType() const;

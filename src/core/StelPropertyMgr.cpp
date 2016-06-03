@@ -31,7 +31,7 @@ bool StelProperty::isReadOnly() const
 
 bool StelProperty::canNotify() const
 {
-    return prop.hasNotifySignal();
+	return prop.hasNotifySignal();
 }
 
 QMetaType::Type StelProperty::getType() const
@@ -86,12 +86,12 @@ StelProperty* StelPropertyMgr::registerProperty(const QString &id, QObject *targ
 	if(!value.isValid())
 		qFatal("StelProperty %s can not be read. Missing READ or need to register MetaType?",id.toUtf8().constData());
 
-	#ifndef NDEBUG
-    QString debugStr=(stelProp->isReadOnly()?"readonly":"readwrite");
-    if(stelProp->canNotify())
-        debugStr.append(" notify");
-    qDebug()<<"StelProperty"<<id<<"registered, properties:"<<debugStr<<", value:"<<value;
-	#endif
+#ifndef NDEBUG
+	QString debugStr=(stelProp->isReadOnly()?"readonly":"readwrite");
+	if(stelProp->canNotify())
+		debugStr.append(" notify");
+	qDebug()<<"StelProperty"<<id<<"registered, properties:"<<debugStr<<", value:"<<value;
+#endif
 
 	propMap.insert(id,stelProp);
 	return stelProp;
@@ -113,9 +113,9 @@ StelProperty* StelPropertyMgr::getProperty(const QString &id) const
 void StelPropertyMgr::onStelPropChanged(const QVariant &val)
 {
 	StelProperty* prop = qobject_cast<StelProperty*>(sender());
-	#ifndef NDEBUG
+#ifndef NDEBUG
 	qDebug()<<"StelProperty"<<prop->getId()<<"changed, value"<<val;
-	#endif
+#endif
 	emit stelPropChanged(prop->getId(),val);
 }
 
