@@ -98,26 +98,26 @@ define(["jquery", "api/viewoptions", "api/actions", "api/properties", "jquery-ui
 		$("#atmosphere_bortlescaleindex").spinner("option", "disabled", data.isChecked);
 	});
 
-	$(propApi).on("stelPropertyChanged:prop_LandscapeMgr_flagLandscapeUseMinimalBrightness", function(evt, data) {
+	$(propApi).on("stelPropertyChanged:LandscapeMgr.flagLandscapeUseMinimalBrightness", function(evt, data) {
 		$("#landscape_defaultMinimalBrightness").spinner("option", "disabled", !data.value);
 		$("#landscape_flagLandscapeSetsMinimalBrightness").prop("disabled", !data.value);
 	});
 
-	$(propApi).on("stelPropertyChanged:prop_LandscapeMgr_currentLandscapeID", function(evt,data){
+	$(propApi).on("stelPropertyChanged:LandscapeMgr.currentLandscapeID", function(evt,data){
 		//reload iframe
 		$("#vo_landscapeinfo").attr("src", function(i, val) {
 			return val;
 		});
 	});
 
-	$(propApi).on("stelPropertyChanged:prop_SkyCultureMgr_currentSkyCultureID", function(evt,data){
+	$(propApi).on("stelPropertyChanged:StelSkyCultureMgr.currentSkyCultureID", function(evt,data){
 		//this forces a reload of the iframe
 		$("#vo_skycultureinfo").attr('src', function(i, val) {
 			return val;
 		});
 	});
 
-	$(propApi).on("stelPropertyChanged:prop_Core_currentProjectionType", function(evt,data){
+	$(propApi).on("stelPropertyChanged:StelCore.currentProjectionType", function(evt,data){
 		//this forces a reload of the iframe
 		$("#vo_projectioninfo").attr('src', function(i, val) {
 			return val;

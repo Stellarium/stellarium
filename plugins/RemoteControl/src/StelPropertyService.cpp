@@ -41,17 +41,24 @@ void StelPropertyService::getImpl(const QByteArray& operation, const APIParamete
 	if(operation=="list")
 	{
 		QJsonObject rootObj;
-		foreach(StelProperty* prop, propMgr->getAllProperties())
+
+		const StelPropertyMgr::StelPropertyMap& map = propMgr->getPropertyMap();
+		for(StelPropertyMgr::StelPropertyMap::const_iterator it = map.constBegin();
+		    it!=map.constEnd();++it)
 		{
 			QJsonObject item;
+			const StelProperty* prop = *it;
 			QVariant val = prop->getValue();
+			QMetaProperty metaProp = prop->getMetaProp();
 			item.insert("value", QJsonValue::fromVariant(val));
 			//The actual data type the variant was converted to, may be different than typeString (for example enums/flags, or user types)
 			item.insert("variantType", val.typeName());
-			item.insert("typeString", prop->getMetaProp().typeName());
-			item.insert("typeEnum", static_cast<qint64>(prop->getType()));
+			item.insert("typeString", metaProp.typeName());
+			item.insert("typeEnum", static_cast<qint64>(metaProp.type()));
+			item.insert("canNotify", metaProp.hasNotifySignal());
+			item.insert("isWritable", metaProp.isWritable());
 
-			rootObj.insert(prop->getId(),item);
+			rootObj.insert(it.key(),item);
 		}
 
 		response.writeJSON(QJsonDocument(rootObj));
@@ -72,16 +79,16 @@ void StelPropertyService::postImpl(const QByteArray &operation, const APIParamet
 		QString id = QString::fromUtf8(parameters.value("id"));
 		QString val = QString::fromUtf8(parameters.value("value"));
 
-		StelProperty* prop = propMgr->getProperty(id);
-		if(!prop)
+		QMetaProperty prop = propMgr->getMetaProperty(id);
+		if(!prop.isValid())
 		{
-			response.setData("error: invalid id parameter");
+			response.setData("error: unknown property");
 		}
 		else
 		{
 			QVariant newValue(val);
 			//make sure that enum types are always interpreted numerically
-			if(prop->getMetaProp().isEnumType())
+			if(prop.isEnumType())
 			{
 				bool ok;
 				uint uiVal = val.toUInt(&ok);
@@ -89,7 +96,7 @@ void StelPropertyService::postImpl(const QByteArray &operation, const APIParamet
 					newValue = uiVal;
 			}
 			//rely on automatic QVariant conversions otherwise if possible
-			if(prop->setValue(newValue))
+			if(propMgr->setStelPropertyValue(id,newValue))
 			{
 				response.setData("ok");
 			}

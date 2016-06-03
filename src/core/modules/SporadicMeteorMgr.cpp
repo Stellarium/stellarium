@@ -52,7 +52,6 @@ void SporadicMeteorMgr::init()
 				StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
 
 	setZHR(StelApp::getInstance().getSettings()->value("astro/meteor_rate", 10).toInt());
-	registerProperty("prop_SporadicMeteorMgr_zhr","zhr");
 }
 
 double SporadicMeteorMgr::getCallOrder(StelModuleActionName actionName) const

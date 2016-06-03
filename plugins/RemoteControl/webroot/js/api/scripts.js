@@ -10,7 +10,7 @@ define(["jquery", "./remotecontrol", "./properties"], function($, rc, propApi) {
         }
     }
 
-    $(propApi).on("stelPropertyChanged:prop_ScriptMgr_runningScriptId", function(evt, data) {
+    $(propApi).on("stelPropertyChanged:StelScriptMgr.runningScriptId", function(evt, data) {
         changeActiveScript(data.value);
     });
 

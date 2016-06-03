@@ -201,13 +201,6 @@ void SolarSystem::init()
 	addAction("actionShow_Planets_Hints", displayGroup, N_("Planet markers"), "hintsDisplayed", "Ctrl+Alt+P");
 	//addAction("actionShow_Planets_Markers", displayGroup, N_("Planet selection marker"), "markersDisplayed", "Ctrl+Shift+P");
 	addAction("actionShow_Skyculture_Nativenames", displayGroup, N_("Native planet names (from starlore)"), "nativeNamesDisplayed", "Ctrl+Shift+N");
-
-	registerProperty("prop_SolarSystem_flagIsolatedOrbits","flagIsolatedOrbits");
-	registerProperty("prop_SolarSystem_flagIsolatedTrails","flagIsolatedTrails");
-	registerProperty("prop_SolarSystem_flagLightTravelTime", "flagLightTravelTime");
-	registerProperty("prop_SolarSystem_flagMoonScale","flagMoonScale");
-	registerProperty("prop_SolarSystem_moonScale","moonScale");
-	registerProperty("prop_SolarSystem_labelsAmount","labelsAmount");
 }
 
 void SolarSystem::deinit()

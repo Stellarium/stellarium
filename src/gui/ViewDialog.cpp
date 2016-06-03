@@ -139,7 +139,7 @@ void ViewDialog::createDialogContent()
 	// TODO: New method: populateLightPollution may be useful. Make sure it is.
 	// Jupiter's GRS must become property, and recheck the other "from trunk" entries.
 
-	connectDoubleProperty(ui->viewportOffsetSpinBox, "prop_MovementMgr_viewportVerticalOffsetTarget");
+	connectDoubleProperty(ui->viewportOffsetSpinBox, "StelMovementMgr.viewportVerticalOffsetTarget");
 
 	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)),&StelApp::getInstance().getSkyCultureMgr(),SLOT(setCurrentSkyCultureNameI18(QString)));
 	connect(&StelApp::getInstance().getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(skyCultureChanged()));
@@ -158,45 +158,45 @@ void ViewDialog::createDialogContent()
 	connect(nmgr, SIGNAL(typeFiltersChanged(Nebula::TypeGroup)), this, SLOT(updateSelectedTypesCheckBoxes()));
 	connect(ui->buttonGroupDisplayedDSOTypes, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedTypesFromCheckBoxes()));
 	connectGroupBox(ui->groupBoxDSOTypeFilters,"actionSet_Nebula_TypeFilterUsage");
-	connectBoolProperty(ui->checkBoxProportionalHints, "prop_NebulaMgr_hintsProportional");
-	connectBoolProperty(ui->checkBoxSurfaceBrightnessUsage, "prop_NebulaMgr_flagSurfaceBrightnessUsage");
+	connectBoolProperty(ui->checkBoxProportionalHints, "NebulaMgr.hintsProportional");
+	connectBoolProperty(ui->checkBoxSurfaceBrightnessUsage, "NebulaMgr.flagSurfaceBrightnessUsage");
 
 	// From Trunk, but seems OK here. It was close to end before.
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 
 	// Stars section
 	connectGroupBox(ui->starGroupBox, "actionShow_Stars"); // NEW FROM TRUNK
-	connectBoolProperty(ui->starTwinkleCheckBox, "prop_SkyDrawer_flagTwinkle");
-	connectDoubleProperty(ui->starScaleRadiusDoubleSpinBox,"prop_SkyDrawer_absoluteStarScale");
-	connectDoubleProperty(ui->starRelativeScaleDoubleSpinBox, "prop_SkyDrawer_relativeStarScale");
-	connectDoubleProperty(ui->milkyWayBrightnessDoubleSpinBox, "prop_MilkyWay_intensity");
-	connectDoubleProperty(ui->zodiacalLightBrightnessDoubleSpinBox, "prop_ZodiacalLight_intensity");
-	connectDoubleProperty(ui->starTwinkleAmountDoubleSpinBox,"prop_SkyDrawer_twinkleAmount");
-	connectBoolProperty(ui->adaptationCheckbox,"prop_SkyDrawer_flagLuminanceAdaptation");
+	connectBoolProperty(ui->starTwinkleCheckBox, "StelSkyDrawer.flagTwinkle");
+	connectDoubleProperty(ui->starScaleRadiusDoubleSpinBox,"StelSkyDrawer.absoluteStarScale");
+	connectDoubleProperty(ui->starRelativeScaleDoubleSpinBox, "StelSkyDrawer.relativeStarScale");
+	connectDoubleProperty(ui->milkyWayBrightnessDoubleSpinBox, "MilkyWay.intensity");
+	connectDoubleProperty(ui->zodiacalLightBrightnessDoubleSpinBox, "ZodiacalLight.intensity");
+	connectDoubleProperty(ui->starTwinkleAmountDoubleSpinBox,"StelSkyDrawer.twinkleAmount");
+	connectBoolProperty(ui->adaptationCheckbox,"StelSkyDrawer.flagLuminanceAdaptation");
 
 	// Limit Magnitudes
 	// Stars
-	connectBoolProperty(ui->starLimitMagnitudeCheckBox,"prop_SkyDrawer_flagStarMagnitudeLimit");
-	connectDoubleProperty(ui->starLimitMagnitudeDoubleSpinBox, "prop_SkyDrawer_customStarMagLimit");
+	connectBoolProperty(ui->starLimitMagnitudeCheckBox,"StelSkyDrawer.flagStarMagnitudeLimit");
+	connectDoubleProperty(ui->starLimitMagnitudeDoubleSpinBox, "StelSkyDrawer.customStarMagLimit");
 	// Planets
-	connectBoolProperty(ui->planetLimitMagnitudeCheckBox,"prop_SkyDrawer_flagPlanetMagnitudeLimit");
-	connectDoubleProperty(ui->planetLimitMagnitudeDoubleSpinBox,"prop_SkyDrawer_customPlanetMagLimit");
+	connectBoolProperty(ui->planetLimitMagnitudeCheckBox,"StelSkyDrawer.flagPlanetMagnitudeLimit");
+	connectDoubleProperty(ui->planetLimitMagnitudeDoubleSpinBox,"StelSkyDrawer.customPlanetMagLimit");
 	// DSO
-	connectBoolProperty(ui->nebulaLimitMagnitudeCheckBox,"prop_SkyDrawer_flagNebulaMagnitudeLimit");
-	connectDoubleProperty(ui->nebulaLimitMagnitudeDoubleSpinBox,"prop_SkyDrawer_customNebulaMagLimit");
+	connectBoolProperty(ui->nebulaLimitMagnitudeCheckBox,"StelSkyDrawer.flagNebulaMagnitudeLimit");
+	connectDoubleProperty(ui->nebulaLimitMagnitudeDoubleSpinBox,"StelSkyDrawer.customNebulaMagLimit");
 
 	// Planets section
 	//connectCheckBox(ui->showPlanetCheckBox, "actionShow_Planets"); // ui element MAY HAVE BEEN RENAMED IN TRUNK?
 	connectGroupBox(ui->planetsGroupBox, "actionShow_Planets"); // THIS ONE FROM TRUNK
 	connectCheckBox(ui->planetMarkerCheckBox, "actionShow_Planets_Hints");
 
-	connectBoolProperty(ui->planetScaleMoonCheckBox, "prop_SolarSystem_flagMoonScale");
-	connectDoubleProperty(ui->moonScaleFactor,"prop_SolarSystem_moonScale");
+	connectBoolProperty(ui->planetScaleMoonCheckBox, "SolarSystem.flagMoonScale");
+	connectDoubleProperty(ui->moonScaleFactor,"SolarSystem.moonScale");
 
 	connectCheckBox(ui->planetOrbitCheckBox, "actionShow_Planets_Orbits");
-	connectBoolProperty(ui->planetIsolatedOrbitCheckBox, "prop_SolarSystem_flagIsolatedOrbits");
-	connectBoolProperty(ui->planetIsolatedTrailsCheckBox, "prop_SolarSystem_flagIsolatedTrails");
-	connectBoolProperty(ui->planetLightSpeedCheckBox, "prop_SolarSystem_flagLightTravelTime");
+	connectBoolProperty(ui->planetIsolatedOrbitCheckBox, "SolarSystem.flagIsolatedOrbits");
+	connectBoolProperty(ui->planetIsolatedTrailsCheckBox, "SolarSystem.flagIsolatedTrails");
+	connectBoolProperty(ui->planetLightSpeedCheckBox, "SolarSystem.flagLightTravelTime");
 
 	// NEW SECTION FROM TRUNK: GreatRedSpot (Jupiter)
 	// TODO: put under Properties system!
@@ -228,10 +228,10 @@ void ViewDialog::createDialogContent()
 	connectGroupBox(ui->groupBoxLabelsAndMarkers, "actionShow_Nebulas");
 	connectCheckBox(ui->planetLabelCheckBox, "actionShow_Planets_Labels");
 
-	connectDoubleProperty(ui->starsLabelsHorizontalSlider,"prop_StarMgr_labelsAmount",0.0,10.0);
-	connectDoubleProperty(ui->planetsLabelsHorizontalSlider, "prop_SolarSystem_labelsAmount",0.0,10.0);
-	connectDoubleProperty(ui->nebulasLabelsHorizontalSlider, "prop_NebulaMgr_labelsAmount",0.0,10.0);
-	connectDoubleProperty(ui->nebulasHintsHorizontalSlider, "prop_NebulaMgr_hintsAmount",0.0,10.0);
+	connectDoubleProperty(ui->starsLabelsHorizontalSlider,"StarMgr.labelsAmount",0.0,10.0);
+	connectDoubleProperty(ui->planetsLabelsHorizontalSlider, "SolarSystem.labelsAmount",0.0,10.0);
+	connectDoubleProperty(ui->nebulasLabelsHorizontalSlider, "NebulaMgr.labelsAmount",0.0,10.0);
+	connectDoubleProperty(ui->nebulasHintsHorizontalSlider, "NebulaMgr.hintsAmount",0.0,10.0);
 
 	// Landscape section
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
@@ -242,16 +242,16 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->landscapeIlluminationCheckBox, "actionShow_LandscapeIllumination");
 	connectCheckBox(ui->landscapeLabelsCheckBox, "actionShow_LandscapeLabels");
 
-	connectBoolProperty(ui->landscapePositionCheckBox, "prop_LandscapeMgr_flagLandscapeSetsLocation");
+	connectBoolProperty(ui->landscapePositionCheckBox, "LandscapeMgr.flagLandscapeSetsLocation");
 
-	connectBoolProperty(ui->landscapeBrightnessCheckBox,"prop_LandscapeMgr_flagLandscapeUseMinimalBrightness");
+	connectBoolProperty(ui->landscapeBrightnessCheckBox,"LandscapeMgr.flagLandscapeUseMinimalBrightness");
 	connect(lmgr,SIGNAL(flagLandscapeUseMinimalBrightnessChanged(bool)),ui->localLandscapeBrightnessCheckBox,SLOT(setEnabled(bool)));
 	connect(lmgr,SIGNAL(flagLandscapeUseMinimalBrightnessChanged(bool)),ui->landscapeBrightnessSpinBox,SLOT(setEnabled(bool)));
 	ui->localLandscapeBrightnessCheckBox->setEnabled(lmgr->getFlagLandscapeUseMinimalBrightness());
 	ui->landscapeBrightnessSpinBox->setEnabled(lmgr->getFlagLandscapeUseMinimalBrightness());
 
-	connectDoubleProperty(ui->landscapeBrightnessSpinBox,"prop_LandscapeMgr_defaultMinimalBrightness");
-	connectBoolProperty(ui->localLandscapeBrightnessCheckBox,"prop_LandscapeMgr_flagLandscapeSetsMinimalBrightness");
+	connectDoubleProperty(ui->landscapeBrightnessSpinBox,"LandscapeMgr.defaultMinimalBrightness");
+	connectBoolProperty(ui->localLandscapeBrightnessCheckBox,"LandscapeMgr.flagLandscapeSetsMinimalBrightness");
 
 	connect(ui->landscapesListWidget, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)), this, SLOT(changeLandscape(QListWidgetItem*)));
 	connect(lmgr, SIGNAL(currentLandscapeChanged(QString,QString)), this, SLOT(landscapeChanged(QString,QString)));
@@ -283,7 +283,7 @@ void ViewDialog::createDialogContent()
 	connect(drawer, SIGNAL(bortleScaleIndexChanged(int)), this, SLOT(setBortleScaleToolTip(int)));
 
 	// Note: This has vanished in the merge on 20160411. -- Ah, moved to ConfigurationDialog.
-	//connectBoolProperty(ui->autoChangeLandscapesCheckBox,"prop_LandscapeMgr_flagLandscapeAutoSelection");
+	//connectBoolProperty(ui->autoChangeLandscapesCheckBox,"LandscapeMgr.flagLandscapeAutoSelection");
 	
 	// atmosphere details
 	connect(ui->pushButtonAtmosphereDetails, SIGNAL(clicked()), this, SLOT(showAtmosphereDialog()));
@@ -314,8 +314,8 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showConstellationBoundariesCheckBox, "actionShow_Constellation_Boundaries");
 	connectCheckBox(ui->showConstellationArtCheckBox, "actionShow_Constellation_Art");
 
-	connectDoubleProperty(ui->constellationArtBrightnessSpinBox,"prop_ConstellationMgr_artIntensity");
-	connectDoubleProperty(ui->constellationLineThicknessSpinBox,"prop_ConstellationMgr_constellationLineThickness");
+	connectDoubleProperty(ui->constellationArtBrightnessSpinBox,"ConstellationMgr.artIntensity");
+	connectDoubleProperty(ui->constellationLineThicknessSpinBox,"ConstellationMgr.constellationLineThickness");
 
 	// Starlore
 	connect(ui->useAsDefaultSkyCultureCheckBox, SIGNAL(clicked()), this, SLOT(setCurrentCultureAsDefault()));
@@ -325,7 +325,7 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->nativeNameCheckBox,"actionShow_Skyculture_Nativenames");
 
 	// allow to display short names and inhibit translation.
-	connectIntProperty(ui->skyCultureNamesStyleComboBox,"prop_ConstellationMgr_constellationDisplayStyle");
+	connectIntProperty(ui->skyCultureNamesStyleComboBox,"ConstellationMgr.constellationDisplayStyle");
 
 	// Sky layers. This not yet finished and not visible in releases.
 	// TODO: These 4 lines are commented away in trunk.

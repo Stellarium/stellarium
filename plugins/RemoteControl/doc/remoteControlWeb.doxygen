@@ -176,10 +176,10 @@ standard Stellarium interface elements. This is supported for:
     The StelProperty to use is identified by the standard attribute \p name,
     and the value to set it to is defined by the attribute \p value.
 
-An example, setting up a spinner for the \c prop_MilkyWay_intensity StelProperty:
+An example, setting up a spinner for the \c MilkyWay.intensity StelProperty:
 \code{.html}
 <!-- this is all that is required, the rest is done automatically -->
-<input class="spinner stelproperty" name="prop_MilkyWay_intensity" data-min="0" data-max="10" data-step="0.1" data-numberformat="n2"/>
+<input class="spinner stelproperty" name="MilkyWay.intensity" data-min="0" data-max="10" data-step="0.1" data-numberformat="n2"/>
 \endcode
 
 Many more examples can be found by studying the `index.html` code.
@@ -275,7 +275,7 @@ An example, defining the plugin panel for the \ref archaeoLines :
     <label><input type="checkbox" class="stelaction" name="actionAL_showCurrentMoonLine"/><?= tr("Current Moon")?></label>
   </div>
   <label class="display-block" for="select_ArchaeoLines_enumShowCurrentPlanet"><?= tr("Current Planet:")?></label>
-  <select id="select_ArchaeoLines_enumShowCurrentPlanet" class="selectmenu stelproperty display-block" name="prop_ArchaeoLines_enumShowCurrentPlanet">
+  <select id="select_ArchaeoLines_enumShowCurrentPlanet" class="selectmenu stelproperty display-block" name="ArchaeoLines.enumShowCurrentPlanet">
     <option value="10"><?= tr("None")?></option>
     <option value="11"><?= tr("Mercury")?></option>
     <option value="12"><?= tr("Venus")?></option>

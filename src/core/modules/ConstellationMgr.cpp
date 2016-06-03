@@ -146,10 +146,6 @@ void ConstellationMgr::init()
 	addAction("actionShow_Constellation_Labels", displayGroup, N_("Constellation labels"), "namesDisplayed", "V");
 	addAction("actionShow_Constellation_Boundaries", displayGroup, N_("Constellation boundaries"), "boundariesDisplayed", "B");
 	addAction("actionShow_Constellation_Isolated", displayGroup, N_("Constellation selection isolated"), "isolateSelected"); // no shortcut
-
-	registerProperty("prop_ConstellationMgr_constellationDisplayStyle","constellationDisplayStyle");
-	registerProperty("prop_ConstellationMgr_constellationLineThickness","constellationLineThickness");
-	registerProperty("prop_ConstellationMgr_artIntensity","artIntensity");
 }
 
 /*************************************************************************
