@@ -33,7 +33,7 @@ IF(${XGETTEXT_FOUND})
 			--keyword=tr
 			--language=PHP
 			--add-comments=TRANSLATORS:
-			--directory=${PROJECT_SOURCE_DIR}/data/webroot
+			--directory=${PROJECT_SOURCE_DIR}/plugins/RemoteControl/webroot
 			--copyright-holder=Stellarium's\ team
 			--package-name=stellarium-remotecontrol
 			--from-code=utf-8

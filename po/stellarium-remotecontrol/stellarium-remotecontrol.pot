@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Stellarium's team
-# This file is distributed under the same license as the stellarium-remotecontrol package.
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-18 23:57+0100\n"
+"POT-Creation-Date: 2016-06-04 20:06+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,108 +17,115 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/webroot/js/api/actions.js:60
+#: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
 msgstr ""
 
-#: data/webroot/js/api/actions.js:88
+#: plugins/RemoteControl/webroot/js/api/actions.js:88
 msgid "Action '%1' not accepted by server: "
 msgstr ""
 
-#: data/webroot/js/api/actions.js:95
+#: plugins/RemoteControl/webroot/js/api/actions.js:95
 msgid "Error sending action '%1' to server: "
 msgstr ""
 
-#: data/webroot/js/api/location.js:33 data/webroot/js/api/location.js:61
-#: data/webroot/js/api/search.js:157
+#: plugins/RemoteControl/webroot/js/api/location.js:33
+#: plugins/RemoteControl/webroot/js/api/location.js:61
+#: plugins/RemoteControl/webroot/js/api/search.js:157
 msgid "Error performing search"
 msgstr ""
 
-#: data/webroot/js/api/location.js:125
+#: plugins/RemoteControl/webroot/js/api/location.js:125
 msgid "Could not retrieve country list"
 msgstr ""
 
-#: data/webroot/js/api/location.js:138
+#: plugins/RemoteControl/webroot/js/api/location.js:138
 msgid "Could not retrieve planet list"
 msgstr ""
 
-#: data/webroot/js/api/properties.js:28
+#: plugins/RemoteControl/webroot/js/api/properties.js:28
 msgid "Could not retrieve property list"
 msgstr ""
 
-#: data/webroot/js/api/properties.js:89 data/webroot/js/api/properties.js:110
+#: plugins/RemoteControl/webroot/js/api/properties.js:89
+#: plugins/RemoteControl/webroot/js/api/properties.js:110
 msgid "Property '%1' not accepted by server: "
 msgstr ""
 
-#: data/webroot/js/api/properties.js:96
+#: plugins/RemoteControl/webroot/js/api/properties.js:96
 msgid "Error sending property '%1' to server: "
 msgstr ""
 
-#: data/webroot/js/api/remotecontrol.js:193
+#: plugins/RemoteControl/webroot/js/api/remotecontrol.js:193
 msgid "Error sending command to server: "
 msgstr ""
 
-#: data/webroot/js/api/scripts.js:34
+#: plugins/RemoteControl/webroot/js/api/scripts.js:27
 msgid "Could not retrieve script list"
 msgstr ""
 
-#: data/webroot/js/api/search.js:32
+#: plugins/RemoteControl/webroot/js/api/search.js:32
 msgid "querying"
 msgstr ""
 
-#: data/webroot/js/api/search.js:41
+#: plugins/RemoteControl/webroot/js/api/search.js:41
 msgid "Error (%1)"
 msgstr ""
 
-#: data/webroot/js/api/search.js:53
+#: plugins/RemoteControl/webroot/js/api/search.js:53
 msgid "Error performing Simbad lookup"
 msgstr ""
 
-#: data/webroot/js/api/search.js:71 index.html:146 tablet7in.html:230
+#: plugins/RemoteControl/webroot/js/api/search.js:71 index.html:146
+#: tablet7in.html:230
 msgid "idle"
 msgstr ""
 
-#: data/webroot/js/api/search.js:90
+#: plugins/RemoteControl/webroot/js/api/search.js:90
 msgid "Error loading object types"
 msgstr ""
 
-#: data/webroot/js/api/search.js:115
+#: plugins/RemoteControl/webroot/js/api/search.js:115
 msgid "Error getting object list"
 msgstr ""
 
-#: data/webroot/js/api/search.js:167
+#: plugins/RemoteControl/webroot/js/api/search.js:167
 msgid "waiting"
 msgstr ""
 
-#: data/webroot/js/api/viewoptions.js:60
+#: plugins/RemoteControl/webroot/js/api/viewoptions.js:38
 msgid "Could not retrieve projection list"
 msgstr ""
 
-#: data/webroot/js/api/viewoptions.js:73 data/webroot/js/api/viewoptions.js:86
+#: plugins/RemoteControl/webroot/js/api/viewoptions.js:51
+#: plugins/RemoteControl/webroot/js/api/viewoptions.js:64
 msgid "Could not retrieve landscape list"
 msgstr ""
 
-#: data/webroot/js/ui/actions.js:44 data/webroot/js/ui/actions.js:77
+#: plugins/RemoteControl/webroot/js/ui/actions.js:44
+#: plugins/RemoteControl/webroot/js/ui/actions.js:77
 msgid "on"
 msgstr ""
 
-#: data/webroot/js/ui/actions.js:44 data/webroot/js/ui/actions.js:77
+#: plugins/RemoteControl/webroot/js/ui/actions.js:44
+#: plugins/RemoteControl/webroot/js/ui/actions.js:77
 msgid "off"
 msgstr ""
 
-#: data/webroot/js/ui/combobox.js:58
+#: plugins/RemoteControl/webroot/js/ui/combobox.js:58
 msgid "Show All Items"
 msgstr ""
 
-#: data/webroot/js/ui/combobox.js:124
+#: plugins/RemoteControl/webroot/js/ui/combobox.js:124
 msgid "Input did not match any item"
 msgstr ""
 
-#: data/webroot/js/ui/mainui.js:313
+#: plugins/RemoteControl/webroot/js/ui/mainui.js:317
 msgid "No current selection"
 msgstr ""
 
-#: data/webroot/js/ui/scripts.js:71 index.html:420 tablet7in.html:606
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:420
+#: tablet7in.html:606
 msgid "-none-"
 msgstr ""
 
@@ -294,6 +301,14 @@ msgstr ""
 msgid "Current selection"
 msgstr ""
 
+#: index.html:205 tablet7in.html:325
+msgid "Planets and satellites"
+msgstr ""
+
+#: index.html:206 tablet7in.html:326
+msgid "Show Solar System objects"
+msgstr ""
+
 #: index.html:237 tablet7in.html:362
 msgid "ZHR:"
 msgstr ""
@@ -386,31 +401,31 @@ msgstr ""
 msgid "Stop current script"
 msgstr ""
 
-#: index.html:424 tablet7in.html:41 tablet7in.html:591
+#: index.html:426 tablet7in.html:41 tablet7in.html:591
 msgid "Actions"
 msgstr ""
 
-#: index.html:428 tablet7in.html:595
+#: index.html:430 tablet7in.html:595
 msgid "Run/toggle action"
 msgstr ""
 
-#: index.html:439 tablet7in.html:629
+#: index.html:441 tablet7in.html:634
 msgid "Planet map"
 msgstr ""
 
-#: index.html:440 tablet7in.html:630
+#: index.html:442 tablet7in.html:635
 msgid "Planet map pointer"
 msgstr ""
 
-#: index.html:444 tablet7in.html:634
+#: index.html:446 tablet7in.html:639
 msgid "Type to search location"
 msgstr ""
 
-#: index.html:489 tablet7in.html:680
+#: index.html:491 tablet7in.html:685
 msgid "No response from server"
 msgstr ""
 
-#: index.html:490
+#: index.html:492
 msgid "No response from server since %1 seconds. Is Stellarium still running?"
 msgstr ""
 
@@ -548,34 +563,38 @@ msgstr ""
 msgid "Current Planet:"
 msgstr ""
 
-#: tablet7in.html:612
+#: tablet7in.html:614
 msgid "Favorites"
 msgstr ""
 
-#: tablet7in.html:614
+#: tablet7in.html:616
 msgid "MAMUZ Mammoth"
 msgstr ""
 
-#: tablet7in.html:614
+#: tablet7in.html:616
 msgid "Run the Mammoth"
 msgstr ""
 
-#: tablet7in.html:615
+#: tablet7in.html:617
 msgid "MAMUZ Show 1"
 msgstr ""
 
-#: tablet7in.html:616
-msgid "MAMUZ Show 2"
+#: tablet7in.html:618 tablet7in.html:620
+msgid "MAMUZ Summer Sunrise"
 msgstr ""
 
-#: tablet7in.html:617
+#: tablet7in.html:619 tablet7in.html:621
+msgid "MAMUZ Winter Sunset"
+msgstr ""
+
+#: tablet7in.html:622
 msgid "Remove Labels and Images"
 msgstr ""
 
-#: tablet7in.html:617
+#: tablet7in.html:622
 msgid "Cleanup Screen"
 msgstr ""
 
-#: tablet7in.html:681
+#: tablet7in.html:686
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
