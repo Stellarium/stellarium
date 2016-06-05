@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-04 00:36+0700\n"
-"PO-Revision-Date: 2016-05-22 09:29+0000\n"
+"PO-Revision-Date: 2016-06-04 07:36+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-04 05:24+0000\n"
+"X-Launchpad-Export-Date: 2016-06-05 05:14+0000\n"
 "X-Generator: Launchpad (build 18086)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -3171,11 +3171,11 @@ msgstr "Koreai"
 
 #: src/translations.h:184
 msgid "Dakota/Lakota/Nakota"
-msgstr ""
+msgstr "Dakota/Lakota/Nakota"
 
 #: src/translations.h:185
 msgid "Macedonian"
-msgstr ""
+msgstr "Macedón"
 
 #: src/translations.h:186
 msgid "Maori"
@@ -5183,7 +5183,7 @@ msgstr "Fénysebesség szimulálása"
 
 #: src/ui_viewDialog.h:1632
 msgid "Use custom settings of GRS:"
-msgstr ""
+msgstr "GRS egyéni beállításai:"
 
 #: src/ui_viewDialog.h:1633
 msgid "GRS details..."
@@ -8080,7 +8080,7 @@ msgstr "Távcsővezérlő bővítmény"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:255
 msgid "Plug-in and GUI programming"
-msgstr ""
+msgstr "Bővítmény és GUI programozás"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
 msgid ""
@@ -8151,7 +8151,7 @@ msgstr "Képességek és korlátok"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:282
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
 msgid "The original telescope control feature"
-msgstr ""
+msgstr "Az eredeti távcsővezérlési funkció"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
@@ -8392,6 +8392,9 @@ msgid ""
 "The number (<b>#</b>) column shows the number used to control this "
 "telescope. For example, for telescope #2, the shortcut is Ctrl+2."
 msgstr ""
+"Az oszlopnál lévő számjegy (<b>#</b>) jelzi a távcső számát, amit a "
+"vezérléshez lehet használni. Például a #2 a kettes távcsövet jelenti, aminek "
+"vezérlése Ctrl+2."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:327
 msgid ""
@@ -8550,7 +8553,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:368
 #, qt-format
 msgid "Both fields here refer to communication over a network (%1TCP/IP%2)."
-msgstr ""
+msgstr "Mindkét mező a hálózaton való kommunikációhoz tartozik (%1TCP/IP%2)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:369
 #, qt-format
@@ -8558,6 +8561,7 @@ msgid ""
 "Doing something with them is necessary only for INDIRECT connections  (see "
 "%1above%2)."
 msgstr ""
+"Módosításuk csak az INDIREKT kapcsolódásnál szükséges  (lásd %1fentebb%2)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:370
 #, qt-format
@@ -10070,7 +10074,7 @@ msgstr "A mutatóeszköz koordinátáit mutató szöveg helyzete"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:208
 msgid "Current set:"
-msgstr ""
+msgstr "Kiválasztott készlet"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:209
 msgid "Note:"
