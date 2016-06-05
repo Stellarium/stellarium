@@ -47,8 +47,8 @@
 #include <QOpenGLContext>
 #include <QOpenGLShader>
 
-Vec3f Planet::labelColor = Vec3f(0.4,0.4,0.8);
-Vec3f Planet::orbitColor = Vec3f(1,0.6,1);
+Vec3f Planet::labelColor = Vec3f(0.4f,0.4f,0.8f);
+Vec3f Planet::orbitColor = Vec3f(1.0f,0.6f,1.0f);
 StelTextureSP Planet::hintCircleTex;
 StelTextureSP Planet::texEarthShadow;
 
