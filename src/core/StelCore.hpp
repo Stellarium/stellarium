@@ -74,7 +74,7 @@ public:
 	};
 
 	//! @enum ProjectionType
-	//! Available projection types. A value of 1000 indicate the default projection
+	//! Available projection types. A value of 1000 indicates the default projection
 	enum ProjectionType
 	{
 		ProjectionPerspective,              //!< Perspective projection
@@ -85,7 +85,8 @@ public:
 		ProjectionCylinder,                 //!< Cylinder projection
 		ProjectionMercator,                 //!< Mercator projection
 		ProjectionOrthographic,             //!< Orthographic projection
-		ProjectionSinusoidal                //!< Sinusoidal projection
+		ProjectionSinusoidal,               //!< Sinusoidal projection
+		ProjectionMiller                    //!< Miller cylindrical projection
 	};
 
 	//! @enum RefractionMode

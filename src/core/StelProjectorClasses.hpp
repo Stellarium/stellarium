@@ -232,6 +232,16 @@ public:
 	bool backward(Vec3d &v) const;
 };
 
+class StelProjectorMiller : public StelProjectorMercator
+{
+public:
+	StelProjectorMiller(ModelViewTranformP func) : StelProjectorMercator(func) {;}
+	virtual QString getNameI18() const;
+	virtual QString getDescriptionI18() const;
+	virtual float getMaxFov() const {return 175.f * 4.f/3.f;} // or 180?
+	bool forward(Vec3f &win) const;
+	bool backward(Vec3d &v) const;
+};
 
 class StelProjector2d : public StelProjector
 {
