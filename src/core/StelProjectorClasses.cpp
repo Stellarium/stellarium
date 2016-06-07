@@ -377,7 +377,7 @@ bool StelProjectorMercator::forward(Vec3f &v) const
 
 bool StelProjectorMercator::backward(Vec3d &v) const
 {
-	const bool rval = v[1]<M_PI_2 && v[1]>-M_PI_2 && v[0]>-M_PI && v[0]<M_PI;
+	const bool rval = v[0]>-M_PI && v[0]<M_PI;
 	const double E = std::exp(v[1]);
 	const double h = E*E;
 	const double h1 = 1.0/(1.0+h);
@@ -494,6 +494,41 @@ bool StelProjectorSinusoidal::backward(Vec3d &v) const
 	v[2] = -cd * std::cos(pcd);
 	v[0] = cd * std::sin(pcd);
 	v[1] = std::sin(v[1]);
+	return rval;
+}
+
+QString StelProjectorMiller::getNameI18() const
+{
+	return q_("Miller cylindrical");
+}
+
+QString StelProjectorMiller::getDescriptionI18() const
+{
+	return q_("The Miller cylindrical projection is a modified Mercator projection, proposed by Osborn Maitland Miller (1897–1979) in 1942. The poles are no longer mapped to infinity.");
+}
+
+bool StelProjectorMiller::forward(Vec3f &v) const
+{
+	const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+	const bool rval = (-r < v[1] && v[1] < r);
+	const float sin_delta = v[1]/r;
+	const float delta=asin(sin_delta);
+	v[0] = std::atan2(v[0],-v[2]);
+	v[1] = 1.25f*asinh(tan(0.8f*delta));
+	v[2] = r;
+	return rval;
+}
+
+bool StelProjectorMiller::backward(Vec3d &v) const
+{
+	const double yMax=1.25f*asinh(tan(M_PI*2.0/5.0));
+	const bool rval = v[1]<yMax && v[1]>-yMax && v[0]>-M_PI && v[0]<M_PI;
+	const double lat = 1.25*atan(sinh(0.8*v[1]));
+	const double lng = v[0];
+	const double cos_lat=cos(lat);
+	v[0] = cos_lat*sin(lng);
+	v[1] = sin(lat);
+	v[2]= -cos_lat*cos(lng);
 	return rval;
 }
 
