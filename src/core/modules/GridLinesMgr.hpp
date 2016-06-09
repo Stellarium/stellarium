@@ -189,6 +189,15 @@ class GridLinesMgr : public StelModule
 			   WRITE setColorColureLines
 			   NOTIFY colureLinesColorChanged)
 
+	Q_PROPERTY(bool circumpolarCirclesDisplayed
+			   READ getFlagCircumpolarCircles
+			   WRITE setFlagCircumpolarCircles
+			   NOTIFY circumpolarCirclesDisplayedChanged)
+	Q_PROPERTY(Vec3f circumpolarCirclesColor
+			   READ getColorCircumpolarCircles
+			   WRITE setColorCircumpolarCircles
+			   NOTIFY circumpolarCirclesColorChanged)
+
 public:
 	GridLinesMgr();
 	virtual ~GridLinesMgr();
@@ -464,6 +473,21 @@ public slots:
 	//! @endcode
 	void setColorColureLines(const Vec3f& newColor);
 
+	//! Setter for displaying circumpolar circles.
+	void setFlagCircumpolarCircles(const bool displayed);
+	//! Accessor for displaying circumpolar circles.
+	bool getFlagCircumpolarCircles(void) const;
+	//! Get the current color of the circumpolar circles.
+	Vec3f getColorCircumpolarCircles(void) const;
+	//! Set the color of the circumpolar circles.
+	//! @param newColor The color of circumpolar circles
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorCircumpolarCircles(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorCircumpolarCircles(const Vec3f& newColor);
+
+
 signals:
 	void azimuthalGridDisplayedChanged(const bool) const;
 	void azimuthalGridColorChanged(const Vec3f & newColor) const;
@@ -499,7 +523,8 @@ signals:
 	void primeVerticalLineColorChanged(const Vec3f & newColor) const;
 	void colureLinesDisplayedChanged(const bool displayed) const;
 	void colureLinesColorChanged(const Vec3f & newColor) const;
-
+	void circumpolarCirclesDisplayedChanged(const bool displayed) const;
+	void circumpolarCirclesColorChanged(const Vec3f & newColor) const;
 
 private slots:
 	//! Re-translate the labels of the great circles.
@@ -526,6 +551,8 @@ private:
 	SkyLine * primeVerticalLine;	// Prime Vertical line
 	SkyLine * colureLine_1;		// First Colure line (0/12h)
 	SkyLine * colureLine_2;		// Second Colure line (6/18h)
+	SkyLine * circumpolarCircleN;	// Northern circumpolar circle
+	SkyLine * circumpolarCircleS;	// Southern circumpolar circle
 };
 
 #endif // _GRIDLINESMGR_HPP_

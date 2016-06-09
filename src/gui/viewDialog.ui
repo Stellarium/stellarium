@@ -1760,6 +1760,16 @@
                   </widget>
                  </item>
                  <item>
+                  <widget class="QCheckBox" name="showCircumpolarCirclesCheckBox">
+                   <property name="toolTip">
+                    <string>These circles delimit stars which stay always above (respectively below) the mathematical horizon.</string>
+                   </property>
+                   <property name="text">
+                    <string>Circumpolar circles</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
                   <widget class="QCheckBox" name="showPrecessionCirclesCheckBox">
                    <property name="toolTip">
                     <string>Instantaneous circles of earth's axis on its motion around ecliptical poles. Displayed on Earth only.</string>
@@ -2642,12 +2652,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>

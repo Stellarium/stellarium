@@ -291,6 +291,7 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showPrecessionCirclesCheckBox, "actionShow_Precession_Circles");
 	connectCheckBox(ui->showPrimeVerticalLineCheckBox, "actionShow_Prime_Vertical_Line");
 	connectCheckBox(ui->showColuresLineCheckBox, "actionShow_Colure_Lines");
+	connectCheckBox(ui->showCircumpolarCirclesCheckBox, "actionShow_Circumpolar_Circles");
 
 	// Projection section
 	connect(ui->projectionListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(projectionChanged(const QString&)));
