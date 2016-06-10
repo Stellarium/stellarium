@@ -51,7 +51,7 @@ StelPluginInfo NavStarsStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Navigational Stars");
 	info.authors = "Alexander Wolf";
 	info.contact = "http://stellarium.org/";	
-	info.description = N_("This plugin marks navigational stars from selected set.");
+	info.description = N_("This plugin marks navigational stars from a selected set.");
 	info.version = NAVSTARS_PLUGIN_VERSION;
 	return info;
 }
@@ -313,13 +313,13 @@ QString NavStars::getCurrentNavigationalStarsSetDescription() const
 		case French:
 		{
 			// TRANSLATORS: The emphasis tags mark a book title.
-			txt = q_("The 81 stars that are listed in <em>%1</em> published by French Bureau des Longitudes.").arg("Ephémérides Nautiques");
+			txt = q_("The 81 stars that are listed in the <em>%1</em> published by the French Bureau des Longitudes.").arg("Ephémérides Nautiques");
 			break;
 		}
 		case Russian:
 		{
 			// TRANSLATORS: The emphasis tags mark a book title.
-			txt = q_("The 160 stars that are listed in the Russian Nautical Almanac (Original Russian title is <em>%1</em>).").arg("Морской астрономический ежегодник");
+			txt = q_("The 160 stars that are listed in the Russian Nautical Almanac (The original Russian title is <em>%1</em>).").arg("Морской астрономический ежегодник");
 			break;
 		}
 	}
