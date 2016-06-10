@@ -91,7 +91,7 @@ void NavStarsWindow::setAboutHtml(void)
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
 	html += "</table>";
 
-	html += "<p>" + q_("This plugin marks navigational stars from selected set.");
+	html += "<p>" + q_("This plugin marks navigational stars from a selected set.");
 	html += "<p>";
 
 	html += "<h3>" + q_("Links") + "</h3>";
