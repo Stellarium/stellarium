@@ -361,40 +361,52 @@ The Markings tab of the View window controls the following features:
 \begin{description}
 \item[Celestial sphere] this group of options makes it possible to
   plot various grids and lines in the main view.
-\item[Constellations] these controls let you turn on and off
-  constellation lines, names, art and boundaries, and control the
-  brightness of the constellation artwork.
 \item[Projection] Selecting items in this list changes the
-  projection method which Stellarium uses to draw the sky. Options are:
+  projection method which Stellarium uses to draw the sky~\cite{Snyder:MapProjections}. Options are:
 
   \begin{description}
-  \item[cylinder] The full name of this projection mode is
-    \emph{cylindrical equidistant projection}. The maximum field of view
-    in this mode is 233\degree.
-  \item[equal area] The full name of this projection method is,
-    \emph{Lambert azimuthal equal-area projection}. The maximum field of
-    view is 360\degree.
-  \item[fish-eye] Stellarium draws the sky using \emph{azimuthal
+  \item[Perspective] Perspective projection maps the horizon and other
+    great circles like equator, ecliptic, hour lines, etc. into
+    straight lines. The maximum field of view is 150\degree. The
+    mathematical name for this projection method is \emph{gnomonic
+      projection}.
+  \item[Stereographic] Stereographic projection has been known since
+    antiquity and was originally known as the planisphere
+    projection. It preserves the angles at which curves cross each
+    other but it does not preserve area. Else it is similar to
+    fish-eye projection mode. The maximum field of view in this mode
+    is 235\degree.
+  \item[Fish-Eye] Stellarium draws the sky using \emph{azimuthal
     equidistant projection}. In fish-eye projection, straight lines
     become curves when they appear a large angular distance from the
     centre of the field of view (like the distortions seen with very
     wide angle camera lenses). This is more pronounced as the user zooms
     out. The maximum field of view in this mode is 180\degree.
+  \item[Orthographic] Orthographic projection is related to
+    perspective projection, but the \emph{point of perspective} is set
+    to an infinite distance. The maximum field of view is 180\degree.
+  \item[Equal Area] The full name of this projection method is
+    \emph{Lambert azimuthal equal-area projection}. It preserves the
+    area but not the angle. The maximum field of view is 360\degree.
   \item[Hammer-Aitoff] The Hammer projection is an equal-area map
     projection, described by Ernst Hammer in 1892 and directly inspired
     by the Aitoff projection. The maximum field of view in this mode is
     360\degree.
-  \item[mercator] Mercator projection preserves the angles between
-    objects, and the scale around an object the same in all directions.
-    The maximum field of view in this mode is 233\degree.
-  \item[orthographic] Orthographic projection is related to
-    perspective projection, but the \emph{point of perspective} is set
-    to an infinite distance. The maximum field of view is 180\degree.
-  \item[perspective] Perspective projection keeps the horizon a
-    straight line. The maximum field of view is 150\degree. The mathematical
-    name for this projection method is \emph{gnomonic projection}.
-  \item[stereographic] This mode is similar to fish-eye projection
-    mode. The maximum field of view in this mode is 235\degree.
+  \item[Sinusoidal] The sinusoidal projection is a
+    \emph{pseudocylindrical equal-area map projection}, sometimes
+    called the Sanson--Flamsteed or the Mercator equal-area
+    projection. Meridians are mapped to sine curves.
+  \item[Mercator] Mercator projection is a cylindrical projection
+    which preserves the angles between objects, and the scale around
+    an object is the same in all directions. The poles are mapped to
+    infinity.  The maximum field of view in this mode is 233\degree.
+  \item[Miller Cylindrical] The Miller cylindrical projection is a
+    modified Mercator projection, proposed by Osborn Maitland Miller
+    (1897--1979) in 1942. The poles are no longer mapped to
+    infinity.
+  \item[Cylinder] The full name of this simple projection mode is
+    \emph{cylindrical equidistant projection} or \emph{Plate
+      Carr\'ee}. The maximum field of view in this mode is 233\degree.
   \end{description}
 \end{description}
 

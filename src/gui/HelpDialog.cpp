@@ -270,7 +270,8 @@ void HelpDialog::updateText(void)
 		     << "Simon Parzer" << "Peter Neubauer" << "Andrei Borza" << "Florian Schaukowitsch"
 		     << "Allan Johnson" << "Felix Zeltner" << "Paolo Cancedda" << "Ross Mitchell"
 		     << "David Baucum" << "Maciej Serylak" << "Adriano Steffler" << "Sibi Antony"
-		     << "Tony Furr" << "misibacsi" << "Pavel Klimenko" << "Rumen G. Bogdanovski";
+		     << "Tony Furr" << "misibacsi" << "Pavel Klimenko" << "Rumen G. Bogdanovski"
+		     << "Colin Gaudion";
 	contributors.sort();
 
 	// populate About tab
@@ -304,6 +305,7 @@ void HelpDialog::updateText(void)
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Marcos Cardinot")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Ferdinand Majerech")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Jörg Müller")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Florian Schaukowitsch")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Continuous Integration: %1").arg(QString("Hans Lambermont")).toHtmlEscaped() + "</li>";	
 	newHtml += "<li>" + q_("Tester: %1").arg(QString("Khalid AlAjaji")).toHtmlEscaped() + "</li></ul>";
 	newHtml += "<h3>" + q_("Former Developers").toHtmlEscaped() + "</h3>";
