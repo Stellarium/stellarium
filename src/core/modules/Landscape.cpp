@@ -130,7 +130,9 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 		createPolygonalHorizon(
 					StelFileMgr::findFile("landscapes/" + landscapeId + "/" + landscapeIni.value("landscape/polygonal_horizon_list").toString()),
 					landscapeIni.value("landscape/polygonal_angle_rotatez", 0.f).toFloat(),
-					landscapeIni.value("landscape/polygonal_horizon_list_mode", "azDeg_altDeg").toString());
+					landscapeIni.value("landscape/polygonal_horizon_list_mode", "azDeg_altDeg").toString(),
+					landscapeIni.value("landscape/polygonal_horizon_inverted", "false").toBool()
+					);
 		// This line can then be drawn in all classes with the color specified here. If not specified, don't draw it! (flagged by negative red)
 		horizonPolygonLineColor=StelUtils::strToVec3f(landscapeIni.value("landscape/horizon_line_color", "-1,0,0" ).toString());
 	}
@@ -141,7 +143,7 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	loadLabels(landscapeId);
 }
 
-void Landscape::createPolygonalHorizon(const QString& lineFileName, const float polyAngleRotateZ, const QString &listMode )
+void Landscape::createPolygonalHorizon(const QString& lineFileName, const float polyAngleRotateZ, const QString &listMode , const bool polygonInverted)
 {
 	// qDebug() << _name << " " << _fullpath << " " << _lineFileName ;
 
@@ -211,7 +213,10 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 		}
 
 		StelUtils::spheToRect(az, alt, point);
-		horiPoints.append(point);
+		if (polygonInverted)
+			horiPoints.prepend(point);
+		else
+			horiPoints.append(point);
 	}
 	file.close();
 	//horiPoints.append(horiPoints.at(0)); // close loop? Apparently not necessary.
@@ -223,6 +228,12 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 	SphericalPolygon aboveHorizonPolygon;
 	aboveHorizonPolygon.setContour(horiPoints);
 	horizonPolygon = allskyRegion.getSubtraction(aboveHorizonPolygon);
+	if (polygonInverted)
+	{
+		AllSkySphericalRegion allskyRegion2;
+		horizonPolygon = allskyRegion2.getSubtraction(horizonPolygon);
+		//horizonPolygon=&aboveHorizonPolygon;
+	}
 }
 
 #include <iostream>

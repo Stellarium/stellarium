@@ -47,8 +47,8 @@
 #include <QOpenGLContext>
 #include <QOpenGLShader>
 
-Vec3f Planet::labelColor = Vec3f(0.4,0.4,0.8);
-Vec3f Planet::orbitColor = Vec3f(1,0.6,1);
+Vec3f Planet::labelColor = Vec3f(0.4f,0.4f,0.8f);
+Vec3f Planet::orbitColor = Vec3f(1.0f,0.6f,1.0f);
 StelTextureSP Planet::hintCircleTex;
 StelTextureSP Planet::texEarthShadow;
 
@@ -208,6 +208,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	double az_app, alt_app;
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	double distanceAu = getJ2000EquatorialPos(core).length();
 	Q_UNUSED(az_app);
 
 	if (flags&Name)
@@ -228,13 +229,13 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	if (flags&Magnitude && getVMagnitude(core)!=std::numeric_limits<float>::infinity())
 	{
 		if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
-			oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
+			oss << q_("Magnitude: <b>%1</b> (after extinction: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
 											QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
 		else
 			oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
 	}
 	if (flags&AbsoluteMagnitude && getVMagnitude(core)!=std::numeric_limits<float>::infinity())
-		oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core)-5.*(std::log10(getJ2000EquatorialPos(core).length()*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
+		oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core)-5.*(std::log10(distanceAu*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
 
 	oss << getPositionInfoString(core, flags);
 
@@ -247,7 +248,26 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Distance)
 	{
-		double distanceAu = getJ2000EquatorialPos(core).length();
+		double hdistanceAu = getHeliocentricEclipticPos().length();
+		double hdistanceKm = AU * hdistanceAu;
+		if (englishName!="Sun")
+		{
+			if (hdistanceAu < 0.1)
+			{
+				// xgettext:no-c-format
+				oss << QString(q_("Distance from Sun: %1AU (%2 km)"))
+				       .arg(hdistanceAu, 0, 'f', 6)
+				       .arg(hdistanceKm, 0, 'f', 3);
+			}
+			else
+			{
+				// xgettext:no-c-format
+				oss << QString(q_("Distance from Sun: %1AU (%2 Mio km)"))
+				       .arg(hdistanceAu, 0, 'f', 3)
+				       .arg(hdistanceKm / 1.0e6, 0, 'f', 3);
+			}
+			oss << "<br>";
+		}
 		double distanceKm = AU * distanceAu;
 		if (distanceAu < 0.1)
 		{
@@ -1534,9 +1554,10 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 	}
 
 	bool allowDrawHalo = true;
-	if (this!=ssm->getSun())
+	if ((this!=ssm->getSun()) && ((this !=ssm->getMoon() && core->getCurrentLocation().planetName=="Earth" )))
 	{
-		// Let's hide halo when inner planet between Sun and observer (or moon between planet and observer)
+		// Let's hide halo when inner planet between Sun and observer (or moon between planet and observer).
+		// Do not hide Earth's moon's halo below ~-45degrees when observing from earth.
 		Vec3d obj = getJ2000EquatorialPos(core);
 		Vec3d par = getParent()->getJ2000EquatorialPos(core);
 		double angle = obj.angle(par)*180.f/M_PI;

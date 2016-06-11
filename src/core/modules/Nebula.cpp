@@ -48,38 +48,38 @@ StelTextureSP Nebula::texOpenClusterWithNebulosity;
 float Nebula::circleScale = 1.f;
 bool  Nebula::drawHintProportional = false;
 bool  Nebula::surfaceBrightnessUsage = false;
-float Nebula::hintsBrightness = 0;
-Vec3f Nebula::labelColor = Vec3f(0.4,0.3,0.5);
-Vec3f Nebula::circleColor = Vec3f(0.8,0.8,0.1);
-Vec3f Nebula::galaxyColor = Vec3f(1.0,0.2,0.2);
-Vec3f Nebula::radioGalaxyColor = Vec3f(0.3,0.3,0.3);
-Vec3f Nebula::activeGalaxyColor = Vec3f(0.8,0.8,0.1);
-Vec3f Nebula::interactingGalaxyColor = Vec3f(0.8,0.8,0.1);
-Vec3f Nebula::quasarColor = Vec3f(1.0,0.2,0.2);
-Vec3f Nebula::nebulaColor = Vec3f(0.1,1.0,0.1);
-Vec3f Nebula::planetaryNebulaColor = Vec3f(0.1,1.0,0.1);
-Vec3f Nebula::reflectionNebulaColor = Vec3f(0.1,1.0,0.1);
-Vec3f Nebula::bipolarNebulaColor = Vec3f(0.1,1.0,0.1);
-Vec3f Nebula::emissionNebulaColor = Vec3f(0.1,1.0,0.1);
-Vec3f Nebula::darkNebulaColor = Vec3f(0.3,0.3,0.3);
-Vec3f Nebula::hydrogenRegionColor = Vec3f(0.1,1.0,0.1);
-Vec3f Nebula::supernovaRemnantColor = Vec3f(0.1,1.0,0.1);
-Vec3f Nebula::interstellarMatterColor = Vec3f(0.1,1.0,0.1);
-Vec3f Nebula::clusterWithNebulosityColor = Vec3f(0.1,1.0,0.1);
-Vec3f Nebula::clusterColor = Vec3f(1.0,1.0,0.1);
-Vec3f Nebula::openClusterColor = Vec3f(1.0,1.0,0.1);
-Vec3f Nebula::globularClusterColor = Vec3f(1.0,1.0,0.1);
-Vec3f Nebula::stellarAssociationColor = Vec3f(1.0,1.0,0.1);
-Vec3f Nebula::starCloudColor = Vec3f(1.0,1.0,0.1);
-Vec3f Nebula::emissionObjectColor = Vec3f(1.0,1.0,0.1);
-Vec3f Nebula::blLacObjectColor = Vec3f(1.0,1.0,0.1);
-Vec3f Nebula::blazarColor = Vec3f(1.0,1.0,0.1);
-Vec3f Nebula::molecularCloudColor = Vec3f(1.0,1.0,0.1);
-Vec3f Nebula::youngStellarObjectColor = Vec3f(1.0,1.0,0.1);
-Vec3f Nebula::possibleQuasarColor = Vec3f(1.0,0.2,0.2);
-Vec3f Nebula::possiblePlanetaryNebulaColor = Vec3f(1.0,1.0,0.1);
-Vec3f Nebula::protoplanetaryNebulaColor = Vec3f(1.0,1.0,0.1);
-Vec3f Nebula::starColor = Vec3f(1.0,1.0,0.1);
+float Nebula::hintsBrightness = 0.f;
+Vec3f Nebula::labelColor = Vec3f(0.4f,0.3f,0.5f);
+Vec3f Nebula::circleColor = Vec3f(0.8f,0.8f,0.1f);
+Vec3f Nebula::galaxyColor = Vec3f(1.0f,0.2f,0.2f);
+Vec3f Nebula::radioGalaxyColor = Vec3f(0.3f,0.3f,0.3f);
+Vec3f Nebula::activeGalaxyColor = Vec3f(0.8f,0.8f,0.1f);
+Vec3f Nebula::interactingGalaxyColor = Vec3f(0.8f,0.8f,0.1f);
+Vec3f Nebula::quasarColor = Vec3f(1.0f,0.2f,0.2f);
+Vec3f Nebula::nebulaColor = Vec3f(0.1f,1.0f,0.1f);
+Vec3f Nebula::planetaryNebulaColor = Vec3f(0.1f,1.0f,0.1f);
+Vec3f Nebula::reflectionNebulaColor = Vec3f(0.1f,1.0f,0.1f);
+Vec3f Nebula::bipolarNebulaColor = Vec3f(0.1f,1.0f,0.1f);
+Vec3f Nebula::emissionNebulaColor = Vec3f(0.1f,1.0f,0.1f);
+Vec3f Nebula::darkNebulaColor = Vec3f(0.3f,0.3f,0.3f);
+Vec3f Nebula::hydrogenRegionColor = Vec3f(0.1f,1.0f,0.1f);
+Vec3f Nebula::supernovaRemnantColor = Vec3f(0.1f,1.0f,0.1f);
+Vec3f Nebula::interstellarMatterColor = Vec3f(0.1f,1.0f,0.1f);
+Vec3f Nebula::clusterWithNebulosityColor = Vec3f(0.1f,1.0f,0.1f);
+Vec3f Nebula::clusterColor = Vec3f(1.0f,1.0f,0.1f);
+Vec3f Nebula::openClusterColor = Vec3f(1.0f,1.0f,0.1f);
+Vec3f Nebula::globularClusterColor = Vec3f(1.0f,1.0f,0.1f);
+Vec3f Nebula::stellarAssociationColor = Vec3f(1.0f,1.0f,0.1f);
+Vec3f Nebula::starCloudColor = Vec3f(1.0f,1.0f,0.1f);
+Vec3f Nebula::emissionObjectColor = Vec3f(1.0f,1.0f,0.1f);
+Vec3f Nebula::blLacObjectColor = Vec3f(1.0f,1.0f,0.1f);
+Vec3f Nebula::blazarColor = Vec3f(1.0f,1.0f,0.1f);
+Vec3f Nebula::molecularCloudColor = Vec3f(1.0f,1.0f,0.1f);
+Vec3f Nebula::youngStellarObjectColor = Vec3f(1.0f,1.0f,0.1f);
+Vec3f Nebula::possibleQuasarColor = Vec3f(1.0f,0.2f,0.2f);
+Vec3f Nebula::possiblePlanetaryNebulaColor = Vec3f(1.0f,1.0f,0.1f);
+Vec3f Nebula::protoplanetaryNebulaColor = Vec3f(1.0f,1.0f,0.1f);
+Vec3f Nebula::starColor = Vec3f(1.0f,1.0f,0.1f);
 bool Nebula::flagUsageTypeFilter = false;
 Nebula::CatalogGroup Nebula::catalogFilters = Nebula::CatalogGroup(0);
 Nebula::TypeGroup Nebula::typeFilters = Nebula::TypeGroup(Nebula::AllTypes);
@@ -199,8 +199,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		else
 		{
 			if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
-				oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
-												QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
+				oss << q_("Magnitude: <b>%1</b> (after extinction: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
+												    QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
 			else
 				oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
 		}
@@ -221,8 +221,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted surface brightness much below horizon where model is meaningless.
 		{
 			if (getSurfaceBrightness(core)<99 && getSurfaceBrightnessWithExtinction(core)<99)
-				oss << q_("Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getSurfaceBrightness(core), 'f', 2),
-													 QString::number(getSurfaceBrightnessWithExtinction(core), 'f', 2)) << "<br>";
+				oss << q_("Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)").arg(QString::number(getSurfaceBrightness(core), 'f', 2),
+													     QString::number(getSurfaceBrightnessWithExtinction(core), 'f', 2)) << "<br>";
 		}
 		else
 		{

@@ -74,18 +74,19 @@ public:
 	};
 
 	//! @enum ProjectionType
-	//! Available projection types. A value of 1000 indicate the default projection
+	//! Available projection types. A value of 1000 indicates the default projection
 	enum ProjectionType
 	{
 		ProjectionPerspective,              //!< Perspective projection
-		ProjectionEqualArea,                //!< Equal Area projection
-		ProjectionStereographic,            //!< Stereograhic projection
+		ProjectionStereographic,            //!< Stereographic projection
 		ProjectionFisheye,                  //!< Fisheye projection
-		ProjectionHammer,                   //!< Hammer-Aitoff projection
-		ProjectionCylinder,                 //!< Cylinder projection
-		ProjectionMercator,                 //!< Mercator projection
 		ProjectionOrthographic,             //!< Orthographic projection
-		ProjectionSinusoidal                //!< Sinusoidal projection
+		ProjectionEqualArea,                //!< Equal Area projection
+		ProjectionHammer,                   //!< Hammer-Aitoff projection
+		ProjectionSinusoidal,               //!< Sinusoidal projection
+		ProjectionMercator,                 //!< Mercator projection
+		ProjectionMiller,                   //!< Miller cylindrical projection
+		ProjectionCylinder                  //!< Cylinder projection
 	};
 
 	//! @enum RefractionMode

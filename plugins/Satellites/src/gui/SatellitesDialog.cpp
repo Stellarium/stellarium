@@ -283,7 +283,7 @@ void SatellitesDialog::updateSatelliteData()
 	{
 		ui->nameEdit->clear();
 		ui->noradNumberEdit->clear();
-		ui->descriptionTextEdit->clear();
+		ui->descriptionTextEdit->clear();		
 		ui->tleFirstLineEdit->clear();
 		ui->tleSecondLineEdit->clear();
 	}

@@ -153,6 +153,7 @@ void DateTimeDialog::yearChanged(int newyear)
 		valid( newyear, month, day, hour, minute, second );
 	}
 }
+
 void DateTimeDialog::monthChanged(int newmonth)
 {
 	if ( month != newmonth )
@@ -160,13 +161,13 @@ void DateTimeDialog::monthChanged(int newmonth)
 		valid( year, newmonth, day, hour, minute, second );
 	}
 }
+
 void DateTimeDialog::dayChanged(int newday)
 {
-	if ( day != newday )
-	{
-		valid( year, month, newday, hour, minute, second );
-	}
+	int delta = newday - day;
+	validJd(jd + delta);
 }
+
 void DateTimeDialog::hourChanged(int newhour)
 {
 	int delta = newhour - hour;
