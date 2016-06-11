@@ -634,7 +634,7 @@ void ViewDialog::populateLists()
 	// Fill the projection list
 	l = ui->projectionListWidget;
 	l->blockSignals(true);
-	l->clear();
+	l->clear();	
 	const QStringList mappings = core->getAllProjectionTypeKeys();
 	foreach (QString s, mappings)
 	{
