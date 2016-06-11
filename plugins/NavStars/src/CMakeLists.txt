@@ -1,6 +1,8 @@
 INCLUDE_DIRECTORIES(
      .
+     gui
      ${CMAKE_BINARY_DIR}/plugins/NavStars/src
+     ${CMAKE_BINARY_DIR}/plugins/NavStars/src/gui
 )
 
 LINK_DIRECTORIES(${BUILD_DIR}/src)
@@ -8,14 +10,22 @@ LINK_DIRECTORIES(${BUILD_DIR}/src)
 SET(NavStars_SRCS
      NavStars.hpp
      NavStars.cpp
+     gui/NavStarsWindow.hpp
+     gui/NavStarsWindow.cpp
 )
+
+SET(NavStars_UIS
+     gui/navStarsWindow.ui
+)
+
+QT5_WRAP_UI(NavStars_UIS_H ${NavStars_UIS})
 
 SET(NavStars_RES ../resources/NavStars.qrc)
 QT5_ADD_RESOURCES(NavStars_RES_CXX ${NavStars_RES})
 
 SET(extLinkerOption ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
 
-ADD_LIBRARY(NavStars-static STATIC ${NavStars_SRCS} ${NavStars_RES_CXX})
+ADD_LIBRARY(NavStars-static STATIC ${NavStars_SRCS} ${NavStars_RES_CXX} ${NavStars_UIS_H})
 QT5_USE_MODULES(NavStars-static Core Network Widgets)
 SET_TARGET_PROPERTIES(NavStars-static PROPERTIES OUTPUT_NAME "NavStars")
 TARGET_LINK_LIBRARIES(NavStars-static ${extLinkerOption})
