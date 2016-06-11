@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-06-09 22:16+0700\n"
-"PO-Revision-Date: 2016-05-30 15:53+0000\n"
+"PO-Revision-Date: 2016-06-10 12:13+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-10 05:26+0000\n"
+"X-Launchpad-Export-Date: 2016-06-11 05:16+0000\n"
 "X-Generator: Launchpad (build 18097)\n"
 "Language: gd\n"
 
@@ -504,7 +504,7 @@ msgstr "soilleireachd mì-chinnteach"
 #: src/core/modules/Nebula.cpp:968
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
-msgstr "soilleireachd neo-chlàraichte nan deargan-doireann ath-thilgeil"
+msgstr "soilleireachd neo-chlàraichte nan deargan-doireann ath-thilgidh"
 
 #: src/core/modules/Nebula.cpp:974
 msgctxt "Reflection Nebulae Classification"
@@ -536,7 +536,7 @@ msgstr "an neulachd neònach soilleirichte"
 #: src/core/modules/Nebula.cpp:995
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
-msgstr "deargan-doireannan ath-thilgeil neo-chlàraichte"
+msgstr "deargan-doireannan ath-thilgidh neo-chlàraichte"
 
 #: src/core/modules/Nebula.cpp:1018
 msgid "circular form"
@@ -2340,7 +2340,7 @@ msgstr "astar planaid-mheadhanach de %1 km"
 
 #: src/gui/StelGuiItems.cpp:695
 msgid "planetocentric observer"
-msgstr "amharc planaid-mheadhanach"
+msgstr "neach-amhairc planaid-mheadhanach"
 
 #: src/gui/StelGuiItems.cpp:724
 msgid "Field of view"
@@ -2813,7 +2813,7 @@ msgstr "Ainm air eadar-theangachadh"
 
 #: src/gui/BookmarksDialog.cpp:98
 msgid "Location of observer"
-msgstr "Ionad an amhairc"
+msgstr "Ionad an neach-amhairc"
 
 #: src/StelMainView.cpp:462 src/StelMainView.cpp:477
 msgid ""
@@ -7609,7 +7609,7 @@ msgstr "A' chiad stèisean-fhànais aig an t-Sìn"
 #: plugins/Satellites/src/Satellite.cpp:257
 #: plugins/Satellites/src/Satellite.cpp:261
 msgid "Catalog #"
-msgstr "Catalog #"
+msgstr "Àireamh cataloig"
 
 #: plugins/Satellites/src/Satellite.cpp:263
 msgid "International Designator"
@@ -7663,11 +7663,11 @@ msgstr "Luaths TEME (km/s): %1"
 #: plugins/Satellites/src/Satellite.cpp:324
 #, qt-format
 msgid "Sun reflection angle: %1%2"
-msgstr "Ceàrn aig ath-thilgeil na grèine: %1%2"
+msgstr "Ceàrn aig ath-thilgeadh na grèine: %1%2"
 
 #: plugins/Satellites/src/Satellite.cpp:335
 msgid "The satellite and the observer are in sunlight."
-msgstr "Tha an saideal 's an amharc ann an solas-grèine."
+msgstr "Tha an saideal 's an neach-amhairc ann an solas-grèine."
 
 #: plugins/Satellites/src/Satellite.cpp:338
 msgid "The satellite is visible."
@@ -7693,7 +7693,7 @@ msgstr "Plugan nan saideal Stellarium"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:412
 #: plugins/Satellites/src/ui_satellitesDialog.h:792
 msgid "Iridium flares"
-msgstr "Lasan iridium"
+msgstr "Lasanan iridium"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:414
 msgid ""
@@ -7712,7 +7712,7 @@ msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
 "Cha dèid na saidealan 's na reul-chuairtean aca a shealltainn ach nuair a "
-"bhios an t-amharc air an Talamh."
+"bhios an neach-amhairc air an Talamh."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:418
 msgid ""
@@ -9049,7 +9049,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:397
 msgid "Sending commands"
-msgstr "Àitheantan cùir"
+msgstr "Cur àitheantan"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:398
 msgid ""
@@ -10349,7 +10349,7 @@ msgstr "Tha %1 reul air an liosta seo uile gu lèir."
 #, qt-format
 msgid "All those supernovae are brighter %1 at peak of brightness."
 msgstr ""
-"Tha prìomh-soilleireachd nam mòr-nòbhathan seo uile nas soilleire na %1."
+"Tha mullach soilleireachd nam mòr-nòbhathan seo uile nas soilleire na %1."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
 #: plugins/Novae/src/gui/NovaeDialog.cpp:130
@@ -10582,7 +10582,8 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:129
 #, qt-format
 msgid "All those novae are brighter than %1 at peak of brightness."
-msgstr "Tha prìomh-soilleireachd nan nòbhathan seo uile nas soilleire na %1."
+msgstr ""
+"Tha mullach soilleireachd nan nòbhathan seo uile nas soilleire na %1."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:131
 msgid ""
