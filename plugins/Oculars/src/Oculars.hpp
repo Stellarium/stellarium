@@ -273,6 +273,8 @@ private:
 	float magLimitDSOs;		//!< Value of limited magnitude for DSOs
 	bool flagLimitPlanets;		//!< Flag to track limit magnitude for planets, asteroids, comets etc.
 	float magLimitPlanets;		//!< Value of limited magnitude for planets, asteroids, comets etc.
+	float relativeStarScale;
+	float absoluteStarScale;
 
 	bool flagMoonScale;		//!< Flag to track of usage zooming of the Moon
 

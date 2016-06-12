@@ -533,9 +533,9 @@ void LocationDialog::updateDefaultLocationControls(bool currentIsDefault)
 // called when the user clicks on the IP Query button
 void LocationDialog::ipQueryLocation(bool state)
 {
+	QSettings* conf = StelApp::getInstance().getSettings();
 	if (state)
 	{
-		QSettings* conf = StelApp::getInstance().getSettings();
 		conf->setValue("init_location/location", "auto");
 		disconnectEditSignals();
 		resetCompleteList(); // in case we are on Moon/Mars, we must get list back to show all (earth) locations...
@@ -546,6 +546,9 @@ void LocationDialog::ipQueryLocation(bool state)
 		connectEditSignals();
 		ui->citySearchLineEdit->setFocus();
 	}
+	else
+		conf->setValue("init_location/location", StelApp::getInstance().getCore()->getCurrentLocation().getID());
+
 }
 
 // called when user clicks "reset list"

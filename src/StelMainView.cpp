@@ -1165,7 +1165,7 @@ void StelMainView::mousePressEvent(QMouseEvent* event)
 void StelMainView::mouseReleaseEvent(QMouseEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
-	QGraphicsView::mouseReleaseEvent(event);
+	QGraphicsView::mouseReleaseEvent(event);	
 }
 
 void StelMainView::wheelEvent(QWheelEvent* event)
@@ -1203,7 +1203,7 @@ void StelMainView::keyPressEvent(QKeyEvent* event)
 void StelMainView::keyReleaseEvent(QKeyEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
-	QGraphicsView::keyReleaseEvent(event);
+	QGraphicsView::keyReleaseEvent(event);	
 }
 
 
@@ -1273,4 +1273,9 @@ void StelMainView::doScreenshot(void)
 QPoint StelMainView::getMousePos()
 {
 	return glWidget->mapFromGlobal(QCursor::pos());
+}
+
+void StelMainView::setFocusOnSky()
+{
+	skyItem->setFocus();
 }

@@ -121,6 +121,8 @@ Oculars::Oculars():
 	magLimitDSOs(0.0),
 	flagLimitPlanets(false),
 	magLimitPlanets(0.0),
+	relativeStarScale(1.0),
+	absoluteStarScale(1.0),
 	flagMoonScale(false),
 	maxEyepieceAngle(0.0),
 	requireSelection(true),
@@ -652,6 +654,10 @@ void Oculars::init()
 		setFlagInitFovUsage(settings->value("use_initial_fov", false).toBool());
 		setFlagUseFlipForCCD(settings->value("use_ccd_flip", false).toBool());
 		setFlagUseSemiTransparency(settings->value("use_semi_transparency", false).toBool());
+
+		StelSkyDrawer *skyManager = StelApp::getInstance().getCore()->getSkyDrawer();
+		relativeStarScale = skyManager->getRelativeStarScale();
+		absoluteStarScale = skyManager->getAbsoluteStarScale();
 	}
 	catch (std::runtime_error& e)
 	{
@@ -1357,6 +1363,8 @@ void Oculars::toggleCCD(bool show)
 
 	StelCore *core = StelApp::getInstance().getCore();
 	StelMovementMgr *movementManager = core->getMovementMgr();
+	StelSkyDrawer *skyManager = core->getSkyDrawer();
+	skyManager->setAbsoluteStarScale(absoluteStarScale);
 	if (show)
 	{
 		initialFOV = movementManager->getCurrentFov();
@@ -1379,6 +1387,10 @@ void Oculars::toggleCCD(bool show)
 		flagShowCCD = true;
 		setScreenFOVForCCD();
 
+		// Change relative scale for stars
+		// TODO: Finding experimental value for better rendering
+		skyManager->setRelativeStarScale(0.6);
+
 		if (guiPanel)
 		{
 			guiPanel->showCcdGui();
@@ -1388,6 +1400,7 @@ void Oculars::toggleCCD(bool show)
 	{
 		flagShowCCD = false;
 
+		skyManager->setRelativeStarScale(relativeStarScale);
 		movementManager->setFlagTracking(false);
 		//Zoom out
 		if (getFlagInitFovUsage())
@@ -1793,11 +1806,11 @@ void Oculars::paintOcularMask(const StelCore *core)
 	radiusHigh=outerRadius-deltaRadius;
 	for (int i=0; i<=slices; i++)
 	{
-		vertices[i*2][0]= params.viewportCenter[0] + outerRadius*sinCache[i];
-		vertices[i*2][1]= params.viewportCenter[1] + outerRadius*cosCache[i];
+		vertices[i*2][0]= params.viewportCenter[0] * params.devicePixelsPerPixel + outerRadius*sinCache[i];
+		vertices[i*2][1]= params.viewportCenter[1] * params.devicePixelsPerPixel + outerRadius*cosCache[i];
 		vertices[i*2][2] = 0.0;
-		vertices[i*2+1][0]= params.viewportCenter[0] + radiusHigh*sinCache[i];
-		vertices[i*2+1][1]= params.viewportCenter[1] + radiusHigh*cosCache[i];
+		vertices[i*2+1][0]= params.viewportCenter[0] * params.devicePixelsPerPixel + radiusHigh*sinCache[i];
+		vertices[i*2+1][1]= params.viewportCenter[1] * params.devicePixelsPerPixel + radiusHigh*cosCache[i];
 		vertices[i*2+1][2] = 0.0;
 	}
 	painter.drawFromArray(StelPainter::TriangleStrip, (slices+1)*2, 0, false);
@@ -2091,6 +2104,8 @@ void Oculars::unzoomOcular()
 	skyManager->setCustomStarMagnitudeLimit(magLimitStars);
 	skyManager->setCustomPlanetMagnitudeLimit(magLimitPlanets);
 	skyManager->setCustomNebulaMagnitudeLimit(magLimitDSOs);
+	skyManager->setRelativeStarScale(relativeStarScale);
+	skyManager->setAbsoluteStarScale(absoluteStarScale);
 	movementManager->setFlagTracking(false);
 	movementManager->setFlagEnableZoomKeys(true);
 	movementManager->setFlagEnableMouseNavigation(true);
@@ -2218,6 +2233,11 @@ void Oculars::zoomOcular()
 		core->setFlipHorz(telescope->isHFlipped());
 		core->setFlipVert(telescope->isVFlipped());
 	}
+
+	// Change relative and absolute scales for stars
+	// TODO: Finding experimental value for better rendering
+	skyManager->setRelativeStarScale(0.6);
+	skyManager->setAbsoluteStarScale(0.75);
 
 	// Limit stars and DSOs	if it enable and it's telescope + eyepiece combination
 	if (getFlagLimitMagnitude() && !ocular->isBinoculars())

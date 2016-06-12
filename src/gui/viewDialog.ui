@@ -1760,6 +1760,16 @@
                   </widget>
                  </item>
                  <item>
+                  <widget class="QCheckBox" name="showCircumpolarCirclesCheckBox">
+                   <property name="toolTip">
+                    <string>These circles delimit stars which stay always above (respectively below) the mathematical horizon.</string>
+                   </property>
+                   <property name="text">
+                    <string>Circumpolar circles</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
                   <widget class="QCheckBox" name="showPrecessionCirclesCheckBox">
                    <property name="toolTip">
                     <string>Instantaneous circles of earth's axis on its motion around ecliptical poles. Displayed on Earth only.</string>
@@ -1819,14 +1829,14 @@
              <item>
               <widget class="QListWidget" name="projectionListWidget">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>120</width>
+                 <width>230</width>
                  <height>0</height>
                 </size>
                </property>
@@ -1949,7 +1959,7 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>180</width>
+              <width>220</width>
               <height>0</height>
              </size>
             </property>
@@ -2166,7 +2176,7 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>180</width>
+              <width>220</width>
               <height>0</height>
              </size>
             </property>

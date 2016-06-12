@@ -259,7 +259,7 @@ given in section~\ref{sec:plugins:TUI:commands}.
 \item
   To edit a value, press the right cursor until the value you wish to
   change it highlighted with \textgreater{} and \textless{} marks, e.g.\
-  \textgreater{}3.142\textless{}. Then press the up and down cursors to
+  \textgreater{}3.142\textless{}. Then press the cursor keys \keys{\arrowkeyup} and \keys{\arrowkeydown} to
   change the value. You may also type in a new value with the other keys
   on the keyboard.
 \end{enumerate}
@@ -481,12 +481,68 @@ documentation}.
 
 \section{Solar System Editor Plugin}
 \label{sec:plugins:SolarSystemEditor}
-TODO...
+
+Stellarium stores its data (orbital elements and other details) about
+solar system objects (planets, their moons, minor bodies) in the file
+\file{data/ssystem.ini}. The file will be taken from the user data
+directory if it also exists there, which means, users can add minor
+planets or comets as they become observable by editing this file.
+
+
+This plugin provides a window to the Minor Planet Center (MPC) where the
+latest Solar System information can be found. When this plugin is
+loaded (see section~\ref{sec:Plugins:EnablingPlugins}) the first tab
+allows to import, export or reset your \file{ssystem.ini}.
+
+The second tab lists all currently loaded objects.  It is recommended
+to remove old entries of last year's comets if you don't need them any
+longer.
+If you have a very weak computer, you may want to reduce the number of
+minor bodies (and maybe even planetary moons) to improve performance.
+
+On this tab, you find the option to connect to the MPC and download current orbital elements. 
+
+
+\newpage
 
 \section{Timezone Configuration Plugin}
-\label{sec:plufins:Timezones}
-TODO...
+\label{sec:plugins:Timezones}
 
+
+\begin{figure}[h]\centering
+\includegraphics[width=.9\textwidth]{Timezone}
+\label{fig:plugins:Timezones}
+\caption{Interface of the TimeZone Configuration Plugin}
+\end{figure}
+
+
+\noindent After installation, Stellarium uses the timezone configured in the
+computer's operating system. This may have unwanted consequences,
+e.g.\ when you want to check the sky for a location on another
+continent. You may set location in the location panel (see
+\ref{sec:gui:location}), but the time will not be the zone time of
+this location but still zone time of your computer!
+
+Another effect of our civilisation that sometimes brings unwanted side
+effects concerns daylight saving time (DST): When you run a timelapse
+with 1-day intervals, you will see what appear to be wrong jumps on
+the days when DST is switched (e.g., end of March/end of October, but
+rules evolve over time and regions). You may want to keep a single
+time zone without DST for such simulations.
+
+
+If enabled (see section~\ref{sec:Plugins:EnablingPlugins}), you can
+choose to use your timezone (default), or plain Universal Coordinated
+Time (UTC) (equivalent to what used to be called Greenwich Mean Time
+GMT), or select a time zone (in steps of 15 minutes). 
+
+Note that you must exit and restart Stellarium to activate the new
+timezone, so jumping from location to location on Earth and showing
+correct zone time is not possible.
+
+%% TODO: Obviously, we should adapt our TZ handling to make this
+%% possible! Store TZ in location list, and suggest/guess TZ from
+%% longitude of map-clicked location.
 
 
 %%% Local Variables: 

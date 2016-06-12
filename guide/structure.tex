@@ -41,6 +41,7 @@
 
 \usepackage{color}
 \usepackage{listings}
+\usepackage{rotating} % Allow sidewaysfigure
 
 %----------------------------------------------------------------------------------------
 %	NEW COMMANDS AND ADDITIONS
@@ -101,6 +102,7 @@
 \newcommand{\kg}{\ensuremath{\,\mathrm{kg}}}
 \newcommand{\g}{\ensuremath{\,\mathrm{g}}}
 \newcommand{\px}{\ensuremath{\mathrm{px}}} % pixels
+\newcommand{\cy}{\ensuremath{\mathrm{cy}}} % century
 
 \lstnewenvironment{commands}{\lstset{language=sh,basicstyle=\ttfamily\small,%
                                      backgroundcolor=\color{black!5},frame=leftline,rulecolor=\color{blue},framerule=1pt}%
@@ -173,7 +175,7 @@
 %	BIBLIOGRAPHY AND INDEX
 %----------------------------------------------------------------------------------------
 
-\usepackage[style=alphabetic,citestyle=numeric,sorting=nyt,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
+\usepackage[style=numeric,citestyle=numeric,sorting=nyt,sortcites=true,autopunct=true,autolang=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
 \addbibresource{guide.bib} % BibTeX bibliography file
 \defbibheading{bibempty}{}
 
@@ -641,7 +643,8 @@ addtohook={%
 %\newcommand{\key}[1]{\textbf{\textsf{\small #1}}}
 % Prefer using menukeys. 
 \newcommand{\key}[1]{\keys{#1}}
-
+\newcommand{\keyPageUp}{\keys{Page\,\arrowkeyup\,}}
+\newcommand{\keyPageDown}{\keys{Page\,\arrowkeydown\,}}
 \renewcommand{\topfraction}{0.9}
 
 \definecolor{light-gray}{gray}{0.90}

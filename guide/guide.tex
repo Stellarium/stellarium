@@ -73,7 +73,7 @@
 \draw[anchor=north] (midpoint) node [fill=ocre!30!white,fill opacity=0.6,text opacity=1,inner sep=1cm]%
      {\Huge\centering\bfseries\sffamily\parbox[c][][t]{\paperwidth}%
                                               {\centering Stellarium User Guide\\[18pt] % Book title
-                                              {\Large Matthew Gates, Alexander Wolf, Georg Zotti, Barry Gerdes}\\[15pt]% Author names
+                                              {\Large Matthew Gates, Georg Zotti, Alexander Wolf, Barry Gerdes}\\[15pt]% Author names
                                               {\Large Version \StelVersion-\DocumentEdition}\\[15pt]% Version like 0.15.0-1
                                               {\Large 2016}% Year
                                              }}; % 
@@ -91,9 +91,9 @@
 \thispagestyle{empty}
 
 \noindent Copyright \copyright\ 2006-2009 Matthew Gates.\\ % Copyright notice
+\noindent Copyright \copyright\ 2014-2016 Georg Zotti.\\ % Copyright notice
 \noindent Copyright \copyright\ 2011-2016 Alexander Wolf.\\ % Copyright notice
 \noindent Copyright \copyright\ 2013-2014 Barry Gerdes.\\ % Copyright notice
-\noindent Copyright \copyright\ 2014-2016 Georg Zotti.\\ % Copyright notice
 
 \noindent \textsc{stellarium.org}\\ % URL
 
@@ -190,7 +190,7 @@ implying a violation of copyright law.}}\\
 \include{plugins}
 \include{plg_interfaces} % TUI, RemoteControl, (2017: D-BUS?)
 \include{plg_catalogs}
-\include{plg_ArchaeoLines}
+\include{plg_archaeolines}
 \include{plg_scenery3d} % move to historical.
 \include{plg_atTheTelescope} % TODO: TelescopeControl, Oculars, various hardware projects with Raspberry, Arduino, ...
 \include{ch_scripting}
@@ -198,6 +198,7 @@ implying a violation of copyright law.}}\\
 %----------------------------------------------------------------------------------------
 %	PART IV
 %----------------------------------------------------------------------------------------
+\renewcommand{\StelTOCdepth}{0}
 \part{Practical Astronomy}
 
 %----------------------------------------------------------------------------------------
@@ -238,10 +239,10 @@ implying a violation of copyright law.}}\\
 \chapterimage{chapter-t1-bg} % Chapter heading image
 
 %----------------------------------------------------------------------------------------
-%	CHAPTER A (config.ini)
+%	CHAPTER A (Hotkeys) -- N.B. "H" :-)
 %----------------------------------------------------------------------------------------
 
-\include{app_config_ini}
+\include{app_hotkeys}
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER B (Bortle Scale) -- N.B. Try to keep this as Appendix "B" [for Bortle]
@@ -255,6 +256,12 @@ implying a violation of copyright law.}}\\
 
 \include{app_star_catalogue}
 
+%----------------------------------------------------------------------------------------
+%	CHAPTER D (config.ini)
+%----------------------------------------------------------------------------------------
+
+\include{app_config_ini}
+\include{app_ssystem_ini}
 %----------------------------------------------------------------------------------------
 %	CHAPTER E (Accuracy, and some notes about used algorithms.)
 %----------------------------------------------------------------------------------------
@@ -273,23 +280,13 @@ implying a violation of copyright law.}}\\
 
 \include{app_license}
 
-%----------------------------------------------------------------------------------------
-%	CHAPTER H (Hotkeys) -- N.B. "H" :-)
-%----------------------------------------------------------------------------------------
-
-\include{app_hotkeys}
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
 \chapter*{Bibliography}
 \addcontentsline{toc}{chapter}{\textcolor{ocre}{Bibliography}}
-\section*{Books}
-\addcontentsline{toc}{section}{Books}
-\printbibliography[heading=bibempty,type=book]
-\section*{Articles}
-\addcontentsline{toc}{section}{Articles}
-\printbibliography[heading=bibempty,type=article]
+\printbibliography[heading=bibempty]
 
 %----------------------------------------------------------------------------------------
 %	INDEX

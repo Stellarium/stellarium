@@ -21,6 +21,7 @@
 #include "StelFileMgr.hpp"
 #include "StelLocationMgr.hpp"
 #include "StelUtils.hpp"
+#include "StelJsonParser.hpp"
 
 #include <QStringListModel>
 #include <QDebug>
@@ -351,7 +352,7 @@ bool StelLocationMgr::deleteUserLocation(const QString& id)
 // lookup location from IP address.
 void StelLocationMgr::locationFromIP()
 {
-	QNetworkRequest req( QUrl( QString("http://freegeoip.net/csv/") ) );	
+	QNetworkRequest req( QUrl( QString("http://freegeoip.net/json/") ) );
 	req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
 	req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
 	QNetworkReply* networkReply=StelApp::getInstance().getNetworkAccessManager()->get(req);
@@ -368,50 +369,25 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 	    return;
 	if (networkReply->error() == QNetworkReply::NoError) {
 		//success
-		// Tested with and without working network connection.
-		QByteArray answer=networkReply->readAll();
-		qDebug() << "IP answer:" << answer;
-		// answer/splitline example:     "222.222.222.222","AT","Austria","","","","","47.3333","13.3333","",""
-		// The parts from freegeoip are: ip,country_code,country_name,region_code,region_name,city,zipcode,latitude,longitude,metro_code,area_code
-		// Changed before 2014-11-21 to: 222.222.222.222,AT,Austria,"","","","",Europe/Vienna,47.33,13.33,0<CR><LF> (i.e., only empty strings have "")
-		//                          Now: ip,country_code,country_name,region_code,region_name,city,zipcode,Timezone_name,latitude,longitude,metro_code
-		// longitude and latitude should always be filled.
-		// A few tests:
-		if (answer.count(',') != 10 )
-		{
-			qDebug() << "StelLocationMgr: Malformatted answer in IP-based location lookup: \n\t" << answer;
-			qDebug() << "StelLocationMgr: Will not change location.";
-			networkReply->deleteLater();
-			return;
-		}
-		const QStringList& splitline = QString(answer).split(",");
-		if (splitline.count() != 11 )
-		{
-			qDebug() << "StelLocationMgr: Unexpected answer in IP-based location lookup: \n\t" << answer;
-			qDebug() << "StelLocationMgr: Will not change location.";
-			networkReply->deleteLater();
-			return;
-		}
-		// KEEP FOR DEBUGGING:
-		//for (int i=0; i<splitline.count(); ++i)
-		//	qDebug() << "Component" << i << "length:" << splitline.at(i).length() << ":" << splitline.at(i);
-		if ((splitline.at(8)=="\"\"") || (splitline.at(9)=="\"\"")) // empty coordinates?
-		{
-			qDebug() << "StelLocationMgr: Invalid coordinates from IP-based lookup. Ignoring: \n\t" << answer;
-			networkReply->deleteLater();
-			return;
-		}
-		float latitude=splitline.at(8).toFloat();
-		float longitude=splitline.at(9).toFloat();
+		QVariantMap locMap = StelJsonParser::parse(networkReply->readAll()).toMap();
+		QString ipRegion = locMap.value("region_name").toString();
+		QString ipCity = locMap.value("city").toString();
+		QString ipCountry = locMap.value("country_name").toString(); // NOTE: Got a short name of country
+		QString ipCountryCode = locMap.value("country_code").toString();
+		QString ipTimeZone = locMap.value("time_zone").toString();
+		float latitude=locMap.value("latitude").toFloat();
+		float longitude=locMap.value("longitude").toFloat();
+
+		qDebug() << "Got location" << QString("%1, %2, %3 (%4, %5)").arg(ipCity).arg(ipRegion).arg(ipCountry).arg(latitude).arg(longitude) << "for IP" << locMap.value("ip").toString();
+
 		QString locLine= // we re-pack into a new line that will be parsed back by StelLocation...
-				QString("%1\t%2\t%3\t%4\t%5\t%6\t%7\t0")
-				.arg(splitline.at(5) == "\"\"" ? QString("%1, %2").arg(latitude).arg(longitude) : splitline.at(5))
-				.arg(splitline.at(4) == "\"\"" ? "IPregion"  : splitline.at(4))
-				.arg(splitline.at(2) == "\"\"" ? "IPcountry" : splitline.at(2)) // countryCode
-				.arg("X") // role: X=user-defined
-				.arg(0)   // population: unknown
+				QString("%1\t%2\t%3\tX\t0\t%4\t%5\t0\t\t%6")
+				.arg(ipCity.isEmpty() ? QString("%1, %2").arg(latitude).arg(longitude) : ipCity)
+				.arg(ipRegion.isEmpty() ? "IPregion"  : ipRegion)
+				.arg(ipCountryCode.isEmpty() ? "" : ipCountryCode.toLower())
 				.arg(latitude<0 ? QString("%1S").arg(-latitude, 0, 'f', 6) : QString("%1N").arg(latitude, 0, 'f', 6))
-				.arg(longitude<0 ? QString("%1W").arg(-longitude, 0, 'f', 6) : QString("%1E").arg(longitude, 0, 'f', 6));
+				.arg(longitude<0 ? QString("%1W").arg(-longitude, 0, 'f', 6) : QString("%1E").arg(longitude, 0, 'f', 6))
+				.arg(ipTimeZone.isEmpty() ? "" : ipTimeZone);
 		location=StelLocation::createFromLine(locLine); // in lack of a regular constructor ;-)
 		core->moveObserverTo(location, 0.0f, 0.0f);
 		QSettings* conf = StelApp::getInstance().getSettings();

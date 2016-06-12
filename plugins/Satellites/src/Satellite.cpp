@@ -796,7 +796,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 
 void Satellite::drawOrbit(StelPainter& painter)
 {
-	Vec3d position;
+	Vec3d position, onscreen;
 	Vec3f drawColor;
 	int size = orbitPoints.size();
 
@@ -807,10 +807,12 @@ void Satellite::drawOrbit(StelPainter& painter)
 
 	QVector<Vec3d> vertexArray;
 	QVector<Vec4f> colorArray;
+	StelProjectorP prj = painter.getProjector();
 
 	vertexArray.resize(size);
 	colorArray.resize(size);
 
+	painter.enableClientStates(true, false, false);
 	//Rest of points
 	for (int i=1; i<size; i++)
 	{
@@ -818,17 +820,19 @@ void Satellite::drawOrbit(StelPainter& painter)
 		it++;
 		position.normalize();
 
-		vertexArray[i] = position;
-		drawColor = invisibleSatelliteColor;
-		if (visibilityPoints[i] == VISIBLE)
-			drawColor = orbitColor;
-		colorArray[i] = Vec4f(drawColor[0], drawColor[1], drawColor[2], hintBrightness * calculateOrbitSegmentIntensity(i));
+		if (prj->project(position, onscreen)) // check position on the screen
+		{
+			vertexArray.append(position);
+			drawColor = invisibleSatelliteColor;
+			if (visibilityPoints[i] == VISIBLE)
+				drawColor = orbitColor;
+			colorArray.append(Vec4f(drawColor[0], drawColor[1], drawColor[2], hintBrightness * calculateOrbitSegmentIntensity(i)));
+		}
 	}
-
-
 	painter.drawPath(vertexArray, colorArray);
 
 	glEnable(GL_TEXTURE_2D);
+	painter.enableClientStates(false);
 }
 
 

@@ -184,6 +184,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	double az_app, alt_app;
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	double distanceAu = getJ2000EquatorialPos(core).length();
 	Q_UNUSED(az_app);
 
 	if (flags&Name)
@@ -215,7 +216,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	if (flags&Magnitude)
 	{
 	    if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
-		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
+		oss << q_("Magnitude: <b>%1</b> (after extinction: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
 										QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
 	    else
 		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
@@ -228,7 +229,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		//If the H-G system is not used, use the default radius/albedo mechanism
 		if (slopeParameter < 0)
 		{
-			oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core) - 5. * (std::log10(getJ2000EquatorialPos(core).length()*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
+			oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core) - 5. * (std::log10(distanceAu*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
 		}
 		else
 		{
@@ -240,7 +241,26 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 	if (flags&Distance)
 	{
-		double distanceAu = getJ2000EquatorialPos(core).length();
+		double hdistanceAu = getHeliocentricEclipticPos().length();
+		double hdistanceKm = AU * hdistanceAu;
+		if (englishName!="Sun")
+		{
+			if (hdistanceAu < 0.1)
+			{
+				// xgettext:no-c-format
+				oss << QString(q_("Distance from Sun: %1AU (%2 km)"))
+				       .arg(hdistanceAu, 0, 'f', 6)
+				       .arg(hdistanceKm, 0, 'f', 3);
+			}
+			else
+			{
+				// xgettext:no-c-format
+				oss << QString(q_("Distance from Sun: %1AU (%2 Mio km)"))
+				       .arg(hdistanceAu, 0, 'f', 3)
+				       .arg(hdistanceKm / 1.0e6, 0, 'f', 3);
+			}
+			oss << "<br>";
+		}
 		double distanceKm = AU * distanceAu;
 		if (distanceAu < 0.1)
 		{
