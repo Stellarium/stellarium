@@ -523,7 +523,7 @@ bool StelProjectorMiller::forward(Vec3f &v) const
 	const bool rval = (-r < v[1] && v[1] < r);
 	const float sin_delta = v[1]/r;
 	const float delta=asin(sin_delta);
-	v[0] = std::atan2(v[0],-v[2]);
+	v[0] = std::atan2(v[0],-v[2]) * widthStretch;
 	v[1] = 1.25f*asinh(tan(0.8f*delta));
 	v[2] = r;
 	return rval;
@@ -531,6 +531,7 @@ bool StelProjectorMiller::forward(Vec3f &v) const
 
 bool StelProjectorMiller::backward(Vec3d &v) const
 {
+	v[0] /= widthStretch;
 	const double yMax=1.25f*asinh(tan(M_PI*2.0/5.0));
 	const bool rval = v[1]<yMax && v[1]>-yMax && v[0]>-M_PI && v[0]<M_PI;
 	const double lat = 1.25*atan(sinh(0.8*v[1]));
