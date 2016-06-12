@@ -1,6 +1,56 @@
-########### install files ###############
 
-INSTALL(FILES stellarium.ico ssystem.ini ssystem_1000comets.ini base_locations.bin.gz DejaVuSans.ttf default_config.ini DejaVuSansMono.ttf iso639-1.utf8 iso3166-1-alpha-2.utf8 countryCodes.dat constellations_boundaries.dat DESTINATION share/${PACKAGE}/data)
+########### install files ###############
+INSTALL(FILES ssystem.ini ssystem_1000comets.ini base_locations.bin.gz DejaVuSans.ttf default_config.ini DejaVuSansMono.ttf iso639-1.utf8 iso3166-1-alpha-2.utf8 countryCodes.dat constellations_boundaries.dat DESTINATION share/${PACKAGE}/data)
+
+########### splash target ##############
+ADD_CUSTOM_TARGET(splash ALL)
+SET(_splashFile splash.png)
+SET(_splashDstFile ${CMAKE_CURRENT_BINARY_DIR}/${_splashFile})
+
+IF(NOT STELLARIUM_RELEASE_BUILD)
+	GET_FILENAME_COMPONENT(_splashSrcFile splash-gray.png ABSOLUTE)
+ELSE()
+	GET_FILENAME_COMPONENT(_splashSrcFile splash.png ABSOLUTE)
+ENDIF()
+
+ADD_CUSTOM_COMMAND(
+	TARGET splash
+	COMMAND ${CMAKE_COMMAND} -E copy ${_splashSrcFile} ${_splashDstFile}
+)
+
+########### icon target ###############
+ADD_CUSTOM_TARGET(icon ALL)
+IF(MACOSX)
+	SET(_iconFile Icon.icns)
+	IF(NOT STELLARIUM_RELEASE_BUILD)
+		GET_FILENAME_COMPONENT(_iconSrcFile IconGray.icns ABSOLUTE)
+	ELSE()
+		GET_FILENAME_COMPONENT(_iconSrcFile Icon.icns ABSOLUTE)
+	ENDIF()
+ELSE()
+	SET(_iconFile stellarium.ico)
+	IF(NOT STELLARIUM_RELEASE_BUILD)
+		GET_FILENAME_COMPONENT(_iconSrcFile stellarium-gray.ico ABSOLUTE)
+	ELSE()
+		GET_FILENAME_COMPONENT(_iconSrcFile stellarium.ico ABSOLUTE)
+	ENDIF()	
+ENDIF()
+
+SET(_iconDstFile ${CMAKE_CURRENT_BINARY_DIR}/${_iconFile})
+ADD_CUSTOM_COMMAND(
+	TARGET icon
+	COMMAND ${CMAKE_COMMAND} -E copy ${_iconSrcFile} ${_iconDstFile}
+)
+
+# install splash and icon
+IF(MACOSX)
+	INSTALL(FILES ${_iconDstFile} DESTINATION share RENAME ${_iconFile})
+	INSTALL(FILES ${_splashDstFile} DESTINATION share/data RENAME ${_splashFile})
+	INSTALL(FILES Info.plist PkgInfo DESTINATION .)
+ELSE()
+	INSTALL(FILES ${_iconDstFile} DESTINATION share/${PACKAGE}/data RENAME ${_iconFile})
+	INSTALL(FILES ${_splashDstFile} DESTINATION share/${PACKAGE}/data RENAME ${_splashFile})
+ENDIF()
 
 # install Scenery3d shaders
 IF(USE_PLUGIN_SCENERY3D)
@@ -31,9 +81,4 @@ IF(UNIX AND NOT APPLE)
 	INSTALL(FILES icons/256x256/stellarium.png DESTINATION share/icons/hicolor/256x256/apps)
 	INSTALL(FILES icons/512x512/stellarium.png DESTINATION share/icons/hicolor/512x512/apps)
 ENDIF()
-
-IF(MACOSX)
-	INSTALL(FILES Icon.icns DESTINATION share )
-	INSTALL(FILES Info.plist PkgInfo DESTINATION . )
-ENDIF(MACOSX)
 

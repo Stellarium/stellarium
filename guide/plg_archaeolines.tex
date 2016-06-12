@@ -23,9 +23,9 @@
 \newpage
 \section{ArchaeoLines Plugin}
 \label{sec:plugin:ArchaeoLines}
-
+\sectionauthor*{Georg Zotti}
 \begin{figure}[ht]
-\includegraphics[width=\textwidth]{ArchaeoLines.jpg}
+\includegraphics[width=\textwidth,trim=0 50 0 0,clip]{ArchaeoLines.jpg}
 \caption{Declination Lines provided by the ArchaeoLines plugin}
 \label{fig:plugin:ArchaeoLines}
 \end{figure}
@@ -41,10 +41,10 @@ to a sunrise on summer or winter solstice. There can hardly be a
 better tool than Scenery3D (see chapter~\ref{ch:scenery3d}) to
 investigate a 3D model of such a building, and this plugin has been
 introduced in version 0.13.3 as a further tool in the
-archaeoastronomer's toolbox.
+archaeoastronomer's toolbox\cite{Zotti:SEAC2015}.
 
-When activated (see section~\ref{sec:Plugins:EnablingPlugins}), there
-is a tool bar button \guibutton{0.6}{bt_archaeolines} (in the
+When activated (see section~\ref{sec:Plugins:EnablingPlugins}), you
+can find a a tool bar button \guibutton{0.6}{bt_archaeolines} (in the
 shape of a \emph{trilithon} with the sun shining through it). Press
 this, or \key{\ctrl+U}, to display the currently selected set of
 characteristical diurnal arcs.
@@ -53,33 +53,66 @@ characteristical diurnal arcs.
 \label{sec:plugin:ArchaeoLines:Declinations}
 
 
-The ArchaeoLines plugin displays any combination of declination arcs most
+The ArchaeoLines plugin displays any combination of declination arcs $\delta$ most
 relevant to archaeo- or ethnoastronomical studies. Of course, principles
 used in this context are derived from natural observations, and many of
 these declinations are still important in everyday astronomy.
 
 \begin{itemize}
-\item Declinations of equinoxes (i.e., the equator) and the solstices
-\item Declinations of the crossquarter days (days right between solstices and equinoxes)
-\item Declinations of the Major Lunar Standstills
-\item Declinations of the Minor Lunar Standstills
-\item Declination of the Zenith passage
-\item Declination of the Nadir passage
-\item Declination of the currently selected object
-\item Current declination of the sun
-\item Current declination of the moon
-\item Current declination of a naked-eye planet
+\item Declinations of equinoxes (i.e., the equator, $\delta=0$) and the solstices ($\delta=\pm\varepsilon$)
+\item Declinations of the crossquarter days (days between solstices and equinoxes, $\delta=\pm\varepsilon/\sqrt2$)
+\item Declinations of the Major Lunar Standstills ($\delta=\pm(\varepsilon+i)$)
+\item Declinations of the Minor Lunar Standstills ($\delta=\pm(\varepsilon-i)$)
+\item Declination of the Zenith passage ($\delta=\varphi$)
+\item Declination of the Nadir passage ($\delta=-\varphi$)
+\item Declination $\delta$ of the currently selected object 
+\item Current declination $\delta_{\text{\Sun}}$ of the sun
+\item Current declination $\delta_{\text{\Moon}}$ of the moon
+\item Current declination $\delta_P$ of a naked-eye planet
 \end{itemize}
 
-\noindent For the lunar events, there are two lines each drawn, for
-maximum and minimum distance of the moon.  The lunar extreme
+The principal relation between declinations $\delta$, geographic
+latitude $\varphi$, and the rising azimuth $A$ is computed from
+\begin{equation}
+  \label{eq:RisingAzimuth}
+  \cos A=-\frac{\sin\delta}{\cos\varphi}.
+\end{equation}
+
+This formula does not take into account local horizon elevation nor
+atmospheric refraction nor lunar parallax correction.  The effect
+applied to characteristic declinations is shown graphically for the
+present time (J2000.0) in
+figure~\ref{fig:plugin:ArchaeoLines:MorningLatitudes}. For example, in
+a latitude of 30\degree, an object which goes through the zenith rises
+at azimuth 55\degree. Lunar major standstill risings occur at azimuths
+56.7\degree\ and 123.5\degree, lunar minor standstill risings at
+azimuths 69\degree\ and 111\degree. The summer sun rises at
+62.6\degree, the winter sun at 117.3\degree. An object which goes
+through the nadir rises at 125\degree.  
+
+\begin{figure}[t]
+\includegraphics[trim=5 0 5 0,clip,width=\textwidth]{GZ_MorningLatitude}
+\caption{Rising azimuths of a few important events for sun and moon,
+  and zenith and nadir passages depending on geographic latitudes
+  (vertical axis).}
+\label{fig:plugin:ArchaeoLines:MorningLatitudes}
+\end{figure}
+
+The blue lines seem to vanish at $\varphi=45\degree$: while there are
+still objects going through the zenith in higher latitudes, they are
+circumpolar and do not cross the horizon.
+
+For the lunar events, there are two lines each drawn by the plugin,
+for maximum and minimum distance of the moon.  The lunar extreme
 declinations are computed taking horizon parallax effects into
-account. Fore technical reasons however, the derived declinations are
+account. For technical reasons however, the derived declinations are
 then used to draw \emph{small circles} of constant declinations on the
 sphere, without taking the change of lunar horizontal parallax into
 account.  Note that therefore the observed declination of the moon at
 the major standstill can exceed the indicated limits if it is high in
-the sky.
+the sky. The main purpose of this plugin is however to show an
+indication of the intersection of the standstill line with the
+horizon.
 
 It may be very instructive to let the time run quite fast and observe
 the declination line of ``current moon'' swinging between its north

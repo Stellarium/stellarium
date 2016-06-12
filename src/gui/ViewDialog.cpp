@@ -307,6 +307,7 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showPrecessionCirclesCheckBox, "actionShow_Precession_Circles");
 	connectCheckBox(ui->showPrimeVerticalLineCheckBox, "actionShow_Prime_Vertical_Line");
 	connectCheckBox(ui->showColuresLineCheckBox, "actionShow_Colure_Lines");
+	connectCheckBox(ui->showCircumpolarCirclesCheckBox, "actionShow_Circumpolar_Circles");
 
 	// Constellations
 	connectCheckBox(ui->showConstellationLinesCheckBox, "actionShow_Constellation_Lines");
@@ -589,7 +590,7 @@ void ViewDialog::populateLists()
 	// Fill the projection list
 	l = ui->projectionListWidget;
 	l->blockSignals(true);
-	l->clear();
+	l->clear();	
 	const QStringList mappings = core->getAllProjectionTypeKeys();
 	foreach (QString s, mappings)
 	{

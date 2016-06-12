@@ -45,10 +45,15 @@ IF(NOT CMAKE_BUILD_TYPE)
     SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind Release RelWithDebInfo MinSizeRel." FORCE)
 ENDIF()
 
+SET(STELLARIUM_RELEASE_BUILD 0 CACHE BOOL "Set 1 to build as an official release (0 for development snapshots).")
+IF(STELLARIUM_RELEASE_BUILD)
+     ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
+ENDIF()
+
 # GZ I had seen that some releases (e.g. 0.13.3 Ubuntu/ARM) were not compiled with NDEBUG defined. Maybe a bug in compilatation setup? 
 # Hint from http://public.kitware.com/Bug/view.php?id=14292. Actually fixed with CMake 2.8.12, but maybe we have other effects?
 if(NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
-    add_definitions(-DQT_NO_DEBUG -DNDEBUG)
+    ADD_DEFINITIONS(-DQT_NO_DEBUG -DNDEBUG)
 endif()
 
 # Add gprof build options if necessary.  Note gmon.out will be created in working directory when Stellarium is executed
@@ -141,10 +146,6 @@ IF(ENABLE_NLS)
      ADD_DEFINITIONS(-DENABLE_NLS)
 ENDIF()
 
-SET(STELLARIUM_RELEASE_BUILD 1 CACHE BOOL "Flag this build as an official release.")
-IF(STELLARIUM_RELEASE_BUILD)
-     ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
-ENDIF()
 
 # Activate media support
 SET(ENABLE_MEDIA 1 CACHE BOOL "Define whether media support should be activated.")
@@ -296,11 +297,15 @@ ENDIF()
 
 ########### Get revision number for non-release builds ###########
 IF(NOT STELLARIUM_RELEASE_BUILD)
-    #Hack until CMake detection for Bazaar is finished
+    # Hack until CMake detection for Bazaar is finished
+    EXECUTE_PROCESS(COMMAND bzr revno WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE BZR_REVISION OUTPUT_STRIP_TRAILING_WHITESPACE)
+    EXECUTE_PROCESS(COMMAND bzr version-info --custom --template={branch_nick} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE BZR_BRANCH OUTPUT_STRIP_TRAILING_WHITESPACE)
     IF(BZR_REVISION)
-        SET(PACKAGE_VERSION "bzr${BZR_REVISION}")
+        SET(PACKAGE_VERSION "${VERSION}.${BZR_REVISION}")
         ADD_DEFINITIONS(-DBZR_REVISION="${BZR_REVISION}")
+        ADD_DEFINITIONS(-DBZR_BRANCH="${BZR_BRANCH}")
     ENDIF()
+#    MESSAGE(STATUS "Branch: ${BZR_BRANCH}; Revision: ${BZR_REVISION}")
     IF(STELLARIUM_VERSION)
         SET(PACKAGE_VERSION "${STELLARIUM_VERSION}")
         ADD_DEFINITIONS(-DSTELLARIUM_VERSION="${STELLARIUM_VERSION}")
@@ -309,6 +314,16 @@ ENDIF()
 
 
 IF(WIN32)
+    #######################################################
+    ### Generate icon file name                         ###
+    #######################################################
+
+    IF(STELLARIUM_RELEASE_BUILD)
+       SET(PACKAGE_ICON "stellarium")
+    ELSE()
+       SET(PACKAGE_ICON "stellarium-gray")
+    ENDIF()
+
     #######################################################
     ### Generate a VersionInfo file                     ###
     #######################################################

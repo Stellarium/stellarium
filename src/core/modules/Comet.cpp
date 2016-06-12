@@ -179,7 +179,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	if (flags&Magnitude)
 	{
 	    if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
-		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
+		oss << q_("Magnitude: <b>%1</b> (after extinction: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
 									    QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
 	    else
 		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
@@ -198,24 +198,26 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 
 	if (flags&Distance)
 	{
-		// GZ: Distance from sun should be added to all planets IMHO.
 		double distanceAu = getHeliocentricEclipticPos().length();
 		double distanceKm = AU * distanceAu;
-		if (distanceAu < 0.1)
+		if (englishName!="Sun")
 		{
-			// xgettext:no-c-format
-			oss << QString(q_("Distance from Sun: %1AU (%2 km)"))
-				   .arg(distanceAu, 0, 'f', 6)
-				   .arg(distanceKm, 0, 'f', 3);
+			if (distanceAu < 0.1)
+			{
+				// xgettext:no-c-format
+				oss << QString(q_("Distance from Sun: %1AU (%2 km)"))
+				       .arg(distanceAu, 0, 'f', 6)
+				       .arg(distanceKm, 0, 'f', 3);
+			}
+			else
+			{
+				// xgettext:no-c-format
+				oss << QString(q_("Distance from Sun: %1AU (%2 Mio km)"))
+				       .arg(distanceAu, 0, 'f', 3)
+				       .arg(distanceKm / 1.0e6, 0, 'f', 3);
+			}
+			oss << "<br>";
 		}
-		else
-		{
-			// xgettext:no-c-format
-			oss << QString(q_("Distance from Sun: %1AU (%2 Mio km)"))
-				   .arg(distanceAu, 0, 'f', 3)
-				   .arg(distanceKm / 1.0e6, 0, 'f', 3);
-		}
-		oss << "<br>";
 		distanceAu = getJ2000EquatorialPos(core).length();
 		distanceKm = AU * distanceAu;
 		if (distanceAu < 0.1)
