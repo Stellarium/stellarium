@@ -627,5 +627,7 @@ class Translations
 		N_("&Red:");
 		N_("&Green:");
 		N_("Bl&ue:");
+		N_("Select Color");
+		N_("Cursor at %1, %2 Press ESC to cancel");
 	}
 };
