@@ -79,8 +79,11 @@ public:
 	QPoint getMousePos();
 public slots:
 
-	//!	Set whether fullscreen is activated or not
+	//! Set whether fullscreen is activated or not
 	void setFullScreen(bool);
+
+	//! Set focus on the sky
+	void setFocusOnSky();
 
 	///////////////////////////////////////////////////////////////////////////
 	// Specific methods

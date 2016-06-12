@@ -31,10 +31,14 @@ class Translations
 		Q_ASSERT(0);
 
 		// Cardinals names
-		N_("N");	// North
-		N_("S");	// South
-		N_("E");	// East
-		N_("W");	// West
+		// TRANSLATORS: Cardinals names: North
+		N_("N");
+		// TRANSLATORS: Cardinals names: South
+		N_("S");
+		// TRANSLATORS: Cardinals names: East
+		N_("E");
+		// TRANSLATORS: Cardinals names: West
+		N_("W");
 
 		// =====================================================================
 		// List of types solar system bodies
@@ -177,11 +181,13 @@ class Translations
 		N_("Indian Vedic");
 		N_("Japanese Moon Stations");
 		N_("Korean");
-		N_("Lakota");
+		N_("Dakota/Lakota/Nakota");
+		N_("Macedonian");
 		N_("Maori");
 		N_("Mongolian");
 		N_("Navajo");
 		N_("Norse");
+		N_("Ojibwe");
 		N_("Polynesian");
 		N_("Romanian");
 		N_("Sami");
@@ -336,8 +342,8 @@ class Translations
 		N_("Earth the other visible Planet's Greatest Elongations and Oppositions from Ceres 2000-3000");
 		N_("A tour of Messier Objects");
 		N_("Tours around interesting objects, which accessible to observation with binoculars. The data for the script are taken from the eponymous book by Gary Seronik.");
-		N_("This script help you make an excursion around 20 fun double stars. The list has been collected by Jerry Lodriguss and published in Sky & Telescope 09/2014. Data taken from his website, http://www.astropix.com/doubles/");
-		N_("This script help you make an excursion around largest known stars.");
+		N_("This script helps you make an excursion around 20 fun double stars. The list has been collected by Jerry Lodriguss and published in Sky & Telescope 09/2014. Data taken from his website, http://www.astropix.com/doubles/");
+		N_("This script helps you make an excursion around largest known stars.");
 		N_("A tour around objects from the Herschel 400 Catalogue");
 		N_("Ben Crowell has created Binosky, an observing list of Deep Sky Objects for Binoculars. In the script we give a list of these 31 objects, ordered by Right Ascension (2000.0).");
 		N_("The Jack Bennett Catalog of Southern Deep-Sky Objects. The Bennett catalog was contributed by Auke Slotegraaf.");
@@ -611,5 +617,15 @@ class Translations
 		N_("Copy &Link Location");
 		N_("Abort");
 		N_("Ignore");
+		N_("&Basic colors");
+		N_("Pick Screen Color");
+		N_("&Custom colors");
+		N_("&Add to Custom Colors");
+		N_("Hu&e:");
+		N_("&Sat:");
+		N_("&Val:");
+		N_("&Red:");
+		N_("&Green:");
+		N_("Bl&ue:");
 	}
 };

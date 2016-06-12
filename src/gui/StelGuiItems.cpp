@@ -82,12 +82,13 @@ void StelButton::initCtor(const QPixmap& apixOn,
 	pixOff = apixOff;
 	pixHover = apixHover;
 	pixNoChange = apixNoChange;
-	noBckground = noBackground;
+	noBckground = !StelApp::getInstance().getSettings()->value("gui/flag_show_buttons_background", !noBackground).toBool();
 	isTristate_ = isTristate;
 	opacity = 1.;
 	hoverOpacity = 0.;
 	action = aaction;
 	checked = false;
+	flagChangeFocus = false;
 
 	Q_ASSERT(!pixOn.isNull());
 	Q_ASSERT(!pixOff.isNull());
@@ -198,6 +199,9 @@ void StelButton::mouseReleaseEvent(QGraphicsSceneMouseEvent*)
 {
 	if (action!=NULL && !action->isCheckable())
 		setChecked(toggleChecked(checked));
+
+	if (flagChangeFocus) // true if button is on bottom bar
+		StelMainView::getInstance().setFocusOnSky(); // Change the focus after clicking on button
 }
 
 void StelButton::updateIcon()
@@ -268,6 +272,7 @@ void LeftStelBar::addButton(StelButton* button)
 		posY += r.bottom()-1;
 	}
 	button->setParentItem(this);
+	button->setFocusOnSky(false);
 	button->prepareGeometryChange(); // could possibly be removed when qt 4.6 become stable
 	button->setPos(0., qRound(posY+10.5));
 
@@ -437,6 +442,7 @@ void BottomStelBar::addButton(StelButton* button, const QString& groupName, cons
 
 	button->setVisible(true);
 	button->setParentItem(this);
+	button->setFocusOnSky(true);
 	updateButtonsGroups();
 
 	connect(button, SIGNAL(hoverChanged(bool)), this, SLOT(buttonHoverChanged(bool)));

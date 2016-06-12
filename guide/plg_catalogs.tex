@@ -631,7 +631,7 @@ To add a new quasar, open a new line after line 5 and paste the following, note 
 \end{figure}
 
 \noindent In contrast and extension of the random \emph{shooting stars}
-feature of Stellarium (see section~\ref{ch:Phenomena:Meteoroids}), this 
+feature of Stellarium (see section~\ref{sec:Phenomena:Meteoroids}), this 
 plugin provides data for real meteor showers and a marker for each 
 active and inactive radiant, showing real information about its activity. 
 If enabled (see section~\ref{sec:Plugins:EnablingPlugins}), just click 
@@ -933,8 +933,8 @@ description field can accept HTML tags such as \texttt{<br/>} (new line), \textt
 \item[description] optional parameter, double quoted. Appears when you click on the satellite
 \item[comms] optional parameter, square bracketed list of curly bracketed communications information.
 \item[groups]  optional parameter, comma separated list of double quoted group names contained in square brackets. Used for grouping satellites in the drop down box on the config (see above)
-\item[tle1]  required parameter, line 1 of the TLE, must be contained in double quotes and begin with \texttt{"1 "}
-\item[tle2]  required parameter, line 2 of the TLE, must be contained in double quotes and begin with \texttt{"2 "}
+\item[tle1]  required, line 1 of the TLE, must be contained in double quotes and begin with \texttt{"1~"}
+\item[tle2]  required, line 2 of the TLE, must be contained in double quotes and begin with \texttt{"2~"}
 \item[visible]  required parameter, set to true if you want to see it, this can be toggled from the configuration window once the satellite is loaded. 
 \end{description}
 You can edit the tags for a satellite, modify the description and comms data, and even add new satellites. 

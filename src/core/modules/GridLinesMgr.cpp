@@ -79,7 +79,9 @@ public:
 		LONGITUDE,
 		PRIME_VERTICAL,
 		COLURE_1,
-		COLURE_2
+		COLURE_2,
+		CIRCUMPOLARCIRCLE_N,
+		CIRCUMPOLARCIRCLE_S
 	};
 	// Create and precompute positions of a SkyGrid
 	SkyLine(SKY_LINE_TYPE _line_type = EQUATOR_J2000);
@@ -628,7 +630,7 @@ void SkyLine::updateLabel()
 			label = q_("Galactic Equator");
 			break;
 		case LONGITUDE:
-			frameType = StelCore::FrameObservercentricEclipticOfDate; // For 0.14.2: Switch from Ecl2000 to FrameObservercentriEclipticOfDate
+			frameType = StelCore::FrameObservercentricEclipticJ2000;
 			// TRANSLATORS: Full term is "opposition/conjunction longitude"
 			label = q_("O./C. longitude");
 			break;
@@ -643,6 +645,11 @@ void SkyLine::updateLabel()
 		case COLURE_2:
 			frameType=StelCore::FrameEquinoxEqu;
 			label = q_("Solstitial Colure");
+			break;
+		case CIRCUMPOLARCIRCLE_N:
+		case CIRCUMPOLARCIRCLE_S:
+			frameType = StelCore::FrameEquinoxEqu;
+			label = q_("Circumpolar Circle");
 			break;
 		default:
 			Q_ASSERT(0);
@@ -678,10 +685,26 @@ void SkyLine::draw(StelCore *core) const
 	/////////////////////////////////////////////////
 	// Draw the line
 
-	// Precession circles are Small Circles, all others are Great Circles.
-	if (line_type==PRECESSIONCIRCLE_N || line_type==PRECESSIONCIRCLE_S)
+	// Precession and Circumpolar circles are Small Circles, all others are Great Circles.
+	if (line_type==PRECESSIONCIRCLE_N || line_type==PRECESSIONCIRCLE_S || line_type==CIRCUMPOLARCIRCLE_N || line_type==CIRCUMPOLARCIRCLE_S)
 	{
-		const double lat=(line_type==PRECESSIONCIRCLE_S ? -1.0 : 1.0) * (M_PI/2.0-getPrecessionAngleVondrakCurrentEpsilonA());
+		double lat;
+		if (line_type==PRECESSIONCIRCLE_N || line_type==PRECESSIONCIRCLE_S)
+		{
+			lat=(line_type==PRECESSIONCIRCLE_S ? -1.0 : 1.0) * (M_PI/2.0-getPrecessionAngleVondrakCurrentEpsilonA());
+		}
+		else // circumpolar:
+		{
+			const double obsLatRad=core->getCurrentLocation().latitude * (M_PI/180.);
+			if (obsLatRad == 0.)
+				return;
+
+			if (line_type==CIRCUMPOLARCIRCLE_N)
+				lat=(obsLatRad>0 ? -1.0 : +1.0) * obsLatRad + (M_PI/2.0);
+			else // southern circle
+				lat=(obsLatRad>0 ? +1.0 : -1.0) * obsLatRad - (M_PI/2.0);
+
+		}
 		SphericalCap declinationCap(Vec3d(0,0,1), std::sin(lat));
 		const Vec3d rotCenter(0,0,declinationCap.d);
 
@@ -761,7 +784,6 @@ void SkyLine::draw(StelCore *core) const
 		meridianSphericalCap.n.set(1,0,0);
 		fpt.set(0,0,1);
 	}
-
 	if (line_type==LONGITUDE)
 	{
 		Vec3d coord;
@@ -839,6 +861,8 @@ GridLinesMgr::GridLinesMgr()
 	primeVerticalLine = new SkyLine(SkyLine::PRIME_VERTICAL);
 	colureLine_1 = new SkyLine(SkyLine::COLURE_1);
 	colureLine_2 = new SkyLine(SkyLine::COLURE_2);
+	circumpolarCircleN = new SkyLine(SkyLine::CIRCUMPOLARCIRCLE_N);
+	circumpolarCircleS = new SkyLine(SkyLine::CIRCUMPOLARCIRCLE_S);
 }
 
 GridLinesMgr::~GridLinesMgr()
@@ -862,6 +886,8 @@ GridLinesMgr::~GridLinesMgr()
 	delete primeVerticalLine;
 	delete colureLine_1;
 	delete colureLine_2;
+	delete circumpolarCircleN;
+	delete circumpolarCircleS;
 }
 
 /*************************************************************************
@@ -896,6 +922,7 @@ void GridLinesMgr::init()
 	setFlagLongitudeLine(conf->value("viewing/flag_longitude_line").toBool());
 	setFlagPrimeVerticalLine(conf->value("viewing/flag_prime_vertical_line").toBool());
 	setFlagColureLines(conf->value("viewing/flag_colure_lines").toBool());
+	setFlagCircumpolarCircles(conf->value("viewing/flag_circumpolar_circles").toBool());
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
@@ -915,7 +942,8 @@ void GridLinesMgr::init()
 	setColorLongitudeLine(StelUtils::strToVec3f(conf->value("color/longitude_color", defaultColor).toString()));
 	setColorPrimeVerticalLine(StelUtils::strToVec3f(conf->value("color/prime_vertical_color", defaultColor).toString()));
 	setColorColureLines(StelUtils::strToVec3f(conf->value("color/colures_color", defaultColor).toString()));
-	
+	setColorCircumpolarCircles(StelUtils::strToVec3f(conf->value("color/circumpolar_circles_color", defaultColor).toString()));
+
 	StelApp& app = StelApp::getInstance();
 	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateLineLabels()));
 	
@@ -937,6 +965,7 @@ void GridLinesMgr::init()
 	addAction("actionShow_Precession_Circles", displayGroup, N_("Precession Circles"), "precessionCirclesDisplayed");
 	addAction("actionShow_Prime_Vertical_Line", displayGroup, N_("Prime Vertical"), "primeVerticalLineDisplayed");
 	addAction("actionShow_Colure_Lines", displayGroup, N_("Colure Lines"), "colureLinesDisplayed");
+	addAction("actionShow_Circumpolar_Circles", displayGroup, N_("Circumpolar Circles"), "circumpolarCirclesDisplayed");
 }
 
 void GridLinesMgr::update(double deltaTime)
@@ -961,6 +990,8 @@ void GridLinesMgr::update(double deltaTime)
 	primeVerticalLine->update(deltaTime);
 	colureLine_1->update(deltaTime);
 	colureLine_2->update(deltaTime);
+	circumpolarCircleN->update(deltaTime);
+	circumpolarCircleS->update(deltaTime);
 }
 
 void GridLinesMgr::draw(StelCore* core)
@@ -992,6 +1023,8 @@ void GridLinesMgr::draw(StelCore* core)
 	meridianLine->draw(core);
 	horizonLine->draw(core);
 	primeVerticalLine->draw(core);
+	circumpolarCircleN->draw(core);
+	circumpolarCircleS->draw(core);
 }
 
 void GridLinesMgr::updateLineLabels()
@@ -1009,6 +1042,8 @@ void GridLinesMgr::updateLineLabels()
 	primeVerticalLine->updateLabel();
 	colureLine_1->updateLabel();
 	colureLine_2->updateLabel();
+	circumpolarCircleN->updateLabel();
+	circumpolarCircleS->updateLabel();
 }
 
 //! Set flag for displaying Azimuthal Grid
@@ -1438,5 +1473,33 @@ void GridLinesMgr::setColorColureLines(const Vec3f& newColor)
 		colureLine_1->setColor(newColor);
 		colureLine_2->setColor(newColor);
 		emit colureLinesColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying Circumpolar Circles
+void GridLinesMgr::setFlagCircumpolarCircles(const bool displayed)
+{
+	if(displayed != circumpolarCircleN->isDisplayed()) {
+		circumpolarCircleN->setDisplayed(displayed);
+		circumpolarCircleS->setDisplayed(displayed);
+		emit circumpolarCirclesDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Circumpolar Circles
+bool GridLinesMgr::getFlagCircumpolarCircles(void) const
+{
+	// circumpolarCircleS is always synchronous, no separate queries.
+	return circumpolarCircleN->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorCircumpolarCircles(void) const
+{
+	return circumpolarCircleN->getColor();
+}
+void GridLinesMgr::setColorCircumpolarCircles(const Vec3f& newColor)
+{
+	if(newColor != circumpolarCircleN->getColor()) {
+		circumpolarCircleN->setColor(newColor);
+		circumpolarCircleS->setColor(newColor);
+		emit circumpolarCirclesColorChanged(newColor);
 	}
 }
