@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-06-09 22:16+0700\n"
-"PO-Revision-Date: 2016-06-10 12:13+0000\n"
+"POT-Creation-Date: 2016-06-11 12:25+0700\n"
+"PO-Revision-Date: 2016-06-11 22:37+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-11 05:16+0000\n"
+"X-Launchpad-Export-Date: 2016-06-12 04:40+0000\n"
 "X-Generator: Launchpad (build 18097)\n"
 "Language: gd\n"
 
@@ -107,7 +107,7 @@ msgstr "Colur nan grian-stad"
 
 #: src/core/modules/GridLinesMgr.cpp:652
 msgid "Circumpolar Circle"
-msgstr ""
+msgstr "Cearcall pòlarach"
 
 #: src/core/modules/GridLinesMgr.cpp:951
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:339
@@ -184,7 +184,7 @@ msgstr "Loidhnichean colur"
 
 #: src/core/modules/GridLinesMgr.cpp:968
 msgid "Circumpolar Circles"
-msgstr ""
+msgstr "Cearcaill phòlarach"
 
 #: src/core/modules/LandscapeMgr.cpp:418 src/ui_viewDialog.h:1613
 msgid "Atmosphere"
@@ -257,7 +257,7 @@ msgstr "Trìd-dhoilleireachd: <b>%1</b>"
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:191
 #, qt-format
 msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
-msgstr ""
+msgstr "Meudachd: <b>%1</b> (às dèidh a' chrìonaidh: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
 #: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
@@ -283,6 +283,7 @@ msgstr "Inneacs datha (B-V): <b>%1</b>"
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
 msgstr ""
+"Soillearachd an uachdair: <b>%1</b> (às dèidh a' chrìonaidh: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:230
 #, qt-format
@@ -1541,6 +1542,10 @@ msgid ""
 "equator, ecliptic, hour lines, etc. into straight lines. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
+"Nì an tilg-shealladh buaidhe-astair mapachadh air an fhàire agus mòr-"
+"chearcaill eile mar am meadhan-chrios, an t-èiclipteach agus loidhnichean "
+"ama nan loidhnichean dìreach. Is <i>tilg-shealladh gnomonaigeach</i> an t-"
+"ainm matamataigeach airson an dòigh seallaidh seo."
 
 #: src/core/StelProjectorClasses.cpp:86
 msgid "Equal Area"
@@ -1551,6 +1556,8 @@ msgid ""
 "The full name of this projection method is <i>Lambert azimuthal equal-area "
 "projection</i>. It preserves the area but not the angle."
 msgstr ""
+"Is <i>tilg-shealladh co-fharsaingeach azimuthach Lambert</i> ainm slàn an t-"
+"seallaidh seo. Glèidhidh i an fharsaingeachd ach cha ghlèidh i an ceàrn."
 
 #: src/core/StelProjectorClasses.cpp:143
 msgid "Stereographic"
@@ -1562,6 +1569,9 @@ msgid ""
 "as the planisphere projection. It preserves the angles at which curves cross "
 "each other but it does not preserve area."
 msgstr ""
+"Bhiodhte eòlach air an tilg-shealladh stereografach o shean agus chuirte "
+"tilg-shealladh planisphere air o thùs. Glèidhidh e na ceàrnan leis an dèid "
+"na lùban thar càch a chèile ach cha ghlèidh e an fharsaingeachd."
 
 #: src/core/StelProjectorClasses.cpp:197
 msgid "Fish-eye"
@@ -1648,7 +1658,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:502
 msgid "Miller cylindrical"
-msgstr ""
+msgstr "Siolandair Mhiller"
 
 #: src/core/StelProjectorClasses.cpp:507
 msgid ""
@@ -1656,6 +1666,10 @@ msgid ""
 "proposed by Osborn Maitland Miller (1897–1979) in 1942. The poles are no "
 "longer mapped to infinity."
 msgstr ""
+"Is atharrachadh air an tilg-shealladh Mhercator a th' ann an tilg-shealladh "
+"siolandrach Mhiller a chaidh a thairgsinn le Osborn Maitland Miller "
+"(1897–1979) ann an 1942. Cha dèid na pòlaichean a mhapachadh dhan neo-"
+"chrìochnachd tuilleadh."
 
 #: src/core/StelObject.cpp:114
 msgctxt "coordinates for current epoch"
@@ -2154,9 +2168,9 @@ msgid ""
 "properly or is missing and is not listed in the tracker, you can open bug "
 "reports here."
 msgstr ""
-"{Siostam aithris air bugaichean is iarrtasan fheartan} - mura h-eil rudeigin "
+"{Siostam aithris air bugaichean is iarrtasan ghleusan} - mura h-eil rudeigin "
 "ag obair mar bu chòir no ma tha rudeigin a dhìth is cha nochd e air an "
-"tracaiche, faodaidh tu aithiris air buga fhosgladh an-seo."
+"tracaiche, faodaidh tu aithris air buga fhosgladh an-seo."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:238
@@ -2429,7 +2443,7 @@ msgstr "Reat àbhaisteach aig dreagan an t-Sealgair Mhòir"
 
 #: src/gui/ViewDialog.cpp:860
 msgid "Standard Perseids rate"
-msgstr "Reat àbhaisteach aig dreagan Pherseus"
+msgstr "Reat àbhaisteach aig dreagan Làmh a' Chlaidheimh"
 
 #: src/gui/ViewDialog.cpp:863
 msgid "Standard Geminids rate"
@@ -3217,11 +3231,11 @@ msgstr "Coirèanach"
 
 #: src/translations.h:184
 msgid "Dakota/Lakota/Nakota"
-msgstr ""
+msgstr "Dakhóta/Lakhóta/Nakhóta"
 
 #: src/translations.h:185
 msgid "Macedonian"
-msgstr ""
+msgstr "Masadonais"
 
 #: src/translations.h:186
 msgid "Maori"
@@ -3241,7 +3255,7 @@ msgstr "Lochlannach"
 
 #: src/translations.h:190
 msgid "Ojibwe"
-msgstr ""
+msgstr "Ojibwa"
 
 #: src/translations.h:191
 msgid "Polynesian"
@@ -4838,43 +4852,43 @@ msgstr "Leig seachad"
 
 #: src/translations.h:620
 msgid "&Basic colors"
-msgstr ""
+msgstr "Dathan &bunasach"
 
 #: src/translations.h:621
 msgid "Pick Screen Color"
-msgstr ""
+msgstr "Tagh dath na sgrìn"
 
 #: src/translations.h:622
 msgid "&Custom colors"
-msgstr ""
+msgstr "Dathan &gnàthaichte"
 
 #: src/translations.h:623
 msgid "&Add to Custom Colors"
-msgstr ""
+msgstr "Cuir ris na d&athan gnàthaichte"
 
 #: src/translations.h:624
 msgid "Hu&e:"
-msgstr ""
+msgstr "&Tuar:"
 
 #: src/translations.h:625
 msgid "&Sat:"
-msgstr ""
+msgstr "&Sàthachd:"
 
 #: src/translations.h:626
 msgid "&Val:"
-msgstr ""
+msgstr "&Luach:"
 
 #: src/translations.h:627
 msgid "&Red:"
-msgstr ""
+msgstr "&Dearg:"
 
 #: src/translations.h:628
 msgid "&Green:"
-msgstr ""
+msgstr "&Uaine:"
 
 #: src/translations.h:629
 msgid "Bl&ue:"
-msgstr ""
+msgstr "&Gorm:"
 
 #: src/ui_dateTimeDialogGui.h:380
 msgid "Date and Time in Gregorian calendar"
@@ -5576,10 +5590,12 @@ msgid ""
 "These circles delimit stars which stay always above (respectively below) the "
 "mathematical horizon."
 msgstr ""
+"Seallaidh na cearcaill seo crìoch nan reultan a dh'fhuiricheas os cionn na "
+"fàire  matamataigich (no foidhpese) an-còmhnaidh."
 
 #: src/ui_viewDialog.h:1802
 msgid "Circumpolar circles"
-msgstr ""
+msgstr "Cearcaill phòlarach"
 
 #: src/ui_viewDialog.h:1804
 msgid ""
@@ -6693,7 +6709,7 @@ msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
 msgstr ""
-"Nam bu toigh leat feart ùr iarraidh, cruthaich aithris air buga is suidhich "
+"Nam bu toigh leat gleus ùr iarraidh, cruthaich aithris air buga is suidhich "
 "\"Importance\" air \"wishlist\"."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
@@ -7177,7 +7193,7 @@ msgstr "Plugan nan sùileach"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:550
 msgid "Barlow lens feature"
-msgstr "Feart lionsa Bharlow"
+msgstr "Gleus lionsa Bharlow"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:554
 msgid "Overview"
@@ -7253,7 +7269,7 @@ msgid ""
 msgstr ""
 "'S urrainn dhut fradharc-luirg Telrad a thoglachadh; cha ghabh seo a "
 "dhèanamh ach mur an do chuir thu an sealladh nan Sùileach air. Tarraingidh "
-"am feart seo trì cearcaill cho-chearclach dhe 0.5%1, 2.0%1 is 4.0%1 a "
+"an gleus seo trì cearcaill cho-chearclach dhe 0.5%1, 2.0%1 is 4.0%1 a "
 "chuidicheas ach am faic thu air an robh thu an dùil leis an t-sùil lom tro "
 "fradharc Telrad (no fear coltach ris)."
 
@@ -7750,7 +7766,7 @@ msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
 msgstr ""
-"Tha plugan nan saideal 'ga leasachadh fhathast. Chan eil gach feart "
+"Tha plugan nan saideal 'ga leasachadh fhathast. Chan eil gach gleus aige "
 "coileanta agus dh'fhaoidte gu bheil cuidh dhiubh a dhìth no làn bugaichean."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
@@ -8321,7 +8337,7 @@ msgid ""
 "control feature);"
 msgstr ""
 "na clasaichean Telescope, TelescopeDummy, TelescopeTcp agus TelescopeMgr ann "
-"an còd Stellarium (taobh a' chliant aig feart tùsail nan glainneachan-"
+"an còd Stellarium (taobh a' chliant aig gleus tùsail nan glainneachan-"
 "amhairc aig Stellarium);"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:260
@@ -8389,7 +8405,7 @@ msgstr "Comasan is cuingeachaidhean"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:282
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
 msgid "The original telescope control feature"
-msgstr "Feart tùsail gus glainneachan-amhairc a stiùireadh"
+msgstr "An gleus tùsail gus glainneachan-amhairc a stiùireadh"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
@@ -8504,7 +8520,7 @@ msgid ""
 msgstr ""
 "Fiù 's mura dèan tu a dh'aona-ghnothaich e, le tionndadh air an latha, "
 "dh'fhaoidte gun tomh a' ghlainne-amhairc ris a' ghrian air slighe a' chinn-"
-"uidhe. Mar sin, mholamaid nach cleachd thu feart stiùireadh nan glainneachan-"
+"uidhe. Mar sin, mholamaid nach cleachd thu gleus stiùireadh nan glainneachan-"
 "amhairc idir ro laighe na grèine às aonais dìona iomchaidh."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
@@ -8529,7 +8545,7 @@ msgid ""
 "removed. There is no longer a way to control a telescope with Stellarium "
 "without this plug-in."
 msgstr ""
-"Chaidh feart tùsail airson stiùireadh nan glainneachan-amhairc aig "
+"Chaidh an gleus tùsail airson stiùireadh nan glainneachan-amhairc aig "
 "Stellarium a thoirt air falbh leis an tionndadh 0.10.5. Chan eil dòigh ann "
 "gus glainne-amhairc a stiùireadh le Stellarium às aonais a' plugain seo a-"
 "nis."
@@ -8938,7 +8954,7 @@ msgid ""
 msgstr ""
 "'S urrainn dhut sreath dhe chearcaill a riochdaicheas raointean seallaidh "
 "eadar-dhealaichte a chur timcheall air comharra na glainne-amhairc. Seo "
-"seann-fheart on àm nach robh am plugan <strong>Sùilich</strong> ann fhathast."
+"seann-ghleus on àm nach robh am plugan <strong>Sùilich</strong> ann fhathast."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:379
 msgid ""
@@ -9248,8 +9264,8 @@ msgid ""
 "This feature is equivalent to the 'Dummy' type of telescope supported by "
 "%1Stellarium's original telescope control feature%2."
 msgstr ""
-"Tha am feart seo co-ionnann ris an t-seòrsa glainne-amhairc \"caochaige\" a "
-"chuir am %1 feart tùsail aig Stellarium gus glainneachan-amhairc a "
+"Tha an gleus seo co-ionnann ris an t-seòrsa glainne-amhairc \"caochaige\" a "
+"chuir %1an gleus tùsail aig Stellarium gus glainneachan-amhairc a "
 "stiùireadh%2 ris."
 
 #. TRANSLATORS: Symbol for "number"
@@ -10449,7 +10465,7 @@ msgstr "Reultan-iùil"
 
 #: plugins/NavStars/src/NavStars.cpp:54
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:94
-msgid "This plugin marks navigational stars from selected set."
+msgid "This plugin marks navigational stars from a selected set."
 msgstr ""
 "Cuiridh am plugan seo comharra ri reultan-iùil o thaghadh dhe reultan."
 
@@ -10476,18 +10492,20 @@ msgstr ""
 #: plugins/NavStars/src/NavStars.cpp:316
 #, qt-format
 msgid ""
-"The 81 stars that are listed in <em>%1</em> published by French Bureau des "
-"Longitudes."
+"The 81 stars that are listed in the <em>%1</em> published by the French "
+"Bureau des Longitudes."
 msgstr ""
+"Chaidh an 81 reul air liosta <em>%1</em> fhoillseachadh le Bureau des "
+"Longitudes Frangach."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:322
 #, qt-format
 msgid ""
-"The 160 stars that are listed in the Russian Nautical Almanac (Original "
+"The 160 stars that are listed in the Russian Nautical Almanac (The original "
 "Russian title is <em>%1</em>)."
 msgstr ""
-"Seo an 160 reul air liosta an Almanaic Sheòladairich Ruisich (is <em>%1</em> "
+"Seo an 160 reul air liosta an Almanaic Sheòladairich Ruisich (Is <em>%1</em> "
 "an t-ainm tùsail a th' air san Ruisis)."
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
@@ -12733,7 +12751,7 @@ msgstr "Dreagan an Seachdarain"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:65
 msgid "Perseids"
-msgstr "Dreagan Pherseus"
+msgstr "Dreagan Làmh a' Chlaidheimh"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:67
@@ -13171,8 +13189,8 @@ msgid ""
 msgstr ""
 "'S e an t-ionad san speur on a thig na dreagan ann an sùilean neach-amhairc "
 "air a' phlanaid a th' ann an dealradh no dealradh lèirsinneach aig fras "
-"dhreagan. Mar eisimpleir, tha coltas gun dig dreagan Pherseus o ionad san "
-"reul-bhad Pherseus."
+"dhreagan. Mar eisimpleir, tha coltas gun dig dreagan Làmh a' Chlaidheimh o "
+"ionad san reul-bhad Làmh a' Chlaidheimh."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:271
 msgid ""
@@ -13835,7 +13853,7 @@ msgid ""
 "the cube at once. It may be the fastest method depending on the scene and "
 "your GPU hardware. If not supported, this cannot be selected."
 msgstr ""
-"Cleachdaidh an <b>Sgàileadair geomatrais</b> feart GPU ùr-nòsach gus a h-"
+"Cleachdaidh an <b>Sgàileadair geomatrais</b> gleus GPU ùr-nòsach gus a h-"
 "uile 6 taobh dhen chiùb a reandaradh aig an aon àm. Dh'fhaoidte gur e seo an "
 "dòigh as luaithe a-rèir an t-seallaidh agus bathar-cruaidh an GPU agad. Mura "
 "cuirear taic ris, cha ghabh seo a thaghadh."
