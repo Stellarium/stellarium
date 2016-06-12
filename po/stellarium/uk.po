@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-09 22:16+0700\n"
-"PO-Revision-Date: 2016-06-09 20:30+0000\n"
+"POT-Creation-Date: 2016-06-11 12:25+0700\n"
+"PO-Revision-Date: 2016-06-11 15:52+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-10 05:41+0000\n"
+"X-Launchpad-Export-Date: 2016-06-12 04:53+0000\n"
 "X-Generator: Launchpad (build 18097)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -10391,7 +10391,7 @@ msgstr "Навігаційна зірка"
 
 #: plugins/NavStars/src/NavStars.cpp:54
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:94
-msgid "This plugin marks navigational stars from selected set."
+msgid "This plugin marks navigational stars from a selected set."
 msgstr "Цей додаток позначає навігаційні зірки із вибраного вами набору."
 
 #: plugins/NavStars/src/NavStars.cpp:112
@@ -10416,20 +10416,21 @@ msgstr ""
 #: plugins/NavStars/src/NavStars.cpp:316
 #, qt-format
 msgid ""
-"The 81 stars that are listed in <em>%1</em> published by French Bureau des "
-"Longitudes."
+"The 81 stars that are listed in the <em>%1</em> published by the French "
+"Bureau des Longitudes."
 msgstr ""
-"81 зірок зі списку <em>%1</em>, опублікованого французьким Бюро довгот."
+"81 зірка зі списку <em>%1</em>, публікацію якого здійснює французьке Бюро "
+"довгот."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:322
 #, qt-format
 msgid ""
-"The 160 stars that are listed in the Russian Nautical Almanac (Original "
+"The 160 stars that are listed in the Russian Nautical Almanac (The original "
 "Russian title is <em>%1</em>)."
 msgstr ""
-"160 зі списку російського «Календаря мореплавця» (назва російською — "
-"<em>%1</em>)."
+"160 зірок зі списку російського морського календаря (початкова назва "
+"російською — <em>%1</em>)."
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
 msgid "Navigational Stars Plug-in"
