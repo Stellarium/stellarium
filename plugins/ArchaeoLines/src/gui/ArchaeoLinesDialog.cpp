@@ -93,6 +93,18 @@ void ArchaeoLinesDialog::createDialogContent()
 	setCurrentPlanetFromApp();
 	connect(al, SIGNAL(currentPlanetChanged(ArchaeoLine::Line)), this, SLOT(setCurrentPlanetFromApp()));
 	connect(ui->currentPlanetComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setCurrentPlanetFromGUI(int)));
+	ui->customAzimuth1CheckBox->setChecked(al->isCustomAzimuth1Displayed());
+	connect(ui->customAzimuth1CheckBox, SIGNAL(toggled(bool)), al, SLOT(showCustomAzimuth1(bool)));
+	ui->customAzimuth2CheckBox->setChecked(al->isCustomAzimuth2Displayed());
+	connect(ui->customAzimuth2CheckBox, SIGNAL(toggled(bool)), al, SLOT(showCustomAzimuth2(bool)));
+	ui->customAzimuth1DoubleSpinBox->setValue(al->getLineAngle(ArchaeoLine::CustomAzimuth1));
+	ui->customAzimuth2DoubleSpinBox->setValue(al->getLineAngle(ArchaeoLine::CustomAzimuth2));
+	connect(ui->customAzimuth1DoubleSpinBox, SIGNAL(valueChanged(double)), al, SLOT(setCustomAzimuth1(double)));
+	connect(ui->customAzimuth2DoubleSpinBox, SIGNAL(valueChanged(double)), al, SLOT(setCustomAzimuth2(double)));
+	ui->customAzimuth1LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomAzimuth1));
+	ui->customAzimuth2LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomAzimuth2));
+	connect(ui->customAzimuth1LineEdit, SIGNAL(textChanged(QString)), al, SLOT(setCustomAzimuth1Label(QString)));
+	connect(ui->customAzimuth2LineEdit, SIGNAL(textChanged(QString)), al, SLOT(setCustomAzimuth2Label(QString)));
 
 	equinoxColor         = al->getLineColor(ArchaeoLine::Equinox);
 	solsticeColor        = al->getLineColor(ArchaeoLine::Solstices);
@@ -105,6 +117,8 @@ void ArchaeoLinesDialog::createDialogContent()
 	currentSunColor      = al->getLineColor(ArchaeoLine::CurrentSun);
 	currentMoonColor     = al->getLineColor(ArchaeoLine::CurrentMoon);
 	currentPlanetColor   = al->getLineColor(ArchaeoLine::CurrentPlanetNone);
+	customAzimuth1Color  = al->getLineColor(ArchaeoLine::CustomAzimuth1);
+	customAzimuth2Color  = al->getLineColor(ArchaeoLine::CustomAzimuth2);
 	equinoxColorPixmap=QPixmap(48, 12);
 	equinoxColorPixmap.fill(equinoxColor);
 	ui->equinoxColorToolButton->setIconSize(QSize(48, 12));
@@ -149,6 +163,14 @@ void ArchaeoLinesDialog::createDialogContent()
 	currentPlanetColorPixmap.fill(currentPlanetColor);
 	ui->currentPlanetColorToolButton->setIconSize(QSize(48, 12));
 	ui->currentPlanetColorToolButton->setIcon(QIcon(currentPlanetColorPixmap));
+	customAzimuth1ColorPixmap=QPixmap(48, 12);
+	customAzimuth1ColorPixmap.fill(customAzimuth1Color);
+	ui->customAzimuth1ColorToolButton->setIconSize(QSize(48, 12));
+	ui->customAzimuth1ColorToolButton->setIcon(QIcon(customAzimuth1ColorPixmap));
+	customAzimuth2ColorPixmap=QPixmap(48, 12);
+	customAzimuth2ColorPixmap.fill(customAzimuth2Color);
+	ui->customAzimuth2ColorToolButton->setIconSize(QSize(48, 12));
+	ui->customAzimuth2ColorToolButton->setIcon(QIcon(customAzimuth2ColorPixmap));
 
 	connect(ui->equinoxColorToolButton,         SIGNAL(released()), this, SLOT(askEquinoxColor()));
 	connect(ui->solsticesColorToolButton,       SIGNAL(released()), this, SLOT(askSolsticeColor()));
@@ -161,10 +183,11 @@ void ArchaeoLinesDialog::createDialogContent()
 	connect(ui->currentSunColorToolButton,      SIGNAL(released()), this, SLOT(askCurrentSunColor()));
 	connect(ui->currentMoonColorToolButton,     SIGNAL(released()), this, SLOT(askCurrentMoonColor()));
 	connect(ui->currentPlanetColorToolButton,   SIGNAL(released()), this, SLOT(askCurrentPlanetColor()));
+	connect(ui->customAzimuth1ColorToolButton,  SIGNAL(released()), this, SLOT(askCustomAzimuth1Color()));
+	connect(ui->customAzimuth2ColorToolButton,  SIGNAL(released()), this, SLOT(askCustomAzimuth2Color()));
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(resetArchaeoLinesSettings()));
 
-	ui->formatDisplayBox->hide();
 	// We must apparently warn about a potential problem, but only on Windows. (QTBUG-35302)
 	#ifndef Q_OS_WIN
 	ui->switchToWindowedModeLabel->hide();
@@ -209,6 +232,7 @@ void ArchaeoLinesDialog::setAboutHtml(void)
 			   "There are two lines each drawn, for maximum and minimum distance of the moon. "
 			   "Note that declination of the moon at the major standstill can exceed the "
 			   "indicated limits if it is high in the sky due to parallax effects.") + "</p>";
+	html += "<p>" + q_("In addition, up to two vertical lines with arbitrary azimuth and custom label can be shown.") + "</p>";
 
 	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("ArchaeoLines plugin") + "</p>";
@@ -248,6 +272,8 @@ void ArchaeoLinesDialog::resetArchaeoLinesSettings()
 	currentSunColor      = al->getLineColor(ArchaeoLine::CurrentSun);
 	currentMoonColor     = al->getLineColor(ArchaeoLine::CurrentMoon);
 	currentPlanetColor   = al->getLineColor(ArchaeoLine::CurrentPlanetNone);
+	customAzimuth1Color  = al->getLineColor(ArchaeoLine::CustomAzimuth1);
+	customAzimuth2Color  = al->getLineColor(ArchaeoLine::CustomAzimuth2);
 	equinoxColorPixmap.fill(equinoxColor);
 	ui->equinoxColorToolButton->setIcon(QIcon(equinoxColorPixmap));
 	solsticeColorPixmap.fill(solsticeColor);
@@ -270,6 +296,10 @@ void ArchaeoLinesDialog::resetArchaeoLinesSettings()
 	ui->currentMoonColorToolButton->setIcon(QIcon(currentMoonColorPixmap));
 	currentPlanetColorPixmap.fill(currentPlanetColor);
 	ui->currentPlanetColorToolButton->setIcon(QIcon(currentPlanetColorPixmap));
+	customAzimuth1ColorPixmap.fill(customAzimuth1Color);
+	ui->customAzimuth1ColorToolButton->setIcon(QIcon(customAzimuth1ColorPixmap));
+	customAzimuth2ColorPixmap.fill(customAzimuth2Color);
+	ui->customAzimuth2ColorToolButton->setIcon(QIcon(customAzimuth2ColorPixmap));
 
 	ui->equinoxCheckBox->setChecked(al->isEquinoxDisplayed());
 	ui->solsticesCheckBox->setChecked(al->isSolsticesDisplayed());
@@ -282,7 +312,8 @@ void ArchaeoLinesDialog::resetArchaeoLinesSettings()
 	ui->currentSunCheckBox->setChecked(al->isCurrentSunDisplayed());
 	ui->currentMoonCheckBox->setChecked(al->isCurrentMoonDisplayed());
 	ui->currentPlanetComboBox->setCurrentIndex(al->whichCurrentPlanetDisplayed()-ArchaeoLine::CurrentPlanetNone);
-}
+	ui->customAzimuth1CheckBox->setChecked(al->isCustomAzimuth1Displayed());
+	ui->customAzimuth2CheckBox->setChecked(al->isCustomAzimuth2Displayed());}
 
 // These are called by the respective buttons.
 void ArchaeoLinesDialog::askEquinoxColor()
@@ -417,6 +448,29 @@ void ArchaeoLinesDialog::askCurrentPlanetColor()
 	}
 }
 
+void ArchaeoLinesDialog::askCustomAzimuth1Color()
+{
+	QColor c=QColorDialog::getColor(customAzimuth1Color, NULL, q_("Select color for Custom Azimuth 1 line"));
+	if (c.isValid())
+	{
+		customAzimuth1Color=c;
+		al->setLineColor(ArchaeoLine::CustomAzimuth1, c);
+		customAzimuth1ColorPixmap.fill(c);
+		ui->customAzimuth1ColorToolButton->setIcon(QIcon(customAzimuth1ColorPixmap));
+	}
+}
+
+void ArchaeoLinesDialog::askCustomAzimuth2Color()
+{
+	QColor c=QColorDialog::getColor(customAzimuth2Color, NULL, q_("Select color for Custom Azimuth 2 line"));
+	if (c.isValid())
+	{
+		customAzimuth2Color=c;
+		al->setLineColor(ArchaeoLine::CustomAzimuth2, c);
+		customAzimuth2ColorPixmap.fill(c);
+		ui->customAzimuth2ColorToolButton->setIcon(QIcon(customAzimuth2ColorPixmap));
+	}
+}
 // Notes/Observations by GZ in 2015-04 with Qt5.4.0/MinGW on Windows7SP1.
 // (1) There are issues in calling the QColorPanel that seem to be related to QTBUG-35302,
 // although it was reportedly fixed at least for X11 in Qt5.3.0.
