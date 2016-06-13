@@ -53,6 +53,8 @@ these declinations are still important in everyday astronomy.
  -# Current declination of the moon
  -# Current declination of a naked-eye planet
 
+In addition, up to 2 custom azimuth lines can be drawn, also with a customized label.
+
 The lunar lines include horizon parallax effects. There are two lines each
 drawn, for maximum and minimum distance of the moon. Note that declination
 of the moon at the major standstill can exceed the indicated limits if it
@@ -98,10 +100,12 @@ public:
 		CurrentPlanetVenus,
 		CurrentPlanetMars,
 		CurrentPlanetJupiter,
-		CurrentPlanetSaturn
+		CurrentPlanetSaturn,
+		CustomAzimuth1,
+		CustomAzimuth2
 	};
 
-	ArchaeoLine(ArchaeoLine::Line lineType, double declination);
+	ArchaeoLine(ArchaeoLine::Line lineType, double definingAngle);
 	virtual ~ArchaeoLine(){}
 	void draw(StelCore* core, float intensity=1.0f) const;
 	const Vec3f& getColor() const {return color;}
@@ -116,16 +120,18 @@ public slots:
 	//! Re-translates the label.
 	void updateLabel();
 	void setLabelVisible(bool b){flagLabel=b;}
-	//! reset declination (degrees) of this small arc.
-	void setDeclination(double decl){declination=decl;}
+	//! reset declination/azimuth angle (degrees) of this arc.
+	void setDefiningAngle(double angle){definingAngle=angle;}
+	double getDefiningAngle(void) const {return definingAngle;}
 	bool isLabelVisible() const{return flagLabel;}
 	void setLineType(ArchaeoLine::Line line) {lineType=line; updateLabel();} // Meaningful only for CurrentPlanet... types
 	//! change label. Used only for selected-object line - the other labels should not be changed!
 	void setLabel(const QString newLabel){label=newLabel;}
+	QString getLabel() const {return label;}
 
 private:
 	ArchaeoLine::Line lineType;
-	double declination; // degrees
+	double definingAngle; // degrees. This is declination for non-azimuth lines, azimuth for custom azimuths.
 	Vec3f color;
 	StelCore::FrameType frameType;
 	bool flagLabel; //! show the label. (some should be permanently silent)
@@ -142,50 +148,77 @@ class ArchaeoLines : public StelModule
 	Q_OBJECT
 	Q_PROPERTY(bool enabled
 		   READ isEnabled
-		   WRITE enableArchaeoLines)
-//	Q_PROPERTY(bool dmsFormat
-//		   READ isDmsFormat
-//		   WRITE useDmsFormat)
+		   WRITE enableArchaeoLines
+		   NOTIFY archaeoLinesEnabledChanged)
 	Q_PROPERTY(bool flagShowEquinox
 				READ    isEquinoxDisplayed
-				WRITE showEquinox)
+				WRITE showEquinox
+				NOTIFY showEquinoxChanged
+		   )
 	Q_PROPERTY(bool flagShowSolstices
 				READ    isSolsticesDisplayed
-				WRITE showSolstices)
+				WRITE showSolstices
+				NOTIFY showSolsticesChanged
+		   )
 	Q_PROPERTY(bool flagShowCrossquarters
 				READ    isCrossquartersDisplayed
-				WRITE showCrossquarters)
+				WRITE showCrossquarters
+				NOTIFY showCrossquartersChanged
+		   )
 	Q_PROPERTY(bool flagShowMajorStandstills
 				READ    isMajorStandstillsDisplayed
-				WRITE showMajorStandstills)
+				WRITE showMajorStandstills
+				NOTIFY showMajorStandstillsChanged
+		   )
 	Q_PROPERTY(bool flagShowMinorStandstills
 				READ    isMinorStandstillsDisplayed
-				WRITE showMinorStandstills)
+				WRITE  showMinorStandstills
+				NOTIFY showMinorStandstillsChanged
+		   )
 	Q_PROPERTY(bool flagShowZenithPassage
 				READ    isZenithPassageDisplayed
-				WRITE showZenithPassage)
+				WRITE  showZenithPassage
+				NOTIFY showZenithPassageChanged
+		   )
 	Q_PROPERTY(bool flagShowNadirPassage
 				READ    isNadirPassageDisplayed
-				WRITE showNadirPassage)
+				WRITE  showNadirPassage
+				NOTIFY showNadirPassageChanged
+		   )
 	Q_PROPERTY(bool flagShowSelectedObject
 				READ    isSelectedObjectDisplayed
-				WRITE showSelectedObject)
+				WRITE  showSelectedObject
+				NOTIFY showSelectedObjectChanged
+		   )
 	Q_PROPERTY(bool flagShowCurrentSun
 				READ    isCurrentSunDisplayed
-				WRITE showCurrentSun)
+				WRITE  showCurrentSun
+				NOTIFY showCurrentSunChanged
+		   )
 	Q_PROPERTY(bool flagShowCurrentMoon
 				READ    isCurrentMoonDisplayed
-				WRITE showCurrentMoon)
+				WRITE  showCurrentMoon
+				NOTIFY showCurrentMoonChanged
+		   )
 	Q_PROPERTY(ArchaeoLine::Line enumShowCurrentPlanet
 				READ    whichCurrentPlanetDisplayed
-				WRITE showCurrentPlanet
+				WRITE  showCurrentPlanet
 				NOTIFY currentPlanetChanged)
+	Q_PROPERTY(bool flagShowCustomAzimuth1
+				READ    isCustomAzimuth1Displayed
+				WRITE  showCustomAzimuth1
+				NOTIFY showCustomAzimuth1Changed
+		   )
+	Q_PROPERTY(bool flagShowCustomAzimuth2
+				READ    isCustomAzimuth2Displayed
+				WRITE  showCustomAzimuth2
+				NOTIFY showCustomAzimuth2Changed
+		   )
 
 public:
 	ArchaeoLines();
 	virtual ~ArchaeoLines();
 	
-
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -211,6 +244,19 @@ public:
 	void loadSettings();
 
 signals:
+	void archaeoLinesEnabledChanged(bool on);
+	void showEquinoxChanged(bool on);
+	void showSolsticesChanged(bool on);
+	void showCrossquartersChanged(bool on);
+	void showMajorStandstillsChanged(bool on);
+	void showMinorStandstillsChanged(bool on);
+	void showZenithPassageChanged(bool on);
+	void showNadirPassageChanged(bool on);
+	void showSelectedObjectChanged(bool on);
+	void showCurrentSunChanged(bool on);
+	void showCurrentMoonChanged(bool on);
+	void showCustomAzimuth1Changed(bool on);
+	void showCustomAzimuth2Changed(bool on);
 	void currentPlanetChanged(ArchaeoLine::Line l); // meaningful only CurrentPlanetNone...CurrentPlanetSaturn.
 
 public slots:
@@ -229,6 +275,8 @@ public slots:
 	bool isCurrentSunDisplayed() const {return flagShowCurrentSun;}
 	bool isCurrentMoonDisplayed() const {return flagShowCurrentMoon;}
 	ArchaeoLine::Line whichCurrentPlanetDisplayed() const {return enumShowCurrentPlanet;}
+	bool isCustomAzimuth1Displayed() const {return flagShowCustomAzimuth1;}
+	bool isCustomAzimuth2Displayed() const {return flagShowCustomAzimuth2;}
 
 
 	void showEquinox(bool b);
@@ -243,11 +291,20 @@ public slots:
 	void showCurrentMoon(bool b);
 	void showCurrentPlanet(ArchaeoLine::Line l); // Allowed values for l: CurrentPlanetNone...CurrentPlanetSaturn.
 	void showCurrentPlanetNamed(QString planet); // Allowed values for planet: "none", "Mercury", "Venus", "Mars", "Jupiter", "Saturn".
+	void showCustomAzimuth1(bool b);
+	void showCustomAzimuth2(bool b);
+	void setCustomAzimuth1(double az);
+	void setCustomAzimuth2(double az);
+	void setCustomAzimuth1Label(QString label);
+	void setCustomAzimuth2Label(QString label);
 
 	// called by the dialog GUI, converts GUI's QColor (0..255) to Stellarium's Vec3f float color.
 	void setLineColor(ArchaeoLine::Line whichLine, QColor color);
 	// called by the dialog UI, converts Stellarium's Vec3f float color to QColor (0..255).
 	QColor getLineColor(ArchaeoLine::Line whichLine);
+	//! query a line for its current angle.
+	double getLineAngle(ArchaeoLine::Line whichLine);
+	QString getLineLabel(ArchaeoLine::Line whichLine);
 
 private:
 	QFont font;
@@ -267,6 +324,8 @@ private:
 	Vec3f currentSunColor;
 	Vec3f currentMoonColor;
 	Vec3f currentPlanetColor;
+	Vec3f customAzimuth1Color;
+	Vec3f customAzimuth2Color;
 
 
 
@@ -281,6 +340,10 @@ private:
 	bool flagShowCurrentSun;
 	bool flagShowCurrentMoon;
 	ArchaeoLine::Line enumShowCurrentPlanet;
+	bool flagShowCustomAzimuth1;
+	bool flagShowCustomAzimuth2;
+	double customAzimuth1;
+	double customAzimuth2;
 	double lastJDE; // cache last-time-computed to every 10 days or so?
 
 	ArchaeoLine * equinoxLine;
@@ -302,6 +365,8 @@ private:
 	ArchaeoLine * currentSunLine;
 	ArchaeoLine * currentMoonLine;
 	ArchaeoLine * currentPlanetLine;
+	ArchaeoLine * customAzimuth1Line;
+	ArchaeoLine * customAzimuth2Line;
 
 	StelButton* toolbarButton;
 
