@@ -827,3 +827,12 @@ void Quasars::reloadCatalog(void)
 		objMgr->setSelectedObject(selectedObject);
 	}
 }
+
+void Quasars::setFlagShowQuasars(bool b)
+{
+	if (b!=flagShowQuasars)
+	{
+		flagShowQuasars=b;
+		emit flagQuasarsVisibilityChanged(b);
+	}
+}

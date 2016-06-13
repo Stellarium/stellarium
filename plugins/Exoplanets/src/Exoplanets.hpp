@@ -70,7 +70,11 @@ typedef QSharedPointer<Exoplanet> ExoplanetP;
 class Exoplanets : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool showExoplanets READ getFlagShowExoplanets WRITE setFlagShowExoplanets)
+	Q_PROPERTY(bool showExoplanets
+		   READ getFlagShowExoplanets
+		   WRITE setFlagShowExoplanets
+		   NOTIFY flagExoplanetsVisibilityChanged
+		   )
 public:	
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
@@ -203,6 +207,8 @@ signals:
 	//! emitted after a JSON update has run.
 	void jsonUpdateComplete(void);
 
+	void flagExoplanetsVisibilityChanged(bool b);
+
 public slots:
 	//! Download JSON from web recources described in the module section of the
 	//! module.ini file and update the local JSON file.
@@ -210,7 +216,7 @@ public slots:
 
 	//! Enable/disable display of markers of exoplanetary systems
 	//! @param b boolean flag
-	void setFlagShowExoplanets(bool b) { flagShowExoplanets=b; }
+	void setFlagShowExoplanets(bool b);
 	//! Get status to display of markers of exoplanetary systems
 	//! @return true if it's visible
 	bool getFlagShowExoplanets(void) { return flagShowExoplanets; }

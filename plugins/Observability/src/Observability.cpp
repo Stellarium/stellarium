@@ -1930,6 +1930,10 @@ void Observability::setHorizonAltitude(int altitude)
 
 void Observability::showReport(bool b)
 {
-	flagShowReport = b;
+	if (b!=flagShowReport)
+	{
+		flagShowReport = b;
+		emit flagReportVisibilityChanged(b);
+	}
 }
 
