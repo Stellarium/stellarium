@@ -54,7 +54,9 @@ class PointerCoordinates : public StelModule
 	Q_ENUMS(CoordinateSystem)
 	Q_PROPERTY(bool enabled
 		   READ isEnabled
-		   WRITE enableCoordinates)
+		   WRITE enableCoordinates
+		   NOTIFY flagCoordinatesVisibilityChanged
+		   )
 
 public:
 	//! @enum CoordinatesPlace
@@ -129,12 +131,15 @@ public:
 		return customPosition;
 	}
 
+signals:
+	void flagCoordinatesVisibilityChanged(bool b);
+
 public slots:
 	//! Enable plugin usage
 	void enableCoordinates(bool b);
 	//! Enable plugin usage at startup
 	void setFlagEnableAtStartup(bool b)
-	{ 
+	{
 		flagEnableAtStartup=b;
 	}
 	//! Set font size for message

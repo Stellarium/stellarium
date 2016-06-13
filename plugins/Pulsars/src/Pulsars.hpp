@@ -73,7 +73,11 @@ typedef QSharedPointer<Pulsar> PulsarP;
 class Pulsars : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool pulsarsVisible READ getFlagShowPulsars WRITE setFlagShowPulsars)
+	Q_PROPERTY(bool pulsarsVisible
+		   READ getFlagShowPulsars
+		   WRITE setFlagShowPulsars
+		   NOTIFY flagPulsarsVisibilityChanged
+		   )
 public:	
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
@@ -179,6 +183,8 @@ signals:
 	//! emitted after a JSON update has run.
 	void jsonUpdateComplete(void);
 
+	void flagPulsarsVisibilityChanged(bool b);
+
 public slots:
 	//! Define whether the button toggling pulsars should be visible
 	void setFlagShowPulsarsButton(bool b);
@@ -186,7 +192,7 @@ public slots:
 
 	//! Enable/disable display of markers of pulsars
 	//! @param b boolean flag
-	void setFlagShowPulsars(bool b) { flagShowPulsars=b; }
+	void setFlagShowPulsars(bool b);
 	//! Get status to display of markers of pulsars
 	//! @return true if it's visible
 	bool getFlagShowPulsars(void) { return flagShowPulsars; }

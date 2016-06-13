@@ -951,6 +951,15 @@ void Exoplanets::setMarkerColor(const Vec3f &c, bool h)
 		Exoplanet::exoplanetMarkerColor = c;
 }
 
+void Exoplanets::setFlagShowExoplanets(bool b)
+{
+	if (b!=flagShowExoplanets)
+	{
+		flagShowExoplanets=b;
+		emit flagExoplanetsVisibilityChanged(b);
+	}
+}
+
 void Exoplanets::translations()
 {
 #if 0

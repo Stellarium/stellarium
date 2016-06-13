@@ -846,3 +846,12 @@ void Pulsars::reloadCatalog(void)
 		objMgr->setSelectedObject(selectedObject);
 	}
 }
+
+void Pulsars::setFlagShowPulsars(bool b)
+{
+	if (b!=flagShowPulsars)
+	{
+		flagShowPulsars=b;
+		emit flagPulsarsVisibilityChanged(b);
+	}
+}
