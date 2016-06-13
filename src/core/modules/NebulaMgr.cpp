@@ -115,7 +115,7 @@ void NebulaMgr::setStarColor(const Vec3f& c) {Nebula::starColor = c;}
 const Vec3f &NebulaMgr::getStarColor(void) const {return Nebula::starColor;}
 void NebulaMgr::setCircleScale(float scale) {Nebula::circleScale = scale;}
 float NebulaMgr::getCircleScale(void) const {return Nebula::circleScale;}
-void NebulaMgr::setHintsProportional(const bool proportional) {Nebula::drawHintProportional=proportional;}
+void NebulaMgr::setHintsProportional(const bool proportional) {if(Nebula::drawHintProportional!=proportional){ Nebula::drawHintProportional=proportional; emit hintsProportionalChanged(proportional);}}
 bool NebulaMgr::getHintsProportional(void) const {return Nebula::drawHintProportional;}
 
 NebulaMgr::NebulaMgr(void)
@@ -362,6 +362,7 @@ void NebulaMgr::init()
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
 	addAction("actionShow_Nebulas", N_("Display Options"), N_("Deep-sky objects"), "flagHintDisplayed", "D", "N");
+	addAction("actionSet_Nebula_TypeFilterUsage", N_("Display Options"), N_("Toggle DSO type filter"), "flagTypeFiltersUsage");
 }
 
 struct DrawNebulaFuncObject
@@ -398,21 +399,35 @@ struct DrawNebulaFuncObject
 	bool checkMaxMagHints;
 };
 
-void NebulaMgr::setCatalogFilters(const Nebula::CatalogGroup &cflags)
+void NebulaMgr::setCatalogFilters(Nebula::CatalogGroup cflags)
 {
-	Nebula::catalogFilters = cflags;
+	if(static_cast<int>(cflags) != static_cast<int>(Nebula::catalogFilters))
+	{
+		Nebula::catalogFilters = cflags;
 
-	dsoArray.clear();
-	dsoIndex.clear();
-	nebGrid.clear();
-	bool status = getFlagShow();
+		dsoArray.clear();
+		dsoIndex.clear();
+		nebGrid.clear();
+		bool status = getFlagShow();
 
-	StelApp::getInstance().getStelObjectMgr().unSelect();
+		StelApp::getInstance().getStelObjectMgr().unSelect();
 
-	qWarning() << "Reloading DSO data...";
-	setFlagShow(false);
-	loadNebulaSet("default");
-	setFlagShow(status);
+		qWarning() << "Reloading DSO data...";
+		setFlagShow(false);
+		loadNebulaSet("default");
+		setFlagShow(status);
+
+		emit catalogFiltersChanged(cflags);
+	}
+}
+
+void NebulaMgr::setTypeFilters(Nebula::TypeGroup tflags)
+{
+	if(static_cast<int>(tflags) != static_cast<int>(Nebula::typeFilters))
+	{
+		Nebula::typeFilters = tflags;
+		emit typeFiltersChanged(tflags);
+	}
 }
 
 float NebulaMgr::computeMaxMagHint(const StelSkyDrawer* skyDrawer) const

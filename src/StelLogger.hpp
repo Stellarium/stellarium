@@ -22,6 +22,7 @@
 
 #include <QString>
 #include <QFile>
+#include <QMutex>
 
 //! @class StelLogger
 //! Class wit only static members used to manage logging for Stellarium.
@@ -55,6 +56,7 @@ public:
 private:
 	static QFile logFile;
 	static QString log;
+	static QMutex fileMutex;
 	
 	static QString getMsvcVersionString(int ver);
 };

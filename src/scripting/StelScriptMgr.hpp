@@ -39,6 +39,8 @@ class ScriptConsole;
 class StelScriptMgr : public QObject
 {
 	Q_OBJECT
+
+	Q_PROPERTY(QString runningScriptId READ runningScriptId NOTIFY runningScriptIdChanged)
 		
 #ifdef ENABLE_SCRIPT_CONSOLE
 friend class ScriptConsole;
@@ -53,7 +55,7 @@ public:
 	//! Find out if a script is running
 	//! @return true if a script is running, else false
 	bool scriptIsRunning();
-	//! Get the ID (filename) of the currently running script
+	//! Get the ID (usually filename) of the currently running script
 	//! @return Empty string if no script is running, else the 
 	//! ID of the script which is running.
 	QString runningScriptId();
@@ -69,13 +71,19 @@ public:
 	//! Add all the StelModules into the script engine
 	void addModules();
 public slots:
+	//! Returns a HTML description of the specified script.
+	//! Includes name, author, description...
+	//! @param s the file name of the script whose HTML description is to be returned.
+	//! @param generateDocumentTags if true, the main wrapping document tags (\<html\>\<body\>...\</body\>\</html\>) are also generated
+	QString getHtmlDescription(const QString& s, bool generateDocumentTags=true) const;
+
 	//! Gets a single line name of the script. 
 	//! @param s the file name of the script whose name is to be returned.
 	//! @return text following a comment with Name: at the start.  If no 
 	//! such comment is found, the file name will be returned.  If the file
 	//! is not found or cannot be opened for some reason, an Empty string
 	//! will be returned.
-	const QString getName(const QString& s);
+	QString getName(const QString& s) const;
 
 	//! Gets the name of the script Author
 	//! @param s the file name of the script whose name is to be returned.
@@ -83,7 +91,7 @@ public slots:
 	//! such comment is found, "" is returned.  If the file
 	//! is not found or cannot be opened for some reason, an Empty string
 	//! will be returned.
-	const QString getAuthor(const QString& s);
+	QString getAuthor(const QString& s) const;
 
 	//! Gets the licensing terms for the script
 	//! @param s the file name of the script whose name is to be returned.
@@ -91,7 +99,7 @@ public slots:
 	//! such comment is found, "" is returned.  If the file
 	//! is not found or cannot be opened for some reason, an Empty string
 	//! will be returned.
-	const QString getLicense(const QString& s);
+	QString getLicense(const QString& s) const;
 
 	//! Gets a description of the script.
 	//! @param s the file name of the script whose name is to be returned.
@@ -100,7 +108,7 @@ public slots:
 	//! is found.  If no such comment is found, QString("") is returned.
 	//! If the file is not found or cannot be opened for some reason, an 
 	//! Empty string will be returned.
-	const QString getDescription(const QString& s);
+	QString getDescription(const QString& s) const;
 
 	//! Gets the default shortcut of the script.
 	//! @param s the file name of the script whose name is to be returned.
@@ -108,22 +116,48 @@ public slots:
 	//! If no such comment is found, QString("") is returned.
 	//! If the file is not found or cannot be opened for some reason, an
 	//! Empty string will be returned.
-	const QString getShortcut(const QString& s);
+	QString getShortcut(const QString& s) const;
 
-	//! Run the preprocessed script
-	//! @param preprocessedScript the string containing the preprocessed script.
-	//! @return false if the given script could not be run, true otherwise
-	bool runPreprocessedScript(const QString& preprocessedScript);
-
-	//! Run the script located at the given location
+	//! Run the script located in the given file. In essence, this calls prepareScript and runPreprocessedScript.
+	//! @note This is a blocking call! The event queue is held up by calls of QCoreApplication::processEvents().
 	//! @param fileName the location of the file containing the script.
 	//! @param includePath the directory to use when searching for include files
-	//! in the SSC preprocessor.  Usually this will be the same as the 
-	//! script file itself, but if you're running a generated script from 
+	//! in the SSC preprocessor. If empty, this will be the same as the
+	//! directory where the script file resides. If you're running a generated script from
 	//! a temp directory, but want to include a file from elsewhere, it 
 	//! can be usetul to set it to something else (e.g. in ScriptConsole).
-	//! @return false if the named script could not be run, true otherwise
+	//! @return false if the named script could not be prepared or run, true otherwise
 	bool runScript(const QString& fileName, const QString& includePath="");
+
+	//! Runs the script code given. This can be used for quick script executions, without having to create a
+	//! temporary file first.
+	//! @note This is a blocking call! The event queue is held up by calls of QCoreApplication::processEvents().
+	//! @param scriptCode The script to execute
+	//! @param includePath If a null string (the default), no pre-processing is done. If an empty string, the default
+	//! script directories are used (script/ in both user and install directory). Otherwise, the given directory is used.
+	//! @return false if the named script code could not be prepared or run, true otherwise
+	bool runScriptDirect(const QString& scriptCode, const QString &includePath = QString());
+
+	//! Runs preprocessed script code which has been generated using runPreprocessedScript().
+	//! In general, you do not want to use this method, use runScript() or runScriptDirect() instead.
+	//! @note This is a blocking call! The event queue is held up by calls of QCoreApplication::processEvents().
+	//! @param preprocessedScript the string containing the preprocessed script.
+	//! @param scriptId The name of the script. Usually should correspond to the file name.
+	//! @return false if the given script code could not be run, true otherwise
+	bool runPreprocessedScript(const QString& preprocessedScript, const QString &scriptId);
+
+	//! Loads a script file and does all preparatory steps except for actually executing the script in the engine.
+	//! Use runPreprocessedScript to execute the script.
+	//! It should be safe to call this method from another thread.
+	//! @param script returns the preprocessed script text
+	//! @param fileName the location of the file containing the script.
+	//! @param includePath the directory to use when searching for include files
+	//! in the SSC preprocessor.  Usually this will be the same as the
+	//! script file itself, but if you're running a generated script from
+	//! a temp directory, but want to include a file from elsewhere, it
+	//! can be usetul to set it to something else (e.g. in ScriptConsole).
+	//! @return false if the named script could not be prepared, true otherwise
+	bool prepareScript(QString& script, const QString& fileName, const QString& includePath="");
 
 	//! Stops any running script.
 	//! @return false if no script was running, true otherwise.
@@ -165,14 +199,16 @@ private slots:
 	//! Called at the end of the running threa
 	void scriptEnded();
 signals:
+	//! Emitted when the running script id changes (also on start/stop)
+	void runningScriptIdChanged(const QString& id);
 	//! Notification when a script starts running
 	void scriptRunning();
 	//! Notification when a script has stopped running 
 	void scriptStopped();
 	//! Notification of a script event - warnings, current execution line etc.
-	void scriptDebug(const QString&);	
+	void scriptDebug(const QString&) const;
 	//! Notification of a script event - output line.
-	void scriptOutput(const QString&);
+	void scriptOutput(const QString&) const;
 
 private:
 	// Utility functions for preprocessor
@@ -189,7 +225,7 @@ private:
 	//! @param notFoundText the text to be returned if the key is not found
 	//! @return the text following the id and : on a comment line near the top of 
 	//! the script file (i.e. before there is a non-comment line).
-	const QString getHeaderSingleLineCommentText(const QString& s, const QString& id, const QString& notFoundText="");	
+	QString getHeaderSingleLineCommentText(const QString& s, const QString& id, const QString& notFoundText="") const;
 	QScriptEngine engine;
 	
 	//! The thread in which scripts are run
@@ -199,7 +235,7 @@ private:
 	
 	//Script engine agent
 	StelScriptEngineAgent *agent;
-	
+
 };
 
 class StelScriptEngineAgent : public QScriptEngineAgent

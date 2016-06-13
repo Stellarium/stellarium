@@ -1,0 +1,461 @@
+/*
+ * Stellarium
+ * Copyright (C) 2016 Florian Schaukowitsch
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+ 
+/*!
+
+\page remoteControlApi %RemoteControl plugin HTTP API description
+
+The \ref remoteControl "RemoteControl plugin" provides an HTTP-based interface to Stellarium, implemented on the server-side through implementations of AbstractAPIService.
+The APIController maintains the list of registered services, and dispatches HTTP requests to the right service.
+The API is accessible under the server path `/api/`. For example, if you have the server running on the default port of 8090,
+you can access the operation \ref rcObjectServiceFind of the ObjectService to look for objects with \c moon in their name by accessing
+\code
+http://localhost:8090/api/objects/find?str=moon
+|____________________|___|_______|____|_______|
+          |            |     |      |     |------ Standard HTTP query string for parameters (key=value)
+          |            |     |      |------------ find operation (defined by service)
+          |            |     |------------------- service (e.g. ObjectService)
+          |            |------------------------- API prefix (always /api/)
+          |-------------------------------------- server access (http://host:port)
+\endcode
+
+Instead of the \ref remoteControlWeb "HTTP remote interface" you can also use tools like <a href="https://curl.haxx.se/">cURL</a>
+to access the API remotely. For POST operations, you would use the flag \c -d to pass parameters. For GET operations, you should use
+the additional flag \c -G if parameters are required. Examples:
+@code{.sh}
+# retrieve info about the script "double_stars.ssc" with a GET request
+curl -G -d 'id=double_stars.ssc' http://localhost:8090/api/scripts/info
+# run the script "double_stars.ssc" with a POST request
+curl -d 'id=double_stars.ssc' http://localhost:8090/api/scripts/run
+@endcode
+
+If authentication is enabled (see RemoteControl class), <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">HTTP Basic access authentication</a> is expected, with an empty username.
+HTTPS configuration is currently not implemented, even if the underlying \ref qtWebApp would allow it.
+
+Most operations return data in the <a href="http://www.json.org/">JSON</a> format, allowing it to be easily used in web applications.
+The format of the returned JSON data is described for each operation below.
+Some operations return plain text if only simple data is requested, or to confirm the success of an operation:
+to indicate success "ok" may be returned, in an error case an HTTP error code may be returned together with a string "error: error message" in the response body.
+Other operations may return HTML or even image data, you can check the returned Content-Type header if you are not sure what to expect.
+
+\tableofcontents
+
+\section rcExtendApi Extending the API
+
+The simplest way to expose new data through the API is by using the StelProperty system for a property you want to access.
+In this way, the data is available through the MainService (allowing tracking of changes) and the StelPropertyService (giving a snapshot of current values, metadata information and allowing to change values).
+You do not need to change/implement a new service in any way for this case.
+
+If you want to expose more complex behaviour, you may need to implement your own AbstractAPIService and register it with the APIController.
+\todo Find out how to do this in plugin code
+
+\section rcApiReference API reference
+
+The default services are registered in the RequestHandler::RequestHandler() constructor. They are:
+
+Service               | Path                                                | Description
+--------------------- | --------------------------------------------------- | ------------------------
+MainService           | \ref rcMainService "main"                           | \copybrief MainService
+ObjectService         | \ref rcObjectService "objects"                      | \copybrief ObjectService
+ScriptService         | \ref rcScriptService "scripts"                      | \copybrief ScriptService
+SimbadService         | \ref rcSimbadService "simbad"                       | \copybrief SimbadService
+StelActionService     | \ref rcStelActionService "stelaction"               | \copybrief StelActionService
+StelPropertyService   | \ref rcStelPropertyService "stelproperty"           | \copybrief StelPropertyService
+LocationService       | \ref rcLocationService "location"                   | \copybrief LocationService
+LocationSearchService | \ref rcLocationSearchService "locationsearch"       | \copybrief LocationSearchService
+ViewService           | \ref rcViewService "view"                           | \copybrief ViewService
+
+\subsection rcMainService MainService operations (/api/main/)
+\subsubsection rcMainServiceGET GET operations
+Implemented by MainService::getImpl
+
+\paragraph rcMainServiceStatus status
+Parameters: <tt>[actionId (Number)] [propId (Number)]</tt>\n
+This operation can be polled every few moments to find out if some primary Stellarium state changed. It returns a JSON object with the following format:
+\code{.js}
+{
+    //current location information, see StelLocation
+    location : {
+        name,
+        role,
+        planet,
+        latitude,
+        longitude,
+        altitude,
+        country,
+        state,
+        landscapeKey
+    },
+    //current time information
+    time : {
+        jday,		//current Julian day
+        deltaT,		//current deltaT as determined by the current dT algorithm
+        gmtShift,	//the timezone shift to GMT
+        timeZone,	//the timezone name
+        utc,		//the time in UTC time zone as ISO8601 time string
+        local,		//the time in local time zone as ISO8601 time string
+        isTimeNow,	//if true, the Stellarium time equals the current real-world time
+        timerate	//the current time rate (in secs)
+    },
+    selectioninfo, //string that contains the information of the currently selected object, as returned by StelObject::getInfoString
+    view : {
+        fov		//current FOV
+    },
+
+    //the following is only inserted if an actionId parameter was given
+    //see below for more info
+    actionChanges : {
+        id, //currently valid action id, the interface should update its own id to this value
+        changes : {
+                //a list of boolean actions that changed since the actionId parameter
+                <actionName> : <actionValue>
+        }
+    },
+    //the following is only inserted if an propId parameter was given
+    //see below for more info
+    propertyChanges : {
+        id, //currently valid prop id, the interface should update its own id to this value
+        changes : {
+                //a list of properties that changed since the propId parameter
+                <propName> : <propValue>
+        }
+    }
+}
+\endcode
+
+The \c actionChanges and \c propertyChanges sections allow a remote interface to track boolean StelAction and/or StelProperty changes.
+On the initial poll, you should pass -2 as \p propId and \p actionId. This indicates to the service that you want a full
+list of properties/actions and their current values. When receiving the answer, you should set your local \p propId /\p actionId to the id
+contained in \c actionChanges and \c propertyChanges, and re-send it with the next request as parameter again.
+This allows the MainService to find out which changes must be sent to you (it maintains a queue of action/property changes internally, incrementing
+the ID with each change), and you only have to process the differences instead of everything.
+
+\paragraph rcMainServicePlugins plugins
+Returns the list of all known plugins, as a JSON object of format:
+\code{.js}
+{
+    //list of known plugins, in format:
+    <pluginName> : {
+        loadAtStartup,	//if to load the plugin at startup
+        loaded,		//if the plugin is currently loaded
+        //corresponds to the StelPluginInfo of the plugin
+        info : {
+                authors,
+                contact,
+                description,
+                displayedName,
+                startByDefault,
+                version
+        }
+    }
+}
+\endcode
+
+\subsubsection rcMainServicePOST POST operations
+Implemented by MainService::postImpl
+
+\paragraph rcMainServiceTime time
+Parameters: <tt>time (Number) timerate (Number)</tt>\n
+Sets the current Stellarium simulation time and/or timerate. The \p time parameter defines the current time (Julian day) as passed to StelCore::setJD.
+The \p timerate parameter allows to change the speed at which the simulation time moves (in JDay/sec) as passed to StelCore::setTimeRate.
+
+\paragraph rcMainServiceFocus focus
+Parameters: <tt>[target (String) | position (JSON Number Array of size 3, i.e. Vec3d)]</tt>\n
+Sets the current app focus/selection. If no parameters are given, the current selection is cleared.
+If the \p target parameter was given, the object to be selected is looked up by name (first the localized name is tried, then the english name).
+If the \p position parameter is used, it is interpreted as a coordinate in the J2000 frame, and focused using StelMovementMgr::moveToJ2000
+
+\paragraph rcMainServiceMove move
+Parameters: <tt>x (Number) y (Number)</tt>\n
+Allows viewport movement, like using the arrow keys in the main program. This allows interfaces to create a "virtual joystick" to move the view manually.
+This operation defines the intended move direction. \p x and \p y  define the intended
+move speed in azimuth and altitude (i.e. a negative \p x means left). Values of +-1.0 correspond to the same speed as used for the arrow keys.
+This operation works in conjunction with the update() method - until the movement is stopped
+(i.e. \p x and \p y are zero), or no \c move command has been received for a specified time (about a second), the movement is performed in the given directions.
+
+\paragraph rcMainServiceFov fov
+Parameters: <tt>fov (Number)</tt>\n
+Sets the current field-of-view using StelCore::setFov
+
+\subsection rcObjectService ObjectService operations (/api/objects/)
+\subsubsection rcObjectServiceGET GET operations
+Implemented by ObjectService::getImpl
+
+\paragraph rcObjectServiceFind find
+Parameters: <tt>str (String)</tt>\n
+Finds objects which match the search string \p str, which may contain greek/unicode characters like in the SearchDialog.
+Returns a JSON String array of search matches
+
+\paragraph rcObjectServiceInfo info
+Parameters: <tt>[name (String)]</tt>\n
+Returns a HTML info string (StelObject::getInfoString) about the object identified by \p name.
+If no parameter is given, the currently selected object is used.
+
+\paragraph rcObjectServiceListobjecttypes listobjecttypes
+Returns all object types available in the internal catalogs as a JSON array of objects of format
+@code{.js}
+{
+    key,	//the internal key for the object type
+    name,	//the english name of the type
+    name_i18n //the type name in the current language
+}
+@endcode
+
+\paragraph rcObjectServiceListobjectsbytype listobjectsbytype
+Parameters: <tt>type (String) [english (Number)]</tt>\n
+Returns all objects of the specified \p type. If \p english is given and it evaluates to a "true" value, the english names
+will be returned, otherwise the localized names will be returned. Returns a JSON string array.
+
+\subsection rcScriptService ScriptService operations (/api/scripts/)
+\subsubsection rcScriptServiceGET GET operations
+Implemented by ScriptService::getImpl
+
+\paragraph rcScriptServiceList list
+Lists all known script files, as a JSON string array.
+
+\paragraph rcScriptServiceInfo info
+Parameters: <tt>id (String) [html (any type)] </tt>\n
+Returns information about the script identified by \p id.
+If the optional parameter \p html is present (its value is ignored),
+the info is formatted using StelScriptMgr::getHtmlDescription and
+suitable for inclusion into an \c iframe element,
+otherwise this operation returns a JSON object of format:
+@code{.js}
+{
+    id,	//the script ID
+    name,	//the english name of the script
+    name_localized,	//the localized name of the script
+    description,	//the english description of the script
+    description_localized,	//the localized description of the script
+    author,	//the author(s) of the script
+    license	//the license of the script
+}
+@endcode
+
+\paragraph rcScriptServiceStatus status
+Returns the current script status as a JSON object of format:
+@code{.js}
+{
+    scriptIsRunning,	//true if a script is running
+    runningScriptId		//the currently running script ID
+}
+@endcode
+@note The StelScriptMgr also provides a StelProperty \c StelScriptMgr.runningScriptId that
+can be used to find out the active script.
+
+\subsubsection rcScriptServicePOST POST operations
+Implemented by ScriptService::postImpl
+
+\paragraph rcScriptServiceRun run
+Parameters: <tt>id (String)</tt>\n
+Runs the script with the given \p id. Will fail if a script is currently running.
+
+\paragraph rcScriptServiceDirect direct
+Parameters: <tt>code (String) [useIncludes (Bool)]</tt>\n
+Directly executes the given script \p code. If \p useIncludes is given and evaluates to true, the standard
+include folder will be used. Script execution will fail if a script is already running.
+
+\paragraph rcScriptServiceStop stop
+Stops the execution of a running script.
+
+\subsection rcSimbadService SimbadService operations (/api/simbad/)
+\subsubsection rcSimbadServiceGET GET operations
+Implemented by SimbadService::getImpl
+
+\paragraph rcSimbadServiceLookup lookup
+Parameters: <tt>str (String)</tt>\n
+Performs a SIMBAD lookup for the string \p str using the Stellarium-configured server and returns the results as a JSON object of format
+@code{.js}
+{
+    status, //the status of the lookup: either "empty" when nothing was found, "found" when at least 1 result was returned, and "error" if the lookup caused an error
+    status_i18n, //a localized status message for display
+    errorString, //if the status is "error", this contains more information about it
+    results: {
+        names : [
+                //an array of object names
+        ],
+        positions : [
+                //an array of object positions (i.e. first one corresponds to first name, etc.)
+                //format is an array of 3 numbers for each entry, i.e.:
+                [1,2,3],...
+        ]
+    }
+}
+@endcode
+
+\subsection rcStelActionService StelAction operations (/api/stelaction/)
+\subsubsection rcStelActionServiceGET GET operations
+Implemented by StelActionService::getImpl
+
+\paragraph rcStelActionServiceList list
+Lists all registered StelActions, in the format
+@code{.js}
+{
+    //translated StelAction group name
+    <groupName> : [
+        //all StelActions in the group <groupName>
+        <actionName> : {
+                id,	//the ID of the action
+                isCheckable,	//true if the action represents a boolean value
+                isChecked,	//if "isCheckable" is true, shows the current boolean state
+                text	//the translated description of the action
+        }
+    ]
+}
+@endcode
+
+\subsubsection rcStelActionServicePOST POST operations
+Implemented by StelActionService::postImpl
+
+\paragraph rcStelActionServiceDo do
+Parameters: <tt>id (String)</tt>\n
+Triggers or toggles the StelAction specified by \p id. If it was a boolean action, returns the new state of the action (strings "true"/"false").
+
+\subsection rcStelPropertyService StelProperty operations (/api/stelproperty/)
+\subsubsection rcStelPropertyServiceGET GET operations
+Implemented by StelPropertyService::getImpl
+
+\paragraph rcStelPropertyServiceList list
+Lists all registered StelProperties, in the format
+@code{.js}
+{
+    <propId> : {
+        value, //the current value of the StelProperty
+        variantType, //the type string of the "value", as determined by QVariant::typeName
+        typeString, //the type string of the StelProperty, as determined by QMetaProperty::typeName (may not be equal to "variantType")
+        typeEnum, //the enum value of the type of the StelProperty, as determined by StelProperty::getType
+    }
+}
+@endcode
+@note The generic type conversions are done by QJsonValue::fromVariant
+
+\subsubsection rcStelPropertyServicePOST POST operations
+Implemented by StelPropertyService::postImpl
+
+\paragraph rcStelPropertyServiceSet set
+Parameters: <tt>id (String) value (String)</tt>\n
+Sets the StelProperty identified by \p id to the value \p value. The value is converted to the StelProperty type
+using QVariant logic, an error is returned if this is somehow not possible.
+
+\subsection rcLocationService LocationService operations (/api/location/)
+\subsubsection rcLocationServiceGET GET operations
+Implemented by LocationService::getImpl
+
+\paragraph rcLocationServiceList list
+Returns the list of all stored location IDs (keys of StelLocationMgr::getAllMap) as JSON string array
+
+\paragraph rcLocationServiceCountrylist countrylist
+Returns the list of all known countries (StelLocaleMgr::getAllCountryNames), as a JSON array of objects of format
+@code
+{
+    name, //the english country name
+    name_i18n //the localized country name (current language)
+}
+@endcode
+
+\paragraph rcLocationServicePlanetlist planetlist
+Returns the list of all solar system planet names (SolarSystem::getAllPlanetEnglishNames), as a JSON array of objects of format
+@code
+{
+    name, //the english planet
+    name_i18n //the localized planet name (current language)
+}
+@endcode
+
+\paragraph rcLocationServicePlanetimage planetimage
+Parameters: <tt>planet (String)</tt>\n
+Returns the planet texture image for the \p planet (english name)
+
+\subsubsection rcLocationServicePOST POST operations
+Implemented by LocationService::postImpl
+
+\paragraph rcLocationServiceSetlocationfields setlocationfields
+Parameters: <tt>id (String) | ( [latitude (Number)] [longitude (Number)] [altitude (Number)] [name (String)] [country (String)] [planet (String)] )</tt>\n
+Changes and moves to a new location.
+If \p id is given, all other parameters are ignored, and a location is searched from the named locations using StelLocationMgr::locationForString with the \p id.
+Else, the other parameters change the specific field of the current StelLocation.
+
+\subsection rcLocationSearchService LocationSearchService operations (/api/locationsearch/)
+\subsubsection rcLocationSearchServiceGET GET operations
+Implemented by LocationSearchService::getImpl
+
+\paragraph rcLocationSearchServiceSearch search
+Parameters: <tt>term (String)</tt>\n
+Searches the \p term in the list of predefined locations of the StelLocationMgr, and returns a JSON string array of the results.
+
+\paragraph rcLocationSearchServiceNearby nearby
+Parameters: <tt>[planet (String)] [latitude (Number)] [longitude (Number)] [radius (Number)]</tt>\n
+Searches near the location defined by \p planet, \p latitude and \p longitude for predefined locations (inside the given \p radius)
+using StelLocationMgr::pickLocationsNearby, returns a JSON string array.
+
+\subsection rcViewService ViewService operations (/api/view/)
+\subsubsection rcViewServiceGET GET operations
+Implemented by ViewService::getImpl
+
+\paragraph rcViewServiceListlandscape listlandscape
+Lists the installed landscapes as a JSON object of format
+@code{.js}
+{
+    <landscapeId> : <landscapeName>, //maps the landscape id to the translated landscape name
+    ...
+}
+@endcode
+
+\paragraph rcViewServiceLandscapedescription landscapedescription/
+<em>Note that the slash at the end is mandatory!</em>\n
+Provides virtual filesystem access to the current landscape directory.
+The operation can take a longer path in the URL. The remainder is used to access files in the landscape directory.
+If no longer path is given, the current HTML landscape description (as per LandscapeMgr::getCurrentLandscapeHtmlDescription)
+is returned. An example: `landscapedescription/image.png` returns `image.png` from the current landscape directory.
+
+This operation allows to set up an HTML \c iframe or similar for the landscape description, including all images, etc. embedded
+in the HTML description.
+
+\paragraph rcViewServiceListskyculture listskyculture
+Lists the installed sky cultures as a JSON object of format
+@code{.js}
+{
+    <skycultureId> : <skycultureName>, //maps the id to the translated name
+    ...
+}
+@endcode
+
+\paragraph rcViewServiceSkyculturedescription skyculturedescription/
+<em>Note that the slash at the end is mandatory!</em>\n
+Provides virtual filesystem access to the current skyculture directory.
+The operation can take a longer path in the URL. The remainder is used to access files in the skyculture directory.
+If no longer path is given, the current HTML skyculture description (as per StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription)
+is returned. An example: `skyculturedescription/image.png` returns `image.png` from the current skyculture directory.
+
+This operation allows to set up an HTML \c iframe or similar for the skycultures description, including all images, etc. embedded
+in the HTML description.
+
+\paragraph rcViewServiceListprojection listprojection
+Lists the available projection types as a JSON object of format
+@code{.js}
+{
+    <projectionTypeKey> : <projectionName>, //maps the id to the translated name
+    ...
+}
+@endcode
+
+\paragraph rcViewServiceProjectiondescription projectiondescription
+Returns the HTML description of the current projection (StelProjector::getHtmlSummary)
+
+*/

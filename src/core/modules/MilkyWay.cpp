@@ -81,7 +81,7 @@ void MilkyWay::update(double deltaTime)
 	fader->update((int)(deltaTime*1000));
 }
 
-void MilkyWay::setFlagShow(bool b){*fader = b;}
+void MilkyWay::setFlagShow(bool b){*fader = b; emit milkyWayDisplayedChanged(b);}
 bool MilkyWay::getFlagShow() const {return *fader;}
 
 void MilkyWay::draw(StelCore* core)

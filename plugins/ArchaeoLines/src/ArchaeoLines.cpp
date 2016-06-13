@@ -89,7 +89,7 @@ ArchaeoLines::ArchaeoLines()
 	objMgr=GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(objMgr);
 
-	// optimize readabiity so that each upper line of the lunistice doubles is labeled.
+	// optimize readability so that each upper line of the lunistice doubles is labeled.
 	equinoxLine = new ArchaeoLine(ArchaeoLine::Equinox, 0.0);
 	northernSolsticeLine = new ArchaeoLine(ArchaeoLine::Solstices, 23.50);
 	southernSolsticeLine = new ArchaeoLine(ArchaeoLine::Solstices, -23.50);
@@ -116,6 +116,7 @@ ArchaeoLines::ArchaeoLines()
 
 	configDialog = new ArchaeoLinesDialog();
 	conf = StelApp::getInstance().getSettings();
+
 }
 
 ArchaeoLines::~ArchaeoLines()
@@ -188,7 +189,8 @@ void ArchaeoLines::init()
 	StelApp& app = StelApp::getInstance();
 
 	// Create action for enable/disable & hook up signals	
-	addAction("actionShow_Archaeo_Lines", N_("ArchaeoLines"), N_("ArchaeoLines"), "enabled", "Ctrl+U");
+	QString section=N_("ArchaeoLines");
+	addAction("actionShow_Archaeo_Lines", section, N_("ArchaeoLines"), "enabled", "Ctrl+U");
 
 	// Add a toolbar button
 	try
@@ -208,6 +210,16 @@ void ArchaeoLines::init()
 	{
 		qWarning() << "WARNING: unable to create toolbar button for ArchaeoLines plugin: " << e.what();
 	}
+	addAction("actionAL_showEquinoxLine",          section, N_("Show Line for Equinox"),            "flagShowEquinox"         ); // No Shortcuts configured.
+	addAction("actionAL_showSolsticeLines",        section, N_("Show Line for Solstices"),          "flagShowSolstices"       ); // No Shortcuts configured.
+	addAction("actionAL_showCrossquarterLines",    section, N_("Show Line for Crossquarter"),       "flagShowCrossquarters"   ); // No Shortcuts configured.
+	addAction("actionAL_showMajorStandstillLines", section, N_("Show Line for Major Standstill"),   "flagShowMajorStandstills"); // No Shortcuts configured.
+	addAction("actionAL_showMinorStandstillLines", section, N_("Show Line for Minor Standstill"),   "flagShowMinorStandstills"); // No Shortcuts configured.
+	addAction("actionAL_showZenithPassageLine",    section, N_("Show Line for Zenith Passage"),     "flagShowZenithPassage"   ); // No Shortcuts configured.
+	addAction("actionAL_showNadirPassageLine",     section, N_("Show Line for Nadir Passage"),      "flagShowNadirPassage"    ); // No Shortcuts configured.
+	addAction("actionAL_showSelectedObjectLine",   section, N_("Show Line for Selected Object"),    "flagShowSelectedObject"  ); // No Shortcuts configured.
+	addAction("actionAL_showCurrentSunLine",       section, N_("Show Line for Current Sun"),        "flagShowCurrentSun"      ); // No Shortcuts configured.
+	addAction("actionAL_showCurrentMoonLine",      section, N_("Show Line for Current Moon"),       "flagShowCurrentMoon"     ); // No Shortcuts configured.
 }
 
 void ArchaeoLines::update(double deltaTime)
@@ -450,7 +462,7 @@ void ArchaeoLines::loadSettings()
 	// indicators for current declinations (those move fast over days...)
 	showCurrentSun(conf->value("ArchaeoLines/show_current_sun", true).toBool());
 	showCurrentMoon(conf->value("ArchaeoLines/show_current_moon", true).toBool());
-	showCurrentPlanet(conf->value("ArchaeoLines/show_current_planet", "none").toString());
+	showCurrentPlanetNamed(conf->value("ArchaeoLines/show_current_planet", "none").toString());
 
 	enableArchaeoLines(conf->value("ArchaeoLines/enable_at_startup", false).toBool());
 }
@@ -526,15 +538,20 @@ void ArchaeoLines::showCurrentMoon(bool b)
 
 void ArchaeoLines::showCurrentPlanet(ArchaeoLine::Line l)
 {
-	enumShowCurrentPlanet=l;
-	const char *planetStrings[]={"none", "Mercury", "Venus", "Mars", "Jupiter", "Saturn"};
+	if(l!=enumShowCurrentPlanet)
+	{
+		enumShowCurrentPlanet=l;
+		const char *planetStrings[]={"none", "Mercury", "Venus", "Mars", "Jupiter", "Saturn"};
 
-	conf->setValue("ArchaeoLines/show_current_planet", planetStrings[l-ArchaeoLine::CurrentPlanetNone]);
-	currentPlanetLine->setLineType(enumShowCurrentPlanet);
-	currentPlanetLine->setDisplayed(enumShowCurrentPlanet != ArchaeoLine::CurrentPlanetNone);
+		conf->setValue("ArchaeoLines/show_current_planet", planetStrings[l-ArchaeoLine::CurrentPlanetNone]);
+		currentPlanetLine->setLineType(enumShowCurrentPlanet);
+		currentPlanetLine->setDisplayed(enumShowCurrentPlanet != ArchaeoLine::CurrentPlanetNone);
+
+		emit currentPlanetChanged(l);
+	}
 }
 
-void ArchaeoLines::showCurrentPlanet(QString planet)
+void ArchaeoLines::showCurrentPlanetNamed(QString planet)
 {
 	if (planet=="none")
 		enumShowCurrentPlanet=ArchaeoLine::CurrentPlanetNone;

@@ -54,6 +54,7 @@ void StelAudioMgr::loadSound(const QString& filename, const QString& id)
 void StelAudioMgr::playSound(const QString& id)
 {
 	if (audioObjects.contains(id))
+	{
 		if (audioObjects[id]!=NULL)
 		{
 			// if already playing, stop and play from the start
@@ -63,32 +64,81 @@ void StelAudioMgr::playSound(const QString& id)
 			// otherwise just play it
 			audioObjects[id]->play();
 		}
+		else
+			qDebug() << "StelAudioMgr: Cannot play sound, " << id << "not correctly loaded.";
+	}
+	else
+		qDebug() << "StelAudioMgr: Cannot play sound, " << id << "not loaded.";
 }
 
 void StelAudioMgr::pauseSound(const QString& id)
 {
 	if (audioObjects.contains(id))
+	{
 		if (audioObjects[id]!=NULL)
 			audioObjects[id]->pause();
+		else
+			qDebug() << "StelAudioMgr: Cannot pause sound, " << id << "not correctly loaded.";
+	}
+	else
+		qDebug() << "StelAudioMgr: Cannot pause sound, " << id << "not loaded.";
 }
 
 void StelAudioMgr::stopSound(const QString& id)
 {
 	if (audioObjects.contains(id))
+	{
 		if (audioObjects[id]!=NULL)
 			audioObjects[id]->stop();
+		else
+			qDebug() << "StelAudioMgr: Cannot stop sound, " << id << "not correctly loaded.";
+	}
+	else
+		qDebug() << "StelAudioMgr: Cannot stop sound, " << id << "not loaded.";
 }
 
 void StelAudioMgr::dropSound(const QString& id)
 {
 	if (!audioObjects.contains(id))
+	{
+		qDebug() << "StelAudioMgr: Cannot drop sound, " << id << "not loaded.";
 		return;
+	}
 	if (audioObjects[id]!=NULL)
 	{
 		audioObjects[id]->stop();
 		delete audioObjects[id];
 		audioObjects.remove(id);
 	}
+}
+
+
+qint64 StelAudioMgr::position(const QString& id)
+{
+	if (!audioObjects.contains(id))
+	{
+		qDebug() << "StelAudioMgr: Cannot report position for sound, " << id << "not loaded.";
+		return(-1);
+	}
+	if (audioObjects[id]!=NULL)
+	{
+		return audioObjects[id]->position();
+	}
+	return (-1);
+}
+
+qint64 StelAudioMgr::duration(const QString& id)
+{
+	if (!audioObjects.contains(id))
+	{
+		qDebug() << "StelAudioMgr: Cannot report duration for sound, " << id << "not loaded.";
+		return(-1);
+	}
+	if (audioObjects[id]!=NULL)
+	{
+		return audioObjects[id]->duration();
+	}
+	return (-1);
 }
 
 #else 
@@ -102,4 +152,6 @@ void StelAudioMgr::playSound(const QString&) {;}
 void StelAudioMgr::pauseSound(const QString&) {;}
 void StelAudioMgr::stopSound(const QString&) {;}
 void StelAudioMgr::dropSound(const QString&) {;}
+qint64 StelAudioMgr::position(const QString&){return -1;}
+qint64 StelAudioMgr::duration(const QString&){return -1;}
 #endif

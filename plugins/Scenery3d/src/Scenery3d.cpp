@@ -95,8 +95,9 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
       cubeVertexBuffer(QOpenGLBuffer::VertexBuffer), cubeIndexBuffer(QOpenGLBuffer::IndexBuffer), cubeIndexCount(0),
       lightOrthoNear(0.1f), lightOrthoFar(1000.0f), parallaxScale(0.015f)
 {
+	#ifndef NDEBUG
 	qDebug()<<"Scenery3d constructor...";
-
+	#endif
 	//the arrays should all contain only zeroes
 	Q_ASSERT(cubeMapTex[0]==0);
 	Q_ASSERT(cubeSideFBO[0]==0);
@@ -117,8 +118,9 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
 	debugTextFont.setFamily("Courier");
 	debugTextFont.setPixelSize(16);
 
-
+	#ifndef NDEBUG
 	qDebug()<<"Scenery3d constructor...done";
+	#endif
 }
 
 Scenery3d::~Scenery3d()

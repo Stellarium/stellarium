@@ -66,6 +66,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	oldLum(-1.f),
 	big3dModelHaloRadius(150.f)
 {
+	setObjectName("StelSkyDrawer");
 	qsrand (QDateTime::currentMSecsSinceEpoch());
 	QSettings* conf = StelApp::getInstance().getSettings();
 	initColorTableFromConfigFile(conf);
@@ -85,9 +86,9 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 
 	bool ok=true;
 
-	setBortleScaleIndex(conf->value("stars/init_bortle_scale",2).toInt(&ok));
+	setBortleScaleIndex(conf->value("stars/init_bortle_scale",3).toInt(&ok));
 	if (!ok)
-		setBortleScaleIndex(2);
+		setBortleScaleIndex(3);
 
 	setRelativeStarScale(conf->value("stars/relative_scale",1.0).toFloat(&ok));
 	if (!ok)
@@ -191,7 +192,7 @@ void StelSkyDrawer::init()
 	starShaderVars.pos = starShaderProgram->attributeLocation("pos");
 	starShaderVars.color = starShaderProgram->attributeLocation("color");
 	starShaderVars.texture = starShaderProgram->uniformLocation("tex");
-			
+
 	update(0);
 }
 
@@ -644,24 +645,28 @@ void StelSkyDrawer::preDraw()
 // See http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
 void StelSkyDrawer::setBortleScaleIndex(int bIndex)
 {
-	// Associate the Bortle index (1 to 9) to inScale value
-	if (bIndex<1)
+	if(bortleScaleIndex!=bIndex)
 	{
-		qWarning() << "WARNING: Bortle scale index range is [1;9], given" << bIndex;
-		bIndex = 1;
-	}
-	if (bIndex>9)
-	{
-		qWarning() << "WARNING: Bortle scale index range is [1;9], given" << bIndex;
-		bIndex = 9;
-	}
+		// Associate the Bortle index (1 to 9) to inScale value
+		if (bIndex<1)
+		{
+			qWarning() << "WARNING: Bortle scale index range is [1;9], given" << bIndex;
+			bIndex = 1;
+		}
+		if (bIndex>9)
+		{
+			qWarning() << "WARNING: Bortle scale index range is [1;9], given" << bIndex;
+			bIndex = 9;
+		}
 
-	bortleScaleIndex = bIndex;
-	// GZ: I moved this block to update()
-	// These value have been calibrated by hand, looking at the faintest star in stellarium at around 40 deg FOV
-	// They should roughly match the scale described at http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
-	// static const float bortleToInScale[9] = {2.45, 1.55, 1.0, 0.63, 0.40, 0.24, 0.23, 0.145, 0.09};
-	// setInputScale(bortleToInScale[bIndex-1]);
+		bortleScaleIndex = bIndex;
+		emit bortleScaleIndexChanged(bortleScaleIndex);
+		// GZ: I moved this block to update()
+		// These value have been calibrated by hand, looking at the faintest star in stellarium at around 40 deg FOV
+		// They should roughly match the scale described at http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
+		// static const float bortleToInScale[9] = {2.45, 1.55, 1.0, 0.63, 0.40, 0.24, 0.23, 0.145, 0.09};
+		// setInputScale(bortleToInScale[bIndex-1]);
+	}
 }
 
 
