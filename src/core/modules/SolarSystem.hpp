@@ -56,9 +56,6 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(bool trailsDisplayed
 		   READ getFlagTrails
 		   WRITE setFlagTrails)
-	Q_PROPERTY(bool planetsDisplayed
-		   READ getFlagPlanets
-		   WRITE setFlagPlanets)
 	Q_PROPERTY(bool hintsDisplayed
 		   READ getFlagHints
 		   WRITE setFlagHints)
@@ -71,6 +68,11 @@ class SolarSystem : public StelObjectModule
 		   WRITE setFlagNativeNames)
 
 	//StelProperties
+	Q_PROPERTY(bool planetsDisplayed
+		   READ getFlagPlanets
+		   WRITE setFlagPlanets
+		   NOTIFY flagPlanetsDisplayedChanged
+		   )
 	Q_PROPERTY(bool flagIsolatedOrbits
 		   READ getFlagIsolatedOrbits
 		   WRITE setFlagIsolatedOrbits
@@ -375,6 +377,7 @@ public slots:
 	//! Get initial JD for calculation of position of Great Red Spot
 	double getCustomGrsJD();
 signals:
+	void flagPlanetsDisplayedChanged(bool b);
 	void flagIsolatedOrbitsChanged(bool b);
 	void flagIsolatedTrailsChanged(bool b);
 	void flagLightTravelTimeChanged(bool b);
