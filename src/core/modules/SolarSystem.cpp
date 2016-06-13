@@ -1571,7 +1571,11 @@ void SolarSystem::selectedObjectChange(StelModule::StelModuleSelectAction)
 // Activate/Deactivate planets display
 void SolarSystem::setFlagPlanets(bool b)
 {
-	flagShow=b;
+	if (b!=flagShow)
+	{
+		flagShow=b;
+		emit flagPlanetsDisplayedChanged(b);
+	}
 }
 
 bool SolarSystem::getFlagPlanets(void) const
