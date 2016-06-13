@@ -41,7 +41,12 @@
 #include <QTimer>
 #include <QStringListModel>
 
-LocationDialog::LocationDialog(QObject* parent) : StelDialog(parent), isEditingNew(false)
+LocationDialog::LocationDialog(QObject* parent)
+	: StelDialog(parent)
+	, isEditingNew(false)
+	, allModel(NULL)
+	, pickedModel(NULL)
+	, proxyModel(NULL)
 {
 	dialogName = "Location";
 	ui = new Ui_locationDialogForm;

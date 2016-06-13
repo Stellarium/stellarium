@@ -68,7 +68,16 @@ StelPluginInfo RemoteControlStelPluginInterface::getPluginInfo() const
 }
 
 RemoteControl::RemoteControl()
-	: httpListener(NULL), requestHandler(NULL), enabled(false), autoStart(false), toolbarButton(NULL)
+	: httpListener(NULL)
+	, requestHandler(NULL)
+	, enabled(false)
+	, autoStart(false)
+	, usePassword(false)
+	, password("")
+	, port(8090)
+	, minThreads(1)
+	, maxThreads(30)
+	, toolbarButton(NULL)
 {
 	setObjectName("RemoteControl");
 
