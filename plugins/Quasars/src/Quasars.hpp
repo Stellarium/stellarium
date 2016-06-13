@@ -69,7 +69,11 @@ typedef QSharedPointer<Quasar> QuasarP;
 class Quasars : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool quasarsVisible READ getFlagShowQuasars WRITE setFlagShowQuasars)
+	Q_PROPERTY(bool quasarsVisible
+		   READ getFlagShowQuasars
+		   WRITE setFlagShowQuasars
+		   NOTIFY flagQuasarsVisibilityChanged
+		   )
 public:
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
@@ -178,6 +182,8 @@ signals:
 	//! emitted after a JSON update has run.
 	void jsonUpdateComplete(void);
 
+	void flagQuasarsVisibilityChanged(bool b);
+
 public slots:
 	//! Download JSON from web recources described in the module section of the
 	//! module.ini file and update the local JSON file.
@@ -185,7 +191,7 @@ public slots:
 
 	//! Enable/disable display of markers of quasars
 	//! @param b boolean flag
-	void setFlagShowQuasars(bool b) { flagShowQuasars=b; }
+	void setFlagShowQuasars(bool b);
 	//! Get status to display of markers of quasars
 	//! @return true if it's visible
 	bool getFlagShowQuasars(void) { return flagShowQuasars; }

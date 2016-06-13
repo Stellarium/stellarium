@@ -72,7 +72,9 @@ class AngleMeasure : public StelModule
 	Q_OBJECT
 	Q_PROPERTY(bool enabled
 		   READ isEnabled
-		   WRITE enableAngleMeasure)
+		   WRITE enableAngleMeasure
+		   NOTIFY flagAngleMeasureChanged
+		   )
 	Q_PROPERTY(bool dmsFormat
 		   READ isDmsFormat
 		   WRITE useDmsFormat)
@@ -114,6 +116,9 @@ public:
 	//! values.
 	//! @see saveSettings(), restoreSettings()
 	void loadSettings();
+
+signals:
+	void flagAngleMeasureChanged(bool b);
 
 public slots:
 	void enableAngleMeasure(bool b);

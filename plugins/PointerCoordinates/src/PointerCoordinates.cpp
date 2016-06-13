@@ -283,7 +283,11 @@ void PointerCoordinates::draw(StelCore *core)
 
 void PointerCoordinates::enableCoordinates(bool b)
 {
-	flagShowCoordinates = b;
+	if (b!=flagShowCoordinates)
+	{
+		flagShowCoordinates = b;
+		emit flagCoordinatesVisibilityChanged(b);
+	}
 }
 
 double PointerCoordinates::getCallOrder(StelModuleActionName actionName) const
@@ -447,4 +451,5 @@ void PointerCoordinates::setCustomCoordinatesPlace(int x, int y)
 {
 	customPosition = qMakePair(x, y);
 }
+
 

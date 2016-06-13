@@ -465,16 +465,21 @@ QString AngleMeasure::calculateAngle(bool horizontal) const
 
 void AngleMeasure::enableAngleMeasure(bool b)
 {
-	flagShowAngleMeasure = b;
-	lineVisible = b;
-	messageFader = b;
-	if (b)
+	if (b!=flagShowAngleMeasure)
 	{
-		//qDebug() << "AngleMeasure::enableAngleMeasure starting timer";
-		messageTimer->start();
+		flagShowAngleMeasure = b;
+		lineVisible = b;
+		messageFader = b;
+		if (b)
+		{
+			//qDebug() << "AngleMeasure::enableAngleMeasure starting timer";
+			messageTimer->start();
+		}
+		// Immediate saving of settings
+		conf->setValue("AngleMeasure/enable_at_startup", flagShowAngleMeasure);
+
+		emit flagAngleMeasureChanged(b);
 	}
-	// Immediate saving of settings
-	conf->setValue("AngleMeasure/enable_at_startup", flagShowAngleMeasure);
 }
 
 void AngleMeasure::showPositionAngle(bool b)
