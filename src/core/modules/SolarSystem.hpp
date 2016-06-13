@@ -59,6 +59,48 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(bool planetsDisplayed
 		   READ getFlagPlanets
 		   WRITE setFlagPlanets)
+	Q_PROPERTY(bool hintsDisplayed
+		   READ getFlagHints
+		   WRITE setFlagHints)
+	Q_PROPERTY(bool pointersDisplayed
+		   READ getFlagPointers
+		   WRITE setFlagPointers)
+
+	Q_PROPERTY(bool nativeNamesDisplayed
+		   READ getFlagNativeNames
+		   WRITE setFlagNativeNames)
+
+	//StelProperties
+	Q_PROPERTY(bool flagIsolatedOrbits
+		   READ getFlagIsolatedOrbits
+		   WRITE setFlagIsolatedOrbits
+		   NOTIFY flagIsolatedOrbitsChanged
+		   )
+	Q_PROPERTY(bool flagIsolatedTrails
+		   READ getFlagIsolatedTrails
+		   WRITE setFlagIsolatedTrails
+		   NOTIFY flagIsolatedTrailsChanged
+		   )
+	Q_PROPERTY(bool flagLightTravelTime
+		   READ getFlagLightTravelTime
+		   WRITE setFlagLightTravelTime
+		   NOTIFY flagLightTravelTimeChanged
+		   )
+	Q_PROPERTY(bool flagMoonScale
+		   READ getFlagMoonScale
+		   WRITE setFlagMoonScale
+		   NOTIFY flagMoonScaleChanged
+		   )
+	Q_PROPERTY(double moonScale
+		   READ getMoonScale
+		   WRITE setMoonScale
+		   NOTIFY moonScaleChanged
+		   )
+	Q_PROPERTY(double labelsAmount
+		   READ getLabelsAmount
+		   WRITE setLabelsAmount
+		   NOTIFY labelsAmountChanged
+		   )
 
 public:
 	SolarSystem();
@@ -157,10 +199,10 @@ public slots:
 	//! Set the amount of planet labels. The real amount is also proportional with FOV.
 	//! The limit is set in function of the planets magnitude
 	//! @param a the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
-	void setLabelsAmount(float a) {labelsAmount=a;}
+	void setLabelsAmount(double a) {if(a!=labelsAmount) {labelsAmount=a; emit labelsAmountChanged(a);}}
 	//! Get the amount of planet labels. The real amount is also proportional with FOV.
 	//! @return the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
-	float getLabelsAmount(void) const {return labelsAmount;}
+	double getLabelsAmount(void) const {return labelsAmount;}
 
 	//! Set flag which determines if planet orbits are drawn or hidden.
 	void setFlagOrbits(bool b);
@@ -233,8 +275,8 @@ public slots:
 
 	//! Set the display scaling factor for Earth's moon.
 	void setMoonScale(double f);
-	//! Get the display scaling factor for Earth's oon.
-	float getMoonScale(void) const {return moonScale;}
+	//! Get the display scaling factor for Earth's moon.
+	double getMoonScale(void) const {return moonScale;}
 
 	//! Translate names. (public so that SolarSystemEditor can call it).
 	void updateI18n();
@@ -332,6 +374,13 @@ public slots:
 	void setCustomGrsJD(double JD);
 	//! Get initial JD for calculation of position of Great Red Spot
 	double getCustomGrsJD();
+signals:
+	void flagIsolatedOrbitsChanged(bool b);
+	void flagIsolatedTrailsChanged(bool b);
+	void flagLightTravelTimeChanged(bool b);
+	void flagMoonScaleChanged(bool b);
+	void moonScaleChanged(double f);
+	void labelsAmountChanged(double f);
 
 public:
 	///////////////////////////////////////////////////////////////////////////
@@ -429,12 +478,12 @@ private:
 
 	// Moon scale value
 	bool flagMoonScale;
-	float moonScale;
+	double moonScale;
 
 	QFont planetNameFont;
 
 	//! The amount of planets labels (between 0 and 10).
-	float labelsAmount;
+	double labelsAmount;
 
 	//! List of all the bodies of the solar system.
 	QList<PlanetP> systemPlanets;

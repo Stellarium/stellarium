@@ -37,6 +37,7 @@
 #include "StelProjector.hpp"
 #include "StelLocationMgr.hpp"
 #include "StelActionMgr.hpp"
+#include "StelPropertyMgr.hpp"
 
 #include "StelProgressController.hpp"
 #include "StelModuleMgr.hpp"
@@ -174,6 +175,14 @@ Q_IMPORT_PLUGIN(ObservabilityStelPluginInterface)
 Q_IMPORT_PLUGIN(Scenery3dStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_REMOTECONTROL
+Q_IMPORT_PLUGIN(RemoteControlStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_REMOTESYNC
+Q_IMPORT_PLUGIN(RemoteSyncStelPluginInterface)
+#endif
+
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
 qint64 StelApp::startMSecs = 0;
@@ -236,6 +245,7 @@ StelApp::StelApp(QObject* parent)
 	moduleMgr=NULL;
 	networkAccessManager=NULL;
 	actionMgr = NULL;
+	propMgr = NULL;
 
 	// Can't create 2 StelApp instances
 	Q_ASSERT(!singleton);
@@ -276,6 +286,7 @@ StelApp::~StelApp()
 	delete planetLocationMgr; planetLocationMgr=NULL;
 	delete moduleMgr; moduleMgr=NULL; // Delete the secondary instance
 	delete actionMgr; actionMgr = NULL;
+	delete propMgr; propMgr = NULL;
 
 	Q_ASSERT(singleton);
 	singleton = NULL;
@@ -402,15 +413,18 @@ void StelApp::init(QSettings* conf)
 	networkAccessManager->setCache(cache);
 	connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(reportFileDownloadFinished(QNetworkReply*)));
 
+	//create non-StelModule managers
+	propMgr = new StelPropertyMgr();
+	localeMgr = new StelLocaleMgr();
+	skyCultureMgr = new StelSkyCultureMgr();
+	propMgr->registerObject(skyCultureMgr);
+	planetLocationMgr = new StelLocationMgr();
+	actionMgr = new StelActionMgr();
+
 	// Stel Object Data Base manager
 	stelObjectMgr = new StelObjectMgr();
 	stelObjectMgr->init();
-	getModuleMgr().registerModule(stelObjectMgr);
-
-	localeMgr = new StelLocaleMgr();
-	skyCultureMgr = new StelSkyCultureMgr();
-	planetLocationMgr = new StelLocationMgr();
-	actionMgr = new StelActionMgr();
+	getModuleMgr().registerModule(stelObjectMgr);	
 
 	localeMgr->init();
 
@@ -772,13 +786,6 @@ void StelApp::updateI18n()
 #ifdef ENABLE_NLS
 	emit(languageChanged());
 #endif
-}
-
-// Update and reload sky culture informations everywhere in the program
-void StelApp::updateSkyCulture()
-{
-	QString skyCultureDir = getSkyCultureMgr().getCurrentSkyCultureID();
-	emit(skyCultureChanged(skyCultureDir));
 }
 
 // Return the time since when stellarium is running in second.

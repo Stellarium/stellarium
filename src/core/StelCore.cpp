@@ -37,6 +37,7 @@
 #include "LandscapeMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
+#include "StelPropertyMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "EphemWrapper.hpp"
 #include "precession.h"
@@ -74,7 +75,7 @@ StelCore::StelCore()
 	, timeSpeed(JD_SECOND)
 	, JD(0.,0.)
 	, presetSkyTime(0.)
-	, secondsOfLastJDUpdate(0.)
+	, milliSecondsOfLastJDUpdate(0.)
 	, jdOfLastJDUpdate(0.)
 	, deltaTCustomNDot(-26.0)
 	, deltaTCustomYear(1820.0)
@@ -83,7 +84,11 @@ StelCore::StelCore()
 	, de430Active(false)
 	, de431Active(false)
 {
+	setObjectName("StelCore");
+	registerMathMetaTypes();
+
 	toneReproducer = new StelToneReproducer();
+	milliSecondsOfLastJDUpdate = QDateTime::currentMSecsSinceEpoch();
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	// Create and initialize the default projector params
@@ -199,10 +204,17 @@ void StelCore::init()
 	currentProjectorParams.fov = movementMgr->getInitFov();
 	StelApp::getInstance().getModuleMgr().registerModule(movementMgr);
 
+	StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
+
 	skyDrawer = new StelSkyDrawer(this);
 	skyDrawer->init();
 
+	propMgr->registerObject(skyDrawer);
+	propMgr->registerObject(this);
+
+
 	setCurrentProjectionTypeKey(getDefaultProjectionTypeKey());
+	updateMaximumFov();
 
 	// Register all the core actions.
 	QString timeGroup = N_("Date and Time");
@@ -260,7 +272,6 @@ void StelCore::init()
 
 	actionsMgr->addAction("actionHorizontal_Flip", displayGroup, N_("Flip scene horizontally"), this, "flipHorz", "Ctrl+Shift+H", "", true);
 	actionsMgr->addAction("actionVertical_Flip", displayGroup, N_("Flip scene vertically"), this, "flipVert", "Ctrl+Shift+V", "", true);
-	
 }
 
 QString StelCore::getDefaultProjectionTypeKey() const
@@ -475,14 +486,25 @@ void StelCore::postDraw()
 	sPainter.drawViewportShape();
 }
 
-void StelCore::setCurrentProjectionType(ProjectionType type)
+void StelCore::updateMaximumFov()
 {
-	currentProjectionType=type;
 	const double savedFov = currentProjectorParams.fov;
 	currentProjectorParams.fov = 0.0001;	// Avoid crash
 	double newMaxFov = getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity())))->getMaxFov();
 	movementMgr->setMaxFov(newMaxFov);
 	currentProjectorParams.fov = qMin(newMaxFov, savedFov);
+}
+
+void StelCore::setCurrentProjectionType(ProjectionType type)
+{
+	if(type!=currentProjectionType)
+	{
+		currentProjectionType=type;
+		updateMaximumFov();
+
+		emit currentProjectionTypeChanged(type);
+		emit currentProjectionTypeKeyChanged(getCurrentProjectionTypeKey());
+	}
 }
 
 StelCore::ProjectionType StelCore::getCurrentProjectionType() const
@@ -552,6 +574,37 @@ bool StelCore::getFlipHorz(void) const
 bool StelCore::getFlipVert(void) const
 {
 	return currentProjectorParams.flipVert;
+}
+
+// Get current value for horizontal viewport offset [-50...50]
+double StelCore::getViewportHorizontalOffset(void)
+{
+	return (currentProjectorParams.viewportCenterOffset[0] * 100.0f);
+}
+// Set horizontal viewport offset. Argument will be clamped to be inside [-50...50]
+void StelCore::setViewportHorizontalOffset(double newOffsetPct)
+{
+	currentProjectorParams.viewportCenterOffset[0]=0.01f* qMin(50., qMax(-50., newOffsetPct));
+	currentProjectorParams.viewportCenter.set(currentProjectorParams.viewportXywh[0]+(0.5f+currentProjectorParams.viewportCenterOffset.v[0])*currentProjectorParams.viewportXywh[2],
+						currentProjectorParams.viewportXywh[1]+(0.5f+currentProjectorParams.viewportCenterOffset.v[1])*currentProjectorParams.viewportXywh[3]);
+}
+
+// Get current value for vertical viewport offset [-50...50]
+double StelCore::getViewportVerticalOffset(void)
+{
+	return (currentProjectorParams.viewportCenterOffset[1] * 100.0f);
+}
+// Set vertical viewport offset. Argument will be clamped to be inside [-50...50]
+void StelCore::setViewportVerticalOffset(double newOffsetPct)
+{
+	currentProjectorParams.viewportCenterOffset[1]=0.01f* qMin(50., qMax(-50., newOffsetPct));
+	currentProjectorParams.viewportCenter.set(currentProjectorParams.viewportXywh[0]+(0.5f+currentProjectorParams.viewportCenterOffset.v[0])*currentProjectorParams.viewportXywh[2],
+						currentProjectorParams.viewportXywh[1]+(0.5f+currentProjectorParams.viewportCenterOffset.v[1])*currentProjectorParams.viewportXywh[3]);
+}
+
+void StelCore::setViewportStretch(float stretch)
+{
+	currentProjectorParams.widthStretch=qMax(0.001f, stretch);
 }
 
 QString StelCore::getDefaultLocationID() const
@@ -882,6 +935,21 @@ void StelCore::returnToHome()
 	smmgr->zoomTo(smmgr->getInitFov(), 1.);
 }
 
+double StelCore::getJDOfLastJDUpdate() const
+{
+	return jdOfLastJDUpdate;
+}
+
+void StelCore::setMilliSecondsOfLastJDUpdate(qint64 millis)
+{
+	milliSecondsOfLastJDUpdate = millis;
+}
+
+qint64 StelCore::getMilliSecondsOfLastJDUpdate() const
+{
+	return milliSecondsOfLastJDUpdate;
+}
+
 void StelCore::setJD(double newJD)
 {
 	JD.first=newJD;
@@ -993,6 +1061,12 @@ const QSharedPointer<Planet> StelCore::getCurrentPlanet() const
 const StelObserver *StelCore::getCurrentObserver() const
 {
 	return position;
+}
+
+void StelCore::setObserver(StelObserver *obs)
+{
+	delete position;
+	position = obs;
 }
 
 // Smoothly move the observer to the given location
@@ -1396,11 +1470,11 @@ void StelCore::updateTime(double deltaTime)
 {
 	if (getRealTimeSpeed())
 	{
-		JD.first = jdOfLastJDUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDUpdate) * JD_SECOND;
+		JD.first = jdOfLastJDUpdate + (QDateTime::currentMSecsSinceEpoch() - milliSecondsOfLastJDUpdate) / 1000.0 * JD_SECOND;
 	}
 	else
 	{
-		JD.first = jdOfLastJDUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDUpdate) * timeSpeed;
+		JD.first = jdOfLastJDUpdate + (QDateTime::currentMSecsSinceEpoch() - milliSecondsOfLastJDUpdate) / 1000.0 * timeSpeed;
 	}
 
 	// Fix time limits to -100000 to +100000 to prevent bugs
@@ -1433,7 +1507,34 @@ void StelCore::updateTime(double deltaTime)
 void StelCore::resetSync()
 {
 	jdOfLastJDUpdate = getJD();
-	secondsOfLastJDUpdate = StelApp::getTotalRunTime();
+	//use currentMsecsSinceEpoch directly instead of StelApp::getTotalRuntime,
+	//because the StelApp::startMSecs gets subtracted anyways in update()
+	//also changed to qint64 to increase precision
+	milliSecondsOfLastJDUpdate = QDateTime::currentMSecsSinceEpoch();
+	emit timeSyncOccurred(jdOfLastJDUpdate);
+}
+
+void StelCore::registerMathMetaTypes()
+{
+	qRegisterMetaType<Vec2d>();
+	qRegisterMetaType<Vec2f>();
+	qRegisterMetaType<Vec2i>();
+	qRegisterMetaType<Vec3d>();
+	qRegisterMetaType<Vec3f>();
+	qRegisterMetaType<Vec4d>();
+	qRegisterMetaType<Vec4f>();
+	qRegisterMetaType<Vec4i>();
+	qRegisterMetaType<Mat4d>();
+	qRegisterMetaType<Mat4f>();
+	qRegisterMetaType<Mat3d>();
+	qRegisterMetaType<Mat3f>();
+
+    //for debugging QVariants with these types, it helps if we register the string converters
+    QMetaType::registerConverter(&Vec3d::toString);
+    QMetaType::registerConverter(&Vec3f::toString);
+    QMetaType::registerConverter(&Vec4d::toString);
+    QMetaType::registerConverter(&Vec4f::toString);
+    QMetaType::registerConverter(&Vec4i::toString);
 }
 
 void StelCore::setStartupTimeMode(const QString& s)

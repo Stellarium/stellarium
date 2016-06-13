@@ -27,8 +27,13 @@
 
 SimbadLookupReply::SimbadLookupReply(const QString& aurl, QNetworkAccessManager* anetMgr, int delayMs) : url(aurl), reply(NULL), netMgr(anetMgr), currentStatus(SimbadLookupQuerying)
 {
-	// First wait before starting query. This avoids sending a query for each autocompletion letter.
-	QTimer::singleShot(delayMs, this, SLOT(delayTimerCompleted()));
+	if(delayMs <= 0)
+		delayTimerCompleted();
+	else
+	{
+		// First wait before starting query. This avoids sending a query for each autocompletion letter.
+		QTimer::singleShot(delayMs, this, SLOT(delayTimerCompleted()));
+	}
 }
 
 SimbadLookupReply::~SimbadLookupReply()
@@ -37,7 +42,20 @@ SimbadLookupReply::~SimbadLookupReply()
 	{
 		disconnect(reply, SIGNAL(finished()), this, SLOT(httpQueryFinished()));
 		reply->abort();
+		//do not use delete here
 		reply->deleteLater();
+		reply = NULL;
+	}
+}
+
+//This is provided for the correct deletion of the reply in the RemoteControl plugin
+void SimbadLookupReply::deleteNetworkReply()
+{
+	if(reply)
+	{
+		disconnect(reply, SIGNAL(finished()), this, SLOT(httpQueryFinished()));
+		reply->abort();
+		delete reply;
 		reply = NULL;
 	}
 }

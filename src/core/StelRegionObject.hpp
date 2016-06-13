@@ -27,14 +27,16 @@
 //! to be stored in a StelSphericalIndex.
 class StelRegionObject
 {
-	public:
-		virtual ~StelRegionObject(void) {;}
+	//required for Q_FLAGS macro in some derived classes
+	Q_GADGET
+public:
+	virtual ~StelRegionObject(void) {;}
 
-		//! Return the spatial region of the object.
-		virtual SphericalRegionP getRegion() const=0;
+	//! Return the spatial region of the object.
+	virtual SphericalRegionP getRegion() const=0;
 	
-		//! Return the spatial region of the object.
-		virtual Vec3d getPointInRegion() const=0;
+	//! Return the spatial region of the object.
+	virtual Vec3d getPointInRegion() const=0;
 };
 
 //! @typedef StelRegionObjectP
