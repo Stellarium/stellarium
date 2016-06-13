@@ -190,13 +190,17 @@ void SolarSystem::init()
 	
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
-	connect(app, SIGNAL(skyCultureChanged(QString)), this, SLOT(updateSkyCulture(QString)));
+	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(updateSkyCulture(QString)));
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Planets", displayGroup, N_("Planets"), "planetsDisplayed", "P");
 	addAction("actionShow_Planets_Labels", displayGroup, N_("Planet labels"), "labelsDisplayed", "Alt+P");
 	addAction("actionShow_Planets_Orbits", displayGroup, N_("Planet orbits"), "orbitsDisplayed", "O");
 	addAction("actionShow_Planets_Trails", displayGroup, N_("Planet trails"), "trailsDisplayed", "Shift+T");
+	//there is a small discrepancy in the GUI: "Show planet markers" actually means show planet hints
+	addAction("actionShow_Planets_Hints", displayGroup, N_("Planet markers"), "hintsDisplayed", "Ctrl+Alt+P");
+	//addAction("actionShow_Planets_Markers", displayGroup, N_("Planet selection marker"), "markersDisplayed", "Ctrl+Shift+P");
+	addAction("actionShow_Skyculture_Nativenames", displayGroup, N_("Native planet names (from starlore)"), "nativeNamesDisplayed", "Ctrl+Shift+N");
 }
 
 void SolarSystem::deinit()
@@ -1400,7 +1404,11 @@ void SolarSystem::setFlagOrbits(bool b)
 
 void SolarSystem::setFlagLightTravelTime(bool b)
 {
-	flagLightTravelTime = b;
+	if(b!=flagLightTravelTime)
+	{
+		flagLightTravelTime = b;
+		emit flagLightTravelTimeChanged(b);
+	}
 }
 
 void SolarSystem::setSelected(PlanetP obj)
@@ -1605,7 +1613,11 @@ bool SolarSystem::getFlagTranslatedNames() const
 
 void SolarSystem::setFlagIsolatedTrails(bool b)
 {
-	flagIsolatedTrails = b;
+	if(b!=flagIsolatedTrails)
+	{
+		flagIsolatedTrails = b;
+		emit flagIsolatedTrailsChanged(b);
+	}
 }
 
 bool SolarSystem::getFlagIsolatedTrails() const
@@ -1615,7 +1627,11 @@ bool SolarSystem::getFlagIsolatedTrails() const
 
 void SolarSystem::setFlagIsolatedOrbits(bool b)
 {
-	flagIsolatedOrbits = b;
+	if(b!=flagIsolatedOrbits)
+	{
+		flagIsolatedOrbits = b;
+		emit flagIsolatedOrbitsChanged(b);
+	}
 }
 
 bool SolarSystem::getFlagIsolatedOrbits() const
@@ -1635,17 +1651,25 @@ Vec3f SolarSystem::getOrbitsColor(void) const {return Planet::getOrbitColor();}
 // Set/Get if Moon display is scaled
 void SolarSystem::setFlagMoonScale(bool b)
 {
-	if (!b) getMoon()->setSphereScale(1);
-	else getMoon()->setSphereScale(moonScale);
-	flagMoonScale = b;
+	if(b!=flagMoonScale)
+	{
+		if (!b) getMoon()->setSphereScale(1);
+		else getMoon()->setSphereScale(moonScale);
+		flagMoonScale = b;
+		emit flagMoonScaleChanged(b);
+	}
 }
 
 // Set/Get Moon display scaling factor
 void SolarSystem::setMoonScale(double f)
 {
-	moonScale = f;
-	if (flagMoonScale)
-		getMoon()->setSphereScale(moonScale);
+	if(moonScale != f)
+	{
+		moonScale = f;
+		if (flagMoonScale)
+			getMoon()->setSphereScale(moonScale);
+		emit moonScaleChanged(f);
+	}
 }
 
 // Set selected planets by englishName

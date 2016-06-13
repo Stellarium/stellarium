@@ -90,7 +90,8 @@ void ArchaeoLinesDialog::createDialogContent()
 	ui->currentMoonCheckBox->setChecked(al->isCurrentMoonDisplayed());
 	connect(ui->currentMoonCheckBox, SIGNAL(toggled(bool)), al, SLOT(showCurrentMoon(bool)));
 	// Planet ComboBox requires special handling!
-	ui->currentPlanetComboBox->setCurrentIndex(al->whichCurrentPlanetDisplayed()-ArchaeoLine::CurrentPlanetNone);
+	setCurrentPlanetFromApp();
+	connect(al, SIGNAL(currentPlanetChanged(ArchaeoLine::Line)), this, SLOT(setCurrentPlanetFromApp()));
 	connect(ui->currentPlanetComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setCurrentPlanetFromGUI(int)));
 
 	equinoxColor         = al->getLineColor(ArchaeoLine::Equinox);
@@ -175,6 +176,12 @@ void ArchaeoLinesDialog::setCurrentPlanetFromGUI(int index)
 {
 	Q_ASSERT(al);
 	al->showCurrentPlanet((ArchaeoLine::Line) (ArchaeoLine::CurrentPlanetNone+index));
+}
+
+void ArchaeoLinesDialog::setCurrentPlanetFromApp()
+{
+	Q_ASSERT(al);
+	ui->currentPlanetComboBox->setCurrentIndex(al->whichCurrentPlanetDisplayed()-ArchaeoLine::CurrentPlanetNone);
 }
 
 

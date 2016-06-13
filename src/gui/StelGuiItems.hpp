@@ -79,9 +79,16 @@ public:
 			   const QPixmap& pixHover=QPixmap(),
 			   class StelAction* action=NULL, bool noBackground=false);
 	
+	//! Constructor
+	//! @param parent the parent item
+	//! @param pixOn the pixmap to display when the button is toggled
+	//! @param pixOff the pixmap to display when the button is not toggled
+	//! @param pixHover a pixmap slowly blended when mouse is over the button
+	//! @param actionId the id of the associated action. Connections are automatically done with the signals if relevant.
+	//! @param noBackground define whether the button background image have to be used
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
-			   const QPixmap& pixHover=QPixmap(),
-			   const QString& actionId=QString(), bool noBackground=false);
+			   const QPixmap& pixHover,
+			   const QString& actionId, bool noBackground=false);
 	//! Constructor
 	//! @param parent the parent item
 	//! @param pixOn the pixmap to display when the button is toggled
@@ -92,7 +99,7 @@ public:
 	//! @param noBackground define whether the button background image have to be used
 	//! @param isTristate define whether the button is a tristate or an on/off button
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff, const QPixmap& pixNoChange,
-			   const QPixmap& pixHover=QPixmap(),
+			   const QPixmap& pixHover,
 			   const QString& actionId=QString(), bool noBackground=false, bool isTristate=true);
 	
 	//! Button states

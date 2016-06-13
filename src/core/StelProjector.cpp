@@ -122,6 +122,7 @@ void StelProjector::init(const StelProjectorParams& params)
 	flipVert = params.flipVert ? -1.f : 1.f;
 	viewportFovDiameter = params.viewportFovDiameter * devicePixelsPerPixel;
 	pixelPerRad = 0.5f * viewportFovDiameter / fovToViewScalingFactor(params.fov*(M_PI/360.f));
+	widthStretch = params.widthStretch;
 	computeBoundingCap();
 }
 

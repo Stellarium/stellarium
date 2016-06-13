@@ -137,6 +137,9 @@ void SporadicMeteorMgr::draw(StelCore* core)
 
 void SporadicMeteorMgr::setZHR(int zhr)
 {
-	m_zhr = zhr;
-	emit zhrChanged(zhr);
+	if(zhr!=m_zhr)
+	{
+		m_zhr = zhr;
+		emit zhrChanged(zhr);
+	}
 }

@@ -54,6 +54,9 @@ class StelCore : public QObject
 	Q_PROPERTY(bool flipVert READ getFlipVert WRITE setFlipVert)
 	Q_PROPERTY(bool flagUseNutation READ getUseNutation WRITE setUseNutation)
 	Q_PROPERTY(bool flagUseTopocentricCoordinates READ getUseTopocentricCoordinates WRITE setUseTopocentricCoordinates)
+	Q_PROPERTY(ProjectionType currentProjectionType READ getCurrentProjectionType WRITE setCurrentProjectionType NOTIFY currentProjectionTypeChanged)
+	//! This is just another way to access the projection type, by string instead of enum
+	Q_PROPERTY(QString currentProjectionTypeKey READ getCurrentProjectionTypeKey WRITE setCurrentProjectionTypeKey NOTIFY currentProjectionTypeKeyChanged STORED false)
 
 public:
 
@@ -262,17 +265,14 @@ public:
 	const QSharedPointer<class Planet> getCurrentPlanet() const;
 
 	//! Unfortunately we also need this.
+	//! Returns the current observer.
+	//! Note that the observer object may be deleted at any time when control returns to StelCore.
 	const StelObserver* getCurrentObserver() const;
 
+	//! Replaces the current observer. StelCore assumes ownership of the observer.
+	void setObserver(StelObserver* obs);
 
 	SphericalCap getVisibleSkyArea() const;
-	
-	//! Smoothly move the observer to the given location
-	//! @param target the target location
-	//! @param duration direction of view move duration in s
-	//! @param durationIfPlanetChange direction of view + planet travel move duration in s.
-	//! This is used only if the destination planet is different from the starting one.
-	void moveObserverTo(const StelLocation& target, double duration=1., double durationIfPlanetChange=1.);
 
 	// Conversion in standard Julian time format
 	static const double JD_SECOND;
@@ -314,6 +314,12 @@ public:
 	QString getDefaultProjectionTypeKey(void) const;
 
 public slots:
+	//! Smoothly move the observer to the given location
+	//! @param target the target location
+	//! @param duration direction of view move duration in s
+	//! @param durationIfPlanetChange direction of view + planet travel move duration in s.
+	//! This is used only if the destination planet is different from the starting one.
+	void moveObserverTo(const StelLocation& target, double duration=1., double durationIfPlanetChange=1.);
 
 	//! Set the current ProjectionType to use
 	void setCurrentProjectionType(ProjectionType type);
@@ -359,6 +365,28 @@ public slots:
 	//! @return True if flipped vertically, else false.
 	bool getFlipVert(void) const;
 
+	//New for 0.15: Vertical offset should even be available for animation, so at last with property mechanism.
+	//! Get current value for horizontal viewport offset [-50...50]
+	//! An offset of 50 percent means projective image center is on the right screen border
+	double getViewportHorizontalOffset(void);
+	//! Set horizontal viewport offset. Argument will be clamped to be inside [-50...50]
+	//! An offset of 50 percent means projective image center is on the right screen border
+	//! Animation is available via StelMovementMgr::moveViewport()
+	void setViewportHorizontalOffset(double newOffsetPct);
+	//! Get current value for vertical viewport offset [-50...50]
+	//! An offset of 50 percent means projective image center is on the upper screen border
+	double getViewportVerticalOffset(void);
+	//! Set vertical viewport offset. Argument will be clamped to be inside [-50...50]
+	//! An offset of 50 percent means projective image center is on the upper screen border
+	//! Setting to a negative value will move the visible horizon down, this may be desired esp. in cylindrical projection.
+	//! Animation is available via StelMovementMgr::moveViewport()
+	void setViewportVerticalOffset(double newOffsetPct);
+
+	//! Can be used in specialized setups, intended e.g. for multi-projector installations with edge blending.
+	//! @param stretch [default 1] enlarge to stretch image to non-square pixels. A minimum value of 0.001 is enforced.
+	//! @note This only influences the projected content. Things like ScreenImages keep square pixels.
+	void setViewportStretch(float stretch);
+
 	//! Get the location used by default at startup
 	QString getDefaultLocationID() const;
 	//! Set the location to use by default at startup
@@ -367,6 +395,15 @@ public slots:
 	void returnToDefaultLocation();
 	//! Return to the default location and set default landscape with atmosphere and fog effects
 	void returnToHome();
+
+	//! Returns the JD of the last time resetSync() was called
+	double getJDOfLastJDUpdate() const;
+	//! Sets the system date which corresponds to the jdOfLastJDUpdate.
+	//! Usually, you do NOT want to call this method.
+	//! This method is used by the RemoteSync plugin.
+	void setMilliSecondsOfLastJDUpdate(qint64 millis);
+	//! Returns the system date of the last time resetSync() was called
+	qint64 getMilliSecondsOfLastJDUpdate() const;
 
 	//! Set the current date in Julian Day (UT)
 	void setJD(double newJD);
@@ -380,6 +417,7 @@ public slots:
 	//! The name is derived from the classical name "Ephemeris Time", of which TT is the successor.
 	//! It is still frequently used in the literature.
 	double getJDE() const;
+
 
 	//! Set the current date in Modified Julian Day (UT).
 	//! MJD is simply JD-2400000.5, getting rid of large numbers and starting days at midnight.
@@ -521,7 +559,8 @@ public slots:
 	//! Add n Julian years to the simulation time.
 	void addJulianYears(float n=100.f);
 
-	//! Add one Gaussian year to the simulation time.
+	//! Add one Gaussian year to the simulation time. The Gaussian Year is 365.2568983 days, and is C.F.Gauss's value for the Sidereal Year.
+	//! Note that 1 GaussY=2 &pi;/k where k is the Gaussian gravitational constant. A massless body orbits one solar mass in 1AU distance in a Gaussian Year.
 	void addGaussianYear();
 
 	//! Subtract one synodic month to the simulation time.
@@ -600,6 +639,14 @@ signals:
 	void locationChanged(StelLocation);
 	//! This signal is emitted when the time rate has changed
 	void timeRateChanged(double rate);
+	//! This signal is emmited whenever the time is re-synced.
+	//! This happens whenever the internal jDay is changed through setJDay/setMJDay and similar,
+	//! and whenever the time rate changes.
+	void timeSyncOccurred(double jDay);
+	//! Emitted whenever the projection type changes
+	void currentProjectionTypeChanged(StelCore::ProjectionType newType);
+	//! Emitted whenever the projection type changes
+	void currentProjectionTypeKeyChanged(const QString& newValue);
 
 private:
 	StelToneReproducer* toneReproducer;		// Tones conversion between stellarium world and display device
@@ -620,8 +667,10 @@ private:
 
 	void updateTransformMatrices();
 	void updateTime(double deltaTime);
+	void updateMaximumFov();
 	void resetSync();
 
+	void registerMathMetaTypes();
 
 
 	// Matrices used for every coordinate transfo
@@ -656,7 +705,7 @@ private:
 	double presetSkyTime;
 	QTime initTodayTime;
 	QString startupTimeMode;
-	double secondsOfLastJDUpdate;    // Time in seconds when the time rate or time last changed
+	double milliSecondsOfLastJDUpdate;    // Time in seconds when the time rate or time last changed
 	double jdOfLastJDUpdate;         // JD when the time rate or time last changed
 
 	// Variables for custom equation of Delta-T
@@ -669,7 +718,6 @@ private:
 	bool de431Available; // ephem file found
 	bool de430Active;    // available and user-activated.
 	bool de431Active;    // available and user-activated.
-
 };
 
 #endif // _STELCORE_HPP_
