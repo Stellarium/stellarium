@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-13 20:47+0700\n"
+"POT-Creation-Date: 2016-06-13 21:57+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1710,6 +1710,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:119
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:107
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:144
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:207
@@ -2071,6 +2072,7 @@ msgstr ""
 #: src/gui/HelpDialog.cpp:319
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
 #: plugins/Oculars/src/gui/OcularDialog.cpp:550
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
 msgid "Contributors"
 msgstr ""
 
@@ -6232,6 +6234,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:120
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:120
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:108
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
@@ -6271,6 +6274,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:136
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:123
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:125
@@ -6286,6 +6290,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:137
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:214
@@ -6304,6 +6309,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:140
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:156
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:128
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
@@ -6321,6 +6327,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:142
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:135
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:158
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:130
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:311
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
@@ -6338,6 +6345,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:144
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:132
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:133
@@ -6349,6 +6357,7 @@ msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin and its history, you "
@@ -6408,6 +6417,7 @@ msgstr ""
 #: plugins/Novae/src/ui_novaeDialog.h:241
 #: plugins/Quasars/src/ui_quasarsDialog.h:273
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:280
+#: plugins/RemoteControl/src/ui_remoteControlDialog.h:250
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:480
 #: plugins/Observability/src/ui_ObservabilityDialog.h:357
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:431
@@ -6426,6 +6436,7 @@ msgstr ""
 #: plugins/Novae/src/ui_novaeDialog.h:244
 #: plugins/Quasars/src/ui_quasarsDialog.h:276
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:283
+#: plugins/RemoteControl/src/ui_remoteControlDialog.h:261
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:503
 #: plugins/Observability/src/ui_ObservabilityDialog.h:360
 #: plugins/FOV/src/ui_fovWindow.h:410
@@ -7658,6 +7669,7 @@ msgstr ""
 #: plugins/Novae/src/ui_novaeDialog.h:242
 #: plugins/Quasars/src/ui_quasarsDialog.h:274
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:281
+#: plugins/RemoteControl/src/ui_remoteControlDialog.h:251
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:481
 #: plugins/Observability/src/ui_ObservabilityDialog.h:358
 msgid "Save settings as default"
@@ -10157,6 +10169,104 @@ msgstr ""
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:279
 msgid "Use separate color for pulsars with glitches"
+msgstr ""
+
+#: plugins/RemoteControl/src/RemoteControl.cpp:58
+#: plugins/RemoteControl/src/RemoteControl.cpp:142
+#: plugins/RemoteControl/src/ui_remoteControlDialog.h:260
+msgid "Remote Control"
+msgstr ""
+
+#: plugins/RemoteControl/src/RemoteControl.cpp:61
+msgid ""
+"<p>Provides remote control functionality using a webserver interface.</p> "
+"<p>See manual for detailed description.</p><br/><p>This plugin was developed "
+"during ESA SoCiS 2015.</p><p>This plugin uses the <a href=\"http://"
+"stefanfrings.de/qtwebapp/index-en.html\">QtWebApp HTTP server</a> by Stefan "
+"Frings.</p>"
+msgstr ""
+
+#: plugins/RemoteControl/src/RemoteControl.cpp:142
+msgid "Remote control"
+msgstr ""
+
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:106
+msgid "Remote Control Plug-in"
+msgstr ""
+
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:112
+msgid ""
+"The Remote Control plugin provides a web interface to allow state changes "
+"and triggering scripts using a connected webbrowser."
+msgstr ""
+
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:115
+msgid "It is also possible to send commands via command line, e.g.."
+msgstr ""
+
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:121
+msgid "This allows triggering automatic show setups for museums etc."
+msgstr ""
+
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:124
+#, qt-format
+msgid "Further information can be found in the %1developer documentation%2."
+msgstr ""
+
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:173
+#, qt-format
+msgid "Listening on %1, IP: "
+msgstr ""
+
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:178
+msgid "Not active."
+msgstr ""
+
+#: plugins/RemoteControl/src/ui_remoteControlDialog.h:246
+msgid "Remote Control Configuration"
+msgstr ""
+
+#: plugins/RemoteControl/src/ui_remoteControlDialog.h:247
+msgid "Remote Control Plug-in Configuration"
+msgstr ""
+
+#: plugins/RemoteControl/src/ui_remoteControlDialog.h:249
+msgid "Port Number:"
+msgstr ""
+
+#: plugins/RemoteControl/src/ui_remoteControlDialog.h:252
+msgid "Access requires authentication"
+msgstr ""
+
+#: plugins/RemoteControl/src/ui_remoteControlDialog.h:253
+msgid "Password"
+msgstr ""
+
+#: plugins/RemoteControl/src/ui_remoteControlDialog.h:254
+msgid ""
+"<html><head/><body><p>Note: The user name field in the browser must be left "
+"empty. </p><p>The password is transmitted over an insecure channel.</p></"
+"body></html>"
+msgstr ""
+
+#: plugins/RemoteControl/src/ui_remoteControlDialog.h:255
+msgid "Your changes require a restart of the server."
+msgstr ""
+
+#: plugins/RemoteControl/src/ui_remoteControlDialog.h:256
+msgid "Restart server"
+msgstr ""
+
+#: plugins/RemoteControl/src/ui_remoteControlDialog.h:257
+msgid "Server enabled"
+msgstr ""
+
+#: plugins/RemoteControl/src/ui_remoteControlDialog.h:258
+msgid "Enable automatically on startup"
+msgstr ""
+
+#: plugins/RemoteControl/src/ui_remoteControlDialog.h:259
+msgid "Server disabled - or Server listening on IP: aaa.bbb.ccc.ddd"
 msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:74
