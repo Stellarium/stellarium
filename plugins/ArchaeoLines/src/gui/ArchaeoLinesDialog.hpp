@@ -56,6 +56,8 @@ public slots:
 	void setCurrentMoonColor(QColor color){currentMoonColor=color;}
 	void setCurrentPlanetColor(QColor color){currentPlanetColor=color;}
 	void setSelectedObjectColor(QColor color){selectedObjectColor=color;}
+	void setCustomAzimuth1Color(QColor color){customAzimuth1Color=color;}
+	void setCustomAzimuth2Color(QColor color){customAzimuth2Color=color;}
 	void askEquinoxColor();
 	void askSolsticeColor();
 	void askCrossquarterColor();
@@ -67,6 +69,8 @@ public slots:
 	void askCurrentMoonColor();
 	void askCurrentPlanetColor();
 	void askSelectedObjectColor();
+	void askCustomAzimuth1Color();
+	void askCustomAzimuth2Color();
 
 protected:
 	void createDialogContent();
@@ -86,6 +90,8 @@ private:
 	QColor currentMoonColor;
 	QColor currentPlanetColor;
 	QColor selectedObjectColor;
+	QColor customAzimuth1Color;
+	QColor customAzimuth2Color;
 	QPixmap equinoxColorPixmap;
 	QPixmap solsticeColorPixmap;
 	QPixmap crossquarterColorPixmap;
@@ -97,6 +103,8 @@ private:
 	QPixmap currentMoonColorPixmap;
 	QPixmap currentPlanetColorPixmap;
 	QPixmap selectedObjectColorPixmap;
+	QPixmap customAzimuth1ColorPixmap;
+	QPixmap customAzimuth2ColorPixmap;
 	void setAboutHtml();
 
 private slots:

@@ -153,46 +153,8 @@
         </widget>
        </item>
        <item>
-        <layout class="QFormLayout" name="formLayout">
-         <property name="fieldGrowthPolicy">
-          <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-         </property>
-         <item row="0" column="0">
-          <widget class="QCheckBox" name="equinoxCheckBox">
-           <property name="text">
-            <string>Equinox line (Equator)</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QToolButton" name="equinoxColorToolButton">
-           <property name="text">
-            <string notr="true">EquinoxColor...</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QCheckBox" name="solsticesCheckBox">
-           <property name="text">
-            <string>Solstice Lines</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QToolButton" name="solsticesColorToolButton">
-           <property name="text">
-            <string notr="true">SolsticeColor...</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QCheckBox" name="crossquarterCheckBox">
-           <property name="text">
-            <string>Crossquarter Lines</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="2" column="3">
           <widget class="QToolButton" name="crossquarterColorToolButton">
            <property name="toolTip">
             <string>Change color</string>
@@ -202,59 +164,24 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="0">
-          <widget class="QCheckBox" name="majorStandstillCheckBox">
+         <item row="10" column="0">
+          <widget class="QCheckBox" name="selectedObjectCheckBox">
            <property name="text">
-            <string>Major Lunar Standstill lines</string>
+            <string>Selected Object</string>
            </property>
           </widget>
          </item>
-         <item row="3" column="1">
+         <item row="3" column="3">
           <widget class="QToolButton" name="majorStandstillColorToolButton">
            <property name="text">
             <string notr="true">majorLunarStandstillColor...</string>
            </property>
           </widget>
          </item>
-         <item row="4" column="0">
-          <widget class="QCheckBox" name="minorStandstillCheckBox">
-           <property name="text">
-            <string>Minor Lunar Standstill lines</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1">
+         <item row="4" column="3">
           <widget class="QToolButton" name="minorStandstillColorToolButton">
            <property name="text">
             <string notr="true">minorLunarStandstillColor...</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="0">
-          <widget class="QCheckBox" name="zenithPassageCheckBox">
-           <property name="text">
-            <string>Declination of Zenith passage</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="1">
-          <widget class="QToolButton" name="zenithPassageColorToolButton">
-           <property name="text">
-            <string notr="true">zenithPassageColor...</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="0">
-          <widget class="QCheckBox" name="nadirPassageCheckBox">
-           <property name="text">
-            <string>Declination of Nadir passage</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="1">
-          <widget class="QToolButton" name="nadirPassageColorToolButton">
-           <property name="text">
-            <string notr="true">NadirPassageColor...</string>
            </property>
           </widget>
          </item>
@@ -265,24 +192,10 @@
            </property>
           </widget>
          </item>
-         <item row="7" column="1">
-          <widget class="QToolButton" name="currentSunColorToolButton">
+         <item row="6" column="0">
+          <widget class="QCheckBox" name="nadirPassageCheckBox">
            <property name="text">
-            <string notr="true">SunColor...</string>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="0">
-          <widget class="QCheckBox" name="currentMoonCheckBox">
-           <property name="text">
-            <string>Current Moon</string>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="1">
-          <widget class="QToolButton" name="currentMoonColorToolButton">
-           <property name="text">
-            <string notr="true">MoonColor...</string>
+            <string>Declination of Nadir passage</string>
            </property>
           </widget>
          </item>
@@ -335,50 +248,168 @@
            </item>
           </widget>
          </item>
-         <item row="9" column="1">
+         <item row="4" column="0">
+          <widget class="QCheckBox" name="minorStandstillCheckBox">
+           <property name="text">
+            <string>Minor Lunar Standstill lines</string>
+           </property>
+          </widget>
+         </item>
+         <item row="11" column="1">
+          <widget class="QDoubleSpinBox" name="customAzimuth1DoubleSpinBox">
+           <property name="maximum">
+            <double>359.990000000000009</double>
+           </property>
+          </widget>
+         </item>
+         <item row="12" column="1">
+          <widget class="QDoubleSpinBox" name="customAzimuth2DoubleSpinBox">
+           <property name="maximum">
+            <double>359.990000000000009</double>
+           </property>
+          </widget>
+         </item>
+         <item row="12" column="3">
+          <widget class="QToolButton" name="customAzimuth2ColorToolButton">
+           <property name="text">
+            <string>Custom Azimuth 2 Color...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="11" column="0">
+          <widget class="QCheckBox" name="customAzimuth1CheckBox">
+           <property name="text">
+            <string>Custom Azimuth 1</string>
+           </property>
+          </widget>
+         </item>
+         <item row="12" column="0">
+          <widget class="QCheckBox" name="customAzimuth2CheckBox">
+           <property name="text">
+            <string>Custom Azimuth 2</string>
+           </property>
+          </widget>
+         </item>
+         <item row="11" column="3">
+          <widget class="QToolButton" name="customAzimuth1ColorToolButton">
+           <property name="text">
+            <string>Custom Azimuth 1 Color...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="11" column="2">
+          <widget class="QLineEdit" name="customAzimuth1LineEdit">
+           <property name="toolTip">
+            <string>Enter a label for this line</string>
+           </property>
+          </widget>
+         </item>
+         <item row="12" column="2">
+          <widget class="QLineEdit" name="customAzimuth2LineEdit">
+           <property name="toolTip">
+            <string>Enter a label for this line</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QToolButton" name="solsticesColorToolButton">
+           <property name="text">
+            <string notr="true">SolsticeColor...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="solsticesCheckBox">
+           <property name="text">
+            <string>Solstice Lines</string>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="3">
           <widget class="QToolButton" name="currentPlanetColorToolButton">
            <property name="text">
             <string notr="true">PlanetColor...</string>
            </property>
           </widget>
          </item>
-         <item row="10" column="0">
-          <widget class="QCheckBox" name="selectedObjectCheckBox">
+         <item row="6" column="3">
+          <widget class="QToolButton" name="nadirPassageColorToolButton">
            <property name="text">
-            <string>Selected Object</string>
+            <string notr="true">NadirPassageColor...</string>
            </property>
           </widget>
          </item>
-         <item row="10" column="1">
+         <item row="8" column="3">
+          <widget class="QToolButton" name="currentMoonColorToolButton">
+           <property name="text">
+            <string notr="true">MoonColor...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="0">
+          <widget class="QCheckBox" name="currentMoonCheckBox">
+           <property name="text">
+            <string>Current Moon</string>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="3">
           <widget class="QToolButton" name="selectedObjectColorToolButton">
            <property name="text">
             <string notr="true">SelectedObjectColor...</string>
            </property>
           </widget>
          </item>
+         <item row="5" column="3">
+          <widget class="QToolButton" name="zenithPassageColorToolButton">
+           <property name="text">
+            <string notr="true">zenithPassageColor...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="3">
+          <widget class="QToolButton" name="currentSunColorToolButton">
+           <property name="text">
+            <string notr="true">SunColor...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QCheckBox" name="zenithPassageCheckBox">
+           <property name="text">
+            <string>Declination of Zenith passage</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QCheckBox" name="crossquarterCheckBox">
+           <property name="text">
+            <string>Crossquarter Lines</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QCheckBox" name="majorStandstillCheckBox">
+           <property name="text">
+            <string>Major Lunar Standstill lines</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <widget class="QToolButton" name="equinoxColorToolButton">
+           <property name="text">
+            <string notr="true">EquinoxColor...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QCheckBox" name="equinoxCheckBox">
+           <property name="text">
+            <string>Equinox line (Equator)</string>
+           </property>
+          </widget>
+         </item>
         </layout>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="formatDisplayBox">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="title">
-          <string>Format</string>
-         </property>
-         <property name="flat">
-          <bool>true</bool>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_3">
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="useDmsFormatCheckBox">
-            <property name="text">
-             <string>Use dms format for angles</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
        </item>
        <item>
         <spacer name="verticalSpacer_3">
