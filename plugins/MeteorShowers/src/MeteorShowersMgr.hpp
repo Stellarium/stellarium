@@ -53,8 +53,8 @@ file (section [MeteorShowers]).
 class MeteorShowersMgr : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool enablePlugin READ getEnablePlugin WRITE actionEnablePlugin)
-	Q_PROPERTY(bool enableLabels READ getEnableLabels WRITE setEnableLabels)
+	Q_PROPERTY(bool enablePlugin READ getEnablePlugin WRITE actionEnablePlugin NOTIFY enablePluginChanged)
+	Q_PROPERTY(bool enableLabels READ getEnableLabels WRITE setEnableLabels NOTIFY enableLabelsChanged)
 
 public:
 	//! @enum DownloadStatus
@@ -139,6 +139,8 @@ public:
 
 signals:
 	void downloadStatusChanged(DownloadStatus);
+	void enablePluginChanged(bool b);
+	void enableLabelsChanged(bool b);
 
 public slots:
 	//! Enable the meteor showers plugin at Stellarium startup.
@@ -335,7 +337,7 @@ private:
 
 	//! Enable/disable the Meteor Showers plugin.
 	//! It'll be triggered by a StelAction! So, it should NOT be called directly!
-	void actionEnablePlugin(const bool& b) { m_enablePlugin = b; }
+	void actionEnablePlugin(const bool& b) { if (m_enablePlugin != b) { m_enablePlugin = b; emit enablePluginChanged(b);} }
 };
 
 #include <QObject>
