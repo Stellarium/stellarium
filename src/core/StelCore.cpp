@@ -558,12 +558,20 @@ void StelCore::setDefaultAngleForGravityText(float a)
 
 void StelCore::setFlipHorz(bool flip)
 {
-	currentProjectorParams.flipHorz = flip;
+	if (currentProjectorParams.flipHorz != flip)
+	{
+		currentProjectorParams.flipHorz = flip;
+		emit flipHorzChanged(flip);
+	}
 }
 
 void StelCore::setFlipVert(bool flip)
 {
-	currentProjectorParams.flipVert = flip;
+	if (currentProjectorParams.flipVert != flip)
+	{
+		currentProjectorParams.flipVert = flip;
+		emit flipVertChanged(flip);
+	}
 }
 
 bool StelCore::getFlipHorz(void) const

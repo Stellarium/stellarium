@@ -48,12 +48,14 @@ class StelObserver;
 class StelCore : public QObject
 {
 	Q_OBJECT
+	Q_ENUMS(FrameType)
 	Q_ENUMS(ProjectionType)
+	Q_ENUMS(RefractionMode)
 	Q_ENUMS(DeltaTAlgorithm)
-	Q_PROPERTY(bool flipHorz READ getFlipHorz WRITE setFlipHorz)
-	Q_PROPERTY(bool flipVert READ getFlipVert WRITE setFlipVert)
-	Q_PROPERTY(bool flagUseNutation READ getUseNutation WRITE setUseNutation)
-	Q_PROPERTY(bool flagUseTopocentricCoordinates READ getUseTopocentricCoordinates WRITE setUseTopocentricCoordinates)
+	Q_PROPERTY(bool flipHorz READ getFlipHorz WRITE setFlipHorz NOTIFY flipHorzChanged)
+	Q_PROPERTY(bool flipVert READ getFlipVert WRITE setFlipVert NOTIFY flipVertChanged)
+	Q_PROPERTY(bool flagUseNutation READ getUseNutation WRITE setUseNutation NOTIFY flagUseNutationChanged)
+	Q_PROPERTY(bool flagUseTopocentricCoordinates READ getUseTopocentricCoordinates WRITE setUseTopocentricCoordinates NOTIFY flagUseTopocentricCoordinatesChanged)
 	Q_PROPERTY(ProjectionType currentProjectionType READ getCurrentProjectionType WRITE setCurrentProjectionType NOTIFY currentProjectionTypeChanged)
 	//! This is just another way to access the projection type, by string instead of enum
 	Q_PROPERTY(QString currentProjectionTypeKey READ getCurrentProjectionTypeKey WRITE setCurrentProjectionTypeKey NOTIFY currentProjectionTypeKeyChanged STORED false)
@@ -443,12 +445,12 @@ public slots:
 	//! @return whether nutation is currently used.
 	bool getUseNutation() const {return flagUseNutation;}
 	//! Set whether you want computation and simulation of nutation (a slight wobble of Earth's axis, just a few arcseconds).
-	void setUseNutation(bool useNutation) { flagUseNutation=useNutation;}
+	void setUseNutation(bool use) { if (flagUseNutation != use) { flagUseNutation=use; emit flagUseNutationChanged(use); }}
 
 	//! @return whether topocentric coordinates are currently used.
 	bool getUseTopocentricCoordinates() const {return flagUseTopocentricCoordinates;}
 	//! Set whether you want computation and simulation of nutation (a slight wobble of Earth's axis, just a few arcseconds).
-	void setUseTopocentricCoordinates(bool use) { flagUseTopocentricCoordinates=use;}
+	void setUseTopocentricCoordinates(bool use) { if (flagUseTopocentricCoordinates!= use) { flagUseTopocentricCoordinates=use; emit flagUseTopocentricCoordinatesChanged(use); }}
 
 	//! Return the preset sky time in JD
 	double getPresetSkyTime() const;
@@ -639,10 +641,18 @@ signals:
 	void locationChanged(StelLocation);
 	//! This signal is emitted when the time rate has changed
 	void timeRateChanged(double rate);
-	//! This signal is emmited whenever the time is re-synced.
+	//! This signal is emitted whenever the time is re-synced.
 	//! This happens whenever the internal jDay is changed through setJDay/setMJDay and similar,
 	//! and whenever the time rate changes.
 	void timeSyncOccurred(double jDay);
+	//! This signal indicates a horizontal display flip
+	void flipHorzChanged(bool b);
+	//! This signal indicates a vertical display flip
+	void flipVertChanged(bool b);
+	//! This signal indicates a switch in use of nutation
+	void flagUseNutationChanged(bool b);
+	//! This signal indicates a switch in use of topocentric coordinates
+	void flagUseTopocentricCoordinatesChanged(bool b);
 	//! Emitted whenever the projection type changes
 	void currentProjectionTypeChanged(StelCore::ProjectionType newType);
 	//! Emitted whenever the projection type changes
