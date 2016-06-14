@@ -156,6 +156,9 @@ void StelAction::connectToObject(QObject* obj, const char* slot)
 
 	//now, check if its a slot
 	int slotIndex = obj->metaObject()->indexOfMethod(slot);
+#ifndef NDEBUG
+	if (slotIndex<0) qWarning()<<"[StelAction]"<<getId()<<"cannot connect to slot"<<slot<<"of object"<<obj << "- EXIT!";
+#endif
 	Q_ASSERT(slotIndex>=0);
 	// connect to a parameterless slot.
 	this->slot = obj->metaObject()->method(slotIndex);
