@@ -1058,6 +1058,7 @@ void StelMainView::setFullScreen(bool b)
 			move(x + screenGeom.x(), y + screenGeom.y());
 		}
 	}
+	emit fullScreenChanged(b);
 }
 
 void StelMainView::updateScene() {
