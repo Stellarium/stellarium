@@ -145,10 +145,12 @@ class Satellites : public StelObjectModule
 	Q_OBJECT
 	Q_PROPERTY(bool hintsVisible
 	           READ getFlagHints
-		   WRITE setFlagHints)
+		   WRITE setFlagHints
+		   NOTIFY hintsVisibleChanged)
 	Q_PROPERTY(bool labelsVisible
 	           READ getFlagLabels
-		   WRITE setFlagLabels)
+		   WRITE setFlagLabels
+		   NOTIFY labelsVisibleChanged)
 	Q_PROPERTY(bool autoAddEnabled
 	           READ isAutoAddEnabled
 	           WRITE enableAutoAdd
@@ -377,6 +379,9 @@ public:
 	IridiumFlaresPredictionList getIridiumFlaresPrediction();
 
 signals:
+	void hintsVisibleChanged(bool b);
+	void labelsVisibleChanged(bool b);
+
 	//! Emitted when some of the plugin settings have been changed.
 	//! Used to communicate with the configuration window.
 	void settingsChanged();

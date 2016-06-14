@@ -474,8 +474,12 @@ void MeteorShowersMgr::setFontSize(int pixelSize)
 
 void MeteorShowersMgr::setEnableLabels(const bool& b)
 {
-	m_enableLabels = b;
-	m_conf->setValue(MS_CONFIG_PREFIX + "/flag_radiant_labels", b);
+	if (m_enableLabels != b)
+	{
+		m_enableLabels = b;
+		m_conf->setValue(MS_CONFIG_PREFIX + "/flag_radiant_labels", b);
+		emit enableLabelsChanged(b);
+	}
 }
 
 void MeteorShowersMgr::setEnableMarker(const bool& b)

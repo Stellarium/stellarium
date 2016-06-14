@@ -631,7 +631,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/flag_surface_brightness_usage", nmgr->getFlagSurfaceBrightnessUsage());
 	conf->setValue("astro/flag_nebula_name", nmgr->getFlagHints());
 	conf->setValue("astro/flag_nebula_display_no_texture", !GETSTELMODULE(StelSkyLayerMgr)->getFlagShow());
-	conf->setValue("astro/flag_use_type_filter", nmgr->getFlagTypeFiltersUsage());
+	conf->setValue("astro/flag_use_type_filter", nmgr->getFlagUseTypeFilters());
 	conf->setValue("projection/type", core->getCurrentProjectionTypeKey());
 	conf->setValue("astro/flag_nutation", core->getUseNutation());
 	conf->setValue("astro/flag_topocentric_coordinates", core->getUseTopocentricCoordinates());

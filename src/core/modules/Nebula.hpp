@@ -267,7 +267,7 @@ private:
 	static bool drawHintProportional;     // scale hint with nebula size?
 	static bool surfaceBrightnessUsage;
 
-	static bool flagUsageTypeFilter;
+	static bool flagUseTypeFilters;
 	static CatalogGroup catalogFilters;
 	static TypeGroup typeFilters;
 };
