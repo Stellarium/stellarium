@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# Updates the translationdata.js in the data/webroot folder using the current stellarium-remotecontrol-js.pot file
+# Updates the translationdata.js in the data/webroot folder using the current stellarium-remotecontrol.jst file
 
 import re
 import sys
@@ -11,7 +11,7 @@ def main():
 	'''
 
 	if len(sys.argv) < 3:
-		print("usage: update_translationdata.py <stellarium-remotecontrol-js.pot> <translationdata.js>")
+		print("usage: update_translationdata.py <stellarium-remotecontrol.jst> <translationdata.js>")
 		print(sys.argv)
 		return
 	potfile = open(sys.argv[1], 'r')
@@ -21,7 +21,7 @@ def main():
 	
 	jsfile.write(
 	"""
-//This file is generated automatically by the stellarium-remotecontrol-update-translationdata target through update_translationdata.py from stellarium-remotecontrol-js.pot
+//This file is generated automatically by the stellarium-remotecontrol-update-translationdata target through update_translationdata.py from stellarium-remotecontrol.jst
 //It contains all strings that can be translated through the StelTranslator in the JavaScript code by calling Main.tr()
 //When this file is requested through the RemoteControl web server, the strings are translated using the current Stellarium app language
 
