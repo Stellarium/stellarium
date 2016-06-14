@@ -9,7 +9,7 @@ IF(${XGETTEXT_FOUND})
 	ADD_CUSTOM_TARGET(
 		generate-pot-stellarium-remotecontrol-js
 		${GETTEXT_XGETTEXT_EXECUTABLE}
-			-o stellarium-remotecontrol-js.pot
+			-o stellarium-remotecontrol.jst
 			--keyword=tr
 			--language=JavaScript
 			--add-comments=TRANSLATORS:
@@ -18,7 +18,7 @@ IF(${XGETTEXT_FOUND})
 			--copyright-holder=Stellarium's\ team
 			--from-code=utf-8
 		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-		COMMENT "Generating stellarium-remotecontrol-js.pot"
+		COMMENT "Generating stellarium-remotecontrol.jst"
 		VERBATIM
 	)
 	
@@ -26,7 +26,7 @@ IF(${XGETTEXT_FOUND})
 	# This file also contains the JS strings, so it is the only one that must be translated!
 	ADD_CUSTOM_TARGET(
 		generate-pot-stellarium-remotecontrol
-		COMMAND ${CMAKE_COMMAND} -E copy stellarium-remotecontrol-js.pot stellarium-remotecontrol.pot
+		COMMAND ${CMAKE_COMMAND} -E copy stellarium-remotecontrol.jst stellarium-remotecontrol.pot
 		COMMAND ${GETTEXT_XGETTEXT_EXECUTABLE}
 			-o stellarium-remotecontrol.pot
 			--join-existing

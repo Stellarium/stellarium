@@ -12,7 +12,7 @@ find_package(PythonInterp)
 if(PYTHON_EXECUTABLE)
 	add_custom_target(RemoteControl-update-translationdata
 		COMMAND ${PYTHON_EXECUTABLE} util/update_translationdata.py 
-		${PROJECT_SOURCE_DIR}/po/stellarium-remotecontrol/stellarium-remotecontrol-js.pot ${REMOTECONTROL_WEBROOT_PATH}/js/translationdata.js
+		${PROJECT_SOURCE_DIR}/po/stellarium-remotecontrol/stellarium-remotecontrol.jst ${REMOTECONTROL_WEBROOT_PATH}/js/translationdata.js
 		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 		COMMENT "Updating RemoteControl translation data"
 		VERBATIM
