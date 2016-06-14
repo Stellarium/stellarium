@@ -152,7 +152,7 @@ void SolarSystem::init()
 	setLabelsAmount(conf->value("astro/labels_amount", 3.).toFloat());
 	setFlagOrbits(conf->value("astro/flag_planets_orbits").toBool());
 	setFlagLightTravelTime(conf->value("astro/flag_light_travel_time", true).toBool());
-	setFlagPointers(conf->value("astro/flag_planets_pointers", true).toBool());
+	setFlagPointer(conf->value("astro/flag_planets_pointers", true).toBool());
 	// Set the algorithm from Astronomical Almanac for computation of apparent magnitudes for
 	// planets in case  observer on the Earth by default
 	setApparentMagnitudeAlgorithmOnEarth(conf->value("astro/apparent_magnitude_algorithm", "Harris").toString());
@@ -173,7 +173,7 @@ void SolarSystem::init()
 	setLabelsColor(StelUtils::strToVec3f(conf->value("color/planet_names_color", defaultColor).toString()));
 	setOrbitsColor(StelUtils::strToVec3f(conf->value("color/planet_orbits_color", defaultColor).toString()));
 	setTrailsColor(StelUtils::strToVec3f(conf->value("color/object_trails_color", defaultColor).toString()));
-	setPointersColor(StelUtils::strToVec3f(conf->value("color/planet_pointers_color", "1.0,0.3,0.3").toString()));
+	setPointerColor(StelUtils::strToVec3f(conf->value("color/planet_pointers_color", "1.0,0.3,0.3").toString()));
 
 	recreateTrails();
 
@@ -195,12 +195,12 @@ void SolarSystem::init()
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Planets", displayGroup, N_("Planets"), "planetsDisplayed", "P");
 	addAction("actionShow_Planets_Labels", displayGroup, N_("Planet labels"), "labelsDisplayed", "Alt+P");
-	addAction("actionShow_Planets_Orbits", displayGroup, N_("Planet orbits"), "orbitsDisplayed", "O");
+	addAction("actionShow_Planets_Orbits", displayGroup, N_("Planet orbits"), "flagOrbits", "O");
 	addAction("actionShow_Planets_Trails", displayGroup, N_("Planet trails"), "trailsDisplayed", "Shift+T");
 	//there is a small discrepancy in the GUI: "Show planet markers" actually means show planet hints
 	addAction("actionShow_Planets_Hints", displayGroup, N_("Planet markers"), "hintsDisplayed", "Ctrl+P");
 	//addAction("actionShow_Planets_Markers", displayGroup, N_("Planet selection marker"), "markersDisplayed", "Ctrl+Shift+P");
-	addAction("actionShow_Skyculture_Nativenames", displayGroup, N_("Native planet names (from starlore)"), "nativeNamesDisplayed", "Ctrl+Shift+N");
+	addAction("actionShow_Skyculture_Nativenames", displayGroup, N_("Native planet names (from starlore)"), "flagNativeNames", "Ctrl+Shift+N");
 }
 
 void SolarSystem::deinit()
@@ -322,7 +322,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 
 
 		StelPainter sPainter(prj);
-		Vec3f color = getPointersColor();
+		Vec3f color = getPointerColor();
 		sPainter.setColor(color[0],color[1],color[2]);
 
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()*2.;
@@ -1141,7 +1141,7 @@ void SolarSystem::draw(StelCore* core)
 		p->draw(core, maxMagLabel, planetNameFont);
 	}
 
-	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer() && getFlagPointers())
+	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer() && getFlagPointer())
 		drawPointer(core);
 
 	// AstroCalcDialog
@@ -1326,11 +1326,15 @@ void SolarSystem::updateI18n()
 
 void SolarSystem::setFlagTrails(bool b)
 {
-	trailFader = b;
-	if (getFlagIsolatedTrails())
-		recreateTrails();
-	if (b)
-		allTrails->reset();
+	if (getFlagTrails() != b)
+	{
+		trailFader = b;
+		if (getFlagIsolatedTrails())
+			recreateTrails();
+		if (b)
+			allTrails->reset();
+		emit trailsDisplayedChanged(b);
+	}
 }
 
 bool SolarSystem::getFlagTrails() const
@@ -1340,8 +1344,12 @@ bool SolarSystem::getFlagTrails() const
 
 void SolarSystem::setFlagHints(bool b)
 {
-	foreach (PlanetP p, systemPlanets)
-		p->setFlagHints(b);
+	if (getFlagHints() != b)
+	{
+		foreach (PlanetP p, systemPlanets)
+			p->setFlagHints(b);
+		emit flagHintsChanged(b);
+	}
 }
 
 bool SolarSystem::getFlagHints(void) const
@@ -1356,8 +1364,12 @@ bool SolarSystem::getFlagHints(void) const
 
 void SolarSystem::setFlagLabels(bool b)
 {
-	foreach (PlanetP p, systemPlanets)
-		p->setFlagLabels(b);
+	if (getFlagLabels() != b)
+	{
+		foreach (PlanetP p, systemPlanets)
+			p->setFlagLabels(b);
+		emit labelsDisplayedChanged(b);
+	}
 }
 
 bool SolarSystem::getFlagLabels() const
@@ -1400,6 +1412,7 @@ void SolarSystem::setFlagOrbits(bool b)
 				p->setFlagOrbits(false);
 		}
 	}
+	emit flagOrbitsChanged(b);
 }
 
 void SolarSystem::setFlagLightTravelTime(bool b)
@@ -1585,13 +1598,17 @@ bool SolarSystem::getFlagPlanets(void) const
 
 void SolarSystem::setFlagNativeNames(bool b)
 {
-	flagNativeNames=b;
-	foreach (const PlanetP& p, systemPlanets)
+	if (b!=flagNativeNames)
 	{
-		if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
-			p->setFlagNativeName(flagNativeNames);
+		flagNativeNames=b;
+		foreach (const PlanetP& p, systemPlanets)
+		{
+			if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
+				p->setFlagNativeName(flagNativeNames);
+		}
+		updateI18n();
+		emit flagNativeNamesChanged(b);
 	}
-	updateI18n();
 }
 
 bool SolarSystem::getFlagNativeNames() const
@@ -1601,13 +1618,17 @@ bool SolarSystem::getFlagNativeNames() const
 
 void SolarSystem::setFlagTranslatedNames(bool b)
 {
-	flagTranslatedNames=b;
-	foreach (const PlanetP& p, systemPlanets)
+	if (b!=flagTranslatedNames)
 	{
-		if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
-			p->setFlagTranslatedName(flagTranslatedNames);
+		flagTranslatedNames=b;
+		foreach (const PlanetP& p, systemPlanets)
+		{
+			if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
+				p->setFlagTranslatedName(flagTranslatedNames);
+		}
+		updateI18n();
+		emit flagTranslatedNamesChanged(b);
 	}
-	updateI18n();
 }
 
 bool SolarSystem::getFlagTranslatedNames() const
