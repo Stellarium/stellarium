@@ -428,6 +428,10 @@ usage are taken! If you are in a home network using NAT (network access
 translation), this should be enough for basic security except if port 
 forwarding or a DMZ is configured.}
 
+\subsection{Remote Control Web Interface}
+\label{sec:plugins:RemoteControl:webinterface}
+
+
 If you are familiar with the main Stellarium interface, you should easily find 
 your way around the web interface. Tabs at the top allow access to 
 different settings and controls. The remote control automatically uses the 
@@ -460,6 +464,20 @@ supported.
 \item[Projection] Switch the projection method used, like \autoref{sec:gui:view:markings}.
 \end{description}
 
+\subsection{Remote Control Commandline API}
+\label{sec:plugins:RemoteControl:CLI}
+
+It is also possible to send commands via command line, e.g.,
+
+\begin{commands}[\scriptsize]
+wget -q --post-data 'id=show.ssc' http://stella:8090/api/scripts/run >/dev/null 2>&1
+curl --data 'id=myScript.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&1
+curl -d     'id=myScript.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&1
+\end{commands}
+This allows triggering automatic show setups for museums etc.\ via  some centralized schedulers like \command{cron}.
+
+% TODO: Please list all available commands with examples here!
+  
 \subsection{Developer information}
 \label{sec:plugins:RemoteControl:developer}
 

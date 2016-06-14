@@ -104,7 +104,7 @@
 \newcommand{\px}{\ensuremath{\mathrm{px}}} % pixels
 \newcommand{\cy}{\ensuremath{\mathrm{cy}}} % century
 
-\lstnewenvironment{commands}{\lstset{language=sh,basicstyle=\ttfamily\small,%
+\lstnewenvironment{commands}[1][\small]{\lstset{language=sh,basicstyle=\ttfamily#1,%
                                      backgroundcolor=\color{black!5},frame=leftline,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
 \lstnewenvironment{configfile}[1][\small]{\lstset{language=sh,basicstyle=\ttfamily#1,%
