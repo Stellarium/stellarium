@@ -51,7 +51,7 @@ class StelMainView : public QGraphicsView
 	friend class StelGuiItem;
 	friend class StelSkyItem;
 	Q_OBJECT
-	Q_PROPERTY(bool fullScreen READ isFullScreen WRITE setFullScreen)
+	Q_PROPERTY(bool fullScreen READ isFullScreen WRITE setFullScreen NOTIFY fullScreenChanged)
 
 public:
 	StelMainView(QWidget* parent = NULL);
@@ -156,6 +156,7 @@ signals:
 	//! doScreenshot() does the actual work (it has to do it in the main
 	//! thread, where as saveScreenShot() might get called from another one.
 	void screenshotRequested(void);
+	void fullScreenChanged(bool b);
 
 private slots:
 	// Do the actual screenshot generation in the main thread with this method.
