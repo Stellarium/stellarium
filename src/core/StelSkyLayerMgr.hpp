@@ -33,7 +33,7 @@ class StelSkyImageTile;
 class StelSkyLayerMgr : public StelModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool visible READ getFlagShow WRITE setFlagShow)
+	Q_PROPERTY(bool flagShow READ getFlagShow WRITE setFlagShow NOTIFY flagShowChanged)
 
 public:
 	StelSkyLayerMgr();
@@ -77,7 +77,7 @@ public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 	//! Set whether Sky Background should be displayed
-	void setFlagShow(bool b) {flagShow = b;}
+	void setFlagShow(bool b) {if (flagShow !=b) { flagShow = b; emit flagShowChanged(b);}}
 	//! Load an image from a file. This should not be called directly from
 	//! scripts because it is not thread safe.  Instead use the simiarly
 	//! named function in the core scripting object.
@@ -161,6 +161,9 @@ public slots:
 
 	//! Return the list of all the layer currently loaded.
 	QStringList getAllKeys() const {return allSkyLayers.keys();}
+
+signals:
+	void flagShowChanged(bool b);
 
 private slots:
 	//! Called when loading of data started or stopped for one collection
