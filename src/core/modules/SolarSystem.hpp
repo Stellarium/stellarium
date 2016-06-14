@@ -47,25 +47,34 @@ typedef QSharedPointer<Planet> PlanetP;
 class SolarSystem : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool labelsDisplayed
+	Q_PROPERTY(bool labelsDisplayed // This is a "forwarding property" which sets labeling into all planets.
 		   READ getFlagLabels
-		   WRITE setFlagLabels)
-	Q_PROPERTY(bool orbitsDisplayed
+		   WRITE setFlagLabels
+		   NOTIFY labelsDisplayedChanged)
+	Q_PROPERTY(bool flagOrbits // was bool orbitsDisplayed
 		   READ getFlagOrbits
-		   WRITE setFlagOrbits)
+		   WRITE setFlagOrbits
+		   NOTIFY flagOrbitsChanged)
 	Q_PROPERTY(bool trailsDisplayed
 		   READ getFlagTrails
-		   WRITE setFlagTrails)
-	Q_PROPERTY(bool hintsDisplayed
+		   WRITE setFlagTrails
+		   NOTIFY trailsDisplayedChanged)
+	Q_PROPERTY(bool flagHints // was bool hintsDisplayed. This is a "forwarding property" only, without own variable.
 		   READ getFlagHints
-		   WRITE setFlagHints)
-	Q_PROPERTY(bool pointersDisplayed
-		   READ getFlagPointers
-		   WRITE setFlagPointers)
-
-	Q_PROPERTY(bool nativeNamesDisplayed
+		   WRITE setFlagHints
+		   NOTIFY flagHintsChanged)
+	Q_PROPERTY(bool flagPointer // was bool pointersDisplayed
+		   READ getFlagPointer
+		   WRITE setFlagPointer
+		   NOTIFY flagPointerChanged)
+	Q_PROPERTY(bool flagNativeNames // was bool nativeNamesDisplayed
 		   READ getFlagNativeNames
-		   WRITE setFlagNativeNames)
+		   WRITE setFlagNativeNames
+		   NOTIFY flagNativeNamesChanged)
+	Q_PROPERTY(bool flagTranslatedNames
+		   READ getFlagTranslatedNames
+		   WRITE setFlagTranslatedNames
+		   NOTIFY flagTranslatedNamesChanged)
 
 	//StelProperties
 	Q_PROPERTY(bool planetsDisplayed
@@ -211,10 +220,10 @@ public slots:
 	//! Get the current value of the flag which determines if planet orbits are drawn or hidden.
 	bool getFlagOrbits() const {return flagOrbits;}
 
-	//! Set flag which determines if planet pointers are drawn or hidden.
-	void setFlagPointers(bool b) { flagPointer=b; }
+	//! Set flag which determines if the planet pointer (red cross) is drawn or hidden on a selected planet.
+	void setFlagPointer(bool b) { if (b!=flagPointer) { flagPointer=b; emit flagPointerChanged(b); }}
 	//! Get the current value of the flag which determines if planet pointers are drawn or hidden.
-	bool getFlagPointers() const {return flagPointer;}
+	bool getFlagPointer() const { return flagPointer;}
 
 	//! Set flag which determines if the light travel time calculation is used or not.
 	void setFlagLightTravelTime(bool b);
@@ -263,12 +272,12 @@ public slots:
 	//! @param c The color of the planet pointers
 	//! @code
 	//! // example of usage in scripts
-	//! SolarSystem.setPointersColor(Vec3f(1.0,0.0,0.0));
+	//! SolarSystem.setPointerColor(Vec3f(1.0,0.0,0.0));
 	//! @endcode
-	void setPointersColor(const Vec3f& c) {pointerColor=c;}
+	void setPointerColor(const Vec3f& c) {pointerColor=c;}
 	//! Get the current color used to draw planet pointers.
 	//! @return current color
-	Vec3f getPointersColor() const {return pointerColor;}
+	Vec3f getPointerColor() const {return pointerColor;}
 
 	//! Set flag which determines if Earth's moon is scaled or not.
 	void setFlagMoonScale(bool b);
@@ -377,6 +386,13 @@ public slots:
 	//! Get initial JD for calculation of position of Great Red Spot
 	double getCustomGrsJD();
 signals:
+	void labelsDisplayedChanged(bool b);
+	void flagOrbitsChanged(bool b);
+	void flagHintsChanged(bool b);
+	void trailsDisplayedChanged(bool b);
+	void flagPointerChanged(bool b);
+	void flagNativeNamesChanged(bool b);
+	void flagTranslatedNamesChanged(bool b);
 	void flagPlanetsDisplayedChanged(bool b);
 	void flagIsolatedOrbitsChanged(bool b);
 	void flagIsolatedTrailsChanged(bool b);
@@ -500,9 +516,9 @@ private:
 	StelTextureSP texCircle;                    // The symbolic circle texture
 
 	bool flagShow;
-	bool flagPointer;
-	bool flagNativeNames;
-	bool flagTranslatedNames;
+	bool flagPointer;                           // show red cross selection pointer?
+	bool flagNativeNames;                       // show native names?
+	bool flagTranslatedNames;                   // show translated names?
 	bool flagIsolatedTrails;
 	bool flagIsolatedOrbits;
 
