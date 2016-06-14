@@ -278,7 +278,7 @@ void NebulaMgr::init()
 	flagConverter = conf->value("devel/convert_dso_catalog", false).toBool();
 	flagDecimalCoordinates = conf->value("devel/convert_dso_decimal_coord", true).toBool();
 
-	setFlagTypeFiltersUsage(conf->value("astro/flag_use_type_filter", false).toBool());
+	setFlagUseTypeFilters(conf->value("astro/flag_use_type_filter", false).toBool());
 
 	Nebula::CatalogGroup catalogFilters = Nebula::CatalogGroup(0);
 

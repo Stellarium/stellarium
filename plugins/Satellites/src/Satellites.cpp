@@ -1133,7 +1133,8 @@ void Satellites::setFlagHints(bool b)
 	if (hintFader != b)
 	{
 		hintFader = b;
-		emit settingsChanged();
+		emit settingsChanged(); // GZ IS THIS REQUIRED/USEFUL??
+		emit hintsVisibleChanged(b);
 	}
 }
 
@@ -1142,7 +1143,8 @@ void Satellites::setFlagLabels(bool b)
 	if (Satellite::showLabels != b)
 	{
 		Satellite::showLabels = b;
-		emit settingsChanged();
+		emit settingsChanged(); // GZ IS THIS REQUIRED/USEFUL??
+		emit labelsVisibleChanged(b);
 	}
 }
 

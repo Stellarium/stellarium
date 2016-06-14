@@ -80,7 +80,7 @@ Vec3f Nebula::possibleQuasarColor = Vec3f(1.0f,0.2f,0.2f);
 Vec3f Nebula::possiblePlanetaryNebulaColor = Vec3f(1.0f,1.0f,0.1f);
 Vec3f Nebula::protoplanetaryNebulaColor = Vec3f(1.0f,1.0f,0.1f);
 Vec3f Nebula::starColor = Vec3f(1.0f,1.0f,0.1f);
-bool Nebula::flagUsageTypeFilter = false;
+bool Nebula::flagUseTypeFilters = false;
 Nebula::CatalogGroup Nebula::catalogFilters = Nebula::CatalogGroup(0);
 Nebula::TypeGroup Nebula::typeFilters = Nebula::TypeGroup(Nebula::AllTypes);
 
@@ -720,7 +720,7 @@ void Nebula::readDSO(QDataStream &in)
 
 bool Nebula::objectInDisplayedType() const
 {
-	if (!flagUsageTypeFilter)
+	if (!flagUseTypeFilters)
 		return true;
 
 	bool r = false;

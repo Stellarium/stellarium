@@ -51,11 +51,12 @@ class NebulaMgr : public StelObjectModule
 	//StelActions
 	Q_PROPERTY(bool flagHintDisplayed
 		   READ getFlagHints
-		   WRITE setFlagHints)
+		   WRITE setFlagHints
+		   NOTIFY flagHintsDisplayedChanged)
 	Q_PROPERTY(bool flagTypeFiltersUsage
-		   READ getFlagTypeFiltersUsage
-		   WRITE setFlagTypeFiltersUsage
-		   )
+		   READ getFlagUseTypeFilters
+		   WRITE setFlagUseTypeFilters
+		   NOTIFY flagUseTypeFiltersChanged)
 	//StelProperties
 	Q_PROPERTY(Nebula::TypeGroup typeFilters
 		   READ getTypeFilters
@@ -487,7 +488,7 @@ public slots:
 	void setHintsFadeDuration(float duration) {hintsFader.setDuration((int) (duration * 1000.f));}
 
 	//! Set flag for displaying Nebulae Hints.
-	void setFlagHints(bool b) {hintsFader=b;}
+	void setFlagHints(bool b) { if (hintsFader!=b) { hintsFader=b; emit flagHintsDisplayedChanged(b);}}
 	//! Get flag for displaying Nebulae Hints.
 	bool getFlagHints(void) const {return hintsFader;}
 
@@ -507,9 +508,9 @@ public slots:
 	bool getFlagShow(void) const { return flagShow; }
 
 	//! Set flag used to turn on and off DSO type filtering.
-	void setFlagTypeFiltersUsage(bool b) { Nebula::flagUsageTypeFilter=b; }
+	void setFlagUseTypeFilters(bool b) { if (Nebula::flagUseTypeFilters!=b) { Nebula::flagUseTypeFilters=b; emit flagUseTypeFiltersChanged(b);}}
 	//! Get value of flag used to turn on and off DSO type filtering.
-	bool getFlagTypeFiltersUsage(void) const { return Nebula::flagUsageTypeFilter; }
+	bool getFlagUseTypeFilters(void) const { return Nebula::flagUseTypeFilters; }
 
 	//! Set the color used to draw nebula labels.
 	//! @param c The color of the nebula labels
@@ -537,6 +538,10 @@ public slots:
 	//! @return the amount between 0 and 10. 0 is no hints, 10 is maximum of hints
 	double getHintsAmount(void) const {return hintsAmount;}
 signals:
+	//! Emitted when hints are toggled.
+	void flagHintsDisplayedChanged(bool b);
+	//! Emitted when filter types are changed.
+	void flagUseTypeFiltersChanged(bool b);
 	//! Emitted when the catalog filter is changed
 	void catalogFiltersChanged(Nebula::CatalogGroup flags);
 	//! Emitted when the type filter is changed
