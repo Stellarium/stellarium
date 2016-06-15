@@ -81,6 +81,8 @@ ArchaeoLines::ArchaeoLines()
 	, enumShowCurrentPlanet(ArchaeoLine::CurrentPlanetNone)
 	, flagShowCustomAzimuth1(false)
 	, flagShowCustomAzimuth2(false)
+	, customAzimuth1(0.0)
+	, customAzimuth2(0.0)
 	, lastJDE(0.0)
 	, toolbarButton(NULL)
 {
