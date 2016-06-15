@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-13 21:57+0700\n"
+"POT-Creation-Date: 2016-06-14 19:17+0700\n"
 "PO-Revision-Date: 2016-06-05 11:05+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-14 05:22+0000\n"
+"X-Launchpad-Export-Date: 2016-06-15 05:19+0000\n"
 "X-Generator: Launchpad (build 18097)\n"
 "Language: bn\n"
 
@@ -1829,7 +1829,7 @@ msgstr "যোগাযোগ"
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:207
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:118
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:192
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:215
 msgid "Version"
 msgstr "সংস্করণ"
 
@@ -3268,7 +3268,7 @@ msgid "Trees"
 msgstr "উদ্যান"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:210 plugins/ArchaeoLines/src/ArchaeoLines.cpp:799
+#: src/translations.h:210 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1029
 msgid "Moon"
 msgstr "চাঁদ"
 
@@ -3288,17 +3288,17 @@ msgid "Garching"
 msgstr "গারচিং"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:218 plugins/ArchaeoLines/src/ArchaeoLines.cpp:811
+#: src/translations.h:218 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1041
 msgid "Mars"
 msgstr "মঙ্গল"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:220 plugins/ArchaeoLines/src/ArchaeoLines.cpp:814
+#: src/translations.h:220 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1044
 msgid "Jupiter"
 msgstr "বৃহস্পতি"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:222 plugins/ArchaeoLines/src/ArchaeoLines.cpp:817
+#: src/translations.h:222 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1047
 msgid "Saturn"
 msgstr "শনি"
 
@@ -6466,24 +6466,24 @@ msgid "Angle measure"
 msgstr "কৌণিক দূরত্ব পরিমাপ"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:527
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:532
 msgid "The Angle Measure is enabled:"
 msgstr "কৌণিক দূরত্ব পরিমাপ করুন :"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:529
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:534
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr ""
 "পরিমাপের জন্য left button চেপে এক স্থান থেকে অন্য স্থানে যান ও নতুন করে "
 "মাপার জন্য left-click করুন ।"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:531
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:536
 msgid "Right-clicking changes the end point only."
 msgstr "Right-click শুধুমাত্র শেষের প্রান্তবিন্দুটির অবস্থান পরিবর্তন করে ।"
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:533
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:538
 msgid "PA="
 msgstr "PA="
 
@@ -6503,7 +6503,7 @@ msgstr "কৌণিক দূরত্ব নির্ণয় সরঞ্জা
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:193
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:216
 msgid "Author"
 msgstr "প্রস্তুতকারক"
 
@@ -6551,7 +6551,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:125
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:213
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:237
 msgid "Links"
 msgstr "বিবিধ"
 
@@ -6566,7 +6566,7 @@ msgstr "বিবিধ"
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:214
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:238
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
@@ -6588,7 +6588,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:217
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:241
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "এ ব্যাপারে আপনার সব প্রশ্নের %1উত্তর এখানে পাবেন%2 ।"
@@ -6606,7 +6606,7 @@ msgstr "এ ব্যাপারে আপনার সব প্রশ্ন�
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:311
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:219
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:243
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "সমস্যা সংক্রান্ত প্রতিবেদনের জন্য %1এখানে%2 ক্লিক করুন ।"
@@ -6624,7 +6624,7 @@ msgstr "সমস্যা সংক্রান্ত প্রতিবেদ�
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:133
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:221
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:245
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -6679,12 +6679,10 @@ msgid "Attach end point to rotating sky"
 msgstr "শেষের বিন্দুটি আকাশের সাথে সামঞ্জস্য রেখে ঘুরবে"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:229
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:361
 msgid "Format"
 msgstr "রীতি"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:230
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:362
 msgid "Use dms format for angles"
 msgstr "কোণ পরিমাপে দশমিকে প্রকাশিত ডিগ্রি ব্যবহার"
 
@@ -6698,7 +6696,7 @@ msgstr "কোণ পরিমাপে দশমিকে প্রকাশি
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:480
 #: plugins/Observability/src/ui_ObservabilityDialog.h:357
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:431
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:363
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:403
 msgid "Restore default settings"
 msgstr "স্বাভাবিক বৈশিষ্টগুলি ফিরিয়ে আনুন"
 
@@ -6720,7 +6718,7 @@ msgstr "স্বাভাবিক বৈশিষ্টগুলি ফির�
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:284
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:462
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:302
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:365
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:405
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "পরিচিতি"
@@ -10598,7 +10596,7 @@ msgid "Use separate color for pulsars with glitches"
 msgstr "অসামঞ্জস্য থাকা পালসার গুলির জন্য আলাদা রঙ ব্যবহার করা হবে"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:58
-#: plugins/RemoteControl/src/RemoteControl.cpp:142
+#: plugins/RemoteControl/src/RemoteControl.cpp:151
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:260
 msgid "Remote Control"
 msgstr ""
@@ -10612,7 +10610,7 @@ msgid ""
 "server</a> by Stefan Frings.</p>"
 msgstr ""
 
-#: plugins/RemoteControl/src/RemoteControl.cpp:142
+#: plugins/RemoteControl/src/RemoteControl.cpp:151
 msgid "Remote control"
 msgstr ""
 
@@ -10718,47 +10716,47 @@ msgid "Exoplanets configuration window"
 msgstr "বহির গ্রহগুলির বৈশিষ্ট্য বিন্যাস"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:958
+#: plugins/Exoplanets/src/Exoplanets.cpp:967
 msgid "Hot"
 msgstr "গরম"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:960
+#: plugins/Exoplanets/src/Exoplanets.cpp:969
 msgid "Warm"
 msgstr "মনোরম"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:962
+#: plugins/Exoplanets/src/Exoplanets.cpp:971
 msgid "Cold"
 msgstr "ঠান্ডা"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:965
+#: plugins/Exoplanets/src/Exoplanets.cpp:974
 msgid "Miniterran"
 msgstr "বুধের মত"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:967
+#: plugins/Exoplanets/src/Exoplanets.cpp:976
 msgid "Subterran"
 msgstr "মঙ্গলের মত"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:969
+#: plugins/Exoplanets/src/Exoplanets.cpp:978
 msgid "Terran"
 msgstr "পার্থিব"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:971
+#: plugins/Exoplanets/src/Exoplanets.cpp:980
 msgid "Superterran"
 msgstr "বৃহৎ পার্থিব"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:973
+#: plugins/Exoplanets/src/Exoplanets.cpp:982
 msgid "Jovian"
 msgstr "বৃহস্পতির মত"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:975
+#: plugins/Exoplanets/src/Exoplanets.cpp:984
 msgid "Neptunian"
 msgstr "নেপচুনের মত"
 
@@ -10777,7 +10775,7 @@ msgstr "ভর"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:310
 #: plugins/Exoplanets/src/Exoplanet.cpp:314
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:796
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1026
 msgid "Sun"
 msgstr "সূর্য"
 
@@ -13715,9 +13713,9 @@ msgid "Title:"
 msgstr "নাম :"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:59
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:192
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:193
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:364
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:200
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:201
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:404
 msgid "ArchaeoLines"
 msgstr "ঘটনা রেখা"
 
@@ -13726,96 +13724,104 @@ msgid "A tool for archaeo-/ethnoastronomical alignment studies"
 msgstr ""
 "প্রাচীন কালে নানা জ্যোতির্বৈজ্ঞানিক গণনার জন্য এগুলি ব্যবহৃত কিছু অক্ষরেখা"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:213
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:221
 msgid "Show Line for Equinox"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:214
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:222
 msgid "Show Line for Solstices"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:215
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:223
 msgid "Show Line for Crossquarter"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:216
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:224
 msgid "Show Line for Major Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:217
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:225
 msgid "Show Line for Minor Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:218
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:226
 msgid "Show Line for Zenith Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:219
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:227
 msgid "Show Line for Nadir Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:220
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:228
 msgid "Show Line for Selected Object"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:221
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:229
 msgid "Show Line for Current Sun"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:222
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:230
 msgid "Show Line for Current Moon"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:772
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:231
+msgid "Show Line for Custom Azimuth 1"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:232
+msgid "Show Line for Custom Azimuth 2"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1002
 msgid "Equinox"
 msgstr "বিষুবরেখা"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:775
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1005
 msgid "Solstice"
 msgstr "সূর্যায়ণ"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:778
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1008
 msgid "Crossquarter"
 msgstr "মরশুমি সূচনা রেখা"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:781
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1011
 msgid "Major Lunar Standstill"
 msgstr "সর্বোচ্চ চন্দ্রায়ণ"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:784
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1014
 msgid "Minor Lunar Standstill"
 msgstr "সর্বনিম্ন চন্দ্রায়ণ"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:787
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1017
 msgid "Zenith Passage"
 msgstr "সুবিন্দু"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:790
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1020
 msgid "Nadir Passage"
 msgstr "কুবিন্দু"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:793
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:360
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1023
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:374
 msgid "Selected Object"
 msgstr "পছন্দসই বস্তু"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:802
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1032
 msgid "error if you can read this"
 msgstr "ত্রুটি দেখা দিযেছে"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:805
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1035
 msgid "Mercury"
 msgstr "বুধ"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:808
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1038
 msgid "Venus"
 msgstr "শুক্র"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:191
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:214
 msgid "ArchaeoLines Plug-in"
 msgstr "ঘটনা রেখা সরঞ্জাম"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:197
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:220
 msgid ""
 "The ArchaeoLines plugin displays any combination of declination arcs most "
 "relevant to archaeo- or ethnoastronomical studies."
@@ -13824,49 +13830,49 @@ msgstr ""
 "গুলি কিছু বিশিষ্ট্য মহাজাগতিক ঘটনার সঙ্গে যুক্ত এবং প্রাচীন কালে নানা "
 "জ্যোতির্বৈজ্ঞানিক গণনার জন্য এগুলি ব্যবহার করা হত ।"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:198
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:221
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
 msgstr "বিষুবরেখা ও তার থেকে সূর্যের সর্বোচ্চ চ্যুতি বা সূর্যায়ণ"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:199
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:222
 msgid ""
 "Declinations of the crossquarter days (days right between solstices and "
 "equinoxes)"
 msgstr "মরশুমি সূচনা রেখা বা ত্রৈমাসিক বিভাজন রেখা"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:200
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:223
 msgid "Declinations of the Major Lunar Standstills"
 msgstr "বিষুবরেখা থেকে চাঁদের সর্বোচ্চ চ্যুতি বা সর্বোচ্চ চন্দ্রায়ণ"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:201
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:224
 msgid "Declinations of the Minor Lunar Standstills"
 msgstr "বিষুবরেখা থেকে চাঁদের সর্বোচ্চ চ্যুতি বা সর্বনিম্ন চন্দ্রায়ণ"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:202
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:225
 msgid "Declination of the Zenith passage"
 msgstr "সুবিন্দু রেখা"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:203
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:226
 msgid "Declination of the Nadir passage"
 msgstr "কুবিন্দু রেখা"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:204
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:227
 msgid "Declination of the currently selected object"
 msgstr "বিষুবরেখা থেকে পছন্দসই বস্তুর সর্বোচ্চ চ্যুতি"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:205
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:228
 msgid "Current declination of the sun"
 msgstr "সূর্যের বর্তমান বিষুবলম্ব"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:206
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:229
 msgid "Current declination of the moon"
 msgstr "চাঁদের বর্তমান বিষুবলম্ব"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:207
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:230
 msgid "Current declination of a naked-eye planet"
 msgstr "খালি চোখে দেখতে পাওয়া গ্রহগুলির বিষুবরেখা থেকে সর্বোচ্চ চ্যুতি"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:208
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:231
 msgid ""
 "The lunar lines include horizon parallax effects. There are two lines each "
 "drawn, for maximum and minimum distance of the moon. Note that declination "
@@ -13877,125 +13883,160 @@ msgstr ""
 "বিভিন্ন স্থান থেকে দেখলে এর অবস্থানের সামান্য হেরফের লক্ষ্য করা যায় । তাই "
 "প্রতিটি চন্দ্রায়ন রেখা আসলে খুব কাছাকাছি থাকা দুটি রেখার সমষ্টি ।"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:290
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:235
+msgid ""
+"In addition, up to two vertical lines with arbitrary azimuth and custom "
+"label can be shown."
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:321
 msgid "Select color for equinox line"
 msgstr "বিষুবরেখার রং"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:302
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:333
 msgid "Select color for solstice lines"
 msgstr "বিষুবরেখা থেকে সূর্যের সর্বোচ্চ চ্যুতি রেখার রং"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:314
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:345
 msgid "Select color for crossquarter lines"
 msgstr "মরশুমি সূচনা রেখার রং"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:326
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:357
 msgid "Select color for major standstill lines"
 msgstr "বিষুবরেখা থেকে চাঁদের সর্বোচ্চ চ্যুতি রেখার রং"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:338
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:369
 msgid "Select color for minor standstill lines"
 msgstr "বিষুবরেখা থেকে চাঁদের সর্বনিম্ন চ্যুতি রেখার রং"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:350
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:381
 msgid "Select color for zenith passage line"
 msgstr "বিষুবরেখা থেকে সুবিন্দুর চ্যুতি রেখার রং"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:362
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:393
 msgid "Select color for nadir passage line"
 msgstr "বিষুবরেখা থেকে কুবিন্দুর চ্যুতি রেখার রং"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:374
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:405
 msgid "Select color for selected object line"
 msgstr "বিষুবরেখা থেকে পছন্দসই বস্তুর চ্যুতি রেখার রং"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:386
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:417
 msgid "Select color for current sun line"
 msgstr "বিষুবরেখা থেকে সূর্যের চ্যুতি রেখার রং"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:398
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:429
 msgid "Select color for current moon line"
 msgstr "বিষুবরেখা থেকে চাঁদের চ্যুতি রেখার রং"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:410
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:441
 msgid "Select color for current planet line"
 msgstr "বিষুবরেখা থেকে পছন্দসই গ্রহের চ্যুতি রেখার রং"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:335
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:453
+msgid "Select color for Custom Azimuth 1 line"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:465
+msgid "Select color for Custom Azimuth 2 line"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:367
 msgid "ArchaeoLines Configuration"
 msgstr "ঘটনা রেখার বৈশিষ্ট্য বিন্যাস"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:336
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:368
 msgid "ArchaeoLines Plug-in Configuration"
 msgstr "ঘটনা রেখা দেখানোর সরঞ্জামের রূপরেখা"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:338
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:370
 msgid "To change colors you may have to leave fullscreen mode!"
 msgstr "রং পরিবর্তনের সময় ফুলস্ক্রীন অবস্থা থেকে বেরিয়ে যেতে হতে পারে !"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:339
-msgid "Equinox line (Equator)"
-msgstr "বিষুবরেখা বা নিরক্ষরেখা"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:340
-msgid "Solstice Lines"
-msgstr "সূর্যায়ন"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:341
-msgid "Crossquarter Lines"
-msgstr "মরশুমি সূচনা রেখা"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:343
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:372
 msgid "Change color"
 msgstr "রং বদলান"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:345
-msgid "Major Lunar Standstill lines"
-msgstr "সর্বোচ্চ চন্দ্রায়ণ"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:346
-msgid "Minor Lunar Standstill lines"
-msgstr "সর্বনিম্ন চন্দ্রায়ণ"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:347
-msgid "Declination of Zenith passage"
-msgstr "সুবিন্দু"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:348
-msgid "Declination of Nadir passage"
-msgstr "কুবিন্দু"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:349
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:375
 msgid "Current Sun"
 msgstr "সূর্য"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:350
-msgid "Current Moon"
-msgstr "চাঁদ"
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:376
+msgid "Declination of Nadir passage"
+msgstr "কুবিন্দু"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:353
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:379
 msgid "Current Planet: None"
 msgstr "পছন্দ করুন"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:354
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:380
 msgid "Current Planet: Mercury"
 msgstr "বুধ"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:355
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:381
 msgid "Current Planet: Venus"
 msgstr "শুক্র"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:356
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:382
 msgid "Current Planet: Mars"
 msgstr "মঙ্গল"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:357
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:383
 msgid "Current Planet: Jupiter"
 msgstr "বৃহস্পতি"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:358
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:384
 msgid "Current Planet: Saturn"
 msgstr "শনি"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:386
+msgid "Minor Lunar Standstill lines"
+msgstr "সর্বনিম্ন চন্দ্রায়ণ"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:387
+msgid "Custom Azimuth 2 Color..."
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:388
+msgid "Custom Azimuth 1"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:389
+msgid "Custom Azimuth 2"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:390
+msgid "Custom Azimuth 1 Color..."
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:392
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:395
+msgid "Enter a label for this line"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:397
+msgid "Solstice Lines"
+msgstr "সূর্যায়ন"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:398
+msgid "Current Moon"
+msgstr "চাঁদ"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:399
+msgid "Declination of Zenith passage"
+msgstr "সুবিন্দু"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:400
+msgid "Crossquarter Lines"
+msgstr "মরশুমি সূচনা রেখা"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:401
+msgid "Major Lunar Standstill lines"
+msgstr "সর্বোচ্চ চন্দ্রায়ণ"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:402
+msgid "Equinox line (Equator)"
+msgstr "বিষুবরেখা বা নিরক্ষরেখা"
 
 #~ msgid "Planet: "
 #~ msgstr "গ্রহ "
@@ -14954,33 +14995,11 @@ msgstr "শনি"
 #~ msgid "Open cluster"
 #~ msgstr "অনিয়তাকার তারকা গুচ্ছ"
 
-#~ msgid "Dark nebula"
-#~ msgstr "কৃষ্ণবর্ণ নিহারীকা"
-
-#~ msgid "Irregular galaxy"
-#~ msgstr "অনিয়তাকার নক্ষত্রলোক"
-
 #~ msgid "Undocumented type"
 #~ msgstr "অনথিভুক্ত"
 
 #~ msgid "Shortcut"
 #~ msgstr "সহজ উপায়"
-
-#~ msgid "Irregular galaxies"
-#~ msgstr "অনিয়তাকার নক্ষত্রলোক"
-
-#~ msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
-#~ msgstr "মঙ্গলের আকাশে শুক্র ও পৃথিবীর সর্বোচ্চ ও সর্বোজ্জ্বল অবস্থান"
-
-#~ msgid ""
-#~ "Screensaver of various happenings in the Solar System. 232 events in all!"
-#~ msgstr "সৌরজগতে ঘটমান ২৩২টি বিশিষ্ট ঘটনা নিয়ে স্ক্রিনসেভার ।"
-
-#~ msgid ""
-#~ "Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
-#~ msgstr ""
-#~ "মঙ্গলের আকাশে শুক্র ও পৃথিবীর সর্বোচ্চ ও সর্বোজ্জ্বল অবস্থান (২০০০ থেকে ৩০০০ "
-#~ "সাল)"
 
 #~ msgid "Acronychal/Cosmical rise/set:"
 #~ msgstr "সূর্যদয়/সূর্যাস্তের সাথে নির্বাচিত জ্যোতিষ্কটির উদয়/অস্ত :"
@@ -15101,19 +15120,6 @@ msgstr "শনি"
 #~ "মানচিত্র পদ্ধতি বলা হত । এই পদ্ধতিতে কোণ ধ্রুবক থাকলেও ক্ষেত্রফল ধ্রুবক থাকে "
 #~ "না ।"
 
-#~ msgid ""
-#~ "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
-#~ "use MESA (or ANGLE) version."
-#~ msgstr ""
-#~ "অনুপযুক্ত OpenGL সংস্করণ । দয়া করে ড্রাইভার ও গ্রাফিক্স হার্ডওয়্যার আপডেট "
-#~ "করুন অথবা MESA (বা ANGLE) সংস্করণ ব্যবহার করুন ।"
-
-#~ msgid "Julian Date"
-#~ msgstr "জুলিয়ান পঞ্জিকা অনুসারে তারিখ"
-
-#~ msgid "Modified Julian Date"
-#~ msgstr "সংশোধিত জুলিয়ান পঞ্জিকা অনুসারে তারিখ"
-
 #~ msgid "Find Object or Position"
 #~ msgstr "জ্যোতিষ্কের নাম বা তার অবস্থান অনুসন্ধান"
 
@@ -15146,9 +15152,6 @@ msgstr "শনি"
 #~ msgid "Show horizon line"
 #~ msgstr "দিগন্তরেখা দেখা যাবে"
 
-#~ msgid "Show Galactic equator line"
-#~ msgstr "ছায়াপথ নির্দেশক রেখা দেখা যাবে"
-
 #~ msgid "Show names"
 #~ msgstr "নামের ব্যবহার"
 
@@ -15180,9 +15183,6 @@ msgstr "শনি"
 #~ "মহারানীর নৌসারণী অফিস এবং মার্কিন নৌ মানমন্দির দ্বারা ১৯৫৮ সাল থেকে যৌথভাবে "
 #~ "প্রকাশিত  <em>The Nautical Almanac</em> তালিকায় থাকা ধ্রুবতারা সমেত আরও ৫৭টি "
 #~ "তারা ।"
-
-#~ msgid "dd/MMM/yyyy"
-#~ msgstr "dd/MMM/yyyy"
 
 #~ msgid "Show Solar System objects"
 #~ msgstr "সৌরজগতিক জ্যোতিষ্কসমূহ"

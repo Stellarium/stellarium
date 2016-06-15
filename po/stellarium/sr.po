@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-13 21:57+0700\n"
+"POT-Creation-Date: 2016-06-14 19:17+0700\n"
 "PO-Revision-Date: 2016-04-06 17:34+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-14 05:35+0000\n"
+"X-Launchpad-Export-Date: 2016-06-15 05:31+0000\n"
 "X-Generator: Launchpad (build 18097)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:378
@@ -1814,7 +1814,7 @@ msgstr "Контакт"
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:207
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:118
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:192
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:215
 msgid "Version"
 msgstr "Издање"
 
@@ -3254,7 +3254,7 @@ msgid "Trees"
 msgstr "Дрвеће"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:210 plugins/ArchaeoLines/src/ArchaeoLines.cpp:799
+#: src/translations.h:210 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1029
 msgid "Moon"
 msgstr "Месец"
 
@@ -3274,17 +3274,17 @@ msgid "Garching"
 msgstr "Гархинг"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:218 plugins/ArchaeoLines/src/ArchaeoLines.cpp:811
+#: src/translations.h:218 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1041
 msgid "Mars"
 msgstr "Марс"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:220 plugins/ArchaeoLines/src/ArchaeoLines.cpp:814
+#: src/translations.h:220 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1044
 msgid "Jupiter"
 msgstr "Јупитер"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:222 plugins/ArchaeoLines/src/ArchaeoLines.cpp:817
+#: src/translations.h:222 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1047
 msgid "Saturn"
 msgstr "Сатурн"
 
@@ -6412,23 +6412,23 @@ msgid "Angle measure"
 msgstr "Мера угла"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:527
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:532
 msgid "The Angle Measure is enabled:"
 msgstr "Мера угла је омогућена:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:529
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:534
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr ""
 "Помери са левим дугметом миша да измериш, лево дугме миша да обришеш."
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:531
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:536
 msgid "Right-clicking changes the end point only."
 msgstr "Десно дугме миша мења само крајњу тачку."
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:533
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:538
 msgid "PA="
 msgstr "ПУ="
 
@@ -6448,7 +6448,7 @@ msgstr "Додатак за мерење угловног растојања"
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:193
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:216
 msgid "Author"
 msgstr "Аутор"
 
@@ -6499,7 +6499,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:125
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:213
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:237
 msgid "Links"
 msgstr "Везе"
 
@@ -6514,7 +6514,7 @@ msgstr "Везе"
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:214
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:238
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
@@ -6536,7 +6536,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:217
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:241
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "Ако имате питање, %1 одговор можете  %2 добити овде"
@@ -6554,7 +6554,7 @@ msgstr "Ако имате питање, %1 одговор можете  %2 до�
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:311
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:219
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:243
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "Извештаји о грешkи могу бити %1овде%2."
@@ -6572,7 +6572,7 @@ msgstr "Извештаји о грешkи могу бити %1овде%2."
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:133
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:221
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:245
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -6629,12 +6629,10 @@ msgid "Attach end point to rotating sky"
 msgstr "Одреди крајњу тачку за ротацију неба"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:229
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:361
 msgid "Format"
 msgstr "Формат"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:230
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:362
 msgid "Use dms format for angles"
 msgstr "Користи компресоване архиве за углове"
 
@@ -6648,7 +6646,7 @@ msgstr "Користи компресоване архиве за углове"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:480
 #: plugins/Observability/src/ui_ObservabilityDialog.h:357
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:431
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:363
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:403
 msgid "Restore default settings"
 msgstr "Враћање подразумеване поставке"
 
@@ -6670,7 +6668,7 @@ msgstr "Враћање подразумеване поставке"
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:284
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:462
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:302
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:365
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:405
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "О програму"
@@ -10547,7 +10545,7 @@ msgid "Use separate color for pulsars with glitches"
 msgstr "Користи различите боје за пулсаре са грешкама."
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:58
-#: plugins/RemoteControl/src/RemoteControl.cpp:142
+#: plugins/RemoteControl/src/RemoteControl.cpp:151
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:260
 msgid "Remote Control"
 msgstr ""
@@ -10561,7 +10559,7 @@ msgid ""
 "server</a> by Stefan Frings.</p>"
 msgstr ""
 
-#: plugins/RemoteControl/src/RemoteControl.cpp:142
+#: plugins/RemoteControl/src/RemoteControl.cpp:151
 msgid "Remote control"
 msgstr ""
 
@@ -10668,47 +10666,47 @@ msgid "Exoplanets configuration window"
 msgstr "Конфигурациони прозор за планете ван Сунчевог система"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:958
+#: plugins/Exoplanets/src/Exoplanets.cpp:967
 msgid "Hot"
 msgstr "Врућа"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:960
+#: plugins/Exoplanets/src/Exoplanets.cpp:969
 msgid "Warm"
 msgstr "Топло"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:962
+#: plugins/Exoplanets/src/Exoplanets.cpp:971
 msgid "Cold"
 msgstr "Хладно"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:965
+#: plugins/Exoplanets/src/Exoplanets.cpp:974
 msgid "Miniterran"
 msgstr "Величина планете"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:967
+#: plugins/Exoplanets/src/Exoplanets.cpp:976
 msgid "Subterran"
 msgstr "Под планета"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:969
+#: plugins/Exoplanets/src/Exoplanets.cpp:978
 msgid "Terran"
 msgstr "Планета"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:971
+#: plugins/Exoplanets/src/Exoplanets.cpp:980
 msgid "Superterran"
 msgstr "Суперпланета"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:973
+#: plugins/Exoplanets/src/Exoplanets.cpp:982
 msgid "Jovian"
 msgstr "Јовијанске планете"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:975
+#: plugins/Exoplanets/src/Exoplanets.cpp:984
 msgid "Neptunian"
 msgstr "Нептунолики"
 
@@ -10727,7 +10725,7 @@ msgstr "Маса"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:310
 #: plugins/Exoplanets/src/Exoplanet.cpp:314
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:796
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1026
 msgid "Sun"
 msgstr "Сунце"
 
@@ -13542,9 +13540,9 @@ msgid "Title:"
 msgstr "Наслов:"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:59
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:192
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:193
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:364
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:200
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:201
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:404
 msgid "ArchaeoLines"
 msgstr "Линије путања"
 
@@ -13552,96 +13550,104 @@ msgstr "Линије путања"
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
 msgstr "Алатка за линије путања"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:213
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:221
 msgid "Show Line for Equinox"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:214
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:222
 msgid "Show Line for Solstices"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:215
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:223
 msgid "Show Line for Crossquarter"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:216
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:224
 msgid "Show Line for Major Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:217
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:225
 msgid "Show Line for Minor Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:218
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:226
 msgid "Show Line for Zenith Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:219
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:227
 msgid "Show Line for Nadir Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:220
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:228
 msgid "Show Line for Selected Object"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:221
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:229
 msgid "Show Line for Current Sun"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:222
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:230
 msgid "Show Line for Current Moon"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:772
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:231
+msgid "Show Line for Custom Azimuth 1"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:232
+msgid "Show Line for Custom Azimuth 2"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1002
 msgid "Equinox"
 msgstr "Еквиноциј"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:775
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1005
 msgid "Solstice"
 msgstr "Солстициј"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:778
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1008
 msgid "Crossquarter"
 msgstr "Квартал"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:781
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1011
 msgid "Major Lunar Standstill"
 msgstr "Главни Лунарни застој"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:784
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1014
 msgid "Minor Lunar Standstill"
 msgstr "Споредни Лунарни застој"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:787
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1017
 msgid "Zenith Passage"
 msgstr "Пролазак зенита"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:790
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1020
 msgid "Nadir Passage"
 msgstr "Надир пролаз"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:793
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:360
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1023
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:374
 msgid "Selected Object"
 msgstr "Изабери објекат"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:802
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1032
 msgid "error if you can read this"
 msgstr "погрешно је  уколико можеш прочитати ово"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:805
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1035
 msgid "Mercury"
 msgstr "Меркур"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:808
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1038
 msgid "Venus"
 msgstr "Венера"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:191
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:214
 msgid "ArchaeoLines Plug-in"
 msgstr "Додатак за путање планета"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:197
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:220
 msgid ""
 "The ArchaeoLines plugin displays any combination of declination arcs most "
 "relevant to archaeo- or ethnoastronomical studies."
@@ -13649,49 +13655,49 @@ msgstr ""
 "Додатак за путање планета приказује комбинацију деклинације која је "
 "најрелевантнија за archaeo- or ethnoastronomical студије."
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:198
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:221
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
 msgstr "Деклинација еквиноција (или екватора) и солстиција."
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:199
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:222
 msgid ""
 "Declinations of the crossquarter days (days right between solstices and "
 "equinoxes)"
 msgstr "Деклинација дана између солстиција и еквиноција."
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:200
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:223
 msgid "Declinations of the Major Lunar Standstills"
 msgstr "Деклинација главног Лунарног застоја"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:201
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:224
 msgid "Declinations of the Minor Lunar Standstills"
 msgstr "Деклинација споредног Лунарног застоја"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:202
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:225
 msgid "Declination of the Zenith passage"
 msgstr "Деклинација зенитног пролаза"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:203
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:226
 msgid "Declination of the Nadir passage"
 msgstr "Деклинација надир пролаза"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:204
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:227
 msgid "Declination of the currently selected object"
 msgstr "Деклинација тренутног обележеног објекта"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:205
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:228
 msgid "Current declination of the sun"
 msgstr "Тренутна деклинација Сунца"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:206
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:229
 msgid "Current declination of the moon"
 msgstr "Тренутна деклинација Месеца"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:207
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:230
 msgid "Current declination of a naked-eye planet"
 msgstr "Тренутна деклинација планете видљиве голим оком"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:208
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:231
 msgid ""
 "The lunar lines include horizon parallax effects. There are two lines each "
 "drawn, for maximum and minimum distance of the moon. Note that declination "
@@ -13703,126 +13709,161 @@ msgstr ""
 "Деклинација Месеца током главног застоја може прекорачити назначене лимите "
 "ако је високо на небу, због паралактичких ефеката."
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:290
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:235
+msgid ""
+"In addition, up to two vertical lines with arbitrary azimuth and custom "
+"label can be shown."
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:321
 msgid "Select color for equinox line"
 msgstr "Обележи боју линије равнодневице"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:302
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:333
 msgid "Select color for solstice lines"
 msgstr "Обележи боју линије краткодневице"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:314
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:345
 msgid "Select color for crossquarter lines"
 msgstr "Изабери боју линија"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:326
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:357
 msgid "Select color for major standstill lines"
 msgstr "Изабери боју линије за главни застој."
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:338
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:369
 msgid "Select color for minor standstill lines"
 msgstr "Изабери боју линије за споредни застој."
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:350
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:381
 msgid "Select color for zenith passage line"
 msgstr "Обележи боју линије зенутног пролаза"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:362
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:393
 msgid "Select color for nadir passage line"
 msgstr "Обележи боју линије надир пролаза"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:374
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:405
 msgid "Select color for selected object line"
 msgstr "Обележи боју линије за обележени објекат"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:386
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:417
 msgid "Select color for current sun line"
 msgstr "Изабери боју за тренутну Сунчеву линију"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:398
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:429
 msgid "Select color for current moon line"
 msgstr "Изабери боју за тренутну Месечеву линију"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:410
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:441
 msgid "Select color for current planet line"
 msgstr "Изабери боју за тренутну линију планете"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:335
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:453
+msgid "Select color for Custom Azimuth 1 line"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:465
+msgid "Select color for Custom Azimuth 2 line"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:367
 msgid "ArchaeoLines Configuration"
 msgstr "Конфигурисање линије путања планета"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:336
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:368
 msgid "ArchaeoLines Plug-in Configuration"
 msgstr "Конфигурисање додатака линије путања планета"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:338
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:370
 msgid "To change colors you may have to leave fullscreen mode!"
 msgstr ""
 "Да би променио/ла боју мораш да напустиш режим приказа на целом екрану!"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:339
-msgid "Equinox line (Equator)"
-msgstr "Линија еквиноција (екватор)"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:340
-msgid "Solstice Lines"
-msgstr "Линије солстицијта"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:341
-msgid "Crossquarter Lines"
-msgstr "Кварталне линије"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:343
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:372
 msgid "Change color"
 msgstr "Промени боју"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:345
-msgid "Major Lunar Standstill lines"
-msgstr "Линије главног Лунарног застоја"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:346
-msgid "Minor Lunar Standstill lines"
-msgstr "Споредне Лунарне застојне линије"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:347
-msgid "Declination of Zenith passage"
-msgstr "Деклинација зенитног  пролаза"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:348
-msgid "Declination of Nadir passage"
-msgstr "Деклинација надир пролаза"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:349
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:375
 msgid "Current Sun"
 msgstr "Тренутно је изабрано Сунце"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:350
-msgid "Current Moon"
-msgstr "Тренутно је изабран Месец"
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:376
+msgid "Declination of Nadir passage"
+msgstr "Деклинација надир пролаза"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:353
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:379
 msgid "Current Planet: None"
 msgstr "Тренутна планета: није изабрана ниједна планета"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:354
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:380
 msgid "Current Planet: Mercury"
 msgstr "Тренутна планета: Меркур"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:355
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:381
 msgid "Current Planet: Venus"
 msgstr "Тренутна планета: Венера"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:356
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:382
 msgid "Current Planet: Mars"
 msgstr "Тренутна планета: Марс"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:357
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:383
 msgid "Current Planet: Jupiter"
 msgstr "Тренутна планета: Јупитер"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:358
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:384
 msgid "Current Planet: Saturn"
 msgstr "Тренутна планета: Сатурн"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:386
+msgid "Minor Lunar Standstill lines"
+msgstr "Споредне Лунарне застојне линије"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:387
+msgid "Custom Azimuth 2 Color..."
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:388
+msgid "Custom Azimuth 1"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:389
+msgid "Custom Azimuth 2"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:390
+msgid "Custom Azimuth 1 Color..."
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:392
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:395
+msgid "Enter a label for this line"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:397
+msgid "Solstice Lines"
+msgstr "Линије солстицијта"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:398
+msgid "Current Moon"
+msgstr "Тренутно је изабран Месец"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:399
+msgid "Declination of Zenith passage"
+msgstr "Деклинација зенитног  пролаза"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:400
+msgid "Crossquarter Lines"
+msgstr "Кварталне линије"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:401
+msgid "Major Lunar Standstill lines"
+msgstr "Линије главног Лунарног застоја"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:402
+msgid "Equinox line (Equator)"
+msgstr "Линија еквиноција (екватор)"
 
 #~ msgid "Date & Time"
 #~ msgstr "Datum i vreme"
@@ -14650,9 +14691,6 @@ msgstr "Тренутна планета: Сатурн"
 #~ msgid "Shortcut"
 #~ msgstr "Пречица"
 
-#~ msgid "Irregular galaxies"
-#~ msgstr "Неправилне галаксије"
-
 #~ msgid ""
 #~ "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
 #~ msgstr "Називи и ознаке за објекте дубоког неба (звезде, галаксије, маглине)"
@@ -14674,9 +14712,6 @@ msgstr "Тренутна планета: Сатурн"
 #~ msgid "Equatorial grid (on date)"
 #~ msgstr "Екваторијална мрежа (за датум)"
 
-#~ msgid "Show Galactic equator line"
-#~ msgstr "Прикажи линију галактичког екватора"
-
 #~ msgid "Show names"
 #~ msgstr "Прикажи имена"
 
@@ -14695,9 +14730,6 @@ msgstr "Тренутна планета: Сатурн"
 #~ msgid "Subtract 1 sidereal century"
 #~ msgstr "Одузми сидерички век"
 
-#~ msgid "Irregular galaxy"
-#~ msgstr "Неправилна галаксија"
-
 #~ msgctxt "Deep-sky objects"
 #~ msgid "DSOs"
 #~ msgstr "ОДН"
@@ -14711,90 +14743,8 @@ msgstr "Тренутна планета: Сатурн"
 #~ msgid "Geocentric equatorial coordinates, equinox of J2000.0"
 #~ msgstr "Геоцентричне екваторске координате, равнодневница Ј2000.0"
 
-#~ msgid ""
-#~ "Screensaver of various happenings in the Solar System. 232 events in all!"
-#~ msgstr ""
-#~ "Чувар екрана са разним дешавањима у Сунчевом систему. Садржи 232 догађаја."
-
-#~ msgid "Show meteor showers"
-#~ msgstr "Прикажи кишу метеора"
-
-#~ msgid "Meteor Shower configuration window"
-#~ msgstr "Конфигурациони прозор кише метеора"
-
-#~ msgid "real data"
-#~ msgstr "реални подаци"
-
-#~ msgid "Real"
-#~ msgstr "Реални"
-
-#~ msgid "Variable"
-#~ msgstr "Променљива"
-
-#~ msgid "Meteor showers is updated"
-#~ msgstr "Кише метеора су ажуриране"
-
-#~ msgid "Update data from Internet"
-#~ msgstr "Ажурирај податке са интернета"
-
-#~ msgid "Meteor showers"
-#~ msgstr "Кише метеора"
-
-#~ msgid "Change Color"
-#~ msgstr "Промени боју"
-
-#~ msgid "Show meteor showers button on toolbar"
-#~ msgstr "Прикажи тастер кише метеора на траци са алаткама"
-
-#~ msgid "Enable display of meteor showers at startup"
-#~ msgstr "Омогући приказ кише метеора приликом покретања програма"
-
-#~ msgid "Search Events"
-#~ msgstr "Тражи догађаје"
-
-#~ msgid "dd/MMM/yyyy"
-#~ msgstr "дд/мм/гггг"
-
-#~ msgid "Dark nebula"
-#~ msgstr "Тамна маглина"
-
-#~ msgid "Solar longitude is"
-#~ msgstr "Лонгитуда Сунца је"
-
 #~ msgid "Undocumented type"
 #~ msgstr "Недокументовани тип"
-
-#~ msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
-#~ msgstr ""
-#~ "Земљина и Венерина највећа елонгација и осветљеност посматрано са Марса."
-
-#~ msgid ""
-#~ "Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
-#~ msgstr ""
-#~ "Земљина и Венерина највећа елонгација и осветљеност посматрано са Марса 2000-"
-#~ "3000."
-
-#~ msgid ""
-#~ "This plugin displays meteor showers and a marker for each active and "
-#~ "inactive radiant, showing real information about its activity."
-#~ msgstr ""
-#~ "Овај додатак приказује кишу метеора и обележивач за сваку активну и "
-#~ "неактивну енергију зрачења, приказује праве информације о својим "
-#~ "активностима."
-
-#~ msgid "Meteor Showers Plug-in Configuration"
-#~ msgstr "Конфигурациони додатак  за метеорске кише"
-
-#~ msgid "Radiant labels"
-#~ msgstr "Ознаке на радијанту"
-
-#~ msgid "Active Radiant - Real Data"
-#~ msgstr "Активан радијант - Стварни податци"
-
-#~ msgid ""
-#~ "This plugin was created as project of ESA Summer of Code in Space 2013."
-#~ msgstr ""
-#~ "Овај додатак је креиран као пројекат ESA Summer of Code in Space 2013."
 
 #, qt-format
 #~ msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
@@ -14825,19 +14775,6 @@ msgstr "Тренутна планета: Сатурн"
 
 #~ msgid "License"
 #~ msgstr "Дозвола"
-
-#~ msgid ""
-#~ "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
-#~ "use MESA (or ANGLE) version."
-#~ msgstr ""
-#~ "Недовољна верзија \"OpenGl\"-a. Молимо те ажурирај драјвере, графички "
-#~ "хардвер или користи MESA (или ANGLE) верзију."
-
-#~ msgid "Julian Date"
-#~ msgstr "Јулијански датум"
-
-#~ msgid "Modified Julian Date"
-#~ msgstr "Измењени јулијански датум"
 
 #~ msgid "Show equator line"
 #~ msgstr "Прикажи линију екватора"
@@ -14885,8 +14822,3 @@ msgstr "Тренутна планета: Сатурн"
 #~ "заједно су објавили његово величанство Канцеларија наутичког алманаха и УН "
 #~ "Навал опсерваторија 1958; сходно томе ове звезде се такође користе и у "
 #~ "навигационим помагалима као што су 2102Д проналазач и препознавач звезда."
-
-#~ msgid ""
-#~ "The old showers.json file is no longer compatible - using default file"
-#~ msgstr ""
-#~ "Стари пљускови.json фајл није више компатибилан - користи основни фајл"
