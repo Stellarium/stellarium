@@ -217,8 +217,7 @@ StelApp::StelApp(QObject* parent)
 	, globalScalingRatio(1.f)
 	, fps(0)
 	, frame(0)
-	, timefr(0.)
-	, timeBase(0.)
+	, frameTimeAccum(0.)
 	, flagNightVision(false)
 	, confSettings(NULL)
 	, initialized(false)
@@ -578,13 +577,13 @@ void StelApp::update(double deltaTime)
 		return;
 
 	++frame;
-	timefr+=deltaTime;
-	if (timefr-timeBase > 1.)
+	frameTimeAccum+=deltaTime;
+	if (frameTimeAccum > 1.)
 	{
 		// Calc the FPS rate every seconds
-		fps=(double)frame/(timefr-timeBase);
+		fps=(double)frame/frameTimeAccum;
 		frame = 0;
-		timeBase+=1.;
+		frameTimeAccum=0.;
 	}
 		
 	core->update(deltaTime);
@@ -641,14 +640,14 @@ void StelApp::draw()
 /*************************************************************************
  Call this when the size of the GL window has changed
 *************************************************************************/
-void StelApp::glWindowHasBeenResized(float x, float y, float w, float h)
+void StelApp::glWindowHasBeenResized(const QRectF& rect)
 {
 	if (core)
-		core->windowHasBeenResized(x, y, w, h);
+		core->windowHasBeenResized(rect.x(), rect.y(), rect.width(), rect.height());
 	else
 	{
-		saveProjW = w;
-		saveProjH = h;
+		saveProjW = rect.width();
+		saveProjH = rect.height();
 	}
 	if (renderBuffer)
 	{
@@ -719,7 +718,7 @@ void StelApp::handleWheel(QWheelEvent* event)
 }
 
 // Handle mouse move
-void StelApp::handleMove(float x, float y, Qt::MouseButtons b)
+bool StelApp::handleMove(float x, float y, Qt::MouseButtons b)
 {
 	if (viewportEffect)
 		viewportEffect->distortXY(x, y);
@@ -727,8 +726,9 @@ void StelApp::handleMove(float x, float y, Qt::MouseButtons b)
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseMoves))
 	{
 		if (i->handleMouseMoves(x*devicePixelsPerPixel, y*devicePixelsPerPixel, b))
-			return;
+			return true;
 	}
+	return false;
 }
 
 // Handle key press and release

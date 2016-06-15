@@ -65,7 +65,7 @@ class StelApp : public QObject
 
 public:
 	friend class StelAppGraphicsWidget;
-	friend class StelSkyItem;
+	friend class StelGraphicsScene;
 
 	//! Create and initialize the main Stellarium application.
 	//! @param parent the QObject parent
@@ -155,9 +155,6 @@ public:
 	// @return the max squared distance in pixels that any object has travelled since the last update.
 	void draw();
 
-	//! Call this when the size of the GL window has changed.
-	void glWindowHasBeenResized(float x, float y, float w, float h);
-
 	//! Get the ratio between real device pixel and "Device Independent Pixel".
 	//! Usually this value is 1, but for a mac with retina screen this will be value 2.
 	float getDevicePixelsPerPixel() const {return devicePixelsPerPixel;}
@@ -204,6 +201,8 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
 public slots:
+	//! Call this when the size of the GL window has changed.
+	void glWindowHasBeenResized(const QRectF &rect);
 
 	//! Set flag for activating night vision mode.
 	void setVisionModeNight(bool);
@@ -255,7 +254,6 @@ signals:
 	void progressBarRemoved(const StelProgressController*);
 	//! Called just before we exit Qt mainloop.
 	void aboutToQuit();
-
 private:
 
 	//! Handle mouse clics.
@@ -263,7 +261,7 @@ private:
 	//! Handle mouse wheel.
 	void handleWheel(class QWheelEvent* event);
 	//! Handle mouse move.
-	void handleMove(float x, float y, Qt::MouseButtons b);
+	bool handleMove(float x, float y, Qt::MouseButtons b);
 	//! Handle key press and release.
 	void handleKeys(class QKeyEvent* event);
 	//! Handle pinch on multi touch devices.
@@ -343,7 +341,7 @@ private:
 
 	float fps;
 	int frame;
-	double timefr, timeBase;		// Used for fps counter
+	double frameTimeAccum;		// Used for fps counter
 
 	//! Define whether we are in night vision mode
 	bool flagNightVision;
