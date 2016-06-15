@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-13 21:57+0700\n"
+"POT-Creation-Date: 2016-06-14 19:17+0700\n"
 "PO-Revision-Date: 2015-12-16 16:39+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-14 05:25+0000\n"
+"X-Launchpad-Export-Date: 2016-06-15 05:22+0000\n"
 "X-Generator: Launchpad (build 18097)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:378
@@ -1819,7 +1819,7 @@ msgstr "Yhteystieto"
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:207
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:118
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:192
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:215
 msgid "Version"
 msgstr "Versio"
 
@@ -3259,7 +3259,7 @@ msgid "Trees"
 msgstr "Puut"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:210 plugins/ArchaeoLines/src/ArchaeoLines.cpp:799
+#: src/translations.h:210 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1029
 msgid "Moon"
 msgstr "Kuu"
 
@@ -3279,17 +3279,17 @@ msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:218 plugins/ArchaeoLines/src/ArchaeoLines.cpp:811
+#: src/translations.h:218 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1041
 msgid "Mars"
 msgstr "Mars"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:220 plugins/ArchaeoLines/src/ArchaeoLines.cpp:814
+#: src/translations.h:220 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1044
 msgid "Jupiter"
 msgstr "Jupiter"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:222 plugins/ArchaeoLines/src/ArchaeoLines.cpp:817
+#: src/translations.h:222 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1047
 msgid "Saturn"
 msgstr "Saturnus"
 
@@ -6447,24 +6447,24 @@ msgid "Angle measure"
 msgstr "Kulman mittaus"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:527
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:532
 msgid "The Angle Measure is enabled:"
 msgstr "Kulmanmittaus on käytössä"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:529
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:534
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr ""
 "Vedä hiirtä painaen vasenta painikketta mitataksesi, vasemman napsautus "
 "poistaa mittauksen."
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:531
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:536
 msgid "Right-clicking changes the end point only."
 msgstr "Oikean painikkeen napsautus muuttaa vain mittauksen loppupistettä."
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:533
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:538
 msgid "PA="
 msgstr "AK="
 
@@ -6484,7 +6484,7 @@ msgstr "Kulmanmittaustyökalu"
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:193
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:216
 msgid "Author"
 msgstr "Tekijä"
 
@@ -6537,7 +6537,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:125
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:213
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:237
 msgid "Links"
 msgstr "Linkit"
 
@@ -6552,7 +6552,7 @@ msgstr "Linkit"
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:214
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:238
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
@@ -6574,7 +6574,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:217
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:241
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "Jos sinulla on kysyttävää, vastaus %1löytyy täältä%2"
@@ -6592,7 +6592,7 @@ msgstr "Jos sinulla on kysyttävää, vastaus %1löytyy täältä%2"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:311
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:219
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:243
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "Virheraportteja voi tehdä %1tänne%2."
@@ -6610,7 +6610,7 @@ msgstr "Virheraportteja voi tehdä %1tänne%2."
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:133
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:221
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:245
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -6667,12 +6667,10 @@ msgid "Attach end point to rotating sky"
 msgstr "Lukitse loppupiste kiertyvään taivaaseen"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:229
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:361
 msgid "Format"
 msgstr "Muoto"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:230
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:362
 msgid "Use dms format for angles"
 msgstr "Näytä kulmat dms-muodossa"
 
@@ -6686,7 +6684,7 @@ msgstr "Näytä kulmat dms-muodossa"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:480
 #: plugins/Observability/src/ui_ObservabilityDialog.h:357
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:431
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:363
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:403
 msgid "Restore default settings"
 msgstr "Palauta oletusasetukset"
 
@@ -6708,7 +6706,7 @@ msgstr "Palauta oletusasetukset"
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:284
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:462
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:302
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:365
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:405
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "Tietoja"
@@ -10583,7 +10581,7 @@ msgid "Use separate color for pulsars with glitches"
 msgstr "Käytä erillistä väriä pulsareille joilla on häiriöitä"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:58
-#: plugins/RemoteControl/src/RemoteControl.cpp:142
+#: plugins/RemoteControl/src/RemoteControl.cpp:151
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:260
 msgid "Remote Control"
 msgstr ""
@@ -10597,7 +10595,7 @@ msgid ""
 "server</a> by Stefan Frings.</p>"
 msgstr ""
 
-#: plugins/RemoteControl/src/RemoteControl.cpp:142
+#: plugins/RemoteControl/src/RemoteControl.cpp:151
 msgid "Remote control"
 msgstr ""
 
@@ -10704,47 +10702,47 @@ msgid "Exoplanets configuration window"
 msgstr "Eksoplaneettojen asetusikkuna"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:958
+#: plugins/Exoplanets/src/Exoplanets.cpp:967
 msgid "Hot"
 msgstr "Kuuma"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:960
+#: plugins/Exoplanets/src/Exoplanets.cpp:969
 msgid "Warm"
 msgstr "Lämmin"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:962
+#: plugins/Exoplanets/src/Exoplanets.cpp:971
 msgid "Cold"
 msgstr "Kylmä"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:965
+#: plugins/Exoplanets/src/Exoplanets.cpp:974
 msgid "Miniterran"
 msgstr "Miniterraaninen"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:967
+#: plugins/Exoplanets/src/Exoplanets.cpp:976
 msgid "Subterran"
 msgstr "Subterraaninen"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:969
+#: plugins/Exoplanets/src/Exoplanets.cpp:978
 msgid "Terran"
 msgstr "Terraaninen"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:971
+#: plugins/Exoplanets/src/Exoplanets.cpp:980
 msgid "Superterran"
 msgstr "Superterraaninen"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:973
+#: plugins/Exoplanets/src/Exoplanets.cpp:982
 msgid "Jovian"
 msgstr "Joviaaninen"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:975
+#: plugins/Exoplanets/src/Exoplanets.cpp:984
 msgid "Neptunian"
 msgstr "Neptuniaaninen"
 
@@ -10763,7 +10761,7 @@ msgstr "Massa"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:310
 #: plugins/Exoplanets/src/Exoplanet.cpp:314
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:796
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1026
 msgid "Sun"
 msgstr "Aurinko"
 
@@ -13612,9 +13610,9 @@ msgid "Title:"
 msgstr "Nimi:"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:59
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:192
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:193
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:364
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:200
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:201
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:404
 msgid "ArchaeoLines"
 msgstr "Arkeolinjat"
 
@@ -13622,96 +13620,104 @@ msgstr "Arkeolinjat"
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
 msgstr "Työkalu arkeo- ja etnoastronomisten linjausten tutkimiseen"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:213
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:221
 msgid "Show Line for Equinox"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:214
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:222
 msgid "Show Line for Solstices"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:215
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:223
 msgid "Show Line for Crossquarter"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:216
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:224
 msgid "Show Line for Major Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:217
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:225
 msgid "Show Line for Minor Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:218
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:226
 msgid "Show Line for Zenith Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:219
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:227
 msgid "Show Line for Nadir Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:220
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:228
 msgid "Show Line for Selected Object"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:221
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:229
 msgid "Show Line for Current Sun"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:222
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:230
 msgid "Show Line for Current Moon"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:772
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:231
+msgid "Show Line for Custom Azimuth 1"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:232
+msgid "Show Line for Custom Azimuth 2"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1002
 msgid "Equinox"
 msgstr "Päiväntasaus"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:775
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1005
 msgid "Solstice"
 msgstr "Päivänseisaus"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:778
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1008
 msgid "Crossquarter"
 msgstr "Ristineljännes"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:781
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1011
 msgid "Major Lunar Standstill"
 msgstr "Yläkuunseisaus"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:784
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1014
 msgid "Minor Lunar Standstill"
 msgstr "Alakuunseisaus"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:787
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1017
 msgid "Zenith Passage"
 msgstr "Zeniitin ohitus"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:790
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1020
 msgid "Nadir Passage"
 msgstr "Nadiirin ohitus"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:793
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:360
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1023
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:374
 msgid "Selected Object"
 msgstr "Valittu kohde"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:802
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1032
 msgid "error if you can read this"
 msgstr "virhe jos voit lukea tämän"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:805
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1035
 msgid "Mercury"
 msgstr "Merkurius"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:808
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1038
 msgid "Venus"
 msgstr "Venus"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:191
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:214
 msgid "ArchaeoLines Plug-in"
 msgstr "Arkeolinjat-laajennus"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:197
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:220
 msgid ""
 "The ArchaeoLines plugin displays any combination of declination arcs most "
 "relevant to archaeo- or ethnoastronomical studies."
@@ -13719,11 +13725,11 @@ msgstr ""
 "Arkeolinjat-laajennus näyttää valikoiman arkeo- ja etnoastronomisille "
 "tutkimuksille tärkeitä deklinaatiolinjoja."
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:198
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:221
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
 msgstr "Päiväntasausten (so. ekvaattorin) ja päivänseisausten deklinaatiot"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:199
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:222
 msgid ""
 "Declinations of the crossquarter days (days right between solstices and "
 "equinoxes)"
@@ -13731,39 +13737,39 @@ msgstr ""
 "Ristineljännesten (päiväntasausten ja -seisausten puoliväliin osuvien "
 "päivien) deklinaatiot"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:200
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:223
 msgid "Declinations of the Major Lunar Standstills"
 msgstr "Yläkuunseisausten deklinaatiot"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:201
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:224
 msgid "Declinations of the Minor Lunar Standstills"
 msgstr "Alakuunseisausten deklinaatiot"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:202
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:225
 msgid "Declination of the Zenith passage"
 msgstr "Zeniitin ohituksen deklinaatio"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:203
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:226
 msgid "Declination of the Nadir passage"
 msgstr "Nadiirin ohituksen deklinaatio"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:204
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:227
 msgid "Declination of the currently selected object"
 msgstr "Valitun kohteen deklinaatio"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:205
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:228
 msgid "Current declination of the sun"
 msgstr "Auringon nykyinen deklinaatio"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:206
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:229
 msgid "Current declination of the moon"
 msgstr "Kuun nykyinen deklinaatio"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:207
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:230
 msgid "Current declination of a naked-eye planet"
 msgstr "Paljaalla silmällä havaittavan planeetan nykyinen deklinaatio"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:208
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:231
 msgid ""
 "The lunar lines include horizon parallax effects. There are two lines each "
 "drawn, for maximum and minimum distance of the moon. Note that declination "
@@ -13775,125 +13781,160 @@ msgstr ""
 "pienimmälle ja suurimmalle etäisyydelle. Huomaa, että Kuun deklinaatio voi "
 "ylittää merkityt rajat yläkuunseisauksessa parallaksi-ilmiöiden takia."
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:290
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:235
+msgid ""
+"In addition, up to two vertical lines with arbitrary azimuth and custom "
+"label can be shown."
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:321
 msgid "Select color for equinox line"
 msgstr "Valitse päivantasauslinjan väri"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:302
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:333
 msgid "Select color for solstice lines"
 msgstr "Valitse päivänseisauslinjojen väri"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:314
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:345
 msgid "Select color for crossquarter lines"
 msgstr "Valitse ristineljänneslinjojen väri"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:326
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:357
 msgid "Select color for major standstill lines"
 msgstr "Valitse yläkuunseisauslinjojen väri"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:338
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:369
 msgid "Select color for minor standstill lines"
 msgstr "Valitse alakuunseisauslinjojen väri"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:350
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:381
 msgid "Select color for zenith passage line"
 msgstr "Valitse zeniitinohituslinjan väri"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:362
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:393
 msgid "Select color for nadir passage line"
 msgstr "Valitse nadiirinohituslinjan väri"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:374
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:405
 msgid "Select color for selected object line"
 msgstr "Valitse valitun kohteen linjan väri"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:386
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:417
 msgid "Select color for current sun line"
 msgstr "Valitse nykyisen Auringon linjan väri"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:398
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:429
 msgid "Select color for current moon line"
 msgstr "Valitse nykyisen Kuun linjan väri"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:410
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:441
 msgid "Select color for current planet line"
 msgstr "Valitse nykyisen planeetan linjan väri"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:335
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:453
+msgid "Select color for Custom Azimuth 1 line"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:465
+msgid "Select color for Custom Azimuth 2 line"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:367
 msgid "ArchaeoLines Configuration"
 msgstr "Arkeolinjojen asetukset"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:336
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:368
 msgid "ArchaeoLines Plug-in Configuration"
 msgstr "Arkeolinjat-laajennuksen asetukset"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:338
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:370
 msgid "To change colors you may have to leave fullscreen mode!"
 msgstr "Saatat joutua poistumaan kokonäyttötilasta valitaksesi värin!"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:339
-msgid "Equinox line (Equator)"
-msgstr "Päiväntasauslinja (ekvaattori)"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:340
-msgid "Solstice Lines"
-msgstr "Päivänseisauslinjat"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:341
-msgid "Crossquarter Lines"
-msgstr "Ristineljänneslinjat"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:343
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:372
 msgid "Change color"
 msgstr "Vaihda väri"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:345
-msgid "Major Lunar Standstill lines"
-msgstr "Yläkuunseisauslinjat"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:346
-msgid "Minor Lunar Standstill lines"
-msgstr "Alakuunseisauslinjat"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:347
-msgid "Declination of Zenith passage"
-msgstr "Zeniitin ohituksen deklinaatio"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:348
-msgid "Declination of Nadir passage"
-msgstr "Nadiirin ohituksen deklinaatio"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:349
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:375
 msgid "Current Sun"
 msgstr "Nykyinen Aurinko"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:350
-msgid "Current Moon"
-msgstr "Nykyinen Kuu"
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:376
+msgid "Declination of Nadir passage"
+msgstr "Nadiirin ohituksen deklinaatio"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:353
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:379
 msgid "Current Planet: None"
 msgstr "Nykyinen planeetta: ei mitään"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:354
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:380
 msgid "Current Planet: Mercury"
 msgstr "Nykyinen planeetta: Merkurius"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:355
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:381
 msgid "Current Planet: Venus"
 msgstr "Nykyinen planeetta: Venus"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:356
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:382
 msgid "Current Planet: Mars"
 msgstr "Nykyinen planeetta: Mars"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:357
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:383
 msgid "Current Planet: Jupiter"
 msgstr "Nykyinen planeetta: Jupiter"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:358
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:384
 msgid "Current Planet: Saturn"
 msgstr "Nykyinen planeetta: Saturnus"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:386
+msgid "Minor Lunar Standstill lines"
+msgstr "Alakuunseisauslinjat"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:387
+msgid "Custom Azimuth 2 Color..."
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:388
+msgid "Custom Azimuth 1"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:389
+msgid "Custom Azimuth 2"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:390
+msgid "Custom Azimuth 1 Color..."
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:392
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:395
+msgid "Enter a label for this line"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:397
+msgid "Solstice Lines"
+msgstr "Päivänseisauslinjat"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:398
+msgid "Current Moon"
+msgstr "Nykyinen Kuu"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:399
+msgid "Declination of Zenith passage"
+msgstr "Zeniitin ohituksen deklinaatio"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:400
+msgid "Crossquarter Lines"
+msgstr "Ristineljänneslinjat"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:401
+msgid "Major Lunar Standstill lines"
+msgstr "Yläkuunseisauslinjat"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:402
+msgid "Equinox line (Equator)"
+msgstr "Päiväntasauslinja (ekvaattori)"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Ekvatoriaaliasteikko"
@@ -15067,124 +15108,12 @@ msgstr "Nykyinen planeetta: Saturnus"
 #~ "päivityksistä löytyy \"ohjeita\"-ikkunan \"tietoja ohjelmasta\" -"
 #~ "välilehdeltä."
 
-#~ msgid "Show meteor showers"
-#~ msgstr "Näytä meteoriparvet"
-
-#~ msgid "Meteor Shower configuration window"
-#~ msgstr "Meteoriparvien asetusikkuna"
-
-#~ msgid "Radiant labels"
-#~ msgstr "Radianttien merkit"
-
-#~ msgid ""
-#~ "The old showers.json file is no longer compatible - using default file"
-#~ msgstr ""
-#~ "Vanha showers.json -tiedosto ei ole enää yhteensopiva - käytetään "
-#~ "oletustiedostoa"
-
-#~ msgid "real data"
-#~ msgstr "todellinen data"
-
-#~ msgid "Solar longitude is"
-#~ msgstr "Solaarinen pituusaste on"
-
-#~ msgid "Variable"
-#~ msgstr "Muuttuva"
-
-#~ msgid "Real"
-#~ msgstr "Todellinen"
-
-#~ msgid ""
-#~ "This plugin was created as project of ESA Summer of Code in Space 2013."
-#~ msgstr "Laajennus toteutettiin ESA Summer of Code in Spacen projektina 2013."
-
-#~ msgid "Meteor showers is updated"
-#~ msgstr "Meteoriparvet on päivitetty"
-
-#~ msgid "Meteor Showers Plug-in Configuration"
-#~ msgstr "Meteoriparvet-lajennuksen asetukset"
-
-#~ msgid "Update data from Internet"
-#~ msgstr "Päivitä tiedot internetistä"
-
-#~ msgid "Meteor showers"
-#~ msgstr "Meteoriparvet"
-
-#~ msgid "Active Radiant - Real Data"
-#~ msgstr "Aktiivinen radiantti - todellinen data"
-
-#~ msgid "Show labels of radiants"
-#~ msgstr "Näytä radianttien merkit"
-
-#~ msgid "Radiants for meteor showers"
-#~ msgstr "Meteoriparvien radiantit"
-
-#~ msgid "Change Color"
-#~ msgstr "Vaihda väriä"
-
-#~ msgid "Color of radiants markers"
-#~ msgstr "Radianttimerkkien väri"
-
-#~ msgid "Enable display of meteor showers at startup"
-#~ msgstr "Näytä meteoriparvet käynnistettäessä"
-
-#~ msgid "Show meteor showers button on toolbar"
-#~ msgstr "Näytä meteoriparvet-painike työkalupalkissa"
-
-#~ msgid "Search Events"
-#~ msgstr "Hakutapahtumat"
-
-#~ msgid "dd/MMM/yyyy"
-#~ msgstr "pp/kkk/vvvv"
-
-#~ msgid "Radiants"
-#~ msgstr "Radiantit"
-
 #, qt-format
 #~ msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
 #~ msgstr "Pintakirkkaus: <b>%1</b> (ekstinktiokorjattu: <b>%2</b>)"
 
 #~ msgid "Shortcut"
 #~ msgstr "Pikanäppäin"
-
-#~ msgid "Dark nebula"
-#~ msgstr "Pimeä sumu"
-
-#~ msgid "Irregular galaxy"
-#~ msgstr "Epäsäännöllinen galaksi"
-
-#~ msgid ""
-#~ "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
-#~ "use MESA (or ANGLE) version."
-#~ msgstr ""
-#~ "Puutteellinen OpenGL:n versio. Ole hyvä ja päivitä ajurit, "
-#~ "grafiikkalaitteisto tai käytä MESA (tai ANGLE) -versiota."
-
-#~ msgid "Irregular galaxies"
-#~ msgstr "Epäsäännölliset galaksit"
-
-#~ msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
-#~ msgstr "Maan ja Venuksen suurimmat elongaatiot ja kirkkaudet Marsista"
-
-#~ msgid ""
-#~ "Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
-#~ msgstr ""
-#~ "Maan ja Venuksen suurimmat elongaatiot ja kirkkaudet Marsista 2000-2003"
-
-#~ msgid ""
-#~ "Screensaver of various happenings in the Solar System. 232 events in all!"
-#~ msgstr ""
-#~ "Näytönsäästäjä aurinkokunnan erilaisista tapahtumista. Kaikkiaan 232 "
-#~ "tapahtumaa!"
-
-#~ msgid "Julian Date"
-#~ msgstr "Juliaaninen päivämäärä"
-
-#~ msgid "Modified Julian Date"
-#~ msgstr "Muokattu juliaaninen päivämäärä"
-
-#~ msgid "Show Galactic equator line"
-#~ msgstr "Näytä galaktinen ekvaattori"
 
 #~ msgid ""
 #~ "The Acronychal rise (or set) of an object happens when the object rises (or "
@@ -15208,14 +15137,6 @@ msgstr "Nykyinen planeetta: Saturnus"
 
 #~ msgid "Dates of Acronychal and Cosmical rise/set"
 #~ msgstr "Akronikaalisen ja kosmikaalisen nousun/laskun päivämäärät"
-
-#~ msgid ""
-#~ "This plugin displays meteor showers and a marker for each active and "
-#~ "inactive radiant, showing real information about its activity."
-#~ msgstr ""
-#~ "Tämä laajennus näyttää meteoriparvet ja merkinnän jokaiselle aktiivisen ja "
-#~ "epäaktiivisen parven radiantille, näyttäen todellista informaatiota sen "
-#~ "aktiivisuudesta."
 
 #~ msgid "Show names"
 #~ msgstr "Näytä nimet"
