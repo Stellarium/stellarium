@@ -398,7 +398,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
      SET(stellarium_gui_RES ${CMAKE_SOURCE_DIR}/data/gui/guiRes.qrc)
      QT5_ADD_RESOURCES(stellarium_gui_RES_CXX ${stellarium_gui_RES})
 
-     SET(extLinkerOption ${extLinkerOption} ${QT_QTSCRIPT_LIBRARY} ${OPENGL_LIBRARIES})
+     SET(extLinkerOption ${extLinkerOption} ${QT_QTSCRIPT_LIBRARY})
      SET(stellarium_lib_SRCS ${stellarium_lib_SRCS} ${stellarium_gui_SRCS} ${stellarium_UIS_H} ${stellarium_gui_RES_CXX})
 ENDIF()
 
@@ -441,15 +441,10 @@ ENDIF()
 ################################ Build main program #########################################
 #############################################################################################
 
-SET(extLinkerOption ${extLinkerOption} ${OPENGL_LIBRARIES} ${ZLIB_LIBRARIES})
+SET(extLinkerOption ${extLinkerOption} ${ZLIB_LIBRARIES})
 IF(ENABLE_MEDIA)
     # Forced linkage to Qt5MultimediaWidgets library when media support is enabled
     SET(extLinkerOption ${extLinkerOption} ${Qt5MultimediaWidgets_LIBRARIES})
-ENDIF()
-IF(WIN32 AND NOT MSVC)
-# TODO: Test if winsock is still necessary if the Telescope Control plug-in is disabled.
-# Because including it here seems to duplicate STELLARIUM_STATIC_PLUGINS_LIBRARIES
-     SET(extLinkerOption ${extLinkerOption} libwinmm.a -lws2_32)
 ENDIF()
 
 IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
@@ -468,7 +463,7 @@ ENDIF()
 IF(GENERATE_STELMAINLIB)
      ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
      TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
-     QT5_USE_MODULES(stelMain Core Concurrent Gui Network OpenGL Script Widgets PrintSupport)
+     QT5_USE_MODULES(stelMain Core Concurrent Gui Network Script Widgets PrintSupport)
      IF(ENABLE_MEDIA)
          QT5_USE_MODULES(stelMain Multimedia MultimediaWidgets)
      ENDIF()
@@ -483,9 +478,9 @@ ELSE()
      ADD_EXECUTABLE(stellarium ${stellarium_lib_SRCS} ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
      TARGET_LINK_LIBRARIES(stellarium ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
      # This will add the ANGLE lib if the Qt version supports it.
-     TARGET_LINK_LIBRARIES(stellarium ${Qt5Gui_LIBRARIES} ${Qt5Gui_OPENGL_LIBRARIES})
+     TARGET_LINK_LIBRARIES(stellarium ${Qt5Gui_LIBRARIES})
 
-     QT5_USE_MODULES(stellarium Core Concurrent Gui Network OpenGL Script Widgets PrintSupport)
+     QT5_USE_MODULES(stellarium Core Concurrent Gui Network Script Widgets PrintSupport)
      IF(ENABLE_MEDIA)
           QT5_USE_MODULES(stellarium Multimedia MultimediaWidgets)
      ENDIF()
@@ -522,7 +517,7 @@ MACRO(ADD_TEST NAME)
      SET(STELLARIUM_TESTS ${STELLARIUM_TESTS} ${NAME})
 ENDMACRO()
 
-SET(extLinkerOptionTest ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTOPENGL_LIBRARY} ${OPENGL_LIBRARIES} ${ZLIB_LIBRARIES})
+SET(extLinkerOptionTest ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY} ${ZLIB_LIBRARIES})
 
 # Custom target used to build all tests at once
 ADD_CUSTOM_TARGET(buildTests)
@@ -581,7 +576,7 @@ IF(WIN32)
      SET(tests_testStelSphereGeometry_SRCS ${tests_testStelSphereGeometry_SRCS} ${zlib_SRCS})
 ENDIF()
 ADD_EXECUTABLE(testStelSphereGeometry EXCLUDE_FROM_ALL ${tests_testStelSphereGeometry_SRCS})
-QT5_USE_MODULES(testStelSphereGeometry Core Gui OpenGL Test)
+QT5_USE_MODULES(testStelSphereGeometry Core Gui Test)
 TARGET_LINK_LIBRARIES(testStelSphereGeometry ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelSphereGeometry)
 ADD_TEST(testStelSphereGeometry)
@@ -607,7 +602,7 @@ ADD_TEST(testStelSphereGeometry)
 #     core/StelTranslator.hpp
 #     ${glues_lib_SRCS})
 #ADD_EXECUTABLE(testStelSphericalIndex EXCLUDE_FROM_ALL ${tests_testStelSphericalIndex_SRCS})
-#QT5_USE_MODULES(testStelSphericalIndex Core Gui Widgets OpenGL Script Test)
+#QT5_USE_MODULES(testStelSphericalIndex Core Gui Widgets Script Test)
 #TARGET_LINK_LIBRARIES(testStelSphericalIndex ${extLinkerOptionTest})
 #ADD_DEPENDENCIES(buildTests testStelSphericalIndex)
 
@@ -629,7 +624,7 @@ SET(tests_testStelVertexArray_SRCS
      core/StelVertexArray.hpp
 )
 ADD_EXECUTABLE(testStelVertexArray EXCLUDE_FROM_ALL ${tests_testStelVertexArray_SRCS})
-QT5_USE_MODULES(testStelVertexArray Core Gui Test OpenGL)
+QT5_USE_MODULES(testStelVertexArray Core Gui Test)
 TARGET_LINK_LIBRARIES(testStelVertexArray ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelVertexArray)
 ADD_TEST(testStelVertexArray)
