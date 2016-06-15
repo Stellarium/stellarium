@@ -1,5 +1,5 @@
 GETTEXT_CREATE_TRANSLATIONS(stellarium-remotecontrol DEFAULT_TARGET
-    en
+    de en en_GB ru
 )
 
 # Discard this target if xgettext is not installed
