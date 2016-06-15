@@ -48,7 +48,6 @@ Source: "@CMAKE_SOURCE_DIR@\AUTHORS"; DestDir: "{app}"; Flags: ignoreversion; De
 Source: "@CMAKE_SOURCE_DIR@\ChangeLog"; DestDir: "{app}"; Flags: ignoreversion; DestName: "ChangeLog.rtf"
 Source: "@QtCore_location@"; DestDir: "{app}";
 Source: "@QtGui_location@"; DestDir: "{app}";
-Source: "@QtOpenGL_location@"; DestDir: "{app}";
 Source: "@QtNetwork_location@"; DestDir: "{app}";
 Source: "@QtWidgets_location@"; DestDir: "{app}";
 Source: "@QtSql_location@"; DestDir: "{app}";

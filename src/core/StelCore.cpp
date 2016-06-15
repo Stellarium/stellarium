@@ -216,6 +216,9 @@ void StelCore::init()
 	setCurrentProjectionTypeKey(getDefaultProjectionTypeKey());
 	updateMaximumFov();
 
+	// activate DE430/431
+	initEphemeridesFunctions();
+
 	// Register all the core actions.
 	QString timeGroup = N_("Date and Time");
 	QString movementGroup = N_("Movement and Selection");
