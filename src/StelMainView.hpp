@@ -155,6 +155,8 @@ private slots:
 	void minFPSUpdate();
 
 private:
+	//! Sets the desired OpenGL format settings
+	void setOpenGLFormat() const;
 	//! provide extended OpenGL diagnostics in logfile.
 	void dumpOpenGLdiagnostics() const;
 	//! Startup diagnostics, providing test for various circumstances of bad OS/OpenGL driver combinations

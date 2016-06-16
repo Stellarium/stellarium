@@ -446,6 +446,10 @@ IF(ENABLE_MEDIA)
     # Forced linkage to Qt5MultimediaWidgets library when media support is enabled
     SET(extLinkerOption ${extLinkerOption} ${Qt5MultimediaWidgets_LIBRARIES})
 ENDIF()
+IF(WIN32 AND NOT MSVC)
+    # This library is required on MinGW builds for some native methods used in a fix in main.cpp
+     SET(extLinkerOption ${extLinkerOption} libwinmm.a)
+ENDIF()
 
 IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
      IF(RC_COMPILER_PATH)
