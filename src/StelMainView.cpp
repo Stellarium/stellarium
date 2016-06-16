@@ -183,18 +183,9 @@ public:
 	{
 		qDebug()<<"StelGLWidget constructor";
 
-        //because we always draw the full background,
-        //lets skip drawing the system background
+		//because we always draw the full background,
+		//lets skip drawing the system background
 		setAttribute(Qt::WA_OpaquePaintEvent);
-
-		//this is the place to set the desired surface format!
-		QSurfaceFormat fmt = QSurfaceFormat::defaultFormat();
-		fmt.setRenderableType(QSurfaceFormat::OpenGL);
-		fmt.setMajorVersion(2);
-		fmt.setMinorVersion(1);
-
-		qDebug()<<"Desired format: "<<fmt;
-		setFormat(fmt);
 	}
 
 protected:
@@ -211,8 +202,8 @@ protected:
 		if (qApp->property("onetime_compat33")==true)
 		{
 			// This may not return the version number set previously!
-            qDebug() << "StelGLWidget context format version:" << context()->format().majorVersion() << "." << context()->format().minorVersion();
-            qDebug() << "StelGLWidget has CompatibilityProfile:" << (context()->format().profile()==QSurfaceFormat::CompatibilityProfile ? "yes" : "no") << "(" <<context()->format().profile() << ")";
+			qDebug() << "StelGLWidget context format version:" << context()->format().majorVersion() << "." << context()->format().minorVersion();
+			qDebug() << "StelGLWidget has CompatibilityProfile:" << (context()->format().profile()==QSurfaceFormat::CompatibilityProfile ? "yes" : "no") << "(" <<context()->format().profile() << ")";
 		}
 
 		parent->init();
@@ -247,7 +238,7 @@ public:
 	}
 
 protected:
-	void StelGraphicsScene::drawBackground(QPainter *painter, const QRectF &rect) Q_DECL_OVERRIDE
+	void drawBackground(QPainter *painter, const QRectF &rect) Q_DECL_OVERRIDE
 	{
 		Q_UNUSED(painter);
 		Q_UNUSED(rect);
@@ -265,7 +256,7 @@ protected:
 		parent->drawEnded();
 	}
 
-	void StelGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE
+	void mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE
 	{
 		QGraphicsScene::mousePressEvent(event);
 
@@ -280,7 +271,7 @@ protected:
 		}
 	}
 
-	void StelGraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE
+	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE
 	{
 		QGraphicsScene::mouseReleaseEvent(event);
 
@@ -295,7 +286,7 @@ protected:
 		}
 	}
 
-	void StelGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE
+	void mouseMoveEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE
 	{
 		QGraphicsScene::mouseMoveEvent(event);
 
@@ -311,7 +302,7 @@ protected:
 		}
 	}
 
-	void StelGraphicsScene::wheelEvent(QGraphicsSceneWheelEvent *event) Q_DECL_OVERRIDE
+	void wheelEvent(QGraphicsSceneWheelEvent *event) Q_DECL_OVERRIDE
 	{
 		QGraphicsScene::wheelEvent(event);
 
@@ -328,7 +319,7 @@ protected:
 		}
 	}
 
-	void StelGraphicsScene::keyPressEvent(QKeyEvent* event) Q_DECL_OVERRIDE
+	void keyPressEvent(QKeyEvent* event) Q_DECL_OVERRIDE
 	{
 		// Try to trigger a global shortcut.
 		StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
@@ -341,7 +332,7 @@ protected:
 		QGraphicsScene::keyPressEvent(event);
 	}
 
-	void StelGraphicsScene::keyReleaseEvent(QKeyEvent* event) Q_DECL_OVERRIDE
+	void keyReleaseEvent(QKeyEvent* event) Q_DECL_OVERRIDE
 	{
 		parent->thereWasAnEvent(); // Refresh screen ASAP
 		QGraphicsScene::keyReleaseEvent(event);
@@ -363,8 +354,9 @@ private:
 			case QEvent::GraphicsSceneMouseMove:
 				t = QEvent::MouseMove;
 				break;
+			default:
+				qFatal("Invalid mouse event type %d",event->type());
 		}
-		Q_ASSERT(t!=QEvent::None);
 
 		QPointF pos = event->scenePos();
 		//Y needs to be inverted
@@ -410,6 +402,8 @@ StelMainView::StelMainView(QSettings* settings)
 
 	lastEventTimeSec = 0;
 
+	//set the surface format BEFORE creating the widget
+	setOpenGLFormat();
 	glWidget = new StelGLWidget(this);
 	setViewport(glWidget);
 
@@ -446,6 +440,20 @@ void StelMainView::focusSky() {
 StelMainView::~StelMainView()
 {
 	StelApp::deinitStatic();
+}
+
+void StelMainView::setOpenGLFormat() const
+{
+	//this is the place to set the desired surface format!
+	QSurfaceFormat fmt = QSurfaceFormat::defaultFormat();
+	fmt.setRenderableType(QSurfaceFormat::OpenGL);
+	fmt.setMajorVersion(2);
+	fmt.setMinorVersion(1);
+	//it seems that VSync is now enabled by default (at least on Windows), uncomment this to try to disable it
+	//fmt.setSwapInterval(0);
+
+	qDebug()<<"Desired surface format: "<<fmt;
+	QSurfaceFormat::setDefaultFormat(fmt);
 }
 
 void StelMainView::init()
@@ -581,7 +589,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	qDebug() << "Driver version string:" << glDriver;
 	qDebug() << "GL vendor is" << QString(reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
 	QString glRenderer(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
-	qDebug() << "GL renderer is" << glRenderer;	
+	qDebug() << "GL renderer is" << glRenderer;
 
 	// Minimal required version of OpenGL for Qt5 is 2.1 and OpenGL Shading Language may be 1.20 (or OpenGL ES is 2.0 and GLSL ES is 1.0).
 	// As of V0.13.0..1, we use GLSL 1.10/GLSL ES 1.00 (implicitly, by omitting a #version line), but in case of using ANGLE we need hardware
@@ -609,7 +617,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 			qWarning() << "Oops... Insufficient OpenGL version. Mesa failed! Please send a bug report.";
 
 		QMessageBox::critical(0, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, graphics hardware, or use --angle-mode (or --mesa-mode) option."), QMessageBox::Abort, QMessageBox::Abort);
-		#else		
+		#else
 		qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, or graphics hardware.";
 		QMessageBox::critical(0, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, or graphics hardware."), QMessageBox::Abort, QMessageBox::Abort);
 		#endif
