@@ -107,8 +107,8 @@ private:
 
 	//! Get the translated name for the Constellation.
 	QString getNameI18n() const {return nameI18;}
-	//! Get the English name for the Constellation (returns the abbreviation).
-	QString getEnglishName() const {return abbreviation;}
+	//! Get the English name for the Constellation.
+	QString getEnglishName() const {return englishName;}
 	//! Get the short name for the Constellation (returns the abbreviation).
 	QString getShortName() const {return abbreviation;}
 	//! Draw the lines for the Constellation.
