@@ -61,11 +61,7 @@ private:
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString a description of the constellation.
-	virtual QString getInfoString(const StelCore*, const InfoStringGroup& flags) const
-	{
-		if (flags&Name) return getNameI18n() + "(" + getShortName() + ")";
-		else return "";
-	}
+	virtual QString getInfoString(const StelCore*, const InfoStringGroup& flags) const;
 
 	//! Get the module/object type string.
 	//! @return "Constellation"
