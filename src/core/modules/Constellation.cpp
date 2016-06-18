@@ -27,6 +27,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelTranslator.hpp"
 #include "ConstellationMgr.hpp"
 
 #include <algorithm>
@@ -277,6 +278,29 @@ bool Constellation::checkVisibility() const
 	}
 	return visible;
 }
+
+QString Constellation::getInfoString(const StelCore *core, const InfoStringGroup &flags) const
+{
+	Q_UNUSED(core);
+	QString str;
+	QTextStream oss(&str);
+
+	if (flags&Name)
+	{
+		oss << "<h2>" << getNameI18n();
+		if (!getShortName().isEmpty())
+			oss << " (" << getShortName() << ")";
+		oss << "</h2>";
+	}
+
+	if (flags&ObjectType)
+		oss << q_("Type: <b>%1</b>").arg(q_("constellation")) << "<br />";
+
+	postProcessInfoString(str, flags);
+
+	return str;
+}
+
 
 StelObjectP Constellation::getBrightestStarInConstellation(void) const
 {
