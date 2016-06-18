@@ -119,6 +119,8 @@ void RemoteControlDialog::setAboutHtml(void)
 		"curl -d     'id=myScript.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&amp;1\n"
 		"</pre>";
 	html += q_("This allows triggering automatic show setups for museums etc.") + "</p>";
+	html += "<p>" + q_("This plugin was developed during ESA SoCiS 2015.") + "</p>";
+	html += "<p>" + q_("This plugin uses the %1QtWebApp HTTP server%2 by Stefan Frings.").arg("<a href=\"http://stefanfrings.de/qtwebapp/index-en.html\">").arg("</a>") + "</p>";
 
 	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + QString(q_("Further information can be found in the %1developer documentation%2.")).arg("<a href=\"http://stellarium.org/doc-plugins/head/\">").arg("</a>") + "</p>";
