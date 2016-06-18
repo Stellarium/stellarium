@@ -86,7 +86,8 @@ ENDIF()
 IF(WIN32)
      IF(NOT MSVC)
           SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fexceptions -fident -mthreads -Wno-unused-parameter -Wno-unused-result")
-          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -fexceptions -fident -mthreads -Wno-unused-parameter -Wno-unused-result")
+          # Qt 5.7 requires C++11 support
+          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -fexceptions -fident -mthreads -Wno-unused-parameter -Wno-unused-result")
           SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fexceptions -fident -mthreads -mwindows")
      ELSE()
           # _USE_MATH_DEFINES Prevent MSVC from complaining about M_PI no matter where <cmath> is included first
@@ -96,7 +97,8 @@ IF(WIN32)
      ENDIF()
 ELSE()
      SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wno-unused-parameter")
-     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-unused-parameter -Wno-unused-result")
+     # Qt 5.7 requires C++11 support
+     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra -Wno-unused-parameter -Wno-unused-result")
 ENDIF()
 
 # CMake 3.0.0 the CMAKE_<LANG>_COMPILER_ID value for Apple-provided Clang is now AppleClang
@@ -300,7 +302,7 @@ IF(NOT STELLARIUM_RELEASE_BUILD)
     # Hack until CMake detection for Bazaar is finished
     EXECUTE_PROCESS(COMMAND bzr revno WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE BZR_REVISION OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE BZR_ERROR)
     EXECUTE_PROCESS(COMMAND bzr version-info --custom --template={branch_nick} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE BZR_BRANCH OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE BZR_ERROR)
-    IF(BZR_REVISION AND ("${BZR_ERROR}" STREQUAL ""))
+    IF(BZR_REVISION)
         SET(PACKAGE_VERSION "${VERSION}.${BZR_REVISION}")
         ADD_DEFINITIONS(-DBZR_REVISION="${BZR_REVISION}")
         ADD_DEFINITIONS(-DBZR_BRANCH="${BZR_BRANCH}")
