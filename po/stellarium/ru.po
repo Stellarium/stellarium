@@ -7,15 +7,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-14 19:17+0700\n"
-"PO-Revision-Date: 2016-06-14 12:37+0000\n"
+"POT-Creation-Date: 2016-06-19 00:27+0700\n"
+"PO-Revision-Date: 2016-06-18 17:49+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-15 05:31+0000\n"
+"X-Launchpad-Export-Date: 2016-06-19 05:29+0000\n"
 "X-Generator: Launchpad (build 18097)\n"
+
+#: src/core/modules/Constellation.cpp:297 src/core/modules/Nebula.cpp:188
+#: src/core/modules/Planet.cpp:226 src/core/modules/MinorPlanet.cpp:213
+#: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:181
+#: src/core/modules/StarWrapper.cpp:184
+#: plugins/Satellites/src/Satellite.cpp:270
+#: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
+#: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:269
+#, qt-format
+msgid "Type: <b>%1</b>"
+msgstr "Тип: <b>%1</b>"
+
+#: src/core/modules/Constellation.cpp:297
+msgid "constellation"
+msgstr "созвездие"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:378
 #: src/core/modules/GridLinesMgr.cpp:950 src/core/modules/LandscapeMgr.cpp:414
@@ -220,33 +235,23 @@ msgstr "Названия"
 msgid "Light pollution data from locations database"
 msgstr "Данные о засветке из базы местоположений"
 
-#: src/core/modules/LandscapeMgr.cpp:705
+#: src/core/modules/LandscapeMgr.cpp:706
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:448
 msgid "Author: "
 msgstr "Автор: "
 
-#: src/core/modules/LandscapeMgr.cpp:711
+#: src/core/modules/LandscapeMgr.cpp:712
 msgid "Location: "
 msgstr "Местоположение: "
 
-#: src/core/modules/LandscapeMgr.cpp:714
+#: src/core/modules/LandscapeMgr.cpp:715
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 м"
 
-#: src/core/modules/LandscapeMgr.cpp:719 src/ui_astroCalcDialog.h:380
+#: src/core/modules/LandscapeMgr.cpp:720 src/ui_astroCalcDialog.h:380
 msgid "Celestial body:"
 msgstr "Небесное тело:"
-
-#: src/core/modules/Nebula.cpp:188 src/core/modules/Planet.cpp:226
-#: src/core/modules/MinorPlanet.cpp:213 src/core/modules/StarWrapper.cpp:53
-#: src/core/modules/StarWrapper.cpp:181 src/core/modules/StarWrapper.cpp:184
-#: plugins/Satellites/src/Satellite.cpp:270
-#: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
-#: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:269
-#, qt-format
-msgid "Type: <b>%1</b>"
-msgstr "Тип: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:190 src/core/modules/Comet.cpp:176
 #: plugins/Novae/src/Nova.cpp:133 plugins/Pulsars/src/Pulsar.cpp:166
@@ -1181,12 +1186,12 @@ msgstr "Отразить по горизонтали"
 msgid "Flip scene vertically"
 msgstr "Отразить по вертикали"
 
-#: src/core/StelCore.cpp:1766
+#: src/core/StelCore.cpp:1774
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Коррекция отключена. Используйте только если вы знаете, что вы делаете!"
 
-#: src/core/StelCore.cpp:1769
+#: src/core/StelCore.cpp:1777
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1198,7 +1203,7 @@ msgstr ""
 "Эйнштейна подтверждена древними солнечными затмениями</em> (%1). Подробности "
 "смотрите %2здесь%3."
 
-#: src/core/StelCore.cpp:1772
+#: src/core/StelCore.cpp:1780
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1207,7 +1212,7 @@ msgstr ""
 "Это эмпирическое уравнение было опубликовано Г. М. Клеменсом в статье <em>О "
 "системе астрономических констант</em> (%1)."
 
-#: src/core/StelCore.cpp:1775
+#: src/core/StelCore.cpp:1783
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1220,7 +1225,7 @@ msgstr ""
 "его книге <em>Астрономические формулы для калькуляторов</em>. Кроме того эта "
 "формула используется в компьютерной программе SunTracker Pro."
 
-#: src/core/StelCore.cpp:1779
+#: src/core/StelCore.cpp:1787
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1230,7 +1235,7 @@ msgstr ""
 "<em>Астрономических эфемеридах</em> и в <em>Каноне солнечных затмений</em> "
 "Муке и Меёса (1983)."
 
-#: src/core/StelCore.cpp:1783
+#: src/core/StelCore.cpp:1791
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1241,7 +1246,7 @@ msgstr ""
 "5 - и 10-дневных интервалах от 601 г. до н.э. по 1649 г. н.э. Это же "
 "соотношение было также неявно принято в таблице сизигий Голдштейна (1973)."
 
-#: src/core/StelCore.cpp:1787
+#: src/core/StelCore.cpp:1795
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1251,7 +1256,7 @@ msgstr ""
 "Это уравнение было опубликовано П. М. Мюллером и Ф. Р. Стивенсоном в статье "
 "<em>Ускорение Земли и Луны из ранних астрономических наблюдений</em> (%1)."
 
-#: src/core/StelCore.cpp:1790
+#: src/core/StelCore.cpp:1798
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1260,7 +1265,7 @@ msgstr ""
 "Это уравнение было опубликовано Ф. Р. Стивенсоном в статье "
 "<em>Дотелескопические астрономические наблюдения</em> (%1)."
 
-#: src/core/StelCore.cpp:1793
+#: src/core/StelCore.cpp:1801
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1273,7 +1278,7 @@ msgstr ""
 "аппроксимация для коррекции дельта T E.T.-U.T. за период 1800-1975 г.г.</em> "
 "(%1) как аппроксимация данных, опубликованным Броувером (1952)."
 
-#: src/core/StelCore.cpp:1796
+#: src/core/StelCore.cpp:1804
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1283,7 +1288,7 @@ msgstr ""
 "<em>Планетные программы и таблицы с -4000 по +2800 годы</em> (1986) и в "
 "компьютерной программе-планетарии RedShift."
 
-#: src/core/StelCore.cpp:1799
+#: src/core/StelCore.cpp:1807
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1294,12 +1299,12 @@ msgstr ""
 "<em>Долгосрочные изменения вращения Земли с 700 г. до н.э. до 1980 г. "
 "н.э.</em> (%1)."
 
-#: src/core/StelCore.cpp:1802
+#: src/core/StelCore.cpp:1810
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "Этот алгоритм используется в компьютерной программе-планетарии Guide 7."
 
-#: src/core/StelCore.cpp:1805
+#: src/core/StelCore.cpp:1813
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -1309,7 +1314,7 @@ msgstr ""
 "солнечных затмений: 1986-2035</em> (1987) и его <em>Пятидесятилетнем каноне "
 "лунных затмений: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:1808
+#: src/core/StelCore.cpp:1816
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -1319,7 +1324,7 @@ msgstr ""
 "солнечном затмении за период между 2137 годом до нашей эры и 1715 годом "
 "нашей эры."
 
-#: src/core/StelCore.cpp:1811
+#: src/core/StelCore.cpp:1819
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1332,7 +1337,7 @@ msgstr ""
 "г.г.</em> (%1) как аппроксимация данных, приведённых Стивенсоном и Моррисом "
 "(1984)."
 
-#: src/core/StelCore.cpp:1814
+#: src/core/StelCore.cpp:1822
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -1342,7 +1347,7 @@ msgstr ""
 "версии лунной теории ELP 2000-85 в их книге <em>Лунные таблицы и программы с "
 "4000 г. до н.э. до 8000 г. н.э.</em> (1991)."
 
-#: src/core/StelCore.cpp:1817
+#: src/core/StelCore.cpp:1825
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1353,7 +1358,7 @@ msgstr ""
 "статье <em>Долгосрочные флуктуации во вращении Земли: с 700 г. до н.э. до "
 "1990 г. н.э.</em> (%1)."
 
-#: src/core/StelCore.cpp:1820
+#: src/core/StelCore.cpp:1828
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1362,7 +1367,7 @@ msgstr ""
 "Ф. Р. Стивенсон опубликовал эту формулу в своей книге <em>Исторические "
 "затмения и вращение Земли</em> (%1)."
 
-#: src/core/StelCore.cpp:1823
+#: src/core/StelCore.cpp:1831
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1373,7 +1378,7 @@ msgstr ""
 "Шапрон, Шапрон-Таузи и Франко (1997) для дат за пределами диапазона "
 "1620..2000."
 
-#: src/core/StelCore.cpp:1826
+#: src/core/StelCore.cpp:1834
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1382,7 +1387,7 @@ msgstr ""
 "Группа Динамики Солнечной Системы Лаборатории Реактивного Движения (JPL) "
 "NASA использует эут формулу на их интерактивном вебсайте %1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:1829
+#: src/core/StelCore.cpp:1837
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1391,7 +1396,7 @@ msgstr ""
 "Этот полином был опубликован Ж. Меёсом и Л. Симонсом в статье "
 "<em>Полиномиальное приближение к дельта T, 1620-2000 Н.Э.</em> (%1)."
 
-#: src/core/StelCore.cpp:1832
+#: src/core/StelCore.cpp:1840
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1401,7 +1406,7 @@ msgstr ""
 "персональном компьютере</em> (2000) представлен простой полином 3-го "
 "порядка, подходящий для недавнего прошлого."
 
-#: src/core/StelCore.cpp:1835
+#: src/core/StelCore.cpp:1843
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1413,7 +1418,7 @@ msgstr ""
 "(2002). Он основан на данных из книги Жана Меёса <em>Астрономические "
 "алгоритмы </em> (1991)."
 
-#: src/core/StelCore.cpp:1838
+#: src/core/StelCore.cpp:1846
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1424,7 +1429,7 @@ msgstr ""
 "статье <em>Исторические значения ошибки земных часов %1T и расчёт "
 "затмений</em> (%2) с добавлениямм в (%3)."
 
-#: src/core/StelCore.cpp:1841
+#: src/core/StelCore.cpp:1849
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1437,7 +1442,7 @@ msgstr ""
 "косинусом и квадратным уравнением. Это уравнение основано на возможной "
 "периодичности, описанной Стивенсоном (%2). Подробнее смотрите %3здесь%4."
 
-#: src/core/StelCore.cpp:1844 src/core/StelCore.cpp:1847
+#: src/core/StelCore.cpp:1852 src/core/StelCore.cpp:1855
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1453,15 +1458,15 @@ msgstr ""
 "используется для расчёта солнечных, лунных и планетных эфемерид в программе "
 "SOLEX."
 
-#: src/core/StelCore.cpp:1844
+#: src/core/StelCore.cpp:1852
 msgid "Used by default."
 msgstr "Используется по умолчанию."
 
-#: src/core/StelCore.cpp:1847
+#: src/core/StelCore.cpp:1855
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "ИСПРАВЛЕННАЯ ВЕРСИЯ БЕЗ ДОБАВЛЕНИЯ ЛУННОГО УСКОРЕНИЯ."
 
-#: src/core/StelCore.cpp:1850
+#: src/core/StelCore.cpp:1858
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1472,7 +1477,7 @@ msgstr ""
 "(1984), было опубликовано в статье <em>Древние затмения и датировка падения "
 "Вавилона</em> (%1)."
 
-#: src/core/StelCore.cpp:1853
+#: src/core/StelCore.cpp:1861
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1484,7 +1489,7 @@ msgstr ""
 "полиноминальном приближении для дельта Т</em> (%1) и пересмотрено Саной "
 "Исламом в 2013 году."
 
-#: src/core/StelCore.cpp:1856
+#: src/core/StelCore.cpp:1864
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1495,7 +1500,7 @@ msgstr ""
 "Султане и Фахима Зайди была опубликована в <em> Дельта T: полиномиальная "
 "аппроксимация для период времени 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:1859
+#: src/core/StelCore.cpp:1867
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1504,15 +1509,15 @@ msgstr ""
 "Это квадратичная формула для вычисления %1T с коэффициентами, заданными "
 "пользователем."
 
-#: src/core/StelCore.cpp:1862 src/core/SimbadSearcher.cpp:151
+#: src/core/StelCore.cpp:1870 src/core/SimbadSearcher.cpp:151
 msgid "Error"
 msgstr "Ошибка"
 
-#: src/core/StelCore.cpp:1912
+#: src/core/StelCore.cpp:1920
 msgid "with meaningless values outside this range"
 msgstr "с бессмысленным значения вне этого диапазона"
 
-#: src/core/StelCore.cpp:1938
+#: src/core/StelCore.cpp:1946
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -1520,23 +1525,23 @@ msgstr ""
 "со средней ошибкой менее секунды, максимальной ошибкой в 1,9 сек и "
 "бессмысленным значения вне этого диапазона"
 
-#: src/core/StelCore.cpp:1960 src/core/StelCore.cpp:1965
-#: src/core/StelCore.cpp:1993 src/core/StelCore.cpp:1998
-#: src/core/StelCore.cpp:2003
+#: src/core/StelCore.cpp:1968 src/core/StelCore.cpp:1973
+#: src/core/StelCore.cpp:2001 src/core/StelCore.cpp:2006
+#: src/core/StelCore.cpp:2011
 msgid "with zero values outside this range"
 msgstr "с нулевым значением вне этого диапазона"
 
-#: src/core/StelCore.cpp:1970
+#: src/core/StelCore.cpp:1978
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "с типичной 1-секундной точностью и нулевым значением вне этого диапазона"
 
-#: src/core/StelCore.cpp:2013
+#: src/core/StelCore.cpp:2021
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Допустимый диапазон применения: между %1 и %2 годами, %3."
 
-#: src/core/StelCore.cpp:2015
+#: src/core/StelCore.cpp:2023
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Допустимый диапазон применения: между %1 и %2 годами."
@@ -2605,23 +2610,23 @@ msgstr "Долгота"
 msgid "Latitude"
 msgstr "Широта"
 
-#: src/gui/SearchDialog.cpp:579
+#: src/gui/SearchDialog.cpp:580
 msgid "Simbad Lookup Error"
 msgstr "Ошибка поиска SIMBAD"
 
-#: src/gui/SearchDialog.cpp:587
+#: src/gui/SearchDialog.cpp:588
 msgid "Simbad Lookup"
 msgstr "Поиск SIMBAD"
 
-#: src/gui/SearchDialog.cpp:768
+#: src/gui/SearchDialog.cpp:769
 msgid "University of Strasbourg (France)"
 msgstr "Университет Страсбурга (Франция)"
 
-#: src/gui/SearchDialog.cpp:769
+#: src/gui/SearchDialog.cpp:770
 msgid "Harvard University (USA)"
 msgstr "Гарвардский университет (США)"
 
-#: src/gui/SearchDialog.cpp:842
+#: src/gui/SearchDialog.cpp:843
 msgid "Paste and Search"
 msgstr "Вставить и поискать"
 
@@ -3276,7 +3281,7 @@ msgid "Trees"
 msgstr "Деревья"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:210 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1029
+#: src/translations.h:210 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1031
 msgid "Moon"
 msgstr "Луна"
 
@@ -3296,17 +3301,17 @@ msgid "Garching"
 msgstr "Гархинг"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:218 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1041
+#: src/translations.h:218 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1043
 msgid "Mars"
 msgstr "Марс"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:220 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1044
+#: src/translations.h:220 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1046
 msgid "Jupiter"
 msgstr "Юпитер"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:222 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1047
+#: src/translations.h:222 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1049
 msgid "Saturn"
 msgstr "Сатурн"
 
@@ -6582,7 +6587,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:136
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:123
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:125
@@ -6598,7 +6603,7 @@ msgstr "Ссылки"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:137
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:127
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:238
@@ -6619,7 +6624,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:140
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:156
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:128
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:130
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
@@ -6637,7 +6642,7 @@ msgstr "Если у вас есть вопрос, то получить отве
 #: plugins/Novae/src/gui/NovaeDialog.cpp:142
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:135
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:158
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:130
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:132
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:311
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
@@ -6655,7 +6660,7 @@ msgstr "Сообщить об ошибке можно %1здесь%2."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:144
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:132
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:133
@@ -6669,7 +6674,7 @@ msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin and its history, you "
@@ -7480,92 +7485,92 @@ msgstr ""
 "умолчанию"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1791
+#: plugins/Satellites/src/Satellites.cpp:1793
 msgid "visual"
 msgstr "визуальные"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1793
+#: plugins/Satellites/src/Satellites.cpp:1795
 msgid "scientific"
 msgstr "научные"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1795
+#: plugins/Satellites/src/Satellites.cpp:1797
 msgid "communications"
 msgstr "коммуникационные"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1797
+#: plugins/Satellites/src/Satellites.cpp:1799
 msgid "navigation"
 msgstr "навигационные"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1799
+#: plugins/Satellites/src/Satellites.cpp:1801
 msgid "amateur"
 msgstr "любительские"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1801
+#: plugins/Satellites/src/Satellites.cpp:1803
 msgid "weather"
 msgstr "метеоспутники"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1803
+#: plugins/Satellites/src/Satellites.cpp:1805
 msgid "geostationary"
 msgstr "геостационарные"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1805
+#: plugins/Satellites/src/Satellites.cpp:1807
 msgid "non-operational"
 msgstr "нерабочие"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1807
+#: plugins/Satellites/src/Satellites.cpp:1809
 msgid "gps"
 msgstr "GPS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:1809
+#: plugins/Satellites/src/Satellites.cpp:1811
 msgid "glonass"
 msgstr "ГЛОНАСС"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:1811
+#: plugins/Satellites/src/Satellites.cpp:1813
 msgid "galileo"
 msgstr "Галилео"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1813
+#: plugins/Satellites/src/Satellites.cpp:1815
 msgid "iridium"
 msgstr "иридиумы"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:1815
+#: plugins/Satellites/src/Satellites.cpp:1817
 msgid "stations"
 msgstr "станции"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:1817
+#: plugins/Satellites/src/Satellites.cpp:1819
 msgid "education"
 msgstr "учебные"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:1819
+#: plugins/Satellites/src/Satellites.cpp:1821
 msgid "observatory"
 msgstr "обсерватории"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1830
+#: plugins/Satellites/src/Satellites.cpp:1832
 msgid "The Hubble Space Telescope"
 msgstr "Космический телескоп им. Э. Хаббла"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1832
+#: plugins/Satellites/src/Satellites.cpp:1834
 msgid "The International Space Station"
 msgstr "Международная космическая станция"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1834
+#: plugins/Satellites/src/Satellites.cpp:1836
 msgid "China's first space station"
 msgstr "Первая китайская космическая станция"
 
@@ -10863,21 +10868,20 @@ msgid "Use separate color for pulsars with glitches"
 msgstr "Использовать отдельный цвет для пульсаров со сбоями"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:58
-#: plugins/RemoteControl/src/RemoteControl.cpp:151
+#: plugins/RemoteControl/src/RemoteControl.cpp:147
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:260
 msgid "Remote Control"
 msgstr "Дистанционное управление"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:61
 msgid ""
-"<p>Provides remote control functionality using a webserver interface.</p> "
-"<p>See manual for detailed description.</p><br/><p>This plugin was developed "
-"during ESA SoCiS 2015.</p><p>This plugin uses the <a "
-"href=\"http://stefanfrings.de/qtwebapp/index-en.html\">QtWebApp HTTP "
-"server</a> by Stefan Frings.</p>"
+"Provides remote control functionality using a webserver interface. See "
+"manual for detailed description."
 msgstr ""
+"Предоставляет функцию дистанционного управления через интерфейс веб-сервера. "
+"Смотри подробное описание в руководстве."
 
-#: plugins/RemoteControl/src/RemoteControl.cpp:151
+#: plugins/RemoteControl/src/RemoteControl.cpp:147
 msgid "Remote control"
 msgstr "Дистанционное управление"
 
@@ -10890,6 +10894,9 @@ msgid ""
 "The Remote Control plugin provides a web interface to allow state changes "
 "and triggering scripts using a connected webbrowser."
 msgstr ""
+"Плагин дистанционного управления предоставляет веб-интерфейс для изменения "
+"состояний элементов управления и запуска скриптов с помощью подключенного "
+"веб-браузера."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:115
 msgid "It is also possible to send commands via command line, e.g.."
@@ -10901,17 +10908,27 @@ msgid "This allows triggering automatic show setups for museums etc."
 msgstr ""
 "Это позволяет запуск автоматических шоу на установках для музеев и т.д."
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:124
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:122
+msgid "This plugin was developed during ESA SoCiS 2015."
+msgstr "Этот плагин был разработан во время SoCiS 2015 ЕКА."
+
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:123
+#, qt-format
+msgid "This plugin uses the %1QtWebApp HTTP server%2 by Stefan Frings."
+msgstr "Этот плагин использует %1HTTP сервер QtWebApp%2 Стефана Фрингса."
+
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:126
 #, qt-format
 msgid "Further information can be found in the %1developer documentation%2."
 msgstr ""
+"Дополнительную информацию можно найти в %1документации разработчика%2."
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:173
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:175
 #, qt-format
 msgid "Listening on %1, IP: "
-msgstr ""
+msgstr "Слушает на %1, IP: "
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:178
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:180
 msgid "Not active."
 msgstr "Не активен."
 
@@ -11048,7 +11065,7 @@ msgstr "Масса"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:310
 #: plugins/Exoplanets/src/Exoplanet.cpp:314
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1026
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1028
 msgid "Sun"
 msgstr "Солнце"
 
@@ -12508,7 +12525,7 @@ msgid "The current catalog of Meteor Showers is invalid!"
 msgstr "Текущий каталог метеорных потоков неверный!"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:559
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:563
 msgid "Meteor Showers"
 msgstr "Метеорные потоки"
 
@@ -12533,7 +12550,7 @@ msgstr "Показать диалог поиска"
 msgid "Using the default Meteor Showers catalog."
 msgstr "Используется каталог метеорных потоков по умолчанию."
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:563
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:567
 msgid ""
 "<p>This plugin enables you to simulate periodic meteor showers and to "
 "display a marker for each active and inactive radiant.</p><p>By a single "
@@ -14041,8 +14058,8 @@ msgid "Title:"
 msgstr "Название:"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:59
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:200
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:201
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:202
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:203
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:404
 msgid "ArchaeoLines"
 msgstr "Археолинии"
@@ -14051,96 +14068,96 @@ msgstr "Археолинии"
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
 msgstr "Инструмент для исследований архео-/этноастрономических ориентаций"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:221
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:223
 msgid "Show Line for Equinox"
 msgstr "Показать линию равноденствия"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:222
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:224
 msgid "Show Line for Solstices"
 msgstr "Показать линию солнцестояния"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:223
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:225
 msgid "Show Line for Crossquarter"
 msgstr "Показать линию пересечения четверти"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:224
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:226
 msgid "Show Line for Major Standstill"
 msgstr "Показать линию больших лунных остановок"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:225
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:227
 msgid "Show Line for Minor Standstill"
 msgstr "Показать линию малых лунных остановок"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:226
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:228
 msgid "Show Line for Zenith Passage"
 msgstr "Показать линию прохождения зенита"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:227
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:229
 msgid "Show Line for Nadir Passage"
 msgstr "Показать линию прохождения надира"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:228
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:230
 msgid "Show Line for Selected Object"
 msgstr "Показать линию выбранного объекта"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:229
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:231
 msgid "Show Line for Current Sun"
 msgstr "Показать линию текущего Солнца"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:230
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:232
 msgid "Show Line for Current Moon"
 msgstr "Показать линию текущей Луны"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:231
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:233
 msgid "Show Line for Custom Azimuth 1"
 msgstr "Выбрать цвет линии пользовательского азимута 2"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:232
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:234
 msgid "Show Line for Custom Azimuth 2"
 msgstr "Показать линию пользовательского азимута 2"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1002
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1004
 msgid "Equinox"
 msgstr "Равноденствие"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1005
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1007
 msgid "Solstice"
 msgstr "Солнцестояние"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1008
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1010
 msgid "Crossquarter"
 msgstr "Пересечение четверти"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1011
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1013
 msgid "Major Lunar Standstill"
 msgstr "Большая лунная остановка"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1014
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1016
 msgid "Minor Lunar Standstill"
 msgstr "Малая лунная остановка"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1017
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1019
 msgid "Zenith Passage"
 msgstr "Прохождение зенита"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1020
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1022
 msgid "Nadir Passage"
 msgstr "Прохождение надира"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1023
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1025
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:374
 msgid "Selected Object"
 msgstr "Выделенный объект"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1032
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1034
 msgid "error if you can read this"
 msgstr "ошибка, если вы можете прочитать это"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1035
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1037
 msgid "Mercury"
 msgstr "Меркурий"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1038
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1040
 msgid "Venus"
 msgstr "Венера"
 

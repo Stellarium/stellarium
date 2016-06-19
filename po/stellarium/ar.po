@@ -7,15 +7,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-14 19:17+0700\n"
+"POT-Creation-Date: 2016-06-19 00:27+0700\n"
 "PO-Revision-Date: 2015-11-30 04:20+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-15 05:17+0000\n"
+"X-Launchpad-Export-Date: 2016-06-19 05:15+0000\n"
 "X-Generator: Launchpad (build 18097)\n"
+
+#: src/core/modules/Constellation.cpp:297 src/core/modules/Nebula.cpp:188
+#: src/core/modules/Planet.cpp:226 src/core/modules/MinorPlanet.cpp:213
+#: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:181
+#: src/core/modules/StarWrapper.cpp:184
+#: plugins/Satellites/src/Satellite.cpp:270
+#: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
+#: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:269
+#, qt-format
+msgid "Type: <b>%1</b>"
+msgstr "‎النوع:‎ <b>%1</b>"
+
+#: src/core/modules/Constellation.cpp:297
+msgid "constellation"
+msgstr ""
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:378
 #: src/core/modules/GridLinesMgr.cpp:950 src/core/modules/LandscapeMgr.cpp:414
@@ -220,33 +235,23 @@ msgstr "الأسماء"
 msgid "Light pollution data from locations database"
 msgstr "استخدم بيانات التلوث الضوئي من قاعدة معلومات المواقع"
 
-#: src/core/modules/LandscapeMgr.cpp:705
+#: src/core/modules/LandscapeMgr.cpp:706
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:448
 msgid "Author: "
 msgstr "المؤلف: ‎ "
 
-#: src/core/modules/LandscapeMgr.cpp:711
+#: src/core/modules/LandscapeMgr.cpp:712
 msgid "Location: "
 msgstr "الموقع‎: ‏ "
 
-#: src/core/modules/LandscapeMgr.cpp:714
+#: src/core/modules/LandscapeMgr.cpp:715
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 متر"
 
-#: src/core/modules/LandscapeMgr.cpp:719 src/ui_astroCalcDialog.h:380
+#: src/core/modules/LandscapeMgr.cpp:720 src/ui_astroCalcDialog.h:380
 msgid "Celestial body:"
 msgstr "الجرم السماوي"
-
-#: src/core/modules/Nebula.cpp:188 src/core/modules/Planet.cpp:226
-#: src/core/modules/MinorPlanet.cpp:213 src/core/modules/StarWrapper.cpp:53
-#: src/core/modules/StarWrapper.cpp:181 src/core/modules/StarWrapper.cpp:184
-#: plugins/Satellites/src/Satellite.cpp:270
-#: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
-#: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:269
-#, qt-format
-msgid "Type: <b>%1</b>"
-msgstr "‎النوع:‎ <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:190 src/core/modules/Comet.cpp:176
 #: plugins/Novae/src/Nova.cpp:133 plugins/Pulsars/src/Pulsar.cpp:166
@@ -1178,12 +1183,12 @@ msgstr "اقلب المنظر افقيا"
 msgid "Flip scene vertically"
 msgstr "اقلب المنظر عموديا"
 
-#: src/core/StelCore.cpp:1766
+#: src/core/StelCore.cpp:1774
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "التصحيح غير مفعّل. لاتستخدم هذا الخيار إلا عندما تعلم معنى إلغاء التصحيح."
 
-#: src/core/StelCore.cpp:1769
+#: src/core/StelCore.cpp:1777
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1194,7 +1199,7 @@ msgstr ""
 "في مقالته \"نظرية آينشتاين النسبية تؤكدها الكسوفات التاريخية القديمة\" (%1). "
 "لمزيد من المعلومات انظر %2هنـــــا%3."
 
-#: src/core/StelCore.cpp:1772
+#: src/core/StelCore.cpp:1780
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1203,7 +1208,7 @@ msgstr ""
 "هذه المعادلة المبنية على الملاحظات نشرها G. M. Clemence في مقالته  \"عن نظام "
 "الثوابت الفلكية\" (%1)."
 
-#: src/core/StelCore.cpp:1775
+#: src/core/StelCore.cpp:1783
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1215,7 +1220,7 @@ msgstr ""
 "من قبل Spencer Jones ـ (%1) ـ واستخدمها  Jean Meeus في كتابه \" الصيغ "
 "الفلكية للآلات الحاسبة\". واستعملت في برنامج الحاسب  SunTracker Pro."
 
-#: src/core/StelCore.cpp:1779
+#: src/core/StelCore.cpp:1787
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1225,7 +1230,7 @@ msgstr ""
 "& Meeuse سنة (1983) في <em>Astronomical Ephemeris</em> وفي <em>Canon of "
 "Solar Eclipses</em>"
 
-#: src/core/StelCore.cpp:1783
+#: src/core/StelCore.cpp:1791
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1236,7 +1241,7 @@ msgstr ""
 "601 قبل الميلاد حتى 1649 م في فترات يفصل بينها 5 و 10 أيام. نفس العلاقات "
 "تضمنتها جداول سيزيجي (1973) لـ Goldstine ."
 
-#: src/core/StelCore.cpp:1787
+#: src/core/StelCore.cpp:1795
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1247,7 +1252,7 @@ msgstr ""
 "accelerations of the earth and moon from early astronomical "
 "observations</em> ـ (%1)."
 
-#: src/core/StelCore.cpp:1790
+#: src/core/StelCore.cpp:1798
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1256,7 +1261,7 @@ msgstr ""
 "هذه المعادلة نشرها F. R. Stephenson في المقالة <em>Pre-Telescopic "
 "Astronomical Observations</em> ـ (%1)."
 
-#: src/core/StelCore.cpp:1793
+#: src/core/StelCore.cpp:1801
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1269,7 +1274,7 @@ msgstr ""
 "U.T. in the period 1800-1975</em> ـ (%1) كما توافق مع البيانات التي نشرها "
 "Brouwer سنة (1952)."
 
-#: src/core/StelCore.cpp:1796
+#: src/core/StelCore.cpp:1804
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1278,7 +1283,7 @@ msgstr ""
 "هذه الخوارزمية تبناها P. Bretagnon & L. Simon's في \"برامج حسابات الكواكب من "
 "-4000 حتى +2800\" ـ(1986) وفي برنامج القبة الفلكية  RedShift."
 
-#: src/core/StelCore.cpp:1799
+#: src/core/StelCore.cpp:1807
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1288,11 +1293,11 @@ msgstr ""
 "هذه الصيغة نشرها F. R. Stephenson و L. V. Morrison في المقالة \"التغيرات "
 "طويلة المدى في دوران الأرض - 700 قبل الميلاد حتى 1980 م\" (%1)."
 
-#: src/core/StelCore.cpp:1802
+#: src/core/StelCore.cpp:1810
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "هذه الخوارزمية مستخدمة في البرنامج الحاسوبي Guide 7."
 
-#: src/core/StelCore.cpp:1805
+#: src/core/StelCore.cpp:1813
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -1301,7 +1306,7 @@ msgstr ""
 "هذه الخوارزمية نشرها F. Espenak في \"لائحة بالكسوفات الشمسية من 1986 إلى "
 "2035\" وفي \"لائحة بالخسوفات القمرية من 1986 إلى 2035\" (1989)."
 
-#: src/core/StelCore.cpp:1808
+#: src/core/StelCore.cpp:1816
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -1310,7 +1315,7 @@ msgstr ""
 "هذه الصيغة تحصّل عليها (%1) K.M. Borkowski من تحليل سجلات 31 كسوفا شمسياً "
 "بين سنة 2137 قبل الميلاد وسنة 1715 م."
 
-#: src/core/StelCore.cpp:1811
+#: src/core/StelCore.cpp:1819
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1322,7 +1327,7 @@ msgstr ""
 "مقالتهما \"Empirical Transformations from U.T. to E.T. for the Period 1800-"
 "1988\" ـ(%1) كتوفيق للبيانات المعطاة من قبل Stephenson & Morrison ـ(1984)."
 
-#: src/core/StelCore.cpp:1814
+#: src/core/StelCore.cpp:1822
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -1332,7 +1337,7 @@ msgstr ""
 "نظرية ELP 2000-85 القمرية في \"جداول وبرامج القمر من 4000 قبل الميلاد حتى "
 "8000 م\" (1991)."
 
-#: src/core/StelCore.cpp:1817
+#: src/core/StelCore.cpp:1825
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1342,7 +1347,7 @@ msgstr ""
 "هذه المعادلة نشرها F. R. Stephenson و L. V. Morrison في المقالة \" التذبذبات "
 "طويلة المدى في دوران الأرض: 700 قبل الميلاد حتى 1900 م\" (%1)."
 
-#: src/core/StelCore.cpp:1820
+#: src/core/StelCore.cpp:1828
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1351,7 +1356,7 @@ msgstr ""
 "نشر F. R. Stephenson هذه الصيغة في كتابه \"الكسوفات التاريخية ودوران الأرض\" "
 "(%1)."
 
-#: src/core/StelCore.cpp:1823
+#: src/core/StelCore.cpp:1831
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1361,7 +1366,7 @@ msgstr ""
 "الاستخدام للسنين 1620 - 2000 ويتضمن نسخة معدلة من (1997) Chapront, Chapront-"
 "Touze & Francou للتواريخ خارج نطاق 1620..2000."
 
-#: src/core/StelCore.cpp:1826
+#: src/core/StelCore.cpp:1834
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1370,7 +1375,7 @@ msgstr ""
 "مجموعة  JPL Solar System Dynamics Group التابعة لناسا تستخدم هذه الصيغة في "
 "موقعها التفاعلي %1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:1829
+#: src/core/StelCore.cpp:1837
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1379,7 +1384,7 @@ msgstr ""
 "متعددة الحدود هذه نشرها  J. Meeus and L. Simons في مقالتهما \"متعددة حدود "
 "تقريبية لدلتا تي، 1620 - 2000 م\" (%1)."
 
-#: src/core/StelCore.cpp:1832
+#: src/core/StelCore.cpp:1840
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1389,7 +1394,7 @@ msgstr ""
 "الشخصي\" (2000) تحوي متعددة حدود بسيطة من الترتيب الثالث لتوفيق البيانات من "
 "الماضي القريب."
 
-#: src/core/StelCore.cpp:1835
+#: src/core/StelCore.cpp:1843
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1401,7 +1406,7 @@ msgstr ""
 "التقاويم\" (2002). وهي مبنية على \"خوارزميات فلكية\" (طبعة 1991) لـ   Jean "
 "Meeus."
 
-#: src/core/StelCore.cpp:1838
+#: src/core/StelCore.cpp:1846
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1411,7 +1416,7 @@ msgstr ""
 "هذا الحل المهم نشره L. V. Morrison and F. R. Stephenson في المقالة \"القيم "
 "التاريخية لخطأ الساعة الأرضية %1T وحسابات الكسوفات\" (%2) مع زيادات في (%3)."
 
-#: src/core/StelCore.cpp:1841
+#: src/core/StelCore.cpp:1849
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1423,7 +1428,7 @@ msgstr ""
 "صيغة لـ  %1T  باستخدام استمثال مبسط مع دالة تربيعية وجيب تمامية. ينبني هذا "
 "على دورة محتملة كما وصفها Stephenson في (%2). للاستزادة %3هنـــــا%4."
 
-#: src/core/StelCore.cpp:1844 src/core/StelCore.cpp:1847
+#: src/core/StelCore.cpp:1852 src/core/StelCore.cpp:1855
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1438,15 +1443,15 @@ msgstr ""
 "5000 سنة: من -1900 حتى +3000\" (2006). وهذه الصيغة مستخدمة أيضاً في برنامج "
 "التقويم الفلكي للشمس والقمر والكواكب SOLEX."
 
-#: src/core/StelCore.cpp:1844
+#: src/core/StelCore.cpp:1852
 msgid "Used by default."
 msgstr "مستخدم افتراضياً"
 
-#: src/core/StelCore.cpp:1847
+#: src/core/StelCore.cpp:1855
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "نسخة معدلة من دون تسارع قمري إضافي."
 
-#: src/core/StelCore.cpp:1850
+#: src/core/StelCore.cpp:1858
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1457,7 +1462,7 @@ msgstr ""
 "نشر في المقالة  <em>Ancient eclipses and dating the fall of Babylon</em>سنة "
 "%1."
 
-#: src/core/StelCore.cpp:1853
+#: src/core/StelCore.cpp:1861
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1468,7 +1473,7 @@ msgstr ""
 "2000 ، ونشر في المقالة العلمية <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em>  %1  ، وعدّل من قبل سنا إسلام في 2013م."
 
-#: src/core/StelCore.cpp:1856
+#: src/core/StelCore.cpp:1864
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1479,22 +1484,22 @@ msgstr ""
 "وفهيم زيدي ونشر في Delta T: Polynomial Approximation of Time Period 1620-"
 "2013 (%1)"
 
-#: src/core/StelCore.cpp:1859
+#: src/core/StelCore.cpp:1867
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr "هذه صيغة رباعية لحساب %1T بمعاملات معرّفة من قبل المستخدم."
 
-#: src/core/StelCore.cpp:1862 src/core/SimbadSearcher.cpp:151
+#: src/core/StelCore.cpp:1870 src/core/SimbadSearcher.cpp:151
 msgid "Error"
 msgstr "خطأ"
 
-#: src/core/StelCore.cpp:1912
+#: src/core/StelCore.cpp:1920
 msgid "with meaningless values outside this range"
 msgstr "القيم خارج نطاق هذه الحقبة ليس لها معنى"
 
-#: src/core/StelCore.cpp:1938
+#: src/core/StelCore.cpp:1946
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -1502,22 +1507,22 @@ msgstr ""
 "متوسط الخطأ أقل من ثانية واحدة، والحد الأقصى للخطأ 1.9 ثانية والقيم خارج "
 "نطاق هذه الحقبة لامعنى لها"
 
-#: src/core/StelCore.cpp:1960 src/core/StelCore.cpp:1965
-#: src/core/StelCore.cpp:1993 src/core/StelCore.cpp:1998
-#: src/core/StelCore.cpp:2003
+#: src/core/StelCore.cpp:1968 src/core/StelCore.cpp:1973
+#: src/core/StelCore.cpp:2001 src/core/StelCore.cpp:2006
+#: src/core/StelCore.cpp:2011
 msgid "with zero values outside this range"
 msgstr "هذا الحل يعطي أصفاراً للقيم خارج نطاق الحقبة الزمنية."
 
-#: src/core/StelCore.cpp:1970
+#: src/core/StelCore.cpp:1978
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "بدقة نموذجية تساوي ثانية واحدة وبقيم صفرية خارج نطاق الحقبة"
 
-#: src/core/StelCore.cpp:2013
+#: src/core/StelCore.cpp:2021
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "صالح للاستخدام في الحقبة بين  سنة %1 و %2، %3."
 
-#: src/core/StelCore.cpp:2015
+#: src/core/StelCore.cpp:2023
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "صالح للاستخدام في الحقبة بين سنة %1 و %2."
@@ -2576,23 +2581,23 @@ msgstr "خط الطول"
 msgid "Latitude"
 msgstr "خط العرض"
 
-#: src/gui/SearchDialog.cpp:579
+#: src/gui/SearchDialog.cpp:580
 msgid "Simbad Lookup Error"
 msgstr "خطأ في البحث في قاعدة معلومات Simbad"
 
-#: src/gui/SearchDialog.cpp:587
+#: src/gui/SearchDialog.cpp:588
 msgid "Simbad Lookup"
 msgstr "البحث في قاعدة معلومات Simbad"
 
-#: src/gui/SearchDialog.cpp:768
+#: src/gui/SearchDialog.cpp:769
 msgid "University of Strasbourg (France)"
 msgstr "جامعة ستراسبورج - فرنسا"
 
-#: src/gui/SearchDialog.cpp:769
+#: src/gui/SearchDialog.cpp:770
 msgid "Harvard University (USA)"
 msgstr "جامعة هارفارد - الولايات المتحدة"
 
-#: src/gui/SearchDialog.cpp:842
+#: src/gui/SearchDialog.cpp:843
 msgid "Paste and Search"
 msgstr "ألصق وابحث"
 
@@ -3247,7 +3252,7 @@ msgid "Trees"
 msgstr "أشجار"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:210 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1029
+#: src/translations.h:210 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1031
 msgid "Moon"
 msgstr "‎القمر‎‏‎"
 
@@ -3267,17 +3272,17 @@ msgid "Garching"
 msgstr "جارشينج"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:218 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1041
+#: src/translations.h:218 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1043
 msgid "Mars"
 msgstr "المريخ"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:220 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1044
+#: src/translations.h:220 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1046
 msgid "Jupiter"
 msgstr "المشتري"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:222 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1047
+#: src/translations.h:222 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1049
 msgid "Saturn"
 msgstr "زحل"
 
@@ -6491,7 +6496,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:136
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:123
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:125
@@ -6507,7 +6512,7 @@ msgstr "<P DIR=RTL>روابط"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:137
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:127
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:238
@@ -6528,7 +6533,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:140
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:156
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:128
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:130
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
@@ -6546,7 +6551,7 @@ msgstr "<P DIR=RTL>إذا كان لديك سؤال يمكنك %1الحصول ع�
 #: plugins/Novae/src/gui/NovaeDialog.cpp:142
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:135
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:158
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:130
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:132
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:311
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
@@ -6564,7 +6569,7 @@ msgstr "<P DIR=RTL> تستطيع التبليغ عن أخطاء البرنامج
 #: plugins/Novae/src/gui/NovaeDialog.cpp:144
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:132
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:133
@@ -6578,7 +6583,7 @@ msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin and its history, you "
@@ -7385,92 +7390,92 @@ msgstr ""
 "لم يعد متوافقاً مع البرنامج - سوف يستخدم الملف الافتراضي"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1791
+#: plugins/Satellites/src/Satellites.cpp:1793
 msgid "visual"
 msgstr "الأقمار الصناعية المرئية"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1793
+#: plugins/Satellites/src/Satellites.cpp:1795
 msgid "scientific"
 msgstr "الأقمار الصناعية العلمية"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1795
+#: plugins/Satellites/src/Satellites.cpp:1797
 msgid "communications"
 msgstr "أقمار الاتصالات"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1797
+#: plugins/Satellites/src/Satellites.cpp:1799
 msgid "navigation"
 msgstr "أقمار الملاحة"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1799
+#: plugins/Satellites/src/Satellites.cpp:1801
 msgid "amateur"
 msgstr "الأقمار التي تبث لهواة الراديو"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1801
+#: plugins/Satellites/src/Satellites.cpp:1803
 msgid "weather"
 msgstr "أقمار الطقس"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1803
+#: plugins/Satellites/src/Satellites.cpp:1805
 msgid "geostationary"
 msgstr "الأقمار ذات المدار الثابت"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1805
+#: plugins/Satellites/src/Satellites.cpp:1807
 msgid "non-operational"
 msgstr "الأقمار المتوقفة عن العمل"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1807
+#: plugins/Satellites/src/Satellites.cpp:1809
 msgid "gps"
 msgstr "أقمار نظام تحديد الموقع"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:1809
+#: plugins/Satellites/src/Satellites.cpp:1811
 msgid "glonass"
 msgstr "أقمار جلوناس"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:1811
+#: plugins/Satellites/src/Satellites.cpp:1813
 msgid "galileo"
 msgstr "أقمار جاليليو"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1813
+#: plugins/Satellites/src/Satellites.cpp:1815
 msgid "iridium"
 msgstr "أقمار إيريديوم"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:1815
+#: plugins/Satellites/src/Satellites.cpp:1817
 msgid "stations"
 msgstr "المحطات الفضائية"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:1817
+#: plugins/Satellites/src/Satellites.cpp:1819
 msgid "education"
 msgstr "الأقمار التعليمية"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:1819
+#: plugins/Satellites/src/Satellites.cpp:1821
 msgid "observatory"
 msgstr "التلسكوبات الفضائية"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1830
+#: plugins/Satellites/src/Satellites.cpp:1832
 msgid "The Hubble Space Telescope"
 msgstr "‎تلسكوب هابل‎"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1832
+#: plugins/Satellites/src/Satellites.cpp:1834
 msgid "The International Space Station"
 msgstr "‎المحطة الفضائية الدولية‎"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1834
+#: plugins/Satellites/src/Satellites.cpp:1836
 msgid "China's first space station"
 msgstr "محطة الصين الفضائية الأولى"
 
@@ -10542,21 +10547,18 @@ msgstr ""
 "استخدم لوناً مختلفاً للنجوم النابضة ذات التغير المفاجيء في التردد الدوراني"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:58
-#: plugins/RemoteControl/src/RemoteControl.cpp:151
+#: plugins/RemoteControl/src/RemoteControl.cpp:147
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:260
 msgid "Remote Control"
 msgstr ""
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:61
 msgid ""
-"<p>Provides remote control functionality using a webserver interface.</p> "
-"<p>See manual for detailed description.</p><br/><p>This plugin was developed "
-"during ESA SoCiS 2015.</p><p>This plugin uses the <a "
-"href=\"http://stefanfrings.de/qtwebapp/index-en.html\">QtWebApp HTTP "
-"server</a> by Stefan Frings.</p>"
+"Provides remote control functionality using a webserver interface. See "
+"manual for detailed description."
 msgstr ""
 
-#: plugins/RemoteControl/src/RemoteControl.cpp:151
+#: plugins/RemoteControl/src/RemoteControl.cpp:147
 msgid "Remote control"
 msgstr ""
 
@@ -10578,17 +10580,26 @@ msgstr ""
 msgid "This allows triggering automatic show setups for museums etc."
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:124
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:122
+msgid "This plugin was developed during ESA SoCiS 2015."
+msgstr ""
+
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:123
+#, qt-format
+msgid "This plugin uses the %1QtWebApp HTTP server%2 by Stefan Frings."
+msgstr ""
+
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:126
 #, qt-format
 msgid "Further information can be found in the %1developer documentation%2."
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:173
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:175
 #, qt-format
 msgid "Listening on %1, IP: "
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:178
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:180
 msgid "Not active."
 msgstr ""
 
@@ -10722,7 +10733,7 @@ msgstr "الكتلة"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:310
 #: plugins/Exoplanets/src/Exoplanet.cpp:314
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1026
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1028
 msgid "Sun"
 msgstr "الشمس"
 
@@ -12052,7 +12063,7 @@ msgid "The current catalog of Meteor Showers is invalid!"
 msgstr "الدليل الحالي لزخات الشهب غير صالح!"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:559
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:563
 msgid "Meteor Showers"
 msgstr "زخات الشهب"
 
@@ -12077,7 +12088,7 @@ msgstr "أظهر نافذة البحث لزخات الشهب"
 msgid "Using the default Meteor Showers catalog."
 msgstr "يجري استخدام دليل زخات الشهب الافتراضي"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:563
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:567
 msgid ""
 "<p>This plugin enables you to simulate periodic meteor showers and to "
 "display a marker for each active and inactive radiant.</p><p>By a single "
@@ -13553,8 +13564,8 @@ msgid "Title:"
 msgstr "الإسم"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:59
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:200
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:201
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:202
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:203
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:404
 msgid "ArchaeoLines"
 msgstr "الخطوط الآثارية الفلكية"
@@ -13563,96 +13574,96 @@ msgstr "الخطوط الآثارية الفلكية"
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
 msgstr "<P DIR=RTL>أداة للدراسات الآثارية والعرقية الفلكية"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:221
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:223
 msgid "Show Line for Equinox"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:222
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:224
 msgid "Show Line for Solstices"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:223
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:225
 msgid "Show Line for Crossquarter"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:224
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:226
 msgid "Show Line for Major Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:225
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:227
 msgid "Show Line for Minor Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:226
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:228
 msgid "Show Line for Zenith Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:227
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:229
 msgid "Show Line for Nadir Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:228
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:230
 msgid "Show Line for Selected Object"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:229
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:231
 msgid "Show Line for Current Sun"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:230
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:232
 msgid "Show Line for Current Moon"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:231
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:233
 msgid "Show Line for Custom Azimuth 1"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:232
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:234
 msgid "Show Line for Custom Azimuth 2"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1002
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1004
 msgid "Equinox"
 msgstr "الاعتدال"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1005
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1007
 msgid "Solstice"
 msgstr "الإنقلاب"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1008
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1010
 msgid "Crossquarter"
 msgstr "منتصف مابين الانقلاب والاعتدال"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1011
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1013
 msgid "Major Lunar Standstill"
 msgstr "وقوف القمر الأكبر"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1014
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1016
 msgid "Minor Lunar Standstill"
 msgstr "وقوف القمر الأصغر"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1017
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1019
 msgid "Zenith Passage"
 msgstr "عبور السمت"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1020
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1022
 msgid "Nadir Passage"
 msgstr "عبور النظير"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1023
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1025
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:374
 msgid "Selected Object"
 msgstr "الجرم المختار"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1032
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1034
 msgid "error if you can read this"
 msgstr "يوجد خطأ إذا كنت تستطيع قراءة هذه الجملة"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1035
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1037
 msgid "Mercury"
 msgstr "عطارد"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1038
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1040
 msgid "Venus"
 msgstr "الزهرة"
 
