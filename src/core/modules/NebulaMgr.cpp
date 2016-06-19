@@ -1852,8 +1852,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 			result << dson;
 	}
 
-	result.sort();
-	result.removeDuplicates();
+	result.sort();	
 	if (maxNbItem > 0)
 	{
 		if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
@@ -2188,8 +2187,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 			result << dson;
 	}
 
-	result.sort();
-	result.removeDuplicates();
+	result.sort();	
 	if (maxNbItem > 0)
 	{
 		if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());

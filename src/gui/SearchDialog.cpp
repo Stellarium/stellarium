@@ -543,13 +543,13 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		QString greekText = substituteGreek(trimmedText);
 		QStringList matches;
 		if(greekText != trimmedText) {
-			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 5, useStartOfWords);
-			matches += objectMgr->listMatchingObjects(trimmedText, 5, useStartOfWords);
-			matches += objectMgr->listMatchingObjectsI18n(greekText, (16 - matches.size()), useStartOfWords);
-			matches += objectMgr->listMatchingObjects(greekText, (16 - matches.size()), useStartOfWords);
+			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 3, useStartOfWords);
+			matches += objectMgr->listMatchingObjects(trimmedText, 3, useStartOfWords);
+			matches += objectMgr->listMatchingObjectsI18n(greekText, (11 - matches.size()), useStartOfWords);
+			matches += objectMgr->listMatchingObjects(greekText, (11 - matches.size()), useStartOfWords);
 		} else {
-			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 10, useStartOfWords);
-			matches += objectMgr->listMatchingObjects(trimmedText, 10, useStartOfWords);
+			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 8, useStartOfWords);
+			matches += objectMgr->listMatchingObjects(trimmedText, 8, useStartOfWords);
 		}
 
 		// remove possible duplicates from completion list
