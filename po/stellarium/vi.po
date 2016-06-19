@@ -7,15 +7,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-14 19:17+0700\n"
+"POT-Creation-Date: 2016-06-19 00:27+0700\n"
 "PO-Revision-Date: 2016-05-05 07:33+0000\n"
 "Last-Translator: Lê Văn Bách <levanbach1994ag@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-15 05:35+0000\n"
+"X-Launchpad-Export-Date: 2016-06-19 05:33+0000\n"
 "X-Generator: Launchpad (build 18097)\n"
+
+#: src/core/modules/Constellation.cpp:297 src/core/modules/Nebula.cpp:188
+#: src/core/modules/Planet.cpp:226 src/core/modules/MinorPlanet.cpp:213
+#: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:181
+#: src/core/modules/StarWrapper.cpp:184
+#: plugins/Satellites/src/Satellite.cpp:270
+#: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
+#: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:269
+#, qt-format
+msgid "Type: <b>%1</b>"
+msgstr "Loại: <b>%1</b>"
+
+#: src/core/modules/Constellation.cpp:297
+msgid "constellation"
+msgstr ""
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:378
 #: src/core/modules/GridLinesMgr.cpp:950 src/core/modules/LandscapeMgr.cpp:414
@@ -220,33 +235,23 @@ msgstr "Nhãn"
 msgid "Light pollution data from locations database"
 msgstr "Dữ liệu ô nhiễm ánh sáng từ cơ sở dữ liệu địa điểm"
 
-#: src/core/modules/LandscapeMgr.cpp:705
+#: src/core/modules/LandscapeMgr.cpp:706
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:448
 msgid "Author: "
 msgstr "Tác giả: "
 
-#: src/core/modules/LandscapeMgr.cpp:711
+#: src/core/modules/LandscapeMgr.cpp:712
 msgid "Location: "
 msgstr "Vị trí: "
 
-#: src/core/modules/LandscapeMgr.cpp:714
+#: src/core/modules/LandscapeMgr.cpp:715
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:719 src/ui_astroCalcDialog.h:380
+#: src/core/modules/LandscapeMgr.cpp:720 src/ui_astroCalcDialog.h:380
 msgid "Celestial body:"
 msgstr "Thiên thể"
-
-#: src/core/modules/Nebula.cpp:188 src/core/modules/Planet.cpp:226
-#: src/core/modules/MinorPlanet.cpp:213 src/core/modules/StarWrapper.cpp:53
-#: src/core/modules/StarWrapper.cpp:181 src/core/modules/StarWrapper.cpp:184
-#: plugins/Satellites/src/Satellite.cpp:270
-#: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
-#: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:269
-#, qt-format
-msgid "Type: <b>%1</b>"
-msgstr "Loại: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:190 src/core/modules/Comet.cpp:176
 #: plugins/Novae/src/Nova.cpp:133 plugins/Pulsars/src/Pulsar.cpp:166
@@ -1178,11 +1183,11 @@ msgstr "Lật cảnh theo chiều ngang"
 msgid "Flip scene vertically"
 msgstr "Lật cảnh theo chiều dọc"
 
-#: src/core/StelCore.cpp:1766
+#: src/core/StelCore.cpp:1774
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "Sửa chữa bị vô hiệu hóa. Chỉ sử dụng nếu bạn biết đang làm gì"
 
-#: src/core/StelCore.cpp:1769
+#: src/core/StelCore.cpp:1777
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1193,7 +1198,7 @@ msgstr ""
 "G. Henriksson trong bài báo của ông ấy <em>Thuyết tương đối của Einstein phù "
 "hợp với những lần nhật thực cổ xưa</em> (%1). Xem thêm thông tin %2ở đây%3."
 
-#: src/core/StelCore.cpp:1772
+#: src/core/StelCore.cpp:1780
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1202,7 +1207,7 @@ msgstr ""
 "Phương trình kinh nghiệm này được xuất bản bởi G. M. Clemence trong bài báo "
 "<em>Trên hệ thống của những hằng số vũ trụ</em> (%1)."
 
-#: src/core/StelCore.cpp:1775
+#: src/core/StelCore.cpp:1783
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1215,7 +1220,7 @@ msgstr ""
 "dụng bởi Jean Meeus trong bài viết của ông ấy <em>Công thức vũ trụ cho những "
 "máy tính</em>.  Nó cũng được thực hiện trong PC program Sun Tracker Pro."
 
-#: src/core/StelCore.cpp:1779
+#: src/core/StelCore.cpp:1787
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1225,7 +1230,7 @@ msgstr ""
 "trong <em>Lịch vũ trụ</em> và trong <em>Tiêu chuẩn của nhật thực</em> bởi "
 "Mucke và Meeus (1983)."
 
-#: src/core/StelCore.cpp:1783
+#: src/core/StelCore.cpp:1791
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1237,7 +1242,7 @@ msgstr ""
 "601 TCN đến 1649. Một cái tương tự cũng được thực hiện hoàn toàn trong những "
 "bảng syzygy của Goldstine (1973)."
 
-#: src/core/StelCore.cpp:1787
+#: src/core/StelCore.cpp:1795
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1248,7 +1253,7 @@ msgstr ""
 "bài <em>Gia tốc của trái đất và mặt trăng từ những quan sát vũ trụ cổ "
 "xưa</em> (%1)."
 
-#: src/core/StelCore.cpp:1790
+#: src/core/StelCore.cpp:1798
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1257,7 +1262,7 @@ msgstr ""
 "Phương trình này được xuất bản bởi F. R. Stephenson trong bài <em>Những quan "
 "sát vũ trụ trước khi có kính thiên văn</em> (%1)."
 
-#: src/core/StelCore.cpp:1793
+#: src/core/StelCore.cpp:1801
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1270,7 +1275,7 @@ msgstr ""
 "<em>Xấp xỉ đa thức cho chính xác delta T E.T.-U.T. trong giai đoạn 1800-"
 "1975</em> (%1) là phù hợp thông qua dữ liệu được xuất bản bởi Brouwer (1952)."
 
-#: src/core/StelCore.cpp:1796
+#: src/core/StelCore.cpp:1804
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1280,7 +1285,7 @@ msgstr ""
 "bảng và chương trình hành tinh từ năm 4000 TCN đến năm 2800</em> (1986) và "
 "trong PC planetarium program RedShift."
 
-#: src/core/StelCore.cpp:1799
+#: src/core/StelCore.cpp:1807
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1291,11 +1296,11 @@ msgstr ""
 "bài <em>Những thay đổi lâu dài trong chu kỳ của trái đất từ 700 TCN đến "
 "1980</em> (%1)."
 
-#: src/core/StelCore.cpp:1802
+#: src/core/StelCore.cpp:1810
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "Thuật toán này được sử dụng trong PC planetarium program Guide 7."
 
-#: src/core/StelCore.cpp:1805
+#: src/core/StelCore.cpp:1813
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -1305,7 +1310,7 @@ msgstr ""
 "trong 50 năm: 1986-2035</em> (1987) và trong bài <em>Danh sách nguyệt thực "
 "trong 50 năm: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:1808
+#: src/core/StelCore.cpp:1816
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -1314,7 +1319,7 @@ msgstr ""
 "Công thức này có được bởi K. M. Borkowsky (%1) từ việc phân tích những ghi "
 "chép của 31 lần nhật thực giữa 2137 TCN và 1715."
 
-#: src/core/StelCore.cpp:1811
+#: src/core/StelCore.cpp:1819
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1327,7 +1332,7 @@ msgstr ""
 "1800-1988</em> (%1) như là dữ liệu phù hợp thông qua các giá trị được đưa ra "
 "bởi Stephenson & Morrison (1984)."
 
-#: src/core/StelCore.cpp:1814
+#: src/core/StelCore.cpp:1822
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -1337,7 +1342,7 @@ msgstr ""
 "phiên bản ngắn của thuyết mặt trăng ELP 2000-85 trong bài <em>Những chương "
 "trình và bảng về mặt trăng từ năm 4000 TCN đến 8000</em> (1991)."
 
-#: src/core/StelCore.cpp:1817
+#: src/core/StelCore.cpp:1825
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1348,7 +1353,7 @@ msgstr ""
 "bài <em>Những dao động dài hạn trong chu kỳ của trái đất: năm 700 TCN đến "
 "1990</em> (%1)."
 
-#: src/core/StelCore.cpp:1820
+#: src/core/StelCore.cpp:1828
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1357,7 +1362,7 @@ msgstr ""
 "F. R. Stepenson đã xuất bản công thức này trong cuốn sách <em>Lịch sử che "
 "khuất và chu kỳ của trái đất</em> (%1)."
 
-#: src/core/StelCore.cpp:1823
+#: src/core/StelCore.cpp:1831
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1367,7 +1372,7 @@ msgstr ""
 "dụng rộng rãi. Bảng cho 1620..2000, và bao gồm một biến thể của Chapront, "
 "Chapront-Touze và Francou (1997) cho những dữ liệu ngoài 1620..2000."
 
-#: src/core/StelCore.cpp:1826
+#: src/core/StelCore.cpp:1834
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1376,7 +1381,7 @@ msgstr ""
 "Nhóm Động lực học Hệ Mặt trời JPL của Phòng thí nghiệm tên lửa đẩy NASA sử "
 "dụng công thức này trong trang web tương tác %1JPL Horizons%2 của họ."
 
-#: src/core/StelCore.cpp:1829
+#: src/core/StelCore.cpp:1837
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1385,7 +1390,7 @@ msgstr ""
 "Đa thức này được xuất bản bởi J. Meeus và L. Simons trong bài <em> Xấp xỉ đa "
 "thức đối với Delta T, 1620-2000</em> (%1)."
 
-#: src/core/StelCore.cpp:1832
+#: src/core/StelCore.cpp:1840
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1395,7 +1400,7 @@ msgstr ""
 "Montenbruck & T. Pfleger (2000) cung cấp dữ liệu đa thức bậc 3 đơn giản phù "
 "hợp cho quá khứ gần đây."
 
-#: src/core/StelCore.cpp:1835
+#: src/core/StelCore.cpp:1843
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1407,7 +1412,7 @@ msgstr ""
 "(2002). Nó được dựa trên <em>Thuật toán thiên văn học</em> của Jean Meeus "
 "(1991)."
 
-#: src/core/StelCore.cpp:1838
+#: src/core/StelCore.cpp:1846
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1418,7 +1423,7 @@ msgstr ""
 "Stephenson trong bài <em>Giá trị lịch sử của sai số đồng hồ của trái đất %1T "
 "và sự tính toán nhật thực</em> (%2) với phụ lục trong (%3)."
 
-#: src/core/StelCore.cpp:1841
+#: src/core/StelCore.cpp:1849
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1431,7 +1436,7 @@ msgstr ""
 "với cosin và hàm bình phương. Điều này dược trên một tính được mô tả bởi "
 "Stephenson (%2). Xem thêm thông tin %3ở đây%4."
 
-#: src/core/StelCore.cpp:1844 src/core/StelCore.cpp:1847
+#: src/core/StelCore.cpp:1852 src/core/StelCore.cpp:1855
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1446,15 +1451,15 @@ msgstr ""
 "Solar Eclipse: -1900 to +3000</em> (2006) của họ. Công thức này cũng được sử "
 "dụng trong chương trình thiên văn SOLEX mặt trời, mặt trăng và hành tinh."
 
-#: src/core/StelCore.cpp:1844
+#: src/core/StelCore.cpp:1852
 msgid "Used by default."
 msgstr "Được sử dụng bởi mặc định"
 
-#: src/core/StelCore.cpp:1847
+#: src/core/StelCore.cpp:1855
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "PHIÊN BẢN VÁ LỖI MÀ KHÔNG BỔ SUNG GIA TỐC MẶT TRĂNG"
 
-#: src/core/StelCore.cpp:1850
+#: src/core/StelCore.cpp:1858
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1465,7 +1470,7 @@ msgstr ""
 "xuất bản trong bài <em>Thiên thực cổ đại và ngày sụp đổ của Babylon</em> "
 "(%1)."
 
-#: src/core/StelCore.cpp:1853
+#: src/core/StelCore.cpp:1861
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1476,7 +1481,7 @@ msgstr ""
 "Simons (2000), được xuất bản trong bài viết <em>Giảm thiểu lỗi của xấp xỉ đa "
 "thức của Delta T</em> (%1) và được xem xét lại bới Sana Islam vào năm 2003."
 
-#: src/core/StelCore.cpp:1856
+#: src/core/StelCore.cpp:1864
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1487,7 +1492,7 @@ msgstr ""
 "Sultana và Faheem Zaidi được xuất bản trong <em>Delata T: Xấp xỉ đa thức của "
 "chu kỳ thời gian 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:1859
+#: src/core/StelCore.cpp:1867
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1496,15 +1501,15 @@ msgstr ""
 "Đây là công thức bậc hai cho phép tính của %1T với hệ số được xác định với "
 "người dùng."
 
-#: src/core/StelCore.cpp:1862 src/core/SimbadSearcher.cpp:151
+#: src/core/StelCore.cpp:1870 src/core/SimbadSearcher.cpp:151
 msgid "Error"
 msgstr "Lỗi"
 
-#: src/core/StelCore.cpp:1912
+#: src/core/StelCore.cpp:1920
 msgid "with meaningless values outside this range"
 msgstr "với giá trị vô nghĩa bên ngoài phạm vi này"
 
-#: src/core/StelCore.cpp:1938
+#: src/core/StelCore.cpp:1946
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -1512,23 +1517,23 @@ msgstr ""
 "với một lỗi trung bình ít hơn 1s, tối đa 1,9s, và giá trị vô nghĩa nằm ngoài "
 "phạm vi này"
 
-#: src/core/StelCore.cpp:1960 src/core/StelCore.cpp:1965
-#: src/core/StelCore.cpp:1993 src/core/StelCore.cpp:1998
-#: src/core/StelCore.cpp:2003
+#: src/core/StelCore.cpp:1968 src/core/StelCore.cpp:1973
+#: src/core/StelCore.cpp:2001 src/core/StelCore.cpp:2006
+#: src/core/StelCore.cpp:2011
 msgid "with zero values outside this range"
 msgstr "với giá trị zero nằm ngoài phạm vi này"
 
-#: src/core/StelCore.cpp:1970
+#: src/core/StelCore.cpp:1978
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "với một độ chính xác 1s điển hình và giá trị zero nằm ngoài khoảng này"
 
-#: src/core/StelCore.cpp:2013
+#: src/core/StelCore.cpp:2021
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Khoảng hợp lệ thường dùng: giữa những năm %1 và %2, %3."
 
-#: src/core/StelCore.cpp:2015
+#: src/core/StelCore.cpp:2023
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Khoảng hợp lệ thường dùng: giữa những năm %1 và %2."
@@ -2589,23 +2594,23 @@ msgstr "Kinh độ"
 msgid "Latitude"
 msgstr "Vĩ độ"
 
-#: src/gui/SearchDialog.cpp:579
+#: src/gui/SearchDialog.cpp:580
 msgid "Simbad Lookup Error"
 msgstr "Lỗi tra cứu SIMBAD"
 
-#: src/gui/SearchDialog.cpp:587
+#: src/gui/SearchDialog.cpp:588
 msgid "Simbad Lookup"
 msgstr "Tra cứu SIMBAD"
 
-#: src/gui/SearchDialog.cpp:768
+#: src/gui/SearchDialog.cpp:769
 msgid "University of Strasbourg (France)"
 msgstr "Đại học Strasbourg (Pháp)"
 
-#: src/gui/SearchDialog.cpp:769
+#: src/gui/SearchDialog.cpp:770
 msgid "Harvard University (USA)"
 msgstr "Đại học Harvard (Hoa Kỳ)"
 
-#: src/gui/SearchDialog.cpp:842
+#: src/gui/SearchDialog.cpp:843
 msgid "Paste and Search"
 msgstr "Dán và tìm kiếm"
 
@@ -3257,7 +3262,7 @@ msgid "Trees"
 msgstr "Cây"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:210 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1029
+#: src/translations.h:210 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1031
 msgid "Moon"
 msgstr "Mặt trăng"
 
@@ -3277,17 +3282,17 @@ msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:218 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1041
+#: src/translations.h:218 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1043
 msgid "Mars"
 msgstr "Hỏa tinh"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:220 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1044
+#: src/translations.h:220 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1046
 msgid "Jupiter"
 msgstr "Mộc tinh"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:222 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1047
+#: src/translations.h:222 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1049
 msgid "Saturn"
 msgstr "Thổ tinh"
 
@@ -6557,7 +6562,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:136
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:123
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:125
@@ -6573,7 +6578,7 @@ msgstr "Liên kết"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:137
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:127
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:238
@@ -6594,7 +6599,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:140
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:156
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:128
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:130
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
@@ -6612,7 +6617,7 @@ msgstr "Nếu bạn có câu hỏi, bạn có thể %1nhận câu trả lời �
 #: plugins/Novae/src/gui/NovaeDialog.cpp:142
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:135
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:158
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:130
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:132
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:311
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
@@ -6630,7 +6635,7 @@ msgstr "Báo cáo lỗi có thể được thực hiện %1ở đây%2"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:144
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:132
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:133
@@ -6644,7 +6649,7 @@ msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin and its history, you "
@@ -7460,92 +7465,92 @@ msgstr ""
 "tin mặc định"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1791
+#: plugins/Satellites/src/Satellites.cpp:1793
 msgid "visual"
 msgstr "Có thể nhìn thấy"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1793
+#: plugins/Satellites/src/Satellites.cpp:1795
 msgid "scientific"
 msgstr "Khoa học"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1795
+#: plugins/Satellites/src/Satellites.cpp:1797
 msgid "communications"
 msgstr "Viễn thông"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1797
+#: plugins/Satellites/src/Satellites.cpp:1799
 msgid "navigation"
 msgstr "Điều hướng"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1799
+#: plugins/Satellites/src/Satellites.cpp:1801
 msgid "amateur"
 msgstr "Nghiệp dư"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1801
+#: plugins/Satellites/src/Satellites.cpp:1803
 msgid "weather"
 msgstr "Thời tiết"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1803
+#: plugins/Satellites/src/Satellites.cpp:1805
 msgid "geostationary"
 msgstr "Địa tĩnh"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1805
+#: plugins/Satellites/src/Satellites.cpp:1807
 msgid "non-operational"
 msgstr "Không hoạt động"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1807
+#: plugins/Satellites/src/Satellites.cpp:1809
 msgid "gps"
 msgstr "GPS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:1809
+#: plugins/Satellites/src/Satellites.cpp:1811
 msgid "glonass"
 msgstr "Hệ thống vệ tinh định vị toàn cầu"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:1811
+#: plugins/Satellites/src/Satellites.cpp:1813
 msgid "galileo"
 msgstr "galileo"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1813
+#: plugins/Satellites/src/Satellites.cpp:1815
 msgid "iridium"
 msgstr "iridium"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:1815
+#: plugins/Satellites/src/Satellites.cpp:1817
 msgid "stations"
 msgstr "trạm không gian"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:1817
+#: plugins/Satellites/src/Satellites.cpp:1819
 msgid "education"
 msgstr "giáo dục"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:1819
+#: plugins/Satellites/src/Satellites.cpp:1821
 msgid "observatory"
 msgstr "trạm quan sát"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1830
+#: plugins/Satellites/src/Satellites.cpp:1832
 msgid "The Hubble Space Telescope"
 msgstr "Kính viễn vọng không gian Hubble"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1832
+#: plugins/Satellites/src/Satellites.cpp:1834
 msgid "The International Space Station"
 msgstr "Trạm vũ trụ quốc tế"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1834
+#: plugins/Satellites/src/Satellites.cpp:1836
 msgid "China's first space station"
 msgstr "Trạm không gian đầu tiên của Trung Quốc"
 
@@ -10809,21 +10814,18 @@ msgid "Use separate color for pulsars with glitches"
 msgstr "Sử dụng màu sắc riêng biệt cho những ẩn tinh gặp sự cố"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:58
-#: plugins/RemoteControl/src/RemoteControl.cpp:151
+#: plugins/RemoteControl/src/RemoteControl.cpp:147
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:260
 msgid "Remote Control"
 msgstr ""
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:61
 msgid ""
-"<p>Provides remote control functionality using a webserver interface.</p> "
-"<p>See manual for detailed description.</p><br/><p>This plugin was developed "
-"during ESA SoCiS 2015.</p><p>This plugin uses the <a "
-"href=\"http://stefanfrings.de/qtwebapp/index-en.html\">QtWebApp HTTP "
-"server</a> by Stefan Frings.</p>"
+"Provides remote control functionality using a webserver interface. See "
+"manual for detailed description."
 msgstr ""
 
-#: plugins/RemoteControl/src/RemoteControl.cpp:151
+#: plugins/RemoteControl/src/RemoteControl.cpp:147
 msgid "Remote control"
 msgstr ""
 
@@ -10845,17 +10847,26 @@ msgstr ""
 msgid "This allows triggering automatic show setups for museums etc."
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:124
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:122
+msgid "This plugin was developed during ESA SoCiS 2015."
+msgstr ""
+
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:123
+#, qt-format
+msgid "This plugin uses the %1QtWebApp HTTP server%2 by Stefan Frings."
+msgstr ""
+
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:126
 #, qt-format
 msgid "Further information can be found in the %1developer documentation%2."
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:173
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:175
 #, qt-format
 msgid "Listening on %1, IP: "
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:178
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:180
 msgid "Not active."
 msgstr ""
 
@@ -10989,7 +11000,7 @@ msgstr "Khối lượng"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:310
 #: plugins/Exoplanets/src/Exoplanet.cpp:314
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1026
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1028
 msgid "Sun"
 msgstr "Mặt trời"
 
@@ -12445,7 +12456,7 @@ msgid "The current catalog of Meteor Showers is invalid!"
 msgstr "Danh mục hiện tại của Mưa Sao Băng thì không hợp lệ!"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:559
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:563
 msgid "Meteor Showers"
 msgstr "Mưa sao băng"
 
@@ -12470,7 +12481,7 @@ msgstr "Hiển thị hộp thoại tìm kiếm"
 msgid "Using the default Meteor Showers catalog."
 msgstr "Sử dụng danh mục Mưa Sao Băng mặc định"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:563
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:567
 msgid ""
 "<p>This plugin enables you to simulate periodic meteor showers and to "
 "display a marker for each active and inactive radiant.</p><p>By a single "
@@ -13973,8 +13984,8 @@ msgid "Title:"
 msgstr "Tiêu đề:"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:59
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:200
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:201
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:202
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:203
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:404
 msgid "ArchaeoLines"
 msgstr "ArchaeoLines"
@@ -13983,96 +13994,96 @@ msgstr "ArchaeoLines"
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
 msgstr "Công cụ cho việc nghiên cứu sự liên kết thiên văn học cổ/vô thần"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:221
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:223
 msgid "Show Line for Equinox"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:222
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:224
 msgid "Show Line for Solstices"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:223
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:225
 msgid "Show Line for Crossquarter"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:224
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:226
 msgid "Show Line for Major Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:225
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:227
 msgid "Show Line for Minor Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:226
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:228
 msgid "Show Line for Zenith Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:227
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:229
 msgid "Show Line for Nadir Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:228
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:230
 msgid "Show Line for Selected Object"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:229
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:231
 msgid "Show Line for Current Sun"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:230
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:232
 msgid "Show Line for Current Moon"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:231
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:233
 msgid "Show Line for Custom Azimuth 1"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:232
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:234
 msgid "Show Line for Custom Azimuth 2"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1002
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1004
 msgid "Equinox"
 msgstr "Điểm phân"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1005
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1007
 msgid "Solstice"
 msgstr "Điểm chí"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1008
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1010
 msgid "Crossquarter"
 msgstr "Giữa các quý"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1011
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1013
 msgid "Major Lunar Standstill"
 msgstr "Mặt trăng dừng lại lớn"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1014
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1016
 msgid "Minor Lunar Standstill"
 msgstr "Mặt trăng dừng lại nhỏ"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1017
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1019
 msgid "Zenith Passage"
 msgstr "Thông qua Thiên đỉnh"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1020
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1022
 msgid "Nadir Passage"
 msgstr "Thiên để"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1023
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1025
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:374
 msgid "Selected Object"
 msgstr "Đối tượng được chọn"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1032
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1034
 msgid "error if you can read this"
 msgstr "lỗi nếu bạn có thể đọc điều này"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1035
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1037
 msgid "Mercury"
 msgstr "Thuỷ tinh"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1038
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1040
 msgid "Venus"
 msgstr "Kim tinh"
 
