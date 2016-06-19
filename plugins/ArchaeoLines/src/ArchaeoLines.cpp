@@ -80,11 +80,11 @@ ArchaeoLines::ArchaeoLines()
 	, flagShowCurrentMoon(false)
 	, enumShowCurrentPlanet(ArchaeoLine::CurrentPlanetNone)
 	, flagShowGeographicLocation1(false)
-	, geographicLocation1Longitude(23.4) // Mecca
-	, geographicLocation1Latitude(24.6)
+	, geographicLocation1Longitude(39.8) // Mecca
+	, geographicLocation1Latitude(21.4)
 	, flagShowGeographicLocation2(false)
-	, geographicLocation2Longitude(20.3) // Jerusalem
-	, geographicLocation2Latitude(27.3)
+	, geographicLocation2Longitude(35.2) // Jerusalem
+	, geographicLocation2Latitude(31.8)
 	, flagShowCustomAzimuth1(false)
 	, flagShowCustomAzimuth2(false)
 	, customAzimuth1(0.0)
