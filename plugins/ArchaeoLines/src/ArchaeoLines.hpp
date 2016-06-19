@@ -54,7 +54,7 @@ these declinations are still important in everyday astronomy.
  -# Current declination of a naked-eye planet
 
 Some religions, most notably Islam, adhere to a practice of observing a prayer direction towards a particular location.
-Azimuth lines for two locations can be shown. Default locations are Mecca (Kaaba) and Jerusalem.
+Azimuth lines (vertical semicircles from zenith to nadir) for two locations can be shown. Default locations are Mecca (Kaaba) and Jerusalem.
 The directions are computed based on spherical trigonometry on a spherical Earth.
 In addition, up to 2 custom azimuth lines can be drawn, also with a customized label.
 
