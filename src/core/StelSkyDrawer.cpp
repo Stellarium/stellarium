@@ -415,20 +415,24 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 }
 
 // Draw a point source halo.
-bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const RCMag& rcMag, const Vec3f& color, bool checkInScreen)
+bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const RCMag& rcMag, const Vec3f& color, bool checkInScreen, float twinkleFactor)
 {
 	Q_ASSERT(sPainter);
 
 	if (rcMag.radius<=0.f)
 		return false;
 
-	Vec3d win;
-	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(Vec3d(v[0],v[1],v[2]), win) : sPainter->getProjector()->project(Vec3d(v[0],v[1],v[2]), win)))
+	// Why do we need Vec3d here? Try with Vec3f win.
+//	Vec3d win;
+//	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(Vec3d(v[0],v[1],v[2]), win) : sPainter->getProjector()->project(Vec3d(v[0],v[1],v[2]), win)))
+//		return false;
+	Vec3f win;
+	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(v, win) : sPainter->getProjector()->project(v, win)))
 		return false;
 
 	const float radius = rcMag.radius;
-	// Random coef for star twinkling
-	const float tw = (flagStarTwinkle && flagHasAtmosphere) ? (1.f-twinkleAmount*qrand()/RAND_MAX)*rcMag.luminance : rcMag.luminance;
+	// Random coef for star twinkling. twinkleFactor can introduce height-dependent twinkling.
+	const float tw = (flagStarTwinkle && flagHasAtmosphere) ? (1.f-twinkleFactor*twinkleAmount*qrand()/RAND_MAX)*rcMag.luminance : rcMag.luminance;
 
 	// If the rmag is big, draw a big halo
 	if (radius>MAX_LINEAR_RADIUS+5.f)
