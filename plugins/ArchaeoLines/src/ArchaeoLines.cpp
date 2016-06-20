@@ -66,8 +66,8 @@ StelPluginInfo ArchaeoLinesStelPluginInterface::getPluginInfo() const
 
 ArchaeoLines::ArchaeoLines()
 	: flagShowArchaeoLines(false)
-	, withDecimalDegree(false)
-	, flagUseDmsFormat(false)
+	//, withDecimalDegree(false)
+	//, flagUseDmsFormat(false)
 	, flagShowEquinox(false)
 	, flagShowSolstices(false)
 	, flagShowCrossquarters(false)
@@ -80,15 +80,15 @@ ArchaeoLines::ArchaeoLines()
 	, flagShowCurrentMoon(false)
 	, enumShowCurrentPlanet(ArchaeoLine::CurrentPlanetNone)
 	, flagShowGeographicLocation1(false)
-	, geographicLocation1Longitude(39.8) // Mecca
+	, geographicLocation1Longitude(39.8) // approx. Mecca
 	, geographicLocation1Latitude(21.4)
 	, flagShowGeographicLocation2(false)
-	, geographicLocation2Longitude(35.2) // Jerusalem
+	, geographicLocation2Longitude(35.2) // approx. Jerusalem
 	, geographicLocation2Latitude(31.8)
 	, flagShowCustomAzimuth1(false)
 	, flagShowCustomAzimuth2(false)
-	, customAzimuth1(0.0)
-	, customAzimuth2(0.0)
+	//, customAzimuth1(0.0)
+	//, customAzimuth2(0.0)
 	, lastJDE(0.0)
 	, toolbarButton(NULL)
 {
@@ -205,8 +205,8 @@ void ArchaeoLines::init()
 	Q_ASSERT(customAzimuth1Line);
 	Q_ASSERT(customAzimuth2Line);
 
-	if (!conf->childGroups().contains("ArchaeoLines"))
-		restoreDefaultSettings();
+//	if (!conf->childGroups().contains("ArchaeoLines"))
+//		restoreDefaultSettings();
 
 	loadSettings();
 
@@ -248,7 +248,6 @@ void ArchaeoLines::init()
 	addAction("actionAL_showGeographicLocation2Line",   section, N_("Show Line for Geographic Location 2"),   "flagShowGeographicLocation2"  ); // No Shortcuts configured.
 	addAction("actionAL_showCustomAzimuth1Line",   section, N_("Show Line for Custom Azimuth 1"),   "flagShowCustomAzimuth1"  ); // No Shortcuts configured.
 	addAction("actionAL_showCustomAzimuth2Line",   section, N_("Show Line for Custom Azimuth 2"),   "flagShowCustomAzimuth2"  ); // No Shortcuts configured.
-	// TODO: Maybe add properties for custom azimuths: labels and azimuth values.
 }
 
 void ArchaeoLines::update(double deltaTime)
@@ -388,7 +387,7 @@ void ArchaeoLines::update(double deltaTime)
 	customAzimuth1Line->update(deltaTime);
 	customAzimuth2Line->update(deltaTime);
 
-	withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();;
+	//withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();;
 }
 
 
@@ -519,6 +518,7 @@ void ArchaeoLines::loadSettings()
 	showCurrentSun(conf->value("ArchaeoLines/show_current_sun", true).toBool());
 	showCurrentMoon(conf->value("ArchaeoLines/show_current_moon", true).toBool());
 	showCurrentPlanetNamed(conf->value("ArchaeoLines/show_current_planet", "none").toString());
+	// azimuths to geographic targets, and custom azimuths.
 	showGeographicLocation1(conf->value("ArchaeoLines/show_geographic_location_1", false).toBool());
 	showGeographicLocation2(conf->value("ArchaeoLines/show_geographic_location_2", false).toBool());
 	showCustomAzimuth1(conf->value("ArchaeoLines/show_custom_azimuth_1", false).toBool());
@@ -766,13 +766,18 @@ void ArchaeoLines::updateObserverLocation(StelLocation loc)
 
 void ArchaeoLines::setCustomAzimuth1(double az)
 {
+	if (az!=customAzimuth1Line->getDefiningAngle())
+	{
 	customAzimuth1Line->setDefiningAngle(az);
 	conf->setValue("ArchaeoLines/custom_azimuth_1_angle", az);
+	emit customAzimuth1Changed(az);
+	}
 }
 void ArchaeoLines::setCustomAzimuth2(double az)
 {
 	customAzimuth2Line->setDefiningAngle(az);
 	conf->setValue("ArchaeoLines/custom_azimuth_2_angle", az);
+	emit customAzimuth2Changed(az);
 }
 void ArchaeoLines::setCustomAzimuth1Label(QString label)
 {

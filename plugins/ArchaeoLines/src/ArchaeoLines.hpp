@@ -87,7 +87,13 @@ class ArchaeoLine : QObject
 	//or in signals/slots
 	Q_ENUMS(Line)
 public:
-	enum Line {
+	enum Line { // we must start with the planet lines to allow proper handling in the combobox.
+		CurrentPlanetNone, // actually a placeholder for counting/testing. By itself it makes no sense, i.e. deactivates the planet line
+		CurrentPlanetMercury,
+		CurrentPlanetVenus,
+		CurrentPlanetMars,
+		CurrentPlanetJupiter,
+		CurrentPlanetSaturn,
 		Equinox,
 		Solstices,
 		Crossquarters,
@@ -98,12 +104,6 @@ public:
 		SelectedObject,
 		CurrentSun,
 		CurrentMoon,
-		CurrentPlanetNone, // actually a placeholder for counting/testing. By itself it makes no sense, i.e. deactivates the planet line
-		CurrentPlanetMercury,
-		CurrentPlanetVenus,
-		CurrentPlanetMars,
-		CurrentPlanetJupiter,
-		CurrentPlanetSaturn,
 		GeographicLocation1,
 		GeographicLocation2,
 		CustomAzimuth1,
@@ -229,23 +229,33 @@ class ArchaeoLines : public StelModule
 				WRITE  setGeographicLocation1Latitude
 				NOTIFY geographicLocation1Changed)
 	Q_PROPERTY(double geographicLocation2Longitude
-				READ   getGeographicLocation1Longitude
-				WRITE  setGeographicLocation1Longitude
+				READ   getGeographicLocation2Longitude
+				WRITE  setGeographicLocation2Longitude
 				NOTIFY geographicLocation2Changed)
 	Q_PROPERTY(double geographicLocation2Latitude
 				READ   getGeographicLocation2Latitude
 				WRITE  setGeographicLocation2Latitude
 				NOTIFY geographicLocation2Changed)
 	Q_PROPERTY(bool flagShowCustomAzimuth1
-				READ    isCustomAzimuth1Displayed
+				READ   isCustomAzimuth1Displayed
 				WRITE  showCustomAzimuth1
 				NOTIFY showCustomAzimuth1Changed
 		   )
 	Q_PROPERTY(bool flagShowCustomAzimuth2
-				READ    isCustomAzimuth2Displayed
+				READ   isCustomAzimuth2Displayed
 				WRITE  showCustomAzimuth2
 				NOTIFY showCustomAzimuth2Changed
 		   )
+	// Note: following 2 are only "forwarding properties", no proper variables!
+	Q_PROPERTY(double customAzimuth1
+				READ getCustomAzimuth1
+				WRITE setCustomAzimuth1
+				NOTIFY customAzimuth1Changed)
+	Q_PROPERTY(double customAzimuth2
+				READ getCustomAzimuth2
+				WRITE setCustomAzimuth2
+				NOTIFY customAzimuth2Changed)
+	// TODO: Maybe add properties for geo locations and custom azimuths: labels.
 
 public:
 	ArchaeoLines();
@@ -262,7 +272,7 @@ public:
 	virtual bool configureGui(bool show=true);
 	//////////////////////////////////////////////////////////////////////////
 
-	bool isDmsFormat() const { return flagUseDmsFormat; } // NOT SURE IF USEFUL
+	//bool isDmsFormat() const { return flagUseDmsFormat; } // NOT SURE IF USEFUL
 
 	//! Restore the plug-in's settings to the default state.
 	//! Replace the plug-in's settings in Stellarium's configuration file
@@ -295,6 +305,8 @@ signals:
 	void geographicLocation2Changed();
 	void showCustomAzimuth1Changed(bool on);
 	void showCustomAzimuth2Changed(bool on);
+	void customAzimuth1Changed(double az);
+	void customAzimuth2Changed(double az);
 	void currentPlanetChanged(ArchaeoLine::Line l); // meaningful only CurrentPlanetNone...CurrentPlanetSaturn.
 
 public slots:
@@ -346,11 +358,11 @@ public slots:
 	void showCustomAzimuth1(bool b);
 	void showCustomAzimuth2(bool b);
 	void setCustomAzimuth1(double az);
+	double getCustomAzimuth1() const { return customAzimuth1Line->getDefiningAngle(); }
 	void setCustomAzimuth2(double az);
+	double getCustomAzimuth2() const { return customAzimuth2Line->getDefiningAngle(); }
 	void setCustomAzimuth1Label(QString label);
 	void setCustomAzimuth2Label(QString label);
-	// a slot connected to core which cares for location changes, updating the geographicLocation lines.
-	void updateObserverLocation(StelLocation loc);
 
 	// called by the dialog GUI, converts GUI's QColor (0..255) to Stellarium's Vec3f float color.
 	void setLineColor(ArchaeoLine::Line whichLine, QColor color);
@@ -360,13 +372,17 @@ public slots:
 	double getLineAngle(ArchaeoLine::Line whichLine);
 	QString getLineLabel(ArchaeoLine::Line whichLine);	
 
-private:
-	//! Compute azimuth towards Target. All angles (args and result) are in degrees.
+private slots:
+	//! a slot connected to core which cares for location changes, updating the geographicLocation lines.
+	void updateObserverLocation(StelLocation loc);
+	//! Compute azimuth (from North) towards Target. All angles (args and result) are in degrees.
 	double getAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget) const;
+
+private:
 	QFont font;
 	bool flagShowArchaeoLines;
-	bool withDecimalDegree;
-	bool flagUseDmsFormat;
+	//bool withDecimalDegree;
+	//bool flagUseDmsFormat;
 	LinearFader lineFader;
 
 	Vec3f equinoxColor;
@@ -404,8 +420,6 @@ private:
 	double geographicLocation2Latitude;
 	bool flagShowCustomAzimuth1;
 	bool flagShowCustomAzimuth2;
-	double customAzimuth1;
-	double customAzimuth2;
 	double lastJDE; // cache last-time-computed to every 10 days or so?
 
 	ArchaeoLine * equinoxLine;
