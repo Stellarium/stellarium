@@ -34,7 +34,6 @@
 #include <QDebug>
 #include <QTimer>
 #include <QPixmap>
-#include <QtNetwork>
 #include <QSettings>
 #include <QKeyEvent>
 #include <QMouseEvent>

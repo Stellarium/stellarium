@@ -29,7 +29,7 @@ SET(SolarSystemEditor_UIS
 QT5_WRAP_UI(SolarSystemEditor_UIS_H ${SolarSystemEditor_UIS})
 
 ADD_LIBRARY(SolarSystemEditor-static STATIC ${SolarSystemEditor_SRCS} ${SolarSystemEditor_RES_CXX} ${SolarSystemEditor_UIS_H})
-QT5_USE_MODULES(SolarSystemEditor-static Core Network Widgets)
+TARGET_LINK_LIBRARIES(SolarSystemEditor-static Qt5::Core Qt5::Network Qt5::Widgets)
 SET_TARGET_PROPERTIES(SolarSystemEditor-static PROPERTIES OUTPUT_NAME "SolarSystemEditor")
 SET_TARGET_PROPERTIES(SolarSystemEditor-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins SolarSystemEditor-static)

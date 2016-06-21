@@ -48,7 +48,6 @@
 #include <QKeyEvent>
 #include <QMenu>
 #include <QMouseEvent>
-#include <QtNetwork>
 #include <QPixmap>
 #include <QSignalMapper>
 

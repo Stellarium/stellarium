@@ -26,7 +26,7 @@ SET(Novae_RES ../resources/Novae.qrc)
 QT5_ADD_RESOURCES(Novae_RES_CXX ${Novae_RES})
 
 ADD_LIBRARY(Novae-static STATIC ${Novae_SRCS} ${Novae_RES_CXX} ${NovaeDialog_UIS_H})
-QT5_USE_MODULES(Novae-static Core Network)
+TARGET_LINK_LIBRARIES(Novae-static Qt5::Core Qt5::Network Qt5::Widgets)
 SET_TARGET_PROPERTIES(Novae-static PROPERTIES OUTPUT_NAME "Novae")
 SET_TARGET_PROPERTIES(Novae-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins Novae-static)

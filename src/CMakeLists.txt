@@ -398,7 +398,6 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
      SET(stellarium_gui_RES ${CMAKE_SOURCE_DIR}/data/gui/guiRes.qrc)
      QT5_ADD_RESOURCES(stellarium_gui_RES_CXX ${stellarium_gui_RES})
 
-     SET(extLinkerOption ${extLinkerOption} ${QT_QTSCRIPT_LIBRARY})
      SET(stellarium_lib_SRCS ${stellarium_lib_SRCS} ${stellarium_gui_SRCS} ${stellarium_UIS_H} ${stellarium_gui_RES_CXX})
 ENDIF()
 
@@ -442,10 +441,6 @@ ENDIF()
 #############################################################################################
 
 SET(extLinkerOption ${extLinkerOption} ${ZLIB_LIBRARIES})
-IF(ENABLE_MEDIA)
-    # Forced linkage to Qt5MultimediaWidgets library when media support is enabled
-    SET(extLinkerOption ${extLinkerOption} ${Qt5MultimediaWidgets_LIBRARIES})
-ENDIF()
 IF(WIN32 AND NOT MSVC)
     # This library is required on MinGW builds for some native methods used in a fix in main.cpp
      SET(extLinkerOption ${extLinkerOption} libwinmm.a)
@@ -464,33 +459,28 @@ IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
      ENDIF()
 ENDIF()
 
+# Setup Qt5 dependencies
+SET(STELLARIUM_QT_LIBRARIES Qt5::Core Qt5::Concurrent Qt5::Gui ${STEL_GLES_LIBS} Qt5::Network Qt5::Widgets Qt5::PrintSupport)
+IF(ENABLE_MEDIA)
+     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Multimedia Qt5::MultimediaWidgets)
+ENDIF()
+IF(ENABLE_SCRIPTING)
+     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Script)
+ENDIF()
+IF(USE_PLUGIN_TELESCOPECONTROL)
+     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::SerialPort)
+ENDIF()
+
 IF(GENERATE_STELMAINLIB)
      ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
-     TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
-     QT5_USE_MODULES(stelMain Core Concurrent Gui Network Script Widgets PrintSupport)
-     IF(ENABLE_MEDIA)
-         QT5_USE_MODULES(stelMain Multimedia MultimediaWidgets)
-     ENDIF()
-     IF(USE_PLUGIN_TELESCOPECONTROL)
-          QT5_USE_MODULES(stelMain SerialPort)
-     ENDIF()
+     TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES})
      INSTALL(TARGETS stelMain DESTINATION lib)
      ADD_EXECUTABLE(stellarium ${stellarium_exe_SRCS})
      #stelMain should be after the plug-ins, otherwise the build crashes
      TARGET_LINK_LIBRARIES(stellarium ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} stelMain ${extLinkerOption})
 ELSE()
      ADD_EXECUTABLE(stellarium ${stellarium_lib_SRCS} ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
-     TARGET_LINK_LIBRARIES(stellarium ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
-     # This will add the ANGLE lib if the Qt version supports it.
-     TARGET_LINK_LIBRARIES(stellarium ${Qt5Gui_LIBRARIES})
-
-     QT5_USE_MODULES(stellarium Core Concurrent Gui Network Script Widgets PrintSupport)
-     IF(ENABLE_MEDIA)
-          QT5_USE_MODULES(stellarium Multimedia MultimediaWidgets)
-     ENDIF()
-     IF(USE_PLUGIN_TELESCOPECONTROL)
-          QT5_USE_MODULES(stellarium SerialPort)
-     ENDIF()
+     TARGET_LINK_LIBRARIES(stellarium ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES})
 
      IF(APPLE)
           SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
@@ -521,7 +511,8 @@ MACRO(ADD_TEST NAME)
      SET(STELLARIUM_TESTS ${STELLARIUM_TESTS} ${NAME})
 ENDMACRO()
 
-SET(extLinkerOptionTest ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY} ${ZLIB_LIBRARIES})
+#SET(extLinkerOptionTest ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY} ${ZLIB_LIBRARIES})
+SET(TESTS_LIBRARIES Qt5::Core Qt5::Test)
 
 # Custom target used to build all tests at once
 ADD_CUSTOM_TARGET(buildTests)
@@ -537,8 +528,7 @@ IF(WIN32)
      SET(tests_testDates_SRCS ${tests_testDates_SRCS} ${zlib_SRCS})
 ENDIF()
 ADD_EXECUTABLE(testDates EXCLUDE_FROM_ALL ${tests_testDates_SRCS})
-QT5_USE_MODULES(testDates Core Gui Widgets Script Test)
-TARGET_LINK_LIBRARIES(testDates ${extLinkerOptionTest})
+TARGET_LINK_LIBRARIES(testDates ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testDates)
 ADD_TEST(testDates)
 
@@ -549,8 +539,7 @@ SET(tests_testStelFileMgr_SRCS
      core/StelFileMgr.cpp
 )
 ADD_EXECUTABLE(testStelFileMgr EXCLUDE_FROM_ALL ${tests_testStelFileMgr_SRCS})
-QT5_USE_MODULES(testStelFileMgr Core Gui Widgets Script Test)
-TARGET_LINK_LIBRARIES(testStelFileMgr ${extLinkerOptionTest})
+TARGET_LINK_LIBRARIES(testStelFileMgr ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testStelFileMgr)
 ADD_TEST(testStelFileMgr)
 
@@ -580,8 +569,7 @@ IF(WIN32)
      SET(tests_testStelSphereGeometry_SRCS ${tests_testStelSphereGeometry_SRCS} ${zlib_SRCS})
 ENDIF()
 ADD_EXECUTABLE(testStelSphereGeometry EXCLUDE_FROM_ALL ${tests_testStelSphereGeometry_SRCS})
-QT5_USE_MODULES(testStelSphereGeometry Core Gui Test)
-TARGET_LINK_LIBRARIES(testStelSphereGeometry ${extLinkerOptionTest})
+TARGET_LINK_LIBRARIES(testStelSphereGeometry ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testStelSphereGeometry)
 ADD_TEST(testStelSphereGeometry)
 
@@ -606,8 +594,7 @@ ADD_TEST(testStelSphereGeometry)
 #     core/StelTranslator.hpp
 #     ${glues_lib_SRCS})
 #ADD_EXECUTABLE(testStelSphericalIndex EXCLUDE_FROM_ALL ${tests_testStelSphericalIndex_SRCS})
-#QT5_USE_MODULES(testStelSphericalIndex Core Gui Widgets Script Test)
-#TARGET_LINK_LIBRARIES(testStelSphericalIndex ${extLinkerOptionTest})
+#TARGET_LINK_LIBRARIES(testStelSphericalIndex ${TESTS_LIBRARIES})
 #ADD_DEPENDENCIES(buildTests testStelSphericalIndex)
 
 SET(tests_testStelJsonParser_SRCS
@@ -617,8 +604,7 @@ SET(tests_testStelJsonParser_SRCS
      core/StelJsonParser.cpp
 )
 ADD_EXECUTABLE(testStelJsonParser EXCLUDE_FROM_ALL ${tests_testStelJsonParser_SRCS})
-QT5_USE_MODULES(testStelJsonParser Core Gui Widgets Script Test)
-TARGET_LINK_LIBRARIES(testStelJsonParser ${extLinkerOptionTest})
+TARGET_LINK_LIBRARIES(testStelJsonParser ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testStelJsonParser)
 ADD_TEST(testStelJsonParser)
 
@@ -628,8 +614,7 @@ SET(tests_testStelVertexArray_SRCS
      core/StelVertexArray.hpp
 )
 ADD_EXECUTABLE(testStelVertexArray EXCLUDE_FROM_ALL ${tests_testStelVertexArray_SRCS})
-QT5_USE_MODULES(testStelVertexArray Core Gui Test)
-TARGET_LINK_LIBRARIES(testStelVertexArray ${extLinkerOptionTest})
+TARGET_LINK_LIBRARIES(testStelVertexArray ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testStelVertexArray)
 ADD_TEST(testStelVertexArray)
 
@@ -644,8 +629,7 @@ IF(WIN32)
      SET(tests_testDeltaT_SRCS ${tests_testDeltaT_SRCS} ${zlib_SRCS})
 ENDIF()
 ADD_EXECUTABLE(testDeltaT EXCLUDE_FROM_ALL ${tests_testDeltaT_SRCS})
-QT5_USE_MODULES(testDeltaT Core Gui Widgets Script Test)
-TARGET_LINK_LIBRARIES(testDeltaT ${extLinkerOptionTest})
+TARGET_LINK_LIBRARIES(testDeltaT ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testDeltaT)
 ADD_TEST(testDeltaT)
 
@@ -660,8 +644,7 @@ IF(WIN32)
      SET(tests_testConversions_SRCS ${tests_testConversions_SRCS} ${zlib_SRCS})
 ENDIF()
 ADD_EXECUTABLE(testConversions EXCLUDE_FROM_ALL ${tests_testConversions_SRCS})
-QT5_USE_MODULES(testConversions Core Gui Widgets Script Test)
-TARGET_LINK_LIBRARIES(testConversions ${extLinkerOptionTest})
+TARGET_LINK_LIBRARIES(testConversions ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testConversions)
 ADD_TEST(testConversions)
 
@@ -672,8 +655,7 @@ SET(tests_testExtinction_SRCS
      core/RefractionExtinction.cpp
 )
 ADD_EXECUTABLE(testExtinction EXCLUDE_FROM_ALL ${tests_testExtinction_SRCS})
-QT5_USE_MODULES(testExtinction Core Gui Widgets Script Test)
-TARGET_LINK_LIBRARIES(testExtinction ${extLinkerOptionTest})
+TARGET_LINK_LIBRARIES(testExtinction ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testExtinction)
 ADD_TEST(testExtinction)
 
@@ -690,8 +672,7 @@ IF(WIN32)
      SET(tests_testRefraction_SRCS ${tests_testRefraction_SRCS} ${zlib_SRCS})
 ENDIF()
 ADD_EXECUTABLE(testRefraction EXCLUDE_FROM_ALL ${tests_testRefraction_SRCS})
-QT5_USE_MODULES(testRefraction Core Gui Widgets Script Test)
-TARGET_LINK_LIBRARIES(testRefraction ${extLinkerOptionTest})
+TARGET_LINK_LIBRARIES(testRefraction ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testRefraction)
 ADD_TEST(testRefraction)
 
@@ -708,8 +689,7 @@ IF(WIN32)
      SET(tests_testPrecession_SRCS ${tests_testPrecession_SRCS} ${zlib_SRCS})
 ENDIF()
 ADD_EXECUTABLE(testPrecession EXCLUDE_FROM_ALL ${tests_testPrecession_SRCS})
-QT5_USE_MODULES(testPrecession Core Gui Widgets Script Test)
-TARGET_LINK_LIBRARIES(testPrecession ${extLinkerOptionTest})
+TARGET_LINK_LIBRARIES(testPrecession ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testPrecession)
 ADD_TEST(testPrecession)
 

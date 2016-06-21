@@ -16,6 +16,9 @@ IF(NOT ("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}.${CMAKE_PATCH_VERSION}" L
     CMAKE_POLICY(SET CMP0054 OLD)
 ENDIF()
 
+# warn about deprecated stuff so that we may try fixing it
+SET(CMAKE_WARN_DEPRECATED 1)
+
 ########### Project name ###########
 PROJECT(Stellarium)
 # Use integer versions instead of strings for easier handling if required
@@ -246,6 +249,24 @@ IF(WIN32)
      FIND_PACKAGE(Qt5XmlPatterns REQUIRED)
 ENDIF()
 
+# Since Qt 5.4, linking to OpenGL is basically not required anymore,
+# because the QtGui module re-implements the GL functions, and perhaps even
+# dispatches the calls to a dynamically selected GL library.
+#
+# The only exception where this does not work with CMake is for
+# ES2-only/ANGLE-only builds, which are seemingly not included in
+# official Qt downloads, but may be required as a custom build
+# for some embedded systems. Interestingly, this works with qmake,
+# but CMake needs an explicit link definition.
+# See also this bug: https://bugreports.qt.io/browse/QTBUG-29132
+
+# Check if we have a GLES-only build
+# On dynamic builds, this property is also "GL"
+if(${Qt5Gui_OPENGL_IMPLEMENTATION} MATCHES "GLES")
+    message(STATUS "Building an OpenGL ES build (${Qt5Gui_OPENGL_IMPLEMENTATION})")
+    set(STEL_GLES_LIBS Qt5::Gui_EGL Qt5::Gui_GLESv2)
+endif()
+
 
 # Tell CMake to run moc when necessary:
 set(CMAKE_AUTOMOC ON)
@@ -253,16 +274,12 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 IF(ENABLE_SCRIPTING)
-    SET(QT_USE_QTSCRIPT TRUE)
     FIND_PACKAGE(Qt5Script REQUIRED)
-    INCLUDE_DIRECTORIES(${Qt5Script_INCLUDE_DIRS})
 ENDIF()
 IF(ENABLE_MEDIA)
     ADD_DEFINITIONS(-DENABLE_MEDIA)
     FIND_PACKAGE(Qt5Multimedia REQUIRED)
     FIND_PACKAGE(Qt5MultimediaWidgets REQUIRED)
-    INCLUDE_DIRECTORIES(${Qt5Multimedia_INCLUDE_DIRS})
-    INCLUDE_DIRECTORIES(${Qt5MultimediaWidgets_INCLUDE_DIRS})
 ENDIF()
 
 IF(NOT WIN32)
@@ -272,7 +289,6 @@ ELSE()
 ENDIF()
 
 FIND_PACKAGE(Qt5Test)
-INCLUDE_DIRECTORIES(${Qt5Test_INCLUDE_DIRS})
 
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)
