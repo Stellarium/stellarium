@@ -189,7 +189,7 @@ public:
 	}
 
 protected:
-	virtual void initializeGL()
+	virtual void initializeGL() Q_DECL_OVERRIDE
 	{
 		//This seems to be the correct place to initialize all
 		//GL related stuff of the application
@@ -208,18 +208,18 @@ protected:
 
 		parent->init();
 	}
-	virtual void paintGL()
+	virtual void paintGL() Q_DECL_OVERRIDE
 	{
 		//this is actually never called because the
 		//QGraphicsView intercepts the paint event
 		//we have to draw in the background of the scene
 		qDebug()<<"paintGL";
 	}
-	virtual void resizeGL()
+	virtual void resizeGL(int w, int h) Q_DECL_OVERRIDE
 	{
 		//we probably can ignore this method,
 		//it seems it is also never called
-		qDebug()<<"resizeGL";
+		qDebug()<<"resizeGL"<<w<<h;
 	}
 
 private:
