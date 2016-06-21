@@ -35,6 +35,8 @@
 #include "StelUtils.hpp"
 
 #include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 
 MainService::MainService(const QByteArray &serviceName, QObject *parent)
