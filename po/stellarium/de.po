@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-20 01:21+0700\n"
-"PO-Revision-Date: 2016-06-15 00:13+0000\n"
+"PO-Revision-Date: 2016-06-20 12:53+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-20 05:21+0000\n"
+"X-Launchpad-Export-Date: 2016-06-21 05:17+0000\n"
 "X-Generator: Launchpad (build 18097)\n"
 
 #: src/core/modules/Constellation.cpp:297 src/core/modules/Nebula.cpp:188
@@ -32,7 +32,7 @@ msgstr "Typ: <b>%1</b>"
 
 #: src/core/modules/Constellation.cpp:297
 msgid "constellation"
-msgstr ""
+msgstr "Sternbild"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:378
 #: src/core/modules/GridLinesMgr.cpp:950 src/core/modules/LandscapeMgr.cpp:414
@@ -10896,6 +10896,8 @@ msgid ""
 "Provides remote control functionality using a webserver interface. See "
 "manual for detailed description."
 msgstr ""
+"Bietet die Möglichkeit einer Fernbedienung mittels einer Webserver-"
+"Schnittstelle. Näheres im Handbuch."
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:147
 msgid "Remote control"
@@ -10926,11 +10928,12 @@ msgstr ""
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:122
 msgid "This plugin was developed during ESA SoCiS 2015."
 msgstr ""
+"Dieses Plugin wurde im Rahmen des Programms ESA SoCiS2015 entwickelt."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:123
 #, qt-format
 msgid "This plugin uses the %1QtWebApp HTTP server%2 by Stefan Frings."
-msgstr ""
+msgstr "Das Plugin nutzt den %1QtWebApp HTTP server%2 von Stefan Frings."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:126
 #, qt-format
@@ -14107,11 +14110,11 @@ msgstr "Zeige Linie für aktuelle Mondposition"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:247
 msgid "Show Line for Geographic Location 1"
-msgstr ""
+msgstr "Zeige Linie für geographischen Ort 1"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:248
 msgid "Show Line for Geographic Location 2"
-msgstr ""
+msgstr "Zeige Linie für geographischen Ort 2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:249
 msgid "Show Line for Custom Azimuth 1"
@@ -14244,6 +14247,11 @@ msgid ""
 "The directions are computed based on spherical trigonometry on a spherical "
 "Earth."
 msgstr ""
+"Einige Religionen, speziell der Islam, kennt eine Praxis, Gebete in Richtung "
+"heiliger Orte zu sprechen. Azimutlinien für 2 Orte können hier dargestellt "
+"werden, voreingestellt auf Mekka (Kaaba) und Jerusalem. Die Richtungen "
+"werden mit sphärischer Trigonometrie auf einer kugelförmig angenommenen Erde "
+"berechnet."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:263
 msgid ""
@@ -14299,11 +14307,11 @@ msgstr "Wähle Farbe für Linie des gewählten Planeten"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:488
 msgid "Select color for Geographic Location 1 line"
-msgstr ""
+msgstr "Wähle Farbe für Linie für geographisches Ziel 1"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:499
 msgid "Select color for Geographic Location 2 line"
-msgstr ""
+msgstr "Wähle Farbe für Linie für geographisches Ziel 2"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:510
 msgid "Select color for Custom Azimuth 1 line"
@@ -14327,7 +14335,7 @@ msgstr "Zur Farbwahl bitte möglichst den Fullscreen-Modus verlassen!"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:471
 msgid "Geographic Location 1"
-msgstr ""
+msgstr "Geographisches Ziel 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:472
 msgid "GeographicLocation1Color..."
@@ -14336,11 +14344,11 @@ msgstr ""
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:474
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:481
 msgid "Enter a label (location name) for this line"
-msgstr ""
+msgstr "Bezeichnung (Ortsname) für diese Linie"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:478
 msgid "Geographic Location 2"
-msgstr ""
+msgstr "Geographisches Ziel 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:479
 msgid "GeographicLocation2Color..."
