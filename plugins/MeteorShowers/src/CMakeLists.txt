@@ -34,7 +34,7 @@ SET(MeteorShowers_RES ../resources/MeteorShower.qrc)
 QT5_ADD_RESOURCES(MeteorShowers_RES_CXX ${MeteorShowers_RES})
 
 ADD_LIBRARY(MeteorShowers-static STATIC ${MeteorShowers_SRCS} ${MeteorShowers_MOC_SRCS} ${MeteorShowers_RES_CXX} ${MeteorShowersDialog_UIS_H})
-QT5_USE_MODULES(MeteorShowers-static Core Network Widgets)
+TARGET_LINK_LIBRARIES(MeteorShowers-static Qt5::Core Qt5::Network Qt5::Widgets)
 SET_TARGET_PROPERTIES(MeteorShowers-static PROPERTIES OUTPUT_NAME "MeteorShowers")
 SET_TARGET_PROPERTIES(MeteorShowers-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins MeteorShowers-static)

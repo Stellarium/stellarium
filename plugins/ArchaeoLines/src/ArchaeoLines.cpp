@@ -37,7 +37,6 @@
 #include <QTimer>
 #include <QPixmap>
 #include <QColor>
-#include <QtNetwork>
 #include <QSettings>
 #include <QMouseEvent>
 #include <cmath>

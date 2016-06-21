@@ -35,7 +35,6 @@
 #include <QPixmap>
 #include <QSettings>
 #include <QKeyEvent>
-#include <QtNetwork>
 #include <cmath>
 
 StelModule* CompassMarksStelPluginInterface::getStelModule() const

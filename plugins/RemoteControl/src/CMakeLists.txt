@@ -67,12 +67,9 @@ QT5_WRAP_UI(RemoteControl_UIS_H ${RemoteControl_UIS})
 SET(RemoteControl_RES ../RemoteControl.qrc)
 QT5_ADD_RESOURCES(RemoteControl_RES_CXX ${RemoteControl_RES})
 
-SET(extLinkerOption ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
-
 ADD_LIBRARY(RemoteControl-static STATIC ${RemoteControl_SRCS} ${RemoteControl_RES_CXX} ${RemoteControl_UIS_H} ${QtWebApp_SRCS})
-QT5_USE_MODULES(RemoteControl-static Core Network Widgets)
+TARGET_LINK_LIBRARIES(RemoteControl-static Qt5::Core Qt5::Network Qt5::Widgets)
 # The library target "RemoteControl-static" has a default OUTPUT_NAME of "RemoteControl-static", so change it.
 SET_TARGET_PROPERTIES(RemoteControl-static PROPERTIES OUTPUT_NAME "RemoteControl")
-TARGET_LINK_LIBRARIES(RemoteControl-static ${extLinkerOption})
 SET_TARGET_PROPERTIES(RemoteControl-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins RemoteControl-static)

@@ -21,15 +21,14 @@
 #define _STELSCRIPTMGR_HPP_
 
 #include <QObject>
-#include <QtScript>
 #include <QStringList>
 #include <QFile>
 #include <QTime>
 #include <QTimer>
-#include <QScriptEngineAgent>
 
 class StelMainScriptAPI;
 class StelScriptEngineAgent;
+class QScriptEngine;
 
 #ifdef ENABLE_SCRIPT_CONSOLE
 class ScriptConsole;
@@ -226,7 +225,7 @@ private:
 	//! @return the text following the id and : on a comment line near the top of 
 	//! the script file (i.e. before there is a non-comment line).
 	QString getHeaderSingleLineCommentText(const QString& s, const QString& id, const QString& notFoundText="") const;
-	QScriptEngine engine;
+	QScriptEngine* engine;
 	
 	//! The thread in which scripts are run
 	StelMainScriptAPI *mainAPI;
@@ -235,23 +234,6 @@ private:
 	
 	//Script engine agent
 	StelScriptEngineAgent *agent;
-
-};
-
-class StelScriptEngineAgent : public QScriptEngineAgent
-{
-public:
-	explicit StelScriptEngineAgent(QScriptEngine *engine);
-	virtual ~StelScriptEngineAgent() {}
-
-	void setPauseScript(bool pause) { isPaused=pause; }
-	bool getPauseScript() { return isPaused; }
-
-	void positionChange(qint64 scriptId, int lineNumber, int columnNumber);
-	
-private:
-	bool isPaused;
-
 };
 
 #endif // _STELSCRIPTMGR_HPP_

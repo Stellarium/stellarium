@@ -20,21 +20,9 @@
 #ifndef _STELOPENGL_HPP_
 #define _STELOPENGL_HPP_
 
-#define GL_GLEXT_PROTOTYPES
-#include <qopengl.h>
-
 #include <QOpenGLFunctions>
 
-// On windows without ANGLE support, we should not directly call some
-// of the OpenGL functions, instead we have to use QOpenGLFunctions.
-//
-// Here we replace the functions with a macro that will invoke the proper
-// calls.
-#if defined(Q_OS_WIN) && !defined(Q_NO_OPENGL)
-#  define GLFUNC_(x) QOpenGLContext::currentContext()->functions()->x
-#else
-#  define GLFUNC_(x) x
-#endif
+#define GLFUNC_(x) QOpenGLContext::currentContext()->functions()->x
 
 #define glActiveTexture(...)        GLFUNC_(glActiveTexture(__VA_ARGS__))
 #define glAttachShader(...)         GLFUNC_(glAttachShader(__VA_ARGS__))
