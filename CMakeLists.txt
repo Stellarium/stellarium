@@ -84,22 +84,30 @@ ELSE()
     SET(GCC_VERSION "0.0")
 ENDIF()
 
+# _USE_MATH_DEFINES enables use of math constants like M_PI,
+# which are by default disabled in standard C++ mode (like std=c++11 instead of std=gnu11)
+ADD_DEFINITIONS(-D_USE_MATH_DEFINES)
+
+# flags shared for gcc-like compilers (also MinGW/Clang)
+# Qt 5.7 requires C++11 support
+SET(STEL_GCC_C_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-unused-result")
+SET(STEL_GCC_CXX_FLAGS "-std=c++11 -Wall -Wextra -Wno-unused-parameter -Wno-unused-result")
 IF(WIN32)
      IF(NOT MSVC)
-          SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fexceptions -fident -mthreads -Wno-unused-parameter -Wno-unused-result")
-          # Qt 5.7 requires C++11 support
-          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -fexceptions -fident -mthreads -Wno-unused-parameter -Wno-unused-result")
-          SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fexceptions -fident -mthreads -mwindows")
-     ELSE()
-          # _USE_MATH_DEFINES Prevent MSVC from complaining about M_PI no matter where <cmath> is included first
+          # MinGW requires enabling of exceptions, version number storage and MinGW-specific threading
+          SET(STEL_MINGW_FLAGS "-fexceptions -fident -mthreads")
+          SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${STEL_GCC_C_FLAGS} ${STEL_MINGW_FLAGS}")
+          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${STEL_GCC_CXX_FLAGS} ${STEL_MINGW_FLAGS}")
+          # -mwindows generates a windows GUI app
+          SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${STEL_MINGW_FLAGS} -mwindows")
+     ELSE() # MSVC
           # NOMINMAX So that windows.h does not redefine min and max
           # _WINSOCKAPI_ Prevent window.s from including winsock.h
-          ADD_DEFINITIONS(-D_USE_MATH_DEFINES -DNOMINMAX -D_WINSOCKAPI_ /D_CRT_SECURE_NO_WARNINGS /wd4244 /wd4005 /wd4101 /wd4996 /wd4305 /wd4805)
+          ADD_DEFINITIONS(-DNOMINMAX -D_WINSOCKAPI_ /D_CRT_SECURE_NO_WARNINGS /wd4244 /wd4005 /wd4101 /wd4996 /wd4305 /wd4805)
      ENDIF()
 ELSE()
-     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wno-unused-parameter")
-     # Qt 5.7 requires C++11 support
-     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra -Wno-unused-parameter -Wno-unused-result")
+     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${STEL_GCC_C_FLAGS}")
+     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${STEL_GCC_CXX_FLAGS}")
 ENDIF()
 
 # CMake 3.0.0 the CMAKE_<LANG>_COMPILER_ID value for Apple-provided Clang is now AppleClang
