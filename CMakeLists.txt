@@ -91,7 +91,20 @@ ADD_DEFINITIONS(-D_USE_MATH_DEFINES)
 # flags shared for gcc-like compilers (also MinGW/Clang)
 # Qt 5.7 requires C++11 support
 SET(STEL_GCC_C_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-unused-result")
-SET(STEL_GCC_CXX_FLAGS "-std=c++11 -Wall -Wextra -Wno-unused-parameter -Wno-unused-result")
+SET(STEL_GCC_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-unused-result")
+
+SET(STELLARIUM_USE_CPP11 1 CACHE BOOL "Set whether to try using C++11 when compiling. Required for Qt >= 5.7")
+IF(STELLARIUM_USE_CPP11)
+    IF(NOT (CMAKE_VERSION VERSION_LESS 3.1.0))
+        # Let CMake handle setting C++11 (since 3.1)
+        SET(CMAKE_CXX_STANDARD 11)
+    ELSE()
+        # Add std=c++11 to gcc flags
+        SET(STEL_GCC_CXX_FLAGS "-std=c++11 ${STEL_GCC_CXX_FLAGS}")
+    ENDIF()
+
+ENDIF()
+
 IF(WIN32)
      IF(NOT MSVC)
           # MinGW requires enabling of exceptions, version number storage and MinGW-specific threading
