@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-06-20 01:21+0700\n"
+"POT-Creation-Date: 2016-06-21 17:32+0700\n"
 "PO-Revision-Date: 2016-06-11 22:37+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-20 05:21+0000\n"
-"X-Generator: Launchpad (build 18097)\n"
+"X-Launchpad-Export-Date: 2016-06-22 05:22+0000\n"
+"X-Generator: Launchpad (build 18111)\n"
 "Language: gd\n"
 
 #: src/core/modules/Constellation.cpp:297 src/core/modules/Nebula.cpp:188
@@ -1856,7 +1856,7 @@ msgstr "Fios"
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:207
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:118
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:240
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:223
 msgid "Version"
 msgstr "Tionndadh"
 
@@ -2624,13 +2624,13 @@ msgid "Altitude"
 msgstr "Àirde"
 
 #: src/gui/SearchDialog.cpp:265
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:477
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:480
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:515
 msgid "Longitude"
 msgstr "Domhan-fhad"
 
 #: src/gui/SearchDialog.cpp:268
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:476
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:479
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:516
 msgid "Latitude"
 msgstr "Domhan-leud"
@@ -3309,7 +3309,7 @@ msgid "Trees"
 msgstr "Craobhan"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:210 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1173
+#: src/translations.h:210 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1178
 msgid "Moon"
 msgstr "A' Ghealach"
 
@@ -3329,17 +3329,17 @@ msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:218 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1185
+#: src/translations.h:218 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1190
 msgid "Mars"
 msgstr "An Corg"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:220 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1188
+#: src/translations.h:220 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1193
 msgid "Jupiter"
 msgstr "Am Bliogh"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:222 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1191
+#: src/translations.h:222 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1196
 msgid "Saturn"
 msgstr "Satarn"
 
@@ -6609,7 +6609,7 @@ msgstr "Plugan tomhas cheàrnan"
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:241
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:224
 msgid "Author"
 msgstr "Ùghdar"
 
@@ -6661,7 +6661,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:125
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:265
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:248
 msgid "Links"
 msgstr "Ceanglaichean"
 
@@ -6676,7 +6676,7 @@ msgstr "Ceanglaichean"
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:127
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:266
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:249
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
@@ -6698,7 +6698,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:269
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:252
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "Ma tha ceist agad, gheibh thu freagairt %1an-seo%2"
@@ -6716,7 +6716,7 @@ msgstr "Ma tha ceist agad, gheibh thu freagairt %1an-seo%2"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:311
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:271
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:254
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "'S urrainn dhut bugaichean aithris %1an-seo%2."
@@ -6734,7 +6734,7 @@ msgstr "'S urrainn dhut bugaichean aithris %1an-seo%2."
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:133
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:273
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:256
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -11193,7 +11193,7 @@ msgstr "Tomad"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:310
 #: plugins/Exoplanets/src/Exoplanet.cpp:314
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1170
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1175
 msgid "Sun"
 msgstr "A' Ghrian"
 
@@ -14292,56 +14292,56 @@ msgstr ""
 msgid "Show Line for Custom Azimuth 2"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1146
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1151
 msgid "Equinox"
 msgstr "Co-fhad-thràth"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1149
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1154
 msgid "Solstice"
 msgstr "Grian-stad"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1152
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1157
 msgid "Crossquarter"
 msgstr "Tar-ràitheil"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1155
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1160
 msgid "Major Lunar Standstill"
 msgstr "Mòr-ghealach-stad"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1158
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1163
 msgid "Minor Lunar Standstill"
 msgstr "Meanbh-ghealach-stad"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1161
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1166
 msgid "Zenith Passage"
 msgstr "Siubhal tron bharr"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1164
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1169
 msgid "Nadir Passage"
 msgstr "Siubhal tron nèidir"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1167
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:486
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1172
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:488
 msgid "Selected Object"
 msgstr "An cuspair a thagh thu"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1176
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1181
 msgid "error if you can read this"
 msgstr "tha mearachd ann ma chì thu seo"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1179
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1184
 msgid "Mercury"
 msgstr "Mearcar"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1182
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1187
 msgid "Venus"
 msgstr "An Rìbhinn"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:239
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:222
 msgid "ArchaeoLines Plug-in"
 msgstr "Plugan nan co-thaobhaidhean dualchasach"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:245
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:228
 msgid ""
 "The ArchaeoLines plugin displays any combination of declination arcs most "
 "relevant to archaeo- or ethnoastronomical studies."
@@ -14350,13 +14350,13 @@ msgstr ""
 "cheàrnan dì-chlaonaidh a tha as cudromaiche dha sgrùdadh àrc-reul-eòlach no "
 "dualchas reul-eòlach."
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:246
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:229
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
 msgstr ""
 "Dì-chlaonaidhean nan co-fhadan-thràth (can meadhan-chriosach) agus nan grian-"
 "stadan"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:247
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:230
 msgid ""
 "Declinations of the crossquarter days (days right between solstices and "
 "equinoxes)"
@@ -14364,39 +14364,39 @@ msgstr ""
 "Dì-chlaonaidhean nan làithean tar-ràitheil (na làithean sa mheadhan eadar na "
 "co-fhadan-thràth is nan grian-stadan)"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:248
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:231
 msgid "Declinations of the Major Lunar Standstills"
 msgstr "Dì-chlaonaidhean nam mòr-ghealach-stadan"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:249
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:232
 msgid "Declinations of the Minor Lunar Standstills"
 msgstr "Dì-chlaonaidhean nam meanbh-ghealach-stadan"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:250
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:233
 msgid "Declination of the Zenith passage"
 msgstr "Dì-chlaonadh an t-siubhail tron bharr"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:251
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:234
 msgid "Declination of the Nadir passage"
 msgstr "Dì-chlaonadh an t-siubhail tron nèidir"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:252
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:235
 msgid "Declination of the currently selected object"
 msgstr "Dì-chlaonadh a' chuspair a thagh thu"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:253
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:236
 msgid "Current declination of the sun"
 msgstr "Dì-chlaonadh na grèine an-dràsta"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:254
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:237
 msgid "Current declination of the moon"
 msgstr "Dì-chlaonadh na gealaich an-dràsta"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:255
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:238
 msgid "Current declination of a naked-eye planet"
 msgstr "Dì-chlaonadh aig planaid air an t-sùil lom an-dràsta"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:256
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:239
 msgid ""
 "The lunar lines include horizon parallax effects. There are two lines each "
 "drawn, for maximum and minimum distance of the moon. Note that declination "
@@ -14409,7 +14409,7 @@ msgstr ""
 "staid a bhith nas motha na na crìochan a chaidh a shònrachadh ma tha i àrd "
 "san speur ri linn èifeachdan paraileige."
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:260
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:243
 msgid ""
 "Some religions, most notably Islam, adhere to a practice of observing a "
 "prayer direction towards a particular location. Azimuth lines for two "
@@ -14418,156 +14418,140 @@ msgid ""
 "Earth."
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:263
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:246
 msgid ""
 "In addition, up to two vertical lines with arbitrary azimuth and custom "
 "label can be shown."
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:367
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:351
 msgid "Select color for equinox line"
 msgstr "Tagh an dath airson loidhne a' cho-fhad-tràth"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:378
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:362
 msgid "Select color for solstice lines"
 msgstr "Tagh an dath airson loidhnichean nan grian-stadan"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:389
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:373
 msgid "Select color for crossquarter lines"
 msgstr "Tagh dath nan loidhnichean tar-ràitheil"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:400
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:384
 msgid "Select color for major standstill lines"
 msgstr "Tagh an dath airson loidhnichean nam mòr-ghealach-stadan"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:411
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:395
 msgid "Select color for minor standstill lines"
 msgstr "Tagh an dath airson loidhnichean nam meanbh-ghealach-stadan"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:422
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:406
 msgid "Select color for zenith passage line"
 msgstr "Tagh an dath airson loidhne an t-siubhail tron bharr"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:433
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:417
 msgid "Select color for nadir passage line"
 msgstr "Tagh an dath airson loidhne an t-siubhail tron nèidir"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:444
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:428
 msgid "Select color for selected object line"
 msgstr "Tagh an dath airson loidhne a' chuspair a thagh thu"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:455
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:439
 msgid "Select color for current sun line"
 msgstr "Tagh an dath airson loidhne na grèine làithrich"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:466
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:450
 msgid "Select color for current moon line"
 msgstr "Tagh an dath airson loidhne na gealaich làithrich"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:477
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:461
 msgid "Select color for current planet line"
 msgstr "Tagh an dath airson loidhne na planaid làithrich"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:488
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:472
 msgid "Select color for Geographic Location 1 line"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:499
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:483
 msgid "Select color for Geographic Location 2 line"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:510
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:494
 msgid "Select color for Custom Azimuth 1 line"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:521
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:505
 msgid "Select color for Custom Azimuth 2 line"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:467
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:471
 msgid "ArchaeoLines Configuration"
 msgstr "Rèiteachadh nan co-thaobhaidhean dualchasach"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:468
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:472
 msgid "ArchaeoLines Plug-in Configuration"
 msgstr "Rèiteachadh aig plugan nan co-thaobhaidhean dualchasach"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:470
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:474
 msgid "To change colors you may have to leave fullscreen mode!"
 msgstr ""
 "'S dòcha gum feum thu am modh làn-sgrìn fhàgail gus na dathan atharrachadh!"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:471
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:475
 msgid "Geographic Location 1"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:472
-msgid "GeographicLocation1Color..."
-msgstr ""
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:474
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:481
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:477
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:483
 msgid "Enter a label (location name) for this line"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:478
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:481
 msgid "Geographic Location 2"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:479
-msgid "GeographicLocation2Color..."
-msgstr ""
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:484
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:486
 msgid "Change color"
 msgstr "Atharraich an dath"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:487
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:489
 msgid "Declination of Nadir passage"
 msgstr "Dì-chlaonadh an t-siubhail tron nèidir"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:490
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:492
 msgid "Current Planet: None"
 msgstr "Gun phlanaid làithreach"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:491
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:493
 msgid "Current Planet: Mercury"
 msgstr "A' phlanaid làithreach: Mearcar"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:492
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:494
 msgid "Current Planet: Venus"
 msgstr "A' phlanaid làithreach: An Rìbhinn"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:493
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:495
 msgid "Current Planet: Mars"
 msgstr "A' phlanaid làithreach: Corg"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:494
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:496
 msgid "Current Planet: Jupiter"
 msgstr "A' phlanaid làithreach: Am Bliogh"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:495
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:497
 msgid "Current Planet: Saturn"
 msgstr "A' phlanaid làithreach: Satarn"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:497
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:499
 msgid "Minor Lunar Standstill lines"
 msgstr "Loidhnichean nam meanbh-ghealach-stadan"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:498
-msgid "Custom Azimuth 2 Color..."
-msgstr ""
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:499
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:500
 msgid "Custom Azimuth 1"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:500
-msgid "Custom Azimuth 2"
-msgstr ""
-
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:501
-msgid "Custom Azimuth 1 Color..."
+msgid "Custom Azimuth 2"
 msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:503

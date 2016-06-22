@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-20 01:21+0700\n"
-"PO-Revision-Date: 2016-06-18 17:49+0000\n"
+"POT-Creation-Date: 2016-06-21 17:32+0700\n"
+"PO-Revision-Date: 2016-06-21 10:37+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-20 05:29+0000\n"
-"X-Generator: Launchpad (build 18097)\n"
+"X-Launchpad-Export-Date: 2016-06-22 05:30+0000\n"
+"X-Generator: Launchpad (build 18111)\n"
 
 #: src/core/modules/Constellation.cpp:297 src/core/modules/Nebula.cpp:188
 #: src/core/modules/Planet.cpp:226 src/core/modules/MinorPlanet.cpp:213
@@ -1843,7 +1843,7 @@ msgstr "Обратная связь"
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:207
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:118
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:240
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:223
 msgid "Version"
 msgstr "Версия"
 
@@ -2603,13 +2603,13 @@ msgid "Altitude"
 msgstr "Высота"
 
 #: src/gui/SearchDialog.cpp:265
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:477
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:480
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:515
 msgid "Longitude"
 msgstr "Долгота"
 
 #: src/gui/SearchDialog.cpp:268
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:476
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:479
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:516
 msgid "Latitude"
 msgstr "Широта"
@@ -3285,7 +3285,7 @@ msgid "Trees"
 msgstr "Деревья"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:210 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1173
+#: src/translations.h:210 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1178
 msgid "Moon"
 msgstr "Луна"
 
@@ -3305,17 +3305,17 @@ msgid "Garching"
 msgstr "Гархинг"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:218 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1185
+#: src/translations.h:218 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1190
 msgid "Mars"
 msgstr "Марс"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:220 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1188
+#: src/translations.h:220 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1193
 msgid "Jupiter"
 msgstr "Юпитер"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:222 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1191
+#: src/translations.h:222 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1196
 msgid "Saturn"
 msgstr "Сатурн"
 
@@ -6542,7 +6542,7 @@ msgstr "Плагин \"Угломер\""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:241
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:224
 msgid "Author"
 msgstr "Автор"
 
@@ -6595,7 +6595,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:125
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:265
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:248
 msgid "Links"
 msgstr "Ссылки"
 
@@ -6610,7 +6610,7 @@ msgstr "Ссылки"
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:127
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:266
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:249
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
@@ -6632,7 +6632,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:269
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:252
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "Если у вас есть вопрос, то получить ответ можно %1здесь%2"
@@ -6650,7 +6650,7 @@ msgstr "Если у вас есть вопрос, то получить отве
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:311
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:271
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:254
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "Сообщить об ошибке можно %1здесь%2."
@@ -6668,7 +6668,7 @@ msgstr "Сообщить об ошибке можно %1здесь%2."
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:133
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:273
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:256
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -11069,7 +11069,7 @@ msgstr "Масса"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:310
 #: plugins/Exoplanets/src/Exoplanet.cpp:314
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1170
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1175
 msgid "Sun"
 msgstr "Солнце"
 
@@ -14114,11 +14114,11 @@ msgstr "Показать линию текущей Луны"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:247
 msgid "Show Line for Geographic Location 1"
-msgstr ""
+msgstr "Показывать линию географического места 1"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:248
 msgid "Show Line for Geographic Location 2"
-msgstr ""
+msgstr "Показывать линию географического места 2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:249
 msgid "Show Line for Custom Azimuth 1"
@@ -14128,56 +14128,56 @@ msgstr "Выбрать цвет линии пользовательского а
 msgid "Show Line for Custom Azimuth 2"
 msgstr "Показать линию пользовательского азимута 2"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1146
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1151
 msgid "Equinox"
 msgstr "Равноденствие"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1149
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1154
 msgid "Solstice"
 msgstr "Солнцестояние"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1152
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1157
 msgid "Crossquarter"
 msgstr "Пересечение четверти"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1155
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1160
 msgid "Major Lunar Standstill"
 msgstr "Большая лунная остановка"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1158
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1163
 msgid "Minor Lunar Standstill"
 msgstr "Малая лунная остановка"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1161
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1166
 msgid "Zenith Passage"
 msgstr "Прохождение зенита"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1164
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1169
 msgid "Nadir Passage"
 msgstr "Прохождение надира"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1167
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:486
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1172
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:488
 msgid "Selected Object"
 msgstr "Выделенный объект"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1176
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1181
 msgid "error if you can read this"
 msgstr "ошибка, если вы можете прочитать это"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1179
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1184
 msgid "Mercury"
 msgstr "Меркурий"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1182
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1187
 msgid "Venus"
 msgstr "Венера"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:239
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:222
 msgid "ArchaeoLines Plug-in"
 msgstr "Плагин \"Археолинии\""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:245
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:228
 msgid ""
 "The ArchaeoLines plugin displays any combination of declination arcs most "
 "relevant to archaeo- or ethnoastronomical studies."
@@ -14185,11 +14185,11 @@ msgstr ""
 "Плагин Археолинии отображает любую комбинацию наиболее актуальных дуг "
 "склонений для архео - или этноастрономических исследований."
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:246
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:229
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
 msgstr "Склонения равноденствий (т. е. экватора) и солнцестояний"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:247
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:230
 msgid ""
 "Declinations of the crossquarter days (days right between solstices and "
 "equinoxes)"
@@ -14197,39 +14197,39 @@ msgstr ""
 "Склонение дней пересечение четверти (дней точно между солнцестояниями и "
 "равноденствиями)"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:248
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:231
 msgid "Declinations of the Major Lunar Standstills"
 msgstr "Склонения больших лунных остановок"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:249
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:232
 msgid "Declinations of the Minor Lunar Standstills"
 msgstr "Склонения малых лунных остановок"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:250
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:233
 msgid "Declination of the Zenith passage"
 msgstr "Склонение прохождения зенита"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:251
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:234
 msgid "Declination of the Nadir passage"
 msgstr "Склонение прохождения надира"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:252
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:235
 msgid "Declination of the currently selected object"
 msgstr "Склонение текущего выбранного объекта"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:253
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:236
 msgid "Current declination of the sun"
 msgstr "Текущее склонение Солнца"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:254
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:237
 msgid "Current declination of the moon"
 msgstr "Текущее склонение Луны"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:255
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:238
 msgid "Current declination of a naked-eye planet"
 msgstr "Текущее склонение видимой невооруженным глазом планеты"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:256
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:239
 msgid ""
 "The lunar lines include horizon parallax effects. There are two lines each "
 "drawn, for maximum and minimum distance of the moon. Note that declination "
@@ -14242,7 +14242,7 @@ msgstr ""
 "остановки может превышать указанные пределы, если она находится высоко в "
 "небе из-за эффекта параллакса."
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:260
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:243
 msgid ""
 "Some religions, most notably Islam, adhere to a practice of observing a "
 "prayer direction towards a particular location. Azimuth lines for two "
@@ -14250,8 +14250,13 @@ msgid ""
 "The directions are computed based on spherical trigonometry on a spherical "
 "Earth."
 msgstr ""
+"Некоторые религии, особенно ислам, придерживаются практики вознесения "
+"молитвы в определенном направлении. Для двух местоположений могут быть "
+"показаны линии азимутов. Направлениями по умолчанию является Мекка (Кааба) и "
+"Иерусалим. Направления рассчитываются на основе сферической тригонометрии на "
+"сферической Земле."
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:263
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:246
 msgid ""
 "In addition, up to two vertical lines with arbitrary azimuth and custom "
 "label can be shown."
@@ -14259,150 +14264,134 @@ msgstr ""
 "Кроме того, могут быть показаны две вертикальные линии с произвольным "
 "азимутом и пользовательскими метками."
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:367
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:351
 msgid "Select color for equinox line"
 msgstr "Выберите цвет для линии равноденствия"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:378
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:362
 msgid "Select color for solstice lines"
 msgstr "Выберите цвет для линии солнцестояния"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:389
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:373
 msgid "Select color for crossquarter lines"
 msgstr "Выберите цвет линий для пересечения четверти"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:400
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:384
 msgid "Select color for major standstill lines"
 msgstr "Выберите цвет для линий больших лунных остановок"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:411
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:395
 msgid "Select color for minor standstill lines"
 msgstr "Выберите цвет для линий малых лунных остановок"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:422
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:406
 msgid "Select color for zenith passage line"
 msgstr "Выберите цвет для линии прохождения зенита"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:433
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:417
 msgid "Select color for nadir passage line"
 msgstr "Выберите цвет для линии прохождения надира"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:444
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:428
 msgid "Select color for selected object line"
 msgstr "Выберите цвет для линии выбранного объекта"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:455
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:439
 msgid "Select color for current sun line"
 msgstr "Выберите цвет для линии текущего солнца"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:466
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:450
 msgid "Select color for current moon line"
 msgstr "Выберите цвет для линии текущей луны"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:477
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:461
 msgid "Select color for current planet line"
 msgstr "Выберите цвет для линии текущей планеты"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:488
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:472
 msgid "Select color for Geographic Location 1 line"
-msgstr ""
+msgstr "Выберите цвет для линии для географического места 1"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:499
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:483
 msgid "Select color for Geographic Location 2 line"
-msgstr ""
+msgstr "Выберите цвет для линии для географического места 2"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:510
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:494
 msgid "Select color for Custom Azimuth 1 line"
 msgstr "Выбрать цвет линии пользовательского азимута 1"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:521
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:505
 msgid "Select color for Custom Azimuth 2 line"
 msgstr "Выбрать цвет линии пользовательского азимута 2"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:467
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:471
 msgid "ArchaeoLines Configuration"
 msgstr "Настройка археолиний"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:468
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:472
 msgid "ArchaeoLines Plug-in Configuration"
 msgstr "Настройка плагина Археолинии"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:470
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:474
 msgid "To change colors you may have to leave fullscreen mode!"
 msgstr "Для изменения цвета необходимо выйти из полноэкранного режима!"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:471
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:475
 msgid "Geographic Location 1"
-msgstr ""
+msgstr "Географическое местоположение 1"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:472
-msgid "GeographicLocation1Color..."
-msgstr ""
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:474
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:481
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:477
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:483
 msgid "Enter a label (location name) for this line"
-msgstr ""
+msgstr "Введите метку (название места) для этой линии"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:478
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:481
 msgid "Geographic Location 2"
-msgstr ""
+msgstr "Географическое местоположение 2"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:479
-msgid "GeographicLocation2Color..."
-msgstr ""
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:484
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:486
 msgid "Change color"
 msgstr "Изменить цвет"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:487
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:489
 msgid "Declination of Nadir passage"
 msgstr "Склонение прохождения надира"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:490
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:492
 msgid "Current Planet: None"
 msgstr "Текущая планета: отсутствует"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:491
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:493
 msgid "Current Planet: Mercury"
 msgstr "Текущая планета: Меркурий"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:492
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:494
 msgid "Current Planet: Venus"
 msgstr "Текущая планета: Венера"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:493
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:495
 msgid "Current Planet: Mars"
 msgstr "Текущая планета: Марс"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:494
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:496
 msgid "Current Planet: Jupiter"
 msgstr "Текущая планета: Юпитер"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:495
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:497
 msgid "Current Planet: Saturn"
 msgstr "Текущая планета: Сатурн"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:497
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:499
 msgid "Minor Lunar Standstill lines"
 msgstr "Линии малых лунных остановок"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:498
-msgid "Custom Azimuth 2 Color..."
-msgstr "Цвет пользовательского азимута 2..."
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:499
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:500
 msgid "Custom Azimuth 1"
 msgstr "Пользовательский азимут 1"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:500
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:501
 msgid "Custom Azimuth 2"
 msgstr "Пользовательский азимут 2"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:501
-msgid "Custom Azimuth 1 Color..."
-msgstr "Цвет пользовательского азимута 1..."
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:503
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:506
