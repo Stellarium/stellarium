@@ -122,8 +122,13 @@ void StelAction::trigger()
 		toggle();
 	else
 	{
-		//parameterless slot call
-		slot.invoke(target);
+		//We do not call the slot here, but let Qt handle it through a
+		//connection established in ::connectToObject from the triggered() signal
+		//to the slot
+		//This should still call the target slot first before all other registered slots
+		//(because it is registered first, see https://doc.qt.io/qt-4.8/signalsandslots.html#signals).
+		//This enables the slot to find out the StelAction that was triggered using sender(),
+		//and enables use of QSignalMapper or similar constructs
 		emit triggered();
 	}
 }
@@ -163,6 +168,9 @@ void StelAction::connectToObject(QObject* obj, const char* slot)
 	// connect to a parameterless slot.
 	this->slot = obj->metaObject()->method(slotIndex);
 	Q_ASSERT(this->slot.parameterCount() == 0);
+	//let Qt handle invoking the slot when the StelAction is triggered
+	int signalIndex = metaObject()->indexOfSignal("triggered()");
+	connect(this,metaObject()->method(signalIndex),obj,this->slot);
 
 	emit changed();
 }
