@@ -265,7 +265,7 @@ public slots:
 	//! // example of usage in scripts
 	//! TelescopeControl.slewTelescopeToSelectedObject();
 	//! @endcode
-	void slewTelescopeToSelectedObject();
+	void slewTelescopeToSelectedObject(const int idx);
 
 	//! slews a telescope to the point of the celestial sphere currently
 	//! in the center of the screen.
@@ -275,7 +275,7 @@ public slots:
 	//! // example of usage in scripts
 	//! TelescopeControl.slewTelescopeToViewDirection();
 	//! @endcode
-	void slewTelescopeToViewDirection();
+	void slewTelescopeToViewDirection(const int idx);
 	
 	//! Used in the GUI
 	void setFlagUseTelescopeServerLogs (bool b) {useTelescopeServerLogs = b;}
