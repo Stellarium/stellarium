@@ -83,7 +83,7 @@ private:
 	QList<double> FOVitem, FOVdefault;
 
 	FOVWindow* mainWindow;
-	QSettings* conf;	
+	QSettings* conf;
 };
 
 

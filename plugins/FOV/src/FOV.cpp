@@ -51,7 +51,7 @@ FOV::FOV()
 {
 	setObjectName("FOV");
 	mainWindow = new FOVWindow();
-	conf = StelApp::getInstance().getSettings();
+	conf = StelApp::getInstance().getSettings();	
 }
 
 FOV::~FOV()
@@ -81,7 +81,7 @@ void FOV::init()
 	QString section = N_("Field of View");
 	for (int i=0; i<10; i++)
 	{
-		QString name = QString("actionSetFOV%1").arg(i);
+		QString name = QString("actionSet_FOV_%1").arg(i);
 		QString shortcut = QString("Ctrl+Alt+%1").arg(i);
 		QString text = q_("Set FOV to %1%2").arg(getQuickFOV(i)).arg(QChar(0x00B0));
 		StelAction* action = addAction(name, section, text, mapper, "map()", shortcut);
