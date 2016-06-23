@@ -222,24 +222,24 @@ QString StelScriptMgr::getHtmlDescription(const QString &s, bool generateDocumen
 	QString html;
 	if (generateDocumentTags)
 		html += "<html><body>";
-	html += "<h2>" + q_(getName(s)) + "</h2>";
-	QString d = getDescription(s);
+	html += "<h2>" + q_(getName(s).trimmed()) + "</h2>";
+	QString d = getDescription(s).trimmed();
 	d.replace("\n", "<br />");
 	d.replace(QRegExp("\\s{2,}"), " ");
 	html += "<p>" + q_(d) + "</p>";
 	html += "<p>";
 
-	QString author = getAuthor(s);
+	QString author = getAuthor(s).trimmed();
 	if (!author.isEmpty())
 	{
 		html += "<strong>" + q_("Author") + "</strong>: " + author + "<br />";
 	}
-	QString license = getLicense(s);
+	QString license = getLicense(s).trimmed();
 	if (!license.isEmpty())
 	{
 		html += "<strong>" + q_("License") + "</strong>: " + license + "<br />";
 	}
-	QString shortcut = getShortcut(s);
+	QString shortcut = getShortcut(s).trimmed();
 	if (!shortcut.isEmpty())
 	{
 		html += "<strong>" + q_("Shortcut") + "</strong>: " + shortcut;
