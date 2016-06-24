@@ -333,9 +333,6 @@ bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript, con
 		return false;
 	}
 
-	// Seed the PRNG so that script random numbers aren't always the same sequence
-	qsrand(QDateTime::currentDateTime().toTime_t());
-
 	// Make sure that the gui objects have been completely initialized (there used to be problems with startup scripts).
 	Q_ASSERT(StelApp::getInstance().getGui());
 

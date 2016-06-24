@@ -58,7 +58,6 @@ MeteorShowersMgr::MeteorShowersMgr()
 	, m_progressBar(NULL)
 {
 	setObjectName("MeteorShowers");
-	qsrand(QDateTime::currentMSecsSinceEpoch());
 }
 
 MeteorShowersMgr::~MeteorShowersMgr()
