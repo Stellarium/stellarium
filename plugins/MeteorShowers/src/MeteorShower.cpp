@@ -189,8 +189,6 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 	}
 
 	m_status = UNDEFINED;
-
-	qsrand(QDateTime::currentMSecsSinceEpoch());
 }
 
 MeteorShower::~MeteorShower()

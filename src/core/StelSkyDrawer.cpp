@@ -67,7 +67,6 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	big3dModelHaloRadius(150.f)
 {
 	setObjectName("StelSkyDrawer");
-	qsrand (QDateTime::currentMSecsSinceEpoch());
 	QSettings* conf = StelApp::getInstance().getSettings();
 	initColorTableFromConfigFile(conf);
 
