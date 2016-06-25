@@ -1,28 +1,12 @@
 #!/usr/bin/perl -w
 
-#
-# Copyright (C) 2013 Alexander Wolf
-#
-# This program is free software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
-# 
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-# 
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA 
-# 02110-1335, USA.
-
 # v.1
 # This tool read original Hipparcos catalog (J1991.25) + Hipparcos from VizieR (J2000.0)
 # and update coordinates in original catalog.
 # v.2
 # Get Hipparcos 2 from VizieR (cat. 2007 - I/311) and improve original catalog.
+# v.3
+# Get An Extended Hipparcos Compilation from VizieR (cat. 2012 - V/137D) and improve original catalog.
 #
 # All catalogs can be found here: http://astro.altspu.ru/~aw/stellarium/hipparcos/
 #
@@ -38,6 +22,9 @@ $HIPcomV	= "./h_dm_com_j2000.dat";
 
 # Hipparcos 2 from VizieR (2013)
 $HIP2main	= "./hip2_main.dat";
+
+# An Extended Hipparcos Compilation VizieR (2016)
+$XHIPmain	= "./xhip_main.dat";
 
 # Result
 $HIPmainR	= "./hip_main_r.dat";
@@ -60,6 +47,10 @@ open(tHIP, "<$HIP2main");
 @catalogT = <tHIP>;
 close tHIP;
 
+open(zHIP, "<$XHIPmain");
+@catalogZ = <zHIP>;
+close zHIP;
+
 for($i=0;$i<scalar(@catalogT);$i++) 
 {
 	@fixt = split('\|',$catalogT[$i]);
@@ -70,6 +61,20 @@ for($i=0;$i<scalar(@catalogT);$i++)
 	$Hpmag[$id] = $fixt[4]; # Hpmag from H2
 	$BV[$id] = $fixt[5];	# B-V from H2
 }
+
+for($i=0;$i<scalar(@catalogZ);$i++) 
+{
+	@fixt = split('\|',$catalogZ[$i]);
+	$id = $fixt[0]+0;
+	$zPlx[$id] = $fixt[1]; 	# Plx from XHIP
+	$zpmRA[$id] = $fixt[2];	# pmRA from XHIP
+	$zpmDE[$id] = $fixt[3];	# pmDE from XHIP
+	$zSpType[$id] = $fixt[4];# SpType from XHIP
+	$zHpmag[$id] = $fixt[5]; # Hpmag from XHIP
+	$zVmag[$id] = $fixt[6];  # Vmag from XHIP
+	$zBV[$id] = $fixt[7];	# B-V from XHIP
+}
+
 
 open(rHIP, ">$HIPmainR");
 for($i=0;$i<scalar(@catalog);$i++) 
@@ -89,20 +94,37 @@ for($i=0;$i<scalar(@catalog);$i++)
 		$cat[9] = $fix[1]."00";
 	}
 	$id = $cat[1]+0;
-	if ($Plx[$id] ne '') {
-		$cat[11] = $Plx[$id]; # Plx from H2
+	if ($zPlx[$id] ne '') {
+		$cat[11] = ' '.$zPlx[$id]; # Plx from XHIP
+	} elsif ($Plx[$id] ne '') {
+		$cat[11] = $Plx[$id]; # Plx from HIP2
 	}
-	if ($pmRA[$id] ne '') {
-		$cat[12] = $pmRA[$id]; # pmRA from H2
+	if ($zpmRA[$id] ne '') {
+		$cat[12] = $zpmRA[$id]; # pmRA from XHIP
+	} elsif ($pmRA[$id] ne '') {
+		$cat[12] = $pmRA[$id]; # pmRA from HIP2
 	}
-	if ($pmDE[$id] ne '') {
-		$cat[13] = $pmDE[$id]; # pmDE from H2
+	if ($zpmDE[$id] ne '') {
+		$cat[13] = $zpmDE[$id]; # pmDE from XHIP
+	} elsif ($pmDE[$id] ne '') {
+		$cat[13] = $pmDE[$id]; # pmDE from HIP2
 	}
-	if ($Hpmag[$id] ne '') {
-		$cat[44] = $Hpmag[$id]; # Hpmag from H2
+	if ($zHpmag[$id] ne '') {
+		$cat[44] = ' '.$zHpmag[$id]; # Hpmag from XHIP
+	} elsif ($Hpmag[$id] ne '') {
+		$cat[44] = $Hpmag[$id]; # Hpmag from HIP2
 	}
-	if ($BV[$id] ne '') {
-		$cat[37] = $BV[$id]; # B-V from H2
+	if ($zBV[$id] ne '') {
+		$cat[37] = $zBV[$id]; # B-V from XHIP
+	} elsif ($BV[$id] ne '') {
+		$cat[37] = $BV[$id]; # B-V from HIP2
+	}
+	if ($zSpType[$id] ne '') {
+		$cat[76] = $zSpType[$id]; # SpType from XHIP
+	} elsif ($cat[76] eq '            ') {
+		$cat[76] = '                          ';
+	} else {
+		$cat[76] .= '              ';
 	}
 	print rHIP join('|', @cat);
 }
