@@ -95,13 +95,14 @@ public:
 	//! @param rcMag the radius and luminance of the source as computed by computeRCMag()
 	//! @param bV the source B-V index
 	//! @param checkInScreen whether source in screen should be checked to avoid unnecessary drawing.
+	//! @param twinkleFactor allows height-dependent twinkling. Recommended value: min(1,1-0.9*sin(altitude)). Allowed values [0..1]
 	//! @return true if the source was actually visible and drawn
-	bool drawPointSource(StelPainter* sPainter, const Vec3f& v, const RCMag &rcMag, unsigned int bV, bool checkInScreen=false)
+	bool drawPointSource(StelPainter* sPainter, const Vec3f& v, const RCMag &rcMag, unsigned int bV, bool checkInScreen=false, float twinkleFactor=1.0f)
 	{
-		return drawPointSource(sPainter, v, rcMag, colorTable[bV], checkInScreen);
+		return drawPointSource(sPainter, v, rcMag, colorTable[bV], checkInScreen, twinkleFactor);
 	}
 
-	bool drawPointSource(StelPainter* sPainter, const Vec3f& v, const RCMag &rcMag, const Vec3f& bcolor, bool checkInScreen=false);
+	bool drawPointSource(StelPainter* sPainter, const Vec3f& v, const RCMag &rcMag, const Vec3f& bcolor, bool checkInScreen=false, float twinkleFactor=1.0f);
 
 	void drawSunCorona(StelPainter* painter, const Vec3f& v, float radius, const Vec3f& color, const float alpha);
 
