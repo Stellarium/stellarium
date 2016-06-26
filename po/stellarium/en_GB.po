@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-21 17:32+0700\n"
-"PO-Revision-Date: 2016-06-02 14:09+0000\n"
+"PO-Revision-Date: 2016-06-25 17:56+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-22 05:36+0000\n"
+"X-Launchpad-Export-Date: 2016-06-26 05:15+0000\n"
 "X-Generator: Launchpad (build 18111)\n"
 
 #: src/core/modules/Constellation.cpp:297 src/core/modules/Nebula.cpp:188
@@ -30,7 +30,7 @@ msgstr "Type: <b>%1</b>"
 
 #: src/core/modules/Constellation.cpp:297
 msgid "constellation"
-msgstr ""
+msgstr "constellation"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:378
 #: src/core/modules/GridLinesMgr.cpp:950 src/core/modules/LandscapeMgr.cpp:414
@@ -63,7 +63,7 @@ msgstr "Constellation boundaries"
 
 #: src/core/modules/ConstellationMgr.cpp:148
 msgid "Constellation selection isolated"
-msgstr ""
+msgstr "Constellation selection isolated"
 
 #: src/core/modules/StarMgr.cpp:379 src/ui_viewDialog.h:1596
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:253
@@ -126,7 +126,7 @@ msgstr "Solstitial Colure"
 
 #: src/core/modules/GridLinesMgr.cpp:652
 msgid "Circumpolar Circle"
-msgstr ""
+msgstr "Circumpolar Circle"
 
 #: src/core/modules/GridLinesMgr.cpp:951
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:339
@@ -203,7 +203,7 @@ msgstr "Colure Lines"
 
 #: src/core/modules/GridLinesMgr.cpp:968
 msgid "Circumpolar Circles"
-msgstr ""
+msgstr "Circumpolar Circles"
 
 #: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1614
 msgid "Atmosphere"
@@ -734,7 +734,7 @@ msgstr "Deep-sky objects"
 
 #: src/core/modules/NebulaMgr.cpp:365
 msgid "Toggle DSO type filter"
-msgstr ""
+msgstr "Toggle DSO type filter"
 
 #: src/core/modules/Planet.cpp:238 src/core/modules/MinorPlanet.cpp:232
 #: src/core/modules/MinorPlanet.cpp:236 src/core/modules/Comet.cpp:194
@@ -882,11 +882,11 @@ msgstr "Planet trails"
 
 #: src/core/modules/SolarSystem.cpp:201
 msgid "Planet markers"
-msgstr ""
+msgstr "Planet markers"
 
 #: src/core/modules/SolarSystem.cpp:203
 msgid "Native planet names (from starlore)"
-msgstr ""
+msgstr "Native planet names (from starlore)"
 
 #: src/core/modules/StarWrapper.cpp:155
 msgid "eruptive variable star"
@@ -1551,6 +1551,9 @@ msgid ""
 "equator, ecliptic, hour lines, etc. into straight lines. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
+"Perspective projection maps the horizon and other great circles like "
+"equator, ecliptic, hour lines, etc. into straight lines. The mathematical "
+"name for this projection method is <i>gnomonic projection</i>."
 
 #: src/core/StelProjectorClasses.cpp:87
 msgid "Equal Area"
@@ -1561,6 +1564,8 @@ msgid ""
 "The full name of this projection method is <i>Lambert azimuthal equal-area "
 "projection</i>. It preserves the area but not the angle."
 msgstr ""
+"The full name of this projection method is <i>Lambert azimuthal equal-area "
+"projection</i>. It preserves the area but not the angle."
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Stereographic"
@@ -1572,6 +1577,9 @@ msgid ""
 "as the planisphere projection. It preserves the angles at which curves cross "
 "each other but it does not preserve area."
 msgstr ""
+"Stereographic projection is known since antiquity and was originally known "
+"as the planisphere projection. It preserves the angles at which curves cross "
+"each other but it does not preserve area."
 
 #: src/core/StelProjectorClasses.cpp:200
 msgid "Fish-eye"
@@ -1655,7 +1663,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:512
 msgid "Miller cylindrical"
-msgstr ""
+msgstr "Miller cylindrical"
 
 #: src/core/StelProjectorClasses.cpp:517
 msgid ""
@@ -1663,6 +1671,9 @@ msgid ""
 "proposed by Osborn Maitland Miller (1897–1979) in 1942. The poles are no "
 "longer mapped to infinity."
 msgstr ""
+"The Miller cylindrical projection is a modified Mercator projection, "
+"proposed by Osborn Maitland Miller (1897–1979) in 1942. The poles are no "
+"longer mapped to infinity."
 
 #: src/core/StelObject.cpp:116
 msgctxt "coordinates for current epoch"
@@ -4794,52 +4805,52 @@ msgstr "Ignore"
 
 #: src/translations.h:620
 msgid "&Basic colors"
-msgstr ""
+msgstr "&Basic colours"
 
 #: src/translations.h:621
 msgid "Pick Screen Color"
-msgstr ""
+msgstr "Pick Screen Colour"
 
 #: src/translations.h:622
 msgid "&Custom colors"
-msgstr ""
+msgstr "&Custom colours"
 
 #: src/translations.h:623
 msgid "&Add to Custom Colors"
-msgstr ""
+msgstr "&Add to Custom Colours"
 
 #: src/translations.h:624
 msgid "Hu&e:"
-msgstr ""
+msgstr "Hu&e:"
 
 #: src/translations.h:625
 msgid "&Sat:"
-msgstr ""
+msgstr "&Sat:"
 
 #: src/translations.h:626
 msgid "&Val:"
-msgstr ""
+msgstr "&Val:"
 
 #: src/translations.h:627
 msgid "&Red:"
-msgstr ""
+msgstr "&Red:"
 
 #: src/translations.h:628
 msgid "&Green:"
-msgstr ""
+msgstr "&Green:"
 
 #: src/translations.h:629
 msgid "Bl&ue:"
-msgstr ""
+msgstr "Bl&ue:"
 
 #: src/translations.h:630
 msgid "Select Color"
-msgstr ""
+msgstr "Select Colour"
 
 #: src/translations.h:631
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
-msgstr ""
+msgstr "Cursor at %1, %2 Press ESC to cancel"
 
 #: src/ui_dateTimeDialogGui.h:380
 msgid "Date and Time in Gregorian calendar"
@@ -5523,10 +5534,12 @@ msgid ""
 "These circles delimit stars which stay always above (respectively below) the "
 "mathematical horizon."
 msgstr ""
+"These circles delimit stars which stay always above (respectively below) the "
+"mathematical horizon."
 
 #: src/ui_viewDialog.h:1803
 msgid "Circumpolar circles"
-msgstr ""
+msgstr "Circumpolar circles"
 
 #: src/ui_viewDialog.h:1805
 msgid ""
@@ -10295,7 +10308,7 @@ msgstr "Navigational Stars"
 #: plugins/NavStars/src/NavStars.cpp:54
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:94
 msgid "This plugin marks navigational stars from a selected set."
-msgstr ""
+msgstr "This plugin marks navigational stars from a selected set."
 
 #: plugins/NavStars/src/NavStars.cpp:112
 msgid "Mark the navigational stars"
@@ -10323,6 +10336,8 @@ msgid ""
 "The 81 stars that are listed in the <em>%1</em> published by the French "
 "Bureau des Longitudes."
 msgstr ""
+"The 81 stars that are listed in the <em>%1</em> published by the French "
+"Bureau des Longitudes."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:322
@@ -10331,6 +10346,8 @@ msgid ""
 "The 160 stars that are listed in the Russian Nautical Almanac (The original "
 "Russian title is <em>%1</em>)."
 msgstr ""
+"The 160 stars that are listed in the Russian Nautical Almanac (The original "
+"Russian title is <em>%1</em>)."
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
 msgid "Navigational Stars Plug-in"
@@ -10792,78 +10809,82 @@ msgstr "Use separate color for pulsars with glitches"
 #: plugins/RemoteControl/src/RemoteControl.cpp:147
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:260
 msgid "Remote Control"
-msgstr ""
+msgstr "Remote Control"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:61
 msgid ""
 "Provides remote control functionality using a webserver interface. See "
 "manual for detailed description."
 msgstr ""
+"Provides remote control functionality using a webserver interface. See "
+"manual for detailed description."
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:147
 msgid "Remote control"
-msgstr ""
+msgstr "Remote control"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:106
 msgid "Remote Control Plug-in"
-msgstr ""
+msgstr "Remote Control Plug-in"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:112
 msgid ""
 "The Remote Control plugin provides a web interface to allow state changes "
 "and triggering scripts using a connected webbrowser."
 msgstr ""
+"The Remote Control plugin provides a web interface to allow state changes "
+"and triggering scripts using a connected webbrowser."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:115
 msgid "It is also possible to send commands via command line, e.g.."
-msgstr ""
+msgstr "It is also possible to send commands via command line, e.g.."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:121
 msgid "This allows triggering automatic show setups for museums etc."
-msgstr ""
+msgstr "This allows triggering automatic show setups for museums etc."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:122
 msgid "This plugin was developed during ESA SoCiS 2015."
-msgstr ""
+msgstr "This plugin was developed during ESA SoCiS 2015."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:123
 #, qt-format
 msgid "This plugin uses the %1QtWebApp HTTP server%2 by Stefan Frings."
-msgstr ""
+msgstr "This plugin uses the %1QtWebApp HTTP server%2 by Stefan Frings."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:126
 #, qt-format
 msgid "Further information can be found in the %1developer documentation%2."
-msgstr ""
+msgstr "Further information can be found in the %1developer documentation%2."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:175
 #, qt-format
 msgid "Listening on %1, IP: "
-msgstr ""
+msgstr "Listening on %1, IP: "
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:180
 msgid "Not active."
-msgstr ""
+msgstr "Not active."
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:246
 msgid "Remote Control Configuration"
-msgstr ""
+msgstr "Remote Control Configuration"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:247
 msgid "Remote Control Plug-in Configuration"
-msgstr ""
+msgstr "Remote Control Plug-in Configuration"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:249
 msgid "Port Number:"
-msgstr ""
+msgstr "Port Number:"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:252
 msgid "Access requires authentication"
-msgstr ""
+msgstr "Access requires authentication"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:253
 msgid "Password"
-msgstr ""
+msgstr "Password"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:254
 msgid ""
@@ -10871,26 +10892,29 @@ msgid ""
 "empty. </p><p>The password is transmitted over an insecure "
 "channel.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>Note: The user name field in the browser must be left "
+"empty. </p><p>The password is transmitted over an insecure "
+"channel.</p></body></html>"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:255
 msgid "Your changes require a restart of the server."
-msgstr ""
+msgstr "Your changes require a restart of the server."
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:256
 msgid "Restart server"
-msgstr ""
+msgstr "Restart server"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:257
 msgid "Server enabled"
-msgstr ""
+msgstr "Server enabled"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:258
 msgid "Enable automatically on startup"
-msgstr ""
+msgstr "Enable automatically on startup"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:259
 msgid "Server disabled - or Server listening on IP: aaa.bbb.ccc.ddd"
-msgstr ""
+msgstr "Server disabled - or Server listening on IP: aaa.bbb.ccc.ddd"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:74
 #: plugins/Exoplanets/src/Exoplanets.cpp:169
@@ -13952,59 +13976,59 @@ msgstr "A tool for archaeo-/ethnoastronomical alignment studies"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:237
 msgid "Show Line for Equinox"
-msgstr ""
+msgstr "Show Line for Equinox"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:238
 msgid "Show Line for Solstices"
-msgstr ""
+msgstr "Show Line for Solstices"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:239
 msgid "Show Line for Crossquarter"
-msgstr ""
+msgstr "Show Line for Crossquarter"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:240
 msgid "Show Line for Major Standstill"
-msgstr ""
+msgstr "Show Line for Major Standstill"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:241
 msgid "Show Line for Minor Standstill"
-msgstr ""
+msgstr "Show Line for Minor Standstill"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:242
 msgid "Show Line for Zenith Passage"
-msgstr ""
+msgstr "Show Line for Zenith Passage"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:243
 msgid "Show Line for Nadir Passage"
-msgstr ""
+msgstr "Show Line for Nadir Passage"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:244
 msgid "Show Line for Selected Object"
-msgstr ""
+msgstr "Show Line for Selected Object"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:245
 msgid "Show Line for Current Sun"
-msgstr ""
+msgstr "Show Line for Current Sun"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:246
 msgid "Show Line for Current Moon"
-msgstr ""
+msgstr "Show Line for Current Moon"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:247
 msgid "Show Line for Geographic Location 1"
-msgstr ""
+msgstr "Show Line for Geographic Location 1"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:248
 msgid "Show Line for Geographic Location 2"
-msgstr ""
+msgstr "Show Line for Geographic Location 2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:249
 msgid "Show Line for Custom Azimuth 1"
-msgstr ""
+msgstr "Show Line for Custom Azimuth 1"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:250
 msgid "Show Line for Custom Azimuth 2"
-msgstr ""
+msgstr "Show Line for Custom Azimuth 2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1151
 msgid "Equinox"
@@ -14127,12 +14151,19 @@ msgid ""
 "The directions are computed based on spherical trigonometry on a spherical "
 "Earth."
 msgstr ""
+"Some religions, most notably Islam, adhere to a practice of observing a "
+"prayer direction towards a particular location. Azimuth lines for two "
+"locations can be shown. Default locations are Mecca (Kaaba) and Jerusalem. "
+"The directions are computed based on spherical trigonometry on a spherical "
+"Earth."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:246
 msgid ""
 "In addition, up to two vertical lines with arbitrary azimuth and custom "
 "label can be shown."
 msgstr ""
+"In addition, up to two vertical lines with arbitrary azimuth and custom "
+"label can be shown."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:351
 msgid "Select color for equinox line"
@@ -14180,19 +14211,19 @@ msgstr "Select colour for current planet line"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:472
 msgid "Select color for Geographic Location 1 line"
-msgstr ""
+msgstr "Select colour for Geographic Location 1 line"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:483
 msgid "Select color for Geographic Location 2 line"
-msgstr ""
+msgstr "Select colour for Geographic Location 2 line"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:494
 msgid "Select color for Custom Azimuth 1 line"
-msgstr ""
+msgstr "Select colour for Custom Azimuth 1 line"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:505
 msgid "Select color for Custom Azimuth 2 line"
-msgstr ""
+msgstr "Select colour for Custom Azimuth 2 line"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:471
 msgid "ArchaeoLines Configuration"
@@ -14208,16 +14239,16 @@ msgstr "To change colours you may have to leave fullscreen mode!"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:475
 msgid "Geographic Location 1"
-msgstr ""
+msgstr "Geographic Location 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:477
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:483
 msgid "Enter a label (location name) for this line"
-msgstr ""
+msgstr "Enter a label (location name) for this line"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:481
 msgid "Geographic Location 2"
-msgstr ""
+msgstr "Geographic Location 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:486
 msgid "Change color"
@@ -14257,16 +14288,16 @@ msgstr "Minor Lunar Standstill lines"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:500
 msgid "Custom Azimuth 1"
-msgstr ""
+msgstr "Custom Azimuth 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:501
 msgid "Custom Azimuth 2"
-msgstr ""
+msgstr "Custom Azimuth 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:503
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:506
 msgid "Enter a label for this line"
-msgstr ""
+msgstr "Enter a label for this line"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:508
 msgid "Solstice Lines"
