@@ -7,15 +7,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-14 19:17+0700\n"
-"PO-Revision-Date: 2015-09-13 19:24+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"POT-Creation-Date: 2016-06-21 17:32+0700\n"
+"PO-Revision-Date: 2016-06-22 22:40+0000\n"
+"Last-Translator: dvds <detvardasjalva@hotmail.com>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-15 05:33+0000\n"
-"X-Generator: Launchpad (build 18097)\n"
+"X-Launchpad-Export-Date: 2016-06-23 05:15+0000\n"
+"X-Generator: Launchpad (build 18111)\n"
+
+#: src/core/modules/Constellation.cpp:297 src/core/modules/Nebula.cpp:188
+#: src/core/modules/Planet.cpp:226 src/core/modules/MinorPlanet.cpp:213
+#: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:181
+#: src/core/modules/StarWrapper.cpp:184
+#: plugins/Satellites/src/Satellite.cpp:270
+#: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
+#: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:269
+#, qt-format
+msgid "Type: <b>%1</b>"
+msgstr "Typ: <b>%1</b>"
+
+#: src/core/modules/Constellation.cpp:297
+msgid "constellation"
+msgstr "stjärnbild"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:378
 #: src/core/modules/GridLinesMgr.cpp:950 src/core/modules/LandscapeMgr.cpp:414
@@ -48,7 +63,7 @@ msgstr "Stjärnbildsgränser"
 
 #: src/core/modules/ConstellationMgr.cpp:148
 msgid "Constellation selection isolated"
-msgstr ""
+msgstr "Vald stjärnbild isolerad"
 
 #: src/core/modules/StarMgr.cpp:379 src/ui_viewDialog.h:1596
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:253
@@ -99,7 +114,7 @@ msgstr "O./K.-longitud"
 #: src/core/modules/GridLinesMgr.cpp:639 src/core/modules/GridLinesMgr.cpp:966
 #: src/ui_viewDialog.h:1791
 msgid "Prime Vertical"
-msgstr ""
+msgstr "Primärvertikal"
 
 #: src/core/modules/GridLinesMgr.cpp:643
 msgid "Equinoctial Colure"
@@ -107,11 +122,11 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:647
 msgid "Solstitial Colure"
-msgstr ""
+msgstr "Solståndskolur"
 
 #: src/core/modules/GridLinesMgr.cpp:652
 msgid "Circumpolar Circle"
-msgstr ""
+msgstr "Cirkumpolär cirkel"
 
 #: src/core/modules/GridLinesMgr.cpp:951
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:339
@@ -184,11 +199,11 @@ msgstr "Precessionscirklar"
 
 #: src/core/modules/GridLinesMgr.cpp:967
 msgid "Colure Lines"
-msgstr ""
+msgstr "Kolurlinjer"
 
 #: src/core/modules/GridLinesMgr.cpp:968
 msgid "Circumpolar Circles"
-msgstr ""
+msgstr "Cirkumpolära cirklar"
 
 #: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1614
 msgid "Atmosphere"
@@ -220,33 +235,23 @@ msgstr "Rubriker"
 msgid "Light pollution data from locations database"
 msgstr "Ljusföroreningsdata från position-databasen."
 
-#: src/core/modules/LandscapeMgr.cpp:705
+#: src/core/modules/LandscapeMgr.cpp:706
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:448
 msgid "Author: "
 msgstr "Upphovsman: "
 
-#: src/core/modules/LandscapeMgr.cpp:711
+#: src/core/modules/LandscapeMgr.cpp:712
 msgid "Location: "
 msgstr "Plats: "
 
-#: src/core/modules/LandscapeMgr.cpp:714
+#: src/core/modules/LandscapeMgr.cpp:715
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:719 src/ui_astroCalcDialog.h:380
+#: src/core/modules/LandscapeMgr.cpp:720 src/ui_astroCalcDialog.h:380
 msgid "Celestial body:"
 msgstr "Himlakropp"
-
-#: src/core/modules/Nebula.cpp:188 src/core/modules/Planet.cpp:226
-#: src/core/modules/MinorPlanet.cpp:213 src/core/modules/StarWrapper.cpp:53
-#: src/core/modules/StarWrapper.cpp:181 src/core/modules/StarWrapper.cpp:184
-#: plugins/Satellites/src/Satellite.cpp:270
-#: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
-#: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:269
-#, qt-format
-msgid "Type: <b>%1</b>"
-msgstr "Typ: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:190 src/core/modules/Comet.cpp:176
 #: plugins/Novae/src/Nova.cpp:133 plugins/Pulsars/src/Pulsar.cpp:166
@@ -265,7 +270,7 @@ msgstr "Genomskinlighet: <b>%1</b>"
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:191
 #, qt-format
 msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
-msgstr ""
+msgstr "Magnitud: <b>%1</b> (med extinktion: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
 #: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
@@ -290,7 +295,7 @@ msgstr "Färgindex (B-V): <b>%1</b>"
 #: src/core/modules/Nebula.cpp:224
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
-msgstr ""
+msgstr "Ytljusstyrka: <b>%1</b> (med extinktion: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:230
 #, qt-format
@@ -333,7 +338,7 @@ msgstr "kpc"
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:298
 msgid "ly"
-msgstr ""
+msgstr "lå"
 
 #: src/core/modules/Nebula.cpp:300
 #, qt-format
@@ -707,7 +712,7 @@ msgstr "möjlig planetarisk nebulosa"
 
 #: src/core/modules/Nebula.cpp:1154
 msgid "protoplanetary nebula"
-msgstr ""
+msgstr "protoplanetarisk nebulosa"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1157 src/core/modules/StarWrapper.cpp:53
@@ -729,7 +734,7 @@ msgstr "Djuprymdsobjekt"
 
 #: src/core/modules/NebulaMgr.cpp:365
 msgid "Toggle DSO type filter"
-msgstr ""
+msgstr "Växla filter för DSO-typ"
 
 #: src/core/modules/Planet.cpp:238 src/core/modules/MinorPlanet.cpp:232
 #: src/core/modules/MinorPlanet.cpp:236 src/core/modules/Comet.cpp:194
@@ -816,7 +821,7 @@ msgstr "Upplyst: %1%"
 #: src/core/modules/Planet.cpp:365
 #, qt-format
 msgid "Eclipse Factor: %1%"
-msgstr ""
+msgstr "Förmörkelsefaktor: %1%"
 
 #: src/core/modules/MinorPlanet.cpp:206
 #, qt-format
@@ -877,11 +882,11 @@ msgstr "Planet spår"
 
 #: src/core/modules/SolarSystem.cpp:201
 msgid "Planet markers"
-msgstr ""
+msgstr "Planetmarkörer"
 
 #: src/core/modules/SolarSystem.cpp:203
 msgid "Native planet names (from starlore)"
-msgstr ""
+msgstr "Ursprungliga planetnamn (från stjärnmytologi)"
 
 #: src/core/modules/StarWrapper.cpp:155
 msgid "eruptive variable star"
@@ -1178,13 +1183,13 @@ msgstr "Vänd scenen horisontellt"
 msgid "Flip scene vertically"
 msgstr "Vänd scenen vertikalt"
 
-#: src/core/StelCore.cpp:1766
+#: src/core/StelCore.cpp:1774
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Korrigering är inaktiverad! Använd endast om är säker på att du vet vad du "
 "gör!"
 
-#: src/core/StelCore.cpp:1769
+#: src/core/StelCore.cpp:1777
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1195,7 +1200,7 @@ msgstr ""
 "Henriksson i artikeln <em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em> (%1). Läs mer %2här%3."
 
-#: src/core/StelCore.cpp:1772
+#: src/core/StelCore.cpp:1780
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1204,7 +1209,7 @@ msgstr ""
 "Denna empiriska ekvation publicerades av G. M. Clemence i artikeln <em>On "
 "the system of astronomical constants</em> (%1)."
 
-#: src/core/StelCore.cpp:1775
+#: src/core/StelCore.cpp:1783
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1217,7 +1222,7 @@ msgstr ""
 "användes av Jean Meeus i boken <em>Astronomical Formulae for "
 "Calculators</em> (1988) och i datorprogrammet SunTracker Pro."
 
-#: src/core/StelCore.cpp:1779
+#: src/core/StelCore.cpp:1787
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1227,7 +1232,7 @@ msgstr ""
 "böckerna <em>Astronomical Ephemeris</em> och <em>Canon of Solar "
 "Eclipses</em> av Mucke & Meeus (1983)."
 
-#: src/core/StelCore.cpp:1783
+#: src/core/StelCore.cpp:1791
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1238,7 +1243,7 @@ msgstr ""
 "planeterna vid 5- och 10-dagarsintervaller från 601 f.v.t. till 1649 e.v.t. "
 "Samma förhållande antogs även indirekt i Goldstines syzygytabeller (1973)."
 
-#: src/core/StelCore.cpp:1787
+#: src/core/StelCore.cpp:1795
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1249,7 +1254,7 @@ msgstr ""
 "<em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 
-#: src/core/StelCore.cpp:1790
+#: src/core/StelCore.cpp:1798
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1258,7 +1263,7 @@ msgstr ""
 "Denna ekvation publicerades av F. R. Stephenson i artikeln <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 
-#: src/core/StelCore.cpp:1793
+#: src/core/StelCore.cpp:1801
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1272,7 +1277,7 @@ msgstr ""
 "period 1800-1975</em> (%1) efter att ha prövats och anpassats m.h.a. data "
 "från Brouwer (1952)."
 
-#: src/core/StelCore.cpp:1796
+#: src/core/StelCore.cpp:1804
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1282,7 +1287,7 @@ msgstr ""
 "Tables from -4000 to +2800</em> (1986) och i planetariumdatorprogrammet "
 "RedShift."
 
-#: src/core/StelCore.cpp:1799
+#: src/core/StelCore.cpp:1807
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1293,11 +1298,11 @@ msgstr ""
 "<em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. "
 "1980</em> (%1)."
 
-#: src/core/StelCore.cpp:1802
+#: src/core/StelCore.cpp:1810
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "Denna algoritm används i planetariumdatorprogrammet Guide 7."
 
-#: src/core/StelCore.cpp:1805
+#: src/core/StelCore.cpp:1813
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -1307,7 +1312,7 @@ msgstr ""
 "Eclipses: 1986-2035</em> (1987) och <em>Fifty Year Canon of Lunar Eclipses: "
 "1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:1808
+#: src/core/StelCore.cpp:1816
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -1316,7 +1321,7 @@ msgstr ""
 "Denna formel togs fram av K.M. Borkowski (%1) utifrån en analys av 31 "
 "registrerade solförmörkelser mellan 2137 f.v.t. och 1715 e.v.t."
 
-#: src/core/StelCore.cpp:1811
+#: src/core/StelCore.cpp:1819
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1329,7 +1334,7 @@ msgstr ""
 "Period 1800-1988</em> (%1) eftr att ha prövats och anpassats m.h.a. "
 "datavärden från Stephenson & Morrison (1984)."
 
-#: src/core/StelCore.cpp:1814
+#: src/core/StelCore.cpp:1822
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -1339,7 +1344,7 @@ msgstr ""
 "version av månrörelseteorin ELP2000-85, publicerad som en del av <em>Lunar "
 "Tables and Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 
-#: src/core/StelCore.cpp:1817
+#: src/core/StelCore.cpp:1825
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1350,7 +1355,7 @@ msgstr ""
 "<em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> "
 "(%1)."
 
-#: src/core/StelCore.cpp:1820
+#: src/core/StelCore.cpp:1828
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1359,7 +1364,7 @@ msgstr ""
 "F. R. Stephenson publicerade denna formel i boken <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 
-#: src/core/StelCore.cpp:1823
+#: src/core/StelCore.cpp:1831
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1369,7 +1374,7 @@ msgstr ""
 "använd. Tabell för 1620-2000 och innefattar en variant av Chapront, Chapront-"
 "Touze & Francou (1997) för datum utanför 1620-2000."
 
-#: src/core/StelCore.cpp:1826
+#: src/core/StelCore.cpp:1834
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1378,7 +1383,7 @@ msgstr ""
 "JPL Solar System Dynamics Group vid NASA Jet Propulsion Laboratory använder "
 "denna formel på sin interaktiva webbplats %1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:1829
+#: src/core/StelCore.cpp:1837
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1387,7 +1392,7 @@ msgstr ""
 "Detta polynom publicerades av J. Meeus & L. Simons i artikeln <em>Polynomial "
 "approximations to Delta T, 1620-2000 AD</em> (%1)."
 
-#: src/core/StelCore.cpp:1832
+#: src/core/StelCore.cpp:1840
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1397,7 +1402,7 @@ msgstr ""
 "Montenbruck & T. Pfleger, 2000) tillhandahåller enkla dataanpassningar för "
 "tredjegradspolynom för en nära dåtid."
 
-#: src/core/StelCore.cpp:1835
+#: src/core/StelCore.cpp:1843
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1409,7 +1414,7 @@ msgstr ""
 "<em>Calendrical Tabulations</em> (2002). Den baseras på Jean Meeus "
 "<em>Astronomical Algorithms</em> (1991)."
 
-#: src/core/StelCore.cpp:1838
+#: src/core/StelCore.cpp:1846
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1420,7 +1425,7 @@ msgstr ""
 "artikeln <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) med tillägg i (%3)."
 
-#: src/core/StelCore.cpp:1841
+#: src/core/StelCore.cpp:1849
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1433,7 +1438,7 @@ msgstr ""
 "med en cosinus- och andragradsfunktion. Detta är baserat på en möjlig "
 "periodicitet, som beskrivs av Stephenson (%2). Läs mer %3här%4."
 
-#: src/core/StelCore.cpp:1844 src/core/StelCore.cpp:1847
+#: src/core/StelCore.cpp:1852 src/core/StelCore.cpp:1855
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1448,15 +1453,15 @@ msgstr ""
 "Canon of Solar Eclipses: -1900 to +3000</em> (2006). Formeln används även i "
 "ett efemeridprogram för solen, månen och planeterna, kallat SOLEX."
 
-#: src/core/StelCore.cpp:1844
+#: src/core/StelCore.cpp:1852
 msgid "Used by default."
 msgstr "Används som standard."
 
-#: src/core/StelCore.cpp:1847
+#: src/core/StelCore.cpp:1855
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "PATCHAD VERSION UTAN TILLAGD MÅNACCELERATION"
 
-#: src/core/StelCore.cpp:1850
+#: src/core/StelCore.cpp:1858
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1467,7 +1472,7 @@ msgstr ""
 "publiserad i artikeln <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 
-#: src/core/StelCore.cpp:1853
+#: src/core/StelCore.cpp:1861
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1478,7 +1483,7 @@ msgstr ""
 "(2000), publiserad i artikeln <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em> (%1) och uppdaterad av Sana Islam i 2013."
 
-#: src/core/StelCore.cpp:1856
+#: src/core/StelCore.cpp:1864
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1489,7 +1494,7 @@ msgstr ""
 "Mariam Sultana och Faheem Zaidi publicerades i <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:1859
+#: src/core/StelCore.cpp:1867
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1498,15 +1503,15 @@ msgstr ""
 "Det här är en andragradsfunktion för beräkning av %1T, där koefficienterna "
 "definieras av användaren."
 
-#: src/core/StelCore.cpp:1862 src/core/SimbadSearcher.cpp:151
+#: src/core/StelCore.cpp:1870 src/core/SimbadSearcher.cpp:151
 msgid "Error"
 msgstr "Fel"
 
-#: src/core/StelCore.cpp:1912
+#: src/core/StelCore.cpp:1920
 msgid "with meaningless values outside this range"
 msgstr "med meningslösa värden utanför detta intervall"
 
-#: src/core/StelCore.cpp:1938
+#: src/core/StelCore.cpp:1946
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -1514,24 +1519,24 @@ msgstr ""
 "med ett medelfel på mindre än en sekund, maximifel på 1,9 s och meningslösa "
 "värden utanför detta intervall"
 
-#: src/core/StelCore.cpp:1960 src/core/StelCore.cpp:1965
-#: src/core/StelCore.cpp:1993 src/core/StelCore.cpp:1998
-#: src/core/StelCore.cpp:2003
+#: src/core/StelCore.cpp:1968 src/core/StelCore.cpp:1973
+#: src/core/StelCore.cpp:2001 src/core/StelCore.cpp:2006
+#: src/core/StelCore.cpp:2011
 msgid "with zero values outside this range"
 msgstr "med noll och inga värden utanför detta intervall"
 
-#: src/core/StelCore.cpp:1970
+#: src/core/StelCore.cpp:1978
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "med en typisk noggrannhet på 1 sekund samt noll och inga värden utanför "
 "detta intervall"
 
-#: src/core/StelCore.cpp:2013
+#: src/core/StelCore.cpp:2021
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Giltigt tidsintervall: mellan år %1 och %2, %3."
 
-#: src/core/StelCore.cpp:2015
+#: src/core/StelCore.cpp:2023
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Giltigt tidsintervall: mellan år %1 och %2."
@@ -1550,6 +1555,9 @@ msgid ""
 "equator, ecliptic, hour lines, etc. into straight lines. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
+"Perspektivprojektionen visar horisontlinjen och andra storcirklar (som "
+"himmelsekvatorn, ekliptikan m.fl.) som raka linjer. Den matematiska "
+"benämningen för denna projektion är <i>gnomisk projektion</i>."
 
 #: src/core/StelProjectorClasses.cpp:87
 msgid "Equal Area"
@@ -1560,6 +1568,8 @@ msgid ""
 "The full name of this projection method is <i>Lambert azimuthal equal-area "
 "projection</i>. It preserves the area but not the angle."
 msgstr ""
+"Det riktiga namnet på denna projektionsmetod är <i>Lamberts azimutala "
+"areariktiga projektion</i>. Bevarar ytor, men inte vinklar."
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Stereographic"
@@ -1571,6 +1581,8 @@ msgid ""
 "as the planisphere projection. It preserves the angles at which curves cross "
 "each other but it does not preserve area."
 msgstr ""
+"Stereografisk projektion var känd redan under antiken och var ursprungligen "
+"känd som den planesfäriska projektionen. Den bevarar vinklar, men inte ytor."
 
 #: src/core/StelProjectorClasses.cpp:200
 msgid "Fish-eye"
@@ -1623,6 +1635,9 @@ msgid ""
 "preserves direction and shapes but distorts size, in an increasing degree "
 "away from the equator."
 msgstr ""
+"Mercators projektion är en av de mest använda för att projicera "
+"världskartor. Den bevarar riktningar och former, men förvränger storlek, med "
+"ökad grad ju längre man går från ekvatorn."
 
 #: src/core/StelProjectorClasses.cpp:418
 msgid "Orthographic"
@@ -1652,7 +1667,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:512
 msgid "Miller cylindrical"
-msgstr ""
+msgstr "Millers cylindriska"
 
 #: src/core/StelProjectorClasses.cpp:517
 msgid ""
@@ -1660,6 +1675,9 @@ msgid ""
 "proposed by Osborn Maitland Miller (1897–1979) in 1942. The poles are no "
 "longer mapped to infinity."
 msgstr ""
+"Millers cylindriska projektion är en modifierad version av Mercators "
+"projektion, och föreslogs år 1942 av Osborn Maitland Miltter (1897-1979). "
+"Polerna går i denna projektion inte längre mot oändligheten."
 
 #: src/core/StelObject.cpp:116
 msgctxt "coordinates for current epoch"
@@ -1743,23 +1761,23 @@ msgstr "Spåra objekt"
 
 #: src/core/StelMovementMgr.cpp:161
 msgid "Look towards East"
-msgstr ""
+msgstr "Titta österut"
 
 #: src/core/StelMovementMgr.cpp:162
 msgid "Look towards West"
-msgstr ""
+msgstr "Titta västerut"
 
 #: src/core/StelMovementMgr.cpp:163
 msgid "Look towards North"
-msgstr ""
+msgstr "Titta norrut"
 
 #: src/core/StelMovementMgr.cpp:164
 msgid "Look towards South"
-msgstr ""
+msgstr "Titta söderut"
 
 #: src/core/StelMovementMgr.cpp:165
 msgid "Look towards Zenith"
-msgstr ""
+msgstr "Titta mot zenit"
 
 #: src/core/SimbadSearcher.cpp:74
 msgid "Network error"
@@ -1820,7 +1838,7 @@ msgstr "Kontakt"
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:207
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:118
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:215
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:223
 msgid "Version"
 msgstr "Version"
 
@@ -1893,11 +1911,11 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1255 src/gui/ConfigurationDialog.cpp:1264
 msgid "Available"
-msgstr ""
+msgstr "Tillgänglig"
 
 #: src/gui/ConfigurationDialog.cpp:1257 src/gui/ConfigurationDialog.cpp:1266
 msgid "Not Available"
-msgstr ""
+msgstr "Ej tillgänglig"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1329
@@ -2278,11 +2296,11 @@ msgstr "Genvägsfönstret"
 
 #: src/gui/StelGui.cpp:219
 msgid "AstroCalc window"
-msgstr ""
+msgstr "AstroCalc-fönster"
 
 #: src/gui/StelGui.cpp:220
 msgid "Bookmarks window"
-msgstr ""
+msgstr "Bokmärkesfönster"
 
 #: src/gui/StelGui.cpp:221
 msgid "Copy selected object information to clipboard"
@@ -2581,30 +2599,34 @@ msgid "Altitude"
 msgstr "Altitud"
 
 #: src/gui/SearchDialog.cpp:265
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:480
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:515
 msgid "Longitude"
 msgstr "Longitud"
 
 #: src/gui/SearchDialog.cpp:268
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:479
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:516
 msgid "Latitude"
 msgstr "Latitud"
 
-#: src/gui/SearchDialog.cpp:579
+#: src/gui/SearchDialog.cpp:580
 msgid "Simbad Lookup Error"
 msgstr "SIMBAD-sökningsfel"
 
-#: src/gui/SearchDialog.cpp:587
+#: src/gui/SearchDialog.cpp:588
 msgid "Simbad Lookup"
 msgstr "Sök i SIMBAD"
 
-#: src/gui/SearchDialog.cpp:768
+#: src/gui/SearchDialog.cpp:769
 msgid "University of Strasbourg (France)"
 msgstr "Universitetet i Strasbourg (Frankrike)"
 
-#: src/gui/SearchDialog.cpp:769
+#: src/gui/SearchDialog.cpp:770
 msgid "Harvard University (USA)"
 msgstr "Harvard University (USA)"
 
-#: src/gui/SearchDialog.cpp:842
+#: src/gui/SearchDialog.cpp:843
 msgid "Paste and Search"
 msgstr "Klistra in och sök"
 
@@ -2691,7 +2713,7 @@ msgstr "1 dag"
 
 #: src/gui/AstroCalcDialog.cpp:402
 msgid "5 days"
-msgstr ""
+msgstr "5 dygn"
 
 #: src/gui/AstroCalcDialog.cpp:403
 msgid "10 days"
@@ -2699,7 +2721,7 @@ msgstr "10 dagar"
 
 #: src/gui/AstroCalcDialog.cpp:404
 msgid "15 days"
-msgstr ""
+msgstr "15 dygn"
 
 #: src/gui/AstroCalcDialog.cpp:405
 msgid "30 days"
@@ -2707,7 +2729,7 @@ msgstr "30 dagar"
 
 #: src/gui/AstroCalcDialog.cpp:406
 msgid "60 days"
-msgstr ""
+msgstr "60 dygn"
 
 #: src/gui/AstroCalcDialog.cpp:454
 msgid "Solar system"
@@ -2752,15 +2774,15 @@ msgstr "Objekt från Oorts kometmoln"
 
 #: src/gui/AstroCalcDialog.cpp:475
 msgid "Phenomenon"
-msgstr ""
+msgstr "Fenomen"
 
 #: src/gui/AstroCalcDialog.cpp:477
 msgid "Object 1"
-msgstr ""
+msgstr "Objekt 1"
 
 #: src/gui/AstroCalcDialog.cpp:478
 msgid "Object 2"
-msgstr ""
+msgstr "Objekt 2"
 
 #: src/gui/AstroCalcDialog.cpp:479
 msgid "Separation"
@@ -2780,11 +2802,11 @@ msgstr "Objekt"
 
 #: src/gui/BookmarksDialog.cpp:96
 msgid "Localized name"
-msgstr ""
+msgstr "Översatt namn"
 
 #: src/gui/BookmarksDialog.cpp:98
 msgid "Location of observer"
-msgstr ""
+msgstr "Observatörens plats"
 
 #: src/StelMainView.cpp:462 src/StelMainView.cpp:477
 msgid ""
@@ -2811,6 +2833,8 @@ msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
 msgstr ""
+"Bristfällig version av OpenGL. Var god uppdatera drivrutiner, grafikhårdvara "
+"och använd -angle-mode (eller -mesa-mode)."
 
 #: src/StelMainView.cpp:731
 msgid ""
@@ -3069,17 +3093,17 @@ msgstr "Unga stellära objekt"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:139
 msgid "Possible Quasars"
-msgstr ""
+msgstr "Möjliga kvasarer"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:141
 msgid "Possible Planetary Nebulae"
-msgstr ""
+msgstr "Möjliga planetariska nebulosor"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:143
 msgid "Protoplanetary Nebulae"
-msgstr ""
+msgstr "Protoplanetariska nebulosor"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:145 src/ui_viewDialog.h:1670
@@ -3124,12 +3148,12 @@ msgstr "Melottes katalog"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:161
 msgid "Dwarf galaxies"
-msgstr ""
+msgstr "Dvärggalaxer"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:163
 msgid "Herschel 400 Catalogue"
-msgstr ""
+msgstr "Herschel 400-katalogen"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:168
@@ -3187,7 +3211,7 @@ msgstr ""
 
 #: src/translations.h:185
 msgid "Macedonian"
-msgstr ""
+msgstr "Makedonska"
 
 #: src/translations.h:186
 msgid "Maori"
@@ -3257,7 +3281,7 @@ msgid "Trees"
 msgstr "Träd"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:210 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1029
+#: src/translations.h:210 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1178
 msgid "Moon"
 msgstr "Månen"
 
@@ -3277,17 +3301,17 @@ msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:218 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1041
+#: src/translations.h:218 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1190
 msgid "Mars"
 msgstr "Mars"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:220 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1044
+#: src/translations.h:220 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1193
 msgid "Jupiter"
 msgstr "Jupiter"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:222 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1047
+#: src/translations.h:222 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1196
 msgid "Saturn"
 msgstr "Saturnus"
 
@@ -3446,6 +3470,7 @@ msgstr "Jordhändelser sett från Mars"
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr ""
+"Jordens och andra planeters största elongation och opposition från Mars"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:292
@@ -3460,27 +3485,27 @@ msgstr "Tychos supernova"
 #. TRANSLATORS: Name of script
 #: src/translations.h:296
 msgid "Earth and other Planets from Ceres"
-msgstr ""
+msgstr "Jorden och andra planeter från Ceres"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:298
 msgid "Messier Objects Tour"
-msgstr ""
+msgstr "Tur kring Messierobjekt"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:300
 msgid "Binocular Highlights"
-msgstr ""
+msgstr "Kikarens höjdpunkter"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:302
 msgid "20 Fun Naked-Eye Double Stars"
-msgstr ""
+msgstr "20 dubbelstjärnor för blotta ögat"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:304
 msgid "List of largest known stars"
-msgstr ""
+msgstr "Lista över de största kända stjärnorna"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:306
@@ -3490,12 +3515,12 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:308
 msgid "Binosky: Deep Sky Objects for Binoculars"
-msgstr ""
+msgstr "Binosky: Djuprymdsobjekt för kikaren"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:310
 msgid "The Jack Bennett Catalog"
-msgstr ""
+msgstr "Jack Bennetts katalog"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:312
@@ -3647,6 +3672,8 @@ msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
 msgstr ""
+"Jordens och andra planeters största elongationer och oppositioner från Mars "
+"år 2000-3000"
 
 #: src/translations.h:341
 msgid ""
@@ -3665,10 +3692,12 @@ msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
 msgstr ""
+"Jordens och andra planeters största elongationer och oppositioner från Ceres "
+"år 2000-3000"
 
 #: src/translations.h:343
 msgid "A tour of Messier Objects"
-msgstr ""
+msgstr "En tur över Messierobjekten"
 
 #: src/translations.h:344
 msgid ""
@@ -4770,52 +4799,52 @@ msgstr "Ignorera"
 
 #: src/translations.h:620
 msgid "&Basic colors"
-msgstr ""
+msgstr "&Basfärger"
 
 #: src/translations.h:621
 msgid "Pick Screen Color"
-msgstr ""
+msgstr "Välj skärmfärg"
 
 #: src/translations.h:622
 msgid "&Custom colors"
-msgstr ""
+msgstr "&Anpassade färger"
 
 #: src/translations.h:623
 msgid "&Add to Custom Colors"
-msgstr ""
+msgstr "&Lägg till i anpassade färger"
 
 #: src/translations.h:624
 msgid "Hu&e:"
-msgstr ""
+msgstr "&Färgton:"
 
 #: src/translations.h:625
 msgid "&Sat:"
-msgstr ""
+msgstr "&Färgmättnad:"
 
 #: src/translations.h:626
 msgid "&Val:"
-msgstr ""
+msgstr "&Valör:"
 
 #: src/translations.h:627
 msgid "&Red:"
-msgstr ""
+msgstr "&Röd:"
 
 #: src/translations.h:628
 msgid "&Green:"
-msgstr ""
+msgstr "&Grön:"
 
 #: src/translations.h:629
 msgid "Bl&ue:"
-msgstr ""
+msgstr "&Blå:"
 
 #: src/translations.h:630
 msgid "Select Color"
-msgstr ""
+msgstr "Välj färg"
 
 #: src/translations.h:631
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
-msgstr ""
+msgstr "Pekare vid %1, %2 Tryck Esc för att avbryta"
 
 #: src/ui_dateTimeDialogGui.h:380
 msgid "Date and Time in Gregorian calendar"
@@ -5138,7 +5167,7 @@ msgstr "Begränsa magnitud för stjärnor"
 
 #: src/ui_viewDialog.h:1605 src/ui_viewDialog.h:1644 src/ui_viewDialog.h:1730
 msgid "Limit magnitude:"
-msgstr ""
+msgstr "Gränsmagnitud"
 
 #: src/ui_viewDialog.h:1607
 msgid "Dim faint stars when a very bright object is visible"
@@ -5196,6 +5225,8 @@ msgid ""
 "Deactivate this option if you want to see orbit for selected planet and its "
 "moons."
 msgstr ""
+"Slå av denna inställning om du vill se omloppsbanorna för vald planet och "
+"dess månar."
 
 #: src/ui_viewDialog.h:1630
 msgid "Show orbit for selected planet"
@@ -5206,16 +5237,19 @@ msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
 msgstr ""
+"Slå av denna inställning om du vill se spår för alla solsystemets kroppar."
 
 #: src/ui_viewDialog.h:1634
 msgid "Show trail only for selected planet"
-msgstr ""
+msgstr "Visa endast spår för vald planet"
 
 #: src/ui_viewDialog.h:1636
 msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
 msgstr ""
+"Slå på denna inställning för att simulera verklig ljushastighet "
+"(rekommenderas)."
 
 #: src/ui_viewDialog.h:1638
 msgid "Simulate light speed"
@@ -5223,19 +5257,19 @@ msgstr "Simulera ljushastighet"
 
 #: src/ui_viewDialog.h:1639
 msgid "Use custom settings of GRS:"
-msgstr ""
+msgstr "Använd egna inställningar för GRS:"
 
 #: src/ui_viewDialog.h:1640
 msgid "GRS details..."
-msgstr ""
+msgstr "GRS-detaljer"
 
 #: src/ui_viewDialog.h:1642
 msgid "Limit the magnitude of solar system objects"
-msgstr ""
+msgstr "Begränsa magnituden för solsystemsobjekt"
 
 #: src/ui_viewDialog.h:1645
 msgid "Scale Moon:"
-msgstr ""
+msgstr "Månskala:"
 
 #: src/ui_viewDialog.h:1647
 msgid "Scale factor"
@@ -5473,15 +5507,16 @@ msgstr "Visa meridianlinje"
 
 #: src/ui_viewDialog.h:1789
 msgid "Show Prime (East-West) Vertical."
-msgstr ""
+msgstr "Visa primärvertikal (öst-väst)."
 
 #: src/ui_viewDialog.h:1793
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
 msgstr ""
+"Visa kolurer (storcirklar genom polerna och solstånds-/dagjämningspunkterna)."
 
 #: src/ui_viewDialog.h:1795
 msgid "Colures"
-msgstr ""
+msgstr "Kolurer"
 
 #: src/ui_viewDialog.h:1797
 msgid ""
@@ -5496,10 +5531,12 @@ msgid ""
 "These circles delimit stars which stay always above (respectively below) the "
 "mathematical horizon."
 msgstr ""
+"Dessa cirklar visar vilka stjärnor som alltid är över respektive under den "
+"matematiska horisonten."
 
 #: src/ui_viewDialog.h:1803
 msgid "Circumpolar circles"
-msgstr ""
+msgstr "Cirkumpolära cirklar"
 
 #: src/ui_viewDialog.h:1805
 msgid ""
@@ -5547,7 +5584,7 @@ msgstr "Visa belysningslager (ljusa fönster, ljusföroreningar etc.)"
 
 #: src/ui_viewDialog.h:1819
 msgid "Show illumination "
-msgstr ""
+msgstr "Visa belysning "
 
 #: src/ui_viewDialog.h:1821
 msgid "Use minimal brightness to leave landscape visible also in darkness"
@@ -5595,11 +5632,11 @@ msgstr "Använd ursprungliga namn på planeter för nuvarande stjärnmytologi"
 
 #: src/ui_viewDialog.h:1842
 msgid "Use native names for planets"
-msgstr ""
+msgstr "Använd ursprungliga namn för planeter"
 
 #: src/ui_viewDialog.h:1843
 msgid "Show lines with thickness"
-msgstr ""
+msgstr "Visa linjer med tjocklek"
 
 #: src/ui_viewDialog.h:1845
 msgid "Value in pixels"
@@ -5607,7 +5644,7 @@ msgstr "Värde i pixlar"
 
 #: src/ui_viewDialog.h:1847
 msgid "Show art in brightness"
-msgstr ""
+msgstr "Visa grafik med ljusstyrka"
 
 #: src/ui_viewDialog.h:1848
 msgid "Show boundaries"
@@ -5662,40 +5699,45 @@ msgstr "Stjärnmytologispråk"
 
 #: src/ui_configurationDialog.h:1093
 msgid "Ephemeris settings"
-msgstr ""
+msgstr "Ephermidinställningar"
 
 #: src/ui_configurationDialog.h:1094 src/ui_configurationDialog.h:1095
 msgid "Not installed"
-msgstr ""
+msgstr "Ej installerad"
 
 #: src/ui_configurationDialog.h:1097
 msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
 msgstr ""
+"DE431 ger positionsdata för åren -13000...+17000. Endast vid speciella "
+"tillämpningar."
 
 #: src/ui_configurationDialog.h:1099
 msgid "Use DE431 (long-time data)"
-msgstr ""
+msgstr "Använd DE431 (långtidsdata)"
 
 #: src/ui_configurationDialog.h:1101
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
-msgstr ""
+msgstr "DE430 ger högsta noggrannhet, endast för åren 1550...2650."
 
 #: src/ui_configurationDialog.h:1103
 msgid "Use DE430 (high accuracy)"
-msgstr ""
+msgstr "Använd DE430 (hög noggrannhet)"
 
 #: src/ui_configurationDialog.h:1105
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
 msgstr ""
+"VSOP87 rekommenderas endast för åren -4000...+8000, men visar även "
+"användbara positioner utanför detta intervall."
 
 #: src/ui_configurationDialog.h:1107
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
+"VSOP87/ELP2000-82B används när dessa inte är installerade eller inaktiverade."
 
 #: src/ui_configurationDialog.h:1108
 msgid "Default options"
@@ -5791,7 +5833,7 @@ msgstr "Visade fält"
 
 #: src/ui_configurationDialog.h:1144 src/ui_configurationDialog.h:1168
 msgid "Equatorial coordinates, equinox of date"
-msgstr ""
+msgstr "Ekvatoriella koordinater, dagjämningspunkt för datum"
 
 #: src/ui_configurationDialog.h:1146
 msgid "Right ascension/Declination (of date)"
@@ -5803,7 +5845,7 @@ msgstr "Katalognummer"
 
 #: src/ui_configurationDialog.h:1149
 msgid "Equatorial coordinates, equinox of J2000.0"
-msgstr ""
+msgstr "Ekvatoriella koordinater, dagjämningspunkt för J2000.0"
 
 #: src/ui_configurationDialog.h:1151
 msgid "Right ascension/Declination (J2000)"
@@ -6048,7 +6090,7 @@ msgstr "Topocentriska koordinater"
 
 #: src/ui_configurationDialog.h:1264
 msgid "Activate this option to calculate azimuth from south towards west."
-msgstr ""
+msgstr "Slå på denna inställning för att visa azimut från söder till väster."
 
 #: src/ui_configurationDialog.h:1266
 msgid "Azimuth from South"
@@ -6242,7 +6284,7 @@ msgstr ""
 
 #: src/ui_greatRedSpotDialog.h:168
 msgid "Great Red Spot Details"
-msgstr ""
+msgstr "Detaljer för Stora röda fläcken"
 
 #: src/ui_greatRedSpotDialog.h:170
 msgid "Custom settings for position of GRS"
@@ -6251,11 +6293,11 @@ msgstr ""
 #: src/ui_greatRedSpotDialog.h:171 src/ui_astroCalcDialog.h:384
 #: src/ui_astroCalcDialog.h:386
 msgid "yyyy.MM.dd hh:mm"
-msgstr ""
+msgstr "åååå.MM.dd hh:mm"
 
 #: src/ui_greatRedSpotDialog.h:172
 msgid "Annual drift (degrees):"
-msgstr ""
+msgstr "Årlig drift (grader):"
 
 #: src/ui_greatRedSpotDialog.h:173
 msgid "Longitude of GRS (degrees):"
@@ -6263,7 +6305,7 @@ msgstr ""
 
 #: src/ui_greatRedSpotDialog.h:180
 msgid "Date and Time (UTC):"
-msgstr ""
+msgstr "Datum och tid (UTC):"
 
 #: src/ui_greatRedSpotDialog.h:184
 msgid "Get the recent GRS measurement"
@@ -6323,11 +6365,11 @@ msgstr "…"
 
 #: src/ui_astroCalcDialog.h:377
 msgid "Planetary positions every 5 minutes."
-msgstr ""
+msgstr "Planetariska positioner var 5:e minut."
 
 #: src/ui_astroCalcDialog.h:379
 msgid "Planetary positions"
-msgstr ""
+msgstr "Planetariska positioner"
 
 #: src/ui_astroCalcDialog.h:382
 msgid "Time step:"
@@ -6345,7 +6387,7 @@ msgstr "Till:"
 
 #: src/ui_astroCalcDialog.h:387
 msgid "Calculate ephemeris"
-msgstr ""
+msgstr "Beräkna ephemerid"
 
 #: src/ui_astroCalcDialog.h:388
 msgid "Cleanup ephemerides"
@@ -6470,7 +6512,7 @@ msgstr "VInkelmåttstillägg"
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:216
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:224
 msgid "Author"
 msgstr "Upphovsman"
 
@@ -6517,11 +6559,11 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:136
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:123
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:125
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:237
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:248
 msgid "Links"
 msgstr "Länkar"
 
@@ -6533,10 +6575,10 @@ msgstr "Länkar"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:137
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:127
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:238
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:249
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
@@ -6554,11 +6596,11 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:140
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:156
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:128
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:130
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:241
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:252
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "Om du har några frågor, kan du %1få svar här%2"
@@ -6572,11 +6614,11 @@ msgstr "Om du har några frågor, kan du %1få svar här%2"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:142
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:135
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:158
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:130
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:132
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:311
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:243
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:254
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "Felrapportering kan göras %1här%2."
@@ -6590,11 +6632,11 @@ msgstr "Felrapportering kan göras %1här%2."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:144
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:132
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:133
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:245
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:256
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -6604,7 +6646,7 @@ msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin and its history, you "
@@ -6668,7 +6710,7 @@ msgstr "Använd dms-format för vinklar"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:480
 #: plugins/Observability/src/ui_ObservabilityDialog.h:357
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:431
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:403
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:517
 msgid "Restore default settings"
 msgstr "Återställ standardinställningar"
 
@@ -6690,7 +6732,7 @@ msgstr "Återställ standardinställningar"
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:284
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:462
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:302
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:405
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:519
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "Om Oculars"
@@ -7404,92 +7446,92 @@ msgstr ""
 "standardfilen"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1791
+#: plugins/Satellites/src/Satellites.cpp:1793
 msgid "visual"
 msgstr "synliga med blotta ögat"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1793
+#: plugins/Satellites/src/Satellites.cpp:1795
 msgid "scientific"
 msgstr "vetenskapliga"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1795
+#: plugins/Satellites/src/Satellites.cpp:1797
 msgid "communications"
 msgstr "kommunikation"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1797
+#: plugins/Satellites/src/Satellites.cpp:1799
 msgid "navigation"
 msgstr "navigation"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1799
+#: plugins/Satellites/src/Satellites.cpp:1801
 msgid "amateur"
 msgstr "amatörradio"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1801
+#: plugins/Satellites/src/Satellites.cpp:1803
 msgid "weather"
 msgstr "väder (meteorologiska)"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1803
+#: plugins/Satellites/src/Satellites.cpp:1805
 msgid "geostationary"
 msgstr "geostationära"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1805
+#: plugins/Satellites/src/Satellites.cpp:1807
 msgid "non-operational"
 msgstr "ej i bruk"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1807
+#: plugins/Satellites/src/Satellites.cpp:1809
 msgid "gps"
 msgstr "GPS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:1809
+#: plugins/Satellites/src/Satellites.cpp:1811
 msgid "glonass"
 msgstr "glonass"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:1811
+#: plugins/Satellites/src/Satellites.cpp:1813
 msgid "galileo"
 msgstr "galileo"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1813
+#: plugins/Satellites/src/Satellites.cpp:1815
 msgid "iridium"
 msgstr "Iridium"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:1815
+#: plugins/Satellites/src/Satellites.cpp:1817
 msgid "stations"
 msgstr "stationer"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:1817
+#: plugins/Satellites/src/Satellites.cpp:1819
 msgid "education"
 msgstr "utbildning"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:1819
+#: plugins/Satellites/src/Satellites.cpp:1821
 msgid "observatory"
 msgstr "observatorium"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1830
+#: plugins/Satellites/src/Satellites.cpp:1832
 msgid "The Hubble Space Telescope"
 msgstr "Rymdteleskopet Hubble"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1832
+#: plugins/Satellites/src/Satellites.cpp:1834
 msgid "The International Space Station"
 msgstr "Internationella rymdstationen (ISS)"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1834
+#: plugins/Satellites/src/Satellites.cpp:1836
 msgid "China's first space station"
 msgstr "Kinas första rymdstation"
 
@@ -9783,7 +9825,7 @@ msgstr ""
 "Du kan importera komet- och asteroiddata formaterade i IAU Minor Planet "
 "Centers exportformat (%1). Du kan importera filer med listor över objekt, "
 "ladda ner dessa från nätet eller söka på nätet vida Minor Planet and Comet "
-"Ephemeris SErvice (MPES)."
+"Ephemeris Service (MPES)."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:108
 msgid "Solar System Editor plug-in"
@@ -10566,21 +10608,18 @@ msgid "Use separate color for pulsars with glitches"
 msgstr "Använd separat färg för pulsarer vid glitchar"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:58
-#: plugins/RemoteControl/src/RemoteControl.cpp:151
+#: plugins/RemoteControl/src/RemoteControl.cpp:147
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:260
 msgid "Remote Control"
 msgstr ""
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:61
 msgid ""
-"<p>Provides remote control functionality using a webserver interface.</p> "
-"<p>See manual for detailed description.</p><br/><p>This plugin was developed "
-"during ESA SoCiS 2015.</p><p>This plugin uses the <a "
-"href=\"http://stefanfrings.de/qtwebapp/index-en.html\">QtWebApp HTTP "
-"server</a> by Stefan Frings.</p>"
+"Provides remote control functionality using a webserver interface. See "
+"manual for detailed description."
 msgstr ""
 
-#: plugins/RemoteControl/src/RemoteControl.cpp:151
+#: plugins/RemoteControl/src/RemoteControl.cpp:147
 msgid "Remote control"
 msgstr ""
 
@@ -10602,17 +10641,26 @@ msgstr ""
 msgid "This allows triggering automatic show setups for museums etc."
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:124
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:122
+msgid "This plugin was developed during ESA SoCiS 2015."
+msgstr ""
+
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:123
+#, qt-format
+msgid "This plugin uses the %1QtWebApp HTTP server%2 by Stefan Frings."
+msgstr ""
+
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:126
 #, qt-format
 msgid "Further information can be found in the %1developer documentation%2."
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:173
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:175
 #, qt-format
 msgid "Listening on %1, IP: "
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:178
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:180
 msgid "Not active."
 msgstr ""
 
@@ -10746,7 +10794,7 @@ msgstr "Massa"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:310
 #: plugins/Exoplanets/src/Exoplanet.cpp:314
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1026
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1175
 msgid "Sun"
 msgstr "Sol"
 
@@ -12015,7 +12063,7 @@ msgid "The current catalog of Meteor Showers is invalid!"
 msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:559
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:563
 msgid "Meteor Showers"
 msgstr "Meteorregn"
 
@@ -12040,7 +12088,7 @@ msgstr ""
 msgid "Using the default Meteor Showers catalog."
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:563
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:567
 msgid ""
 "<p>This plugin enables you to simulate periodic meteor showers and to "
 "display a marker for each active and inactive radiant.</p><p>By a single "
@@ -13427,9 +13475,9 @@ msgid "Title:"
 msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:59
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:200
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:201
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:404
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:216
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:217
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:518
 msgid "ArchaeoLines"
 msgstr ""
 
@@ -13437,152 +13485,160 @@ msgstr ""
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:221
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:237
 msgid "Show Line for Equinox"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:222
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:238
 msgid "Show Line for Solstices"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:223
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:239
 msgid "Show Line for Crossquarter"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:224
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:240
 msgid "Show Line for Major Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:225
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:241
 msgid "Show Line for Minor Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:226
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:242
 msgid "Show Line for Zenith Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:227
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:243
 msgid "Show Line for Nadir Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:228
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:244
 msgid "Show Line for Selected Object"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:229
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:245
 msgid "Show Line for Current Sun"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:230
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:246
 msgid "Show Line for Current Moon"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:231
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:247
+msgid "Show Line for Geographic Location 1"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:248
+msgid "Show Line for Geographic Location 2"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:249
 msgid "Show Line for Custom Azimuth 1"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:232
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:250
 msgid "Show Line for Custom Azimuth 2"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1002
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1151
 msgid "Equinox"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1005
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1154
 msgid "Solstice"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1008
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1157
 msgid "Crossquarter"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1011
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1160
 msgid "Major Lunar Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1014
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1163
 msgid "Minor Lunar Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1017
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1166
 msgid "Zenith Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1020
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1169
 msgid "Nadir Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1023
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:374
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1172
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:488
 msgid "Selected Object"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1032
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1181
 msgid "error if you can read this"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1035
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1184
 msgid "Mercury"
 msgstr "Merkurius"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1038
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1187
 msgid "Venus"
 msgstr "Venus"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:214
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:222
 msgid "ArchaeoLines Plug-in"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:220
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:228
 msgid ""
 "The ArchaeoLines plugin displays any combination of declination arcs most "
 "relevant to archaeo- or ethnoastronomical studies."
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:221
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:229
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:222
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:230
 msgid ""
 "Declinations of the crossquarter days (days right between solstices and "
 "equinoxes)"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:223
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:231
 msgid "Declinations of the Major Lunar Standstills"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:224
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:232
 msgid "Declinations of the Minor Lunar Standstills"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:225
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:233
 msgid "Declination of the Zenith passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:226
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:234
 msgid "Declination of the Nadir passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:227
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:235
 msgid "Declination of the currently selected object"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:228
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:236
 msgid "Current declination of the sun"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:229
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:237
 msgid "Current declination of the moon"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:230
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:238
 msgid "Current declination of a naked-eye planet"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:231
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:239
 msgid ""
 "The lunar lines include horizon parallax effects. There are two lines each "
 "drawn, for maximum and minimum distance of the moon. Note that declination "
@@ -13590,159 +13646,181 @@ msgid ""
 "high in the sky due to parallax effects."
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:235
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:243
+msgid ""
+"Some religions, most notably Islam, adhere to a practice of observing a "
+"prayer direction towards a particular location. Azimuth lines for two "
+"locations can be shown. Default locations are Mecca (Kaaba) and Jerusalem. "
+"The directions are computed based on spherical trigonometry on a spherical "
+"Earth."
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:246
 msgid ""
 "In addition, up to two vertical lines with arbitrary azimuth and custom "
 "label can be shown."
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:321
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:351
 msgid "Select color for equinox line"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:333
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:362
 msgid "Select color for solstice lines"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:345
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:373
 msgid "Select color for crossquarter lines"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:357
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:384
 msgid "Select color for major standstill lines"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:369
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:395
 msgid "Select color for minor standstill lines"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:381
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:406
 msgid "Select color for zenith passage line"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:393
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:417
 msgid "Select color for nadir passage line"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:405
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:428
 msgid "Select color for selected object line"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:417
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:439
 msgid "Select color for current sun line"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:429
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:450
 msgid "Select color for current moon line"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:441
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:461
 msgid "Select color for current planet line"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:453
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:472
+msgid "Select color for Geographic Location 1 line"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:483
+msgid "Select color for Geographic Location 2 line"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:494
 msgid "Select color for Custom Azimuth 1 line"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:465
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:505
 msgid "Select color for Custom Azimuth 2 line"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:367
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:471
 msgid "ArchaeoLines Configuration"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:368
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:472
 msgid "ArchaeoLines Plug-in Configuration"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:370
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:474
 msgid "To change colors you may have to leave fullscreen mode!"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:372
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:475
+msgid "Geographic Location 1"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:477
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:483
+msgid "Enter a label (location name) for this line"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:481
+msgid "Geographic Location 2"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:486
 msgid "Change color"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:375
-msgid "Current Sun"
-msgstr ""
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:376
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:489
 msgid "Declination of Nadir passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:379
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:492
 msgid "Current Planet: None"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:380
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:493
 msgid "Current Planet: Mercury"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:381
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:494
 msgid "Current Planet: Venus"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:382
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:495
 msgid "Current Planet: Mars"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:383
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:496
 msgid "Current Planet: Jupiter"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:384
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:497
 msgid "Current Planet: Saturn"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:386
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:499
 msgid "Minor Lunar Standstill lines"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:387
-msgid "Custom Azimuth 2 Color..."
-msgstr ""
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:388
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:500
 msgid "Custom Azimuth 1"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:389
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:501
 msgid "Custom Azimuth 2"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:390
-msgid "Custom Azimuth 1 Color..."
-msgstr ""
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:392
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:395
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:503
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:506
 msgid "Enter a label for this line"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:397
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:508
 msgid "Solstice Lines"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:398
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:509
 msgid "Current Moon"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:399
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:510
 msgid "Declination of Zenith passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:400
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:511
 msgid "Crossquarter Lines"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:401
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:512
 msgid "Major Lunar Standstill lines"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:402
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:513
 msgid "Equinox line (Equator)"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:514
+msgid "Current Sun"
 msgstr ""
 
 # Osäker

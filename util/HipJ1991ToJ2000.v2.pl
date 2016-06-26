@@ -24,7 +24,7 @@
 # v.2
 # Get Hipparcos 2 from VizieR (cat. 2007 - I/311) and improve original catalog.
 #
-# All catalogs can be found here: http://astro.uni-altai.ru/~aw/stellarium/hipparcos/
+# All catalogs can be found here: http://astro.altspu.ru/~aw/stellarium/hipparcos/
 #
 
 # Original Hipparcos catalog (1997; J1991.25)

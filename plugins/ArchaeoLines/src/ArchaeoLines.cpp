@@ -65,8 +65,8 @@ StelPluginInfo ArchaeoLinesStelPluginInterface::getPluginInfo() const
 
 ArchaeoLines::ArchaeoLines()
 	: flagShowArchaeoLines(false)
-	, withDecimalDegree(false)
-	, flagUseDmsFormat(false)
+	//, withDecimalDegree(false)
+	//, flagUseDmsFormat(false)
 	, flagShowEquinox(false)
 	, flagShowSolstices(false)
 	, flagShowCrossquarters(false)
@@ -78,10 +78,16 @@ ArchaeoLines::ArchaeoLines()
 	, flagShowCurrentSun(false)
 	, flagShowCurrentMoon(false)
 	, enumShowCurrentPlanet(ArchaeoLine::CurrentPlanetNone)
+	, flagShowGeographicLocation1(false)
+	, geographicLocation1Longitude(39.8) // approx. Mecca
+	, geographicLocation1Latitude(21.4)
+	, flagShowGeographicLocation2(false)
+	, geographicLocation2Longitude(35.2) // approx. Jerusalem
+	, geographicLocation2Latitude(31.8)
 	, flagShowCustomAzimuth1(false)
 	, flagShowCustomAzimuth2(false)
-	, customAzimuth1(0.0)
-	, customAzimuth2(0.0)
+	//, customAzimuth1(0.0)
+	//, customAzimuth2(0.0)
 	, lastJDE(0.0)
 	, toolbarButton(NULL)
 {
@@ -116,11 +122,15 @@ ArchaeoLines::ArchaeoLines()
 	currentSunLine     = new ArchaeoLine(ArchaeoLine::CurrentSun, 0.0);
 	currentMoonLine    = new ArchaeoLine(ArchaeoLine::CurrentMoon, 0.0);
 	currentPlanetLine  = new ArchaeoLine(ArchaeoLine::CurrentPlanetNone, 0.0);
+	geographicLocation1Line = new ArchaeoLine(ArchaeoLine::GeographicLocation1, 0.0);
+	geographicLocation2Line = new ArchaeoLine(ArchaeoLine::GeographicLocation2, 0.0);
 	customAzimuth1Line = new ArchaeoLine(ArchaeoLine::CustomAzimuth1, 0.0);
 	customAzimuth2Line = new ArchaeoLine(ArchaeoLine::CustomAzimuth2, 0.0);
 
 	configDialog = new ArchaeoLinesDialog();
 	conf = StelApp::getInstance().getSettings();
+
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateObserverLocation(StelLocation)));
 
 }
 
@@ -145,6 +155,8 @@ ArchaeoLines::~ArchaeoLines()
 	delete currentSunLine;     currentSunLine=NULL;
 	delete currentMoonLine;    currentMoonLine=NULL;
 	delete currentPlanetLine;  currentPlanetLine=NULL;
+	delete geographicLocation1Line; geographicLocation1Line=NULL;
+	delete geographicLocation2Line; geographicLocation2Line=NULL;
 	delete customAzimuth1Line; customAzimuth1Line=NULL;
 	delete customAzimuth2Line; customAzimuth2Line=NULL;
 
@@ -187,11 +199,13 @@ void ArchaeoLines::init()
 	Q_ASSERT(currentSunLine);
 	Q_ASSERT(currentMoonLine);
 	Q_ASSERT(currentPlanetLine);
+	Q_ASSERT(geographicLocation1Line);
+	Q_ASSERT(geographicLocation2Line);
 	Q_ASSERT(customAzimuth1Line);
 	Q_ASSERT(customAzimuth2Line);
 
-	if (!conf->childGroups().contains("ArchaeoLines"))
-		restoreDefaultSettings();
+//	if (!conf->childGroups().contains("ArchaeoLines"))
+//		restoreDefaultSettings();
 
 	loadSettings();
 
@@ -229,9 +243,10 @@ void ArchaeoLines::init()
 	addAction("actionAL_showSelectedObjectLine",   section, N_("Show Line for Selected Object"),    "flagShowSelectedObject"  ); // No Shortcuts configured.
 	addAction("actionAL_showCurrentSunLine",       section, N_("Show Line for Current Sun"),        "flagShowCurrentSun"      ); // No Shortcuts configured.
 	addAction("actionAL_showCurrentMoonLine",      section, N_("Show Line for Current Moon"),       "flagShowCurrentMoon"     ); // No Shortcuts configured.
+	addAction("actionAL_showGeographicLocation1Line",   section, N_("Show Line for Geographic Location 1"),   "flagShowGeographicLocation1"  ); // No Shortcuts configured.
+	addAction("actionAL_showGeographicLocation2Line",   section, N_("Show Line for Geographic Location 2"),   "flagShowGeographicLocation2"  ); // No Shortcuts configured.
 	addAction("actionAL_showCustomAzimuth1Line",   section, N_("Show Line for Custom Azimuth 1"),   "flagShowCustomAzimuth1"  ); // No Shortcuts configured.
 	addAction("actionAL_showCustomAzimuth2Line",   section, N_("Show Line for Custom Azimuth 2"),   "flagShowCustomAzimuth2"  ); // No Shortcuts configured.
-	// TODO: Maybe add properties for custom azimuths: labels and azimuth values.
 }
 
 void ArchaeoLines::update(double deltaTime)
@@ -366,10 +381,12 @@ void ArchaeoLines::update(double deltaTime)
 	currentSunLine->update(deltaTime);
 	currentMoonLine->update(deltaTime);
 	currentPlanetLine->update(deltaTime);
+	geographicLocation1Line->update(deltaTime);
+	geographicLocation2Line->update(deltaTime);
 	customAzimuth1Line->update(deltaTime);
 	customAzimuth2Line->update(deltaTime);
 
-	withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();;
+	//withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();;
 }
 
 
@@ -400,8 +417,11 @@ void ArchaeoLines::draw(StelCore* core)
 	currentMoonLine->draw(core, lineFader.getInterstate());
 	if (enumShowCurrentPlanet>ArchaeoLine::CurrentPlanetNone)
 		currentPlanetLine->draw(core, lineFader.getInterstate());
+	geographicLocation1Line->draw(core, lineFader.getInterstate());
+	geographicLocation2Line->draw(core, lineFader.getInterstate());
 	customAzimuth1Line->draw(core, lineFader.getInterstate());
-	customAzimuth2Line->draw(core, lineFader.getInterstate());}
+	customAzimuth2Line->draw(core, lineFader.getInterstate());
+}
 
 
 void ArchaeoLines::enableArchaeoLines(bool b)
@@ -426,11 +446,9 @@ void ArchaeoLines::restoreDefaultSettings()
 
 void ArchaeoLines::loadSettings()
 {
-	//useDmsFormat(conf->value("ArchaeoLines/angle_format_dms", false).toBool());
-
 	equinoxColor         = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_equinox",          "1.00,1.00,0.5").toString());
 	equinoxLine->setColor(equinoxColor);
-	solsticesColor       = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_solstices",        "1.00,1.00,0.25").toString());
+	solsticesColor       = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_solstices",        "1.00,0.15,0.15").toString());
 	northernSolsticeLine->setColor(solsticesColor);
 	southernSolsticeLine->setColor(solsticesColor);
 	crossquartersColor   = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_crossquarters",    "1.00,0.75,0.25").toString());
@@ -446,9 +464,9 @@ void ArchaeoLines::loadSettings()
 	northernMinorStandstillLine3->setColor(minorStandstillColor);
 	southernMinorStandstillLine4->setColor(minorStandstillColor);
 	southernMinorStandstillLine5->setColor(minorStandstillColor);
-	zenithPassageColor   = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_zenith_passage",   "1.00,0.75,0.75").toString());
+	zenithPassageColor   = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_zenith_passage",   "0.75,0.75,0.75").toString());
 	zenithPassageLine->setColor(zenithPassageColor);
-	nadirPassageColor    = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_nadir_passage",    "1.00,0.75,0.75").toString());
+	nadirPassageColor    = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_nadir_passage",    "0.25,0.25,0.25").toString());
 	nadirPassageLine->setColor(nadirPassageColor);
 	selectedObjectColor    = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_selected_object",    "1.00,1.00,1.00").toString());
 	selectedObjectLine->setColor(selectedObjectColor);
@@ -458,11 +476,31 @@ void ArchaeoLines::loadSettings()
 	currentMoonLine->setColor(currentMoonColor);
 	currentPlanetColor    = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_current_planet",    "0.25,0.80,1.00").toString());
 	currentPlanetLine->setColor(currentPlanetColor);
+	geographicLocation1Color   = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_geographic_location_1",    "0.25,1.00,0.25").toString());
+	geographicLocation1Line->setColor(geographicLocation1Color);
+	geographicLocation2Color   = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_geographic_location_2",    "0.25,0.25,1.00").toString());
+	geographicLocation2Line->setColor(geographicLocation2Color);
 	customAzimuth1Color   = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_custom_azimuth_1",    "0.25,1.00,0.25").toString());
 	customAzimuth1Line->setColor(customAzimuth1Color);
 	customAzimuth2Color   = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_custom_azimuth_2",    "0.25,0.50,0.75").toString());
 	customAzimuth2Line->setColor(customAzimuth2Color);
 
+	setGeographicLocation1Longitude(conf->value("ArchaeoLines/geographic_location_1_longitude",  39.826175).toDouble());
+	setGeographicLocation1Latitude( conf->value("ArchaeoLines/geographic_location_1_latitude",   21.422476).toDouble());
+	setGeographicLocation2Longitude(conf->value("ArchaeoLines/geographic_location_2_longitude",  35.235774).toDouble());
+	setGeographicLocation2Latitude( conf->value("ArchaeoLines/geographic_location_2_latitude",   31.778087).toDouble());
+	StelLocation loc=core->getCurrentLocation();
+	geographicLocation1Line->setDefiningAngle(getAzimuthForLocation(loc.longitude, loc.latitude, geographicLocation1Longitude, geographicLocation1Latitude));
+	geographicLocation2Line->setDefiningAngle(getAzimuthForLocation(loc.longitude, loc.latitude, geographicLocation2Longitude, geographicLocation2Latitude));
+	geographicLocation1Line->setLabel(conf->value("ArchaeoLines/geographic_location_1_label", "Mecca (Qibla)").toString());
+	geographicLocation2Line->setLabel(conf->value("ArchaeoLines/geographic_location_2_label", "Jerusalem").toString());
+
+	customAzimuth1Line->setDefiningAngle(conf->value("ArchaeoLines/custom_azimuth_1_angle", 0.0).toDouble());
+	customAzimuth2Line->setDefiningAngle(conf->value("ArchaeoLines/custom_azimuth_2_angle", 0.0).toDouble());
+	customAzimuth1Line->setLabel(conf->value("ArchaeoLines/custom_azimuth_1_label", "custAzi1").toString());
+	customAzimuth2Line->setLabel(conf->value("ArchaeoLines/custom_azimuth_2_label", "custAzi2").toString());
+
+	// Now activate line display if needed.
 	// 5 solar limits
 	showEquinox(conf->value("ArchaeoLines/show_equinox", true).toBool());
 	showSolstices(conf->value("ArchaeoLines/show_solstices", true).toBool());
@@ -472,19 +510,18 @@ void ArchaeoLines::loadSettings()
 	showMinorStandstills(conf->value("ArchaeoLines/show_minor_standstills", true).toBool());
 	// esp. Mesoamerica
 	showZenithPassage(conf->value("ArchaeoLines/show_zenith_passage", true).toBool());
-	showNadirPassage(conf->value("ArchaeoLines/show_nadir_passage",  true).toBool());
+	showNadirPassage(conf->value("ArchaeoLines/show_nadir_passage",  false).toBool());
 	// indicator for a line representing currently selected object
 	showSelectedObject(conf->value("ArchaeoLines/show_selected_object", false).toBool());
 	// indicators for current declinations (those move fast over days...)
 	showCurrentSun(conf->value("ArchaeoLines/show_current_sun", true).toBool());
 	showCurrentMoon(conf->value("ArchaeoLines/show_current_moon", true).toBool());
 	showCurrentPlanetNamed(conf->value("ArchaeoLines/show_current_planet", "none").toString());
-	showCustomAzimuth1(conf->value("ArchaeoLines/show_custom_azimuth_1", true).toBool());
-	showCustomAzimuth2(conf->value("ArchaeoLines/show_custom_azimuth_2", true).toBool());
-	customAzimuth1Line->setDefiningAngle(conf->value("ArchaeoLines/custom_azimuth_1_angle", 0.0).toDouble());
-	customAzimuth2Line->setDefiningAngle(conf->value("ArchaeoLines/custom_azimuth_2_angle", 0.0).toDouble());
-	customAzimuth1Line->setLabel(conf->value("ArchaeoLines/custom_azimuth_1_label", "custAzi1").toString());
-	customAzimuth2Line->setLabel(conf->value("ArchaeoLines/custom_azimuth_2_label", "custAzi2").toString());
+	// azimuths to geographic targets, and custom azimuths.
+	showGeographicLocation1(conf->value("ArchaeoLines/show_geographic_location_1", false).toBool());
+	showGeographicLocation2(conf->value("ArchaeoLines/show_geographic_location_2", false).toBool());
+	showCustomAzimuth1(conf->value("ArchaeoLines/show_custom_azimuth_1", false).toBool());
+	showCustomAzimuth2(conf->value("ArchaeoLines/show_custom_azimuth_2", false).toBool());
 
 	enableArchaeoLines(conf->value("ArchaeoLines/enable_at_startup", false).toBool());
 }
@@ -597,7 +634,6 @@ void ArchaeoLines::showCurrentMoon(bool b)
 		emit showCurrentMoonChanged(b);
 	}
 }
-
 void ArchaeoLines::showCurrentPlanet(ArchaeoLine::Line l)
 {
 	if(l!=enumShowCurrentPlanet)
@@ -612,7 +648,6 @@ void ArchaeoLines::showCurrentPlanet(ArchaeoLine::Line l)
 		emit currentPlanetChanged(l);
 	}
 }
-
 void ArchaeoLines::showCurrentPlanetNamed(QString planet)
 {
 	if (planet=="none")
@@ -637,7 +672,26 @@ void ArchaeoLines::showCurrentPlanetNamed(QString planet)
 	currentPlanetLine->setDisplayed(enumShowCurrentPlanet != ArchaeoLine::CurrentPlanetNone);
 	emit currentPlanetChanged(enumShowCurrentPlanet);
 }
-
+void ArchaeoLines::showGeographicLocation1(bool b)
+{
+	if (b!=flagShowGeographicLocation1)
+	{
+		flagShowGeographicLocation1=b;
+		conf->setValue("ArchaeoLines/show_geographic_location_1",       isGeographicLocation1Displayed());
+		geographicLocation1Line->setDisplayed(b);
+		emit showGeographicLocation1Changed(b);
+	}
+}
+void ArchaeoLines::showGeographicLocation2(bool b)
+{
+	if (b!=flagShowGeographicLocation2)
+	{
+		flagShowGeographicLocation2=b;
+		conf->setValue("ArchaeoLines/show_geographic_location_2",       isGeographicLocation2Displayed());
+		geographicLocation2Line->setDisplayed(b);
+		emit showGeographicLocation2Changed(b);
+	}
+}
 void ArchaeoLines::showCustomAzimuth1(bool b)
 {
 	if (b!=flagShowCustomAzimuth1)
@@ -659,15 +713,70 @@ void ArchaeoLines::showCustomAzimuth2(bool b)
 	}
 }
 
+void ArchaeoLines::setGeographicLocation1Longitude(double lng)
+{
+	conf->setValue("ArchaeoLines/geographic_location_1_longitude", lng);
+	geographicLocation1Longitude=lng;
+	StelLocation loc=core->getCurrentLocation();
+	geographicLocation1Line->setDefiningAngle(getAzimuthForLocation(loc.longitude, loc.latitude, geographicLocation1Longitude, geographicLocation1Latitude));
+	emit geographicLocation1Changed();
+}
+void ArchaeoLines::setGeographicLocation1Latitude(double lat)
+{
+	conf->setValue("ArchaeoLines/geographic_location_1_latitude", lat);
+	geographicLocation1Latitude=lat;
+	StelLocation loc=core->getCurrentLocation();
+	geographicLocation1Line->setDefiningAngle(getAzimuthForLocation(loc.longitude, loc.latitude, geographicLocation1Longitude, geographicLocation1Latitude));
+	emit geographicLocation1Changed();
+}
+void ArchaeoLines::setGeographicLocation1Label(QString label)
+{
+	geographicLocation1Line->setLabel(label);
+	conf->setValue("ArchaeoLines/geographic_location_1_label", label);
+}
+void ArchaeoLines::setGeographicLocation2Longitude(double lng)
+{
+	conf->setValue("ArchaeoLines/geographic_location_2_longitude", lng);
+	geographicLocation2Longitude=lng;
+	StelLocation loc=core->getCurrentLocation();
+	geographicLocation2Line->setDefiningAngle(getAzimuthForLocation(loc.longitude, loc.latitude, geographicLocation2Longitude, geographicLocation2Latitude));
+	emit geographicLocation2Changed();
+}
+void ArchaeoLines::setGeographicLocation2Latitude(double lat)
+{
+	conf->setValue("ArchaeoLines/geographic_location_2_latitude", lat);
+	geographicLocation2Latitude=lat;
+	StelLocation loc=core->getCurrentLocation();
+	geographicLocation2Line->setDefiningAngle(getAzimuthForLocation(loc.longitude, loc.latitude, geographicLocation2Longitude, geographicLocation2Latitude));
+	emit geographicLocation2Changed();
+}
+void ArchaeoLines::setGeographicLocation2Label(QString label)
+{
+	geographicLocation2Line->setLabel(label);
+	conf->setValue("ArchaeoLines/geographic_location_2_label", label);
+}
+
+void ArchaeoLines::updateObserverLocation(StelLocation loc)
+{
+	geographicLocation1Line->setDefiningAngle(getAzimuthForLocation(loc.longitude, loc.latitude, geographicLocation1Longitude, geographicLocation1Latitude));
+	geographicLocation2Line->setDefiningAngle(getAzimuthForLocation(loc.longitude, loc.latitude, geographicLocation2Longitude, geographicLocation2Latitude));
+}
+
+
 void ArchaeoLines::setCustomAzimuth1(double az)
 {
+	if (az!=customAzimuth1Line->getDefiningAngle())
+	{
 	customAzimuth1Line->setDefiningAngle(az);
 	conf->setValue("ArchaeoLines/custom_azimuth_1_angle", az);
+	emit customAzimuth1Changed(az);
+	}
 }
 void ArchaeoLines::setCustomAzimuth2(double az)
 {
 	customAzimuth2Line->setDefiningAngle(az);
 	conf->setValue("ArchaeoLines/custom_azimuth_2_angle", az);
+	emit customAzimuth2Changed(az);
 }
 void ArchaeoLines::setCustomAzimuth1Label(QString label)
 {
@@ -753,6 +862,16 @@ void ArchaeoLines::setLineColor(ArchaeoLine::Line whichLine, QColor color)
 			conf->setValue("ArchaeoLines/color_current_planet",      QString("%1,%2,%3").arg(currentPlanetColor.v[0]).arg(currentPlanetColor.v[1]).arg(currentPlanetColor.v[2]));
 			currentPlanetLine->setColor(currentPlanetColor);
 			break;
+		case ArchaeoLine::GeographicLocation1:
+			geographicLocation1Color.set(color.redF(), color.greenF(), color.blueF());
+			conf->setValue("ArchaeoLines/color_geographic_location_1", QString("%1,%2,%3").arg(geographicLocation1Color.v[0]).arg(geographicLocation1Color.v[1]).arg(geographicLocation1Color.v[2]));
+			geographicLocation1Line->setColor(geographicLocation1Color);
+			break;
+		case ArchaeoLine::GeographicLocation2:
+			geographicLocation2Color.set(color.redF(), color.greenF(), color.blueF());
+			conf->setValue("ArchaeoLines/color_geographic_location_2", QString("%1,%2,%3").arg(geographicLocation2Color.v[0]).arg(geographicLocation2Color.v[1]).arg(geographicLocation2Color.v[2]));
+			geographicLocation2Line->setColor(geographicLocation2Color);
+			break;
 		case ArchaeoLine::CustomAzimuth1:
 			customAzimuth1Color.set(color.redF(), color.greenF(), color.blueF());
 			conf->setValue("ArchaeoLines/color_custom_azimuth_1",    QString("%1,%2,%3").arg(customAzimuth1Color.v[0]).arg(customAzimuth1Color.v[1]).arg(customAzimuth1Color.v[2]));
@@ -811,6 +930,12 @@ QColor ArchaeoLines::getLineColor(ArchaeoLine::Line whichLine)
 		case ArchaeoLine::CurrentPlanetSaturn:
 			vColor=&currentPlanetColor;
 			break;
+		case ArchaeoLine::GeographicLocation1:
+			vColor=&geographicLocation1Color;
+			break;
+		case ArchaeoLine::GeographicLocation2:
+			vColor=&geographicLocation2Color;
+			break;
 		case ArchaeoLine::CustomAzimuth1:
 			vColor=&customAzimuth1Color;
 			break;
@@ -868,6 +993,12 @@ double ArchaeoLines::getLineAngle(ArchaeoLine::Line whichLine)
 		case ArchaeoLine::CurrentPlanetSaturn:
 			return currentPlanetLine->getDefiningAngle();
 			break;
+		case ArchaeoLine::GeographicLocation1:
+			return geographicLocation1Line->getDefiningAngle();
+			break;
+		case ArchaeoLine::GeographicLocation2:
+			return geographicLocation2Line->getDefiningAngle();
+			break;
 		case ArchaeoLine::CustomAzimuth1:
 			return customAzimuth1Line->getDefiningAngle();
 			break;
@@ -921,6 +1052,12 @@ QString ArchaeoLines::getLineLabel(ArchaeoLine::Line whichLine)
 		case ArchaeoLine::CurrentPlanetSaturn:
 			return currentPlanetLine->getLabel();
 			break;
+		case ArchaeoLine::GeographicLocation1:
+			return geographicLocation1Line->getLabel();
+			break;
+		case ArchaeoLine::GeographicLocation2:
+			return geographicLocation2Line->getLabel();
+			break;
 		case ArchaeoLine::CustomAzimuth1:
 			return customAzimuth1Line->getLabel();
 			break;
@@ -929,8 +1066,18 @@ QString ArchaeoLines::getLineLabel(ArchaeoLine::Line whichLine)
 			break;
 		default:
 			Q_ASSERT(0);
+			return "ArchaeoLines::getLineLabel(): Error!";
 	}
-	return "Error!";
+}
+
+double ArchaeoLines::getAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget) const
+{
+	longObs    *= (M_PI/180.0);
+	latObs     *= (M_PI/180.0);
+	longTarget *= (M_PI/180.0);
+	latTarget  *= (M_PI/180.0);
+
+	return (180.0/M_PI) * atan2(sin(longTarget-longObs), cos(latObs)*tan(latTarget)-sin(latObs)*cos(longTarget-longObs));
 }
 
 
@@ -980,7 +1127,7 @@ void alViewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& direct
 ArchaeoLine::ArchaeoLine(ArchaeoLine::Line lineType, double definingAngle) :
 	lineType(lineType), definingAngle(definingAngle), color(0.f, 0.f, 1.f), frameType(StelCore::FrameEquinoxEqu), flagLabel(true)
 {
-	if (lineType>=CustomAzimuth1)
+	if (lineType>=GeographicLocation1)
 		frameType=StelCore::FrameAltAz;
 	// Font size is 14
 	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
@@ -1047,7 +1194,9 @@ void ArchaeoLine::updateLabel()
 		case ArchaeoLine::CurrentPlanetSaturn:
 			label = q_("Saturn");
 			break;
-		case ArchaeoLine::CustomAzimuth1: // label was set in setLabel(). DO NOT update.
+		case ArchaeoLine::GeographicLocation1: // label was set in setLabel(). DO NOT update.
+		case ArchaeoLine::GeographicLocation2:
+		case ArchaeoLine::CustomAzimuth1:
 		case ArchaeoLine::CustomAzimuth2:
 			break;
 		default:
@@ -1088,53 +1237,54 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 	//userData.textColor = textColor;
 	userData.text = (isLabelVisible() ? label : "");
 	/////////////////////////////////////////////////
-	// Azimuth lines are Great Circles.
-	if (lineType>=ArchaeoLine::CustomAzimuth1)
+	// Azimuth lines are Great Semicircles. TODO: Make sure the code commented away below is OK in all cases, then cleanup if full circles are never required.
+	if (lineType>=ArchaeoLine::GeographicLocation1)
 	{
 		SphericalCap meridianSphericalCap(Vec3d(0,1,0), 0);
-		Vec3d fpt(1,0,0);
+		Vec3d fpt(-1,0,0);
 		meridianSphericalCap.n.transfo4d(Mat4d::rotation(Vec3d(0, 0, 1), -definingAngle*M_PI/180.));
 		fpt.transfo4d(Mat4d::rotation(Vec3d(0, 0, 1), -definingAngle*M_PI/180.));
 
-		Vec3d p1, p2;
-		if (!SphericalCap::intersectionPoints(viewPortSphericalCap, meridianSphericalCap, p1, p2))
-		{
-			if ((viewPortSphericalCap.d<meridianSphericalCap.d && viewPortSphericalCap.contains(meridianSphericalCap.n))
-				|| (viewPortSphericalCap.d<-meridianSphericalCap.d && viewPortSphericalCap.contains(-meridianSphericalCap.n)))
-			{
-				// The meridian is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
-				const Mat4d& rotLon120 = Mat4d::rotation(meridianSphericalCap.n, 120.*M_PI/180.);
+//		Vec3d p1, p2;
+//		//if (!SphericalCap::intersectionPoints(viewPortSphericalCap, meridianSphericalCap, p1, p2))
+//		{
+//			//if ((viewPortSphericalCap.d<meridianSphericalCap.d && viewPortSphericalCap.contains(meridianSphericalCap.n))
+//			//	|| (viewPortSphericalCap.d<-meridianSphericalCap.d && viewPortSphericalCap.contains(-meridianSphericalCap.n)))
+//			{ // N.B. we had 3x120degrees here. Look into GridLineMgr to restore if neessary.
+//				// The meridian is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
+				const Mat4d& rotLonP90 = Mat4d::rotation(meridianSphericalCap.n, 90.*M_PI/180.);
+				const Mat4d& rotLonM90 = Mat4d::rotation(meridianSphericalCap.n, -90.*M_PI/180.);
 				Vec3d rotFpt=fpt;
-				rotFpt.transfo4d(rotLon120);
-				Vec3d rotFpt2=rotFpt;
-				rotFpt2.transfo4d(rotLon120);
+				rotFpt.transfo4d(rotLonP90);
+				Vec3d rotFpt2=fpt;
+				rotFpt2.transfo4d(rotLonM90);
 				sPainter.drawGreatCircleArc(fpt, rotFpt, NULL, alViewportEdgeIntersectCallback, &userData);
-				sPainter.drawGreatCircleArc(rotFpt, rotFpt2, NULL, alViewportEdgeIntersectCallback, &userData);
 				sPainter.drawGreatCircleArc(rotFpt2, fpt, NULL, alViewportEdgeIntersectCallback, &userData);
+				//sPainter.drawGreatCircleArc(rotFpt2, fpt, NULL, alViewportEdgeIntersectCallback, &userData);
 				return;
-			}
-			else
-				return;
-		}
+//			}
+//			//else
+//			//	return;
+//		}
 
-		Vec3d middlePoint = p1+p2;
-		middlePoint.normalize();
-		if (!viewPortSphericalCap.contains(middlePoint))
-			middlePoint*=-1.;
+//		Vec3d middlePoint = p1+p2;
+//		middlePoint.normalize();
+//		if (!viewPortSphericalCap.contains(middlePoint))
+//			middlePoint*=-1.;
 
-		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
-		sPainter.drawGreatCircleArc(p1, middlePoint, NULL, alViewportEdgeIntersectCallback, &userData);
-		sPainter.drawGreatCircleArc(p2, middlePoint, NULL, alViewportEdgeIntersectCallback, &userData);
+//		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
+//		sPainter.drawGreatCircleArc(p1, middlePoint, NULL, alViewportEdgeIntersectCallback, &userData);
+//		sPainter.drawGreatCircleArc(p2, middlePoint, NULL, alViewportEdgeIntersectCallback, &userData);
 
-		// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
-		#ifdef GL_LINE_SMOOTH
-		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-			glDisable(GL_LINE_SMOOTH);
-		#endif
+//		// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
+//		#ifdef GL_LINE_SMOOTH
+//		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+//			glDisable(GL_LINE_SMOOTH);
+//		#endif
 
-		glDisable(GL_BLEND);
+//		glDisable(GL_BLEND);
 
-		return;
+//		return;
 	}
 	/////////////////////////////////////////////////
 	// Else draw small circles (declinations). (Technically, Equator is one, but ok...)

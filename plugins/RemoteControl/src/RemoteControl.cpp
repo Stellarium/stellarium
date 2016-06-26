@@ -58,11 +58,7 @@ StelPluginInfo RemoteControlStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Remote Control");
 	info.authors = "Florian Schaukowitsch and Georg Zotti";
 	info.contact = "http://homepage.univie.ac.at/Georg.Zotti";
-	info.description = N_("<p>Provides remote control functionality using a webserver interface.</p> "
-			      "<p>See manual for detailed description.</p><br/>"
-			      "<p>This plugin was developed during ESA SoCiS 2015.</p>"
-			      "<p>This plugin uses the <a href=\"http://stefanfrings.de/qtwebapp/index-en.html\">QtWebApp HTTP server</a> by Stefan Frings.</p>"
-			      );
+	info.description = N_("Provides remote control functionality using a webserver interface. See manual for detailed description.");
 	info.version = REMOTECONTROL_VERSION;
 	return info;
 }
