@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-21 17:32+0700\n"
-"PO-Revision-Date: 2016-06-21 00:22+0000\n"
+"PO-Revision-Date: 2016-06-24 20:47+0000\n"
 "Last-Translator: Miguel Angel <maportilloserra@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-22 05:32+0000\n"
+"X-Launchpad-Export-Date: 2016-06-26 05:15+0000\n"
 "X-Generator: Launchpad (build 18111)\n"
 "Language: es_ES\n"
 
@@ -1049,7 +1049,7 @@ msgstr "Añadir 1 día sidéreo"
 
 #: src/core/StelCore.cpp:238
 msgid "Add 1 sidereal year"
-msgstr "Añadir 1 año sideral"
+msgstr "Agregar 1 año sideral"
 
 #: src/core/StelCore.cpp:239
 msgid "Add 100 sidereal years"
@@ -2272,7 +2272,7 @@ msgstr "Contiuar la ejecución del script"
 
 #: src/gui/StelGui.cpp:209
 msgid "Script console window"
-msgstr "Ventana de la consola de scripts"
+msgstr "Ventana consola scripts"
 
 #: src/gui/StelGui.cpp:212
 msgid "Help window"
@@ -3533,7 +3533,7 @@ msgstr "Binosky: objetos de cielo profundo de los prismáticos"
 #. TRANSLATORS: Name of script
 #: src/translations.h:310
 msgid "The Jack Bennett Catalog"
-msgstr ""
+msgstr "El Catalago de Jack Bennett"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:312
@@ -4850,7 +4850,7 @@ msgstr "&Añadir a los colores personalizados"
 
 #: src/translations.h:624
 msgid "Hu&e:"
-msgstr ""
+msgstr "&Matiz"
 
 #: src/translations.h:625
 msgid "&Sat:"
@@ -5783,6 +5783,8 @@ msgstr ""
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
+"VSOP87/ELP2000-82B se utiliza cuando éstos no están instalados o no están "
+"activados."
 
 #: src/ui_configurationDialog.h:1108
 msgid "Default options"
@@ -5878,7 +5880,7 @@ msgstr "Campos mostrados"
 
 #: src/ui_configurationDialog.h:1144 src/ui_configurationDialog.h:1168
 msgid "Equatorial coordinates, equinox of date"
-msgstr ""
+msgstr "Coordenadas ecuatoriales, equinoccio de fecha"
 
 #: src/ui_configurationDialog.h:1146
 msgid "Right ascension/Declination (of date)"
@@ -5890,7 +5892,7 @@ msgstr "Número(s) de catálogo"
 
 #: src/ui_configurationDialog.h:1149
 msgid "Equatorial coordinates, equinox of J2000.0"
-msgstr ""
+msgstr "Coordenadas ecuatoriales, equinoccio de J2000."
 
 #: src/ui_configurationDialog.h:1151
 msgid "Right ascension/Declination (J2000)"
@@ -6116,6 +6118,8 @@ msgstr "Usar grados decimales"
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr ""
+"La Nutación es una pequeña oscilación del eje terrestre, que asciende a unos "
+"pocos segundos de arco."
 
 #: src/ui_configurationDialog.h:1258
 msgid "Include nutation"
@@ -6136,6 +6140,7 @@ msgstr "Coordenadas topocéntricas"
 #: src/ui_configurationDialog.h:1264
 msgid "Activate this option to calculate azimuth from south towards west."
 msgstr ""
+"Activar esta opción para calcular el azimut desde el sur hacia el oeste."
 
 #: src/ui_configurationDialog.h:1266
 msgid "Azimuth from South"
@@ -6330,11 +6335,11 @@ msgstr ""
 
 #: src/ui_greatRedSpotDialog.h:168
 msgid "Great Red Spot Details"
-msgstr ""
+msgstr "Detalles Gran Mancha Roja"
 
 #: src/ui_greatRedSpotDialog.h:170
 msgid "Custom settings for position of GRS"
-msgstr ""
+msgstr "Configuración personalizada para la posición GRS"
 
 #: src/ui_greatRedSpotDialog.h:171 src/ui_astroCalcDialog.h:384
 #: src/ui_astroCalcDialog.h:386
@@ -6343,11 +6348,11 @@ msgstr "yyyy.MM.dd hh:mm"
 
 #: src/ui_greatRedSpotDialog.h:172
 msgid "Annual drift (degrees):"
-msgstr ""
+msgstr "Deriva anuales (grados):"
 
 #: src/ui_greatRedSpotDialog.h:173
 msgid "Longitude of GRS (degrees):"
-msgstr ""
+msgstr "Longitud GRS (grados):"
 
 #: src/ui_greatRedSpotDialog.h:180
 msgid "Date and Time (UTC):"
@@ -6355,7 +6360,7 @@ msgstr "Fecha y hora (UTC):"
 
 #: src/ui_greatRedSpotDialog.h:184
 msgid "Get the recent GRS measurement"
-msgstr ""
+msgstr "Obtener medición reciente GRS"
 
 #: src/ui_scriptConsole.h:346
 msgid "Script console"
@@ -8297,6 +8302,8 @@ msgid ""
 "This plug-in is based on and reuses a lot of code under the GNU General "
 "Public License:"
 msgstr ""
+"Este plug-in se basa y se vuelve a utilizar una gran cantidad de código bajo "
+"la Licencia Pública General de GNU:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:259
 msgid ""
@@ -8307,7 +8314,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:260
 msgid "the telescope server core code (licensed under the LGPL)"
-msgstr ""
+msgstr "código núcleo servidor telescopio (bajo la licencia LGPL)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:261
 msgid ""
@@ -8349,7 +8356,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 msgid "Contents"
-msgstr ""
+msgstr "Contenido"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
@@ -8359,27 +8366,27 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:282
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
 msgid "The original telescope control feature"
-msgstr ""
+msgstr "La función de control del telescopio original"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
 msgid "Using this plug-in"
-msgstr ""
+msgstr "Usar este plug-in"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:321
 msgid "Main window ('Telescopes')"
-msgstr ""
+msgstr "Ventana Principal ('Telescopios')"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:336
 msgid "Telescope configuration window"
-msgstr ""
+msgstr "Ventana configuración telescopio"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:286
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:338
 msgid "Connection type"
-msgstr ""
+msgstr "Tipo Conexión"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:346
@@ -8402,7 +8409,7 @@ msgstr "Opciones de Conexión"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:377
 msgid "Field of view indicators"
-msgstr ""
+msgstr "Indicadores campo de vision"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:385
@@ -8411,17 +8418,17 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 msgid "Telescope commands"
-msgstr ""
+msgstr "Comandos Telescopio"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:293
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:410
 msgid "Supported devices"
-msgstr ""
+msgstr "Dispositivos soportados"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:294
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:426
 msgid "Virtual telescope"
-msgstr ""
+msgstr "Telescopio virtual"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:297
 msgid ""
@@ -8431,18 +8438,27 @@ msgid ""
 "and similar situations. (To abort a slew, you can start another one to a "
 "safe position.)"
 msgstr ""
+"Este plug-in permite a Stellarium para enviar sólo '<b>slew</b>' ('go to') "
+"ordena al dispositivo y recibir su posición actual. No puede emitir ningún "
+"otro comando, por lo que los usuarios deben ser conscientes de la "
+"posibilidad de colisiones de montaje y situaciones similares. (Para abortar "
+"una serie, puede empezar en una posición segura.)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:298
 msgid ""
 "As of the current version, this plug-in doesn't allow satellite tracking, "
 "and is not very suitable for lunar or planetary observations."
 msgstr ""
+"A partir de la versión actual, este plug-in no permite el seguimiento por "
+"satélite, y no es muy adecuado para las observaciones lunares y planetarias."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:299
 msgid ""
 "WARNING: Stellarium CANNOT prevent your telescope from being pointed at the "
 "Sun."
 msgstr ""
+"ADVERTENCIA: Stellarium no puede evitar que su telescopio señale en "
+"dirección al sol..."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
 msgid ""
@@ -8473,7 +8489,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:424
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:430
 msgid "Back to top"
-msgstr ""
+msgstr "Volver arriba"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:305
 msgid ""
@@ -8501,7 +8517,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:311
 msgid "INDIRECT CONNECTION"
-msgstr ""
+msgstr "CONEXION INDIRECTA"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:312
 #, qt-format
@@ -8554,7 +8570,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
 msgid "The plug-in's main window can be opened:"
-msgstr ""
+msgstr "El plug-in ventana principal se puede abrir:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:323
 msgid ""
