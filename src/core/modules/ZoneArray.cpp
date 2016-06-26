@@ -521,6 +521,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		}
 
 		int extinctedMagIndex = s->getMag();
+		float twinkleFactor=1.0f; // allow height-dependent twinkle.
 		if (withExtinction)
 		{
 			Vec3f altAz(vf);
@@ -532,9 +533,10 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			if (extinctedMagIndex >= cutoffMagStep) // i.e., if extincted it is dimmer than cutoff, so remove
 				continue;
 			tmpRcmag = &rcmag_table[extinctedMagIndex];
+			twinkleFactor=qMin(1.0f, 1.0f-0.9f*altAz[2]); // suppress twinkling in higher altitudes. Keep 0.1 twinkle amount in zenith.
 		}
 	
-		if (drawer->drawPointSource(sPainter, vf, *tmpRcmag, s->getBVIndex(), !isInsideViewport) && s->hasName() && extinctedMagIndex < maxMagStarName && s->hasComponentID()<=1)
+		if (drawer->drawPointSource(sPainter, vf, *tmpRcmag, s->getBVIndex(), !isInsideViewport, twinkleFactor) && s->hasName() && extinctedMagIndex < maxMagStarName && s->hasComponentID()<=1)
 		{
 			const float offset = tmpRcmag->radius*0.7f;
 			const Vec3f colorr = StelSkyDrawer::indexToColor(s->getBVIndex())*0.75f;

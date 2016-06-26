@@ -35,7 +35,6 @@ SporadicMeteorMgr::SporadicMeteorMgr(int zhr, int maxv)
 	, m_flagShow(true)
 {
 	setObjectName("SporadicMeteorMgr");
-	qsrand(QDateTime::currentMSecsSinceEpoch());
 }
 
 SporadicMeteorMgr::~SporadicMeteorMgr()
