@@ -444,6 +444,8 @@ StelMainView::~StelMainView()
 
 void StelMainView::setOpenGLFormat() const
 {
+	//if on an GLES build, do not set the format
+#ifndef QT_OPENGL_ES_2
 	//this is the place to set the desired surface format!
 	QSurfaceFormat fmt = QSurfaceFormat::defaultFormat();
 	fmt.setRenderableType(QSurfaceFormat::OpenGL);
@@ -454,6 +456,7 @@ void StelMainView::setOpenGLFormat() const
 
 	qDebug()<<"Desired surface format: "<<fmt;
 	QSurfaceFormat::setDefaultFormat(fmt);
+#endif
 }
 
 void StelMainView::init()
