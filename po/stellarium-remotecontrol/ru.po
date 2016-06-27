@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-06-14 19:17+0700\n"
+"POT-Creation-Date: 2016-06-26 19:46+0700\n"
 "PO-Revision-Date: 2016-06-13 15:29+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-16 04:35+0000\n"
-"X-Generator: Launchpad (build 18097)\n"
+"X-Launchpad-Export-Date: 2016-06-27 05:54+0000\n"
+"X-Generator: Launchpad (build 18115)\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -409,19 +409,19 @@ msgstr "Действия"
 msgid "Run/toggle action"
 msgstr "Выполнить/Переключить действие"
 
-#: index.html:441 tablet7in.html:634
+#: index.html:441 tablet7in.html:630
 msgid "Planet map"
 msgstr "Карта планеты"
 
-#: index.html:442 tablet7in.html:635
+#: index.html:442 tablet7in.html:631
 msgid "Planet map pointer"
 msgstr "Указатель на карте планеты"
 
-#: index.html:446 tablet7in.html:639
+#: index.html:446 tablet7in.html:635
 msgid "Type to search location"
 msgstr "Введите запрос для поиска местоположения"
 
-#: index.html:491 tablet7in.html:685
+#: index.html:491 tablet7in.html:681
 msgid "No response from server"
 msgstr "Нет отклика от сервера"
 
@@ -566,39 +566,23 @@ msgstr "Малая лунная остановка"
 msgid "Current Planet:"
 msgstr "Текущая планета:"
 
-#: tablet7in.html:614
+#: tablet7in.html:615
 msgid "Favorites"
 msgstr "Избранное"
 
-#: tablet7in.html:616
-msgid "MAMUZ Mammoth"
-msgstr "MAMUZ Mammoth"
-
-#: tablet7in.html:616
-msgid "Run the Mammoth"
-msgstr "Выполнить Mammoth"
-
 #: tablet7in.html:617
-msgid "MAMUZ Show 1"
-msgstr "Первое шоу MAMUZ"
+msgid "Show 1"
+msgstr ""
 
-#: tablet7in.html:618 tablet7in.html:620
-msgid "MAMUZ Summer Sunrise"
-msgstr "Летний восход MAMUZ"
-
-#: tablet7in.html:619 tablet7in.html:621
-msgid "MAMUZ Winter Sunset"
-msgstr "Зимний закат MAMUZ"
-
-#: tablet7in.html:622
+#: tablet7in.html:618
 msgid "Remove Labels and Images"
 msgstr "Удаление названий и изображений"
 
-#: tablet7in.html:622
+#: tablet7in.html:618
 msgid "Cleanup Screen"
 msgstr "Очистка экрана"
 
-#: tablet7in.html:686
+#: tablet7in.html:682
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
 "От сервера не ответа в течении %1 секунд. Stellarium всё ещё работает?"
