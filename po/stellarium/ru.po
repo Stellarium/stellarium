@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-21 17:32+0700\n"
+"POT-Creation-Date: 2016-06-26 19:46+0700\n"
 "PO-Revision-Date: 2016-06-21 10:37+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-22 05:30+0000\n"
-"X-Generator: Launchpad (build 18111)\n"
+"X-Launchpad-Export-Date: 2016-06-27 05:32+0000\n"
+"X-Generator: Launchpad (build 18115)\n"
 
 #: src/core/modules/Constellation.cpp:297 src/core/modules/Nebula.cpp:188
 #: src/core/modules/Planet.cpp:226 src/core/modules/MinorPlanet.cpp:213
@@ -255,7 +255,7 @@ msgstr "Небесное тело:"
 
 #: src/core/modules/Nebula.cpp:190 src/core/modules/Comet.cpp:176
 #: plugins/Novae/src/Nova.cpp:133 plugins/Pulsars/src/Pulsar.cpp:166
-#: plugins/MeteorShowers/src/MeteorShower.cpp:550
+#: plugins/MeteorShowers/src/MeteorShower.cpp:548
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
 msgstr "Тип: <b>%1</b> (%2)"
@@ -5835,7 +5835,7 @@ msgstr "Вся доступная"
 msgid "Display no information"
 msgstr "Не отображать информации"
 
-#: src/ui_configurationDialog.h:1132 plugins/Oculars/src/Oculars.cpp:2291
+#: src/ui_configurationDialog.h:1132 plugins/Oculars/src/Oculars.cpp:2289
 #: plugins/Observability/src/Observability.cpp:205
 msgid "None"
 msgstr "Отключена"
@@ -6780,7 +6780,7 @@ msgstr "Этот плагин позволяет показывать румбы
 msgid "Compass marks"
 msgstr "Компас"
 
-#: plugins/Oculars/src/Oculars.cpp:81 plugins/Oculars/src/Oculars.cpp:1471
+#: plugins/Oculars/src/Oculars.cpp:81 plugins/Oculars/src/Oculars.cpp:1467
 #: plugins/Oculars/src/ui_ocularDialog.h:1160
 msgid "Oculars"
 msgstr "Окуляры"
@@ -6795,216 +6795,216 @@ msgstr ""
 "телескопа (моделируется поле зрения и увеличение). Дополнительно этот плагин "
 "может показать размер кадра сенсора и градусные круги Telrad."
 
-#: plugins/Oculars/src/Oculars.cpp:945
+#: plugins/Oculars/src/Oculars.cpp:941
 msgid "Please select an object before switching to ocular view."
 msgstr "Выберите объект до включения вида через окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1053
+#: plugins/Oculars/src/Oculars.cpp:1049
 msgid "&Previous ocular"
 msgstr "&Предыдущий окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1054
+#: plugins/Oculars/src/Oculars.cpp:1050
 msgid "&Next ocular"
 msgstr "&Следующий окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1055
+#: plugins/Oculars/src/Oculars.cpp:1051
 msgid "Select &ocular"
 msgstr "Выбрать &окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1106
+#: plugins/Oculars/src/Oculars.cpp:1102
 msgid "Toggle &crosshair"
 msgstr "Перключить пере&крестие"
 
-#: plugins/Oculars/src/Oculars.cpp:1116
+#: plugins/Oculars/src/Oculars.cpp:1112
 msgid "Configure &Oculars"
 msgstr "Настройка &окуляров"
 
-#: plugins/Oculars/src/Oculars.cpp:1125
+#: plugins/Oculars/src/Oculars.cpp:1121
 msgid "Toggle &CCD"
 msgstr "Переключить &ПЗС"
 
-#: plugins/Oculars/src/Oculars.cpp:1133
+#: plugins/Oculars/src/Oculars.cpp:1129
 msgid "Toggle &Telrad"
 msgstr "Переключить &Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1142
+#: plugins/Oculars/src/Oculars.cpp:1138
 msgid "&Previous CCD"
 msgstr "&Предыдущая ПЗС"
 
-#: plugins/Oculars/src/Oculars.cpp:1143
+#: plugins/Oculars/src/Oculars.cpp:1139
 msgid "&Next CCD"
 msgstr "&Следующая ПЗС"
 
-#: plugins/Oculars/src/Oculars.cpp:1144
+#: plugins/Oculars/src/Oculars.cpp:1140
 msgid "&Select CCD"
 msgstr "&Выбрать ПЗС"
 
-#: plugins/Oculars/src/Oculars.cpp:1166
+#: plugins/Oculars/src/Oculars.cpp:1162
 msgid "&Rotate CCD"
 msgstr "По&вернуть ПЗС"
 
-#: plugins/Oculars/src/Oculars.cpp:1188
+#: plugins/Oculars/src/Oculars.cpp:1184
 msgid "&Reset rotation"
 msgstr "&Сбросить поворот"
 
-#: plugins/Oculars/src/Oculars.cpp:1472
+#: plugins/Oculars/src/Oculars.cpp:1468
 #: plugins/Oculars/src/ui_ocularDialog.h:1162
 msgid "Ocular view"
 msgstr "Вид в окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1487
+#: plugins/Oculars/src/Oculars.cpp:1483
 msgid "Oculars popup menu"
 msgstr "Контекстное меню окуляров"
 
-#: plugins/Oculars/src/Oculars.cpp:1488
+#: plugins/Oculars/src/Oculars.cpp:1484
 msgid "Show crosshairs"
 msgstr "Показывать перекрестия"
 
-#: plugins/Oculars/src/Oculars.cpp:1489
+#: plugins/Oculars/src/Oculars.cpp:1485
 msgid "Image sensor frame"
 msgstr "Кадр сенсора"
 
-#: plugins/Oculars/src/Oculars.cpp:1490
+#: plugins/Oculars/src/Oculars.cpp:1486
 msgid "Telrad sight"
 msgstr "Поле зрения Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1491
+#: plugins/Oculars/src/Oculars.cpp:1487
 msgid "Oculars plugin configuration"
 msgstr "Конфигурация плагина"
 
-#: plugins/Oculars/src/Oculars.cpp:1493
+#: plugins/Oculars/src/Oculars.cpp:1489
 msgid "Select next telescope"
 msgstr "Выбрать следующий телескоп"
 
-#: plugins/Oculars/src/Oculars.cpp:1495
+#: plugins/Oculars/src/Oculars.cpp:1491
 msgid "Select previous telescope"
 msgstr "Выбрать предыдущий телескоп"
 
-#: plugins/Oculars/src/Oculars.cpp:1497
+#: plugins/Oculars/src/Oculars.cpp:1493
 msgid "Select next eyepiece"
 msgstr "Выбрать следующий окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1499
+#: plugins/Oculars/src/Oculars.cpp:1495
 msgid "Select previous eyepiece"
 msgstr "Выбрать предыдущий окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1684
+#: plugins/Oculars/src/Oculars.cpp:1680
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "П.В./Скл. (J2000.0) перекрестия"
 
-#: plugins/Oculars/src/Oculars.cpp:1872
+#: plugins/Oculars/src/Oculars.cpp:1868
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:486
 #, qt-format
 msgid "Ocular #%1"
 msgstr "Окуляр #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1876
+#: plugins/Oculars/src/Oculars.cpp:1872
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:490
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "Окуляр #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1890
+#: plugins/Oculars/src/Oculars.cpp:1886
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:527
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "ФР окуляра: %1 мм"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1897
+#: plugins/Oculars/src/Oculars.cpp:1893
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:537
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Видимое ПЗ окуляра: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1908
+#: plugins/Oculars/src/Oculars.cpp:1904
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:567
 #, qt-format
 msgid "Lens #%1"
 msgstr "Линза #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1912
+#: plugins/Oculars/src/Oculars.cpp:1908
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:571
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Линза #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1917
+#: plugins/Oculars/src/Oculars.cpp:1913
 msgid "Lens: none"
 msgstr "Линза: нет"
 
-#: plugins/Oculars/src/Oculars.cpp:1950 plugins/Oculars/src/Oculars.cpp:1995
+#: plugins/Oculars/src/Oculars.cpp:1946 plugins/Oculars/src/Oculars.cpp:1991
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:723
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Телескоп #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1953
+#: plugins/Oculars/src/Oculars.cpp:1949
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:806
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Увеличение: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1956
+#: plugins/Oculars/src/Oculars.cpp:1952
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:816
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "Выходной зрачок: %1 мм"
 
-#: plugins/Oculars/src/Oculars.cpp:1959
+#: plugins/Oculars/src/Oculars.cpp:1955
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
 #, qt-format
 msgid "FOV: %1"
 msgstr "Поле зрения: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1979
+#: plugins/Oculars/src/Oculars.cpp:1975
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:669
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:765
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Размеры: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1983
+#: plugins/Oculars/src/Oculars.cpp:1979
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:629
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Сенсор #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1987
+#: plugins/Oculars/src/Oculars.cpp:1983
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:633
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Сенсор #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2000
+#: plugins/Oculars/src/Oculars.cpp:1996
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:727
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Телескоп #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2287
+#: plugins/Oculars/src/Oculars.cpp:2285
 msgid "&Lens"
 msgstr "&Линза"
 
-#: plugins/Oculars/src/Oculars.cpp:2288
+#: plugins/Oculars/src/Oculars.cpp:2286
 msgid "&Previous lens"
 msgstr "&Предыдущая линза"
 
-#: plugins/Oculars/src/Oculars.cpp:2289
+#: plugins/Oculars/src/Oculars.cpp:2287
 msgid "&Next lens"
 msgstr "&Следующая линза"
 
-#: plugins/Oculars/src/Oculars.cpp:2319
+#: plugins/Oculars/src/Oculars.cpp:2317
 msgid "&Telescope"
 msgstr "&Телескоп"
 
-#: plugins/Oculars/src/Oculars.cpp:2320
+#: plugins/Oculars/src/Oculars.cpp:2318
 msgid "&Previous telescope"
 msgstr "&Предыдущий телескоп"
 
-#: plugins/Oculars/src/Oculars.cpp:2321
+#: plugins/Oculars/src/Oculars.cpp:2319
 msgid "&Next telescope"
 msgstr "&Следующий телескоп"
 
@@ -8196,9 +8196,8 @@ msgid "Discard"
 msgstr "Отклонить"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:78
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:163
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:169
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:178
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:159
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:186
 msgid "Telescope Control"
 msgstr "Управление телескопом"
 
@@ -8210,19 +8209,19 @@ msgstr ""
 "Этот плагин позволяет Stellarium'у управлять телескопами с "
 "компьютеризированными монтировками (\"GoTo телескоп\")."
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:162
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:211
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:166
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:219
 #, qt-format
 msgid "Move telescope #%1 to selected object"
 msgstr "Навести телескоп #%1 на выбранный объект"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:168
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:215
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:173
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:223
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
 msgstr "Навести телескоп #%1 на точку, находящуюся сейчас в центре экрана"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:178
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:186
 msgid "Move a telescope to a given set of coordinates"
 msgstr "Навести телескоп по указанным координатам"
 
@@ -12413,13 +12412,13 @@ msgstr "Ночи со светилами над горизонтом"
 msgid "Dates of previous and next Full Moon"
 msgstr "Даты предыдущего и следующего полнолуния"
 
-#: plugins/FOV/src/FOV.cpp:40 plugins/FOV/src/FOV.cpp:78
+#: plugins/FOV/src/FOV.cpp:42 plugins/FOV/src/FOV.cpp:81
 #: plugins/FOV/src/ui_fovWindow.h:388 plugins/FOV/src/ui_fovWindow.h:390
 #: plugins/FOV/src/ui_fovWindow.h:409
 msgid "Field of View"
 msgstr "Поле зрения"
 
-#: plugins/FOV/src/FOV.cpp:43
+#: plugins/FOV/src/FOV.cpp:45
 msgid ""
 "This plugin allows stepwise zooming via keyboard shortcuts like in the "
 "<em>Cartes du Ciel</em> planetarium program."
@@ -12427,7 +12426,7 @@ msgstr ""
 "Этот плагин даёт ступенчатое масштабирование с помощью сочетаний клавиш, как "
 "в планетарии <em>Cartes du Ciel</em>."
 
-#: plugins/FOV/src/FOV.cpp:83
+#: plugins/FOV/src/FOV.cpp:86
 #, qt-format
 msgid "Set FOV to %1%2"
 msgstr "Установить поле зрения в %1%2"
@@ -12524,37 +12523,37 @@ msgstr "Изменить знак уравнения"
 msgid "Font size:"
 msgstr "Размер шрифта:"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:97
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:96
 msgid "The current catalog of Meteor Showers is invalid!"
 msgstr "Текущий каталог метеорных потоков неверный!"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:563
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:148
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:562
 msgid "Meteor Showers"
 msgstr "Метеорные потоки"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:150
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
 msgid "Toggle meteor showers"
 msgstr "Переключение метеорных потоков"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:151
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:150
 msgid "Toggle radiant labels"
 msgstr "Переключение названий радиантов"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:152
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:151
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:234
 msgid "Show settings dialog"
 msgstr "Показать диалог настройки"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:153
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:152
 msgid "Show search dialog"
 msgstr "Показать диалог поиска"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:259
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:258
 msgid "Using the default Meteor Showers catalog."
 msgstr "Используется каталог метеорных потоков по умолчанию."
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:567
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:566
 msgid ""
 "<p>This plugin enables you to simulate periodic meteor showers and to "
 "display a marker for each active and inactive radiant.</p><p>By a single "
@@ -12596,59 +12595,59 @@ msgstr "Подтвержденый"
 msgid "Generic"
 msgstr "Общий"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:524
+#: plugins/MeteorShowers/src/MeteorShower.cpp:522
 msgid "generic data"
 msgstr "общие данные"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:528
+#: plugins/MeteorShowers/src/MeteorShower.cpp:526
 msgid "confirmed data"
 msgstr "подтвержденные данные"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:532
+#: plugins/MeteorShowers/src/MeteorShower.cpp:530
 msgid "inactive"
 msgstr "неактивный"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:550
+#: plugins/MeteorShowers/src/MeteorShower.cpp:548
 msgid "meteor shower"
 msgstr "метеорный поток"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:567
+#: plugins/MeteorShowers/src/MeteorShower.cpp:565
 msgid "Radiant drift (per day)"
 msgstr "Дрейф радианта (в день)"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:574
+#: plugins/MeteorShowers/src/MeteorShower.cpp:572
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
 msgstr "Геоцентрическая скорость метеоров: %1 км/с"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:579
+#: plugins/MeteorShowers/src/MeteorShower.cpp:577
 #, qt-format
 msgid "The population index: %1"
 msgstr "Популяционный индекс: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:584
+#: plugins/MeteorShowers/src/MeteorShower.cpp:582
 #, qt-format
 msgid "Parent body: %1"
 msgstr "Родоначальник: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:593
+#: plugins/MeteorShowers/src/MeteorShower.cpp:591
 msgid "Active"
 msgstr "Активен"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:601
+#: plugins/MeteorShowers/src/MeteorShower.cpp:599
 msgid "Activity"
 msgstr "Активность"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:606
+#: plugins/MeteorShowers/src/MeteorShower.cpp:604
 #, qt-format
 msgid "Maximum: %1"
 msgstr "Максимум: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:609
+#: plugins/MeteorShowers/src/MeteorShower.cpp:607
 msgid "Solar longitude"
 msgstr "Солнечная долгота"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:619
+#: plugins/MeteorShowers/src/MeteorShower.cpp:617
 msgid "variable"
 msgstr "переменная"
 
