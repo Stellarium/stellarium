@@ -31,6 +31,7 @@
 #include <QComboBox>
 #include <QDialog>
 #include <QGraphicsProxyWidget>
+#include <QGraphicsSceneWheelEvent>
 #include <QMetaProperty>
 #include <QStyleOptionGraphicsItem>
 #include <QSettings>
@@ -59,7 +60,7 @@ class CustomProxy : public QGraphicsProxyWidget
 		}
 	protected:
 
-		virtual bool event(QEvent* event)
+		virtual bool event(QEvent* event) Q_DECL_OVERRIDE
 		{
 			if (StelApp::getInstance().getSettings()->value("gui/flag_use_window_transparency", true).toBool())
 			{
@@ -77,6 +78,14 @@ class CustomProxy : public QGraphicsProxyWidget
 				}
 			}
 			return QGraphicsProxyWidget::event(event);
+		}
+
+		virtual void wheelEvent(QGraphicsSceneWheelEvent* event) Q_DECL_OVERRIDE
+		{
+			QGraphicsProxyWidget::wheelEvent(event);
+			// always accept scroll events on GUI
+			// to prevent main view from unwanted zooming
+			event->accept();
 		}
 };
 
