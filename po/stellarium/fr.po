@@ -18,13 +18,13 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-26 19:46+0700\n"
-"PO-Revision-Date: 2016-06-21 20:40+0000\n"
+"PO-Revision-Date: 2016-06-27 21:02+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-27 05:23+0000\n"
+"X-Launchpad-Export-Date: 2016-06-28 05:15+0000\n"
 "X-Generator: Launchpad (build 18115)\n"
 
 #: src/core/modules/Constellation.cpp:297 src/core/modules/Nebula.cpp:188
@@ -8739,7 +8739,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:340
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:463
 msgid "Telescope controlled by:"
-msgstr "Télescope contrôlé par:"
+msgstr "Télescope contrôlé par :"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:341
 msgid "<b>Stellarium, directly through a serial port</b> is the DIRECT case"
@@ -8936,6 +8936,9 @@ msgid ""
 "Mark the 'Use field of view indicators' option, then enter a list of values "
 "separated with commas in the field below."
 msgstr ""
+"Cocher l'option « Utiliser les indicateurs de champ de vision », puis "
+"saisissez une liste de valeurs séparées par des virgules dans le champ ci-"
+"dessous."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
 msgid "The values are interpreted as degrees of arc."
@@ -8964,6 +8967,9 @@ msgid ""
 "preferred format (Hours-Minutes-Seconds, Degrees-Minutes-Seconds, or Decimal "
 "degrees), a drop-down list and two buttons."
 msgstr ""
+"Il comporte deux champs pour recevoir les coordonnées célestes, des "
+"sélecteurs pour le format préféré (heures-minutes-secondes, degrés-minutes-"
+"secondes ou degrés décimaux), un menu déroulant et deux boutons."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:388
 msgid ""
@@ -9032,6 +9038,9 @@ msgid ""
 "telescope reticle labelled with the telescope's name on its current position "
 "in the sky."
 msgstr ""
+"Une fois le télescope démarré ou connecté, Stellarium affiche un réticule "
+"étiqueté du nom du télescope, pointant vers sa position actuelle dans le "
+"ciel."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:399
 msgid ""
@@ -9048,6 +9057,9 @@ msgid ""
 "<b>To point a device to an object:</b> Select an object (e.g. a star) and "
 "press the number of the device while holding down the <b>Ctrl</b> key."
 msgstr ""
+"<bPour pointer un appareil en direction d'un objet </b>: sélectionnez un "
+"objet (par exemple une étoile) et cliquez sur le numéro de l'appareil en "
+"maintenant la touche <b>Ctrl</b> enfoncée."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:401
 msgid "For example, Ctrl+1 for telescope #1."
@@ -9062,6 +9074,8 @@ msgid ""
 "<b>To point a device to the center of the view:</b> Press the number of the "
 "device while holding down the <b>Alt</b> key."
 msgstr ""
+"<b>Pour pointer un appareil au centre du champ de vision </b>: pressez le "
+"numéro de l'appareil en maintenant enfoncée la touche <b>Alt</b>."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:404
 msgid "For example, Alt+1 for telescope #1."
@@ -9078,6 +9092,8 @@ msgid ""
 "If you move the view after issuing the command, the target won't change "
 "unless you issue another command."
 msgstr ""
+"Si vous déplacer le champ de vision après avoir lancé la commande, la "
+"position visée ne sera modifiée que si vous lancez une nouvelle commande."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:407
 #, qt-format
@@ -9095,6 +9111,9 @@ msgid ""
 "definitions using one of the two built-in interfaces: the Meade LX200 (the "
 "Meade Autostar controller) interface and the Celestron NexStar interface."
 msgstr ""
+"Tous les appareils listés dans la %1liste « Modèles d'appareils »%2 "
+"utilisent une des deux interfaces proposées : la Meade LX200 (contrôleur "
+"Meade Autostar) et la Celestron NexStar."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:412
 msgid "The device list contains the following:"
@@ -9179,6 +9198,10 @@ msgid ""
 "will react in the same way as the reticle of a real telescope controlled by "
 "the plug-in."
 msgstr ""
+"Pour tester ce plugin sans appareil connecté à l'ordinateur, choisissez "
+"<b>Aucun, une simple simulation (un réticule mouvant)</b> dans le champ "
+"<b>Télescope contrôlé par</b>. Un réticule sera affiché, qui réagira comme "
+"le réticule d'un véritable télescope piloté par le plugin."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:428
 #, qt-format
@@ -9407,7 +9430,7 @@ msgstr "Logiciel tiers ou poste distant"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Nothing, just simulate one (a moving reticle)"
-msgstr "Rien, seulement une simulation (un réticule mouvant)"
+msgstr "Aucun, une simple simulation (un réticule mouvant)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:475
 msgid "Connection delay:"
@@ -9449,7 +9472,7 @@ msgstr "Port série:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
 msgid "Device model:"
-msgstr "Modèle du périphérique:"
+msgstr "Modèle d'appareil :"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "Host:"
