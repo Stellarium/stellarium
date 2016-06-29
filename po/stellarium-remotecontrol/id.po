@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-06-26 19:46+0700\n"
-"PO-Revision-Date: 2016-06-28 05:15+0000\n"
+"PO-Revision-Date: 2016-06-28 05:22+0000\n"
 "Last-Translator: hariyadi.pt <hariyadiputraga@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-28 05:15+0000\n"
+"X-Launchpad-Export-Date: 2016-06-29 05:19+0000\n"
 "X-Generator: Launchpad (build 18115)\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
@@ -45,7 +45,7 @@ msgstr "tidak dapat mendapatkan daftar planet"
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:28
 msgid "Could not retrieve property list"
-msgstr ""
+msgstr "tidak dapat mendapatkan daftar Properti"
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:89
 #: plugins/RemoteControl/webroot/js/api/properties.js:110
@@ -152,6 +152,9 @@ msgstr "Pemilihan"
 #: index.html:33 tablet7in.html:38
 msgid "DSO"
 msgstr ""
+"Objek Langit Dalam \r\n"
+"\r\n"
+"Objek Deep Sky"
 
 #: index.html:36
 msgid "Actions and scripts"
@@ -159,31 +162,31 @@ msgstr "Tindakan dan Skrip"
 
 #: index.html:81 tablet7in.html:178
 msgid "Time jumps"
-msgstr ""
+msgstr "loncatan waktu"
 
 #: index.html:85 tablet7in.html:182
 msgid "Solar hour"
-msgstr ""
+msgstr "jam berdasarkan matahari (solar hour)"
 
 #: index.html:86 tablet7in.html:183
 msgid "Solar day"
-msgstr ""
+msgstr "Hari berdasarkan matahari (solar day)"
 
 #: index.html:87 tablet7in.html:184
 msgid "Solar week"
-msgstr ""
+msgstr "minggu berdasarkan matahari (solar week)"
 
 #: index.html:89 tablet7in.html:186
 msgid "Sidereal day"
-msgstr ""
+msgstr "Hari berdasarkan posisi bintang (sidereal day)"
 
 #: index.html:90 tablet7in.html:187
 msgid "Sidereal year"
-msgstr ""
+msgstr "tahun berdasarkan posisi bintang (sidereal year)"
 
 #: index.html:91 tablet7in.html:188
 msgid "Sidereal century"
-msgstr ""
+msgstr "abad berdasarkan posisi bintang (Sidereal century)"
 
 #: index.html:93 tablet7in.html:190
 msgid "Synodic month"
@@ -458,7 +461,7 @@ msgstr "Arcturus"
 
 #: tablet7in.html:262
 msgid "Capella"
-msgstr ""
+msgstr "Capella"
 
 #: tablet7in.html:263
 msgid "Vega"
@@ -554,36 +557,38 @@ msgstr "titik balik matahari ( Solstices)"
 
 #: tablet7in.html:407
 msgid "Crossquarters"
-msgstr ""
+msgstr "Cross-Quarter"
 
 #: tablet7in.html:408
 msgid "Major Standstill"
-msgstr ""
+msgstr "perhentian utama"
 
 #: tablet7in.html:409
 msgid "Minor Standstill"
-msgstr ""
+msgstr "perhentian kecil"
 
 #: tablet7in.html:420
 msgid "Current Planet:"
-msgstr ""
+msgstr "Planet saat ini"
 
 #: tablet7in.html:615
 msgid "Favorites"
-msgstr ""
+msgstr "Favorit"
 
 #: tablet7in.html:617
 msgid "Show 1"
-msgstr ""
+msgstr "perlihatkan 1"
 
 #: tablet7in.html:618
 msgid "Remove Labels and Images"
-msgstr ""
+msgstr "hilangkan Label dan Gambar"
 
 #: tablet7in.html:618
 msgid "Cleanup Screen"
-msgstr ""
+msgstr "membersihkan layar"
 
 #: tablet7in.html:682
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
+"tidak ada respon dari server selama %1 detik. apakah stellarium masih "
+"berjalan?"
