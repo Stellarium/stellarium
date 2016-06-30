@@ -18,13 +18,13 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-26 19:46+0700\n"
-"PO-Revision-Date: 2016-06-27 21:02+0000\n"
+"PO-Revision-Date: 2016-06-29 12:59+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-28 05:15+0000\n"
+"X-Launchpad-Export-Date: 2016-06-30 05:19+0000\n"
 "X-Generator: Launchpad (build 18115)\n"
 
 #: src/core/modules/Constellation.cpp:297 src/core/modules/Nebula.cpp:188
@@ -8885,6 +8885,9 @@ msgid ""
 "<b>Host</b> can be either a host name or an %1IPv4%2 address such as "
 "'127.0.0.1'. The default value of 'localhost' means 'this computer'."
 msgstr ""
+"L'<b>hôte</b> peut être soit un nom (<i>hostname</i>), soit une adresse "
+"%1IPv4%2, comme 127.0.0.1. La valeur par défaut est « localhost », ce qui "
+"signifie l'ordinateur sur lequel Stellarium est installé."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:371
 msgid ""
@@ -9141,8 +9144,8 @@ msgid ""
 "The Meade ETX-70 telescope with the #494 Autostar controller and the #506 "
 "Connector Cable Set."
 msgstr ""
-"Le télescope Meade ETX-70 avec un contrôleur #494 Autocar et un ensemble "
-"#506 Connector Cable."
+"Le télescope Meade ETX-70 avec un contrôleur Autocar #494 et un Connector "
+"Cable Set #506 ."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:417
 #, qt-format
@@ -9167,6 +9170,10 @@ msgid ""
 "controller version 3.0 or greater is supported by the plug-in, as it uses "
 "the NexStar protocol."
 msgstr ""
+"<b>SynScan</b> est aussi le nom d'une raquette de commande utilisée avec "
+"d'autres monture Sky-Watchers GoTo. Il semble que toutes les montures qui "
+"utilisent une raquette SynScan version 3.0 ou ultérieure sont supportées par "
+"le plugin, puisqu'elle passe par le protocole NexStar."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:421
 msgid "Argo Navis is a 'Digital Telescope Computer' by Wildcard Innovations."
@@ -9180,6 +9187,9 @@ msgid ""
 "(for example, a dobsonian) into a 'Push To' telescope (a telescope that uses "
 "a computer to find targets and human power to move the telescope itself)."
 msgstr ""
+"Il permet de transformer un télescope ordinaire (par exemple avec monture "
+"Dobson) en un télescope semi-manuel, qui utilise un ordinateur pour repérer "
+"les objets et la force humaine pour déplacer le télescope."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:423
 #, qt-format
@@ -9476,7 +9486,7 @@ msgstr "Modèle d'appareil :"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "Host:"
-msgstr "Hôte:"
+msgstr "Hôte :"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:493
 msgid ""
