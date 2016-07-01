@@ -509,6 +509,14 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 	}
 	if (willCastShadow(this, parent.data()))
 		res.append(parent.data());
+	// Test satellites mutual occultations.
+	if (parent.data() != sun) {
+		foreach (const PlanetP& planet, parent.data()->satellites)
+		{
+			if (willCastShadow(this, planet.data()))
+				res.append(planet.data());
+		}
+	}
 	
 	return res;
 }
