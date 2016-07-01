@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-26 19:46+0700\n"
-"PO-Revision-Date: 2016-04-29 09:11+0000\n"
-"Last-Translator: Aliak <aliak_93@yahoo.it>\n"
+"PO-Revision-Date: 2016-06-30 20:48+0000\n"
+"Last-Translator: Mad Hatter <vanhelgen@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-27 05:26+0000\n"
+"X-Launchpad-Export-Date: 2016-07-01 05:16+0000\n"
 "X-Generator: Launchpad (build 18115)\n"
 
 #: src/core/modules/Constellation.cpp:297 src/core/modules/Nebula.cpp:188
@@ -338,7 +338,7 @@ msgstr "kpc"
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:298
 msgid "ly"
-msgstr ""
+msgstr "al"
 
 #: src/core/modules/Nebula.cpp:300
 #, qt-format
@@ -1878,7 +1878,7 @@ msgid ""
 "Magnitude range: %3 - %4"
 msgstr ""
 "Dimensione scaricamento: %1MB\n"
-"Numero di stelle: %2 Million\n"
+"Numero di stelle: %2 milioni\n"
 "Intervallo di magnitudine: %3 - %4"
 
 #: src/gui/ConfigurationDialog.cpp:1116 src/gui/ConfigurationDialog.cpp:1152
@@ -2828,6 +2828,8 @@ msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
 msgstr ""
+"Versione di OpenGL insufficiente. Aggiornare i driver, la scheda grafica o "
+"usare l'opzione --angle-mode (oppure --mesa-mode)."
 
 #: src/StelMainView.cpp:731
 msgid ""
@@ -5945,7 +5947,7 @@ msgstr "Altro:"
 
 #: src/ui_configurationDialog.h:1203
 msgid "Use current local date and time"
-msgstr "Usa la data e l'ora correnti"
+msgstr "Usa la data e l'ora locali attuali"
 
 #: src/ui_configurationDialog.h:1205
 msgid "use current"
@@ -6100,7 +6102,7 @@ msgstr "Auto zoom out riporta alla direzione iniziale di visualizzazione"
 
 #: src/ui_configurationDialog.h:1272
 msgid "Automatic change of landscape when planet is changed"
-msgstr "Cambiamento automatico dei paesaggi quando il pianeta è cambiato"
+msgstr "Cambiamento automatico dei paesaggi quando si cambia il pianeta"
 
 #: src/ui_configurationDialog.h:1274
 msgid "Auto select landscapes"
@@ -7384,7 +7386,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
-msgstr "Telescopi:"
+msgstr "Telescopi"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1226
 msgid "Diameter:"
