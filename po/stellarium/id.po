@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-26 19:46+0700\n"
-"PO-Revision-Date: 2015-07-16 14:27+0000\n"
-"Last-Translator: Stenly Ivan Mamanua <stenlyivanmamanua@gmail.com>\n"
+"PO-Revision-Date: 2016-06-30 09:37+0000\n"
+"Last-Translator: hariyadi.pt <hariyadiputraga@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-27 05:26+0000\n"
+"X-Launchpad-Export-Date: 2016-07-01 05:15+0000\n"
 "X-Generator: Launchpad (build 18115)\n"
 
 #: src/core/modules/Constellation.cpp:297 src/core/modules/Nebula.cpp:188
@@ -30,7 +30,7 @@ msgstr "Jenis: <b>%1</b>"
 
 #: src/core/modules/Constellation.cpp:297
 msgid "constellation"
-msgstr ""
+msgstr "Rasi"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:378
 #: src/core/modules/GridLinesMgr.cpp:950 src/core/modules/LandscapeMgr.cpp:414
@@ -63,7 +63,7 @@ msgstr "Batas rasi bintang"
 
 #: src/core/modules/ConstellationMgr.cpp:148
 msgid "Constellation selection isolated"
-msgstr ""
+msgstr "Pemilihan Rasi Diasingkan"
 
 #: src/core/modules/StarMgr.cpp:379 src/ui_viewDialog.h:1596
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:253
@@ -80,15 +80,15 @@ msgstr "Meridian"
 
 #: src/core/modules/GridLinesMgr.cpp:605
 msgid "Ecliptic of J2000.0"
-msgstr ""
+msgstr "Ekliptika pada J2000.0"
 
 #: src/core/modules/GridLinesMgr.cpp:609
 msgid "Ecliptic of Date"
-msgstr ""
+msgstr "Ekliptika dari Tanggal"
 
 #: src/core/modules/GridLinesMgr.cpp:613
 msgid "Equator of J2000.0"
-msgstr ""
+msgstr "Ekuator pada J2000.0"
 
 #: src/core/modules/GridLinesMgr.cpp:617
 msgid "Equator"
@@ -96,7 +96,7 @@ msgstr "Ekuator"
 
 #: src/core/modules/GridLinesMgr.cpp:622
 msgid "Precession Circle"
-msgstr ""
+msgstr "Lingkaran Presisian"
 
 #: src/core/modules/GridLinesMgr.cpp:626 src/ui_viewDialog.h:1775
 msgid "Horizon"
@@ -109,12 +109,12 @@ msgstr "Ekuator Galaktika"
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:635 src/ui_viewDialog.h:1799
 msgid "O./C. longitude"
-msgstr ""
+msgstr "O./C. Bujur"
 
 #: src/core/modules/GridLinesMgr.cpp:639 src/core/modules/GridLinesMgr.cpp:966
 #: src/ui_viewDialog.h:1791
 msgid "Prime Vertical"
-msgstr ""
+msgstr "Garis Vertikal Utama"
 
 #: src/core/modules/GridLinesMgr.cpp:643
 msgid "Equinoctial Colure"
@@ -203,7 +203,7 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:968
 msgid "Circumpolar Circles"
-msgstr ""
+msgstr "Lingkaran Circumpolar"
 
 #: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1614
 msgid "Atmosphere"
@@ -233,7 +233,7 @@ msgstr "Nama"
 
 #: src/core/modules/LandscapeMgr.cpp:421 src/ui_viewDialog.h:1618
 msgid "Light pollution data from locations database"
-msgstr ""
+msgstr "Data Polusi Cahaya dari Database Lokasi"
 
 #: src/core/modules/LandscapeMgr.cpp:706
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:448
@@ -258,19 +258,19 @@ msgstr ""
 #: plugins/MeteorShowers/src/MeteorShower.cpp:548
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
-msgstr ""
+msgstr "Tipe: <b>%1</b> (%2)"
 
 #: src/core/modules/Nebula.cpp:197
 #, qt-format
 msgid "Opacity: <b>%1</b>"
-msgstr ""
+msgstr "Kebeningan: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:232
 #: src/core/modules/MinorPlanet.cpp:219 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:191
 #, qt-format
 msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
-msgstr ""
+msgstr "Magnitudo: <b>%1</b> (Setelah Pemusnahan: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
 #: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
@@ -284,7 +284,7 @@ msgstr "Magnitudo: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:211
 msgid " (Photometric system: B)"
-msgstr ""
+msgstr " (Sistem Potometri: B)"
 
 #: src/core/modules/Nebula.cpp:217 src/core/modules/StarWrapper.cpp:68
 #: src/core/modules/StarWrapper.cpp:202 plugins/Quasars/src/Quasar.cpp:119
@@ -295,7 +295,7 @@ msgstr "Indeks warna (B-V): <b>%1</b>"
 #: src/core/modules/Nebula.cpp:224
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
-msgstr ""
+msgstr "Kecerahan Permukaan: <b>%1</b> (Setelah Pemusnahan: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:230
 #, qt-format
@@ -310,12 +310,12 @@ msgstr "Ukuran: %1"
 #: src/core/modules/Nebula.cpp:242
 #, qt-format
 msgid "Size: %1 x %2"
-msgstr ""
+msgstr "Ukuran: %1 x %2"
 
 #: src/core/modules/Nebula.cpp:244
 #, qt-format
 msgid "Orientation angle: %1%2"
-msgstr ""
+msgstr "Orientasi Sudut: %1%2"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:268 src/core/modules/StarWrapper.cpp:232
@@ -328,22 +328,22 @@ msgstr "Jarak: %1 tc"
 #. TRANSLATORS: Unit of measure for distance - megaparsecs
 #: src/core/modules/Nebula.cpp:289
 msgid "Mpc"
-msgstr ""
+msgstr "Mpc"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
 #: src/core/modules/Nebula.cpp:295
 msgid "kpc"
-msgstr ""
+msgstr "Kiloparsec"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:298
 msgid "ly"
-msgstr ""
+msgstr "Tahun Cahaya"
 
 #: src/core/modules/Nebula.cpp:300
 #, qt-format
 msgid "Distance: %1 %2"
-msgstr ""
+msgstr "Jarak: %1 %2"
 
 #: src/core/modules/Nebula.cpp:314
 #, qt-format
@@ -357,32 +357,32 @@ msgstr "Paralaks: %1\""
 
 #: src/core/modules/Nebula.cpp:329
 msgid "Morphological description: "
-msgstr ""
+msgstr "Deskripsi analisis Morfologi "
 
 #: src/core/modules/Nebula.cpp:831
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
-msgstr ""
+msgstr "Konsentrasi Tinggi dari Bintang yang Menuju ke tengah"
 
 #: src/core/modules/Nebula.cpp:834
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "dense central concentration of stars"
-msgstr ""
+msgstr "Konsentrasi Kepadatan tengah dari Bintang"
 
 #: src/core/modules/Nebula.cpp:837
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "strong inner core of stars"
-msgstr ""
+msgstr "Kekuatan Inti dalam dari Bintang"
 
 #: src/core/modules/Nebula.cpp:840
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
-msgstr ""
+msgstr "Konsentrasi kekayaan Menengah dari Bintang"
 
 #: src/core/modules/Nebula.cpp:845
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
-msgstr ""
+msgstr "Konsentrasi Menengah dari Bintang"
 
 #: src/core/modules/Nebula.cpp:848
 msgctxt "Shapley–Sawyer Concentration Class"
