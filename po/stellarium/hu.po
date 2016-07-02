@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-21 17:32+0700\n"
-"PO-Revision-Date: 2016-06-04 07:36+0000\n"
+"POT-Creation-Date: 2016-06-26 19:46+0700\n"
+"PO-Revision-Date: 2016-07-02 05:08+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-22 05:24+0000\n"
-"X-Generator: Launchpad (build 18111)\n"
+"X-Launchpad-Export-Date: 2016-07-02 05:16+0000\n"
+"X-Generator: Launchpad (build 18115)\n"
 "X-Poedit-Language: Hungarian\n"
 
 #: src/core/modules/Constellation.cpp:297 src/core/modules/Nebula.cpp:188
@@ -257,7 +257,7 @@ msgstr "Égi objektum:"
 
 #: src/core/modules/Nebula.cpp:190 src/core/modules/Comet.cpp:176
 #: plugins/Novae/src/Nova.cpp:133 plugins/Pulsars/src/Pulsar.cpp:166
-#: plugins/MeteorShowers/src/MeteorShower.cpp:550
+#: plugins/MeteorShowers/src/MeteorShower.cpp:548
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
 msgstr "Típus: <b>%1</b> (%2)"
@@ -5794,7 +5794,7 @@ msgstr "Minden elérhető"
 msgid "Display no information"
 msgstr "Információ elrejtése"
 
-#: src/ui_configurationDialog.h:1132 plugins/Oculars/src/Oculars.cpp:2291
+#: src/ui_configurationDialog.h:1132 plugins/Oculars/src/Oculars.cpp:2289
 #: plugins/Observability/src/Observability.cpp:205
 msgid "None"
 msgstr "Semmi"
@@ -6725,7 +6725,7 @@ msgstr "Iránytű jeleket rajzol a horizontnál."
 msgid "Compass marks"
 msgstr "iránytű jelzések"
 
-#: plugins/Oculars/src/Oculars.cpp:81 plugins/Oculars/src/Oculars.cpp:1471
+#: plugins/Oculars/src/Oculars.cpp:81 plugins/Oculars/src/Oculars.cpp:1467
 #: plugins/Oculars/src/ui_ocularDialog.h:1160
 msgid "Oculars"
 msgstr "Okulárok"
@@ -6740,216 +6740,216 @@ msgstr ""
 "Csak a nagyítás és a látótér nagysága állítható. Mutatja a képszenzor "
 "keretét és a Telradot is."
 
-#: plugins/Oculars/src/Oculars.cpp:945
+#: plugins/Oculars/src/Oculars.cpp:941
 msgid "Please select an object before switching to ocular view."
 msgstr "Válasszon objektumot az okulár nézetbe kapcsolás előtt."
 
-#: plugins/Oculars/src/Oculars.cpp:1053
+#: plugins/Oculars/src/Oculars.cpp:1049
 msgid "&Previous ocular"
 msgstr "&Előző okulár"
 
-#: plugins/Oculars/src/Oculars.cpp:1054
+#: plugins/Oculars/src/Oculars.cpp:1050
 msgid "&Next ocular"
 msgstr "&Következő okulár"
 
-#: plugins/Oculars/src/Oculars.cpp:1055
+#: plugins/Oculars/src/Oculars.cpp:1051
 msgid "Select &ocular"
 msgstr "&Okulár választása"
 
-#: plugins/Oculars/src/Oculars.cpp:1106
+#: plugins/Oculars/src/Oculars.cpp:1102
 msgid "Toggle &crosshair"
 msgstr "&Célkereszt be/ki"
 
-#: plugins/Oculars/src/Oculars.cpp:1116
+#: plugins/Oculars/src/Oculars.cpp:1112
 msgid "Configure &Oculars"
 msgstr "&Okulárok beállításai"
 
-#: plugins/Oculars/src/Oculars.cpp:1125
+#: plugins/Oculars/src/Oculars.cpp:1121
 msgid "Toggle &CCD"
 msgstr "&CCD be/ki"
 
-#: plugins/Oculars/src/Oculars.cpp:1133
+#: plugins/Oculars/src/Oculars.cpp:1129
 msgid "Toggle &Telrad"
 msgstr "&Telrad ki/be"
 
-#: plugins/Oculars/src/Oculars.cpp:1142
+#: plugins/Oculars/src/Oculars.cpp:1138
 msgid "&Previous CCD"
 msgstr "&Előző CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1143
+#: plugins/Oculars/src/Oculars.cpp:1139
 msgid "&Next CCD"
 msgstr "&Következő CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1144
+#: plugins/Oculars/src/Oculars.cpp:1140
 msgid "&Select CCD"
 msgstr "CCD kivála&sztása"
 
-#: plugins/Oculars/src/Oculars.cpp:1166
+#: plugins/Oculars/src/Oculars.cpp:1162
 msgid "&Rotate CCD"
 msgstr "CCD fo&rgatása"
 
-#: plugins/Oculars/src/Oculars.cpp:1188
+#: plugins/Oculars/src/Oculars.cpp:1184
 msgid "&Reset rotation"
 msgstr "Forgatás &reszet"
 
-#: plugins/Oculars/src/Oculars.cpp:1472
+#: plugins/Oculars/src/Oculars.cpp:1468
 #: plugins/Oculars/src/ui_ocularDialog.h:1162
 msgid "Ocular view"
 msgstr "okulárnézet"
 
-#: plugins/Oculars/src/Oculars.cpp:1487
+#: plugins/Oculars/src/Oculars.cpp:1483
 msgid "Oculars popup menu"
 msgstr "okulár menü"
 
-#: plugins/Oculars/src/Oculars.cpp:1488
+#: plugins/Oculars/src/Oculars.cpp:1484
 msgid "Show crosshairs"
 msgstr "célkereszt mutatása"
 
-#: plugins/Oculars/src/Oculars.cpp:1489
+#: plugins/Oculars/src/Oculars.cpp:1485
 msgid "Image sensor frame"
 msgstr "Képérzékelő"
 
-#: plugins/Oculars/src/Oculars.cpp:1490
+#: plugins/Oculars/src/Oculars.cpp:1486
 msgid "Telrad sight"
 msgstr "Telrad nézet"
 
-#: plugins/Oculars/src/Oculars.cpp:1491
+#: plugins/Oculars/src/Oculars.cpp:1487
 msgid "Oculars plugin configuration"
 msgstr "Okulár bővítmény beállításai"
 
-#: plugins/Oculars/src/Oculars.cpp:1493
+#: plugins/Oculars/src/Oculars.cpp:1489
 msgid "Select next telescope"
 msgstr "Következő távcső"
 
-#: plugins/Oculars/src/Oculars.cpp:1495
+#: plugins/Oculars/src/Oculars.cpp:1491
 msgid "Select previous telescope"
 msgstr "Előző távcső"
 
-#: plugins/Oculars/src/Oculars.cpp:1497
+#: plugins/Oculars/src/Oculars.cpp:1493
 msgid "Select next eyepiece"
 msgstr "Következő nézőke"
 
-#: plugins/Oculars/src/Oculars.cpp:1499
+#: plugins/Oculars/src/Oculars.cpp:1495
 msgid "Select previous eyepiece"
 msgstr "Előző nézőke"
 
-#: plugins/Oculars/src/Oculars.cpp:1684
+#: plugins/Oculars/src/Oculars.cpp:1680
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "RA/Dec (J2000.0)"
 
-#: plugins/Oculars/src/Oculars.cpp:1872
+#: plugins/Oculars/src/Oculars.cpp:1868
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:486
 #, qt-format
 msgid "Ocular #%1"
 msgstr "Okulár #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1876
+#: plugins/Oculars/src/Oculars.cpp:1872
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:490
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "Okulár #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1890
+#: plugins/Oculars/src/Oculars.cpp:1886
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:527
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Okulár FL: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1897
+#: plugins/Oculars/src/Oculars.cpp:1893
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:537
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Okulár aFOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1908
+#: plugins/Oculars/src/Oculars.cpp:1904
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:567
 #, qt-format
 msgid "Lens #%1"
 msgstr "Lencse #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1912
+#: plugins/Oculars/src/Oculars.cpp:1908
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:571
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Lencse #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1917
+#: plugins/Oculars/src/Oculars.cpp:1913
 msgid "Lens: none"
 msgstr "Lencse: nincs"
 
-#: plugins/Oculars/src/Oculars.cpp:1950 plugins/Oculars/src/Oculars.cpp:1995
+#: plugins/Oculars/src/Oculars.cpp:1946 plugins/Oculars/src/Oculars.cpp:1991
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:723
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Távcső #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1953
+#: plugins/Oculars/src/Oculars.cpp:1949
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:806
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Nagyítás: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1956
+#: plugins/Oculars/src/Oculars.cpp:1952
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:816
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "Fényrekesz: %1 mm"
 
-#: plugins/Oculars/src/Oculars.cpp:1959
+#: plugins/Oculars/src/Oculars.cpp:1955
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
 #, qt-format
 msgid "FOV: %1"
 msgstr "FOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1979
+#: plugins/Oculars/src/Oculars.cpp:1975
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:669
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:765
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Dimenziók: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1983
+#: plugins/Oculars/src/Oculars.cpp:1979
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:629
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Szenzor #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1987
+#: plugins/Oculars/src/Oculars.cpp:1983
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:633
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Szenzor #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2000
+#: plugins/Oculars/src/Oculars.cpp:1996
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:727
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Távcső #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2287
+#: plugins/Oculars/src/Oculars.cpp:2285
 msgid "&Lens"
 msgstr "&Lencsék"
 
-#: plugins/Oculars/src/Oculars.cpp:2288
+#: plugins/Oculars/src/Oculars.cpp:2286
 msgid "&Previous lens"
 msgstr "&Előző lencse"
 
-#: plugins/Oculars/src/Oculars.cpp:2289
+#: plugins/Oculars/src/Oculars.cpp:2287
 msgid "&Next lens"
 msgstr "&Következő lencse"
 
-#: plugins/Oculars/src/Oculars.cpp:2319
+#: plugins/Oculars/src/Oculars.cpp:2317
 msgid "&Telescope"
 msgstr "&Távcső"
 
-#: plugins/Oculars/src/Oculars.cpp:2320
+#: plugins/Oculars/src/Oculars.cpp:2318
 msgid "&Previous telescope"
 msgstr "&Előző távcső"
 
-#: plugins/Oculars/src/Oculars.cpp:2321
+#: plugins/Oculars/src/Oculars.cpp:2319
 msgid "&Next telescope"
 msgstr "&Következő távcső"
 
@@ -8115,9 +8115,8 @@ msgid "Discard"
 msgstr "Elvetés"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:78
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:163
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:169
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:178
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:159
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:186
 msgid "Telescope Control"
 msgstr "Távcső irányítása"
 
@@ -8127,19 +8126,19 @@ msgid ""
 "computerized mount (a \"GoTo telescope\")."
 msgstr "A bővítmény elfordítási parancsot küld a távcsőnek."
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:162
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:211
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:166
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:219
 #, qt-format
 msgid "Move telescope #%1 to selected object"
 msgstr "Távcső_#%1 mozgatása a kiválasztott objektumra"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:168
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:215
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:173
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:223
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
 msgstr "Távcső_#%1 mozgatása a képernyő közepén lévő objektumra."
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:178
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:186
 msgid "Move a telescope to a given set of coordinates"
 msgstr "a távcső mozgatása koordinátára"
 
@@ -11585,7 +11584,7 @@ msgstr "Weboldalak"
 
 #: plugins/Observability/src/Observability.cpp:65
 msgid "Observability Analysis"
-msgstr "Láthatósági elemzés"
+msgstr "Megfigyelhetőség"
 
 #: plugins/Observability/src/Observability.cpp:68
 msgid ""
@@ -12036,13 +12035,13 @@ msgstr "Azok az éjszakák, amikor a forrás a látóhatár fölött van."
 msgid "Dates of previous and next Full Moon"
 msgstr "Előző és következő teliholdak dátumai"
 
-#: plugins/FOV/src/FOV.cpp:40 plugins/FOV/src/FOV.cpp:78
+#: plugins/FOV/src/FOV.cpp:42 plugins/FOV/src/FOV.cpp:81
 #: plugins/FOV/src/ui_fovWindow.h:388 plugins/FOV/src/ui_fovWindow.h:390
 #: plugins/FOV/src/ui_fovWindow.h:409
 msgid "Field of View"
 msgstr "Látóhatár"
 
-#: plugins/FOV/src/FOV.cpp:43
+#: plugins/FOV/src/FOV.cpp:45
 msgid ""
 "This plugin allows stepwise zooming via keyboard shortcuts like in the "
 "<em>Cartes du Ciel</em> planetarium program."
@@ -12051,7 +12050,7 @@ msgstr ""
 "billentyűkombináció segítségével.  Ilyen beállítást használ a <em>Cartes du "
 "Ciel (=Sky Charts)</em> planetáriumprogram is."
 
-#: plugins/FOV/src/FOV.cpp:83
+#: plugins/FOV/src/FOV.cpp:86
 #, qt-format
 msgid "Set FOV to %1%2"
 msgstr "FOV beállítása %1%2"
@@ -12141,37 +12140,37 @@ msgstr "Előjelváltás"
 msgid "Font size:"
 msgstr "Betűméret:"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:97
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:96
 msgid "The current catalog of Meteor Showers is invalid!"
 msgstr "A meteorrajok jelenlegi katalógusa érvénytelen!"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:563
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:148
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:562
 msgid "Meteor Showers"
 msgstr "Meteorraj"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:150
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
 msgid "Toggle meteor showers"
 msgstr "Meteorrajok"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:151
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:150
 msgid "Toggle radiant labels"
 msgstr "Radiánsfelirat"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:152
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:151
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:234
 msgid "Show settings dialog"
 msgstr "Beállítások mutatása"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:153
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:152
 msgid "Show search dialog"
 msgstr "Keresési ablak"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:259
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:258
 msgid "Using the default Meteor Showers catalog."
 msgstr "Alapértelmezett meteorraj katalógus használata"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:567
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:566
 msgid ""
 "<p>This plugin enables you to simulate periodic meteor showers and to "
 "display a marker for each active and inactive radiant.</p><p>By a single "
@@ -12198,59 +12197,59 @@ msgstr "Megerősítve"
 msgid "Generic"
 msgstr "Általános"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:524
+#: plugins/MeteorShowers/src/MeteorShower.cpp:522
 msgid "generic data"
 msgstr "általános adat"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:528
+#: plugins/MeteorShowers/src/MeteorShower.cpp:526
 msgid "confirmed data"
 msgstr "ellenőrzött adatok"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:532
+#: plugins/MeteorShowers/src/MeteorShower.cpp:530
 msgid "inactive"
 msgstr "inaktív"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:550
+#: plugins/MeteorShowers/src/MeteorShower.cpp:548
 msgid "meteor shower"
 msgstr "meteorraj"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:567
+#: plugins/MeteorShowers/src/MeteorShower.cpp:565
 msgid "Radiant drift (per day)"
 msgstr "Napi radiánseltolódás"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:574
+#: plugins/MeteorShowers/src/MeteorShower.cpp:572
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
 msgstr "Geocentrikus meteorsebesség: %1 km/s"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:579
+#: plugins/MeteorShowers/src/MeteorShower.cpp:577
 #, qt-format
 msgid "The population index: %1"
 msgstr "Populációs index: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:584
+#: plugins/MeteorShowers/src/MeteorShower.cpp:582
 #, qt-format
 msgid "Parent body: %1"
 msgstr "Szülőobjektum: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:593
+#: plugins/MeteorShowers/src/MeteorShower.cpp:591
 msgid "Active"
 msgstr "Aktív"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:601
+#: plugins/MeteorShowers/src/MeteorShower.cpp:599
 msgid "Activity"
 msgstr "Aktivitás"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:606
+#: plugins/MeteorShowers/src/MeteorShower.cpp:604
 #, qt-format
 msgid "Maximum: %1"
 msgstr "Maximum: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:609
+#: plugins/MeteorShowers/src/MeteorShower.cpp:607
 msgid "Solar longitude"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:619
+#: plugins/MeteorShowers/src/MeteorShower.cpp:617
 msgid "variable"
 msgstr "változó"
 
