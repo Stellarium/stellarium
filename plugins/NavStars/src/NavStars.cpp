@@ -215,9 +215,6 @@ void NavStars::update(double deltaTime)
 
 void NavStars::setNavStarsMarks(const bool b)
 {
-	if (b == markerFader)
-		return;
-
 	if (b)
 	{
 		// Save the display state of the star labels and hide them.
