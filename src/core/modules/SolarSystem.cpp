@@ -1450,7 +1450,6 @@ void SolarSystem::update(double deltaTime)
 	}
 }
 
-
 // is a lunar eclipse close at hand?
 bool SolarSystem::nearLunarEclipse()
 {
@@ -1475,72 +1474,21 @@ bool SolarSystem::nearLunarEclipse()
 	return 1;
 }
 
-//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
-QStringList SolarSystem::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QStringList SolarSystem::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
-	if (maxNbItem==0)
-		return result;
-
-	QString sson;
-	bool find;
-	foreach (const PlanetP& p, systemPlanets)
+	if (inEnglish)
 	{
-		sson = p->getNameI18n();
-		find = false;
-		if (useStartOfWords)
+		foreach(const PlanetP& p, systemPlanets)
 		{
-			QString constw = sson.mid(0, objPrefix.size()).toUpper();
-			if (constw==objPrefix.toUpper())
-				find = true;
+			result << p->getEnglishName();
 		}
-		else
-		{
-			if (sson.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-
-		}
-		if (find)
-		{
-			result << sson;
-			if (result.size()==maxNbItem)
-				return result;
-		}
-
 	}
-	return result;
-}
-
-//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name
-QStringList SolarSystem::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
-{
-	QStringList result;
-	if (maxNbItem==0)
-		return result;
-
-	QString sson;
-	bool find;
-	foreach (const PlanetP& p, systemPlanets)
+	else
 	{
-		sson = p->getEnglishName();
-		find = false;
-		if (useStartOfWords)
+		foreach(const PlanetP& p, systemPlanets)
 		{
-			QString constw = sson.mid(0, objPrefix.size()).toUpper();
-			if (constw==objPrefix.toUpper())
-				find = true;
-		}
-		else
-		{
-			if (sson.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-
-		}
-		if (find)
-		{
-			result << sson;
-			if (result.size()==maxNbItem)
-				return result;
+			result << p->getNameI18n();
 		}
 	}
 	return result;

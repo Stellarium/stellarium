@@ -218,7 +218,7 @@ StelObjectP MeteorShowers::searchByNameI18n(const QString& nameI18n) const
 	return NULL;
 }
 
-QStringList MeteorShowers::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QStringList MeteorShowers::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
 	QStringList result;
 	if (!m_mgr->getEnablePlugin() || maxNbItem <= 0)
@@ -228,77 +228,20 @@ QStringList MeteorShowers::listMatchingObjectsI18n(const QString& objPrefix, int
 
 	foreach(const MeteorShowerP& ms, m_meteorShowers)
 	{
-		if (result.size() >= maxNbItem)
-		{
-			break;
-		}
-
-		if (!ms->enabled())
+		QString name = inEnglish ? ms->getEnglishName() : ms->getNameI18n();
+		if (!ms->enabled() || !matchObjectName(name, objPrefix, useStartOfWords))
 		{
 			continue;
 		}
 
-		bool found = false;
-		QString name = ms->getNameI18n();
-		if (useStartOfWords)
-		{
-			found = name.toUpper().left(objPrefix.length()) == objPrefix.toUpper();
-		}
-		else
-		{
-			found = name.contains(objPrefix, Qt::CaseInsensitive);
-		}
-
-		if (found)
-		{
-			result.append(name);
-		}
-	}
-
-	result.sort();
-
-	return result;
-}
-
-QStringList MeteorShowers::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
-{
-	QStringList result;
-	if (!m_mgr->getEnablePlugin() || maxNbItem <= 0)
-	{
-		return result;
-	}
-
-	foreach(const MeteorShowerP& ms, m_meteorShowers)
-	{
+		result.append(name);
 		if (result.size() >= maxNbItem)
 		{
 			break;
 		}
-
-		if (!ms->enabled())
-		{
-			continue;
-		}
-
-		bool found = false;
-		QString name = ms->getEnglishName();
-		if (useStartOfWords)
-		{
-			found = objPrefix.toUpper() == name.toUpper().left(objPrefix.length());
-		}
-		else
-		{
-			found = name.contains(objPrefix, Qt::CaseInsensitive);
-		}
-
-		if (found)
-		{
-			result.append(name);
-		}
 	}
 
 	result.sort();
-
 	return result;
 }
 

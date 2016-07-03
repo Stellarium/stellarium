@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2007 Fabien Chereau
+ * Copyright (C) 2016 Marcos Cardinot
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -242,41 +243,22 @@ QList<StelObjectP> StelObjectMgr::getSelectedObject(const QString& type)
 	return result;
 }
 
-
-/*************************************************************************
- Find and return the list of at most maxNbItem objects auto-completing
- passed object I18 name
-*************************************************************************/
-QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, unsigned int maxNbItem, bool useStartOfWords) const
+/*****************************************************************************************
+ Find and return the list of at most maxNbItem objects auto-completing passed object name
+*******************************************************************************************/
+QStringList StelObjectMgr::listMatchingObjects(const QString& objPrefix, unsigned int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
 	QStringList result;
-
-	// For all StelObjectmodules..
-	foreach (const StelObjectModule* m, objectsModule)
+	if (maxNbItem <= 0)
 	{
-		// Get matching object for this module
-		QStringList matchingObj = m->listMatchingObjectsI18n(objPrefix, maxNbItem, useStartOfWords);
-		result += matchingObj;
-		maxNbItem-=matchingObj.size();
+		return result;
 	}
 
-	result.sort();
-	return result;
-}
-
-/*************************************************************************
- Find and return the list of at most maxNbItem objects auto-completing
- passed object English name
-*************************************************************************/
-QStringList StelObjectMgr::listMatchingObjects(const QString& objPrefix, unsigned int maxNbItem, bool useStartOfWords) const
-{
-	QStringList result;
-
 	// For all StelObjectmodules..
 	foreach (const StelObjectModule* m, objectsModule)
 	{
 		// Get matching object for this module
-		QStringList matchingObj = m->listMatchingObjects(objPrefix, maxNbItem, useStartOfWords);
+		QStringList matchingObj = m->listMatchingObjects(objPrefix, maxNbItem, useStartOfWords, inEnglish);
 		result += matchingObj;
 		maxNbItem-=matchingObj.size();
 	}

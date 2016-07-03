@@ -346,7 +346,7 @@ StelObjectP Exoplanets::searchByNameI18n(const QString& nameI18n) const
 	return NULL;
 }
 
-QStringList Exoplanets::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
 	QStringList result;
 	if (!flagShowExoplanets || maxNbItem <= 0)
@@ -356,80 +356,37 @@ QStringList Exoplanets::listMatchingObjectsI18n(const QString& objPrefix, int ma
 
 	foreach(const ExoplanetP& eps, ep)
 	{
-		QStringList names = eps->getExoplanetsNamesI18n();
-		names.append(eps->getNameI18n());
-		foreach (const QString &str, names)
+		QStringList names;
+		if (inEnglish)
 		{
+			names.append(eps->getEnglishName());
+			names.append(eps->getExoplanetsEnglishNames());
+		}
+		else
+		{
+			names.append(eps->getNameI18n());
+			names.append(eps->getExoplanetsNamesI18n());
+		}
+
+		foreach (const QString& name, names)
+		{
+			if (!matchObjectName(name, objPrefix, useStartOfWords))
+			{
+				continue;
+			}
+
+			result.append(name);
 			if (result.size() >= maxNbItem)
 			{
 				result.sort();
 				return result;
 			}
-
-			bool found = false;
-			if (useStartOfWords)
-			{
-				found = str.toUpper().left(objPrefix.length()) == objPrefix.toUpper();
-			}
-			else
-			{
-				found = str.contains(objPrefix, Qt::CaseInsensitive);
-			}
-
-			if (found)
-			{
-				result.append(str);
-			}
 		}
 	}
 
 	result.sort();
-
 	return result;
 }
-
-QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
-{
-	QStringList result;
-	if (!flagShowExoplanets || maxNbItem <= 0)
-	{
-		return result;
-	}
-
-	foreach(const ExoplanetP& eps, ep)
-	{
-		QStringList names = eps->getExoplanetsEnglishNames();
-		names.append(eps->getEnglishName());
-		foreach (const QString &str, names)
-		{
-			if (result.size() >= maxNbItem)
-			{
-				result.sort();
-				return result;
-			}
-
-			bool found = false;
-			if (useStartOfWords)
-			{
-				found = str.toUpper().left(objPrefix.length()) == objPrefix.toUpper();
-			}
-			else
-			{
-				found = str.contains(objPrefix, Qt::CaseInsensitive);
-			}
-
-			if (found)
-			{
-				result.append(str);
-			}
-		}
-	}
-
-	result.sort();
-
-	return result;
-}
-
 
 QStringList Exoplanets::listAllObjects(bool inEnglish) const
 {
