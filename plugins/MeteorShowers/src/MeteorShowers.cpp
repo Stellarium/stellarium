@@ -250,9 +250,10 @@ QStringList MeteorShowers::listMatchingObjectsI18n(const QString& objPrefix, int
 	}
 
 	result.sort();
-	if (result.size() > maxNbItem)
+	if (maxNbItem > 0)
 	{
-		result.erase(result.begin() + maxNbItem, result.end());
+		if (result.size()>maxNbItem)
+			result.erase(result.begin()+maxNbItem, result.end());
 	}
 
 	return result;
@@ -303,9 +304,10 @@ QStringList MeteorShowers::listMatchingObjects(const QString& objPrefix, int max
 	}
 
 	result.sort();
-	if (result.size() > maxNbItem)
+	if (maxNbItem > 0)
 	{
-		result.erase(result.begin() + maxNbItem, result.end());
+		if (result.size()>maxNbItem)
+			result.erase(result.begin()+maxNbItem, result.end());
 	}
 	return result;
 }

@@ -401,7 +401,11 @@ QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int ma
 	}
 
 	result.sort();
-	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+	if (maxNbItem > 0)
+	{
+		if (result.size()>maxNbItem)
+			result.erase(result.begin()+maxNbItem, result.end());
+	}
 
 	return result;
 }
@@ -457,7 +461,11 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 	}
 
 	result.sort();
-	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+	if (maxNbItem > 0)
+	{
+		if (result.size()>maxNbItem)
+			result.erase(result.begin()+maxNbItem, result.end());
+	}
 
 	return result;
 }
