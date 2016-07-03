@@ -1443,7 +1443,7 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	}
 
 	// Add exact WDS catalogue numbers
-	QRegExp wdsRx("^(WDS)\\s*(\\w+)\\s*$");
+	QRegExp wdsRx("^(WDS)\\s*(\\S+)\\s*$");
 	wdsRx.setCaseSensitivity(Qt::CaseInsensitive);
 	if (wdsRx.exactMatch(objw))
 	{
@@ -1612,7 +1612,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	}
 
 	// Add exact WDS catalogue numbers
-	QRegExp wdsRx("^(WDS)\\s*(\\w+)\\s*$");
+	QRegExp wdsRx("^(WDS)\\s*(\\S+)\\s*$");
 	wdsRx.setCaseSensitivity(Qt::CaseInsensitive);
 	if (wdsRx.exactMatch(objw))
 	{
