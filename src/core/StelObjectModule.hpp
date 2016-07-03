@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2006 Fabien Chereau
+ * Copyright (C) 2016 Marcos Cardinot
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,26 +57,26 @@ public:
 	//! Return the matching StelObject if exists or the empty StelObject if not found
 	//! @param name the english object name
 	virtual StelObjectP searchByName(const QString& name) const = 0;
-	
-	//! Find and return the list of at most maxNbItem objects auto-completing passed object I18 name
-	//! @param objPrefix the first letters of the searched object
-	//! @param maxNbItem the maximum number of returned object names
-	//! @param useStartOfWords the autofill mode for returned objects names
-	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const = 0;
 
-	//! Find and return the list of at most maxNbItem objects auto-completing passed object English name
+	//! Find and return the list of at most maxNbItem objects auto-completing passed object name
 	//! @param objPrefix the first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const = 0;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
 
 	virtual QStringList listAllObjects(bool inEnglish) const = 0;
 
 	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const = 0;
 
 	virtual QString getName() const = 0;
+
+	//! Auxiliary method of listMatchingObjects()
+	//! @param objName object name
+	//! @param objPrefix the first letters of the searched object
+	//! @param useStartOfWords the autofill mode for returned objects names
+	//! @return true if it matches
+	bool matchObjectName(const QString& objName, const QString& objPrefix, bool useStartOfWords) const;
 };
 
 #endif // _STELOBJECTMODULE_HPP_
