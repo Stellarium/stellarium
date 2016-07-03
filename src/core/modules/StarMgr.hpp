@@ -54,6 +54,14 @@ typedef struct
 	QString stype;		//! Spectral type
 } varstar;
 
+typedef struct
+{
+	QString designation;	//! WDS designation
+	int observation;	//! Date of last satisfactory observation, yr
+	int positionAngle;	//! Position Angle at date of last satisfactory observation, deg
+	float separation;	//! Separation at date of last satisfactory observation, arcsec
+} wds;
+
 //! @class StarMgr
 //! Stores the star catalogue data.
 //! Used to render the stars themselves, as well as determine the color table
@@ -220,6 +228,12 @@ public:
 	//! @return translated scientific name of variable star
 	static QString getGcvsName(int hip);
 
+	//! Get the (translated) scientific name for a double star with a specified
+	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return translated scientific name of double star
+	static QString getWdsName(int hip);
+
 	//! Get the (English) common name for a star with a specified
 	//! Hipparcos catalogue number.
 	//! @param hip The Hipparcos number of star
@@ -281,6 +295,24 @@ public:
 	//! @return the rising time or duration of eclipse for variable star
 	static int getGcvsMM(int hip);
 
+	//! Get year of last satisfactory observation of double star with a
+	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return year of last satisfactory observation
+	static int getWdsLastObservation(int hip);
+
+	//! Get position angle at date of last satisfactory observation of double star with a
+	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return position angle in degrees
+	static int getWdsLastPositionAngle(int hip);
+
+	//! Get separation angle at date of last satisfactory observation of double star with a
+	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return separation in arcseconds
+	static float getWdsLastSeparation(int hip);
+
 	static QString convertToSpectralType(int index);
 	static QString convertToComponentIds(int index);
 
@@ -325,6 +357,10 @@ private:
 	//! Loads GCVS from a file.
 	//! @param the path to a file containing the GCVS.
 	void loadGcvs(const QString& GcvsFile);
+
+	//! Loads WDS from a file.
+	//! @param the path to a file containing the WDS.
+	void loadWds(const QString& WdsFile);
 
 	//! Loads cross-index data from a file.
 	//! @param the path to a file containing the cross-index data.
@@ -381,6 +417,9 @@ private:
 
 	static QHash<int, varstar> varStarsMapI18n;
 	static QMap<QString, int> varStarsIndexI18n;
+
+	static QHash<int, wds> wdsStarsMapI18n;
+	static QMap<QString, int> wdsStarsIndexI18n;
 
 	static QHash<int, int> saoStarsMap;
 	static QMap<int, int> saoStarsIndex;
