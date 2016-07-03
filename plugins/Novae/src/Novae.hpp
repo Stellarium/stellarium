@@ -115,7 +115,6 @@ public:
 	virtual QStringList listAllObjects(bool inEnglish) const;
 	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
 	virtual QString getName() const { return "Bright Novae"; }
-	//virtual bool matchObjectName(const QString &objName, const QString &objPrefix, bool useStartOfWords);
 
 	//! get a nova object by identifier
 	NovaP getByID(const QString& id);
