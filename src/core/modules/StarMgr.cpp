@@ -79,6 +79,8 @@ QHash<int,QString> StarMgr::sciAdditionalNamesMapI18n;
 QMap<QString,int> StarMgr::sciAdditionalNamesIndexI18n;
 QHash<int, varstar> StarMgr::varStarsMapI18n;
 QMap<QString, int> StarMgr::varStarsIndexI18n;
+QHash<int, wds> StarMgr::wdsStarsMapI18n;
+QMap<QString, int> StarMgr::wdsStarsIndexI18n;
 QHash<int, int> StarMgr::saoStarsMap;
 QMap<int, int> StarMgr::saoStarsIndex;
 QHash<int, int> StarMgr::hdStarsMap;
@@ -220,6 +222,38 @@ QString StarMgr::getCrossIndexDesignations(int hip)
 	}
 
 	return designations;
+}
+
+QString StarMgr::getWdsName(int hip)
+{
+	QHash<int,wds>::const_iterator it(wdsStarsMapI18n.find(hip));
+	if (it!=wdsStarsMapI18n.end())
+		return QString("WDS %1").arg(it.value().designation);
+	return QString();
+}
+
+int StarMgr::getWdsLastObservation(int hip)
+{
+	QHash<int,wds>::const_iterator it(wdsStarsMapI18n.find(hip));
+	if (it!=wdsStarsMapI18n.end())
+		return it.value().observation;
+	return 0;
+}
+
+int StarMgr::getWdsLastPositionAngle(int hip)
+{
+	QHash<int,wds>::const_iterator it(wdsStarsMapI18n.find(hip));
+	if (it!=wdsStarsMapI18n.end())
+		return it.value().positionAngle;
+	return 0;
+}
+
+float StarMgr::getWdsLastSeparation(int hip)
+{
+	QHash<int,wds>::const_iterator it(wdsStarsMapI18n.find(hip));
+	if (it!=wdsStarsMapI18n.end())
+		return it.value().separation;
+	return 0.f;
 }
 
 QString StarMgr::getGcvsName(int hip)
@@ -801,6 +835,64 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "variable stars";
 }
 
+// Load WDS from file
+void StarMgr::loadWds(const QString& WdsFile)
+{
+	wdsStarsMapI18n.clear();
+	wdsStarsIndexI18n.clear();
+
+	qDebug() << "Loading double stars from" << QDir::toNativeSeparators(WdsFile);
+	QFile dsFile(WdsFile);
+	if (!dsFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		qWarning() << "WARNING - could not open" << QDir::toNativeSeparators(WdsFile);
+		return;
+	}
+	const QStringList& allRecords = QString::fromUtf8(dsFile.readAll()).split('\n');
+	dsFile.close();
+
+	int readOk=0;
+	int totalRecords=0;
+	int lineNumber=0;
+
+	// record structure is delimited with a tab character.
+	foreach(const QString& record, allRecords)
+	{
+		++lineNumber;
+		if (record.isEmpty())
+			continue;
+
+		++totalRecords;
+		const QStringList& fields = record.split('\t');
+
+		bool ok;
+		unsigned int hip = fields.at(0).toUInt(&ok);
+		if (!ok)
+		{
+			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(WdsFile)
+				   << " - failed to convert " << fields.at(0) << "to a number";
+			continue;
+		}
+
+		// Don't set the star if it's already set
+		if (wdsStarsMapI18n.find(hip)!=wdsStarsMapI18n.end())
+			continue;
+
+		wds doubleStar;
+
+		doubleStar.designation = fields.at(1).trimmed();
+		doubleStar.observation = fields.at(2).toInt();
+		doubleStar.positionAngle = fields.at(3).toInt();
+		doubleStar.separation = fields.at(4).toFloat();
+
+		wdsStarsMapI18n[hip] = doubleStar;
+		wdsStarsIndexI18n[QString("WDS %1").arg(doubleStar.designation.toUpper())] = hip;
+		++readOk;
+	}
+
+	qDebug() << "Loaded" << readOk << "/" << totalRecords << "double stars";
+}
+
 // Load cross-index data from file
 void StarMgr::loadCrossIndex(const QString& crossIndexFile)
 {
@@ -1138,6 +1230,13 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 		return searchHP(it4.value());
 	}
 
+	// Search by WDS name
+	QMap<QString,int>::const_iterator wdsIt = wdsStarsIndexI18n.find(objw);
+	if (wdsIt!=wdsStarsIndexI18n.end())
+	{
+		return searchHP(wdsIt.value());
+	}
+
 	return StelObjectP();
 }
 
@@ -1343,6 +1442,25 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 		}
 	}
 
+	// Add exact WDS catalogue numbers
+	QRegExp wdsRx("^(WDS)\\s*(\\w+)\\s*$");
+	wdsRx.setCaseSensitivity(Qt::CaseInsensitive);
+	if (wdsRx.exactMatch(objw))
+	{
+		for (QMap<QString,int>::const_iterator wds(wdsStarsIndexI18n.lowerBound(objw)); wds!=wdsStarsIndexI18n.end(); ++wds)
+		{
+			if (wds.key().startsWith(objw))
+			{
+				if (maxNbItem==0)
+					break;
+				result << getWdsName(wds.value());
+				--maxNbItem;
+			}
+			else
+				break;
+		}
+	}
+
 	result.sort();
 	return result;
 }
@@ -1493,6 +1611,25 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		}
 	}
 
+	// Add exact WDS catalogue numbers
+	QRegExp wdsRx("^(WDS)\\s*(\\w+)\\s*$");
+	wdsRx.setCaseSensitivity(Qt::CaseInsensitive);
+	if (wdsRx.exactMatch(objw))
+	{
+		for (QMap<QString,int>::const_iterator wds(wdsStarsIndexI18n.lowerBound(objw)); wds!=wdsStarsIndexI18n.end(); ++wds)
+		{
+			if (wds.key().startsWith(objw))
+			{
+				if (maxNbItem==0)
+					break;
+				result << getWdsName(wds.value());
+				--maxNbItem;
+			}
+			else
+				break;
+		}
+	}
+
 	result.sort();
 	return result;
 }
@@ -1524,6 +1661,12 @@ void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 		qWarning() << "WARNING: could not load variable stars file: stars/default/gcvs_hip_part.dat";
 	else
 		loadGcvs(fic);
+
+	fic = StelFileMgr::findFile("stars/default/wds_hip_part.dat");
+	if (fic.isEmpty())
+		qWarning() << "WARNING: could not load double stars file: stars/default/wds_hip_part.dat";
+	else
+		loadWds(fic);
 
 	fic = StelFileMgr::findFile("stars/default/cross-index.dat");
 	if (fic.isEmpty())

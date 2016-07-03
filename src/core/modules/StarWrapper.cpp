@@ -89,6 +89,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	QTextStream oss(&str);
 	const QString varType = StarMgr::getGcvsVariabilityType(s->getHip());
+	const int wdsObs = StarMgr::getWdsLastObservation(s->getHip());
+	const int wdsPA = StarMgr::getWdsLastPositionAngle(s->getHip());
+	const float wdsSep = StarMgr::getWdsLastSeparation(s->getHip());
 	const float maxVMag = StarMgr::getGcvsMaxMagnitude(s->getHip());
 	const float magFlag = StarMgr::getGcvsMagnitudeFlag(s->getHip());
 	const float minVMag = StarMgr::getGcvsMinMagnitude(s->getHip());
@@ -106,6 +109,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		const QString sciName = StarMgr::getSciName(s->getHip());
 		const QString addSciName = StarMgr::getSciAdditionalName(s->getHip());
 		const QString varSciName = StarMgr::getGcvsName(s->getHip());
+		const QString wdsSciName = StarMgr::getWdsName(s->getHip());
 		const QString crossIndexData = StarMgr::getCrossIndexDesignations(s->getHip());
 		QStringList designations;
 		if (!sciName.isEmpty())
@@ -125,6 +129,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 		if (!crossIndexData.isEmpty())
 			designations.append(crossIndexData);
+
+		if (!wdsSciName.isEmpty() && wdsSciName!=addSciName && wdsSciName!=sciName)
+			designations.append(wdsSciName);
 
 		const QString designationsList = designations.join(" - ");
 
@@ -262,6 +269,13 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 				oss << q_("Duration of eclipse: %1%").arg(vMm) << "<br />";
 			else
 				oss << q_("Rising time: %1%").arg(vMm) << "<br />";
+		}
+
+		if (wdsObs>0)
+		{
+			oss << q_("Year of last satisfactory observation: %1").arg(wdsObs) << "<br />";
+			oss << q_("Position angle: %1%2").arg(wdsPA).arg(QChar(0x00B0)) << "<br />";
+			oss << q_("Separation: %1\"").arg(QString::number(wdsSep, 'f', 2)) << "<br />";
 		}
 	}
 
