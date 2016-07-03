@@ -144,7 +144,7 @@ public:
 	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing matches
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
 	virtual QStringList listAllObjects(bool inEnglish) const;
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
+	virtual QStringList listAllObjectsByType(const QString&, bool) const { return QStringList(); }
 	virtual QString getName() const { return "Constellations"; }
 	//! Describes how to display constellation labels. The viewDialog GUI has a combobox which corresponds to these values.
 	enum ConstellationDisplayStyle
