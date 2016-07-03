@@ -365,7 +365,7 @@ StelObjectP TelescopeControl::searchByName(const QString &name) const
 QStringList TelescopeControl::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
-	if (maxNbItem==0)
+	if (maxNbItem<=0)
 		return result;
 
 	QString tn;
@@ -390,18 +390,16 @@ QStringList TelescopeControl::listMatchingObjectsI18n(const QString& objPrefix, 
 		}
 	}
 	result.sort();
-	if (maxNbItem > 0)
-	{
-		if (result.size()>maxNbItem)
-			result.erase(result.begin()+maxNbItem, result.end());
-	}
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
+
 	return result;
 }
 
 QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
-	if (maxNbItem==0)
+	if (maxNbItem<=0)
 		return result;
 
 	QString tn;
@@ -426,11 +424,9 @@ QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, int 
 		}
 	}
 	result.sort();
-	if (maxNbItem > 0)
-	{
-		if (result.size()>maxNbItem)
-			result.erase(result.begin()+maxNbItem, result.end());
-	}
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
+
 	return result;
 }
 

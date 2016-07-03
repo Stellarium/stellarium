@@ -284,7 +284,7 @@ StelObjectP Supernovae::searchByNameI18n(const QString& nameI18n) const
 QStringList Supernovae::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
-	if (maxNbItem==0)
+	if (maxNbItem<=0)
 		return result;
 
 	QString snn;
@@ -310,11 +310,8 @@ QStringList Supernovae::listMatchingObjectsI18n(const QString& objPrefix, int ma
 	}
 
 	result.sort();
-	if (maxNbItem > 0)
-	{
-		if (result.size()>maxNbItem)
-			result.erase(result.begin()+maxNbItem, result.end());
-	}
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
 
 	return result;
 }
@@ -322,7 +319,7 @@ QStringList Supernovae::listMatchingObjectsI18n(const QString& objPrefix, int ma
 QStringList Supernovae::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
-	if (maxNbItem==0)
+	if (maxNbItem<=0)
 		return result;
 
 	QString snn;
@@ -348,11 +345,8 @@ QStringList Supernovae::listMatchingObjects(const QString& objPrefix, int maxNbI
 	}
 
 	result.sort();
-	if (maxNbItem > 0)
-	{
-		if (result.size()>maxNbItem)
-			result.erase(result.begin()+maxNbItem, result.end());
-	}
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
 
 	return result;
 }
