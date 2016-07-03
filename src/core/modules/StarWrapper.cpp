@@ -175,14 +175,14 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 				varstartype = q_("variable star");
 		}
 
-		if (s->getComponentIds())
+		if (s->getComponentIds() || wdsObs>0)
 			startype = q_("double star");
 		else
 			startype = q_("star");
 
 		if (!varType.isEmpty())
 		{
-			if (s->getComponentIds())
+			if (s->getComponentIds() || wdsObs>0)
 				oss << q_("Type: <b>%1, %2</b>").arg(varstartype).arg(startype);
 			else
 				oss << q_("Type: <b>%1</b>").arg(varstartype);
