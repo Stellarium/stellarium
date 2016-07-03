@@ -1298,192 +1298,29 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	return StelObjectP();
 }
 
-//! Find and return the list of at most maxNbItem objects auto-completing
-//! the passed object I18n name.
-QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
+QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
 	QStringList result;
-	if (maxNbItem==0) return result;
+	if (maxNbItem <= 0)
+	{
+		return result;
+	}
 
 	QString objw = objPrefix.toUpper();
 
-	// Search for common names
-	if (useStartOfWords) {
-		for (QMap<QString,int>::const_iterator it(commonNamesIndexI18n.lowerBound(objw)); it!=commonNamesIndexI18n.end(); ++it)
-		{
-			if (it.key().startsWith(objw))
-			{
-				if (maxNbItem==0)
-					break;
-				result << getCommonName(it.value());
-				--maxNbItem;
-			}
-			else
-				break;
-		}
-	}
-	else
-	{
-		QMapIterator<QString, int> i(commonNamesIndexI18n);
-		while (i.hasNext())
-		{
-			i.next();
-			if (i.key().contains(objw))
-			{
-				if (maxNbItem==0)
-					break;
-				result << getCommonName(i.value());
-				--maxNbItem;
-			}
-		}
-	}
-
-	// Search for sci names
-	QString bayerPattern = objw;
-	QRegExp bayerRegEx(bayerPattern);
-
-	// if the first character is a Greek letter, check if there's an index
-	// after it, such as "alpha1 Cen".
-	if (objw.at(0).unicode() >= 0x0391 && objw.at(0).unicode() <= 0x03A9)
-		bayerRegEx.setPattern(bayerPattern.insert(1,"\\d?"));
-
-	for (QMap<QString,int>::const_iterator it(sciNamesIndexI18n.lowerBound(objw)); it!=sciNamesIndexI18n.end(); ++it)
-	{
-		if (it.key().indexOf(bayerRegEx)==0)
-		{
-			if (maxNbItem==0)
-				break;
-			result << getSciName(it.value());
-			--maxNbItem;
-		}
-		else if (it.key().at(0) != objw.at(0))
-			break;
-	}
-
-	for (QMap<QString,int>::const_iterator it(sciAdditionalNamesIndexI18n.lowerBound(objw)); it!=sciAdditionalNamesIndexI18n.end(); ++it)
-	{
-		if (it.key().indexOf(bayerRegEx)==0)
-		{
-			if (maxNbItem==0)
-				break;
-			result << getSciAdditionalName(it.value());
-			--maxNbItem;
-		}
-		else if (it.key().at(0) != objw.at(0))
-			break;
-	}
-
-	for (QMap<QString,int>::const_iterator it(varStarsIndexI18n.lowerBound(objw)); it!=varStarsIndexI18n.end(); ++it)
-	{
-		if (it.key().startsWith(objw))
-		{
-			if (maxNbItem==0)
-				break;
-			result << getGcvsName(it.value());
-			--maxNbItem;
-		}
-		else
-			break;
-	}
-
-	// Add exact Hp catalogue numbers
-	QRegExp hpRx("^(HIP|HP)\\s*(\\d+)\\s*$");
-	hpRx.setCaseSensitivity(Qt::CaseInsensitive);
-	if (hpRx.exactMatch(objw))
-	{
-		bool ok;
-		int hpNum = hpRx.capturedTexts().at(2).toInt(&ok);
-		if (ok)
-		{
-			StelObjectP s = searchHP(hpNum);
-			if (s && maxNbItem>0)
-			{
-				result << QString("HIP%1").arg(hpNum);
-				maxNbItem--;
-			}
-		}
-	}
-
-	// Add exact SAO catalogue numbers
-	QRegExp saoRx("^(SAO)\\s*(\\d+)\\s*$");
-	saoRx.setCaseSensitivity(Qt::CaseInsensitive);
-	if (saoRx.exactMatch(objw))
-	{
-		bool ok;
-		int saoNum = saoRx.capturedTexts().at(2).toInt(&ok);
-		QMap<int,int>::const_iterator sao(saoStarsIndex.find(saoNum));
-		if (sao!=saoStarsIndex.end())
-		{
-			StelObjectP s = searchHP(sao.value());
-			if (s && maxNbItem>0)
-			{
-				result << QString("SAO%1").arg(saoNum);
-				maxNbItem--;
-			}
-		}
-	}
-
-	// Add exact HD catalogue numbers
-	QRegExp hdRx("^(HD)\\s*(\\d+)\\s*$");
-	hdRx.setCaseSensitivity(Qt::CaseInsensitive);
-	if (hdRx.exactMatch(objw))
-	{
-		bool ok;
-		int hdNum = hdRx.capturedTexts().at(2).toInt(&ok);
-		QMap<int,int>::const_iterator hd(hdStarsIndex.find(hdNum));
-		if (hd!=hdStarsIndex.end())
-		{
-			StelObjectP s = searchHP(hd.value());
-			if (s && maxNbItem>0)
-			{
-				result << QString("HD%1").arg(hdNum);
-				maxNbItem--;
-			}
-		}
-	}
-
-	// Add exact WDS catalogue numbers
-	QRegExp wdsRx("^(WDS)\\s*(\\S+)\\s*$");
-	wdsRx.setCaseSensitivity(Qt::CaseInsensitive);
-	if (wdsRx.exactMatch(objw))
-	{
-		for (QMap<QString,int>::const_iterator wds(wdsStarsIndexI18n.lowerBound(objw)); wds!=wdsStarsIndexI18n.end(); ++wds)
-		{
-			if (wds.key().startsWith(objw))
-			{
-				if (maxNbItem==0)
-					break;
-				result << getWdsName(wds.value());
-				--maxNbItem;
-			}
-			else
-				break;
-		}
-	}
-
-	result.sort();
-	return result;
-}
-
-//! Find and return the list of at most maxNbItem objects auto-completing
-//! the passed object English name.
-QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
-{
-	QStringList result;
-	if (maxNbItem==0) return result;
-
-	QString objw = objPrefix.toUpper();
+	QMap<QString, int> cNamesIdx = inEnglish ? commonNamesIndex : commonNamesIndexI18n;
 
 	// Search for common names
 	if (useStartOfWords)
 	{
-		for (QMap<QString,int>::const_iterator it(commonNamesIndex.lowerBound(objw)); it!=commonNamesIndex.end(); ++it)
+		for (QMap<QString,int>::const_iterator it(cNamesIdx.lowerBound(objw)); it!=cNamesIdx.end(); ++it)
 		{
 			if (it.key().startsWith(objw))
 			{
-				if (maxNbItem==0)
+				if (maxNbItem<=0)
 					break;
-				result << getCommonEnglishName(it.value());
+				result.append(inEnglish ? getCommonEnglishName(it.value()) : getCommonName(it.value()));
 				--maxNbItem;
 			}
 			else
@@ -1492,15 +1329,15 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	}
 	else
 	{
-		QMapIterator<QString, int> i(commonNamesIndex);
+		QMapIterator<QString, int> i(cNamesIdx);
 		while (i.hasNext())
 		{
 			i.next();
 			if (i.key().contains(objw))
 			{
-				if (maxNbItem==0)
+				if (maxNbItem<=0)
 					break;
-				result << getCommonEnglishName(i.value());
+				result.append(inEnglish ? getCommonEnglishName(i.value()) : getCommonName(i.value()));
 				--maxNbItem;
 			}
 		}
@@ -1519,7 +1356,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	{
 		if (it.key().indexOf(bayerRegEx)==0)
 		{
-			if (maxNbItem==0)
+			if (maxNbItem<=0)
 				break;
 			result << getSciName(it.value());
 			--maxNbItem;
@@ -1532,7 +1369,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	{
 		if (it.key().indexOf(bayerRegEx)==0)
 		{
-			if (maxNbItem==0)
+			if (maxNbItem<=0)
 				break;
 			result << getSciAdditionalName(it.value());
 			--maxNbItem;
@@ -1546,7 +1383,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	{
 		if (it.key().startsWith(objw))
 		{
-			if (maxNbItem==0)
+			if (maxNbItem<=0)
 				break;
 			result << getGcvsName(it.value());
 			--maxNbItem;

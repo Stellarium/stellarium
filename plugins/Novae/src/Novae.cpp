@@ -278,90 +278,46 @@ StelObjectP Novae::searchByNameI18n(const QString& nameI18n) const
 	return NULL;
 }
 
-QStringList Novae::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QStringList Novae::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
 	QStringList result;
-	if (maxNbItem<=0)
-		return result;
-
-	QString sn;
-	bool find;
-	foreach(const NovaP& n, nova)
+	if (maxNbItem <= 0)
 	{
-		sn = n->getNameI18n();
-		find = false;
-		if (useStartOfWords)
+		return result;
+	}
+
+	QStringList names;
+	if (inEnglish)
+	{
+		foreach(const NovaP& n, nova)
 		{
-			if (objPrefix.toUpper()==sn.toUpper().left(objPrefix.length()))
-				find = true;
+			names.append(n->getEnglishName());
+			names.append(n->getDesignation());
 		}
-		else
+	}
+	else
+	{
+		foreach(const NovaP& n, nova)
 		{
-			if (sn.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
+			names.append(n->getNameI18n());
 		}
-		if (find)
+	}
+
+	foreach (const QString& name, names)
+	{
+		if (!matchObjectName(name, objPrefix, useStartOfWords))
 		{
-				result << sn;
+			continue;
+		}
+
+		result.append(name);
+		if (result.size() >= maxNbItem)
+		{
+			break;
 		}
 	}
 
 	result.sort();
-	if (result.size()>maxNbItem)
-		result.erase(result.begin()+maxNbItem, result.end());
-
-	return result;
-}
-
-QStringList Novae::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
-{
-	QStringList result;
-	if (maxNbItem<=0)
-		return result;
-
-	QString sn;
-	bool find;
-	foreach(const NovaP& n, nova)
-	{
-		sn = n->getEnglishName();
-		find = false;
-		if (useStartOfWords)
-		{
-			if (objPrefix.toUpper()==sn.toUpper().left(objPrefix.length()))
-				find = true;
-		}
-		else
-		{
-			if (sn.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-		}
-		if (find)
-		{
-				result << sn;
-		}
-
-		sn = n->getDesignation();
-		find = false;
-		if (useStartOfWords)
-		{
-			if (objPrefix.toUpper()==sn.toUpper().left(objPrefix.length()))
-				find = true;
-		}
-		else
-		{
-			if (sn.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-		}
-		if (find)
-		{
-				result << sn;
-		}
-	}
-
-	result.sort();
-	if (result.size()>maxNbItem)
-		result.erase(result.begin()+maxNbItem, result.end());
-
 	return result;
 }
 
