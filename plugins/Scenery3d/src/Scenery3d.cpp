@@ -43,6 +43,7 @@
 
 #include "Scenery3dMgr.hpp"
 #include "AABB.hpp"
+#include "StelOBJ.hpp"
 
 #include <QKeyEvent>
 #include <QSettings>
@@ -176,6 +177,9 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 	    qCritical()<<"[Scenery3d] Failed to load OBJ file.";
 	    return false;
 	}
+
+	StelOBJ obj;
+	obj.load(modelFile);
 
 	if(loadCancel)
 		return false;
