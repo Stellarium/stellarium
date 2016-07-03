@@ -109,7 +109,7 @@ public:
 	virtual StelObjectP searchByName(const QString& name) const;
 
 	virtual QStringList listAllObjects(bool inEnglish) const;
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
+	virtual QStringList listAllObjectsByType(const QString&, bool) const { return QStringList(); }
 	virtual QString getName() const { return "Historical Supernovae"; }
 
 	//! get a supernova object by identifier
