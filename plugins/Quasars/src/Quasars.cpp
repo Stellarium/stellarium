@@ -330,7 +330,7 @@ QStringList Quasars::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	if (!flagShowQuasars)
 		return result;
 
-	if (maxNbItem==0)
+	if (maxNbItem<=0)
 		return result;
 
 	QString qson;
@@ -356,11 +356,8 @@ QStringList Quasars::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	}
 
 	result.sort();
-	if (maxNbItem > 0)
-	{
-		if (result.size()>maxNbItem)
-			result.erase(result.begin()+maxNbItem, result.end());
-	}
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
 
 	return result;
 }
@@ -371,7 +368,7 @@ QStringList Quasars::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	if (!flagShowQuasars)
 		return result;
 
-	if (maxNbItem==0)
+	if (maxNbItem<=0)
 		return result;
 
 	QString qson;
@@ -397,11 +394,8 @@ QStringList Quasars::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	}
 
 	result.sort();
-	if (maxNbItem > 0)
-	{
-		if (result.size()>maxNbItem)
-			result.erase(result.begin()+maxNbItem, result.end());
-	}
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
 
 	return result;
 }

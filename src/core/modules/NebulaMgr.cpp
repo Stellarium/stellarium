@@ -1530,7 +1530,9 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
-	if (maxNbItem==0) return result;
+
+	if (maxNbItem<=0)
+		return result;
 
 	QString objw = objPrefix.toUpper();
 	// Search by Messier objects number (possible formats are "M31" or "M 31")
@@ -1853,11 +1855,9 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	}
 
 	result.sort();	
-	if (maxNbItem > 0)
-	{
-		if (result.size()>maxNbItem)
-			result.erase(result.begin()+maxNbItem, result.end());
-	}
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
+
 	return result;
 }
 
@@ -1865,7 +1865,11 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
-	if (maxNbItem==0) return result;
+
+	qWarning() << "maxNbItem" << maxNbItem;
+
+	if (maxNbItem<=0)
+		return result;
 
 	QString objw = objPrefix.toUpper();
 
@@ -2189,11 +2193,8 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	}
 
 	result.sort();	
-	if (maxNbItem > 0)
-	{
-		if (result.size()>maxNbItem)
-			result.erase(result.begin()+maxNbItem, result.end());
-	}
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
 
 	return result;
 }
