@@ -354,8 +354,11 @@ QStringList Pulsars::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	}
 
 	result.sort();
-	if (result.size()>maxNbItem)
-		result.erase(result.begin()+maxNbItem, result.end());
+	if (maxNbItem > 0)
+	{
+		if (result.size()>maxNbItem)
+			result.erase(result.begin()+maxNbItem, result.end());
+	}
 
 	return result;
 }
@@ -392,8 +395,11 @@ QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	}
 
 	result.sort();
-	if (result.size()>maxNbItem)
-		result.erase(result.begin()+maxNbItem, result.end());
+	if (maxNbItem > 0)
+	{
+		if (result.size()>maxNbItem)
+			result.erase(result.begin()+maxNbItem, result.end());
+	}
 
 	return result;
 }

@@ -307,8 +307,11 @@ QStringList Novae::listMatchingObjectsI18n(const QString& objPrefix, int maxNbIt
 	}
 
 	result.sort();
-	if (result.size()>maxNbItem)
-		result.erase(result.begin()+maxNbItem, result.end());
+	if (maxNbItem > 0)
+	{
+		if (result.size()>maxNbItem)
+			result.erase(result.begin()+maxNbItem, result.end());
+	}
 
 	return result;
 }
@@ -359,8 +362,11 @@ QStringList Novae::listMatchingObjects(const QString& objPrefix, int maxNbItem, 
 	}
 
 	result.sort();
-	if (result.size()>maxNbItem)
-		result.erase(result.begin()+maxNbItem, result.end());
+	if (maxNbItem > 0)
+	{
+		if (result.size()>maxNbItem)
+			result.erase(result.begin()+maxNbItem, result.end());
+	}
 
 	return result;
 }

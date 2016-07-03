@@ -390,9 +390,10 @@ QStringList TelescopeControl::listMatchingObjectsI18n(const QString& objPrefix, 
 		}
 	}
 	result.sort();
-	if (result.size()>maxNbItem)
+	if (maxNbItem > 0)
 	{
-		result.erase(result.begin() + maxNbItem, result.end());
+		if (result.size()>maxNbItem)
+			result.erase(result.begin()+maxNbItem, result.end());
 	}
 	return result;
 }
@@ -425,9 +426,10 @@ QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, int 
 		}
 	}
 	result.sort();
-	if (result.size()>maxNbItem)
+	if (maxNbItem > 0)
 	{
-		result.erase(result.begin() + maxNbItem, result.end());
+		if (result.size()>maxNbItem)
+			result.erase(result.begin()+maxNbItem, result.end());
 	}
 	return result;
 }
