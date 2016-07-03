@@ -281,7 +281,7 @@ StelObjectP Novae::searchByNameI18n(const QString& nameI18n) const
 QStringList Novae::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
-	if (maxNbItem==0)
+	if (maxNbItem<=0)
 		return result;
 
 	QString sn;
@@ -307,11 +307,8 @@ QStringList Novae::listMatchingObjectsI18n(const QString& objPrefix, int maxNbIt
 	}
 
 	result.sort();
-	if (maxNbItem > 0)
-	{
-		if (result.size()>maxNbItem)
-			result.erase(result.begin()+maxNbItem, result.end());
-	}
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
 
 	return result;
 }
@@ -319,7 +316,7 @@ QStringList Novae::listMatchingObjectsI18n(const QString& objPrefix, int maxNbIt
 QStringList Novae::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
-	if (maxNbItem==0)
+	if (maxNbItem<=0)
 		return result;
 
 	QString sn;
@@ -362,11 +359,8 @@ QStringList Novae::listMatchingObjects(const QString& objPrefix, int maxNbItem, 
 	}
 
 	result.sort();
-	if (maxNbItem > 0)
-	{
-		if (result.size()>maxNbItem)
-			result.erase(result.begin()+maxNbItem, result.end());
-	}
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
 
 	return result;
 }

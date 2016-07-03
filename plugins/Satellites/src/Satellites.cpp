@@ -357,7 +357,9 @@ QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int ma
 	QStringList result;
 	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
 		return result;
-	if (maxNbItem==0) return result;
+
+	if (maxNbItem<=0)
+		return result;
 
 	QString objw = objPrefix.toUpper();
 
@@ -401,11 +403,8 @@ QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int ma
 	}
 
 	result.sort();
-	if (maxNbItem > 0)
-	{
-		if (result.size()>maxNbItem)
-			result.erase(result.begin()+maxNbItem, result.end());
-	}
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
 
 	return result;
 }
@@ -415,7 +414,9 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 	QStringList result;
 	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
 		return result;
-	if (maxNbItem==0) return result;
+
+	if (maxNbItem<=0)
+		return result;
 
 	QString objw = objPrefix.toUpper();
 
@@ -461,11 +462,8 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 	}
 
 	result.sort();
-	if (maxNbItem > 0)
-	{
-		if (result.size()>maxNbItem)
-			result.erase(result.begin()+maxNbItem, result.end());
-	}
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
 
 	return result;
 }
