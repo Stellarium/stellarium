@@ -1866,8 +1866,6 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 {
 	QStringList result;
 
-	qWarning() << "maxNbItem" << maxNbItem;
-
 	if (maxNbItem<=0)
 		return result;
 
