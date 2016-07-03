@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-26 19:46+0700\n"
-"PO-Revision-Date: 2016-06-20 04:06+0000\n"
+"PO-Revision-Date: 2016-07-02 19:46+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-27 05:20+0000\n"
+"X-Launchpad-Export-Date: 2016-07-03 05:15+0000\n"
 "X-Generator: Launchpad (build 18115)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -128,7 +128,7 @@ msgstr "Колур сонцастаяньня"
 
 #: src/core/modules/GridLinesMgr.cpp:652
 msgid "Circumpolar Circle"
-msgstr ""
+msgstr "Каляпалярная акружына"
 
 #: src/core/modules/GridLinesMgr.cpp:951
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:339
@@ -205,7 +205,7 @@ msgstr "Лініі колураў"
 
 #: src/core/modules/GridLinesMgr.cpp:968
 msgid "Circumpolar Circles"
-msgstr ""
+msgstr "Каляпалярныя акружыны"
 
 #: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1614
 msgid "Atmosphere"
@@ -1558,6 +1558,9 @@ msgid ""
 "equator, ecliptic, hour lines, etc. into straight lines. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
+"Пэрспэктыўная праекцыя ператварае гарызонт і іншыя важныя акружыны, такія як "
+"экватар, экліптыку, лініі гадзін, і г.д. у прамыя лініі. Матэматычная назва "
+"такога мэтаду праекцыі: <i>ґнаманічная праекцыя</i>."
 
 #: src/core/StelProjectorClasses.cpp:87
 msgid "Equal Area"
@@ -1667,7 +1670,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:512
 msgid "Miller cylindrical"
-msgstr ""
+msgstr "Цыліндрычная Мілера"
 
 #: src/core/StelProjectorClasses.cpp:517
 msgid ""
@@ -1675,6 +1678,9 @@ msgid ""
 "proposed by Osborn Maitland Miller (1897–1979) in 1942. The poles are no "
 "longer mapped to infinity."
 msgstr ""
+"Цыліндрычная праекцыя Мілера — гэта мадыфікаваная праекцыя Мэркатора, "
+"прапанаваная Осбарнам Мэйтландам Мілерам (1897–1979) у 1942 годзе. Полюсы "
+"болей не адлюстроўваюцца як бясконцасьць."
 
 #: src/core/StelObject.cpp:116
 msgctxt "coordinates for current epoch"
@@ -2021,7 +2027,7 @@ msgstr "Эспэнак і Мэёс (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1369
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
-msgstr ""
+msgstr "Эспэнак і Мэёс (2006) без дадатковага паскарэння Месяца"
 
 #: src/gui/ConfigurationDialog.cpp:1371
 msgid "Reijs (2006)"
@@ -3230,7 +3236,7 @@ msgstr "Скандынаўскія"
 
 #: src/translations.h:190
 msgid "Ojibwe"
-msgstr ""
+msgstr "Аджыбвэ"
 
 #: src/translations.h:191
 msgid "Polynesian"
@@ -3498,7 +3504,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:302
 msgid "20 Fun Naked-Eye Double Stars"
-msgstr ""
+msgstr "20 цікавых падвойных зорак"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:304
@@ -3703,6 +3709,9 @@ msgid ""
 "binoculars. The data for the script are taken from the eponymous book by "
 "Gary Seronik."
 msgstr ""
+"Туры вакол цікавых аб'ектаў, якія даступныя для назіраньня з дапамогай "
+"бінокля. Зьвесткі для сцэнара ўзятыя з кнігі Ґэры Сэроніка, у гонар якой "
+"названы гэты сцэнар."
 
 #: src/translations.h:345
 msgid ""
@@ -3710,14 +3719,18 @@ msgid ""
 "has been collected by Jerry Lodriguss and published in Sky & Telescope "
 "09/2014. Data taken from his website, http://www.astropix.com/doubles/"
 msgstr ""
+"Гэты сцэнар дапамагае зрабіць экскурсію вакол 20 цікавых падвойных зорак. "
+"Сьпіс быў сабраны Джэры Ладрыгусам і апублікаваны ў «Sky & Telescope» у "
+"верасьні 2014 г. Зьвесткі ўзятыя з пляцоўкі http://www.astropix.com/doubles/"
 
 #: src/translations.h:346
 msgid "This script helps you make an excursion around largest known stars."
 msgstr ""
+"Гэты сцэнар дапамагае зрабіць экскурсію вакол найбольшых вялікіх зорак."
 
 #: src/translations.h:347
 msgid "A tour around objects from the Herschel 400 Catalogue"
-msgstr ""
+msgstr "Тур вакол аб'ектаў з каталёґу «Гершэль 400»"
 
 #: src/translations.h:348
 msgid ""
@@ -3725,12 +3738,17 @@ msgid ""
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
 "Right Ascension (2000.0)."
 msgstr ""
+"Бэн Кроўэл стварыў «Бінеба», сьпіс назіраньняў абхектаў глыбокага космасу "
+"для «Бінокля». У сцэнары мы даём сьпіс гэтых 31 аб'ектаў, упарадкаваных "
+"паводле прамога ўзыходжаньня (2000.0)."
 
 #: src/translations.h:349
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects. The Bennett catalog "
 "was contributed by Auke Slotegraaf."
 msgstr ""
+"Каталёґ паўднёвых аб'ектаў глыбокага космасу Джэка Бэнэта. Каталёґ Бэнэта "
+"для Stellarium быў зроблены Аўке Слатэґраафам."
 
 #: src/translations.h:350
 msgid ""
@@ -4813,7 +4831,7 @@ msgstr "&Дадаць у свае колеры"
 
 #: src/translations.h:624
 msgid "Hu&e:"
-msgstr ""
+msgstr "&Адц:"
 
 #: src/translations.h:625
 msgid "&Sat:"
@@ -4821,7 +4839,7 @@ msgstr "&Нас:"
 
 #: src/translations.h:626
 msgid "&Val:"
-msgstr ""
+msgstr "&Ярк:"
 
 #: src/translations.h:627
 msgid "&Red:"
@@ -4833,7 +4851,7 @@ msgstr "&Зялёны:"
 
 #: src/translations.h:629
 msgid "Bl&ue:"
-msgstr ""
+msgstr "С&іні:"
 
 #: src/translations.h:630
 msgid "Select Color"
@@ -4842,7 +4860,7 @@ msgstr "Выберы колер"
 #: src/translations.h:631
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
-msgstr ""
+msgstr "Курсор у %1, %2. Націсьні ESC для скасаваньня"
 
 #: src/ui_dateTimeDialogGui.h:380
 msgid "Date and Time in Gregorian calendar"
@@ -5530,6 +5548,8 @@ msgid ""
 "These circles delimit stars which stay always above (respectively below) the "
 "mathematical horizon."
 msgstr ""
+"Гэтыя акружыны абмяжоўваюць зоркі, якія заўжды знаходзяцца вышэй (адпаведна, "
+"ніжэй) за матэматычны гарызонт."
 
 #: src/ui_viewDialog.h:1803
 msgid "Circumpolar circles"
@@ -7140,7 +7160,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:557
 msgid "You can choose to scale the image you see on the screen."
-msgstr ""
+msgstr "Можна маштабаваць выяву, бачную на экране."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:558
 msgid ""
@@ -7165,6 +7185,8 @@ msgid ""
 "Therefore I recommend that you leave it off, unless you feel you have a need "
 "of it."
 msgstr ""
+"Таму я ня раю задзейнічаць яго, апрача сытуацый, калі яно сапраўды табе "
+"патрэбна."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:562
 msgid ""
@@ -8281,12 +8303,12 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 msgid "Contents"
-msgstr ""
+msgstr "Зьмест"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
 msgid "Abilities and limitations"
-msgstr ""
+msgstr "Магчымасьці й абмежаваньні"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:282
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
@@ -8296,22 +8318,22 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
 msgid "Using this plug-in"
-msgstr ""
+msgstr "Выкарыстаньне гэтага дадатаку"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:321
 msgid "Main window ('Telescopes')"
-msgstr ""
+msgstr "Галоўнае вакно («Тэлескопы»)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:336
 msgid "Telescope configuration window"
-msgstr ""
+msgstr "Вакно настаўленьняў тэлескопа"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:286
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:338
 msgid "Connection type"
-msgstr ""
+msgstr "Тып злучэньня"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:346
@@ -8334,7 +8356,7 @@ msgstr "Настройкі злучэньня"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:377
 msgid "Field of view indicators"
-msgstr ""
+msgstr "Полю зроку індыкатараў"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:385
@@ -8375,6 +8397,7 @@ msgid ""
 "WARNING: Stellarium CANNOT prevent your telescope from being pointed at the "
 "Sun."
 msgstr ""
+"УВАГА: Stellarium НЯ МОЖА прадухіліць накіраваньня твайго тэлескопа на Сонца."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
 msgid ""
@@ -8457,6 +8480,9 @@ msgid ""
 "Most older telescopes use cables that connect to a %1serial port%2 (RS-232), "
 "the newer ones use %3USB%4 (Universal Serial Bus)."
 msgstr ""
+"Большасьць старых тэлескопаў выкарыстоўваюць кабэль для далучэньня да "
+"%1пасьлядоўнага порта%2 (RS-232), новыя выкарыстоўваюць %3USB%4 "
+"(Унівэрсальную пасьлядоўную шыну)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:315
 msgid ""
@@ -8464,12 +8490,17 @@ msgid ""
 "Windows, a USB connection may require a 'virtual serial port' software, if "
 "it is not supplied with the cable or the telescope."
 msgstr ""
+"У Linux і Max OS X дадатак апрацоўвае абодва выдадкі аднолькава. У Windows "
+"для падлучэньня праз USB можа спатрэбіцца праґрама «віртуальнага "
+"пасьлядоўнага порту», калі яна не ішла разам з кабэлем ці тэлескопам."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:316
 msgid ""
 "Such a software creates a virtual ('fake') COM port that corresponds to the "
 "real USB port so it can be used by the plug-in."
 msgstr ""
+"Такая праґрама стварае віртуальны COM порт, які адпавядае сапраўднаму порту "
+"USB, таму яго можна выкарыстоўваць у дадатку."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
 msgid ""
@@ -8477,6 +8508,9 @@ msgid ""
 "the telescope can connect only to a serial port, a serial-to-USB (RS-232-to-"
 "USB) adapter may be necessary."
 msgstr ""
+"На ўсіх трох плятформах, калі кампутар ня мае «клясычных» пасьлядоўным "
+"партоў і тэлескоп можа далучацца толькі да пасьлядоўнага порту, можа "
+"спатрэбіцца перахаднік з пасьлядоўнага порту на USB (RS-232-у-USB)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid ""
@@ -8625,6 +8659,8 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:356
 msgid "<b>Serial port</b> sets the serial port used by the telescope."
 msgstr ""
+"<b>Пасьлядоўны порт</b> задае пасьлядоўны порт, які выкарыстоўваецца "
+"тэлескопам."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:357
 msgid "There is a pop-up box that suggests some default values:"
@@ -8632,18 +8668,20 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:358
 msgid "On Windows, serial ports COM1 to COM10;"
-msgstr ""
+msgstr "У Windows, пасьлядоўныя парты з COM1 па COM10;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:359
 msgid ""
 "On Linux, serial ports /dev/ttyS0 to /dev/ttyS3 and USB ports /dev/ttyUSB0 "
 "to /dev/ttyUSB3;"
 msgstr ""
+"У Linux, пасьлядоўныя парты з /dev/ttyS0 па /dev/ttyS3 і USB парты з "
+"/dev/ttyUSB0 па /dev/ttyUSB3;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:360
 msgid ""
 "On Mac OS X, the list is empty as it names its ports in a peculiar way."
-msgstr ""
+msgstr "У Mac OS X сьпіс пусты, бо яна называе парты спэйыфічным чынам."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:361
 msgid ""
@@ -8707,6 +8745,8 @@ msgid ""
 "In this case, it should be the name or IP address of the computer that runs "
 "a program that runs the telescope."
 msgstr ""
+"У такім выпадку, гэта мусіць быць назва ці IP-адрас кампутара, на якім "
+"запушчаная праґрама, якая кіруе тэлескопам."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:378
 msgid ""
@@ -8728,7 +8768,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
 msgid "The values are interpreted as degrees of arc."
-msgstr ""
+msgstr "Значэньні інтэрпрэтуюцца як ґрадусы дугі."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:382
 #, qt-format
@@ -8867,7 +8907,7 @@ msgstr "Сьпіс прыладаў утрымлівае наступныя:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:413
 msgid "Any device using the NexStar interface."
-msgstr ""
+msgstr "Любая прылада з інтэрфэйсам NexStar."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:414
 msgid ""
@@ -8878,7 +8918,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:415
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:418
 msgid "Any device using the LX-200/Autostar interface."
-msgstr ""
+msgstr "Любая прылада з інтэрфэйсам LX-200/Autostar."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:416
 msgid ""
@@ -10124,7 +10164,7 @@ msgstr "Навіґацыйныя зоркі"
 #: plugins/NavStars/src/NavStars.cpp:54
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:94
 msgid "This plugin marks navigational stars from a selected set."
-msgstr ""
+msgstr "Гэты дадатак пазначае навіґацыйныя зоркі з выбранага набору."
 
 #: plugins/NavStars/src/NavStars.cpp:112
 msgid "Mark the navigational stars"
@@ -10152,6 +10192,8 @@ msgid ""
 "The 81 stars that are listed in the <em>%1</em> published by the French "
 "Bureau des Longitudes."
 msgstr ""
+"81 зорка, адлюстраваная ў <em>%1</em>, апублікаваным францускім Bureau des "
+"Longitudes."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:322
@@ -10160,6 +10202,8 @@ msgid ""
 "The 160 stars that are listed in the Russian Nautical Almanac (The original "
 "Russian title is <em>%1</em>)."
 msgstr ""
+"160 зорак, адлюстраваных у Расейскім навіґацыйным альманаху (расейская назва "
+"— <em>%1</em>)."
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
 msgid "Navigational Stars Plug-in"
@@ -10669,12 +10713,12 @@ msgstr ""
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:126
 #, qt-format
 msgid "Further information can be found in the %1developer documentation%2."
-msgstr ""
+msgstr "Больш зьвестак можна знайсьці ў %1дакумэнтацыі распрацоўніка%2."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:175
 #, qt-format
 msgid "Listening on %1, IP: "
-msgstr ""
+msgstr "Праслухоўваю на %1, IP: "
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:180
 msgid "Not active."
@@ -10686,7 +10730,7 @@ msgstr "Настаўленьні аддаленага кіраваньня"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:247
 msgid "Remote Control Plug-in Configuration"
-msgstr ""
+msgstr "Настаўленьні дадатку аддаленага кіраваньня"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:249
 msgid "Port Number:"
@@ -10709,7 +10753,7 @@ msgstr ""
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:255
 msgid "Your changes require a restart of the server."
-msgstr ""
+msgstr "Зробленыя зьмены патрабуюць перазапуску паслужніка."
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:256
 msgid "Restart server"
@@ -10725,7 +10769,7 @@ msgstr "Аўтаматычна запускаць на пачатку працы
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:259
 msgid "Server disabled - or Server listening on IP: aaa.bbb.ccc.ddd"
-msgstr ""
+msgstr "Пслужнік абязьдзейнены, або праслухоўвае на IP: aaa.bbb.ccc.ddd"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:74
 #: plugins/Exoplanets/src/Exoplanets.cpp:169
@@ -13786,43 +13830,43 @@ msgstr "Прылада штудый з археа- й этнаастранамі
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:237
 msgid "Show Line for Equinox"
-msgstr ""
+msgstr "Паказваць лінію раўнадзенства"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:238
 msgid "Show Line for Solstices"
-msgstr ""
+msgstr "Паказваць лінію сонцастаяньня"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:239
 msgid "Show Line for Crossquarter"
-msgstr ""
+msgstr "Паказваць лінію перасячэньня чвэрці"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:240
 msgid "Show Line for Major Standstill"
-msgstr ""
+msgstr "Паказваць лінію вялікіх спыненьняў"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:241
 msgid "Show Line for Minor Standstill"
-msgstr ""
+msgstr "Паказваць лінію малых спыненьняў"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:242
 msgid "Show Line for Zenith Passage"
-msgstr ""
+msgstr "Паказваць лінію праходжаньня зэніту"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:243
 msgid "Show Line for Nadir Passage"
-msgstr ""
+msgstr "Паказваць лінію праходжаньня надыру"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:244
 msgid "Show Line for Selected Object"
-msgstr ""
+msgstr "Паказваць лінію вылучанага аб'екту"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:245
 msgid "Show Line for Current Sun"
-msgstr ""
+msgstr "Паказваць лінію бягучага Сонца"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:246
 msgid "Show Line for Current Moon"
-msgstr ""
+msgstr "Паказваць лінію бягучага Месяца"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:247
 msgid "Show Line for Geographic Location 1"
@@ -13967,6 +14011,8 @@ msgid ""
 "In addition, up to two vertical lines with arbitrary azimuth and custom "
 "label can be shown."
 msgstr ""
+"Дадаткова могуць быць паказаныя да дзьвюх вэртыкальных ліній з адвольнымі "
+"азімутам і подпісам."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:351
 msgid "Select color for equinox line"
@@ -14022,11 +14068,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:494
 msgid "Select color for Custom Azimuth 1 line"
-msgstr ""
+msgstr "Выберы колер лініі свайго азімуту 1"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:505
 msgid "Select color for Custom Azimuth 2 line"
-msgstr ""
+msgstr "Выберы колер лініі свайго азімуту 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:471
 msgid "ArchaeoLines Configuration"
@@ -14100,7 +14146,7 @@ msgstr "Свой азімут 2"
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:503
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:506
 msgid "Enter a label for this line"
-msgstr ""
+msgstr "Увядзі подпіс гэтай лініі"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:508
 msgid "Solstice Lines"
