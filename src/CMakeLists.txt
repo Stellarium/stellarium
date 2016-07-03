@@ -158,6 +158,8 @@ SET(stellarium_lib_SRCS
      core/StelProgressController.hpp
      core/StelPropertyMgr.hpp
      core/StelPropertyMgr.cpp
+     core/StelOBJ.hpp
+     core/StelOBJ.cpp
 
      ${gl_lib_SRCS}
 

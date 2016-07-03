@@ -47,6 +47,10 @@ typedef Vector3<double>	Vec3d;
 //! A 3d vector of floats compatible with openGL.
 typedef Vector3<float>	Vec3f;
 
+//! @typedef Vec3i
+//! A 3d vector of ints compatible with openGL.
+typedef Vector3<int>	Vec3i;
+
 //! @typedef Vec4d
 //! A 4d vector of doubles compatible with openGL.
 typedef Vector4<double>	Vec4d;
@@ -1586,6 +1590,7 @@ Q_DECLARE_TYPEINFO(Vec2f, Q_PRIMITIVE_TYPE);
 Q_DECLARE_TYPEINFO(Vec2i, Q_PRIMITIVE_TYPE);
 Q_DECLARE_TYPEINFO(Vec3d, Q_PRIMITIVE_TYPE);
 Q_DECLARE_TYPEINFO(Vec3f, Q_PRIMITIVE_TYPE);
+Q_DECLARE_TYPEINFO(Vec3i, Q_PRIMITIVE_TYPE);
 Q_DECLARE_TYPEINFO(Vec4d, Q_PRIMITIVE_TYPE);
 Q_DECLARE_TYPEINFO(Vec4f, Q_PRIMITIVE_TYPE);
 Q_DECLARE_TYPEINFO(Vec4i, Q_PRIMITIVE_TYPE);
@@ -1601,6 +1606,7 @@ Q_DECLARE_METATYPE(Vec2f)
 Q_DECLARE_METATYPE(Vec2i)
 Q_DECLARE_METATYPE(Vec3d)
 Q_DECLARE_METATYPE(Vec3f)
+Q_DECLARE_METATYPE(Vec3i)
 Q_DECLARE_METATYPE(Vec4d)
 Q_DECLARE_METATYPE(Vec4f)
 Q_DECLARE_METATYPE(Vec4i)

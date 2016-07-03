@@ -1529,6 +1529,7 @@ void StelCore::registerMathMetaTypes()
 	qRegisterMetaType<Vec2i>();
 	qRegisterMetaType<Vec3d>();
 	qRegisterMetaType<Vec3f>();
+	qRegisterMetaType<Vec3i>();
 	qRegisterMetaType<Vec4d>();
 	qRegisterMetaType<Vec4f>();
 	qRegisterMetaType<Vec4i>();
@@ -1537,12 +1538,13 @@ void StelCore::registerMathMetaTypes()
 	qRegisterMetaType<Mat3d>();
 	qRegisterMetaType<Mat3f>();
 
-    //for debugging QVariants with these types, it helps if we register the string converters
-    QMetaType::registerConverter(&Vec3d::toString);
-    QMetaType::registerConverter(&Vec3f::toString);
-    QMetaType::registerConverter(&Vec4d::toString);
-    QMetaType::registerConverter(&Vec4f::toString);
-    QMetaType::registerConverter(&Vec4i::toString);
+	//for debugging QVariants with these types, it helps if we register the string converters
+	QMetaType::registerConverter(&Vec3d::toString);
+	QMetaType::registerConverter(&Vec3f::toString);
+	QMetaType::registerConverter(&Vec3i::toString);
+	QMetaType::registerConverter(&Vec4d::toString);
+	QMetaType::registerConverter(&Vec4f::toString);
+	QMetaType::registerConverter(&Vec4i::toString);
 }
 
 void StelCore::setStartupTimeMode(const QString& s)
