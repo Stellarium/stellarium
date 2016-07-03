@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-03 22:55+0700\n"
+"POT-Creation-Date: 2016-07-04 01:01+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -963,18 +963,15 @@ msgid "Rising time: %1%"
 msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:276
-#, qt-format
-msgid "Year of last satisfactory observation: %1"
+msgid "Year of last satisfactory observation"
 msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:277
-#, qt-format
-msgid "Position angle: %1%2"
+msgid "Position angle"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:278
-#, qt-format
-msgid "Separation: %1\""
+#: src/core/modules/StarWrapper.cpp:278 src/gui/AstroCalcDialog.cpp:479
+msgid "Separation"
 msgstr ""
 
 #: src/core/modules/MilkyWay.cpp:75
@@ -2653,10 +2650,6 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:478
 msgid "Object 2"
-msgstr ""
-
-#: src/gui/AstroCalcDialog.cpp:479
-msgid "Separation"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:635
@@ -10317,47 +10310,47 @@ msgid "Exoplanets configuration window"
 msgstr ""
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:967
+#: plugins/Exoplanets/src/Exoplanets.cpp:928
 msgid "Hot"
 msgstr ""
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:969
+#: plugins/Exoplanets/src/Exoplanets.cpp:930
 msgid "Warm"
 msgstr ""
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:971
+#: plugins/Exoplanets/src/Exoplanets.cpp:932
 msgid "Cold"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:974
+#: plugins/Exoplanets/src/Exoplanets.cpp:935
 msgid "Miniterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:976
+#: plugins/Exoplanets/src/Exoplanets.cpp:937
 msgid "Subterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:978
+#: plugins/Exoplanets/src/Exoplanets.cpp:939
 msgid "Terran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:980
+#: plugins/Exoplanets/src/Exoplanets.cpp:941
 msgid "Superterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:982
+#: plugins/Exoplanets/src/Exoplanets.cpp:943
 msgid "Jovian"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:984
+#: plugins/Exoplanets/src/Exoplanets.cpp:945
 msgid "Neptunian"
 msgstr ""
 
