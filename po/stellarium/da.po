@@ -3,26 +3,28 @@
 # This file is distributed under the same license as the stellarium package.
 # Henrik Johansen
 #
+# Thomas Pryds <thomas@pryds.eu>, 2016.
 msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-26 19:46+0700\n"
-"PO-Revision-Date: 2012-04-08 01:13+0000\n"
-"Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2016-07-04 01:01+0700\n"
+"PO-Revision-Date: 2016-07-04 00:16+0000\n"
+"Last-Translator: Thomas Pryds <Unknown>\n"
+"Language-Team: English <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-27 05:22+0000\n"
+"X-Launchpad-Export-Date: 2016-07-04 05:18+0000\n"
 "X-Generator: Launchpad (build 18115)\n"
 "X-Poedit-Country: DENMARK\n"
+"Language: en_US\n"
 "X-Poedit-Language: Danish\n"
 
 #: src/core/modules/Constellation.cpp:297 src/core/modules/Nebula.cpp:188
 #: src/core/modules/Planet.cpp:226 src/core/modules/MinorPlanet.cpp:213
-#: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:181
-#: src/core/modules/StarWrapper.cpp:184
+#: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:188
+#: src/core/modules/StarWrapper.cpp:191
 #: plugins/Satellites/src/Satellite.cpp:270
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
 #: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:269
@@ -32,9 +34,9 @@ msgstr "Type: <b>%1</b>"
 
 #: src/core/modules/Constellation.cpp:297
 msgid "constellation"
-msgstr ""
+msgstr "stjernebillede"
 
-#: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:378
+#: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:412
 #: src/core/modules/GridLinesMgr.cpp:950 src/core/modules/LandscapeMgr.cpp:414
 #: src/core/modules/NebulaMgr.cpp:364 src/core/modules/NebulaMgr.cpp:365
 #: src/core/modules/SolarSystem.cpp:195 src/core/modules/MilkyWay.cpp:74
@@ -56,7 +58,7 @@ msgstr "Stjernebilledgrafik"
 #: src/core/modules/ConstellationMgr.cpp:146
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Constellation labels"
-msgstr "Stjernebilledernes navne"
+msgstr "Stjernebilledetiketter"
 
 #: src/core/modules/ConstellationMgr.cpp:147
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:305
@@ -65,16 +67,16 @@ msgstr "Stjernebilledomrids"
 
 #: src/core/modules/ConstellationMgr.cpp:148
 msgid "Constellation selection isolated"
-msgstr ""
+msgstr "Stjernebilledmarkering isoleret"
 
-#: src/core/modules/StarMgr.cpp:379 src/ui_viewDialog.h:1596
+#: src/core/modules/StarMgr.cpp:413 src/ui_viewDialog.h:1596
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:253
 msgid "Stars"
 msgstr "Stjerner"
 
-#: src/core/modules/StarMgr.cpp:380
+#: src/core/modules/StarMgr.cpp:414
 msgid "Stars labels"
-msgstr ""
+msgstr "Stjerneetiketter"
 
 #: src/core/modules/GridLinesMgr.cpp:601 src/ui_viewDialog.h:1787
 msgid "Meridian"
@@ -106,7 +108,7 @@ msgstr "Horisonten"
 
 #: src/core/modules/GridLinesMgr.cpp:630
 msgid "Galactic Equator"
-msgstr ""
+msgstr "Galaktisk ækvator"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:635 src/ui_viewDialog.h:1799
@@ -128,7 +130,7 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:652
 msgid "Circumpolar Circle"
-msgstr ""
+msgstr "Cirkumpolar cirkel"
 
 #: src/core/modules/GridLinesMgr.cpp:951
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:339
@@ -143,43 +145,43 @@ msgstr "Azimuth gitter"
 #: src/core/modules/GridLinesMgr.cpp:953
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Ecliptic line"
-msgstr "Ekliptika"
+msgstr "Ekliptikalinje"
 
 #: src/core/modules/GridLinesMgr.cpp:954
 msgid "Ecliptic J2000 line"
-msgstr ""
+msgstr "Ekliptika J2000-linje"
 
 #: src/core/modules/GridLinesMgr.cpp:955
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Equator line"
-msgstr "Ækvator"
+msgstr "Ækvatorlinje"
 
 #: src/core/modules/GridLinesMgr.cpp:956
 msgid "Equator J2000 line"
-msgstr ""
+msgstr "Ækvator J2000-linje"
 
 #: src/core/modules/GridLinesMgr.cpp:957
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:329
 msgid "Meridian line"
-msgstr "Meridianen"
+msgstr "Meridianlinje"
 
 #: src/core/modules/GridLinesMgr.cpp:958
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:390
 msgid "Horizon line"
-msgstr ""
+msgstr "Horisontlinje"
 
 #: src/core/modules/GridLinesMgr.cpp:959
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:344
 msgid "Equatorial J2000 grid"
-msgstr "Ækvatorialsk j2000-gitter"
+msgstr "Ækvatorialsk J2000-gitter"
 
 #: src/core/modules/GridLinesMgr.cpp:960
 msgid "Ecliptic J2000 grid"
-msgstr ""
+msgstr "Ekliptika J2000-gitter"
 
 #: src/core/modules/GridLinesMgr.cpp:961
 msgid "Ecliptic grid"
-msgstr ""
+msgstr "Ekliptikagitter"
 
 #: src/core/modules/GridLinesMgr.cpp:962 src/ui_viewDialog.h:1755
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:395
@@ -188,7 +190,7 @@ msgstr "Galaktisk gitter"
 
 #: src/core/modules/GridLinesMgr.cpp:963 src/ui_viewDialog.h:1779
 msgid "Galactic equator"
-msgstr ""
+msgstr "Galaktisk ækvator"
 
 #: src/core/modules/GridLinesMgr.cpp:964
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:405
@@ -205,7 +207,7 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:968
 msgid "Circumpolar Circles"
-msgstr ""
+msgstr "Cirkumpolare cirkler"
 
 #: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1614
 msgid "Atmosphere"
@@ -226,16 +228,16 @@ msgstr "Jord"
 
 #: src/core/modules/LandscapeMgr.cpp:419
 msgid "Illumination"
-msgstr ""
+msgstr "Oplysning"
 
 #: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:1717
 #: plugins/Satellites/src/ui_satellitesDialog.h:718
 msgid "Labels"
-msgstr ""
+msgstr "Etiketter"
 
 #: src/core/modules/LandscapeMgr.cpp:421 src/ui_viewDialog.h:1618
 msgid "Light pollution data from locations database"
-msgstr ""
+msgstr "Lysforureningsdata fra placeringsdatabase"
 
 #: src/core/modules/LandscapeMgr.cpp:706
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:448
@@ -249,35 +251,35 @@ msgstr "Placering: "
 #: src/core/modules/LandscapeMgr.cpp:715
 #, qt-format
 msgid ", %1 m"
-msgstr ". %1 m"
+msgstr ", %1 m"
 
 #: src/core/modules/LandscapeMgr.cpp:720 src/ui_astroCalcDialog.h:380
 msgid "Celestial body:"
-msgstr ""
+msgstr "Himmellegeme:"
 
 #: src/core/modules/Nebula.cpp:190 src/core/modules/Comet.cpp:176
 #: plugins/Novae/src/Nova.cpp:133 plugins/Pulsars/src/Pulsar.cpp:166
 #: plugins/MeteorShowers/src/MeteorShower.cpp:548
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
-msgstr ""
+msgstr "Type: <b>%1</b> (%2)"
 
 #: src/core/modules/Nebula.cpp:197
 #, qt-format
 msgid "Opacity: <b>%1</b>"
-msgstr ""
+msgstr "Uigennemsigtighed: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:232
 #: src/core/modules/MinorPlanet.cpp:219 src/core/modules/Comet.cpp:182
-#: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:191
+#: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:198
 #, qt-format
 msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
-msgstr ""
+msgstr "Lysstyrke: <b>%1</b> (efter udslettelse: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
 #: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
 #: src/core/modules/Comet.cpp:185 src/core/modules/StarWrapper.cpp:63
-#: src/core/modules/StarWrapper.cpp:194
+#: src/core/modules/StarWrapper.cpp:201
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
 #: plugins/Quasars/src/Quasar.cpp:109 plugins/Exoplanets/src/Exoplanet.cpp:283
 #, qt-format
@@ -286,10 +288,10 @@ msgstr "Lysstyrke: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:211
 msgid " (Photometric system: B)"
-msgstr ""
+msgstr " (Fotometrisk system: B)"
 
 #: src/core/modules/Nebula.cpp:217 src/core/modules/StarWrapper.cpp:68
-#: src/core/modules/StarWrapper.cpp:202 plugins/Quasars/src/Quasar.cpp:119
+#: src/core/modules/StarWrapper.cpp:209 plugins/Quasars/src/Quasar.cpp:119
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
 msgstr ""
@@ -297,12 +299,12 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:224
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
-msgstr ""
+msgstr "Overfladelysstyrke: <b>%1</b> (efter udslettelse: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:230
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
-msgstr ""
+msgstr "Overfladelysstyrke: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:239
 #, qt-format
@@ -312,7 +314,7 @@ msgstr "Størrelse: %1"
 #: src/core/modules/Nebula.cpp:242
 #, qt-format
 msgid "Size: %1 x %2"
-msgstr ""
+msgstr "Størrelse: %1 × %2"
 
 #: src/core/modules/Nebula.cpp:244
 #, qt-format
@@ -320,427 +322,427 @@ msgid "Orientation angle: %1%2"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:268 src/core/modules/StarWrapper.cpp:232
+#: src/core/modules/Nebula.cpp:268 src/core/modules/StarWrapper.cpp:239
 #: plugins/Supernovae/src/Supernova.cpp:147 plugins/Novae/src/Nova.cpp:153
 #: plugins/Exoplanets/src/Exoplanet.cpp:299
 #, qt-format
 msgid "Distance: %1 ly"
-msgstr ""
+msgstr "Afstand: %1 ly"
 
 #. TRANSLATORS: Unit of measure for distance - megaparsecs
 #: src/core/modules/Nebula.cpp:289
 msgid "Mpc"
-msgstr ""
+msgstr "Mpc"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
 #: src/core/modules/Nebula.cpp:295
 msgid "kpc"
-msgstr ""
+msgstr "kpc"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:298
 msgid "ly"
-msgstr ""
+msgstr "ly"
 
 #: src/core/modules/Nebula.cpp:300
 #, qt-format
 msgid "Distance: %1 %2"
-msgstr ""
+msgstr "Afstand: %1 %2"
 
 #: src/core/modules/Nebula.cpp:314
 #, qt-format
 msgid "Redshift: %1"
-msgstr ""
+msgstr "Rødforskydning: %1"
 
-#: src/core/modules/Nebula.cpp:325 src/core/modules/StarWrapper.cpp:241
+#: src/core/modules/Nebula.cpp:325 src/core/modules/StarWrapper.cpp:248
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Parallakse: %1\""
 
 #: src/core/modules/Nebula.cpp:329
 msgid "Morphological description: "
-msgstr ""
+msgstr "Morfologisk beskrivelse: "
 
 #: src/core/modules/Nebula.cpp:831
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
-msgstr ""
+msgstr "høj koncentration af stjerner i mod centrum"
 
 #: src/core/modules/Nebula.cpp:834
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "dense central concentration of stars"
-msgstr ""
+msgstr "tæt central koncentration af stjerner"
 
 #: src/core/modules/Nebula.cpp:837
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "strong inner core of stars"
-msgstr ""
+msgstr "stærk indre kerne af stjerner"
 
 #: src/core/modules/Nebula.cpp:840
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
-msgstr ""
+msgstr "mellemliggende rig koncentration af stjerner"
 
 #: src/core/modules/Nebula.cpp:845
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
-msgstr ""
+msgstr "mellemliggende koncentration af stjerner"
 
 #: src/core/modules/Nebula.cpp:848
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "rather loosely concentration of stars towards the center"
-msgstr ""
+msgstr "forholdsvis løs koncentration af stjerner i mod centrum"
 
 #: src/core/modules/Nebula.cpp:851
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
-msgstr ""
+msgstr "løs koncentration af stjerner i mod centrum"
 
 #: src/core/modules/Nebula.cpp:854
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars"
-msgstr ""
+msgstr "løs koncentration af stjerner"
 
 #: src/core/modules/Nebula.cpp:857
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
-msgstr ""
+msgstr "meget løs koncentration af stjerner i mod centrum"
 
 #: src/core/modules/Nebula.cpp:860
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
-msgstr ""
+msgstr "næsten ingen koncentration i mod centrum"
 
 #: src/core/modules/Nebula.cpp:863
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "undocumented concentration class"
-msgstr ""
+msgstr "udokumenteret koncentrationsklasse"
 
 #: src/core/modules/Nebula.cpp:883
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
-msgstr ""
+msgstr "stærk central koncentration af stjerner"
 
 #: src/core/modules/Nebula.cpp:886
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
-msgstr ""
+msgstr "svag central koncentration af stjerner"
 
 #: src/core/modules/Nebula.cpp:889
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
-msgstr ""
+msgstr "ingen bemærkelsesværdig koncentration af stjerner"
 
 #: src/core/modules/Nebula.cpp:892
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
-msgstr ""
+msgstr "en kondensering af stjerner"
 
 #: src/core/modules/Nebula.cpp:895
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
-msgstr ""
+msgstr "udokumenteret koncentrationsklasse"
 
 #: src/core/modules/Nebula.cpp:901
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
-msgstr ""
+msgstr "lille lysstyrkeinterval for stjerner i hoben"
 
 #: src/core/modules/Nebula.cpp:904
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
-msgstr ""
+msgstr "medium lysstyrkeinterval for stjerner i hoben"
 
 #: src/core/modules/Nebula.cpp:907
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
-msgstr ""
+msgstr "stor lysstyrkeinterval for stjerner i hoben"
 
 #: src/core/modules/Nebula.cpp:910
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
-msgstr ""
+msgstr "udokumenteret lysstyrkeinterval for stjerner i hoben"
 
 #: src/core/modules/Nebula.cpp:916
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
-msgstr ""
+msgstr "fattig hob med mindre end 50 stjerner"
 
 #: src/core/modules/Nebula.cpp:919
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
-msgstr ""
+msgstr "moderat rig hob med 50-100 stjerner"
 
 #: src/core/modules/Nebula.cpp:922
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
-msgstr ""
+msgstr "rig hob med mere end 100 stjerner"
 
 #: src/core/modules/Nebula.cpp:925
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
-msgstr ""
+msgstr "udokumenteret klasse for antal medlemmer"
 
 #: src/core/modules/Nebula.cpp:929
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
-msgstr ""
+msgstr "hoben ligger inden for stjernetåge"
 
 #: src/core/modules/Nebula.cpp:950
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
-msgstr ""
+msgstr "meget lysstærk"
 
 #: src/core/modules/Nebula.cpp:953
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
-msgstr ""
+msgstr "lysstærk"
 
 #: src/core/modules/Nebula.cpp:956
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
-msgstr ""
+msgstr "moderat lysstyrke"
 
 #: src/core/modules/Nebula.cpp:959
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
-msgstr ""
+msgstr "lyssvag"
 
 #: src/core/modules/Nebula.cpp:962
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
-msgstr ""
+msgstr "meget lyssvag"
 
 #: src/core/modules/Nebula.cpp:965
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
-msgstr ""
+msgstr "usikker lysstyrke"
 
 #: src/core/modules/Nebula.cpp:968
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
-msgstr ""
+msgstr "udokumenteret lysstyrke for reflektionståge"
 
 #: src/core/modules/Nebula.cpp:974
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
-msgstr ""
+msgstr "den oplysende stjerne er indlejret i stjernetågen"
 
 #: src/core/modules/Nebula.cpp:977
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
-msgstr ""
+msgstr "stjernen er placeret uden for den oplyste stjernetåge"
 
 #: src/core/modules/Nebula.cpp:980
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
-msgstr ""
+msgstr "stjernen er placeret i hjørnet af den oplyste stjernetåge"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
 #: src/core/modules/Nebula.cpp:985
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
-msgstr ""
+msgstr "stjernen er placeret uden for den oplyste mærkværdige stjernetåge"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
 #: src/core/modules/Nebula.cpp:991
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
-msgstr ""
+msgstr "den oplyste mærkværdige stjernetåge"
 
 #: src/core/modules/Nebula.cpp:995
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
-msgstr ""
+msgstr "udokumenteret reflektionståge"
 
 #: src/core/modules/Nebula.cpp:1018
 msgid "circular form"
-msgstr ""
+msgstr "cirkulær form"
 
 #: src/core/modules/Nebula.cpp:1021
 msgid "elliptical form"
-msgstr ""
+msgstr "elliptisk form"
 
 #: src/core/modules/Nebula.cpp:1024
 msgid "irregular form"
-msgstr ""
+msgstr "irregulær form"
 
 #: src/core/modules/Nebula.cpp:1027
 msgid "undocumented form"
-msgstr ""
+msgstr "udokumenteret form"
 
 #: src/core/modules/Nebula.cpp:1033
 msgid "amorphous structure"
-msgstr ""
+msgstr "amorf struktur"
 
 #: src/core/modules/Nebula.cpp:1036
 msgid "conventional structure"
-msgstr ""
+msgstr "konventionel struktur"
 
 #: src/core/modules/Nebula.cpp:1039
 msgid "filamentary structure"
-msgstr ""
+msgstr "trådformet struktur"
 
 #: src/core/modules/Nebula.cpp:1042
 msgid "undocumented structure"
-msgstr ""
+msgstr "udokumenteret struktur"
 
 #: src/core/modules/Nebula.cpp:1048
 msgctxt "HII region brightness"
 msgid "faintest"
-msgstr ""
+msgstr "lyssvageste"
 
 #: src/core/modules/Nebula.cpp:1051
 msgctxt "HII region brightness"
 msgid "moderate brightness"
-msgstr ""
+msgstr "moderat lysstyrke"
 
 #: src/core/modules/Nebula.cpp:1054
 msgctxt "HII region brightness"
 msgid "brightest"
-msgstr ""
+msgstr "lysstærkeste"
 
 #: src/core/modules/Nebula.cpp:1057
 msgid "undocumented brightness"
-msgstr ""
+msgstr "udokumenteret lysstyrke"
 
 #: src/core/modules/Nebula.cpp:1073
 msgid "galaxy"
-msgstr ""
+msgstr "galakse"
 
 #: src/core/modules/Nebula.cpp:1076
 msgid "active galaxy"
-msgstr ""
+msgstr "aktiv galakse"
 
 #: src/core/modules/Nebula.cpp:1079
 msgid "radio galaxy"
-msgstr ""
+msgstr "radiogalakse"
 
 #: src/core/modules/Nebula.cpp:1082
 msgid "interacting galaxy"
-msgstr ""
+msgstr "velselvirkende galakse"
 
 #: src/core/modules/Nebula.cpp:1085 plugins/Quasars/src/Quasar.cpp:98
 msgid "quasar"
-msgstr ""
+msgstr "kvasar"
 
 #: src/core/modules/Nebula.cpp:1088
 msgid "star cluster"
-msgstr ""
+msgstr "stjernehob"
 
 #: src/core/modules/Nebula.cpp:1091
 msgid "open star cluster"
-msgstr ""
+msgstr "åben stjernehob"
 
 #: src/core/modules/Nebula.cpp:1094
 msgid "globular star cluster"
-msgstr ""
+msgstr "kuglehob"
 
 #: src/core/modules/Nebula.cpp:1097
 msgid "nebula"
-msgstr ""
+msgstr "stjernetåge"
 
 #: src/core/modules/Nebula.cpp:1100
 msgid "planetary nebula"
-msgstr ""
+msgstr "planetarisk tåge"
 
 #: src/core/modules/Nebula.cpp:1103
 msgid "dark nebula"
-msgstr ""
+msgstr "mørk tåge"
 
 #: src/core/modules/Nebula.cpp:1106
 msgid "cluster associated with nebulosity"
-msgstr ""
+msgstr "stjernehob associeret med stjernetåge"
 
 #: src/core/modules/Nebula.cpp:1109
 msgid "bipolar nebula"
-msgstr ""
+msgstr "bipolar tåge"
 
 #: src/core/modules/Nebula.cpp:1112
 msgid "emission nebula"
-msgstr ""
+msgstr "emissionståge"
 
 #: src/core/modules/Nebula.cpp:1115
 msgid "HII region"
-msgstr ""
+msgstr "HII-region"
 
 #: src/core/modules/Nebula.cpp:1118
 msgid "reflection nebula"
-msgstr ""
+msgstr "reflektionståge"
 
 #: src/core/modules/Nebula.cpp:1121
 msgid "supernova remnant"
-msgstr ""
+msgstr "rest fra supernova"
 
 #: src/core/modules/Nebula.cpp:1124
 msgid "stellar association"
-msgstr ""
+msgstr "stjernesamling"
 
 #: src/core/modules/Nebula.cpp:1127
 msgid "star cloud"
-msgstr ""
+msgstr "stjernesky"
 
 #: src/core/modules/Nebula.cpp:1130
 msgid "interstellar matter"
-msgstr ""
+msgstr "interstellart medium"
 
 #: src/core/modules/Nebula.cpp:1133
 msgid "emission object"
-msgstr ""
+msgstr "emissionsobjekt"
 
 #: src/core/modules/Nebula.cpp:1136
 msgid "BL Lac object"
-msgstr ""
+msgstr "BL Lac-objekt"
 
 #: src/core/modules/Nebula.cpp:1139
 msgid "blazar"
-msgstr ""
+msgstr "blazar"
 
 #: src/core/modules/Nebula.cpp:1142
 msgid "molecular cloud"
-msgstr ""
+msgstr "molekulær sky"
 
 #: src/core/modules/Nebula.cpp:1145
 msgid "young stellar object"
-msgstr ""
+msgstr "Ungt stjerneobjekt"
 
 #: src/core/modules/Nebula.cpp:1148
 msgid "possible quasar"
-msgstr ""
+msgstr "mulig kvasar"
 
 #: src/core/modules/Nebula.cpp:1151
 msgid "possible planetary nebula"
-msgstr ""
+msgstr "mulig planetarisk tåge"
 
 #: src/core/modules/Nebula.cpp:1154
 msgid "protoplanetary nebula"
-msgstr ""
+msgstr "protoplanetarisk tåge"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1157 src/core/modules/StarWrapper.cpp:53
-#: src/core/modules/StarWrapper.cpp:174 src/translations.h:46
+#: src/core/modules/StarWrapper.cpp:181 src/translations.h:46
 msgid "star"
-msgstr ""
+msgstr "stjerne"
 
 #: src/core/modules/Nebula.cpp:1160
 msgid "object of unknown nature"
-msgstr ""
+msgstr "objekt af ukendt karakter"
 
 #: src/core/modules/Nebula.cpp:1163
 msgid "undocumented type"
-msgstr ""
+msgstr "udokumenteret type"
 
 #: src/core/modules/NebulaMgr.cpp:364
 msgid "Deep-sky objects"
-msgstr ""
+msgstr "Deep-sky-objekter"
 
 #: src/core/modules/NebulaMgr.cpp:365
 msgid "Toggle DSO type filter"
-msgstr ""
+msgstr "Slå DSO-typefilter til/fra"
 
 #: src/core/modules/Planet.cpp:238 src/core/modules/MinorPlanet.cpp:232
 #: src/core/modules/MinorPlanet.cpp:236 src/core/modules/Comet.cpp:194
-#: src/core/modules/StarWrapper.cpp:198 plugins/Quasars/src/Quasar.cpp:113
+#: src/core/modules/StarWrapper.cpp:205 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Absolut lysstyrke: %1"
@@ -749,30 +751,30 @@ msgstr "Absolut lysstyrke: %1"
 #: src/core/modules/Comet.cpp:208
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
-msgstr ""
+msgstr "Afstand fra Solen: %1 AU (%2 km)"
 
 #: src/core/modules/Planet.cpp:265 src/core/modules/MinorPlanet.cpp:258
 #: src/core/modules/Comet.cpp:215
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "Afstand fra Solen: %1 AU (%2 mio km)"
 
 #: src/core/modules/Planet.cpp:275 src/core/modules/MinorPlanet.cpp:268
 #: src/core/modules/Comet.cpp:226
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "Afstand: %1 AU (%2 km)"
 
 #: src/core/modules/Planet.cpp:282 src/core/modules/MinorPlanet.cpp:275
 #: src/core/modules/Comet.cpp:233
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "Afstand: %1 AU (%2 mio km)"
 
 #: src/core/modules/Planet.cpp:296 src/core/modules/Planet.cpp:300
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr ""
+msgstr "Tilsyneladende diameter: %1. Med ringe: %2"
 
 #: src/core/modules/Planet.cpp:307 src/core/modules/Planet.cpp:309
 #: src/core/modules/MinorPlanet.cpp:286 src/core/modules/MinorPlanet.cpp:288
@@ -784,82 +786,83 @@ msgstr "Tilsyneladende diameter: %1"
 #: src/core/modules/Planet.cpp:325 src/core/modules/MinorPlanet.cpp:296
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
-msgstr ""
+msgstr "Siderisk omløbstid: %1 dage (%2 a)"
 
 #: src/core/modules/Planet.cpp:328
 #, qt-format
 msgid "Sidereal day: %1"
-msgstr ""
+msgstr "Siderisk dag: %1"
 
 #: src/core/modules/Planet.cpp:329
 #, qt-format
 msgid "Mean solar day: %1"
-msgstr ""
+msgstr "Middelsoldag: %1"
 
 #: src/core/modules/Planet.cpp:333
 msgid "The period of rotation is chaotic"
-msgstr ""
+msgstr "Omløbstiden er kaotisk"
 
 #: src/core/modules/Planet.cpp:343 src/core/modules/Planet.cpp:348
 #, qt-format
 msgid "Phase Angle: %1"
-msgstr ""
+msgstr "Fasevinkel: %1"
 
 #: src/core/modules/Planet.cpp:344 src/core/modules/Planet.cpp:349
 #, qt-format
 msgid "Elongation: %1"
-msgstr ""
+msgstr "Elongation: %1"
 
 #: src/core/modules/Planet.cpp:352
 #, qt-format
 msgid "Phase: %1"
-msgstr ""
+msgstr "Fase: %1"
 
 #: src/core/modules/Planet.cpp:353
 #, qt-format
 msgid "Illuminated: %1%"
-msgstr ""
+msgstr "Oplyst: %1%"
 
 #: src/core/modules/Planet.cpp:365
 #, qt-format
 msgid "Eclipse Factor: %1%"
-msgstr ""
+msgstr "Formørkelsesfaktor: %1%"
 
+# Uncertain of Danish term. Overgangsnavn used in Norwegian.
 #: src/core/modules/MinorPlanet.cpp:206
 #, qt-format
 msgid "Provisional designation: %1"
-msgstr ""
+msgstr "Overgangsnavn: %1"
 
 #: src/core/modules/Comet.cpp:170
 msgctxt "type of comet"
 msgid "non-periodic"
-msgstr ""
+msgstr "ikke-periodisk"
 
 #: src/core/modules/Comet.cpp:174
 msgctxt "type of comet"
 msgid "periodic"
-msgstr ""
+msgstr "periodisk"
 
 #. TRANSLATORS: Sidereal (orbital) period for comets in Julian years (symbol: a)
 #: src/core/modules/Comet.cpp:246
 #, qt-format
 msgid "Sidereal period: %1 a"
-msgstr ""
+msgstr "Siderisk omløbstid: %1 a"
 
 #: src/core/modules/Comet.cpp:251
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
-msgstr ""
+msgstr "Hastighed: %1 km/s"
 
 #: src/core/modules/Comet.cpp:262
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
-msgstr ""
+msgstr "Diameter af koma (estimeret): %1 km"
 
 #: src/core/modules/Comet.cpp:266
 #, no-c-format, qt-format
 msgid "Gas tail length (estimate): %1 Mio km"
-msgstr ""
+msgstr "Længde på gashale (estimeret): %1 mio km"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:196 src/gui/AstroCalcDialog.cpp:455
@@ -870,12 +873,12 @@ msgstr "Planeter"
 #: src/core/modules/SolarSystem.cpp:197
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:316
 msgid "Planet labels"
-msgstr ""
+msgstr "Planetetiketter"
 
 #: src/core/modules/SolarSystem.cpp:198
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Planet orbits"
-msgstr "Planet kredsløb"
+msgstr "Planetkredsløb"
 
 #: src/core/modules/SolarSystem.cpp:199
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:324
@@ -884,93 +887,105 @@ msgstr "Planetbaner"
 
 #: src/core/modules/SolarSystem.cpp:201
 msgid "Planet markers"
-msgstr ""
+msgstr "Planetmarkører"
 
 #: src/core/modules/SolarSystem.cpp:203
 msgid "Native planet names (from starlore)"
-msgstr ""
+msgstr "Lokale planetnavne (fra starlore)"
 
-#: src/core/modules/StarWrapper.cpp:155
+#: src/core/modules/StarWrapper.cpp:162
 msgid "eruptive variable star"
-msgstr ""
-
-#: src/core/modules/StarWrapper.cpp:157
-msgid "pulsating variable star"
-msgstr ""
-
-#: src/core/modules/StarWrapper.cpp:159
-msgid "rotating variable star"
-msgstr ""
-
-#: src/core/modules/StarWrapper.cpp:161
-msgid "cataclysmic variable star"
-msgstr ""
+msgstr "eruptiv variabel stjerne"
 
 #: src/core/modules/StarWrapper.cpp:164
-msgid "eclipsing binary system"
-msgstr ""
+msgid "pulsating variable star"
+msgstr "pulserende variabel stjerne"
+
+#: src/core/modules/StarWrapper.cpp:166
+msgid "rotating variable star"
+msgstr "roterende variabel stjerne"
 
 #: src/core/modules/StarWrapper.cpp:168
-msgid "variable star"
-msgstr ""
+msgid "cataclysmic variable star"
+msgstr "katalysmisk variabel stjerne"
 
-#: src/core/modules/StarWrapper.cpp:172
-msgid "double star"
-msgstr ""
+#: src/core/modules/StarWrapper.cpp:171
+msgid "eclipsing binary system"
+msgstr "formørkelsesvariabelt dobbeltstjernesystem"
+
+#: src/core/modules/StarWrapper.cpp:175
+msgid "variable star"
+msgstr "variabel stjerne"
 
 #: src/core/modules/StarWrapper.cpp:179
+msgid "double star"
+msgstr "dobbeltstjerne"
+
+#: src/core/modules/StarWrapper.cpp:186
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
-msgstr ""
+msgstr "Type: <b>%1, %2</b>"
 
-#: src/core/modules/StarWrapper.cpp:220
+#: src/core/modules/StarWrapper.cpp:227
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
-msgstr ""
+msgstr "Lysstyrkeinterval: <b>%1</b>%2<b>%3</b> (fotometrisk system: %4)"
 
-#: src/core/modules/StarWrapper.cpp:222
+#: src/core/modules/StarWrapper.cpp:229
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
-msgstr ""
+msgstr "Lysstyrkeinterval: <b>%1</b>%2<b>%3/%4</b> (fotometrisk system: %5)"
 
-#: src/core/modules/StarWrapper.cpp:238
+#: src/core/modules/StarWrapper.cpp:245
 #: plugins/Exoplanets/src/Exoplanet.cpp:293
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Spektraltype: %1"
 
-#: src/core/modules/StarWrapper.cpp:244
+#: src/core/modules/StarWrapper.cpp:251
 #, qt-format
 msgid "Period: %1 days"
-msgstr ""
+msgstr "Periode: %1 dage"
 
-#: src/core/modules/StarWrapper.cpp:253
+#: src/core/modules/StarWrapper.cpp:260
 #, qt-format
 msgid "Next minimum light: %1 UTC"
-msgstr ""
-
-#: src/core/modules/StarWrapper.cpp:255
-#, qt-format
-msgid "Next maximum light: %1 UTC"
-msgstr ""
+msgstr "Næste minimum lys: %1 UTC"
 
 #: src/core/modules/StarWrapper.cpp:262
 #, qt-format
-msgid "Duration of eclipse: %1%"
-msgstr ""
+msgid "Next maximum light: %1 UTC"
+msgstr "Næste maksimum lys: %1 UTC"
 
-#: src/core/modules/StarWrapper.cpp:264
+#: src/core/modules/StarWrapper.cpp:269
+#, qt-format
+msgid "Duration of eclipse: %1%"
+msgstr "Varighed af formørkelse: %1%"
+
+#: src/core/modules/StarWrapper.cpp:271
 #, qt-format
 msgid "Rising time: %1%"
+msgstr "Opgangstid: %1%"
+
+#: src/core/modules/StarWrapper.cpp:276
+msgid "Year of last satisfactory observation"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:277
+msgid "Position angle"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:278 src/gui/AstroCalcDialog.cpp:479
+msgid "Separation"
 msgstr ""
 
 #: src/core/modules/MilkyWay.cpp:75
 msgid "Milky Way"
-msgstr ""
+msgstr "Mælkevejen"
 
 #: src/core/modules/ZodiacalLight.cpp:81
 msgid "Zodiacal Light"
-msgstr ""
+msgstr "Zodiakallys"
 
 #: src/core/StelApp.cpp:516
 msgid "Night mode"
@@ -987,7 +1002,7 @@ msgstr "Dato og tidspunkt"
 
 #: src/core/StelCore.cpp:221 src/core/StelMovementMgr.cpp:154
 msgid "Movement and Selection"
-msgstr "Navigation og Valg"
+msgstr "Navigation og markering"
 
 #: src/core/StelCore.cpp:224
 msgid "Increase time speed"
@@ -999,11 +1014,11 @@ msgstr "Sænk tidsraten"
 
 #: src/core/StelCore.cpp:226
 msgid "Increase time speed (a little)"
-msgstr "Øg tidsraten (en smugle)"
+msgstr "Øg tidsraten (en smule)"
 
 #: src/core/StelCore.cpp:227
 msgid "Decrease time speed (a little)"
-msgstr "Sænk tidsraten (en smugle)"
+msgstr "Sænk tidsraten (en smule)"
 
 #: src/core/StelCore.cpp:228
 msgid "Set normal time rate"
@@ -1027,11 +1042,11 @@ msgstr "Læg 1 soldag til"
 
 #: src/core/StelCore.cpp:233
 msgid "Add 7 solar days"
-msgstr ""
+msgstr "Læg 7 soldage til"
 
 #: src/core/StelCore.cpp:234
 msgid "Subtract 1 solar hour"
-msgstr "Træk 1 soldag fra"
+msgstr "Træk 1 soltime fra"
 
 #: src/core/StelCore.cpp:235
 msgid "Subtract 1 solar day"
@@ -1039,143 +1054,143 @@ msgstr "Træk 1 soldag fra"
 
 #: src/core/StelCore.cpp:236
 msgid "Subtract 7 solar days"
-msgstr ""
+msgstr "Træk 7 soldage fra"
 
 #: src/core/StelCore.cpp:237
 msgid "Add 1 sidereal day"
-msgstr "Tilføj et siderisk døgn"
+msgstr "Læg 1 siderisk dag til"
 
 #: src/core/StelCore.cpp:238
 msgid "Add 1 sidereal year"
-msgstr ""
+msgstr "Læg 1 siderisk år til"
 
 #: src/core/StelCore.cpp:239
 msgid "Add 100 sidereal years"
-msgstr ""
+msgstr "Læg 100 sideriske år til"
 
 #: src/core/StelCore.cpp:240
 msgid "Add 1 synodic month"
-msgstr ""
+msgstr "Læg 1 synodisk måned til"
 
 #: src/core/StelCore.cpp:241
 msgid "Add 1 draconic month"
-msgstr ""
+msgstr "Læg 1 drakonisk måned til"
 
 #: src/core/StelCore.cpp:242
 msgid "Add 1 draconic year"
-msgstr ""
+msgstr "Læg 1 drakonisk år til"
 
 #: src/core/StelCore.cpp:243
 msgid "Add 1 anomalistic month"
-msgstr ""
+msgstr "Læg 1 anomalistisk måned til"
 
 #: src/core/StelCore.cpp:244
 msgid "Add 1 anomalistic year"
-msgstr ""
+msgstr "Læg 1 anomalistisk år til"
 
 #: src/core/StelCore.cpp:245
 msgid "Add 100 anomalistic years"
-msgstr ""
+msgstr "Læg 100 anomalistiske år til"
 
 #: src/core/StelCore.cpp:246
 msgid "Add 1 mean tropical month"
-msgstr ""
+msgstr "Læg 1 middeltropisk måned til"
 
 #: src/core/StelCore.cpp:247
 msgid "Add 1 mean tropical year"
-msgstr ""
+msgstr "Læg 1 middeltropisk år til"
 
 #: src/core/StelCore.cpp:248
 msgid "Add 100 mean tropical years"
-msgstr ""
+msgstr "Læg 100 middeltropiske år til"
 
 #: src/core/StelCore.cpp:249
 msgid "Add 1 tropical year"
-msgstr ""
+msgstr "Læg 1 tropisk år til"
 
 #: src/core/StelCore.cpp:250
 msgid "Add 1 Julian year"
-msgstr ""
+msgstr "Læg 1 juliansk år til"
 
 #: src/core/StelCore.cpp:251
 msgid "Add 1 Julian century"
-msgstr ""
+msgstr "Læg 1 juliansk århundrede til"
 
 #: src/core/StelCore.cpp:252
 msgid "Add 1 Gaussian year"
-msgstr ""
+msgstr "Læg 1 gaussisk år til"
 
 #: src/core/StelCore.cpp:253
 msgid "Subtract 1 sidereal day"
-msgstr "Fratræk et siderisk døgn"
+msgstr "Træk 1 siderisk dag fra"
 
 #: src/core/StelCore.cpp:254
 msgid "Subtract 1 sidereal year"
-msgstr ""
+msgstr "Træk 1 siderisk år fra"
 
 #: src/core/StelCore.cpp:255
 msgid "Subtract 100 sidereal years"
-msgstr ""
+msgstr "Træk 100 sideriske år fra"
 
 #: src/core/StelCore.cpp:256
 msgid "Subtract 1 synodic month"
-msgstr ""
+msgstr "Træk 1 synodisk måned fra"
 
 #: src/core/StelCore.cpp:257
 msgid "Subtract 1 draconic month"
-msgstr ""
+msgstr "Træk 1 drakonisk måned fra"
 
 #: src/core/StelCore.cpp:258
 msgid "Subtract 1 draconic year"
-msgstr ""
+msgstr "Træk 1 drakonisk år fra"
 
 #: src/core/StelCore.cpp:259
 msgid "Subtract 1 anomalistic month"
-msgstr ""
+msgstr "Træk 1 anomalistisk måned fra"
 
 #: src/core/StelCore.cpp:260
 msgid "Subtract 1 anomalistic year"
-msgstr ""
+msgstr "Træk 1 anomalistisk år fra"
 
 #: src/core/StelCore.cpp:261
 msgid "Subtract 100 anomalistic years"
-msgstr ""
+msgstr "Træk 100 anomalistiske år fra"
 
 #: src/core/StelCore.cpp:262
 msgid "Subtract 1 mean tropical month"
-msgstr ""
+msgstr "Træk 1 middeltropisk måned fra"
 
 #: src/core/StelCore.cpp:263
 msgid "Subtract 1 mean tropical year"
-msgstr ""
+msgstr "Træk 1 middeltropisk år fra"
 
 #: src/core/StelCore.cpp:264
 msgid "Subtract 100 mean tropical years"
-msgstr ""
+msgstr "Træk 100 middeltropiske år fra"
 
 #: src/core/StelCore.cpp:265
 msgid "Subtract 1 tropical year"
-msgstr ""
+msgstr "Træk 1 tropisk år fra"
 
 #: src/core/StelCore.cpp:266
 msgid "Subtract 1 Julian year"
-msgstr ""
+msgstr "Træk 1 juliansk år fra"
 
 #: src/core/StelCore.cpp:267
 msgid "Subtract 1 Julian century"
-msgstr ""
+msgstr "Træk 1 juliansk århundrede fra"
 
 #: src/core/StelCore.cpp:268
 msgid "Subtract 1 Gaussian year"
-msgstr ""
+msgstr "Træk 1 gaussisk år fra"
 
 #: src/core/StelCore.cpp:270
 msgid "Set home planet to selected planet"
-msgstr "Sæt hjemplaneten til valgte planet"
+msgstr "Sæt hjemplaneten til den markerede planet"
 
 #: src/core/StelCore.cpp:271
 msgid "Go to home"
-msgstr ""
+msgstr "Gå til hjem"
 
 #: src/core/StelCore.cpp:273
 msgid "Flip scene horizontally"
@@ -1187,7 +1202,7 @@ msgstr "Vend billedet vertikalt"
 
 #: src/core/StelCore.cpp:1774
 msgid "Correction is disabled. Use only if you know what you are doing!"
-msgstr ""
+msgstr "Korrektion er deaktiveret. Brug kun dette, hvis du ved, hvad du gør!"
 
 #: src/core/StelCore.cpp:1777
 #, qt-format
@@ -1381,7 +1396,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:1852
 msgid "Used by default."
-msgstr ""
+msgstr "Bruges som standard."
 
 #: src/core/StelCore.cpp:1855
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
@@ -1420,7 +1435,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:1870 src/core/SimbadSearcher.cpp:151
 msgid "Error"
-msgstr ""
+msgstr "Fejl"
 
 #: src/core/StelCore.cpp:1920
 msgid "with meaningless values outside this range"
@@ -1454,11 +1469,11 @@ msgstr ""
 
 #: src/core/StelProjector.cpp:131
 msgid "Maximum FOV: "
-msgstr "Maksimum synsfelt: "
+msgstr "Maksimalt synsfelt: "
 
 #: src/core/StelProjectorClasses.cpp:27
 msgid "Perspective"
-msgstr "Perspektiv"
+msgstr "Perspektivisk"
 
 #: src/core/StelProjectorClasses.cpp:32
 msgid ""
@@ -1466,6 +1481,9 @@ msgid ""
 "equator, ecliptic, hour lines, etc. into straight lines. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
+"Perspektivisk projektion afbilder horisonten og andre større cirkler såsom "
+"ækvator, ekliptika, timelinjer, osv. som rette linjer. Det matematiske navn "
+"for denne projektionsmetode er <i>gnomonisk projektion</i>."
 
 #: src/core/StelProjectorClasses.cpp:87
 msgid "Equal Area"
@@ -1479,7 +1497,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Stereographic"
-msgstr "Stereografisk projektion"
+msgstr "Stereografisk"
 
 #: src/core/StelProjectorClasses.cpp:150
 msgid ""
@@ -1592,7 +1610,7 @@ msgstr "Timevinkel/DE: %1/%2"
 #: src/core/StelObject.cpp:154 src/core/StelObject.cpp:157
 #: src/core/StelObject.cpp:188 src/core/StelObject.cpp:190
 msgid "(apparent)"
-msgstr ""
+msgstr "(tilsyneladende)"
 
 #: src/core/StelObject.cpp:188 src/core/StelObject.cpp:190
 #: src/core/StelObject.cpp:195 src/core/StelObject.cpp:197
@@ -1639,11 +1657,11 @@ msgstr "Skift mellem ækvatorial og azimutal opstilling"
 
 #: src/core/StelMovementMgr.cpp:156
 msgid "Center on selected object"
-msgstr "Centrér på det valgte objekt"
+msgstr "Centrér på det markerede objekt"
 
 #: src/core/StelMovementMgr.cpp:157
 msgid "Zoom in on selected object"
-msgstr "Zoom ind på det valgte objekt"
+msgstr "Zoom ind på det markerede objekt"
 
 #: src/core/StelMovementMgr.cpp:158
 msgid "Zoom out"
@@ -1777,9 +1795,9 @@ msgid ""
 "Star count: %2 Million\n"
 "Magnitude range: %3 - %4"
 msgstr ""
-"Overførselsstørrelse: %1MB\n"
+"Overførselsstørrelse: %1 MB\n"
 "Antal stjerner: %2 millioner\n"
-"Interval for lysstyrke: %3 - %4"
+"Lysstyrkeinterval: %3 - %4"
 
 #: src/gui/ConfigurationDialog.cpp:1116 src/gui/ConfigurationDialog.cpp:1152
 #, qt-format
@@ -1818,7 +1836,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1340
 msgid "Without correction"
-msgstr ""
+msgstr "Uden korrektion"
 
 #: src/gui/ConfigurationDialog.cpp:1341
 msgid "Schoch (1931)"
@@ -1975,7 +1993,7 @@ msgstr "CTRL +pil op/ned"
 
 #: src/gui/HelpDialog.cpp:157
 msgid "Select object"
-msgstr "Vælg objekt"
+msgstr "Markér objekt"
 
 #: src/gui/HelpDialog.cpp:158
 msgid "Left click"
@@ -1983,7 +2001,7 @@ msgstr "Venstre klik"
 
 #: src/gui/HelpDialog.cpp:166
 msgid "Clear selection"
-msgstr "Nulstil valg"
+msgstr "Nulstil markering"
 
 #: src/gui/HelpDialog.cpp:167
 msgid "Right click"
@@ -2340,7 +2358,7 @@ msgstr ""
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:114
 msgid "Select a ZIP archive that contains a Stellarium landscape"
-msgstr "Vælg et ZIP-arkiv der indeholder et Stellarium landskab"
+msgstr "Vælg et ZIP-arkiv, der indeholder et Stellarium-landskab"
 
 #. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
 #: src/gui/AddRemoveLandscapesDialog.cpp:116
@@ -2381,7 +2399,7 @@ msgstr "Landskab \"%1\" er blevet fjernet med succes."
 #: src/gui/AddRemoveLandscapesDialog.cpp:167
 #: src/gui/AddRemoveLandscapesDialog.cpp:237
 msgid "The selected landscape could not be (completely) removed."
-msgstr "Det valgte landskab kunne ikke (helt) fjernes."
+msgstr "Det valgte landskab kunne ikke fjernes (helt)."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:190
@@ -2400,8 +2418,8 @@ msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
 msgstr ""
-"Den valgte fil er ikke et ZIP-arkiv eller indeholder ikke et landskab til "
-"Stellarium."
+"Den valgte fil er ikke et ZIP-arkiv eller indeholder ikke et Stellarium-"
+"landskab."
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
 #: src/gui/AddRemoveLandscapesDialog.cpp:229
@@ -2421,7 +2439,7 @@ msgstr ""
 
 #: src/gui/ScriptConsole.cpp:77
 msgid "selected text"
-msgstr ""
+msgstr "markeret tekst"
 
 #: src/gui/ScriptConsole.cpp:78
 msgid "clear text"
@@ -2673,10 +2691,6 @@ msgstr ""
 msgid "Object 2"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:479
-msgid "Separation"
-msgstr ""
-
 #: src/gui/AstroCalcDialog.cpp:635
 msgid "Conjunction"
 msgstr ""
@@ -2855,17 +2869,17 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:95
 msgid "Nebulae"
-msgstr ""
+msgstr "Stjernetåger"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:97
 msgid "Planetary nebulae"
-msgstr ""
+msgstr "Planetariske tåger"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:99
 msgid "Dark nebulae"
-msgstr ""
+msgstr "Mørke tåger"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:101
@@ -2880,7 +2894,7 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:105
 msgid "Reflection nebulae"
-msgstr ""
+msgstr "Reflektionståger"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:107 src/ui_viewDialog.h:1713
@@ -2920,12 +2934,12 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:121
 msgid "Bipolar nebulae"
-msgstr ""
+msgstr "Bipolare tåger"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:123
 msgid "Emission nebulae"
-msgstr ""
+msgstr "Emissionståger"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:125 src/ui_viewDialog.h:1706
@@ -2940,7 +2954,7 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:129
 msgid "Emission objects"
-msgstr ""
+msgstr "Emissionsobjekter"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:131
@@ -2970,12 +2984,12 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:141
 msgid "Possible Planetary Nebulae"
-msgstr ""
+msgstr "Mulige planetariske tåger"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:143
 msgid "Protoplanetary Nebulae"
-msgstr ""
+msgstr "Protoplanetariske tåger"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:145 src/ui_viewDialog.h:1670
@@ -4994,11 +5008,11 @@ msgstr "Funkeling:"
 
 #: src/ui_viewDialog.h:1603
 msgid "Limit the magnitude of stars"
-msgstr ""
+msgstr "Begræns lysstyrken for stjerner"
 
 #: src/ui_viewDialog.h:1605 src/ui_viewDialog.h:1644 src/ui_viewDialog.h:1730
 msgid "Limit magnitude:"
-msgstr ""
+msgstr "Begræns lysstyrke:"
 
 #: src/ui_viewDialog.h:1607
 msgid "Dim faint stars when a very bright object is visible"
@@ -5043,7 +5057,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1625
 msgid "Show planet markers"
-msgstr "Vis planet markeringer"
+msgstr "Vis planetmarkører"
 
 #: src/ui_viewDialog.h:1626
 msgid "Show planet orbits"
@@ -5089,7 +5103,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1642
 msgid "Limit the magnitude of solar system objects"
-msgstr ""
+msgstr "Begræns lysstyrken for objekter i solsystemet"
 
 #: src/ui_viewDialog.h:1645
 msgid "Scale Moon:"
@@ -5189,7 +5203,7 @@ msgstr "Andet"
 
 #: src/ui_viewDialog.h:1711
 msgid "Planetary Nebulae"
-msgstr ""
+msgstr "Planetariske tåger"
 
 #: src/ui_viewDialog.h:1712
 msgid "Galaxies"
@@ -5197,21 +5211,23 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1714
 msgid "Dark Nebulae"
-msgstr ""
+msgstr "Mørke tåger"
 
 #: src/ui_viewDialog.h:1715
 msgid "Bright Nebulae"
-msgstr ""
+msgstr "Lysstærke tåger"
 
 #: src/ui_viewDialog.h:1718
 msgid "Hints"
-msgstr ""
+msgstr "Fif"
 
 #: src/ui_viewDialog.h:1720
 msgid ""
 "Use surface brightness of deep-sky objects for scale of the visibility of "
 "their markers and labels."
 msgstr ""
+"Brug deep-sky-objekters overfladelysstyrke som skala for synligheden af "
+"deres markører og etiketter."
 
 #: src/ui_viewDialog.h:1722
 msgid "Use surface brightness"
@@ -5220,15 +5236,19 @@ msgstr ""
 #: src/ui_viewDialog.h:1724
 msgid "Use hints proportional to angular size of deep-sky objects"
 msgstr ""
+"Brug fif, der er proportionale med den tilsyneladende størrelse på deep-sky-"
+"objekter"
 
 #: src/ui_viewDialog.h:1726
 msgid "Use proportional hints"
-msgstr ""
+msgstr "Brug proportionale fif"
 
 #: src/ui_viewDialog.h:1728
 msgid ""
 "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
+"Begræns lysstyrke (for observatører med kikkerter/det blotte øje) for deep-"
+"sky-objekter."
 
 #: src/ui_viewDialog.h:1731
 msgid "Celestial Sphere"
@@ -5316,7 +5336,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1781
 msgid "Labels for the Cardinal directions."
-msgstr ""
+msgstr "Etiketter for kompasretningerne."
 
 #: src/ui_viewDialog.h:1785
 msgid "Show meridian line."
@@ -5382,7 +5402,7 @@ msgstr "Benyt tilhørende planet og position"
 
 #: src/ui_viewDialog.h:1814
 msgid "Show landscape labels"
-msgstr ""
+msgstr "Vis landskabsetiketter"
 
 #: src/ui_viewDialog.h:1815
 msgid "Show fog"
@@ -5427,7 +5447,7 @@ msgstr "Brug denne himmelkultur som standard"
 
 #: src/ui_viewDialog.h:1834
 msgid "Show labels"
-msgstr "Vis labels"
+msgstr "Vis etiketter"
 
 #: src/ui_viewDialog.h:1836
 msgid "Select if you want names abbreviated, original or translated"
@@ -5468,15 +5488,15 @@ msgstr "Himlen"
 #: src/ui_viewDialog.h:1857
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
-msgstr ""
+msgstr "DSO"
 
 #: src/ui_viewDialog.h:1859
 msgid "Deep-Sky Objects"
-msgstr ""
+msgstr "Deep-sky-objekter"
 
 #: src/ui_viewDialog.h:1862
 msgid "Markings"
-msgstr "Markeringer"
+msgstr "Markører"
 
 #: src/ui_viewDialog.h:1864
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:445
@@ -5594,7 +5614,7 @@ msgstr "Retning der vises når Stellarium starter"
 
 #: src/ui_configurationDialog.h:1124 src/ui_configurationDialog.h:1314
 msgid "Selected object information"
-msgstr "Information for valgte objekt"
+msgstr "Information for markerede objekt"
 
 #: src/ui_configurationDialog.h:1126
 msgid "Display all information available"
@@ -5655,7 +5675,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1152
 msgid "Absolute magnitude"
-msgstr ""
+msgstr "Absolut lysstyrke"
 
 #: src/ui_configurationDialog.h:1153
 msgid "Galactic coordinates"
@@ -5663,7 +5683,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1154
 msgid "Visual magnitude"
-msgstr ""
+msgstr "Visuel lysstyrke"
 
 #: src/ui_configurationDialog.h:1156
 msgid "Angular or physical size"
@@ -5786,7 +5806,7 @@ msgstr "Systemdato kl:"
 
 #: src/ui_configurationDialog.h:1214
 msgid "Time correction"
-msgstr ""
+msgstr "Tidskorrektion"
 
 #: src/ui_configurationDialog.h:1217
 msgid "Edit equation"
@@ -5822,11 +5842,11 @@ msgstr "Skjul andre stjernebilleder når der vælges et"
 
 #: src/ui_configurationDialog.h:1234
 msgid "Select single constellation"
-msgstr "Udvælg enkelt konstellation"
+msgstr "Markér enkelt stjernebillede"
 
 #: src/ui_configurationDialog.h:1236
 msgid "Align labels with the horizon"
-msgstr "Juster etiketter vandret"
+msgstr "Juster etiketter til horisonten"
 
 #: src/ui_configurationDialog.h:1238
 msgid "Gravity labels"
@@ -5955,7 +5975,7 @@ msgstr "Luk vindue når skript kører"
 
 #: src/ui_configurationDialog.h:1296
 msgid "Run the selected script"
-msgstr "Kør de valgte skript"
+msgstr "Kør det valgte skript"
 
 #: src/ui_configurationDialog.h:1300
 msgid "Stop a running script"
@@ -5992,7 +6012,7 @@ msgstr "Skript"
 
 #: src/ui_configurationDialog.h:1323
 msgid "Plugins"
-msgstr "Tilføjelser"
+msgstr "Udvidelsesmoduler"
 
 #: src/ui_addRemoveLandscapesDialog.h:265
 msgid "Add/Remove Landscapes"
@@ -6507,7 +6527,7 @@ msgstr ""
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:519
 msgctxt "tab in plugin windows"
 msgid "About"
-msgstr ""
+msgstr "Om"
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:53
 #: plugins/CompassMarks/src/CompassMarks.cpp:96
@@ -7182,7 +7202,7 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:143
 msgid "Satellite hints"
-msgstr "satellit tips"
+msgstr "Fif om satellitter"
 
 #: plugins/Satellites/src/Satellites.cpp:144
 msgid "Satellite labels"
@@ -7200,92 +7220,92 @@ msgstr ""
 "standardfilen"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1793
+#: plugins/Satellites/src/Satellites.cpp:1799
 msgid "visual"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1795
+#: plugins/Satellites/src/Satellites.cpp:1801
 msgid "scientific"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1797
+#: plugins/Satellites/src/Satellites.cpp:1803
 msgid "communications"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1799
+#: plugins/Satellites/src/Satellites.cpp:1805
 msgid "navigation"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1801
+#: plugins/Satellites/src/Satellites.cpp:1807
 msgid "amateur"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1803
+#: plugins/Satellites/src/Satellites.cpp:1809
 msgid "weather"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1805
+#: plugins/Satellites/src/Satellites.cpp:1811
 msgid "geostationary"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1807
+#: plugins/Satellites/src/Satellites.cpp:1813
 msgid "non-operational"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1809
+#: plugins/Satellites/src/Satellites.cpp:1815
 msgid "gps"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:1811
+#: plugins/Satellites/src/Satellites.cpp:1817
 msgid "glonass"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:1813
+#: plugins/Satellites/src/Satellites.cpp:1819
 msgid "galileo"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1815
+#: plugins/Satellites/src/Satellites.cpp:1821
 msgid "iridium"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:1817
+#: plugins/Satellites/src/Satellites.cpp:1823
 msgid "stations"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:1819
+#: plugins/Satellites/src/Satellites.cpp:1825
 msgid "education"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:1821
+#: plugins/Satellites/src/Satellites.cpp:1827
 msgid "observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1832
+#: plugins/Satellites/src/Satellites.cpp:1838
 msgid "The Hubble Space Telescope"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1834
+#: plugins/Satellites/src/Satellites.cpp:1840
 msgid "The International Space Station"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1836
+#: plugins/Satellites/src/Satellites.cpp:1842
 msgid "China's first space station"
 msgstr ""
 
@@ -7693,7 +7713,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:719
 msgid "Label font size (pixels):"
-msgstr ""
+msgstr "Skrifttypestørrelse på etiketter (pixels):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:720
 msgid "Orbit lines"
@@ -7884,7 +7904,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:219
 #, qt-format
 msgid "Move telescope #%1 to selected object"
-msgstr "Flyt teleskop #%1 til det valgte objekt"
+msgstr "Flyt teleskop nr. %1 til det markerede objekt"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:173
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:223
@@ -8953,7 +8973,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:410
 msgid "Show telescope labels"
-msgstr ""
+msgstr "Vis teleskopetiketter"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
 msgid "Show telescope reticles"
@@ -9009,114 +9029,114 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:713
 msgid "January"
-msgstr ""
+msgstr "Januar"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:713
 msgid "February"
-msgstr ""
+msgstr "Februar"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:713
 msgid "March"
-msgstr ""
+msgstr "Marts"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:713
 msgid "April"
-msgstr ""
+msgstr "April"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:713
 msgid "May"
-msgstr ""
+msgstr "Maj"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:713
 msgid "June"
-msgstr ""
+msgstr "Juni"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:713
 msgid "July"
-msgstr ""
+msgstr "Juli"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:713
 msgid "August"
-msgstr ""
+msgstr "August"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:713
 msgid "September"
-msgstr ""
+msgstr "September"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:713
 msgid "October"
-msgstr ""
+msgstr "Oktober"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:254
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:713
 msgid "November"
-msgstr ""
+msgstr "November"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:255
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:713
 msgid "December"
-msgstr ""
+msgstr "December"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:267
 msgid "First week"
-msgstr ""
+msgstr "Første uge"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:268
 msgid "Second week"
-msgstr ""
+msgstr "Anden uge"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:269
 msgid "Third week"
-msgstr ""
+msgstr "Tredje uge"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:270
 msgid "Fourth week"
-msgstr ""
+msgstr "Fjerde uge"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:271
 msgid "Last week"
-msgstr ""
+msgstr "Sidste uge"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:280
 msgid "Sunday"
-msgstr ""
+msgstr "Søndag"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:281
 msgid "Monday"
-msgstr ""
+msgstr "Mandag"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:282
 msgid "Tuesday"
-msgstr ""
+msgstr "Tirsdag"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:283
 msgid "Wednesday"
-msgstr ""
+msgstr "Onsdag"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:284
 msgid "Thursday"
-msgstr ""
+msgstr "Torsdag"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:285
 msgid "Friday"
-msgstr ""
+msgstr "Fredag"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:286
 msgid "Saturday"
-msgstr ""
+msgstr "Lørdag"
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:106
 msgid "Time Zone plug-in"
-msgstr ""
+msgstr "Tidszone-udvidelsesmodul"
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:107
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:109
@@ -9124,67 +9144,67 @@ msgstr ""
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:83
 #, qt-format
 msgid "Version %1"
-msgstr ""
+msgstr "Version %1"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:448
 msgid "Define a time zone"
-msgstr ""
+msgstr "Definér en tidszone"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:450
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:381
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:383
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:392
 msgid "Time zone"
-msgstr ""
+msgstr "Tidszone"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:451
 msgid "Timezone name:"
-msgstr ""
+msgstr "Tidszonenavn:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:452
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:387
 msgid "Offset from UTC (hours):"
-msgstr ""
+msgstr "Forskydning fra UTC (timer):"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
 msgid "Daylight saving time (summer time)"
-msgstr ""
+msgstr "Sommertid"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:454
 msgid "DST timezone name:"
-msgstr ""
+msgstr "Tidszonenavn under sommertid:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:455
 msgid "DST offset from UTC (hours):"
-msgstr ""
+msgstr "DST-forskydning fra UTC (timer):"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:456
 msgid "Daylight saving time start"
-msgstr ""
+msgstr "Sommertid start"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:457
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:461
 msgid "Day:"
-msgstr ""
+msgstr "Dag:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:462
 msgid "Time of change:"
-msgstr ""
+msgstr "Tidspunkt for overgang:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:459
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:463
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
 msgid "Date:"
-msgstr ""
+msgstr "Dato:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:460
 msgid "Daylight saving time end"
-msgstr ""
+msgstr "Sommertid slut"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:464
 msgid "Use this definition"
-msgstr ""
+msgstr "Brug denne definition"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
 msgid ""
@@ -9193,71 +9213,75 @@ msgid ""
 "This behaviour can be changed by changing Stellarium's global time zone "
 "settings."
 msgstr ""
+"Som standard tolkes den viste tid i Stellarium som den lokale tid i "
+"systemets tidszone – ikke i den viste placerings tidszone. Denne adfærd can "
+"ændres ved at ændre Stellariums globale tidszoneindstillinger."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:385
 msgid "Use system settings (default)"
-msgstr ""
+msgstr "Brug systemindstillinger (standard)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:386
 msgid "Universal Coordinated Time (UTC)"
-msgstr ""
+msgstr "Koordineret universaltid (UTC)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
 msgid "(offset = local time - UTC time)"
-msgstr ""
+msgstr "(forskydning = lokal tid - UTC-tid)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:389
 msgid "User-defined:"
-msgstr ""
+msgstr "Brugerdefineret:"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
 msgid "Any changes will take effect the next time Stellarium is started."
-msgstr ""
+msgstr "Alle ændringer træder i kraft næste gang, Stellarium startes."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:404
 msgid "Display formats"
-msgstr ""
+msgstr "Visningsformater"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:394
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
 msgstr ""
+"Disse indstillinger styrer hvordan tid og dato vises i den nederste bjælke."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:211
 msgid "Time display format"
-msgstr ""
+msgstr "Tidsvisningsformat"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
 msgid "System default"
-msgstr ""
+msgstr "Systemstandard"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
 msgid "12-hour format"
-msgstr ""
+msgstr "12-timers format"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
 msgid "24-hour format"
-msgstr ""
+msgstr "24-timers format"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:200
 msgid "Date display format"
-msgstr ""
+msgstr "Datovisningsformat"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:401
 msgid "yyyy-mm-dd (ISO 8601)"
-msgstr ""
+msgstr "åååå-mm-dd (ISO 8601)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:402
 msgid "dd-mm-yyyy"
-msgstr ""
+msgstr "dd-mm-åååå"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:403
 msgid "mm-dd-yyyy"
-msgstr ""
+msgstr "mm-dd-åååå"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:90
 msgid "Text User Interface"
@@ -9268,6 +9292,8 @@ msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
 msgstr ""
+"Implementering via indstiksmodul af tekstgrænsefladen (TUI) i 0.9.x-serien, "
+"brugt i planetariumsystemer"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Solar System body"
@@ -9275,11 +9301,11 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:175
 msgid "Current date/time"
-msgstr ""
+msgstr "Aktuel dato/tid"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:180
 msgid "Set time zone"
-msgstr ""
+msgstr "Sæt tidszone"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:181
 msgid "Day keys"
@@ -9292,50 +9318,50 @@ msgstr ""
 #. TRANSLATORS: The current system time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:189
 msgid "system"
-msgstr ""
+msgstr "system"
 
 #. TRANSLATORS: A pre-set time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:191
 msgid "preset"
-msgstr ""
+msgstr "forvalgt"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:199
 msgid "mmddyyyy"
-msgstr ""
+msgstr "mmddåååå"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:199
 msgid "ddmmyyyy"
-msgstr ""
+msgstr "ddmmåååå"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:199
 msgid "yyyymmdd"
-msgstr ""
+msgstr "ååååmmdd"
 
 #. TRANSLATORS: 12-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:208
 msgid "12h"
-msgstr ""
+msgstr "12-timer"
 
 #. TRANSLATORS: 24-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:210
 msgid "24h"
-msgstr ""
+msgstr "24-timer"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:235
 msgid "Sky Language"
-msgstr ""
+msgstr "Himmelsprog"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "App Language"
-msgstr ""
+msgstr "App-sprog"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:256
 msgid "Show stars"
-msgstr ""
+msgstr "Vis stjerner"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:284
 msgid "Colors"
-msgstr ""
+msgstr "Farver"
 
 #. TRANSLATORS: Refers to constellation art
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:299
@@ -9348,27 +9374,27 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Nebula names"
-msgstr ""
+msgstr "Stjernetågenavne"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:370
 msgid "Nebula hints"
-msgstr ""
+msgstr "Fif om stjernetåger"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:374
 msgid "Galaxy hints"
-msgstr ""
+msgstr "Fif om galakser"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:378
 msgid "Bright nebulae hints"
-msgstr ""
+msgstr "Fif om lysstærke tåger"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:382
 msgid "Dark nebulae hints"
-msgstr ""
+msgstr "Fif om mørke tåger"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:386
 msgid "Clusters hints"
-msgstr ""
+msgstr "Fif om hobe"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:400
 msgid "Galactic equator line"
@@ -9783,7 +9809,7 @@ msgid "Mark the navigational stars"
 msgstr ""
 
 #. TRANSLATORS: The emphasis tags mark a title.
-#: plugins/NavStars/src/NavStars.cpp:310
+#: plugins/NavStars/src/NavStars.cpp:307
 msgid ""
 "The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> "
 "jointly published by Her Majesty's Nautical Almanac Office and the US Naval "
@@ -9793,7 +9819,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:316
+#: plugins/NavStars/src/NavStars.cpp:313
 #, qt-format
 msgid ""
 "The 81 stars that are listed in the <em>%1</em> published by the French "
@@ -9801,7 +9827,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:322
+#: plugins/NavStars/src/NavStars.cpp:319
 #, qt-format
 msgid ""
 "The 160 stars that are listed in the Russian Nautical Almanac (The original "
@@ -9996,7 +10022,7 @@ msgstr ""
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:268
 msgid "Plot all quasars without labels"
-msgstr ""
+msgstr "Angiv alle kvasarer uden etiketter"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:270
 msgid "Enable display of distribution for quasars"
@@ -10024,6 +10050,8 @@ msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
 msgstr ""
+"Dette udvidelsesmodul angiver positionen af diverse pulsarer, inkl. "
+"objektinformation om hver."
 
 #: plugins/Pulsars/src/Pulsars.cpp:167
 msgid "Show pulsars"
@@ -10224,7 +10252,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:274
 msgid "Plot all pulsars without labels"
-msgstr ""
+msgstr "Angiv alle pulsarer uden etiketter"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:276
 msgid "Enable display of distribution for pulsars"
@@ -10353,6 +10381,9 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
 msgstr ""
+"Dette udvidelsesmodul angiver positionen af stjerner med exoplaneter. Data "
+"om exoplaneter er udledt fra \"Extrasolar Planets Encyclopaedia\" på "
+"exoplanet.eu"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:169
 msgid "Show exoplanets"
@@ -10363,47 +10394,47 @@ msgid "Exoplanets configuration window"
 msgstr ""
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:967
+#: plugins/Exoplanets/src/Exoplanets.cpp:928
 msgid "Hot"
 msgstr ""
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:969
+#: plugins/Exoplanets/src/Exoplanets.cpp:930
 msgid "Warm"
 msgstr ""
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:971
+#: plugins/Exoplanets/src/Exoplanets.cpp:932
 msgid "Cold"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:974
+#: plugins/Exoplanets/src/Exoplanets.cpp:935
 msgid "Miniterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:976
+#: plugins/Exoplanets/src/Exoplanets.cpp:937
 msgid "Subterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:978
+#: plugins/Exoplanets/src/Exoplanets.cpp:939
 msgid "Terran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:980
+#: plugins/Exoplanets/src/Exoplanets.cpp:941
 msgid "Superterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:982
+#: plugins/Exoplanets/src/Exoplanets.cpp:943
 msgid "Jovian"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:984
+#: plugins/Exoplanets/src/Exoplanets.cpp:945
 msgid "Neptunian"
 msgstr ""
 
@@ -10501,6 +10532,8 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
 msgstr ""
+"Dette udvidelsesmodul angiver positionen af stjerner med exoplaneter. Data "
+"om exoplaneter er udledt fra \"%1Extrasolar Planets Encyclopaedia%2\""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:148
 #, qt-format
@@ -11061,7 +11094,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:467
 msgid "Plot all systems with exoplanets without labels"
-msgstr ""
+msgstr "Angiv alle systemer med exoplaneter uden etiketter"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:469
 msgid "Enable display of distribution for exoplanets"
@@ -11128,17 +11161,17 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:500
 msgctxt "tab in plugin windows"
 msgid "Diagram"
-msgstr ""
+msgstr "Diagram"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:501
 msgctxt "tab in plugin windows"
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:502
 msgctxt "tab in plugin windows"
 msgid "Websites"
-msgstr ""
+msgstr "Websteder"
 
 #: plugins/Observability/src/Observability.cpp:65
 msgid "Observability Analysis"
@@ -11158,77 +11191,77 @@ msgstr ""
 #: plugins/Observability/src/Observability.cpp:174
 msgctxt "short month name"
 msgid "Jan"
-msgstr ""
+msgstr "Jan"
 
 #: plugins/Observability/src/Observability.cpp:175
 msgctxt "short month name"
 msgid "Feb"
-msgstr ""
+msgstr "Feb"
 
 #: plugins/Observability/src/Observability.cpp:176
 msgctxt "short month name"
 msgid "Mar"
-msgstr ""
+msgstr "Mar"
 
 #: plugins/Observability/src/Observability.cpp:177
 msgctxt "short month name"
 msgid "Apr"
-msgstr ""
+msgstr "Apr"
 
 #: plugins/Observability/src/Observability.cpp:178
 msgctxt "short month name"
 msgid "May"
-msgstr ""
+msgstr "Maj"
 
 #: plugins/Observability/src/Observability.cpp:179
 msgctxt "short month name"
 msgid "Jun"
-msgstr ""
+msgstr "Jun"
 
 #: plugins/Observability/src/Observability.cpp:180
 msgctxt "short month name"
 msgid "Jul"
-msgstr ""
+msgstr "Jul"
 
 #: plugins/Observability/src/Observability.cpp:181
 msgctxt "short month name"
 msgid "Aug"
-msgstr ""
+msgstr "Aug"
 
 #: plugins/Observability/src/Observability.cpp:182
 msgctxt "short month name"
 msgid "Sep"
-msgstr ""
+msgstr "Sep"
 
 #: plugins/Observability/src/Observability.cpp:183
 msgctxt "short month name"
 msgid "Oct"
-msgstr ""
+msgstr "Okt"
 
 #: plugins/Observability/src/Observability.cpp:184
 msgctxt "short month name"
 msgid "Nov"
-msgstr ""
+msgstr "Nov"
 
 #: plugins/Observability/src/Observability.cpp:185
 msgctxt "short month name"
 msgid "Dec"
-msgstr ""
+msgstr "Dec"
 
 #. TRANSLATORS: Short for "hours".
 #: plugins/Observability/src/Observability.cpp:188
 msgid "h"
-msgstr ""
+msgstr "t"
 
 #. TRANSLATORS: Short for "minutes".
 #: plugins/Observability/src/Observability.cpp:190
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #. TRANSLATORS: Short for "seconds".
 #: plugins/Observability/src/Observability.cpp:192
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: plugins/Observability/src/Observability.cpp:193
 #, qt-format
@@ -12424,7 +12457,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:458
 msgid "Status:"
-msgstr ""
+msgstr "Status:"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:461
 msgid "Update"
@@ -12437,7 +12470,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "Search"
-msgstr ""
+msgstr "Søg"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
@@ -12561,7 +12594,7 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:285
 msgid "Coordinates:"
-msgstr ""
+msgstr "Koordinater:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:290
 msgid "Place of the string:"
