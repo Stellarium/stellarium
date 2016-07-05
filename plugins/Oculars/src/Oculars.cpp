@@ -653,11 +653,7 @@ void Oculars::init()
 		setFlagLimitMagnitude(settings->value("limit_stellar_magnitude", true).toBool());
 		setFlagInitFovUsage(settings->value("use_initial_fov", false).toBool());
 		setFlagUseFlipForCCD(settings->value("use_ccd_flip", false).toBool());
-		setFlagUseSemiTransparency(settings->value("use_semi_transparency", false).toBool());
-
-		StelSkyDrawer *skyManager = StelApp::getInstance().getCore()->getSkyDrawer();
-		relativeStarScale = skyManager->getRelativeStarScale();
-		absoluteStarScale = skyManager->getAbsoluteStarScale();
+		setFlagUseSemiTransparency(settings->value("use_semi_transparency", false).toBool());		
 	}
 	catch (std::runtime_error& e)
 	{
@@ -2159,6 +2155,8 @@ void Oculars::zoom(bool zoomedIn)
 			magLimitStars = skyManager->getCustomStarMagnitudeLimit();
 			magLimitPlanets = skyManager->getCustomPlanetMagnitudeLimit();
 			magLimitDSOs = skyManager->getCustomNebulaMagnitudeLimit();
+			relativeStarScale = skyManager->getRelativeStarScale();
+			absoluteStarScale = skyManager->getAbsoluteStarScale();
 
 			flagMoonScale = GETSTELMODULE(SolarSystem)->getFlagMoonScale();
 

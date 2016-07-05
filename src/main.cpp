@@ -126,6 +126,9 @@ int main(int argc, char **argv)
 	}
 #endif
 
+	// Seed the PRNG
+	qsrand(QDateTime::currentMSecsSinceEpoch());
+
 	QCoreApplication::setApplicationName("stellarium");
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");

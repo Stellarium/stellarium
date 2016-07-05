@@ -41,7 +41,9 @@ class SimbadLookupTask :public QRunnable
 {
 public:
 	SimbadLookupTask(const QString& url, const QString& searchTerm)
-		: url(url), searchTerm(searchTerm)
+		: url(url)
+		, searchTerm(searchTerm)
+		, status(SimbadLookupReply::SimbadLookupQuerying)
 	{
 		parentThread = QThread::currentThread();
 		setAutoDelete(false);
