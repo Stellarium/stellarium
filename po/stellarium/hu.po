@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-04 01:01+0700\n"
-"PO-Revision-Date: 2016-07-03 18:43+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2016-07-04 15:55+0000\n"
+"Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-04 05:22+0000\n"
+"X-Launchpad-Export-Date: 2016-07-05 05:19+0000\n"
 "X-Generator: Launchpad (build 18115)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -128,7 +128,7 @@ msgstr "Napfordulói kolur"
 
 #: src/core/modules/GridLinesMgr.cpp:652
 msgid "Circumpolar Circle"
-msgstr ""
+msgstr "Cirkumpoláris kör"
 
 #: src/core/modules/GridLinesMgr.cpp:951
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:339
@@ -205,7 +205,7 @@ msgstr "Kolur vonalak"
 
 #: src/core/modules/GridLinesMgr.cpp:968
 msgid "Circumpolar Circles"
-msgstr ""
+msgstr "Cirkumpoláris körök"
 
 #: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1614
 msgid "Atmosphere"
@@ -736,7 +736,7 @@ msgstr "Mélyég-objektumok"
 
 #: src/core/modules/NebulaMgr.cpp:365
 msgid "Toggle DSO type filter"
-msgstr ""
+msgstr "DSO típusú szűrő ki/be"
 
 #: src/core/modules/Planet.cpp:238 src/core/modules/MinorPlanet.cpp:232
 #: src/core/modules/MinorPlanet.cpp:236 src/core/modules/Comet.cpp:194
@@ -4848,7 +4848,7 @@ msgstr "Szín kiválasztása"
 #: src/translations.h:631
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
-msgstr ""
+msgstr "Kurzorpozíció %1, %2 kilépés: ESC"
 
 #: src/ui_dateTimeDialogGui.h:380
 msgid "Date and Time in Gregorian calendar"
@@ -7247,7 +7247,7 @@ msgstr "Beállítópanel"
 #: plugins/Oculars/src/ui_ocularDialog.h:1180
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of Stellarium."
-msgstr ""
+msgstr "Bejelölve a FOV ugyanannyi lesz a Stellarium újbóli indulásakor."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1182
 msgid "Restore FOV to initial values"
