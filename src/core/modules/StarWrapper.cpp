@@ -275,7 +275,10 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		{
 			oss << QString("%1: %2").arg(q_("Year of last satisfactory observation")).arg(wdsObs) << "<br />";
 			oss << QString("%1: %2%3").arg(q_("Position angle")).arg(wdsPA).arg(QChar(0x00B0)) << "<br />";
-			oss << QString("%1: %2'").arg(q_("Separation")).arg(QString::number(wdsSep, 'f', 2)) << "<br />";
+			if (wdsSep>0.f) // A spectroscopic binary or not?
+			{
+				oss << QString("%1: %2'").arg(q_("Separation")).arg(QString::number(wdsSep, 'f', 2)) << "<br />";
+			}
 		}
 	}
 
