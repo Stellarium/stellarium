@@ -53,6 +53,9 @@ these declinations are still important in everyday astronomy.
  -# Current declination of the moon
  -# Current declination of a naked-eye planet
 
+Some religions, most notably Islam, adhere to a practice of observing a prayer direction towards a particular location.
+Azimuth lines (vertical semicircles from zenith to nadir) for two locations can be shown. Default locations are Mecca (Kaaba) and Jerusalem.
+The directions are computed based on spherical trigonometry on a spherical Earth.
 In addition, up to 2 custom azimuth lines can be drawn, also with a customized label.
 
 The lunar lines include horizon parallax effects. There are two lines each
@@ -84,7 +87,13 @@ class ArchaeoLine : QObject
 	//or in signals/slots
 	Q_ENUMS(Line)
 public:
-	enum Line {
+	enum Line { // we must start with the planet lines to allow proper handling in the combobox.
+		CurrentPlanetNone, // actually a placeholder for counting/testing. By itself it makes no sense, i.e. deactivates the planet line
+		CurrentPlanetMercury,
+		CurrentPlanetVenus,
+		CurrentPlanetMars,
+		CurrentPlanetJupiter,
+		CurrentPlanetSaturn,
 		Equinox,
 		Solstices,
 		Crossquarters,
@@ -95,12 +104,8 @@ public:
 		SelectedObject,
 		CurrentSun,
 		CurrentMoon,
-		CurrentPlanetNone, // actually a placeholder for counting/testing. By itself it makes no sense, i.e. deactivates the planet line
-		CurrentPlanetMercury,
-		CurrentPlanetVenus,
-		CurrentPlanetMars,
-		CurrentPlanetJupiter,
-		CurrentPlanetSaturn,
+		GeographicLocation1,
+		GeographicLocation2,
 		CustomAzimuth1,
 		CustomAzimuth2
 	};
@@ -117,12 +122,12 @@ public slots:
 	void setFadeDuration(float duration) {fader.setDuration((int)(duration*1000.f));}
 	void setDisplayed(const bool displayed){fader = displayed;}
 	void setFontSize(double newSize){font.setPixelSize(newSize);}
+	//! reset declination/azimuth angle (degrees) of this arc.
+	void setDefiningAngle(double angle){definingAngle=angle;}
+	double getDefiningAngle(void) const {return definingAngle;} // returns declination for most, or azimuth.
 	//! Re-translates the label.
 	void updateLabel();
 	void setLabelVisible(bool b){flagLabel=b;}
-	//! reset declination/azimuth angle (degrees) of this arc.
-	void setDefiningAngle(double angle){definingAngle=angle;}
-	double getDefiningAngle(void) const {return definingAngle;}
 	bool isLabelVisible() const{return flagLabel;}
 	void setLineType(ArchaeoLine::Line line) {lineType=line; updateLabel();} // Meaningful only for CurrentPlanet... types
 	//! change label. Used only for selected-object line - the other labels should not be changed!
@@ -131,7 +136,7 @@ public slots:
 
 private:
 	ArchaeoLine::Line lineType;
-	double definingAngle; // degrees. This is declination for non-azimuth lines, azimuth for custom azimuths.
+	double definingAngle; // degrees. This is declination for non-azimuth lines, azimuth for geographic locations and custom azimuths.
 	Vec3f color;
 	StelCore::FrameType frameType;
 	bool flagLabel; //! show the label. (some should be permanently silent)
@@ -142,7 +147,8 @@ private:
 
 //! Main class of the ArchaeoLines plug-in.
 //! Provides an on-screen visualisation of several small circles relevant mainly to archaeoastronomy.
-//! GZ 2014-12
+//! In addition, a few azimuth lines can be shown.
+//! GZ 2014-12, updated 2016-06.
 class ArchaeoLines : public StelModule
 {
 	Q_OBJECT
@@ -151,69 +157,105 @@ class ArchaeoLines : public StelModule
 		   WRITE enableArchaeoLines
 		   NOTIFY archaeoLinesEnabledChanged)
 	Q_PROPERTY(bool flagShowEquinox
-				READ    isEquinoxDisplayed
-				WRITE showEquinox
+				READ   isEquinoxDisplayed
+				WRITE  showEquinox
 				NOTIFY showEquinoxChanged
 		   )
 	Q_PROPERTY(bool flagShowSolstices
-				READ    isSolsticesDisplayed
-				WRITE showSolstices
+				READ   isSolsticesDisplayed
+				WRITE  showSolstices
 				NOTIFY showSolsticesChanged
 		   )
 	Q_PROPERTY(bool flagShowCrossquarters
-				READ    isCrossquartersDisplayed
-				WRITE showCrossquarters
+				READ   isCrossquartersDisplayed
+				WRITE  showCrossquarters
 				NOTIFY showCrossquartersChanged
 		   )
 	Q_PROPERTY(bool flagShowMajorStandstills
-				READ    isMajorStandstillsDisplayed
-				WRITE showMajorStandstills
+				READ   isMajorStandstillsDisplayed
+				WRITE  showMajorStandstills
 				NOTIFY showMajorStandstillsChanged
 		   )
 	Q_PROPERTY(bool flagShowMinorStandstills
-				READ    isMinorStandstillsDisplayed
+				READ   isMinorStandstillsDisplayed
 				WRITE  showMinorStandstills
 				NOTIFY showMinorStandstillsChanged
 		   )
 	Q_PROPERTY(bool flagShowZenithPassage
-				READ    isZenithPassageDisplayed
+				READ   isZenithPassageDisplayed
 				WRITE  showZenithPassage
 				NOTIFY showZenithPassageChanged
 		   )
 	Q_PROPERTY(bool flagShowNadirPassage
-				READ    isNadirPassageDisplayed
+				READ   isNadirPassageDisplayed
 				WRITE  showNadirPassage
 				NOTIFY showNadirPassageChanged
 		   )
 	Q_PROPERTY(bool flagShowSelectedObject
-				READ    isSelectedObjectDisplayed
+				READ   isSelectedObjectDisplayed
 				WRITE  showSelectedObject
 				NOTIFY showSelectedObjectChanged
 		   )
 	Q_PROPERTY(bool flagShowCurrentSun
-				READ    isCurrentSunDisplayed
+				READ   isCurrentSunDisplayed
 				WRITE  showCurrentSun
 				NOTIFY showCurrentSunChanged
 		   )
 	Q_PROPERTY(bool flagShowCurrentMoon
-				READ    isCurrentMoonDisplayed
+				READ   isCurrentMoonDisplayed
 				WRITE  showCurrentMoon
 				NOTIFY showCurrentMoonChanged
 		   )
 	Q_PROPERTY(ArchaeoLine::Line enumShowCurrentPlanet
-				READ    whichCurrentPlanetDisplayed
+				READ   whichCurrentPlanetDisplayed
 				WRITE  showCurrentPlanet
 				NOTIFY currentPlanetChanged)
+	Q_PROPERTY(bool flagShowGeographicLocation1
+				READ   isGeographicLocation1Displayed
+				WRITE  showGeographicLocation1
+				NOTIFY showGeographicLocation1Changed
+		   )
+	Q_PROPERTY(bool flagShowGeographicLocation2
+				READ   isGeographicLocation2Displayed
+				WRITE  showGeographicLocation2
+				NOTIFY showGeographicLocation2Changed
+		   )
+	Q_PROPERTY(double geographicLocation1Longitude
+				READ   getGeographicLocation1Longitude
+				WRITE  setGeographicLocation1Longitude
+				NOTIFY geographicLocation1Changed)
+	Q_PROPERTY(double geographicLocation1Latitude
+				READ   getGeographicLocation1Latitude
+				WRITE  setGeographicLocation1Latitude
+				NOTIFY geographicLocation1Changed)
+	Q_PROPERTY(double geographicLocation2Longitude
+				READ   getGeographicLocation2Longitude
+				WRITE  setGeographicLocation2Longitude
+				NOTIFY geographicLocation2Changed)
+	Q_PROPERTY(double geographicLocation2Latitude
+				READ   getGeographicLocation2Latitude
+				WRITE  setGeographicLocation2Latitude
+				NOTIFY geographicLocation2Changed)
 	Q_PROPERTY(bool flagShowCustomAzimuth1
-				READ    isCustomAzimuth1Displayed
+				READ   isCustomAzimuth1Displayed
 				WRITE  showCustomAzimuth1
 				NOTIFY showCustomAzimuth1Changed
 		   )
 	Q_PROPERTY(bool flagShowCustomAzimuth2
-				READ    isCustomAzimuth2Displayed
+				READ   isCustomAzimuth2Displayed
 				WRITE  showCustomAzimuth2
 				NOTIFY showCustomAzimuth2Changed
 		   )
+	// Note: following 2 are only "forwarding properties", no proper variables!
+	Q_PROPERTY(double customAzimuth1
+				READ getCustomAzimuth1
+				WRITE setCustomAzimuth1
+				NOTIFY customAzimuth1Changed)
+	Q_PROPERTY(double customAzimuth2
+				READ getCustomAzimuth2
+				WRITE setCustomAzimuth2
+				NOTIFY customAzimuth2Changed)
+	// TODO: Maybe add properties for geo locations and custom azimuths: labels.
 
 public:
 	ArchaeoLines();
@@ -228,7 +270,9 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	virtual void handleKeys(class QKeyEvent* event){event->setAccepted(false);}
 	virtual bool configureGui(bool show=true);
-	bool isDmsFormat() const { return flagUseDmsFormat; } // NOT SURE IF USEFUL
+	//////////////////////////////////////////////////////////////////////////
+
+	//bool isDmsFormat() const { return flagUseDmsFormat; } // NOT SURE IF USEFUL
 
 	//! Restore the plug-in's settings to the default state.
 	//! Replace the plug-in's settings in Stellarium's configuration file
@@ -255,8 +299,14 @@ signals:
 	void showSelectedObjectChanged(bool on);
 	void showCurrentSunChanged(bool on);
 	void showCurrentMoonChanged(bool on);
+	void showGeographicLocation1Changed(bool on);
+	void showGeographicLocation2Changed(bool on);
+	void geographicLocation1Changed();
+	void geographicLocation2Changed();
 	void showCustomAzimuth1Changed(bool on);
 	void showCustomAzimuth2Changed(bool on);
+	void customAzimuth1Changed(double az);
+	void customAzimuth2Changed(double az);
 	void currentPlanetChanged(ArchaeoLine::Line l); // meaningful only CurrentPlanetNone...CurrentPlanetSaturn.
 
 public slots:
@@ -275,6 +325,8 @@ public slots:
 	bool isCurrentSunDisplayed() const {return flagShowCurrentSun;}
 	bool isCurrentMoonDisplayed() const {return flagShowCurrentMoon;}
 	ArchaeoLine::Line whichCurrentPlanetDisplayed() const {return enumShowCurrentPlanet;}
+	bool isGeographicLocation1Displayed() const {return flagShowGeographicLocation1;}
+	bool isGeographicLocation2Displayed() const {return flagShowGeographicLocation2;}
 	bool isCustomAzimuth1Displayed() const {return flagShowCustomAzimuth1;}
 	bool isCustomAzimuth2Displayed() const {return flagShowCustomAzimuth2;}
 
@@ -291,10 +343,24 @@ public slots:
 	void showCurrentMoon(bool b);
 	void showCurrentPlanet(ArchaeoLine::Line l); // Allowed values for l: CurrentPlanetNone...CurrentPlanetSaturn.
 	void showCurrentPlanetNamed(QString planet); // Allowed values for planet: "none", "Mercury", "Venus", "Mars", "Jupiter", "Saturn".
+	void showGeographicLocation1(bool b);
+	void showGeographicLocation2(bool b);
+	void setGeographicLocation1Longitude(double lng);
+	void setGeographicLocation1Latitude(double lat);
+	void setGeographicLocation2Longitude(double lng);
+	void setGeographicLocation2Latitude(double lat);
+	void setGeographicLocation1Label(QString label);
+	void setGeographicLocation2Label(QString label);
+	double getGeographicLocation1Longitude() const {return geographicLocation1Longitude; }
+	double getGeographicLocation1Latitude()  const {return geographicLocation1Latitude; }
+	double getGeographicLocation2Longitude() const {return geographicLocation2Longitude; }
+	double getGeographicLocation2Latitude()  const {return geographicLocation2Latitude; }
 	void showCustomAzimuth1(bool b);
 	void showCustomAzimuth2(bool b);
 	void setCustomAzimuth1(double az);
+	double getCustomAzimuth1() const { return customAzimuth1Line->getDefiningAngle(); }
 	void setCustomAzimuth2(double az);
+	double getCustomAzimuth2() const { return customAzimuth2Line->getDefiningAngle(); }
 	void setCustomAzimuth1Label(QString label);
 	void setCustomAzimuth2Label(QString label);
 
@@ -302,15 +368,21 @@ public slots:
 	void setLineColor(ArchaeoLine::Line whichLine, QColor color);
 	// called by the dialog UI, converts Stellarium's Vec3f float color to QColor (0..255).
 	QColor getLineColor(ArchaeoLine::Line whichLine);
-	//! query a line for its current angle.
+	//! query a line for its current defining angle. Returns declination or azimuth, respectively.
 	double getLineAngle(ArchaeoLine::Line whichLine);
-	QString getLineLabel(ArchaeoLine::Line whichLine);
+	QString getLineLabel(ArchaeoLine::Line whichLine);	
+
+private slots:
+	//! a slot connected to core which cares for location changes, updating the geographicLocation lines.
+	void updateObserverLocation(StelLocation loc);
+	//! Compute azimuth (from North) towards Target. All angles (args and result) are in degrees.
+	double getAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget) const;
 
 private:
 	QFont font;
 	bool flagShowArchaeoLines;
-	bool withDecimalDegree;
-	bool flagUseDmsFormat;
+	//bool withDecimalDegree;
+	//bool flagUseDmsFormat;
 	LinearFader lineFader;
 
 	Vec3f equinoxColor;
@@ -324,10 +396,10 @@ private:
 	Vec3f currentSunColor;
 	Vec3f currentMoonColor;
 	Vec3f currentPlanetColor;
+	Vec3f geographicLocation1Color;
+	Vec3f geographicLocation2Color;
 	Vec3f customAzimuth1Color;
 	Vec3f customAzimuth2Color;
-
-
 
 	bool flagShowEquinox;
 	bool flagShowSolstices;
@@ -340,10 +412,14 @@ private:
 	bool flagShowCurrentSun;
 	bool flagShowCurrentMoon;
 	ArchaeoLine::Line enumShowCurrentPlanet;
+	bool flagShowGeographicLocation1;
+	double geographicLocation1Longitude;
+	double geographicLocation1Latitude;
+	bool flagShowGeographicLocation2;
+	double geographicLocation2Longitude;
+	double geographicLocation2Latitude;
 	bool flagShowCustomAzimuth1;
 	bool flagShowCustomAzimuth2;
-	double customAzimuth1;
-	double customAzimuth2;
 	double lastJDE; // cache last-time-computed to every 10 days or so?
 
 	ArchaeoLine * equinoxLine;
@@ -365,19 +441,12 @@ private:
 	ArchaeoLine * currentSunLine;
 	ArchaeoLine * currentMoonLine;
 	ArchaeoLine * currentPlanetLine;
+	ArchaeoLine * geographicLocation1Line;
+	ArchaeoLine * geographicLocation2Line;
 	ArchaeoLine * customAzimuth1Line;
 	ArchaeoLine * customAzimuth2Line;
 
 	StelButton* toolbarButton;
-
-	// draw one arc.
-	//! @param core the StelCore object
-	//! @param declination of the small circle
-	//! @param frameType usually StelCore::FrameEquinoxEqu
-	//! @param refractionMode usually StelCore::RefractionAuto
-	//! @param txtColor color used for any text printed regarding this line
-	//! @param lineColor color used for this line
-//	void drawOne(StelCore *core, const float declination, const StelCore::FrameType frameType, const StelCore::RefractionMode refractionMode, const Vec3f txtColor, const Vec3f lineColor);
   
 	QSettings* conf;
 

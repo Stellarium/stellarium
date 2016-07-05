@@ -224,7 +224,6 @@ QByteArray StelJsonParserInstance::readString()
 	if (atEnd())
 		throw std::runtime_error(qPrintable(QString("End of file before end of string: "+name)));
 	throw std::runtime_error(qPrintable(QString("Read error before end of string: "+name)));
-	return "";
 }
 
 QVariant StelJsonParserInstance::readOther()

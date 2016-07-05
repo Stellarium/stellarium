@@ -1356,69 +1356,31 @@ StelObjectP ConstellationMgr::searchByName(const QString& name) const
 	return NULL;
 }
 
-QStringList ConstellationMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QStringList ConstellationMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
 	QStringList result;
-	if (maxNbItem==0) return result;
+	if (maxNbItem <= 0)
+	{
+		return result;
+	}
 
-	QString cn;
-	bool find;
-	vector < Constellation * >::const_iterator iter;
+	vector<Constellation*>::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		cn = (*iter)->getNameI18n();
-		find = false;
-		if (useStartOfWords)
+		QString name = inEnglish ? (*iter)->getEnglishName() : (*iter)->getNameI18n();
+		if (!matchObjectName(name, objPrefix, useStartOfWords))
 		{
-			//if (objPrefix.toUpper()==cn.mid(0, objPrefix.size()).toUpper())  // WHY SO LONG?
-			if (cn.startsWith(objPrefix, Qt::CaseInsensitive))
-				find = true;
+			continue;
 		}
-		else
+
+		result.append(name);
+		if (result.size() >= maxNbItem)
 		{
-			if (cn.contains(objPrefix,Qt::CaseInsensitive))
-				find = true;
-		}
-		if (find)
-		{
-			result << cn;
-			if (result.size()==maxNbItem)
-				return result;
+			break;
 		}
 	}
-	return result;
-}
 
-QStringList ConstellationMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
-{
-	QStringList result;
-	if (maxNbItem==0) return result;
-
-	QString cn;
-	bool find;
-	vector < Constellation * >::const_iterator iter;
-	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-	{
-		cn = (*iter)->getEnglishName();
-		find = false;
-		if (useStartOfWords)
-		{
-			//if (objPrefix.toUpper()==cn.mid(0, objPrefix.size()).toUpper())  // WHY SO LONG?
-			if (cn.startsWith(objPrefix, Qt::CaseInsensitive))
-				find = true;
-		}
-		else
-		{
-			if (cn.contains(objPrefix,Qt::CaseInsensitive))
-				find = true;
-		}
-		if (find)
-		{
-			result << cn;
-			if (result.size()==maxNbItem)
-				return result;
-		}
-	}
+	result.sort();
 	return result;
 }
 

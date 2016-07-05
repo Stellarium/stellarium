@@ -38,7 +38,6 @@ Meteor::Meteor(const StelCore* core, const StelTextureSP& bolideTexture)
 	, m_bolideTexture(bolideTexture)
 	, m_segments(10)
 {
-	qsrand(QDateTime::currentMSecsSinceEpoch());
 }
 
 Meteor::~Meteor()
