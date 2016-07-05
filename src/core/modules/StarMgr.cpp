@@ -882,7 +882,7 @@ void StarMgr::loadWds(const QString& WdsFile)
 
 		doubleStar.designation = fields.at(1).trimmed();
 		doubleStar.observation = fields.at(2).toInt();
-		doubleStar.positionAngle = fields.at(3).toInt();
+		doubleStar.positionAngle = fields.at(3).toFloat();
 		doubleStar.separation = fields.at(4).toFloat();
 
 		wdsStarsMapI18n[hip] = doubleStar;
