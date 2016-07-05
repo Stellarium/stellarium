@@ -58,7 +58,7 @@ typedef struct
 {
 	QString designation;	//! WDS designation
 	int observation;	//! Date of last satisfactory observation, yr
-	int positionAngle;	//! Position Angle at date of last satisfactory observation, deg
+	float positionAngle;	//! Position Angle at date of last satisfactory observation, deg
 	float separation;	//! Separation at date of last satisfactory observation, arcsec
 } wds;
 

@@ -90,7 +90,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	QTextStream oss(&str);
 	const QString varType = StarMgr::getGcvsVariabilityType(s->getHip());
 	const int wdsObs = StarMgr::getWdsLastObservation(s->getHip());
-	const int wdsPA = StarMgr::getWdsLastPositionAngle(s->getHip());
+	const float wdsPA = StarMgr::getWdsLastPositionAngle(s->getHip());
 	const float wdsSep = StarMgr::getWdsLastSeparation(s->getHip());
 	const float maxVMag = StarMgr::getGcvsMaxMagnitude(s->getHip());
 	const float magFlag = StarMgr::getGcvsMagnitudeFlag(s->getHip());
@@ -274,10 +274,10 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if (wdsObs>0)
 		{
 			oss << QString("%1: %2").arg(q_("Year of last satisfactory observation")).arg(wdsObs) << "<br />";
-			oss << QString("%1: %2%3").arg(q_("Position angle")).arg(wdsPA).arg(QChar(0x00B0)) << "<br />";
+			oss << QString("%1: %2%3").arg(q_("Position angle")).arg(QString::number(wdsPA, 'f', 2)).arg(QChar(0x00B0)) << "<br />";
 			if (wdsSep>0.f) // A spectroscopic binary or not?
 			{
-				oss << QString("%1: %2'").arg(q_("Separation")).arg(QString::number(wdsSep, 'f', 2)) << "<br />";
+				oss << QString("%1: %2\"").arg(q_("Separation")).arg(QString::number(wdsSep, 'f', 3)) << "<br />";
 			}
 		}
 	}
