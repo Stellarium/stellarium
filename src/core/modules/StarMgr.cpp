@@ -228,7 +228,7 @@ QString StarMgr::getWdsName(int hip)
 {
 	QHash<int,wds>::const_iterator it(wdsStarsMapI18n.find(hip));
 	if (it!=wdsStarsMapI18n.end())
-		return QString("WDS %1").arg(it.value().designation);
+		return QString("WDS J%1").arg(it.value().designation);
 	return QString();
 }
 
@@ -886,7 +886,7 @@ void StarMgr::loadWds(const QString& WdsFile)
 		doubleStar.separation = fields.at(4).toFloat();
 
 		wdsStarsMapI18n[hip] = doubleStar;
-		wdsStarsIndexI18n[QString("WDS %1").arg(doubleStar.designation.toUpper())] = hip;
+		wdsStarsIndexI18n[QString("WDS J%1").arg(doubleStar.designation.toUpper())] = hip;
 		++readOk;
 	}
 
