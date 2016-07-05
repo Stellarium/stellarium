@@ -509,6 +509,14 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 	}
 	if (willCastShadow(this, parent.data()))
 		res.append(parent.data());
+	// Test satellites mutual occultations.
+	if (parent.data() != sun) {
+		foreach (const PlanetP& planet, parent.data()->satellites)
+		{
+			if (willCastShadow(this, planet.data()))
+				res.append(planet.data());
+		}
+	}
 	
 	return res;
 }
@@ -1151,6 +1159,9 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	// Compute the 2D position and check if in the screen
 	const StelProjectorP prj = core->getProjection(transfo);
 	float screenSz = getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
+	// enlarge if this is sun with its huge halo.
+	if (englishName=="Sun")
+		screenSz+=125.f;
 	float viewport_left = prj->getViewportPosX();
 	float viewport_bottom = prj->getViewportPosY();
 	if ((prj->project(Vec3d(0), screenPos)

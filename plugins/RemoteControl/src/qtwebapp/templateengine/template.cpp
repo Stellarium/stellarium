@@ -8,33 +8,30 @@
 #include <QRegularExpression>
 
 Template::Template(QString source, QString sourceName)
-    : QString(source)
+	: QString(source)
 {
-    this->sourceName=sourceName;
-    this->warnings=false;
+	this->sourceName=sourceName;
+	this->warnings=false;
 }
 
 Template::Template(QFile& file, QTextCodec* textCodec)
 {
-    this->warnings=false;
-    sourceName=QFileInfo(file.fileName()).baseName();
-    if (!file.isOpen())
-    {
-        file.open(QFile::ReadOnly | QFile::Text);
-    }
-    QByteArray data=file.readAll();
-    file.close();
-    if (data.size()==0 || file.error())
-    {
-        qCritical("Template: cannot read from %s, %s",qPrintable(sourceName),qPrintable(file.errorString()));
-    }
-    else
-    {
-        if(textCodec)
-            append(textCodec->toUnicode(data));
-        else
-            append(fromUtf8(data));
-    }
+	this->warnings=false;
+	sourceName=QFileInfo(file.fileName()).baseName();
+	if (file.open(QFile::ReadOnly | QFile::Text))
+	{
+		QByteArray data=file.readAll();
+		file.close();
+
+		if(textCodec)
+			append(textCodec->toUnicode(data));
+		else
+			append(fromUtf8(data));
+	}
+	else
+	{
+		qCritical("Template: cannot read from %s, %s",qPrintable(sourceName),qPrintable(file.errorString()));
+	}
 }
 
 

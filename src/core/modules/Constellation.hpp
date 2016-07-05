@@ -61,11 +61,7 @@ private:
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString a description of the constellation.
-	virtual QString getInfoString(const StelCore*, const InfoStringGroup& flags) const
-	{
-		if (flags&Name) return getNameI18n() + "(" + getShortName() + ")";
-		else return "";
-	}
+	virtual QString getInfoString(const StelCore*, const InfoStringGroup& flags) const;
 
 	//! Get the module/object type string.
 	//! @return "Constellation"
@@ -107,8 +103,8 @@ private:
 
 	//! Get the translated name for the Constellation.
 	QString getNameI18n() const {return nameI18;}
-	//! Get the English name for the Constellation (returns the abbreviation).
-	QString getEnglishName() const {return abbreviation;}
+	//! Get the English name for the Constellation.
+	QString getEnglishName() const {return englishName;}
 	//! Get the short name for the Constellation (returns the abbreviation).
 	QString getShortName() const {return abbreviation;}
 	//! Draw the lines for the Constellation.
