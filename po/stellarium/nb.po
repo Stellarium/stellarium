@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-04 01:01+0700\n"
-"PO-Revision-Date: 2016-04-16 16:21+0000\n"
+"PO-Revision-Date: 2016-07-05 19:06+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-04 05:27+0000\n"
+"X-Launchpad-Export-Date: 2016-07-06 05:17+0000\n"
 "X-Generator: Launchpad (build 18115)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
@@ -33,7 +33,7 @@ msgstr "Type: <b>%1</b>"
 
 #: src/core/modules/Constellation.cpp:297
 msgid "constellation"
-msgstr ""
+msgstr "Stjernebilde"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:412
 #: src/core/modules/GridLinesMgr.cpp:950 src/core/modules/LandscapeMgr.cpp:414
@@ -66,7 +66,7 @@ msgstr "Stjernebildegrenser"
 
 #: src/core/modules/ConstellationMgr.cpp:148
 msgid "Constellation selection isolated"
-msgstr ""
+msgstr "Valg av stjernebilder enkeltvis"
 
 #: src/core/modules/StarMgr.cpp:413 src/ui_viewDialog.h:1596
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:253
@@ -129,7 +129,7 @@ msgstr "Solvervskolur"
 
 #: src/core/modules/GridLinesMgr.cpp:652
 msgid "Circumpolar Circle"
-msgstr ""
+msgstr "Sirkumpolarsirkel"
 
 #: src/core/modules/GridLinesMgr.cpp:951
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:339
@@ -206,7 +206,7 @@ msgstr "Kolurlinjer"
 
 #: src/core/modules/GridLinesMgr.cpp:968
 msgid "Circumpolar Circles"
-msgstr ""
+msgstr "Sirkumpolarsirkler"
 
 #: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1614
 msgid "Atmosphere"
@@ -273,7 +273,7 @@ msgstr "Ugjennomsiktighet: <b>%1</b>"
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:198
 #, qt-format
 msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
-msgstr ""
+msgstr "Magnitude: <b>%1</b> (med ekstinksjon: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
 #: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
@@ -298,7 +298,7 @@ msgstr "Fargeindeks (B-V): <b>%1</b>"
 #: src/core/modules/Nebula.cpp:224
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
-msgstr ""
+msgstr "Overflatelysstyrke: <b>%1</b> (med ekstinksjon: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:230
 #, qt-format
@@ -737,7 +737,7 @@ msgstr "Deep-sky-objekter"
 
 #: src/core/modules/NebulaMgr.cpp:365
 msgid "Toggle DSO type filter"
-msgstr ""
+msgstr "Filter for DSO-type av/på"
 
 #: src/core/modules/Planet.cpp:238 src/core/modules/MinorPlanet.cpp:232
 #: src/core/modules/MinorPlanet.cpp:236 src/core/modules/Comet.cpp:194
@@ -885,11 +885,11 @@ msgstr "Planetspor"
 
 #: src/core/modules/SolarSystem.cpp:201
 msgid "Planet markers"
-msgstr ""
+msgstr "Planetmarkører"
 
 #: src/core/modules/SolarSystem.cpp:203
 msgid "Native planet names (from starlore)"
-msgstr ""
+msgstr "Planetnavn i originalspråket til stjernemyte"
 
 #: src/core/modules/StarWrapper.cpp:162
 msgid "eruptive variable star"
@@ -967,11 +967,11 @@ msgstr "Oppgangstid: %1%"
 
 #: src/core/modules/StarWrapper.cpp:276
 msgid "Year of last satisfactory observation"
-msgstr ""
+msgstr "Det siste tilfredsstillende observasjonsåret"
 
 #: src/core/modules/StarWrapper.cpp:277
 msgid "Position angle"
-msgstr ""
+msgstr "Posisjonsvinkel"
 
 #: src/core/modules/StarWrapper.cpp:278 src/gui/AstroCalcDialog.cpp:479
 msgid "Separation"
@@ -1491,6 +1491,9 @@ msgid ""
 "equator, ecliptic, hour lines, etc. into straight lines. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
+"Perspektivprojeksjon avbilder horisonten og andre storsirkler som ekvator, "
+"ekliptikken, timelinjer etc. i rette linjer. Det matematiske navnet for "
+"denne projeksjonsmetoden er <i>gnomonisk projeksjon</i>."
 
 #: src/core/StelProjectorClasses.cpp:87
 msgid "Equal Area"
@@ -1501,6 +1504,8 @@ msgid ""
 "The full name of this projection method is <i>Lambert azimuthal equal-area "
 "projection</i>. It preserves the area but not the angle."
 msgstr ""
+"Det fulle navnet på denne projeksjonsmetoden er <i>Lamberts arealriktige "
+"asimutprojeksjon</i>. Den bevarer areal, men ikke vinkler."
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Stereographic"
@@ -1512,6 +1517,9 @@ msgid ""
 "as the planisphere projection. It preserves the angles at which curves cross "
 "each other but it does not preserve area."
 msgstr ""
+"Stereografisk projeksjon er kjent siden antikken og var opprinnelig kjent "
+"som den planisfæriske projeksjon. Den bevarer vinkler der kurver krysser "
+"hverandre, men den bevarer ikke areal."
 
 #: src/core/StelProjectorClasses.cpp:200
 msgid "Fish-eye"
@@ -1595,7 +1603,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:512
 msgid "Miller cylindrical"
-msgstr ""
+msgstr "Miller-sylinderprojeksjon"
 
 #: src/core/StelProjectorClasses.cpp:517
 msgid ""
@@ -1603,6 +1611,9 @@ msgid ""
 "proposed by Osborn Maitland Miller (1897–1979) in 1942. The poles are no "
 "longer mapped to infinity."
 msgstr ""
+"Millers sylinderprojeksjon er en modifisert Mercator-projeksjon, foreslått "
+"av Osborn Maitland Miller (1897–1979) i 1942. Polene er ikke lenger avbildet "
+"mot uendelighet."
 
 #: src/core/StelObject.cpp:116
 msgctxt "coordinates for current epoch"
@@ -3116,7 +3127,7 @@ msgstr ""
 
 #: src/translations.h:185
 msgid "Macedonian"
-msgstr ""
+msgstr "Makedonsk"
 
 #: src/translations.h:186
 msgid "Maori"
@@ -4701,52 +4712,52 @@ msgstr "Ignorer"
 
 #: src/translations.h:620
 msgid "&Basic colors"
-msgstr ""
+msgstr "&Basisfarger"
 
 #: src/translations.h:621
 msgid "Pick Screen Color"
-msgstr ""
+msgstr "Velg skjermfarge"
 
 #: src/translations.h:622
 msgid "&Custom colors"
-msgstr ""
+msgstr "&Tilpassede farger"
 
 #: src/translations.h:623
 msgid "&Add to Custom Colors"
-msgstr ""
+msgstr "&Legg til i tilpassede farger"
 
 #: src/translations.h:624
 msgid "Hu&e:"
-msgstr ""
+msgstr "&Fargetone:"
 
 #: src/translations.h:625
 msgid "&Sat:"
-msgstr ""
+msgstr "&Metning:"
 
 #: src/translations.h:626
 msgid "&Val:"
-msgstr ""
+msgstr "&Valør:"
 
 #: src/translations.h:627
 msgid "&Red:"
-msgstr ""
+msgstr "&Rød:"
 
 #: src/translations.h:628
 msgid "&Green:"
-msgstr ""
+msgstr "&Grønn:"
 
 #: src/translations.h:629
 msgid "Bl&ue:"
-msgstr ""
+msgstr "Bl&å:"
 
 #: src/translations.h:630
 msgid "Select Color"
-msgstr ""
+msgstr "Velg farge"
 
 #: src/translations.h:631
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
-msgstr ""
+msgstr "Peker ved %1, %2 Trykk ESC for å avbryte"
 
 #: src/ui_dateTimeDialogGui.h:380
 msgid "Date and Time in Gregorian calendar"
@@ -5430,10 +5441,12 @@ msgid ""
 "These circles delimit stars which stay always above (respectively below) the "
 "mathematical horizon."
 msgstr ""
+"Disse sirklene markerer stjerner som alltid står over (henholdsvis under) "
+"den matematiske horisonten."
 
 #: src/ui_viewDialog.h:1803
 msgid "Circumpolar circles"
-msgstr ""
+msgstr "Sirkumpolarsirkler"
 
 #: src/ui_viewDialog.h:1805
 msgid ""
@@ -9996,6 +10009,7 @@ msgstr "Navigasjonsstjerner"
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:94
 msgid "This plugin marks navigational stars from a selected set."
 msgstr ""
+"Dette programtillegget markerer navigasjonsstjerner fra et valgt sett."
 
 #: plugins/NavStars/src/NavStars.cpp:112
 msgid "Mark the navigational stars"
@@ -10010,6 +10024,10 @@ msgid ""
 "navigational aids such as the <em>2102D Star Finder</em> and "
 "<em>Identifier</em>."
 msgstr ""
+"De 57 utvalgte stjerner som er listet i <em>The Nautical Almanac</em>, "
+"utgitt i fellesskap av Her Majesty's Nautical Almanac Office og US Naval "
+"Observatory siden 1958; følgelig er disse stjernene også brukt i "
+"navigasjonshjelpemidler som <em>2102D Star Finder and Identifier</em>."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:313
@@ -10482,7 +10500,7 @@ msgstr ""
 #: plugins/RemoteControl/src/RemoteControl.cpp:147
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:260
 msgid "Remote Control"
-msgstr ""
+msgstr "Fjernkontroll"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:61
 msgid ""
@@ -10492,11 +10510,11 @@ msgstr ""
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:147
 msgid "Remote control"
-msgstr ""
+msgstr "Fjernkontroll"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:106
 msgid "Remote Control Plug-in"
-msgstr ""
+msgstr "Programtillegg for fjernkontroll"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:112
 msgid ""
@@ -10537,11 +10555,11 @@ msgstr ""
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:246
 msgid "Remote Control Configuration"
-msgstr ""
+msgstr "Fjernkontrollinnstilling"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:247
 msgid "Remote Control Plug-in Configuration"
-msgstr ""
+msgstr "Innstilling for fjernkontrolltillegg"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:249
 msgid "Port Number:"
