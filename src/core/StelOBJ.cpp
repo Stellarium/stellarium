@@ -21,9 +21,10 @@
 #include "StelUtils.hpp"
 
 #include <QBuffer>
-#include <QFileInfo>
+#include <QDir>
 #include <QElapsedTimer>
 #include <QFile>
+#include <QFileInfo>
 #include <QRegularExpression>
 #include <QTextStream>
 
@@ -41,8 +42,12 @@ StelOBJ::~StelOBJ()
 
 void StelOBJ::clear()
 {
-	m_vertices.clear();
+	m_objectMap.clear();
+	m_objects.clear();
+	m_materialMap.clear();
+	m_materials.clear();
 	m_indices.clear();
+	m_vertices.clear();
 }
 
 bool StelOBJ::load(const QString& filename)
@@ -59,7 +64,7 @@ bool StelOBJ::load(const QString& filename)
 	QFile file(filename);
 	if(!file.open(QIODevice::ReadOnly))
 	{
-		qCCritical(stelOBJ)<<"Could not open file "<<filename<<file.errorString();
+		qCCritical(stelOBJ)<<"Could not open file"<<filename<<file.errorString();
 		return false;
 	}
 
@@ -91,84 +96,178 @@ bool StelOBJ::load(const QString& filename)
 	return load(file,fi.canonicalPath());
 }
 
-bool StelOBJ::parseVertPos(const QVector<QStringRef>& params, V3Vec& posList) const
+//macro to test out different ways of comparison and their performance
+#define CMD_CMP(a) (cmd==QLatin1String(a))
+
+//macro to increase a list by size one and return a reference to the last element
+//used instead of append() to avoid memory copies
+#define INC_LIST(a) (a.resize(a.size()+1), a.last())
+
+bool StelOBJ::parseBool(const ParseParams &params, bool &out)
 {
-	if(params.size()<4 || params.size()>5)
+	if(params.size()<2)
 	{
-		qCCritical(stelOBJ)<<"Invalid vertex position specification"<<params;
+		qCCritical(stelOBJ)<<"Expected parameter for statement"<<params;
 		return false;
 	}
-	//we ignore the optional W coordinate
-	if(params.size()==5)
-		qCWarning(stelOBJ)<<"W coordinate unsupported in vertex position specification"<<params;
+	if(params.size()>2)
+	{
+		qCWarning(stelOBJ)<<"Additional parameters ignored in statement"<<params;
+	}
 
-	Vec3f v;
+
+	const QStringRef& cmd = params.at(1);
+	out = (CMD_CMP("1") || CMD_CMP("true") || CMD_CMP("TRUE") || CMD_CMP("yes") || CMD_CMP("YES"));
+
+	return true;
+}
+
+bool StelOBJ::parseString(const ParseParams &params, QString &out)
+{
+	if(params.size()<2)
+	{
+		qCCritical(stelOBJ)<<"Expected parameter for statement"<<params;
+		return false;
+	}
+	if(params.size()>2)
+	{
+		qCWarning(stelOBJ)<<"Additional parameters ignored in statement"<<params;
+	}
+
+	out = params.at(1).toString();
+	return true;
+}
+
+bool StelOBJ::parseFloat(const ParseParams &params, float &out)
+{
+	if(params.size()<2)
+	{
+		qCCritical(stelOBJ)<<"Expected parameter for statement"<<params;
+		return false;
+	}
+	if(params.size()>2)
+	{
+		qCWarning(stelOBJ)<<"Additional parameters ignored in statement"<<params;
+	}
+
+	bool ok;
+	out = params.at(1).toFloat(&ok);
+	return ok;
+}
+
+template <typename T>
+bool StelOBJ::parseVec3(const ParseParams& params, T &out)
+{
+	if(params.size()<4)
+	{
+		qCCritical(stelOBJ)<<"Invalid Vec3f specification"<<params;
+		return false;
+	}
+	if(params.size()>4)
+	{
+		qCWarning(stelOBJ)<<"Additional parameters ignored in statement"<<params;
+	}
+
 	bool ok = false;
-	v[0] = params.at(1).toFloat(&ok);
+	out[0] = params.at(1).toFloat(&ok);
 	if(ok)
 	{
-		v[1] = params.at(2).toFloat(&ok);
+		out[1] = params.at(2).toFloat(&ok);
 		if(ok)
 		{
-			v[2] = params.at(3).toFloat(&ok);
-			posList.append(v);
+			out[2] = params.at(3).toFloat(&ok);
 			return true;
 		}
 	}
 
-	qCCritical(stelOBJ)<<"Cannot parse vertex position specification"<<params;
+	qCCritical(stelOBJ)<<"Error parsing Vec3:"<<params;
 	return false;
 }
 
-bool StelOBJ::parseVertNorm(ParseParams params, V3Vec& normList) const
+template <typename T>
+bool StelOBJ::parseVec2(const ParseParams& params,T &out)
 {
-	if(params.size()!=4)
+	if(params.size()<3)
 	{
-		qCCritical(stelOBJ)<<"Invalid vertex normal specification"<<params;
+		qCCritical(stelOBJ)<<"Invalid Vec2f specification"<<params;
 		return false;
 	}
-
-	Vec3f v;
-	bool ok = false;
-	v[0] = params.at(1).toFloat(&ok);
-	if(ok)
+	if(params.size()>3)
 	{
-		v[1] = params.at(2).toFloat(&ok);
-		if(ok)
-		{
-			v[2] = params.at(3).toFloat(&ok);
-			normList.append(v);
-			return true;
-		}
+		qCWarning(stelOBJ)<<"Additional parameters ignored in statement"<<params;
 	}
 
-	qCCritical(stelOBJ)<<"Cannot parse vertex normal specification"<<params;
-	return false;
-}
-
-bool StelOBJ::parseVertTex(ParseParams params, V2Vec& texList) const
-{
-	if(params.size()<3||params.size()>4)
-	{
-		qCCritical(stelOBJ)<<"Invalid vertex texture coordinate specification"<<params;
-		return false;
-	}
-
-	Vec2f v;
 	bool ok = false;
-	v[0] = params.at(1).toFloat(&ok);
+	out[0] = params.at(1).toFloat(&ok);
 	if(ok)
 	{
-		v[1] = params.at(2).toFloat(&ok);
-		texList.append(v);
+		out[1] = params.at(2).toFloat(&ok);
 		return true;
 	}
 
-	qCCritical(stelOBJ)<<"Cannot parse vertex texture coordinate specification"<<params;
+	qCCritical(stelOBJ)<<"Error parsing Vec2:"<<params;
 	return false;
 }
 
-bool StelOBJ::parseFace(ParseParams params, const V3Vec& posList, const V3Vec& normList, const V2Vec& texList,
+StelOBJ::Object* StelOBJ::getCurrentObject(CurrentParserState &state)
+{
+	//if there is a current object, return this one
+	if(state.currentObject)
+		return state.currentObject;
+
+	//create the default object
+	Object& obj = INC_LIST(m_objects);
+	obj.name = "<default object>";
+	obj.isDefaultObject = true;
+	m_objectMap.insert(obj.name, m_objects.size()-1);
+	state.currentObject = &obj;
+	return &obj;
+}
+
+StelOBJ::MaterialGroup* StelOBJ::getCurrentMaterialGroup(CurrentParserState &state)
+{
+	int matIdx = getCurrentMaterialIndex(state);
+	//if there is a current material group, check if a new one must be created because the material changed
+	if(state.currentMaterialGroup && state.currentMaterialGroup->materialIndex==matIdx)
+		return state.currentMaterialGroup;
+
+	//no material group has been created yet
+	//or the material has changed
+	//we need to create a new group
+	//we need an object for this
+	Object* curObj = getCurrentObject(state);
+
+	MaterialGroup& grp = INC_LIST(curObj->groups);
+	grp.materialIndex = matIdx;
+	//the object should always be the most recently added one
+	grp.objectIndex = m_objects.size()-1;
+	//the start index is positioned after the end of the index list
+	grp.startIndex = m_indices.size();
+	state.currentMaterialGroup = &grp;
+	return &grp;
+}
+
+int StelOBJ::getCurrentMaterialIndex(CurrentParserState &state)
+{
+	//if there has been a material definition before, we use this
+	if(m_materials.size())
+		return state.currentMaterialIdx;
+
+	//only if no material has been defined before any face,
+	//we need to create a default material
+	//this is "a white material" according to http://paulbourke.net/dataformats/obj/
+	Material& mat = INC_LIST(m_materials);
+	mat.name = "<default material>";
+	mat.Kd = QVector3D(0.8f, 0.8f, 0.8f);
+	mat.Ka = QVector3D(0.1f, 0.1f, 0.1f);
+
+	m_materialMap.insert(mat.name, m_materials.size()-1);
+	state.currentMaterialIdx = 0;
+	return 0;
+}
+
+bool StelOBJ::parseFace(const ParseParams& params, const V3Vec& posList, const V3Vec& normList, const V2Vec& texList,
+			CurrentParserState& state,
 			VertexCache& vertCache)
 {
 	//The face definition can have 4 different variants
@@ -247,7 +346,8 @@ bool StelOBJ::parseFace(ParseParams params, const V3Vec& posList, const V3Vec& n
 		}
 
 		//create a temporary Vertex by copying the info from the lists
-		Vertex v = {};
+		//zero initialize!
+		Vertex v = Vertex();
 		if(posIdx)
 		{
 			const float* data = posList.at(posIdx-1).v;
@@ -280,6 +380,9 @@ bool StelOBJ::parseFace(ParseParams params, const V3Vec& posList, const V3Vec& n
 		}
 	}
 
+	//get/create current material group
+	MaterialGroup* grp = getCurrentMaterialGroup(state);
+
 	//vertex data has been loaded, create the faces
 	//we use triangle-fan triangulation
 	for(int i=2;i<vtxAmount;++i)
@@ -288,14 +391,133 @@ bool StelOBJ::parseFace(ParseParams params, const V3Vec& posList, const V3Vec& n
 		m_indices.append(vIdx[0]);
 		m_indices.append(vIdx[i-1]);
 		m_indices.append(vIdx[i]);
+		//add the triangle to the group
+		grp->indexCount+=3;
 	}
 
 	return true;
 }
 
+StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
+{
+	StelOBJ::MaterialList list;
+
+	QFile file(filename);
+	if(!file.open(QIODevice::ReadOnly))
+	{
+		qCWarning(stelOBJ)<<"Could not open MTL file"<<filename<<file.errorString();
+		return list;
+	}
+
+	QTextStream stream(&file);
+	Material* curMaterial = NULL;
+	int lineNr = 0;
+
+	while(!stream.atEnd())
+	{
+		++lineNr;
+		bool ok = true;
+		QString line = stream.readLine();
+		//split line by space
+		QVector<QStringRef> splits = line.splitRef(' ',QString::SkipEmptyParts);
+		if(!splits.isEmpty())
+		{
+			const QStringRef& cmd = splits.at(0);
+
+			//macro to make sure a material is currently active
+			#define CHECK_MTL(a) do{ if(curMaterial) { a; } else { ok = false; qCCritical(stelOBJ)<<"Encountered material statement without active material"; } } while(0)
+			if(CMD_CMP("newmtl")) //define new material
+			{
+				ok = splits.size()==2;
+				if(ok)
+				{
+					const QStringRef& name = splits.at(1);
+					//add a new material with the specified name
+					list.resize(list.size()+1);
+					curMaterial = &list.last();
+					curMaterial->name = name.toString();
+					ok = !name.isEmpty();
+				}
+				if(!ok)
+				{
+					qCCritical(stelOBJ)<<"Invalid newmtl statement"<<line;
+				}
+			}
+			else if(CMD_CMP("Ka")) //define ambient color
+			{
+				CHECK_MTL(ok = parseVec3(splits,curMaterial->Ka));
+			}
+			else if(CMD_CMP("Kd")) //define diffuse color
+			{
+				CHECK_MTL(ok = parseVec3(splits,curMaterial->Kd));
+			}
+			else if(CMD_CMP("Ks")) //define specular color
+			{
+				CHECK_MTL(ok = parseVec3(splits,curMaterial->Ks));
+			}
+			else if(CMD_CMP("Ke")) //define emissive color
+			{
+				CHECK_MTL(ok = parseVec3(splits,curMaterial->Ke));
+			}
+			else if(CMD_CMP("Ns")) //define specular coefficient
+			{
+				CHECK_MTL(ok = parseFloat(splits,curMaterial->Ns));
+			}
+			else if(CMD_CMP("map_Ka")) //define ambient map
+			{
+				CHECK_MTL(ok = parseString(splits,curMaterial->map_Ka));
+			}
+			else if(CMD_CMP("map_Kd")) //define diffuse map
+			{
+				CHECK_MTL(ok = parseString(splits,curMaterial->map_Kd));
+			}
+			else if(CMD_CMP("map_Ks")) //define specular map
+			{
+				CHECK_MTL(ok = parseString(splits,curMaterial->map_Ks));
+			}
+			else if(CMD_CMP("map_Ke")) //define emissive map
+			{
+				CHECK_MTL(ok = parseString(splits,curMaterial->map_Ke));
+			}
+			else if(CMD_CMP("map_bump")) //define bump/normal map
+			{
+				CHECK_MTL(ok = parseString(splits,curMaterial->map_bump));
+			}
+			else if(CMD_CMP("map_height")) //define height map
+			{
+				CHECK_MTL(ok = parseString(splits,curMaterial->map_height));
+			}
+			else if(CMD_CMP("bAlphatest"))
+			{
+				CHECK_MTL(ok = parseBool(splits,curMaterial->bAlphatest));
+			}
+			else if(CMD_CMP("bBackface"))
+			{
+				CHECK_MTL(ok = parseBool(splits,curMaterial->bBackface));
+			}
+			else if(!cmd.startsWith("#"))
+			{
+				//unknown command, warn
+				qCWarning(stelOBJ)<<"Unknown MTL statement:"<<line;
+			}
+		}
+
+		if(!ok)
+		{
+			list.clear();
+			qCCritical(stelOBJ)<<"Critical error in MTL file"<<filename<<"at line"<<lineNr<<", cannot process: "<<line;
+			break;
+		}
+	}
+
+	return list;
+}
+
 bool StelOBJ::load(QIODevice& device, const QString &basePath)
 {
 	clear();
+
+	QDir baseDir(basePath);
 
 	QElapsedTimer timer;
 	timer.start();
@@ -309,6 +531,7 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath)
 	V2Vec texList;
 
 	VertexCache vertCache;
+	CurrentParserState state = CurrentParserState();
 
 	int lineNr=0;
 
@@ -326,42 +549,72 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath)
 
 			bool ok = true;
 
-			//macro to test out different ways of comparison and their performance
-			#define CMD_CMP(a) (cmd==QLatin1String(a))
-
 			if(CMD_CMP("f"))
 			{
-				ok = parseFace(splits,posList,normalList,texList,vertCache);
+				ok = parseFace(splits,posList,normalList,texList,state,vertCache);
 			}
 			else if(CMD_CMP("v"))
 			{
-				ok = parseVertPos(splits,posList);
+				ok = parseVec3(splits,INC_LIST(posList));
 			}
 			else if(CMD_CMP("vt"))
 			{
-				ok = parseVertTex(splits,texList);
+				ok = parseVec2(splits,INC_LIST(texList));
 			}
 			else if(CMD_CMP("vn"))
 			{
-				ok = parseVertNorm(splits,normalList);
+				ok = parseVec3(splits,INC_LIST(normalList));
 			}
 			else if(CMD_CMP("usemtl"))
 			{
-				//load material from cache
+				ok = splits.size()==2;
+				if(ok)
+				{
+					QString mtl = splits.at(1).toString();
+					if(m_materialMap.contains(mtl))
+					{
+						//set material as active
+						state.currentMaterialIdx = m_materialMap.value(mtl);
+					}
+					else
+					{
+						ok = false;
+						qCCritical(stelOBJ)<<"Unknown material"<<mtl<<"has been referenced";
+					}
+				}
 			}
 			else if(CMD_CMP("mtllib"))
 			{
-				//load external material file
+				ok = splits.size()==2;
+				if(ok)
+				{
+					//load external material file
+					MaterialList newMaterials = Material::loadFromFile(baseDir.absoluteFilePath(splits.at(1).toString()));
+					foreach(const Material& m, newMaterials)
+					{
+						m_materials.append(m);
+						//the map has the index of the material
+						//because pointers may change during parsing
+						//because of list resizeing
+						m_materialMap.insert(m.name,m_materials.size()-1);
+					}
+					qCDebug(stelOBJ)<<newMaterials.size()<<"loaded from MTL file"<<splits.at(1);
+				}
 			}
 			else if(CMD_CMP("o"))
 			{
 				//create new object
+				Object& obj = INC_LIST(m_objects);
+				ok = parseString(splits, obj.name);
+				if(ok)
+				{
+					m_objectMap.insert(obj.name,m_objects.size()-1);
+					state.currentObject = &obj;
+					//also clear material group to make sure a new group is created
+					state.currentMaterialGroup = NULL;
+				}
 			}
-			else if(CMD_CMP("g"))
-			{
-				//create new group
-			}
-			else if(!CMD_CMP("#"))
+			else if(!cmd.startsWith('#'))
 			{
 				//unknown command, warn
 				qCWarning(stelOBJ)<<"Unknown OBJ statement:"<<line;
@@ -380,9 +633,9 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath)
 	m_indices.squeeze();
 
 	qCDebug(stelOBJ)<<"Loaded OBJ in"<<timer.elapsed()<<"ms";
-	qCDebug(stelOBJ, "Parsed %d positions, %d normals, %d texture coordinates",
-		posList.size(), normalList.size(), texList.size());
-	qCDebug(stelOBJ, "Created %d vertices and %d faces", m_vertices.size(), getFaceCount());
+	qCDebug(stelOBJ, "Parsed %d positions, %d normals, %d texture coordinates, %d materials",
+		posList.size(), normalList.size(), texList.size(), m_materials.size());
+	qCDebug(stelOBJ, "Created %d vertices, %d faces, %d objects", m_vertices.size(), getFaceCount(), m_objects.size());
 
 
 	device.close();
