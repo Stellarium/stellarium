@@ -38,7 +38,6 @@ or other presentation for instruction or entertainment from within the
 Stellarium program. The original \emph{Stratoscript} was quite limited in
 what it could do so a new Stellarium Scripting System has been
 developed. As of version 0.14.0 a new scripting engine 
-% is still in development but it 
 has reached a level where it 
 has all required features for usage, however new
 commands may be added from time to time. Since version 0.14.0 support
@@ -50,9 +49,7 @@ features that those documented here. Check for updates to Stellarium at
 the Stellarium website.
 
 If you have questions and/or comments about this guide, 
-% please email the author. %% GZ This is IMHO no longer valid.
-% For comments 
-or about Stellarium itself, visit the Stellarium forums\footnote{%
+or about Stellarium itself, visit the Stellarium forums\footnote{
 \url{https://sourceforge.net/p/stellarium/discussion/278769/}}.
 
 
@@ -65,46 +62,59 @@ or about Stellarium itself, visit the Stellarium forums\footnote{%
 %% It may also be possible, if everyone from the original team adds 1/2-1 page under his name, to have some nice anecdotes?
 
 Stellarium has been developed by a small team of enthusiastic developers. 
-%% Please replace the following sentence by something corrected!
-[We should have a short description here!]
-% Fabien Chereau started the project in 2000,%?
-% and soon found support by his brother Guillaume, Matthew Gates,
-% Timothy Reaves, Johannes Gajdosik, Barry Gerdes, and Alexander Wolf.
-% The artist Johan Meuris contributed the graphical elements, not only
-% the GUI button icons, but a full set of drawings of our Western 88
-% constellations.
 
-% It may be interesting for "software archaeologists" to dig into very old versions still available on SourceForge... 
-%% MAYBE SOME DEV. HIGHLIGHTS? Fabien?
-
-%% AND OTHERS?
-%% MAYBE PRESENT THE CONTRIBUTIONS OF THEM? 
-% In 200x, Guillaume ported Stellarium first to the Nokia Maemo platform, then to Android. 
-% The Android version differs a bit from the desktop version: 
-%% WHY, IN WHAT PARTS? Can this guide be applied/extended to the Android version?
-
-By 2010 the team was preparing a first ``final'' release 1.0. 
-%% WHAT HAPPENED THEN?
-
+Fabien Chereau started the project during the summer 2000, and throughout
+the years found continuous support by a small team of enthusiastic developers.
 Unfortunately time is evolving, and most members of the original
 development team are no longer able to devote most of their spare time
-to the project. Fortunately some are still available for limited work
-which requires specific knowledge about the project. Currently (2016)
-most maintenance and regular releases are created by Alexander
-Wolf. Georg Zotti joined around 2010 and is working on extensions of Stellarium's applicability
-mostly in the fields of historical and cultural astronomy (which means Stellarium is getting more accurate), but also on
-graphic items like the comet tails or the Zodiacal Light.
+to the project (some are still available for limited work
+which requires specific knowledge about the project).
 
-%% Whoever feels left out, please present yourself!
+Here is a list of past and present major contributors sorted roughly by date of
+arrival on the project:
+ - Fabien Chereau: original creator, maintainer, general development
+ - Matthew Gates: maintainer, user guide, user support, general development
+ - Johannes Gajdosik: astronomical computations, large stars catalogs support
+ - Johan Meuris: GUI design, website creation, drawings of our Western 88 constellations
+ - Nigel Kerr: Mac OSX port
+ - Rob Spearman: funding for planetarium support
+ - Barry Gerdes: user support, tester, windows support. Barry passed away in 
+     October 2014 at age 80. He was a major contributor on the forums, wiki
+     pages and mailing list where his good will and enthusiasm is strongly
+     missed. RIP Barry.
+ - Timothy Reaves: ocular plugin
+ - Bogdan Marinov: GUI, telescope control, other plugins
+ - Diego Marcos: SVMT plugin
+ - Guillaume Chereau: display, optimization, Qt upgrades
+ - Alexander Wolf: maintainer, general development
+ - Georg Zotti: astronomical computations, user support
+ - Marcos Cardinot: meteor plugin
+ - Florian Schaukowitsch: 3D Landscape plugin
 
+A few important milestones for the project:
+ - 2000: first lines of code for the project
+ - 2001-06: first public mention (and users feedbacks!) of the software on the fr.sci.astronomie.amateur french newsgroup \url{https://groups.google.com/d/topic/fr.sci.astronomie.amateur/OT7K8yogRlI/discussion}
+ - 2003-01: stellarium reviewed by Astronomy magazine
+ - 2003-07: funding for developing planetarium features (fisheye projection and other features)
+ - 2005-12: use accurate (and fast) planetary model
+ - 2006-05: stellarium "Project Of the Month" on sourceforge
+ - 2006-08: large stars catalogs
+ - 2007-01: funding by ESO for development of professional astronomy extensions (VirGO)
+ - 2007-04: developer's meeting near Munich, Germany
+ - 2007-05: switch to the Qt library as main GUI and general purpose library
+ - 2009-09: plugin system, enabling a lot of new development
+ - 2010-07: stellarium ported on Maemo mobile device
+ - 2010-11: artificial satellites plugin
+ - 2014-06: high quality satellites and saturn rings shadows, moon craters
+ - 2014-07: adapt to opengl evolutions in the Qt framework, require more modern graphic hardware than earlier versions
+ - 2015-04: scenery 3D plugin
 
-A great leap forward was the 0.13 series. We had to adapt to
-evolutions in the Qt framework which Stellarium is based
-on. Fortunately Fabien and Guillaume had enough insight into the
-framework to do this. This also means the series 0.13 and later
-require more modern hardware than earlier versions. Computers 
-with dedicated 3D graphics cards from 2008 and later, and 
-most computers from 2011 and later are able to run it. 
+As of 2016, the project's maintainer is Alexander Wolf, doing most maintenance
+and regular releases. Major new features are contributed mostly by Georg Zotti
+and his team focused on extensions of Stellarium's applicability in the fields of
+historical and cultural astronomy (which means Stellarium is getting more
+accurate), but also on graphic items like the comet tails or the Zodiacal Light.
+
 
 Stellarium has been kindly supported by ESA in their Summer of Code in
 Space initiatives, which resulted in better planetary rendering
