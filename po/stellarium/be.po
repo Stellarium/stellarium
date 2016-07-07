@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-04 01:01+0700\n"
-"PO-Revision-Date: 2016-07-02 19:46+0000\n"
+"PO-Revision-Date: 2016-07-06 10:31+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-04 05:16+0000\n"
+"X-Launchpad-Export-Date: 2016-07-07 05:17+0000\n"
 "X-Generator: Launchpad (build 18115)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -32,7 +32,7 @@ msgstr "Тып: <b>%1</b>"
 
 #: src/core/modules/Constellation.cpp:297
 msgid "constellation"
-msgstr ""
+msgstr "сузор'е"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:412
 #: src/core/modules/GridLinesMgr.cpp:950 src/core/modules/LandscapeMgr.cpp:414
@@ -967,11 +967,11 @@ msgstr "Час узыходжаньня: %1%"
 
 #: src/core/modules/StarWrapper.cpp:276
 msgid "Year of last satisfactory observation"
-msgstr ""
+msgstr "Год апошняга здавальняючага назіраньня"
 
 #: src/core/modules/StarWrapper.cpp:277
 msgid "Position angle"
-msgstr ""
+msgstr "Пазыцыйны вугал"
 
 #: src/core/modules/StarWrapper.cpp:278 src/gui/AstroCalcDialog.cpp:479
 msgid "Separation"
@@ -8259,6 +8259,8 @@ msgid ""
 "This plug-in is based on and reuses a lot of code under the GNU General "
 "Public License:"
 msgstr ""
+"Гэты дадатак выкарыстоўвае шмат коду абароненага Асноўнай грамадзкай "
+"ліцэнзіяй GNU:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:259
 msgid ""
@@ -8369,7 +8371,7 @@ msgstr "Полю зроку індыкатараў"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:385
 msgid "'Slew telescope to' window"
-msgstr ""
+msgstr "Вакно «павернуць тэлескоп да»"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 msgid "Telescope commands"
@@ -8399,6 +8401,8 @@ msgid ""
 "As of the current version, this plug-in doesn't allow satellite tracking, "
 "and is not very suitable for lunar or planetary observations."
 msgstr ""
+"У бягучай вэрсіі дадатак не дазваляе адсочваць спадарожнікі й ня вельмі "
+"прыдатны для назіраньняў за плянэтамі ці Месяцам."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:299
 msgid ""
@@ -8413,6 +8417,9 @@ msgid ""
 "installed. The powerful light amplified by the telescope WILL cause "
 "irreversible damage to your eyes and/or your equipment."
 msgstr ""
+"Ніколі не накіроўвай тэлескоп на Сонца без адпаведнага сонечнага фільтра. "
+"Магутнае сьвятло, узмоцненае тэлескопам, нанясе непапраўную шкоду тваім "
+"вачам і/ці абсталяваньню."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:301
 msgid ""
@@ -8444,12 +8451,15 @@ msgid ""
 "removed. There is no longer a way to control a telescope with Stellarium "
 "without this plug-in."
 msgstr ""
+"У Stellarium 0.10.5 спачатная функцыя кіраваньня тэлескопам была выдаленая. "
+"Больш няма магчымасьці кіраваць тэлескопам з Stellarium бяз гэтага дадатку."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:309
 msgid ""
 "Here are two general ways to control a device with this plug-in, depending "
 "on the situation:"
 msgstr ""
+"Гэты дадатак мае два асноўныя спосабы кіраваньня прыладай, у залежнасьці ад:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
 msgid "DIRECT CONNECTION"
@@ -8461,6 +8471,8 @@ msgid ""
 "A %1device supported by the plug-in%2 is connected with a cable to the "
 "computer running Stellarium;"
 msgstr ""
+"прылада, якую %1падтрымлівае дадатак%2, далучаная кабэлем да кампутара, на "
+"якім працуе Stellarium;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:311
 msgid "INDIRECT CONNECTION"
@@ -8528,7 +8540,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
 msgid "The plug-in's main window can be opened:"
-msgstr ""
+msgstr "Галоўнае вакно дадатку можна адкрыць з дапамогай:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:323
 msgid ""
@@ -8550,12 +8562,15 @@ msgid ""
 "The <b>Telescopes</b> tab displays a list of the telescope connections that "
 "have been set up:"
 msgstr ""
+"Укладка <b>Тэлескопы</b> паказвае сьпіс усталяваных злучэньняў з тэлескопамі:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:326
 msgid ""
 "The number (<b>#</b>) column shows the number used to control this "
 "telescope. For example, for telescope #2, the shortcut is Ctrl+2."
 msgstr ""
+"Слупок «нумар» (<b>#</b>) паказвае лічбу, з дапамогай можна кіраваць "
+"тэлескопам. Напрыклад, для тэлескопа №2 скарот Ctrl+2."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:327
 msgid ""
@@ -8566,12 +8581,12 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:328
 msgid "The <b>Type</b> field indicates what kind of connection is this:"
-msgstr ""
+msgstr "Поле <b>Тып</b> паказвае від злучэньня:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:329
 #, qt-format
 msgid "<b>virtual</b> means a %1virtual telescope%2;"
-msgstr ""
+msgstr "<b>віртуальнае</b> азначае %1віртуальны тэлескоп%2;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:330
 #, qt-format
@@ -8579,18 +8594,24 @@ msgid ""
 "<b>local, Stellarium</b> means a DIRECT connection to the telescope (see "
 "%1above%2);"
 msgstr ""
+"<b>мясцовае, Stellarium</b> азначае, што ўсталяванае ПРАМАЕ злучэньне з "
+"тэлескопам (гл. %1вышэй%2);"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:331
 msgid ""
 "<b>local, external</b> means an INDIRECT connection to a program running on "
 "the same computer;"
 msgstr ""
+"<b>мясцовае, вонкавае</b> азначае НЕПРАМОЕ злучэньне з праґрамай, запушчанай "
+"на гэтым жа кампутары;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:332
 msgid ""
 "<b>remote, unknown</b> means an INDIRECT connection over a network to a "
 "remote machine."
 msgstr ""
+"<b>аддаленае, невядомае</b> азначае НЕПРАМОЕ злучэньне да аддаленага "
+"кампутара."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:333
 msgid ""
@@ -8599,6 +8620,10 @@ msgid ""
 "the <b>Configure</b> button. In both cases, a telescope connection "
 "configuration window will open."
 msgstr ""
+"Каб усталяваць новае злучэньне з тэлескопам націсьні ґузік <b>Дадаць</b>. "
+"Каб зьмяніць настаўленьні існоўнага злучэньня выберы яго ў сьпісе й націсьні "
+"ґузік <b>Наставіць</b>. У абодвух выпадках будзе адкрытае вакно "
+"настаўленьняў злучэньня з тэлескопам."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:339
 #, qt-format
@@ -8606,6 +8631,8 @@ msgid ""
 "The topmost field represents the choice between the two types of connections "
 "(see %1above%2):"
 msgstr ""
+"Самае верхняе поле адлюстроўвае выбар між двума відамі злучэньня (гл. "
+"%1вышэй%2):"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:340
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:463
@@ -8662,7 +8689,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:355
 #, qt-format
 msgid "This section is active only for DIRECT connections (see %1above%2)."
-msgstr ""
+msgstr "Гэтая сэкцыя актыўная толькі для ПРАМЫХ злучэньняў (гл. %1вышэй%2)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:356
 msgid "<b>Serial port</b> sets the serial port used by the telescope."
@@ -8701,6 +8728,8 @@ msgstr ""
 msgid ""
 "To list all valid serial port names in Mac OS X, open a terminal and type:"
 msgstr ""
+"Каб атрымаць сьпіс наяўных пасьлядоўных палёў у Mac OS X адкрый тэрмінал і "
+"напішы:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:363
 msgid ""
@@ -8712,11 +8741,12 @@ msgstr ""
 #, qt-format
 msgid "<b>Device model</b>: see %1Supported devices%2 below."
 msgstr ""
+"<b>Мадэль прылады</b>: глядзі ніжэй %1прылады, якія падтрымліваюцца%2."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:368
 #, qt-format
 msgid "Both fields here refer to communication over a network (%1TCP/IP%2)."
-msgstr ""
+msgstr "Гэтыя абодва палі адносяцца да злучэньняў празь сетку (%1TCP/IP%2)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:369
 #, qt-format
@@ -8740,7 +8770,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:372
 msgid "Both values are ignored for DIRECT connections."
-msgstr ""
+msgstr "Абодва значэньні не бяруцца да ўвагі для ПРАМЫХ злучэньняў."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:373
 msgid ""
@@ -13878,11 +13908,11 @@ msgstr "Паказваць лінію бягучага Месяца"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:247
 msgid "Show Line for Geographic Location 1"
-msgstr ""
+msgstr "Паказваць лінію ґеаґрафічнага месца 1"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:248
 msgid "Show Line for Geographic Location 2"
-msgstr ""
+msgstr "Паказваць лінію ґеаґрафічнага месца 2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:249
 msgid "Show Line for Custom Azimuth 1"
@@ -14068,11 +14098,11 @@ msgstr "Выберы колер лініі бягучай плянэты"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:472
 msgid "Select color for Geographic Location 1 line"
-msgstr ""
+msgstr "Выберы колер лініі ґеаґрафічнага месца 1"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:483
 msgid "Select color for Geographic Location 2 line"
-msgstr ""
+msgstr "Выберы колер лініі ґеаґрафічнага месца 2"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:494
 msgid "Select color for Custom Azimuth 1 line"
@@ -14096,16 +14126,16 @@ msgstr "Каб зьмяніць колер трэба выйсьці з поўн
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:475
 msgid "Geographic Location 1"
-msgstr ""
+msgstr "Ґеаґрафічнае месца 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:477
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:483
 msgid "Enter a label (location name) for this line"
-msgstr ""
+msgstr "Увядзі подпіс (назву месца) гэтай лініі"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:481
 msgid "Geographic Location 2"
-msgstr ""
+msgstr "Ґеаґрафічнае месца 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:486
 msgid "Change color"
