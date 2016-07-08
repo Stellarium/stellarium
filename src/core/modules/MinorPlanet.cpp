@@ -64,9 +64,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 		  pTypeStr)
 {
 	texMapName = atexMapName;
-	lastOrbitJDE =0;
 	deltaJDE = StelCore::JD_SECOND;
-	orbitCached = 0;
 	closeOrbit = acloseOrbit;
 	semiMajorAxis = 0.;
 

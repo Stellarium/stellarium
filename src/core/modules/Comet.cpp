@@ -89,11 +89,9 @@ Comet::Comet(const QString& englishName,
 	  dustTailBrightnessFactor(dustTailBrightnessFact)
 {
 	texMapName = atexMapName;
-	lastOrbitJDE =0;
 	deltaJDE = StelCore::JD_SECOND;
 	deltaJDEtail=15.0*StelCore::JD_MINUTE; // update tail geometry every 15 minutes only
 	lastJDEtail=0.0;
-	orbitCached = 0;
 	closeOrbit = acloseOrbit;
 
 	eclipticPos=Vec3d(0.,0.,0.);

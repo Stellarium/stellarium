@@ -28,6 +28,7 @@
 #include <QString>
 #include <QVarLengthArray>
 #include <QFontMetrics>
+#include <functional>
 
 class QOpenGLShaderProgram;
 
@@ -121,6 +122,14 @@ public:
 	//! The points should be already tesselated to ensure that the path will look smooth.
 	//! The algorithm take care of cutting the path if it crosses a viewport discontinutiy.
 	void drawPath(const QVector<Vec3d> &points, const QVector<Vec4f> &colors);
+
+	// Draw a curve from a parametric function.
+	// @param t0		starting argument of the curve function.
+	// @param t1		end argument of the curve function.
+	// @param nmin		minimum number of point of the curve.
+	// @param fn		parametric curve function.
+	void drawParametricPath(double t0, double t1, int nmin,
+							std::function<void(double t, Vec3d *p)> fn);
 
 	//! Draw a simple circle, 2d viewport coordinates in pixel
 	void drawCircle(float x, float y, float r);
