@@ -266,6 +266,7 @@ private:
 	static float circleScale;             // Define the scaling of the hints circle. Unused in 0.15. TODO: Remove this? I see no use. (GZ)
 	static bool drawHintProportional;     // scale hint with nebula size?
 	static bool surfaceBrightnessUsage;
+	static bool designationUsage;
 
 	static bool flagUseTypeFilters;
 	static CatalogGroup catalogFilters;
