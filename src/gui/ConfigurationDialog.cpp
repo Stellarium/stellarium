@@ -629,6 +629,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/nebula_labels_amount", nmgr->getLabelsAmount());
 	conf->setValue("astro/flag_nebula_hints_proportional", nmgr->getHintsProportional());
 	conf->setValue("astro/flag_surface_brightness_usage", nmgr->getFlagSurfaceBrightnessUsage());
+	conf->setValue("gui/flag_dso_designation_usage", nmgr->getDesignationUsage());
 	conf->setValue("astro/flag_nebula_name", nmgr->getFlagHints());
 	conf->setValue("astro/flag_nebula_display_no_texture", !GETSTELMODULE(StelSkyLayerMgr)->getFlagShow());
 	conf->setValue("astro/flag_use_type_filter", nmgr->getFlagUseTypeFilters());
