@@ -48,10 +48,51 @@ typedef QSharedPointer<Nebula> NebulaP;
 class NebulaMgr : public StelObjectModule
 {
 	Q_OBJECT
+	//StelActions
 	Q_PROPERTY(bool flagHintDisplayed
 		   READ getFlagHints
-		   WRITE setFlagHints)
-
+		   WRITE setFlagHints
+		   NOTIFY flagHintsDisplayedChanged)
+	Q_PROPERTY(bool flagTypeFiltersUsage
+		   READ getFlagUseTypeFilters
+		   WRITE setFlagUseTypeFilters
+		   NOTIFY flagUseTypeFiltersChanged)
+	//StelProperties
+	Q_PROPERTY(Nebula::TypeGroup typeFilters
+		   READ getTypeFilters
+		   WRITE setTypeFilters
+		   NOTIFY typeFiltersChanged
+		   )
+	Q_PROPERTY(Nebula::CatalogGroup catalogFilters
+		   READ getCatalogFilters
+		   WRITE setCatalogFilters
+		   NOTIFY catalogFiltersChanged
+		   )
+	Q_PROPERTY(bool hintsProportional
+		   READ getHintsProportional
+		   WRITE setHintsProportional
+		   NOTIFY hintsProportionalChanged
+		   )
+	Q_PROPERTY(bool flagSurfaceBrightnessUsage
+		   READ getFlagSurfaceBrightnessUsage
+		   WRITE setFlagSurfaceBrightnessUsage
+		   NOTIFY flagSurfaceBrightnessUsageChanged
+		   )
+	Q_PROPERTY(double labelsAmount
+		   READ getLabelsAmount
+		   WRITE setLabelsAmount
+		   NOTIFY labelsAmountChanged
+		   )
+	Q_PROPERTY(double hintsAmount
+		   READ getHintsAmount
+		   WRITE setHintsAmount
+		   NOTIFY hintsAmountChanged
+		   )
+	Q_PROPERTY(bool flagDesignationLabels
+		   READ getDesignationUsage
+		   WRITE setDesignationUsage
+		   NOTIFY designationUsageChanged
+		   )
 public:
 	NebulaMgr();
 	virtual ~NebulaMgr();
@@ -94,18 +135,12 @@ public:
 	//! @param name The case in-sensistive standard program name
 	virtual StelObjectP searchByName(const QString& name) const;
 
-	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
-	//! @param objPrefix the case insensitive first letters of the searched object
-	//! @param maxNbItem the maximum number of returned object names
-	//! @param useStartOfWords the autofill mode for returned objects names
-	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
 	//! @note Loading deep-sky objects with the proper names only.
 	virtual QStringList listAllObjects(bool inEnglish) const;
 	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
@@ -113,12 +148,6 @@ public:
 
 	//! Compute the maximum magntiude for which hints will be displayed.
 	float computeMaxMagHint(const class StelSkyDrawer* skyDrawer) const;
-	
-	void setCatalogFilters(const Nebula::CatalogGroup& cflags);
-	const Nebula::CatalogGroup& getCatalogFilters() const { return Nebula::catalogFilters; }
-
-	void setTypeFilters(const Nebula::TypeGroup& tflags) { Nebula::typeFilters=tflags; }
-	const Nebula::TypeGroup& getTypeFilters() const { return Nebula::typeFilters; }
 
 	bool objectInDisplayedCatalog(NebulaP n);
 
@@ -130,6 +159,12 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 public slots:
+	void setCatalogFilters(Nebula::CatalogGroup cflags);
+	Nebula::CatalogGroup getCatalogFilters() const { return Nebula::catalogFilters; }
+
+	void setTypeFilters(Nebula::TypeGroup tflags);
+	Nebula::TypeGroup getTypeFilters() const { return Nebula::typeFilters; }
+
 	//! Set the default color used to draw the nebula symbols (default circles, etc).
 	//! @param c The color of the nebula symbols
 	//! @code
@@ -452,7 +487,7 @@ public slots:
 	void setHintsFadeDuration(float duration) {hintsFader.setDuration((int) (duration * 1000.f));}
 
 	//! Set flag for displaying Nebulae Hints.
-	void setFlagHints(bool b) {hintsFader=b;}
+	void setFlagHints(bool b) { if (hintsFader!=b) { hintsFader=b; emit flagHintsDisplayedChanged(b);}}
 	//! Get flag for displaying Nebulae Hints.
 	bool getFlagHints(void) const {return hintsFader;}
 
@@ -461,8 +496,13 @@ public slots:
 	//! Get whether hints (symbols) are scaled according to nebula size.
 	bool getHintsProportional(void) const;
 
+	//! Set flag for usage designations of DSO for their labels instead common names.
+	void setDesignationUsage(const bool flag);
+	//! Get flag for usage designations of DSO for their labels instead common names.
+	bool getDesignationUsage(void) const;
+
 	//! Set whether hints (symbols) should be visible according to surface brightness value.
-	void setFlagSurfaceBrightnessUsage(const bool usage) { Nebula::surfaceBrightnessUsage=usage; }
+	void setFlagSurfaceBrightnessUsage(const bool usage) {if(usage!=Nebula::surfaceBrightnessUsage){ Nebula::surfaceBrightnessUsage=usage; emit flagSurfaceBrightnessUsageChanged(usage);}}
 	//! Get whether hints (symbols) are visible according to surface brightness value.
 	bool getFlagSurfaceBrightnessUsage(void) const { return Nebula::surfaceBrightnessUsage; }
 
@@ -472,9 +512,9 @@ public slots:
 	bool getFlagShow(void) const { return flagShow; }
 
 	//! Set flag used to turn on and off DSO type filtering.
-	void setFlagTypeFiltersUsage(bool b) { Nebula::flagUsageTypeFilter=b; }
+	void setFlagUseTypeFilters(bool b) { if (Nebula::flagUseTypeFilters!=b) { Nebula::flagUseTypeFilters=b; emit flagUseTypeFiltersChanged(b);}}
 	//! Get value of flag used to turn on and off DSO type filtering.
-	bool getFlagTypeFiltersUsage(void) const { return Nebula::flagUsageTypeFilter; }
+	bool getFlagUseTypeFilters(void) const { return Nebula::flagUseTypeFilters; }
 
 	//! Set the color used to draw nebula labels.
 	//! @param c The color of the nebula labels
@@ -489,18 +529,32 @@ public slots:
 	//! Set the amount of nebulae labels. The real amount is also proportional with FOV.
 	//! The limit is set in function of the nebulae magnitude
 	//! @param a the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
-	void setLabelsAmount(float a) {labelsAmount=a;}
+	void setLabelsAmount(double a) {if(a!=labelsAmount){labelsAmount=a; emit labelsAmountChanged(a);}}
 	//! Get the amount of nebulae labels. The real amount is also proportional with FOV.
 	//! @return the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
-	float getLabelsAmount(void) const {return labelsAmount;}
+	double getLabelsAmount(void) const {return labelsAmount;}
 
 	//! Set the amount of nebulae hints. The real amount is also proportional with FOV.
 	//! The limit is set in function of the nebulae magnitude
 	//! @param f the amount between 0 and 10. 0 is no hints, 10 is maximum of hints
-	void setHintsAmount(float f) {hintsAmount = f;}
+	void setHintsAmount(double f) {if(hintsAmount!=f){hintsAmount = f; emit hintsAmountChanged(f);}}
 	//! Get the amount of nebulae labels. The real amount is also proportional with FOV.
 	//! @return the amount between 0 and 10. 0 is no hints, 10 is maximum of hints
-	float getHintsAmount(void) const {return hintsAmount;}
+	double getHintsAmount(void) const {return hintsAmount;}
+signals:
+	//! Emitted when hints are toggled.
+	void flagHintsDisplayedChanged(bool b);
+	//! Emitted when filter types are changed.
+	void flagUseTypeFiltersChanged(bool b);
+	//! Emitted when the catalog filter is changed
+	void catalogFiltersChanged(Nebula::CatalogGroup flags);
+	//! Emitted when the type filter is changed
+	void typeFiltersChanged(Nebula::TypeGroup flags);
+	void hintsProportionalChanged(bool b);
+	void designationUsageChanged(bool b);
+	void flagSurfaceBrightnessUsageChanged(bool b);
+	void labelsAmountChanged(double a);
+	void hintsAmountChanged(double f);
 
 private slots:
 	//! Update i18 names from English names according to passed translator.
@@ -561,9 +615,9 @@ private:
 	StelSphericalIndex nebGrid;
 
 	//! The amount of hints (between 0 and 10)
-	float hintsAmount;
+	double hintsAmount;
 	//! The amount of labels (between 0 and 10)
-	float labelsAmount;
+	double labelsAmount;
 
 	//! The selection pointer texture
 	StelTextureSP texPointer;

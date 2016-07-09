@@ -50,8 +50,6 @@
 
 #include <cmath>
 
-Q_DECLARE_METATYPE(Vec3f)
-
 QScriptValue vec3fToScriptValue(QScriptEngine *engine, const Vec3f& c)
 {
 	QScriptValue obj = engine->newObject();
@@ -187,13 +185,10 @@ bool StelScriptMgr::scriptIsRunning()
 
 QString StelScriptMgr::runningScriptId()
 {
-	if (engine.isEvaluating())
-		return scriptFileName;
-	else
-		return QString();
+	return scriptFileName;
 }
 
-const QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, const QString& id, const QString& notFoundText)
+QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, const QString& id, const QString& notFoundText) const
 {
 	QFile file(StelFileMgr::findFile("scripts/" + s, StelFileMgr::File));
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -204,41 +199,80 @@ const QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, co
 		return QString();
 	}
 
+	//use a buffered stream instead of QFile::readLine - much faster!
+	QTextStream textStream(&file);
+	textStream.setCodec("UTF-8");
+
 	QRegExp nameExp("^\\s*//\\s*" + id + ":\\s*(.+)$");
-	while (!file.atEnd())
+	while (!textStream.atEnd())
 	{
-		QString line = QString::fromUtf8(file.readLine());
+		QString line = textStream.readLine();
 		if (nameExp.exactMatch(line))
 		{
 			file.close();
-			return nameExp.capturedTexts().at(1);
+			return nameExp.capturedTexts().at(1).trimmed();
 		}
 	}
 	file.close();
 	return notFoundText;
 }
 
-const QString StelScriptMgr::getName(const QString& s)
+QString StelScriptMgr::getHtmlDescription(const QString &s, bool generateDocumentTags) const
+{
+	QString html;
+	if (generateDocumentTags)
+		html += "<html><body>";
+	html += "<h2>" + q_(getName(s).trimmed()) + "</h2>";
+	QString d = getDescription(s).trimmed();
+	d.replace("\n", "<br />");
+	d.replace(QRegExp("\\s{2,}"), " ");
+	html += "<p>" + q_(d) + "</p>";
+	html += "<p>";
+
+	QString author = getAuthor(s).trimmed();
+	if (!author.isEmpty())
+	{
+		html += "<strong>" + q_("Author") + "</strong>: " + author + "<br />";
+	}
+	QString license = getLicense(s).trimmed();
+	if (!license.isEmpty())
+	{
+		html += "<strong>" + q_("License") + "</strong>: " + license + "<br />";
+	}
+	QString shortcut = getShortcut(s).trimmed();
+	if (!shortcut.isEmpty())
+	{
+		html += "<strong>" + q_("Shortcut") + "</strong>: " + shortcut;
+	}
+	html += "</p>";
+
+	if (generateDocumentTags)
+		html += "</body></html>";
+
+	return html;
+}
+
+QString StelScriptMgr::getName(const QString& s) const
 {
 	return getHeaderSingleLineCommentText(s, "Name", s);
 }
 
-const QString StelScriptMgr::getAuthor(const QString& s)
+QString StelScriptMgr::getAuthor(const QString& s) const
 {
 	return getHeaderSingleLineCommentText(s, "Author");
 }
 
-const QString StelScriptMgr::getLicense(const QString& s)
+QString StelScriptMgr::getLicense(const QString& s) const
 {
 	return getHeaderSingleLineCommentText(s, "License", "");
 }
 
-const QString StelScriptMgr::getShortcut(const QString& s)
+QString StelScriptMgr::getShortcut(const QString& s) const
 {
-	return getHeaderSingleLineCommentText(s, "Shortcut", "").trimmed();
+	return getHeaderSingleLineCommentText(s, "Shortcut", "");
 }
 
-const QString StelScriptMgr::getDescription(const QString& s)
+QString StelScriptMgr::getDescription(const QString& s) const
 {
 	QFile file(StelFileMgr::findFile("scripts/" + s, StelFileMgr::File));
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -249,14 +283,18 @@ const QString StelScriptMgr::getDescription(const QString& s)
 		return QString();
 	}
 
+	//use a buffered stream instead of QFile::readLine - much faster!
+	QTextStream textStream(&file);
+	textStream.setCodec("UTF-8");
+
 	QString desc = "";
 	bool inDesc = false;
 	QRegExp descExp("^\\s*//\\s*Description:\\s*([^\\s].+)\\s*$");
 	QRegExp descNewlineExp("^\\s*//\\s*$");
 	QRegExp descContExp("^\\s*//\\s*([^\\s].*)\\s*$");
-	while (!file.atEnd())
+	while (!textStream.atEnd())
 	{
-		QString line = QString::fromUtf8(file.readLine());
+		QString line = textStream.readLine();
 		if (!inDesc && descExp.exactMatch(line))
 		{
 			inDesc = true;
@@ -282,10 +320,10 @@ const QString StelScriptMgr::getDescription(const QString& s)
 		}
 	}
 	file.close();
-	return desc;
+	return desc.trimmed();
 }
 
-bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript)
+bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript, const QString& scriptId)
 {
 	if (engine.isEvaluating())
 	{
@@ -294,16 +332,17 @@ bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript)
 		qWarning() << msg;
 		return false;
 	}
-	// Seed the PRNG so that script random numbers aren't always the same sequence
-	qsrand(QDateTime::currentDateTime().toTime_t());
 
 	// Make sure that the gui objects have been completely initialized (there used to be problems with startup scripts).
 	Q_ASSERT(StelApp::getInstance().getGui());
 
 	engine.globalObject().setProperty("scriptRateReadOnly", 1.0);
 
+	scriptFileName = scriptId;
+
 	// Notify that the script starts here
 	emit(scriptRunning());
+	emit runningScriptIdChanged(scriptId);
 
 	// run that script
 	engine.evaluate(preprocessedScript);
@@ -313,6 +352,31 @@ bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript)
 
 // Run the script located at the given location
 bool StelScriptMgr::runScript(const QString& fileName, const QString& includePath)
+{
+	QString preprocessedScript;
+	prepareScript(preprocessedScript,fileName,includePath);
+	return runPreprocessedScript(preprocessedScript,fileName);
+}
+
+bool StelScriptMgr::runScriptDirect(const QString &scriptCode, const QString& includePath)
+{
+	if(includePath.isNull())
+		return runPreprocessedScript(scriptCode, "<Direct script input>");
+	else
+	{
+		QString path = includePath;
+		if(includePath.isEmpty())
+			path = QStringLiteral("scripts");
+
+		QString processed;
+		bool ok = preprocessScript(scriptCode,processed, path);
+		if(ok)
+			return runPreprocessedScript(processed, "<Direct script input>");
+		return false;
+	}
+}
+
+bool StelScriptMgr::prepareScript(QString &script, const QString &fileName, const QString &includePath)
 {
 	QString absPath;
 
@@ -328,9 +392,9 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 		qWarning() << msg;
 		return false;
 	}
-	
+
 	QString scriptDir = QFileInfo(absPath).dir().path();
-	
+
 	QFile fic(absPath);
 	if (!fic.open(QIODevice::ReadOnly))
 	{
@@ -340,18 +404,18 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 		return false;
 	}
 
-	scriptFileName = fileName;
 	if (!includePath.isEmpty())
 		scriptDir = includePath;
-	QString preprocessedScript;
+
 	bool ok = false;
 	if (fileName.endsWith(".ssc"))
-		ok = preprocessScript(fic, preprocessedScript, scriptDir);
+		ok = preprocessScript(fic, script, scriptDir);
 	if (!ok)
 	{
 		return false;
 	}
-	return runPreprocessedScript(preprocessedScript);
+
+	return true;
 }
 
 void StelScriptMgr::stopScript()
@@ -439,6 +503,8 @@ void StelScriptMgr::scriptEnded()
 	}
 
 	GETSTELMODULE(StelMovementMgr)->setMovementSpeedFactor(1.0);
+	scriptFileName = QString();
+	emit runningScriptIdChanged(scriptFileName);
 	emit(scriptStopped());
 }
 

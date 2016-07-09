@@ -44,6 +44,7 @@ class StelGuiBase;
 class StelMainScriptAPIProxy;
 class StelScriptMgr;
 class StelActionMgr;
+class StelPropertyMgr;
 class StelProgressController;
 
 //! @class StelApp
@@ -123,6 +124,9 @@ public:
 	//! Get the actions manager to use for managing and editing actions
 	StelActionMgr* getStelActionManager() {return actionMgr;}
 
+	//! Return the property manager
+	StelPropertyMgr* getStelPropertyManager() {return propMgr;}
+
 	//! Get the video manager
 	StelVideoMgr* getStelVideoMgr() {return videoMgr;}
 
@@ -136,9 +140,6 @@ public:
 
 	//! Update translations, font for GUI and sky everywhere in the program.
 	void updateI18n();
-
-	//! Update and reload sky culture informations everywhere in the program.
-	void updateSkyCulture();
 
 	//! Return the main configuration options
 	QSettings* getSettings() {return confSettings;}
@@ -247,7 +248,6 @@ signals:
 	void visionNightModeChanged(bool);
 	void colorSchemeChanged(const QString&);
 	void languageChanged();
-	void skyCultureChanged(const QString&);
 
 	//! Called just after a progress bar is added.
 	void progressBarAdded(const StelProgressController*);
@@ -289,6 +289,9 @@ private:
 
 	//Actions manager fot the application.  Will replace shortcutMgr.
 	StelActionMgr* actionMgr;
+
+	//Property manager for the application
+	StelPropertyMgr* propMgr;
 
 	// Textures manager for the application
 	StelTextureMgr* textureMgr;

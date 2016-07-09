@@ -291,12 +291,15 @@ void ConfigurationDialog::createDialogContent()
 	ui->invertScreenShotColorsCheckBox->setChecked(StelMainView::getInstance().getFlagInvertScreenShotColors());
 	connect(ui->invertScreenShotColorsCheckBox, SIGNAL(toggled(bool)), &StelMainView::getInstance(), SLOT(setFlagInvertScreenShotColors(bool)));
 
-	LandscapeMgr *lmgr = GETSTELMODULE(LandscapeMgr);
-	ui->autoEnableAtmosphereCheckBox->setChecked(lmgr->getFlagAtmosphereAutoEnable());
-	connect(ui->autoEnableAtmosphereCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagAtmosphereAutoEnable(bool)));
+	//LandscapeMgr *lmgr = GETSTELMODULE(LandscapeMgr);
+	//ui->autoEnableAtmosphereCheckBox->setChecked(lmgr->getFlagAtmosphereAutoEnable());
+	//connect(ui->autoEnableAtmosphereCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagAtmosphereAutoEnable(bool)));
+	connectBoolProperty(ui->autoEnableAtmosphereCheckBox,"LandscapeMgr.flagAtmosphereAutoEnabling");
 
-	ui->autoChangeLandscapesCheckBox->setChecked(lmgr->getFlagLandscapeAutoSelection());
-	connect(ui->autoChangeLandscapesCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeAutoSelection(bool)));
+	//ui->autoChangeLandscapesCheckBox->setChecked(lmgr->getFlagLandscapeAutoSelection());
+	//connect(ui->autoChangeLandscapesCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeAutoSelection(bool)));
+	connectBoolProperty(ui->autoChangeLandscapesCheckBox,"LandscapeMgr.flagLandscapeAutoSelection");
+
 
 	// script tab controls
 	#ifndef DISABLE_SCRIPTING
@@ -611,7 +614,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_light_pollution_database", lmgr->getFlagUseLightPollutionFromDatabase());
 	conf->setValue("viewing/flag_atmosphere_auto_enable", lmgr->getFlagAtmosphereAutoEnable());
 	conf->setValue("viewing/flag_planets_native_names", ssmgr->getFlagNativeNames());
-	conf->setValue("viewing/constellation_art_intensity", mvmgr->getInitConstellationIntensity());
+	conf->setValue("viewing/constellation_art_intensity", cmgr->getArtIntensity());
 	conf->setValue("viewing/constellation_name_style", cmgr->getConstellationDisplayStyleString());
 	conf->setValue("viewing/constellation_line_thickness", cmgr->getConstellationLineThickness());
 	conf->setValue("viewing/flag_night", StelApp::getInstance().getVisionModeNight());
@@ -623,9 +626,10 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/nebula_labels_amount", nmgr->getLabelsAmount());
 	conf->setValue("astro/flag_nebula_hints_proportional", nmgr->getHintsProportional());
 	conf->setValue("astro/flag_surface_brightness_usage", nmgr->getFlagSurfaceBrightnessUsage());
+	conf->setValue("gui/flag_dso_designation_usage", nmgr->getDesignationUsage());
 	conf->setValue("astro/flag_nebula_name", nmgr->getFlagHints());
 	conf->setValue("astro/flag_nebula_display_no_texture", !GETSTELMODULE(StelSkyLayerMgr)->getFlagShow());
-	conf->setValue("astro/flag_use_type_filter", nmgr->getFlagTypeFiltersUsage());
+	conf->setValue("astro/flag_use_type_filter", nmgr->getFlagUseTypeFilters());
 	conf->setValue("projection/type", core->getCurrentProjectionTypeKey());
 	conf->setValue("astro/flag_nutation", core->getUseNutation());
 	conf->setValue("astro/flag_topocentric_coordinates", core->getUseTopocentricCoordinates());
@@ -875,6 +879,7 @@ void ConfigurationDialog::pluginsSelectionChanged(QListWidgetItem* item, QListWi
 			if (!desc.info.version.isEmpty())
 				html += "<br /><strong>" + q_("Version") + "</strong>: " + desc.info.version;
 			html += "</p></body></html>";
+			ui->pluginsInfoBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 			ui->pluginsInfoBrowser->setHtml(html);
 			ui->pluginLoadAtStartupCheckBox->setChecked(desc.loadAtStartup);
 			StelModule* pmod = StelApp::getInstance().getModuleMgr().getModule(desc.info.id, true);
@@ -947,26 +952,7 @@ void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 		return;	
 	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();	
 	//ui->scriptInfoBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
-	QString html = "<html><head></head><body>";
-	html += "<h2>" + q_(scriptMgr.getName(s).trimmed()) + "</h2>";
-	QString d = scriptMgr.getDescription(s).trimmed();
-	d.replace("\n", "<br />");
-	d.replace(QRegExp("\\s{2,}"), " ");
-	html += "<p>" + q_(d) + "</p>";
-	html += "<p>";
-	if (!scriptMgr.getAuthor(s).trimmed().isEmpty())
-	{
-		html += "<strong>" + q_("Author") + "</strong>: " + scriptMgr.getAuthor(s) + "<br />";
-	}
-	if (!scriptMgr.getLicense(s).trimmed().isEmpty())
-	{
-		html += "<strong>" + q_("License") + "</strong>: " + scriptMgr.getLicense(s) + "<br />";
-	}	
-	if (!scriptMgr.getShortcut(s).trimmed().isEmpty())
-	{
-		html += "<strong>" + q_("Shortcut") + "</strong>: " + scriptMgr.getShortcut(s);
-	}
-	html += "</p></body></html>";
+	QString html = scriptMgr.getHtmlDescription(s);
 	ui->scriptInfoBrowser->setHtml(html);	
 }
 

@@ -33,14 +33,12 @@
 #endif
 
 StelAction::StelAction(const QString& actionId,
-					   const QString& groupId,
-					   const QString& text,
-					   const QString& primaryKey,
-					   const QString& altKey,
-					   bool global):
+		       const QString& groupId,
+		       const QString& text,
+		       const QString& primaryKey,
+		       const QString& altKey,
+		       bool global):
 	QObject(StelApp::getInstance().getStelActionManager()),
-	checkable(false),
-	checked(false),
 	group(groupId),
 	text(text),
 	global(global),
@@ -49,10 +47,10 @@ StelAction::StelAction(const QString& actionId,
 	defaultKeySequence(primaryKey),
 	defaultAltKeySequence(altKey),
 	target(NULL),
-	property(NULL)
-#ifndef USE_QUICKVIEW
-	,qAction(NULL)
-#endif
+	boolProperty(NULL)
+      #ifndef USE_QUICKVIEW
+      ,qAction(NULL)
+      #endif
 {
 	setObjectName(actionId);
 	// Check the global conf for custom shortcuts.
@@ -104,71 +102,82 @@ QString StelAction::getText() const
 
 void StelAction::setChecked(bool value)
 {
-	Q_ASSERT(checkable);
-	if (value == checked)
+	Q_ASSERT(boolProperty);
+	if (value == isChecked()) //dont do anything if value would not change
 		return;
-	checked = value;
-	if (target)
-		target->setProperty(property, checked);
-	emit toggled(checked);
+
+	boolProperty->setValue(value);
+	if(!boolProperty->canNotify())
+		emit toggled(value); //if connected to a property without NOTIFY, we have to toggle the event ourselves
 }
 
 void StelAction::toggle()
 {
-	setChecked(!checked);
+	setChecked(!isChecked());
 }
 
 void StelAction::trigger()
 {
-	if (checkable)
+	if (isCheckable())
 		toggle();
 	else
+	{
+		//We do not call the slot here, but let Qt handle it through a
+		//connection established in ::connectToObject from the triggered() signal
+		//to the slot
+		//This should still call the target slot first before all other registered slots
+		//(because it is registered first, see https://doc.qt.io/qt-4.8/signalsandslots.html#signals).
+		//This enables the slot to find out the StelAction that was triggered using sender(),
+		//and enables use of QSignalMapper or similar constructs
 		emit triggered();
+	}
 }
 
 void StelAction::connectToObject(QObject* obj, const char* slot)
 {
+	target = obj;
 	QVariant prop = obj->property(slot);
-	if (prop.isValid()) // Connect to a property.
+	if (prop.isValid()) // Connect to a bool property, use a StelProperty if possible
 	{
-		checkable = true;
-		target = obj;
-		property = slot;
-		checked = prop.toBool();
+		Q_ASSERT(prop.type() == QVariant::Bool);
+
 		// Listen to the property notified signal if there is one.
 		int propIndex = obj->metaObject()->indexOfProperty(slot);
 		QMetaProperty metaProp = obj->metaObject()->property(propIndex);
-		int slotIndex = metaObject()->indexOfMethod("propertyChanged(bool)");
-		if (metaProp.hasNotifySignal())
-			connect(obj, metaProp.notifySignal(), this, metaObject()->method(slotIndex));
+
+		//can use a StelProperty for the connection, property name is action name
+		boolProperty = StelApp::getInstance().getStelPropertyManager()->registerProperty(objectName(),obj,slot);
+		StelPropertyBoolProxy* prox = new StelPropertyBoolProxy(boolProperty,this);
+		connect(prox,SIGNAL(propertyChanged(bool)),this,SLOT(propertyChanged(bool)));
+
+		if(!metaProp.hasNotifySignal())
+		{
+			//warn about missing notify
+			qWarning()<<"[StelAction]"<<getId()<<"is connected to property"<<slot<<"of object"<<obj<<" without a NOTIFY signal";
+		}
+
 		return;
 	}
+
+	//now, check if its a slot
 	int slotIndex = obj->metaObject()->indexOfMethod(slot);
-	if (obj->metaObject()->method(slotIndex).parameterCount() == 1)
-	{
-		// connect to a boolean slot.
-		Q_ASSERT(obj->metaObject()->method(slotIndex).parameterType(0) == QMetaType::Bool);
-		checkable = true;
-		int signalIndex = metaObject()->indexOfMethod("toggled(bool)");
-		connect(this, metaObject()->method(signalIndex), obj, obj->metaObject()->method(slotIndex));
-	}
-	else
-	{
-		// connect to a slot.
-		Q_ASSERT(obj->metaObject()->method(slotIndex).parameterCount() == 0);
-		checkable = false;
-		int signalIndex = metaObject()->indexOfMethod("triggered()");
-		connect(this, metaObject()->method(signalIndex), obj, obj->metaObject()->method(slotIndex));
-	}
+#ifndef NDEBUG
+	if (slotIndex<0) qWarning()<<"[StelAction]"<<getId()<<"cannot connect to slot"<<slot<<"of object"<<obj << "- EXIT!";
+#endif
+	Q_ASSERT(slotIndex>=0);
+	// connect to a parameterless slot.
+	this->slot = obj->metaObject()->method(slotIndex);
+	Q_ASSERT(this->slot.parameterCount() == 0);
+	//let Qt handle invoking the slot when the StelAction is triggered
+	int signalIndex = metaObject()->indexOfSignal("triggered()");
+	connect(this,metaObject()->method(signalIndex),obj,this->slot);
+
 	emit changed();
 }
 
 void StelAction::propertyChanged(bool value)
 {
-	if (value == checked)
-		return;
-	checked	= value;
-	emit toggled(checked);
+	emit toggled(value);
 }
 
 QKeySequence::SequenceMatch StelAction::matches(const QKeySequence& seq) const
@@ -176,7 +185,7 @@ QKeySequence::SequenceMatch StelAction::matches(const QKeySequence& seq) const
 	Q_ASSERT(QKeySequence::PartialMatch > QKeySequence::NoMatch);
 	Q_ASSERT(QKeySequence::ExactMatch > QKeySequence::PartialMatch);
 	return qMax((!keySequence.isEmpty() ? keySequence.matches(seq) : QKeySequence::NoMatch),
-				(!altKeySequence.isEmpty() ? altKeySequence.matches(seq) : QKeySequence::NoMatch));
+		    (!altKeySequence.isEmpty() ? altKeySequence.matches(seq) : QKeySequence::NoMatch));
 }
 
 StelActionMgr::StelActionMgr() :
@@ -190,11 +199,12 @@ StelActionMgr::~StelActionMgr()
 }
 
 StelAction* StelActionMgr::addAction(const QString& id, const QString& groupId, const QString& text,
-                                     QObject* target, const char* slot,
-                                     const QString& shortcut, const QString& altShortcut,
-                                     bool global)
+				     QObject* target, const char* slot,
+				     const QString& shortcut, const QString& altShortcut,
+				     bool global)
 {
 	StelAction* action = new StelAction(id, groupId, text, shortcut, altShortcut, global);
+	connect(action,SIGNAL(toggled(bool)),this,SLOT(onStelActionToggled(bool)));
 	action->connectToObject(target, slot);
 	return action;
 }
@@ -210,9 +220,9 @@ bool StelActionMgr::pushKey(int key, bool global)
 		return false;
 	keySequence << key;
 	QKeySequence sequence(keySequence.size() > 0 ? keySequence[0] : 0,
-						  keySequence.size() > 1 ? keySequence[1] : 0,
-						  keySequence.size() > 2 ? keySequence[2] : 0,
-						  keySequence.size() > 3 ? keySequence[3] : 0);
+			      keySequence.size() > 1 ? keySequence[1] : 0,
+			      keySequence.size() > 2 ? keySequence[2] : 0,
+			      keySequence.size() > 3 ? keySequence[3] : 0);
 	bool hasPartialMatch = false;
 	foreach(StelAction* action, findChildren<StelAction*>())
 	{
@@ -253,6 +263,11 @@ QList<StelAction*> StelActionMgr::getActionList(const QString& group) const
 	return ret;
 }
 
+QList<StelAction*> StelActionMgr::getActionList() const
+{
+	return findChildren<StelAction*>();
+}
+
 void StelActionMgr::saveShortcuts()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
@@ -280,4 +295,10 @@ void StelActionMgr::restoreDefaultShortcuts()
 		emit action->changed();
 	}
 	saveShortcuts();
+}
+
+void StelActionMgr::onStelActionToggled(bool val)
+{
+	StelAction* action = qobject_cast<StelAction*>(sender());
+	emit actionToggled(action->getId(),val);
 }

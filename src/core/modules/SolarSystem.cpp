@@ -152,7 +152,7 @@ void SolarSystem::init()
 	setLabelsAmount(conf->value("astro/labels_amount", 3.).toFloat());
 	setFlagOrbits(conf->value("astro/flag_planets_orbits").toBool());
 	setFlagLightTravelTime(conf->value("astro/flag_light_travel_time", true).toBool());
-	setFlagPointers(conf->value("astro/flag_planets_pointers", true).toBool());
+	setFlagPointer(conf->value("astro/flag_planets_pointers", true).toBool());
 	// Set the algorithm from Astronomical Almanac for computation of apparent magnitudes for
 	// planets in case  observer on the Earth by default
 	setApparentMagnitudeAlgorithmOnEarth(conf->value("astro/apparent_magnitude_algorithm", "Harris").toString());
@@ -173,7 +173,7 @@ void SolarSystem::init()
 	setLabelsColor(StelUtils::strToVec3f(conf->value("color/planet_names_color", defaultColor).toString()));
 	setOrbitsColor(StelUtils::strToVec3f(conf->value("color/planet_orbits_color", defaultColor).toString()));
 	setTrailsColor(StelUtils::strToVec3f(conf->value("color/object_trails_color", defaultColor).toString()));
-	setPointersColor(StelUtils::strToVec3f(conf->value("color/planet_pointers_color", "1.0,0.3,0.3").toString()));
+	setPointerColor(StelUtils::strToVec3f(conf->value("color/planet_pointers_color", "1.0,0.3,0.3").toString()));
 
 	recreateTrails();
 
@@ -190,13 +190,17 @@ void SolarSystem::init()
 	
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
-	connect(app, SIGNAL(skyCultureChanged(QString)), this, SLOT(updateSkyCulture(QString)));
+	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(updateSkyCulture(QString)));
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Planets", displayGroup, N_("Planets"), "planetsDisplayed", "P");
 	addAction("actionShow_Planets_Labels", displayGroup, N_("Planet labels"), "labelsDisplayed", "Alt+P");
-	addAction("actionShow_Planets_Orbits", displayGroup, N_("Planet orbits"), "orbitsDisplayed", "O");
+	addAction("actionShow_Planets_Orbits", displayGroup, N_("Planet orbits"), "flagOrbits", "O");
 	addAction("actionShow_Planets_Trails", displayGroup, N_("Planet trails"), "trailsDisplayed", "Shift+T");
+	//there is a small discrepancy in the GUI: "Show planet markers" actually means show planet hints
+	addAction("actionShow_Planets_Hints", displayGroup, N_("Planet markers"), "flagHints", "Ctrl+P");
+	//addAction("actionShow_Planets_Markers", displayGroup, N_("Planet selection marker"), "markersDisplayed", "Ctrl+Shift+P");
+	addAction("actionShow_Skyculture_Nativenames", displayGroup, N_("Native planet names (from starlore)"), "flagNativeNames", "Ctrl+Shift+N");
 }
 
 void SolarSystem::deinit()
@@ -318,7 +322,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 
 
 		StelPainter sPainter(prj);
-		Vec3f color = getPointersColor();
+		Vec3f color = getPointerColor();
 		sPainter.setColor(color[0],color[1],color[2]);
 
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()*2.;
@@ -1137,7 +1141,7 @@ void SolarSystem::draw(StelCore* core)
 		p->draw(core, maxMagLabel, planetNameFont);
 	}
 
-	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer() && getFlagPointers())
+	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer() && getFlagPointer())
 		drawPointer(core);
 
 	// AstroCalcDialog
@@ -1322,11 +1326,15 @@ void SolarSystem::updateI18n()
 
 void SolarSystem::setFlagTrails(bool b)
 {
-	trailFader = b;
-	if (getFlagIsolatedTrails())
-		recreateTrails();
-	if (b)
-		allTrails->reset();
+	if (getFlagTrails() != b)
+	{
+		trailFader = b;
+		if (getFlagIsolatedTrails())
+			recreateTrails();
+		if (b)
+			allTrails->reset();
+		emit trailsDisplayedChanged(b);
+	}
 }
 
 bool SolarSystem::getFlagTrails() const
@@ -1336,8 +1344,12 @@ bool SolarSystem::getFlagTrails() const
 
 void SolarSystem::setFlagHints(bool b)
 {
-	foreach (PlanetP p, systemPlanets)
-		p->setFlagHints(b);
+	if (getFlagHints() != b)
+	{
+		foreach (PlanetP p, systemPlanets)
+			p->setFlagHints(b);
+		emit flagHintsChanged(b);
+	}
 }
 
 bool SolarSystem::getFlagHints(void) const
@@ -1352,8 +1364,12 @@ bool SolarSystem::getFlagHints(void) const
 
 void SolarSystem::setFlagLabels(bool b)
 {
-	foreach (PlanetP p, systemPlanets)
-		p->setFlagLabels(b);
+	if (getFlagLabels() != b)
+	{
+		foreach (PlanetP p, systemPlanets)
+			p->setFlagLabels(b);
+		emit labelsDisplayedChanged(b);
+	}
 }
 
 bool SolarSystem::getFlagLabels() const
@@ -1396,11 +1412,16 @@ void SolarSystem::setFlagOrbits(bool b)
 				p->setFlagOrbits(false);
 		}
 	}
+	emit flagOrbitsChanged(b);
 }
 
 void SolarSystem::setFlagLightTravelTime(bool b)
 {
-	flagLightTravelTime = b;
+	if(b!=flagLightTravelTime)
+	{
+		flagLightTravelTime = b;
+		emit flagLightTravelTimeChanged(b);
+	}
 }
 
 void SolarSystem::setSelected(PlanetP obj)
@@ -1429,7 +1450,6 @@ void SolarSystem::update(double deltaTime)
 	}
 }
 
-
 // is a lunar eclipse close at hand?
 bool SolarSystem::nearLunarEclipse()
 {
@@ -1454,72 +1474,21 @@ bool SolarSystem::nearLunarEclipse()
 	return 1;
 }
 
-//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
-QStringList SolarSystem::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QStringList SolarSystem::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
-	if (maxNbItem==0)
-		return result;
-
-	QString sson;
-	bool find;
-	foreach (const PlanetP& p, systemPlanets)
+	if (inEnglish)
 	{
-		sson = p->getNameI18n();
-		find = false;
-		if (useStartOfWords)
+		foreach(const PlanetP& p, systemPlanets)
 		{
-			QString constw = sson.mid(0, objPrefix.size()).toUpper();
-			if (constw==objPrefix.toUpper())
-				find = true;
+			result << p->getEnglishName();
 		}
-		else
-		{
-			if (sson.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-
-		}
-		if (find)
-		{
-			result << sson;
-			if (result.size()==maxNbItem)
-				return result;
-		}
-
 	}
-	return result;
-}
-
-//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name
-QStringList SolarSystem::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
-{
-	QStringList result;
-	if (maxNbItem==0)
-		return result;
-
-	QString sson;
-	bool find;
-	foreach (const PlanetP& p, systemPlanets)
+	else
 	{
-		sson = p->getEnglishName();
-		find = false;
-		if (useStartOfWords)
+		foreach(const PlanetP& p, systemPlanets)
 		{
-			QString constw = sson.mid(0, objPrefix.size()).toUpper();
-			if (constw==objPrefix.toUpper())
-				find = true;
-		}
-		else
-		{
-			if (sson.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-
-		}
-		if (find)
-		{
-			result << sson;
-			if (result.size()==maxNbItem)
-				return result;
+			result << p->getNameI18n();
 		}
 	}
 	return result;
@@ -1563,7 +1532,11 @@ void SolarSystem::selectedObjectChange(StelModule::StelModuleSelectAction)
 // Activate/Deactivate planets display
 void SolarSystem::setFlagPlanets(bool b)
 {
-	flagShow=b;
+	if (b!=flagShow)
+	{
+		flagShow=b;
+		emit flagPlanetsDisplayedChanged(b);
+	}
 }
 
 bool SolarSystem::getFlagPlanets(void) const
@@ -1573,13 +1546,17 @@ bool SolarSystem::getFlagPlanets(void) const
 
 void SolarSystem::setFlagNativeNames(bool b)
 {
-	flagNativeNames=b;
-	foreach (const PlanetP& p, systemPlanets)
+	if (b!=flagNativeNames)
 	{
-		if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
-			p->setFlagNativeName(flagNativeNames);
+		flagNativeNames=b;
+		foreach (const PlanetP& p, systemPlanets)
+		{
+			if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
+				p->setFlagNativeName(flagNativeNames);
+		}
+		updateI18n();
+		emit flagNativeNamesChanged(b);
 	}
-	updateI18n();
 }
 
 bool SolarSystem::getFlagNativeNames() const
@@ -1589,13 +1566,17 @@ bool SolarSystem::getFlagNativeNames() const
 
 void SolarSystem::setFlagTranslatedNames(bool b)
 {
-	flagTranslatedNames=b;
-	foreach (const PlanetP& p, systemPlanets)
+	if (b!=flagTranslatedNames)
 	{
-		if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
-			p->setFlagTranslatedName(flagTranslatedNames);
+		flagTranslatedNames=b;
+		foreach (const PlanetP& p, systemPlanets)
+		{
+			if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
+				p->setFlagTranslatedName(flagTranslatedNames);
+		}
+		updateI18n();
+		emit flagTranslatedNamesChanged(b);
 	}
-	updateI18n();
 }
 
 bool SolarSystem::getFlagTranslatedNames() const
@@ -1605,7 +1586,11 @@ bool SolarSystem::getFlagTranslatedNames() const
 
 void SolarSystem::setFlagIsolatedTrails(bool b)
 {
-	flagIsolatedTrails = b;
+	if(b!=flagIsolatedTrails)
+	{
+		flagIsolatedTrails = b;
+		emit flagIsolatedTrailsChanged(b);
+	}
 }
 
 bool SolarSystem::getFlagIsolatedTrails() const
@@ -1615,7 +1600,11 @@ bool SolarSystem::getFlagIsolatedTrails() const
 
 void SolarSystem::setFlagIsolatedOrbits(bool b)
 {
-	flagIsolatedOrbits = b;
+	if(b!=flagIsolatedOrbits)
+	{
+		flagIsolatedOrbits = b;
+		emit flagIsolatedOrbitsChanged(b);
+	}
 }
 
 bool SolarSystem::getFlagIsolatedOrbits() const
@@ -1635,17 +1624,25 @@ Vec3f SolarSystem::getOrbitsColor(void) const {return Planet::getOrbitColor();}
 // Set/Get if Moon display is scaled
 void SolarSystem::setFlagMoonScale(bool b)
 {
-	if (!b) getMoon()->setSphereScale(1);
-	else getMoon()->setSphereScale(moonScale);
-	flagMoonScale = b;
+	if(b!=flagMoonScale)
+	{
+		if (!b) getMoon()->setSphereScale(1);
+		else getMoon()->setSphereScale(moonScale);
+		flagMoonScale = b;
+		emit flagMoonScaleChanged(b);
+	}
 }
 
 // Set/Get Moon display scaling factor
 void SolarSystem::setMoonScale(double f)
 {
-	moonScale = f;
-	if (flagMoonScale)
-		getMoon()->setSphereScale(moonScale);
+	if(moonScale != f)
+	{
+		moonScale = f;
+		if (flagMoonScale)
+			getMoon()->setSphereScale(moonScale);
+		emit moonScaleChanged(f);
+	}
 }
 
 // Set selected planets by englishName

@@ -53,9 +53,9 @@ class ScriptConsole;
 class StelGui : public QObject, public StelGuiBase
 {
 	Q_OBJECT
-	Q_PROPERTY(bool visible READ getVisible WRITE setVisible)
-	Q_PROPERTY(bool autoHideHorizontalButtonBar READ getAutoHideHorizontalButtonBar WRITE setAutoHideHorizontalButtonBar)
-	Q_PROPERTY(bool autoHideVerticalButtonBar READ getAutoHideVerticalButtonBar WRITE setAutoHideVerticalButtonBar)
+	Q_PROPERTY(bool visible READ getVisible WRITE setVisible NOTIFY visibleChanged)
+	Q_PROPERTY(bool autoHideHorizontalButtonBar READ getAutoHideHorizontalButtonBar WRITE setAutoHideHorizontalButtonBar NOTIFY autoHideHorizontalButtonBarChanged)
+	Q_PROPERTY(bool autoHideVerticalButtonBar READ getAutoHideVerticalButtonBar WRITE setAutoHideVerticalButtonBar NOTIFY autoHideVerticalButtonBarChanged)
 
 public:
 	friend class ViewDialog;
@@ -159,6 +159,11 @@ public slots:
 
 	//! Hide or show the GUI.  Public so it can be called from scripts.
 	void setGuiVisible(bool);	
+
+signals:
+	void visibleChanged(bool b);
+	void autoHideHorizontalButtonBarChanged(bool b);
+	void autoHideVerticalButtonBarChanged(bool b);
 
 private slots:
 	void reloadStyle();

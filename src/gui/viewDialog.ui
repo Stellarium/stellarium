@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>707</width>
+    <width>715</width>
     <height>537</height>
    </rect>
   </property>
@@ -1482,7 +1482,7 @@
                  </item>
                 </layout>
                </item>
-               <item row="4" column="0">
+               <item row="5" column="0">
                 <widget class="QCheckBox" name="checkBoxSurfaceBrightnessUsage">
                  <property name="toolTip">
                   <string>Use surface brightness of deep-sky objects for scale of the visibility of their markers and labels.</string>
@@ -1492,7 +1492,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="3" column="0">
+               <item row="4" column="0">
                 <widget class="QCheckBox" name="checkBoxProportionalHints">
                  <property name="toolTip">
                   <string>Use hints proportional to angular size of deep-sky objects</string>
@@ -1502,7 +1502,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="5" column="0">
+               <item row="6" column="0">
                 <layout class="QHBoxLayout" name="horizontalLayout_7">
                  <item>
                   <widget class="QCheckBox" name="nebulaLimitMagnitudeCheckBox">
@@ -1531,6 +1531,16 @@
                   </widget>
                  </item>
                 </layout>
+               </item>
+               <item row="3" column="0">
+                <widget class="QCheckBox" name="checkBoxDesignationsOnlyUsage">
+                 <property name="toolTip">
+                  <string>Use designations of deep-sky objects instead of their common names for screen labels</string>
+                 </property>
+                 <property name="text">
+                  <string>Use designations for screen labels</string>
+                 </property>
+                </widget>
                </item>
               </layout>
              </widget>
@@ -1829,14 +1839,14 @@
              <item>
               <widget class="QListWidget" name="projectionListWidget">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>120</width>
+                 <width>230</width>
                  <height>0</height>
                 </size>
                </property>
@@ -1879,18 +1889,21 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QSpinBox" name="viewportOffsetSpinBox">
+                  <widget class="QDoubleSpinBox" name="viewportOffsetSpinBox">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                      <horstretch>0</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
                    </property>
+                   <property name="decimals">
+                    <number>0</number>
+                   </property>
                    <property name="minimum">
-                    <number>-50</number>
+                    <double>-50.000000000000000</double>
                    </property>
                    <property name="maximum">
-                    <number>50</number>
+                    <double>50.000000000000000</double>
                    </property>
                   </widget>
                  </item>
@@ -1956,7 +1969,7 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>180</width>
+              <width>220</width>
               <height>0</height>
              </size>
             </property>
@@ -2173,7 +2186,7 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>180</width>
+              <width>220</width>
               <height>0</height>
              </size>
             </property>

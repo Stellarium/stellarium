@@ -346,129 +346,47 @@ StelObjectP Exoplanets::searchByNameI18n(const QString& nameI18n) const
 	return NULL;
 }
 
-QStringList Exoplanets::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
-{
-	QStringList result;	
-	if (!flagShowExoplanets)
-		return result;
-
-	if (maxNbItem==0)
-		return result;
-
-	QString epsn;
-	bool find;
-	foreach(const ExoplanetP& eps, ep)
-	{
-		epsn = eps->getNameI18n();
-		find = false;
-		if (useStartOfWords)
-		{
-			if (epsn.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
-				find = true;
-		}
-		else
-		{
-			if (epsn.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-		}
-		if (find)
-		{
-			result << epsn;
-		}
-
-		QStringList epsnp = eps->getExoplanetsNamesI18n();
-		if (!epsnp.isEmpty())
-		{
-			foreach (const QString &str, epsnp)
-			{
-				find = false;
-				if (useStartOfWords)
-				{
-					if (str.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
-						find = true;
-				}
-				else
-				{
-					if (str.contains(objPrefix, Qt::CaseInsensitive))
-						find = true;
-				}
-				if (find)
-				{
-					result << str;
-				}
-			}
-		}
-	}
-
-	result.sort();
-
-	if (result.size()>maxNbItem)
-		result.erase(result.begin()+maxNbItem, result.end());
-
-	return result;
-}
-
-QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
 	QStringList result;
-	if (!flagShowExoplanets)
+	if (!flagShowExoplanets || maxNbItem <= 0)
+	{
 		return result;
+	}
 
-	if (maxNbItem==0)
-		return result;
-
-	QString epsn;
-	bool find;
 	foreach(const ExoplanetP& eps, ep)
 	{
-		epsn = eps->getNameI18n();
-		find = false;
-		if (useStartOfWords)
+		QStringList names;
+		if (inEnglish)
 		{
-			if (epsn.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
-				find = true;
+			names.append(eps->getEnglishName());
+			names.append(eps->getExoplanetsEnglishNames());
 		}
 		else
 		{
-			if (epsn.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
+			names.append(eps->getNameI18n());
+			names.append(eps->getExoplanetsNamesI18n());
 		}
-		if (find)
+
+		foreach (const QString& name, names)
 		{
-			result << epsn;
-		}
-		QStringList epsnp = eps->getExoplanetsEnglishNames();
-		if (!epsnp.isEmpty())
-		{
-			foreach (const QString &str, epsnp)
+			if (!matchObjectName(name, objPrefix, useStartOfWords))
 			{
-				find = false;
-				if (useStartOfWords)
-				{
-					if (str.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
-						find = true;
-				}
-				else
-				{
-					if (str.contains(objPrefix, Qt::CaseInsensitive))
-						find = true;
-				}
-				if (find)
-				{
-					result << str;
-				}
+				continue;
+			}
+
+			result.append(name);
+			if (result.size() >= maxNbItem)
+			{
+				result.sort();
+				return result;
 			}
 		}
 	}
 
 	result.sort();
-
-	if (result.size()>maxNbItem)
-		result.erase(result.begin()+maxNbItem, result.end());
-
 	return result;
 }
-
 
 QStringList Exoplanets::listAllObjects(bool inEnglish) const
 {
@@ -949,6 +867,15 @@ void Exoplanets::setMarkerColor(const Vec3f &c, bool h)
 		Exoplanet::habitableExoplanetMarkerColor = c;
 	else
 		Exoplanet::exoplanetMarkerColor = c;
+}
+
+void Exoplanets::setFlagShowExoplanets(bool b)
+{
+	if (b!=flagShowExoplanets)
+	{
+		flagShowExoplanets=b;
+		emit flagExoplanetsVisibilityChanged(b);
+	}
 }
 
 void Exoplanets::translations()

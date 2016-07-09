@@ -5,12 +5,30 @@
 \section{Introduction}
 \label{sec:scripting:introduction}
 
-Since version 0.10.1, Stellarium includes a scripting feature based on
+
+The development of a powerful scripting system has been continuing for
+a number of years now and can now be called operational. The use of a
+script was recognised as a perfect way of arranging a display of a
+sequence of astronomical events from the earliest versions of
+Stellarium and a simple system called \emph{Stratoscript} was
+implemented. The scripting facility is Stellarium's version of a
+\emph{Presentation}, a feature that may be used to run an astronomical
+or other presentation for instruction or entertainment from within the
+Stellarium program. The original \emph{Stratoscript} was quite limited in
+what it could do so a new Stellarium Scripting System has been
+developed.
+
+Since version 0.10.1, Stellarium has included a scripting feature based on
 the Qt Scripting
 Engine\footnote{\url{http://doc.qt.io/qt-5/qtscript-index.html}}. This
 makes it possible to write small programs within Stellarium to produce
 automatic presentations, set up custom configurations, and to automate
 repetitive tasks. 
+
+As of version 0.14.0 a new scripting engine has reached a level where
+it has all required features for usage, however new commands may be
+added from time to time. Since version 0.14.0 support of scripts for
+the \emph{Stratoscript} engine has been discontinued.
 
 The programming language
 ECMAscript\footnote{\url{https://en.wikipedia.org/wiki/ECMAScript}}

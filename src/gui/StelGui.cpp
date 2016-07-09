@@ -709,6 +709,7 @@ void StelGui::setFlagShowDecimalDegrees(bool b)
 void StelGui::setVisible(bool b)
 {
 	skyGui->setVisible(b);	
+	emit visibleChanged(b);
 }
 
 bool StelGui::getVisible() const
@@ -761,7 +762,11 @@ bool StelGui::getAutoHideHorizontalButtonBar() const
 
 void StelGui::setAutoHideHorizontalButtonBar(bool b)
 {
-	skyGui->autoHideHorizontalButtonBar=b;
+	if (skyGui->autoHideHorizontalButtonBar!=b)
+	{
+		skyGui->autoHideHorizontalButtonBar=b;
+		emit autoHideHorizontalButtonBarChanged(b);
+	}
 }
 
 bool StelGui::getAutoHideVerticalButtonBar() const
@@ -771,7 +776,11 @@ bool StelGui::getAutoHideVerticalButtonBar() const
 
 void StelGui::setAutoHideVerticalButtonBar(bool b)
 {
-	skyGui->autoHideVerticalButtonBar=b;
+	if (skyGui->autoHideVerticalButtonBar!=b)
+	{
+		skyGui->autoHideVerticalButtonBar=b;
+		emit autoHideVerticalButtonBarChanged(b);
+	}
 }
 
 bool StelGui::getFlagShowFlipButtons() const

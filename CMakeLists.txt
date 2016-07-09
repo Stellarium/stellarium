@@ -18,9 +18,15 @@ ENDIF()
 
 ########### Project name ###########
 PROJECT(Stellarium)
-SET(STELLARIUM_MAJOR "0")
-SET(STELLARIUM_MINOR "14")
-SET(STELLARIUM_PATCH "90")
+# Use integer versions instead of strings for easier handling if required
+SET(STELLARIUM_MAJOR 0)
+SET(STELLARIUM_MINOR 14)
+SET(STELLARIUM_PATCH 90)
+ADD_DEFINITIONS(
+-DSTELLARIUM_MAJOR=${STELLARIUM_MAJOR}
+-DSTELLARIUM_MINOR=${STELLARIUM_MINOR}
+-DSTELLARIUM_PATCH=${STELLARIUM_PATCH}
+)
 SET(VERSION "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}.${STELLARIUM_PATCH}")
 SET(PACKAGE stellarium)
 SET(COPYRIGHT_YEARS "2000-2016")
@@ -65,6 +71,7 @@ ENDIF()
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     SET(APPLE 1)
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
 ENDIF()
 
 IF(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUCC)
@@ -77,20 +84,43 @@ ELSE()
     SET(GCC_VERSION "0.0")
 ENDIF()
 
+# _USE_MATH_DEFINES enables use of math constants like M_PI,
+# which are by default disabled in standard C++ mode (like std=c++11 instead of std=gnu11)
+ADD_DEFINITIONS(-D_USE_MATH_DEFINES)
+
+# flags shared for gcc-like compilers (also MinGW/Clang)
+# Qt 5.7 requires C++11 support
+SET(STEL_GCC_C_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-unused-result")
+SET(STEL_GCC_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-unused-result")
+
+SET(STELLARIUM_USE_CPP11 1 CACHE BOOL "Set whether to try using C++11 when compiling. Required for Qt >= 5.7")
+IF(STELLARIUM_USE_CPP11)
+    IF(NOT (CMAKE_VERSION VERSION_LESS 3.1.0))
+        # Let CMake handle setting C++11 (since 3.1)
+        SET(CMAKE_CXX_STANDARD 11)
+    ELSE()
+        # Add std=c++11 to gcc flags
+        SET(STEL_GCC_CXX_FLAGS "-std=c++11 ${STEL_GCC_CXX_FLAGS}")
+    ENDIF()
+
+ENDIF()
+
 IF(WIN32)
      IF(NOT MSVC)
-          SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fexceptions -fident -mthreads -Wno-unused-parameter -Wno-unused-result")
-          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -fexceptions -fident -mthreads -Wno-unused-parameter -Wno-unused-result")
-          SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fexceptions -fident -mthreads -mwindows")
-     ELSE()
-          # _USE_MATH_DEFINES Prevent MSVC from complaining about M_PI no matter where <cmath> is included first
+          # MinGW requires enabling of exceptions, version number storage and MinGW-specific threading
+          SET(STEL_MINGW_FLAGS "-fexceptions -fident -mthreads")
+          SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${STEL_GCC_C_FLAGS} ${STEL_MINGW_FLAGS}")
+          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${STEL_GCC_CXX_FLAGS} ${STEL_MINGW_FLAGS}")
+          # -mwindows generates a windows GUI app
+          SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${STEL_MINGW_FLAGS} -mwindows")
+     ELSE() # MSVC
           # NOMINMAX So that windows.h does not redefine min and max
           # _WINSOCKAPI_ Prevent window.s from including winsock.h
-          ADD_DEFINITIONS(-D_USE_MATH_DEFINES -DNOMINMAX -D_WINSOCKAPI_ /D_CRT_SECURE_NO_WARNINGS /wd4244 /wd4005 /wd4101 /wd4996 /wd4305 /wd4805)
+          ADD_DEFINITIONS(-DNOMINMAX -D_WINSOCKAPI_ /D_CRT_SECURE_NO_WARNINGS /wd4244 /wd4005 /wd4101 /wd4996 /wd4305 /wd4805)
      ENDIF()
 ELSE()
-     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wno-unused-parameter")
-     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-unused-parameter -Wno-unused-result")
+     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${STEL_GCC_C_FLAGS}")
+     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${STEL_GCC_CXX_FLAGS}")
 ENDIF()
 
 # CMake 3.0.0 the CMAKE_<LANG>_COMPILER_ID value for Apple-provided Clang is now AppleClang
@@ -174,7 +204,7 @@ ENDIF()
 SET(STELLARIUM_PLUGINS) # Global list of all the plugins.
 MACRO(ADD_PLUGIN NAME DEFAULT)
      STRING(TOUPPER ${NAME} NAME_UP)
-     SET(USE_PLUGIN_${NAME_UP} ${DEFAULT} CACHE BOOL "Define wheter the ${NAME} plugin should be created.")
+     SET(USE_PLUGIN_${NAME_UP} ${DEFAULT} CACHE BOOL "Define whether the ${NAME} plugin should be created.")
      SET(STELLARIUM_PLUGINS ${STELLARIUM_PLUGINS} ${NAME})
 ENDMACRO()
 
@@ -197,6 +227,9 @@ ADD_PLUGIN(Oculars 1)
 ADD_PLUGIN(PointerCoordinates 1)
 ADD_PLUGIN(Pulsars 1)
 ADD_PLUGIN(Quasars 1)
+# SOCIS 2015:
+ADD_PLUGIN(RemoteControl 1)
+ADD_PLUGIN(RemoteSync 0)
 ADD_PLUGIN(Satellites 1)
 ADD_PLUGIN(Scenery3d 1)
 ADD_PLUGIN(SolarSystemEditor 1)
@@ -289,14 +322,14 @@ ENDIF()
 ########### Get revision number for non-release builds ###########
 IF(NOT STELLARIUM_RELEASE_BUILD)
     # Hack until CMake detection for Bazaar is finished
-    EXECUTE_PROCESS(COMMAND bzr revno WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE BZR_REVISION OUTPUT_STRIP_TRAILING_WHITESPACE)
-    EXECUTE_PROCESS(COMMAND bzr version-info --custom --template={branch_nick} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE BZR_BRANCH OUTPUT_STRIP_TRAILING_WHITESPACE)
+    EXECUTE_PROCESS(COMMAND bzr revno WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE BZR_REVISION OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE BZR_ERROR)
+    EXECUTE_PROCESS(COMMAND bzr version-info --custom --template={branch_nick} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE BZR_BRANCH OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE BZR_ERROR)
     IF(BZR_REVISION)
         SET(PACKAGE_VERSION "${VERSION}.${BZR_REVISION}")
         ADD_DEFINITIONS(-DBZR_REVISION="${BZR_REVISION}")
         ADD_DEFINITIONS(-DBZR_BRANCH="${BZR_BRANCH}")
     ENDIF()
-#    MESSAGE(STATUS "Branch: ${BZR_BRANCH}; Revision: ${BZR_REVISION}")
+    # MESSAGE(STATUS "Branch: ${BZR_BRANCH}; Revision: ${BZR_REVISION}; Error: ${BZR_ERROR}")
     IF(STELLARIUM_VERSION)
         SET(PACKAGE_VERSION "${STELLARIUM_VERSION}")
         ADD_DEFINITIONS(-DSTELLARIUM_VERSION="${STELLARIUM_VERSION}")
@@ -461,9 +494,9 @@ IF(GENERATE_PACKAGE_TARGET)
     SET(CPACK_PACKAGE_VENDOR "Stellarium's team")
     SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README")
     SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/COPYING")
-    SET(CPACK_PACKAGE_VERSION_MAJOR ${STELLARIUM_MAJOR})
-    SET(CPACK_PACKAGE_VERSION_MINOR ${STELLARIUM_MINOR})
-    SET(CPACK_PACKAGE_VERSION_PATCH ${STELLARIUM_PATCH})
+    SET(CPACK_PACKAGE_VERSION_MAJOR "${STELLARIUM_MAJOR}")
+    SET(CPACK_PACKAGE_VERSION_MINOR "${STELLARIUM_MINOR}")
+    SET(CPACK_PACKAGE_VERSION_PATCH "${STELLARIUM_PATCH}")
     SET(CPACK_PACKAGE_INSTALL_DIRECTORY "stellarium")
     SET(CPACK_SOURCE_PACKAGE_FILE_NAME "stellarium-${VERSION}")
     SET(CPACK_SOURCE_GENERATOR "TGZ")
@@ -517,8 +550,18 @@ IF(WIN32)
 ENDIF()
 
 ########### Generate doxygen doc ###############
-CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/Doxyfile.cmake ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
-ADD_CUSTOM_TARGET(apidoc doxygen ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generate the doxygen documentation into the doc directory.")
+FIND_PACKAGE(Doxygen)
+IF(DOXYGEN_FOUND)
+    IF(DOXYGEN_DOT_FOUND)
+        SET(HAVE_DOT "YES")
+        SET(DOT_PATH ${DOXYGEN_DOT_PATH})
+    ELSE()
+        SET(HAVE_DOT "NO")
+        SET(DOT_PATH "")
+    ENDIF()
+    CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/Doxyfile.cmake ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+    ADD_CUSTOM_TARGET(apidoc ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generate the doxygen documentation into the doc directory.")
+ENDIF()
 
 ##################### Generate translation copying script ######################
 IF(WIN32)

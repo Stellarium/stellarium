@@ -47,18 +47,71 @@ typedef QSharedPointer<Planet> PlanetP;
 class SolarSystem : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool labelsDisplayed
+	Q_PROPERTY(bool labelsDisplayed // This is a "forwarding property" which sets labeling into all planets.
 		   READ getFlagLabels
-		   WRITE setFlagLabels)
-	Q_PROPERTY(bool orbitsDisplayed
+		   WRITE setFlagLabels
+		   NOTIFY labelsDisplayedChanged)
+	Q_PROPERTY(bool flagOrbits // was bool orbitsDisplayed
 		   READ getFlagOrbits
-		   WRITE setFlagOrbits)
+		   WRITE setFlagOrbits
+		   NOTIFY flagOrbitsChanged)
 	Q_PROPERTY(bool trailsDisplayed
 		   READ getFlagTrails
-		   WRITE setFlagTrails)
+		   WRITE setFlagTrails
+		   NOTIFY trailsDisplayedChanged)
+	Q_PROPERTY(bool flagHints // was bool hintsDisplayed. This is a "forwarding property" only, without own variable.
+		   READ getFlagHints
+		   WRITE setFlagHints
+		   NOTIFY flagHintsChanged)
+	Q_PROPERTY(bool flagPointer // was bool pointersDisplayed
+		   READ getFlagPointer
+		   WRITE setFlagPointer
+		   NOTIFY flagPointerChanged)
+	Q_PROPERTY(bool flagNativeNames // was bool nativeNamesDisplayed
+		   READ getFlagNativeNames
+		   WRITE setFlagNativeNames
+		   NOTIFY flagNativeNamesChanged)
+	Q_PROPERTY(bool flagTranslatedNames
+		   READ getFlagTranslatedNames
+		   WRITE setFlagTranslatedNames
+		   NOTIFY flagTranslatedNamesChanged)
+
+	//StelProperties
 	Q_PROPERTY(bool planetsDisplayed
 		   READ getFlagPlanets
-		   WRITE setFlagPlanets)
+		   WRITE setFlagPlanets
+		   NOTIFY flagPlanetsDisplayedChanged
+		   )
+	Q_PROPERTY(bool flagIsolatedOrbits
+		   READ getFlagIsolatedOrbits
+		   WRITE setFlagIsolatedOrbits
+		   NOTIFY flagIsolatedOrbitsChanged
+		   )
+	Q_PROPERTY(bool flagIsolatedTrails
+		   READ getFlagIsolatedTrails
+		   WRITE setFlagIsolatedTrails
+		   NOTIFY flagIsolatedTrailsChanged
+		   )
+	Q_PROPERTY(bool flagLightTravelTime
+		   READ getFlagLightTravelTime
+		   WRITE setFlagLightTravelTime
+		   NOTIFY flagLightTravelTimeChanged
+		   )
+	Q_PROPERTY(bool flagMoonScale
+		   READ getFlagMoonScale
+		   WRITE setFlagMoonScale
+		   NOTIFY flagMoonScaleChanged
+		   )
+	Q_PROPERTY(double moonScale
+		   READ getMoonScale
+		   WRITE setMoonScale
+		   NOTIFY moonScaleChanged
+		   )
+	Q_PROPERTY(double labelsAmount
+		   READ getLabelsAmount
+		   WRITE setLabelsAmount
+		   NOTIFY labelsAmountChanged
+		   )
 
 public:
 	SolarSystem();
@@ -110,23 +163,7 @@ public:
 	//! @return a StelObjectP for the object if found, else NULL.
 	virtual StelObjectP searchByName(const QString& name) const;
 
-	//! Find objects by translated name prefix.
-	//! Find and return the list of at most maxNbItem objects auto-completing
-	//! the passed object I18n name.
-	//! @param objPrefix the case insensitive first letters of the searched object.
-	//! @param maxNbItem the maximum number of returned object names.
-	//! @param useStartOfWords the autofill mode for returned objects names.
-	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches.
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
-	//! Find objects by translated name prefix.
-	//! Find and return the list of at most maxNbItem objects auto-completing
-	//! the passed object English name.
-	//! @param objPrefix the case insensitive first letters of the searched object.
-	//! @param maxNbItem the maximum number of returned object names.
-	//! @param useStartOfWords the autofill mode for returned objects names.
-	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches.
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
-	virtual QStringList listAllObjects(bool inEnglish) const { Q_UNUSED(inEnglish) return QStringList(); }
+	virtual QStringList listAllObjects(bool inEnglish) const;
 	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
 	virtual QString getName() const { return "Solar System"; }
 
@@ -157,20 +194,20 @@ public slots:
 	//! Set the amount of planet labels. The real amount is also proportional with FOV.
 	//! The limit is set in function of the planets magnitude
 	//! @param a the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
-	void setLabelsAmount(float a) {labelsAmount=a;}
+	void setLabelsAmount(double a) {if(a!=labelsAmount) {labelsAmount=a; emit labelsAmountChanged(a);}}
 	//! Get the amount of planet labels. The real amount is also proportional with FOV.
 	//! @return the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
-	float getLabelsAmount(void) const {return labelsAmount;}
+	double getLabelsAmount(void) const {return labelsAmount;}
 
 	//! Set flag which determines if planet orbits are drawn or hidden.
 	void setFlagOrbits(bool b);
 	//! Get the current value of the flag which determines if planet orbits are drawn or hidden.
 	bool getFlagOrbits() const {return flagOrbits;}
 
-	//! Set flag which determines if planet pointers are drawn or hidden.
-	void setFlagPointers(bool b) { flagPointer=b; }
+	//! Set flag which determines if the planet pointer (red cross) is drawn or hidden on a selected planet.
+	void setFlagPointer(bool b) { if (b!=flagPointer) { flagPointer=b; emit flagPointerChanged(b); }}
 	//! Get the current value of the flag which determines if planet pointers are drawn or hidden.
-	bool getFlagPointers() const {return flagPointer;}
+	bool getFlagPointer() const { return flagPointer;}
 
 	//! Set flag which determines if the light travel time calculation is used or not.
 	void setFlagLightTravelTime(bool b);
@@ -219,12 +256,12 @@ public slots:
 	//! @param c The color of the planet pointers
 	//! @code
 	//! // example of usage in scripts
-	//! SolarSystem.setPointersColor(Vec3f(1.0,0.0,0.0));
+	//! SolarSystem.setPointerColor(Vec3f(1.0,0.0,0.0));
 	//! @endcode
-	void setPointersColor(const Vec3f& c) {pointerColor=c;}
+	void setPointerColor(const Vec3f& c) {pointerColor=c;}
 	//! Get the current color used to draw planet pointers.
 	//! @return current color
-	Vec3f getPointersColor() const {return pointerColor;}
+	Vec3f getPointerColor() const {return pointerColor;}
 
 	//! Set flag which determines if Earth's moon is scaled or not.
 	void setFlagMoonScale(bool b);
@@ -233,8 +270,8 @@ public slots:
 
 	//! Set the display scaling factor for Earth's moon.
 	void setMoonScale(double f);
-	//! Get the display scaling factor for Earth's oon.
-	float getMoonScale(void) const {return moonScale;}
+	//! Get the display scaling factor for Earth's moon.
+	double getMoonScale(void) const {return moonScale;}
 
 	//! Translate names. (public so that SolarSystemEditor can call it).
 	void updateI18n();
@@ -332,6 +369,21 @@ public slots:
 	void setCustomGrsJD(double JD);
 	//! Get initial JD for calculation of position of Great Red Spot
 	double getCustomGrsJD();
+signals:
+	void labelsDisplayedChanged(bool b);
+	void flagOrbitsChanged(bool b);
+	void flagHintsChanged(bool b);
+	void trailsDisplayedChanged(bool b);
+	void flagPointerChanged(bool b);
+	void flagNativeNamesChanged(bool b);
+	void flagTranslatedNamesChanged(bool b);
+	void flagPlanetsDisplayedChanged(bool b);
+	void flagIsolatedOrbitsChanged(bool b);
+	void flagIsolatedTrailsChanged(bool b);
+	void flagLightTravelTimeChanged(bool b);
+	void flagMoonScaleChanged(bool b);
+	void moonScaleChanged(double f);
+	void labelsAmountChanged(double f);
 
 public:
 	///////////////////////////////////////////////////////////////////////////
@@ -429,12 +481,12 @@ private:
 
 	// Moon scale value
 	bool flagMoonScale;
-	float moonScale;
+	double moonScale;
 
 	QFont planetNameFont;
 
 	//! The amount of planets labels (between 0 and 10).
-	float labelsAmount;
+	double labelsAmount;
 
 	//! List of all the bodies of the solar system.
 	QList<PlanetP> systemPlanets;
@@ -448,9 +500,9 @@ private:
 	StelTextureSP texCircle;                    // The symbolic circle texture
 
 	bool flagShow;
-	bool flagPointer;
-	bool flagNativeNames;
-	bool flagTranslatedNames;
+	bool flagPointer;                           // show red cross selection pointer?
+	bool flagNativeNames;                       // show native names?
+	bool flagTranslatedNames;                   // show translated names?
 	bool flagIsolatedTrails;
 	bool flagIsolatedOrbits;
 

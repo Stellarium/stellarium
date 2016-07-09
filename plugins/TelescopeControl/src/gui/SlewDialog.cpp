@@ -36,7 +36,7 @@ using namespace TelescopeControlGlobals;
 
 SlewDialog::SlewDialog()
 {
-	ui = new Ui_slewDialog;
+	ui = new Ui_slewDialog();
 	dialogName = "TelescopeControlSlew";
 	
 	//TODO: Fix this - it's in the same plugin
