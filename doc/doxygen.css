@@ -1193,7 +1193,8 @@ div.toc {
         float: right;
         height: auto;
         margin: 0 20px 10px 10px;
-        width: 200px;
+        min-width: 200px;
+        max-width: 400px;
 }
 
 div.toc li {

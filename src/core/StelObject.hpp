@@ -35,8 +35,11 @@ class StelCore;
 //! @sa StelObjectP
 class StelObject : public StelRegionObject
 {
+	//Required for Q_FLAGS macro, this requires this header to be MOC'ed
+	Q_GADGET
+	Q_FLAGS(InfoStringGroupFlags InfoStringGroup)
 public:
-	//! @enum InfoStringGroup used as named bitfield flags as specifiers to
+	//! Used as named bitfield flags as specifiers to
 	//! filter results of getInfoString. The precise definition of these should
 	//! be documented in the getInfoString documentation for the derived classes
 	//! for all specifiers which are defined in that derivative.
@@ -58,6 +61,7 @@ public:
 		ObjectType		= 0x00001000, //!< The type of the object (star, planet, etc.)
 		EclipticCoord		= 0x00002000, //!< The ecliptic position
 		EclipticCoordXYZ	= 0x00004000, //!< The ecliptic position, XYZ of VSOP87A (used mainly for debugging, not public)
+		NoFont			= 0x00008000,
 		PlainText		= 0x00010000,  //!< Strip HTML tags from output
 // TODO GZ
 //		RaDecJ2000Planetocentric  = 0x00020000, //!< The planetocentric equatorial position (J2000 ref) [Mostly to compare with almanacs]
@@ -68,8 +72,7 @@ public:
 
 
 	};
-	typedef QFlags<InfoStringGroupFlags> InfoStringGroup;
-	Q_FLAGS(InfoStringGroup)
+	Q_DECLARE_FLAGS(InfoStringGroup, InfoStringGroupFlags)
 
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
 	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra|HourAngle|
@@ -173,6 +176,8 @@ protected:
 
 	//! Apply post processing on the info string
 	void postProcessInfoString(QString& str, const InfoStringGroup& flags) const;
+private:
+	static int stelObjectPMetaTypeID;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(StelObject::InfoStringGroup)

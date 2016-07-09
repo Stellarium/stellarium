@@ -1580,6 +1580,7 @@ Vector4<T> operator*(T s,const Vector4<T>&v)
 	return Vector4<T>(s*v[0],s*v[1],s*v[2],s*v[3]);
 }
 
+//Make Qt handle the classes as primitive type. This optimizes performance with Qt's container classes
 Q_DECLARE_TYPEINFO(Vec2d, Q_PRIMITIVE_TYPE);
 Q_DECLARE_TYPEINFO(Vec2f, Q_PRIMITIVE_TYPE);
 Q_DECLARE_TYPEINFO(Vec2i, Q_PRIMITIVE_TYPE);
@@ -1592,6 +1593,21 @@ Q_DECLARE_TYPEINFO(Mat4d, Q_PRIMITIVE_TYPE);
 Q_DECLARE_TYPEINFO(Mat4f, Q_PRIMITIVE_TYPE);
 Q_DECLARE_TYPEINFO(Mat3d, Q_PRIMITIVE_TYPE);
 Q_DECLARE_TYPEINFO(Mat3f, Q_PRIMITIVE_TYPE);
+
+//Declare meta-type information so that Vec/Mat classes can be used in QVariant
+//They are registered (qRegisterMetaType) in StelCore::registerMathMetaTypes, called in constructor
+Q_DECLARE_METATYPE(Vec2d)
+Q_DECLARE_METATYPE(Vec2f)
+Q_DECLARE_METATYPE(Vec2i)
+Q_DECLARE_METATYPE(Vec3d)
+Q_DECLARE_METATYPE(Vec3f)
+Q_DECLARE_METATYPE(Vec4d)
+Q_DECLARE_METATYPE(Vec4f)
+Q_DECLARE_METATYPE(Vec4i)
+Q_DECLARE_METATYPE(Mat4d)
+Q_DECLARE_METATYPE(Mat4f)
+Q_DECLARE_METATYPE(Mat3d)
+Q_DECLARE_METATYPE(Mat3f)
 
 
 //! Provide Qt 3x3 matrix-vector multiplication, which does not exist for some reason

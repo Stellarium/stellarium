@@ -49,31 +49,30 @@ protected:
 	virtual void createDialogContent();
 private slots:
 	void populateLists();
-	void skyCultureChanged(const QString& cultureName);
-	void projectionChanged(const QString& projectionName);
-	void viewportVerticalShiftChanged(const int shift);
-	void landscapeChanged(QListWidgetItem* item);
-	void setZHR(int zhr);
-	void updateZhrDescription();
-	void planetsLabelsValueChanged(int);
-	void nebulasLabelsValueChanged(int);
-	void nebulasMarkersValueChanged(int);
+	void skyCultureChanged();
+	void changeProjection(const QString& projectionNameI18n);
+	void projectionChanged();
+	void changeLandscape(QListWidgetItem* item);
+	void landscapeChanged(QString id,QString name);
+	void updateZhrDescription(int zhr);
 	void setBortleScaleToolTip(int Bindex);
-	void starsLabelsValueChanged(int);
 	void setCurrentLandscapeAsDefault(void);
 	void setCurrentCultureAsDefault(void);
-	void setFlagLandscapeUseMinimalBrightness(bool b);
+	void updateDefaultSkyCulture();
+	void updateDefaultLandscape();
 	void setFlagCustomGrsSettings(bool b);
 	//! Update the widget to make sure it is synchrone if a value was changed programmatically
 	//! This function should be called repeatidly with e.g. a timer
-	void updateFromProgram();
+	// NO LONGER NEEDED!
+	//void updateFromProgram();
 
 	void showAddRemoveLandscapesDialog();
         void showAtmosphereDialog();
 	void showGreatRedSpotDialog();
 
+	void setLightPollutionSpinBoxStatus();
+	// Two new from the unwanted trunk-rework Not sure if we need them at all?
 	void populateLightPollution();
-	void populateLandscapeMinimalBrightness();
 
 	// WHAT IS THE SKY LAYER? hidden, under development?
 	void populateSkyLayersList();
@@ -84,17 +83,15 @@ private slots:
 	void setSelectedTypesFromCheckBoxes();
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
+
+	void updateSelectedCatalogsCheckBoxes();
+	void updateSelectedTypesCheckBoxes();
 private:
-	//! convenience method to link a checkbox to a StelAction.
-	void connectCheckBox(class QCheckBox* checkBox, const QString& actionId);
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);
 	void updateSkyCultureText();
 	//! Make sure that no tabs icons are outside of the viewport.
 	//! @todo Limit the width to the width of the screen *available to the window*.
 	void updateTabBarListWidgetWidth();
-
-	void updateSelectedCatalogsCheckBoxes();
-	void updateSelectedTypesCheckBoxes();
 
 	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;
 	AtmosphereDialog * atmosphereDialog;

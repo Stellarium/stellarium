@@ -352,66 +352,16 @@ StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 	return StelObjectP();
 }
 
-QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
 	QStringList result;
-	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
-		return result;
-	if (maxNbItem==0) return result;
-
-	QString objw = objPrefix.toUpper();
-
-	QString numberPrefix;
-	QRegExp regExp("^(NORAD)\\s*(\\d+)\\s*$");
-	if (regExp.exactMatch(objw))
+	if (!hintFader
+		|| maxNbItem <= 0
+		|| StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName()
+		|| !isValidRangeDates())
 	{
-		QString numberString = regExp.capturedTexts().at(2);
-		numberPrefix = numberString;
-	}
-	bool find;
-	foreach(const SatelliteP& sat, satellites)
-	{
-		if (sat->initialized && sat->displayed)
-		{
-			find = false;
-			if (useStartOfWords)
-			{
-				if (sat->getNameI18n().toUpper().left(objw.length()) == objw)
-				{
-					find = true;
-				}
-			}
-			else
-			{
-				if (sat->getNameI18n().toUpper().contains(objw, Qt::CaseInsensitive))
-				{
-					find = true;
-				}
-			}
-
-			if (find)
-			{
-				result << sat->getNameI18n().toUpper();
-			}
-			else if (!numberPrefix.isEmpty() && sat->getCatalogNumberString().left(numberPrefix.length()) == numberPrefix)
-			{
-				result << QString("NORAD %1").arg(sat->getCatalogNumberString());
-			}
-		}
-	}
-
-	result.sort();
-	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
-
-	return result;
-}
-
-QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
-{
-	QStringList result;
-	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
 		return result;
-	if (maxNbItem==0) return result;
+	}
 
 	QString objw = objPrefix.toUpper();
 
@@ -425,40 +375,31 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 		if (ok)
 			numberPrefix = numberString;
 	}
-	bool find;
-	foreach(const SatelliteP& sat, satellites)
+
+	foreach(const SatelliteP& sobj, satellites)
 	{
-		if (sat->initialized && sat->displayed)
+		if (!sobj->initialized || !sobj->displayed)
 		{
-			find = false;
-			if (useStartOfWords)
-			{
-				if (sat->getEnglishName().toUpper().left(objw.length()) == objw)
-				{
-					find = true;
-				}
-			}
-			else
-			{
-				if (sat->getEnglishName().toUpper().contains(objw, Qt::CaseInsensitive))
-				{
-					find = true;
-				}
-			}
-			if (find)
-			{
-				result << sat->getEnglishName().toUpper();
-			}
-			else if (find==false && !numberPrefix.isEmpty() && sat->getCatalogNumberString().left(numberPrefix.length()) == numberPrefix)
-			{
-				result << QString("NORAD %1").arg(sat->getCatalogNumberString());			
-			}
+			continue;
+		}
+
+		QString name = inEnglish ? sobj->getEnglishName() : sobj->getNameI18n();
+		if (matchObjectName(name, objPrefix, useStartOfWords))
+		{
+			result.append(name);
+		}
+		else if (!numberPrefix.isEmpty() && sobj->getCatalogNumberString().startsWith(numberPrefix))
+		{
+			result.append(QString("NORAD %1").arg(sobj->getCatalogNumberString()));
+		}
+
+		if (result.size() >= maxNbItem)
+		{
+			break;
 		}
 	}
 
 	result.sort();
-	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
-
 	return result;
 }
 
@@ -1133,7 +1074,8 @@ void Satellites::setFlagHints(bool b)
 	if (hintFader != b)
 	{
 		hintFader = b;
-		emit settingsChanged();
+		emit settingsChanged(); // GZ IS THIS REQUIRED/USEFUL??
+		emit hintsVisibleChanged(b);
 	}
 }
 
@@ -1142,7 +1084,8 @@ void Satellites::setFlagLabels(bool b)
 	if (Satellite::showLabels != b)
 	{
 		Satellite::showLabels = b;
-		emit settingsChanged();
+		emit settingsChanged(); // GZ IS THIS REQUIRED/USEFUL??
+		emit labelsVisibleChanged(b);
 	}
 }
 

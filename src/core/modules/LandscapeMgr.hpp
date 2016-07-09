@@ -38,6 +38,16 @@ class QSettings;
 //! This includes landscape textures, fog, atmosphere and cardinal points.
 //! I decided to put all these elements together in a single class because they are
 //! inherently linked, especially when we start moving the observer in altitude.
+//! \note
+//! The Bortle scale index setting was removed from this class, because it was duplicated
+//! from StelSkyDrawer, complicating code that changes it.
+//! It is now only in StelSkyDrawer and can be accessed with
+//! with \link StelSkyDrawer::getBortleScaleIndex getBortleScaleIndex \endlink
+//! and \link StelSkyDrawer::setBortleScaleIndex setBortleScaleIndex \endlink.
+//! Slots setAtmosphereBortleLightPollution and getAtmosphereBortleLightPollution
+//! in this class have been removed/made private.
+//! If script access is desired, use
+//! \link StelMainScriptAPI::getBortleScaleIndex StelMainScriptAPI::get \endlink/\link StelMainScriptAPI::setBortleScaleIndex setBortleScaleIndex \endlink
 class LandscapeMgr : public StelModule
 {
 	Q_OBJECT
@@ -69,7 +79,40 @@ class LandscapeMgr : public StelModule
 			READ getFlagUseLightPollutionFromDatabase
 			WRITE setFlagUseLightPollutionFromDatabase
 			NOTIFY lightPollutionUsageChanged)
-
+	Q_PROPERTY(bool flagLandscapeAutoSelection
+		   READ getFlagLandscapeAutoSelection
+		   WRITE setFlagLandscapeAutoSelection
+		   NOTIFY flagLandscapeAutoSelectionChanged)
+	Q_PROPERTY(bool flagLandscapeSetsLocation
+		   READ getFlagLandscapeSetsLocation
+		   WRITE setFlagLandscapeSetsLocation
+		   NOTIFY flagLandscapeSetsLocationChanged
+		   )
+	Q_PROPERTY(bool flagLandscapeUseMinimalBrightness
+		   READ getFlagLandscapeUseMinimalBrightness
+		   WRITE setFlagLandscapeUseMinimalBrightness
+		   NOTIFY flagLandscapeUseMinimalBrightnessChanged
+		   )
+	Q_PROPERTY(bool flagLandscapeSetsMinimalBrightness
+		   READ getFlagLandscapeSetsMinimalBrightness
+		   WRITE setFlagLandscapeSetsMinimalBrightness
+		   NOTIFY flagLandscapeSetsMinimalBrightnessChanged
+		   )
+	Q_PROPERTY(double defaultMinimalBrightness
+		   READ getDefaultMinimalBrightness
+		   WRITE setDefaultMinimalBrightness
+		   NOTIFY defaultMinimalBrightnessChanged
+		   )
+	Q_PROPERTY(bool flagAtmosphereAutoEnabling
+		   READ getFlagAtmosphereAutoEnable
+		   WRITE setFlagAtmosphereAutoEnable
+		   NOTIFY setFlagAtmosphereAutoEnableChanged
+		   )
+	Q_PROPERTY(QString currentLandscapeID
+		   READ getCurrentLandscapeID
+		   WRITE setCurrentLandscapeID
+		   NOTIFY currentLandscapeChanged
+		   )
 public:
 	LandscapeMgr();
 	virtual ~LandscapeMgr();
@@ -136,6 +179,9 @@ public slots:
 	//! this value explicitly to freeze it during image export. To unfreeze, call this again with any negative value.
 	void setAtmosphereAverageLuminance(const float overrideLuminance);
 
+	//! Return a map of landscape name to landscape ID (directory name).
+	QMap<QString,QString> getNameToDirMap() const;
+
 	//! Retrieve a list of the names of all the available landscapes in
 	//! the file search path sub-directories of the landscape area
 	//! @return the names of the landscapes, which are the values of the name parameter in the landscape.ini files
@@ -154,6 +200,7 @@ public slots:
 	//! Get the current landscape ID.
 	const QString& getCurrentLandscapeID() const {return currentLandscapeID;}
 	//! Change the current landscape to the landscape with the ID specified.
+	//! Emits currentLandscapeChanged() if the landscape changed (true returned)
 	//! @param id the ID of the new landscape
 	//! @param changeLocationDuration the duration of the transition animation
 	//! @return false if the new landscape could not be set (e.g. no landscape of that ID was found).
@@ -162,6 +209,7 @@ public slots:
 	//! Get the current landscape name.
 	QString getCurrentLandscapeName() const;
 	//! Change the current landscape to the landscape with the name specified.
+	//! Emits currentLandscapeChanged() if the landscape changed (true returned)
 	//! @param name the name of the new landscape, as found in the landscape:name key of the landscape.ini file.
 	//! @param changeLocationDuration the duration of the transition animation
 	bool setCurrentLandscapeName(const QString& name, const double changeLocationDuration = 1.0);
@@ -208,20 +256,20 @@ public slots:
 	//! Return the value of the flag determining if a change of landscape will update the observer location.
 	bool getFlagLandscapeSetsLocation() const {return flagLandscapeSetsLocation;}
 	//! Set the value of the flag determining if a change of landscape will update the observer location.
-	void setFlagLandscapeSetsLocation(bool b) {flagLandscapeSetsLocation=b;}
+	void setFlagLandscapeSetsLocation(bool b) {if(b!=flagLandscapeSetsLocation){ flagLandscapeSetsLocation=b; emit flagLandscapeSetsLocationChanged(b);}}
 
 	//! Return the value of the flag determining if a minimal brightness should be used to keep landscape visible.
 	bool getFlagLandscapeUseMinimalBrightness() const {return flagLandscapeUseMinimalBrightness; }
 	//! Set the value of the flag determining if a minimal brightness should be used to keep landscape visible.
-	void setFlagLandscapeUseMinimalBrightness(bool b) {flagLandscapeUseMinimalBrightness=b; }
+	void setFlagLandscapeUseMinimalBrightness(bool b) {if(b!=flagLandscapeUseMinimalBrightness){ flagLandscapeUseMinimalBrightness=b; emit flagLandscapeUseMinimalBrightnessChanged(b);}}
 	//! Return the value of the flag determining if the minimal brightness should be taken from landscape.ini
 	bool getFlagLandscapeSetsMinimalBrightness() const {return flagLandscapeSetsMinimalBrightness;}
 	//! Sets the value of the flag determining if the minimal brightness should be taken from landscape.ini
-	void setFlagLandscapeSetsMinimalBrightness(bool b) {flagLandscapeSetsMinimalBrightness=b;}
+	void setFlagLandscapeSetsMinimalBrightness(bool b) {if(b!=flagLandscapeSetsMinimalBrightness){ flagLandscapeSetsMinimalBrightness=b; emit flagLandscapeSetsMinimalBrightnessChanged(b);}}
 	//! Return the minimal brightness value of the landscape
 	double getDefaultMinimalBrightness() const {return defaultMinimalBrightness;}
 	//! Set the minimal brightness value of the landscape.
-	void setDefaultMinimalBrightness(const double b) {defaultMinimalBrightness=b;}
+	void setDefaultMinimalBrightness(const double b) {if(b!=defaultMinimalBrightness){ defaultMinimalBrightness=b; emit defaultMinimalBrightnessChanged(b);}}
 	//! Sets the value of the flag usage light pollution (and bortle index) from locations database.
 	void setFlagUseLightPollutionFromDatabase(const bool usage);
 	//! Return the value of flag usage light pollution (and bortle index) from locations database.
@@ -247,10 +295,11 @@ public slots:
 	//! Set atmosphere fade duration in s.
 	void setAtmosphereFadeDuration(const float f);
 
-	//! Set the light pollution following the Bortle Scale. Emits lightPollutionChanged().
-	void setAtmosphereBortleLightPollution(const int bIndex);
-	//! Get the light pollution following the Bortle Scale
+	/*
+	//This method has been removed, use StelSkyDrawer::getBortleScaleIndex instead, or StelMainScriptAPI::getBortleScaleIndex in scripts
+	//Also, if required, please use StelSkyDrawer::setBortleScaleIndex or StelMainScriptAPI::setBortleScaleIndex instead of LandscapeMgr::setAtmosphereBortleLightPollution
 	int getAtmosphereBortleLightPollution() const;
+	*/
 
 	//! Set the rotation of the landscape about the z-axis.
 	//! This is intended for special uses such as when the landscape consists of
@@ -366,14 +415,21 @@ signals:
 	void illuminationDisplayedChanged(const bool displayed);
 	void labelsDisplayedChanged(const bool displayed);
 	void lightPollutionUsageChanged(const bool usage);
+	void flagLandscapeAutoSelectionChanged(const bool value);
+	void flagLandscapeSetsLocationChanged(const bool value);
+	void flagLandscapeUseMinimalBrightnessChanged(const bool value);
+	void flagLandscapeSetsMinimalBrightnessChanged(const bool value);
+	void defaultMinimalBrightnessChanged(const double value);
+	void setFlagAtmosphereAutoEnableChanged(const bool enabled);
+
+	//! Emitted whenever the default landscape is changed
+	//! @param id the landscape id of the new default landscape
+	void defaultLandscapeChanged(const QString& id);
 
 	//! Emitted when a landscape has been installed or un-installed.
 	//! For example, it is used to update the list of landscapes in
 	//! the Sky and viewing options window (the ViewDialog class)
 	void landscapesChanged();
-
-	//! emitted by setAtmosphereBortleLightPollution().
-	void lightPollutionChanged();
 
 	//! Emitted when installLandscapeFromArchive() can't read from, write to or
 	//! create a file or a directory.
@@ -395,7 +451,19 @@ signals:
 	//! \param path the path to the landscape's directory
 	void errorRemoveManually(QString path);
 
+	//! Emitted when the current landscape was changed
+	//! \param currentLandscapeID the ID of the new landscape
+	//! \param currentLandscapeName the name of the new landscape
+	void currentLandscapeChanged(QString currentLandscapeID,QString currentLandscapeName);
+
 private slots:
+	//! Set the light pollution following the Bortle Scale.
+	//! This should not be called from script code, use StelMainScriptAPI::setBortleScaleIndex if you want to change the light pollution.
+	void setAtmosphereBortleLightPollution(const int bIndex);
+
+	//! Reacts to StelCore::locationChanged, and changes the light pollution if the flagLightPollutionFromDatabase is true
+	void updateLocationBasedPollution(StelLocation loc);
+
 	//! Translate labels to new language settings.
 	void updateI18n();	
 
@@ -410,9 +478,6 @@ private:
 	//! This takes a name of the landscape, as described in the landscape:name item in the
 	//! landscape.ini, and returns the landscape ID which corresponds to that name.
 	QString nameToID(const QString& name) const;
-
-	//! Return a map of landscape name to landscape ID (directory name).
-	QMap<QString,QString> getNameToDirMap() const;
 
 	//! Returns the path to an installed landscape's directory.
 	//! It uses StelFileMgr to look for it in the possible directories.
@@ -435,7 +500,7 @@ private:
 	//! Indicate use of the default minimal brightness value specified in config.ini.
 	bool flagLandscapeUseMinimalBrightness;
 	//! A minimal brightness value to keep landscape visible.
-	float defaultMinimalBrightness;
+	double defaultMinimalBrightness;
 	//! Indicate use of the minimal brightness value specified in the current landscape.ini, if present.
 	bool flagLandscapeSetsMinimalBrightness;
 	//! Indicate auto-enable atmosphere for planets with atmospheres in location window

@@ -150,9 +150,13 @@ void TelescopeControl::init()
 		reticleTexture = StelApp::getInstance().getTextureManager().createTexture(":/telescopeControl/telescope_reticle.png");
 		selectionTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
 
+		QSignalMapper* slewObj = new QSignalMapper(this);
+		QSignalMapper* slewDir = new QSignalMapper(this);
+
 		//Create telescope key bindings
 		/* StelAction-s with these key bindings existed in Stellarium prior to
 			revision 6311. Any future backports should account for that. */
+		QString section = N_("Telescope Control");
 		for (int i = MIN_SLOT_NUMBER; i <= MAX_SLOT_NUMBER; i++)
 		{
 			// "Slew to object" commands
@@ -160,14 +164,18 @@ void TelescopeControl::init()
 			QString shortcut = QString("Ctrl+%1").arg(i);
 			QString text;
 			text = q_("Move telescope #%1 to selected object").arg(i);
-			addAction(name, N_("Telescope Control"), text, "slewTelescopeToSelectedObject()", shortcut);
+			StelAction* actionSlewObj = addAction(name, section, text, slewObj, "map()", shortcut);
+			slewObj->setMapping(actionSlewObj, i);
 
 			// "Slew to the center of the screen" commands
 			name = moveToCenterActionId.arg(i);
 			shortcut = QString("Alt+%1").arg(i);
 			text = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
-			addAction(name, N_("Telescope Control"), text, "slewTelescopeToViewDirection()", shortcut);
+			StelAction* actionSlewDir = addAction(name, section, text, slewDir, "map()", shortcut);
+			slewDir->setMapping(actionSlewDir, i);
 		}
+		connect(slewObj,SIGNAL(mapped(int)),this,SLOT(slewTelescopeToSelectedObject(int)));
+		connect(slewDir,SIGNAL(mapped(int)),this,SLOT(slewTelescopeToViewDirection(int)));
 		connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 		        this, SLOT(translateActionDescriptions()));
 	
@@ -354,76 +362,6 @@ StelObjectP TelescopeControl::searchByName(const QString &name) const
 	return 0;
 }
 
-QStringList TelescopeControl::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
-{
-	QStringList result;
-	if (maxNbItem==0)
-		return result;
-
-	QString tn;
-	bool find;
-	foreach (const TelescopeClientP& telescope, telescopeClients)
-	{
-		tn = telescope->getNameI18n();
-		find = false;
-		if (useStartOfWords)
-		{
-			if (objPrefix.toUpper()==tn.mid(0, objPrefix.size()).toUpper())
-				find = true;
-		}
-		else
-		{
-			if (tn.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-		}
-		if (find)
-		{
-			result << tn;
-		}
-	}
-	result.sort();
-	if (result.size()>maxNbItem)
-	{
-		result.erase(result.begin() + maxNbItem, result.end());
-	}
-	return result;
-}
-
-QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
-{
-	QStringList result;
-	if (maxNbItem==0)
-		return result;
-
-	QString tn;
-	bool find;
-	foreach (const TelescopeClientP& telescope, telescopeClients)
-	{
-		tn = telescope->getEnglishName();
-		find = false;
-		if (useStartOfWords)
-		{
-			if (objPrefix.toUpper()==tn.mid(0, objPrefix.size()).toUpper())
-				find = true;
-		}
-		else
-		{
-			if (tn.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-		}
-		if (find)
-		{
-			result << tn;
-		}
-	}
-	result.sort();
-	if (result.size()>maxNbItem)
-	{
-		result.erase(result.begin() + maxNbItem, result.end());
-	}
-	return result;
-}
-
 bool TelescopeControl::configureGui(bool show)
 {
 	if(show)
@@ -442,13 +380,8 @@ void TelescopeControl::setFontSize(int fontSize)
 	labelFont.setPixelSize(fontSize);
 }
 
-void TelescopeControl::slewTelescopeToSelectedObject()
+void TelescopeControl::slewTelescopeToSelectedObject(const int idx)
 {
-	// Find out for which telescope is the command
-	if (sender() == NULL)
-		return;
-	int slotNumber = sender()->objectName().right(1).toInt();
-
 	// Find out the coordinates of the target
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	if (omgr->getSelectedObject().isEmpty())
@@ -460,21 +393,15 @@ void TelescopeControl::slewTelescopeToSelectedObject()
 
 	Vec3d objectPosition = selectObject->getJ2000EquatorialPos(StelApp::getInstance().getCore());
 
-	telescopeGoto(slotNumber, objectPosition);
+	telescopeGoto(idx, objectPosition);
 }
 
-void TelescopeControl::slewTelescopeToViewDirection()
+void TelescopeControl::slewTelescopeToViewDirection(const int idx)
 {
-	// Find out for which telescope is the command
-	if (sender() == NULL)
-		return;
-	// XXX: we could use a QSignalMapper instead of this trick.
-	int slotNumber = sender()->objectName().right(1).toInt();
-
 	// Find out the coordinates of the target
 	Vec3d centerPosition = GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000();
 
-	telescopeGoto(slotNumber, centerPosition);
+	telescopeGoto(idx, centerPosition);
 }
 
 void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelCore* core, StelPainter& sPainter)

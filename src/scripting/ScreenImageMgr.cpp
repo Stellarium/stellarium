@@ -78,17 +78,19 @@ ScreenImage::ScreenImage(const QString& filename, float x, float y, bool show, f
 
 ScreenImage::~ScreenImage()
 {
+	moveTimer->stop();
+	scaleTimer->stop();
+	fadeTimer->stop();
+	delete anim; anim = NULL;
+	delete scaleAnim; scaleAnim = NULL;
+	delete moveTimer; moveTimer = NULL;
+	delete scaleTimer; scaleTimer = NULL;
+	delete fadeTimer; fadeTimer = NULL;
 	if (tex!=NULL)
 	{
 		delete tex;
 		tex = NULL;
 	}
-	moveTimer->stop();
-	scaleTimer->stop();
-	delete anim; anim = NULL;
-	delete scaleAnim; scaleAnim = NULL;
-	delete moveTimer; moveTimer = NULL;
-	delete scaleTimer; scaleTimer = NULL;
 }
 
 bool ScreenImage::draw(const StelCore*)
@@ -250,7 +252,7 @@ void ScreenImageMgr::createScreenImage(const QString& id, const QString& filenam
 	}
 	else
 	{
-		qWarning() << "Failed to create ScreenImage: file not exists";
+		qWarning() << "Failed to create ScreenImage" << id << ": file not found: " << filename;
 	}
 }
 

@@ -29,6 +29,7 @@
 // Init statics variables.
 QFile StelLogger::logFile;
 QString StelLogger::log;
+QMutex StelLogger::fileMutex;
 
 void StelLogger::init(const QString& logFilePath)
 {
@@ -251,17 +252,43 @@ void StelLogger::deinit()
 	logFile.close();
 }
 
-void StelLogger::debugLogHandler(QtMsgType, const QMessageLogContext&, const QString& msg)
+void StelLogger::debugLogHandler(QtMsgType type, const QMessageLogContext& ctx, const QString& msg)
 {
-	fprintf(stderr, "%s\n", msg.toUtf8().constData());
-	writeLog(QString(msg));
+#if (QT_VERSION>=QT_VERSION_CHECK(5,4,0))
+	//use Qt to format the log message, if possible
+	//this uses the format set by qSetMessagePattern
+	//or QT_MESSAGE_PATTERN environment var
+	QString fmt = qFormatLogMessage(type,ctx,msg);
+#else
+	Q_UNUSED(type)
+	Q_UNUSED(ctx)
+	QString fmt = msg;
+#endif
+	//do nothing for null messages
+	if(fmt.isNull())
+		return;
+
+#ifdef Q_OS_WIN
+	//Send debug messages to Debugger, if one is attached, instead of stderr
+	//This seems to avoid output delays in Qt Creator, allowing for easier debugging
+	//Seems to work fine with MSVC and MinGW
+	if(IsDebuggerPresent())
+		OutputDebugStringW(reinterpret_cast<LPCWSTR>(fmt.utf16()));
+	else
+#endif
+	//this does the same as the default handler in qlogging.cpp
+	fprintf(stderr, "%s\n", qPrintable(fmt));
+	fflush(stderr);
+	writeLog(fmt);
 }
 
 void StelLogger::writeLog(QString msg)
 {
+	fileMutex.lock();
 	msg += "\n";
 	logFile.write(qPrintable(msg), msg.size());
 	log += msg;
+	fileMutex.unlock();
 }
 
 QString StelLogger::getMsvcVersionString(int ver)

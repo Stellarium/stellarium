@@ -324,79 +324,13 @@ StelObjectP Quasars::searchByNameI18n(const QString& nameI18n) const
 	return NULL;
 }
 
-QStringList Quasars::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QStringList Quasars::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
 	QStringList result;
-	if (!flagShowQuasars)
-		return result;
-
-	if (maxNbItem==0)
-		return result;
-
-	QString qson;
-	bool find;
-	foreach(const QuasarP& quasar, QSO)
+	if (flagShowQuasars)
 	{
-		qson = quasar->getNameI18n();
-		find = false;
-		if (useStartOfWords)
-		{
-			if (qson.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
-				find = true;
-		}
-		else
-		{
-			if (qson.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-		}
-		if (find)
-		{
-			result << qson;
-		}
+		result = StelObjectModule::listMatchingObjects(objPrefix, maxNbItem, useStartOfWords);
 	}
-
-	result.sort();
-	if (result.size()>maxNbItem)
-		result.erase(result.begin()+maxNbItem, result.end());
-
-	return result;
-}
-
-QStringList Quasars::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
-{
-	QStringList result;
-	if (!flagShowQuasars)
-		return result;
-
-	if (maxNbItem==0)
-		return result;
-
-	QString qson;
-	bool find;
-	foreach(const QuasarP& quasar, QSO)
-	{
-		qson = quasar->getEnglishName();
-		find = false;
-		if (useStartOfWords)
-		{
-			if (qson.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
-				find = true;
-		}
-		else
-		{
-			if (qson.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-		}
-		if (find)
-		{
-			result << qson;
-		}
-	}
-
-	result.sort();
-	if (result.size()>maxNbItem)
-		result.erase(result.begin()+maxNbItem, result.end());
-
 	return result;
 }
 
@@ -825,5 +759,14 @@ void Quasars::reloadCatalog(void)
 	{
 		// Restore selection...
 		objMgr->setSelectedObject(selectedObject);
+	}
+}
+
+void Quasars::setFlagShowQuasars(bool b)
+{
+	if (b!=flagShowQuasars)
+	{
+		flagShowQuasars=b;
+		emit flagQuasarsVisibilityChanged(b);
 	}
 }

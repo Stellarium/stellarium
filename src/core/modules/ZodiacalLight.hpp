@@ -53,6 +53,11 @@ class ZodiacalLight : public StelModule
 		   READ getFlagShow
 		   WRITE setFlagShow
 		   NOTIFY zodiacalLightDisplayedChanged)
+	Q_PROPERTY(double intensity
+		   READ getIntensity
+		   WRITE setIntensity
+		   NOTIFY intensityChanged
+		   )
 
 public:
 	ZodiacalLight();
@@ -82,7 +87,7 @@ public slots:
 	double getIntensity() const {return intensity;}
 	//! Set Zodiacal Light intensity.
 	//! @param aintensity intensity of Zodiacal Light
-	void setIntensity(double aintensity) {intensity = aintensity;}
+	void setIntensity(double aintensity) {if(aintensity!=intensity){intensity = aintensity; emit intensityChanged(intensity);}}
 	
 	//! Get the color used for rendering the Zodiacal Light
 	Vec3f getColor() const {return color;}
@@ -105,11 +110,12 @@ public slots:
 
 signals:
 	void zodiacalLightDisplayedChanged(const bool displayed);
+	void intensityChanged(double intensity);
 	
 private:
 	StelTextureSP tex;
 	Vec3f color; // global color
-	float intensity;
+	double intensity;
 	class LinearFader* fader;
 	double lastJD; // keep date of last computation. Position will be updated only if far enough away from last computation.
 

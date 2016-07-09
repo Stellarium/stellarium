@@ -54,6 +54,14 @@ typedef struct
 	QString stype;		//! Spectral type
 } varstar;
 
+typedef struct
+{
+	QString designation;	//! WDS designation
+	int observation;	//! Date of last satisfactory observation, yr
+	float positionAngle;	//! Position Angle at date of last satisfactory observation, deg
+	float separation;	//! Separation at date of last satisfactory observation, arcsec
+} wds;
+
 //! @class StarMgr
 //! Stores the star catalogue data.
 //! Used to render the stars themselves, as well as determine the color table
@@ -88,6 +96,10 @@ class StarMgr : public StelObjectModule
 		   READ getFlagLabels
 		   WRITE setFlagLabels
 		   NOTIFY starLabelsDisplayedChanged)
+	Q_PROPERTY(double labelsAmount
+		   READ getLabelsAmount
+		   WRITE setLabelsAmount
+		   NOTIFY labelsAmountChanged)
 
 public:
 	StarMgr(void);
@@ -128,18 +140,12 @@ public:
 	//! @param name The case in-sensistive standard program planet name
 	virtual StelObjectP searchByName(const QString& name) const;
 
-	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
-	//! @param objPrefix the case insensitive first letters of the searched object
-	//! @param maxNbItem the maximum number of returned object names
-	//! @param useStartOfWords the autofill mode for returned objects names
-	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
 	//! @note Loading stars with the common names only.
 	virtual QStringList listAllObjects(bool inEnglish) const;	
 	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
@@ -159,22 +165,22 @@ public slots:
 	Vec3f getLabelColor(void) const {return labelColor;}
 
 	//! Set display flag for Stars.
-	void setFlagStars(bool b) {starsFader=b;}
+	void setFlagStars(bool b) {starsFader=b; emit starsDisplayedChanged(b);}
 	//! Get display flag for Stars
 	bool getFlagStars(void) const {return starsFader==true;}
 
 	//! Set display flag for Star names (labels).
-	void setFlagLabels(bool b) {labelsFader=b;}
+	void setFlagLabels(bool b) {labelsFader=b; emit starLabelsDisplayedChanged(b);}
 	//! Get display flag for Star names (labels).
 	bool getFlagLabels(void) const {return labelsFader==true;}
 
 	//! Set the amount of star labels. The real amount is also proportional with FOV.
 	//! The limit is set in function of the stars magnitude
 	//! @param a the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
-	void setLabelsAmount(float a) {labelsAmount=a;}
+	void setLabelsAmount(double a) {if(a!=labelsAmount){ labelsAmount=a; emit labelsAmountChanged(a);}}
 	//! Get the amount of star labels. The real amount is also proportional with FOV.
 	//! @return the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
-	float getLabelsAmount(void) const {return labelsAmount;}
+	double getLabelsAmount(void) const {return labelsAmount;}
 
 	//! Define font size to use for star names display.
 	void setFontSize(float newFontSize);
@@ -215,6 +221,12 @@ public:
 	//! @param hip The Hipparcos number of star
 	//! @return translated scientific name of variable star
 	static QString getGcvsName(int hip);
+
+	//! Get the (translated) scientific name for a double star with a specified
+	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return translated scientific name of double star
+	static QString getWdsName(int hip);
 
 	//! Get the (English) common name for a star with a specified
 	//! Hipparcos catalogue number.
@@ -277,6 +289,24 @@ public:
 	//! @return the rising time or duration of eclipse for variable star
 	static int getGcvsMM(int hip);
 
+	//! Get year of last satisfactory observation of double star with a
+	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return year of last satisfactory observation
+	static int getWdsLastObservation(int hip);
+
+	//! Get position angle at date of last satisfactory observation of double star with a
+	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return position angle in degrees
+	static int getWdsLastPositionAngle(int hip);
+
+	//! Get separation angle at date of last satisfactory observation of double star with a
+	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return separation in arcseconds
+	static float getWdsLastSeparation(int hip);
+
 	static QString convertToSpectralType(int index);
 	static QString convertToComponentIds(int index);
 
@@ -299,6 +329,7 @@ private slots:
 signals:
 	void starLabelsDisplayedChanged(const bool displayed);
 	void starsDisplayedChanged(const bool displayed);
+	void labelsAmountChanged(float a);
 
 private:
 
@@ -321,6 +352,10 @@ private:
 	//! @param the path to a file containing the GCVS.
 	void loadGcvs(const QString& GcvsFile);
 
+	//! Loads WDS from a file.
+	//! @param the path to a file containing the WDS.
+	void loadWds(const QString& WdsFile);
+
 	//! Loads cross-index data from a file.
 	//! @param the path to a file containing the cross-index data.
 	void loadCrossIndex(const QString& crossIndexFile);
@@ -339,7 +374,7 @@ private:
 	LinearFader starsFader;
 
 	bool flagStarName;
-	float labelsAmount;
+	double labelsAmount;
 	bool gravityLabel;
 
 	int maxGeodesicGridLevel;
@@ -376,6 +411,9 @@ private:
 
 	static QHash<int, varstar> varStarsMapI18n;
 	static QMap<QString, int> varStarsIndexI18n;
+
+	static QHash<int, wds> wdsStarsMapI18n;
+	static QMap<QString, int> wdsStarsIndexI18n;
 
 	static QHash<int, int> saoStarsMap;
 	static QMap<int, int> saoStarsIndex;

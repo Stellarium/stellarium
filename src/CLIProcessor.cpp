@@ -56,6 +56,8 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  << "--user-dir (or -u)      : Use an alternative user data directory\n"
 			  << "--verbose               : Even more diagnostic output in logfile \n"
 			  << "                          (esp. multimedia handling)\n"
+			  << "--compat33 (or -C)      : Request OpenGL 3.3 Compatibility Profile\n"
+			  << "                          May help for certain driver configurations. Mac?\n"
 			  << "--fix-text (or -t)      : May fix text rendering problems\n"
 			#ifdef Q_OS_WIN
 			  << "--angle-mode (or -a)    : Use ANGLE as OpenGL ES2 rendering engine (autodetect driver)\n"
@@ -93,11 +95,14 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 	{
 		qApp->setProperty("verbose", true);
 	}
+	if (argsGetOption(argList, "-C", "--compat33"))
+	{
+		qApp->setProperty("onetime_compat33", true);
+	}
 	if (argsGetOption(argList, "-t", "--fix-text"))
 	{
 		qApp->setProperty("text_texture", true); // Will be observed in StelPainter::drawText()
 	}
-
 	#ifdef Q_OS_WIN
 	if (argsGetOption(argList, "-s", "--safe-mode"))
 	{
