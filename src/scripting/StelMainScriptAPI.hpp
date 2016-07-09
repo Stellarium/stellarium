@@ -264,14 +264,16 @@ public slots:
 	//! @return the Declination angle in J2000 frame in decimal degrees.
 	double getViewDecJ2000Angle();
 
-	//! move the current viewing direction to some specified altitude and azimuth
+	//! move the current viewing direction to some specified altitude and azimuth.
+	//! The move will run in AltAz coordinates. This will look different from moveToRaDec() when timelapse is fast.
 	//! angles may be specified in a format recognised by StelUtils::getDecAngle()
 	//! @param alt the altitude angle
 	//! @param azi the azimuth angle
 	//! @param duration the duration of the movement in seconds
 	void moveToAltAzi(const QString& alt, const QString& azi, float duration=1.);
 
-	//! move the current viewing direction to some specified right ascension and declination
+	//! move the current viewing direction to some specified right ascension and declination.
+	//! The move will run in equatorial coordinates. This will look different from moveToAltAzi() when timelapse is fast.
 	//! angles may be specified in a format recognised by StelUtils::getDecAngle()
 	//! @param ra the right ascension angle
 	//! @param dec the declination angle
@@ -410,7 +412,14 @@ public slots:
 	//! This can be used e.g. in wide cylindrical panorama screens to push the horizon down and see more of the sky.
 	//! @param x -0.5...0.5 horizontal offset. This is not available in the GUI, and it is recommended to keep it at 0.
 	//! @param y -0.5...0.5 vertical offset. This is available in the GUI.
+	//! @deprecated Use StelMovementMgr::moveViewport instead
 	void setViewportOffset(const float x, const float y);
+
+	//! Set a lateral width distortion. Use this e.g. in startup.ssc.
+	//! Implemented for 0.15 for a setup with 5 beamers with edge blending. The 9600x1200 get squeezed somewhat which looks a bit odd. Use this stretch to compensate.
+	//! Experimental! To avoid overuse, there is currently no config.ini setting available.
+	//! @note Currently only the projected content is affected. ScreenImage, ScreenLabel is not stretched.
+	void setViewportStretch(const float stretch);
 
 	//! Get a list of Sky Culture IDs
 	//! @return a list of valid sky culture IDs
@@ -552,8 +561,8 @@ public slots:
 
 	//! Get screen coordinates from some specified altitude and azimuth
 	//! angles may be specified in a format recognised by StelUtils::getDecAngle()
-	//! @param alt the altitude angle
-	//! @param azi the azimuth angle
+	//! @param alt the altitude angle [degrees]
+	//! @param azi the azimuth angle [degrees]
 	//! @return a map of object data.  Keys:
 	//! - x : x coordinate on the screen
 	//! - y : y coordinate on the screen
@@ -584,6 +593,17 @@ public slots:
 	//! of your script.
 	//! @param id the identifier used when loadSound was called
 	void dropSound(const QString& id);
+
+	//! Get position in a playing sound.
+	//! @param id the identifier used when loadSound was called
+	//! @return position [ms] during play or pause, 0 when stopped, -1 in case of error.
+	qint64 getSoundPosition(const QString& id);
+
+	//! Get duration of a sound object (if possible).
+	//! @param id the identifier used when loadSound was called
+	//! @return duration[ms] if known, 0 if unknown (e.g. during load/before playing), -1 in case of error.
+	qint64 getSoundDuration(const QString& id);
+
 
 	//! Load a video from a file.
 	//! @param filename the name of the file to load, relative to the scripts directory.
@@ -760,6 +780,19 @@ public slots:
 	//! Get Zodiacal Light intensity.
 	//! @return value of Zodiacal Light intensity, e.g. "1.2"
 	double getZodiacalLightIntensity();
+
+	//! Returns the currently set Bortle scale index, which is used to simulate light pollution.
+	//! Wrapper for StelSkyDrawer::getBortleScaleIndex
+	//! @see https://en.wikipedia.org/wiki/Bortle_scale
+	//! @return the Bortle scale index in range [1,9]
+	int getBortleScaleIndex() const;
+
+	//! Changes the Bortle scale index, which is used to simulate light pollution.
+	//! Wrapper for StelSkyDrawer::setBortleScaleIndex
+	//! Valid values are in the range [1,9]
+	//! @see https://en.wikipedia.org/wiki/Bortle_scale
+	//! @param index the new Bortle scale index, must be in range [1,9]
+	void setBortleScaleIndex(int index);
 
 	//! For use in setDate and waitFor
 	//! For parameter descriptions see setDate().

@@ -48,6 +48,7 @@ StelTextureSP Nebula::texOpenClusterWithNebulosity;
 float Nebula::circleScale = 1.f;
 bool  Nebula::drawHintProportional = false;
 bool  Nebula::surfaceBrightnessUsage = false;
+bool  Nebula::designationUsage = false;
 float Nebula::hintsBrightness = 0.f;
 Vec3f Nebula::labelColor = Vec3f(0.4f,0.3f,0.5f);
 Vec3f Nebula::circleColor = Vec3f(0.8f,0.8f,0.1f);
@@ -80,7 +81,7 @@ Vec3f Nebula::possibleQuasarColor = Vec3f(1.0f,0.2f,0.2f);
 Vec3f Nebula::possiblePlanetaryNebulaColor = Vec3f(1.0f,1.0f,0.1f);
 Vec3f Nebula::protoplanetaryNebulaColor = Vec3f(1.0f,1.0f,0.1f);
 Vec3f Nebula::starColor = Vec3f(1.0f,1.0f,0.1f);
-bool Nebula::flagUsageTypeFilter = false;
+bool Nebula::flagUseTypeFilters = false;
 Nebula::CatalogGroup Nebula::catalogFilters = Nebula::CatalogGroup(0);
 Nebula::TypeGroup Nebula::typeFilters = Nebula::TypeGroup(Nebula::AllTypes);
 
@@ -658,7 +659,7 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 	float shift = 4.f + (drawHintProportional ? size : size/1.8f);
 
 	QString str = getNameI18n();
-	if (str.isEmpty())
+	if (str.isEmpty() || designationUsage)
 		str = getDSODesignation();
 
 	sPainter.drawText(XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);
@@ -720,7 +721,7 @@ void Nebula::readDSO(QDataStream &in)
 
 bool Nebula::objectInDisplayedType() const
 {
-	if (!flagUsageTypeFilter)
+	if (!flagUseTypeFilters)
 		return true;
 
 	bool r = false;

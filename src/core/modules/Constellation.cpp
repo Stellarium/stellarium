@@ -27,6 +27,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelTranslator.hpp"
 #include "ConstellationMgr.hpp"
 
 #include <algorithm>
@@ -40,6 +41,7 @@ Vec3f Constellation::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Constellation::boundaryColor = Vec3f(0.8,0.3,0.3);
 bool Constellation::singleSelected = false;
 bool Constellation::seasonalRuleEnabled = false;
+float Constellation::artIntensityFovScale = 1.0f;
 
 Constellation::Constellation()
 	: numberOfSegments(0)
@@ -161,8 +163,8 @@ void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& r
 {
 	if (checkVisibility())
 	{
-		const float intensity = artFader.getInterstate();
-		if (artTexture && intensity && region.intersects(boundingCap))
+		const float intensity = artFader.getInterstate() * artIntensityFovScale;
+		if (artTexture && intensity > 0.0f && region.intersects(boundingCap))
 		{
 			sPainter.setColor(intensity,intensity,intensity);
 
@@ -276,6 +278,29 @@ bool Constellation::checkVisibility() const
 	}
 	return visible;
 }
+
+QString Constellation::getInfoString(const StelCore *core, const InfoStringGroup &flags) const
+{
+	Q_UNUSED(core);
+	QString str;
+	QTextStream oss(&str);
+
+	if (flags&Name)
+	{
+		oss << "<h2>" << getNameI18n();
+		if (!getShortName().isEmpty())
+			oss << " (" << getShortName() << ")";
+		oss << "</h2>";
+	}
+
+	if (flags&ObjectType)
+		oss << q_("Type: <b>%1</b>").arg(q_("constellation")) << "<br />";
+
+	postProcessInfoString(str, flags);
+
+	return str;
+}
+
 
 StelObjectP Constellation::getBrightestStarInConstellation(void) const
 {

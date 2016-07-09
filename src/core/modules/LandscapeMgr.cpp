@@ -304,7 +304,7 @@ void LandscapeMgr::update(double deltaTime)
 	else
 	{
 		// In case we have exceptionally deep horizons ("Little Prince planet"), the sun will rise somehow over that line and demand light on the landscape.
-		sinSunAngle=sin(qMin(M_PI_2, asin(sunPos[2]-landscape->getSinMinAltitudeLimit()) + (0.25f *M_PI/180.)));
+		sinSunAngle=sin(qMin(M_PI_2, asin(qMax(-1.0, qMin(1.0, sunPos[2]-landscape->getSinMinAltitudeLimit()))) + (0.25f *M_PI/180.)));
 		if(sinSunAngle > 0.0f)
 			landscapeBrightness +=  (1.0f-landscape->getOpacity(sunPos))*sinSunAngle;
 
@@ -403,15 +403,12 @@ void LandscapeMgr::init()
 	QString defaultColor = conf->value("color/default_color").toString();
 	setColorCardinalPoints(StelUtils::strToVec3f(conf->value("color/cardinal_color", defaultColor).toString()));
 
-	bool ok =true;
-	setAtmosphereBortleLightPollution(conf->value("stars/init_bortle_scale",3).toInt(&ok));
-	if (!ok)
-	{
-		conf->setValue("stars/init_bortle_scale",3);
-		setAtmosphereBortleLightPollution(3);
-		ok = true;
-	}
 	StelApp *app = &StelApp::getInstance();
+	//Bortle scale is managed by SkyDrawer
+	StelSkyDrawer* drawer = app->getCore()->getSkyDrawer();
+	setAtmosphereBortleLightPollution(drawer->getBortleScaleIndex());
+	connect(app->getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(updateLocationBasedPollution(StelLocation)));
+	connect(drawer, SIGNAL(bortleScaleIndexChanged(int)), this, SLOT(setAtmosphereBortleLightPollution(int)));
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 
 	QString displayGroup = N_("Display Options");
@@ -421,6 +418,7 @@ void LandscapeMgr::init()
 	addAction("actionShow_Ground", displayGroup, N_("Ground"), "landscapeDisplayed", "G");
 	addAction("actionShow_LandscapeIllumination", displayGroup, N_("Illumination"), "illuminationDisplayed", "Shift+G");
 	addAction("actionShow_LandscapeLabels", displayGroup, N_("Labels"), "labelsDisplayed", "Ctrl+Shift+G");
+	addAction("actionShow_LightPollution_Database", displayGroup, N_("Light pollution data from locations database"), "databaseUsage");
 }
 
 bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeLocationDuration)
@@ -428,12 +426,16 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 	if (id.isEmpty())
 		return false;
 
+	//prevent unnecessary changes/file access
+	if(id==currentLandscapeID)
+		return false;
+
 	// We want to lookup the landscape ID (dir) from the name.
 	Landscape* newLandscape = createFromFile(StelFileMgr::findFile("landscapes/" + id + "/landscape.ini"), id);
 	
 	if (!newLandscape)
 	{
-		qWarning() << "ERROR while loading default landscape " << "landscapes/" + id + "/landscape.ini";
+		qWarning() << "ERROR while loading landscape " << "landscapes/" + id + "/landscape.ini";
 		return false;
 	}
 
@@ -450,46 +452,48 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 		if (oldLandscape)
 			delete oldLandscape;
 		oldLandscape = landscape; // keep old while transitioning!
-		landscape = newLandscape;
+	}
+	landscape=newLandscape;
+	currentLandscapeID = id;
 
-		if (getFlagLandscapeSetsLocation() && landscape->hasLocation())
+
+	if (getFlagLandscapeSetsLocation() && landscape->hasLocation())
+	{
+		StelApp::getInstance().getCore()->moveObserverTo(landscape->getLocation(), changeLocationDuration);
+		StelSkyDrawer* drawer=StelApp::getInstance().getCore()->getSkyDrawer();
+
+		if (landscape->getDefaultFogSetting() >-1)
 		{
-			StelApp::getInstance().getCore()->moveObserverTo(landscape->getLocation(), changeLocationDuration);
-			StelSkyDrawer* drawer=StelApp::getInstance().getCore()->getSkyDrawer();
-
-			if (landscape->getDefaultFogSetting() >-1)
-			{
-				setFlagFog((bool) landscape->getDefaultFogSetting());
-				landscape->setFlagShowFog((bool) landscape->getDefaultFogSetting());
-			}
-			if (landscape->getDefaultBortleIndex() > 0)
-			{
-				setAtmosphereBortleLightPollution(landscape->getDefaultBortleIndex());
-				drawer->setBortleScaleIndex(landscape->getDefaultBortleIndex());
-			}
-			if (landscape->getDefaultAtmosphericExtinction() >= 0.0)
-			{
-				drawer->setExtinctionCoefficient(landscape->getDefaultAtmosphericExtinction());
-			}
-			if (landscape->getDefaultAtmosphericTemperature() > -273.15)
-			{
-				drawer->setAtmosphereTemperature(landscape->getDefaultAtmosphericTemperature());
-			}
-			if (landscape->getDefaultAtmosphericPressure() >= 0.0)
-			{
-				drawer->setAtmospherePressure(landscape->getDefaultAtmosphericPressure());
-			}
-			else if (landscape->getDefaultAtmosphericPressure() == -1.0)
-			{
-				// compute standard pressure for standard atmosphere in given altitude if landscape.ini coded as atmospheric_pressure=-1
-				// International altitude formula found in Wikipedia.
-				double alt=landscape->getLocation().altitude;
-				double p=1013.25*std::pow(1-(0.0065*alt)/288.15, 5.255);
-				drawer->setAtmospherePressure(p);
-			}
+			setFlagFog((bool) landscape->getDefaultFogSetting());
+			landscape->setFlagShowFog((bool) landscape->getDefaultFogSetting());
+		}
+		if (landscape->getDefaultBortleIndex() > 0)
+		{
+			drawer->setBortleScaleIndex(landscape->getDefaultBortleIndex());
+		}
+		if (landscape->getDefaultAtmosphericExtinction() >= 0.0)
+		{
+			drawer->setExtinctionCoefficient(landscape->getDefaultAtmosphericExtinction());
+		}
+		if (landscape->getDefaultAtmosphericTemperature() > -273.15)
+		{
+			drawer->setAtmosphereTemperature(landscape->getDefaultAtmosphericTemperature());
+		}
+		if (landscape->getDefaultAtmosphericPressure() >= 0.0)
+		{
+			drawer->setAtmospherePressure(landscape->getDefaultAtmosphericPressure());
+		}
+		else if (landscape->getDefaultAtmosphericPressure() == -1.0)
+		{
+			// compute standard pressure for standard atmosphere in given altitude if landscape.ini coded as atmospheric_pressure=-1
+			// International altitude formula found in Wikipedia.
+			double alt=landscape->getLocation().altitude;
+			double p=1013.25*std::pow(1-(0.0065*alt)/288.15, 5.255);
+			drawer->setAtmospherePressure(p);
 		}
 	}
-	currentLandscapeID = id;
+
+	emit currentLandscapeChanged(currentLandscapeID,getCurrentLandscapeName());
 
 	// else qDebug() << "Will not set new location; Landscape location: planet: " << landscape->getLocation().planetName << "name: " << landscape->getLocation().name;
 	return true;
@@ -520,6 +524,7 @@ bool LandscapeMgr::setDefaultLandscapeID(const QString& id)
 	defaultLandscapeID = id;
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("init_location/landscape_name", id);
+	emit defaultLandscapeChanged(id);
 	return true;
 }
 
@@ -565,7 +570,33 @@ void LandscapeMgr::setFlagUseLightPollutionFromDatabase(const bool usage)
 	if (flagLightPollutionFromDatabase != usage)
 	{
 		flagLightPollutionFromDatabase = usage;
+
+		StelCore* core = StelApp::getInstance().getCore();
+
+		//this was previously logic in ViewDialog, but should really be on a non-GUI layer
+		if (usage)
+		{
+			StelLocation loc = core->getCurrentLocation();
+			updateLocationBasedPollution(loc);
+		}
+
 		emit lightPollutionUsageChanged(usage);
+	}
+}
+
+void LandscapeMgr::updateLocationBasedPollution(StelLocation loc)
+{
+	if(flagLightPollutionFromDatabase)
+	{
+		//this was previously logic in ViewDialog, but should really be on a non-GUI layer
+		StelCore* core = StelApp::getInstance().getCore();
+		int bIdx = loc.bortleScaleIndex;
+		if (!loc.planetName.contains("Earth")) // location not on Earth...
+			bIdx = 1;
+		if (bIdx<1) // ...or it observatory, or it unknown location
+			bIdx = loc.DEFAULT_BORTLE_SCALE_INDEX;
+
+		core->getSkyDrawer()->setBortleScaleIndex(bIdx);
 	}
 }
 
@@ -610,7 +641,11 @@ bool LandscapeMgr::getFlagLabels() const
 
 void LandscapeMgr::setFlagLandscapeAutoSelection(bool enableAutoSelect)
 {
-	flagLandscapeAutoSelection = enableAutoSelect;
+	if(enableAutoSelect != flagLandscapeAutoSelection)
+	{
+		flagLandscapeAutoSelection = enableAutoSelect;
+		emit flagLandscapeAutoSelectionChanged(enableAutoSelect);
+	}
 }
 
 bool LandscapeMgr::getFlagLandscapeAutoSelection() const
@@ -620,7 +655,12 @@ bool LandscapeMgr::getFlagLandscapeAutoSelection() const
 
 void LandscapeMgr::setFlagAtmosphereAutoEnable(bool b)
 {
-	flagAtmosphereAutoEnabling = b;
+	if(b != flagAtmosphereAutoEnabling)
+	{
+		flagAtmosphereAutoEnabling = b;
+		emit setFlagAtmosphereAutoEnableChanged(b);
+	}
+
 }
 
 bool LandscapeMgr::getFlagAtmosphereAutoEnable() const
@@ -765,13 +805,6 @@ void LandscapeMgr::setAtmosphereBortleLightPollution(const int bIndex)
 {
 	// This is an empirical formula
 	setAtmosphereLightPollutionLuminance(qMax(0.,0.0004*std::pow(bIndex-1, 2.1)));
-	emit lightPollutionChanged();
-}
-
-//! Get the light pollution following the Bortle Scale
-int LandscapeMgr::getAtmosphereBortleLightPollution() const
-{
-	return (int)std::pow(getAtmosphereLightPollutionLuminance()/0.0004, 1./2.1) + 1;
 }
 
 void LandscapeMgr::setZRotation(const float d)

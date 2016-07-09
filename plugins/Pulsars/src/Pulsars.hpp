@@ -73,7 +73,11 @@ typedef QSharedPointer<Pulsar> PulsarP;
 class Pulsars : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool pulsarsVisible READ getFlagShowPulsars WRITE setFlagShowPulsars)
+	Q_PROPERTY(bool pulsarsVisible
+		   READ getFlagShowPulsars
+		   WRITE setFlagShowPulsars
+		   NOTIFY flagPulsarsVisibilityChanged
+		   )
 public:	
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
@@ -114,20 +118,14 @@ public:
 	//! @param name The case in-sensistive standard program name
 	virtual StelObjectP searchByName(const QString& name) const;
 
-	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
+	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
-	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
-	//! @param objPrefix the case insensitive first letters of the searched object
-	//! @param maxNbItem the maximum number of returned object names
-	//! @param useStartOfWords the autofill mode for returned objects names
-	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
 	virtual QStringList listAllObjects(bool inEnglish) const;
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
+	virtual QStringList listAllObjectsByType(const QString&, bool) const { return QStringList(); }
 	virtual QString getName() const { return "Pulsars"; }
 
 	//! get a Pulsar object by identifier
@@ -179,6 +177,8 @@ signals:
 	//! emitted after a JSON update has run.
 	void jsonUpdateComplete(void);
 
+	void flagPulsarsVisibilityChanged(bool b);
+
 public slots:
 	//! Define whether the button toggling pulsars should be visible
 	void setFlagShowPulsarsButton(bool b);
@@ -186,7 +186,7 @@ public slots:
 
 	//! Enable/disable display of markers of pulsars
 	//! @param b boolean flag
-	void setFlagShowPulsars(bool b) { flagShowPulsars=b; }
+	void setFlagShowPulsars(bool b);
 	//! Get status to display of markers of pulsars
 	//! @return true if it's visible
 	bool getFlagShowPulsars(void) { return flagShowPulsars; }

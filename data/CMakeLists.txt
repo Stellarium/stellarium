@@ -53,13 +53,16 @@ ELSE()
 ENDIF()
 
 # install Scenery3d shaders
+IF(USE_PLUGIN_SCENERY3D)
 INSTALL(DIRECTORY shaders/ DESTINATION share/${PACKAGE}/data/shaders FILES_MATCHING 
-	PATTERN "s3d_*.vert" PATTERN "s3d_*.geom" PATTERN "s3d_*.frag")
-	
+	PATTERN "s3d_*.vert" 
+	PATTERN "s3d_*.geom" 
+	PATTERN "s3d_*.frag")
 # install Scenery3D docs for Windows
 IF(WIN32)
 	INSTALL(FILES ../plugins/Scenery3d/doc/Scenery3d.pdf DESTINATION share/${PACKAGE}/data)
 ENDIF(WIN32)
+ENDIF()
 
 IF (BUILD_FOR_MAEMO)
 	INSTALL(FILES maemo/stellarium.desktop DESTINATION /usr/share/applications/hildon)

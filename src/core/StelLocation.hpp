@@ -20,6 +20,7 @@
 #define _STELLOCATION_HPP_
 
 #include <QString>
+#include <QMetaType>
 
 //! @class StelLocation
 //! Store the informations for a location on a planet
@@ -79,7 +80,13 @@ public:
 	bool isUserLocation;
 
 	static const int DEFAULT_BORTLE_SCALE_INDEX;
+private:
+	//Register with Qt
+	static int metaTypeId;
+	static int initMetaType();
 };
+
+Q_DECLARE_METATYPE(StelLocation)
 
 //! Serialize the passed StelLocation into a binary blob.
 QDataStream& operator<<(QDataStream& out, const StelLocation& loc);

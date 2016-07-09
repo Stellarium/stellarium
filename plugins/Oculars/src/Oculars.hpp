@@ -75,6 +75,12 @@ a good way to supplement your visual astronomy interests.
 class Oculars : public StelModule
 {
 	Q_OBJECT
+
+	Q_PROPERTY(bool enableOcular READ getEnableOcular WRITE enableOcular NOTIFY enableOcularChanged)
+	Q_PROPERTY(bool enableCrosshairs READ getEnableCrosshairs WRITE toggleCrosshairs NOTIFY enableCrosshairsChanged)
+	Q_PROPERTY(bool enableCCD READ getEnableCCD WRITE toggleCCD NOTIFY enableCCDChanged)
+	Q_PROPERTY(bool enableTelrad READ getEnableTelrad WRITE toggleTelrad NOTIFY enableTelradChanged)
+
 	//BM: Temporary, until the GUI is finalized and some other method of getting
 	//info from the main class is implemented.
 	friend class OcularsGuiPanel;
@@ -119,6 +125,7 @@ public slots:
 	//! This method is called with we detect that our hot key is pressed.  It handles
 	//! determining if we should do anything - based on a selected object.
 	void enableOcular(bool b);
+	bool getEnableOcular() const { return flagShowOculars; }
 	void incrementCCDIndex();
 	void incrementOcularIndex();
 	void incrementTelescopeIndex();
@@ -133,9 +140,12 @@ public slots:
 	void toggleCCD(bool show);
 	//! Toggles the sensor frame overlay (overloaded for blind switching).
 	void toggleCCD();
+	bool getEnableCCD() const { return flagShowCCD; }
 	void toggleCrosshairs(bool show = true);
+	bool getEnableCrosshairs() const { return flagShowCrosshairs; }
 	//! Toggles the Telrad sight overlay.
 	void toggleTelrad(bool show);
+	bool getEnableTelrad() const { return flagShowTelrad; }
 	//! Toggles the Telrad sight overlay (overloaded for blind switching).
 	void toggleTelrad();
 	void enableGuiPanel(bool enable = true);
@@ -156,6 +166,10 @@ public slots:
 	bool getFlagUseSemiTransparency(void) const;
 
 signals:
+	void enableOcularChanged(bool value);
+	void enableCrosshairsChanged(bool value);
+	void enableCCDChanged(bool value);
+	void enableTelradChanged(bool value);
 	void selectedCCDChanged();
 	void selectedOcularChanged();
 	void selectedTelescopeChanged();
@@ -166,7 +180,7 @@ private slots:
 	void instrumentChanged();
 	void determineMaxEyepieceAngle();
 	void setRequireSelection(bool state);
-	void setScaleImageCircle(bool state);	
+	void setScaleImageCircle(bool state);
 	void setScreenFOVForCCD();
 	void retranslateGui();
 	void setStelStyle(const QString& style);
@@ -259,6 +273,8 @@ private:
 	float magLimitDSOs;		//!< Value of limited magnitude for DSOs
 	bool flagLimitPlanets;		//!< Flag to track limit magnitude for planets, asteroids, comets etc.
 	float magLimitPlanets;		//!< Value of limited magnitude for planets, asteroids, comets etc.
+	float relativeStarScale;
+	float absoluteStarScale;
 
 	bool flagMoonScale;		//!< Flag to track of usage zooming of the Moon
 

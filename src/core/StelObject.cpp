@@ -35,6 +35,8 @@
 #include <QDebug>
 #include <QSettings>
 
+int StelObject::stelObjectPMetaTypeID = qRegisterMetaType<StelObjectP>();
+
 Vec3d StelObject::getEquinoxEquatorialPos(const StelCore* core) const
 {
 	return core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core));
@@ -277,7 +279,7 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 		str.replace("</h2>", "\n");
 		str.replace(QRegExp("<br(\\s*/)?>"), "\n");
 	}
-	else
+	else if(!(flags&NoFont))
 	{
 		Vec3f color = getInfoColor();
 		StelCore* core = StelApp::getInstance().getCore();

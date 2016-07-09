@@ -841,7 +841,8 @@ void Observability::draw(StelCore* core)
 
 // Print all results:
 
-	int lineSpacing = (int) (1.3* ( (double) fontSize));  // between lines
+	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+	int lineSpacing = (int) (params.devicePixelsPerPixel * 1.3 * ( (double) fontSize));  // between lines
 	int groupSpacing = 6*fontSize;  // between daily and yearly results
 	int yLine = 8*fontSize+110;
 	int xLine = 80;
@@ -1930,6 +1931,10 @@ void Observability::setHorizonAltitude(int altitude)
 
 void Observability::showReport(bool b)
 {
-	flagShowReport = b;
+	if (b!=flagShowReport)
+	{
+		flagShowReport = b;
+		emit flagReportVisibilityChanged(b);
+	}
 }
 
