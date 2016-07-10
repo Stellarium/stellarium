@@ -116,7 +116,7 @@ IF(WIN32)
      ELSE() # MSVC
           # NOMINMAX So that windows.h does not redefine min and max
           # _WINSOCKAPI_ Prevent window.s from including winsock.h
-          ADD_DEFINITIONS(-DNOMINMAX -D_WINSOCKAPI_ /D_CRT_SECURE_NO_WARNINGS /wd4244 /wd4005 /wd4101 /wd4996 /wd4305 /wd4805)
+          ADD_DEFINITIONS(-DNOMINMAX -D_WINSOCKAPI_ /D_CRT_SECURE_NO_WARNINGS /wd4244 /wd4005 /wd4101 /wd4996 /wd4305 /wd4805 /FS)
      ENDIF()
 ELSE()
      SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${STEL_GCC_C_FLAGS}")
