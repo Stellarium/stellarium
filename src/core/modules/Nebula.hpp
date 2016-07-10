@@ -57,7 +57,7 @@ public:
 		CatMel		= 0x00000800, //!< Melotte Catalogue of Deep Sky Objects (Mel)
 		CatPGC		= 0x00001000, //!< HYPERLEDA. I. Catalog of galaxies (PGC)
 		CatUGC		= 0x00002000, //!< The Uppsala General Catalogue of Galaxies
-		CatCed		= 0x00004000 //!< Cederblad Catalog of bright diffuse Galactic nebulae (Ced)
+		CatCed		= 0x00004000  //!< Cederblad Catalog of bright diffuse Galactic nebulae (Ced)
 	};
 	Q_DECLARE_FLAGS(CatalogGroup, CatalogGroupFlags)
 
