@@ -75,7 +75,7 @@ public:
 	//! @param objType object type
 	//! @param inEnglish list translated names (false) or in English (true)
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish);
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
 
 	virtual QString getName() const = 0;
 
