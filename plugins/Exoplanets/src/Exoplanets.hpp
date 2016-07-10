@@ -123,7 +123,6 @@ public:
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=true) const;
 
 	virtual QStringList listAllObjects(bool inEnglish) const;
-	virtual QStringList listAllObjectsByType(const QString&, bool) const { return QStringList(); }
 
 	virtual QString getName() const { return "Exoplanets"; }
 
