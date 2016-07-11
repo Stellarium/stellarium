@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-09 00:22+0700\n"
-"PO-Revision-Date: 2016-04-17 09:39+0000\n"
-"Last-Translator: Mixalis Zisis <Unknown>\n"
+"PO-Revision-Date: 2016-07-10 06:16+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Greek, Modern (1453-) <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-09 05:26+0000\n"
+"X-Launchpad-Export-Date: 2016-07-11 05:15+0000\n"
 "X-Generator: Launchpad (build 18115)\n"
 
 #: src/core/modules/Constellation.cpp:297 src/core/modules/Nebula.cpp:189
@@ -30,7 +30,7 @@ msgstr "Τύπος: <b>%1</b>"
 
 #: src/core/modules/Constellation.cpp:297
 msgid "constellation"
-msgstr ""
+msgstr "αστερισμός"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:412
 #: src/core/modules/GridLinesMgr.cpp:950 src/core/modules/LandscapeMgr.cpp:414
@@ -604,7 +604,7 @@ msgstr "ατεκμηρίωτη λαμπρότητα"
 
 #: src/core/modules/Nebula.cpp:1074
 msgid "galaxy"
-msgstr ""
+msgstr "γαλαξίας"
 
 #: src/core/modules/Nebula.cpp:1077
 msgid "active galaxy"
@@ -620,7 +620,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1086 plugins/Quasars/src/Quasar.cpp:98
 msgid "quasar"
-msgstr ""
+msgstr "κβάζαρ"
 
 #: src/core/modules/Nebula.cpp:1089
 msgid "star cluster"
@@ -640,11 +640,11 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1101
 msgid "planetary nebula"
-msgstr ""
+msgstr "πλανητικό νεφέλωμα"
 
 #: src/core/modules/Nebula.cpp:1104
 msgid "dark nebula"
-msgstr ""
+msgstr "σκοτεινό νεφέλωμα"
 
 #: src/core/modules/Nebula.cpp:1107
 msgid "cluster associated with nebulosity"
@@ -668,7 +668,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1122
 msgid "supernova remnant"
-msgstr ""
+msgstr "παλιός σουπερνόβα"
 
 #: src/core/modules/Nebula.cpp:1125
 msgid "stellar association"
@@ -968,16 +968,16 @@ msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:277
 msgid "Position angle"
-msgstr ""
+msgstr "Γωνία θέσης"
 
 #: src/core/modules/StarWrapper.cpp:281 src/core/modules/StarWrapper.cpp:283
 #: src/gui/AstroCalcDialog.cpp:479
 msgid "Separation"
-msgstr ""
+msgstr "Διάκριση"
 
 #: src/core/modules/MilkyWay.cpp:75
 msgid "Milky Way"
-msgstr ""
+msgstr "Γαλαξίας"
 
 #: src/core/modules/ZodiacalLight.cpp:81
 msgid "Zodiacal Light"
@@ -1826,11 +1826,11 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1256 src/gui/ConfigurationDialog.cpp:1265
 msgid "Available"
-msgstr ""
+msgstr "Διαθέσιμο"
 
 #: src/gui/ConfigurationDialog.cpp:1258 src/gui/ConfigurationDialog.cpp:1267
 msgid "Not Available"
-msgstr ""
+msgstr "Μη Διαθέσιμο"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1330
@@ -2135,7 +2135,7 @@ msgstr "Προγραμματιστής OSX: %1"
 #: plugins/Oculars/src/gui/OcularDialog.cpp:550
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
 msgid "Contributors"
-msgstr ""
+msgstr "Συντελεστές"
 
 #: src/gui/HelpDialog.cpp:320
 #, qt-format
@@ -2256,7 +2256,7 @@ msgstr ""
 
 #: src/gui/StelGuiItems.cpp:749
 msgid "Frames per second"
-msgstr ""
+msgstr "Καρέ ανά δευτερόλεπτο"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:523
@@ -2475,7 +2475,7 @@ msgstr ""
 #: src/gui/SearchDialog.cpp:209
 msgctxt "coordinate system"
 msgid "Equatorial"
-msgstr ""
+msgstr "Ισημερινού"
 
 #: src/gui/SearchDialog.cpp:210
 msgctxt "coordinate system"
@@ -2485,12 +2485,12 @@ msgstr ""
 #: src/gui/SearchDialog.cpp:211
 msgctxt "coordinate system"
 msgid "Galactic"
-msgstr ""
+msgstr "Γαλαξιακός"
 
 #: src/gui/SearchDialog.cpp:212
 msgctxt "coordinate system"
 msgid "Ecliptic"
-msgstr ""
+msgstr "Εκλειπτική"
 
 #: src/gui/SearchDialog.cpp:213
 msgctxt "coordinate system"
@@ -2503,29 +2503,29 @@ msgstr ""
 
 #: src/gui/SearchDialog.cpp:244
 msgid "Declination"
-msgstr ""
+msgstr "Απόκλιση"
 
 #: src/gui/SearchDialog.cpp:252
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:945
 msgid "Azimuth"
-msgstr ""
+msgstr "Αζιμούθιο"
 
 #: src/gui/SearchDialog.cpp:255
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
 msgid "Altitude"
-msgstr ""
+msgstr "Ύψος"
 
 #: src/gui/SearchDialog.cpp:265
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:480
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:515
 msgid "Longitude"
-msgstr ""
+msgstr "Μήκος"
 
 #: src/gui/SearchDialog.cpp:268
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:479
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:516
 msgid "Latitude"
-msgstr ""
+msgstr "Πλάτος"
 
 #: src/gui/SearchDialog.cpp:580
 msgid "Simbad Lookup Error"
@@ -2571,11 +2571,11 @@ msgstr ""
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:139
 msgid "where"
-msgstr ""
+msgstr "όπου"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:139
 msgid "year"
-msgstr ""
+msgstr "έτος"
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:135 src/ui_configurationDialog.h:1142
@@ -2614,49 +2614,49 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:252
 msgid "JD"
-msgstr ""
+msgstr "ΙΗ"
 
 #: src/gui/AstroCalcDialog.cpp:399
 msgid "10 minutes"
-msgstr ""
+msgstr "10 λεπτά"
 
 #: src/gui/AstroCalcDialog.cpp:400
 msgid "1 hour"
-msgstr ""
+msgstr "1 ώρα"
 
 #: src/gui/AstroCalcDialog.cpp:401
 msgid "1 day"
-msgstr ""
+msgstr "1 ημέρα"
 
 #: src/gui/AstroCalcDialog.cpp:402
 msgid "5 days"
-msgstr ""
+msgstr "5 ημέρες"
 
 #: src/gui/AstroCalcDialog.cpp:403
 msgid "10 days"
-msgstr ""
+msgstr "10 ημέρες"
 
 #: src/gui/AstroCalcDialog.cpp:404
 msgid "15 days"
-msgstr ""
+msgstr "15 ημέρες"
 
 #: src/gui/AstroCalcDialog.cpp:405
 msgid "30 days"
-msgstr ""
+msgstr "30 ημέρες"
 
 #: src/gui/AstroCalcDialog.cpp:406
 msgid "60 days"
-msgstr ""
+msgstr "60 ημέρες"
 
 #: src/gui/AstroCalcDialog.cpp:454
 msgid "Solar system"
-msgstr ""
+msgstr "Ηλιακό σύστημα"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:456 src/translations.h:70
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
-msgstr ""
+msgstr "Αστεροειδή"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:457 src/translations.h:74
@@ -2667,7 +2667,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:458 src/translations.h:68
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
-msgstr ""
+msgstr "Κομήτες"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:459 src/translations.h:76
@@ -2707,7 +2707,7 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:639
 msgid "Opposition"
-msgstr ""
+msgstr "Αντίθεση"
 
 #: src/gui/BookmarksDialog.cpp:95 src/ui_searchDialogGui.h:699
 msgid "Object"
@@ -2876,12 +2876,12 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:95
 msgid "Nebulae"
-msgstr ""
+msgstr "Νεφελώματα"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:97
 msgid "Planetary nebulae"
-msgstr ""
+msgstr "Πλανητικά νεφελώματα"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:99
@@ -4566,23 +4566,23 @@ msgstr "Ζιμπάμπουε"
 
 #: src/translations.h:599
 msgid "&Undo"
-msgstr ""
+msgstr "Αναί&ρεση"
 
 #: src/translations.h:600
 msgid "&Redo"
-msgstr ""
+msgstr "&Επανάληψη ενέργειας"
 
 #: src/translations.h:601
 msgid "Cu&t"
-msgstr ""
+msgstr "Απο&κοπή"
 
 #: src/translations.h:602
 msgid "&Copy"
-msgstr ""
+msgstr "&Αντιγραφή"
 
 #: src/translations.h:603
 msgid "&Paste"
-msgstr ""
+msgstr "&Επικόλληση"
 
 #: src/translations.h:604 src/ui_locationDialogGui.h:432
 #: plugins/Oculars/src/ui_ocularDialog.h:1189
@@ -4594,19 +4594,19 @@ msgstr "Διαγραφή"
 
 #: src/translations.h:605
 msgid "Select All"
-msgstr ""
+msgstr "Επιλογή Όλων"
 
 #: src/translations.h:606
 msgid "Look in:"
-msgstr ""
+msgstr "Αναζήτηση σε:"
 
 #: src/translations.h:607
 msgid "Directory:"
-msgstr ""
+msgstr "Κατάλογος:"
 
 #: src/translations.h:608
 msgid "Folder"
-msgstr ""
+msgstr "Φάκελος"
 
 #: src/translations.h:609
 msgid "&Choose"
@@ -4619,23 +4619,23 @@ msgstr "Άκυρο"
 
 #: src/translations.h:611
 msgid "Files of type:"
-msgstr ""
+msgstr "Αρχεία τύπου:"
 
 #: src/translations.h:612
 msgid "Date Modified"
-msgstr ""
+msgstr "Ημερομηνία τροποποίησης"
 
 #: src/translations.h:613
 msgid "Directories"
-msgstr ""
+msgstr "Κατάλογοι"
 
 #: src/translations.h:614
 msgid "Computer"
-msgstr ""
+msgstr "Υπολογιστές"
 
 #: src/translations.h:615
 msgid "&Open"
-msgstr ""
+msgstr "Άν&οιγμα"
 
 #: src/translations.h:616
 msgid "File &name:"
@@ -4643,11 +4643,11 @@ msgstr ""
 
 #: src/translations.h:617
 msgid "Copy &Link Location"
-msgstr ""
+msgstr "Αντιγραφή &διεύθυνσης δεσμού"
 
 #: src/translations.h:618
 msgid "Abort"
-msgstr ""
+msgstr "Ματαίωση"
 
 #: src/translations.h:619
 msgid "Ignore"
