@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-09 00:22+0700\n"
-"PO-Revision-Date: 2016-07-05 19:06+0000\n"
+"PO-Revision-Date: 2016-07-10 16:49+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-09 05:32+0000\n"
+"X-Launchpad-Export-Date: 2016-07-11 05:15+0000\n"
 "X-Generator: Launchpad (build 18115)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
@@ -967,7 +967,7 @@ msgstr "Oppgangstid: %1%"
 
 #: src/core/modules/StarWrapper.cpp:276
 msgid "Year of last satisfactory observation"
-msgstr "Det siste tilfredsstillende observasjonsåret"
+msgstr "Siste tilfredsstillende observasjonsår"
 
 #: src/core/modules/StarWrapper.cpp:277
 msgid "Position angle"
@@ -5328,10 +5328,12 @@ msgid ""
 "Use designations of deep-sky objects instead of their common names for "
 "screen labels"
 msgstr ""
+"Bruk deep-sky-objekt-betegnelser istedenfor deres vanlige navn for "
+"skjermpåskrifter"
 
 #: src/ui_viewDialog.h:1740
 msgid "Use designations for screen labels"
-msgstr ""
+msgstr "Bruk DSO-betegnelser for skjermpåskrifter"
 
 #: src/ui_viewDialog.h:1741
 msgid "Celestial Sphere"
@@ -10058,7 +10060,7 @@ msgstr ""
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
 msgid "Navigational Stars Plug-in"
-msgstr ""
+msgstr "Programtillegg for navigasjonsstjerner"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:107
@@ -10075,26 +10077,26 @@ msgstr ""
 #. TRANSLATORS: Part of full phrase: Anglo-American set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:143
 msgid "Anglo-American"
-msgstr ""
+msgstr "Angloamerikansk"
 
 #. TRANSLATORS: Part of full phrase: French set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:145
 msgid "French"
-msgstr ""
+msgstr "Fransk"
 
 #. TRANSLATORS: Part of full phrase: Russian set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:147
 msgid "Russian"
-msgstr ""
+msgstr "Russisk"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:202
 #: plugins/NavStars/src/ui_navStarsWindow.h:213
 msgid "Navigational stars"
-msgstr ""
+msgstr "Navigasjonsstjerner"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:204
 msgid "Set of navigational stars"
-msgstr ""
+msgstr "Navigasjonsstjernesett"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:206
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:288
@@ -10103,11 +10105,11 @@ msgstr "Plass for visning av musepekerkoordinater"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:208
 msgid "Current set:"
-msgstr ""
+msgstr "Gjeldende sett:"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:209
 msgid "Note:"
-msgstr ""
+msgstr "Merk:"
 
 #: plugins/Novae/src/Novae.cpp:71 plugins/Novae/src/Novae.cpp:142
 msgid "Bright Novae"
