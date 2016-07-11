@@ -832,7 +832,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			dist			= list.at(14).toFloat(); // distance (Mpc for galaxies, kpc for other objects)
 			distErr			= list.at(15).toFloat(); // distance error (Mpc for galaxies, kpc for other objects)
 			// -----------------------------------------------
-			// cross-index data
+			// cross-identification data
 			// -----------------------------------------------
 			NGC			= list.at(16).toInt();	 // NGC number
 			IC			= list.at(17).toInt();	 // IC number
