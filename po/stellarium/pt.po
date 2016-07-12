@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-09 00:22+0700\n"
-"PO-Revision-Date: 2016-07-03 18:46+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2016-07-11 21:07+0000\n"
+"Last-Translator: Tiago S. <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-09 05:33+0000\n"
+"X-Launchpad-Export-Date: 2016-07-12 05:31+0000\n"
 "X-Generator: Launchpad (build 18115)\n"
 
 #: src/core/modules/Constellation.cpp:297 src/core/modules/Nebula.cpp:189
@@ -967,7 +967,7 @@ msgstr "Tempo de ascensão: %1%"
 
 #: src/core/modules/StarWrapper.cpp:276
 msgid "Year of last satisfactory observation"
-msgstr ""
+msgstr "Ano da última observação satisfatória"
 
 #: src/core/modules/StarWrapper.cpp:277
 msgid "Position angle"
@@ -1579,6 +1579,9 @@ msgid ""
 "equator, ecliptic, hour lines, etc. into straight lines. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
+"A projecção de perspetiva mapeia o horizonte e outros grandes círculos como "
+"o equador, elíticas, linhas horárias, etc. como linhas retas. O nome "
+"matemático para esta projeção é <i>projeção gnomónica</i>."
 
 #: src/core/StelProjectorClasses.cpp:87
 msgid "Equal Area"
@@ -5475,10 +5478,12 @@ msgid ""
 "Use designations of deep-sky objects instead of their common names for "
 "screen labels"
 msgstr ""
+"Utilizar designações de objetos do céu profundo em vez dos seus nomes comuns "
+"para as etiquetas de ecrã"
 
 #: src/ui_viewDialog.h:1740
 msgid "Use designations for screen labels"
-msgstr ""
+msgstr "Utilizar designações para as etiquetas de ecrã"
 
 #: src/ui_viewDialog.h:1741
 msgid "Celestial Sphere"
@@ -5601,6 +5606,8 @@ msgid ""
 "These circles delimit stars which stay always above (respectively below) the "
 "mathematical horizon."
 msgstr ""
+"Estes círculos delimitam estrelas que estão sempre acima (respetivamente "
+"abaixo) do horizonte matemático."
 
 #: src/ui_viewDialog.h:1813
 msgid "Circumpolar circles"
@@ -7225,18 +7232,25 @@ msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
 msgstr ""
+"Isto pretende mostrar-lhe a melhor comparação entre o que uma combinação de "
+"ocular/telescópio será quando a comparar com outra."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:559
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will "
 "produce two different exit pupils, changing the view somewhat."
 msgstr ""
+"A mesma ocular em dois telescópios diferentes com distâncias focais "
+"distintas produz duas púpilas de saída distintas, alteranda a vista de um "
+"certo modo."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:560
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
 msgstr ""
+"O contra disto é que, com a imagem escalada, uma grande parte do ecrã será "
+"desperdiçado."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:561
 msgid ""
@@ -8357,6 +8371,9 @@ msgid ""
 "server, along with the Stellarium telescope control network protocol (over "
 "TCP/IP), is <b>Johannes Gajdosik</b>."
 msgstr ""
+"O autor de tudo o seguinte - o cliente, a base do servidor e o servidor "
+"LX200, assim como o protocolo de controlo de rede para telescópios no "
+"Stellarium (por TCP/IP), é <b>Johannes Gajdosik</b>."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:263
 msgid ""
@@ -8382,6 +8399,8 @@ msgid ""
 "A more complete and up-to-date documentation for this plug-in can be found "
 "on the %1Telescope Control%2 page in the Stellarium Wiki."
 msgstr ""
+"Uma documentação mais completa e atualizada para este complemento pode ser "
+"encontrada na página %1Telescope Control%2 da Wiki do Stellarium."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 msgid "Contents"
@@ -8548,6 +8567,8 @@ msgid ""
 "A %1device supported by the plug-in%2 is connected with a cable to the "
 "computer running Stellarium;"
 msgstr ""
+"Um %1dispositivo suportado pelo complemento%2 é conetado com um cabo ao "
+"computador que corre o Stellarium:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:311
 msgid "INDIRECT CONNECTION"
@@ -8575,6 +8596,9 @@ msgid ""
 "Most older telescopes use cables that connect to a %1serial port%2 (RS-232), "
 "the newer ones use %3USB%4 (Universal Serial Bus)."
 msgstr ""
+"Os telescópios mais antigos utilizam cabos para conetar-se a uma %1porta "
+"serial%2 (RS-232), e os mais recentes utilizam %3USB%4 (Universal Serial "
+"Bus)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:315
 msgid ""
