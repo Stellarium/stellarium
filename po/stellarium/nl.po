@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-09 00:22+0700\n"
-"PO-Revision-Date: 2016-06-23 11:46+0000\n"
+"PO-Revision-Date: 2016-07-11 19:47+0000\n"
 "Last-Translator: Daan Smets <daan.smetsx@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-09 05:23+0000\n"
+"X-Launchpad-Export-Date: 2016-07-12 05:22+0000\n"
 "X-Generator: Launchpad (build 18115)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -7279,7 +7279,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
-msgstr ""
+msgstr "Telescopen"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1226
 msgid "Diameter:"
@@ -7333,12 +7333,12 @@ msgstr ""
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
 #: plugins/Satellites/src/Satellites.cpp:1734
 msgid "visual"
-msgstr ""
+msgstr "zichtbaar"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
 #: plugins/Satellites/src/Satellites.cpp:1736
 msgid "scientific"
-msgstr ""
+msgstr "wetenschappelijk"
 
 #. TRANSLATORS: Satellite group: Communication satellites
 #: plugins/Satellites/src/Satellites.cpp:1738
@@ -7348,12 +7348,12 @@ msgstr ""
 #. TRANSLATORS: Satellite group: Navigation satellites
 #: plugins/Satellites/src/Satellites.cpp:1740
 msgid "navigation"
-msgstr ""
+msgstr "navigatie"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
 #: plugins/Satellites/src/Satellites.cpp:1742
 msgid "amateur"
-msgstr ""
+msgstr "amateur"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
 #: plugins/Satellites/src/Satellites.cpp:1744
@@ -7368,7 +7368,7 @@ msgstr ""
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
 #: plugins/Satellites/src/Satellites.cpp:1748
 msgid "non-operational"
-msgstr ""
+msgstr "niet-operationeel"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
 #: plugins/Satellites/src/Satellites.cpp:1750
@@ -7378,17 +7378,17 @@ msgstr "gps"
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
 #: plugins/Satellites/src/Satellites.cpp:1752
 msgid "glonass"
-msgstr ""
+msgstr "glonass"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
 #: plugins/Satellites/src/Satellites.cpp:1754
 msgid "galileo"
-msgstr ""
+msgstr "galileo"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
 #: plugins/Satellites/src/Satellites.cpp:1756
 msgid "iridium"
-msgstr ""
+msgstr "iridium"
 
 #. TRANSLATORS: Satellite group: Space stations
 #: plugins/Satellites/src/Satellites.cpp:1758
@@ -7398,27 +7398,27 @@ msgstr ""
 #. TRANSLATORS: Satellite group: Education satellites
 #: plugins/Satellites/src/Satellites.cpp:1760
 msgid "education"
-msgstr ""
+msgstr "educatie"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
 #: plugins/Satellites/src/Satellites.cpp:1762
 msgid "observatory"
-msgstr ""
+msgstr "observatorium"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:1773
 msgid "The Hubble Space Telescope"
-msgstr ""
+msgstr "De Hubble Space Telescope"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1775
 msgid "The International Space Station"
-msgstr ""
+msgstr "het Internationaal Ruimtestation"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1777
 msgid "China's first space station"
-msgstr ""
+msgstr "China's eerste ruimtestation"
 
 #: plugins/Satellites/src/Satellite.cpp:257
 #: plugins/Satellites/src/Satellite.cpp:261
@@ -7431,7 +7431,7 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:270
 msgid "artificial satellite"
-msgstr ""
+msgstr "kunstmatige satelliet"
 
 #: plugins/Satellites/src/Satellite.cpp:275
 #, qt-format
@@ -7454,7 +7454,7 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:294
 #, qt-format
 msgid "Altitude (km): %1"
-msgstr ""
+msgstr "Hoogte (km): %1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
 #: plugins/Satellites/src/Satellite.cpp:297
@@ -7592,7 +7592,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:440
 msgid "Technical notes"
-msgstr ""
+msgstr "Technische notities"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:441
 msgid ""
@@ -7643,7 +7643,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:186
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:301
 msgid "Next update: < 1 minute"
-msgstr ""
+msgstr "Volgende update:  < 1 minuut"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:485
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:175
@@ -7653,7 +7653,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:303
 #, qt-format
 msgid "Next update: %1 minutes"
-msgstr ""
+msgstr "Volgende update: %1 minuut"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:487
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:177
@@ -7663,7 +7663,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:305
 #, qt-format
 msgid "Next update: %1 hours"
-msgstr ""
+msgstr "Volgende update: %1 uur"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:497
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:208
@@ -7672,7 +7672,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:245
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:364
 msgid "Update error"
-msgstr ""
+msgstr "Updatefout"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:510
 #, qt-format
@@ -7686,7 +7686,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:574
 msgid "[new source]"
-msgstr ""
+msgstr "[nieuwe bron]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:626
 #: plugins/Satellites/src/ui_satellitesDialog.h:715
@@ -7711,7 +7711,7 @@ msgstr "Nu updaten"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:209
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:352
 msgid "Update from files"
-msgstr ""
+msgstr "Update van bestanden"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:670
 msgid "[orbit calculation error]"
@@ -7731,7 +7731,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:674
 msgid "[all]"
-msgstr ""
+msgstr "[alle]"
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:718
@@ -7744,15 +7744,15 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:942
 msgid "Time"
-msgstr ""
+msgstr "Tijd"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:943
 msgid "Brightness"
-msgstr ""
+msgstr "Helderheid"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:946
 msgid "Satellite"
-msgstr ""
+msgstr "Satelliet"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:154
 msgid "Downloading data..."
@@ -7773,7 +7773,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:246
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:247
 msgid "Processing data..."
-msgstr ""
+msgstr "Data wordt verwerkt..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:241
 msgid "No data could be downloaded. Try again later."
@@ -7900,7 +7900,7 @@ msgstr "Wijzigingen opslaan"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:761
 msgid "Catalog number:"
-msgstr ""
+msgstr "Catalogusnummer"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:763
 msgid "Display the selected satellite(s)"
@@ -7953,11 +7953,11 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:783
 msgid "Add new source"
-msgstr ""
+msgstr "Voeg nieuwe bron toe"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:787
 msgid "Remove selected source"
-msgstr ""
+msgstr "Verwijder geselecteerde bron"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:790
 msgid "Sources"
@@ -7969,7 +7969,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 msgid "More Satellites"
-msgstr ""
+msgstr "Meer satellieten"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:213
 msgid "Get data from update sources"
@@ -7982,7 +7982,7 @@ msgstr "Breek download af"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:215
 msgid "New satellites"
-msgstr ""
+msgstr "Nieuwe satellieten"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:216
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
@@ -8037,7 +8037,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:215
 msgid "Configure Telescope"
-msgstr ""
+msgstr "Configureer telescoop"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:63
 msgid "N/A"
@@ -8126,7 +8126,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 msgid "Contents"
-msgstr ""
+msgstr "Inhoudsopgave"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
@@ -8156,13 +8156,13 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:286
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:338
 msgid "Connection type"
-msgstr ""
+msgstr "Verbindingstype"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:346
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:473
 msgid "Telescope properties"
-msgstr ""
+msgstr "Telescoopeigenschappen"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:354
@@ -8193,12 +8193,12 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:293
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:410
 msgid "Supported devices"
-msgstr ""
+msgstr "Ondersteunde apparaten"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:294
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:426
 msgid "Virtual telescope"
-msgstr ""
+msgstr "Virtuele telescoop"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:297
 msgid ""
@@ -8250,7 +8250,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:424
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:430
 msgid "Back to top"
-msgstr ""
+msgstr "Terug naar boven"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:305
 msgid ""
@@ -8267,7 +8267,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
 msgid "DIRECT CONNECTION"
-msgstr ""
+msgstr "DIRECTE VERBINDING"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
 #, qt-format
@@ -8278,7 +8278,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:311
 msgid "INDIRECT CONNECTION"
-msgstr ""
+msgstr "INDIRECTE VERBINDING"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:312
 #, qt-format
@@ -8413,7 +8413,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:340
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:463
 msgid "Telescope controlled by:"
-msgstr ""
+msgstr "Telescoop gecontroleerd door:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:341
 msgid "<b>Stellarium, directly through a serial port</b> is the DIRECT case"
