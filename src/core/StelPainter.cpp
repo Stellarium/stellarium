@@ -845,6 +845,11 @@ static inline void fIter2(const StelProjectorP& prj, std::function<void(double t
 
 	const float dist = std::sqrt((v10*v10+v11*v11)*(v20*v20+v21*v21));
 	const float cosAngle = (v10*v20+v11*v21)/dist;
+
+	// Early exit if we are *almost* sure the segment is not visible.
+	if (nbI >= minN && (!prj->checkInViewport(win1) && !prj->checkInViewport(win2) && !prj->checkInViewport(win3)))
+		return;
+
 	if ((cosAngle>-0.999f || dist>maxDist || crossDiscontinuity || nbI<minN) && nbI<15)
 	{
 		// Use the 3rd component of the vector to store whether the vertex is valid
