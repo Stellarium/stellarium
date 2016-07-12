@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-09 00:22+0700\n"
-"PO-Revision-Date: 2016-07-07 06:51+0000\n"
+"PO-Revision-Date: 2016-07-10 03:27+0000\n"
 "Last-Translator: Thomas Pryds <Unknown>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-09 05:23+0000\n"
+"X-Launchpad-Export-Date: 2016-07-12 05:21+0000\n"
 "X-Generator: Launchpad (build 18115)\n"
 "X-Poedit-Country: DENMARK\n"
 "Language: da\n"
@@ -84,11 +84,11 @@ msgstr "Meridian"
 
 #: src/core/modules/GridLinesMgr.cpp:605
 msgid "Ecliptic of J2000.0"
-msgstr ""
+msgstr "Ekliptika for J2000.0"
 
 #: src/core/modules/GridLinesMgr.cpp:609
 msgid "Ecliptic of Date"
-msgstr ""
+msgstr "Ekliptika for dato"
 
 #: src/core/modules/GridLinesMgr.cpp:613
 msgid "Equator of J2000.0"
@@ -135,7 +135,7 @@ msgstr "Cirkumpolar cirkel"
 #: src/core/modules/GridLinesMgr.cpp:951
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:339
 msgid "Equatorial grid"
-msgstr "Ækvatorial gitter"
+msgstr "Ækvatorialgitter"
 
 #: src/core/modules/GridLinesMgr.cpp:952 src/ui_viewDialog.h:1761
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:334
@@ -274,7 +274,7 @@ msgstr "Uigennemsigtighed: <b>%1</b>"
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:198
 #, qt-format
 msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
-msgstr "Lysstyrke: <b>%1</b> (efter udslettelse: <b>%2</b>)"
+msgstr "Lysstyrke: <b>%1</b> (efter ekstinktion: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:206 src/core/modules/Nebula.cpp:211
 #: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
@@ -299,7 +299,7 @@ msgstr "Farveindeks (B-V): <b>%1</b>"
 #: src/core/modules/Nebula.cpp:225
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
-msgstr "Overfladelysstyrke: <b>%1</b> (efter udslettelse: <b>%2</b>)"
+msgstr "Overfladelysstyrke: <b>%1</b> (efter ekstinktion: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:231
 #, qt-format
@@ -1483,7 +1483,7 @@ msgid ""
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
 "Perspektivisk projektion afbilder horisonten og andre storcirkler såsom "
-"ækvator, ekliptika, timelinjer, osv. som rette linjer. Det matematiske navn "
+"ækvator, ekliptika, timelinjer osv. som rette linjer. Det matematiske navn "
 "for denne projektionsmetode er <i>gnomonisk projektion</i>."
 
 #: src/core/StelProjectorClasses.cpp:87
@@ -1635,14 +1635,15 @@ msgstr "(tilsyneladende)"
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
 
+# https://da.wikipedia.org/wiki/Ekliptiske_koordinatsystem
 #: src/core/StelObject.cpp:216 src/core/StelObject.cpp:218
 #: src/core/StelObject.cpp:228 src/core/StelObject.cpp:230
 msgid "Ecliptic longitude/latitude"
-msgstr ""
+msgstr "Ekliptisk længde/bredde"
 
 #: src/core/StelObject.cpp:233 src/core/StelObject.cpp:235
 msgid "Ecliptic obliquity"
-msgstr ""
+msgstr "Aksehældning"
 
 #: src/core/StelObject.cpp:244 src/core/StelObject.cpp:246
 #, qt-format
@@ -1849,7 +1850,7 @@ msgstr "Ikke tilgængelig"
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1330
 msgid "Algorithm of"
-msgstr ""
+msgstr "Algoritme for"
 
 #: src/gui/ConfigurationDialog.cpp:1341
 msgid "Without correction"
@@ -1974,7 +1975,7 @@ msgstr "Khalid, Sultana & Zaidi (2014)"
 #: src/gui/ConfigurationDialog.cpp:1376
 #, qt-format
 msgid "Custom equation of %1T"
-msgstr ""
+msgstr "Tilpasset ligning for %1 T"
 
 #: src/gui/HelpDialog.cpp:133
 msgid "Stellarium Help"
@@ -2259,11 +2260,11 @@ msgstr "%1m"
 #: src/gui/StelGuiItems.cpp:693
 #, qt-format
 msgid "planetocentric distance %1 km"
-msgstr ""
+msgstr "planetocentrisk afstand %1 km"
 
 #: src/gui/StelGuiItems.cpp:695
 msgid "planetocentric observer"
-msgstr ""
+msgstr "planetocentrisk observatør"
 
 #: src/gui/StelGuiItems.cpp:724
 msgid "Field of view"
@@ -2271,7 +2272,7 @@ msgstr "Synsfelt"
 
 #: src/gui/StelGuiItems.cpp:749
 msgid "Frames per second"
-msgstr ""
+msgstr "Billeder pr. sekund"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:523
@@ -2320,7 +2321,7 @@ msgstr "Indre storby-himmel"
 
 #: src/gui/ViewDialog.cpp:553
 msgid "The naked-eye limiting magnitude is"
-msgstr ""
+msgstr "Lysstyrkebegrænsningen for det blotte øje er"
 
 # Refers to "Show names", i.e. plural.
 #: src/gui/ViewDialog.cpp:577
@@ -2476,7 +2477,7 @@ msgstr "ryd billeder"
 
 #: src/gui/ScriptConsole.cpp:80
 msgid "natural"
-msgstr ""
+msgstr "naturlig"
 
 #: src/gui/ScriptConsole.cpp:81
 msgid "starchart"
@@ -2544,23 +2545,23 @@ msgstr "Breddegrad"
 
 #: src/gui/SearchDialog.cpp:580
 msgid "Simbad Lookup Error"
-msgstr ""
+msgstr "Fejl under opslag i SIMBAD"
 
 #: src/gui/SearchDialog.cpp:588
 msgid "Simbad Lookup"
-msgstr ""
+msgstr "Opslag i SIMBAD"
 
 #: src/gui/SearchDialog.cpp:769
 msgid "University of Strasbourg (France)"
-msgstr ""
+msgstr "Strasbourg Universitet (Frankrig)"
 
 #: src/gui/SearchDialog.cpp:770
 msgid "Harvard University (USA)"
-msgstr ""
+msgstr "Harvard Universitet (USA)"
 
 #: src/gui/SearchDialog.cpp:843
 msgid "Paste and Search"
-msgstr ""
+msgstr "Indsæt og søg"
 
 #: src/gui/ShortcutsDialog.cpp:498
 msgid "Action"
@@ -2577,7 +2578,7 @@ msgstr "Alternativ genvej"
 #: src/gui/CustomDeltaTEquationDialog.cpp:136
 #, qt-format
 msgid "Custom equation for %1T"
-msgstr ""
+msgstr "Tilpasset ligning for %1 T"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:137
 #, qt-format
@@ -2614,7 +2615,7 @@ msgstr "Dec (J2000)"
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:141 src/gui/AstroCalcDialog.cpp:258
 msgid "Mag."
-msgstr ""
+msgstr "Lysst."
 
 #. TRANSLATORS: type of object
 #: src/gui/AstroCalcDialog.cpp:143 src/ui_configurationDialog.h:1162
@@ -2761,11 +2762,14 @@ msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
 msgstr ""
+"Utilstrækkelig OpenGL-version. Opdatér venligst drivere, grafikhardware "
+"eller brug tilvalget --angle-mode (eller --mesa-mode)."
 
 #: src/StelMainView.cpp:731
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
+"Utilstrækkelig OpenGL-version. Opdatér venligst drivere eller grafikhardware."
 
 #: src/StelMainView.cpp:773
 msgid ""
@@ -2773,6 +2777,10 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"Der er problemer med dit DirectX-/OpenGL ES-undersystem. Se loggen for "
+"detaljer.\n"
+"Ignorér og undertryk denne besked i fremtiden og prøv alligevel at fortsætte "
+"i nedgraderet tilstand?"
 
 #: src/StelMainView.cpp:824
 msgid ""
@@ -2780,6 +2788,9 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"Der er problemer med dit OpenGL-/Mesa-undersystem. Se loggen for detaljer.\n"
+"Ignorér og undertryk denne besked i fremtiden og prøv alligevel at fortsætte "
+"i nedgraderet tilstand?"
 
 #: src/StelMainView.cpp:880
 msgid ""
@@ -2787,6 +2798,9 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"Der er problemer med dit OpenGL-undersystem. Se loggen for detaljer.\n"
+"Ignorér og undertryk denne besked i fremtiden og prøv alligevel at fortsætte "
+"i nedgraderet tilstand?"
 
 #: src/StelMainView.cpp:921
 msgid ""
@@ -2794,6 +2808,9 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"Der er problemer med dit OpenGL ES-undersystem. Se loggen for detaljer.\n"
+"Ignorér og undertryk denne besked i fremtiden og prøv alligevel at fortsætte "
+"i nedgraderet tilstand?"
 
 #: src/StelMainView.cpp:1032
 #, qt-format
@@ -3346,7 +3363,7 @@ msgstr "Solen fra forskellige planeter"
 #. TRANSLATORS: Name of script
 #: src/translations.h:276
 msgid "Earth best views from other bodies"
-msgstr "Bedste udsyn til Jorden fra andre objekter"
+msgstr "Bedste udsyn til Jorden fra andre himmellegemer"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:278
@@ -3480,6 +3497,9 @@ msgid ""
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
+"Dette skript viser stjernebillederne i Dyrekredsen. Det vil sige "
+"stjernebillederne, der ligger langs den linje, som Solen følger hen over "
+"himmelkuglen i løbet af et år."
 
 #: src/translations.h:327
 msgid ""
@@ -3495,7 +3515,7 @@ msgid ""
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr ""
 "Lige før Mars formørker Solen, kommer Phobos frem bagfra og formørker den "
-"først. Dette finder sted mellem Skorpionen og Skytten d. 26. april 2017."
+"først. Dette finder sted mellem Skorpionen og Skytten 26. april 2017."
 
 #: src/translations.h:329
 msgid ""
@@ -3503,11 +3523,11 @@ msgid ""
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr ""
 "Lige før Mars formørker Solen, kommer Phobos frem bagfra og formørker den "
-"først. Dette finder sted mellem Tyren og Tvillingerne d. 23. juli 2031."
+"først. Dette finder sted mellem Tyren og Tvillingerne 23. juli 2031."
 
 #: src/translations.h:330
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
-msgstr "Phobos, der formørker Solen, set fra Olympus Mons d. 10. jan 2068."
+msgstr "Phobos, der formørker Solen, set fra Olympus Mons 10. jan 2068."
 
 #: src/translations.h:331
 msgid ""
@@ -3515,6 +3535,9 @@ msgid ""
 "occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
+"Phobos-okkultationer af Jorden er almindelige, ligesom okkultationer af "
+"Jupiter. Men okkultationer af begge på samme dag er meget sjældne. Her er "
+"en, der finder sted 23/1-2048. I naturlig hastighed."
 
 #: src/translations.h:332
 msgid ""
@@ -3525,11 +3548,18 @@ msgid ""
 "emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to "
 "light up later."
 msgstr ""
+"Phobos ræser foran Mars og passerer Solen, passerer igennem den og går så "
+"tilbage imod Solen. Den passerer Solen igen, denne gang delvist, (ses kun "
+"fra den sydlige halvkugle af Deimos), hvorefter Mars formørker Solen totalt, "
+"mens Phobos passerer i mørket mellem Mars og Deimos. Når Phobos dukker frem "
+"fra Mars, er den stadig formørket og dens lys dæmpet i Mars' skygge, for "
+"senere at lyse op igen."
 
 #: src/translations.h:333
 msgid ""
 "Screensaver of various happenings in the Solar System. 261 events in all!"
 msgstr ""
+"Pauseskærm med forskellige hændelser i Solsystemet. 261 hændelser i alt!"
 
 #: src/translations.h:334
 msgid "A tour of the western constellations."
@@ -3537,34 +3567,42 @@ msgstr "En tur blandt vestlige stjernebilleder."
 
 #: src/translations.h:335
 msgid "Look at the Sun from big planets of Solar System and Pluto."
-msgstr ""
+msgstr "Se på Solen fra store planeter i Solsystemet og Pluto."
 
 #: src/translations.h:336
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
+"De bedste udsyn til Jorden fra andre himmellegemer i Solsystemet i det 21. "
+"århundrede."
 
 #: src/translations.h:337
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
-msgstr ""
+msgstr "Venus-passage set fra Sydney i Australien 6. juni 2012."
 
 #: src/translations.h:338
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr ""
+"En demonstration af analemma – Solens rute hen over himmelen i løbet af et "
+"år."
 
 #: src/translations.h:339
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
+"Lysglimt fra den supernova, som Tycho Brahe observerede i 1572. "
+"Udvidelsesmodulet Historiske supernovaer skal være aktiveret."
 
 #: src/translations.h:340
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
 msgstr ""
+"Jordens og andre planeters største elongationer og oppositioner fra Mars "
+"2000–3000"
 
 #: src/translations.h:341
 msgid ""
@@ -3573,12 +3611,18 @@ msgid ""
 "Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's "
 "moons, Callisto will be the one."
 msgstr ""
+"Jordens største elongationer og passager fra Callisto 2000–3000. Hvorfor "
+"Callisto? Af de fire galilæiske måner er Callisto den eneste uden for "
+"Jupiters strålingsbælte. Hvis mennesker nogensinde koloniserer Jupiters "
+"måner, vil Callisto derfor være den udvalgte."
 
 #: src/translations.h:342
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
 msgstr ""
+"Jorden og de andre synlige planeters største elongationer og oppositioner "
+"fra Ceres 2000–3000"
 
 #: src/translations.h:343
 msgid "A tour of Messier Objects"
@@ -3599,10 +3643,16 @@ msgid ""
 "has been collected by Jerry Lodriguss and published in Sky & Telescope "
 "09/2014. Data taken from his website, http://www.astropix.com/doubles/"
 msgstr ""
+"Dette skript hjælper dig med at lave en ekskursion omkring 20 sjove "
+"dobbeltstjerner. Listen er sammensat af Jerry Lodriguss og er udgivet i Sky "
+"& Telescope 09/2014. Data er fra hans websted, "
+"http://www.astropix.com/doubles/"
 
 #: src/translations.h:346
 msgid "This script helps you make an excursion around largest known stars."
 msgstr ""
+"Dette skript hjælper dig med at lave en ekskursion omkring de største kendte "
+"stjerner."
 
 #: src/translations.h:347
 msgid "A tour around objects from the Herschel 400 Catalogue"
@@ -3614,6 +3664,9 @@ msgid ""
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
 "Right Ascension (2000.0)."
 msgstr ""
+"Ben Crowell har sammensat Binosky, en observationsliste med deep-sky-"
+"objekter for kikkerter. I skriptet gives en liste over disse 31 objekter, "
+"sorteret efter Rektascension (2000.0)."
 
 #: src/translations.h:349
 msgid ""
@@ -3637,7 +3690,7 @@ msgstr "Forenede Arabiske Emirater"
 
 #: src/translations.h:356
 msgid "Afghanistan"
-msgstr "Afganistan"
+msgstr "Afghanistan"
 
 #: src/translations.h:357
 msgid "Antigua and Barbuda"
@@ -3877,7 +3930,7 @@ msgstr "Ecuador"
 
 #: src/translations.h:416
 msgid "Estonia"
-msgstr "Estonien"
+msgstr "Estland"
 
 #: src/translations.h:417
 msgid "Egypt"
@@ -4241,7 +4294,7 @@ msgstr "Mozambique"
 
 #: src/translations.h:507
 msgid "Namibia"
-msgstr "Naminia"
+msgstr "Namibia"
 
 #: src/translations.h:508
 msgid "New Caledonia"
@@ -4377,7 +4430,7 @@ msgstr "Saudi-Arabien"
 
 #: src/translations.h:541
 msgid "Solomon Islands"
-msgstr "Solomonøerne"
+msgstr "Salomonøerne"
 
 #: src/translations.h:542
 msgid "Seychelles"
@@ -4629,7 +4682,7 @@ msgstr "Vælg alle"
 
 #: src/translations.h:606
 msgid "Look in:"
-msgstr ""
+msgstr "Søg i:"
 
 #: src/translations.h:607
 msgid "Directory:"
@@ -4641,7 +4694,7 @@ msgstr "Mappe"
 
 #: src/translations.h:609
 msgid "&Choose"
-msgstr ""
+msgstr "&Vælg"
 
 #: src/translations.h:610 src/ui_configurationDialog.h:1291
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
@@ -4708,9 +4761,10 @@ msgstr "&Kulør:"
 msgid "&Sat:"
 msgstr "&Mætning:"
 
+# hue, sat, val
 #: src/translations.h:626
 msgid "&Val:"
-msgstr ""
+msgstr "&Lys:"
 
 #: src/translations.h:627
 msgid "&Red:"
@@ -4969,6 +5023,7 @@ msgstr "Koordinatsystem:"
 msgid ""
 "Note: this tool doesn't apply the refraction correction for coordinates."
 msgstr ""
+"Bemærk: Dette værktøj anvender ikke refraktionskorrektion for koordinater."
 
 #: src/ui_searchDialogGui.h:704
 msgid "Position"
@@ -4977,6 +5032,8 @@ msgstr "Placering"
 #: src/ui_searchDialogGui.h:706
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr ""
+"Visse objekter kan først findes efter aktivering af det respektive "
+"udvidelsesmodul"
 
 #: src/ui_searchDialogGui.h:708
 msgid "names in English"
@@ -4993,57 +5050,59 @@ msgstr "Lister"
 
 #: src/ui_searchDialogGui.h:711
 msgid "On-line astronomical database SIMBAD"
-msgstr ""
+msgstr "Den elektroniske astronomiske database, SIMBAD"
 
 #: src/ui_searchDialogGui.h:712
 msgid "Extend search with SIMBAD"
-msgstr ""
+msgstr "Udvid søgning med SIMBAD"
 
 #: src/ui_searchDialogGui.h:713
 msgid "Server:"
-msgstr ""
+msgstr "Server:"
 
 #: src/ui_searchDialogGui.h:714
 msgid "Search options"
-msgstr ""
+msgstr "Søgeindstillinger"
 
 #: src/ui_searchDialogGui.h:715
 msgid "Use autofill only from the beginning of words"
-msgstr ""
+msgstr "Brug kun autoudfyldning fra begyndelsen af ord"
 
 #: src/ui_searchDialogGui.h:716 src/ui_viewDialog.h:1820
 #: src/ui_viewDialog.h:1842 src/ui_viewDialog.h:1859
 #: src/ui_configurationDialog.h:1292 src/ui_configurationDialog.h:1303
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
-msgstr "Valgmuilgheder"
+msgstr "Valgmuligheder"
 
 #: src/ui_viewDialog.h:1600
 msgid "View"
-msgstr "Vis"
+msgstr "Visning"
 
 #: src/ui_viewDialog.h:1603
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:266
 msgid "Absolute scale:"
-msgstr "Absolut skala"
+msgstr "Absolut skala:"
 
 #: src/ui_viewDialog.h:1604
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Relative scale:"
-msgstr "Relativ skala"
+msgstr "Relativ skala:"
 
 #: src/ui_viewDialog.h:1605
 msgid "Milky Way brightness:"
-msgstr ""
+msgstr "Lysstyrke for Mælkevejen:"
 
+# Wikipedia mentions both "zodiakal" and "Dyrekredsen" as Danish names for the zodiac.
+# https://da.wikipedia.org/wiki/Zodiakallys
 #: src/ui_viewDialog.h:1606
 msgid "Zodiacal Light brightness:"
-msgstr ""
+msgstr "Lysstyrke for zodiakallys:"
 
 #: src/ui_viewDialog.h:1607
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:272
 msgid "Twinkle:"
-msgstr "Funkeling:"
+msgstr "Funklen:"
 
 #: src/ui_viewDialog.h:1609
 msgid "Limit the magnitude of stars"
@@ -5055,7 +5114,7 @@ msgstr "Begræns lysstyrke:"
 
 #: src/ui_viewDialog.h:1613
 msgid "Dim faint stars when a very bright object is visible"
-msgstr "Dæmp falmede når et lyst objekt er synlig"
+msgstr "Dæmp lyssvage stjerner, når et meget lysstærkt objekt er synligt"
 
 #: src/ui_viewDialog.h:1615
 msgid "Dynamic eye adaptation"
@@ -5074,25 +5133,27 @@ msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
 msgstr ""
+"Brug lysforureningsdata fra placeringsdatabasen og ignorér indstillingerne "
+"for lysforurening herunder"
 
 #: src/ui_viewDialog.h:1625
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:440
 msgid "Light pollution:"
-msgstr ""
+msgstr "Lysforurening:"
 
 #: src/ui_viewDialog.h:1627
 msgid "pressure, temperature, extinction coefficient"
-msgstr ""
+msgstr "tryk, temperatur og ekstinktionskoefficient"
 
 #: src/ui_viewDialog.h:1629
 msgid "Refraction/Extinction settings..."
-msgstr ""
+msgstr "Refraktions-/ekstinktionsindstillinger…"
 
 #: src/ui_viewDialog.h:1630
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:293
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Solar System objects"
-msgstr ""
+msgstr "Objekter i Solsystemet"
 
 #: src/ui_viewDialog.h:1631
 msgid "Show planet markers"
@@ -5107,54 +5168,60 @@ msgid ""
 "Deactivate this option if you want to see orbit for selected planet and its "
 "moons."
 msgstr ""
+"Deaktivér denne indstilling hvis du vil se kredsløbet for den markerede "
+"planet og dens måner."
 
 #: src/ui_viewDialog.h:1636
 msgid "Show orbit for selected planet"
-msgstr ""
+msgstr "Vis kredsløb for markeret planet"
 
 #: src/ui_viewDialog.h:1638
 msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
 msgstr ""
+"Deaktivér denne indstilling hvis du vil se sporene efter alle himmellegemer "
+"i Solsystemet."
 
 #: src/ui_viewDialog.h:1640
 msgid "Show trail only for selected planet"
-msgstr ""
+msgstr "Vis kun sporet efter den markerede planet"
 
 #: src/ui_viewDialog.h:1642
 msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
 msgstr ""
+"Aktivér denne indstilling for at simulere effekten af lysets rigtige "
+"hastighed (anbefales)."
 
 #: src/ui_viewDialog.h:1644
 msgid "Simulate light speed"
-msgstr "Simuler lyshastighed"
+msgstr "Simulér lysets hastighed"
 
 #: src/ui_viewDialog.h:1645
 msgid "Use custom settings of GRS:"
-msgstr ""
+msgstr "Brug tilpassede indstillinger for Den store røde plet:"
 
 #: src/ui_viewDialog.h:1646
 msgid "GRS details..."
-msgstr ""
+msgstr "Detaljer om Den store røde plet…"
 
 #: src/ui_viewDialog.h:1648
 msgid "Limit the magnitude of solar system objects"
-msgstr "Begræns lysstyrken for objekter i solsystemet"
+msgstr "Begræns lysstyrken for objekter i Solsystemet"
 
 #: src/ui_viewDialog.h:1651
 msgid "Scale Moon:"
-msgstr ""
+msgstr "Skalér Månen:"
 
 #: src/ui_viewDialog.h:1653
 msgid "Scale factor"
-msgstr ""
+msgstr "Skaleringsfaktor"
 
 #: src/ui_viewDialog.h:1657
 msgid "Settings for sporadic meteors"
-msgstr ""
+msgstr "Indstillinger for sporadiske meteorer"
 
 #: src/ui_viewDialog.h:1659
 msgid "Shooting Stars"
@@ -5162,16 +5229,17 @@ msgstr "Stjerneskud"
 
 #: src/ui_viewDialog.h:1661
 msgid "Hourly zenith rate"
-msgstr ""
+msgstr "Timerate for zenit (Zenithal hourly rate)"
 
+# https://en.wikipedia.org/wiki/Zenithal_hourly_rate
 #: src/ui_viewDialog.h:1663
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
-msgstr ""
+msgstr "ZHR:"
 
 #: src/ui_viewDialog.h:1665
 msgid "Display objects from catalogs"
-msgstr ""
+msgstr "Vis objekter fra kataloger"
 
 #: src/ui_viewDialog.h:1667
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
@@ -5230,15 +5298,16 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1711
 msgid "Filter by type"
-msgstr ""
+msgstr "Filtrér efter type"
 
 #: src/ui_viewDialog.h:1714
 msgid "Hydrogen regions"
-msgstr ""
+msgstr "Hydrogenregioner"
 
+# Ser ud til at være en del af listen med bl.a. "Galakser", "Planetariske tåger" osv., derfor flertal.
 #: src/ui_viewDialog.h:1715
 msgid "Other"
-msgstr "Andet"
+msgstr "Andre"
 
 #: src/ui_viewDialog.h:1717
 msgid "Planetary Nebulae"
@@ -5246,7 +5315,7 @@ msgstr "Planetariske tåger"
 
 #: src/ui_viewDialog.h:1718
 msgid "Galaxies"
-msgstr ""
+msgstr "Galakser"
 
 #: src/ui_viewDialog.h:1720
 msgid "Dark Nebulae"
@@ -5270,7 +5339,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1728
 msgid "Use surface brightness"
-msgstr ""
+msgstr "Brug overfladelysstyrke"
 
 #: src/ui_viewDialog.h:1730
 msgid "Use hints proportional to angular size of deep-sky objects"
@@ -5305,83 +5374,87 @@ msgstr "Himmelkuglen"
 
 #: src/ui_viewDialog.h:1743
 msgid "Equatorial coordinates of J2000.0."
-msgstr ""
+msgstr "Ækvatorialkoordinater for J2000.0."
 
 #: src/ui_viewDialog.h:1745
 msgid "Equatorial grid (J2000)"
-msgstr ""
+msgstr "Ækvatorialgitter (J2000)"
 
+# https://en.wikipedia.org/wiki/Equatorial_coordinate_system
 #: src/ui_viewDialog.h:1747
 msgid "Equatorial coordinates of current date and planet."
-msgstr ""
+msgstr "Ækvatorialkoordinater for aktuel dato og planet."
 
 #: src/ui_viewDialog.h:1749
 msgid "Equatorial grid (of date)"
-msgstr ""
+msgstr "Ækvatorialgitter (for dato)"
 
+# https://da.wikipedia.org/wiki/Ekliptiske_koordinatsystem
 #: src/ui_viewDialog.h:1751
 msgid "Ecliptical coordinates for J2000.0."
-msgstr ""
+msgstr "Ekliptiske koordinater for J2000.0."
 
 #: src/ui_viewDialog.h:1753
 msgid "Ecliptic grid (J2000)"
-msgstr ""
+msgstr "Ekliptikagitter (J2000)"
 
 #: src/ui_viewDialog.h:1755
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
-msgstr ""
+msgstr "Ekliptiske koordinater for aktuel dato. Vises kun på Jorden."
 
 #: src/ui_viewDialog.h:1757
 msgid "Ecliptic grid (of date)"
-msgstr ""
+msgstr "Ekliptikagitter (for dato)"
 
 #: src/ui_viewDialog.h:1759
 msgid "Altitudes and azimuth (counted from North towards East)."
 msgstr "Højder og azimut (målt fra nord imod øst)."
 
+# https://da.wikipedia.org/wiki/Galaktiske_koordinatsystem
 #: src/ui_viewDialog.h:1763
 msgid "Galactic Coordinates, System II (IAU 1958)."
-msgstr ""
+msgstr "Galaktiske koordinater, System II (IAU 1958)."
 
+# https://da.wikipedia.org/wiki/Himlens_%C3%A6kvator
 #: src/ui_viewDialog.h:1767
 msgid "Show celestial equator of J2000.0."
-msgstr ""
+msgstr "Vis himlens ækvator for J2000.0."
 
 #: src/ui_viewDialog.h:1769
 msgid "Equator (J2000)"
-msgstr ""
+msgstr "Ækvator (J2000)"
 
 #: src/ui_viewDialog.h:1771
 msgid "Show celestial equator of current planet and date."
-msgstr ""
+msgstr "Vis himlens ækvator for aktuel planet og dato."
 
 #: src/ui_viewDialog.h:1773
 msgid "Equator (of date)"
-msgstr ""
+msgstr "Ækvator (for dato)"
 
 #: src/ui_viewDialog.h:1775
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
-msgstr ""
+msgstr "Vis ekliptikalinje for J2000.0 (VSOP87A fundamentalplan)."
 
 #: src/ui_viewDialog.h:1777
 msgid "Ecliptic (J2000)"
-msgstr ""
+msgstr "Ekliptika (J2000)"
 
 #: src/ui_viewDialog.h:1779
 msgid "Show ecliptic line of current date."
-msgstr ""
+msgstr "Vis ekliptikalinje for aktuel dato."
 
 #: src/ui_viewDialog.h:1781
 msgid "Ecliptic (of date)"
-msgstr ""
+msgstr "Ekliptika (for dato)"
 
 #: src/ui_viewDialog.h:1783
 msgid "Show horizon line."
-msgstr ""
+msgstr "Vis horisontlinje."
 
 #: src/ui_viewDialog.h:1787
 msgid "Show Galactic equator line."
-msgstr ""
+msgstr "Vis den galaktiske ækvatorlinje."
 
 #: src/ui_viewDialog.h:1791
 msgid "Labels for the Cardinal directions."
@@ -5389,45 +5462,52 @@ msgstr "Etiketter for kompasretningerne."
 
 #: src/ui_viewDialog.h:1795
 msgid "Show meridian line."
-msgstr ""
+msgstr "Vis meridianlinje."
 
 #: src/ui_viewDialog.h:1799
 msgid "Show Prime (East-West) Vertical."
-msgstr ""
+msgstr "Vis første (øst–vest) vertikal."
 
 #: src/ui_viewDialog.h:1803
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
-msgstr ""
+msgstr "Vis kolurer (storcirkler gennem poler og solhverv/jævndøgn)."
 
 #: src/ui_viewDialog.h:1805
 msgid "Colures"
-msgstr ""
+msgstr "Kolurer"
 
 #: src/ui_viewDialog.h:1807
 msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which "
 "passes through both ecliptic poles, the Sun and opposition point."
 msgstr ""
+"Længdelinje for opposition/konjunktion – linjen for ekliptisk længde, der "
+"passerer gennem både ekliptiske poler, Solen og oppositionspunktet."
 
 #: src/ui_viewDialog.h:1811
 msgid ""
 "These circles delimit stars which stay always above (respectively below) the "
 "mathematical horizon."
 msgstr ""
+"Disse cirkler udelukker stjerner, som altid forbliver over (henholdsvis "
+"under) den matematiske horisont."
 
 #: src/ui_viewDialog.h:1813
 msgid "Circumpolar circles"
-msgstr ""
+msgstr "Cirkumpolare cirkler"
 
 #: src/ui_viewDialog.h:1815
 msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
 msgstr ""
+"Øjeblikkelige cirkler på Jordens akser på dens bevægelse omkring de "
+"ekliptiske poler. Vises kun på Jorden."
 
+# https://da.wikipedia.org/wiki/Pr%C3%A6cession
 #: src/ui_viewDialog.h:1817
 msgid "Precession circles"
-msgstr ""
+msgstr "Præcessionscirkler"
 
 #: src/ui_viewDialog.h:1818
 msgid "Projection"
@@ -5439,7 +5519,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1821
 msgid "Show ground"
-msgstr "Vis jorden"
+msgstr "Vis terræn"
 
 #: src/ui_viewDialog.h:1822
 msgid "Use this landscape as default"
@@ -5459,36 +5539,39 @@ msgstr "Vis dis"
 
 #: src/ui_viewDialog.h:1827
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
-msgstr ""
+msgstr "Vis oplysningslag (lysstærke vinduer, lysforurening osv.)"
 
 #: src/ui_viewDialog.h:1829
 msgid "Show illumination "
-msgstr ""
+msgstr "Vis oplysning "
 
 #: src/ui_viewDialog.h:1831
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr ""
+"Brug minimal lysstyrke for at lade landskabet være synligt, selv i mørke"
 
 #: src/ui_viewDialog.h:1833
 msgid "Minimal brightness:"
-msgstr ""
+msgstr "Minimal lysstyrke:"
 
 #: src/ui_viewDialog.h:1835
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr ""
+"Værdiinterval 0..1 (landskabet er sort om natten – landskabet er fuldt "
+"oplyst)"
 
 #: src/ui_viewDialog.h:1838
 msgid "Use minimal brightness as may be specified in landscape.ini"
-msgstr ""
+msgstr "Brug minimal lysstyrke, som kan angives i landscape.ini"
 
 #: src/ui_viewDialog.h:1840
 msgid "from landscape, if given"
-msgstr ""
+msgstr "fra landskab, hvis givet"
 
 #: src/ui_viewDialog.h:1841
 msgid "Add/remove landscapes..."
-msgstr "Tilføj/fjern landskaber..."
+msgstr "Tilføj/fjern landskaber…"
 
 #: src/ui_viewDialog.h:1843
 msgid "Use this sky culture as default"
@@ -5500,7 +5583,7 @@ msgstr "Vis etiketter"
 
 #: src/ui_viewDialog.h:1846
 msgid "Select if you want names abbreviated, original or translated"
-msgstr ""
+msgstr "Vælg hvis du vil have navne forkortet, oversat eller oprindelige"
 
 #: src/ui_viewDialog.h:1850
 msgid "Use native names for planets from current culture"
@@ -5512,15 +5595,15 @@ msgstr "Brug oprindelige navne på planeter"
 
 #: src/ui_viewDialog.h:1853
 msgid "Show lines with thickness"
-msgstr ""
+msgstr "Vis linjer med tykkelse"
 
 #: src/ui_viewDialog.h:1855
 msgid "Value in pixels"
-msgstr ""
+msgstr "Værdi i pixels"
 
 #: src/ui_viewDialog.h:1857
 msgid "Show art in brightness"
-msgstr ""
+msgstr "Vis grafik i lysstyrke"
 
 #: src/ui_viewDialog.h:1858
 msgid "Show boundaries"
@@ -5555,7 +5638,7 @@ msgstr "Landskab"
 #: src/ui_viewDialog.h:1876
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:229
 msgid "Starlore"
-msgstr "Stjernetradition"
+msgstr "Starlore"
 
 #: src/ui_configurationDialog.h:1088
 msgid "Configuration"
@@ -5563,11 +5646,11 @@ msgstr "Opsætning"
 
 #: src/ui_configurationDialog.h:1090
 msgid "Language settings"
-msgstr ""
+msgstr "Sprogindstillinger"
 
 #: src/ui_configurationDialog.h:1091
 msgid "Program Language"
-msgstr ""
+msgstr "Programsprog"
 
 #: src/ui_configurationDialog.h:1092
 msgid "Sky Culture Language"
@@ -5575,11 +5658,11 @@ msgstr "Himmelkultursprog"
 
 #: src/ui_configurationDialog.h:1093
 msgid "Ephemeris settings"
-msgstr ""
+msgstr "Efemeride-indstillinger"
 
 #: src/ui_configurationDialog.h:1094 src/ui_configurationDialog.h:1095
 msgid "Not installed"
-msgstr ""
+msgstr "Ikke installeret"
 
 #: src/ui_configurationDialog.h:1097
 msgid ""
@@ -5619,8 +5702,8 @@ msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
 msgstr ""
-"Gem de indstillinger du har ændret i denne session til at være de samme, "
-"næste gang du starter Stellarium"
+"Gem de indstillinger, du har ændret i denne session, så de vil blive "
+"beholdt, næste gang du starter Stellarium"
 
 #: src/ui_configurationDialog.h:1112
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
@@ -5633,7 +5716,7 @@ msgstr "Gem indstillinger"
 
 #: src/ui_configurationDialog.h:1114
 msgid "Restore the default settings that came with Stellarium"
-msgstr "Gendan de standart indstillinger der kom med Stellarium"
+msgstr "Gendan Stellariums standardindstillinger"
 
 #: src/ui_configurationDialog.h:1116
 #: plugins/NavStars/src/ui_navStarsWindow.h:212
@@ -5641,7 +5724,7 @@ msgstr "Gendan de standart indstillinger der kom med Stellarium"
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:282
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
 msgid "Restore defaults"
-msgstr "Gendan standartindstillinger"
+msgstr "Gendan standardindstillinger"
 
 #: src/ui_configurationDialog.h:1117
 msgid ""
@@ -5650,16 +5733,16 @@ msgid ""
 "next startup."
 msgstr ""
 "Gendannelse til standardindstillinger kræver genstart af Stellarium. Lagring "
-"af alle nuværende indstillinger inkluderer den nuværende  Startsynsvinkel og "
-"-retning til brug ved næste start."
+"af alle nuværende indstillinger inkluderer nuværende synsfelt og synsretning "
+"til brug ved næste opstart."
 
 #: src/ui_configurationDialog.h:1119
 msgid "The width of your view when Stellarium starts"
-msgstr "Udsynsvinklen når Stellarium starter"
+msgstr "Din synsvinkel når Stellarium starter"
 
 #: src/ui_configurationDialog.h:1122
 msgid "The direction you're looking when Stellarium starts"
-msgstr "Retning der vises når Stellarium starter"
+msgstr "Den retning, du kigger i, når Stellarium starter"
 
 #: src/ui_configurationDialog.h:1124 src/ui_configurationDialog.h:1314
 msgid "Selected object information"
@@ -5671,7 +5754,7 @@ msgstr "Vis al tilgængelig information"
 
 #: src/ui_configurationDialog.h:1128
 msgid "All available"
-msgstr "Alt tilgængeligt"
+msgstr "Al tilgængelig"
 
 #: src/ui_configurationDialog.h:1130
 msgid "Display no information"
@@ -5692,11 +5775,11 @@ msgstr "Kort"
 
 #: src/ui_configurationDialog.h:1138
 msgid "Display user settings information"
-msgstr ""
+msgstr "Vis information om brugerinstillinger"
 
 #: src/ui_configurationDialog.h:1140
 msgid "Customized"
-msgstr ""
+msgstr "Tilpasset"
 
 #: src/ui_configurationDialog.h:1141
 msgid "Displayed fields"
@@ -5704,7 +5787,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1144 src/ui_configurationDialog.h:1168
 msgid "Equatorial coordinates, equinox of date"
-msgstr ""
+msgstr "Ækvatorialkoordinater, jævndøgn for dato"
 
 #: src/ui_configurationDialog.h:1146
 msgid "Right ascension/Declination (of date)"
@@ -5716,7 +5799,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1149
 msgid "Equatorial coordinates, equinox of J2000.0"
-msgstr ""
+msgstr "Ækvatorialkoordinater, jævndøgn for J2000.0"
 
 #: src/ui_configurationDialog.h:1151
 msgid "Right ascension/Declination (J2000)"
@@ -5740,7 +5823,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1158
 msgid "Size"
-msgstr ""
+msgstr "Størrelse"
 
 #: src/ui_configurationDialog.h:1160
 msgid "The type of the object (star, planet, etc.)"
@@ -5770,15 +5853,15 @@ msgstr "Højde/azimut"
 
 #: src/ui_configurationDialog.h:1175
 msgid "Distance"
-msgstr ""
+msgstr "Afstand"
 
 #: src/ui_configurationDialog.h:1177
 msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
-msgstr ""
+msgstr "Ekliptiske koordinater, jævndøgn for dato og J2000 (kun for Jorden)"
 
 #: src/ui_configurationDialog.h:1179
 msgid "Ecliptic coordinates"
-msgstr ""
+msgstr "Ekliptiske koordinater"
 
 #: src/ui_configurationDialog.h:1180
 msgid "Control"
@@ -5966,21 +6049,21 @@ msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr ""
-"Ved  aktiveret, vil \"Automatisk zoom ud\" knappen også indstille den "
+"Hvis aktiveret, vil \"Automatisk zoom ud\"-knappen også indstille den "
 "indledende synsretning"
 
 #: src/ui_configurationDialog.h:1270
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:457
 msgid "Auto zoom out returns to initial direction of view"
-msgstr "Automatisk zoom ud retunerer ti den indledende sysnretning"
+msgstr "Automatisk zoom ud returnerer til den indledende synsretning"
 
 #: src/ui_configurationDialog.h:1272
 msgid "Automatic change of landscape when planet is changed"
-msgstr ""
+msgstr "Automatisk landskabsskift når der ændres planet"
 
 #: src/ui_configurationDialog.h:1274
 msgid "Auto select landscapes"
-msgstr ""
+msgstr "Vælg automatisk landskaber"
 
 #: src/ui_configurationDialog.h:1275
 msgid "Screenshots"
@@ -6016,11 +6099,11 @@ msgstr "Prøv igen"
 
 #: src/ui_configurationDialog.h:1289
 msgid "Stop the download. You can always restart it later"
-msgstr "Stop download, Du kan altid genstarte den senere"
+msgstr "Stop download. Du kan altid genstarte den senere"
 
 #: src/ui_configurationDialog.h:1294
 msgid "Close window when script runs"
-msgstr "Luk vindue når skript kører"
+msgstr "Luk vinduet når skript kører"
 
 #: src/ui_configurationDialog.h:1296
 msgid "Run the selected script"
@@ -6057,7 +6140,7 @@ msgstr "Værktøjer"
 #: src/ui_configurationDialog.h:1321
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:497
 msgid "Scripts"
-msgstr "Skript"
+msgstr "Skripts"
 
 #: src/ui_configurationDialog.h:1323
 msgid "Plugins"
@@ -6073,7 +6156,7 @@ msgstr "Tilføj et nyt landskab"
 
 #: src/ui_addRemoveLandscapesDialog.h:268
 msgid "Install a new landscape from a ZIP archive..."
-msgstr "Installer et nyt landskab fra et Zip-arkiv..."
+msgstr "Installér et nyt landskab fra et zip-arkiv…"
 
 #: src/ui_addRemoveLandscapesDialog.h:269
 msgid "Switch to the new landscape after installation"
@@ -6099,23 +6182,23 @@ msgstr ""
 
 #: src/ui_shortcutsDialog.h:195
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Tastaturgenveje"
 
 #: src/ui_shortcutsDialog.h:199
 msgid "Restore Defaults"
-msgstr ""
+msgstr "Gendan standarder"
 
 #: src/ui_shortcutsDialog.h:200
 msgid "Apply"
-msgstr ""
+msgstr "Anvend"
 
 #: src/ui_atmosphereDialog.h:175
 msgid "Atmosphere Details"
-msgstr ""
+msgstr "Atmosfæredetaljer"
 
 #: src/ui_atmosphereDialog.h:177
 msgid "Refraction Settings"
-msgstr ""
+msgstr "Refraktionsopsætning"
 
 #: src/ui_atmosphereDialog.h:178
 msgid "Pressure (mbar):"
@@ -6123,32 +6206,38 @@ msgstr "Tryk (mbar):"
 
 #: src/ui_atmosphereDialog.h:179
 msgid "Temperature (C):"
-msgstr "Temperatur (C):"
+msgstr "Temperatur (°C):"
 
+# https://en.wikipedia.org/wiki/Extinction_(astronomy)
 #: src/ui_atmosphereDialog.h:184 src/ui_greatRedSpotDialog.h:178
 msgid ""
 "Extinction is the loss of star brightness due to Earth's atmosphere. It is "
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
+"Ekstinktion er tabet af lysstyrke fra en stjerne på grund af Jordens "
+"atmosfære. Den udtrykkes i lysstyrke/luftmasse, hvor luftmasse er antallet "
+"af atmosfærer, som lyset skal passere. (zenit: 1; horisonten: omkring 40)"
 
 #: src/ui_atmosphereDialog.h:186
 msgid "Extinction Coefficient:"
-msgstr ""
+msgstr "Ekstinktionskoefficient:"
 
 #: src/ui_atmosphereDialog.h:188
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
 msgstr ""
+"Brug omkring 0,12 for perfekte bjergtoppe, 0,2 for godt landligt landskab, "
+"0,35 for dunkle forhold."
 
 #: src/ui_greatRedSpotDialog.h:168
 msgid "Great Red Spot Details"
-msgstr ""
+msgstr "Detaljer om Den store røde plet"
 
 #: src/ui_greatRedSpotDialog.h:170
 msgid "Custom settings for position of GRS"
-msgstr ""
+msgstr "Tilpassede indstillinger for placeringen af Den store røde plet"
 
 #: src/ui_greatRedSpotDialog.h:171 src/ui_astroCalcDialog.h:384
 #: src/ui_astroCalcDialog.h:386
@@ -6507,7 +6596,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:220
 msgid "Show in Equatorial Coordinates"
-msgstr ""
+msgstr "Vis som ækvatorialkoordinater"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:221
 msgid "Display with position angle"
@@ -7233,7 +7322,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1229
 msgid "Equatorial Mount"
-msgstr ""
+msgstr "Ækvatorialmontering"
 
 #: plugins/Satellites/src/Satellites.cpp:68
 #: plugins/Satellites/src/Satellites.cpp:142
@@ -9346,7 +9435,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Solar System body"
-msgstr ""
+msgstr "Himmellegeme i Solsystemet"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:175
 msgid "Current date/time"
@@ -9419,7 +9508,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:359
 msgid "Ecliptic line (J2000)"
-msgstr ""
+msgstr "Ekliptikalinje (J2000)"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Nebula names"
@@ -9447,7 +9536,7 @@ msgstr "Fif om hobe"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:400
 msgid "Galactic equator line"
-msgstr ""
+msgstr "Galaktisk ækvatorlinje"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:438
 msgid "Effects"
@@ -9579,7 +9668,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:108
 msgid "Solar System Editor plug-in"
-msgstr ""
+msgstr "Udvidelsesmodul for solsystemredigering"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:511
 msgid "Import data"
@@ -9703,35 +9792,36 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
 msgid "Solar System"
-msgstr ""
+msgstr "Solsystemet"
 
 #: plugins/Supernovae/src/Supernovae.cpp:71
 #: plugins/Supernovae/src/Supernovae.cpp:148
 msgid "Historical Supernovae"
-msgstr ""
+msgstr "Historiske supernovaer"
 
 #: plugins/Supernovae/src/Supernovae.cpp:74
 msgid "This plugin allows you to see some bright historical supernovae."
 msgstr ""
+"Dette udvidelsesmodul lader dig se nogle lysstærke historiske supernovaer."
 
 #: plugins/Supernovae/src/Supernovae.cpp:148
 msgid "Historical Supernovae configuration window"
-msgstr ""
+msgstr "Opsætning af Historiske supernovaer"
 
 #: plugins/Supernovae/src/Supernova.cpp:127
 msgid "supernova"
-msgstr ""
+msgstr "supernova"
 
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
 #: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:278
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Lysstyrke: <b>%1</b> (med ekstinktion: <b>%2</b>)"
 
 #: plugins/Supernovae/src/Supernova.cpp:142
 #, qt-format
 msgid "Type of supernova: %1"
-msgstr ""
+msgstr "Supernovatype: %1"
 
 #: plugins/Supernovae/src/Supernova.cpp:143 plugins/Novae/src/Nova.cpp:149
 #, qt-format
@@ -9740,7 +9830,7 @@ msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
 msgid "Historical Supernovae Plug-in"
-msgstr ""
+msgstr "Udvidelsesmodulet Historiske supernovaer"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 msgid "This plugin allows you to see some bright historical supernovae: "
@@ -9804,15 +9894,15 @@ msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:215
 msgid "Historical supernovae is updated"
-msgstr ""
+msgstr "Historiske supernovaer er opdateret"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:229
 msgid "Historical Supernovae Configuration"
-msgstr ""
+msgstr "Opsætning af Historiske supernovaer"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:230
 msgid "Historical Supernovae Plug-in Configuration"
-msgstr ""
+msgstr "Opsætning af udvidelsesmodulet Historiske supernovaer"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:232
 #: plugins/Novae/src/ui_novaeDialog.h:235
@@ -11334,7 +11424,7 @@ msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:197
 msgid "Circumpolar."
-msgstr ""
+msgstr "Cirkumpolar."
 
 #: plugins/Observability/src/Observability.cpp:198
 msgid "No rise."
@@ -12607,7 +12697,7 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:175
 msgid "Custom position"
-msgstr ""
+msgstr "Tilpasset placering"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:196
 msgid "Right ascension/Declination (J2000.0)"
@@ -12619,11 +12709,11 @@ msgstr "Rektascension/deklination"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:199
 msgid "Ecliptic Longitude/Latitude"
-msgstr ""
+msgstr "Ekliptisk længde/bredde"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:200
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
-msgstr ""
+msgstr "Ekliptisk længde/bredde (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:202
 msgid "Galactic Longitude/Latitude"
@@ -12631,7 +12721,7 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:232
 msgid "Coordinates of custom position:"
-msgstr ""
+msgstr "Koordinater for tilpasset placering:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:280
 msgid "Enable display of coordinates at startup"
@@ -13160,11 +13250,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:237
 msgid "Show Line for Equinox"
-msgstr ""
+msgstr "Vis jævndøgnslinje"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:238
 msgid "Show Line for Solstices"
-msgstr ""
+msgstr "Vis linje for solhverv"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:239
 msgid "Show Line for Crossquarter"
@@ -13216,11 +13306,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1151
 msgid "Equinox"
-msgstr ""
+msgstr "Jævndøgn"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1154
 msgid "Solstice"
-msgstr ""
+msgstr "Solhverv"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1157
 msgid "Crossquarter"
@@ -13336,11 +13426,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:351
 msgid "Select color for equinox line"
-msgstr ""
+msgstr "Vælg farve for jævndøgnslinje"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:362
 msgid "Select color for solstice lines"
-msgstr ""
+msgstr "Vælg farve for solhvervslinjer"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:373
 msgid "Select color for crossquarter lines"
@@ -13421,7 +13511,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:486
 msgid "Change color"
-msgstr ""
+msgstr "Ændr farve"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:489
 msgid "Declination of Nadir passage"
@@ -13470,7 +13560,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:508
 msgid "Solstice Lines"
-msgstr ""
+msgstr "Solhvervslinjer"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:509
 msgid "Current Moon"
@@ -13490,7 +13580,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:513
 msgid "Equinox line (Equator)"
-msgstr ""
+msgstr "Jævndøgnslinje (Ækvator)"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:514
 msgid "Current Sun"
