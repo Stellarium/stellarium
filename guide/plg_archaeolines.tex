@@ -131,10 +131,10 @@ observing a prayer direction towards a particular location.  Azimuth
 lines for two locations can be shown, these lines indicate the great
 circle direction towards the locations which can be edited in the
 configuration window. Default locations are Mecca (Kaaba) and
-Jerusalem.  The directions towards a location $T=(\lambda_T,
+Jerusalem.  The azimuth $q$ towards a location $T=(\lambda_T,
 \varphi_T)$ are computed for an observer at $O=(\lambda_O, \varphi_O)$
 based on spherical trigonometry on a spherical
-Earth\cite{Abdali:1997}:
+Earth~\cite{Abdali:1997}:
 \begin{equation}
   \label{eq:qibla}
   q=\arctan\left(\frac{\sin (\lambda_{T} - \lambda_O) } { \cos\varphi_O \tan\varphi_T - sin \varphi_O \cos(\lambda_{T} - \lambda_O) }\right)
@@ -155,7 +155,7 @@ of interest to you.
 %been important. Also Venus or other planets may appear useful.
 %
 In addition, you can select the color of the lines by clicking on the
-color swatches.\footnote{Unfortunately, on Windows, the color dialog hides
+color swatches.\footnote{Unfortunately, on Windows in OpenGL mode, the color dialog hides
 behind the Stellarium window when in fullscreen mode. So, before
 editing line colors, please leave fullscreen mode!}
 
