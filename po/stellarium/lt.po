@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-09 00:22+0700\n"
-"PO-Revision-Date: 2015-12-20 22:44+0000\n"
-"Last-Translator: Mantas Kriaučiūnas <mantas@akl.lt>\n"
+"PO-Revision-Date: 2016-07-13 04:30+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-12 05:27+0000\n"
+"X-Launchpad-Export-Date: 2016-07-13 05:15+0000\n"
 "X-Generator: Launchpad (build 18115)\n"
 
 #: src/core/modules/Constellation.cpp:297 src/core/modules/Nebula.cpp:189
@@ -30,7 +30,7 @@ msgstr "Tipas: <b>%1</b>"
 
 #: src/core/modules/Constellation.cpp:297
 msgid "constellation"
-msgstr ""
+msgstr "žvaigždynas"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:412
 #: src/core/modules/GridLinesMgr.cpp:950 src/core/modules/LandscapeMgr.cpp:414
@@ -604,7 +604,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1074
 msgid "galaxy"
-msgstr ""
+msgstr "galaktika"
 
 #: src/core/modules/Nebula.cpp:1077
 msgid "active galaxy"
@@ -640,11 +640,11 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1101
 msgid "planetary nebula"
-msgstr ""
+msgstr "planetiškasis ūkas"
 
 #: src/core/modules/Nebula.cpp:1104
 msgid "dark nebula"
-msgstr ""
+msgstr "tamsusis ūkas"
 
 #: src/core/modules/Nebula.cpp:1107
 msgid "cluster associated with nebulosity"
@@ -668,7 +668,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1122
 msgid "supernova remnant"
-msgstr ""
+msgstr "supernovos liekanos"
 
 #: src/core/modules/Nebula.cpp:1125
 msgid "stellar association"
@@ -977,7 +977,7 @@ msgstr ""
 
 #: src/core/modules/MilkyWay.cpp:75
 msgid "Milky Way"
-msgstr ""
+msgstr "Paukščių Taką"
 
 #: src/core/modules/ZodiacalLight.cpp:81
 msgid "Zodiacal Light"
@@ -1639,7 +1639,7 @@ msgstr ""
 #: src/core/StelObject.cpp:123 src/core/StelObject.cpp:125
 #: src/core/StelObject.cpp:133 src/core/StelObject.cpp:135
 msgid "RA/Dec"
-msgstr ""
+msgstr "Rektascensija/Deklinacija"
 
 #: src/core/StelObject.cpp:154 src/core/StelObject.cpp:157
 #: src/core/StelObject.cpp:167 src/core/StelObject.cpp:170
@@ -1863,11 +1863,11 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1256 src/gui/ConfigurationDialog.cpp:1265
 msgid "Available"
-msgstr ""
+msgstr "Prieinami"
 
 #: src/gui/ConfigurationDialog.cpp:1258 src/gui/ConfigurationDialog.cpp:1267
 msgid "Not Available"
-msgstr ""
+msgstr "Neprieinama"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1330
@@ -2173,7 +2173,7 @@ msgstr "OSX programuotojas: %1"
 #: plugins/Oculars/src/gui/OcularDialog.cpp:550
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
 msgid "Contributors"
-msgstr ""
+msgstr "Pagalbininkai"
 
 #: src/gui/HelpDialog.cpp:320
 #, qt-format
@@ -2509,7 +2509,7 @@ msgstr ""
 #: src/gui/SearchDialog.cpp:209
 msgctxt "coordinate system"
 msgid "Equatorial"
-msgstr ""
+msgstr "Pausiaujinės"
 
 #: src/gui/SearchDialog.cpp:210
 msgctxt "coordinate system"
@@ -2519,12 +2519,12 @@ msgstr ""
 #: src/gui/SearchDialog.cpp:211
 msgctxt "coordinate system"
 msgid "Galactic"
-msgstr ""
+msgstr "Galaktika"
 
 #: src/gui/SearchDialog.cpp:212
 msgctxt "coordinate system"
 msgid "Ecliptic"
-msgstr ""
+msgstr "Ekliptika"
 
 #: src/gui/SearchDialog.cpp:213
 msgctxt "coordinate system"
@@ -2537,29 +2537,29 @@ msgstr ""
 
 #: src/gui/SearchDialog.cpp:244
 msgid "Declination"
-msgstr ""
+msgstr "Deklinacija"
 
 #: src/gui/SearchDialog.cpp:252
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:945
 msgid "Azimuth"
-msgstr ""
+msgstr "Azimutas"
 
 #: src/gui/SearchDialog.cpp:255
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
 msgid "Altitude"
-msgstr ""
+msgstr "Aukštis"
 
 #: src/gui/SearchDialog.cpp:265
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:480
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:515
 msgid "Longitude"
-msgstr ""
+msgstr "Ilguma"
 
 #: src/gui/SearchDialog.cpp:268
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:479
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:516
 msgid "Latitude"
-msgstr ""
+msgstr "Platuma"
 
 #: src/gui/SearchDialog.cpp:580
 msgid "Simbad Lookup Error"
@@ -2652,45 +2652,45 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:399
 msgid "10 minutes"
-msgstr ""
+msgstr "10 minučių"
 
 #: src/gui/AstroCalcDialog.cpp:400
 msgid "1 hour"
-msgstr ""
+msgstr "1 valandai"
 
 #: src/gui/AstroCalcDialog.cpp:401
 msgid "1 day"
-msgstr ""
+msgstr "1 diena"
 
 #: src/gui/AstroCalcDialog.cpp:402
 msgid "5 days"
-msgstr ""
+msgstr "5 dienos"
 
 #: src/gui/AstroCalcDialog.cpp:403
 msgid "10 days"
-msgstr ""
+msgstr "10 dienų"
 
 #: src/gui/AstroCalcDialog.cpp:404
 msgid "15 days"
-msgstr ""
+msgstr "15 dienos"
 
 #: src/gui/AstroCalcDialog.cpp:405
 msgid "30 days"
-msgstr ""
+msgstr "30 dienos"
 
 #: src/gui/AstroCalcDialog.cpp:406
 msgid "60 days"
-msgstr ""
+msgstr "60 dienos"
 
 #: src/gui/AstroCalcDialog.cpp:454
 msgid "Solar system"
-msgstr ""
+msgstr "Saulės sistemą"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:456 src/translations.h:70
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
-msgstr ""
+msgstr "Asteroidai"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:457 src/translations.h:74
@@ -2701,7 +2701,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:458 src/translations.h:68
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
-msgstr ""
+msgstr "Kometos"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:459 src/translations.h:76
@@ -2737,11 +2737,11 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:635
 msgid "Conjunction"
-msgstr ""
+msgstr "Jungtis"
 
 #: src/gui/AstroCalcDialog.cpp:639
 msgid "Opposition"
-msgstr ""
+msgstr "Opozicija"
 
 #: src/gui/BookmarksDialog.cpp:95 src/ui_searchDialogGui.h:699
 msgid "Object"
@@ -2911,12 +2911,12 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:95
 msgid "Nebulae"
-msgstr ""
+msgstr "Ūkai"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:97
 msgid "Planetary nebulae"
-msgstr ""
+msgstr "Planetiškasis ūkas"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:99
@@ -3216,7 +3216,7 @@ msgstr "Mėnulis"
 #. TRANSLATORS: Landscape name: Hurricane Ridge
 #: src/translations.h:212
 msgid "Hurricane"
-msgstr ""
+msgstr "Uraganas"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:214
@@ -3850,7 +3850,7 @@ msgstr "Serbija ir Juodkalnija"
 
 #: src/translations.h:403
 msgid "Montenegro"
-msgstr ""
+msgstr "Juodkalnija"
 
 #: src/translations.h:404
 msgid "Cuba"
@@ -4138,7 +4138,7 @@ msgstr "Kazachstanas"
 
 #: src/translations.h:475
 msgid "Lao"
-msgstr ""
+msgstr "Laosiečių kalba"
 
 #: src/translations.h:476
 msgid "Lebanon"
@@ -4606,7 +4606,7 @@ msgstr "Majotas"
 
 #: src/translations.h:592
 msgid "Yugoslavia"
-msgstr ""
+msgstr "Jugoslavija"
 
 #: src/translations.h:593
 msgid "South Africa"
@@ -4622,23 +4622,23 @@ msgstr "Zimbabvė"
 
 #: src/translations.h:599
 msgid "&Undo"
-msgstr ""
+msgstr "&Atšaukti"
 
 #: src/translations.h:600
 msgid "&Redo"
-msgstr ""
+msgstr "&Atlikti iš naujo"
 
 #: src/translations.h:601
 msgid "Cu&t"
-msgstr ""
+msgstr "Iškir&pti"
 
 #: src/translations.h:602
 msgid "&Copy"
-msgstr ""
+msgstr "&Kopijuoti"
 
 #: src/translations.h:603
 msgid "&Paste"
-msgstr ""
+msgstr "&Įklijuoti"
 
 #: src/translations.h:604 src/ui_locationDialogGui.h:432
 #: plugins/Oculars/src/ui_ocularDialog.h:1189
@@ -4650,11 +4650,11 @@ msgstr "Pašalinti"
 
 #: src/translations.h:605
 msgid "Select All"
-msgstr ""
+msgstr "Pasirinkti visus"
 
 #: src/translations.h:606
 msgid "Look in:"
-msgstr ""
+msgstr "Kur žiūrėti:"
 
 #: src/translations.h:607
 msgid "Directory:"
@@ -4679,7 +4679,7 @@ msgstr "Failų tipai:"
 
 #: src/translations.h:612
 msgid "Date Modified"
-msgstr ""
+msgstr "Koregavimo data"
 
 #: src/translations.h:613
 msgid "Directories"
@@ -4691,27 +4691,27 @@ msgstr "Kompiuteris"
 
 #: src/translations.h:615
 msgid "&Open"
-msgstr ""
+msgstr "&Atidaryti"
 
 #: src/translations.h:616
 msgid "File &name:"
-msgstr ""
+msgstr "Failo &vardas:"
 
 #: src/translations.h:617
 msgid "Copy &Link Location"
-msgstr ""
+msgstr "Kopijuoti &nuorodos adresą"
 
 #: src/translations.h:618
 msgid "Abort"
-msgstr ""
+msgstr "Nutraukti"
 
 #: src/translations.h:619
 msgid "Ignore"
-msgstr ""
+msgstr "Nepaisyti"
 
 #: src/translations.h:620
 msgid "&Basic colors"
-msgstr ""
+msgstr "&Pagrindinės spalvos"
 
 #: src/translations.h:621
 msgid "Pick Screen Color"
@@ -4719,11 +4719,11 @@ msgstr ""
 
 #: src/translations.h:622
 msgid "&Custom colors"
-msgstr ""
+msgstr "&Darbo spalvos"
 
 #: src/translations.h:623
 msgid "&Add to Custom Colors"
-msgstr ""
+msgstr "Įtraukti į &savadarbes spalvas"
 
 #: src/translations.h:624
 msgid "Hu&e:"
@@ -4739,19 +4739,19 @@ msgstr ""
 
 #: src/translations.h:627
 msgid "&Red:"
-msgstr ""
+msgstr "&Raudona:"
 
 #: src/translations.h:628
 msgid "&Green:"
-msgstr ""
+msgstr "&Žalia:"
 
 #: src/translations.h:629
 msgid "Bl&ue:"
-msgstr ""
+msgstr "&Mėlyna:"
 
 #: src/translations.h:630
 msgid "Select Color"
-msgstr ""
+msgstr "Pasirinkti spalvą"
 
 #: src/translations.h:631
 #, qt-format
@@ -4764,7 +4764,7 @@ msgstr ""
 
 #: src/ui_dateTimeDialogGui.h:382 src/ui_dateTimeDialogGui.h:387
 msgid "Julian Day"
-msgstr ""
+msgstr "Julijaus diena"
 
 #: src/ui_dateTimeDialogGui.h:385
 msgid "Modified Julian Day"
@@ -5268,11 +5268,11 @@ msgstr "Kita"
 
 #: src/ui_viewDialog.h:1717
 msgid "Planetary Nebulae"
-msgstr ""
+msgstr "Planetiškieji ūkai"
 
 #: src/ui_viewDialog.h:1718
 msgid "Galaxies"
-msgstr ""
+msgstr "Galaktikos"
 
 #: src/ui_viewDialog.h:1720
 msgid "Dark Nebulae"
@@ -6239,7 +6239,7 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:378
 msgid "Cursor position"
-msgstr ""
+msgstr "Žymiklio pozicija"
 
 #: src/ui_scriptConsole.h:380
 msgid "Include dir:"
@@ -6247,7 +6247,7 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:381 plugins/TelescopeControl/src/ui_slewDialog.h:327
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: src/ui_astroCalcDialog.h:377
 msgid "Planetary positions every 5 minutes."
@@ -6264,12 +6264,12 @@ msgstr ""
 #: src/ui_astroCalcDialog.h:383 src/ui_astroCalcDialog.h:392
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
-msgstr ""
+msgstr "Nuo:"
 
 #: src/ui_astroCalcDialog.h:385 src/ui_astroCalcDialog.h:394
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
-msgstr ""
+msgstr "Kam:"
 
 #: src/ui_astroCalcDialog.h:387
 msgid "Calculate ephemeris"
@@ -6285,11 +6285,11 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:390
 msgid "Between objects:"
-msgstr ""
+msgstr "Tarp objektų:"
 
 #: src/ui_astroCalcDialog.h:391
 msgid "and"
-msgstr ""
+msgstr "ir"
 
 #: src/ui_astroCalcDialog.h:393 src/ui_astroCalcDialog.h:395
 msgid "yyyy.MM.dd"
@@ -6297,7 +6297,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:396
 msgid "Maximum allowed separation:"
-msgstr ""
+msgstr "Didžiausias leistinas išsiskyrimas:"
 
 #: src/ui_astroCalcDialog.h:398
 msgid "Value in decimal degrees"
@@ -6317,7 +6317,7 @@ msgstr ""
 
 #: src/ui_bookmarksDialog.h:174
 msgid "Bookmarks"
-msgstr ""
+msgstr "Žymelės"
 
 #: src/ui_bookmarksDialog.h:176
 msgid "Add date and time"
@@ -6333,15 +6333,15 @@ msgstr ""
 
 #: src/ui_bookmarksDialog.h:181
 msgid "&Add bookmark"
-msgstr ""
+msgstr "&Pridėti žymę"
 
 #: src/ui_bookmarksDialog.h:182
 msgid "&Remove bookmark"
-msgstr ""
+msgstr "Ša&linti žymę"
 
 #: src/ui_bookmarksDialog.h:183
 msgid "Clear bookmarks"
-msgstr ""
+msgstr "Išvalyti žymes"
 
 #: src/ui_bookmarksDialog.h:184
 msgid "&Go to..."
@@ -7051,7 +7051,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:567
 msgid "Hot Keys"
-msgstr ""
+msgstr "Karštieji klavišai"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:568
 msgid "The plug-in's key bindings can be edited in the General Tab."
