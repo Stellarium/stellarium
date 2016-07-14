@@ -429,9 +429,15 @@ void AstroCalcDialog::populateMajorPlanetList()
 	//data. Unfortunately, there's no other way to do this than with a cycle.
 	foreach(const PlanetP& planet, planets)
 	{
-		if (planet->getPlanetType()==Planet::isPlanet && planet->getEnglishName()!=core->getCurrentPlanet()->getEnglishName())
+		// major planets and the Sun
+		if ((planet->getPlanetType()==Planet::isPlanet || planet->getPlanetType()==Planet::isStar) && planet->getEnglishName()!=core->getCurrentPlanet()->getEnglishName())
 			majorPlanet->addItem(trans.qtranslate(planet->getNameI18n()), planet->getEnglishName());
-	}
+
+		// the moons of current planet
+		if (planet->getPlanetType()==Planet::isMoon && planet->getEnglishName()!=core->getCurrentPlanet()->getEnglishName() && planet->getParent()==core->getCurrentPlanet())
+			majorPlanet->addItem(trans.qtranslate(planet->getNameI18n()), planet->getEnglishName());
+
+	}	
 	//Restore the selection
 	index = majorPlanet->findData(selectedPlanetId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
