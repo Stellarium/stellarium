@@ -86,8 +86,13 @@ typedef Matrix3<float> Mat3f;
 template<class T> class Vector2
 {
 public:
+	//! The vector is not initialized!
 	inline Vector2();
+	//! Sets all components of the vector to the same value
 	inline Vector2(T);
+	//! Explicit conversion constructor from an array (copies values)
+	//! @warning Does not check array size, make sure it has at least 2 elements
+	inline explicit Vector2(const T*);
 	inline Vector2(T, T);
 
 	inline Vector2& operator=(const T*);
@@ -132,11 +137,14 @@ public:
 template<class T> class Vector3
 {
 public:
+	//! The vector is not initialized!
 	inline Vector3();
-	//inline Vector3(const Vector3&);
-	//template <class T2> inline Vector3(const Vector3<T2>&);
-	inline Vector3(T, T, T);
+	//! Sets all components of the vector to the same value
 	inline Vector3(T);
+	//! Explicit conversion constructor from an array (copies values)
+	//! @warning Does not check array size, make sure it has at least 3 elements
+	inline explicit Vector3(const T*);
+	inline Vector3(T, T, T);
 
 	//inline Vector3& operator=(const Vector3&);
 	inline Vector3& operator=(const T*);
@@ -206,8 +214,14 @@ public:
 template<class T> class Vector4
 {
 public:
+	//! The vector is not initialized!
 	inline Vector4();
+	//! Explicit conversion constructor from an array
+	//! @warning Does not check array size, make sure it has at least 4 elements
+	inline explicit Vector4(const T*);
+	//! Creates an Vector4 with xyz set to the given Vector3, and w set to 1.0
 	inline Vector4(const Vector3<T>&);
+	//! Creates an Vector4 with xyz set to the given values, and w set to 1.0
 	inline Vector4(T, T, T);
 	inline Vector4(T, T, T, T);
 
@@ -403,6 +417,11 @@ template<class T> Vector2<T>::Vector2(T x)
         v[0]=x; v[1]=x;
 }
 
+template<class T> Vector2<T>::Vector2(const T* x)
+{
+	v[0]=x[0]; v[1]=x[1];
+}
+
 template<class T> Vector2<T>::Vector2(T x, T y)
 {
 	v[0]=x; v[1]=y;
@@ -548,6 +567,11 @@ template<class T> Vector3<T>::Vector3() {}
 template<class T> Vector3<T>::Vector3(T x)
 {
 	v[0]=x; v[1]=x; v[2]=x;
+}
+
+template<class T> Vector3<T>::Vector3(const T* x)
+{
+	v[0]=x[0]; v[1]=x[1]; v[2]=x[2];
 }
 
 template<class T> Vector3<T>::Vector3(T x, T y, T z)
@@ -755,6 +779,11 @@ template<class T> T Vector3<T>::longitude() const
 ////////////////////////// Vector4 class methods ///////////////////////////////
 
 template<class T> Vector4<T>::Vector4() {}
+
+template<class T> Vector4<T>::Vector4(const T* x)
+{
+	v[0]=x[0]; v[1]=x[1]; v[2]=x[2]; v[3]=x[3];
+}
 
 template<class T> Vector4<T>::Vector4(const Vector3<T>& a)
 {
@@ -1614,6 +1643,33 @@ Q_DECLARE_METATYPE(Mat4d)
 Q_DECLARE_METATYPE(Mat4f)
 Q_DECLARE_METATYPE(Mat3d)
 Q_DECLARE_METATYPE(Mat3f)
+
+template <class T>
+QDebug operator<<(QDebug debug, const Vector2<T> &c)
+{
+    QDebugStateSaver saver(debug);
+    debug.nospace() << '[' << c[0] << ", " << c[1] << ']';
+
+    return debug;
+}
+
+template <class T>
+QDebug operator<<(QDebug debug, const Vector3<T> &c)
+{
+    QDebugStateSaver saver(debug);
+    debug.nospace() << '[' << c[0] << ", " << c[1] << ", " << c[2] << ']';
+
+    return debug;
+}
+
+template <class T>
+QDebug operator<<(QDebug debug, const Vector4<T> &c)
+{
+    QDebugStateSaver saver(debug);
+    debug.nospace() << '[' << c[0] << ", " << c[1] << ", " << c[2] << ", " << c[3] << ']';
+
+    return debug;
+}
 
 
 //! Provide Qt 3x3 matrix-vector multiplication, which does not exist for some reason

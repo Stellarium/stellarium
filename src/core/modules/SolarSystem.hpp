@@ -75,8 +75,6 @@ class SolarSystem : public StelObjectModule
 		   READ getFlagTranslatedNames
 		   WRITE setFlagTranslatedNames
 		   NOTIFY flagTranslatedNamesChanged)
-
-	//StelProperties
 	Q_PROPERTY(bool planetsDisplayed
 		   READ getFlagPlanets
 		   WRITE setFlagPlanets
@@ -96,6 +94,11 @@ class SolarSystem : public StelObjectModule
 		   READ getFlagLightTravelTime
 		   WRITE setFlagLightTravelTime
 		   NOTIFY flagLightTravelTimeChanged
+		   )
+	Q_PROPERTY(bool flagUseObjModels
+		   READ getFlagUseObjModels
+		   WRITE setFlagUseObjModels
+		   NOTIFY flagUseObjModelsChanged
 		   )
 	Q_PROPERTY(bool flagMoonScale
 		   READ getFlagMoonScale
@@ -214,6 +217,11 @@ public slots:
 	//! Get the current value of the flag which determines if light travel time
 	//! calculation is used or not.
 	bool getFlagLightTravelTime(void) const {return flagLightTravelTime;}
+
+	//! Set flag whether to use OBJ models for rendering, where available
+	void setFlagUseObjModels(bool b) { if(b!=flagUseObjModels) { flagUseObjModels = b; emit flagUseObjModelsChanged(b); } }
+	//! Get the current value of the flag which determines wether to use OBJ models for rendering, where available
+	bool getFlagUseObjModels(void) const { return flagUseObjModels; }
 
 	//! Set planet names font size.
 	//! @return font size
@@ -381,6 +389,7 @@ signals:
 	void flagIsolatedOrbitsChanged(bool b);
 	void flagIsolatedTrailsChanged(bool b);
 	void flagLightTravelTimeChanged(bool b);
+	void flagUseObjModelsChanged(bool b);
 	void flagMoonScaleChanged(bool b);
 	void moonScaleChanged(double f);
 	void labelsAmountChanged(double f);
@@ -494,6 +503,7 @@ private:
 	// Master settings
 	bool flagOrbits;
 	bool flagLightTravelTime;
+	bool flagUseObjModels;
 
 	//! The selection pointer texture.
 	StelTextureSP texPointer;

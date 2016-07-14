@@ -67,6 +67,7 @@ SolarSystem::SolarSystem()
 	, labelsAmount(false)
 	, flagOrbits(false)
 	, flagLightTravelTime(true)
+	, flagUseObjModels(false)
 	, flagShow(false)
 	, flagPointer(false)
 	, flagNativeNames(false)
@@ -152,6 +153,7 @@ void SolarSystem::init()
 	setLabelsAmount(conf->value("astro/labels_amount", 3.).toFloat());
 	setFlagOrbits(conf->value("astro/flag_planets_orbits").toBool());
 	setFlagLightTravelTime(conf->value("astro/flag_light_travel_time", true).toBool());
+	setFlagUseObjModels(conf->value("astro/flag_use_obj_models", false).toBool());
 	setFlagPointer(conf->value("astro/flag_planets_pointers", true).toBool());
 	// Set the algorithm from Astronomical Almanac for computation of apparent magnitudes for
 	// planets in case  observer on the Earth by default
@@ -864,6 +866,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 						    StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
 						    pd.value(secname+"/albedo").toFloat(),
 						    pd.value(secname+"/tex_map").toString(),
+						    pd.value(secname+"/model").toString(),
 						    posfunc,
 						    userDataPtr,
 						    osculatingFunc,
@@ -908,22 +911,23 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		else if (type == "comet")
 		{
 			p = PlanetP(new Comet(englishName,
-			               pd.value(secname+"/lighting").toBool(),
-			               pd.value(secname+"/radius").toDouble()/AU,
-			               pd.value(secname+"/oblateness", 0.0).toDouble(),
-			               StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
-			               pd.value(secname+"/albedo").toFloat(),
-			               pd.value(secname+"/tex_map").toString(),
-			               posfunc,
-			               userDataPtr,
-			               osculatingFunc,
-			               closeOrbit,
-						   pd.value(secname+"/hidden", 0).toBool(),
-						   type,
-						   pd.value(secname+"/dust_widthfactor", 1.5f).toFloat(),
-						   pd.value(secname+"/dust_lengthfactor", 0.4f).toFloat(),
-						   pd.value(secname+"/dust_brightnessfactor", 1.5f).toFloat()
-						  ));
+					      pd.value(secname+"/lighting").toBool(),
+					      pd.value(secname+"/radius").toDouble()/AU,
+					      pd.value(secname+"/oblateness", 0.0).toDouble(),
+					      StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
+					      pd.value(secname+"/albedo").toFloat(),
+					      pd.value(secname+"/tex_map").toString(),
+					      pd.value(secname+"/model").toString(),
+					      posfunc,
+					      userDataPtr,
+					      osculatingFunc,
+					      closeOrbit,
+					      pd.value(secname+"/hidden", 0).toBool(),
+					      type,
+					      pd.value(secname+"/dust_widthfactor", 1.5f).toFloat(),
+					      pd.value(secname+"/dust_lengthfactor", 0.4f).toFloat(),
+					      pd.value(secname+"/dust_brightnessfactor", 1.5f).toFloat()
+					      ));
 
 			QSharedPointer<Comet> mp =  p.dynamicCast<Comet>();
 
@@ -963,6 +967,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       pd.value(secname+"/albedo").toFloat(),
 					       pd.value(secname+"/tex_map").toString(),
 					       pd.value(secname+"/normals_map", normalMapName).toString(),
+					       pd.value(secname+"/model").toString(),
 					       posfunc,
 					       userDataPtr,
 					       osculatingFunc,

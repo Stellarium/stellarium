@@ -32,7 +32,8 @@ Q_LOGGING_CATEGORY(stelOBJ,"stel.OBJ")
 
 StelOBJ::StelOBJ()
 {
-
+	qDebug()<<"sizeof(Vertex)"<<sizeof(Vertex);
+	qDebug()<<"alignof(Vertex)"<<__alignof(Vertex);
 }
 
 StelOBJ::~StelOBJ()
@@ -42,12 +43,8 @@ StelOBJ::~StelOBJ()
 
 void StelOBJ::clear()
 {
-	m_objectMap.clear();
-	m_objects.clear();
-	m_materialMap.clear();
-	m_materials.clear();
-	m_indices.clear();
-	m_vertices.clear();
+	//just create a new object
+	*this = StelOBJ();
 }
 
 bool StelOBJ::load(const QString& filename)
@@ -628,7 +625,7 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath)
 		}
 	}
 
-	//finished loading, squeeze the arrays to save memory
+	//finished loading, squeeze the arrays to save some memory
 	m_vertices.squeeze();
 	m_indices.squeeze();
 
@@ -637,7 +634,65 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath)
 		posList.size(), normalList.size(), texList.size(), m_materials.size());
 	qCDebug(stelOBJ, "Created %d vertices, %d faces, %d objects", m_vertices.size(), getFaceCount(), m_objects.size());
 
-
 	device.close();
+
+	//perform post processing
+	performPostProcessing();
 	return true;
+}
+
+void StelOBJ::Object::postprocess(const StelOBJ &obj, Vec3d &centroid)
+{
+	const VertexList& vList = obj.getVertexList();
+	const IndexList& iList = obj.getIndexList();
+
+	int idxCnt = 0;
+
+	//iterate through the groups
+	for(int i =0;i<groups.size();++i)
+	{
+		MaterialGroup& grp = groups[i];
+		Vec3d accVertex(0.);
+
+		Q_ASSERT(grp.indexCount > 0);
+
+		//iterate through the vertices of the group
+		for(int idx = grp.startIndex;idx<(grp.startIndex+grp.indexCount);++idx)
+		{
+			const Vertex& v = vList.at(iList.at(idx));
+			Vec3f pos(v.position);
+			grp.boundingbox.expand(pos);
+			accVertex+=pos.toVec3d();
+			centroid+=pos.toVec3d();
+		}
+		boundingbox.expand(grp.boundingbox);
+		grp.centroid = (accVertex / grp.indexCount).toVec3f();
+
+		idxCnt += grp.indexCount;
+	}
+	Q_ASSERT(idxCnt>0);
+	//only do 1 division for more accuracy
+	centroid /= idxCnt;
+	this->centroid = centroid.toVec3f();
+}
+
+void StelOBJ::performPostProcessing()
+{
+	QElapsedTimer timer;
+	timer.start();
+
+	Vec3d accCentroid(0.);
+	for(int i =0;i<m_objects.size();++i)
+	{
+		Vec3d centr(0.);
+		Object& o = m_objects[i];
+
+		o.postprocess(*this,centr);
+		m_bbox.expand(o.boundingbox);
+		accCentroid+=centr;
+	}
+
+	m_centroid = (accCentroid / m_objects.size()).toVec3f();
+	qCDebug(stelOBJ)<<"Postprocessing done in"<<timer.elapsed()<<"ms";
+	qCDebug(stelOBJ)<<"Centroid is at "<<m_centroid;
 }

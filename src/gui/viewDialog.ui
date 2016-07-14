@@ -742,6 +742,16 @@
               <number>0</number>
              </property>
              <item>
+              <widget class="QCheckBox" name="planetUseObjModelsCheckBox">
+               <property name="toolTip">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Uses a polygonal 3D model for some selected subplanetary objects (small moons, asteroids, comets) instead of a spherical approximation&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
+               <property name="text">
+                <string>Use more accurate 3D models (where available)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QCheckBox" name="planetMarkerCheckBox">
                <property name="text">
                 <string>Show planet markers</string>

@@ -77,6 +77,7 @@ Planet::Planet(const QString& englishName,
 	       float albedo,
 	       const QString& atexMapName,
 	       const QString& anormalMapName,
+	       const QString& aobjModelName,
 	       posFuncType coordFunc,
 	       void* auserDataPtr,
 	       OsculatingFunctType *osculatingFunc,
@@ -121,6 +122,8 @@ Planet::Planet(const QString& englishName,
 	rotLocalToParent = Mat4d::identity();
 	texMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 	normalMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+normalMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	//the OBJ is lazily loaded when first required
+	objModelPath = StelFileMgr::findFile("/models/"+aobjModelName);
 
 	nameI18 = englishName;
 	nativeName = "";
@@ -1164,7 +1167,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		screenSz+=125.f;
 	float viewport_left = prj->getViewportPosX();
 	float viewport_bottom = prj->getViewportPosY();
-	if ((prj->project(Vec3d(0), screenPos)
+	if ((prj->project(Vec3d(0.), screenPos)
 	     && screenPos[1]>viewport_bottom - screenSz && screenPos[1] < viewport_bottom + prj->getViewportHeight()+screenSz
 	     && screenPos[0]>viewport_left - screenSz && screenPos[0] < viewport_left + prj->getViewportWidth() + screenSz)
 	     || permanentDrawingOrbits)
@@ -1506,7 +1509,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		if (flagLighting)
 		{
 			// Set the main source of light to be the sun
-			Vec3d sunPos(0);
+			Vec3d sunPos(0.);
 			core->getHeliocentricEclipticModelViewTransform()->forward(sunPos);
 			light.position=Vec4f(sunPos[0],sunPos[1],sunPos[2],1.f);
 

@@ -113,6 +113,7 @@ public:
 	       float albedo,
 	       const QString& texMapName,
 	       const QString& normalMapName,
+	       const QString& objModelName,
 	       posFuncType _coordFunc,
 	       void* userDataPtr,
 	       OsculatingFunctType *osculatingFunc,
@@ -335,6 +336,8 @@ protected:
 					 // For Earth, this should be Greenwich Mean Sidereal Time GMST.
 	StelTextureSP texMap;            // Planet map texture
 	StelTextureSP normalMap;         // Planet normal map texture
+
+	QString objModelPath;
 
 	Ring* rings;                     // Planet rings
 	double distance;                 // Temporary variable used to store the distance to a given point

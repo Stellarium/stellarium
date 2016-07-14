@@ -197,6 +197,7 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->planetIsolatedOrbitCheckBox, "SolarSystem.flagIsolatedOrbits");
 	connectBoolProperty(ui->planetIsolatedTrailsCheckBox, "SolarSystem.flagIsolatedTrails");
 	connectBoolProperty(ui->planetLightSpeedCheckBox, "SolarSystem.flagLightTravelTime");
+	connectBoolProperty(ui->planetUseObjModelsCheckBox, "SolarSystem.flagUseObjModels");
 
 	// NEW SECTION FROM TRUNK: GreatRedSpot (Jupiter)
 	// TODO: put under Properties system!
