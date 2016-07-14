@@ -20,7 +20,7 @@
 #ifndef _STELOBJ_HPP_
 #define _STELOBJ_HPP_
 
-#include "VecMath.hpp"
+#include "GeomMath.hpp"
 
 #include <qopengl.h>
 #include <QLoggingCategory>
@@ -51,6 +51,7 @@ public:
 		//! The vertex bitangent
 		GLfloat bitangent[3];
 
+		//! Checks if the 2 vertices correspond to the same data using memcmp
 		bool operator==(const Vertex& b) const { return !memcmp(this,&b,sizeof(Vertex)); }
 	};
 
@@ -102,9 +103,21 @@ public:
 		static QVector<Material> loadFromFile(const QString& filename);
 	};
 
+	//forward decl
+	struct Object;
+
 	//! Represents a bunch of faces following after each other
 	//! that use the same material
 	struct MaterialGroup{
+		MaterialGroup()
+			: startIndex(0),
+			  indexCount(0),
+			  objectIndex(-1),
+			  materialIndex(-1),
+			  centroid(0.)
+		{
+		}
+
 		//! The starting index in the index list
 		int startIndex;
 		//! The amount of indices after the start index which belong to this material group
@@ -114,12 +127,26 @@ public:
 		int objectIndex;
 		//! The index of the material that this group uses
 		int materialIndex;
+
+		//! The centroid of this group at load time
+		//! @note This is a very simple centroid calculation which simply accumulates all vertex positions
+		//! and divides by their number. Most notably, it does not take vertex density into account, so this may not
+		//! correspond to the geometric center/center of mass of the object
+		Vec3f centroid;
+		//! The AABB of this group at load time
+		AABBox boundingbox;
 	};
 
 	//! Represents an OBJ object as defined with the 'o' statement.
 	//! There is an default object for faces defined before any 'o' statement
 	struct Object
 	{
+		Object()
+			: isDefaultObject(false),
+			  centroid(0.)
+		{
+		}
+
 		//! True if this object was automatically generated because no 'o' statements
 		//! were before the first 'f' statement
 		bool isDefaultObject;
@@ -127,11 +154,19 @@ public:
 		//! The name of the object. May be empty
 		QString name;
 
-		//! The centroid of this object at load time
+		//! The centroid of this object at load time.
+		//! @note This is a very simple centroid calculation which simply accumulates all vertex positions
+		//! and divides by their number. Most notably, it does not take vertex density into account, so this may not
+		//! correspond to the geometric center/center of mass of the object
 		Vec3f centroid;
+		//! The AABB of this object at load time
+		AABBox boundingbox;
 
 		//! The list of material groups in this object
 		QVector<MaterialGroup> groups;
+	private:
+		void postprocess(const StelOBJ& obj, Vec3d& centroid);
+		friend class StelOBJ;
 	};
 
 	typedef QVector<Vertex> VertexList;
@@ -152,8 +187,17 @@ public:
 	//! always the index count divided by 3.
 	inline unsigned int getFaceCount() const { return m_indices.size() / 3; }
 
+	//! Returns an vertex list, suitable for loading into OpenGL arrays
 	inline const VertexList& getVertexList() const { return m_vertices; }
+	//! Returns an index list, suitable for use with OpenGL element arrays
 	inline const IndexList& getIndexList() const { return m_indices; }
+	//! Returns the global AABB of all vertices of the OBJ
+	inline const AABBox& getAABBox() const { return m_bbox; }
+	//! Returns the global centroid of all vertices of the OBJ.
+	//! @note This is a very simple centroid calculation which simply accumulates all vertex positions
+	//! and divides by their number. Most notably, it does not take vertex density into account, so this may not
+	//! correspond to the geometric center/center of mass of the object
+	inline const Vec3f& getCentroid() const { return m_centroid; }
 
 	//! Loads an .obj file by name. Supports .gz decompression, and
 	//! then calls load(QIODevice) for the actual loading.
@@ -190,6 +234,11 @@ private:
 	ObjectList m_objects;
 	ObjectMap m_objectMap;
 
+	//global bounding box
+	AABBox m_bbox;
+	//global centroid
+	Vec3f m_centroid;
+
 	//! Get or create the current parsed object
 	inline Object* getCurrentObject(CurrentParserState& state);
 	//! Get or create the current parsed material group
@@ -214,6 +263,10 @@ private:
 	inline static bool parseVec2(const ParseParams& params, T& out);
 	inline bool parseFace(const ParseParams& params, const V3Vec& posList, const V3Vec& normList, const V2Vec& texList,
 			      CurrentParserState &state, VertexCache& vertCache);
+
+	//! Performs post-processing steps, like finding centroids and bounding boxes
+	//! This is called after a model has been loaded
+	void performPostProcessing();
 };
 
 //! Implements the qHash method for the Vertex type

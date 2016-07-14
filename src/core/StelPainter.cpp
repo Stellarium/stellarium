@@ -701,11 +701,11 @@ void StelPainter::drawGreatCircleArc(const Vec3d& start, const Vec3d& stop, cons
 		 pt2=stop;
 		 if (clippingCap->clipGreatCircle(pt1, pt2))
 		 {
-			drawSmallCircleArc(pt1, pt2, Vec3d(0), viewportEdgeIntersectCallback, userData);
+			drawSmallCircleArc(pt1, pt2, Vec3d(0.), viewportEdgeIntersectCallback, userData);
 		 }
 		 return;
 	}
-	drawSmallCircleArc(start, stop, Vec3d(0), viewportEdgeIntersectCallback, userData);
+	drawSmallCircleArc(start, stop, Vec3d(0.), viewportEdgeIntersectCallback, userData);
  }
 
 /*************************************************************************

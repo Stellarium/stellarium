@@ -160,6 +160,8 @@ SET(stellarium_lib_SRCS
      core/StelPropertyMgr.cpp
      core/StelOBJ.hpp
      core/StelOBJ.cpp
+     core/GeomMath.hpp
+     core/GeomMath.cpp
 
      ${gl_lib_SRCS}
 

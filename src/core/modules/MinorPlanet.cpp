@@ -40,6 +40,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 			 Vec3f halocolor,
 			 float albedo,
 			 const QString& atexMapName,
+			 const QString& aobjModelName,
 			 posFuncType coordFunc,
 			 void* auserDataPtr,
 			 OsculatingFunctType *osculatingFunc,
@@ -54,6 +55,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 		  albedo,
 		  atexMapName,
 		  "",
+		  aobjModelName,
 		  coordFunc,
 		  auserDataPtr,
 		  osculatingFunc,
@@ -63,16 +65,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 		  true,  //Halo
 		  pTypeStr)
 {
-	texMapName = atexMapName;
-	lastOrbitJDE =0;
-	deltaJDE = StelCore::JD_SECOND;
-	orbitCached = 0;
-	closeOrbit = acloseOrbit;
 	semiMajorAxis = 0.;
-
-	eclipticPos=Vec3d(0.,0.,0.);
-	rotLocalToParent = Mat4d::identity();
-	texMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
 	//MinorPlanet specific members
 	minorPlanetNumber = 0;
