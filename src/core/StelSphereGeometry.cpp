@@ -479,7 +479,7 @@ bool SphericalCap::intersectionPoints(const SphericalCap& h1, const SphericalCap
 	// u gives the direction of the line, still need to find a suitable start point p0
 	// Find the axis on which the line varies the fastest, and solve the system for value == 0 on this axis
 	int maxI = (fabs(u[0])>=fabs(u[1])) ? (fabs(u[0])>=fabs(u[2]) ? 0 : 2) : (fabs(u[2])>fabs(u[1]) ? 2 : 1);
-	Vec3d p0(0);
+	Vec3d p0(0.);
 	switch (maxI)
 	{
 		case 0:

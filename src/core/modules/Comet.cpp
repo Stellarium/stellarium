@@ -57,6 +57,7 @@ Comet::Comet(const QString& englishName,
 	     Vec3f halocolor,
 	     float albedo,
 	     const QString& atexMapName,
+	     const QString& aobjModelName,
 	     posFuncType coordFunc,
 	     void* auserDataPtr,
 	     OsculatingFunctType *osculatingFunc,
@@ -74,6 +75,7 @@ Comet::Comet(const QString& englishName,
 		  albedo,
 		  atexMapName,
 		  "",
+		  aobjModelName,
 		  coordFunc,
 		  auserDataPtr,
 		  osculatingFunc,
@@ -88,17 +90,8 @@ Comet::Comet(const QString& englishName,
 	  dustTailLengthFactor(dustTailLengthFact),
 	  dustTailBrightnessFactor(dustTailBrightnessFact)
 {
-	texMapName = atexMapName;
-	lastOrbitJDE =0;
-	deltaJDE = StelCore::JD_SECOND;
 	deltaJDEtail=15.0*StelCore::JD_MINUTE; // update tail geometry every 15 minutes only
 	lastJDEtail=0.0;
-	orbitCached = 0;
-	closeOrbit = acloseOrbit;
-
-	eclipticPos=Vec3d(0.,0.,0.);
-	rotLocalToParent = Mat4d::identity();
-	texMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
 	tailFactors[0]=-1.0f; tailFactors[1]=-1.0f; // mark "invalid"
 	gastailVertexArr.clear();
@@ -504,7 +497,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	float screenSz = getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
 	float viewport_left = prj->getViewportPosX();
 	float viewport_bottom = prj->getViewportPosY();
-	if (prj->project(Vec3d(0), screenPos)
+	if (prj->project(Vec3d(0.), screenPos)
 		&& screenPos[1]>viewport_bottom - screenSz && screenPos[1] < viewport_bottom + prj->getViewportHeight()+screenSz
 		&& screenPos[0]>viewport_left - screenSz && screenPos[0] < viewport_left + prj->getViewportWidth() + screenSz)
 	{

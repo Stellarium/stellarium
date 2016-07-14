@@ -580,6 +580,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_isolated_trails", ssmgr->getFlagIsolatedTrails());
 	conf->setValue("viewing/flag_isolated_orbits", ssmgr->getFlagIsolatedOrbits());
 	conf->setValue("astro/flag_light_travel_time", ssmgr->getFlagLightTravelTime());
+	conf->setValue("astro/flag_use_obj_models", ssmgr->getFlagUseObjModels());
 	conf->setValue("viewing/flag_moon_scaled", ssmgr->getFlagMoonScale());
 	conf->setValue("viewing/moon_scale", ssmgr->getMoonScale());
 	conf->setValue("astro/meteor_rate", mmgr->getZHR());
