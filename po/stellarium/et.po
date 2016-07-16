@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: po_stellarium-et\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-09 00:22+0700\n"
-"PO-Revision-Date: 2014-06-22 16:35+0000\n"
-"Last-Translator: Ummi10 <boxhand1@gmail.com>\n"
+"PO-Revision-Date: 2016-07-13 04:43+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Estonian <kde-i18n-doc@lists.kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-12 05:22+0000\n"
+"X-Launchpad-Export-Date: 2016-07-14 05:17+0000\n"
 "X-Generator: Launchpad (build 18115)\n"
 
 #: src/core/modules/Constellation.cpp:297 src/core/modules/Nebula.cpp:189
@@ -32,7 +32,7 @@ msgstr "Tüüp: <b>%1</b>"
 
 #: src/core/modules/Constellation.cpp:297
 msgid "constellation"
-msgstr ""
+msgstr "tähtkuju"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:412
 #: src/core/modules/GridLinesMgr.cpp:950 src/core/modules/LandscapeMgr.cpp:414
@@ -606,7 +606,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1074
 msgid "galaxy"
-msgstr ""
+msgstr "galaktika"
 
 #: src/core/modules/Nebula.cpp:1077
 msgid "active galaxy"
@@ -622,7 +622,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1086 plugins/Quasars/src/Quasar.cpp:98
 msgid "quasar"
-msgstr ""
+msgstr "kvasar"
 
 #: src/core/modules/Nebula.cpp:1089
 msgid "star cluster"
@@ -642,11 +642,11 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1101
 msgid "planetary nebula"
-msgstr ""
+msgstr "planetaarudu"
 
 #: src/core/modules/Nebula.cpp:1104
 msgid "dark nebula"
-msgstr ""
+msgstr "tume udu"
 
 #: src/core/modules/Nebula.cpp:1107
 msgid "cluster associated with nebulosity"
@@ -670,7 +670,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1122
 msgid "supernova remnant"
-msgstr ""
+msgstr "supernoova jäänuk"
 
 #: src/core/modules/Nebula.cpp:1125
 msgid "stellar association"
@@ -975,11 +975,11 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:281 src/core/modules/StarWrapper.cpp:283
 #: src/gui/AstroCalcDialog.cpp:479
 msgid "Separation"
-msgstr ""
+msgstr "Kaugus"
 
 #: src/core/modules/MilkyWay.cpp:75
 msgid "Milky Way"
-msgstr ""
+msgstr "Linnutee"
 
 #: src/core/modules/ZodiacalLight.cpp:81
 msgid "Zodiacal Light"
@@ -1595,7 +1595,7 @@ msgstr ""
 #: src/core/StelObject.cpp:123 src/core/StelObject.cpp:125
 #: src/core/StelObject.cpp:133 src/core/StelObject.cpp:135
 msgid "RA/Dec"
-msgstr ""
+msgstr "OT/Kääne"
 
 #: src/core/StelObject.cpp:154 src/core/StelObject.cpp:157
 #: src/core/StelObject.cpp:167 src/core/StelObject.cpp:170
