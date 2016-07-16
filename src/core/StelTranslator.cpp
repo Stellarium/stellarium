@@ -142,13 +142,13 @@ QString StelTranslator::nativeNameToIso639_1Code(const QString& languageName)
 }
 
 //! Get available native language names from directory tree
-QStringList StelTranslator::getAvailableLanguagesNamesNative(const QString& localeDir, const QString& subDir) const
+QStringList StelTranslator::getAvailableLanguagesNamesNative(const QString& localeDir, const QString& section) const
 {
 	QString tmpDir = localeDir;
-	if (subDir.isEmpty())
+	if (section.isEmpty() || section=="stellarium")
 		tmpDir.append("/stellarium/");
 	else
-		tmpDir.append("/stellarium-" + subDir + "/");
+		tmpDir.append("/stellarium-" + section + "/");
 	QStringList codeList = getAvailableIso639_1Codes(tmpDir);
 	QStringList output;
 	foreach (const QString& lang, codeList)
