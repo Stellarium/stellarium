@@ -169,8 +169,11 @@ public:
 		friend class StelOBJ;
 	};
 
+	typedef QVector<Vec3f> V3Vec;
+	typedef QVector<Vec2f> V2Vec;
 	typedef QVector<Vertex> VertexList;
 	typedef QVector<unsigned int> IndexList;
+	typedef QVector<unsigned short> ShortIndexList;
 	typedef QVector<Material> MaterialList;
 	typedef QMap<QString, int> MaterialMap;
 	typedef QVector<Object> ObjectList;
@@ -191,6 +194,12 @@ public:
 	inline const VertexList& getVertexList() const { return m_vertices; }
 	//! Returns an index list, suitable for use with OpenGL element arrays
 	inline const IndexList& getIndexList() const { return m_indices; }
+	//! Returns the list of materials
+	inline const MaterialList& getMaterialList() const { return m_materials; }
+	//! Returns the list of objects
+	inline const ObjectList& getObjectList() const { return m_objects; }
+	//! Returns the object map (mapping the object names to their indices in the object list)
+	inline const ObjectMap& getObjectMap() const { return m_objectMap; }
 	//! Returns the global AABB of all vertices of the OBJ
 	inline const AABBox& getAABBox() const { return m_bbox; }
 	//! Returns the global centroid of all vertices of the OBJ.
@@ -211,9 +220,41 @@ public:
 
 	//! Rebuilds vertex normals as the average of face normals.
 	void rebuildNormals();
+
+	//! Returns if unsigned short indices can be used instead of unsigned int indices,
+	//! to save some memory. This can only be done if the model has less vertices than
+	//! std::numeric_limits<unsigned short>::max()
+	inline bool canUseShortIndices() const;
+
+	//! Converts the index list (as returned by getIndexList())
+	//! to use unsigned short instead of integer.
+	//! If this is not possible (canUseShortIndices() returns false),
+	//! an empty list is returned.
+	ShortIndexList getShortIndexList() const;
+
+	//! Scales the vertex positions according to the given factor.
+	//! This may be useful for importing, because many exporters
+	//! don't handle very large or very small models well.
+	//! For example, the solar system objects are modeled with kilometer units,
+	//! and then converted to AU on loading.
+	void scale(double factor);
+
+	//! Splits the vertex data into separate arrays.
+	//! If a given parameter vector is null, it is not filled.
+	//!
+	//! If \p deleteVertexData is true, the internal vertex list
+	//! will be cleared to save space, meaning getVertexList() returns
+	//! an empty list! The other members are unaffected (indices, materials,
+	//! objects etc. still work). The vertex list can only be restored
+	//! when the OBJ data is freshly loaded again, so don't do this if
+	//! you require it later.
+	void splitVertexData(bool deleteVertexData,
+			     V3Vec* position,
+			     V2Vec* texCoord = NULL,
+			     V3Vec* normal = NULL,
+			     V3Vec* tangent = NULL,
+			     V3Vec* bitangent = NULL);
 private:
-	typedef QVector<Vec3f> V3Vec;
-	typedef QVector<Vec2f> V2Vec;
 	typedef QVector<QStringRef> ParseParams;
 	typedef QHash<Vertex, int> VertexCache;
 

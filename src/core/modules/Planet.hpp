@@ -42,7 +42,9 @@ typedef void (OsculatingFunctType)(double jde0,double jde,double xyz[3]);
 class StelFont;
 class StelPainter;
 class StelTranslator;
+class StelOBJ;
 class QOpenGLShaderProgram;
+template <class T> class QFuture;
 
 // Class used to store rotational elements, i.e. axis orientation for the planetary body.
 class RotationElements
@@ -298,6 +300,14 @@ public:
 	QVector<const Planet*> getCandidatesForShadow() const;
 	
 protected:
+	struct PlanetOBJModel
+	{
+		QVector<Vec3f> posArray;
+		QVector<Vec2f> texCoordArray;
+		QVector<unsigned short> indexArray;
+		StelTextureSP texture;
+	};
+
 	static StelTextureSP texEarthShadow;     // for lunar eclipses
 
 	void computeModelMatrix(Mat4d &result) const;
@@ -308,11 +318,17 @@ protected:
 	// Draw the 3d model. Call the proper functions if there are rings etc..
 	void draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz, bool drawOnlyRing=false);
 
+	// Draws the OBJ model, assuming it is available
+	// @return false if the model can currently not be drawn (not loaded)
+	bool drawObjModel(StelPainter* painter, float screenSz);
+
 	// Draw the 3D sphere
 	void drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing=false);
 
 	// Draw the circle and name of the Planet
 	void drawHints(const StelCore* core, const QFont& planetNameFont);
+
+	PlanetOBJModel* loadObjModel() const;
 
 	QString englishName;             // english planet name
 	QString nameI18;                 // International translated name
@@ -336,6 +352,9 @@ protected:
 					 // For Earth, this should be Greenwich Mean Sidereal Time GMST.
 	StelTextureSP texMap;            // Planet map texture
 	StelTextureSP normalMap;         // Planet normal map texture
+
+	PlanetOBJModel* objModel;               // Planet model (when it has been loaded)
+	QFuture<PlanetOBJModel*>* objModelLoader;// For async loading of the OBJ file
 
 	QString objModelPath;
 
