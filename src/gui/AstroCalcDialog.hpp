@@ -95,10 +95,12 @@ private slots:
 	void generateEphemeris();
 	void cleanupEphemeris();
 	void selectCurrentEphemeride(const QModelIndex &modelIndex);
+	void saveEphemeris();
 
 	//! Calculate phenomena for selected celestial body and fill the list.
 	void calculatePhenomena();
 	void selectCurrentPhenomen(const QModelIndex &modelIndex);
+	void savePhenomena();
 
 private:
 	class StelCore* core;

@@ -25,6 +25,7 @@
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelFileMgr.hpp"
 
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
@@ -33,6 +34,7 @@
 #include "ui_astroCalcDialog.h"
 
 #include <QTimer>
+#include <QFileDialog>
 
 QVector<Vec3d> AstroCalcDialog::EphemerisListJ2000;
 int AstroCalcDialog::DisplayedPositionIndex = -1;
@@ -106,11 +108,13 @@ void AstroCalcDialog::createDialogContent()
 
 	connect(ui->ephemerisPushButton, SIGNAL(clicked()), this, SLOT(generateEphemeris()));
 	connect(ui->ephemerisCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupEphemeris()));
+	connect(ui->ephemerisSaveButton, SIGNAL(clicked()), this, SLOT(saveEphemeris()));
 	connect(ui->ephemerisTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentEphemeride(QModelIndex)));
 	connect(ui->ephemerisTreeWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(onChangedEphemerisPosition(QModelIndex)));
 
 	connect(ui->phenomenaPushButton, SIGNAL(clicked()), this, SLOT(calculatePhenomena()));
 	connect(ui->phenomenaTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentPhenomen(QModelIndex)));
+	connect(ui->phenomenaSaveButton, SIGNAL(clicked()), this, SLOT(savePhenomena()));
 
 	// every 5 min, check if it's time to update
 	QTimer* updateTimer = new QTimer(this);
@@ -349,6 +353,40 @@ void AstroCalcDialog::generateEphemeris()
 
 	// sort-by-date
 	ui->ephemerisTreeWidget->sortItems(EphemerisDate, Qt::AscendingOrder);
+}
+
+void AstroCalcDialog::saveEphemeris()
+{
+	QString filter = q_("CSV (Comma delimited)");
+	filter.append(" (*.csv)");
+	QString filePath = QFileDialog::getSaveFileName(0, q_("Save calculated ephemerides as..."), StelFileMgr::getScreenshotDir(), filter);
+	QFile ephem(filePath);
+	ephem.open(QFile::WriteOnly | QFile::Truncate);
+	QTextStream ephemList(&ephem);
+
+	int count = ui->ephemerisTreeWidget->topLevelItemCount();
+
+	QString delimiter = ", ";
+	ephemList << q_("Date and Time") << delimiter
+		  << q_("JD") << delimiter
+		  << q_("RA (J2000)") << delimiter
+		  << q_("Dec (J2000)") << delimiter
+		  << q_("Magnitude") << "\n";
+	for (int i = 0; i < count; i++)
+	{
+		// Date and Time
+		ephemList << ui->ephemerisTreeWidget->topLevelItem(i)->text(0) << delimiter;
+		// JD
+		ephemList << ui->ephemerisTreeWidget->topLevelItem(i)->text(1) << delimiter;
+		// RA (J2000)
+		ephemList << ui->ephemerisTreeWidget->topLevelItem(i)->text(2) << delimiter;
+		// Dec (J2000)
+		ephemList << ui->ephemerisTreeWidget->topLevelItem(i)->text(3) << delimiter;
+		// Magnitude
+		ephemList << ui->ephemerisTreeWidget->topLevelItem(i)->text(4) << "\n";
+	}
+
+	ephem.close();
 }
 
 void AstroCalcDialog::cleanupEphemeris()
@@ -628,6 +666,40 @@ void AstroCalcDialog::calculatePhenomena()
 
 	// sort-by-date
 	ui->phenomenaTreeWidget->sortItems(PhenomenaDate, Qt::AscendingOrder);
+}
+
+void AstroCalcDialog::savePhenomena()
+{
+	QString filter = q_("CSV (Comma delimited)");
+	filter.append(" (*.csv)");
+	QString filePath = QFileDialog::getSaveFileName(0, q_("Save calculated phenomena as..."), StelFileMgr::getScreenshotDir(), filter);
+	QFile phenomena(filePath);
+	phenomena.open(QFile::WriteOnly | QFile::Truncate);
+	QTextStream phenomenaList(&phenomena);
+
+	int count = ui->phenomenaTreeWidget->topLevelItemCount();
+
+	QString delimiter = ", ";
+	phenomenaList << q_("Phenomenon") << delimiter
+		      << q_("Date and Time") << delimiter
+		      << q_("Object 1") << delimiter
+		      << q_("Object 2") << delimiter
+		      << q_("Separation") << "\n";
+	for (int i = 0; i < count; i++)
+	{
+		// Phenomenon
+		phenomenaList << ui->phenomenaTreeWidget->topLevelItem(i)->text(0) << delimiter;
+		// Date and Time
+		phenomenaList << ui->phenomenaTreeWidget->topLevelItem(i)->text(1) << delimiter;
+		// Object 1
+		phenomenaList << ui->phenomenaTreeWidget->topLevelItem(i)->text(2) << delimiter;
+		// Object 2
+		phenomenaList << ui->phenomenaTreeWidget->topLevelItem(i)->text(3) << delimiter;
+		// Separation
+		phenomenaList << ui->phenomenaTreeWidget->topLevelItem(i)->text(4) << "\n";
+	}
+
+	phenomena.close();
 }
 
 void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, bool opposition)

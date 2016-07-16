@@ -122,27 +122,6 @@
          </item>
         </layout>
        </item>
-       <item row="0" column="1">
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <item>
-          <widget class="QLabel" name="ephemerisStepLabel">
-           <property name="text">
-            <string>Time step:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="ephemerisStepComboBox">
-           <property name="editable">
-            <bool>true</bool>
-           </property>
-           <property name="insertPolicy">
-            <enum>QComboBox::NoInsert</enum>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
        <item row="1" column="0">
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
@@ -185,14 +164,7 @@
          </item>
         </layout>
        </item>
-       <item row="2" column="1">
-        <widget class="QPushButton" name="ephemerisPushButton">
-         <property name="text">
-          <string>Calculate ephemeris</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0" colspan="2">
+       <item row="4" column="0" colspan="2">
         <widget class="QTreeWidget" name="ephemerisTreeWidget">
          <property name="editTriggers">
           <set>QAbstractItemView::NoEditTriggers</set>
@@ -214,12 +186,51 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QPushButton" name="ephemerisCleanupButton">
-         <property name="text">
-          <string>Cleanup ephemerides</string>
-         </property>
-        </widget>
+       <item row="0" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLabel" name="ephemerisStepLabel">
+           <property name="text">
+            <string>Time step:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="ephemerisStepComboBox">
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+           <property name="insertPolicy">
+            <enum>QComboBox::NoInsert</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <layout class="QHBoxLayout" name="horizontalLayout_11">
+         <item>
+          <widget class="QPushButton" name="ephemerisCleanupButton">
+           <property name="text">
+            <string>Cleanup ephemerides</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="ephemerisPushButton">
+           <property name="text">
+            <string>Calculate ephemeris</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="ephemerisSaveButton">
+           <property name="text">
+            <string>Save ephemeris</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
@@ -290,6 +301,28 @@
          </item>
         </layout>
        </item>
+       <item row="3" column="0" colspan="2">
+        <widget class="QTreeWidget" name="phenomenaTreeWidget">
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="rootIsDecorated">
+          <bool>false</bool>
+         </property>
+         <property name="uniformRowHeights">
+          <bool>true</bool>
+         </property>
+         <property name="itemsExpandable">
+          <bool>false</bool>
+         </property>
+         <property name="expandsOnDoubleClick">
+          <bool>false</bool>
+         </property>
+         <property name="columnCount">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
        <item row="1" column="1">
         <layout class="QHBoxLayout" name="horizontalLayout_7">
          <item>
@@ -339,33 +372,22 @@
         </layout>
        </item>
        <item row="2" column="1">
-        <widget class="QPushButton" name="phenomenaPushButton">
-         <property name="text">
-          <string>Calculate phenomena</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0" colspan="2">
-        <widget class="QTreeWidget" name="phenomenaTreeWidget">
-         <property name="editTriggers">
-          <set>QAbstractItemView::NoEditTriggers</set>
-         </property>
-         <property name="rootIsDecorated">
-          <bool>false</bool>
-         </property>
-         <property name="uniformRowHeights">
-          <bool>true</bool>
-         </property>
-         <property name="itemsExpandable">
-          <bool>false</bool>
-         </property>
-         <property name="expandsOnDoubleClick">
-          <bool>false</bool>
-         </property>
-         <property name="columnCount">
-          <number>0</number>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout_9">
+         <item>
+          <widget class="QPushButton" name="phenomenaPushButton">
+           <property name="text">
+            <string>Calculate phenomena</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="phenomenaSaveButton">
+           <property name="text">
+            <string>Save phenomena</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
