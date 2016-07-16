@@ -75,6 +75,7 @@ public:
 	virtual ~AstroCalcDialog();
 
 	static QVector<Vec3d> EphemerisListJ2000;
+	static QVector<QString> EphemerisListDates;
 	static int DisplayedPositionIndex;
 
 public slots:
