@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>743</width>
-    <height>366</height>
+    <width>780</width>
+    <height>368</height>
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
@@ -86,6 +86,13 @@
          <attribute name="headerShowSortIndicator" stdset="0">
           <bool>true</bool>
          </attribute>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="planetaryPositionsUpdateButton">
+         <property name="text">
+          <string>Update planetary positions</string>
+         </property>
         </widget>
        </item>
       </layout>
