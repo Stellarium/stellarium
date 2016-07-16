@@ -164,7 +164,7 @@ void ConfigurationDialog::createDialogContent()
 	// Do the same for sky language:
 	cb = ui->skycultureLanguageComboBox;
 	cb->clear();
-	cb->addItems(StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()));
+	cb->addItems(StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir(), "skycultures"));
 	cb->model()->sort(0);
 	updateCurrentSkyLanguage();
 	connect(cb->lineEdit(), SIGNAL(editingFinished()), this, SLOT(updateCurrentSkyLanguage()));
