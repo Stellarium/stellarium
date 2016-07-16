@@ -32,8 +32,7 @@ Q_LOGGING_CATEGORY(stelOBJ,"stel.OBJ")
 
 StelOBJ::StelOBJ()
 {
-	qDebug()<<"sizeof(Vertex)"<<sizeof(Vertex);
-	qDebug()<<"alignof(Vertex)"<<__alignof(Vertex);
+
 }
 
 StelOBJ::~StelOBJ()
@@ -399,6 +398,8 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 {
 	StelOBJ::MaterialList list;
 
+	QFileInfo fi(filename);
+	QDir dir = fi.dir();
 	QFile file(filename);
 	if(!file.open(QIODevice::ReadOnly))
 	{
@@ -423,6 +424,8 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 
 			//macro to make sure a material is currently active
 			#define CHECK_MTL(a) do{ if(curMaterial) { a; } else { ok = false; qCCritical(stelOBJ)<<"Encountered material statement without active material"; } } while(0)
+			//macro to make path absolute
+			#define MAKE_ABS(a) if(!a.isEmpty()){ a = dir.absoluteFilePath(a); }
 			if(CMD_CMP("newmtl")) //define new material
 			{
 				ok = splits.size()==2;
@@ -463,26 +466,32 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 			else if(CMD_CMP("map_Ka")) //define ambient map
 			{
 				CHECK_MTL(ok = parseString(splits,curMaterial->map_Ka));
+				MAKE_ABS(curMaterial->map_Ka);
 			}
 			else if(CMD_CMP("map_Kd")) //define diffuse map
 			{
 				CHECK_MTL(ok = parseString(splits,curMaterial->map_Kd));
+				MAKE_ABS(curMaterial->map_Kd);
 			}
 			else if(CMD_CMP("map_Ks")) //define specular map
 			{
 				CHECK_MTL(ok = parseString(splits,curMaterial->map_Ks));
+				MAKE_ABS(curMaterial->map_Ks);
 			}
 			else if(CMD_CMP("map_Ke")) //define emissive map
 			{
 				CHECK_MTL(ok = parseString(splits,curMaterial->map_Ke));
+				MAKE_ABS(curMaterial->map_Ke);
 			}
 			else if(CMD_CMP("map_bump")) //define bump/normal map
 			{
 				CHECK_MTL(ok = parseString(splits,curMaterial->map_bump));
+				MAKE_ABS(curMaterial->map_bump);
 			}
 			else if(CMD_CMP("map_height")) //define height map
 			{
 				CHECK_MTL(ok = parseString(splits,curMaterial->map_height));
+				MAKE_ABS(curMaterial->map_height);
 			}
 			else if(CMD_CMP("bAlphatest"))
 			{
@@ -595,7 +604,7 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath)
 						//because of list resizeing
 						m_materialMap.insert(m.name,m_materials.size()-1);
 					}
-					qCDebug(stelOBJ)<<newMaterials.size()<<"loaded from MTL file"<<splits.at(1);
+					qCDebug(stelOBJ)<<newMaterials.size()<<"materials loaded from MTL file"<<splits.at(1);
 				}
 			}
 			else if(CMD_CMP("o"))
@@ -695,4 +704,91 @@ void StelOBJ::performPostProcessing()
 	m_centroid = (accCentroid / m_objects.size()).toVec3f();
 	qCDebug(stelOBJ)<<"Postprocessing done in"<<timer.elapsed()<<"ms";
 	qCDebug(stelOBJ)<<"Centroid is at "<<m_centroid;
+}
+
+bool StelOBJ::canUseShortIndices() const
+{
+	return m_vertices.size() < std::numeric_limits<unsigned short>::max();
+}
+
+StelOBJ::ShortIndexList StelOBJ::getShortIndexList() const
+{
+	QElapsedTimer timer;
+	timer.start();
+
+	ShortIndexList ret;
+	if(!canUseShortIndices())
+	{
+		return ret;
+		qCWarning(stelOBJ)<<"Cannot use short indices for OBJ data, it has"<<m_vertices.size()<<"vertices";
+	}
+
+	ret.reserve(m_indices.size());
+	for(int i =0;i<m_indices.size();++i)
+	{
+		ret.append(m_indices.at(i));
+	}
+
+	qCDebug(stelOBJ)<<"Indices converted to short in"<<timer.elapsed()<<"ms";
+	return ret;
+}
+
+void StelOBJ::scale(double factor)
+{
+	QElapsedTimer timer;
+	timer.start();
+
+	for(int i = 0;i<m_vertices.size();++i)
+	{
+		GLfloat* dat = m_vertices[i].position;
+		dat[0] *= factor;
+		dat[1] *= factor;
+		dat[2] *= factor;
+	}
+
+	qCDebug(stelOBJ)<<"Scaling done in"<<timer.elapsed()<<"ms";
+}
+
+void StelOBJ::splitVertexData(bool deleteVertexData,
+			      V3Vec *position,
+			      V2Vec *texCoord,
+			      V3Vec *normal,
+			      V3Vec *tangent,
+			      V3Vec *bitangent)
+{
+	QElapsedTimer timer;
+	timer.start();
+
+	const int size = m_vertices.size();
+	//resize arrays
+	if(position)
+		position->resize(size);
+	if(texCoord)
+		texCoord->resize(size);
+	if(normal)
+		normal->resize(size);
+	if(tangent)
+		tangent->resize(size);
+	if(bitangent)
+		bitangent->resize(size);
+
+	for(int i = 0;i<size;++i)
+	{
+		const Vertex& vtx = m_vertices.at(i);
+		if(position)
+			(*position)[i] = Vec3f(vtx.position);
+		if(texCoord)
+			(*texCoord)[i] = Vec2f(vtx.texCoord);
+		if(normal)
+			(*normal)[i] = Vec3f(vtx.normal);
+		if(tangent)
+			(*tangent)[i] = Vec3f(vtx.tangent);
+		if(bitangent)
+			(*bitangent)[i] = Vec3f(vtx.bitangent);
+	}
+
+	if(deleteVertexData)
+		m_vertices.clear();
+
+	qCDebug(stelOBJ)<<"Vertex data split in "<<timer.elapsed()<<"ms";
 }
