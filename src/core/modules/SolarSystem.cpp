@@ -73,6 +73,8 @@ SolarSystem::SolarSystem()
 	, flagTranslatedNames(false)
 	, flagIsolatedTrails(true)
 	, flagIsolatedOrbits(true)
+	, ephemerisMarkersDisplayed(true)
+	, ephemerisDatesDisplayed(false)
 	, allTrails(NULL)
 	, conf(StelApp::getInstance().getSettings())
 {
@@ -161,6 +163,9 @@ void SolarSystem::init()
 	setFlagIsolatedTrails(conf->value("viewing/flag_isolated_trails", true).toBool());
 	setFlagIsolatedOrbits(conf->value("viewing/flag_isolated_orbits", true).toBool());
 	setFlagPermanentOrbits(conf->value("astro/flag_permanent_orbits", false).toBool());
+
+	setFlagEphemerisMarkers(conf->value("astro/flag_ephemeris_markers", true).toBool());
+	setFlagEphemerisDates(conf->value("astro/flag_ephemeris_dates", false).toBool());
 
 	// Settings for calculation of position of Great Red Spot on Jupiter
 	setFlagCustomGrsSettings(conf->value("astro/flag_grs_custom", false).toBool());
@@ -1145,15 +1150,12 @@ void SolarSystem::draw(StelCore* core)
 		drawPointer(core);
 
 	// AstroCalcDialog
-	if (gui && gui->getAstroCalcVisible())
+	if (getFlagEphemerisMarkers())
 	{
 		StelProjectorP prj = core->getProjection(StelCore::FrameJ2000); // , StelCore::RefractionOff);
 		StelPainter sPainter(prj);
 
-		float size;
-
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_ONE, GL_ONE);
+		float size, shift;
 
 		for (int i =0; i< AstroCalcDialog::EphemerisListJ2000.count(); i++)
 		{
@@ -1175,8 +1177,18 @@ void SolarSystem::draw(StelCore* core)
 				size = 4.f;
 			}
 
+			glEnable(GL_BLEND);
+			sPainter.enableTexture2d(true);
+			glBlendFunc(GL_ONE, GL_ONE);
+
 			texCircle->bind();
-			sPainter.drawSprite2dMode(win[0], win[1], size);
+			sPainter.drawSprite2dMode(AstroCalcDialog::EphemerisListJ2000[i], size);
+
+			if (getFlagEphemerisDates())
+			{
+				shift = 3.f + size/1.6f;
+				sPainter.drawText(AstroCalcDialog::EphemerisListJ2000[i], AstroCalcDialog::EphemerisListDates[i], 0, shift, shift, false);
+			}
 		}
 	}
 }
@@ -1542,6 +1554,36 @@ void SolarSystem::setFlagPlanets(bool b)
 bool SolarSystem::getFlagPlanets(void) const
 {
 	return flagShow;
+}
+
+void SolarSystem::setFlagEphemerisMarkers(bool b)
+{
+	if (b!=ephemerisMarkersDisplayed)
+	{
+		ephemerisMarkersDisplayed=b;
+		conf->setValue("astro/flag_ephemeris_markers", b); // Immediate saving of state
+		emit ephemerisMarkersChanged(b);
+	}
+}
+
+bool SolarSystem::getFlagEphemerisMarkers() const
+{
+	return ephemerisMarkersDisplayed;
+}
+
+void SolarSystem::setFlagEphemerisDates(bool b)
+{
+	if (b!=ephemerisDatesDisplayed)
+	{
+		ephemerisDatesDisplayed=b;
+		conf->setValue("astro/flag_ephemeris_dates", b); // Immediate saving of state
+		emit ephemerisDatesChanged(b);
+	}
+}
+
+bool SolarSystem::getFlagEphemerisDates() const
+{
+	return ephemerisDatesDisplayed;
 }
 
 void SolarSystem::setFlagNativeNames(bool b)

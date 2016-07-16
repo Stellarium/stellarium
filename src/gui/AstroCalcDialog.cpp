@@ -36,6 +36,7 @@
 #include <QFileDialog>
 
 QVector<Vec3d> AstroCalcDialog::EphemerisListJ2000;
+QVector<QString> AstroCalcDialog::EphemerisListDates;
 int AstroCalcDialog::DisplayedPositionIndex = -1;
 
 AstroCalcDialog::AstroCalcDialog(QObject *parent)
@@ -115,6 +116,9 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->phenomenaPushButton, SIGNAL(clicked()), this, SLOT(calculatePhenomena()));
 	connect(ui->phenomenaTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentPhenomen(QModelIndex)));
 	connect(ui->phenomenaSaveButton, SIGNAL(clicked()), this, SLOT(savePhenomena()));
+
+	connectBoolProperty(ui->ephemerisShowMarkersCheckBox, "SolarSystem.ephemerisMarkersDisplayed");
+	connectBoolProperty(ui->ephemerisShowDatesCheckBox, "SolarSystem.ephemerisDatesDisplayed");
 
 	currentPlanetaryPositions();
 }
@@ -318,6 +322,8 @@ void AstroCalcDialog::generateEphemeris()
 		int elements = (int)((StelUtils::qDateTimeToJd(ui->dateToDateTimeEdit->dateTime()) - firstJD)/currentStep);
 		EphemerisListJ2000.clear();
 		EphemerisListJ2000.reserve(elements);
+		EphemerisListDates.clear();
+		EphemerisListDates.reserve(elements);
 		for (int i=0; i<elements; i++)
 		{
 			double JD = firstJD + i*currentStep;
@@ -325,6 +331,7 @@ void AstroCalcDialog::generateEphemeris()
 			core->update(0); // force update to get new coordinates			
 			Vec3d pos = obj->getJ2000EquatorialPos(core);
 			EphemerisListJ2000.append(pos);
+			EphemerisListDates.append(StelUtils::jdToQDateTime(JD + StelUtils::getGMTShiftFromQT(JD)/24).toString("yyyy-MM-dd"));
 			StelUtils::rectToSphe(&ra,&dec,pos);
 			ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->ephemerisTreeWidget);
 			// local date and time
