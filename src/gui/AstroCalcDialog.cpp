@@ -33,7 +33,6 @@
 #include "AstroCalcDialog.hpp"
 #include "ui_astroCalcDialog.h"
 
-#include <QTimer>
 #include <QFileDialog>
 
 QVector<Vec3d> AstroCalcDialog::EphemerisListJ2000;
@@ -117,11 +116,6 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->phenomenaTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentPhenomen(QModelIndex)));
 	connect(ui->phenomenaSaveButton, SIGNAL(clicked()), this, SLOT(savePhenomena()));
 
-	// every 5 min, check if it's time to update
-	QTimer* updateTimer = new QTimer(this);
-	updateTimer->setInterval(300000);
-	connect(updateTimer, SIGNAL(timeout()), this, SLOT(currentPlanetaryPositions()));
-	updateTimer->start();
 	currentPlanetaryPositions();
 }
 
