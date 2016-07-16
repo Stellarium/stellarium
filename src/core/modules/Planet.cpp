@@ -37,8 +37,8 @@
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 #include "StelOpenGL.hpp"
+#include "StelOBJ.hpp"
 
-#include <iomanip>
 #include <limits>
 #include <QTextStream>
 #include <QString>
@@ -46,6 +46,7 @@
 #include <QVarLengthArray>
 #include <QOpenGLContext>
 #include <QOpenGLShader>
+#include <QtConcurrent>
 
 Vec3f Planet::labelColor = Vec3f(0.4f,0.4f,0.8f);
 Vec3f Planet::orbitColor = Vec3f(1.0f,0.6f,1.0f);
@@ -93,6 +94,8 @@ Planet::Planet(const QString& englishName,
 	  haloColor(halocolor),
 	  albedo(albedo),
 	  axisRotation(0.),
+	  objModel(NULL),
+	  objModelLoader(NULL),
 	  rings(NULL),
 	  sphereScale(1.f),
 	  lastJDE(J2000),
@@ -123,7 +126,14 @@ Planet::Planet(const QString& englishName,
 	texMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 	normalMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+normalMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 	//the OBJ is lazily loaded when first required
-	objModelPath = StelFileMgr::findFile("/models/"+aobjModelName);
+	if(!aobjModelName.isEmpty())
+	{
+		objModelPath = StelFileMgr::findFile("models/"+aobjModelName, StelFileMgr::File);
+		if(objModelPath.isEmpty())
+		{
+			qWarning()<<"Cannot resolve path to model file"<<aobjModelName<<"of object"<<englishName;
+		}
+	}
 
 	nameI18 = englishName;
 	nativeName = "";
@@ -173,6 +183,8 @@ Planet::~Planet()
 {
 	if (rings)
 		delete rings;
+	if (objModel)
+		delete objModel;
 }
 
 void Planet::translateName(const StelTranslator& trans)
@@ -1542,6 +1554,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			sPainter->setColor(2.f, pow(0.75f, extinctedMag)*2.f, pow(0.42f, 0.9f*extinctedMag)*2.f);
 
 
+		double n,f;
 		if (rings)
 		{
 			// The planet has rings, we need to use depth buffer and adjust the clipping planes to avoid 
@@ -1550,19 +1563,25 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			double z_near = 0.9*(dist - rings->getSize());
 			double z_far  = 1.1*(dist + rings->getSize());
 			if (z_near < 0.0) z_near = 0.0;
-			double n,f;
 			core->getClippingPlanes(&n,&f); // Save clipping planes
 			core->setClippingPlanes(z_near,z_far);
+		}
 
-			drawSphere(sPainter, screenSz, drawOnlyRing);
-			
-			core->setClippingPlanes(n,f);  // Restore old clipping planes
+		if(ssm->getFlagUseObjModels() && !objModelPath.isEmpty())
+		{
+			if(!drawObjModel(sPainter, screenSz))
+			{
+				drawSphere(sPainter, screenSz, drawOnlyRing);
+			}
 		}
 		else
+			drawSphere(sPainter, screenSz, drawOnlyRing);
+
+		if(rings)
 		{
-			// Normal planet
-			drawSphere(sPainter, screenSz);
+			core->setClippingPlanes(n,f);  // Restore old clipping planes
 		}
+
 		delete sPainter;
 		sPainter=NULL;
 	}
@@ -1616,6 +1635,7 @@ struct Planet3DModel
 	QVector<float> texCoordArr;
 	QVector<unsigned short> indiceArr;
 };
+
 
 void sSphere(Planet3DModel* model, const float radius, const float oneMinusOblateness, const int slices, const int stacks)
 {
@@ -1928,6 +1948,94 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	GL(shader->release());
 	
 	glDisable(GL_CULL_FACE);
+}
+
+Planet::PlanetOBJModel* Planet::loadObjModel() const
+{
+	StelOBJ obj;
+	if(!obj.load(objModelPath))
+	{
+		//object loading failed
+		qCritical()<<"Could not load planet OBJ model for"<<englishName;
+		return NULL;
+	}
+
+	//ideally, all planet OBJs should only have a single object with a single material
+	if(obj.getObjectList().size()>1)
+		qWarning()<<"Planet OBJ model has more than one object defined, this may cause problems ...";
+	if(obj.getMaterialList().size()>1)
+		qWarning()<<"Planet OBJ model has more than one material defined, this may cause problems ...";
+
+        //start texture loading
+	const StelOBJ::Material& mat = obj.getMaterialList().at(obj.getObjectList().first().groups.first().materialIndex);
+	if(mat.map_Kd.isEmpty())
+	{
+		qCritical()<<"Planet OBJ model for"<<englishName<<"has no diffuse texture, aborting loading";
+		return NULL;
+	}
+	//we assume the OBJ is modeled in km
+	//so we have to scale it to AU
+	obj.scale(sphereScale / AU);
+	PlanetOBJModel* mdl = new PlanetOBJModel();
+	mdl->texture = StelApp::getInstance().getTextureManager().createTextureThread(mat.map_Kd,StelTexture::StelTextureParams(true,GL_LINEAR,GL_REPEAT,true),false);
+	mdl->indexArray = obj.getShortIndexList();
+	obj.splitVertexData(false,&mdl->posArray,&mdl->texCoordArray);
+	return mdl;
+}
+
+bool Planet::drawObjModel(StelPainter *painter, float screenSz)
+{
+	if(!objModel && !objModelLoader)
+	{
+		qDebug()<<"Queueing aysnc load of OBJ model for"<<englishName;
+		//create the async OBJ model loader
+		objModelLoader = new QFuture<PlanetOBJModel*>(QtConcurrent::run(this,&Planet::loadObjModel));
+	}
+
+	if(objModelLoader)
+	{
+		if(objModelLoader->isFinished())
+		{
+			objModel = objModelLoader->result();
+			delete objModelLoader; //we dont need the result anymore
+			objModelLoader = NULL;
+
+			if(!objModel)
+			{
+				//model load failed, fall back to sphere mode
+				objModelPath.clear();
+				qWarning()<<"Cannot load OBJ model for solar system object"<<getEnglishName();
+			}
+		}
+		else
+		{
+			//we are still loading, use the sphere method for drawing
+			return false;
+		}
+	}
+
+	if(!objModel->texture->bind())
+	{
+		//the texture is still loading, use the sphere method
+		return false;
+	}
+
+	//the model is ready to draw!
+	painter->enableTexture2d(true);
+	glDisable(GL_BLEND);
+	glEnable(GL_CULL_FACE);
+
+	QVector<Vec3f> projectedVertexArr;
+	const int vtxCount = objModel->posArray.size();
+	projectedVertexArr.resize(vtxCount);
+	painter->getProjector()->project(vtxCount,objModel->posArray.constData(),projectedVertexArr.data());
+	painter->setArrays(projectedVertexArr.constData(),objModel->texCoordArray.constData());
+	painter->setColor(1.0f,1.0f,1.0f);
+	painter->drawFromArray(StelPainter::Triangles, objModel->indexArray.size(), 0, false, objModel->indexArray.constData());
+
+	glDisable(GL_CULL_FACE);
+
+	return true;
 }
 
 
