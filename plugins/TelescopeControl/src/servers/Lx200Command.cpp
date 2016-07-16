@@ -174,7 +174,7 @@ bool Lx200CommandSetSelectedDec::writeCommandToBuffer(char *&p, char *end)
 	p[-3] = ':';
 	p[-4] = '0' + (x % 10); x /= 10;
 	p[-5] = '0' + (x %  6); x /=  6;	
-	p[-6] = 223; // degree symbol
+	p[-6] = '\xDF'; // = 223, degree symbol
 	p[-7] = '0' + (x % 10); x /= 10;
 	p[-8] = '0' + x;
 	*p++ = '#';
