@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-07-09 00:22+0700\n"
+"POT-Creation-Date: 2016-07-16 19:57+0700\n"
 "PO-Revision-Date: 2015-11-30 07:20+0000\n"
 "Last-Translator: Balaji பாலாஜி <Unknown>\n"
 "Language-Team: Tamil <ta@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-12 05:34+0000\n"
-"X-Generator: Launchpad (build 18115)\n"
+"X-Launchpad-Export-Date: 2016-07-17 05:35+0000\n"
+"X-Generator: Launchpad (build 18140)\n"
 
 #: src/core/modules/Constellation.cpp:297 src/core/modules/Nebula.cpp:189
 #: src/core/modules/Planet.cpp:226 src/core/modules/MinorPlanet.cpp:213
@@ -35,7 +35,7 @@ msgstr ""
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:412
 #: src/core/modules/GridLinesMgr.cpp:950 src/core/modules/LandscapeMgr.cpp:414
 #: src/core/modules/NebulaMgr.cpp:367 src/core/modules/NebulaMgr.cpp:368
-#: src/core/modules/SolarSystem.cpp:195 src/core/modules/MilkyWay.cpp:74
+#: src/core/modules/SolarSystem.cpp:200 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/StelApp.cpp:516
 #: src/core/StelCore.cpp:222 src/core/StelSkyLayerMgr.cpp:88
 #: src/StelMainView.cpp:575
@@ -249,7 +249,7 @@ msgstr "இடம்: "
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:720 src/ui_astroCalcDialog.h:380
+#: src/core/modules/LandscapeMgr.cpp:720 src/ui_astroCalcDialog.h:427
 msgid "Celestial body:"
 msgstr ""
 
@@ -860,31 +860,31 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:196 src/gui/AstroCalcDialog.cpp:455
+#: src/core/modules/SolarSystem.cpp:201 src/gui/AstroCalcDialog.cpp:501
 #: src/translations.h:66
 msgid "Planets"
 msgstr "கோள்கள்"
 
-#: src/core/modules/SolarSystem.cpp:197
+#: src/core/modules/SolarSystem.cpp:202
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:316
 msgid "Planet labels"
 msgstr "கோள் விவரச்சீட்டு"
 
-#: src/core/modules/SolarSystem.cpp:198
+#: src/core/modules/SolarSystem.cpp:203
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Planet orbits"
 msgstr "கோள்களின் கோளப்பாதை"
 
-#: src/core/modules/SolarSystem.cpp:199
+#: src/core/modules/SolarSystem.cpp:204
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:324
 msgid "Planet trails"
 msgstr "கோள்களின் சுவடு"
 
-#: src/core/modules/SolarSystem.cpp:201
+#: src/core/modules/SolarSystem.cpp:206
 msgid "Planet markers"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:203
+#: src/core/modules/SolarSystem.cpp:208
 msgid "Native planet names (from starlore)"
 msgstr ""
 
@@ -971,7 +971,7 @@ msgid "Position angle"
 msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:281 src/core/modules/StarWrapper.cpp:283
-#: src/gui/AstroCalcDialog.cpp:479
+#: src/gui/AstroCalcDialog.cpp:525 src/gui/AstroCalcDialog.cpp:689
 msgid "Separation"
 msgstr ""
 
@@ -989,7 +989,8 @@ msgstr "இரவு நிலை"
 
 #. TRANSLATORS: name of object
 #: src/core/StelCore.cpp:220 src/gui/StelGui.cpp:197
-#: src/gui/AstroCalcDialog.cpp:251 src/gui/AstroCalcDialog.cpp:476
+#: src/gui/AstroCalcDialog.cpp:254 src/gui/AstroCalcDialog.cpp:372
+#: src/gui/AstroCalcDialog.cpp:522 src/gui/AstroCalcDialog.cpp:686
 #: src/gui/BookmarksDialog.cpp:97 src/ui_dateTimeDialogGui.h:376
 #: src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:173
@@ -1733,7 +1734,7 @@ msgstr "தொடர்புகொள்"
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:207
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:118
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:223
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:228
 msgid "Version"
 msgstr "பதிப்பு"
 
@@ -2546,7 +2547,7 @@ msgid "year"
 msgstr ""
 
 #. TRANSLATORS: name of object
-#: src/gui/AstroCalcDialog.cpp:135 src/ui_configurationDialog.h:1142
+#: src/gui/AstroCalcDialog.cpp:138 src/ui_configurationDialog.h:1142
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:450
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:96
 #: plugins/Exoplanets/src/Exoplanet.cpp:323
@@ -2555,125 +2556,143 @@ msgid "Name"
 msgstr "பெயர்"
 
 #. TRANSLATORS: right ascension
-#: src/gui/AstroCalcDialog.cpp:137 src/gui/AstroCalcDialog.cpp:254
+#: src/gui/AstroCalcDialog.cpp:140 src/gui/AstroCalcDialog.cpp:257
+#: src/gui/AstroCalcDialog.cpp:374
 msgid "RA (J2000)"
 msgstr ""
 
 #. TRANSLATORS: declination
-#: src/gui/AstroCalcDialog.cpp:139 src/gui/AstroCalcDialog.cpp:256
+#: src/gui/AstroCalcDialog.cpp:142 src/gui/AstroCalcDialog.cpp:259
+#: src/gui/AstroCalcDialog.cpp:375
 msgid "Dec (J2000)"
 msgstr ""
 
 #. TRANSLATORS: magnitude
-#: src/gui/AstroCalcDialog.cpp:141 src/gui/AstroCalcDialog.cpp:258
+#: src/gui/AstroCalcDialog.cpp:144 src/gui/AstroCalcDialog.cpp:261
 msgid "Mag."
 msgstr ""
 
 #. TRANSLATORS: type of object
-#: src/gui/AstroCalcDialog.cpp:143 src/ui_configurationDialog.h:1162
+#: src/gui/AstroCalcDialog.cpp:146 src/ui_configurationDialog.h:1162
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
 msgid "Type"
 msgstr "வகை"
 
-#: src/gui/AstroCalcDialog.cpp:161
+#: src/gui/AstroCalcDialog.cpp:164
 #, qt-format
 msgid "Positions on %1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:252
+#: src/gui/AstroCalcDialog.cpp:255 src/gui/AstroCalcDialog.cpp:373
 msgid "JD"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:399
+#: src/gui/AstroCalcDialog.cpp:362 src/gui/AstroCalcDialog.cpp:675
+msgid "CSV (Comma delimited)"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:364
+msgid "Save calculated ephemerides as..."
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:376
+msgid "Magnitude"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:439
 msgid "10 minutes"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:400
+#: src/gui/AstroCalcDialog.cpp:440
 msgid "1 hour"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:401
+#: src/gui/AstroCalcDialog.cpp:441
 msgid "1 day"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:402
+#: src/gui/AstroCalcDialog.cpp:442
 msgid "5 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:403
+#: src/gui/AstroCalcDialog.cpp:443
 msgid "10 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:404
+#: src/gui/AstroCalcDialog.cpp:444
 msgid "15 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:405
+#: src/gui/AstroCalcDialog.cpp:445
 msgid "30 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:406
+#: src/gui/AstroCalcDialog.cpp:446
 msgid "60 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:454
+#: src/gui/AstroCalcDialog.cpp:500
 msgid "Solar system"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:456 src/translations.h:70
+#: src/gui/AstroCalcDialog.cpp:502 src/translations.h:70
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
 msgstr "விண்கற்கள்"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:457 src/translations.h:74
+#: src/gui/AstroCalcDialog.cpp:503 src/translations.h:74
 msgid "Plutinos"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:458 src/translations.h:68
+#: src/gui/AstroCalcDialog.cpp:504 src/translations.h:68
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
 msgstr "வால் நட்சத்திரங்கள்"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:459 src/translations.h:76
+#: src/gui/AstroCalcDialog.cpp:505 src/translations.h:76
 msgid "Dwarf planets"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:460 src/translations.h:78
+#: src/gui/AstroCalcDialog.cpp:506 src/translations.h:78
 msgid "Cubewanos"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:461 src/translations.h:80
+#: src/gui/AstroCalcDialog.cpp:507 src/translations.h:80
 msgid "Scattered disc objects"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:462 src/translations.h:82
+#: src/gui/AstroCalcDialog.cpp:508 src/translations.h:82
 msgid "Oort cloud objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:475
+#: src/gui/AstroCalcDialog.cpp:521 src/gui/AstroCalcDialog.cpp:685
 msgid "Phenomenon"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:477
+#: src/gui/AstroCalcDialog.cpp:523 src/gui/AstroCalcDialog.cpp:687
 msgid "Object 1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:478
+#: src/gui/AstroCalcDialog.cpp:524 src/gui/AstroCalcDialog.cpp:688
 msgid "Object 2"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:635
+#: src/gui/AstroCalcDialog.cpp:677
+msgid "Save calculated phenomena as..."
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:715
 msgid "Conjunction"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:639
+#: src/gui/AstroCalcDialog.cpp:719
 msgid "Opposition"
 msgstr ""
 
@@ -6067,8 +6086,8 @@ msgstr ""
 msgid "Custom settings for position of GRS"
 msgstr ""
 
-#: src/ui_greatRedSpotDialog.h:171 src/ui_astroCalcDialog.h:384
-#: src/ui_astroCalcDialog.h:386
+#: src/ui_greatRedSpotDialog.h:171 src/ui_astroCalcDialog.h:418
+#: src/ui_astroCalcDialog.h:430
 msgid "yyyy.MM.dd hh:mm"
 msgstr ""
 
@@ -6140,69 +6159,93 @@ msgstr ""
 msgid "..."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:377
-msgid "Planetary positions every 5 minutes."
+#: src/ui_astroCalcDialog.h:415
+msgid "Update of planetary positions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:379
+#: src/ui_astroCalcDialog.h:416
 msgid "Planetary positions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:382
-msgid "Time step:"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:383 src/ui_astroCalcDialog.h:392
+#: src/ui_astroCalcDialog.h:417 src/ui_astroCalcDialog.h:438
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:385 src/ui_astroCalcDialog.h:394
+#: src/ui_astroCalcDialog.h:419
+msgid "Time step:"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:420
+msgid "Cleanup ephemerides"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:421
+msgid "Calculate ephemeris"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:422
+msgid "Save ephemeris"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:424
+msgid "Show markers of positions of the current celestial body on the sky"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:426
+msgid "Show markers of positions"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:429 src/ui_astroCalcDialog.h:440
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:387
-msgid "Calculate ephemeris"
+#: src/ui_astroCalcDialog.h:432
+msgid "Show dates of positions of current celestial body near markers"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:388
-msgid "Cleanup ephemerides"
+#: src/ui_astroCalcDialog.h:434
+msgid "Show dates of positions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:389
+#: src/ui_astroCalcDialog.h:435
 msgid "Ephemeris"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:390
+#: src/ui_astroCalcDialog.h:436
 msgid "Between objects:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:391
+#: src/ui_astroCalcDialog.h:437
 msgid "and"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:393 src/ui_astroCalcDialog.h:395
+#: src/ui_astroCalcDialog.h:439 src/ui_astroCalcDialog.h:441
 msgid "yyyy.MM.dd"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:396
+#: src/ui_astroCalcDialog.h:442
 msgid "Maximum allowed separation:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:398
+#: src/ui_astroCalcDialog.h:444
 msgid "Value in decimal degrees"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:400
+#: src/ui_astroCalcDialog.h:446
 msgid "Calculate phenomena"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:401
+#: src/ui_astroCalcDialog.h:447
+msgid "Save phenomena"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:448
 msgid "Phenomena"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:402
+#: src/ui_astroCalcDialog.h:449
 msgid "AstroCalc"
 msgstr ""
 
@@ -6288,7 +6331,7 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:224
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:229
 msgid "Author"
 msgstr "படைப்பாளர்"
 
@@ -6327,7 +6370,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:125
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:248
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:253
 msgid "Links"
 msgstr "இணைப்புகள்"
 
@@ -6342,7 +6385,7 @@ msgstr "இணைப்புகள்"
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:127
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:249
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:254
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
@@ -6362,7 +6405,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:252
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:257
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "கேள்விகள் இருந்தால் அதற்கான பதிலை %1இங்கே%2 பெறலாம்"
@@ -6380,7 +6423,7 @@ msgstr "கேள்விகள் இருந்தால் அதற்க�
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:311
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:254
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:259
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr ""
@@ -6398,7 +6441,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:133
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:256
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:261
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -9491,6 +9534,18 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:108
 msgid "Solar System Editor plug-in"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:187
+msgid "Save the Solar System configuration file as..."
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:193
+msgid "Configration files"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:195
+msgid "Select a file to replace the Solar System configuration file"
 msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:511
@@ -13160,59 +13215,59 @@ msgstr "புதன் (Mercury)"
 msgid "Venus"
 msgstr "வெள்ளி (Venus)"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:222
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:227
 msgid "ArchaeoLines Plug-in"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:228
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:233
 msgid ""
 "The ArchaeoLines plugin displays any combination of declination arcs most "
 "relevant to archaeo- or ethnoastronomical studies."
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:229
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:234
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:230
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:235
 msgid ""
 "Declinations of the crossquarter days (days right between solstices and "
 "equinoxes)"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:231
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:236
 msgid "Declinations of the Major Lunar Standstills"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:232
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:237
 msgid "Declinations of the Minor Lunar Standstills"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:233
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:238
 msgid "Declination of the Zenith passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:234
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:239
 msgid "Declination of the Nadir passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:235
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:240
 msgid "Declination of the currently selected object"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:236
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:241
 msgid "Current declination of the sun"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:237
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:242
 msgid "Current declination of the moon"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:238
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:243
 msgid "Current declination of a naked-eye planet"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:239
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:244
 msgid ""
 "The lunar lines include horizon parallax effects. There are two lines each "
 "drawn, for maximum and minimum distance of the moon. Note that declination "
@@ -13220,7 +13275,7 @@ msgid ""
 "high in the sky due to parallax effects."
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:243
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:248
 msgid ""
 "Some religions, most notably Islam, adhere to a practice of observing a "
 "prayer direction towards a particular location. Azimuth lines for two "
@@ -13229,69 +13284,69 @@ msgid ""
 "Earth."
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:246
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:251
 msgid ""
 "In addition, up to two vertical lines with arbitrary azimuth and custom "
 "label can be shown."
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:351
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:356
 msgid "Select color for equinox line"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:362
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:367
 msgid "Select color for solstice lines"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:373
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:378
 msgid "Select color for crossquarter lines"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:384
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:389
 msgid "Select color for major standstill lines"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:395
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:400
 msgid "Select color for minor standstill lines"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:406
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:411
 msgid "Select color for zenith passage line"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:417
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:422
 msgid "Select color for nadir passage line"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:428
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:433
 msgid "Select color for selected object line"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:439
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:444
 msgid "Select color for current sun line"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:450
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:455
 msgid "Select color for current moon line"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:461
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:466
 msgid "Select color for current planet line"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:472
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:477
 msgid "Select color for Geographic Location 1 line"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:483
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:488
 msgid "Select color for Geographic Location 2 line"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:494
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:499
 msgid "Select color for Custom Azimuth 1 line"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:505
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:510
 msgid "Select color for Custom Azimuth 2 line"
 msgstr ""
 
