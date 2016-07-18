@@ -142,6 +142,8 @@ private:
 	double findDistance(double JD, PlanetP object1, PlanetP object2, bool opposition);
 	bool findPrecise(QPair<double, double>* out, PlanetP object1, PlanetP object2, double JD, double step, int prevSign, bool opposition);
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, bool opposition);
+
+	QStringList ephemerisHeader, phenomenaHeader, planetaryPositionsHeader;
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug
