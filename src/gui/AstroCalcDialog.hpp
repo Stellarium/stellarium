@@ -143,6 +143,7 @@ private:
 	bool findPrecise(QPair<double, double>* out, PlanetP object1, PlanetP object2, double JD, double step, int prevSign, bool opposition);
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, bool opposition);
 
+	QString delimiter;
 	QStringList ephemerisHeader, phenomenaHeader, planetaryPositionsHeader;
 };
 
