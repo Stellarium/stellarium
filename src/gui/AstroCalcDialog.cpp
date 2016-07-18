@@ -473,7 +473,7 @@ void AstroCalcDialog::populateMajorPlanetList()
 		if ((planet->getPlanetType()==Planet::isPlanet || planet->getPlanetType()==Planet::isStar) && planet->getEnglishName()!=core->getCurrentPlanet()->getEnglishName())
 			majorPlanet->addItem(trans.qtranslate(planet->getNameI18n()), planet->getEnglishName());
 
-		// the moons of current planet
+		// moons of the current planet
 		if (planet->getPlanetType()==Planet::isMoon && planet->getEnglishName()!=core->getCurrentPlanet()->getEnglishName() && planet->getParent()==core->getCurrentPlanet())
 			majorPlanet->addItem(trans.qtranslate(planet->getNameI18n()), planet->getEnglishName());
 
@@ -732,7 +732,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 
 QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP &object1, PlanetP &object2, double startJD, double stopJD, float maxSeparation, bool opposition)
 {
-	float dist, prevDist, step, step0;
+	double dist, prevDist, step, step0;
 	int sgn, prevSgn = 0;
 	QMap<double, double> separations;
 	QPair<double, double> extremum;
