@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-16 19:57+0700\n"
-"PO-Revision-Date: 2015-11-22 12:02+0000\n"
-"Last-Translator: vine_user <Unknown>\n"
+"PO-Revision-Date: 2016-07-17 20:58+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-17 05:27+0000\n"
+"X-Launchpad-Export-Date: 2016-07-18 05:16+0000\n"
 "X-Generator: Launchpad (build 18140)\n"
 
 #: src/core/modules/Constellation.cpp:297 src/core/modules/Nebula.cpp:189
@@ -30,7 +30,7 @@ msgstr "種類: <b>%1</b>"
 
 #: src/core/modules/Constellation.cpp:297
 msgid "constellation"
-msgstr ""
+msgstr "星座"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:412
 #: src/core/modules/GridLinesMgr.cpp:950 src/core/modules/LandscapeMgr.cpp:414
@@ -604,7 +604,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1074
 msgid "galaxy"
-msgstr ""
+msgstr "銀河系"
 
 #: src/core/modules/Nebula.cpp:1077
 msgid "active galaxy"
@@ -640,11 +640,11 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1101
 msgid "planetary nebula"
-msgstr ""
+msgstr "惑星状星雲"
 
 #: src/core/modules/Nebula.cpp:1104
 msgid "dark nebula"
-msgstr ""
+msgstr "暗黒星雲"
 
 #: src/core/modules/Nebula.cpp:1107
 msgid "cluster associated with nebulosity"
@@ -668,7 +668,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1122
 msgid "supernova remnant"
-msgstr ""
+msgstr "超新星の残骸"
 
 #: src/core/modules/Nebula.cpp:1125
 msgid "stellar association"
@@ -977,7 +977,7 @@ msgstr ""
 
 #: src/core/modules/MilkyWay.cpp:75
 msgid "Milky Way"
-msgstr ""
+msgstr "天の川"
 
 #: src/core/modules/ZodiacalLight.cpp:81
 msgid "Zodiacal Light"
@@ -1586,7 +1586,7 @@ msgstr ""
 #: src/core/StelObject.cpp:123 src/core/StelObject.cpp:125
 #: src/core/StelObject.cpp:133 src/core/StelObject.cpp:135
 msgid "RA/Dec"
-msgstr ""
+msgstr "赤経/赤緯"
 
 #: src/core/StelObject.cpp:154 src/core/StelObject.cpp:157
 #: src/core/StelObject.cpp:167 src/core/StelObject.cpp:170
@@ -2474,7 +2474,7 @@ msgstr ""
 
 #: src/gui/SearchDialog.cpp:244
 msgid "Declination"
-msgstr ""
+msgstr "赤緯"
 
 #: src/gui/SearchDialog.cpp:252
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:945
@@ -2490,13 +2490,13 @@ msgstr ""
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:480
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:515
 msgid "Longitude"
-msgstr ""
+msgstr "経度"
 
 #: src/gui/SearchDialog.cpp:268
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:479
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:516
 msgid "Latitude"
-msgstr ""
+msgstr "緯度"
 
 #: src/gui/SearchDialog.cpp:580
 msgid "Simbad Lookup Error"
@@ -2635,7 +2635,7 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:500
 msgid "Solar system"
-msgstr ""
+msgstr "太陽系"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:502 src/translations.h:70
@@ -2692,11 +2692,11 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:715
 msgid "Conjunction"
-msgstr ""
+msgstr "合 (コンジャンクション)"
 
 #: src/gui/AstroCalcDialog.cpp:719
 msgid "Opposition"
-msgstr ""
+msgstr "衝 (オポジション)"
 
 #: src/gui/BookmarksDialog.cpp:95 src/ui_searchDialogGui.h:699
 msgid "Object"
@@ -2865,12 +2865,12 @@ msgstr "球状星団"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:95
 msgid "Nebulae"
-msgstr ""
+msgstr "星雲"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:97
 msgid "Planetary nebulae"
-msgstr ""
+msgstr "惑星状星雲"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:99
@@ -3210,7 +3210,7 @@ msgstr "海王星"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:228
 msgid "Geneva"
-msgstr ""
+msgstr "ジュネーブ"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:230
@@ -4697,11 +4697,11 @@ msgstr ""
 
 #: src/ui_dateTimeDialogGui.h:382 src/ui_dateTimeDialogGui.h:387
 msgid "Julian Day"
-msgstr ""
+msgstr "ユリウス日"
 
 #: src/ui_dateTimeDialogGui.h:385
 msgid "Modified Julian Day"
-msgstr ""
+msgstr "準ユリウス日"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
@@ -5197,11 +5197,11 @@ msgstr "その他"
 
 #: src/ui_viewDialog.h:1717
 msgid "Planetary Nebulae"
-msgstr ""
+msgstr "惑星状星雲"
 
 #: src/ui_viewDialog.h:1718
 msgid "Galaxies"
-msgstr ""
+msgstr "銀河"
 
 #: src/ui_viewDialog.h:1720
 msgid "Dark Nebulae"
@@ -5490,7 +5490,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1869
 msgid "Deep-Sky Objects"
-msgstr ""
+msgstr "深宇宙の天体"
 
 #: src/ui_viewDialog.h:1872
 msgid "Markings"
@@ -5892,7 +5892,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1262
 msgid "Topocentric coordinates"
-msgstr ""
+msgstr "測心座標"
 
 #: src/ui_configurationDialog.h:1264
 msgid "Activate this option to calculate azimuth from south towards west."
@@ -6158,7 +6158,7 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:381 plugins/TelescopeControl/src/ui_slewDialog.h:327
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: src/ui_astroCalcDialog.h:415
 msgid "Update of planetary positions"
@@ -6216,7 +6216,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:436
 msgid "Between objects:"
-msgstr ""
+msgstr "次の天体間で:"
 
 #: src/ui_astroCalcDialog.h:437
 msgid "and"
@@ -6228,7 +6228,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:442
 msgid "Maximum allowed separation:"
-msgstr ""
+msgstr "許可する最大離角:"
 
 #: src/ui_astroCalcDialog.h:444
 msgid "Value in decimal degrees"
