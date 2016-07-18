@@ -47,6 +47,9 @@ AstroCalcDialog::AstroCalcDialog(QObject *parent)
 	core = StelApp::getInstance().getCore();
 	solarSystem = GETSTELMODULE(SolarSystem);
 	objectMgr = GETSTELMODULE(StelObjectMgr);
+	ephemerisHeader.clear();
+	phenomenaHeader.clear();
+	planetaryPositionsHeader.clear();
 }
 
 AstroCalcDialog::~AstroCalcDialog()
@@ -133,18 +136,18 @@ void AstroCalcDialog::initListPlanetaryPositions()
 
 void AstroCalcDialog::setPlanetaryPositionsHeaderNames()
 {
-	QStringList headerStrings;
+	planetaryPositionsHeader.clear();
 	//TRANSLATORS: name of object
-	headerStrings << q_("Name");
+	planetaryPositionsHeader << q_("Name");
 	//TRANSLATORS: right ascension
-	headerStrings << q_("RA (J2000)");
+	planetaryPositionsHeader << q_("RA (J2000)");
 	//TRANSLATORS: declination
-	headerStrings << q_("Dec (J2000)");
+	planetaryPositionsHeader << q_("Dec (J2000)");
 	//TRANSLATORS: magnitude
-	headerStrings << q_("Mag.");
+	planetaryPositionsHeader << q_("Mag.");
 	//TRANSLATORS: type of object
-	headerStrings << q_("Type");
-	ui->planetaryPositionsTreeWidget->setHeaderLabels(headerStrings);
+	planetaryPositionsHeader << q_("Type");
+	ui->planetaryPositionsTreeWidget->setHeaderLabels(planetaryPositionsHeader);
 
 	// adjust the column width
 	for(int i = 0; i < ColumnCount; ++i)
@@ -249,17 +252,16 @@ void AstroCalcDialog::selectCurrentEphemeride(const QModelIndex &modelIndex)
 
 void AstroCalcDialog::setEphemerisHeaderNames()
 {
-	QStringList headerStrings;
-	//TRANSLATORS: name of object
-	headerStrings << q_("Date and Time");
-	headerStrings << q_("JD");
+	ephemerisHeader.clear();
+	ephemerisHeader << q_("Date and Time");
+	ephemerisHeader << q_("Julian Day");
 	//TRANSLATORS: right ascension
-	headerStrings << q_("RA (J2000)");
+	ephemerisHeader << q_("RA (J2000)");
 	//TRANSLATORS: declination
-	headerStrings << q_("Dec (J2000)");
+	ephemerisHeader << q_("Dec (J2000)");
 	//TRANSLATORS: magnitude
-	headerStrings << q_("Mag.");
-	ui->ephemerisTreeWidget->setHeaderLabels(headerStrings);
+	ephemerisHeader << q_("Mag.");
+	ui->ephemerisTreeWidget->setHeaderLabels(ephemerisHeader);
 
 	// adjust the column width
 	for(int i = 0; i < EphemerisCount; ++i)
@@ -365,27 +367,23 @@ void AstroCalcDialog::saveEphemeris()
 	QFile ephem(filePath);
 	ephem.open(QFile::WriteOnly | QFile::Truncate);
 	QTextStream ephemList(&ephem);
+	ephemList.setCodec("UTF-8");
 
 	int count = ui->ephemerisTreeWidget->topLevelItemCount();
 
 	QString delimiter = ", ";
-	ephemList << q_("Date and Time") << delimiter
-		  << q_("JD") << delimiter
-		  << q_("RA (J2000)") << delimiter
-		  << q_("Dec (J2000)") << delimiter
-		  << q_("Magnitude") << "\n";
+	ephemList << ephemerisHeader.join(delimiter) << endl;
 	for (int i = 0; i < count; i++)
 	{
-		// Date and Time
-		ephemList << ui->ephemerisTreeWidget->topLevelItem(i)->text(0) << delimiter;
-		// JD
-		ephemList << ui->ephemerisTreeWidget->topLevelItem(i)->text(1) << delimiter;
-		// RA (J2000)
-		ephemList << ui->ephemerisTreeWidget->topLevelItem(i)->text(2) << delimiter;
-		// Dec (J2000)
-		ephemList << ui->ephemerisTreeWidget->topLevelItem(i)->text(3) << delimiter;
-		// Magnitude
-		ephemList << ui->ephemerisTreeWidget->topLevelItem(i)->text(4) << "\n";
+		int columns = ephemerisHeader.size();
+		for (int j=0; j<columns; j++)
+		{
+			ephemList << ui->ephemerisTreeWidget->topLevelItem(i)->text(j);
+			if (j<columns-1)
+				ephemList << delimiter;
+			else
+				ephemList << endl;
+		}
 	}
 
 	ephem.close();
@@ -517,13 +515,13 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 
 void AstroCalcDialog::setPhenomenaHeaderNames()
 {
-	QStringList headerStrings;
-	headerStrings << q_("Phenomenon");
-	headerStrings << q_("Date and Time");
-	headerStrings << q_("Object 1");
-	headerStrings << q_("Object 2");
-	headerStrings << q_("Separation");
-	ui->phenomenaTreeWidget->setHeaderLabels(headerStrings);
+	phenomenaHeader.clear();
+	phenomenaHeader << q_("Phenomenon");
+	phenomenaHeader << q_("Date and Time");
+	phenomenaHeader << q_("Object 1");
+	phenomenaHeader << q_("Object 2");
+	phenomenaHeader << q_("Separation");
+	ui->phenomenaTreeWidget->setHeaderLabels(phenomenaHeader);
 
 	// adjust the column width
 	for(int i = 0; i < PhenomenaCount; ++i)
@@ -678,27 +676,23 @@ void AstroCalcDialog::savePhenomena()
 	QFile phenomena(filePath);
 	phenomena.open(QFile::WriteOnly | QFile::Truncate);
 	QTextStream phenomenaList(&phenomena);
+	phenomenaList.setCodec("UTF-8");
 
 	int count = ui->phenomenaTreeWidget->topLevelItemCount();
 
 	QString delimiter = ", ";
-	phenomenaList << q_("Phenomenon") << delimiter
-		      << q_("Date and Time") << delimiter
-		      << q_("Object 1") << delimiter
-		      << q_("Object 2") << delimiter
-		      << q_("Separation") << "\n";
+	phenomenaList << phenomenaHeader.join(delimiter) << endl;
 	for (int i = 0; i < count; i++)
 	{
-		// Phenomenon
-		phenomenaList << ui->phenomenaTreeWidget->topLevelItem(i)->text(0) << delimiter;
-		// Date and Time
-		phenomenaList << ui->phenomenaTreeWidget->topLevelItem(i)->text(1) << delimiter;
-		// Object 1
-		phenomenaList << ui->phenomenaTreeWidget->topLevelItem(i)->text(2) << delimiter;
-		// Object 2
-		phenomenaList << ui->phenomenaTreeWidget->topLevelItem(i)->text(3) << delimiter;
-		// Separation
-		phenomenaList << ui->phenomenaTreeWidget->topLevelItem(i)->text(4) << "\n";
+		int columns = phenomenaHeader.size();
+		for (int j=0; j<columns; j++)
+		{
+			phenomenaList << ui->phenomenaTreeWidget->topLevelItem(i)->text(j);
+			if (j<columns-1)
+				phenomenaList << delimiter;
+			else
+				phenomenaList << endl;
+		}
 	}
 
 	phenomena.close();
