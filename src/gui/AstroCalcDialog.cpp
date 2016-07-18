@@ -41,6 +41,7 @@ int AstroCalcDialog::DisplayedPositionIndex = -1;
 
 AstroCalcDialog::AstroCalcDialog(QObject *parent)
 	: StelDialog(parent)
+	, delimiter(", ")
 {
 	dialogName = "AstroCalc";
 	ui = new Ui_astroCalcDialogForm;
@@ -371,7 +372,6 @@ void AstroCalcDialog::saveEphemeris()
 
 	int count = ui->ephemerisTreeWidget->topLevelItemCount();
 
-	QString delimiter = ", ";
 	ephemList << ephemerisHeader.join(delimiter) << endl;
 	for (int i = 0; i < count; i++)
 	{
@@ -680,7 +680,6 @@ void AstroCalcDialog::savePhenomena()
 
 	int count = ui->phenomenaTreeWidget->topLevelItemCount();
 
-	QString delimiter = ", ";
 	phenomenaList << phenomenaHeader.join(delimiter) << endl;
 	for (int i = 0; i < count; i++)
 	{
