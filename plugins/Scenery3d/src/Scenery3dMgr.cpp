@@ -45,6 +45,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
 #include "LandscapeMgr.hpp"
+#include "StelMainView.hpp"
 
 #define S3D_CONFIG_PREFIX QString("Scenery3d")
 
@@ -164,6 +165,8 @@ void Scenery3dMgr::init()
 	createActions();
 	createToolbarButtons();
 
+	connect(&StelMainView::getInstance(), SIGNAL(reloadShadersRequested()), this, SLOT(reloadShaders()));
+
 	//finally, hook up the lightscape toggle event (external to this plugin) to cubemap redraw
 	StelAction* action = StelApp::getInstance().getStelActionManager()->findAction("actionShow_LandscapeIllumination");
 	Q_ASSERT(action);
@@ -237,7 +240,6 @@ void Scenery3dMgr::createActions()
 	addAction("actionShow_Scenery3d_debuginfo",        groupName, N_("Toggle debug information"), this,          "enableDebugInfo",   "Ctrl+R, D");
 	addAction("actionShow_Scenery3d_locationinfo",     groupName, N_("Toggle location text"),     this,          "enableLocationInfo","Ctrl+R, T");
 	addAction("actionShow_Scenery3d_torchlight",       groupName, N_("Toggle torchlight"),        this,          "enableTorchLight",  "Ctrl+R, L");
-	addAction("actionReload_Scenery3d_shaders",        groupName, N_("Reload shaders"),           this,          "reloadShaders()",   "Ctrl+R, P");
 }
 
 void Scenery3dMgr::createToolbarButtons() const
