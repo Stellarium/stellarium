@@ -21,35 +21,55 @@
   This is the vertex shader for solar system object rendering
  */
 
-attribute highp vec3 vertex;
-attribute highp vec3 unprojectedVertex;
+attribute highp vec3 vertex; // vertex projected by CPU
 attribute mediump vec2 texCoord;
+attribute highp vec3 unprojectedVertex; //original vertex coordinate
+#ifdef IS_OBJ
+    attribute mediump vec3 normalIn; // OBJs have pre-calculated normals
+#endif
+
 uniform highp mat4 projectionMatrix;
-uniform highp vec3 lightDirection;
-uniform highp vec3 eyeDirection;
-varying mediump vec2 texc;
-varying highp vec3 P;
-#ifdef IS_MOON
-    varying highp vec3 normalX;
-    varying highp vec3 normalY;
-    varying highp vec3 normalZ;
+
+varying mediump vec2 texc; //texture coord
+varying highp vec3 P; //original unprojected position
+
+#ifdef IS_OBJ
+    //OBJ uses single normal for oren-nayar
+    varying mediump vec3 normal;
 #else
-    varying mediump float lum_;
+    #ifdef IS_MOON
+        //Luna uses normal mapping
+        varying highp vec3 normalX;
+        varying highp vec3 normalY;
+        varying highp vec3 normalZ;
+    #else
+        //normal objects use gourard shading
+        //good enough for our spheres
+        uniform highp vec3 lightDirection;
+        varying mediump float lum_;
+    #endif
 #endif
 
 void main()
 {
     gl_Position = projectionMatrix * vec4(vertex, 1.);
     texc = texCoord;
-    highp vec3 normal = normalize(unprojectedVertex);
-#ifdef IS_MOON
-    normalX = normalize(cross(vec3(0,0,1), normal));
-    normalY = normalize(cross(normal, normalX));
-    normalZ = normal;
-#else
-    mediump float c = dot(lightDirection, normal);
-    lum_ = clamp(c, 0.0, 1.0);
-#endif
-
     P = unprojectedVertex;
+    
+#ifdef IS_OBJ
+    //OBJ uses imported normals
+    normal = normalIn;
+#else
+    //other objects use the spherical normals
+    highp vec3 normal = normalize(unprojectedVertex);
+    #ifdef IS_MOON
+        normalX = normalize(cross(vec3(0,0,1), normal));
+        normalY = normalize(cross(normal, normalX));
+        normalZ = normal;
+    #else
+        //simple Lambert illumination
+        mediump float c = dot(lightDirection, normal);
+        lum_ = clamp(c, 0.0, 1.0);
+    #endif
+#endif
 }
