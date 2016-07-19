@@ -37,6 +37,7 @@
 #include "Planet.hpp"
 #include "MinorPlanet.hpp"
 #include "Comet.hpp"
+#include "StelMainView.hpp"
 
 #include "StelSkyDrawer.hpp"
 #include "StelUtils.hpp"
@@ -193,6 +194,7 @@ void SolarSystem::init()
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(updateSkyCulture(QString)));
+	connect(&StelMainView::getInstance(), SIGNAL(reloadShadersRequested()), this, SLOT(reloadShaders()));
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Planets", displayGroup, N_("Planets"), "planetsDisplayed", "P");
@@ -304,6 +306,12 @@ void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
 	}
 
 	updateI18n();
+}
+
+void SolarSystem::reloadShaders()
+{
+	Planet::deinitShader();
+	Planet::initShader();
 }
 
 void SolarSystem::drawPointer(const StelCore* core)

@@ -158,11 +158,18 @@ signals:
 	void screenshotRequested(void);
 	void fullScreenChanged(bool b);
 
+	//! Emitted when the "Reload shaders" action is perfomed
+	//! Interested objects should subscribe to this signal and reload their shaders
+	//! when this is emitted
+	void reloadShadersRequested();
+
 private slots:
 	// Do the actual screenshot generation in the main thread with this method.
 	void doScreenshot(void);
 	void minFpsChanged();
 	void updateNightModeProperty();
+
+	void reloadShaders();
 
 private:
 	//! Start the display loop
