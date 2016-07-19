@@ -21,13 +21,17 @@
   This is the fragment shader for solar system object rendering
  */
 
-varying mediump vec2 texc;
+varying mediump vec2 texc; //texture coord
+varying highp vec3 P; //original vertex pos in model space
+#ifdef IS_OBJ
+    varying mediump vec3 normal; //pre-calculated normals
+#endif
+
 uniform sampler2D tex;
 uniform mediump vec3 ambientLight;
 uniform mediump vec3 diffuseLight;
 uniform highp vec4 sunInfo;
 uniform mediump float skyBrightness;
-varying highp vec3 P;
 
 uniform int shadowCount;
 uniform highp mat4 shadowData;
@@ -40,22 +44,48 @@ uniform sampler2D ringS;
 uniform bool isRing;
 #endif
 
-#ifdef IS_MOON
-uniform sampler2D earthShadow;
-uniform sampler2D normalMap;
-uniform highp vec3 lightDirection;
-uniform highp vec3 eyeDirection;
-varying highp vec3 normalX;
-varying highp vec3 normalY;
-varying highp vec3 normalZ;
-#else
-varying mediump float lum_;
+#if defined(IS_OBJ) || defined(IS_MOON)
+    //light and eye direction in model space
+    uniform highp vec3 lightDirection;
+    uniform highp vec3 eyeDirection;
 #endif
+#ifdef IS_MOON
+    uniform sampler2D earthShadow;
+    uniform sampler2D normalMap;
+
+    varying highp vec3 normalX;
+    varying highp vec3 normalY;
+    varying highp vec3 normalZ;
+#else
+    varying mediump float lum_;
+#endif
+
+// Calculates the Oren-Nayar reflectance with fixed sigma and E0 (https://en.wikipedia.org/wiki/Oren%E2%80%93Nayar_reflectance_model)
+mediump float orenNayar(in mediump vec3 normal, in highp vec3 lightDir, in highp vec3 viewDir)
+{
+    // GZ next 2 dont require highp IMHO
+    mediump float cosAngleLightNormal = dot(normal, lightDir);
+    mediump float cosAngleEyeNormal = dot(normal, viewDir);
+    //acos can be quite expensive, can we avoid it?
+    mediump float angleLightNormal = acos(cosAngleLightNormal);
+    mediump float angleEyeNormal = acos(cosAngleEyeNormal);
+    mediump float alpha = max(angleEyeNormal, angleLightNormal);
+    mediump float beta = min(angleEyeNormal, angleLightNormal);
+    mediump float gamma = dot(viewDir - normal * cosAngleEyeNormal, lightDir - normal * cosAngleLightNormal);
+    // GZ next 5 can be lowp instead of mediump. Roughness original 1.0, then 0.8 in 0.14.0.
+    lowp float roughness = 0.9;
+    lowp float roughnessSquared = roughness * roughness;
+    lowp float A = 1.0 - 0.5 * (roughnessSquared / (roughnessSquared + 0.57));
+    lowp float B = 0.45 * (roughnessSquared / (roughnessSquared + 0.09));
+    lowp float C = sin(alpha) * tan(beta);
+    // GZ final number was 2, but this causes overly bright moon. was 1.5 in 0.14.0.
+    return max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C) * 1.85;
+}
 
 void main()
 {
     mediump float final_illumination = 1.0;
-#ifdef IS_MOON
+#if defined(IS_OBJ) || defined(IS_MOON)
     mediump float lum = 1.;
 #else
     mediump float lum = lum_;
@@ -64,6 +94,7 @@ void main()
     if(isRing)
         lum=1.0;
 #endif
+#ifndef IS_OBJ //shadows are buggy for OBJs for now
     if(lum > 0.0)
     {
         highp vec3 sunPosition = sunInfo.xyz;
@@ -137,29 +168,17 @@ void main()
             }
         }
     }
+#endif
 
 #ifdef IS_MOON
     mediump vec3 normal = texture2D(normalMap, texc).rgb-vec3(0.5, 0.5, 0);
     normal = normalize(normalX*normal.x+normalY*normal.y+normalZ*normal.z);
     // normal now contains the real surface normal taking normal map into account
+#endif
+#if defined(IS_OBJ) || defined(IS_MOON)
     // Use an Oren-Nayar model for rough surfaces
     // Ref: http://content.gpwiki.org/index.php/D3DBook:(Lighting)_Oren-Nayar
-// GZ next 2 dont require highp IMHO
-    mediump float cosAngleLightNormal = dot(normal, lightDirection);
-    mediump float cosAngleEyeNormal = dot(normal, eyeDirection);
-    mediump float angleLightNormal = acos(cosAngleLightNormal);
-    mediump float angleEyeNormal = acos(cosAngleEyeNormal);
-    mediump float alpha = max(angleEyeNormal, angleLightNormal);
-    mediump float beta = min(angleEyeNormal, angleLightNormal);
-    mediump float gamma = dot(eyeDirection - normal * cosAngleEyeNormal, lightDirection - normal * cosAngleLightNormal);
-// GZ next 5 can be lowp instead of mediump. Roughness original 1.0, then 0.8 in 0.14.0.
-    lowp float roughness = 0.9;
-    lowp float roughnessSquared = roughness * roughness;
-    lowp float A = 1.0 - 0.5 * (roughnessSquared / (roughnessSquared + 0.57));
-    lowp float B = 0.45 * (roughnessSquared / (roughnessSquared + 0.09));
-    lowp float C = sin(alpha) * tan(beta);
-// GZ final number was 2, but this causes overly bright moon. was 1.5 in 0.14.0.
-    lum = max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C) * 1.85;
+    lum = orenNayar(normal, lightDirection, eyeDirection);
 #endif
 //Reduce lum if sky is bright, to avoid burnt-out look in daylight sky.
     lum *= (1.0-0.4*skyBrightness);

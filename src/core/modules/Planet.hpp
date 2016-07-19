@@ -304,6 +304,7 @@ protected:
 	{
 		QVector<Vec3f> posArray;
 		QVector<Vec2f> texCoordArray;
+		QVector<Vec3f> normalArray;
 		QVector<unsigned short> indexArray;
 		StelTextureSP texture;
 	};
@@ -432,6 +433,8 @@ protected:
 	};
 	static MoonShaderVars moonShaderVars;
 	static QOpenGLShaderProgram* moonShaderProgram;
+
+	static QOpenGLShaderProgram* objShaderProgram;
 	
 	static void initShader();
 	static void deinitShader();
