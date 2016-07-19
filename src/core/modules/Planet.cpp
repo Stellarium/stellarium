@@ -40,6 +40,7 @@
 #include "StelOBJ.hpp"
 
 #include <limits>
+#include <QByteArray>
 #include <QTextStream>
 #include <QString>
 #include <QDebug>
@@ -47,6 +48,8 @@
 #include <QOpenGLContext>
 #include <QOpenGLShader>
 #include <QtConcurrent>
+
+bool Planet::shaderError = false;
 
 Vec3f Planet::labelColor = Vec3f(0.4f,0.4f,0.8f);
 Vec3f Planet::orbitColor = Vec3f(1.0f,0.6f,1.0f);
@@ -1237,199 +1240,43 @@ void Planet::PlanetShaderVars::initLocations(QOpenGLShaderProgram* p)
 void Planet::initShader()
 {
 	qDebug() << "Initializing planets GL shaders... ";
+
+	shaderError = true;
 	
-	const char *vsrc =
-		"attribute highp vec3 vertex;\n"
-		"attribute highp vec3 unprojectedVertex;\n"
-		"attribute mediump vec2 texCoord;\n"
-		"uniform highp mat4 projectionMatrix;\n"
-		"uniform highp vec3 lightDirection;\n"
-		"uniform highp vec3 eyeDirection;\n"
-		"varying mediump vec2 texc;\n"
-		"varying highp vec3 P;\n"
-		"#ifdef IS_MOON\n"
-		"    varying highp vec3 normalX;\n"
-		"    varying highp vec3 normalY;\n"
-		"    varying highp vec3 normalZ;\n"
-		"#else\n"
-		"    varying mediump float lum_;\n"
-		"#endif\n"
-		"\n"
-		"void main()\n"
-		"{\n"
-		"    gl_Position = projectionMatrix * vec4(vertex, 1.);\n"
-		"    texc = texCoord;\n"
-		"    highp vec3 normal = normalize(unprojectedVertex);\n"
-		"#ifdef IS_MOON\n"
-		"    normalX = normalize(cross(vec3(0,0,1), normal));\n"
-		"    normalY = normalize(cross(normal, normalX));\n"
-		"    normalZ = normal;\n"
-		"#else\n"
-		"    mediump float c = dot(lightDirection, normal);\n"
-		"    lum_ = clamp(c, 0.0, 1.0);\n"
-		"#endif\n"
-		"\n"
-		"    P = unprojectedVertex;\n"
-		"}\n"
-		"\n";
-	
-	const char *fsrc =
-		"varying mediump vec2 texc;\n"
-		"uniform sampler2D tex;\n"
-		"uniform mediump vec3 ambientLight;\n"
-		"uniform mediump vec3 diffuseLight;\n"
-		"uniform highp vec4 sunInfo;\n"
-		"uniform mediump float skyBrightness;\n"
-		"varying highp vec3 P;\n"
-		"\n"
-		"uniform int shadowCount;\n"
-		"uniform highp mat4 shadowData;\n"
-		"\n"
-		"#ifdef RINGS_SUPPORT\n"
-		"uniform bool ring;\n"
-		"uniform highp float outerRadius;\n"
-		"uniform highp float innerRadius;\n"
-		"uniform sampler2D ringS;\n"
-		"uniform bool isRing;\n"
-		"#endif\n"
-		"\n"
-		"#ifdef IS_MOON\n"
-		"uniform sampler2D earthShadow;\n"
-		"uniform sampler2D normalMap;\n"
-		"uniform highp vec3 lightDirection;\n"
-		"uniform highp vec3 eyeDirection;\n"
-		"varying highp vec3 normalX;\n"
-		"varying highp vec3 normalY;\n"
-		"varying highp vec3 normalZ;\n"
-		"#else\n"
-		"varying mediump float lum_;\n"
-		"#endif\n"
-		"\n"
-		"void main()\n"
-		"{\n"
-		"    mediump float final_illumination = 1.0;\n"
-		"#ifdef IS_MOON\n"
-		"    mediump float lum = 1.;\n"
-		"#else\n"
-		"    mediump float lum = lum_;\n"
-		"#endif\n"
-		"#ifdef RINGS_SUPPORT\n"
-		"    if(isRing)"
-		"        lum=1.0;\n"
-		"#endif\n"
-		"    if(lum > 0.0)\n"
-		"    {\n"
-		"        highp vec3 sunPosition = sunInfo.xyz;\n"
-		"#ifdef RINGS_SUPPORT\n"
-		"        if(ring && !isRing)\n"
-		"        {\n"
-		"            highp vec3 ray = normalize(sunPosition);\n"
-		"            highp float u = - P.z / ray.z;\n"
-		"            if(u > 0.0 && u < 1e10)\n"
-		"            {\n"
-		"                mediump float ring_radius = length(P + u * ray);\n"
-		"                if(ring_radius > innerRadius && ring_radius < outerRadius)\n"
-		"                {\n"
-		"                    ring_radius = (ring_radius - innerRadius) / (outerRadius - innerRadius);\n"
-		"                    lowp float ringAlpha = texture2D(ringS, vec2(ring_radius, 0.5)).w;\n"
-		"                    final_illumination = 1.0 - ringAlpha;\n"
-		"                }\n"
-		"            }\n"
-		"        }\n"
-		"#endif\n"
-		"\n"
-		"        highp float sunRadius = sunInfo.w;\n"
-		"        highp float L = length(sunPosition - P);\n"
-		"        highp float R = asin(sunRadius / L);\n"
-		"        for (int i = 0; i < 4; ++i)\n"
-		"        {\n"
-		"            if (shadowCount>i)\n"
-		"            {\n"
-		"                highp vec3 satellitePosition = shadowData[i].xyz;\n"
-		"                highp float satelliteRadius = shadowData[i].w;\n"
-		"                highp float l = length(satellitePosition - P);\n"
-		"                highp float r = asin(satelliteRadius / l);\n"
-		"                highp float d = acos(min(1.0, dot(normalize(sunPosition - P), normalize(satellitePosition - P))));\n"
-		"\n"
-		"                mediump float illumination = 1.0;\n"
-		"                if(d >= R + r)\n"
-		"                {\n"
-		"                    // distance too far\n"
-		"                    illumination = 1.0;\n"
-		"                }\n"
-		"                else if(r >= R + d)\n"
-		"                {\n"
-		"                    // umbra\n"
-		"#ifdef IS_MOON\n"
-		"                    illumination = d / (r - R) * 0.6;\n"
-		"#else\n"
-		"                    illumination = 0.0;\n"
-		"#endif\n"
-		"                }\n"
-		"                else if(d + r <= R)\n"
-		"                {\n"
-		"                    // penumbra completely inside\n"
-		"                    illumination = 1.0 - r * r / (R * R);\n"
-		"                }\n"
-		"                else\n"
-		"                {\n"
-		"                    // penumbra partially inside\n"
-		"#ifdef IS_MOON\n"
-		"                    illumination = ((d - abs(R-r)) / (R + r - abs(R-r))) * 0.4 + 0.6;\n"
-		"#else\n"
-		"                    mediump float x = (R * R + d * d - r * r) / (2.0 * d);\n"
-		"                    mediump float alpha = acos(x / R);\n"
-		"                    mediump float beta = acos((d - x) / r);\n"
-		"                    mediump float AR = R * R * (alpha - 0.5 * sin(2.0 * alpha));\n"
-		"                    mediump float Ar = r * r * (beta - 0.5 * sin(2.0 * beta));\n"
-		"                    mediump float AS = R * R * 2.0 * 1.57079633;\n"
-		"                    illumination = 1.0 - (AR + Ar) / AS;\n"
-		"#endif\n"
-		"                }\n"
-		"                final_illumination = min(illumination, final_illumination);\n"
-		"            }\n"
-		"        }\n"
-		"    }\n"
-		"\n"
-		"#ifdef IS_MOON\n"
-		"    mediump vec3 normal = texture2D(normalMap, texc).rgb-vec3(0.5, 0.5, 0);\n"
-		"    normal = normalize(normalX*normal.x+normalY*normal.y+normalZ*normal.z);\n"
-		"    // normal now contains the real surface normal taking normal map into account\n"
-		"    // Use an Oren-Nayar model for rough surfaces\n"
-		"    // Ref: http://content.gpwiki.org/index.php/D3DBook:(Lighting)_Oren-Nayar\n"
-		// GZ next 2 don't require highp IMHO
-		"    mediump float cosAngleLightNormal = dot(normal, lightDirection);\n"
-		"    mediump float cosAngleEyeNormal = dot(normal, eyeDirection);\n"
-		"    mediump float angleLightNormal = acos(cosAngleLightNormal);\n"
-		"    mediump float angleEyeNormal = acos(cosAngleEyeNormal);\n"
-		"    mediump float alpha = max(angleEyeNormal, angleLightNormal);\n"
-		"    mediump float beta = min(angleEyeNormal, angleLightNormal);\n"
-		"    mediump float gamma = dot(eyeDirection - normal * cosAngleEyeNormal, lightDirection - normal * cosAngleLightNormal);\n"
-		// GZ next 5 can be lowp instead of mediump. Roughness original 1.0, then 0.8 in 0.14.0.
-		"    lowp float roughness = 0.9;\n"
-		"    lowp float roughnessSquared = roughness * roughness;\n"
-		"    lowp float A = 1.0 - 0.5 * (roughnessSquared / (roughnessSquared + 0.57));\n"
-		"    lowp float B = 0.45 * (roughnessSquared / (roughnessSquared + 0.09));\n"
-		"    lowp float C = sin(alpha) * tan(beta);\n"
-		// GZ final number was 2, but this causes overly bright moon. was 1.5 in 0.14.0.
-		"    lum = max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C) * 1.85;\n"
-		"#endif\n"
-		//Reduce lum if sky is bright, to avoid burnt-out look in daylight sky.
-		"    lum *= (1.0-0.4*skyBrightness);\n"
-		"    mediump vec4 litColor = vec4(lum * final_illumination * diffuseLight + ambientLight, 1.0);\n"
-		"#ifdef IS_MOON\n"
-		"    if(final_illumination < 0.99)\n"
-		"    {\n"
-		"        lowp vec4 shadowColor = texture2D(earthShadow, vec2(final_illumination, 0.5));\n"
-		"        gl_FragColor = mix(texture2D(tex, texc) * litColor, shadowColor, shadowColor.a);\n"
-		"    }\n"
-		"    else\n"
-		"#endif\n"
-		"    {\n"
-		"        gl_FragColor = texture2D(tex, texc) * litColor;\n"
-		"    }\n"
-		"}\n";
-	
+	// Shader text is loaded from file
+	QString vFileName = StelFileMgr::findFile("data/shaders/planet.vert",StelFileMgr::File);
+	QString fFileName = StelFileMgr::findFile("data/shaders/planet.frag",StelFileMgr::File);
+
+	if(vFileName.isEmpty())
+	{
+		qCritical()<<"Cannot find 'data/shaders/planet.vert', can't use planet rendering!";
+		return;
+	}
+	if(fFileName.isEmpty())
+	{
+		qCritical()<<"Cannot find 'data/shaders/planet.frag', can't use planet rendering!";
+		return;
+	}
+
+	QFile vFile(vFileName);
+	QFile fFile(fFileName);
+
+	if(!vFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		qCritical()<<"Cannot load planet vertex shader file"<<vFileName<<vFile.errorString();
+		return;
+	}
+	QByteArray vsrc = vFile.readAll();
+	vFile.close();
+
+	if(!fFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		qCritical()<<"Cannot load planet fragment shader file"<<vFileName<<fFile.errorString();
+		return;
+	}
+	QByteArray fsrc = fFile.readAll();
+	fFile.close();
+
 	// Default planet shader program
 	QOpenGLShader vshader(QOpenGLShader::Vertex);
 	vshader.compileSourceCode(vsrc);
@@ -1483,22 +1330,56 @@ void Planet::initShader()
 	moonShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 	moonShaderProgram->addShader(&moonVertexShader);
 	moonShaderProgram->addShader(&moonFragmentShader);
-	GL(StelPainter::linkProg(moonShaderProgram, "moonPlanetShaderProgram"));
+	GL(StelPainter::linkProg(moonShaderProgram, "moonShaderProgram"));
 	GL(moonShaderProgram->bind());
 	moonShaderVars.initLocations(moonShaderProgram);
 	GL(moonShaderVars.earthShadow = moonShaderProgram->uniformLocation("earthShadow"));
 	GL(moonShaderVars.normalMap = moonShaderProgram->uniformLocation("normalMap"));
 	GL(moonShaderProgram->release());
+
+	shaderError = false;
+
+	//check if the programs are valid, and delete them if they are not
+	if(!planetShaderProgram->isLinked())
+	{
+		qCritical()<<"Failed to link planet shader program";
+		delete planetShaderProgram;
+		planetShaderProgram = NULL;
+		shaderError = true;
+	}
+	if(!ringPlanetShaderProgram->isLinked())
+	{
+		qCritical()<<"Failed to link ring planet shader program";
+		delete ringPlanetShaderProgram;
+		ringPlanetShaderProgram = NULL;
+		shaderError = true;
+	}
+	if(!moonShaderProgram->isLinked())
+	{
+		qCritical()<<"Failed to link moon shader program";
+		delete moonShaderProgram;
+		moonShaderProgram = NULL;
+		shaderError = true;
+	}
 }
 
 void Planet::deinitShader()
 {
-	delete planetShaderProgram;
-	planetShaderProgram = NULL;
-	delete ringPlanetShaderProgram;
-	ringPlanetShaderProgram = NULL;
-	delete moonShaderProgram;
-	moonShaderProgram = NULL;
+	if(planetShaderProgram)
+	{
+		delete planetShaderProgram;
+		planetShaderProgram = NULL;
+	}
+	if(ringPlanetShaderProgram)
+	{
+		delete ringPlanetShaderProgram;
+		ringPlanetShaderProgram = NULL;
+	}
+	if(moonShaderProgram)
+	{
+		delete moonShaderProgram;
+		moonShaderProgram = NULL;
+	}
 }
 
 void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz, bool drawOnlyRing)
@@ -1784,12 +1665,10 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 		painter->drawFromArray(StelPainter::Triangles, model.indiceArr.size(), 0, false, model.indiceArr.constData());
 		return;
 	}
-	
-	if (planetShaderProgram==NULL)
-		Planet::initShader();
-	Q_ASSERT(planetShaderProgram!=NULL);
-	Q_ASSERT(ringPlanetShaderProgram!=NULL);
-	Q_ASSERT(moonShaderProgram!=NULL);
+
+	//cancel out if shaders are invalid
+	if(shaderError)
+		return;
 	
 	QOpenGLShaderProgram* shader = planetShaderProgram;
 	const PlanetShaderVars* shaderVars = &planetShaderVars;
@@ -1803,6 +1682,28 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 		shader = moonShaderProgram;
 		shaderVars = &moonShaderVars;
 	}
+	//check if shaders are loaded
+	if(!shader)
+	{
+		Planet::initShader();
+
+		if(shaderError)
+		{
+			qCritical()<<"Can't use planet drawing, shaders invalid!";
+			return;
+		}
+
+		shader = planetShaderProgram;
+		if (rings)
+		{
+			shader = ringPlanetShaderProgram;
+		}
+		if (this==ssm->getMoon())
+		{
+			shader = moonShaderProgram;
+		}
+	}
+
 	GL(shader->bind());
 	
 	const Mat4f& m = painter->getProjector()->getProjectionMatrix();

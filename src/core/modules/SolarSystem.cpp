@@ -207,8 +207,7 @@ void SolarSystem::init()
 
 void SolarSystem::deinit()
 {
-	if(Planet::planetShaderProgram)
-		Planet::deinitShader();
+	Planet::deinitShader();
 }
 
 void SolarSystem::recreateTrails()
