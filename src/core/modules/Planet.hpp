@@ -380,6 +380,8 @@ protected:
 
 	ApparentMagnitudeAlgorithm vMagAlgorithm;
 
+	static bool shaderError;		// True if loading shaders caused errors
+
 	static Vec3f labelColor;
 	static StelTextureSP hintCircleTex;	
 	static QMap<PlanetType, QString> pTypeMap; // Maps fast type to english name.
