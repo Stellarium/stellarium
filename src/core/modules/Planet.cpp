@@ -1514,6 +1514,25 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 	if (screenSz>1.)
 	{
+		//make better use of depth buffer by adjusting clipping planes
+		//must be done before creating StelPainter
+		//depth buffer is used for object with rings or with OBJ models
+		//it is not used for normal spherical object rendering without rings!
+		//but it does not hurt to adjust it in all cases
+		double n,f;
+		core->getClippingPlanes(&n,&f); // Save clipping planes
+
+		//determine the minimum size of the clip space
+		double r = radius;
+		if(rings)
+			r+=rings->getSize();
+
+		const double dist = getEquinoxEquatorialPos(core).length();
+		double z_near = (dist - r); //near Z should be as close as possible to the actual geometry
+		double z_far  = (dist + 10*r); //far Z should be quite a bit further behind (Z buffer accuracy is worse near the far plane)
+		if (z_near < 0.0) z_near = 0.0;
+		core->setClippingPlanes(z_near,z_far);
+
 		StelProjector::ModelViewTranformP transfo2 = transfo->clone();
 		transfo2->combine(Mat4d::zrotation(M_PI/180*(axisRotation + 90.)));
 		StelPainter* sPainter = new StelPainter(core->getProjection(transfo2));
@@ -1553,20 +1572,6 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		if (this==ssm->getSun())
 			sPainter->setColor(2.f, pow(0.75f, extinctedMag)*2.f, pow(0.42f, 0.9f*extinctedMag)*2.f);
 
-
-		double n,f;
-		if (rings)
-		{
-			// The planet has rings, we need to use depth buffer and adjust the clipping planes to avoid 
-			// reaching the maximum resolution of the depth buffer
-			const double dist = getEquinoxEquatorialPos(core).length();
-			double z_near = 0.9*(dist - rings->getSize());
-			double z_far  = 1.1*(dist + rings->getSize());
-			if (z_near < 0.0) z_near = 0.0;
-			core->getClippingPlanes(&n,&f); // Save clipping planes
-			core->setClippingPlanes(z_near,z_far);
-		}
-
 		if(ssm->getFlagUseObjModels() && !objModelPath.isEmpty())
 		{
 			if(!drawObjModel(sPainter, screenSz))
@@ -1577,10 +1582,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		else
 			drawSphere(sPainter, screenSz, drawOnlyRing);
 
-		if(rings)
-		{
-			core->setClippingPlanes(n,f);  // Restore old clipping planes
-		}
+		core->setClippingPlanes(n,f);  // Restore old clipping planes
 
 		delete sPainter;
 		sPainter=NULL;
@@ -1973,6 +1975,7 @@ Planet::PlanetOBJModel* Planet::loadObjModel() const
 		qCritical()<<"Planet OBJ model for"<<englishName<<"has no diffuse texture, aborting loading";
 		return NULL;
 	}
+
 	//we assume the OBJ is modeled in km
 	//so we have to scale it to AU
 	obj.scale(sphereScale / AU);
@@ -2024,6 +2027,12 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 	painter->enableTexture2d(true);
 	glDisable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
+	//depth testing is required here
+	glDepthMask(GL_TRUE);
+	glClear(GL_DEPTH_BUFFER_BIT);
+	glEnable(GL_DEPTH_TEST);
+
 
 	QVector<Vec3f> projectedVertexArr;
 	const int vtxCount = objModel->posArray.size();
@@ -2034,6 +2043,7 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 	painter->drawFromArray(StelPainter::Triangles, objModel->indexArray.size(), 0, false, objModel->indexArray.constData());
 
 	glDisable(GL_CULL_FACE);
+	glDisable(GL_DEPTH_TEST);
 
 	return true;
 }
