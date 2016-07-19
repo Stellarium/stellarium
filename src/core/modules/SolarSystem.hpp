@@ -443,6 +443,9 @@ private slots:
 	//! @param skyCultureDir the name of the directory containing the sky culture to use.
 	void updateSkyCulture(const QString& skyCultureDir);
 
+	//! Called following StelMainView::reloadShadersRequested
+	void reloadShaders();
+
 private:
 	//! Search for SolarSystem objects which are close to the position given
 	//! in earth equatorial position.
