@@ -366,7 +366,13 @@ void AstroCalcDialog::saveEphemeris()
 	filter.append(" (*.csv)");
 	QString filePath = QFileDialog::getSaveFileName(0, q_("Save calculated ephemerides as..."), StelFileMgr::getScreenshotDir(), filter);
 	QFile ephem(filePath);
-	ephem.open(QFile::WriteOnly | QFile::Truncate);
+	if (ephem.open(QFile::WriteOnly | QFile::Truncate))
+	{
+		qWarning() << "AstroCalc: Unable to open file!"
+			   << QDir::toNativeSeparators(filePath);
+		return;
+	}
+
 	QTextStream ephemList(&ephem);
 	ephemList.setCodec("UTF-8");
 
@@ -674,7 +680,13 @@ void AstroCalcDialog::savePhenomena()
 	filter.append(" (*.csv)");
 	QString filePath = QFileDialog::getSaveFileName(0, q_("Save calculated phenomena as..."), StelFileMgr::getScreenshotDir(), filter);
 	QFile phenomena(filePath);
-	phenomena.open(QFile::WriteOnly | QFile::Truncate);
+	if (phenomena.open(QFile::WriteOnly | QFile::Truncate))
+	{
+		qWarning() << "AstroCalc: Unable to open file!"
+			   << QDir::toNativeSeparators(filePath);
+		return;
+	}
+
 	QTextStream phenomenaList(&phenomena);
 	phenomenaList.setCodec("UTF-8");
 
