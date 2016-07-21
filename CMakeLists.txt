@@ -593,6 +593,7 @@ INCLUDE_DIRECTORIES(
 
 ########### Subdirectories ###############
 ADD_SUBDIRECTORY( data )
+ADD_SUBDIRECTORY( models )
 ADD_SUBDIRECTORY( src )
 ADD_SUBDIRECTORY( textures )
 ADD_SUBDIRECTORY( doc )
