@@ -63,7 +63,7 @@ There also exist some control and reference files:
 \item[\file{stars\_hip\_sp\_0v0\_2.cat}]
 \item[\file{gcvs\_hip\_part.dat}]
 \item[\file{wds\_hip\_part.dat}]
-\item[\file{cross-index.dat}]
+\item[\file{cross-id.dat}]
 \item[\file{stars.ini}]
 \item[\file{name.fab}]
 \end{description}
@@ -78,7 +78,7 @@ file \file{gcvs\_hip\_part.dat} contains data about variables stars
 contains data about double stars (see section~\ref{sec:StarCatalogues:DoubleStars}) 
 which again contains references into the main catalogue files.
 
-The file \file{cross-index.dat} (see section~\ref{sec:StarCatalogues:CrossIndexData}) contains cross-identification data between HIP, SAO and HD designations.
+The file \file{cross-id.dat} (see section~\ref{sec:StarCatalogues:CrossIdentificationData}) contains cross-identification data between HIP, SAO and HD designations.
 
 A given catalogue file models stars for one and only one level (i.e. for
 a fixed number of zones), which is recorded in the header of the file.
@@ -1229,23 +1229,23 @@ stored in the plain text format with tab delimiter.
 \end{longtabu}
 
 \section{Cross-Identification Data}
-\label{sec:StarCatalogues:CrossIndexData}
+\label{sec:StarCatalogues:CrossIdentificationData}
 
 Since version 0.14.0 Stellarium supports cross-identification between stars from Hipparcos (HIP)~\cite{2012AstL...38..331A}, Smithsonian Astrophysical Observatory (SAO) Star Catalog J2000.0 (SAO) and Henry Draper Catalogue and Extension (HD)~\cite{1993yCat.3135....0C} catalogues.
 
 \subsection{Cross-Identification Catalog File Format}
-\label{sec:StarCatalogues:CrossIndexData:format}
+\label{sec:StarCatalogues:CrossIdentificationData:format}
 
 \subsubsection{General Description}
-\label{sec:StarCatalogues:CrossIndexData:general}
+\label{sec:StarCatalogues:CrossIdentificationData:general}
 
 Stellarium's Cross-Identification catalog data is kept
 in the \file{stars/default} sub-directory of the Installation Directory and/or User Directory (see section~\ref{sec:Directories}).
 
 \subsubsection{File Format}
-\label{sec:StarCatalogues:CrossIndexData:file}
+\label{sec:StarCatalogues:CrossIdentificationData:file}
 
-The \textbf{cross-index.dat} file contains cross reference data for catalogues HIP, SAO and HD, which stored in the plain text format with tab delimiter.
+The \textbf{cross-id.dat} file contains cross reference data for catalogues HIP, SAO and HD, which stored in the plain text format with tab delimiter.
 
 \begin{longtabu} to \textwidth {l|l|X}\toprule
 	\emph{Name} & \emph{Type} & \emph{Description}\\\midrule
