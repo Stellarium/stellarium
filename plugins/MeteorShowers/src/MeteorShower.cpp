@@ -530,7 +530,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 		mstdata = q_("inactive");
 	}
 
-	if(flags&Name)
+	if (flags&Name)
 	{
 		oss << "<h2>" << getNameI18n();
 		if (!m_showerID.toInt())
@@ -543,7 +543,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 		}
 	}
 
-	if(flags&Extra)
+	if (flags&Extra)
 	{
 		oss << q_("Type: <b>%1</b> (%2)").arg(q_("meteor shower"), mstdata) << "<br />";
 	}
@@ -551,7 +551,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
 
-	if(flags&Extra)
+	if (flags&Extra)
 	{
 		QString sDriftRA = StelUtils::radToHmsStr(m_driftAlpha);
 		QString sDriftDE = StelUtils::radToDmsStr(m_driftDelta);
@@ -572,12 +572,12 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 			oss << q_("Geocentric meteoric velocity: %1 km/s").arg(m_speed) << "<br />";
 		}
 
-		if(m_pidx > 0)
+		if (m_pidx > 0)
 		{
 			oss << q_("The population index: %1").arg(m_pidx) << "<br />";
 		}
 
-		if(!m_parentObj.isEmpty())
+		if (!m_parentObj.isEmpty())
 		{
 			oss << q_("Parent body: %1").arg(q_(m_parentObj)) << "<br />";
 		}
@@ -588,7 +588,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 			if(m_activity.start.month() == m_activity.finish.month())
 			{
 				oss << QString("%1: %2 - %3 %4")
-				       .arg(q_("Active"))
+				       .arg(q_("Activity"))
 				       .arg(m_activity.start.day())
 				       .arg(m_activity.finish.day())
 				       .arg(m_activity.start.toString("MMMM"));
@@ -617,7 +617,8 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 				oss << QString("ZHR<sub>max</sub>: %1").arg(q_("variable"));
 				if(m_activity.variable.size() == 2)
 				{
-					oss << QString("; %1-%2").arg(m_activity.variable.at(0))
+					oss << QString("; %1-%2")
+					       .arg(m_activity.variable.at(0))
 					       .arg(m_activity.variable.at(1));
 				}
 				oss << "<br />";
