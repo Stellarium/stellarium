@@ -133,7 +133,6 @@ public:
 	virtual StelObjectP searchByName(const QString&) const { return StelObjectP(); }
 	virtual QStringList listMatchingObjects(const QString&, int, bool, bool) const { return QStringList(); }
 	virtual QStringList listAllObjects(bool) const { return QStringList(); }
-	virtual QStringList listAllObjectsByType(const QString&, bool) const { return QStringList(); }
 	virtual QString getName() const { return QString(); }
 
 signals:
