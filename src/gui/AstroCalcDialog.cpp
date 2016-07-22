@@ -25,6 +25,7 @@
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelFileMgr.hpp"
 
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
@@ -32,19 +33,24 @@
 #include "AstroCalcDialog.hpp"
 #include "ui_astroCalcDialog.h"
 
-#include <QTimer>
+#include <QFileDialog>
 
 QVector<Vec3d> AstroCalcDialog::EphemerisListJ2000;
+QVector<QString> AstroCalcDialog::EphemerisListDates;
 int AstroCalcDialog::DisplayedPositionIndex = -1;
 
 AstroCalcDialog::AstroCalcDialog(QObject *parent)
 	: StelDialog(parent)
+	, delimiter(", ")
 {
 	dialogName = "AstroCalc";
 	ui = new Ui_astroCalcDialogForm;
 	core = StelApp::getInstance().getCore();
 	solarSystem = GETSTELMODULE(SolarSystem);
 	objectMgr = GETSTELMODULE(StelObjectMgr);
+	ephemerisHeader.clear();
+	phenomenaHeader.clear();
+	planetaryPositionsHeader.clear();
 }
 
 AstroCalcDialog::~AstroCalcDialog()
@@ -103,20 +109,21 @@ void AstroCalcDialog::createDialogContent()
 		ui->planetaryPositionsTreeWidget, SLOT(repaint()));
 
 	connect(ui->planetaryPositionsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentPlanetaryPosition(QModelIndex)));
+	connect(ui->planetaryPositionsUpdateButton, SIGNAL(clicked()), this, SLOT(currentPlanetaryPositions()));
 
 	connect(ui->ephemerisPushButton, SIGNAL(clicked()), this, SLOT(generateEphemeris()));
 	connect(ui->ephemerisCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupEphemeris()));
+	connect(ui->ephemerisSaveButton, SIGNAL(clicked()), this, SLOT(saveEphemeris()));
 	connect(ui->ephemerisTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentEphemeride(QModelIndex)));
 	connect(ui->ephemerisTreeWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(onChangedEphemerisPosition(QModelIndex)));
 
 	connect(ui->phenomenaPushButton, SIGNAL(clicked()), this, SLOT(calculatePhenomena()));
 	connect(ui->phenomenaTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentPhenomen(QModelIndex)));
+	connect(ui->phenomenaSaveButton, SIGNAL(clicked()), this, SLOT(savePhenomena()));
 
-	// every 5 min, check if it's time to update
-	QTimer* updateTimer = new QTimer(this);
-	updateTimer->setInterval(300000);
-	connect(updateTimer, SIGNAL(timeout()), this, SLOT(currentPlanetaryPositions()));
-	updateTimer->start();
+	connectBoolProperty(ui->ephemerisShowMarkersCheckBox, "SolarSystem.ephemerisMarkersDisplayed");
+	connectBoolProperty(ui->ephemerisShowDatesCheckBox, "SolarSystem.ephemerisDatesDisplayed");
+
 	currentPlanetaryPositions();
 }
 
@@ -130,18 +137,18 @@ void AstroCalcDialog::initListPlanetaryPositions()
 
 void AstroCalcDialog::setPlanetaryPositionsHeaderNames()
 {
-	QStringList headerStrings;
+	planetaryPositionsHeader.clear();
 	//TRANSLATORS: name of object
-	headerStrings << q_("Name");
+	planetaryPositionsHeader << q_("Name");
 	//TRANSLATORS: right ascension
-	headerStrings << q_("RA (J2000)");
+	planetaryPositionsHeader << q_("RA (J2000)");
 	//TRANSLATORS: declination
-	headerStrings << q_("Dec (J2000)");
+	planetaryPositionsHeader << q_("Dec (J2000)");
 	//TRANSLATORS: magnitude
-	headerStrings << q_("Mag.");
+	planetaryPositionsHeader << q_("Mag.");
 	//TRANSLATORS: type of object
-	headerStrings << q_("Type");
-	ui->planetaryPositionsTreeWidget->setHeaderLabels(headerStrings);
+	planetaryPositionsHeader << q_("Type");
+	ui->planetaryPositionsTreeWidget->setHeaderLabels(planetaryPositionsHeader);
 
 	// adjust the column width
 	for(int i = 0; i < ColumnCount; ++i)
@@ -158,7 +165,7 @@ void AstroCalcDialog::currentPlanetaryPositions()
 	initListPlanetaryPositions();
 
 	double JD = StelApp::getInstance().getCore()->getJD();
-	ui->positionsTimeLabel->setText(q_("Positions on %1").arg(StelUtils::jdToQDateTime(JD + StelUtils::getGMTShiftFromQT(JD)/24).toString("yyyy-MM-dd hh:mm:ss")));
+	ui->positionsTimeLabel->setText(q_("Positions on %1").arg(StelUtils::jdToQDateTime(JD + StelUtils::getGMTShiftFromQT(JD)/24).toString("yyyy-MM-dd hh:mm")));
 
 	foreach (const PlanetP& planet, allPlanets)
 	{
@@ -246,17 +253,16 @@ void AstroCalcDialog::selectCurrentEphemeride(const QModelIndex &modelIndex)
 
 void AstroCalcDialog::setEphemerisHeaderNames()
 {
-	QStringList headerStrings;
-	//TRANSLATORS: name of object
-	headerStrings << q_("Date and Time");
-	headerStrings << q_("JD");
+	ephemerisHeader.clear();
+	ephemerisHeader << q_("Date and Time");
+	ephemerisHeader << q_("Julian Day");
 	//TRANSLATORS: right ascension
-	headerStrings << q_("RA (J2000)");
+	ephemerisHeader << q_("RA (J2000)");
 	//TRANSLATORS: declination
-	headerStrings << q_("Dec (J2000)");
+	ephemerisHeader << q_("Dec (J2000)");
 	//TRANSLATORS: magnitude
-	headerStrings << q_("Mag.");
-	ui->ephemerisTreeWidget->setHeaderLabels(headerStrings);
+	ephemerisHeader << q_("Mag.");
+	ui->ephemerisTreeWidget->setHeaderLabels(ephemerisHeader);
 
 	// adjust the column width
 	for(int i = 0; i < EphemerisCount; ++i)
@@ -319,6 +325,8 @@ void AstroCalcDialog::generateEphemeris()
 		int elements = (int)((StelUtils::qDateTimeToJd(ui->dateToDateTimeEdit->dateTime()) - firstJD)/currentStep);
 		EphemerisListJ2000.clear();
 		EphemerisListJ2000.reserve(elements);
+		EphemerisListDates.clear();
+		EphemerisListDates.reserve(elements);
 		for (int i=0; i<elements; i++)
 		{
 			double JD = firstJD + i*currentStep;
@@ -326,6 +334,7 @@ void AstroCalcDialog::generateEphemeris()
 			core->update(0); // force update to get new coordinates			
 			Vec3d pos = obj->getJ2000EquatorialPos(core);
 			EphemerisListJ2000.append(pos);
+			EphemerisListDates.append(StelUtils::jdToQDateTime(JD + StelUtils::getGMTShiftFromQT(JD)/24).toString("yyyy-MM-dd"));
 			StelUtils::rectToSphe(&ra,&dec,pos);
 			ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->ephemerisTreeWidget);
 			// local date and time
@@ -349,6 +358,41 @@ void AstroCalcDialog::generateEphemeris()
 
 	// sort-by-date
 	ui->ephemerisTreeWidget->sortItems(EphemerisDate, Qt::AscendingOrder);
+}
+
+void AstroCalcDialog::saveEphemeris()
+{
+	QString filter = q_("CSV (Comma delimited)");
+	filter.append(" (*.csv)");
+	QString filePath = QFileDialog::getSaveFileName(0, q_("Save calculated ephemerides as..."), StelFileMgr::getScreenshotDir(), filter);
+	QFile ephem(filePath);
+	if (!ephem.open(QFile::WriteOnly | QFile::Truncate))
+	{
+		qWarning() << "AstroCalc: Unable to open file"
+			   << QDir::toNativeSeparators(filePath);
+		return;
+	}
+
+	QTextStream ephemList(&ephem);
+	ephemList.setCodec("UTF-8");
+
+	int count = ui->ephemerisTreeWidget->topLevelItemCount();
+
+	ephemList << ephemerisHeader.join(delimiter) << endl;
+	for (int i = 0; i < count; i++)
+	{
+		int columns = ephemerisHeader.size();
+		for (int j=0; j<columns; j++)
+		{
+			ephemList << ui->ephemerisTreeWidget->topLevelItem(i)->text(j);
+			if (j<columns-1)
+				ephemList << delimiter;
+			else
+				ephemList << endl;
+		}
+	}
+
+	ephem.close();
 }
 
 void AstroCalcDialog::cleanupEphemeris()
@@ -429,9 +473,15 @@ void AstroCalcDialog::populateMajorPlanetList()
 	//data. Unfortunately, there's no other way to do this than with a cycle.
 	foreach(const PlanetP& planet, planets)
 	{
-		if (planet->getPlanetType()==Planet::isPlanet && planet->getEnglishName()!=core->getCurrentPlanet()->getEnglishName())
+		// major planets and the Sun
+		if ((planet->getPlanetType()==Planet::isPlanet || planet->getPlanetType()==Planet::isStar) && planet->getEnglishName()!=core->getCurrentPlanet()->getEnglishName())
 			majorPlanet->addItem(trans.qtranslate(planet->getNameI18n()), planet->getEnglishName());
-	}
+
+		// moons of the current planet
+		if (planet->getPlanetType()==Planet::isMoon && planet->getEnglishName()!=core->getCurrentPlanet()->getEnglishName() && planet->getParent()==core->getCurrentPlanet())
+			majorPlanet->addItem(trans.qtranslate(planet->getNameI18n()), planet->getEnglishName());
+
+	}	
 	//Restore the selection
 	index = majorPlanet->findData(selectedPlanetId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
@@ -471,13 +521,13 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 
 void AstroCalcDialog::setPhenomenaHeaderNames()
 {
-	QStringList headerStrings;
-	headerStrings << q_("Phenomenon");
-	headerStrings << q_("Date and Time");
-	headerStrings << q_("Object 1");
-	headerStrings << q_("Object 2");
-	headerStrings << q_("Separation");
-	ui->phenomenaTreeWidget->setHeaderLabels(headerStrings);
+	phenomenaHeader.clear();
+	phenomenaHeader << q_("Phenomenon");
+	phenomenaHeader << q_("Date and Time");
+	phenomenaHeader << q_("Object 1");
+	phenomenaHeader << q_("Object 2");
+	phenomenaHeader << q_("Separation");
+	ui->phenomenaTreeWidget->setHeaderLabels(phenomenaHeader);
 
 	// adjust the column width
 	for(int i = 0; i < PhenomenaCount; ++i)
@@ -624,6 +674,41 @@ void AstroCalcDialog::calculatePhenomena()
 	ui->phenomenaTreeWidget->sortItems(PhenomenaDate, Qt::AscendingOrder);
 }
 
+void AstroCalcDialog::savePhenomena()
+{
+	QString filter = q_("CSV (Comma delimited)");
+	filter.append(" (*.csv)");
+	QString filePath = QFileDialog::getSaveFileName(0, q_("Save calculated phenomena as..."), StelFileMgr::getScreenshotDir(), filter);
+	QFile phenomena(filePath);
+	if (!phenomena.open(QFile::WriteOnly | QFile::Truncate))
+	{
+		qWarning() << "AstroCalc: Unable to open file"
+			   << QDir::toNativeSeparators(filePath);
+		return;
+	}
+
+	QTextStream phenomenaList(&phenomena);
+	phenomenaList.setCodec("UTF-8");
+
+	int count = ui->phenomenaTreeWidget->topLevelItemCount();
+
+	phenomenaList << phenomenaHeader.join(delimiter) << endl;
+	for (int i = 0; i < count; i++)
+	{
+		int columns = phenomenaHeader.size();
+		for (int j=0; j<columns; j++)
+		{
+			phenomenaList << ui->phenomenaTreeWidget->topLevelItem(i)->text(j);
+			if (j<columns-1)
+				phenomenaList << delimiter;
+			else
+				phenomenaList << endl;
+		}
+	}
+
+	phenomena.close();
+}
+
 void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, bool opposition)
 {
 	QMap<double, double>::ConstIterator it;
@@ -652,7 +737,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 
 QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP &object1, PlanetP &object2, double startJD, double stopJD, float maxSeparation, bool opposition)
 {
-	float dist, prevDist, step, step0;
+	double dist, prevDist, step, step0;
 	int sgn, prevSgn = 0;
 	QMap<double, double> separations;
 	QPair<double, double> extremum;
