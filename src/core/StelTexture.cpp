@@ -60,7 +60,9 @@ StelTexture::~StelTexture()
 	if (networkReply != NULL)
 	{
 		networkReply->abort();
-		networkReply->deleteLater();
+		//networkReply->deleteLater();
+		delete networkReply;
+		networkReply = NULL;
 	}
 	if (loader != NULL) {
 		delete loader;
