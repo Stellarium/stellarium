@@ -513,6 +513,9 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 	if (parent.data() != sun) {
 		foreach (const PlanetP& planet, parent.data()->satellites)
 		{
+			//skip self-shadowing
+			if(planet.data() == this )
+				continue;
 			if (willCastShadow(this, planet.data()))
 				res.append(planet.data());
 		}
