@@ -57,7 +57,7 @@ public:
 		CatMel		= 0x00000800, //!< Melotte Catalogue of Deep Sky Objects (Mel)
 		CatPGC		= 0x00001000, //!< HYPERLEDA. I. Catalog of galaxies (PGC)
 		CatUGC		= 0x00002000, //!< The Uppsala General Catalogue of Galaxies
-		CatCed		= 0x00004000 //!< Cederblad Catalog of bright diffuse Galactic nebulae (Ced)
+		CatCed		= 0x00004000  //!< Cederblad Catalog of bright diffuse Galactic nebulae (Ced)
 	};
 	Q_DECLARE_FLAGS(CatalogGroup, CatalogGroupFlags)
 
@@ -266,6 +266,7 @@ private:
 	static float circleScale;             // Define the scaling of the hints circle. Unused in 0.15. TODO: Remove this? I see no use. (GZ)
 	static bool drawHintProportional;     // scale hint with nebula size?
 	static bool surfaceBrightnessUsage;
+	static bool designationUsage;
 
 	static bool flagUseTypeFilters;
 	static CatalogGroup catalogFilters;

@@ -56,6 +56,13 @@ if(NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
     ADD_DEFINITIONS(-DQT_NO_DEBUG -DNDEBUG)
 endif()
 
+# Use ccache if possible
+find_program(CCACHE_PROGRAM ccache)
+if(CCACHE_PROGRAM)
+    MESSAGE(STATUS "Found ccache ${CCACHE_PROGRAM}")
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
+endif()
+
 # Add gprof build options if necessary.  Note gmon.out will be created in working directory when Stellarium is executed
 IF(${CMAKE_BUILD_TYPE} MATCHES "GProf")
     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs")
