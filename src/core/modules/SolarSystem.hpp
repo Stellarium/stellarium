@@ -115,6 +115,16 @@ class SolarSystem : public StelObjectModule
 		   WRITE setLabelsAmount
 		   NOTIFY labelsAmountChanged
 		   )
+	Q_PROPERTY(bool ephemerisMarkersDisplayed
+		   READ getFlagEphemerisMarkers
+		   WRITE setFlagEphemerisMarkers
+		   NOTIFY ephemerisMarkersChanged
+		   )
+	Q_PROPERTY(bool ephemerisDatesDisplayed
+		   READ getFlagEphemerisDates
+		   WRITE setFlagEphemerisDates
+		   NOTIFY ephemerisDatesChanged
+		   )
 
 public:
 	SolarSystem();
@@ -393,6 +403,8 @@ signals:
 	void flagMoonScaleChanged(bool b);
 	void moonScaleChanged(double f);
 	void labelsAmountChanged(double f);
+	void ephemerisMarkersChanged(bool b);
+	void ephemerisDatesChanged(bool b);
 
 public:
 	///////////////////////////////////////////////////////////////////////////
@@ -445,6 +457,12 @@ private slots:
 
 	//! Called following StelMainView::reloadShadersRequested
 	void reloadShaders();
+
+	void setFlagEphemerisMarkers(bool b);
+	bool getFlagEphemerisMarkers() const;
+
+	void setFlagEphemerisDates(bool b);
+	bool getFlagEphemerisDates() const;
 
 private:
 	//! Search for SolarSystem objects which are close to the position given
@@ -518,6 +536,8 @@ private:
 	bool flagTranslatedNames;                   // show translated names?
 	bool flagIsolatedTrails;
 	bool flagIsolatedOrbits;
+	bool ephemerisMarkersDisplayed;
+	bool ephemerisDatesDisplayed;
 
 	class TrailGroup* allTrails;
 	StelGui* gui;

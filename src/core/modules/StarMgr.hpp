@@ -58,7 +58,7 @@ typedef struct
 {
 	QString designation;	//! WDS designation
 	int observation;	//! Date of last satisfactory observation, yr
-	int positionAngle;	//! Position Angle at date of last satisfactory observation, deg
+	float positionAngle;	//! Position Angle at date of last satisfactory observation, deg
 	float separation;	//! Separation at date of last satisfactory observation, arcsec
 } wds;
 
@@ -234,11 +234,11 @@ public:
 	//! @return common name of star (from skyculture file star_names.fab)
 	static QString getCommonEnglishName(int hip);
 
-	//! Get the cross-index designations for a star with a specified
+	//! Get the cross-identification designations for a star with a specified
 	//! Hipparcos catalogue number.
 	//! @param hip The Hipparcos number of star
-	//! @return cross-index data
-	static QString getCrossIndexDesignations(int hip);
+	//! @return cross-identification data
+	static QString getCrossIdentificationDesignations(int hip);
 
 	//! Get the type of variability for a variable star with a specified
 	//! Hipparcos catalogue number.
@@ -356,9 +356,9 @@ private:
 	//! @param the path to a file containing the WDS.
 	void loadWds(const QString& WdsFile);
 
-	//! Loads cross-index data from a file.
-	//! @param the path to a file containing the cross-index data.
-	void loadCrossIndex(const QString& crossIndexFile);
+	//! Loads cross-identification data from a file.
+	//! @param the path to a file containing the cross-identification data.
+	void loadCrossIdentificationData(const QString& crossIdFile);
 
 	//! Gets the maximum search level.
 	// TODO: add a non-lame description - what is the purpose of the max search level?

@@ -151,7 +151,6 @@ void Constellation::drawName(StelPainter& sPainter, ConstellationMgr::Constellat
 			case ConstellationMgr::constellationsAbbreviated:
 				name=(abbreviation.startsWith('.') ? "" : abbreviation);
 				break;
-			Q_ASSERT(0);
 		}
 
 		sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], nameFader.getInterstate());

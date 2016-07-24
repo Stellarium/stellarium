@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>707</width>
+    <width>715</width>
     <height>537</height>
    </rect>
   </property>
@@ -1492,7 +1492,7 @@
                  </item>
                 </layout>
                </item>
-               <item row="4" column="0">
+               <item row="5" column="0">
                 <widget class="QCheckBox" name="checkBoxSurfaceBrightnessUsage">
                  <property name="toolTip">
                   <string>Use surface brightness of deep-sky objects for scale of the visibility of their markers and labels.</string>
@@ -1502,7 +1502,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="3" column="0">
+               <item row="4" column="0">
                 <widget class="QCheckBox" name="checkBoxProportionalHints">
                  <property name="toolTip">
                   <string>Use hints proportional to angular size of deep-sky objects</string>
@@ -1512,7 +1512,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="5" column="0">
+               <item row="6" column="0">
                 <layout class="QHBoxLayout" name="horizontalLayout_7">
                  <item>
                   <widget class="QCheckBox" name="nebulaLimitMagnitudeCheckBox">
@@ -1541,6 +1541,16 @@
                   </widget>
                  </item>
                 </layout>
+               </item>
+               <item row="3" column="0">
+                <widget class="QCheckBox" name="checkBoxDesignationsOnlyUsage">
+                 <property name="toolTip">
+                  <string>Use designations of deep-sky objects instead of their common names for screen labels</string>
+                 </property>
+                 <property name="text">
+                  <string>Use designations for screen labels</string>
+                 </property>
+                </widget>
                </item>
               </layout>
              </widget>
@@ -2665,12 +2675,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>

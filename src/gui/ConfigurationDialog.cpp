@@ -164,7 +164,7 @@ void ConfigurationDialog::createDialogContent()
 	// Do the same for sky language:
 	cb = ui->skycultureLanguageComboBox;
 	cb->clear();
-	cb->addItems(StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()));
+	cb->addItems(StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir(), "skycultures"));
 	cb->model()->sort(0);
 	updateCurrentSkyLanguage();
 	connect(cb->lineEdit(), SIGNAL(editingFinished()), this, SLOT(updateCurrentSkyLanguage()));
@@ -630,6 +630,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/nebula_labels_amount", nmgr->getLabelsAmount());
 	conf->setValue("astro/flag_nebula_hints_proportional", nmgr->getHintsProportional());
 	conf->setValue("astro/flag_surface_brightness_usage", nmgr->getFlagSurfaceBrightnessUsage());
+	conf->setValue("gui/flag_dso_designation_usage", nmgr->getDesignationUsage());
 	conf->setValue("astro/flag_nebula_name", nmgr->getFlagHints());
 	conf->setValue("astro/flag_nebula_display_no_texture", !GETSTELMODULE(StelSkyLayerMgr)->getFlagShow());
 	conf->setValue("astro/flag_use_type_filter", nmgr->getFlagUseTypeFilters());
@@ -775,6 +776,8 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("projection/viewport", StelProjector::maskTypeToString(proj->getMaskType()));
 	conf->setValue("projection/viewport_center_offset_x", core->getCurrentStelProjectorParams().viewportCenterOffset[0]);
 	conf->setValue("projection/viewport_center_offset_y", core->getCurrentStelProjectorParams().viewportCenterOffset[1]);
+	conf->setValue("projection/flip_horz", core->getCurrentStelProjectorParams().flipHorz);
+	conf->setValue("projection/flip_vert", core->getCurrentStelProjectorParams().flipVert);
 	conf->setValue("viewing/flag_gravity_labels", proj->getFlagGravityLabels());
 	conf->setValue("navigation/auto_zoom_out_resets_direction", mvmgr->getFlagAutoZoomOutResetsDirection());
 	conf->setValue("gui/flag_mouse_cursor_timeout", StelMainView::getInstance().getFlagCursorTimeout());
