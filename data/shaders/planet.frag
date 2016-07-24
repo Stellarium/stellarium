@@ -94,7 +94,6 @@ void main()
     if(isRing)
         lum=1.0;
 #endif
-#ifndef IS_OBJ //shadows are buggy for OBJs for now
     if(lum > 0.0)
     {
         highp vec3 sunPosition = sunInfo.xyz;
@@ -168,7 +167,6 @@ void main()
             }
         }
     }
-#endif
 
 #ifdef IS_MOON
     mediump vec3 normal = texture2D(normalMap, texc).rgb-vec3(0.5, 0.5, 0);
