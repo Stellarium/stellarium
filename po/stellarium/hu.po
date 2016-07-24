@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-18 20:53+0700\n"
-"PO-Revision-Date: 2016-07-13 16:43+0000\n"
+"PO-Revision-Date: 2016-07-23 07:05+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-19 05:24+0000\n"
+"X-Launchpad-Export-Date: 2016-07-24 05:14+0000\n"
 "X-Generator: Launchpad (build 18147)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -1583,6 +1583,8 @@ msgid ""
 "The full name of this projection method is <i>Lambert azimuthal equal-area "
 "projection</i>. It preserves the area but not the angle."
 msgstr ""
+"Teljes neve <i>Lambert-féle azimutális, területtartó vetület</i>. "
+"Szögtorzító."
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Stereographic"
@@ -1594,6 +1596,8 @@ msgid ""
 "as the planisphere projection. It preserves the angles at which curves cross "
 "each other but it does not preserve area."
 msgstr ""
+"Sztereografikus vetület, ami az ókor óta ismert. Eredetileg planiszférikus "
+"vetület néven is ismert. Szögtartó, de nem területtartó."
 
 #: src/core/StelProjectorClasses.cpp:200
 msgid "Fish-eye"
@@ -2709,7 +2713,7 @@ msgstr "Julián-nap"
 
 #: src/gui/AstroCalcDialog.cpp:364 src/gui/AstroCalcDialog.cpp:673
 msgid "CSV (Comma delimited)"
-msgstr ""
+msgstr "CSV (vesszővel elválasztva)"
 
 #: src/gui/AstroCalcDialog.cpp:366
 msgid "Save calculated ephemerides as..."
@@ -6384,7 +6388,7 @@ msgstr "…"
 
 #: src/ui_astroCalcDialog.h:415
 msgid "Update of planetary positions"
-msgstr ""
+msgstr "Bolygópozíciók frissítése"
 
 #: src/ui_astroCalcDialog.h:416
 msgid "Planetary positions"
@@ -6409,15 +6413,15 @@ msgstr "Efemerisz számítása"
 
 #: src/ui_astroCalcDialog.h:422
 msgid "Save ephemeris"
-msgstr ""
+msgstr "Efemeriszek mentése"
 
 #: src/ui_astroCalcDialog.h:424
 msgid "Show markers of positions of the current celestial body on the sky"
-msgstr ""
+msgstr "A kiválasztott égi objektum pozíciójának jelölése."
 
 #: src/ui_astroCalcDialog.h:426
 msgid "Show markers of positions"
-msgstr ""
+msgstr "Pozíció jelölése"
 
 #: src/ui_astroCalcDialog.h:429 src/ui_astroCalcDialog.h:440
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
@@ -6426,11 +6430,11 @@ msgstr "Eddig:"
 
 #: src/ui_astroCalcDialog.h:432
 msgid "Show dates of positions of current celestial body near markers"
-msgstr ""
+msgstr "Pozíció dátumának mutatása a kiválasztott égi objektum közelében"
 
 #: src/ui_astroCalcDialog.h:434
 msgid "Show dates of positions"
-msgstr ""
+msgstr "Pozíciók dátumának mutatása"
 
 #: src/ui_astroCalcDialog.h:435
 msgid "Ephemeris"
@@ -6462,7 +6466,7 @@ msgstr "Jelenség számítása"
 
 #: src/ui_astroCalcDialog.h:447
 msgid "Save phenomena"
-msgstr ""
+msgstr "Jelenség mentése"
 
 #: src/ui_astroCalcDialog.h:448
 msgid "Phenomena"
@@ -8485,6 +8489,9 @@ msgid ""
 "alone telescope server program%2 or a %3third-party application%4 <b>that "
 "can 'talk' to Stellarium</b>;"
 msgstr ""
+"Az eszköz ugyanahhoz a számítógéphez csatlakozik,  de  %1önálló "
+"távcsővezérlő  program%2, vagy  %3egyéb alkalmazás%4 <b> működteti, ami "
+"képes a Stellarium programmal való párbeszédre.</b>;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:313
 msgid ""
@@ -8660,6 +8667,8 @@ msgid ""
 "<b>Connection delay</b>: If the movement of the telescope reticle on the "
 "screen is uneven, you can try increasing or decreasing this value."
 msgstr ""
+"<b>Kapcsolódási késleltetés</b>: ha a távcső keresőjének mozgása nem "
+"egyenletes, növelni vagy csökkenteni lehet ezt az értéket."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:349
 msgid ""
@@ -8996,6 +9005,8 @@ msgid ""
 "Just don't forget to set it to Meade compatibility mode and set the baud "
 "rate to 9600B%1."
 msgstr ""
+"Be kell állítani a Meade-kompatibilitás módot és a Baud-rate sebességet: "
+"9600B%1."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:427
 msgid ""
@@ -9902,11 +9913,11 @@ msgstr "Naprendszer szerkesztő bővítmény"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:187
 msgid "Save the Solar System configuration file as..."
-msgstr ""
+msgstr "Naprendszer konfigurációs fájl mentése más néven..."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:193
 msgid "Configration files"
-msgstr ""
+msgstr "Konfigurációs fájl"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:195
 msgid "Select a file to replace the Solar System configuration file"
@@ -13927,6 +13938,9 @@ msgid ""
 "The directions are computed based on spherical trigonometry on a spherical "
 "Earth."
 msgstr ""
+"Az iszlám vallás ragaszkodik ahhoz a hagyományhoz, hogy az imát egy bizonyos "
+"irányban kell végezni. Ez alapértelmezés szerint a mekkai Kába-kő, vagy "
+"Jeruzsálem. Az irány gömbi  trigonometria alapján van kiszámítva."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:251
 msgid ""
