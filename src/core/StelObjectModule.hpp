@@ -61,20 +61,28 @@ public:
 	//! Find and return the list of at most maxNbItem objects auto-completing passed object name
 	//! @param objPrefix the first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
-	//! @param useStartOfWords the autofill mode for returned objects names
+	//! @param useStartOfWords decide if start of word is searched
+	//! @param inEnglish list translated names (false) or in English (true)
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
 
+	//! List all StelObjects.
+	//! @param inEnglish list names in English (true) or translated (false)
+	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches
 	virtual QStringList listAllObjects(bool inEnglish) const = 0;
 
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const = 0;
+	//! List all StelObjects by type.
+	//! @param objType object type
+	//! @param inEnglish list translated names (false) or in English (true)
+	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
 
 	virtual QString getName() const = 0;
 
 	//! Auxiliary method of listMatchingObjects()
 	//! @param objName object name
 	//! @param objPrefix the first letters of the searched object
-	//! @param useStartOfWords the autofill mode for returned objects names
+	//! @param useStartOfWords decide if start of word is searched
 	//! @return true if it matches
 	bool matchObjectName(const QString& objName, const QString& objPrefix, bool useStartOfWords) const;
 };

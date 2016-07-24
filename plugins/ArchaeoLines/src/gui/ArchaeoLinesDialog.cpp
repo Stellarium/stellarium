@@ -26,6 +26,7 @@
 #include "StelModule.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMainView.hpp"
+#include "StelOpenGL.hpp"
 
 ArchaeoLinesDialog::ArchaeoLinesDialog()
 	: al(NULL)
@@ -196,9 +197,13 @@ void ArchaeoLinesDialog::createDialogContent()
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(resetArchaeoLinesSettings()));
 
-	// We must apparently warn about a potential problem, but only on Windows. (QTBUG-35302)
+	// We must apparently warn about a potential problem, but only on Windows in OpenGL mode. (QTBUG-35302?)
 	#ifndef Q_OS_WIN
 	ui->switchToWindowedModeLabel->hide();
+	#else
+	QString glRenderer(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
+	if (glRenderer.startsWith("ANGLE", Qt::CaseSensitive))
+		ui->switchToWindowedModeLabel->hide();
 	#endif
 	setAboutHtml();
 }

@@ -569,6 +569,37 @@ Stellarium will point you at that object in the sky even if there is no
 object displayed on the screen. The SIMBAD server being used can be
 selected from the scroll window.
 
+\section{AstroCalc Window}
+\label{sec:gui:AstroCalc}
+
+\newFeature{V0.15} This window provides advanced functionality and is
+still in an experimental phase. You can call it by pressing \key{F10}.
+
+% TODO: Add button on left side.
+
+
+\begin{figure}[htbp]
+\centering\includegraphics[width=\textwidth]{gui_AstroCalc}
+\caption{AstroCalc: Plot traces of planets.}
+\label{fig:gui:AstroCalc:Ephemeris}
+\end{figure}
+
+\noindent The AstroCalc window shows three tabs with different functionality.
+\begin{description}
+\item[Planet Positions] Shows J2000.0 positions and magnitudes for all
+  installed planets, planet moons, minor bodies (asteroids, comets,
+  etc.). Clicking on an entry brings the object into focus.
+
+\item[Ephemeris] Select an object and start and end time, and compute
+  an ephemeris (list of positions and magnitude evolving over time)
+  for that object. The positions are marked in the sky with yellow
+  circles (Figure~\ref{fig:gui:AstroCalc:Ephemeris}). When you click on a date, an orange circle indicates this
+  date. Double-clicking sets the respective date and brings object to
+  focus. You can export the calculated ephemeris into CSV file. 
+
+\item[Phenomena] Compute phenomena like conjunctions and oppositions
+  between planetary objects. You can export the calculated conjunctions and oppositions into CSV file.
+\end{description}
 
 \section{Help Window}
 \label{sec:gui:help}

@@ -117,6 +117,8 @@ void NebulaMgr::setCircleScale(float scale) {Nebula::circleScale = scale;}
 float NebulaMgr::getCircleScale(void) const {return Nebula::circleScale;}
 void NebulaMgr::setHintsProportional(const bool proportional) {if(Nebula::drawHintProportional!=proportional){ Nebula::drawHintProportional=proportional; emit hintsProportionalChanged(proportional);}}
 bool NebulaMgr::getHintsProportional(void) const {return Nebula::drawHintProportional;}
+void NebulaMgr::setDesignationUsage(const bool flag) {if(Nebula::designationUsage!=flag){ Nebula::designationUsage=flag; emit designationUsageChanged(flag);}}
+bool NebulaMgr::getDesignationUsage(void) const {return Nebula::designationUsage; }
 
 NebulaMgr::NebulaMgr(void)
 	: nebGrid(200)
@@ -173,6 +175,7 @@ void NebulaMgr::init()
 	setLabelsAmount(conf->value("astro/nebula_labels_amount", 3).toFloat());
 	setCircleScale(conf->value("astro/nebula_scale",1.0f).toFloat());	
 	setHintsProportional(conf->value("astro/flag_nebula_hints_proportional", false).toBool());
+	setDesignationUsage(conf->value("gui/flag_dso_designation_usage", false).toBool());
 	setFlagSurfaceBrightnessUsage(conf->value("astro/flag_surface_brightness_usage", false).toBool());
 
 	// Load colors from config file
@@ -416,6 +419,8 @@ void NebulaMgr::setCatalogFilters(Nebula::CatalogGroup cflags)
 		setFlagShow(false);
 		loadNebulaSet("default");
 		setFlagShow(status);
+
+		updateI18n(); // OK, update localized names of DSO
 
 		emit catalogFiltersChanged(cflags);
 	}
@@ -827,7 +832,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			dist			= list.at(14).toFloat(); // distance (Mpc for galaxies, kpc for other objects)
 			distErr			= list.at(15).toFloat(); // distance error (Mpc for galaxies, kpc for other objects)
 			// -----------------------------------------------
-			// cross-index data
+			// cross-identification data
 			// -----------------------------------------------
 			NGC			= list.at(16).toInt();	 // NGC number
 			IC			= list.at(17).toInt();	 // IC number

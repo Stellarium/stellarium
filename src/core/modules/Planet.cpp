@@ -532,6 +532,9 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 	if (parent.data() != sun) {
 		foreach (const PlanetP& planet, parent.data()->satellites)
 		{
+			//skip self-shadowing
+			if(planet.data() == this )
+				continue;
 			if (willCastShadow(this, planet.data()))
 				res.append(planet.data());
 		}
@@ -1178,14 +1181,15 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	// Compute the 2D position and check if in the screen
 	const StelProjectorP prj = core->getProjection(transfo);
 	float screenSz = getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
+	float viewportBufferSz=screenSz;
 	// enlarge if this is sun with its huge halo.
 	if (englishName=="Sun")
-		screenSz+=125.f;
+		viewportBufferSz+=125.f;
 	float viewport_left = prj->getViewportPosX();
 	float viewport_bottom = prj->getViewportPosY();
 	if ((prj->project(Vec3d(0.), screenPos)
-	     && screenPos[1]>viewport_bottom - screenSz && screenPos[1] < viewport_bottom + prj->getViewportHeight()+screenSz
-	     && screenPos[0]>viewport_left - screenSz && screenPos[0] < viewport_left + prj->getViewportWidth() + screenSz)
+	     && screenPos[1]>viewport_bottom - viewportBufferSz && screenPos[1] < viewport_bottom + prj->getViewportHeight()+viewportBufferSz
+	     && screenPos[0]>viewport_left - viewportBufferSz && screenPos[0] < viewport_left + prj->getViewportWidth() + viewportBufferSz)
 	     || permanentDrawingOrbits)
 	{
 		// Draw the name, and the circle if it's not too close from the body it's turning around

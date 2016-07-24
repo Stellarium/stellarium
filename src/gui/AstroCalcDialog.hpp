@@ -75,6 +75,7 @@ public:
 	virtual ~AstroCalcDialog();
 
 	static QVector<Vec3d> EphemerisListJ2000;
+	static QVector<QString> EphemerisListDates;
 	static int DisplayedPositionIndex;
 
 public slots:
@@ -95,10 +96,12 @@ private slots:
 	void generateEphemeris();
 	void cleanupEphemeris();
 	void selectCurrentEphemeride(const QModelIndex &modelIndex);
+	void saveEphemeris();
 
 	//! Calculate phenomena for selected celestial body and fill the list.
 	void calculatePhenomena();
 	void selectCurrentPhenomen(const QModelIndex &modelIndex);
+	void savePhenomena();
 
 private:
 	class StelCore* core;
@@ -139,6 +142,9 @@ private:
 	double findDistance(double JD, PlanetP object1, PlanetP object2, bool opposition);
 	bool findPrecise(QPair<double, double>* out, PlanetP object1, PlanetP object2, double JD, double step, int prevSign, bool opposition);
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, bool opposition);
+
+	QString delimiter;
+	QStringList ephemerisHeader, phenomenaHeader, planetaryPositionsHeader;
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug

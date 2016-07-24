@@ -88,6 +88,11 @@ class NebulaMgr : public StelObjectModule
 		   WRITE setHintsAmount
 		   NOTIFY hintsAmountChanged
 		   )
+	Q_PROPERTY(bool flagDesignationLabels
+		   READ getDesignationUsage
+		   WRITE setDesignationUsage
+		   NOTIFY designationUsageChanged
+		   )
 public:
 	NebulaMgr();
 	virtual ~NebulaMgr();
@@ -491,6 +496,11 @@ public slots:
 	//! Get whether hints (symbols) are scaled according to nebula size.
 	bool getHintsProportional(void) const;
 
+	//! Set flag for usage designations of DSO for their labels instead common names.
+	void setDesignationUsage(const bool flag);
+	//! Get flag for usage designations of DSO for their labels instead common names.
+	bool getDesignationUsage(void) const;
+
 	//! Set whether hints (symbols) should be visible according to surface brightness value.
 	void setFlagSurfaceBrightnessUsage(const bool usage) {if(usage!=Nebula::surfaceBrightnessUsage){ Nebula::surfaceBrightnessUsage=usage; emit flagSurfaceBrightnessUsageChanged(usage);}}
 	//! Get whether hints (symbols) are visible according to surface brightness value.
@@ -541,6 +551,7 @@ signals:
 	//! Emitted when the type filter is changed
 	void typeFiltersChanged(Nebula::TypeGroup flags);
 	void hintsProportionalChanged(bool b);
+	void designationUsageChanged(bool b);
 	void flagSurfaceBrightnessUsageChanged(bool b);
 	void labelsAmountChanged(double a);
 	void hintsAmountChanged(double f);

@@ -420,6 +420,26 @@ A few examples:
 \item[node-telescope-server] \url{https://www.npmjs.com/package/node-telescope-server}
 \end{description}
 
+One anonymous user sent a troubleshooting solution when connecting Stellarium to the Celestron \program{NexRemote} software:
+\begin{quote}
+  This involves connecting Stellarium to the \program{NexRemote} software controlling a Celestron NexStar telescope.
+
+  One tricky Window XP issue I fixed was that my older laptop would
+  transiently lose connection with Stellarium although the status
+  would still be ``Connected'' and all looked normal.
+
+  3 (or whatever) slews would work. Next -- nothing. Although all
+  seemed well.
+
+  I boosted the \emph{NexRemote.exe} process in Windows XP to \emph{High} under
+  \emph{Set Priority} under the \program{Windows Task Manager} via
+  \key{\ctrl+\Alt+Del}.
+
+  All slews now proceed normally. Problem went
+  away.\footnote{\url{https://sourceforge.net/p/stellarium/discussion/278769/thread/16e4c054/?limit=25\#8ffa}}
+\end{quote}
+
+
 \newpage
 \section{Observability Plugin}
 \label{sec:plugins:Observability}

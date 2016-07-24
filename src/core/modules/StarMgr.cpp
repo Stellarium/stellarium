@@ -205,7 +205,7 @@ QString StarMgr::getSciAdditionalName(int hip)
 	return QString();
 }
 
-QString StarMgr::getCrossIndexDesignations(int hip)
+QString StarMgr::getCrossIdentificationDesignations(int hip)
 {
 	QString designations;
 	QHash<int,int>::const_iterator it(saoStarsMap.find(hip));
@@ -882,7 +882,7 @@ void StarMgr::loadWds(const QString& WdsFile)
 
 		doubleStar.designation = fields.at(1).trimmed();
 		doubleStar.observation = fields.at(2).toInt();
-		doubleStar.positionAngle = fields.at(3).toInt();
+		doubleStar.positionAngle = fields.at(3).toFloat();
 		doubleStar.separation = fields.at(4).toFloat();
 
 		wdsStarsMapI18n[hip] = doubleStar;
@@ -893,19 +893,19 @@ void StarMgr::loadWds(const QString& WdsFile)
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "double stars";
 }
 
-// Load cross-index data from file
-void StarMgr::loadCrossIndex(const QString& crossIndexFile)
+// Load cross-identification data from file
+void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 {
 	saoStarsMap.clear();
 	saoStarsIndex.clear();
 	hdStarsMap.clear();
 	hdStarsIndex.clear();
 
-	qDebug() << "Loading cross-index data from" << QDir::toNativeSeparators(crossIndexFile);
-	QFile ciFile(crossIndexFile);
+	qDebug() << "Loading cross-identification data from" << QDir::toNativeSeparators(crossIdFile);
+	QFile ciFile(crossIdFile);
 	if (!ciFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "WARNING - could not open" << QDir::toNativeSeparators(crossIndexFile);
+		qWarning() << "WARNING - could not open" << QDir::toNativeSeparators(crossIdFile);
 		return;
 	}
 	const QStringList& allRecords = QString::fromUtf8(ciFile.readAll()).split('\n');
@@ -927,7 +927,7 @@ void StarMgr::loadCrossIndex(const QString& crossIndexFile)
 		const QStringList& fields = record.split('\t');
 		if (fields.size()!=3)
 		{
-			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(crossIndexFile)
+			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(crossIdFile)
 				   << " - record does not match record pattern";
 			continue;
 		}
@@ -938,7 +938,7 @@ void StarMgr::loadCrossIndex(const QString& crossIndexFile)
 			unsigned int hip = fields.at(0).toUInt(&ok);
 			if (!ok)
 			{
-				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(crossIndexFile)
+				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(crossIdFile)
 					   << " - failed to convert " << fields.at(0) << "to a number";
 				continue;
 			}
@@ -962,7 +962,7 @@ void StarMgr::loadCrossIndex(const QString& crossIndexFile)
 		}
 	}
 
-	qDebug() << "Loaded" << readOk << "/" << totalRecords << "cross-index data records";
+	qDebug() << "Loaded" << readOk << "/" << totalRecords << "cross-identification data records for stars";
 }
 
 int StarMgr::getMaxSearchLevel() const
@@ -1505,11 +1505,11 @@ void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 	else
 		loadWds(fic);
 
-	fic = StelFileMgr::findFile("stars/default/cross-index.dat");
+	fic = StelFileMgr::findFile("stars/default/cross-id.dat");
 	if (fic.isEmpty())
-		qWarning() << "WARNING: could not load cross-index data file: stars/default/cross-index.dat";
+		qWarning() << "WARNING: could not load cross-identification data file: stars/default/cross-id.dat";
 	else
-		loadCrossIndex(fic);
+		loadCrossIdentificationData(fic);
 
 	// Turn on sci names/catalog names for western culture only
 	setFlagSciNames(skyCultureDir.startsWith("western"));
