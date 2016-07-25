@@ -5,7 +5,7 @@
 % ArdWar	2012
 % MisterE	2013
 % B. Gerdes	2013
-% G. Zotti	2014-2015
+% G. Zotti	2014-2016
 % Additions inserted from wiki 2015-12-26
 % GZ checked grammar and structure, added ANGLE details and Troubleshooting.
 % Content OK for 0.15+.
@@ -117,7 +117,7 @@ may be installed on your system. Select one of these to run Stellarium:
 \item[Stellarium] OpenGL version. This is the most efficient for
   modern PCs and should be used when you have installed appropriate
   OpenGL drivers. Note that some graphics cards are ``blacklisted'' by
-  Qt to immediately run via DirectX, you cannot force OpenGL in this
+  Qt to immediately run via ANGLE (Direct3D), you cannot force OpenGL in this
   case. This should not bother you.
 \item[Stellarium (ANGLE mode)] Uses Direct3D translation of the OpenGL
   rendering via ANGLE library.  Forces Direct3D version~9.
@@ -162,7 +162,7 @@ item in the GNOME or KDE application menus. If not, just open a
 terminal and type \texttt{stellarium}.
 
 
-\subsection{Troubleshooting}
+\section{Troubleshooting}
 \label{sec:GettingStarted:Running:Troubleshooting}
 
 Stellarium writes startup and other diagnostic messages into a
@@ -173,9 +173,10 @@ been found before.
 
 If you don't succeed in running Stellarium, please see the online
 forum\footnote{\url{https://launchpad.net/stellarium}}.  It includes
-FAQ (Frequently Asked Questions)\index{FAQ} and a general question
-section which may include further hints. Please make sure you have
-read and understood the FAQ before asking the same questions again.
+FAQ (Frequently Asked Questions, also Frequently Answered
+Questions)\index{FAQ} and a general question section which may include
+further hints. Please make sure you have read and understood the FAQ
+before asking the same questions again.
 
 
 %%% Local Variables: 
