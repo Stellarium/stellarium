@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-18 20:53+0700\n"
-"PO-Revision-Date: 2016-06-20 14:28+0000\n"
+"PO-Revision-Date: 2016-07-24 13:22+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-19 05:18+0000\n"
+"X-Launchpad-Export-Date: 2016-07-25 05:15+0000\n"
 "X-Generator: Launchpad (build 18147)\n"
 "Language: bn\n"
 
@@ -64,7 +64,7 @@ msgstr "নক্ষত্রমন্ডল গুলির পরিসর"
 
 #: src/core/modules/ConstellationMgr.cpp:148
 msgid "Constellation selection isolated"
-msgstr ""
+msgstr "শুধু নির্বাচিত তারামন্ডলটি দেখানো হবে"
 
 #: src/core/modules/StarMgr.cpp:413 src/ui_viewDialog.h:1602
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:253
@@ -966,11 +966,11 @@ msgstr "উদয় : %1%"
 
 #: src/core/modules/StarWrapper.cpp:276
 msgid "Year of last satisfactory observation"
-msgstr ""
+msgstr "আপেক্ষিক অবস্থান পরিমেয় বছর"
 
 #: src/core/modules/StarWrapper.cpp:277
 msgid "Position angle"
-msgstr ""
+msgstr "তারাদ্বয়ের আপেক্ষিক অবস্থান"
 
 #: src/core/modules/StarWrapper.cpp:281 src/core/modules/StarWrapper.cpp:283
 #: src/gui/AstroCalcDialog.cpp:523
@@ -1633,7 +1633,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:316
 msgid "Cylinder"
-msgstr "চোঙকার (Cylinder)"
+msgstr "চোঙাকার (Cylinder)"
 
 #: src/core/StelProjectorClasses.cpp:321
 msgid ""
@@ -1685,7 +1685,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:512
 msgid "Miller cylindrical"
-msgstr "চোঙকার (Miller cylindrical)"
+msgstr "চোঙাকার (Miller cylindrical)"
 
 #: src/core/StelProjectorClasses.cpp:517
 msgid ""
@@ -2721,11 +2721,11 @@ msgstr "জুলিয়ান পঞ্জিকা অনুসারে দি
 
 #: src/gui/AstroCalcDialog.cpp:364 src/gui/AstroCalcDialog.cpp:673
 msgid "CSV (Comma delimited)"
-msgstr ""
+msgstr "CSV (কমা দ্বারা বিভাজিত)"
 
 #: src/gui/AstroCalcDialog.cpp:366
 msgid "Save calculated ephemerides as..."
-msgstr ""
+msgstr "নিম্নলিখিত নামে সঞ্চয় করুন ...."
 
 #: src/gui/AstroCalcDialog.cpp:437
 msgid "10 minutes"
@@ -2814,7 +2814,7 @@ msgstr "২য় বস্তু"
 
 #: src/gui/AstroCalcDialog.cpp:675
 msgid "Save calculated phenomena as..."
-msgstr ""
+msgstr "নিম্নলিখিত নামে সঞ্চয় করুন ...."
 
 #: src/gui/AstroCalcDialog.cpp:709
 msgid "Conjunction"
@@ -5445,11 +5445,11 @@ msgstr "খালি চোখে দেখতে পাওয়া সর্ব�
 msgid ""
 "Use designations of deep-sky objects instead of their common names for "
 "screen labels"
-msgstr ""
+msgstr "মহাজাগতিক জ্যোতিষ্কদের প্রচলিত নামের বদলে বৈজ্ঞানিক নাম দেখানো হবে"
 
 #: src/ui_viewDialog.h:1740
 msgid "Use designations for screen labels"
-msgstr ""
+msgstr "বৈজ্ঞানিক নাম ব্যবহার"
 
 #: src/ui_viewDialog.h:1741
 msgid "Celestial Sphere"
@@ -6405,7 +6405,7 @@ msgstr "..."
 
 #: src/ui_astroCalcDialog.h:415
 msgid "Update of planetary positions"
-msgstr ""
+msgstr "টাটকা তথ্য দেখুন"
 
 #: src/ui_astroCalcDialog.h:416
 msgid "Planetary positions"
@@ -6430,15 +6430,15 @@ msgstr "গণনা করুন"
 
 #: src/ui_astroCalcDialog.h:422
 msgid "Save ephemeris"
-msgstr ""
+msgstr "সঞ্চয় করে রাখুন"
 
 #: src/ui_astroCalcDialog.h:424
 msgid "Show markers of positions of the current celestial body on the sky"
-msgstr ""
+msgstr "পঞ্জিকা অনুসারে আকাশে অবস্থান গুলি চিহ্নিত করে দেখানো হবে"
 
 #: src/ui_astroCalcDialog.h:426
 msgid "Show markers of positions"
-msgstr ""
+msgstr "পঞ্জিকা অনুযায়ী অবস্থান"
 
 #: src/ui_astroCalcDialog.h:429 src/ui_astroCalcDialog.h:440
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
@@ -6447,11 +6447,11 @@ msgstr "শেষ :"
 
 #: src/ui_astroCalcDialog.h:432
 msgid "Show dates of positions of current celestial body near markers"
-msgstr ""
+msgstr "পঞ্জিকা অনুসারে দেখানো অবস্থান গুলির সময় দেখানো হবে"
 
 #: src/ui_astroCalcDialog.h:434
 msgid "Show dates of positions"
-msgstr ""
+msgstr "অবস্থান গুলির সময়"
 
 #: src/ui_astroCalcDialog.h:435
 msgid "Ephemeris"
@@ -6483,7 +6483,7 @@ msgstr "গণনা করুন"
 
 #: src/ui_astroCalcDialog.h:447
 msgid "Save phenomena"
-msgstr ""
+msgstr "সঞ্চয় করে রাখুন"
 
 #: src/ui_astroCalcDialog.h:448
 msgid "Phenomena"
@@ -8291,6 +8291,8 @@ msgid ""
 "This plug-in is based on and reuses a lot of code under the GNU General "
 "Public License:"
 msgstr ""
+"এই সরঞ্জামটিতে GNU সাধারণ সর্বজনীন অনুমতি অনুযায়ী তৈরী বহু কোড ব্যবহার করা "
+"হয়েছে । যেমন :"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:259
 msgid ""
@@ -8301,13 +8303,15 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:260
 msgid "the telescope server core code (licensed under the LGPL)"
-msgstr ""
+msgstr "দূরবীন সার্ভারের মূল কোড (LGPL এর আওতায় অনুমোদন প্রাপ্ত)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:261
 msgid ""
 "the TelescopeServerLx200 telescope server core code (originally licensed "
 "under the LGPL)"
 msgstr ""
+"TelescopeServerLx200 দূরবীন সার্ভারের মূল কোড (মূলত LGPL এর আওতায় অনুমোদন "
+"প্রাপ্ত)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:262
 msgid ""
@@ -8315,6 +8319,9 @@ msgid ""
 "server, along with the Stellarium telescope control network protocol (over "
 "TCP/IP), is <b>Johannes Gajdosik</b>."
 msgstr ""
+"উপরের সবগুলি অর্থাৎ ক্লায়েন্ট, সার্ভার কোড, LX200 সার্ভার ও স্টীলারিয়ামে "
+"ব্যবহৃত দূরবীন নিয়ন্ত্রন নেটওয়ার্ক প্রোটোকল (TCP/IP দ্বারা) গুলির "
+"প্রস্তুতকারক b>Johannes Gajdosik</b> ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:263
 msgid ""
@@ -10281,7 +10288,7 @@ msgstr ""
 
 #: plugins/Novae/src/Novae.cpp:71 plugins/Novae/src/Novae.cpp:142
 msgid "Bright Novae"
-msgstr "বিস্ফোরিত নক্ষত্র"
+msgstr "বিস্ফোরিত নক্ষত্র বা নোভা"
 
 #: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/gui/NovaeDialog.cpp:123
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
@@ -10294,7 +10301,7 @@ msgstr "বিস্ফোরিত নক্ষত্রের বৈশিষ�
 
 #: plugins/Novae/src/Nova.cpp:133
 msgid "nova"
-msgstr "বিস্ফোরিত নক্ষত্র"
+msgstr "বিস্ফোরিত নক্ষত্র বা নোভা"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:118
 msgid "Bright Novae Plug-in"
@@ -13998,12 +14005,16 @@ msgid ""
 "The directions are computed based on spherical trigonometry on a spherical "
 "Earth."
 msgstr ""
+"বিশেষ কিছু ধর্মের লোকেরা কোনো একটি নির্দিষ্ট স্থানের দিকে ভগবানের প্রার্থনা "
+"করে থাকেন । এই উদ্দেশ্যে এখানে দুটি বিশেষ স্থানের দিগংশ রেখা দেখানো যায় । "
+"প্রাথমিক ভাবে মক্কা(কাবা) এবং জেরুজালেম স্থান দুটি দেওয়া আছে । দিক নির্ণয়ের "
+"ক্ষেত্রে পৃথিবীকে গোলক ধরে গোলীয় জ্যামিতি ব্যবহার করা হয়েছে ।"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:251
 msgid ""
 "In addition, up to two vertical lines with arbitrary azimuth and custom "
 "label can be shown."
-msgstr ""
+msgstr "এছাড়াও আরও দুটি পছন্দসই  দিগংশ রেখা দেখানো যেতে পারে ।"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:356
 msgid "Select color for equinox line"
@@ -14051,19 +14062,19 @@ msgstr "বিষুবরেখা থেকে পছন্দসই গ্র
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:477
 msgid "Select color for Geographic Location 1 line"
-msgstr ""
+msgstr "বিশেষ স্থান ১ এর রেখার রং"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:488
 msgid "Select color for Geographic Location 2 line"
-msgstr ""
+msgstr "বিশেষ স্থান ২ এর রেখার রং"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:499
 msgid "Select color for Custom Azimuth 1 line"
-msgstr ""
+msgstr "পছন্দসই দিগংশ ১ রেখার রং"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:510
 msgid "Select color for Custom Azimuth 2 line"
-msgstr ""
+msgstr "পছন্দসই দিগংশ ২ রেখার রং"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:471
 msgid "ArchaeoLines Configuration"
@@ -14079,16 +14090,16 @@ msgstr "রং পরিবর্তনের সময় ফুলস্ক্র
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:475
 msgid "Geographic Location 1"
-msgstr ""
+msgstr "বিশেষ স্থান ১"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:477
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:483
 msgid "Enter a label (location name) for this line"
-msgstr ""
+msgstr "এই স্থানটির নাম লিখুন"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:481
 msgid "Geographic Location 2"
-msgstr ""
+msgstr "বিশেষ স্থান ২"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:486
 msgid "Change color"
@@ -14128,16 +14139,16 @@ msgstr "সর্বনিম্ন চন্দ্রায়ণ"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:500
 msgid "Custom Azimuth 1"
-msgstr ""
+msgstr "পছন্দসই দিগংশ ১"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:501
 msgid "Custom Azimuth 2"
-msgstr ""
+msgstr "পছন্দসই দিগংশ ২"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:503
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:506
 msgid "Enter a label for this line"
-msgstr ""
+msgstr "এই লাইনের একটি নাম দিন"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:508
 msgid "Solstice Lines"
