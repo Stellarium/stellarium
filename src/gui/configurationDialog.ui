@@ -270,8 +270,11 @@
           </item>
           <item>
            <widget class="QGroupBox" name="groupBox_EphemerisSettings">
+            <property name="toolTip">
+             <string>This feature has not been thoroughly tested yet!</string>
+            </property>
             <property name="title">
-             <string>Ephemeris settings</string>
+             <string>Ephemeris settings (experimental)</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_ephemeris">
              <property name="leftMargin">
