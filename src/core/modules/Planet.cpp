@@ -38,6 +38,7 @@
 #include "StelUtils.hpp"
 #include "StelOpenGL.hpp"
 #include "StelOBJ.hpp"
+#include "StelOpenGLArray.hpp"
 
 #include <limits>
 #include <QByteArray>
@@ -45,6 +46,7 @@
 #include <QString>
 #include <QDebug>
 #include <QVarLengthArray>
+#include <QOpenGLBuffer>
 #include <QOpenGLContext>
 #include <QOpenGLShader>
 #include <QtConcurrent>
@@ -73,6 +75,20 @@ QOpenGLShaderProgram* Planet::objShaderProgram=NULL;
 
 QMap<Planet::PlanetType, QString> Planet::pTypeMap;
 QMap<Planet::ApparentMagnitudeAlgorithm, QString> Planet::vMagAlgorithmMap;
+
+Planet::PlanetOBJModel::PlanetOBJModel()
+	: projPosBuffer(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer)), obj(NULL), arr(new StelOpenGLArray())
+{
+	//The buffer is refreshed completely before each draw, so StreamDraw should be ok
+	projPosBuffer->setUsagePattern(QOpenGLBuffer::StreamDraw);
+}
+
+Planet::PlanetOBJModel::~PlanetOBJModel()
+{
+	delete projPosBuffer;
+	delete obj;
+	delete arr;
+}
 	
 Planet::Planet(const QString& englishName,
 	       int flagLighting,
@@ -185,10 +201,8 @@ void Planet::init()
 
 Planet::~Planet()
 {
-	if (rings)
-		delete rings;
-	if (objModel)
-		delete objModel;
+	delete rings;
+	delete objModel;
 }
 
 void Planet::translateName(const StelTranslator& trans)
@@ -1359,6 +1373,12 @@ void Planet::initShader()
 	objShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 	objShaderProgram->addShader(&objVertexShader);
 	objShaderProgram->addShader(&objFragmentShader);
+
+	//bind fixed StelOpenGLArray attribute locations
+	objShaderProgram->bindAttributeLocation("unprojectedVertex", StelOpenGLArray::ATTLOC_VERTEX);
+	objShaderProgram->bindAttributeLocation("texCoord", StelOpenGLArray::ATTLOC_TEXCOORD);
+	objShaderProgram->bindAttributeLocation("normalIn", StelOpenGLArray::ATTLOC_NORMAL);
+
 	GL(StelPainter::linkProg(objShaderProgram, "objShaderProgram"));
 	//no uniform/attrib locations for now, all done in draw method
 
@@ -1891,35 +1911,39 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 
 Planet::PlanetOBJModel* Planet::loadObjModel() const
 {
-	StelOBJ obj;
-	if(!obj.load(objModelPath))
+	PlanetOBJModel* mdl = new PlanetOBJModel();
+	mdl->obj = new StelOBJ();
+	if(!mdl->obj->load(objModelPath))
 	{
 		//object loading failed
 		qCritical()<<"Could not load planet OBJ model for"<<englishName;
+		delete mdl;
 		return NULL;
 	}
 
 	//ideally, all planet OBJs should only have a single object with a single material
-	if(obj.getObjectList().size()>1)
+	if(mdl->obj->getObjectList().size()>1)
 		qWarning()<<"Planet OBJ model has more than one object defined, this may cause problems ...";
-	if(obj.getMaterialList().size()>1)
+	if(mdl->obj->getMaterialList().size()>1)
 		qWarning()<<"Planet OBJ model has more than one material defined, this may cause problems ...";
 
         //start texture loading
-	const StelOBJ::Material& mat = obj.getMaterialList().at(obj.getObjectList().first().groups.first().materialIndex);
+	const StelOBJ::Material& mat = mdl->obj->getMaterialList().at(mdl->obj->getObjectList().first().groups.first().materialIndex);
 	if(mat.map_Kd.isEmpty())
 	{
 		qCritical()<<"Planet OBJ model for"<<englishName<<"has no diffuse texture, aborting loading";
+		delete mdl;
 		return NULL;
 	}
+	//this call starts loading the tex in background
+	mdl->texture = StelApp::getInstance().getTextureManager().createTextureThread(mat.map_Kd,StelTexture::StelTextureParams(true,GL_LINEAR,GL_REPEAT,true),false);
 
 	//we assume the OBJ is modeled in km
 	//so we have to scale it to AU
-	obj.scale(sphereScale / AU);
-	PlanetOBJModel* mdl = new PlanetOBJModel();
-	mdl->texture = StelApp::getInstance().getTextureManager().createTextureThread(mat.map_Kd,StelTexture::StelTextureParams(true,GL_LINEAR,GL_REPEAT,true),false);
-	mdl->indexArray = obj.getShortIndexList();
-	obj.splitVertexData(false,&mdl->posArray,&mdl->texCoordArray, &mdl->normalArray);
+	mdl->obj->scale(sphereScale / AU);
+
+	//extract the pos array into separate vector, it is the only one we need on CPU side for drawing
+	mdl->obj->splitVertexData(false,&mdl->posArray);
 	return mdl;
 }
 
@@ -1938,6 +1962,7 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 	{
 		if(objModelLoader->isFinished())
 		{
+			//the model loading has just finished, save the result
 			objModel = objModelLoader->result();
 			delete objModelLoader; //we dont need the result anymore
 			objModelLoader = NULL;
@@ -1947,6 +1972,26 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 				//model load failed, fall back to sphere mode
 				objModelPath.clear();
 				qWarning()<<"Cannot load OBJ model for solar system object"<<getEnglishName();
+			}
+			else
+			{
+				//load model data into GL
+				if(!objModel->arr->load(objModel->obj,false))
+				{
+					delete objModel;
+					objModel = NULL;
+					objModelPath.clear();
+					qWarning()<<"Cannot load OBJ model into OpenGL for solar system object"<<getEnglishName();
+				}
+				else
+				{
+					//delete StelOBJ because the data is no longer needed
+					delete objModel->obj;
+					objModel->obj = NULL;
+					//create the GL buffer for the projection
+					objModel->projPosBuffer->create();
+					objModel->projectedPosArray.resize(objModel->posArray.size());
+				}
 			}
 		}
 		else
@@ -1971,15 +2016,36 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 	glDepthMask(GL_TRUE);
 	glClear(GL_DEPTH_BUFFER_BIT);
 
+	// Bind the array
+	objModel->arr->bind();
 
+	//set up shader
+	objShaderProgram->bind();
 
 	//project the data
+	//because the StelOpenGLArray might use a VAO, we have to use a OGL buffer here in all cases
+	objModel->projPosBuffer->bind();
+	const int vtxCount = objModel->posArray.size();
+
 	const StelProjectorP& projector = painter->getProjector();
 
-	QVector<Vec3f> projectedVertexArr;
-	const int vtxCount = objModel->posArray.size();
-	projectedVertexArr.resize(vtxCount);
-	projector->project(vtxCount,objModel->posArray.constData(),projectedVertexArr.data());
+	// I tested buffer orphaning (https://www.opengl.org/wiki/Buffer_Object_Streaming#Buffer_re-specification),
+	// but it seems there is not really much of a effect here (probably because we are already pretty CPU-bound).
+	// Also, map()-ing the buffer directly, like:
+	//	Vec3f* bufPtr = static_cast<Vec3f*>(objModel->projPosBuffer->map(QOpenGLBuffer::WriteOnly));
+	//	projector->project(vtxCount,objModel->posArray.constData(),bufPtr);
+	//	objModel->projPosBuffer->unmap();
+	// caused a 40% FPS drop for some reason!
+	// (in theory, this should be faster because it should avoid copying the array)
+	// So, lets not do that and just use this simple way in all cases:
+	projector->project(vtxCount,objModel->posArray.constData(),objModel->projectedPosArray.data());
+	objModel->projPosBuffer->allocate(objModel->projectedPosArray.constData(),vtxCount * sizeof(Vec3f));
+
+	//unprojectedVertex, normalIn and texCoord are set by the StelOpenGLArray
+	//we only need to set the freshly projected data
+	GL(objShaderProgram->setAttributeArray("vertex",GL_FLOAT,NULL,3,0));
+	GL(objShaderProgram->enableAttributeArray("vertex"));
+	objModel->projPosBuffer->release();
 
 	const Mat4f& m = painter->getProjector()->getProjectionMatrix();
 	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);
@@ -2022,18 +2088,6 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 	const LandscapeMgr* lmgr=GETSTELMODULE(LandscapeMgr);
 	const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 
-
-	//set up shader
-	objShaderProgram->bind();
-	GL(objShaderProgram->setAttributeArray("vertex",reinterpret_cast<const GLfloat*>(projectedVertexArr.constData()),3,0));
-	GL(objShaderProgram->enableAttributeArray("vertex"));
-	GL(objShaderProgram->setAttributeArray("unprojectedVertex",reinterpret_cast<const GLfloat*>(objModel->posArray.constData()),3,0));
-	GL(objShaderProgram->enableAttributeArray("unprojectedVertex"));
-	GL(objShaderProgram->setAttributeArray("normalIn",reinterpret_cast<const GLfloat*>(objModel->normalArray.constData()),3,0));
-	GL(objShaderProgram->enableAttributeArray("normalIn"));
-	GL(objShaderProgram->setAttributeArray("texCoord",reinterpret_cast<const GLfloat*>(objModel->texCoordArray.constData()),2,0));
-	GL(objShaderProgram->enableAttributeArray("texCoord"));
-
 	GL(objShaderProgram->setUniformValue("projectionMatrix", qMat));
 	GL(objShaderProgram->setUniformValue("lightDirection", lightPos3[0], lightPos3[1], lightPos3[2]));
 	GL(objShaderProgram->setUniformValue("eyeDirection", eyePos[0], eyePos[1], eyePos[2]));
@@ -2045,14 +2099,13 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 	GL(objShaderProgram->setUniformValue("sunInfo", mTarget[12], mTarget[13], mTarget[14], ssm->getSun()->getRadius()));
 	GL(objShaderProgram->setUniformValue("skyBrightness", lmgr->getLuminance()));
 
-	glDrawElements(GL_TRIANGLES, objModel->indexArray.size(), GL_UNSIGNED_SHORT, objModel->indexArray.constData());
+	//draw that model using the array wrapper
+	objModel->arr->draw();
 
 	objShaderProgram->disableAttributeArray("vertex");
-	objShaderProgram->disableAttributeArray("unprojectedVertex");
-	objShaderProgram->disableAttributeArray("normalIn");
-	objShaderProgram->disableAttributeArray("texCoord");
-
 	objShaderProgram->release();
+	objModel->arr->release();
+
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_DEPTH_TEST);
 
