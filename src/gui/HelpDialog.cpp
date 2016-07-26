@@ -271,7 +271,7 @@ void HelpDialog::updateText(void)
 		     << "Allan Johnson" << "Felix Zeltner" << "Paolo Cancedda" << "Ross Mitchell"
 		     << "David Baucum" << "Maciej Serylak" << "Adriano Steffler" << "Sibi Antony"
 		     << "Tony Furr" << "misibacsi" << "Pavel Klimenko" << "Rumen G. Bogdanovski"
-		     << "Colin Gaudion" << "Annette S. Lee" << "Vancho Stojkoski";
+		     << "Colin Gaudion" << "Annette S. Lee" << "Vancho Stojkoski" << "Robert S. Fuller";
 	contributors.sort();
 
 	// populate About tab
