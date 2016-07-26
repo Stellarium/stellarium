@@ -29,6 +29,7 @@
 #include "StelUtils.hpp"
 #include "StelActionMgr.hpp"
 #include "StelOpenGL.hpp"
+#include "StelOpenGLArray.hpp"
 
 #include <QDebug>
 #include <QDir>
@@ -566,6 +567,8 @@ void StelMainView::init(QSettings* conf)
 		processOpenGLdiagnosticsAndWarnings(conf, glWidget);
 	}
 
+	//setup StelOpenGLArray global state
+	StelOpenGLArray::initGL();
 
 	stelApp= new StelApp();
 	stelApp->setGui(gui);

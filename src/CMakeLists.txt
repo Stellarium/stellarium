@@ -162,6 +162,8 @@ SET(stellarium_lib_SRCS
      core/StelOBJ.cpp
      core/GeomMath.hpp
      core/GeomMath.cpp
+     core/StelOpenGLArray.hpp
+     core/StelOpenGLArray.cpp
 
      ${gl_lib_SRCS}
 
