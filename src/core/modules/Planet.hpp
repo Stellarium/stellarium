@@ -43,8 +43,10 @@ class StelFont;
 class StelPainter;
 class StelTranslator;
 class StelOBJ;
-class QOpenGLShaderProgram;
+class StelOpenGLArray;
 template <class T> class QFuture;
+class QOpenGLBuffer;
+class QOpenGLShaderProgram;
 
 // Class used to store rotational elements, i.e. axis orientation for the planetary body.
 class RotationElements
@@ -302,11 +304,21 @@ public:
 protected:
 	struct PlanetOBJModel
 	{
+		PlanetOBJModel();
+		~PlanetOBJModel();
+
+		//! Contains the original positions, they need StelProjector transformation
 		QVector<Vec3f> posArray;
-		QVector<Vec2f> texCoordArray;
-		QVector<Vec3f> normalArray;
-		QVector<unsigned short> indexArray;
+		//! Used to store the projected array data, avoids re-allocation each frame
+		QVector<Vec3f> projectedPosArray;
+		//! An OpenGL buffer for the projected positions
+		QOpenGLBuffer* projPosBuffer;
+		//! The single texture to use
 		StelTextureSP texture;
+		//! The original StelOBJ data, deleted after loading to GL
+		StelOBJ* obj;
+		//! The opengl array, created by loadObjModel() but filled later in main thread
+		StelOpenGLArray* arr;
 	};
 
 	static StelTextureSP texEarthShadow;     // for lunar eclipses
