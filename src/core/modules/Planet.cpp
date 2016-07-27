@@ -77,7 +77,7 @@ QMap<Planet::PlanetType, QString> Planet::pTypeMap;
 QMap<Planet::ApparentMagnitudeAlgorithm, QString> Planet::vMagAlgorithmMap;
 
 Planet::PlanetOBJModel::PlanetOBJModel()
-	: projPosBuffer(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer)), obj(NULL), arr(new StelOpenGLArray())
+	: projPosBuffer(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer)), obj(new StelOBJ()), arr(new StelOpenGLArray())
 {
 	//The buffer is refreshed completely before each draw, so StreamDraw should be ok
 	projPosBuffer->setUsagePattern(QOpenGLBuffer::StreamDraw);
@@ -88,6 +88,21 @@ Planet::PlanetOBJModel::~PlanetOBJModel()
 	delete projPosBuffer;
 	delete obj;
 	delete arr;
+}
+
+bool Planet::PlanetOBJModel::loadGL()
+{
+	if(arr->load(obj,false))
+	{
+		//delete StelOBJ because the data is no longer needed
+		delete obj;
+		obj = NULL;
+		//make sure the vector has enough space to hold the projected data
+		projectedPosArray.resize(posArray.size());
+		//create the GL buffer for the projection
+		return projPosBuffer->create();
+	}
+	return false;
 }
 	
 Planet::Planet(const QString& englishName,
@@ -1912,7 +1927,6 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 Planet::PlanetOBJModel* Planet::loadObjModel() const
 {
 	PlanetOBJModel* mdl = new PlanetOBJModel();
-	mdl->obj = new StelOBJ();
 	if(!mdl->obj->load(objModelPath))
 	{
 		//object loading failed
@@ -1947,10 +1961,8 @@ Planet::PlanetOBJModel* Planet::loadObjModel() const
 	return mdl;
 }
 
-bool Planet::drawObjModel(StelPainter *painter, float screenSz)
+bool Planet::ensureObjLoaded()
 {
-	Q_UNUSED(screenSz); //screen size unused for now, use it for LOD or something?
-
 	if(!objModel && !objModelLoader)
 	{
 		qDebug()<<"Queueing aysnc load of OBJ model for"<<englishName;
@@ -1976,21 +1988,12 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 			else
 			{
 				//load model data into GL
-				if(!objModel->arr->load(objModel->obj,false))
+				if(!objModel->loadGL())
 				{
 					delete objModel;
 					objModel = NULL;
 					objModelPath.clear();
 					qWarning()<<"Cannot load OBJ model into OpenGL for solar system object"<<getEnglishName();
-				}
-				else
-				{
-					//delete StelOBJ because the data is no longer needed
-					delete objModel->obj;
-					objModel->obj = NULL;
-					//create the GL buffer for the projection
-					objModel->projPosBuffer->create();
-					objModel->projectedPosArray.resize(objModel->posArray.size());
 				}
 			}
 		}
@@ -2000,6 +2003,18 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 			return false;
 		}
 	}
+
+	//OBJ model is valid!
+	return true;
+}
+
+bool Planet::drawObjModel(StelPainter *painter, float screenSz)
+{
+	Q_UNUSED(screenSz); //screen size unused for now, use it for LOD or something?
+
+	//make sure the OBJ is loaded, or start loading it
+	if(!ensureObjLoaded())
+		return false;
 
 	if(!objModel->texture->bind())
 	{

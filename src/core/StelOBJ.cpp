@@ -706,11 +706,6 @@ void StelOBJ::performPostProcessing()
 	qCDebug(stelOBJ)<<"Centroid is at "<<m_centroid;
 }
 
-bool StelOBJ::canUseShortIndices() const
-{
-	return m_vertices.size() < std::numeric_limits<unsigned short>::max();
-}
-
 StelOBJ::ShortIndexList StelOBJ::getShortIndexList() const
 {
 	QElapsedTimer timer;
