@@ -224,7 +224,7 @@ public:
 	//! Returns if unsigned short indices can be used instead of unsigned int indices,
 	//! to save some memory. This can only be done if the model has less vertices than
 	//! std::numeric_limits<unsigned short>::max()
-	inline bool canUseShortIndices() const;
+	inline bool canUseShortIndices() const { return m_vertices.size() < std::numeric_limits<unsigned short>::max(); }
 
 	//! Converts the index list (as returned by getIndexList())
 	//! to use unsigned short instead of integer.

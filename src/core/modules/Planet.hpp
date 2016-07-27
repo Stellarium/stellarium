@@ -307,6 +307,9 @@ protected:
 		PlanetOBJModel();
 		~PlanetOBJModel();
 
+		//! Loads the data from the StelOBJ into the StelOpenGLArray
+		bool loadGL();
+
 		//! Contains the original positions, they need StelProjector transformation
 		QVector<Vec3f> posArray;
 		//! Used to store the projected array data, avoids re-allocation each frame
@@ -334,6 +337,10 @@ protected:
 	// Draws the OBJ model, assuming it is available
 	// @return false if the model can currently not be drawn (not loaded)
 	bool drawObjModel(StelPainter* painter, float screenSz);
+
+	//! Starts the OBJ loading process, if it has not been done yet.
+	//! Returns true when the OBJ is ready to draw
+	bool ensureObjLoaded();
 
 	// Draw the 3D sphere
 	void drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing=false);
