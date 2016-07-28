@@ -5,12 +5,14 @@
 %% TODO: document the more obscure entries. Add links to the respective chapters.
 %% TODO: remove unused entries, add new ones.  
 
-%\chapterimage{chapter-t1-bg} % Chapter heading image
 
-\chapter{Configuration File}
+\chapter{Configuration Files}
+\label{app:ConfigFiles}
+
+\section{Program Configuration}
 \label{sec:config.ini}
-See \ref{sec:ConfigurationFile}{The
-Main Configuration File} for information about this file, including its
+First, see \ref{sec:ConfigurationFile} (The
+Main Configuration File) for information about the file \file{config.ini}, including its
 default installed location, and command line options that can
 affect how it is processed.
 
@@ -21,10 +23,10 @@ affect how it is processed.
 The file \file{config.ini} (or a file which you can load instead with
 the \command{-\/-config <file>} option) is structured into the following
 parts. In addition, plugins can add a section named like the plugin
-(Exception: The Text User Interface plugin's section is named [tui]
+(Exception: The Text User Interface plugin's section is named \texttt{[tui]}
 for historical reasons).
 
-\section{\big[astro\big]}
+\subsection{\big[astro\big]}
 \label{sec:config.ini:astro}
 
 This section includes settings for the commonly displayed objects.
@@ -77,7 +79,7 @@ flag\_surface\_brightness\_usage  & bool & false &Enables/disables usage surface
 flag\_use\_type\_filter           & bool & false &Enables/disables usage of the type filters for deep-sky objects. \\\bottomrule
 \end{longtabu}
 
-\section{\big[color\big]}
+\subsection{\big[color\big]}
 \label{sec:config.ini:color}
 
 This section defines the RGB colors for the various objects, lines,
@@ -151,7 +153,7 @@ dso\_young\_stellar\_object\_color      & 1.0,0.7,0.2 & young stellar objects sy
 \bottomrule
 \end{longtabu}
 
-\section{\big[custom\_selected\_info\big]}
+\subsection{\big[custom\_selected\_info\big]}
 \label{sec:config.ini:custom_selected_info}
 
 You can fine-tune the bits of information to display for the selected object in this section. Set the entry to \emph{true} to display it.
@@ -176,7 +178,7 @@ flag\_show\_type              & bool & type of object\\\bottomrule
 
 %% TODO: Maybe separate flag_show_eclcoord and flag_show_eclcoordj2000?
 
-\section{\big[custom\_time\_correction\big]}
+\subsection{\big[custom\_time\_correction\big]}
 \label{sec:config.ini:custom_time_correction}
 
 Stellarium allows experiments with $\Delta T$. See \ref{sec:Concepts:DeltaT} for details.
@@ -188,7 +190,7 @@ ndot & float & n-dot value for custom equation of DeltaT\\\midrule
 year & int   & Year for custom equation of DeltaT\\\bottomrule
 \end{longtabu}
 
-\section{\big[devel\big]}
+\subsection{\big[devel\big]}
 \label{sec:config.ini:devel}
 
 This section is for developers only. 
@@ -202,7 +204,7 @@ convert\_dso\_decimal\_coord & bool & Set to \emph{true} to use decimal values f
                                       in source catalog. Default value: \emph{true}.\\\bottomrule
 \end{longtabu}
 
-\section{\big[dso\_catalog\_filters\big]}
+\subsection{\big[dso\_catalog\_filters\big]}
 \label{sec:config.ini:dso_catalog_filters}
 In this section you can fine-tune which of the deep-sky catalogs should be selected on startup.
 
@@ -225,7 +227,7 @@ flag\_show\_ced & bool & false & Cederblad Catalog of bright diffuse Galactic ne
 flag\_show\_ugc & bool & false & The Uppsala General Catalogue of Galaxies (UGC). \\\bottomrule
 \end{longtabu}
 
-\section{\big[dso\_type\_filters\big]}
+\subsection{\big[dso\_type\_filters\big]}
 \label{sec:config.ini:dso_type_filters}
 
 \begin{longtabu} to \textwidth {l|l|l|X}\toprule
@@ -242,14 +244,16 @@ flag\_show\_supernova\_remnants   & bool & true & display supernovae remnants. \
 flag\_show\_other                 & bool & true & display other deep-sky objects.  \\\bottomrule
 \end{longtabu}
 
-\section{\big[gui\big]}\label{sec:config.ini:gui}
+\subsection{\big[gui\big]}\label{sec:config.ini:gui}
 
 \begin{longtabu} to \textwidth {l|l|l|X}
 \toprule
 \emph{ID} & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
 base\_font\_size & int    & 13 & Sets the font size. Typical value: \emph{15}\\\midrule
-base\_font\_name & string & Verdana (Windows)    & Selects the name for base font\\
-                 &        & DejaVu Sans (others) & \\\midrule
+base\_font\_name & string & Verdana     & Selects the name \\
+                 &        & (Windows)            & for base font\\
+                 &        & DejaVu Sans & \\
+                 &        & (others)            & \\\midrule
 %safe\_font\_name & string & Selects the name for safe font, e.g. \emph{Verdana}\\\midrule
 base\_font\_file & string & & Selects the name for font file, e.g. \emph{DejaVuSans.ttf}\\\midrule
 flag\_show\_fps                 & bool   & true & see at how many frames per second Stellarium is rendering\\\midrule
@@ -283,7 +287,7 @@ flag\_use\_azimuth\_from\_south & bool   & false & If \emph{true}, calculate azi
 flag\_show\_gui                 & bool   & false & If \emph{true}, display GUI\\\bottomrule
 \end{longtabu}
 
-\section{\big[init\_location\big]}\label{sec:config.ini:init_location}
+\subsection{\big[init\_location\big]}\label{sec:config.ini:init_location}
 
 \begin{longtabu} to \textwidth {l|l|X}\toprule
 \emph{ID} & \emph{Type} & \emph{Description}\\\midrule
@@ -293,7 +297,7 @@ location          & string & Name of location on which to start stellarium.\\\mi
 last\_location    & string & Coordinates of last used location in stellarium.\\\bottomrule
 \end{longtabu}
 
-\section{\big[landscape\big]}\label{sec:config.ini:landscape}
+\subsection{\big[landscape\big]}\label{sec:config.ini:landscape}
 
 \begin{longtabu} to \textwidth {l|l|X}\toprule
 \emph{ID} & \emph{Type} & \emph{Description}\\\midrule
@@ -310,7 +314,7 @@ temperature\_C                       & float & Set atmospheric temperature [Cels
 pressure\_mbar                       & float & Set atmospheric pressure [mbar]\\\bottomrule
 \end{longtabu}
 
-\section{\big[localization\big]}\label{sec:config.ini:localization}
+\subsection{\big[localization\big]}\label{sec:config.ini:localization}
 
 \begin{longtabu} to \textwidth {l|l|X}\toprule
 \emph{ID} & \emph{Type} & \emph{Description}\\\midrule
@@ -326,7 +330,7 @@ time\_display\_format & string & time display format: can be \emph{system\_defau
 date\_display\_format & string & date display format: can be \emph{system\_default}, \emph{mmddyyyy}, \emph{ddmmyyyy} or \emph{yyyymmdd} (ISO8601).\\\bottomrule
 \end{longtabu}
 
-\section{\big[main\big]}\label{sec:config.ini:main}
+\subsection{\big[main\big]}\label{sec:config.ini:main}
 
 \begin{longtabu} to \textwidth {l|l|X}\toprule
 \emph{ID}                 & \emph{Type} & \emph{Description}\\\midrule
@@ -341,7 +345,7 @@ check\_requirements         & bool   & Set to \emph{false} if you want to disabl
 \bottomrule
 \end{longtabu}
 
-\section{\big[navigation\big]}\label{sec:config.ini:navigation}
+\subsection{\big[navigation\big]}\label{sec:config.ini:navigation}
 
 This section controls much of the look\&feel of Stellarium. Be careful if you change something here.
 
@@ -372,7 +376,7 @@ auto\_zoom\_out\_resets\_direction & bool & Set to \emph{true} if you want to au
 time\_correction\_algorithm     & string  & Algorithm of DeltaT correction.\\\bottomrule %% TODO: list values! And write ref. chapter!
 \end{longtabu}
 
-\section{\big[plugins\_load\_at\_startup\big]}
+\subsection{\big[plugins\_load\_at\_startup\big]}
 \label{sec:config.ini:plugins_load_at_startup}
 
 This section lists which plugins are loaded at startup (those with
@@ -404,7 +408,7 @@ Novae                 & bool & Bright Novae plugin \\\midrule
 Scenery3dMgr          & bool & Scenery 3D plugin \\\bottomrule
 \end{longtabu}
 
-\section{\big[projection\big]}\label{sec:config.ini:projection}
+\subsection{\big[projection\big]}\label{sec:config.ini:projection}
 
 This section contains the projection of your choice and several
 advanced settings important if you run Stellarium on a single screen,
@@ -428,7 +432,7 @@ viewport\_center\_offset\_y & float & [-0.5\ldots+0.5] Use negative values to mo
 \bottomrule
 \end{longtabu}
 
-\section{\big[proxy\big]}\label{sec:config.ini:proxy}
+\subsection{\big[proxy\big]}\label{sec:config.ini:proxy}
 %% TODO: What does this do?
 
 \begin{longtabu} to \textwidth {l|l|X}\toprule
@@ -439,7 +443,7 @@ user       & string & Username for proxy. E.g. \emph{michael\_knight}\\\midrule
 password   & string & Password for proxy. E.g. \emph{xxxxx}\\\bottomrule
 \end{longtabu}
 
-\section{\big[scripts\big]}\label{sec:config.ini:scripts}
+\subsection{\big[scripts\big]}\label{sec:config.ini:scripts}
 
 \begin{longtabu} to \textwidth {l|l|l|X}\toprule
 \emph{ID}                  & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
@@ -449,7 +453,7 @@ startup\_script                & string & startup.ssc & name of script executed 
 %scripting\_allow\_write\_files & bool &\\\bottomrule
 \end{longtabu}
 
-\section{\big[search\big]}\label{sec:config.ini:search}
+\subsection{\big[search\big]}\label{sec:config.ini:search}
 
 \begin{longtabu} to \textwidth {l|l|X}\toprule
 \emph{ID} & \emph{Type} & \emph{Description}\\\midrule
@@ -461,7 +465,7 @@ coordinate\_system   & string & Specifies the coordinate system.
 \bottomrule
 \end{longtabu}
 
-\section{\big[spheric\_mirror\big]}\label{sec:config.ini:spheric_mirror}
+\subsection{\big[spheric\_mirror\big]}\label{sec:config.ini:spheric_mirror}
 
 Stellarium can be used in planetarium domes. You can use a projector with a hemispheric mirror with geometric properties given in this section. 
 Note: These functions are only rarely used, some may not work as expected.
@@ -500,7 +504,7 @@ viewportCenterY       & float && projected image center Y, pixels\\\midrule
 \bottomrule
 \end{longtabu}
 
-\section{\big[stars\big]}\label{sec:config.ini:stars}
+\subsection{\big[stars\big]}\label{sec:config.ini:stars}
 
 This section controls how stars are rendered.
 %% TODO: Explain what we mean with "magnitude conversion routine"!
@@ -517,7 +521,7 @@ labels\_amount           & float       & amount of labels. Typical value: \emph{
 init\_bortle\_scale      & int         & initial value of light pollution on the Bortle scale. Typical value: \emph{3}.\\\bottomrule
 \end{longtabu}
 
-\section{\big[tui\big]}\label{sec:config.ini:tui}
+\subsection{\big[tui\big]}\label{sec:config.ini:tui}
 
 The built-in text user interface (TUI) plugin (see chapter~\ref{sec:plugins:TextUserInterface}) is most useful for planetariums. You can even configure a system shutdown command. 
 For historical reasons, the section is not called \texttt{[TextUserInterface]} but simply \texttt{[tui]}.
@@ -535,7 +539,7 @@ flag\_show\_tui\_short\_obj\_info   & bool&    &set to \emph{true} if you want t
 tui\_admin\_shutdown\_command       & string  && e.g.\ for Linux: ``shutdown --poweroff +2'' \\\bottomrule
 \end{longtabu}
 
-\section{\big[video\big]}\label{sec:config.ini:video}
+\subsection{\big[video\big]}\label{sec:config.ini:video}
 
 \begin{longtabu} to \textwidth {l|l|X}\toprule
 \emph{ID}  & \emph{Type} & \emph{Description}\\\midrule
@@ -549,7 +553,7 @@ minimum\_fps     & int    & Sets the minimum number of frames per second to disp
 maximum\_fps     & int    & Sets the maximum number of frames per second to display at. This is useful to reduce power consumption in laptops.\\\bottomrule
 \end{longtabu}
 
-\section{\big[viewing\big]}\label{sec:config.ini:viewing}
+\subsection{\big[viewing\big]}\label{sec:config.ini:viewing}
 
 This section defines which objects, labels, lines, grids etc.\ you
 want to see on startup. Set those to \emph{true}. Most items can be
