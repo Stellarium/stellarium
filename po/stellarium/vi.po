@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-27 09:55+0700\n"
-"PO-Revision-Date: 2016-07-24 12:44+0000\n"
+"PO-Revision-Date: 2016-07-27 15:24+0000\n"
 "Last-Translator: Lê Văn Bách <levanbach1994ag@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-27 05:37+0000\n"
+"X-Launchpad-Export-Date: 2016-07-28 05:41+0000\n"
 "X-Generator: Launchpad (build 18153)\n"
 
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:189
@@ -968,7 +968,7 @@ msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:277
 msgid "Position angle"
-msgstr ""
+msgstr "Góc vị trí"
 
 #: src/core/modules/StarWrapper.cpp:281 src/core/modules/StarWrapper.cpp:283
 #: src/gui/AstroCalcDialog.cpp:529
@@ -1574,6 +1574,8 @@ msgid ""
 "The full name of this projection method is <i>Lambert azimuthal equal-area "
 "projection</i>. It preserves the area but not the angle."
 msgstr ""
+"Tên đầy đủ của phép chiếu là <i>phép chiếu bằng phương vị Lambert</i>. Nó "
+"bảo toàn diện tích nhưng không giữ góc."
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Stereographic"
@@ -2020,7 +2022,7 @@ msgstr "Espenak & Meeus (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1372
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
-msgstr ""
+msgstr "Espenak & Meeus (2006) không bổ sung gia tốc mặt trăng"
 
 #: src/gui/ConfigurationDialog.cpp:1374
 msgid "Reijs (2006)"
@@ -2702,11 +2704,11 @@ msgstr "Ngày Julian"
 
 #: src/gui/AstroCalcDialog.cpp:365 src/gui/AstroCalcDialog.cpp:679
 msgid "CSV (Comma delimited)"
-msgstr ""
+msgstr "CSV (Dấu phẩy được giới hạn)"
 
 #: src/gui/AstroCalcDialog.cpp:367
 msgid "Save calculated ephemerides as..."
-msgstr ""
+msgstr "Lưu lịch thiên văn được tính toán như..."
 
 #: src/gui/AstroCalcDialog.cpp:443
 msgid "10 minutes"
@@ -2795,7 +2797,7 @@ msgstr "Đối tượng 2"
 
 #: src/gui/AstroCalcDialog.cpp:681
 msgid "Save calculated phenomena as..."
-msgstr ""
+msgstr "Lưu hiện tượng được tính toán như..."
 
 #: src/gui/AstroCalcDialog.cpp:720
 msgid "Conjunction"
@@ -3209,7 +3211,7 @@ msgstr "Hệ thống chiêm tinh Nhật Bản"
 
 #: src/translations.h:183
 msgid "Kamilaroi/Euahlayi"
-msgstr ""
+msgstr "Kamilaroi/Euahlayi"
 
 #: src/translations.h:184
 msgid "Korean"
@@ -3217,11 +3219,11 @@ msgstr "Hàn Quốc"
 
 #: src/translations.h:185
 msgid "Dakota/Lakota/Nakota"
-msgstr ""
+msgstr "Dakota/Lakota/Nakota"
 
 #: src/translations.h:186
 msgid "Macedonian"
-msgstr ""
+msgstr "Macedonian"
 
 #: src/translations.h:187
 msgid "Maori"
@@ -3241,7 +3243,7 @@ msgstr "Na-Uy"
 
 #: src/translations.h:191
 msgid "Ojibwe"
-msgstr ""
+msgstr "Ojibwe"
 
 #: src/translations.h:192
 msgid "Polynesian"
@@ -4830,7 +4832,7 @@ msgstr "Bỏ qua"
 
 #: src/translations.h:621
 msgid "&Basic colors"
-msgstr ""
+msgstr "&Màu cơ bản"
 
 #: src/translations.h:622
 msgid "Pick Screen Color"
@@ -4838,11 +4840,11 @@ msgstr ""
 
 #: src/translations.h:623
 msgid "&Custom colors"
-msgstr ""
+msgstr "&Màu tùy chỉnh"
 
 #: src/translations.h:624
 msgid "&Add to Custom Colors"
-msgstr ""
+msgstr "&Thêm màu tùy chỉnh"
 
 #: src/translations.h:625
 msgid "Hu&e:"
@@ -4858,24 +4860,24 @@ msgstr ""
 
 #: src/translations.h:628
 msgid "&Red:"
-msgstr ""
+msgstr "&Đỏ:"
 
 #: src/translations.h:629
 msgid "&Green:"
-msgstr ""
+msgstr "&Lục:"
 
 #: src/translations.h:630
 msgid "Bl&ue:"
-msgstr ""
+msgstr "&Lam:"
 
 #: src/translations.h:631
 msgid "Select Color"
-msgstr ""
+msgstr "Chọn màu"
 
 #: src/translations.h:632
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
-msgstr ""
+msgstr "Con trỏ ở %1, %2 Nhấn ESC để xóa"
 
 #: src/ui_dateTimeDialogGui.h:380
 msgid "Date and Time in Gregorian calendar"
@@ -5117,8 +5119,7 @@ msgstr "Vị trí"
 #: src/ui_searchDialogGui.h:706
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr ""
-"Một vài đối tượng có thể được tìm thầy sau khi kích hoạt phần bổ sung tương "
-"ứng"
+"Một vài đối tượng có thể được tìm thầy sau khi kích hoạt trình cắm tương ứng"
 
 #: src/ui_searchDialogGui.h:708
 msgid "names in English"
@@ -5446,10 +5447,12 @@ msgid ""
 "Use designations of deep-sky objects instead of their common names for "
 "screen labels"
 msgstr ""
+"Sử dụng kí hiệu của các vật thể xa thay vì tên thông thường của chúng cho "
+"các nhãn màn hình"
 
 #: src/ui_viewDialog.h:1740
 msgid "Use designations for screen labels"
-msgstr ""
+msgstr "Sử dụng các kí hiệu cho nhãn màn hình"
 
 #: src/ui_viewDialog.h:1741
 msgid "Celestial Sphere"
@@ -5737,11 +5740,11 @@ msgstr "Ngôn ngữ văn hóa bầu trời"
 
 #: src/ui_configurationDialog.h:1094
 msgid "This feature has not been thoroughly tested yet!"
-msgstr ""
+msgstr "Đặc điểm này chưa được kiểm tra hoàn toàn!"
 
 #: src/ui_configurationDialog.h:1096
 msgid "Ephemeris settings (experimental)"
-msgstr ""
+msgstr "Các cài đặt lịch thiên văn (thực nghiệm)"
 
 #: src/ui_configurationDialog.h:1097 src/ui_configurationDialog.h:1098
 msgid "Not installed"
@@ -6409,7 +6412,7 @@ msgstr "…"
 
 #: src/ui_astroCalcDialog.h:415
 msgid "Update of planetary positions"
-msgstr ""
+msgstr "Cập nhật vị trí hành tinh"
 
 #: src/ui_astroCalcDialog.h:416
 msgid "Planetary positions"
@@ -6434,15 +6437,15 @@ msgstr "tính toán lịch thiên văn"
 
 #: src/ui_astroCalcDialog.h:422
 msgid "Save ephemeris"
-msgstr ""
+msgstr "Lưu lịch thiên văn"
 
 #: src/ui_astroCalcDialog.h:424
 msgid "Show markers of positions of the current celestial body on the sky"
-msgstr ""
+msgstr "Hiển thị đánh dấu vị trí của các thiên thể hiện tại trên bầu trời"
 
 #: src/ui_astroCalcDialog.h:426
 msgid "Show markers of positions"
-msgstr ""
+msgstr "Hiển thị đánh dấu vị trí"
 
 #: src/ui_astroCalcDialog.h:429 src/ui_astroCalcDialog.h:440
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
@@ -6451,11 +6454,11 @@ msgstr "Tới:"
 
 #: src/ui_astroCalcDialog.h:432
 msgid "Show dates of positions of current celestial body near markers"
-msgstr ""
+msgstr "Hiển thị ngày của vị trí của thiên thể hiện tại gần các đánh dấu"
 
 #: src/ui_astroCalcDialog.h:434
 msgid "Show dates of positions"
-msgstr ""
+msgstr "Hiển thị ngày của vị trí"
 
 #: src/ui_astroCalcDialog.h:435
 msgid "Ephemeris"
@@ -6487,7 +6490,7 @@ msgstr "Tính toán hiện tượng"
 
 #: src/ui_astroCalcDialog.h:447
 msgid "Save phenomena"
-msgstr ""
+msgstr "Lưu hiện tượng"
 
 #: src/ui_astroCalcDialog.h:448
 msgid "Phenomena"
@@ -6565,7 +6568,7 @@ msgstr "Vị trí góc="
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
 msgid "Angle Measure Plug-in"
-msgstr "Phần bổ trợ Đo Góc"
+msgstr "Trình cắm Đo Góc"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
 #: plugins/Oculars/src/gui/OcularDialog.cpp:549
@@ -6728,7 +6731,7 @@ msgstr "Cấu hình Ẩn Tinh"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:218
 msgid "Angle Measure Plug-in Configuration"
-msgstr "Cấu hình Bổ trợ Đo góc"
+msgstr "Cấu hình Trình cắm Đo góc"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:220
 msgid "Show in Equatorial Coordinates"
@@ -7188,7 +7191,7 @@ msgstr "Tiêu cự:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:547
 msgid "Oculars Plug-in"
-msgstr "Bổ trợ Trực quan"
+msgstr "Trình cắm Trực quan"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:550
 msgid "Barlow lens feature"
@@ -7281,7 +7284,7 @@ msgstr "Phím nóng"
 #: plugins/Oculars/src/gui/OcularDialog.cpp:568
 msgid "The plug-in's key bindings can be edited in the General Tab."
 msgstr ""
-"Tổ hợp phím của phần bổ trợ có thể được chỉnh sửa trong tab tổng quan."
+"Tổ hợp phím của phần trình cắm có thể được chỉnh sửa trong tab tổng quan."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:582
 #: plugins/Oculars/src/gui/OcularDialog.cpp:587
@@ -8242,8 +8245,8 @@ msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
 "computerized mount (a \"GoTo telescope\")."
 msgstr ""
-"Phần bổ trợ này cho phép Stellarium gửi \"hàng loạt\" lệnh tới một chiếc "
-"kính thiên văn trên máy tính (\"Goto telescope\")."
+"Trình cắm này cho phép Stellarium gửi \"hàng loạt\" lệnh tới một chiếc kính "
+"thiên văn trên máy tính (\"Goto telescope\")."
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:166
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:219
@@ -8295,18 +8298,18 @@ msgstr "Đã dừng"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:251
 msgid "Telescope Control plug-in"
-msgstr "Phần bổ trợ Điều khiển kính thiên văn"
+msgstr "Trình cắm Điều khiển kính thiên văn"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:255
 msgid "Plug-in and GUI programming"
-msgstr "Lập trình bổ trợ và giao diện đồ họa"
+msgstr "Lập trình trình cắm và giao diện đồ họa"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
 msgid ""
 "This plug-in is based on and reuses a lot of code under the GNU General "
 "Public License:"
 msgstr ""
-"Phần bổ trợ này được dựa trên và tái sử dụng nhiều mã theo giấy phép GNU "
+"Trình cắm này được dựa trên và tái sử dụng nhiều mã theo giấy phép GNU "
 "General Public:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:259
@@ -8366,7 +8369,7 @@ msgid ""
 "A more complete and up-to-date documentation for this plug-in can be found "
 "on the %1Telescope Control%2 page in the Stellarium Wiki."
 msgstr ""
-"Một tài liệu hoàn chỉnh và cập nhật hơn cho phần bổ trợ này có thể được tìm "
+"Một tài liệu hoàn chỉnh và cập nhật hơn cho trình cắm này có thể được tìm "
 "thấy trên trang %1Điều khiển kính thiên văn%2 trong Stellarium Wiki."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
@@ -8386,7 +8389,7 @@ msgstr "Tình năng điều khiển kính thiên văn gốc"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
 msgid "Using this plug-in"
-msgstr "Sử dụng phần bổ trợ này"
+msgstr "Sử dụng trình cắm này"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:321
@@ -8453,19 +8456,19 @@ msgid ""
 "and similar situations. (To abort a slew, you can start another one to a "
 "safe position.)"
 msgstr ""
-"Phần bổ trợ này cho phép Stellarium chỉ gửi lệnh '<b>xoay</b>' ('đi đến') "
-"tới thiết bị và nhận vị trí hiện tại của nó. Nó không thể phát hành bất kì "
-"lệnh nào khác, vì thế người dùng nên biết về khả năng va chạm đỉnh điểm và "
-"những tình huống tương tự. (Để hủy bỏ xoay, bạn có thể bắt đầu mộtcái khác "
-"đến một vị trí an toàn.)"
+"Trình cắm này cho phép Stellarium chỉ gửi lệnh '<b>xoay</b>' ('đi đến') tới "
+"thiết bị và nhận vị trí hiện tại của nó. Nó không thể phát hành bất kì lệnh "
+"nào khác, vì thế người dùng nên biết về khả năng va chạm đỉnh điểm và những "
+"tình huống tương tự. (Để hủy bỏ xoay, bạn có thể bắt đầu một cái khác đến "
+"một vị trí an toàn.)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:298
 msgid ""
 "As of the current version, this plug-in doesn't allow satellite tracking, "
 "and is not very suitable for lunar or planetary observations."
 msgstr ""
-"Như các phiên bản hiện tại, phần bổ trợ này không cho phép theo dõi vệ tinh, "
-"và thích hợp lắm cho việc quan sát mặt trăng hoặc hành tinh."
+"Như các phiên bản hiện tại, trình cắm này không cho phép theo dõi vệ tinh, "
+"và không thích hợp lắm cho việc quan sát mặt trăng hoặc hành tinh."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:299
 msgid ""
@@ -8521,15 +8524,15 @@ msgid ""
 "without this plug-in."
 msgstr ""
 "Cũng như Stellarium 0.10.5, tính năng điều khiển kính thiên văn gốc được "
-"xóa. Không còn cách để điều khiển một chiếc kính thiên văn mà không có phần "
-"bổ trợ này."
+"xóa. Không còn cách để điều khiển một chiếc kính thiên văn mà không có trình "
+"cắm này."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:309
 msgid ""
 "Here are two general ways to control a device with this plug-in, depending "
 "on the situation:"
 msgstr ""
-"Dưới đây là hai cách thức chung để điều khiển một thiết bị với phần bổ trợ "
+"Dưới đây là hai cách thức chung để điều khiển một thiết bị với trình cắm "
 "này, tùy thuộc vào tình hình:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
@@ -8542,8 +8545,8 @@ msgid ""
 "A %1device supported by the plug-in%2 is connected with a cable to the "
 "computer running Stellarium;"
 msgstr ""
-"Một %1thiết bị được hỗ trợ bởi các phần bổ trợ%2 được kết nối bằng cáp với "
-"máy tính chạy Stellarium;"
+"Một %1thiết bị được hỗ trợ bởi trình cắm%2 được kết nối bằng cáp với máy "
+"tính chạy Stellarium;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:311
 msgid "INDIRECT CONNECTION"
@@ -8587,8 +8590,8 @@ msgid ""
 "Windows, a USB connection may require a 'virtual serial port' software, if "
 "it is not supplied with the cable or the telescope."
 msgstr ""
-"Trên Linux và Max OS X cả hai trường hợp được xử lý giống nhau bởi các phần "
-"bổ trợ. Trên Windows, kết nối USB có thể yêu cầu một phần mềm 'cổng nối tiếp "
+"Trên Linux và Max OS X cả hai trường hợp được xử lý giống nhau bởi trình "
+"cắm. Trên Windows, kết nối USB có thể yêu cầu một phần mềm 'cổng nối tiếp "
 "ảo', nếu nó không được cung cấp với cáp hay kính thiên văn."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:316
@@ -8597,7 +8600,7 @@ msgid ""
 "real USB port so it can be used by the plug-in."
 msgstr ""
 "Một phần mềm như vậy tạo ra một cổng giao tiếp ảo ('giả') tương ứng với cổng "
-"USB thật vì thế nó có thể được sử dụng bởi phần bổ trợ"
+"USB thật vì thế nó có thể được sử dụng bởi trình cắm"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
 msgid ""
@@ -8619,7 +8622,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
 msgid "The plug-in's main window can be opened:"
-msgstr "Cửa sổ chính của phần bổ trợ này có thể được mở:"
+msgstr "Cửa sổ chính của trình cắm này có thể được mở:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:323
 msgid ""
@@ -8627,9 +8630,9 @@ msgid ""
 "Stellarium's Configuration window (opened by pressing <b>F2</b> or the "
 "respective button in the left toolbar)."
 msgstr ""
-"Bằng cách nhấn vào nút 'cấu hình' cho các phần bổ trợ trong thẻ 'Phần bổ "
-"trợ' của cửa sổ Cấu hình Stellarium (đươc mở bằng cách nhấn <b>F2</b> hoặc "
-"các nút tương ứng trên thanh công cụ bên trái)."
+"Bằng cách nhấn vào nút 'cấu hình' cho các trình cắm trong thẻ 'Trình cắm' "
+"của cửa sổ Cấu hình Stellarium (đươc mở bằng cách nhấn <b>F2</b> hoặc các "
+"nút tương ứng trên thanh công cụ bên trái)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:324
 #, qt-format
@@ -8910,7 +8913,7 @@ msgid ""
 msgstr ""
 "Một loạt các vòng tròn đại diện cho các trường nhìn khác nhau có thể được "
 "thêm vào xung quanh các điểm đánh dấu kính thiên văn. Đây là một di tích từ "
-"thời trước khi phần bổ trợ <strong>Thị kính</ strong> tồn tại."
+"thời trước khi trình cắm <strong>Trực quan</strong> tồn tại."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:379
 msgid ""
@@ -8993,8 +8996,8 @@ msgid ""
 "Pressing the <b>Configure telescopes...</b> button opens the %1main window%2 "
 "of the plug-in."
 msgstr ""
-"Nhấn nút <b>Cấu hình kính thiên văn...</b> để mở %1cửa sổ chính%2 của phần "
-"bổ trợ."
+"Nhấn nút <b>Cấu hình kính thiên văn...</b> để mở %1cửa sổ chính%2 của trình "
+"cắm."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:393
 msgid ""
@@ -9177,12 +9180,12 @@ msgid ""
 "will react in the same way as the reticle of a real telescope controlled by "
 "the plug-in."
 msgstr ""
-"Nếu bạn muốn kiểm tra phần bổ trợ này mà không có một thiết bị thực tế kết "
-"nối với máy tính, hãy chọn <b>Không có gì, chỉ là một cái mô phỏng  (một "
-"đường chữ thập di chuyển)</b> trong <b>Kính thiên văn được kiểm soát "
-"bởi:</b> . Nó sẽ hiển thị một đường chữ thập kính thiên văn rằng sẽ phản ứng "
-"theo cách tương tự như đường chữ thập của kính thiên văn thực sự được kiểm "
-"soát bởi phần bổ trợ."
+"Nếu bạn muốn kiểm tra trình cắm này mà không có một thiết bị thực tế kết nối "
+"với máy tính, hãy chọn <b>Không có gì, chỉ là một cái mô phỏng (một đường "
+"chữ thập di chuyển)</b> trong <b>Kính thiên văn được kiểm soát bởi:</b> . Nó "
+"sẽ hiển thị một đường chữ thập kính thiên văn rằng sẽ phản ứng theo cách "
+"tương tự như đường chữ thập của kính thiên văn thực sự được kiểm soát bởi "
+"trình cắm."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:428
 #, qt-format
@@ -9686,7 +9689,7 @@ msgstr "Thứ Bảy"
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:106
 msgid "Time Zone plug-in"
-msgstr "Phần bổ trợ Múi Giờ"
+msgstr "Trình cắm Múi Giờ"
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:107
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:109
@@ -10095,7 +10098,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:108
 msgid "Solar System Editor plug-in"
-msgstr "Phần bổ trợ chỉnh sửa hệ mặt trời"
+msgstr "Trình cắm chỉnh sửa hệ mặt trời"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:187
 msgid "Save the Solar System configuration file as..."
@@ -10103,11 +10106,11 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:193
 msgid "Configuration files"
-msgstr ""
+msgstr "Tập tin cấu hình"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:195
 msgid "Select a file to replace the Solar System configuration file"
-msgstr ""
+msgstr "Chọn một tập tin để thay thế tập tin cấu hình Hệ Mặt Trời"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:511
 msgid "Import data"
@@ -10198,8 +10201,8 @@ msgid ""
 "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
 "manually that file from:"
 msgstr ""
-"Phần bổ trợ này sử dụng một tập tin cấu hình hệ mặt trời tùy chỉnh. Nếu có "
-"điều gì sai và Stellarium bị treo và / hoặc không khởi động, bạn có thể xóa "
+"Trình cắm này sử dụng một tập tin cấu hình hệ mặt trời tùy chỉnh. Nếu có "
+"điều gì sai và Stellarium bị treo và/hoặc không khởi động, bạn có thể xóa "
 "bằng tay tập tin đó từ:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
@@ -10279,7 +10282,7 @@ msgstr "Độ sáng tối đa: %1"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
 msgid "Historical Supernovae Plug-in"
-msgstr "Phần bổ trợ Siêu tân tinh lịch sử"
+msgstr "Trình cắm Siêu tân tinh lịch sử"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 msgid "This plugin allows you to see some bright historical supernovae: "
@@ -10358,7 +10361,7 @@ msgstr "Cấu hinh siều tân tinh lịch sử"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:230
 msgid "Historical Supernovae Plug-in Configuration"
-msgstr "Cấu hinh phần bổ trợ Siêu tân tinh lịch sử"
+msgstr "Cấu hinh trình cắm Siêu tân tinh lịch sử"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:232
 #: plugins/Novae/src/ui_novaeDialog.h:235
@@ -10431,7 +10434,7 @@ msgstr ""
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
 msgid "Navigational Stars Plug-in"
-msgstr ""
+msgstr "Trình cắm Sao chỉ hướng"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:107
@@ -10476,11 +10479,11 @@ msgstr "Nơi của chuỗi với tọa độ của con trỏ chuột"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:208
 msgid "Current set:"
-msgstr ""
+msgstr "Cài đặt hiện tại:"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:209
 msgid "Note:"
-msgstr ""
+msgstr "Chú ý:"
 
 #: plugins/Novae/src/Novae.cpp:71 plugins/Novae/src/Novae.cpp:142
 msgid "Bright Novae"
@@ -10500,7 +10503,7 @@ msgstr "Tân tinh"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:118
 msgid "Bright Novae Plug-in"
-msgstr "Phần bổ trợ tân tinh sáng"
+msgstr "Trình cắm Tân tinh sáng"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:124
 msgid ""
@@ -10555,7 +10558,7 @@ msgstr "Cấu hình Tân tinh sáng"
 
 #: plugins/Novae/src/ui_novaeDialog.h:233
 msgid "Bright Novae Plug-in Configuration"
-msgstr "Cấu hình Phần bổ trợ Tân tinh sáng"
+msgstr "Cấu hình Trình cắm Tân tinh sáng"
 
 #: plugins/Quasars/src/Quasars.cpp:72 plugins/Quasars/src/Quasars.cpp:169
 #: plugins/Quasars/src/Quasars.cpp:170
@@ -10587,7 +10590,7 @@ msgstr "Z (dịch chuyển đỏ): %1"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 msgid "Quasars Plug-in"
-msgstr "Phần bổ trợ Chuẩn tinh"
+msgstr "Trình cắm Chuẩn tinh"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
 msgid ""
@@ -10628,7 +10631,7 @@ msgstr "Cấu hình Chuẩn tinh"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:258
 msgid "Quasars Plug-in Configuration"
-msgstr "Cấu hình Bổ trợ Chuẩn tinh"
+msgstr "Cấu hình Trình cắm Chuẩn tinh"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:266
 msgid "Settings for quasars"
@@ -10809,7 +10812,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:127
 msgid "Pulsars Plug-in"
-msgstr "Phần bổ trợ Ẩn tinh"
+msgstr "Trình cắm Ẩn tinh"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
 #, qt-format
@@ -10865,7 +10868,7 @@ msgstr "Ẩn tinh được cập nhật"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:264
 msgid "Pulsars Plug-in Configuration"
-msgstr "Cấu hình bổ trợ Ẩn tinh"
+msgstr "Cấu hình Trình cắm Ẩn tinh"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:272
 msgid "Settings for pulsars"
@@ -10891,7 +10894,7 @@ msgstr "Sử dụng màu sắc riêng biệt cho những ẩn tinh gặp sự c�
 #: plugins/RemoteControl/src/RemoteControl.cpp:147
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:260
 msgid "Remote Control"
-msgstr ""
+msgstr "Điều khiển từ xa"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:61
 msgid ""
@@ -10901,68 +10904,75 @@ msgstr ""
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:147
 msgid "Remote control"
-msgstr ""
+msgstr "Điều khiển từ xa"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:106
 msgid "Remote Control Plug-in"
-msgstr ""
+msgstr "Trình cắm Điều khiển từ xa"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:112
 msgid ""
 "The Remote Control plugin provides a web interface to allow state changes "
 "and triggering scripts using a connected webbrowser."
 msgstr ""
+"Trình cắm Điều khiển từ xa cung cấp một giao diện web để cho phép thay đổi "
+"trạng thái và các kịch bản kích hoạt bằng cách sử dụng trình duyệt web được "
+"kết nối."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:115
 msgid "It is also possible to send commands via command line, e.g.."
-msgstr ""
+msgstr "Nó cũng có thể gửi các lệnh thông qua dòng lệnh, ví dụ..."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:121
 msgid "This allows triggering automatic show setups for museums etc."
 msgstr ""
+"Điều này cho phép kích hoạt các thiết lập trình tự động cho các viện bảo "
+"tàng, vv"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:122
 msgid "This plugin was developed during ESA SoCiS 2015."
-msgstr ""
+msgstr "Trình cắm này được phát triển trong thời gian ESA SoCiS 2015."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:123
 #, qt-format
 msgid "This plugin uses the %1QtWebApp HTTP server%2 by Stefan Frings."
-msgstr ""
+msgstr "Trình cắm này sử dụng %1Máy chủ QtWebApp HTTP%2 bởi Stefan Frings."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:126
 #, qt-format
 msgid "Further information can be found in the %1developer documentation%2."
 msgstr ""
+"Thông tin chi tiết có thể được tìm thấy trong %1tài liệu hướng dẫn nhà phát "
+"triển%2."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:175
 #, qt-format
 msgid "Listening on %1, IP: "
-msgstr ""
+msgstr "Nghe trên %1, IP: "
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:180
 msgid "Not active."
-msgstr ""
+msgstr "Không được kích hoạt."
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:246
 msgid "Remote Control Configuration"
-msgstr ""
+msgstr "Cấu hình Điều khiển từ xa"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:247
 msgid "Remote Control Plug-in Configuration"
-msgstr ""
+msgstr "Cấu hình Trình cắm Điều khiển từ xa"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:249
 msgid "Port Number:"
-msgstr ""
+msgstr "Số cổng:"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:252
 msgid "Access requires authentication"
-msgstr ""
+msgstr "Truy cập yêu cầu xác thực"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:253
 msgid "Password"
-msgstr ""
+msgstr "Mật khẩu"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:254
 msgid ""
@@ -10970,26 +10980,30 @@ msgid ""
 "empty. </p><p>The password is transmitted over an insecure "
 "channel.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>Chú ý: Trường tên người dùng trong trình duyệt phải "
+"được bỏ trống. </p><p>Mật khẩu được truyền thông qua một kênh không an toàn. "
+"</p></body></html>"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:255
 msgid "Your changes require a restart of the server."
-msgstr ""
+msgstr "Các thay đổi của bạn yêu cầu khởi động lại máy chủ."
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:256
 msgid "Restart server"
-msgstr ""
+msgstr "Khởi động lại máy chủ"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:257
 msgid "Server enabled"
-msgstr ""
+msgstr "Máy chủ đã bật"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:258
 msgid "Enable automatically on startup"
-msgstr ""
+msgstr "Bật tự động lúc khởi động"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:259
 msgid "Server disabled - or Server listening on IP: aaa.bbb.ccc.ddd"
 msgstr ""
+"Máy chủ đã vô hiệu hóa - hoặc Máy chủ đang nghe trên IP: aaa.bbb.ccc.ddd"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:74
 #: plugins/Exoplanets/src/Exoplanets.cpp:169
@@ -11145,7 +11159,7 @@ msgstr "Chỉ số tương đồng với Trái đất"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
 msgid "Exoplanets Plug-in"
-msgstr "Phần bổ trợ Ngoại hành tinh"
+msgstr "Trình cắm Ngoại hành tinh"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
 #, qt-format
@@ -11843,7 +11857,7 @@ msgstr "Cấu hình ngoại hành tinh"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:457
 msgid "Exoplanets Plug-in Configuration"
-msgstr "Cấu hình Phần bổ trợ Ngoại hành tinh"
+msgstr "Cấu hình Trình cắm Ngoại hành tinh"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:459
 msgid "Update exoplanets data from Internet"
@@ -12161,7 +12175,7 @@ msgstr "Cửa sổ cấu hình Khả năng quan sát"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
 msgid "Observability Plug-in"
-msgstr "Phần bổ trợ Khả năng quan sát"
+msgstr "Trình cắm Khả năng quan sát"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:138
 msgid ""
@@ -12365,7 +12379,7 @@ msgstr "Cấu hình khả năng quan sát"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:343
 msgid "Observability Plug-in Configuration"
-msgstr "Cấu hình Phần bổ trợ Khả năng quan sát"
+msgstr "Cấu hình Trình cắm Khả năng quan sát"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:345
 msgid "Font color and size"
@@ -12436,7 +12450,7 @@ msgstr "Cài đặt trường nhìn đối với %1%2"
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:80
 msgid "Field of View plug-in"
-msgstr "Phần bổ trợ Trường nhìn"
+msgstr "Trình cắm Trường nhìn"
 
 #: plugins/FOV/src/ui_fovWindow.h:392
 msgid ""
@@ -12483,7 +12497,7 @@ msgstr "giây"
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:82
 msgid "Equation of Time plug-in"
-msgstr "Phần bổ trợ Cân bằng Thời gian"
+msgstr "Trình cắm Cân bằng Thời gian"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:275
 msgid ""
@@ -12510,7 +12524,7 @@ msgstr ""
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:277
 msgid "Show plug-ins button on toolbar"
-msgstr "Thể hiện nút phần bổ trợ ở thanh dưới cùng"
+msgstr "Thể hiện nút trình cắm ở thanh dưới cùng"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:278
 msgid "Use minutes and seconds"
@@ -13086,7 +13100,7 @@ msgstr "Lỗi thời!"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:204
 msgid "Meteor Showers Plug-in"
-msgstr "Phần bổ trợ Mưa sao băng"
+msgstr "Trình cắm Mưa sao băng"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:217
 msgid ""
@@ -13438,7 +13452,7 @@ msgstr "Góc giờ/Xích vĩ"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:117
 msgid "Pointer Coordinates plug-in"
-msgstr "Phần bổ trợ Tọa Độ Con Trỏ"
+msgstr "Trình cắm Tọa Độ Con Trỏ"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:122
 msgid "Show coordinates of the mouse cursor on the screen."
@@ -13490,7 +13504,7 @@ msgstr "Bật hiển thị tọa độ lúc khởi động"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:281
 msgid "Show plug-in button on toolbar"
-msgstr "Thể hiện nút phần bổ trợ ở thanh dưới cùng"
+msgstr "Hiển thị nút trình cắm ở thanh dưới cùng"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:283
 msgid "Which coordinate system will be used for displaying"
@@ -14067,11 +14081,11 @@ msgstr "Công cụ cho việc nghiên cứu sự liên kết thiên văn học c
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:237
 msgid "Show Line for Equinox"
-msgstr ""
+msgstr "Hiển thị đường phân điểm"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:238
 msgid "Show Line for Solstices"
-msgstr ""
+msgstr "Hiển thị đường chí điểm"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:239
 msgid "Show Line for Crossquarter"
@@ -14095,31 +14109,31 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:244
 msgid "Show Line for Selected Object"
-msgstr ""
+msgstr "Hiển thị đường cho đối tượng được chọn"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:245
 msgid "Show Line for Current Sun"
-msgstr ""
+msgstr "Hiển thị đường cho mặt trời hiện tại"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:246
 msgid "Show Line for Current Moon"
-msgstr ""
+msgstr "Hiển thị đường cho Mặt trăng hiện tại"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:247
 msgid "Show Line for Geographic Location 1"
-msgstr ""
+msgstr "Hiển thị đường cho Vị trí địa lí 1"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:248
 msgid "Show Line for Geographic Location 2"
-msgstr ""
+msgstr "Hiển thị đường cho Vị trí địa lí 2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:249
 msgid "Show Line for Custom Azimuth 1"
-msgstr ""
+msgstr "Hiển thị đường cho Góc phương vị tùy chỉnh 1"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:250
 msgid "Show Line for Custom Azimuth 2"
-msgstr ""
+msgstr "Hiển thị đường cho Góc phương vị tùy chỉnh 2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1151
 msgid "Equinox"
@@ -14168,7 +14182,7 @@ msgstr "Kim tinh"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:227
 msgid "ArchaeoLines Plug-in"
-msgstr "Phần bổ trợ ArchaeLines"
+msgstr "Trình cắm ArchaeLines"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:233
 msgid ""
@@ -14295,19 +14309,19 @@ msgstr "Chọn màu sắc cho đường hành tinh hiện tại"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:477
 msgid "Select color for Geographic Location 1 line"
-msgstr ""
+msgstr "Chọn màu cho đường Vị trí địa lí 1"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:488
 msgid "Select color for Geographic Location 2 line"
-msgstr ""
+msgstr "Chọn màu cho đường Vị trí địa lí 2"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:499
 msgid "Select color for Custom Azimuth 1 line"
-msgstr ""
+msgstr "Chọn màu cho đường Góc phương vị tùy chỉnh 1"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:510
 msgid "Select color for Custom Azimuth 2 line"
-msgstr ""
+msgstr "Chọn màu cho đường Góc phương vị tùy chỉnh 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:471
 msgid "ArchaeoLines Configuration"
@@ -14315,7 +14329,7 @@ msgstr "Cấu hình ArchaeoLines"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:472
 msgid "ArchaeoLines Plug-in Configuration"
-msgstr "Cấu hình phần bổ trợ ArchaeoLines"
+msgstr "Cấu hình Trình cắm ArchaeoLines"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:474
 msgid "To change colors you may have to leave fullscreen mode!"
@@ -14323,16 +14337,16 @@ msgstr "Để thay đổi màu sắc bạn có lẽ phải rời khỏi chế đ
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:475
 msgid "Geographic Location 1"
-msgstr ""
+msgstr "Vị trí địa lí 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:477
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:483
 msgid "Enter a label (location name) for this line"
-msgstr ""
+msgstr "Nhập một nhãn (tên vị trí) cho đường này"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:481
 msgid "Geographic Location 2"
-msgstr ""
+msgstr "Vị trí địa lí 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:486
 msgid "Change color"
@@ -14372,11 +14386,11 @@ msgstr "Đường Mặt trăng dừng lại nhỏ"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:500
 msgid "Custom Azimuth 1"
-msgstr ""
+msgstr "Góc phương vị tùy chỉnh 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:501
 msgid "Custom Azimuth 2"
-msgstr ""
+msgstr "Góc phương vị tùy chỉnh 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:503
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:506
