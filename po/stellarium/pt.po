@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-27 09:55+0700\n"
-"PO-Revision-Date: 2016-07-11 21:07+0000\n"
+"PO-Revision-Date: 2016-07-27 07:50+0000\n"
 "Last-Translator: Tiago S. <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-27 05:33+0000\n"
+"X-Launchpad-Export-Date: 2016-07-28 05:36+0000\n"
 "X-Generator: Launchpad (build 18153)\n"
 
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:189
@@ -2729,11 +2729,11 @@ msgstr "Dia Juliano"
 
 #: src/gui/AstroCalcDialog.cpp:365 src/gui/AstroCalcDialog.cpp:679
 msgid "CSV (Comma delimited)"
-msgstr ""
+msgstr "CSV (delimitado por vírgulas)"
 
 #: src/gui/AstroCalcDialog.cpp:367
 msgid "Save calculated ephemerides as..."
-msgstr ""
+msgstr "Guardar as efemérides calculadas como..."
 
 #: src/gui/AstroCalcDialog.cpp:443
 msgid "10 minutes"
@@ -2822,7 +2822,7 @@ msgstr "Objecto 2"
 
 #: src/gui/AstroCalcDialog.cpp:681
 msgid "Save calculated phenomena as..."
-msgstr ""
+msgstr "Guardar fenómenos calculados como..."
 
 #: src/gui/AstroCalcDialog.cpp:720
 msgid "Conjunction"
@@ -3241,7 +3241,7 @@ msgstr "Estações Lunares Japonesas"
 
 #: src/translations.h:183
 msgid "Kamilaroi/Euahlayi"
-msgstr ""
+msgstr "Kamilaroi/Euahlayi"
 
 #: src/translations.h:184
 msgid "Korean"
@@ -5787,11 +5787,11 @@ msgstr "Idioma da cultura do céu"
 
 #: src/ui_configurationDialog.h:1094
 msgid "This feature has not been thoroughly tested yet!"
-msgstr ""
+msgstr "Esta função ainda não foi testada!"
 
 #: src/ui_configurationDialog.h:1096
 msgid "Ephemeris settings (experimental)"
-msgstr ""
+msgstr "Definições das efemérides (experimental)"
 
 #: src/ui_configurationDialog.h:1097 src/ui_configurationDialog.h:1098
 msgid "Not installed"
@@ -6462,7 +6462,7 @@ msgstr "..."
 
 #: src/ui_astroCalcDialog.h:415
 msgid "Update of planetary positions"
-msgstr ""
+msgstr "Atualizar as posições planetárias"
 
 #: src/ui_astroCalcDialog.h:416
 msgid "Planetary positions"
@@ -6487,15 +6487,15 @@ msgstr "Calcular as efemérides"
 
 #: src/ui_astroCalcDialog.h:422
 msgid "Save ephemeris"
-msgstr ""
+msgstr "Guardar efemérides"
 
 #: src/ui_astroCalcDialog.h:424
 msgid "Show markers of positions of the current celestial body on the sky"
-msgstr ""
+msgstr "Mostrar marcadores das posições do corpo celestial atual no céu"
 
 #: src/ui_astroCalcDialog.h:426
 msgid "Show markers of positions"
-msgstr ""
+msgstr "Mostrar marcadores das posições"
 
 #: src/ui_astroCalcDialog.h:429 src/ui_astroCalcDialog.h:440
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
@@ -6505,10 +6505,11 @@ msgstr "A:"
 #: src/ui_astroCalcDialog.h:432
 msgid "Show dates of positions of current celestial body near markers"
 msgstr ""
+"Mostrar dataa das posições do corpo celestial atual próximo do marcadores"
 
 #: src/ui_astroCalcDialog.h:434
 msgid "Show dates of positions"
-msgstr ""
+msgstr "Mostrar dataa das posições"
 
 #: src/ui_astroCalcDialog.h:435
 msgid "Ephemeris"
@@ -6540,7 +6541,7 @@ msgstr "Calcular fenómenos"
 
 #: src/ui_astroCalcDialog.h:447
 msgid "Save phenomena"
-msgstr ""
+msgstr "Guardar fenómeno"
 
 #: src/ui_astroCalcDialog.h:448
 msgid "Phenomena"
