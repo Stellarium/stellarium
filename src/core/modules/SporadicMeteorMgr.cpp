@@ -50,7 +50,7 @@ void SporadicMeteorMgr::init()
 				StelFileMgr::getInstallationDir() + "/textures/cometComa.png",
 				StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
 
-	setZHR(StelApp::getInstance().getSettings()->value("astro/meteor_rate", 10).toInt());
+	setZHR(StelApp::getInstance().getSettings()->value("astro/meteor_zhr", 10).toInt());
 }
 
 double SporadicMeteorMgr::getCallOrder(StelModuleActionName actionName) const
