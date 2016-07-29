@@ -36,8 +36,8 @@ This section includes settings for the commonly displayed objects.
 \emph{ID} & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
 apparent\_magnitude\_algorithm & string & Harris & Set algorithm for computation of apparent magnitude of the planets. 
                                                    Possible values: \emph{Planesas}, \emph{Mueller}, \emph{Harris} 
-                                                   and \emph{Generic}\footnote{Available since version 0.13.3}.\\\midrule
-nebula\_magnitude\_limit         & float & 8.5  & Value of limiting magnitude for the deep-sky objects.\\
+                                                   and \emph{Generic}.\\\midrule
+nebula\_magnitude\_limit         & float & 8.5  & Value of limiting magnitude for the deep-sky objects.\\\midrule
 star\_magnitude\_limit           & float &      & Value of limiting magnitude for the stars. 
                                                   Sometimes you don't want to display more stars when zooming in. \\\midrule
 flag\_nebula\_magnitude\_limit   & bool & false & Set to \emph{true} to activate limit for showing deep-sky objects.\\\midrule
@@ -284,7 +284,8 @@ flag\_fov\_dms                  & bool   & false & If \emph{true}, using DMS for
 flag\_show\_decimal\_degrees    & bool   & false & If \emph{true}, use decimal degrees for coordinates\\\midrule
 flag\_use\_azimuth\_from\_south & bool   & false & If \emph{true}, calculate azimuth from south towards west 
                                                    (as in some astronomical literature)\\\midrule
-flag\_show\_gui                 & bool   & false & If \emph{true}, display GUI\\\bottomrule
+flag\_show\_gui                 & bool   & false & If \emph{true}, display GUI\\\midrule
+pointer\_animation\_speed 		& float  & 1.0 	& Speed of rotating of pointers\\\bottomrule
 \end{longtabu}
 
 \subsection{\big[init\_location\big]}\label{sec:config.ini:init_location}
@@ -398,6 +399,7 @@ Observability         & bool & Observability Analysis\\\midrule
 Oculars               & bool & Oculars plugin \\\midrule
 Pulsars               & bool & Pulsars plugin \\\midrule
 Quasars               & bool & Quasars plugin \\\midrule
+RemoteControl         & bool & Remote Control plugin \\\midrule
 Satellites            & bool & Satellites plugin \\\midrule
 SolarSystemEditor     & bool & Solar System Editor plugin\\\midrule
 Supernovae            & bool & Historical Supernovae plugin \\\midrule
