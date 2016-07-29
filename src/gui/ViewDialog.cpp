@@ -171,9 +171,10 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->starScaleRadiusDoubleSpinBox,"StelSkyDrawer.absoluteStarScale");
 	connectDoubleProperty(ui->starRelativeScaleDoubleSpinBox, "StelSkyDrawer.relativeStarScale");
 	connectDoubleProperty(ui->milkyWayBrightnessDoubleSpinBox, "MilkyWay.intensity");
+	connectBoolProperty(ui->zodiacalLightCheckBox, "ZodiacalLight.flagZodiacalLightDisplayed");
 	connectDoubleProperty(ui->zodiacalLightBrightnessDoubleSpinBox, "ZodiacalLight.intensity");
-	connectDoubleProperty(ui->starTwinkleAmountDoubleSpinBox,"StelSkyDrawer.twinkleAmount");
-	connectBoolProperty(ui->adaptationCheckbox,"StelSkyDrawer.flagLuminanceAdaptation");
+	connectDoubleProperty(ui->starTwinkleAmountDoubleSpinBox, "StelSkyDrawer.twinkleAmount");
+	connectBoolProperty(ui->adaptationCheckbox, "StelSkyDrawer.flagLuminanceAdaptation");
 
 	// Limit Magnitudes
 	// Stars
