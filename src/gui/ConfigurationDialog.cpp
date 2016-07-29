@@ -585,6 +585,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/meteor_zhr", mmgr->getZHR());
 	conf->setValue("astro/milky_way_intensity", GETSTELMODULE(MilkyWay)->getIntensity());
 	conf->setValue("astro/zodiacal_light_intensity", GETSTELMODULE(ZodiacalLight)->getIntensity());
+	conf->setValue("astro/flag_zodiacal_light", GETSTELMODULE(ZodiacalLight)->getFlagShow());
 	conf->setValue("astro/flag_grs_custom", ssmgr->getFlagCustomGrsSettings());
 	conf->setValue("astro/grs_longitude", ssmgr->getCustomGrsLongitude());
 	conf->setValue("astro/grs_drift", ssmgr->getCustomGrsDrift());
