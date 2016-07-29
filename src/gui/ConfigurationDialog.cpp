@@ -582,7 +582,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/flag_light_travel_time", ssmgr->getFlagLightTravelTime());
 	conf->setValue("viewing/flag_moon_scaled", ssmgr->getFlagMoonScale());
 	conf->setValue("viewing/moon_scale", ssmgr->getMoonScale());
-	conf->setValue("astro/meteor_rate", mmgr->getZHR());
+	conf->setValue("astro/meteor_zhr", mmgr->getZHR());
 	conf->setValue("astro/milky_way_intensity", GETSTELMODULE(MilkyWay)->getIntensity());
 	conf->setValue("astro/zodiacal_light_intensity", GETSTELMODULE(ZodiacalLight)->getIntensity());
 	conf->setValue("astro/flag_grs_custom", ssmgr->getFlagCustomGrsSettings());
@@ -677,7 +677,6 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("landscape/flag_landscape_sets_location", lmgr->getFlagLandscapeSetsLocation());
 	conf->setValue("landscape/flag_landscape", lmgr->getFlagLandscape());
 	conf->setValue("landscape/flag_atmosphere", lmgr->getFlagAtmosphere());
-	conf->setValue("landscape/flag_brightness", lmgr->getFlagLandscapeSetsMinimalBrightness());
 	conf->setValue("landscape/flag_fog", lmgr->getFlagFog());
 	conf->setValue("landscape/flag_enable_illumination_layer", lmgr->getFlagIllumination());
 	conf->setValue("landscape/flag_enable_labels", lmgr->getFlagLabels());

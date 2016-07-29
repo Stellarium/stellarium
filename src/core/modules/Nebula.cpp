@@ -45,7 +45,6 @@ StelTextureSP Nebula::texPlanetaryNebula;
 StelTextureSP Nebula::texDiffuseNebula;
 StelTextureSP Nebula::texDarkNebula;
 StelTextureSP Nebula::texOpenClusterWithNebulosity;
-float Nebula::circleScale = 1.f;
 bool  Nebula::drawHintProportional = false;
 bool  Nebula::surfaceBrightnessUsage = false;
 bool  Nebula::designationUsage = false;

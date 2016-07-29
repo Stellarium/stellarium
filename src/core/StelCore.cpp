@@ -2102,7 +2102,7 @@ void StelCore::initEphemeridesFunctions()
 		qDebug() << "DE430 at: " << de430FilePath;
 		EphemWrapper::init_de430(de430FilePath.toStdString().c_str());
 	}
-	setDe430Active(de430Available && conf->value("astro/flag_use_de430").toBool());
+	setDe430Active(de430Available && conf->value("astro/flag_use_de430", false).toBool());
 
 	//<-- DE431 -->
 	if(de431ConfigPath.remove(QChar('"')).isEmpty())
@@ -2116,5 +2116,5 @@ void StelCore::initEphemeridesFunctions()
 		qDebug() << "DE431 at: " << de431FilePath;
 		EphemWrapper::init_de431(de431FilePath.toStdString().c_str());
 	}
-	setDe431Active(de431Available && conf->value("astro/flag_use_de431").toBool());
+	setDe431Active(de431Available && conf->value("astro/flag_use_de431", false).toBool());
 }

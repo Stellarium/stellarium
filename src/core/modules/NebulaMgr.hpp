@@ -477,11 +477,6 @@ public slots:
 	//! Get current value of the star symbol color.
 	const Vec3f& getStarColor(void) const;
 
-	//! Set Nebulae Hints circle scale.
-	void setCircleScale(float scale);
-	//! Get Nebulae Hints circle scale.
-	float getCircleScale(void) const;
-
 	//! Set how long it takes for nebula hints to fade in and out when turned on and off.
 	//! @param duration given in seconds
 	void setHintsFadeDuration(float duration) {hintsFader.setDuration((int) (duration * 1000.f));}
