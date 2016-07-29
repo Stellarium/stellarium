@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-27 09:55+0700\n"
+"POT-Creation-Date: 2016-07-28 20:52+0700\n"
 "PO-Revision-Date: 2016-06-05 20:55+0000\n"
 "Last-Translator: henrysky <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-28 05:42+0000\n"
+"X-Launchpad-Export-Date: 2016-07-29 05:36+0000\n"
 "X-Generator: Launchpad (build 18153)\n"
 
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:189
@@ -11640,9 +11640,8 @@ msgid ""
 msgstr "這個插件允許通過鍵盤快捷鍵從而階段性變焦像星像軟件<em>Cartes du Ciel</ em>"
 
 #: plugins/FOV/src/FOV.cpp:86
-#, qt-format
-msgid "Set FOV to %1%2"
-msgstr "設定視野大小到 %1%2"
+msgid "Set FOV to"
+msgstr ""
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:80
 msgid "Field of View plug-in"
@@ -14056,6 +14055,10 @@ msgstr "目前的太陽"
 #~ "This plugin marks the 58 navigational stars of the 2102-D Rude Star Finder, "
 #~ "also tabulated in the Nautical Almanac."
 #~ msgstr "些插件會標示58顆2102-D Rude Star Finder導航星體, 也列在航海天文歷."
+
+#, qt-format
+#~ msgid "Set FOV to %1%2"
+#~ msgstr "設定視野大小到 %1%2"
 
 #~ msgid "Sun altitude at twilight: 0 deg."
 #~ msgstr "太陽在黃昏之高度：0 度."

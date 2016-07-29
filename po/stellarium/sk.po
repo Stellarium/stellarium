@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-27 09:55+0700\n"
+"POT-Creation-Date: 2016-07-28 20:52+0700\n"
 "PO-Revision-Date: 2016-07-16 17:38+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-28 05:38+0000\n"
+"X-Launchpad-Export-Date: 2016-07-29 05:32+0000\n"
 "X-Generator: Launchpad (build 18153)\n"
 
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:189
@@ -12009,9 +12009,8 @@ msgstr ""
 "štýle programu <em>Cartes du Ciel</em>."
 
 #: plugins/FOV/src/FOV.cpp:86
-#, qt-format
-msgid "Set FOV to %1%2"
-msgstr "Nastav zorné pole na %1%2"
+msgid "Set FOV to"
+msgstr ""
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:80
 msgid "Field of View plug-in"
@@ -15086,6 +15085,10 @@ msgstr "Aktuálne Slnko"
 #~ msgstr ""
 #~ "Modul zvýrazní 58 navigačných hviezd podľa 2102-D Rude Star Finder, ktoré sa "
 #~ "nachádzajú aj v Námorníckej ročenke."
+
+#, qt-format
+#~ msgid "Set FOV to %1%2"
+#~ msgstr "Nastav zorné pole na %1%2"
 
 #~ msgid "Active"
 #~ msgstr "Aktívny"

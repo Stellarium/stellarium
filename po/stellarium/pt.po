@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-27 09:55+0700\n"
+"POT-Creation-Date: 2016-07-28 20:52+0700\n"
 "PO-Revision-Date: 2016-07-27 07:50+0000\n"
 "Last-Translator: Tiago S. <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-28 05:36+0000\n"
+"X-Launchpad-Export-Date: 2016-07-29 05:31+0000\n"
 "X-Generator: Launchpad (build 18153)\n"
 
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:189
@@ -12382,9 +12382,8 @@ msgstr ""
 "modo que no programa <em>Cartes du Ciel</em>."
 
 #: plugins/FOV/src/FOV.cpp:86
-#, qt-format
-msgid "Set FOV to %1%2"
-msgstr "Definir o campo de visão para %1%2"
+msgid "Set FOV to"
+msgstr ""
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:80
 msgid "Field of View plug-in"
@@ -15751,6 +15750,10 @@ msgstr "Sol Atual"
 
 #~ msgid "Equatorial grid (on date)"
 #~ msgstr "Grade equatorial (na data)"
+
+#, qt-format
+#~ msgid "Set FOV to %1%2"
+#~ msgstr "Definir o campo de visão para %1%2"
 
 #~ msgid "Active"
 #~ msgstr "Activar"
