@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-27 09:55+0700\n"
+"POT-Creation-Date: 2016-07-28 20:52+0700\n"
 "PO-Revision-Date: 2016-07-08 16:12+0000\n"
 "Last-Translator: Mad Hatter <vanhelgen@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-28 05:30+0000\n"
+"X-Launchpad-Export-Date: 2016-07-29 05:25+0000\n"
 "X-Generator: Launchpad (build 18153)\n"
 
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:189
@@ -12143,9 +12143,8 @@ msgstr ""
 "come nel software planetario <em>Cartes du Ciel</em>."
 
 #: plugins/FOV/src/FOV.cpp:86
-#, qt-format
-msgid "Set FOV to %1%2"
-msgstr "Imposta campo visivo a %1%2"
+msgid "Set FOV to"
+msgstr ""
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:80
 msgid "Field of View plug-in"
@@ -15360,6 +15359,10 @@ msgstr ""
 
 #~ msgid "Mean Surface Temperature"
 #~ msgstr "Temperatura media in superficie"
+
+#, qt-format
+#~ msgid "Set FOV to %1%2"
+#~ msgstr "Imposta campo visivo a %1%2"
 
 #~ msgid ""
 #~ "This plugin marks 58 navigational stars - Polaris and the 57 \"selected "

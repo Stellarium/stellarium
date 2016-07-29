@@ -17,14 +17,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-27 09:55+0700\n"
-"PO-Revision-Date: 2016-07-26 16:57+0000\n"
+"POT-Creation-Date: 2016-07-28 20:52+0700\n"
+"PO-Revision-Date: 2016-07-28 14:32+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-28 05:27+0000\n"
+"X-Launchpad-Export-Date: 2016-07-29 05:22+0000\n"
 "X-Generator: Launchpad (build 18153)\n"
 
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:189
@@ -10201,7 +10201,7 @@ msgstr "Enregistrer le fichier de configuration du Système solaire sous..."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:193
 msgid "Configuration files"
-msgstr ""
+msgstr "Fichiers de configuration"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:195
 msgid "Select a file to replace the Solar System configuration file"
@@ -12577,9 +12577,8 @@ msgstr ""
 "Ciel</em>."
 
 #: plugins/FOV/src/FOV.cpp:86
-#, qt-format
-msgid "Set FOV to %1%2"
-msgstr "Définir le champ de vision à %1%2"
+msgid "Set FOV to"
+msgstr "Définir le champ de vision à"
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:80
 msgid "Field of View plug-in"
@@ -15965,6 +15964,10 @@ msgstr "Soleil actuel"
 
 #~ msgid "Show names"
 #~ msgstr "Afficher les noms"
+
+#, qt-format
+#~ msgid "Set FOV to %1%2"
+#~ msgstr "Définir le champ de vision à %1%2"
 
 #~ msgid ""
 #~ "The mercator projection is one of the most used world map projection. It "

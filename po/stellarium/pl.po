@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-27 09:55+0700\n"
+"POT-Creation-Date: 2016-07-28 20:52+0700\n"
 "PO-Revision-Date: 2016-07-03 18:44+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-28 05:36+0000\n"
+"X-Launchpad-Export-Date: 2016-07-29 05:30+0000\n"
 "X-Generator: Launchpad (build 18153)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -12099,9 +12099,8 @@ msgstr ""
 "klawiszowych na wzór programu <em>Cartes du Ciel</em>."
 
 #: plugins/FOV/src/FOV.cpp:86
-#, qt-format
-msgid "Set FOV to %1%2"
-msgstr "Ustaw pole widzenia na %1%2"
+msgid "Set FOV to"
+msgstr ""
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:80
 msgid "Field of View plug-in"
@@ -15241,6 +15240,10 @@ msgstr "Bieżące Słońce"
 
 #~ msgid "Equatorial grid (on date)"
 #~ msgstr "Siatka równikowa (na dzień)"
+
+#, qt-format
+#~ msgid "Set FOV to %1%2"
+#~ msgstr "Ustaw pole widzenia na %1%2"
 
 #~ msgid "Show Solar System objects"
 #~ msgstr "Pokaż obiekty Układu Słonecznego"

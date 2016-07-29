@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-27 09:55+0700\n"
-"PO-Revision-Date: 2016-07-24 13:22+0000\n"
+"POT-Creation-Date: 2016-07-28 20:52+0700\n"
+"PO-Revision-Date: 2016-07-28 09:39+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-28 05:24+0000\n"
+"X-Launchpad-Export-Date: 2016-07-29 05:18+0000\n"
 "X-Generator: Launchpad (build 18153)\n"
 "Language: bn\n"
 
@@ -735,7 +735,7 @@ msgstr "মহাজাগতিক জ্যোতিষ্ক"
 
 #: src/core/modules/NebulaMgr.cpp:368
 msgid "Toggle DSO type filter"
-msgstr ""
+msgstr "পছন্দসই মহাজাগতিক জ্যোতিষ্ক"
 
 #: src/core/modules/Planet.cpp:238 src/core/modules/MinorPlanet.cpp:232
 #: src/core/modules/MinorPlanet.cpp:236 src/core/modules/Comet.cpp:194
@@ -2107,7 +2107,7 @@ msgstr "Left click"
 
 #: src/gui/HelpDialog.cpp:166
 msgid "Clear selection"
-msgstr "নির্বাচন সাফ করা.........."
+msgstr "নতুন করে বেছে নিন ......"
 
 #: src/gui/HelpDialog.cpp:167
 msgid "Right click"
@@ -3230,7 +3230,7 @@ msgstr "জাপানী - চাঁদ সম্পর্কীত"
 
 #: src/translations.h:183
 msgid "Kamilaroi/Euahlayi"
-msgstr ""
+msgstr "কামিলারোই/ইউয়ালেই"
 
 #: src/translations.h:184
 msgid "Korean"
@@ -10707,27 +10707,31 @@ msgstr "অসামঞ্জস্য থাকা পালসার গুল
 #: plugins/RemoteControl/src/RemoteControl.cpp:147
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:260
 msgid "Remote Control"
-msgstr ""
+msgstr "দূর সঞ্চালন"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:61
 msgid ""
 "Provides remote control functionality using a webserver interface. See "
 "manual for detailed description."
 msgstr ""
+"এই সরঞ্জামটি একটি ওয়েবসার্ভারের সাহায্যে দূর সঞ্চালনের সুবিধা প্রদান করে । "
+"বিশদে জানতে ব্যবহার পদ্ধতি দেখুন ।"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:147
 msgid "Remote control"
-msgstr ""
+msgstr "দূর সঞ্চালন"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:106
 msgid "Remote Control Plug-in"
-msgstr ""
+msgstr "দূর সঞ্চালন"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:112
 msgid ""
 "The Remote Control plugin provides a web interface to allow state changes "
 "and triggering scripts using a connected webbrowser."
 msgstr ""
+"এই সরঞ্জামটি দূর থেকে একটি সংযুক্ত ওয়েব ব্রাউজারের মাধ্যমে অবস্থা পরিবর্তন "
+"কিংবা কার্যলিপি (স্ক্রিপ্ট) সঞ্চালনের সুবিধা প্রদান করে ।"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:115
 msgid "It is also possible to send commands via command line, e.g.."
@@ -10762,11 +10766,11 @@ msgstr ""
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:246
 msgid "Remote Control Configuration"
-msgstr ""
+msgstr "দূর সঞ্চালন সংক্রান্ত তথ্য বিন্যাস"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:247
 msgid "Remote Control Plug-in Configuration"
-msgstr ""
+msgstr "দূর সঞ্চালন সংক্রান্ত তথ্য বিন্যাস"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:249
 msgid "Port Number:"
@@ -10797,15 +10801,15 @@ msgstr ""
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:257
 msgid "Server enabled"
-msgstr ""
+msgstr "সার্ভার চালু"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:258
 msgid "Enable automatically on startup"
-msgstr ""
+msgstr "শুরুতে স্বয়ংক্রিয় ভাবে চালু"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:259
 msgid "Server disabled - or Server listening on IP: aaa.bbb.ccc.ddd"
-msgstr ""
+msgstr "সার্ভার বন্ধ কিংবা IP: aaa.bbb.ccc.ddd এর সাথে সংযুক্ত"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:74
 #: plugins/Exoplanets/src/Exoplanets.cpp:169
@@ -12229,9 +12233,8 @@ msgstr ""
 "ব্যবহার করে ধাপে ধাপে জুম ইন বা আউট করা যায় ।"
 
 #: plugins/FOV/src/FOV.cpp:86
-#, qt-format
-msgid "Set FOV to %1%2"
-msgstr "%1%2 দৃষ্টিক্ষেত্র"
+msgid "Set FOV to"
+msgstr ""
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:80
 msgid "Field of View plug-in"
@@ -13837,59 +13840,59 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:237
 msgid "Show Line for Equinox"
-msgstr ""
+msgstr "বিষুব রেখা দেখুন"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:238
 msgid "Show Line for Solstices"
-msgstr ""
+msgstr "সূর্যায়ন রেখা দেখুন"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:239
 msgid "Show Line for Crossquarter"
-msgstr ""
+msgstr "মরশুমি সূচনা রেখা দেখুন"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:240
 msgid "Show Line for Major Standstill"
-msgstr ""
+msgstr "সর্বোচ্চ চন্দ্রায়ন রেখা দেখুন"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:241
 msgid "Show Line for Minor Standstill"
-msgstr ""
+msgstr "সর্বনিম্ন চন্দ্রায়ন রেখা দেখুন"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:242
 msgid "Show Line for Zenith Passage"
-msgstr ""
+msgstr "সুবিন্দুর অক্ষাংশ দেখুন"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:243
 msgid "Show Line for Nadir Passage"
-msgstr ""
+msgstr "কুবিন্দুর অক্ষাংশ দেখুন"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:244
 msgid "Show Line for Selected Object"
-msgstr ""
+msgstr "পছন্দসই জ্যোতিষ্কের অক্ষাংশ দেখুন"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:245
 msgid "Show Line for Current Sun"
-msgstr ""
+msgstr "সূর্যের অক্ষাংশ দেখুন"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:246
 msgid "Show Line for Current Moon"
-msgstr ""
+msgstr "চাঁদের অক্ষাংশ দেখুন"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:247
 msgid "Show Line for Geographic Location 1"
-msgstr ""
+msgstr "বিশেষ স্থান ১ নির্দেশক রেখা দেখুন"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:248
 msgid "Show Line for Geographic Location 2"
-msgstr ""
+msgstr "বিশেষ স্থান ২ নির্দেশক রেখা দেখুন"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:249
 msgid "Show Line for Custom Azimuth 1"
-msgstr ""
+msgstr "পছন্দসই দিগংশ ১ নির্দেশক রেখা দেখুন"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:250
 msgid "Show Line for Custom Azimuth 2"
-msgstr ""
+msgstr "পছন্দসই দিগংশ ২ নির্দেশক রেখা দেখুন"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1151
 msgid "Equinox"
@@ -15169,6 +15172,10 @@ msgstr "সূর্য"
 
 #~ msgid "Dates of Acronychal and Cosmical rise/set"
 #~ msgstr "যে দিনগুলিতে সূর্যদয় কিংবা সূর্যাস্তের সাথে উদয় বা অস্ত হবে"
+
+#, qt-format
+#~ msgid "Set FOV to %1%2"
+#~ msgstr "%1%2 দৃষ্টিক্ষেত্র"
 
 #, qt-format
 #~ msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"

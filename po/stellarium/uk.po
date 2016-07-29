@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-27 09:55+0700\n"
-"PO-Revision-Date: 2016-07-27 05:48+0000\n"
-"Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
+"POT-Creation-Date: 2016-07-28 20:52+0700\n"
+"PO-Revision-Date: 2016-07-28 17:21+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-28 05:41+0000\n"
+"X-Launchpad-Export-Date: 2016-07-29 05:35+0000\n"
 "X-Generator: Launchpad (build 18153)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -12560,9 +12560,8 @@ msgstr ""
 "Ciel</em>."
 
 #: plugins/FOV/src/FOV.cpp:86
-#, qt-format
-msgid "Set FOV to %1%2"
-msgstr "Встановити поле зору %1%2"
+msgid "Set FOV to"
+msgstr "Встановити ПЗ"
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:80
 msgid "Field of View plug-in"
@@ -15874,6 +15873,10 @@ msgstr "Поточне Сонце"
 #~ "За допомогою цього додатка програма може позначати 58 навігаційних зірок з "
 #~ "каталогу 2102-D Rude Star Finder, таблиці для яких також можна знайти у "
 #~ "a«Календарі мореплавця»."
+
+#, qt-format
+#~ msgid "Set FOV to %1%2"
+#~ msgstr "Встановити поле зору %1%2"
 
 #, qt-format
 #~ msgid "This version of Stellarium is outdated! Latest version is %1."
