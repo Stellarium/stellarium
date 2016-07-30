@@ -180,6 +180,7 @@ class Translations
 		N_("Inuit");
 		N_("Indian Vedic");
 		N_("Japanese Moon Stations");
+		N_("Kamilaroi/Euahlayi");
 		N_("Korean");
 		N_("Dakota/Lakota/Nakota");
 		N_("Macedonian");

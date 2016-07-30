@@ -190,7 +190,7 @@ void SolarSystemManagerWindow::copyConfiguration()
 
 void SolarSystemManagerWindow::replaceConfiguration()
 {
-	QString filter = q_("Configration files");
+	QString filter = q_("Configuration files");
 	filter.append(" (*.ini)");
 	QString filePath = QFileDialog::getOpenFileName(0, q_("Select a file to replace the Solar System configuration file"), StelFileMgr::getScreenshotDir(), filter);
 	ssoManager->replaceSolarSystemConfigurationFileWith(filePath);
