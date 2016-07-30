@@ -7,18 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-28 20:52+0700\n"
-"PO-Revision-Date: 2016-07-28 09:39+0000\n"
+"POT-Creation-Date: 2016-07-30 11:43+0700\n"
+"PO-Revision-Date: 2016-07-30 04:31+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-29 05:18+0000\n"
-"X-Generator: Launchpad (build 18153)\n"
+"X-Launchpad-Export-Date: 2016-07-30 05:22+0000\n"
+"X-Generator: Launchpad (build 18169)\n"
 "Language: bn\n"
 
-#: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:189
+#: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:188
 #: src/core/modules/Planet.cpp:226 src/core/modules/MinorPlanet.cpp:213
 #: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:188
 #: src/core/modules/StarWrapper.cpp:191
@@ -35,7 +35,7 @@ msgstr "তারামণ্ডল"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:412
 #: src/core/modules/GridLinesMgr.cpp:950 src/core/modules/LandscapeMgr.cpp:414
-#: src/core/modules/NebulaMgr.cpp:367 src/core/modules/NebulaMgr.cpp:368
+#: src/core/modules/NebulaMgr.cpp:364 src/core/modules/NebulaMgr.cpp:365
 #: src/core/modules/SolarSystem.cpp:200 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/StelApp.cpp:516
 #: src/core/StelCore.cpp:222 src/core/StelSkyLayerMgr.cpp:88
@@ -254,26 +254,26 @@ msgstr ", %1 মিটার"
 msgid "Celestial body:"
 msgstr "স্থান :"
 
-#: src/core/modules/Nebula.cpp:191 src/core/modules/Comet.cpp:176
+#: src/core/modules/Nebula.cpp:190 src/core/modules/Comet.cpp:176
 #: plugins/Novae/src/Nova.cpp:133 plugins/Pulsars/src/Pulsar.cpp:166
 #: plugins/MeteorShowers/src/MeteorShower.cpp:548
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
 msgstr "ধরন : <b>%1</b> (%2)"
 
-#: src/core/modules/Nebula.cpp:198
+#: src/core/modules/Nebula.cpp:197
 #, qt-format
 msgid "Opacity: <b>%1</b>"
 msgstr "স্বচ্ছতা : <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:203 src/core/modules/Planet.cpp:232
+#: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:232
 #: src/core/modules/MinorPlanet.cpp:219 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:198
 #, qt-format
 msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
 msgstr "ঔজ্জ্বল্যতা : <b>%1</b> (হ্রাস পেয়ে : <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:206 src/core/modules/Nebula.cpp:211
+#: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
 #: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
 #: src/core/modules/Comet.cpp:185 src/core/modules/StarWrapper.cpp:63
 #: src/core/modules/StarWrapper.cpp:201
@@ -283,43 +283,43 @@ msgstr "ঔজ্জ্বল্যতা : <b>%1</b> (হ্রাস পেয়
 msgid "Magnitude: <b>%1</b>"
 msgstr "ঔজ্জ্বল্যতা : <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:212
+#: src/core/modules/Nebula.cpp:211
 msgid " (Photometric system: B)"
 msgstr " (আলোর ধরণ : দৃশ্যমান  B)"
 
-#: src/core/modules/Nebula.cpp:218 src/core/modules/StarWrapper.cpp:68
+#: src/core/modules/Nebula.cpp:217 src/core/modules/StarWrapper.cpp:68
 #: src/core/modules/StarWrapper.cpp:209 plugins/Quasars/src/Quasar.cpp:119
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
 msgstr "বর্নাঙ্ক (B-V) : <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:225
+#: src/core/modules/Nebula.cpp:224
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
 msgstr "পৃষ্ঠতলের ঔজ্জ্বল্যতা : <b>%1</b> (হ্রাস পেয়ে : <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:231
+#: src/core/modules/Nebula.cpp:230
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
 msgstr "পৃষ্ঠতলের ঔজ্জ্বল্যতা : <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:240
+#: src/core/modules/Nebula.cpp:239
 #, qt-format
 msgid "Size: %1"
 msgstr "বিস্তার : %1"
 
-#: src/core/modules/Nebula.cpp:243
+#: src/core/modules/Nebula.cpp:242
 #, qt-format
 msgid "Size: %1 x %2"
 msgstr "বিস্তার : %1 x %2"
 
-#: src/core/modules/Nebula.cpp:245
+#: src/core/modules/Nebula.cpp:244
 #, qt-format
 msgid "Orientation angle: %1%2"
 msgstr "ঘুর্ণন : %1%2"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:269 src/core/modules/StarWrapper.cpp:239
+#: src/core/modules/Nebula.cpp:268 src/core/modules/StarWrapper.cpp:239
 #: plugins/Supernovae/src/Supernova.cpp:147 plugins/Novae/src/Nova.cpp:153
 #: plugins/Exoplanets/src/Exoplanet.cpp:299
 #, qt-format
@@ -327,413 +327,413 @@ msgid "Distance: %1 ly"
 msgstr "দূরত্ব : %1 আলোকবর্ষ"
 
 #. TRANSLATORS: Unit of measure for distance - megaparsecs
-#: src/core/modules/Nebula.cpp:290
+#: src/core/modules/Nebula.cpp:289
 msgid "Mpc"
 msgstr "মেগা পারসেক"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:296
+#: src/core/modules/Nebula.cpp:295
 msgid "kpc"
 msgstr "কিলো পারসেক"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:299
+#: src/core/modules/Nebula.cpp:298
 msgid "ly"
 msgstr "আলোকবর্ষ"
 
-#: src/core/modules/Nebula.cpp:301
+#: src/core/modules/Nebula.cpp:300
 #, qt-format
 msgid "Distance: %1 %2"
 msgstr "দূরত্ব : %1 %2"
 
-#: src/core/modules/Nebula.cpp:315
+#: src/core/modules/Nebula.cpp:314
 #, qt-format
 msgid "Redshift: %1"
 msgstr "লোহিত সরণ : %1"
 
-#: src/core/modules/Nebula.cpp:326 src/core/modules/StarWrapper.cpp:248
+#: src/core/modules/Nebula.cpp:325 src/core/modules/StarWrapper.cpp:248
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "লম্বণ : %1\""
 
-#: src/core/modules/Nebula.cpp:330
+#: src/core/modules/Nebula.cpp:329
 msgid "Morphological description: "
 msgstr "গঠন বৈশিষ্ট্য : "
 
-#: src/core/modules/Nebula.cpp:832
+#: src/core/modules/Nebula.cpp:831
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr "কেন্দ্র বরাবর তারাগুলো অতি ঘনসন্নিবিষ্ট হয়ে আছে"
 
-#: src/core/modules/Nebula.cpp:835
+#: src/core/modules/Nebula.cpp:834
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr "কেন্দ্রে তারাগুলো খুব ঘনসন্নিবিষ্ট হয়ে আছে"
 
-#: src/core/modules/Nebula.cpp:838
+#: src/core/modules/Nebula.cpp:837
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr "কেন্দ্রে তারাগুলো ঘনসন্নিবিষ্ট হয়ে আছে"
 
-#: src/core/modules/Nebula.cpp:841
+#: src/core/modules/Nebula.cpp:840
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr "কেন্দ্রে তারাগুলো প্রায় ঘনসন্নিবিষ্ট হয়ে আছে"
 
-#: src/core/modules/Nebula.cpp:846
+#: src/core/modules/Nebula.cpp:845
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr "কেন্দ্রে তারাগুলো মোটামুটি ভাবে ঘনসন্নিবিষ্ট হয়ে আছে"
 
-#: src/core/modules/Nebula.cpp:849
+#: src/core/modules/Nebula.cpp:848
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "rather loosely concentration of stars towards the center"
 msgstr "কেন্দ্র বরাবর তারাগুলো সামান্য খাপছাড়া ভাবে আছে"
 
-#: src/core/modules/Nebula.cpp:852
+#: src/core/modules/Nebula.cpp:851
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr "কেন্দ্র বরাবর তারাগুলো প্রায় খাপছাড়া ভাবে আছে"
 
-#: src/core/modules/Nebula.cpp:855
+#: src/core/modules/Nebula.cpp:854
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr "কেন্দ্রে তারাগুলো খাপছাড়া ভাবে আছে"
 
-#: src/core/modules/Nebula.cpp:858
+#: src/core/modules/Nebula.cpp:857
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr "কেন্দ্র বরাবর তারাগুলো খুব খাপছাড়া ভাবে আছে"
 
-#: src/core/modules/Nebula.cpp:861
+#: src/core/modules/Nebula.cpp:860
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr "কেন্দ্র বরাবর তারাগুলো একদম খাপছাড়া ভাবে আছে"
 
-#: src/core/modules/Nebula.cpp:864
+#: src/core/modules/Nebula.cpp:863
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr "তারাগুলো কি রকম ঘনসন্নিবিষ্ট হয়ে আছে তা এখনও নথিভুক্ত করা হয় নি"
 
-#: src/core/modules/Nebula.cpp:884
+#: src/core/modules/Nebula.cpp:883
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr "তারাগুলোর কেন্দ্রাভিমুখী সমাবেশ দেখা যায়"
 
-#: src/core/modules/Nebula.cpp:887
+#: src/core/modules/Nebula.cpp:886
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr "তারাগুলোর সামান্য কেন্দ্রাভিমুখী সমাবেশ দেখা যায়"
 
-#: src/core/modules/Nebula.cpp:890
+#: src/core/modules/Nebula.cpp:889
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr "তারাগুলো খাপছাড়া ভাবে আছে"
 
-#: src/core/modules/Nebula.cpp:893
+#: src/core/modules/Nebula.cpp:892
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr "এটি একটি ঘন সন্নিবিষ্ট নক্ষত্র ক্ষেত্র"
 
-#: src/core/modules/Nebula.cpp:896
+#: src/core/modules/Nebula.cpp:895
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr "তারাগুলো কি রকম ঘনসন্নিবিষ্ট হয়ে আছে তা এখনও নথিভুক্ত করা হয় নি"
 
-#: src/core/modules/Nebula.cpp:902
+#: src/core/modules/Nebula.cpp:901
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr "নক্ষত্র গুলির উজ্জ্ব্যলতা প্রায় সমান"
 
-#: src/core/modules/Nebula.cpp:905
+#: src/core/modules/Nebula.cpp:904
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr "নক্ষত্র গুলির উজ্জ্ব্যলতা একটু কমবেশি"
 
-#: src/core/modules/Nebula.cpp:908
+#: src/core/modules/Nebula.cpp:907
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr "নক্ষত্র গুলির উজ্জ্ব্যলতা ফারাক অনেক"
 
-#: src/core/modules/Nebula.cpp:911
+#: src/core/modules/Nebula.cpp:910
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr "তারাগুলোর উজ্জ্ব্যললতার ফারাক এখনও নথিভুক্ত করা হয় নি"
 
-#: src/core/modules/Nebula.cpp:917
+#: src/core/modules/Nebula.cpp:916
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr "৫০ টিরও কম নক্ষত্র আছে"
 
-#: src/core/modules/Nebula.cpp:920
+#: src/core/modules/Nebula.cpp:919
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr "মোটামুটি ভাবে ৫০ থেকে ১০০ টির মত নক্ষত্র আছে"
 
-#: src/core/modules/Nebula.cpp:923
+#: src/core/modules/Nebula.cpp:922
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr "১০০ রও বেশী নক্ষত্র আছে"
 
-#: src/core/modules/Nebula.cpp:926
+#: src/core/modules/Nebula.cpp:925
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr "কতগুলো তারা আছে তা এখনও নথিভুক্ত করা হয় নি"
 
-#: src/core/modules/Nebula.cpp:930
+#: src/core/modules/Nebula.cpp:929
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr "তারকাগুচ্ছটি নীহারিকা মন্ডলের মধ্যে অবস্থিত"
 
-#: src/core/modules/Nebula.cpp:951
+#: src/core/modules/Nebula.cpp:950
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr "অতি উজ্জ্বল"
 
-#: src/core/modules/Nebula.cpp:954
+#: src/core/modules/Nebula.cpp:953
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr "উজ্জ্বল"
 
-#: src/core/modules/Nebula.cpp:957
+#: src/core/modules/Nebula.cpp:956
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr "মোটামুটি উজ্জ্বল"
 
-#: src/core/modules/Nebula.cpp:960
+#: src/core/modules/Nebula.cpp:959
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr "ম্লান"
 
-#: src/core/modules/Nebula.cpp:963
+#: src/core/modules/Nebula.cpp:962
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr "আবছা"
 
-#: src/core/modules/Nebula.cpp:966
+#: src/core/modules/Nebula.cpp:965
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr "উজ্জ্বলতা পরিবর্তনশীল"
 
-#: src/core/modules/Nebula.cpp:969
+#: src/core/modules/Nebula.cpp:968
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr "নীহারিকাটি কতটা উজ্জ্ব্যল তা এখনও নথিভুক্ত করা হয় নি"
 
-#: src/core/modules/Nebula.cpp:975
+#: src/core/modules/Nebula.cpp:974
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr "আলোক প্রদানকারী নক্ষত্রটি নীহারিকা মন্ডলে অবস্থিত"
 
-#: src/core/modules/Nebula.cpp:978
+#: src/core/modules/Nebula.cpp:977
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr "আলোক প্রদানকারী নক্ষত্রটি নীহারিকা মন্ডলের বাইরে অবস্থিত"
 
-#: src/core/modules/Nebula.cpp:981
+#: src/core/modules/Nebula.cpp:980
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr "আলোক প্রদানকারী নক্ষত্রটি নীহারিকা মন্ডলের এক কোনে অবস্থিত"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:986
+#: src/core/modules/Nebula.cpp:985
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr "আলোক প্রদানকারী নক্ষত্রটি পরিবর্তনশীল নীহারিকা মন্ডলের বাইরে অবস্থিত"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:992
+#: src/core/modules/Nebula.cpp:991
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr "পরিবর্তনশীল নীহারিকা"
 
-#: src/core/modules/Nebula.cpp:996
+#: src/core/modules/Nebula.cpp:995
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr "অনথিভুক্ত"
 
-#: src/core/modules/Nebula.cpp:1019
+#: src/core/modules/Nebula.cpp:1018
 msgid "circular form"
 msgstr "গোলকাকার"
 
-#: src/core/modules/Nebula.cpp:1022
+#: src/core/modules/Nebula.cpp:1021
 msgid "elliptical form"
 msgstr "উপবৃত্তাকার"
 
-#: src/core/modules/Nebula.cpp:1025
+#: src/core/modules/Nebula.cpp:1024
 msgid "irregular form"
 msgstr "অনিয়তকার"
 
-#: src/core/modules/Nebula.cpp:1028
+#: src/core/modules/Nebula.cpp:1027
 msgid "undocumented form"
 msgstr "আকার এখনও নথিভুক্ত করা হয় নি"
 
-#: src/core/modules/Nebula.cpp:1034
+#: src/core/modules/Nebula.cpp:1033
 msgid "amorphous structure"
 msgstr "খাপছাড়া গ্যাসীয় গঠন"
 
-#: src/core/modules/Nebula.cpp:1037
+#: src/core/modules/Nebula.cpp:1036
 msgid "conventional structure"
 msgstr "প্রথাগত গ্যাসীয় গঠন"
 
-#: src/core/modules/Nebula.cpp:1040
+#: src/core/modules/Nebula.cpp:1039
 msgid "filamentary structure"
 msgstr "জালিকাকার গ্যাসীয় গঠন"
 
-#: src/core/modules/Nebula.cpp:1043
+#: src/core/modules/Nebula.cpp:1042
 msgid "undocumented structure"
 msgstr "অনথিভুক্ত"
 
-#: src/core/modules/Nebula.cpp:1049
+#: src/core/modules/Nebula.cpp:1048
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "ম্লান"
 
-#: src/core/modules/Nebula.cpp:1052
+#: src/core/modules/Nebula.cpp:1051
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr "মোটামুটি উজ্জ্বল"
 
-#: src/core/modules/Nebula.cpp:1055
+#: src/core/modules/Nebula.cpp:1054
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "উজ্জ্বল"
 
-#: src/core/modules/Nebula.cpp:1058
+#: src/core/modules/Nebula.cpp:1057
 msgid "undocumented brightness"
 msgstr "অনথিভুক্ত"
 
-#: src/core/modules/Nebula.cpp:1074
+#: src/core/modules/Nebula.cpp:1073
 msgid "galaxy"
 msgstr "নক্ষত্রলোক"
 
-#: src/core/modules/Nebula.cpp:1077
+#: src/core/modules/Nebula.cpp:1076
 msgid "active galaxy"
 msgstr "সক্রিয় নক্ষত্রলোক"
 
-#: src/core/modules/Nebula.cpp:1080
+#: src/core/modules/Nebula.cpp:1079
 msgid "radio galaxy"
 msgstr "বেতার নক্ষত্রলোক"
 
-#: src/core/modules/Nebula.cpp:1083
+#: src/core/modules/Nebula.cpp:1082
 msgid "interacting galaxy"
 msgstr "পারস্পরিক ক্রিয়াশীল নক্ষত্রলোক"
 
-#: src/core/modules/Nebula.cpp:1086 plugins/Quasars/src/Quasar.cpp:98
+#: src/core/modules/Nebula.cpp:1085 plugins/Quasars/src/Quasar.cpp:98
 msgid "quasar"
 msgstr "কোয়াসার"
 
-#: src/core/modules/Nebula.cpp:1089
+#: src/core/modules/Nebula.cpp:1088
 msgid "star cluster"
 msgstr "তারকাগুচ্ছ"
 
-#: src/core/modules/Nebula.cpp:1092
+#: src/core/modules/Nebula.cpp:1091
 msgid "open star cluster"
 msgstr "মুক্ত তারকাগুচ্ছ"
 
-#: src/core/modules/Nebula.cpp:1095
+#: src/core/modules/Nebula.cpp:1094
 msgid "globular star cluster"
 msgstr "গোলকাকার তারকা গুচ্ছ"
 
-#: src/core/modules/Nebula.cpp:1098
+#: src/core/modules/Nebula.cpp:1097
 msgid "nebula"
 msgstr "নীহারিকা"
 
-#: src/core/modules/Nebula.cpp:1101
+#: src/core/modules/Nebula.cpp:1100
 msgid "planetary nebula"
 msgstr "গ্রহরূপী নীহারিকা"
 
-#: src/core/modules/Nebula.cpp:1104
+#: src/core/modules/Nebula.cpp:1103
 msgid "dark nebula"
 msgstr "কৃষ্ণবর্ণ নিহারীকা"
 
-#: src/core/modules/Nebula.cpp:1107
+#: src/core/modules/Nebula.cpp:1106
 msgid "cluster associated with nebulosity"
 msgstr "নীহারিকা যুক্ত তারকা গুচ্ছ"
 
-#: src/core/modules/Nebula.cpp:1110
+#: src/core/modules/Nebula.cpp:1109
 msgid "bipolar nebula"
 msgstr "ডাম্বেলাকার নীহারিকা"
 
-#: src/core/modules/Nebula.cpp:1113
+#: src/core/modules/Nebula.cpp:1112
 msgid "emission nebula"
 msgstr "নিঃসরণ নীহারিকা"
 
-#: src/core/modules/Nebula.cpp:1116
+#: src/core/modules/Nebula.cpp:1115
 msgid "HII region"
 msgstr "HII বা আয়নিত হাইড্রোজেন অধ্যুষিত এলাকা"
 
-#: src/core/modules/Nebula.cpp:1119
+#: src/core/modules/Nebula.cpp:1118
 msgid "reflection nebula"
 msgstr "প্রতিফলিত নিহারীকা"
 
-#: src/core/modules/Nebula.cpp:1122
+#: src/core/modules/Nebula.cpp:1121
 msgid "supernova remnant"
 msgstr "অতিনোভার ধ্বংসাবশেষ"
 
-#: src/core/modules/Nebula.cpp:1125
+#: src/core/modules/Nebula.cpp:1124
 msgid "stellar association"
 msgstr "নক্ষত্র সমাবেশ"
 
-#: src/core/modules/Nebula.cpp:1128
+#: src/core/modules/Nebula.cpp:1127
 msgid "star cloud"
 msgstr "নক্ষত্র মেঘ"
 
-#: src/core/modules/Nebula.cpp:1131
+#: src/core/modules/Nebula.cpp:1130
 msgid "interstellar matter"
 msgstr "আন্তঃনাক্ষত্রিক গ্যাস ও ধূলিকনা"
 
-#: src/core/modules/Nebula.cpp:1134
+#: src/core/modules/Nebula.cpp:1133
 msgid "emission object"
 msgstr "উৎক্ষেপিত পদার্থ"
 
-#: src/core/modules/Nebula.cpp:1137
+#: src/core/modules/Nebula.cpp:1136
 msgid "BL Lac object"
 msgstr "ব্ল ল্যাকটারে বস্তু"
 
-#: src/core/modules/Nebula.cpp:1140
+#: src/core/modules/Nebula.cpp:1139
 msgid "blazar"
 msgstr "ব্লেজার"
 
-#: src/core/modules/Nebula.cpp:1143
+#: src/core/modules/Nebula.cpp:1142
 msgid "molecular cloud"
 msgstr "নক্ষত্র সৃষ্টিকারী গ্যাস ও ধূলিকনার মেঘ"
 
-#: src/core/modules/Nebula.cpp:1146
+#: src/core/modules/Nebula.cpp:1145
 msgid "young stellar object"
 msgstr "প্রাক নাক্ষত্রিক জ্যোতিষ্ক"
 
-#: src/core/modules/Nebula.cpp:1149
+#: src/core/modules/Nebula.cpp:1148
 msgid "possible quasar"
 msgstr "সম্ভবত কোয়াসার"
 
-#: src/core/modules/Nebula.cpp:1152
+#: src/core/modules/Nebula.cpp:1151
 msgid "possible planetary nebula"
 msgstr "সম্ভবত গ্রহরূপী নীহারিকা"
 
-#: src/core/modules/Nebula.cpp:1155
+#: src/core/modules/Nebula.cpp:1154
 msgid "protoplanetary nebula"
 msgstr "প্রাকগ্রহরূপী নীহারিকা"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1158 src/core/modules/StarWrapper.cpp:53
+#: src/core/modules/Nebula.cpp:1157 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:181 src/translations.h:46
 msgid "star"
 msgstr "নক্ষত্র"
 
-#: src/core/modules/Nebula.cpp:1161
+#: src/core/modules/Nebula.cpp:1160
 msgid "object of unknown nature"
 msgstr "নির্ধারণ করা যায় নি"
 
-#: src/core/modules/Nebula.cpp:1164
+#: src/core/modules/Nebula.cpp:1163
 msgid "undocumented type"
 msgstr "অনথিভুক্ত"
 
-#: src/core/modules/NebulaMgr.cpp:367
+#: src/core/modules/NebulaMgr.cpp:364
 msgid "Deep-sky objects"
 msgstr "মহাজাগতিক জ্যোতিষ্ক"
 
-#: src/core/modules/NebulaMgr.cpp:368
+#: src/core/modules/NebulaMgr.cpp:365
 msgid "Toggle DSO type filter"
 msgstr "পছন্দসই মহাজাগতিক জ্যোতিষ্ক"
 
@@ -1837,7 +1837,7 @@ msgstr "দৃশ্যপটের প্রারম্ভিক দিক - �
 msgid "Authors"
 msgstr "প্রস্তুতকারক বৃন্দ"
 
-#: src/gui/ConfigurationDialog.cpp:882 src/gui/ViewDialog.cpp:653
+#: src/gui/ConfigurationDialog.cpp:882 src/gui/ViewDialog.cpp:654
 msgid "Contact"
 msgstr "যোগাযোগ"
 
@@ -2363,107 +2363,107 @@ msgid "Frames per second"
 msgstr "ফ্রেম প্রতি সেকেন্ড"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:523
+#: src/gui/ViewDialog.cpp:524
 msgid "Excellent dark-sky site"
 msgstr "একদম ঝকঝকে আকাশ"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:525
+#: src/gui/ViewDialog.cpp:526
 msgid "Typical truly dark site"
 msgstr "বাস্তবিক পরিষ্কার আকাশ"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:527
+#: src/gui/ViewDialog.cpp:528
 msgid "Rural sky"
 msgstr "গ্রাম্য আকাশ"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:529
+#: src/gui/ViewDialog.cpp:530
 msgid "Rural/suburban transition"
 msgstr "শহরতলি ও গ্রাম মধ্যবর্তী আকাশ"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:531
+#: src/gui/ViewDialog.cpp:532
 msgid "Suburban sky"
 msgstr "শহরতলিয় আকাশ"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:533
+#: src/gui/ViewDialog.cpp:534
 msgid "Bright suburban sky"
 msgstr "শহরতলির আলোকিত আকাশ"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:535
+#: src/gui/ViewDialog.cpp:536
 msgid "Suburban/urban transition"
 msgstr "শহর ও শহরতলি মধ্যবর্তী আকাশ"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:537
+#: src/gui/ViewDialog.cpp:538
 msgid "City sky"
 msgstr "শহরের আকাশ"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:539
+#: src/gui/ViewDialog.cpp:540
 msgid "Inner-city sky"
 msgstr "শহর অভ্যন্তরস্থ আকাশ"
 
-#: src/gui/ViewDialog.cpp:553
+#: src/gui/ViewDialog.cpp:554
 msgid "The naked-eye limiting magnitude is"
 msgstr "খালি চোখে দৃশ্যমান নক্ষত্রের সর্বোচ্চ ঔজ্জ্বলতা"
 
-#: src/gui/ViewDialog.cpp:577
+#: src/gui/ViewDialog.cpp:578
 msgid "Abbreviated"
 msgstr "সংক্ষিপ্ত নাম"
 
-#: src/gui/ViewDialog.cpp:578
+#: src/gui/ViewDialog.cpp:579
 msgid "Native"
 msgstr "আঞ্চলিক নাম"
 
-#: src/gui/ViewDialog.cpp:579
+#: src/gui/ViewDialog.cpp:580
 msgid "Translated"
 msgstr "ভাষান্তরিত নাম"
 
-#: src/gui/ViewDialog.cpp:758
+#: src/gui/ViewDialog.cpp:759
 msgid "No shooting stars"
 msgstr "কোন উল্কাপাত ঘটবে না"
 
-#: src/gui/ViewDialog.cpp:760
+#: src/gui/ViewDialog.cpp:761
 msgid "Normal rate"
 msgstr "স্বাভাবিক হার"
 
-#: src/gui/ViewDialog.cpp:762
+#: src/gui/ViewDialog.cpp:763
 msgid "Standard Orionids rate"
 msgstr "কালপুরুষ মন্ডল থেকে বর্ষিত উল্কাবৃষ্টির প্রমাণ হার"
 
-#: src/gui/ViewDialog.cpp:764
+#: src/gui/ViewDialog.cpp:765
 msgid "Standard Perseids rate"
 msgstr "পারসিউস মন্ডল থেকে বর্ষিত উল্কাবৃষ্টির প্রমাণ হার"
 
-#: src/gui/ViewDialog.cpp:766
+#: src/gui/ViewDialog.cpp:767
 msgid "Standard Geminids rate"
 msgstr "মিথুন রাশি থেকে বর্ষিত উল্কাবৃষ্টির প্রমাণ হার"
 
-#: src/gui/ViewDialog.cpp:768
+#: src/gui/ViewDialog.cpp:769
 msgid "Exceptional Perseid rate"
 msgstr "পারসিউস মন্ডল থেকে বর্ষিত উল্কাবৃষ্টির অস্বাভাবিক হার"
 
-#: src/gui/ViewDialog.cpp:770
+#: src/gui/ViewDialog.cpp:771
 msgid "Meteor storm rate"
 msgstr "প্রবল উল্কা বৃষ্টির হার"
 
-#: src/gui/ViewDialog.cpp:772
+#: src/gui/ViewDialog.cpp:773
 msgid "Exceptional Draconid rate"
 msgstr "ড্রাকো মন্ডল থেকে বর্ষিত উল্কাবৃষ্টির অস্বাভাবিক হার"
 
-#: src/gui/ViewDialog.cpp:774
+#: src/gui/ViewDialog.cpp:775
 msgid "Exceptional Leonid rate"
 msgstr "সিংহরাশি থেকে বর্ষিত উল্কাবৃষ্টির অস্বাভাবিক হার"
 
-#: src/gui/ViewDialog.cpp:776
+#: src/gui/ViewDialog.cpp:777
 msgid "Very high rate (1966 Leonids)"
 msgstr "অতি প্রবল উল্কা বৃষ্টির হার (১৯৬৬ সাল, সিংহরাশি থেকে)"
 
-#: src/gui/ViewDialog.cpp:778
+#: src/gui/ViewDialog.cpp:779
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "সর্বকালের সর্বোচ্চ হার (১৮৩৩ সাল, সিংহরাশি থেকে)"
 
@@ -4823,7 +4823,7 @@ msgstr "খুলু&ন"
 
 #: src/translations.h:617
 msgid "File &name:"
-msgstr "নথির &নাম :"
+msgstr "ফাইলের &নাম :"
 
 #: src/translations.h:618
 msgid "Copy &Link Location"
@@ -5736,15 +5736,15 @@ msgstr "পোগ্রামে ব্যবহৃত ভাষা"
 
 #: src/ui_configurationDialog.h:1092
 msgid "Sky Culture Language"
-msgstr "মহাকাশ সংস্কৃতিতে ব্যবহৃত ভাষা"
+msgstr "মহাকাশ সম্পর্কিত বিষয়ের ভাষা"
 
 #: src/ui_configurationDialog.h:1094
 msgid "This feature has not been thoroughly tested yet!"
-msgstr ""
+msgstr "এটি এখনো পুরোপুরি পরীক্ষা নিরীক্ষা করা হয় নি!"
 
 #: src/ui_configurationDialog.h:1096
 msgid "Ephemeris settings (experimental)"
-msgstr ""
+msgstr "পঞ্জিকা গণনা বিধি (পরীক্ষামূলক)"
 
 #: src/ui_configurationDialog.h:1097 src/ui_configurationDialog.h:1098
 msgid "Not installed"
@@ -5777,8 +5777,8 @@ msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
 msgstr ""
-"-৪০০০ থেকে +৮০০০ বছরের মাঝের সময়ের জন্য VSOP87 ব্যবহার করা উচিত । যদিও এর "
-"বাইরের সময়ের ক্ষেত্রেও এটি যথেষ্ট ভাল কাজ করে ।"
+"-৪০০০ থেকে +৮০০০ বছরের মাঝের সময়ের জন্য VSOP87 ব্যবহার করার পরামর্শ দেওয়া "
+"হচ্ছে । যদিও এর বাইরের সময়ের ক্ষেত্রেও এটি যথেষ্ট ভাল কাজ করে ।"
 
 #: src/ui_configurationDialog.h:1110
 msgid ""
@@ -7484,7 +7484,7 @@ msgstr "লম্বালম্বি উল্টানো"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1229
 msgid "Equatorial Mount"
-msgstr "ভূ-বিষুব বিচলন"
+msgstr "ভূ-বিষুব বিচলন বা আলম্ব"
 
 #: plugins/Satellites/src/Satellites.cpp:68
 #: plugins/Satellites/src/Satellites.cpp:142
@@ -7799,7 +7799,7 @@ msgid ""
 "you wish to add and select the \"add\" button."
 msgstr ""
 "১. আপনি যে কৃত্রিম উপগ্রহ (গুলি) যোগ করতে ইচ্ছুক সেগুলি যেন এই অংশের অধীনে "
-"উত্স বিভাগের কোন একটি ঠিকানায় অন্তর্ভুক্ত থাকে, এ ব্যাপারে নিশ্চিত হোন । \n"
+"উৎস বিভাগের কোন একটি ঠিকানায় অন্তর্ভুক্ত থাকে, এ ব্যাপারে নিশ্চিত হোন । \r\n"
 "২.কৃত্রিম উপগ্রহ বিভাগে যান, + বোতামে ক্লিক করুন, যে কৃত্রিম উপগ্রহ (গুলি) "
 "যোগ করতে ইচ্ছুক সেগুলি নির্বাচন করুন । শেষে \"যোগ করুন\" বোতামে ক্লিক করুন"
 
@@ -7904,7 +7904,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:574
 msgid "[new source]"
-msgstr "[নতুন উত্স]"
+msgstr "[নতুন উৎস]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:626
 #: plugins/Satellites/src/ui_satellitesDialog.h:715
@@ -7929,7 +7929,7 @@ msgstr "এখনই সংশোধন করুন"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:209
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:352
 msgid "Update from files"
-msgstr "কোন নথি থেকে সংশোধন করুন"
+msgstr "কোনো নথি থেকে সংশোধন করুন"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:670
 msgid "[orbit calculation error]"
@@ -7981,12 +7981,12 @@ msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
 msgstr ""
-"উত্স থেকে কৃত্রিম উপগ্রহ সংক্রান্ত তথ্য সংগ্রহ করা হচ্ছে । তাই একটু অপেক্ষা "
+"উৎস থেকে কৃত্রিম উপগ্রহ সংক্রান্ত তথ্য সংগ্রহ করা হচ্ছে । তাই একটু অপেক্ষা "
 "করুন..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:171
 msgid "Select TLE source file(s)..."
-msgstr "TLE নথি প্রাপ্তির উত্স নির্বাচন করুন..."
+msgstr "TLE নথি প্রাপ্তির উৎস নির্বাচন করুন..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:186
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:187
@@ -8015,7 +8015,7 @@ msgstr "সংশোধনী"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:712
 msgid "Update satellite data from Internet sources"
-msgstr "ইন্টারনেট উত্সগুলি থেকে কৃত্রিম উপগ্রহ তালিকা সংশোধন"
+msgstr "ইন্টারনেট উৎসগুলি থেকে কৃত্রিম উপগ্রহ তালিকা সংশোধন"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:713
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
@@ -8165,7 +8165,7 @@ msgid ""
 "Satellites in the marked source lists will be automatically added on the "
 "next update if they are not already in the collection."
 msgstr ""
-"চিহ্নিত উত্সগুলির তালিকায় অবস্থিত কৃত্রিম উপগ্রহগুলি পরের সংশোধনের সময় "
+"চিহ্নিত উৎসগুলির তালিকায় অবস্থিত কৃত্রিম উপগ্রহগুলি পরের সংশোধনের সময় "
 "স্বয়ংক্রিয় ভাবে য়ুক্ত হয়ে যাবে ।"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:780
@@ -8173,20 +8173,20 @@ msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
 msgstr ""
-"নতুন উত্স লিখুন অথবা নির্বাচিত উত্স সম্পাদন করুন । Enter কী চেপে "
-"পরিবর্তনগুলি সংরক্ষন করুন ।"
+"নতুন উৎস লিখুন অথবা নির্বাচিত উত্স সম্পাদন করুন । Enter কী চেপে পরিবর্তনগুলি "
+"সংরক্ষন করুন ।"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:783
 msgid "Add new source"
-msgstr "নতুন উত্স যোগ করুন"
+msgstr "নতুন উৎস যোগ করুন"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:787
 msgid "Remove selected source"
-msgstr "নির্বাচিত উত্সগুলি মুছুন"
+msgstr "নির্বাচিত উৎসগুলি মুছুন"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:790
 msgid "Sources"
-msgstr "উত্স"
+msgstr "উৎস"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:791
 msgid "Predict Iridium flares"
@@ -8198,7 +8198,7 @@ msgstr "আরও কৃত্রিম উপগ্রহ"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:213
 msgid "Get data from update sources"
-msgstr "সংশোধন করা উত্স থেকে তথ্য আমদানি করুন"
+msgstr "সংশোধন করা উৎস থেকে তথ্য আমদানি করুন"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:214
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
@@ -8308,6 +8308,8 @@ msgid ""
 "Stellarium's code (the client side of Stellarium's original telescope "
 "control feature);"
 msgstr ""
+"স্টেলারিয়ামের কোডের (মূল দূরবীন নিয়ন্ত্রক সরঞ্জামের ক্লায়েন্ট অংশ) "
+"Telescope, TelescopeDummy, TelescopeTcp এবং TelescopeMgr ক্লাসগুলি;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:260
 msgid "the telescope server core code (licensed under the LGPL)"
@@ -8327,7 +8329,7 @@ msgid ""
 "server, along with the Stellarium telescope control network protocol (over "
 "TCP/IP), is <b>Johannes Gajdosik</b>."
 msgstr ""
-"উপরের সবগুলি অর্থাৎ ক্লায়েন্ট, সার্ভার কোড, LX200 সার্ভার ও স্টীলারিয়ামে "
+"উপরের সবগুলি অর্থাৎ ক্লায়েন্ট, সার্ভার কোড, LX200 সার্ভার ও স্টেলারিয়ামে "
 "ব্যবহৃত দূরবীন নিয়ন্ত্রন নেটওয়ার্ক প্রোটোকল (TCP/IP দ্বারা) গুলির "
 "প্রস্তুতকারক b>Johannes Gajdosik</b> ।"
 
@@ -8336,6 +8338,9 @@ msgid ""
 "the TelescopeServerNexStar telescope server core code (originally licensed "
 "under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>."
 msgstr ""
+"<b>Michael Heinz</b> লিখিত TelescopeServerNexStar দূরবীন সার্ভার মূল কোড "
+"(মূলত LGPL এর আওতায় অনুমোদন প্রাপ্ত এবং TelescopeServerLx200 এর উপর ভিত্তি "
+"করে তৈরী) ।"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:275
@@ -8442,18 +8447,25 @@ msgid ""
 "and similar situations. (To abort a slew, you can start another one to a "
 "safe position.)"
 msgstr ""
+"এই সরঞ্জামের সাহায্যে শুধুমাত্র '<b>ঘোরান</b>' ('নির্দিষ্ট অংশে যান') "
+"নির্দেশ পাঠানো সম্ভব এবং সাথে উপকরণটির বর্তমান অবস্থান জানা সম্ভব । তাই "
+"আলম্ব বিভ্রাট বা ঐরকম কোনো সমস্যা দেখা দেওয়ার ব্যাপারে ব্যবহারকারীদের অবহিত "
+"করা হচ্ছে । (একটি ঘোরানো নির্দেশ বাতিল করতে নতুন একটি ঘোরানোর নির্দেশ দিন ।)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:298
 msgid ""
 "As of the current version, this plug-in doesn't allow satellite tracking, "
 "and is not very suitable for lunar or planetary observations."
 msgstr ""
+"এই সংস্করণ কোনো জ্যোতিষ্ককে অনুসরণের সুবিধা প্রদান করে না । তাই এটি চাঁদ বা "
+"গ্রহের পর্যবেক্ষণের জন্য যথাযথ নয় ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:299
 msgid ""
 "WARNING: Stellarium CANNOT prevent your telescope from being pointed at the "
 "Sun."
 msgstr ""
+"সাবধান : স্টেলারিয়াম আপনাকে সূর্যের দিকে তাক করা থেকে আটকাতে সক্ষম নয় ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
 msgid ""
@@ -8461,6 +8473,8 @@ msgid ""
 "installed. The powerful light amplified by the telescope WILL cause "
 "irreversible damage to your eyes and/or your equipment."
 msgstr ""
+"আপনার দুরবীনটিকে উপযুক্ত সৌর আচ্ছাদন ছাড়া সূর্যের দিকে তাক করবেন না । এতে "
+"আপনার চোখ ও উপকরণের পাকাপাকি ক্ষতি হতে পারে ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:301
 msgid ""
@@ -8469,6 +8483,9 @@ msgid ""
 "it is strongly recommended to avoid using the telescope control feature "
 "before sunset without appropriate protection."
 msgstr ""
+"এমনকি কোনো একটি অংশে ঘোরার জন্য দুরবীনটিকে সূর্যের সামনে দিয়ে যেতে হতে পারে "
+"। তাই সূর্য ডোবার আগে এই সরঞ্জামটি যথাযথ সতর্কতা ছাড়া ব্যবহার না করার "
+"পরামর্শ দেওয়া হচ্ছে ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:306
@@ -8484,7 +8501,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:424
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:430
 msgid "Back to top"
-msgstr ""
+msgstr "উপরে ফিরে যান"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:305
 msgid ""
@@ -8492,12 +8509,16 @@ msgid ""
 "removed. There is no longer a way to control a telescope with Stellarium "
 "without this plug-in."
 msgstr ""
+"স্টেলারিয়ামেয়ে ০.১০.৫ সংস্করণ এর পর থেকে মূল দূরবীন নিয়ন্ত্রণ বৈশিষ্ট্যটি "
+"বাদ দেওয়া হয়েছে । তাই এই সরঞ্জাম ছাড়া স্টীলারিয়ামের সাহায্যে কোনোভাবেই "
+"দূরবীন নিয়ন্ত্রণ সম্ভব নয় ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:309
 msgid ""
 "Here are two general ways to control a device with this plug-in, depending "
 "on the situation:"
 msgstr ""
+"পরিস্থিতি অনুযায়ী দুভাবে এই সরঞ্জাম ব্যবহারে দূরবীন নিয়ন্ত্রণ করা যায় :"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
 msgid "DIRECT CONNECTION"
@@ -8509,6 +8530,8 @@ msgid ""
 "A %1device supported by the plug-in%2 is connected with a cable to the "
 "computer running Stellarium;"
 msgstr ""
+"%1সরঞ্জাম সমর্থিত কোনো দূরবীন%2 কে তারের সাহায্যে কম্পিউটারে সাথে যোগ করে "
+"সরাসরি স্টেলারিয়ামের মাধ্যমে;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:311
 msgid "INDIRECT CONNECTION"
@@ -8521,6 +8544,9 @@ msgid ""
 "alone telescope server program%2 or a %3third-party application%4 <b>that "
 "can 'talk' to Stellarium</b>;"
 msgstr ""
+"দুরবীনটিকে কম্পিউটারের সাথে যোগ করে কিন্তু তা নিয়ন্ত্রিত হয় <b>স্টেলারিয়ামের "
+"নির্দেশ বুঝতে পারে</b> এমন কোনো %1দূরবীন সার্ভার প্রোগ্রাম%2 বা %3অন্য কোনো "
+"অ্যাপ্লিকেশন%4 এর সাহায্যে;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:313
 msgid ""
@@ -8529,6 +8555,9 @@ msgid ""
 "either one of Stellarium's stand-alone telescope servers, or a third party "
 "application."
 msgstr ""
+"দুরবীনটিকে দূরবর্তী কম্পিউটারের সাথে যোগ করে কিন্তু তা নিয়ন্ত্রিত হয় "
+"<i>নেটওয়ার্কের মাধ্যমে</i> এমন কোনো দূরবীন সার্ভার প্রোগ্রাম বা অন্য কোনো "
+"অ্যাপ্লিকেশনের সাহায্যে যা স্টেলারিয়ামের 'নির্দেশ' বুঝতে পারে;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
 #, qt-format
@@ -8536,10 +8565,13 @@ msgid ""
 "Most older telescopes use cables that connect to a %1serial port%2 (RS-232), "
 "the newer ones use %3USB%4 (Universal Serial Bus)."
 msgstr ""
+"বেশিরভাগ পুরানো দুরবীনগুলি তারের সাহায্যে %1সিরিয়াল পোর্ট%2 (RS-232) এ যুক্ত "
+"হয়; অপরদিকে নতুন দুরবীনগুলি যুক্ত হয় %3USB%4 (Universal Serial Bus) এর "
+"মাধ্যমে ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:315
 msgid ""
-"On Linux and Max OS X both cases are handled identically by the plug-in. On "
+"On Linux and Mac OS X both cases are handled identically by the plug-in. On "
 "Windows, a USB connection may require a 'virtual serial port' software, if "
 "it is not supplied with the cable or the telescope."
 msgstr ""
@@ -8549,6 +8581,8 @@ msgid ""
 "Such a software creates a virtual ('fake') COM port that corresponds to the "
 "real USB port so it can be used by the plug-in."
 msgstr ""
+"এই সরঞ্জামের ব্যবহারের জন্য এই ধরনের সফ্টওয়্যার আাসল USB পোর্টের অনুরূপ একটি "
+"কৃত্রিম ('নকল') COM পোর্ট তৈরি করে ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
 msgid ""
@@ -8556,16 +8590,21 @@ msgid ""
 "the telescope can connect only to a serial port, a serial-to-USB (RS-232-to-"
 "USB) adapter may be necessary."
 msgstr ""
+"সব ক্ষেত্রেই যদি কমপিউটারে 'প্রচলিত' সিরিয়াল পোর্ট না থাকে এবং সেই সঙ্গে "
+"দূরবীনটিও কেবল মাত্র যদি সিরিয়াল পোর্টেই যুক্ত করা যায়, তাহলে একটি serial-to-"
+"USB (RS-232-to-USB) রূপান্তরকের প্রয়োজন ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid ""
 "Telescope set-up (setting geographical coordinates, performing alignment, "
 "etc.) should be done before connecting the telescope to Stellarium."
 msgstr ""
+"দূরবীনটিকে সংযুক্ত করার আগেই বিভিন্ন দূরবীন বিন্যাস (স্থান, অ্যালাইনমেন্ট "
+"ইত্যাদি) ঠিক করে রাখতে হবে ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
 msgid "The plug-in's main window can be opened:"
-msgstr ""
+msgstr "মূল বিভাগে যেতে হলে :"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:323
 msgid ""
@@ -8573,6 +8612,8 @@ msgid ""
 "Stellarium's Configuration window (opened by pressing <b>F2</b> or the "
 "respective button in the left toolbar)."
 msgstr ""
+"রূপরেখা বিন্যাস অংশের (যা <b>F2</b> বোতাম চেপে বা বাম টুলবারের যথাযথ বোতাম "
+"চেপে খুলতে হয়) 'সরঞ্জাম' বিভাগের 'ব্যবহার পদ্ধতি' বোতামে ক্লিক করতে হবে ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:324
 #, qt-format
@@ -8581,18 +8622,22 @@ msgid ""
 "(opened by pressing <b>Ctrl+0</b> or the respective button on the bottom "
 "toolbar)."
 msgstr ""
+"%1'দূরবীনটিকে ঘোরান' অংশের%2 (যা <b>Ctrl+0</b> বোতাম চেপে বা নিচের টুলবারের "
+"যথাযথ বোতাম চেপে খুলতে হয়) 'দুরবীন বিন্যাস করুন...' বোতামে ক্লিক করতে হবে ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:325
 msgid ""
 "The <b>Telescopes</b> tab displays a list of the telescope connections that "
 "have been set up:"
-msgstr ""
+msgstr "<b>দূরবীন সমূহ</b> বিভাগে উপলব্ধ দূরবীনগুলি দেখতে পাবেন :"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:326
 msgid ""
 "The number (<b>#</b>) column shows the number used to control this "
 "telescope. For example, for telescope #2, the shortcut is Ctrl+2."
 msgstr ""
+"নম্বর (<b>#</b>) স্তম্ভে দেখানো নম্বরটির সাহায্যে ঐ দূরবীনটি ব্যবহার করা যায় "
+"। যেমন - ঝটকরে দূরবীন #2 ব্যবহারের জন্য Ctrl+2 চাপতে হবে ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:327
 msgid ""
@@ -8600,15 +8645,18 @@ msgid ""
 "not. Unfortunately, there are some cases in which 'Connected' is displayed "
 "when no working connection exists."
 msgstr ""
+"<b>পরিস্থিতি</b> স্তম্ভ দেখায় যে দূরবীনটির সাথে সংযোগ চালু না বন্ধ আছে । তবে "
+"দূর্ভাগ্যবশত কিছু ক্ষেত্রে দূরবীন সংযুক্ত না থাকা সত্তেও সেটিকে 'সংযুক্ত' "
+"দেখায় ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:328
 msgid "The <b>Type</b> field indicates what kind of connection is this:"
-msgstr ""
+msgstr "<b>ধরণ</b> স্তম্ভে সংযোগের ধরণ সম্পর্কে জানা যায় :"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:329
 #, qt-format
 msgid "<b>virtual</b> means a %1virtual telescope%2;"
-msgstr ""
+msgstr "<b>কৃত্রিম</b> অর্থাৎ %1আলস দূরবীন না%2;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:330
 #, qt-format
@@ -8616,18 +8664,24 @@ msgid ""
 "<b>local, Stellarium</b> means a DIRECT connection to the telescope (see "
 "%1above%2);"
 msgstr ""
+"<b>স্থানীয়, স্টেলারিয়াম</b> অর্থাৎ দূরবীনের সাথে সরাসরি সংযুক্ত (%1উপরে%2 "
+"দেখুন);"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:331
 msgid ""
 "<b>local, external</b> means an INDIRECT connection to a program running on "
 "the same computer;"
 msgstr ""
+"<b>স্থানীয়, বাহ্যিক</b> অর্থাৎ ঐ কম্পিউটারে চলছে অন্য একটি প্রোগ্রামের "
+"সাহায্যে দূরবীনের সাথে পরোক্ষ ভাবে সংযুক্ত;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:332
 msgid ""
 "<b>remote, unknown</b> means an INDIRECT connection over a network to a "
 "remote machine."
 msgstr ""
+"<b>দূরবর্তী, অজানা</b> অর্থাৎ নেটওয়ার্কের সাহায্যে দূরবর্তী সিস্টেমের সাথে "
+"সংযুক্ত ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:333
 msgid ""
@@ -8636,13 +8690,16 @@ msgid ""
 "the <b>Configure</b> button. In both cases, a telescope connection "
 "configuration window will open."
 msgstr ""
+"নতুন দূরবীন সংযোগ প্রতিষ্ঠার জন্য <b>যোগ করুন</b> বোতামে ক্লিক করুন । কোনো "
+"সংযোগ পরিবর্তনের জন্য সেটিকে বেছে নিয়ে <b>রূপরেখা নির্ধারণ</b> বোতামে ক্লিক "
+"করুন । দুক্ষেত্রেই দূরবীন বিন্যাস উইন্ডো খুলে যাবে ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:339
 #, qt-format
 msgid ""
 "The topmost field represents the choice between the two types of connections "
 "(see %1above%2):"
-msgstr ""
+msgstr "উপরের বিভাগে সংযোগের ধরণ বেছে নেওয়া যায় (%1উপরে%2 দেখুন) :"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:340
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:463
@@ -8652,10 +8709,12 @@ msgstr "দূরবীনটির নিয়ন্ত্রক :"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:341
 msgid "<b>Stellarium, directly through a serial port</b> is the DIRECT case"
 msgstr ""
+"<b>স্টেলারিয়াম, সরাসরি একটি সিরিয়াল পোর্টের দ্বারা</b> বা প্রত্যক্ষ সংযোগ"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:342
 msgid "<b>External software or a remote computer</b> is the INDIRECT case"
 msgstr ""
+"<b>বাহ্যিক অ্যাপ্লিকেশান অথবা কোনো দূরবর্তী কম্পিউটার</b> বা পরোক্ষ সংযোগ"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:343
 #, qt-format
@@ -8663,18 +8722,22 @@ msgid ""
 "<b>Nothing, just simulate one (a moving reticle)</b> is a %1virtual "
 "telescope%2 (no connection)"
 msgstr ""
+"<b>কেউ নয়, শুধু অনুকরণ (একটি চলমান বৃত্ত)</b> আসলে %1কৃত্রিম দূরবীন%2 (কোনো "
+"সংযোগ লাগে না)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:347
 msgid ""
 "<b>Name</b> is the label that will be displayed on the screen next to the "
 "telescope reticle."
-msgstr ""
+msgstr "<b>নাম</b> যা নিশানার পাশে দেখানো হবে ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:348
 msgid ""
 "<b>Connection delay</b>: If the movement of the telescope reticle on the "
 "screen is uneven, you can try increasing or decreasing this value."
 msgstr ""
+"<b>সংযোগ বিলম্ব</b> : যদি নিশানার চলন অসম গতিতে হয়, তাহলে এর মান কমিয়ে বা "
+"বাড়িয়ে তা ঠিক করা যায় ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:349
 msgid ""
@@ -8683,73 +8746,88 @@ msgid ""
 "use the equinox of the date (EOD, also known as JNow), making necessary this "
 "override."
 msgstr ""
+"<b>স্থানাঙ্ক ব্যবস্থা</b> : কিছু সেলেস্ট্রন দূরবীনের নিয়ন্ত্রন ব্যবস্থার "
+"আধুনিকরন করা হয়েছে এবং সেগুলি এখন বর্তমান বিষুব বিন্দু অনুযায়ী (EOD, JNow "
+"নামেও পরিচিত) প্রাপ্ত স্থানাঙ্ক বুঝতে সক্ষম । সেক্ষেত্রে এটি ব্যবহার করা "
+"যেতে পারে ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:350
 msgid ""
 "<b>Start/connect at startup</b>: Check this option if you want Stellarium to "
 "attempt to connect to the telescope immediately after it starts."
 msgstr ""
+"<b>শুরু হওয়ার সময় সক্রিয় / সংযোগ স্থাপন</b> : স্টেলারিয়াম চালুর সাথে সাথেই "
+"দূরবীন সংযুক্ত করতে চাইলে এটিতে টিক মারুন ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:351
 msgid ""
 "Otherwise, to start the telescope, you need to open the main window, select "
 "that telescope and press the 'Start/Connect' button."
 msgstr ""
+"অন্যথায় দূরবীন সমূহ বিভাগে গিয়ে দূরবীন বেছে নেওয়ার পর 'সংযোগ স্থাপন করুন' "
+"বোতামে ক্লিক করুন ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:355
 #, qt-format
 msgid "This section is active only for DIRECT connections (see %1above%2)."
 msgstr ""
+"এই অংশটি কেবলমাত্র প্রত্যক্ষ সংযোগের ক্ষেত্রেই সক্রিয় থাকে (%1উপরে%2 দেখুন) ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:356
 msgid "<b>Serial port</b> sets the serial port used by the telescope."
-msgstr ""
+msgstr "<b>সিরিয়াল পোর্ট</b> যা দিয়ে দূরবীনটি সংযুক্ত করা হয় ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:357
 msgid "There is a pop-up box that suggests some default values:"
-msgstr ""
+msgstr "এখানে আগে থেকেই কিছু সিরিয়াল পোর্টের মানের প্রস্তাব দেওয়া থাকে :"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:358
 msgid "On Windows, serial ports COM1 to COM10;"
-msgstr ""
+msgstr "Windows এর ক্ষেত্র সিরিয়াল পোর্টগুলি COM1 থেকে COM10 পর্যন্ত হয়;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:359
 msgid ""
 "On Linux, serial ports /dev/ttyS0 to /dev/ttyS3 and USB ports /dev/ttyUSB0 "
 "to /dev/ttyUSB3;"
 msgstr ""
+"Linux এর ক্ষেত্র সিরিয়াল পোর্টগুলি /dev/ttyS0 থেকে /dev/ttyS3 এবং USB "
+"পোর্টগুলি /dev/ttyUSB0 থেকে /dev/ttyUSB3 পর্যন্ত হয়;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:360
 msgid ""
 "On Mac OS X, the list is empty as it names its ports in a peculiar way."
-msgstr ""
+msgstr "Mac OS X এ পোর্টের নামগুলি অদ্ভুত হওয়ার কারনে তালিকাটি ফাঁকা থাকে ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:361
 msgid ""
 "If you are using an USB cable, the default serial port of your telescope "
 "most probably is not in the list of suggestions."
-msgstr ""
+msgstr "যদি আপনি USB তার ব্যবহার করেন তাহলে কোনো প্রস্তাব খুঁজে পাবেন না ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:362
 msgid ""
 "To list all valid serial port names in Mac OS X, open a terminal and type:"
-msgstr ""
+msgstr "Mac OS X এ বৈধ সিরিয়াল পোর্ট জানতে হলে টার্মিনাল খুলে লিখুন :"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:363
 msgid ""
 "This will list all devices, the full name of your serial port should be "
 "somewhere in the list (for example, '/dev/cu.usbserial-FTDFZVMK')."
 msgstr ""
+"এতে সমত্ত উপলব্ধ ডিভাইসগুলি দেখতে পাবেন পুরো নাম সমেত (যেমন -  "
+"'/dev/cu.usbserial-FTDFZVMK') ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:364
 #, qt-format
 msgid "<b>Device model</b>: see %1Supported devices%2 below."
 msgstr ""
+"<b>দূরবীনের ধরন</b> : %1সমর্থিত দূরবীন সমূহ%2 সম্পর্কে জানতে নিচে দেখুন ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:368
 #, qt-format
 msgid "Both fields here refer to communication over a network (%1TCP/IP%2)."
 msgstr ""
+"এই অংশটি সামগ্রিকভাবে নেটওয়ার্কের মাধ্যমে সংয়োগ প্রসঙ্গিত (%1TCP/IP%2) ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:369
 #, qt-format
@@ -8757,6 +8835,7 @@ msgid ""
 "Doing something with them is necessary only for INDIRECT connections  (see "
 "%1above%2)."
 msgstr ""
+"এগুলি পরিবর্তন করতে হলে সংযোগটি অবশ্যই পরোক্ষ হতে হবে (%1উপরে%2 দেখুন) ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:370
 #, qt-format
@@ -8764,28 +8843,37 @@ msgid ""
 "<b>Host</b> can be either a host name or an %1IPv4%2 address such as "
 "'127.0.0.1'. The default value of 'localhost' means 'this computer'."
 msgstr ""
+"<b>সঞ্চালক</b> কোনো একটি নাম কিংবা একটি %1IPv4%2 ঠিকানা (যেমন - 127.0.0.1) "
+"হতে হবে । প্রস্তাবিত মান 'localhost' কথার অর্থ এই কম্পিউটারটি ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:371
 msgid ""
 "<b>Port</b> refers to the TCP port used for communication. The default value "
 "depends on the telescope number and ranges between 10001 and 10009."
 msgstr ""
+"<b>পোর্ট</b> বলতে সংযোগে ব্যবহৃত TCP পোর্টগুলিকে বোঝায় । প্রস্তাবিত মান "
+"সংযুক্ত দূরবীন সংখ্যার উপর নির্ভর করে এবং এর মান ১০০০১ থেকে ১০০০৯ এর মধ্যে "
+"হয় ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:372
 msgid "Both values are ignored for DIRECT connections."
-msgstr ""
+msgstr "প্রত্যক্ষ সংযোগের ক্ষেত্রে এগুলি কোনো কাজে লাগে না ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:373
 msgid ""
 "For INDIRECT connections, modifying the default host name value makes sense "
 "only if you are attempting a remote connection over a network."
 msgstr ""
+"পরোক্ষ সংযোগের ক্ষেত্রে দূরবর্তী কম্পিউটারের সাথে সংযোগের জন্যই কেবল "
+"সঞ্চালকের প্রস্তাবিত নামের পরিবর্তনের প্রয়োজন হয় ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:374
 msgid ""
 "In this case, it should be the name or IP address of the computer that runs "
 "a program that runs the telescope."
 msgstr ""
+"এক্ষেত্রে মানগুলি হবে সেই কম্পিউটারের নাম বা IP যাতে দূরবীনটিকে নিয়ন্ত্রণ "
+"করার কোনো পোগ্রাম চালানো আছে ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:378
 msgid ""
@@ -8793,17 +8881,22 @@ msgid ""
 "around the telescope marker. This is a relic from the times before the "
 "<strong>Oculars</strong> plug-in existed."
 msgstr ""
+"বিভিন্ন দৃষ্টিক্ষেত্র অনুযায়ী নিশানাটির চারপাশে আলাদা আলাদা বৃত্ত দেখা যায় । "
+"এটি <strong>দূরবীন অনুকরণ</strong> সরঞ্জামের আগের সময়ের গুরুত্বপূর্ণ "
+"বৈশিষ্টের একটি নিদর্শন ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:379
 msgid ""
 "In the telescope configuration window, click on 'User Interface Settings'."
-msgstr ""
+msgstr "প্রথমে দূরবীন বিন্যাস উইন্ডোর 'ব্যবহৃত প্রেক্ষাপট' অংশে যান ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:380
 msgid ""
 "Mark the 'Use field of view indicators' option, then enter a list of values "
 "separated with commas in the field below."
 msgstr ""
+"এরপর 'দৃষ্টিক্ষেত্র নির্দেশক সূচক ব্যবহার' এ টিক মারুন ও নিচের বাক্সে "
+"পছন্দসই দৃষ্টিক্ষেত্রগুলি কমা কমা দিয়ে লিখুন ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
 msgid "The values are interpreted as degrees of arc."
@@ -8898,32 +8991,36 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:401
 msgid "For example, Ctrl+1 for telescope #1."
-msgstr ""
+msgstr "যেমন - দূরবীন #1 এর জন্য Ctrl+1 ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:402
 msgid "This will move the telescope to the selected object."
-msgstr ""
+msgstr "এভাবে দূরবীনের মুখ নির্বাচিত বস্তুর দিকে ঘুরে যাবে ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:403
 msgid ""
 "<b>To point a device to the center of the view:</b> Press the number of the "
 "device while holding down the <b>Alt</b> key."
 msgstr ""
+"<b>দৃশ্যপটের মাঝখানে তাক করতে হলে :</b> <b>Alt</b> সহযোগে দূরবীন নম্বরটি "
+"চাপতে হবে ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:404
 msgid "For example, Alt+1 for telescope #1."
-msgstr ""
+msgstr "যেমন - দূরবীন #1 এর জন্য Alt+1 ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:405
 msgid ""
 "This will slew the device to the point in the center of the current view."
-msgstr ""
+msgstr "এভাবে দূরবীনের মুখ দৃশ্যপটের মাঝখানে ঘুরে যাবে ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:406
 msgid ""
 "If you move the view after issuing the command, the target won't change "
 "unless you issue another command."
 msgstr ""
+"একবার ঘুরিয়ে তাক করা হয়ে যাওয়ার পর দৃশ্যপট ঘোরালেও দূরবীনের মুখ নিজে থেকে "
+"ঘুরে যাবে না যতক্ষন না নতুন করে তা করার নির্দেশ দেওয়া হচ্ছে ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:407
 #, qt-format
@@ -8931,6 +9028,8 @@ msgid ""
 "<b>To point a device to a given set of coordinates:</b> Use the %1'Slew to' "
 "window%2 (press <b>Ctrl+0</b>)."
 msgstr ""
+"<b>নির্দিষ্ট স্থানাঙ্কে দূরবীনটিকে ঘোরাতে হলে :</b> %1'দূরবীনটিকে ঘোরান' "
+"উইন্ডো%2 (যা <b>Ctrl+0</b> চেপে খোলা যায়) ব্যবহার করতে হবে ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:411
 #, qt-format
@@ -9025,6 +9124,8 @@ msgid ""
 "This feature is equivalent to the 'Dummy' type of telescope supported by "
 "%1Stellarium's original telescope control feature%2."
 msgstr ""
+"এটি %1স্টেলারিয়ামের মূল দূরবীন নিয়ন্ত্রণ বৈশিষ্ট্যের%2 'নকল' দূরবীন "
+"ব্যবহারের সমতুল্য ।"
 
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:446
@@ -9271,7 +9372,7 @@ msgstr "সিরিয়াল পোর্ট :"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
 msgid "Device model:"
-msgstr "আসল নাম :"
+msgstr "দূরবীনের ধরন :"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "Host:"
@@ -9717,11 +9818,11 @@ msgstr "২৪ ঘন্টা"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:235
 msgid "Sky Language"
-msgstr ""
+msgstr "মহাকাশ সম্পর্কিত বিষয়ের ভাষা"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "App Language"
-msgstr ""
+msgstr "প্রোগ্রামে ব্যবহৃত ভাষা"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:256
 msgid "Show stars"
@@ -9738,7 +9839,7 @@ msgstr "কল্পচিত্রগুলির ঔজ্জ্বলতা :
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:359
 msgid "Ecliptic line (J2000)"
-msgstr ""
+msgstr "সৌরপথ (J2000 অনুযায়ী)"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Nebula names"
@@ -9807,7 +9908,7 @@ msgstr "স্বাভাবিক বৈশিষ্টাবলী আমদ�
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:526
 msgid "Save current configuration"
-msgstr "বর্তমান রূপরেখা সংরক্ষণ করুন"
+msgstr "ব্যবহৃত রূপরেখা সংরক্ষণ করুন"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:529
 msgid "Shut down"
@@ -9915,15 +10016,15 @@ msgstr "সৌরজগত সম্পাদনার সরঞ্জাম"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:187
 msgid "Save the Solar System configuration file as..."
-msgstr ""
+msgstr "সৌরজগৎ সংক্রান্ত তথ্য এই নামে সঞ্চয় করুন..."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:193
 msgid "Configuration files"
-msgstr ""
+msgstr "বিন্যাস সংক্রান্ত নথিসমূহ"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:195
 msgid "Select a file to replace the Solar System configuration file"
-msgstr ""
+msgstr "প্রতিস্থাপনের জন্য একটি নথি বেছে নিন"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:511
 msgid "Import data"
@@ -9935,7 +10036,7 @@ msgstr "ধরণ নির্বাচন"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:516
 msgid "Select the source"
-msgstr "উত্স নির্বাচন"
+msgstr "উৎস নির্বাচন"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:517
 msgid "Download a list of objects from the Internet"
@@ -10210,6 +10311,8 @@ msgstr "দিকনির্দেশী নক্ষত্র"
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:94
 msgid "This plugin marks navigational stars from a selected set."
 msgstr ""
+"এই সরঞ্জামটি বিভিন্ন ক্ষেত্রে ব্যবহৃত দিক নির্দেশকারী নক্ষত্রগুলিকে চিহ্নিত "
+"করে ।"
 
 #: plugins/NavStars/src/NavStars.cpp:112
 msgid "Mark the navigational stars"
@@ -10224,6 +10327,10 @@ msgid ""
 "navigational aids such as the <em>2102D Star Finder</em> and "
 "<em>Identifier</em>."
 msgstr ""
+"এক্ষেত্রে মহারানীর নৌসারণী অফিস এবং মার্কিন নৌ মানমন্দির দ্বারা ১৯৫৮ সাল "
+"থেকে যৌথভাবে প্রকাশিত  <em>নৌসারণী</em> তালিকায় থাকা ৫৭টি দিক নির্দেশকারী "
+"তারা দেখানো হয়েছে । কাজেই <em>2102D Star Finder</em> কিংবা "
+"<em>Identifier</em> এর মত দিকনির্ণয়ে সাহায্যকারী নথিতেও এর ব্যবহার রয়েছে ।"
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:313
@@ -10232,6 +10339,8 @@ msgid ""
 "The 81 stars that are listed in the <em>%1</em> published by the French "
 "Bureau des Longitudes."
 msgstr ""
+"এক্ষেত্রে ফ্রান্সের ফ্রেঞ্চ ব্যুরো ডেস লনজিটিউডস দ্বারা প্রকাশিত <em>%1</em> "
+"তালিকায় থাকা ৮১টি দিক নির্দেশকারী তারা দেখানো হয়েছে ।"
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:319
@@ -10240,10 +10349,12 @@ msgid ""
 "The 160 stars that are listed in the Russian Nautical Almanac (The original "
 "Russian title is <em>%1</em>)."
 msgstr ""
+"এক্ষেত্রে রাশিয়ান নৌসারণী (রাশিয়ান নাম <em>%1</em>) তালিকায় থাকা ১৬০টি দিক "
+"নির্দেশকারী তারা দেখানো হয়েছে ।"
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
 msgid "Navigational Stars Plug-in"
-msgstr ""
+msgstr "দিকনির্দেশী নক্ষত্র"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:107
@@ -10260,26 +10371,26 @@ msgstr ""
 #. TRANSLATORS: Part of full phrase: Anglo-American set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:143
 msgid "Anglo-American"
-msgstr ""
+msgstr "অ্যাংলো-আমেরিকা"
 
 #. TRANSLATORS: Part of full phrase: French set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:145
 msgid "French"
-msgstr ""
+msgstr "ফরাসি"
 
 #. TRANSLATORS: Part of full phrase: Russian set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:147
 msgid "Russian"
-msgstr ""
+msgstr "রাশিয়ান"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:202
 #: plugins/NavStars/src/ui_navStarsWindow.h:213
 msgid "Navigational stars"
-msgstr ""
+msgstr "দিকনির্দেশী নক্ষত্র"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:204
 msgid "Set of navigational stars"
-msgstr ""
+msgstr "তালিকা"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:206
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:288
@@ -10288,11 +10399,11 @@ msgstr "স্ক্রিনের যে অংশে স্থানাঙ্
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:208
 msgid "Current set:"
-msgstr ""
+msgstr "ব্যহহৃত তালিকা"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:209
 msgid "Note:"
-msgstr ""
+msgstr "বিঃদ্রঃ"
 
 #: plugins/Novae/src/Novae.cpp:71 plugins/Novae/src/Novae.cpp:142
 msgid "Bright Novae"
@@ -10735,34 +10846,36 @@ msgstr ""
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:115
 msgid "It is also possible to send commands via command line, e.g.."
-msgstr ""
+msgstr "কমান্ড লাইন বা লিখিত নির্দেশের মাধ্যমেও নির্দেশ পাঠানো যায়, যেমন .."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:121
 msgid "This allows triggering automatic show setups for museums etc."
-msgstr ""
+msgstr "জাদুঘর ইত্যাদির জন্য এভাবে স্বয়ংক্রিয় অনুষ্ঠান সঞ্চালন করা সম্ভব ।"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:122
 msgid "This plugin was developed during ESA SoCiS 2015."
-msgstr ""
+msgstr "ESA SoCiS 2015 চলাকালীন এই সরঞ্জামটি প্রস্তুত করা হয়েছে ।"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:123
 #, qt-format
 msgid "This plugin uses the %1QtWebApp HTTP server%2 by Stefan Frings."
 msgstr ""
+"এটিতে Stefan Frings দ্বারা প্রস্তুত %1QtWebApp HTTP সার্ভার%2 ব্যবহার করা "
+"হয়েছে ।"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:126
 #, qt-format
 msgid "Further information can be found in the %1developer documentation%2."
-msgstr ""
+msgstr "আরও তথ্যের জন্য %1প্রস্তুতকারক নথি%2 বা ডেভেলপার ডকুমেন্টেশন দেখুন ।"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:175
 #, qt-format
 msgid "Listening on %1, IP: "
-msgstr ""
+msgstr "%1 নামে সংযুক্ত, IP : "
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:180
 msgid "Not active."
-msgstr ""
+msgstr "চালু নেই ।"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:246
 msgid "Remote Control Configuration"
@@ -10774,15 +10887,15 @@ msgstr "দূর সঞ্চালন সংক্রান্ত তথ্য
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:249
 msgid "Port Number:"
-msgstr ""
+msgstr "পোর্ট নম্বর :"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:252
 msgid "Access requires authentication"
-msgstr ""
+msgstr "ব্যবহারের জন্য অনুমতি আবশ্যক"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:253
 msgid "Password"
-msgstr ""
+msgstr "পাসওয়ার্ড"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:254
 msgid ""
@@ -10790,14 +10903,17 @@ msgid ""
 "empty. </p><p>The password is transmitted over an insecure "
 "channel.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>বি: দ্র:- ব্রাউজারে ব্যবহারকারীর নাম অবশ্যই ফাঁকা "
+"রাখতে হবে ।</p><p>আপনার পাসওয়ার্ডটি একটি অসুরক্ষিত চ্যানেলের মধ্যে দিয়ে "
+"প্রেরণ করা হয়ে থাকে ।</p></body></html>"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:255
 msgid "Your changes require a restart of the server."
-msgstr ""
+msgstr "পরিবর্তনগুলি সম্পূর্ণ করতে সার্ভার পুনরায় চালু করা প্রয়োজন ।"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:256
 msgid "Restart server"
-msgstr ""
+msgstr "সার্ভার পুনরায় চালু করুন"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:257
 msgid "Server enabled"
@@ -12234,7 +12350,7 @@ msgstr ""
 
 #: plugins/FOV/src/FOV.cpp:86
 msgid "Set FOV to"
-msgstr ""
+msgstr "দৃষ্টিক্ষেত্র"
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:80
 msgid "Field of View plug-in"
@@ -13591,7 +13707,7 @@ msgid ""
 "<b>Cubemap</b> uses a single GL_TEXTURE_CUBEMAP. Recommended for most users."
 msgstr ""
 "<b>ঘনকাকার চিত্র</b> অর্থাৎ এক্ষেত্রে একটি GL_TEXTURE_CUBEMAP ছবি ব্যবহার হয় "
-"। আমরা সাধারণত এটিই ব্যবহার করতে বলি ।"
+"। আমরা সাধারণত এটিই ব্যবহার করার পরামর্শ দিয়ে থাকি ।"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:262
 msgid ""
@@ -15357,3 +15473,12 @@ msgstr "সূর্য"
 
 #~ msgid "Ephemeris settings"
 #~ msgstr "গতিপথ নির্ধারণ"
+
+#~ msgid ""
+#~ "On Linux and Max OS X both cases are handled identically by the plug-in. On "
+#~ "Windows, a USB connection may require a 'virtual serial port' software, if "
+#~ "it is not supplied with the cable or the telescope."
+#~ msgstr ""
+#~ "Linux কিংবা Mac OS X দুক্ষেত্রেই একই রকম ভাবে এই সরঞ্জাম কাজ করে । তবে "
+#~ "WINDOWS এর ক্ষেত্রে USB সংযোগের জন্য 'ভার্চুয়াল সিরিয়াল পোর্ট' সফটওয়ারের "
+#~ "প্রয়োজন যদি না এটি তার বা দুরবীনের সাথে সরবরাহ করা না থাকে ।"
