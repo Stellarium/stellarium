@@ -68,25 +68,24 @@ double Satellite::sunReflAngle = 180.;
 double Satellite::timeShift = 0.;
 
 Satellite::Satellite(const QString& identifier, const QVariantMap& map)
-    : initialized(false),
-      displayed(true),
-      orbitDisplayed(false),
-      userDefined(false),
-      newlyAdded(false),
-      orbitValid(false),
-      jdLaunchYearJan1(0),
-      stdMag(99.),
-      height(0.),
-      range(0.),
-      rangeRate(0.),
-      hintColor(0.0,0.0,0.0),
-      lastUpdated(),
-      pSatWrapper(NULL),
-      visibility(0),
-      phaseAngle(0.),
-      lastEpochCompForOrbit(0.),
-      epochTime(0.)
-
+	: initialized(false)
+	, displayed(true)
+	, orbitDisplayed(false)
+	, userDefined(false)
+	, newlyAdded(false)
+	, orbitValid(false)
+	, jdLaunchYearJan1(0)
+	, stdMag(99.)
+	, height(0.)
+	, range(0.)
+	, rangeRate(0.)
+	, hintColor(0.0,0.0,0.0)
+	, lastUpdated()
+	, pSatWrapper(NULL)
+	, visibility(0)
+	, phaseAngle(0.)
+	, lastEpochCompForOrbit(0.)
+	, epochTime(0.)
 {
 	// return initialized if the mandatory fields are not present
 	if (identifier.isEmpty())
