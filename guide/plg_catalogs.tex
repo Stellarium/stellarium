@@ -232,10 +232,7 @@ To add a new nova, open a new line after line 5 and paste the following, note co
 },
 \end{configfile}
 
-%\newpage
-
 \newpage
-
 
 \section{Exoplanets Plugin}
 \label{sec:plugins:Exoplanets}
@@ -840,8 +837,7 @@ current\_ns\_set	& string		& Current set of navigational stars. Possible values:
 %% Original URL: http://www.stellarium.org/wiki/index.php/Satellites_plugin
 %% TODO: Update from there or write new.
 
-\noindent The Satellites plugin displays the positions of artifical satellites
-in Earth's orbit based on a catalog of orbital data. It allows
+\noindent The Satellites plugin displays the positions of artifical satellites in Earth's orbit based on a catalog of orbital data. It allows
 automatic updates from online sources and manages a list of update
 file URLs.
 
@@ -889,8 +885,7 @@ By convention, group names are in lowercase. The GUI translates some of the grou
 
 
 The satellite catalog is stored on the disk in JSON\footnote{\url{http://www.json.org/}}
-format, in a file named \file{satellites.json}. A default copy is embedded in the
-plug-in at compile time. A working copy is kept in the user data directory.
+format, in a file named \file{satellites.json}. A default copy is embedded in the plug-in at compile time. A working copy is kept in the user data directory.
 
 %   Used in Satellites plug-in 0.7.1 and later (Stellarium 0.11.2 and later) 
 
@@ -922,10 +917,7 @@ Explanation of the fields:
 \begin{description}
 \item[NORAD number]  required parameter, surrounded by double quotes (\texttt{"}),
 followed by a colon (\texttt{:}). It is used internally to identify the
-satellite. You should replace the text \texttt{"NORAD number"} with the first
-number on both lines of the TLE set (in this case, \texttt{"12345"}). It must
-match the number of the satellite in the source you are adding from if
-you want the TLE to be automatically updated.
+satellite. You should replace the text \texttt{"NORAD number"} with the first number on both lines of the TLE set (in this case, \texttt{"12345"}). It must match the number of the satellite in the source you are adding from if you want the TLE to be automatically updated.
 \end{description}
 The remaining parameters should be listed between two curly brackets and the closing curly bracket must be followed by a comma to separate it from the next satellite in the list:
 
@@ -935,8 +927,7 @@ when searching for the satellite with the Find window. Use the
 description field for a more readable name if you like. (The
 description field can accept HTML tags such as \texttt{<br/>} (new line), \texttt{<b></b>} (bold), etc.)
 
-\item[description] optional parameter, double quoted. Appears when you click on the satellite
-\item[comms] optional parameter, square bracketed list of curly bracketed communications information.
+\item[description] optional parameter, double quoted. Appears when you click on the satellite \item[comms] optional parameter, square bracketed list of curly bracketed communications information.
 \item[groups]  optional parameter, comma separated list of double quoted group names contained in square brackets. Used for grouping satellites in the drop down box on the config (see above)
 \item[tle1]  required, line 1 of the TLE, must be contained in double quotes and begin with \texttt{"1~"}
 \item[tle2]  required, line 2 of the TLE, must be contained in double quotes and begin with \texttt{"2~"}
