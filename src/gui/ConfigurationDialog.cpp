@@ -255,14 +255,13 @@ void ConfigurationDialog::createDialogContent()
 		ui->pushButtonCustomDeltaTEquationDialog->setEnabled(true);
 
 	// Tools tab
-	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
-	Q_ASSERT(cmgr);
 	ui->sphericMirrorCheckbox->setChecked(StelApp::getInstance().getViewportEffect() == "sphericMirrorDistorter");
 	connect(ui->sphericMirrorCheckbox, SIGNAL(toggled(bool)), this, SLOT(setSphericMirror(bool)));
 	ui->gravityLabelCheckbox->setChecked(proj->getFlagGravityLabels());
 	connect(ui->gravityLabelCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore(), SLOT(setFlagGravityLabels(bool)));
-	ui->selectSingleConstellationButton->setChecked(cmgr->getFlagIsolateSelected());
-	connect(ui->selectSingleConstellationButton, SIGNAL(toggled(bool)), cmgr, SLOT(setFlagIsolateSelected(bool)));
+
+	connectBoolProperty(ui->selectSingleConstellationButton, "ConstellationMgr.isolateSelected");
+
 	ui->diskViewportCheckbox->setChecked(proj->getMaskType() == StelProjector::MaskDisk);
 	connect(ui->diskViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
 	ui->autoZoomResetsDirectionCheckbox->setChecked(mvmgr->getFlagAutoZoomOutResetsDirection());
@@ -295,14 +294,8 @@ void ConfigurationDialog::createDialogContent()
 	ui->invertScreenShotColorsCheckBox->setChecked(StelMainView::getInstance().getFlagInvertScreenShotColors());
 	connect(ui->invertScreenShotColorsCheckBox, SIGNAL(toggled(bool)), &StelMainView::getInstance(), SLOT(setFlagInvertScreenShotColors(bool)));
 
-	//LandscapeMgr *lmgr = GETSTELMODULE(LandscapeMgr);
-	//ui->autoEnableAtmosphereCheckBox->setChecked(lmgr->getFlagAtmosphereAutoEnable());
-	//connect(ui->autoEnableAtmosphereCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagAtmosphereAutoEnable(bool)));
-	connectBoolProperty(ui->autoEnableAtmosphereCheckBox,"LandscapeMgr.flagAtmosphereAutoEnabling");
-
-	//ui->autoChangeLandscapesCheckBox->setChecked(lmgr->getFlagLandscapeAutoSelection());
-	//connect(ui->autoChangeLandscapesCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeAutoSelection(bool)));
-	connectBoolProperty(ui->autoChangeLandscapesCheckBox,"LandscapeMgr.flagLandscapeAutoSelection");
+	connectBoolProperty(ui->autoEnableAtmosphereCheckBox, "LandscapeMgr.flagAtmosphereAutoEnabling");
+	connectBoolProperty(ui->autoChangeLandscapesCheckBox, "LandscapeMgr.flagLandscapeAutoSelection");
 
 
 	// script tab controls
