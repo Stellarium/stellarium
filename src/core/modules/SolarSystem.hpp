@@ -123,6 +123,26 @@ class SolarSystem : public StelObjectModule
 		   NOTIFY ephemerisDatesChanged
 		   )
 
+	Q_PROPERTY(bool flagCustomGrsSettings
+		   READ getFlagCustomGrsSettings
+		   WRITE setFlagCustomGrsSettings
+		   NOTIFY flagCustomGrsSettingsChanged
+		   )
+	Q_PROPERTY(int customGrsLongitude
+		   READ getCustomGrsLongitude
+		   WRITE setCustomGrsLongitude
+		   NOTIFY customGrsLongitudeChanged
+		   )
+	Q_PROPERTY(double customGrsDrift
+		   READ getCustomGrsDrift
+		   WRITE setCustomGrsDrift
+		   NOTIFY customGrsDriftChanged
+		   )
+	Q_PROPERTY(double customGrsJD
+		   READ getCustomGrsJD
+		   WRITE setCustomGrsJD
+		   NOTIFY customGrsJDChanged
+		   )
 public:
 	SolarSystem();
 	virtual ~SolarSystem();
@@ -376,6 +396,7 @@ public slots:
 
 	//! Set initial JD for calculation of position of Great Red Spot
 	//! @param JD
+	// TODO (GZ): Clarify whether this is JD or rather JDE?
 	void setCustomGrsJD(double JD);
 	//! Get initial JD for calculation of position of Great Red Spot
 	double getCustomGrsJD();
@@ -396,6 +417,10 @@ signals:
 	void labelsAmountChanged(double f);
 	void ephemerisMarkersChanged(bool b);
 	void ephemerisDatesChanged(bool b);
+	void flagCustomGrsSettingsChanged(bool b);
+	void customGrsLongitudeChanged(int l);
+	void customGrsDriftChanged(double drift);
+	void customGrsJDChanged(double JD);
 
 public:
 	///////////////////////////////////////////////////////////////////////////

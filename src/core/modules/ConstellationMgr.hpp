@@ -259,7 +259,7 @@ public slots:
 	ConstellationMgr::ConstellationDisplayStyle getConstellationDisplayStyle();
 	//! Returns the currently set constellation display style as string, instead of enum
 	//! @see getConstellationDisplayStyle()
-	QString getConstellationDisplayStyleString();
+	static QString getConstellationDisplayStyleString(ConstellationMgr::ConstellationDisplayStyle style);
 
 	//! Set the thickness of lines of the constellations
 	//! @param thickness of line in pixels
