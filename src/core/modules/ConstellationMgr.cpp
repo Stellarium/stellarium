@@ -353,10 +353,9 @@ void ConstellationMgr::setConstellationDisplayStyle(ConstellationDisplayStyle st
 	}
 }
 
-QString ConstellationMgr::getConstellationDisplayStyleString()
+QString ConstellationMgr::getConstellationDisplayStyleString(ConstellationDisplayStyle style)
 {
-	ConstellationDisplayStyle displayStyle = getConstellationDisplayStyle();
-	return (displayStyle == constellationsAbbreviated ? "abbreviated" : (displayStyle == constellationsNative ? "native" : "translated"));
+	return (style == constellationsAbbreviated ? "abbreviated" : (style == constellationsNative ? "native" : "translated"));
 }
 
 ConstellationMgr::ConstellationDisplayStyle ConstellationMgr::getConstellationDisplayStyle()
