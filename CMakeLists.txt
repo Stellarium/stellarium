@@ -206,6 +206,15 @@ ELSE()
      SET(GENERATE_STELMAINLIB 0)
 ENDIF()
 
+########### User Guide ###############
+IF(EXISTS "${CMAKE_SOURCE_DIR}/guide/guide.pdf")
+     MESSAGE(STATUS "Found Stellarium User Guide")
+     INSTALL(FILES guide/guide.pdf DESTINATION share/${PACKAGE}/guide)
+     SET(ISS_GUIDE "Name: \"{group}\\{cm:UserGuide}\"; Filename: \"{app}\\guide\\guide.pdf\"")
+ELSE()
+     SET(ISS_GUIDE "; No link to Stellarium User Guide")
+ENDIF()
+
 ########### Plugin setup #############
 
 SET(STELLARIUM_PLUGINS) # Global list of all the plugins.
