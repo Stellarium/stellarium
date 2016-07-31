@@ -329,7 +329,7 @@ QStringList Quasars::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	QStringList result;
 	if (flagShowQuasars)
 	{
-		result = StelObjectModule::listMatchingObjects(objPrefix, maxNbItem, useStartOfWords);
+		result = StelObjectModule::listMatchingObjects(objPrefix, maxNbItem, useStartOfWords, inEnglish);
 	}
 	return result;
 }
