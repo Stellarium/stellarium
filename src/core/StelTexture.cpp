@@ -57,7 +57,7 @@ StelTexture::~StelTexture()
 		}
 		id = 0;
 	}
-	if (networkReply != NULL)
+	if (networkReply)
 	{
 		networkReply->abort();
 		//networkReply->deleteLater();
