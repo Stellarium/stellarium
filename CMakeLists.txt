@@ -45,7 +45,7 @@ IF(NOT CMAKE_BUILD_TYPE)
     SET(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind Release RelWithDebInfo MinSizeRel." FORCE)
 ENDIF()
 
-SET(STELLARIUM_RELEASE_BUILD 0 CACHE BOOL "Set 1 to build as an official release (0 for development snapshots).")
+SET(STELLARIUM_RELEASE_BUILD 1 CACHE BOOL "Set 1 to build as an official release (0 for development snapshots).")
 IF(STELLARIUM_RELEASE_BUILD)
      ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
 ENDIF()
@@ -204,6 +204,15 @@ IF(WIN32 AND NOT MSVC)
      SET(GENERATE_STELMAINLIB 1)
 ELSE()
      SET(GENERATE_STELMAINLIB 0)
+ENDIF()
+
+########### User Guide ###############
+IF(EXISTS "${CMAKE_SOURCE_DIR}/guide/guide.pdf")
+     MESSAGE(STATUS "Found Stellarium User Guide")
+     INSTALL(FILES guide/guide.pdf DESTINATION share/${PACKAGE}/guide)
+     SET(ISS_GUIDE "Name: \"{group}\\{cm:UserGuide}\"; Filename: \"{app}\\guide\\guide.pdf\"")
+ELSE()
+     SET(ISS_GUIDE "; No link to Stellarium User Guide")
 ENDIF()
 
 ########### Plugin setup #############

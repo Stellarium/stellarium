@@ -1817,6 +1817,7 @@ void SolarSystem::setFlagCustomGrsSettings(bool b)
 	Planet::flagCustomGrsSettings=b;
 	// automatic saving of the setting
 	conf->setValue("astro/flag_grs_custom", b);
+	emit flagCustomGrsSettingsChanged(b);
 }
 
 bool SolarSystem::getFlagCustomGrsSettings()
@@ -1829,6 +1830,7 @@ void SolarSystem::setCustomGrsLongitude(int longitude)
 	Planet::customGrsLongitude = longitude;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_longitude", longitude);
+	emit customGrsLongitudeChanged(longitude);
 }
 
 int SolarSystem::getCustomGrsLongitude()
@@ -1841,6 +1843,7 @@ void SolarSystem::setCustomGrsDrift(double drift)
 	Planet::customGrsDrift = drift;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_drift", drift);
+	emit customGrsDriftChanged(drift);
 }
 
 double SolarSystem::getCustomGrsDrift()
@@ -1853,6 +1856,7 @@ void SolarSystem::setCustomGrsJD(double JD)
 	Planet::customGrsJD = JD;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_jd", JD);
+	emit customGrsJDChanged(JD);
 }
 
 double SolarSystem::getCustomGrsJD()

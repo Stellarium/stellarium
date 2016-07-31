@@ -108,7 +108,7 @@ Name: "{group}\{cm:UninstallProgram,Stellarium}"; Filename: "{uninstallexe}"
 Name: "{group}\config.ini"; Filename: "{userappdata}\Stellarium\config.ini"
 Name: "{group}\{cm:LastRunLog}"; Filename: "{userappdata}\Stellarium\log.txt"
 Name: "{group}\{cm:ChangeLog}"; Filename: "{app}\ChangeLog.rtf"
-Name: "{group}\{cm:UserGuide}"; Filename: "{app}\guide.pdf"
+@ISS_GUIDE@
 Name: "{commondesktop}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"; Tasks: desktopicon\common
 Name: "{userdesktop}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"; Tasks: desktopicon\user
 

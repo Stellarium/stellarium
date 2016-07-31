@@ -69,7 +69,7 @@ class GridLinesMgr : public StelModule
 			   READ getColorEclipticJ2000Grid
 			   WRITE setColorEclipticJ2000Grid
 			   NOTIFY eclipticJ2000GridColorChanged)
-	// NEW
+
 	Q_PROPERTY(bool eclipticGridDisplayed
 			   READ getFlagEclipticGrid
 			   WRITE setFlagEclipticGrid
