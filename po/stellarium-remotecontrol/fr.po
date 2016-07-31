@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-06-26 19:46+0700\n"
-"PO-Revision-Date: 2016-07-18 09:17+0000\n"
+"POT-Creation-Date: 2016-07-26 21:07+0700\n"
+"PO-Revision-Date: 2016-07-24 20:47+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-19 05:38+0000\n"
-"X-Generator: Launchpad (build 18147)\n"
+"X-Launchpad-Export-Date: 2016-07-27 05:56+0000\n"
+"X-Generator: Launchpad (build 18153)\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -23,11 +23,11 @@ msgstr "Impossible de récupérer la liste des actions"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:88
 msgid "Action '%1' not accepted by server: "
-msgstr ""
+msgstr "Action « %1 » pas acceptée par le serveur : "
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:95
 msgid "Error sending action '%1' to server: "
-msgstr ""
+msgstr "Erreur lors de l'envoi de l'action « %1 » au serveur : "
 
 #: plugins/RemoteControl/webroot/js/api/location.js:33
 #: plugins/RemoteControl/webroot/js/api/location.js:61
@@ -50,15 +50,15 @@ msgstr "Impossible de récupérer la liste des propriétés"
 #: plugins/RemoteControl/webroot/js/api/properties.js:89
 #: plugins/RemoteControl/webroot/js/api/properties.js:110
 msgid "Property '%1' not accepted by server: "
-msgstr ""
+msgstr "Propriété « %1 » pas acceptée par le serveur : "
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:96
 msgid "Error sending property '%1' to server: "
-msgstr ""
+msgstr "Erreur lors de l'envoi de la propriété « %1 » au serveur : "
 
 #: plugins/RemoteControl/webroot/js/api/remotecontrol.js:193
 msgid "Error sending command to server: "
-msgstr ""
+msgstr "Erreur lors de l'envoi de la commande au serveur : "
 
 #: plugins/RemoteControl/webroot/js/api/scripts.js:27
 msgid "Could not retrieve script list"
@@ -74,7 +74,7 @@ msgstr "Erreur (%1)"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:53
 msgid "Error performing Simbad lookup"
-msgstr ""
+msgstr "Erreur de traitement de la recherche Simbad"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:71 index.html:146
 #: tablet7in.html:230
@@ -83,11 +83,11 @@ msgstr "inactif"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:90
 msgid "Error loading object types"
-msgstr ""
+msgstr "Erreur de chargement des types d'objet"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:115
 msgid "Error getting object list"
-msgstr ""
+msgstr "Erreur lors de la récupération de la liste des objets"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:167
 msgid "waiting"
@@ -118,7 +118,7 @@ msgstr "Afficher tous les éléments"
 
 #: plugins/RemoteControl/webroot/js/ui/combobox.js:124
 msgid "Input did not match any item"
-msgstr ""
+msgstr "La saisie ne correspond à aucun élément"
 
 #: plugins/RemoteControl/webroot/js/ui/mainui.js:317
 msgid "No current selection"
@@ -159,7 +159,7 @@ msgstr "Actions et scripts"
 
 #: index.html:81 tablet7in.html:178
 msgid "Time jumps"
-msgstr ""
+msgstr "Sauts de temps"
 
 #: index.html:85 tablet7in.html:182
 msgid "Solar hour"
@@ -280,14 +280,16 @@ msgstr "Bas/droite"
 #: index.html:140 tablet7in.html:224
 msgid "Enter search term. Use TAB to navigate results."
 msgstr ""
+"Saisir un terme de recherche. Utiliser la touche TAB pour passer d'un "
+"résultat à l'autre."
 
 #: index.html:141 tablet7in.html:225
 msgid "Select and focus"
-msgstr ""
+msgstr "Sélectionner et centrer"
 
 #: index.html:168 tablet7in.html:255
 msgid "Quick select"
-msgstr ""
+msgstr "Sélection rapide"
 
 #: index.html:172 tablet7in.html:259
 msgid "Earth"
@@ -407,32 +409,34 @@ msgstr "Actions"
 
 #: index.html:430 tablet7in.html:595
 msgid "Run/toggle action"
-msgstr ""
+msgstr "Lancer l'action"
 
 #: index.html:441 tablet7in.html:630
 msgid "Planet map"
-msgstr ""
+msgstr "Carte de la planète"
 
 #: index.html:442 tablet7in.html:631
 msgid "Planet map pointer"
-msgstr ""
+msgstr "Pointeur de la carte de la planète"
 
 #: index.html:446 tablet7in.html:635
 msgid "Type to search location"
-msgstr ""
+msgstr "Taper pour rechercher une situation"
 
 #: index.html:491 tablet7in.html:681
 msgid "No response from server"
-msgstr ""
+msgstr "Pas de réponse du serveur"
 
 #: index.html:492
 msgid ""
 "No response from server since %1 seconds. Is Stellarium still running?"
 msgstr ""
+"Pas de réponse du serveur depuis %1 secondes. Stellarium fonctionne-t-il "
+"encore ?"
 
 #: tablet7in.html:32
 msgid "Time Jump"
-msgstr ""
+msgstr "Saut de temps"
 
 #: tablet7in.html:37
 msgid "Grids"
@@ -440,7 +444,7 @@ msgstr "Grilles"
 
 #: tablet7in.html:96
 msgid "View towards horizon at Azimuth"
-msgstr ""
+msgstr "Regarder vers l'horizon à l'azimut"
 
 #: tablet7in.html:128
 msgid "Reset"
@@ -543,6 +547,8 @@ msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
 msgstr ""
+"Cercles formés par l'axe de la Terre au cours de son déplacement autour des "
+"pôles de l'écliptique. Affichés uniquement sur Terre."
 
 #: tablet7in.html:406
 msgid "Solstices"
@@ -550,15 +556,15 @@ msgstr "Solstices"
 
 #: tablet7in.html:407
 msgid "Crossquarters"
-msgstr ""
+msgstr "Mi-saisons"
 
 #: tablet7in.html:408
 msgid "Major Standstill"
-msgstr ""
+msgstr "Stagnation majeure"
 
 #: tablet7in.html:409
 msgid "Minor Standstill"
-msgstr ""
+msgstr "Stagnation mineure"
 
 #: tablet7in.html:420
 msgid "Current Planet:"
@@ -570,7 +576,7 @@ msgstr "Favoris"
 
 #: tablet7in.html:617
 msgid "Show 1"
-msgstr ""
+msgstr "Démo 1"
 
 #: tablet7in.html:618
 msgid "Remove Labels and Images"
@@ -583,3 +589,5 @@ msgstr "Nettoyer l'écran"
 #: tablet7in.html:682
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
+"Pas de réponse du serveur depuis %1 secondes. Stellarium fonctionne-t-il "
+"encore ?"

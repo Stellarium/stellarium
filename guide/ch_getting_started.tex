@@ -5,7 +5,7 @@
 % ArdWar	2012
 % MisterE	2013
 % B. Gerdes	2013
-% G. Zotti	2014-2015
+% G. Zotti	2014-2016
 % Additions inserted from wiki 2015-12-26
 % GZ checked grammar and structure, added ANGLE details and Troubleshooting.
 % Content OK for 0.15+.
@@ -28,7 +28,7 @@ requirement is a contemporary graphics subsystem.
 
 \subsection{Minimum}
 \begin{itemize}
-\item Linux/Unix; Windows 7 and later (It may run on Vista, but unsupported. A special version for XP is still available); OS X 10.7.4 and later
+\item Linux/Unix; Windows 7 and later (It may run on Vista, but unsupported. A special version for XP is still available); OS X 10.8.5 and later
 \item 3D graphics card which supports OpenGL 3.0 and GLSL 1.3 (2008
   GeForce 8xxx and later, ATI/AMD Radeon HD-2xxx and later; Intel HD
   graphics (Core-i 2xxx and later)) or OpenGL ES 2.0 and GLSL ES 1.0
@@ -43,7 +43,7 @@ requirement is a contemporary graphics subsystem.
 \item Linux/Unix; Windows 7 and later; OS X 10.8.5 and later
 \item 3D graphics card which supports OpenGL 3.3 and above and GLSL1.3 and later
 \item 1 GB RAM or more
-\item 1.5 GB free on disk. (About 3GB extra required for the optional DE430/DE431 files.)
+\item 1.5 GB free on disk (About 3GB extra required for the optional DE430/DE431 files).
 \end{itemize}
  A dark room for realistic rendering --- details like the Milky Way, Zodiacal Light or
 star twinkling can't be seen in a bright room.
@@ -52,8 +52,7 @@ star twinkling can't be seen in a bright room.
 \section{Downloading}\index{Downloading}
 \label{sec:GettingStarted:Downloading}
 
-Download the correct package for your operating system directly from the main page,
-\url{http://stellarium.org}.
+Download the correct package for your operating system directly from the main page, \newline \url{http://stellarium.org}.
 
 \section{Installation}\index{Installation}
 \label{sec:GettingStarted:Installation}
@@ -63,9 +62,9 @@ Download the correct package for your operating system directly from the main pa
 \begin{enumerate}
 \item Double click on the installer file you downloaded:
 \begin{itemize}
-\item \file{stellarium-\StelVersion-win64.exe}
-\item \file{stellarium-\StelVersion-win32.exe} for Windows x86
-\item \file{stellarium-\StelVersion-classic-win32.exe} for XP
+\item \file{stellarium-\StelVersion-win64.exe} for 64-bit Windows 7 and later.
+\item \file{stellarium-\StelVersion-win32.exe} for 32-bit Windows 7 and later.
+\item \file{stellarium-\StelVersion-classic-win32.exe} for Windows XP and later.
 \end{itemize}
 \item Follow the on-screen instructions.
 \end{enumerate}
@@ -117,7 +116,7 @@ may be installed on your system. Select one of these to run Stellarium:
 \item[Stellarium] OpenGL version. This is the most efficient for
   modern PCs and should be used when you have installed appropriate
   OpenGL drivers. Note that some graphics cards are ``blacklisted'' by
-  Qt to immediately run via DirectX, you cannot force OpenGL in this
+  Qt to immediately run via ANGLE (Direct3D), you cannot force OpenGL in this
   case. This should not bother you.
 \item[Stellarium (ANGLE mode)] Uses Direct3D translation of the OpenGL
   rendering via ANGLE library.  Forces Direct3D version~9.
@@ -162,7 +161,7 @@ item in the GNOME or KDE application menus. If not, just open a
 terminal and type \texttt{stellarium}.
 
 
-\subsection{Troubleshooting}
+\section{Troubleshooting}
 \label{sec:GettingStarted:Running:Troubleshooting}
 
 Stellarium writes startup and other diagnostic messages into a
@@ -173,9 +172,10 @@ been found before.
 
 If you don't succeed in running Stellarium, please see the online
 forum\footnote{\url{https://launchpad.net/stellarium}}.  It includes
-FAQ (Frequently Asked Questions)\index{FAQ} and a general question
-section which may include further hints. Please make sure you have
-read and understood the FAQ before asking the same questions again.
+FAQ (Frequently Asked Questions, also Frequently Answered
+Questions)\index{FAQ} and a general question section which may include
+further hints. Please make sure you have read and understood the FAQ
+before asking the same questions again.
 
 
 %%% Local Variables: 
