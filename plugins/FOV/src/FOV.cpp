@@ -83,7 +83,7 @@ void FOV::init()
 	{
 		QString name = QString("actionSet_FOV_%1").arg(i);
 		QString shortcut = QString("Ctrl+Alt+%1").arg(i);
-		QString text = QString("%1 %2%3").arg(N_("Set FOV to")).arg(getQuickFOV(i)).arg(QChar(0x00B0));
+		QString text = QString("%1 %2%3").arg(q_("Set FOV to")).arg(getQuickFOV(i)).arg(QChar(0x00B0));
 		StelAction* action = addAction(name, section, text, mapper, "map()", shortcut);
 		mapper->setMapping(action,i);
 	}
