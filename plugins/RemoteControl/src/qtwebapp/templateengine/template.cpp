@@ -261,8 +261,9 @@ void Template::translate(ITemplateTranslationProvider &provider)
 			int len = match.capturedLength(0);
 			QString key = match.captured(1);
 
-			//replace escaped quotes
+			//replace escaped double and single quotes
 			key.replace("\\\"","\"");
+			key.replace("\\'", "'");
 
 			QString translation = provider.getTranslation(key);
 
@@ -279,6 +280,7 @@ void Template::translate(ITemplateTranslationProvider &provider)
 
 					//replace escaped quotes
 					param.replace("\\\"","\"");
+					param.replace("\\'", "'");
 
 					//apply the param
 					translation = translation.arg(param);
