@@ -42,18 +42,32 @@
 
 const QByteArray RequestHandler::AUTH_REALM = "Basic realm=\"Stellarium remote control\"";
 
-class StelTemplateTranslationProvider : public ITemplateTranslationProvider
+class HtmlTranslationProvider : public ITemplateTranslationProvider
 {
 public:
-	StelTemplateTranslationProvider()
+	HtmlTranslationProvider(StelTranslator* localInstance)
 	{
-		//create a translator for remote control specific stuff
-		rcTranslator = new StelTranslator("stellarium-remotecontrol",StelTranslator::globalTranslator->getTrueLocaleName());
+		rcTranslator = localInstance;
 	}
-
-	~StelTemplateTranslationProvider()
+	QString getTranslation(const QString &key) Q_DECL_OVERRIDE
 	{
-		delete rcTranslator;
+		//try to get a RemoteControl specific translation first
+		QString trans = rcTranslator->tryQtranslate(key);
+		if(trans.isNull())
+			trans = StelTranslator::globalTranslator->qtranslate(key);
+		//HTML escape + single quote escape
+		return trans.toHtmlEscaped().replace('\'',"&#39");
+	}
+private:
+	StelTranslator* rcTranslator;
+};
+
+class JsTranslationProvider : public ITemplateTranslationProvider
+{
+public:
+	JsTranslationProvider(StelTranslator* localInstance)
+	{
+		rcTranslator = localInstance;
 	}
 
 	QString getTranslation(const QString &key) Q_DECL_OVERRIDE
@@ -61,8 +75,9 @@ public:
 		//try to get a RemoteControl specific translation first
 		QString trans = rcTranslator->tryQtranslate(key);
 		if(trans.isNull())
-			return StelTranslator::globalTranslator->qtranslate(key);
-		return trans;
+			trans = StelTranslator::globalTranslator->qtranslate(key);
+		//JS escape single/double quotes
+		return trans.replace('\'',"\\'").replace('"',"\\\"");
 	}
 private:
 	StelTranslator* rcTranslator;
@@ -86,13 +101,12 @@ RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QOb
 	apiController->registerService(new ViewService("view",apiController));
 
 	staticFiles = new StaticFileController(settings,this);
-	connect(&StelApp::getInstance(),SIGNAL(languageChanged()),this,SLOT(refreshHtmlTemplate()));
-	refreshHtmlTemplate();
+	connect(&StelApp::getInstance(),SIGNAL(languageChanged()),this,SLOT(refreshTemplates()));
+	refreshTemplates();
 }
 
 RequestHandler::~RequestHandler()
 {
-
 }
 
 void RequestHandler::update(double deltaTime)
@@ -146,7 +160,7 @@ void RequestHandler::service(HttpRequest &request, HttpResponse &response)
 #ifndef QT_NO_DEBUG
 			//force fresh loading for each request in debug mode
 			//to allow for immediate display of changes
-			refreshHtmlTemplate();
+			refreshTemplates();
 #endif
 			//get a mime type
 			QByteArray mime = StaticFileController::getContentType(path,"utf-8");
@@ -179,12 +193,18 @@ void RequestHandler::setPassword(const QString &pw)
 	passwordReply = "Basic " + arr.toBase64();
 }
 
-void RequestHandler::refreshHtmlTemplate()
+void RequestHandler::refreshTemplates()
 {
-	//remove old tranlations
+	//multiple threads can potentially enter here,
+	//so this requires locking
+	QMutexLocker locker(&templateMutex);
+	//remove old translations
 	templateMap.clear();
+	//create a translator for remote control specific stuff, with the current language
+	StelTranslator rcTrans("stellarium-remotecontrol",StelTranslator::globalTranslator->getTrueLocaleName());
+	JsTranslationProvider jsTranslator(&rcTrans);
+	HtmlTranslationProvider htmlTranslator(&rcTrans);
 
-	StelTemplateTranslationProvider transProv;
 	QDir docRoot = QDir(staticFiles->getDocRoot());
 	//load the translate_files list
 	QFile transFileList(docRoot.absoluteFilePath("translate_files"));
@@ -202,8 +222,14 @@ void RequestHandler::refreshHtmlTemplate()
 			QFile f(docRoot.absoluteFilePath(line));
 			if(f.exists())
 			{
+				//use the HTML escapes by default,
+				//but use JS escapes for js files
+				ITemplateTranslationProvider* transProv = &htmlTranslator;
+				if(line.endsWith(".js"))
+					transProv = &jsTranslator;
+
 				Template tmp(f);
-				tmp.translate(transProv);
+				tmp.translate(*transProv);
 				//check if the file was correctly loaded
 				if(tmp.size()>0)
 				{
