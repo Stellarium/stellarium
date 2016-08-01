@@ -68,10 +68,11 @@ int Planet::customGrsLongitude = 216;
 QOpenGLShaderProgram* Planet::planetShaderProgram=NULL;
 Planet::PlanetShaderVars Planet::planetShaderVars;
 QOpenGLShaderProgram* Planet::ringPlanetShaderProgram=NULL;
-Planet::RingPlanetShaderVars Planet::ringPlanetShaderVars;
+Planet::PlanetShaderVars Planet::ringPlanetShaderVars;
 QOpenGLShaderProgram* Planet::moonShaderProgram=NULL;
-Planet::MoonShaderVars Planet::moonShaderVars;
+Planet::PlanetShaderVars Planet::moonShaderVars;
 QOpenGLShaderProgram* Planet::objShaderProgram=NULL;
+Planet::PlanetShaderVars Planet::objShaderVars;
 
 QMap<Planet::PlanetType, QString> Planet::pTypeMap;
 QMap<Planet::ApparentMagnitudeAlgorithm, QString> Planet::vMagAlgorithmMap;
@@ -1256,11 +1257,16 @@ static StelPainterLight light;
 
 void Planet::PlanetShaderVars::initLocations(QOpenGLShaderProgram* p)
 {
-	GL(projectionMatrix = p->uniformLocation("projectionMatrix"));
+	GL(p->bind());
+	//attributes
 	GL(texCoord = p->attributeLocation("texCoord"));
 	GL(unprojectedVertex = p->attributeLocation("unprojectedVertex"));
 	GL(vertex = p->attributeLocation("vertex"));
-	GL(texture = p->uniformLocation("tex"));
+	GL(normalIn = p->attributeLocation("normalIn"));
+
+	//common uniforms
+	GL(projectionMatrix = p->uniformLocation("projectionMatrix"));
+	GL(tex = p->uniformLocation("tex"));
 	GL(lightDirection = p->uniformLocation("lightDirection"));
 	GL(eyeDirection = p->uniformLocation("eyeDirection"));
 	GL(diffuseLight = p->uniformLocation("diffuseLight"));
@@ -1269,16 +1275,74 @@ void Planet::PlanetShaderVars::initLocations(QOpenGLShaderProgram* p)
 	GL(shadowData = p->uniformLocation("shadowData"));
 	GL(sunInfo = p->uniformLocation("sunInfo"));
 	GL(skyBrightness = p->uniformLocation("skyBrightness"));
+
+	// Moon-specific variables
+	GL(earthShadow = p->uniformLocation("earthShadow"));
+	GL(normalMap = p->uniformLocation("normalMap"));
+
+	// Rings-specific variables
+	GL(isRing = p->uniformLocation("isRing"));
+	GL(ring = p->uniformLocation("ring"));
+	GL(outerRadius = p->uniformLocation("outerRadius"));
+	GL(innerRadius = p->uniformLocation("innerRadius"));
+	GL(ringS = p->uniformLocation("ringS"));
+
+	GL(p->release());
+}
+
+QOpenGLShaderProgram* Planet::createShader(const QString& name, PlanetShaderVars& vars, const QByteArray& vSrc, const QByteArray& fSrc, const QByteArray& prefix, const QMap<QByteArray, int> &fixedAttributeLocations)
+{
+	QByteArray vPrefixed = prefix;
+	QByteArray fPrefixed = prefix;
+	vPrefixed+=vSrc;
+	fPrefixed+=fSrc;
+
+	QOpenGLShader vshader(QOpenGLShader::Vertex);
+	vshader.compileSourceCode(vPrefixed);
+	if (!vshader.log().isEmpty() && !vshader.log().contains("no warnings", Qt::CaseInsensitive)) { qWarning() << "Planet: Warnings/Errors while compiling" << name << "vertex shader: " << vshader.log(); }
+	if(!vshader.isCompiled())
+		return Q_NULLPTR;
+
+	QOpenGLShader fshader(QOpenGLShader::Fragment);
+	fshader.compileSourceCode(fPrefixed);
+	if (!fshader.log().isEmpty() && !fshader.log().contains("no warnings", Qt::CaseInsensitive)) { qWarning() << "Planet: Warnings/Errors while compiling" << name << "fragment shader: " << fshader.log(); }
+	if(!fshader.isCompiled())
+		return Q_NULLPTR;
+
+	QOpenGLShaderProgram* program = new QOpenGLShaderProgram();
+	if(!program->create())
+	{
+		qCritical()<<"Planet: Cannot create shader program object for"<<name;
+		delete program;
+		return Q_NULLPTR;
+	}
+	program->addShader(&vshader);
+	program->addShader(&fshader);
+
+	//process fixed attribute locations
+	QMap<QByteArray,int>::const_iterator it = fixedAttributeLocations.begin();
+	while(it!=fixedAttributeLocations.end())
+	{
+		program->bindAttributeLocation(it.key(),it.value());
+		++it;
+	}
+
+	if(!StelPainter::linkProg(program,name))
+	{
+		delete program;
+		return Q_NULLPTR;
+	}
+
+	vars.initLocations(program);
+
+	return program;
 }
 
 void Planet::initShader()
 {
 	qDebug() << "Initializing planets GL shaders... ";
-
 	shaderError = true;
 
-	//TODO: clean this up and reduce the copy-pasta style code...
-	
 	// Shader text is loaded from file
 	QString vFileName = StelFileMgr::findFile("data/shaders/planet.vert",StelFileMgr::File);
 	QString fFileName = StelFileMgr::findFile("data/shaders/planet.frag",StelFileMgr::File);
@@ -1313,145 +1377,40 @@ void Planet::initShader()
 	QByteArray fsrc = fFile.readAll();
 	fFile.close();
 
-	// Default planet shader program
-	QOpenGLShader vshader(QOpenGLShader::Vertex);
-	vshader.compileSourceCode(vsrc);
-	if (!vshader.log().isEmpty()) { qWarning() << "Planet: Warnings while compiling vshader: " << vshader.log(); }
-	
-	QOpenGLShader fshader(QOpenGLShader::Fragment);
-	fshader.compileSourceCode(fsrc);
-	if (!fshader.log().isEmpty()) { qWarning() << "Planet: Warnings while compiling fshader: " << fshader.log(); }
-
-	planetShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
-	planetShaderProgram->addShader(&vshader);
-	planetShaderProgram->addShader(&fshader);
-	GL(StelPainter::linkProg(planetShaderProgram, "planetShaderProgram"));
-	GL(planetShaderProgram->bind());
-	planetShaderVars.initLocations(planetShaderProgram);
-	GL(planetShaderProgram->release());
-	
-	// Planet with ring shader program
-	QByteArray arr = "#define RINGS_SUPPORT\n\n";
-	arr+=fsrc;
-	QOpenGLShader ringFragmentShader(QOpenGLShader::Fragment);
-	ringFragmentShader.compileSourceCode(arr.constData());
-	if (!ringFragmentShader.log().isEmpty()) { qWarning() << "Planet: Warnings while compiling ringFragmentShader: " << ringFragmentShader.log(); }
-
-	ringPlanetShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
-	ringPlanetShaderProgram->addShader(&vshader);
-	ringPlanetShaderProgram->addShader(&ringFragmentShader);
-	GL(StelPainter::linkProg(ringPlanetShaderProgram, "ringPlanetShaderProgram"));
-	GL(ringPlanetShaderProgram->bind());
-	ringPlanetShaderVars.initLocations(ringPlanetShaderProgram);
-	GL(ringPlanetShaderVars.isRing = ringPlanetShaderProgram->uniformLocation("isRing"));
-	GL(ringPlanetShaderVars.ring = ringPlanetShaderProgram->uniformLocation("ring"));
-	GL(ringPlanetShaderVars.outerRadius = ringPlanetShaderProgram->uniformLocation("outerRadius"));
-	GL(ringPlanetShaderVars.innerRadius = ringPlanetShaderProgram->uniformLocation("innerRadius"));
-	GL(ringPlanetShaderVars.ringS = ringPlanetShaderProgram->uniformLocation("ringS"));
-	GL(ringPlanetShaderProgram->release());
-	
-	// Moon shader program
-	arr = "#define IS_MOON\n\n";
-	arr+=vsrc;
-	QOpenGLShader moonVertexShader(QOpenGLShader::Vertex);
-	moonVertexShader.compileSourceCode(arr.constData());
-	if (!moonVertexShader.log().isEmpty()) { qWarning() << "Planet: Warnings while compiling moonVertexShader: " << moonVertexShader.log(); }
-	
-	arr = "#define IS_MOON\n\n";
-	arr+=fsrc;
-	QOpenGLShader moonFragmentShader(QOpenGLShader::Fragment);
-	moonFragmentShader.compileSourceCode(arr.constData());
-	if (!moonFragmentShader.log().isEmpty()) { qWarning() << "Planet: Warnings while compiling moonFragmentShader: " << moonFragmentShader.log(); }
-
-	moonShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
-	moonShaderProgram->addShader(&moonVertexShader);
-	moonShaderProgram->addShader(&moonFragmentShader);
-	GL(StelPainter::linkProg(moonShaderProgram, "moonShaderProgram"));
-	GL(moonShaderProgram->bind());
-	moonShaderVars.initLocations(moonShaderProgram);
-	GL(moonShaderVars.earthShadow = moonShaderProgram->uniformLocation("earthShadow"));
-	GL(moonShaderVars.normalMap = moonShaderProgram->uniformLocation("normalMap"));
-	GL(moonShaderProgram->release());
-
-	arr = "#define IS_OBJ\n\n";
-	arr += vsrc;
-	QOpenGLShader objVertexShader(QOpenGLShader::Vertex);
-	objVertexShader.compileSourceCode(arr.constData());
-	if(!objVertexShader.log().isEmpty()) { qWarning() <<"Planet: Warnings while compiling objVertexShader:" << objVertexShader.log(); }
-
-	arr = "#define IS_OBJ\n\n";
-	arr += fsrc;
-	QOpenGLShader objFragmentShader(QOpenGLShader::Fragment);
-	objFragmentShader.compileSourceCode(arr.constData());
-	if(!objFragmentShader.log().isEmpty()) { qWarning() <<"Planet: Warnings while compiling objFragmentShader:" << objFragmentShader.log(); }
-
-	objShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
-	objShaderProgram->addShader(&objVertexShader);
-	objShaderProgram->addShader(&objFragmentShader);
-
-	//bind fixed StelOpenGLArray attribute locations
-	objShaderProgram->bindAttributeLocation("unprojectedVertex", StelOpenGLArray::ATTLOC_VERTEX);
-	objShaderProgram->bindAttributeLocation("texCoord", StelOpenGLArray::ATTLOC_TEXCOORD);
-	objShaderProgram->bindAttributeLocation("normalIn", StelOpenGLArray::ATTLOC_NORMAL);
-
-	GL(StelPainter::linkProg(objShaderProgram, "objShaderProgram"));
-	//no uniform/attrib locations for now, all done in draw method
-
 	shaderError = false;
 
-	//check if the programs are valid, and delete them if they are not
-	if(!planetShaderProgram->isLinked())
-	{
-		qCritical()<<"Failed to link planet shader program";
-		delete planetShaderProgram;
-		planetShaderProgram = NULL;
-		shaderError = true;
-	}
-	if(!ringPlanetShaderProgram->isLinked())
-	{
-		qCritical()<<"Failed to link ring planet shader program";
-		delete ringPlanetShaderProgram;
-		ringPlanetShaderProgram = NULL;
-		shaderError = true;
-	}
-	if(!moonShaderProgram->isLinked())
-	{
-		qCritical()<<"Failed to link moon shader program";
-		delete moonShaderProgram;
-		moonShaderProgram = NULL;
-		shaderError = true;
-	}
-	if(!objShaderProgram->isLinked())
-	{
-		qCritical()<<"Failed to link OBJ shader program";
-		delete objShaderProgram;
-		objShaderProgram = NULL;
-		shaderError = true;
-	}
+	// Default planet shader program
+	planetShaderProgram = createShader("planetShaderProgram",planetShaderVars,vsrc,fsrc);
+	// Planet with ring shader program
+	ringPlanetShaderProgram = createShader("ringPlanetShaderProgram",ringPlanetShaderVars,vsrc,fsrc,"#define RINGS_SUPPORT\n\n");
+	// Moon shader program
+	moonShaderProgram = createShader("moonShaderProgram",moonShaderVars,vsrc,fsrc,"#define IS_MOON\n\n");
+	// OBJ model shader program
+	// we REQUIRE some fixed attribute locations here
+	QMap<QByteArray,int> attrLoc;
+	attrLoc.insert("unprojectedVertex", StelOpenGLArray::ATTLOC_VERTEX);
+	attrLoc.insert("texCoord", StelOpenGLArray::ATTLOC_TEXCOORD);
+	attrLoc.insert("normalIn", StelOpenGLArray::ATTLOC_NORMAL);
+	objShaderProgram = createShader("objShaderProgram",objShaderVars,vsrc,fsrc,"#define IS_OBJ\n\n",attrLoc);
+
+	//check if ALL shaders have been created correctly
+	shaderError = !(planetShaderProgram&&
+			ringPlanetShaderProgram&&
+			moonShaderProgram&&
+			objShaderProgram);
 }
 
 void Planet::deinitShader()
 {
-	if(planetShaderProgram)
-	{
-		delete planetShaderProgram;
-		planetShaderProgram = NULL;
-	}
-	if(ringPlanetShaderProgram)
-	{
-		delete ringPlanetShaderProgram;
-		ringPlanetShaderProgram = NULL;
-	}
-	if(moonShaderProgram)
-	{
-		delete moonShaderProgram;
-		moonShaderProgram = NULL;
-	}
-	if(objShaderProgram)
-	{
-		delete objShaderProgram;
-		objShaderProgram = NULL;
-	}
+	//note that it is not necessary to check for NULL before delete
+	delete planetShaderProgram;
+	planetShaderProgram = Q_NULLPTR;
+	delete ringPlanetShaderProgram;
+	ringPlanetShaderProgram = Q_NULLPTR;
+	delete moonShaderProgram;
+	moonShaderProgram = Q_NULLPTR;
+	delete objShaderProgram;
+	objShaderProgram = Q_NULLPTR;
 }
 
 void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz, bool drawOnlyRing)
@@ -1698,6 +1657,67 @@ void Planet::computeModelMatrix(Mat4d &result) const
 	}
 }
 
+Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars) const
+{
+	RenderData data;
+
+	const PlanetP sun = GETSTELMODULE(SolarSystem)->getSun();
+	const StelProjectorP& projector = painter.getProjector();
+
+	const Mat4f& m = projector->getProjectionMatrix();
+	const QMatrix4x4 qMat = m.convertToQMatrix();
+
+	computeModelMatrix(data.modelMatrix);
+	// used to project from solar system into local space
+	data.mTarget = data.modelMatrix.inverse();
+
+	data.shadowCandidates = getCandidatesForShadow();
+	// Our shader doesn't support more than 4 planets creating shadow
+	if (data.shadowCandidates.size()>4)
+	{
+		qDebug() << "Too many satellite shadows, some won't be displayed";
+		data.shadowCandidates.resize(4);
+	}
+	Mat4d shadowModelMatrix;
+	for (int i=0;i<data.shadowCandidates.size();++i)
+	{
+		data.shadowCandidates.at(i)->computeModelMatrix(shadowModelMatrix);
+		const Vec4d position = data.mTarget * shadowModelMatrix.getColumn(3);
+		data.shadowCandidatesData(0, i) = position[0];
+		data.shadowCandidatesData(1, i) = position[1];
+		data.shadowCandidatesData(2, i) = position[2];
+		data.shadowCandidatesData(3, i) = data.shadowCandidates.at(i)->getRadius();
+	}
+
+	Vec3f lightPos3(light.position[0], light.position[1], light.position[2]);
+	projector->getModelViewTransform()->backward(lightPos3);
+	lightPos3.normalize();
+
+	data.eyePos = StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos();
+	//qDebug() << eyePos[0] << " " << eyePos[1] << " " << eyePos[2] << " --> ";
+	// Use refractionOff for avoiding flickering Moon. (Bug #1411958)
+	StelApp::getInstance().getCore()->getHeliocentricEclipticModelViewTransform(StelCore::RefractionOff)->forward(data.eyePos);
+	//qDebug() << "-->" << eyePos[0] << " " << eyePos[1] << " " << eyePos[2];
+	projector->getModelViewTransform()->backward(data.eyePos);
+	data.eyePos.normalize();
+	//qDebug() << " -->" << eyePos[0] << " " << eyePos[1] << " " << eyePos[2];
+	LandscapeMgr* lmgr=GETSTELMODULE(LandscapeMgr);
+	Q_ASSERT(lmgr);
+
+	GL(shader->setUniformValue(shaderVars.projectionMatrix, qMat));
+	GL(shader->setUniformValue(shaderVars.lightDirection, lightPos3[0], lightPos3[1], lightPos3[2]));
+	GL(shader->setUniformValue(shaderVars.eyeDirection, data.eyePos[0], data.eyePos[1], data.eyePos[2]));
+	GL(shader->setUniformValue(shaderVars.diffuseLight, light.diffuse[0], light.diffuse[1], light.diffuse[2]));
+	GL(shader->setUniformValue(shaderVars.ambientLight, light.ambient[0], light.ambient[1], light.ambient[2]));
+	GL(shader->setUniformValue(shaderVars.tex, 0));
+	GL(shader->setUniformValue(shaderVars.shadowCount, data.shadowCandidates.size()));
+	GL(shader->setUniformValue(shaderVars.shadowData, data.shadowCandidatesData));
+	GL(shader->setUniformValue(shaderVars.sunInfo, data.mTarget[12], data.mTarget[13], data.mTarget[14], sun->getRadius()));
+	GL(shader->setUniformValue(shaderVars.skyBrightness, lmgr->getLuminance()));
+
+	return data;
+}
+
 void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 {
 	if (texMap)
@@ -1722,8 +1742,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	Planet3DModel model;
 	sSphere(&model, radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
 	
-	QVector<float> projectedVertexArr;
-	projectedVertexArr.resize(model.vertexArr.size());
+	QVector<float> projectedVertexArr(model.vertexArr.size());
 	for (int i=0;i<model.vertexArr.size()/3;++i)
 		painter->getProjector()->project(*((Vec3f*)(model.vertexArr.constData()+i*3)), *((Vec3f*)(projectedVertexArr.data()+i*3)));
 	
@@ -1777,62 +1796,8 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	}
 
 	GL(shader->bind());
-	
-	const Mat4f& m = painter->getProjector()->getProjectionMatrix();
-	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);
-	
-	Mat4d modelMatrix;
-	computeModelMatrix(modelMatrix);
-	// TODO explain this
-	const Mat4d mTarget = modelMatrix.inverse();
 
-	QMatrix4x4 shadowCandidatesData;
-	QVector<const Planet*> shadowCandidates = getCandidatesForShadow();
-	// Our shader doesn't support more than 4 planets creating shadow
-	if (shadowCandidates.size()>4)
-	{
-		qDebug() << "Too many satellite shadows, some won't be displayed";
-		shadowCandidates.resize(4);
-	}
-	for (int i=0;i<shadowCandidates.size();++i)
-	{
-		shadowCandidates.at(i)->computeModelMatrix(modelMatrix);
-		const Vec4d position = mTarget * modelMatrix.getColumn(3);
-		shadowCandidatesData(0, i) = position[0];
-		shadowCandidatesData(1, i) = position[1];
-		shadowCandidatesData(2, i) = position[2];
-		shadowCandidatesData(3, i) = shadowCandidates.at(i)->getRadius();
-	}
-	
-	const StelProjectorP& projector = painter->getProjector();
-	
-	Vec3f lightPos3(light.position[0], light.position[1], light.position[2]);
-	projector->getModelViewTransform()->backward(lightPos3);
-	lightPos3.normalize();
-	
-	Vec3d eyePos = StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos();	
-	//qDebug() << eyePos[0] << " " << eyePos[1] << " " << eyePos[2] << " --> ";
-	// Use refractionOff for avoiding flickering Moon. (Bug #1411958)
-	StelApp::getInstance().getCore()->getHeliocentricEclipticModelViewTransform(StelCore::RefractionOff)->forward(eyePos);
-	//qDebug() << "-->" << eyePos[0] << " " << eyePos[1] << " " << eyePos[2];
-	projector->getModelViewTransform()->backward(eyePos);
-	eyePos.normalize();
-	//qDebug() << " -->" << eyePos[0] << " " << eyePos[1] << " " << eyePos[2];
-	LandscapeMgr* lmgr=GETSTELMODULE(LandscapeMgr);
-	Q_ASSERT(lmgr);
-
-
-	GL(shader->setUniformValue(shaderVars->projectionMatrix, qMat));
-	GL(shader->setUniformValue(shaderVars->lightDirection, lightPos3[0], lightPos3[1], lightPos3[2]));
-	GL(shader->setUniformValue(shaderVars->eyeDirection, eyePos[0], eyePos[1], eyePos[2]));
-	GL(shader->setUniformValue(shaderVars->diffuseLight, light.diffuse[0], light.diffuse[1], light.diffuse[2]));
-	GL(shader->setUniformValue(shaderVars->ambientLight, light.ambient[0], light.ambient[1], light.ambient[2]));
-	GL(shader->setUniformValue(shaderVars->texture, 0));
-	GL(shader->setUniformValue(shaderVars->shadowCount, shadowCandidates.size()));
-	GL(shader->setUniformValue(shaderVars->shadowData, shadowCandidatesData));
-	GL(shader->setUniformValue(shaderVars->sunInfo, mTarget[12], mTarget[13], mTarget[14], ssm->getSun()->getRadius()));
-	GL(shader->setUniformValue(shaderVars->skyBrightness, lmgr->getLuminance()));
-
+	RenderData rData = setCommonShaderUniforms(*painter,shader,*shaderVars);
 	
 	if (rings!=NULL)
 	{
@@ -1848,7 +1813,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	{
 		GL(normalMap->bind(2));
 		GL(moonShaderProgram->setUniformValue(moonShaderVars.normalMap, 2));
-		if (!shadowCandidates.isEmpty())
+		if (!rData.shadowCandidates.isEmpty())
 		{
 			GL(texEarthShadow->bind(3));
 			GL(moonShaderProgram->setUniformValue(moonShaderVars.earthShadow, 3));
@@ -1885,11 +1850,11 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 		sRing(&ringModel, rings->radiusMin, rings->radiusMax, 128, 32);
 		
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.isRing, true));
-		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.texture, 2));
+		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.tex, 2));
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.ringS, 1));
 		
-		computeModelMatrix(modelMatrix);
-		const Vec4d position = mTarget * modelMatrix.getColumn(3);
+		QMatrix4x4 shadowCandidatesData;
+		const Vec4d position = rData.mTarget * rData.modelMatrix.getColumn(3);
 		shadowCandidatesData(0, 0) = position[0];
 		shadowCandidatesData(1, 0) = position[1];
 		shadowCandidatesData(2, 0) = position[2];
@@ -1908,12 +1873,12 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 		GL(ringPlanetShaderProgram->setAttributeArray(ringPlanetShaderVars.texCoord, (const GLfloat*)ringModel.texCoordArr.constData(), 2));
 		GL(ringPlanetShaderProgram->enableAttributeArray(ringPlanetShaderVars.texCoord));
 		
-		if (eyePos[2]<0)
+		if (rData.eyePos[2]<0)
 			glCullFace(GL_FRONT);
 					
 		GL(glDrawElements(GL_TRIANGLES, ringModel.indiceArr.size(), GL_UNSIGNED_SHORT, ringModel.indiceArr.constData()));
 		
-		if (eyePos[2]<0)
+		if (rData.eyePos[2]<0)
 			glCullFace(GL_BACK);
 		
 		glDisable(GL_DEPTH_TEST);
@@ -2062,57 +2027,7 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 	GL(objShaderProgram->enableAttributeArray("vertex"));
 	objModel->projPosBuffer->release();
 
-	const Mat4f& m = painter->getProjector()->getProjectionMatrix();
-	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);
-
-	Mat4d modelMatrix;
-	computeModelMatrix(modelMatrix);
-	// TODO explain this
-	const Mat4d mTarget = modelMatrix.inverse();
-
-	QMatrix4x4 shadowCandidatesData;
-	QVector<const Planet*> shadowCandidates = getCandidatesForShadow();
-	// Our shader doesn't support more than 4 planets creating shadow
-	if (shadowCandidates.size()>4)
-	{
-		qDebug() << "Too many satellite shadows, some won't be displayed";
-		shadowCandidates.resize(4);
-	}
-	for (int i=0;i<shadowCandidates.size();++i)
-	{
-		shadowCandidates.at(i)->computeModelMatrix(modelMatrix);
-		const Vec4d position = mTarget * modelMatrix.getColumn(3);
-		shadowCandidatesData(0, i) = position[0];
-		shadowCandidatesData(1, i) = position[1];
-		shadowCandidatesData(2, i) = position[2];
-		shadowCandidatesData(3, i) = shadowCandidates.at(i)->getRadius();
-	}
-
-	Vec3f lightPos3(light.position[0], light.position[1], light.position[2]);
-	projector->getModelViewTransform()->backward(lightPos3);
-	lightPos3.normalize();
-
-	Vec3d eyePos = StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos();
-	//qDebug() << eyePos[0] << " " << eyePos[1] << " " << eyePos[2] << " --> ";
-	// Use refractionOff for avoiding flickering Moon. (Bug #1411958)
-	StelApp::getInstance().getCore()->getHeliocentricEclipticModelViewTransform(StelCore::RefractionOff)->forward(eyePos);
-	//qDebug() << "-->" << eyePos[0] << " " << eyePos[1] << " " << eyePos[2];
-	projector->getModelViewTransform()->backward(eyePos);
-	eyePos.normalize();
-	//qDebug() << " -->" << eyePos[0] << " " << eyePos[1] << " " << eyePos[2];
-	const LandscapeMgr* lmgr=GETSTELMODULE(LandscapeMgr);
-	const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
-
-	GL(objShaderProgram->setUniformValue("projectionMatrix", qMat));
-	GL(objShaderProgram->setUniformValue("lightDirection", lightPos3[0], lightPos3[1], lightPos3[2]));
-	GL(objShaderProgram->setUniformValue("eyeDirection", eyePos[0], eyePos[1], eyePos[2]));
-	GL(objShaderProgram->setUniformValue("diffuseLight", light.diffuse[0], light.diffuse[1], light.diffuse[2]));
-	GL(objShaderProgram->setUniformValue("ambientLight", light.ambient[0], light.ambient[1], light.ambient[2]));
-	GL(objShaderProgram->setUniformValue("tex", 0));
-	GL(objShaderProgram->setUniformValue("shadowCount", shadowCandidates.size()));
-	GL(objShaderProgram->setUniformValue("shadowData", shadowCandidatesData));
-	GL(objShaderProgram->setUniformValue("sunInfo", mTarget[12], mTarget[13], mTarget[14], ssm->getSun()->getRadius()));
-	GL(objShaderProgram->setUniformValue("skyBrightness", lmgr->getLuminance()));
+	setCommonShaderUniforms(*painter,objShaderProgram,objShaderVars);
 
 	//draw that model using the array wrapper
 	objModel->arr->draw();

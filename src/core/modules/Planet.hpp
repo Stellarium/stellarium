@@ -411,14 +411,19 @@ protected:
 	static double customGrsJD;		// Initial JD for calculation of position of Great Red Spot
 	static int customGrsLongitude;		// Longitude of Great Red Spot (System II, degrees)
 	static double customGrsDrift;		// Annual drift of Great Red Spot position (degrees)
-	
+
+private:
 	// Shader-related variables
 	struct PlanetShaderVars {
-		int projectionMatrix;
+		// Vertex attributes
 		int texCoord;
 		int unprojectedVertex;
 		int vertex;
-		int texture;
+		int normalIn;
+
+		// Common uniforms
+		int projectionMatrix;
+		int tex;
 		int lightDirection;
 		int eyeDirection;
 		int diffuseLight;
@@ -427,36 +432,50 @@ protected:
 		int shadowData;
 		int sunInfo;
 		int skyBrightness;
-		
-		void initLocations(QOpenGLShaderProgram*);
-	};
-	static PlanetShaderVars planetShaderVars;
-	static QOpenGLShaderProgram* planetShaderProgram;
 
-	// Shader-related variables
-	struct RingPlanetShaderVars : public PlanetShaderVars {
+		// Moon-specific variables
+		int earthShadow;
+		int normalMap;
+
 		// Rings-specific variables
 		int isRing;
 		int ring;
 		int outerRadius;
 		int innerRadius;
 		int ringS;
+		
+		void initLocations(QOpenGLShaderProgram*);
 	};
-	static RingPlanetShaderVars ringPlanetShaderVars;
+
+	//! Encapsulates some calculated information used for rendering
+	struct RenderData
+	{
+		Mat4d modelMatrix;
+		Mat4d mTarget;
+		QVector<const Planet*> shadowCandidates;
+		QMatrix4x4 shadowCandidatesData;
+		Vec3d eyePos;
+	};
+
+	//! Calculates and uploads the common shader uniforms (projection matrix, texture, lighting&shadow data)
+	RenderData setCommonShaderUniforms(const StelPainter &painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars) const;
+
+	static PlanetShaderVars planetShaderVars;
+	static QOpenGLShaderProgram* planetShaderProgram;
+
+	static PlanetShaderVars ringPlanetShaderVars;
 	static QOpenGLShaderProgram* ringPlanetShaderProgram;
 	
-	struct MoonShaderVars : public PlanetShaderVars {
-		// Moon-specific variables
-		int earthShadow;
-		int normalMap;
-	};
-	static MoonShaderVars moonShaderVars;
+	static PlanetShaderVars moonShaderVars;
 	static QOpenGLShaderProgram* moonShaderProgram;
 
+	static PlanetShaderVars objShaderVars;
 	static QOpenGLShaderProgram* objShaderProgram;
 	
 	static void initShader();
 	static void deinitShader();
+
+	static QOpenGLShaderProgram* createShader(const QString& name, PlanetShaderVars& vars, const QByteArray& vSrc, const QByteArray& fSrc, const QByteArray& prefix=QByteArray(), const QMap<QByteArray,int>& fixedAttributeLocations=QMap<QByteArray,int>());
 };
 
 #endif // _PLANET_HPP_
