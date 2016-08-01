@@ -821,9 +821,10 @@ static inline void fIter2(const StelProjectorP& prj, std::function<void(double t
 						  QLinkedList<Vec3d>& vertexList, const QLinkedList<Vec3d>::iterator& iter,
 						  int minN, int nbI=0, bool checkCrossDiscontinuity=true)
 {
-	const double maxDist = 50 * 50; // XXX: should be an argument.
+	const int maxNbI = 20;     // XXX: should be an argument.
+	const double maxDist = 10; // XXX: should be an argument.
 	const bool crossDiscontinuity = checkCrossDiscontinuity && prj->intersectViewportDiscontinuity(p1, p2);
-	if (crossDiscontinuity && nbI>=15)
+	if (crossDiscontinuity && nbI>=maxNbI)
 	{
 		win1[2]=-2.;
 		win2[2]=-2.;
@@ -850,7 +851,7 @@ static inline void fIter2(const StelProjectorP& prj, std::function<void(double t
 	if (nbI >= minN && (!prj->checkInViewport(win1) && !prj->checkInViewport(win2) && !prj->checkInViewport(win3)))
 		return;
 
-	if ((cosAngle>-0.999f || dist>maxDist || crossDiscontinuity || nbI<minN) && nbI<15)
+	if ((cosAngle>-0.999f || dist>maxDist || crossDiscontinuity || nbI<minN) && nbI<maxNbI)
 	{
 		// Use the 3rd component of the vector to store whether the vertex is valid
 		win3[2]= isValidVertex ? 1.0 : -1.;
