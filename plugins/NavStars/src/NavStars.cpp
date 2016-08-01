@@ -29,6 +29,7 @@
 #include "StelFileMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StarMgr.hpp"
+#include "StelPropertyMgr.hpp"
 #include "StelUtils.hpp"
 #include "NavStars.hpp"
 #include "NavStarsWindow.hpp"
@@ -60,15 +61,12 @@ StelPluginInfo NavStarsStelPluginInterface::getPluginInfo() const
 
 NavStars::NavStars()
 	: currentNSSet(AngloAmerican)
-	, starNamesState(false)
 	, toolbarButton(NULL)
 {
 	setObjectName("NavStars");
 	conf = StelApp::getInstance().getSettings();
+	propMgr = StelApp::getInstance().getStelPropertyManager();
 	mainWindow = new NavStarsWindow();
-
-	// Get the manager of stars for manipulation of the stars labels
-	smgr = GETSTELMODULE(StarMgr);
 }
 
 
@@ -129,9 +127,7 @@ void NavStars::init()
 	}
 
 	// Sync global settings for stars labels
-	connect(smgr, SIGNAL(starLabelsDisplayedChanged(bool)),
-	        this, SLOT(starNamesChanged(bool)));
-	starNamesState = false;
+	connect(GETSTELMODULE(StarMgr), SIGNAL(starLabelsDisplayedChanged(bool)), this, SLOT(starNamesChanged(bool)));
 }
 
 
@@ -215,20 +211,12 @@ void NavStars::update(double deltaTime)
 
 void NavStars::setNavStarsMarks(const bool b)
 {
-	if (b)
+	if (b != getNavStarsMarks())
 	{
-		// Save the display state of the star labels and hide them.
-		starNamesState = smgr->getFlagLabels();
-		smgr->setFlagLabels(false);
+		propMgr->setStelPropertyValue("StarMgr.flagLabelsDisplayed", !b);
+		markerFader = b;
+		emit navStarsMarksChanged(b);
 	}
-	else
-	{
-		// Restore the star labels state.
-		smgr->setFlagLabels(starNamesState);
-	}
-
-	markerFader = b;
-	emit navStarsMarksChanged(b);
 }
 
 
@@ -242,7 +230,6 @@ void NavStars::starNamesChanged(const bool b)
 {
 	if (b && getNavStarsMarks())
 	{
-		starNamesState=true;
 		setNavStarsMarks(false);
 	}
 }
