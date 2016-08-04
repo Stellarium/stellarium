@@ -1880,6 +1880,12 @@ void Planet::drawOrbit(const StelCore* core)
 	if (!re.siderealPeriod)
 		return;
 
+	// Save a few attributes that we are going to override during the
+	// orbit computation.
+	Vec3d eclipticPosSave = eclipticPos;
+	Mat4d rotLocalToParentSave = rotLocalToParent;
+	float axisRotationSave = axisRotation;
+
 	const StelProjectorP prj = core->getProjection(StelCore::FrameHeliocentricEclipticJ2000);
 
 	StelPainter sPainter(prj);
@@ -1907,6 +1913,11 @@ void Planet::drawOrbit(const StelCore* core)
 			}
 			*p = getHeliocentricPos(pos);
 	});
+
+	// Restore attributes.
+	eclipticPos = eclipticPosSave;
+	rotLocalToParent = rotLocalToParentSave;
+	axisRotation= axisRotationSave;
 }
 
 void Planet::update(int deltaTime)
