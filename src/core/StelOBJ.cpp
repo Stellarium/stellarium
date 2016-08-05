@@ -1,5 +1,6 @@
 /*
  * Stellarium
+ * Copyright (C) 2012 Andrei Borza
  * Copyright (C) 2016 Florian Schaukowitsch
  *
  * This program is free software; you can redistribute it and/or
@@ -46,7 +47,7 @@ void StelOBJ::clear()
 	*this = StelOBJ();
 }
 
-bool StelOBJ::load(const QString& filename)
+bool StelOBJ::load(const QString& filename, const VertexOrder vertexOrder)
 {
 	qCDebug(stelOBJ)<<"Loading"<<filename;
 
@@ -85,11 +86,11 @@ bool StelOBJ::load(const QString& filename)
 		buf.open(QIODevice::ReadOnly);
 
 		//perform actual load
-		return load(buf,fi.canonicalPath());
+		return load(buf,fi.canonicalPath(),vertexOrder);
 	}
 
 	//perform actual load
-	return load(file,fi.canonicalPath());
+	return load(file,fi.canonicalPath(),vertexOrder);
 }
 
 //macro to test out different ways of comparison and their performance
@@ -361,10 +362,11 @@ bool StelOBJ::parseFace(const ParseParams& params, const V3Vec& posList, const V
 		}
 
 		//check if the vertex is already in the vertex cache
-		if(vertCache.contains(v))
+		VertexCache::const_iterator it = vertCache.find(v);
+		if(it!=vertCache.end())
 		{
 			//cache hit, reuse index
-			vIdx.append(vertCache.value(v));
+			vIdx.append(*it);
 		}
 		else
 		{
@@ -408,7 +410,7 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 	}
 
 	QTextStream stream(&file);
-	Material* curMaterial = NULL;
+	Material* curMaterial = Q_NULLPTR;
 	int lineNr = 0;
 
 	while(!stream.atEnd())
@@ -519,7 +521,7 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 	return list;
 }
 
-bool StelOBJ::load(QIODevice& device, const QString &basePath)
+bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder vertexOrder)
 {
 	clear();
 
@@ -561,7 +563,34 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath)
 			}
 			else if(CMD_CMP("v"))
 			{
-				ok = parseVec3(splits,INC_LIST(posList));
+				//we have to handle the vertex order
+				Vec3f& target = INC_LIST(posList);
+				ok = parseVec3(splits,target);
+				switch(vertexOrder)
+				{
+					case XYZ:
+						//no change
+						break;
+					case XZY:
+						target.set(target[0],-target[2],target[1]);
+						break;
+					case YXZ:
+						target.set(target[1],target[0],target[2]);
+						break;
+					case YZX:
+						target.set(target[1],target[2],target[0]);
+						break;
+					case ZXY:
+						target.set(target[2],target[0],target[1]);
+						break;
+					case ZYX:
+						target.set(target[2],target[1],target[0]);
+						break;
+					default:
+						Q_ASSERT_X(0,"StelOBJ::load","invalid vertex order found");
+						qCWarning(stelOBJ) << "Vertex order"<<vertexOrder<<"not implemented, assuming XYZ";
+						break;
+				}
 			}
 			else if(CMD_CMP("vt"))
 			{
@@ -617,7 +646,7 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath)
 					m_objectMap.insert(obj.name,m_objects.size()-1);
 					state.currentObject = &obj;
 					//also clear material group to make sure a new group is created
-					state.currentMaterialGroup = NULL;
+					state.currentMaterialGroup = Q_NULLPTR;
 				}
 			}
 			else if(!cmd.startsWith('#'))
@@ -634,6 +663,8 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath)
 		}
 	}
 
+	device.close();
+
 	//finished loading, squeeze the arrays to save some memory
 	m_vertices.squeeze();
 	m_indices.squeeze();
@@ -642,8 +673,6 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath)
 	qCDebug(stelOBJ, "Parsed %d positions, %d normals, %d texture coordinates, %d materials",
 		posList.size(), normalList.size(), texList.size(), m_materials.size());
 	qCDebug(stelOBJ, "Created %d vertices, %d faces, %d objects", m_vertices.size(), getFaceCount(), m_objects.size());
-
-	device.close();
 
 	//perform post processing
 	performPostProcessing();
@@ -685,11 +714,184 @@ void StelOBJ::Object::postprocess(const StelOBJ &obj, Vec3d &centroid)
 	this->centroid = centroid.toVec3f();
 }
 
-void StelOBJ::performPostProcessing()
+void StelOBJ::generateTangents()
 {
-	QElapsedTimer timer;
-	timer.start();
+	//Code adapted from old OBJ loader (Andrei Borza)
 
+	const unsigned int *pTriangle = Q_NULLPTR;
+	Vertex *pVertex0 = Q_NULLPTR;
+	Vertex *pVertex1 = Q_NULLPTR;
+	Vertex *pVertex2 = Q_NULLPTR;
+	float edge1[3] = {0.0f, 0.0f, 0.0f};
+	float edge2[3] = {0.0f, 0.0f, 0.0f};
+	float texEdge1[2] = {0.0f, 0.0f};
+	float texEdge2[2] = {0.0f, 0.0f};
+	float tangent[3] = {0.0f, 0.0f, 0.0f};
+	float bitangent[3] = {0.0f, 0.0f, 0.0f};
+	float det = 0.0f;
+	float nDotT = 0.0f;
+	float bDotB = 0.0f;
+	float invlength = 0.0f;
+	const int totalVertices = m_vertices.size();
+	const int totalTriangles = m_indices.size() / 3;
+
+	// Initialize all the vertex tangents and bitangents.
+	for (int i=0; i<totalVertices; ++i)
+	{
+		pVertex0 = &m_vertices[i];
+
+		pVertex0->tangent[0] = 0.0f;
+		pVertex0->tangent[1] = 0.0f;
+		pVertex0->tangent[2] = 0.0f;
+		pVertex0->tangent[3] = 0.0f;
+
+		pVertex0->bitangent[0] = 0.0f;
+		pVertex0->bitangent[1] = 0.0f;
+		pVertex0->bitangent[2] = 0.0f;
+	}
+
+	// Calculate the vertex tangents and bitangents.
+	for (int i=0; i<totalTriangles; ++i)
+	{
+		pTriangle = &m_indices.at(i*3);
+
+		pVertex0 = &m_vertices[pTriangle[0]];
+		pVertex1 = &m_vertices[pTriangle[1]];
+		pVertex2 = &m_vertices[pTriangle[2]];
+
+		// Calculate the triangle face tangent and bitangent.
+
+		edge1[0] = static_cast<float>(pVertex1->position[0] - pVertex0->position[0]);
+		edge1[1] = static_cast<float>(pVertex1->position[1] - pVertex0->position[1]);
+		edge1[2] = static_cast<float>(pVertex1->position[2] - pVertex0->position[2]);
+
+		edge2[0] = static_cast<float>(pVertex2->position[0] - pVertex0->position[0]);
+		edge2[1] = static_cast<float>(pVertex2->position[1] - pVertex0->position[1]);
+		edge2[2] = static_cast<float>(pVertex2->position[2] - pVertex0->position[2]);
+
+		texEdge1[0] = pVertex1->texCoord[0] - pVertex0->texCoord[0];
+		texEdge1[1] = pVertex1->texCoord[1] - pVertex0->texCoord[1];
+
+		texEdge2[0] = pVertex2->texCoord[0] - pVertex0->texCoord[0];
+		texEdge2[1] = pVertex2->texCoord[1] - pVertex0->texCoord[1];
+
+		det = texEdge1[0]*texEdge2[1] - texEdge2[0]*texEdge1[1];
+
+		if (fabs(det) < 1e-6f)
+		{
+			tangent[0] = 1.0f;
+			tangent[1] = 0.0f;
+			tangent[2] = 0.0f;
+
+			bitangent[0] = 0.0f;
+			bitangent[1] = 1.0f;
+			bitangent[2] = 0.0f;
+		}
+		else
+		{
+			det = 1.0f / det;
+
+			tangent[0] = (texEdge2[1]*edge1[0] - texEdge1[1]*edge2[0])*det;
+			tangent[1] = (texEdge2[1]*edge1[1] - texEdge1[1]*edge2[1])*det;
+			tangent[2] = (texEdge2[1]*edge1[2] - texEdge1[1]*edge2[2])*det;
+
+			bitangent[0] = (-texEdge2[0]*edge1[0] + texEdge1[0]*edge2[0])*det;
+			bitangent[1] = (-texEdge2[0]*edge1[1] + texEdge1[0]*edge2[1])*det;
+			bitangent[2] = (-texEdge2[0]*edge1[2] + texEdge1[0]*edge2[2])*det;
+		}
+
+		// Accumulate the tangents and bitangents.
+
+		pVertex0->tangent[0] += tangent[0];
+		pVertex0->tangent[1] += tangent[1];
+		pVertex0->tangent[2] += tangent[2];
+		pVertex0->bitangent[0] += bitangent[0];
+		pVertex0->bitangent[1] += bitangent[1];
+		pVertex0->bitangent[2] += bitangent[2];
+
+		pVertex1->tangent[0] += tangent[0];
+		pVertex1->tangent[1] += tangent[1];
+		pVertex1->tangent[2] += tangent[2];
+		pVertex1->bitangent[0] += bitangent[0];
+		pVertex1->bitangent[1] += bitangent[1];
+		pVertex1->bitangent[2] += bitangent[2];
+
+		pVertex2->tangent[0] += tangent[0];
+		pVertex2->tangent[1] += tangent[1];
+		pVertex2->tangent[2] += tangent[2];
+		pVertex2->bitangent[0] += bitangent[0];
+		pVertex2->bitangent[1] += bitangent[1];
+		pVertex2->bitangent[2] += bitangent[2];
+	}
+
+	// Orthogonalize and normalize the vertex tangents.
+	for (int i=0; i<totalVertices; ++i)
+	{
+		pVertex0 = &m_vertices[i];
+
+		// Gram-Schmidt orthogonalize tangent with normal.
+
+		nDotT = pVertex0->normal[0]*pVertex0->tangent[0] +
+			pVertex0->normal[1]*pVertex0->tangent[1] +
+			pVertex0->normal[2]*pVertex0->tangent[2];
+
+		pVertex0->tangent[0] -= pVertex0->normal[0]*nDotT;
+		pVertex0->tangent[1] -= pVertex0->normal[1]*nDotT;
+		pVertex0->tangent[2] -= pVertex0->normal[2]*nDotT;
+
+		// Normalize the tangent.
+
+		invlength = 1.0f / sqrtf(pVertex0->tangent[0]*pVertex0->tangent[0] +
+				      pVertex0->tangent[1]*pVertex0->tangent[1] +
+				      pVertex0->tangent[2]*pVertex0->tangent[2]);
+
+		pVertex0->tangent[0] *= invlength;
+		pVertex0->tangent[1] *= invlength;
+		pVertex0->tangent[2] *= invlength;
+
+		// Calculate the handedness of the local tangent space.
+		// The bitangent vector is the cross product between the triangle face
+		// normal vector and the calculated tangent vector. The resulting
+		// bitangent vector should be the same as the bitangent vector
+		// calculated from the set of linear equations above. If they point in
+		// different directions then we need to invert the cross product
+		// calculated bitangent vector. We store this scalar multiplier in the
+		// tangent vector's 'w' component so that the correct bitangent vector
+		// can be generated in the normal mapping shader's vertex shader.
+		//
+		// Normal maps have a left handed coordinate system with the origin
+		// located at the top left of the normal map texture. The x coordinates
+		// run horizontally from left to right. The y coordinates run
+		// vertically from top to bottom. The z coordinates run out of the
+		// normal map texture towards the viewer. Our handedness calculations
+		// must take this fact into account as well so that the normal mapping
+		// shader's vertex shader will generate the correct bitangent vectors.
+		// Some normal map authoring tools such as Crazybump
+		// (http://www.crazybump.com/) includes options to allow you to control
+		// the orientation of the normal map normal's y-axis.
+
+		bitangent[0] = (pVertex0->normal[1]*pVertex0->tangent[2]) -
+			       (pVertex0->normal[2]*pVertex0->tangent[1]);
+		bitangent[1] = (pVertex0->normal[2]*pVertex0->tangent[0]) -
+			       (pVertex0->normal[0]*pVertex0->tangent[2]);
+		bitangent[2] = (pVertex0->normal[0]*pVertex0->tangent[1]) -
+			       (pVertex0->normal[1]*pVertex0->tangent[0]);
+
+		bDotB = bitangent[0]*pVertex0->bitangent[0] +
+			bitangent[1]*pVertex0->bitangent[1] +
+			bitangent[2]*pVertex0->bitangent[2];
+
+		pVertex0->tangent[3] = (bDotB < 0.0f) ? 1.0f : -1.0f;
+
+		pVertex0->bitangent[0] = bitangent[0];
+		pVertex0->bitangent[1] = bitangent[1];
+		pVertex0->bitangent[2] = bitangent[2];
+	}
+}
+
+void StelOBJ::generateAABB()
+{
+	//calculate AABB and centroid for each object
 	Vec3d accCentroid(0.);
 	for(int i =0;i<m_objects.size();++i)
 	{
@@ -702,7 +904,19 @@ void StelOBJ::performPostProcessing()
 	}
 
 	m_centroid = (accCentroid / m_objects.size()).toVec3f();
-	qCDebug(stelOBJ)<<"Postprocessing done in"<<timer.elapsed()<<"ms";
+}
+
+void StelOBJ::performPostProcessing()
+{
+	QElapsedTimer timer;
+	timer.start();
+
+	//generate tangent data
+	generateTangents();
+	qCDebug(stelOBJ())<<"Tangents calculated in"<<timer.restart()<<"ms";
+
+	generateAABB();
+	qCDebug(stelOBJ)<<"AABBs/Centroids calculated in"<<timer.elapsed()<<"ms";
 	qCDebug(stelOBJ)<<"Centroid is at "<<m_centroid;
 }
 
@@ -741,7 +955,42 @@ void StelOBJ::scale(double factor)
 		dat[2] *= factor;
 	}
 
+	//AABBs must be recalculated
+	generateAABB();
 	qCDebug(stelOBJ)<<"Scaling done in"<<timer.elapsed()<<"ms";
+}
+
+void StelOBJ::transform(const QMatrix4x4 &mat)
+{
+	//matrix for normals/tangents
+	QMatrix3x3 normalMat = mat.normalMatrix();
+
+	//Transform all vertices and normals by mat
+	for(int i=0; i<m_vertices.size(); ++i)
+	{
+		Vertex& pVertex = m_vertices[i];
+
+		QVector3D tf = mat * QVector3D(pVertex.position[0], pVertex.position[1], pVertex.position[2]);
+		std::copy(&tf[0],&tf[0]+3,pVertex.position);
+
+		tf = normalMat * QVector3D(pVertex.normal[0], pVertex.normal[1], pVertex.normal[2]);
+		pVertex.normal[0] = tf.x();
+		pVertex.normal[1] = tf.y();
+		pVertex.normal[2] = tf.z();
+
+		tf = normalMat * QVector3D(pVertex.tangent[0], pVertex.tangent[1], pVertex.tangent[2]);
+		pVertex.tangent[0] = tf.x();
+		pVertex.tangent[1] = tf.y();
+		pVertex.tangent[2] = tf.z();
+
+		tf = normalMat * QVector3D(pVertex.bitangent[0], pVertex.bitangent[1], pVertex.bitangent[2]);
+		pVertex.bitangent[0] = tf.x();
+		pVertex.bitangent[1] = tf.y();
+		pVertex.bitangent[2] = tf.z();
+	}
+
+	//Update bounding box in case it changed
+	generateAABB();
 }
 
 void StelOBJ::splitVertexData(bool deleteVertexData,
