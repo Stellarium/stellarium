@@ -76,6 +76,14 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 	info.modelGround = ini.value("ground","").toString();
 	info.vertexOrder = ini.value("obj_order","XYZ").toString();
 
+	info.vertexOrderEnum = StelOBJ::XYZ;
+	if (!info.vertexOrder.compare("XZY", Qt::CaseInsensitive)) info.vertexOrderEnum=StelOBJ::XZY;
+	else if (!info.vertexOrder.compare("YXZ", Qt::CaseInsensitive)) info.vertexOrderEnum=StelOBJ::YXZ;
+	else if (!info.vertexOrder.compare("YZX", Qt::CaseInsensitive)) info.vertexOrderEnum=StelOBJ::YZX;
+	else if (!info.vertexOrder.compare("ZXY", Qt::CaseInsensitive)) info.vertexOrderEnum=StelOBJ::ZXY;
+	else if (!info.vertexOrder.compare("ZYX", Qt::CaseInsensitive)) info.vertexOrderEnum=StelOBJ::ZYX;
+	else qWarning()<<"Invalid vertex order statement:"<<info.vertexOrder;
+
 	info.camNearZ = ini.value("camNearZ",0.3f).toFloat();
 	info.camFarZ = ini.value("camFarZ",10000.0f).toFloat();
 	info.shadowFarZ = ini.value("shadowDistance",info.camFarZ).toFloat();

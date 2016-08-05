@@ -23,6 +23,7 @@
 
 #include "StelLocation.hpp"
 #include "VecMath.hpp"
+#include "StelOBJ.hpp"
 
 #include <QMap>
 #include <QSharedPointer>
@@ -33,7 +34,7 @@ class QSettings;
 //! and can be loaded from special .ini files in a scene's folder.
 struct SceneInfo
 {
-	SceneInfo() : isValid(false),id(),fullPath(),name(),author(),description(),copyright(),landscapeName(),modelScenery(),modelGround(),vertexOrder(),
+	SceneInfo() : isValid(false),id(),fullPath(),name(),author(),description(),copyright(),landscapeName(),modelScenery(),modelGround(),vertexOrder(),vertexOrderEnum(StelOBJ::XYZ),
 		camNearZ(0.1f),camFarZ(1000.0f),shadowFarZ(1000.0f),shadowSplitWeight(0.5f),location(),lookAt_fov(0.0f,0.0f,25.0f),eyeLevel(0.0),
 		altitudeFromModel(false),startPositionFromModel(false),groundNullHeightFromModel(false),groundNullHeight(0.0),
 		transparencyThreshold(0.0f),sceneryGenerateNormals(false),groundGenerateNormals(false)
@@ -63,6 +64,9 @@ struct SceneInfo
 	QString modelGround;
 	//! Optional string depicting vertex order of models (XYZ, ZXY, ...)
 	QString vertexOrder;
+
+	//! The vertex order of the corresponding OBJ file
+	StelOBJ::VertexOrder vertexOrderEnum;
 
 	//! Distance to cam near clipping plane. Default 0.3.
 	float camNearZ;
