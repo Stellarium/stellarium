@@ -1,5 +1,6 @@
 /*
  * Stellarium
+ * Copyright (C) 2012 Andrei Borza
  * Copyright (C) 2016 Florian Schaukowitsch
  *
  * This program is free software; you can redistribute it and/or
@@ -36,6 +37,12 @@ Q_DECLARE_LOGGING_CATEGORY(stelOBJ)
 class StelOBJ
 {
 public:
+	//! Possible vertex orderings with load()
+	enum VertexOrder
+	{
+		XYZ, XZY, YXZ, YZX, ZXY, ZYX
+	};
+
 	//! A Vertex struct holds the vertex itself (position), corresponding texture coordinates, normals, tangents and bitangents
 	//! It does not use Vec3f etc. to be POD compliant (needed for offsetof)
 	struct Vertex
@@ -211,12 +218,13 @@ public:
 	//! Loads an .obj file by name. Supports .gz decompression, and
 	//! then calls load(QIODevice) for the actual loading.
 	//! @return true if load was successful
-	bool load(const QString& filename);
+	bool load(const QString& filename, const VertexOrder vertexOrder = VertexOrder::XYZ);
 	//! Loads an .obj file from the specified device.
 	//! @param device The device to load OBJ data from
 	//! @param basePath The path to use to find additional files (like material definitions)
+	//! @param vertexOrder The order to use for vertex positions
 	//! @return true if load was successful
-	bool load(QIODevice& device, const QString& basePath);
+	bool load(QIODevice& device, const QString& basePath, const VertexOrder vertexOrder = VertexOrder::XYZ);
 
 	//! Rebuilds vertex normals as the average of face normals.
 	void rebuildNormals();
@@ -238,6 +246,9 @@ public:
 	//! For example, the solar system objects are modeled with kilometer units,
 	//! and then converted to AU on loading.
 	void scale(double factor);
+
+	//! Applies the given transformation matrix to the vertex data.
+	void transform(const QMatrix4x4& mat);
 
 	//! Splits the vertex data into separate arrays.
 	//! If a given parameter vector is null, it is not filled.
@@ -304,6 +315,12 @@ private:
 	inline static bool parseVec2(const ParseParams& params, T& out);
 	inline bool parseFace(const ParseParams& params, const V3Vec& posList, const V3Vec& normList, const V2Vec& texList,
 			      CurrentParserState &state, VertexCache& vertCache);
+
+	//! Calculates tangents and bitangents
+	void generateTangents();
+
+	//! Calculates AABBs of objects (and also centroids)
+	void generateAABB();
 
 	//! Performs post-processing steps, like finding centroids and bounding boxes
 	//! This is called after a model has been loaded
