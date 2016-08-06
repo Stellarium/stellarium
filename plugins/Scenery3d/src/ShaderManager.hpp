@@ -20,8 +20,8 @@
 
 #ifndef _SHADERMANAGER_HPP_
 #define _SHADERMANAGER_HPP_
-#include "OBJ.hpp"
-#include "StelOpenGL.hpp"
+#include "StelOBJ.hpp"
+#include "StelTexture.hpp"
 #include "S3DEnum.hpp"
 
 #include <QMap>
@@ -132,7 +132,7 @@ public:
 	};
 
 	//! Returns a shader that supports the specified operations. Must be called within a GL context.
-	inline QOpenGLShaderProgram* getShader(const GlobalShaderParameters &globals, const OBJ::Material *mat = NULL);
+	inline QOpenGLShaderProgram* getShader(const GlobalShaderParameters &globals, const StelOBJ::Material *mat = NULL);
 
 	//! Returns the Frustum/Boundingbox Debug shader
 	inline QOpenGLShaderProgram* getDebugShader();
@@ -225,7 +225,7 @@ private:
 	t_UniformCache m_uniformCache;
 };
 
-QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals,const OBJ::Material* mat)
+QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals,const StelOBJ::Material* mat)
 {
 	//Build bitflags from bools. Some stuff requires pixelLighting to be enabled, so check it too.
 
@@ -250,19 +250,19 @@ QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals
 
 	if(mat)
 	{
-		if(mat->alphatest && mat->texture && mat->texture->hasAlphaChannel()) //alpha test needs diffuse texture, otherwise it would not make sense
+		if(mat->bAlphatest && mat->tex_Kd && mat->tex_Kd->hasAlphaChannel()) //alpha test needs diffuse texture, otherwise it would not make sense
 			flags|= ALPHATEST;
-		if(mat->hasSpecularity)
+		if(mat->traits.hasSpecularity)
 			flags|= MAT_SPECULAR;
-		if(mat->hasTransparency)
+		if(mat->traits.hasTransparency)
 			flags|= BLENDING;
-		if(mat->texture)
+		if(mat->traits.hasDiffuseTexture)
 			flags|= MAT_DIFFUSETEX;
-		if(mat->emissive_texture)
+		if(mat->traits.hasEmissiveTexture)
 			flags|= MAT_EMISSIVETEX;
-		if(mat->bump_texture && globals.bump && globals.pixelLighting)
+		if(mat->traits.hasBumpTexture && globals.bump && globals.pixelLighting)
 			flags|= BUMP;
-		if(mat->height_texture && globals.bump && globals.pixelLighting)
+		if(mat->traits.hasHeightTexture && globals.bump && globals.pixelLighting)
 			flags|= HEIGHT;
 	}
 

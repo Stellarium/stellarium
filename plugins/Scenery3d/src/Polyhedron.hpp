@@ -45,11 +45,11 @@ public:
 	void add(const QVector<Vec3f> &verts, const Vec3f &normal);
 
 	//! Intersect this polyhedron with the specified bounding box
-	void intersect(const AABB &bb);
+	void intersect(const AABBox &bb);
 	//! Intersect this polyhedron with the specified plane
 	void intersect(const Plane &p);
 	//! Extrude each point of this polyhedron towards direction until we hit the bounding box
-	void extrude(const Vec3f &dir, const AABB &bb);
+	void extrude(const Vec3f &dir, const AABBox &bb);
 	//! Clear up
 	void clear();
 	//! Returns the unique vertices count
@@ -63,7 +63,7 @@ public:
 
 	//! This is used for debugging of the crop matrix
 	//! It contains the world-space representation of the orthographic projection used for shadowmapping.
-	Box debugBox;
+	//Box debugBox;
 private:
 	//! Vector holding all unique vertices of this polyhedron
 	QVector<Vec3f> uniqueVerts;

@@ -27,7 +27,8 @@
 #include "Landscape.hpp"
 #include "SolarSystem.hpp"
 
-#include "OBJ.hpp"
+#include "StelOBJ.hpp"
+#include "StelOpenGLArray.hpp"
 #include "Heightmap.hpp"
 #include "Frustum.hpp"
 #include "Polyhedron.hpp"
@@ -158,6 +159,8 @@ public:
 
 	//! Loads the model into GL and sets the loaded scene to be the current one
 	void finalizeLoad();
+	//! Makes sure the texture is loaded and without errors, and loads it into GL
+	void finalizeTexture(StelTextureSP& tex);
 
 	//these are some properties that determine the features supported in the current GL context
 	//available after init() is called
@@ -203,9 +206,10 @@ private:
 	StelCore* core;
 	LandscapeMgr* landscapeMgr;
 	StelProjectorP altAzProjector;
-	QSharedPointer<OBJ> objModel, objModelLoad, groundModel, groundModelLoad;
+	QSharedPointer<StelOBJ> objModel, objModelLoad, groundModel, groundModelLoad;
 	Heightmap* heightmap;
 	Heightmap* heightmapLoad;
+	StelOpenGLArray glArray;
 
 	Vec3d mainViewUp;
 	Vec3d mainViewDir;
@@ -276,7 +280,7 @@ private:
 	GlobalShaderParameters shaderParameters;
 
 	//Scene AABB
-	AABB sceneBoundingBox;
+	AABBox sceneBoundingBox;
 
 	//Shadow Map FBO handles
 	QVector<GLuint> shadowFBOs;
@@ -353,7 +357,7 @@ private:
 	//! Sets up shader uniforms constant over the whole frame/side of cubemap (=modelview dependent stuff)
 	void setupFrameUniforms(QOpenGLShaderProgram *shader);
 	//! Sets up shader uniforms specific to one material
-	void setupMaterialUniforms(QOpenGLShaderProgram *shader, const OBJ::Material& mat);
+	void setupMaterialUniforms(QOpenGLShaderProgram *shader, const StelOBJ::Material& mat);
 
 	//! Finds the correct light source out of Sun, Moon, Venus, and returns ambient and directional light components.
 	Scenery3d::ShadowCaster calculateLightSource(float &ambientBrightness, float &diffuseBrightness, Vec3f &lightsourcePosition, float &emissiveFactor);
@@ -362,7 +366,7 @@ private:
 	float groundHeight();
 
 	//Sets the scenes' AABB
-	void setSceneAABB(const AABB &bbox);
+	void setSceneAABB(const AABBox &bbox);
 
 	//Save the Frustum to be able to move away from it and analyze it
 	void saveFrusts();

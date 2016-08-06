@@ -22,6 +22,7 @@
 #define _STELOBJ_HPP_
 
 #include "GeomMath.hpp"
+#include "StelTextureTypes.hpp"
 
 #include <qopengl.h>
 #include <QLoggingCategory>
@@ -67,6 +68,12 @@ public:
 	//! Qt's OpenGL wrappers.
 	struct Material
 	{
+		Material()
+			: Ns(8.0f), d(-1.0f), bBackface(false), bAlphatest(false), fAlphaThreshold(0.5f)
+		{
+
+		}
+
 		//! Name of the material as defined in the .mtl
 		QString name;
 
@@ -85,16 +92,22 @@ public:
 
 		//! The ambient map path
 		QString map_Ka;
+		StelTextureSP tex_Ka;
 		//! The diffuse map path
 		QString map_Kd;
+		StelTextureSP tex_Kd;
 		//! The specular map path
 		QString map_Ks;
+		StelTextureSP tex_Ks;
 		//! The emissive map path
 		QString map_Ke;
+		StelTextureSP tex_Ke;
 		//! The bump/normal map path
 		QString map_bump;
+		StelTextureSP tex_bump;
 		//! The height map path
 		QString map_height;
+		StelTextureSP tex_height;
 
 		//! Nonstandard extension:
 		//! if to render backface, default false
@@ -106,12 +119,26 @@ public:
 		//! the alpha threshold to use for alpha testing when bAlphatest is true, default 0.5
 		float fAlphaThreshold;
 
+		struct Traits
+		{
+			bool hasAmbientTexture; //! True when tex_Ka is a valid texture
+			bool hasDiffuseTexture; //! True when tex_Kd is a valid texture
+			bool hasSpecularTexture; //! True when tex_Ks is a valid texture
+			bool hasEmissiveTexture; //! True when tex_Ke is a valid texture
+			bool hasBumpTexture; //! True when tex_bump is a valid texture
+			bool hasHeightTexture; //! True when tex_height is a valid texture
+			bool hasSpecularity; //! True when both Ks and Ns are non-zero
+			bool hasTransparency; //! True when the material exhibits "true" transparency, that is when the tex_Kd has an alpha channel or the d value is smaller than 1
+		} traits;
+
+		//! Starts loading the textures in this material asynchronously
+		void loadTexturesAsync();
+		//! Re-calculates the material traits. This requires all textures to be fully loaded.
+		void calculateTraits();
 		//! Loads all materials contained in an .mtl file
 		static QVector<Material> loadFromFile(const QString& filename);
 	};
 
-	//forward decl
-	struct Object;
 
 	//! Represents a bunch of faces following after each other
 	//! that use the same material
@@ -144,6 +171,8 @@ public:
 		AABBox boundingbox;
 	};
 
+	typedef QVector<MaterialGroup> MaterialGroupList;
+
 	//! Represents an OBJ object as defined with the 'o' statement.
 	//! There is an default object for faces defined before any 'o' statement
 	struct Object
@@ -170,7 +199,7 @@ public:
 		AABBox boundingbox;
 
 		//! The list of material groups in this object
-		QVector<MaterialGroup> groups;
+		MaterialGroupList groups;
 	private:
 		void postprocess(const StelOBJ& obj, Vec3d& centroid);
 		friend class StelOBJ;
@@ -201,6 +230,8 @@ public:
 	inline const VertexList& getVertexList() const { return m_vertices; }
 	//! Returns an index list, suitable for use with OpenGL element arrays
 	inline const IndexList& getIndexList() const { return m_indices; }
+	//! Returns the list of materials for modification
+	inline MaterialList& getMaterialList() { return m_materials; }
 	//! Returns the list of materials
 	inline const MaterialList& getMaterialList() const { return m_materials; }
 	//! Returns the list of objects
@@ -225,6 +256,9 @@ public:
 	//! @param vertexOrder The order to use for vertex positions
 	//! @return true if load was successful
 	bool load(QIODevice& device, const QString& basePath, const VertexOrder vertexOrder = VertexOrder::XYZ);
+
+	//! Returns true if this object contains valid data from a load() method
+	bool isLoaded() const { return m_isLoaded; }
 
 	//! Rebuilds vertex normals as the average of face normals.
 	void rebuildNormals();
@@ -265,6 +299,10 @@ public:
 			     V3Vec* normal = NULL,
 			     V3Vec* tangent = NULL,
 			     V3Vec* bitangent = NULL);
+
+	//! Calls Material::loadTexturesAsync() for all materials,
+	//! which starts loading the textures in the background.
+	void loadAllTexturesAsync();
 private:
 	typedef QVector<QStringRef> ParseParams;
 	typedef QHash<Vertex, int> VertexCache;
@@ -276,6 +314,7 @@ private:
 		Object* currentObject;
 	};
 
+	bool m_isLoaded;
 	//all vertex data is contained in this list
 	VertexList m_vertices;
 	//all index data is contained in this list
