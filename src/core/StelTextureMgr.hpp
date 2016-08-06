@@ -22,6 +22,8 @@
 
 #include "StelTexture.hpp"
 #include <QObject>
+#include <QMap>
+#include <QWeakPointer>
 
 class QNetworkReply;
 class QThread;
@@ -53,6 +55,10 @@ public:
 private:
 	friend class StelTexture;
 	friend class ImageLoader;
+
+	StelTextureSP lookupCache(const QString& file);
+	typedef QMap<QString,QWeakPointer<StelTexture>> TexCache;
+	TexCache textureCache;
 };
 
 

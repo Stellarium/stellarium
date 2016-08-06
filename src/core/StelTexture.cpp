@@ -119,6 +119,38 @@ bool StelTexture::bind(int slot)
 	if (errorOccured)
 		return false;
 
+	if(load())
+	{
+		// Finally load the data in the main thread.
+		glLoad(loader->result());
+		delete loader;
+		loader = NULL;
+		if (id != 0)
+		{
+			// The texture is already fully loaded, just bind and return true;
+			glActiveTexture(GL_TEXTURE0 + slot);
+			glBindTexture(GL_TEXTURE_2D, id);
+			return true;
+		}
+		if (errorOccured)
+			return false;
+	}
+	return false;
+}
+
+void StelTexture::waitForLoaded()
+{
+	if(networkReply)
+	{
+		qWarning()<<"StelTexture::waitForLoaded called for a network-loaded texture"<<fullPath;
+		Q_ASSERT(0);
+	}
+	if(loader)
+		loader->waitForFinished();
+}
+
+bool StelTexture::load()
+{
 	// If the file is remote, start a network connection.
 	if (loader == NULL && networkReply == NULL && fullPath.startsWith("http://")) {
 		QNetworkRequest req = QNetworkRequest(QUrl(fullPath));
@@ -139,13 +171,7 @@ bool StelTexture::bind(int slot)
 		return false;
 	}
 	// Wait until the loader finish.
-	if (!loader->isFinished())
-		return false;
-	// Finally load the data in the main thread.
-	glLoad(loader->result());
-	delete loader;
-	loader = NULL;
-	return true;
+	return loader->isFinished();
 }
 
 void StelTexture::onNetworkReply()
