@@ -116,3 +116,43 @@ Vec4f AABBox::getPlane(AABBox::Face p) const
 			return Vec4f(std::numeric_limits<float>::signaling_NaN());
 	}
 }
+
+Vec3f AABBox::positiveVertex(Vec3f& normal) const
+{
+	Vec3f out = min;
+
+	if(normal.v[0] >= 0.0f)
+		out.v[0] = max.v[0];
+	if(normal.v[1] >= 0.0f)
+		out.v[1] = max.v[1];
+	if(normal.v[2] >= 0.0f)
+		out.v[2] = max.v[2];
+
+	return out;
+}
+
+Vec3f AABBox::negativeVertex(Vec3f& normal) const
+{
+	Vec3f out = max;
+
+	if(normal.v[0] >= 0.0f)
+		out.v[0] = min.v[0];
+	if(normal.v[1] >= 0.0f)
+		out.v[1] = min.v[1];
+	if(normal.v[2] >= 0.0f)
+		out.v[2] = min.v[2];
+
+	return out;
+}
+
+Line::Line(const Vec3f &p, const Vec3f &dir)
+{
+	startPoint = p;
+	direction = dir;
+	endPoint = startPoint + direction;
+}
+
+Vec3f Line::getPoint(float val)
+{
+	return startPoint + (val*direction);
+}

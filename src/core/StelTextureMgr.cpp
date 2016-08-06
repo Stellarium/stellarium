@@ -42,8 +42,18 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 	if (afilename.isEmpty())
 		return StelTextureSP();
 
+	QFileInfo info(afilename);
+	QString canPath = info.canonicalFilePath();
+
+	if(canPath.isEmpty()) //file does not exist
+		return StelTextureSP();
+
+	//try to find out if the tex is already loaded
+	StelTextureSP cache = lookupCache(canPath);
+	if(!cache.isNull()) return cache;
+
 	StelTextureSP tex = StelTextureSP(new StelTexture());
-	tex->fullPath = afilename;
+	tex->fullPath = canPath;
 
 	QImage image(tex->fullPath);
 	if (image.isNull())
@@ -51,7 +61,10 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 
 	tex->loadParams = params;
 	if (tex->glLoad(image))
+	{
+		textureCache.insert(canPath,tex);
 		return tex;
+	}
 	else
 	{
 		qWarning()<<tex->getErrorMessage();
@@ -65,12 +78,50 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 	if (url.isEmpty())
 		return StelTextureSP();
 
+	QString canPath = url;
+	if(!url.startsWith("http"))
+	{
+		QFileInfo info(url);
+		canPath = info.canonicalFilePath();
+	}
+
+	if(canPath.isEmpty()) //file does not exist
+		return StelTextureSP();
+
+	//try to find out if the tex is already loaded
+	StelTextureSP cache = lookupCache(canPath);
+	if(!cache.isNull()) return cache;
+
 	StelTextureSP tex = StelTextureSP(new StelTexture());
 	tex->loadParams = params;
-	tex->fullPath = url;
+	tex->fullPath = canPath;
 	if (!lazyLoading)
 	{
-		tex->bind();
+		//use load() instead of bind() to prevent potential - if very unlikey - OpenGL errors
+		//because GL must be called in the main thread
+		tex->load();
 	}
+	textureCache.insert(canPath,tex);
 	return tex;
+}
+
+StelTextureSP StelTextureMgr::lookupCache(const QString &file)
+{
+	TexCache::iterator it = textureCache.find(file);
+	if(it!=textureCache.end())
+	{
+		//find out if it is valid
+		StelTextureSP ref = it->toStrongRef();
+		if(ref)
+		{
+			qDebug()<<"Cache hit"<<file;
+			return ref; //valid texture!
+		}
+		else
+		{
+			//remove the cache entry
+			it=textureCache.erase(it);
+		}
+	}
+	return StelTextureSP();
 }

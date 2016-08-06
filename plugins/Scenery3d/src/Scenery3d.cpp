@@ -42,7 +42,6 @@
 #include "SolarSystem.hpp"
 
 #include "Scenery3dMgr.hpp"
-#include "AABB.hpp"
 #include "StelOBJ.hpp"
 
 #include <QKeyEvent>
@@ -114,8 +113,6 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
 	shaderParameters.torchLight = false;
 	shaderParameters.frustumSplits = 0;
 
-	sceneBoundingBox = AABB(Vec3f(0.0f), Vec3f(0.0f));
-
 	debugTextFont.setFamily("Courier");
 	debugTextFont.setPixelSize(16);
 
@@ -159,30 +156,23 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 	//setup some state
 	QMatrix4x4 zRot2Grid = (loadingScene.zRotateMatrix*loadingScene.obj2gridMatrix).convertToQMatrix();
 
-	OBJ::vertexOrder objVertexOrder=OBJ::XYZ;
-	if (loadingScene.vertexOrder.compare("XZY") == 0) objVertexOrder=OBJ::XZY;
-	else if (loadingScene.vertexOrder.compare("YXZ") == 0) objVertexOrder=OBJ::YXZ;
-	else if (loadingScene.vertexOrder.compare("YZX") == 0) objVertexOrder=OBJ::YZX;
-	else if (loadingScene.vertexOrder.compare("ZXY") == 0) objVertexOrder=OBJ::ZXY;
-	else if (loadingScene.vertexOrder.compare("ZYX") == 0) objVertexOrder=OBJ::ZYX;
-
 	parent->updateProgress(q_("Loading model..."),1,0,6);
 
 	//load model
-	objModelLoad.reset(new OBJ());
+	objModelLoad.reset(new StelOBJ());
 	QString modelFile = StelFileMgr::findFile( loadingScene.fullPath+ "/" + loadingScene.modelScenery);
 	qDebug()<<"[Scenery3d] Loading scene from "<<modelFile;
-	if(!objModelLoad->load(modelFile, objVertexOrder, loadingScene.sceneryGenerateNormals))
+	if(!objModelLoad->load(modelFile, scene.vertexOrderEnum))
 	{
 	    qCritical()<<"[Scenery3d] Failed to load OBJ file.";
 	    return false;
 	}
 
-	StelOBJ obj;
-	obj.load(modelFile);
-
 	if(loadCancel)
 		return false;
+
+	//start async texture loading
+	objModelLoad->loadAllTexturesAsync();
 
 	parent->updateProgress(q_("Transforming model..."),2,0,6);
 
@@ -198,10 +188,10 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 	{
 		parent->updateProgress(q_("Loading ground..."),3,0,6);
 
-		groundModelLoad.reset(new OBJ());
+		groundModelLoad.reset(new StelOBJ());
 		modelFile = StelFileMgr::findFile(loadingScene.fullPath + "/" + loadingScene.modelGround);
 		qDebug()<<"[Scenery3d] Loading ground from"<<modelFile;
-		if(!groundModelLoad->load(modelFile, objVertexOrder, loadingScene.groundGenerateNormals))
+		if(!groundModelLoad->load(modelFile, scene.vertexOrderEnum))
 		{
 			qCritical()<<"[Scenery3d] Failed to load OBJ file.";
 			return false;
@@ -221,13 +211,14 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 	{
 		if(loadingScene.altitudeFromModel)
 		{
-			loadingScene.location->altitude=static_cast<int>(0.5*(objModelLoad->getBoundingBox().min[2]+objModelLoad->getBoundingBox().max[2])+loadingScene.modelWorldOffset[2]);
+			const AABBox& box = objModelLoad->getAABBox();
+			loadingScene.location->altitude=static_cast<int>(0.5*(box.min[2]+box.max[2])+loadingScene.modelWorldOffset[2]);
 		}
 	}
 
 	if(scene.groundNullHeightFromModel)
 	{
-		loadingScene.groundNullHeight = ((!groundModelLoad.isNull() && groundModelLoad->isLoaded()) ? groundModelLoad->getBoundingBox().min[2] : objModelLoad->getBoundingBox().min[2]);
+		loadingScene.groundNullHeight = ((!groundModelLoad.isNull() && groundModelLoad->isLoaded()) ? groundModelLoad->getAABBox().min[2] : objModelLoad->getAABBox().min[2]);
 		qDebug() << "[Scenery3d] Ground outside model is " << loadingScene.groundNullHeight  << "m high (in model coordinates)";
 	}
 	else qDebug() << "[Scenery3d] Ground outside model stays " << loadingScene.groundNullHeight  << "m high (in model coordinates)";
@@ -265,11 +256,9 @@ void Scenery3d::finalizeLoad()
 	groundModel = groundModelLoad;
 	groundModelLoad.clear();
 
-	//upload GL
-	objModel->uploadBuffersGL();
-	objModel->uploadTexturesGL();
+	glArray.load(objModel.data());
 	//call this after texture load
-	objModel->finalizeForRendering();
+	//objModel->finalizeForRendering();
 
 	//the ground model needs no opengl uploads, so we skip them
 
@@ -284,10 +273,12 @@ void Scenery3d::finalizeLoad()
 
 	if(currentScene.startPositionFromModel)
 	{
-		absolutePosition.v[0] = -(objModel->getBoundingBox().max[0]+objModel->getBoundingBox().min[0])/2.0;
-		qDebug() << "Setting Easting  to BBX center: " << objModel->getBoundingBox().min[0] << ".." << objModel->getBoundingBox().max[0] << ": " << absolutePosition.v[0];
-		absolutePosition.v[1] = -(objModel->getBoundingBox().max[1]+objModel->getBoundingBox().min[1])/2.0;
-		qDebug() << "Setting Northing to BBX center: " << objModel->getBoundingBox().min[1] << ".." << objModel->getBoundingBox().max[1] << ": " << -absolutePosition.v[1];
+		//position at the XY center of the model
+		const AABBox& box = objModel->getAABBox();
+		absolutePosition.v[0] = -(box.max[0]+box.min[0])/2.0;
+		qDebug() << "Setting Easting  to BBX center: " << box.min[0] << ".." << box.max[0] << ": " << absolutePosition.v[0];
+		absolutePosition.v[1] = -(box.max[1]+box.min[1])/2.0;
+		qDebug() << "Setting Northing to BBX center: " << box.min[1] << ".." << box.max[1] << ": " << -absolutePosition.v[1];
 	}
 	else
 	{
@@ -298,9 +289,9 @@ void Scenery3d::finalizeLoad()
 
 	//TODO: maybe introduce a switch in scenery3d.ini that allows the "ground" bounding box to be used for shadow calculations
 	//this would allow some scenes to have better shadows
-	OBJ* cur = objModel.data();
+	StelOBJ* cur = objModel.data();
 	//Set the scene's AABB
-	setSceneAABB(cur->getBoundingBox());
+	setSceneAABB(cur->getAABBox());
 
 	//Find a good splitweight based on the scene's size
 	float maxSize = -std::numeric_limits<float>::max();
@@ -323,6 +314,41 @@ void Scenery3d::finalizeLoad()
 
 	//reset the cubemap time so that is ensured it is immediately rerendered
 	invalidateCubemap();
+
+	//make sure textures are loaded
+	StelOBJ::MaterialList& matList = objModel->getMaterialList();
+	for(int i =0; i< matList.size();++i)
+	{
+		StelOBJ::Material& mat = matList[i];
+		//ambient and specular textures currently unused
+		//finalizeTexture(mat.tex_Ka);
+		//finalizeTexture(mat.tex_Ks);
+		finalizeTexture(mat.tex_Kd);
+		finalizeTexture(mat.tex_Ke);
+		finalizeTexture(mat.tex_bump);
+		finalizeTexture(mat.tex_height);
+
+		mat.calculateTraits();
+	}
+}
+
+void Scenery3d::finalizeTexture(StelTextureSP &tex)
+{
+	if(tex)
+	{
+		tex->waitForLoaded();
+		//load it into GL
+		if(!tex->bind())
+		{
+			qWarning()<<"Error loading texture"<<tex->getFullPath()<<tex->getErrorMessage();
+			tex.clear();
+		}
+		else
+		{
+			//clean up after ourselves
+			tex->release();
+		}
+	}
 }
 
 void Scenery3d::handleKeys(QKeyEvent* e)
@@ -411,7 +437,7 @@ void Scenery3d::saveFrusts()
 	}
 }
 
-void Scenery3d::setSceneAABB(const AABB& bbox)
+void Scenery3d::setSceneAABB(const AABBox& bbox)
 {
 	sceneBoundingBox = bbox;
 }
@@ -640,38 +666,38 @@ void Scenery3d::setupFrameUniforms(QOpenGLShaderProgram *shader)
 	}
 }
 
-void Scenery3d::setupMaterialUniforms(QOpenGLShaderProgram* shader, const OBJ::Material &mat)
+void Scenery3d::setupMaterialUniforms(QOpenGLShaderProgram* shader, const StelOBJ::Material &mat)
 {
 	//ambient is calculated depending on illum model
-	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_AMBIENT,mat.ambient * lightInfo.ambient);
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_AMBIENT,mat.Ka * lightInfo.ambient);
 
-	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_DIFFUSE, mat.diffuse * lightInfo.directional);
-	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_TORCHDIFFUSE, mat.diffuse * lightInfo.torchDiffuse);
-	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_EMISSIVE,mat.emission * lightInfo.emissive);
-	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_SPECULAR,mat.specular * lightInfo.specular);
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_DIFFUSE, mat.Kd * lightInfo.directional);
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_TORCHDIFFUSE, mat.Kd * lightInfo.torchDiffuse);
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_EMISSIVE,mat.Ke * lightInfo.emissive);
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_SPECULAR,mat.Ks * lightInfo.specular);
 
-	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_SHININESS,mat.shininess);
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_SHININESS,mat.Ns);
 	//force alpha to 1 here for non-translucent mats (fixes incorrect blending in cubemap)
-	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_ALPHA,mat.hasTransparency ? mat.alpha : 1.0f);
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_ALPHA,mat.traits.hasTransparency ? mat.d : 1.0f);
 
-	if(mat.texture)
+	if(mat.traits.hasDiffuseTexture)
 	{
-		mat.texture->bind(0); //this already sets glActiveTexture(0)
+		mat.tex_Kd->bind(0); //this already sets glActiveTexture(0)
 		SET_UNIFORM(shader,ShaderMgr::UNIFORM_TEX_DIFFUSE,0);
 	}
-	if(mat.emissive_texture)
+	if(mat.traits.hasEmissiveTexture)
 	{
-		mat.emissive_texture->bind(1);
+		mat.tex_Ke->bind(1);
 		SET_UNIFORM(shader,ShaderMgr::UNIFORM_TEX_EMISSIVE,1);
 	}
-	if(shaderParameters.bump && mat.bump_texture)
+	if(shaderParameters.bump && mat.traits.hasBumpTexture)
 	{
-		mat.bump_texture->bind(2);
+		mat.tex_bump->bind(2);
 		SET_UNIFORM(shader,ShaderMgr::UNIFORM_TEX_BUMP,2);
 	}
-	if(shaderParameters.bump && mat.height_texture)
+	if(shaderParameters.bump && mat.traits.hasHeightTexture)
 	{
-		mat.height_texture->bind(3);
+		mat.tex_height->bind(3);
 		SET_UNIFORM(shader,ShaderMgr::UNIFORM_TEX_HEIGHT,3);
 	}
 }
@@ -680,8 +706,6 @@ bool Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 {
 	QOpenGLShaderProgram* curShader = NULL;
 	QSet<QOpenGLShaderProgram*> initialized;
-	GLenum indexDataType = OBJ::getIndexBufferType();
-	size_t indexDataTypeSize = OBJ::getIndexBufferTypeSize();
 
 	//override some shader Params
 	GlobalShaderParameters pm = shaderParameters;
@@ -700,115 +724,121 @@ bool Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 	}
 
 	//bind VAO
-	objModel->bindGL();
+	glArray.bind();
 
 	//assume backfaceculling is on
 	bool backfaceCullState = true;
 	bool success = true;
 
 	//TODO optimize: clump models with same material together when first loading to minimize state changes
-	const OBJ::Material* lastMaterial = NULL;
+	const StelOBJ::Material* lastMaterial = NULL;
 	bool blendEnabled = false;
-	for(int i=0; i<objModel->getNumberOfStelModels(); i++)
+	const StelOBJ::ObjectList& objectList = objModel->getObjectList();
+	for(int i=0; i<objectList.size(); ++i)
 	{
+		const StelOBJ::Object& obj = objectList.at(i);
+		const StelOBJ::MaterialGroupList& matGroups = obj.groups;
 
-		const OBJ::StelModel* pStelModel = &objModel->getStelModel(i);
-		const OBJ::Material* pMaterial = pStelModel->pMaterial;
-		Q_ASSERT(pMaterial);
-
-		++drawnModels;
-
-		if(lastMaterial!=pMaterial)
+		for(int j = 0; j < matGroups.size();++j)
 		{
-			++materialSwitches;
-			lastMaterial = pMaterial;
+			const StelOBJ::MaterialGroup& matGroup = matGroups.at(j);
+			const StelOBJ::Material* pMaterial = &objModel->getMaterialList().at(matGroup.materialIndex);
+			Q_ASSERT(pMaterial);
 
-			//get a shader from shadermgr that fits the current state + material combo
-			QOpenGLShaderProgram* newShader = shaderManager.getShader(pm,pMaterial);
-			if(!newShader)
+			++drawnModels;
+
+			if(lastMaterial!=pMaterial)
 			{
-				//shader invalid, can't draw
-				parent->showMessage(q_("Scenery3d shader error, can't draw. Check debug output for details."));
-				success = false;
-				break;
-			}
-			if(newShader!=curShader)
-			{
-				curShader = newShader;
-				curShader->bind();
-				if(!initialized.contains(curShader))
+				++materialSwitches;
+				lastMaterial = pMaterial;
+
+				//get a shader from shadermgr that fits the current state + material combo
+				QOpenGLShaderProgram* newShader = shaderManager.getShader(pm,pMaterial);
+				if(!newShader)
 				{
-					++shaderSwitches;
-
-					//needs first-time initialization for this pass
-					if(shading)
+					//shader invalid, can't draw
+					parent->showMessage(q_("Scenery3d shader error, can't draw. Check debug output for details."));
+					success = false;
+					break;
+				}
+				if(newShader!=curShader)
+				{
+					curShader = newShader;
+					curShader->bind();
+					if(!initialized.contains(curShader))
 					{
-						setupPassUniforms(curShader);
-						setupFrameUniforms(curShader);
+						++shaderSwitches;
+
+						//needs first-time initialization for this pass
+						if(shading)
+						{
+							setupPassUniforms(curShader);
+							setupFrameUniforms(curShader);
+						}
+						else
+						{
+							//really only mvp+alpha thresh required, so only set this
+							SET_UNIFORM(curShader,ShaderMgr::UNIFORM_MAT_MVP,projectionMatrix * modelViewMatrix);
+							SET_UNIFORM(curShader,ShaderMgr::UNIFORM_FLOAT_ALPHA_THRESH,currentScene.transparencyThreshold);
+						}
+
+						//we remember if we have initialized this shader already, so we can skip "global" initialization later if we encounter it again
+						initialized.insert(curShader);
 					}
-					else
+				}
+				if(shading)
+				{
+					//perform full material setup
+					setupMaterialUniforms(curShader,*pMaterial);
+				}
+				else
+				{
+					//set diffuse tex if possible for alpha testing
+					if( ! pMaterial->tex_Kd.isNull())
 					{
-						//really only mvp+alpha thresh required, so only set this
-						SET_UNIFORM(curShader,ShaderMgr::UNIFORM_MAT_MVP,projectionMatrix * modelViewMatrix);
-						SET_UNIFORM(curShader,ShaderMgr::UNIFORM_FLOAT_ALPHA_THRESH,currentScene.transparencyThreshold);
+						pMaterial->tex_Kd->bind(0);
+						SET_UNIFORM(curShader,ShaderMgr::UNIFORM_TEX_DIFFUSE,0);
 					}
+				}
 
-					//we remember if we have initialized this shader already, so we can skip "global" initialization later if we encounter it again
-					initialized.insert(curShader);
-				}
-			}
-			if(shading)
-			{
-				//perform full material setup
-				setupMaterialUniforms(curShader,*pMaterial);
-			}
-			else
-			{
-				//set diffuse tex if possible for alpha testing
-				if( ! pMaterial->texture.isNull())
+				if(pMaterial->traits.hasTransparency )
 				{
-					pMaterial->texture->bind(0);
-					SET_UNIFORM(curShader,ShaderMgr::UNIFORM_TEX_DIFFUSE,0);
+					//TODO provide Z-sorting for transparent objects (center of bounding box should be fine)
+					if(!blendEnabled)
+					{
+						glEnable(GL_BLEND);
+						if(blendAlphaAdditive)
+							glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+						else //traditional direct blending
+							glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+						blendEnabled = true;
+					}
 				}
-			}
+				else
+				{
+					if(blendEnabled)
+					{
+						glDisable(GL_BLEND);
+						blendEnabled=false;
+					}
+				}
 
-			if(pMaterial->hasTransparency )
-			{
-				//TODO provide Z-sorting for transparent objects (center of bounding box should be fine)
-				if(!blendEnabled)
+				if(backfaceCullState && pMaterial->bBackface)
 				{
-					glEnable(GL_BLEND);
-					if(blendAlphaAdditive)
-						glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-					else //traditional direct blending
-						glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-					blendEnabled = true;
+					glDisable(GL_CULL_FACE);
+					backfaceCullState = false;
 				}
-			}
-			else
-			{
-				if(blendEnabled)
+				else if(!backfaceCullState && !pMaterial->bBackface)
 				{
-					glDisable(GL_BLEND);
-					blendEnabled=false;
+					glEnable(GL_CULL_FACE);
+					backfaceCullState = true;
 				}
 			}
 
-			if(backfaceCullState && !pMaterial->backfacecull)
-			{
-				glDisable(GL_CULL_FACE);
-				backfaceCullState = false;
-			}
-			else if(!backfaceCullState && pMaterial->backfacecull)
-			{
-				glEnable(GL_CULL_FACE);
-				backfaceCullState = true;
-			}
+
+			glArray.draw(matGroup.startIndex,matGroup.indexCount);
+			drawnTriangles+=matGroup.indexCount/3;
 		}
-
-
-		glDrawElements(GL_TRIANGLES, pStelModel->triangleCount * 3, indexDataType, reinterpret_cast<const void*>(pStelModel->startIndex * indexDataTypeSize));
-		drawnTriangles+=pStelModel->triangleCount;
 	}
 
 	if(!backfaceCullState)
@@ -821,7 +851,7 @@ bool Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 		glDisable(GL_BLEND);
 
 	//release VAO
-	objModel->unbindGL();
+	glArray.release();
 
 	return success;
 }
@@ -880,9 +910,9 @@ void Scenery3d::computeOrthoProjVals(const Vec3f shadowDir,float& orthoExtent,fl
 	left.normalize();
 	Vec3f right = -left;
 
-	for(unsigned int i=0; i<AABB::CORNERCOUNT; i++)
+	for(unsigned int i=0; i<AABBox::CORNERCOUNT; i++)
 	{
-		Vec3f v = sceneBoundingBox.getCorner(static_cast<AABB::Corner>(i));
+		Vec3f v = sceneBoundingBox.getCorner(static_cast<AABBox::Corner>(i));
 		Vec3f toCam = v - eye;
 
 		float dist = toCam.dot(vDir);
@@ -942,9 +972,9 @@ void Scenery3d::computeCropMatrix(QMatrix4x4& cropMatrix, QVector4D& orthoScale,
 	//minZ = std::max(minZ - zRange*0.05f, 0.0f);
 
 #ifdef QT_DEBUG
-	AABB deb(Vec3f(minX,minY,minZ),Vec3f(maxX,maxY,maxZ));
-	focusBody.debugBox = deb.toBox();
-	focusBody.debugBox.transform(lightMVP.inverted());
+	//AABBox deb(Vec3f(minX,minY,minZ),Vec3f(maxX,maxY,maxZ));
+	//focusBody.debugBox = deb.toBox();
+	//focusBody.debugBox.transform(lightMVP.inverted());
 #endif
 
 	//Build the crop matrix and apply it to the light projection matrix
@@ -1843,11 +1873,11 @@ void Scenery3d::drawDebug()
 
 			//set mvp
 			SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_MAT_MVP,projectionMatrix * modelViewMatrix);
-			SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(1.0f,1.0f,1.0f,1.0f));
 
-			sceneBoundingBox.render();
+			//SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(1.0f,1.0f,1.0f,1.0f));
+			//sceneBoundingBox.render();
 
-			SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(0.4f,0.4f,0.4f,1.0f));
+			//SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(0.4f,0.4f,0.4f,1.0f));
 			//objModel->renderAABBs();
 
 			SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(1.0f,1.0f,1.0f,1.0f));
@@ -2051,8 +2081,6 @@ void Scenery3d::determineFeatureSupport()
 
 void Scenery3d::init()
 {
-	OBJ::setupGL();
-
 	QOpenGLContext* ctx = QOpenGLContext::currentContext();
 
 #ifndef QT_OPENGL_ES_2
@@ -2707,7 +2735,7 @@ bool Scenery3d::initShadowmapping()
 void Scenery3d::draw(StelCore* core)
 {
 	//cant draw if no models
-	if(!objModel || !objModel->hasStelModels())
+	if(!objModel || !objModel->isLoaded())
 		return;
 
 	//reset render statistic
@@ -2719,7 +2747,8 @@ void Scenery3d::draw(StelCore* core)
 
 	//perform Z-sorting for correct transparency
 	//this uses the object's centroids for sorting, so the OBJ must be created correctly
-	objModel->transparencyDepthSort(-absolutePosition.toVec3f());
+	//TODO make this work with new OBJ loader
+	//objModel->transparencyDepthSort(-absolutePosition.toVec3f());
 
 	if(requiresCubemap)
 	{

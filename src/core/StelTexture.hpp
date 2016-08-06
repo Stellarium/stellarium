@@ -67,8 +67,15 @@ public:
 	//! Bind the texture so that it can be used for openGL drawing (calls glBindTexture).
 	//! If the texture is lazyly loaded, this starts the loading and return false immediately.
 	//! @return true if the binding successfully occured, false if the texture is not yet loaded.
-	
 	bool bind(int slot=0);
+
+	//! Releases the currently bound texture without testing if it is currently bound,
+	//! i.e. it simply calls glBindTexture(GL_TEXTURE_2D, 0)
+	inline void release() const { glBindTexture(GL_TEXTURE_2D, 0 ); }
+
+	//! Waits until the texture data is ready for usage (i.e. bind will return true after this).
+	//! Do not use this for potentially network loaded textures.
+	void waitForLoaded();
 
 	//! Return whether the texture can be binded, i.e. it is fully loaded
 	bool canBind() const {return id!=0;}
@@ -83,6 +90,9 @@ public:
 	//! Get the error message which caused the texture loading to fail
 	//! @return the human friendly error message or empty string if no errors occured
 	const QString& getErrorMessage() const {return errorMessage;}
+
+	//! Returns true if a loading error occurred
+	bool hasError() const { return errorOccured; }
 
 	//! Return the full path to the image file.
 	//! If the texture was downloaded from a remote location, this function return the full URL.
@@ -136,6 +146,10 @@ private:
 	bool glLoad(const QImage& image);
 	//! Same as glLoad(QImage), but with an image already in OpenGl format
 	bool glLoad(const GLData& data);
+
+	//! Starts the loading process if it has not already started.
+	//! Returns true if the data was loaded, false if not yet ready.
+	bool load();
 
 	StelTextureParams loadParams;
 

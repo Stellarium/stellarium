@@ -132,7 +132,7 @@ int Frustum::pointInFrustum(const Vec3f& p)
 	return result;
 }
 
-int Frustum::boxInFrustum(const AABB& bbox)
+int Frustum::boxInFrustum(const AABBox &bbox)
 {
 	int result = INSIDE;
 	for(unsigned int i=0; i<PLANECOUNT; i++)
@@ -270,6 +270,6 @@ void Frustum::drawFrustum() const
 		glExtFuncs->glVertex3f(b.v[0],b.v[1],b.v[2]);
 	glExtFuncs->glEnd();
 
-	drawBbox.render();
+	//drawBbox.render();
 #endif
 }

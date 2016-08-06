@@ -20,7 +20,7 @@
 
 //! @file
 //! This header contains useful classes for common geometric operations that are
-//! useful for 3D rendering, such as AABB
+//! useful for 3D rendering, such as AABB, and other vector math helpers.
 
 #ifndef _GEOMMATH_HPP_
 #define _GEOMMATH_HPP_
@@ -93,6 +93,23 @@ public:
 	Vec3f min;
 	//! The maximal extents of the box.
 	Vec3f max;
+};
+
+//! A simple line class, identified by a point and a direction vector.
+class Line
+{
+public:
+	//! Constructs a line given a start point and a direction vector
+	Line(const Vec3f &p, const Vec3f &dir);
+
+	Vec3f startPoint;
+	//! Equals startPoint + direction
+	Vec3f endPoint;
+	Vec3f direction;
+
+	//! Gets the point that lies on the line according to the
+	//! equation \p startPoint + \p val * \p direction
+	Vec3f getPoint(float val);
 };
 
 #endif
