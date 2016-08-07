@@ -34,14 +34,16 @@
 #include "ui_astroCalcDialog.h"
 
 #include <QFileDialog>
+#include <QDir>
 
 QVector<Vec3d> AstroCalcDialog::EphemerisListJ2000;
 QVector<QString> AstroCalcDialog::EphemerisListDates;
 int AstroCalcDialog::DisplayedPositionIndex = -1;
 
 AstroCalcDialog::AstroCalcDialog(QObject *parent)
-	: StelDialog(parent)
+	: StelDialog(parent)	
 	, delimiter(", ")
+	, acEndl("\n")
 {
 	dialogName = "AstroCalc";
 	ui = new Ui_astroCalcDialogForm;
@@ -83,8 +85,11 @@ void AstroCalcDialog::createDialogContent()
 	QList<QWidget *> addscroll;
 	addscroll << ui->planetaryPositionsTreeWidget;
 	installKineticScrolling(addscroll);
+	acEndl="\r\n";
+#else
+	acEndl="\n";
 #endif
-	
+
 	//Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
@@ -364,7 +369,7 @@ void AstroCalcDialog::saveEphemeris()
 {
 	QString filter = q_("CSV (Comma delimited)");
 	filter.append(" (*.csv)");
-	QString filePath = QFileDialog::getSaveFileName(0, q_("Save calculated ephemerides as..."), StelFileMgr::getScreenshotDir(), filter);
+	QString filePath = QFileDialog::getSaveFileName(0, q_("Save calculated ephemerides as..."), QDir::homePath() + "/ephemeris.csv", filter);
 	QFile ephem(filePath);
 	if (!ephem.open(QFile::WriteOnly | QFile::Truncate))
 	{
@@ -378,7 +383,7 @@ void AstroCalcDialog::saveEphemeris()
 
 	int count = ui->ephemerisTreeWidget->topLevelItemCount();
 
-	ephemList << ephemerisHeader.join(delimiter) << endl;
+	ephemList << ephemerisHeader.join(delimiter) << acEndl;
 	for (int i = 0; i < count; i++)
 	{
 		int columns = ephemerisHeader.size();
@@ -388,7 +393,7 @@ void AstroCalcDialog::saveEphemeris()
 			if (j<columns-1)
 				ephemList << delimiter;
 			else
-				ephemList << endl;
+				ephemList << acEndl;
 		}
 	}
 
@@ -678,7 +683,7 @@ void AstroCalcDialog::savePhenomena()
 {
 	QString filter = q_("CSV (Comma delimited)");
 	filter.append(" (*.csv)");
-	QString filePath = QFileDialog::getSaveFileName(0, q_("Save calculated phenomena as..."), StelFileMgr::getScreenshotDir(), filter);
+	QString filePath = QFileDialog::getSaveFileName(0, q_("Save calculated phenomena as..."), QDir::homePath() + "/phenomena.csv", filter);
 	QFile phenomena(filePath);
 	if (!phenomena.open(QFile::WriteOnly | QFile::Truncate))
 	{
@@ -692,7 +697,7 @@ void AstroCalcDialog::savePhenomena()
 
 	int count = ui->phenomenaTreeWidget->topLevelItemCount();
 
-	phenomenaList << phenomenaHeader.join(delimiter) << endl;
+	phenomenaList << phenomenaHeader.join(delimiter) << acEndl;
 	for (int i = 0; i < count; i++)
 	{
 		int columns = phenomenaHeader.size();
@@ -702,7 +707,7 @@ void AstroCalcDialog::savePhenomena()
 			if (j<columns-1)
 				phenomenaList << delimiter;
 			else
-				phenomenaList << endl;
+				phenomenaList << acEndl;
 		}
 	}
 
@@ -735,7 +740,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 	}
 }
 
-QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP &object1, PlanetP &object2, double startJD, double stopJD, float maxSeparation, bool opposition)
+QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP &object1, PlanetP &object2, double startJD, double stopJD, double maxSeparation, bool opposition)
 {
 	double dist, prevDist, step, step0;
 	int sgn, prevSgn = 0;
