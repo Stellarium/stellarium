@@ -40,6 +40,7 @@
 #include "StelTranslator.hpp"
 #include "SolarSystem.hpp"
 #include "StelUtils.hpp"
+#include "StelPropertyMgr.hpp"
 
 #include <QAction>
 #include <QDebug>
@@ -159,6 +160,8 @@ Oculars::Oculars():
 	initialFOV(0),
 	flagInitFOVUsage(false),
 	flagUseFlipForCCD(false),
+	flagAutosetMountForCCD(false),
+	equatorialMountEnabled(false),
 	reticleRotation(0)
 {
 	// Font size is 14
@@ -653,7 +656,11 @@ void Oculars::init()
 		setFlagLimitMagnitude(settings->value("limit_stellar_magnitude", true).toBool());
 		setFlagInitFovUsage(settings->value("use_initial_fov", false).toBool());
 		setFlagUseFlipForCCD(settings->value("use_ccd_flip", false).toBool());
-		setFlagUseSemiTransparency(settings->value("use_semi_transparency", false).toBool());		
+		setFlagUseSemiTransparency(settings->value("use_semi_transparency", false).toBool());
+		setFlagAutosetMountForCCD(settings->value("use_mount_autoset", false).toBool());
+
+		StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
+		equatorialMountEnabled = propMgr->getStelPropertyValue("actionSwitch_Equatorial_Mount").toBool();
 	}
 	catch (std::runtime_error& e)
 	{
@@ -1410,6 +1417,12 @@ void Oculars::toggleCCD(bool show)
 			core->setFlipVert(false);
 		}
 
+		if (getFlagAutosetMountForCCD())
+		{
+			StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
+			propMgr->setStelPropertyValue("actionSwitch_Equatorial_Mount", equatorialMountEnabled);
+		}
+
 		if (guiPanel)
 		{
 			guiPanel->foldGui();
@@ -1587,6 +1600,13 @@ void Oculars::paintCCDBounds()
 				polarAngle = atan2(cpos[1] - crel[1], cpos[0] - crel[0]) * (-180.0)/M_PI; // convert to degrees
 				if (CPos[2] > 0) polarAngle += 90.0;
 				else polarAngle -= 90.0;
+			}
+
+			if (getFlagAutosetMountForCCD())
+			{
+				StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
+				propMgr->setStelPropertyValue("actionSwitch_Equatorial_Mount", telescope->isEquatorial());
+				polarAngle = 0;
 			}
 
 			if (width > 0.0 && height > 0.0)
@@ -2387,6 +2407,24 @@ void Oculars::setFlagUseFlipForCCD(const bool b)
 bool Oculars::getFlagUseFlipForCCD() const
 {
 	return flagUseFlipForCCD;
+}
+
+void Oculars::setFlagAutosetMountForCCD(const bool b)
+{
+	flagAutosetMountForCCD = b;
+	settings->setValue("use_mount_autoset", b);
+	settings->sync();
+
+	if (!b)
+	{
+		StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
+		propMgr->setStelPropertyValue("actionSwitch_Equatorial_Mount", equatorialMountEnabled);
+	}
+}
+
+bool Oculars::getFlagAutosetMountForCCD() const
+{
+	return  flagAutosetMountForCCD;
 }
 
 void Oculars::setFlagUseSemiTransparency(const bool b)
