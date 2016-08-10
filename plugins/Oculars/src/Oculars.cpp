@@ -1043,7 +1043,7 @@ void Oculars::displayPopupMenu()
 	QMenu * popup = new QMenu(&StelMainView::getInstance());
 	StelGui * gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
-	qDebug() <<this->getModuleStyleSheet(gui->getStelStyle()).qtStyleSheet;
+	//qDebug() << "[Oculars]" << this->getModuleStyleSheet(gui->getStelStyle()).qtStyleSheet;
 	popup->setStyleSheet(this->getModuleStyleSheet(gui->getStelStyle()).qtStyleSheet);
 
 	if (flagShowOculars)
