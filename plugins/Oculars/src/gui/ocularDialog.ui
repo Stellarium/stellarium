@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>668</width>
-    <height>595</height>
+    <height>609</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -385,6 +385,16 @@
               <widget class="QCheckBox" name="checkBoxUseFlipForCCD">
                <property name="text">
                 <string>Use flip for CCD</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBoxTypeOfMount">
+               <property name="toolTip">
+                <string>Enable automatic setting the type of mount from the telescope settings for saving horizontal orientation of CCD frame.</string>
+               </property>
+               <property name="text">
+                <string>Enable automatic setting the type of mount</string>
                </property>
               </widget>
              </item>
