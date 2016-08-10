@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>668</width>
+    <width>646</width>
     <height>609</height>
    </rect>
   </property>
@@ -179,6 +179,44 @@
            <number>0</number>
           </property>
           <item>
+           <widget class="QGroupBox" name="groupBoxInterface">
+            <property name="title">
+             <string>Interface</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_7">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBoxControlPanel">
+               <property name="text">
+                <string>On-screen control panel</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="checkBoxInitialFOV">
+               <property name="toolTip">
+                <string>Mark it if you want the FOV value the same like at the startup of Stellarium.</string>
+               </property>
+               <property name="text">
+                <string>Restore FOV to initial values</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
            <widget class="QGroupBox" name="groupBoxOcularOptions">
             <property name="title">
              <string>Ocular view</string>
@@ -234,134 +272,11 @@
            </widget>
           </item>
           <item>
-           <widget class="QGroupBox" name="groupBox">
-            <property name="title">
-             <string>Key mappings</string>
-            </property>
-            <layout class="QFormLayout" name="formLayout_3">
-             <property name="fieldGrowthPolicy">
-              <enum>QFormLayout::FieldsStayAtSizeHint</enum>
-             </property>
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_11">
-               <property name="text">
-                <string>Toggle ocular view:</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="togglePluginLineEdit">
-               <property name="maximumSize">
-                <size>
-                 <width>100</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="baseSize">
-                <size>
-                 <width>100</width>
-                 <height>22</height>
-                </size>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="maxLength">
-                <number>50</number>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="labelPopupMenuShortcut">
-               <property name="text">
-                <string>Open pop-up navigation menu:</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLineEdit" name="togglePopupNavigatorWindowLineEdit">
-               <property name="maximumSize">
-                <size>
-                 <width>100</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="baseSize">
-                <size>
-                 <width>100</width>
-                 <height>22</height>
-                </size>
-               </property>
-               <property name="maxLength">
-                <number>50</number>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBoxInterface">
-            <property name="title">
-             <string>Interface</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_8">
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QCheckBox" name="checkBoxControlPanel">
-               <property name="text">
-                <string>On-screen control panel</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="checkBoxInitialFOV">
-               <property name="toolTip">
-                <string>Mark it if you want the FOV value the same like at the startup of Stellarium.</string>
-               </property>
-               <property name="text">
-                <string>Restore FOV to initial values</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
            <widget class="QGroupBox" name="groupBoxSensorOptions">
             <property name="title">
              <string>Sensor view</string>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_11">
+            <layout class="QGridLayout" name="gridLayout_8">
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -374,27 +289,27 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item>
-              <widget class="QCheckBox" name="checkBoxDecimalDegrees">
-               <property name="text">
-                <string>Use degrees and minutes for FOV of CCD</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="checkBoxUseFlipForCCD">
-               <property name="text">
-                <string>Use flip for CCD</string>
-               </property>
-              </widget>
-             </item>
-             <item>
+             <item row="3" column="0">
               <widget class="QCheckBox" name="checkBoxTypeOfMount">
                <property name="toolTip">
                 <string>Enable automatic setting the type of mount from the telescope settings for saving horizontal orientation of CCD frame.</string>
                </property>
                <property name="text">
                 <string>Enable automatic setting the type of mount</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="checkBoxDecimalDegrees">
+               <property name="text">
+                <string>Use degrees and minutes for FOV of CCD</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="checkBoxUseFlipForCCD">
+               <property name="text">
+                <string>Use flip for CCD</string>
                </property>
               </widget>
              </item>
@@ -1830,8 +1745,6 @@
  <tabstops>
   <tabstop>Tabs</tabstop>
   <tabstop>requireSelectionCheckBox</tabstop>
-  <tabstop>togglePluginLineEdit</tabstop>
-  <tabstop>togglePopupNavigatorWindowLineEdit</tabstop>
   <tabstop>ocularListView</tabstop>
   <tabstop>addOcular</tabstop>
   <tabstop>pushButtonMoveOcularUp</tabstop>
