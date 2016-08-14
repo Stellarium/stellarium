@@ -20,7 +20,7 @@
 #include "tests/testStelVertexArray.hpp"
 
 
-QTEST_MAIN(TestStelVertexArray)
+QTEST_GUILESS_MAIN(TestStelVertexArray)
 
 
 void TestStelVertexArray::initTestCase()

@@ -29,7 +29,7 @@
 #include "StelUtils.hpp"
 
 
-QTEST_MAIN(TestStelSphericalIndex)
+QTEST_GUILESS_MAIN(TestStelSphericalIndex)
 
 class TestRegionObject : public StelRegionObject
 {
@@ -59,7 +59,7 @@ void TestStelSphericalIndex::testBase()
 	grid.insert(StelRegionObjectP(new TestRegionObject(SphericalRegionP(new SphericalCap(Vec3d(1,0,0), 0.9)))));
 	grid.insert(StelRegionObjectP(new TestRegionObject(SphericalRegionP(new SphericalCap(Vec3d(-1,0,0), 0.99)))));
 	CountFuncObject countFunc;
- 	grid.processIntersectingRegions(SphericalRegionP(new SphericalCap(Vec3d(1,0,0), 0.5)), countFunc);
+	grid.processIntersectingRegions(SphericalRegionP(new SphericalCap(Vec3d(1,0,0), 0.5)), countFunc);
 	grid.processIntersectingRegions(SphericalRegionP(new SphericalCap(Vec3d(1,0,0), 0.95)), countFunc);
 	QVERIFY(countFunc.count==2);
 	countFunc.count=0;
