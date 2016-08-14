@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-11 04:58+0700\n"
-"PO-Revision-Date: 2016-07-29 18:23+0000\n"
+"PO-Revision-Date: 2016-08-14 04:33+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-08-11 05:22+0000\n"
+"X-Launchpad-Export-Date: 2016-08-14 05:18+0000\n"
 "X-Generator: Launchpad (build 18169)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -2720,11 +2720,11 @@ msgstr "Юліянскі дзень"
 
 #: src/gui/AstroCalcDialog.cpp:370 src/gui/AstroCalcDialog.cpp:684
 msgid "CSV (Comma delimited)"
-msgstr ""
+msgstr "CSV (Падзелены коскамі)"
 
 #: src/gui/AstroCalcDialog.cpp:372
 msgid "Save calculated ephemerides as..."
-msgstr ""
+msgstr "Захаваць разьлічаныя эфэмэрыды як…"
 
 #: src/gui/AstroCalcDialog.cpp:448
 msgid "10 minutes"
@@ -2813,7 +2813,7 @@ msgstr "Аб'ект 2"
 
 #: src/gui/AstroCalcDialog.cpp:686
 msgid "Save calculated phenomena as..."
-msgstr ""
+msgstr "Захаваць разьлічаную зьяву як…"
 
 #: src/gui/AstroCalcDialog.cpp:725
 msgid "Conjunction"
@@ -5454,10 +5454,12 @@ msgid ""
 "Use designations of deep-sky objects instead of their common names for "
 "screen labels"
 msgstr ""
+"Выкарыстоўваць абазначэньні аб'ектаў глыбокага космасу замест іхных "
+"агульнапрынятых назваў у пазнаках на экране"
 
 #: src/ui_viewDialog.h:1740
 msgid "Use designations for screen labels"
-msgstr ""
+msgstr "Выкарыстоўваць абазначэньні ў пазнаках на экране"
 
 #: src/ui_viewDialog.h:1741
 msgid "Celestial Sphere"
@@ -5746,11 +5748,11 @@ msgstr "Мова культуры неба:"
 
 #: src/ui_configurationDialog.h:1094
 msgid "This feature has not been thoroughly tested yet!"
-msgstr ""
+msgstr "Гэтая функцыянальнасьць не быля належным чынам правераная."
 
 #: src/ui_configurationDialog.h:1096
 msgid "Ephemeris settings (experimental)"
-msgstr ""
+msgstr "Настаўленьні эфэмэрыдаў (экспэрымэнтальныя)"
 
 #: src/ui_configurationDialog.h:1097 src/ui_configurationDialog.h:1098
 msgid "Not installed"
@@ -6410,7 +6412,7 @@ msgstr "…"
 
 #: src/ui_astroCalcDialog.h:415
 msgid "Update of planetary positions"
-msgstr ""
+msgstr "Абнаўленьне становішчаў плянэт"
 
 #: src/ui_astroCalcDialog.h:416
 msgid "Planetary positions"
@@ -6435,15 +6437,15 @@ msgstr "Разьлічыць эфэмэрыды"
 
 #: src/ui_astroCalcDialog.h:422
 msgid "Save ephemeris"
-msgstr ""
+msgstr "Захаваць эфэмэрыду"
 
 #: src/ui_astroCalcDialog.h:424
 msgid "Show markers of positions of the current celestial body on the sky"
-msgstr ""
+msgstr "Паказваць пазнакі становішча бягучага нябеснага цела"
 
 #: src/ui_astroCalcDialog.h:426
 msgid "Show markers of positions"
-msgstr ""
+msgstr "Паказваць пазнакі становішчаў"
 
 #: src/ui_astroCalcDialog.h:429 src/ui_astroCalcDialog.h:440
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
@@ -6452,11 +6454,11 @@ msgstr "Да:"
 
 #: src/ui_astroCalcDialog.h:432
 msgid "Show dates of positions of current celestial body near markers"
-msgstr ""
+msgstr "Паказваць даты становішчаў бягучага нябеснага цела ля пазнак"
 
 #: src/ui_astroCalcDialog.h:434
 msgid "Show dates of positions"
-msgstr ""
+msgstr "Паказваць даты становішчаў"
 
 #: src/ui_astroCalcDialog.h:435
 msgid "Ephemeris"
@@ -6484,15 +6486,15 @@ msgstr "Значэньне ў дзесятковых ґрадусах"
 
 #: src/ui_astroCalcDialog.h:446
 msgid "Calculate phenomena"
-msgstr "Разьлічыць фэномэны"
+msgstr "Разьлічыць зьяву"
 
 #: src/ui_astroCalcDialog.h:447
 msgid "Save phenomena"
-msgstr ""
+msgstr "Захаваць зьяву"
 
 #: src/ui_astroCalcDialog.h:448
 msgid "Phenomena"
-msgstr "Фэномэны"
+msgstr "Зьява"
 
 #: src/ui_astroCalcDialog.h:449
 msgid "AstroCalc"
@@ -7638,7 +7640,7 @@ msgstr "№ у каталёґу"
 
 #: plugins/Satellites/src/Satellite.cpp:262
 msgid "International Designator"
-msgstr "Міжнародае абазначэньне"
+msgstr "Міжнароднае абазначэньне"
 
 #: plugins/Satellites/src/Satellite.cpp:269
 msgid "artificial satellite"
@@ -8576,6 +8578,9 @@ msgid ""
 "Windows, a USB connection may require a 'virtual serial port' software, if "
 "it is not supplied with the cable or the telescope."
 msgstr ""
+"У Linux і Max OS X дадатак апрацоўвае абодва выпадкі аднолькава. У Windows "
+"для падлучэньня праз USB можа спатрэбіцца праґрама «віртуальнага "
+"пасьлядоўнага порту», калі яна не ішла разам з кабэлем ці тэлескопам."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:316
 msgid ""
@@ -8705,10 +8710,11 @@ msgstr "Тэлескоп кіруецца:"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:341
 msgid "<b>Stellarium, directly through a serial port</b> is the DIRECT case"
 msgstr ""
+"<b>Stellarium, наўпрост праз пасьлядоўны порт</b> — гэта ПРАМОЕ злучэньне"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:342
 msgid "<b>External software or a remote computer</b> is the INDIRECT case"
-msgstr ""
+msgstr "<b>Вонкавая праґрама ці аддалены кампутар</b> — НЕПРАМОЕ злучэньне"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:343
 #, qt-format
@@ -8787,6 +8793,8 @@ msgid ""
 "If you are using an USB cable, the default serial port of your telescope "
 "most probably is not in the list of suggestions."
 msgstr ""
+"Калі карыстаешся кабэлем USB, то прадвызначаны пасьлядоўны порт найхутчэй "
+"будзе адсутнічаць у сьпісе прапановаў."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:362
 msgid ""
@@ -8861,6 +8869,8 @@ msgstr ""
 msgid ""
 "In the telescope configuration window, click on 'User Interface Settings'."
 msgstr ""
+"У вакне настаўленьняў тэлескопа, пстрыкні па «Настаўленьні інтэрфэйсу "
+"карыстальніка»"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:380
 msgid ""
@@ -8982,7 +8992,7 @@ msgstr "Напрыклад, Alt+1 для тэлескопа №1."
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:405
 msgid ""
 "This will slew the device to the point in the center of the current view."
-msgstr ""
+msgstr "Прылада будзе павернутая да пункта ў цэнтры бягучага прагляду."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:406
 msgid ""
@@ -9983,15 +9993,15 @@ msgstr "Дадатак рэдактару Сонечнай сыстэмы"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:187
 msgid "Save the Solar System configuration file as..."
-msgstr ""
+msgstr "Захаваць файл настаўленьняў Сонечнай сыстэмы як…"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:193
 msgid "Configuration files"
-msgstr ""
+msgstr "Файлы настаўленьняў"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:195
 msgid "Select a file to replace the Solar System configuration file"
-msgstr ""
+msgstr "Выбеы файл, якім трэба замяніць файл настаўленьняў Сонечнай сыстэмы"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:511
 msgid "Import data"
@@ -10808,6 +10818,8 @@ msgid ""
 "The Remote Control plugin provides a web interface to allow state changes "
 "and triggering scripts using a connected webbrowser."
 msgstr ""
+"Дадатак аддаленага кіраваньня стварае вэб-інтэрфэйс, які дазваляе мяняць "
+"стан і запушчаць сцэнары выкарыстоўваючы аблядальнік Сеціва."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:115
 msgid "It is also possible to send commands via command line, e.g.."
@@ -12314,7 +12326,7 @@ msgstr ""
 
 #: plugins/FOV/src/FOV.cpp:86
 msgid "Set FOV to"
-msgstr ""
+msgstr "Усталяваць ПЗ у"
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:80
 msgid "Field of View plug-in"
