@@ -592,30 +592,34 @@ TARGET_LINK_LIBRARIES(testStelSphereGeometry ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelSphereGeometry)
 ADD_TEST(testStelSphereGeometry)
 
-#SET(tests_testStelSphericalIndex_SRCS
-#     tests/testStelSphericalIndex.hpp
-#     tests/testStelSphericalIndex.cpp
-#     core/StelSphericalIndex.hpp
-#     core/StelSphericalIndex.cpp
-#     core/StelSphereGeometry.hpp
-#     core/StelSphereGeometry.cpp
-#     core/StelVertexArray.hpp
-#     core/StelVertexArray.cpp
-#     core/OctahedronPolygon.hpp
-#     core/OctahedronPolygon.cpp
-#     core/StelJsonParser.hpp
-#     core/StelJsonParser.cpp
-#     core/StelUtils.cpp
-#     core/StelUtils.hpp
-#     core/StelProjector.cpp
-#     core/StelProjector.hpp
-#     core/StelTranslator.cpp
-#     core/StelTranslator.hpp
-#     ${glues_lib_SRCS})
-#ADD_EXECUTABLE(testStelSphericalIndex EXCLUDE_FROM_ALL ${tests_testStelSphericalIndex_SRCS})
-#QT5_USE_MODULES(testStelSphericalIndex Core OpenGL Test)
-#TARGET_LINK_LIBRARIES(testStelSphericalIndex ${extLinkerOptionTest})
-#ADD_DEPENDENCIES(buildTests testStelSphericalIndex)
+SET(tests_testStelSphericalIndex_SRCS
+     tests/testStelSphericalIndex.hpp
+     tests/testStelSphericalIndex.cpp
+     core/StelSphericalIndex.hpp
+     core/StelSphericalIndex.cpp
+     core/StelSphereGeometry.hpp
+     core/StelSphereGeometry.cpp
+     core/StelVertexArray.hpp
+     core/StelVertexArray.cpp
+     core/OctahedronPolygon.hpp
+     core/OctahedronPolygon.cpp
+     core/StelJsonParser.hpp
+     core/StelJsonParser.cpp
+     core/StelUtils.cpp
+     core/StelUtils.hpp
+     core/StelProjector.cpp
+     core/StelProjector.hpp
+     core/StelTranslator.cpp
+     core/StelTranslator.hpp
+     core/StelFileMgr.cpp
+     core/StelFileMgr.hpp
+     ${glues_lib_SRCS}
+)
+ADD_EXECUTABLE(testStelSphericalIndex EXCLUDE_FROM_ALL ${tests_testStelSphericalIndex_SRCS})
+QT5_USE_MODULES(testStelSphericalIndex Core OpenGL Test)
+TARGET_LINK_LIBRARIES(testStelSphericalIndex ${extLinkerOptionTest})
+ADD_DEPENDENCIES(buildTests testStelSphericalIndex)
+ADD_TEST(testStelSphericalIndex)
 
 SET(tests_testStelJsonParser_SRCS
      tests/testStelJsonParser.hpp
