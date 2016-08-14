@@ -615,6 +615,10 @@ SET(tests_testStelSphericalIndex_SRCS
      core/StelFileMgr.hpp
      ${glues_lib_SRCS}
 )
+IF(WIN32)
+     # StelUtils required zlib sources
+     SET(tests_testStelSphericalIndex_SRCS ${tests_testStelSphericalIndex_SRCS} ${zlib_SRCS})
+ENDIF()
 ADD_EXECUTABLE(testStelSphericalIndex EXCLUDE_FROM_ALL ${tests_testStelSphericalIndex_SRCS})
 QT5_USE_MODULES(testStelSphericalIndex Core OpenGL Test)
 TARGET_LINK_LIBRARIES(testStelSphericalIndex ${extLinkerOptionTest})
