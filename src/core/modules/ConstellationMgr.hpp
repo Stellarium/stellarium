@@ -44,53 +44,53 @@ class ConstellationMgr : public StelObjectModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool artDisplayed
-			   READ getFlagArt
-			   WRITE setFlagArt
-			   NOTIFY artDisplayedChanged)
+		   READ getFlagArt
+		   WRITE setFlagArt
+		   NOTIFY artDisplayedChanged)
 	Q_PROPERTY(float artFadeDuration
-			   READ getArtFadeDuration
-			   WRITE setArtFadeDuration
-			   NOTIFY artFadeDurationChanged)
+		   READ getArtFadeDuration
+		   WRITE setArtFadeDuration
+		   NOTIFY artFadeDurationChanged)
 	Q_PROPERTY(float artIntensity
-			   READ getArtIntensity
-			   WRITE setArtIntensity
-			   NOTIFY artIntensityChanged)
+		   READ getArtIntensity
+		   WRITE setArtIntensity
+		   NOTIFY artIntensityChanged)
 	Q_PROPERTY(Vec3f boundariesColor
-			   READ getBoundariesColor
-			   WRITE setBoundariesColor
-			   NOTIFY boundariesColorChanged)
+		   READ getBoundariesColor
+		   WRITE setBoundariesColor
+		   NOTIFY boundariesColorChanged)
 	Q_PROPERTY(bool boundariesDisplayed
-			   READ getFlagBoundaries
-			   WRITE setFlagBoundaries
-			   NOTIFY boundariesDisplayedChanged)
+		   READ getFlagBoundaries
+		   WRITE setFlagBoundaries
+		   NOTIFY boundariesDisplayedChanged)
 	Q_PROPERTY(float fontSize
-			   READ getFontSize
-			   WRITE setFontSize
-			   NOTIFY fontSizeChanged)
+		   READ getFontSize
+		   WRITE setFontSize
+		   NOTIFY fontSizeChanged)
 	Q_PROPERTY(bool isolateSelected
-			   READ getFlagIsolateSelected
-			   WRITE setFlagIsolateSelected
-			   NOTIFY isolateSelectedChanged)	
+		   READ getFlagIsolateSelected
+		   WRITE setFlagIsolateSelected
+		   NOTIFY isolateSelectedChanged)
 	Q_PROPERTY(Vec3f linesColor
-			   READ getLinesColor
-			   WRITE setLinesColor
-			   NOTIFY linesColorChanged)
+		   READ getLinesColor
+		   WRITE setLinesColor
+		   NOTIFY linesColorChanged)
 	Q_PROPERTY(bool linesDisplayed
-			   READ getFlagLines
-			   WRITE setFlagLines
-			   NOTIFY linesDisplayedChanged)
+		   READ getFlagLines
+		   WRITE setFlagLines
+		   NOTIFY linesDisplayedChanged)
 	Q_PROPERTY(Vec3f namesColor
-			   READ getLabelsColor
-			   WRITE setLabelsColor
-			   NOTIFY namesColorChanged)
+		   READ getLabelsColor
+		   WRITE setLabelsColor
+		   NOTIFY namesColorChanged)
 	Q_PROPERTY(bool namesDisplayed
-			   READ getFlagLabels
-			   WRITE setFlagLabels
-			   NOTIFY namesDisplayedChanged)
+		   READ getFlagLabels
+		   WRITE setFlagLabels
+		   NOTIFY namesDisplayedChanged)
 	Q_PROPERTY(ConstellationDisplayStyle constellationDisplayStyle
-			   READ getConstellationDisplayStyle
-			   WRITE setConstellationDisplayStyle
-			   NOTIFY constellationsDisplayStyleChanged)
+		   READ getConstellationDisplayStyle
+		   WRITE setConstellationDisplayStyle
+		   NOTIFY constellationsDisplayStyleChanged)
 	Q_PROPERTY(float constellationLineThickness
 		   READ getConstellationLineThickness
 		   WRITE setConstellationLineThickness
