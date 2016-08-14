@@ -728,6 +728,37 @@ TARGET_LINK_LIBRARIES(testPrecession ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testPrecession)
 ADD_TEST(testPrecession)
 
+SET(tests_testEphemeris_SRCS
+     tests/testEphemeris.hpp
+     tests/testEphemeris.cpp
+     core/StelFileMgr.hpp
+     core/StelFileMgr.cpp
+     core/planetsephems/EphemWrapper.hpp
+     core/planetsephems/vsop87.h
+     core/planetsephems/vsop87.c
+     core/planetsephems/calc_interpolated_elements.h
+     core/planetsephems/calc_interpolated_elements.c
+     core/planetsephems/elliptic_to_rectangular.h
+     core/planetsephems/elliptic_to_rectangular.c
+#     core/planetsephems/de430.hpp
+#     core/planetsephems/de430.cpp
+#     core/planetsephems/de431.hpp
+#     core/planetsephems/de431.cpp
+#     core/planetsephems/jpleph.h
+#     core/planetsephems/jpleph.cpp
+     core/StelUtils.hpp
+     core/StelUtils.cpp
+)
+IF(WIN32)
+     # StelUtils required zlib sources
+     SET(tests_testEphemeris_SRCS ${tests_testEphemeris_SRCS} ${zlib_SRCS})
+ENDIF()
+ADD_EXECUTABLE(testEphemeris EXCLUDE_FROM_ALL ${tests_testEphemeris_SRCS})
+QT5_USE_MODULES(testEphemeris Core Test)
+TARGET_LINK_LIBRARIES(testEphemeris ${extLinkerOptionTest})
+ADD_DEPENDENCIES(buildTests testEphemeris)
+ADD_TEST(testEphemeris)
+
 ADD_CUSTOM_TARGET(tests COMMENT "Run the Stellarium unit tests")
 FOREACH(NAME ${STELLARIUM_TESTS})
      IF(MSVC)
