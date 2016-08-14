@@ -29,16 +29,17 @@ class TestEphemeris : public QObject
 
 private slots:
 	void initTestCase();
-	void testMercuryHeliocentricEphemeris();
-	void testVenusHeliocentricEphemeris();
-	void testMarsHeliocentricEphemeris();
-	void testJupiterHeliocentricEphemeris();
-	void testSaturnHeliocentricEphemeris();
-	void testUranusHeliocentricEphemeris();
-	void testNeptuneHeliocentricEphemeris();
+	void testMercuryHeliocentricEphemerisVsop87();
+	void testVenusHeliocentricEphemerisVsop87();
+	void testMarsHeliocentricEphemerisVsop87();
+	void testJupiterHeliocentricEphemerisVsop87();
+	void testSaturnHeliocentricEphemerisVsop87();
+	void testUranusHeliocentricEphemerisVsop87();
+	void testNeptuneHeliocentricEphemerisVsop87();
 
 private:
 	QString de430FilePath, de431FilePath;
+	QVariantList mercury, venus, mars, jupiter, saturn, uranus, neptune;
 
 };
 
