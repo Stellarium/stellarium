@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include <QOpenGLFunctions_1_0>
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
@@ -48,6 +49,9 @@
 #include <QVarLengthArray>
 #include <QOpenGLBuffer>
 #include <QOpenGLContext>
+#ifdef DEBUG_SHADOWMAP
+#include <QOpenGLFramebufferObject>
+#endif
 #include <QOpenGLShader>
 #include <QtConcurrent>
 
@@ -65,17 +69,34 @@ double Planet::customGrsJD = 2456901.5;
 double Planet::customGrsDrift = 15.;
 int Planet::customGrsLongitude = 216;
 
-QOpenGLShaderProgram* Planet::planetShaderProgram=NULL;
+QOpenGLShaderProgram* Planet::planetShaderProgram=Q_NULLPTR;
 Planet::PlanetShaderVars Planet::planetShaderVars;
-QOpenGLShaderProgram* Planet::ringPlanetShaderProgram=NULL;
+QOpenGLShaderProgram* Planet::ringPlanetShaderProgram=Q_NULLPTR;
 Planet::PlanetShaderVars Planet::ringPlanetShaderVars;
-QOpenGLShaderProgram* Planet::moonShaderProgram=NULL;
+QOpenGLShaderProgram* Planet::moonShaderProgram=Q_NULLPTR;
 Planet::PlanetShaderVars Planet::moonShaderVars;
-QOpenGLShaderProgram* Planet::objShaderProgram=NULL;
+QOpenGLShaderProgram* Planet::objShaderProgram=Q_NULLPTR;
 Planet::PlanetShaderVars Planet::objShaderVars;
+QOpenGLShaderProgram* Planet::objShadowShaderProgram=Q_NULLPTR;
+Planet::PlanetShaderVars  Planet::objShadowShaderVars;
+QOpenGLShaderProgram* Planet::transformShaderProgram=Q_NULLPTR;
+Planet::PlanetShaderVars Planet::transformShaderVars;
+
+bool Planet::shadowInitialized = false;
+#ifdef DEBUG_SHADOWMAP
+QOpenGLFramebufferObject* Planet::shadowFBO = Q_NULLPTR;
+#else
+GLuint Planet::shadowFBO = 0;
+#endif
+GLuint Planet::shadowTex = 0;
+
 
 QMap<Planet::PlanetType, QString> Planet::pTypeMap;
 QMap<Planet::ApparentMagnitudeAlgorithm, QString> Planet::vMagAlgorithmMap;
+
+#define STRINGIFY2(a) #a
+#define STRINGIFY(a) STRINGIFY2(a)
+#define SM_SIZE 1024
 
 Planet::PlanetOBJModel::PlanetOBJModel()
 	: projPosBuffer(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer)), obj(new StelOBJ()), arr(new StelOpenGLArray())
@@ -1291,28 +1312,15 @@ void Planet::PlanetShaderVars::initLocations(QOpenGLShaderProgram* p)
 	GL(innerRadius = p->uniformLocation("innerRadius"));
 	GL(ringS = p->uniformLocation("ringS"));
 
+	// Shadowmap variables
+	GL(shadowMatrix = p->uniformLocation("shadowMatrix"));
+	GL(shadowTex = p->uniformLocation("shadowTex"));
+
 	GL(p->release());
 }
 
 QOpenGLShaderProgram* Planet::createShader(const QString& name, PlanetShaderVars& vars, const QByteArray& vSrc, const QByteArray& fSrc, const QByteArray& prefix, const QMap<QByteArray, int> &fixedAttributeLocations)
 {
-	QByteArray vPrefixed = prefix;
-	QByteArray fPrefixed = prefix;
-	vPrefixed+=vSrc;
-	fPrefixed+=fSrc;
-
-	QOpenGLShader vshader(QOpenGLShader::Vertex);
-	vshader.compileSourceCode(vPrefixed);
-	if (!vshader.log().isEmpty() && !vshader.log().contains("no warnings", Qt::CaseInsensitive)) { qWarning() << "Planet: Warnings/Errors while compiling" << name << "vertex shader: " << vshader.log(); }
-	if(!vshader.isCompiled())
-		return Q_NULLPTR;
-
-	QOpenGLShader fshader(QOpenGLShader::Fragment);
-	fshader.compileSourceCode(fPrefixed);
-	if (!fshader.log().isEmpty() && !fshader.log().contains("no warnings", Qt::CaseInsensitive)) { qWarning() << "Planet: Warnings/Errors while compiling" << name << "fragment shader: " << fshader.log(); }
-	if(!fshader.isCompiled())
-		return Q_NULLPTR;
-
 	QOpenGLShaderProgram* program = new QOpenGLShaderProgram();
 	if(!program->create())
 	{
@@ -1320,8 +1328,32 @@ QOpenGLShaderProgram* Planet::createShader(const QString& name, PlanetShaderVars
 		delete program;
 		return Q_NULLPTR;
 	}
-	program->addShader(&vshader);
-	program->addShader(&fshader);
+
+	if(!vSrc.isEmpty())
+	{
+		QOpenGLShader vshader(QOpenGLShader::Vertex);
+		vshader.compileSourceCode(prefix + vSrc);
+		if (!vshader.log().isEmpty() && !vshader.log().contains("no warnings", Qt::CaseInsensitive)) { qWarning() << "Planet: Warnings/Errors while compiling" << name << "vertex shader: " << vshader.log(); }
+		if(!vshader.isCompiled())
+		{
+			delete program;
+			return Q_NULLPTR;
+		}
+		program->addShader(&vshader);
+	}
+
+	if(!fSrc.isEmpty())
+	{
+		QOpenGLShader fshader(QOpenGLShader::Fragment);
+		fshader.compileSourceCode(prefix + fSrc);
+		if (!fshader.log().isEmpty() && !fshader.log().contains("no warnings", Qt::CaseInsensitive)) { qWarning() << "Planet: Warnings/Errors while compiling" << name << "fragment shader: " << fshader.log(); }
+		if(!fshader.isCompiled())
+		{
+			delete program;
+			return Q_NULLPTR;
+		}
+		program->addShader(&fshader);
+	}
 
 	//process fixed attribute locations
 	QMap<QByteArray,int>::const_iterator it = fixedAttributeLocations.begin();
@@ -1375,7 +1407,7 @@ void Planet::initShader()
 
 	if(!fFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qCritical()<<"Cannot load planet fragment shader file"<<vFileName<<fFile.errorString();
+		qCritical()<<"Cannot load planet fragment shader file"<<fFileName<<fFile.errorString();
 		return;
 	}
 	QByteArray fsrc = fFile.readAll();
@@ -1396,12 +1428,56 @@ void Planet::initShader()
 	attrLoc.insert("texCoord", StelOpenGLArray::ATTLOC_TEXCOORD);
 	attrLoc.insert("normalIn", StelOpenGLArray::ATTLOC_NORMAL);
 	objShaderProgram = createShader("objShaderProgram",objShaderVars,vsrc,fsrc,"#define IS_OBJ\n\n",attrLoc);
+	//OBJ shader with shadowmap support
+	objShadowShaderProgram = createShader("objShadowShaderProgram",objShadowShaderVars,vsrc,fsrc,
+					      "#define IS_OBJ\n"
+					      "#define SHADOWMAP\n"
+					      "#define SM_SIZE " STRINGIFY(SM_SIZE) "\n"
+					      "\n",attrLoc);
+
+	//this is a simple transform-only shader (used for filling the depth map for OBJ shadows)
+	QByteArray transformVShader(
+				"uniform mat4 projectionMatrix;\n"
+				"attribute vec4 unprojectedVertex;\n"
+			#ifdef DEBUG_SHADOWMAP
+				"attribute mediump vec2 texCoord;\n"
+				"varying mediump vec2 texc; //texture coord\n"
+				"varying highp vec4 pos; //projected pos\n"
+			#endif
+				"void main()\n"
+				"{\n"
+			#ifdef DEBUG_SHADOWMAP
+				"   texc = texCoord;\n"
+				"   pos = projectionMatrix * unprojectedVertex;\n"
+			#endif
+				"   gl_Position = projectionMatrix * unprojectedVertex;\n"
+				"}\n"
+				);
+
+#ifdef DEBUG_SHADOWMAP
+	QByteArray transformFShader(
+				"uniform sampler2D tex;\n"
+				"varying mediump vec2 texc; //texture coord\n"
+				"varying highp vec4 pos; //projected pos\n"
+				"void main()\n"
+				"{\n"
+				"   vec4 texCol = texture2D(tex,texc);\n"
+				"   float zNorm = (pos.z + 1.0) / 2.0;\n" //from [-1,1] to [0,1]
+				"   gl_FragColor = vec4(texCol.rgb,zNorm);\n"
+				"}\n"
+				);
+#else
+	QByteArray transformFShader;
+#endif
+	transformShaderProgram = createShader("transformShaderProgam", transformShaderVars, transformVShader, transformFShader,QByteArray(),attrLoc);
 
 	//check if ALL shaders have been created correctly
 	shaderError = !(planetShaderProgram&&
 			ringPlanetShaderProgram&&
 			moonShaderProgram&&
-			objShaderProgram);
+			objShaderProgram&&
+			objShadowShaderProgram&&
+			transformShaderProgram);
 }
 
 void Planet::deinitShader()
@@ -1415,6 +1491,134 @@ void Planet::deinitShader()
 	moonShaderProgram = Q_NULLPTR;
 	delete objShaderProgram;
 	objShaderProgram = Q_NULLPTR;
+	delete objShadowShaderProgram;
+	objShadowShaderProgram = Q_NULLPTR;
+	delete transformShaderProgram;
+	transformShaderProgram = Q_NULLPTR;
+}
+
+bool Planet::initFBO()
+{
+	if(shadowInitialized)
+		return false;
+
+	QOpenGLContext* ctx  = QOpenGLContext::currentContext();
+
+	bool isGLESv2 = false;
+	bool error = false;
+	//check if support for the required features is available
+	if(!ctx->functions()->hasOpenGLFeature(QOpenGLFunctions::Framebuffers))
+	{
+		qWarning()<<"Your GL driver does not support framebuffer objects, OBJ model self-shadows will not be available";
+		error = true;
+	}
+	else if(ctx->isOpenGLES() &&
+			ctx->format().majorVersion()<3)
+	{
+		isGLESv2 = true;
+		//GLES v2 requires extensions for depth textures
+		if(!(ctx->hasExtension("GL_OES_depth_texture") || ctx->hasExtension("GL_ANGLE_depth_texture")))
+		{
+			qWarning()<<"Your GL driver has no support for depth textures, OBJ model self-shadows will not be available";
+			error = true;
+		}
+	}
+	//on desktop, depth textures should be available on all GL >= 1.4 contexts, so no check should be required
+
+	if(!error)
+	{
+		//all seems ok, create our objects
+		glGenTextures(1, &shadowTex);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, shadowTex);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+#ifndef QT_OPENGL_ES_2
+		if(!isGLESv2)
+		{
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+			const float ones[] = {1.0f, 1.0f, 1.0f, 1.0f};
+			glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ones);
+		}
+#endif
+
+#ifndef DEBUG_SHADOWMAP
+		//create the texture
+		glTexImage2D(GL_TEXTURE_2D,0,isGLESv2?GL_DEPTH_COMPONENT:GL_DEPTH_COMPONENT16,SM_SIZE,SM_SIZE,0,GL_DEPTH_COMPONENT,GL_UNSIGNED_SHORT, NULL);
+
+		//we dont use QOpenGLFramebuffer because we dont want a color buffer...
+		GL(glGenFramebuffers(1, &shadowFBO));
+		GL(glBindFramebuffer(GL_FRAMEBUFFER, shadowFBO));
+
+		//attach shadow tex to FBO
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowTex, 0);
+
+		//on desktop, we must disable the read/draw buffer because we have no color buffer
+		//else, it would be an FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER error
+		//see GL_EXT_framebuffer_object and GL_ARB_framebuffer_object
+		//on ES 2, this seems to be allowed (there are no glDrawBuffers/glReadBuffer functions there), see GLES spec section 4.4.4
+		//probably same on ES 3: though it has glDrawBuffers/glReadBuffer but no mention of it in section 4.4.4 and no FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER is defined
+		if(!ctx->isOpenGLES())
+		{
+			QOpenGLFunctions_1_0* gl10 = ctx->versionFunctions<QOpenGLFunctions_1_0>();
+			if(Q_LIKELY(gl10))
+			{
+				//use DrawBuffer instead of DrawBuffers
+				//because it is available since GL 1.0 instead of only on 3+
+				gl10->glDrawBuffer(GL_NONE);
+				gl10->glReadBuffer(GL_NONE);
+			}
+			else
+			{
+				//something is probably not how we want it
+				Q_ASSERT(0);
+			}
+		}
+
+		//check for completeness
+		GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+		if(status != GL_FRAMEBUFFER_COMPLETE)
+		{
+			error = true;
+			qWarning()<<"Planet self-shadow framebuffer is incomplete, cannot use. Status:"<<status;
+		}
+
+		GL(glBindFramebuffer(GL_FRAMEBUFFER, ctx->defaultFramebufferObject()));
+		glActiveTexture(GL_TEXTURE0);
+#else
+		shadowFBO = new QOpenGLFramebufferObject(SM_SIZE,SM_SIZE,QOpenGLFramebufferObject::Depth);
+		error = !shadowFBO->isValid();
+#endif
+
+		qDebug()<<"Planet self-shadow framebuffer initialized";
+	}
+
+	shadowInitialized = true;
+	return !error;
+}
+
+void Planet::deinitFBO()
+{
+	if(!shadowInitialized)
+		return;
+
+#ifndef DEBUG_SHADOWMAP
+	//zeroed names are ignored by GL
+	glDeleteFramebuffers(1,&shadowFBO);
+	shadowFBO = 0;
+#else
+	delete shadowFBO;
+	shadowFBO = Q_NULLPTR;
+#endif
+	glDeleteTextures(1,&shadowTex);
+	shadowTex = 0;
+
+	shadowInitialized = false;
 }
 
 void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz, bool drawOnlyRing)
@@ -1921,12 +2125,17 @@ Planet::PlanetOBJModel* Planet::loadObjModel() const
 	//this call starts loading the tex in background
 	mdl->texture = StelApp::getInstance().getTextureManager().createTextureThread(mat.map_Kd,StelTexture::StelTextureParams(true,GL_LINEAR,GL_REPEAT,true),false);
 
-	//we assume the OBJ is modeled in km
-	//so we have to scale it to AU
-	mdl->obj->scale(sphereScale / AU);
-
 	//extract the pos array into separate vector, it is the only one we need on CPU side for drawing
 	mdl->obj->splitVertexData(false,&mdl->posArray);
+
+	//pre-scale the cpu-side array
+	for(int i = 0; i<mdl->posArray.size();++i)
+	{
+		mdl->posArray[i]*=AU_KM;
+	}
+
+	mdl->bbox = mdl->obj->getAABBox();
+
 	return mdl;
 }
 
@@ -1985,6 +2194,16 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 	if(!ensureObjLoaded())
 		return false;
 
+	if(shaderError)
+		return false;
+
+	const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
+
+	QMatrix4x4 shadowMatrix;
+	bool shadowmapping = false;
+	if(ssm->getFlagShowObjSelfShadows())
+		shadowmapping = drawObjShadowMap(painter,shadowMatrix);
+
 	if(!objModel->texture->bind())
 	{
 		//the texture is still loading, use the sphere method
@@ -2004,7 +2223,21 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 	objModel->arr->bind();
 
 	//set up shader
-	objShaderProgram->bind();
+	QOpenGLShaderProgram* shd = objShaderProgram;
+	PlanetShaderVars* shdVars = &objShaderVars;
+	if(shadowmapping)
+	{
+		shd = objShadowShaderProgram;
+		shdVars = &objShadowShaderVars;
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D,shadowTex);
+		//shadowTex->bind(1);
+		shd->bind();
+		shd->setUniformValue(shdVars->shadowMatrix, shadowMatrix);
+		shd->setUniformValue(shdVars->shadowTex, 1);
+	}
+	else
+		shd->bind();
 
 	//project the data
 	//because the StelOpenGLArray might use a VAO, we have to use a OGL buffer here in all cases
@@ -2027,17 +2260,17 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 
 	//unprojectedVertex, normalIn and texCoord are set by the StelOpenGLArray
 	//we only need to set the freshly projected data
-	GL(objShaderProgram->setAttributeArray("vertex",GL_FLOAT,NULL,3,0));
-	GL(objShaderProgram->enableAttributeArray("vertex"));
+	GL(shd->setAttributeArray("vertex",GL_FLOAT,NULL,3,0));
+	GL(shd->enableAttributeArray("vertex"));
 	objModel->projPosBuffer->release();
 
-	setCommonShaderUniforms(*painter,objShaderProgram,objShaderVars);
+	setCommonShaderUniforms(*painter,shd,*shdVars);
 
 	//draw that model using the array wrapper
 	objModel->arr->draw();
 
-	objShaderProgram->disableAttributeArray("vertex");
-	objShaderProgram->release();
+	shd->disableAttributeArray("vertex");
+	shd->release();
 	objModel->arr->release();
 
 	glDisable(GL_CULL_FACE);
@@ -2046,6 +2279,139 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 	return true;
 }
 
+bool Planet::drawObjShadowMap(StelPainter *painter, QMatrix4x4& shadowMatrix)
+{
+	if(!shadowInitialized)
+		if(!initFBO())
+		{
+			qDebug()<<"Cannot draw OBJ self-shadow";
+			return false;
+		}
+
+	const StelProjectorP projector = painter->getProjector();
+
+	//find the light direction in model space
+	Mat4d modelMatrix;
+	computeModelMatrix(modelMatrix);
+	Mat4d worldToModel = modelMatrix.inverse();
+
+	//Vec3d lightDir = light.position;
+	//projector->getModelViewTransform()->backward(lightDir);
+	Vec3d lightDir(worldToModel[12], worldToModel[13], worldToModel[14]);
+	lightDir.normalize();
+
+	//use a distance of 1km to the origin for additional precision, instead of 1AU
+	Vec3d lightPosScaled = lightDir;
+
+	//the camera looks to the origin
+	QMatrix4x4 modelView;
+	modelView.lookAt(QVector3D(lightPosScaled[0],lightPosScaled[1],lightPosScaled[2]), QVector3D(), QVector3D(0,0,1));
+
+	//create an orthographic projection encompassing the AABB
+	double maxZ = -std::numeric_limits<double>::max();
+	double minZ = std::numeric_limits<double>::max();
+	double maxUp = -std::numeric_limits<double>::max();
+	double minUp = std::numeric_limits<double>::max();
+	double maxRight = -std::numeric_limits<double>::max();
+	double minRight = std::numeric_limits<double>::max();
+
+	//create an orthonormal system using 2-step Gram-Schmidt + cross product
+	// https://en.wikipedia.org/wiki/Gram%E2%80%93Schmidt_process
+	Vec3d vDir = -lightDir; //u1/e1, view direction
+	Vec3d up = Vec3d(0.0, 0.0, 1.0); //v2
+	up = up - up.dot(vDir) * vDir; //u2 = v2 - proj_u1(v2)
+	up.normalize(); //e2
+
+	Vec3d right = vDir^up;
+	right.normalize();
+
+	for(unsigned int i=0; i<AABBox::CORNERCOUNT; i++)
+	{
+		Vec3d v = objModel->bbox.getCorner(static_cast<AABBox::Corner>(i)).toVec3d();
+		Vec3d fromCam = v - lightPosScaled; //vector from cam to vertex
+
+		//project the fromCam vector onto the 3 vectors of the orthonormal system
+		double dist = fromCam.dot(vDir);
+		maxZ = std::max(dist, maxZ);
+		minZ = std::min(dist, minZ);
+
+		dist = fromCam.dot(right);
+		minRight = std::min(dist, minRight);
+		maxRight = std::max(dist, maxRight);
+
+		dist = fromCam.dot(up);
+		minUp = std::min(dist, minUp);
+		maxUp = std::max(dist, maxUp);
+	}
+
+	QMatrix4x4 proj;
+	proj.ortho(minRight,maxRight,minUp,maxUp,minZ,maxZ);
+
+	QMatrix4x4 mvp = proj * modelView;
+
+	//bias matrix for lookup
+	static const QMatrix4x4 biasMatrix(0.5f, 0.0f, 0.0f, 0.5f,
+					   0.0f, 0.5f, 0.0f, 0.5f,
+					   0.0f, 0.0f, 0.5f, 0.5f,
+					   0.0f, 0.0f, 0.0f, 1.0f);
+	shadowMatrix = biasMatrix * mvp;
+
+	glEnable(GL_DEPTH_TEST);
+	glDepthMask(GL_TRUE);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
+	glEnable(GL_POLYGON_OFFSET_FILL);
+	glPolygonOffset(2.0f,6.0f);
+
+	glViewport(0,0,SM_SIZE,SM_SIZE);
+
+	objModel->arr->bind();
+	transformShaderProgram->bind();
+	transformShaderProgram->setUniformValue(transformShaderVars.projectionMatrix, mvp);
+
+#ifdef DEBUG_SHADOWMAP
+	shadowFBO->bind();
+	objModel->texture->bind();
+	transformShaderProgram->setUniformValue(transformShaderVars.tex, 0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+#else
+	glBindFramebuffer(GL_FRAMEBUFFER, shadowFBO);
+	glClear(GL_DEPTH_BUFFER_BIT);
+#endif
+
+	GL(objModel->arr->draw());
+
+	transformShaderProgram->release();
+	objModel->arr->release();
+
+#ifdef DEBUG_SHADOWMAP
+	//copy depth buffer into shadowTex
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D,shadowTex);
+	QOpenGLContext::currentContext()->functions()->glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 0, 0, SM_SIZE, SM_SIZE, 0);
+
+	shadowFBO->release();
+#else
+	glBindFramebuffer(GL_FRAMEBUFFER, QOpenGLContext::currentContext()->defaultFramebufferObject());
+#endif
+
+	//reset viewport (see StelPainter::setProjector)
+	const Vec4i& vp = projector->getViewport();
+	glViewport(vp[0], vp[1], vp[2], vp[3]);
+
+	glDepthMask(GL_FALSE);
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_CULL_FACE);
+	glDisable(GL_POLYGON_OFFSET_FILL);
+	glPolygonOffset(0.0f,0.0f);
+
+#ifdef DEBUG_SHADOWMAP
+	//display the FB contents on-screen
+	QOpenGLFramebufferObject::blitFramebuffer(NULL,shadowFBO);
+#endif
+
+	return true;
+}
 
 void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 {

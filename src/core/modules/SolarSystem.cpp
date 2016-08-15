@@ -69,6 +69,7 @@ SolarSystem::SolarSystem()
 	, flagOrbits(false)
 	, flagLightTravelTime(true)
 	, flagUseObjModels(false)
+	, flagShowObjSelfShadows(true)
 	, flagShow(false)
 	, flagPointer(false)
 	, flagNativeNames(false)
@@ -157,6 +158,7 @@ void SolarSystem::init()
 	setFlagOrbits(conf->value("astro/flag_planets_orbits").toBool());
 	setFlagLightTravelTime(conf->value("astro/flag_light_travel_time", true).toBool());
 	setFlagUseObjModels(conf->value("astro/flag_use_obj_models", false).toBool());
+	setFlagShowObjSelfShadows(conf->value("astro/flag_show_obj_self_shadows", true).toBool());
 	setFlagPointer(conf->value("astro/flag_planets_pointers", true).toBool());
 	// Set the algorithm from Astronomical Almanac for computation of apparent magnitudes for
 	// planets in case  observer on the Earth by default
@@ -215,6 +217,7 @@ void SolarSystem::init()
 void SolarSystem::deinit()
 {
 	Planet::deinitShader();
+	Planet::deinitFBO();
 }
 
 void SolarSystem::recreateTrails()
@@ -1445,6 +1448,17 @@ void SolarSystem::setFlagLightTravelTime(bool b)
 	{
 		flagLightTravelTime = b;
 		emit flagLightTravelTimeChanged(b);
+	}
+}
+
+void SolarSystem::setFlagShowObjSelfShadows(bool b)
+{
+	if(b!=flagShowObjSelfShadows)
+	{
+		flagShowObjSelfShadows = b;
+		if(!b)
+			Planet::deinitFBO();
+		emit flagShowObjSelfShadowsChanged(b);
 	}
 }
 

@@ -69,7 +69,7 @@ public:
 	struct Material
 	{
 		Material()
-			: Ns(8.0f), d(-1.0f), bBackface(false), bAlphatest(false), fAlphaThreshold(0.5f)
+			: Ns(8.0f), d(-1.0f), bBackface(false), bAlphatest(false), fAlphaThreshold(0.5f), traits()
 		{
 
 		}

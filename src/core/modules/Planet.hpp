@@ -23,6 +23,7 @@
 #include "StelObject.hpp"
 #include "StelProjector.hpp"
 #include "VecMath.hpp"
+#include "GeomMath.hpp"
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
@@ -47,6 +48,10 @@ class StelOpenGLArray;
 template <class T> class QFuture;
 class QOpenGLBuffer;
 class QOpenGLShaderProgram;
+class QOpenGLTexture;
+#ifdef DEBUG_SHADOWMAP
+class QOpenGLFramebufferObject;
+#endif
 
 // Class used to store rotational elements, i.e. axis orientation for the planetary body.
 class RotationElements
@@ -310,6 +315,7 @@ protected:
 		//! Loads the data from the StelOBJ into the StelOpenGLArray
 		bool loadGL();
 
+		AABBox bbox;
 		//! Contains the original positions, they need StelProjector transformation
 		QVector<Vec3f> posArray;
 		//! Used to store the projected array data, avoids re-allocation each frame
@@ -337,6 +343,8 @@ protected:
 	// Draws the OBJ model, assuming it is available
 	// @return false if the model can currently not be drawn (not loaded)
 	bool drawObjModel(StelPainter* painter, float screenSz);
+
+	bool drawObjShadowMap(StelPainter* painter, QMatrix4x4 &shadowMatrix);
 
 	//! Starts the OBJ loading process, if it has not been done yet.
 	//! Returns true when the OBJ is ready to draw
@@ -443,6 +451,10 @@ private:
 		int outerRadius;
 		int innerRadius;
 		int ringS;
+
+		// Shadowmap variables
+		int shadowMatrix;
+		int shadowTex;
 		
 		void initLocations(QOpenGLShaderProgram*);
 	};
@@ -471,9 +483,26 @@ private:
 
 	static PlanetShaderVars objShaderVars;
 	static QOpenGLShaderProgram* objShaderProgram;
+
+	static PlanetShaderVars objShadowShaderVars;
+	static QOpenGLShaderProgram* objShadowShaderProgram;
+
+	static PlanetShaderVars transformShaderVars;
+	static QOpenGLShaderProgram* transformShaderProgram;
+
+	static bool shadowInitialized;
+#ifdef DEBUG_SHADOWMAP
+	static QOpenGLFramebufferObject* shadowFBO;
+#else
+	static unsigned int shadowFBO;
+#endif
+	static unsigned int shadowTex;
+
 	
 	static void initShader();
 	static void deinitShader();
+	static bool initFBO();
+	static void deinitFBO();
 
 	static QOpenGLShaderProgram* createShader(const QString& name, PlanetShaderVars& vars, const QByteArray& vSrc, const QByteArray& fSrc, const QByteArray& prefix=QByteArray(), const QMap<QByteArray,int>& fixedAttributeLocations=QMap<QByteArray,int>());
 };

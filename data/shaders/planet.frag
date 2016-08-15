@@ -44,6 +44,11 @@ uniform sampler2D ringS;
 uniform bool isRing;
 #endif
 
+#ifdef SHADOWMAP
+uniform highp sampler2D shadowTex;
+varying highp vec4 shadowCoord;
+#endif
+
 #if defined(IS_OBJ) || defined(IS_MOON)
     //light and eye direction in model space
     uniform highp vec3 lightDirection;
@@ -58,6 +63,110 @@ uniform bool isRing;
     varying highp vec3 normalZ;
 #else
     varying mediump float lum_;
+#endif
+
+#ifdef SHADOWMAP
+const vec2 poissonDisk[64] = vec2[64]( 
+   vec2(-0.610470, -0.702763),
+   vec2( 0.609267,  0.765488),
+   vec2(-0.817537, -0.412950),
+   vec2( 0.777710, -0.446717),
+   vec2(-0.668764, -0.524195),
+   vec2( 0.425181,  0.797780),
+   vec2(-0.766728, -0.065185),
+   vec2( 0.266692,  0.917346),
+   vec2(-0.578028, -0.268598),
+   vec2( 0.963767,  0.079058),
+   vec2(-0.968971, -0.039291),
+   vec2( 0.174263, -0.141862),
+   vec2(-0.348933, -0.505110),
+   vec2( 0.837686, -0.083142),
+   vec2(-0.462722, -0.072878),
+   vec2( 0.701887, -0.281632),
+   vec2(-0.377209, -0.247278),
+   vec2( 0.765589,  0.642157),
+   vec2(-0.678950,  0.128138),
+   vec2( 0.418512, -0.186050),
+   vec2(-0.442419,  0.242444),
+   vec2( 0.442748, -0.456745),
+   vec2(-0.196461,  0.084314),
+   vec2( 0.536558, -0.770240),
+   vec2(-0.190154, -0.268138),
+   vec2( 0.643032, -0.584872),
+   vec2(-0.160193, -0.457076),
+   vec2( 0.089220,  0.855679),
+   vec2(-0.200650, -0.639838),
+   vec2( 0.220825,  0.710969),
+   vec2(-0.330313, -0.812004),
+   vec2(-0.046886,  0.721859),
+   vec2( 0.070102, -0.703208),
+   vec2(-0.161384,  0.952897),
+   vec2( 0.034711, -0.432054),
+   vec2(-0.508314,  0.638471),
+   vec2(-0.026992, -0.163261),
+   vec2( 0.702982,  0.089288),
+   vec2(-0.004114, -0.901428),
+   vec2( 0.656819,  0.387131),
+   vec2(-0.844164,  0.526829),
+   vec2( 0.843124,  0.220030),
+   vec2(-0.802066,  0.294509),
+   vec2( 0.863563,  0.399832),
+   vec2( 0.268762, -0.576295),
+   vec2( 0.465623,  0.517930),
+   vec2( 0.340116, -0.747385),
+   vec2( 0.223493,  0.516709),
+   vec2( 0.240980, -0.942373),
+   vec2(-0.689804,  0.649927),
+   vec2( 0.272309, -0.297217),
+   vec2( 0.378957,  0.162593),
+   vec2( 0.061461,  0.067313),
+   vec2( 0.536957,  0.249192),
+   vec2(-0.252331,  0.265096),
+   vec2( 0.587532, -0.055223),
+   vec2( 0.034467,  0.289122),
+   vec2( 0.215271,  0.278700),
+   vec2(-0.278059,  0.615201),
+   vec2(-0.369530,  0.791952),
+   vec2(-0.026918,  0.542170),
+   vec2( 0.274033,  0.010652),
+   vec2(-0.561495,  0.396310),
+   vec2(-0.367752,  0.454260)
+);
+
+lowp float offset_lookup(in highp sampler2D sTex, in vec4 loc, in vec2 offset, in float zbias)
+{
+    //the macro SM_SIZE is set to the shadowmap size
+    const vec2 texmapscale=vec2(1.0/SM_SIZE, 1.0/SM_SIZE);
+    //"simulates" textureProjOffset for use in GLSL < 130
+    float texVal = texture2DProj(sTex, vec4(loc.xy + (offset * texmapscale * loc.w), loc.z, loc.w)).r;
+    //perform shadow comparison
+    return texVal > (loc.z/loc.w)-zbias ? 1.0 : 0.0;
+}
+
+//basic pseudo-random number generator
+mediump float random(in mediump vec4 seed4)
+{
+    float dot_product = dot(seed4, vec4(12.9898,78.233,45.164,94.673));
+    return fract(sin(dot_product) * 43758.5453);
+}
+
+lowp float sampleShadowMap(in highp sampler2D sTex, in highp vec4 coord)
+{
+    //z-bias is modified using the angle between the surface and the light
+    //gives less shadow acne
+    float zbias = 0.0025 * tan(acos(dot(normal, normalize(sunInfo.xyz))));
+    zbias = clamp(zbias, 0.0, 0.01);
+    
+    float sum = 0.0;
+    for(int i=0;i<16;++i)
+    {
+        //choose 16 "random"  locations out of 64 using the screen-space coordinates
+        int index = int(64.0*random(vec4(gl_FragCoord.xyy,i))) % 64;
+        sum += offset_lookup(sTex, coord, poissonDisk[index], zbias);
+    }
+    
+    return clamp(sum / 16.0,0.0,1.0);
+}
 #endif
 
 // Calculates the Oren-Nayar reflectance with fixed sigma and E0 (https://en.wikipedia.org/wiki/Oren%E2%80%93Nayar_reflectance_model)
@@ -180,6 +289,11 @@ void main()
 #endif
 //Reduce lum if sky is bright, to avoid burnt-out look in daylight sky.
     lum *= (1.0-0.4*skyBrightness);
+#ifdef SHADOWMAP
+    //use shadowmapping
+    float shadow = sampleShadowMap(shadowTex, shadowCoord);
+    lum*=shadow;
+#endif
     mediump vec4 litColor = vec4(lum * final_illumination * diffuseLight + ambientLight, 1.0);
 #ifdef IS_MOON
     if(final_illumination < 0.99)
@@ -191,5 +305,13 @@ void main()
 #endif
     {
         gl_FragColor = texture2D(tex, texc) * litColor;
+        /*
+        #ifdef SHADOWMAP
+        vec2 col = vec2(shadow,shadow);
+        if(shadow>=1.0)
+            col = shadowCoord.xy;
+        gl_FragColor = vec4(shadow,shadow,shadow,1.0);
+        #endif
+        */
     }
 }
