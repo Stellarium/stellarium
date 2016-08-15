@@ -116,6 +116,8 @@ void StelOpenGLArray::clear()
 
 bool StelOpenGLArray::load(const StelOBJ* obj, bool useTangents)
 {
+	clear();
+
 	QElapsedTimer timer;
 	timer.start();
 

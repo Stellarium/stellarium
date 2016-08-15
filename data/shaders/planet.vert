@@ -21,17 +21,21 @@
   This is the vertex shader for solar system object rendering
  */
 
-attribute highp vec3 vertex; // vertex projected by CPU
+attribute highp vec4 vertex; // vertex projected by CPU
 attribute mediump vec2 texCoord;
-attribute highp vec3 unprojectedVertex; //original vertex coordinate
+attribute highp vec4 unprojectedVertex; //original vertex coordinate (in km for OBJ models, in AU otherwise)
 #ifdef IS_OBJ
     attribute mediump vec3 normalIn; // OBJs have pre-calculated normals
 #endif
 
 uniform highp mat4 projectionMatrix;
+#ifdef SHADOWMAP
+uniform highp mat4 shadowMatrix;
+varying highp vec4 shadowCoord;
+#endif
 
 varying mediump vec2 texc; //texture coord
-varying highp vec3 P; //original unprojected position
+varying highp vec3 P; //original unprojected position (in AU)
 
 #ifdef IS_OBJ
     //OBJ uses single normal for oren-nayar
@@ -52,16 +56,23 @@ varying highp vec3 P; //original unprojected position
 
 void main()
 {
-    gl_Position = projectionMatrix * vec4(vertex, 1.);
+    gl_Position = projectionMatrix * vertex;
     texc = texCoord;
-    P = unprojectedVertex;
     
+#ifdef SHADOWMAP
+    shadowCoord = shadowMatrix * unprojectedVertex; //uses the km data for better accuracy
+#endif
 #ifdef IS_OBJ
     //OBJ uses imported normals
     normal = normalIn;
+    
+    //The unprojectedVertex here is in km, so we have to scale to AU
+    P = unprojectedVertex.xyz / 149597870.691;
 #else
+    //unprojectedVertex is already in AU
+    P = unprojectedVertex.xyz;
     //other objects use the spherical normals
-    highp vec3 normal = normalize(unprojectedVertex);
+    highp vec3 normal = normalize(unprojectedVertex.xyz);
     #ifdef IS_MOON
         normalX = normalize(cross(vec3(0,0,1), normal));
         normalY = normalize(cross(normal, normalX));

@@ -149,6 +149,8 @@ void ViewDialog::createDialogContent()
 	// Connect and initialize checkboxes and other widgets
 
 	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
+	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
+	Q_ASSERT(ssmgr);
 
 	// DSO
 	updateSelectedCatalogsCheckBoxes();
@@ -199,11 +201,12 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->planetIsolatedTrailsCheckBox, "SolarSystem.flagIsolatedTrails");
 	connectBoolProperty(ui->planetLightSpeedCheckBox, "SolarSystem.flagLightTravelTime");
 	connectBoolProperty(ui->planetUseObjModelsCheckBox, "SolarSystem.flagUseObjModels");
+	connectBoolProperty(ui->planetShowObjSelfShadowsCheckBox, "SolarSystem.flagShowObjSelfShadows");
+	ui->planetShowObjSelfShadowsCheckBox->setEnabled(ssmgr->getFlagUseObjModels());
+	connect(ssmgr,SIGNAL(flagUseObjModelsChanged(bool)),ui->planetShowObjSelfShadowsCheckBox, SLOT(setEnabled(bool)));
 
 	// NEW SECTION FROM TRUNK: GreatRedSpot (Jupiter)
 	// TODO: put under Properties system!
-	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
-	Q_ASSERT(ssmgr);
 	bool grsFlag = ssmgr->getFlagCustomGrsSettings();
 	ui->customGrsSettingsCheckBox->setChecked(grsFlag);
 	connect(ui->customGrsSettingsCheckBox, SIGNAL(toggled(bool)), this, SLOT(setFlagCustomGrsSettings(bool)));
