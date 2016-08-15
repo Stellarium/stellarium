@@ -752,6 +752,7 @@ void StelOBJ::Object::postprocess(const StelOBJ &obj, Vec3d &centroid)
 	const IndexList& iList = obj.getIndexList();
 
 	int idxCnt = 0;
+	boundingbox.reset();
 
 	//iterate through the groups
 	for(int i =0;i<groups.size();++i)
@@ -760,6 +761,7 @@ void StelOBJ::Object::postprocess(const StelOBJ &obj, Vec3d &centroid)
 		Vec3d accVertex(0.);
 
 		Q_ASSERT(grp.indexCount > 0);
+		grp.boundingbox.reset();
 
 		//iterate through the vertices of the group
 		for(int idx = grp.startIndex;idx<(grp.startIndex+grp.indexCount);++idx)
@@ -960,6 +962,7 @@ void StelOBJ::generateAABB()
 {
 	//calculate AABB and centroid for each object
 	Vec3d accCentroid(0.);
+	m_bbox.reset();
 	for(int i =0;i<m_objects.size();++i)
 	{
 		Vec3d centr(0.);

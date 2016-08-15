@@ -100,6 +100,11 @@ class SolarSystem : public StelObjectModule
 		   WRITE setFlagUseObjModels
 		   NOTIFY flagUseObjModelsChanged
 		   )
+	Q_PROPERTY(bool flagShowObjSelfShadows
+		   READ getFlagShowObjSelfShadows
+		   WRITE setFlagShowObjSelfShadows
+		   NOTIFY flagShowObjSelfShadowsChanged
+		   )
 	Q_PROPERTY(bool flagMoonScale
 		   READ getFlagMoonScale
 		   WRITE setFlagMoonScale
@@ -232,6 +237,11 @@ public slots:
 	void setFlagUseObjModels(bool b) { if(b!=flagUseObjModels) { flagUseObjModels = b; emit flagUseObjModelsChanged(b); } }
 	//! Get the current value of the flag which determines wether to use OBJ models for rendering, where available
 	bool getFlagUseObjModels(void) const { return flagUseObjModels; }
+
+	//! Set flag whether OBJ models should render self-shadowing (using a shadow map)
+	void setFlagShowObjSelfShadows(bool b);
+	//! Get the current value of the flag which determines whether OBJ models should render self-shadowing (using a shadow map)
+	bool getFlagShowObjSelfShadows(void) const { return flagShowObjSelfShadows; }
 
 	//! Set planet names font size.
 	//! @return font size
@@ -400,6 +410,7 @@ signals:
 	void flagIsolatedTrailsChanged(bool b);
 	void flagLightTravelTimeChanged(bool b);
 	void flagUseObjModelsChanged(bool b);
+	void flagShowObjSelfShadowsChanged(bool b);
 	void flagMoonScaleChanged(bool b);
 	void moonScaleChanged(double f);
 	void labelsAmountChanged(double f);
@@ -525,6 +536,7 @@ private:
 	bool flagOrbits;
 	bool flagLightTravelTime;
 	bool flagUseObjModels;
+	bool flagShowObjSelfShadows;
 
 	//! The selection pointer texture.
 	StelTextureSP texPointer;
