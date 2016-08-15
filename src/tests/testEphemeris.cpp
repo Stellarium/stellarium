@@ -26,7 +26,6 @@
 
 #include "StelFileMgr.hpp"
 #include "EphemWrapper.hpp"
-#include "StelUtils.hpp"
 #include "vsop87.h"
 //#include "de430.hpp"
 //#include "de431.hpp"
@@ -38,7 +37,7 @@ void TestEphemeris::initTestCase()
 	de430FilePath = StelFileMgr::findFile("ephem/" + QString(DE430_FILENAME), StelFileMgr::File);
 	de431FilePath = StelFileMgr::findFile("ephem/" + QString(DE430_FILENAME), StelFileMgr::File);
 
-	// test data was obtained from http://ssd.jpl.nasa.gov/horizons.cgi#results
+	// test data was obtained from http://ssd.jpl.nasa.gov/horizons.cgi
 
 	// Mercury:
 	// Start time      : B.C. 2000-Jan-01 00:00:00.0000 TDB ( 990923.500000000)
