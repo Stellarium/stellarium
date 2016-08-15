@@ -37,7 +37,7 @@ void TestEphemeris::initTestCase()
 	de430FilePath = StelFileMgr::findFile("ephem/" + QString(DE430_FILENAME), StelFileMgr::File);
 	de431FilePath = StelFileMgr::findFile("ephem/" + QString(DE430_FILENAME), StelFileMgr::File);
 
-	// test data was obtained from http://ssd.jpl.nasa.gov/horizons.cgi
+	// test data was obtained from http://ssd.jpl.nasa.gov/horizons.cgi#results
 
 	// Mercury:
 	// Start time      : B.C. 2000-Jan-01 00:00:00.0000 TDB ( 990923.500000000)
@@ -1207,13 +1207,13 @@ void TestEphemeris::testNeptuneHeliocentricEphemerisVsop87()
 
 		QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
 			 QString("jd=%1 x=%2 (%5) y=%3 (%6) z=%4 (%7)")
-			 .arg(QString::number(    jd, 'f', 15))
-			 .arg(QString::number(xyz[0], 'f', 15))
-			 .arg(QString::number(xyz[1], 'f', 15))
-			 .arg(QString::number(xyz[2], 'f', 15))
-			 .arg(QString::number(     x, 'f', 15))
-			 .arg(QString::number(     y, 'f', 15))
-			 .arg(QString::number(     z, 'f', 15))
+			 .arg(QString::number(jd, 'f', 15))
+			 .arg(QString::number( x, 'f', 15))
+			 .arg(QString::number( y, 'f', 15))
+			 .arg(QString::number( z, 'f', 15))
+			 .arg(QString::number(actualErrorX, 'f', 10))
+			 .arg(QString::number(actualErrorY, 'f', 10))
+			 .arg(QString::number(actualErrorZ, 'f', 10))
 			 .toUtf8());
 	}
 }
