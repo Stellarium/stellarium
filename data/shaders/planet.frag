@@ -66,14 +66,21 @@ varying highp vec4 shadowCoord;
 #endif
 
 #ifdef SHADOWMAP
-uniform vec2 poissonDisk[64];
+uniform highp vec2 poissonDisk[64];
 
-lowp float offset_lookup(in highp sampler2D sTex, in vec4 loc, in vec2 offset, in float zbias)
+lowp float offset_lookup(in highp sampler2D sTex, in highp vec4 loc, in highp vec2 offset, in highp float zbias)
 {
     //the macro SM_SIZE is set to the shadowmap size
-    const vec2 texmapscale=vec2(1.0/float(SM_SIZE));
+    const mediump vec2 texmapscale=vec2(1.0/float(SM_SIZE));
     //"simulates" textureProjOffset for use in GLSL < 130
-    float texVal = texture2DProj(sTex, vec4(loc.xy + (offset * texmapscale * loc.w), loc.z, loc.w)).r;
+    highp vec4 coords = vec4(loc.xy + (offset * texmapscale * loc.w), loc.z, loc.w);
+    
+    //for some reason, when not adding a LOD bias, the result is wrong in my VM (Ubuntu 16.04)
+    //even if the texture has NO mipmaps and the lookup filter is GL_NEAREST???
+    //I'm 99% certain this is some bug in the GL driver, 
+    //because adding ANY bias here makes it work correctly
+    //It should have no effect on platforms which don't have this bug
+    highp float texVal = texture2DProj(sTex, coords, -1000.0).r;
     //perform shadow comparison
     return texVal > (loc.z/loc.w)-zbias ? 1.0 : 0.0;
 }
@@ -81,7 +88,7 @@ lowp float offset_lookup(in highp sampler2D sTex, in vec4 loc, in vec2 offset, i
 //basic pseudo-random number generator
 mediump float random(in mediump vec4 seed4)
 {
-    float dot_product = dot(seed4, vec4(12.9898,78.233,45.164,94.673));
+    highp float dot_product = dot(seed4, vec4(12.9898,78.233,45.164,94.673));
     return fract(sin(dot_product) * 43758.5453);
 }
 
@@ -89,18 +96,25 @@ lowp float sampleShadowMap(in highp sampler2D sTex, in highp vec4 coord)
 {
     //z-bias is modified using the angle between the surface and the light
     //gives less shadow acne
-    float zbias = 0.0025 * tan(acos(dot(normal, normalize(sunInfo.xyz))));
+    highp float zbias = 0.0025 * tan(acos(dot(normal, normalize(sunInfo.xyz))));
     zbias = clamp(zbias, 0.0, 0.01);
     
-    float sum = 0.0;
-    for(int i=0;i<16;++i)
+    // for some reason > 5 samples do not seem to work on my Ubuntu VM 
+    // (no matter if ES2 or GL 2.1)
+    // everything gets shadowed, but no errors?!
+    // so to be sure we just fix the sample count at 4 for now, 
+    // even though 16 would look quite a lot better
+    #define SAMPLE_COUNT 4
+    mediump float sum = 0.0;
+    for(int i=0;i<SAMPLE_COUNT;++i)
     {
-        //choose 16 "random"  locations out of 64 using the screen-space coordinates
-        int index = int(mod( int(64.0*random(vec4(gl_FragCoord.xyy,i))), 64));
+        //choose "random" locations out of 64 using the screen-space coordinates
+        //for ES2, we have to use mod(float, float), mod(int, int) is not defined
+        int index = int(mod( 64.0*random(vec4(gl_FragCoord.xyy,i)), 64.0));
         sum += offset_lookup(sTex, coord, poissonDisk[index], zbias);
     }
     
-    return clamp(sum / 16.0,0.0,1.0);
+    return clamp(sum / float(SAMPLE_COUNT),0.0,1.0);
 }
 #endif
 
@@ -226,7 +240,7 @@ void main()
     lum *= (1.0-0.4*skyBrightness);
 #ifdef SHADOWMAP
     //use shadowmapping
-    float shadow = sampleShadowMap(shadowTex, shadowCoord);
+    lowp float shadow = sampleShadowMap(shadowTex, shadowCoord);
     lum*=shadow;
 #endif
     mediump vec4 litColor = vec4(lum * final_illumination * diffuseLight + ambientLight, 1.0);
@@ -240,13 +254,8 @@ void main()
 #endif
     {
         gl_FragColor = texture2D(tex, texc) * litColor;
-        /*
         #ifdef SHADOWMAP
-        vec2 col = vec2(shadow,shadow);
-        if(shadow>=1.0)
-            col = shadowCoord.xy;
-        gl_FragColor = vec4(shadow,shadow,shadow,1.0);
+        //gl_FragColor = vec4(shadow,shadow,shadow,1.0);
         #endif
-        */
     }
 }
