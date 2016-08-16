@@ -17,8 +17,10 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include <QtGlobal>
+
 #if !defined(Q_OS_WIN)
-//exclude StelOpenGL here on windows because of conflicts with GLFuncs.hpp otherwise (uses QOpenGLFunctions_1_0 directly)
+//exclude StelOpenGL here on windows because of conflicts otherwise (uses QOpenGLFunctions_1_0 directly)
 #include "StelOpenGL.hpp"
 #endif
 #include <QOpenGLFunctions_1_0>
