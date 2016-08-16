@@ -174,7 +174,7 @@
 # define GL(line) do { \
 	line;\
 	if (checkGLErrors(__FILE__, __LINE__))\
-		exit(-1);\
+		abort();\
 	} while(0)
 #else
 # define GL(line) line

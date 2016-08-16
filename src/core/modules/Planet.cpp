@@ -1551,21 +1551,25 @@ void Planet::initShader()
 				);
 
 #ifdef DEBUG_SHADOWMAP
-	QByteArray transformFShader(
-				"uniform sampler2D tex;\n"
+	const QByteArray transformFShader(
+				"uniform lowp sampler2D tex;\n"
 				"varying mediump vec2 texc; //texture coord\n"
 				"varying highp vec4 pos; //projected pos\n"
 				"void main()\n"
 				"{\n"
-				"   vec4 texCol = texture2D(tex,texc);\n"
-				"   float zNorm = (pos.z + 1.0) / 2.0;\n" //from [-1,1] to [0,1]
+				"   lowp vec4 texCol = texture2D(tex,texc);\n"
+				"   highp float zNorm = (pos.z + 1.0) / 2.0;\n" //from [-1,1] to [0,1]
 				"   gl_FragColor = vec4(texCol.rgb,zNorm);\n"
 				"}\n"
 				);
 #else
-	QByteArray transformFShader;
+	//create an empty dummy FShader or ES2 may complain
+	const QByteArray transformFShader(
+				"void main()\n"
+				"{ }\n"
+				);
 #endif
-	transformShaderProgram = createShader("transformShaderProgam", transformShaderVars, transformVShader, transformFShader,QByteArray(),attrLoc);
+	GL(transformShaderProgram = createShader("transformShaderProgam", transformShaderVars, transformVShader, transformFShader,QByteArray(),attrLoc));
 
 	//check if ALL shaders have been created correctly
 	shaderError = !(planetShaderProgram&&
@@ -1628,9 +1632,6 @@ bool Planet::initFBO()
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, shadowTex);
 
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
 #ifndef QT_OPENGL_ES_2
 		if(!isGLESv2)
 		{
@@ -1642,10 +1643,13 @@ bool Planet::initFBO()
 			glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ones);
 		}
 #endif
+		GL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
+		GL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
 
 #ifndef DEBUG_SHADOWMAP
 		//create the texture
-		glTexImage2D(GL_TEXTURE_2D,0,isGLESv2?GL_DEPTH_COMPONENT:GL_DEPTH_COMPONENT16,SM_SIZE,SM_SIZE,0,GL_DEPTH_COMPONENT,GL_UNSIGNED_SHORT, NULL);
+		//note that the 'type' must be GL_UNSIGNED_SHORT or GL_UNSIGNED_INT for ES2 compatibility, even if the 'pixels' are NULL
+		GL(glTexImage2D(GL_TEXTURE_2D, 0, isGLESv2?GL_DEPTH_COMPONENT:GL_DEPTH_COMPONENT16, SM_SIZE, SM_SIZE, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, NULL));
 
 		//we dont use QOpenGLFramebuffer because we dont want a color buffer...
 		GL(glGenFramebuffers(1, &shadowFBO));
@@ -1659,6 +1663,7 @@ bool Planet::initFBO()
 		//see GL_EXT_framebuffer_object and GL_ARB_framebuffer_object
 		//on ES 2, this seems to be allowed (there are no glDrawBuffers/glReadBuffer functions there), see GLES spec section 4.4.4
 		//probably same on ES 3: though it has glDrawBuffers/glReadBuffer but no mention of it in section 4.4.4 and no FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER is defined
+#ifndef QT_OPENGL_ES_2
 		if(!ctx->isOpenGLES())
 		{
 			QOpenGLFunctions_1_0* gl10 = ctx->versionFunctions<QOpenGLFunctions_1_0>();
@@ -1675,6 +1680,7 @@ bool Planet::initFBO()
 				Q_ASSERT(0);
 			}
 		}
+#endif
 
 		//check for completeness
 		GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
@@ -1687,7 +1693,7 @@ bool Planet::initFBO()
 		GL(glBindFramebuffer(GL_FRAMEBUFFER, ctx->defaultFramebufferObject()));
 		glActiveTexture(GL_TEXTURE0);
 #else
-		shadowFBO = new QOpenGLFramebufferObject(SM_SIZE,SM_SIZE,QOpenGLFramebufferObject::Depth);
+		GL(shadowFBO = new QOpenGLFramebufferObject(SM_SIZE,SM_SIZE,QOpenGLFramebufferObject::Depth));
 		error = !shadowFBO->isValid();
 #endif
 
@@ -2316,7 +2322,7 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 	glClear(GL_DEPTH_BUFFER_BIT);
 
 	// Bind the array
-	objModel->arr->bind();
+	GL(objModel->arr->bind());
 
 	//set up shader
 	QOpenGLShaderProgram* shd = objShaderProgram;
@@ -2327,9 +2333,9 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 		shdVars = &objShadowShaderVars;
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D,shadowTex);
-		shd->bind();
-		shd->setUniformValue(shdVars->shadowMatrix, shadowMatrix);
-		shd->setUniformValue(shdVars->shadowTex, 1);
+		GL(shd->bind());
+		GL(shd->setUniformValue(shdVars->shadowMatrix, shadowMatrix));
+		GL(shd->setUniformValue(shdVars->shadowTex, 1));
 	}
 	else
 		shd->bind();
@@ -2460,9 +2466,9 @@ bool Planet::drawObjShadowMap(StelPainter *painter, QMatrix4x4& shadowMatrix)
 
 	glViewport(0,0,SM_SIZE,SM_SIZE);
 
-	objModel->arr->bind();
-	transformShaderProgram->bind();
-	transformShaderProgram->setUniformValue(transformShaderVars.projectionMatrix, mvp);
+	GL(objModel->arr->bind());
+	GL(transformShaderProgram->bind());
+	GL(transformShaderProgram->setUniformValue(transformShaderVars.projectionMatrix, mvp));
 
 #ifdef DEBUG_SHADOWMAP
 	shadowFBO->bind();
@@ -2483,9 +2489,11 @@ bool Planet::drawObjShadowMap(StelPainter *painter, QMatrix4x4& shadowMatrix)
 	//copy depth buffer into shadowTex
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D,shadowTex);
-	QOpenGLContext::currentContext()->functions()->glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 0, 0, SM_SIZE, SM_SIZE, 0);
 
-	shadowFBO->release();
+	//this is probably unsupported on an OGL ES2 context! just don't use DEBUG_SHADOWMAP here...
+	GL(QOpenGLContext::currentContext()->functions()->glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 0, 0, SM_SIZE, SM_SIZE, 0));
+
+	GL(shadowFBO->release());
 #else
 	glBindFramebuffer(GL_FRAMEBUFFER, QOpenGLContext::currentContext()->defaultFramebufferObject());
 #endif
@@ -2498,7 +2506,7 @@ bool Planet::drawObjShadowMap(StelPainter *painter, QMatrix4x4& shadowMatrix)
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_POLYGON_OFFSET_FILL);
-	glPolygonOffset(0.0f,0.0f);
+	GL(glPolygonOffset(0.0f,0.0f));
 
 #ifdef DEBUG_SHADOWMAP
 	//display the FB contents on-screen
