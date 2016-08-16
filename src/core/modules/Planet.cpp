@@ -17,6 +17,10 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#if !defined(Q_OS_WIN)
+//exclude StelOpenGL here on windows because of conflicts with GLFuncs.hpp otherwise (uses QOpenGLFunctions_1_0 directly)
+#include "StelOpenGL.hpp"
+#endif
 #include <QOpenGLFunctions_1_0>
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -1315,6 +1319,7 @@ void Planet::PlanetShaderVars::initLocations(QOpenGLShaderProgram* p)
 	// Shadowmap variables
 	GL(shadowMatrix = p->uniformLocation("shadowMatrix"));
 	GL(shadowTex = p->uniformLocation("shadowTex"));
+	GL(poissonDisk = p->uniformLocation("poissonDisk"));
 
 	GL(p->release());
 }
@@ -1329,30 +1334,47 @@ QOpenGLShaderProgram* Planet::createShader(const QString& name, PlanetShaderVars
 		return Q_NULLPTR;
 	}
 
+	// We HAVE to create QOpenGLShader on the heap (with automatic QObject memory management), or the shader may be destroyed before the program has been linked
+	// This was FUN to debug - OGL simply accepts an empty shader, no errors generated but funny colors drawn :)
+	// We could also use QOpenGLShaderProgram::addShaderFromSourceCode directly, but this would prevent having access to warnings (because log is copied only on errors there...)
 	if(!vSrc.isEmpty())
 	{
-		QOpenGLShader vshader(QOpenGLShader::Vertex);
-		vshader.compileSourceCode(prefix + vSrc);
-		if (!vshader.log().isEmpty() && !vshader.log().contains("no warnings", Qt::CaseInsensitive)) { qWarning() << "Planet: Warnings/Errors while compiling" << name << "vertex shader: " << vshader.log(); }
-		if(!vshader.isCompiled())
+		QOpenGLShader* shd = new QOpenGLShader(QOpenGLShader::Vertex, program);
+		bool ok = shd->compileSourceCode(prefix + vSrc);
+		QString log = shd->log();
+		if (!log.isEmpty() && !log.contains("no warnings", Qt::CaseInsensitive)) { qWarning() << "Planet: Warnings/Errors while compiling" << name << "vertex shader: " << log; }
+		if(!ok)
 		{
+			qCritical()<<name<<"vertex shader could not be compiled";
 			delete program;
 			return Q_NULLPTR;
 		}
-		program->addShader(&vshader);
+		if(!program->addShader(shd))
+		{
+			qCritical()<<name<<"vertex shader could not be added to program";
+			delete program;
+			return Q_NULLPTR;
+		}
 	}
 
 	if(!fSrc.isEmpty())
 	{
-		QOpenGLShader fshader(QOpenGLShader::Fragment);
-		fshader.compileSourceCode(prefix + fSrc);
-		if (!fshader.log().isEmpty() && !fshader.log().contains("no warnings", Qt::CaseInsensitive)) { qWarning() << "Planet: Warnings/Errors while compiling" << name << "fragment shader: " << fshader.log(); }
-		if(!fshader.isCompiled())
+		QOpenGLShader* shd = new QOpenGLShader(QOpenGLShader::Fragment, program);
+		bool ok = shd->compileSourceCode(prefix + fSrc);
+		QString log = shd->log();
+		if (!log.isEmpty() && !log.contains("no warnings", Qt::CaseInsensitive)) { qWarning() << "Planet: Warnings/Errors while compiling" << name << "fragment shader: " << log; }
+		if(!ok)
 		{
+			qCritical()<<name<<"fragment shader could not be compiled";
 			delete program;
 			return Q_NULLPTR;
 		}
-		program->addShader(&fshader);
+		if(!program->addShader(shd))
+		{
+			qCritical()<<name<<"fragment shader could not be added to program";
+			delete program;
+			return Q_NULLPTR;
+		}
 	}
 
 	//process fixed attribute locations
@@ -1434,6 +1456,80 @@ void Planet::initShader()
 					      "#define SHADOWMAP\n"
 					      "#define SM_SIZE " STRINGIFY(SM_SIZE) "\n"
 					      "\n",attrLoc);
+
+	//set the poisson disk as uniform, this seems to be the only way to get an (const) array into GLSL 110 on all drivers
+	if(objShadowShaderProgram)
+	{
+		objShadowShaderProgram->bind();
+		const float poissonDisk[] ={
+			-0.610470, -0.702763,
+			 0.609267,  0.765488,
+			-0.817537, -0.412950,
+			 0.777710, -0.446717,
+			-0.668764, -0.524195,
+			 0.425181,  0.797780,
+			-0.766728, -0.065185,
+			 0.266692,  0.917346,
+			-0.578028, -0.268598,
+			 0.963767,  0.079058,
+			-0.968971, -0.039291,
+			 0.174263, -0.141862,
+			-0.348933, -0.505110,
+			 0.837686, -0.083142,
+			-0.462722, -0.072878,
+			 0.701887, -0.281632,
+			-0.377209, -0.247278,
+			 0.765589,  0.642157,
+			-0.678950,  0.128138,
+			 0.418512, -0.186050,
+			-0.442419,  0.242444,
+			 0.442748, -0.456745,
+			-0.196461,  0.084314,
+			 0.536558, -0.770240,
+			-0.190154, -0.268138,
+			 0.643032, -0.584872,
+			-0.160193, -0.457076,
+			 0.089220,  0.855679,
+			-0.200650, -0.639838,
+			 0.220825,  0.710969,
+			-0.330313, -0.812004,
+			-0.046886,  0.721859,
+			 0.070102, -0.703208,
+			-0.161384,  0.952897,
+			 0.034711, -0.432054,
+			-0.508314,  0.638471,
+			-0.026992, -0.163261,
+			 0.702982,  0.089288,
+			-0.004114, -0.901428,
+			 0.656819,  0.387131,
+			-0.844164,  0.526829,
+			 0.843124,  0.220030,
+			-0.802066,  0.294509,
+			 0.863563,  0.399832,
+			 0.268762, -0.576295,
+			 0.465623,  0.517930,
+			 0.340116, -0.747385,
+			 0.223493,  0.516709,
+			 0.240980, -0.942373,
+			-0.689804,  0.649927,
+			 0.272309, -0.297217,
+			 0.378957,  0.162593,
+			 0.061461,  0.067313,
+			 0.536957,  0.249192,
+			-0.252331,  0.265096,
+			 0.587532, -0.055223,
+			 0.034467,  0.289122,
+			 0.215271,  0.278700,
+			-0.278059,  0.615201,
+			-0.369530,  0.791952,
+			-0.026918,  0.542170,
+			 0.274033,  0.010652,
+			-0.561495,  0.396310,
+			-0.367752,  0.454260
+		};
+		objShadowShaderProgram->setUniformValueArray(objShadowShaderVars.poissonDisk,poissonDisk,64,2);
+		objShadowShaderProgram->release();
+	}
 
 	//this is a simple transform-only shader (used for filling the depth map for OBJ shadows)
 	QByteArray transformVShader(
@@ -2231,7 +2327,6 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 		shdVars = &objShadowShaderVars;
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D,shadowTex);
-		//shadowTex->bind(1);
 		shd->bind();
 		shd->setUniformValue(shdVars->shadowMatrix, shadowMatrix);
 		shd->setUniformValue(shdVars->shadowTex, 1);
