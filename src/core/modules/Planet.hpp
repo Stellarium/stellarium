@@ -455,6 +455,7 @@ private:
 		// Shadowmap variables
 		int shadowMatrix;
 		int shadowTex;
+		int poissonDisk;
 		
 		void initLocations(QOpenGLShaderProgram*);
 	};
