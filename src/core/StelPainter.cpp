@@ -80,7 +80,8 @@ StelPainter::GLState::~GLState()
 bool StelPainter::linkProg(QOpenGLShaderProgram* prog, const QString& name)
 {
 	bool ret = prog->link();
-	if (!ret || (!prog->log().isEmpty() && !prog->log().contains("Link was successful")))
+	QString log = prog->log();
+	if (!ret || (!log.isEmpty() && !log.contains("Link was successful") && !(log=="No errors."))) //"No errors." returned on some Intel drivers
 		qWarning() << QString("StelPainter: Warnings while linking %1 shader program:\n%2").arg(name, prog->log());
 	return ret;
 }

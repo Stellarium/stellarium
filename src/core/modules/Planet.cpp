@@ -1565,11 +1565,13 @@ void Planet::initShader()
 				"}\n"
 				);
 #else
-	//create an empty dummy FShader or ES2 may complain
-	const QByteArray transformFShader(
-				"void main()\n"
-				"{ }\n"
-				);
+	//On ES2, we have to create an empty dummy FShader or the compiler may complain
+	//but don't do this on desktop, at least my Intel fails linking with this (with no log message, yay...)
+	 QByteArray transformFShader;
+	 if(QOpenGLContext::currentContext()->isOpenGLES())
+	 {
+		 transformFShader = "void main()\n{ }\n";
+	 }
 #endif
 	GL(transformShaderProgram = createShader("transformShaderProgam", transformShaderVars, transformVShader, transformFShader,QByteArray(),attrLoc));
 
