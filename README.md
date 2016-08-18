@@ -5,14 +5,14 @@ By Fabien Chereau & al - http://www.stellarium.org
 
 Stellarium comes with ABSOLUTELY NO WARRANTY. See the COPYING file for details.
 
-- [1. INTRODUCTION](#1.-introduction)                
+- [1. INTRODUCTION](#introduction)                
 - [2. INSTALLATION INSTRUCTIONS](#installation-instructions)
-- [3. REQUIREMENT](#requirement)
+- [3. REQUIREMENTS](#requirements)
 - [4. QUICK START](#quick-start)
 - [5. CONFIGURATION](#configuration)
 - [6. THANKS](#thanks)
 - [7. NOTE](#note)
-- [8. FULL REFERENCES & CREDITS](#full-references-&-credits)
+- [8. FULL REFERENCES AND CREDITS](#full-references-and-credits)
 - [9. LICENSE](#license)
 - [10. APPENDIX](#appendix)
 
@@ -93,7 +93,7 @@ And... All the people who sent us mails and bug reports!
 This program is free, but if you have nothing to do with your money, just go there and do something useful with it:
 	https://www.greenpeace.com/forms/gpicontr.html
 
-## FULL REFERENCES & CREDITS
+## FULL REFERENCES AND CREDITS
 ### 1. Technical Articles
 **1.1 The tone reproductor class**
 
@@ -118,6 +118,7 @@ The class is a fast reimplementation of the VISLIMIT.BAS basic source code from 
 **1.4 The Delta-T calculations**
 
 For implementation of calculation routines for Delta-T we used the following sources:
+
 [1] Delta-T webpage by Rob van Gent: http://www.staff.science.uu.nl/~gent0113/deltat/deltat.htm
 
 [2] "Five Millennium Canon of Solar Eclipses", Espenak and Meeus http://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
@@ -288,7 +289,7 @@ http://deepskypedia.com/wiki/List:Melotte
 
 **4.5f** Ganymede map is from USGS and modified by RVS. Public domain.
 
-**4.5g** Tethys, Dione, Rhea, Enceladus and Mimas maps are created by NASA (CICLOPS team) from Cassini data, colored by RVS. Public domain.
+**4.5g** Tethys, Dione, Rhea, EnceladuUnify the date format and changess and Mimas maps are created by NASA (CICLOPS team) from Cassini data, colored by RVS. Public domain.
 
 **4.5h** Hyperion map created by John van Vliet from PDS data, modified by RVS. License: cc-by-sa.
 
@@ -324,8 +325,8 @@ License: Creative Commons Attribution-ShareAlike 3.0 Unported
 **4.13** The "earth-clouds" texture includes imagery owned by NASA.
 See NASA's Visible Earth project at http://visibleearth.nasa.gov/
 License:
-1. The imagery is free of licensing fees
 
+1. The imagery is free of licensing fees
 2. NASA requires that they be provided a credit as the owners of the imagery
 
 The cloud texturing was taken from Celestia (GPL), http://www.shatters.net/celestia/
