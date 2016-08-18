@@ -23,8 +23,12 @@ THE SOFTWARE.
 
 #include "de430.hpp"
 #include "StelUtils.hpp"
+#ifndef UNIT_TEST
 #include "StelCore.hpp"
 #include "StelApp.hpp"
+#else
+#include "VecMath.hpp"
+#endif
 
 #ifdef __cplusplus
   extern "C" {
@@ -37,6 +41,10 @@ static Vec3d tempICRF = Vec3d(0,0,0);
 static char nams[JPL_MAX_N_CONSTANTS][6];
 static double vals[JPL_MAX_N_CONSTANTS];
 static double tempXYZ[6];
+#ifdef UNIT_TEST
+// NOTE: Added hook for unit testing
+static const Mat4d matJ2000ToVsop87(Mat4d::xrotation(-23.4392803055555555556*(M_PI/180)) * Mat4d::zrotation(0.0000275*(M_PI/180)));
+#endif
 
 static bool initDone = false;
 
@@ -46,7 +54,9 @@ void InitDE430(const char* filepath)
 
 	if(jpl_init_error_code() != 0)
 	{
+		#ifndef UNIT_TEST
 		StelApp::getInstance().getCore()->setDe430Active(false);
+		#endif
 		qDebug() << "Error "<< jpl_init_error_code() << "at DE430 init:" << jpl_init_error_message();
 	}
 	else
@@ -104,7 +114,11 @@ bool GetDe430Coor(const double jde, const int planet_id, double * xyz, const int
 	jpl_pleph(ephem, jde, planet_id, centralBody_id, tempXYZ, 0);
 
         tempICRF = Vec3d(tempXYZ[0], tempXYZ[1], tempXYZ[2]);
+	#ifdef UNIT_TEST
+	tempECL = matJ2000ToVsop87 * tempICRF;
+	#else
         tempECL = StelCore::matJ2000ToVsop87 * tempICRF;
+	#endif
 
         xyz[0] = tempECL[0];
         xyz[1] = tempECL[1];
