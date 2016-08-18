@@ -61,13 +61,34 @@ vec3 xyYToRGB(highp float x, highp float y, highp float Y)
 		// Y = std::pow(adaptLuminanceScaled(Y), oneOverGamma);
 		Y = pow(abs(Y*pi*1e-4), alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
 
-		// Convert from xyY to XYZ
-		highp vec3 XYZ = vec3(x * Y / y, Y, (1. - x - y) * Y / y);
-		// Use the XYZ to sRGB matrix which uses a D65 reference white
-		// Ref: http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html
-		const highp mat3 XYZ2sRGBl=mat3(vec3(3.2404542,-0.9692660,0.0556434),
-										vec3(-1.5371385,1.8760108,-0.2040259),
-										vec3(-0.4985314,0.0415560,1.0572252));
-		return XYZ2sRGBl * XYZ * brightnessScale;
+//  HEAD of 2021:
+//		// Convert from xyY to XYZ
+//		highp vec3 XYZ = vec3(x * Y / y, Y, (1. - x - y) * Y / y);
+//		// Use the XYZ to sRGB matrix which uses a D65 reference white
+//		// Ref: http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html
+//		const highp mat3 XYZ2sRGBl=mat3(vec3(3.2404542,-0.9692660,0.0556434),
+//										vec3(-1.5371385,1.8760108,-0.2040259),
+//										vec3(-0.4985314,0.0415560,1.0572252));
+//		return XYZ2sRGBl * XYZ * brightnessScale;
+//  EXPERIMENTAL
+		// Convert from xyY to XZY
+		// Use a XYZ to Adobe RGB (1998) matrix which uses a D65 reference white
+		mediump vec3 tmpXYZ = vec3(x * Y / y, Y, (1. - x - y) * Y / y);
+		// Apparently AdobeRGB1998 transformation. TODO: sRGB!
+        //resultSkyColor = vec3(2.04148  *tmpXYZ.x -0.564977*tmpXYZ.y-0.344713 *tmpXYZ.z, 
+        //                     -0.969258 *tmpXYZ.x +1.87599 *tmpXYZ.y+0.0415557*tmpXYZ.z, 
+        //                      0.0134455*tmpXYZ.x -0.118373*tmpXYZ.y+1.01527  *tmpXYZ.z);
+
+		resultSkyColor = vec3(3.2406   *tmpXYZ.x -1.5372  *tmpXYZ.y-0.4986   *tmpXYZ.z, 
+                             -0.9689   *tmpXYZ.x +1.8758  *tmpXYZ.y+0.0415   *tmpXYZ.z, 
+                              0.0557   *tmpXYZ.x -0.2040  *tmpXYZ.y+1.0570   *tmpXYZ.z);
+		// This is now preliminary sRGB. We have to scale this with preset Gamma=2.2, channel-wise!
+        resultSkyColor.x=( resultSkyColor.x <= 0.0031308 ? 12.92*resultSkyColor.x : 1.055*pow(resultSkyColor.x, 1/2.4) - 0.055);
+        resultSkyColor.y=( resultSkyColor.y <= 0.0031308 ? 12.92*resultSkyColor.y : 1.055*pow(resultSkyColor.y, 1/2.4) - 0.055);
+        resultSkyColor.z=( resultSkyColor.z <= 0.0031308 ? 12.92*resultSkyColor.z : 1.055*pow(resultSkyColor.z, 1/2.4) - 0.055);
+
+        // final scaling. GZ: Not sure, maybe do this scale before the Gamma step just above.
+		resultSkyColor*=brightnessScale;
+// EXPERIMENT END 
 	}
 }
