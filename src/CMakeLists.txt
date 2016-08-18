@@ -587,7 +587,6 @@ IF(WIN32)
      SET(tests_testStelSphereGeometry_SRCS ${tests_testStelSphereGeometry_SRCS} ${zlib_SRCS})
 ENDIF()
 ADD_EXECUTABLE(testStelSphereGeometry EXCLUDE_FROM_ALL ${tests_testStelSphereGeometry_SRCS})
-
 QT5_USE_MODULES(testStelSphereGeometry Core OpenGL Test)
 TARGET_LINK_LIBRARIES(testStelSphereGeometry ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelSphereGeometry)
