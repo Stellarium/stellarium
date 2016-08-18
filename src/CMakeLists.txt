@@ -587,6 +587,7 @@ IF(WIN32)
      SET(tests_testStelSphereGeometry_SRCS ${tests_testStelSphereGeometry_SRCS} ${zlib_SRCS})
 ENDIF()
 ADD_EXECUTABLE(testStelSphereGeometry EXCLUDE_FROM_ALL ${tests_testStelSphereGeometry_SRCS})
+
 QT5_USE_MODULES(testStelSphereGeometry Core OpenGL Test)
 TARGET_LINK_LIBRARIES(testStelSphereGeometry ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelSphereGeometry)
@@ -733,6 +734,7 @@ SET(tests_testEphemeris_SRCS
      tests/testEphemeris.cpp
      core/StelFileMgr.hpp
      core/StelFileMgr.cpp
+     core/VecMath.hpp
      core/planetsephems/EphemWrapper.hpp
      core/planetsephems/vsop87.h
      core/planetsephems/vsop87.c
@@ -740,17 +742,18 @@ SET(tests_testEphemeris_SRCS
      core/planetsephems/calc_interpolated_elements.c
      core/planetsephems/elliptic_to_rectangular.h
      core/planetsephems/elliptic_to_rectangular.c
-#     core/planetsephems/de430.hpp
-#     core/planetsephems/de430.cpp
-#     core/planetsephems/de431.hpp
-#     core/planetsephems/de431.cpp
-#     core/planetsephems/jpl_int.h
-#     core/planetsephems/jpleph.h
-#     core/planetsephems/jpleph.cpp
+     core/planetsephems/de430.hpp
+     core/planetsephems/de430.cpp
+     core/planetsephems/de431.hpp
+     core/planetsephems/de431.cpp
+     core/planetsephems/jpl_int.h
+     core/planetsephems/jpleph.h
+     core/planetsephems/jpleph.cpp
 )
 ADD_EXECUTABLE(testEphemeris EXCLUDE_FROM_ALL ${tests_testEphemeris_SRCS})
 QT5_USE_MODULES(testEphemeris Core Test)
 TARGET_LINK_LIBRARIES(testEphemeris ${extLinkerOptionTest})
+TARGET_COMPILE_DEFINITIONS(testEphemeris PRIVATE UNIT_TEST)
 ADD_DEPENDENCIES(buildTests testEphemeris)
 ADD_TEST(testEphemeris)
 
