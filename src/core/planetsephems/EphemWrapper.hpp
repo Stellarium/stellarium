@@ -92,6 +92,54 @@ void get_umbriel_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*
 void get_titania_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
 void get_oberon_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
 
-#endif // EPHEMWRAPPER_HPP
+#if 0
+// GZ re-implemented differently as of 2017-01.
+// GZ: preliminary definitions. Should go to another new file.
+// The pattern might be changed to (const double jde, double *raDeg, double *decDeg, Vec3d *rotDeg) with rotDeg[0] the usual rotation, and CM1/CM2/CM3 for Jupiter.
+void get_mercury_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_jupiter_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg1, double *rotDeg2, double *rotDeg3);
+void get_neptune_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+// Table 2:
+void get_moon_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_deimos_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_phobos_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_amalthea_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_thebe_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_io_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_europa_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_ganymede_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_callisto_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_epimetheus_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_janus_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_mimas_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_tethys_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_rhea_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_cordelia_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_ophelia_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_bianca_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_cressida_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_desdemona_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_juliet_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_portia_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_rosalind_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_belinda_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_puck_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_miranda_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_ariel_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_umbriel_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_titania_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_oberon_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_naiad_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_thalassa_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_despina_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_galatea_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_larissa_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_proteus_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_triton_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+void get_io_axis_rot(const double jde, double *raDeg, double *decDeg, double *rotDeg);
+
+#endif
+
+#endif // _EPHEMWRAPPER_HPP_
 
 

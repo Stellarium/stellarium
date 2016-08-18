@@ -692,6 +692,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		Q_ASSERT(parent || englishName=="Sun");
 
 		const QString coordFuncName = pd.value(secname+"/coord_func", "kepler_orbit").toString(); // 0.20: new default for all non *_special.
+		const QString axisFuncName = pd.value(secname+"/axis_func").toString(); // TODO: Make sense out of it!
 		// qDebug() << "englishName:" << englishName << ", parent:" << strParent <<  ", coord_func:" << coordFuncName;
 		posFuncType posfunc=Q_NULLPTR;
 		Orbit* orbitPtr=Q_NULLPTR;
@@ -1033,41 +1034,70 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		if (secname=="sun") sun = newP;
 		if (secname=="moon") moon = newP;
 
-		float rotObliquity = pd.value(secname+"/rot_obliquity",0.).toFloat()*(M_PI_180f);
-		float rotAscNode = pd.value(secname+"/rot_equator_ascending_node",0.).toFloat()*(M_PI_180f);
+		double rotObliquity = pd.value(secname+"/rot_obliquity",0.).toDouble()*(M_PI_180);
+		double rotAscNode = pd.value(secname+"/rot_equator_ascending_node",0.).toDouble()*(M_PI_180);
 
 		// Use more common planet North pole data if available
 		// NB: N pole as defined by IAU (NOT right hand rotation rule)
 		// NB: J2000 epoch
-		const double J2000NPoleRA = pd.value(secname+"/rot_pole_ra", 0.).toDouble()*M_PI/180.;
-		const double J2000NPoleDE = pd.value(secname+"/rot_pole_de", 0.).toDouble()*M_PI/180.;
+		// GZ TODO for 0.20: Make this more flexible with changing axes. and have special functions for more complicated axes.
+		const double J2000NPoleRA  = pd.value(secname+"/rot_pole_ra",  0.).toDouble()*M_PI_180;
+		const double J2000NPoleRA1 = pd.value(secname+"/rot_pole_ra1", 0.).toDouble()*M_PI_180;
+		const double J2000NPoleDE  = pd.value(secname+"/rot_pole_de",  0.).toDouble()*M_PI_180;
+		const double J2000NPoleDE1 = pd.value(secname+"/rot_pole_de1", 0.).toDouble()*M_PI_180;
+		const double J2000NPoleW0  = pd.value(secname+"/rot_pole_w0",  0.).toDouble(); // stays in degrees!
+		const double J2000NPoleW1  = pd.value(secname+"/rot_pole_w1",  0.).toDouble(); // stays in degrees!
+
+		const double rotPeriod=pd.value(secname+"/rot_periode", pd.value(secname+"/orbit_Period", 24.).toDouble()).toDouble()/24.;
+		const double rotOffset=pd.value(secname+"/rot_rotation_offset",0.).toDouble();
 
 		if((J2000NPoleRA!=0.) || (J2000NPoleDE!=0.))
 		{
+			// Old solution: Make this once for J2000.
+			// New in 0.20: Repeat this block in planet::update() if required.
 			Vec3d J2000NPole;
 			StelUtils::spheToRect(J2000NPoleRA,J2000NPoleDE,J2000NPole);
 
 			Vec3d vsop87Pole(StelCore::matJ2000ToVsop87.multiplyWithoutTranslation(J2000NPole));
 
-			float ra, de;
+			double ra, de;
 			StelUtils::rectToSphe(&ra, &de, vsop87Pole);
 
-			rotObliquity = (M_PI_2f - de);
-			rotAscNode = (ra + M_PI_2f);
+			rotObliquity = (M_PI_2 - de);
+			rotAscNode = (ra + M_PI_2);
 
 			// qDebug() << "\tCalculated rotational obliquity: " << rotObliquity*180./M_PI << StelUtils::getEndLineChar();
 			// qDebug() << "\tCalculated rotational ascending node: " << rotAscNode*180./M_PI << StelUtils::getEndLineChar();
+			/*
+			if (J2000NPoleW0 >0)
+			{
+				// this is just another name for offset...
+				rotOffset=J2000NPoleW0;
+			}
+			if (J2000NPoleW1 >0)
+			{
+				// this is just another expression for rotational speed.
+				rotPeriod=360.0/J2000NPoleW1;
+				// qDebug() << "\t" << englishName << ": Calculated rotational speed: " << rotPeriod*180./M_PI << endl;
+			}
+			*/
 		}
 
 		// rot_periode given in hours, or orbit_Period given in days, orbit_visualization_period in days. The latter should have a meaningful default.
 		newP->setRotationElements(
-			pd.value(secname+"/rot_periode", pd.value(secname+"/orbit_Period", 1.).toDouble()*24.).toFloat()/24.f,
-			pd.value(secname+"/rot_rotation_offset",0.).toFloat(),
+			rotPeriod,
+			rotOffset,
 			pd.value(secname+"/rot_epoch", J2000).toDouble(),
 			rotObliquity,
 			rotAscNode,
-			pd.value(secname+"/rot_precession_rate",0.).toFloat()*M_PIf/(180*36525),
-			pd.value(secname+"/orbit_good", pd.value(secname+"/orbit_visualization_period", fabs(pd.value(secname+"/orbit_Period", 1.).toDouble())).toDouble()).toDouble()); // this is given in days...
+			//pd.value(secname+"/rot_precession_rate",0.).toDouble()*M_PI/(180*36525),
+			J2000NPoleRA,
+			J2000NPoleRA1,
+			J2000NPoleDE,
+			J2000NPoleDE1,
+			J2000NPoleW0,
+			J2000NPoleW1,
+			pd.value(secname+"/orbit_good", pd.value(secname+"/orbit_visualization_period", fabs(pd.value(secname+"/orbit_Period", 1.).toDouble())).toDouble()).toDouble()); // this is given in days. TODO; Get rid of the last parameter!
 
 		if (pd.contains(secname+"/tex_ring")) {
 			const float rMin = pd.value(secname+"/ring_inner_size").toFloat()/AUf;
@@ -1132,6 +1162,11 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		{
 			const double light_speed_correction = (p->getHeliocentricEclipticPos()-obsPosJDE).length() * (AU / (SPEED_OF_LIGHT * 86400.));
 			p->computePosition(dateJDE-light_speed_correction);
+			if      (p->englishName=="Moon")    Planet::updatePlanetCorrections(dateJDE-light_speed_correction, Planet::EarthMoon);
+			else if (p->englishName=="Jupiter") Planet::updatePlanetCorrections(dateJDE-light_speed_correction, Planet::Jupiter);
+			else if (p->englishName=="Saturn")  Planet::updatePlanetCorrections(dateJDE-light_speed_correction, Planet::Saturn);
+			else if (p->englishName=="Uranus")  Planet::updatePlanetCorrections(dateJDE-light_speed_correction, Planet::Uranus);
+			else if (p->englishName=="Neptune") Planet::updatePlanetCorrections(dateJDE-light_speed_correction, Planet::Neptune);
 		}
 	}
 	else
@@ -1139,6 +1174,11 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		for (const auto& p : systemPlanets)
 		{
 			p->computePosition(dateJDE);
+			if      (p->englishName=="Moon")    Planet::updatePlanetCorrections(dateJDE, Planet::EarthMoon);
+			else if (p->englishName=="Jupiter") Planet::updatePlanetCorrections(dateJDE, Planet::Jupiter);
+			else if (p->englishName=="Saturn")  Planet::updatePlanetCorrections(dateJDE, Planet::Saturn);
+			else if (p->englishName=="Uranus")  Planet::updatePlanetCorrections(dateJDE, Planet::Uranus);
+			else if (p->englishName=="Neptune") Planet::updatePlanetCorrections(dateJDE, Planet::Neptune);
 		}
 		lightTimeSunPosition.set(0.,0.,0.);
 	}
