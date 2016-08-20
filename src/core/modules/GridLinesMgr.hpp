@@ -35,168 +35,168 @@ class GridLinesMgr : public StelModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool azimuthalGridDisplayed
-			   READ getFlagAzimuthalGrid
-			   WRITE setFlagAzimuthalGrid
-			   NOTIFY azimuthalGridDisplayedChanged)
+		   READ getFlagAzimuthalGrid
+		   WRITE setFlagAzimuthalGrid
+		   NOTIFY azimuthalGridDisplayedChanged)
 	Q_PROPERTY(Vec3f azimuthalGridColor
-			   READ getColorAzimuthalGrid
-			   WRITE setColorAzimuthalGrid
-			   NOTIFY azimuthalGridColorChanged)
+		   READ getColorAzimuthalGrid
+		   WRITE setColorAzimuthalGrid
+		   NOTIFY azimuthalGridColorChanged)
 
 	Q_PROPERTY(bool equatorGridDisplayed
-			   READ getFlagEquatorGrid
-			   WRITE setFlagEquatorGrid
-			   NOTIFY equatorGridDisplayedChanged)
+		   READ getFlagEquatorGrid
+		   WRITE setFlagEquatorGrid
+		   NOTIFY equatorGridDisplayedChanged)
 	Q_PROPERTY(Vec3f equatorGridColor
-			   READ getColorEquatorGrid
-			   WRITE setColorEquatorGrid
-			   NOTIFY equatorGridColorChanged)
+		   READ getColorEquatorGrid
+		   WRITE setColorEquatorGrid
+		   NOTIFY equatorGridColorChanged)
 
 	Q_PROPERTY(bool equatorJ2000GridDisplayed
-			   READ getFlagEquatorJ2000Grid
-			   WRITE setFlagEquatorJ2000Grid
-			   NOTIFY equatorJ2000GridDisplayedChanged)
+		   READ getFlagEquatorJ2000Grid
+		   WRITE setFlagEquatorJ2000Grid
+		   NOTIFY equatorJ2000GridDisplayedChanged)
 	Q_PROPERTY(Vec3f equatorJ2000GridColor
-			   READ getColorEquatorJ2000Grid
-			   WRITE setColorEquatorJ2000Grid
-			   NOTIFY equatorJ2000GridColorChanged)
+		   READ getColorEquatorJ2000Grid
+		   WRITE setColorEquatorJ2000Grid
+		   NOTIFY equatorJ2000GridColorChanged)
 
 	Q_PROPERTY(bool eclipticJ2000GridDisplayed
-			   READ getFlagEclipticJ2000Grid
-			   WRITE setFlagEclipticJ2000Grid
-			   NOTIFY eclipticJ2000GridDisplayedChanged)
+		   READ getFlagEclipticJ2000Grid
+		   WRITE setFlagEclipticJ2000Grid
+		   NOTIFY eclipticJ2000GridDisplayedChanged)
 	Q_PROPERTY(Vec3f eclipticJ2000GridColor
-			   READ getColorEclipticJ2000Grid
-			   WRITE setColorEclipticJ2000Grid
-			   NOTIFY eclipticJ2000GridColorChanged)
+		   READ getColorEclipticJ2000Grid
+		   WRITE setColorEclipticJ2000Grid
+		   NOTIFY eclipticJ2000GridColorChanged)
 
 	Q_PROPERTY(bool eclipticGridDisplayed
-			   READ getFlagEclipticGrid
-			   WRITE setFlagEclipticGrid
-			   NOTIFY eclipticGridDisplayedChanged)
+		   READ getFlagEclipticGrid
+		   WRITE setFlagEclipticGrid
+		   NOTIFY eclipticGridDisplayedChanged)
 	Q_PROPERTY(Vec3f eclipticGridColor
-			   READ getColorEclipticGrid
-			   WRITE setColorEclipticGrid
-			   NOTIFY eclipticGridColorChanged)
+		   READ getColorEclipticGrid
+		   WRITE setColorEclipticGrid
+		   NOTIFY eclipticGridColorChanged)
 
 	Q_PROPERTY(bool galacticGridDisplayed
-			   READ getFlagGalacticGrid
-			   WRITE setFlagGalacticGrid
-			   NOTIFY galacticGridDisplayedChanged)
+		   READ getFlagGalacticGrid
+		   WRITE setFlagGalacticGrid
+		   NOTIFY galacticGridDisplayedChanged)
 	Q_PROPERTY(Vec3f galacticGridColor
-			   READ getColorGalacticGrid
-			   WRITE setColorGalacticGrid
-			   NOTIFY galacticGridColorChanged)
+		   READ getColorGalacticGrid
+		   WRITE setColorGalacticGrid
+		   NOTIFY galacticGridColorChanged)
 
 	Q_PROPERTY(bool equatorLineDisplayed
-			   READ getFlagEquatorLine
-			   WRITE setFlagEquatorLine
-			   NOTIFY equatorLineDisplayedChanged)
+		   READ getFlagEquatorLine
+		   WRITE setFlagEquatorLine
+		   NOTIFY equatorLineDisplayedChanged)
 	Q_PROPERTY(Vec3f equatorLineColor
-			   READ getColorEquatorLine
-			   WRITE setColorEquatorLine
-			   NOTIFY equatorLineColorChanged)
+		   READ getColorEquatorLine
+		   WRITE setColorEquatorLine
+		   NOTIFY equatorLineColorChanged)
 
 	Q_PROPERTY(bool equatorJ2000LineDisplayed
-			   READ getFlagEquatorJ2000Line
-			   WRITE setFlagEquatorJ2000Line
-			   NOTIFY equatorJ2000LineDisplayedChanged)
+		   READ getFlagEquatorJ2000Line
+		   WRITE setFlagEquatorJ2000Line
+		   NOTIFY equatorJ2000LineDisplayedChanged)
 	Q_PROPERTY(Vec3f equatorJ2000LineColor
-			   READ getColorEquatorJ2000Line
-			   WRITE setColorEquatorJ2000Line
-			   NOTIFY equatorJ2000LineColorChanged)
+		   READ getColorEquatorJ2000Line
+		   WRITE setColorEquatorJ2000Line
+		   NOTIFY equatorJ2000LineColorChanged)
 
 	// This is now ecl. of date.
 	Q_PROPERTY(bool eclipticLineDisplayed
-			   READ getFlagEclipticLine
-			   WRITE setFlagEclipticLine
-			   NOTIFY eclipticLineDisplayedChanged)
+		   READ getFlagEclipticLine
+		   WRITE setFlagEclipticLine
+		   NOTIFY eclipticLineDisplayedChanged)
 	Q_PROPERTY(Vec3f eclipticLineColor
-			   READ getColorEclipticLine
-			   WRITE setColorEclipticLine
-			   NOTIFY eclipticLineColorChanged)
+		   READ getColorEclipticLine
+		   WRITE setColorEclipticLine
+		   NOTIFY eclipticLineColorChanged)
 
 	// new name, but replaces old ecliptic.
 	Q_PROPERTY(bool eclipticJ2000LineDisplayed
-			   READ getFlagEclipticJ2000Line
-			   WRITE setFlagEclipticJ2000Line
-			   NOTIFY eclipticJ2000LineDisplayedChanged)
+		   READ getFlagEclipticJ2000Line
+		   WRITE setFlagEclipticJ2000Line
+		   NOTIFY eclipticJ2000LineDisplayedChanged)
 	Q_PROPERTY(Vec3f eclipticJ2000LineColor
-			   READ getColorEclipticJ2000Line
-			   WRITE setColorEclipticJ2000Line
-			   NOTIFY eclipticJ2000LineColorChanged)
+		   READ getColorEclipticJ2000Line
+		   WRITE setColorEclipticJ2000Line
+		   NOTIFY eclipticJ2000LineColorChanged)
 
 	Q_PROPERTY(bool precessionCirclesDisplayed
-			   READ getFlagPrecessionCircles
-			   WRITE setFlagPrecessionCircles
-			   NOTIFY precessionCirclesDisplayedChanged)
+		   READ getFlagPrecessionCircles
+		   WRITE setFlagPrecessionCircles
+		   NOTIFY precessionCirclesDisplayedChanged)
 	Q_PROPERTY(Vec3f precessionCirclesColor
-			   READ getColorPrecessionCircles
-			   WRITE setColorPrecessionCircles
-			   NOTIFY precessionCirclesColorChanged)
+		   READ getColorPrecessionCircles
+		   WRITE setColorPrecessionCircles
+		   NOTIFY precessionCirclesColorChanged)
 
 	Q_PROPERTY(bool meridianLineDisplayed
-			   READ getFlagMeridianLine
-			   WRITE setFlagMeridianLine
-			   NOTIFY meridianLineDisplayedChanged)
+		   READ getFlagMeridianLine
+		   WRITE setFlagMeridianLine
+		   NOTIFY meridianLineDisplayedChanged)
 	Q_PROPERTY(Vec3f meridianLineColor
-			   READ getColorMeridianLine
-			   WRITE setColorMeridianLine
-			   NOTIFY meridianLineColorChanged)
+		   READ getColorMeridianLine
+		   WRITE setColorMeridianLine
+		   NOTIFY meridianLineColorChanged)
 
 	Q_PROPERTY(bool longitudeLineDisplayed
-			   READ getFlagLongitudeLine
-			   WRITE setFlagLongitudeLine
-			   NOTIFY longitudeLineDisplayedChanged)
+		   READ getFlagLongitudeLine
+		   WRITE setFlagLongitudeLine
+		   NOTIFY longitudeLineDisplayedChanged)
 	Q_PROPERTY(Vec3f longitudeLineColor
-			   READ getColorLongitudeLine
-			   WRITE setColorLongitudeLine
-			   NOTIFY longitudeLineColorChanged)
+		   READ getColorLongitudeLine
+		   WRITE setColorLongitudeLine
+		   NOTIFY longitudeLineColorChanged)
 
 	Q_PROPERTY(bool horizonLineDisplayed
-			   READ getFlagHorizonLine
-			   WRITE setFlagHorizonLine
-			   NOTIFY horizonLineDisplayedChanged)
+		   READ getFlagHorizonLine
+		   WRITE setFlagHorizonLine
+		   NOTIFY horizonLineDisplayedChanged)
 	Q_PROPERTY(Vec3f horizonLineColor
-			   READ getColorHorizonLine
-			   WRITE setColorHorizonLine
-			   NOTIFY horizonLineColorChanged)
+		   READ getColorHorizonLine
+		   WRITE setColorHorizonLine
+		   NOTIFY horizonLineColorChanged)
 
 	Q_PROPERTY(bool galacticEquatorLineDisplayed
-			   READ getFlagGalacticEquatorLine
-			   WRITE setFlagGalacticEquatorLine
-			   NOTIFY galacticEquatorLineDisplayedChanged)
+		   READ getFlagGalacticEquatorLine
+		   WRITE setFlagGalacticEquatorLine
+		   NOTIFY galacticEquatorLineDisplayedChanged)
 	Q_PROPERTY(Vec3f galacticEquatorLineColor
-			   READ getColorGalacticEquatorLine
-			   WRITE setColorGalacticEquatorLine
-			   NOTIFY galacticEquatorLineColorChanged)
+		   READ getColorGalacticEquatorLine
+		   WRITE setColorGalacticEquatorLine
+		   NOTIFY galacticEquatorLineColorChanged)
 
 	Q_PROPERTY(bool primeVerticalLineDisplayed
-			   READ getFlagPrimeVerticalLine
-			   WRITE setFlagPrimeVerticalLine
-			   NOTIFY primeVerticalLineDisplayedChanged)
+		   READ getFlagPrimeVerticalLine
+		   WRITE setFlagPrimeVerticalLine
+		   NOTIFY primeVerticalLineDisplayedChanged)
 	Q_PROPERTY(Vec3f primeVerticalLineColor
-			   READ getColorPrimeVerticalLine
-			   WRITE setColorPrimeVerticalLine
-			   NOTIFY primeVerticalLineColorChanged)
+		   READ getColorPrimeVerticalLine
+		   WRITE setColorPrimeVerticalLine
+		   NOTIFY primeVerticalLineColorChanged)
 
 	Q_PROPERTY(bool colureLinesDisplayed
-			   READ getFlagColureLines
-			   WRITE setFlagColureLines
-			   NOTIFY colureLinesDisplayedChanged)
+		   READ getFlagColureLines
+		   WRITE setFlagColureLines
+		   NOTIFY colureLinesDisplayedChanged)
 	Q_PROPERTY(Vec3f colureLinesColor
-			   READ getColorColureLines
-			   WRITE setColorColureLines
-			   NOTIFY colureLinesColorChanged)
+		   READ getColorColureLines
+		   WRITE setColorColureLines
+		   NOTIFY colureLinesColorChanged)
 
 	Q_PROPERTY(bool circumpolarCirclesDisplayed
-			   READ getFlagCircumpolarCircles
-			   WRITE setFlagCircumpolarCircles
-			   NOTIFY circumpolarCirclesDisplayedChanged)
+		   READ getFlagCircumpolarCircles
+		   WRITE setFlagCircumpolarCircles
+		   NOTIFY circumpolarCirclesDisplayedChanged)
 	Q_PROPERTY(Vec3f circumpolarCirclesColor
-			   READ getColorCircumpolarCircles
-			   WRITE setColorCircumpolarCircles
-			   NOTIFY circumpolarCirclesColorChanged)
+		   READ getColorCircumpolarCircles
+		   WRITE setColorCircumpolarCircles
+		   NOTIFY circumpolarCirclesColorChanged)
 
 public:
 	GridLinesMgr();

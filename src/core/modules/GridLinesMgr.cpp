@@ -933,6 +933,7 @@ void GridLinesMgr::init()
 	setColorGalacticGrid(StelUtils::strToVec3f(conf->value("color/galactic_color", defaultColor).toString()));
 	setColorAzimuthalGrid(StelUtils::strToVec3f(conf->value("color/azimuthal_color", defaultColor).toString()));
 	setColorEquatorLine(StelUtils::strToVec3f(conf->value("color/equator_color", defaultColor).toString()));
+	setColorEquatorJ2000Line(StelUtils::strToVec3f(conf->value("color/equator_J2000_color", defaultColor).toString()));
 	setColorEclipticLine(StelUtils::strToVec3f(conf->value("color/ecliptic_color", defaultColor).toString()));
 	setColorEclipticJ2000Line(StelUtils::strToVec3f(conf->value("color/ecliptic_J2000_color", defaultColor).toString()));
 	setColorPrecessionCircles(StelUtils::strToVec3f(conf->value("color/precession_circles_color", defaultColor).toString()));

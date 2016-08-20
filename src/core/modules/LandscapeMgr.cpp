@@ -745,7 +745,11 @@ bool LandscapeMgr::getFlagCardinalsPoints() const
 //! Set Cardinals Points color
 void LandscapeMgr::setColorCardinalPoints(const Vec3f& v)
 {
-	cardinalsPoints->setColor(v);
+	if(v != getColorCardinalPoints())
+	{
+		cardinalsPoints->setColor(v);
+		emit cardinalsPointsColorChanged(v);
+	}
 }
 
 //! Get Cardinals Points color
