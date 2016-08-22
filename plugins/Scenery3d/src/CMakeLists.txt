@@ -20,6 +20,8 @@ SET(Scenery3d_SRCS
      S3DEnum.hpp
      SceneInfo.hpp
      SceneInfo.cpp
+     S3DScene.hpp
+     S3DScene.cpp
      Scenery3d.hpp
      Scenery3d.cpp
      Scenery3dMgr.hpp

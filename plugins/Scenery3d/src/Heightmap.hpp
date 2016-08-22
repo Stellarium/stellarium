@@ -28,12 +28,16 @@ class Heightmap
 {
 
 public:
+	typedef QVector<unsigned int> IdxList;
+	typedef QVector<Vec3f> PosList;
 
         //! Construct a heightmap from a loaded OBJ mesh.
         //! The mesh is stored as reference and used for calculations.
         //! @param obj Mesh for building the heightmap.
-	Heightmap(StelOBJ *obj);
+	Heightmap();
         virtual ~Heightmap();
+
+	void setMeshData(const IdxList& indexList, const PosList& posList);
 
         //! Get z Value at (x,y) coordinates.
         //! In case of ambiguities always returns the maximum height.
@@ -47,20 +51,21 @@ public:
         float getNullHeight() const {return nullHeight;}
 
 private:
+	IdxList indexList;
+	PosList posList;
 
         static const int GRID_LENGTH = 60; // # of grid spaces is GRID_LENGTH^2
 
-        typedef std::vector<int> FaceVector;
+	typedef std::vector<const unsigned int*> FaceVector; //points to first index in Index list for a face
 
         struct GridSpace {
                 FaceVector faces;
-		float getHeight(const StelOBJ& obj, const float x, const float y) const;
+		float getHeight(const PosList &posList, const float x, const float y) const;
 
                 //static float face_height_at(const OBJ& obj, const OBJ::Face* face, float x, float y);
-		static float face_height_at(const StelOBJ::VertexList &obj, const unsigned int *pTriangle, const float x, const float y);
+		static float face_height_at(const PosList &obj, const unsigned int *pTriangle, const float x, const float y);
         };
 
-	StelOBJ* obj;
         GridSpace* grid;
         float xMin, yMin;
         float xMax, yMax;

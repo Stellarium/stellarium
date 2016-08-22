@@ -42,6 +42,7 @@ class Scenery3dDialog;
 class StoredViewDialog;
 class QSettings;
 class StelButton;
+class S3DScene;
 
 //! Main class of the module, inherits from StelModule.
 //! Manages initialization, provides an interface to change Scenery3d properties and handles user input
@@ -263,7 +264,7 @@ private:
     void createToolbarButtons() const;
 
     //! This is run asynchronously in a background thread, performing the actual scene loading
-    bool loadSceneBackground();
+    S3DScene *loadSceneBackground();
 
     // the other "main" objects
     Scenery3d* scenery3d;
@@ -286,7 +287,7 @@ private:
 
     StelProgressController* progressBar;
     SceneInfo currentLoadScene;
-    QFutureWatcher<bool> currentLoadFuture;
+    QFutureWatcher<S3DScene*> currentLoadFuture;
 };
 
 

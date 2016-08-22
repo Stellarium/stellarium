@@ -22,7 +22,6 @@
 #define _STELOBJ_HPP_
 
 #include "GeomMath.hpp"
-#include "StelTextureTypes.hpp"
 
 #include <qopengl.h>
 #include <QLoggingCategory>
@@ -69,7 +68,7 @@ public:
 	struct Material
 	{
 		Material()
-			: Ns(8.0f), d(-1.0f), bBackface(false), bAlphatest(false), fAlphaThreshold(0.5f), traits()
+			: Ns(8.0f), d(-1.0f), bBackface(false), bAlphatest(false), fAlphaThreshold(0.5f)
 		{
 
 		}
@@ -92,22 +91,16 @@ public:
 
 		//! The ambient map path
 		QString map_Ka;
-		StelTextureSP tex_Ka;
 		//! The diffuse map path
 		QString map_Kd;
-		StelTextureSP tex_Kd;
 		//! The specular map path
 		QString map_Ks;
-		StelTextureSP tex_Ks;
 		//! The emissive map path
 		QString map_Ke;
-		StelTextureSP tex_Ke;
 		//! The bump/normal map path
 		QString map_bump;
-		StelTextureSP tex_bump;
 		//! The height map path
 		QString map_height;
-		StelTextureSP tex_height;
 
 		//! Nonstandard extension:
 		//! if to render backface, default false
@@ -119,22 +112,6 @@ public:
 		//! the alpha threshold to use for alpha testing when bAlphatest is true, default 0.5
 		float fAlphaThreshold;
 
-		struct Traits
-		{
-			bool hasAmbientTexture; //! True when tex_Ka is a valid texture
-			bool hasDiffuseTexture; //! True when tex_Kd is a valid texture
-			bool hasSpecularTexture; //! True when tex_Ks is a valid texture
-			bool hasEmissiveTexture; //! True when tex_Ke is a valid texture
-			bool hasBumpTexture; //! True when tex_bump is a valid texture
-			bool hasHeightTexture; //! True when tex_height is a valid texture
-			bool hasSpecularity; //! True when both Ks and Ns are non-zero
-			bool hasTransparency; //! True when the material exhibits "true" transparency, that is when the tex_Kd has an alpha channel or the d value is smaller than 1
-		} traits;
-
-		//! Starts loading the textures in this material asynchronously
-		void loadTexturesAsync();
-		//! Re-calculates the material traits. This requires all textures to be fully loaded.
-		void calculateTraits();
 		//! Loads all materials contained in an .mtl file
 		static QVector<Material> loadFromFile(const QString& filename);
 	};
@@ -230,8 +207,6 @@ public:
 	inline const VertexList& getVertexList() const { return m_vertices; }
 	//! Returns an index list, suitable for use with OpenGL element arrays
 	inline const IndexList& getIndexList() const { return m_indices; }
-	//! Returns the list of materials for modification
-	inline MaterialList& getMaterialList() { return m_materials; }
 	//! Returns the list of materials
 	inline const MaterialList& getMaterialList() const { return m_materials; }
 	//! Returns the list of objects
@@ -286,23 +261,20 @@ public:
 
 	//! Splits the vertex data into separate arrays.
 	//! If a given parameter vector is null, it is not filled.
-	//!
-	//! If \p deleteVertexData is true, the internal vertex list
-	//! will be cleared to save space, meaning getVertexList() returns
+	void splitVertexData(V3Vec* position,
+			     V2Vec* texCoord = NULL,
+			     V3Vec* normal = NULL,
+			     V3Vec* tangent = NULL,
+			     V3Vec* bitangent = NULL) const;
+
+	//! Clears the internal vertex list to save space, meaning getVertexList() returns
 	//! an empty list! The other members are unaffected (indices, materials,
 	//! objects etc. still work). The vertex list can only be restored
 	//! when the OBJ data is freshly loaded again, so don't do this if
 	//! you require it later.
-	void splitVertexData(bool deleteVertexData,
-			     V3Vec* position,
-			     V2Vec* texCoord = NULL,
-			     V3Vec* normal = NULL,
-			     V3Vec* tangent = NULL,
-			     V3Vec* bitangent = NULL);
-
-	//! Calls Material::loadTexturesAsync() for all materials,
-	//! which starts loading the textures in the background.
-	void loadAllTexturesAsync();
+	//!
+	//! This is intended to be used together with splitVertexData(), when you want your own vertex format.
+	void clearVertexData();
 private:
 	typedef QVector<QStringRef> ParseParams;
 	typedef QHash<Vertex, int> VertexCache;

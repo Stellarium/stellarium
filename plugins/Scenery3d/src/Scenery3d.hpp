@@ -41,7 +41,11 @@
 //predeclarations
 class QOpenGLFramebufferObject;
 class Scenery3dMgr;
+class StelMovementMgr;
 class LandscapeMgr;
+class S3DScene;
+
+Q_DECLARE_LOGGING_CATEGORY(scenery3d)
 
 //! Representation of a complete 3D scenery
 class Scenery3d
@@ -52,7 +56,9 @@ public:
 	virtual ~Scenery3d();
 
 	//! Loads the specified scene
-	bool loadScene(const SceneInfo& scene);
+	S3DScene *loadScene(const SceneInfo& scene) const;
+	//! Loads the model into GL and sets the given scene to be the current one. Takes ownership of the given scene.
+	void setCurrentScene(S3DScene *scene);
 
 	//! Walk/Fly Navigation with Ctrl+Cursor and Ctrl+PgUp/Dn keys.
 	//! Pressing Ctrl-Alt: 5x, Ctrl-Shift: 10x speedup; Ctrl-Shift-Alt: 50x!
@@ -74,7 +80,7 @@ public:
 	void init();
 
 	//! Gets the current scene's metadata
-	SceneInfo getCurrentScene() { return currentScene; }
+	SceneInfo getCurrentSceneInfo() const;
 
 	bool getDebugEnabled() const { return debugEnabled; }
 	void setDebugEnabled(bool debugEnabled) { this->debugEnabled = debugEnabled; }
@@ -148,19 +154,14 @@ public:
 	Vec3d getCurrentGridPosition() const;
 
 	//! Sets the observer eye height.
-	void setEyeHeight(const float eyeheight) { eye_height = eyeheight; }
+	void setEyeHeight(const float eyeheight);
 	//! Gets the current observer eye height (vertical difference from feet to camera position).
-	float getEyeHeight() const { return eye_height; }
+	double getEyeHeight() const;
 
 	enum ShadowCaster { None, Sun, Moon, Venus };
 
 	//! Returns the shader manager this instance uses
 	ShaderMgr& getShaderManager()    {	    return shaderManager;    }
-
-	//! Loads the model into GL and sets the loaded scene to be the current one
-	void finalizeLoad();
-	//! Makes sure the texture is loaded and without errors, and loads it into GL
-	void finalizeTexture(StelTextureSP& tex);
 
 	//these are some properties that determine the features supported in the current GL context
 	//available after init() is called
@@ -172,7 +173,7 @@ public:
 
 private:
 	Scenery3dMgr* parent;
-	SceneInfo currentScene,loadingScene;
+	S3DScene* currentScene;
 	ShaderMgr shaderManager;
 	PlanetP sun,moon,venus;
 
@@ -198,22 +199,15 @@ private:
 	unsigned int cubemapSize;            // configurable values, typically 512/1024/2048/4096
 	unsigned int shadowmapSize;
 
-	Vec3d absolutePosition;     // current eyepoint in model (note: this is actually the negated position, i.e. the value used to translate the view matrix)
 	Vec3d moveVector;           // position change in scene coords
 	Vec3f movement;		// speed values for moving around the scenery
-	float eye_height;
 
 	StelCore* core;
+	StelMovementMgr* mvMgr;
 	LandscapeMgr* landscapeMgr;
 	StelProjectorP altAzProjector;
-	QSharedPointer<StelOBJ> objModel, objModelLoad, groundModel, groundModelLoad;
-	Heightmap* heightmap;
-	Heightmap* heightmapLoad;
-	StelOpenGLArray glArray;
 
-	Vec3d mainViewUp;
 	Vec3d mainViewDir;
-	Vec3d viewPos;
 
 	int drawnTriangles,drawnModels;
 	int materialSwitches, shaderSwitches;
@@ -279,9 +273,6 @@ private:
 
 	GlobalShaderParameters shaderParameters;
 
-	//Scene AABB
-	AABBox sceneBoundingBox;
-
 	//Shadow Map FBO handles
 	QVector<GLuint> shadowFBOs;
 	//Holds the shadow textures
@@ -322,7 +313,7 @@ private:
 	//! Cleans up shadowmapping related objects
 	void deleteShadowmapping();
 
-	void calcCubeMVP();
+	void calcCubeMVP(const Vec3d translation);
 
 	// --- drawing methods ---
 	//! Basic setup for default perspective drawing. Standard OpenGL forward rendering.
@@ -357,24 +348,18 @@ private:
 	//! Sets up shader uniforms constant over the whole frame/side of cubemap (=modelview dependent stuff)
 	void setupFrameUniforms(QOpenGLShaderProgram *shader);
 	//! Sets up shader uniforms specific to one material
-	void setupMaterialUniforms(QOpenGLShaderProgram *shader, const StelOBJ::Material& mat);
+	void setupMaterialUniforms(QOpenGLShaderProgram *shader, const S3DScene::Material& mat);
 
 	//! Finds the correct light source out of Sun, Moon, Venus, and returns ambient and directional light components.
 	Scenery3d::ShadowCaster calculateLightSource(float &ambientBrightness, float &diffuseBrightness, Vec3f &lightsourcePosition, float &emissiveFactor);
-
-	//! @return height at -absolutePosition, which is the current eye point.
-	float groundHeight();
-
-	//Sets the scenes' AABB
-	void setSceneAABB(const AABBox &bbox);
 
 	//Save the Frustum to be able to move away from it and analyze it
 	void saveFrusts();
 
 	//! Adjust the frustum to the loaded scene bounding box according to Zhang et al.
-	void adjustShadowFrustum(const Vec3d viewPos, const Vec3d viewDir, const Vec3d viewUp, const float fov, const float aspect);
+	void adjustShadowFrustum(const Vec3d &viewPos, const Vec3d &viewDir, const Vec3d &viewUp, const float fov, const float aspect);
 	//Computes the frustum splits
-	void computeFrustumSplits(const Vec3d viewPos, const Vec3d viewDir, const Vec3d viewUp);
+	void computeFrustumSplits(const Vec3d& viewPos, const Vec3d& viewDir, const Vec3d& viewUp);
 	//Computes the focus body for given frustum
 	void computePolyhedron(Polyhedron& body, const Frustum& frustum, const Vec3f &shadowDir);
 	//Computes the crop matrix to focus the light

@@ -20,7 +20,7 @@
 
 #ifndef _SHADERMANAGER_HPP_
 #define _SHADERMANAGER_HPP_
-#include "StelOBJ.hpp"
+#include "S3DScene.hpp"
 #include "StelTexture.hpp"
 #include "S3DEnum.hpp"
 
@@ -132,7 +132,7 @@ public:
 	};
 
 	//! Returns a shader that supports the specified operations. Must be called within a GL context.
-	inline QOpenGLShaderProgram* getShader(const GlobalShaderParameters &globals, const StelOBJ::Material *mat = NULL);
+	inline QOpenGLShaderProgram* getShader(const GlobalShaderParameters &globals, const S3DScene::Material *mat = NULL);
 
 	//! Returns the Frustum/Boundingbox Debug shader
 	inline QOpenGLShaderProgram* getDebugShader();
@@ -225,7 +225,7 @@ private:
 	t_UniformCache m_uniformCache;
 };
 
-QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals,const StelOBJ::Material* mat)
+QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals,const S3DScene::Material* mat)
 {
 	//Build bitflags from bools. Some stuff requires pixelLighting to be enabled, so check it too.
 

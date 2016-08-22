@@ -27,20 +27,32 @@
 #define INF (std::numeric_limits<float>::max())
 #define NO_HEIGHT (-INF)
 
-Heightmap::Heightmap(StelOBJ *obj) : obj(obj), nullHeight(0)
+Heightmap::Heightmap() : grid(Q_NULLPTR), nullHeight(0.0)
 {
-	const AABBox& box = obj->getAABBox();
-	xMin = box.min[0];
-	yMin = box.min[1];
-	xMax = box.max[0];
-	yMax = box.max[1];
-
-	this->initGrid();
 }
 
 Heightmap::~Heightmap()
 {
 	delete[] grid;
+}
+
+void Heightmap::setMeshData(const IdxList &indexList, const PosList &posList)
+{
+	this->indexList = indexList;
+	this->posList = posList;
+
+	//re-calc min/max
+	xMin = yMin =  std::numeric_limits<float>::max();
+	xMax = yMax = -std::numeric_limits<float>::max();
+	for(int i = 0;i<posList.size();++i)
+	{
+		xMin = std::min(xMin, posList.at(i)[0]);
+		yMin = std::min(yMin, posList.at(i)[1]);
+		xMax = std::max(xMax, posList.at(i)[0]);
+		yMax = std::max(yMax, posList.at(i)[1]);
+	}
+
+	this->initGrid();
 }
 
 /**
@@ -57,7 +69,7 @@ float Heightmap::getHeight(const float x, const float y) const
 	}
 	else
 	{
-		float h = space->getHeight(*obj, x, y);
+		float h = space->getHeight(posList, x, y);
 		if (h == NO_HEIGHT)
 		{
 			return nullHeight;
@@ -74,17 +86,18 @@ float Heightmap::getHeight(const float x, const float y) const
  * for intersection with the observer coords is limited to faces
  * intersecting this grid space.
  */
-float Heightmap::GridSpace::getHeight(const StelOBJ &obj, const float x, const float y) const
+float Heightmap::GridSpace::getHeight(const PosList& posList, const float x, const float y) const
 {
 	float h = NO_HEIGHT;
 
-	const StelOBJ::IndexList& indexArray = obj.getIndexList();
-	const StelOBJ::VertexList& vertexArray = obj.getVertexList();
-	for(unsigned int i=0; i<obj.getFaceCount(); ++i)
+	// this was actually broken for a very long time
+	// and checked ALL faces instead of only the ones in the grid cell...
+	for(unsigned int i=0; i<faces.size(); ++i)
 	{
-		const unsigned int* pTriangle = &indexArray[i*3];
+		//points into the index list
+		const unsigned int* pTriangle = faces[i];
 
-		float face_h = face_height_at(vertexArray, pTriangle, x, y);
+		float face_h = face_height_at(posList, pTriangle, x, y);
 		if(face_h > h)
 		{
 			h = face_h;
@@ -95,13 +108,13 @@ float Heightmap::GridSpace::getHeight(const StelOBJ &obj, const float x, const f
 }
 
 /**
- * Allocates memory for the grid and fills every grid space with
+ * Fills every grid space with
  * pointers to the faces in that space.
  */
 void Heightmap::initGrid()
 {
+	delete[] grid;
 	grid = new GridSpace[GRID_LENGTH*GRID_LENGTH];
-	const StelOBJ::IndexList& indexArray = obj->getIndexList();
 
 	for (int y = 0; y < GRID_LENGTH; y++)
 	{
@@ -114,12 +127,15 @@ void Heightmap::initGrid()
 
 			FaceVector* faces = &grid[y*GRID_LENGTH + x].faces;
 
-			for(unsigned int i=0; i<obj->getFaceCount(); ++i)
+			for(int i=0; i<indexList.size(); i+=3)
 			{
-				const unsigned int* pTriangle = &(indexArray.at(i*3));
+				const unsigned int* pTriangle = &(indexList.at(i));
+				//TODO this can be optimized massively by only checking the grid spaces which the triangle actually covers...
+				// or at least check only the bounding rectangle...
+
 				if(face_in_area(pTriangle, xmin, ymin, xmax, ymax))
 				{
-					faces->push_back(*pTriangle);
+					faces->push_back(pTriangle);
 				}
 			}
 		}
@@ -148,16 +164,12 @@ Heightmap::GridSpace* Heightmap::getSpace(const float x, const float y) const
  * Returns the height of the face at the given point or -inf if
  * the coordinates are outside the bounds of the face.
  */
-float Heightmap::GridSpace::face_height_at(const StelOBJ::VertexList& obj, const unsigned int* pTriangle, const float x, const float y)
+float Heightmap::GridSpace::face_height_at(const PosList& obj, const unsigned int* pTriangle, const float x, const float y)
 {
 	//Vertices in triangle
-	const StelOBJ::Vertex& pV0 = obj.at(pTriangle[0]);
-	const StelOBJ::Vertex& pV1 = obj.at(pTriangle[1]);
-	const StelOBJ::Vertex& pV2 = obj.at(pTriangle[2]);
-
-	const float* pVertex0 = pV0.position;
-	const float* pVertex1 = pV1.position;
-	const float* pVertex2 = pV2.position;
+	const Vec3f& pVertex0 = obj.at(pTriangle[0]);
+	const Vec3f& pVertex1 = obj.at(pTriangle[1]);
+	const Vec3f& pVertex2 = obj.at(pTriangle[2]);
 
 	// Weight of those vertices is used to calculate exact height at (x,y), using barycentric coordinates, see also
 	// http://en.wikipedia.org/wiki/Barycentric_coordinate_system_(mathematics)#Converting_to_barycentric_coordinates
@@ -199,15 +211,13 @@ bool Heightmap::face_in_area(const unsigned int* pTriangle, const float xmin, co
 	float f_xmax = xmin;
 	float f_ymax = ymin;
 
-	const StelOBJ::VertexList& vtxArray = obj->getVertexList();
-
 	for(int i=0; i<3; i++)
 	{
-		const StelOBJ::Vertex& pVertex = vtxArray.at(pTriangle[i]);
-		if(pVertex.position[0] < f_xmin) f_xmin = pVertex.position[0];
-		if(pVertex.position[1] < f_ymin) f_ymin = pVertex.position[1];
-		if(pVertex.position[0] > f_xmax) f_xmax = pVertex.position[0];
-		if(pVertex.position[1] > f_ymax) f_ymax = pVertex.position[1];
+		const Vec3f& pos = posList.at(pTriangle[i]);
+		f_xmin = std::min(f_xmin, pos[0]);
+		f_ymin = std::min(f_ymin, pos[1]);
+		f_xmax = std::max(f_xmax, pos[0]);
+		f_ymax = std::max(f_ymax, pos[1]);
 	}
 
 	if ((f_xmin < xmax) && (f_ymin < ymax) && (f_xmax > xmin) && (f_ymax > ymin))
