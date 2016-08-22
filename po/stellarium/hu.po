@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-11 04:58+0700\n"
-"PO-Revision-Date: 2016-07-23 07:05+0000\n"
+"PO-Revision-Date: 2016-08-18 08:00+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-08-11 05:28+0000\n"
-"X-Generator: Launchpad (build 18169)\n"
+"X-Launchpad-Export-Date: 2016-08-19 05:18+0000\n"
+"X-Generator: Launchpad (build 18176)\n"
 "X-Poedit-Language: Hungarian\n"
 
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:188
@@ -184,7 +184,7 @@ msgstr "Ekliptikus háló"
 #: src/core/modules/GridLinesMgr.cpp:962 src/ui_viewDialog.h:1765
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Galactic grid"
-msgstr "Galaktikus hálózat"
+msgstr "Galaktikus háló"
 
 #: src/core/modules/GridLinesMgr.cpp:963 src/ui_viewDialog.h:1789
 msgid "Galactic equator"
@@ -1573,6 +1573,9 @@ msgid ""
 "equator, ecliptic, hour lines, etc. into straight lines. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
+"A perspektivikus vetület a horizontot és az egyéb a nagy köröket, mint "
+"például az egyenlítőt és az ekliptikát egyenes vonallá képezi le. "
+"Matematikai neve gnomónikus vetület."
 
 #: src/core/StelProjectorClasses.cpp:87
 msgid "Equal Area"
@@ -2983,7 +2986,7 @@ msgstr "Csillagképek"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:89
 msgid "Bright galaxies"
-msgstr "Fényes galaxisok"
+msgstr "Fényes galaxis"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:91
@@ -3003,7 +3006,7 @@ msgstr "Ködök"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:97
 msgid "Planetary nebulae"
-msgstr "Planetáris ködök"
+msgstr "Planetáris köd"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:99
@@ -3028,7 +3031,7 @@ msgstr "Reflexiós köd"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:107 src/ui_viewDialog.h:1719
 msgid "Active galaxies"
-msgstr "aktív galaxis"
+msgstr "Aktív galaxis"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:109
@@ -3038,7 +3041,7 @@ msgstr "Rádiógalaxis"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:111 src/ui_viewDialog.h:1713
 msgid "Interacting galaxies"
-msgstr "közreható galaxisok"
+msgstr "Közreható galaxis"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:113
@@ -3218,7 +3221,7 @@ msgstr "Japán Hold-házak"
 
 #: src/translations.h:183
 msgid "Kamilaroi/Euahlayi"
-msgstr ""
+msgstr "Kamilaroi/Euahlayi"
 
 #: src/translations.h:184
 msgid "Korean"
@@ -5393,7 +5396,7 @@ msgstr "Planetáris ködök"
 
 #: src/ui_viewDialog.h:1718
 msgid "Galaxies"
-msgstr "Galaxisok"
+msgstr "Galaxis"
 
 #: src/ui_viewDialog.h:1720
 msgid "Dark Nebulae"
@@ -5668,7 +5671,7 @@ msgstr "Bolygók helyi nevei"
 
 #: src/ui_viewDialog.h:1853
 msgid "Show lines with thickness"
-msgstr "Vonalak vastagítása"
+msgstr "Vonalak vastagsága"
 
 #: src/ui_viewDialog.h:1855
 msgid "Value in pixels"
@@ -5676,7 +5679,7 @@ msgstr "Érték pixelben:"
 
 #: src/ui_viewDialog.h:1857
 msgid "Show art in brightness"
-msgstr ""
+msgstr "Rajzok fényessége"
 
 #: src/ui_viewDialog.h:1858
 msgid "Show boundaries"
@@ -5735,7 +5738,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1096
 msgid "Ephemeris settings (experimental)"
-msgstr ""
+msgstr "Efemerisz beállítás (kísérleti)"
 
 #: src/ui_configurationDialog.h:1097 src/ui_configurationDialog.h:1098
 msgid "Not installed"
