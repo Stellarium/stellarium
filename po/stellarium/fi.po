@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-11 04:58+0700\n"
-"PO-Revision-Date: 2016-07-03 18:39+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2016-08-21 23:58+0000\n"
+"Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-08-11 05:25+0000\n"
-"X-Generator: Launchpad (build 18169)\n"
+"X-Launchpad-Export-Date: 2016-08-22 05:16+0000\n"
+"X-Generator: Launchpad (build 18176)\n"
 
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:188
 #: src/core/modules/Planet.cpp:226 src/core/modules/MinorPlanet.cpp:213
@@ -109,24 +109,24 @@ msgstr "Galaktinen ekvaattori"
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:635 src/ui_viewDialog.h:1809
 msgid "O./C. longitude"
-msgstr "Oppositio–konjuktiolinja"
+msgstr "Oppositio–konjunktiolinja"
 
 #: src/core/modules/GridLinesMgr.cpp:639 src/core/modules/GridLinesMgr.cpp:966
 #: src/ui_viewDialog.h:1801
 msgid "Prime Vertical"
-msgstr ""
+msgstr "Päävertikaali"
 
 #: src/core/modules/GridLinesMgr.cpp:643
 msgid "Equinoctial Colure"
-msgstr ""
+msgstr "Päiväntasauskoluuri"
 
 #: src/core/modules/GridLinesMgr.cpp:647
 msgid "Solstitial Colure"
-msgstr ""
+msgstr "Päivänseisauskoluuri"
 
 #: src/core/modules/GridLinesMgr.cpp:652
 msgid "Circumpolar Circle"
-msgstr ""
+msgstr "Sirkumpolaariympyrä"
 
 #: src/core/modules/GridLinesMgr.cpp:951
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:339
@@ -199,11 +199,11 @@ msgstr "Prekessioympyrät"
 
 #: src/core/modules/GridLinesMgr.cpp:967
 msgid "Colure Lines"
-msgstr ""
+msgstr "Koluurilinjat"
 
 #: src/core/modules/GridLinesMgr.cpp:968
 msgid "Circumpolar Circles"
-msgstr ""
+msgstr "Sirkumpolaariympyrät"
 
 #: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1620
 msgid "Atmosphere"
@@ -270,7 +270,7 @@ msgstr "Läpinäkyvyys: <b>%1</b>"
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:198
 #, qt-format
 msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
-msgstr ""
+msgstr "Magnitudi: <b>%1</b> (ekstinktiokorjattu: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
 #: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
@@ -295,7 +295,7 @@ msgstr "Väri-indeksi (B-V): <b>%1</b>"
 #: src/core/modules/Nebula.cpp:224
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
-msgstr ""
+msgstr "Pintakirkkaus: <b>%1</b> (ekstinktiokorjattu: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:230
 #, qt-format
@@ -338,7 +338,7 @@ msgstr "kiloparsekia"
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:298
 msgid "ly"
-msgstr ""
+msgstr "valovuotta"
 
 #: src/core/modules/Nebula.cpp:300
 #, qt-format
@@ -734,7 +734,7 @@ msgstr "Syvän taivaan kohteet"
 
 #: src/core/modules/NebulaMgr.cpp:365
 msgid "Toggle DSO type filter"
-msgstr ""
+msgstr "Suodata tyypin mukaan"
 
 #: src/core/modules/Planet.cpp:238 src/core/modules/MinorPlanet.cpp:232
 #: src/core/modules/MinorPlanet.cpp:236 src/core/modules/Comet.cpp:194
@@ -882,11 +882,11 @@ msgstr "Planeettojen radat"
 
 #: src/core/modules/SolarSystem.cpp:206
 msgid "Planet markers"
-msgstr ""
+msgstr "Planeettojen osoittimet"
 
 #: src/core/modules/SolarSystem.cpp:208
 msgid "Native planet names (from starlore)"
-msgstr ""
+msgstr "Omakieliset planeettojen nimet (tähtitarustosta)"
 
 #: src/core/modules/StarWrapper.cpp:162
 msgid "eruptive variable star"
@@ -965,11 +965,11 @@ msgstr "Kirkkausmuutoksen kesto: %1%"
 
 #: src/core/modules/StarWrapper.cpp:276
 msgid "Year of last satisfactory observation"
-msgstr ""
+msgstr "Viimeisin tyydyttävä havainto"
 
 #: src/core/modules/StarWrapper.cpp:277
 msgid "Position angle"
-msgstr ""
+msgstr "Sijaintikulma"
 
 #: src/core/modules/StarWrapper.cpp:281 src/core/modules/StarWrapper.cpp:283
 #: src/gui/AstroCalcDialog.cpp:534
@@ -1566,6 +1566,9 @@ msgid ""
 "equator, ecliptic, hour lines, etc. into straight lines. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
+"Perspektiiviprojektio pitää horisontin ja muut isoympyrät kuten ekvaattorin, "
+"ekliptikan, tuntikulmat, jne. suorana viivana. Matemaattinen nimi tälle "
+"projektiolle on <i>gnomoninen projektio</i>."
 
 #: src/core/StelProjectorClasses.cpp:87
 msgid "Equal Area"
@@ -1576,6 +1579,8 @@ msgid ""
 "The full name of this projection method is <i>Lambert azimuthal equal-area "
 "projection</i>. It preserves the area but not the angle."
 msgstr ""
+"Täydellinen nimi projektiolle on <i>Lambertin atsimutaalinen oikeapintainen "
+"projektio</i>. Se kuvaa pinta-alat oikein, muttei kulmia."
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Stereographic"
@@ -1587,6 +1592,9 @@ msgid ""
 "as the planisphere projection. It preserves the angles at which curves cross "
 "each other but it does not preserve area."
 msgstr ""
+"Stereograafinen projektio on tunnettu antiikin ajoista, ja alkuaan se "
+"tunnettiin nimellä planisfääriprojektio. Se kuvaa käyrien leikkauskohtien "
+"kulmat oikein, mutta vääristää pinta-aloja."
 
 #: src/core/StelProjectorClasses.cpp:200
 msgid "Fish-eye"
@@ -1639,6 +1647,9 @@ msgid ""
 "preserves direction and shapes but distorts size, in an increasing degree "
 "away from the equator."
 msgstr ""
+"Mercatorin projektio on yksi käytetyimmistä maailmankarttojen projektioista. "
+"Se kuvaa oikein suunnat ja muodot, mutta vääristää kokoja suurentaen niitä "
+"etäisyyden kasvaessa ekvaattorilta."
 
 #: src/core/StelProjectorClasses.cpp:418
 msgid "Orthographic"
@@ -1668,7 +1679,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:512
 msgid "Miller cylindrical"
-msgstr ""
+msgstr "Miller"
 
 #: src/core/StelProjectorClasses.cpp:517
 msgid ""
@@ -1676,6 +1687,9 @@ msgid ""
 "proposed by Osborn Maitland Miller (1897–1979) in 1942. The poles are no "
 "longer mapped to infinity."
 msgstr ""
+"Milerin lieriöprojekto on Osborn Maitland Millerin (1897–1979) vuonna 1942 "
+"laatima Mercatorin projektion muunnelma. Siinä navat eivät enää kuvaudu "
+"äärettömyyteen."
 
 #: src/core/StelObject.cpp:116
 msgctxt "coordinates for current epoch"
@@ -1759,23 +1773,23 @@ msgstr "Seuraa kohdetta"
 
 #: src/core/StelMovementMgr.cpp:161
 msgid "Look towards East"
-msgstr ""
+msgstr "Katso itään"
 
 #: src/core/StelMovementMgr.cpp:162
 msgid "Look towards West"
-msgstr ""
+msgstr "Katso länteen"
 
 #: src/core/StelMovementMgr.cpp:163
 msgid "Look towards North"
-msgstr ""
+msgstr "Katso pohjoiseen"
 
 #: src/core/StelMovementMgr.cpp:164
 msgid "Look towards South"
-msgstr ""
+msgstr "Katso etelään"
 
 #: src/core/StelMovementMgr.cpp:165
 msgid "Look towards Zenith"
-msgstr ""
+msgstr "Katso zeniittiin"
 
 #: src/core/SimbadSearcher.cpp:74
 msgid "Network error"
@@ -1883,7 +1897,7 @@ msgid ""
 msgstr ""
 "Latauskoko: %1MB\n"
 "Tähtien määrä: %2 miljoonaa\n"
-"Magnitudiväli: %3 - %4"
+"Magnitudiväli: %3–%4"
 
 #: src/gui/ConfigurationDialog.cpp:1098 src/gui/ConfigurationDialog.cpp:1134
 #, qt-format
@@ -1909,11 +1923,11 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1237 src/gui/ConfigurationDialog.cpp:1246
 msgid "Available"
-msgstr ""
+msgstr "Saatavilla"
 
 #: src/gui/ConfigurationDialog.cpp:1239 src/gui/ConfigurationDialog.cpp:1248
 msgid "Not Available"
-msgstr ""
+msgstr "Ei saatavilla"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1311
@@ -2022,7 +2036,7 @@ msgstr "Espenak & Meeus (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1351
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
-msgstr ""
+msgstr "Espenak & Meeus (2006) – ei erillistä Kuun kiihtyvyyttä"
 
 #: src/gui/ConfigurationDialog.cpp:1353
 msgid "Reijs (2006)"
@@ -2301,7 +2315,7 @@ msgstr "Astrolaskin-ikkuna"
 
 #: src/gui/StelGui.cpp:220
 msgid "Bookmarks window"
-msgstr ""
+msgstr "Kirjanmerkki-ikkuna"
 
 #: src/gui/StelGui.cpp:221
 msgid "Copy selected object information to clipboard"
@@ -2695,7 +2709,7 @@ msgstr "Tyyppi"
 #: src/gui/AstroCalcDialog.cpp:173
 #, qt-format
 msgid "Positions on %1"
-msgstr ""
+msgstr "Sijainnit %1"
 
 #: src/gui/AstroCalcDialog.cpp:263 src/ui_dateTimeDialogGui.h:382
 #: src/ui_dateTimeDialogGui.h:387
@@ -2704,11 +2718,11 @@ msgstr "Juliaaninen päivämäärä"
 
 #: src/gui/AstroCalcDialog.cpp:370 src/gui/AstroCalcDialog.cpp:684
 msgid "CSV (Comma delimited)"
-msgstr ""
+msgstr "CSV (pilkkuerotettu)"
 
 #: src/gui/AstroCalcDialog.cpp:372
 msgid "Save calculated ephemerides as..."
-msgstr ""
+msgstr "Tallenna lasketut efemeridit nimellä..."
 
 #: src/gui/AstroCalcDialog.cpp:448
 msgid "10 minutes"
@@ -2724,7 +2738,7 @@ msgstr "1 päivä"
 
 #: src/gui/AstroCalcDialog.cpp:451
 msgid "5 days"
-msgstr ""
+msgstr "5 päivää"
 
 #: src/gui/AstroCalcDialog.cpp:452
 msgid "10 days"
@@ -2732,7 +2746,7 @@ msgstr "10 päivää"
 
 #: src/gui/AstroCalcDialog.cpp:453
 msgid "15 days"
-msgstr ""
+msgstr "15 päivää"
 
 #: src/gui/AstroCalcDialog.cpp:454
 msgid "30 days"
@@ -2740,7 +2754,7 @@ msgstr "30 päivää"
 
 #: src/gui/AstroCalcDialog.cpp:455
 msgid "60 days"
-msgstr ""
+msgstr "60 päivää"
 
 #: src/gui/AstroCalcDialog.cpp:509
 msgid "Solar system"
@@ -2785,19 +2799,19 @@ msgstr "Oortin pilven kohteet"
 
 #: src/gui/AstroCalcDialog.cpp:530
 msgid "Phenomenon"
-msgstr "Ilmiö"
+msgstr "Tapahtuma"
 
 #: src/gui/AstroCalcDialog.cpp:532
 msgid "Object 1"
-msgstr "Kohde 1"
+msgstr "Taivaankappale 1"
 
 #: src/gui/AstroCalcDialog.cpp:533
 msgid "Object 2"
-msgstr "Kohde 2"
+msgstr "Taivaankappale 2"
 
 #: src/gui/AstroCalcDialog.cpp:686
 msgid "Save calculated phenomena as..."
-msgstr ""
+msgstr "Tallenna lasketut tapahtumat nimellä..."
 
 #: src/gui/AstroCalcDialog.cpp:725
 msgid "Conjunction"
@@ -2813,11 +2827,11 @@ msgstr "Kohde"
 
 #: src/gui/BookmarksDialog.cpp:96
 msgid "Localized name"
-msgstr ""
+msgstr "Paikallinen nimi"
 
 #: src/gui/BookmarksDialog.cpp:98
 msgid "Location of observer"
-msgstr ""
+msgstr "Havainnoijan sijainti"
 
 #: src/StelMainView.cpp:462 src/StelMainView.cpp:477
 msgid ""
@@ -2844,6 +2858,8 @@ msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
 msgstr ""
+"Riittämätön OpenGL:n versio. Ole hyvä ja päivitä ohjaimet tai "
+"grafiikkakortti. Vaihtoehtoisesti käytä angle- tai mesa-tilaa."
 
 #: src/StelMainView.cpp:731
 msgid ""
@@ -3156,12 +3172,12 @@ msgstr "Melotten luettelo"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:161
 msgid "Dwarf galaxies"
-msgstr ""
+msgstr "Kääpiögalaksit"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:163
 msgid "Herschel 400 Catalogue"
-msgstr ""
+msgstr "Herschel 400 -luettelo"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:168
@@ -3211,7 +3227,7 @@ msgstr "Japanilaiset Kuun huoneet"
 
 #: src/translations.h:183
 msgid "Kamilaroi/Euahlayi"
-msgstr ""
+msgstr "Kamilaroiden ja euahlayiden"
 
 #: src/translations.h:184
 msgid "Korean"
@@ -3219,11 +3235,11 @@ msgstr "Korealainen"
 
 #: src/translations.h:185
 msgid "Dakota/Lakota/Nakota"
-msgstr ""
+msgstr "Dakotojen, lakotojen ja nakotojen"
 
 #: src/translations.h:186
 msgid "Macedonian"
-msgstr ""
+msgstr "Makedonialainen"
 
 #: src/translations.h:187
 msgid "Maori"
@@ -3243,7 +3259,7 @@ msgstr "Muinaisnorjalainen"
 
 #: src/translations.h:191
 msgid "Ojibwe"
-msgstr ""
+msgstr "Ojibwejen"
 
 #: src/translations.h:192
 msgid "Polynesian"
@@ -3482,6 +3498,7 @@ msgstr "Maan tapahtumia Marsista"
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr ""
+"Maan ja muiden planeettojen suurimmat elongaatiot ja oppositiot Marsista."
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:293
@@ -3496,47 +3513,47 @@ msgstr "Tykon supernova"
 #. TRANSLATORS: Name of script
 #: src/translations.h:297
 msgid "Earth and other Planets from Ceres"
-msgstr ""
+msgstr "Maa ja muut planeetat Cereksestä"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:299
 msgid "Messier Objects Tour"
-msgstr ""
+msgstr "Messier-matka"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:301
 msgid "Binocular Highlights"
-msgstr ""
+msgstr "Kiikarikohteita"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:303
 msgid "20 Fun Naked-Eye Double Stars"
-msgstr ""
+msgstr "20 paljain silmin näkyvää kaksoistähteä"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:305
 msgid "List of largest known stars"
-msgstr ""
+msgstr "Luettelo suurimmista tunnetuista tähdistä"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:307
 msgid "Herschel 400 Tour"
-msgstr ""
+msgstr "Herschel 400 -matka"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:309
 msgid "Binosky: Deep Sky Objects for Binoculars"
-msgstr ""
+msgstr "Binosky:  syvän taivaan kiikarikohteita"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:311
 msgid "The Jack Bennett Catalog"
-msgstr ""
+msgstr "Jack Bennet -luettelo"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:313
 msgid "Best objects in the New General Catalog"
-msgstr ""
+msgstr "NGC-luettelon parhaat kohteet"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:319
@@ -3643,6 +3660,8 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 261 events in all!"
 msgstr ""
+"Näytönsäästäjä erilaisista aurinkokunnan tapahtumista. Kaikkiaan 261 "
+"tapahtumaa!"
 
 #: src/translations.h:335
 msgid "A tour of the western constellations."
@@ -3667,7 +3686,8 @@ msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr ""
-"Analemman esittely - kuvio, jonka Aurinko piirtää taivaalle vuoden aikana."
+"Analemman esittely. Analemma on kuvio, jonka Aurinko piirtää taivaalle "
+"vuoden aikana."
 
 #: src/translations.h:340
 msgid ""
@@ -3682,6 +3702,8 @@ msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
 msgstr ""
+"Maan ja muiden planeettojen suurimmat elongaatiot ja oppositiot Marsista "
+"2000–3000"
 
 #: src/translations.h:342
 msgid ""
@@ -3700,10 +3722,12 @@ msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
 msgstr ""
+"Maan ja muiden näkyvien planeettojen suurimmat elongaatiot ja oppositiot "
+"Cereksestä 2000–3000"
 
 #: src/translations.h:344
 msgid "A tour of Messier Objects"
-msgstr ""
+msgstr "Matka Messier-luettelon kohteisiin"
 
 #: src/translations.h:345
 msgid ""
@@ -3711,6 +3735,8 @@ msgid ""
 "binoculars. The data for the script are taken from the eponymous book by "
 "Gary Seronik."
 msgstr ""
+"Matka kiinnostaviin kiikarikohteisiin. Komentosarjan tiedot ovat peräisin "
+"Gary Seronikin Binocular Highlights -kirjasta."
 
 #: src/translations.h:346
 msgid ""
@@ -3718,14 +3744,18 @@ msgid ""
 "has been collected by Jerry Lodriguss and published in Sky & Telescope "
 "09/2014. Data taken from his website, http://www.astropix.com/doubles/"
 msgstr ""
+"Matka 20 paljaalla silmällä näkyvään kaksoistähteen. Luettelon on koonnut "
+"Jerry Lodriguss, ja se on julkaistu Sky & Telesope -lehden numerossa "
+"09/2014. Tiedot ovat peräisin Lodrigussin nettisivuilta, "
+"http://www.astropix.com/doubles/."
 
 #: src/translations.h:347
 msgid "This script helps you make an excursion around largest known stars."
-msgstr ""
+msgstr "Matka suurimpiin tunnettuihin tähtiin."
 
 #: src/translations.h:348
 msgid "A tour around objects from the Herschel 400 Catalogue"
-msgstr ""
+msgstr "Matka Herschel 400 -luettelon kohteisiin."
 
 #: src/translations.h:349
 msgid ""
@@ -3733,18 +3763,25 @@ msgid ""
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
 "Right Ascension (2000.0)."
 msgstr ""
+"Ben Crowell on luonut Binoskyn, kiikareilla havaittavien syvän taivaan "
+"kohteiden luettelon. Komentosarjassa esittelemme näistä kohteista 31, "
+"rektaskension (J2000.0) mukaisessa järjestyksessä."
 
 #: src/translations.h:350
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects. The Bennett catalog "
 "was contributed by Auke Slotegraaf."
 msgstr ""
+"Jack Bennettin luettelo eteläisistä syvän taivaan kohteista. Bennett-"
+"luettelon toi ohjelmaan Auke Slotegraaf."
 
 #: src/translations.h:351
 msgid ""
 "This list by A.J. Crayon and Steve Coe is used by members of the Saguaro "
 "Astronomy Club of Phoenix, AZ. for the Best of the NGC achievement award."
 msgstr ""
+"Tämä A. J. Crayonin ja Steve Coen luettelo on Arizonan Phoenixin Saguaro "
+"Astronomy Clubin käytössä ”paras NGC-saavutus” -palkinnon jaossa."
 
 #: src/translations.h:355
 msgid "Andorra"
@@ -3944,7 +3981,7 @@ msgstr "Serbia ja Montenegro"
 
 #: src/translations.h:404
 msgid "Montenegro"
-msgstr ""
+msgstr "Montenegro"
 
 #: src/translations.h:405
 msgid "Cuba"
@@ -4805,52 +4842,52 @@ msgstr "Ohita"
 
 #: src/translations.h:621
 msgid "&Basic colors"
-msgstr ""
+msgstr "&Perusvärit"
 
 #: src/translations.h:622
 msgid "Pick Screen Color"
-msgstr ""
+msgstr "Valitse väri näytöltä"
 
 #: src/translations.h:623
 msgid "&Custom colors"
-msgstr ""
+msgstr "&Omat värit"
 
 #: src/translations.h:624
 msgid "&Add to Custom Colors"
-msgstr ""
+msgstr "&Lisää omiin väreihin"
 
 #: src/translations.h:625
 msgid "Hu&e:"
-msgstr ""
+msgstr "&Sävy"
 
 #: src/translations.h:626
 msgid "&Sat:"
-msgstr ""
+msgstr "&Kyll.:"
 
 #: src/translations.h:627
 msgid "&Val:"
-msgstr ""
+msgstr "&Arvo:"
 
 #: src/translations.h:628
 msgid "&Red:"
-msgstr ""
+msgstr "&Pun.:"
 
 #: src/translations.h:629
 msgid "&Green:"
-msgstr ""
+msgstr "&Vihr.:"
 
 #: src/translations.h:630
 msgid "Bl&ue:"
-msgstr ""
+msgstr "&Sin:"
 
 #: src/translations.h:631
 msgid "Select Color"
-msgstr ""
+msgstr "Valitse väri"
 
 #: src/translations.h:632
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
-msgstr ""
+msgstr "Osoittimen koordinaatit %1, %2 Paina ESC lopettaaksesi"
 
 #: src/ui_dateTimeDialogGui.h:380
 msgid "Date and Time in Gregorian calendar"
@@ -5169,7 +5206,7 @@ msgstr "Rajoita tähtien magnitudia"
 
 #: src/ui_viewDialog.h:1611 src/ui_viewDialog.h:1650 src/ui_viewDialog.h:1736
 msgid "Limit magnitude:"
-msgstr ""
+msgstr "Rajoita magnitudia:"
 
 #: src/ui_viewDialog.h:1613
 msgid "Dim faint stars when a very bright object is visible"
@@ -5205,7 +5242,7 @@ msgstr "paine, lämpötila, ekstinktiokerroin"
 
 #: src/ui_viewDialog.h:1629
 msgid "Refraction/Extinction settings..."
-msgstr "Refraktio/ekstinktioasetukset..."
+msgstr "Refraktio- ja ekstinktioasetukset..."
 
 #: src/ui_viewDialog.h:1630
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:293
@@ -5257,11 +5294,11 @@ msgstr "Jäljittele valonnopeutta"
 
 #: src/ui_viewDialog.h:1645
 msgid "Use custom settings of GRS:"
-msgstr ""
+msgstr "Käytä omia asetuksia Jupiterin SPP:lle"
 
 #: src/ui_viewDialog.h:1646
 msgid "GRS details..."
-msgstr ""
+msgstr "Asetukset..."
 
 #: src/ui_viewDialog.h:1648
 msgid "Limit the magnitude of solar system objects"
@@ -5269,7 +5306,7 @@ msgstr "Rajoita aurinkokunnan kohteiden magnitudia"
 
 #: src/ui_viewDialog.h:1651
 msgid "Scale Moon:"
-msgstr ""
+msgstr "Kuun koko:"
 
 #: src/ui_viewDialog.h:1653
 msgid "Scale factor"
@@ -5338,7 +5375,7 @@ msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
 msgstr ""
-"Franklinin-Adamsin valokuvalevyillä näkyvien tähtijoukkojen luettelo "
+"Franklinin–Adamsin valokuvalevyillä näkyvien tähtijoukkojen luettelo "
 "(Melotte, 1915)"
 
 #: src/ui_viewDialog.h:1703
@@ -5418,11 +5455,11 @@ msgstr ""
 msgid ""
 "Use designations of deep-sky objects instead of their common names for "
 "screen labels"
-msgstr ""
+msgstr "Käytä syvän taivaan kohteiden näyttöniminä niiden tunnuksia."
 
 #: src/ui_viewDialog.h:1740
 msgid "Use designations for screen labels"
-msgstr ""
+msgstr "Käytä tunnuksia näyttöniminä"
 
 #: src/ui_viewDialog.h:1741
 msgid "Celestial Sphere"
@@ -5519,41 +5556,45 @@ msgstr "Näytä meridiaanilinja."
 
 #: src/ui_viewDialog.h:1799
 msgid "Show Prime (East-West) Vertical."
-msgstr ""
+msgstr "Näytä päävertikaali (itä–länsisuuntainen linja)"
 
 #: src/ui_viewDialog.h:1803
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
 msgstr ""
+"Näytä koluurit (napojen ja päivänseisaus- sekä tasauspisteiden kautta "
+"kulkevat isoympyrät)."
 
 #: src/ui_viewDialog.h:1805
 msgid "Colures"
-msgstr ""
+msgstr "Koluurit"
 
 #: src/ui_viewDialog.h:1807
 msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which "
 "passes through both ecliptic poles, the Sun and opposition point."
 msgstr ""
-"Oppositio-/konjunktiolinja – ekliptisen pituuden linja, joka kulkee "
-"molempien ekliptisten napojen sekä Auringon ja oppositiopisteen kautta."
+"Oppositio–konjunktiolinja – ekliptisen pituuden linja, joka kulkee molempien "
+"ekliptisten napojen sekä Auringon ja oppositiopisteen kautta."
 
 #: src/ui_viewDialog.h:1811
 msgid ""
 "These circles delimit stars which stay always above (respectively below) the "
 "mathematical horizon."
 msgstr ""
+"Näyttää ympyrät, joiden sisällä oleva alue pysyy jatkuvasti matemaattisen "
+"horisontin yläpuolella (ja vastaavasti sen alapuolella)."
 
 #: src/ui_viewDialog.h:1813
 msgid "Circumpolar circles"
-msgstr ""
+msgstr "Sirkumpolaariympyrät"
 
 #: src/ui_viewDialog.h:1815
 msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
 msgstr ""
-"Hetkelliset Maan akselin liikeympyrät ekliptisten napojen läheisyydessä. "
-"Näytetään vain Maassa."
+"Maan akselin liikeympyrät ekliptisten napojen ympärillä. Näytetään vain "
+"Maassa."
 
 #: src/ui_viewDialog.h:1817
 msgid "Precession circles"
@@ -5593,7 +5634,7 @@ msgstr "Näytä valaistus (loistavat ikkunat, valosaaste, ym.)"
 
 #: src/ui_viewDialog.h:1829
 msgid "Show illumination "
-msgstr ""
+msgstr "Näytä valaistus "
 
 #: src/ui_viewDialog.h:1831
 msgid "Use minimal brightness to leave landscape visible also in darkness"
@@ -5643,11 +5684,11 @@ msgstr "Käytä paikallisia nimiä nykyisen kulttuurin planeetoille"
 
 #: src/ui_viewDialog.h:1852
 msgid "Use native names for planets"
-msgstr ""
+msgstr "Käytä planeettojen omakielisiä nimiä"
 
 #: src/ui_viewDialog.h:1853
 msgid "Show lines with thickness"
-msgstr ""
+msgstr "Tähdistöviivojen paksuus"
 
 #: src/ui_viewDialog.h:1855
 msgid "Value in pixels"
@@ -5655,7 +5696,7 @@ msgstr "Arvo kuvapisteinä"
 
 #: src/ui_viewDialog.h:1857
 msgid "Show art in brightness"
-msgstr ""
+msgstr "Tähdistökuvien kirkkaus"
 
 #: src/ui_viewDialog.h:1858
 msgid "Show boundaries"
@@ -5710,44 +5751,51 @@ msgstr "Taivaskulttuurin kieli"
 
 #: src/ui_configurationDialog.h:1094
 msgid "This feature has not been thoroughly tested yet!"
-msgstr ""
+msgstr "Tätä ominaisuutta ei ole vielä perusteellisesti testattu!"
 
 #: src/ui_configurationDialog.h:1096
 msgid "Ephemeris settings (experimental)"
-msgstr ""
+msgstr "Efemeridiasetukset (kokeellinen)"
 
 #: src/ui_configurationDialog.h:1097 src/ui_configurationDialog.h:1098
 msgid "Not installed"
-msgstr ""
+msgstr "Ei asennettu"
 
 #: src/ui_configurationDialog.h:1100
 msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
 msgstr ""
+"DE431 sisältää sijaintitiedot vuosille -13000...+17000. Vain "
+"erikoistarkoituksiin."
 
 #: src/ui_configurationDialog.h:1102
 msgid "Use DE431 (long-time data)"
-msgstr ""
+msgstr "Ota DE431 käyttöön (pitkän aikavälin tiedot)"
 
 #: src/ui_configurationDialog.h:1104
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
 msgstr ""
+"DE430 tarjoaa parhaan tarkkuuden, käyttökelpoinen vain vuosille 1550...2650."
 
 #: src/ui_configurationDialog.h:1106
 msgid "Use DE430 (high accuracy)"
-msgstr ""
+msgstr "Ota DE430 käyttöön (korkea tarkkuus)"
 
 #: src/ui_configurationDialog.h:1108
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
 msgstr ""
+"VSOP87:n käyttö on suositeltavaa vain vuosille -4000...+8000, mutta se antaa "
+"käyttökelpoisia tietoja myös tämän aikavälin ulkopuolella."
 
 #: src/ui_configurationDialog.h:1110
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
+"VSOP87/ELP2000-82B on käytössä jos näitä ei ole asennettu tai otettu "
+"käyttöön."
 
 #: src/ui_configurationDialog.h:1111
 msgid "Default options"
@@ -5819,7 +5867,7 @@ msgstr "Älä näytä tietoja"
 #: src/ui_configurationDialog.h:1135 plugins/Oculars/src/Oculars.cpp:2309
 #: plugins/Observability/src/Observability.cpp:205
 msgid "None"
-msgstr "ei tietoja"
+msgstr "Ei tietoja"
 
 #: src/ui_configurationDialog.h:1137
 msgid "Display less information"
@@ -5843,7 +5891,7 @@ msgstr "Näytettävät tiedot"
 
 #: src/ui_configurationDialog.h:1147 src/ui_configurationDialog.h:1171
 msgid "Equatorial coordinates, equinox of date"
-msgstr ""
+msgstr "Ekvatoriaaliset koordinaatit, nykyinen epookki"
 
 #: src/ui_configurationDialog.h:1149
 msgid "Right ascension/Declination (of date)"
@@ -5855,7 +5903,7 @@ msgstr "Luettelonumero(t)"
 
 #: src/ui_configurationDialog.h:1152
 msgid "Equatorial coordinates, equinox of J2000.0"
-msgstr ""
+msgstr "Ekvatoriaaliset koordinaatit, J2000.0"
 
 #: src/ui_configurationDialog.h:1154
 msgid "Right ascension/Declination (J2000)"
@@ -6038,7 +6086,7 @@ msgstr "Suuntaa nimet horisontin mukaan"
 
 #: src/ui_configurationDialog.h:1241
 msgid "Gravity labels"
-msgstr "\"Gravitaationimet\""
+msgstr "”Gravitaationimet”"
 
 #: src/ui_configurationDialog.h:1243
 msgid "Toggle display backgrounds of the nebulae."
@@ -6100,7 +6148,7 @@ msgstr "Paikkakeskiset koordinaatit"
 
 #: src/ui_configurationDialog.h:1267
 msgid "Activate this option to calculate azimuth from south towards west."
-msgstr ""
+msgstr "Ota käyttöön atsimuutin laskemiseksi etelästä länteen."
 
 #: src/ui_configurationDialog.h:1269
 msgid "Azimuth from South"
@@ -6295,11 +6343,11 @@ msgstr ""
 
 #: src/ui_greatRedSpotDialog.h:168
 msgid "Great Red Spot Details"
-msgstr ""
+msgstr "Suuren punaisen pilkun asetukset"
 
 #: src/ui_greatRedSpotDialog.h:170
 msgid "Custom settings for position of GRS"
-msgstr ""
+msgstr "Jupiterin Suuren punaisen pilkun sijaintiasetukset"
 
 #: src/ui_greatRedSpotDialog.h:171 src/ui_astroCalcDialog.h:418
 #: src/ui_astroCalcDialog.h:430
@@ -6308,19 +6356,19 @@ msgstr "vvvv.kk.pp tt:mm"
 
 #: src/ui_greatRedSpotDialog.h:172
 msgid "Annual drift (degrees):"
-msgstr ""
+msgstr "Vuosittainen siirtymä (asteina):"
 
 #: src/ui_greatRedSpotDialog.h:173
 msgid "Longitude of GRS (degrees):"
-msgstr ""
+msgstr "Pilkun pituusiiri (asteina):"
 
 #: src/ui_greatRedSpotDialog.h:180
 msgid "Date and Time (UTC):"
-msgstr ""
+msgstr "Päivämäärä ja aika (UTC):"
 
 #: src/ui_greatRedSpotDialog.h:184
 msgid "Get the recent GRS measurement"
-msgstr ""
+msgstr "Hae uusimmat mittaukset"
 
 #: src/ui_scriptConsole.h:345
 msgid "Script console"
@@ -6376,11 +6424,11 @@ msgstr "..."
 
 #: src/ui_astroCalcDialog.h:415
 msgid "Update of planetary positions"
-msgstr ""
+msgstr "Päivitä taivaankappaleitten asemat"
 
 #: src/ui_astroCalcDialog.h:416
 msgid "Planetary positions"
-msgstr "Planeettojen asemat"
+msgstr "Taivaankappaleitten asemat"
 
 #: src/ui_astroCalcDialog.h:417 src/ui_astroCalcDialog.h:438
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
@@ -6393,7 +6441,7 @@ msgstr "Aika-askel:"
 
 #: src/ui_astroCalcDialog.h:420
 msgid "Cleanup ephemerides"
-msgstr ""
+msgstr "Tyhjennä efemeridit"
 
 #: src/ui_astroCalcDialog.h:421
 msgid "Calculate ephemeris"
@@ -6401,15 +6449,15 @@ msgstr "Laske efemeridi"
 
 #: src/ui_astroCalcDialog.h:422
 msgid "Save ephemeris"
-msgstr ""
+msgstr "Tallenna efemeridit"
 
 #: src/ui_astroCalcDialog.h:424
 msgid "Show markers of positions of the current celestial body on the sky"
-msgstr ""
+msgstr "Näytä nykyisen taivaankappaleen sijaintimerkinnät"
 
 #: src/ui_astroCalcDialog.h:426
 msgid "Show markers of positions"
-msgstr ""
+msgstr "Näytä sijaintimerkinnät"
 
 #: src/ui_astroCalcDialog.h:429 src/ui_astroCalcDialog.h:440
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
@@ -6418,15 +6466,15 @@ msgstr "Mihin:"
 
 #: src/ui_astroCalcDialog.h:432
 msgid "Show dates of positions of current celestial body near markers"
-msgstr ""
+msgstr "Näytä päivämäärät sijaintimerkintöjen vieressä"
 
 #: src/ui_astroCalcDialog.h:434
 msgid "Show dates of positions"
-msgstr ""
+msgstr "Näytä päivämäärät"
 
 #: src/ui_astroCalcDialog.h:435
 msgid "Ephemeris"
-msgstr "Efemeridi"
+msgstr "Efemeridit"
 
 #: src/ui_astroCalcDialog.h:436
 msgid "Between objects:"
@@ -6454,7 +6502,7 @@ msgstr "Laske tapahtumat"
 
 #: src/ui_astroCalcDialog.h:447
 msgid "Save phenomena"
-msgstr ""
+msgstr "Tallenna tapahtumat"
 
 #: src/ui_astroCalcDialog.h:448
 msgid "Phenomena"
@@ -6466,35 +6514,35 @@ msgstr "Astrolaskin"
 
 #: src/ui_bookmarksDialog.h:174
 msgid "Bookmarks"
-msgstr ""
+msgstr "Kirjanmerkit"
 
 #: src/ui_bookmarksDialog.h:176
 msgid "Add date and time"
-msgstr ""
+msgstr "Lisää päiväys ja kellonaika"
 
 #: src/ui_bookmarksDialog.h:177
 msgid "Add location"
-msgstr ""
+msgstr "Lisää sijainti"
 
 #: src/ui_bookmarksDialog.h:179
 msgid "Add selected object to bookmarks"
-msgstr ""
+msgstr "Lisää valittu kohde kirjanmerkkeihin"
 
 #: src/ui_bookmarksDialog.h:181
 msgid "&Add bookmark"
-msgstr ""
+msgstr "&Lisää kirjanmerkki"
 
 #: src/ui_bookmarksDialog.h:182
 msgid "&Remove bookmark"
-msgstr ""
+msgstr "&Poista kirjanmerkki"
 
 #: src/ui_bookmarksDialog.h:183
 msgid "Clear bookmarks"
-msgstr ""
+msgstr "Tyhjennä kirjanmerkit"
 
 #: src/ui_bookmarksDialog.h:184
 msgid "&Go to..."
-msgstr ""
+msgstr "&Mene..."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:138
@@ -6960,7 +7008,7 @@ msgstr "Suurennus: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:843
 #, qt-format
 msgid "Exit pupil: %1 mm"
-msgstr ""
+msgstr "Lähtöpupilli: %1 mm"
 
 #: plugins/Oculars/src/Oculars.cpp:1975
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:852
@@ -7132,7 +7180,7 @@ msgstr "Näiden kiikarien antama todellinen näkökenttä"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:816
 msgid "Exit pupil provided by these binoculars"
-msgstr ""
+msgstr "Näiden kiikarien lähtöpupilli"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:824
 msgid "Magnification provided by this ocular/lens/telescope combination"
@@ -7146,7 +7194,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
-msgstr ""
+msgstr "Tämän okulaari/linssi/kaukoputki-yhdistelmän lähtöpupilli"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:498
@@ -7195,31 +7243,39 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:524
 msgid "You can choose to scale the image you see on the screen."
-msgstr ""
+msgstr "Voit halutessasi skaalata ruudulla näkyvää kuvaa."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:525
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
 msgstr ""
+"Tämän tarkoituksena on mahdollistaa parempi okulaari/kaukoputki-yhdistelmien "
+"vertailu."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:526
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will "
 "produce two different exit pupils, changing the view somewhat."
 msgstr ""
+"Sama okulaari antaa erilaisen lähtöpupillin polttoväleiltään eroavissa "
+"kaukoputkissa, mikä jossain määrin muuttaa näkymää."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:527
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
 msgstr ""
+"Tämän haittapuolena on, että kuvaa skaalatessa suuri osa kuvaruudusta voi "
+"mennä hukkaan."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:528
 msgid ""
 "Therefore I recommend that you leave it off, unless you feel you have a need "
 "of it."
 msgstr ""
+"Näin ollen on suositeltavaa jättää tämä ominaisuus pois käytöstä, ellet "
+"todella koe tarvitsevasi sitä."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:529
 msgid ""
@@ -7305,7 +7361,7 @@ msgstr "Muuta kuvaympyrän kokoa"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1139
 msgid "Use semi-transparent mask"
-msgstr ""
+msgstr "Käytä puoliläpäisevää maskia"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1140
 msgid "Sensor view"
@@ -13099,7 +13155,7 @@ msgstr "Osoittimen koordinaatit -laajennus"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:122
 msgid "Show coordinates of the mouse cursor on the screen."
-msgstr "Näytä hiiren kursorin koordinaatit ruudulla."
+msgstr "Näyttää hiiren osoittimen koordinaatit ruudulla."
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:172
 msgid "The top center of the screen"
