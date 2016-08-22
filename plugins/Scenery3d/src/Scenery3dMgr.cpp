@@ -340,25 +340,24 @@ void Scenery3dMgr::loadScene(const SceneInfo& scene)
 	progressBar->setFormat(QString(q_("Loading scene '%1'")).arg(scene.name));
 	progressBar->setValue(0);
 
-	QFuture<bool> future = QtConcurrent::run(this,&Scenery3dMgr::loadSceneBackground);
+	QFuture<S3DScene*> future = QtConcurrent::run(this,&Scenery3dMgr::loadSceneBackground);
 	currentLoadFuture.setFuture(future);
 }
 
-bool Scenery3dMgr::loadSceneBackground()
+S3DScene* Scenery3dMgr::loadSceneBackground()
 {
-	bool val = scenery3d->loadScene(currentLoadScene);
-	return val;
+	return scenery3d->loadScene(currentLoadScene);
 }
 
 void Scenery3dMgr::loadSceneCompleted()
 {
-	bool ok = currentLoadFuture.result();
+	S3DScene* result = currentLoadFuture.result();
 
 	progressBar->setValue(100);
 	StelApp::getInstance().removeProgressBar(progressBar);
 	progressBar=NULL;
 
-	if(!ok)
+	if(!result)
 	{
 		showMessage(q_("Could not load scene, please check log for error messages!"));
 		return;
@@ -401,7 +400,7 @@ void Scenery3dMgr::loadSceneCompleted()
 
 
 	//perform GL upload + other calculations that require the location to be set
-	scenery3d->finalizeLoad();
+	scenery3d->setCurrentScene(result);
 
 	//clear loading scene
 	SceneInfo s = currentLoadScene;
@@ -455,7 +454,7 @@ SceneInfo Scenery3dMgr::loadScenery3dByName(const QString& name)
 
 SceneInfo Scenery3dMgr::getCurrentScene() const
 {
-	return scenery3d->getCurrentScene();
+	return scenery3d->getCurrentSceneInfo();
 }
 
 void Scenery3dMgr::setDefaultScenery3dID(const QString& id)

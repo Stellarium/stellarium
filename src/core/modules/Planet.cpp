@@ -2232,7 +2232,7 @@ Planet::PlanetOBJModel* Planet::loadObjModel() const
 	mdl->texture = StelApp::getInstance().getTextureManager().createTextureThread(mat.map_Kd,StelTexture::StelTextureParams(true,GL_LINEAR,GL_REPEAT,true),false);
 
 	//extract the pos array into separate vector, it is the only one we need on CPU side for drawing
-	mdl->obj->splitVertexData(false,&mdl->posArray);
+	mdl->obj->splitVertexData(&mdl->posArray);
 
 	//pre-scale the cpu-side array
 	for(int i = 0; i<mdl->posArray.size();++i)

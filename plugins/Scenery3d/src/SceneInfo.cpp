@@ -239,11 +239,10 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 
 	//calc pos in model coords
 	info.relativeStartPosition = info.startWorldOffset - info.modelWorldOffset;
-	 // I love code without comments
+	// I love code without comments
 	info.relativeStartPosition[1]*=-1.0;
 	info.relativeStartPosition = info.zRotateMatrix.inverse() * info.relativeStartPosition;
-	info.relativeStartPosition[0]*=-1.0;
-	info.relativeStartPosition[2]*=-1.0;
+	info.relativeStartPosition[1]*=-1.0;
 
 	if(ini.contains("zero_ground_height"))
 	{

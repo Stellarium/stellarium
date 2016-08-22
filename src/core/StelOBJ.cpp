@@ -399,63 +399,6 @@ bool StelOBJ::parseFace(const ParseParams& params, const V3Vec& posList, const V
 	return true;
 }
 
-void StelOBJ::Material::loadTexturesAsync()
-{
-	StelTextureMgr& mgr = StelApp::getInstance().getTextureManager();
-	if(!map_Ka.isEmpty())
-		tex_Ka = mgr.createTextureThread(map_Ka, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true), false);
-	if(!map_Kd.isEmpty())
-		tex_Kd = mgr.createTextureThread(map_Kd, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true), false);
-	if(!map_Ke.isEmpty())
-		tex_Ke = mgr.createTextureThread(map_Ke, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true), false);
-	if(!map_Ks.isEmpty())
-		tex_Ks = mgr.createTextureThread(map_Ks, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true), false);
-	if(!map_bump.isEmpty())
-		tex_bump = mgr.createTextureThread(map_bump, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true), false);
-	if(!map_height.isEmpty())
-		tex_height = mgr.createTextureThread(map_height, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true), false);
-}
-
-void StelOBJ::Material::calculateTraits()
-{
-	traits.hasAmbientTexture = tex_Ka && tex_Ka->canBind();
-	traits.hasDiffuseTexture = tex_Kd && tex_Kd->canBind();
-	traits.hasSpecularTexture = tex_Ks && tex_Ks->canBind();
-	traits.hasEmissiveTexture = tex_Ke && tex_Ke->canBind();
-	traits.hasBumpTexture = tex_bump && tex_bump->canBind();
-	traits.hasHeightTexture = tex_height && tex_height->canBind();
-
-	//test if specular coefficient and shininess is non-zero
-	traits.hasSpecularity = Ks.lengthSquared()>0.0001f  && Ns > 0.0001f;
-
-	bool alphaChannel = tex_Kd && tex_Kd->canBind() && tex_Kd->hasAlphaChannel();
-	//test if we require blending
-	if(d< .0f)
-	{
-		//no alpha value set, no transparency
-		traits.hasTransparency = false;
-		d = 1.0f;
-	}
-	else if (d <1.0f)
-	{
-		//alpha value set, between 0 and 1
-		traits.hasTransparency = true;
-	}
-	else
-	{
-		//alpha = 1, check if texture has alpha channel, otherwise it makes no sense enabling transparency
-		traits.hasTransparency = alphaChannel;
-	}
-}
-
-void StelOBJ::loadAllTexturesAsync()
-{
-	for(int i = 0; i<m_materials.size(); ++i)
-	{
-		m_materials[i].loadTexturesAsync();
-	}
-}
-
 StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 {
 	StelOBJ::MaterialList list;
@@ -1063,12 +1006,11 @@ void StelOBJ::transform(const QMatrix4x4 &mat)
 	generateAABB();
 }
 
-void StelOBJ::splitVertexData(bool deleteVertexData,
-			      V3Vec *position,
+void StelOBJ::splitVertexData(V3Vec *position,
 			      V2Vec *texCoord,
 			      V3Vec *normal,
 			      V3Vec *tangent,
-			      V3Vec *bitangent)
+			      V3Vec *bitangent) const
 {
 	QElapsedTimer timer;
 	timer.start();
@@ -1099,10 +1041,12 @@ void StelOBJ::splitVertexData(bool deleteVertexData,
 			(*tangent)[i] = Vec3f(vtx.tangent);
 		if(bitangent)
 			(*bitangent)[i] = Vec3f(vtx.bitangent);
-	}
-
-	if(deleteVertexData)
-		m_vertices.clear();
+	}		
 
 	qCDebug(stelOBJ)<<"Vertex data split in "<<timer.elapsed()<<"ms";
+}
+
+void StelOBJ::clearVertexData()
+{
+	m_vertices.clear();
 }

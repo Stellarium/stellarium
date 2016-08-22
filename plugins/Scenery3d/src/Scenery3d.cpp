@@ -28,6 +28,7 @@
 #include "GLFuncs.hpp"
 
 #include "Scenery3d.hpp"
+#include "S3DScene.hpp"
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -50,12 +51,15 @@
 #include <cmath>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLFramebufferObject>
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(scenery3d, "stel.plugin.scenery3d")
 
 #define GET_GLERROR()                                   \
 {                                                       \
     GLenum err = glGetError();                          \
     if (err != GL_NO_ERROR) {                           \
-    qWarning("[line %d] GL Error: %d",__LINE__, err);   \
+    qCWarning(scenery3d,"[line %d] GL Error: %d",__LINE__, err);   \
     }                                                   \
 }
 
@@ -76,7 +80,7 @@ GLExtFuncs* glExtFuncs;
 #endif
 
 Scenery3d::Scenery3d(Scenery3dMgr* parent)
-    : parent(parent), currentScene(), loadingScene(),
+    : parent(parent), currentScene(Q_NULLPTR),
       //sun(NULL), moon(NULL), venus(NULL),
       supportsGSCubemapping(false), supportsShadows(false), supportsShadowFiltering(false), isANGLE(false), maximumFramebufferSize(0),
       torchBrightness(0.5f), torchRange(5.0f), textEnabled(false), debugEnabled(false), fixShadowData(false),
@@ -84,9 +88,9 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
       reinitCubemapping(true), reinitShadowmapping(true),
       loadCancel(false),
       cubemapSize(1024),shadowmapSize(1024),
-      absolutePosition(0.0, 0.0, 0.0), moveVector(0.0, 0.0, 0.0), movement(0.0f,0.0f,0.0f), eye_height(0.0f),
-      core(NULL), landscapeMgr(NULL),  heightmap(NULL), heightmapLoad(NULL),
-      mainViewUp(0.0, 0.0, 1.0), mainViewDir(1.0, 0.0, 0.0), viewPos(0.0, 0.0, 0.0),
+      moveVector(0.0, 0.0, 0.0), movement(0.0f,0.0f,0.0f),
+      core(NULL), landscapeMgr(NULL),
+      mainViewDir(1.0, 0.0, 0.0),
       drawnTriangles(0), drawnModels(0), materialSwitches(0), shaderSwitches(0),
       requiresCubemap(false), cubemappingUsedLastFrame(false),
       lazyDrawing(false), updateOnlyDominantOnMoving(true), updateSecondDominantOnMoving(true), needsMovementEndUpdate(false),
@@ -123,16 +127,7 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
 
 Scenery3d::~Scenery3d()
 {
-	if (heightmap) {
-		delete heightmap;
-		heightmap = NULL;
-	}
-
-	if(heightmapLoad)
-	{
-		delete heightmapLoad;
-		heightmapLoad = NULL;
-	}
+	delete currentScene;
 
 	cubeVertexBuffer.destroy();
 	cubeIndexBuffer.destroy();
@@ -146,209 +141,76 @@ Scenery3d::~Scenery3d()
 #endif
 }
 
-bool Scenery3d::loadScene(const SceneInfo &scene)
+S3DScene* Scenery3d::loadScene(const SceneInfo &scene) const
 {
-	loadingScene = scene;
+	QScopedPointer<S3DScene> newScene(new S3DScene(scene));
 
 	if(loadCancel)
-		return false;
-
-	//setup some state
-	QMatrix4x4 zRot2Grid = (loadingScene.zRotateMatrix*loadingScene.obj2gridMatrix).convertToQMatrix();
+		return Q_NULLPTR;
 
 	parent->updateProgress(q_("Loading model..."),1,0,6);
 
 	//load model
-	objModelLoad.reset(new StelOBJ());
-	QString modelFile = StelFileMgr::findFile( loadingScene.fullPath+ "/" + loadingScene.modelScenery);
+	StelOBJ modelOBJ;
+	QString modelFile = StelFileMgr::findFile( scene.fullPath+ "/" + scene.modelScenery);
 	qDebug()<<"[Scenery3d] Loading scene from "<<modelFile;
-	if(!objModelLoad->load(modelFile, scene.vertexOrderEnum))
+	if(!modelOBJ.load(modelFile, scene.vertexOrderEnum))
 	{
 	    qCritical()<<"[Scenery3d] Failed to load OBJ file.";
-	    return false;
+	    return Q_NULLPTR;
 	}
 
 	if(loadCancel)
-		return false;
-
-	//start async texture loading
-	objModelLoad->loadAllTexturesAsync();
+		return Q_NULLPTR;
 
 	parent->updateProgress(q_("Transforming model..."),2,0,6);
-
-	//transform the vertices of the model to match the grid
-	objModelLoad->transform( zRot2Grid );
+	newScene->setModel(modelOBJ);
 
 	if(loadCancel)
-		return false;
+		return Q_NULLPTR;
 
-	if(loadingScene.modelGround.isEmpty())
-		groundModelLoad = objModelLoad;
-	else if (loadingScene.modelGround != "NULL")
+	if(scene.modelGround.isEmpty())
+	{
+		parent->updateProgress(q_("Calculating collision map..."),5,0,6);
+		newScene->setGround(modelOBJ);
+	}
+	else if (scene.modelGround != "NULL")
 	{
 		parent->updateProgress(q_("Loading ground..."),3,0,6);
 
-		groundModelLoad.reset(new StelOBJ());
-		modelFile = StelFileMgr::findFile(loadingScene.fullPath + "/" + loadingScene.modelGround);
+		StelOBJ groundOBJ;
+		modelFile = StelFileMgr::findFile(scene.fullPath + "/" + scene.modelGround);
 		qDebug()<<"[Scenery3d] Loading ground from"<<modelFile;
-		if(!groundModelLoad->load(modelFile, scene.vertexOrderEnum))
+		if(!groundOBJ.load(modelFile, scene.vertexOrderEnum))
 		{
-			qCritical()<<"[Scenery3d] Failed to load OBJ file.";
-			return false;
+			qCritical()<<"[Scenery3d] Failed to load ground model";
+			return Q_NULLPTR;
 		}
 
 		parent->updateProgress(q_("Transforming ground..."),4,0,6);
 		if(loadCancel)
-			return false;
+			return Q_NULLPTR;
 
-		groundModelLoad->transform( zRot2Grid );
+		parent->updateProgress(q_("Calculating collision map..."),5,0,6);
+		newScene->setGround(groundOBJ);
 	}
 
 	if(loadCancel)
-		return false;
-
-	if(loadingScene.hasLocation())
-	{
-		if(loadingScene.altitudeFromModel)
-		{
-			const AABBox& box = objModelLoad->getAABBox();
-			loadingScene.location->altitude=static_cast<int>(0.5*(box.min[2]+box.max[2])+loadingScene.modelWorldOffset[2]);
-		}
-	}
-
-	if(scene.groundNullHeightFromModel)
-	{
-		loadingScene.groundNullHeight = ((!groundModelLoad.isNull() && groundModelLoad->isLoaded()) ? groundModelLoad->getAABBox().min[2] : objModelLoad->getAABBox().min[2]);
-		qDebug() << "[Scenery3d] Ground outside model is " << loadingScene.groundNullHeight  << "m high (in model coordinates)";
-	}
-	else qDebug() << "[Scenery3d] Ground outside model stays " << loadingScene.groundNullHeight  << "m high (in model coordinates)";
-
-	//calculate heightmap
-	if(loadCancel)
-		return false;
-	parent->updateProgress(q_("Calculating collision map..."),5,0,6);
-
-	if(heightmapLoad)
-	{
-		delete heightmapLoad;
-	}
-
-	if( !groundModelLoad.isNull() && groundModelLoad->isLoaded())
-	{
-		heightmapLoad = new Heightmap(groundModelLoad.data());
-		heightmapLoad->setNullHeight(loadingScene.groundNullHeight);
-	}
-	else
-		heightmapLoad = NULL;
+		return Q_NULLPTR;
 
 	parent->updateProgress(q_("Finalizing load..."),6,0,6);
 
-	return true;
+	return newScene.take();
 }
 
-void Scenery3d::finalizeLoad()
+void Scenery3d::setCurrentScene(S3DScene* scene)
 {
-	currentScene = loadingScene;
-
-	//move load data to current one
-	objModel = objModelLoad;
-	objModelLoad.clear();
-	groundModel = groundModelLoad;
-	groundModelLoad.clear();
-
-	glArray.load(objModel.data());
-	//call this after texture load
-	//objModel->finalizeForRendering();
-
-	//the ground model needs no opengl uploads, so we skip them
-
-	//delete old heightmap
-	if(heightmap)
-	{
-		delete heightmap;
-	}
-
-	heightmap = heightmapLoad;
-	heightmapLoad = NULL;
-
-	if(currentScene.startPositionFromModel)
-	{
-		//position at the XY center of the model
-		const AABBox& box = objModel->getAABBox();
-		absolutePosition.v[0] = -(box.max[0]+box.min[0])/2.0;
-		qDebug() << "Setting Easting  to BBX center: " << box.min[0] << ".." << box.max[0] << ": " << absolutePosition.v[0];
-		absolutePosition.v[1] = -(box.max[1]+box.min[1])/2.0;
-		qDebug() << "Setting Northing to BBX center: " << box.min[1] << ".." << box.max[1] << ": " << -absolutePosition.v[1];
-	}
-	else
-	{
-		absolutePosition[0] = currentScene.relativeStartPosition[0];
-		absolutePosition[1] = currentScene.relativeStartPosition[1];
-	}
-	eye_height = currentScene.eyeLevel;
-
-	//TODO: maybe introduce a switch in scenery3d.ini that allows the "ground" bounding box to be used for shadow calculations
-	//this would allow some scenes to have better shadows
-	StelOBJ* cur = objModel.data();
-	//Set the scene's AABB
-	setSceneAABB(cur->getAABBox());
-
-	//Find a good splitweight based on the scene's size
-	float maxSize = -std::numeric_limits<float>::max();
-	maxSize = std::max(sceneBoundingBox.max.v[0], maxSize);
-	maxSize = std::max(sceneBoundingBox.max.v[1], maxSize);
-
-
-	if(currentScene.shadowSplitWeight<0)
-	{
-		//qDebug() << "MAXSIZE:" << maxSize;
-		if(maxSize < 100.0f)
-			currentScene.shadowSplitWeight = 0.5f;
-		else if(maxSize < 200.0f)
-			currentScene.shadowSplitWeight = 0.60f;
-		else if(maxSize < 400.0f)
-			currentScene.shadowSplitWeight = 0.70f;
-		else
-			currentScene.shadowSplitWeight = 0.99f;
-	}
+	delete currentScene;
+	currentScene = scene;
+	scene->glLoad();
 
 	//reset the cubemap time so that is ensured it is immediately rerendered
 	invalidateCubemap();
-
-	//make sure textures are loaded
-	StelOBJ::MaterialList& matList = objModel->getMaterialList();
-	for(int i =0; i< matList.size();++i)
-	{
-		StelOBJ::Material& mat = matList[i];
-		//ambient and specular textures currently unused
-		//finalizeTexture(mat.tex_Ka);
-		//finalizeTexture(mat.tex_Ks);
-		finalizeTexture(mat.tex_Kd);
-		finalizeTexture(mat.tex_Ke);
-		finalizeTexture(mat.tex_bump);
-		finalizeTexture(mat.tex_height);
-
-		mat.calculateTraits();
-	}
-}
-
-void Scenery3d::finalizeTexture(StelTextureSP &tex)
-{
-	if(tex)
-	{
-		tex->waitForLoaded();
-		//load it into GL
-		if(!tex->bind())
-		{
-			qWarning()<<"Error loading texture"<<tex->getFullPath()<<tex->getErrorMessage();
-			tex.clear();
-		}
-		else
-		{
-			//clean up after ourselves
-			tex->release();
-		}
-	}
 }
 
 void Scenery3d::handleKeys(QKeyEvent* e)
@@ -376,10 +238,10 @@ void Scenery3d::handleKeys(QKeyEvent* e)
 
 		switch (e->key())
 		{
-			case Qt::Key_PageUp:    movement[2] = -1.0f * speedup; e->accept(); break;
-			case Qt::Key_PageDown:  movement[2] =  1.0f * speedup; e->accept(); break;
-			case Qt::Key_Up:        movement[1] = -1.0f * speedup; e->accept(); break;
-			case Qt::Key_Down:      movement[1] =  1.0f * speedup; e->accept(); break;
+			case Qt::Key_PageUp:    movement[2] =  1.0f * speedup; e->accept(); break;
+			case Qt::Key_PageDown:  movement[2] = -1.0f * speedup; e->accept(); break;
+			case Qt::Key_Up:        movement[1] =  1.0f * speedup; e->accept(); break;
+			case Qt::Key_Down:      movement[1] = -1.0f * speedup; e->accept(); break;
 			case Qt::Key_Right:     movement[0] =  1.0f * speedup; e->accept(); break;
 			case Qt::Key_Left:      movement[0] = -1.0f * speedup; e->accept(); break;
 #ifdef QT_DEBUG
@@ -437,21 +299,15 @@ void Scenery3d::saveFrusts()
 	}
 }
 
-void Scenery3d::setSceneAABB(const AABBox& bbox)
-{
-	sceneBoundingBox = bbox;
-}
-
 void Scenery3d::update(double deltaTime)
 {
-	if (core != NULL)
+	if (core && currentScene)
 	{
-		StelMovementMgr *stelMovementMgr = GETSTELMODULE(StelMovementMgr);
-
-		Vec3d viewDirection = core->getMovementMgr()->getViewDirectionJ2000();
-		Vec3d viewDirectionAltAz=core->j2000ToAltAz(viewDirection);
+		//View Direction
+		mainViewDir = mvMgr->getViewDirectionJ2000();
+		mainViewDir = core->j2000ToAltAz(mainViewDir);
 		double alt, az;
-		StelUtils::rectToSphe(&az, &alt, viewDirectionAltAz);
+		StelUtils::rectToSphe(&az, &alt, mainViewDir);
 
 		//if we were moving in the last update
 		bool wasMoving = moveVector.lengthSquared()>0.0;
@@ -465,9 +321,9 @@ void Scenery3d::update(double deltaTime)
 		// moveVector.set(-moveVector.v[1], moveVector.v[0], moveVector.v[2]);
 
 		// Better yet: immediately make it right.
-		moveVector.set( movement[1] * std::cos(az) - movement[0] * std::sin(az),
-				movement[0] * std::cos(az) + movement[1] * std::sin(az),
-				movement[2]);
+		moveVector.set(   movement[1] * std::cos(az) + movement[0] * std::sin(az),
+				- movement[0] * std::cos(az) + movement[1] * std::sin(az),
+				  movement[2]);
 
 		//get current time
 		double curTime = core->getJD();
@@ -516,26 +372,17 @@ void Scenery3d::update(double deltaTime)
 			needsCubemapUpdate = true;
 		}
 
-		moveVector *= deltaTime * 0.01 * qMax(5.0, stelMovementMgr->getCurrentFov());
+		//when zoomed in more than 5°, we slow down movement
+		moveVector *= deltaTime * 0.01 * qMax(5.0, mvMgr->getCurrentFov());
 
 
-		absolutePosition.v[0] += moveVector.v[0];
-		absolutePosition.v[1] += moveVector.v[1];
-		eye_height -= moveVector.v[2];
-		absolutePosition.v[2] = -groundHeight()-eye_height;
-
-
-		//View Up in our case always pointing positive up
-		mainViewUp.v[0] = 0;
-		mainViewUp.v[1] = 0;
-		mainViewUp.v[2] = 1;
-
-
-		viewPos = -absolutePosition;
-
-		//View Direction
-		mainViewDir = core->getMovementMgr()->getViewDirectionJ2000();
-		mainViewDir = core->j2000ToAltAz(mainViewDir);
+		Vec2d curPos = currentScene->getViewer2DPosition();
+		curPos.v[0] += moveVector.v[0];
+		curPos.v[1] += moveVector.v[1];
+		double eye_height = currentScene->getEyeHeight();
+		eye_height += moveVector.v[2];
+		currentScene->setEyeHeight(eye_height);
+		currentScene->setViewerPositionOnHeightmap(curPos);
 
 		//find cubemap face this vector points at
 		//only consider horizontal plane (XY)
@@ -562,22 +409,13 @@ void Scenery3d::update(double deltaTime)
 	}
 }
 
-float Scenery3d::groundHeight()
-{
-	if (heightmap == NULL) {
-		return currentScene.groundNullHeight;
-	} else {
-		return heightmap->getHeight(-absolutePosition.v[0],-absolutePosition.v[1]);
-	}
-}
-
 void Scenery3d::setupPassUniforms(QOpenGLShaderProgram *shader)
 {
 	//send projection matrix
 	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MAT_PROJECTION, projectionMatrix);
 
 	//set alpha test threshold (this is scene-global for now)
-	SET_UNIFORM(shader,ShaderMgr::UNIFORM_FLOAT_ALPHA_THRESH,currentScene.transparencyThreshold);
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_FLOAT_ALPHA_THRESH,currentScene->getSceneInfo().transparencyThreshold);
 
 	//torch attenuation factor
 	SET_UNIFORM(shader, ShaderMgr::UNIFORM_TORCH_ATTENUATION, lightInfo.torchAttenuation);
@@ -666,7 +504,7 @@ void Scenery3d::setupFrameUniforms(QOpenGLShaderProgram *shader)
 	}
 }
 
-void Scenery3d::setupMaterialUniforms(QOpenGLShaderProgram* shader, const StelOBJ::Material &mat)
+void Scenery3d::setupMaterialUniforms(QOpenGLShaderProgram* shader, const S3DScene::Material &mat)
 {
 	//ambient is calculated depending on illum model
 	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_AMBIENT,mat.Ka * lightInfo.ambient);
@@ -724,16 +562,16 @@ bool Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 	}
 
 	//bind VAO
-	glArray.bind();
+	currentScene->glBind();
 
 	//assume backfaceculling is on
 	bool backfaceCullState = true;
 	bool success = true;
 
 	//TODO optimize: clump models with same material together when first loading to minimize state changes
-	const StelOBJ::Material* lastMaterial = NULL;
+	const S3DScene::Material* lastMaterial = NULL;
 	bool blendEnabled = false;
-	const StelOBJ::ObjectList& objectList = objModel->getObjectList();
+	const S3DScene::ObjectList& objectList = currentScene->getObjects();
 	for(int i=0; i<objectList.size(); ++i)
 	{
 		const StelOBJ::Object& obj = objectList.at(i);
@@ -742,7 +580,7 @@ bool Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 		for(int j = 0; j < matGroups.size();++j)
 		{
 			const StelOBJ::MaterialGroup& matGroup = matGroups.at(j);
-			const StelOBJ::Material* pMaterial = &objModel->getMaterialList().at(matGroup.materialIndex);
+			const S3DScene::Material* pMaterial = &currentScene->getMaterial(matGroup.materialIndex);
 			Q_ASSERT(pMaterial);
 
 			++drawnModels;
@@ -779,7 +617,7 @@ bool Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 						{
 							//really only mvp+alpha thresh required, so only set this
 							SET_UNIFORM(curShader,ShaderMgr::UNIFORM_MAT_MVP,projectionMatrix * modelViewMatrix);
-							SET_UNIFORM(curShader,ShaderMgr::UNIFORM_FLOAT_ALPHA_THRESH,currentScene.transparencyThreshold);
+							SET_UNIFORM(curShader,ShaderMgr::UNIFORM_FLOAT_ALPHA_THRESH,currentScene->getSceneInfo().transparencyThreshold);
 						}
 
 						//we remember if we have initialized this shader already, so we can skip "global" initialization later if we encounter it again
@@ -836,7 +674,7 @@ bool Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 			}
 
 
-			glArray.draw(matGroup.startIndex,matGroup.indexCount);
+			currentScene->glDraw(matGroup.startIndex,matGroup.indexCount);
 			drawnTriangles+=matGroup.indexCount/3;
 		}
 	}
@@ -851,12 +689,12 @@ bool Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 		glDisable(GL_BLEND);
 
 	//release VAO
-	glArray.release();
+	currentScene->glRelease();
 
 	return success;
 }
 
-void Scenery3d::computeFrustumSplits(const Vec3d viewPos, const Vec3d viewDir, const Vec3d viewUp)
+void Scenery3d::computeFrustumSplits(const Vec3d& viewPos, const Vec3d& viewDir, const Vec3d& viewUp)
 {
 	//the frustum arrays all already contain the same adjusted frustum from adjustFrustum
 	float zNear = frustumArray[0].zNear;
@@ -864,12 +702,14 @@ void Scenery3d::computeFrustumSplits(const Vec3d viewPos, const Vec3d viewDir, c
 	float zRatio = zFar / zNear;
 	float zRange = zFar - zNear;
 
+	const SceneInfo& info = currentScene->getSceneInfo();
+
 	//Compute the z-planes for the subfrusta
 	for(int i=1; i<shaderParameters.frustumSplits; i++)
 	{
 		float s_i = i/static_cast<float>(shaderParameters.frustumSplits);
 
-		frustumArray[i].zNear = currentScene.shadowSplitWeight*(zNear*powf(zRatio, s_i)) + (1.0f-currentScene.shadowSplitWeight)*(zNear + (zRange)*s_i);
+		frustumArray[i].zNear = info.shadowSplitWeight*(zNear*powf(zRatio, s_i)) + (1.0f-info.shadowSplitWeight)*(zNear + (zRange)*s_i);
 		//Set the previous zFar to the newly computed zNear
 		//use a small overlap for robustness
 		frustumArray[i-1].zFar = frustumArray[i].zNear * 1.005f;
@@ -885,13 +725,13 @@ void Scenery3d::computePolyhedron(Polyhedron& body,const Frustum& frustum,const 
 {
 	//Building a convex body for directional lights according to Wimmer et al. 2006
 
-
+	const AABBox& sceneAABB = currentScene->getSceneAABB();
 	//Add the Frustum to begin with
 	body.add(frustum);
 	//Intersect with the scene AABB
-	body.intersect(sceneBoundingBox);
+	body.intersect(sceneAABB);
 	//Extrude towards light direction
-	body.extrude(shadowDir, sceneBoundingBox);
+	body.extrude(shadowDir, sceneAABB);
 }
 
 void Scenery3d::computeOrthoProjVals(const Vec3f shadowDir,float& orthoExtent,float& orthoNear,float& orthoFar)
@@ -910,9 +750,11 @@ void Scenery3d::computeOrthoProjVals(const Vec3f shadowDir,float& orthoExtent,fl
 	left.normalize();
 	Vec3f right = -left;
 
+	const AABBox& bbox = currentScene->getSceneAABB();
+
 	for(unsigned int i=0; i<AABBox::CORNERCOUNT; i++)
 	{
-		Vec3f v = sceneBoundingBox.getCorner(static_cast<AABBox::Corner>(i));
+		Vec3f v = bbox.getCorner(static_cast<AABBox::Corner>(i));
 		Vec3f toCam = v - eye;
 
 		float dist = toCam.dot(vDir);
@@ -1021,7 +863,7 @@ void Scenery3d::computeCropMatrix(QMatrix4x4& cropMatrix, QVector4D& orthoScale,
 	cropMatrix = biasMatrix * projectionMatrix * modelViewMatrix;
 }
 
-void Scenery3d::adjustShadowFrustum(const Vec3d viewPos, const Vec3d viewDir, const Vec3d viewUp, const float fov, const float aspect)
+void Scenery3d::adjustShadowFrustum(const Vec3d& viewPos, const Vec3d& viewDir, const Vec3d& viewUp, const float fov, const float aspect)
 {
 	if(fixShadowData)
 		return;
@@ -1029,13 +871,14 @@ void Scenery3d::adjustShadowFrustum(const Vec3d viewPos, const Vec3d viewDir, co
 	//note that this is only correct in the perspective projection case, cubemapping WILL introduce shadow artifacts in most cases
 
 	//TODO make shadows in cubemapping mode better by projecting the frusta, more closely estimating the required shadow extents
-	camFrustShadow.setCamInternals(fov,aspect,currentScene.camNearZ,currentScene.shadowFarZ);
+	const SceneInfo& info = currentScene->getSceneInfo();
+	camFrustShadow.setCamInternals(fov,aspect,info.camNearZ,info.shadowFarZ);
 	camFrustShadow.calcFrustum(viewPos, viewDir, viewUp);
 
 	//Compute H = V intersect S according to Zhang et al.
 	Polyhedron p;
 	p.add(camFrustShadow);
-	p.intersect(sceneBoundingBox);
+	p.intersect(currentScene->getSceneAABB());
 	p.makeUniqueVerts();
 
 	//Find the boundaries
@@ -1441,13 +1284,13 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
 	return shadowcaster;
 }
 
-void Scenery3d::calcCubeMVP()
+void Scenery3d::calcCubeMVP(const Vec3d translation)
 {
 	QMatrix4x4 tmp;
 	for(int i = 0;i<6;++i)
 	{
 		tmp = cubeRotation[i];
-		tmp.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+		tmp.translate(translation.v[0], translation.v[1], translation.v[2]);
 		cubeMVP[i] = projectionMatrix * tmp;
 	}
 }
@@ -1460,13 +1303,14 @@ void Scenery3d::renderIntoCubemapGeometryShader()
 	//Hack: because the modelviewmatrix is used for lighting in shader, but we dont want to perform MV transformations 6 times,
 	// we just set the position because that currently is all that is needeed for correct lighting
 	modelViewMatrix.setToIdentity();
-	modelViewMatrix.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+	Vec3d negEyePos = -currentScene->getEyePosition();
+	modelViewMatrix.translate(negEyePos.v[0], negEyePos.v[1], negEyePos.v[2]);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//render all 6 faces at once
 	shaderParameters.geometryShader = true;
 	//calculate the final required matrices for each face
-	calcCubeMVP();
+	calcCubeMVP(negEyePos);
 	drawArrays(true,true);
 	shaderParameters.geometryShader = false;
 }
@@ -1480,7 +1324,7 @@ void Scenery3d::renderShadowMapsForFace(int face)
 	//this is NOT fixed by choosing a different up vector here as could be expected
 	//the problem seems to occur during final rendering because shadowmap textures look alright and the scaling values seem valid
 	//for now, fix this by adding a tiny value to X in these cases
-	adjustShadowFrustum(viewPos,Vec3d(face>3?viewDir[0]+0.000001:viewDir[0],viewDir[1],viewDir[2]),Vec3d(0,0,1),90.0f,1.0f);
+	adjustShadowFrustum(currentScene->getEyePosition(),Vec3d(face>3?viewDir[0]+0.000001:viewDir[0],viewDir[1],viewDir[2]),Vec3d(0,0,1),90.0f,1.0f);
 	//render shadowmap
 	if(!renderShadowMaps())
 		return;
@@ -1497,6 +1341,8 @@ void Scenery3d::renderIntoCubemapSixPasses()
 	//store current projection (= 90° cube projection)
 	QMatrix4x4 squareProjection = projectionMatrix;
 
+	const Vec3d& eyePos = currentScene->getEyePosition();
+
 	if(needsMovementUpdate && updateOnlyDominantOnMoving)
 	{
 		if(shaderParameters.shadows && fullCubemapShadows)
@@ -1509,9 +1355,8 @@ void Scenery3d::renderIntoCubemapSixPasses()
 
 		//update only the dominant face
 		glBindFramebuffer(GL_FRAMEBUFFER, cubeSideFBO[dominantFace]);
-
 		modelViewMatrix = cubeRotation[dominantFace];
-		modelViewMatrix.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+		modelViewMatrix.translate(-eyePos.v[0], -eyePos.v[1], -eyePos.v[2]);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		drawArrays(true,true);
@@ -1530,7 +1375,7 @@ void Scenery3d::renderIntoCubemapSixPasses()
 			glBindFramebuffer(GL_FRAMEBUFFER, cubeSideFBO[secondDominantFace]);
 
 			modelViewMatrix = cubeRotation[secondDominantFace];
-			modelViewMatrix.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+			modelViewMatrix.translate(-eyePos.v[0], -eyePos.v[1], -eyePos.v[2]);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			drawArrays(true,true);
@@ -1553,7 +1398,7 @@ void Scenery3d::renderIntoCubemapSixPasses()
 			glBindFramebuffer(GL_FRAMEBUFFER, cubeSideFBO[i]);
 
 			modelViewMatrix = cubeRotation[i];
-			modelViewMatrix.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+			modelViewMatrix.translate(-eyePos.v[0], -eyePos.v[1], -eyePos.v[2]);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			drawArrays(true,true);
@@ -1580,15 +1425,17 @@ void Scenery3d::generateCubeMap()
 			float fov = altAzProjector->getFov();
 			float aspect = (float)altAzProjector->getViewportWidth() / (float)altAzProjector->getViewportHeight();
 
-			adjustShadowFrustum(viewPos,mainViewDir,mainViewUp,fov,aspect);
+			adjustShadowFrustum(currentScene->getEyePosition(),mainViewDir,Vec3d(0.,0.,1.),fov,aspect);
 			if(!renderShadowMaps())
 				return; //shadow map rendering failed, do an early abort
 		}
 	}
 
+	const SceneInfo& info = currentScene->getSceneInfo();
+
 	//setup projection matrix - this is a 90-degree perspective with aspect 1.0
 	projectionMatrix.setToIdentity();
-	projectionMatrix.perspective(90.0f,1.0f,currentScene.camNearZ,currentScene.camFarZ);
+	projectionMatrix.perspective(90.0f,1.0f,info.camNearZ,info.camFarZ);
 
 	//set opengl viewport to the size of cubemap
 	glViewport(0, 0, cubemapSize, cubemapSize);
@@ -1719,6 +1566,9 @@ void Scenery3d::drawDirect() // for Perspective Projection only!
     //recalculate lighting info
     calculateLighting();
 
+    const Vec3d& eyePos = currentScene->getEyePosition();
+    const SceneInfo& info = currentScene->getSceneInfo();
+
     //do shadow pass
     //only calculate shadows if enabled
     if(shaderParameters.shadows)
@@ -1726,14 +1576,14 @@ void Scenery3d::drawDirect() // for Perspective Projection only!
 	    calculateShadowCaster();
 
 	    //no need to extract view information, use the direction from stellarium
-	    adjustShadowFrustum(viewPos,mainViewDir,mainViewUp,fov,aspect);
+	    adjustShadowFrustum(eyePos,mainViewDir,Vec3d(0.0,0.0,1.0),fov,aspect);
 
 	    //this call modifies projection + mv matrices, so we have to set them afterwards
 	    if(!renderShadowMaps())
 		    return; //shadow map rendering failed, do an early abort
     }
 
-    mvMatrix.translate(absolutePosition.v[0],absolutePosition.v[1],absolutePosition.v[2]);
+    mvMatrix.translate(-eyePos.v[0],-eyePos.v[1],-eyePos.v[2]);
 
     //set final rendering matrices
     modelViewMatrix = mvMatrix;
@@ -1742,7 +1592,7 @@ void Scenery3d::drawDirect() // for Perspective Projection only!
     //without viewport offset, you could simply call this:
     //projectionMatrix.perspective(fov,aspect,currentScene.camNearZ,currentScene.camFarZ);
     //these 2 lines replicate gluPerspective with glFrustum
-    float fH = qTan( fov / 360.0f * M_PI ) * currentScene.camNearZ;
+    float fH = qTan( fov / 360.0f * M_PI ) * info.camNearZ;
     float fW = fH * aspect;
 
     //apply offset values
@@ -1753,7 +1603,7 @@ void Scenery3d::drawDirect() // for Perspective Projection only!
     //final projection matrix
     projectionMatrix.frustum(-fW + horizOffset, fW + horizOffset,
 			     -fH + vertOffset, fH + vertOffset,
-			     currentScene.camNearZ, currentScene.camFarZ);
+			     info.camNearZ, info.camFarZ);
 
     //depth test needs enabling, clear depth buffer, color buffer already contains background so it stays
     glEnable(GL_DEPTH_TEST);
@@ -1785,27 +1635,56 @@ void Scenery3d::drawWithCubeMap()
 
 Vec3d Scenery3d::getCurrentGridPosition() const
 {
+	if(!currentScene)
+	{
+		qCWarning(scenery3d)<<"No scene loaded, can't get grid position";
+		return Vec3d(0.0);
+	}
+	SceneInfo info = currentScene->getSceneInfo();
+	Vec3d pos = currentScene->getViewerPosition();
 	// this is the observer position (camera eye position) in model-grid coordinates, relative to the origin
-	Vec3d pos=currentScene.zRotateMatrix.inverse()* (-absolutePosition);
+	pos=info.zRotateMatrix.inverse()* pos;
 	// this is the observer position (camera eye position) in grid coordinates, e.g. Gauss-Krueger or UTM.
-	pos+= currentScene.modelWorldOffset;
+	pos+= info.modelWorldOffset;
 
-	//subtract the eye_height to get the foot position
-	pos[2]-=eye_height;
 	return pos;
 }
 
 void Scenery3d::setGridPosition(Vec3d pos)
 {
+	if(!currentScene)
+	{
+		qCWarning(scenery3d)<<"No scene loaded, can't set grid position";
+		return;
+	}
+	SceneInfo info = currentScene->getSceneInfo();
 	//this is basically the same as getCurrentGridPosition(), but in reverse
-	pos[2]+=eye_height;
-	pos-=currentScene.modelWorldOffset;
+	pos-=info.modelWorldOffset;
 
 	//calc opengl position
-	absolutePosition = - (currentScene.zRotateMatrix * pos);
+	currentScene->setViewerPosition(info.zRotateMatrix * pos);
 
 	//reset cube map time
 	invalidateCubemap();
+}
+
+void Scenery3d::setEyeHeight(const float eyeheight)
+{
+	if(currentScene)
+		currentScene->setEyeHeight(eyeheight);
+	else
+		qCWarning(scenery3d)<<"No scene loaded, eye height not set";
+}
+
+double Scenery3d::getEyeHeight() const
+{
+	if(currentScene)
+		return currentScene->getEyeHeight();
+	else
+	{
+		qCWarning(scenery3d)<<"No scene loaded, eye height unknown";
+		return 1.65f;
+	}
 }
 
 void Scenery3d::drawCoordinatesText()
@@ -1819,9 +1698,11 @@ void Scenery3d::drawCoordinatesText()
 
     Vec3d gridPos = getCurrentGridPosition();
 
+    const SceneInfo& info = currentScene->getSceneInfo();
+
     // problem: long grid names!
-    painter.drawText(altAzProjector->getViewportWidth()-10-qMax(240, painter.getFontMetrics().boundingRect(currentScene.gridName).width()),
-		     screen_y, currentScene.gridName);
+    painter.drawText(altAzProjector->getViewportWidth()-10-qMax(240, painter.getFontMetrics().boundingRect(info.gridName).width()),
+		     screen_y, info.gridName);
     screen_y -= 17.0f;
     str = QString("East:   %1m").arg(gridPos[0], 10, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
@@ -1832,7 +1713,7 @@ void Scenery3d::drawCoordinatesText()
     str = QString("Height: %1m").arg(gridPos[2], 10, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
     screen_y -= 15.0f;
-    str = QString("Eye:    %1m").arg(eye_height, 10, 'f', 2);
+    str = QString("Eye:    %1m").arg(currentScene->getEyeHeight(), 10, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
 
     /*// DEBUG AIDS:
@@ -1908,94 +1789,96 @@ void Scenery3d::drawDebug()
 	}
 #endif
 
+	const SceneInfo& info = currentScene->getSceneInfo();
 
-    StelPainter painter(altAzProjector);
-    painter.setFont(debugTextFont);
-    painter.setColor(1.f,0.f,1.f,1.f);
-    // For now, these messages print light mixture values.
-    painter.drawText(20, 160, lightMessage);
-    painter.drawText(20, 145, lightMessage2);
-    painter.drawText(20, 130, lightMessage3);
-    painter.drawText(20, 115, QString("Torch range %1, brightness %2/%3/%4").arg(torchRange).arg(lightInfo.torchDiffuse[0]).arg(lightInfo.torchDiffuse[1]).arg(lightInfo.torchDiffuse[2]));
-    QString str = QString("BB: %1/%2/%3 %4/%5/%6").arg(sceneBoundingBox.min.v[0], 7, 'f', 2).arg(sceneBoundingBox.min.v[1], 7, 'f', 2).arg(sceneBoundingBox.min.v[2], 7, 'f', 2)
-		    .arg(sceneBoundingBox.max.v[0], 7, 'f', 2).arg(sceneBoundingBox.max.v[1], 7, 'f', 2).arg(sceneBoundingBox.max.v[2], 7, 'f', 2);
-    painter.drawText(10, 100, str);
-    // PRINT OTHER MESSAGES HERE:
+	StelPainter painter(altAzProjector);
+	painter.setFont(debugTextFont);
+	painter.setColor(1.f,0.f,1.f,1.f);
+	// For now, these messages print light mixture values.
+	painter.drawText(20, 160, lightMessage);
+	painter.drawText(20, 145, lightMessage2);
+	painter.drawText(20, 130, lightMessage3);
+	painter.drawText(20, 115, QString("Torch range %1, brightness %2/%3/%4").arg(torchRange).arg(lightInfo.torchDiffuse[0]).arg(lightInfo.torchDiffuse[1]).arg(lightInfo.torchDiffuse[2]));
 
-    float screen_x = altAzProjector->getViewportWidth()  - 500.0f;
-    float screen_y = altAzProjector->getViewportHeight() - 300.0f;
+	const AABBox& bbox = currentScene->getSceneAABB();
+	QString str = QString("BB: %1/%2/%3 %4/%5/%6").arg(bbox.min.v[0], 7, 'f', 2).arg(bbox.min.v[1], 7, 'f', 2).arg(bbox.min.v[2], 7, 'f', 2)
+			.arg(bbox.max.v[0], 7, 'f', 2).arg(bbox.max.v[1], 7, 'f', 2).arg(bbox.max.v[2], 7, 'f', 2);
+	painter.drawText(10, 100, str);
+	// PRINT OTHER MESSAGES HERE:
 
-    //Show some debug aids
-    if(debugEnabled)
-    {
-	float debugTextureSize = 128.0f;
-	float screen_x = altAzProjector->getViewportWidth() - debugTextureSize - 30;
-	float screen_y = altAzProjector->getViewportHeight() - debugTextureSize - 30;
+	float screen_x = altAzProjector->getViewportWidth()  - 500.0f;
+	float screen_y = altAzProjector->getViewportHeight() - 300.0f;
 
-	if(shaderParameters.shadows)
+	//Show some debug aids
+	if(debugEnabled)
 	{
-		QString cap("SM %1");
+		float debugTextureSize = 128.0f;
+		float screen_x = altAzProjector->getViewportWidth() - debugTextureSize - 30;
+		float screen_y = altAzProjector->getViewportHeight() - debugTextureSize - 30;
 
-		for(int i=0; i<shaderParameters.frustumSplits; i++)
+		if(shaderParameters.shadows)
 		{
-			painter.drawText(screen_x+70, screen_y+130, cap.arg(i));
+			QString cap("SM %1");
 
-			glBindTexture(GL_TEXTURE_2D, shadowMapsArray[i]);
-			painter.drawSprite2dMode(screen_x, screen_y, debugTextureSize);
+			for(int i=0; i<shaderParameters.frustumSplits; i++)
+			{
+				painter.drawText(screen_x+70, screen_y+130, cap.arg(i));
 
-			int tmp = screen_y - debugTextureSize-30;
-			painter.drawText(screen_x-125, tmp, QString("cam n/f: %1/%2").arg(frustumArray[i].zNear, 7, 'f', 2).arg(frustumArray[i].zFar, 7, 'f', 2));
-			painter.drawText(screen_x-125, tmp-15.0f, QString("uv scale: %1/%2").arg(shadowFrustumSize[i].x(), 7, 'f', 2).arg(shadowFrustumSize[i].y(),7,'f',2));
-			painter.drawText(screen_x-125, tmp-30.0f, QString("ortho n/f: %1/%2").arg(shadowFrustumSize[i].z(), 7, 'f', 2).arg(shadowFrustumSize[i].w(),7,'f',2));
+				glBindTexture(GL_TEXTURE_2D, shadowMapsArray[i]);
+				painter.drawSprite2dMode(screen_x, screen_y, debugTextureSize);
 
-			screen_x -= 290;
+				int tmp = screen_y - debugTextureSize-30;
+				painter.drawText(screen_x-125, tmp, QString("cam n/f: %1/%2").arg(frustumArray[i].zNear, 7, 'f', 2).arg(frustumArray[i].zFar, 7, 'f', 2));
+				painter.drawText(screen_x-125, tmp-15.0f, QString("uv scale: %1/%2").arg(shadowFrustumSize[i].x(), 7, 'f', 2).arg(shadowFrustumSize[i].y(),7,'f',2));
+				painter.drawText(screen_x-125, tmp-30.0f, QString("ortho n/f: %1/%2").arg(shadowFrustumSize[i].z(), 7, 'f', 2).arg(shadowFrustumSize[i].w(),7,'f',2));
+
+				screen_x -= 290;
+			}
+			painter.drawText(screen_x+165.0f, screen_y-215.0f, QString("Splitweight: %1").arg(info.shadowSplitWeight, 3, 'f', 2));
+			painter.drawText(screen_x+165.0f, screen_y-230.0f, QString("Light near/far: %1/%2").arg(lightOrthoNear, 3, 'f', 2).arg(lightOrthoFar, 3, 'f', 2));
 		}
-		painter.drawText(screen_x+165.0f, screen_y-215.0f, QString("Splitweight: %1").arg(currentScene.shadowSplitWeight, 3, 'f', 2));
-		painter.drawText(screen_x+165.0f, screen_y-230.0f, QString("Light near/far: %1/%2").arg(lightOrthoNear, 3, 'f', 2).arg(lightOrthoFar, 3, 'f', 2));
+
 	}
 
-    }
+	screen_y -= 100.f;
+	str = QString("Last frame stats:");
+	painter.drawText(screen_x, screen_y, str);
+	screen_y -= 15.0f;
+	str = QString("%1 tris, %2 mdls").arg(drawnTriangles).arg(drawnModels);
+	painter.drawText(screen_x, screen_y, str);
+	screen_y -= 15.0f;
+	str = QString("%1 mats, %2 shaders").arg(materialSwitches).arg(shaderSwitches);
+	painter.drawText(screen_x, screen_y, str);
+	screen_y -= 15.0f;
+	str = "View Pos";
+	painter.drawText(screen_x, screen_y, str);
+	screen_y -= 15.0f;
+	const Vec3d& viewPos = currentScene->getEyePosition();
+	str = QString("%1 %2 %3").arg(viewPos.v[0], 7, 'f', 2).arg(viewPos.v[1], 7, 'f', 2).arg(viewPos.v[2], 7, 'f', 2);
+	painter.drawText(screen_x, screen_y, str);
+	screen_y -= 15.0f;
+	str = "View Dir, dominant faces";
+	painter.drawText(screen_x, screen_y, str);
+	screen_y -= 15.0f;
+	str = QString("%1 %2 %3, %4/%5").arg(mainViewDir.v[0], 7, 'f', 2).arg(mainViewDir.v[1], 7, 'f', 2).arg(mainViewDir.v[2], 7, 'f', 2).arg(dominantFace).arg(secondDominantFace);
+	painter.drawText(screen_x, screen_y, str);
+	screen_y -= 15.0f;
+	str = "View Up";
+	painter.drawText(screen_x, screen_y, str);
+	screen_y -= 15.0f;
+	if(requiresCubemap)
+	{
+		screen_y -= 15.0f;
+		str = QString("Last cubemap update: %1ms ago").arg(QDateTime::currentMSecsSinceEpoch() - lastCubemapUpdateRealTime);
+		painter.drawText(screen_x, screen_y, str);
+		screen_y -= 15.0f;
+		str = QString("Last cubemap update JDAY: %1").arg(qAbs(core->getJD()-lastCubemapUpdate) * StelCore::ONE_OVER_JD_SECOND);
+		painter.drawText(screen_x, screen_y, str);
+	}
 
-    screen_y -= 100.f;
-    str = QString("Last frame stats:");
-    painter.drawText(screen_x, screen_y, str);
-    screen_y -= 15.0f;
-    str = QString("%1 tris, %2 mdls").arg(drawnTriangles).arg(drawnModels);
-    painter.drawText(screen_x, screen_y, str);
-    screen_y -= 15.0f;
-    str = QString("%1 mats, %2 shaders").arg(materialSwitches).arg(shaderSwitches);
-    painter.drawText(screen_x, screen_y, str);
-    screen_y -= 15.0f;
-    str = "View Pos";
-    painter.drawText(screen_x, screen_y, str);
-    screen_y -= 15.0f;
-    str = QString("%1 %2 %3").arg(viewPos.v[0], 7, 'f', 2).arg(viewPos.v[1], 7, 'f', 2).arg(viewPos.v[2], 7, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);
-    screen_y -= 15.0f;
-    str = "View Dir, dominant faces";
-    painter.drawText(screen_x, screen_y, str);
-    screen_y -= 15.0f;
-    str = QString("%1 %2 %3, %4/%5").arg(mainViewDir.v[0], 7, 'f', 2).arg(mainViewDir.v[1], 7, 'f', 2).arg(mainViewDir.v[2], 7, 'f', 2).arg(dominantFace).arg(secondDominantFace);
-    painter.drawText(screen_x, screen_y, str);
-    screen_y -= 15.0f;
-    str = "View Up";
-    painter.drawText(screen_x, screen_y, str);
-    screen_y -= 15.0f;
-    str = QString("%1 %2 %3").arg(mainViewUp.v[0], 7, 'f', 2).arg(mainViewUp.v[1], 7, 'f', 2).arg(mainViewUp.v[2], 7, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);
-    if(requiresCubemap)
-    {
-	    screen_y -= 15.0f;
-	    str = QString("Last cubemap update: %1ms ago").arg(QDateTime::currentMSecsSinceEpoch() - lastCubemapUpdateRealTime);
-	    painter.drawText(screen_x, screen_y, str);
-	    screen_y -= 15.0f;
-	    str = QString("Last cubemap update JDAY: %1").arg(qAbs(core->getJD()-lastCubemapUpdate) * StelCore::ONE_OVER_JD_SECOND);
-	    painter.drawText(screen_x, screen_y, str);
-    }
-
-    screen_y -= 30.0f;
-    str = QString("Venus: %1").arg(lightInfo.lightSource == Venus);
-    painter.drawText(screen_x, screen_y, str);
+	screen_y -= 30.0f;
+	str = QString("Venus: %1").arg(lightInfo.lightSource == Venus);
+	painter.drawText(screen_x, screen_y, str);
 }
 
 void Scenery3d::determineFeatureSupport()
@@ -2114,6 +1997,7 @@ void Scenery3d::init()
 
 	//finally, set core to enable update().
 	this->core=StelApp::getInstance().getCore();
+	this->mvMgr= GETSTELMODULE(StelMovementMgr);
 	//init planets
 	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	sun = ssystem->getSun();
@@ -2121,6 +2005,13 @@ void Scenery3d::init()
 	venus = ssystem->searchByEnglishName("Venus");
 	landscapeMgr = GETSTELMODULE(LandscapeMgr);
 	Q_ASSERT(landscapeMgr);
+}
+
+SceneInfo Scenery3d::getCurrentSceneInfo() const
+{
+	if(currentScene)
+		return currentScene->getSceneInfo();
+	return SceneInfo();
 }
 
 void Scenery3d::deleteCubemapping()
@@ -2735,7 +2626,7 @@ bool Scenery3d::initShadowmapping()
 void Scenery3d::draw(StelCore* core)
 {
 	//cant draw if no models
-	if(!objModel || !objModel->isLoaded())
+	if(!currentScene)
 		return;
 
 	//reset render statistic
