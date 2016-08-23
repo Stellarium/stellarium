@@ -138,7 +138,7 @@ private:
 	//! Populates the drop-down list of groups of celestial bodies.
 	void populateGroupCelestialBodyList();
 
-	//! Calculation conjuctions and oppositions.
+	//! Calculation conjunctions and oppositions.
 	//! @note Ported from KStars, should be improved, because this feature calculate
 	//! angular separation ("conjunction" defined as equality of right ascension
 	//! of two body) and current solution is not accurate and slow.
