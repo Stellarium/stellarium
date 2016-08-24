@@ -102,6 +102,8 @@ StelGui::StelGui()
 	, flipHoriz(NULL)
 	, flagShowNebulaBackgroundButton(false)
 	, btShowNebulaeBackground(NULL)
+	, flagShowBookmarksButton(false)
+	, btShowBookmarks(NULL)
 	, initDone(false)
 #ifndef DISABLE_SCRIPTING
 	  // We use a QStringList to save the user-configured buttons while script is running, and restore them later.
@@ -216,8 +218,8 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	actionsMgr->addAction("actionShow_DateTime_Window_Global", windowsGroup, N_("Date/time window"), dateTimeDialog, "visible", "F5", "", true);
 	actionsMgr->addAction("actionShow_Location_Window_Global", windowsGroup, N_("Location window"), locationDialog, "visible", "F6", "", true);
 	actionsMgr->addAction("actionShow_Shortcuts_Window_Global", windowsGroup, N_("Shortcuts window"), shortcutsDialog, "visible", "F7", "", true);
-	actionsMgr->addAction("actionShow_AstroCalc_Window_Global", windowsGroup, N_("AstroCalc window"), astroCalcDialog, "visible", "F10", "Alt+A", true);
-	actionsMgr->addAction("actionShow_Bookmarks_Window_Global", windowsGroup, N_("Bookmarks window"), bookmarksDialog, "visible", "Alt+B", "", true);
+	actionsMgr->addAction("actionShow_AstroCalc_Window_Global", windowsGroup, N_("Astronomical calculations window"), astroCalcDialog, "visible", "F10", "Alt+A", true);
+	actionsMgr->addAction("actionShow_Bookmarks_Window_Global", windowsGroup, N_("Bookmarks"), bookmarksDialog, "visible", "Alt+B", "", true);
 	actionsMgr->addAction("actionSave_Copy_Object_Information_Global", miscGroup, N_("Copy selected object information to clipboard"), this, "copySelectedObjectInfo()", "Ctrl+C", "", true);	
 
 	QSettings* conf = StelApp::getInstance().getSettings();
@@ -266,6 +268,13 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	pxmapOn = QPixmap(":/graphicGui/8-on-settings.png");
 	pxmapOff = QPixmap(":/graphicGui/8-off-settings.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, "actionShow_Configuration_Window_Global");
+	skyGui->winBar->addButton(b);
+
+	// NOTE: Should be a toggle of visibility for this button?
+	// FIXME: Update icons for AstroCalc window
+	pxmapOn = QPixmap(":/graphicGui/5-on-labels.png");
+	pxmapOff = QPixmap(":/graphicGui/5-off-labels.png");
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, "actionShow_AstroCalc_Window_Global");
 	skyGui->winBar->addButton(b);
 
 	pxmapOn = QPixmap(":/graphicGui/9-on-help.png");
@@ -374,7 +383,8 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 
 	// add the flip buttons if requested in the config
 	setFlagShowFlipButtons(conf->value("gui/flag_show_flip_buttons", false).toBool());
-	setFlagShowNebulaBackgroundButton(conf->value("gui/flag_show_nebulae_background_button", false).toBool());	
+	setFlagShowNebulaBackgroundButton(conf->value("gui/flag_show_nebulae_background_button", false).toBool());
+	setFlagShowBookmarksButton(conf->value("gui/flag_show_bookmarks_button", false).toBool());
 
 	///////////////////////////////////////////////////////////////////////
 	// Create the main base widget
@@ -454,7 +464,9 @@ void StelGui::setStelStyle(const QString& section)
 	viewDialog->styleChanged();
 #ifdef ENABLE_SCRIPT_CONSOLE
 	scriptConsole->styleChanged();
-#endif // ENABLE_SCRIPT_CONSOLE
+#endif // ENABLE_SCRIPT_CONSOLE	
+	astroCalcDialog->styleChanged();
+	bookmarksDialog->styleChanged();
 }
 
 
@@ -651,7 +663,6 @@ void StelGui::setFlagShowFlipButtons(bool b)
 	}
 }
 
-
 // Define whether the button toggling nebulae backround images should be visible
 void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 {
@@ -668,6 +679,31 @@ void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 		getButtonBar()->hideButton("actionShow_DSS");
 	}
 	flagShowNebulaBackgroundButton = b;
+	if (initDone) {
+		skyGui->updateBarsPos();
+	}
+}
+
+// Define whether the button toggling bookmarks should be visible
+void StelGui::setFlagShowBookmarksButton(bool b)
+{
+	if (b==true) {
+		if (btShowBookmarks==NULL) {
+			// Create the nebulae background button
+			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
+			// FIXME: Updated icons for bookmarks button
+			QPixmap pxmapOn(":/graphicGui/btDSS-on.png");
+			QPixmap pxmapOff(":/graphicGui/btDSS-off.png");
+			btShowBookmarks = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Bookmarks_Window_Global");
+		}
+		getButtonBar()->addButton(btShowBookmarks, "060-othersGroup");
+	} else {
+		getButtonBar()->hideButton("actionShow_Bookmarks_Window_Global");
+	}
+	flagShowBookmarksButton = b;
+	if (initDone) {
+		skyGui->updateBarsPos();
+	}
 }
 
 void StelGui::setFlagShowDecimalDegrees(bool b)
@@ -765,6 +801,11 @@ bool StelGui::getFlagShowFlipButtons() const
 bool StelGui::getFlagShowNebulaBackgroundButton() const
 {
 	return flagShowNebulaBackgroundButton;
+}
+
+bool StelGui::getFlagShowBookmarksButton() const
+{
+	return flagShowBookmarksButton;
 }
 
 bool StelGui::initComplete(void) const

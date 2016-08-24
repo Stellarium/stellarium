@@ -79,6 +79,11 @@ void AstroCalcDialog::retranslate()
 	}
 }
 
+void AstroCalcDialog::styleChanged()
+{
+	// Nothing for now
+}
+
 void AstroCalcDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
@@ -95,6 +100,8 @@ void AstroCalcDialog::createDialogContent()
 
 	//Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	ui->stackedWidget->setCurrentIndex(0);
+	ui->stackListWidget->setCurrentRow(0);
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
@@ -133,6 +140,8 @@ void AstroCalcDialog::createDialogContent()
 	connectBoolProperty(ui->ephemerisShowDatesCheckBox, "SolarSystem.ephemerisDatesDisplayed");
 
 	currentPlanetaryPositions();
+
+	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 }
 
 void AstroCalcDialog::initListPlanetaryPositions()
@@ -1078,4 +1087,11 @@ double AstroCalcDialog::findDistance(double JD, PlanetP object1, NebulaP object2
 	Vec3d obj1 = object1->getJ2000EquatorialPos(core);
 	Vec3d obj2 = object2->getJ2000EquatorialPos(core);
 	return obj1.angle(obj2);
+}
+
+void AstroCalcDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
+{
+	if (!current)
+		current = previous;
+	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
 }
