@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>509</width>
-    <height>538</height>
+    <width>512</width>
+    <height>548</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -1139,26 +1139,83 @@
              <string>Planetarium options</string>
             </property>
             <layout class="QGridLayout" name="gridLayoutOptions">
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="sphericMirrorCheckbox">
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="autoEnableAtmosphereCheckBox">
                <property name="toolTip">
-                <string>Spheric mirror distortion is used when projecting Stellarium onto a spheric mirror for low-cost planetarium systems.</string>
+                <string>Auto-enabling of the atmosphere for bodies with atmosphere in location window</string>
                </property>
                <property name="text">
-                <string>Spheric mirror distortion</string>
-               </property>
-               <property name="checkable">
-                <bool>true</bool>
+                <string>Auto-enabling for the atmosphere</string>
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="diskViewportCheckbox">
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="showNebulaBgButtonCheckbox">
                <property name="toolTip">
-                <string>Mask out everything outside a central circle in the main view</string>
+                <string>Toggle display backgrounds of the nebulae.</string>
                </property>
                <property name="text">
-                <string>Disc viewport</string>
+                <string>Show nebula background button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="nutationCheckBox">
+               <property name="toolTip">
+                <string>Nutation is a small wobble of Earth's axis, amounting to a few arcseconds.</string>
+               </property>
+               <property name="text">
+                <string>Include nutation</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="azimuthFromSouthcheckBox">
+               <property name="toolTip">
+                <string>Activate this option to calculate azimuth from south towards west.</string>
+               </property>
+               <property name="text">
+                <string>Azimuth from South</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="decimalDegreeCheckBox">
+               <property name="toolTip">
+                <string>Use decimal degrees for coordinates</string>
+               </property>
+               <property name="text">
+                <string>Use decimal degrees</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="topocentricCheckBox">
+               <property name="toolTip">
+                <string>Activate to view as seen from surface of the planet (recommended). If switched off, display planetocentric view.</string>
+               </property>
+               <property name="text">
+                <string>Topocentric coordinates</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="showFlipButtonsCheckbox">
+               <property name="toolTip">
+                <string>Toggle vertical and horizontal image flip buttons.</string>
+               </property>
+               <property name="text">
+                <string>Show flip buttons</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="gravityLabelCheckbox">
+               <property name="toolTip">
+                <string>Align labels with the horizon</string>
+               </property>
+               <property name="text">
+                <string>Gravity labels</string>
                </property>
               </widget>
              </item>
@@ -1175,93 +1232,16 @@
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
-              <widget class="QCheckBox" name="gravityLabelCheckbox">
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="sphericMirrorCheckbox">
                <property name="toolTip">
-                <string>Align labels with the horizon</string>
+                <string>Spheric mirror distortion is used when projecting Stellarium onto a spheric mirror for low-cost planetarium systems.</string>
                </property>
                <property name="text">
-                <string>Gravity labels</string>
+                <string>Spheric mirror distortion</string>
                </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="showNebulaBgButtonCheckbox">
-               <property name="toolTip">
-                <string>Toggle display backgrounds of the nebulae.</string>
-               </property>
-               <property name="text">
-                <string>Show nebula background button</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QCheckBox" name="showFlipButtonsCheckbox">
-               <property name="toolTip">
-                <string>Toggle vertical and horizontal image flip buttons.</string>
-               </property>
-               <property name="text">
-                <string>Show flip buttons</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="autoEnableAtmosphereCheckBox">
-               <property name="toolTip">
-                <string>Auto-enabling of the atmosphere for bodies with atmosphere in location window</string>
-               </property>
-               <property name="text">
-                <string>Auto-enabling for the atmosphere</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QCheckBox" name="decimalDegreeCheckBox">
-               <property name="toolTip">
-                <string>Use decimal degrees for coordinates</string>
-               </property>
-               <property name="text">
-                <string>Use decimal degrees</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="nutationCheckBox">
-               <property name="toolTip">
-                <string>Nutation is a small wobble of Earth's axis, amounting to a few arcseconds.</string>
-               </property>
-               <property name="text">
-                <string>Include nutation</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QCheckBox" name="topocentricCheckBox">
-               <property name="toolTip">
-                <string>Activate to view as seen from surface of the planet (recommended). If switched off, display planetocentric view.</string>
-               </property>
-               <property name="text">
-                <string>Topocentric coordinates</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QCheckBox" name="azimuthFromSouthcheckBox">
-               <property name="toolTip">
-                <string>Activate this option to calculate azimuth from south towards west.</string>
-               </property>
-               <property name="text">
-                <string>Azimuth from South</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="0" colspan="2">
-              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
-               <property name="toolTip">
-                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
-               </property>
-               <property name="text">
-                <string>Auto zoom out returns to initial direction of view</string>
+               <property name="checkable">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
@@ -1272,6 +1252,33 @@
                </property>
                <property name="text">
                 <string>Auto select landscapes</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="diskViewportCheckbox">
+               <property name="toolTip">
+                <string>Mask out everything outside a central circle in the main view</string>
+               </property>
+               <property name="text">
+                <string>Disc viewport</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0" colspan="2">
+              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
+               <property name="toolTip">
+                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
+               </property>
+               <property name="text">
+                <string>Auto zoom out returns to initial direction of view</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="showBookmarksButtonCheckBox">
+               <property name="text">
+                <string>Show bookmarks button</string>
                </property>
               </widget>
              </item>
@@ -1767,7 +1774,7 @@
   <customwidget>
    <class>BarFrame</class>
    <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
+   <header location="global">Dialog.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
