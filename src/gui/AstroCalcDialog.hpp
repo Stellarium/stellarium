@@ -35,6 +35,7 @@
 #include "NebulaMgr.hpp"
 
 class Ui_astroCalcDialogForm;
+class QListWidgetItem;
 
 class AstroCalcDialog : public StelDialog
 {
@@ -77,6 +78,9 @@ public:
 	AstroCalcDialog(QObject* parent);
 	virtual ~AstroCalcDialog();
 
+	//! Notify that the application style changed
+	void styleChanged();
+
 	static QVector<Vec3d> EphemerisListJ2000;
 	static QVector<QString> EphemerisListDates;
 	static int DisplayedPositionIndex;
@@ -105,6 +109,8 @@ private slots:
 	void calculatePhenomena();
 	void selectCurrentPhenomen(const QModelIndex &modelIndex);
 	void savePhenomena();
+
+	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 
 private:
 	class StelCore* core;
