@@ -90,6 +90,10 @@ public:
     virtual void update(double deltaTime);
     virtual double getCallOrder(StelModuleActionName actionName) const;
     virtual bool configureGui(bool show);
+    //! Walk/Fly Navigation with Ctrl+Cursor and Ctrl+PgUp/Dn keys.
+    //! Pressing Ctrl-Alt: 5x, Ctrl-Shift: 10x speedup; Ctrl-Shift-Alt: 50x!
+    //! To allow fine control, zoom in.
+    //! If you release Ctrl key while pressing cursor key, movement will continue.
     virtual void handleKeys(QKeyEvent* e);
 
     //! Sends the progressReport() signal, which eventually updates the progress bar. Can be called from another thread.
@@ -276,6 +280,10 @@ private:
     bool flagEnabled;
     bool cleanedUp;
 
+    Vec3d movementKeyInput;
+
+    StelCore* core;
+    StelMovementMgr* mvMgr;
     StelCore::ProjectionType oldProjectionType;
 
     //screen messages (taken largely from AngleMeasure as of 2012-01-21)

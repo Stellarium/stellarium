@@ -60,15 +60,6 @@ public:
 	//! Loads the model into GL and sets the given scene to be the current one. Takes ownership of the given scene.
 	void setCurrentScene(S3DScene *scene);
 
-	//! Walk/Fly Navigation with Ctrl+Cursor and Ctrl+PgUp/Dn keys.
-	//! Pressing Ctrl-Alt: 5x, Ctrl-Shift: 10x speedup; Ctrl-Shift-Alt: 50x!
-	//! To allow fine control, zoom in.
-	//! If you release Ctrl key while pressing cursor key, movement will continue.
-	void handleKeys(QKeyEvent* e);
-
-	//! Update method, called by Scenery3dMgr.
-	//! Shifts observer position due to movement through the landscape.
-	void update(double deltaTime);
 	//! Draw observer grid coordinates as text.
 	void drawCoordinatesText();
 	//! Draw some text output. This can be filled as needed by development.
@@ -79,6 +70,8 @@ public:
 	//! Performs initialization that requires an valid OpenGL context
 	void init();
 
+	//! Returns the current scene
+	S3DScene* getCurrentScene() const { return currentScene; }
 	//! Gets the current scene's metadata
 	SceneInfo getCurrentSceneInfo() const;
 
@@ -158,6 +151,9 @@ public:
 	//! Gets the current observer eye height (vertical difference from feet to camera position).
 	double getEyeHeight() const;
 
+	//Debugging method, save the Frustum to be able to move away from it and analyze it
+	void saveFrusts();
+
 	enum ShadowCaster { None, Sun, Moon, Venus };
 
 	//! Returns the shader manager this instance uses
@@ -199,16 +195,14 @@ private:
 	unsigned int cubemapSize;            // configurable values, typically 512/1024/2048/4096
 	unsigned int shadowmapSize;
 
-	Vec3d moveVector;           // position change in scene coords
-	Vec3f movement;		// speed values for moving around the scenery
+	bool wasMovedInLastDrawCall;
+	Vec3d lastDrawnPosition;
 
 	StelCore* core;
-	StelMovementMgr* mvMgr;
 	LandscapeMgr* landscapeMgr;
 	StelProjectorP altAzProjector;
 
-	Vec3d mainViewDir;
-
+	// debug info
 	int drawnTriangles,drawnModels;
 	int materialSwitches, shaderSwitches;
 
@@ -353,8 +347,6 @@ private:
 	//! Finds the correct light source out of Sun, Moon, Venus, and returns ambient and directional light components.
 	Scenery3d::ShadowCaster calculateLightSource(float &ambientBrightness, float &diffuseBrightness, Vec3f &lightsourcePosition, float &emissiveFactor);
 
-	//Save the Frustum to be able to move away from it and analyze it
-	void saveFrusts();
 
 	//! Adjust the frustum to the loaded scene bounding box according to Zhang et al.
 	void adjustShadowFrustum(const Vec3d &viewPos, const Vec3d &viewDir, const Vec3d &viewUp, const float fov, const float aspect);

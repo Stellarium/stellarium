@@ -87,10 +87,8 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
       simpleShadows(false), fullCubemapShadows(false), cubemappingMode(S3DEnum::CM_TEXTURES), //set it to 6 textures as a safe default (Cubemap should work on ANGLE, but does not...)
       reinitCubemapping(true), reinitShadowmapping(true),
       loadCancel(false),
-      cubemapSize(1024),shadowmapSize(1024),
-      moveVector(0.0, 0.0, 0.0), movement(0.0f,0.0f,0.0f),
+      cubemapSize(1024),shadowmapSize(1024),wasMovedInLastDrawCall(false),
       core(NULL), landscapeMgr(NULL),
-      mainViewDir(1.0, 0.0, 0.0),
       drawnTriangles(0), drawnModels(0), materialSwitches(0), shaderSwitches(0),
       requiresCubemap(false), cubemappingUsedLastFrame(false),
       lazyDrawing(false), updateOnlyDominantOnMoving(true), updateSecondDominantOnMoving(true), needsMovementEndUpdate(false),
@@ -100,7 +98,7 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
       lightOrthoNear(0.1f), lightOrthoFar(1000.0f), parallaxScale(0.015f)
 {
 	#ifndef NDEBUG
-	qDebug()<<"Scenery3d constructor...";
+	qDebug(scenery3d)<<"Scenery3d constructor...";
 	#endif
 	//the arrays should all contain only zeroes
 	Q_ASSERT(cubeMapTex[0]==0);
@@ -121,7 +119,7 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
 	debugTextFont.setPixelSize(16);
 
 	#ifndef NDEBUG
-	qDebug()<<"Scenery3d constructor...done";
+	qDebug(scenery3d)<<"Scenery3d constructor...done";
 	#endif
 }
 
@@ -153,10 +151,10 @@ S3DScene* Scenery3d::loadScene(const SceneInfo &scene) const
 	//load model
 	StelOBJ modelOBJ;
 	QString modelFile = StelFileMgr::findFile( scene.fullPath+ "/" + scene.modelScenery);
-	qDebug()<<"[Scenery3d] Loading scene from "<<modelFile;
+	qDebug(scenery3d)<<"Loading scene from "<<modelFile;
 	if(!modelOBJ.load(modelFile, scene.vertexOrderEnum))
 	{
-	    qCritical()<<"[Scenery3d] Failed to load OBJ file.";
+	    qCritical(scenery3d)<<"Failed to load OBJ file.";
 	    return Q_NULLPTR;
 	}
 
@@ -180,10 +178,10 @@ S3DScene* Scenery3d::loadScene(const SceneInfo &scene) const
 
 		StelOBJ groundOBJ;
 		modelFile = StelFileMgr::findFile(scene.fullPath + "/" + scene.modelGround);
-		qDebug()<<"[Scenery3d] Loading ground from"<<modelFile;
+		qDebug(scenery3d)<<"Loading ground from"<<modelFile;
 		if(!groundOBJ.load(modelFile, scene.vertexOrderEnum))
 		{
-			qCritical()<<"[Scenery3d] Failed to load ground model";
+			qCritical(scenery3d)<<"Failed to load ground model";
 			return Q_NULLPTR;
 		}
 
@@ -213,79 +211,6 @@ void Scenery3d::setCurrentScene(S3DScene* scene)
 	invalidateCubemap();
 }
 
-void Scenery3d::handleKeys(QKeyEvent* e)
-{
-	//TODO FS maybe move this to Mgr, so that input is separate from rendering and scene management?
-
-	static const Qt::KeyboardModifier S3D_SPEEDBASE_MODIFIER = Qt::ShiftModifier;
-
-	//on OSX, there is a still-unfixed bug which prevents the command key (=Qt's Control key) to be used here
-	//see https://bugreports.qt.io/browse/QTBUG-36839
-	//we have to use the option/ALT key instead to activate walking around, and CMD is used as multiplier.
-#ifdef Q_OS_OSX
-	static const Qt::KeyboardModifier S3D_CTRL_MODIFIER = Qt::AltModifier;
-	static const Qt::KeyboardModifier S3D_SPEEDMUL_MODIFIER = Qt::ControlModifier;
-#else
-	static const Qt::KeyboardModifier S3D_CTRL_MODIFIER = Qt::ControlModifier;
-	static const Qt::KeyboardModifier S3D_SPEEDMUL_MODIFIER = Qt::AltModifier;
-#endif
-
-	if ((e->type() == QKeyEvent::KeyPress) && (e->modifiers() & S3D_CTRL_MODIFIER))
-	{
-		// Pressing CTRL+ALT: 5x, CTRL+SHIFT: 10x speedup; CTRL+SHIFT+ALT: 50x!
-		float speedup=((e->modifiers() & S3D_SPEEDBASE_MODIFIER)? 10.0f : 1.0f);
-		speedup *= ((e->modifiers() & S3D_SPEEDMUL_MODIFIER)? 5.0f : 1.0f);
-
-		switch (e->key())
-		{
-			case Qt::Key_PageUp:    movement[2] =  1.0f * speedup; e->accept(); break;
-			case Qt::Key_PageDown:  movement[2] = -1.0f * speedup; e->accept(); break;
-			case Qt::Key_Up:        movement[1] =  1.0f * speedup; e->accept(); break;
-			case Qt::Key_Down:      movement[1] = -1.0f * speedup; e->accept(); break;
-			case Qt::Key_Right:     movement[0] =  1.0f * speedup; e->accept(); break;
-			case Qt::Key_Left:      movement[0] = -1.0f * speedup; e->accept(); break;
-#ifdef QT_DEBUG
-			//leave this out on non-debug builds to reduce conflict chance
-			case Qt::Key_P:         saveFrusts(); e->accept(); break;
-#endif
-		}
-	}
-	// FS: No modifier here!? GZ: I want the lock feature. If this does not work for MacOS, it is not there, but only on that platform...
-#ifdef Q_OS_OSX
-	else if ((e->type() == QKeyEvent::KeyRelease) )
-#else
-	else if ((e->type() == QKeyEvent::KeyRelease) && (e->modifiers() & S3D_CTRL_MODIFIER))
-#endif
-	{
-		//if a movement key is released, stop moving in that direction
-		//we do not accept the event on MacOS to allow further handling the event in other modules. (Else the regular view motion stop does not work!)
-		switch (e->key())
-		{
-			case Qt::Key_PageUp:
-			case Qt::Key_PageDown:
-				movement[2] = 0.0f;
-#ifndef Q_OS_OSX
-				e->accept();
-#endif
-				break;
-			case Qt::Key_Up:
-			case Qt::Key_Down:
-				movement[1] = 0.0f;
-#ifndef Q_OS_OSX
-				e->accept();
-#endif
-				break;
-			case Qt::Key_Right:
-			case Qt::Key_Left:
-				movement[0] = 0.0f;
-#ifndef Q_OS_OSX
-				e->accept();
-#endif
-				break;
-		}
-	}
-}
-
 void Scenery3d::saveFrusts()
 {
 	fixShadowData = !fixShadowData;
@@ -296,116 +221,6 @@ void Scenery3d::saveFrusts()
 	{
 		if(fixShadowData) frustumArray[i].saveDrawingCorners();
 		else frustumArray[i].resetCorners();
-	}
-}
-
-void Scenery3d::update(double deltaTime)
-{
-	if (core && currentScene)
-	{
-		//View Direction
-		mainViewDir = mvMgr->getViewDirectionJ2000();
-		mainViewDir = core->j2000ToAltAz(mainViewDir);
-		double alt, az;
-		StelUtils::rectToSphe(&az, &alt, mainViewDir);
-
-		//if we were moving in the last update
-		bool wasMoving = moveVector.lengthSquared()>0.0;
-
-		//moveVector = Vec3d(( movement[0] * std::cos(az) + movement[1] * std::sin(az)),
-		//		( movement[0] * std::sin(az) - movement[1] * std::cos(az)),
-		//		movement[2]);
-		//Bring move into world-grid space
-		//currentScene.zRotateMatrix.transfo(moveVector);
-		// GZ DON'T!: Rotating by zRotateMatrix will make a case of convergence_angle=180 (i.e. misconfigured model) very silly (inverted!). -->Just swap x/y.
-		// moveVector.set(-moveVector.v[1], moveVector.v[0], moveVector.v[2]);
-
-		// Better yet: immediately make it right.
-		moveVector.set(   movement[1] * std::cos(az) + movement[0] * std::sin(az),
-				- movement[0] * std::cos(az) + movement[1] * std::sin(az),
-				  movement[2]);
-
-		//get current time
-		double curTime = core->getJD();
-
-		if(lazyDrawing)
-		{
-			needsMovementUpdate = false;
-
-			//check if cubemap requires redraw
-			if(qAbs(curTime-lastCubemapUpdate) > lazyInterval * StelCore::JD_SECOND || reinitCubemapping)
-			{
-				needsCubemapUpdate = true;
-				needsMovementEndUpdate = false;
-			}
-			else if (moveVector.lengthSquared() > 0.0 )
-			{
-				if(updateOnlyDominantOnMoving)
-				{
-					needsMovementUpdate = true;
-					needsMovementEndUpdate = true;
-					needsCubemapUpdate = false;
-				}
-				else
-				{
-					needsCubemapUpdate = true;
-					needsMovementEndUpdate = false;
-				}
-			}
-			else
-			{
-				if(wasMoving)
-					lastMovementEndRealTime = QDateTime::currentMSecsSinceEpoch();
-
-				if(needsMovementEndUpdate && (QDateTime::currentMSecsSinceEpoch() - lastMovementEndRealTime)  > 700)
-				{
-					//if the last movement was some time ago, update the whole cubemap
-					needsCubemapUpdate = true;
-					needsMovementEndUpdate = false;
-				}
-				else
-					needsCubemapUpdate = false;
-			}
-		}
-		else
-		{
-			needsCubemapUpdate = true;
-		}
-
-		//when zoomed in more than 5°, we slow down movement
-		moveVector *= deltaTime * 0.01 * qMax(5.0, mvMgr->getCurrentFov());
-
-
-		Vec2d curPos = currentScene->getViewer2DPosition();
-		curPos.v[0] += moveVector.v[0];
-		curPos.v[1] += moveVector.v[1];
-		double eye_height = currentScene->getEyeHeight();
-		eye_height += moveVector.v[2];
-		currentScene->setEyeHeight(eye_height);
-		currentScene->setViewerPositionOnHeightmap(curPos);
-
-		//find cubemap face this vector points at
-		//only consider horizontal plane (XY)
-		dominantFace = qAbs(mainViewDir.v[0])<qAbs(mainViewDir.v[1]);
-		secondDominantFace = !dominantFace;
-
-		//uncomment this to also consider up/down faces
-		/*
-	double max = qAbs(viewDir.v[dominantFace]);
-	if(qAbs(viewDir.v[2])>max)
-	{
-		secondDominantFace = dominantFace;
-		dominantFace = 2;
-	}
-	else if (qAbs(viewDir.v[2])>qAbs(viewDir.v[secondDominantFace]))
-	{
-		secondDominantFace = 2;
-	}
-	*/
-
-		//check sign
-		dominantFace = dominantFace*2 + (mainViewDir.v[dominantFace]<0.0);
-		secondDominantFace = secondDominantFace*2 + (mainViewDir.v[secondDominantFace]<0.0);
 	}
 }
 
@@ -1425,7 +1240,7 @@ void Scenery3d::generateCubeMap()
 			float fov = altAzProjector->getFov();
 			float aspect = (float)altAzProjector->getViewportWidth() / (float)altAzProjector->getViewportHeight();
 
-			adjustShadowFrustum(currentScene->getEyePosition(),mainViewDir,Vec3d(0.,0.,1.),fov,aspect);
+			adjustShadowFrustum(currentScene->getEyePosition(),currentScene->getViewDirection(),Vec3d(0.,0.,1.),fov,aspect);
 			if(!renderShadowMaps())
 				return; //shadow map rendering failed, do an early abort
 		}
@@ -1576,7 +1391,7 @@ void Scenery3d::drawDirect() // for Perspective Projection only!
 	    calculateShadowCaster();
 
 	    //no need to extract view information, use the direction from stellarium
-	    adjustShadowFrustum(eyePos,mainViewDir,Vec3d(0.0,0.0,1.0),fov,aspect);
+	    adjustShadowFrustum(eyePos,currentScene->getViewDirection(),Vec3d(0.0,0.0,1.0),fov,aspect);
 
 	    //this call modifies projection + mv matrices, so we have to set them afterwards
 	    if(!renderShadowMaps())
@@ -1784,7 +1599,7 @@ void Scenery3d::drawDebug()
 		}
 		else
 		{
-			qWarning()<<"[Scenery3d] Cannot use debug shader, probably on OpenGL ES context";
+			qWarning(scenery3d)<<"Cannot use debug shader, probably on OpenGL ES context";
 		}
 	}
 #endif
@@ -1860,6 +1675,7 @@ void Scenery3d::drawDebug()
 	str = "View Dir, dominant faces";
 	painter.drawText(screen_x, screen_y, str);
 	screen_y -= 15.0f;
+	Vec3d mainViewDir = currentScene->getViewDirection();
 	str = QString("%1 %2 %3, %4/%5").arg(mainViewDir.v[0], 7, 'f', 2).arg(mainViewDir.v[1], 7, 'f', 2).arg(mainViewDir.v[2], 7, 'f', 2).arg(dominantFace).arg(secondDominantFace);
 	painter.drawText(screen_x, screen_y, str);
 	screen_y -= 15.0f;
@@ -1891,8 +1707,8 @@ void Scenery3d::determineFeatureSupport()
 	if ( !ctx->functions()->hasOpenGLFeature(QOpenGLFunctions::Framebuffers) ) {
 
 		//TODO FS: it seems like the current stellarium requires a working framebuffer extension anyway, so skip this check?
-		qWarning() << "[Scenery3d] Your hardware does not support EXT_framebuffer_object.";
-		qWarning() << "[Scenery3d] Shadow mapping disabled, and display limited to perspective projection.";
+		qWarning(scenery3d) << "Your hardware does not support EXT_framebuffer_object.";
+		qWarning(scenery3d) << "Shadow mapping disabled, and display limited to perspective projection.";
 
 		setCubemapSize(0);
 		setShadowmapSize(0);
@@ -1905,12 +1721,12 @@ void Scenery3d::determineFeatureSupport()
 		glGetIntegerv(GL_MAX_VIEWPORT_DIMS, viewportSize);
 		glGetIntegerv(GL_MAX_RENDERBUFFER_SIZE, &rbSize);
 
-		qDebug()<<"[Scenery3d] Maximum texture size:"<<texSize;
-		qDebug()<<"[Scenery3d] Maximum viewport dims:"<<viewportSize[0]<<viewportSize[1];
-		qDebug()<<"[Scenery3d] Maximum renderbuffer size:"<<rbSize;
+		qDebug(scenery3d)<<"Maximum texture size:"<<texSize;
+		qDebug(scenery3d)<<"Maximum viewport dims:"<<viewportSize[0]<<viewportSize[1];
+		qDebug(scenery3d)<<"Maximum renderbuffer size:"<<rbSize;
 
 		maximumFramebufferSize = qMin(texSize,qMin(rbSize,qMin(viewportSize[0],viewportSize[1])));
-		qDebug()<<"[Scenery3d] Maximum framebuffer size:"<<maximumFramebufferSize;
+		qDebug(scenery3d)<<"Maximum framebuffer size:"<<maximumFramebufferSize;
 	}
 
 	QString renderer(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
@@ -1920,21 +1736,21 @@ void Scenery3d::determineFeatureSupport()
 	if(QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Geometry,ctx)) //this checks if version >= 3.2
 	{
 		this->supportsGSCubemapping = true;
-		qDebug()<<"[Scenery3d] Geometry shader supported";
+		qDebug(scenery3d)<<"Geometry shader supported";
 	}
 	else
-		qDebug()<<"[Scenery3d] Geometry shader not supported on this hardware";
+		qDebug(scenery3d)<<"Geometry shader not supported on this hardware";
 
 	//Query how many texture units we have at disposal in a fragment shader
 	//we currently need 8 in the worst case: diffuse, emissive, bump, height + 4x shadowmap
 	GLint texUnits,combUnits;
 	glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &texUnits);
-	qDebug() << "[Scenery3d] GL_MAX_TEXTURE_IMAGE_UNITS:" << texUnits;
+	qDebug(scenery3d) << "GL_MAX_TEXTURE_IMAGE_UNITS:" << texUnits;
 	glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &combUnits);
-	qDebug() << "[Scenery3d] GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:" << combUnits;
+	qDebug(scenery3d) << "GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:" << combUnits;
 	if(texUnits < 8 || combUnits < 8)
 	{
-		qWarning()<<"Insufficient texture units available for all effects, should have at least 8!";
+		qWarning(scenery3d)<<"Insufficient texture units available for all effects, should have at least 8!";
 	}
 
 	if(shaderParameters.openglES)
@@ -1944,12 +1760,12 @@ void Scenery3d::determineFeatureSupport()
 			ctx->hasExtension("GL_ANGLE_depth_texture"))
 		{
 			supportsShadows = true;
-			qDebug()<<"[Scenery3d] Shadows are supported";
+			qDebug(scenery3d)<<"Shadows are supported";
 		}
 		else
 		{
 			supportsShadows = false;
-			qDebug()<<"[Scenery3d] Shadows are not supported on this hardware";
+			qDebug(scenery3d)<<"Shadows are not supported on this hardware";
 		}
 		//shadow filtering is completely disabled for now on ES
 		supportsShadowFiltering = false;
@@ -1988,7 +1804,7 @@ void Scenery3d::init()
 	{
 #ifdef GL_TEXTURE_CUBE_MAP_SEAMLESS
 		glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
-		qDebug()<<"[Scenery3d] Seamless cubemap filtering enabled";
+		qDebug(scenery3d)<<"Seamless cubemap filtering enabled";
 #endif
 	}
 
@@ -1997,7 +1813,6 @@ void Scenery3d::init()
 
 	//finally, set core to enable update().
 	this->core=StelApp::getInstance().getCore();
-	this->mvMgr= GETSTELMODULE(StelMovementMgr);
 	//init planets
 	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	sun = ssystem->getSun();
@@ -2068,7 +1883,7 @@ bool Scenery3d::initCubemapping()
 	GET_GLERROR()
 
 	bool ret = false;
-	qDebug()<<"[Scenery3d] Initializing cubemap...";
+	qDebug(scenery3d)<<"Initializing cubemap...";
 
 	//remove old cubemap objects if they exist
 	deleteCubemapping();
@@ -2077,7 +1892,7 @@ bool Scenery3d::initCubemapping()
 
 	if(cubemapSize<=0)
 	{
-		qWarning()<<"[Scenery3d] Cubemapping not supported or disabled";
+		qWarning(scenery3d)<<"Cubemapping not supported or disabled";
 		parent->showMessage(q_("Your hardware does not support cubemapping, please switch to 'Perspective' projection!"));
 		return false;
 	}
@@ -2088,7 +1903,7 @@ bool Scenery3d::initCubemapping()
 	if( !isGeometryShaderCubemapSupported() && cubemappingMode == S3DEnum::CM_CUBEMAP_GSACCEL)
 	{
 		parent->showMessage(q_("Geometry shader is not supported. Falling back to '6 Textures' mode."));
-		qWarning()<<"[Scenery3d] GS not supported, fallback to '6 Textures'";
+		qWarning(scenery3d)<<"GS not supported, fallback to '6 Textures'";
 		cubemappingMode = S3DEnum::CM_TEXTURES;
 	}
 
@@ -2098,7 +1913,7 @@ bool Scenery3d::initCubemapping()
 	{
 		//Fall back to "6 Textures" mode
 		parent->showMessage(q_("Falling back to '6 Textures' because of ANGLE bug"));
-		qWarning()<<"[Scenery3d] On ANGLE, fallback to '6 Textures'";
+		qWarning(scenery3d)<<"On ANGLE, fallback to '6 Textures'";
 		cubemappingMode = S3DEnum::CM_TEXTURES;
 	}
 
@@ -2196,7 +2011,7 @@ bool Scenery3d::initCubemapping()
 		//gen renderbuffer for single-face depth, reused for all faces to save some memory
 		int val = 0;
 		glGetIntegerv(GL_MAX_RENDERBUFFER_SIZE,&val);
-		qDebug()<<"[Scenery3d] Max Renderbuffer size"<<val;
+		qDebug(scenery3d)<<"Max Renderbuffer size"<<val;
 
 		glGenRenderbuffers(1,&cubeRB);
 		glBindRenderbuffer(GL_RENDERBUFFER,cubeRB);
@@ -2207,16 +2022,16 @@ bool Scenery3d::initCubemapping()
 			case GL_NO_ERROR:
 					break;
 			case GL_INVALID_ENUM:
-					qWarning()<<"Scenery3D: RB: invalid depth format?";
+					qWarning(scenery3d)<<"RB: invalid depth format?";
 					break;
 			case GL_INVALID_VALUE:
-					qWarning()<<"Scenery3D: RB: invalid renderbuffer size";
+					qWarning(scenery3d)<<"RB: invalid renderbuffer size";
 					break;
 			case GL_OUT_OF_MEMORY:
-					qWarning()<<"Scenery3D: RB: out of memory. Cannot create renderbuffer.";
+					qWarning(scenery3d)<<"RB: out of memory. Cannot create renderbuffer.";
 					break;
 				default:
-				qWarning()<<"Scenery3D: RB: unexpected OpenGL error:" << err;
+				qWarning(scenery3d)<<"RB: unexpected OpenGL error:" << err;
 		}
 
 		glBindRenderbuffer(GL_RENDERBUFFER, 0);
@@ -2244,7 +2059,7 @@ bool Scenery3d::initCubemapping()
 		//check validity
 		if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		{
-			qWarning() << "[Scenery3D] glCheckFramebufferStatus failed, probably can't use cube map";
+			qWarning(scenery3d) << "glCheckFramebufferStatus failed, probably can't use cube map";
 		}
 		else
 			ret = true;
@@ -2275,7 +2090,7 @@ bool Scenery3d::initCubemapping()
 
 			if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 			{
-				qWarning() << "[Scenery3D] glCheckFramebufferStatus failed, probably can't use cube map";
+				qWarning(scenery3d) << "glCheckFramebufferStatus failed, probably can't use cube map";
 				ret = false;
 				break;
 			}
@@ -2426,7 +2241,7 @@ bool Scenery3d::initCubemapping()
 	transformedCubeVertices.resize(cubeVertices.size());
 	cubeIndexCount = cubeIndices.size();
 
-	qDebug()<<"[Scenery3d] Using cube with"<<cubeVertices.size()<<"vertices and" <<cubeIndexCount<<"indices";
+	qDebug(scenery3d)<<"Using cube with"<<cubeVertices.size()<<"vertices and" <<cubeIndexCount<<"indices";
 
 	//create the other cube faces by rotating the front face
 #define PLANE(_PLANEID_, _MAT_) for(int i=_PLANEID_ * vtxCount;i < (_PLANEID_ + 1)*vtxCount;i++){ _MAT_.transfo(cubeVertices[i]); }\
@@ -2455,7 +2270,7 @@ bool Scenery3d::initCubemapping()
 	//reset cubemap timer to make sure it is rerendered immediately after re-init
 	invalidateCubemap();
 
-	qDebug()<<"[Scenery3d] Initializing cubemap...done!";
+	qDebug(scenery3d)<<"Initializing cubemap...done!";
 
 	if(!ret)
 	{
@@ -2480,7 +2295,7 @@ void Scenery3d::deleteShadowmapping()
 		frustumArray.clear();
 		focusBodies.clear();
 
-		qDebug()<<"[Scenery3d] Shadowmapping objects cleaned up";
+		qDebug(scenery3d)<<"Shadowmapping objects cleaned up";
 	}
 }
 
@@ -2502,7 +2317,7 @@ bool Scenery3d::initShadowmapping()
 
 	if(!areShadowsSupported())
 	{
-		qWarning()<<"[Scenery3d] Tried to initialize shadows without shadow support!";
+		qWarning(scenery3d)<<"Tried to initialize shadows without shadow support!";
 		return false;
 	}
 
@@ -2595,7 +2410,7 @@ bool Scenery3d::initShadowmapping()
 
 			if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 			{
-				qWarning() << "[Scenery3D] glCheckFramebufferStatus failed, can't use FBO";
+				qWarning(scenery3d) << "glCheckFramebufferStatus failed, can't use FBO";
 				break;
 			}
 			else if (i==shaderParameters.frustumSplits-1)
@@ -2608,11 +2423,11 @@ bool Scenery3d::initShadowmapping()
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glActiveTexture(GL_TEXTURE0);
 
-		qDebug()<<"[Scenery3D] shadowmapping initialized";
+		qDebug(scenery3d)<<"shadowmapping initialized";
 	}
 	else
 	{
-		qWarning()<<"[Scenery3D] shadowmapping not supported or disabled";
+		qWarning(scenery3d)<<"shadowmapping not supported or disabled";
 	}
 
 	if(!valid)
@@ -2650,6 +2465,84 @@ void Scenery3d::draw(StelCore* core)
 				return;
 			reinitCubemapping = false;
 		}
+
+		if(lazyDrawing)
+		{
+			//if the viewer was moved after the last draw call
+			bool wasMoved = lastDrawnPosition != currentScene->getEyePosition();
+
+			//get current time
+			double curTime = core->getJD();
+			qint64 curMS = QDateTime::currentMSecsSinceEpoch();
+
+			needsMovementUpdate = false;
+
+			//check if cubemap requires redraw
+			if(qAbs(curTime-lastCubemapUpdate) > lazyInterval * StelCore::JD_SECOND || reinitCubemapping)
+			{
+				needsCubemapUpdate = true;
+				needsMovementEndUpdate = false;
+			}
+			else if (wasMoved) //we have been moved currently
+			{
+				if(updateOnlyDominantOnMoving)
+				{
+					needsMovementUpdate = true;
+					needsMovementEndUpdate = true;
+					needsCubemapUpdate = false;
+				}
+				else
+				{
+					needsCubemapUpdate = true;
+					needsMovementEndUpdate = false;
+				}
+			}
+			else
+			{
+				if(wasMovedInLastDrawCall) // we have been moved in the last draw call, but no longer
+					lastMovementEndRealTime = curMS;
+
+				if(needsMovementEndUpdate && (curMS - lastMovementEndRealTime)  > 700)
+				{
+					//if the last movement was some time ago, update the whole cubemap
+					needsCubemapUpdate = true;
+					needsMovementEndUpdate = false;
+				}
+				else
+					needsCubemapUpdate = false;
+			}
+
+			wasMovedInLastDrawCall = wasMoved;
+		}
+		else
+		{
+			needsCubemapUpdate = true;
+		}
+
+
+		const Vec3d& mainViewDir = currentScene->getViewDirection();
+		//find cubemap face this vector points at
+		//only consider horizontal plane (XY)
+		dominantFace = qAbs(mainViewDir.v[0])<qAbs(mainViewDir.v[1]);
+		secondDominantFace = !dominantFace;
+
+		//uncomment this to also consider up/down faces
+		/*
+		double max = qAbs(viewDir.v[dominantFace]);
+		if(qAbs(viewDir.v[2])>max)
+		{
+			secondDominantFace = dominantFace;
+			dominantFace = 2;
+		}
+		else if (qAbs(viewDir.v[2])>qAbs(viewDir.v[secondDominantFace]))
+		{
+			secondDominantFace = 2;
+		}
+		*/
+
+		//check sign
+		dominantFace = dominantFace*2 + (mainViewDir.v[dominantFace]<0.0);
+		secondDominantFace = secondDominantFace*2 + (mainViewDir.v[secondDominantFace]<0.0);
 	}
 	else
 	{
@@ -2693,5 +2586,6 @@ void Scenery3d::draw(StelCore* core)
 		drawDebug();
 	}
 
+	lastDrawnPosition = currentScene->getEyePosition();
 	cubemappingUsedLastFrame = requiresCubemap;
 }
