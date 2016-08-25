@@ -82,6 +82,12 @@ public:
 	const Material& getMaterial(int index) const { return materials.at(index); }
 	const ObjectList& getObjects() const { return objects; }
 
+	//! Moves the viewer according to the given move vector
+	//!  (which is specified relative to the view direction and current position)
+	//! The 3rd component of the vector specifies the eye height change.
+	//! The foot height is set to the heightmap position.
+	void moveViewer(const Vec3d& moveView);
+
 	//! Sets the viewer (foot) position
 	void setViewerPosition(const Vec3d& pos);
 	//! Sets the viewer foot position on the given x/y point on the heightmap
@@ -96,6 +102,8 @@ public:
 	inline void setEyeHeight(double height) { eye_height = height; recalcEyePos();}
 	inline const AABBox& getSceneAABB() const { return sceneAABB; }
 	float getGroundHeightAtViewer() const;
+	inline void setViewDirection(const Vec3d& viewDir) { viewDirection = viewDir; }
+	inline const Vec3d& getViewDirection() const { return viewDirection; }
 
 	//! Makes the scene ready for GL rendering. Needs a valid GL context
 	bool glLoad();
@@ -105,7 +113,7 @@ public:
 	inline void glDraw(int offset, int count) const { glArray.draw(offset,count); }
 
 private:
-	void recalcEyePos() { eyePosition = position; eyePosition[2]+=eye_height; }
+	inline void recalcEyePos() { eyePosition = position; eyePosition[2]+=eye_height; }
 	MaterialList materials;
 	ObjectList objects;
 
@@ -114,12 +122,14 @@ private:
 
 	AABBox sceneAABB;
 
+	// current view direction vector
+	Vec3d viewDirection;
 	// current foot position in model
 	Vec3d position;
-	// current eye position in model
-	Vec3d eyePosition;
 	// current eye height (relative to foot position)
 	double eye_height;
+	// current eye position in model (stored to avoid repeated re-calculations)
+	Vec3d eyePosition;
 
 	//the model data is only retained before loaded into GL
 	StelOBJ modelData;

@@ -104,19 +104,92 @@ double Scenery3dMgr::getCallOrder(StelModuleActionName actionName) const
 
 void Scenery3dMgr::handleKeys(QKeyEvent* e)
 {
-	if (flagEnabled)
+	if (!flagEnabled)
+		return;
+
+	static const Qt::KeyboardModifier S3D_SPEEDBASE_MODIFIER = Qt::ShiftModifier;
+
+	//on OSX, there is a still-unfixed bug which prevents the command key (=Qt's Control key) to be used here
+	//see https://bugreports.qt.io/browse/QTBUG-36839
+	//we have to use the option/ALT key instead to activate walking around, and CMD is used as multiplier.
+#ifdef Q_OS_OSX
+	static const Qt::KeyboardModifier S3D_CTRL_MODIFIER = Qt::AltModifier;
+	static const Qt::KeyboardModifier S3D_SPEEDMUL_MODIFIER = Qt::ControlModifier;
+#else
+	static const Qt::KeyboardModifier S3D_CTRL_MODIFIER = Qt::ControlModifier;
+	static const Qt::KeyboardModifier S3D_SPEEDMUL_MODIFIER = Qt::AltModifier;
+#endif
+
+	if ((e->type() == QKeyEvent::KeyPress) && (e->modifiers() & S3D_CTRL_MODIFIER))
 	{
-		//pass event on to scenery3d obj
-		scenery3d->handleKeys(e);
+		// Pressing CTRL+ALT: 5x, CTRL+SHIFT: 10x speedup; CTRL+SHIFT+ALT: 50x!
+		float speedup=((e->modifiers() & S3D_SPEEDBASE_MODIFIER)? 10.0f : 1.0f);
+		speedup *= ((e->modifiers() & S3D_SPEEDMUL_MODIFIER)? 5.0f : 1.0f);
+
+		switch (e->key())
+		{
+			case Qt::Key_PageUp:    movementKeyInput[2] =  1.0f * speedup; e->accept(); break;
+			case Qt::Key_PageDown:  movementKeyInput[2] = -1.0f * speedup; e->accept(); break;
+			case Qt::Key_Up:        movementKeyInput[1] =  1.0f * speedup; e->accept(); break;
+			case Qt::Key_Down:      movementKeyInput[1] = -1.0f * speedup; e->accept(); break;
+			case Qt::Key_Right:     movementKeyInput[0] =  1.0f * speedup; e->accept(); break;
+			case Qt::Key_Left:      movementKeyInput[0] = -1.0f * speedup; e->accept(); break;
+#ifdef QT_DEBUG
+				//leave this out on non-debug builds to reduce conflict chance
+			case Qt::Key_P:         scenery3d->saveFrusts(); e->accept(); break;
+#endif
+		}
+	}
+	// FS: No modifier here!? GZ: I want the lock feature. If this does not work for MacOS, it is not there, but only on that platform...
+#ifdef Q_OS_OSX
+	else if ((e->type() == QKeyEvent::KeyRelease) )
+#else
+	else if ((e->type() == QKeyEvent::KeyRelease) && (e->modifiers() & S3D_CTRL_MODIFIER))
+#endif
+	{
+		//if a movement key is released, stop moving in that direction
+		//we do not accept the event on MacOS to allow further handling the event in other modules. (Else the regular view motion stop does not work!)
+		switch (e->key())
+		{
+			case Qt::Key_PageUp:
+			case Qt::Key_PageDown:
+				movementKeyInput[2] = 0.0f;
+#ifndef Q_OS_OSX
+				e->accept();
+#endif
+				break;
+			case Qt::Key_Up:
+			case Qt::Key_Down:
+				movementKeyInput[1] = 0.0f;
+#ifndef Q_OS_OSX
+				e->accept();
+#endif
+				break;
+			case Qt::Key_Right:
+			case Qt::Key_Left:
+				movementKeyInput[0] = 0.0f;
+#ifndef Q_OS_OSX
+				e->accept();
+#endif
+				break;
+		}
 	}
 }
 
 
 void Scenery3dMgr::update(double deltaTime)
 {
-	if (flagEnabled)
+	S3DScene* curScene = scenery3d->getCurrentScene();
+	if (flagEnabled && curScene)
 	{
-		scenery3d->update(deltaTime);
+		//update view direction
+		Vec3d mainViewDir = mvMgr->getViewDirectionJ2000();
+		mainViewDir = core->j2000ToAltAz(mainViewDir, StelCore::RefractionOff);
+		curScene->setViewDirection(mainViewDir);
+
+		//perform movement
+		//when zoomed in more than 5°, we slow down movement
+		curScene->moveViewer(movementKeyInput * deltaTime * 0.01 * qMax(5.0, mvMgr->getCurrentFov()));
 	}
 
 	messageFader.update((int)(deltaTime*1000));
@@ -145,6 +218,9 @@ void Scenery3dMgr::draw(StelCore* core)
 void Scenery3dMgr::init()
 {
 	qDebug() << "Scenery3d plugin - press KGA button to toggle 3D scenery, KGA tool button for settings";
+
+	core = StelApp::getInstance().getCore();
+	mvMgr = GETSTELMODULE(StelMovementMgr);
 
 	//Initialize the renderer - this also finds out what features are supported
 	qDebug() << "[Scenery3dMgr] Initializing Scenery3d object...";
@@ -389,13 +465,12 @@ void Scenery3dMgr::loadSceneCompleted()
 	if (currentLoadScene.hasLookAtFOV())
 	{
 		qDebug() << "[Scenery3dMgr] Setting orientation";
-		StelMovementMgr* mm=StelApp::getInstance().getCore()->getMovementMgr();
 		Vec3f lookat=currentLoadScene.lookAt_fov;
 		// This vector is (az_deg, alt_deg, fov_deg)
 		Vec3d v;
 		StelUtils::spheToRect(lookat[0]*M_PI/180.0, lookat[1]*M_PI/180.0, v);
-		mm->setViewDirectionJ2000(StelApp::getInstance().getCore()->altAzToJ2000(v, StelCore::RefractionOff));
-		mm->zoomTo(lookat[2]);
+		mvMgr->setViewDirectionJ2000(StelApp::getInstance().getCore()->altAzToJ2000(v, StelCore::RefractionOff));
+		mvMgr->zoomTo(lookat[2]);
 	} else qDebug() << "[Scenery3dMgr] No orientation given in scenery3d.ini";
 
 
@@ -861,12 +936,11 @@ void Scenery3dMgr::setView(const StoredView &view, const bool setDate)
 	}
 
 	//update view vector
-	StelMovementMgr* mm=StelApp::getInstance().getCore()->getMovementMgr();
 	// This vector is (az_deg, alt_deg, fov_deg)
 	Vec3d v;
 	StelUtils::spheToRect((180.0-view.view_fov[0])*M_PI/180.0, view.view_fov[1]*M_PI/180.0, v);
-	mm->setViewDirectionJ2000(StelApp::getInstance().getCore()->altAzToJ2000(v, StelCore::RefractionOff));
-	mm->zoomTo(view.view_fov[2]);
+	mvMgr->setViewDirectionJ2000(StelApp::getInstance().getCore()->altAzToJ2000(v, StelCore::RefractionOff));
+	mvMgr->zoomTo(view.view_fov[2]);
 }
 
 StoredView Scenery3dMgr::getCurrentView()
@@ -874,10 +948,9 @@ StoredView Scenery3dMgr::getCurrentView()
 	StoredView view;
 	view.isGlobal = false;
 	StelCore* core = StelApp::getInstance().getCore();
-	StelMovementMgr* mm = core->getMovementMgr();
 
 	//get view vec
-	Vec3d vd = mm->getViewDirectionJ2000();
+	Vec3d vd = mvMgr->getViewDirectionJ2000();
 	//convert to alt/az format
 	vd = core->j2000ToAltAz(vd, StelCore::RefractionOff);
 	//convert to spherical angles
@@ -888,7 +961,7 @@ StoredView Scenery3dMgr::getCurrentView()
 	// we must patch azimuth
 	view.view_fov[0]=180.0-view.view_fov[0];
 	//3rd comp is fov
-	view.view_fov[2] = mm->getAimFov();
+	view.view_fov[2] = mvMgr->getAimFov();
 
 	//get current grid pos + eye height
 	Vec3d pos = scenery3d->getCurrentGridPosition();
