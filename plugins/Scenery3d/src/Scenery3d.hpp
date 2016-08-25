@@ -39,41 +39,25 @@
 #include <QMatrix4x4>
 
 //predeclarations
-class QOpenGLFramebufferObject;
-class Scenery3dMgr;
-class StelMovementMgr;
 class LandscapeMgr;
+class QOpenGLFramebufferObject;
 class S3DScene;
 
 Q_DECLARE_LOGGING_CATEGORY(scenery3d)
 
-//! Representation of a complete 3D scenery
-class Scenery3d
+//! Scenery3d renderer class
+class Scenery3d : public QObject
 {
+	Q_OBJECT
 public:
 	//! Initializes an empty Scenery3d object.
-	Scenery3d(Scenery3dMgr *parent);
+	Scenery3d(QObject* parent = NULL);
 	virtual ~Scenery3d();
 
-	//! Loads the specified scene
-	S3DScene *loadScene(const SceneInfo& scene) const;
-	//! Loads the model into GL and sets the given scene to be the current one. Takes ownership of the given scene.
-	void setCurrentScene(S3DScene *scene);
-
-	//! Draw observer grid coordinates as text.
-	void drawCoordinatesText();
-	//! Draw some text output. This can be filled as needed by development.
-	void drawDebug();
-
 	//! Draw scenery, called by Scenery3dMgr.
-	void draw(StelCore* core);
+	void draw(StelCore* core, S3DScene &scene);
 	//! Performs initialization that requires an valid OpenGL context
 	void init();
-
-	//! Returns the current scene
-	S3DScene* getCurrentScene() const { return currentScene; }
-	//! Gets the current scene's metadata
-	SceneInfo getCurrentSceneInfo() const;
 
 	bool getDebugEnabled() const { return debugEnabled; }
 	void setDebugEnabled(bool debugEnabled) { this->debugEnabled = debugEnabled; }
@@ -138,40 +122,29 @@ public:
 	float getTorchRange() const { return torchRange; }
 	void setTorchRange(float range) { torchRange = range; invalidateCubemap(); }
 
-	void setLoadCancel(bool val) { loadCancel = val; }
-
-	//! Sets the observer position to the specified grid coordinates.
-	//! The height is assumed to be at the feet, so make sure to set the eye height with setEyeHeight before, if necessary.
-	void setGridPosition(Vec3d pos);
-	//! Gets the current position on the scene's grid (height at feet)
-	Vec3d getCurrentGridPosition() const;
-
-	//! Sets the observer eye height.
-	void setEyeHeight(const float eyeheight);
-	//! Gets the current observer eye height (vertical difference from feet to camera position).
-	double getEyeHeight() const;
-
 	//Debugging method, save the Frustum to be able to move away from it and analyze it
 	void saveFrusts();
 
 	enum ShadowCaster { None, Sun, Moon, Venus };
 
 	//! Returns the shader manager this instance uses
-	ShaderMgr& getShaderManager()    {	    return shaderManager;    }
+	ShaderMgr& getShaderManager() { return shaderManager; }
 
 	//these are some properties that determine the features supported in the current GL context
 	//available after init() is called
-	bool isGeometryShaderCubemapSupported() { return supportsGSCubemapping; }
-	bool areShadowsSupported() { return supportsShadows; }
-	bool isShadowFilteringSupported() { return supportsShadowFiltering; }
-	bool isANGLEContext() { return isANGLE; }
-	unsigned int getMaximumFramebufferSize() { return maximumFramebufferSize; }
+	bool isGeometryShaderCubemapSupported() const { return supportsGSCubemapping; }
+	bool areShadowsSupported() const { return supportsShadows; }
+	bool isShadowFilteringSupported() const { return supportsShadowFiltering; }
+	bool isANGLEContext() const { return isANGLE; }
+	unsigned int getMaximumFramebufferSize() const { return maximumFramebufferSize; }
+signals:
+	void message(const QString& msg) const;
 
 private:
-	Scenery3dMgr* parent;
-	S3DScene* currentScene;
 	ShaderMgr shaderManager;
 	PlanetP sun,moon,venus;
+	// a pointer to the scene currently being drawn. only valid during draw() calls
+	S3DScene* currentScene;
 
 	bool supportsGSCubemapping; //if the GL context supports geometry shader cubemapping
 	bool supportsShadows; //if shadows are supported
@@ -189,8 +162,6 @@ private:
 	bool fullCubemapShadows;
 	S3DEnum::CubemappingMode cubemappingMode;
 	bool reinitCubemapping,reinitShadowmapping;
-
-	bool loadCancel; //true if loading process should be canceled
 
 	unsigned int cubemapSize;            // configurable values, typically 512/1024/2048/4096
 	unsigned int shadowmapSize;
@@ -330,6 +301,10 @@ private:
 	//! If shading is true, a suitable shader for each material is selected and initialized. Submits 1 draw call for each StelModel.
 	//! @return false on shader errors
 	bool drawArrays(bool shading=true, bool blendAlphaAdditive=false);
+	//! Draw observer grid coordinates as text.
+	void drawCoordinatesText();
+	//! Draw some text output. This can be filled as needed by development.
+	void drawDebug();
 
 
 	// --- shading related stuff ---
@@ -358,6 +333,8 @@ private:
 	void computeCropMatrix(QMatrix4x4& cropMatrix, QVector4D &orthoScale, Polyhedron &focusBody, const QMatrix4x4 &lightProj, const QMatrix4x4 &lightMVP);
 	//Computes the light projection values
 	void computeOrthoProjVals(const Vec3f shadowDir, float &orthoExtent, float &orthoNear, float &orthoFar);
+
+	void rendererMessage(const QString& msg) const;
 };
 
 #endif

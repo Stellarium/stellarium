@@ -77,7 +77,7 @@ void S3DScene::Material::calculateTraits()
 }
 
 S3DScene::S3DScene(const SceneInfo &info)
-	: info(info),
+	: glReady(false), info(info),
 	  viewDirection(1.0,0.0,0.0), position(0.0,0.0,0.0), eye_height(1.65), eyePosition(0.0,0.0,1.65)
 {
 	//setup main load transform matrix
@@ -89,7 +89,7 @@ void S3DScene::setModel(const StelOBJ &model)
 	modelData = model;
 	//transform the model
 	modelData.transform(zRot2Grid);
-	sceneAABB = model.getAABBox();
+	sceneAABB = modelData.getAABBox();
 
 	//copy materials
 	const StelOBJ::MaterialList& objMats = modelData.getMaterialList();
@@ -161,13 +161,11 @@ void S3DScene::setGround(const StelOBJ &ground)
 		pos.set(trans.x(),trans.y(),trans.z());
 	}
 
+	heightmap.setMeshData(ground.getIndexList(), groundPositionList);
 	if(info.groundNullHeightFromModel)
 	{
 		info.groundNullHeight = ground.getAABBox().min[2];
 	}
-
-	heightmap.setNullHeight(info.groundNullHeight);
-	heightmap.setMeshData(ground.getIndexList(), groundPositionList);
 }
 
 float S3DScene::getGroundHeightAtViewer() const
@@ -175,10 +173,35 @@ float S3DScene::getGroundHeightAtViewer() const
 	return heightmap.getHeight(position.v[0],position.v[1]);
 }
 
+Vec3d S3DScene::getGridPosition() const
+{
+	Vec3d pos = getViewerPosition();
+	// this is the observer position (camera eye position) in model-grid coordinates, relative to the origin
+	pos=info.zRotateMatrix.inverse()* pos;
+	// this is the observer position (camera eye position) in grid coordinates, e.g. Gauss-Krueger or UTM.
+	pos+= info.modelWorldOffset;
+
+	return pos;
+}
+
+void S3DScene::setGridPosition(const Vec3d &gridPos)
+{
+	Vec3d pos = gridPos;
+	//this is basically the same as getCurrentGridPosition(), but in reverse
+	pos-=info.modelWorldOffset;
+
+	//calc opengl position
+	setViewerPosition(info.zRotateMatrix * pos);
+}
+
 bool S3DScene::glLoad()
 {
 	bool ok = glArray.load(&modelData);
 	modelData.clear();
+
+	//set this here, to respect models without ground OBJ
+	heightmap.setNullHeight(info.groundNullHeight);
+
 
 	//make sure textures are loaded
 	for(int i =0; i< materials.size();++i)
@@ -195,6 +218,7 @@ bool S3DScene::glLoad()
 		mat.calculateTraits();
 	}
 
+	glReady = ok;
 	return ok;
 }
 

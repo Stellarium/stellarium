@@ -97,7 +97,7 @@ public:
     virtual void handleKeys(QKeyEvent* e);
 
     //! Sends the progressReport() signal, which eventually updates the progress bar. Can be called from another thread.
-    void updateProgress(const QString& str, int val, int min, int max);
+    void updateProgress(const QString& str, int val, int min, int max) const;
 signals:
     void enableSceneChanged(const bool val);
     void enablePixelLightingChanged(const bool val);
@@ -123,7 +123,7 @@ signals:
     void currentSceneChanged(const SceneInfo& sceneInfo);
 
     //! This signal is emitted from another thread than this QObject belongs to, so use QueuedConnection.
-    void progressReport(const QString& str, int val, int min, int max);
+    void progressReport(const QString& str, int val, int min, int max) const;
 
 public slots:
     //! Clears the shader cache, forcing a reload of shaders on use
@@ -268,7 +268,7 @@ private:
     void createToolbarButtons() const;
 
     //! This is run asynchronously in a background thread, performing the actual scene loading
-    S3DScene *loadSceneBackground();
+    S3DScene *loadSceneBackground(const SceneInfo &scene) const;
 
     // the other "main" objects
     Scenery3d* scenery3d;
@@ -293,8 +293,10 @@ private:
     QFont font;
     QString currentMessage;
 
+    volatile bool loadCancel;
     StelProgressController* progressBar;
     SceneInfo currentLoadScene;
+    S3DScene* currentScene;
     QFutureWatcher<S3DScene*> currentLoadFuture;
 };
 

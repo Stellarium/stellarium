@@ -105,8 +105,13 @@ public:
 	inline void setViewDirection(const Vec3d& viewDir) { viewDirection = viewDir; }
 	inline const Vec3d& getViewDirection() const { return viewDirection; }
 
+	Vec3d getGridPosition() const;
+	void setGridPosition(const Vec3d& gridPos);
+
 	//! Makes the scene ready for GL rendering. Needs a valid GL context
 	bool glLoad();
+	//! Returns true if the scene is ready for GL rendering (glLoad succeded)
+	bool isGLReady() const { return glReady; }
 	// Basic wrappers alround StelOpenGLArray
 	inline void glBind() { glArray.bind(); }
 	inline void glRelease() { glArray.release(); }
@@ -116,6 +121,9 @@ private:
 	inline void recalcEyePos() { eyePosition = position; eyePosition[2]+=eye_height; }
 	MaterialList materials;
 	ObjectList objects;
+
+
+	bool glReady;
 
 	SceneInfo info;
 	QMatrix4x4 zRot2Grid;
