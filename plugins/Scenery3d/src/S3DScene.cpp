@@ -20,9 +20,10 @@
 
 #include "S3DScene.hpp"
 
+#include "StelApp.hpp"
 #include "StelTexture.hpp"
 #include "StelTextureMgr.hpp"
-#include "StelApp.hpp"
+#include "StelUtils.hpp"
 
 #include <QVector3D>
 
@@ -76,7 +77,8 @@ void S3DScene::Material::calculateTraits()
 }
 
 S3DScene::S3DScene(const SceneInfo &info)
-	: info(info)
+	: info(info),
+	  viewDirection(1.0,0.0,0.0), position(0.0,0.0,0.0), eye_height(1.65), eyePosition(0.0,0.0,1.65)
 {
 	//setup main load transform matrix
 	zRot2Grid = (info.zRotateMatrix*info.obj2gridMatrix).convertToQMatrix();
@@ -194,6 +196,24 @@ bool S3DScene::glLoad()
 	}
 
 	return ok;
+}
+
+void S3DScene::moveViewer(const Vec3d &moveView)
+{
+	//get the azimuth angle of the current view vector
+	double alt, az;
+	StelUtils::rectToSphe(&az, &alt, viewDirection);
+
+	//calculate the move vector in the world space
+	Vec3d moveWorld(  moveView[1] * std::cos(az) + moveView[0] * std::sin(az),
+			- moveView[0] * std::cos(az) + moveView[1] * std::sin(az),
+			  moveView[2]);
+
+	eye_height+= moveWorld[2];
+	position[0]+= moveWorld[0];
+	position[1]+= moveWorld[1];
+	position[2] = heightmap.getHeight(position[0],position[1]);
+	recalcEyePos();
 }
 
 void S3DScene::setViewerPosition(const Vec3d &pos)
