@@ -19,8 +19,8 @@
  */
 
 #include "SceneInfo.hpp"
-#include "Scenery3dMgr.hpp"
 
+#include "Scenery3d.hpp"
 #include "StelApp.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelFileMgr.hpp"
@@ -523,6 +523,6 @@ QSettings* StoredView::getUserViews()
 
 	//QSettings gets deleted when plugin is shut down (also saves settings)
 	//TODO StelIniFormat has bugs with saving HTML! so we use the default Qt format here, no idea if this may cause some problems.
-	userviews = new QSettings(file,QSettings::IniFormat,GETSTELMODULE(Scenery3dMgr));
+	userviews = new QSettings(file,QSettings::IniFormat,GETSTELMODULE(Scenery3d));
 	return userviews;
 }
