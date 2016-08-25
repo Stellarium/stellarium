@@ -79,14 +79,14 @@ GLExtFuncs* glExtFuncs;
 #pragma warning(disable : 4351)
 #endif
 
-Scenery3d::Scenery3d(Scenery3dMgr* parent)
-    : parent(parent), currentScene(Q_NULLPTR),
+Scenery3d::Scenery3d(QObject *parent)
+    :
+      QObject(parent),
       //sun(NULL), moon(NULL), venus(NULL),
       supportsGSCubemapping(false), supportsShadows(false), supportsShadowFiltering(false), isANGLE(false), maximumFramebufferSize(0),
       torchBrightness(0.5f), torchRange(5.0f), textEnabled(false), debugEnabled(false), fixShadowData(false),
       simpleShadows(false), fullCubemapShadows(false), cubemappingMode(S3DEnum::CM_TEXTURES), //set it to 6 textures as a safe default (Cubemap should work on ANGLE, but does not...)
       reinitCubemapping(true), reinitShadowmapping(true),
-      loadCancel(false),
       cubemapSize(1024),shadowmapSize(1024),wasMovedInLastDrawCall(false),
       core(NULL), landscapeMgr(NULL),
       drawnTriangles(0), drawnModels(0), materialSwitches(0), shaderSwitches(0),
@@ -125,8 +125,6 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
 
 Scenery3d::~Scenery3d()
 {
-	delete currentScene;
-
 	cubeVertexBuffer.destroy();
 	cubeIndexBuffer.destroy();
 
@@ -137,78 +135,6 @@ Scenery3d::~Scenery3d()
 	//delete extension functions
 	delete glExtFuncs;
 #endif
-}
-
-S3DScene* Scenery3d::loadScene(const SceneInfo &scene) const
-{
-	QScopedPointer<S3DScene> newScene(new S3DScene(scene));
-
-	if(loadCancel)
-		return Q_NULLPTR;
-
-	parent->updateProgress(q_("Loading model..."),1,0,6);
-
-	//load model
-	StelOBJ modelOBJ;
-	QString modelFile = StelFileMgr::findFile( scene.fullPath+ "/" + scene.modelScenery);
-	qDebug(scenery3d)<<"Loading scene from "<<modelFile;
-	if(!modelOBJ.load(modelFile, scene.vertexOrderEnum))
-	{
-	    qCritical(scenery3d)<<"Failed to load OBJ file.";
-	    return Q_NULLPTR;
-	}
-
-	if(loadCancel)
-		return Q_NULLPTR;
-
-	parent->updateProgress(q_("Transforming model..."),2,0,6);
-	newScene->setModel(modelOBJ);
-
-	if(loadCancel)
-		return Q_NULLPTR;
-
-	if(scene.modelGround.isEmpty())
-	{
-		parent->updateProgress(q_("Calculating collision map..."),5,0,6);
-		newScene->setGround(modelOBJ);
-	}
-	else if (scene.modelGround != "NULL")
-	{
-		parent->updateProgress(q_("Loading ground..."),3,0,6);
-
-		StelOBJ groundOBJ;
-		modelFile = StelFileMgr::findFile(scene.fullPath + "/" + scene.modelGround);
-		qDebug(scenery3d)<<"Loading ground from"<<modelFile;
-		if(!groundOBJ.load(modelFile, scene.vertexOrderEnum))
-		{
-			qCritical(scenery3d)<<"Failed to load ground model";
-			return Q_NULLPTR;
-		}
-
-		parent->updateProgress(q_("Transforming ground..."),4,0,6);
-		if(loadCancel)
-			return Q_NULLPTR;
-
-		parent->updateProgress(q_("Calculating collision map..."),5,0,6);
-		newScene->setGround(groundOBJ);
-	}
-
-	if(loadCancel)
-		return Q_NULLPTR;
-
-	parent->updateProgress(q_("Finalizing load..."),6,0,6);
-
-	return newScene.take();
-}
-
-void Scenery3d::setCurrentScene(S3DScene* scene)
-{
-	delete currentScene;
-	currentScene = scene;
-	scene->glLoad();
-
-	//reset the cubemap time so that is ensured it is immediately rerendered
-	invalidateCubemap();
 }
 
 void Scenery3d::saveFrusts()
@@ -410,7 +336,7 @@ bool Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 				if(!newShader)
 				{
 					//shader invalid, can't draw
-					parent->showMessage(q_("Scenery3d shader error, can't draw. Check debug output for details."));
+					rendererMessage(q_("Scenery3d shader error, can't draw. Check debug output for details."));
 					success = false;
 					break;
 				}
@@ -1448,60 +1374,6 @@ void Scenery3d::drawWithCubeMap()
 	drawFromCubeMap();
 }
 
-Vec3d Scenery3d::getCurrentGridPosition() const
-{
-	if(!currentScene)
-	{
-		qCWarning(scenery3d)<<"No scene loaded, can't get grid position";
-		return Vec3d(0.0);
-	}
-	SceneInfo info = currentScene->getSceneInfo();
-	Vec3d pos = currentScene->getViewerPosition();
-	// this is the observer position (camera eye position) in model-grid coordinates, relative to the origin
-	pos=info.zRotateMatrix.inverse()* pos;
-	// this is the observer position (camera eye position) in grid coordinates, e.g. Gauss-Krueger or UTM.
-	pos+= info.modelWorldOffset;
-
-	return pos;
-}
-
-void Scenery3d::setGridPosition(Vec3d pos)
-{
-	if(!currentScene)
-	{
-		qCWarning(scenery3d)<<"No scene loaded, can't set grid position";
-		return;
-	}
-	SceneInfo info = currentScene->getSceneInfo();
-	//this is basically the same as getCurrentGridPosition(), but in reverse
-	pos-=info.modelWorldOffset;
-
-	//calc opengl position
-	currentScene->setViewerPosition(info.zRotateMatrix * pos);
-
-	//reset cube map time
-	invalidateCubemap();
-}
-
-void Scenery3d::setEyeHeight(const float eyeheight)
-{
-	if(currentScene)
-		currentScene->setEyeHeight(eyeheight);
-	else
-		qCWarning(scenery3d)<<"No scene loaded, eye height not set";
-}
-
-double Scenery3d::getEyeHeight() const
-{
-	if(currentScene)
-		return currentScene->getEyeHeight();
-	else
-	{
-		qCWarning(scenery3d)<<"No scene loaded, eye height unknown";
-		return 1.65f;
-	}
-}
-
 void Scenery3d::drawCoordinatesText()
 {
     StelPainter painter(altAzProjector);
@@ -1511,7 +1383,7 @@ void Scenery3d::drawCoordinatesText()
     float screen_y = altAzProjector->getViewportHeight() -  60.0f;
     QString str;
 
-    Vec3d gridPos = getCurrentGridPosition();
+    Vec3d gridPos = currentScene->getGridPosition();
 
     const SceneInfo& info = currentScene->getSceneInfo();
 
@@ -1822,13 +1694,6 @@ void Scenery3d::init()
 	Q_ASSERT(landscapeMgr);
 }
 
-SceneInfo Scenery3d::getCurrentSceneInfo() const
-{
-	if(currentScene)
-		return currentScene->getSceneInfo();
-	return SceneInfo();
-}
-
 void Scenery3d::deleteCubemapping()
 {
 	if(cubeMappingCreated)
@@ -1893,7 +1758,7 @@ bool Scenery3d::initCubemapping()
 	if(cubemapSize<=0)
 	{
 		qWarning(scenery3d)<<"Cubemapping not supported or disabled";
-		parent->showMessage(q_("Your hardware does not support cubemapping, please switch to 'Perspective' projection!"));
+		rendererMessage(q_("Your hardware does not support cubemapping, please switch to 'Perspective' projection!"));
 		return false;
 	}
 
@@ -1902,7 +1767,7 @@ bool Scenery3d::initCubemapping()
 	//last compatibility check before possible crash
 	if( !isGeometryShaderCubemapSupported() && cubemappingMode == S3DEnum::CM_CUBEMAP_GSACCEL)
 	{
-		parent->showMessage(q_("Geometry shader is not supported. Falling back to '6 Textures' mode."));
+		rendererMessage(q_("Geometry shader is not supported. Falling back to '6 Textures' mode."));
 		qWarning(scenery3d)<<"GS not supported, fallback to '6 Textures'";
 		cubemappingMode = S3DEnum::CM_TEXTURES;
 	}
@@ -1912,7 +1777,7 @@ bool Scenery3d::initCubemapping()
 	if(isANGLEContext() && cubemappingMode >= S3DEnum::CM_CUBEMAP)
 	{
 		//Fall back to "6 Textures" mode
-		parent->showMessage(q_("Falling back to '6 Textures' because of ANGLE bug"));
+		rendererMessage(q_("Falling back to '6 Textures' because of ANGLE bug"));
 		qWarning(scenery3d)<<"On ANGLE, fallback to '6 Textures'";
 		cubemappingMode = S3DEnum::CM_TEXTURES;
 	}
@@ -2274,7 +2139,7 @@ bool Scenery3d::initCubemapping()
 
 	if(!ret)
 	{
-		parent->showMessage("Cannot use cubemapping with current settings");
+		rendererMessage("Cannot use cubemapping with current settings");
 		deleteCubemapping();
 	}
 	return ret;
@@ -2433,16 +2298,20 @@ bool Scenery3d::initShadowmapping()
 	if(!valid)
 	{
 		deleteShadowmapping();
-		parent->showMessage(q_("Shadow mapping can not be used on your hardware, check logs for details"));
+		rendererMessage(q_("Shadow mapping can not be used on your hardware, check logs for details"));
 	}
 	return valid;
 }
 
-void Scenery3d::draw(StelCore* core)
+void Scenery3d::draw(StelCore* core, S3DScene &scene)
 {
-	//cant draw if no models
-	if(!currentScene)
-		return;
+	if(!scene.isGLReady())
+	{
+		scene.glLoad();
+		invalidateCubemap();
+	}
+
+	currentScene = &scene;
 
 	//reset render statistic
 	drawnTriangles = drawnModels = materialSwitches = shaderSwitches = 0;
@@ -2588,4 +2457,10 @@ void Scenery3d::draw(StelCore* core)
 
 	lastDrawnPosition = currentScene->getEyePosition();
 	cubemappingUsedLastFrame = requiresCubemap;
+	currentScene = Q_NULLPTR;
+}
+
+void Scenery3d::rendererMessage(const QString &msg) const
+{
+	emit message(msg);
 }

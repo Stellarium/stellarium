@@ -32,6 +32,7 @@
 
 #include "Scenery3dMgr.hpp"
 #include "Scenery3d.hpp"
+#include "S3DScene.hpp"
 #include "Scenery3dDialog.hpp"
 #include "StoredViewDialog.hpp"
 #include "StelApp.hpp"
@@ -54,8 +55,10 @@ Scenery3dMgr::Scenery3dMgr() :
 	flagEnabled(false),
 	cleanedUp(false),
 	oldProjectionType(StelCore::ProjectionPerspective),
+	loadCancel(false),
 	progressBar(NULL),	
 	currentLoadScene(),
+	currentScene(NULL),
 	currentLoadFuture(this)
 {
 	setObjectName("Scenery3dMgr");
@@ -76,7 +79,8 @@ Scenery3dMgr::Scenery3dMgr() :
 	conf = StelApp::getInstance().getSettings();
 
 	//create scenery3d object
-	scenery3d = new Scenery3d(this);
+	scenery3d = new Scenery3d();
+	connect(scenery3d, SIGNAL(message(QString)), this, SLOT(showMessage(QString)));
 }
 
 Scenery3dMgr::~Scenery3dMgr()
@@ -179,17 +183,16 @@ void Scenery3dMgr::handleKeys(QKeyEvent* e)
 
 void Scenery3dMgr::update(double deltaTime)
 {
-	S3DScene* curScene = scenery3d->getCurrentScene();
-	if (flagEnabled && curScene)
+	if (flagEnabled && currentScene)
 	{
 		//update view direction
 		Vec3d mainViewDir = mvMgr->getViewDirectionJ2000();
 		mainViewDir = core->j2000ToAltAz(mainViewDir, StelCore::RefractionOff);
-		curScene->setViewDirection(mainViewDir);
+		currentScene->setViewDirection(mainViewDir);
 
 		//perform movement
 		//when zoomed in more than 5°, we slow down movement
-		curScene->moveViewer(movementKeyInput * deltaTime * 0.01 * qMax(5.0, mvMgr->getCurrentFov()));
+		currentScene->moveViewer(movementKeyInput * deltaTime * 0.01 * qMax(5.0, mvMgr->getCurrentFov()));
 	}
 
 	messageFader.update((int)(deltaTime*1000));
@@ -197,9 +200,9 @@ void Scenery3dMgr::update(double deltaTime)
 
 void Scenery3dMgr::draw(StelCore* core)
 {
-	if (flagEnabled)
+	if (flagEnabled && currentScene)
 	{
-		scenery3d->draw(core);
+		scenery3d->draw(core,*currentScene);
 	}
 
 	//the message is always drawn
@@ -262,15 +265,14 @@ void Scenery3dMgr::deinit()
 	//wait until loading is finished. (If test added after hint from Coverity)
 	if(scenery3d)
 	{
-		scenery3d->setLoadCancel(true);
+		loadCancel = true;
 		currentLoadFuture.waitForFinished();
 	}
 	//this is correct the place to delete all OpenGL related stuff, not the destructor
-	if(scenery3d != NULL)
-	{
-		delete scenery3d;
-		scenery3d = NULL;
-	}
+	delete scenery3d;
+	scenery3d = Q_NULLPTR;
+	delete currentScene;
+	currentScene = Q_NULLPTR;
 
 	cleanedUp = true;
 }
@@ -374,7 +376,7 @@ void Scenery3dMgr::showStoredViewDialog()
 	storedViewDialog->setVisible(true);
 }
 
-void Scenery3dMgr::updateProgress(const QString &str, int val, int min, int max)
+void Scenery3dMgr::updateProgress(const QString &str, int val, int min, int max) const
 {
 	emit progressReport(str,val,min,max);
 }
@@ -392,13 +394,13 @@ void Scenery3dMgr::progressReceive(const QString &str, int val, int min, int max
 
 void Scenery3dMgr::loadScene(const SceneInfo& scene)
 {
-	scenery3d->setLoadCancel(true);
+	loadCancel = true;
 
 	//If currently loading, we have to wait until it is finished
 	//This currently blocks the GUI thread until the loading can be canceled
 	//  (which is for now rather rough-grained and so may take a while)
 	currentLoadFuture.waitForFinished();
-	scenery3d->setLoadCancel(false);
+	loadCancel = false;
 
 	if(progressBar)
 	{
@@ -408,21 +410,79 @@ void Scenery3dMgr::loadScene(const SceneInfo& scene)
 		return;
 	}
 
-	currentLoadScene = scene;
-
 	// Loading may take a while...
 	showMessage(QString(q_("Loading scene. Please be patient!")));
 	progressBar = StelApp::getInstance().addProgressBar();
 	progressBar->setFormat(QString(q_("Loading scene '%1'")).arg(scene.name));
 	progressBar->setValue(0);
 
-	QFuture<S3DScene*> future = QtConcurrent::run(this,&Scenery3dMgr::loadSceneBackground);
+	currentLoadScene = scene;
+
+	QFuture<S3DScene*> future = QtConcurrent::run(this,&Scenery3dMgr::loadSceneBackground,scene);
 	currentLoadFuture.setFuture(future);
 }
 
-S3DScene* Scenery3dMgr::loadSceneBackground()
+S3DScene* Scenery3dMgr::loadSceneBackground(const SceneInfo& scene) const
 {
-	return scenery3d->loadScene(currentLoadScene);
+	//the scoped pointer ensures this scene is deleted when errors occur
+	QScopedPointer<S3DScene> newScene(new S3DScene(scene));
+
+	if(loadCancel)
+		return Q_NULLPTR;
+
+	updateProgress(q_("Loading model..."),1,0,6);
+
+	//load model
+	StelOBJ modelOBJ;
+	QString modelFile = StelFileMgr::findFile( scene.fullPath+ "/" + scene.modelScenery);
+	qDebug()<<"Loading scene from "<<modelFile;
+	if(!modelOBJ.load(modelFile, scene.vertexOrderEnum))
+	{
+	    qCritical()<<"Failed to load OBJ file.";
+	    return Q_NULLPTR;
+	}
+
+	if(loadCancel)
+		return Q_NULLPTR;
+
+	updateProgress(q_("Transforming model..."),2,0,6);
+	newScene->setModel(modelOBJ);
+
+	if(loadCancel)
+		return Q_NULLPTR;
+
+	if(scene.modelGround.isEmpty())
+	{
+		updateProgress(q_("Calculating collision map..."),5,0,6);
+		newScene->setGround(modelOBJ);
+	}
+	else if (scene.modelGround != "NULL")
+	{
+		updateProgress(q_("Loading ground..."),3,0,6);
+
+		StelOBJ groundOBJ;
+		modelFile = StelFileMgr::findFile(scene.fullPath + "/" + scene.modelGround);
+		qDebug()<<"Loading ground from"<<modelFile;
+		if(!groundOBJ.load(modelFile, scene.vertexOrderEnum))
+		{
+			qCritical()<<"Failed to load ground model";
+			return Q_NULLPTR;
+		}
+
+		updateProgress(q_("Transforming ground..."),4,0,6);
+		if(loadCancel)
+			return Q_NULLPTR;
+
+		updateProgress(q_("Calculating collision map..."),5,0,6);
+		newScene->setGround(groundOBJ);
+	}
+
+	if(loadCancel)
+		return Q_NULLPTR;
+
+	updateProgress(q_("Finalizing load..."),6,0,6);
+
+	return newScene.take();
 }
 
 void Scenery3dMgr::loadSceneCompleted()
@@ -442,12 +502,13 @@ void Scenery3dMgr::loadSceneCompleted()
 		showMessage(q_("Scene successfully loaded."));
 
 	//do stuff that requires the main thread
+	const SceneInfo& info = result->getSceneInfo();
 
 	//move to the location specified by the scene
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	bool landscapeSetsLocation=lmgr->getFlagLandscapeSetsLocation();
 	lmgr->setFlagLandscapeSetsLocation(true);
-	lmgr->setCurrentLandscapeName(currentLoadScene.landscapeName, 0.); // took a second, implicitly.
+	lmgr->setCurrentLandscapeName(info.landscapeName, 0.); // took a second, implicitly.
 	// Switched to immediate landscape loading: Else,
 	// Landscape and Navigator at this time have old coordinates! But it should be possible to
 	// delay rot_z computation up to this point and live without an own location section even
@@ -455,14 +516,14 @@ void Scenery3dMgr::loadSceneCompleted()
 	lmgr->setFlagLandscapeSetsLocation(landscapeSetsLocation); // restore
 
 
-	if (currentLoadScene.hasLocation())
+	if (info.hasLocation())
 	{
 		qDebug() << "[Scenery3dMgr] Setting location to given coordinates";
-		StelApp::getInstance().getCore()->moveObserverTo(*(currentLoadScene.location.data()), 0., 0.);
+		StelApp::getInstance().getCore()->moveObserverTo(*(info.location.data()), 0., 0.);
 	}
 	else qDebug() << "[Scenery3dMgr] No coordinates given in scenery3d.ini";
 
-	if (currentLoadScene.hasLookAtFOV())
+	if (info.hasLookAtFOV())
 	{
 		qDebug() << "[Scenery3dMgr] Setting orientation";
 		Vec3f lookat=currentLoadScene.lookAt_fov;
@@ -473,18 +534,17 @@ void Scenery3dMgr::loadSceneCompleted()
 		mvMgr->zoomTo(lookat[2]);
 	} else qDebug() << "[Scenery3dMgr] No orientation given in scenery3d.ini";
 
-
-	//perform GL upload + other calculations that require the location to be set
-	scenery3d->setCurrentScene(result);
-
 	//clear loading scene
-	SceneInfo s = currentLoadScene;
 	currentLoadScene = SceneInfo();
+
+	//switch scenes
+	delete currentScene;
+	currentScene = result;
 
 	//show the scene
 	setEnableScene(true);
 
-	emit currentSceneChanged(s);
+	emit currentSceneChanged(info);
 }
 
 SceneInfo Scenery3dMgr::loadScenery3dByID(const QString& id)
@@ -529,7 +589,9 @@ SceneInfo Scenery3dMgr::loadScenery3dByName(const QString& name)
 
 SceneInfo Scenery3dMgr::getCurrentScene() const
 {
-	return scenery3d->getCurrentSceneInfo();
+	if(currentScene)
+		return currentScene->getSceneInfo();
+	return SceneInfo();
 }
 
 void Scenery3dMgr::setDefaultScenery3dID(const QString& id)
@@ -922,11 +984,17 @@ uint Scenery3dMgr::getMaximumFramebufferSize() const
 
 void Scenery3dMgr::setView(const StoredView &view, const bool setDate)
 {
+	if(!currentScene)
+	{
+		qWarning()<<"Can't set current view, no scene loaded!";
+		return;
+	}
+
 	//update position
 	//important: set eye height first
-	scenery3d->setEyeHeight(view.position[3]);
+	currentScene->setEyeHeight(view.position[3]);
 	//then, set grid position
-	scenery3d->setGridPosition(Vec3d(view.position[0],view.position[1],view.position[2]));
+	currentScene->setGridPosition(Vec3d(view.position[0],view.position[1],view.position[2]));
 
 	//update time, if relevant and wanted.
 	if (view.jdIsRelevant && setDate)
@@ -945,6 +1013,12 @@ void Scenery3dMgr::setView(const StoredView &view, const bool setDate)
 
 StoredView Scenery3dMgr::getCurrentView()
 {
+	if(!currentScene)
+	{
+		qWarning()<<"Can't return current view, no scene loaded!";
+		return StoredView();
+	}
+
 	StoredView view;
 	view.isGlobal = false;
 	StelCore* core = StelApp::getInstance().getCore();
@@ -964,11 +1038,11 @@ StoredView Scenery3dMgr::getCurrentView()
 	view.view_fov[2] = mvMgr->getAimFov();
 
 	//get current grid pos + eye height
-	Vec3d pos = scenery3d->getCurrentGridPosition();
+	Vec3d pos = currentScene->getGridPosition();
 	view.position[0] = pos[0];
 	view.position[1] = pos[1];
 	view.position[2] = pos[2];
-	view.position[3] = scenery3d->getEyeHeight();
+	view.position[3] = currentScene->getEyeHeight();
 
 	return view;
 }
