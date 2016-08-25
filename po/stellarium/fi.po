@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-22 21:44+0700\n"
-"PO-Revision-Date: 2016-08-24 05:03+0000\n"
+"PO-Revision-Date: 2016-08-24 22:06+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-08-24 05:17+0000\n"
+"X-Launchpad-Export-Date: 2016-08-25 05:18+0000\n"
 "X-Generator: Launchpad (build 18179)\n"
 
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:188
@@ -5578,8 +5578,8 @@ msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which "
 "passes through both ecliptic poles, the Sun and opposition point."
 msgstr ""
-"Oppositio–konjunktiolinja – ekliptisen pituuden linja, joka kulkee molempien "
-"ekliptisten napojen sekä Auringon ja oppositiopisteen kautta."
+"Oppositio–konjunktiolinja on ekliptisen pituuden linja, joka kulkee "
+"molempien ekliptisten napojen sekä Auringon ja oppositiopisteen kautta."
 
 #: src/ui_viewDialog.h:1811
 msgid ""
@@ -11693,18 +11693,23 @@ msgid ""
 "These names are modified based on the original proposals, to be consistent "
 "with the IAU rules."
 msgstr ""
+"Seuraavia nimiä on muutettu alkuperäisiin ehdotuksiin perustuen IAU:n "
+"sääntöjä silmälläpitäen."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 msgid ""
 "The original name proposed, <em>Veritas</em>, is that of an asteroid "
 "important for the study of the solar system."
 msgstr ""
+"Alun perin ehdotettu nimi <em>Veritas</em> on erään aurinkokunnan "
+"tutkimukselle tärkeän asteroidin nimi."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
 msgid ""
 "The name originally proposed, <em>Amaterasu</em>, is already used for an "
 "asteroid."
 msgstr ""
+"Alun perin ehdotettu nimi <em>Amaterasu</em> on jo erään asteroidin käytössä."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
 msgid ""
@@ -11713,10 +11718,13 @@ msgid ""
 "<em>Aegir</em>, has been attributed to one of Saturn's satellites, "
 "discovered in 2004."
 msgstr ""
+"Huomaa typografinen ero <em>Ægirin</em> ja <em>Aegirin</em>, englantiin "
+"sovitetun asun ero. Sama nimi asussa <em>Aegir</em> on annettu eräälle "
+"Saturnuksen kuulle, joka löydettiin vuonna 2004.."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
 msgid "<em>Ogmios</em> is a name already attributed to an asteroid."
-msgstr ""
+msgstr "Nimi <em>Ogmios</em> on jo annettu eräälle asteroidille."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 msgid ""
@@ -11724,6 +11732,9 @@ msgid ""
 "asteroid and to one of Jupiter's satellites. The name <em>Althaea</em> is "
 "also attributed to an asteroid."
 msgstr ""
+"Alun perin ehdotettu <em>Leda</em> on jo annettu eräälle asteroidille, sekä "
+"eräälle Jupiterin kuulle. Nimi<em>Althaea</em> on myös annettu eräälle "
+"asteroidille."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
 msgid ""
@@ -11732,6 +11743,10 @@ msgid ""
 "<em>Lippershey</em> (with an <em>s</em>) results in fact from a "
 "typographical error dating back from 1831, thus should be avoided."
 msgstr ""
+"Alkuperäinen kirjoitusmuoto <em>Lippershey</em> korjattiin muotoon "
+"<em>Lipperhey</em>  tammikuussa 2016. Yleinen kirjoitusmuoto "
+"<em>Lippershey</em> (<em>s:llä</em>) juontaa juurensa kirjoitusvirheeseen "
+"vuodelta 1931, ja sitä tulisi näin ollen välttää."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
 msgid "Additional info"
@@ -11755,11 +11770,11 @@ msgstr "Maankaltaisuusindeksi"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
 msgid "Final Results of NameExoWorlds Public Vote Released"
-msgstr ""
+msgstr "NameExoWorlds-yleisöäänestyksen tulokset julkaistu"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
 msgid "NameExoWorlds website"
-msgstr ""
+msgstr "NameExoWorlds-verkkosivu"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
 msgid "General professional Web sites relevant to extrasolar planets"
@@ -11848,27 +11863,27 @@ msgstr "Eksoplaneetat on päivitetty"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:493
 msgid "Orbital Eccentricity"
-msgstr ""
+msgstr "Radan eksentrisyys"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:494
 msgid "Orbit Semi-Major Axis, AU"
-msgstr ""
+msgstr "Radan isoakselin puolikas, AU"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:495
 msgid "Planetary Mass, Mjup"
-msgstr ""
+msgstr "Massa, Mjup"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:496
 msgid "Planetary Radius, Rjup"
-msgstr ""
+msgstr "Säde, Rjup"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:497
 msgid "Orbital Period, days"
-msgstr ""
+msgstr "Kiertoaika, päivää"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:498
 msgid "Angular Distance, arcsec."
-msgstr ""
+msgstr "Kulmaetäisyys, kaarisek."
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:456
 msgid "Exoplanets Configuration"
@@ -11923,44 +11938,44 @@ msgstr "Näytä eksoplaneetat-painike alapalkissa"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:483
 msgid "Diagrams: scatter plot"
-msgstr ""
+msgstr "Kuvaajat: hajontapiirros"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:484
 msgid "Plot"
-msgstr ""
+msgstr "Piirrä"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:485
 msgid "Y axis"
-msgstr ""
+msgstr "Y-akseli"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:487
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:494
 msgid "Logarithmic scale"
-msgstr ""
+msgstr "Logaritminen asteikko"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:489
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:496
 msgid "log scale"
-msgstr ""
+msgstr "Logaritminen asteikko"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:490
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:498
 msgid "min"
-msgstr ""
+msgstr "min"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:491
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:499
 msgid "max"
-msgstr ""
+msgstr "max"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:492
 msgid "X axis"
-msgstr ""
+msgstr "X-akseli"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:500
 msgctxt "tab in plugin windows"
 msgid "Diagram"
-msgstr ""
+msgstr "Kuvaaja"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:501
 msgctxt "tab in plugin windows"
@@ -12469,7 +12484,7 @@ msgstr ""
 
 #: plugins/FOV/src/FOV.cpp:86
 msgid "Set FOV to"
-msgstr ""
+msgstr "Aseta näkökentäksi"
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:80
 msgid "Field of View plug-in"
@@ -12608,6 +12623,18 @@ msgid ""
 "year.</li><li><b>Inactive:</b> the radiant is inactive for the current sky "
 "date.</li></ul></p>"
 msgstr ""
+"<p>Tämä laajennus mahdollistaa realistisen meteoriparvien ja aktiivisten ja "
+"epäaktiivisten radianttien merkitsemisen.</p><p>Klikkaamalla radianttia näet "
+"tiedot sen sijainnista ja aktiivisuudesta. Suurin osa tässä laajennuksessa "
+"käytetyistä tiedoista on peräisin <a href=\"http://imo.net\">Kansainvälisen "
+"meteorijärjestön</a> tietokannasta.</p><p>Radianttien merkkejä on kolmea "
+"tyyppiä:<ul><li><b>vahvistettu:</b> radiantti on aktiivinen ja sen tiedot on "
+"vahvistettu. Kyseessä on siis historiallinen (vahvistetusti menneisyydessä "
+"havaittu) tai ennustettu parvi.</li><li><b>Vahvistamaton:</b> radiantti on "
+"aktiivinen, mutta sen tietoja ei ole vahvistettu. Tämä tarkoittaa että parvi "
+"voidaan mahdollisesti havaita, mutta sen aktiivisuudesta ei ole tietoja "
+"kuluvalle vuodelle.</li><li><b>Epäaktiivinen:</b> radiantti on aktiivinen "
+"nykyisenä ajanhetkenä.</li></ul></p>"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:128
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:451
@@ -12980,12 +13007,12 @@ msgstr "χ-orionidit"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:155
 msgid "Sextantids"
-msgstr ""
+msgstr "Sextantidit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:157
 msgid "November Orionids"
-msgstr ""
+msgstr "Marraskuun orionidit"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:161
@@ -13400,7 +13427,7 @@ msgstr "Etsi"
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
 msgid "dd/MM/yyyy"
-msgstr ""
+msgstr "pp/kk/vvvv"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "Results"
@@ -14082,59 +14109,59 @@ msgstr "Työkalu arkeo- ja etnoastronomisten linjausten tutkimiseen"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:237
 msgid "Show Line for Equinox"
-msgstr ""
+msgstr "Näytä päiväntasauslinja"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:238
 msgid "Show Line for Solstices"
-msgstr ""
+msgstr "Näytä päivänseisauslinjat"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:239
 msgid "Show Line for Crossquarter"
-msgstr ""
+msgstr "Näytä ristineljänneslinjat"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:240
 msgid "Show Line for Major Standstill"
-msgstr ""
+msgstr "Näytä yläkuunseisauslinja"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:241
 msgid "Show Line for Minor Standstill"
-msgstr ""
+msgstr "Näytä alakuunseisauslinja"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:242
 msgid "Show Line for Zenith Passage"
-msgstr ""
+msgstr "Näytä zeniitinohituslinja"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:243
 msgid "Show Line for Nadir Passage"
-msgstr ""
+msgstr "Näytä nadiirinohituslinja"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:244
 msgid "Show Line for Selected Object"
-msgstr ""
+msgstr "Näytä valitun kohteen linja"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:245
 msgid "Show Line for Current Sun"
-msgstr ""
+msgstr "Näytä nykyisen Auringon linja"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:246
 msgid "Show Line for Current Moon"
-msgstr ""
+msgstr "Näytä nykyisen Kuun linja"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:247
 msgid "Show Line for Geographic Location 1"
-msgstr ""
+msgstr "Näytä maantieteellisen sijainnin 1 linja"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:248
 msgid "Show Line for Geographic Location 2"
-msgstr ""
+msgstr "Näytä maantieteellisen sijainnin 2 linja"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:249
 msgid "Show Line for Custom Azimuth 1"
-msgstr ""
+msgstr "Näytä oman atsimuutin 1 linja"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:250
 msgid "Show Line for Custom Azimuth 2"
-msgstr ""
+msgstr "Näytä oman atsimuutin 2 linja"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1151
 msgid "Equinox"
@@ -14257,12 +14284,19 @@ msgid ""
 "The directions are computed based on spherical trigonometry on a spherical "
 "Earth."
 msgstr ""
+"Joissakin uskonnoissa, mainittavimmin islamissa, on tapana rukoilla jotakin "
+"tiettyä sijaintia kohti. Laajennus mahdollistaa kahden käyttäjän asettaman "
+"atsimuuttilinjan näyttämisen. Oletussijainnit ovat Mekka ja Jerusalem. "
+"Linjojen suunnat lasketaan pallotrigonometriaan ja pallonmuotoiseen Maahan "
+"perustuen."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:251
 msgid ""
 "In addition, up to two vertical lines with arbitrary azimuth and custom "
 "label can be shown."
 msgstr ""
+"Lisäksi on mahdollista näyttää kaksi muuta atsimuutiltaan ja nimeltään "
+"vapaavalintaista pystysuuntaista linjaa."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:356
 msgid "Select color for equinox line"
@@ -14310,19 +14344,19 @@ msgstr "Valitse nykyisen planeetan linjan väri"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:477
 msgid "Select color for Geographic Location 1 line"
-msgstr ""
+msgstr "Valitse väri maantieteellisen sijainnin 1 linjalle"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:488
 msgid "Select color for Geographic Location 2 line"
-msgstr ""
+msgstr "Valitse väri maantieteellisen sijainnin 2 linjalle"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:499
 msgid "Select color for Custom Azimuth 1 line"
-msgstr ""
+msgstr "Valitse väri omalle atsimuuttilinjalle 1"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:510
 msgid "Select color for Custom Azimuth 2 line"
-msgstr ""
+msgstr "Valitse väri omalle atsimuuttilinjalle 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:471
 msgid "ArchaeoLines Configuration"
@@ -14338,16 +14372,16 @@ msgstr "Saatat joutua poistumaan kokonäyttötilasta valitaksesi värin!"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:475
 msgid "Geographic Location 1"
-msgstr ""
+msgstr "Maantieteellinen sijainti 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:477
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:483
 msgid "Enter a label (location name) for this line"
-msgstr ""
+msgstr "Syötä nimi tälle linjalle"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:481
 msgid "Geographic Location 2"
-msgstr ""
+msgstr "Maantieteellinen sijainti 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:486
 msgid "Change color"
@@ -14387,16 +14421,16 @@ msgstr "Alakuunseisauslinjat"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:500
 msgid "Custom Azimuth 1"
-msgstr ""
+msgstr "Oma atsimuutti 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:501
 msgid "Custom Azimuth 2"
-msgstr ""
+msgstr "Oma atsimuutti 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:503
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:506
 msgid "Enter a label for this line"
-msgstr ""
+msgstr "Syötä nimi tälle linjalle"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:508
 msgid "Solstice Lines"
