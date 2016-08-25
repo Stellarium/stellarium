@@ -20,7 +20,7 @@
 
 #include "StoredViewDialog.hpp"
 #include "StoredViewDialog_p.hpp"
-#include "Scenery3dMgr.hpp"
+#include "Scenery3d.hpp"
 
 #include "StelApp.hpp"
 #include "StelGui.hpp"
@@ -50,7 +50,7 @@ void StoredViewDialog::createDialogContent()
 	connect(ui->closeStelWindow, &QPushButton::clicked, this, &StelDialog::close);
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
-	mgr = GETSTELMODULE(Scenery3dMgr);
+	mgr = GETSTELMODULE(Scenery3d);
 	Q_ASSERT(mgr);
 
 	connect(ui->pushButtonAddView, &QPushButton::clicked, this, &StoredViewDialog::addUserView);
@@ -71,7 +71,7 @@ void StoredViewDialog::createDialogContent()
 	ui->listView->setModel(viewModel);
 	connect(ui->listView->selectionModel(), &QItemSelectionModel::currentChanged, this, &StoredViewDialog::updateViewSelection);
 
-	connect(mgr, &Scenery3dMgr::currentSceneChanged, viewModel, &StoredViewModel::setScene);
+	connect(mgr, &Scenery3d::currentSceneChanged, viewModel, &StoredViewModel::setScene);
 	connect(viewModel, &QAbstractItemModel::modelReset, this, &StoredViewDialog::resetViewSelection);
 	viewModel->setScene(mgr->getCurrentScene());
 }
