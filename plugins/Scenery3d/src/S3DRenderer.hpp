@@ -171,6 +171,15 @@ private:
 	LandscapeMgr* landscapeMgr;
 	StelProjectorP altAzProjector;
 
+	// state required during drawing
+	GlobalShaderParameters renderShaderParameters;
+	bool backfaceCullState;
+	bool blendEnabled;
+	const S3DScene::Material* lastMaterial;
+	QOpenGLShaderProgram* curShader;
+	QSet<QOpenGLShaderProgram*> initializedShaders;
+	QVector<const StelOBJ::MaterialGroup*> transparentGroups;
+
 	// debug info
 	int drawnTriangles,drawnModels;
 	int materialSwitches, shaderSwitches;
@@ -304,11 +313,13 @@ private:
 	//! If shading is true, a suitable shader for each material is selected and initialized. Submits 1 draw call for each StelModel.
 	//! @return false on shader errors
 	bool drawArrays(bool shading=true, bool blendAlphaAdditive=false);
+	//! Draws a single material group, to be use from within drawArrays
+	bool drawMaterialGroup(const StelOBJ::MaterialGroup& matGroup, bool shading, bool blendAlphaAdditive);
+
 	//! Draw observer grid coordinates as text.
 	void drawCoordinatesText();
 	//! Draw some text output. This can be filled as needed by development.
 	void drawDebug();
-
 
 	// --- shading related stuff ---
 	//! Finds out the shadow caster and determines shadow parameters for current frame
