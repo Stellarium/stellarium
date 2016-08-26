@@ -122,6 +122,23 @@ bool StelOBJ::parseBool(const ParseParams &params, bool &out)
 	return true;
 }
 
+bool StelOBJ::parseInt(const ParseParams &params, int &out)
+{
+	if(params.size()<2)
+	{
+		qCCritical(stelOBJ)<<"Expected parameter for statement"<<params;
+		return false;
+	}
+	if(params.size()>2)
+	{
+		qCWarning(stelOBJ)<<"Additional parameters ignored in statement"<<params;
+	}
+
+	bool ok;
+	out = params.at(1).toInt(&ok);
+	return ok;
+}
+
 bool StelOBJ::parseString(const ParseParams &params, QString &out)
 {
 	if(params.size()<2)
@@ -511,6 +528,27 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 			else if(CMD_CMP("bBackface"))
 			{
 				CHECK_MTL(ok = parseBool(splits,curMaterial->bBackface));
+			}
+			else if(CMD_CMP("Illum"))
+			{
+				int tmp;
+				CHECK_MTL(ok = parseInt(splits,tmp));
+				curMaterial->illum = static_cast<Illum>(tmp);
+
+				if(tmp<I_DIFFUSE || tmp > I_TRANSLUCENT)
+				{
+					ok = false;
+					tmp = I_NONE;
+					qCCritical(stelOBJ())<<"Invalid illum statement"<<line;
+				}
+
+				//if between these 2, set to translucent and warn
+				if(tmp>I_DIFFUSE_AND_AMBIENT && tmp < I_TRANSLUCENT)
+				{
+					qCWarning(stelOBJ())<<"Treating illum "<<tmp<<"as TRANSLUCENT";
+					tmp = I_TRANSLUCENT;
+				}
+				curMaterial->illum = static_cast<Illum>(tmp);
 			}
 			else if(!cmd.startsWith("#"))
 			{
