@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-22 21:44+0700\n"
-"PO-Revision-Date: 2016-08-24 22:06+0000\n"
+"PO-Revision-Date: 2016-08-25 18:29+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-08-25 05:18+0000\n"
+"X-Launchpad-Export-Date: 2016-08-26 05:16+0000\n"
 "X-Generator: Launchpad (build 18179)\n"
 
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:188
@@ -1208,9 +1208,9 @@ msgid ""
 "Henriksson in his article <em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
-"Tämän kaavan otti käyttöön C. Schoch vuonna 1931, ja sitä käytti G. "
-"Henrikkson artikkelissaan <em>Einstein's Theory of Relativity Confirmed by "
-"Ancient Solar Eclipses</em> (%1). Katso lisätietoa %2täältä%3."
+"Tämän kaavan kehitti C. Schoch vuonna 1931, ja sitä käytti G. Henrikkson "
+"artikkelissaan <em>Einstein's Theory of Relativity Confirmed by Ancient "
+"Solar Eclipses</em> (%1). Katso lisätietoa %2täältä%3."
 
 #: src/core/StelCore.cpp:1780
 #, qt-format
@@ -5685,7 +5685,7 @@ msgstr "Valitse haluatko nimet lyhennettyinä, alkuperäisinä vai käännettyin
 
 #: src/ui_viewDialog.h:1850
 msgid "Use native names for planets from current culture"
-msgstr "Käytä paikallisia nimiä nykyisen kulttuurin planeetoille"
+msgstr "Käytä planeetoille nykyisen kulttuurin omakielisiä nimiä"
 
 #: src/ui_viewDialog.h:1852
 msgid "Use native names for planets"
@@ -6611,7 +6611,7 @@ msgid ""
 "angle between those two points)."
 msgstr ""
 "Kulmanmittaustyökalua voi käyttää kulman mittaamiseen kahden taivaalla "
-"olevan pisteen välillä (ja asentokulman laskemiseen näiden kahden pisteen "
+"olevan pisteen välillä (ja sijaintikulman laskemiseen näiden kahden pisteen "
 "välillä)."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:96
@@ -6760,7 +6760,7 @@ msgstr "Näytä ekvatoriaaliset koordinaatit"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:221
 msgid "Display with position angle"
-msgstr "Näytä asentokulma"
+msgstr "Näytä sijaintikulma"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:222
 msgid "Show in Horizontal Coordinates"
@@ -6772,7 +6772,7 @@ msgstr "(esim. tähtihyppelyä varten)"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:226
 msgid "Display with position angle "
-msgstr "Näytä asentokulma "
+msgstr "Näytä sijaintikulma "
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:227
 msgid "Attach start point to rotating sky"
@@ -11746,7 +11746,7 @@ msgstr ""
 "Alkuperäinen kirjoitusmuoto <em>Lippershey</em> korjattiin muotoon "
 "<em>Lipperhey</em>  tammikuussa 2016. Yleinen kirjoitusmuoto "
 "<em>Lippershey</em> (<em>s:llä</em>) juontaa juurensa kirjoitusvirheeseen "
-"vuodelta 1931, ja sitä tulisi näin ollen välttää."
+"vuodelta 1831, ja sitä tulisi näin ollen välttää."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
 msgid "Additional info"
