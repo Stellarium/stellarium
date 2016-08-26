@@ -63,8 +63,9 @@ public:
 
 		//! Starts loading the textures in this material asynchronously
 		void loadTexturesAsync();
-		//! Re-calculates the material traits. This requires all textures to be fully loaded.
-		void calculateTraits();
+		//! Re-calculates the material traits, and sets invalid material fields to valid values.
+		//! This requires all textures to be fully loaded.
+		void fixup();
 	};
 
 	typedef QVector<Material> MaterialList;

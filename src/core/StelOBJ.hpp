@@ -67,26 +67,32 @@ public:
 	//! Qt's OpenGL wrappers.
 	struct Material
 	{
+		//! MTL Illumination models, see the developer doc for info.
+		//! @deprecated If possible, do not use. Illum use is very inconsistent between different modeling programs
+		enum Illum { I_NONE=-1, I_DIFFUSE=0, I_DIFFUSE_AND_AMBIENT=1, I_SPECULAR=2, I_TRANSLUCENT=9 } illum;
+
 		Material()
-			: Ns(8.0f), d(-1.0f), bBackface(false), bAlphatest(false), fAlphaThreshold(0.5f)
+			: illum(I_NONE),
+			  Ka(-1.0f,-1.0f,-1.0f),Kd(-1.0f,-1.0f,-1.0f),Ks(-1.0f,-1.0f,-1.0f),Ke(-1.0f,-1.0f,-1.0f),
+			  Ns(8.0f), d(-1.0f), bBackface(false), bAlphatest(false), fAlphaThreshold(-1.0f)
 		{
 
 		}
 
-		//! Name of the material as defined in the .mtl
+		//! Name of the material as defined in the .mtl, default empty
 		QString name;
 
-		//! Ambient coefficient
+		//! Ambient coefficient. Contains all -1 if not set by .mtl
 		QVector3D Ka;
-		//! Diffuse coefficient
+		//! Diffuse coefficient. Contains all -1 if not set by .mtl
 		QVector3D Kd;
-		//! Specular coefficient
+		//! Specular coefficient. Contains all -1 if not set by .mtl
 		QVector3D Ks;
-		//! Emissive coefficient
+		//! Emissive coefficient. Contains all -1 if not set by .mtl
 		QVector3D Ke;
-		//! Specular shininess (exponent), should be > 0
+		//! Specular shininess (exponent), should be > 0. Default 8.0
 		float Ns;
-		//! Alpha value (1 means opaque)
+		//! Alpha value (1 means opaque). -1 if not set by .mtl
 		float d;
 
 		//! The ambient map path
@@ -109,7 +115,7 @@ public:
 		//! if to perform binary alpha testing, default false
 		bool bAlphatest;
 		//! Nonstandard extension:
-		//! the alpha threshold to use for alpha testing when bAlphatest is true, default 0.5
+		//! the alpha threshold to use for alpha testing when bAlphatest is true. -1 if not set by .mtl
 		float fAlphaThreshold;
 
 		//! Loads all materials contained in an .mtl file
@@ -310,6 +316,8 @@ private:
 	inline int getCurrentMaterialIndex(CurrentParserState& state);
 	//! Parse a single bool
 	inline static bool parseBool(const ParseParams& params, bool& out);
+	//! Parse a single int
+	inline static bool parseInt(const ParseParams& params, int& out);
 	//! Parse a single string
 	inline static bool parseString(const ParseParams &params, QString &out);
 	//! Parse a single float

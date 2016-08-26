@@ -84,7 +84,7 @@ public:
 	void setLazyCubemapInterval(double val) { lazyInterval = val; }
 
 	//This has the be the most crazy method name in the plugin
-	void getLazyCubemapUpdateOnlyDominantFaceOnMoving(bool &val, bool &alsoSecondDominantFace) { val = updateOnlyDominantOnMoving; alsoSecondDominantFace = updateSecondDominantOnMoving; }
+	void getLazyCubemapUpdateOnlyDominantFaceOnMoving(bool &val, bool &alsoSecondDominantFace) const { val = updateOnlyDominantOnMoving; alsoSecondDominantFace = updateSecondDominantOnMoving; }
 	void setLazyCubemapUpdateOnlyDominantFaceOnMoving(bool val, bool alsoSecondDominantFace) { updateOnlyDominantOnMoving = val; updateSecondDominantOnMoving = alsoSecondDominantFace; }
 
 	//! Does a cubemap redraw at the next possible opportunity when lazy-drawing is enabled.
