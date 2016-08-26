@@ -660,6 +660,7 @@ void Exoplanets::loadConfiguration(void)
 	setHabitableMode(conf->value("habitable_enabled", false).toBool());
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowExoplanetsButton = conf->value("flag_show_exoplanets_button", true).toBool();
+	setFlagShowExoplanetsDesignations(conf->value("flag_show_designations", true).toBool());
 	setMarkerColor(StelUtils::strToVec3f(conf->value("exoplanet_marker_color", "0.4,0.9,0.5").toString()), false);
 	setMarkerColor(StelUtils::strToVec3f(conf->value("habitable_exoplanet_marker_color", "1.0,0.5,0.0").toString()), true);
 
@@ -678,6 +679,7 @@ void Exoplanets::saveConfiguration(void)
 	conf->setValue("habitable_enabled", getHabitableMode());
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_exoplanets_button", flagShowExoplanetsButton);
+	conf->setValue("flag_show_designations", getFlagShowExoplanetsDesignations());
 	conf->setValue("habitable_exoplanet_marker_color", StelUtils::vec3fToStr(getMarkerColor(true)));
 	conf->setValue("exoplanet_marker_color", StelUtils::vec3fToStr(getMarkerColor(false)));
 
@@ -829,6 +831,16 @@ bool Exoplanets::getDisplayMode()
 void Exoplanets::setDisplayMode(bool b)
 {
 	Exoplanet::distributionMode=b;
+}
+
+bool Exoplanets::getFlagShowExoplanetsDesignations()
+{
+	return Exoplanet::showDesignations;
+}
+
+void Exoplanets::setFlagShowExoplanetsDesignations(bool b)
+{
+	Exoplanet::showDesignations=b;
 }
 
 bool Exoplanets::getTimelineMode()
