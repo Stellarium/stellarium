@@ -44,7 +44,7 @@ void S3DScene::Material::loadTexturesAsync()
 		tex_height = mgr.createTextureThread(map_height, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true), false);
 }
 
-void S3DScene::Material::calculateTraits()
+void S3DScene::Material::fixup()
 {
 	//traits.hasAmbientTexture = tex_Ka && tex_Ka->canBind();
 	traits.hasDiffuseTexture = tex_Kd && tex_Kd->canBind();
@@ -54,7 +54,7 @@ void S3DScene::Material::calculateTraits()
 	traits.hasHeightTexture = tex_height && tex_height->canBind();
 
 	//test if specular coefficient and shininess is non-zero
-	traits.hasSpecularity = Ks.lengthSquared()>0.0001f  && Ns > 0.0001f;
+	traits.hasSpecularity = Ks[0]<0.0f ? false : Ks.lengthSquared()>0.0001f  && Ns > 0.0001f;
 
 	bool alphaChannel = tex_Kd && tex_Kd->canBind() && tex_Kd->hasAlphaChannel();
 	//test if we require blending
@@ -62,7 +62,6 @@ void S3DScene::Material::calculateTraits()
 	{
 		//no alpha value set, no transparency
 		traits.hasTransparency = false;
-		d = 1.0f;
 	}
 	else if (d <1.0f)
 	{
@@ -73,6 +72,91 @@ void S3DScene::Material::calculateTraits()
 	{
 		//alpha = 1, check if texture has alpha channel, otherwise it makes no sense enabling transparency
 		traits.hasTransparency = alphaChannel;
+	}
+
+	//find out if Kd is valid
+	//this is probably the minimum we should expect
+	if(Kd[0]< .0f)
+	{
+		qWarning()<<"Material"<<name<<"has no Kd defined";
+		Kd = QVector3D(0.8f,0.8f,0.8f);
+	}
+
+	//support for "legacy" illumination using the illum statement
+	//Illum definitions are used by a lot of exporters, but their use is rather inconsistent
+	//Here we try to make something useful out of it
+	if(illum>I_NONE)
+	{
+		if(Ka[0]< .0f) //set to old default value
+			Ka = QVector3D(0.2f,0.2f,0.2f);
+
+		switch(illum)
+		{
+			case I_DIFFUSE:
+				//explicitely set Ka to Kd
+				Ka = Kd;
+				//explicitly disable specularity and transparency
+				traits.hasSpecularity = false;
+				traits.hasTransparency = false;
+				break;
+			case I_DIFFUSE_AND_AMBIENT:
+				//explicitly disable specularity and transparency
+				traits.hasSpecularity = false;
+				traits.hasTransparency = false;
+				break;
+			case I_SPECULAR:
+				//here, this follows the same logic as if no Illum was set
+				//only when there is a valid Ks and Ns, specularity is used
+				//this fixes problems with some exporters where this illum
+				//is set but Ns = 0
+				//traits.hasSpecularity = true;
+				traits.hasTransparency = false;
+				break;
+			case I_TRANSLUCENT:
+				//also follow the "no illum" logic here
+				//traits.hasSpecularity = false;
+				if(d<.0f)
+				{
+					d = 1.0f;
+					//here, transparancy is only enabled if
+					//there is actually something transparent!
+					//would be a waste of computing power otherwise
+					traits.hasTransparency = alphaChannel;
+				}
+				else
+				{
+					traits.hasTransparency = true;
+				}
+				break;
+			default:
+				qWarning()<<"Unknown illum model encountered"<<illum;
+				break;
+		}
+	}
+	else
+	{
+		if(Ka[0]< .0f)
+		{
+			//ambient was not set, old "illum 0" behaviour, set Ka to Kd
+			Ka = Kd;
+		}
+
+		if(d <.0f)
+		{
+			d = 1.0f;
+		}
+	}
+
+	//finally, find out if Ks and Ke are valid
+	if(Ks[0]< .0f)
+	{
+		//no specularity
+		Ks = QVector3D();
+	}
+	if(Ke[0]< .0f)
+	{
+		//no emission
+		Ke = QVector3D();
 	}
 }
 
@@ -215,7 +299,7 @@ bool S3DScene::glLoad()
 		finalizeTexture(mat.tex_bump);
 		finalizeTexture(mat.tex_height);
 
-		mat.calculateTraits();
+		mat.fixup();
 	}
 
 	glReady = ok;

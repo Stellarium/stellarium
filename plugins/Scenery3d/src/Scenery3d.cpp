@@ -54,6 +54,7 @@ Scenery3d::Scenery3d() :
 	renderer(NULL),
 	flagEnabled(false),
 	cleanedUp(false),
+	movementKeyInput(0.0,0.0,0.0),
 	oldProjectionType(StelCore::ProjectionPerspective),
 	loadCancel(false),
 	progressBar(NULL),	
