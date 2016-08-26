@@ -125,8 +125,6 @@ public:
 	//Debugging method, save the Frustum to be able to move away from it and analyze it
 	void saveFrusts();
 
-	enum ShadowCaster { None, Sun, Moon, Venus };
-
 	//! Returns the shader manager this instance uses
 	ShaderMgr& getShaderManager() { return shaderManager; }
 
@@ -222,10 +220,12 @@ private:
 	// a struct which encapsulates lighting info
 	struct LightParameters
 	{
+		//this is used for shadow calculation
+		enum ShadowCaster { SC_None, SC_Sun, SC_Moon, SC_Venus } shadowCaster;
 		QMatrix4x4 shadowModelView;
 
-		ShadowCaster lightSource;
 		Vec3f lightDirectionV3f;
+		//same as lightDirectionV3f, but as QVector3D
 		QVector3D lightDirectionWorld;
 		QVector3D ambient;
 		QVector3D directional;
@@ -234,6 +234,13 @@ private:
 
 		QVector3D torchDiffuse;
 		float torchAttenuation;
+
+		//these are just used for debugging
+		enum DirectionalSource { DS_Sun_Horiz, DS_Sun, DS_Moon, DS_Venus, DS_Venus_Ambient } directionalSource;
+		float sunAmbient;
+		float moonAmbient;
+		float backgroundAmbient;
+		float landscapeOpacity;
 	} lightInfo;
 
 	GlobalShaderParameters shaderParameters;
@@ -260,10 +267,6 @@ private:
 	float parallaxScale;
 
 	QFont debugTextFont;
-
-	QString lightMessage; // DEBUG/TEST ONLY. contains on-screen info on ambient/directional light strength and source.
-	QString lightMessage2; // DEBUG/TEST ONLY. contains on-screen info on ambient/directional light strength and source.
-	QString lightMessage3; // DEBUG/TEST ONLY. contains on-screen info on ambient/directional light strength and source.
 
 	// --- initialization
 	//! Determines what features the current opengl context supports
@@ -318,10 +321,6 @@ private:
 	void setupFrameUniforms(QOpenGLShaderProgram *shader);
 	//! Sets up shader uniforms specific to one material
 	void setupMaterialUniforms(QOpenGLShaderProgram *shader, const S3DScene::Material& mat);
-
-	//! Finds the correct light source out of Sun, Moon, Venus, and returns ambient and directional light components.
-	S3DRenderer::ShadowCaster calculateLightSource(float &ambientBrightness, float &diffuseBrightness, Vec3f &lightsourcePosition, float &emissiveFactor);
-
 
 	//! Adjust the frustum to the loaded scene bounding box according to Zhang et al.
 	void adjustShadowFrustum(const Vec3d &viewPos, const Vec3d &viewDir, const Vec3d &viewUp, const float fov, const float aspect);

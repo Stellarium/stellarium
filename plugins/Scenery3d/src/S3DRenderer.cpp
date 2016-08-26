@@ -285,13 +285,13 @@ bool S3DRenderer::drawArrays(bool shading, bool blendAlphaAdditive)
 
 	//override some shader Params
 	GlobalShaderParameters pm = shaderParameters;
-	switch(lightInfo.lightSource)
+	switch(lightInfo.shadowCaster)
 	{
-		case Venus:
+		case LightParameters::SC_Venus:
 			//turn shadow filter off to get sharper shadows
 			pm.shadowFilterQuality = S3DEnum::SFQ_OFF;
 			break;
-		case None:
+		case LightParameters::SC_None:
 			//disable shadow rendering to speed things up
 			pm.shadows = false;
 			break;
@@ -721,7 +721,7 @@ bool S3DRenderer::renderShadowMaps()
 		//Clear everything, also if focusbody is empty
 		glClear(GL_DEPTH_BUFFER_BIT);
 
-		if(lightInfo.lightSource != None && focusBodies[i].getVertCount())
+		if(lightInfo.shadowCaster != LightParameters::SC_None && focusBodies[i].getVertCount())
 		{
 			//Calculate the crop matrix so that the light's frustum is tightly fit to the current split's PSR+PSC polyhedron
 			//This alters the ProjectionMatrix of the light
@@ -770,40 +770,7 @@ void S3DRenderer::calculateLighting()
 {
 	//calculate which light source we need + intensity
 	float ambientBrightness, directionalBrightness,emissiveFactor;
-	lightInfo.lightSource = calculateLightSource(ambientBrightness, directionalBrightness, lightInfo.lightDirectionV3f, emissiveFactor);
 
-	lightInfo.lightDirectionWorld = QVector3D(lightInfo.lightDirectionV3f.v[0],lightInfo.lightDirectionV3f.v[1],lightInfo.lightDirectionV3f.v[2]);
-
-	//specular factor is calculated from other values for now
-	float specular = std::min(ambientBrightness*directionalBrightness*5.0f,1.0f);
-
-	//if the night vision mode is on, use red-tinted lighting
-	bool red=StelApp::getInstance().getVisionModeNight();
-
-	float torchDiff = shaderParameters.torchLight ? torchBrightness : 0.0f;
-	lightInfo.torchAttenuation = 1.0f / (torchRange * torchRange);
-
-	if(red)
-	{
-		lightInfo.ambient = QVector3D(ambientBrightness,0, 0);
-		lightInfo.directional = QVector3D(directionalBrightness,0,0);
-		lightInfo.emissive = QVector3D(emissiveFactor,0,0);
-		lightInfo.specular = QVector3D(specular,0,0);
-		lightInfo.torchDiffuse = QVector3D(torchDiff,0,0);
-	}
-	else
-	{
-		//for now, lighting is only white
-		lightInfo.ambient = QVector3D(ambientBrightness,ambientBrightness, ambientBrightness);
-		lightInfo.directional = QVector3D(directionalBrightness,directionalBrightness,directionalBrightness);
-		lightInfo.emissive = QVector3D(emissiveFactor,emissiveFactor,emissiveFactor);
-		lightInfo.specular = QVector3D(specular,specular,specular);
-		lightInfo.torchDiffuse = QVector3D(torchDiff,torchDiff,torchDiff);
-	}
-}
-
-S3DRenderer::ShadowCaster  S3DRenderer::calculateLightSource(float &ambientBrightness, float &directionalBrightness, Vec3f &lightsourcePosition, float &emissiveFactor)
-{
 	Vec3d sunPosition = sun->getAltAzPosAuto(core);
 	sunPosition.normalize();
 	Vec3d moonPosition = moon->getAltAzPosAuto(core);
@@ -847,18 +814,13 @@ S3DRenderer::ShadowCaster  S3DRenderer::calculateLightSource(float &ambientBrigh
 		ambientBrightness = 0.0f;
 	}
 
+	lightInfo.shadowCaster = LightParameters::SC_None;
 	directionalBrightness=0.0f;
-	ShadowCaster shadowcaster = None;
-	// DEBUG AIDS: Helper strings to be displayed
-	//TODO move these string manipulations to drawDebug, it is a bit dumb to do this every frame, even if not needed
-	QString sunAmbientString;
-	QString moonAmbientString;
-	QString backgroundAmbientString=QString("%1").arg(ambientBrightness, 6, 'f', 4);
-	QString directionalSourceString;
+	lightInfo.backgroundAmbient = ambientBrightness;
 
 	//assume light=sun for a start.
 	Vec3d lightPosition = sunPosition;
-	directionalSourceString="(Sun, below horiz.)";
+	lightInfo.directionalSource = LightParameters::DS_Sun_Horiz;
 
 	//calculate emissive factor
 	if(l!=NULL)
@@ -885,19 +847,19 @@ S3DRenderer::ShadowCaster  S3DRenderer::calculateLightSource(float &ambientBrigh
 	// calculate ambient light
 	if(sinSunAngle > -0.3f) // sun above -18 deg?
 	{
-		ambientBrightness += qMin(0.3f, sinSunAngle+0.3f);
-		sunAmbientString=QString("%1").arg(qMin(0.3f, sinSunAngle+0.3f), 6, 'f', 4);
+		lightInfo.sunAmbient = qMin(0.3f, sinSunAngle+0.3f);
+		ambientBrightness += lightInfo.sunAmbient;
 	}
 	else
-		sunAmbientString=QString("0.0");
+		lightInfo.sunAmbient = 0.0f;
 
 	if ((sinMoonAngle>0.0f) && (sinSunAngle<0.0f))
 	{
-		ambientBrightness += sqrt(sinMoonAngle * ((std::cos(moonPhaseAngle)+1)/2)) * LUNAR_BRIGHTNESS_FACTOR;
-		moonAmbientString=QString("%1").arg(sqrt(sinMoonAngle * ((std::cos(moonPhaseAngle)+1)/2)) * LUNAR_BRIGHTNESS_FACTOR);
+		lightInfo.moonAmbient = sqrt(sinMoonAngle * ((std::cos(moonPhaseAngle)+1)/2)) * LUNAR_BRIGHTNESS_FACTOR;
+		ambientBrightness += lightInfo.moonAmbient;
 	}
 	else
-		moonAmbientString=QString("0.0");
+		lightInfo.moonAmbient = 0.0f;
 
 	// Now find shadow caster + directional light, if any:
 	if (sinSunAngle>-0.1f)
@@ -905,15 +867,9 @@ S3DRenderer::ShadowCaster  S3DRenderer::calculateLightSource(float &ambientBrigh
 		directionalBrightness=qMin(0.7f, std::sqrt(sinSunAngle+0.1f)); // limit to 0.7 in order to keep total below 1.
 		//redundant
 		//lightPosition = sunPosition;
-		if (shaderParameters.shadows) shadowcaster = Sun;
-		directionalSourceString="Sun";
+		if (shaderParameters.shadows) lightInfo.shadowCaster = LightParameters::SC_Sun;
+		lightInfo.directionalSource = LightParameters::DS_Sun;
 	}
-	/*   else if (sinSunAngle> -0.3f) // sun above -18: create shadowless directional pseudo-light from solar azimuth
-    {
-	directionalBrightness=qMin(0.7, sinSunAngle+0.3); // limit to 0.7 in order to keep total below 1.
-	lightsourcePosition.set(sunPosition.v[0], sunPosition.v[1], sinSunAngle+0.3);
-	directionalSourceString="(Sun, below hor.)";
-    }*/
 	// "else" is required now, else we have lunar shadow with sun above horizon...
 	else if (sinMoonAngle>0.0f)
 	{
@@ -939,9 +895,9 @@ S3DRenderer::ShadowCaster  S3DRenderer::calculateLightSource(float &ambientBrigh
 		{
 			directionalBrightness = moonBrightness;
 			lightPosition = moonPosition;
-			if (shaderParameters.shadows) shadowcaster = Moon;
-			directionalSourceString="Moon";
-		} else directionalSourceString="Moon";
+			if (shaderParameters.shadows) lightInfo.shadowCaster = LightParameters::SC_Moon;
+		}
+		lightInfo.directionalSource = LightParameters::DS_Moon;
 		//Alternately, construct a term around lunar brightness, like
 		// directionalBrightness=(mag/-10)
 	}
@@ -970,9 +926,9 @@ S3DRenderer::ShadowCaster  S3DRenderer::calculateLightSource(float &ambientBrigh
 		{
 			directionalBrightness = venusBrightness;
 			lightPosition = venusPosition;
-			if (shaderParameters.shadows) shadowcaster = Venus;
-			directionalSourceString="Venus";
-		} else directionalSourceString="(Venus, flooded by ambient)";
+			if (shaderParameters.shadows) lightInfo.shadowCaster = LightParameters::SC_Venus;
+			lightInfo.directionalSource = LightParameters::DS_Venus;
+		} else lightInfo.directionalSource = LightParameters::DS_Venus_Ambient;
 		//Alternately, construct a term around Venus brightness, like
 		// directionalBrightness=(mag/-100)
 	}
@@ -984,9 +940,10 @@ S3DRenderer::ShadowCaster  S3DRenderer::calculateLightSource(float &ambientBrigh
 	}
 
 	//convert to float
-	lightsourcePosition.set(lightPosition.v[0], lightPosition.v[1], lightPosition.v[2]);
+	lightInfo.lightDirectionV3f = Vec3f(lightPosition.v[0],lightPosition[1],lightPosition.v[2]);
+	lightInfo.lightDirectionWorld = QVector3D(lightPosition.v[0],lightPosition[1],lightPosition.v[2]);
 
-	float landscapeOpacity = 0.0f;
+	lightInfo.landscapeOpacity = 0.0f;
 
 	//check landscape occlusion, modify directional if needed
 	if(directionalBrightness>0)
@@ -994,32 +951,40 @@ S3DRenderer::ShadowCaster  S3DRenderer::calculateLightSource(float &ambientBrigh
 		if(l)
 		{
 			//TODO the changes are currently rather harsh, find a better method (like angular distance of light source to horizon, or bitmap interpolation for the alpha values)
-			landscapeOpacity = l->getOpacity(lightPosition);
+			lightInfo.landscapeOpacity = l->getOpacity(lightPosition);
 
 			//lerp between the determined opacity and 1.0, depending on landscape fade (visibility)
-			float fadeValue = 1.0f + l->getEffectiveLandFadeValue() * (-landscapeOpacity);
+			float fadeValue = 1.0f + l->getEffectiveLandFadeValue() * (-lightInfo.landscapeOpacity);
 			directionalBrightness *= fadeValue;
 		}
 	}
 
-	//TODO remove the string stuff from this method...
-	// DEBUG: Prepare output message
-	QString shadowCasterName;
-	switch (shadowcaster) {
-		case None:  shadowCasterName="None";  break;
-		case Sun:   shadowCasterName="Sun";   break;
-		case Moon:  shadowCasterName="Moon";  break;
-		case Venus: shadowCasterName="Venus"; break;
-		default: shadowCasterName="Error!!!";
-	}
-	lightMessage=QString("Ambient: %1 Directional: %2. Shadows cast by: %3 from %4/%5/%6")
-			.arg(ambientBrightness, 6, 'f', 4).arg(directionalBrightness, 6, 'f', 4)
-			.arg(shadowCasterName).arg(lightsourcePosition.v[0], 6, 'f', 4)
-			.arg(lightsourcePosition.v[1], 6, 'f', 4).arg(lightsourcePosition.v[2], 6, 'f', 4);
-	lightMessage2=QString("Contributions: Ambient     Sun: %1, Moon: %2, Background+^L: %3").arg(sunAmbientString).arg(moonAmbientString).arg(backgroundAmbientString);
-	lightMessage3=QString("               Directional %1 by: %2, emissive factor: %3, landscape opacity: %4").arg(directionalBrightness, 6, 'f', 4).arg(directionalSourceString).arg(emissiveFactor).arg(landscapeOpacity);
+	//specular factor is calculated from other values for now
+	float specular = std::min(ambientBrightness*directionalBrightness*5.0f,1.0f);
 
-	return shadowcaster;
+	//if the night vision mode is on, use red-tinted lighting
+	bool red=StelApp::getInstance().getVisionModeNight();
+
+	float torchDiff = shaderParameters.torchLight ? torchBrightness : 0.0f;
+	lightInfo.torchAttenuation = 1.0f / (torchRange * torchRange);
+
+	if(red)
+	{
+		lightInfo.ambient = QVector3D(ambientBrightness,0, 0);
+		lightInfo.directional = QVector3D(directionalBrightness,0,0);
+		lightInfo.emissive = QVector3D(emissiveFactor,0,0);
+		lightInfo.specular = QVector3D(specular,0,0);
+		lightInfo.torchDiffuse = QVector3D(torchDiff,0,0);
+	}
+	else
+	{
+		//for now, lighting is only white
+		lightInfo.ambient = QVector3D(ambientBrightness,ambientBrightness, ambientBrightness);
+		lightInfo.directional = QVector3D(directionalBrightness,directionalBrightness,directionalBrightness);
+		lightInfo.emissive = QVector3D(emissiveFactor,emissiveFactor,emissiveFactor);
+		lightInfo.specular = QVector3D(specular,specular,specular);
+		lightInfo.torchDiffuse = QVector3D(torchDiff,torchDiff,torchDiff);
+	}
 }
 
 void S3DRenderer::calcCubeMVP(const Vec3d translation)
@@ -1476,6 +1441,38 @@ void S3DRenderer::drawDebug()
 	const SceneInfo& info = currentScene->getSceneInfo();
 
 	StelPainter painter(altAzProjector);
+
+	QString lightMessage;
+	QString lightMessage2;
+	QString lightMessage3;
+	QString directionalSourceString;
+
+	QString shadowCasterName;
+	switch (lightInfo.shadowCaster) {
+		case LightParameters::SC_None:  shadowCasterName="None";  break;
+		case LightParameters::SC_Sun:   shadowCasterName="Sun";   break;
+		case LightParameters::SC_Moon:  shadowCasterName="Moon";  break;
+		case LightParameters::SC_Venus: shadowCasterName="Venus"; break;
+		default: shadowCasterName="Error!!!";
+	}
+
+	switch(lightInfo.directionalSource){
+		case LightParameters::DS_Sun_Horiz:		directionalSourceString="(Sun, below horiz.)"; break;
+		case LightParameters::DS_Sun:			directionalSourceString="Sun"; break;
+		case LightParameters::DS_Moon:			directionalSourceString="Moon"; break;
+		case LightParameters::DS_Venus:			directionalSourceString="Venus"; break;
+		case LightParameters::DS_Venus_Ambient:		directionalSourceString="(Venus, flooded by ambient)"; break;
+		default: directionalSourceString="Error!!!";
+	}
+
+	lightMessage=QString("Ambient: %1 Directional: %2. Shadows cast by: %3 from %4/%5/%6")
+			.arg(lightInfo.ambient[0], 6, 'f', 4).arg(lightInfo.directional[0], 6, 'f', 4)
+			.arg(shadowCasterName).arg(lightInfo.lightDirectionV3f.v[0], 6, 'f', 4)
+			.arg(lightInfo.lightDirectionV3f.v[1], 6, 'f', 4).arg(lightInfo.lightDirectionV3f.v[2], 6, 'f', 4);
+	lightMessage2=QString("Contributions: Ambient     Sun: %1, Moon: %2, Background+^L: %3").arg(lightInfo.sunAmbient, 6, 'f', 4).arg(lightInfo.moonAmbient, 6, 'f', 4).arg(lightInfo.backgroundAmbient, 6, 'f', 4);
+	lightMessage3=QString("               Directional %1 by: %2, emissive factor: %3, landscape opacity: %4").arg(lightInfo.directional[0], 6, 'f', 4).arg(directionalSourceString).arg(lightInfo.emissive[0]).arg(lightInfo.landscapeOpacity);
+
+
 	painter.setFont(debugTextFont);
 	painter.setColor(1.f,0.f,1.f,1.f);
 	// For now, these messages print light mixture values.
@@ -1562,7 +1559,7 @@ void S3DRenderer::drawDebug()
 	}
 
 	screen_y -= 30.0f;
-	str = QString("Venus: %1").arg(lightInfo.lightSource == Venus);
+	str = QString("Venus: %1").arg(lightInfo.shadowCaster == LightParameters::SC_Venus);
 	painter.drawText(screen_x, screen_y, str);
 }
 
