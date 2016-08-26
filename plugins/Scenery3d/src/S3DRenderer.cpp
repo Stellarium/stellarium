@@ -278,22 +278,29 @@ void S3DRenderer::setupMaterialUniforms(QOpenGLShaderProgram* shader, const S3DS
 	}
 }
 
+//depth sort helper
+Vec3f zSortValue;
+bool zSortFunction(const StelOBJ::MaterialGroup*& mLeft, const StelOBJ::MaterialGroup*& mRight)
+{
+	//we can avoid taking the sqrt here
+	float dist1 = (mLeft->centroid - zSortValue).lengthSquared();
+	float dist2 = (mRight->centroid - zSortValue).lengthSquared();
+	return dist1>dist2;
+}
+
 bool S3DRenderer::drawArrays(bool shading, bool blendAlphaAdditive)
 {
-	QOpenGLShaderProgram* curShader = NULL;
-	QSet<QOpenGLShaderProgram*> initialized;
-
 	//override some shader Params
-	GlobalShaderParameters pm = shaderParameters;
+	renderShaderParameters = shaderParameters;
 	switch(lightInfo.shadowCaster)
 	{
 		case LightParameters::SC_Venus:
 			//turn shadow filter off to get sharper shadows
-			pm.shadowFilterQuality = S3DEnum::SFQ_OFF;
+			renderShaderParameters.shadowFilterQuality = S3DEnum::SFQ_OFF;
 			break;
 		case LightParameters::SC_None:
 			//disable shadow rendering to speed things up
-			pm.shadows = false;
+			renderShaderParameters.shadows = false;
 			break;
 		default:
 			break;
@@ -302,13 +309,17 @@ bool S3DRenderer::drawArrays(bool shading, bool blendAlphaAdditive)
 	//bind VAO
 	currentScene->glBind();
 
-	//assume backfaceculling is on
-	bool backfaceCullState = true;
+	//assume backfaceculling is on, and blending turned off
+	backfaceCullState = true;
+	blendEnabled = false;
+	lastMaterial = Q_NULLPTR;
+	curShader = Q_NULLPTR;
+	initializedShaders.clear();
+	transparentGroups.clear();
 	bool success = true;
 
 	//TODO optimize: clump models with same material together when first loading to minimize state changes
-	const S3DScene::Material* lastMaterial = NULL;
-	bool blendEnabled = false;
+
 	const S3DScene::ObjectList& objectList = currentScene->getObjects();
 	for(int i=0; i<objectList.size(); ++i)
 	{
@@ -321,115 +332,144 @@ bool S3DRenderer::drawArrays(bool shading, bool blendAlphaAdditive)
 			const S3DScene::Material* pMaterial = &currentScene->getMaterial(matGroup.materialIndex);
 			Q_ASSERT(pMaterial);
 
-			++drawnModels;
-
-			if(lastMaterial!=pMaterial)
+			if(shading && pMaterial->traits.hasTransparency)
 			{
-				++materialSwitches;
-				lastMaterial = pMaterial;
-
-				//get a shader from shadermgr that fits the current state + material combo
-				QOpenGLShaderProgram* newShader = shaderManager.getShader(pm,pMaterial);
-				if(!newShader)
-				{
-					//shader invalid, can't draw
-					rendererMessage(q_("Scenery3d shader error, can't draw. Check debug output for details."));
-					success = false;
-					break;
-				}
-				if(newShader!=curShader)
-				{
-					curShader = newShader;
-					curShader->bind();
-					if(!initialized.contains(curShader))
-					{
-						++shaderSwitches;
-
-						//needs first-time initialization for this pass
-						if(shading)
-						{
-							setupPassUniforms(curShader);
-							setupFrameUniforms(curShader);
-						}
-						else
-						{
-							//really only mvp+alpha thresh required, so only set this
-							SET_UNIFORM(curShader,ShaderMgr::UNIFORM_MAT_MVP,projectionMatrix * modelViewMatrix);
-							SET_UNIFORM(curShader,ShaderMgr::UNIFORM_FLOAT_ALPHA_THRESH,currentScene->getSceneInfo().transparencyThreshold);
-						}
-
-						//we remember if we have initialized this shader already, so we can skip "global" initialization later if we encounter it again
-						initialized.insert(curShader);
-					}
-				}
-				if(shading)
-				{
-					//perform full material setup
-					setupMaterialUniforms(curShader,*pMaterial);
-				}
-				else
-				{
-					//set diffuse tex if possible for alpha testing
-					if( ! pMaterial->tex_Kd.isNull())
-					{
-						pMaterial->tex_Kd->bind(0);
-						SET_UNIFORM(curShader,ShaderMgr::UNIFORM_TEX_DIFFUSE,0);
-					}
-				}
-
-				if(pMaterial->traits.hasTransparency )
-				{
-					//TODO provide Z-sorting for transparent objects (center of bounding box should be fine)
-					if(!blendEnabled)
-					{
-						glEnable(GL_BLEND);
-						if(blendAlphaAdditive)
-							glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-						else //traditional direct blending
-							glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-						blendEnabled = true;
-					}
-				}
-				else
-				{
-					if(blendEnabled)
-					{
-						glDisable(GL_BLEND);
-						blendEnabled=false;
-					}
-				}
-
-				if(backfaceCullState && pMaterial->bBackface)
-				{
-					glDisable(GL_CULL_FACE);
-					backfaceCullState = false;
-				}
-				else if(!backfaceCullState && !pMaterial->bBackface)
-				{
-					glEnable(GL_CULL_FACE);
-					backfaceCullState = true;
-				}
+				//process transparent objects later, with Z sorting
+				transparentGroups.append(&matGroup);
+				continue;
 			}
 
-
-			currentScene->glDraw(matGroup.startIndex,matGroup.indexCount);
-			drawnTriangles+=matGroup.indexCount/3;
+			success = drawMaterialGroup(matGroup,shading,blendAlphaAdditive);
+			if(!success)
+				break;
 		}
 	}
 
-	if(!backfaceCullState)
-		glEnable(GL_CULL_FACE);
+	//sort and render transparent objects
+	if(transparentGroups.size()>0)
+	{
+		zSortValue = currentScene->getEyePosition().toVec3f();
+		std::sort(transparentGroups.begin(),transparentGroups.end(),zSortFunction);
 
+		for(int i = 0; i<transparentGroups.size();++i)
+		{
+			success = drawMaterialGroup(*transparentGroups[i],shading,blendAlphaAdditive);
+			if(!success)
+				break;
+		}
+	}
+
+	//release last used shader and VAO
 	if(curShader)
 		curShader->release();
+	currentScene->glRelease();
+
+	//reset to default states
+	if(!backfaceCullState)
+		glEnable(GL_CULL_FACE);
 
 	if(blendEnabled)
 		glDisable(GL_BLEND);
 
-	//release VAO
-	currentScene->glRelease();
 
 	return success;
+}
+
+bool S3DRenderer::drawMaterialGroup(const StelOBJ::MaterialGroup &matGroup, bool shading, bool blendAlphaAdditive)
+{
+	const S3DScene::Material* pMaterial = &currentScene->getMaterial(matGroup.materialIndex);
+
+	if(lastMaterial!=pMaterial)
+	{
+		++materialSwitches;
+		lastMaterial = pMaterial;
+
+		//get a shader from shadermgr that fits the current state + material combo
+		QOpenGLShaderProgram* newShader = shaderManager.getShader(renderShaderParameters,pMaterial);
+		if(!newShader)
+		{
+			//shader invalid, can't draw
+			rendererMessage(q_("Scenery3d shader error, can't draw. Check debug output for details."));
+			return false;
+		}
+		if(newShader!=curShader)
+		{
+			curShader = newShader;
+			curShader->bind();
+			if(!initializedShaders.contains(curShader))
+			{
+				++shaderSwitches;
+
+				//needs first-time initialization for this pass
+				if(shading)
+				{
+					setupPassUniforms(curShader);
+					setupFrameUniforms(curShader);
+				}
+				else
+				{
+					//really only mvp+alpha thresh required, so only set this
+					SET_UNIFORM(curShader,ShaderMgr::UNIFORM_MAT_MVP,projectionMatrix * modelViewMatrix);
+					SET_UNIFORM(curShader,ShaderMgr::UNIFORM_FLOAT_ALPHA_THRESH,currentScene->getSceneInfo().transparencyThreshold);
+				}
+
+				//we remember if we have initialized this shader already, so we can skip "global" initialization later if we encounter it again
+				initializedShaders.insert(curShader);
+			}
+		}
+		if(shading)
+		{
+			//perform full material setup
+			setupMaterialUniforms(curShader,*pMaterial);
+		}
+		else
+		{
+			//set diffuse tex if possible for alpha testing
+			if( ! pMaterial->tex_Kd.isNull())
+			{
+				pMaterial->tex_Kd->bind(0);
+				SET_UNIFORM(curShader,ShaderMgr::UNIFORM_TEX_DIFFUSE,0);
+			}
+		}
+
+		if(pMaterial->traits.hasTransparency )
+		{
+			if(!blendEnabled)
+			{
+				glEnable(GL_BLEND);
+				if(blendAlphaAdditive)
+					glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+				else //traditional direct blending
+					glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+				blendEnabled = true;
+			}
+		}
+		else
+		{
+			if(blendEnabled)
+			{
+				glDisable(GL_BLEND);
+				blendEnabled=false;
+			}
+		}
+
+		if(backfaceCullState && pMaterial->bBackface)
+		{
+			glDisable(GL_CULL_FACE);
+			backfaceCullState = false;
+		}
+		else if(!backfaceCullState && !pMaterial->bBackface)
+		{
+			glEnable(GL_CULL_FACE);
+			backfaceCullState = true;
+		}
+	}
+
+
+	currentScene->glDraw(matGroup.startIndex,matGroup.indexCount);
+	++drawnModels;
+	drawnTriangles+=matGroup.indexCount/3;
+	return true;
 }
 
 void S3DRenderer::computeFrustumSplits(const Vec3d& viewPos, const Vec3d& viewDir, const Vec3d& viewUp)
