@@ -1601,27 +1601,6 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="1">
-                  <widget class="QToolButton" name="colorEclipticLineJ2000">
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="1">
-                  <widget class="QToolButton" name="colorEquatorJ2000Line">
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="1">
-                  <widget class="QToolButton" name="colorEquatorLine">
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                  </widget>
-                 </item>
                  <item row="4" column="0">
                   <widget class="QCheckBox" name="showHorizonLineCheckBox">
                    <property name="toolTip">
@@ -1629,23 +1608,6 @@
                    </property>
                    <property name="text">
                     <string>Horizon</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="1">
-                  <widget class="QToolButton" name="colorHorizonLine">
-                   <property name="toolTip">
-                    <string/>
-                   </property>
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="1">
-                  <widget class="QToolButton" name="colorEclipticLineOfDate">
-                   <property name="text">
-                    <string notr="true"/>
                    </property>
                   </widget>
                  </item>
@@ -1679,13 +1641,6 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="5" column="1">
-                  <widget class="QToolButton" name="colorGalacticEquatorLine">
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                  </widget>
-                 </item>
                  <item row="3" column="0">
                   <widget class="QCheckBox" name="showEclipticLineOfDateCheckBox">
                    <property name="toolTip">
@@ -1693,6 +1648,66 @@
                    </property>
                    <property name="text">
                     <string>Ecliptic (of date)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QToolButton" name="colorEquatorJ2000Line">
+                   <property name="toolTip">
+                    <string>Color of equator (J2000.0)</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QToolButton" name="colorEquatorLine">
+                   <property name="toolTip">
+                    <string>Color of equator (of date)</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QToolButton" name="colorEclipticLineJ2000">
+                   <property name="toolTip">
+                    <string>Color of ecliptic (J2000.0)</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1">
+                  <widget class="QToolButton" name="colorEclipticLineOfDate">
+                   <property name="toolTip">
+                    <string>Color of ecliptic (of date)</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="1">
+                  <widget class="QToolButton" name="colorHorizonLine">
+                   <property name="toolTip">
+                    <string>Color of horizon</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="1">
+                  <widget class="QToolButton" name="colorGalacticEquatorLine">
+                   <property name="toolTip">
+                    <string>Color of galactic equator</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
                    </property>
                   </widget>
                  </item>
@@ -1772,6 +1787,9 @@
                  </item>
                  <item row="0" column="1">
                   <widget class="QToolButton" name="colorCardinalPoints">
+                   <property name="toolTip">
+                    <string>Color of cardinal points</string>
+                   </property>
                    <property name="text">
                     <string notr="true"/>
                    </property>
@@ -1779,6 +1797,9 @@
                  </item>
                  <item row="1" column="1">
                   <widget class="QToolButton" name="colorMeridianLine">
+                   <property name="toolTip">
+                    <string>Color of meridian</string>
+                   </property>
                    <property name="text">
                     <string notr="true"/>
                    </property>
@@ -1786,6 +1807,9 @@
                  </item>
                  <item row="2" column="1">
                   <widget class="QToolButton" name="colorPrimeVerticalLine">
+                   <property name="toolTip">
+                    <string>Color of Prime Vertical</string>
+                   </property>
                    <property name="text">
                     <string notr="true"/>
                    </property>
@@ -1793,6 +1817,9 @@
                  </item>
                  <item row="3" column="1">
                   <widget class="QToolButton" name="colorColuresLine">
+                   <property name="toolTip">
+                    <string>Color of colures</string>
+                   </property>
                    <property name="text">
                     <string notr="true"/>
                    </property>
@@ -1800,6 +1827,9 @@
                  </item>
                  <item row="4" column="1">
                   <widget class="QToolButton" name="colorLongitudeLine">
+                   <property name="toolTip">
+                    <string>Color of the opposition/conjunction longitude line</string>
+                   </property>
                    <property name="text">
                     <string notr="true"/>
                    </property>
@@ -1807,6 +1837,9 @@
                  </item>
                  <item row="5" column="1">
                   <widget class="QToolButton" name="colorCircumpolarCircles">
+                   <property name="toolTip">
+                    <string>Color of circumpolar circles</string>
+                   </property>
                    <property name="text">
                     <string notr="true"/>
                    </property>
@@ -1814,6 +1847,9 @@
                  </item>
                  <item row="6" column="1">
                   <widget class="QToolButton" name="colorPrecessionCircles">
+                   <property name="toolTip">
+                    <string>Color of precession circles</string>
+                   </property>
                    <property name="text">
                     <string notr="true"/>
                    </property>
@@ -1823,20 +1859,6 @@
                </item>
                <item row="0" column="0">
                 <layout class="QGridLayout" name="gridLayout_9">
-                 <item row="2" column="1">
-                  <widget class="QToolButton" name="colorEclipticGridJ2000">
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="1">
-                  <widget class="QToolButton" name="colorEquatorialGrid">
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                  </widget>
-                 </item>
                  <item row="3" column="0">
                   <widget class="QCheckBox" name="showEclipticGridOfDateCheckBox">
                    <property name="toolTip">
@@ -1844,20 +1866,6 @@
                    </property>
                    <property name="text">
                     <string>Ecliptic grid (of date)</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="1">
-                  <widget class="QToolButton" name="colorEquatorialJ2000Grid">
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="5" column="1">
-                  <widget class="QToolButton" name="colorGalacticGrid">
-                   <property name="text">
-                    <string notr="true"/>
                    </property>
                   </widget>
                  </item>
@@ -1891,13 +1899,6 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="3" column="1">
-                  <widget class="QToolButton" name="colorEclipticGridOfDate">
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                  </widget>
-                 </item>
                  <item row="1" column="0">
                   <widget class="QCheckBox" name="showEquatorialGridCheckBox">
                    <property name="toolTip">
@@ -1908,13 +1909,6 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="4" column="1">
-                  <widget class="QToolButton" name="colorAzimuthalGrid">
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                  </widget>
-                 </item>
                  <item row="5" column="0">
                   <widget class="QCheckBox" name="showGalacticGridCheckBox">
                    <property name="toolTip">
@@ -1922,6 +1916,66 @@
                    </property>
                    <property name="text">
                     <string>Galactic grid</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QToolButton" name="colorEquatorialJ2000Grid">
+                   <property name="toolTip">
+                    <string>Color of the equatorial grid (J2000.0)</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QToolButton" name="colorEquatorialGrid">
+                   <property name="toolTip">
+                    <string>Color of the equatorial grid (of date)</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QToolButton" name="colorEclipticGridJ2000">
+                   <property name="toolTip">
+                    <string>Color of the ecliptical grid (J2000.0)</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1">
+                  <widget class="QToolButton" name="colorEclipticGridOfDate">
+                   <property name="toolTip">
+                    <string>Color of the ecliptical grid (of date)</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="1">
+                  <widget class="QToolButton" name="colorAzimuthalGrid">
+                   <property name="toolTip">
+                    <string>Color of the azimuthal grid</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="1">
+                  <widget class="QToolButton" name="colorGalacticGrid">
+                   <property name="toolTip">
+                    <string>Color of the galactic grid</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
                    </property>
                   </widget>
                  </item>
@@ -2765,7 +2819,7 @@
   <customwidget>
    <class>BarFrame</class>
    <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
+   <header location="global">Dialog.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
@@ -2801,12 +2855,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
