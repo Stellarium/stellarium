@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-22 21:44+0700\n"
-"PO-Revision-Date: 2016-08-25 18:29+0000\n"
+"PO-Revision-Date: 2016-08-28 03:35+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-08-26 05:16+0000\n"
+"X-Launchpad-Export-Date: 2016-08-28 06:09+0000\n"
 "X-Generator: Launchpad (build 18179)\n"
 
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:188
@@ -114,7 +114,7 @@ msgstr "Oppositio–konjunktiolinja"
 #: src/core/modules/GridLinesMgr.cpp:639 src/core/modules/GridLinesMgr.cpp:966
 #: src/ui_viewDialog.h:1801
 msgid "Prime Vertical"
-msgstr "Päävertikaali"
+msgstr "Ensivertikaali"
 
 #: src/core/modules/GridLinesMgr.cpp:643
 msgid "Equinoctial Colure"
@@ -1070,11 +1070,11 @@ msgstr "Lisää synodinen kuukausi"
 
 #: src/core/StelCore.cpp:241
 msgid "Add 1 draconic month"
-msgstr "Lisää drakoninen kuukausi"
+msgstr "Lisää drakoniittinen kuukausi"
 
 #: src/core/StelCore.cpp:242
 msgid "Add 1 draconic year"
-msgstr "Lisää drakoninen vuosi"
+msgstr "Lisää drakoniittinen vuosi"
 
 #: src/core/StelCore.cpp:243
 msgid "Add 1 anomalistic month"
@@ -1134,11 +1134,11 @@ msgstr "Vähennä synodinen kuukausi"
 
 #: src/core/StelCore.cpp:257
 msgid "Subtract 1 draconic month"
-msgstr "Vähennä drakoninen kuukausi"
+msgstr "Vähennä drakoniittinen kuukausi"
 
 #: src/core/StelCore.cpp:258
 msgid "Subtract 1 draconic year"
-msgstr "Vähennä drakoninen vuosi"
+msgstr "Vähennä drakoniittinen vuosi"
 
 #: src/core/StelCore.cpp:259
 msgid "Subtract 1 anomalistic month"
@@ -2118,7 +2118,7 @@ msgid ""
 "available via the \"%1\" button."
 msgstr ""
 "Alla on lueteltu vain näppäinkomennoin määritellyt toiminnot. Lisää "
-"toimintoja voi olla saatavilla \"%1\"-näppäimellä."
+"toimintoja voi olla saatavilla ”%1”-näppäimellä."
 
 #: src/gui/HelpDialog.cpp:213
 msgid ""
@@ -2476,7 +2476,7 @@ msgstr "ZIP-arkisto"
 #: src/gui/AddRemoveLandscapesDialog.cpp:129
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
-msgstr "Maisema \"%1\" on asennettu onnistuneesti."
+msgstr "Maisema ”%1” on asennettu onnistuneesti."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:130
 #: src/gui/AddRemoveLandscapesDialog.cpp:157
@@ -2502,7 +2502,7 @@ msgstr "Virhe!"
 #: src/gui/AddRemoveLandscapesDialog.cpp:156
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
-msgstr "Maisema \"%1\" on poistettu onnistuneesti."
+msgstr "Maisema ”%1” on poistettu onnistuneesti."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:167
 #: src/gui/AddRemoveLandscapesDialog.cpp:237
@@ -5561,7 +5561,7 @@ msgstr "Näytä meridiaanilinja."
 
 #: src/ui_viewDialog.h:1799
 msgid "Show Prime (East-West) Vertical."
-msgstr "Näytä päävertikaali (itä–länsisuuntainen linja)"
+msgstr "Näytä ensivertikaali (idästä zeniitin kautta länteen kulkeva linja)."
 
 #: src/ui_viewDialog.h:1803
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
@@ -5598,8 +5598,7 @@ msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
 msgstr ""
-"Maan akselin liikeympyrät ekliptisten napojen ympärillä. Näytetään vain "
-"Maassa."
+"Maan akselin liikeympyrät ekliptisten napojen ympäri. Näytetään vain Maassa."
 
 #: src/ui_viewDialog.h:1817
 msgid "Precession circles"
@@ -6674,7 +6673,7 @@ msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
 "subject when posting."
 msgstr ""
-"Tukea tarjotaan Launchpad-sivustolta. Varmista, että lisäät otsikkoon \"%1\" "
+"Tukea tarjotaan Launchpad-sivustolta. Varmista, että lisäät otsikkoon ”%1” "
 "kun lähetät viestin."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
@@ -6732,7 +6731,7 @@ msgid ""
 "and set the severity to \"wishlist\"."
 msgstr ""
 "Jos haluat ehdottaa uutta ominaisuutta, voit laatia virheraportin ja asettaa "
-"sen tärkeysarvoksi \"wishlist\"."
+"sen tärkeysarvoksi ”wishlist”."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
@@ -7787,7 +7786,7 @@ msgid ""
 "the default %3 file.  The old file will be backed up as %4.  This can be "
 "found in the user data directory, under \"modules/Satellites/\"."
 msgstr ""
-"Napsauttamalla \"%1\"-näppäintä tämän valintaikkunan \"%2\"-välilehdellä "
+"Napsauttamalla ”%1”-näppäintä tämän valintaikkunan ”%2”-välilehdellä "
 "palautetaan oletus-%3-tiedosto. Vanha tiedosto varmuuskopioidaan nimellä %4. "
 "Se löytyy käyttäjätietojen hakemiston alihakemistosta modules/Satellites/."
 
@@ -7844,9 +7843,9 @@ msgid ""
 "you wish to add and select the \"add\" button."
 msgstr ""
 "1. Varmista, että haluamasi lisättävät satelliitit löytyvät jostakin "
-"satelliittein asetusikkunan Lähteet-välilehden osoitteista. 2. Mene "
-"satelliitit-välilehdelle, ja napsauta '+'-painiketta. Valitse satelliitit, "
-"jotka haluat lisätä ja paina \"Lisää\"-painiketta."
+"satelliittien asetusikkunan ”Lähteet”-välilehden osoitteista. 2. Mene "
+"satelliitit-välilehdelle, ja napsauta ”+”-painiketta. Valitse satelliitit, "
+"jotka haluat lisätä ja napsauta ”Lisää”-painiketta."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:440
 msgid "Technical notes"
@@ -8277,7 +8276,7 @@ msgid ""
 "computerized mount (a \"GoTo telescope\")."
 msgstr ""
 "Tämä laajennus mahdollistaa Stellariumille ohjauskomentojen lähettämisen "
-"tietokoneistetulle kaukoputken jalustalle (\"GoTo-kaukoputki\")."
+"tietokoneistetulle kaukoputken jalustalle (”GoTo-kaukoputkelle”)."
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:166
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:219
@@ -8631,7 +8630,7 @@ msgid ""
 "USB) adapter may be necessary."
 msgstr ""
 "Jos tietokoneessasi ei ole sarjaporttia ja kaukoputken yhdistäminen onnistuu "
-"ainoastaan sellaisen kautta, on siinä tapauksessa käytettävä erityistä "
+"ainoastaan sellaisen kautta, on tällaisessa tapauksessa käytettävä erityistä "
 "sarjaportti–USB-sovitinta."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
@@ -8949,7 +8948,7 @@ msgid ""
 "Mark the 'Use field of view indicators' option, then enter a list of values "
 "separated with commas in the field below."
 msgstr ""
-"Ota käyttöön \"Näytä näkökenttien osoittimet\" -asetus, ja syötä pilkulla "
+"Ota käyttöön ”Näytä näkökenttien osoittimet” -asetus, ja syötä pilkulla "
 "erotetut arvot alapuolella olevaan kenttään."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
@@ -8970,8 +8969,8 @@ msgid ""
 "The 'Slew telescope to' window can be opened by pressing <b>Ctrl+0</b> or "
 "the respective button in the bottom toolbar."
 msgstr ""
-"”Osoita kaukoputki kohteeseen\"-ikkuna voidaan avata painamalla "
-"<b>Ctrl+0</b> tai klikkaamalla alemmassa työkalurivissä olevaa painiketta."
+"”Osoita kaukoputki kohteeseen\" -ikkuna voidaan avata painamalla "
+"<b>Ctrl+0</b>, tai klikkaamalla alemmassa työkalurivissä olevaa painiketta."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:387
 msgid ""
@@ -9033,9 +9032,8 @@ msgid ""
 "For example, pressing <b>Alt+S</b> is equivalent to clicking the 'Slew' "
 "button, pressing <b>Alt+E</b> switches to decimal degree format, etc."
 msgstr ""
-"Esimerkiksi yhdistelmän <b>Alt+S</b> painaminen vastaa \"Siirry\"-"
-"painiketta, <b>Alt+E</b>-yhdistelmän painaminen ottaa käyttöön "
-"desimaaliasteet, jne."
+"Esimerkiksi yhdistelmän <b>Alt+S</b> painaminen vastaa ”Siirry”-painiketta, "
+"<b>Alt+E</b>-yhdistelmän painaminen ottaa käyttöön desimaaliasteet, jne."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:397
 msgid "Sending commands"
@@ -9181,7 +9179,7 @@ msgstr ""
 msgid "Argo Navis is a 'Digital Telescope Computer' by Wildcard Innovations."
 msgstr ""
 "Argo Navis on Wildcard Innovationsin kehittämä ”digitaalinen "
-"kaukoputkitietokone\"."
+"kaukoputkitietokone”."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:422
 msgid ""
@@ -9189,7 +9187,7 @@ msgid ""
 "(for example, a dobsonian) into a 'Push To' telescope (a telescope that uses "
 "a computer to find targets and human power to move the telescope itself)."
 msgstr ""
-"Se on kehittynyt ”digitaalinen asteikkoympyrä\", joka muuttaa tavallisen "
+"Se on kehittynyt ”digitaalinen asteikkoympyrä”, joka muuttaa tavallisen "
 "kaukoputken (esimerkiksi dobson-kaukoputken) ”Push To” -kaukoputkeksi "
 "(kaukoputkeksi, joka käyttää tietokonetta kohteiden löytämiseen ja "
 "lihasvoimaa itse kaukoputken liikuttamiseen)."
@@ -9233,7 +9231,7 @@ msgid ""
 "%1Stellarium's original telescope control feature%2."
 msgstr ""
 "Tämä ominaisuus vastaa %1Stellariumin alkuperäisen kaukoputken ohjaus -"
-"ominaisuuden%2 tukemaa ”harjoituskaukoputkea\"."
+"ominaisuuden%2 tukemaa ”harjoituskaukoputkea”."
 
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:446
@@ -10040,7 +10038,7 @@ msgstr "Pois"
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:109
 #, qt-format
 msgid "error, unknown color part \"%1\""
-msgstr "virhe, tuntematon värin osa \"%1\""
+msgstr "virhe, tuntematon värin osa ”%1”"
 
 #: plugins/TextUserInterface/src/TuiNodeActivate.cpp:48
 msgid " [RETURN to activate]"
@@ -10094,7 +10092,7 @@ msgid ""
 msgstr ""
 "Komeettojen <i>nimet</i> vaativat etuliitteen %1 tai %2. Jos useampi "
 "komeetta vastaa nimeä, vain ensimmäinen tulos palautetaan. Esimerkiksi, haku "
-"\"%3\" palauttaa tuloksen %4, Halleyn komeetan, mutta haku \"%5\" palauttaa "
+"”%3” palauttaa tuloksen %4, Halleyn komeetan, mutta haku ”%5” palauttaa "
 "asteroidin %6."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:211
@@ -10443,9 +10441,10 @@ msgid ""
 msgstr ""
 "57 valittua tähteä, jotka on listattu Hänen Majesteettinsa "
 "Merenkulkualmanakkatoimiston ja Yhdysvaltain Merenkulkuobservatorion "
-"yhteistyönä vuodesta 1958 lähtien laaditussa <em>Merenkulkualmanakassa</em>. "
-" Näitä tähtiä on käytetty myös navigointiapuvälineissä, kuten <em>2102D-"
-"tähdenetsijässä</em> ja <em>-tunnistajassa</em>."
+"yhteistyönä vuodesta 1958 lähtien laaditussa merenkulkualmanakassa (”<em>The "
+"Nautical Almanac</em>”).  Näitä tähtiä on käytetty myös "
+"navigointiapuvälineissä, kuten <em>2102D-tähdenetsijässä</em> ja <em>-"
+"tunnistajassa</em>."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:300
@@ -10543,8 +10542,8 @@ msgid ""
 "You can find novae via search tool by entering designation of nova or its "
 "common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg')."
 msgstr ""
-"Voit etsiä novia hakutyökalulla syöttämällä novan designaation tai nimen "
-"(esim. 'Nova Cygni 1975' tai 'V1500 Cyg')."
+"Voit etsiä novia hakutyökalulla syöttämällä novan tunnuksen tai nimen (esim. "
+"”Nova Cygni 1975” tai ”V1500 Cyg”)."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:126
 msgid "This plugin allows you to see recent bright novae: "
@@ -10604,7 +10603,7 @@ msgid ""
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
 "Laajennus, joka näyttää joitakin 16. magnitudia kirkkaampia kvasaareja. "
-"Kvasaarien luettelo on koottu teoksesta 'Quasars and Active Galactic Nuclei' "
+"Kvasaarien luettelo on koottu teoksesta ”Quasars and Active Galactic Nuclei” "
 "(13. painos) (Veron+ 2010) =2010A&A...518A..10V"
 
 #: plugins/Quasars/src/Quasars.cpp:169
@@ -10631,8 +10630,8 @@ msgid ""
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
 "Kvasaarit-laajennus näyttää joitakin 16. magnitudia kirkkaampia kvasaareja. "
-"Luettelo kvasaareista on koottu teoksesta \"Quasars and Active Galactic "
-"Nuclei\" (13. painos)"
+"Luettelo kvasaareista on koottu teoksesta ”Quasars and Active Galactic "
+"Nuclei” (13. painos)"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 msgid "Veron+ 2010"
@@ -10852,7 +10851,7 @@ msgid ""
 "Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
 "(%1astro-ph/0412641%2))."
 msgstr ""
-"Pulsarien tiedot on koottu julkaisusta 'The ATNF Pulsar Catalogue' "
+"Pulsarien tiedot on koottu teoksesta ”The ATNF Pulsar Catalogue” "
 "(Manchester, R. N., Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, "
 "1993-2006 (2005) (%1astro-ph/0412641%2))."
 
@@ -10867,7 +10866,7 @@ msgstr "Huomautus"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:139
 msgid "pulsar identifiers have the prefix 'PSR'"
-msgstr "pulsarien tunnuksissa on etuliite 'PSR'"
+msgstr "pulsarien tunnuksissa on etuliite ”PSR”"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 msgid "Acknowledgment"
@@ -11048,8 +11047,8 @@ msgid ""
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
 msgstr ""
 "Laajennus näyttää niiden tähtien paikat, joilla on eksoplaneettoja. "
-"Eksoplaneettojen tiedot ovat koottu  'Extrasolar Planets Encyclopaedia' -"
-"sivutolta osoitteessa exoplanet.eu"
+"Eksoplaneettojen tiedot on koottu  ”Extrasolar Planets Encyclopaedia” -"
+"sivustolta osoitteessa exoplanet.eu"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:169
 msgid "Show exoplanets"
@@ -11210,8 +11209,8 @@ msgid ""
 "Laboratory%3."
 msgstr ""
 "Mahdollisesti elinkelpoisten eksoplaneettojen luettelo ja tiedot perustuvat "
-"%2Planetary Habitability Laboratoryn%3 luetteloon \"%1The Habitable "
-"Exoplanets Catalog%3\"."
+"%2Planetary Habitability Laboratoryn%3 ”%1The Habitable Exoplanets "
+"Catalog%3” -luetteloon."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:150
 #, qt-format
@@ -11646,7 +11645,7 @@ msgid ""
 "<em>Ibn al-Samh</em>), a noted 11th century astronomer and mathematician in "
 "the school of al Majriti in Cordova (Andalusia, now modern Spain)."
 msgstr ""
-"Samh on nimetty Abu al-Qasim 'Asbagh ibn Muhammad ibn al-Samh al-Mahrin (eli "
+"Samh on nimetty Abu al-Qasim ’Asbagh ibn Muhammad ibn al-Samh al-Mahrin (eli "
 "<em>Ibn al-Samhin</em>), tunnetun 1000-luvun tähtitieteilijän ja "
 "matemaatikon mukaan. Hän vaikutti Andalusian Cordovassa (nykyisen Espanjan "
 "alueella) al-Majritin koulussa."
@@ -12002,13 +12001,13 @@ msgid ""
 "configuration window.)"
 msgstr ""
 "Näyttää erittelyn valitun kohteen havainnoitavuudesta (nousu-, lasku- ja "
-"ylikulkuajat) nykyiselle ajankohdalle, sekä aikavälin, jolloin kyseinen "
+"kulminointiajat) nykyiselle ajankohdalle, sekä aikavälin, jolloin kyseinen "
 "kohde on havainnoitavissa kuluvan vuoden aikana. Kohteen oletetaan olevan "
 "havainnoitavissa, jos se käy horisontin yläpuolella yön aikana. Lisäksi "
 "näytetään kohteen suurimman kulmaetäisyyden ajanhetki (so. päivämäärä, "
 "jolloin kohde on kauimmillaan Auringosta), sekä akronikaalisen ja kosmisen "
-"nousun ja laskun ajankohdat. Selitykset edellä mainituille termeille "
-"löytyvät \"Tietoja\"-välilehdeltä laajennuksen asetusikkunasta."
+"nousun ja laskun ajankohdat. Edellä mainittujen termien selitykset löytyvät "
+"”Tietoja”-välilehdeltä laajennuksen asetusikkunasta."
 
 #: plugins/Observability/src/Observability.cpp:174
 msgctxt "short month name"
@@ -12346,7 +12345,7 @@ msgstr ""
 "vastakkaisella puolella. Kun kohteen kulmaetäisyys on suurimmillaan "
 "Auringosta (oli se sitten planeetta tai tähti), se kulminoi (on etelässä) "
 "keskiyöllä ja on taivaan tummimmalla alueella tällä deklinaatiolla; on siis "
-"'paras' yö tämän nimenomaisen kohteen havainnoimiseen."
+"”paras” yö tämän nimenomaisen kohteen havainnoimiseen."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
 msgid "Nights with source above horizon:"
@@ -12372,7 +12371,7 @@ msgid ""
 "by the user) will be implemented in future versions of this plugin."
 msgstr ""
 "Ohjelma laskee päivämäärävälin, jolloin taivaankappale on horisontin "
-"yläpuolella yöaikaan edes hetken. 'Yöksi' ohjelma määrittelee aikavälin, "
+"yläpuolella yöaikaan edes hetken. ”Yöksi” ohjelma määrittelee aikavälin, "
 "jolloin Auringon korkeus on hämärärajan alapuolella (jonka käyttäjä voi itse "
 "asettaa; katso yllä). Kun kohteet on kiinteästi taivaalla (tai ovat "
 "ulkoplaneettoja), voidaan kuluvan vuoden havainnointijakson väli antaa "
@@ -12380,13 +12379,13 @@ msgstr ""
 "tammikuun 20:sta syyskuun 15:een) tai kahdessa jaksossa (tammikuun "
 "ensimmäisestä annettuun päivään ja toisesta päivämäärästä joulukuun 31:een). "
 "Ensimmäisessä tapauksessa ensimmäisen päivän (esimerkissämme 20. tammikuuta) "
-"tulisi olla lähellä ns. 'tähden heliakkista nousua' ja toisen päivän "
-"(esimerkissämme 15. syyskuuta) lähellä 'heliakkista laskua'. Toisessa "
+"tulisi olla lähellä tähden ns. ”heliakkista nousua” ja toisen päivän "
+"(esimerkissämme 15. syyskuuta) lähellä ”heliakkista laskua”. Toisessa "
 "tapauksessa (esim. aikavälin 1.1. - 20.5. ja 21.9. - 31.12.), ensimmäisen "
 "päivän (esimerkissämme 20. toukokuuta) tulisi olla lähellä heliakkista "
 "laskua ja toisen (esimerkissämme 21. syyskuuta) lähellä heliakkista nousua. "
-"Tarkempia heliaakkisen nousun/laskun laskentakaavoja tähdille ja "
-"planeetoille (jotka eivät riipu käyttäjän asettamasta hämärän korkeudesta) "
+"Tarkempia heliakkisen nousun ja laskun laskentakaavoja tähdille ja "
+"planeetoille (jotka eivät riipu käyttäjän asettamasta hämärän rajasta) "
 "toteutetaan tulevaisuudessa tähän laajennukseen."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
@@ -12552,13 +12551,13 @@ msgstr ""
 "Ajantasaus tarkoittaa kahden eri aurinkoajan, todellisen ja "
 "keskiaurinkoajan, välistä poikkeamaa. Todellinen aurinkoaika seuraa "
 "todellista auringon liikettä, kun taas keskiaurinkoaika seuraa "
-"kuvitteellista \"keskiaurinkoa\", joka on etelässä tasan 24 tunnin välein. "
-"Ajantasaukselle ei ole olemassa yleisesti hyväksyttyä etumerkkiä. Joissain "
+"kuvitteellista ”keskiaurinkoa”, joka on etelässä tasan 24 tunnin välein. "
+"Ajantasaukselle ei ole olemassa yleisesti hyväksyttyä etumerkkiä. Joissakin "
 "julkaisuissa se on positiivinen kun aurinkokello on seinäkelloa edellä, "
-"toisissa kun seinäkello on edellä. Englanninkielisissä maissa jälkimmäinen "
-"on yleisemmin käytössä, joskaan ei aina. Luettaessa ajantasausta taulukosta "
-"tai kaaviosta  on aina muistettava tarkistaa, mitä etumerkkiä kyseinen "
-"julkaisu käyttää."
+"toisissa kun seinäkello on edellä. Englanninkielisissä maissa edellinen on "
+"yleisemmin käytössä, joskaan ei aina. Luettaessa ajantasausta taulukosta tai "
+"kaaviosta  on aina muistettava tarkistaa, mitä etumerkkiä kyseinen julkaisu "
+"käyttää."
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:277
 msgid "Show plug-ins button on toolbar"
@@ -13311,8 +13310,8 @@ msgid ""
 "Support is provided via the Launchpad website. Be sure to put \"%1\" in the "
 "subject when posting."
 msgstr ""
-"Tukea tarjotaan Launchpad-sivustolta. Varmista, että lisäät otsikkoon "
-"\"%1\", kun lähetät viestin."
+"Tukea tarjotaan Launchpad-sivustolta. Varmista, että lisäät otsikkoon ”%1” "
+"kun lähetät viestin."
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:107
 msgid "Start date greater than end date!"
@@ -13659,7 +13658,7 @@ msgstr "Ladataan maisemaa. Ole hyvä ja odota!"
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:338
 #, qt-format
 msgid "Loading scene '%1'"
-msgstr "Ladataan maisemaa \"%1\""
+msgstr "Ladataan maisemaa ”%1”"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:361
 msgid "Could not load scene, please check log for error messages!"
