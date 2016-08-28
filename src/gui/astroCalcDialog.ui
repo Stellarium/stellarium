@@ -226,7 +226,10 @@
       </item>
       <item>
        <widget class="QStackedWidget" name="stackedWidget">
-        <widget class="QWidget" name="stackedWidgetPage1" native="true">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="stackedWidgetPage1">
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_10">
@@ -282,30 +285,19 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="stackedWidgetPage2" native="true">
+        <widget class="QWidget" name="stackedWidgetPage2">
          <layout class="QGridLayout" name="gridLayout_3">
-          <item row="1" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
-            <item>
-             <widget class="QLabel" name="dateFromLabel">
-              <property name="text">
-               <string>From:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QDateTimeEdit" name="dateFromDateTimeEdit">
-              <property name="displayFormat">
-               <string>yyyy.MM.dd hh:mm</string>
-              </property>
-              <property name="calendarPopup">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-           </layout>
+          <item row="2" column="1">
+           <widget class="QCheckBox" name="ephemerisShowDatesCheckBox">
+            <property name="toolTip">
+             <string>Show dates of positions of current celestial body near markers</string>
+            </property>
+            <property name="text">
+             <string>Show dates of positions</string>
+            </property>
+           </widget>
           </item>
-          <item row="6" column="0" colspan="2">
+          <item row="5" column="0" colspan="2">
            <widget class="QTreeWidget" name="ephemerisTreeWidget">
             <property name="editTriggers">
              <set>QAbstractItemView::NoEditTriggers</set>
@@ -326,52 +318,6 @@
              <number>0</number>
             </property>
            </widget>
-          </item>
-          <item row="0" column="1">
-           <layout class="QHBoxLayout" name="horizontalLayout_2">
-            <item>
-             <widget class="QLabel" name="ephemerisStepLabel">
-              <property name="text">
-               <string>Time step:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="ephemerisStepComboBox">
-              <property name="editable">
-               <bool>true</bool>
-              </property>
-              <property name="insertPolicy">
-               <enum>QComboBox::NoInsert</enum>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="4" column="0" colspan="2">
-           <layout class="QHBoxLayout" name="horizontalLayout_11">
-            <item>
-             <widget class="QPushButton" name="ephemerisCleanupButton">
-              <property name="text">
-               <string>Cleanup ephemerides</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="ephemerisPushButton">
-              <property name="text">
-               <string>Calculate ephemeris</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="ephemerisSaveButton">
-              <property name="text">
-               <string>Save ephemeris</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
           </item>
           <item row="2" column="0">
            <widget class="QCheckBox" name="ephemerisShowMarkersCheckBox">
@@ -410,6 +356,52 @@
             </item>
            </layout>
           </item>
+          <item row="4" column="0" colspan="2">
+           <layout class="QHBoxLayout" name="horizontalLayout_11">
+            <item>
+             <widget class="QPushButton" name="ephemerisCleanupButton">
+              <property name="text">
+               <string>Cleanup ephemerides</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="ephemerisPushButton">
+              <property name="text">
+               <string>Calculate ephemeris</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="ephemerisSaveButton">
+              <property name="text">
+               <string>Save ephemeris</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QLabel" name="ephemerisStepLabel">
+              <property name="text">
+               <string>Time step:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="ephemerisStepComboBox">
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
           <item row="1" column="1">
            <layout class="QHBoxLayout" name="horizontalLayout_4">
             <item>
@@ -431,19 +423,30 @@
             </item>
            </layout>
           </item>
-          <item row="2" column="1">
-           <widget class="QCheckBox" name="ephemerisShowDatesCheckBox">
-            <property name="toolTip">
-             <string>Show dates of positions of current celestial body near markers</string>
-            </property>
-            <property name="text">
-             <string>Show dates of positions</string>
-            </property>
-           </widget>
+          <item row="1" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <widget class="QLabel" name="dateFromLabel">
+              <property name="text">
+               <string>From:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDateTimeEdit" name="dateFromDateTimeEdit">
+              <property name="displayFormat">
+               <string>yyyy.MM.dd hh:mm</string>
+              </property>
+              <property name="calendarPopup">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="stackedWidgetPage3" native="true">
+        <widget class="QWidget" name="stackedWidgetPage3">
          <layout class="QGridLayout" name="gridLayout_4">
           <item row="3" column="0" colspan="2">
            <widget class="QTreeWidget" name="phenomenaTreeWidget">
