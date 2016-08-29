@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-22 21:44+0700\n"
-"PO-Revision-Date: 2016-08-28 03:35+0000\n"
+"PO-Revision-Date: 2016-08-28 19:46+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-08-28 06:09+0000\n"
+"X-Launchpad-Export-Date: 2016-08-29 06:04+0000\n"
 "X-Generator: Launchpad (build 18179)\n"
 
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:188
@@ -688,7 +688,7 @@ msgstr "emissiokohde"
 
 #: src/core/modules/Nebula.cpp:1136
 msgid "BL Lac object"
-msgstr "BL Lac -kohde"
+msgstr "BL Lacertae -kohde"
 
 #: src/core/modules/Nebula.cpp:1139
 msgid "blazar"
@@ -2801,7 +2801,7 @@ msgstr "Oortin pilven kohteet"
 #: src/gui/AstroCalcDialog.cpp:521 src/translations.h:115
 #: src/ui_viewDialog.h:1716
 msgid "Star clusters"
-msgstr "Tähtjoukot"
+msgstr "Tähtijoukot"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:522 src/translations.h:97
@@ -8455,7 +8455,7 @@ msgstr "Näkökentän osoittimet"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:385
 msgid "'Slew telescope to' window"
-msgstr "'Osoita kaukoputki kohteeseen' -ikkuna"
+msgstr "”Osoita kaukoputki kohteeseen” -ikkuna"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 msgid "Telescope commands"
@@ -8611,7 +8611,7 @@ msgid ""
 "it is not supplied with the cable or the telescope."
 msgstr ""
 "Linuxissa ja Mac OS X:ssä laajennus käsittelee molemmat yhteystyypit samalla "
-"tavoin. WIndowsissa USB-yhteyden käyttäminen saattaa vaatia erillisen "
+"tavoin. Windowsissa USB-yhteyden käyttäminen saattaa vaatia erillisen "
 "virtuaalisarjaporttiohjelmiston, jos sitä ei ole toimitettu kaukoputken tai "
 "kaapelin mukana."
 
@@ -8831,7 +8831,7 @@ msgstr "Avautuva luettelo ehdottaa joitakin oletusarvoja:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:358
 msgid "On Windows, serial ports COM1 to COM10;"
-msgstr "WIndowsissa sarjaportit COM1–COM10;"
+msgstr "Windowsissa sarjaportit COM1–COM10;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:359
 msgid ""
@@ -8969,7 +8969,7 @@ msgid ""
 "The 'Slew telescope to' window can be opened by pressing <b>Ctrl+0</b> or "
 "the respective button in the bottom toolbar."
 msgstr ""
-"”Osoita kaukoputki kohteeseen\" -ikkuna voidaan avata painamalla "
+"”Osoita kaukoputki kohteeseen” -ikkuna voidaan avata painamalla "
 "<b>Ctrl+0</b>, tai klikkaamalla alemmassa työkalurivissä olevaa painiketta."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:387
@@ -9211,9 +9211,9 @@ msgid ""
 msgstr ""
 "Jos haluat kokeilla tätä laajennusta ilman todellista tietokoneeseen "
 "kytkettyä laitetta, valitse <b>”Ei mikään, simuloitu kaukoputki (liikkuva "
-"ristikko)”</b> <b>Kaukoputken ohjaus</b>-kentässä. Tällöin laajennus näyttää "
-"kuvaruudulla kaukoputken ristikon, joka käyttäytyy kuten oikea laajennuksen "
-"ohjaaman kaukoputken ristikko."
+"ristikko)”</b> <b>Kaukoputken ohjaus</b> -kentässä. Tällöin laajennus "
+"näyttää kuvaruudulla kaukoputken ristikon, joka käyttäytyy kuten oikea "
+"laajennuksen ohjaaman kaukoputken ristikko."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:428
 #, qt-format
@@ -11307,7 +11307,7 @@ msgid ""
 "From the latin <em>Veritas</em>, truth. The ablative form means <em>where "
 "there is truth</em>."
 msgstr ""
-"Alkuperä latinan <em>Veritas</em>, totuus. Ablatiivimuodon merkitys on "
+"Alkuperä latinan <em>veritas</em>, totuus. Ablatiivimuodon merkitys on "
 "<em>siellä missä on totuus</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
@@ -11315,7 +11315,7 @@ msgid ""
 "From the latin <em>Spes</em>, hope. The ablative form means <em>where there "
 "is hope</em>."
 msgstr ""
-"Alkuperä latinan <em>Spes</em>, toivo. Ablatiivimuodon merkitys on "
+"Alkuperä latinan <em>spes</em>, toivo. Ablatiivimuodon merkitys on "
 "<em>siellä missä on toivo</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
@@ -11403,7 +11403,7 @@ msgid ""
 "the phases of Venus, among other discoveries."
 msgstr ""
 "Galileo Galilei (1564–1642) oli italialainen tähtitieteilijä ja fyysikko, "
-"jota usein kutsutaan <em>havaitsevan tähtitieteen isäksi</em ja "
+"jota usein kutsutaan <em>havaitsevan tähtitieteen isäksi</em> ja "
 "<em>nykyaikaisen fysiikan isäksi</em>.  Hän löysi kaukoputkellaan Jupiterin "
 "neljä suurta kuuta ja havaitsi ensimmäisenä Venuksen vaiheet, monien muiden "
 "löytöjen joukossa."
@@ -11516,7 +11516,7 @@ msgid ""
 "Roman deity <em>Ogmios</em>."
 msgstr ""
 "Ogma oli Irlannin ja Skotlannin kelttien tarustossa kaunopuheisuuden, "
-"kirjoituksen ja fyysisen voiman jumala, joka saattaa liittyä gallo-"
+"kirjoituksen ja ruumiillisen vahvuuden jumala, joka saattaa liittyä gallo-"
 "romaaniseen <em>Ogmios</em>-jumalhahmoon."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
@@ -11719,7 +11719,7 @@ msgid ""
 msgstr ""
 "Huomaa typografinen ero <em>Ægirin</em> ja <em>Aegirin</em>, englantiin "
 "sovitetun asun ero. Sama nimi asussa <em>Aegir</em> on annettu eräälle "
-"Saturnuksen kuulle, joka löydettiin vuonna 2004.."
+"Saturnuksen kuulle, joka löydettiin vuonna 2004."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
 msgid "<em>Ogmios</em> is a name already attributed to an asteroid."
@@ -11732,7 +11732,7 @@ msgid ""
 "also attributed to an asteroid."
 msgstr ""
 "Alun perin ehdotettu <em>Leda</em> on jo annettu eräälle asteroidille, sekä "
-"eräälle Jupiterin kuulle. Nimi<em>Althaea</em> on myös annettu eräälle "
+"eräälle Jupiterin kuulle. Nimi <em>Althaea</em> on myös annettu eräälle "
 "asteroidille."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
