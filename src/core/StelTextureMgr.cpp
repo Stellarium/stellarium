@@ -32,9 +32,10 @@
 #include <cstdlib>
 #include <QOpenGLContext>
 
-
-void StelTextureMgr::init()
+StelTextureMgr::StelTextureMgr(QObject *parent)
+	:QObject(parent)
 {
+
 }
 
 StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const StelTexture::StelTextureParams& params)
@@ -46,7 +47,13 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 	QString canPath = info.canonicalFilePath();
 
 	if(canPath.isEmpty()) //file does not exist
+	{
+		qWarning()<<"Texture"<<afilename<<"does not exist";
 		return StelTextureSP();
+	}
+
+	//lock it for thread safety
+	QMutexLocker locker(&mutex);
 
 	//try to find out if the tex is already loaded
 	StelTextureSP cache = lookupCache(canPath);
@@ -86,7 +93,13 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 	}
 
 	if(canPath.isEmpty()) //file does not exist
+	{
+		qWarning()<<"Texture"<<url<<"does not exist";
 		return StelTextureSP();
+	}
+
+	//lock it for thread safety
+	QMutexLocker locker(&mutex);
 
 	//try to find out if the tex is already loaded
 	StelTextureSP cache = lookupCache(canPath);

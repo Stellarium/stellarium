@@ -446,8 +446,8 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 
 			//macro to make sure a material is currently active
 			#define CHECK_MTL(a) do{ if(curMaterial) { a; } else { ok = false; qCCritical(stelOBJ)<<"Encountered material statement without active material"; } } while(0)
-			//macro to make path absolute
-			#define MAKE_ABS(a) if(!a.isEmpty()){ a = dir.absoluteFilePath(a); }
+			//macro to make path absolute, also to force use of forward slashes
+			#define MAKE_ABS(a) if(!a.isEmpty()){ a = dir.absoluteFilePath(QDir::cleanPath(a.replace('\\','/'))); }
 			if(CMD_CMP("newmtl")) //define new material
 			{
 				ok = splits.size()==2;

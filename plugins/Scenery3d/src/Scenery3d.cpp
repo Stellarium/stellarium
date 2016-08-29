@@ -193,7 +193,8 @@ void Scenery3d::update(double deltaTime)
 
 		//perform movement
 		//when zoomed in more than 5°, we slow down movement
-		currentScene->moveViewer(movementKeyInput * deltaTime * 0.01 * qMax(5.0, mvMgr->getCurrentFov()));
+		if(movementKeyInput.lengthSquared() > 0.00001)
+			currentScene->moveViewer(movementKeyInput * deltaTime * 0.01 * qMax(5.0, mvMgr->getCurrentFov()));
 	}
 
 	messageFader.update((int)(deltaTime*1000));

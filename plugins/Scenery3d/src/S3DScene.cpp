@@ -286,6 +286,9 @@ bool S3DScene::glLoad()
 	//set this here, to respect models without ground OBJ
 	heightmap.setNullHeight(info.groundNullHeight);
 
+	//move the viewer to the ground height
+	position[2] = getGroundHeightAtViewer();
+	recalcEyePos();
 
 	//make sure textures are loaded
 	for(int i =0; i< materials.size();++i)

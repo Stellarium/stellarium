@@ -24,20 +24,19 @@
 #include <QObject>
 #include <QMap>
 #include <QWeakPointer>
+#include <QMutex>
 
 class QNetworkReply;
 class QThread;
-
 
 //! @class StelTextureMgr
 //! Manage textures loading.
 //! It provides method for loading images in a separate thread.
 class StelTextureMgr : QObject
 {
+	Q_OBJECT
 public:
-	//! Initialize some variable from the openGL context.
-	//! Must be called after the creation of the GLContext.
-	void init();
+	StelTextureMgr(QObject* parent = 0);
 
 	//! Load an image from a file and create a new texture from it
 	//! @param filename the texture file name, can be absolute path if starts with '/' otherwise
@@ -58,6 +57,7 @@ private:
 
 	StelTextureSP lookupCache(const QString& file);
 	typedef QMap<QString,QWeakPointer<StelTexture>> TexCache;
+	QMutex mutex;
 	TexCache textureCache;
 };
 

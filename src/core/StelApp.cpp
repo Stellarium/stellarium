@@ -401,7 +401,6 @@ void StelApp::init(QSettings* conf)
 
 	// Initialize AFTER creation of openGL context
 	textureMgr = new StelTextureMgr();
-	textureMgr->init();
 
 	networkAccessManager = new QNetworkAccessManager(this);
 	// Activate http cache if Qt version >= 4.5
