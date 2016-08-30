@@ -12,10 +12,8 @@ map_height TX_Stellarium-Testscene_withGrid\Stein_Mauerwerk_mehrfarbig_height.pn
 Ns 10
 Ni 3
 # The following Julian Day Numbers represent a material which appears between 2000-01-01 and 2000-01-05 and disappears between 2020-01-01 and 2020-01-05.
-vis_begin 2451545.0
-vis_full  2451550.0
-vis_until 2458850.0
-vis_end   2458855.0
+vis_fadeIn 2451545.0 2451550.0
+vis_fadeOut 2458850.0 2458855.0
 
 
 # Identifier=./Models/Square100m
@@ -48,9 +46,7 @@ d 0.5
 Ns 34
 Ni 3
 # The following Julian Day Numbers represent a material which appears between 2010-01-03 and 2010-01-08 and disappears much more slowly between 2014-12-08 and 2016-04-21.
-vis_begin 2455200.0
-vis_full  2455205.0
-vis_until 2457000.0
-vis_end   2457500.0
+vis_fadeIn 2455200.0 2455205.0
+vis_fadeOut 2457000.0 2457500.0
 
 

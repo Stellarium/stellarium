@@ -21,6 +21,7 @@
 #include "S3DScene.hpp"
 
 #include "StelApp.hpp"
+#include "StelCore.hpp"
 #include "StelTexture.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelUtils.hpp"
@@ -160,6 +161,36 @@ void S3DScene::Material::fixup()
 	}
 }
 
+bool S3DScene::Material::updateFadeInfo(double currentJD)
+{
+	//find out if we have to fade in or out
+	if(currentJD >= vis_fadeIn[0] && currentJD <= vis_fadeIn[1])
+	{
+		vis_fadeValue = (currentJD - vis_fadeIn[0]) / (vis_fadeIn[1] - vis_fadeIn[0]);
+		traits.isFading = true;
+	}
+	else if(currentJD >= vis_fadeOut[0] && currentJD <= vis_fadeOut[1])
+	{
+		vis_fadeValue = 1.0 - (currentJD - vis_fadeOut[0]) / (vis_fadeOut[1] - vis_fadeOut[0]);
+		traits.isFading = true;
+	}
+	else if (currentJD > vis_fadeIn[1] && currentJD < vis_fadeOut[0])
+	{
+		vis_fadeValue = 1.0;
+		traits.isFading = false;
+	}
+	else
+	{
+		vis_fadeValue = 0.0;
+		traits.isFading = false;
+		traits.isFullyTransparent = true;
+		//we skip drawing this object entirely!
+		return false;
+	}
+	traits.isFullyTransparent = d <= 0.0;
+	return true;
+}
+
 S3DScene::S3DScene(const SceneInfo &info)
 	: glReady(false), info(info),
 	  viewDirection(1.0,0.0,0.0), position(0.0,0.0,0.0), eye_height(1.65), eyePosition(0.0,0.0,1.65)
@@ -290,6 +321,8 @@ bool S3DScene::glLoad()
 	position[2] = getGroundHeightAtViewer();
 	recalcEyePos();
 
+	double currentJD = StelApp::getInstance().getCore()->getJD();
+
 	//make sure textures are loaded
 	for(int i =0; i< materials.size();++i)
 	{
@@ -303,6 +336,9 @@ bool S3DScene::glLoad()
 		finalizeTexture(mat.tex_height);
 
 		mat.fixup();
+		//make sure fade value is current
+		if(mat.traits.hasTimeFade)
+			mat.updateFadeInfo(currentJD);
 	}
 
 	glReady = ok;

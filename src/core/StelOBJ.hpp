@@ -74,7 +74,7 @@ public:
 		Material()
 			: illum(I_NONE),
 			  Ka(-1.0f,-1.0f,-1.0f),Kd(-1.0f,-1.0f,-1.0f),Ks(-1.0f,-1.0f,-1.0f),Ke(-1.0f,-1.0f,-1.0f),
-			  Ns(8.0f), d(-1.0f), bBackface(false), bAlphatest(false), fAlphaThreshold(-1.0f)
+			  Ns(8.0f), d(-1.0f)
 		{
 
 		}
@@ -93,6 +93,7 @@ public:
 		//! Specular shininess (exponent), should be > 0. Default 8.0
 		float Ns;
 		//! Alpha value (1 means opaque). -1 if not set by .mtl
+		//! Note that both the \c d and \c Tr statements can change this value
 		float d;
 
 		//! The ambient map path
@@ -108,18 +109,29 @@ public:
 		//! The height map path
 		QString map_height;
 
-		//! Nonstandard extension:
-		//! if to render backface, default false
-		bool bBackface;
-		//! Nonstandard extension:
-		//! if to perform binary alpha testing, default false
-		bool bAlphatest;
-		//! Nonstandard extension:
-		//! the alpha threshold to use for alpha testing when bAlphatest is true. -1 if not set by .mtl
-		float fAlphaThreshold;
+
+		typedef QMap<QString,QStringList> ParamsMap;
+		//! Contains all other material parameters that are not recognized by this class,
+		//! but can still be accessed by class users this way.
+		//! The key is the statement name (like are \c Ka, \c map_bump etc.), the value is the list of
+		//! space-separated parameters to this statement
+		ParamsMap additionalParams;
 
 		//! Loads all materials contained in an .mtl file
 		static QVector<Material> loadFromFile(const QString& filename);
+	protected:
+		//! Parses a bool from a parameter list (like included in the ::additionalParams)
+		//! using the same logic StelOBJ uses internally
+		//! @returns true if successful, the output is written into \p out
+		static bool parseBool(const QStringList& params, bool &out);
+		//! Parses a float from a parameter list (like included in the ::additionalParams)
+		//! using the same logic StelOBJ uses internally
+		//! @returns true if successful, the output is written into \p out
+		static bool parseFloat(const QStringList &params, float &out);
+		//! Parses a Vec2d from a parameter list (like included in the ::additionalParams)
+		//! using the same logic StelOBJ uses internally
+		//! @returns true if successful, the output is written into \p out
+		static bool parseVec2d(const QStringList &params, Vec2d &out);
 	};
 
 
@@ -315,23 +327,23 @@ private:
 	//! Get or create the current material index for parsing
 	inline int getCurrentMaterialIndex(CurrentParserState& state);
 	//! Parse a single bool
-	inline static bool parseBool(const ParseParams& params, bool& out);
+	inline static bool parseBool(const ParseParams& params, bool& out, int paramsStart=1);
 	//! Parse a single int
-	inline static bool parseInt(const ParseParams& params, int& out);
+	inline static bool parseInt(const ParseParams& params, int& out, int paramsStart=1);
 	//! Parse a single string
-	inline static bool parseString(const ParseParams &params, QString &out);
+	inline static bool parseString(const ParseParams &params, QString &out, int paramsStart=1);
 	//! Parse a single float
-	inline static bool parseFloat(const ParseParams& params, float& out);
+	inline static bool parseFloat(const ParseParams& params, float& out, int paramsStart=1);
 	//! Generic Vec3 parse method, used for position, normals, colors, etc.
 	//! Templated to allow for both use of QVector3D as well as Vec3f, etc, with a single implementation
 	//! Only requirement is that operator[] is defined.
 	template<typename T>
-	inline static bool parseVec3(const ParseParams& params, T& out);
+	inline static bool parseVec3(const ParseParams& params, T& out, int paramsStart=1);
 	//! Generic Vec2 parse method
 	//! Templated to allow for both use of QVector2D as well as Vec2f, etc, with a single implementation
 	//! Only requirement is that operator[] is defined.
 	template<typename T>
-	inline static bool parseVec2(const ParseParams& params, T& out);
+	inline static bool parseVec2(const ParseParams& params, T& out, int paramsStart=1);
 	inline bool parseFace(const ParseParams& params, const V3Vec& posList, const V3Vec& normList, const V2Vec& texList,
 			      CurrentParserState &state, VertexCache& vertCache);
 
