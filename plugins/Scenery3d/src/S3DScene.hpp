@@ -33,14 +33,31 @@ public:
 	//! Extension of StelOBJ::Material which provides Scenery3d specific stuff
 	struct Material : public StelOBJ::Material
 	{
-		Material() : traits()
+		Material() : traits(), bAlphatest(false), bBackface(false), fAlphaThreshold(0.5)
 		{
 
 		}
 
-		Material(const StelOBJ::Material& stelMat) : StelOBJ::Material(stelMat), traits()
+		Material(const StelOBJ::Material& stelMat)
+			: StelOBJ::Material(stelMat), traits(), bAlphatest(false), bBackface(false), fAlphaThreshold(0.5),
+			  vis_fadeIn(0.0,0.0),vis_fadeOut(0.0,0.0),vis_fadeValue(1.0)
 		{
-
+			if(additionalParams.contains("bAlphatest"))
+				parseBool(additionalParams.value("bAlphatest"), bAlphatest);
+			if(additionalParams.contains("bBackface"))
+				parseBool(additionalParams.value("bBackface"), bBackface);
+			if(additionalParams.contains("fAlphaThreshold"))
+				parseFloat(additionalParams.value("fAlphaThreshold"), fAlphaThreshold);
+			if(additionalParams.contains("vis_fadeIn"))
+			{
+				traits.hasTimeFade = true;
+				parseVec2d(additionalParams.value("vis_fadeIn"), vis_fadeIn);
+			}
+			if(additionalParams.contains("vis_fadeOut"))
+			{
+				traits.hasTimeFade = true;
+				parseVec2d(additionalParams.value("vis_fadeOut"), vis_fadeOut);
+			}
 		}
 
 		struct Traits
@@ -53,6 +70,9 @@ public:
 			bool hasHeightTexture; //! True when tex_height is a valid texture
 			bool hasSpecularity; //! True when both Ks and Ns are non-zero
 			bool hasTransparency; //! True when the material exhibits "true" transparency, that is when the tex_Kd has an alpha channel or the d value is smaller than 1
+			bool hasTimeFade; //! True when the material has time-dependent display
+			bool isFullyTransparent; //! True when the material is (currently) completely invisible
+			bool isFading; //! True while the material is currently fading
 		} traits;
 
 		//the actual texture instances
@@ -61,11 +81,22 @@ public:
 		StelTextureSP tex_bump;
 		StelTextureSP tex_height;
 
+		bool bAlphatest;
+		bool bBackface;
+		float fAlphaThreshold;
+
+		Vec2d vis_fadeIn;
+		Vec2d vis_fadeOut;
+		//! Updated by S3DRenderer when necessary, otherwise always 1.0
+		float vis_fadeValue;
+
 		//! Starts loading the textures in this material asynchronously
 		void loadTexturesAsync();
 		//! Re-calculates the material traits, and sets invalid material fields to valid values.
 		//! This requires all textures to be fully loaded.
 		void fixup();
+		//! Re-calculates time fade info, returns true if the object should be rendered
+		bool updateFadeInfo(double currentJD);
 	};
 
 	typedef QVector<Material> MaterialList;
@@ -79,7 +110,7 @@ public:
 
 	const SceneInfo& getSceneInfo() const { return info; }
 
-	Material& getMaterial(int index) { return materials[index]; }
+	MaterialList& getMaterialList() { return materials; }
 	const Material& getMaterial(int index) const { return materials.at(index); }
 	const ObjectList& getObjects() const { return objects; }
 
