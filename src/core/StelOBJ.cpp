@@ -103,96 +103,96 @@ bool StelOBJ::load(const QString& filename, const VertexOrder vertexOrder)
 //used instead of append() to avoid memory copies
 #define INC_LIST(a) (a.resize(a.size()+1), a.last())
 
-bool StelOBJ::parseBool(const ParseParams &params, bool &out)
+bool StelOBJ::parseBool(const ParseParams &params, bool &out, int paramsStart)
 {
-	if(params.size()<2)
+	if(params.size()-paramsStart<1)
 	{
 		qCCritical(stelOBJ)<<"Expected parameter for statement"<<params;
 		return false;
 	}
-	if(params.size()>2)
+	if(params.size()-paramsStart>1)
 	{
 		qCWarning(stelOBJ)<<"Additional parameters ignored in statement"<<params;
 	}
 
 
-	const QStringRef& cmd = params.at(1);
+	const QStringRef& cmd = params.at(paramsStart);
 	out = (CMD_CMP("1") || CMD_CMP("true") || CMD_CMP("TRUE") || CMD_CMP("yes") || CMD_CMP("YES"));
 
 	return true;
 }
 
-bool StelOBJ::parseInt(const ParseParams &params, int &out)
+bool StelOBJ::parseInt(const ParseParams &params, int &out, int paramsStart)
 {
-	if(params.size()<2)
+	if(params.size()-paramsStart<1)
 	{
 		qCCritical(stelOBJ)<<"Expected parameter for statement"<<params;
 		return false;
 	}
-	if(params.size()>2)
+	if(params.size()-paramsStart>1)
 	{
 		qCWarning(stelOBJ)<<"Additional parameters ignored in statement"<<params;
 	}
 
 	bool ok;
-	out = params.at(1).toInt(&ok);
+	out = params.at(paramsStart).toInt(&ok);
 	return ok;
 }
 
-bool StelOBJ::parseString(const ParseParams &params, QString &out)
+bool StelOBJ::parseString(const ParseParams &params, QString &out, int paramsStart)
 {
-	if(params.size()<2)
+	if(params.size()-paramsStart<1)
 	{
 		qCCritical(stelOBJ)<<"Expected parameter for statement"<<params;
 		return false;
 	}
-	if(params.size()>2)
+	if(params.size()-paramsStart>1)
 	{
 		qCWarning(stelOBJ)<<"Additional parameters ignored in statement"<<params;
 	}
 
-	out = params.at(1).toString();
+	out = params.at(paramsStart).toString();
 	return true;
 }
 
-bool StelOBJ::parseFloat(const ParseParams &params, float &out)
+bool StelOBJ::parseFloat(const ParseParams &params, float &out, int paramsStart)
 {
-	if(params.size()<2)
+	if(params.size()-paramsStart<1)
 	{
 		qCCritical(stelOBJ)<<"Expected parameter for statement"<<params;
 		return false;
 	}
-	if(params.size()>2)
+	if(params.size()-paramsStart>1)
 	{
 		qCWarning(stelOBJ)<<"Additional parameters ignored in statement"<<params;
 	}
 
 	bool ok;
-	out = params.at(1).toFloat(&ok);
+	out = params.at(paramsStart).toFloat(&ok);
 	return ok;
 }
 
 template <typename T>
-bool StelOBJ::parseVec3(const ParseParams& params, T &out)
+bool StelOBJ::parseVec3(const ParseParams& params, T &out, int paramsStart)
 {
-	if(params.size()<4)
+	if(params.size()-paramsStart<3)
 	{
 		qCCritical(stelOBJ)<<"Invalid Vec3f specification"<<params;
 		return false;
 	}
-	if(params.size()>4)
+	if(params.size()-paramsStart>3)
 	{
 		qCWarning(stelOBJ)<<"Additional parameters ignored in statement"<<params;
 	}
 
 	bool ok = false;
-	out[0] = params.at(1).toFloat(&ok);
+	out[0] = params.at(paramsStart).toDouble(&ok); //use double here, so that it even works for Vec3d, etc
 	if(ok)
 	{
-		out[1] = params.at(2).toFloat(&ok);
+		out[1] = params.at(paramsStart+1).toDouble(&ok);
 		if(ok)
 		{
-			out[2] = params.at(3).toFloat(&ok);
+			out[2] = params.at(paramsStart+2).toDouble(&ok);
 			return true;
 		}
 	}
@@ -202,23 +202,23 @@ bool StelOBJ::parseVec3(const ParseParams& params, T &out)
 }
 
 template <typename T>
-bool StelOBJ::parseVec2(const ParseParams& params,T &out)
+bool StelOBJ::parseVec2(const ParseParams& params,T &out, int paramsStart)
 {
-	if(params.size()<3)
+	if(params.size()-paramsStart<2)
 	{
 		qCCritical(stelOBJ)<<"Invalid Vec2f specification"<<params;
 		return false;
 	}
-	if(params.size()>3)
+	if(params.size()-paramsStart>2)
 	{
 		qCWarning(stelOBJ)<<"Additional parameters ignored in statement"<<params;
 	}
 
 	bool ok = false;
-	out[0] = params.at(1).toFloat(&ok);
+	out[0] = params.at(paramsStart).toDouble(&ok);
 	if(ok)
 	{
-		out[1] = params.at(2).toFloat(&ok);
+		out[1] = params.at(paramsStart+1).toDouble(&ok);
 		return true;
 	}
 
@@ -483,11 +483,11 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 			}
 			else if(CMD_CMP("Ns")) //define specular coefficient
 			{
-				CHECK_MTL(ok = parseFloat(splits,curMaterial->Ns));
+				CHECK_MTL(ok = StelOBJ::parseFloat(splits,curMaterial->Ns));
 			}
 			else if(CMD_CMP("d") || CMD_CMP("Tr"))
 			{
-				CHECK_MTL(ok = parseFloat(splits,curMaterial->d));
+				CHECK_MTL(ok = StelOBJ::parseFloat(splits,curMaterial->d));
 				//clamp d to [0,1]
 				curMaterial->d = std::max(0.0f, std::min(curMaterial->d,1.0f));
 			}
@@ -521,14 +521,6 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 				CHECK_MTL(ok = parseString(splits,curMaterial->map_height));
 				MAKE_ABS(curMaterial->map_height);
 			}
-			else if(CMD_CMP("bAlphatest"))
-			{
-				CHECK_MTL(ok = parseBool(splits,curMaterial->bAlphatest));
-			}
-			else if(CMD_CMP("bBackface"))
-			{
-				CHECK_MTL(ok = parseBool(splits,curMaterial->bBackface));
-			}
 			else if(CMD_CMP("Illum"))
 			{
 				int tmp;
@@ -552,8 +544,16 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 			}
 			else if(!cmd.startsWith("#"))
 			{
-				//unknown command, warn
-				qCWarning(stelOBJ)<<"Unknown MTL statement:"<<line;
+				//unknown command, add to additional params
+				//we need to convert to actual string instances to store them
+				QStringList list;
+				for(int i = 1; i<splits.size();++i)
+				{
+					list.append(splits.at(i).toString());
+				}
+
+				CHECK_MTL(curMaterial->additionalParams.insert(cmd.toString(),list));
+				//qCWarning(stelOBJ)<<"Unknown MTL statement:"<<line;
 			}
 		}
 
@@ -566,6 +566,36 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 	}
 
 	return list;
+}
+
+bool StelOBJ::Material::parseBool(const QStringList &params, bool &out)
+{
+	ParseParams pp(params.size());
+	for(int i = 0; i< params.size();++i)
+	{
+		pp[i] = QStringRef(&params.at(i));
+	}
+	return StelOBJ::parseBool(pp,out,0);
+}
+
+bool StelOBJ::Material::parseFloat(const QStringList &params, float &out)
+{
+	ParseParams pp(params.size());
+	for(int i = 0; i< params.size();++i)
+	{
+		pp[i] = QStringRef(&params.at(i));
+	}
+	return StelOBJ::parseFloat(pp,out,0);
+}
+
+bool StelOBJ::Material::parseVec2d(const QStringList &params, Vec2d &out)
+{
+	ParseParams pp(params.size());
+	for(int i = 0; i< params.size();++i)
+	{
+		pp[i] = QStringRef(&params.at(i));
+	}
+	return StelOBJ::parseVec2(pp,out,0);
 }
 
 bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder vertexOrder)

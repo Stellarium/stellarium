@@ -254,7 +254,7 @@ QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals
 			flags|= ALPHATEST;
 		if(mat->traits.hasSpecularity)
 			flags|= MAT_SPECULAR;
-		if(mat->traits.hasTransparency)
+		if(mat->traits.hasTransparency || mat->traits.isFading)
 			flags|= BLENDING;
 		if(mat->traits.hasDiffuseTexture)
 			flags|= MAT_DIFFUSETEX;

@@ -254,7 +254,8 @@ void S3DRenderer::setupMaterialUniforms(QOpenGLShaderProgram* shader, const S3DS
 
 	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_SHININESS,mat.Ns);
 	//force alpha to 1 here for non-translucent mats (fixes incorrect blending in cubemap)
-	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_ALPHA,mat.traits.hasTransparency ? mat.d : 1.0f);
+	float baseAlpha = mat.traits.hasTransparency ? mat.d : 1.0f;
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_ALPHA,mat.traits.isFading ? baseAlpha * mat.vis_fadeValue : baseAlpha);
 
 	if(mat.traits.hasDiffuseTexture)
 	{
@@ -332,11 +333,23 @@ bool S3DRenderer::drawArrays(bool shading, bool blendAlphaAdditive)
 			const S3DScene::Material* pMaterial = &currentScene->getMaterial(matGroup.materialIndex);
 			Q_ASSERT(pMaterial);
 
-			if(shading && pMaterial->traits.hasTransparency)
+			if(pMaterial->traits.isFullyTransparent)
+				continue; //dont render fully invisible objects
+
+			if(shading)
 			{
-				//process transparent objects later, with Z sorting
-				transparentGroups.append(&matGroup);
-				continue;
+				if(pMaterial->traits.hasTransparency || pMaterial->traits.isFading)
+				{
+					//process transparent objects later, with Z sorting
+					transparentGroups.append(&matGroup);
+					continue;
+				}
+			}
+			else
+			{
+				//objects start casting shadows with at least 0.2 opacity
+				if(pMaterial->d * pMaterial->vis_fadeValue < 0.2)
+					continue;
 			}
 
 			success = drawMaterialGroup(matGroup,shading,blendAlphaAdditive);
@@ -432,7 +445,7 @@ bool S3DRenderer::drawMaterialGroup(const StelOBJ::MaterialGroup &matGroup, bool
 			}
 		}
 
-		if(pMaterial->traits.hasTransparency )
+		if(shading && (pMaterial->traits.hasTransparency || pMaterial->traits.isFading))
 		{
 			if(!blendEnabled)
 			{
@@ -444,13 +457,10 @@ bool S3DRenderer::drawMaterialGroup(const StelOBJ::MaterialGroup &matGroup, bool
 				blendEnabled = true;
 			}
 		}
-		else
+		else if(blendEnabled)
 		{
-			if(blendEnabled)
-			{
-				glDisable(GL_BLEND);
-				blendEnabled=false;
-			}
+			glDisable(GL_BLEND);
+			blendEnabled=false;
 		}
 
 		if(backfaceCullState && pMaterial->bBackface)
