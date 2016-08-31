@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-22 21:44+0700\n"
-"PO-Revision-Date: 2016-06-30 03:18+0000\n"
+"PO-Revision-Date: 2016-08-30 05:58+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-08-23 05:26+0000\n"
-"X-Generator: Launchpad (build 18176)\n"
+"X-Launchpad-Export-Date: 2016-08-31 05:49+0000\n"
+"X-Generator: Launchpad (build 18179)\n"
 
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:188
 #: src/core/modules/Planet.cpp:226 src/core/modules/MinorPlanet.cpp:213
@@ -965,11 +965,11 @@ msgstr "Tempo de saída: %1%"
 
 #: src/core/modules/StarWrapper.cpp:276
 msgid "Year of last satisfactory observation"
-msgstr ""
+msgstr "Ano da última observación satisfactoria"
 
 #: src/core/modules/StarWrapper.cpp:277
 msgid "Position angle"
-msgstr ""
+msgstr "Ángulo de posición"
 
 #: src/core/modules/StarWrapper.cpp:281 src/core/modules/StarWrapper.cpp:283
 #: src/gui/AstroCalcDialog.cpp:542
@@ -2715,11 +2715,11 @@ msgstr "Día Xuliano"
 
 #: src/gui/AstroCalcDialog.cpp:373 src/gui/AstroCalcDialog.cpp:747
 msgid "CSV (Comma delimited)"
-msgstr ""
+msgstr "CSV (Coma delimitado)"
 
 #: src/gui/AstroCalcDialog.cpp:375
 msgid "Save calculated ephemerides as..."
-msgstr ""
+msgstr "Gardar efemérides calcuadas como..."
 
 #: src/gui/AstroCalcDialog.cpp:451
 msgid "10 minutes"
@@ -2807,7 +2807,7 @@ msgstr "Nebulosas planetarias"
 
 #: src/gui/AstroCalcDialog.cpp:523
 msgid "Bright nebulae"
-msgstr ""
+msgstr "Nebulosas brillantes"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:524 src/translations.h:99
@@ -2832,7 +2832,7 @@ msgstr "Obxecto 2"
 
 #: src/gui/AstroCalcDialog.cpp:749
 msgid "Save calculated phenomena as..."
-msgstr ""
+msgstr "Gardar os fenómenos calculados como..."
 
 #: src/gui/AstroCalcDialog.cpp:788 src/gui/AstroCalcDialog.cpp:942
 msgid "Conjunction"
@@ -3234,7 +3234,7 @@ msgstr "Estacións lunares xaponesas"
 
 #: src/translations.h:183
 msgid "Kamilaroi/Euahlayi"
-msgstr ""
+msgstr "Kamilaroi/Euahlayi"
 
 #: src/translations.h:184
 msgid "Korean"
@@ -5462,10 +5462,12 @@ msgid ""
 "Use designations of deep-sky objects instead of their common names for "
 "screen labels"
 msgstr ""
+"Usar as denominacións de obxectos de ceo profundo cos seus nomes comúns para "
+"as etiquetas de pantalla"
 
 #: src/ui_viewDialog.h:1740
 msgid "Use designations for screen labels"
-msgstr ""
+msgstr "Usar as denominacións para etiquetas de pantalla"
 
 #: src/ui_viewDialog.h:1741
 msgid "Celestial Sphere"
@@ -5756,11 +5758,11 @@ msgstr "Linguaxe das Culturas do Ceo"
 
 #: src/ui_configurationDialog.h:1094
 msgid "This feature has not been thoroughly tested yet!"
-msgstr ""
+msgstr "Esta característica non foi probada dabondo!"
 
 #: src/ui_configurationDialog.h:1096
 msgid "Ephemeris settings (experimental)"
-msgstr ""
+msgstr "Configuración de efemérides (experimental)"
 
 #: src/ui_configurationDialog.h:1097 src/ui_configurationDialog.h:1098
 msgid "Not installed"
@@ -6421,7 +6423,7 @@ msgstr "..."
 
 #: src/ui_astroCalcDialog.h:416
 msgid "Update of planetary positions"
-msgstr ""
+msgstr "Actualización de posicións planetarias"
 
 #: src/ui_astroCalcDialog.h:417
 msgid "Planetary positions"
@@ -6446,15 +6448,15 @@ msgstr "Calcula efemérides"
 
 #: src/ui_astroCalcDialog.h:423
 msgid "Save ephemeris"
-msgstr ""
+msgstr "Gardar efemérides"
 
 #: src/ui_astroCalcDialog.h:425
 msgid "Show markers of positions of the current celestial body on the sky"
-msgstr ""
+msgstr "Amosar marcadores de posición do actual obxecto no ceo"
 
 #: src/ui_astroCalcDialog.h:427
 msgid "Show markers of positions"
-msgstr ""
+msgstr "Amosar marcadores de posición"
 
 #: src/ui_astroCalcDialog.h:430 src/ui_astroCalcDialog.h:437
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
@@ -6464,10 +6466,11 @@ msgstr "Ata:"
 #: src/ui_astroCalcDialog.h:433
 msgid "Show dates of positions of current celestial body near markers"
 msgstr ""
+"Amosar as datas de posición actual do obxecto celeste preto dos marcadores"
 
 #: src/ui_astroCalcDialog.h:435
 msgid "Show dates of positions"
-msgstr ""
+msgstr "Amosar datas de posición"
 
 #: src/ui_astroCalcDialog.h:436
 msgid "Ephemeris"
@@ -6491,7 +6494,7 @@ msgstr "Calcular fenómenos"
 
 #: src/ui_astroCalcDialog.h:444
 msgid "Save phenomena"
-msgstr ""
+msgstr "Gardar fenómenos"
 
 #: src/ui_astroCalcDialog.h:445
 msgid "Maximum allowed separation:"
@@ -7368,10 +7371,12 @@ msgid ""
 "Enable automatic install the type of mount from the telescope settings for "
 "saving horizontal orientation of CCD frame."
 msgstr ""
+"Activar a instalación automática do tipo de telescopio dende as opcións de "
+"montura para gardar a orientación horizontal do marco de CCD."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1144
 msgid "Enable automatic install the type of mount"
-msgstr ""
+msgstr "Activar a instalación automática do tipo de montura"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1145
 msgid "Use degrees and minutes for FOV of CCD"
@@ -8633,6 +8638,9 @@ msgid ""
 "Windows, a USB connection may require a 'virtual serial port' software, if "
 "it is not supplied with the cable or the telescope."
 msgstr ""
+"En Linux e Mac OS X ambos os casos son tratados de forma idéntica polo "
+"plugin. En Windows, unha conexión USB pode requirir un programa de 'porto en "
+"serie virtual', se non é fornecido co cable ou o telescopio."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:316
 msgid ""
@@ -10155,15 +10163,17 @@ msgstr "Engadido Editor do Sistema Solar"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:187
 msgid "Save the Solar System configuration file as..."
-msgstr ""
+msgstr "Gardar arquivo de configuración do Sistema Solar como..."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:193
 msgid "Configuration files"
-msgstr ""
+msgstr "Arquivos de configuración"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:195
 msgid "Select a file to replace the Solar System configuration file"
 msgstr ""
+"Seleccionar un arquivo para reemprazar o arquivo de configuración do Sistema "
+"Solar"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:511
 msgid "Import data"
@@ -12511,7 +12521,7 @@ msgstr ""
 
 #: plugins/FOV/src/FOV.cpp:86
 msgid "Set FOV to"
-msgstr ""
+msgstr "Establecer FOV a"
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:80
 msgid "Field of View plug-in"
