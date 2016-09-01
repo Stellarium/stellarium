@@ -12,14 +12,14 @@ msgstr ""
 "Project-Id-Version: po_stellarium_stellarium-is\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-22 21:44+0700\n"
-"PO-Revision-Date: 2016-04-09 21:31+0000\n"
+"PO-Revision-Date: 2016-08-31 08:15+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-08-23 05:28+0000\n"
-"X-Generator: Launchpad (build 18176)\n"
+"X-Launchpad-Export-Date: 2016-09-01 05:53+0000\n"
+"X-Generator: Launchpad (build 18179)\n"
 "Language: is\n"
 
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:188
@@ -35,7 +35,7 @@ msgstr "Gerð: <b>%1</b>"
 
 #: src/core/modules/Constellation.cpp:296
 msgid "constellation"
-msgstr ""
+msgstr "stjörnumerki"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:412
 #: src/core/modules/GridLinesMgr.cpp:950 src/core/modules/LandscapeMgr.cpp:414
@@ -275,7 +275,7 @@ msgstr "Ógegnsæi: <b>%1</b>"
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:198
 #, qt-format
 msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
-msgstr ""
+msgstr "Birtustig: <b>%1</b> (með ljósdeyfingu: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
 #: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
@@ -300,7 +300,7 @@ msgstr "Skráningarlitur (B-V): <b>%1</b>"
 #: src/core/modules/Nebula.cpp:224
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
-msgstr ""
+msgstr "Birta yfirborðs: <b>%1</b> (með ljósdeyfingu: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:230
 #, qt-format
@@ -739,7 +739,7 @@ msgstr "Djúpfyrirbæri"
 
 #: src/core/modules/NebulaMgr.cpp:365
 msgid "Toggle DSO type filter"
-msgstr ""
+msgstr "Víxla af/á síu fyrir gerðir djúpfyrirbæra"
 
 #: src/core/modules/Planet.cpp:238 src/core/modules/MinorPlanet.cpp:232
 #: src/core/modules/MinorPlanet.cpp:236 src/core/modules/Comet.cpp:194
@@ -887,11 +887,11 @@ msgstr "Ferlar reikistjarna"
 
 #: src/core/modules/SolarSystem.cpp:206
 msgid "Planet markers"
-msgstr ""
+msgstr "Merki fyrir reikistjörnur"
 
 #: src/core/modules/SolarSystem.cpp:208
 msgid "Native planet names (from starlore)"
-msgstr ""
+msgstr "Upprunaleg nöfn reikistjarna (frá starlore)"
 
 #: src/core/modules/StarWrapper.cpp:162
 msgid "eruptive variable star"
@@ -969,11 +969,11 @@ msgstr "Ristími: %1%"
 
 #: src/core/modules/StarWrapper.cpp:276
 msgid "Year of last satisfactory observation"
-msgstr ""
+msgstr "Ártal síðustu fullnægjandi skoðunar"
 
 #: src/core/modules/StarWrapper.cpp:277
 msgid "Position angle"
-msgstr ""
+msgstr "Stöðuhorn"
 
 #: src/core/modules/StarWrapper.cpp:281 src/core/modules/StarWrapper.cpp:283
 #: src/gui/AstroCalcDialog.cpp:542
@@ -1212,6 +1212,9 @@ msgid ""
 "Henriksson in his article <em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
+"Þessi sögulega jafna var reiknuð af C. Schoch árið 1931 og var hún notuð af "
+"G. Henriksson í grein hans <em>Einstein's Theory of Relativity Confirmed by "
+"Ancient Solar Eclipses</em> (%1). Frekari upplýsingar má sjá %2hér%3."
 
 #: src/core/StelCore.cpp:1780
 #, qt-format
@@ -1219,6 +1222,8 @@ msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
+"Þessi empíríska jafna var gefin út af G. M. Clemence í greininni <em>On the "
+"system of astronomical constants</em> (%1)."
 
 #: src/core/StelCore.cpp:1783
 #, qt-format
@@ -1235,6 +1240,9 @@ msgid ""
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
+"Þetta er lítillega breytt útgáfa af IAU (1952) jöfnunni sem tekin var upp í "
+"<em>Astronomical Ephemeris</em> og í <em>Canon of Solar Eclipses</em> eftir "
+"Mucke og Meeus (1983)."
 
 #: src/core/StelCore.cpp:1791
 msgid ""
@@ -1261,7 +1269,7 @@ msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
-"Þessi jafna var gefin út af F R Stephenson í greininni <em>Pre-Telescopic "
+"Þessi jafna var gefin út af F. R. Stephenson í greininni <em>Pre-Telescopic "
 "Astronomical Observations</em> (%1)."
 
 #: src/core/StelCore.cpp:1801
@@ -1279,9 +1287,9 @@ msgid ""
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
-"Þetta algrím var aðlagað af P. Bretagnon & L. Simon í <em>Planetary Programs "
-"and Tables from -4000 to +2800</em> (1986) og í PC stjörnuhvolfsforritinu "
-"RedShift."
+"Þetta algrím var aðlagað af P. Bretagnon og L. Simon í <em>Planetary "
+"Programs and Tables from -4000 to +2800</em> (1986) og í PC "
+"stjörnuhvolfsforritinu RedShift."
 
 #: src/core/StelCore.cpp:1807
 #, qt-format
@@ -1332,7 +1340,7 @@ msgid ""
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
-"Þessi formúla var aðlöguð af M. Chapront-Touze & J. Chapront í styttri "
+"Þessi formúla var aðlöguð af M. Chapront-Touze og J. Chapront í styttri "
 "útgáfu af ELP 2000-85 tunglkenningunni í <em>Lunar Tables and Programs from "
 "4000 B.C. to A.D. 8000</em> (1991)."
 
@@ -1362,6 +1370,9 @@ msgid ""
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
+"Kemur frá J. Meeus, <em>Astronomical Algorithms</em> (2. útgáfa, 1998), og "
+"er víða notuð. Tafla fyrir 1620..2000, og inniheldur tilbrigði við Chapront, "
+"Chapront-Touze og Francou (1997) fyrir dagsetningar utan 1620..2000."
 
 #: src/core/StelCore.cpp:1834
 #, qt-format
@@ -1399,6 +1410,9 @@ msgid ""
 "in article <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
+"Þessi mikilvæga lausn var gefin út af L. V. Morrison og F. R. Stephenson í "
+"greininni <em>Historical values of the Earth's clock error %1T and the "
+"calculation of eclipses</em> (%2) með viðauka (%3)."
 
 #: src/core/StelCore.cpp:1849
 #, qt-format
@@ -1421,7 +1435,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:1852
 msgid "Used by default."
-msgstr "Sjálfgefið."
+msgstr "Notað sjálfgefið."
 
 #: src/core/StelCore.cpp:1855
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
@@ -1434,6 +1448,9 @@ msgid ""
 "published in article <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 msgstr ""
+"Þessi lausn eftir B. Banjevic, byggð á Stephenson og Morrison (1984), var "
+"gefin út í greininni <em>Ancient eclipses and dating the fall of "
+"Babylon</em> (%1)."
 
 #: src/core/StelCore.cpp:1861
 #, qt-format
@@ -1442,6 +1459,9 @@ msgid ""
 "Simons (2000), was published in article <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
+"Þessi lausn eftir S. Islam, M. Sadiq og M. S. Qureshi, byggð á Meeus og "
+"Simons (2000), var gefin út í greininni <em>Error Minimization of Polynomial "
+"Approximation of DeltaT</em> (%1) og endurskoðuð af Sana Islam árið 2013."
 
 #: src/core/StelCore.cpp:1864
 #, qt-format
@@ -1518,6 +1538,8 @@ msgid ""
 "The full name of this projection method is <i>Lambert azimuthal equal-area "
 "projection</i>. It preserves the area but not the angle."
 msgstr ""
+"Fullt nafn á þessari vörpun er <i>Lambert azimuthal flatarrétt vörpun</i>. "
+"Hún varðveitir svæði en ekki horn."
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Stereographic"
@@ -1529,6 +1551,8 @@ msgid ""
 "as the planisphere projection. It preserves the angles at which curves cross "
 "each other but it does not preserve area."
 msgstr ""
+"Himinflött vörpun varðveitir hornin þar sem bogalínur skerast en varðveitir "
+"ekki svæði."
 
 #: src/core/StelProjectorClasses.cpp:200
 msgid "Fish-eye"
@@ -1594,7 +1618,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:470
 msgid "Sinusoidal"
-msgstr ""
+msgstr "Bylgjuð"
 
 #: src/core/StelProjectorClasses.cpp:475
 msgid ""
@@ -1605,7 +1629,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:512
 msgid "Miller cylindrical"
-msgstr ""
+msgstr "Miller hólklaga"
 
 #: src/core/StelProjectorClasses.cpp:517
 msgid ""
@@ -1959,7 +1983,7 @@ msgstr "Espenak & Meeus (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1351
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
-msgstr ""
+msgstr "Espenak & Meeus (2006), engin auka tunglhröðun"
 
 #: src/gui/ConfigurationDialog.cpp:1353
 msgid "Reijs (2006)"
@@ -2640,11 +2664,11 @@ msgstr "Júlíanskur dagur"
 
 #: src/gui/AstroCalcDialog.cpp:373 src/gui/AstroCalcDialog.cpp:747
 msgid "CSV (Comma delimited)"
-msgstr ""
+msgstr "CSV (aðgreint með kommum)"
 
 #: src/gui/AstroCalcDialog.cpp:375
 msgid "Save calculated ephemerides as..."
-msgstr ""
+msgstr "Vista reiknuð stjörnuhnit sem..."
 
 #: src/gui/AstroCalcDialog.cpp:451
 msgid "10 minutes"
@@ -2732,7 +2756,7 @@ msgstr "Hringþokur"
 
 #: src/gui/AstroCalcDialog.cpp:523
 msgid "Bright nebulae"
-msgstr ""
+msgstr "Björt geimþoka"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:524 src/translations.h:99
@@ -3170,7 +3194,7 @@ msgstr ""
 
 #: src/translations.h:186
 msgid "Macedonian"
-msgstr ""
+msgstr "Makedónískt"
 
 #: src/translations.h:187
 msgid "Maori"
@@ -4727,52 +4751,52 @@ msgstr "Hunsa"
 
 #: src/translations.h:621
 msgid "&Basic colors"
-msgstr ""
+msgstr "&Grunnlitir"
 
 #: src/translations.h:622
 msgid "Pick Screen Color"
-msgstr ""
+msgstr "Plokka lit af skjá"
 
 #: src/translations.h:623
 msgid "&Custom colors"
-msgstr ""
+msgstr "&Sérsniðnir litir"
 
 #: src/translations.h:624
 msgid "&Add to Custom Colors"
-msgstr ""
+msgstr "&Bæta við sérsniðna liti"
 
 #: src/translations.h:625
 msgid "Hu&e:"
-msgstr ""
+msgstr "L&itblær:"
 
 #: src/translations.h:626
 msgid "&Sat:"
-msgstr ""
+msgstr "Lit&mettun:"
 
 #: src/translations.h:627
 msgid "&Val:"
-msgstr ""
+msgstr "Li&tgildi:"
 
 #: src/translations.h:628
 msgid "&Red:"
-msgstr ""
+msgstr "&Rautt:"
 
 #: src/translations.h:629
 msgid "&Green:"
-msgstr ""
+msgstr "&Grænt:"
 
 #: src/translations.h:630
 msgid "Bl&ue:"
-msgstr ""
+msgstr "&Blátt:"
 
 #: src/translations.h:631
 msgid "Select Color"
-msgstr ""
+msgstr "Velja lit"
 
 #: src/translations.h:632
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
-msgstr ""
+msgstr "Bendill á %1, %2 Ýttu á ESC til að hætta"
 
 #: src/ui_dateTimeDialogGui.h:380
 msgid "Date and Time in Gregorian calendar"
@@ -8106,7 +8130,7 @@ msgstr "Viðbót fyrir sjónaukastýringu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:255
 msgid "Plug-in and GUI programming"
-msgstr ""
+msgstr "Forritun viðbóta og notendaviðmóts"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
 msgid ""
@@ -8163,7 +8187,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 msgid "Contents"
-msgstr ""
+msgstr "Innihald"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
@@ -8193,7 +8217,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:286
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:338
 msgid "Connection type"
-msgstr ""
+msgstr "Tegund tengingar"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:346
@@ -8287,7 +8311,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:424
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:430
 msgid "Back to top"
-msgstr ""
+msgstr "Til baka efst"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:305
 msgid ""
@@ -9165,7 +9189,7 @@ msgstr "Fjarlægja valið"
 
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:251
 msgid "Clear list"
-msgstr ""
+msgstr "Hreinsa lista"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
@@ -9561,7 +9585,7 @@ msgstr "Stillingar landslags ráða staðsetningu"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:462
 msgid "Zoom duration:"
-msgstr ""
+msgstr "Tímalengd aðdráttar:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:469
 msgid "Milky Way intensity:"
@@ -9612,11 +9636,11 @@ msgstr "Af"
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:109
 #, qt-format
 msgid "error, unknown color part \"%1\""
-msgstr ""
+msgstr "villa, óþekktur lithluti \"%1\""
 
 #: plugins/TextUserInterface/src/TuiNodeActivate.cpp:48
 msgid " [RETURN to activate]"
-msgstr ""
+msgstr " [ENTER til að virkja]"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:57
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:120
@@ -9629,6 +9653,9 @@ msgid ""
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database."
 msgstr ""
+"Viðmót til þess að bæta smástirnum og halastjörnum inn í Stellarium. Það "
+"getur hlaðið niður lista yfir fyrirbæri af vefsíðu Minor Planet Center og "
+"framkvæmt leitir í gagnagrunni þess á netinu."
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:120
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
@@ -9689,7 +9716,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:193
 msgid "Configuration files"
-msgstr ""
+msgstr "Stillingarskrár"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:195
 msgid "Select a file to replace the Solar System configuration file"
@@ -10021,12 +10048,12 @@ msgstr ""
 #. TRANSLATORS: Part of full phrase: French set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:145
 msgid "French"
-msgstr ""
+msgstr "Franska"
 
 #. TRANSLATORS: Part of full phrase: Russian set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:147
 msgid "Russian"
-msgstr ""
+msgstr "Rússneska"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:202
 #: plugins/NavStars/src/ui_navStarsWindow.h:213
@@ -10048,7 +10075,7 @@ msgstr ""
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:209
 msgid "Note:"
-msgstr ""
+msgstr "Athugið:"
 
 #: plugins/Novae/src/Novae.cpp:71 plugins/Novae/src/Novae.cpp:142
 msgid "Bright Novae"
@@ -10446,7 +10473,7 @@ msgstr ""
 #: plugins/RemoteControl/src/RemoteControl.cpp:147
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:260
 msgid "Remote Control"
-msgstr ""
+msgstr "Fjarstýring"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:61
 msgid ""
@@ -10456,7 +10483,7 @@ msgstr ""
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:147
 msgid "Remote control"
-msgstr ""
+msgstr "Fjarstýring"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:106
 msgid "Remote Control Plug-in"
@@ -10497,7 +10524,7 @@ msgstr ""
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:180
 msgid "Not active."
-msgstr ""
+msgstr "Ekki virkt."
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:246
 msgid "Remote Control Configuration"
@@ -10517,7 +10544,7 @@ msgstr ""
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:253
 msgid "Password"
-msgstr ""
+msgstr "Lykilorð"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:254
 msgid ""
@@ -11308,7 +11335,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:487
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:494
 msgid "Logarithmic scale"
-msgstr ""
+msgstr "Lógaritmískur kvarði"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:489
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:496
@@ -11318,21 +11345,21 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:490
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:498
 msgid "min"
-msgstr ""
+msgstr "lágm."
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:491
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:499
 msgid "max"
-msgstr ""
+msgstr "hám."
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:492
 msgid "X axis"
-msgstr ""
+msgstr "X ás"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:500
 msgctxt "tab in plugin windows"
 msgid "Diagram"
-msgstr ""
+msgstr "Skýringamynd"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:501
 msgctxt "tab in plugin windows"
@@ -13159,7 +13186,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:479
 msgid "Visual options"
-msgstr ""
+msgstr "Sjónrænir valkostir"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
 msgid "Per-Pixel lighting"
@@ -13526,7 +13553,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:475
 msgid "Geographic Location 1"
-msgstr ""
+msgstr "Hnattstaðsetning 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:477
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:483
@@ -13535,7 +13562,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:481
 msgid "Geographic Location 2"
-msgstr ""
+msgstr "Hnattstaðsetning 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:486
 msgid "Change color"
@@ -13575,11 +13602,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:500
 msgid "Custom Azimuth 1"
-msgstr ""
+msgstr "Sérsniðið áttarhorn 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:501
 msgid "Custom Azimuth 2"
-msgstr ""
+msgstr "Sérsniðið áttarhorn 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:503
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:506
