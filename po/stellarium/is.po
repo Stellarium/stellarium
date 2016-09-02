@@ -12,13 +12,13 @@ msgstr ""
 "Project-Id-Version: po_stellarium_stellarium-is\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-22 21:44+0700\n"
-"PO-Revision-Date: 2016-08-31 08:15+0000\n"
+"PO-Revision-Date: 2016-09-01 11:58+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-09-01 05:53+0000\n"
+"X-Launchpad-Export-Date: 2016-09-02 05:53+0000\n"
 "X-Generator: Launchpad (build 18179)\n"
 "Language: is\n"
 
@@ -2781,7 +2781,7 @@ msgstr "Hlutur 2"
 
 #: src/gui/AstroCalcDialog.cpp:749
 msgid "Save calculated phenomena as..."
-msgstr ""
+msgstr "Vista reiknuð fyrirbæri sem..."
 
 #: src/gui/AstroCalcDialog.cpp:788 src/gui/AstroCalcDialog.cpp:942
 msgid "Conjunction"
@@ -3132,7 +3132,7 @@ msgstr "Dvergvetrarbrautir"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:163
 msgid "Herschel 400 Catalogue"
-msgstr ""
+msgstr "Stjörnuskrá Herschel 400"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:168
@@ -3182,7 +3182,7 @@ msgstr "Japanskar tunglstöður"
 
 #: src/translations.h:183
 msgid "Kamilaroi/Euahlayi"
-msgstr ""
+msgstr "Kamilaroi/Euahlayi"
 
 #: src/translations.h:184
 msgid "Korean"
@@ -3190,7 +3190,7 @@ msgstr "Kóresk"
 
 #: src/translations.h:185
 msgid "Dakota/Lakota/Nakota"
-msgstr ""
+msgstr "Dakota/Lakota/Nakota"
 
 #: src/translations.h:186
 msgid "Macedonian"
@@ -3214,7 +3214,7 @@ msgstr "Norræn"
 
 #: src/translations.h:191
 msgid "Ojibwe"
-msgstr ""
+msgstr "Ojibwe"
 
 #: src/translations.h:192
 msgid "Polynesian"
@@ -3452,7 +3452,7 @@ msgstr "Viðburðir Jarðar frá Mars"
 #: src/translations.h:291
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
-msgstr ""
+msgstr "Mestu álengdir og gagnstöður Jarðar og annarra pláneta séð frá Mars"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:293
@@ -3482,17 +3482,17 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:303
 msgid "20 Fun Naked-Eye Double Stars"
-msgstr ""
+msgstr "20 áhugaverð tvístirni sem hægt er að sjá með berum augum"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:305
 msgid "List of largest known stars"
-msgstr ""
+msgstr "Listi yfir stærstu þekktu stjörnur"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:307
 msgid "Herschel 400 Tour"
-msgstr ""
+msgstr "Ferð um Herschel 400"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:309
@@ -3502,7 +3502,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:311
 msgid "The Jack Bennett Catalog"
-msgstr ""
+msgstr "Jack Bennett stjörnuskráin"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:313
@@ -3620,18 +3620,23 @@ msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr ""
+"Birtir sýnidæmi um árlykkju (analemma) - feril Sólarinnar yfir himinhvolfið "
+"í heilt ár."
 
 #: src/translations.h:340
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
+"Blossinn frá sprengistjörnunni sem Tycho Brahe skoðaði árið 1572. "
+"Sprengistjörnuviðbótin þar að vera virk."
 
 #: src/translations.h:341
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
 msgstr ""
+"Mestu álengdir og gagnstöður Jarðar og annarra pláneta séð frá Mars 2000-3000"
 
 #: src/translations.h:342
 msgid ""
@@ -3646,6 +3651,8 @@ msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
 msgstr ""
+"Mestu álengdir og gagnstöður Jarðar og annarra sýnilegra pláneta séð frá "
+"Ceres 2000-3000"
 
 #: src/translations.h:344
 msgid "A tour of Messier Objects"
@@ -3691,6 +3698,9 @@ msgid ""
 "This list by A.J. Crayon and Steve Coe is used by members of the Saguaro "
 "Astronomy Club of Phoenix, AZ. for the Best of the NGC achievement award."
 msgstr ""
+"Þessi listi eftir A.J. Crayon og Steve Coe er notaður af meðlimum Saguaro "
+"Astronomy Club í Phoenix, Arizona. fyrir 'Best of the NGC achievement' "
+"verðlaunin."
 
 #: src/translations.h:355
 msgid "Andorra"
@@ -5172,6 +5182,8 @@ msgid ""
 "Deactivate this option if you want to see orbit for selected planet and its "
 "moons."
 msgstr ""
+"Gerðu þetta óvirkt ef þú vilt sjá ferla á eftir valinni plánetu og tunglum "
+"hennar."
 
 #: src/ui_viewDialog.h:1636
 msgid "Show orbit for selected planet"
@@ -5182,6 +5194,7 @@ msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
 msgstr ""
+"Gerðu þetta óvirkt ef þú vilt sjá ferla á eftir öllum hnöttum sólkerfisins."
 
 #: src/ui_viewDialog.h:1640
 msgid "Show trail only for selected planet"
@@ -5192,6 +5205,8 @@ msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
 msgstr ""
+"Virkjaðu þennan valkost til að líkja eftir áhrifum raunverulegs ljóshraða "
+"(mælt með þessu)"
 
 #: src/ui_viewDialog.h:1644
 msgid "Simulate light speed"
@@ -5340,7 +5355,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1732
 msgid "Use proportional hints"
-msgstr ""
+msgstr "Nota hlutfallslegar vísbendingar"
 
 #: src/ui_viewDialog.h:1734
 msgid ""
@@ -5353,10 +5368,11 @@ msgid ""
 "Use designations of deep-sky objects instead of their common names for "
 "screen labels"
 msgstr ""
+"Nota skilgreiningar á djúpfyrirbærum í skjámerkingum í stað hefbundinna nafna"
 
 #: src/ui_viewDialog.h:1740
 msgid "Use designations for screen labels"
-msgstr ""
+msgstr "Nota skilgreiningar í skjámerkingum"
 
 #: src/ui_viewDialog.h:1741
 msgid "Celestial Sphere"
@@ -5364,7 +5380,7 @@ msgstr "Himinhvelfing"
 
 #: src/ui_viewDialog.h:1743
 msgid "Equatorial coordinates of J2000.0."
-msgstr ""
+msgstr "Miðbaugshnit J2000.0."
 
 #: src/ui_viewDialog.h:1745
 msgid "Equatorial grid (J2000)"
@@ -5372,7 +5388,7 @@ msgstr "Miðbaugshnit (J2000)"
 
 #: src/ui_viewDialog.h:1747
 msgid "Equatorial coordinates of current date and planet."
-msgstr ""
+msgstr "Miðbaugshnit núverandi dagsetningar og plánetu."
 
 #: src/ui_viewDialog.h:1749
 msgid "Equatorial grid (of date)"
@@ -5444,7 +5460,7 @@ msgstr "Birta miðbaugslínu vetrarbrautar."
 
 #: src/ui_viewDialog.h:1791
 msgid "Labels for the Cardinal directions."
-msgstr ""
+msgstr "Merkingar á höfuðáttum."
 
 #: src/ui_viewDialog.h:1795
 msgid "Show meridian line."
@@ -5637,11 +5653,11 @@ msgstr "Tungumál á himni"
 
 #: src/ui_configurationDialog.h:1094
 msgid "This feature has not been thoroughly tested yet!"
-msgstr ""
+msgstr "Athugaðu að þessi kóði hefur ekki verið fullprófaður!"
 
 #: src/ui_configurationDialog.h:1096
 msgid "Ephemeris settings (experimental)"
-msgstr ""
+msgstr "Stillingar stjörnualmanaks (á tilraunastigi)"
 
 #: src/ui_configurationDialog.h:1097 src/ui_configurationDialog.h:1098
 msgid "Not installed"
@@ -5652,6 +5668,8 @@ msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
 msgstr ""
+"DE431 gefur staðsetningargögn fyrir árin -13000...+17000. Eingöngu fyrir "
+"sérstök tilfelli."
 
 #: src/ui_configurationDialog.h:1102
 msgid "Use DE431 (long-time data)"
@@ -5659,7 +5677,7 @@ msgstr "Nota DE431 (langtímagögn)"
 
 #: src/ui_configurationDialog.h:1104
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
-msgstr ""
+msgstr "DE430 gefur mesta nákvæmni, einungis fyrir árin 1550...2650."
 
 #: src/ui_configurationDialog.h:1106
 msgid "Use DE430 (high accuracy)"
@@ -5670,11 +5688,14 @@ msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
 msgstr ""
+"Mælt er með notkun VSOP87 einungis fyrir árin -4000...+8000, en gefur samt "
+"nothæfar staðsetningar utan þessa sviðs."
 
 #: src/ui_configurationDialog.h:1110
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
+"VSOP87/ELP2000-82B er notað þegar þessi eru ekki uppsett eða ekki virkjuð."
 
 #: src/ui_configurationDialog.h:1111
 msgid "Default options"
@@ -5982,10 +6003,11 @@ msgstr "Sýna flettihnappa"
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
+"Sjálfvirk virkjun lofthjúps í staðsetningarglugga fyrir hnetti með lofthjúp"
 
 #: src/ui_configurationDialog.h:1253
 msgid "Auto-enabling for the atmosphere"
-msgstr ""
+msgstr "Sjálfvirk virkjun lofthjúps"
 
 #: src/ui_configurationDialog.h:1255
 msgid "Use decimal degrees for coordinates"
@@ -6020,7 +6042,7 @@ msgstr "Staðbundin hnit"
 
 #: src/ui_configurationDialog.h:1267
 msgid "Activate this option to calculate azimuth from south towards west."
-msgstr ""
+msgstr "Virkjaðu þetta til að reikna áttarhorn frá suðri til vesturs."
 
 #: src/ui_configurationDialog.h:1269
 msgid "Azimuth from South"
@@ -6220,7 +6242,7 @@ msgstr "Nánar um stóra rauða blettinn (GRS)"
 
 #: src/ui_greatRedSpotDialog.h:170
 msgid "Custom settings for position of GRS"
-msgstr ""
+msgstr "Sérsniðnar stillingar fyrir stóra rauða blettinn (GRS) á Júpíter"
 
 #: src/ui_greatRedSpotDialog.h:171 src/ui_astroCalcDialog.h:419
 #: src/ui_astroCalcDialog.h:431
@@ -6241,7 +6263,7 @@ msgstr "Dagsetning og tími (UTC):"
 
 #: src/ui_greatRedSpotDialog.h:184
 msgid "Get the recent GRS measurement"
-msgstr ""
+msgstr "Ná í nýlegar mælingar á GRS"
 
 #: src/ui_scriptConsole.h:345
 msgid "Script console"
@@ -6297,7 +6319,7 @@ msgstr "..."
 
 #: src/ui_astroCalcDialog.h:416
 msgid "Update of planetary positions"
-msgstr ""
+msgstr "Uppfærsla á stöðu pláneta"
 
 #: src/ui_astroCalcDialog.h:417
 msgid "Planetary positions"
@@ -6322,15 +6344,15 @@ msgstr "Reikna stjörnualmanak"
 
 #: src/ui_astroCalcDialog.h:423
 msgid "Save ephemeris"
-msgstr ""
+msgstr "Vista stjörnualmanak"
 
 #: src/ui_astroCalcDialog.h:425
 msgid "Show markers of positions of the current celestial body on the sky"
-msgstr ""
+msgstr "Sýna merki fyrir staðsetningar núverandi hnattar á himninum"
 
 #: src/ui_astroCalcDialog.h:427
 msgid "Show markers of positions"
-msgstr ""
+msgstr "Sýna merki fyrir staðsetningar"
 
 #: src/ui_astroCalcDialog.h:430 src/ui_astroCalcDialog.h:437
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
@@ -6340,10 +6362,11 @@ msgstr "Til:"
 #: src/ui_astroCalcDialog.h:433
 msgid "Show dates of positions of current celestial body near markers"
 msgstr ""
+"Sýna dagsetningar fyrir staðsetningar núverandi hnattar nálægt merkjum"
 
 #: src/ui_astroCalcDialog.h:435
 msgid "Show dates of positions"
-msgstr ""
+msgstr "Sýna dagsetningar fyrir staðsetningar"
 
 #: src/ui_astroCalcDialog.h:436
 msgid "Ephemeris"
@@ -6367,7 +6390,7 @@ msgstr "Reikna fyrirbæri"
 
 #: src/ui_astroCalcDialog.h:444
 msgid "Save phenomena"
-msgstr ""
+msgstr "Vista fyrirbæri"
 
 #: src/ui_astroCalcDialog.h:445
 msgid "Maximum allowed separation:"
@@ -6586,6 +6609,8 @@ msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
 msgstr ""
+"Ef þú vilt koma á framfæri ósk um nýja/betri eiginleika, geturðu útbúið "
+"villuskýrslu og sett forgang hennar á \"wishlist\"."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
@@ -6595,6 +6620,7 @@ msgid ""
 "If you want to read full information about this plugin and its history, you "
 "can %1get info here%2."
 msgstr ""
+"Frekari upplýsingar um þessa viðbót og þróun hennar geturðu %1séð hér%2."
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:217
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
@@ -7097,7 +7123,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:524
 msgid "You can choose to scale the image you see on the screen."
-msgstr ""
+msgstr "Þú getur valið að kvarða myndina sem þú sérð á skjánum."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:525
 msgid ""
@@ -7203,7 +7229,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1140
 msgid "Sensor view"
-msgstr ""
+msgstr "Sýn skynjara"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1142
 msgid ""
@@ -7311,19 +7337,19 @@ msgstr "Hæð mynddíla (míkron):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1175
 msgid "Prism/CCD distance (mm):"
-msgstr ""
+msgstr "Fjarlægð prismu/CCD (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1176
 msgid "Prism/CCD height (mm):"
-msgstr ""
+msgstr "Hæð prismu/CCD (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1177
 msgid "Prism/CCD width (mm):"
-msgstr ""
+msgstr "Breidd prismu/CCD (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1178
 msgid "Position angle (degrees):"
-msgstr ""
+msgstr "Stöðuhorn (gráður):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1179
 msgid "Off-Axis guider"
@@ -7331,7 +7357,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1180
 msgid "Rotation Angle (degrees):"
-msgstr ""
+msgstr "Snúningshorn (gráður):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1182
 #: plugins/Oculars/src/ui_ocularDialog.h:1191
@@ -7947,7 +7973,7 @@ msgstr "Stillingar"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:747
 msgid "Double-click a satellite to start tracking it."
-msgstr ""
+msgstr "Tvísmelltu á gervihnött til að fylgja honum."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:750
 msgid "Add more satellites"
@@ -7955,7 +7981,7 @@ msgstr "Bæta við fleiri gervihnöttum"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:753
 msgid "Remove the selected satellites"
-msgstr ""
+msgstr "Fjarlægja valda gervihnetti"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:757
 msgid "Save changes"
@@ -8000,7 +8026,7 @@ msgstr "Hópar:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:776
 msgid "TLE set:"
-msgstr ""
+msgstr "TLE sett:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:778
 msgid ""
@@ -8028,7 +8054,7 @@ msgstr "Heimildir"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:791
 msgid "Predict Iridium flares"
-msgstr ""
+msgstr "Spá fyrir um Iridium-blossa"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 msgid "More Satellites"
@@ -8889,17 +8915,17 @@ msgstr ""
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:491
 msgid "local, Stellarium"
-msgstr ""
+msgstr "staðvært, Stellarium"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:495
 msgid "local, external"
-msgstr ""
+msgstr "staðvært, annað forrit"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:499
 msgid "remote, unknown"
-msgstr ""
+msgstr "fjartengt, óþekkt"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:503
@@ -8987,31 +9013,31 @@ msgstr ""
 #: plugins/TelescopeControl/src/ui_slewDialog.h:326
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:245
 msgid "Center of the screen"
-msgstr ""
+msgstr "Á miðjum skjánum"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:329
 msgid "Hours-minutes-seconds format"
-msgstr ""
+msgstr "Klukkutímar-Mínútur-Sekúndur snið"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:331
 msgid "&HMS"
-msgstr ""
+msgstr "&HMS"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:333
 msgid "Degrees-minutes-seconds format"
-msgstr ""
+msgstr "Gráður-Mínútur-Sekúndur snið"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "&DMS"
-msgstr ""
+msgstr "&DMS"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:337
 msgid "Decimal degrees"
-msgstr ""
+msgstr "Gráður í tugakerfi"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:339
 msgid "D&ecimal"
-msgstr ""
+msgstr "Tuga&kerfisgráður"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:340
 msgid "&Slew"
@@ -9019,7 +9045,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "Configure &telescopes..."
-msgstr ""
+msgstr "S&tilla sjónauka..."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:461
 msgid "Telescope Configuration"
@@ -9101,7 +9127,7 @@ msgstr "TCP gátt:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:496
 msgid "User interface settings"
-msgstr "Stillingar notendaviðmóts"
+msgstr "Stillingar notandaviðmóts"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Show circles with fixed angular size around the telescope reticle"
@@ -9113,7 +9139,7 @@ msgstr "Nota vísbendingar fyrir sjónsvið"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
 msgid "Circle size(s):"
-msgstr ""
+msgstr "Stærð hrings/hringja:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:503
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
@@ -9125,7 +9151,7 @@ msgstr "Í lagi"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:394
 msgid "Telescopes Controlled"
-msgstr ""
+msgstr "Stýrðir sjónaukar"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:397
 msgid "Configure the selected telescope"
@@ -9472,7 +9498,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Solar System body"
-msgstr ""
+msgstr "Hnöttur í sólkerfi"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:175
 msgid "Current date/time"
@@ -9488,7 +9514,7 @@ msgstr "Dagalyklar"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:182
 msgid "Startup date/time preset"
-msgstr ""
+msgstr "Forstilling dags og tíma við ræsingu"
 
 #. TRANSLATORS: The current system time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:189
@@ -9524,11 +9550,11 @@ msgstr "24h"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:235
 msgid "Sky Language"
-msgstr ""
+msgstr "Tungumál á himni"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "App Language"
-msgstr ""
+msgstr "Tungumál forrits"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:256
 msgid "Show stars"
@@ -9545,7 +9571,7 @@ msgstr "Birtustig myndskreytinga:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:359
 msgid "Ecliptic line (J2000)"
-msgstr ""
+msgstr "Sólbaugur (J2000)"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Nebula names"
@@ -9689,7 +9715,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:211
 msgid "Select bookmark..."
-msgstr ""
+msgstr "Veldu bókamerki..."
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:100
@@ -9736,7 +9762,7 @@ msgstr "Veldu heimild"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:517
 msgid "Download a list of objects from the Internet"
-msgstr ""
+msgstr "Ná í lista yfir hluti af internetinu"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:518
 msgid "Select a source from the list:"
@@ -9756,11 +9782,11 @@ msgstr "Heiti bókamerkis:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:522
 msgid "A file containing a list of objects"
-msgstr ""
+msgstr "Skrá sem inniheldur lista yfir hluti"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "Get orbital elements"
-msgstr ""
+msgstr "Sækja atriði á sporbaug"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
@@ -9790,7 +9816,7 @@ msgstr "Uppfæra fyrirliggjandi hluti"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "Update only the orbital elements"
-msgstr ""
+msgstr "Aðeins uppfæra atriði á sporbaug"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 msgid "Add objects"
@@ -9818,7 +9844,7 @@ msgstr "Frumstilla á sjálfgefin gildi"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
 msgid "Copy/replace the Solar System file"
-msgstr ""
+msgstr "Afrita/Skipta út sólkerfisskránni"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 msgid ""
@@ -9828,11 +9854,11 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
 msgid "Copy the Solar System file..."
-msgstr ""
+msgstr "Afrita sólkerfisskrána..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Replace the Solar System file..."
-msgstr ""
+msgstr "Skipta út sólkerfisskránni..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Configuration file"
@@ -9840,7 +9866,7 @@ msgstr "Stillingaskrá"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Add new Solar System objects"
-msgstr ""
+msgstr "Bæta nýjum hlutum við í sólkerfið"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
 msgid "Solar System"
@@ -9854,6 +9880,8 @@ msgstr "Sögulegar sprengistjörnur"
 #: plugins/Supernovae/src/Supernovae.cpp:74
 msgid "This plugin allows you to see some bright historical supernovae."
 msgstr ""
+"Þessi viðbót gerir þér kleift að skoða nokkrar bjartar sögulegar "
+"sprengistjörnur."
 
 #: plugins/Supernovae/src/Supernovae.cpp:148
 msgid "Historical Supernovae configuration window"
@@ -9893,12 +9921,13 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:128
 #, qt-format
 msgid "This list altogether contains %1 stars."
-msgstr ""
+msgstr "Þessi listi inniheldur alls %1 stjörnur."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
 #, qt-format
 msgid "All those supernovae are brighter %1 at peak of brightness."
 msgstr ""
+"Allar þessar sprengistjörnur eru bjartari en %1 við hámarksbirtustig."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
 #: plugins/Novae/src/gui/NovaeDialog.cpp:130
@@ -9923,6 +9952,8 @@ msgstr "Þakkir"
 msgid ""
 "We thank the following people for their contribution and valuable comments:"
 msgstr ""
+"Við þökkum eftirfarandi einstaklingum fyrir framlög þeirra og gagnlegar "
+"athugasemdir:"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:135
 msgid "Sergei Blinnikov"
@@ -9943,15 +9974,15 @@ msgstr "í Rússlandi"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:192
 #, qt-format
 msgid "Next update: %1 days"
-msgstr ""
+msgstr "Næsta uppfærsla: %1 dagar"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:215
 msgid "Historical supernovae is updated"
-msgstr ""
+msgstr "Uppfærðar sögulegar sprengistjörnur"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:229
 msgid "Historical Supernovae Configuration"
-msgstr ""
+msgstr "Stillingar fyrir sögulegar sprengistjörnur"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:230
 msgid "Historical Supernovae Plug-in Configuration"
