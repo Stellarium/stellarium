@@ -555,7 +555,7 @@ NebulaP NebulaMgr::search(const QString& name)
 void NebulaMgr::loadNebulaSet(const QString& setName)
 {
 	QString srcCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.txt");
-	QString dsoCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.dat");	
+	QString dsoCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.dat");
 	QString dsoNamesPath		= StelFileMgr::findFile("nebulae/" + setName + "/names.dat");
 
 	if (flagConverter)
@@ -1011,6 +1011,8 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 	if (!in.open(QIODevice::ReadOnly))
 		return false;
 
+	// TODO: Let's begin use gzipped data
+	// QDataStream ins(StelUtils::uncompress(in.readAll()));
 	QDataStream ins(&in);
 	ins.setVersion(QDataStream::Qt_5_2);
 
