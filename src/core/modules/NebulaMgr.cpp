@@ -887,12 +887,12 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			       << "RNE" << "HII" << "SNR" << "BN" << "EN" << "SA" << "SC" << "CL" << "IG"
 			       << "RG" << "AGX" << "QSO" << "ISM" << "EMO" << "GNE" << "RAD" << "LIN"
 			       << "BLL" << "BLA" << "MOC" << "YSO" << "Q?" << "PN?" << "*" << "SFR"
-			       << "IR" << "**" << "MUL" << "PPN";
+			       << "IR" << "**" << "MUL" << "PPN" << "GIG";
 
 			switch (oTypes.indexOf(oType.toUpper()))
 			{
 				case 0:
-				case 1:
+				case 1:				
 					nType = (unsigned int)Nebula::NebGx;
 					break;
 				case 2:
@@ -941,6 +941,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 					nType = (unsigned int)Nebula::NebCl;
 					break;
 				case 17:
+				case 38:
 					nType = (unsigned int)Nebula::NebIGx;
 					break;
 				case 18:
