@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-22 21:44+0700\n"
-"PO-Revision-Date: 2016-08-14 04:33+0000\n"
+"PO-Revision-Date: 2016-09-02 06:58+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-08-23 05:21+0000\n"
-"X-Generator: Launchpad (build 18176)\n"
+"X-Launchpad-Export-Date: 2016-09-03 05:52+0000\n"
+"X-Generator: Launchpad (build 18179)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -3238,7 +3238,7 @@ msgstr "Японскія месцы Месяца"
 
 #: src/translations.h:183
 msgid "Kamilaroi/Euahlayi"
-msgstr ""
+msgstr "Камілароі/Эўаглаі"
 
 #: src/translations.h:184
 msgid "Korean"
@@ -3533,7 +3533,7 @@ msgstr "Тур па аб'ектах Мэсье"
 #. TRANSLATORS: Name of script
 #: src/translations.h:301
 msgid "Binocular Highlights"
-msgstr ""
+msgstr "Найцікавейшае ў бінокль"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:303
@@ -3789,6 +3789,9 @@ msgid ""
 "This list by A.J. Crayon and Steve Coe is used by members of the Saguaro "
 "Astronomy Club of Phoenix, AZ. for the Best of the NGC achievement award."
 msgstr ""
+"Гэты сьпіс Э.Дж. Крэёна й Стыва Коў выкарыстоўваецца сябрамі Астранамічнага "
+"клюбу «Саґуара» ў Фэніксе (штат Арызона, ЗША) для вызначэньня пераможцаў у "
+"назіраньнях НАК."
 
 #: src/translations.h:355
 msgid "Andorra"
@@ -7245,18 +7248,24 @@ msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
 msgstr ""
+"Мае на мэце паказаць лепшае параўнаньне як адно спалучэньне "
+"акуляра/тэлескопа будзе параўнальна зь іншым."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:526
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will "
 "produce two different exit pupils, changing the view somewhat."
 msgstr ""
+"Адзін і той акуляр на двух розных тэлескопах з рознай фокуснай адлегласьцю "
+"будзе ствараць дзьве розныя выходныя зрэнкі, зьмяняючы неяк выяву."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:527
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
 msgstr ""
+"Як кампраміс пры маштабаваньні карцінкі, вялікая частка экрану будзе "
+"змарнаваная."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:528
 msgid ""
@@ -8341,16 +8350,20 @@ msgid ""
 "Stellarium's code (the client side of Stellarium's original telescope "
 "control feature);"
 msgstr ""
+"клясы Telescope, TelescopeDummy, TelescopeTcp and TelescopeMgr у кодзе "
+"Stellarium (кліенцкі бок спачатнай функцыі кіраваньня тэлескопам Stellarium);"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:260
 msgid "the telescope server core code (licensed under the LGPL)"
-msgstr ""
+msgstr "ядро коду паслужніка тэлескопа (ліцэнзаваны паводле LGPL)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:261
 msgid ""
 "the TelescopeServerLx200 telescope server core code (originally licensed "
 "under the LGPL)"
 msgstr ""
+"ядро коду паслужніка тэлескопа TelescopeServerLx200 (спачатку ліцэнзаваны "
+"паводле LGPL)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:262
 msgid ""
@@ -8358,12 +8371,17 @@ msgid ""
 "server, along with the Stellarium telescope control network protocol (over "
 "TCP/IP), is <b>Johannes Gajdosik</b>."
 msgstr ""
+"Аўтар усяго вышэйшага: кліента, ядра паслужніка, паслужніка LX200, а таксама "
+"сеткавага (праз TCP/IP) пратаколу кіраваньня тэлескопам Stellarium, — "
+"<b>Яганэс Ґайдосік</b>."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:263
 msgid ""
 "the TelescopeServerNexStar telescope server core code (originally licensed "
 "under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>."
 msgstr ""
+"ядро коду паслужніка тэлескопа TelescopeServerNexStar (спачатку ліцэнзаваны "
+"паводле LGPL, на аснове TelescopeServerLx200) <b>Міхаэля Гайнца</b>."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:275
@@ -8383,6 +8401,8 @@ msgid ""
 "A more complete and up-to-date documentation for this plug-in can be found "
 "on the %1Telescope Control%2 page in the Stellarium Wiki."
 msgstr ""
+"Паўнейшую і сьвяжэйшую дакумэнтацыю для гэтага дадатку можна знайсьці "
+"старонцы %1Кіраваньне тэлескопам%2 у вікі Stellarium."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 msgid "Contents"
@@ -8468,6 +8488,11 @@ msgid ""
 "and similar situations. (To abort a slew, you can start another one to a "
 "safe position.)"
 msgstr ""
+"Гэты дадатак дазваляе толькі пасылаць прыладзе загады «<b>павернуцца</b>» "
+"(«перайсьці да») і атрымоўваць ейнае бягучае становішча. Ён ня можа выдаваць "
+"іншыя загады, таму карыстальніку варта памятаць пра магчымасьць канфліктаў з "
+"мацаваньнем і падобныя сытуацыі. (Каб спыніць паварот трэба пачаць іншы ў "
+"бясьпечнае становішча.)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:298
 msgid ""
@@ -8501,6 +8526,10 @@ msgid ""
 "it is strongly recommended to avoid using the telescope control feature "
 "before sunset without appropriate protection."
 msgstr ""
+"Нават калі ты не зробіш гэтага наўмысна, удзень пры паварочваньні, тэлескоп "
+"можа быць накіраваным на Сонца падчас руху ў патрэбным напрамку, таму "
+"настойліва раім не карыстацца функцыяй кіраваньня тэлескопам удзень без "
+"адпаведнае засьцярогі."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:306
@@ -8558,6 +8587,9 @@ msgid ""
 "alone telescope server program%2 or a %3third-party application%4 <b>that "
 "can 'talk' to Stellarium</b>;"
 msgstr ""
+"Прылада далучаная да таго ж кампутара, але ёй кіруе %1асобная праґрама "
+"паслужніка тэлескопа%2 ці %3іншая праґрама%4, <b>якая можа «гаварыць» з "
+"Stellarium</b>;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:313
 msgid ""
@@ -8566,6 +8598,9 @@ msgid ""
 "either one of Stellarium's stand-alone telescope servers, or a third party "
 "application."
 msgstr ""
+"Прылада далучаная да іншага кампутара й праґрама, якая кіруе ім, можа "
+"«гаварыць» з Stellarium <i>празь сетку</i>; такой праґрамай можа быць як "
+"адзін з асобных паслужнікаў тэлескопа Stellarium, або іншая праґрама."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
 #, qt-format
@@ -8610,6 +8645,8 @@ msgid ""
 "Telescope set-up (setting geographical coordinates, performing alignment, "
 "etc.) should be done before connecting the telescope to Stellarium."
 msgstr ""
+"Настройка тэлескопа (заданьне ґеаґрафічных каардынат, раўнаваньне й г.д.) "
+"трэба рабіць да далучэньня тэлескопа да Stellarium."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
 msgid "The plug-in's main window can be opened:"
@@ -8759,6 +8796,8 @@ msgid ""
 "Otherwise, to start the telescope, you need to open the main window, select "
 "that telescope and press the 'Start/Connect' button."
 msgstr ""
+"У іншым выпадку каб пачаць працу тэлескопа, трэба адкрыць галоўнае вакно, "
+"выбраць гэты тэлескоп і націснуць ґузік «Пачаць/злучыцца»."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:355
 #, qt-format
@@ -8813,6 +8852,8 @@ msgid ""
 "This will list all devices, the full name of your serial port should be "
 "somewhere in the list (for example, '/dev/cu.usbserial-FTDFZVMK')."
 msgstr ""
+"Будуць паказаныя ўсе прылады, поўная назва твайго пасьлядоўнага порту будзе "
+"недзе ў сьпісе (напрыклад, «/dev/cu.usbserial-FTDFZVMK»)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:364
 #, qt-format
@@ -8831,6 +8872,7 @@ msgid ""
 "Doing something with them is necessary only for INDIRECT connections  (see "
 "%1above%2)."
 msgstr ""
+"Нешта зь імі рабіць трэба толькі для НЕПРАМЫХ злучэньняў (глядзі %1вышэй%2)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:370
 #, qt-format
@@ -8838,12 +8880,16 @@ msgid ""
 "<b>Host</b> can be either a host name or an %1IPv4%2 address such as "
 "'127.0.0.1'. The default value of 'localhost' means 'this computer'."
 msgstr ""
+"<b>Вузел</b> можа быць назвай вузла або адрасам %1IPv4%2, такім як "
+"«127.0.0.1». Прадвызначанае значэньне «localhost» значыць «гэты кампутар»."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:371
 msgid ""
 "<b>Port</b> refers to the TCP port used for communication. The default value "
 "depends on the telescope number and ranges between 10001 and 10009."
 msgstr ""
+"<b>Порт</b> ­— значэньне порту TCP для злучэньня. Прадвызначанае значэньне "
+"залежыць ад нумару тэлескопа й ляжыць у прамежку ад 10001 да 10009."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:372
 msgid "Both values are ignored for DIRECT connections."
@@ -8854,6 +8900,8 @@ msgid ""
 "For INDIRECT connections, modifying the default host name value makes sense "
 "only if you are attempting a remote connection over a network."
 msgstr ""
+"Для НЕПРАМЫХ злучэньняў зьмяненьне прадвызначанай назвы вузла мае сэнс "
+"толькі пры спробе аддаленага злучэньня празь сетку."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:374
 msgid ""
