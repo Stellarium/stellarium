@@ -820,7 +820,8 @@ void ViewDialog::setFlagCustomGrsSettings(bool b)
 {
 	GETSTELMODULE(SolarSystem)->setFlagCustomGrsSettings(b);
 	ui->pushButtonGrsDetails->setEnabled(b);
-	if (!b)
+
+	if (!b && greatRedSpotDialog!=NULL)
 		greatRedSpotDialog->setVisible(false);
 }
 
