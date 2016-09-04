@@ -37,6 +37,7 @@ GreatRedSpotDialog::GreatRedSpotDialog()
 GreatRedSpotDialog::~GreatRedSpotDialog()
 {
 	delete ui;
+	ui=NULL;
 }
 
 void GreatRedSpotDialog::retranslate()
@@ -45,6 +46,10 @@ void GreatRedSpotDialog::retranslate()
 		ui->retranslateUi(dialog);
 }
 
+void GreatRedSpotDialog::setVisible(bool v)
+{
+	StelDialog::setVisible(v);
+}
 
 void GreatRedSpotDialog::createDialogContent()
 {
