@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-03 23:58+0700\n"
-"PO-Revision-Date: 2016-09-02 06:58+0000\n"
+"PO-Revision-Date: 2016-09-04 19:57+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-09-04 05:53+0000\n"
+"X-Launchpad-Export-Date: 2016-09-05 05:48+0000\n"
 "X-Generator: Launchpad (build 18179)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -120,11 +120,11 @@ msgstr "Галоўная вэртыкаль"
 
 #: src/core/modules/GridLinesMgr.cpp:643
 msgid "Equinoctial Colure"
-msgstr "Колур раўнадзенства"
+msgstr "Калюр раўнадзенства"
 
 #: src/core/modules/GridLinesMgr.cpp:647
 msgid "Solstitial Colure"
-msgstr "Колур сонцастаяньня"
+msgstr "Калюр сонцастаяньня"
 
 #: src/core/modules/GridLinesMgr.cpp:652
 msgid "Circumpolar Circle"
@@ -201,7 +201,7 @@ msgstr "Акружыны прэцэсіі"
 
 #: src/core/modules/GridLinesMgr.cpp:968
 msgid "Colure Lines"
-msgstr "Лініі колураў"
+msgstr "Лініі калюраў"
 
 #: src/core/modules/GridLinesMgr.cpp:969
 msgid "Circumpolar Circles"
@@ -2314,7 +2314,7 @@ msgstr "Вакно скаротаў"
 
 #: src/gui/StelGui.cpp:221
 msgid "Astronomical calculations window"
-msgstr ""
+msgstr "Вакно астранамічных разьлікаў"
 
 #: src/gui/StelGui.cpp:222 src/ui_bookmarksDialog.h:174
 msgid "Bookmarks"
@@ -2812,7 +2812,7 @@ msgstr "Плянэтарная туманнасьць"
 
 #: src/gui/AstroCalcDialog.cpp:532
 msgid "Bright nebulae"
-msgstr ""
+msgstr "Яркія туманнасьці"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:533 src/translations.h:99
@@ -5125,7 +5125,7 @@ msgstr "Грэцкія літары для абазначэньняў Баера
 #: src/ui_searchDialogGui.h:701
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
 msgid "Coordinate system:"
-msgstr "Каардынатная сыстэма:"
+msgstr "Сыстэма каардынат:"
 
 #: src/ui_searchDialogGui.h:703
 msgid ""
@@ -5516,27 +5516,27 @@ msgstr "Экліптычная (даты)"
 
 #: src/ui_viewDialog.h:1901
 msgid "Color of equator (J2000.0)"
-msgstr ""
+msgstr "Колер экватара (J2000.0)"
 
 #: src/ui_viewDialog.h:1904
 msgid "Color of equator (of date)"
-msgstr ""
+msgstr "Колер экватара (даты)"
 
 #: src/ui_viewDialog.h:1907
 msgid "Color of ecliptic (J2000.0)"
-msgstr ""
+msgstr "Колер экліптыкі (J2000.0)"
 
 #: src/ui_viewDialog.h:1910
 msgid "Color of ecliptic (of date)"
-msgstr ""
+msgstr "Колер экліптыкі (даты)"
 
 #: src/ui_viewDialog.h:1913
 msgid "Color of horizon"
-msgstr ""
+msgstr "Колер гарызонту"
 
 #: src/ui_viewDialog.h:1916
 msgid "Color of galactic equator"
-msgstr ""
+msgstr "Колер ґаляктычнага экватара"
 
 #: src/ui_viewDialog.h:1919
 msgid "Show Prime (East-West) Vertical."
@@ -5545,12 +5545,12 @@ msgstr "Паказваць галоўную (усход-захад) вэртык
 #: src/ui_viewDialog.h:1923
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
 msgstr ""
-"Паказваць колуры (вялікія акружыны праз палюсы й "
+"Паказваць калюры (вялікія акружыны праз палюсы й "
 "раўнадзенствы/сонцастаяньні)."
 
 #: src/ui_viewDialog.h:1925
 msgid "Colures"
-msgstr "Колуры"
+msgstr "Калюры"
 
 #: src/ui_viewDialog.h:1927
 msgid "Show meridian line."
@@ -5594,31 +5594,31 @@ msgstr "Пазнакі галоўных напрамкаў."
 
 #: src/ui_viewDialog.h:1947
 msgid "Color of cardinal points"
-msgstr ""
+msgstr "Колер бакоў сьвету"
 
 #: src/ui_viewDialog.h:1950
 msgid "Color of meridian"
-msgstr ""
+msgstr "Колер мэрыдыяна"
 
 #: src/ui_viewDialog.h:1953
 msgid "Color of Prime Vertical"
-msgstr ""
+msgstr "Колер галоўнай вэртыкалі"
 
 #: src/ui_viewDialog.h:1956
 msgid "Color of colures"
-msgstr ""
+msgstr "Колер калюраў"
 
 #: src/ui_viewDialog.h:1959
 msgid "Color of the opposition/conjunction longitude line"
-msgstr ""
+msgstr "Колер лініё даўгаты супрацьстаяньня/злучэньня"
 
 #: src/ui_viewDialog.h:1962
 msgid "Color of circumpolar circles"
-msgstr ""
+msgstr "Колер каляпалярных акружын"
 
 #: src/ui_viewDialog.h:1965
 msgid "Color of precession circles"
-msgstr ""
+msgstr "Колер акружын прэцэсіі"
 
 #: src/ui_viewDialog.h:1968
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
@@ -5662,27 +5662,27 @@ msgstr "Каляктычныя каардынаты, сыстэма II (МАЗ 1
 
 #: src/ui_viewDialog.h:1992
 msgid "Color of the equatorial grid (J2000.0)"
-msgstr ""
+msgstr "Колер экватарыяльнай сеткі (J2000.0)"
 
 #: src/ui_viewDialog.h:1995
 msgid "Color of the equatorial grid (of date)"
-msgstr ""
+msgstr "Колер экватарыяльнай сеткі (даты)"
 
 #: src/ui_viewDialog.h:1998
 msgid "Color of the ecliptical grid (J2000.0)"
-msgstr ""
+msgstr "Колер экліптычнай сеткі (J2000.0)"
 
 #: src/ui_viewDialog.h:2001
 msgid "Color of the ecliptical grid (of date)"
-msgstr ""
+msgstr "Колер экліптычнай сеткі (даты)"
 
 #: src/ui_viewDialog.h:2004
 msgid "Color of the azimuthal grid"
-msgstr ""
+msgstr "Колер азімутальнай сеткі"
 
 #: src/ui_viewDialog.h:2007
 msgid "Color of the galactic grid"
-msgstr ""
+msgstr "Колер ґаляктычнай сеткі"
 
 #: src/ui_viewDialog.h:2009
 msgid "Projection"
@@ -6251,7 +6251,7 @@ msgstr "«Аўтааддаленьне» вяртае пачатковы нап�
 
 #: src/ui_configurationDialog.h:1284
 msgid "Show bookmarks button"
-msgstr ""
+msgstr "Паказваць ґузік закладак"
 
 #: src/ui_configurationDialog.h:1285
 msgid "Screenshots"
@@ -6500,11 +6500,11 @@ msgstr "…"
 
 #: src/ui_astroCalcDialog.h:454
 msgid "Astronomical calculations"
-msgstr ""
+msgstr "Астранамічныя разьлікі"
 
 #: src/ui_astroCalcDialog.h:460
 msgid "Positions"
-msgstr ""
+msgstr "Становішчы"
 
 #: src/ui_astroCalcDialog.h:462
 msgid "Planetary positions"
@@ -8768,6 +8768,8 @@ msgid ""
 "not. Unfortunately, there are some cases in which 'Connected' is displayed "
 "when no working connection exists."
 msgstr ""
+"Слупок <b>статус</b> паказвае ці актыўнае на даны момант злучэньне. Нажаль, "
+"часам паказана «Злучаны», але працоўнае злучэньне адсутнічае."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:328
 msgid "The <b>Type</b> field indicates what kind of connection is this:"
@@ -8844,18 +8846,24 @@ msgid ""
 "<b>Nothing, just simulate one (a moving reticle)</b> is a %1virtual "
 "telescope%2 (no connection)"
 msgstr ""
+"<b>Нічога, проста ўдаваць (рухомая акулярная сетка)</b> — %1віртуальны "
+"тэлескоп%2 (няма злучэньня)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:347
 msgid ""
 "<b>Name</b> is the label that will be displayed on the screen next to the "
 "telescope reticle."
 msgstr ""
+"<b>Назва</b> ­— метка, якая будзе паказаная на экране побач з акулярнай "
+"сеткай тэлескопа."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:348
 msgid ""
 "<b>Connection delay</b>: If the movement of the telescope reticle on the "
 "screen is uneven, you can try increasing or decreasing this value."
 msgstr ""
+"<b>Затрымка злучэньня</b>: калі рух акулярнай сеткі тэлескопа на экране "
+"няроўны, можна паспрабаваць павялічыць ці зьменшыць гэтае значэньне."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:349
 msgid ""
@@ -8864,12 +8872,18 @@ msgid ""
 "use the equinox of the date (EOD, also known as JNow), making necessary this "
 "override."
 msgstr ""
+"<b>Сыстэма каардынам</b>: некаторыя тэлескопы Celestron маюць абноўленую "
+"прашыўку й яны інтэрпрэтуюуь атрыманыя каардынаты як каардынаты, якія "
+"выкарыстоўваюць раўнадзенства даты (EOD, таксама вядомае як JNow), таму "
+"гэтае значэньне трэба для іх памяняць."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:350
 msgid ""
 "<b>Start/connect at startup</b>: Check this option if you want Stellarium to "
 "attempt to connect to the telescope immediately after it starts."
 msgstr ""
+"<b>Злучацца на пачатку працы</b>: задзейнічай гэты выбор, калі хочаш, каб "
+"Stellarium спрабаваў злучыцца з тэлескопам адразу па запуску."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:351
 msgid ""
@@ -8997,6 +9011,9 @@ msgid ""
 "around the telescope marker. This is a relic from the times before the "
 "<strong>Oculars</strong> plug-in existed."
 msgstr ""
+"Вакол пазнакі тэлескопа можна дадаць набор акружын, якія паказваюць палі "
+"зроку. Гэта рэлікт з тых часоў, калі не існаваў дадатак "
+"<strong>Акуляры</strong>."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:379
 msgid ""
@@ -9010,6 +9027,8 @@ msgid ""
 "Mark the 'Use field of view indicators' option, then enter a list of values "
 "separated with commas in the field below."
 msgstr ""
+"Пазнач выбор «Выкарыстоўваць індыкатары поля зроку» і ўвядзі ў полі ніжэй "
+"значэньні, падзеленыя коскамі."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
 msgid "The values are interpreted as degrees of arc."
@@ -9021,12 +9040,16 @@ msgid ""
 "This can be used in combination with a %1virtual telescope%2 to display a "
 "moving reticle with the Telrad circles."
 msgstr ""
+"Можна выкарыстоўваць разам зь %1віртуальным тэлескопам%2 каб паказваць "
+"рухомую акулярную сетку з акружынамі Тэлрад."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:386
 msgid ""
 "The 'Slew telescope to' window can be opened by pressing <b>Ctrl+0</b> or "
 "the respective button in the bottom toolbar."
 msgstr ""
+"Вакно «Павернуць тэлескоп да» можна адкрыць націснуўшы <b>Ctrl+0</b> ці "
+"адпаведны ґузік на ніжняй панэлі."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:387
 msgid ""
@@ -9034,6 +9057,9 @@ msgid ""
 "preferred format (Hours-Minutes-Seconds, Degrees-Minutes-Seconds, or Decimal "
 "degrees), a drop-down list and two buttons."
 msgstr ""
+"Яно ўтрымлівае два палі для ўвядзеньня нябесных каардынат, поле выбару "
+"пажаданага фармату (Гадзіны-Хвіліны-Сэкунды, Ґрадусы-Мінуты-Сэкунды ці "
+"дзесятковыя ґрадусы), выпадаючы сьпіс і два ґузік."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:388
 msgid ""
@@ -9053,6 +9079,8 @@ msgid ""
 "Pressing the <b>Slew</b> button slews the selected device to the selected "
 "set of coordinates."
 msgstr ""
+"Пасьля націсканьня ґузіка <b>Павернуць</b> выбраная прылада будзе павернутая "
+"да ўведзеных каардынат."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:391
 #, qt-format
@@ -9060,6 +9088,8 @@ msgid ""
 "See the section about %1keyboard commands%2 below for other ways of "
 "controlling the device."
 msgstr ""
+"Глядзі разьдзел пра %1кіраваньне клявіятурай%2 унізе зь іншымі спосабамі "
+"кіраваньня прыладай."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:392
 #, qt-format
@@ -9067,6 +9097,8 @@ msgid ""
 "Pressing the <b>Configure telescopes...</b> button opens the %1main window%2 "
 "of the plug-in."
 msgstr ""
+"Пасьля націсканьня ґузіка <b>Наставіць тэлескопы…» будзе адкрытае %1галоўнае "
+"вакно%2 дадатку."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:393
 msgid ""
@@ -9161,6 +9193,8 @@ msgid ""
 "A computerized telescope mount made by Losmandy (Meade LX-200/Autostar "
 "interface)."
 msgstr ""
+"Кампутарызаванае мацаваньне тэлескопа зробленае Losmandy (інтэрфэйс Meade LX-"
+"200/Autostar)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:415
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:418
@@ -9172,6 +9206,8 @@ msgid ""
 "The Meade ETX-70 telescope with the #494 Autostar controller and the #506 "
 "Connector Cable Set."
 msgstr ""
+"Тэлескоп «Meade ETX-70» з кантролерам «#494 Autostar» і наборам злучальных "
+"кабэляў #506."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:417
 #, qt-format
@@ -9179,11 +9215,14 @@ msgid ""
 "According to the tester, it is a bit slow, so its default setting of "
 "%1'Connection delay'%2 is 1.5 seconds instead of 0.5 seconds."
 msgstr ""
+"Паводле тэставальніка, ён крыху павольны, таму ягонае прадвызначанае "
+"значэньне %1затрымкі злучэньня%2 1,5 сэкунды, а не 0,5."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:419
 msgid ""
 "The Sky-Watcher SynScan AZ GoTo mount is used in a number of telescopes."
 msgstr ""
+"Мауаваньне «Sky-Watcher SynScan AZ GoTo» выкарыстоўваюць шмат якія тэлескопы."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:420
 msgid ""
@@ -9233,6 +9272,8 @@ msgid ""
 "This feature is equivalent to the 'Dummy' type of telescope supported by "
 "%1Stellarium's original telescope control feature%2."
 msgstr ""
+"Гэтая функцыя эквівалентная «фіктыўнаму» тэлескопу, якія падтрымлівала "
+"%1спачатная функцыя кіраваньня тэлескопам 1Stellarium%2."
 
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:446
@@ -10937,6 +10978,8 @@ msgid ""
 "Provides remote control functionality using a webserver interface. See "
 "manual for detailed description."
 msgstr ""
+"Стварае функцыянальнасьць аддаленага кіраваньня праз інтэрфэйс "
+"вэбпаслужніка. Глядзі падрабязнасьці ў кіраўніцтве карыстальніка."
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:147
 msgid "Remote control"
@@ -10960,7 +11003,7 @@ msgstr "Таксама магчыма дасылаць загады з дапа�
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:121
 msgid "This allows triggering automatic show setups for museums etc."
-msgstr ""
+msgstr "Дазваляе задзейнічаць аўтаматычныя паказы для музэяў і г.д."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:122
 msgid "This plugin was developed during ESA SoCiS 2015."
@@ -11914,7 +11957,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:484
 msgid "Enable display designations of exoplanets"
-msgstr ""
+msgstr "Задзейнічаць паказ абазначэньняў экзаплянэт"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:486
 msgid "Show exoplanets button on toolbar"
@@ -14269,6 +14312,10 @@ msgid ""
 "The directions are computed based on spherical trigonometry on a spherical "
 "Earth."
 msgstr ""
+"Некаторыя рэлігіі, найперш Іслам, надаюць вялікую ўвагу таму, каб багамолец "
+"маліўся ў пэўным напрамку. Можна паказваць лініі азімута двух месцаў. "
+"Прадвызначаныя месцы ­— Мэкка (Кааба) і Ерусалім. Напрамкі разьлічваюцца "
+"выкарыстоўваючы сфэрычную трыґанамэтрыю на сфэрычнай Зямлі."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:251
 msgid ""
