@@ -671,7 +671,7 @@ inline void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, V
 }
 
 // Used by the method below
-QVector<Vec2f> StelPainter::smallCircleVertexArray;
+QVector<Vec3f> StelPainter::smallCircleVertexArray;
 QVector<Vec4f> StelPainter::smallCircleColorArray;
 
 void StelPainter::drawSmallCircleVertexArray()
@@ -682,7 +682,7 @@ void StelPainter::drawSmallCircleVertexArray()
 	Q_ASSERT(smallCircleVertexArray.size()>1);
 
 	enableClientStates(true, false, !smallCircleColorArray.isEmpty());
-	setVertexPointer(2, GL_FLOAT, smallCircleVertexArray.constData());
+	setVertexPointer(3, GL_FLOAT, smallCircleVertexArray.constData());
 	if (!smallCircleColorArray.isEmpty())
 		setColorPointer(4, GL_FLOAT, smallCircleColorArray.constData());
 	drawFromArray(LineStrip, smallCircleVertexArray.size(), 0, false);
@@ -746,10 +746,10 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 		const bool p2InViewport = prj->checkInViewport(p2);
 		if ((p1[2]>0 && p1InViewport) || (p2[2]>0 && p2InViewport))
 		{
-			smallCircleVertexArray.append(Vec2f(p1[0], p1[1]));
+			smallCircleVertexArray.append(Vec3f(p1[0], p1[1], p1[2]));
 			if (i+1==tessArc.constEnd())
 			{
-				smallCircleVertexArray.append(Vec2f(p2[0], p2[1]));
+				smallCircleVertexArray.append(Vec3f(p2[0], p2[1], p2[2]));
 				drawSmallCircleVertexArray();
 			}
 			if (viewportEdgeIntersectCallback && p1InViewport!=p2InViewport)
@@ -765,7 +765,7 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 		{
 			// Break the line, draw the stored vertex and flush the list
 			if (!smallCircleVertexArray.isEmpty())
-				smallCircleVertexArray.append(Vec2f(p1[0], p1[1]));
+				smallCircleVertexArray.append(Vec3f(p1[0], p1[1], p1[2]));
 			drawSmallCircleVertexArray();
 		}
 	}
@@ -787,12 +787,12 @@ void StelPainter::drawPath(const QVector<Vec3d> &points, const QVector<Vec4f> &c
 		if (!prj->intersectViewportDiscontinuity(p1, p2))
 		{
 			prj->project(p1, win);
-			smallCircleVertexArray.append(Vec2f(win[0], win[1]));
+			smallCircleVertexArray.append(Vec3f(win[0], win[1], win[2]));
 			smallCircleColorArray.append(colors[i]);
 			if (i+2==points.size())
 			{
 				prj->project(p2, win);
-				smallCircleVertexArray.append(Vec2f(win[0], win[1]));
+				smallCircleVertexArray.append(Vec3f(win[0], win[1], win[2]));
 				smallCircleColorArray.append(colors[i + 1]);
 				drawSmallCircleVertexArray();
 			}
@@ -803,7 +803,7 @@ void StelPainter::drawPath(const QVector<Vec3d> &points, const QVector<Vec4f> &c
 			if (!smallCircleVertexArray.isEmpty())
 			{
 				prj->project(p1, win);
-				smallCircleVertexArray.append(Vec2f(win[0], win[1]));
+				smallCircleVertexArray.append(Vec3f(win[0], win[1], win[2]));
 				smallCircleColorArray.append(colors[i]);
 			}
 			drawSmallCircleVertexArray();
@@ -817,7 +817,7 @@ void StelPainter::drawPath(const QVector<Vec3d> &points, const QVector<Vec4f> &c
 // This is just a more generic version of fIter where we can specify
 // the full parametric function of the path we want to render.
 static inline void fIter2(const StelProjectorP& prj, std::function<void(double t, Vec3d *p)> fn,
-						  double t1, double t2, const Vec3d& p1, const Vec3d& p2, Vec3d& win1, Vec3d& win2,
+						  double t1, double t2, const Vec3d& p1, const Vec3d& p2, Vec3d win1, Vec3d win2,
 						  QLinkedList<Vec3d>& vertexList, const QLinkedList<Vec3d>::iterator& iter,
 						  int minN, int nbI=0, bool checkCrossDiscontinuity=true)
 {
@@ -826,8 +826,6 @@ static inline void fIter2(const StelProjectorP& prj, std::function<void(double t
 	const bool crossDiscontinuity = checkCrossDiscontinuity && prj->intersectViewportDiscontinuity(p1, p2);
 	if (crossDiscontinuity && nbI>=maxNbI)
 	{
-		win1[2]=-2.;
-		win2[2]=-2.;
 		vertexList.insert(iter, win1);
 		vertexList.insert(iter, win2);
 		return;
@@ -837,7 +835,7 @@ static inline void fIter2(const StelProjectorP& prj, std::function<void(double t
 	Vec3d newVertex;
 	fn(newT, &newVertex);
 	Vec3d win3 = newVertex;
-	const bool isValidVertex = prj->projectInPlace(win3);
+	prj->projectInPlace(win3);
 
 	const float v10=win1[0]-win3[0];
 	const float v11=win1[1]-win3[1];
@@ -853,8 +851,6 @@ static inline void fIter2(const StelProjectorP& prj, std::function<void(double t
 
 	if ((cosAngle>-0.999f || dist>maxDist || crossDiscontinuity || nbI<minN) && nbI<maxNbI)
 	{
-		// Use the 3rd component of the vector to store whether the vertex is valid
-		win3[2]= isValidVertex ? 1.0 : -1.;
 		fIter2(prj, fn, t1, newT, p1, newVertex, win1, win3, vertexList, vertexList.insert(iter, win3), minN, nbI+1, crossDiscontinuity || dist>maxDist);
 		fIter2(prj, fn, newT, t2, newVertex, p2, win3, win2, vertexList, iter, minN, nbI+1, crossDiscontinuity || dist>maxDist );
 	}
@@ -868,8 +864,9 @@ void StelPainter::drawParametricPath(double t1, double t2, int nmin,
 	Vec3d p1, p2, win1, win2;
 	fn(t1, &p1);
 	fn(t2, &p2);
-	win1[2] = prj->project(p1, win1) ? 1.0 : -1.;
-	win2[2] = prj->project(p2, win2) ? 1.0 : -1.;
+	prj->project(p1, win1);
+	prj->project(p2, win2);
+
 	tessArc.append(win1);
 	fIter2(prj, fn, t1, t2, p1, p2, win1, win2, tessArc, tessArc.insert(tessArc.end(), win2), log2(nmin));
 
@@ -881,12 +878,12 @@ void StelPainter::drawParametricPath(double t1, double t2, int nmin,
 		const Vec3d& p2 = *(++i);
 		const bool p1InViewport = prj->checkInViewport(p1);
 		const bool p2InViewport = prj->checkInViewport(p2);
-		if ((p1[2]>0 && p1InViewport) || (p2[2]>0 && p2InViewport))
+		if (p1InViewport || p2InViewport)
 		{
-			smallCircleVertexArray.append(Vec2f(p1[0], p1[1]));
+			smallCircleVertexArray.append(Vec3f(p1[0], p1[1], p1[2]));
 			if (i+1==tessArc.constEnd())
 			{
-				smallCircleVertexArray.append(Vec2f(p2[0], p2[1]));
+				smallCircleVertexArray.append(Vec3f(p2[0], p2[1], p2[2]));
 				drawSmallCircleVertexArray();
 			}
 		}
@@ -894,7 +891,7 @@ void StelPainter::drawParametricPath(double t1, double t2, int nmin,
 		{
 			// Break the line, draw the stored vertex and flush the list
 			if (!smallCircleVertexArray.isEmpty())
-				smallCircleVertexArray.append(Vec2f(p1[0], p1[1]));
+				smallCircleVertexArray.append(Vec3f(p1[0], p1[1], p1[2]));
 			drawSmallCircleVertexArray();
 		}
 	}
