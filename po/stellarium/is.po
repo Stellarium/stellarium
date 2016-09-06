@@ -12,13 +12,13 @@ msgstr ""
 "Project-Id-Version: po_stellarium_stellarium-is\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-03 23:58+0700\n"
-"PO-Revision-Date: 2016-09-01 11:58+0000\n"
+"PO-Revision-Date: 2016-09-05 10:52+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-09-04 06:03+0000\n"
+"X-Launchpad-Export-Date: 2016-09-06 05:57+0000\n"
 "X-Generator: Launchpad (build 18179)\n"
 "Language: is\n"
 
@@ -131,7 +131,7 @@ msgstr "Sólstöðubaugur"
 
 #: src/core/modules/GridLinesMgr.cpp:652
 msgid "Circumpolar Circle"
-msgstr ""
+msgstr "Pólhverfubaugur"
 
 #: src/core/modules/GridLinesMgr.cpp:952
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:339
@@ -208,7 +208,7 @@ msgstr "Línur bauga"
 
 #: src/core/modules/GridLinesMgr.cpp:969
 msgid "Circumpolar Circles"
-msgstr ""
+msgstr "Pólhverfubaugar"
 
 #: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1754
 msgid "Atmosphere"
@@ -1528,6 +1528,9 @@ msgid ""
 "equator, ecliptic, hour lines, etc. into straight lines. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
+"Í fjarvíddarvörpun er sjóndeildarhring og öðrum stórum baugum á borð við "
+"miðbaug, klukkustundarlínum o.fl. varpað sem beinum línum. Stærðfræðilegt "
+"heiti þessarar vörpunar er <i>gnomonic projection</i>."
 
 #: src/core/StelProjectorClasses.cpp:87
 msgid "Equal Area"
@@ -1637,6 +1640,9 @@ msgid ""
 "proposed by Osborn Maitland Miller (1897–1979) in 1942. The poles are no "
 "longer mapped to infinity."
 msgstr ""
+"Miller-hólkvörpun er breytt Mercator-vörpun, var stungið upp á af Osborn "
+"Maitland Miller (1897–1979) árið 1942. Pólunum er ekki lengur varpað á "
+"óendanlegt."
 
 #: src/core/StelObject.cpp:116
 msgctxt "coordinates for current epoch"
@@ -3477,7 +3483,7 @@ msgstr "Ferðalag um Messier-hluti"
 #. TRANSLATORS: Name of script
 #: src/translations.h:301
 msgid "Binocular Highlights"
-msgstr ""
+msgstr "Áhugavert fyrir handsjónauka"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:303
@@ -3497,7 +3503,7 @@ msgstr "Ferð um Herschel 400"
 #. TRANSLATORS: Name of script
 #: src/translations.h:309
 msgid "Binosky: Deep Sky Objects for Binoculars"
-msgstr ""
+msgstr "Binosky: Djúpfyrirbæri fyrir handsjónauka"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:311
@@ -3507,7 +3513,7 @@ msgstr "Jack Bennett stjörnuskráin"
 #. TRANSLATORS: Name of script
 #: src/translations.h:313
 msgid "Best objects in the New General Catalog"
-msgstr ""
+msgstr "Bestu bitarnir í nýju almennu stjörnuskránni"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:319
@@ -3558,6 +3564,8 @@ msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr ""
+"Vegna frávika í sporbaug og snúningi Merkúrs á ákveðnum stöðum mun sólin "
+"rísa og setjast þar þrisvar sinnum á einum Merkúr-degi."
 
 #: src/translations.h:329
 msgid ""
@@ -3671,14 +3679,20 @@ msgid ""
 "has been collected by Jerry Lodriguss and published in Sky & Telescope "
 "09/2014. Data taken from his website, http://www.astropix.com/doubles/"
 msgstr ""
+"Þessi skrifta hjálpar þér við að búa til ferðalag um 20 skemmtileg "
+"tvístirni. Listanum var safnað saman af Jerry Lodriguss og gefinn út í Sky & "
+"Telescope 09/2014. Gögnin eru tekin af vefsvæðinu hans, "
+"http://www.astropix.com/doubles/"
 
 #: src/translations.h:347
 msgid "This script helps you make an excursion around largest known stars."
 msgstr ""
+"Þessi skrifta hjálpar þér við að búa til ferðalag um stærstu þekktu "
+"stjörnurnar."
 
 #: src/translations.h:348
 msgid "A tour around objects from the Herschel 400 Catalogue"
-msgstr ""
+msgstr "Ferðalag í kringum hluti úr Herschel 400 stjörnuskránni"
 
 #: src/translations.h:349
 msgid ""
@@ -3686,12 +3700,17 @@ msgid ""
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
 "Right Ascension (2000.0)."
 msgstr ""
+"Ben Crowell útbjó Binosky, sem er listi yfir djúpfyrirbæri sem skoða má með "
+"handsjónaukum. Í skriftunni er farið yfir lista með 31 atriðum, raðað eftir "
+"stjörnulengd (2000.0)."
 
 #: src/translations.h:350
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects. The Bennett catalog "
 "was contributed by Auke Slotegraaf."
 msgstr ""
+"Jack Bennett stjörnuskráin fyrir djúpfyrirbæri á suðurhveli. Auke Slotegraaf "
+"bætti við Bennett stjörnuskránni."
 
 #: src/translations.h:351
 msgid ""
@@ -5404,7 +5423,7 @@ msgstr "Miðbaugur (m.v. dagsetningu)"
 
 #: src/ui_viewDialog.h:1893
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
-msgstr ""
+msgstr "Sýna sólbaugslínu fyrir J2000.0 (VSOP87A grunnplan)."
 
 #: src/ui_viewDialog.h:1895
 msgid "Ecliptic (J2000)"
@@ -5471,6 +5490,8 @@ msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
 msgstr ""
+"Sjálfvirkir hringir með snúningi jarðaráss í kringum póla sólbaugs. Birtist "
+"einungis á Jörðinni."
 
 #: src/ui_viewDialog.h:1937
 msgid "Precession circles"
@@ -5484,7 +5505,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1941
 msgid "Circumpolar circles"
-msgstr ""
+msgstr "Pólhverfubaugar"
 
 #: src/ui_viewDialog.h:1943
 msgid "Labels for the Cardinal directions."
@@ -5521,6 +5542,7 @@ msgstr ""
 #: src/ui_viewDialog.h:1968
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
 msgstr ""
+"Sólbaugshnit fyrir núverandi dagsetningu. Birtist einungis á Jörðinni."
 
 #: src/ui_viewDialog.h:1970
 msgid "Ecliptic grid (of date)"
@@ -5536,7 +5558,7 @@ msgstr "Miðbaugshnit (J2000)"
 
 #: src/ui_viewDialog.h:1976
 msgid "Ecliptical coordinates for J2000.0."
-msgstr ""
+msgstr "Sólbaugshnit fyrir J2000.0."
 
 #: src/ui_viewDialog.h:1978
 msgid "Ecliptic grid (J2000)"
@@ -8011,7 +8033,7 @@ msgstr "Fjöldi búta:"
 #: plugins/Satellites/src/ui_satellitesDialog.h:729
 #: plugins/Satellites/src/ui_satellitesDialog.h:733
 msgid "Duration of a single segment in seconds"
-msgstr ""
+msgstr "Tímalengd hvers búts í sekúndum"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:731
 msgid "Segment length (s):"
@@ -8020,7 +8042,7 @@ msgstr "Lengd búts (sek):"
 #: plugins/Satellites/src/ui_satellitesDialog.h:736
 #: plugins/Satellites/src/ui_satellitesDialog.h:739
 msgid "Number of segments used to draw each end of the line"
-msgstr ""
+msgstr "Fjöldi búta sem notaður er til að draga hvern enda línunnar"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:741
 msgid "Fade length:"
@@ -8454,6 +8476,9 @@ msgid ""
 "alone telescope server program%2 or a %3third-party application%4 <b>that "
 "can 'talk' to Stellarium</b>;"
 msgstr ""
+"Tæki er tengt við sömu tölvu en er keyrt áfram af %1sjálfstæðu "
+"sjónaukamiðlaraforriti%2 eða %3forriti frá þriðja aðila%4 <b>sem getur "
+"'talað' við Stellarium</b>;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:313
 msgid ""
@@ -8462,6 +8487,10 @@ msgid ""
 "either one of Stellarium's stand-alone telescope servers, or a third party "
 "application."
 msgstr ""
+"Tæki er tengt við fjartengda tölvu og hugbúnaðurinn sem keyrir það getur "
+"'talað' við Stellarium <i>yfir netið</i>; þetta getur verið eitt af "
+"sjálfstæðu sjónaukamiðlaraforritunum í Stellarium, eða forrit frá þriðja "
+"aðila."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
 #, qt-format
@@ -9055,7 +9084,7 @@ msgstr "Stjörnulengd (J2000)"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:98
 msgid "Declination (J2000)"
-msgstr ""
+msgstr "Stjörnubreidd (J2000)"
 
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:262
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:291
@@ -13428,15 +13457,15 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:239
 msgid "Show Line for Crossquarter"
-msgstr ""
+msgstr "Birta línu fyrir árstíðafjórðung"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:240
 msgid "Show Line for Major Standstill"
-msgstr ""
+msgstr "Birta línu fyrir mestu hvarfstöðu"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:241
 msgid "Show Line for Minor Standstill"
-msgstr ""
+msgstr "Birta línu fyrir minnstu hvarfstöðu"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:242
 msgid "Show Line for Zenith Passage"
@@ -13484,15 +13513,15 @@ msgstr "Sólstöður"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1157
 msgid "Crossquarter"
-msgstr "Miðkvartil"
+msgstr "Árstíðafjórðungur"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1160
 msgid "Major Lunar Standstill"
-msgstr ""
+msgstr "Mesta hvarfstaða tungls"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1163
 msgid "Minor Lunar Standstill"
-msgstr ""
+msgstr "Minnsta hvarfstaða tungls"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1166
 msgid "Zenith Passage"
@@ -13541,11 +13570,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:236
 msgid "Declinations of the Major Lunar Standstills"
-msgstr ""
+msgstr "Breidd mestu hvarfstöðu tungls"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:237
 msgid "Declinations of the Minor Lunar Standstills"
-msgstr ""
+msgstr "Breidd minnstu hvarfstöðu tungls"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:238
 msgid "Declination of the Zenith passage"
@@ -13604,15 +13633,15 @@ msgstr "Veldu lit fyrir sólstöðulínur"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:378
 msgid "Select color for crossquarter lines"
-msgstr "Veldu lit fyrir miðkvartillínur"
+msgstr "Veldu lit fyrir línur árstíðafjórðunga"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:389
 msgid "Select color for major standstill lines"
-msgstr ""
+msgstr "Veldu lit fyrir línur mestu hvarfstöðu"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:400
 msgid "Select color for minor standstill lines"
-msgstr ""
+msgstr "Veldu lit fyrir línur minnstu hvarfstöðu"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:411
 msgid "Select color for zenith passage line"
@@ -13713,7 +13742,7 @@ msgstr "Núverandi pláneta: Satúrnus"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:499
 msgid "Minor Lunar Standstill lines"
-msgstr ""
+msgstr "Línur fyrir minnstu hvarfstöðu tungls"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:500
 msgid "Custom Azimuth 1"
@@ -13742,11 +13771,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:511
 msgid "Crossquarter Lines"
-msgstr "Miðkvartillínur"
+msgstr "Línur árstíðafjórðunga"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:512
 msgid "Major Lunar Standstill lines"
-msgstr ""
+msgstr "Línur fyrir mestu hvarfstöðu tungls"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:513
 msgid "Equinox line (Equator)"

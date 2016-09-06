@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-03 23:58+0700\n"
-"PO-Revision-Date: 2016-09-04 19:57+0000\n"
+"PO-Revision-Date: 2016-09-05 21:57+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-09-05 05:48+0000\n"
+"X-Launchpad-Export-Date: 2016-09-06 05:56+0000\n"
 "X-Generator: Launchpad (build 18179)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -7436,7 +7436,7 @@ msgstr "Абмежаваць зоркавую велічыню"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1135
 msgid "Scale image circle"
-msgstr "Зьмяненьне памеру акружыны відарыса"
+msgstr "Маштабаваць акружыны відарыса"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1139
 msgid "Use semi-transparent mask"
@@ -7451,10 +7451,12 @@ msgid ""
 "Enable automatic install the type of mount from the telescope settings for "
 "saving horizontal orientation of CCD frame."
 msgstr ""
+"Задзейнічаць аўтаматычнае ўсталяваньне тыпу мацаваньня з настаўленьняў "
+"тэлескопа каб захаваць гарызантальную арыентацыю рамкі ПЗС."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1144
 msgid "Enable automatic install the type of mount"
-msgstr ""
+msgstr "Аўтаматычна ўсталяваць тып мацаваньня"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1145
 msgid "Use degrees and minutes for FOV of CCD"
@@ -8539,7 +8541,7 @@ msgstr "Настройкі злучэньня"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:377
 msgid "Field of view indicators"
-msgstr "Полю зроку індыкатараў"
+msgstr "Індыкатары поля зроку"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:385
@@ -8606,10 +8608,10 @@ msgid ""
 "it is strongly recommended to avoid using the telescope control feature "
 "before sunset without appropriate protection."
 msgstr ""
-"Нават калі ты не зробіш гэтага наўмысна, удзень пры паварочваньні, тэлескоп "
-"можа быць накіраваным на Сонца падчас руху ў патрэбным напрамку, таму "
-"настойліва раім не карыстацца функцыяй кіраваньня тэлескопам удзень без "
-"адпаведнае засьцярогі."
+"Нават калі ты не зробіш гэтага наўмысна, удзень пры паварочваньні, можна "
+"навесьці тэлескоп на Сонца падчас руху ў патрэбным напрамку, таму настойліва "
+"раім не карыстацца функцыяй кіраваньня тэлескопам удзень без адпаведнае "
+"засьцярогі."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:306
@@ -8738,6 +8740,9 @@ msgid ""
 "Stellarium's Configuration window (opened by pressing <b>F2</b> or the "
 "respective button in the left toolbar)."
 msgstr ""
+"Націснуўшы ґузік «наставіць» дадатка ў закладцы «Дадаткі» вакна "
+"настаўленьняў Stellarium (адрываецца націсканьнем <b>F2</b> ці адпаведнага "
+"ґузіка ў левай панэлі)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:324
 #, qt-format
@@ -8746,6 +8751,9 @@ msgid ""
 "(opened by pressing <b>Ctrl+0</b> or the respective button on the bottom "
 "toolbar)."
 msgstr ""
+"Націснуўшы ґузік «Наставіць тэлескопы…» ў %1вакне «Павернуць да»%2 "
+"(адкрываецца націсканьнем <b>Ctrl+0</b> ці адпаведнага ґузіка ў ніжняй "
+"панэлі)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:325
 msgid ""
@@ -8829,7 +8837,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:340
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:463
 msgid "Telescope controlled by:"
-msgstr "Тэлескоп кіруецца:"
+msgstr "Тэлескоп кіраваны:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:341
 msgid "<b>Stellarium, directly through a serial port</b> is the DIRECT case"
@@ -8838,7 +8846,8 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:342
 msgid "<b>External software or a remote computer</b> is the INDIRECT case"
-msgstr "<b>Вонкавая праґрама ці аддалены кампутар</b> — НЕПРАМОЕ злучэньне"
+msgstr ""
+"<b>Вонкавай праґрамай ці аддаленым кампутарам</b> — НЕПРАМОЕ злучэньне"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:343
 #, qt-format
@@ -9105,12 +9114,18 @@ msgid ""
 "<b>TIP:</b> Inside the 'Slew' window, underlined letters indicate that "
 "pressing 'Alt + underlined letter' can be used instead of clicking."
 msgstr ""
+"<b>ПАДКАЗКА:</b> унутры вакна «Павернуць» падкрэсьленыя літары паказваюць, "
+"што замест пстрыку можна карыстацца націсканьнем «Alt + падкрэсьленая "
+"літара»."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:394
 msgid ""
 "For example, pressing <b>Alt+S</b> is equivalent to clicking the 'Slew' "
 "button, pressing <b>Alt+E</b> switches to decimal degree format, etc."
 msgstr ""
+"Напрыклад, націсканьне <b>Alt+S</b> раўназначна пстрыку па ґузіку "
+"«Павернуць», націсканьне <b>Alt+E</b> пераключыць на фармат дзесятковых "
+"ґрадусаў і г.д."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:397
 msgid "Sending commands"
@@ -9122,6 +9137,9 @@ msgid ""
 "telescope reticle labelled with the telescope's name on its current position "
 "in the sky."
 msgstr ""
+"Як толькі тэлескоп будзе пасьпяхова запушчаны/падлучаны, Stellarium пакажа "
+"акулярную сетку тэлескопа, падпісаную назвай тэлескопа, у той вобласьці "
+"неба, на якую ён наведзены."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:399
 msgid ""
@@ -9129,12 +9147,17 @@ msgid ""
 "with the mouse, it can be tracked and it appears as an object in the "
 "'Search' window."
 msgstr ""
+"Акулярная сетка — гэта такі ж аб'ект Stellarium, як і іншы які, яе можна "
+"вылучыць мышкай, за ёй можна сачыць, і яна зьяўляецца як аб'ект у вакне "
+"«Пошук»."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:400
 msgid ""
 "<b>To point a device to an object:</b> Select an object (e.g. a star) and "
 "press the number of the device while holding down the <b>Ctrl</b> key."
 msgstr ""
+"<b>Каб навесьці прыладу на аб'ект:</b> вылучы аб'ект (напр., зорку) і "
+"націсьні нумар прылады, трымаючы націснутай клявішу <b>Ctrl</b>."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:401
 msgid "For example, Ctrl+1 for telescope #1."
@@ -9149,6 +9172,8 @@ msgid ""
 "<b>To point a device to the center of the view:</b> Press the number of the "
 "device while holding down the <b>Alt</b> key."
 msgstr ""
+"<b>Каб навесьці прыладу на цэнтар агляду:</b> націсьні нумар прылады, "
+"трымаючы націснутай клявішу <b>Alt</b>."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:404
 msgid "For example, Alt+1 for telescope #1."
@@ -9164,6 +9189,8 @@ msgid ""
 "If you move the view after issuing the command, the target won't change "
 "unless you issue another command."
 msgstr ""
+"Калі перасунеш агляд пасьля выдачы загаду, цэль ня будзе зьмененая пакуль ня "
+"выдасі іншы загад."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:407
 #, qt-format
@@ -9171,6 +9198,8 @@ msgid ""
 "<b>To point a device to a given set of coordinates:</b> Use the %1'Slew to' "
 "window%2 (press <b>Ctrl+0</b>)."
 msgstr ""
+"<b>Каб навесьці прыладу на зададзенага набору каардынат:</b> карыстайся "
+"вакном %1«Павернуць да»%2 (націсьні <b>Ctrl+0</b>)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:411
 #, qt-format
@@ -9179,6 +9208,9 @@ msgid ""
 "definitions using one of the two built-in interfaces: the Meade LX200 (the "
 "Meade Autostar controller) interface and the Celestron NexStar interface."
 msgstr ""
+"Усе прылады, пералічаныя ў %1сьпісе «Мадэль прылады»%2, зьяўляюцца зручнымі "
+"азначэньнямі аднаго з двух убудаваных інтэрфэйсаў: Meade LX200 (кантролер "
+"Meade Autostar) і Celestron NexStar."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:412
 msgid "The device list contains the following:"
@@ -9231,10 +9263,16 @@ msgid ""
 "controller version 3.0 or greater is supported by the plug-in, as it uses "
 "the NexStar protocol."
 msgstr ""
+"<b>SynScan</b> таксама зьяўляецца назвай ручнога кантролера, які "
+"выкарыстоўваецца ў іншых мацаваньнях «Sky-Watcher GoTo», і выглядае на тое, "
+"што гэты дадатак падтрымлівае любое мацаваньне, якое выкарыстоўвае кантролер "
+"«SynScan» вэрсіі 3.0 ці пазьнейшай, бо ён выкарыстоўвае пратакол «NexStar»."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:421
 msgid "Argo Navis is a 'Digital Telescope Computer' by Wildcard Innovations."
 msgstr ""
+"Argo Navis — гэта «Лічбавы кампутарны тэлескоп», выраблены Wildcard "
+"Innovations."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:422
 msgid ""
@@ -9242,6 +9280,10 @@ msgid ""
 "(for example, a dobsonian) into a 'Push To' telescope (a telescope that uses "
 "a computer to find targets and human power to move the telescope itself)."
 msgstr ""
+"Гэта ўдасканалены лічбавы круг настаўленьняў, які ператварае звычайны "
+"тэлескоп (напрыклад, добсанаў) у тэлескоп «Push To» (тэлескоп які "
+"выкарыстоўвае кампутар для пошуку цэляў і сілу чалавека для павароту "
+"тэлескопа)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:423
 #, qt-format
@@ -9249,6 +9291,8 @@ msgid ""
 "Just don't forget to set it to Meade compatibility mode and set the baud "
 "rate to 9600B%1."
 msgstr ""
+"Проста не забудзь задзейнічаць рэжым сумяшчальнасьці з Meade і задаць "
+"часьціню мадуляцыі ў 9600Б%1."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:427
 msgid ""
@@ -9258,6 +9302,10 @@ msgid ""
 "will react in the same way as the reticle of a real telescope controlled by "
 "the plug-in."
 msgstr ""
+"Калі хочаш праверыць гэты дадатак без падлучэньня да кампутара сапраўднай "
+"прылады выберы <b>Нічым, проста ўдаваць (рухомая акулярная сетка)</b> у полі "
+"<b>Тэлескоп кіраваны:</b>. Будзе паказаная акулярная сетка, якая будзе "
+"паводзійь сябе як  сетка сапраўднага тэлескопа, кіраванага дадаткам."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:428
 #, qt-format
@@ -9265,6 +9313,8 @@ msgid ""
 "See the section above about %1field of view indicators%2 for a possible "
 "practical application (emulating 'Telrad' circles)."
 msgstr ""
+"Глядзі разьдзел вышэй пра %1індыкатары поля зроку%2 пра магчымае практычнае "
+"выкарыстаньне (эмуляваньне кругоў «Тэлрад»)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:429
 #, qt-format
