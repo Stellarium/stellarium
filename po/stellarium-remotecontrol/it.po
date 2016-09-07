@@ -8,26 +8,26 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-07-26 21:07+0700\n"
-"PO-Revision-Date: 2016-07-28 09:05+0000\n"
-"Last-Translator: SebastianoPistore <sebastianopistore@gmail.com>\n"
+"PO-Revision-Date: 2016-09-06 10:18+0000\n"
+"Last-Translator: Mad Hatter <vanhelgen@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-29 05:38+0000\n"
-"X-Generator: Launchpad (build 18153)\n"
+"X-Launchpad-Export-Date: 2016-09-07 06:36+0000\n"
+"X-Generator: Launchpad (build 18179)\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
-msgstr ""
+msgstr "Impossibile recuperare l'elenco delle azioni"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:88
 msgid "Action '%1' not accepted by server: "
-msgstr ""
+msgstr "Azione '%1' non accettata dal server: "
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:95
 msgid "Error sending action '%1' to server: "
-msgstr ""
+msgstr "Errore durante l'invio dell'azione '%1' al server: "
 
 #: plugins/RemoteControl/webroot/js/api/location.js:33
 #: plugins/RemoteControl/webroot/js/api/location.js:61
@@ -37,32 +37,32 @@ msgstr "Errore durante l'esecuzione della ricerca"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:125
 msgid "Could not retrieve country list"
-msgstr ""
+msgstr "Impossibile recuperare l'elenco dei paesi"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:138
 msgid "Could not retrieve planet list"
-msgstr ""
+msgstr "Impossibile recuperare l'elenco dei pianeti"
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:28
 msgid "Could not retrieve property list"
-msgstr ""
+msgstr "Impossibile recuperare l'elenco delle proprietà"
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:89
 #: plugins/RemoteControl/webroot/js/api/properties.js:110
 msgid "Property '%1' not accepted by server: "
-msgstr ""
+msgstr "Proprietà '%1' non accettata dal server: "
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:96
 msgid "Error sending property '%1' to server: "
-msgstr ""
+msgstr "Errore durante l'invio della proprietà '%1' al server: "
 
 #: plugins/RemoteControl/webroot/js/api/remotecontrol.js:193
 msgid "Error sending command to server: "
-msgstr ""
+msgstr "Errore durante l'invio del comando al server: "
 
 #: plugins/RemoteControl/webroot/js/api/scripts.js:27
 msgid "Could not retrieve script list"
-msgstr ""
+msgstr "Impossibile recuperare l'elenco degli script"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:32
 msgid "querying"
@@ -70,7 +70,7 @@ msgstr "invio dell'interrogazione"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:41
 msgid "Error (%1)"
-msgstr ""
+msgstr "Errore (%1)"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:53
 msgid "Error performing Simbad lookup"
@@ -100,7 +100,7 @@ msgstr ""
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:51
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:64
 msgid "Could not retrieve landscape list"
-msgstr ""
+msgstr "Impossibile recuperare l'elenco dei paesaggi"
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
@@ -155,7 +155,7 @@ msgstr ""
 
 #: index.html:36
 msgid "Actions and scripts"
-msgstr ""
+msgstr "Azioni e script"
 
 #: index.html:81 tablet7in.html:178
 msgid "Time jumps"
@@ -163,15 +163,15 @@ msgstr ""
 
 #: index.html:85 tablet7in.html:182
 msgid "Solar hour"
-msgstr ""
+msgstr "Ora solare"
 
 #: index.html:86 tablet7in.html:183
 msgid "Solar day"
-msgstr ""
+msgstr "Giorno solare"
 
 #: index.html:87 tablet7in.html:184
 msgid "Solar week"
-msgstr ""
+msgstr "Settimana solare"
 
 #: index.html:89 tablet7in.html:186
 msgid "Sidereal day"
@@ -179,11 +179,11 @@ msgstr "Giorno siderale"
 
 #: index.html:90 tablet7in.html:187
 msgid "Sidereal year"
-msgstr ""
+msgstr "Anno siderale"
 
 #: index.html:91 tablet7in.html:188
 msgid "Sidereal century"
-msgstr ""
+msgstr "Secolo siderale"
 
 #: index.html:93 tablet7in.html:190
 msgid "Synodic month"
@@ -191,27 +191,27 @@ msgstr "Mese Sinodico"
 
 #: index.html:94 tablet7in.html:191
 msgid "Draconic month"
-msgstr ""
+msgstr "Mese draconico"
 
 #: index.html:95 tablet7in.html:192
 msgid "Draconic year"
-msgstr ""
+msgstr "Anno draconico"
 
 #: index.html:97 tablet7in.html:205
 msgid "Gaussian year"
-msgstr ""
+msgstr "Anno gaussiano"
 
 #: index.html:100 tablet7in.html:195
 msgid "Anomalistic month"
-msgstr ""
+msgstr "Mese anomalistico"
 
 #: index.html:101 tablet7in.html:196
 msgid "Anomalistic year"
-msgstr ""
+msgstr "Anno anomalistico"
 
 #: index.html:102 tablet7in.html:197
 msgid "Anomalistic century"
-msgstr ""
+msgstr "Secolo anomalistico"
 
 #: index.html:104 tablet7in.html:199
 msgid "Mean tropical month"
@@ -231,11 +231,11 @@ msgstr "Anno tropico"
 
 #: index.html:109 tablet7in.html:204
 msgid "Julian year"
-msgstr ""
+msgstr "Anno giuliano"
 
 #: index.html:110 tablet7in.html:206
 msgid "Julian century"
-msgstr ""
+msgstr "Secolo giuliano"
 
 #: index.html:118 tablet7in.html:92
 msgid "Up/Left"
