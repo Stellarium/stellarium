@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-04 00:06+0700\n"
+"POT-Creation-Date: 2016-09-07 00:08+0700\n"
 "PO-Revision-Date: 2016-07-26 15:22+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-09-04 06:29+0000\n"
+"X-Launchpad-Export-Date: 2016-09-07 06:01+0000\n"
 "X-Generator: Launchpad (build 18179)\n"
 
 #: skycultures/translations.fab:9
@@ -1585,7 +1585,7 @@ msgstr "‎منطقة صدر البجعة‎"
 msgid "Abell 71"
 msgstr "‎إيبل_71‎"
 
-#: nebulae/default/names.dat:263 nebulae/default/names.dat:316
+#: nebulae/default/names.dat:263 nebulae/default/names.dat:329
 msgid "Cave Nebula"
 msgstr "‎سديم الكهف‎"
 
@@ -1690,154 +1690,206 @@ msgid "Large Magellanic Cloud"
 msgstr "‎سحابة ماجلان الكبيرة‎"
 
 #: nebulae/default/names.dat:289
+msgid "Orion Dwarf Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:290
 msgid "Carina Dwarf Galaxy"
 msgstr "‎مجرة القاعدة القزمة‎"
 
-#: nebulae/default/names.dat:290
+#: nebulae/default/names.dat:291
 msgid "Southern Ellipse"
 msgstr ""
 
-#: nebulae/default/names.dat:291
-msgid "Sextans B"
-msgstr "‎السدس ب‎"
-
 #: nebulae/default/names.dat:292
-msgid "Antlia Dwarf Galaxy"
-msgstr "‎مجرة مفرغة الهواء القزمة‎"
+msgid "Argo Dwarf Irregular Galaxy"
+msgstr ""
 
 #: nebulae/default/names.dat:293
-msgid "Sextans A"
-msgstr "‎السدس أ‎"
-
-#: nebulae/default/names.dat:294
-msgid "Leo II Dwarf Galaxy (Leo B)"
-msgstr ""
-
-#: nebulae/default/names.dat:295
-msgid "Circinus Galaxy"
-msgstr "‎مجرة الفرجار‎"
-
-#: nebulae/default/names.dat:296
-msgid "Ursa Minor Dwarf Galaxy"
-msgstr "‎مجرة الدب الأصغر القزمة‎"
-
-#: nebulae/default/names.dat:297
-msgid "Draco Dwarf Galaxy"
-msgstr "‎مجرة التنين القزمة‎"
-
-#: nebulae/default/names.dat:298
-msgid "Sagittarius Dwarf Galaxy"
-msgstr "‎مجرة القوس القزمة‎"
-
-#: nebulae/default/names.dat:299
-msgid "Aquarius Dwarf Galaxy"
-msgstr ""
-
-#: nebulae/default/names.dat:300
-msgid "Cygnus A"
-msgstr "‎الدجاجة أ‎"
-
-#: nebulae/default/names.dat:301
-msgid "Tucana Dwarf Galaxy"
-msgstr "‎مجرة الطوقان القزمة‎"
-
-#: nebulae/default/names.dat:302
-msgid "Sextans Dwarf Galaxy"
-msgstr "‎مجرة السدس القزمة‎"
-
-#: nebulae/default/names.dat:303
-msgid "Cassiopeia Dwarf Galaxy"
-msgstr "‎مجرة ذات الكرسي القزمة‎"
-
-#: nebulae/default/names.dat:304
-msgid "Pegasus Dwarf Galaxy (Pegasus II, Andromeda VI)"
-msgstr ""
-
-#: nebulae/default/names.dat:305
-msgid "Boomerang Nebula"
-msgstr "‎سديم البومارانج‎"
-
-#: nebulae/default/names.dat:306
-msgid "Cetus Dwarf Galaxy"
-msgstr "‎مجرة قيطس القزمة‎"
-
-#: nebulae/default/names.dat:307
 msgid "Holmberg II"
 msgstr ""
 
-#: nebulae/default/names.dat:308
+#: nebulae/default/names.dat:294
+msgid "Holmberg III"
+msgstr ""
+
+#: nebulae/default/names.dat:295
+msgid "Holmberg I"
+msgstr ""
+
+#: nebulae/default/names.dat:296
 msgid "Holmberg IX"
 msgstr ""
 
-#: nebulae/default/names.dat:309
-msgid "Leo A (Leo III)"
+#: nebulae/default/names.dat:297
+msgid "Sextans B"
+msgstr "‎السدس ب‎"
+
+#: nebulae/default/names.dat:298
+msgid "Antlia Dwarf Galaxy"
+msgstr "‎مجرة مفرغة الهواء القزمة‎"
+
+#: nebulae/default/names.dat:299
+msgid "Sextans A"
+msgstr "‎السدس أ‎"
+
+#: nebulae/default/names.dat:300
+msgid "Haro II"
 msgstr ""
 
+#: nebulae/default/names.dat:301
+msgid "Leo II Dwarf Galaxy (Leo B)"
+msgstr ""
+
+#: nebulae/default/names.dat:302
+msgid "Holmberg VII"
+msgstr ""
+
+#: nebulae/default/names.dat:303
+msgid "Holmberg VIII"
+msgstr ""
+
+#: nebulae/default/names.dat:304
+msgid "Holmberg V"
+msgstr ""
+
+#: nebulae/default/names.dat:305
+msgid "Holmberg IV"
+msgstr ""
+
+#: nebulae/default/names.dat:306
+msgid "Circinus Galaxy"
+msgstr "‎مجرة الفرجار‎"
+
+#: nebulae/default/names.dat:307
+msgid "Ursa Minor Dwarf Galaxy"
+msgstr "‎مجرة الدب الأصغر القزمة‎"
+
+#: nebulae/default/names.dat:308
+msgid "Draco Dwarf Galaxy"
+msgstr "‎مجرة التنين القزمة‎"
+
+#: nebulae/default/names.dat:309
+msgid "Sagittarius Dwarf Galaxy"
+msgstr "‎مجرة القوس القزمة‎"
+
 #: nebulae/default/names.dat:310
-msgid "Regulus Dwarf Galaxy (Leo I)"
+msgid "Aquarius Dwarf Galaxy"
 msgstr ""
 
 #: nebulae/default/names.dat:311
-msgid "Markarian 421"
-msgstr ""
+msgid "Cygnus A"
+msgstr "‎الدجاجة أ‎"
 
 #: nebulae/default/names.dat:312
-msgid "Markarian 231"
-msgstr ""
+msgid "Tucana Dwarf Galaxy"
+msgstr "‎مجرة الطوقان القزمة‎"
 
 #: nebulae/default/names.dat:313
-msgid "Imprint of a Foot"
+msgid "Malin II"
 msgstr ""
 
 #: nebulae/default/names.dat:314
-msgid "Tadpole Galaxy"
+msgid "Sextans Dwarf Spheroidal Galaxy"
 msgstr ""
 
 #: nebulae/default/names.dat:315
-msgid "Pegasus Dwarf Irregular Galaxy"
+msgid "Camelopardalis A"
+msgstr ""
+
+#: nebulae/default/names.dat:316
+msgid "Cassiopeia Dwarf Spheroidal Galaxy (Andromeda VII)"
 msgstr ""
 
 #: nebulae/default/names.dat:317
-msgid "Calabash Nebula"
-msgstr "‎سديم كالاباش‎"
+msgid "Pegasus Dwarf Galaxy (Pegasus II, Andromeda VI)"
+msgstr ""
 
 #: nebulae/default/names.dat:318
-msgid "Egg Nebula"
-msgstr "‎سديم البيضة‎"
+msgid "Boomerang Nebula"
+msgstr "‎سديم البومارانج‎"
 
 #: nebulae/default/names.dat:319
-msgid "Frosty Leo Nebula"
-msgstr "‎سديم الأسد الصقيعي‎"
+msgid "Cepheus I"
+msgstr ""
 
 #: nebulae/default/names.dat:320
-msgid "Gomez's Hamburger"
-msgstr "‎هامبرجر جوميز‎"
+msgid "Cetus Dwarf Galaxy"
+msgstr "‎مجرة قيطس القزمة‎"
 
 #: nebulae/default/names.dat:321
-msgid "Cotton Candy Nebula"
-msgstr "‎سديم حلاوة القطن‎"
+msgid "Leo A (Leo III)"
+msgstr ""
 
 #: nebulae/default/names.dat:322
-msgid "Water Lily Nebula"
+msgid "Regulus Dwarf Galaxy (Leo I)"
 msgstr ""
 
 #: nebulae/default/names.dat:323
+msgid "Markarian 421"
+msgstr ""
+
+#: nebulae/default/names.dat:324
+msgid "Markarian 231"
+msgstr ""
+
+#: nebulae/default/names.dat:325
+msgid "Imprint of a Foot"
+msgstr ""
+
+#: nebulae/default/names.dat:326
+msgid "Exclamation Point Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:327
+msgid "Tadpole Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:328
+msgid "Pegasus Dwarf Irregular Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:330
+msgid "Calabash Nebula"
+msgstr "‎سديم كالاباش‎"
+
+#: nebulae/default/names.dat:331
+msgid "Egg Nebula"
+msgstr "‎سديم البيضة‎"
+
+#: nebulae/default/names.dat:332
+msgid "Frosty Leo Nebula"
+msgstr "‎سديم الأسد الصقيعي‎"
+
+#: nebulae/default/names.dat:333
+msgid "Gomez's Hamburger"
+msgstr "‎هامبرجر جوميز‎"
+
+#: nebulae/default/names.dat:334
+msgid "Cotton Candy Nebula"
+msgstr "‎سديم حلاوة القطن‎"
+
+#: nebulae/default/names.dat:335
+msgid "Water Lily Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:336
 msgid "Westbrook Nebula"
 msgstr "‎سديم وستبروك‎"
 
-#: nebulae/default/names.dat:324
+#: nebulae/default/names.dat:337
 msgid "Footprint Nebula (Minkowski's Footprint; M1-92)"
 msgstr "‎سديم أثر القدم-أثر قدم منكوفسكي-إم-1-92‎"
 
-#: nebulae/default/names.dat:325
+#: nebulae/default/names.dat:338
 msgid "Minkowski's Butterfly (M2-9)"
 msgstr "‎فراشة منكوفوسكي-إم2-9‎"
 
-#: nebulae/default/names.dat:326
+#: nebulae/default/names.dat:339
 msgid "Sagittarius A East"
 msgstr "‎القوس أ الشرقي‎"
 
-#: nebulae/default/names.dat:327
+#: nebulae/default/names.dat:340
 msgid "Sagittarius A West"
 msgstr "‎القوس أ الغربي‎"
 
@@ -9608,3 +9660,9 @@ msgstr "‎بيتا قنطورس‎"
 
 #~ msgid "Oglechkutepi"
 #~ msgstr "‎أوغليتشكوتيبي‎"
+
+#~ msgid "Sextans Dwarf Galaxy"
+#~ msgstr "‎مجرة السدس القزمة‎"
+
+#~ msgid "Cassiopeia Dwarf Galaxy"
+#~ msgstr "‎مجرة ذات الكرسي القزمة‎"

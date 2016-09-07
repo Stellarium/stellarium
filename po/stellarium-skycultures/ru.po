@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-04 00:06+0700\n"
+"POT-Creation-Date: 2016-09-07 00:08+0700\n"
 "PO-Revision-Date: 2016-09-03 17:22+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Koptev Oleg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-09-04 06:49+0000\n"
+"X-Launchpad-Export-Date: 2016-09-07 06:24+0000\n"
 "X-Generator: Launchpad (build 18179)\n"
 "Language: ru\n"
 
@@ -1587,7 +1587,7 @@ msgstr "Область Садра"
 msgid "Abell 71"
 msgstr "Абель 71"
 
-#: nebulae/default/names.dat:263 nebulae/default/names.dat:316
+#: nebulae/default/names.dat:263 nebulae/default/names.dat:329
 msgid "Cave Nebula"
 msgstr "Туманность Грот"
 
@@ -1692,154 +1692,206 @@ msgid "Large Magellanic Cloud"
 msgstr "Большое Магелланово облако"
 
 #: nebulae/default/names.dat:289
+msgid "Orion Dwarf Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:290
 msgid "Carina Dwarf Galaxy"
 msgstr "Карликовая галактика Киля"
 
-#: nebulae/default/names.dat:290
+#: nebulae/default/names.dat:291
 msgid "Southern Ellipse"
 msgstr "Южный Эллипс"
 
-#: nebulae/default/names.dat:291
-msgid "Sextans B"
-msgstr "Секстант B"
-
 #: nebulae/default/names.dat:292
-msgid "Antlia Dwarf Galaxy"
-msgstr "Карликовая галактика Насоса"
+msgid "Argo Dwarf Irregular Galaxy"
+msgstr ""
 
 #: nebulae/default/names.dat:293
-msgid "Sextans A"
-msgstr "Секстант A"
-
-#: nebulae/default/names.dat:294
-msgid "Leo II Dwarf Galaxy (Leo B)"
-msgstr "Карликовая галактика Лев II (Лев B)"
-
-#: nebulae/default/names.dat:295
-msgid "Circinus Galaxy"
-msgstr "Галактика Циркуля"
-
-#: nebulae/default/names.dat:296
-msgid "Ursa Minor Dwarf Galaxy"
-msgstr "Карликовая галактика Малой Медведицы"
-
-#: nebulae/default/names.dat:297
-msgid "Draco Dwarf Galaxy"
-msgstr "Карликовая галактика Дракона"
-
-#: nebulae/default/names.dat:298
-msgid "Sagittarius Dwarf Galaxy"
-msgstr "Карликовая галактика Стрельца"
-
-#: nebulae/default/names.dat:299
-msgid "Aquarius Dwarf Galaxy"
-msgstr "Карликовая галактика Водолея"
-
-#: nebulae/default/names.dat:300
-msgid "Cygnus A"
-msgstr "Лебедь A"
-
-#: nebulae/default/names.dat:301
-msgid "Tucana Dwarf Galaxy"
-msgstr "Карликовая галактика Тукана"
-
-#: nebulae/default/names.dat:302
-msgid "Sextans Dwarf Galaxy"
-msgstr "Карликовая галактика Секстанта"
-
-#: nebulae/default/names.dat:303
-msgid "Cassiopeia Dwarf Galaxy"
-msgstr "Карликовая галактика Кассиопеи"
-
-#: nebulae/default/names.dat:304
-msgid "Pegasus Dwarf Galaxy (Pegasus II, Andromeda VI)"
-msgstr "Карликовая галактика Пегаса (Пегас II, Андромеда VI)"
-
-#: nebulae/default/names.dat:305
-msgid "Boomerang Nebula"
-msgstr "Туманность Бумеранг"
-
-#: nebulae/default/names.dat:306
-msgid "Cetus Dwarf Galaxy"
-msgstr "Карликовая галактика Кита"
-
-#: nebulae/default/names.dat:307
 msgid "Holmberg II"
 msgstr "Холмберг II"
 
-#: nebulae/default/names.dat:308
+#: nebulae/default/names.dat:294
+msgid "Holmberg III"
+msgstr ""
+
+#: nebulae/default/names.dat:295
+msgid "Holmberg I"
+msgstr ""
+
+#: nebulae/default/names.dat:296
 msgid "Holmberg IX"
 msgstr "Холмберг IX"
 
+#: nebulae/default/names.dat:297
+msgid "Sextans B"
+msgstr "Секстант B"
+
+#: nebulae/default/names.dat:298
+msgid "Antlia Dwarf Galaxy"
+msgstr "Карликовая галактика Насоса"
+
+#: nebulae/default/names.dat:299
+msgid "Sextans A"
+msgstr "Секстант A"
+
+#: nebulae/default/names.dat:300
+msgid "Haro II"
+msgstr ""
+
+#: nebulae/default/names.dat:301
+msgid "Leo II Dwarf Galaxy (Leo B)"
+msgstr "Карликовая галактика Лев II (Лев B)"
+
+#: nebulae/default/names.dat:302
+msgid "Holmberg VII"
+msgstr ""
+
+#: nebulae/default/names.dat:303
+msgid "Holmberg VIII"
+msgstr ""
+
+#: nebulae/default/names.dat:304
+msgid "Holmberg V"
+msgstr ""
+
+#: nebulae/default/names.dat:305
+msgid "Holmberg IV"
+msgstr ""
+
+#: nebulae/default/names.dat:306
+msgid "Circinus Galaxy"
+msgstr "Галактика Циркуля"
+
+#: nebulae/default/names.dat:307
+msgid "Ursa Minor Dwarf Galaxy"
+msgstr "Карликовая галактика Малой Медведицы"
+
+#: nebulae/default/names.dat:308
+msgid "Draco Dwarf Galaxy"
+msgstr "Карликовая галактика Дракона"
+
 #: nebulae/default/names.dat:309
+msgid "Sagittarius Dwarf Galaxy"
+msgstr "Карликовая галактика Стрельца"
+
+#: nebulae/default/names.dat:310
+msgid "Aquarius Dwarf Galaxy"
+msgstr "Карликовая галактика Водолея"
+
+#: nebulae/default/names.dat:311
+msgid "Cygnus A"
+msgstr "Лебедь A"
+
+#: nebulae/default/names.dat:312
+msgid "Tucana Dwarf Galaxy"
+msgstr "Карликовая галактика Тукана"
+
+#: nebulae/default/names.dat:313
+msgid "Malin II"
+msgstr ""
+
+#: nebulae/default/names.dat:314
+msgid "Sextans Dwarf Spheroidal Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:315
+msgid "Camelopardalis A"
+msgstr ""
+
+#: nebulae/default/names.dat:316
+msgid "Cassiopeia Dwarf Spheroidal Galaxy (Andromeda VII)"
+msgstr ""
+
+#: nebulae/default/names.dat:317
+msgid "Pegasus Dwarf Galaxy (Pegasus II, Andromeda VI)"
+msgstr "Карликовая галактика Пегаса (Пегас II, Андромеда VI)"
+
+#: nebulae/default/names.dat:318
+msgid "Boomerang Nebula"
+msgstr "Туманность Бумеранг"
+
+#: nebulae/default/names.dat:319
+msgid "Cepheus I"
+msgstr ""
+
+#: nebulae/default/names.dat:320
+msgid "Cetus Dwarf Galaxy"
+msgstr "Карликовая галактика Кита"
+
+#: nebulae/default/names.dat:321
 msgid "Leo A (Leo III)"
 msgstr "Лев А (Лев III)"
 
-#: nebulae/default/names.dat:310
+#: nebulae/default/names.dat:322
 msgid "Regulus Dwarf Galaxy (Leo I)"
 msgstr "Карликовая галактика Регула (Лев I)"
 
-#: nebulae/default/names.dat:311
+#: nebulae/default/names.dat:323
 msgid "Markarian 421"
 msgstr "Маркариан 421"
 
-#: nebulae/default/names.dat:312
+#: nebulae/default/names.dat:324
 msgid "Markarian 231"
 msgstr "Маркариан 231"
 
-#: nebulae/default/names.dat:313
+#: nebulae/default/names.dat:325
 msgid "Imprint of a Foot"
 msgstr "Отпечаток ступни"
 
-#: nebulae/default/names.dat:314
+#: nebulae/default/names.dat:326
+msgid "Exclamation Point Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:327
 msgid "Tadpole Galaxy"
 msgstr "Галактика Головастик"
 
-#: nebulae/default/names.dat:315
+#: nebulae/default/names.dat:328
 msgid "Pegasus Dwarf Irregular Galaxy"
 msgstr "Неправильная карликовая галактика Водолея"
 
-#: nebulae/default/names.dat:317
+#: nebulae/default/names.dat:330
 msgid "Calabash Nebula"
 msgstr "Туманность Кальян"
 
-#: nebulae/default/names.dat:318
+#: nebulae/default/names.dat:331
 msgid "Egg Nebula"
 msgstr "Туманность Яйцо"
 
-#: nebulae/default/names.dat:319
+#: nebulae/default/names.dat:332
 msgid "Frosty Leo Nebula"
 msgstr "Туманность Седой лев"
 
-#: nebulae/default/names.dat:320
+#: nebulae/default/names.dat:333
 msgid "Gomez's Hamburger"
 msgstr "Гамбургер Гомеза"
 
-#: nebulae/default/names.dat:321
+#: nebulae/default/names.dat:334
 msgid "Cotton Candy Nebula"
 msgstr "Туманность Сахарная вата"
 
-#: nebulae/default/names.dat:322
+#: nebulae/default/names.dat:335
 msgid "Water Lily Nebula"
 msgstr "Туманность Водяная лилия"
 
-#: nebulae/default/names.dat:323
+#: nebulae/default/names.dat:336
 msgid "Westbrook Nebula"
 msgstr "Туманность Уэстбрук"
 
-#: nebulae/default/names.dat:324
+#: nebulae/default/names.dat:337
 msgid "Footprint Nebula (Minkowski's Footprint; M1-92)"
 msgstr "Туманность След (След Минковского; M1-92)"
 
-#: nebulae/default/names.dat:325
+#: nebulae/default/names.dat:338
 msgid "Minkowski's Butterfly (M2-9)"
 msgstr "Бабочка Минковского (M2-9)"
 
-#: nebulae/default/names.dat:326
+#: nebulae/default/names.dat:339
 msgid "Sagittarius A East"
 msgstr "Восточный Стрелец А"
 
-#: nebulae/default/names.dat:327
+#: nebulae/default/names.dat:340
 msgid "Sagittarius A West"
 msgstr "Западный Стрелец А"
 
@@ -9610,3 +9662,9 @@ msgstr "Бета Центавра"
 
 #~ msgid "Water lily nebula"
 #~ msgstr "Туманность Водная лилия"
+
+#~ msgid "Cassiopeia Dwarf Galaxy"
+#~ msgstr "Карликовая галактика Кассиопеи"
+
+#~ msgid "Sextans Dwarf Galaxy"
+#~ msgstr "Карликовая галактика Секстанта"
