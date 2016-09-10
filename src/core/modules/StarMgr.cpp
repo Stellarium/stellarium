@@ -71,8 +71,12 @@ static const int StarCatalogFormatVersion = 8;
 bool StarMgr::flagSciNames = true;
 QHash<int,QString> StarMgr::commonNamesMap;
 QHash<int,QString> StarMgr::commonNamesMapI18n;
+QHash<int,QString> StarMgr::additionalNamesMap;
+QHash<int,QString> StarMgr::additionalNamesMapI18n;
 QMap<QString,int> StarMgr::commonNamesIndexI18n;
 QMap<QString,int> StarMgr::commonNamesIndex;
+QMap<QString,int> StarMgr::additionalNamesIndex;
+QMap<QString,int> StarMgr::additionalNamesIndexI18n;
 QHash<int,QString> StarMgr::sciNamesMapI18n;
 QMap<QString,int> StarMgr::sciNamesIndexI18n;
 QHash<int,QString> StarMgr::sciAdditionalNamesMapI18n;
@@ -85,6 +89,7 @@ QHash<int, int> StarMgr::saoStarsMap;
 QMap<int, int> StarMgr::saoStarsIndex;
 QHash<int, int> StarMgr::hdStarsMap;
 QMap<int, int> StarMgr::hdStarsIndex;
+QHash<int, QString> StarMgr::referenceMap;
 
 QStringList initStringListFromFile(const QString& file_name)
 {
@@ -176,6 +181,14 @@ QString StarMgr::getCommonName(int hip)
 
 	QHash<int,QString>::const_iterator it(commonNamesMapI18n.find(hip));
 	if (it!=commonNamesMapI18n.end())
+		return it.value();
+	return QString();
+}
+
+QString StarMgr::getAdditionalNames(int hip)
+{
+	QHash<int,QString>::const_iterator it(additionalNamesMapI18n.find(hip));
+	if (it!=additionalNamesMapI18n.end())
 		return it.value();
 	return QString();
 }
@@ -609,8 +622,12 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 {
 	commonNamesMap.clear();
 	commonNamesMapI18n.clear();
+	additionalNamesMap.clear();
+	additionalNamesMapI18n.clear();
 	commonNamesIndexI18n.clear();
 	commonNamesIndex.clear();
+	additionalNamesIndex.clear();
+	additionalNamesIndexI18n.clear();
 
 	qDebug() << "Loading star names from" << QDir::toNativeSeparators(commonNameFile);
 	QFile cnFile(commonNameFile);
@@ -632,7 +649,7 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 	// "   677|_("Alpheratz")"
 	// "113368|_("Fomalhaut")"
 	// Note: Stellarium doesn't support sky cultures made prior version 0.10.6 now!
-	QRegExp recordRx("^\\s*(\\d+)\\s*\\|_[(]\"(.*)\"[)]\\s*\\n");
+	QRegExp recordRx("^\\s*(\\d+)\\s*\\|_[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
 
 	while(!cnFile.atEnd())
 	{
@@ -667,13 +684,45 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 				continue;
 			}
 
-			const QString commonNameI18n = englishCommonName;
-			QString commonNameI18n_cap = commonNameI18n.toUpper();
+			const QString englishNameCap = englishCommonName.toUpper();
+			if (commonNamesMap.find(hip)!=commonNamesMap.end())
+			{
+				if (additionalNamesMap.find(hip)!=additionalNamesMap.end())
+				{
+					QString sname = additionalNamesMap[hip].append(" - " + englishCommonName);
+					QString snamecap = sname.toUpper();
+					additionalNamesMap[hip] = sname;
+					additionalNamesMapI18n[hip] = sname;
+					additionalNamesIndex.remove(englishNameCap);
+					additionalNamesIndexI18n.remove(englishNameCap);
+					additionalNamesIndex[snamecap] = hip;
+					additionalNamesIndexI18n[snamecap] = hip;
+				}
+				else
+				{
+					additionalNamesMap[hip] = englishCommonName;
+					additionalNamesMapI18n[hip] = englishCommonName;
+					additionalNamesIndex[englishNameCap] = hip;
+					additionalNamesIndexI18n[englishNameCap] = hip;
+				}
+			}
+			else
+			{
+				commonNamesMap[hip] = englishCommonName;
+				commonNamesMapI18n[hip] = englishCommonName;
+				commonNamesIndexI18n[englishNameCap] = hip;
+				commonNamesIndex[englishNameCap] = hip;
+			}
 
-			commonNamesMap[hip] = englishCommonName;
-			commonNamesMapI18n[hip] = commonNameI18n;
-			commonNamesIndexI18n[commonNameI18n_cap] = hip;
-			commonNamesIndex[englishCommonName.toUpper()] = hip;
+			QString reference = recordRx.capturedTexts().at(3).trimmed();
+			if (!reference.isEmpty())
+			{
+				if (referenceMap.find(hip)!=referenceMap.end())
+					referenceMap[hip] = referenceMap[hip].append("," + reference);
+				else
+					referenceMap[hip] = reference;
+			}
+
 			readOk++;
 		}
 	}
@@ -1143,12 +1192,27 @@ void StarMgr::updateI18n()
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	commonNamesMapI18n.clear();
 	commonNamesIndexI18n.clear();
+	additionalNamesMapI18n.clear();
+	additionalNamesIndexI18n.clear();
 	for (QHash<int,QString>::ConstIterator it(commonNamesMap.constBegin());it!=commonNamesMap.constEnd();it++)
 	{
 		const int i = it.key();
 		const QString t(trans.qtranslate(it.value()));
 		commonNamesMapI18n[i] = t;
 		commonNamesIndexI18n[t.toUpper()] = i;
+	}
+	for (QHash<int,QString>::ConstIterator ita(additionalNamesMap.constBegin());ita!=additionalNamesMap.constEnd();ita++)
+	{
+		const int i = ita.key();
+		QStringList a = ita.value().split(" - ");
+		QStringList tn;
+		foreach(const QString &str, a)
+		{
+			tn << trans.qtranslate(str);
+		}
+		const QString r = tn.join(" - ");
+		additionalNamesMapI18n[i] = r;
+		additionalNamesIndexI18n[r.toUpper()] = i;
 	}
 }
 
