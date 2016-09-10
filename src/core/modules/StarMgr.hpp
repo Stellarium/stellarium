@@ -240,6 +240,12 @@ public:
 	//! @return translated additional names of star
 	static QString getAdditionalNames(int hip);
 
+	//! Get the English additional names for a star with a specified
+	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return additional names of star
+	static QString getAdditionalEnglishNames(int hip);
+
 	//! Get the cross-identification designations for a star with a specified
 	//! Hipparcos catalogue number.
 	//! @param hip The Hipparcos number of star
