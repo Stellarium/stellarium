@@ -193,6 +193,14 @@ QString StarMgr::getAdditionalNames(int hip)
 	return QString();
 }
 
+QString StarMgr::getAdditionalEnglishNames(int hip)
+{
+	QHash<int,QString>::const_iterator it(additionalNamesMap.find(hip));
+	if (it!=additionalNamesMap.end())
+		return it.value();
+	return QString();
+}
+
 QString StarMgr::getCommonEnglishName(int hip)
 {
 	QHash<int,QString>::const_iterator it(commonNamesMap.find(hip));
@@ -1272,6 +1280,13 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 		return searchHP(it.value());
 	}
 
+	// Search by I18n additional common names
+	QMap<QString,int>::const_iterator ita(additionalNamesIndexI18n.find(objw));
+	if (ita!=additionalNamesIndexI18n.end())
+	{
+		return searchHP(ita.value());
+	}
+
 	// Search by sci name
 	QMap<QString,int>::const_iterator it2 = sciNamesIndexI18n.find(objw);
 	if (it2!=sciNamesIndexI18n.end())
@@ -1338,11 +1353,18 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 		}
 	}
 
-	// Search by I18n common name
+	// Search by English common name
 	QMap<QString,int>::const_iterator it(commonNamesIndex.find(objw));
 	if (it!=commonNamesIndex.end())
 	{
 		return searchHP(it.value());
+	}
+
+	// Search by English additional common names
+	QMap<QString,int>::const_iterator ita(additionalNamesIndex.find(objw));
+	if (ita!=additionalNamesIndex.end())
+	{
+		return searchHP(ita.value());
 	}
 
 	// Search by sci name
@@ -1374,6 +1396,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	QString objw = objPrefix.toUpper();
 
 	QMap<QString, int> cNamesIdx = inEnglish ? commonNamesIndex : commonNamesIndexI18n;
+	QMap<QString, int> aNamesIdx = inEnglish ? additionalNamesIndex : additionalNamesIndexI18n;
 
 	// Search for common names
 	if (useStartOfWords)
@@ -1390,6 +1413,19 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			else
 				break;
 		}
+		for (QMap<QString,int>::const_iterator ita(aNamesIdx.lowerBound(objw)); ita!=aNamesIdx.end(); ++ita)
+		{
+			if (ita.key().startsWith(objw))
+			{
+				if (maxNbItem<=0)
+					break;
+				result.append(inEnglish ? getAdditionalEnglishNames(ita.value()) : getAdditionalNames(ita.value()));
+				--maxNbItem;
+			}
+			else
+				break;
+		}
+
 	}
 	else
 	{
@@ -1405,6 +1441,19 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 				--maxNbItem;
 			}
 		}
+		QMapIterator<QString, int> j(aNamesIdx);
+		while (j.hasNext())
+		{
+			j.next();
+			if (j.key().contains(objw))
+			{
+				if (maxNbItem<=0)
+					break;
+				result.append(inEnglish ? getAdditionalEnglishNames(j.value()) : getAdditionalNames(j.value()));
+				--maxNbItem;
+			}
+		}
+
 	}
 
 	// Search for sci names
