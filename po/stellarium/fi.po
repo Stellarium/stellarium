@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-03 23:58+0700\n"
-"PO-Revision-Date: 2016-09-04 00:52+0000\n"
+"PO-Revision-Date: 2016-09-04 19:39+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-09-04 05:58+0000\n"
+"X-Launchpad-Export-Date: 2016-09-05 05:48+0000\n"
 "X-Generator: Launchpad (build 18179)\n"
 
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:188
@@ -5336,7 +5336,7 @@ msgstr "Aktiivisuus tunnissa zeniitissä"
 #: src/ui_viewDialog.h:1797
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
-msgstr "Aktiivisuus tunnissa zeniitissä"
+msgstr "Meteoreja tunnissa:"
 
 #: src/ui_viewDialog.h:1799
 msgid "Display objects from catalogs"
@@ -9760,7 +9760,7 @@ msgstr "Neljäs viikko"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:271
 msgid "Last week"
-msgstr "Viime viikko"
+msgstr "Viimeinen viikko"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:280
 msgid "Sunday"
@@ -13356,8 +13356,8 @@ msgid ""
 "share of faint meteors is larger than usual."
 msgstr ""
 "Populaatioindeksi kertoo kuinka kirkkaita meteoriparven meteorit ovat. Alle "
-"2.5 arvot tarkoittavat kirkkaiden meteorien olevan keskimääräistä "
-"todennäköisempiä, kun taas yli 3.0 arvot tarkoittavat himmeiden meteorien "
+"2,5 arvot tarkoittavat kirkkaiden meteorien olevan keskimääräistä "
+"todennäköisempiä, kun taas yli 3,0 arvot tarkoittavat himmeiden meteorien "
 "keskimääräistä suurempaa määrää."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:296
@@ -13380,7 +13380,7 @@ msgstr "Tietoja meteoriparvista löydät täältä:"
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:301
 #, qt-format
 msgid "%1Meteor shower%2 - article in Wikipedia"
-msgstr "%1Meteoriparvi%2 - artikkeli Wikipediassa"
+msgstr "%1Meteoriparvi%2-artikkeli Wikipediassa"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:303

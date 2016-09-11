@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-03 23:58+0700\n"
-"PO-Revision-Date: 2016-07-30 16:31+0000\n"
-"Last-Translator: Riccardo Maffei <Unknown>\n"
+"PO-Revision-Date: 2016-09-06 10:34+0000\n"
+"Last-Translator: SebastianoPistore <sebastiano.pistore.info@aol.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-09-04 06:04+0000\n"
+"X-Launchpad-Export-Date: 2016-09-07 05:59+0000\n"
 "X-Generator: Launchpad (build 18179)\n"
 
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:188
@@ -126,7 +126,7 @@ msgstr "Coluro solstiziale"
 
 #: src/core/modules/GridLinesMgr.cpp:652
 msgid "Circumpolar Circle"
-msgstr ""
+msgstr "Cerchio circumpolare"
 
 #: src/core/modules/GridLinesMgr.cpp:952
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:339
@@ -203,7 +203,7 @@ msgstr "Linee del coluro"
 
 #: src/core/modules/GridLinesMgr.cpp:969
 msgid "Circumpolar Circles"
-msgstr ""
+msgstr "Cerchi circumpolari"
 
 #: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1754
 msgid "Atmosphere"
@@ -270,7 +270,7 @@ msgstr "Opacità: <b>%1</b>"
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:198
 #, qt-format
 msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
-msgstr ""
+msgstr "Magnitudine: <b>%1</b> (dopo l'estinzione: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
 #: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
@@ -295,7 +295,7 @@ msgstr "Indice di Colore (B-V): <b>%1</b>"
 #: src/core/modules/Nebula.cpp:224
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
-msgstr ""
+msgstr "Luminosità superficiale: <b>%1</b> (dopo l'estinzione: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:230
 #, qt-format
@@ -457,7 +457,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:915
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
-msgstr ""
+msgstr "intervallo di luminosità non documentato dei membri dell'ammasso"
 
 #: src/core/modules/Nebula.cpp:921
 msgctxt "Trumpler's Number of Members Class"
@@ -3540,7 +3540,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:303
 msgid "20 Fun Naked-Eye Double Stars"
-msgstr ""
+msgstr "20 divertenti stelle doppie visibili a occhio nudo"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:305
@@ -3565,7 +3565,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:313
 msgid "Best objects in the New General Catalog"
-msgstr ""
+msgstr "Gli oggetti migliori nel Nuovo Catalogo Generale"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:319
@@ -4854,7 +4854,7 @@ msgstr ""
 
 #: src/translations.h:622
 msgid "Pick Screen Color"
-msgstr ""
+msgstr "Scegli il colore dello schermo"
 
 #: src/translations.h:623
 msgid "&Custom colors"
@@ -5391,6 +5391,8 @@ msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
 msgstr ""
+"Catalogo di ammassi stellari presenti sulle lastre fotografiche di Franklin-"
+"Adams (Melotte, 1915)"
 
 #: src/ui_viewDialog.h:1837
 msgid "Catalog of galaxies"
