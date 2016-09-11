@@ -383,7 +383,7 @@ struct DrawNebulaFuncObject
 		// filter out DSOs which are too dim to be seen (e.g. for bino observers)
 		if ((drawer->getFlagNebulaMagnitudeLimit()) && (n->vMag > drawer->getCustomNebulaMagnitudeLimit())) return;
 
-		if (n->majorAxisSize>angularSizeLimit || (checkMaxMagHints && n->vMag <= maxMagHints))
+		if (n->majorAxisSize>angularSizeLimit || n->majorAxisSize==0.f || (checkMaxMagHints && n->vMag <= maxMagHints))
 		{
 			float refmag_add=0; // value to adjust hints visibility threshold.
 			sPainter->getProjector()->project(n->XYZ,n->XY);
@@ -555,7 +555,7 @@ NebulaP NebulaMgr::search(const QString& name)
 void NebulaMgr::loadNebulaSet(const QString& setName)
 {
 	QString srcCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.txt");
-	QString dsoCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.dat");	
+	QString dsoCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.dat");
 	QString dsoNamesPath		= StelFileMgr::findFile("nebulae/" + setName + "/names.dat");
 
 	if (flagConverter)
@@ -887,12 +887,12 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			       << "RNE" << "HII" << "SNR" << "BN" << "EN" << "SA" << "SC" << "CL" << "IG"
 			       << "RG" << "AGX" << "QSO" << "ISM" << "EMO" << "GNE" << "RAD" << "LIN"
 			       << "BLL" << "BLA" << "MOC" << "YSO" << "Q?" << "PN?" << "*" << "SFR"
-			       << "IR" << "**" << "MUL" << "PPN";
+			       << "IR" << "**" << "MUL" << "PPN" << "GIG";
 
 			switch (oTypes.indexOf(oType.toUpper()))
 			{
 				case 0:
-				case 1:
+				case 1:				
 					nType = (unsigned int)Nebula::NebGx;
 					break;
 				case 2:
@@ -941,6 +941,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 					nType = (unsigned int)Nebula::NebCl;
 					break;
 				case 17:
+				case 38:
 					nType = (unsigned int)Nebula::NebIGx;
 					break;
 				case 18:
@@ -1011,6 +1012,8 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 	if (!in.open(QIODevice::ReadOnly))
 		return false;
 
+	// TODO: Let's begin use gzipped data
+	// QDataStream ins(StelUtils::uncompress(in.readAll()));
 	QDataStream ins(&in);
 	ins.setVersion(QDataStream::Qt_5_2);
 

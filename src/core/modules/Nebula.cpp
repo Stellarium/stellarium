@@ -813,6 +813,11 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 {
 	QString m, r = "";
 
+	// Let's avoid showing a wrong morphological description for galaxies
+	// NOTE: Is required the morphological description for galaxies?
+	if (nType==NebGx || nType==NebAGx || nType==NebRGx || nType==NebIGx || nType==NebQSO || nType==NebPossQSO || nType==NebBLA || nType==NebBLL)
+		return QString();
+
 	QRegExp GlClRx("\\.*(I|II|III|IV|V|VI|VI|VII|VIII|IX|X|XI|XII)\\.*");
 	int idx = GlClRx.indexIn(mTypeString);
 	if (idx>0)

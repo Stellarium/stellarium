@@ -30,7 +30,7 @@
 #include "StelSphereGeometry.hpp"
 #include "StelUtils.hpp"
 
-QTEST_MAIN(TestStelSphericalGeometry)
+QTEST_GUILESS_MAIN(TestStelSphericalGeometry)
 
 void TestStelSphericalGeometry::initTestCase()
 {

@@ -2,6 +2,7 @@
 %% Status:
 %% 2015-12-30 taken from wiki
 %% 2016-04-06 GZ reformatted a bit. 
+%% 2016-08-01 AW added color boxes for visual representation of colours. 
 %% TODO: document the more obscure entries. Add links to the respective chapters.
 %% TODO: remove unused entries, add new ones.  
 
@@ -96,74 +97,74 @@ no whitespace between the numbers!
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
-\emph{ID} & \emph{Default} & \emph{Colour of the\ldots}\\
+\emph{ID}	& \emph{Default} & \emph{Colour of the\ldots}\\
 \midrule
-default\_color           & 0.5,0.5,0.7 & default colour.\\\midrule
-azimuthal\_color         & 0.3,0.2,0.1 &  azimuthal grid. \\\midrule
-equatorial\_color        & 0.2,0.3,0.8 &  equatorial grid (of date). \\\midrule
-equatorial\_J2000\_color & 0.1,0.1,0.5 &  equatorial grid (J2000). \\\midrule
-ecliptical\_color        & 0.6,0.3,0.1 &  ecliptical grid (of date). \\\midrule
-ecliptical\_J2000\_color & 0.4,0.1,0.1 &  ecliptical grid (J2000). \\\midrule
-galactic\_color          & 0.0,0.3,0.2 &  galactic grid. \\\midrule
-galactic\_equator\_color & 0.5,0.3,0.1 &  galactic equator line. \\\midrule
-equator\_color           & 0.3,0.5,1.0 &  equatorial line. \\\midrule
-ecliptic\_color          & 0.9,0.6,0.2 &  ecliptic line (of date). \\\midrule
-ecliptic\_J2000\_color   & 0.7,0.2,0.2 &  ecliptic grid (J2000). \\\midrule
-meridian\_color          & 0.2,0.6,0.2 &  meridian line. \\\midrule
-horizon\_color           & 0.2,0.6,0.2 &  horizon line. \\\midrule
-const\_lines\_color      & 0.2,0.2,0.6 &  constellation lines. \\\midrule
-const\_names\_color      & 0.4,0.6,0.9 &  constellation names. \\\midrule
-const\_boundary\_color   & 0.3,0.1,0.1 &  constellation boundaries. \\\midrule
-star\_label\_color       & 0.4,0.3,0.5 &  star labels. \\\midrule
-cardinal\_color          & 0.8,0.2,0.1 &  cardinal points. \\\midrule
-planet\_names\_color     & 0.5,0.5,0.7 &  planet names. \\\midrule
-planet\_orbits\_color    & 0.7,0.2,0.2 &  orbits. \\\midrule
-planet\_pointers\_color  & 1.0,0.3,0.3 &  planet pointers. \\\midrule
-object\_trails\_color    & 1.0,0.7,0.0 &  planet trails. \\\midrule
-precession\_circles\_color & 0.9,0.6,0.2 &  precession circles. \\\midrule
-prime\_vertical\_color   & 0.18,0.54,0.18 &  prime vertical. \\\midrule
-longitude\_color	     & 0.2,0.4,0.4 &  opposition/conjunction longitude. \\\midrule
-circumpolar\_circles\_color & 0.5,0.5,0.7 &  circumpolar circles. \\\midrule
-colures\_color 			 & 0.5,0.5,0.7 &  colures. \\\midrule
-telescope\_circle\_color & 0.6,0.4,0.0 &  telescope location indicator. \\\midrule
-telescope\_label\_color  & 0.6,0.4,0.0 &  telescope label (next to location circle). \\\midrule
-script\_console\_keyword\_color  & 1.0,0.0,1.0 & syntax highlight for keywords in the script console. \\\midrule
-script\_console\_module\_color   & 0.0,1.0,1.0 & syntax highlight for modules in the script console. \\\midrule
-script\_console\_comment\_color  & 1.0,1.0,0.0 & syntax highlight for comments in the script console. \\\midrule
-script\_console\_function\_color & 0.0,1.0,0.0 & syntax highlight for functions in the script console. \\\midrule
-script\_console\_constant\_color & 1.0,0.5,0.5 & syntax highlight for constants in the script console. \\\midrule
-daylight\_text\_color            & 0.0,0.0,0.0 & info text at daylight. \\\midrule
-dso\_label\_color                       & 0.2,0.6,0.7 & deep-sky objects labels. \\\midrule
-dso\_circle\_color                      & 1.0,0.7,0.2 & deep-sky objects symbols, if not of the types below. \\\midrule
-dso\_galaxy\_color                      & 1.0,0.2,0.2 & galaxies symbols. \\\midrule
-dso\_radio\_galaxy\_color               & 0.3,0.3,0.3 & radio galaxies symbols. \\\midrule
-dso\_active\_galaxy\_color              & 1.0,0.5,0.2 & active galaxies symbols. \\\midrule
-dso\_interacting\_galaxy\_color         & 0.2,0.5,1.0 & interacting galaxies symbols. \\\midrule
-dso\_quasar\_color                      & 1.0,0.2,0.2 & quasars symbols. \\\midrule
-dso\_possible\_quasar\_color            & 1.0,0.2,0.2 & possible quasars symbols. \\\midrule
-dso\_bl\_lac\_color                     & 1.0,0.2,0.2 & BL Lac objects symbols. \\\midrule
-dso\_blazar\_color                      & 1.0,0.2,0.2 & blazars symbols. \\\midrule
-dso\_nebula\_color                      & 0.1,1.0,0.1 & nebulae symbols. \\\midrule
-dso\_planetary\_nebula\_color           & 0.1,1.0,0.1 & planetary nebulae symbols. \\\midrule
-dso\_reflection\_nebula\_color          & 0.1,1.0,0.1 & reflection nebulae symbols. \\\midrule
-dso\_bipolar\_nebula\_color             & 0.1,1.0,0.1 & bipolar nebulae symbols. \\\midrule
-dso\_emission\_nebula\_color            & 0.1,1.0,0.1 & emission nebulae symbols. \\\midrule
-dso\_dark\_nebula\_color                & 0.3,0.3,0.3 & dark nebulae symbols. \\\midrule
-dso\_hydrogen\_region\_color            & 0.1,1.0,0.1 & hydrogen regions symbols. \\\midrule
-dso\_supernova\_remnant\_color          & 0.1,1.0,0.1 & supernovae remnants symbols. \\\midrule
-dso\_interstellar\_matter\_color        & 0.1,1.0,0.1 & interstellar matter symbols. \\\midrule
-dso\_cluster\_with\_nebulosity\_color   & 0.1,1.0,0.1 & clusters associated with nebulosity symbols. \\\midrule
-dso\_molecular\_cloud\_color            & 0.1,1.0,0.1 & molecular clouds symbols. \\\midrule
-dso\_possible\_planetary\_nebula\_color & 0.1,1.0,0.1 & possible planetary nebulae symbols. \\\midrule
-dso\_protoplanetary\_nebula\_color      & 0.1,1.0,0.1 & protoplanetary nebulae symbols. \\\midrule
-dso\_cluster\_color                     & 1.0,1.0,0.1 & star clusters symbols. \\\midrule
-dso\_open\_cluster\_color               & 1.0,1.0,0.1 & open star clusters symbols. \\\midrule
-dso\_globular\_cluster\_color           & 1.0,1.0,0.1 & globular star clusters symbols. \\\midrule
-dso\_stellar\_association\_color        & 1.0,1.0,0.1 & stellar associations symbols. \\\midrule
-dso\_star\_cloud\_color                 & 1.0,1.0,0.1 & star clouds symbols. \\\midrule
-dso\_star\_color                        & 1.0,0.7,0.2 & star symbols. \\\midrule
-dso\_emission\_object\_color            & 1.0,0.7,0.2 & emission objects symbols. \\\midrule
-dso\_young\_stellar\_object\_color      & 1.0,0.7,0.2 & young stellar objects symbols. \\
+default\_color           				& \ccbox{0.5,0.5,0.7} & default colour.\\\midrule
+azimuthal\_color         				& \ccbox{0.3,0.2,0.1} &  azimuthal grid. \\\midrule
+equatorial\_color        				& \ccbox{0.2,0.3,0.8} &  equatorial grid (of date). \\\midrule
+equatorial\_J2000\_color 				& \ccbox{0.1,0.1,0.5} &  equatorial grid (J2000). \\\midrule
+ecliptical\_color        				& \ccbox{0.6,0.3,0.1} &  ecliptical grid (of date). \\\midrule
+ecliptical\_J2000\_color 				& \ccbox{0.4,0.1,0.1} &  ecliptical grid (J2000). \\\midrule
+galactic\_color          				& \ccbox{0.0,0.3,0.2} &  galactic grid. \\\midrule
+galactic\_equator\_color 				& \ccbox{0.5,0.3,0.1} &  galactic equator line. \\\midrule
+equator\_color           				& \ccbox{0.3,0.5,1.0} &  equatorial line. \\\midrule
+ecliptic\_color          				& \ccbox{0.9,0.6,0.2} &  ecliptic line (of date). \\\midrule
+ecliptic\_J2000\_color   				& \ccbox{0.7,0.2,0.2} &  ecliptic grid (J2000). \\\midrule
+meridian\_color          				& \ccbox{0.2,0.6,0.2} &  meridian line. \\\midrule
+horizon\_color           				& \ccbox{0.2,0.6,0.2} &  horizon line. \\\midrule
+const\_lines\_color      				& \ccbox{0.2,0.2,0.6} &  constellation lines. \\\midrule
+const\_names\_color      				& \ccbox{0.4,0.6,0.9} &  constellation names. \\\midrule
+const\_boundary\_color   				& \ccbox{0.3,0.1,0.1} &  constellation boundaries. \\\midrule
+star\_label\_color       				& \ccbox{0.4,0.3,0.5} &  star labels. \\\midrule
+cardinal\_color          				& \ccbox{0.8,0.2,0.1} &  cardinal points. \\\midrule
+planet\_names\_color     				& \ccbox{0.5,0.5,0.7} &  planet names. \\\midrule
+planet\_orbits\_color    				& \ccbox{0.7,0.2,0.2} &  orbits. \\\midrule
+planet\_pointers\_color  				& \ccbox{1.0,0.3,0.3} &  planet pointers. \\\midrule
+object\_trails\_color    				& \ccbox{1.0,0.7,0.0} &  planet trails. \\\midrule
+precession\_circles\_color 				& \ccbox{0.9,0.6,0.2} &  precession circles. \\\midrule
+prime\_vertical\_color   				& \ccbox{0.18,0.54,0.18} &  prime vertical. \\\midrule
+longitude\_color	     				& \ccbox{0.2,0.4,0.4} &  opposition/conjunction longitude. \\\midrule
+circumpolar\_circles\_color 			& \ccbox{0.5,0.5,0.7} &  circumpolar circles. \\\midrule
+colures\_color 			 				& \ccbox{0.5,0.5,0.7} &  colures. \\\midrule
+telescope\_circle\_color 				& \ccbox{0.6,0.4,0.0} &  telescope location indicator. \\\midrule
+telescope\_label\_color  				& \ccbox{0.6,0.4,0.0} &  telescope label (next to location circle). \\\midrule
+script\_console\_keyword\_color  		& \ccbox{1.0,0.0,1.0} & syntax highlight for keywords in the script console. \\\midrule
+script\_console\_module\_color   		& \ccbox{0.0,1.0,1.0} & syntax highlight for modules in the script console. \\\midrule
+script\_console\_comment\_color  		& \ccbox{1.0,1.0,0.0} & syntax highlight for comments in the script console. \\\midrule
+script\_console\_function\_color 		& \ccbox{0.0,1.0,0.0} & syntax highlight for functions in the script console. \\\midrule
+script\_console\_constant\_color 		& \ccbox{1.0,0.5,0.5} & syntax highlight for constants in the script console. \\\midrule
+daylight\_text\_color            		& \ccbox{0.0,0.0,0.0} & info text at daylight. \\\midrule
+dso\_label\_color                       & \ccbox{0.2,0.6,0.7} & deep-sky objects labels. \\\midrule
+dso\_circle\_color                      & \ccbox{1.0,0.7,0.2} & deep-sky objects symbols, if not of the types below. \\\midrule
+dso\_galaxy\_color                      & \ccbox{1.0,0.2,0.2} & galaxies symbols. \\\midrule
+dso\_radio\_galaxy\_color               & \ccbox{0.3,0.3,0.3} & radio galaxies symbols. \\\midrule
+dso\_active\_galaxy\_color              & \ccbox{1.0,0.5,0.2} & active galaxies symbols. \\\midrule
+dso\_interacting\_galaxy\_color         & \ccbox{0.2,0.5,1.0} & interacting galaxies symbols. \\\midrule
+dso\_quasar\_color                      & \ccbox{1.0,0.2,0.2} & quasars symbols. \\\midrule
+dso\_possible\_quasar\_color            & \ccbox{1.0,0.2,0.2} & possible quasars symbols. \\\midrule
+dso\_bl\_lac\_color                     & \ccbox{1.0,0.2,0.2} & BL Lac objects symbols. \\\midrule
+dso\_blazar\_color                      & \ccbox{1.0,0.2,0.2} & blazars symbols. \\\midrule
+dso\_nebula\_color                      & \ccbox{0.1,1.0,0.1} & nebulae symbols. \\\midrule
+dso\_planetary\_nebula\_color           & \ccbox{0.1,1.0,0.1} & planetary nebulae symbols. \\\midrule
+dso\_reflection\_nebula\_color          & \ccbox{0.1,1.0,0.1} & reflection nebulae symbols. \\\midrule
+dso\_bipolar\_nebula\_color             & \ccbox{0.1,1.0,0.1} & bipolar nebulae symbols. \\\midrule
+dso\_emission\_nebula\_color            & \ccbox{0.1,1.0,0.1} & emission nebulae symbols. \\\midrule
+dso\_dark\_nebula\_color                & \ccbox{0.3,0.3,0.3} & dark nebulae symbols. \\\midrule
+dso\_hydrogen\_region\_color            & \ccbox{0.1,1.0,0.1} & hydrogen regions symbols. \\\midrule
+dso\_supernova\_remnant\_color          & \ccbox{0.1,1.0,0.1} & supernovae remnants symbols. \\\midrule
+dso\_interstellar\_matter\_color        & \ccbox{0.1,1.0,0.1} & interstellar matter symbols. \\\midrule
+dso\_cluster\_with\_nebulosity\_color   & \ccbox{0.1,1.0,0.1} & clusters associated with nebulosity symbols. \\\midrule
+dso\_molecular\_cloud\_color            & \ccbox{0.1,1.0,0.1} & molecular clouds symbols. \\\midrule
+dso\_possible\_planetary\_nebula\_color & \ccbox{0.1,1.0,0.1} & possible planetary nebulae symbols. \\\midrule
+dso\_protoplanetary\_nebula\_color      & \ccbox{0.1,1.0,0.1} & protoplanetary nebulae symbols. \\\midrule
+dso\_cluster\_color                     & \ccbox{1.0,1.0,0.1} & star clusters symbols. \\\midrule
+dso\_open\_cluster\_color               & \ccbox{1.0,1.0,0.1} & open star clusters symbols. \\\midrule
+dso\_globular\_cluster\_color           & \ccbox{1.0,1.0,0.1} & globular star clusters symbols. \\\midrule
+dso\_stellar\_association\_color        & \ccbox{1.0,1.0,0.1} & stellar associations symbols. \\\midrule
+dso\_star\_cloud\_color                 & \ccbox{1.0,1.0,0.1} & star clouds symbols. \\\midrule
+dso\_star\_color                        & \ccbox{1.0,0.7,0.2} & star symbols. \\\midrule
+dso\_emission\_object\_color            & \ccbox{1.0,0.7,0.2} & emission objects symbols. \\\midrule
+dso\_young\_stellar\_object\_color      & \ccbox{1.0,0.7,0.2} & young stellar objects symbols. \\
 \bottomrule
 \end{longtabu}
 

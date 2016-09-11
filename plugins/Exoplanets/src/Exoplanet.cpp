@@ -42,6 +42,7 @@ StelTextureSP Exoplanet::markerTexture;
 bool Exoplanet::distributionMode = false;
 bool Exoplanet::timelineMode = false;
 bool Exoplanet::habitableMode = false;
+bool Exoplanet::showDesignations = false;
 Vec3f Exoplanet::exoplanetMarkerColor = Vec3f(0.4f,0.9f,0.5f);
 Vec3f Exoplanet::habitableExoplanetMarkerColor = Vec3f(1.f,0.5f,0.f);
 
@@ -591,7 +592,7 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 
 		painter->drawSprite2dMode(XYZ, distributionMode ? 4.f : 5.f);
 
-		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+1.f)<mlimit && smgr->getFlagLabels())
+		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+1.f)<mlimit && smgr->getFlagLabels() && showDesignations)
 		{
 			painter->drawText(XYZ, getNameI18n(), 0, shift, shift, false);
 		}

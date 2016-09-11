@@ -284,26 +284,6 @@ void OcularDialog::moveDownSelectedLens()
 #pragma mark Private Slot Methods
 #endif
 /* ********************************************************************* */
-void OcularDialog::keyBindingTogglePluginChanged(const QString& newString)
-{
-	Oculars::appSettings()->setValue("bindings/toggle_oculars", newString);
-	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
-	StelAction* action = actionMgr->findAction("actionShow_Ocular");
-	if (action != NULL) {
-		action->setShortcut(newString.trimmed());
-	}
-}
-
-void OcularDialog::keyBindingPopupNavigatorConfigChanged(const QString& newString)
-{
-	Oculars::appSettings()->setValue("bindings/popup_navigator", newString);
-	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
-	StelAction* action = actionMgr->findAction("actionShow_Ocular_Menu");
-	if (action != NULL) {
-		action->setShortcut(newString.trimmed());
-	}
-}
-
 void OcularDialog::requireSelectionStateChanged(int state)
 {
 	bool requireSelection = (state == Qt::Checked);
@@ -362,6 +342,7 @@ void OcularDialog::createDialogContent()
 	connect(ui->checkBoxDecimalDegrees, SIGNAL(clicked(bool)), plugin, SLOT(setFlagDecimalDegrees(bool)));
 	connect(ui->checkBoxInitialFOV, SIGNAL(clicked(bool)), plugin, SLOT(setFlagInitFovUsage(bool)));
 	connect(ui->checkBoxUseFlipForCCD, SIGNAL(clicked(bool)), plugin, SLOT(setFlagUseFlipForCCD(bool)));
+	connect(ui->checkBoxTypeOfMount, SIGNAL(clicked(bool)), plugin, SLOT(setFlagAutosetMountForCCD(bool)));
 	
 	// The add & delete buttons
 	connect(ui->addCCD, SIGNAL(clicked()), this, SLOT(insertNewCCD()));
@@ -379,21 +360,7 @@ void OcularDialog::createDialogContent()
 	ui->telescopeName->setValidator(validatorName);
 	ui->lensName->setValidator(validatorName);
 
-	// The key bindings
-	QString bindingString = Oculars::appSettings()->value("bindings/toggle_oculars", "Ctrl+O").toString();
-	ui->togglePluginLineEdit->setText(bindingString);
-	bindingString = Oculars::appSettings()->value("bindings/popup_navigator", "Alt+O").toString();
-	ui->togglePopupNavigatorWindowLineEdit->setText(bindingString);
-	connect(ui->togglePluginLineEdit, SIGNAL(textEdited(const QString&)),
-		this, SLOT(keyBindingTogglePluginChanged(const QString&)));
-	connect(ui->togglePopupNavigatorWindowLineEdit, SIGNAL(textEdited(const QString&)),
-		this, SLOT(keyBindingPopupNavigatorConfigChanged(const QString&)));
-	
 	initAboutText();
-	connect(ui->togglePluginLineEdit, SIGNAL(textEdited(QString)),
-		this, SLOT(initAboutText()));
-	connect(ui->togglePopupNavigatorWindowLineEdit, SIGNAL(textEdited(QString)),
-		this, SLOT(initAboutText()));
 
 	connect(ui->pushButtonMoveOcularUp, SIGNAL(pressed()),
 		this, SLOT(moveUpSelectedOcular()));

@@ -52,7 +52,7 @@ using namespace std;
 ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 	: hipStarMgr(_hip_stars),
 	  constellationDisplayStyle(ConstellationMgr::constellationsTranslated),
-	  artFadeDuration(1.),
+	  artFadeDuration(2.),
 	  artIntensity(0),
 	  artIntensityMinimumFov(1.0),
 	  artIntensityMaximumFov(2.0),

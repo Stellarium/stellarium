@@ -261,6 +261,9 @@ void ConfigurationDialog::createDialogContent()
 	ui->showToastSurveyButtonCheckbox->setChecked(gui->getFlagShowToastSurveyButton());
 	connect(ui->showToastSurveyButtonCheckbox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowToastSurveyButton(bool)));
 
+	ui->showBookmarksButtonCheckBox->setChecked(gui->getFlagShowBookmarksButton());
+	connect(ui->showBookmarksButtonCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowBookmarksButton(bool)));
+
 	ui->decimalDegreeCheckBox->setChecked(StelApp::getInstance().getFlagShowDecimalDegrees());
 	connect(ui->decimalDegreeCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowDecimalDegrees(bool)));
 	ui->azimuthFromSouthcheckBox->setChecked(StelApp::getInstance().getFlagSouthAzimuthUsage());

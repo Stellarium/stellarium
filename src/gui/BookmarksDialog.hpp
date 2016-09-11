@@ -48,6 +48,9 @@ public:
 	BookmarksDialog(QObject* parent);
 	virtual ~BookmarksDialog();
 
+	//! Notify that the application style changed
+	void styleChanged();
+
 public slots:
         void retranslate();
 
