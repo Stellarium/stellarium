@@ -156,6 +156,9 @@ public:
 	//! @return a designation
 	QString getLatestSelectedDSODesignation();
 
+	//! Get the list of all the bodies of the solar system.
+	const QVector<NebulaP>& getAllDeepSkyObjects() const { return dsoArray; }
+
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 public slots:

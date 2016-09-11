@@ -219,7 +219,7 @@ void StelDialog::connectIntProperty(QSpinBox *spinBox, const QString &propName)
 	Q_ASSERT_X(prop,"StelDialog", "StelProperty does not exist");
 
 	//use a proxy for the connection
-    new QSpinBoxStelPropertyConnectionHelper(prop,spinBox);
+	new QSpinBoxStelPropertyConnectionHelper(prop,spinBox);
 }
 
 void StelDialog::connectIntProperty(QComboBox *comboBox, const QString &propName)
@@ -237,7 +237,7 @@ void StelDialog::connectDoubleProperty(QDoubleSpinBox *spinBox, const QString &p
 	Q_ASSERT_X(prop,"StelDialog", "StelProperty does not exist");
 
 	//use a proxy for the connection
-    new QDoubleSpinBoxStelPropertyConnectionHelper(prop,spinBox);
+	new QDoubleSpinBoxStelPropertyConnectionHelper(prop,spinBox);
 }
 
 void StelDialog::connectDoubleProperty(QSlider *slider, const QString &propName,double minValue, double maxValue)

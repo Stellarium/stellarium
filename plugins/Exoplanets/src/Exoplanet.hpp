@@ -151,6 +151,7 @@ private:
 	static bool distributionMode;
 	static bool timelineMode;
 	static bool habitableMode;
+	static bool showDesignations;
 
 	void draw(StelCore* core, StelPainter *painter);
 

@@ -162,6 +162,9 @@ public slots:
 	void setFlagUseFlipForCCD(const bool b);
 	bool getFlagUseFlipForCCD(void) const;
 
+	void setFlagAutosetMountForCCD(const bool b);
+	bool getFlagAutosetMountForCCD(void) const;
+
 	void setFlagUseSemiTransparency(const bool b);
 	bool getFlagUseSemiTransparency(void) const;
 
@@ -327,6 +330,8 @@ private:
 	double initialFOV;		//!< Holds the initial FOV
 	bool flagInitFOVUsage;		//!< Flag used to track if we use default initial FOV (value at the startup of planetarium).
 	bool flagUseFlipForCCD;		//!< Flag used to track if we use flips for CCD
+	bool flagAutosetMountForCCD;	//!< Flag used to track if we use automatic switch to type of mount for CCD frame
+	bool equatorialMountEnabled;
 	double reticleRotation;
 };
 
