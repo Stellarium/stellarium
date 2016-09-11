@@ -29,24 +29,29 @@
 
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
+#include "NebulaMgr.hpp"
+#include "Nebula.hpp"
 
 #include "AstroCalcDialog.hpp"
 #include "ui_astroCalcDialog.h"
 
 #include <QFileDialog>
+#include <QDir>
 
 QVector<Vec3d> AstroCalcDialog::EphemerisListJ2000;
 QVector<QString> AstroCalcDialog::EphemerisListDates;
 int AstroCalcDialog::DisplayedPositionIndex = -1;
 
 AstroCalcDialog::AstroCalcDialog(QObject *parent)
-	: StelDialog(parent)
+	: StelDialog(parent)	
 	, delimiter(", ")
+	, acEndl("\n")
 {
 	dialogName = "AstroCalc";
 	ui = new Ui_astroCalcDialogForm;
 	core = StelApp::getInstance().getCore();
 	solarSystem = GETSTELMODULE(SolarSystem);
+	dsoMgr = GETSTELMODULE(NebulaMgr);
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	ephemerisHeader.clear();
 	phenomenaHeader.clear();
@@ -74,6 +79,11 @@ void AstroCalcDialog::retranslate()
 	}
 }
 
+void AstroCalcDialog::styleChanged()
+{
+	// Nothing for now
+}
+
 void AstroCalcDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
@@ -83,10 +93,15 @@ void AstroCalcDialog::createDialogContent()
 	QList<QWidget *> addscroll;
 	addscroll << ui->planetaryPositionsTreeWidget;
 	installKineticScrolling(addscroll);
+	acEndl="\r\n";
+#else
+	acEndl="\n";
 #endif
-	
+
 	//Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	ui->stackedWidget->setCurrentIndex(0);
+	ui->stackListWidget->setCurrentRow(0);
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
@@ -125,6 +140,8 @@ void AstroCalcDialog::createDialogContent()
 	connectBoolProperty(ui->ephemerisShowDatesCheckBox, "SolarSystem.ephemerisDatesDisplayed");
 
 	currentPlanetaryPositions();
+
+	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 }
 
 void AstroCalcDialog::initListPlanetaryPositions()
@@ -364,7 +381,7 @@ void AstroCalcDialog::saveEphemeris()
 {
 	QString filter = q_("CSV (Comma delimited)");
 	filter.append(" (*.csv)");
-	QString filePath = QFileDialog::getSaveFileName(0, q_("Save calculated ephemerides as..."), StelFileMgr::getScreenshotDir(), filter);
+	QString filePath = QFileDialog::getSaveFileName(0, q_("Save calculated ephemerides as..."), QDir::homePath() + "/ephemeris.csv", filter);
 	QFile ephem(filePath);
 	if (!ephem.open(QFile::WriteOnly | QFile::Truncate))
 	{
@@ -378,7 +395,7 @@ void AstroCalcDialog::saveEphemeris()
 
 	int count = ui->ephemerisTreeWidget->topLevelItemCount();
 
-	ephemList << ephemerisHeader.join(delimiter) << endl;
+	ephemList << ephemerisHeader.join(delimiter) << acEndl;
 	for (int i = 0; i < count; i++)
 	{
 		int columns = ephemerisHeader.size();
@@ -388,7 +405,7 @@ void AstroCalcDialog::saveEphemeris()
 			if (j<columns-1)
 				ephemList << delimiter;
 			else
-				ephemList << endl;
+				ephemList << acEndl;
 		}
 	}
 
@@ -510,6 +527,11 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	groups->addItem(q_("Cubewanos"), "6");
 	groups->addItem(q_("Scattered disc objects"), "7");
 	groups->addItem(q_("Oort cloud objects"), "8");
+	groups->addItem(q_("Star clusters"), "9");
+	groups->addItem(q_("Planetary nebulae"), "10");
+	groups->addItem(q_("Bright nebulae"), "11");
+	groups->addItem(q_("Dark nebulae"), "12");
+	groups->addItem(q_("Galaxies"), "13");
 
 	index = groups->findData(selectedGroupId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
@@ -568,7 +590,6 @@ void AstroCalcDialog::selectCurrentPhenomen(const QModelIndex &modelIndex)
 
 void AstroCalcDialog::calculatePhenomena()
 {
-	Vec3d obj1Point, obj2Point;
 	QString currentPlanet = ui->object1ComboBox->currentData().toString();
 	double separation = ui->allowedSeparationDoubleSpinBox->value();
 
@@ -577,7 +598,21 @@ void AstroCalcDialog::calculatePhenomena()
 	QList<PlanetP> objects;
 	objects.clear();
 	QList<PlanetP> allObjects = solarSystem->getAllPlanets();
-	switch (ui->object2ComboBox->currentData().toInt()) {
+
+	QList<NebulaP> dso;
+	dso.clear();
+	QVector<NebulaP> allDSO = dsoMgr->getAllDeepSkyObjects();
+
+	int obj2Type = ui->object2ComboBox->currentData().toInt();
+	switch (obj2Type)
+	{
+		case 0: // Solar system
+			foreach(const PlanetP& object, allObjects)
+			{
+				if (object->getPlanetType()!=Planet::isUNDEFINED)
+					objects.append(object);
+			}
+			break;
 		case 1: // Planets
 			foreach(const PlanetP& object, allObjects)
 			{
@@ -634,11 +669,39 @@ void AstroCalcDialog::calculatePhenomena()
 					objects.append(object);
 			}
 			break;
-		default:
-			foreach(const PlanetP& object, allObjects)
+		case 9: // Star clusters
+			foreach(const NebulaP& object, allDSO)
 			{
-				if (object->getPlanetType()!=Planet::isUNDEFINED)
-					objects.append(object);
+				if (object->getDSOType()==Nebula::NebCl || object->getDSOType()==Nebula::NebOc || object->getDSOType()==Nebula::NebGc || object->getDSOType()==Nebula::NebSA || object->getDSOType()==Nebula::NebSC || object->getDSOType()==Nebula::NebCn)
+					dso.append(object);
+			}
+			break;
+		case 10: // Planetary nebulae
+			foreach(const NebulaP& object, allDSO)
+			{
+				if (object->getDSOType()==Nebula::NebPn || object->getDSOType()==Nebula::NebPossPN || object->getDSOType()==Nebula::NebPPN)
+					dso.append(object);
+			}
+			break;
+		case 11: // Bright nebulae
+			foreach(const NebulaP& object, allDSO)
+			{
+				if (object->getDSOType()==Nebula::NebN || object->getDSOType()==Nebula::NebBn || object->getDSOType()==Nebula::NebEn || object->getDSOType()==Nebula::NebRn || object->getDSOType()==Nebula::NebHII || object->getDSOType()==Nebula::NebISM || object->getDSOType()==Nebula::NebCn || object->getDSOType()==Nebula::NebSNR)
+					dso.append(object);
+			}
+			break;
+		case 12: // Dark nebulae
+			foreach(const NebulaP& object, allDSO)
+			{
+				if (object->getDSOType()==Nebula::NebDn || object->getDSOType()==Nebula::NebMolCld || object->getDSOType()==Nebula::NebYSO)
+					dso.append(object);
+			}
+			break;
+		case 13: // Galaxies
+			foreach(const NebulaP& object, allDSO)
+			{
+				if (object->getDSOType()==Nebula::NebGx || object->getDSOType()==Nebula::NebAGx || object->getDSOType()==Nebula::NebRGx || object->getDSOType()==Nebula::NebQSO || object->getDSOType()==Nebula::NebPossQSO || object->getDSOType()==Nebula::NebBLL || object->getDSOType()==Nebula::NebBLA || object->getDSOType()==Nebula::NebIGx)
+					dso.append(object);
 			}
 			break;
 	}
@@ -652,13 +715,27 @@ void AstroCalcDialog::calculatePhenomena()
 		startJD = startJD - StelUtils::getGMTShiftFromQT(startJD)/24;
 		stopJD = stopJD - StelUtils::getGMTShiftFromQT(stopJD)/24;
 
-		foreach (PlanetP obj, objects)
+		if (obj2Type<9)
 		{
-			// conjunction
-			fillPhenomenaTable(findClosestApproach(planet, obj, startJD, stopJD, separation, false), planet, obj, false);
-			// opposition
-			fillPhenomenaTable(findClosestApproach(planet, obj, startJD, stopJD, separation, true), planet, obj, true);
+			// Solar system objects
+			foreach (PlanetP obj, objects)
+			{
+				// conjunction
+				fillPhenomenaTable(findClosestApproach(planet, obj, startJD, stopJD, separation, false), planet, obj, false);
+				// opposition
+				fillPhenomenaTable(findClosestApproach(planet, obj, startJD, stopJD, separation, true), planet, obj, true);
+			}
 		}
+		else
+		{
+			// Deep-sky objects
+			foreach (NebulaP obj, dso)
+			{
+				// conjunction
+				fillPhenomenaTable(findClosestApproach(planet, obj, startJD, stopJD, separation), planet, obj);
+			}
+		}
+
 
 		core->setJD(currentJD); // restore time
 		core->update(0);
@@ -678,7 +755,7 @@ void AstroCalcDialog::savePhenomena()
 {
 	QString filter = q_("CSV (Comma delimited)");
 	filter.append(" (*.csv)");
-	QString filePath = QFileDialog::getSaveFileName(0, q_("Save calculated phenomena as..."), StelFileMgr::getScreenshotDir(), filter);
+	QString filePath = QFileDialog::getSaveFileName(0, q_("Save calculated phenomena as..."), QDir::homePath() + "/phenomena.csv", filter);
 	QFile phenomena(filePath);
 	if (!phenomena.open(QFile::WriteOnly | QFile::Truncate))
 	{
@@ -692,7 +769,7 @@ void AstroCalcDialog::savePhenomena()
 
 	int count = ui->phenomenaTreeWidget->topLevelItemCount();
 
-	phenomenaList << phenomenaHeader.join(delimiter) << endl;
+	phenomenaList << phenomenaHeader.join(delimiter) << acEndl;
 	for (int i = 0; i < count; i++)
 	{
 		int columns = phenomenaHeader.size();
@@ -702,7 +779,7 @@ void AstroCalcDialog::savePhenomena()
 			if (j<columns-1)
 				phenomenaList << delimiter;
 			else
-				phenomenaList << endl;
+				phenomenaList << acEndl;
 		}
 	}
 
@@ -735,7 +812,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 	}
 }
 
-QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP &object1, PlanetP &object2, double startJD, double stopJD, float maxSeparation, bool opposition)
+QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP &object1, PlanetP &object2, double startJD, double stopJD, double maxSeparation, bool opposition)
 {
 	double dist, prevDist, step, step0;
 	int sgn, prevSgn = 0;
@@ -861,4 +938,160 @@ double AstroCalcDialog::findDistance(double JD, PlanetP object1, PlanetP object2
 	if (opposition)
 		angle = M_PI - angle;
 	return angle;
+}
+
+void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const NebulaP object2)
+{
+	QMap<double, double>::ConstIterator it;
+	for (it=list.constBegin(); it!=list.constEnd(); ++it)
+	{
+		core->setJD(it.key());
+		core->update(0);
+
+		QString phenomenType = q_("Conjunction");
+		double separation = it.value();
+
+		ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->phenomenaTreeWidget);
+		treeItem->setText(PhenomenaType, phenomenType);
+		// local date and time
+		treeItem->setText(PhenomenaDate, StelUtils::jdToQDateTime(it.key() + StelUtils::getGMTShiftFromQT(it.key())/24).toString("yyyy-MM-dd hh:mm:ss"));
+		treeItem->setText(PhenomenaObject1, object1->getNameI18n());
+		if (!object2->getNameI18n().isEmpty())
+			treeItem->setText(PhenomenaObject2, object2->getNameI18n());
+		else
+			treeItem->setText(PhenomenaObject2, object2->getDSODesignation());
+		treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation));
+	}
+}
+
+QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP &object1, NebulaP &object2, double startJD, double stopJD, double maxSeparation)
+{
+	double dist, prevDist, step, step0;
+	int sgn, prevSgn = 0;
+	QMap<double, double> separations;
+	QPair<double, double> extremum;
+
+	step0 = (stopJD - startJD)/4.0;
+	if (step0>24.8*365.25)
+		step0 = 24.8*365.25;
+
+	if (object1->getEnglishName()=="Neptune" || object1->getEnglishName()=="Uranus")
+		if (step0 > 3652.5)
+			step0 = 3652.5;
+	if (object1->getEnglishName()=="Jupiter" || object1->getEnglishName()=="Saturn")
+		if (step0 > 365.25)
+			step0 = 365.f;
+	if (object1->getEnglishName()=="Mars")
+		if (step0 > 10.f)
+			step0 = 10.f;
+	if (object1->getEnglishName()=="Venus" || object1->getEnglishName()=="Mercury")
+		if (step0 > 5.f)
+			step0 = 5.f;
+	if (object1->getEnglishName()=="Moon")
+		if (step0 > 0.25)
+			step0 = 0.25;
+
+	step = step0;
+	double jd = startJD;
+	prevDist = findDistance(jd, object1, object2);
+	jd += step;
+	while(jd <= stopJD)
+	{
+		dist = findDistance(jd, object1, object2);
+		sgn = StelUtils::sign(dist - prevDist);
+
+		double factor = qAbs((dist - prevDist)/dist);
+		if (factor>10.f)
+			step = step0 * factor/10.f;
+		else
+			step = step0;
+
+		if (sgn != prevSgn && prevSgn == -1)
+		{
+			if (step > step0)
+			{
+				jd -= step;
+				step = step0;
+				sgn = prevSgn;
+				while(jd <= stopJD)
+				{
+					dist = findDistance(jd, object1, object2);
+					sgn = StelUtils::sign(dist - prevDist);
+					if (sgn!=prevSgn)
+						break;
+
+					prevDist = dist;
+					prevSgn = sgn;
+					jd += step;
+				}
+			}
+
+			if (findPrecise(&extremum, object1, object2, jd, step, sgn))
+			{
+				double sep = extremum.second*180./M_PI;
+				if (sep<maxSeparation)
+					separations.insert(extremum.first, extremum.second);
+			}
+
+		}
+
+		prevDist = dist;
+		prevSgn = sgn;
+		jd += step;
+	}
+
+	return separations;
+}
+
+bool AstroCalcDialog::findPrecise(QPair<double, double> *out, PlanetP object1, NebulaP object2, double JD, double step, int prevSign)
+{
+	int sgn;
+	double dist, prevDist;
+
+	if (out==NULL)
+		return false;
+
+	prevDist = findDistance(JD, object1, object2);
+	step = -step/2.f;
+	prevSign = -prevSign;
+
+	while(true)
+	{
+		JD += step;
+		dist = findDistance(JD, object1, object2);
+
+		if (qAbs(step)< 1.f/1440.f)
+		{
+			out->first = JD - step/2.0;
+			out->second = findDistance(JD - step/2.0, object1, object2);
+			if (out->second < findDistance(JD - 5.0, object1, object2))
+				return true;
+			else
+				return false;
+		}
+		sgn = StelUtils::sign(dist - prevDist);
+		if (sgn!=prevSign)
+		{
+			step = -step/2.0;
+			sgn = -sgn;
+		}
+		prevDist = dist;
+		prevSign = sgn;
+	}
+}
+
+double AstroCalcDialog::findDistance(double JD, PlanetP object1, NebulaP object2)
+{
+	core->setJD(JD);
+	core->update(0);
+	Vec3d obj1 = object1->getJ2000EquatorialPos(core);
+	Vec3d obj2 = object2->getJ2000EquatorialPos(core);
+	return obj1.angle(obj2);
+}
+
+void AstroCalcDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
+{
+	if (!current)
+		current = previous;
+	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
 }

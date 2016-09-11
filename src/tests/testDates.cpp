@@ -32,7 +32,7 @@
 
 #define IGREG 2299161
 
-QTEST_MAIN(TestDates)
+QTEST_GUILESS_MAIN(TestDates)
 
 void TestDates::dateRoundTrip()
 {

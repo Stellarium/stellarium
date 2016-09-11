@@ -184,7 +184,7 @@ void SolarSystemManagerWindow::removeObject()
 
 void SolarSystemManagerWindow::copyConfiguration()
 {
-	QString filePath = QFileDialog::getSaveFileName(0, q_("Save the Solar System configuration file as..."), StelFileMgr::getScreenshotDir());
+	QString filePath = QFileDialog::getSaveFileName(0, q_("Save the Solar System configuration file as..."), QDir::homePath() + "/ssystem.ini");
 	ssoManager->copySolarSystemConfigurationFileTo(filePath);
 }
 
@@ -192,6 +192,6 @@ void SolarSystemManagerWindow::replaceConfiguration()
 {
 	QString filter = q_("Configuration files");
 	filter.append(" (*.ini)");
-	QString filePath = QFileDialog::getOpenFileName(0, q_("Select a file to replace the Solar System configuration file"), StelFileMgr::getScreenshotDir(), filter);
+	QString filePath = QFileDialog::getOpenFileName(0, q_("Select a file to replace the Solar System configuration file"), QDir::homePath(), filter);
 	ssoManager->replaceSolarSystemConfigurationFileWith(filePath);
 }

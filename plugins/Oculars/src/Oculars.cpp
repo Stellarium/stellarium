@@ -40,6 +40,7 @@
 #include "StelTranslator.hpp"
 #include "SolarSystem.hpp"
 #include "StelUtils.hpp"
+#include "StelPropertyMgr.hpp"
 
 #include <QAction>
 #include <QDebug>
@@ -159,6 +160,8 @@ Oculars::Oculars():
 	initialFOV(0),
 	flagInitFOVUsage(false),
 	flagUseFlipForCCD(false),
+	flagAutosetMountForCCD(false),
+	equatorialMountEnabled(false),
 	reticleRotation(0)
 {
 	// Font size is 14
@@ -653,7 +656,11 @@ void Oculars::init()
 		setFlagLimitMagnitude(settings->value("limit_stellar_magnitude", true).toBool());
 		setFlagInitFovUsage(settings->value("use_initial_fov", false).toBool());
 		setFlagUseFlipForCCD(settings->value("use_ccd_flip", false).toBool());
-		setFlagUseSemiTransparency(settings->value("use_semi_transparency", false).toBool());		
+		setFlagUseSemiTransparency(settings->value("use_semi_transparency", false).toBool());
+		setFlagAutosetMountForCCD(settings->value("use_mount_autoset", false).toBool());
+
+		StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
+		equatorialMountEnabled = propMgr->getStelPropertyValue("actionSwitch_Equatorial_Mount").toBool();
 	}
 	catch (std::runtime_error& e)
 	{
@@ -940,9 +947,9 @@ void Oculars::enableOcular(bool enableOcularMode)
 			QFontMetrics metrics(font);
 			QString labelText = q_("Please select an object before switching to ocular view.");
 			StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
-			int xPosition = projectorParams.viewportCenter[0];
+			int xPosition = projectorParams.viewportCenter[0] + projectorParams.viewportCenterOffset[0];
 			xPosition = xPosition - 0.5 * (metrics.width(labelText));
-			int yPosition = projectorParams.viewportCenter[1];
+			int yPosition = projectorParams.viewportCenter[1] + projectorParams.viewportCenterOffset[1];
 			yPosition = yPosition - 0.5 * (metrics.height());
 			const char *tcolor = "#99FF99";
 			usageMessageLabelID = labelManager->labelScreen(labelText, xPosition, yPosition,
@@ -1036,7 +1043,7 @@ void Oculars::displayPopupMenu()
 	QMenu * popup = new QMenu(&StelMainView::getInstance());
 	StelGui * gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
-	qDebug() <<this->getModuleStyleSheet(gui->getStelStyle()).qtStyleSheet;
+	//qDebug() << "[Oculars]" << this->getModuleStyleSheet(gui->getStelStyle()).qtStyleSheet;
 	popup->setStyleSheet(this->getModuleStyleSheet(gui->getStelStyle()).qtStyleSheet);
 
 	if (flagShowOculars)
@@ -1410,6 +1417,12 @@ void Oculars::toggleCCD(bool show)
 			core->setFlipVert(false);
 		}
 
+		if (getFlagAutosetMountForCCD())
+		{
+			StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
+			propMgr->setStelPropertyValue("actionSwitch_Equatorial_Mount", equatorialMountEnabled);
+		}
+
 		if (guiPanel)
 		{
 			guiPanel->foldGui();
@@ -1534,6 +1547,9 @@ void Oculars::paintCCDBounds()
 	const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);
 	double screenFOV = params.fov;
 
+	Vec2i centerScreen(projector->getViewportPosX() + projector->getViewportWidth() / 2,
+			   projector->getViewportPosY() + projector->getViewportHeight() / 2);
+
 	// draw sensor rectangle
 	if(selectedCCDIndex != -1)
 	{
@@ -1586,11 +1602,17 @@ void Oculars::paintCCDBounds()
 				else polarAngle -= 90.0;
 			}
 
+			if (getFlagAutosetMountForCCD())
+			{
+				StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
+				propMgr->setStelPropertyValue("actionSwitch_Equatorial_Mount", telescope->isEquatorial());
+				polarAngle = 0;
+			}
+
 			if (width > 0.0 && height > 0.0)
 			{
 				QPoint a, b;
-				QTransform transform = QTransform().translate(params.viewportCenter[0] * params.devicePixelsPerPixel,
-						params.viewportCenter[1] * params.devicePixelsPerPixel).rotate(-(ccd->chipRotAngle() + polarAngle));
+				QTransform transform = QTransform().translate(centerScreen[0], centerScreen[1]).rotate(-(ccd->chipRotAngle() + polarAngle));
 				// bottom line
 				a = transform.map(QPoint(-width/2.0, -height/2.0));
 				b = transform.map(QPoint(width/2.0, -height/2.0));
@@ -1618,13 +1640,10 @@ void Oculars::paintCCDBounds()
 					float h_width = params.viewportXywh[aspectIndex] * prismXRatio * params.devicePixelsPerPixel / 2.0;
 
 					//painter.setColor(0.60f, 0.20f, 0.20f, .5f);
-					painter.drawCircle(params.viewportCenter[0] * params.devicePixelsPerPixel,
-							params.viewportCenter[1] * params.devicePixelsPerPixel, in_oag_r);
-					painter.drawCircle(params.viewportCenter[0] * params.devicePixelsPerPixel,
-							params.viewportCenter[1] * params.devicePixelsPerPixel, out_oag_r);
+					painter.drawCircle(centerScreen[0], centerScreen[1], in_oag_r);
+					painter.drawCircle(centerScreen[0], centerScreen[1], out_oag_r);
 
-					QTransform oag_transform = QTransform().translate(params.viewportCenter[0] * params.devicePixelsPerPixel,
-							params.viewportCenter[1] * params.devicePixelsPerPixel).rotate(-(ccd->chipRotAngle() + polarAngle + ccd->prismPosAngle()));
+					QTransform oag_transform = QTransform().translate(centerScreen[0], centerScreen[1]).rotate(-(ccd->chipRotAngle() + polarAngle + ccd->prismPosAngle()));
 
 					// bottom line
 					a = oag_transform.map(QPoint(-h_width, in_oag_r));
@@ -1661,8 +1680,7 @@ void Oculars::paintCCDBounds()
 					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 					// calculate coordinates of the center and show it
 					Vec3d centerPosition;
-					Vec2f center = projector->getViewportCenter();
-					projector->unProject(center[0], center[1], centerPosition);
+					projector->unProject(centerScreen[0], centerScreen[1], centerPosition);
 					double cx, cy;
 					QString cxt, cyt;
 					StelUtils::rectToSphe(&cx,&cy,core->equinoxEquToJ2000(centerPosition)); // Calculate RA/DE (J2000.0) and show it...
@@ -1714,16 +1732,18 @@ void Oculars::paintCrosshairs()
 void Oculars::paintTelrad()
 {
 	if (!flagShowOculars) {
-		const StelProjectorP projector = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
+		StelCore *core = StelApp::getInstance().getCore();
+		const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);
 		// StelPainter drawing
 		StelPainter painter(projector);
+		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
-		Vec2i centerScreen(projector->getViewportPosX() + projector->getViewportWidth() / 2,
-				   projector->getViewportPosY() + projector->getViewportHeight() / 2);
-		float pixelsPerRad = projector->getPixelPerRadAtCenter();
-		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (0.5));
-		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (2.0));
-		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (4.0));
+		Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
+				   projector->getViewportPosY()+projector->getViewportHeight()/2);
+		float length = 0.5 * params.viewportFovDiameter * params.devicePixelsPerPixel;
+		painter.drawCircle(centerScreen[0], centerScreen[1], length * (M_PI/180) * (0.5));
+		painter.drawCircle(centerScreen[0], centerScreen[1], length * (M_PI/180) * (2.0));
+		painter.drawCircle(centerScreen[0], centerScreen[1], length * (M_PI/180) * (4.0));
 
 	}
 }
@@ -1744,6 +1764,8 @@ void Oculars::paintOcularMask(const StelCore *core)
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
+	Vec2i centerScreen(prj->getViewportPosX()+prj->getViewportWidth()/2, prj->getViewportPosY()+prj->getViewportHeight()/2);
+
 	// Paint the reticale, if needed
 	if (!reticleTexture.isNull())
 	{
@@ -1756,9 +1778,7 @@ void Oculars::paintOcularMask(const StelCore *core)
 		int textureWidth;
 		reticleTexture->getDimensions(textureWidth, textureHeight);
 
-		painter.drawSprite2dMode(params.viewportXywh[2] / 2 * params.devicePixelsPerPixel,
-				params.viewportXywh[3] / 2 * params.devicePixelsPerPixel,
-				inner, reticleRotation);
+		painter.drawSprite2dMode(centerScreen[0], centerScreen[1], inner, reticleRotation);
 	}
 
 	if (oculars[selectedOcularIndex]->hasPermanentCrosshair())
@@ -1802,11 +1822,11 @@ void Oculars::paintOcularMask(const StelCore *core)
 	radiusHigh=outerRadius-deltaRadius;
 	for (int i=0; i<=slices; i++)
 	{
-		vertices[i*2][0]= params.viewportCenter[0] * params.devicePixelsPerPixel + outerRadius*sinCache[i];
-		vertices[i*2][1]= params.viewportCenter[1] * params.devicePixelsPerPixel + outerRadius*cosCache[i];
+		vertices[i*2][0]= centerScreen[0] + outerRadius*sinCache[i];
+		vertices[i*2][1]= centerScreen[1] + outerRadius*cosCache[i];
 		vertices[i*2][2] = 0.0;
-		vertices[i*2+1][0]= params.viewportCenter[0] * params.devicePixelsPerPixel + radiusHigh*sinCache[i];
-		vertices[i*2+1][1]= params.viewportCenter[1] * params.devicePixelsPerPixel + radiusHigh*cosCache[i];
+		vertices[i*2+1][0]= centerScreen[0] + radiusHigh*sinCache[i];
+		vertices[i*2+1][1]= centerScreen[1] + radiusHigh*cosCache[i];
 		vertices[i*2+1][2] = 0.0;
 	}
 	painter.drawFromArray(StelPainter::TriangleStrip, (slices+1)*2, 0, false);
@@ -1851,9 +1871,9 @@ void Oculars::paintText(const StelCore* core)
 	QString widthString = "MMMMMMMMMMMMMMMMMMM";
 	float insetFromRHS = painter.getFontMetrics().width(widthString);
 	StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
-	int xPosition = projectorParams.viewportXywh[2];
+	int xPosition = projectorParams.viewportXywh[2] - projectorParams.viewportCenterOffset[0];
 	xPosition -= insetFromRHS;
-	int yPosition = projectorParams.viewportXywh[3];
+	int yPosition = projectorParams.viewportXywh[3] - projectorParams.viewportCenterOffset[1];
 	yPosition -= 40;
 	const int lineHeight = painter.getFontMetrics().height();
 	
@@ -2387,6 +2407,24 @@ void Oculars::setFlagUseFlipForCCD(const bool b)
 bool Oculars::getFlagUseFlipForCCD() const
 {
 	return flagUseFlipForCCD;
+}
+
+void Oculars::setFlagAutosetMountForCCD(const bool b)
+{
+	flagAutosetMountForCCD = b;
+	settings->setValue("use_mount_autoset", b);
+	settings->sync();
+
+	if (!b)
+	{
+		StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
+		propMgr->setStelPropertyValue("actionSwitch_Equatorial_Mount", equatorialMountEnabled);
+	}
+}
+
+bool Oculars::getFlagAutosetMountForCCD() const
+{
+	return  flagAutosetMountForCCD;
 }
 
 void Oculars::setFlagUseSemiTransparency(const bool b)

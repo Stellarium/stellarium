@@ -1133,7 +1133,9 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	// Problematic: Early-out here of course disables the wanted hint circles for dim asteroids.
 	// The line makes hints for asteroids 5 magnitudes below sky limiting magnitude visible.
 	// If asteroid is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of orbital elements!)
-	if (((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType>=Planet::isAsteroid)
+	// AW: Added a special case for educational purpose to drawing orbits for the Solar System Observer
+	// Details: https://sourceforge.net/p/stellarium/discussion/278769/thread/4828ebe4/
+	if (((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType>=Planet::isAsteroid && core->getCurrentLocation().planetName!="Solar System Observer")
 	{
 		return;
 	}

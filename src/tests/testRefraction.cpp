@@ -25,7 +25,7 @@
 #include "tests/testRefraction.hpp"
 #include "StelUtils.hpp"
 
-QTEST_MAIN(TestRefraction)
+QTEST_GUILESS_MAIN(TestRefraction)
 
 void TestRefraction::initTestCase()
 {

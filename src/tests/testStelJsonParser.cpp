@@ -28,7 +28,7 @@
 #include "StelJsonParser.hpp"
 
 
-QTEST_MAIN(TestStelJsonParser);
+QTEST_GUILESS_MAIN(TestStelJsonParser);
 
 void TestStelJsonParser::initTestCase()
 {
