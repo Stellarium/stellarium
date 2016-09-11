@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-04 00:06+0700\n"
-"PO-Revision-Date: 2016-09-04 01:13+0000\n"
+"POT-Creation-Date: 2016-09-09 22:01+0700\n"
+"PO-Revision-Date: 2016-09-10 18:27+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-09-04 06:36+0000\n"
-"X-Generator: Launchpad (build 18179)\n"
+"X-Launchpad-Export-Date: 2016-09-11 05:50+0000\n"
+"X-Generator: Launchpad (build 18186)\n"
 
 #: skycultures/translations.fab:9
 #: skycultures/korean/constellation_names.eng.fab:30
@@ -1585,7 +1585,7 @@ msgstr "Sadrin alue"
 msgid "Abell 71"
 msgstr "Abell 71"
 
-#: nebulae/default/names.dat:263 nebulae/default/names.dat:316
+#: nebulae/default/names.dat:263 nebulae/default/names.dat:330
 msgid "Cave Nebula"
 msgstr "Luolasumu"
 
@@ -1690,154 +1690,210 @@ msgid "Large Magellanic Cloud"
 msgstr "Suuri Magellanin pilvi"
 
 #: nebulae/default/names.dat:289
+msgid "Orion Dwarf Galaxy"
+msgstr "Orionin kääpiögalaksi"
+
+#: nebulae/default/names.dat:290
 msgid "Carina Dwarf Galaxy"
 msgstr "Kölin kääpiögalaksi"
 
-#: nebulae/default/names.dat:290
+#: nebulae/default/names.dat:291
 msgid "Southern Ellipse"
 msgstr "Eteläinen soikio"
 
-#: nebulae/default/names.dat:291
-msgid "Sextans B"
-msgstr "Sextans B"
-
 #: nebulae/default/names.dat:292
-msgid "Antlia Dwarf Galaxy"
-msgstr "Ilmapumpun kääpiögalaksi"
+msgid "Argo Dwarf Irregular Galaxy"
+msgstr "Argon epäsäännöllinen kääpiögalaksi"
 
 #: nebulae/default/names.dat:293
-msgid "Sextans A"
-msgstr "Sextans A"
-
-#: nebulae/default/names.dat:294
-msgid "Leo II Dwarf Galaxy (Leo B)"
-msgstr "Leijonan II. kääpiögalaksi (Leo B)"
-
-#: nebulae/default/names.dat:295
-msgid "Circinus Galaxy"
-msgstr "Harpin galaksi"
-
-#: nebulae/default/names.dat:296
-msgid "Ursa Minor Dwarf Galaxy"
-msgstr "Pienen karhun kääpiögalaksi"
-
-#: nebulae/default/names.dat:297
-msgid "Draco Dwarf Galaxy"
-msgstr "Lohikäärmeen kääpiögalaksi"
-
-#: nebulae/default/names.dat:298
-msgid "Sagittarius Dwarf Galaxy"
-msgstr "Jousimiehen kääpiögalaksi"
-
-#: nebulae/default/names.dat:299
-msgid "Aquarius Dwarf Galaxy"
-msgstr "Vesimiehen kääpiögalaksi"
-
-#: nebulae/default/names.dat:300
-msgid "Cygnus A"
-msgstr "Cygnus A"
-
-#: nebulae/default/names.dat:301
-msgid "Tucana Dwarf Galaxy"
-msgstr "Tukaanin kääpiögalaksi"
-
-#: nebulae/default/names.dat:302
-msgid "Sextans Dwarf Galaxy"
-msgstr "Sekstantin kääpiögalaksi"
-
-#: nebulae/default/names.dat:303
-msgid "Cassiopeia Dwarf Galaxy"
-msgstr "Kassiopeian kääpiögalaksi"
-
-#: nebulae/default/names.dat:304
-msgid "Pegasus Dwarf Galaxy (Pegasus II, Andromeda VI)"
-msgstr "Pegasuksen kääpiögalaksi (Pegasus II, Andromeda VI)"
-
-#: nebulae/default/names.dat:305
-msgid "Boomerang Nebula"
-msgstr "Bumerangisumu"
-
-#: nebulae/default/names.dat:306
-msgid "Cetus Dwarf Galaxy"
-msgstr "Valaan kääpiögalaksi"
-
-#: nebulae/default/names.dat:307
 msgid "Holmberg II"
 msgstr "Holmberg II"
 
-#: nebulae/default/names.dat:308
+#: nebulae/default/names.dat:294
+msgid "Holmberg III"
+msgstr "Holmberg III"
+
+#: nebulae/default/names.dat:295
+msgid "Holmberg I"
+msgstr "Holmberg I"
+
+#: nebulae/default/names.dat:296
 msgid "Holmberg IX"
 msgstr "Holmberg IX"
 
+#: nebulae/default/names.dat:297
+msgid "Sextans B"
+msgstr "Sextans B"
+
+#: nebulae/default/names.dat:298
+msgid "Antlia Dwarf Galaxy"
+msgstr "Ilmapumpun kääpiögalaksi"
+
+#: nebulae/default/names.dat:299
+msgid "Sextans A"
+msgstr "Sextans A"
+
+#: nebulae/default/names.dat:300
+msgid "Haro II"
+msgstr "Haro II"
+
+#: nebulae/default/names.dat:301
+msgid "Leo II Dwarf Galaxy (Leo B)"
+msgstr "Leijonan II. kääpiögalaksi (Leo B)"
+
+#: nebulae/default/names.dat:302
+msgid "Wild's Triplet"
+msgstr "Wildin kolmikko"
+
+#: nebulae/default/names.dat:303
+msgid "Holmberg VII"
+msgstr "Holmberg VII"
+
+#: nebulae/default/names.dat:304
+msgid "Holmberg VIII"
+msgstr "Holmberg VIII"
+
+#: nebulae/default/names.dat:305
+msgid "Holmberg V"
+msgstr "Holmberg V"
+
+#: nebulae/default/names.dat:306
+msgid "Holmberg IV"
+msgstr "Holmberg IV"
+
+#: nebulae/default/names.dat:307
+msgid "Circinus Galaxy"
+msgstr "Harpin galaksi"
+
+#: nebulae/default/names.dat:308
+msgid "Ursa Minor Dwarf Galaxy"
+msgstr "Pienen karhun kääpiögalaksi"
+
 #: nebulae/default/names.dat:309
+msgid "Draco Dwarf Galaxy"
+msgstr "Lohikäärmeen kääpiögalaksi"
+
+#: nebulae/default/names.dat:310
+msgid "Sagittarius Dwarf Galaxy"
+msgstr "Jousimiehen kääpiögalaksi"
+
+#: nebulae/default/names.dat:311
+msgid "Aquarius Dwarf Galaxy"
+msgstr "Vesimiehen kääpiögalaksi"
+
+#: nebulae/default/names.dat:312
+msgid "Cygnus A"
+msgstr "Cygnus A"
+
+#: nebulae/default/names.dat:313
+msgid "Tucana Dwarf Galaxy"
+msgstr "Tukaanin kääpiögalaksi"
+
+#: nebulae/default/names.dat:314
+msgid "Malin II"
+msgstr "Malin II"
+
+#: nebulae/default/names.dat:315
+msgid "Sextans Dwarf Spheroidal Galaxy"
+msgstr "Sekstantin pallomainen kääpiögalaksi"
+
+#: nebulae/default/names.dat:316
+msgid "Camelopardalis A"
+msgstr "Camelopardalis A"
+
+#: nebulae/default/names.dat:317
+msgid "Cassiopeia Dwarf Spheroidal Galaxy (Andromeda VII)"
+msgstr "Kassiopeian pallomainen kääpiögalaksi (Andromeda VII)"
+
+#: nebulae/default/names.dat:318
+msgid "Pegasus Dwarf Galaxy (Pegasus II, Andromeda VI)"
+msgstr "Pegasuksen kääpiögalaksi (Pegasus II, Andromeda VI)"
+
+#: nebulae/default/names.dat:319
+msgid "Boomerang Nebula"
+msgstr "Bumerangisumu"
+
+#: nebulae/default/names.dat:320
+msgid "Cepheus I"
+msgstr "Cepheus I"
+
+#: nebulae/default/names.dat:321
+msgid "Cetus Dwarf Galaxy"
+msgstr "Valaan kääpiögalaksi"
+
+#: nebulae/default/names.dat:322
 msgid "Leo A (Leo III)"
 msgstr "Leo A (Leo III)"
 
-#: nebulae/default/names.dat:310
+#: nebulae/default/names.dat:323
 msgid "Regulus Dwarf Galaxy (Leo I)"
 msgstr "Reguluksen kääpiögalaksi (Leo I)"
 
-#: nebulae/default/names.dat:311
+#: nebulae/default/names.dat:324
 msgid "Markarian 421"
 msgstr "Markarian 421"
 
-#: nebulae/default/names.dat:312
+#: nebulae/default/names.dat:325
 msgid "Markarian 231"
 msgstr "Markarian 231"
 
-#: nebulae/default/names.dat:313
+#: nebulae/default/names.dat:326
 msgid "Imprint of a Foot"
 msgstr "Jalanjälki"
 
-#: nebulae/default/names.dat:314
+#: nebulae/default/names.dat:327
+msgid "Exclamation Point Galaxy"
+msgstr "Huutomerkkigalaksi"
+
+#: nebulae/default/names.dat:328
 msgid "Tadpole Galaxy"
 msgstr "Nuijapäägalaksi"
 
-#: nebulae/default/names.dat:315
+#: nebulae/default/names.dat:329
 msgid "Pegasus Dwarf Irregular Galaxy"
 msgstr "Pegasuksen epäsäännöllinen kääpiögalaksi"
 
-#: nebulae/default/names.dat:317
+#: nebulae/default/names.dat:331
 msgid "Calabash Nebula"
 msgstr "Pullokurpitsasumu"
 
-#: nebulae/default/names.dat:318
+#: nebulae/default/names.dat:332
 msgid "Egg Nebula"
 msgstr "Kananmunasumu"
 
-#: nebulae/default/names.dat:319
+#: nebulae/default/names.dat:333
 msgid "Frosty Leo Nebula"
 msgstr "Leijonan huurresumu"
 
-#: nebulae/default/names.dat:320
+#: nebulae/default/names.dat:334
 msgid "Gomez's Hamburger"
 msgstr "Gomezin hampurilainen"
 
-#: nebulae/default/names.dat:321
+#: nebulae/default/names.dat:335
 msgid "Cotton Candy Nebula"
 msgstr "Hattarasumu"
 
-#: nebulae/default/names.dat:322
+#: nebulae/default/names.dat:336
 msgid "Water Lily Nebula"
 msgstr "Vesililjasumu"
 
-#: nebulae/default/names.dat:323
+#: nebulae/default/names.dat:337
 msgid "Westbrook Nebula"
 msgstr "Westbrook-sumu"
 
-#: nebulae/default/names.dat:324
+#: nebulae/default/names.dat:338
 msgid "Footprint Nebula (Minkowski's Footprint; M1-92)"
 msgstr "Jalanjälkisumu (Minkowskin jalanjälki; M1-92)"
 
-#: nebulae/default/names.dat:325
+#: nebulae/default/names.dat:339
 msgid "Minkowski's Butterfly (M2-9)"
 msgstr "Minkowskin perhonen (M2-9)"
 
-#: nebulae/default/names.dat:326
+#: nebulae/default/names.dat:340
 msgid "Sagittarius A East"
 msgstr "Sagittarius A itäinen"
 
-#: nebulae/default/names.dat:327
+#: nebulae/default/names.dat:341
 msgid "Sagittarius A West"
 msgstr "Sagittarius A läntinen"
 
@@ -9608,3 +9664,9 @@ msgstr "Beta Centauri"
 
 #~ msgid "Beehive cluster"
 #~ msgstr "Praesepe (Seimi)"
+
+#~ msgid "Cassiopeia Dwarf Galaxy"
+#~ msgstr "Kassiopeian kääpiögalaksi"
+
+#~ msgid "Sextans Dwarf Galaxy"
+#~ msgstr "Sekstantin kääpiögalaksi"
