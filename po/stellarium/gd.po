@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-09-03 23:58+0700\n"
-"PO-Revision-Date: 2016-08-31 08:21+0000\n"
+"PO-Revision-Date: 2016-09-12 20:09+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-09-04 05:59+0000\n"
-"X-Generator: Launchpad (build 18179)\n"
+"X-Launchpad-Export-Date: 2016-09-13 05:49+0000\n"
+"X-Generator: Launchpad (build 18186)\n"
 "Language: gd\n"
 
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:188
@@ -196,7 +196,7 @@ msgstr "Loidhne domhan-fhaid na comhaireachd ’s a’ cho-nasgaidh"
 
 #: src/core/modules/GridLinesMgr.cpp:966
 msgid "Precession Circles"
-msgstr "Cearcallan ro-imeachd"
+msgstr "Cearcaill ro-imeachd"
 
 #: src/core/modules/GridLinesMgr.cpp:968
 msgid "Colure Lines"
@@ -2332,7 +2332,7 @@ msgstr "Uinneag nan ath-ghoiridean"
 
 #: src/gui/StelGui.cpp:221
 msgid "Astronomical calculations window"
-msgstr ""
+msgstr "Uinneag nan àireamhachaidhean reul-eòlach"
 
 #: src/gui/StelGui.cpp:222 src/ui_bookmarksDialog.h:174
 msgid "Bookmarks"
@@ -5004,7 +5004,7 @@ msgid ""
 "+1d 12m 8s"
 msgstr ""
 "’S urrainn dhut luachan a chur a-steach le ceuman deicheach no leis an "
-"fhòrmat cms (ceàrn-mionaid-diog), mar eisimpleir: (+1° 12' 8\")"
+"fhòrmat cms (ceàrn-mionaid-diog), mar eisimpleir: (+1° 12’ 8\")"
 
 #: src/ui_locationDialogGui.h:422
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:150
@@ -5563,27 +5563,27 @@ msgstr "An t-èiclipteach (an-diugh)"
 
 #: src/ui_viewDialog.h:1901
 msgid "Color of equator (J2000.0)"
-msgstr ""
+msgstr "Dath a’ chriosa-mheadhain (J2000.0)"
 
 #: src/ui_viewDialog.h:1904
 msgid "Color of equator (of date)"
-msgstr ""
+msgstr "Dath a’ chriosa-mheadhain (an-diugh)"
 
 #: src/ui_viewDialog.h:1907
 msgid "Color of ecliptic (J2000.0)"
-msgstr ""
+msgstr "Dath an èicliptich (J2000.0)"
 
 #: src/ui_viewDialog.h:1910
 msgid "Color of ecliptic (of date)"
-msgstr ""
+msgstr "Dath an èicliptich (an-diugh)"
 
 #: src/ui_viewDialog.h:1913
 msgid "Color of horizon"
-msgstr ""
+msgstr "Dath na fàire"
 
 #: src/ui_viewDialog.h:1916
 msgid "Color of galactic equator"
-msgstr ""
+msgstr "Dath a’ chriosa-mheadhain reul-chriosaich"
 
 #: src/ui_viewDialog.h:1919
 msgid "Show Prime (East-West) Vertical."
@@ -5617,12 +5617,12 @@ msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
 msgstr ""
-"Cearcallan sa bhad aig aiseal na Talmhainn a’ gluasad timcheall nam "
+"Cearcaill sa bhad aig aiseal na Talmhainn a’ gluasad timcheall nam "
 "pòlaichean èiclipteach. ’Ga shealltainn air an Talamh a-mhàin."
 
 #: src/ui_viewDialog.h:1937
 msgid "Precession circles"
-msgstr "Cearcallan ro-imeachd"
+msgstr "Cearcaill ro-imeachd"
 
 #: src/ui_viewDialog.h:1939
 msgid ""
@@ -5642,31 +5642,31 @@ msgstr "Leubailean air na prìomh-phuingean combaist."
 
 #: src/ui_viewDialog.h:1947
 msgid "Color of cardinal points"
-msgstr ""
+msgstr "Dath nam prìomh-phuingean combaist"
 
 #: src/ui_viewDialog.h:1950
 msgid "Color of meridian"
-msgstr ""
+msgstr "Dath na meadhan-loidhne"
 
 #: src/ui_viewDialog.h:1953
 msgid "Color of Prime Vertical"
-msgstr ""
+msgstr "Dath a’ phrìomh-chearcaill inghearaich"
 
 #: src/ui_viewDialog.h:1956
 msgid "Color of colures"
-msgstr ""
+msgstr "Dath nan coluran"
 
 #: src/ui_viewDialog.h:1959
 msgid "Color of the opposition/conjunction longitude line"
-msgstr ""
+msgstr "Dath loidhne domhan-fhaid na comhaireachd ’s a’ cho-nasgaidh"
 
 #: src/ui_viewDialog.h:1962
 msgid "Color of circumpolar circles"
-msgstr ""
+msgstr "Dath nan cearcall pòlarach"
 
 #: src/ui_viewDialog.h:1965
 msgid "Color of precession circles"
-msgstr ""
+msgstr "Dath nan cearcall ro-imeachd"
 
 #: src/ui_viewDialog.h:1968
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
@@ -5711,27 +5711,27 @@ msgstr "Co-chomharran reul-chriosach, Siostam II (IAU 1958)."
 
 #: src/ui_viewDialog.h:1992
 msgid "Color of the equatorial grid (J2000.0)"
-msgstr ""
+msgstr "Dath a’ ghrioda mheadhan-chriosaich (J2000.0)"
 
 #: src/ui_viewDialog.h:1995
 msgid "Color of the equatorial grid (of date)"
-msgstr ""
+msgstr "Dath a’ ghrioda mheadhan-chriosaich (an-diugh)"
 
 #: src/ui_viewDialog.h:1998
 msgid "Color of the ecliptical grid (J2000.0)"
-msgstr ""
+msgstr "Dath a’ ghrioda èicliptich (J2000.0)"
 
 #: src/ui_viewDialog.h:2001
 msgid "Color of the ecliptical grid (of date)"
-msgstr ""
+msgstr "Dath a’ ghrioda èicliptich (an-diugh)"
 
 #: src/ui_viewDialog.h:2004
 msgid "Color of the azimuthal grid"
-msgstr ""
+msgstr "Dath a’ ghrioda azimuthaich"
 
 #: src/ui_viewDialog.h:2007
 msgid "Color of the galactic grid"
-msgstr ""
+msgstr "Dath a’ ghrioda reul-chriosaich"
 
 #: src/ui_viewDialog.h:2009
 msgid "Projection"
@@ -6327,7 +6327,7 @@ msgstr "Tillidh “fèin-sùmadh a-mach” dhan chomhair seallaidh tòiseachaidh
 
 #: src/ui_configurationDialog.h:1284
 msgid "Show bookmarks button"
-msgstr ""
+msgstr "Seall putan nan comharran-leabhair"
 
 #: src/ui_configurationDialog.h:1285
 msgid "Screenshots"
@@ -6580,11 +6580,11 @@ msgstr "..."
 
 #: src/ui_astroCalcDialog.h:454
 msgid "Astronomical calculations"
-msgstr ""
+msgstr "Àireamhachaidhean reul-eòlach"
 
 #: src/ui_astroCalcDialog.h:460
 msgid "Positions"
-msgstr ""
+msgstr "Ionadan"
 
 #: src/ui_astroCalcDialog.h:462
 msgid "Planetary positions"
@@ -12212,7 +12212,7 @@ msgstr "Na seall ach na h-exo-phlanaidean le coltas aitreabhach orra"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:484
 msgid "Enable display designations of exoplanets"
-msgstr ""
+msgstr "Cuir sealladh ainmeachaidhean nan exo-planaidean an comas"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:486
 msgid "Show exoplanets button on toolbar"
