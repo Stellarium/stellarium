@@ -29,6 +29,8 @@
  97278|_("Tarazed") 1,2,6
  97278|_("Reda")
  97938|_("Libertas") 4,6
+ 93805|_("Al Thalimain Prior") 2,5
+ 93429|_("Al Thalimain Posterior") 2,5
 # Ara (Ara)
  86796|_("Cervantes") 4,6
 # Aries (Ari)
@@ -40,8 +42,10 @@
  24608|_("Capella") 1,2,6
  28360|_("Menkalinan") 1,2,6
  23015|_("Hassaleh") 1
- 23453|_("Haedus") 2
+ 23453|_("Haedus") 2,5
+ 23453|_("Haedus I")
  23416|_("Al Ma'az") 2
+ 23767|_("Haedus II") 5
 # Bootes (Boo)
  69673|_("Arcturus") 1,2,6
  73555|_("Nekkar") 1,2,6
@@ -52,16 +56,16 @@
  67927|_("Muphrid") 1,2
  75411|_("Alkalurops") 1,2,6
  72487|_("Merga") 1,2
- 70497|_("Asellus Primus") 2
- 69713|_("Asellus Secundus") 2
- 69483|_("Asellus Tertius") 2
+ 70497|_("Asellus Primus") 2,5
+ 69713|_("Asellus Secundus") 2,5
+ 69483|_("Asellus Tertius") 2,5
 # Camelopardalis (Cam)
  58952|_("Tonatiuh") 4,6
 # Cancer (Cnc)
  44066|_("Acubens") 1,2,6
  44066|_("Sertan")
- 42806|_("Asellus Borealis") 1
- 42911|_("Asellus Australis") 1
+ 42806|_("Asellus Borealis") 1,5
+ 42911|_("Asellus Australis") 1,5
  40167|_("Tegmine") 1,2
  40526|_("Al Tarf") 2
  43587|_("Copernicus") 4,6 
@@ -72,7 +76,7 @@
 # Canis Major (CMa)
  32349|_("Sirius") 1,2,6
  30324|_("Mirzam") 1,2,6
- 34045|_("Muliphein") 1,2,6
+ 34045|_("Muliphein") 1,2,5,6
  34444|_("Wezen") 1,2,6
  33579|_("Adhara") 1,2,6
  30122|_("Furud") 1,2,6
@@ -106,7 +110,10 @@
   6686|_("Ksora")
   3821|_("Achird") 1
   8886|_("Segin") 1
-  5542|_("Marfak") 2
+  5542|_("Marfak") 2,5
+  5542|_("Marfak-East")
+  5336|_("Marfak") 2,5
+  5336|_("Marfak-West")
 # Centaurus (Cen)
  71683|_("Rigil Kentaurus") 1,2
  71683|_("Toliman")
@@ -123,23 +130,28 @@
 106032|_("Alfirk") 1,2,6
 116727|_("Errai") 1,2,6
 107259|_("The Garnet Star") 1,2
-108917|_("Kurhah") 1,2
+108917|_("Kurhah") 1,2,5
 108917|_("Al Kurhah")
 111056|_("Al Kalb al Rai") 2
 107418|_("Castula") 2
 110893|_("Kruger 60") 9
+# Coma Berenices (Com)
+ 62763|_("Polaris Galacticum Borealis") 5
 # Cetus (Cet)
  14135|_("Menkar") 1,2,6
   3419|_("Diphda") 1,2,6
   3419|_("Deneb Kaitos")
   8645|_("Baten Kaitos") 1,2
  10826|_("Mira") 1,2,6
- 12706|_("Al Kaff al Jidhmah") 2
+ 12706|_("Al Kaff al Jidhmah") 2,5
+ 12706|_("Kaffaljidhma")
   5364|_("Dheneb") 2
   5364|_("Deneb Algenubi")
 # Columba (Col)
  26634|_("Phact") 1,2,6
  27628|_("Wazn") 1,2,6
+# Corona Australis (CrA)
+ 94114|_("Alfecca Meridiana") 2,5
 # Corona Borealis (CrB)
  76267|_("Alphecca") 1,2,6
  76267|_("Gemma")
@@ -147,7 +159,8 @@
 # Corvus (Crv)
  59199|_("Alchiba") 1,2
  59199|_("Al Chiba") 1,2
- 59803|_("Gienah") 1,2
+ 59803|_("Gienah Corvi") 1,2,5
+ 59803|_("Gienah")
  60965|_("Algorab") 1,2,6
  61359|_("Kraz") 1
 # Crater (Crt)
@@ -163,7 +176,8 @@
 102098|_("Aridif")
  95947|_("Albireo") 1,2,6
 100453|_("Sadr") 1,2,6
-102488|_("Gienah") 1,2
+102488|_("Gienah Cygni") 1,2,5
+102488|_("Gienah")
 107136|_("Azelfafage") 1,2
 101138|_("Ruchba") 2
 104217|_("Bessel's Star") 7,8
@@ -175,11 +189,14 @@
 101769|_("Rotanev") 1,2
 103527|_("Musica") 4,6
 # Draco (Dra)
- 68756|_("Thuban") 1,2,6
+ 68756|_("Thuban") 1,2,5,6
  68756|_("Adib")
+ 68756|_("Al Tinnin")
  85670|_("Rastaban") 1,2,6
  85670|_("Alwaid")
- 87833|_("Eltanin") 1,2,6
+ 87833|_("Eltanin") 1,2,3,5,6
+ 87833|_("Etamin")
+ 87833|_("Taurt")
  94376|_("Altais") 1,2,6
  94376|_("Al Tais")
  75458|_("Edasich") 1,2,6
@@ -196,6 +213,8 @@
  86620|_("Dsiban") 2
  86201|_("Al Dhih") 2
  90344|_("Fafnir") 4,6
+ 83895|_("Al Dhibain Posterior") 5
+ 80331|_("Al Dhibain Prior") 5
 # Equuleus (Equ)
 104987|_("Kitalpha") 1,2,6
 # Eridanus (Eri)
@@ -243,6 +262,8 @@
  80838|_("Ogma") 4,6
 # Hydra (Hya)
  46390|_("Alphard") 1,2,6
+# Indus (Ind)
+101772|_("Persian") 2,5
 # Lacerta (Lac)
 112247|_("Babcock's Star") 3
 # Leo (Leo)
@@ -260,10 +281,13 @@
  48455|_("Alshemali")
  47508|_("Subra") 1
  47908|_("Algenubi") 2
+ 46146|_("Al Minlear al Asad") 5
+# Leo Minor (LMi)
+ 53229|_("Praecipua") 5
 # Lepus (Lep)
  25985|_("Arneb") 1,2,6
  25606|_("Nihal") 1,2,6
-150058|_("Hind's Crimson Star") 2
+150058|_("Hind's Crimson Star") 2,5
 # Libra (Lib)
  72622|_("Zubenelgenubi") 1,2,6
  74785|_("Zubeneschamali") 1,2,6
@@ -273,18 +297,20 @@
  92420|_("Sheliak") 1,2,6
  93194|_("Sulafat") 1,2,6
  93194|_("Jugum")
- 94481|_("Aladfar") 2
- 90191|_("Al Athfar") 2
+ 94481|_("Aladfar") 2,5
+ 90191|_("Al Athfar") 2,5
 # Monoceros (Mon)
- 31646|_("Plaskett's Star") 3
+ 31646|_("Plaskett's Star") 3,5
+# Octanus (Oct)
+104382|_("Polaris Australis") 5
 # Ophiuchus (Oph)
  86032|_("Rasalhague") 1,2,6
  86742|_("Cebalrai") 1,2,6
  79593|_("Yed Prior") 1,2
  79882|_("Yed Posterior") 1,2
  84012|_("Sabik") 1,2,6
- 80883|_("Marfik") 1,2
- 87108|_("Muliphen") 2
+ 80883|_("Marfik") 1,2,5
+ 87108|_("Muliphen") 2,5
  87937|_("Barnard's Star") 3
 # Orion (Ori)
  27989|_("Betelgeuse") 1,2,6
@@ -302,6 +328,7 @@
 100751|_("Peacock") 1,6
 # Pegasus (Peg)
 113963|_("Markab") 1,2,6
+113963|_("Yed Alpheras")
 113881|_("Scheat") 1,2,6
   1067|_("Algenib") 1,2,6
 107315|_("Enif") 1,2,6
@@ -317,8 +344,12 @@
  15863|_("Mirfak") 1,2,6
  15863|_("Algenib")
  14576|_("Algol") 1,2,6
+ 14576|_("Gorgonea Prima")
  18614|_("Menkib") 1,2
  17448|_("Atik") 1,2
+ 13879|_("Gorgonea Secunda") 2,5
+ 14354|_("Gorgonea Tertia") 2,5
+ 14817|_("Gorgonea Quarta") 2
 # Phoenix (Phe)
   2081|_("Ankaa") 1,6
   2081|_("Nair al Zaurak")
@@ -329,27 +360,35 @@
   9487|_("Al Rescha")
   3829|_("van Maanen's Star") 3
   3829|_("van Maanen 2")
+  8198|_("Torcularis Septentrionalis") 2
+  8198|_("Torcular")
 # Piscis Austrinus (PsA)
 113368|_("Fomalhaut") 1,2,6
+113368|_("Thalim")
 # Puppis (Pup)
  39429|_("Naos") 1,6
- 39757|_("Tureis") 1
+ 39757|_("Tureis") 1,5
  35488|_("Bernes 135") 3
 # Sagitta (Sge)
- 96757|_("Sham") 1
+ 96757|_("Sham") 1,5
 # Sagittarius (Sgr)
  95347|_("Rukbat") 1,2,6
  95347|_("Alrami")
- 95241|_("Arkab") 1,2
+ 95241|_("Arkab") 1,2,5
+ 95241|_("Arkab Prior")
+ 95294|_("Arkab Posterior") 2,5
  88635|_("Alnasl") 1,2,6
  88635|_("Nushaba")
  88365|_("Al Nasl")
- 89931|_("Kaus Media") 1,2,6
+ 89931|_("Kaus Media") 1,2,5,6
  89931|_("Kaus Meridionalis")
- 90185|_("Kaus Australis") 1,2,6
+ 90185|_("Kaus Australis") 1,2,5,6
  93506|_("Ascella") 1,2
- 90496|_("Kaus Borealis") 1,2,6
+ 90496|_("Kaus Borealis") 1,2,5,6
+ 90496|_("Al Thalimain") 2
  92855|_("Nunki") 1,2,6
+ 89341|_("Polis") 2,5
+ 89341|_("Al Thalimain")
 # Scorpius (Sco)
  80763|_("Antares") 1,2,6
  78820|_("Acrab") 1,2,6
@@ -358,7 +397,8 @@
  86228|_("Girtab") 1,6
  86228|_("Sargas")
  85927|_("Shaula") 1,2,6
- 80112|_("Al Niyat") 1,2
+ 80112|_("Al Niyat") 1,2,5
+ 81266|_("Al Niyat") 2,5
  85696|_("Lesath") 1,2,6
  79374|_("Jabbah") 2
 # Serpens (Ser)
