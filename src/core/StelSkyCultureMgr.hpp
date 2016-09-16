@@ -71,7 +71,7 @@ public slots:
 	QString getCurrentSkyCultureNameI18() const;
 	//! Set the sky culture from i18n name.
 	//! @return true on success; false and doesn't change if skyculture is invalid.
-	bool setCurrentSkyCultureNameI18(const QString& cultureName) {return setCurrentSkyCultureID(skyCultureI18ToDirectory(cultureName));}
+	bool setCurrentSkyCultureNameI18(const QString& cultureName);
 	
 	//! Get the current sky culture ID.
 	QString getCurrentSkyCultureID() const {return currentSkyCultureDir;}
