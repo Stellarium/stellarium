@@ -49,7 +49,7 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 		}
 		QSettings pd(pdFile, StelIniFormat);
 		dirToNameEnglish[dir].englishName = pd.value("info/name").toString();
-		dirToNameEnglish[dir].author = pd.value("info/author").toString();
+		dirToNameEnglish[dir].author = pd.value("info/author").toString();		
 	}	
 }
 
@@ -104,9 +104,20 @@ bool StelSkyCultureMgr::setDefaultSkyCultureID(const QString& id)
 	return true;
 }
 	
-QString StelSkyCultureMgr::getCurrentSkyCultureNameI18() const {return q_(currentSkyCulture.englishName);}
+QString StelSkyCultureMgr::getCurrentSkyCultureNameI18() const
+{
+	return q_(currentSkyCulture.englishName);
+}
 
-QString StelSkyCultureMgr::getCurrentSkyCultureEnglishName() const {return currentSkyCulture.englishName;}
+QString StelSkyCultureMgr::getCurrentSkyCultureEnglishName() const
+{
+	return currentSkyCulture.englishName;
+}
+
+bool StelSkyCultureMgr::setCurrentSkyCultureNameI18(const QString& cultureName)
+{
+	return setCurrentSkyCultureID(skyCultureI18ToDirectory(cultureName));
+}
 
 //! returns newline delimited list of human readable culture names in english
 QString StelSkyCultureMgr::getSkyCultureListEnglish(void)
