@@ -49,7 +49,16 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 		}
 		QSettings pd(pdFile, StelIniFormat);
 		dirToNameEnglish[dir].englishName = pd.value("info/name").toString();
-		dirToNameEnglish[dir].author = pd.value("info/author").toString();		
+		dirToNameEnglish[dir].author = pd.value("info/author").toString();
+		QString boundaries = pd.value("info/boundaries", "none").toString();
+		int boundariesIdx = -1;
+		if (boundaries.contains("generic", Qt::CaseInsensitive))
+			boundariesIdx = 0;
+		else if (boundaries.contains("own", Qt::CaseInsensitive))
+			boundariesIdx = 1;
+		else
+			boundariesIdx = -1;
+		dirToNameEnglish[dir].boundariesIdx = boundariesIdx;
 	}	
 }
 
@@ -112,6 +121,11 @@ QString StelSkyCultureMgr::getCurrentSkyCultureNameI18() const
 QString StelSkyCultureMgr::getCurrentSkyCultureEnglishName() const
 {
 	return currentSkyCulture.englishName;
+}
+
+int StelSkyCultureMgr::getCurrentSkyCultureBoundariesIdx() const
+{
+	return currentSkyCulture.boundariesIdx;
 }
 
 bool StelSkyCultureMgr::setCurrentSkyCultureNameI18(const QString& cultureName)
