@@ -51,7 +51,7 @@
 // static data members - will be initialised in the Satallites class (the StelObjectMgr)
 StelTextureSP Satellite::hintTexture;
 float Satellite::showLabels = true;
-float Satellite::hintBrightness = 0.0;
+float Satellite::hintBrightness = 0.f;
 float Satellite::hintScale = 1.f;
 SphericalCap Satellite::viewportHalfspace = SphericalCap();
 int Satellite::orbitLineSegments = 90;
@@ -59,7 +59,7 @@ int Satellite::orbitLineFadeSegments = 4;
 int Satellite::orbitLineSegmentDuration = 20;
 bool Satellite::orbitLinesFlag = true;
 bool Satellite::realisticModeFlag = false;
-Vec3f Satellite::invisibleSatelliteColor = Vec3f(0.2,0.2,0.2);
+Vec3f Satellite::invisibleSatelliteColor = Vec3f(0.2f,0.2f,0.2f);
 
 #ifdef IRIDIUM_SAT_TEXT_DEBUG
 QString Satellite::myText = "";
