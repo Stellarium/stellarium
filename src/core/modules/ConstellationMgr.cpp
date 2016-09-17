@@ -608,10 +608,10 @@ void ConstellationMgr::drawArt(StelPainter& sPainter) const
 void ConstellationMgr::drawLines(StelPainter& sPainter, const StelCore* core) const
 {
 	sPainter.enableTexture2d(false);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	if (constellationLineThickness>1.f)
 		glLineWidth(constellationLineThickness); // set line thickness
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	
 	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH. But it looks much better.
 	#ifdef GL_LINE_SMOOTH
 	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
@@ -623,14 +623,14 @@ void ConstellationMgr::drawLines(StelPainter& sPainter, const StelCore* core) co
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
 		(*iter)->drawOptim(sPainter, core, viewportHalfspace);
-	}	
+	}
+	if (constellationLineThickness>1.f)
+		glLineWidth(1.f); // restore line thickness
 	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH. But it looks much better.
 	#ifdef GL_LINE_SMOOTH
 	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
 		glDisable(GL_LINE_SMOOTH);
 	#endif
-	if (constellationLineThickness>1.f)
-			glLineWidth(1.f); // restore line thickness
 }
 
 // Draw the names of all the constellations
