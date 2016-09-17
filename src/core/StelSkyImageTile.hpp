@@ -133,6 +133,8 @@ protected:
 	//! Minimum resolution of the data of the texture in degree/pixel
 	float minResolution;
 
+	double birthJD;
+
 private:
 	//! init the StelSkyImageTile
 	void initCtor();
