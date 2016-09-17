@@ -1503,7 +1503,8 @@ void StelCore::updateTime(double deltaTime)
 		delete position;
 		position = newObs;
 	}
-	position->update(deltaTime);
+	if (position->update(deltaTime))
+		emit(locationChanged(getCurrentLocation()));
 
 	// Position of sun and all the satellites (ie planets)
 	// GZ maybe setting this static can speedup a bit?
