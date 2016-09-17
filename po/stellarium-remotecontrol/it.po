@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-07-26 21:07+0700\n"
-"PO-Revision-Date: 2016-09-06 10:18+0000\n"
+"PO-Revision-Date: 2016-09-16 09:16+0000\n"
 "Last-Translator: Mad Hatter <vanhelgen@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-09-07 06:36+0000\n"
-"X-Generator: Launchpad (build 18179)\n"
+"X-Launchpad-Export-Date: 2016-09-17 06:43+0000\n"
+"X-Generator: Launchpad (build 18186)\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -83,11 +83,11 @@ msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/search.js:90
 msgid "Error loading object types"
-msgstr ""
+msgstr "Errore durante il caricamento dei tipi di oggetto"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:115
 msgid "Error getting object list"
-msgstr ""
+msgstr "Errore durante il recupero dell'elenco degli oggetti"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:167
 msgid "waiting"
@@ -95,7 +95,7 @@ msgstr "in attesa"
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:38
 msgid "Could not retrieve projection list"
-msgstr ""
+msgstr "Impossibile recuperare l'elenco delle proiezioni"
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:51
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:64
@@ -122,7 +122,7 @@ msgstr ""
 
 #: plugins/RemoteControl/webroot/js/ui/mainui.js:317
 msgid "No current selection"
-msgstr ""
+msgstr "Nessuna selezione attuale"
 
 #: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:420
 #: tablet7in.html:606
@@ -131,27 +131,27 @@ msgstr "-nessuno-"
 
 #: index.html:5 tablet7in.html:5
 msgid "Stellarium remote control plugin"
-msgstr ""
+msgstr "Plugin di Stellarium per il controllo remoto"
 
 #: index.html:17 tablet7in.html:18
 msgid "Please wait, loading"
-msgstr ""
+msgstr "Attendere, caricamento in corso"
 
 #: index.html:26 tablet7in.html:27
 msgid "Stellarium remote control"
-msgstr ""
+msgstr "Controllo remoto di Stellarium"
 
 #: index.html:30 tablet7in.html:31
 msgid "Main controls"
-msgstr ""
+msgstr "Controlli principali"
 
 #: index.html:31 tablet7in.html:33
 msgid "Selection"
-msgstr ""
+msgstr "Selezione"
 
 #: index.html:33 tablet7in.html:38
 msgid "DSO"
-msgstr ""
+msgstr "DSO"
 
 #: index.html:36
 msgid "Actions and scripts"
@@ -187,7 +187,7 @@ msgstr "Secolo siderale"
 
 #: index.html:93 tablet7in.html:190
 msgid "Synodic month"
-msgstr "Mese Sinodico"
+msgstr "Mese sinodico"
 
 #: index.html:94 tablet7in.html:191
 msgid "Draconic month"
@@ -239,15 +239,15 @@ msgstr "Secolo giuliano"
 
 #: index.html:118 tablet7in.html:92
 msgid "Up/Left"
-msgstr ""
+msgstr "Su/Sinistra"
 
 #: index.html:118 tablet7in.html:92
 msgid "Up"
-msgstr ""
+msgstr "Su"
 
 #: index.html:118 tablet7in.html:92
 msgid "Up/Right"
-msgstr ""
+msgstr "Su/Destra"
 
 #: index.html:118 tablet7in.html:92
 msgid "Left"
@@ -267,19 +267,20 @@ msgstr "Destra"
 
 #: index.html:118 tablet7in.html:92
 msgid "Down/Left"
-msgstr ""
+msgstr "Giù/Sinistra"
 
 #: index.html:118 tablet7in.html:92
 msgid "Down"
-msgstr ""
+msgstr "Giù"
 
 #: index.html:118 tablet7in.html:92
 msgid "Down/Right"
-msgstr ""
+msgstr "Giù/Destra"
 
 #: index.html:140 tablet7in.html:224
 msgid "Enter search term. Use TAB to navigate results."
 msgstr ""
+"Inserire il termine di ricerca. Usare TAB per navigare nei risultati."
 
 #: index.html:141 tablet7in.html:225
 msgid "Select and focus"
@@ -287,7 +288,7 @@ msgstr ""
 
 #: index.html:168 tablet7in.html:255
 msgid "Quick select"
-msgstr ""
+msgstr "Selezione rapida"
 
 #: index.html:172 tablet7in.html:259
 msgid "Earth"
@@ -299,7 +300,7 @@ msgstr "Plutone"
 
 #: index.html:180 tablet7in.html:290
 msgid "Current selection"
-msgstr ""
+msgstr "Selezione attuale"
 
 #: index.html:205 tablet7in.html:325
 msgid "Planets and satellites"
@@ -307,7 +308,7 @@ msgstr "Pianeti e satelliti"
 
 #: index.html:206 tablet7in.html:326
 msgid "Show Solar System objects"
-msgstr ""
+msgstr "Mostra gli oggetti del Sistema solare"
 
 #: index.html:237 tablet7in.html:362
 msgid "ZHR:"
@@ -375,15 +376,15 @@ msgstr ""
 
 #: index.html:347 tablet7in.html:519
 msgid "Labels and markers"
-msgstr ""
+msgstr "Etichette e indicatori"
 
 #: index.html:375 tablet7in.html:547
 msgid "Show illumination"
-msgstr ""
+msgstr "Mostra l'illuminazione"
 
 #: index.html:380 tablet7in.html:553
 msgid "Current landscape"
-msgstr ""
+msgstr "Panorama attuale"
 
 #: index.html:407 tablet7in.html:581
 msgid "Current sky culture"
@@ -391,19 +392,19 @@ msgstr ""
 
 #: index.html:420 tablet7in.html:606
 msgid "Active script:"
-msgstr ""
+msgstr "Script attivo:"
 
 #: index.html:421 tablet7in.html:607
 msgid "Run selected script"
-msgstr ""
+msgstr "Eseguire script selezionato"
 
 #: index.html:421 tablet7in.html:607
 msgid "Stop current script"
-msgstr ""
+msgstr "Fermare script attuale"
 
 #: index.html:426 tablet7in.html:41 tablet7in.html:591
 msgid "Actions"
-msgstr ""
+msgstr "Azioni"
 
 #: index.html:430 tablet7in.html:595
 msgid "Run/toggle action"
@@ -423,12 +424,14 @@ msgstr ""
 
 #: index.html:491 tablet7in.html:681
 msgid "No response from server"
-msgstr ""
+msgstr "Nessuna risposta ricevuta dal server"
 
 #: index.html:492
 msgid ""
 "No response from server since %1 seconds. Is Stellarium still running?"
 msgstr ""
+"Nessuna risposta ricevuta dal server da %1 secondi. Stellarium è ancora "
+"attivo?"
 
 #: tablet7in.html:32
 msgid "Time Jump"
@@ -484,11 +487,11 @@ msgstr "Nebulosa di Orione"
 
 #: tablet7in.html:269
 msgid "Eta Carinae Nebula"
-msgstr ""
+msgstr "Nebulosa Eta Carinae"
 
 #: tablet7in.html:270
 msgid "47 Tucanae Cluster"
-msgstr ""
+msgstr "Ammasso 47 Tucanae"
 
 #: tablet7in.html:271
 msgid "Aries"
@@ -524,19 +527,19 @@ msgstr "Scorpione"
 
 #: tablet7in.html:279
 msgid "Sagittarius"
-msgstr ""
+msgstr "Sagittario"
 
 #: tablet7in.html:280
 msgid "Capricornus"
-msgstr ""
+msgstr "Capricorno"
 
 #: tablet7in.html:281
 msgid "Aquarius"
-msgstr ""
+msgstr "Acquario"
 
 #: tablet7in.html:282
 msgid "Pisces"
-msgstr ""
+msgstr "Pesci"
 
 #: tablet7in.html:386
 msgid ""
@@ -562,11 +565,11 @@ msgstr ""
 
 #: tablet7in.html:420
 msgid "Current Planet:"
-msgstr ""
+msgstr "Pianeta attuale:"
 
 #: tablet7in.html:615
 msgid "Favorites"
-msgstr ""
+msgstr "Preferiti"
 
 #: tablet7in.html:617
 msgid "Show 1"
@@ -574,11 +577,11 @@ msgstr ""
 
 #: tablet7in.html:618
 msgid "Remove Labels and Images"
-msgstr ""
+msgstr "Rimuovi etichette ed immagini"
 
 #: tablet7in.html:618
 msgid "Cleanup Screen"
-msgstr ""
+msgstr "Pulisci schermo"
 
 #: tablet7in.html:682
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
