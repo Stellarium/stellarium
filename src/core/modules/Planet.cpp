@@ -1122,8 +1122,12 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	if (hidden)
 		return;
 
+	// Get the eclipse factor to avoid hiding the Moon during a total solar eclipse.
+	// Details: https://answers.launchpad.net/stellarium/+question/395139
+	bool eclipseFactor = GETSTELMODULE(SolarSystem)->getEclipseFactor(core)==1.0 ? true : false ;
+
 	// Exclude drawing if user set a hard limit magnitude.
-	if (core->getSkyDrawer()->getFlagPlanetMagnitudeLimit() && (getVMagnitude(core) > core->getSkyDrawer()->getCustomPlanetMagnitudeLimit()))
+	if (core->getSkyDrawer()->getFlagPlanetMagnitudeLimit() && (getVMagnitude(core) > core->getSkyDrawer()->getCustomPlanetMagnitudeLimit()) && eclipseFactor)
 		return;
 
 	// Try to improve speed for minor planets: test if visible at all.
