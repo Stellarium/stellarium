@@ -133,6 +133,7 @@ void SimbadLookupReply::httpQueryFinished()
 				line = reply->readLine();
 				line.chop(1); // Remove a line break at the end
 				line.replace("NAME " ,"");
+				line.replace("  ", " "); // Remove double spaces
 				resultPositions[line]=v;
 			}
 			line = reply->readLine();
