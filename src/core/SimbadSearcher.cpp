@@ -25,7 +25,11 @@
 #include <QDebug>
 #include <QTimer>
 
-SimbadLookupReply::SimbadLookupReply(const QString& aurl, QNetworkAccessManager* anetMgr, int delayMs) : url(aurl), reply(NULL), netMgr(anetMgr), currentStatus(SimbadLookupQuerying)
+SimbadLookupReply::SimbadLookupReply(const QString& aurl, QNetworkAccessManager* anetMgr, int delayMs)
+	: url(aurl)
+	, reply(NULL)
+	, netMgr(anetMgr)
+	, currentStatus(SimbadLookupQuerying)
 {
 	if(delayMs <= 0)
 		delayTimerCompleted();

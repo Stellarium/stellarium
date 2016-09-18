@@ -640,15 +640,38 @@ void SearchDialog::gotoObject(const QString &nameI18n)
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	if (simbadResults.contains(nameI18n))
 	{
-		close();
-		Vec3d pos = simbadResults[nameI18n];
-		Vec3d aimUp;
-		objectMgr->unSelect();
-		mvmgr->setViewUpVector(Vec3d(0., 0., 1.));
-		aimUp=mvmgr->getViewUpVectorJ2000();
-		mvmgr->moveToJ2000(pos, aimUp, mvmgr->getAutoMoveDuration());
-		ui->lineEditSearchSkyObject->clear();
-		ui->completionLabel->clearValues();
+		if (objectMgr->findAndSelect(nameI18n))
+		{
+			const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+			if (!newSelected.empty())
+			{
+				close();
+				ui->lineEditSearchSkyObject->clear();
+				ui->completionLabel->clearValues();
+				// Can't point to home planet
+				if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
+				{
+					mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
+					mvmgr->setFlagTracking(true);
+				}
+				else
+				{
+					GETSTELMODULE(StelObjectMgr)->unSelect();
+				}
+			}
+		}
+		else
+		{
+			close();
+			Vec3d pos = simbadResults[nameI18n];
+			Vec3d aimUp;
+			objectMgr->unSelect();
+			mvmgr->setViewUpVector(Vec3d(0., 0., 1.));
+			aimUp=mvmgr->getViewUpVectorJ2000();
+			mvmgr->moveToJ2000(pos, aimUp, mvmgr->getAutoMoveDuration());
+			ui->lineEditSearchSkyObject->clear();
+			ui->completionLabel->clearValues();
+		}
 	}
 	else if (objectMgr->findAndSelectI18n(nameI18n) || objectMgr->findAndSelect(nameI18n))
 	{
