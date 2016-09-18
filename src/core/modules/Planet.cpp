@@ -1122,13 +1122,14 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	if (hidden)
 		return;
 
-	// Get the eclipse factor to avoid hiding the Moon during a total solar eclipse.
-	// Details: https://answers.launchpad.net/stellarium/+question/395139
-	bool eclipseFactor = GETSTELMODULE(SolarSystem)->getEclipseFactor(core)==1.0 ? true : false ;
-
 	// Exclude drawing if user set a hard limit magnitude.
-	if (core->getSkyDrawer()->getFlagPlanetMagnitudeLimit() && (getVMagnitude(core) > core->getSkyDrawer()->getCustomPlanetMagnitudeLimit()) && eclipseFactor)
-		return;
+	if (core->getSkyDrawer()->getFlagPlanetMagnitudeLimit() && (getVMagnitude(core) > core->getSkyDrawer()->getCustomPlanetMagnitudeLimit()))
+	{
+		// Get the eclipse factor to avoid hiding the Moon during a total solar eclipse.
+		// Details: https://answers.launchpad.net/stellarium/+question/395139
+		if (GETSTELMODULE(SolarSystem)->getEclipseFactor(core)==1.0)
+			return;
+	}
 
 	// Try to improve speed for minor planets: test if visible at all.
 	// For a full catalog of NEAs (11000 objects), with this and resetting deltaJD according to distance, rendering time went 4.5fps->12fps.	
