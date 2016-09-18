@@ -269,8 +269,11 @@ private:
 	//! Handle pinch on multi touch devices.
 	void handlePinch(qreal scale, bool started);
 
+	//! Used internally to set the viewport effects.
 	void prepareRenderBuffer();
-	void applyRenderBuffer();
+	//! Used internally to set the viewport effects.
+	//! @param drawFbo the OpenGL fbo we need to render into.
+	void applyRenderBuffer(int drawFbo=0);
 
 	// The StelApp singleton
 	static StelApp* singleton;
