@@ -403,6 +403,7 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 			{
 				// Deselect the selected object
 				StelApp::getInstance().getStelObjectMgr().unSelect();
+				setFlagLockEquPos(false);
 				event->accept();
 				return;
 			}
