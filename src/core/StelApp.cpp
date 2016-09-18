@@ -614,10 +614,11 @@ void StelApp::prepareRenderBuffer()
 	renderBuffer->bind();
 }
 
-void StelApp::applyRenderBuffer()
+void StelApp::applyRenderBuffer(int drawFbo)
 {
 	if (!renderBuffer) return;
 	renderBuffer->release();
+	if (drawFbo) GL(glBindFramebuffer(GL_FRAMEBUFFER, drawFbo));
 	viewportEffect->paintViewportBuffer(renderBuffer);
 }
 
@@ -626,6 +627,10 @@ void StelApp::draw()
 {
 	if (!initialized)
 		return;
+
+	int drawFbo;
+	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &drawFbo);
+
 	prepareRenderBuffer();
 	core->preDraw();
 
@@ -635,7 +640,7 @@ void StelApp::draw()
 		module->draw(core);
 	}
 	core->postDraw();
-	applyRenderBuffer();
+	applyRenderBuffer(drawFbo);
 }
 
 /*************************************************************************
