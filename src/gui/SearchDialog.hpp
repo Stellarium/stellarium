@@ -153,6 +153,9 @@ private slots:
 	//! Whether to use autofill for start of words or not.
 	void enableStartOfWordsAutofill(bool enable);
 
+	//! Whether to use pause when coordinates are used or not.
+	void enableStopTime(bool enable);
+
 	//! Set flagHasSelectedText as true, if search box has selected text
 	void setHasSelectedFlag();
 
@@ -220,6 +223,7 @@ private:
 	bool flagHasSelectedText;
 
 	bool useStartOfWords;
+	bool useStopTime;
 	bool useSimbad;
 	//! URL of the server used for SIMBAD queries. 
 	QString simbadServerUrl;
