@@ -144,7 +144,7 @@ SearchDialog::SearchDialog(QObject* parent)
 	conf = StelApp::getInstance().getSettings();
 	useSimbad = conf->value("search/flag_search_online", true).toBool();	
 	useStartOfWords = conf->value("search/flag_start_words", false).toBool();
-	useStopTime = conf->value("search/flag_stop_time", true).toBool();
+	useLockPosition = conf->value("search/flag_lock_position", true).toBool();
 	simbadServerUrl = conf->value("search/simbad_server_url", DEF_SIMBAD_URL).toString();
 	setCurrentCoordinateSystemKey(conf->value("search/coordinate_system", "equatorialJ2000").toString());
 }
@@ -380,8 +380,8 @@ void SearchDialog::createDialogContent()
 	connect(ui->checkBoxUseStartOfWords, SIGNAL(clicked(bool)), this, SLOT(enableStartOfWordsAutofill(bool)));
 	ui->checkBoxUseStartOfWords->setChecked(useStartOfWords);
 
-	connect(ui->checkBoxStopTime, SIGNAL(clicked(bool)), this, SLOT(enableStopTime(bool)));
-	ui->checkBoxStopTime->setChecked(useStopTime);
+	connect(ui->checkBoxLockPosition, SIGNAL(clicked(bool)), this, SLOT(enableLockPosition(bool)));
+	ui->checkBoxLockPosition->setChecked(useLockPosition);
 
 	// list views initialization
 	connect(ui->objectTypeComboBox, SIGNAL(activated(int)), this, SLOT(updateListWidget(int)));
@@ -412,10 +412,10 @@ void SearchDialog::enableStartOfWordsAutofill(bool enable)
 	conf->setValue("search/flag_start_words", useStartOfWords);
 }
 
-void SearchDialog::enableStopTime(bool enable)
+void SearchDialog::enableLockPosition(bool enable)
 {
-	useStopTime = enable;
-	conf->setValue("search/flag_stop_time", useStopTime);
+	useLockPosition = enable;
+	conf->setValue("search/flag_lock_position", useLockPosition);
 }
 
 void SearchDialog::setSimpleStyle()
@@ -520,8 +520,8 @@ void SearchDialog::manualPositionChanged()
 	}
 	mvmgr->setFlagTracking(false);
 	mvmgr->moveToJ2000(pos, aimUp, 0.05);
-	if (useStopTime)
-		core->setTimeRate(0);
+	if (useLockPosition)
+		mvmgr->setFlagLockEquPos(true);
 }
 
 void SearchDialog::onSearchTextChanged(const QString& text)
@@ -683,8 +683,8 @@ void SearchDialog::gotoObject(const QString &nameI18n)
 			mvmgr->setViewUpVector(Vec3d(0., 0., 1.));
 			aimUp=mvmgr->getViewUpVectorJ2000();
 			mvmgr->moveToJ2000(pos, aimUp, mvmgr->getAutoMoveDuration());
-			if (useStopTime)
-				StelApp::getInstance().getCore()->setTimeRate(0);
+			if (useLockPosition)
+				mvmgr->setFlagLockEquPos(true);
 			ui->lineEditSearchSkyObject->clear();
 			ui->completionLabel->clearValues();
 		}
