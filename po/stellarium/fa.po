@@ -8,20 +8,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-03 23:58+0700\n"
+"POT-Creation-Date: 2016-09-18 17:17+0700\n"
 "PO-Revision-Date: 2015-10-22 19:35+0000\n"
 "Last-Translator: Mohammad Hadi Sotoudeh <mhsotoudeh@yahoo.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-09-04 06:13+0000\n"
-"X-Generator: Launchpad (build 18179)\n"
+"X-Launchpad-Export-Date: 2016-09-20 06:59+0000\n"
+"X-Generator: Launchpad (build 18200)\n"
 
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:188
 #: src/core/modules/Planet.cpp:226 src/core/modules/MinorPlanet.cpp:213
-#: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:188
-#: src/core/modules/StarWrapper.cpp:191
+#: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:192
+#: src/core/modules/StarWrapper.cpp:195
 #: plugins/Satellites/src/Satellite.cpp:269
 #: plugins/Supernovae/src/Supernova.cpp:130 plugins/Quasars/src/Quasar.cpp:101
 #: plugins/Pulsars/src/Pulsar.cpp:158 plugins/Exoplanets/src/Exoplanet.cpp:270
@@ -33,7 +33,7 @@ msgstr "نوع: <b>%1</b>"
 msgid "constellation"
 msgstr ""
 
-#: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:412
+#: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:433
 #: src/core/modules/GridLinesMgr.cpp:951 src/core/modules/LandscapeMgr.cpp:414
 #: src/core/modules/NebulaMgr.cpp:364 src/core/modules/NebulaMgr.cpp:365
 #: src/core/modules/SolarSystem.cpp:200 src/core/modules/MilkyWay.cpp:74
@@ -66,12 +66,12 @@ msgstr "مرز صورت‌های فلکی"
 msgid "Select single constellation"
 msgstr "انتخاب تک صورت‌فلکی"
 
-#: src/core/modules/StarMgr.cpp:413 src/ui_viewDialog.h:1736
+#: src/core/modules/StarMgr.cpp:434 src/ui_viewDialog.h:1736
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:253
 msgid "Stars"
 msgstr "ستارگان"
 
-#: src/core/modules/StarMgr.cpp:414
+#: src/core/modules/StarMgr.cpp:435
 msgid "Stars labels"
 msgstr "برچسب ستارگان"
 
@@ -236,21 +236,21 @@ msgstr "برچسب‌ها"
 msgid "Light pollution data from locations database"
 msgstr "داده‌های آلودگی نوری از دادگان محل‌ها"
 
-#: src/core/modules/LandscapeMgr.cpp:706
+#: src/core/modules/LandscapeMgr.cpp:707
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:448
 msgid "Author: "
 msgstr "پدیدآور: "
 
-#: src/core/modules/LandscapeMgr.cpp:712
+#: src/core/modules/LandscapeMgr.cpp:713
 msgid "Location: "
 msgstr "محل: "
 
-#: src/core/modules/LandscapeMgr.cpp:715
+#: src/core/modules/LandscapeMgr.cpp:716
 #, qt-format
 msgid ", %1 m"
 msgstr "، %1 متر"
 
-#: src/core/modules/LandscapeMgr.cpp:720 src/ui_astroCalcDialog.h:480
+#: src/core/modules/LandscapeMgr.cpp:721 src/ui_astroCalcDialog.h:480
 msgid "Celestial body:"
 msgstr "جرم آسمانی:"
 
@@ -268,7 +268,7 @@ msgstr "کدریت: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:232
 #: src/core/modules/MinorPlanet.cpp:219 src/core/modules/Comet.cpp:182
-#: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:198
+#: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:202
 #, qt-format
 msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
 msgstr ""
@@ -276,7 +276,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
 #: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
 #: src/core/modules/Comet.cpp:185 src/core/modules/StarWrapper.cpp:63
-#: src/core/modules/StarWrapper.cpp:201
+#: src/core/modules/StarWrapper.cpp:205
 #: plugins/Supernovae/src/Supernova.cpp:137 plugins/Novae/src/Nova.cpp:144
 #: plugins/Quasars/src/Quasar.cpp:112 plugins/Exoplanets/src/Exoplanet.cpp:284
 #, qt-format
@@ -288,7 +288,7 @@ msgid " (Photometric system: B)"
 msgstr " (دستگاه نورسنجی: B)"
 
 #: src/core/modules/Nebula.cpp:217 src/core/modules/StarWrapper.cpp:68
-#: src/core/modules/StarWrapper.cpp:209 plugins/Quasars/src/Quasar.cpp:122
+#: src/core/modules/StarWrapper.cpp:213 plugins/Quasars/src/Quasar.cpp:122
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
 msgstr "شاخص رنگ (B-V): <b>%1</b>"
@@ -319,7 +319,7 @@ msgid "Orientation angle: %1%2"
 msgstr "زاویه‌ی جهت‌گیری: %1%2"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:268 src/core/modules/StarWrapper.cpp:239
+#: src/core/modules/Nebula.cpp:268 src/core/modules/StarWrapper.cpp:243
 #: plugins/Supernovae/src/Supernova.cpp:150 plugins/Novae/src/Nova.cpp:156
 #: plugins/Exoplanets/src/Exoplanet.cpp:300
 #, qt-format
@@ -351,7 +351,7 @@ msgstr "فاصله: %1 %2"
 msgid "Redshift: %1"
 msgstr "قرمزگرایی: %1"
 
-#: src/core/modules/Nebula.cpp:325 src/core/modules/StarWrapper.cpp:248
+#: src/core/modules/Nebula.cpp:325 src/core/modules/StarWrapper.cpp:252
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "اختلاف منظر: %1\""
@@ -717,7 +717,7 @@ msgstr "پیش‌سحابی سیاره‌نما"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1162 src/core/modules/StarWrapper.cpp:53
-#: src/core/modules/StarWrapper.cpp:181 src/translations.h:46
+#: src/core/modules/StarWrapper.cpp:185 src/translations.h:46
 msgid "star"
 msgstr "ستاره"
 
@@ -739,7 +739,7 @@ msgstr ""
 
 #: src/core/modules/Planet.cpp:238 src/core/modules/MinorPlanet.cpp:232
 #: src/core/modules/MinorPlanet.cpp:236 src/core/modules/Comet.cpp:194
-#: src/core/modules/StarWrapper.cpp:205 plugins/Quasars/src/Quasar.cpp:116
+#: src/core/modules/StarWrapper.cpp:209 plugins/Quasars/src/Quasar.cpp:116
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "قدر مطلق: %1"
@@ -889,89 +889,89 @@ msgstr ""
 msgid "Native planet names (from starlore)"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:162
+#: src/core/modules/StarWrapper.cpp:166
 msgid "eruptive variable star"
 msgstr "ستاره متغیر فورانی"
 
-#: src/core/modules/StarWrapper.cpp:164
+#: src/core/modules/StarWrapper.cpp:168
 msgid "pulsating variable star"
 msgstr "ستاره متغیر تپنده"
 
-#: src/core/modules/StarWrapper.cpp:166
+#: src/core/modules/StarWrapper.cpp:170
 msgid "rotating variable star"
 msgstr "ستاره متغیر چرخشی"
 
-#: src/core/modules/StarWrapper.cpp:168
+#: src/core/modules/StarWrapper.cpp:172
 msgid "cataclysmic variable star"
 msgstr "ستاره متغیر انفجاری"
 
-#: src/core/modules/StarWrapper.cpp:171
+#: src/core/modules/StarWrapper.cpp:175
 msgid "eclipsing binary system"
 msgstr "سیستم دوتایی گرفتی"
 
-#: src/core/modules/StarWrapper.cpp:175
+#: src/core/modules/StarWrapper.cpp:179
 msgid "variable star"
 msgstr "ستاره‌ی متغیر"
 
-#: src/core/modules/StarWrapper.cpp:179
+#: src/core/modules/StarWrapper.cpp:183
 msgid "double star"
 msgstr "ستاره دوگانه"
 
-#: src/core/modules/StarWrapper.cpp:186
+#: src/core/modules/StarWrapper.cpp:190
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
 msgstr "نوع: <b>%1، %2</b>"
 
-#: src/core/modules/StarWrapper.cpp:227
+#: src/core/modules/StarWrapper.cpp:231
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
 msgstr "بازه‌ی قدر: <b>%1</b>%2<b>%3</b> (دستگاه نورسنجی: %4)"
 
-#: src/core/modules/StarWrapper.cpp:229
+#: src/core/modules/StarWrapper.cpp:233
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 msgstr "بازه‌ی قدر: <b>%1</b>%2<b>%3/%4</b> (دستگاه نورسنجی: %5)"
 
-#: src/core/modules/StarWrapper.cpp:245
+#: src/core/modules/StarWrapper.cpp:249
 #: plugins/Exoplanets/src/Exoplanet.cpp:294
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "رده‌ی طیفی: %1"
 
-#: src/core/modules/StarWrapper.cpp:251
+#: src/core/modules/StarWrapper.cpp:255
 #, qt-format
 msgid "Period: %1 days"
 msgstr "دوره‌ی تناوب: %1 روز"
 
-#: src/core/modules/StarWrapper.cpp:260
+#: src/core/modules/StarWrapper.cpp:264
 #, qt-format
 msgid "Next minimum light: %1 UTC"
 msgstr "کمینه‌ی نوری بعدی: %1 زمان جهانی"
 
-#: src/core/modules/StarWrapper.cpp:262
+#: src/core/modules/StarWrapper.cpp:266
 #, qt-format
 msgid "Next maximum light: %1 UTC"
 msgstr "بیشینه‌ی نوری بعدی: %1 زمان جهانی"
 
-#: src/core/modules/StarWrapper.cpp:269
+#: src/core/modules/StarWrapper.cpp:273
 #, qt-format
 msgid "Duration of eclipse: %1%"
 msgstr "مدت گرفت: %1%"
 
-#: src/core/modules/StarWrapper.cpp:271
+#: src/core/modules/StarWrapper.cpp:275
 #, qt-format
 msgid "Rising time: %1%"
 msgstr "زمان طلوع: %1%"
 
-#: src/core/modules/StarWrapper.cpp:276
+#: src/core/modules/StarWrapper.cpp:280
 msgid "Year of last satisfactory observation"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:277
+#: src/core/modules/StarWrapper.cpp:281
 msgid "Position angle"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:281 src/core/modules/StarWrapper.cpp:283
+#: src/core/modules/StarWrapper.cpp:285 src/core/modules/StarWrapper.cpp:287
 #: src/gui/AstroCalcDialog.cpp:551
 msgid "Separation"
 msgstr "جدایی"
@@ -1196,11 +1196,11 @@ msgstr "برگردان جانبی منظره"
 msgid "Flip scene vertically"
 msgstr "وارونگی منظره"
 
-#: src/core/StelCore.cpp:1774
+#: src/core/StelCore.cpp:1775
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "تصحیح غیرفعال است. تنها در صورت آگاهی استفاده کنید!"
 
-#: src/core/StelCore.cpp:1777
+#: src/core/StelCore.cpp:1778
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1211,7 +1211,7 @@ msgstr ""
 "را در مقاله خود <em>نظریه‌ی نسبیت انیشتن با خورشیدگرفتگی‌های کهن اثبات "
 "شد</em> به کار برد. (%1). اطلاعات بیشتر در %2اینجا%3."
 
-#: src/core/StelCore.cpp:1780
+#: src/core/StelCore.cpp:1781
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1220,7 +1220,7 @@ msgstr ""
 "این معادله تجربی را جی. ام. کلِمِنس در مقاله‌ی <em>در مورد دستگاه ثابت‌های "
 "نجومی</em> منتشر کرد (%1)."
 
-#: src/core/StelCore.cpp:1783
+#: src/core/StelCore.cpp:1784
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1232,7 +1232,7 @@ msgstr ""
 "سیاره‌ها  پایه‌گذاری کرد (%1) و ژان مويس در <em>فرمول هاي نجومی برای "
 "ماشین‌حساب‌ها</em>. همچنین در برنامه رایانه‌ای SunTracker Pro اتخاذ شد."
 
-#: src/core/StelCore.cpp:1787
+#: src/core/StelCore.cpp:1788
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1242,7 +1242,7 @@ msgstr ""
 "در <em>تقویم فلکی</em> و <em>جدول خورشیدگرفتگی‌ها</em>آن را موکه و مویس "
 "(۱۹۸۳ م.) اتخاذ کردند."
 
-#: src/core/StelCore.cpp:1791
+#: src/core/StelCore.cpp:1792
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1253,7 +1253,7 @@ msgstr ""
 "فاصله‌های ۵- و ۱۰-روزه از ۶۰۱ ق.م. تا ۱۶۴۹ م. فهرست می‌کند. \r\n"
 "به همان نسبت نیز به طور ضمنی در جدول‌های سیزیجی گلدستین (۱۹۷۳ م.) اتخاذ شد."
 
-#: src/core/StelCore.cpp:1795
+#: src/core/StelCore.cpp:1796
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1263,7 +1263,7 @@ msgstr ""
 "این مقاله را پی. ام. مولر و اف. آر. استِفِنسون در مقاله <em>شتاب زمین و ماه "
 "از رصدهای اولیه</em> منتشر کرد (%1)."
 
-#: src/core/StelCore.cpp:1798
+#: src/core/StelCore.cpp:1799
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1272,7 +1272,7 @@ msgstr ""
 "این معادله را اف. آر. استِفِنسون د مقاله <em>رصدهای پیشا-تلسکوپی</em> منتشر "
 "کرد (%1)."
 
-#: src/core/StelCore.cpp:1801
+#: src/core/StelCore.cpp:1802
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1281,7 +1281,7 @@ msgid ""
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1804
+#: src/core/StelCore.cpp:1805
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1291,7 +1291,7 @@ msgstr ""
 "سیاره‌ای از 4000- تا 2800+<em/> و در برنامه‌ی آسمان‌نمای RedShift برای "
 "کامپیوتر استفاده شد."
 
-#: src/core/StelCore.cpp:1807
+#: src/core/StelCore.cpp:1808
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1299,26 +1299,26 @@ msgid ""
 "A.D. 1980</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1810
+#: src/core/StelCore.cpp:1811
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "این الگوریتم در برنامه‌ی آسمان‌نمای Guide 7 برای کامپیوتر استفاده می‌شود."
 
-#: src/core/StelCore.cpp:1813
+#: src/core/StelCore.cpp:1814
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1816
+#: src/core/StelCore.cpp:1817
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
 
-#: src/core/StelCore.cpp:1819
+#: src/core/StelCore.cpp:1820
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1327,14 +1327,14 @@ msgid ""
 "Morrison (1984)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1822
+#: src/core/StelCore.cpp:1823
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1825
+#: src/core/StelCore.cpp:1826
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1342,42 +1342,42 @@ msgid ""
 "1990</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1828
+#: src/core/StelCore.cpp:1829
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1831
+#: src/core/StelCore.cpp:1832
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:1834
+#: src/core/StelCore.cpp:1835
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
 
-#: src/core/StelCore.cpp:1837
+#: src/core/StelCore.cpp:1838
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1840
+#: src/core/StelCore.cpp:1841
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
 
-#: src/core/StelCore.cpp:1843
+#: src/core/StelCore.cpp:1844
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1385,7 +1385,7 @@ msgid ""
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1846
+#: src/core/StelCore.cpp:1847
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1393,7 +1393,7 @@ msgid ""
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1849
+#: src/core/StelCore.cpp:1850
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1402,7 +1402,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:1852 src/core/StelCore.cpp:1855
+#: src/core/StelCore.cpp:1853 src/core/StelCore.cpp:1856
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1412,15 +1412,15 @@ msgid ""
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 
-#: src/core/StelCore.cpp:1852
+#: src/core/StelCore.cpp:1853
 msgid "Used by default."
 msgstr "استفاده‌شده از پیش‌فرض"
 
-#: src/core/StelCore.cpp:1855
+#: src/core/StelCore.cpp:1856
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 
-#: src/core/StelCore.cpp:1858
+#: src/core/StelCore.cpp:1859
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1428,7 +1428,7 @@ msgid ""
 "Babylon</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1861
+#: src/core/StelCore.cpp:1862
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1436,7 +1436,7 @@ msgid ""
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
 
-#: src/core/StelCore.cpp:1864
+#: src/core/StelCore.cpp:1865
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1444,22 +1444,22 @@ msgid ""
 "Approximation of Time Period 1620-2013</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1867
+#: src/core/StelCore.cpp:1868
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
 
-#: src/core/StelCore.cpp:1870 src/core/SimbadSearcher.cpp:151
+#: src/core/StelCore.cpp:1871 src/core/SimbadSearcher.cpp:156
 msgid "Error"
 msgstr "خطا"
 
-#: src/core/StelCore.cpp:1920
+#: src/core/StelCore.cpp:1921
 msgid "with meaningless values outside this range"
 msgstr "با مقادیر بی‌معنی بیرون این بازه"
 
-#: src/core/StelCore.cpp:1946
+#: src/core/StelCore.cpp:1947
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -1467,22 +1467,22 @@ msgstr ""
 "با خطای میانگین کمتر از یک ثانیه، بیشینه‌ی خطا 1.9 ثانیه، و مقادیر بی‌معنی "
 "بیرون این بازه"
 
-#: src/core/StelCore.cpp:1968 src/core/StelCore.cpp:1973
-#: src/core/StelCore.cpp:2001 src/core/StelCore.cpp:2006
-#: src/core/StelCore.cpp:2011
+#: src/core/StelCore.cpp:1969 src/core/StelCore.cpp:1974
+#: src/core/StelCore.cpp:2002 src/core/StelCore.cpp:2007
+#: src/core/StelCore.cpp:2012
 msgid "with zero values outside this range"
 msgstr "با مقادیر صفر بیرون این بازه"
 
-#: src/core/StelCore.cpp:1978
+#: src/core/StelCore.cpp:1979
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "با مقادیر دارای خطای معمول 1 ثانیه و مقادیر صفر بیرون این بازه"
 
-#: src/core/StelCore.cpp:2021
+#: src/core/StelCore.cpp:2022
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "بازه‌ی معتبر استفاده: میان سال‌های %1 و %2، %3."
 
-#: src/core/StelCore.cpp:2023
+#: src/core/StelCore.cpp:2024
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "بازه‌ی معتبر استفاده: میان سال‌های %1 و %2."
@@ -1709,23 +1709,23 @@ msgstr ""
 msgid "Look towards Zenith"
 msgstr ""
 
-#: src/core/SimbadSearcher.cpp:74
+#: src/core/SimbadSearcher.cpp:78
 msgid "Network error"
 msgstr "خطا در شبکه"
 
-#: src/core/SimbadSearcher.cpp:111 src/core/SimbadSearcher.cpp:123
+#: src/core/SimbadSearcher.cpp:115 src/core/SimbadSearcher.cpp:127
 msgid "Error parsing position"
 msgstr ""
 
-#: src/core/SimbadSearcher.cpp:149
+#: src/core/SimbadSearcher.cpp:154
 msgid "Querying"
 msgstr "در حال جستجو"
 
-#: src/core/SimbadSearcher.cpp:153
+#: src/core/SimbadSearcher.cpp:158
 msgid "Not found"
 msgstr "یافت نشد"
 
-#: src/core/SimbadSearcher.cpp:153
+#: src/core/SimbadSearcher.cpp:158
 msgid "Found"
 msgstr "پیدا شد"
 
@@ -1749,7 +1749,7 @@ msgstr "جهت‌گیری نمای سمت/ارتفاع هنگام راه‌ان�
 msgid "Authors"
 msgstr "پدیدآوران"
 
-#: src/gui/ConfigurationDialog.cpp:864 src/gui/ViewDialog.cpp:992
+#: src/gui/ConfigurationDialog.cpp:864 src/gui/ViewDialog.cpp:993
 msgid "Contact"
 msgstr "تماس"
 
@@ -2203,7 +2203,7 @@ msgstr "پنجره‌ی راهنما"
 msgid "Configuration window"
 msgstr "تنظیمات نرم‌افزار"
 
-#: src/gui/StelGui.cpp:216 src/ui_searchDialogGui.h:615
+#: src/gui/StelGui.cpp:216 src/ui_searchDialogGui.h:618
 msgid "Search window"
 msgstr "جست‌وجو"
 
@@ -2274,107 +2274,107 @@ msgid "Frames per second"
 msgstr "فریم بر ثانیه"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:862
+#: src/gui/ViewDialog.cpp:863
 msgid "Excellent dark-sky site"
 msgstr "رصدگاه خیلی تاریک عالی"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:864
+#: src/gui/ViewDialog.cpp:865
 msgid "Typical truly dark site"
 msgstr "رصدگاه خیلی تاریک"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:866
+#: src/gui/ViewDialog.cpp:867
 msgid "Rural sky"
 msgstr "آسمان روستا"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:868
+#: src/gui/ViewDialog.cpp:869
 msgid "Rural/suburban transition"
 msgstr "گذار روستا به حومه‌ی شهر"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:870
+#: src/gui/ViewDialog.cpp:871
 msgid "Suburban sky"
 msgstr "آسمان حومه‌ی شهر"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:872
+#: src/gui/ViewDialog.cpp:873
 msgid "Bright suburban sky"
 msgstr "آسمان روشن حومه‌ی شهر"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:874
+#: src/gui/ViewDialog.cpp:875
 msgid "Suburban/urban transition"
 msgstr "گذار حومه‌ی شهر به شهر"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:876
+#: src/gui/ViewDialog.cpp:877
 msgid "City sky"
 msgstr "آسمان شهر"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:878
+#: src/gui/ViewDialog.cpp:879
 msgid "Inner-city sky"
 msgstr "آسمان درون شهر"
 
-#: src/gui/ViewDialog.cpp:892
+#: src/gui/ViewDialog.cpp:893
 msgid "The naked-eye limiting magnitude is"
 msgstr "حد قد چشم غیرمسلح"
 
-#: src/gui/ViewDialog.cpp:916
+#: src/gui/ViewDialog.cpp:917
 msgid "Abbreviated"
 msgstr "اختصاری"
 
-#: src/gui/ViewDialog.cpp:917
+#: src/gui/ViewDialog.cpp:918
 msgid "Native"
 msgstr "بومی"
 
-#: src/gui/ViewDialog.cpp:918
+#: src/gui/ViewDialog.cpp:919
 msgid "Translated"
 msgstr "ترجمه شده"
 
-#: src/gui/ViewDialog.cpp:1097
+#: src/gui/ViewDialog.cpp:1098
 msgid "No shooting stars"
 msgstr "بدون شهاب"
 
-#: src/gui/ViewDialog.cpp:1099
+#: src/gui/ViewDialog.cpp:1100
 msgid "Normal rate"
 msgstr "آهنگ عادی"
 
-#: src/gui/ViewDialog.cpp:1101
+#: src/gui/ViewDialog.cpp:1102
 msgid "Standard Orionids rate"
 msgstr "آهنگ استاندارد بارش جباری"
 
-#: src/gui/ViewDialog.cpp:1103
+#: src/gui/ViewDialog.cpp:1104
 msgid "Standard Perseids rate"
 msgstr "آهنگ استاندارد بارش برساوشی"
 
-#: src/gui/ViewDialog.cpp:1105
+#: src/gui/ViewDialog.cpp:1106
 msgid "Standard Geminids rate"
 msgstr "آهنگ استاندارد بارش جوزایی"
 
-#: src/gui/ViewDialog.cpp:1107
+#: src/gui/ViewDialog.cpp:1108
 msgid "Exceptional Perseid rate"
 msgstr "آهنگ استثنایی بارش برساوشی"
 
-#: src/gui/ViewDialog.cpp:1109
+#: src/gui/ViewDialog.cpp:1110
 msgid "Meteor storm rate"
 msgstr "آهنگ بارش شهابی"
 
-#: src/gui/ViewDialog.cpp:1111
+#: src/gui/ViewDialog.cpp:1112
 msgid "Exceptional Draconid rate"
 msgstr "آهنگ استثنایی بارش اژدهایی"
 
-#: src/gui/ViewDialog.cpp:1113
+#: src/gui/ViewDialog.cpp:1114
 msgid "Exceptional Leonid rate"
 msgstr "آهنگ استثنایی بارش اسدی"
 
-#: src/gui/ViewDialog.cpp:1115
+#: src/gui/ViewDialog.cpp:1116
 msgid "Very high rate (1966 Leonids)"
 msgstr "آهنگ بسیار بالا (بارش اسدی ۱۹۹۶ م.)"
 
-#: src/gui/ViewDialog.cpp:1117
+#: src/gui/ViewDialog.cpp:1118
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "بالاترین آهنگ تاکنون (بارش اسدی ۱۸۳۳م.)"
 
@@ -2478,83 +2478,83 @@ msgstr "طبیعی"
 msgid "starchart"
 msgstr "نقشه‌ی ستارگان"
 
-#: src/gui/SearchDialog.cpp:208
+#: src/gui/SearchDialog.cpp:211
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
 msgstr "استوایی (J2000.0)"
 
-#: src/gui/SearchDialog.cpp:209
+#: src/gui/SearchDialog.cpp:212
 msgctxt "coordinate system"
 msgid "Equatorial"
 msgstr "استوایی"
 
-#: src/gui/SearchDialog.cpp:210
+#: src/gui/SearchDialog.cpp:213
 msgctxt "coordinate system"
 msgid "Horizontal"
 msgstr "افقی"
 
-#: src/gui/SearchDialog.cpp:211
+#: src/gui/SearchDialog.cpp:214
 msgctxt "coordinate system"
 msgid "Galactic"
 msgstr "کهکشانی"
 
-#: src/gui/SearchDialog.cpp:212
+#: src/gui/SearchDialog.cpp:215
 msgctxt "coordinate system"
 msgid "Ecliptic"
 msgstr "دایرةالبروجی"
 
-#: src/gui/SearchDialog.cpp:213
+#: src/gui/SearchDialog.cpp:216
 msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
 msgstr "دایرةالبروجی (J2000.0)"
 
-#: src/gui/SearchDialog.cpp:241
+#: src/gui/SearchDialog.cpp:244
 msgid "Right ascension"
 msgstr "بعد"
 
-#: src/gui/SearchDialog.cpp:244
+#: src/gui/SearchDialog.cpp:247
 msgid "Declination"
 msgstr "میل"
 
-#: src/gui/SearchDialog.cpp:252
+#: src/gui/SearchDialog.cpp:255
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:945
 msgid "Azimuth"
 msgstr "سمت"
 
-#: src/gui/SearchDialog.cpp:255
+#: src/gui/SearchDialog.cpp:258
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
 msgid "Altitude"
 msgstr "ارتفاع‌"
 
-#: src/gui/SearchDialog.cpp:265
+#: src/gui/SearchDialog.cpp:268
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:480
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:515
 msgid "Longitude"
 msgstr "طول جغرافیایی"
 
-#: src/gui/SearchDialog.cpp:268
+#: src/gui/SearchDialog.cpp:271
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:479
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:516
 msgid "Latitude"
 msgstr "عرض جغرافیایی"
 
-#: src/gui/SearchDialog.cpp:580
+#: src/gui/SearchDialog.cpp:594
 msgid "Simbad Lookup Error"
 msgstr "خطای مراجعه به سیمباد"
 
-#: src/gui/SearchDialog.cpp:588
+#: src/gui/SearchDialog.cpp:602
 msgid "Simbad Lookup"
 msgstr "مراجعه به سیمباد"
 
-#: src/gui/SearchDialog.cpp:769
+#: src/gui/SearchDialog.cpp:808
 msgid "University of Strasbourg (France)"
 msgstr "دانشگاه استراسبورگ (فرانسه)"
 
-#: src/gui/SearchDialog.cpp:770
+#: src/gui/SearchDialog.cpp:809
 msgid "Harvard University (USA)"
 msgstr "دانشگاه هاروارد (ایالات متحده‌ی آمريكا)"
 
-#: src/gui/SearchDialog.cpp:843
+#: src/gui/SearchDialog.cpp:882
 msgid "Paste and Search"
 msgstr "چسباندن و جستجو"
 
@@ -2757,7 +2757,7 @@ msgstr "مقارنه"
 msgid "Opposition"
 msgstr "مقابله"
 
-#: src/gui/BookmarksDialog.cpp:100 src/ui_searchDialogGui.h:699
+#: src/gui/BookmarksDialog.cpp:100 src/ui_searchDialogGui.h:702
 msgid "Object"
 msgstr "جرم"
 
@@ -4868,166 +4868,166 @@ msgstr "پیش‌فرض قرار دادن محل کنونی"
 msgid "Get location from Network"
 msgstr "دریافت محل از شبکه"
 
-#: src/ui_searchDialogGui.h:614
+#: src/ui_searchDialogGui.h:617
 msgid "Find Object"
 msgstr "جستجوی اجرام"
 
-#: src/ui_searchDialogGui.h:618 src/ui_searchDialogGui.h:622
+#: src/ui_searchDialogGui.h:621 src/ui_searchDialogGui.h:625
 msgid "Use tab key for select of found items"
 msgstr "استفاده از کلید جهش برای انتخاب از موردهای یافته"
 
-#: src/ui_searchDialogGui.h:627
+#: src/ui_searchDialogGui.h:630
 msgid "iota"
 msgstr "یوتا"
 
-#: src/ui_searchDialogGui.h:630
+#: src/ui_searchDialogGui.h:633
 msgid "alpha"
 msgstr "آلفا"
 
-#: src/ui_searchDialogGui.h:633
+#: src/ui_searchDialogGui.h:636
 msgid "beta"
 msgstr "بتا"
 
-#: src/ui_searchDialogGui.h:636
+#: src/ui_searchDialogGui.h:639
 msgid "gamma"
 msgstr "گاما"
 
-#: src/ui_searchDialogGui.h:639
+#: src/ui_searchDialogGui.h:642
 msgid "delta"
 msgstr "دلتا"
 
-#: src/ui_searchDialogGui.h:642
+#: src/ui_searchDialogGui.h:645
 msgid "epsilon"
 msgstr "اپسیلون"
 
-#: src/ui_searchDialogGui.h:645
+#: src/ui_searchDialogGui.h:648
 msgid "zeta"
 msgstr "زتا"
 
-#: src/ui_searchDialogGui.h:648
+#: src/ui_searchDialogGui.h:651
 msgid "eta"
 msgstr "اِتا"
 
-#: src/ui_searchDialogGui.h:651
+#: src/ui_searchDialogGui.h:654
 msgid "theta"
 msgstr "تتا"
 
-#: src/ui_searchDialogGui.h:654
+#: src/ui_searchDialogGui.h:657
 msgid "kappa"
 msgstr "کاپا"
 
-#: src/ui_searchDialogGui.h:657
+#: src/ui_searchDialogGui.h:660
 msgid "lambda"
 msgstr "لاندا"
 
-#: src/ui_searchDialogGui.h:660
+#: src/ui_searchDialogGui.h:663
 msgid "mu"
 msgstr "مو"
 
-#: src/ui_searchDialogGui.h:663
+#: src/ui_searchDialogGui.h:666
 msgid "nu"
 msgstr "نو"
 
-#: src/ui_searchDialogGui.h:666
+#: src/ui_searchDialogGui.h:669
 msgid "xi"
 msgstr "کسی"
 
-#: src/ui_searchDialogGui.h:669
+#: src/ui_searchDialogGui.h:672
 msgid "omicron"
 msgstr "اُمیکرون"
 
-#: src/ui_searchDialogGui.h:672
+#: src/ui_searchDialogGui.h:675
 msgid "pi"
 msgstr "پی"
 
-#: src/ui_searchDialogGui.h:675
+#: src/ui_searchDialogGui.h:678
 msgid "rho"
 msgstr "رو"
 
-#: src/ui_searchDialogGui.h:678
+#: src/ui_searchDialogGui.h:681
 msgid "sigma"
 msgstr "سیگما"
 
-#: src/ui_searchDialogGui.h:681
+#: src/ui_searchDialogGui.h:684
 msgid "tau"
 msgstr "تاو"
 
-#: src/ui_searchDialogGui.h:684
+#: src/ui_searchDialogGui.h:687
 msgid "upsilon"
 msgstr "اوپسیلون"
 
-#: src/ui_searchDialogGui.h:687
+#: src/ui_searchDialogGui.h:690
 msgid "phi"
 msgstr "فی"
 
-#: src/ui_searchDialogGui.h:690
+#: src/ui_searchDialogGui.h:693
 msgid "chi"
 msgstr "خی"
 
-#: src/ui_searchDialogGui.h:693
+#: src/ui_searchDialogGui.h:696
 msgid "psi"
 msgstr "پسی"
 
-#: src/ui_searchDialogGui.h:696
+#: src/ui_searchDialogGui.h:699
 msgid "omega"
 msgstr "اُمگا"
 
-#: src/ui_searchDialogGui.h:698
+#: src/ui_searchDialogGui.h:701
 msgid "Greek letters for Bayer designations"
 msgstr "حرف‌های یونانی برای نام‌گذاری بایر"
 
-#: src/ui_searchDialogGui.h:701
+#: src/ui_searchDialogGui.h:704
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
 msgid "Coordinate system:"
 msgstr "دستگاه مختصات:"
 
-#: src/ui_searchDialogGui.h:703
+#: src/ui_searchDialogGui.h:706
 msgid ""
 "Note: this tool doesn't apply the refraction correction for coordinates."
 msgstr "توجه: این ابزار، تصحیح شکست را در مختصات اعمال نمی‌کند."
 
-#: src/ui_searchDialogGui.h:704
+#: src/ui_searchDialogGui.h:707
 msgid "Position"
 msgstr "موقعیت"
 
-#: src/ui_searchDialogGui.h:706
+#: src/ui_searchDialogGui.h:709
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr "برخی جرم‌ها شاید پس از فعال‌سازی افزایه‌های مربوطه پیدا شود"
 
-#: src/ui_searchDialogGui.h:708
+#: src/ui_searchDialogGui.h:711
 msgid "names in English"
 msgstr "نام‌ها به انگلیسی"
 
-#: src/ui_searchDialogGui.h:709
+#: src/ui_searchDialogGui.h:712
 msgid "Search in list..."
 msgstr "جستجو در فهرست..."
 
-#: src/ui_searchDialogGui.h:710
+#: src/ui_searchDialogGui.h:713
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Lists"
 msgstr "فهرست‌ها"
 
-#: src/ui_searchDialogGui.h:711
-msgid "On-line astronomical database SIMBAD"
-msgstr "دادگان نجومی برخط سیمباد"
+#: src/ui_searchDialogGui.h:714
+msgid "Use on-line astronomical database SIMBAD"
+msgstr ""
 
-#: src/ui_searchDialogGui.h:712
-msgid "Extend search with SIMBAD"
-msgstr "جستجو‍ي گسترش داده شده با SIMBAD"
-
-#: src/ui_searchDialogGui.h:713
+#: src/ui_searchDialogGui.h:715
 msgid "Server:"
 msgstr "کارساز:"
 
-#: src/ui_searchDialogGui.h:714
+#: src/ui_searchDialogGui.h:716
 msgid "Search options"
 msgstr "گزینه‌های جستجو"
 
-#: src/ui_searchDialogGui.h:715
+#: src/ui_searchDialogGui.h:717
 msgid "Use autofill only from the beginning of words"
 msgstr "استفاده از پر کردن خودکار تنها با استفاده از آغاز واژه‌ها"
 
-#: src/ui_searchDialogGui.h:716 src/ui_viewDialog.h:2011
+#: src/ui_searchDialogGui.h:718
+msgid "Lock position when coordinates are used"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:719 src/ui_viewDialog.h:2011
 #: src/ui_viewDialog.h:2033 src/ui_viewDialog.h:2050
 #: src/ui_configurationDialog.h:1302 src/ui_configurationDialog.h:1313
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
@@ -7406,77 +7406,77 @@ msgstr ""
 "فايل قديمي satellites.json سازگار نيست. از فايل پيشفرض استفاده مي‌شود"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1734
+#: plugins/Satellites/src/Satellites.cpp:1731
 msgid "visual"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1736
+#: plugins/Satellites/src/Satellites.cpp:1733
 msgid "scientific"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1738
+#: plugins/Satellites/src/Satellites.cpp:1735
 msgid "communications"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1740
+#: plugins/Satellites/src/Satellites.cpp:1737
 msgid "navigation"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1742
+#: plugins/Satellites/src/Satellites.cpp:1739
 msgid "amateur"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1744
+#: plugins/Satellites/src/Satellites.cpp:1741
 msgid "weather"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1746
+#: plugins/Satellites/src/Satellites.cpp:1743
 msgid "geostationary"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1748
+#: plugins/Satellites/src/Satellites.cpp:1745
 msgid "non-operational"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1750
+#: plugins/Satellites/src/Satellites.cpp:1747
 msgid "gps"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:1752
+#: plugins/Satellites/src/Satellites.cpp:1749
 msgid "glonass"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:1754
+#: plugins/Satellites/src/Satellites.cpp:1751
 msgid "galileo"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1756
+#: plugins/Satellites/src/Satellites.cpp:1753
 msgid "iridium"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:1758
+#: plugins/Satellites/src/Satellites.cpp:1755
 msgid "stations"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:1760
+#: plugins/Satellites/src/Satellites.cpp:1757
 msgid "education"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:1762
+#: plugins/Satellites/src/Satellites.cpp:1759
 msgid "observatory"
 msgstr ""
 
@@ -7486,17 +7486,17 @@ msgstr ""
 #. Satellite descriptions - bright and/or famous objects
 #. Just A FEW objects please! (I'm looking at you, Alex!)
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1773
+#: plugins/Satellites/src/Satellites.cpp:1770
 msgid "The Hubble Space Telescope"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1775
+#: plugins/Satellites/src/Satellites.cpp:1772
 msgid "The International Space Station"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1777
+#: plugins/Satellites/src/Satellites.cpp:1774
 msgid "China's first space station"
 msgstr ""
 
@@ -14199,6 +14199,9 @@ msgstr "خورشید کنونی"
 #~ msgid "Sedna"
 #~ msgstr "سدنا"
 
+#~ msgid "Extend search with SIMBAD"
+#~ msgstr "جستجو‍ي گسترش داده شده با SIMBAD"
+
 #~ msgid "Galactic plane line"
 #~ msgstr "خط صفحه كهكشاني"
 
@@ -14222,6 +14225,9 @@ msgstr "خورشید کنونی"
 
 #~ msgid "Lakota"
 #~ msgstr "لاکوتا"
+
+#~ msgid "On-line astronomical database SIMBAD"
+#~ msgstr "دادگان نجومی برخط سیمباد"
 
 #~ msgid "Show planets"
 #~ msgstr "نشان دادن سیاره‌ها"
