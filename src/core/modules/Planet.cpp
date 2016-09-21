@@ -49,6 +49,9 @@
 
 Vec3f Planet::labelColor = Vec3f(0.4f,0.4f,0.8f);
 Vec3f Planet::orbitColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitPlanetsColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitAsteroidsColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitCometsColor = Vec3f(1.0f,0.6f,1.0f);
 StelTextureSP Planet::hintCircleTex;
 StelTextureSP Planet::texEarthShadow;
 
@@ -1140,7 +1143,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	// If asteroid is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of orbital elements!)
 	// AW: Added a special case for educational purpose to drawing orbits for the Solar System Observer
 	// Details: https://sourceforge.net/p/stellarium/discussion/278769/thread/4828ebe4/
-	if (((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType>=Planet::isAsteroid && core->getCurrentLocation().planetName!="Solar System Observer")
+	if (((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType>=Planet::isAsteroid && !core->getCurrentLocation().planetName.contains("Observer", Qt::CaseInsensitive))
 	{
 		return;
 	}
@@ -1990,7 +1993,29 @@ void Planet::drawOrbit(const StelCore* core)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 
-	sPainter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], orbitFader.getInterstate());
+	Vec3f orbColor = orbitColor;
+	switch (pType)
+	{
+		case isMoon:
+		case isPlanet:
+			orbColor = orbitPlanetsColor;
+			break;
+		case isAsteroid:
+		case isDwarfPlanet:
+		case isCubewano:
+		case isPlutino:
+		case isSDO:
+		case isOCO:
+			orbColor = orbitAsteroidsColor;
+			break;
+		case isComet:
+			orbColor = orbitCometsColor;
+			break;
+		default:
+			orbColor = orbitColor;
+	}
+
+	sPainter.setColor(orbColor[0], orbColor[1], orbColor[2], orbitFader.getInterstate());
 	Vec3d onscreen;
 	// special case - use current Planet position as center vertex so that draws
 	// on its orbit all the time (since segmented rather than smooth curve)

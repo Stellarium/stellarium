@@ -435,7 +435,7 @@ void AstroCalcDialog::populateCelestialBodyList()
 	//data. Unfortunately, there's no other way to do this than with a cycle.
 	foreach(const QString& name, planetNames)
 	{
-		if (name!="Solar System Observer" && name!="Sun" && name!=core->getCurrentPlanet()->getEnglishName())
+		if (!name.contains("Observer", Qt::CaseInsensitive) && name!="Sun" && name!=core->getCurrentPlanet()->getEnglishName())
 			planets->addItem(trans.qtranslate(name), name);
 	}
 	//Restore the selection
