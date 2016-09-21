@@ -227,7 +227,7 @@ void StelCore::init()
 	actionsMgr->addAction("actionDecrease_Time_Speed_Less", timeGroup, N_("Decrease time speed (a little)"), this, "decreaseTimeSpeedLess()", "Shift+J");
 	actionsMgr->addAction("actionSet_Real_Time_Speed", timeGroup, N_("Set normal time rate"), this, "toggleRealTimeSpeed()", "K");
 	actionsMgr->addAction("actionSet_Time_Rate_Zero", timeGroup, N_("Set time rate to zero"), this, "setZeroTimeSpeed()", "7");
-	actionsMgr->addAction("actionSet_Time_Reverse", timeGroup, N_("Revert time direction"), this, "revertTimeDirection()", "0");
+	actionsMgr->addAction("actionSet_Time_Reverse", timeGroup, N_("Set reverse time direction"), this, "revertTimeDirection()", "0");
 	actionsMgr->addAction("actionReturn_To_Current_Time", timeGroup, N_("Set time to now"), this, "setTimeNow()", "8");
 	actionsMgr->addAction("actionAdd_Solar_Minute", timeGroup, N_("Add 1 solar minute"), this, "addMinute()");
 	actionsMgr->addAction("actionAdd_Solar_Hour", timeGroup, N_("Add 1 solar hour"), this, "addHour()", "Ctrl+=");
