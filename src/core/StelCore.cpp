@@ -227,10 +227,13 @@ void StelCore::init()
 	actionsMgr->addAction("actionDecrease_Time_Speed_Less", timeGroup, N_("Decrease time speed (a little)"), this, "decreaseTimeSpeedLess()", "Shift+J");
 	actionsMgr->addAction("actionSet_Real_Time_Speed", timeGroup, N_("Set normal time rate"), this, "toggleRealTimeSpeed()", "K");
 	actionsMgr->addAction("actionSet_Time_Rate_Zero", timeGroup, N_("Set time rate to zero"), this, "setZeroTimeSpeed()", "7");
+	actionsMgr->addAction("actionSet_Time_Reverse", timeGroup, N_("Revert time direction"), this, "revertTimeDirection()", "0");
 	actionsMgr->addAction("actionReturn_To_Current_Time", timeGroup, N_("Set time to now"), this, "setTimeNow()", "8");
+	actionsMgr->addAction("actionAdd_Solar_Minute", timeGroup, N_("Add 1 solar minute"), this, "addMinute()");
 	actionsMgr->addAction("actionAdd_Solar_Hour", timeGroup, N_("Add 1 solar hour"), this, "addHour()", "Ctrl+=");
 	actionsMgr->addAction("actionAdd_Solar_Day", timeGroup, N_("Add 1 solar day"), this, "addDay()", "=");
 	actionsMgr->addAction("actionAdd_Solar_Week", timeGroup, N_("Add 7 solar days"), this, "addWeek()", "]");
+	actionsMgr->addAction("actionSubtract_Solar_Minute", timeGroup, N_("Subtract 1 solar minute"), this, "subtractMinute()");
 	actionsMgr->addAction("actionSubtract_Solar_Hour", timeGroup, N_("Subtract 1 solar hour"), this, "subtractHour()", "Ctrl+-");
 	actionsMgr->addAction("actionSubtract_Solar_Day", timeGroup, N_("Subtract 1 solar day"), this, "subtractDay()", "-");
 	actionsMgr->addAction("actionSubtract_Solar_Week", timeGroup, N_("Subtract 7 solar days"), this, "subtractWeek()", "[");
@@ -1016,6 +1019,11 @@ double StelCore::getTimeRate() const
 	return timeSpeed;
 }
 
+void StelCore::revertTimeDirection(void)
+{
+	setTimeRate(-1*getTimeRate());
+}
+
 void StelCore::moveObserverToSelected()
 {
 	StelObjectMgr* objmgr = GETSTELMODULE(StelObjectMgr);
@@ -1035,7 +1043,7 @@ void StelCore::moveObserverToSelected()
 				moveObserverTo(loc);
 
 				LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
-				if (pl->getEnglishName() == "Solar System Observer")
+				if (pl->getEnglishName().contains("Observer", Qt::CaseInsensitive))
 				{
 					landscapeMgr->setFlagAtmosphere(false);
 					landscapeMgr->setFlagFog(false);
@@ -1155,6 +1163,11 @@ void StelCore::setPresetSkyTime(QDateTime dateTime)
 	setPresetSkyTime(StelUtils::qDateTimeToJd(dateTime));
 }
 
+void StelCore::addMinute()
+{
+	addSolarDays(JD_MINUTE);
+}
+
 void StelCore::addHour()
 {
 	addSolarDays(JD_HOUR);
@@ -1179,7 +1192,7 @@ void StelCore::addSiderealYear()
 {
 	double days = 365.256363004;
 	const PlanetP& home = position->getHomePlanet();
-	if ((home->getEnglishName() != "Solar System Observer") && (home->getSiderealPeriod()>0))
+	if (!home->getEnglishName().contains("Observer", Qt::CaseInsensitive) && (home->getSiderealPeriod()>0))
 		days = home->getSiderealPeriod();
 
 	addSolarDays(days);
@@ -1189,7 +1202,7 @@ void StelCore::addSiderealYears(float n)
 {
 	double days = 365.256363004;
 	const PlanetP& home = position->getHomePlanet();
-	if ((home->getEnglishName() != "Solar System Observer") && (home->getSiderealPeriod()>0))
+	if (!home->getEnglishName().contains("Observer", Qt::CaseInsensitive) && (home->getSiderealPeriod()>0))
 		days = home->getSiderealPeriod();
 
 	addSolarDays(days*n);
@@ -1262,6 +1275,11 @@ void StelCore::addJulianYears(float n)
 	addSolarDays(365.25*n);
 }
 
+void StelCore::subtractMinute()
+{
+	addSolarDays(-JD_MINUTE);
+}
+
 void StelCore::subtractHour()
 {
 	addSolarDays(-JD_HOUR);
@@ -1286,7 +1304,7 @@ void StelCore::subtractSiderealYear()
 {
 	double days = 365.256363004;
 	const PlanetP& home = position->getHomePlanet();
-	if ((home->getEnglishName() != "Solar System Observer") && (home->getSiderealPeriod()>0))
+	if (!home->getEnglishName().contains("Observer", Qt::CaseInsensitive) && (home->getSiderealPeriod()>0))
 		days = home->getSiderealPeriod();
 
 	addSolarDays(-days);
@@ -1296,7 +1314,7 @@ void StelCore::subtractSiderealYears(float n)
 {
 	double days = 365.256363004;
 	const PlanetP& home = position->getHomePlanet();
-	if ((home->getEnglishName() != "Solar System Observer") && (home->getSiderealPeriod()>0))
+	if (!home->getEnglishName().contains("Observer", Qt::CaseInsensitive) && (home->getSiderealPeriod()>0))
 		days = home->getSiderealPeriod();
 
 	addSolarDays(-days*n);
@@ -1372,7 +1390,7 @@ void StelCore::subtractJulianYears(float n)
 void StelCore::addSolarDays(double d)
 {
 	const PlanetP& home = position->getHomePlanet();
-	if (home->getEnglishName() != "Solar System Observer")	
+	if (!home->getEnglishName().contains("Observer", Qt::CaseInsensitive))
 		d *= home->getMeanSolarDay();
 
 	setJD(getJD() + d);
@@ -1381,7 +1399,7 @@ void StelCore::addSolarDays(double d)
 void StelCore::addSiderealDays(double d)
 {
 	const PlanetP& home = position->getHomePlanet();
-	if (home->getEnglishName() != "Solar System Observer")
+	if (!home->getEnglishName().contains("Observer", Qt::CaseInsensitive))
 		d *= home->getSiderealDay();
 	setJD(getJD() + d);
 }

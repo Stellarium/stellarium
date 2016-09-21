@@ -462,6 +462,8 @@ public slots:
 	//! Get time speed in JDay/sec
 	double getTimeRate() const;
 
+	void revertTimeDirection(void);
+
 	//! Increase the time speed
 	void increaseTimeSpeed();
 	//! Decrease the time speed
@@ -494,6 +496,8 @@ public slots:
 	//! Set the preset sky time from a QDateTime
 	void setPresetSkyTime(QDateTime dateTime);
 
+	//! Add one [Earth, solar] minute to the current simulation time.
+	void addMinute();
 	//! Add one [Earth, solar] hour to the current simulation time.
 	void addHour();
 	//! Add one [Earth, solar] day to the current simulation time.
@@ -513,6 +517,8 @@ public slots:
 	//! connected to orbital period of planets.
 	void addSiderealYears(float n=100.f);
 
+	//! Subtract one [Earth, solar] minute to the current simulation time.
+	void subtractMinute();
 	//! Subtract one [Earth, solar] hour to the current simulation time.
 	void subtractHour();
 	//! Subtract one [Earth, solar] day to the current simulation time.
