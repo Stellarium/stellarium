@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-18 17:17+0700\n"
+"POT-Creation-Date: 2016-09-21 19:47+0700\n"
 "PO-Revision-Date: 2016-09-13 08:32+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-09-20 06:27+0000\n"
-"X-Generator: Launchpad (build 18200)\n"
+"X-Launchpad-Export-Date: 2016-09-22 06:21+0000\n"
+"X-Generator: Launchpad (build 18204)\n"
 "Language: bn\n"
 
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:188
-#: src/core/modules/Planet.cpp:226 src/core/modules/MinorPlanet.cpp:213
+#: src/core/modules/Planet.cpp:229 src/core/modules/MinorPlanet.cpp:213
 #: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:192
 #: src/core/modules/StarWrapper.cpp:195
 #: plugins/Satellites/src/Satellite.cpp:269
@@ -36,7 +36,7 @@ msgstr "তারামণ্ডল"
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:433
 #: src/core/modules/GridLinesMgr.cpp:951 src/core/modules/LandscapeMgr.cpp:414
 #: src/core/modules/NebulaMgr.cpp:364 src/core/modules/NebulaMgr.cpp:365
-#: src/core/modules/SolarSystem.cpp:200 src/core/modules/MilkyWay.cpp:74
+#: src/core/modules/SolarSystem.cpp:203 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/StelApp.cpp:516
 #: src/core/StelCore.cpp:222 src/core/StelSkyLayerMgr.cpp:88
 #: src/StelMainView.cpp:575
@@ -266,7 +266,7 @@ msgstr "ধরন : <b>%1</b> (%2)"
 msgid "Opacity: <b>%1</b>"
 msgstr "স্বচ্ছতা : <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:232
+#: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:235
 #: src/core/modules/MinorPlanet.cpp:219 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:202
 #, qt-format
@@ -274,7 +274,7 @@ msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
 msgstr "ঔজ্জ্বল্যতা : <b>%1</b> (হ্রাস পেয়ে : <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
-#: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
+#: src/core/modules/Planet.cpp:238 src/core/modules/MinorPlanet.cpp:222
 #: src/core/modules/Comet.cpp:185 src/core/modules/StarWrapper.cpp:63
 #: src/core/modules/StarWrapper.cpp:205
 #: plugins/Supernovae/src/Supernova.cpp:137 plugins/Novae/src/Nova.cpp:144
@@ -737,89 +737,89 @@ msgstr "মহাজাগতিক জ্যোতিষ্ক"
 msgid "Toggle DSO type filter"
 msgstr "পছন্দসই মহাজাগতিক জ্যোতিষ্ক"
 
-#: src/core/modules/Planet.cpp:238 src/core/modules/MinorPlanet.cpp:232
+#: src/core/modules/Planet.cpp:241 src/core/modules/MinorPlanet.cpp:232
 #: src/core/modules/MinorPlanet.cpp:236 src/core/modules/Comet.cpp:194
 #: src/core/modules/StarWrapper.cpp:209 plugins/Quasars/src/Quasar.cpp:116
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "পরম ঔজ্জ্বল্যতা : %1"
 
-#: src/core/modules/Planet.cpp:258 src/core/modules/MinorPlanet.cpp:251
+#: src/core/modules/Planet.cpp:261 src/core/modules/MinorPlanet.cpp:251
 #: src/core/modules/Comet.cpp:208
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
 msgstr "সূর্য থেকে দূরত্ব : %1 জ্যোতির্বৈজ্ঞানিক একক (%2 কিমি)"
 
-#: src/core/modules/Planet.cpp:265 src/core/modules/MinorPlanet.cpp:258
+#: src/core/modules/Planet.cpp:268 src/core/modules/MinorPlanet.cpp:258
 #: src/core/modules/Comet.cpp:215
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
 msgstr "সূর্য থেকে দূরত্ব : %1 জ্যোতির্বৈজ্ঞানিক একক (%2 মিলিয়ন কিমি)"
 
-#: src/core/modules/Planet.cpp:275 src/core/modules/MinorPlanet.cpp:268
+#: src/core/modules/Planet.cpp:278 src/core/modules/MinorPlanet.cpp:268
 #: src/core/modules/Comet.cpp:226
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "দূরত্ব : %1 জ্যোতির্বৈজ্ঞানিক একক (%2 কিমি)"
 
-#: src/core/modules/Planet.cpp:282 src/core/modules/MinorPlanet.cpp:275
+#: src/core/modules/Planet.cpp:285 src/core/modules/MinorPlanet.cpp:275
 #: src/core/modules/Comet.cpp:233
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "দূরত্ব : %1 জ্যোতির্বৈজ্ঞানিক একক (%2 মিলিয়ন কিমি)"
 
-#: src/core/modules/Planet.cpp:296 src/core/modules/Planet.cpp:300
+#: src/core/modules/Planet.cpp:299 src/core/modules/Planet.cpp:303
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "অাপাত ব্যাস : %1, বলয় সহ : %2"
 
-#: src/core/modules/Planet.cpp:307 src/core/modules/Planet.cpp:309
+#: src/core/modules/Planet.cpp:310 src/core/modules/Planet.cpp:312
 #: src/core/modules/MinorPlanet.cpp:286 src/core/modules/MinorPlanet.cpp:288
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "আপাত ব্যাস : %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:325 src/core/modules/MinorPlanet.cpp:296
+#: src/core/modules/Planet.cpp:328 src/core/modules/MinorPlanet.cpp:296
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "বার্ষিক গতি : %1 দিন (বা %2 বছর)"
 
-#: src/core/modules/Planet.cpp:328
+#: src/core/modules/Planet.cpp:331
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "আহ্নিক গতি : %1"
 
-#: src/core/modules/Planet.cpp:329
+#: src/core/modules/Planet.cpp:332
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "গড় সৌর দিন : %1"
 
-#: src/core/modules/Planet.cpp:333
+#: src/core/modules/Planet.cpp:336
 msgid "The period of rotation is chaotic"
 msgstr "আবর্তন কাল খুব অনিয়মিত"
 
-#: src/core/modules/Planet.cpp:343 src/core/modules/Planet.cpp:348
+#: src/core/modules/Planet.cpp:346 src/core/modules/Planet.cpp:351
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "পূর্ণকলার কৌনিক অবস্থান : %1"
 
-#: src/core/modules/Planet.cpp:344 src/core/modules/Planet.cpp:349
+#: src/core/modules/Planet.cpp:347 src/core/modules/Planet.cpp:352
 #, qt-format
 msgid "Elongation: %1"
 msgstr "দ্রাঘন বা সূর্যের থেকে কৌনিক দূরত্ব : %1"
 
-#: src/core/modules/Planet.cpp:352
+#: src/core/modules/Planet.cpp:355
 #, qt-format
 msgid "Phase: %1"
 msgstr "দৃশ্যমান অংশ বা কলা : %1 অংশ"
 
-#: src/core/modules/Planet.cpp:353
+#: src/core/modules/Planet.cpp:356
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "দৃশ্যমান ঔজ্জ্বল্যতা : %1%"
 
-#: src/core/modules/Planet.cpp:365
+#: src/core/modules/Planet.cpp:368
 #, qt-format
 msgid "Eclipse Factor: %1%"
 msgstr "গ্রহণের পরিমান : %1%"
@@ -861,31 +861,31 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "গ্যাসীয় লেজটির দৈর্ঘ্য (আনুমানিক) : %1 মিলিয়ন কিমি"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:201 src/gui/AstroCalcDialog.cpp:522
+#: src/core/modules/SolarSystem.cpp:204 src/gui/AstroCalcDialog.cpp:522
 #: src/translations.h:66
 msgid "Planets"
 msgstr "গ্রহ"
 
-#: src/core/modules/SolarSystem.cpp:202
+#: src/core/modules/SolarSystem.cpp:205
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:316
 msgid "Planet labels"
 msgstr "গ্রহের নাম"
 
-#: src/core/modules/SolarSystem.cpp:203
+#: src/core/modules/SolarSystem.cpp:206
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Planet orbits"
 msgstr "গ্রহের কক্ষপথ"
 
-#: src/core/modules/SolarSystem.cpp:204
+#: src/core/modules/SolarSystem.cpp:207
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:324
 msgid "Planet trails"
 msgstr "গ্রহের গমনপথ"
 
-#: src/core/modules/SolarSystem.cpp:206
+#: src/core/modules/SolarSystem.cpp:209
 msgid "Planet markers"
 msgstr "গ্রহের অবস্থান"
 
-#: src/core/modules/SolarSystem.cpp:208
+#: src/core/modules/SolarSystem.cpp:211
 msgid "Native planet names (from starlore)"
 msgstr "গ্রহের আঞ্চলিক নাম ব্যবহার"
 
@@ -1026,183 +1026,195 @@ msgid "Set time rate to zero"
 msgstr "সময় থামান"
 
 #: src/core/StelCore.cpp:230
+msgid "Set reverse time direction"
+msgstr ""
+
+#: src/core/StelCore.cpp:231
 msgid "Set time to now"
 msgstr "বর্তমান সময়ে ফিরুন"
 
-#: src/core/StelCore.cpp:231
+#: src/core/StelCore.cpp:232
+msgid "Add 1 solar minute"
+msgstr ""
+
+#: src/core/StelCore.cpp:233
 msgid "Add 1 solar hour"
 msgstr "সূর্যঘড়ি অনুসারে এক ঘন্টা এগিয়ে যান"
 
-#: src/core/StelCore.cpp:232
+#: src/core/StelCore.cpp:234
 msgid "Add 1 solar day"
 msgstr "সূর্যঘড়ি অনুসারে এক দিন এগিয়ে যান"
 
-#: src/core/StelCore.cpp:233
+#: src/core/StelCore.cpp:235
 msgid "Add 7 solar days"
 msgstr "সূর্যঘড়ি অনুসারে ৭ দিন এগিয়ে যান"
 
-#: src/core/StelCore.cpp:234
+#: src/core/StelCore.cpp:236
+msgid "Subtract 1 solar minute"
+msgstr ""
+
+#: src/core/StelCore.cpp:237
 msgid "Subtract 1 solar hour"
 msgstr "সূর্যঘড়ি অনুসারে এক ঘন্টা পিছিয়ে যান"
 
-#: src/core/StelCore.cpp:235
+#: src/core/StelCore.cpp:238
 msgid "Subtract 1 solar day"
 msgstr "সূর্যঘড়ি অনুসারে এক দিন পিছিয়ে যান"
 
-#: src/core/StelCore.cpp:236
+#: src/core/StelCore.cpp:239
 msgid "Subtract 7 solar days"
 msgstr "সূর্যঘড়ি অনুসারে ৭ দিন পিছিয়ে যান"
 
-#: src/core/StelCore.cpp:237
+#: src/core/StelCore.cpp:240
 msgid "Add 1 sidereal day"
 msgstr "আহ্নিক গতি অনুসারে এক ঘন্টা এগিয়ে যান"
 
-#: src/core/StelCore.cpp:238
+#: src/core/StelCore.cpp:241
 msgid "Add 1 sidereal year"
 msgstr "বার্ষিক গতি অনুসারে এক বছর এগিয়ে যান"
 
-#: src/core/StelCore.cpp:239
+#: src/core/StelCore.cpp:242
 msgid "Add 100 sidereal years"
 msgstr "বার্ষিক গতি অনুসারে ১০০ বছর এগিয়ে যান"
 
-#: src/core/StelCore.cpp:240
+#: src/core/StelCore.cpp:243
 msgid "Add 1 synodic month"
 msgstr "চন্দ্রকলা অনুসারে এক মাস এগিয়ে যান"
 
-#: src/core/StelCore.cpp:241
+#: src/core/StelCore.cpp:244
 msgid "Add 1 draconic month"
 msgstr "চন্দ্রায়ণ অনুসারে এক মাস এগিয়ে যান"
 
-#: src/core/StelCore.cpp:242
+#: src/core/StelCore.cpp:245
 msgid "Add 1 draconic year"
 msgstr "চন্দ্রায়ণ অনুসারে এক বছর এগিয়ে যান"
 
-#: src/core/StelCore.cpp:243
+#: src/core/StelCore.cpp:246
 msgid "Add 1 anomalistic month"
 msgstr "চাঁদের দূরত্ব নির্ভর এক মাস এগিয়ে যান"
 
-#: src/core/StelCore.cpp:244
+#: src/core/StelCore.cpp:247
 msgid "Add 1 anomalistic year"
 msgstr "চাঁদের দূরত্ব নির্ভর এক বছর এগিয়ে যান"
 
-#: src/core/StelCore.cpp:245
+#: src/core/StelCore.cpp:248
 msgid "Add 100 anomalistic years"
 msgstr "চাঁদের দূরত্ব নির্ভর ১০০ বছর এগিয়ে যান"
 
-#: src/core/StelCore.cpp:246
+#: src/core/StelCore.cpp:249
 msgid "Add 1 mean tropical month"
 msgstr "সূর্যায়ণ অনুসারে এক মাস এগিয়ে যান"
 
-#: src/core/StelCore.cpp:247
+#: src/core/StelCore.cpp:250
 msgid "Add 1 mean tropical year"
 msgstr "সূর্যায়ণ অনুসারে এক বছর এগিয়ে যান"
 
-#: src/core/StelCore.cpp:248
+#: src/core/StelCore.cpp:251
 msgid "Add 100 mean tropical years"
 msgstr "সূর্যায়ণ অনুসারে ১০০ বছর এগিয়ে যান"
 
-#: src/core/StelCore.cpp:249
+#: src/core/StelCore.cpp:252
 msgid "Add 1 tropical year"
 msgstr "সূর্যায়ণ অনুসারে এক বছর এগিয়ে যান"
 
-#: src/core/StelCore.cpp:250
+#: src/core/StelCore.cpp:253
 msgid "Add 1 Julian year"
 msgstr "জুলিয়ান ক্যালেন্ডার অনুযায়ী এক বছর এগিয়ে যান"
 
-#: src/core/StelCore.cpp:251
+#: src/core/StelCore.cpp:254
 msgid "Add 1 Julian century"
 msgstr "জুলিয়ান ক্যালেন্ডার অনুযায়ী এক শতাব্দী এগিয়ে যান"
 
-#: src/core/StelCore.cpp:252
+#: src/core/StelCore.cpp:255
 msgid "Add 1 Gaussian year"
 msgstr "গসিয়ান ক্যালেন্ডার অনুযায়ী এক বছর এগিয়ে যান"
 
-#: src/core/StelCore.cpp:253
+#: src/core/StelCore.cpp:256
 msgid "Subtract 1 sidereal day"
 msgstr "আহ্নিক গতি অনুসারে এক দিন পিছিয়ে যান"
 
-#: src/core/StelCore.cpp:254
+#: src/core/StelCore.cpp:257
 msgid "Subtract 1 sidereal year"
 msgstr "বার্ষিক গতি অনুসারে এক বছর পিছিয়ে যান"
 
-#: src/core/StelCore.cpp:255
+#: src/core/StelCore.cpp:258
 msgid "Subtract 100 sidereal years"
 msgstr "বার্ষিক গতি অনুসারে ১০০ বছর পিছিয়ে যান"
 
-#: src/core/StelCore.cpp:256
+#: src/core/StelCore.cpp:259
 msgid "Subtract 1 synodic month"
 msgstr "চন্দ্রকলা অনুসারে এক মাস পিছিয়ে যান"
 
-#: src/core/StelCore.cpp:257
+#: src/core/StelCore.cpp:260
 msgid "Subtract 1 draconic month"
 msgstr "চন্দ্রায়ণ অনুসারে এক মাস পিছিয়ে যান"
 
-#: src/core/StelCore.cpp:258
+#: src/core/StelCore.cpp:261
 msgid "Subtract 1 draconic year"
 msgstr "চন্দ্রায়ণ অনুসারে এক বছর পিছিয়ে যান"
 
-#: src/core/StelCore.cpp:259
+#: src/core/StelCore.cpp:262
 msgid "Subtract 1 anomalistic month"
 msgstr "চাঁদের দূরত্ব নির্ভর এক মাস পিছিয়ে যান"
 
-#: src/core/StelCore.cpp:260
+#: src/core/StelCore.cpp:263
 msgid "Subtract 1 anomalistic year"
 msgstr "চাঁদের দূরত্ব নির্ভর এক বছর পিছিয়ে যান"
 
-#: src/core/StelCore.cpp:261
+#: src/core/StelCore.cpp:264
 msgid "Subtract 100 anomalistic years"
 msgstr "চাঁদের দূরত্ব নির্ভর ১০০ বছর পিছিয়ে যান"
 
-#: src/core/StelCore.cpp:262
+#: src/core/StelCore.cpp:265
 msgid "Subtract 1 mean tropical month"
 msgstr "সূর্যায়ণ অনুসারে এক মাস পিছিয়ে যান"
 
-#: src/core/StelCore.cpp:263
+#: src/core/StelCore.cpp:266
 msgid "Subtract 1 mean tropical year"
 msgstr "সূর্যায়ণ অনুসারে এক বছর পিছিয়ে যান"
 
-#: src/core/StelCore.cpp:264
+#: src/core/StelCore.cpp:267
 msgid "Subtract 100 mean tropical years"
 msgstr "সূর্যায়ণ অনুসারে ১০০ বছর পিছিয়ে যান"
 
-#: src/core/StelCore.cpp:265
+#: src/core/StelCore.cpp:268
 msgid "Subtract 1 tropical year"
 msgstr "সূর্যায়ণ অনুসারে এক বছর পিছিয়ে যান"
 
-#: src/core/StelCore.cpp:266
+#: src/core/StelCore.cpp:269
 msgid "Subtract 1 Julian year"
 msgstr "জুলিয়ান ক্যালেন্ডার অনুযায়ী এক বছর পিছিয়ে যান"
 
-#: src/core/StelCore.cpp:267
+#: src/core/StelCore.cpp:270
 msgid "Subtract 1 Julian century"
 msgstr "জুলিয়ান ক্যালেন্ডার অনুযায়ী এক শতাব্দী পিছিয়ে যান"
 
-#: src/core/StelCore.cpp:268
+#: src/core/StelCore.cpp:271
 msgid "Subtract 1 Gaussian year"
 msgstr "গসিয়ান ক্যালেন্ডার অনুযায়ী এক বছর পিছিয়ে যান"
 
-#: src/core/StelCore.cpp:270
+#: src/core/StelCore.cpp:273
 msgid "Set home planet to selected planet"
 msgstr "নির্বাচিত গ্রহটি বাড়ি হিসাবে নির্বাচন"
 
-#: src/core/StelCore.cpp:271
+#: src/core/StelCore.cpp:274
 msgid "Go to home"
 msgstr "নিজ স্থানে প্রত্যাবর্তন করুন"
 
-#: src/core/StelCore.cpp:273
+#: src/core/StelCore.cpp:276
 msgid "Flip scene horizontally"
 msgstr "আড়াআড়ি ভাবে দৃশ্যপট ঘোরান"
 
-#: src/core/StelCore.cpp:274
+#: src/core/StelCore.cpp:277
 msgid "Flip scene vertically"
 msgstr "লম্বালম্বিভাবে দৃশ্যপট ঘোরান"
 
-#: src/core/StelCore.cpp:1775
+#: src/core/StelCore.cpp:1793
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "সংশোধন প্রনালি নিস্ক্রিয় করা আছে । সম্যক ধারণা থাকলে তবেই সক্রিয় করুন ।"
 
-#: src/core/StelCore.cpp:1778
+#: src/core/StelCore.cpp:1796
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1214,7 +1226,7 @@ msgstr ""
 "(%1) নামক প্রবন্ধে এটি ব্যবহার করেছেন । বিস্তারিত তথ্য জানতে %2এখানে%3 দেখুন "
 "।"
 
-#: src/core/StelCore.cpp:1781
+#: src/core/StelCore.cpp:1799
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1223,7 +1235,7 @@ msgstr ""
 "এই বিখ্যাত সূত্রটি G. M. Clemence তাঁর  <em>On the system of astronomical "
 "constants</em> (%1) নামক প্রবন্ধে প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1784
+#: src/core/StelCore.cpp:1802
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1236,7 +1248,7 @@ msgstr ""
 "<em>Astronomical Formulae for Calculators</em> নামক প্রবন্ধে এটি ব্যবহার "
 "করেছেন ।"
 
-#: src/core/StelCore.cpp:1788
+#: src/core/StelCore.cpp:1806
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1246,7 +1258,7 @@ msgstr ""
 "প্রবর্তিত <em>জ্যোতির্বৈজ্ঞানিক পঞ্জিকা</em> ও <em>Canon of Solar "
 "Eclipses</em> নামক প্রবন্ধে গৃহীত হয়েছে ।"
 
-#: src/core/StelCore.cpp:1792
+#: src/core/StelCore.cpp:1810
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1258,7 +1270,7 @@ msgstr ""
 "তালিকা দেওয়া আছে । এই একই সম্পর্ক Goldstine (১৯৭৩) প্রবর্তিত syzygy ছকেও "
 "গৃহিত হয়েছে ।"
 
-#: src/core/StelCore.cpp:1796
+#: src/core/StelCore.cpp:1814
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1269,7 +1281,7 @@ msgstr ""
 "observations</em> (%1) নামক প্রবন্ধে P. M. Muller এবং F. R. Stephenson এই "
 "সমীকরনটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1799
+#: src/core/StelCore.cpp:1817
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1278,7 +1290,7 @@ msgstr ""
 "<em>Pre-Telescopic Astronomical Observations</em> (%1) নামক প্রবন্ধে P. M. "
 "Muller এবং F. R. Stephenson এই সমীকরনটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1802
+#: src/core/StelCore.cpp:1820
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1292,7 +1304,7 @@ msgstr ""
 "period 1800-1975</em> (%1) নামক প্রবন্ধে L. D. Schmadel এবং G. Zech প্রকাশ "
 "করেন ।"
 
-#: src/core/StelCore.cpp:1805
+#: src/core/StelCore.cpp:1823
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1302,7 +1314,7 @@ msgstr ""
 "and Tables from -4000 to +2800</em> (১৯৮৬) ও RedShift নামক কম্পিউটার "
 "প্রোগ্রামে গৃহিত হয়েছে ।"
 
-#: src/core/StelCore.cpp:1808
+#: src/core/StelCore.cpp:1826
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1313,13 +1325,13 @@ msgstr ""
 "rotation of the earth - 700 B.C. to A.D. 1980</em> (%1) নামক প্রবন্ধে এই "
 "সূত্রটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1811
+#: src/core/StelCore.cpp:1829
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "Guide নামক কম্পিউটার প্রোগ্রামের ৭ম সংস্করণে এই কার্যপ্রনালীটি ব্যবহৃত হয়েছে "
 "।"
 
-#: src/core/StelCore.cpp:1814
+#: src/core/StelCore.cpp:1832
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -1329,7 +1341,7 @@ msgstr ""
 "Year Canon of Lunar Eclipses: 1986-2035</em> (১৯৮৯) নামক প্রবন্ধে F. Espenak "
 "এই কার্যপ্রনালীটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1817
+#: src/core/StelCore.cpp:1835
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -1338,7 +1350,7 @@ msgstr ""
 "২১৩৭ খ্রীষ্টপূর্বাব্দ থেকে ১৭১৫ খ্রীষ্টাব্দ পর্যন্ত ঘটা সূর্যগ্রহণগুলির "
 "মধ্যের ৩১টির সংগৃহিত তথ্য থেকে K.M. Borkowski (%1) এই সূত্রটি তৈরী করেছেন ।"
 
-#: src/core/StelCore.cpp:1820
+#: src/core/StelCore.cpp:1838
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1350,7 +1362,7 @@ msgstr ""
 "সমীকরনটি <em>Empirical Transformations from U.T. to E.T. for the Period 1800-"
 "1988</em> (%1) নামক প্রবন্ধে L. D. Schmadel এবং G. Zech প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1823
+#: src/core/StelCore.cpp:1841
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -1360,7 +1372,7 @@ msgstr ""
 "4000 B.C. to A.D. 8000</em> (১৯৯১) প্রবন্ধে চাঁদ সংক্রান্ত ELP 2000-85 "
 "মতবাদের সংক্ষিপ্ত রূপটিতে এই সূত্রটি গৃহিত হয়েছে ।"
 
-#: src/core/StelCore.cpp:1826
+#: src/core/StelCore.cpp:1844
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1371,7 +1383,7 @@ msgstr ""
 "Earth's Rotation: 700 BC to AD 1990</em> (%1) নামক প্রবন্ধে এই সূত্রটি "
 "প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1829
+#: src/core/StelCore.cpp:1847
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1380,7 +1392,7 @@ msgstr ""
 "F. R. Stephenson তাঁর রচিত<em>Historical Eclipses and Earth's Rotation</em> "
 "(%1) বইয়ে এই সূত্রটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1832
+#: src/core/StelCore.cpp:1850
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1391,7 +1403,7 @@ msgstr ""
 "তালিকা ও তার বাইরের দিনগুলির জন্য Chapront, Chapront-Touze এবং Francou "
 "(১৯৯৭) প্রবর্তিত অপেক্ষক যোগ করা হয়েছে ।"
 
-#: src/core/StelCore.cpp:1835
+#: src/core/StelCore.cpp:1853
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1400,7 +1412,7 @@ msgstr ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "তার ওয়েবসাইট %1JPL Horizons%2 এ এই সূত্র ব্যবহার করে ।"
 
-#: src/core/StelCore.cpp:1838
+#: src/core/StelCore.cpp:1856
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1409,7 +1421,7 @@ msgstr ""
 "J. Meeus এবং L. Simons তাঁদের প্রবন্ধ <em>Polynomial approximations to Delta "
 "T, 1620-2000 AD</em> (%1) তে এই বহুপদী সমীকরনটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1841
+#: src/core/StelCore.cpp:1859
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1419,7 +1431,7 @@ msgstr ""
 "রচিত <em>Astronomy on the Personal Computer</em> (২০০০) এর ৪র্থ সংস্করণে "
 "পাওয়া যায় ।"
 
-#: src/core/StelCore.cpp:1844
+#: src/core/StelCore.cpp:1862
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1431,7 +1443,7 @@ msgstr ""
 "Tabulations</em> (২০০২) এ প্রকাশ করেন । যদিও এটির ভিত্তি Jean Meeus এর "
 "<em>Astronomical Algorithms</em> (১৯৯১) ।"
 
-#: src/core/StelCore.cpp:1847
+#: src/core/StelCore.cpp:1865
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1442,7 +1454,7 @@ msgstr ""
 "the Earth's clock error %1T and the calculation of eclipses</em> (%2) এর "
 "একটি সংযোজনে (%3) এই গুরুত্বপূর্ণ সমাধানটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1850
+#: src/core/StelCore.cpp:1868
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1456,7 +1468,7 @@ msgstr ""
 "পর্যায়বৃত্তির উপর ভিত্তি করে নির্ণয় করা হয়েছে । আরও তথ্যের জন্য %3এখানে%4 "
 "দেখুন ।"
 
-#: src/core/StelCore.cpp:1853 src/core/StelCore.cpp:1856
+#: src/core/StelCore.cpp:1871 src/core/StelCore.cpp:1874
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1472,15 +1484,15 @@ msgstr ""
 "গ্রহ উপগ্রহ ইত্যাদির পঞ্জিকা নির্ণয়ের জন্য ব্যবহৃত SOLEX নামক একটি "
 "প্রোগ্রামে এটি ব্যবহার করা হয়েছে ।"
 
-#: src/core/StelCore.cpp:1853
+#: src/core/StelCore.cpp:1871
 msgid "Used by default."
 msgstr "প্রারম্ভিক সূচনা হিসেবে ব্যবহার করা হয়ে থাকে ।"
 
-#: src/core/StelCore.cpp:1856
+#: src/core/StelCore.cpp:1874
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "সংযোজিত সংস্করণ, চন্দ্র জনিত অতিরিক্ত ত্বরণ উপেক্ষিত"
 
-#: src/core/StelCore.cpp:1859
+#: src/core/StelCore.cpp:1877
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1491,7 +1503,7 @@ msgstr ""
 "<em>Ancient eclipses and dating the fall of Babylon</em> (%1) প্রবন্ধে "
 "প্রকাশিত হয় ।"
 
-#: src/core/StelCore.cpp:1862
+#: src/core/StelCore.cpp:1880
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1503,7 +1515,7 @@ msgstr ""
 "DeltaT</em> (%1) প্রবন্ধে প্রকাশিত হয় যা ২০১৩ সালে Sana Islam পুনরুত্থাপন "
 "করেন ।"
 
-#: src/core/StelCore.cpp:1865
+#: src/core/StelCore.cpp:1883
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1514,7 +1526,7 @@ msgstr ""
 "<em>Delta T: Polynomial Approximation of Time Period 1620-2013</em> (%1) "
 "নামক প্রবন্ধে প্রকাশ করেন । এটিতেমাত্র ০.৬ সেকেন্ডের এদিক ওদিক হয় ।"
 
-#: src/core/StelCore.cpp:1868
+#: src/core/StelCore.cpp:1886
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1522,15 +1534,15 @@ msgid ""
 msgstr ""
 "এটি %1T নির্ণয় করার জন্য ব্যবহারকারী প্রদত্ত সহগ যুক্ত দ্বিঘাত সমীকরন ।"
 
-#: src/core/StelCore.cpp:1871 src/core/SimbadSearcher.cpp:156
+#: src/core/StelCore.cpp:1889 src/core/SimbadSearcher.cpp:156
 msgid "Error"
 msgstr "ত্রুটি"
 
-#: src/core/StelCore.cpp:1921
+#: src/core/StelCore.cpp:1939
 msgid "with meaningless values outside this range"
 msgstr "এই সীমার বাইরের মানগুলি অর্থহীন যা কোন কাজের নয়"
 
-#: src/core/StelCore.cpp:1947
+#: src/core/StelCore.cpp:1965
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -1538,24 +1550,24 @@ msgstr ""
 "গড়ে সর্বনিম্ন ১ সেকেন্ড ও সর্বোচ্চ ১.৯ সেকেন্ড ত্রুটি থাকতে পারে এবং এই "
 "সীমার বাইরের মানগুলি অর্থহীন যা কোন কাজের নয়"
 
-#: src/core/StelCore.cpp:1969 src/core/StelCore.cpp:1974
-#: src/core/StelCore.cpp:2002 src/core/StelCore.cpp:2007
-#: src/core/StelCore.cpp:2012
+#: src/core/StelCore.cpp:1987 src/core/StelCore.cpp:1992
+#: src/core/StelCore.cpp:2020 src/core/StelCore.cpp:2025
+#: src/core/StelCore.cpp:2030
 msgid "with zero values outside this range"
 msgstr "এই সীমার বাইরের মান সবসময় শূন্য হয়"
 
-#: src/core/StelCore.cpp:1979
+#: src/core/StelCore.cpp:1997
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "সচরাচর হিসাবে ১ সেকেন্ডেরও কম ত্রুটি থাকে এবং এই সীমার বাইরের মান সবসময় "
 "শূন্য হয়"
 
-#: src/core/StelCore.cpp:2022
+#: src/core/StelCore.cpp:2040
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "ব্যবহারিক সীমা : %1 থেকে %2 বছরের মধ্যে , %3 ।"
 
-#: src/core/StelCore.cpp:2024
+#: src/core/StelCore.cpp:2042
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "ব্যবহারিক সীমা : %1 থেকে %2 বছরের মধ্যে ।"

@@ -7,20 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-18 17:17+0700\n"
+"POT-Creation-Date: 2016-09-21 19:47+0700\n"
 "PO-Revision-Date: 2016-09-06 18:27+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-09-20 06:26+0000\n"
-"X-Generator: Launchpad (build 18200)\n"
+"X-Launchpad-Export-Date: 2016-09-22 06:21+0000\n"
+"X-Generator: Launchpad (build 18204)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:188
-#: src/core/modules/Planet.cpp:226 src/core/modules/MinorPlanet.cpp:213
+#: src/core/modules/Planet.cpp:229 src/core/modules/MinorPlanet.cpp:213
 #: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:192
 #: src/core/modules/StarWrapper.cpp:195
 #: plugins/Satellites/src/Satellite.cpp:269
@@ -37,7 +37,7 @@ msgstr "сузор'е"
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:433
 #: src/core/modules/GridLinesMgr.cpp:951 src/core/modules/LandscapeMgr.cpp:414
 #: src/core/modules/NebulaMgr.cpp:364 src/core/modules/NebulaMgr.cpp:365
-#: src/core/modules/SolarSystem.cpp:200 src/core/modules/MilkyWay.cpp:74
+#: src/core/modules/SolarSystem.cpp:203 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/StelApp.cpp:516
 #: src/core/StelCore.cpp:222 src/core/StelSkyLayerMgr.cpp:88
 #: src/StelMainView.cpp:575
@@ -267,7 +267,7 @@ msgstr "Тып: <b>%1</b> (%2)"
 msgid "Opacity: <b>%1</b>"
 msgstr "<bНепразрыстасьць: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:232
+#: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:235
 #: src/core/modules/MinorPlanet.cpp:219 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:202
 #, qt-format
@@ -275,7 +275,7 @@ msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
 msgstr "Велічыня: <b>%1</b> (пасьля гашэньня: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
-#: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
+#: src/core/modules/Planet.cpp:238 src/core/modules/MinorPlanet.cpp:222
 #: src/core/modules/Comet.cpp:185 src/core/modules/StarWrapper.cpp:63
 #: src/core/modules/StarWrapper.cpp:205
 #: plugins/Supernovae/src/Supernova.cpp:137 plugins/Novae/src/Nova.cpp:144
@@ -738,89 +738,89 @@ msgstr "Аб'екты глыбокага космасу"
 msgid "Toggle DSO type filter"
 msgstr "Укл/выкл фільтар тыпаў АГК"
 
-#: src/core/modules/Planet.cpp:238 src/core/modules/MinorPlanet.cpp:232
+#: src/core/modules/Planet.cpp:241 src/core/modules/MinorPlanet.cpp:232
 #: src/core/modules/MinorPlanet.cpp:236 src/core/modules/Comet.cpp:194
 #: src/core/modules/StarWrapper.cpp:209 plugins/Quasars/src/Quasar.cpp:116
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Абсалютная велічыня: %1"
 
-#: src/core/modules/Planet.cpp:258 src/core/modules/MinorPlanet.cpp:251
+#: src/core/modules/Planet.cpp:261 src/core/modules/MinorPlanet.cpp:251
 #: src/core/modules/Comet.cpp:208
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
 msgstr "Адлегласьць ад Сонца: %1 АА (%2 км)"
 
-#: src/core/modules/Planet.cpp:265 src/core/modules/MinorPlanet.cpp:258
+#: src/core/modules/Planet.cpp:268 src/core/modules/MinorPlanet.cpp:258
 #: src/core/modules/Comet.cpp:215
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
 msgstr "Адлегласьць ад Сонца: %1 АА (%2 млн км)"
 
-#: src/core/modules/Planet.cpp:275 src/core/modules/MinorPlanet.cpp:268
+#: src/core/modules/Planet.cpp:278 src/core/modules/MinorPlanet.cpp:268
 #: src/core/modules/Comet.cpp:226
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Адлегласьць: %1 а.а. (%2 км)"
 
-#: src/core/modules/Planet.cpp:282 src/core/modules/MinorPlanet.cpp:275
+#: src/core/modules/Planet.cpp:285 src/core/modules/MinorPlanet.cpp:275
 #: src/core/modules/Comet.cpp:233
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "Адлегласьць: %1 АА (%2 млн км)"
 
-#: src/core/modules/Planet.cpp:296 src/core/modules/Planet.cpp:300
+#: src/core/modules/Planet.cpp:299 src/core/modules/Planet.cpp:303
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "Бачны дыямэтар: %1, з кольцамі: %2"
 
-#: src/core/modules/Planet.cpp:307 src/core/modules/Planet.cpp:309
+#: src/core/modules/Planet.cpp:310 src/core/modules/Planet.cpp:312
 #: src/core/modules/MinorPlanet.cpp:286 src/core/modules/MinorPlanet.cpp:288
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Бачны дыямэтар: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:325 src/core/modules/MinorPlanet.cpp:296
+#: src/core/modules/Planet.cpp:328 src/core/modules/MinorPlanet.cpp:296
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "Зоркавы пэрыяд: %1 дзён (%2 a)"
 
-#: src/core/modules/Planet.cpp:328
+#: src/core/modules/Planet.cpp:331
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "Зоркавы дзень: %1"
 
-#: src/core/modules/Planet.cpp:329
+#: src/core/modules/Planet.cpp:332
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "Сярэдні сонечны дзень: %1"
 
-#: src/core/modules/Planet.cpp:333
+#: src/core/modules/Planet.cpp:336
 msgid "The period of rotation is chaotic"
 msgstr "Пэрыяд авароту хаатычны"
 
-#: src/core/modules/Planet.cpp:343 src/core/modules/Planet.cpp:348
+#: src/core/modules/Planet.cpp:346 src/core/modules/Planet.cpp:351
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Фазавы вугал: %1"
 
-#: src/core/modules/Planet.cpp:344 src/core/modules/Planet.cpp:349
+#: src/core/modules/Planet.cpp:347 src/core/modules/Planet.cpp:352
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Эланґацыя: %1"
 
-#: src/core/modules/Planet.cpp:352
+#: src/core/modules/Planet.cpp:355
 #, qt-format
 msgid "Phase: %1"
 msgstr "Фаза: %1"
 
-#: src/core/modules/Planet.cpp:353
+#: src/core/modules/Planet.cpp:356
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Асьветлены: %1%"
 
-#: src/core/modules/Planet.cpp:365
+#: src/core/modules/Planet.cpp:368
 #, qt-format
 msgid "Eclipse Factor: %1%"
 msgstr "Каэфіцыент зацьменьня: %1%"
@@ -862,31 +862,31 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "Даўжыня ґазавага хваста (ацэнка): %1 Mio км"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:201 src/gui/AstroCalcDialog.cpp:522
+#: src/core/modules/SolarSystem.cpp:204 src/gui/AstroCalcDialog.cpp:522
 #: src/translations.h:66
 msgid "Planets"
 msgstr "Плянэты"
 
-#: src/core/modules/SolarSystem.cpp:202
+#: src/core/modules/SolarSystem.cpp:205
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:316
 msgid "Planet labels"
 msgstr "Назвы плянэт"
 
-#: src/core/modules/SolarSystem.cpp:203
+#: src/core/modules/SolarSystem.cpp:206
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Planet orbits"
 msgstr "Арбіты плянэтаў"
 
-#: src/core/modules/SolarSystem.cpp:204
+#: src/core/modules/SolarSystem.cpp:207
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:324
 msgid "Planet trails"
 msgstr "Сьляды плянэтаў"
 
-#: src/core/modules/SolarSystem.cpp:206
+#: src/core/modules/SolarSystem.cpp:209
 msgid "Planet markers"
 msgstr "Пазнакі плянэт"
 
-#: src/core/modules/SolarSystem.cpp:208
+#: src/core/modules/SolarSystem.cpp:211
 msgid "Native planet names (from starlore)"
 msgstr "Родныя назвы плянэт (з зоркавых ведаў)"
 
@@ -1027,183 +1027,195 @@ msgid "Set time rate to zero"
 msgstr "Зрабіць хуткасьць часу нулявой"
 
 #: src/core/StelCore.cpp:230
+msgid "Set reverse time direction"
+msgstr ""
+
+#: src/core/StelCore.cpp:231
 msgid "Set time to now"
 msgstr "Вернуцца да цяперашняга часу"
 
-#: src/core/StelCore.cpp:231
+#: src/core/StelCore.cpp:232
+msgid "Add 1 solar minute"
+msgstr ""
+
+#: src/core/StelCore.cpp:233
 msgid "Add 1 solar hour"
 msgstr "Наперад на 1 сонечную гадзіну"
 
-#: src/core/StelCore.cpp:232
+#: src/core/StelCore.cpp:234
 msgid "Add 1 solar day"
 msgstr "Наперад на 1 сонечны дзень"
 
-#: src/core/StelCore.cpp:233
+#: src/core/StelCore.cpp:235
 msgid "Add 7 solar days"
 msgstr "Дадаць 7 сонечных дзён"
 
-#: src/core/StelCore.cpp:234
+#: src/core/StelCore.cpp:236
+msgid "Subtract 1 solar minute"
+msgstr ""
+
+#: src/core/StelCore.cpp:237
 msgid "Subtract 1 solar hour"
 msgstr "Назад на 1 сонечную гадзіну"
 
-#: src/core/StelCore.cpp:235
+#: src/core/StelCore.cpp:238
 msgid "Subtract 1 solar day"
 msgstr "Назад на 1 сонечны дзень"
 
-#: src/core/StelCore.cpp:236
+#: src/core/StelCore.cpp:239
 msgid "Subtract 7 solar days"
 msgstr "Адняць 7 сонечных дзён"
 
-#: src/core/StelCore.cpp:237
+#: src/core/StelCore.cpp:240
 msgid "Add 1 sidereal day"
 msgstr "Наперад на 1 зоркавы дзень"
 
-#: src/core/StelCore.cpp:238
+#: src/core/StelCore.cpp:241
 msgid "Add 1 sidereal year"
 msgstr "Дадаць 1 зоркавы год"
 
-#: src/core/StelCore.cpp:239
+#: src/core/StelCore.cpp:242
 msgid "Add 100 sidereal years"
 msgstr "Дадаць 100 зоркавых гадоў"
 
-#: src/core/StelCore.cpp:240
+#: src/core/StelCore.cpp:243
 msgid "Add 1 synodic month"
 msgstr "Дадаць 1 сынадычны месяц"
 
-#: src/core/StelCore.cpp:241
+#: src/core/StelCore.cpp:244
 msgid "Add 1 draconic month"
 msgstr "Дадаць 1 драканічны месяц"
 
-#: src/core/StelCore.cpp:242
+#: src/core/StelCore.cpp:245
 msgid "Add 1 draconic year"
 msgstr "Дадаць 1 драканічны год"
 
-#: src/core/StelCore.cpp:243
+#: src/core/StelCore.cpp:246
 msgid "Add 1 anomalistic month"
 msgstr "Дадаць 1 анамалістычны месяц"
 
-#: src/core/StelCore.cpp:244
+#: src/core/StelCore.cpp:247
 msgid "Add 1 anomalistic year"
 msgstr "Дадаць 1 анамалістычны год"
 
-#: src/core/StelCore.cpp:245
+#: src/core/StelCore.cpp:248
 msgid "Add 100 anomalistic years"
 msgstr "Дадаць 100 анамалістычных гадоў"
 
-#: src/core/StelCore.cpp:246
+#: src/core/StelCore.cpp:249
 msgid "Add 1 mean tropical month"
 msgstr "Дадаць 1 сярэдні трапічны месяц"
 
-#: src/core/StelCore.cpp:247
+#: src/core/StelCore.cpp:250
 msgid "Add 1 mean tropical year"
 msgstr "Дадаць 1 сярэдні трапічны год"
 
-#: src/core/StelCore.cpp:248
+#: src/core/StelCore.cpp:251
 msgid "Add 100 mean tropical years"
 msgstr "Дадаць 100 сярэдніх трапічных стагодзьдзяў"
 
-#: src/core/StelCore.cpp:249
+#: src/core/StelCore.cpp:252
 msgid "Add 1 tropical year"
 msgstr "Дадаць 1 трапічны год"
 
-#: src/core/StelCore.cpp:250
+#: src/core/StelCore.cpp:253
 msgid "Add 1 Julian year"
 msgstr "Дадаць 1 юліянскі год"
 
-#: src/core/StelCore.cpp:251
+#: src/core/StelCore.cpp:254
 msgid "Add 1 Julian century"
 msgstr "Дадаць 1 юліянскае стагодзьдзе"
 
-#: src/core/StelCore.cpp:252
+#: src/core/StelCore.cpp:255
 msgid "Add 1 Gaussian year"
 msgstr "Дадаць 1 ґаўсіянскі год"
 
-#: src/core/StelCore.cpp:253
+#: src/core/StelCore.cpp:256
 msgid "Subtract 1 sidereal day"
 msgstr "Назад на 1 зоркавы дзень"
 
-#: src/core/StelCore.cpp:254
+#: src/core/StelCore.cpp:257
 msgid "Subtract 1 sidereal year"
 msgstr "Адняць 1 зоркавы год"
 
-#: src/core/StelCore.cpp:255
+#: src/core/StelCore.cpp:258
 msgid "Subtract 100 sidereal years"
 msgstr "Адняць 100 зоркавых гадоў"
 
-#: src/core/StelCore.cpp:256
+#: src/core/StelCore.cpp:259
 msgid "Subtract 1 synodic month"
 msgstr "Адняць 1 сынадычны месяц"
 
-#: src/core/StelCore.cpp:257
+#: src/core/StelCore.cpp:260
 msgid "Subtract 1 draconic month"
 msgstr "Адняць 1 драканічны месяц"
 
-#: src/core/StelCore.cpp:258
+#: src/core/StelCore.cpp:261
 msgid "Subtract 1 draconic year"
 msgstr "Адняць 1 драканічны год"
 
-#: src/core/StelCore.cpp:259
+#: src/core/StelCore.cpp:262
 msgid "Subtract 1 anomalistic month"
 msgstr "Адняць 1 анамалістычны месяц"
 
-#: src/core/StelCore.cpp:260
+#: src/core/StelCore.cpp:263
 msgid "Subtract 1 anomalistic year"
 msgstr "Адняць 1 анамалістычны год"
 
-#: src/core/StelCore.cpp:261
+#: src/core/StelCore.cpp:264
 msgid "Subtract 100 anomalistic years"
 msgstr "Адняць 100 анамалістычных гадоў"
 
-#: src/core/StelCore.cpp:262
+#: src/core/StelCore.cpp:265
 msgid "Subtract 1 mean tropical month"
 msgstr "Адняць 1 сярэдні трапічны месяц"
 
-#: src/core/StelCore.cpp:263
+#: src/core/StelCore.cpp:266
 msgid "Subtract 1 mean tropical year"
 msgstr "Адняць 1 сярэдні трапічны год"
 
-#: src/core/StelCore.cpp:264
+#: src/core/StelCore.cpp:267
 msgid "Subtract 100 mean tropical years"
 msgstr "Адняць 100 сярэдніх трапічных гадоў"
 
-#: src/core/StelCore.cpp:265
+#: src/core/StelCore.cpp:268
 msgid "Subtract 1 tropical year"
 msgstr "Адняць 1 трапічны год"
 
-#: src/core/StelCore.cpp:266
+#: src/core/StelCore.cpp:269
 msgid "Subtract 1 Julian year"
 msgstr "Адняць 1 юліянскі год"
 
-#: src/core/StelCore.cpp:267
+#: src/core/StelCore.cpp:270
 msgid "Subtract 1 Julian century"
 msgstr "Адняць 1 юліянскае стагодзьдзе"
 
-#: src/core/StelCore.cpp:268
+#: src/core/StelCore.cpp:271
 msgid "Subtract 1 Gaussian year"
 msgstr "Адняць 1 ґаўсіянскі год"
 
-#: src/core/StelCore.cpp:270
+#: src/core/StelCore.cpp:273
 msgid "Set home planet to selected planet"
 msgstr "Зрабіць выбраную плянэту «хатняй»"
 
-#: src/core/StelCore.cpp:271
+#: src/core/StelCore.cpp:274
 msgid "Go to home"
 msgstr "Дахаты"
 
-#: src/core/StelCore.cpp:273
+#: src/core/StelCore.cpp:276
 msgid "Flip scene horizontally"
 msgstr "Перакуліць сцэну гарызантальна"
 
-#: src/core/StelCore.cpp:274
+#: src/core/StelCore.cpp:277
 msgid "Flip scene vertically"
 msgstr "Перакуліць сцэну вэртыкальна"
 
-#: src/core/StelCore.cpp:1775
+#: src/core/StelCore.cpp:1793
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Выпраўленьне абязьдзейненае. Выкарыстоўвай толькі калі ведаеш што робіш!"
 
-#: src/core/StelCore.cpp:1778
+#: src/core/StelCore.cpp:1796
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1215,7 +1227,7 @@ msgstr ""
 "Айнштайна, пацьверджаная даўнімі зацьменнямі Сонца</em> (%1). Болей зьвестак "
 "глядзі %2тут%3."
 
-#: src/core/StelCore.cpp:1781
+#: src/core/StelCore.cpp:1799
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1224,7 +1236,7 @@ msgstr ""
 "Гэтая эмпірычная формула была апублікаваная Дж.М. Клемэнсам у артыкуле "
 "<em>Наконт сыстэмы астранамічных канстантаў</em> (%1)."
 
-#: src/core/StelCore.cpp:1784
+#: src/core/StelCore.cpp:1802
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1238,7 +1250,7 @@ msgstr ""
 "калькулятараў</em>. Таксама яна выкарыстоўваецца ў кампутарнай праґраме "
 "SunTracker Pro."
 
-#: src/core/StelCore.cpp:1788
+#: src/core/StelCore.cpp:1806
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1248,7 +1260,7 @@ msgstr ""
 "эфэмэрыдамі</em> і<em>Канонам сонечных зацьменьняў</em>, напісаных Муке й "
 "Мэёсам (1983)."
 
-#: src/core/StelCore.cpp:1792
+#: src/core/StelCore.cpp:1810
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1259,7 +1271,7 @@ msgstr ""
 "з 5-ці і 10-ці дзённымі прамежкамі ад 601 г. да н.э. да 1649 г. н.э. Такія ж "
 "дачыненьні былі няяўна прынятыя сыґізійных табліцах Ґалдстайна (1973)."
 
-#: src/core/StelCore.cpp:1796
+#: src/core/StelCore.cpp:1814
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1269,7 +1281,7 @@ msgstr ""
 "Гэты раўнаньне было апублікаванае П.М. Мюлерам і Ф.Р. Стэфэнсанам у артыкуле "
 "<em>Паскарэньні Зямлі й Месяца ад першых астранамічных назіраньняў</em> (%1)."
 
-#: src/core/StelCore.cpp:1799
+#: src/core/StelCore.cpp:1817
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1278,7 +1290,7 @@ msgstr ""
 "Гэты раўнаньне было апублікаванае Ф.Р. Стэфэнсанам у артыкуле "
 "<em>Астранамічныя назіраньні да эпохі тэлескопаў</em> (%1)."
 
-#: src/core/StelCore.cpp:1802
+#: src/core/StelCore.cpp:1820
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1291,7 +1303,7 @@ msgstr ""
 "<em>Палінамінальная апраксымацыя паправак дэльты T E.T.-U.T. у пэрыяд 1800-"
 "1975</em> (%1) як апраксымацыя даньняў, апублікаваных Браўэрам (1952)."
 
-#: src/core/StelCore.cpp:1805
+#: src/core/StelCore.cpp:1823
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1300,7 +1312,7 @@ msgstr ""
 "Гэты альґарытм быў прыняты <em>Плянэтарнымі праґрамамі й табліцамі ад -4000 "
 "да +2800</em> (1986) і кампутарнай праґрамай RedShift."
 
-#: src/core/StelCore.cpp:1808
+#: src/core/StelCore.cpp:1826
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1311,11 +1323,11 @@ msgstr ""
 "артыкуле <em>Доўгачасовыя зьмены аварачэньня Зямлі ад 700 г. да н.э. да 1980 "
 "г. н.э.</em> (%1)."
 
-#: src/core/StelCore.cpp:1811
+#: src/core/StelCore.cpp:1829
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "Гэты альґарытм выкарыстоўваецца ў праґраме-плянэтару Guide 7."
 
-#: src/core/StelCore.cpp:1814
+#: src/core/StelCore.cpp:1832
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -1325,7 +1337,7 @@ msgstr ""
 "каноне сонечных зацьменьняў 1986-2035</em> (1987) і<em>Пяцідзесяцігадовым "
 "каноне месячных зацьменьняў 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:1817
+#: src/core/StelCore.cpp:1835
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -1334,7 +1346,7 @@ msgstr ""
 "Гэтая формула была атрыманая К.М. Баркоўскім (%1) з аналізу 31 запісу аб "
 "сонечных зацьменьняў, што адбываліся між 2137 г. да н.э. і 1715 г. н.э."
 
-#: src/core/StelCore.cpp:1820
+#: src/core/StelCore.cpp:1838
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1346,7 +1358,7 @@ msgstr ""
 "Зэхам у артыкуле <em>Эмпірычныя ператварэньні з U.T. у E.T. для пэрыяду 1800-"
 "1988</em> (%1) як апраксымацыя даньняў Стэфэнсана й Морысана (1984)."
 
-#: src/core/StelCore.cpp:1823
+#: src/core/StelCore.cpp:1841
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -1356,7 +1368,7 @@ msgstr ""
 "вэрсіі месячнай тэорыі ELP 2000-85 у іхнай кнізе <em>Месячныя табліцы й "
 "праґрамы ад 4000 г. да н.э. да 8000 г. н.э.</em> (1991)."
 
-#: src/core/StelCore.cpp:1826
+#: src/core/StelCore.cpp:1844
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1367,7 +1379,7 @@ msgstr ""
 "артыкуле <em>Доўгачасовыя флюнктуацыі аварачэньня Зямлі: ад 700 г. да н.э. "
 "да 1990 г. н.э.</em> (%1)."
 
-#: src/core/StelCore.cpp:1829
+#: src/core/StelCore.cpp:1847
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1376,7 +1388,7 @@ msgstr ""
 "Ф.Р. Стэфэнсан апублікаваў гэтую формулу ў сваёй кнізе <em>Гістарычныя "
 "зацьменьні й аварачэньне Зямлі</em> (%1)."
 
-#: src/core/StelCore.cpp:1832
+#: src/core/StelCore.cpp:1850
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1386,7 +1398,7 @@ msgstr ""
 "ўжываецца. Табліцы для 1620—2000 гг., улучае варыянт Шапрона, Шапронам-Тузэ "
 "й Франку (1997) для гадаў па-за абсягам 1620—2000."
 
-#: src/core/StelCore.cpp:1835
+#: src/core/StelCore.cpp:1853
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1396,7 +1408,7 @@ msgstr ""
 "выкарыстоўвае гэтую формулу на сваёй інтэрактыўнай старонцы %1Гарызонты "
 "ЛРР%2."
 
-#: src/core/StelCore.cpp:1838
+#: src/core/StelCore.cpp:1856
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1405,7 +1417,7 @@ msgstr ""
 "Гэты паліном быў апублікаваны Ж. Мэёсам і Л. Сімансам у артыкуле "
 "<em>Палінамінальнае набліжэньне да дэльта T, 1620-2000 н.э.</em> (%1)."
 
-#: src/core/StelCore.cpp:1841
+#: src/core/StelCore.cpp:1859
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1415,7 +1427,7 @@ msgstr ""
 "Мантэнбрука й Т. Пфлеґера ўтрымлівае просты паліном 3-га парадку для "
 "нядаўняй мінуўшчыны."
 
-#: src/core/StelCore.cpp:1844
+#: src/core/StelCore.cpp:1862
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1427,7 +1439,7 @@ msgstr ""
 "табліцах</em> (2002). Яна базуецца на <em>Астранамічных альґарытмах</em> "
 "Жана Мэёса (1991)."
 
-#: src/core/StelCore.cpp:1847
+#: src/core/StelCore.cpp:1865
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1438,7 +1450,7 @@ msgstr ""
 "артыкуле <em>Гістарычныя значэньні памылкі зямнога гадзіньніка %1T і разьлік "
 "зацьменьняў </em> (%2) з дадаткам у (%3)."
 
-#: src/core/StelCore.cpp:1850
+#: src/core/StelCore.cpp:1868
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1451,7 +1463,7 @@ msgstr ""
 "вывеў формулу %1T. Яна базуецца на магчымай пэрыядычнасьці, апісанай "
 "Стэфэнсанам (%2). Болей зьвестак глядзі %3тут%4."
 
-#: src/core/StelCore.cpp:1853 src/core/StelCore.cpp:1856
+#: src/core/StelCore.cpp:1871 src/core/StelCore.cpp:1874
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1467,15 +1479,15 @@ msgstr ""
 "(2006). Гэтая формула таксама выкарыстоўваецца ў праґраме разьліку сонечных, "
 "месячных і плянэтарных эфэмэрыд SOLEX."
 
-#: src/core/StelCore.cpp:1853
+#: src/core/StelCore.cpp:1871
 msgid "Used by default."
 msgstr "Прадвызначанае."
 
-#: src/core/StelCore.cpp:1856
+#: src/core/StelCore.cpp:1874
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "ПРАЎЛЕНАЯ ВЭРСІЯ БЕЗ ДАДАТКОВАГА ПАСКАРЭНЬНЯ МЕСЯЦА"
 
-#: src/core/StelCore.cpp:1859
+#: src/core/StelCore.cpp:1877
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1486,7 +1498,7 @@ msgstr ""
 "было апублікаванае ў артыкуле em>Старажытныя зацьменьні й датаваньне "
 "падзеньня Бабілёну</em> (%1)."
 
-#: src/core/StelCore.cpp:1862
+#: src/core/StelCore.cpp:1880
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1498,7 +1510,7 @@ msgstr ""
 "палінінальнай апраксымацыі дэльтаT</em> (%1) і перагледжаны Санам Ісламам у "
 "2013."
 
-#: src/core/StelCore.cpp:1865
+#: src/core/StelCore.cpp:1883
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1509,7 +1521,7 @@ msgstr ""
 "М. Халідам, Марыям Султана й Фахімам Зайдзі было апублікаванае ў <em>Дэльта "
 "T: палімінальнае апраксымацыя часавага пэрыяду 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:1868
+#: src/core/StelCore.cpp:1886
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1518,15 +1530,15 @@ msgstr ""
 "Гэта — квадратычная формула разьліку %1T з каэфіцыентамі, вызначанымі "
 "карыстальнікам."
 
-#: src/core/StelCore.cpp:1871 src/core/SimbadSearcher.cpp:156
+#: src/core/StelCore.cpp:1889 src/core/SimbadSearcher.cpp:156
 msgid "Error"
 msgstr "Памылка"
 
-#: src/core/StelCore.cpp:1921
+#: src/core/StelCore.cpp:1939
 msgid "with meaningless values outside this range"
 msgstr "зь нязначнымі велічынямі па-за гэтым прамежкам"
 
-#: src/core/StelCore.cpp:1947
+#: src/core/StelCore.cpp:1965
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -1534,24 +1546,24 @@ msgstr ""
 "са значнай памылкай, меншай за сэкунду, найбольшай памылкай 1,9 с і "
 "нязначнымі велічынямі па-за гэтым прамежкам"
 
-#: src/core/StelCore.cpp:1969 src/core/StelCore.cpp:1974
-#: src/core/StelCore.cpp:2002 src/core/StelCore.cpp:2007
-#: src/core/StelCore.cpp:2012
+#: src/core/StelCore.cpp:1987 src/core/StelCore.cpp:1992
+#: src/core/StelCore.cpp:2020 src/core/StelCore.cpp:2025
+#: src/core/StelCore.cpp:2030
 msgid "with zero values outside this range"
 msgstr "з нулявымі значэньнямі па-за гэтым прамежкам"
 
-#: src/core/StelCore.cpp:1979
+#: src/core/StelCore.cpp:1997
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "з тыповай 1-сэкунднай дакладнасьцю й нулявымі значэньнямі па-за гэтым "
 "прамежкам"
 
-#: src/core/StelCore.cpp:2022
+#: src/core/StelCore.cpp:2040
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Дыяпазон, дапушчальны да выкарыстаньня: гады ад %1 да %2, %3."
 
-#: src/core/StelCore.cpp:2024
+#: src/core/StelCore.cpp:2042
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Дыяпазон, дапушчальны да выкарыстаньня: гады ад %1 да %2."

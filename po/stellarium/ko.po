@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-18 17:17+0700\n"
+"POT-Creation-Date: 2016-09-21 19:47+0700\n"
 "PO-Revision-Date: 2016-01-10 05:17+0000\n"
 "Last-Translator: SeokHwan Park <mints1324@gmail.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-09-20 06:48+0000\n"
-"X-Generator: Launchpad (build 18200)\n"
+"X-Launchpad-Export-Date: 2016-09-22 06:39+0000\n"
+"X-Generator: Launchpad (build 18204)\n"
 "Language: ko\n"
 
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:188
-#: src/core/modules/Planet.cpp:226 src/core/modules/MinorPlanet.cpp:213
+#: src/core/modules/Planet.cpp:229 src/core/modules/MinorPlanet.cpp:213
 #: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:192
 #: src/core/modules/StarWrapper.cpp:195
 #: plugins/Satellites/src/Satellite.cpp:269
@@ -36,7 +36,7 @@ msgstr ""
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:433
 #: src/core/modules/GridLinesMgr.cpp:951 src/core/modules/LandscapeMgr.cpp:414
 #: src/core/modules/NebulaMgr.cpp:364 src/core/modules/NebulaMgr.cpp:365
-#: src/core/modules/SolarSystem.cpp:200 src/core/modules/MilkyWay.cpp:74
+#: src/core/modules/SolarSystem.cpp:203 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/StelApp.cpp:516
 #: src/core/StelCore.cpp:222 src/core/StelSkyLayerMgr.cpp:88
 #: src/StelMainView.cpp:575
@@ -266,7 +266,7 @@ msgstr "종류: <b>%1</b>(%2)"
 msgid "Opacity: <b>%1</b>"
 msgstr "불투명도: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:232
+#: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:235
 #: src/core/modules/MinorPlanet.cpp:219 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:202
 #, qt-format
@@ -274,7 +274,7 @@ msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
-#: src/core/modules/Planet.cpp:235 src/core/modules/MinorPlanet.cpp:222
+#: src/core/modules/Planet.cpp:238 src/core/modules/MinorPlanet.cpp:222
 #: src/core/modules/Comet.cpp:185 src/core/modules/StarWrapper.cpp:63
 #: src/core/modules/StarWrapper.cpp:205
 #: plugins/Supernovae/src/Supernova.cpp:137 plugins/Novae/src/Nova.cpp:144
@@ -737,89 +737,89 @@ msgstr "딥스카이 천체"
 msgid "Toggle DSO type filter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:238 src/core/modules/MinorPlanet.cpp:232
+#: src/core/modules/Planet.cpp:241 src/core/modules/MinorPlanet.cpp:232
 #: src/core/modules/MinorPlanet.cpp:236 src/core/modules/Comet.cpp:194
 #: src/core/modules/StarWrapper.cpp:209 plugins/Quasars/src/Quasar.cpp:116
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "절대등급: %1"
 
-#: src/core/modules/Planet.cpp:258 src/core/modules/MinorPlanet.cpp:251
+#: src/core/modules/Planet.cpp:261 src/core/modules/MinorPlanet.cpp:251
 #: src/core/modules/Comet.cpp:208
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
 msgstr "태양과의 거리: %1AU (%2 km)"
 
-#: src/core/modules/Planet.cpp:265 src/core/modules/MinorPlanet.cpp:258
+#: src/core/modules/Planet.cpp:268 src/core/modules/MinorPlanet.cpp:258
 #: src/core/modules/Comet.cpp:215
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
 msgstr "태양과의 거리: %1AU (%2 백만 km)"
 
-#: src/core/modules/Planet.cpp:275 src/core/modules/MinorPlanet.cpp:268
+#: src/core/modules/Planet.cpp:278 src/core/modules/MinorPlanet.cpp:268
 #: src/core/modules/Comet.cpp:226
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "거리: %1AU (%2 km)"
 
-#: src/core/modules/Planet.cpp:282 src/core/modules/MinorPlanet.cpp:275
+#: src/core/modules/Planet.cpp:285 src/core/modules/MinorPlanet.cpp:275
 #: src/core/modules/Comet.cpp:233
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "거리: %1AU (%2 백만 km)"
 
-#: src/core/modules/Planet.cpp:296 src/core/modules/Planet.cpp:300
+#: src/core/modules/Planet.cpp:299 src/core/modules/Planet.cpp:303
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "시직경: %1, 고리 포함: %2"
 
-#: src/core/modules/Planet.cpp:307 src/core/modules/Planet.cpp:309
+#: src/core/modules/Planet.cpp:310 src/core/modules/Planet.cpp:312
 #: src/core/modules/MinorPlanet.cpp:286 src/core/modules/MinorPlanet.cpp:288
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "시직경: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:325 src/core/modules/MinorPlanet.cpp:296
+#: src/core/modules/Planet.cpp:328 src/core/modules/MinorPlanet.cpp:296
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "공전주기: %1일 (%2 율리우스년)"
 
-#: src/core/modules/Planet.cpp:328
+#: src/core/modules/Planet.cpp:331
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "항성일: %1"
 
-#: src/core/modules/Planet.cpp:329
+#: src/core/modules/Planet.cpp:332
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "평균태양일: %1"
 
-#: src/core/modules/Planet.cpp:333
+#: src/core/modules/Planet.cpp:336
 msgid "The period of rotation is chaotic"
 msgstr "회전 주기는 불규칙적"
 
-#: src/core/modules/Planet.cpp:343 src/core/modules/Planet.cpp:348
+#: src/core/modules/Planet.cpp:346 src/core/modules/Planet.cpp:351
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "위상각: %1"
 
-#: src/core/modules/Planet.cpp:344 src/core/modules/Planet.cpp:349
+#: src/core/modules/Planet.cpp:347 src/core/modules/Planet.cpp:352
 #, qt-format
 msgid "Elongation: %1"
 msgstr "이각: %1"
 
-#: src/core/modules/Planet.cpp:352
+#: src/core/modules/Planet.cpp:355
 #, qt-format
 msgid "Phase: %1"
 msgstr "위상: %1"
 
-#: src/core/modules/Planet.cpp:353
+#: src/core/modules/Planet.cpp:356
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "밝은 부분: %1%"
 
-#: src/core/modules/Planet.cpp:365
+#: src/core/modules/Planet.cpp:368
 #, qt-format
 msgid "Eclipse Factor: %1%"
 msgstr "위성식률: %1%"
@@ -861,31 +861,31 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "가스 꼬리 길이 (추정): %1 백만 km"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:201 src/gui/AstroCalcDialog.cpp:522
+#: src/core/modules/SolarSystem.cpp:204 src/gui/AstroCalcDialog.cpp:522
 #: src/translations.h:66
 msgid "Planets"
 msgstr "행성"
 
-#: src/core/modules/SolarSystem.cpp:202
+#: src/core/modules/SolarSystem.cpp:205
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:316
 msgid "Planet labels"
 msgstr "행성 이름표"
 
-#: src/core/modules/SolarSystem.cpp:203
+#: src/core/modules/SolarSystem.cpp:206
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Planet orbits"
 msgstr "행성 궤도"
 
-#: src/core/modules/SolarSystem.cpp:204
+#: src/core/modules/SolarSystem.cpp:207
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:324
 msgid "Planet trails"
 msgstr "행성 궤적"
 
-#: src/core/modules/SolarSystem.cpp:206
+#: src/core/modules/SolarSystem.cpp:209
 msgid "Planet markers"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:208
+#: src/core/modules/SolarSystem.cpp:211
 msgid "Native planet names (from starlore)"
 msgstr ""
 
@@ -1025,182 +1025,194 @@ msgid "Set time rate to zero"
 msgstr "시간 멈춤"
 
 #: src/core/StelCore.cpp:230
+msgid "Set reverse time direction"
+msgstr ""
+
+#: src/core/StelCore.cpp:231
 msgid "Set time to now"
 msgstr "현재 시각으로 설정"
 
-#: src/core/StelCore.cpp:231
+#: src/core/StelCore.cpp:232
+msgid "Add 1 solar minute"
+msgstr ""
+
+#: src/core/StelCore.cpp:233
 msgid "Add 1 solar hour"
 msgstr "1 태양시 더하기"
 
-#: src/core/StelCore.cpp:232
+#: src/core/StelCore.cpp:234
 msgid "Add 1 solar day"
 msgstr "1 태양일 더하기"
 
-#: src/core/StelCore.cpp:233
+#: src/core/StelCore.cpp:235
 msgid "Add 7 solar days"
 msgstr "7태양일 추가"
 
-#: src/core/StelCore.cpp:234
+#: src/core/StelCore.cpp:236
+msgid "Subtract 1 solar minute"
+msgstr ""
+
+#: src/core/StelCore.cpp:237
 msgid "Subtract 1 solar hour"
 msgstr "1 태양시 빼기"
 
-#: src/core/StelCore.cpp:235
+#: src/core/StelCore.cpp:238
 msgid "Subtract 1 solar day"
 msgstr "1 태양일 빼기"
 
-#: src/core/StelCore.cpp:236
+#: src/core/StelCore.cpp:239
 msgid "Subtract 7 solar days"
 msgstr "7태양일 빼기"
 
-#: src/core/StelCore.cpp:237
+#: src/core/StelCore.cpp:240
 msgid "Add 1 sidereal day"
 msgstr "1 항성일 더하기"
 
-#: src/core/StelCore.cpp:238
+#: src/core/StelCore.cpp:241
 msgid "Add 1 sidereal year"
 msgstr "1 항성년 더하기"
 
-#: src/core/StelCore.cpp:239
+#: src/core/StelCore.cpp:242
 msgid "Add 100 sidereal years"
 msgstr "100항성년 추가"
 
-#: src/core/StelCore.cpp:240
+#: src/core/StelCore.cpp:243
 msgid "Add 1 synodic month"
 msgstr "1 삭망월 더하기"
 
-#: src/core/StelCore.cpp:241
+#: src/core/StelCore.cpp:244
 msgid "Add 1 draconic month"
 msgstr "1 교점월 더하기"
 
-#: src/core/StelCore.cpp:242
+#: src/core/StelCore.cpp:245
 msgid "Add 1 draconic year"
 msgstr "1 교점년 더하기"
 
-#: src/core/StelCore.cpp:243
+#: src/core/StelCore.cpp:246
 msgid "Add 1 anomalistic month"
 msgstr "1 근점월 더하기"
 
-#: src/core/StelCore.cpp:244
+#: src/core/StelCore.cpp:247
 msgid "Add 1 anomalistic year"
 msgstr "1근점년 추가"
 
-#: src/core/StelCore.cpp:245
+#: src/core/StelCore.cpp:248
 msgid "Add 100 anomalistic years"
 msgstr "100근점년 추가"
 
-#: src/core/StelCore.cpp:246
+#: src/core/StelCore.cpp:249
 msgid "Add 1 mean tropical month"
 msgstr "1 평균회귀월 더하기"
 
-#: src/core/StelCore.cpp:247
+#: src/core/StelCore.cpp:250
 msgid "Add 1 mean tropical year"
 msgstr "1 평균회귀년 더하기"
 
-#: src/core/StelCore.cpp:248
+#: src/core/StelCore.cpp:251
 msgid "Add 100 mean tropical years"
 msgstr "약 100태양년(회기년) 추가"
 
-#: src/core/StelCore.cpp:249
+#: src/core/StelCore.cpp:252
 msgid "Add 1 tropical year"
 msgstr "1태양년(회기년) 추가"
 
-#: src/core/StelCore.cpp:250
+#: src/core/StelCore.cpp:253
 msgid "Add 1 Julian year"
 msgstr "1율리우스년 추가"
 
-#: src/core/StelCore.cpp:251
+#: src/core/StelCore.cpp:254
 msgid "Add 1 Julian century"
 msgstr "1율리우스 세기 추가"
 
-#: src/core/StelCore.cpp:252
+#: src/core/StelCore.cpp:255
 msgid "Add 1 Gaussian year"
 msgstr "1가우시안(Gaussian)년 추가"
 
-#: src/core/StelCore.cpp:253
+#: src/core/StelCore.cpp:256
 msgid "Subtract 1 sidereal day"
 msgstr "1 항성일 빼기"
 
-#: src/core/StelCore.cpp:254
+#: src/core/StelCore.cpp:257
 msgid "Subtract 1 sidereal year"
 msgstr "1 항성년 빼기"
 
-#: src/core/StelCore.cpp:255
+#: src/core/StelCore.cpp:258
 msgid "Subtract 100 sidereal years"
 msgstr "100항성년 빼기"
 
-#: src/core/StelCore.cpp:256
+#: src/core/StelCore.cpp:259
 msgid "Subtract 1 synodic month"
 msgstr "1 삭망월 빼기"
 
-#: src/core/StelCore.cpp:257
+#: src/core/StelCore.cpp:260
 msgid "Subtract 1 draconic month"
 msgstr "1 교점월 빼기"
 
-#: src/core/StelCore.cpp:258
+#: src/core/StelCore.cpp:261
 msgid "Subtract 1 draconic year"
 msgstr "1 교점년 빼기"
 
-#: src/core/StelCore.cpp:259
+#: src/core/StelCore.cpp:262
 msgid "Subtract 1 anomalistic month"
 msgstr "1 근점월 빼기"
 
-#: src/core/StelCore.cpp:260
+#: src/core/StelCore.cpp:263
 msgid "Subtract 1 anomalistic year"
 msgstr "1근점년 빼기"
 
-#: src/core/StelCore.cpp:261
+#: src/core/StelCore.cpp:264
 msgid "Subtract 100 anomalistic years"
 msgstr "100근점년 빼기"
 
-#: src/core/StelCore.cpp:262
+#: src/core/StelCore.cpp:265
 msgid "Subtract 1 mean tropical month"
 msgstr "1 평균회귀월 빼기"
 
-#: src/core/StelCore.cpp:263
+#: src/core/StelCore.cpp:266
 msgid "Subtract 1 mean tropical year"
 msgstr "1 평균회귀년 빼기"
 
-#: src/core/StelCore.cpp:264
+#: src/core/StelCore.cpp:267
 msgid "Subtract 100 mean tropical years"
 msgstr "약 100태양년(회기년) 뻬기"
 
-#: src/core/StelCore.cpp:265
+#: src/core/StelCore.cpp:268
 msgid "Subtract 1 tropical year"
 msgstr "1태양년(회기년) 빼기"
 
-#: src/core/StelCore.cpp:266
+#: src/core/StelCore.cpp:269
 msgid "Subtract 1 Julian year"
 msgstr "1율리우스년 빼기"
 
-#: src/core/StelCore.cpp:267
+#: src/core/StelCore.cpp:270
 msgid "Subtract 1 Julian century"
 msgstr "1율리우스 세기 빼기"
 
-#: src/core/StelCore.cpp:268
+#: src/core/StelCore.cpp:271
 msgid "Subtract 1 Gaussian year"
 msgstr "1가우시안(Gaussian)년 빼기"
 
-#: src/core/StelCore.cpp:270
+#: src/core/StelCore.cpp:273
 msgid "Set home planet to selected planet"
 msgstr "선택된 행성을 모행성으로 설정"
 
-#: src/core/StelCore.cpp:271
+#: src/core/StelCore.cpp:274
 msgid "Go to home"
 msgstr "집으로 이동"
 
-#: src/core/StelCore.cpp:273
+#: src/core/StelCore.cpp:276
 msgid "Flip scene horizontally"
 msgstr "좌우 반전"
 
-#: src/core/StelCore.cpp:274
+#: src/core/StelCore.cpp:277
 msgid "Flip scene vertically"
 msgstr "상하 반전"
 
-#: src/core/StelCore.cpp:1775
+#: src/core/StelCore.cpp:1793
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "보정이 비활성화됩니다. 당신이 무엇을 하는지 알고 있는 경우에만 사용하십시오!"
 
-#: src/core/StelCore.cpp:1778
+#: src/core/StelCore.cpp:1796
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1211,7 +1223,7 @@ msgstr ""
 "of Relativity Confirmed by Ancient Solar Eclipses</em> (%1)에 사용되었습니다. 더 많은 "
 "정보는 %2여기%3를 참고하십시오."
 
-#: src/core/StelCore.cpp:1781
+#: src/core/StelCore.cpp:1799
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1220,7 +1232,7 @@ msgstr ""
 "이 실험식은 G. M. Clemence의 논문 <em>On the system of astronomical constants</em> "
 "(%1)에서 발표되었습니다."
 
-#: src/core/StelCore.cpp:1784
+#: src/core/StelCore.cpp:1802
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1232,7 +1244,7 @@ msgstr ""
 "<em>Astronomical Formulae for Calculators</em>에 사용되었습니다. 또한 이 공식은 컴퓨터 프로그램 "
 "SunTracker Pro에 적용되었습니다."
 
-#: src/core/StelCore.cpp:1788
+#: src/core/StelCore.cpp:1806
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1241,7 +1253,7 @@ msgstr ""
 "이 공식은 IAU (1952)를 약간 보정한 버전으로 Mucke & Meeus (1983)의 <em>Astronomical "
 "Ephemeris</em> 와 <em>Canon of Solar Eclipses</em> 에 적용되었습니다."
 
-#: src/core/StelCore.cpp:1792
+#: src/core/StelCore.cpp:1810
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1251,7 +1263,7 @@ msgstr ""
 "Tuckerman 표 (1962, 1964)는 기원전 601년부터 서기 1649년까지 5일 간격과 10일 간격으로 태양, 달, 행성의 "
 "위치를 담고 있습니다. 이 관계는 Goldstine (1973)의 삭망 표에도 내재되었습니다."
 
-#: src/core/StelCore.cpp:1796
+#: src/core/StelCore.cpp:1814
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1261,7 +1273,7 @@ msgstr ""
 "이 공식은 P. M. Muller와 F. R. Stephenson의 논문 <em>The accelerations of the earth "
 "and moon from early astronomical observations</em> (%1)에서 발표되었습니다."
 
-#: src/core/StelCore.cpp:1799
+#: src/core/StelCore.cpp:1817
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1270,7 +1282,7 @@ msgstr ""
 "이 공식은  F. R. Stephenson의 논문 <em>Pre-Telescopic Astronomical "
 "Observations</em> (%1)에 발표되었습니다."
 
-#: src/core/StelCore.cpp:1802
+#: src/core/StelCore.cpp:1820
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1282,7 +1294,7 @@ msgstr ""
 "L. D. Schmadel와 G. Zech의 논문 <em>Polynomial approximations for the correction "
 "delta T E.T.-U.T. in the period 1800-1975</em> (%1)에서 발표되었습니다."
 
-#: src/core/StelCore.cpp:1805
+#: src/core/StelCore.cpp:1823
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1291,7 +1303,7 @@ msgstr ""
 "이 알고리즘은 P. Bretagnon와 L. Simon's의 <em>Planetary Programs and Tables from -"
 "4000 to +2800</em> (1986)와 컴퓨터 플라네타리움 프로그램 ResShift에 적용되었습니다."
 
-#: src/core/StelCore.cpp:1808
+#: src/core/StelCore.cpp:1826
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1301,11 +1313,11 @@ msgstr ""
 "이 공식은 F. R. Stephenson와 L. V. Morrison의 논문 <em>Long-term changes in the "
 "rotation of the earth - 700 B.C. to A.D. 1980</em> (%1)에서 발표되었습니다."
 
-#: src/core/StelCore.cpp:1811
+#: src/core/StelCore.cpp:1829
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "이 알고리즘은 컴퓨터 플라네타리움 프로그램 Guide 7에 사용되었습니다."
 
-#: src/core/StelCore.cpp:1814
+#: src/core/StelCore.cpp:1832
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -1314,7 +1326,7 @@ msgstr ""
 "이 알고리즘은 F. Espenak의 <em>Fifty Year Canon of Solar Eclipses: 1986-2035</em> "
 "(1987)와 <em>Fifty Year Canon of Lunar Eclipses: 1986-2035</em>(1989)에서 나왔습니다."
 
-#: src/core/StelCore.cpp:1817
+#: src/core/StelCore.cpp:1835
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -1322,7 +1334,7 @@ msgid ""
 msgstr ""
 "이 공식은 K.M. Borkowski (%1)의 기원전 2137년부터 서기 1713년 사이의 31개 일식기록 데이터 분석에서 나왔습니다."
 
-#: src/core/StelCore.cpp:1820
+#: src/core/StelCore.cpp:1838
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1334,7 +1346,7 @@ msgstr ""
 "Zech의 논문 <em>Empirical Transformations from U.T. to E.T. for the Period 1800-"
 "1988</em> (%1)에 발표되었습니다."
 
-#: src/core/StelCore.cpp:1823
+#: src/core/StelCore.cpp:1841
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -1343,7 +1355,7 @@ msgstr ""
 "이 공식은 M. Chapront-Touze와 J. Chapront의 <em>Lunar Tables and Programs from "
 "4000 B.C. to A.D. 8000</em> (1991)의 ELP 2000-85 lunar theory의 요약버젼에서 나왔습니다."
 
-#: src/core/StelCore.cpp:1826
+#: src/core/StelCore.cpp:1844
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1353,7 +1365,7 @@ msgstr ""
 "이 방정식은 F. R. Stephenson와 L. V. Morrison의 논문 <em>Long-Term Fluctuations in "
 "the Earth's Rotation: 700 BC to AD 1990</em> (%1)에서 발표되었습니다."
 
-#: src/core/StelCore.cpp:1829
+#: src/core/StelCore.cpp:1847
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1362,7 +1374,7 @@ msgstr ""
 "이 공식은 F. R. Stephenson의 책 <em>Historical Eclipses and Earth's Rotation</em> "
 "(%1)에서 발표되였습니다."
 
-#: src/core/StelCore.cpp:1832
+#: src/core/StelCore.cpp:1850
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1372,7 +1384,7 @@ msgstr ""
 "1620년부터 2000년을 표로 제공하고, 그 이외의 시간대은 Chapront, Chapront-Touze & Francou "
 "(1997)의 변형을 포함하고 있습니다."
 
-#: src/core/StelCore.cpp:1835
+#: src/core/StelCore.cpp:1853
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1380,7 +1392,7 @@ msgid ""
 msgstr ""
 "NASA 제트 추진 연구소의 JPL 태양계 역학 그룹이 자신들의 웹 사이트인 %1JPL Horizons%2에서 이 공식을 사용합니다."
 
-#: src/core/StelCore.cpp:1838
+#: src/core/StelCore.cpp:1856
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1389,7 +1401,7 @@ msgstr ""
 "이 다항식은 J. Meeus와 L. Simons의 논문 <em>Polynomial approximations to Delta T, "
 "1620-2000 AD</em> (%1)에서 발표되었습니다."
 
-#: src/core/StelCore.cpp:1841
+#: src/core/StelCore.cpp:1859
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1398,7 +1410,7 @@ msgstr ""
 "O. Montenbruck와 T. Pfleger의 <em>Astronomy on the Personal Computer</em> "
 "(2000) 4판은 최근 자료를 근사하는 3차 다항식을 제공합니다."
 
-#: src/core/StelCore.cpp:1844
+#: src/core/StelCore.cpp:1862
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1409,7 +1421,7 @@ msgstr ""
 "Calculations</em> (3판, 2007)와 <em>Calendrical Tabulations</em> (2002)에서 "
 "선보였습니다. 이 식은 Jean Meeus의 <em>Astronomical Algorithms</em> (1991)을 기반으로 합니다."
 
-#: src/core/StelCore.cpp:1847
+#: src/core/StelCore.cpp:1865
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1420,7 +1432,7 @@ msgstr ""
 "Earth's clock error %1T and the calculation of eclipses</em> (%2)와 그 "
 "부록(%3)에서 발표되었습니다."
 
-#: src/core/StelCore.cpp:1850
+#: src/core/StelCore.cpp:1868
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1432,7 +1444,7 @@ msgstr ""
 "쓰는 단체 최적화된 %1T 공식을 만들었습니다. 이 식은 Stephenson (%2)이 서술한 가능한 주기를 기반으로 하고 있습니다. 더 "
 "많은 정보는 %3여기%4를 참고하십시오."
 
-#: src/core/StelCore.cpp:1853 src/core/StelCore.cpp:1856
+#: src/core/StelCore.cpp:1871 src/core/StelCore.cpp:1874
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1446,15 +1458,15 @@ msgstr ""
 "of Solar Eclipses: -1900 to +3000</em> (2006)에 쓰였습니다. 이 공식은 또한 태양, 달, 행성의 "
 "천문력 프로그램 SOLEX에도 쓰였습니다."
 
-#: src/core/StelCore.cpp:1853
+#: src/core/StelCore.cpp:1871
 msgid "Used by default."
 msgstr "기본 설정"
 
-#: src/core/StelCore.cpp:1856
+#: src/core/StelCore.cpp:1874
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "달의 가속도가 추가되지 않은 패치된 버전입니다."
 
-#: src/core/StelCore.cpp:1859
+#: src/core/StelCore.cpp:1877
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1464,7 +1476,7 @@ msgstr ""
 "이 공식은 Stephenson & Morrison (1984)을 기반으로 B. Banjevic의 논문 <em>Ancient "
 "eclipses and dating the fall of Babylon</em> (%1)에 발표되었습니다."
 
-#: src/core/StelCore.cpp:1862
+#: src/core/StelCore.cpp:1880
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1475,7 +1487,7 @@ msgstr ""
 "논문 <em>Error Minimization of Polynomial Approximation of DeltaT</em> (%1)에 "
 "발표되었고 2013년에 Sana Islam이 재논의하였습니다."
 
-#: src/core/StelCore.cpp:1865
+#: src/core/StelCore.cpp:1883
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1483,43 +1495,43 @@ msgid ""
 "Approximation of Time Period 1620-2013</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1868
+#: src/core/StelCore.cpp:1886
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr "이 공식은 사용자 정의 상수를 써서 계산하는 %1T의 2차 방정식입니다."
 
-#: src/core/StelCore.cpp:1871 src/core/SimbadSearcher.cpp:156
+#: src/core/StelCore.cpp:1889 src/core/SimbadSearcher.cpp:156
 msgid "Error"
 msgstr "오류"
 
-#: src/core/StelCore.cpp:1921
+#: src/core/StelCore.cpp:1939
 msgid "with meaningless values outside this range"
 msgstr "범위 밖에서는 의미없는 값을 가짐"
 
-#: src/core/StelCore.cpp:1947
+#: src/core/StelCore.cpp:1965
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr "평균 오차 1초 미만, 최대 오차 1.9초, 범위 밖에서는 의미없은 값을 가짐"
 
-#: src/core/StelCore.cpp:1969 src/core/StelCore.cpp:1974
-#: src/core/StelCore.cpp:2002 src/core/StelCore.cpp:2007
-#: src/core/StelCore.cpp:2012
+#: src/core/StelCore.cpp:1987 src/core/StelCore.cpp:1992
+#: src/core/StelCore.cpp:2020 src/core/StelCore.cpp:2025
+#: src/core/StelCore.cpp:2030
 msgid "with zero values outside this range"
 msgstr "범위 밖에서는 값이 0임"
 
-#: src/core/StelCore.cpp:1979
+#: src/core/StelCore.cpp:1997
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "범위 밖에서는 평균적으로 1초 정도의 정확성과 0의 값을 가짐"
 
-#: src/core/StelCore.cpp:2022
+#: src/core/StelCore.cpp:2040
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "유효 시간범위: %1년에서 %2년까지, %3"
 
-#: src/core/StelCore.cpp:2024
+#: src/core/StelCore.cpp:2042
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "유효 시간범위: %1년에서 %2까지"
