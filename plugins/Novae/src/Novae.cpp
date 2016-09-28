@@ -648,6 +648,8 @@ void Novae::updateDownloadComplete(QNetworkReply* reply)
 		StelApp::getInstance().removeProgressBar(progressBar);
 		progressBar = NULL;
 	}
+
+	readJsonFile();
 }
 
 void Novae::displayMessage(const QString& message, const QString hexColor)
