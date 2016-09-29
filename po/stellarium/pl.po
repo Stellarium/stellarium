@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-21 19:47+0700\n"
-"PO-Revision-Date: 2016-09-10 01:30+0000\n"
+"PO-Revision-Date: 2016-09-29 00:57+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-09-22 06:50+0000\n"
+"X-Launchpad-Export-Date: 2016-09-29 05:50+0000\n"
 "X-Generator: Launchpad (build 18204)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -1040,7 +1040,7 @@ msgstr "Ustaw czas na chwilę obecną"
 
 #: src/core/StelCore.cpp:232
 msgid "Add 1 solar minute"
-msgstr ""
+msgstr "Dodaj 1 minutę słoneczną"
 
 #: src/core/StelCore.cpp:233
 msgid "Add 1 solar hour"
@@ -1056,7 +1056,7 @@ msgstr "Dodaj 7 dni słonecznych"
 
 #: src/core/StelCore.cpp:236
 msgid "Subtract 1 solar minute"
-msgstr ""
+msgstr "Odejmij 1 minutę słoneczną"
 
 #: src/core/StelCore.cpp:237
 msgid "Subtract 1 solar hour"
@@ -7323,31 +7323,39 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:524
 msgid "You can choose to scale the image you see on the screen."
-msgstr ""
+msgstr "Można użyć tej funkcji do przeskalowania obrazu na ekranie."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:525
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
 msgstr ""
+"Ma to na celu lepsze porównanie określonego połączenia okularu/teleskopu z "
+"innym."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:526
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will "
 "produce two different exit pupils, changing the view somewhat."
 msgstr ""
+"Skutkiem użycia takiego samego okularu w dwóch różnych teleskopach o różnej "
+"długości ogniskowej będą dwie różne źrenice wyjściowe i różne pola widzenia."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:527
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
 msgstr ""
+"Ujemnym skutkiem przeskalowania obrazu może być zmarnowanie dużej części "
+"ekranu."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:528
 msgid ""
 "Therefore I recommend that you leave it off, unless you feel you have a need "
 "of it."
 msgstr ""
+"Z tego powodu zalecane jest pozostawienie tej funkcji wyłączonej dopóki nie "
+"jest potrzebna."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:529
 msgid ""
@@ -8414,7 +8422,7 @@ msgstr "Wtyczka Sterowanie teleskopem"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:255
 msgid "Plug-in and GUI programming"
-msgstr ""
+msgstr "Programowanie wtyczek i GUI"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
 msgid ""
@@ -8473,17 +8481,17 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 msgid "Contents"
-msgstr ""
+msgstr "Spis treści"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
 msgid "Abilities and limitations"
-msgstr ""
+msgstr "Możliwości i ograniczenia"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:282
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
 msgid "The original telescope control feature"
-msgstr ""
+msgstr "Oryginalna funkcja sterowania teleskopem"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
@@ -8493,17 +8501,17 @@ msgstr "Używanie tej wtyczki"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:321
 msgid "Main window ('Telescopes')"
-msgstr ""
+msgstr "Główne okno ('Teleskopy')"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:336
 msgid "Telescope configuration window"
-msgstr ""
+msgstr "Okno konfiguracji Teleskopu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:286
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:338
 msgid "Connection type"
-msgstr ""
+msgstr "Typ połączenia"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:346
@@ -8526,26 +8534,26 @@ msgstr "Ustawienia połączenia"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:377
 msgid "Field of view indicators"
-msgstr ""
+msgstr "Wskaźniki pola widzenia"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:385
 msgid "'Slew telescope to' window"
-msgstr ""
+msgstr "Okno 'Obróć teleskop w stronę'"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 msgid "Telescope commands"
-msgstr ""
+msgstr "Polecenia teleskopu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:293
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:410
 msgid "Supported devices"
-msgstr ""
+msgstr "Obsługiwane urządzenia"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:294
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:426
 msgid "Virtual telescope"
-msgstr ""
+msgstr "Teleskop wirtualny"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:297
 msgid ""
@@ -8561,12 +8569,16 @@ msgid ""
 "As of the current version, this plug-in doesn't allow satellite tracking, "
 "and is not very suitable for lunar or planetary observations."
 msgstr ""
+"Bieżąca wersja tej wtyczki nie pozwala na śledzenie satelitów i niezbyt się "
+"nadaje do obserwacji Księżyca i planet."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:299
 msgid ""
 "WARNING: Stellarium CANNOT prevent your telescope from being pointed at the "
 "Sun."
 msgstr ""
+"OSTRZEŻENIE: Program Stellarium NIE JEST W STANIE zapobiec skierowaniu "
+"teleskopu w stronę Słońca."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
 msgid ""
@@ -8574,6 +8586,9 @@ msgid ""
 "installed. The powerful light amplified by the telescope WILL cause "
 "irreversible damage to your eyes and/or your equipment."
 msgstr ""
+"Nigdy nie kieruj na Słońce teleskopu bez zamontowanego odpowiedniego filtra "
+"słonecznego. Silne światło wzmocnione przez teleskop SPOWODUJE nieodwracalne "
+"uszkodzenie wzroku i/lub sprzętu."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:301
 msgid ""
@@ -8602,7 +8617,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:424
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:430
 msgid "Back to top"
-msgstr ""
+msgstr "Powrót na górę"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:305
 msgid ""
@@ -8610,16 +8625,21 @@ msgid ""
 "removed. There is no longer a way to control a telescope with Stellarium "
 "without this plug-in."
 msgstr ""
+"W wersji 0.10.5 programu Stellarium oryginalna funkcja sterowania teleskopem "
+"została usunięta. Nie ma już możliwości sterowania teleskopem w programie "
+"Stellarium bez tej wtyczki."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:309
 msgid ""
 "Here are two general ways to control a device with this plug-in, depending "
 "on the situation:"
 msgstr ""
+"Oto dwa ogólne sposoby sterowania urządzeniem za pomocą tej wtyczki, w "
+"zależności od sytuacji:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
 msgid "DIRECT CONNECTION"
-msgstr ""
+msgstr "POŁĄCZENIE BEZPOŚREDNIE"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
 #, qt-format
@@ -8627,10 +8647,12 @@ msgid ""
 "A %1device supported by the plug-in%2 is connected with a cable to the "
 "computer running Stellarium;"
 msgstr ""
+"%1Urządzenie obsługiwane przez wtyczkę%2 jest połączone kablem z komputerem, "
+"na którym działa Stellarium;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:311
 msgid "INDIRECT CONNECTION"
-msgstr ""
+msgstr "POŁĄCZENIE POŚREDNIE"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:312
 #, qt-format
@@ -8639,6 +8661,9 @@ msgid ""
 "alone telescope server program%2 or a %3third-party application%4 <b>that "
 "can 'talk' to Stellarium</b>;"
 msgstr ""
+"Urządzenie jest połączone z tym samym komputerem, lecz jest sterowane przez "
+"%1samodzielny program serwera teleskopu%2 albo %3aplikację innej firmy%4 "
+"<b>, która potrafi 'rozmawiać' z programem Stellarium</b>;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:313
 msgid ""
@@ -8647,6 +8672,10 @@ msgid ""
 "either one of Stellarium's stand-alone telescope servers, or a third party "
 "application."
 msgstr ""
+"Urządzenie jest połączone z odległym komputerem, a program sterujący nim "
+"potrafi 'rozmawiać' ze Stellarium <i>przez sieć</i>; programem tym może być "
+"albo jeden z samodzielnych serwerów teleskopu programu Stellarium, albo "
+"aplikacja innej firmy."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
 #, qt-format
@@ -8654,6 +8683,8 @@ msgid ""
 "Most older telescopes use cables that connect to a %1serial port%2 (RS-232), "
 "the newer ones use %3USB%4 (Universal Serial Bus)."
 msgstr ""
+"Większość starszych teleskopów łączy się kablem z %1portem szeregowym%2 (RS-"
+"232), nowsze z gniazdem %3USB%4 (uniwersalna magistrala szeregowa)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:315
 msgid ""
@@ -10042,7 +10073,7 @@ msgstr "Wtyczka Edytor Układu Słonecznego"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:187
 msgid "Save the Solar System configuration file as..."
-msgstr ""
+msgstr "Zapisz plik konfiguracyjny Układu Słonecznego jako..."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:193
 msgid "Configuration files"
@@ -10051,6 +10082,7 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:195
 msgid "Select a file to replace the Solar System configuration file"
 msgstr ""
+"Wybierz plik, który ma zastąpić plik konfiguracyjny Układu Słonecznego"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:511
 msgid "Import data"
@@ -11269,6 +11301,9 @@ msgid ""
 "who proposed the heliocentric model of the solar system in his book <em>De "
 "revolutionibus orbium coelestium</em>."
 msgstr ""
+"Mikołaj Kopernik (1473-1543) był polskim astronomem, który zaproponował "
+"model heliocentryczny układu słoneczny w swojej pracy <em>De revolutionibus "
+"orbium coelestium</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid ""
