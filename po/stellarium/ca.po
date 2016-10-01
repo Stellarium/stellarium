@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-21 19:47+0700\n"
-"PO-Revision-Date: 2016-07-03 18:41+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2016-09-30 22:05+0000\n"
+"Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-09-22 06:24+0000\n"
+"X-Launchpad-Export-Date: 2016-10-01 05:50+0000\n"
 "X-Generator: Launchpad (build 18204)\n"
 
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:188
@@ -737,7 +737,7 @@ msgstr "Objectes de l'Espai Profund"
 
 #: src/core/modules/NebulaMgr.cpp:365
 msgid "Toggle DSO type filter"
-msgstr ""
+msgstr "Commutar filtre de tipus d'OEP"
 
 #: src/core/modules/Planet.cpp:241 src/core/modules/MinorPlanet.cpp:232
 #: src/core/modules/MinorPlanet.cpp:236 src/core/modules/Comet.cpp:194
@@ -967,7 +967,7 @@ msgstr "Hora de sortida: %1%"
 
 #: src/core/modules/StarWrapper.cpp:280
 msgid "Year of last satisfactory observation"
-msgstr ""
+msgstr "Data de l'última observació satisfactòria"
 
 #: src/core/modules/StarWrapper.cpp:281
 msgid "Position angle"
@@ -1028,7 +1028,7 @@ msgstr "Estableix ràtio del temps a zero"
 
 #: src/core/StelCore.cpp:230
 msgid "Set reverse time direction"
-msgstr ""
+msgstr "Establir la direcció de temps invers"
 
 #: src/core/StelCore.cpp:231
 msgid "Set time to now"
@@ -1036,7 +1036,7 @@ msgstr "Estableix hora actual"
 
 #: src/core/StelCore.cpp:232
 msgid "Add 1 solar minute"
-msgstr ""
+msgstr "Afegir 1 minut solar"
 
 #: src/core/StelCore.cpp:233
 msgid "Add 1 solar hour"
@@ -1052,7 +1052,7 @@ msgstr "Afegeix 7 dies solars"
 
 #: src/core/StelCore.cpp:236
 msgid "Subtract 1 solar minute"
-msgstr ""
+msgstr "Restar 1 minut solar"
 
 #: src/core/StelCore.cpp:237
 msgid "Subtract 1 solar hour"
@@ -1586,6 +1586,9 @@ msgid ""
 "equator, ecliptic, hour lines, etc. into straight lines. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
+"Projecció en perspectiva mapeja l'horitzó i altres grans cercles com "
+"equador, eclíptica, línies horàries, etc., en línies rectes. El nom "
+"matemàtica per a aquest mètode de projecció és <i>projecció gnomònica</i>."
 
 #: src/core/StelProjectorClasses.cpp:87
 msgid "Equal Area"
@@ -1596,6 +1599,8 @@ msgid ""
 "The full name of this projection method is <i>Lambert azimuthal equal-area "
 "projection</i>. It preserves the area but not the angle."
 msgstr ""
+"El nom complet d'aquest mètode de projecció és <i>Projecció azimutal d'àrees "
+"equivalents de Lambert</i>. Conserva la zona, però no l'angle."
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Stereographic"
@@ -1607,6 +1612,9 @@ msgid ""
 "as the planisphere projection. It preserves the angles at which curves cross "
 "each other but it does not preserve area."
 msgstr ""
+"La projecció estereogràfica és coneguda des de l'antiguitat i era conegut "
+"originalment com la projecció planisferi. Conserva els angles en què les "
+"corbes creuen entre si, però no conserva àrea."
 
 #: src/core/StelProjectorClasses.cpp:200
 msgid "Fish-eye"
@@ -1693,7 +1701,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:512
 msgid "Miller cylindrical"
-msgstr ""
+msgstr "Cilíndrica Miller"
 
 #: src/core/StelProjectorClasses.cpp:517
 msgid ""
@@ -1701,6 +1709,9 @@ msgid ""
 "proposed by Osborn Maitland Miller (1897–1979) in 1942. The poles are no "
 "longer mapped to infinity."
 msgstr ""
+"La projecció cilíndrica Miller és una projecció de Mercator modificat, "
+"proposat per Osborne Maitland Miller (1897-1979) el 1942. Els pols ja no "
+"s'assignen a l'infinit."
 
 #: src/core/StelObject.cpp:116
 msgctxt "coordinates for current epoch"
@@ -2321,11 +2332,11 @@ msgstr "Finestra de dreceres"
 
 #: src/gui/StelGui.cpp:221
 msgid "Astronomical calculations window"
-msgstr ""
+msgstr "Finestra de càlculs astronòmics"
 
 #: src/gui/StelGui.cpp:222 src/ui_bookmarksDialog.h:174
 msgid "Bookmarks"
-msgstr ""
+msgstr "Favorits"
 
 #: src/gui/StelGui.cpp:223
 msgid "Copy selected object information to clipboard"
@@ -2726,11 +2737,11 @@ msgstr "Dia Julià"
 
 #: src/gui/AstroCalcDialog.cpp:382 src/gui/AstroCalcDialog.cpp:756
 msgid "CSV (Comma delimited)"
-msgstr ""
+msgstr "CSV (Delimitat per comes)"
 
 #: src/gui/AstroCalcDialog.cpp:384
 msgid "Save calculated ephemerides as..."
-msgstr ""
+msgstr "Guardar efemèrides calculats com..."
 
 #: src/gui/AstroCalcDialog.cpp:460
 msgid "10 minutes"
@@ -2818,7 +2829,7 @@ msgstr "Nebuloses planetàries"
 
 #: src/gui/AstroCalcDialog.cpp:532
 msgid "Bright nebulae"
-msgstr ""
+msgstr "Nebuloses brillants"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:533 src/translations.h:99
@@ -2843,7 +2854,7 @@ msgstr "Objecte 2"
 
 #: src/gui/AstroCalcDialog.cpp:758
 msgid "Save calculated phenomena as..."
-msgstr ""
+msgstr "Guardeu els fenòmens calculats com..."
 
 #: src/gui/AstroCalcDialog.cpp:797 src/gui/AstroCalcDialog.cpp:951
 msgid "Conjunction"
@@ -3247,7 +3258,7 @@ msgstr "Cases de la Lluna a la cultura Japonesa"
 
 #: src/translations.h:183
 msgid "Kamilaroi/Euahlayi"
-msgstr ""
+msgstr "Kamilaroi/Euahlayi"
 
 #: src/translations.h:184
 msgid "Korean"
@@ -3804,6 +3815,9 @@ msgid ""
 "This list by A.J. Crayon and Steve Coe is used by members of the Saguaro "
 "Astronomy Club of Phoenix, AZ. for the Best of the NGC achievement award."
 msgstr ""
+"Aquesta llista de A. J. Crayon i Steve Coe és utilitzada pels membres del "
+"club Saguaro d'Astronomia de Phoenix, AZ. per el premi al millor assoliment "
+"del NGC."
 
 #: src/translations.h:355
 msgid "Andorra"
@@ -4864,52 +4878,52 @@ msgstr "Ignorar"
 
 #: src/translations.h:621
 msgid "&Basic colors"
-msgstr ""
+msgstr "Colors &basics"
 
 #: src/translations.h:622
 msgid "Pick Screen Color"
-msgstr ""
+msgstr "Selecció de color de la pantalla"
 
 #: src/translations.h:623
 msgid "&Custom colors"
-msgstr ""
+msgstr "&Colors personalitzats"
 
 #: src/translations.h:624
 msgid "&Add to Custom Colors"
-msgstr ""
+msgstr "&Afegir als colors personalitzats"
 
 #: src/translations.h:625
 msgid "Hu&e:"
-msgstr ""
+msgstr "&Mat:"
 
 #: src/translations.h:626
 msgid "&Sat:"
-msgstr ""
+msgstr "&Sat:"
 
 #: src/translations.h:627
 msgid "&Val:"
-msgstr ""
+msgstr "&Val:"
 
 #: src/translations.h:628
 msgid "&Red:"
-msgstr ""
+msgstr "&Ver:"
 
 #: src/translations.h:629
 msgid "&Green:"
-msgstr ""
+msgstr "V&erd:"
 
 #: src/translations.h:630
 msgid "Bl&ue:"
-msgstr ""
+msgstr "&Blue:"
 
 #: src/translations.h:631
 msgid "Select Color"
-msgstr ""
+msgstr "Selecciona color"
 
 #: src/translations.h:632
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
-msgstr ""
+msgstr "Cursor a %1, %2 Prem ESC per cancel·lar"
 
 #: src/ui_dateTimeDialogGui.h:380
 msgid "Date and Time in Gregorian calendar"
@@ -5171,7 +5185,7 @@ msgstr "Llistes"
 
 #: src/ui_searchDialogGui.h:714
 msgid "Use on-line astronomical database SIMBAD"
-msgstr ""
+msgstr "Ús de la base de dades astronòmiques en línia SIMBAD"
 
 #: src/ui_searchDialogGui.h:715
 msgid "Server:"
@@ -5187,7 +5201,7 @@ msgstr "Fes servir autocompletat de les inicials de les paraules"
 
 #: src/ui_searchDialogGui.h:718
 msgid "Lock position when coordinates are used"
-msgstr ""
+msgstr "Bloqueja posició quan s'utilitzen les coordenades"
 
 #: src/ui_searchDialogGui.h:719 src/ui_viewDialog.h:2011
 #: src/ui_viewDialog.h:2033 src/ui_viewDialog.h:2050
@@ -5229,7 +5243,7 @@ msgstr "Limit de la magnitud dels estels"
 
 #: src/ui_viewDialog.h:1745 src/ui_viewDialog.h:1784 src/ui_viewDialog.h:1870
 msgid "Limit magnitude:"
-msgstr ""
+msgstr "magnitud límit:"
 
 #: src/ui_viewDialog.h:1747
 msgid "Dim faint stars when a very bright object is visible"
@@ -5320,11 +5334,11 @@ msgstr "Simula velocitat de la llum"
 
 #: src/ui_viewDialog.h:1779
 msgid "Use custom settings of GRS:"
-msgstr ""
+msgstr "Utilitza una configuració personalitzada de GRS:"
 
 #: src/ui_viewDialog.h:1780
 msgid "GRS details..."
-msgstr ""
+msgstr "Detalls GRS..."
 
 #: src/ui_viewDialog.h:1782
 msgid "Limit the magnitude of solar system objects"
@@ -5332,7 +5346,7 @@ msgstr "Limita la magnitud dels objectes del sistema solar"
 
 #: src/ui_viewDialog.h:1785
 msgid "Scale Moon:"
-msgstr ""
+msgstr "Escala Lluna:"
 
 #: src/ui_viewDialog.h:1787
 msgid "Scale factor"
@@ -5479,10 +5493,12 @@ msgid ""
 "Use designations of deep-sky objects instead of their common names for "
 "screen labels"
 msgstr ""
+"Utilitza les denominacions d'objectes de cel profund en lloc dels seus noms "
+"comuns per a les etiquetes de pantalla"
 
 #: src/ui_viewDialog.h:1874
 msgid "Use designations for screen labels"
-msgstr ""
+msgstr "Utilitza les denominacions per les etiquetes de pantalla"
 
 #: src/ui_viewDialog.h:1875
 msgid "Celestial Sphere"
@@ -5530,11 +5546,11 @@ msgstr "Eclíptica (de la data)"
 
 #: src/ui_viewDialog.h:1901
 msgid "Color of equator (J2000.0)"
-msgstr ""
+msgstr "Color del equador (J2000.0)"
 
 #: src/ui_viewDialog.h:1904
 msgid "Color of equator (of date)"
-msgstr ""
+msgstr "Color de l'equador (de data)"
 
 #: src/ui_viewDialog.h:1907
 msgid "Color of ecliptic (J2000.0)"
@@ -14096,6 +14112,11 @@ msgid ""
 "The directions are computed based on spherical trigonometry on a spherical "
 "Earth."
 msgstr ""
+"Algunes religions, especialment l'Islam, s'adhereixen a una pràctica de "
+"l'observació d'una direcció de l'oració cap a un lloc en particular. Es "
+"poden mostrar les línies d'azimut per a dues ubicacions. Les ubicacions "
+"predeterminades són Meca (Kaaba) i Jerusalem. Les adreces es calculen sobre "
+"la base de la trigonometria esfèrica en una Terra esfèrica."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:251
 msgid ""
