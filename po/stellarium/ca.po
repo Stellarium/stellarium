@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-21 19:47+0700\n"
-"PO-Revision-Date: 2016-09-30 22:05+0000\n"
+"PO-Revision-Date: 2016-10-01 15:32+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-10-01 05:50+0000\n"
+"X-Launchpad-Export-Date: 2016-10-02 05:49+0000\n"
 "X-Generator: Launchpad (build 18204)\n"
 
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:188
@@ -5334,11 +5334,11 @@ msgstr "Simula velocitat de la llum"
 
 #: src/ui_viewDialog.h:1779
 msgid "Use custom settings of GRS:"
-msgstr "Utilitza una configuració personalitzada de GRS:"
+msgstr "Utilitza una configuració personalitzada de GTV:"
 
 #: src/ui_viewDialog.h:1780
 msgid "GRS details..."
-msgstr "Detalls GRS..."
+msgstr "Detalls GTV..."
 
 #: src/ui_viewDialog.h:1782
 msgid "Limit the magnitude of solar system objects"
@@ -5554,31 +5554,32 @@ msgstr "Color de l'equador (de data)"
 
 #: src/ui_viewDialog.h:1907
 msgid "Color of ecliptic (J2000.0)"
-msgstr ""
+msgstr "Color de l'eclíptica (J2000.0)"
 
 #: src/ui_viewDialog.h:1910
 msgid "Color of ecliptic (of date)"
-msgstr ""
+msgstr "Color de l'eclíptica (de data)"
 
 #: src/ui_viewDialog.h:1913
 msgid "Color of horizon"
-msgstr ""
+msgstr "Color de l'horitzó"
 
 #: src/ui_viewDialog.h:1916
 msgid "Color of galactic equator"
-msgstr ""
+msgstr "Color de l'equador galàctic"
 
 #: src/ui_viewDialog.h:1919
 msgid "Show Prime (East-West) Vertical."
-msgstr ""
+msgstr "Mostra Primer (est-oest) Vertical."
 
 #: src/ui_viewDialog.h:1923
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
 msgstr ""
+"Mostra colors (cercles grans a través dels pols i els solsticis/equinoccis)."
 
 #: src/ui_viewDialog.h:1925
 msgid "Colures"
-msgstr ""
+msgstr "Colors"
 
 #: src/ui_viewDialog.h:1927
 msgid "Show meridian line."
@@ -5609,10 +5610,12 @@ msgid ""
 "These circles delimit stars which stay always above (respectively below) the "
 "mathematical horizon."
 msgstr ""
+"Aquests cercles delimiten estrelles que romanen sempre per sobre (per sota, "
+"respectivament) l'horitzó matemàtic."
 
 #: src/ui_viewDialog.h:1941
 msgid "Circumpolar circles"
-msgstr ""
+msgstr "Cercles circumpolars"
 
 #: src/ui_viewDialog.h:1943
 msgid "Labels for the Cardinal directions."
@@ -5620,31 +5623,31 @@ msgstr "Les etiquetes dels punts Cardinals."
 
 #: src/ui_viewDialog.h:1947
 msgid "Color of cardinal points"
-msgstr ""
+msgstr "Color dels punts cardinals"
 
 #: src/ui_viewDialog.h:1950
 msgid "Color of meridian"
-msgstr ""
+msgstr "Color del meridià"
 
 #: src/ui_viewDialog.h:1953
 msgid "Color of Prime Vertical"
-msgstr ""
+msgstr "Color del Primer Vertical"
 
 #: src/ui_viewDialog.h:1956
 msgid "Color of colures"
-msgstr ""
+msgstr "Color dels colors"
 
 #: src/ui_viewDialog.h:1959
 msgid "Color of the opposition/conjunction longitude line"
-msgstr ""
+msgstr "El color de la línia de longitud de l'oposició/conjunció"
 
 #: src/ui_viewDialog.h:1962
 msgid "Color of circumpolar circles"
-msgstr ""
+msgstr "Color dels cercles circumpolars"
 
 #: src/ui_viewDialog.h:1965
 msgid "Color of precession circles"
-msgstr ""
+msgstr "Color dels cercles de precessió"
 
 #: src/ui_viewDialog.h:1968
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
@@ -5689,27 +5692,27 @@ msgstr "Coordenades Galàctiques, Sistema II (UAI 1958)."
 
 #: src/ui_viewDialog.h:1992
 msgid "Color of the equatorial grid (J2000.0)"
-msgstr ""
+msgstr "Color de la graella equatorial (J2000.0)"
 
 #: src/ui_viewDialog.h:1995
 msgid "Color of the equatorial grid (of date)"
-msgstr ""
+msgstr "Color de la graella equatorial (de data)"
 
 #: src/ui_viewDialog.h:1998
 msgid "Color of the ecliptical grid (J2000.0)"
-msgstr ""
+msgstr "Color de la graella de l'eclíptica (J2000.0)"
 
 #: src/ui_viewDialog.h:2001
 msgid "Color of the ecliptical grid (of date)"
-msgstr ""
+msgstr "Color de la graella de l'eclíptica (de data)"
 
 #: src/ui_viewDialog.h:2004
 msgid "Color of the azimuthal grid"
-msgstr ""
+msgstr "Color de la graella azimutal"
 
 #: src/ui_viewDialog.h:2007
 msgid "Color of the galactic grid"
-msgstr ""
+msgstr "Color de la graella galàctic"
 
 #: src/ui_viewDialog.h:2009
 msgid "Projection"
@@ -5747,7 +5750,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2020
 msgid "Show illumination "
-msgstr ""
+msgstr "Mostra la il·luminació "
 
 #: src/ui_viewDialog.h:2022
 msgid "Use minimal brightness to leave landscape visible also in darkness"
@@ -5796,11 +5799,11 @@ msgstr "Utilitzeu noms nadius de planetes de la cultura actual"
 
 #: src/ui_viewDialog.h:2043
 msgid "Use native names for planets"
-msgstr ""
+msgstr "Feu servir noms nadius per als planetes"
 
 #: src/ui_viewDialog.h:2044
 msgid "Show lines with thickness"
-msgstr ""
+msgstr "Mostra línies amb gruix"
 
 #: src/ui_viewDialog.h:2046
 msgid "Value in pixels"
@@ -5808,7 +5811,7 @@ msgstr "Valor en píxels"
 
 #: src/ui_viewDialog.h:2048
 msgid "Show art in brightness"
-msgstr ""
+msgstr "Mostra l'art en la brillantor"
 
 #: src/ui_viewDialog.h:2049
 msgid "Show boundaries"
@@ -5863,44 +5866,51 @@ msgstr "Idioma de la Cultura del Cel"
 
 #: src/ui_configurationDialog.h:1100
 msgid "This feature has not been thoroughly tested yet!"
-msgstr ""
+msgstr "Aquesta característica no ha estat provada a fons encara!"
 
 #: src/ui_configurationDialog.h:1102
 msgid "Ephemeris settings (experimental)"
-msgstr ""
+msgstr "Configuració d'efemèrides (experimental)"
 
 #: src/ui_configurationDialog.h:1103 src/ui_configurationDialog.h:1104
 msgid "Not installed"
-msgstr ""
+msgstr "No instal·lat"
 
 #: src/ui_configurationDialog.h:1106
 msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
 msgstr ""
+"DE431 proporciona dades de posició durant els anys -13.000 ... + 17000. "
+"Només per a aplicacions especials."
 
 #: src/ui_configurationDialog.h:1108
 msgid "Use DE431 (long-time data)"
-msgstr ""
+msgstr "Ús DE431 (dades en temps amplis)"
 
 #: src/ui_configurationDialog.h:1110
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
 msgstr ""
+"DE430 ofereix la més alta precisió, només per als anys 1550 ... 2650."
 
 #: src/ui_configurationDialog.h:1112
 msgid "Use DE430 (high accuracy)"
-msgstr ""
+msgstr "Ús DE430 (alta precisió)"
 
 #: src/ui_configurationDialog.h:1114
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
 msgstr ""
+"Usant VSOP87 es recomana per als anys -4000 ... + 8000 només, però ofereix "
+"posicions útils fora d'aquest rang."
 
 #: src/ui_configurationDialog.h:1116
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
+"VSOP87/ELP 2000-82B s'utilitza quan aquests no estan instal·lats o no "
+"activades."
 
 #: src/ui_configurationDialog.h:1117
 msgid "Default options"
@@ -5996,7 +6006,7 @@ msgstr "camps mostrats"
 
 #: src/ui_configurationDialog.h:1153 src/ui_configurationDialog.h:1177
 msgid "Equatorial coordinates, equinox of date"
-msgstr ""
+msgstr "Coordinades equatorials, equinocci de la data"
 
 #: src/ui_configurationDialog.h:1155
 msgid "Right ascension/Declination (of date)"
@@ -6008,7 +6018,7 @@ msgstr "El(s) nombre(s) del catàleg"
 
 #: src/ui_configurationDialog.h:1158
 msgid "Equatorial coordinates, equinox of J2000.0"
-msgstr ""
+msgstr "Coordinades equatorials, equinocci de J2000.0"
 
 #: src/ui_configurationDialog.h:1160
 msgid "Right ascension/Declination (J2000)"
@@ -6190,7 +6200,7 @@ msgstr "Incloure nutació"
 
 #: src/ui_configurationDialog.h:1242
 msgid "Activate this option to calculate azimuth from south towards west."
-msgstr ""
+msgstr "Activa aquesta opció per calcular l'azimut des del sud cap a l'oest."
 
 #: src/ui_configurationDialog.h:1244
 msgid "Azimuth from South"
@@ -6279,7 +6289,7 @@ msgstr "L'allunyament automàtic torna a la direcció inicial de la vista"
 
 #: src/ui_configurationDialog.h:1284
 msgid "Show bookmarks button"
-msgstr ""
+msgstr "Mostra botó de favorits"
 
 #: src/ui_configurationDialog.h:1285
 msgid "Screenshots"
@@ -6448,11 +6458,11 @@ msgstr ""
 
 #: src/ui_greatRedSpotDialog.h:168
 msgid "Great Red Spot Details"
-msgstr ""
+msgstr "Detalls de la Gran Taca Vermella"
 
 #: src/ui_greatRedSpotDialog.h:170
 msgid "Custom settings for position of GRS"
-msgstr ""
+msgstr "Configuració personalitzada per a la posició de GTV"
 
 #: src/ui_greatRedSpotDialog.h:171 src/ui_astroCalcDialog.h:487
 #: src/ui_astroCalcDialog.h:489
@@ -6461,19 +6471,19 @@ msgstr "aaaa.MM.dd hh:mm"
 
 #: src/ui_greatRedSpotDialog.h:172
 msgid "Annual drift (degrees):"
-msgstr ""
+msgstr "Deriva anuals (graus):"
 
 #: src/ui_greatRedSpotDialog.h:173
 msgid "Longitude of GRS (degrees):"
-msgstr ""
+msgstr "Longitud del GTV (graus):"
 
 #: src/ui_greatRedSpotDialog.h:180
 msgid "Date and Time (UTC):"
-msgstr ""
+msgstr "Data i hora (UTC):"
 
 #: src/ui_greatRedSpotDialog.h:184
 msgid "Get the recent GRS measurement"
-msgstr ""
+msgstr "Obtenir recent mesures GTV"
 
 #: src/ui_scriptConsole.h:345
 msgid "Script console"
@@ -6529,11 +6539,11 @@ msgstr "..."
 
 #: src/ui_astroCalcDialog.h:454
 msgid "Astronomical calculations"
-msgstr ""
+msgstr "Càlculs astronòmics"
 
 #: src/ui_astroCalcDialog.h:460
 msgid "Positions"
-msgstr ""
+msgstr "Posicions"
 
 #: src/ui_astroCalcDialog.h:462
 msgid "Planetary positions"
@@ -6549,27 +6559,27 @@ msgstr "Fenòmens"
 
 #: src/ui_astroCalcDialog.h:471
 msgid "Update of planetary positions"
-msgstr ""
+msgstr "Actualització de les posicions planetàries"
 
 #: src/ui_astroCalcDialog.h:473
 msgid "Show dates of positions of current celestial body near markers"
-msgstr ""
+msgstr "Mostra dates de posicions dels cossos celestes propers als marcadors"
 
 #: src/ui_astroCalcDialog.h:475
 msgid "Show dates of positions"
-msgstr ""
+msgstr "Mostra dates de posicions"
 
 #: src/ui_astroCalcDialog.h:477
 msgid "Show markers of positions of the current celestial body on the sky"
-msgstr ""
+msgstr "Mostrar les marques de posicions del cos celeste actual al cel"
 
 #: src/ui_astroCalcDialog.h:479
 msgid "Show markers of positions"
-msgstr ""
+msgstr "Mostrar les marques de posicions"
 
 #: src/ui_astroCalcDialog.h:482
 msgid "Cleanup ephemerides"
-msgstr ""
+msgstr "Esborrar efemèrides"
 
 #: src/ui_astroCalcDialog.h:483
 msgid "Calculate ephemeris"
@@ -6577,7 +6587,7 @@ msgstr "Calcula efemèrides"
 
 #: src/ui_astroCalcDialog.h:484
 msgid "Save ephemeris"
-msgstr ""
+msgstr "Desar efemèrides"
 
 #: src/ui_astroCalcDialog.h:485
 msgid "Time step:"
@@ -6599,7 +6609,7 @@ msgstr "Calcula els fenòmens"
 
 #: src/ui_astroCalcDialog.h:491
 msgid "Save phenomena"
-msgstr ""
+msgstr "Guardeu els fenòmens"
 
 #: src/ui_astroCalcDialog.h:493 src/ui_astroCalcDialog.h:497
 msgid "yyyy.MM.dd"
@@ -6623,31 +6633,31 @@ msgstr "Valor en graus decimals"
 
 #: src/ui_bookmarksDialog.h:176
 msgid "Add date and time"
-msgstr ""
+msgstr "Afegeix data i hora"
 
 #: src/ui_bookmarksDialog.h:177
 msgid "Add location"
-msgstr ""
+msgstr "Afegeix un lloc"
 
 #: src/ui_bookmarksDialog.h:179
 msgid "Add selected object to bookmarks"
-msgstr ""
+msgstr "Afegir als marcadors l'objecte seleccionat"
 
 #: src/ui_bookmarksDialog.h:181
 msgid "&Add bookmark"
-msgstr ""
+msgstr "&Afegix marcador"
 
 #: src/ui_bookmarksDialog.h:182
 msgid "&Remove bookmark"
-msgstr ""
+msgstr "Elimina ma&rcador"
 
 #: src/ui_bookmarksDialog.h:183
 msgid "Clear bookmarks"
-msgstr ""
+msgstr "Esborrar marcadors"
 
 #: src/ui_bookmarksDialog.h:184
 msgid "&Go to..."
-msgstr ""
+msgstr "&Vés a..."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:138
@@ -7112,7 +7122,7 @@ msgstr "Aument: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:843
 #, qt-format
 msgid "Exit pupil: %1 mm"
-msgstr ""
+msgstr "Pupil·la de sortida: %1 mm"
 
 #: plugins/Oculars/src/Oculars.cpp:1975
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:852
