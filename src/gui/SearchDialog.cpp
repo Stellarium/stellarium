@@ -27,6 +27,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelTranslator.hpp"
 #include "Planet.hpp"
+#include "CustomObjectMgr.hpp"
 
 #include "StelObjectMgr.hpp"
 #include "StelGui.hpp"
@@ -677,16 +678,23 @@ void SearchDialog::gotoObject(const QString &nameI18n)
 		else
 		{
 			close();
-			Vec3d pos = simbadResults[nameI18n];
-			Vec3d aimUp;
-			objectMgr->unSelect();
-			mvmgr->setViewUpVector(Vec3d(0., 0., 1.));
-			aimUp=mvmgr->getViewUpVectorJ2000();
-			mvmgr->moveToJ2000(pos, aimUp, mvmgr->getAutoMoveDuration());
-			if (useLockPosition)
-				mvmgr->setFlagLockEquPos(true);
+			GETSTELMODULE(CustomObjectMgr)->addCustomObject(nameI18n, simbadResults[nameI18n]);
 			ui->lineEditSearchSkyObject->clear();
 			ui->completionLabel->clearValues();
+			if (objectMgr->findAndSelect(nameI18n))
+			{
+				const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+				// Can't point to home planet
+				if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
+				{
+					mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
+					mvmgr->setFlagTracking(true);
+				}
+				else
+				{
+					GETSTELMODULE(StelObjectMgr)->unSelect();
+				}
+			}
 		}
 	}
 	else if (objectMgr->findAndSelectI18n(nameI18n) || objectMgr->findAndSelect(nameI18n))
