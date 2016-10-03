@@ -204,6 +204,10 @@ SET(stellarium_lib_SRCS
      core/modules/Constellation.hpp
      core/modules/ConstellationMgr.cpp
      core/modules/ConstellationMgr.hpp
+     core/modules/CustomObject.cpp
+     core/modules/CustomObject.hpp
+     core/modules/CustomObjectMgr.cpp
+     core/modules/CustomObjectMgr.hpp
      core/modules/GridLinesMgr.cpp
      core/modules/GridLinesMgr.hpp
      core/modules/LabelMgr.hpp

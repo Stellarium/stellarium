@@ -26,6 +26,7 @@
 #include "ConstellationMgr.hpp"
 #include "NebulaMgr.hpp"
 #include "LandscapeMgr.hpp"
+#include "CustomObjectMgr.hpp"
 #include "GridLinesMgr.hpp"
 #include "MilkyWay.hpp"
 #include "ZodiacalLight.hpp"
@@ -493,6 +494,11 @@ void StelApp::init(QSettings* conf)
 	getModuleMgr().registerModule(skyLabels);
 
 	skyCultureMgr->init();
+
+	// Init custom objects
+	CustomObjectMgr* custObj = new CustomObjectMgr();
+	custObj->init();
+	getModuleMgr().registerModule(custObj);
 
 	//Create the script manager here, maybe some modules/plugins may want to connect to it
 	//It has to be initialized later after all modules have been loaded by calling initScriptMgr
