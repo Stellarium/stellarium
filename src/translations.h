@@ -82,6 +82,8 @@ class Translations
 		N_("Oort cloud objects");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Constellations");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Custom Objects");
 
 		// =====================================================================
 		// List of deep-sky objects types
