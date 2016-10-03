@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-21 19:47+0700\n"
-"PO-Revision-Date: 2016-10-01 15:32+0000\n"
+"PO-Revision-Date: 2016-10-02 20:57+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-10-02 05:49+0000\n"
+"X-Launchpad-Export-Date: 2016-10-03 05:46+0000\n"
 "X-Generator: Launchpad (build 18204)\n"
 
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:188
@@ -7294,7 +7294,7 @@ msgstr "Camp de visió real proporcionat per aquests binoculars"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:816
 msgid "Exit pupil provided by these binoculars"
-msgstr ""
+msgstr "Pupil·la de sortida proporcionada per aquests prismàtics"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:824
 msgid "Magnification provided by this ocular/lens/telescope combination"
@@ -7310,6 +7310,8 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
 msgstr ""
+"Pupil·la de sortida proporcionada per aquesta combinació de "
+"lent/ocular/telescopi"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:498
@@ -7359,31 +7361,40 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:524
 msgid "You can choose to scale the image you see on the screen."
-msgstr ""
+msgstr "Pots triar escalar la imatge que es veu a la pantalla."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:525
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
 msgstr ""
+"Amb això es pretén mostrar una millor comparació del que una combinació "
+"d'ocular/telescopi respecte una altra."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:526
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will "
 "produce two different exit pupils, changing the view somewhat."
 msgstr ""
+"El mateix ocular en dos telescopis diferents de diferent distància focal "
+"produirà dues pupil·les de sortida diferents, canviant el punt de vista "
+"alguna cosa."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:527
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
 msgstr ""
+"La compensació d'això és que, amb la imatge escalada, una gran part de la "
+"pantalla es pot desaprofitar."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:528
 msgid ""
 "Therefore I recommend that you leave it off, unless you feel you have a need "
 "of it."
 msgstr ""
+"Per tant, recomano que ho deixis fora, llevat que sentis que tens una "
+"necessitat d'ell."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:529
 msgid ""
@@ -7471,7 +7482,7 @@ msgstr "Canvia l'escala del cercle d'imatge"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1139
 msgid "Use semi-transparent mask"
-msgstr ""
+msgstr "Utilitza màscara semitransparent"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1140
 msgid "Sensor view"
@@ -7482,10 +7493,12 @@ msgid ""
 "Enable automatic install the type of mount from the telescope settings for "
 "saving horizontal orientation of CCD frame."
 msgstr ""
+"Habilitar instal·lació automàtica del tipus de muntura de la configuració "
+"del telescopi per a l'estalviar l'orientació horitzontal del marc CCD."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1144
 msgid "Enable automatic install the type of mount"
-msgstr ""
+msgstr "Habilitar instal·lació automàtica del tipus de muntura"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1145
 msgid "Use degrees and minutes for FOV of CCD"
@@ -7585,27 +7598,27 @@ msgstr "Alçada del píxel (micres)"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1175
 msgid "Prism/CCD distance (mm):"
-msgstr ""
+msgstr "Distancia prisma/CCD (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1176
 msgid "Prism/CCD height (mm):"
-msgstr ""
+msgstr "Altura prisma/CCD (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1177
 msgid "Prism/CCD width (mm):"
-msgstr ""
+msgstr "Amplada prisma/CCD (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1178
 msgid "Position angle (degrees):"
-msgstr ""
+msgstr "Angle posició (graus):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1179
 msgid "Off-Axis guider"
-msgstr ""
+msgstr "Guia fora d'eix"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1180
 msgid "Rotation Angle (degrees):"
-msgstr ""
+msgstr "Angle rotació (graus):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1182
 #: plugins/Oculars/src/ui_ocularDialog.h:1191
@@ -7628,7 +7641,7 @@ msgstr "Capgira veticalment"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1190
 msgid "Equatorial Mount"
-msgstr ""
+msgstr "Muntura equatorial"
 
 #: plugins/Satellites/src/Satellites.cpp:68
 #: plugins/Satellites/src/Satellites.cpp:142
@@ -8449,13 +8462,15 @@ msgstr "Connector de control de telescopi"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:255
 msgid "Plug-in and GUI programming"
-msgstr ""
+msgstr "Programació plug-in i IGU"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
 msgid ""
 "This plug-in is based on and reuses a lot of code under the GNU General "
 "Public License:"
 msgstr ""
+"Aquest plug-in es basat i reutilitza una gran quantitat de codi sota la "
+"Llicència pública general de GNU:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:259
 msgid ""
@@ -8463,16 +8478,21 @@ msgid ""
 "Stellarium's code (the client side of Stellarium's original telescope "
 "control feature);"
 msgstr ""
+"Les classes Telescope, TelescopeDummy, Telescopi TelescopeTcp i TelescopeMgr "
+"al codi Stellarium (la part client de la funció de control del telescopi "
+"original de l'Stellarium);"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:260
 msgid "the telescope server core code (licensed under the LGPL)"
-msgstr ""
+msgstr "el codi del nucli del servidor de telescopi (sota la llicència LGPL)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:261
 msgid ""
 "the TelescopeServerLx200 telescope server core code (originally licensed "
 "under the LGPL)"
 msgstr ""
+"el codi del nucli del servidor del telescopi TelescopeServerLx200  servidor "
+"(originalment sota la llicència LGPL)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:262
 msgid ""
