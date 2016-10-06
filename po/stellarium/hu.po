@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-03 23:43+0700\n"
-"PO-Revision-Date: 2016-08-18 08:00+0000\n"
+"PO-Revision-Date: 2016-10-05 16:51+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-10-04 06:05+0000\n"
+"X-Launchpad-Export-Date: 2016-10-06 05:49+0000\n"
 "X-Generator: Launchpad (build 18217)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -33,15 +33,15 @@ msgstr "Típus: <b>%1</b>"
 
 #: src/core/modules/CustomObject.cpp:65
 msgid "custom marker"
-msgstr ""
+msgstr "Egyéni jelölő"
 
 #: src/core/modules/CustomObject.cpp:67
 msgid "custom object"
-msgstr ""
+msgstr "Egyéni objektum"
 
 #: src/core/modules/CustomObjectMgr.cpp:81
 msgid "Marker"
-msgstr ""
+msgstr "Jelölő"
 
 #: src/core/modules/Constellation.cpp:296
 msgid "constellation"
@@ -2145,15 +2145,15 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:174
 msgid "Shift + Left click"
-msgstr ""
+msgstr "Shift + bal katt"
 
 #: src/gui/HelpDialog.cpp:176
 msgid "Delete all custom markers"
-msgstr ""
+msgstr "Egyéni jelölők törlése"
 
 #: src/gui/HelpDialog.cpp:177
 msgid "Shift + Right click"
-msgstr ""
+msgstr "Shift + jobb katt"
 
 #: src/gui/HelpDialog.cpp:180
 #, qt-format
@@ -2351,7 +2351,7 @@ msgstr "Rövidítések ablaka"
 
 #: src/gui/StelGui.cpp:221
 msgid "Astronomical calculations window"
-msgstr ""
+msgstr "Csillagászati számítások ablak"
 
 #: src/gui/StelGui.cpp:222 src/ui_bookmarksDialog.h:174
 msgid "Bookmarks"
@@ -2761,7 +2761,7 @@ msgstr "CSV (vesszővel elválasztva)"
 
 #: src/gui/AstroCalcDialog.cpp:384
 msgid "Save calculated ephemerides as..."
-msgstr ""
+msgstr "Kiszámított efemeriszek mentése mint..."
 
 #: src/gui/AstroCalcDialog.cpp:460
 msgid "10 minutes"
@@ -2849,7 +2849,7 @@ msgstr "Planetáris köd"
 
 #: src/gui/AstroCalcDialog.cpp:532
 msgid "Bright nebulae"
-msgstr ""
+msgstr "Fényes ködök"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:533 src/translations.h:101
@@ -2874,7 +2874,7 @@ msgstr "Objektum 2"
 
 #: src/gui/AstroCalcDialog.cpp:758
 msgid "Save calculated phenomena as..."
-msgstr ""
+msgstr "Kiszámított jelenség mentése mint..."
 
 #: src/gui/AstroCalcDialog.cpp:797 src/gui/AstroCalcDialog.cpp:951
 msgid "Conjunction"
@@ -3051,7 +3051,7 @@ msgstr "Csillagképek"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:86
 msgid "Custom Objects"
-msgstr ""
+msgstr "Egyéni objektumok"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:91
@@ -5188,7 +5188,7 @@ msgstr "Listák"
 
 #: src/ui_searchDialogGui.h:714
 msgid "Use on-line astronomical database SIMBAD"
-msgstr ""
+msgstr "SIMBAD online csillagászati adatbázis használata"
 
 #: src/ui_searchDialogGui.h:715
 msgid "Server:"
@@ -5204,7 +5204,7 @@ msgstr "Automatikus kitöltés csak a szó elejétől"
 
 #: src/ui_searchDialogGui.h:718
 msgid "Lock position when coordinates are used"
-msgstr ""
+msgstr "Pozíció rögzítése, ha koordináták vannak megadva"
 
 #: src/ui_searchDialogGui.h:719 src/ui_viewDialog.h:2011
 #: src/ui_viewDialog.h:2033 src/ui_viewDialog.h:2050
@@ -5544,27 +5544,27 @@ msgstr "Jelenlegi ekliptika"
 
 #: src/ui_viewDialog.h:1901
 msgid "Color of equator (J2000.0)"
-msgstr ""
+msgstr "Egyenlítő színe (J2000.0)"
 
 #: src/ui_viewDialog.h:1904
 msgid "Color of equator (of date)"
-msgstr ""
+msgstr "Egyenlítő színe (dátum)"
 
 #: src/ui_viewDialog.h:1907
 msgid "Color of ecliptic (J2000.0)"
-msgstr ""
+msgstr "Ekliptika színe (J2000.0)"
 
 #: src/ui_viewDialog.h:1910
 msgid "Color of ecliptic (of date)"
-msgstr ""
+msgstr "Ekliptika színe (dátum)"
 
 #: src/ui_viewDialog.h:1913
 msgid "Color of horizon"
-msgstr ""
+msgstr "Horizont színe"
 
 #: src/ui_viewDialog.h:1916
 msgid "Color of galactic equator"
-msgstr ""
+msgstr "Galaktikus egyenlítő színe"
 
 #: src/ui_viewDialog.h:1919
 msgid "Show Prime (East-West) Vertical."
@@ -5621,11 +5621,11 @@ msgstr "Fő égtájak feliratai"
 
 #: src/ui_viewDialog.h:1947
 msgid "Color of cardinal points"
-msgstr ""
+msgstr "Kardinális pontok színe"
 
 #: src/ui_viewDialog.h:1950
 msgid "Color of meridian"
-msgstr ""
+msgstr "Délkör színe"
 
 #: src/ui_viewDialog.h:1953
 msgid "Color of Prime Vertical"
@@ -5641,11 +5641,11 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1962
 msgid "Color of circumpolar circles"
-msgstr ""
+msgstr "Cirkumpoláris körök színe"
 
 #: src/ui_viewDialog.h:1965
 msgid "Color of precession circles"
-msgstr ""
+msgstr "Precessziós körök színe"
 
 #: src/ui_viewDialog.h:1968
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
@@ -5861,7 +5861,7 @@ msgstr "Az égbolt kultúrájának nyelve"
 
 #: src/ui_configurationDialog.h:1100
 msgid "This feature has not been thoroughly tested yet!"
-msgstr ""
+msgstr "Ez a képesség még nincs teljesen kitesztelve!"
 
 #: src/ui_configurationDialog.h:1102
 msgid "Ephemeris settings (experimental)"
@@ -6278,7 +6278,7 @@ msgstr "Automatikus kicsinyítéskor visszaáll az eredeti látóirány"
 
 #: src/ui_configurationDialog.h:1284
 msgid "Show bookmarks button"
-msgstr ""
+msgstr "Könyvjelzők gomb mutatása"
 
 #: src/ui_configurationDialog.h:1285
 msgid "Screenshots"
@@ -6294,7 +6294,7 @@ msgstr "Színek megfordítása"
 
 #: src/ui_configurationDialog.h:1289
 msgid "Star catalog updates"
-msgstr "Csillagkatalógus frissítés"
+msgstr "Csillagkatalógus bővítés"
 
 #: src/ui_configurationDialog.h:1291
 msgid "Click here to start downloading"
@@ -6526,11 +6526,11 @@ msgstr "…"
 
 #: src/ui_astroCalcDialog.h:454
 msgid "Astronomical calculations"
-msgstr ""
+msgstr "Csillagászati számítások"
 
 #: src/ui_astroCalcDialog.h:460
 msgid "Positions"
-msgstr ""
+msgstr "Pozíciók"
 
 #: src/ui_astroCalcDialog.h:462
 msgid "Planetary positions"
@@ -6604,7 +6604,7 @@ msgstr "éééé.hh.nn"
 
 #: src/ui_astroCalcDialog.h:494
 msgid "Between objects:"
-msgstr "Objektumok között:"
+msgstr "Objektum:"
 
 #: src/ui_astroCalcDialog.h:495
 msgid "and"
@@ -9145,6 +9145,8 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:421
 msgid "Argo Navis is a 'Digital Telescope Computer' by Wildcard Innovations."
 msgstr ""
+"Az Argo Navis egy 'Digitális távcsőszámítógép', a Wildcard Innovations "
+"terméke."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:422
 msgid ""
@@ -10071,7 +10073,7 @@ msgstr "Naprendszer konfigurációs fájl mentése más néven..."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:193
 msgid "Configuration files"
-msgstr ""
+msgstr "Beállítófájlok"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:195
 msgid "Select a file to replace the Solar System configuration file"
@@ -11803,7 +11805,7 @@ msgstr "Csak a lakható exobolygók mutatása"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:484
 msgid "Enable display designations of exoplanets"
-msgstr ""
+msgstr "Exobolygók jelöléseinek mutatása"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:486
 msgid "Show exoplanets button on toolbar"
@@ -12330,7 +12332,7 @@ msgstr ""
 
 #: plugins/FOV/src/FOV.cpp:86
 msgid "Set FOV to"
-msgstr ""
+msgstr "Látómező:"
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:80
 msgid "Field of View plug-in"
@@ -14158,11 +14160,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:499
 msgid "Select color for Custom Azimuth 1 line"
-msgstr ""
+msgstr "Egyéni 1-es azimutvonal színe"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:510
 msgid "Select color for Custom Azimuth 2 line"
-msgstr ""
+msgstr "Egyéni 2-es azimutvonal színe"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:471
 msgid "ArchaeoLines Configuration"
@@ -14178,7 +14180,7 @@ msgstr "A színek megváltoztatásához ki kell lépni a teljes képernyős mód
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:475
 msgid "Geographic Location 1"
-msgstr ""
+msgstr "Földrajzi hely 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:477
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:483
@@ -14187,7 +14189,7 @@ msgstr "Felirat megadása a vonalhoz"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:481
 msgid "Geographic Location 2"
-msgstr ""
+msgstr "Földrajzi hely 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:486
 msgid "Change color"
