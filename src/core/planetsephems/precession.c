@@ -22,6 +22,10 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  * New precession expressions, valid for long time intervals
  * Astronomy&Astrophysics 534, A22 (2011)
  * DOI: 10.1051/0004-6361/201117274
+ * J. Vondrak, N. Capitaine, P. Wallace
+ * New precession expressions, valid for long time intervals (Corrigendum)
+ * A&A 541, C1 (2012)
+ * DOI: 10.1051/0004-6361/201117274e
  * The data are only applicable for a time range of 200.000 years around J2000.
  * This is by far enough for Stellarium as of 2015, but just to make sure I added a few asserts.
  */
@@ -50,7 +54,7 @@ static const double PQvals[8][5]=
   { 1.0/ 492.20,   413.442940, -356.652376,   376.202861,   421.535876 },
   { 1.0/1183.00,    78.614193, -186.387003,   184.778874,   -36.776172 },
   { 1.0/ 622.00,  -180.732815, -316.800070,   335.321713,  -145.278396 },
-  { 1.0/ 882.00,   -87.676083,  198.296071,  -185.138669,   -34.744450 },
+  { 1.0/ 882.00,   -87.676083,  198.296701,  -185.138669,   -34.744450 },
   { 1.0/ 547.00,    46.140315,  101.135679,  -120.972830,    22.885731 }};
 
 static const double XYvals[14][5]=
