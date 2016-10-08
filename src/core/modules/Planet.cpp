@@ -348,8 +348,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			}
 			else
 			{
-				oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos))) << "<br>";
-				oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(elongation)) << "<br>";
+				oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos), true)) << "<br>";
+				oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(elongation, true)) << "<br>";
 			}
 
 			oss << QString(q_("Phase: %1")).arg(getPhase(observerHelioPos), 0, 'f', 2) << "<br>";
