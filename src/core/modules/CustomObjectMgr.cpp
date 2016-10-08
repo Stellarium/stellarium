@@ -96,7 +96,6 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 void CustomObjectMgr::init()
 {
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
-	CustomObject::markerTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cross.png");
 
 	customObjects.clear();
 
@@ -108,8 +107,7 @@ void CustomObjectMgr::init()
 
 void CustomObjectMgr::deinit()
 {
-	customObjects.clear();
-	CustomObject::markerTexture.clear();
+	customObjects.clear();	
 	texPointer.clear();
 }
 
