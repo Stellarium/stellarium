@@ -61,6 +61,7 @@ public:
 		EphemerisRA,		//! right ascension
 		EphemerisDec,		//! declination
 		EphemerisMagnitude,	//! magnitude
+		EphemerisVMagnitude,	//! visual magnitude
 		EphemerisCount		//! total number of columns
 	};
 

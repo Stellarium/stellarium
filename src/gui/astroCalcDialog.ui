@@ -311,6 +311,9 @@
             <property name="itemsExpandable">
              <bool>false</bool>
             </property>
+            <property name="sortingEnabled">
+             <bool>true</bool>
+            </property>
             <property name="expandsOnDoubleClick">
              <bool>false</bool>
             </property>
@@ -614,7 +617,7 @@
   <customwidget>
    <class>BarFrame</class>
    <extends>QFrame</extends>
-   <header location="global">Dialog.hpp</header>
+   <header>Dialog.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
