@@ -78,7 +78,7 @@ private:
 
 	Vec3d XYZ;                         // holds J2000 position
 
-	static StelTextureSP markerTexture;
+	StelTextureSP markerTexture;
 	static Vec3f markerColor;
 	static float markerSize;
 

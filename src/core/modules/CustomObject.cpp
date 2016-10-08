@@ -22,28 +22,30 @@
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelTextureMgr.hpp"
+#include "StelFileMgr.hpp"
 #include "StelTexture.hpp"
 #include "StelTranslator.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelProjector.hpp"
 
-StelTextureSP CustomObject::markerTexture;
 Vec3f CustomObject::markerColor = Vec3f(0.1f,1.0f,0.1f);
 float CustomObject::markerSize = 1.f;
 
 CustomObject::CustomObject(const QString& codesignation, const Vec3d& coordinates, const bool isVisible)
 	: initialized(false)
+	, markerTexture(NULL)
 {
 	designation = codesignation;
 	XYZ = coordinates;
 	isMarker = isVisible;
-
-	initialized = true;
+	markerTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cross.png");
+	initialized = true;	
 }
 
 CustomObject::~CustomObject()
 {
-	//
+	markerTexture.clear();
 }
 
 float CustomObject::getSelectPriority(const StelCore* core) const
@@ -116,7 +118,7 @@ void CustomObject::draw(StelCore* core, StelPainter *painter)
 
 	if (isMarker)
 	{
-		CustomObject::markerTexture->bind();
+		markerTexture->bind();
 		float size = getAngularSize(NULL)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
 		float shift = markerSize + size/1.6f;
 
