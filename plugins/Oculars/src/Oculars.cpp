@@ -169,7 +169,6 @@ Oculars::Oculars():
 	actualFOV(0),
 	initialFOV(0),
 	flagInitFOVUsage(false),
-	flagUseFlipForCCD(false),
 	flagAutosetMountForCCD(false),
 	equatorialMountEnabled(false),
 	reticleRotation(0)
@@ -665,7 +664,6 @@ void Oculars::init()
 		setFlagDecimalDegrees(settings->value("use_decimal_degrees", false).toBool());
 		setFlagLimitMagnitude(settings->value("limit_stellar_magnitude", true).toBool());
 		setFlagInitFovUsage(settings->value("use_initial_fov", false).toBool());
-		setFlagUseFlipForCCD(settings->value("use_ccd_flip", false).toBool());
 		setFlagUseSemiTransparency(settings->value("use_semi_transparency", false).toBool());
 		setFlagHideGridsLines(settings->value("hide_grids_and_lines", true).toBool());
 		setFlagAutosetMountForCCD(settings->value("use_mount_autoset", false).toBool());
@@ -1423,12 +1421,6 @@ void Oculars::toggleCCD(bool show)
 		else
 			movementManager->zoomTo(initialFOV);
 
-		if (getFlagUseFlipForCCD())
-		{
-			core->setFlipHorz(false);
-			core->setFlipVert(false);
-		}
-
 		if (getFlagAutosetMountForCCD())
 		{
 			StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
@@ -1575,19 +1567,6 @@ void Oculars::paintCCDBounds()
 			const double ccdXRatio = ccd->getActualFOVx(telescope, lens) / screenFOV;
 			const double ccdYRatio = ccd->getActualFOVy(telescope, lens) / screenFOV;
 
-			// flip are needed and allowed?
-			float ratioLimit = 0.125f;
-			if (getFlagUseFlipForCCD() && (ccdXRatio>=ratioLimit || ccdYRatio>=ratioLimit))
-			{
-				core->setFlipHorz(telescope->isHFlipped());
-				core->setFlipVert(telescope->isVFlipped());
-			}
-			else
-			{
-				core->setFlipHorz(false);
-				core->setFlipVert(false);
-			}
-
 			// As the FOV is based on the narrow aspect of the screen, we need to calculate
 			// height & width based soley off of that dimension.
 			int aspectIndex = 2;
@@ -1679,7 +1658,7 @@ void Oculars::paintCCDBounds()
 				// frame and equatorial coordinates for epoch J2000.0 of that center.
 				// Details: https://bugs.launchpad.net/stellarium/+bug/1404695
 
-				ratioLimit = 0.25f;
+				float ratioLimit = 0.25f;
 				if (ccdXRatio>=ratioLimit || ccdYRatio>=ratioLimit)
 				{
 					// draw cross at center
@@ -2445,18 +2424,6 @@ void Oculars::setFlagInitFovUsage(const bool b)
 bool Oculars::getFlagInitFovUsage() const
 {
 	return flagInitFOVUsage;
-}
-
-void Oculars::setFlagUseFlipForCCD(const bool b)
-{
-	flagUseFlipForCCD = b;
-	settings->setValue("use_ccd_flip", b);
-	settings->sync();
-}
-
-bool Oculars::getFlagUseFlipForCCD() const
-{
-	return flagUseFlipForCCD;
 }
 
 void Oculars::setFlagAutosetMountForCCD(const bool b)
