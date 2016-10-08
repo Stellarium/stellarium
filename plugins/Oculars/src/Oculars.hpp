@@ -168,6 +168,9 @@ public slots:
 	void setFlagUseSemiTransparency(const bool b);
 	bool getFlagUseSemiTransparency(void) const;
 
+	void setFlagHideGridsLines(const bool b);
+	bool getFlagHideGridsLines(void) const;
+
 signals:
 	void enableOcularChanged(bool value);
 	void enableCrosshairsChanged(bool value);
@@ -259,15 +262,25 @@ private:
 
 	bool flagAzimuthalGrid;		//!< Flag to track if AzimuthalGrid was displayed at activation.
 	bool flagGalacticGrid;		//!< Flag to track if GalacticGrid was displayed at activation.
-	bool flagEquatorGrid;		//!< Flag to track if EquatorGrid was displayed at activation.
 	bool flagEquatorJ2000Grid;	//!< Flag to track if EquatorJ2000Grid was displayed at activation.
-	bool flagEquatorLine;		//!< Flag to track if EquatorLine was displayed at activation.
-	bool flagEclipticLine;		//!< Flag to track if EclipticLine was displayed at activation.
+	bool flagEquatorGrid;		//!< Flag to track if EquatorGrid was displayed at activation.
+	bool flagEquatorJ2000Line;	//!< Flag to track if EquatorJ2000Line was displayed at activation.
+	bool flagEquatorLine;		//!< Flag to track if EquatorLine was displayed at activation.	
+	bool flagEclipticJ2000Line;	//!< Flag to track if EclipticJ2000Line was displayed at activation.
+	bool flagEclipticLine;		//!< Flag to track if EclipticLine was displayed at activation.	
 	bool flagEclipticJ2000Grid;	//!< Flag to track if EclipticJ2000Grid was displayed at activation.
+	bool flagEclipticGrid;		//!< Flag to track if EclipticGrid was displayed at activation.
 	bool flagMeridianLine;		//!< Flag to track if MeridianLine was displayed at activation.
 	bool flagLongitudeLine;		//!< Flag to track if LongitudeLine was displayed at activation.
 	bool flagHorizonLine;		//!< Flag to track if HorizonLine was displayed at activation.
 	bool flagGalacticEquatorLine;	//!< Flag to track if GalacticEquatorLine was displayed at activation.
+	bool flagPrimeVerticalLine;	//!< Flag to track if PrimeVerticalLine was displayed at activation.
+	bool flagColureLines;		//!< Flag to track if ColureLines was displayed at activation.
+	bool flagCircumpolarCircles;	//!< Flag to track if CircumpolarCircles was displayed at activation.
+	bool flagPrecessionCircles;	//!< Flag to track if PrecessionCircles was displayed at activation.
+
+	bool flagCardinalPoints;	//!< Flag to track if CardinalPoints was displayed at activation.
+
 	bool flagAdaptation;		//!< Flag to track if adaptationCheckbox was enabled at activation.
 
 	bool flagLimitStars;		//!< Flag to track limit magnitude for stars
@@ -289,6 +302,7 @@ private:
 	bool guiPanelEnabled;
 	bool flagDecimalDegrees;
 	bool flagSemiTransporency;
+	bool flagHideGridsLines;
 	bool flipVert;
 	bool flipHorz;
 
