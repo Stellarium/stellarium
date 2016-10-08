@@ -371,7 +371,7 @@ StelProjectorP StelCore::getProjection(FrameType frameType, RefractionMode refra
 		case FrameJ2000:
 			return getProjection(getJ2000ModelViewTransform(refractionMode));
 		case FrameGalactic:
-			 return getProjection(getGalacticModelViewTransform(refractionMode));
+			return getProjection(getGalacticModelViewTransform(refractionMode));
 		default:
 			qDebug() << "Unknown reference frame type: " << (int)frameType << ".";
 	}
