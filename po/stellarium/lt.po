@@ -7,16 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-21 19:47+0700\n"
+"POT-Creation-Date: 2016-10-03 23:43+0700\n"
 "PO-Revision-Date: 2016-07-13 04:30+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-09-22 06:41+0000\n"
-"X-Generator: Launchpad (build 18204)\n"
+"X-Launchpad-Export-Date: 2016-10-04 06:09+0000\n"
+"X-Generator: Launchpad (build 18217)\n"
 
+#: src/core/modules/CustomObject.cpp:65 src/core/modules/CustomObject.cpp:67
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:188
 #: src/core/modules/Planet.cpp:229 src/core/modules/MinorPlanet.cpp:213
 #: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:192
@@ -28,6 +29,18 @@ msgstr ""
 msgid "Type: <b>%1</b>"
 msgstr "Tipas: <b>%1</b>"
 
+#: src/core/modules/CustomObject.cpp:65
+msgid "custom marker"
+msgstr ""
+
+#: src/core/modules/CustomObject.cpp:67
+msgid "custom object"
+msgstr ""
+
+#: src/core/modules/CustomObjectMgr.cpp:81
+msgid "Marker"
+msgstr ""
+
 #: src/core/modules/Constellation.cpp:296
 msgid "constellation"
 msgstr "žvaigždynas"
@@ -36,7 +49,7 @@ msgstr "žvaigždynas"
 #: src/core/modules/GridLinesMgr.cpp:951 src/core/modules/LandscapeMgr.cpp:414
 #: src/core/modules/NebulaMgr.cpp:364 src/core/modules/NebulaMgr.cpp:365
 #: src/core/modules/SolarSystem.cpp:203 src/core/modules/MilkyWay.cpp:74
-#: src/core/modules/ZodiacalLight.cpp:80 src/core/StelApp.cpp:516
+#: src/core/modules/ZodiacalLight.cpp:80 src/core/StelApp.cpp:522
 #: src/core/StelCore.cpp:222 src/core/StelSkyLayerMgr.cpp:88
 #: src/StelMainView.cpp:575
 msgid "Display Options"
@@ -983,7 +996,7 @@ msgstr "Paukščių Taką"
 msgid "Zodiacal Light"
 msgstr ""
 
-#: src/core/StelApp.cpp:516
+#: src/core/StelApp.cpp:522
 msgid "Night mode"
 msgstr "Nakties režimas"
 
@@ -2018,7 +2031,7 @@ msgstr "Stellarium žinynas"
 msgid "Keys"
 msgstr "Klavišai"
 
-#: src/gui/HelpDialog.cpp:140 src/gui/HelpDialog.cpp:212
+#: src/gui/HelpDialog.cpp:140 src/gui/HelpDialog.cpp:218
 msgid "Further Reading"
 msgstr "Tolesniam skaitymui"
 
@@ -2062,7 +2075,23 @@ msgstr "Spragtelėti dešiniu pelės klavišu"
 msgid "CTRL + Left click"
 msgstr "Ctrl + kairiojo pelės klavišo spustelėjimas"
 
+#: src/gui/HelpDialog.cpp:173
+msgid "Add custom marker"
+msgstr ""
+
 #: src/gui/HelpDialog.cpp:174
+msgid "Shift + Left click"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:176
+msgid "Delete all custom markers"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:177
+msgid "Shift + Right click"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:180
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
@@ -2071,7 +2100,7 @@ msgstr ""
 "Žemiau išvardinti tik veiksmai su priskirtais sparčiaisiais klavišais. Kiti "
 "veiksmai gali būti pasiekiami klavišu \"%1\"."
 
-#: src/gui/HelpDialog.cpp:213
+#: src/gui/HelpDialog.cpp:219
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
@@ -2079,17 +2108,17 @@ msgstr ""
 "Šios nuorodos veda į interneto svetaines ir bus atidarytos interneto "
 "naršyklėje:\n"
 
-#: src/gui/HelpDialog.cpp:214
+#: src/gui/HelpDialog.cpp:220
 msgid "The Stellarium User Guide"
 msgstr "Stellarium vartotojo žinynas"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:218
+#: src/gui/HelpDialog.cpp:224
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{Dažniausiai užduodami klausimai} apie Stellarium.  Su atsakymais."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:223
+#: src/gui/HelpDialog.cpp:229
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
@@ -2098,7 +2127,7 @@ msgstr ""
 "sukurtas vietoves bei scenarijus."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:228
+#: src/gui/HelpDialog.cpp:234
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
@@ -2107,7 +2136,7 @@ msgstr ""
 "Stellarium, parašykite pagalbos prašymą čia ir mes pabandysime padėti."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:233
+#: src/gui/HelpDialog.cpp:239
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -2118,50 +2147,50 @@ msgstr ""
 "galite pranešti čia."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:238
+#: src/gui/HelpDialog.cpp:244
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Forumai} - aptarkite Stellarium su kitais vartotojais."
 
-#: src/gui/HelpDialog.cpp:297
+#: src/gui/HelpDialog.cpp:303
 msgid "Developers"
 msgstr "Programuotojai"
 
-#: src/gui/HelpDialog.cpp:298
+#: src/gui/HelpDialog.cpp:304
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Projekto koordinatorius ir pagrindinis programuotojas: %1"
 
-#: src/gui/HelpDialog.cpp:299
+#: src/gui/HelpDialog.cpp:305
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Grafikos/kt. dizaineris: %1"
 
-#: src/gui/HelpDialog.cpp:300 src/gui/HelpDialog.cpp:301
-#: src/gui/HelpDialog.cpp:302 src/gui/HelpDialog.cpp:303
-#: src/gui/HelpDialog.cpp:304 src/gui/HelpDialog.cpp:305
-#: src/gui/HelpDialog.cpp:306 src/gui/HelpDialog.cpp:312
-#: src/gui/HelpDialog.cpp:313 src/gui/HelpDialog.cpp:314
-#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
-#: src/gui/HelpDialog.cpp:317
+#: src/gui/HelpDialog.cpp:306 src/gui/HelpDialog.cpp:307
+#: src/gui/HelpDialog.cpp:308 src/gui/HelpDialog.cpp:309
+#: src/gui/HelpDialog.cpp:310 src/gui/HelpDialog.cpp:311
+#: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:318
+#: src/gui/HelpDialog.cpp:319 src/gui/HelpDialog.cpp:320
+#: src/gui/HelpDialog.cpp:321 src/gui/HelpDialog.cpp:322
+#: src/gui/HelpDialog.cpp:323
 #, qt-format
 msgid "Developer: %1"
 msgstr "Programuotojas: %1"
 
-#: src/gui/HelpDialog.cpp:307
+#: src/gui/HelpDialog.cpp:313
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "Nuolatinė integracija: %1"
 
-#: src/gui/HelpDialog.cpp:308
+#: src/gui/HelpDialog.cpp:314
 #, qt-format
 msgid "Tester: %1"
 msgstr "Testuotojas: %1"
 
-#: src/gui/HelpDialog.cpp:309
+#: src/gui/HelpDialog.cpp:315
 msgid "Former Developers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:310
+#: src/gui/HelpDialog.cpp:316
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -2169,24 +2198,24 @@ msgstr ""
 "Keli žmonės įnešė ryškų indėlį, tačiau nebėra aktyvūs. Jų darbas stipriai "
 "patobulino projektą:"
 
-#: src/gui/HelpDialog.cpp:311
+#: src/gui/HelpDialog.cpp:317
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Žinyno autorius/programuotojas: %1"
 
-#: src/gui/HelpDialog.cpp:318 src/gui/HelpDialog.cpp:319
+#: src/gui/HelpDialog.cpp:324 src/gui/HelpDialog.cpp:325
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX programuotojas: %1"
 
-#: src/gui/HelpDialog.cpp:320
+#: src/gui/HelpDialog.cpp:326
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
 #: plugins/Oculars/src/gui/OcularDialog.cpp:517
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
 msgid "Contributors"
 msgstr "Pagalbininkai"
 
-#: src/gui/HelpDialog.cpp:321
+#: src/gui/HelpDialog.cpp:327
 #, qt-format
 msgid ""
 "Several people have made contributions to the project and their work has "
@@ -2512,83 +2541,83 @@ msgstr "natūralu"
 msgid "starchart"
 msgstr "žvaigždėlapis"
 
-#: src/gui/SearchDialog.cpp:211
+#: src/gui/SearchDialog.cpp:212
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:212
+#: src/gui/SearchDialog.cpp:213
 msgctxt "coordinate system"
 msgid "Equatorial"
 msgstr "Pausiaujinės"
 
-#: src/gui/SearchDialog.cpp:213
+#: src/gui/SearchDialog.cpp:214
 msgctxt "coordinate system"
 msgid "Horizontal"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:214
+#: src/gui/SearchDialog.cpp:215
 msgctxt "coordinate system"
 msgid "Galactic"
 msgstr "Galaktika"
 
-#: src/gui/SearchDialog.cpp:215
+#: src/gui/SearchDialog.cpp:216
 msgctxt "coordinate system"
 msgid "Ecliptic"
 msgstr "Ekliptika"
 
-#: src/gui/SearchDialog.cpp:216
+#: src/gui/SearchDialog.cpp:217
 msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:244
+#: src/gui/SearchDialog.cpp:245
 msgid "Right ascension"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:247
+#: src/gui/SearchDialog.cpp:248
 msgid "Declination"
 msgstr "Deklinacija"
 
-#: src/gui/SearchDialog.cpp:255
+#: src/gui/SearchDialog.cpp:256
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:945
 msgid "Azimuth"
 msgstr "Azimutas"
 
-#: src/gui/SearchDialog.cpp:258
+#: src/gui/SearchDialog.cpp:259
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
 msgid "Altitude"
 msgstr "Aukštis"
 
-#: src/gui/SearchDialog.cpp:268
+#: src/gui/SearchDialog.cpp:269
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:480
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:515
 msgid "Longitude"
 msgstr "Ilguma"
 
-#: src/gui/SearchDialog.cpp:271
+#: src/gui/SearchDialog.cpp:272
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:479
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:516
 msgid "Latitude"
 msgstr "Platuma"
 
-#: src/gui/SearchDialog.cpp:594
+#: src/gui/SearchDialog.cpp:595
 msgid "Simbad Lookup Error"
 msgstr "Simbad Paieškos Klaida"
 
-#: src/gui/SearchDialog.cpp:602
+#: src/gui/SearchDialog.cpp:603
 msgid "Simbad Lookup"
 msgstr "Simbad Paieška"
 
-#: src/gui/SearchDialog.cpp:808
+#: src/gui/SearchDialog.cpp:816
 msgid "University of Strasbourg (France)"
 msgstr "Strasburgo Universitetas (Prancūzija)"
 
-#: src/gui/SearchDialog.cpp:809
+#: src/gui/SearchDialog.cpp:817
 msgid "Harvard University (USA)"
 msgstr "Harvardo Universitetas (JAV)"
 
-#: src/gui/SearchDialog.cpp:882
+#: src/gui/SearchDialog.cpp:890
 msgid "Paste and Search"
 msgstr "Įkopijuoti ir ieškoti"
 
@@ -2744,13 +2773,13 @@ msgid "Oort cloud objects"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:530 src/translations.h:115
+#: src/gui/AstroCalcDialog.cpp:530 src/translations.h:117
 #: src/ui_viewDialog.h:1850
 msgid "Star clusters"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:531 src/translations.h:97
+#: src/gui/AstroCalcDialog.cpp:531 src/translations.h:99
 msgid "Planetary nebulae"
 msgstr "Planetiškasis ūkas"
 
@@ -2759,7 +2788,7 @@ msgid "Bright nebulae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:533 src/translations.h:99
+#: src/gui/AstroCalcDialog.cpp:533 src/translations.h:101
 msgid "Dark nebulae"
 msgstr ""
 
@@ -2942,578 +2971,583 @@ msgid "Constellations"
 msgstr "Žvaigždynai"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:89
-msgid "Bright galaxies"
+#: src/translations.h:86
+msgid "Custom Objects"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:91
-msgid "Open star clusters"
+msgid "Bright galaxies"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:93
-msgid "Globular star clusters"
+msgid "Open star clusters"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:95
+msgid "Globular star clusters"
+msgstr ""
+
+#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
+#: src/translations.h:97
 msgid "Nebulae"
 msgstr "Ūkai"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:101
+#: src/translations.h:103
 msgid "Clusters associated with nebulosity"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:103
+#: src/translations.h:105
 msgid "HII regions"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:105
+#: src/translations.h:107
 msgid "Reflection nebulae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:107 src/ui_viewDialog.h:1853
+#: src/translations.h:109 src/ui_viewDialog.h:1853
 msgid "Active galaxies"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:109
+#: src/translations.h:111
 msgid "Radio galaxies"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:111 src/ui_viewDialog.h:1847
+#: src/translations.h:113 src/ui_viewDialog.h:1847
 msgid "Interacting galaxies"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:113
+#: src/translations.h:115
 msgid "Bright quasars"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:117
+#: src/translations.h:119
 msgid "Stellar associations"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:119
+#: src/translations.h:121
 msgid "Star clouds"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:121
+#: src/translations.h:123
 msgid "Bipolar nebulae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:123
+#: src/translations.h:125
 msgid "Emission nebulae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:125 src/ui_viewDialog.h:1846
+#: src/translations.h:127 src/ui_viewDialog.h:1846
 msgid "Supernova remnants"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:127
+#: src/translations.h:129
 msgid "Interstellar matter"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:129
+#: src/translations.h:131
 msgid "Emission objects"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:131
+#: src/translations.h:133
 msgid "BL Lac objects"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:133
+#: src/translations.h:135
 msgid "Blazars"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:135
+#: src/translations.h:137
 msgid "Molecular Clouds"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:137
+#: src/translations.h:139
 msgid "Young Stellar Objects"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:139
+#: src/translations.h:141
 msgid "Possible Quasars"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:141
+#: src/translations.h:143
 msgid "Possible Planetary Nebulae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:143
+#: src/translations.h:145
 msgid "Protoplanetary Nebulae"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:145 src/ui_viewDialog.h:1810
+#: src/translations.h:147 src/ui_viewDialog.h:1810
 msgid "Messier Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:147 src/ui_viewDialog.h:1813
+#: src/translations.h:149 src/ui_viewDialog.h:1813
 msgid "Caldwell Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:149
+#: src/translations.h:151
 msgid "Barnard Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:151
+#: src/translations.h:153
 msgid "Sharpless Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:153
+#: src/translations.h:155
 msgid "Van den Bergh Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:155
+#: src/translations.h:157
 msgid "The Catalogue of Rodgers, Campbell, and Whiteoak"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:157
+#: src/translations.h:159
 msgid "Collinder Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:159
+#: src/translations.h:161
 msgid "Melotte Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:161
+#: src/translations.h:163
 msgid "Dwarf galaxies"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:163
+#: src/translations.h:165
 msgid "Herschel 400 Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/translations.h:168
+#: src/translations.h:170
 msgid "Interesting double stars"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/translations.h:170
+#: src/translations.h:172
 msgid "Interesting variable stars"
 msgstr ""
 
-#: src/translations.h:174
+#: src/translations.h:176
 msgid "Arabic"
 msgstr "Arabų"
 
-#: src/translations.h:175
+#: src/translations.h:177
 msgid "Arabic Moon Stations"
 msgstr ""
 
-#: src/translations.h:176
+#: src/translations.h:178
 msgid "Aztec"
 msgstr "Actekų"
 
-#: src/translations.h:177
+#: src/translations.h:179
 msgid "Boorong"
 msgstr ""
 
-#: src/translations.h:178
+#: src/translations.h:180
 msgid "Chinese"
 msgstr "Kinų"
 
-#: src/translations.h:179
+#: src/translations.h:181
 msgid "Egyptian"
 msgstr "Egiptiečių"
 
-#: src/translations.h:180
+#: src/translations.h:182
 msgid "Inuit"
 msgstr "Inuitų"
 
-#: src/translations.h:181
+#: src/translations.h:183
 msgid "Indian Vedic"
 msgstr "Indų Vedų"
 
-#: src/translations.h:182
+#: src/translations.h:184
 msgid "Japanese Moon Stations"
 msgstr ""
 
-#: src/translations.h:183
+#: src/translations.h:185
 msgid "Kamilaroi/Euahlayi"
 msgstr ""
 
-#: src/translations.h:184
+#: src/translations.h:186
 msgid "Korean"
 msgstr "Korėjiečių"
 
-#: src/translations.h:185
+#: src/translations.h:187
 msgid "Dakota/Lakota/Nakota"
 msgstr ""
 
-#: src/translations.h:186
+#: src/translations.h:188
 msgid "Macedonian"
 msgstr ""
 
-#: src/translations.h:187
+#: src/translations.h:189
 msgid "Maori"
 msgstr "Maorių"
 
-#: src/translations.h:188
+#: src/translations.h:190
 msgid "Mongolian"
 msgstr ""
 
-#: src/translations.h:189
+#: src/translations.h:191
 msgid "Navajo"
 msgstr "Navahų"
 
-#: src/translations.h:190
+#: src/translations.h:192
 msgid "Norse"
 msgstr "Norvegų"
 
-#: src/translations.h:191
+#: src/translations.h:193
 msgid "Ojibwe"
 msgstr ""
 
-#: src/translations.h:192
+#: src/translations.h:194
 msgid "Polynesian"
 msgstr "Polineziečių"
 
-#: src/translations.h:193
+#: src/translations.h:195
 msgid "Romanian"
 msgstr ""
 
-#: src/translations.h:194
+#: src/translations.h:196
 msgid "Sami"
 msgstr "Samių"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:196
+#: src/translations.h:198
 msgid "Siberian"
 msgstr ""
 
-#: src/translations.h:197
+#: src/translations.h:199
 msgid "Tukano"
 msgstr ""
 
-#: src/translations.h:198
+#: src/translations.h:200
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guarani"
 
-#: src/translations.h:199
+#: src/translations.h:201
 msgid "Tongan"
 msgstr "Tongiečių"
 
-#: src/translations.h:200
+#: src/translations.h:202
 msgid "Western"
 msgstr "Vakariečių"
 
-#: src/translations.h:201
+#: src/translations.h:203
 msgid "Western (H.A.Rey)"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:207
+#: src/translations.h:209
 msgid "Guereins"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:209
+#: src/translations.h:211
 msgid "Trees"
 msgstr "Medžiai"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:211 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1178
+#: src/translations.h:213 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1178
 msgid "Moon"
 msgstr "Mėnulis"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:213
+#: src/translations.h:215
 msgid "Hurricane"
 msgstr "Uraganas"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:215
+#: src/translations.h:217
 msgid "Ocean"
 msgstr "Vandenynas"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:217
+#: src/translations.h:219
 msgid "Garching"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:219 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1190
+#: src/translations.h:221 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1190
 msgid "Mars"
 msgstr "Marsas"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:221 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1193
+#: src/translations.h:223 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1193
 msgid "Jupiter"
 msgstr "Jupiteris"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:223 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1196
+#: src/translations.h:225 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1196
 msgid "Saturn"
 msgstr "Saturnas"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:225
+#: src/translations.h:227
 msgid "Uranus"
 msgstr "Uranas"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:227
+#: src/translations.h:229
 msgid "Neptune"
 msgstr "Neptūnas"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:229
+#: src/translations.h:231
 msgid "Geneva"
 msgstr "Ženeva"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:231
+#: src/translations.h:233
 msgid "Grossmugl"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:233
+#: src/translations.h:235
 msgid "Zero Horizon"
 msgstr ""
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:238
+#: src/translations.h:240
 msgid "Vienna Sterngarten"
 msgstr ""
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:240
+#: src/translations.h:242
 msgid "Testscene"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:245
+#: src/translations.h:247
 msgid "Landscape Tour"
 msgstr "Kraštovaizdžių turas"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:247
+#: src/translations.h:249
 msgid "Partial Lunar Eclipse"
 msgstr "Dalinis Mėnulio Užtemimas"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:249
+#: src/translations.h:251
 msgid "Total Lunar Eclipse"
 msgstr "Visiškas Mėnulio Užtemimas"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:251
+#: src/translations.h:253
 msgid "Screensaver"
 msgstr "Ekrano užsklanda"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:253
+#: src/translations.h:255
 msgid "Solar Eclipse 2009"
 msgstr "2009-ųjų Saulės Užtemimas"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:255
+#: src/translations.h:257
 msgid "Startup Script"
 msgstr "Paleidimo scenarijus"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:257
+#: src/translations.h:259
 msgid "Zodiac"
 msgstr "Zodiakas"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:259
+#: src/translations.h:261
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "Merkurijaus trigubas saulėtekis ir saulėlydis"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:261
+#: src/translations.h:263
 msgid "Double eclipse from Deimos in 2017"
 msgstr "Dvigubas užtemimas iš Deimo, 2017"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:263
+#: src/translations.h:265
 msgid "Double eclipse from Deimos in 2031"
 msgstr "Dvigubas užtemimas iš Deimo, 2031"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:265
+#: src/translations.h:267
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:267
+#: src/translations.h:269
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "Žemės ir Jupiterio okultacija 2048"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:269
+#: src/translations.h:271
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "3 tranzitai ir 2 užtemimai iš Deimo, 2027"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:271
+#: src/translations.h:273
 msgid "Solar System Screensaver"
 msgstr "Saulės sistemos ekrano užsklanda"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:273
+#: src/translations.h:275
 msgid "Constellations Tour"
 msgstr "Žvaigždynų turas"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:275
+#: src/translations.h:277
 msgid "Sun from different planets"
 msgstr "Saulė iš skirtingų planetų"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:277
+#: src/translations.h:279
 msgid "Earth best views from other bodies"
 msgstr "Geriausi Žemės vaizdai iš kitų dangaus kūnų"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:279
+#: src/translations.h:281
 msgid "Transit of Venus"
 msgstr "Veneros tranzitas"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:281
+#: src/translations.h:283
 msgid "Analemma"
 msgstr "Analema"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:283
+#: src/translations.h:285
 msgid "Sky Culture Tour"
 msgstr "Dangus įvairiose kultūrose turas"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:285
+#: src/translations.h:287
 msgid "Earth Events from Mercury"
 msgstr "Žemės Įvykiai iš Merkurijaus"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:287
+#: src/translations.h:289
 msgid "Earth Events from a floating city on Venus"
 msgstr "Žemės Įvykiai iš plaukiojančio miesto Veneroje"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:289
+#: src/translations.h:291
 msgid "Earth Events from Mars"
 msgstr "Žemės Įvykiai iš MArso"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:291
+#: src/translations.h:293
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:293
+#: src/translations.h:295
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr "Žemės ir Marso didžiausios elongacijos ir tranzitai iš Kalisto"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:295
+#: src/translations.h:297
 msgid "Tycho's Supernova"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:297
+#: src/translations.h:299
 msgid "Earth and other Planets from Ceres"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:299
+#: src/translations.h:301
 msgid "Messier Objects Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:301
+#: src/translations.h:303
 msgid "Binocular Highlights"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:303
+#: src/translations.h:305
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:305
+#: src/translations.h:307
 msgid "List of largest known stars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:307
+#: src/translations.h:309
 msgid "Herschel 400 Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:309
+#: src/translations.h:311
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:311
+#: src/translations.h:313
 msgid "The Jack Bennett Catalog"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:313
+#: src/translations.h:315
 msgid "Best objects in the New General Catalog"
 msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:319
+#: src/translations.h:321
 msgid "Look around each installed landscape."
 msgstr "Pasižvalgykite po kiekvieną įdiegtą kraštovaizdį"
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:321
+#: src/translations.h:323
 msgid "Look at each installed sky culture."
 msgstr "Pažvelkite į kiekvieną įdiegtą dangaus stebėjimų kultūrą"
 
-#: src/translations.h:322
+#: src/translations.h:324
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Scenarijus, skirtas pademonstruoti dalinį mėnulio užtemimą"
 
-#: src/translations.h:323
+#: src/translations.h:325
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Scenarijus, skirtas pademonstruoti visišką mėnulio užtemimą"
 
-#: src/translations.h:324
+#: src/translations.h:326
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "Lėtas, begalinis turas po dangų, žvalgantis į atsitiktinius objektus"
 
-#: src/translations.h:325
+#: src/translations.h:327
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -3521,11 +3555,11 @@ msgstr ""
 "Scenarijus, skirtas pademonstruoti visišką saulės užtemimą, įvykusį 2009 m. "
 "(vieta= Rangpur, Bangladešas)"
 
-#: src/translations.h:326
+#: src/translations.h:328
 msgid "Script which runs automatically at startup"
 msgstr "Scenarijus, automatiškai įvykdomas įjungus programą"
 
-#: src/translations.h:327
+#: src/translations.h:329
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -3535,7 +3569,7 @@ msgstr ""
 "esančius palei liniją, kurią judėdama per dangaus sferą metų eigoje nubrėžia "
 "Saulė."
 
-#: src/translations.h:328
+#: src/translations.h:330
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -3543,7 +3577,7 @@ msgstr ""
 "Dėl keistybių Merkurijaus orbitoje ir sukimęsi, tam tikruose taškuose Saulė "
 "teka ir leidžiasi 3 kartus per vieną Merkurijaus dieną."
 
-#: src/translations.h:329
+#: src/translations.h:331
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -3552,7 +3586,7 @@ msgstr ""
 "Saulę pirmas. Veiksmas vyksta tarp Skorpiono ir Šaulio, 2017 m. balandžio 26 "
 "d."
 
-#: src/translations.h:330
+#: src/translations.h:332
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -3560,12 +3594,12 @@ msgstr ""
 "Neužilgo iki Marsas užtemdo Saulę, Fobas pasirodo iš už planetos ir užtemdo "
 "Saulę pirmas. Veiksmas vyksta tarp Jaučio ir Dvynių, 2031 m. liepos 23 d."
 
-#: src/translations.h:331
+#: src/translations.h:333
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
 "Vaizdas nuo Olimpo kalno, kaip Fobas užtemdo Saulę, 2068 m. sausio 10 d."
 
-#: src/translations.h:332
+#: src/translations.h:334
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
@@ -3575,7 +3609,7 @@ msgstr ""
 "Bet abiejų planetų okultacijos tą pačią dieną yra labai retas reiškinys. Čia "
 "vienas iš tokių, įvyksiantis 2048 m. sausio 23 d., vaizduojamas realiu laiku."
 
-#: src/translations.h:333
+#: src/translations.h:335
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -3585,48 +3619,48 @@ msgid ""
 "light up later."
 msgstr ""
 
-#: src/translations.h:334
+#: src/translations.h:336
 msgid ""
 "Screensaver of various happenings in the Solar System. 261 events in all!"
 msgstr ""
 
-#: src/translations.h:335
+#: src/translations.h:337
 msgid "A tour of the western constellations."
 msgstr "Vakarietiškų žvaigždynų turas."
 
-#: src/translations.h:336
+#: src/translations.h:338
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "Saulės vaizdas iš didžiųjų Saulės sistemos planetų bei Plutono."
 
-#: src/translations.h:337
+#: src/translations.h:339
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr "Geriausi 21-ojo amžiaus Žemės vaizdai iš kitų Saulės sistemos kūnų."
 
-#: src/translations.h:338
+#: src/translations.h:340
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 "Veneros tranzitas, matytas iš Sidnėjaus, Australijos, 2012 m. birželio 6 d."
 
-#: src/translations.h:339
+#: src/translations.h:341
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr "Analemos - Saulės kelio per dangų metų eigoje - demonstracija."
 
-#: src/translations.h:340
+#: src/translations.h:342
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
 
-#: src/translations.h:341
+#: src/translations.h:343
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
 msgstr ""
 
-#: src/translations.h:342
+#: src/translations.h:344
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -3638,1046 +3672,1046 @@ msgstr ""
 "Jupiterio radiacijos juostos. Taigi, jei žmonės kada nors kolonizuos "
 "Jupiterio palydovus, Kalista bus vienas iš jų."
 
-#: src/translations.h:343
+#: src/translations.h:345
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
 msgstr ""
 
-#: src/translations.h:344
+#: src/translations.h:346
 msgid "A tour of Messier Objects"
 msgstr ""
 
-#: src/translations.h:345
+#: src/translations.h:347
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
 "Gary Seronik."
 msgstr ""
 
-#: src/translations.h:346
+#: src/translations.h:348
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list "
 "has been collected by Jerry Lodriguss and published in Sky & Telescope "
 "09/2014. Data taken from his website, http://www.astropix.com/doubles/"
 msgstr ""
 
-#: src/translations.h:347
+#: src/translations.h:349
 msgid "This script helps you make an excursion around largest known stars."
 msgstr ""
 
-#: src/translations.h:348
+#: src/translations.h:350
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr ""
 
-#: src/translations.h:349
+#: src/translations.h:351
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
 "Right Ascension (2000.0)."
 msgstr ""
 
-#: src/translations.h:350
+#: src/translations.h:352
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects. The Bennett catalog "
 "was contributed by Auke Slotegraaf."
 msgstr ""
 
-#: src/translations.h:351
+#: src/translations.h:353
 msgid ""
 "This list by A.J. Crayon and Steve Coe is used by members of the Saguaro "
 "Astronomy Club of Phoenix, AZ. for the Best of the NGC achievement award."
 msgstr ""
 
-#: src/translations.h:355
+#: src/translations.h:357
 msgid "Andorra"
 msgstr "Andora"
 
-#: src/translations.h:356
+#: src/translations.h:358
 msgid "United Arab Emirates"
 msgstr "Jungtiniai Arabų Emyratai"
 
-#: src/translations.h:357
+#: src/translations.h:359
 msgid "Afghanistan"
 msgstr "Afganistanas"
 
-#: src/translations.h:358
+#: src/translations.h:360
 msgid "Antigua and Barbuda"
 msgstr "Antigva ir Barbuda"
 
-#: src/translations.h:359
+#: src/translations.h:361
 msgid "Anguilla"
 msgstr "Angilija"
 
-#: src/translations.h:360
+#: src/translations.h:362
 msgid "Albania"
 msgstr "Albanija"
 
-#: src/translations.h:361
+#: src/translations.h:363
 msgid "Armenia"
 msgstr "Armėnija"
 
-#: src/translations.h:362
+#: src/translations.h:364
 msgid "Netherlands Antilles"
 msgstr "Nyderlandų Antilai"
 
-#: src/translations.h:363
+#: src/translations.h:365
 msgid "Angola"
 msgstr "Angola"
 
-#: src/translations.h:364
+#: src/translations.h:366
 msgid "Antarctica"
 msgstr "Antarktida"
 
-#: src/translations.h:365
+#: src/translations.h:367
 msgid "Argentina"
 msgstr "Argentina"
 
-#: src/translations.h:366
+#: src/translations.h:368
 msgid "American Samoa"
 msgstr "Amerikos Samoa"
 
-#: src/translations.h:367
+#: src/translations.h:369
 msgid "Austria"
 msgstr "Austrija"
 
-#: src/translations.h:368
+#: src/translations.h:370
 msgid "Australia"
 msgstr "Australija"
 
-#: src/translations.h:369
+#: src/translations.h:371
 msgid "Aruba"
 msgstr "Aruba"
 
-#: src/translations.h:370
+#: src/translations.h:372
 msgid "Azerbaijan"
 msgstr "Azerbaidžanas"
 
-#: src/translations.h:371
+#: src/translations.h:373
 msgid "Bosnia and Herzegowina"
 msgstr "Bosnija ir Hercegovina"
 
-#: src/translations.h:372
+#: src/translations.h:374
 msgid "Barbados"
 msgstr "Barbadosas"
 
-#: src/translations.h:373
+#: src/translations.h:375
 msgid "Bangladesh"
 msgstr "Bangladešas"
 
-#: src/translations.h:374
+#: src/translations.h:376
 msgid "Belgium"
 msgstr "Belgija"
 
-#: src/translations.h:375
+#: src/translations.h:377
 msgid "Burkina Faso"
 msgstr "Burkina Fasas"
 
-#: src/translations.h:376
+#: src/translations.h:378
 msgid "Bulgaria"
 msgstr "Bulgarija"
 
-#: src/translations.h:377
+#: src/translations.h:379
 msgid "Bahrain"
 msgstr "Bahreinas"
 
-#: src/translations.h:378
+#: src/translations.h:380
 msgid "Burundi"
 msgstr "Burundis"
 
-#: src/translations.h:379
+#: src/translations.h:381
 msgid "Benin"
 msgstr "Beninas"
 
-#: src/translations.h:380
+#: src/translations.h:382
 msgid "Bermuda"
 msgstr "Bermudai"
 
-#: src/translations.h:381
+#: src/translations.h:383
 msgid "Brunei Darussalam"
 msgstr "Brunėjus"
 
-#: src/translations.h:382
+#: src/translations.h:384
 msgid "Bolivia"
 msgstr "Bolivija"
 
-#: src/translations.h:383
+#: src/translations.h:385
 msgid "Brazil"
 msgstr "Brazilija"
 
-#: src/translations.h:384
+#: src/translations.h:386
 msgid "Bahamas"
 msgstr "Bahamos"
 
-#: src/translations.h:385
+#: src/translations.h:387
 msgid "Bhutan"
 msgstr "Butanas"
 
-#: src/translations.h:386
+#: src/translations.h:388
 msgid "Bouvet Island"
 msgstr "Buvė sala"
 
-#: src/translations.h:387
+#: src/translations.h:389
 msgid "Botswana"
 msgstr "Botsvana"
 
-#: src/translations.h:388
+#: src/translations.h:390
 msgid "Belarus"
 msgstr "Baltarusija"
 
-#: src/translations.h:389
+#: src/translations.h:391
 msgid "Belize"
 msgstr "Belizas"
 
-#: src/translations.h:390
+#: src/translations.h:392
 msgid "Canada"
 msgstr "Kanada"
 
-#: src/translations.h:391
+#: src/translations.h:393
 msgid "Cocos Islands"
 msgstr "Kokosų salos"
 
-#: src/translations.h:392
+#: src/translations.h:394
 msgid "Democratic Republic of the Congo"
 msgstr "Kongo demokratinė respublika"
 
-#: src/translations.h:393
+#: src/translations.h:395
 msgid "Central African Republic"
 msgstr "Centrinės Afrikos Respublika"
 
-#: src/translations.h:394
+#: src/translations.h:396
 msgid "Republic of the Congo"
 msgstr "Kongo respublika"
 
-#: src/translations.h:395
+#: src/translations.h:397
 msgid "Switzerland"
 msgstr "Šveicarija"
 
-#: src/translations.h:396
+#: src/translations.h:398
 msgid "Cote d'Ivoire"
 msgstr "Dramblio Kaulo Krantas"
 
-#: src/translations.h:397
+#: src/translations.h:399
 msgid "Cook Islands"
 msgstr "Kuko salos"
 
-#: src/translations.h:398
+#: src/translations.h:400
 msgid "Chile"
 msgstr "Čilė"
 
-#: src/translations.h:399
+#: src/translations.h:401
 msgid "Cameroon"
 msgstr "Kamerūnas"
 
-#: src/translations.h:400
+#: src/translations.h:402
 msgid "China"
 msgstr "Kinija"
 
-#: src/translations.h:401
+#: src/translations.h:403
 msgid "Colombia"
 msgstr "Kolumbija"
 
-#: src/translations.h:402
+#: src/translations.h:404
 msgid "Costa Rica"
 msgstr "Kosta Rika"
 
-#: src/translations.h:403
+#: src/translations.h:405
 msgid "Serbia and Montenegro"
 msgstr "Serbija ir Juodkalnija"
 
-#: src/translations.h:404
+#: src/translations.h:406
 msgid "Montenegro"
 msgstr "Juodkalnija"
 
-#: src/translations.h:405
+#: src/translations.h:407
 msgid "Cuba"
 msgstr "Kuba"
 
-#: src/translations.h:406
+#: src/translations.h:408
 msgid "Cape Verde"
 msgstr "Žaliasis Kyšulys"
 
-#: src/translations.h:407
+#: src/translations.h:409
 msgid "Christmas Island"
 msgstr "Kalėdų sala"
 
-#: src/translations.h:408
+#: src/translations.h:410
 msgid "Cyprus"
 msgstr "Kipras"
 
-#: src/translations.h:409
+#: src/translations.h:411
 msgid "Czech Republic"
 msgstr "Čekija"
 
-#: src/translations.h:410
+#: src/translations.h:412
 msgid "Germany"
 msgstr "Vokietija"
 
-#: src/translations.h:411
+#: src/translations.h:413
 msgid "Djibouti"
 msgstr "Džibutis"
 
-#: src/translations.h:412
+#: src/translations.h:414
 msgid "Denmark"
 msgstr "Danija"
 
-#: src/translations.h:413
+#: src/translations.h:415
 msgid "Dominica"
 msgstr "Dominika"
 
-#: src/translations.h:414
+#: src/translations.h:416
 msgid "Dominican Republic"
 msgstr "Dominikos respublika"
 
-#: src/translations.h:415
+#: src/translations.h:417
 msgid "Algeria"
 msgstr "Alžyras"
 
-#: src/translations.h:416
+#: src/translations.h:418
 msgid "Ecuador"
 msgstr "Ekvadoras"
 
-#: src/translations.h:417
+#: src/translations.h:419
 msgid "Estonia"
 msgstr "Estija"
 
-#: src/translations.h:418
+#: src/translations.h:420
 msgid "Egypt"
 msgstr "Egiptas"
 
-#: src/translations.h:419
+#: src/translations.h:421
 msgid "Western Sahara"
 msgstr "Vakarų Sachara"
 
-#: src/translations.h:420
+#: src/translations.h:422
 msgid "Eritrea"
 msgstr "Eritrėja"
 
-#: src/translations.h:421
+#: src/translations.h:423
 msgid "Spain"
 msgstr "Ispanija"
 
-#: src/translations.h:422
+#: src/translations.h:424
 msgid "Ethiopia"
 msgstr "Etiopija"
 
-#: src/translations.h:423
+#: src/translations.h:425
 msgid "Finland"
 msgstr "Suomija"
 
-#: src/translations.h:424
+#: src/translations.h:426
 msgid "Fiji"
 msgstr "Fidžis"
 
-#: src/translations.h:425
+#: src/translations.h:427
 msgid "Falkland Islands"
 msgstr "Folklando (Malvinų) Salos"
 
-#: src/translations.h:426
+#: src/translations.h:428
 msgid "Micronesia"
 msgstr "Mikronezija"
 
-#: src/translations.h:427
+#: src/translations.h:429
 msgid "Faroe Islands"
 msgstr "Farerai"
 
-#: src/translations.h:428
+#: src/translations.h:430
 msgid "France"
 msgstr "Prancūzija"
 
-#: src/translations.h:429
+#: src/translations.h:431
 msgid "Gabon"
 msgstr "Gabonas"
 
-#: src/translations.h:430
+#: src/translations.h:432
 msgid "United Kingdom"
 msgstr "Jungtinė Karalystė"
 
-#: src/translations.h:431
+#: src/translations.h:433
 msgid "Grenada"
 msgstr "Grenada"
 
-#: src/translations.h:432
+#: src/translations.h:434
 msgid "Georgia"
 msgstr "Gruzija"
 
-#: src/translations.h:433
+#: src/translations.h:435
 msgid "French Guiana"
 msgstr "Prancūzijos Gviana"
 
-#: src/translations.h:434
+#: src/translations.h:436
 msgid "Ghana"
 msgstr "Gana"
 
-#: src/translations.h:435
+#: src/translations.h:437
 msgid "Gibraltar"
 msgstr "Gibraltaras"
 
-#: src/translations.h:436
+#: src/translations.h:438
 msgid "Greenland"
 msgstr "Grenlandija"
 
-#: src/translations.h:437
+#: src/translations.h:439
 msgid "Gambia"
 msgstr "Gambija"
 
-#: src/translations.h:438
+#: src/translations.h:440
 msgid "Guinea"
 msgstr "Gvinėja"
 
-#: src/translations.h:439
+#: src/translations.h:441
 msgid "Guadeloupe"
 msgstr "Gvadelupa"
 
-#: src/translations.h:440
+#: src/translations.h:442
 msgid "Equatorial Guinea"
 msgstr "Pusiaujo Gvinėja"
 
-#: src/translations.h:441
+#: src/translations.h:443
 msgid "Greece"
 msgstr "Graikija"
 
-#: src/translations.h:442
+#: src/translations.h:444
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Pietų Džordžijos ir Pietų Sandvičo Salos"
 
-#: src/translations.h:443
+#: src/translations.h:445
 msgid "Guatemala"
 msgstr "Gvatemala"
 
-#: src/translations.h:444
+#: src/translations.h:446
 msgid "Guam"
 msgstr "Guamas"
 
-#: src/translations.h:445
+#: src/translations.h:447
 msgid "Guinea-Bissau"
 msgstr "Bisau Gvineja"
 
-#: src/translations.h:446
+#: src/translations.h:448
 msgid "Guyana"
 msgstr "Gajana"
 
-#: src/translations.h:447
+#: src/translations.h:449
 msgid "Hong Kong"
 msgstr "Honkongas"
 
-#: src/translations.h:448
+#: src/translations.h:450
 msgid "Heard Island and McDonald Islands"
 msgstr "Herdo ir Makonaldo salos"
 
-#: src/translations.h:449
+#: src/translations.h:451
 msgid "Honduras"
 msgstr "Hondūras"
 
-#: src/translations.h:450
+#: src/translations.h:452
 msgid "Croatia"
 msgstr "Kroatija"
 
-#: src/translations.h:451
+#: src/translations.h:453
 msgid "Haiti"
 msgstr "Haitis"
 
-#: src/translations.h:452
+#: src/translations.h:454
 msgid "Hungary"
 msgstr "Vengrija"
 
-#: src/translations.h:453
+#: src/translations.h:455
 msgid "Indonesia"
 msgstr "Indonezija"
 
-#: src/translations.h:454
+#: src/translations.h:456
 msgid "Ireland"
 msgstr "Airija"
 
-#: src/translations.h:455
+#: src/translations.h:457
 msgid "Israel"
 msgstr "Izraelis"
 
-#: src/translations.h:456
+#: src/translations.h:458
 msgid "India"
 msgstr "Indija"
 
-#: src/translations.h:457
+#: src/translations.h:459
 msgid "British Indian Ocean Territory"
 msgstr "Indijos vandenyno britų sritis"
 
-#: src/translations.h:458
+#: src/translations.h:460
 msgid "Iraq"
 msgstr "Irakas"
 
-#: src/translations.h:459
+#: src/translations.h:461
 msgid "Iran"
 msgstr "Iranas"
 
-#: src/translations.h:460
+#: src/translations.h:462
 msgid "Iceland"
 msgstr "Islandija"
 
-#: src/translations.h:461
+#: src/translations.h:463
 msgid "Italy"
 msgstr "Italija"
 
-#: src/translations.h:462
+#: src/translations.h:464
 msgid "Jamaica"
 msgstr "Jamaika"
 
-#: src/translations.h:463
+#: src/translations.h:465
 msgid "Jordan"
 msgstr "Jordanija"
 
-#: src/translations.h:464
+#: src/translations.h:466
 msgid "Japan"
 msgstr "Japonija"
 
-#: src/translations.h:465
+#: src/translations.h:467
 msgid "Kenya"
 msgstr "Kenija"
 
-#: src/translations.h:466
+#: src/translations.h:468
 msgid "Kyrgyzstan"
 msgstr "Kirgizija"
 
-#: src/translations.h:467
+#: src/translations.h:469
 msgid "Cambodia"
 msgstr "Kambodža"
 
-#: src/translations.h:468
+#: src/translations.h:470
 msgid "Kiribati"
 msgstr "Kiribatis"
 
-#: src/translations.h:469
+#: src/translations.h:471
 msgid "Comoros"
 msgstr "Komorai"
 
-#: src/translations.h:470
+#: src/translations.h:472
 msgid "Saint Kitts and Nevis"
 msgstr "Sent Kitsas ir Nevis"
 
-#: src/translations.h:471
+#: src/translations.h:473
 msgid "Democratic People's Republic of Korea"
 msgstr "Korėjos Liaudies Demokratinė Respublika"
 
-#: src/translations.h:472
+#: src/translations.h:474
 msgid "Republic of Korea"
 msgstr "Korėjos Respublika"
 
-#: src/translations.h:473
+#: src/translations.h:475
 msgid "Kuwait"
 msgstr "Kuveitas"
 
-#: src/translations.h:474
+#: src/translations.h:476
 msgid "Cayman Islands"
 msgstr "Kaimanų salos"
 
-#: src/translations.h:475
+#: src/translations.h:477
 msgid "Kazakhstan"
 msgstr "Kazachstanas"
 
-#: src/translations.h:476
+#: src/translations.h:478
 msgid "Lao"
 msgstr "Laosiečių kalba"
 
-#: src/translations.h:477
+#: src/translations.h:479
 msgid "Lebanon"
 msgstr "Libanas"
 
-#: src/translations.h:478
+#: src/translations.h:480
 msgid "Saint Lucia"
 msgstr "Sent Lusija"
 
-#: src/translations.h:479
+#: src/translations.h:481
 msgid "Liechtenstein"
 msgstr "Lichtenšteinas"
 
-#: src/translations.h:480
+#: src/translations.h:482
 msgid "Sri Lanka"
 msgstr "Šri Lanka"
 
-#: src/translations.h:481
+#: src/translations.h:483
 msgid "Liberia"
 msgstr "Liberija"
 
-#: src/translations.h:482
+#: src/translations.h:484
 msgid "Lesotho"
 msgstr "Lesotas"
 
-#: src/translations.h:483
+#: src/translations.h:485
 msgid "Lithuania"
 msgstr "Lietuva"
 
-#: src/translations.h:484
+#: src/translations.h:486
 msgid "Luxembourg"
 msgstr "Liuksemburgas"
 
-#: src/translations.h:485
+#: src/translations.h:487
 msgid "Latvia"
 msgstr "Latvija"
 
-#: src/translations.h:486
+#: src/translations.h:488
 msgid "Libyan Arab Jamahiriya"
 msgstr "Libija"
 
-#: src/translations.h:487
+#: src/translations.h:489
 msgid "Morocco"
 msgstr "Marokas"
 
-#: src/translations.h:488
+#: src/translations.h:490
 msgid "Monaco"
 msgstr "Monakas"
 
-#: src/translations.h:489
+#: src/translations.h:491
 msgid "Moldova"
 msgstr "Moldavija"
 
-#: src/translations.h:490
+#: src/translations.h:492
 msgid "Madagascar"
 msgstr "Madagaskaras"
 
-#: src/translations.h:491
+#: src/translations.h:493
 msgid "Marshall Islands"
 msgstr "Maršalo salos"
 
-#: src/translations.h:492
+#: src/translations.h:494
 msgid "Macedonia"
 msgstr "Makedonija"
 
-#: src/translations.h:493
+#: src/translations.h:495
 msgid "Mali"
 msgstr "Malis"
 
-#: src/translations.h:494
+#: src/translations.h:496
 msgid "Myanmar"
 msgstr "Mianmaras"
 
-#: src/translations.h:495
+#: src/translations.h:497
 msgid "Mongolia"
 msgstr "Mongolija"
 
-#: src/translations.h:496
+#: src/translations.h:498
 msgid "Macau"
 msgstr "Makao"
 
-#: src/translations.h:497
+#: src/translations.h:499
 msgid "Northern Mariana Islands"
 msgstr "Šiaurės Marianų salos"
 
-#: src/translations.h:498
+#: src/translations.h:500
 msgid "Martinique"
 msgstr "Martinika"
 
-#: src/translations.h:499
+#: src/translations.h:501
 msgid "Mauritania"
 msgstr "Mauritanija"
 
-#: src/translations.h:500
+#: src/translations.h:502
 msgid "Montserrat"
 msgstr "Montseratas"
 
-#: src/translations.h:501
+#: src/translations.h:503
 msgid "Malta"
 msgstr "Malta"
 
-#: src/translations.h:502
+#: src/translations.h:504
 msgid "Mauritius"
 msgstr "Mauricijus"
 
-#: src/translations.h:503
+#: src/translations.h:505
 msgid "Maldives"
 msgstr "Maldyvai"
 
-#: src/translations.h:504
+#: src/translations.h:506
 msgid "Malawi"
 msgstr "Malavis"
 
-#: src/translations.h:505
+#: src/translations.h:507
 msgid "Mexico"
 msgstr "Meksika"
 
-#: src/translations.h:506
+#: src/translations.h:508
 msgid "Malaysia"
 msgstr "Malaizija"
 
-#: src/translations.h:507
+#: src/translations.h:509
 msgid "Mozambique"
 msgstr "Mozambikas"
 
-#: src/translations.h:508
+#: src/translations.h:510
 msgid "Namibia"
 msgstr "Namibija"
 
-#: src/translations.h:509
+#: src/translations.h:511
 msgid "New Caledonia"
 msgstr "Naujoji Kaledonija"
 
-#: src/translations.h:510
+#: src/translations.h:512
 msgid "Niger"
 msgstr "Nigeris"
 
-#: src/translations.h:511
+#: src/translations.h:513
 msgid "Norfolk Island"
 msgstr "Norfolko sala"
 
-#: src/translations.h:512
+#: src/translations.h:514
 msgid "Nigeria"
 msgstr "Nigerija"
 
-#: src/translations.h:513
+#: src/translations.h:515
 msgid "Nicaragua"
 msgstr "Nikaragva"
 
-#: src/translations.h:514
+#: src/translations.h:516
 msgid "Netherlands"
 msgstr "Nyderlandai"
 
-#: src/translations.h:515
+#: src/translations.h:517
 msgid "Norway"
 msgstr "Norvegija"
 
-#: src/translations.h:516
+#: src/translations.h:518
 msgid "Nepal"
 msgstr "Nepalas"
 
-#: src/translations.h:517
+#: src/translations.h:519
 msgid "Nauru"
 msgstr "Nauru"
 
-#: src/translations.h:518
+#: src/translations.h:520
 msgid "Niue"
 msgstr "Niujė"
 
-#: src/translations.h:519
+#: src/translations.h:521
 msgid "New Zealand"
 msgstr "Naujoji Zelandija"
 
-#: src/translations.h:520
+#: src/translations.h:522
 msgid "Oman"
 msgstr "Omanas"
 
-#: src/translations.h:521
+#: src/translations.h:523
 msgid "Panama"
 msgstr "Panama"
 
-#: src/translations.h:522
+#: src/translations.h:524
 msgid "Peru"
 msgstr "Peru"
 
-#: src/translations.h:523
+#: src/translations.h:525
 msgid "French Polynesia"
 msgstr "Prancūzijos Polinezija"
 
-#: src/translations.h:524
+#: src/translations.h:526
 msgid "Papua New Guinea"
 msgstr "Papua Naujoji Gvinėja"
 
-#: src/translations.h:525
+#: src/translations.h:527
 msgid "Philippines"
 msgstr "Filipinai"
 
-#: src/translations.h:526
+#: src/translations.h:528
 msgid "Pakistan"
 msgstr "Pakistanas"
 
-#: src/translations.h:527
+#: src/translations.h:529
 msgid "Poland"
 msgstr "Lenkija"
 
-#: src/translations.h:528
+#: src/translations.h:530
 msgid "Saint Pierre and Miquelon"
 msgstr "Sen Pjeras ir Mikelonas"
 
-#: src/translations.h:529
+#: src/translations.h:531
 msgid "Pitcairn"
 msgstr "Pitkerno salos"
 
-#: src/translations.h:530
+#: src/translations.h:532
 msgid "Puerto Rico"
 msgstr "Puerto Rikas"
 
-#: src/translations.h:531
+#: src/translations.h:533
 msgid "Palestinian Territories"
 msgstr "Palestina"
 
-#: src/translations.h:532
+#: src/translations.h:534
 msgid "Portugal"
 msgstr "Portugalija"
 
-#: src/translations.h:533
+#: src/translations.h:535
 msgid "Palau"
 msgstr "Palau"
 
-#: src/translations.h:534
+#: src/translations.h:536
 msgid "Paraguay"
 msgstr "Paragvajus"
 
-#: src/translations.h:535
+#: src/translations.h:537
 msgid "Qatar"
 msgstr "Kataras"
 
-#: src/translations.h:536
+#: src/translations.h:538
 msgid "Réunion"
 msgstr "Reunjonas"
 
-#: src/translations.h:537
+#: src/translations.h:539
 msgid "Romania"
 msgstr "Rumunija"
 
-#: src/translations.h:538
+#: src/translations.h:540
 msgid "Serbia"
 msgstr "Serbija"
 
-#: src/translations.h:539
+#: src/translations.h:541
 msgid "Russian Federation"
 msgstr "Rusijos Federacija"
 
-#: src/translations.h:540
+#: src/translations.h:542
 msgid "Rwanda"
 msgstr "Ruanda"
 
-#: src/translations.h:541
+#: src/translations.h:543
 msgid "Saudi Arabia"
 msgstr "Saudo Arabija"
 
-#: src/translations.h:542
+#: src/translations.h:544
 msgid "Solomon Islands"
 msgstr "Saliamono Salos"
 
-#: src/translations.h:543
+#: src/translations.h:545
 msgid "Seychelles"
 msgstr "Seišeliai"
 
-#: src/translations.h:544
+#: src/translations.h:546
 msgid "Sudan"
 msgstr "Sudanas"
 
-#: src/translations.h:545
+#: src/translations.h:547
 msgid "Sweden"
 msgstr "Švedija"
 
-#: src/translations.h:546
+#: src/translations.h:548
 msgid "Singapore"
 msgstr "Singapūras"
 
-#: src/translations.h:547
+#: src/translations.h:549
 msgid "Saint Helena"
 msgstr "Šv. Elenos sala"
 
-#: src/translations.h:548
+#: src/translations.h:550
 msgid "Slovenia"
 msgstr "Slovėnija"
 
-#: src/translations.h:549
+#: src/translations.h:551
 msgid "Svalbard and Jan Mayen"
 msgstr "Svalbardas ir Jan Majenas"
 
-#: src/translations.h:550
+#: src/translations.h:552
 msgid "Slovakia"
 msgstr "Slovakija"
 
-#: src/translations.h:551
+#: src/translations.h:553
 msgid "Sierra Leone"
 msgstr "Siera Leonė"
 
-#: src/translations.h:552
+#: src/translations.h:554
 msgid "San Marino"
 msgstr "San Marinas"
 
-#: src/translations.h:553
+#: src/translations.h:555
 msgid "Senegal"
 msgstr "Senegalas"
 
-#: src/translations.h:554
+#: src/translations.h:556
 msgid "Somalia"
 msgstr "Somalis"
 
-#: src/translations.h:555
+#: src/translations.h:557
 msgid "Suriname"
 msgstr "Surinamas"
 
-#: src/translations.h:556
+#: src/translations.h:558
 msgid "Sao Tome and Principe"
 msgstr "San Tomė ir Prinsipė"
 
-#: src/translations.h:557
+#: src/translations.h:559
 msgid "El Salvador"
 msgstr "Salvadoras"
 
-#: src/translations.h:558
+#: src/translations.h:560
 msgid "Syrian Arab Republic"
 msgstr "Sirija"
 
-#: src/translations.h:559
+#: src/translations.h:561
 msgid "Swaziland"
 msgstr "Svazilandas"
 
-#: src/translations.h:560
+#: src/translations.h:562
 msgid "Turks and Caicos Islands"
 msgstr "Terksas ir Kaikosas"
 
-#: src/translations.h:561
+#: src/translations.h:563
 msgid "Chad"
 msgstr "Čadas"
 
-#: src/translations.h:562
+#: src/translations.h:564
 msgid "French Southern Territories"
 msgstr "Prancūzijos Pietų Sritys"
 
-#: src/translations.h:563
+#: src/translations.h:565
 msgid "Togo"
 msgstr "Togas"
 
-#: src/translations.h:564
+#: src/translations.h:566
 msgid "Thailand"
 msgstr "Tailandas"
 
-#: src/translations.h:565
+#: src/translations.h:567
 msgid "Tajikistan"
 msgstr "Tadžikija"
 
-#: src/translations.h:566
+#: src/translations.h:568
 msgid "Tokelau"
 msgstr "Tokelau"
 
-#: src/translations.h:567
+#: src/translations.h:569
 msgid "East Timor"
 msgstr "Rytų Timoras"
 
-#: src/translations.h:568
+#: src/translations.h:570
 msgid "Turkmenistan"
 msgstr "Turkmėnija"
 
-#: src/translations.h:569
+#: src/translations.h:571
 msgid "Tunisia"
 msgstr "Tunisas"
 
-#: src/translations.h:570
+#: src/translations.h:572
 msgid "Tonga"
 msgstr "Tonga"
 
-#: src/translations.h:571
+#: src/translations.h:573
 msgid "Turkey"
 msgstr "Turkija"
 
-#: src/translations.h:572
+#: src/translations.h:574
 msgid "Trinidad and Tobago"
 msgstr "Trinidadas ir Tobagas"
 
-#: src/translations.h:573
+#: src/translations.h:575
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
-#: src/translations.h:574
+#: src/translations.h:576
 msgid "Taiwan"
 msgstr "Taivanas"
 
-#: src/translations.h:575
+#: src/translations.h:577
 msgid "Tanzania"
 msgstr "Tanzanija"
 
-#: src/translations.h:576
+#: src/translations.h:578
 msgid "Ukraine"
 msgstr "Ukraina"
 
-#: src/translations.h:577
+#: src/translations.h:579
 msgid "Uganda"
 msgstr "Uganda"
 
-#: src/translations.h:578
+#: src/translations.h:580
 msgid "United States Minor Outlying Islands"
 msgstr "Mažosios Tolimosios Salos (JAV)"
 
-#: src/translations.h:579
+#: src/translations.h:581
 msgid "United States"
 msgstr "Jungtinės Amerikos Valstijos"
 
-#: src/translations.h:580
+#: src/translations.h:582
 msgid "Uruguay"
 msgstr "Urugvajus"
 
-#: src/translations.h:581
+#: src/translations.h:583
 msgid "Uzbekistan"
 msgstr "Uzbekija"
 
-#: src/translations.h:582
+#: src/translations.h:584
 msgid "Vatican City State"
 msgstr "Vatikanas"
 
-#: src/translations.h:583
+#: src/translations.h:585
 msgid "Saint Vincent and the Grenadines"
 msgstr "Sent Vinsentas ir Grenadinai"
 
-#: src/translations.h:584
+#: src/translations.h:586
 msgid "Venezuela"
 msgstr "Venesuela"
 
-#: src/translations.h:585
+#: src/translations.h:587
 msgid "British Virgin Islands"
 msgstr "Mergelių Salos (Didžioji Britanija)"
 
-#: src/translations.h:586
+#: src/translations.h:588
 msgid "United States Virgin Islands"
 msgstr "Mergelių Salos (JAV)"
 
-#: src/translations.h:587
+#: src/translations.h:589
 msgid "Viet Nam"
 msgstr "Vietnamas"
 
-#: src/translations.h:588
+#: src/translations.h:590
 msgid "Vanuatu"
 msgstr "Vanuatu"
 
-#: src/translations.h:589
+#: src/translations.h:591
 msgid "Wallis and Futuna"
 msgstr "Volisas ir Futūna"
 
-#: src/translations.h:590
+#: src/translations.h:592
 msgid "Samoa"
 msgstr "Samoa"
 
-#: src/translations.h:591
+#: src/translations.h:593
 msgid "Yemen"
 msgstr "Jemenas"
 
-#: src/translations.h:592
+#: src/translations.h:594
 msgid "Mayotte"
 msgstr "Majotas"
 
-#: src/translations.h:593
+#: src/translations.h:595
 msgid "Yugoslavia"
 msgstr "Jugoslavija"
 
-#: src/translations.h:594
+#: src/translations.h:596
 msgid "South Africa"
 msgstr "Pietų Afrika"
 
-#: src/translations.h:595
+#: src/translations.h:597
 msgid "Zambia"
 msgstr "Zambija"
 
-#: src/translations.h:596
+#: src/translations.h:598
 msgid "Zimbabwe"
 msgstr "Zimbabvė"
 
-#: src/translations.h:600
+#: src/translations.h:602
 msgid "&Undo"
 msgstr "&Atšaukti"
 
-#: src/translations.h:601
+#: src/translations.h:603
 msgid "&Redo"
 msgstr "&Atlikti iš naujo"
 
-#: src/translations.h:602
+#: src/translations.h:604
 msgid "Cu&t"
 msgstr "Iškir&pti"
 
-#: src/translations.h:603
+#: src/translations.h:605
 msgid "&Copy"
 msgstr "&Kopijuoti"
 
-#: src/translations.h:604
+#: src/translations.h:606
 msgid "&Paste"
 msgstr "&Įklijuoti"
 
-#: src/translations.h:605 src/ui_locationDialogGui.h:432
+#: src/translations.h:607 src/ui_locationDialogGui.h:432
 #: plugins/Oculars/src/ui_ocularDialog.h:1150
 #: plugins/Oculars/src/ui_ocularDialog.h:1160
 #: plugins/Oculars/src/ui_ocularDialog.h:1167
@@ -4685,112 +4719,112 @@ msgstr "&Įklijuoti"
 msgid "Delete"
 msgstr "Pašalinti"
 
-#: src/translations.h:606
+#: src/translations.h:608
 msgid "Select All"
 msgstr "Pasirinkti visus"
 
-#: src/translations.h:607
+#: src/translations.h:609
 msgid "Look in:"
 msgstr "Kur žiūrėti:"
 
-#: src/translations.h:608
+#: src/translations.h:610
 msgid "Directory:"
 msgstr "Katalogas:"
 
-#: src/translations.h:609
+#: src/translations.h:611
 msgid "Folder"
 msgstr "Aplankas"
 
-#: src/translations.h:610
+#: src/translations.h:612
 msgid "&Choose"
 msgstr ""
 
-#: src/translations.h:611 src/ui_configurationDialog.h:1301
+#: src/translations.h:613 src/ui_configurationDialog.h:1301
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "Cancel"
 msgstr "Atšaukti"
 
-#: src/translations.h:612
+#: src/translations.h:614
 msgid "Files of type:"
 msgstr "Failų tipai:"
 
-#: src/translations.h:613
+#: src/translations.h:615
 msgid "Date Modified"
 msgstr "Koregavimo data"
 
-#: src/translations.h:614
+#: src/translations.h:616
 msgid "Directories"
 msgstr "Katalogai"
 
-#: src/translations.h:615
+#: src/translations.h:617
 msgid "Computer"
 msgstr "Kompiuteris"
 
-#: src/translations.h:616
+#: src/translations.h:618
 msgid "&Open"
 msgstr "&Atidaryti"
 
-#: src/translations.h:617
+#: src/translations.h:619
 msgid "File &name:"
 msgstr "Failo &vardas:"
 
-#: src/translations.h:618
+#: src/translations.h:620
 msgid "Copy &Link Location"
 msgstr "Kopijuoti &nuorodos adresą"
 
-#: src/translations.h:619
+#: src/translations.h:621
 msgid "Abort"
 msgstr "Nutraukti"
 
-#: src/translations.h:620
+#: src/translations.h:622
 msgid "Ignore"
 msgstr "Nepaisyti"
 
-#: src/translations.h:621
+#: src/translations.h:623
 msgid "&Basic colors"
 msgstr "&Pagrindinės spalvos"
 
-#: src/translations.h:622
+#: src/translations.h:624
 msgid "Pick Screen Color"
 msgstr ""
 
-#: src/translations.h:623
+#: src/translations.h:625
 msgid "&Custom colors"
 msgstr "&Darbo spalvos"
 
-#: src/translations.h:624
+#: src/translations.h:626
 msgid "&Add to Custom Colors"
 msgstr "Įtraukti į &savadarbes spalvas"
 
-#: src/translations.h:625
+#: src/translations.h:627
 msgid "Hu&e:"
 msgstr ""
 
-#: src/translations.h:626
+#: src/translations.h:628
 msgid "&Sat:"
 msgstr ""
 
-#: src/translations.h:627
+#: src/translations.h:629
 msgid "&Val:"
 msgstr ""
 
-#: src/translations.h:628
+#: src/translations.h:630
 msgid "&Red:"
 msgstr "&Raudona:"
 
-#: src/translations.h:629
+#: src/translations.h:631
 msgid "&Green:"
 msgstr "&Žalia:"
 
-#: src/translations.h:630
+#: src/translations.h:632
 msgid "Bl&ue:"
 msgstr "&Mėlyna:"
 
-#: src/translations.h:631
+#: src/translations.h:633
 msgid "Select Color"
 msgstr "Pasirinkti spalvą"
 
-#: src/translations.h:632
+#: src/translations.h:634
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr ""
@@ -9281,62 +9315,62 @@ msgstr ""
 "juostoje."
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:669
+#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
 msgid "January"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:669
+#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
 msgid "February"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:669
+#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
 msgid "March"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:669
+#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
 msgid "April"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:669
+#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
 msgid "May"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:669
+#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
 msgid "June"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:669
+#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
 msgid "July"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:669
+#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
 msgid "August"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:669
+#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
 msgid "September"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:669
+#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
 msgid "October"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:254
-#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:669
+#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
 msgid "November"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:255
-#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:669
+#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
 msgid "December"
 msgstr ""
 
