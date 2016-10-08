@@ -232,7 +232,7 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 			if (withDecimalDegree)
 				res += q_("Ecliptic obliquity") + QString(" (%1): %2").arg(cepoch, StelUtils::radToDecDegStr(ecl)) + "<br>";
 			else
-				res += q_("Ecliptic obliquity") + QString(" (%1): %2").arg(cepoch, StelUtils::radToDmsStr(ecl)) + "<br>";
+				res += q_("Ecliptic obliquity") + QString(" (%1): %2").arg(cepoch, StelUtils::radToDmsStr(ecl, true)) + "<br>";
 		}
 	}
 
