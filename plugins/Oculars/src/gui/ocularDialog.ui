@@ -296,7 +296,7 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="3" column="0">
+             <item row="2" column="0">
               <widget class="QCheckBox" name="checkBoxTypeOfMount">
                <property name="toolTip">
                 <string>Enable automatic install the type of mount from the telescope settings for saving horizontal orientation of CCD frame.</string>
@@ -310,13 +310,6 @@
               <widget class="QCheckBox" name="checkBoxDecimalDegrees">
                <property name="text">
                 <string>Use degrees and minutes for FOV of CCD</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="checkBoxUseFlipForCCD">
-               <property name="text">
-                <string>Use flip for CCD</string>
                </property>
               </widget>
              </item>
