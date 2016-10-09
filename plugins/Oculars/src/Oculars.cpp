@@ -126,6 +126,9 @@ Oculars::Oculars():
 	flagCircumpolarCircles(false),
 	flagPrecessionCircles(false),
 	flagCardinalPoints(false),
+	flagCelestialJ2000Poles(false),
+	flagCelestialPoles(false),
+	flagZenithNadirPoints(false),
 	flagAdaptation(false),
 	flagLimitStars(false),
 	magLimitStars(0.0),
@@ -2118,6 +2121,9 @@ void Oculars::unzoomOcular()
 		gridManager->setFlagColureLines(flagColureLines);
 		gridManager->setFlagCircumpolarCircles(flagCircumpolarCircles);
 		gridManager->setFlagPrecessionCircles(flagPrecessionCircles);
+		gridManager->setFlagCelestialJ2000Poles(flagCelestialJ2000Poles);
+		gridManager->setFlagCelestialPoles(flagCelestialPoles);
+		gridManager->setFlagZenithNadir(flagZenithNadirPoints);
 
 		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(flagCardinalPoints);
 	}
@@ -2185,6 +2191,9 @@ void Oculars::zoom(bool zoomedIn)
 				flagColureLines = gridManager->getFlagColureLines();
 				flagCircumpolarCircles = gridManager->getFlagCircumpolarCircles();
 				flagPrecessionCircles = gridManager->getFlagPrecessionCircles();
+				flagCelestialJ2000Poles = gridManager->getFlagCelestialJ2000Poles();
+				flagCelestialPoles = gridManager->getFlagCelestialPoles();
+				flagZenithNadirPoints = gridManager->getFlagZenithNadir();
 				flagCardinalPoints = GETSTELMODULE(LandscapeMgr)->getFlagCardinalsPoints();
 			}
 
@@ -2249,6 +2258,9 @@ void Oculars::zoomOcular()
 		gridManager->setFlagColureLines(false);
 		gridManager->setFlagCircumpolarCircles(false);
 		gridManager->setFlagPrecessionCircles(false);
+		gridManager->setFlagCelestialJ2000Poles(false);
+		gridManager->setFlagCelestialPoles(false);
+		gridManager->setFlagZenithNadir(false);
 
 		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(false);
 	}
