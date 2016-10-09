@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-09 14:44+0700\n"
+"POT-Creation-Date: 2016-10-09 14:51+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -250,7 +250,7 @@ msgstr ""
 msgid "Celestial J2000 poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1136 src/ui_viewDialog.h:1990
+#: src/core/modules/GridLinesMgr.cpp:1136
 msgid "Celestial poles"
 msgstr ""
 
@@ -5400,6 +5400,10 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1988
 msgid "Show celestial poles of current planet and date."
+msgstr ""
+
+#: src/ui_viewDialog.h:1990
+msgid "Celestial poles (of date)"
 msgstr ""
 
 #: src/ui_viewDialog.h:1992
