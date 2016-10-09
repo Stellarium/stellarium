@@ -88,6 +88,15 @@ class GridLinesMgr : public StelModule
 		   WRITE setColorGalacticGrid
 		   NOTIFY galacticGridColorChanged)
 
+	Q_PROPERTY(bool supergalacticGridDisplayed
+		   READ getFlagSupergalacticGrid
+		   WRITE setFlagSupergalacticGrid
+		   NOTIFY supergalacticGridDisplayedChanged)
+	Q_PROPERTY(Vec3f supergalacticGridColor
+		   READ getColorSupergalacticGrid
+		   WRITE setColorSupergalacticGrid
+		   NOTIFY supergalacticGridColorChanged)
+
 	Q_PROPERTY(bool equatorLineDisplayed
 		   READ getFlagEquatorLine
 		   WRITE setFlagEquatorLine
@@ -170,6 +179,15 @@ class GridLinesMgr : public StelModule
 		   READ getColorGalacticEquatorLine
 		   WRITE setColorGalacticEquatorLine
 		   NOTIFY galacticEquatorLineColorChanged)
+
+	Q_PROPERTY(bool supergalacticEquatorLineDisplayed
+		   READ getFlagSupergalacticEquatorLine
+		   WRITE setFlagSupergalacticEquatorLine
+		   NOTIFY supergalacticEquatorLineDisplayedChanged)
+	Q_PROPERTY(Vec3f supergalacticEquatorLineColor
+		   READ getColorSupergalacticEquatorLine
+		   WRITE setColorSupergalacticEquatorLine
+		   NOTIFY supergalacticEquatorLineColorChanged)
 
 	Q_PROPERTY(bool primeVerticalLineDisplayed
 		   READ getFlagPrimeVerticalLine
@@ -313,6 +331,20 @@ public slots:
 	//! @endcode
 	void setColorGalacticGrid(const Vec3f& newColor);
 
+	//! Setter for displaying Supergalactic Grid.
+	void setFlagSupergalacticGrid(const bool displayed);
+	//! Accessor for displaying Supergalactic Grid.
+	bool getFlagSupergalacticGrid(void) const;
+	//! Get the current color of the Supergalactic Grid.
+	Vec3f getColorSupergalacticGrid(void) const;
+	//! Set the color of the Supergalactic Grid.
+	//! @param newColor The color of supergalactic grid
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorSupergalacticGrid(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorSupergalacticGrid(const Vec3f& newColor);
+
 	//! Setter for displaying Equatorial Line.
 	void setFlagEquatorLine(const bool displayed);
 	//! Accessor for displaying Equatorial Line.
@@ -445,6 +477,20 @@ public slots:
 	//! @endcode
 	void setColorGalacticEquatorLine(const Vec3f& newColor);
 
+	//! Setter for displaying Supergalactic Equator Line.
+	void setFlagSupergalacticEquatorLine(const bool displayed);
+	//! Accessor for displaying Supergalactic Equator Line.
+	bool getFlagSupergalacticEquatorLine(void) const;
+	//! Get the current color of the Supergalactic Equator Line.
+	Vec3f getColorSupergalacticEquatorLine(void) const;
+	//! Set the color of the Supergalactic Equator Line.
+	//! @param newColor The color of supergalactic equator line
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorSupergalacticEquatorLine(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorSupergalacticEquatorLine(const Vec3f& newColor);
+
 	//! Setter for displaying the Prime Vertical Line.
 	void setFlagPrimeVerticalLine(const bool displayed);
 	//! Accessor for displaying Prime Vertical Line.
@@ -501,6 +547,8 @@ signals:
 	void eclipticJ2000GridColorChanged(const Vec3f & newColor) const;
 	void galacticGridDisplayedChanged(const bool displayed) const;
 	void galacticGridColorChanged(const Vec3f & newColor) const;
+	void supergalacticGridDisplayedChanged(const bool displayed) const;
+	void supergalacticGridColorChanged(const Vec3f & newColor) const;
 	void equatorLineDisplayedChanged(const bool displayed) const;
 	void equatorLineColorChanged(const Vec3f & newColor) const;
 	void equatorJ2000LineDisplayedChanged(const bool displayed) const;
@@ -519,6 +567,8 @@ signals:
 	void horizonLineColorChanged(const Vec3f & newColor) const;
 	void galacticEquatorLineDisplayedChanged(const bool displayed) const;
 	void galacticEquatorLineColorChanged(const Vec3f & newColor) const;
+	void supergalacticEquatorLineDisplayedChanged(const bool displayed) const;
+	void supergalacticEquatorLineColorChanged(const Vec3f & newColor) const;
 	void primeVerticalLineDisplayedChanged(const bool displayed) const;
 	void primeVerticalLineColorChanged(const Vec3f & newColor) const;
 	void colureLinesDisplayedChanged(const bool displayed) const;
@@ -532,27 +582,29 @@ private slots:
 	void updateLineLabels();
 
 private:
-	SkyGrid * equGrid;		// Equatorial grid
-	SkyGrid * equJ2000Grid;		// Equatorial J2000 grid
-	SkyGrid * galacticGrid;		// Galactic grid
-	SkyGrid * eclGrid;		// Ecliptic of Date grid
-	SkyGrid * eclJ2000Grid;		// Ecliptic J2000 grid
-	SkyGrid * aziGrid;		// Azimuthal grid
-	SkyLine * equatorLine;		// Celestial Equator line
-	SkyLine * equatorJ2000Line;	// Celestial Equator of J2000 line
-	SkyLine * eclipticLine;		// Ecliptic line
-	SkyLine * eclipticJ2000Line;	// Ecliptic line of J2000
-	SkyLine * precessionCircleN;	// Northern precession circle
-	SkyLine * precessionCircleS;	// Southern precession circle
-	SkyLine * meridianLine;		// Meridian line
-	SkyLine * longitudeLine; 	// Opposition/conjunction longitude line
-	SkyLine * horizonLine;		// Horizon line
-	SkyLine * galacticEquatorLine;	// line depicting the Galactic equator as defined by the IAU definition of Galactic coordinates (System II, 1958)
-	SkyLine * primeVerticalLine;	// Prime Vertical line
-	SkyLine * colureLine_1;		// First Colure line (0/12h)
-	SkyLine * colureLine_2;		// Second Colure line (6/18h)
-	SkyLine * circumpolarCircleN;	// Northern circumpolar circle
-	SkyLine * circumpolarCircleS;	// Southern circumpolar circle
+	SkyGrid * equGrid;			// Equatorial grid
+	SkyGrid * equJ2000Grid;			// Equatorial J2000 grid
+	SkyGrid * galacticGrid;			// Galactic grid
+	SkyGrid * supergalacticGrid;		// Supergalactic grid
+	SkyGrid * eclGrid;			// Ecliptic of Date grid
+	SkyGrid * eclJ2000Grid;			// Ecliptic J2000 grid
+	SkyGrid * aziGrid;			// Azimuthal grid
+	SkyLine * equatorLine;			// Celestial Equator line
+	SkyLine * equatorJ2000Line;		// Celestial Equator of J2000 line
+	SkyLine * eclipticLine;			// Ecliptic line
+	SkyLine * eclipticJ2000Line;		// Ecliptic line of J2000
+	SkyLine * precessionCircleN;		// Northern precession circle
+	SkyLine * precessionCircleS;		// Southern precession circle
+	SkyLine * meridianLine;			// Meridian line
+	SkyLine * longitudeLine;		// Opposition/conjunction longitude line
+	SkyLine * horizonLine;			// Horizon line
+	SkyLine * galacticEquatorLine;		// line depicting the Galactic equator as defined by the IAU definition of Galactic coordinates (System II, 1958)
+	SkyLine * supergalacticEquatorLine;	// line depicting the Supergalactic equator
+	SkyLine * primeVerticalLine;		// Prime Vertical line
+	SkyLine * colureLine_1;			// First Colure line (0/12h)
+	SkyLine * colureLine_2;			// Second Colure line (6/18h)
+	SkyLine * circumpolarCircleN;		// Northern circumpolar circle
+	SkyLine * circumpolarCircleS;		// Southern circumpolar circle
 };
 
 #endif // _GRIDLINESMGR_HPP_
