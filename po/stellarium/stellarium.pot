@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-09 21:15+0700\n"
+"POT-Creation-Date: 2016-10-09 21:54+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -145,34 +145,44 @@ msgstr ""
 msgid "Circumpolar Circle"
 msgstr ""
 
+#. TRANSLATORS: North Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:914 src/core/modules/GridLinesMgr.cpp:923
 msgid "NCP"
 msgstr ""
 
+#. TRANSLATORS: South Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:916 src/core/modules/GridLinesMgr.cpp:925
 msgid "SCP"
 msgstr ""
 
+#. TRANSLATORS: Zenith
 #: src/core/modules/GridLinesMgr.cpp:932
+msgctxt "zenith"
 msgid "Z"
 msgstr ""
 
+#. TRANSLATORS: Nadir
 #: src/core/modules/GridLinesMgr.cpp:934
+msgctxt "nadir"
 msgid "Z'"
 msgstr ""
 
+#. TRANSLATORS: North Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:941 src/core/modules/GridLinesMgr.cpp:950
 msgid "NEP"
 msgstr ""
 
+#. TRANSLATORS: South Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:943 src/core/modules/GridLinesMgr.cpp:952
 msgid "SEP"
 msgstr ""
 
+#. TRANSLATORS: North Galactic Pole
 #: src/core/modules/GridLinesMgr.cpp:959
 msgid "NGP"
 msgstr ""
 
+#. TRANSLATORS: South Galactic Pole
 #: src/core/modules/GridLinesMgr.cpp:961
 msgid "SGP"
 msgstr ""
