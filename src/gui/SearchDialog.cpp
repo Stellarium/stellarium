@@ -213,6 +213,7 @@ void SearchDialog::populateCoordinateSystemsList()
 	csys->addItem(qc_("Equatorial", "coordinate system"), "equatorial");
 	csys->addItem(qc_("Horizontal", "coordinate system"), "horizontal");
 	csys->addItem(qc_("Galactic", "coordinate system"), "galactic");
+	csys->addItem(qc_("Supergalactic", "coordinate system"), "supergalactic");
 	csys->addItem(qc_("Ecliptic", "coordinate system"), "ecliptic");
 	csys->addItem(qc_("Ecliptic (J2000.0)", "coordinate system"), "eclipticJ2000");
 
@@ -265,6 +266,7 @@ void SearchDialog::populateCoordinateAxis()
 		case ecliptic:
 		case eclipticJ2000:
 		case galactic:
+		case supergalactic:
 		{
 			ui->AxisXLabel->setText(q_("Longitude"));
 			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbolsUnsigned);
@@ -496,6 +498,18 @@ void SearchDialog::manualPositionChanged()
 			StelUtils::spheToRect(spinLong, spinLat, pos);
 			pos = core->galacticToJ2000(pos);
 			if ( (mountMode==StelMovementMgr::MountGalactic) && (fabs(spinLat)> (0.9*M_PI/2.0)) )
+			{
+				// make up vector more stable.
+				mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat>0. ? 1. : -1. ));
+				aimUp=mvmgr->getViewUpVectorJ2000();
+			}
+			break;
+		}
+		case supergalactic:
+		{
+			StelUtils::spheToRect(spinLong, spinLat, pos);
+			pos = core->supergalacticToJ2000(pos);
+			if ( (mountMode==StelMovementMgr::MountSupergalactic) && (fabs(spinLat)> (0.9*M_PI/2.0)) )
 			{
 				// make up vector more stable.
 				mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat>0. ? 1. : -1. ));

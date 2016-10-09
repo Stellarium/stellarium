@@ -83,6 +83,7 @@ public:
 		equatorial,
 		horizontal,
 		galactic,
+		supergalactic,
 		ecliptic,
 		eclipticJ2000
 	};
