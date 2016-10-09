@@ -279,6 +279,8 @@ void AstroCalcDialog::setEphemerisHeaderNames()
 	ephemerisHeader << q_("Dec (J2000)");
 	//TRANSLATORS: magnitude
 	ephemerisHeader << q_("Mag.");
+	//TRANSLATORS: visible magnitude
+	ephemerisHeader << q_("Vis. mag.");
 	ui->ephemerisTreeWidget->setHeaderLabels(ephemerisHeader);
 
 	// adjust the column width
@@ -361,8 +363,10 @@ void AstroCalcDialog::generateEphemeris()
 			treeItem->setTextAlignment(EphemerisRA, Qt::AlignRight);
 			treeItem->setText(EphemerisDec, StelUtils::radToDmsStr(dec, true));
 			treeItem->setTextAlignment(EphemerisDec, Qt::AlignRight);
-			treeItem->setText(EphemerisMagnitude, QString::number(obj->getVMagnitudeWithExtinction(core), 'f', 2));
+			treeItem->setText(EphemerisMagnitude, QString::number(obj->getVMagnitude(core), 'f', 2));
 			treeItem->setTextAlignment(EphemerisMagnitude, Qt::AlignRight);
+			treeItem->setText(EphemerisVMagnitude, QString::number(obj->getVMagnitudeWithExtinction(core), 'f', 2));
+			treeItem->setTextAlignment(EphemerisVMagnitude, Qt::AlignRight);
 		}
 		core->setJD(currentJD); // restore time
 	}
@@ -435,7 +439,7 @@ void AstroCalcDialog::populateCelestialBodyList()
 	//data. Unfortunately, there's no other way to do this than with a cycle.
 	foreach(const QString& name, planetNames)
 	{
-		if (name!="Solar System Observer" && name!="Sun" && name!=core->getCurrentPlanet()->getEnglishName())
+		if (!name.contains("Observer", Qt::CaseInsensitive) && name!="Sun" && name!=core->getCurrentPlanet()->getEnglishName())
 			planets->addItem(trans.qtranslate(name), name);
 	}
 	//Restore the selection

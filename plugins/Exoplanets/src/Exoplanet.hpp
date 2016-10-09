@@ -144,7 +144,6 @@ private:
 
 	Vec3d XYZ;                         // holds J2000 position	
 
-	static StelTextureSP hintTexture;
 	static StelTextureSP markerTexture;
 	static Vec3f habitableExoplanetMarkerColor;
 	static Vec3f exoplanetMarkerColor;

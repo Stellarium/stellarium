@@ -93,12 +93,14 @@ private slots:
 	void askEquatorJ2000GridColor();
 	void askEquatorGridColor();
 	void askGalacticGridColor();
+	void askSupergalacticGridColor();
 	void askAzimuthalGridColor();
 	void askEclipticLineJ2000Color();
 	void askEclipticLineColor();
 	void askEquatorLineJ2000Color();
 	void askEquatorLineColor();
 	void askGalacticEquatorLineColor();
+	void askSupergalacticEquatorLineColor();
 	void askLongitudeLineColor();
 	void askHorizonLineColor();
 	void askColureLinesColor();
@@ -107,6 +109,12 @@ private slots:
 	void askPrimeVerticalLineColor();
 	void askMeridianLineColor();
 	void askCardinalPointsColor();
+	void askCelestialJ2000PolesColor();
+	void askCelestialPolesColor();
+	void askZenithNadirColor();
+	void askEclipticJ2000PolesColor();
+	void askEclipticPolesColor();
+	void askGalacticPolesColor();
 
 private:
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);

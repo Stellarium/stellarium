@@ -41,6 +41,7 @@
 #include "SolarSystem.hpp"
 #include "StelUtils.hpp"
 #include "StelPropertyMgr.hpp"
+#include "LandscapeMgr.hpp"
 
 #include <QAction>
 #include <QDebug>
@@ -106,15 +107,31 @@ Oculars::Oculars():
 	usageMessageLabelID(-1),
 	flagAzimuthalGrid(false),
 	flagGalacticGrid(false),
-	flagEquatorGrid(false),
+	flagSupergalacticGrid(false),
 	flagEquatorJ2000Grid(false),
+	flagEquatorGrid(false),
+	flagEquatorJ2000Line(false),
 	flagEquatorLine(false),
+	flagEclipticJ2000Line(false),
 	flagEclipticLine(false),
 	flagEclipticJ2000Grid(false),
+	flagEclipticGrid(false),
 	flagMeridianLine(false),
 	flagLongitudeLine(false),
 	flagHorizonLine(false),
 	flagGalacticEquatorLine(false),
+	flagSupergalacticEquatorLine(false),
+	flagPrimeVerticalLine(false),
+	flagColureLines(false),
+	flagCircumpolarCircles(false),
+	flagPrecessionCircles(false),
+	flagCardinalPoints(false),
+	flagCelestialJ2000Poles(false),
+	flagCelestialPoles(false),
+	flagZenithNadirPoints(false),
+	flagEclipticJ2000Poles(false),
+	flagEclipticPoles(false),
+	flagGalacticPoles(false),
 	flagAdaptation(false),
 	flagLimitStars(false),
 	magLimitStars(0.0),
@@ -132,6 +149,7 @@ Oculars::Oculars():
 	guiPanelEnabled(false),
 	flagDecimalDegrees(false),
 	flagSemiTransporency(false),
+	flagHideGridsLines(false),
 	flipVert(false),
 	flipHorz(false),
 	ccdRotationSignalMapper(0),
@@ -159,7 +177,6 @@ Oculars::Oculars():
 	actualFOV(0),
 	initialFOV(0),
 	flagInitFOVUsage(false),
-	flagUseFlipForCCD(false),
 	flagAutosetMountForCCD(false),
 	equatorialMountEnabled(false),
 	reticleRotation(0)
@@ -655,8 +672,8 @@ void Oculars::init()
 		setFlagDecimalDegrees(settings->value("use_decimal_degrees", false).toBool());
 		setFlagLimitMagnitude(settings->value("limit_stellar_magnitude", true).toBool());
 		setFlagInitFovUsage(settings->value("use_initial_fov", false).toBool());
-		setFlagUseFlipForCCD(settings->value("use_ccd_flip", false).toBool());
 		setFlagUseSemiTransparency(settings->value("use_semi_transparency", false).toBool());
+		setFlagHideGridsLines(settings->value("hide_grids_and_lines", true).toBool());
 		setFlagAutosetMountForCCD(settings->value("use_mount_autoset", false).toBool());
 
 		StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
@@ -1373,7 +1390,8 @@ void Oculars::toggleCCD(bool show)
 		initialFOV = movementManager->getCurrentFov();
 		//Mutually exclusive with the ocular mode
 		hideUsageMessageIfDisplayed();
-		enableOcular(false);
+		if (flagShowOculars)
+			enableOcular(false);
 
 		if (flagShowTelrad) {
 			toggleTelrad(false);
@@ -1410,12 +1428,6 @@ void Oculars::toggleCCD(bool show)
 			movementManager->zoomTo(movementManager->getInitFov());
 		else
 			movementManager->zoomTo(initialFOV);
-
-		if (getFlagUseFlipForCCD())
-		{
-			core->setFlipHorz(false);
-			core->setFlipVert(false);
-		}
 
 		if (getFlagAutosetMountForCCD())
 		{
@@ -1563,19 +1575,6 @@ void Oculars::paintCCDBounds()
 			const double ccdXRatio = ccd->getActualFOVx(telescope, lens) / screenFOV;
 			const double ccdYRatio = ccd->getActualFOVy(telescope, lens) / screenFOV;
 
-			// flip are needed and allowed?
-			float ratioLimit = 0.125f;
-			if (getFlagUseFlipForCCD() && (ccdXRatio>=ratioLimit || ccdYRatio>=ratioLimit))
-			{
-				core->setFlipHorz(telescope->isHFlipped());
-				core->setFlipVert(telescope->isVFlipped());
-			}
-			else
-			{
-				core->setFlipHorz(false);
-				core->setFlipVert(false);
-			}
-
 			// As the FOV is based on the narrow aspect of the screen, we need to calculate
 			// height & width based soley off of that dimension.
 			int aspectIndex = 2;
@@ -1667,7 +1666,7 @@ void Oculars::paintCCDBounds()
 				// frame and equatorial coordinates for epoch J2000.0 of that center.
 				// Details: https://bugs.launchpad.net/stellarium/+bug/1404695
 
-				ratioLimit = 0.25f;
+				float ratioLimit = 0.25f;
 				if (ccdXRatio>=ratioLimit || ccdYRatio>=ratioLimit)
 				{
 					// draw cross at center
@@ -1740,10 +1739,10 @@ void Oculars::paintTelrad()
 		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
 		Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
 				   projector->getViewportPosY()+projector->getViewportHeight()/2);
-		float length = 0.5 * params.viewportFovDiameter * params.devicePixelsPerPixel;
-		painter.drawCircle(centerScreen[0], centerScreen[1], length * (M_PI/180) * (0.5));
-		painter.drawCircle(centerScreen[0], centerScreen[1], length * (M_PI/180) * (2.0));
-		painter.drawCircle(centerScreen[0], centerScreen[1], length * (M_PI/180) * (4.0));
+		float pixelsPerRad = projector->getPixelPerRadAtCenter() * params.devicePixelsPerPixel;
+		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (0.5));
+		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (2.0));
+		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (4.0));
 
 	}
 }
@@ -2098,21 +2097,43 @@ void Oculars::validateAndLoadIniFile()
 void Oculars::unzoomOcular()
 {
 	StelCore *core = StelApp::getInstance().getCore();
-	StelMovementMgr *movementManager = core->getMovementMgr();
-	GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
+	StelMovementMgr *movementManager = core->getMovementMgr();	
 	StelSkyDrawer *skyManager = core->getSkyDrawer();
 
-	gridManager->setFlagAzimuthalGrid(flagAzimuthalGrid);
-	gridManager->setFlagGalacticGrid(flagGalacticGrid);
-	gridManager->setFlagEquatorGrid(flagEquatorGrid);
-	gridManager->setFlagEquatorJ2000Grid(flagEquatorJ2000Grid);
-	gridManager->setFlagEquatorLine(flagEquatorLine);
-	gridManager->setFlagEclipticLine(flagEclipticLine);
-	gridManager->setFlagEclipticJ2000Grid(flagEclipticJ2000Grid);
-	gridManager->setFlagMeridianLine(flagMeridianLine);
-	gridManager->setFlagLongitudeLine(flagLongitudeLine);
-	gridManager->setFlagHorizonLine(flagHorizonLine);
-	gridManager->setFlagGalacticEquatorLine(flagGalacticEquatorLine);
+	if (flagHideGridsLines)
+	{
+		GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
+
+		gridManager->setFlagAzimuthalGrid(flagAzimuthalGrid);
+		gridManager->setFlagGalacticGrid(flagGalacticGrid);
+		gridManager->setFlagSupergalacticGrid(flagSupergalacticGrid);
+		gridManager->setFlagEquatorJ2000Grid(flagEquatorJ2000Grid);
+		gridManager->setFlagEquatorGrid(flagEquatorGrid);
+		gridManager->setFlagEquatorJ2000Line(flagEquatorJ2000Line);
+		gridManager->setFlagEquatorLine(flagEquatorLine);
+		gridManager->setFlagEclipticJ2000Line(flagEclipticJ2000Line);
+		gridManager->setFlagEclipticLine(flagEclipticLine);
+		gridManager->setFlagEclipticJ2000Grid(flagEclipticJ2000Grid);
+		gridManager->setFlagEclipticGrid(flagEclipticGrid);
+		gridManager->setFlagMeridianLine(flagMeridianLine);
+		gridManager->setFlagLongitudeLine(flagLongitudeLine);
+		gridManager->setFlagHorizonLine(flagHorizonLine);
+		gridManager->setFlagGalacticEquatorLine(flagGalacticEquatorLine);
+		gridManager->setFlagSupergalacticEquatorLine(flagSupergalacticEquatorLine);
+		gridManager->setFlagPrimeVerticalLine(flagPrimeVerticalLine);
+		gridManager->setFlagColureLines(flagColureLines);
+		gridManager->setFlagCircumpolarCircles(flagCircumpolarCircles);
+		gridManager->setFlagPrecessionCircles(flagPrecessionCircles);
+		gridManager->setFlagCelestialJ2000Poles(flagCelestialJ2000Poles);
+		gridManager->setFlagCelestialPoles(flagCelestialPoles);
+		gridManager->setFlagZenithNadir(flagZenithNadirPoints);
+		gridManager->setFlagEclipticJ2000Poles(flagEclipticJ2000Poles);
+		gridManager->setFlagEclipticPoles(flagEclipticPoles);
+		gridManager->setFlagGalacticPoles(flagGalacticPoles);
+
+		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(flagCardinalPoints);
+	}
+
 	skyManager->setFlagLuminanceAdaptation(flagAdaptation);
 	skyManager->setFlagStarMagnitudeLimit(flagLimitStars);
 	skyManager->setFlagPlanetMagnitudeLimit(flagLimitPlanets);
@@ -2152,19 +2173,38 @@ void Oculars::zoom(bool zoomedIn)
 		{
 			StelCore *core = StelApp::getInstance().getCore();
 
-			GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
-			// Current state
-			flagAzimuthalGrid = gridManager->getFlagAzimuthalGrid();
-			flagGalacticGrid = gridManager->getFlagGalacticGrid();
-			flagEquatorGrid = gridManager->getFlagEquatorGrid();
-			flagEquatorJ2000Grid = gridManager->getFlagEquatorJ2000Grid();
-			flagEquatorLine = gridManager->getFlagEquatorLine();
-			flagEclipticLine = gridManager->getFlagEclipticLine();
-			flagEclipticJ2000Grid = gridManager->getFlagEclipticJ2000Grid();
-			flagMeridianLine = gridManager->getFlagMeridianLine();
-			flagLongitudeLine = gridManager->getFlagLongitudeLine();
-			flagHorizonLine = gridManager->getFlagHorizonLine();
-			flagGalacticEquatorLine = gridManager->getFlagGalacticEquatorLine();
+			if (flagHideGridsLines)
+			{
+				GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
+				// Current state
+				flagAzimuthalGrid = gridManager->getFlagAzimuthalGrid();
+				flagGalacticGrid = gridManager->getFlagGalacticGrid();
+				flagSupergalacticGrid = gridManager->getFlagSupergalacticGrid();
+				flagEquatorJ2000Grid = gridManager->getFlagEquatorJ2000Grid();
+				flagEquatorGrid = gridManager->getFlagEquatorGrid();
+				flagEquatorJ2000Line = gridManager->getFlagEquatorJ2000Line();
+				flagEquatorLine = gridManager->getFlagEquatorLine();
+				flagEclipticJ2000Line = gridManager->getFlagEclipticJ2000Line();
+				flagEclipticLine = gridManager->getFlagEclipticLine();
+				flagEclipticJ2000Grid = gridManager->getFlagEclipticJ2000Grid();
+				flagEclipticGrid = gridManager->getFlagEclipticGrid();
+				flagMeridianLine = gridManager->getFlagMeridianLine();
+				flagLongitudeLine = gridManager->getFlagLongitudeLine();
+				flagHorizonLine = gridManager->getFlagHorizonLine();
+				flagGalacticEquatorLine = gridManager->getFlagGalacticEquatorLine();
+				flagSupergalacticEquatorLine = gridManager->getFlagSupergalacticEquatorLine();
+				flagPrimeVerticalLine = gridManager->getFlagPrimeVerticalLine();
+				flagColureLines = gridManager->getFlagColureLines();
+				flagCircumpolarCircles = gridManager->getFlagCircumpolarCircles();
+				flagPrecessionCircles = gridManager->getFlagPrecessionCircles();
+				flagCelestialJ2000Poles = gridManager->getFlagCelestialJ2000Poles();
+				flagCelestialPoles = gridManager->getFlagCelestialPoles();
+				flagZenithNadirPoints = gridManager->getFlagZenithNadir();
+				flagEclipticJ2000Poles = gridManager->getFlagEclipticJ2000Poles();
+				flagEclipticPoles = gridManager->getFlagEclipticPoles();
+				flagGalacticPoles = gridManager->getFlagGalacticPoles();
+				flagCardinalPoints = GETSTELMODULE(LandscapeMgr)->getFlagCardinalsPoints();
+			}
 
 			StelSkyDrawer *skyManager = core->getSkyDrawer();
 			// Current state
@@ -2201,21 +2241,42 @@ void Oculars::zoomOcular()
 {
 	StelCore *core = StelApp::getInstance().getCore();
 	StelMovementMgr *movementManager = core->getMovementMgr();
-	GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
-
 	StelSkyDrawer *skyManager = core->getSkyDrawer();
 
-	gridManager->setFlagAzimuthalGrid(false);
-	gridManager->setFlagGalacticGrid(false);
-	gridManager->setFlagEquatorGrid(false);
-	gridManager->setFlagEquatorJ2000Grid(false);
-	gridManager->setFlagEquatorLine(false);
-	gridManager->setFlagEclipticLine(false);
-	gridManager->setFlagEclipticJ2000Grid(false);
-	gridManager->setFlagMeridianLine(false);
-	gridManager->setFlagLongitudeLine(false);
-	gridManager->setFlagHorizonLine(false);
-	gridManager->setFlagGalacticEquatorLine(false);
+	if (flagHideGridsLines)
+	{
+		GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
+
+		gridManager->setFlagAzimuthalGrid(false);
+		gridManager->setFlagGalacticGrid(false);
+		gridManager->setFlagSupergalacticGrid(false);
+		gridManager->setFlagEquatorJ2000Grid(false);
+		gridManager->setFlagEquatorGrid(false);
+		gridManager->setFlagEquatorJ2000Line(false);
+		gridManager->setFlagEquatorLine(false);
+		gridManager->setFlagEclipticJ2000Line(false);
+		gridManager->setFlagEclipticLine(false);
+		gridManager->setFlagEclipticJ2000Grid(false);
+		gridManager->setFlagEclipticGrid(false);
+		gridManager->setFlagMeridianLine(false);
+		gridManager->setFlagLongitudeLine(false);
+		gridManager->setFlagHorizonLine(false);
+		gridManager->setFlagGalacticEquatorLine(false);
+		gridManager->setFlagSupergalacticEquatorLine(false);
+		gridManager->setFlagPrimeVerticalLine(false);
+		gridManager->setFlagColureLines(false);
+		gridManager->setFlagCircumpolarCircles(false);
+		gridManager->setFlagPrecessionCircles(false);
+		gridManager->setFlagCelestialJ2000Poles(false);
+		gridManager->setFlagCelestialPoles(false);		
+		gridManager->setFlagZenithNadir(false);
+		gridManager->setFlagEclipticJ2000Poles(false);
+		gridManager->setFlagEclipticPoles(false);
+		gridManager->setFlagGalacticPoles(false);
+
+		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(false);
+	}
+
 	skyManager->setFlagLuminanceAdaptation(false);
 
 	GETSTELMODULE(SolarSystem)->setFlagMoonScale(false);
@@ -2397,18 +2458,6 @@ bool Oculars::getFlagInitFovUsage() const
 	return flagInitFOVUsage;
 }
 
-void Oculars::setFlagUseFlipForCCD(const bool b)
-{
-	flagUseFlipForCCD = b;
-	settings->setValue("use_ccd_flip", b);
-	settings->sync();
-}
-
-bool Oculars::getFlagUseFlipForCCD() const
-{
-	return flagUseFlipForCCD;
-}
-
 void Oculars::setFlagAutosetMountForCCD(const bool b)
 {
 	flagAutosetMountForCCD = b;
@@ -2437,6 +2486,18 @@ void Oculars::setFlagUseSemiTransparency(const bool b)
 bool Oculars::getFlagUseSemiTransparency() const
 {
 	return flagSemiTransporency;
+}
+
+void Oculars::setFlagHideGridsLines(const bool b)
+{
+	flagHideGridsLines = b;
+	settings->setValue("hide_grids_and_lines", b);
+	settings->sync();
+}
+
+bool Oculars::getFlagHideGridsLines() const
+{
+	return flagHideGridsLines;
 }
 
 QString Oculars::getDimensionsString(double fovX, double fovY) const

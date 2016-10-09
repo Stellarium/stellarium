@@ -75,7 +75,8 @@ public:
 							//!< The north pole follows the precession of the planet on which the observer is located.
 							//!< On Earth, this may include nutation if so configured. Has been corrected for V0.14 to really properly reflect ecliptical motion and precession (Vondrak 2011 model) and nutation.
 		FrameJ2000,				//!< Equatorial reference frame at the J2000 equinox centered on the observer. This is also the ICRS reference frame.
-		FrameGalactic				//!< Galactic reference frame centered on observer.
+		FrameGalactic,				//!< Galactic reference frame centered on observer.
+		FrameSupergalactic			//!< Supergalactic reference frame centered on observer.
 	};
 
 	//! @enum ProjectionType
@@ -214,9 +215,11 @@ public:
 	Vec3d j2000ToAltAz(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
 	void j2000ToAltAzInPlaceNoRefraction(Vec3f* v) const {v->transfo4d(matJ2000ToAltAz);}
 	Vec3d galacticToJ2000(const Vec3d& v) const;
+	Vec3d supergalacticToJ2000(const Vec3d& v) const;
 	Vec3d equinoxEquToJ2000(const Vec3d& v) const;
 	Vec3d j2000ToEquinoxEqu(const Vec3d& v) const;
 	Vec3d j2000ToGalactic(const Vec3d& v) const;
+	Vec3d j2000ToSupergalactic(const Vec3d& v) const;
 
 	//! Transform vector from heliocentric ecliptic coordinate to altazimuthal
 	Vec3d heliocentricEclipticToAltAz(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
@@ -249,14 +252,21 @@ public:
 	//! Get the modelview matrix for observer-centric Galactic equatorial drawing.
 	StelProjector::ModelViewTranformP getGalacticModelViewTransform(RefractionMode refMode=RefractionAuto) const;
 
+	//! Get the modelview matrix for observer-centric Supergalactic equatorial drawing.
+	StelProjector::ModelViewTranformP getSupergalacticModelViewTransform(RefractionMode refMode=RefractionAuto) const;
+
 	//! Rotation matrix from equatorial J2000 to ecliptic (VSOP87A).
 	static const Mat4d matJ2000ToVsop87;
 	//! Rotation matrix from ecliptic (VSOP87A) to equatorial J2000.
 	static const Mat4d matVsop87ToJ2000;
 	//! Rotation matrix from J2000 to Galactic reference frame, using FITS convention.
 	static const Mat4d matJ2000ToGalactic;
-	//! Rotation matrix from J2000 to Galactic reference frame, using FITS convention.
+	//! Rotation matrix from Galactic to J2000 reference frame, using FITS convention.
 	static const Mat4d matGalacticToJ2000;
+	//! Rotation matrix from J2000 to Supergalactic reference frame.
+	static const Mat4d matJ2000ToSupergalactic;
+	//! Rotation matrix from Supergalactic to J2000 reference frame.
+	static const Mat4d matSupergalacticToJ2000;
 
 	//! Return the observer heliocentric ecliptic position
 	Vec3d getObserverHeliocentricEclipticPos() const;
@@ -462,6 +472,8 @@ public slots:
 	//! Get time speed in JDay/sec
 	double getTimeRate() const;
 
+	void revertTimeDirection(void);
+
 	//! Increase the time speed
 	void increaseTimeSpeed();
 	//! Decrease the time speed
@@ -494,6 +506,8 @@ public slots:
 	//! Set the preset sky time from a QDateTime
 	void setPresetSkyTime(QDateTime dateTime);
 
+	//! Add one [Earth, solar] minute to the current simulation time.
+	void addMinute();
 	//! Add one [Earth, solar] hour to the current simulation time.
 	void addHour();
 	//! Add one [Earth, solar] day to the current simulation time.
@@ -513,6 +527,8 @@ public slots:
 	//! connected to orbital period of planets.
 	void addSiderealYears(float n=100.f);
 
+	//! Subtract one [Earth, solar] minute to the current simulation time.
+	void subtractMinute();
 	//! Subtract one [Earth, solar] hour to the current simulation time.
 	void subtractHour();
 	//! Subtract one [Earth, solar] day to the current simulation time.

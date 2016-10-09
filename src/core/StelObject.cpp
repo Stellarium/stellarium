@@ -79,6 +79,12 @@ Vec3d StelObject::getGalacticPos(const StelCore *core) const
 	return core->j2000ToGalactic(getJ2000EquatorialPos(core));
 }
 
+// Get observer-centered supergalactic position
+Vec3d StelObject::getSupergalacticPos(const StelCore *core) const
+{
+	return core->j2000ToSupergalactic(getJ2000EquatorialPos(core));
+}
+
 float StelObject::getVMagnitude(const StelCore* core) const 
 {
 	Q_UNUSED(core);
@@ -232,7 +238,7 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 			if (withDecimalDegree)
 				res += q_("Ecliptic obliquity") + QString(" (%1): %2").arg(cepoch, StelUtils::radToDecDegStr(ecl)) + "<br>";
 			else
-				res += q_("Ecliptic obliquity") + QString(" (%1): %2").arg(cepoch, StelUtils::radToDmsStr(ecl)) + "<br>";
+				res += q_("Ecliptic obliquity") + QString(" (%1): %2").arg(cepoch, StelUtils::radToDmsStr(ecl, true)) + "<br>";
 		}
 	}
 
@@ -244,6 +250,12 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 			res += q_("Galactic longitude/latitude: %1/%2").arg(StelUtils::radToDecDegStr(glong), StelUtils::radToDecDegStr(glat)) + "<br>";
 		else
 			res += q_("Galactic longitude/latitude: %1/%2").arg(StelUtils::radToDmsStr(glong,true), StelUtils::radToDmsStr(glat,true)) + "<br>";
+
+		StelUtils::rectToSphe(&glong, &glat, getSupergalacticPos(core));
+		if (withDecimalDegree)
+			res += q_("Supergalactic longitude/latitude: %1/%2").arg(StelUtils::radToDecDegStr(glong), StelUtils::radToDecDegStr(glat)) + "<br>";
+		else
+			res += q_("Supergalactic longitude/latitude: %1/%2").arg(StelUtils::radToDmsStr(glong,true), StelUtils::radToDmsStr(glat,true)) + "<br>";
 	}
 
 	if ((flags&Extra) && core->getCurrentPlanet()->getEnglishName()=="Earth")

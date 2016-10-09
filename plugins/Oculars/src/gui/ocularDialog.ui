@@ -268,6 +268,13 @@
                </property>
               </widget>
              </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="hideGridsLinesCheckBox">
+               <property name="text">
+                <string>Hide grids and lines when enabled</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>
@@ -289,7 +296,7 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="3" column="0">
+             <item row="2" column="0">
               <widget class="QCheckBox" name="checkBoxTypeOfMount">
                <property name="toolTip">
                 <string>Enable automatic install the type of mount from the telescope settings for saving horizontal orientation of CCD frame.</string>
@@ -303,13 +310,6 @@
               <widget class="QCheckBox" name="checkBoxDecimalDegrees">
                <property name="text">
                 <string>Use degrees and minutes for FOV of CCD</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="checkBoxUseFlipForCCD">
-               <property name="text">
-                <string>Use flip for CCD</string>
                </property>
               </widget>
              </item>
@@ -569,7 +569,7 @@
                 <item row="1" column="1">
                  <widget class="QDoubleSpinBox" name="ocularAFov">
                   <property name="decimals">
-                   <number>1</number>
+                   <number>2</number>
                   </property>
                   <property name="maximum">
                    <double>120.000000000000000</double>
@@ -596,7 +596,7 @@
                 <item row="2" column="1">
                  <widget class="QDoubleSpinBox" name="ocularFL">
                   <property name="decimals">
-                   <number>1</number>
+                   <number>2</number>
                   </property>
                   <property name="minimum">
                    <double>1.000000000000000</double>
@@ -612,7 +612,7 @@
                 <item row="3" column="1">
                  <widget class="QDoubleSpinBox" name="ocularFieldStop">
                   <property name="decimals">
-                   <number>2</number>
+                   <number>3</number>
                   </property>
                   <property name="minimum">
                    <double>0.000000000000000</double>
@@ -883,7 +883,7 @@
                 <item row="1" column="1">
                  <widget class="QDoubleSpinBox" name="lensMultipler">
                   <property name="decimals">
-                   <number>2</number>
+                   <number>3</number>
                   </property>
                   <property name="maximum">
                    <double>9.000000000000000</double>
@@ -1228,7 +1228,7 @@
                 <item row="3" column="1">
                  <widget class="QDoubleSpinBox" name="ccdChipX">
                   <property name="decimals">
-                   <number>1</number>
+                   <number>2</number>
                   </property>
                   <property name="minimum">
                    <double>0.100000000000000</double>
@@ -1251,7 +1251,7 @@
                 <item row="4" column="1">
                  <widget class="QDoubleSpinBox" name="ccdChipY">
                   <property name="decimals">
-                   <number>1</number>
+                   <number>2</number>
                   </property>
                   <property name="minimum">
                    <double>0.100000000000000</double>
@@ -1267,7 +1267,7 @@
                 <item row="6" column="1">
                  <widget class="QDoubleSpinBox" name="ccdPixelY">
                   <property name="decimals">
-                   <number>1</number>
+                   <number>2</number>
                   </property>
                   <property name="minimum">
                    <double>0.100000000000000</double>
@@ -1283,7 +1283,7 @@
                 <item row="5" column="1">
                  <widget class="QDoubleSpinBox" name="ccdPixelX">
                   <property name="decimals">
-                   <number>1</number>
+                   <number>2</number>
                   </property>
                   <property name="minimum">
                    <double>0.100000000000000</double>
@@ -1299,7 +1299,7 @@
                 <item row="9" column="1">
                  <widget class="QDoubleSpinBox" name="OAGDist">
                   <property name="decimals">
-                   <number>1</number>
+                   <number>2</number>
                   </property>
                   <property name="singleStep">
                    <double>0.100000000000000</double>
@@ -1323,7 +1323,7 @@
                 <item row="10" column="1">
                  <widget class="QDoubleSpinBox" name="OAGPrismH">
                   <property name="decimals">
-                   <number>1</number>
+                   <number>2</number>
                   </property>
                   <property name="singleStep">
                    <double>0.100000000000000</double>
@@ -1347,7 +1347,7 @@
                 <item row="11" column="1">
                  <widget class="QDoubleSpinBox" name="OAGPrismW">
                   <property name="decimals">
-                   <number>1</number>
+                   <number>2</number>
                   </property>
                   <property name="singleStep">
                    <double>0.100000000000000</double>
@@ -1623,7 +1623,7 @@
                 <item row="1" column="1">
                  <widget class="QDoubleSpinBox" name="telescopeFL">
                   <property name="decimals">
-                   <number>1</number>
+                   <number>2</number>
                   </property>
                   <property name="minimum">
                    <double>1.000000000000000</double>
@@ -1646,7 +1646,7 @@
                 <item row="2" column="1">
                  <widget class="QDoubleSpinBox" name="telescopeDiameter">
                   <property name="decimals">
-                   <number>1</number>
+                   <number>2</number>
                   </property>
                   <property name="minimum">
                    <double>1.000000000000000</double>
