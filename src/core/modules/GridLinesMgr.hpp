@@ -26,6 +26,7 @@
 
 class SkyGrid;
 class SkyLine;
+class SkyPoint;
 
 //! @class GridLinesMgr
 //! The GridLinesMgr controls the drawing of the Azimuthal, Equatorial, Ecliptical and Galactic Grids,
@@ -215,6 +216,33 @@ class GridLinesMgr : public StelModule
 		   READ getColorCircumpolarCircles
 		   WRITE setColorCircumpolarCircles
 		   NOTIFY circumpolarCirclesColorChanged)
+
+	Q_PROPERTY(bool celestialJ2000PolesDisplayed
+		   READ getFlagCelestialJ2000Poles
+		   WRITE setFlagCelestialJ2000Poles
+		   NOTIFY celestialJ2000PolesDisplayedChanged)
+	Q_PROPERTY(Vec3f celestialJ2000PolesColor
+		   READ getColorCelestialJ2000Poles
+		   WRITE setColorCelestialJ2000Poles
+		   NOTIFY celestialJ2000PolesColorChanged)
+
+	Q_PROPERTY(bool celestialPolesDisplayed
+		   READ getFlagCelestialPoles
+		   WRITE setFlagCelestialPoles
+		   NOTIFY celestialPolesDisplayedChanged)
+	Q_PROPERTY(Vec3f celestialPolesColor
+		   READ getColorCelestialPoles
+		   WRITE setColorCelestialPoles
+		   NOTIFY celestialPolesColorChanged)
+
+	Q_PROPERTY(bool zenithNadirDisplayed
+		   READ getFlagZenithNadir
+		   WRITE setFlagZenithNadir
+		   NOTIFY zenithNadirDisplayedChanged)
+	Q_PROPERTY(Vec3f zenithNadirColor
+		   READ getColorZenithNadir
+		   WRITE setColorZenithNadir
+		   NOTIFY zenithNadirColorChanged)
 
 public:
 	GridLinesMgr();
@@ -533,6 +561,47 @@ public slots:
 	//! @endcode
 	void setColorCircumpolarCircles(const Vec3f& newColor);
 
+	//! Setter for displaying celestial poles of J2000.
+	void setFlagCelestialJ2000Poles(const bool displayed);
+	//! Accessor for displaying celestial poles of J2000.
+	bool getFlagCelestialJ2000Poles(void) const;
+	//! Get the current color of the celestial poles of J2000.
+	Vec3f getColorCelestialJ2000Poles(void) const;
+	//! Set the color of the celestial poles of J2000.
+	//! @param newColor The color of celestial poles of J2000
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorCelestialJ2000Poles(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorCelestialJ2000Poles(const Vec3f& newColor);
+
+	//! Setter for displaying celestial poles.
+	void setFlagCelestialPoles(const bool displayed);
+	//! Accessor for displaying celestial poles.
+	bool getFlagCelestialPoles(void) const;
+	//! Get the current color of the celestial poles.
+	Vec3f getColorCelestialPoles(void) const;
+	//! Set the color of the celestial poles.
+	//! @param newColor The color of celestial poles
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorCelestialPoles(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorCelestialPoles(const Vec3f& newColor);
+
+	//! Setter for displaying zenith and nadir.
+	void setFlagZenithNadir(const bool displayed);
+	//! Accessor for displaying zenith and nadir.
+	bool getFlagZenithNadir(void) const;
+	//! Get the current color of the zenith and nadir.
+	Vec3f getColorZenithNadir(void) const;
+	//! Set the color of the zenith and nadir.
+	//! @param newColor The color of zenith and nadir
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorZenithNadir(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorZenithNadir(const Vec3f& newColor);
 
 signals:
 	void azimuthalGridDisplayedChanged(const bool) const;
@@ -575,6 +644,12 @@ signals:
 	void colureLinesColorChanged(const Vec3f & newColor) const;
 	void circumpolarCirclesDisplayedChanged(const bool displayed) const;
 	void circumpolarCirclesColorChanged(const Vec3f & newColor) const;
+	void celestialJ2000PolesDisplayedChanged(const bool displayed) const;
+	void celestialJ2000PolesColorChanged(const Vec3f & newColor) const;
+	void celestialPolesDisplayedChanged(const bool displayed) const;
+	void celestialPolesColorChanged(const Vec3f & newColor) const;
+	void zenithNadirDisplayedChanged(const bool displayed) const;
+	void zenithNadirColorChanged(const Vec3f & newColor) const;
 
 private slots:
 	//! Re-translate the labels of the great circles.
@@ -605,6 +680,9 @@ private:
 	SkyLine * colureLine_2;			// Second Colure line (6/18h)
 	SkyLine * circumpolarCircleN;		// Northern circumpolar circle
 	SkyLine * circumpolarCircleS;		// Southern circumpolar circle
+	SkyPoint * celestialJ2000Poles;		// Celestial poles of J2000
+	SkyPoint * celestialPoles;		// Celestial poles
+	SkyPoint * zenithNadir;			// Zenith and nadir
 };
 
 #endif // _GRIDLINESMGR_HPP_

@@ -109,6 +109,9 @@ private slots:
 	void askPrimeVerticalLineColor();
 	void askMeridianLineColor();
 	void askCardinalPointsColor();
+	void askCelestialJ2000PolesColor();
+	void askCelestialPolesColor();
+	void askZenithNadirColor();
 
 private:
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);
