@@ -93,12 +93,14 @@ private slots:
 	void askEquatorJ2000GridColor();
 	void askEquatorGridColor();
 	void askGalacticGridColor();
+	void askSupergalacticGridColor();
 	void askAzimuthalGridColor();
 	void askEclipticLineJ2000Color();
 	void askEclipticLineColor();
 	void askEquatorLineJ2000Color();
 	void askEquatorLineColor();
 	void askGalacticEquatorLineColor();
+	void askSupergalacticEquatorLineColor();
 	void askLongitudeLineColor();
 	void askHorizonLineColor();
 	void askColureLinesColor();

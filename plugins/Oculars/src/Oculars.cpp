@@ -106,7 +106,8 @@ Oculars::Oculars():
 	flagShowTelrad(false),
 	usageMessageLabelID(-1),
 	flagAzimuthalGrid(false),
-	flagGalacticGrid(false),	
+	flagGalacticGrid(false),
+	flagSupergalacticGrid(false),
 	flagEquatorJ2000Grid(false),
 	flagEquatorGrid(false),
 	flagEquatorJ2000Line(false),
@@ -119,6 +120,7 @@ Oculars::Oculars():
 	flagLongitudeLine(false),
 	flagHorizonLine(false),
 	flagGalacticEquatorLine(false),
+	flagSupergalacticEquatorLine(false),
 	flagPrimeVerticalLine(false),
 	flagColureLines(false),
 	flagCircumpolarCircles(false),
@@ -2098,6 +2100,7 @@ void Oculars::unzoomOcular()
 
 		gridManager->setFlagAzimuthalGrid(flagAzimuthalGrid);
 		gridManager->setFlagGalacticGrid(flagGalacticGrid);
+		gridManager->setFlagSupergalacticGrid(flagSupergalacticGrid);
 		gridManager->setFlagEquatorJ2000Grid(flagEquatorJ2000Grid);
 		gridManager->setFlagEquatorGrid(flagEquatorGrid);
 		gridManager->setFlagEquatorJ2000Line(flagEquatorJ2000Line);
@@ -2110,6 +2113,7 @@ void Oculars::unzoomOcular()
 		gridManager->setFlagLongitudeLine(flagLongitudeLine);
 		gridManager->setFlagHorizonLine(flagHorizonLine);
 		gridManager->setFlagGalacticEquatorLine(flagGalacticEquatorLine);
+		gridManager->setFlagSupergalacticEquatorLine(flagSupergalacticEquatorLine);
 		gridManager->setFlagPrimeVerticalLine(flagPrimeVerticalLine);
 		gridManager->setFlagColureLines(flagColureLines);
 		gridManager->setFlagCircumpolarCircles(flagCircumpolarCircles);
@@ -2163,6 +2167,7 @@ void Oculars::zoom(bool zoomedIn)
 				// Current state
 				flagAzimuthalGrid = gridManager->getFlagAzimuthalGrid();
 				flagGalacticGrid = gridManager->getFlagGalacticGrid();
+				flagSupergalacticGrid = gridManager->getFlagSupergalacticGrid();
 				flagEquatorJ2000Grid = gridManager->getFlagEquatorJ2000Grid();
 				flagEquatorGrid = gridManager->getFlagEquatorGrid();
 				flagEquatorJ2000Line = gridManager->getFlagEquatorJ2000Line();
@@ -2175,6 +2180,7 @@ void Oculars::zoom(bool zoomedIn)
 				flagLongitudeLine = gridManager->getFlagLongitudeLine();
 				flagHorizonLine = gridManager->getFlagHorizonLine();
 				flagGalacticEquatorLine = gridManager->getFlagGalacticEquatorLine();
+				flagSupergalacticEquatorLine = gridManager->getFlagSupergalacticEquatorLine();
 				flagPrimeVerticalLine = gridManager->getFlagPrimeVerticalLine();
 				flagColureLines = gridManager->getFlagColureLines();
 				flagCircumpolarCircles = gridManager->getFlagCircumpolarCircles();
@@ -2225,6 +2231,7 @@ void Oculars::zoomOcular()
 
 		gridManager->setFlagAzimuthalGrid(false);
 		gridManager->setFlagGalacticGrid(false);
+		gridManager->setFlagSupergalacticGrid(false);
 		gridManager->setFlagEquatorJ2000Grid(false);
 		gridManager->setFlagEquatorGrid(false);
 		gridManager->setFlagEquatorJ2000Line(false);
@@ -2237,6 +2244,7 @@ void Oculars::zoomOcular()
 		gridManager->setFlagLongitudeLine(false);
 		gridManager->setFlagHorizonLine(false);
 		gridManager->setFlagGalacticEquatorLine(false);
+		gridManager->setFlagSupergalacticEquatorLine(false);
 		gridManager->setFlagPrimeVerticalLine(false);
 		gridManager->setFlagColureLines(false);
 		gridManager->setFlagCircumpolarCircles(false);

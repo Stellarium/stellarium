@@ -303,6 +303,8 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showEquatorialGridCheckBox, "actionShow_Equatorial_Grid");
 	connectCheckBox(ui->showGalacticGridCheckBox, "actionShow_Galactic_Grid");
 	connectCheckBox(ui->showGalacticEquatorLineCheckBox, "actionShow_Galactic_Equator_Line");
+	connectCheckBox(ui->showSupergalacticGridCheckBox, "actionShow_Supergalactic_Grid");
+	connectCheckBox(ui->showSupergalacticEquatorLineCheckBox, "actionShow_Supergalactic_Equator_Line");
 	connectCheckBox(ui->showAzimuthalGridCheckBox, "actionShow_Azimuthal_Grid");
 	connectCheckBox(ui->showEquatorialJ2000GridCheckBox, "actionShow_Equatorial_J2000_Grid");
 	connectCheckBox(ui->showEclipticGridJ2000CheckBox, "actionShow_Ecliptic_J2000_Grid");
@@ -318,12 +320,14 @@ void ViewDialog::createDialogContent()
 	colorButton(ui->colorEquatorialJ2000Grid,	"GridLinesMgr.equatorJ2000GridColor");
 	colorButton(ui->colorEquatorialGrid,		"GridLinesMgr.equatorGridColor");
 	colorButton(ui->colorGalacticGrid,		"GridLinesMgr.galacticGridColor");
+	colorButton(ui->colorSupergalacticGrid,		"GridLinesMgr.supergalacticGridColor");
 	colorButton(ui->colorAzimuthalGrid,		"GridLinesMgr.azimuthalGridColor");
 	colorButton(ui->colorEclipticLineJ2000,		"GridLinesMgr.eclipticJ2000LineColor");
 	colorButton(ui->colorEclipticLineOfDate,	"GridLinesMgr.eclipticLineColor");
 	colorButton(ui->colorEquatorJ2000Line,		"GridLinesMgr.equatorJ2000LineColor");
 	colorButton(ui->colorEquatorLine,		"GridLinesMgr.equatorLineColor");
 	colorButton(ui->colorGalacticEquatorLine,	"GridLinesMgr.galacticEquatorLineColor");
+	colorButton(ui->colorSupergalacticEquatorLine,	"GridLinesMgr.supergalacticEquatorLineColor");
 	colorButton(ui->colorHorizonLine,		"GridLinesMgr.horizonLineColor");
 	colorButton(ui->colorLongitudeLine,		"GridLinesMgr.longitudeLineColor");
 	colorButton(ui->colorColuresLine,		"GridLinesMgr.colureLinesColor");
@@ -333,25 +337,27 @@ void ViewDialog::createDialogContent()
 	colorButton(ui->colorMeridianLine,		"GridLinesMgr.meridianLineColor");
 	colorButton(ui->colorCardinalPoints,		"LandscapeMgr.cardinalsPointsColor");
 
-	connect(ui->colorEclipticGridJ2000,	SIGNAL(released()), this, SLOT(askEclipticJ2000GridColor()));
-	connect(ui->colorEclipticGridOfDate,	SIGNAL(released()), this, SLOT(askEclipticGridColor()));
-	connect(ui->colorEquatorialJ2000Grid,	SIGNAL(released()), this, SLOT(askEquatorJ2000GridColor()));
-	connect(ui->colorEquatorialGrid,	SIGNAL(released()), this, SLOT(askEquatorGridColor()));
-	connect(ui->colorGalacticGrid,		SIGNAL(released()), this, SLOT(askGalacticGridColor()));
-	connect(ui->colorAzimuthalGrid,		SIGNAL(released()), this, SLOT(askAzimuthalGridColor()));
-	connect(ui->colorEclipticLineJ2000,	SIGNAL(released()), this, SLOT(askEclipticLineJ2000Color()));
-	connect(ui->colorEclipticLineOfDate,	SIGNAL(released()), this, SLOT(askEclipticLineColor()));
-	connect(ui->colorEquatorJ2000Line,	SIGNAL(released()), this, SLOT(askEquatorLineJ2000Color()));
-	connect(ui->colorEquatorLine,		SIGNAL(released()), this, SLOT(askEquatorLineColor()));
-	connect(ui->colorGalacticEquatorLine,	SIGNAL(released()), this, SLOT(askGalacticEquatorLineColor()));
-	connect(ui->colorHorizonLine,		SIGNAL(released()), this, SLOT(askHorizonLineColor()));
-	connect(ui->colorLongitudeLine,		SIGNAL(released()), this, SLOT(askLongitudeLineColor()));
-	connect(ui->colorColuresLine,		SIGNAL(released()), this, SLOT(askColureLinesColor()));
-	connect(ui->colorCircumpolarCircles,	SIGNAL(released()), this, SLOT(askCircumpolarCirclesColor()));
-	connect(ui->colorPrecessionCircles,	SIGNAL(released()), this, SLOT(askPrecessionCirclesColor()));
-	connect(ui->colorPrimeVerticalLine,	SIGNAL(released()), this, SLOT(askPrimeVerticalLineColor()));
-	connect(ui->colorMeridianLine,		SIGNAL(released()), this, SLOT(askMeridianLineColor()));
-	connect(ui->colorCardinalPoints,	SIGNAL(released()), this, SLOT(askCardinalPointsColor()));
+	connect(ui->colorEclipticGridJ2000,		SIGNAL(released()), this, SLOT(askEclipticJ2000GridColor()));
+	connect(ui->colorEclipticGridOfDate,		SIGNAL(released()), this, SLOT(askEclipticGridColor()));
+	connect(ui->colorEquatorialJ2000Grid,		SIGNAL(released()), this, SLOT(askEquatorJ2000GridColor()));
+	connect(ui->colorEquatorialGrid,		SIGNAL(released()), this, SLOT(askEquatorGridColor()));
+	connect(ui->colorGalacticGrid,			SIGNAL(released()), this, SLOT(askGalacticGridColor()));
+	connect(ui->colorSupergalacticGrid,		SIGNAL(released()), this, SLOT(askSupergalacticGridColor()));
+	connect(ui->colorAzimuthalGrid,			SIGNAL(released()), this, SLOT(askAzimuthalGridColor()));
+	connect(ui->colorEclipticLineJ2000,		SIGNAL(released()), this, SLOT(askEclipticLineJ2000Color()));
+	connect(ui->colorEclipticLineOfDate,		SIGNAL(released()), this, SLOT(askEclipticLineColor()));
+	connect(ui->colorEquatorJ2000Line,		SIGNAL(released()), this, SLOT(askEquatorLineJ2000Color()));
+	connect(ui->colorEquatorLine,			SIGNAL(released()), this, SLOT(askEquatorLineColor()));
+	connect(ui->colorGalacticEquatorLine,		SIGNAL(released()), this, SLOT(askGalacticEquatorLineColor()));
+	connect(ui->colorSupergalacticEquatorLine,	SIGNAL(released()), this, SLOT(askSupergalacticEquatorLineColor()));
+	connect(ui->colorHorizonLine,			SIGNAL(released()), this, SLOT(askHorizonLineColor()));
+	connect(ui->colorLongitudeLine,			SIGNAL(released()), this, SLOT(askLongitudeLineColor()));
+	connect(ui->colorColuresLine,			SIGNAL(released()), this, SLOT(askColureLinesColor()));
+	connect(ui->colorCircumpolarCircles,		SIGNAL(released()), this, SLOT(askCircumpolarCirclesColor()));
+	connect(ui->colorPrecessionCircles,		SIGNAL(released()), this, SLOT(askPrecessionCirclesColor()));
+	connect(ui->colorPrimeVerticalLine,		SIGNAL(released()), this, SLOT(askPrimeVerticalLineColor()));
+	connect(ui->colorMeridianLine,			SIGNAL(released()), this, SLOT(askMeridianLineColor()));
+	connect(ui->colorCardinalPoints,		SIGNAL(released()), this, SLOT(askCardinalPointsColor()));
 
 	// Constellations
 	connectCheckBox(ui->showConstellationLinesCheckBox, "actionShow_Constellation_Lines");
@@ -468,6 +474,23 @@ void ViewDialog::askGalacticGridColor()
 	}
 }
 
+void ViewDialog::askSupergalacticGridColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.supergalacticGridColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorSupergalacticGrid->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		GETSTELMODULE(GridLinesMgr)->setColorSupergalacticGrid(vColor);
+		StelApp::getInstance().getSettings()->setValue("color/supergalactic_color", StelUtils::vec3fToStr(vColor));
+		ui->colorSupergalacticGrid->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
+
+
 void ViewDialog::askAzimuthalGridColor()
 {
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.azimuthalGridColor")->getValue().value<Vec3f>();
@@ -555,6 +578,21 @@ void ViewDialog::askGalacticEquatorLineColor()
 		GETSTELMODULE(GridLinesMgr)->setColorGalacticEquatorLine(vColor);
 		StelApp::getInstance().getSettings()->setValue("color/galactic_equator_color", StelUtils::vec3fToStr(vColor));
 		ui->colorGalacticEquatorLine->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
+void ViewDialog::askSupergalacticEquatorLineColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.supergalacticEquatorLineColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorSupergalacticEquatorLine->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		GETSTELMODULE(GridLinesMgr)->setColorSupergalacticEquatorLine(vColor);
+		StelApp::getInstance().getSettings()->setValue("color/supergalactic_equator_color", StelUtils::vec3fToStr(vColor));
+		ui->colorSupergalacticEquatorLine->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
 }
 

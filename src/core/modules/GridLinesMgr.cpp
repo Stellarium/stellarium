@@ -76,6 +76,7 @@ public:
 		MERIDIAN,
 		HORIZON,
 		GALACTICEQUATOR,
+		SUPERGALACTICEQUATOR,
 		LONGITUDE,
 		PRIME_VERTICAL,
 		COLURE_1,
@@ -246,6 +247,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 				break;			
 			}
 			case StelCore::FrameGalactic:
+			case StelCore::FrameSupergalactic:
 			{
 				double raAngle = M_PI-d->raAngle;
 				lon = M_PI-lon;
@@ -341,10 +343,10 @@ void SkyGrid::draw(const StelCore* core) const
 	const double gridStepParallelRad = M_PI/180.*getClosestResolutionDMS(prj->getPixelPerRadAtCenter());
 	double gridStepMeridianRad;
 	if (northPoleInViewport || southPoleInViewport)
-		gridStepMeridianRad = (frameType==StelCore::FrameAltAz || frameType==StelCore::FrameGalactic) ? M_PI/180.* 10. : M_PI/180.* 15.;
+		gridStepMeridianRad = (frameType==StelCore::FrameAltAz || frameType==StelCore::FrameGalactic || frameType==StelCore::FrameSupergalactic) ? M_PI/180.* 10. : M_PI/180.* 15.;
 	else
 	{
-		const double closestResLon = (frameType==StelCore::FrameAltAz || frameType==StelCore::FrameGalactic) ? getClosestResolutionDMS(prj->getPixelPerRadAtCenter()*std::cos(lat2)) : getClosestResolutionHMS(prj->getPixelPerRadAtCenter()*std::cos(lat2));
+		const double closestResLon = (frameType==StelCore::FrameAltAz || frameType==StelCore::FrameGalactic || frameType==StelCore::FrameSupergalactic) ? getClosestResolutionDMS(prj->getPixelPerRadAtCenter()*std::cos(lat2)) : getClosestResolutionHMS(prj->getPixelPerRadAtCenter()*std::cos(lat2));
 		gridStepMeridianRad = M_PI/180.* ((northPoleInViewport || southPoleInViewport) ? 15. : closestResLon);
 	}
 
@@ -629,6 +631,10 @@ void SkyLine::updateLabel()
 			frameType = StelCore::FrameGalactic;
 			label = q_("Galactic Equator");
 			break;
+		case SUPERGALACTICEQUATOR:
+			frameType = StelCore::FrameSupergalactic;
+			label = q_("Supergalactic Equator");
+			break;
 		case LONGITUDE:
 			frameType = StelCore::FrameObservercentricEclipticJ2000;
 			// TRANSLATORS: Full term is "opposition/conjunction longitude"
@@ -847,6 +853,7 @@ GridLinesMgr::GridLinesMgr()
 	eclJ2000Grid = new SkyGrid(StelCore::FrameObservercentricEclipticJ2000);
 	eclGrid = new SkyGrid(StelCore::FrameObservercentricEclipticOfDate);
 	galacticGrid = new SkyGrid(StelCore::FrameGalactic);
+	supergalacticGrid = new SkyGrid(StelCore::FrameSupergalactic);
 	aziGrid = new SkyGrid(StelCore::FrameAltAz);
 	equatorLine = new SkyLine(SkyLine::EQUATOR_OF_DATE);
 	equatorJ2000Line = new SkyLine(SkyLine::EQUATOR_J2000);
@@ -857,6 +864,7 @@ GridLinesMgr::GridLinesMgr()
 	meridianLine = new SkyLine(SkyLine::MERIDIAN);
 	horizonLine = new SkyLine(SkyLine::HORIZON);
 	galacticEquatorLine = new SkyLine(SkyLine::GALACTICEQUATOR);
+	supergalacticEquatorLine = new SkyLine(SkyLine::SUPERGALACTICEQUATOR);
 	longitudeLine = new SkyLine(SkyLine::LONGITUDE);
 	primeVerticalLine = new SkyLine(SkyLine::PRIME_VERTICAL);
 	colureLine_1 = new SkyLine(SkyLine::COLURE_1);
@@ -872,6 +880,7 @@ GridLinesMgr::~GridLinesMgr()
 	delete eclJ2000Grid;
 	delete eclGrid;
 	delete galacticGrid;
+	delete supergalacticGrid;
 	delete aziGrid;
 	delete equatorLine;
 	delete equatorJ2000Line;
@@ -882,6 +891,7 @@ GridLinesMgr::~GridLinesMgr()
 	delete meridianLine;
 	delete horizonLine;
 	delete galacticEquatorLine;
+	delete supergalacticEquatorLine;
 	delete longitudeLine;
 	delete primeVerticalLine;
 	delete colureLine_1;
@@ -911,6 +921,7 @@ void GridLinesMgr::init()
 	setFlagEclipticJ2000Grid(conf->value("viewing/flag_ecliptic_J2000_grid").toBool());
 	setFlagEclipticGrid(conf->value("viewing/flag_ecliptic_grid").toBool());
 	setFlagGalacticGrid(conf->value("viewing/flag_galactic_grid").toBool());
+	setFlagSupergalacticGrid(conf->value("viewing/flag_supergalactic_grid").toBool());
 	setFlagEquatorLine(conf->value("viewing/flag_equator_line").toBool());
 	setFlagEquatorJ2000Line(conf->value("viewing/flag_equator_J2000_line").toBool());
 	setFlagEclipticLine(conf->value("viewing/flag_ecliptic_line").toBool());
@@ -919,6 +930,7 @@ void GridLinesMgr::init()
 	setFlagMeridianLine(conf->value("viewing/flag_meridian_line").toBool());
 	setFlagHorizonLine(conf->value("viewing/flag_horizon_line").toBool());
 	setFlagGalacticEquatorLine(conf->value("viewing/flag_galactic_equator_line").toBool());
+	setFlagSupergalacticEquatorLine(conf->value("viewing/flag_supergalactic_equator_line").toBool());
 	setFlagLongitudeLine(conf->value("viewing/flag_longitude_line").toBool());
 	setFlagPrimeVerticalLine(conf->value("viewing/flag_prime_vertical_line").toBool());
 	setFlagColureLines(conf->value("viewing/flag_colure_lines").toBool());
@@ -931,6 +943,7 @@ void GridLinesMgr::init()
 	setColorEclipticJ2000Grid(StelUtils::strToVec3f(conf->value("color/ecliptical_J2000_color", defaultColor).toString()));
 	setColorEclipticGrid(StelUtils::strToVec3f(conf->value("color/ecliptical_color", defaultColor).toString()));
 	setColorGalacticGrid(StelUtils::strToVec3f(conf->value("color/galactic_color", defaultColor).toString()));
+	setColorSupergalacticGrid(StelUtils::strToVec3f(conf->value("color/supergalactic_color", defaultColor).toString()));
 	setColorAzimuthalGrid(StelUtils::strToVec3f(conf->value("color/azimuthal_color", defaultColor).toString()));
 	setColorEquatorLine(StelUtils::strToVec3f(conf->value("color/equator_color", defaultColor).toString()));
 	setColorEquatorJ2000Line(StelUtils::strToVec3f(conf->value("color/equator_J2000_color", defaultColor).toString()));
@@ -940,6 +953,7 @@ void GridLinesMgr::init()
 	setColorMeridianLine(StelUtils::strToVec3f(conf->value("color/meridian_color", defaultColor).toString()));
 	setColorHorizonLine(StelUtils::strToVec3f(conf->value("color/horizon_color", defaultColor).toString()));
 	setColorGalacticEquatorLine(StelUtils::strToVec3f(conf->value("color/galactic_equator_color", defaultColor).toString()));
+	setColorSupergalacticEquatorLine(StelUtils::strToVec3f(conf->value("color/supergalactic_equator_color", defaultColor).toString()));
 	setColorLongitudeLine(StelUtils::strToVec3f(conf->value("color/longitude_color", defaultColor).toString()));
 	setColorPrimeVerticalLine(StelUtils::strToVec3f(conf->value("color/prime_vertical_color", defaultColor).toString()));
 	setColorColureLines(StelUtils::strToVec3f(conf->value("color/colures_color", defaultColor).toString()));
@@ -960,8 +974,10 @@ void GridLinesMgr::init()
 	addAction("actionShow_Equatorial_J2000_Grid", displayGroup, N_("Equatorial J2000 grid"), "equatorJ2000GridDisplayed");
 	addAction("actionShow_Ecliptic_J2000_Grid", displayGroup, N_("Ecliptic J2000 grid"), "eclipticJ2000GridDisplayed");
 	addAction("actionShow_Ecliptic_Grid", displayGroup, N_("Ecliptic grid"), "eclipticGridDisplayed");
-	addAction("actionShow_Galactic_Grid", displayGroup, N_("Galactic grid"), "galacticGridDisplayed");
+	addAction("actionShow_Galactic_Grid", displayGroup, N_("Galactic grid"), "galacticGridDisplayed");	
 	addAction("actionShow_Galactic_Equator_Line", displayGroup, N_("Galactic equator"), "galacticEquatorLineDisplayed");
+	addAction("actionShow_Supergalactic_Grid", displayGroup, N_("Supergalactic grid"), "supergalacticGridDisplayed");
+	addAction("actionShow_Supergalactic_Equator_Line", displayGroup, N_("Supergalactic equator"), "supergalacticEquatorLineDisplayed");
 	addAction("actionShow_Longitude_Line", displayGroup, N_("Opposition/conjunction longitude line"), "longitudeLineDisplayed");
 	addAction("actionShow_Precession_Circles", displayGroup, N_("Precession Circles"), "precessionCirclesDisplayed");
 	addAction("actionShow_Prime_Vertical_Line", displayGroup, N_("Prime Vertical"), "primeVerticalLineDisplayed");
@@ -977,6 +993,7 @@ void GridLinesMgr::update(double deltaTime)
 	eclJ2000Grid->update(deltaTime);
 	eclGrid->update(deltaTime);
 	galacticGrid->update(deltaTime);
+	supergalacticGrid->update(deltaTime);
 	aziGrid->update(deltaTime);
 	equatorLine->update(deltaTime);
 	equatorJ2000Line->update(deltaTime);
@@ -987,6 +1004,7 @@ void GridLinesMgr::update(double deltaTime)
 	meridianLine->update(deltaTime);
 	horizonLine->update(deltaTime);
 	galacticEquatorLine->update(deltaTime);
+	supergalacticEquatorLine->update(deltaTime);
 	longitudeLine->update(deltaTime);
 	primeVerticalLine->update(deltaTime);
 	colureLine_1->update(deltaTime);
@@ -998,6 +1016,7 @@ void GridLinesMgr::update(double deltaTime)
 void GridLinesMgr::draw(StelCore* core)
 {
 	galacticGrid->draw(core);
+	supergalacticGrid->draw(core);
 	eclJ2000Grid->draw(core);
 	// While ecliptic of J2000 may be helpful to get a feeling of the Z=0 plane of VSOP87,
 	// ecliptic of date is related to Earth and does not make much sense for the other planets.
@@ -1009,6 +1028,7 @@ void GridLinesMgr::draw(StelCore* core)
 	aziGrid->draw(core);
 	// Lines after grids, to be able to e.g. draw equators in different color!
 	galacticEquatorLine->draw(core);
+	supergalacticEquatorLine->draw(core);
 	eclipticJ2000Line->draw(core);
 	if (core->getCurrentPlanet()->getEnglishName()=="Earth")
 	{
@@ -1039,6 +1059,7 @@ void GridLinesMgr::updateLineLabels()
 	meridianLine->updateLabel();
 	horizonLine->updateLabel();
 	galacticEquatorLine->updateLabel();
+	supergalacticEquatorLine->updateLabel();
 	longitudeLine->updateLabel();
 	primeVerticalLine->updateLabel();
 	colureLine_1->updateLabel();
@@ -1194,6 +1215,31 @@ void GridLinesMgr::setColorGalacticGrid(const Vec3f& newColor)
 	if(newColor != galacticGrid->getColor()) {
 		galacticGrid->setColor(newColor);
 		emit galacticGridColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying Supergalactic Grid
+void GridLinesMgr::setFlagSupergalacticGrid(const bool displayed)
+{
+	if(displayed != supergalacticGrid->isDisplayed()) {
+		supergalacticGrid->setDisplayed(displayed);
+		emit supergalacticGridDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Supergalactic Grid
+bool GridLinesMgr::getFlagSupergalacticGrid(void) const
+{
+	return supergalacticGrid->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorSupergalacticGrid(void) const
+{
+	return supergalacticGrid->getColor();
+}
+void GridLinesMgr::setColorSupergalacticGrid(const Vec3f& newColor)
+{
+	if(newColor != supergalacticGrid->getColor()) {
+		supergalacticGrid->setColor(newColor);
+		emit supergalacticGridColorChanged(newColor);
 	}
 }
 
@@ -1422,6 +1468,31 @@ void GridLinesMgr::setColorGalacticEquatorLine(const Vec3f& newColor)
 	if(newColor != galacticEquatorLine->getColor()) {
 		galacticEquatorLine->setColor(newColor);
 		emit galacticEquatorLineColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying Supergalactic Equator Line
+void GridLinesMgr::setFlagSupergalacticEquatorLine(const bool displayed)
+{
+	if(displayed != supergalacticEquatorLine->isDisplayed()) {
+		supergalacticEquatorLine->setDisplayed(displayed);
+		emit supergalacticEquatorLineDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Supergalactic Equator Line
+bool GridLinesMgr::getFlagSupergalacticEquatorLine(void) const
+{
+	return supergalacticEquatorLine->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorSupergalacticEquatorLine(void) const
+{
+	return supergalacticEquatorLine->getColor();
+}
+void GridLinesMgr::setColorSupergalacticEquatorLine(const Vec3f& newColor)
+{
+	if(newColor != supergalacticEquatorLine->getColor()) {
+		supergalacticEquatorLine->setColor(newColor);
+		emit supergalacticEquatorLineColorChanged(newColor);
 	}
 }
 
