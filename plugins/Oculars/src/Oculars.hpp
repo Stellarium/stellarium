@@ -259,6 +259,7 @@ private:
 
 	bool flagAzimuthalGrid;		//!< Flag to track if AzimuthalGrid was displayed at activation.
 	bool flagGalacticGrid;		//!< Flag to track if GalacticGrid was displayed at activation.
+	bool flagSupergalacticGrid;	//!< Flag to track if SupergalacticGrid was displayed at activation.
 	bool flagEquatorJ2000Grid;	//!< Flag to track if EquatorJ2000Grid was displayed at activation.
 	bool flagEquatorGrid;		//!< Flag to track if EquatorGrid was displayed at activation.
 	bool flagEquatorJ2000Line;	//!< Flag to track if EquatorJ2000Line was displayed at activation.
@@ -271,6 +272,7 @@ private:
 	bool flagLongitudeLine;		//!< Flag to track if LongitudeLine was displayed at activation.
 	bool flagHorizonLine;		//!< Flag to track if HorizonLine was displayed at activation.
 	bool flagGalacticEquatorLine;	//!< Flag to track if GalacticEquatorLine was displayed at activation.
+	bool flagSupergalacticEquatorLine;	//!< Flag to track if SupergalacticEquatorLine was displayed at activation.
 	bool flagPrimeVerticalLine;	//!< Flag to track if PrimeVerticalLine was displayed at activation.
 	bool flagColureLines;		//!< Flag to track if ColureLines was displayed at activation.
 	bool flagCircumpolarCircles;	//!< Flag to track if CircumpolarCircles was displayed at activation.

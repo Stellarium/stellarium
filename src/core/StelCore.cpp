@@ -55,6 +55,8 @@ const Mat4d StelCore::matJ2000ToVsop87(Mat4d::xrotation(-23.4392803055555555556*
 const Mat4d StelCore::matVsop87ToJ2000(matJ2000ToVsop87.transpose());
 const Mat4d StelCore::matJ2000ToGalactic(-0.054875539726, 0.494109453312, -0.867666135858, 0, -0.873437108010, -0.444829589425, -0.198076386122, 0, -0.483834985808, 0.746982251810, 0.455983795705, 0, 0, 0, 0, 1);
 const Mat4d StelCore::matGalacticToJ2000(matJ2000ToGalactic.transpose());
+const Mat4d StelCore::matJ2000ToSupergalactic(0.37501548, -0.89832046, 0.22887497, 0, 0.34135896, -0.09572714, -0.93504565, 0, 0.86188018, 0.42878511, 0.27075058, 0, 0, 0, 0, 1);
+const Mat4d StelCore::matSupergalacticToJ2000(matJ2000ToSupergalactic.transpose());
 
 const double StelCore::JD_SECOND=0.000011574074074074074074; // 1/(24*60*60)=1/86400
 const double StelCore::JD_MINUTE=0.00069444444444444444444;  // 1/(24*60)   =1/1440
@@ -372,6 +374,8 @@ StelProjectorP StelCore::getProjection(FrameType frameType, RefractionMode refra
 			return getProjection(getJ2000ModelViewTransform(refractionMode));
 		case FrameGalactic:
 			return getProjection(getGalacticModelViewTransform(refractionMode));
+		case FrameSupergalactic:
+			return getProjection(getSupergalacticModelViewTransform(refractionMode));
 		default:
 			qDebug() << "Unknown reference frame type: " << (int)frameType << ".";
 	}
@@ -717,6 +721,11 @@ Vec3d StelCore::galacticToJ2000(const Vec3d& v) const
 	return matGalacticToJ2000*v;
 }
 
+Vec3d StelCore::supergalacticToJ2000(const Vec3d& v) const
+{
+	return matSupergalacticToJ2000*v;
+}
+
 Vec3d StelCore::equinoxEquToJ2000(const Vec3d& v) const
 {
 	return matEquinoxEquToJ2000*v;
@@ -730,6 +739,11 @@ Vec3d StelCore::j2000ToEquinoxEqu(const Vec3d& v) const
 Vec3d StelCore::j2000ToGalactic(const Vec3d& v) const
 {
 	return matJ2000ToGalactic*v;
+}
+
+Vec3d StelCore::j2000ToSupergalactic(const Vec3d& v) const
+{
+	return matJ2000ToSupergalactic*v;
 }
 
 //! Transform vector from heliocentric ecliptic coordinate to altazimuthal
@@ -842,6 +856,18 @@ StelProjector::ModelViewTranformP StelCore::getGalacticModelViewTransform(Refrac
 	Refraction* refr = new Refraction(skyDrawer->getRefraction());
 	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
 	refr->setPreTransfoMat(matEquinoxEquToAltAz*matJ2000ToEquinoxEqu*matGalacticToJ2000);
+	refr->setPostTransfoMat(matAltAzModelView);
+	return StelProjector::ModelViewTranformP(refr);
+}
+
+//! Get the modelview matrix for observer-centric Supergalactic equatorial drawing
+StelProjector::ModelViewTranformP StelCore::getSupergalacticModelViewTransform(RefractionMode refMode) const
+{
+	if (refMode==RefractionOff || skyDrawer==NULL || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matEquinoxEquToAltAz*matJ2000ToEquinoxEqu*matSupergalacticToJ2000));
+	Refraction* refr = new Refraction(skyDrawer->getRefraction());
+	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
+	refr->setPreTransfoMat(matEquinoxEquToAltAz*matJ2000ToEquinoxEqu*matSupergalacticToJ2000);
 	refr->setPostTransfoMat(matAltAzModelView);
 	return StelProjector::ModelViewTranformP(refr);
 }
