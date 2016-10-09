@@ -29,6 +29,8 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "StelSkyDrawer.hpp"
+#include "StelTextureMgr.hpp"
+#include "StelFileMgr.hpp"
 #include "precession.h"
 
 #include <set>
@@ -57,6 +59,40 @@ private:
 	StelCore::FrameType frameType;
 	QFont font;
 	LinearFader fader;
+};
+
+//! @class SkyPoint
+//! Class which manages a point to display around the sky like the North Celestial Pole.
+class SkyPoint
+{
+public:
+	enum SKY_POINT_TYPE
+	{
+		CELESTIALPOLE_J2000,
+		CELESTIALPOLE_OF_DATE,
+		ZENITH_NADIR
+	};
+	// Create and precompute positions of a SkyGrid
+	SkyPoint(SKY_POINT_TYPE _point_type = CELESTIALPOLE_J2000);
+	virtual ~SkyPoint();
+	void draw(StelCore* core) const;
+	void setColor(const Vec3f& c) {color = c;}
+	const Vec3f& getColor() {return color;}
+	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
+	void setFadeDuration(float duration) {fader.setDuration((int)(duration*1000.f));}
+	void setDisplayed(const bool displayed){fader = displayed;}
+	bool isDisplayed(void) const {return fader;}
+	void setFontSize(double newSize);
+	//! Re-translates the label.
+	void updateLabel();
+private:
+	SKY_POINT_TYPE point_type;
+	Vec3f color;
+	StelCore::FrameType frameType;
+	LinearFader fader;
+	QFont font;
+	QString northernLabel, southernLabel;
+	StelTextureSP texCross;
 };
 
 
@@ -845,6 +881,107 @@ void SkyLine::draw(StelCore *core) const
 
 }
 
+SkyPoint::SkyPoint(SKY_POINT_TYPE _point_type) : color(0.f, 0.f, 1.f)
+{
+	// Font size is 14
+	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
+	point_type = _point_type;
+	texCross = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cross.png");
+	updateLabel();
+}
+
+SkyPoint::~SkyPoint()
+{
+	texCross.clear();
+}
+
+void SkyPoint::setFontSize(double newFontSize)
+{
+	font.setPixelSize(newFontSize);
+}
+
+void SkyPoint::updateLabel()
+{
+	switch (point_type)
+	{
+		case CELESTIALPOLE_J2000:
+		{
+			frameType = StelCore::FrameJ2000;
+			// TRANSLATOR: North Celestial Pole
+			northernLabel = q_("NCP");
+			// TRANSLATOR: South Celestial Pole
+			southernLabel = q_("SCP");
+			break;
+		}
+		case CELESTIALPOLE_OF_DATE:
+		{
+			frameType = StelCore::FrameEquinoxEqu;
+			// TRANSLATOR: North Celestial Pole
+			northernLabel = q_("NCP");
+			// TRANSLATOR: South Celestial Pole
+			southernLabel = q_("SCP");
+			break;
+		}
+		case ZENITH_NADIR:
+		{
+			frameType = StelCore::FrameAltAz;
+			// TRANSLATOR: Zenith
+			northernLabel = q_("Z");
+			// TRANSLATOR: Nadir
+			southernLabel = q_("Z'");
+			break;
+		}
+		default:
+			Q_ASSERT(0);
+	}
+}
+
+void SkyPoint::draw(StelCore *core) const
+{
+	if (!fader.getInterstate())
+		return;
+
+	StelProjectorP prj = core->getProjection(frameType, frameType!=StelCore::FrameAltAz ? StelCore::RefractionAuto : StelCore::RefractionOff);
+
+	// Initialize a painter and set openGL state
+	StelPainter sPainter(prj);
+	sPainter.setColor(color[0], color[1], color[2], fader.getInterstate());
+	glEnable(GL_BLEND);
+	#ifdef GL_LINE_SMOOTH
+	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+		glEnable(GL_LINE_SMOOTH);
+	#endif
+	Vec4f textColor(color[0], color[1], color[2], 0);
+	textColor[3]=fader.getInterstate();
+
+	sPainter.setFont(font);
+	/////////////////////////////////////////////////
+	// Draw the point
+
+	texCross->bind();
+	float size = 0.00001*M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
+	float shift = 4.f + size/1.8f;
+
+	// North Celestial Pole or Zenith
+	glBlendFunc(GL_ONE, GL_ONE);
+	sPainter.drawSprite2dMode(Vec3d(0,0,1), 5.f);
+	sPainter.drawText(Vec3d(0,0,1), northernLabel, 0, shift, shift, false);
+
+	// South Celestial Pole or Nadir
+	glBlendFunc(GL_ONE, GL_ONE);
+	sPainter.drawSprite2dMode(Vec3d(0,0,-1), 5.f);
+	sPainter.drawText(Vec3d(0,0,-1), southernLabel, 0, shift, shift, false);
+
+	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
+	#ifdef GL_LINE_SMOOTH
+	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+		glDisable(GL_LINE_SMOOTH);
+	#endif
+
+	glDisable(GL_BLEND);
+}
+
+
 GridLinesMgr::GridLinesMgr()
 {
 	setObjectName("GridLinesMgr");
@@ -871,6 +1008,9 @@ GridLinesMgr::GridLinesMgr()
 	colureLine_2 = new SkyLine(SkyLine::COLURE_2);
 	circumpolarCircleN = new SkyLine(SkyLine::CIRCUMPOLARCIRCLE_N);
 	circumpolarCircleS = new SkyLine(SkyLine::CIRCUMPOLARCIRCLE_S);
+	celestialJ2000Poles = new SkyPoint(SkyPoint::CELESTIALPOLE_J2000);
+	celestialPoles = new SkyPoint(SkyPoint::CELESTIALPOLE_OF_DATE);
+	zenithNadir = new SkyPoint(SkyPoint::ZENITH_NADIR);
 }
 
 GridLinesMgr::~GridLinesMgr()
@@ -898,6 +1038,9 @@ GridLinesMgr::~GridLinesMgr()
 	delete colureLine_2;
 	delete circumpolarCircleN;
 	delete circumpolarCircleS;
+	delete celestialJ2000Poles;
+	delete celestialPoles;
+	delete zenithNadir;
 }
 
 /*************************************************************************
@@ -935,6 +1078,9 @@ void GridLinesMgr::init()
 	setFlagPrimeVerticalLine(conf->value("viewing/flag_prime_vertical_line").toBool());
 	setFlagColureLines(conf->value("viewing/flag_colure_lines").toBool());
 	setFlagCircumpolarCircles(conf->value("viewing/flag_circumpolar_circles").toBool());
+	setFlagCelestialJ2000Poles(conf->value("viewing/flag_celestial_J2000_poles").toBool());
+	setFlagCelestialPoles(conf->value("viewing/flag_celestial_poles").toBool());
+	setFlagZenithNadir(conf->value("viewing/flag_zenith_nadir").toBool());
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
@@ -958,6 +1104,9 @@ void GridLinesMgr::init()
 	setColorPrimeVerticalLine(StelUtils::strToVec3f(conf->value("color/prime_vertical_color", defaultColor).toString()));
 	setColorColureLines(StelUtils::strToVec3f(conf->value("color/colures_color", defaultColor).toString()));
 	setColorCircumpolarCircles(StelUtils::strToVec3f(conf->value("color/circumpolar_circles_color", defaultColor).toString()));
+	setColorCelestialJ2000Poles(StelUtils::strToVec3f(conf->value("color/celestial_J2000_poles_color", defaultColor).toString()));
+	setColorCelestialPoles(StelUtils::strToVec3f(conf->value("color/celestial_poles_color", defaultColor).toString()));
+	setColorZenithNadir(StelUtils::strToVec3f(conf->value("color/zenith_nadir_color", defaultColor).toString()));
 
 	StelApp& app = StelApp::getInstance();
 	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateLineLabels()));
@@ -983,6 +1132,9 @@ void GridLinesMgr::init()
 	addAction("actionShow_Prime_Vertical_Line", displayGroup, N_("Prime Vertical"), "primeVerticalLineDisplayed");
 	addAction("actionShow_Colure_Lines", displayGroup, N_("Colure Lines"), "colureLinesDisplayed");
 	addAction("actionShow_Circumpolar_Circles", displayGroup, N_("Circumpolar Circles"), "circumpolarCirclesDisplayed");
+	addAction("actionShow_Celestial_J2000_Poles", displayGroup, N_("Celestial J2000 poles"), "celestialJ2000PolesDisplayed");
+	addAction("actionShow_Celestial_Poles", displayGroup, N_("Celestial poles"), "celestialPolesDisplayed");
+	addAction("actionShow_Zenith_Nadir", displayGroup, N_("Zenith and nadir"), "zenithNadirDisplayed");
 }
 
 void GridLinesMgr::update(double deltaTime)
@@ -1011,6 +1163,9 @@ void GridLinesMgr::update(double deltaTime)
 	colureLine_2->update(deltaTime);
 	circumpolarCircleN->update(deltaTime);
 	circumpolarCircleS->update(deltaTime);
+	celestialJ2000Poles->update(deltaTime);
+	celestialPoles->update(deltaTime);
+	zenithNadir->update(deltaTime);
 }
 
 void GridLinesMgr::draw(StelCore* core)
@@ -1046,6 +1201,9 @@ void GridLinesMgr::draw(StelCore* core)
 	primeVerticalLine->draw(core);
 	circumpolarCircleN->draw(core);
 	circumpolarCircleS->draw(core);
+	celestialJ2000Poles->draw(core);
+	celestialPoles->draw(core);
+	zenithNadir->draw(core);
 }
 
 void GridLinesMgr::updateLineLabels()
@@ -1066,6 +1224,9 @@ void GridLinesMgr::updateLineLabels()
 	colureLine_2->updateLabel();
 	circumpolarCircleN->updateLabel();
 	circumpolarCircleS->updateLabel();
+	celestialJ2000Poles->updateLabel();
+	celestialPoles->updateLabel();
+	zenithNadir->updateLabel();
 }
 
 //! Set flag for displaying Azimuthal Grid
@@ -1573,5 +1734,86 @@ void GridLinesMgr::setColorCircumpolarCircles(const Vec3f& newColor)
 		circumpolarCircleN->setColor(newColor);
 		circumpolarCircleS->setColor(newColor);
 		emit circumpolarCirclesColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying celestial poles of J2000
+void GridLinesMgr::setFlagCelestialJ2000Poles(const bool displayed)
+{
+	if(displayed != celestialJ2000Poles->isDisplayed()) {
+		celestialJ2000Poles->setDisplayed(displayed);
+		emit celestialJ2000PolesDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying celestial poles of J2000
+bool GridLinesMgr::getFlagCelestialJ2000Poles(void) const
+{
+	return celestialJ2000Poles->isDisplayed();
+}
+
+Vec3f GridLinesMgr::getColorCelestialJ2000Poles(void) const
+{
+	return celestialJ2000Poles->getColor();
+}
+
+void GridLinesMgr::setColorCelestialJ2000Poles(const Vec3f& newColor)
+{
+	if(newColor != celestialJ2000Poles->getColor()) {
+		celestialJ2000Poles->setColor(newColor);
+		emit celestialJ2000PolesColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying celestial poles
+void GridLinesMgr::setFlagCelestialPoles(const bool displayed)
+{
+	if(displayed != celestialPoles->isDisplayed()) {
+		celestialPoles->setDisplayed(displayed);
+		emit celestialPolesDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying celestial poles
+bool GridLinesMgr::getFlagCelestialPoles(void) const
+{
+	return celestialPoles->isDisplayed();
+}
+
+Vec3f GridLinesMgr::getColorCelestialPoles(void) const
+{
+	return celestialPoles->getColor();
+}
+
+void GridLinesMgr::setColorCelestialPoles(const Vec3f& newColor)
+{
+	if(newColor != celestialPoles->getColor()) {
+		celestialPoles->setColor(newColor);
+		emit celestialPolesColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying zenith and nadir
+void GridLinesMgr::setFlagZenithNadir(const bool displayed)
+{
+	if(displayed != zenithNadir->isDisplayed()) {
+		zenithNadir->setDisplayed(displayed);
+		emit zenithNadirDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying zenith and nadir
+bool GridLinesMgr::getFlagZenithNadir(void) const
+{
+	return zenithNadir->isDisplayed();
+}
+
+Vec3f GridLinesMgr::getColorZenithNadir(void) const
+{
+	return zenithNadir->getColor();
+}
+
+void GridLinesMgr::setColorZenithNadir(const Vec3f& newColor)
+{
+	if(newColor != zenithNadir->getColor()) {
+		zenithNadir->setColor(newColor);
+		emit zenithNadirColorChanged(newColor);
 	}
 }

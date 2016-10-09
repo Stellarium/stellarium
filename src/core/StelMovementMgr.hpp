@@ -47,7 +47,7 @@ class StelMovementMgr : public StelModule
 public:
 
 	//! Possible mount modes defining the reference frame in which head movements occur.
-	//! MountGalactic is currently only available via scripting API: core.clear("galactic")
+	//! MountGalactic and MountSupergalactic is currently only available via scripting API: core.clear("galactic") and core.clear("supergalactic")
 	// TODO: add others: MountEcliptical, MountEq2000, MountEcliptical2000 and implement proper variants.
 	enum MountMode { MountAltAzimuthal, MountEquinoxEquatorial, MountGalactic, MountSupergalactic};
 
