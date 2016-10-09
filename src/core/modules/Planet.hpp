@@ -291,6 +291,18 @@ public:
 	static void setOrbitColor(const Vec3f& oc) {orbitColor = oc;}
 	static const Vec3f& getOrbitColor() {return orbitColor;}
 
+	static Vec3f orbitPlanetsColor;
+	static void setPlanetOrbitColor(const Vec3f& oc) { orbitPlanetsColor = oc;}
+	static const Vec3f& getPlanetOrbitColor() {return orbitPlanetsColor;}
+
+	static Vec3f orbitAsteroidsColor;
+	static void setAsteroidOrbitColor(const Vec3f& oc) { orbitAsteroidsColor = oc;}
+	static const Vec3f& getAsteroidOrbitColor() {return orbitAsteroidsColor;}
+
+	static Vec3f orbitCometsColor;
+	static void setCometOrbitColor(const Vec3f& oc) { orbitCometsColor = oc;}
+	static const Vec3f& getCometOrbitColor() {return orbitCometsColor;}
+
 	static bool permanentDrawingOrbits;
 
 	//! Return the list of planets which project some shadow on this planet

@@ -77,8 +77,8 @@ Satellites::Satellites()
 	: satelliteListModel(NULL)
 	, toolbarButton(NULL)
 	, earth(NULL)
-	, defaultHintColor(0.0, 0.4, 0.6)
-	, defaultOrbitColor(0.0, 0.3, 0.6)
+	, defaultHintColor(0.0f, 0.4f, 0.6f)
+	, defaultOrbitColor(0.0f, 0.3f, 0.6f)
 	, updateState(CompleteNoUpdates)
 	, downloadMgr(NULL)
 	, progressBar(NULL)
@@ -209,10 +209,7 @@ void Satellites::init()
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
 	// Handle changes to the observer location:
-	connect(StelApp::getInstance().getCore(),
-	        SIGNAL(locationChanged(StelLocation)),
-	        this,
-	        SLOT(updateObserverLocation(StelLocation)));
+	connect(StelApp::getInstance().getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(updateObserverLocation(StelLocation)));
 }
 
 bool Satellites::backupCatalog(bool deleteOriginal)
