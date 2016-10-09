@@ -279,6 +279,9 @@ private:
 	bool flagPrecessionCircles;	//!< Flag to track if PrecessionCircles was displayed at activation.
 
 	bool flagCardinalPoints;	//!< Flag to track if CardinalPoints was displayed at activation.
+	bool flagCelestialJ2000Poles;	//!< Flag to track if CelestialJ2000Poles was displayed at activation.
+	bool flagCelestialPoles;	//!< Flag to track if CelestialPoles was displayed at activation.
+	bool flagZenithNadirPoints;	//!< Flag to track if ZenithNadir was displayed at activation.
 
 	bool flagAdaptation;		//!< Flag to track if adaptationCheckbox was enabled at activation.
 

@@ -611,6 +611,7 @@ class Translations
 		N_("Folder");
 		N_("&Choose");
 		N_("Cancel");
+		N_("&Cancel");
 		N_("Files of type:");
 		N_("Date Modified");
 		N_("Directories");
