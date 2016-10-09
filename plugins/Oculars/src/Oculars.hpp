@@ -282,6 +282,9 @@ private:
 	bool flagCelestialJ2000Poles;	//!< Flag to track if CelestialJ2000Poles was displayed at activation.
 	bool flagCelestialPoles;	//!< Flag to track if CelestialPoles was displayed at activation.
 	bool flagZenithNadirPoints;	//!< Flag to track if ZenithNadir was displayed at activation.
+	bool flagEclipticJ2000Poles;	//!< Flag to track if EclipticJ2000Poles was displayed at activation.
+	bool flagEclipticPoles;		//!< Flag to track if EclipticPoles was displayed at activation.
+	bool flagGalacticPoles;		//!< Flag to track if GalacticPoles was displayed at activation.
 
 	bool flagAdaptation;		//!< Flag to track if adaptationCheckbox was enabled at activation.
 
