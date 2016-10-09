@@ -910,54 +910,54 @@ void SkyPoint::updateLabel()
 		case CELESTIALPOLES_J2000:
 		{
 			frameType = StelCore::FrameJ2000;
-			// TRANSLATOR: North Celestial Pole
+			// TRANSLATORS: North Celestial Pole
 			northernLabel = q_("NCP");
-			// TRANSLATOR: South Celestial Pole
+			// TRANSLATORS: South Celestial Pole
 			southernLabel = q_("SCP");
 			break;
 		}
 		case CELESTIALPOLES_OF_DATE:
 		{
 			frameType = StelCore::FrameEquinoxEqu;
-			// TRANSLATOR: North Celestial Pole
+			// TRANSLATORS: North Celestial Pole
 			northernLabel = q_("NCP");
-			// TRANSLATOR: South Celestial Pole
+			// TRANSLATORS: South Celestial Pole
 			southernLabel = q_("SCP");
 			break;
 		}
 		case ZENITH_NADIR:
 		{
 			frameType = StelCore::FrameAltAz;
-			// TRANSLATOR: Zenith
-			northernLabel = q_("Z");
-			// TRANSLATOR: Nadir
-			southernLabel = q_("Z'");
+			// TRANSLATORS: Zenith
+			northernLabel = qc_("Z", "zenith");
+			// TRANSLATORS: Nadir
+			southernLabel = qc_("Z'", "nadir");
 			break;
 		}
 		case ECLIPTICPOLES_J2000:
 		{
 			frameType = StelCore::FrameObservercentricEclipticJ2000;
-			// TRANSLATOR: North Celestial Pole
+			// TRANSLATORS: North Celestial Pole
 			northernLabel = q_("NEP");
-			// TRANSLATOR: South Celestial Pole
+			// TRANSLATORS: South Celestial Pole
 			southernLabel = q_("SEP");
 			break;
 		}
 		case ECLIPTICPOLES_OF_DATE:
 		{
 			frameType = StelCore::FrameObservercentricEclipticOfDate;
-			// TRANSLATOR: North Celestial Pole
+			// TRANSLATORS: North Celestial Pole
 			northernLabel = q_("NEP");
-			// TRANSLATOR: South Celestial Pole
+			// TRANSLATORS: South Celestial Pole
 			southernLabel = q_("SEP");
 			break;
 		}
 		case GALACTICPOLES:
 		{
 			frameType = StelCore::FrameGalactic;
-			// TRANSLATOR: North Galactic Pole
+			// TRANSLATORS: North Galactic Pole
 			northernLabel = q_("NGP");
-			// TRANSLATOR: South Galactic Pole
+			// TRANSLATORS: South Galactic Pole
 			southernLabel = q_("SGP");
 			break;
 		}
