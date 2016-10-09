@@ -992,12 +992,12 @@ void SkyPoint::draw(StelCore *core) const
 	float size = 0.00001*M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
 	float shift = 4.f + size/1.8f;
 
-	// North Celestial Pole or Zenith
+	// North Pole
 	glBlendFunc(GL_ONE, GL_ONE);
 	sPainter.drawSprite2dMode(Vec3d(0,0,1), 5.f);
 	sPainter.drawText(Vec3d(0,0,1), northernLabel, 0, shift, shift, false);
 
-	// South Celestial Pole or Nadir
+	// South Pole
 	glBlendFunc(GL_ONE, GL_ONE);
 	sPainter.drawSprite2dMode(Vec3d(0,0,-1), 5.f);
 	sPainter.drawText(Vec3d(0,0,-1), southernLabel, 0, shift, shift, false);
