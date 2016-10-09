@@ -1096,8 +1096,11 @@ void StelMainScriptAPI::clear(const QString& state)
 		mmgr->setZHR(10);
 		glmgr->setFlagAzimuthalGrid(false);
 		glmgr->setFlagGalacticGrid(false);
+		glmgr->setFlagSupergalacticGrid(false);
 		glmgr->setFlagEquatorGrid(false);
+		glmgr->setFlagEquatorJ2000Grid(false);
 		glmgr->setFlagEquatorLine(false);
+		glmgr->setFlagEquatorJ2000Line(false);
 		glmgr->setFlagEclipticLine(false);
 		glmgr->setFlagEclipticJ2000Line(false);
 		glmgr->setFlagMeridianLine(false);
@@ -1106,7 +1109,9 @@ void StelMainScriptAPI::clear(const QString& state)
 		glmgr->setFlagColureLines(false);
 		glmgr->setFlagPrimeVerticalLine(false);
 		glmgr->setFlagGalacticEquatorLine(false);
-		glmgr->setFlagEquatorJ2000Grid(false);
+		glmgr->setFlagSupergalacticEquatorLine(false);
+		glmgr->setFlagCircumpolarCircles(false);
+		glmgr->setFlagLongitudeLine(false);
 		glmgr->setFlagEclipticGrid(false);
 		glmgr->setFlagEclipticJ2000Grid(false);
 		lmgr->setFlagCardinalsPoints(false);
@@ -1135,14 +1140,19 @@ void StelMainScriptAPI::clear(const QString& state)
 		mmgr->setZHR(0);
 		glmgr->setFlagAzimuthalGrid(false);
 		glmgr->setFlagGalacticGrid(false);
+		glmgr->setFlagSupergalacticGrid(false);
 		glmgr->setFlagEquatorGrid(true);
+		glmgr->setFlagEquatorJ2000Grid(false);
 		glmgr->setFlagEquatorLine(false);
+		glmgr->setFlagEquatorJ2000Line(false);
 		glmgr->setFlagEclipticLine(false);
 		glmgr->setFlagMeridianLine(false);
 		glmgr->setFlagLongitudeLine(false);
 		glmgr->setFlagHorizonLine(false);
 		glmgr->setFlagGalacticEquatorLine(false);
-		glmgr->setFlagEquatorJ2000Grid(false);
+		glmgr->setFlagSupergalacticEquatorLine(false);
+		glmgr->setFlagCircumpolarCircles(false);
+		glmgr->setFlagLongitudeLine(false);
 		lmgr->setFlagCardinalsPoints(false);
 		cmgr->setFlagLines(true);
 		cmgr->setFlagLabels(true);
@@ -1169,14 +1179,19 @@ void StelMainScriptAPI::clear(const QString& state)
 		mmgr->setZHR(0);
 		glmgr->setFlagAzimuthalGrid(false);
 		glmgr->setFlagGalacticGrid(false);
+		glmgr->setFlagSupergalacticGrid(false);
 		glmgr->setFlagEquatorGrid(false);
+		glmgr->setFlagEquatorJ2000Grid(false);
 		glmgr->setFlagEquatorLine(false);
+		glmgr->setFlagEquatorJ2000Line(false);
 		glmgr->setFlagEclipticLine(false);
 		glmgr->setFlagMeridianLine(false);
 		glmgr->setFlagLongitudeLine(false);
 		glmgr->setFlagHorizonLine(false);
 		glmgr->setFlagGalacticEquatorLine(false);
-		glmgr->setFlagEquatorJ2000Grid(false);
+		glmgr->setFlagSupergalacticEquatorLine(false);
+		glmgr->setFlagCircumpolarCircles(false);
+		glmgr->setFlagLongitudeLine(false);
 		lmgr->setFlagCardinalsPoints(false);
 		cmgr->setFlagLines(false);
 		cmgr->setFlagLabels(false);
@@ -1202,15 +1217,20 @@ void StelMainScriptAPI::clear(const QString& state)
 		ssmgr->setFlagTrails(false);
 		mmgr->setZHR(0);
 		glmgr->setFlagAzimuthalGrid(false);
-		glmgr->setFlagGalacticGrid(false);
+		glmgr->setFlagGalacticGrid(true);
+		glmgr->setFlagSupergalacticGrid(false);
 		glmgr->setFlagEquatorGrid(false);
+		glmgr->setFlagEquatorJ2000Grid(false);
 		glmgr->setFlagEquatorLine(false);
+		glmgr->setFlagEquatorJ2000Line(false);
 		glmgr->setFlagEclipticLine(false);
 		glmgr->setFlagMeridianLine(false);
 		glmgr->setFlagLongitudeLine(false);
 		glmgr->setFlagHorizonLine(false);
 		glmgr->setFlagGalacticEquatorLine(false);
-		glmgr->setFlagEquatorJ2000Grid(false);
+		glmgr->setFlagSupergalacticEquatorLine(false);
+		glmgr->setFlagCircumpolarCircles(false);
+		glmgr->setFlagLongitudeLine(false);
 		lmgr->setFlagCardinalsPoints(false);
 		cmgr->setFlagLines(false);
 		cmgr->setFlagLabels(false);
@@ -1224,6 +1244,46 @@ void StelMainScriptAPI::clear(const QString& state)
 		lmgr->setFlagFog(false);
 		zl->setFlagShow(false);
 	}
+	else if (state.toLower() == "supergalactic")
+	{
+		movmgr->setMountMode(StelMovementMgr::MountSupergalactic);
+		skyd->setFlagTwinkle(false);
+		skyd->setFlagLuminanceAdaptation(false);
+		ssmgr->setFlagPlanets(false);
+		ssmgr->setFlagHints(false);
+		ssmgr->setFlagOrbits(false);
+		ssmgr->setFlagMoonScale(false);
+		ssmgr->setFlagTrails(false);
+		mmgr->setZHR(0);
+		glmgr->setFlagAzimuthalGrid(false);
+		glmgr->setFlagGalacticGrid(false);
+		glmgr->setFlagSupergalacticGrid(true);
+		glmgr->setFlagEquatorGrid(false);
+		glmgr->setFlagEquatorJ2000Grid(false);
+		glmgr->setFlagEquatorLine(false);
+		glmgr->setFlagEquatorJ2000Line(false);
+		glmgr->setFlagEclipticLine(false);
+		glmgr->setFlagMeridianLine(false);
+		glmgr->setFlagLongitudeLine(false);
+		glmgr->setFlagHorizonLine(false);
+		glmgr->setFlagGalacticEquatorLine(false);
+		glmgr->setFlagSupergalacticEquatorLine(false);
+		glmgr->setFlagCircumpolarCircles(false);
+		glmgr->setFlagLongitudeLine(false);
+		lmgr->setFlagCardinalsPoints(false);
+		cmgr->setFlagLines(false);
+		cmgr->setFlagLabels(false);
+		cmgr->setFlagBoundaries(false);
+		cmgr->setFlagArt(false);
+		smgr->setFlagLabels(false);
+		ssmgr->setFlagLabels(false);
+		nmgr->setFlagHints(false);
+		lmgr->setFlagLandscape(false);
+		lmgr->setFlagAtmosphere(false);
+		lmgr->setFlagFog(false);
+		zl->setFlagShow(false);
+	}
+
 	else
 	{
 		qWarning() << "WARNING clear(" << state << ") - state not known";

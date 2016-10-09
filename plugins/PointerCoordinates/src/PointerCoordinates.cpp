@@ -215,6 +215,22 @@ void PointerCoordinates::draw(StelCore *core)
 			}
 			break;
 		}
+		case Supergalactic:
+		{
+			StelUtils::rectToSphe(&cx,&cy,core->j2000ToSupergalactic(mousePosition)); // Calculate supergalactic position and show it...
+			coordsSystem = qc_("Supergal. Long/Lat", "abbreviated in the plugin");
+			if (withDecimalDegree)
+			{
+				cxt = StelUtils::radToDecDegStr(cx);
+				cyt = StelUtils::radToDecDegStr(cy);
+			}
+			else
+			{
+				cxt = StelUtils::radToDmsStr(cx, true);
+				cyt = StelUtils::radToDmsStr(cy, true);
+			}
+			break;
+		}
 		case Ecliptic:
 		{
 			double lambda, beta;

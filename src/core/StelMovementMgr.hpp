@@ -49,7 +49,7 @@ public:
 	//! Possible mount modes defining the reference frame in which head movements occur.
 	//! MountGalactic is currently only available via scripting API: core.clear("galactic")
 	// TODO: add others: MountEcliptical, MountEq2000, MountEcliptical2000 and implement proper variants.
-	enum MountMode { MountAltAzimuthal, MountEquinoxEquatorial, MountGalactic};
+	enum MountMode { MountAltAzimuthal, MountEquinoxEquatorial, MountGalactic, MountSupergalactic};
 
 	//! Named constants for zoom operations.
 	enum ZoomingMode { ZoomOut=-1, ZoomNone=0, ZoomIn=1};
