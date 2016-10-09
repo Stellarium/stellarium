@@ -244,6 +244,33 @@ class GridLinesMgr : public StelModule
 		   WRITE setColorZenithNadir
 		   NOTIFY zenithNadirColorChanged)
 
+	Q_PROPERTY(bool eclipticJ2000PolesDisplayed
+		   READ getFlagEclipticJ2000Poles
+		   WRITE setFlagEclipticJ2000Poles
+		   NOTIFY eclipticJ2000PolesDisplayedChanged)
+	Q_PROPERTY(Vec3f eclipticJ2000PolesColor
+		   READ getColorEclipticJ2000Poles
+		   WRITE setColorEclipticJ2000Poles
+		   NOTIFY eclipticJ2000PolesColorChanged)
+
+	Q_PROPERTY(bool eclipticPolesDisplayed
+		   READ getFlagEclipticPoles
+		   WRITE setFlagEclipticPoles
+		   NOTIFY eclipticPolesDisplayedChanged)
+	Q_PROPERTY(Vec3f eclipticPolesColor
+		   READ getColorEclipticPoles
+		   WRITE setColorEclipticPoles
+		   NOTIFY eclipticPolesColorChanged)
+
+	Q_PROPERTY(bool galacticPolesDisplayed
+		   READ getFlagGalacticPoles
+		   WRITE setFlagGalacticPoles
+		   NOTIFY galacticPolesDisplayedChanged)
+	Q_PROPERTY(Vec3f galacticPolesColor
+		   READ getColorGalacticPoles
+		   WRITE setColorGalacticPoles
+		   NOTIFY galacticPolesColorChanged)
+
 public:
 	GridLinesMgr();
 	virtual ~GridLinesMgr();
@@ -603,6 +630,48 @@ public slots:
 	//! @endcode
 	void setColorZenithNadir(const Vec3f& newColor);
 
+	//! Setter for displaying ecliptic poles of J2000.
+	void setFlagEclipticJ2000Poles(const bool displayed);
+	//! Accessor for displaying ecliptic poles of J2000.
+	bool getFlagEclipticJ2000Poles(void) const;
+	//! Get the current color of the ecliptic poles of J2000.
+	Vec3f getColorEclipticJ2000Poles(void) const;
+	//! Set the color of the ecliptic poles of J2000.
+	//! @param newColor The color of ecliptic poles of J2000
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorEclipticJ2000Poles(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorEclipticJ2000Poles(const Vec3f& newColor);
+
+	//! Setter for displaying ecliptic poles.
+	void setFlagEclipticPoles(const bool displayed);
+	//! Accessor for displaying ecliptic poles.
+	bool getFlagEclipticPoles(void) const;
+	//! Get the current color of the ecliptic poles.
+	Vec3f getColorEclipticPoles(void) const;
+	//! Set the color of the ecliptic poles.
+	//! @param newColor The color of ecliptic poles
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorEclipticPoles(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorEclipticPoles(const Vec3f& newColor);
+
+	//! Setter for displaying galactic poles.
+	void setFlagGalacticPoles(const bool displayed);
+	//! Accessor for displaying galactic poles.
+	bool getFlagGalacticPoles(void) const;
+	//! Get the current color of the galactic poles.
+	Vec3f getColorGalacticPoles(void) const;
+	//! Set the color of the galactic poles.
+	//! @param newColor The color of galactic poles
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorGalacticPoles(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorGalacticPoles(const Vec3f& newColor);
+
 signals:
 	void azimuthalGridDisplayedChanged(const bool) const;
 	void azimuthalGridColorChanged(const Vec3f & newColor) const;
@@ -650,6 +719,12 @@ signals:
 	void celestialPolesColorChanged(const Vec3f & newColor) const;
 	void zenithNadirDisplayedChanged(const bool displayed) const;
 	void zenithNadirColorChanged(const Vec3f & newColor) const;
+	void eclipticJ2000PolesDisplayedChanged(const bool displayed) const;
+	void eclipticJ2000PolesColorChanged(const Vec3f & newColor) const;
+	void eclipticPolesDisplayedChanged(const bool displayed) const;
+	void eclipticPolesColorChanged(const Vec3f & newColor) const;
+	void galacticPolesDisplayedChanged(const bool displayed) const;
+	void galacticPolesColorChanged(const Vec3f & newColor) const;
 
 private slots:
 	//! Re-translate the labels of the great circles.
@@ -683,6 +758,9 @@ private:
 	SkyPoint * celestialJ2000Poles;		// Celestial poles of J2000
 	SkyPoint * celestialPoles;		// Celestial poles
 	SkyPoint * zenithNadir;			// Zenith and nadir
+	SkyPoint * eclipticJ2000Poles;		// Ecliptic poles of J2000
+	SkyPoint * eclipticPoles;		// Ecliptic poles
+	SkyPoint * galacticPoles;		// Galactic poles
 };
 
 #endif // _GRIDLINESMGR_HPP_

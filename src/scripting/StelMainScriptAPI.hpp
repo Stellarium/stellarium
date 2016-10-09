@@ -168,6 +168,8 @@ public slots:
 	//! - decJ2000 : declination angle (J2000 frame) in decimal degrees
 	//! - glong : galactic longitude in decimal degrees
 	//! - glat : galactic latitude in decimal degrees
+	//! - sglong : supergalactic longitude in decimal degrees
+	//! - sglat : supergalactic latitude in decimal degrees
 	//! - elong : ecliptic longitude in decimal degrees (on Earth only!)
 	//! - elat : ecliptic latitude in decimal degrees (on Earth only!)
 	//! - elongJ2000 : ecliptic longitude (J2000 frame) in decimal degrees (on Earth only!)
@@ -202,6 +204,8 @@ public slots:
 	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees	
 	//! - glong : galactic longitude in decimal degrees
 	//! - glat : galactic latitude in decimal degrees
+	//! - sglong : supergalactic longitude in decimal degrees
+	//! - sglat : supergalactic latitude in decimal degrees
 	//! - elong : ecliptic longitude in decimal degrees (on Earth only!)
 	//! - elat : ecliptic latitude in decimal degrees (on Earth only!)
 	//! - elongJ2000 : ecliptic longitude (J2000 frame) in decimal degrees (on Earth only!)

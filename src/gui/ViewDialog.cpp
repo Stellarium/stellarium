@@ -317,6 +317,9 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showCelestialJ2000PolesCheckBox,	"actionShow_Celestial_J2000_Poles");
 	connectCheckBox(ui->showCelestialPolesCheckBox,		"actionShow_Celestial_Poles");
 	connectCheckBox(ui->showZenithNadirCheckBox,		"actionShow_Zenith_Nadir");
+	connectCheckBox(ui->showEclipticJ2000PolesCheckBox,	"actionShow_Ecliptic_J2000_Poles");
+	connectCheckBox(ui->showEclipticPolesCheckBox,		"actionShow_Ecliptic_Poles");
+	connectCheckBox(ui->showGalacticPolesCheckBox,		"actionShow_Galactic_Poles");
 
 	colorButton(ui->colorEclipticGridJ2000,		"GridLinesMgr.eclipticJ2000GridColor");
 	colorButton(ui->colorEclipticGridOfDate,	"GridLinesMgr.eclipticGridColor");
@@ -341,6 +344,9 @@ void ViewDialog::createDialogContent()
 	colorButton(ui->colorCelestialJ2000Poles,	"GridLinesMgr.celestialJ2000PolesColor");
 	colorButton(ui->colorCelestialPoles,		"GridLinesMgr.celestialPolesColor");
 	colorButton(ui->colorZenithNadir,		"GridLinesMgr.zenithNadirColor");
+	colorButton(ui->colorEclipticJ2000Poles,	"GridLinesMgr.eclipticJ2000PolesColor");
+	colorButton(ui->colorEclipticPoles,		"GridLinesMgr.eclipticPolesColor");
+	colorButton(ui->colorGalacticPoles,		"GridLinesMgr.galacticPolesColor");
 	colorButton(ui->colorCardinalPoints,		"LandscapeMgr.cardinalsPointsColor");
 
 	connect(ui->colorEclipticGridJ2000,		SIGNAL(released()), this, SLOT(askEclipticJ2000GridColor()));
@@ -366,6 +372,9 @@ void ViewDialog::createDialogContent()
 	connect(ui->colorCelestialJ2000Poles,		SIGNAL(released()), this, SLOT(askCelestialJ2000PolesColor()));
 	connect(ui->colorCelestialPoles,		SIGNAL(released()), this, SLOT(askCelestialPolesColor()));
 	connect(ui->colorZenithNadir,			SIGNAL(released()), this, SLOT(askZenithNadirColor()));
+	connect(ui->colorEclipticJ2000Poles,		SIGNAL(released()), this, SLOT(askEclipticJ2000PolesColor()));
+	connect(ui->colorEclipticPoles,			SIGNAL(released()), this, SLOT(askEclipticPolesColor()));
+	connect(ui->colorGalacticPoles,			SIGNAL(released()), this, SLOT(askGalacticPolesColor()));
 	connect(ui->colorCardinalPoints,		SIGNAL(released()), this, SLOT(askCardinalPointsColor()));
 
 	// Constellations
@@ -750,6 +759,51 @@ void ViewDialog::askZenithNadirColor()
 		GETSTELMODULE(GridLinesMgr)->setColorZenithNadir(vColor);
 		StelApp::getInstance().getSettings()->setValue("color/zenith_nadir_color", StelUtils::vec3fToStr(vColor));
 		ui->colorZenithNadir->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
+void ViewDialog::askEclipticJ2000PolesColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.eclipticJ2000PolesColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorEclipticJ2000Poles->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		GETSTELMODULE(GridLinesMgr)->setColorEclipticJ2000Poles(vColor);
+		StelApp::getInstance().getSettings()->setValue("color/ecliptic_J2000_poles_color", StelUtils::vec3fToStr(vColor));
+		ui->colorEclipticJ2000Poles->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
+void ViewDialog::askEclipticPolesColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.eclipticPolesColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorEclipticPoles->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		GETSTELMODULE(GridLinesMgr)->setColorEclipticPoles(vColor);
+		StelApp::getInstance().getSettings()->setValue("color/ecliptic_poles_color", StelUtils::vec3fToStr(vColor));
+		ui->colorEclipticPoles->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
+void ViewDialog::askGalacticPolesColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.galacticPolesColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorGalacticPoles->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		GETSTELMODULE(GridLinesMgr)->setColorGalacticPoles(vColor);
+		StelApp::getInstance().getSettings()->setValue("color/galactic_poles_color", StelUtils::vec3fToStr(vColor));
+		ui->colorGalacticPoles->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
 }
 
