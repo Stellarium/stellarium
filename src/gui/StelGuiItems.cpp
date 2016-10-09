@@ -619,11 +619,11 @@ void BottomStelBar::updateText(bool updatePos)
 		else
 			newDateInfo = QString("%1   %2").arg(locmgr.getPrintableDateLocal(jd)).arg(locmgr.getPrintableTimeLocal(jd));
 	}
-	QString newDateAppx = QString("JD %1").arg(jd, 0, 'f', 5);
+	QString newDateAppx = QString("JD %1").arg(jd, 0, 'f', 6);
 	if (getFlagTimeJd())
 	{
 		newDateAppx = newDateInfo;
-		newDateInfo = QString("JD %1").arg(jd, 0, 'f', 5);
+		newDateInfo = QString("JD %1").arg(jd, 0, 'f', 6);
 	}
 
 	if (datetime->text()!=newDateInfo)

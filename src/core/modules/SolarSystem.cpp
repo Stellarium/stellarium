@@ -176,7 +176,10 @@ void SolarSystem::init()
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
 	setLabelsColor(StelUtils::strToVec3f(conf->value("color/planet_names_color", defaultColor).toString()));
-	setOrbitsColor(StelUtils::strToVec3f(conf->value("color/planet_orbits_color", defaultColor).toString()));
+	setOrbitsColor(StelUtils::strToVec3f(conf->value("color/sso_orbits_color", defaultColor).toString()));
+	setPlanetsOrbitsColor(StelUtils::strToVec3f(conf->value("color/planet_orbits_color", defaultColor).toString()));
+	setAsteroidsOrbitsColor(StelUtils::strToVec3f(conf->value("color/asteroid_orbits_color", defaultColor).toString()));
+	setCometsOrbitsColor(StelUtils::strToVec3f(conf->value("color/comet_orbits_color", defaultColor).toString()));
 	setTrailsColor(StelUtils::strToVec3f(conf->value("color/object_trails_color", defaultColor).toString()));
 	setPointerColor(StelUtils::strToVec3f(conf->value("color/planet_pointers_color", "1.0,0.3,0.3").toString()));
 
@@ -1656,12 +1659,56 @@ bool SolarSystem::getFlagIsolatedOrbits() const
 
 
 // Set/Get planets names color
-void SolarSystem::setLabelsColor(const Vec3f& c) {Planet::setLabelColor(c);}
-const Vec3f& SolarSystem::getLabelsColor(void) const {return Planet::getLabelColor();}
+void SolarSystem::setLabelsColor(const Vec3f& c)
+{
+	Planet::setLabelColor(c);
+}
+
+const Vec3f& SolarSystem::getLabelsColor(void) const
+{
+	return Planet::getLabelColor();
+}
 
 // Set/Get orbits lines color
-void SolarSystem::setOrbitsColor(const Vec3f& c) {Planet::setOrbitColor(c);}
-Vec3f SolarSystem::getOrbitsColor(void) const {return Planet::getOrbitColor();}
+void SolarSystem::setOrbitsColor(const Vec3f& c)
+{
+	Planet::setOrbitColor(c);
+}
+
+Vec3f SolarSystem::getOrbitsColor(void) const
+{
+	return Planet::getOrbitColor();
+}
+
+void SolarSystem::setPlanetsOrbitsColor(const Vec3f& c)
+{
+	Planet::setPlanetOrbitColor(c);
+}
+
+Vec3f SolarSystem::getPlanetsOrbitsColor(void) const
+{
+	return Planet::getPlanetOrbitColor();
+}
+
+void SolarSystem::setAsteroidsOrbitsColor(const Vec3f& c)
+{
+	Planet::setAsteroidOrbitColor(c);
+}
+
+Vec3f SolarSystem::getAsteroidsOrbitsColor(void) const
+{
+	return Planet::getAsteroidOrbitColor();
+}
+
+void SolarSystem::setCometsOrbitsColor(const Vec3f& c)
+{
+	Planet::setCometOrbitColor(c);
+}
+
+Vec3f SolarSystem::getCometsOrbitsColor(void) const
+{
+	return Planet::getCometOrbitColor();
+}
 
 // Set/Get if Moon display is scaled
 void SolarSystem::setFlagMoonScale(bool b)

@@ -311,6 +311,9 @@
             <property name="itemsExpandable">
              <bool>false</bool>
             </property>
+            <property name="sortingEnabled">
+             <bool>true</bool>
+            </property>
             <property name="expandsOnDoubleClick">
              <bool>false</bool>
             </property>
@@ -414,7 +417,7 @@
             <item>
              <widget class="QDateTimeEdit" name="dateToDateTimeEdit">
               <property name="displayFormat">
-               <string>yyyy.MM.dd hh:mm</string>
+               <string notr="true">yyyy.MM.dd hh:mm</string>
               </property>
               <property name="calendarPopup">
                <bool>true</bool>
@@ -435,7 +438,7 @@
             <item>
              <widget class="QDateTimeEdit" name="dateFromDateTimeEdit">
               <property name="displayFormat">
-               <string>yyyy.MM.dd hh:mm</string>
+               <string notr="true">yyyy.MM.dd hh:mm</string>
               </property>
               <property name="calendarPopup">
                <bool>true</bool>
@@ -503,7 +506,7 @@
             <item>
              <widget class="QDateEdit" name="phenomenFromDateEdit">
               <property name="displayFormat">
-               <string>yyyy.MM.dd</string>
+               <string notr="true">yyyy.MM.dd</string>
               </property>
               <property name="calendarPopup">
                <bool>true</bool>
@@ -565,7 +568,7 @@
             <item>
              <widget class="QDateEdit" name="phenomenToDateEdit">
               <property name="displayFormat">
-               <string>yyyy.MM.dd</string>
+               <string notr="true">yyyy.MM.dd</string>
               </property>
               <property name="calendarPopup">
                <bool>true</bool>
@@ -614,7 +617,7 @@
   <customwidget>
    <class>BarFrame</class>
    <extends>QFrame</extends>
-   <header location="global">Dialog.hpp</header>
+   <header>Dialog.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

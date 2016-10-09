@@ -27,6 +27,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelTranslator.hpp"
 #include "Planet.hpp"
+#include "CustomObjectMgr.hpp"
 
 #include "StelObjectMgr.hpp"
 #include "StelGui.hpp"
@@ -129,7 +130,9 @@ const char* SearchDialog::DEF_SIMBAD_URL = "http://simbad.u-strasbg.fr/";
 SearchDialog::SearchDialogStaticData SearchDialog::staticData;
 QString SearchDialog::extSearchText = "";
 
-SearchDialog::SearchDialog(QObject* parent) : StelDialog(parent), simbadReply(NULL)
+SearchDialog::SearchDialog(QObject* parent)
+	: StelDialog(parent)
+	, simbadReply(NULL)
 {
 	dialogName = "Search";
 	ui = new Ui_searchDialogForm;
@@ -142,6 +145,7 @@ SearchDialog::SearchDialog(QObject* parent) : StelDialog(parent), simbadReply(NU
 	conf = StelApp::getInstance().getSettings();
 	useSimbad = conf->value("search/flag_search_online", true).toBool();	
 	useStartOfWords = conf->value("search/flag_start_words", false).toBool();
+	useLockPosition = conf->value("search/flag_lock_position", true).toBool();
 	simbadServerUrl = conf->value("search/simbad_server_url", DEF_SIMBAD_URL).toString();
 	setCurrentCoordinateSystemKey(conf->value("search/coordinate_system", "equatorialJ2000").toString());
 }
@@ -209,6 +213,7 @@ void SearchDialog::populateCoordinateSystemsList()
 	csys->addItem(qc_("Equatorial", "coordinate system"), "equatorial");
 	csys->addItem(qc_("Horizontal", "coordinate system"), "horizontal");
 	csys->addItem(qc_("Galactic", "coordinate system"), "galactic");
+	csys->addItem(qc_("Supergalactic", "coordinate system"), "supergalactic");
 	csys->addItem(qc_("Ecliptic", "coordinate system"), "ecliptic");
 	csys->addItem(qc_("Ecliptic (J2000.0)", "coordinate system"), "eclipticJ2000");
 
@@ -261,6 +266,7 @@ void SearchDialog::populateCoordinateAxis()
 		case ecliptic:
 		case eclipticJ2000:
 		case galactic:
+		case supergalactic:
 		{
 			ui->AxisXLabel->setText(q_("Longitude"));
 			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbolsUnsigned);
@@ -361,8 +367,8 @@ void SearchDialog::createDialogContent()
 	connect(ui->psiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 	connect(ui->omegaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 
-	connect(ui->checkBoxUseSimbad, SIGNAL(clicked(bool)), this, SLOT(enableSimbadSearch(bool)));
-	ui->checkBoxUseSimbad->setChecked(useSimbad);
+	connect(ui->simbadGroupBox, SIGNAL(clicked(bool)), this, SLOT(enableSimbadSearch(bool)));
+	ui->simbadGroupBox->setChecked(useSimbad);
 
 	populateSimbadServerList();
 	idx = ui->serverListComboBox->findData(simbadServerUrl, Qt::UserRole, Qt::MatchCaseSensitive);
@@ -376,6 +382,9 @@ void SearchDialog::createDialogContent()
 
 	connect(ui->checkBoxUseStartOfWords, SIGNAL(clicked(bool)), this, SLOT(enableStartOfWordsAutofill(bool)));
 	ui->checkBoxUseStartOfWords->setChecked(useStartOfWords);
+
+	connect(ui->checkBoxLockPosition, SIGNAL(clicked(bool)), this, SLOT(enableLockPosition(bool)));
+	ui->checkBoxLockPosition->setChecked(useLockPosition);
 
 	// list views initialization
 	connect(ui->objectTypeComboBox, SIGNAL(activated(int)), this, SLOT(updateListWidget(int)));
@@ -404,6 +413,12 @@ void SearchDialog::enableStartOfWordsAutofill(bool enable)
 {
 	useStartOfWords = enable;
 	conf->setValue("search/flag_start_words", useStartOfWords);
+}
+
+void SearchDialog::enableLockPosition(bool enable)
+{
+	useLockPosition = enable;
+	conf->setValue("search/flag_lock_position", useLockPosition);
 }
 
 void SearchDialog::setSimpleStyle()
@@ -490,6 +505,18 @@ void SearchDialog::manualPositionChanged()
 			}
 			break;
 		}
+		case supergalactic:
+		{
+			StelUtils::spheToRect(spinLong, spinLat, pos);
+			pos = core->supergalacticToJ2000(pos);
+			if ( (mountMode==StelMovementMgr::MountSupergalactic) && (fabs(spinLat)> (0.9*M_PI/2.0)) )
+			{
+				// make up vector more stable.
+				mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat>0. ? 1. : -1. ));
+				aimUp=mvmgr->getViewUpVectorJ2000();
+			}
+			break;
+		}
 		case eclipticJ2000:
 		{
 			double ra, dec;
@@ -508,6 +535,8 @@ void SearchDialog::manualPositionChanged()
 	}
 	mvmgr->setFlagTracking(false);
 	mvmgr->moveToJ2000(pos, aimUp, 0.05);
+	if (useLockPosition)
+		mvmgr->setFlagLockEquPos(true);
 }
 
 void SearchDialog::onSearchTextChanged(const QString& text)
@@ -640,15 +669,47 @@ void SearchDialog::gotoObject(const QString &nameI18n)
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	if (simbadResults.contains(nameI18n))
 	{
-		close();
-		Vec3d pos = simbadResults[nameI18n];
-		Vec3d aimUp;
-		objectMgr->unSelect();
-		mvmgr->setViewUpVector(Vec3d(0., 0., 1.));
-		aimUp=mvmgr->getViewUpVectorJ2000();
-		mvmgr->moveToJ2000(pos, aimUp, mvmgr->getAutoMoveDuration());
-		ui->lineEditSearchSkyObject->clear();
-		ui->completionLabel->clearValues();
+		if (objectMgr->findAndSelect(nameI18n))
+		{
+			const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+			if (!newSelected.empty())
+			{
+				close();
+				ui->lineEditSearchSkyObject->clear();
+				ui->completionLabel->clearValues();
+				// Can't point to home planet
+				if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
+				{
+					mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
+					mvmgr->setFlagTracking(true);
+				}
+				else
+				{
+					GETSTELMODULE(StelObjectMgr)->unSelect();
+				}
+			}
+		}
+		else
+		{
+			close();
+			GETSTELMODULE(CustomObjectMgr)->addCustomObject(nameI18n, simbadResults[nameI18n]);
+			ui->lineEditSearchSkyObject->clear();
+			ui->completionLabel->clearValues();
+			if (objectMgr->findAndSelect(nameI18n))
+			{
+				const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+				// Can't point to home planet
+				if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
+				{
+					mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
+					mvmgr->setFlagTracking(true);
+				}
+				else
+				{
+					GETSTELMODULE(StelObjectMgr)->unSelect();
+				}
+			}
+		}
 	}
 	else if (objectMgr->findAndSelectI18n(nameI18n) || objectMgr->findAndSelect(nameI18n))
 	{

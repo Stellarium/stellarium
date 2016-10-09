@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>507</width>
-    <height>213</height>
+    <height>223</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -871,7 +871,16 @@
        <item>
         <widget class="QGroupBox" name="simbadGroupBox">
          <property name="title">
-          <string>On-line astronomical database SIMBAD</string>
+          <string>Use on-line astronomical database SIMBAD</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <property name="leftMargin">
@@ -886,13 +895,6 @@
           <property name="bottomMargin">
            <number>0</number>
           </property>
-          <item>
-           <widget class="QCheckBox" name="checkBoxUseSimbad">
-            <property name="text">
-             <string>Extend search with SIMBAD</string>
-            </property>
-           </widget>
-          </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item>
@@ -954,6 +956,13 @@
            <widget class="QCheckBox" name="checkBoxUseStartOfWords">
             <property name="text">
              <string>Use autofill only from the beginning of words</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxLockPosition">
+            <property name="text">
+             <string>Lock position when coordinates are used</string>
             </property>
            </widget>
           </item>
