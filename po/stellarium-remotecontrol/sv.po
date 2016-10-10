@@ -1,4 +1,4 @@
-# Belarusian translation for stellarium
+# Swedish translation for stellarium
 # Copyright (c) 2016 Rosetta Contributors and Canonical Ltd 2016
 # This file is distributed under the same license as the stellarium package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
@@ -8,70 +8,69 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-07-26 21:07+0700\n"
-"PO-Revision-Date: 2016-10-09 23:21+0000\n"
-"Last-Translator: 375gnu <Unknown>\n"
-"Language-Team: Belarusian <be@li.org>\n"
+"PO-Revision-Date: 2016-10-09 19:06+0000\n"
+"Last-Translator: dvds <detvardasjalva@hotmail.com>\n"
+"Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2016-10-10 06:40+0000\n"
 "X-Generator: Launchpad (build 18227)\n"
-"Language: be\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
-msgstr "Не атрымалася атрымаць сьпіс дзеяньняў"
+msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:88
 msgid "Action '%1' not accepted by server: "
-msgstr "Дзеяньне «%1» не прынятае паслужнікам: "
+msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:95
 msgid "Error sending action '%1' to server: "
-msgstr "Памылка пасыланьня дзеяньня «%1» на паслужнік: "
+msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/location.js:33
 #: plugins/RemoteControl/webroot/js/api/location.js:61
 #: plugins/RemoteControl/webroot/js/api/search.js:157
 msgid "Error performing search"
-msgstr "Памылка зьдзясьненьня пошуку"
+msgstr "Fel vid sökning"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:125
 msgid "Could not retrieve country list"
-msgstr "Не атрымалася атрымаць сьпіс краін"
+msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/location.js:138
 msgid "Could not retrieve planet list"
-msgstr "Не атрымалася атрымаць сьпіс рлянэтаў"
+msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:28
 msgid "Could not retrieve property list"
-msgstr "Не атрымалася атрымаць сьпіс уласьцівасьцяў"
+msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:89
 #: plugins/RemoteControl/webroot/js/api/properties.js:110
 msgid "Property '%1' not accepted by server: "
-msgstr "Уласьцівасьць «%1» не прынятая паслужнікам: "
+msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:96
 msgid "Error sending property '%1' to server: "
-msgstr "Памылка пасыланьня ўласьцівасьці «%1» на паслужнік: "
+msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/remotecontrol.js:193
 msgid "Error sending command to server: "
-msgstr "Памылка пасыланьня загаду на паслужнік: "
+msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/scripts.js:27
 msgid "Could not retrieve script list"
-msgstr "Не атрымалася атрымаць сьпіс сцэнароў"
+msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/search.js:32
 msgid "querying"
-msgstr "запытваньне"
+msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/search.js:41
 msgid "Error (%1)"
-msgstr "Памылка (%1)"
+msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/search.js:53
 msgid "Error performing Simbad lookup"
@@ -84,38 +83,38 @@ msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/search.js:90
 msgid "Error loading object types"
-msgstr "Памылка загрузкі тыпаў аб'ектаў"
+msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/search.js:115
 msgid "Error getting object list"
-msgstr "Памылка атрыманьня сьпісу аб'ектаў"
+msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/search.js:167
 msgid "waiting"
-msgstr "чаканьне"
+msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:38
 msgid "Could not retrieve projection list"
-msgstr "Не атрымалася атрымаць сьпіс праекцый"
+msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:51
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:64
 msgid "Could not retrieve landscape list"
-msgstr "Не атрымалася атрымаць сьпіс краявідаў"
+msgstr ""
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
 msgid "on"
-msgstr "укл"
+msgstr ""
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
 msgid "off"
-msgstr "выкл"
+msgstr ""
 
 #: plugins/RemoteControl/webroot/js/ui/combobox.js:58
 msgid "Show All Items"
-msgstr "Паказваць усе элемэнты"
+msgstr ""
 
 #: plugins/RemoteControl/webroot/js/ui/combobox.js:124
 msgid "Input did not match any item"
@@ -123,24 +122,24 @@ msgstr ""
 
 #: plugins/RemoteControl/webroot/js/ui/mainui.js:317
 msgid "No current selection"
-msgstr "Няма бягучага вылучэньня"
+msgstr ""
 
 #: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:420
 #: tablet7in.html:606
 msgid "-none-"
-msgstr "-няма-"
+msgstr ""
 
 #: index.html:5 tablet7in.html:5
 msgid "Stellarium remote control plugin"
-msgstr "Дадатак аддаленага кіраваньня Stellarium"
+msgstr ""
 
 #: index.html:17 tablet7in.html:18
 msgid "Please wait, loading"
-msgstr "Пачакай, калі ласка, загружаецца"
+msgstr ""
 
 #: index.html:26 tablet7in.html:27
 msgid "Stellarium remote control"
-msgstr "Аддаленае кіраваньне Stellarium"
+msgstr ""
 
 #: index.html:30 tablet7in.html:31
 msgid "Main controls"
@@ -148,15 +147,15 @@ msgstr ""
 
 #: index.html:31 tablet7in.html:33
 msgid "Selection"
-msgstr "Вылучэньне"
+msgstr ""
 
 #: index.html:33 tablet7in.html:38
 msgid "DSO"
-msgstr "АГК"
+msgstr ""
 
 #: index.html:36
 msgid "Actions and scripts"
-msgstr "Дзеяньні й сцэнары"
+msgstr ""
 
 #: index.html:81 tablet7in.html:178
 msgid "Time jumps"
@@ -164,119 +163,119 @@ msgstr ""
 
 #: index.html:85 tablet7in.html:182
 msgid "Solar hour"
-msgstr "Сонечная гадзіна"
+msgstr ""
 
 #: index.html:86 tablet7in.html:183
 msgid "Solar day"
-msgstr "Сонечны дзень"
+msgstr ""
 
 #: index.html:87 tablet7in.html:184
 msgid "Solar week"
-msgstr "Сонечны тыдзень"
+msgstr ""
 
 #: index.html:89 tablet7in.html:186
 msgid "Sidereal day"
-msgstr "Зоркавы дзень"
+msgstr ""
 
 #: index.html:90 tablet7in.html:187
 msgid "Sidereal year"
-msgstr "Зоркавы год"
+msgstr ""
 
 #: index.html:91 tablet7in.html:188
 msgid "Sidereal century"
-msgstr "Зоркавае стагодзьдзе"
+msgstr ""
 
 #: index.html:93 tablet7in.html:190
 msgid "Synodic month"
-msgstr "Сынадычны месяц"
+msgstr ""
 
 #: index.html:94 tablet7in.html:191
 msgid "Draconic month"
-msgstr "Драканічны месяц"
+msgstr ""
 
 #: index.html:95 tablet7in.html:192
 msgid "Draconic year"
-msgstr "Драканічны год"
+msgstr ""
 
 #: index.html:97 tablet7in.html:205
 msgid "Gaussian year"
-msgstr "Ґаўсіянскі год"
+msgstr ""
 
 #: index.html:100 tablet7in.html:195
 msgid "Anomalistic month"
-msgstr "Анамалістычны месяц"
+msgstr ""
 
 #: index.html:101 tablet7in.html:196
 msgid "Anomalistic year"
-msgstr "Анамалістычны год"
+msgstr ""
 
 #: index.html:102 tablet7in.html:197
 msgid "Anomalistic century"
-msgstr "Анамалістычнае стагодзьдзе"
+msgstr ""
 
 #: index.html:104 tablet7in.html:199
 msgid "Mean tropical month"
-msgstr "Сярэдні трапічны месяц"
+msgstr ""
 
 #: index.html:105 tablet7in.html:200
 msgid "Mean tropical year"
-msgstr "Сярэдні трапічны год"
+msgstr ""
 
 #: index.html:106 tablet7in.html:201
 msgid "Mean tropical century"
-msgstr "Сярэдняе трапічнае стагодзьдзе"
+msgstr ""
 
 #: index.html:108 tablet7in.html:203
 msgid "Tropical year"
-msgstr "Трапічны год"
+msgstr ""
 
 #: index.html:109 tablet7in.html:204
 msgid "Julian year"
-msgstr "Юліянскі год"
+msgstr ""
 
 #: index.html:110 tablet7in.html:206
 msgid "Julian century"
-msgstr "Юліянскае стагодзьдзе"
+msgstr ""
 
 #: index.html:118 tablet7in.html:92
 msgid "Up/Left"
-msgstr "Уверх/улева"
+msgstr ""
 
 #: index.html:118 tablet7in.html:92
 msgid "Up"
-msgstr "Уверх"
+msgstr ""
 
 #: index.html:118 tablet7in.html:92
 msgid "Up/Right"
-msgstr "Уверх/управа"
+msgstr ""
 
 #: index.html:118 tablet7in.html:92
 msgid "Left"
-msgstr "Улева"
+msgstr ""
 
 #: index.html:118 tablet7in.html:92
 msgid "Focus on selected object"
-msgstr "Фокус на вылучаны аб'ект"
+msgstr ""
 
 #: index.html:118 tablet7in.html:92
 msgid "Focus on selection"
-msgstr "Фокус на вылучэньне"
+msgstr ""
 
 #: index.html:118 tablet7in.html:92
 msgid "Right"
-msgstr "Управа"
+msgstr ""
 
 #: index.html:118 tablet7in.html:92
 msgid "Down/Left"
-msgstr "Уніз/улева"
+msgstr ""
 
 #: index.html:118 tablet7in.html:92
 msgid "Down"
-msgstr "Уніз"
+msgstr ""
 
 #: index.html:118 tablet7in.html:92
 msgid "Down/Right"
-msgstr "Уніз/управа"
+msgstr ""
 
 #: index.html:140 tablet7in.html:224
 msgid "Enter search term. Use TAB to navigate results."
@@ -284,31 +283,31 @@ msgstr ""
 
 #: index.html:141 tablet7in.html:225
 msgid "Select and focus"
-msgstr "Вылучыць і ўзяць у фокус"
+msgstr ""
 
 #: index.html:168 tablet7in.html:255
 msgid "Quick select"
-msgstr "Хуткае вылучэньне"
+msgstr ""
 
 #: index.html:172 tablet7in.html:259
 msgid "Earth"
-msgstr "Зямля"
+msgstr ""
 
 #: index.html:172 tablet7in.html:259
 msgid "Pluto"
-msgstr "Плютон"
+msgstr ""
 
 #: index.html:180 tablet7in.html:290
 msgid "Current selection"
-msgstr "Бягучае вылучэньне"
+msgstr ""
 
 #: index.html:205 tablet7in.html:325
 msgid "Planets and satellites"
-msgstr "Плянэты й спадарожнікі"
+msgstr ""
 
 #: index.html:206 tablet7in.html:326
 msgid "Show Solar System objects"
-msgstr "Паказваць аб'екты Сонечнай сыстэмы"
+msgstr ""
 
 #: index.html:237 tablet7in.html:362
 msgid "ZHR:"
@@ -376,43 +375,43 @@ msgstr ""
 
 #: index.html:347 tablet7in.html:519
 msgid "Labels and markers"
-msgstr "Подпісы й пазнакі"
+msgstr ""
 
 #: index.html:375 tablet7in.html:547
 msgid "Show illumination"
-msgstr "Паказваць асьвятленьне"
+msgstr ""
 
 #: index.html:380 tablet7in.html:553
 msgid "Current landscape"
-msgstr "Бягучы краявід"
+msgstr ""
 
 #: index.html:407 tablet7in.html:581
 msgid "Current sky culture"
-msgstr "Бягучая культура неба"
+msgstr ""
 
 #: index.html:420 tablet7in.html:606
 msgid "Active script:"
-msgstr "Актыўны сцэнар:"
+msgstr ""
 
 #: index.html:421 tablet7in.html:607
 msgid "Run selected script"
-msgstr "Выканаць вылучаны сцэнар"
+msgstr ""
 
 #: index.html:421 tablet7in.html:607
 msgid "Stop current script"
-msgstr "Спыніць бягучы сцэнар"
+msgstr ""
 
 #: index.html:426 tablet7in.html:41 tablet7in.html:591
 msgid "Actions"
-msgstr "Дзеяньні"
+msgstr ""
 
 #: index.html:430 tablet7in.html:595
 msgid "Run/toggle action"
-msgstr "Выканаць/спыніць дзеяннье"
+msgstr ""
 
 #: index.html:441 tablet7in.html:630
 msgid "Planet map"
-msgstr "Мапа плянэты"
+msgstr ""
 
 #: index.html:442 tablet7in.html:631
 msgid "Planet map pointer"
@@ -424,12 +423,12 @@ msgstr ""
 
 #: index.html:491 tablet7in.html:681
 msgid "No response from server"
-msgstr "Паслужнік не адказвае"
+msgstr ""
 
 #: index.html:492
 msgid ""
 "No response from server since %1 seconds. Is Stellarium still running?"
-msgstr "Паслужнік не адказвае з «%1» сэкунды. Ці запушчаны яшчэ Stellarium?"
+msgstr ""
 
 #: tablet7in.html:32
 msgid "Time Jump"
@@ -437,7 +436,7 @@ msgstr ""
 
 #: tablet7in.html:37
 msgid "Grids"
-msgstr "Сеткі"
+msgstr ""
 
 #: tablet7in.html:96
 msgid "View towards horizon at Azimuth"
@@ -445,111 +444,109 @@ msgstr ""
 
 #: tablet7in.html:128
 msgid "Reset"
-msgstr "Вернуць"
+msgstr ""
 
 #: tablet7in.html:260
 msgid "Sirius"
-msgstr "Сырыюс"
+msgstr ""
 
 #: tablet7in.html:261
 msgid "Arcturus"
-msgstr "Арктур"
+msgstr ""
 
 #: tablet7in.html:262
 msgid "Capella"
-msgstr "Капэла"
+msgstr ""
 
 #: tablet7in.html:263
 msgid "Vega"
-msgstr "Вэга"
+msgstr ""
 
 #: tablet7in.html:264
 msgid "Deneb"
-msgstr "Дэнэб"
+msgstr ""
 
 #: tablet7in.html:265
 msgid "Altair"
-msgstr "Альтаір"
+msgstr ""
 
 #: tablet7in.html:266
 msgid "Andromeda Galaxy"
-msgstr "Ґаляктыка «Андрамэда»"
+msgstr ""
 
 #: tablet7in.html:267
 msgid "Hercules Cluster"
-msgstr "Скопішча Гекулеса"
+msgstr ""
 
 #: tablet7in.html:268
 msgid "Orion Nebula"
-msgstr "Туманнасьць Арыёна"
+msgstr ""
 
 #: tablet7in.html:269
 msgid "Eta Carinae Nebula"
-msgstr "Туманнасьць Эта Кароны"
+msgstr ""
 
 #: tablet7in.html:270
 msgid "47 Tucanae Cluster"
-msgstr "Скопішча 47 Тукана"
+msgstr ""
 
 #: tablet7in.html:271
 msgid "Aries"
-msgstr "Авен"
+msgstr ""
 
 #: tablet7in.html:272
 msgid "Taurus"
-msgstr "Цялец"
+msgstr ""
 
 #: tablet7in.html:273
 msgid "Gemini"
-msgstr "Блізьняты"
+msgstr ""
 
 #: tablet7in.html:274
 msgid "Cancer"
-msgstr "Рак"
+msgstr ""
 
 #: tablet7in.html:275
 msgid "Leo"
-msgstr "Леў"
+msgstr ""
 
 #: tablet7in.html:276
 msgid "Virgo"
-msgstr "Дзева"
+msgstr ""
 
 #: tablet7in.html:277
 msgid "Libra"
-msgstr "Лібра"
+msgstr ""
 
 #: tablet7in.html:278
 msgid "Scorpius"
-msgstr "Скарпіён"
+msgstr ""
 
 #: tablet7in.html:279
 msgid "Sagittarius"
-msgstr "Стралец"
+msgstr ""
 
 #: tablet7in.html:280
 msgid "Capricornus"
-msgstr "Казарог"
+msgstr ""
 
 #: tablet7in.html:281
 msgid "Aquarius"
-msgstr "Вадаліў"
+msgstr ""
 
 #: tablet7in.html:282
 msgid "Pisces"
-msgstr "Рыбы"
+msgstr ""
 
 #: tablet7in.html:386
 msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
 msgstr ""
-"Вокамгненны акружыны восі Зямлі падчас яе руху вакол полюсаў экліптыкі. "
-"Паказваюцца толькі на Зямлі."
 
 #: tablet7in.html:406
 msgid "Solstices"
-msgstr "Сонцастаяньні"
+msgstr ""
 
 #: tablet7in.html:407
 msgid "Crossquarters"
@@ -557,19 +554,19 @@ msgstr ""
 
 #: tablet7in.html:408
 msgid "Major Standstill"
-msgstr "Вялікія спыненьні"
+msgstr ""
 
 #: tablet7in.html:409
 msgid "Minor Standstill"
-msgstr "Малыя спыненьні"
+msgstr ""
 
 #: tablet7in.html:420
 msgid "Current Planet:"
-msgstr "Бягучай плянэта:"
+msgstr ""
 
 #: tablet7in.html:615
 msgid "Favorites"
-msgstr "Абранае"
+msgstr ""
 
 #: tablet7in.html:617
 msgid "Show 1"
@@ -577,12 +574,12 @@ msgstr ""
 
 #: tablet7in.html:618
 msgid "Remove Labels and Images"
-msgstr "Паказваць меткі й відарысы"
+msgstr ""
 
 #: tablet7in.html:618
 msgid "Cleanup Screen"
-msgstr "Ачысьціць экран"
+msgstr ""
 
 #: tablet7in.html:682
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
-msgstr "Паслужнік не адказвае «%1» сэкундаў. Ці запушчаны яшчэ Stellarium?"
+msgstr ""
