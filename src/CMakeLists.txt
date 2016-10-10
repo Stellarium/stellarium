@@ -204,6 +204,10 @@ SET(stellarium_lib_SRCS
      core/modules/Constellation.hpp
      core/modules/ConstellationMgr.cpp
      core/modules/ConstellationMgr.hpp
+     core/modules/CustomObject.cpp
+     core/modules/CustomObject.hpp
+     core/modules/CustomObjectMgr.cpp
+     core/modules/CustomObjectMgr.hpp
      core/modules/GridLinesMgr.cpp
      core/modules/GridLinesMgr.hpp
      core/modules/LabelMgr.hpp
@@ -691,6 +695,33 @@ ADD_EXECUTABLE(testPrecession EXCLUDE_FROM_ALL ${tests_testPrecession_SRCS})
 TARGET_LINK_LIBRARIES(testPrecession ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testPrecession)
 ADD_TEST(testPrecession)
+
+SET(tests_testEphemeris_SRCS
+     tests/testEphemeris.hpp
+     tests/testEphemeris.cpp
+     core/StelFileMgr.hpp
+     core/StelFileMgr.cpp
+     core/VecMath.hpp
+     core/planetsephems/EphemWrapper.hpp
+     core/planetsephems/vsop87.h
+     core/planetsephems/vsop87.c
+     core/planetsephems/calc_interpolated_elements.h
+     core/planetsephems/calc_interpolated_elements.c
+     core/planetsephems/elliptic_to_rectangular.h
+     core/planetsephems/elliptic_to_rectangular.c
+     core/planetsephems/de430.hpp
+     core/planetsephems/de430.cpp
+     core/planetsephems/de431.hpp
+     core/planetsephems/de431.cpp
+     core/planetsephems/jpl_int.h
+     core/planetsephems/jpleph.h
+     core/planetsephems/jpleph.cpp
+)
+ADD_EXECUTABLE(testEphemeris EXCLUDE_FROM_ALL ${tests_testEphemeris_SRCS})
+TARGET_LINK_LIBRARIES(testEphemeris ${TESTS_LIBRARIES})
+TARGET_COMPILE_DEFINITIONS(testEphemeris PRIVATE UNIT_TEST)
+ADD_DEPENDENCIES(buildTests testEphemeris)
+ADD_TEST(testEphemeris)
 
 ADD_CUSTOM_TARGET(tests COMMENT "Run the Stellarium unit tests")
 FOREACH(NAME ${STELLARIUM_TESTS})

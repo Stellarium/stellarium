@@ -89,6 +89,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	QTextStream oss(&str);
 	const QString varType = StarMgr::getGcvsVariabilityType(s->getHip());
+	const int wdsObs = StarMgr::getWdsLastObservation(s->getHip());
+	const float wdsPA = StarMgr::getWdsLastPositionAngle(s->getHip());
+	const float wdsSep = StarMgr::getWdsLastSeparation(s->getHip());
 	const float maxVMag = StarMgr::getGcvsMaxMagnitude(s->getHip());
 	const float magFlag = StarMgr::getGcvsMagnitudeFlag(s->getHip());
 	const float minVMag = StarMgr::getGcvsMinMagnitude(s->getHip());
@@ -103,10 +106,12 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			oss << "<h2>";
 
 		const QString commonNameI18 = StarMgr::getCommonName(s->getHip());
+		const QString additionalNameI18 = StarMgr::getAdditionalNames(s->getHip());
 		const QString sciName = StarMgr::getSciName(s->getHip());
 		const QString addSciName = StarMgr::getSciAdditionalName(s->getHip());
 		const QString varSciName = StarMgr::getGcvsName(s->getHip());
-		const QString crossIndexData = StarMgr::getCrossIndexDesignations(s->getHip());
+		const QString wdsSciName = StarMgr::getWdsName(s->getHip());
+		const QString crossIndexData = StarMgr::getCrossIdentificationDesignations(s->getHip());
 		QStringList designations;
 		if (!sciName.isEmpty())
 			designations.append(sciName);
@@ -126,12 +131,18 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if (!crossIndexData.isEmpty())
 			designations.append(crossIndexData);
 
+		if (!wdsSciName.isEmpty() && wdsSciName!=addSciName && wdsSciName!=sciName)
+			designations.append(wdsSciName);
+
 		const QString designationsList = designations.join(" - ");
 
 		if (flags&Name)
 		{
 			if (!commonNameI18.isEmpty())
 				oss << commonNameI18;
+
+			if (!additionalNameI18.isEmpty())
+				oss << " (" << additionalNameI18 << ")";
 
 			if (!commonNameI18.isEmpty() && !designationsList.isEmpty() && flags&CatalogNumber)
 				oss << "<br>";
@@ -168,14 +179,14 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 				varstartype = q_("variable star");
 		}
 
-		if (s->getComponentIds())
+		if (s->getComponentIds() || wdsObs>0)
 			startype = q_("double star");
 		else
 			startype = q_("star");
 
 		if (!varType.isEmpty())
 		{
-			if (s->getComponentIds())
+			if (s->getComponentIds() || wdsObs>0)
 				oss << q_("Type: <b>%1, %2</b>").arg(varstartype).arg(startype);
 			else
 				oss << q_("Type: <b>%1</b>").arg(varstartype);
@@ -262,6 +273,19 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 				oss << q_("Duration of eclipse: %1%").arg(vMm) << "<br />";
 			else
 				oss << q_("Rising time: %1%").arg(vMm) << "<br />";
+		}
+
+		if (wdsObs>0)
+		{
+			oss << QString("%1: %2").arg(q_("Year of last satisfactory observation")).arg(wdsObs) << "<br />";
+			oss << QString("%1: %2%3").arg(q_("Position angle")).arg(QString::number(wdsPA, 'f', 2)).arg(QChar(0x00B0)) << "<br />";
+			if (wdsSep>0.f) // A spectroscopic binary or not?
+			{
+				if (wdsSep>60.f) // A wide binary star?
+					oss << QString("%1: %2\" (%3)").arg(q_("Separation")).arg(QString::number(wdsSep, 'f', 3)).arg(StelUtils::decDegToDmsStr(wdsSep/3600.f)) << "<br />";
+				else
+					oss << QString("%1: %2\"").arg(q_("Separation")).arg(QString::number(wdsSep, 'f', 3)) << "<br />";
+			}
 		}
 	}
 

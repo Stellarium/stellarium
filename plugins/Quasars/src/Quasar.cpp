@@ -41,25 +41,28 @@ bool Quasar::distributionMode = false;
 Vec3f Quasar::markerColor = Vec3f(1.0f,0.5f,0.4f);
 
 Quasar::Quasar(const QVariantMap& map)
-		: initialized(false),
-		  designation(""),
-		  VMagnitude(21.),
-		  AMagnitude(21.),
-		  bV(0.),
-		  qRA(0.),
-		  qDE(0.),
-		  redshift(0.)
+	: initialized(false)
+	, designation("")
+	, VMagnitude(21.)
+	, AMagnitude(21.)
+	, bV(0.)
+	, qRA(0.)
+	, qDE(0.)
+	, redshift(0.)
 {
-	// return initialized if the mandatory fields are not present
-	if (!map.contains("designation"))
+	if (!map.contains("designation") || !map.contains("RA") || !map.contains("DE"))
+	{
+		qWarning() << "Quasar: INVALID quasar!" << map.value("designation").toString();
+		qWarning() << "Quasar: Please, check your 'quasars.json' catalog!";
 		return;
-		
+	}
+
 	designation  = map.value("designation").toString();
 	VMagnitude = map.value("Vmag").toFloat();
 	AMagnitude = map.value("Amag").toFloat();
 	bV = map.value("bV").toFloat();
 	qRA = StelUtils::getDecAngle(map.value("RA").toString());
-	qDE = StelUtils::getDecAngle(map.value("DE").toString());	
+	qDE = StelUtils::getDecAngle(map.value("DE").toString());
 	redshift = map.value("z").toFloat();
 
 	initialized = true;

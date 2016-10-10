@@ -73,6 +73,8 @@ SolarSystem::SolarSystem()
 	, flagTranslatedNames(false)
 	, flagIsolatedTrails(true)
 	, flagIsolatedOrbits(true)
+	, ephemerisMarkersDisplayed(true)
+	, ephemerisDatesDisplayed(false)
 	, allTrails(NULL)
 	, conf(StelApp::getInstance().getSettings())
 {
@@ -162,6 +164,9 @@ void SolarSystem::init()
 	setFlagIsolatedOrbits(conf->value("viewing/flag_isolated_orbits", true).toBool());
 	setFlagPermanentOrbits(conf->value("astro/flag_permanent_orbits", false).toBool());
 
+	setFlagEphemerisMarkers(conf->value("astro/flag_ephemeris_markers", true).toBool());
+	setFlagEphemerisDates(conf->value("astro/flag_ephemeris_dates", false).toBool());
+
 	// Settings for calculation of position of Great Red Spot on Jupiter
 	setFlagCustomGrsSettings(conf->value("astro/flag_grs_custom", false).toBool());
 	setCustomGrsLongitude(conf->value("astro/grs_longitude", 216).toInt());
@@ -171,7 +176,10 @@ void SolarSystem::init()
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
 	setLabelsColor(StelUtils::strToVec3f(conf->value("color/planet_names_color", defaultColor).toString()));
-	setOrbitsColor(StelUtils::strToVec3f(conf->value("color/planet_orbits_color", defaultColor).toString()));
+	setOrbitsColor(StelUtils::strToVec3f(conf->value("color/sso_orbits_color", defaultColor).toString()));
+	setPlanetsOrbitsColor(StelUtils::strToVec3f(conf->value("color/planet_orbits_color", defaultColor).toString()));
+	setAsteroidsOrbitsColor(StelUtils::strToVec3f(conf->value("color/asteroid_orbits_color", defaultColor).toString()));
+	setCometsOrbitsColor(StelUtils::strToVec3f(conf->value("color/comet_orbits_color", defaultColor).toString()));
 	setTrailsColor(StelUtils::strToVec3f(conf->value("color/object_trails_color", defaultColor).toString()));
 	setPointerColor(StelUtils::strToVec3f(conf->value("color/planet_pointers_color", "1.0,0.3,0.3").toString()));
 
@@ -1145,15 +1153,12 @@ void SolarSystem::draw(StelCore* core)
 		drawPointer(core);
 
 	// AstroCalcDialog
-	if (gui && gui->getAstroCalcVisible())
+	if (getFlagEphemerisMarkers())
 	{
 		StelProjectorP prj = core->getProjection(StelCore::FrameJ2000); // , StelCore::RefractionOff);
 		StelPainter sPainter(prj);
 
-		float size;
-
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_ONE, GL_ONE);
+		float size, shift;
 
 		for (int i =0; i< AstroCalcDialog::EphemerisListJ2000.count(); i++)
 		{
@@ -1175,8 +1180,18 @@ void SolarSystem::draw(StelCore* core)
 				size = 4.f;
 			}
 
+			glEnable(GL_BLEND);
+			sPainter.enableTexture2d(true);
+			glBlendFunc(GL_ONE, GL_ONE);
+
 			texCircle->bind();
-			sPainter.drawSprite2dMode(win[0], win[1], size);
+			sPainter.drawSprite2dMode(AstroCalcDialog::EphemerisListJ2000[i], size);
+
+			if (getFlagEphemerisDates())
+			{
+				shift = 3.f + size/1.6f;
+				sPainter.drawText(AstroCalcDialog::EphemerisListJ2000[i], AstroCalcDialog::EphemerisListDates[i], 0, shift, shift, false);
+			}
 		}
 	}
 }
@@ -1450,7 +1465,6 @@ void SolarSystem::update(double deltaTime)
 	}
 }
 
-
 // is a lunar eclipse close at hand?
 bool SolarSystem::nearLunarEclipse()
 {
@@ -1475,72 +1489,21 @@ bool SolarSystem::nearLunarEclipse()
 	return 1;
 }
 
-//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
-QStringList SolarSystem::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QStringList SolarSystem::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
-	if (maxNbItem==0)
-		return result;
-
-	QString sson;
-	bool find;
-	foreach (const PlanetP& p, systemPlanets)
+	if (inEnglish)
 	{
-		sson = p->getNameI18n();
-		find = false;
-		if (useStartOfWords)
+		foreach(const PlanetP& p, systemPlanets)
 		{
-			QString constw = sson.mid(0, objPrefix.size()).toUpper();
-			if (constw==objPrefix.toUpper())
-				find = true;
+			result << p->getEnglishName();
 		}
-		else
-		{
-			if (sson.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-
-		}
-		if (find)
-		{
-			result << sson;
-			if (result.size()==maxNbItem)
-				return result;
-		}
-
 	}
-	return result;
-}
-
-//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name
-QStringList SolarSystem::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
-{
-	QStringList result;
-	if (maxNbItem==0)
-		return result;
-
-	QString sson;
-	bool find;
-	foreach (const PlanetP& p, systemPlanets)
+	else
 	{
-		sson = p->getEnglishName();
-		find = false;
-		if (useStartOfWords)
+		foreach(const PlanetP& p, systemPlanets)
 		{
-			QString constw = sson.mid(0, objPrefix.size()).toUpper();
-			if (constw==objPrefix.toUpper())
-				find = true;
-		}
-		else
-		{
-			if (sson.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-
-		}
-		if (find)
-		{
-			result << sson;
-			if (result.size()==maxNbItem)
-				return result;
+			result << p->getNameI18n();
 		}
 	}
 	return result;
@@ -1594,6 +1557,36 @@ void SolarSystem::setFlagPlanets(bool b)
 bool SolarSystem::getFlagPlanets(void) const
 {
 	return flagShow;
+}
+
+void SolarSystem::setFlagEphemerisMarkers(bool b)
+{
+	if (b!=ephemerisMarkersDisplayed)
+	{
+		ephemerisMarkersDisplayed=b;
+		conf->setValue("astro/flag_ephemeris_markers", b); // Immediate saving of state
+		emit ephemerisMarkersChanged(b);
+	}
+}
+
+bool SolarSystem::getFlagEphemerisMarkers() const
+{
+	return ephemerisMarkersDisplayed;
+}
+
+void SolarSystem::setFlagEphemerisDates(bool b)
+{
+	if (b!=ephemerisDatesDisplayed)
+	{
+		ephemerisDatesDisplayed=b;
+		conf->setValue("astro/flag_ephemeris_dates", b); // Immediate saving of state
+		emit ephemerisDatesChanged(b);
+	}
+}
+
+bool SolarSystem::getFlagEphemerisDates() const
+{
+	return ephemerisDatesDisplayed;
 }
 
 void SolarSystem::setFlagNativeNames(bool b)
@@ -1666,12 +1659,56 @@ bool SolarSystem::getFlagIsolatedOrbits() const
 
 
 // Set/Get planets names color
-void SolarSystem::setLabelsColor(const Vec3f& c) {Planet::setLabelColor(c);}
-const Vec3f& SolarSystem::getLabelsColor(void) const {return Planet::getLabelColor();}
+void SolarSystem::setLabelsColor(const Vec3f& c)
+{
+	Planet::setLabelColor(c);
+}
+
+const Vec3f& SolarSystem::getLabelsColor(void) const
+{
+	return Planet::getLabelColor();
+}
 
 // Set/Get orbits lines color
-void SolarSystem::setOrbitsColor(const Vec3f& c) {Planet::setOrbitColor(c);}
-Vec3f SolarSystem::getOrbitsColor(void) const {return Planet::getOrbitColor();}
+void SolarSystem::setOrbitsColor(const Vec3f& c)
+{
+	Planet::setOrbitColor(c);
+}
+
+Vec3f SolarSystem::getOrbitsColor(void) const
+{
+	return Planet::getOrbitColor();
+}
+
+void SolarSystem::setPlanetsOrbitsColor(const Vec3f& c)
+{
+	Planet::setPlanetOrbitColor(c);
+}
+
+Vec3f SolarSystem::getPlanetsOrbitsColor(void) const
+{
+	return Planet::getPlanetOrbitColor();
+}
+
+void SolarSystem::setAsteroidsOrbitsColor(const Vec3f& c)
+{
+	Planet::setAsteroidOrbitColor(c);
+}
+
+Vec3f SolarSystem::getAsteroidsOrbitsColor(void) const
+{
+	return Planet::getAsteroidOrbitColor();
+}
+
+void SolarSystem::setCometsOrbitsColor(const Vec3f& c)
+{
+	Planet::setCometOrbitColor(c);
+}
+
+Vec3f SolarSystem::getCometsOrbitsColor(void) const
+{
+	return Planet::getCometOrbitColor();
+}
 
 // Set/Get if Moon display is scaled
 void SolarSystem::setFlagMoonScale(bool b)
@@ -1827,6 +1864,7 @@ void SolarSystem::setFlagCustomGrsSettings(bool b)
 	Planet::flagCustomGrsSettings=b;
 	// automatic saving of the setting
 	conf->setValue("astro/flag_grs_custom", b);
+	emit flagCustomGrsSettingsChanged(b);
 }
 
 bool SolarSystem::getFlagCustomGrsSettings()
@@ -1839,6 +1877,7 @@ void SolarSystem::setCustomGrsLongitude(int longitude)
 	Planet::customGrsLongitude = longitude;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_longitude", longitude);
+	emit customGrsLongitudeChanged(longitude);
 }
 
 int SolarSystem::getCustomGrsLongitude()
@@ -1851,6 +1890,7 @@ void SolarSystem::setCustomGrsDrift(double drift)
 	Planet::customGrsDrift = drift;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_drift", drift);
+	emit customGrsDriftChanged(drift);
 }
 
 double SolarSystem::getCustomGrsDrift()
@@ -1863,6 +1903,7 @@ void SolarSystem::setCustomGrsJD(double JD)
 	Planet::customGrsJD = JD;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_jd", JD);
+	emit customGrsJDChanged(JD);
 }
 
 double SolarSystem::getCustomGrsJD()

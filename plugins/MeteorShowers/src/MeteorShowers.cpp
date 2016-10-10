@@ -218,95 +218,30 @@ StelObjectP MeteorShowers::searchByNameI18n(const QString& nameI18n) const
 	return NULL;
 }
 
-QStringList MeteorShowers::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QStringList MeteorShowers::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
 	QStringList result;
-	if (!m_mgr->getEnablePlugin() || maxNbItem == 0)
+	if (!m_mgr->getEnablePlugin() || maxNbItem <= 0)
 	{
 		return result;
 	}
 
-	QString sn;
-	bool found = false;
 	foreach(const MeteorShowerP& ms, m_meteorShowers)
 	{
-		if (ms->enabled())
+		QString name = inEnglish ? ms->getEnglishName() : ms->getNameI18n();
+		if (!ms->enabled() || !matchObjectName(name, objPrefix, useStartOfWords))
 		{
-			sn = ms->getNameI18n();
-			if (useStartOfWords)
-			{
-				found = sn.toUpper().left(objPrefix.length()) == objPrefix.toUpper();
-			}
-			else
-			{
-				found = sn.contains(objPrefix, Qt::CaseInsensitive);
-			}
+			continue;
+		}
 
-			if (found)
-			{
-				result.append(sn);
-			}
+		result.append(name);
+		if (result.size() >= maxNbItem)
+		{
+			break;
 		}
 	}
 
 	result.sort();
-	if (result.size() > maxNbItem)
-	{
-		result.erase(result.begin() + maxNbItem, result.end());
-	}
-
-	return result;
-}
-
-QStringList MeteorShowers::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
-{
-	QStringList result;
-	if (!m_mgr->getEnablePlugin() || maxNbItem == 0)
-	{
-		return result;
-	}
-
-	QString sn;
-	bool found = false;
-	foreach(const MeteorShowerP& ms, m_meteorShowers)
-	{
-		if (ms->enabled())
-		{
-			sn = ms->getEnglishName();
-			if (useStartOfWords)
-			{
-				found = objPrefix.toUpper()==sn.toUpper().left(objPrefix.length());
-			}
-			else
-			{
-				found = sn.contains(objPrefix, Qt::CaseInsensitive);
-			}
-			if (found)
-			{
-				result.append(sn);
-			}
-
-			sn = ms->getDesignation();
-			if (useStartOfWords)
-			{
-				found = objPrefix.toUpper()==sn.toUpper().left(objPrefix.length());
-			}
-			else
-			{
-				found = sn.contains(objPrefix, Qt::CaseInsensitive);
-			}
-			if (found)
-			{
-				result.append(sn);
-			}
-		}
-	}
-
-	result.sort();
-	if (result.size() > maxNbItem)
-	{
-		result.erase(result.begin() + maxNbItem, result.end());
-	}
 	return result;
 }
 
