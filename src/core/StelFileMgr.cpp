@@ -89,7 +89,7 @@ void StelFileMgr::init()
 	#ifndef NDEBUG
 		QString path = QString(INSTALL_DATADIR) + QDir::separator() + CHECK_FILE;
 		QFileInfo checkFile(path);
-		QFileInfo installLocation(INSTALL_LOCALEDIR);
+		QFileInfo installLocation(QFile::decodeName(INSTALL_LOCALEDIR));
 	#elif defined(Q_OS_MAC)
 		QString relativePath = "/../Resources";
 		if (QCoreApplication::applicationDirPath().contains("src")) {
