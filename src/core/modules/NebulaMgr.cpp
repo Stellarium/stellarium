@@ -113,10 +113,10 @@ void NebulaMgr::setProtoplanetaryNebulaColor(const Vec3f& c) {Nebula::protoplane
 const Vec3f &NebulaMgr::getProtoplanetaryNebulaColor(void) const {return Nebula::protoplanetaryNebulaColor;}
 void NebulaMgr::setStarColor(const Vec3f& c) {Nebula::starColor = c;}
 const Vec3f &NebulaMgr::getStarColor(void) const {return Nebula::starColor;}
-void NebulaMgr::setCircleScale(float scale) {Nebula::circleScale = scale;}
-float NebulaMgr::getCircleScale(void) const {return Nebula::circleScale;}
 void NebulaMgr::setHintsProportional(const bool proportional) {if(Nebula::drawHintProportional!=proportional){ Nebula::drawHintProportional=proportional; emit hintsProportionalChanged(proportional);}}
 bool NebulaMgr::getHintsProportional(void) const {return Nebula::drawHintProportional;}
+void NebulaMgr::setDesignationUsage(const bool flag) {if(Nebula::designationUsage!=flag){ Nebula::designationUsage=flag; emit designationUsageChanged(flag);}}
+bool NebulaMgr::getDesignationUsage(void) const {return Nebula::designationUsage; }
 
 NebulaMgr::NebulaMgr(void)
 	: nebGrid(200)
@@ -171,8 +171,8 @@ void NebulaMgr::init()
 	setFlagHints(conf->value("astro/flag_nebula_name",false).toBool());
 	setHintsAmount(conf->value("astro/nebula_hints_amount", 3).toFloat());
 	setLabelsAmount(conf->value("astro/nebula_labels_amount", 3).toFloat());
-	setCircleScale(conf->value("astro/nebula_scale",1.0f).toFloat());	
 	setHintsProportional(conf->value("astro/flag_nebula_hints_proportional", false).toBool());
+	setDesignationUsage(conf->value("gui/flag_dso_designation_usage", false).toBool());
 	setFlagSurfaceBrightnessUsage(conf->value("astro/flag_surface_brightness_usage", false).toBool());
 
 	// Load colors from config file
@@ -383,7 +383,7 @@ struct DrawNebulaFuncObject
 		// filter out DSOs which are too dim to be seen (e.g. for bino observers)
 		if ((drawer->getFlagNebulaMagnitudeLimit()) && (n->vMag > drawer->getCustomNebulaMagnitudeLimit())) return;
 
-		if (n->majorAxisSize>angularSizeLimit || (checkMaxMagHints && n->vMag <= maxMagHints))
+		if (n->majorAxisSize>angularSizeLimit || n->majorAxisSize==0.f || (checkMaxMagHints && n->vMag <= maxMagHints))
 		{
 			float refmag_add=0; // value to adjust hints visibility threshold.
 			sPainter->getProjector()->project(n->XYZ,n->XY);
@@ -416,6 +416,8 @@ void NebulaMgr::setCatalogFilters(Nebula::CatalogGroup cflags)
 		setFlagShow(false);
 		loadNebulaSet("default");
 		setFlagShow(status);
+
+		updateI18n(); // OK, update localized names of DSO
 
 		emit catalogFiltersChanged(cflags);
 	}
@@ -553,7 +555,7 @@ NebulaP NebulaMgr::search(const QString& name)
 void NebulaMgr::loadNebulaSet(const QString& setName)
 {
 	QString srcCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.txt");
-	QString dsoCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.dat");	
+	QString dsoCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.dat");
 	QString dsoNamesPath		= StelFileMgr::findFile("nebulae/" + setName + "/names.dat");
 
 	if (flagConverter)
@@ -827,7 +829,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			dist			= list.at(14).toFloat(); // distance (Mpc for galaxies, kpc for other objects)
 			distErr			= list.at(15).toFloat(); // distance error (Mpc for galaxies, kpc for other objects)
 			// -----------------------------------------------
-			// cross-index data
+			// cross-identification data
 			// -----------------------------------------------
 			NGC			= list.at(16).toInt();	 // NGC number
 			IC			= list.at(17).toInt();	 // IC number
@@ -885,12 +887,12 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			       << "RNE" << "HII" << "SNR" << "BN" << "EN" << "SA" << "SC" << "CL" << "IG"
 			       << "RG" << "AGX" << "QSO" << "ISM" << "EMO" << "GNE" << "RAD" << "LIN"
 			       << "BLL" << "BLA" << "MOC" << "YSO" << "Q?" << "PN?" << "*" << "SFR"
-			       << "IR" << "**" << "MUL" << "PPN";
+			       << "IR" << "**" << "MUL" << "PPN" << "GIG";
 
 			switch (oTypes.indexOf(oType.toUpper()))
 			{
 				case 0:
-				case 1:
+				case 1:				
 					nType = (unsigned int)Nebula::NebGx;
 					break;
 				case 2:
@@ -939,6 +941,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 					nType = (unsigned int)Nebula::NebCl;
 					break;
 				case 17:
+				case 38:
 					nType = (unsigned int)Nebula::NebIGx;
 					break;
 				case 18:
@@ -1009,6 +1012,8 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 	if (!in.open(QIODevice::ReadOnly))
 		return false;
 
+	// TODO: Let's begin use gzipped data
+	// QDataStream ins(StelUtils::uncompress(in.readAll()));
 	QDataStream ins(&in);
 	ins.setVersion(QDataStream::Qt_5_2);
 
@@ -1525,14 +1530,17 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	return NULL;
 }
 
-
-//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
-QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+//! Find and return the list of at most maxNbItem objects auto-completing the passed object name
+QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
 	QStringList result;
-	if (maxNbItem==0) return result;
+	if (maxNbItem <= 0)
+	{
+		return result;
+	}
 
 	QString objw = objPrefix.toUpper();
+
 	// Search by Messier objects number (possible formats are "M31" or "M 31")
 	if (objw.size()>=1 && objw.left(1)=="M" && objw.left(3)!="MEL")
 	{
@@ -1610,7 +1618,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 			result << constw;
 	}
 
-	// Search by PGC objects number (possible formats are "PGC31" or "PGC 31")
+	// Search by PGC object numbers (possible formats are "PGC31" or "PGC 31")
 	if (objw.size()>=1 && objw.left(3)=="PGC")
 	{
 		foreach (const NebulaP& n, dsoArray)
@@ -1620,8 +1628,8 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 			QString constws = constw.mid(0, objw.size());
 			if (constws==objw)
 			{
-				result << constws;
-				continue;	// Prevent adding both forms for name
+				result << constws;	// Prevent adding both forms for name
+				continue;
 			}
 			constw = QString("PGC %1").arg(n->PGC_nb);
 			constws = constw.mid(0, objw.size());
@@ -1630,7 +1638,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 		}
 	}
 
-	// Search by UGC objects number (possible formats are "UGC31" or "UGC 31")
+	// Search by UGC object numbers (possible formats are "UGC31" or "UGC 31")
 	if (objw.size()>=1 && objw.left(3)=="UGC")
 	{
 		foreach (const NebulaP& n, dsoArray)
@@ -1830,367 +1838,20 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 		}
 	}
 
-	QString dson;
-	bool find;
 	// Search by common names
 	foreach (const NebulaP& n, dsoArray)
 	{
-		dson = n->nameI18;
-		find = false;
-		if (useStartOfWords)
+		QString name = inEnglish ? n->englishName : n->nameI18;
+		if (matchObjectName(name, objPrefix, useStartOfWords))
 		{
-			if (dson.mid(0, objw.size()).toUpper()==objw)
-				find = true;
-
-		}
-		else
-		{
-			if (dson.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-		}
-		if (find)
-			result << dson;
-	}
-
-	result.sort();	
-	if (maxNbItem > 0)
-	{
-		if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
-	}
-	return result;
-}
-
-//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name
-QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
-{
-	QStringList result;
-	if (maxNbItem==0) return result;
-
-	QString objw = objPrefix.toUpper();
-
-	// Search by Messier objects number (possible formats are "M31" or "M 31")
-	if (objw.size()>=1 && objw.left(1)=="M" && objw.left(2)!="ME")
-	{
-		foreach (const NebulaP& n, dsoArray)
-		{
-			if (n->M_nb==0) continue;
-			QString constw = QString("M%1").arg(n->M_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws==objw)
-			{
-				result << constws;
-				continue;	// Prevent adding both forms for name
-			}
-			constw = QString("M %1").arg(n->M_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws==objw)
-				result << constw;
+			result.append(name);
 		}
 	}
 
-	// Search by Melotte objects number (possible formats are "Mel31" or "Mel 31")
-	if (objw.size()>=1 && objw.left(3)=="MEL")
+	result.sort();
+	if (result.size() > maxNbItem)
 	{
-		foreach (const NebulaP& n, dsoArray)
-		{
-			if (n->Mel_nb==0) continue;
-			QString constw = QString("MEL%1").arg(n->Mel_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws==objw)
-			{
-				result << constws;
-				continue;	// Prevent adding both forms for name
-			}
-			constw = QString("MEL %1").arg(n->Mel_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws==objw)
-				result << constw;
-		}
-	}
-
-	// Search by IC objects number (possible formats are "IC466" or "IC 466")
-	if (objw.size()>=1 && objw.left(2)=="IC")
-	{
-		foreach (const NebulaP& n, dsoArray)
-		{
-			if (n->IC_nb==0) continue;
-			QString constw = QString("IC%1").arg(n->IC_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws==objw)
-			{
-				result << constws;
-				continue;	// Prevent adding both forms for name
-			}
-			constw = QString("IC %1").arg(n->IC_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws==objw)
-				result << constw;
-		}
-	}
-
-	// Search by NGC numbers (possible formats are "NGC31" or "NGC 31")
-	foreach (const NebulaP& n, dsoArray)
-	{
-		if (n->NGC_nb==0) continue;
-		QString constw = QString("NGC%1").arg(n->NGC_nb);
-		QString constws = constw.mid(0, objw.size());
-		if (constws==objw)
-		{
-			result << constws;
-			continue;
-		}
-		constw = QString("NGC %1").arg(n->NGC_nb);
-		constws = constw.mid(0, objw.size());
-		if (constws==objw)
-			result << constw;
-	}
-
-	// Search by PGC numbers (possible formats are "PGC31" or "PGC 31")
-	if (objw.size()>=1 && objw.left(3)=="PGC")
-	{
-		foreach (const NebulaP& n, dsoArray)
-		{
-			if (n->PGC_nb==0) continue;
-			QString constw = QString("PGC%1").arg(n->PGC_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws==objw)
-			{
-				result << constws;
-				continue;
-			}
-			constw = QString("PGC %1").arg(n->PGC_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws==objw)
-				result << constw;
-		}
-	}
-
-	// Search by UGC numbers (possible formats are "UGC31" or "UGC 31")
-	if (objw.size()>=1 && objw.left(3)=="UGC")
-	{
-		foreach (const NebulaP& n, dsoArray)
-		{
-			if (n->UGC_nb==0) continue;
-			QString constw = QString("UGC%1").arg(n->UGC_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws==objw)
-			{
-				result << constws;
-				continue;
-			}
-			constw = QString("UGC %1").arg(n->UGC_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws==objw)
-				result << constw;
-		}
-	}
-
-	// Search by Ced numbers (possible formats are "Ced31" or "Ced 31")
-	if (objw.size()>=1 && objw.left(3)=="CED")
-	{
-		foreach (const NebulaP& n, dsoArray)
-		{
-			if (n->Ced_nb==0) continue;
-			QString constw = QString("Ced%1").arg(n->Ced_nb.trimmed());
-			QString constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw.toUpper())
-			{
-				result << constws;
-				continue;
-			}
-			constw = QString("Ced %1").arg(n->Ced_nb.trimmed());
-			constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw.toUpper())
-				result << constw;
-		}
-	}
-
-	// Search by Caldwell objects number (possible formats are "C31" or "C 31")
-	if (objw.size()>=1 && objw.left(1)=="C" && objw.left(2)!="CR" && objw.left(2)!="CE")
-	{
-		foreach (const NebulaP& n, dsoArray)
-		{
-			if (n->C_nb==0) continue;
-			QString constw = QString("C%1").arg(n->C_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws==objw)
-			{
-				result << constws;
-				continue;	// Prevent adding both forms for name
-			}
-			constw = QString("C %1").arg(n->C_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws==objw)
-				result << constw;
-		}
-	}
-
-	// Search by Collinder objects number (possible formats are "Cr31" or "Cr 31")
-	if (objw.size()>=1 && objw.left(2)=="CR")
-	{
-		foreach (const NebulaP& n, dsoArray)
-		{
-			if (n->Cr_nb==0) continue;
-			QString constw = QString("CR%1").arg(n->Cr_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws==objw)
-			{
-				result << constws;
-				continue;	// Prevent adding both forms for name
-			}
-			constw = QString("CR %1").arg(n->Cr_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws==objw)
-				result << constw;
-		}
-	}
-
-	// Search by Barnard objects number (possible formats are "B31" or "B 31")
-	if (objw.size()>=1 && objw.left(1)=="B")
-	{
-		foreach (const NebulaP& n, dsoArray)
-		{
-			if (n->B_nb==0) continue;
-			QString constw = QString("B%1").arg(n->B_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws==objw)
-			{
-				result << constws;
-				continue;	// Prevent adding both forms for name
-			}
-			constw = QString("B %1").arg(n->B_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws==objw)
-				result << constw;
-		}
-	}
-
-	// Search by Sharpless objects number (possible formats are "Sh2-31" or "Sh 2-31")
-	if (objw.size()>=1 && objw.left(2)=="SH")
-	{
-		foreach (const NebulaP& n, dsoArray)
-		{
-			if (n->Sh2_nb==0) continue;
-			QString constw = QString("SH2-%1").arg(n->Sh2_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws==objw)
-			{
-				result << constws;
-				continue;	// Prevent adding both forms for name
-			}
-			constw = QString("SH 2-%1").arg(n->Sh2_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws==objw)
-				result << constw;
-		}
-	}
-
-	// Search by Van den Bergh objects number (possible formats are "VdB31" or "VdB 31")
-	if (objw.size()>=1 && objw.left(3)=="VDB")
-	{
-		foreach (const NebulaP& n, dsoArray)
-		{
-			if (n->VdB_nb==0) continue;
-			QString constw = QString("VDB%1").arg(n->VdB_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws==objw)
-			{
-				result << constws;
-				continue;	// Prevent adding both forms for name
-			}
-			constw = QString("VDB %1").arg(n->VdB_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws==objw)
-				result << constw;
-		}
-	}
-
-	// Search by RCW objects number (possible formats are "RCW31" or "RCW 31")
-	if (objw.size()>=1 && objw.left(3)=="RCW")
-	{
-		foreach (const NebulaP& n, dsoArray)
-		{
-			if (n->RCW_nb==0) continue;
-			QString constw = QString("RCW%1").arg(n->RCW_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws==objw)
-			{
-				result << constws;
-				continue;	// Prevent adding both forms for name
-			}
-			constw = QString("RCW %1").arg(n->RCW_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws==objw)
-				result << constw;
-		}
-	}
-
-	// Search by LDN objects number (possible formats are "LDN31" or "LDN 31")
-	if (objw.size()>=1 && objw.left(3)=="LDN")
-	{
-		foreach (const NebulaP& n, dsoArray)
-		{
-			if (n->LDN_nb==0) continue;
-			QString constw = QString("LDN%1").arg(n->LDN_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws==objw)
-			{
-				result << constws;
-				continue;	// Prevent adding both forms for name
-			}
-			constw = QString("LDN %1").arg(n->LDN_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws==objw)
-				result << constw;
-		}
-	}
-
-	// Search by LBN objects number (possible formats are "LBN31" or "LBN 31")
-	if (objw.size()>=1 && objw.left(3)=="LBN")
-	{
-		foreach (const NebulaP& n, dsoArray)
-		{
-			if (n->LBN_nb==0) continue;
-			QString constw = QString("LBN%1").arg(n->LBN_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws==objw)
-			{
-				result << constws;
-				continue;	// Prevent adding both forms for name
-			}
-			constw = QString("LBN %1").arg(n->LBN_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws==objw)
-				result << constw;
-		}
-	}
-
-	QString dson;
-	bool find;
-	// Search by common names
-	foreach (const NebulaP& n, dsoArray)
-	{
-		dson = n->englishName;
-		find = false;
-		if (useStartOfWords)
-		{
-			if (dson.mid(0, objw.size()).toUpper()==objw)
-				find = true;
-
-		}
-		else
-		{
-			if (dson.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-		}
-		if (find)
-			result << dson;
-	}
-
-	result.sort();	
-	if (maxNbItem > 0)
-	{
-		if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+		result.erase(result.begin() + maxNbItem, result.end());
 	}
 
 	return result;

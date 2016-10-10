@@ -131,10 +131,8 @@ public:
 	virtual QList<StelObjectP> searchAround(const Vec3d&, double, const StelCore*) const { return QList<StelObjectP>(); }
 	virtual StelObjectP searchByNameI18n(const QString&) const { return StelObjectP(); }
 	virtual StelObjectP searchByName(const QString&) const { return StelObjectP(); }
-	virtual QStringList listMatchingObjectsI18n(const QString&, int, bool) const { return QStringList(); }
-	virtual QStringList listMatchingObjects(const QString&, int, bool) const { return QStringList(); }
+	virtual QStringList listMatchingObjects(const QString&, int, bool, bool) const { return QStringList(); }
 	virtual QStringList listAllObjects(bool) const { return QStringList(); }
-	virtual QStringList listAllObjectsByType(const QString&, bool) const { return QStringList(); }
 	virtual QString getName() const { return QString(); }
 
 signals:

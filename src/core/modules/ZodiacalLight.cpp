@@ -100,7 +100,7 @@ void ZodiacalLight::update(double deltaTime)
 		Vec3d obsPos=core->getObserverHeliocentricEclipticPos();
 		// For solar-centered texture, take minus, else plus:
 		double solarLongitude=atan2(obsPos[1], obsPos[0]) - 0.5*M_PI;
-		Mat4d transMat=core->matVsop87ToJ2000 * Mat4d::zrotation(solarLongitude);
+		Mat4d transMat=StelCore::matVsop87ToJ2000 * Mat4d::zrotation(solarLongitude);
 		for (int i=0; i<eclipticalVertices.size(); ++i)
 		{
 			Vec3d tmp=eclipticalVertices.at(i);

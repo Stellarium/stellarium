@@ -143,7 +143,7 @@ On reasonably good hardware
 % models up to 100.000 triangles are fluent, up to 250.000 are still ``interactive''.  
 % we have 2015, and a much faster implementation!
 (tested on a notebook PC with NVidia M580 GTS), models with about
-500.000 triangles are fluent with shadows and bumpmaps.  On very small
+850.000 triangles are working nicely with shadows and bumpmaps.  On very small
 hardware like single-board computers with native OpenGL ES2, models
 may be limited to 64k vertices (points).  If display is too slow,
 switch to perspective projection: all other projections require almost
@@ -237,15 +237,18 @@ look.
 If possible, the model should also be triangulated, but the current loader may
 also work with non-triangle geometry. 
 %% TODO: GZ: Does that mean Quads, or higher-level polygons? 
-The correct use of objects (\parameter{o}) and
-groups (\parameter{g}) will improve performance: it is best if you pre-combine all objects
-that use the same material into a single one. The loader will try to optimize it
-anyways if this is not the case, but can do this only partly (to combine 2
-objects with the same material into 1, it requires them to follow directly after
-each other in the OBJ). A simple guide to use \program{Blender} for this task follows:
+The correct use of objects (\parameter{o}) and groups (\parameter{g})
+will improve performance: it is best if you pre-combine all objects
+that use the same material into a single one. The loader will try to
+optimize it anyways if this is not the case, but can do this only
+partly (to combine 2 objects with the same material into 1, it
+requires them to follow directly after each other in the OBJ). A
+simple guide to use
+\program{Blender}\footnote{\url{http://www.blender.org}} for this task
+follows:
 
 \begin{enumerate}
-\item \menu{File>Import>Wavefront .obj} - you may need to change the forward/up axes for correct orientation, try -Y for forward and Z for up
+\item \menu{File>Import>Wavefront .obj} - you may need to change the forward/up axes for correct orientation, try ``-Y forward'' and ``Z up''
 \item Select an object which has a shared material
 \item Press \key{\shift+L} and select 'By Material'
 \item Select 'Join' in the left (main) tool window
@@ -258,7 +261,7 @@ NOT need this), this recommendation does NOT hold: for optimal
 results, each separate transparent object should be exported as a
 separate ``OBJ object''. This is because they need to be sorted during
 rendering to achieve correct transparency. If the objects are combined
-already, you can separate them using Blender:
+already, you can separate them using \program{Blender}:
 
 \begin{enumerate}
 \item Import .obj (see above)
@@ -284,6 +287,7 @@ already, you can separate them using Blender:
 \parameter{map\_Kd}       & (none)      & filename       & texture map to be mixed with Ka, Kd \\
 \parameter{map\_Ke}       & (none)      & filename       & texture map to be mixed with Ke \\
 \parameter{map\_bump}     & (none)      & filename       & normal map for surface roughness\\  
+\parameter{illum}         & 2           & integer        & illumination mode in the standard MTL format. \\
 \bottomrule
 \end{tabular}
 \caption{MTL parameters evaluated}
@@ -308,7 +312,14 @@ using the Phong reflection
 model\footnote{\url{https://en.wikipedia.org/wiki/Phong_reflection_model}}
 with \parameter{Ns} as the exponential shininess constant. Larger
 shininess means smaller specular highlights (more metal-like
-appearance). Specularity is not modulated by the texture maps.
+appearance). Specularity is not modulated by the texture
+maps. Unfortunately, some 3D editors export unusable default value
+combinations for \parameter{Ks} and \parameter{Ns}. \program{Blender}
+may create lines with \parameter{Ks}=1/1/1 and \parameter{Ns}=0. This
+creates a look of ``partial overexposed snow fields''. While the
+values are allowed in the specification, in most cases the result
+looks ugly. \emph{Make sure to set \parameter{Ns} to 1 or higher, or
+  disable those two lines.}
 
 If a value for \parameter{d} or \parameter{Tr} exists, alpha blending is enabled for this
 material. This simulates transparency effects. Transparency can be further
@@ -508,9 +519,11 @@ vertices, you will hit numerical problems with the usual
 single-precision floating point arithmetic. Therefore we can specify
 this offset which is only necessary for coordinate display.
 
-Typically, digital elevation models and building structures built on those are
-survey-grid aligned, so true geographical north will not coincide with grid
-north, the difference is known as \indexterm{meridian convergence}\footnote{%
+Typically, digital elevation models and building structures built on
+those are survey-grid aligned, so true geographical north for a place
+with geographical longitude $\lambda$ and latitude $\varphi$ will in
+general not coincide with grid north, the difference is known as
+\indexterm{meridian convergence}\footnote{%
   \url{http://en.wikipedia.org/wiki/Transverse_Mercator_projection}}.
 \begin{equation}
 \gamma(\lambda, \varphi)=\arctan(\tan(\lambda-\lambda_0)\sin\varphi)
@@ -527,8 +540,8 @@ grid_meridian=<double>|+<int>d<int>'<float>"
 \end{configfile}
 
 \noindent \texttt{grid\_meridian} is the central meridian $\lambda_0$ of grid
-zone, e.g.\ for UTM or Gauss-Kr\"uger, is only required to compute
-convergence angle if \texttt{convergence\_angle=from\_grid}
+zone, e.g.\ for UTM or Gauss-Kr\"uger, and is only required to compute
+convergence angle if \texttt{convergence\_angle=from\_grid}.
 
 
 
@@ -564,14 +577,32 @@ corridors (temple axes, \ldots).
 
 Some automated workflows may involve tiled landscape areas, e.g. to
 overcome texture limitations or triangle count limits in simpler tools
-like \program{Sketchup}. In this case you can create separate meshes in the same
-coordinate system, but you need to concatenate them. in \program{Blender}, import
-the OBJ files \menu{File>Import>Wavefront .obj}, select them and press
-\key{\ctrl+J} to join them, then export to a single OBJ
-\menu{File>Export>Wavefront .obj}%
+like \program{Sketchup}. In this case you can create separate meshes
+in the same coordinate system, but you need to concatenate them. One
+powerful program to assemble your parts is again \program{Blender}.
+
+In \program{Blender}, import the OBJ files \menu{File>Import>Wavefront
+  .obj}. If your OBJ coordinates have Z as vertical axis (common for
+terrestrial models), use ``Z up'', ``-Y Forward'' as import settings
+for the coordinate axes. The model will appear south-up.  Switch on
+textured view if required (\keys{\Alt+Z}). If the scene looks almost
+black now, reconfigure the light to be sunlight. If you have created a
+VRML of some structures in \program{ArcScene}, export that without
+shifting to center, and import the WRL file in \program{Blender} with
+default orientation ``Y up'', ``Z forward''. Models from other sources
+may still be different. In the end, all parts should fit neatly
+together. \program{Blender} is a very powerful program, you can
+enhance your model as you wish.
+
+In the end, select all relevant parts which you want to have visible
+in Stellarium (click on the lines in the outline view containing the
+object names to light them up gray, then Rightclick-Select) and press
+\key{\ctrl+J} to optionally join them, then export to a single OBJ
+\menu{File>Export>Wavefront .obj}. In the export options, apply
+``Selection Only'', and ``-Y Forward'' and ``Z Up''%
 \footnote{http://blender.stackexchange.com/questions/3352/merging-multiple-obj-files}.
 
-Verify the new model loads correctly, e.g.\ in \program{Meshlab}\footnote{\url{www.meshlab.org}}!
+Verify the new model loads correctly, e.g.\ in \program{Meshlab}\footnote{\url{http://www.meshlab.org}}!
 
 \subsection{Working with non-georeferenced OBJ files}
 \label{sec:scenery3d:NonGeoreferenced}

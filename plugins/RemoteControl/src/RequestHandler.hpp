@@ -70,7 +70,7 @@ public slots:
 	void setPassword(const QString& pw);
 
 private slots:
-	void refreshHtmlTemplate();
+	void refreshTemplates();
 
 private:
 	//Contains the translated templates loaded from the file "translate_files" in the webroot folder
@@ -81,6 +81,7 @@ private:
 	QByteArray passwordReply;
 	APIController* apiController;
 	StaticFileController* staticFiles;
+	QMutex templateMutex;
 
 	static const QByteArray AUTH_REALM;
 };

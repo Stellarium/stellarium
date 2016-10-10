@@ -55,6 +55,8 @@ const Mat4d StelCore::matJ2000ToVsop87(Mat4d::xrotation(-23.4392803055555555556*
 const Mat4d StelCore::matVsop87ToJ2000(matJ2000ToVsop87.transpose());
 const Mat4d StelCore::matJ2000ToGalactic(-0.054875539726, 0.494109453312, -0.867666135858, 0, -0.873437108010, -0.444829589425, -0.198076386122, 0, -0.483834985808, 0.746982251810, 0.455983795705, 0, 0, 0, 0, 1);
 const Mat4d StelCore::matGalacticToJ2000(matJ2000ToGalactic.transpose());
+const Mat4d StelCore::matJ2000ToSupergalactic(0.37501548, -0.89832046, 0.22887497, 0, 0.34135896, -0.09572714, -0.93504565, 0, 0.86188018, 0.42878511, 0.27075058, 0, 0, 0, 0, 1);
+const Mat4d StelCore::matSupergalacticToJ2000(matJ2000ToSupergalactic.transpose());
 
 const double StelCore::JD_SECOND=0.000011574074074074074074; // 1/(24*60*60)=1/86400
 const double StelCore::JD_MINUTE=0.00069444444444444444444;  // 1/(24*60)   =1/1440
@@ -230,10 +232,13 @@ void StelCore::init()
 	actionsMgr->addAction("actionDecrease_Time_Speed_Less", timeGroup, N_("Decrease time speed (a little)"), this, "decreaseTimeSpeedLess()", "Shift+J");
 	actionsMgr->addAction("actionSet_Real_Time_Speed", timeGroup, N_("Set normal time rate"), this, "toggleRealTimeSpeed()", "K");
 	actionsMgr->addAction("actionSet_Time_Rate_Zero", timeGroup, N_("Set time rate to zero"), this, "setZeroTimeSpeed()", "7");
+	actionsMgr->addAction("actionSet_Time_Reverse", timeGroup, N_("Set reverse time direction"), this, "revertTimeDirection()", "0");
 	actionsMgr->addAction("actionReturn_To_Current_Time", timeGroup, N_("Set time to now"), this, "setTimeNow()", "8");
+	actionsMgr->addAction("actionAdd_Solar_Minute", timeGroup, N_("Add 1 solar minute"), this, "addMinute()");
 	actionsMgr->addAction("actionAdd_Solar_Hour", timeGroup, N_("Add 1 solar hour"), this, "addHour()", "Ctrl+=");
 	actionsMgr->addAction("actionAdd_Solar_Day", timeGroup, N_("Add 1 solar day"), this, "addDay()", "=");
 	actionsMgr->addAction("actionAdd_Solar_Week", timeGroup, N_("Add 7 solar days"), this, "addWeek()", "]");
+	actionsMgr->addAction("actionSubtract_Solar_Minute", timeGroup, N_("Subtract 1 solar minute"), this, "subtractMinute()");
 	actionsMgr->addAction("actionSubtract_Solar_Hour", timeGroup, N_("Subtract 1 solar hour"), this, "subtractHour()", "Ctrl+-");
 	actionsMgr->addAction("actionSubtract_Solar_Day", timeGroup, N_("Subtract 1 solar day"), this, "subtractDay()", "-");
 	actionsMgr->addAction("actionSubtract_Solar_Week", timeGroup, N_("Subtract 7 solar days"), this, "subtractWeek()", "[");
@@ -371,7 +376,9 @@ StelProjectorP StelCore::getProjection(FrameType frameType, RefractionMode refra
 		case FrameJ2000:
 			return getProjection(getJ2000ModelViewTransform(refractionMode));
 		case FrameGalactic:
-			 return getProjection(getGalacticModelViewTransform(refractionMode));
+			return getProjection(getGalacticModelViewTransform(refractionMode));
+		case FrameSupergalactic:
+			return getProjection(getSupergalacticModelViewTransform(refractionMode));
 		default:
 			qDebug() << "Unknown reference frame type: " << (int)frameType << ".";
 	}
@@ -717,6 +724,11 @@ Vec3d StelCore::galacticToJ2000(const Vec3d& v) const
 	return matGalacticToJ2000*v;
 }
 
+Vec3d StelCore::supergalacticToJ2000(const Vec3d& v) const
+{
+	return matSupergalacticToJ2000*v;
+}
+
 Vec3d StelCore::equinoxEquToJ2000(const Vec3d& v) const
 {
 	return matEquinoxEquToJ2000*v;
@@ -730,6 +742,11 @@ Vec3d StelCore::j2000ToEquinoxEqu(const Vec3d& v) const
 Vec3d StelCore::j2000ToGalactic(const Vec3d& v) const
 {
 	return matJ2000ToGalactic*v;
+}
+
+Vec3d StelCore::j2000ToSupergalactic(const Vec3d& v) const
+{
+	return matJ2000ToSupergalactic*v;
 }
 
 //! Transform vector from heliocentric ecliptic coordinate to altazimuthal
@@ -842,6 +859,18 @@ StelProjector::ModelViewTranformP StelCore::getGalacticModelViewTransform(Refrac
 	Refraction* refr = new Refraction(skyDrawer->getRefraction());
 	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
 	refr->setPreTransfoMat(matEquinoxEquToAltAz*matJ2000ToEquinoxEqu*matGalacticToJ2000);
+	refr->setPostTransfoMat(matAltAzModelView);
+	return StelProjector::ModelViewTranformP(refr);
+}
+
+//! Get the modelview matrix for observer-centric Supergalactic equatorial drawing
+StelProjector::ModelViewTranformP StelCore::getSupergalacticModelViewTransform(RefractionMode refMode) const
+{
+	if (refMode==RefractionOff || skyDrawer==NULL || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matEquinoxEquToAltAz*matJ2000ToEquinoxEqu*matSupergalacticToJ2000));
+	Refraction* refr = new Refraction(skyDrawer->getRefraction());
+	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
+	refr->setPreTransfoMat(matEquinoxEquToAltAz*matJ2000ToEquinoxEqu*matSupergalacticToJ2000);
 	refr->setPostTransfoMat(matAltAzModelView);
 	return StelProjector::ModelViewTranformP(refr);
 }
@@ -1019,6 +1048,11 @@ double StelCore::getTimeRate() const
 	return timeSpeed;
 }
 
+void StelCore::revertTimeDirection(void)
+{
+	setTimeRate(-1*getTimeRate());
+}
+
 void StelCore::moveObserverToSelected()
 {
 	StelObjectMgr* objmgr = GETSTELMODULE(StelObjectMgr);
@@ -1038,7 +1072,7 @@ void StelCore::moveObserverToSelected()
 				moveObserverTo(loc);
 
 				LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
-				if (pl->getEnglishName() == "Solar System Observer")
+				if (pl->getEnglishName().contains("Observer", Qt::CaseInsensitive))
 				{
 					landscapeMgr->setFlagAtmosphere(false);
 					landscapeMgr->setFlagFog(false);
@@ -1158,6 +1192,11 @@ void StelCore::setPresetSkyTime(QDateTime dateTime)
 	setPresetSkyTime(StelUtils::qDateTimeToJd(dateTime));
 }
 
+void StelCore::addMinute()
+{
+	addSolarDays(JD_MINUTE);
+}
+
 void StelCore::addHour()
 {
 	addSolarDays(JD_HOUR);
@@ -1182,7 +1221,7 @@ void StelCore::addSiderealYear()
 {
 	double days = 365.256363004;
 	const PlanetP& home = position->getHomePlanet();
-	if ((home->getEnglishName() != "Solar System Observer") && (home->getSiderealPeriod()>0))
+	if (!home->getEnglishName().contains("Observer", Qt::CaseInsensitive) && (home->getSiderealPeriod()>0))
 		days = home->getSiderealPeriod();
 
 	addSolarDays(days);
@@ -1192,7 +1231,7 @@ void StelCore::addSiderealYears(float n)
 {
 	double days = 365.256363004;
 	const PlanetP& home = position->getHomePlanet();
-	if ((home->getEnglishName() != "Solar System Observer") && (home->getSiderealPeriod()>0))
+	if (!home->getEnglishName().contains("Observer", Qt::CaseInsensitive) && (home->getSiderealPeriod()>0))
 		days = home->getSiderealPeriod();
 
 	addSolarDays(days*n);
@@ -1265,6 +1304,11 @@ void StelCore::addJulianYears(float n)
 	addSolarDays(365.25*n);
 }
 
+void StelCore::subtractMinute()
+{
+	addSolarDays(-JD_MINUTE);
+}
+
 void StelCore::subtractHour()
 {
 	addSolarDays(-JD_HOUR);
@@ -1289,7 +1333,7 @@ void StelCore::subtractSiderealYear()
 {
 	double days = 365.256363004;
 	const PlanetP& home = position->getHomePlanet();
-	if ((home->getEnglishName() != "Solar System Observer") && (home->getSiderealPeriod()>0))
+	if (!home->getEnglishName().contains("Observer", Qt::CaseInsensitive) && (home->getSiderealPeriod()>0))
 		days = home->getSiderealPeriod();
 
 	addSolarDays(-days);
@@ -1299,7 +1343,7 @@ void StelCore::subtractSiderealYears(float n)
 {
 	double days = 365.256363004;
 	const PlanetP& home = position->getHomePlanet();
-	if ((home->getEnglishName() != "Solar System Observer") && (home->getSiderealPeriod()>0))
+	if (!home->getEnglishName().contains("Observer", Qt::CaseInsensitive) && (home->getSiderealPeriod()>0))
 		days = home->getSiderealPeriod();
 
 	addSolarDays(-days*n);
@@ -1375,7 +1419,7 @@ void StelCore::subtractJulianYears(float n)
 void StelCore::addSolarDays(double d)
 {
 	const PlanetP& home = position->getHomePlanet();
-	if (home->getEnglishName() != "Solar System Observer")	
+	if (!home->getEnglishName().contains("Observer", Qt::CaseInsensitive))
 		d *= home->getMeanSolarDay();
 
 	setJD(getJD() + d);
@@ -1384,7 +1428,7 @@ void StelCore::addSolarDays(double d)
 void StelCore::addSiderealDays(double d)
 {
 	const PlanetP& home = position->getHomePlanet();
-	if (home->getEnglishName() != "Solar System Observer")
+	if (!home->getEnglishName().contains("Observer", Qt::CaseInsensitive))
 		d *= home->getSiderealDay();
 	setJD(getJD() + d);
 }
@@ -1506,7 +1550,8 @@ void StelCore::updateTime(double deltaTime)
 		delete position;
 		position = newObs;
 	}
-	position->update(deltaTime);
+	if (position->update(deltaTime))
+		emit(locationChanged(getCurrentLocation()));
 
 	// Position of sun and all the satellites (ie planets)
 	// GZ maybe setting this static can speedup a bit?
@@ -1540,12 +1585,12 @@ void StelCore::registerMathMetaTypes()
 	qRegisterMetaType<Mat3d>();
 	qRegisterMetaType<Mat3f>();
 
-    //for debugging QVariants with these types, it helps if we register the string converters
-    QMetaType::registerConverter(&Vec3d::toString);
-    QMetaType::registerConverter(&Vec3f::toString);
-    QMetaType::registerConverter(&Vec4d::toString);
-    QMetaType::registerConverter(&Vec4f::toString);
-    QMetaType::registerConverter(&Vec4i::toString);
+	//for debugging QVariants with these types, it helps if we register the string converters
+	QMetaType::registerConverter(&Vec3d::toString);
+	QMetaType::registerConverter(&Vec3f::toString);
+	QMetaType::registerConverter(&Vec4d::toString);
+	QMetaType::registerConverter(&Vec4f::toString);
+	QMetaType::registerConverter(&Vec4i::toString);
 }
 
 void StelCore::setStartupTimeMode(const QString& s)
@@ -2105,7 +2150,7 @@ void StelCore::initEphemeridesFunctions()
 		qDebug() << "DE430 at: " << de430FilePath;
 		EphemWrapper::init_de430(de430FilePath.toStdString().c_str());
 	}
-	setDe430Active(de430Available && conf->value("astro/flag_use_de430").toBool());
+	setDe430Active(de430Available && conf->value("astro/flag_use_de430", false).toBool());
 
 	//<-- DE431 -->
 	if(de431ConfigPath.remove(QChar('"')).isEmpty())
@@ -2119,5 +2164,5 @@ void StelCore::initEphemeridesFunctions()
 		qDebug() << "DE431 at: " << de431FilePath;
 		EphemWrapper::init_de431(de431FilePath.toStdString().c_str());
 	}
-	setDe431Active(de431Available && conf->value("astro/flag_use_de431").toBool());
+	setDe431Active(de431Available && conf->value("astro/flag_use_de431", false).toBool());
 }

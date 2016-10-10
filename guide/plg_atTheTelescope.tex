@@ -379,7 +379,7 @@ StellariumScope is a free add-on that enables you to control your telescope with
   control computer that hosts the telescope driver.
 \item The installation program will automatically install the
   documentation, but the link to the documentation is provided
-  here\footnote{WHERE?} so you can read it before installation.
+  by developer\footnote{StellariumScope User's Guide --- \url{http://welshdragoncomputing.ca/x/st/misc/stellariumscope_user_guide.2015.10.24.pdf}} so you can read it before installation.
 \item There are earlier releases still available on the downloads page on
   Welsh Dragon Computing site.
 \end{itemize}
@@ -397,12 +397,6 @@ Figure~\ref{fig:StellariumScopeFullWindow} shows the interface and
 some of the options.  Use this application (like all software that
 controls your mount) with supervision of your mount's movements.
 
-\subsection{Configure StellariumScope}
-\label{sec:plugins:StellariumScope:configure}
-TODO...
-\subsection{Download StellariumScope}
-TODO...
-
 \section{Other telescope servers and Stellarium}
 \label{sec:plugins:TelescopeControl:Other}
 
@@ -419,6 +413,26 @@ A few examples:
 \item[iTelescope] \url{http://simonbox.info/index.php/astronomy/93-raspberry-pi-itelescope}
 \item[node-telescope-server] \url{https://www.npmjs.com/package/node-telescope-server}
 \end{description}
+
+One anonymous user sent a troubleshooting solution when connecting Stellarium to the Celestron \program{NexRemote} software:
+\begin{quote}
+  This involves connecting Stellarium to the \program{NexRemote} software controlling a Celestron NexStar telescope.
+
+  One tricky Window XP issue I fixed was that my older laptop would
+  transiently lose connection with Stellarium although the status
+  would still be ``Connected'' and all looked normal.
+
+  3 (or whatever) slews would work. Next -- nothing. Although all
+  seemed well.
+
+  I boosted the \emph{NexRemote.exe} process in Windows XP to \emph{High} under
+  \emph{Set Priority} under the \program{Windows Task Manager} via
+  \key{\ctrl+\Alt+Del}.
+
+  All slews now proceed normally. Problem went
+  away.\footnote{\url{https://sourceforge.net/p/stellarium/discussion/278769/thread/16e4c054/?limit=25\#8ffa}}
+\end{quote}
+
 
 \newpage
 \section{Observability Plugin}

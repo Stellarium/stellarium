@@ -120,6 +120,8 @@ public:
     */
     Template(QFile& file, QTextCodec* textCodec = NULL);
 
+    virtual ~Template() { }
+
     /**
       Replace a variable by the given value.
       Affects tags with the syntax

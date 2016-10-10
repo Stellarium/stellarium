@@ -30,8 +30,12 @@
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
 #include "Planet.hpp"
+#include "SolarSystem.hpp"
+#include "Nebula.hpp"
+#include "NebulaMgr.hpp"
 
 class Ui_astroCalcDialogForm;
+class QListWidgetItem;
 
 class AstroCalcDialog : public StelDialog
 {
@@ -57,6 +61,7 @@ public:
 		EphemerisRA,		//! right ascension
 		EphemerisDec,		//! declination
 		EphemerisMagnitude,	//! magnitude
+		EphemerisVMagnitude,	//! visible magnitude
 		EphemerisCount		//! total number of columns
 	};
 
@@ -74,7 +79,11 @@ public:
 	AstroCalcDialog(QObject* parent);
 	virtual ~AstroCalcDialog();
 
+	//! Notify that the application style changed
+	void styleChanged();
+
 	static QVector<Vec3d> EphemerisListJ2000;
+	static QVector<QString> EphemerisListDates;
 	static int DisplayedPositionIndex;
 
 public slots:
@@ -95,14 +104,19 @@ private slots:
 	void generateEphemeris();
 	void cleanupEphemeris();
 	void selectCurrentEphemeride(const QModelIndex &modelIndex);
+	void saveEphemeris();
 
 	//! Calculate phenomena for selected celestial body and fill the list.
 	void calculatePhenomena();
 	void selectCurrentPhenomen(const QModelIndex &modelIndex);
+	void savePhenomena();
+
+	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 
 private:
 	class StelCore* core;
 	class SolarSystem* solarSystem;
+	class NebulaMgr* dsoMgr;
 	class StelObjectMgr* objectMgr;
 
 	//! Update header names for planetary positions table
@@ -131,14 +145,22 @@ private:
 	//! Populates the drop-down list of groups of celestial bodies.
 	void populateGroupCelestialBodyList();
 
-	//! Calculation conjuctions and oppositions.
+	//! Calculation conjunctions and oppositions.
 	//! @note Ported from KStars, should be improved, because this feature calculate
 	//! angular separation ("conjunction" defined as equality of right ascension
 	//! of two body) and current solution is not accurate and slow.
-	QMap<double, double> findClosestApproach(PlanetP& object1, PlanetP& object2, double startJD, double stopJD, float maxSeparation, bool opposition);
+	QMap<double, double> findClosestApproach(PlanetP& object1, PlanetP& object2, double startJD, double stopJD, double maxSeparation, bool opposition);
 	double findDistance(double JD, PlanetP object1, PlanetP object2, bool opposition);
 	bool findPrecise(QPair<double, double>* out, PlanetP object1, PlanetP object2, double JD, double step, int prevSign, bool opposition);
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, bool opposition);
+
+	QMap<double, double> findClosestApproach(PlanetP& object1, NebulaP& object2, double startJD, double stopJD, double maxSeparation);
+	double findDistance(double JD, PlanetP object1, NebulaP object2);
+	bool findPrecise(QPair<double, double>* out, PlanetP object1, NebulaP object2, double JD, double step, int prevSign);
+	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const NebulaP object2);
+
+	QString delimiter, acEndl;
+	QStringList ephemerisHeader, phenomenaHeader, planetaryPositionsHeader;
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug

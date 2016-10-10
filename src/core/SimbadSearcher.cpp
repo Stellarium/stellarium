@@ -25,7 +25,11 @@
 #include <QDebug>
 #include <QTimer>
 
-SimbadLookupReply::SimbadLookupReply(const QString& aurl, QNetworkAccessManager* anetMgr, int delayMs) : url(aurl), reply(NULL), netMgr(anetMgr), currentStatus(SimbadLookupQuerying)
+SimbadLookupReply::SimbadLookupReply(const QString& aurl, QNetworkAccessManager* anetMgr, int delayMs)
+	: url(aurl)
+	, reply(NULL)
+	, netMgr(anetMgr)
+	, currentStatus(SimbadLookupQuerying)
 {
 	if(delayMs <= 0)
 		delayTimerCompleted();
@@ -129,6 +133,7 @@ void SimbadLookupReply::httpQueryFinished()
 				line = reply->readLine();
 				line.chop(1); // Remove a line break at the end
 				line.replace("NAME " ,"");
+				line.replace("  ", " "); // Remove double spaces
 				resultPositions[line]=v;
 			}
 			line = reply->readLine();

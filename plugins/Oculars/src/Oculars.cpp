@@ -40,6 +40,8 @@
 #include "StelTranslator.hpp"
 #include "SolarSystem.hpp"
 #include "StelUtils.hpp"
+#include "StelPropertyMgr.hpp"
+#include "LandscapeMgr.hpp"
 
 #include <QAction>
 #include <QDebug>
@@ -104,15 +106,31 @@ Oculars::Oculars():
 	usageMessageLabelID(-1),
 	flagAzimuthalGrid(false),
 	flagGalacticGrid(false),
-	flagEquatorGrid(false),
+	flagSupergalacticGrid(false),
 	flagEquatorJ2000Grid(false),
+	flagEquatorGrid(false),
+	flagEquatorJ2000Line(false),
 	flagEquatorLine(false),
+	flagEclipticJ2000Line(false),
 	flagEclipticLine(false),
 	flagEclipticJ2000Grid(false),
+	flagEclipticGrid(false),
 	flagMeridianLine(false),
 	flagLongitudeLine(false),
 	flagHorizonLine(false),
 	flagGalacticEquatorLine(false),
+	flagSupergalacticEquatorLine(false),
+	flagPrimeVerticalLine(false),
+	flagColureLines(false),
+	flagCircumpolarCircles(false),
+	flagPrecessionCircles(false),
+	flagCardinalPoints(false),
+	flagCelestialJ2000Poles(false),
+	flagCelestialPoles(false),
+	flagZenithNadirPoints(false),
+	flagEclipticJ2000Poles(false),
+	flagEclipticPoles(false),
+	flagGalacticPoles(false),
 	flagAdaptation(false),
 	flagLimitStars(false),
 	magLimitStars(0.0),
@@ -130,6 +148,7 @@ Oculars::Oculars():
 	guiPanelEnabled(false),
 	flagDecimalDegrees(false),
 	flagSemiTransporency(false),
+	flagHideGridsLines(false),
 	flipVert(false),
 	flipHorz(false),
 	ccdRotationSignalMapper(0),
@@ -157,7 +176,8 @@ Oculars::Oculars():
 	actualFOV(0),
 	initialFOV(0),
 	flagInitFOVUsage(false),
-	flagUseFlipForCCD(false),
+	flagAutosetMountForCCD(false),
+	equatorialMountEnabled(false),
 	reticleRotation(0)
 {
 	// Font size is 14
@@ -651,8 +671,12 @@ void Oculars::init()
 		setFlagDecimalDegrees(settings->value("use_decimal_degrees", false).toBool());
 		setFlagLimitMagnitude(settings->value("limit_stellar_magnitude", true).toBool());
 		setFlagInitFovUsage(settings->value("use_initial_fov", false).toBool());
-		setFlagUseFlipForCCD(settings->value("use_ccd_flip", false).toBool());
-		setFlagUseSemiTransparency(settings->value("use_semi_transparency", false).toBool());		
+		setFlagUseSemiTransparency(settings->value("use_semi_transparency", false).toBool());
+		setFlagHideGridsLines(settings->value("hide_grids_and_lines", true).toBool());
+		setFlagAutosetMountForCCD(settings->value("use_mount_autoset", false).toBool());
+
+		StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
+		equatorialMountEnabled = propMgr->getStelPropertyValue("actionSwitch_Equatorial_Mount").toBool();
 	}
 	catch (std::runtime_error& e)
 	{
@@ -939,9 +963,9 @@ void Oculars::enableOcular(bool enableOcularMode)
 			QFontMetrics metrics(font);
 			QString labelText = q_("Please select an object before switching to ocular view.");
 			StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
-			int xPosition = projectorParams.viewportCenter[0];
+			int xPosition = projectorParams.viewportCenter[0] + projectorParams.viewportCenterOffset[0];
 			xPosition = xPosition - 0.5 * (metrics.width(labelText));
-			int yPosition = projectorParams.viewportCenter[1];
+			int yPosition = projectorParams.viewportCenter[1] + projectorParams.viewportCenterOffset[1];
 			yPosition = yPosition - 0.5 * (metrics.height());
 			const char *tcolor = "#99FF99";
 			usageMessageLabelID = labelManager->labelScreen(labelText, xPosition, yPosition,
@@ -1035,7 +1059,7 @@ void Oculars::displayPopupMenu()
 	QMenu * popup = new QMenu(&StelMainView::getInstance());
 	StelGui * gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
-	qDebug() <<this->getModuleStyleSheet(gui->getStelStyle()).qtStyleSheet;
+	//qDebug() << "[Oculars]" << this->getModuleStyleSheet(gui->getStelStyle()).qtStyleSheet;
 	popup->setStyleSheet(this->getModuleStyleSheet(gui->getStelStyle()).qtStyleSheet);
 
 	if (flagShowOculars)
@@ -1365,7 +1389,8 @@ void Oculars::toggleCCD(bool show)
 		initialFOV = movementManager->getCurrentFov();
 		//Mutually exclusive with the ocular mode
 		hideUsageMessageIfDisplayed();
-		enableOcular(false);
+		if (flagShowOculars)
+			enableOcular(false);
 
 		if (flagShowTelrad) {
 			toggleTelrad(false);
@@ -1403,10 +1428,10 @@ void Oculars::toggleCCD(bool show)
 		else
 			movementManager->zoomTo(initialFOV);
 
-		if (getFlagUseFlipForCCD())
+		if (getFlagAutosetMountForCCD())
 		{
-			core->setFlipHorz(false);
-			core->setFlipVert(false);
+			StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
+			propMgr->setStelPropertyValue("actionSwitch_Equatorial_Mount", equatorialMountEnabled);
 		}
 
 		if (guiPanel)
@@ -1533,6 +1558,9 @@ void Oculars::paintCCDBounds()
 	const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);
 	double screenFOV = params.fov;
 
+	Vec2i centerScreen(projector->getViewportPosX() + projector->getViewportWidth() / 2,
+			   projector->getViewportPosY() + projector->getViewportHeight() / 2);
+
 	// draw sensor rectangle
 	if(selectedCCDIndex != -1)
 	{
@@ -1545,19 +1573,6 @@ void Oculars::paintCCDBounds()
 
 			const double ccdXRatio = ccd->getActualFOVx(telescope, lens) / screenFOV;
 			const double ccdYRatio = ccd->getActualFOVy(telescope, lens) / screenFOV;
-
-			// flip are needed and allowed?
-			float ratioLimit = 0.125f;
-			if (getFlagUseFlipForCCD() && (ccdXRatio>=ratioLimit || ccdYRatio>=ratioLimit))
-			{
-				core->setFlipHorz(telescope->isHFlipped());
-				core->setFlipVert(telescope->isVFlipped());
-			}
-			else
-			{
-				core->setFlipHorz(false);
-				core->setFlipVert(false);
-			}
 
 			// As the FOV is based on the narrow aspect of the screen, we need to calculate
 			// height & width based soley off of that dimension.
@@ -1585,11 +1600,17 @@ void Oculars::paintCCDBounds()
 				else polarAngle -= 90.0;
 			}
 
+			if (getFlagAutosetMountForCCD())
+			{
+				StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
+				propMgr->setStelPropertyValue("actionSwitch_Equatorial_Mount", telescope->isEquatorial());
+				polarAngle = 0;
+			}
+
 			if (width > 0.0 && height > 0.0)
 			{
 				QPoint a, b;
-				QTransform transform = QTransform().translate(params.viewportCenter[0] * params.devicePixelsPerPixel,
-						params.viewportCenter[1] * params.devicePixelsPerPixel).rotate(-(ccd->chipRotAngle() + polarAngle));
+				QTransform transform = QTransform().translate(centerScreen[0], centerScreen[1]).rotate(-(ccd->chipRotAngle() + polarAngle));
 				// bottom line
 				a = transform.map(QPoint(-width/2.0, -height/2.0));
 				b = transform.map(QPoint(width/2.0, -height/2.0));
@@ -1617,13 +1638,10 @@ void Oculars::paintCCDBounds()
 					float h_width = params.viewportXywh[aspectIndex] * prismXRatio * params.devicePixelsPerPixel / 2.0;
 
 					//painter.setColor(0.60f, 0.20f, 0.20f, .5f);
-					painter.drawCircle(params.viewportCenter[0] * params.devicePixelsPerPixel,
-							params.viewportCenter[1] * params.devicePixelsPerPixel, in_oag_r);
-					painter.drawCircle(params.viewportCenter[0] * params.devicePixelsPerPixel,
-							params.viewportCenter[1] * params.devicePixelsPerPixel, out_oag_r);
+					painter.drawCircle(centerScreen[0], centerScreen[1], in_oag_r);
+					painter.drawCircle(centerScreen[0], centerScreen[1], out_oag_r);
 
-					QTransform oag_transform = QTransform().translate(params.viewportCenter[0] * params.devicePixelsPerPixel,
-							params.viewportCenter[1] * params.devicePixelsPerPixel).rotate(-(ccd->chipRotAngle() + polarAngle + ccd->prismPosAngle()));
+					QTransform oag_transform = QTransform().translate(centerScreen[0], centerScreen[1]).rotate(-(ccd->chipRotAngle() + polarAngle + ccd->prismPosAngle()));
 
 					// bottom line
 					a = oag_transform.map(QPoint(-h_width, in_oag_r));
@@ -1647,7 +1665,7 @@ void Oculars::paintCCDBounds()
 				// frame and equatorial coordinates for epoch J2000.0 of that center.
 				// Details: https://bugs.launchpad.net/stellarium/+bug/1404695
 
-				ratioLimit = 0.25f;
+				float ratioLimit = 0.25f;
 				if (ccdXRatio>=ratioLimit || ccdYRatio>=ratioLimit)
 				{
 					// draw cross at center
@@ -1660,8 +1678,7 @@ void Oculars::paintCCDBounds()
 					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 					// calculate coordinates of the center and show it
 					Vec3d centerPosition;
-					Vec2f center = projector->getViewportCenter();
-					projector->unProject(center[0], center[1], centerPosition);
+					projector->unProject(centerScreen[0], centerScreen[1], centerPosition);
 					double cx, cy;
 					QString cxt, cyt;
 					StelUtils::rectToSphe(&cx,&cy,core->equinoxEquToJ2000(centerPosition)); // Calculate RA/DE (J2000.0) and show it...
@@ -1713,13 +1730,15 @@ void Oculars::paintCrosshairs()
 void Oculars::paintTelrad()
 {
 	if (!flagShowOculars) {
-		const StelProjectorP projector = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
+		StelCore *core = StelApp::getInstance().getCore();
+		const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);
 		// StelPainter drawing
 		StelPainter painter(projector);
+		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
-		Vec2i centerScreen(projector->getViewportPosX() + projector->getViewportWidth() / 2,
-				   projector->getViewportPosY() + projector->getViewportHeight() / 2);
-		float pixelsPerRad = projector->getPixelPerRadAtCenter();
+		Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
+				   projector->getViewportPosY()+projector->getViewportHeight()/2);
+		float pixelsPerRad = projector->getPixelPerRadAtCenter() * params.devicePixelsPerPixel;
 		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (0.5));
 		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (2.0));
 		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (4.0));
@@ -1743,6 +1762,8 @@ void Oculars::paintOcularMask(const StelCore *core)
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
+	Vec2i centerScreen(prj->getViewportPosX()+prj->getViewportWidth()/2, prj->getViewportPosY()+prj->getViewportHeight()/2);
+
 	// Paint the reticale, if needed
 	if (!reticleTexture.isNull())
 	{
@@ -1755,9 +1776,7 @@ void Oculars::paintOcularMask(const StelCore *core)
 		int textureWidth;
 		reticleTexture->getDimensions(textureWidth, textureHeight);
 
-		painter.drawSprite2dMode(params.viewportXywh[2] / 2 * params.devicePixelsPerPixel,
-				params.viewportXywh[3] / 2 * params.devicePixelsPerPixel,
-				inner, reticleRotation);
+		painter.drawSprite2dMode(centerScreen[0], centerScreen[1], inner, reticleRotation);
 	}
 
 	if (oculars[selectedOcularIndex]->hasPermanentCrosshair())
@@ -1801,11 +1820,11 @@ void Oculars::paintOcularMask(const StelCore *core)
 	radiusHigh=outerRadius-deltaRadius;
 	for (int i=0; i<=slices; i++)
 	{
-		vertices[i*2][0]= params.viewportCenter[0] * params.devicePixelsPerPixel + outerRadius*sinCache[i];
-		vertices[i*2][1]= params.viewportCenter[1] * params.devicePixelsPerPixel + outerRadius*cosCache[i];
+		vertices[i*2][0]= centerScreen[0] + outerRadius*sinCache[i];
+		vertices[i*2][1]= centerScreen[1] + outerRadius*cosCache[i];
 		vertices[i*2][2] = 0.0;
-		vertices[i*2+1][0]= params.viewportCenter[0] * params.devicePixelsPerPixel + radiusHigh*sinCache[i];
-		vertices[i*2+1][1]= params.viewportCenter[1] * params.devicePixelsPerPixel + radiusHigh*cosCache[i];
+		vertices[i*2+1][0]= centerScreen[0] + radiusHigh*sinCache[i];
+		vertices[i*2+1][1]= centerScreen[1] + radiusHigh*cosCache[i];
 		vertices[i*2+1][2] = 0.0;
 	}
 	painter.drawFromArray(StelPainter::TriangleStrip, (slices+1)*2, 0, false);
@@ -1850,9 +1869,9 @@ void Oculars::paintText(const StelCore* core)
 	QString widthString = "MMMMMMMMMMMMMMMMMMM";
 	float insetFromRHS = painter.getFontMetrics().width(widthString);
 	StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
-	int xPosition = projectorParams.viewportXywh[2];
+	int xPosition = projectorParams.viewportXywh[2] - projectorParams.viewportCenterOffset[0];
 	xPosition -= insetFromRHS;
-	int yPosition = projectorParams.viewportXywh[3];
+	int yPosition = projectorParams.viewportXywh[3] - projectorParams.viewportCenterOffset[1];
 	yPosition -= 40;
 	const int lineHeight = painter.getFontMetrics().height();
 	
@@ -2077,21 +2096,43 @@ void Oculars::validateAndLoadIniFile()
 void Oculars::unzoomOcular()
 {
 	StelCore *core = StelApp::getInstance().getCore();
-	StelMovementMgr *movementManager = core->getMovementMgr();
-	GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
+	StelMovementMgr *movementManager = core->getMovementMgr();	
 	StelSkyDrawer *skyManager = core->getSkyDrawer();
 
-	gridManager->setFlagAzimuthalGrid(flagAzimuthalGrid);
-	gridManager->setFlagGalacticGrid(flagGalacticGrid);
-	gridManager->setFlagEquatorGrid(flagEquatorGrid);
-	gridManager->setFlagEquatorJ2000Grid(flagEquatorJ2000Grid);
-	gridManager->setFlagEquatorLine(flagEquatorLine);
-	gridManager->setFlagEclipticLine(flagEclipticLine);
-	gridManager->setFlagEclipticJ2000Grid(flagEclipticJ2000Grid);
-	gridManager->setFlagMeridianLine(flagMeridianLine);
-	gridManager->setFlagLongitudeLine(flagLongitudeLine);
-	gridManager->setFlagHorizonLine(flagHorizonLine);
-	gridManager->setFlagGalacticEquatorLine(flagGalacticEquatorLine);
+	if (flagHideGridsLines)
+	{
+		GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
+
+		gridManager->setFlagAzimuthalGrid(flagAzimuthalGrid);
+		gridManager->setFlagGalacticGrid(flagGalacticGrid);
+		gridManager->setFlagSupergalacticGrid(flagSupergalacticGrid);
+		gridManager->setFlagEquatorJ2000Grid(flagEquatorJ2000Grid);
+		gridManager->setFlagEquatorGrid(flagEquatorGrid);
+		gridManager->setFlagEquatorJ2000Line(flagEquatorJ2000Line);
+		gridManager->setFlagEquatorLine(flagEquatorLine);
+		gridManager->setFlagEclipticJ2000Line(flagEclipticJ2000Line);
+		gridManager->setFlagEclipticLine(flagEclipticLine);
+		gridManager->setFlagEclipticJ2000Grid(flagEclipticJ2000Grid);
+		gridManager->setFlagEclipticGrid(flagEclipticGrid);
+		gridManager->setFlagMeridianLine(flagMeridianLine);
+		gridManager->setFlagLongitudeLine(flagLongitudeLine);
+		gridManager->setFlagHorizonLine(flagHorizonLine);
+		gridManager->setFlagGalacticEquatorLine(flagGalacticEquatorLine);
+		gridManager->setFlagSupergalacticEquatorLine(flagSupergalacticEquatorLine);
+		gridManager->setFlagPrimeVerticalLine(flagPrimeVerticalLine);
+		gridManager->setFlagColureLines(flagColureLines);
+		gridManager->setFlagCircumpolarCircles(flagCircumpolarCircles);
+		gridManager->setFlagPrecessionCircles(flagPrecessionCircles);
+		gridManager->setFlagCelestialJ2000Poles(flagCelestialJ2000Poles);
+		gridManager->setFlagCelestialPoles(flagCelestialPoles);
+		gridManager->setFlagZenithNadir(flagZenithNadirPoints);
+		gridManager->setFlagEclipticJ2000Poles(flagEclipticJ2000Poles);
+		gridManager->setFlagEclipticPoles(flagEclipticPoles);
+		gridManager->setFlagGalacticPoles(flagGalacticPoles);
+
+		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(flagCardinalPoints);
+	}
+
 	skyManager->setFlagLuminanceAdaptation(flagAdaptation);
 	skyManager->setFlagStarMagnitudeLimit(flagLimitStars);
 	skyManager->setFlagPlanetMagnitudeLimit(flagLimitPlanets);
@@ -2131,19 +2172,38 @@ void Oculars::zoom(bool zoomedIn)
 		{
 			StelCore *core = StelApp::getInstance().getCore();
 
-			GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
-			// Current state
-			flagAzimuthalGrid = gridManager->getFlagAzimuthalGrid();
-			flagGalacticGrid = gridManager->getFlagGalacticGrid();
-			flagEquatorGrid = gridManager->getFlagEquatorGrid();
-			flagEquatorJ2000Grid = gridManager->getFlagEquatorJ2000Grid();
-			flagEquatorLine = gridManager->getFlagEquatorLine();
-			flagEclipticLine = gridManager->getFlagEclipticLine();
-			flagEclipticJ2000Grid = gridManager->getFlagEclipticJ2000Grid();
-			flagMeridianLine = gridManager->getFlagMeridianLine();
-			flagLongitudeLine = gridManager->getFlagLongitudeLine();
-			flagHorizonLine = gridManager->getFlagHorizonLine();
-			flagGalacticEquatorLine = gridManager->getFlagGalacticEquatorLine();
+			if (flagHideGridsLines)
+			{
+				GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
+				// Current state
+				flagAzimuthalGrid = gridManager->getFlagAzimuthalGrid();
+				flagGalacticGrid = gridManager->getFlagGalacticGrid();
+				flagSupergalacticGrid = gridManager->getFlagSupergalacticGrid();
+				flagEquatorJ2000Grid = gridManager->getFlagEquatorJ2000Grid();
+				flagEquatorGrid = gridManager->getFlagEquatorGrid();
+				flagEquatorJ2000Line = gridManager->getFlagEquatorJ2000Line();
+				flagEquatorLine = gridManager->getFlagEquatorLine();
+				flagEclipticJ2000Line = gridManager->getFlagEclipticJ2000Line();
+				flagEclipticLine = gridManager->getFlagEclipticLine();
+				flagEclipticJ2000Grid = gridManager->getFlagEclipticJ2000Grid();
+				flagEclipticGrid = gridManager->getFlagEclipticGrid();
+				flagMeridianLine = gridManager->getFlagMeridianLine();
+				flagLongitudeLine = gridManager->getFlagLongitudeLine();
+				flagHorizonLine = gridManager->getFlagHorizonLine();
+				flagGalacticEquatorLine = gridManager->getFlagGalacticEquatorLine();
+				flagSupergalacticEquatorLine = gridManager->getFlagSupergalacticEquatorLine();
+				flagPrimeVerticalLine = gridManager->getFlagPrimeVerticalLine();
+				flagColureLines = gridManager->getFlagColureLines();
+				flagCircumpolarCircles = gridManager->getFlagCircumpolarCircles();
+				flagPrecessionCircles = gridManager->getFlagPrecessionCircles();
+				flagCelestialJ2000Poles = gridManager->getFlagCelestialJ2000Poles();
+				flagCelestialPoles = gridManager->getFlagCelestialPoles();
+				flagZenithNadirPoints = gridManager->getFlagZenithNadir();
+				flagEclipticJ2000Poles = gridManager->getFlagEclipticJ2000Poles();
+				flagEclipticPoles = gridManager->getFlagEclipticPoles();
+				flagGalacticPoles = gridManager->getFlagGalacticPoles();
+				flagCardinalPoints = GETSTELMODULE(LandscapeMgr)->getFlagCardinalsPoints();
+			}
 
 			StelSkyDrawer *skyManager = core->getSkyDrawer();
 			// Current state
@@ -2180,21 +2240,42 @@ void Oculars::zoomOcular()
 {
 	StelCore *core = StelApp::getInstance().getCore();
 	StelMovementMgr *movementManager = core->getMovementMgr();
-	GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
-
 	StelSkyDrawer *skyManager = core->getSkyDrawer();
 
-	gridManager->setFlagAzimuthalGrid(false);
-	gridManager->setFlagGalacticGrid(false);
-	gridManager->setFlagEquatorGrid(false);
-	gridManager->setFlagEquatorJ2000Grid(false);
-	gridManager->setFlagEquatorLine(false);
-	gridManager->setFlagEclipticLine(false);
-	gridManager->setFlagEclipticJ2000Grid(false);
-	gridManager->setFlagMeridianLine(false);
-	gridManager->setFlagLongitudeLine(false);
-	gridManager->setFlagHorizonLine(false);
-	gridManager->setFlagGalacticEquatorLine(false);
+	if (flagHideGridsLines)
+	{
+		GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
+
+		gridManager->setFlagAzimuthalGrid(false);
+		gridManager->setFlagGalacticGrid(false);
+		gridManager->setFlagSupergalacticGrid(false);
+		gridManager->setFlagEquatorJ2000Grid(false);
+		gridManager->setFlagEquatorGrid(false);
+		gridManager->setFlagEquatorJ2000Line(false);
+		gridManager->setFlagEquatorLine(false);
+		gridManager->setFlagEclipticJ2000Line(false);
+		gridManager->setFlagEclipticLine(false);
+		gridManager->setFlagEclipticJ2000Grid(false);
+		gridManager->setFlagEclipticGrid(false);
+		gridManager->setFlagMeridianLine(false);
+		gridManager->setFlagLongitudeLine(false);
+		gridManager->setFlagHorizonLine(false);
+		gridManager->setFlagGalacticEquatorLine(false);
+		gridManager->setFlagSupergalacticEquatorLine(false);
+		gridManager->setFlagPrimeVerticalLine(false);
+		gridManager->setFlagColureLines(false);
+		gridManager->setFlagCircumpolarCircles(false);
+		gridManager->setFlagPrecessionCircles(false);
+		gridManager->setFlagCelestialJ2000Poles(false);
+		gridManager->setFlagCelestialPoles(false);		
+		gridManager->setFlagZenithNadir(false);
+		gridManager->setFlagEclipticJ2000Poles(false);
+		gridManager->setFlagEclipticPoles(false);
+		gridManager->setFlagGalacticPoles(false);
+
+		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(false);
+	}
+
 	skyManager->setFlagLuminanceAdaptation(false);
 
 	GETSTELMODULE(SolarSystem)->setFlagMoonScale(false);
@@ -2376,16 +2457,22 @@ bool Oculars::getFlagInitFovUsage() const
 	return flagInitFOVUsage;
 }
 
-void Oculars::setFlagUseFlipForCCD(const bool b)
+void Oculars::setFlagAutosetMountForCCD(const bool b)
 {
-	flagUseFlipForCCD = b;
-	settings->setValue("use_ccd_flip", b);
+	flagAutosetMountForCCD = b;
+	settings->setValue("use_mount_autoset", b);
 	settings->sync();
+
+	if (!b)
+	{
+		StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
+		propMgr->setStelPropertyValue("actionSwitch_Equatorial_Mount", equatorialMountEnabled);
+	}
 }
 
-bool Oculars::getFlagUseFlipForCCD() const
+bool Oculars::getFlagAutosetMountForCCD() const
 {
-	return flagUseFlipForCCD;
+	return  flagAutosetMountForCCD;
 }
 
 void Oculars::setFlagUseSemiTransparency(const bool b)
@@ -2398,6 +2485,18 @@ void Oculars::setFlagUseSemiTransparency(const bool b)
 bool Oculars::getFlagUseSemiTransparency() const
 {
 	return flagSemiTransporency;
+}
+
+void Oculars::setFlagHideGridsLines(const bool b)
+{
+	flagHideGridsLines = b;
+	settings->setValue("hide_grids_and_lines", b);
+	settings->sync();
+}
+
+bool Oculars::getFlagHideGridsLines() const
+{
+	return flagHideGridsLines;
 }
 
 QString Oculars::getDimensionsString(double fovX, double fovY) const
