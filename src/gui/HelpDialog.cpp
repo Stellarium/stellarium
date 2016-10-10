@@ -206,9 +206,10 @@ QString HelpDialog::getHelpText(void)
 		}
 	}
 
-	// edit shortcuts
-//	htmlText += "<tr><td><b>" + Qt::escape(q_("F7")) + "</b></td>";
-//	htmlText += "<td>" + Qt::escape(q_("Show and edit all keyboard shortcuts")) + "</td></tr>\n";
+	htmlText += "<tr></tr><tr><td><b><u>" + q_("Text User Interface (TUI)") +
+		    ":</u></b></td></tr>\n";
+	htmlText += "<tr><td>" + q_("Activate TUI") + "</td>";
+	htmlText += "<td><b>Alt+T</b></td></tr>\n";
 	htmlText += "</table>";
 
 	// Regexp to replace {text} with an HTML link.
