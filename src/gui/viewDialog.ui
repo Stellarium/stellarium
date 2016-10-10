@@ -1768,6 +1768,23 @@
                    </property>
                   </widget>
                  </item>
+                 <item row="9" column="0">
+                  <widget class="QCheckBox" name="showEquinoxPointsCheckBox">
+                   <property name="text">
+                    <string>Equinoxes (of date)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="1">
+                  <widget class="QToolButton" name="colorEquinoxPoints">
+                   <property name="toolTip">
+                    <string>Color of the equinox points (of date)</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
                 </layout>
                </item>
                <item row="0" column="2">
@@ -1940,6 +1957,23 @@
                   <widget class="QToolButton" name="colorGalacticPoles">
                    <property name="toolTip">
                     <string>Color of galactic poles</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="0">
+                  <widget class="QCheckBox" name="showSupergalacticPolesCheckBox">
+                   <property name="text">
+                    <string>Supergalactic poles</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="1">
+                  <widget class="QToolButton" name="colorSupergalacticPoles">
+                   <property name="toolTip">
+                    <string>Color of supergalactic poles</string>
                    </property>
                    <property name="text">
                     <string notr="true"/>
@@ -2121,6 +2155,23 @@
                   <widget class="QToolButton" name="colorEclipticJ2000Poles">
                    <property name="toolTip">
                     <string>Color of the ecliptic poles (J2000.0)</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="0">
+                  <widget class="QCheckBox" name="showEquinoxJ2000PointsCheckBox">
+                   <property name="text">
+                    <string>Equinoxes (J2000)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="1">
+                  <widget class="QToolButton" name="colorEquinoxJ2000Points">
+                   <property name="toolTip">
+                    <string>Color of the equinox points (J2000.0)</string>
                    </property>
                    <property name="text">
                     <string notr="true"/>

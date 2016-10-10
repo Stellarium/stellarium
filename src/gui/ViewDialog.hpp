@@ -115,6 +115,9 @@ private slots:
 	void askEclipticJ2000PolesColor();
 	void askEclipticPolesColor();
 	void askGalacticPolesColor();
+	void askSupergalacticPolesColor();
+	void askEquinoxJ2000PointsColor();
+	void askEquinoxPointsColor();
 
 private:
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);
