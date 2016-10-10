@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2006 Fabien Chereau
+ * Copyright (C) 2016 Marcos Cardinot
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,9 +25,52 @@ StelObjectModule::StelObjectModule()
 {
 }
 
-
 StelObjectModule::~StelObjectModule()
 {
 }
 
+bool StelObjectModule::matchObjectName(const QString& objName, const QString& objPrefix, bool useStartOfWords) const
+{
+	if (useStartOfWords)
+	{
+		return objName.startsWith(objPrefix, Qt::CaseInsensitive);
+	}
+	else
+	{
+		return objName.contains(objPrefix, Qt::CaseInsensitive);
+	}
+}
 
+QStringList StelObjectModule::listMatchingObjects(const QString &objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
+{
+	QStringList result;
+	if (maxNbItem <= 0)
+	{
+		return result;
+	}
+
+	QStringList names = listAllObjects(inEnglish);
+	foreach(const QString& name, names)
+	{
+		if (!matchObjectName(name, objPrefix, useStartOfWords))
+		{
+			continue;
+		}
+
+		result.append(name);
+		if (result.size() >= maxNbItem)
+		{
+			break;
+		}
+	}
+
+	result.sort();
+	return result;
+}
+
+QStringList StelObjectModule::listAllObjectsByType(const QString &objType, bool inEnglish) const
+{
+	Q_UNUSED(objType);
+	Q_UNUSED(inEnglish);
+	return QStringList();
+}

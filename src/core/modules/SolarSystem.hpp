@@ -112,7 +112,37 @@ class SolarSystem : public StelObjectModule
 		   WRITE setLabelsAmount
 		   NOTIFY labelsAmountChanged
 		   )
+	Q_PROPERTY(bool ephemerisMarkersDisplayed
+		   READ getFlagEphemerisMarkers
+		   WRITE setFlagEphemerisMarkers
+		   NOTIFY ephemerisMarkersChanged
+		   )
+	Q_PROPERTY(bool ephemerisDatesDisplayed
+		   READ getFlagEphemerisDates
+		   WRITE setFlagEphemerisDates
+		   NOTIFY ephemerisDatesChanged
+		   )
 
+	Q_PROPERTY(bool flagCustomGrsSettings
+		   READ getFlagCustomGrsSettings
+		   WRITE setFlagCustomGrsSettings
+		   NOTIFY flagCustomGrsSettingsChanged
+		   )
+	Q_PROPERTY(int customGrsLongitude
+		   READ getCustomGrsLongitude
+		   WRITE setCustomGrsLongitude
+		   NOTIFY customGrsLongitudeChanged
+		   )
+	Q_PROPERTY(double customGrsDrift
+		   READ getCustomGrsDrift
+		   WRITE setCustomGrsDrift
+		   NOTIFY customGrsDriftChanged
+		   )
+	Q_PROPERTY(double customGrsJD
+		   READ getCustomGrsJD
+		   WRITE setCustomGrsJD
+		   NOTIFY customGrsJDChanged
+		   )
 public:
 	SolarSystem();
 	virtual ~SolarSystem();
@@ -163,23 +193,7 @@ public:
 	//! @return a StelObjectP for the object if found, else NULL.
 	virtual StelObjectP searchByName(const QString& name) const;
 
-	//! Find objects by translated name prefix.
-	//! Find and return the list of at most maxNbItem objects auto-completing
-	//! the passed object I18n name.
-	//! @param objPrefix the case insensitive first letters of the searched object.
-	//! @param maxNbItem the maximum number of returned object names.
-	//! @param useStartOfWords the autofill mode for returned objects names.
-	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches.
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
-	//! Find objects by translated name prefix.
-	//! Find and return the list of at most maxNbItem objects auto-completing
-	//! the passed object English name.
-	//! @param objPrefix the case insensitive first letters of the searched object.
-	//! @param maxNbItem the maximum number of returned object names.
-	//! @param useStartOfWords the autofill mode for returned objects names.
-	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches.
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
-	virtual QStringList listAllObjects(bool inEnglish) const { Q_UNUSED(inEnglish) return QStringList(); }
+	virtual QStringList listAllObjects(bool inEnglish) const;
 	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
 	virtual QString getName() const { return "Solar System"; }
 
@@ -246,16 +260,49 @@ public slots:
 	//! @return current color
 	const Vec3f& getLabelsColor(void) const;
 
-	//! Set the color used to draw planet orbit lines.
-	//! @param c The color of the planet orbit lines (R,G,B)
+	//! Set the color used to draw solar system object orbit lines.
+	//! @param c The color of the solar system object orbit lines (R,G,B)
 	//! @code
 	//! // example of usage in scripts
 	//! SolarSystem.setOrbitsColor(Vec3f(1.0,0.0,0.0));
 	//! @endcode
 	void setOrbitsColor(const Vec3f& c);
-	//! Get the current color used to draw planet orbit lines.
+	//! Get the current color used to draw solar system object orbit lines.
 	//! @return current color
 	Vec3f getOrbitsColor(void) const;
+
+	//! Set the color used to draw planet and their moons orbit lines.
+	//! @param c The color of the planet and their moons orbit lines (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setPlanetsOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setPlanetsOrbitsColor(const Vec3f& c);
+	//! Get the current color used to draw planet and their moons orbit lines.
+	//! @return current color
+	Vec3f getPlanetsOrbitsColor(void) const;
+
+	//! Set the color used to draw minor planet orbit lines.
+	//! @param c The color of the minor planet orbit lines (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setAsteroidsOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setAsteroidsOrbitsColor(const Vec3f& c);
+	//! Get the current color used to draw minor planet orbit lines.
+	//! @return current color
+	Vec3f getAsteroidsOrbitsColor(void) const;
+
+	//! Set the color used to draw comet orbit lines.
+	//! @param c The color of the comet orbit lines (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setCometsOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setCometsOrbitsColor(const Vec3f& c);
+	//! Get the current color used to draw comet orbit lines.
+	//! @return current color
+	Vec3f getCometsOrbitsColor(void) const;
 
 	//! Set the color used to draw planet trails lines.
 	//! @param c The color of the planet trails lines (R,G,B)
@@ -382,6 +429,7 @@ public slots:
 
 	//! Set initial JD for calculation of position of Great Red Spot
 	//! @param JD
+	// TODO (GZ): Clarify whether this is JD or rather JDE?
 	void setCustomGrsJD(double JD);
 	//! Get initial JD for calculation of position of Great Red Spot
 	double getCustomGrsJD();
@@ -400,6 +448,12 @@ signals:
 	void flagMoonScaleChanged(bool b);
 	void moonScaleChanged(double f);
 	void labelsAmountChanged(double f);
+	void ephemerisMarkersChanged(bool b);
+	void ephemerisDatesChanged(bool b);
+	void flagCustomGrsSettingsChanged(bool b);
+	void customGrsLongitudeChanged(int l);
+	void customGrsDriftChanged(double drift);
+	void customGrsJDChanged(double JD);
 
 public:
 	///////////////////////////////////////////////////////////////////////////
@@ -449,6 +503,12 @@ private slots:
 	//! Loads native names of planets for a given sky culture.
 	//! @param skyCultureDir the name of the directory containing the sky culture to use.
 	void updateSkyCulture(const QString& skyCultureDir);
+
+	void setFlagEphemerisMarkers(bool b);
+	bool getFlagEphemerisMarkers() const;
+
+	void setFlagEphemerisDates(bool b);
+	bool getFlagEphemerisDates() const;
 
 private:
 	//! Search for SolarSystem objects which are close to the position given
@@ -521,6 +581,8 @@ private:
 	bool flagTranslatedNames;                   // show translated names?
 	bool flagIsolatedTrails;
 	bool flagIsolatedOrbits;
+	bool ephemerisMarkersDisplayed;
+	bool ephemerisDatesDisplayed;
 
 	class TrailGroup* allTrails;
 	StelGui* gui;

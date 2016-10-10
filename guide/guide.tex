@@ -1,13 +1,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % The Legrand Orange Book
 % LaTeX Template
-% Version 2.1 (14/11/15)
+% Version 2.1.1 (14/07/16)
 %
 % This template has been downloaded from:
 % http://www.LaTeXTemplates.com
 %
 % Mathias Legrand (legrand.mathias@gmail.com) with modifications by:
 % Vel (vel@latextemplates.com)
+% Alexander Wolf (alex.v.wolf@gmail.com)
+% Georg Zotti (georg.zotti@univie.ac.at)
 %
 % License:
 % CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
@@ -95,6 +97,13 @@
 \noindent Copyright \copyright\ 2011-2016 Alexander Wolf.\\ % Copyright notice
 \noindent Copyright \copyright\ 2013-2014 Barry Gerdes.\\ % Copyright notice
 
+\noindent \fbox{
+  \begin{minipage}[t]{0.8\linewidth}
+    Stellarium Version 0.15 is dedicated in memory of our team
+    member Barry Gerdes (\dag\,2014).
+  \end{minipage}
+}\\
+
 \noindent \textsc{stellarium.org}\\ % URL
 
 \noindent Permission is granted to copy, distribute and/or modify this
@@ -112,7 +121,7 @@ used for purposes of explanation and to the readers' benefit, without
 implying a violation of copyright law.}}\\
 
 
-\noindent \textit{A draft of version 0.15.0-1, \today} % Printing/edition date
+\noindent \textit{A draft of version \StelVersion-\DocumentEdition, \today} % Printing/edition date
 
 %----------------------------------------------------------------------------------------
 %	TABLE OF CONTENTS
@@ -142,7 +151,7 @@ implying a violation of copyright law.}}\\
 %----------------------------------------------------------------------------------------
 \chapterimage{chapter-t2-bg} % Chapter heading image
 
-\include{introduction}
+\include{ch_introduction}
 
 
 %----------------------------------------------------------------------------------------
@@ -150,13 +159,13 @@ implying a violation of copyright law.}}\\
 %----------------------------------------------------------------------------------------
 % \chapterimage{chapter-t2-bg} % Chapter heading image Did not change...
 
-\include{start}
+\include{ch_getting_started}
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER 3 (was called Interface Guide, but is just a first tour.)
 %----------------------------------------------------------------------------------------
 
-\include{tour}
+\include{ch_tour}
 
 
 %----------------------------------------------------------------------------------------
@@ -187,7 +196,7 @@ implying a violation of copyright law.}}\\
 %----------------------------------------------------------------------------------------
 \part{Extending Stellarium}
 \chapterimage{chapter-t3-bg} % Chapter heading image
-\include{plugins}
+\include{ch_plugins}
 \include{plg_interfaces} % TUI, RemoteControl, (2017: D-BUS?)
 \include{plg_catalogs}
 \include{plg_archaeolines}

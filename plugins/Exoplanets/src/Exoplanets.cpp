@@ -346,129 +346,47 @@ StelObjectP Exoplanets::searchByNameI18n(const QString& nameI18n) const
 	return NULL;
 }
 
-QStringList Exoplanets::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
-{
-	QStringList result;	
-	if (!flagShowExoplanets)
-		return result;
-
-	if (maxNbItem==0)
-		return result;
-
-	QString epsn;
-	bool find;
-	foreach(const ExoplanetP& eps, ep)
-	{
-		epsn = eps->getNameI18n();
-		find = false;
-		if (useStartOfWords)
-		{
-			if (epsn.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
-				find = true;
-		}
-		else
-		{
-			if (epsn.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-		}
-		if (find)
-		{
-			result << epsn;
-		}
-
-		QStringList epsnp = eps->getExoplanetsNamesI18n();
-		if (!epsnp.isEmpty())
-		{
-			foreach (const QString &str, epsnp)
-			{
-				find = false;
-				if (useStartOfWords)
-				{
-					if (str.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
-						find = true;
-				}
-				else
-				{
-					if (str.contains(objPrefix, Qt::CaseInsensitive))
-						find = true;
-				}
-				if (find)
-				{
-					result << str;
-				}
-			}
-		}
-	}
-
-	result.sort();
-
-	if (result.size()>maxNbItem)
-		result.erase(result.begin()+maxNbItem, result.end());
-
-	return result;
-}
-
-QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
 	QStringList result;
-	if (!flagShowExoplanets)
+	if (!flagShowExoplanets || maxNbItem <= 0)
+	{
 		return result;
+	}
 
-	if (maxNbItem==0)
-		return result;
-
-	QString epsn;
-	bool find;
 	foreach(const ExoplanetP& eps, ep)
 	{
-		epsn = eps->getNameI18n();
-		find = false;
-		if (useStartOfWords)
+		QStringList names;
+		if (inEnglish)
 		{
-			if (epsn.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
-				find = true;
+			names.append(eps->getEnglishName());
+			names.append(eps->getExoplanetsEnglishNames());
 		}
 		else
 		{
-			if (epsn.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
+			names.append(eps->getNameI18n());
+			names.append(eps->getExoplanetsNamesI18n());
 		}
-		if (find)
+
+		foreach (const QString& name, names)
 		{
-			result << epsn;
-		}
-		QStringList epsnp = eps->getExoplanetsEnglishNames();
-		if (!epsnp.isEmpty())
-		{
-			foreach (const QString &str, epsnp)
+			if (!matchObjectName(name, objPrefix, useStartOfWords))
 			{
-				find = false;
-				if (useStartOfWords)
-				{
-					if (str.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
-						find = true;
-				}
-				else
-				{
-					if (str.contains(objPrefix, Qt::CaseInsensitive))
-						find = true;
-				}
-				if (find)
-				{
-					result << str;
-				}
+				continue;
+			}
+
+			result.append(name);
+			if (result.size() >= maxNbItem)
+			{
+				result.sort();
+				return result;
 			}
 		}
 	}
 
 	result.sort();
-
-	if (result.size()>maxNbItem)
-		result.erase(result.begin()+maxNbItem, result.end());
-
 	return result;
 }
-
 
 QStringList Exoplanets::listAllObjects(bool inEnglish) const
 {
@@ -742,6 +660,7 @@ void Exoplanets::loadConfiguration(void)
 	setHabitableMode(conf->value("habitable_enabled", false).toBool());
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowExoplanetsButton = conf->value("flag_show_exoplanets_button", true).toBool();
+	setFlagShowExoplanetsDesignations(conf->value("flag_show_designations", true).toBool());
 	setMarkerColor(StelUtils::strToVec3f(conf->value("exoplanet_marker_color", "0.4,0.9,0.5").toString()), false);
 	setMarkerColor(StelUtils::strToVec3f(conf->value("habitable_exoplanet_marker_color", "1.0,0.5,0.0").toString()), true);
 
@@ -760,6 +679,7 @@ void Exoplanets::saveConfiguration(void)
 	conf->setValue("habitable_enabled", getHabitableMode());
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_exoplanets_button", flagShowExoplanetsButton);
+	conf->setValue("flag_show_designations", getFlagShowExoplanetsDesignations());
 	conf->setValue("habitable_exoplanet_marker_color", StelUtils::vec3fToStr(getMarkerColor(true)));
 	conf->setValue("exoplanet_marker_color", StelUtils::vec3fToStr(getMarkerColor(false)));
 
@@ -911,6 +831,16 @@ bool Exoplanets::getDisplayMode()
 void Exoplanets::setDisplayMode(bool b)
 {
 	Exoplanet::distributionMode=b;
+}
+
+bool Exoplanets::getFlagShowExoplanetsDesignations()
+{
+	return Exoplanet::showDesignations;
+}
+
+void Exoplanets::setFlagShowExoplanetsDesignations(bool b)
+{
+	Exoplanet::showDesignations=b;
 }
 
 bool Exoplanets::getTimelineMode()

@@ -322,79 +322,13 @@ StelObjectP Pulsars::searchByNameI18n(const QString& nameI18n) const
 	return NULL;
 }
 
-QStringList Pulsars::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
 	QStringList result;
-	if (!flagShowPulsars)
-		return result;
-
-	if (maxNbItem==0)
-		return result;
-
-	QString psrn;
-	bool find;
-	foreach(const PulsarP& pulsar, psr)
+	if (flagShowPulsars)
 	{
-		psrn = pulsar->getNameI18n();
-		find = false;
-		if (useStartOfWords)
-		{
-			if (psrn.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
-				find = true;
-		}
-		else
-		{
-			if (psrn.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-		}
-		if (find)
-		{
-			result << psrn;
-		}
+		result = StelObjectModule::listMatchingObjects(objPrefix, maxNbItem, useStartOfWords, inEnglish);
 	}
-
-	result.sort();
-	if (result.size()>maxNbItem)
-		result.erase(result.begin()+maxNbItem, result.end());
-
-	return result;
-}
-
-QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
-{
-	QStringList result;
-	if (!flagShowPulsars)
-		return result;
-
-	if (maxNbItem==0)
-		return result;
-
-	QString psrn;
-	bool find;
-	foreach(const PulsarP& pulsar, psr)
-	{
-		psrn = pulsar->getEnglishName();
-		find = false;
-		if (useStartOfWords)
-		{
-			if (psrn.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
-				find = true;
-		}
-		else
-		{
-			if (psrn.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-		}
-		if (find)
-		{
-			result << psrn;
-		}
-	}
-
-	result.sort();
-	if (result.size()>maxNbItem)
-		result.erase(result.begin()+maxNbItem, result.end());
-
 	return result;
 }
 

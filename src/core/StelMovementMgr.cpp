@@ -403,6 +403,7 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 			{
 				// Deselect the selected object
 				StelApp::getInstance().getStelObjectMgr().unSelect();
+				setFlagLockEquPos(false);
 				event->accept();
 				return;
 			}
@@ -725,6 +726,9 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 				case MountGalactic:
 					v = move.targetObject->getGalacticPos(core);
 					break;
+				case MountSupergalactic:
+					v = move.targetObject->getSupergalacticPos(core);
+					break;
 				default:
 					qWarning() << "StelMovementMgr: unexpected mountMode" << mountMode;
 					Q_ASSERT(0);
@@ -860,6 +864,9 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 					break;
 				case MountGalactic:
 					v = objectMgr->getSelectedObject()[0]->getGalacticPos(core);
+					break;
+				case MountSupergalactic:
+					v = objectMgr->getSelectedObject()[0]->getSupergalacticPos(core);
 					break;
 				default:
 					qWarning() << "StelMovementMgr: unexpected mountMode" << mountMode;
@@ -1086,6 +1093,8 @@ Vec3d StelMovementMgr::j2000ToMountFrame(const Vec3d& v) const
 			return core->j2000ToEquinoxEqu(v);
 		case MountGalactic:
 			return core->j2000ToGalactic(v);
+		case MountSupergalactic:
+			return core->j2000ToSupergalactic(v);
 	}
 	Q_ASSERT(0);
 	return Vec3d(0);
@@ -1101,6 +1110,8 @@ Vec3d StelMovementMgr::mountFrameToJ2000(const Vec3d& v) const
 			return core->equinoxEquToJ2000(v);
 		case MountGalactic:
 			return core->galacticToJ2000(v);
+		case MountSupergalactic:
+			return core->supergalacticToJ2000(v);
 	}
 	Q_ASSERT(0);
 	return Vec3d(0);
@@ -1241,6 +1252,9 @@ void StelMovementMgr::updateAutoZoom(double deltaTime)
 					break;
 				case MountGalactic:
 					v = objectMgr->getSelectedObject()[0]->getGalacticPos(core);
+					break;
+				case MountSupergalactic:
+					v = objectMgr->getSelectedObject()[0]->getSupergalacticPos(core);
 					break;
 				default:
 					qWarning() << "StelMovementMgr: unexpected mountMode" << mountMode;

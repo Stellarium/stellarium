@@ -121,7 +121,10 @@ void StelFileMgr::init()
 			qWarning() << "WARNING StelFileMgr::StelFileMgr: could not find install location:" << 
 				QDir::toNativeSeparators(installLocation.filePath()) << " (we checked for " << 
 				QDir::toNativeSeparators(checkFile.filePath()) << ").";
+			#ifndef UNIT_TEST
+			// NOTE: Hook for buildbots (using within testEphemeris)
 			qFatal("Couldn't find install directory location.");
+			#endif
 		}
 	}
 

@@ -88,6 +88,11 @@ class NebulaMgr : public StelObjectModule
 		   WRITE setHintsAmount
 		   NOTIFY hintsAmountChanged
 		   )
+	Q_PROPERTY(bool flagDesignationLabels
+		   READ getDesignationUsage
+		   WRITE setDesignationUsage
+		   NOTIFY designationUsageChanged
+		   )
 public:
 	NebulaMgr();
 	virtual ~NebulaMgr();
@@ -130,18 +135,12 @@ public:
 	//! @param name The case in-sensistive standard program name
 	virtual StelObjectP searchByName(const QString& name) const;
 
-	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
-	//! @param objPrefix the case insensitive first letters of the searched object
-	//! @param maxNbItem the maximum number of returned object names
-	//! @param useStartOfWords the autofill mode for returned objects names
-	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
 	//! @note Loading deep-sky objects with the proper names only.
 	virtual QStringList listAllObjects(bool inEnglish) const;
 	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
@@ -156,6 +155,9 @@ public:
 	//! @note using for bookmarks feature as example
 	//! @return a designation
 	QString getLatestSelectedDSODesignation();
+
+	//! Get the list of all the bodies of the solar system.
+	const QVector<NebulaP>& getAllDeepSkyObjects() const { return dsoArray; }
 
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
@@ -478,11 +480,6 @@ public slots:
 	//! Get current value of the star symbol color.
 	const Vec3f& getStarColor(void) const;
 
-	//! Set Nebulae Hints circle scale.
-	void setCircleScale(float scale);
-	//! Get Nebulae Hints circle scale.
-	float getCircleScale(void) const;
-
 	//! Set how long it takes for nebula hints to fade in and out when turned on and off.
 	//! @param duration given in seconds
 	void setHintsFadeDuration(float duration) {hintsFader.setDuration((int) (duration * 1000.f));}
@@ -496,6 +493,11 @@ public slots:
 	void setHintsProportional(const bool proportional);
 	//! Get whether hints (symbols) are scaled according to nebula size.
 	bool getHintsProportional(void) const;
+
+	//! Set flag for usage designations of DSO for their labels instead common names.
+	void setDesignationUsage(const bool flag);
+	//! Get flag for usage designations of DSO for their labels instead common names.
+	bool getDesignationUsage(void) const;
 
 	//! Set whether hints (symbols) should be visible according to surface brightness value.
 	void setFlagSurfaceBrightnessUsage(const bool usage) {if(usage!=Nebula::surfaceBrightnessUsage){ Nebula::surfaceBrightnessUsage=usage; emit flagSurfaceBrightnessUsageChanged(usage);}}
@@ -547,6 +549,7 @@ signals:
 	//! Emitted when the type filter is changed
 	void typeFiltersChanged(Nebula::TypeGroup flags);
 	void hintsProportionalChanged(bool b);
+	void designationUsageChanged(bool b);
 	void flagSurfaceBrightnessUsageChanged(bool b);
 	void labelsAmountChanged(double a);
 	void hintsAmountChanged(double f);

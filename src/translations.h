@@ -82,6 +82,8 @@ class Translations
 		N_("Oort cloud objects");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Constellations");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Custom Objects");
 
 		// =====================================================================
 		// List of deep-sky objects types
@@ -180,6 +182,7 @@ class Translations
 		N_("Inuit");
 		N_("Indian Vedic");
 		N_("Japanese Moon Stations");
+		N_("Kamilaroi/Euahlayi");
 		N_("Korean");
 		N_("Dakota/Lakota/Nakota");
 		N_("Macedonian");
@@ -608,6 +611,7 @@ class Translations
 		N_("Folder");
 		N_("&Choose");
 		N_("Cancel");
+		N_("&Cancel");
 		N_("Files of type:");
 		N_("Date Modified");
 		N_("Directories");

@@ -79,7 +79,8 @@ public:
 		Ecliptic,
 		EclipticJ2000,
 		AltAzi,
-		Galactic
+		Galactic,
+		Supergalactic
 	};
 
 

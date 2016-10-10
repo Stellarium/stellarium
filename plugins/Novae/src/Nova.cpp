@@ -36,25 +36,28 @@
 #include <QList>
 
 Nova::Nova(const QVariantMap& map)
-		: initialized(false),
-		  designation(""),
-		  novaName(""),
-		  novaType(""),
-		  maxMagnitude(21.),
-		  minMagnitude(21.),
-		  peakJD(0.),
-		  m2(-1),
-		  m3(-1),
-		  m6(-1),
-		  m9(-1),
-		  RA(0.),
-		  Dec(0.),
-		  distance(0.)
+	: initialized(false)
+	, designation("")
+	, novaName("")
+	, novaType("")
+	, maxMagnitude(21.)
+	, minMagnitude(21.)
+	, peakJD(0.)
+	, m2(-1)
+	, m3(-1)
+	, m6(-1)
+	, m9(-1)
+	, RA(0.)
+	, Dec(0.)
+	, distance(0.)
 {
-	// return initialized if the mandatory fields are not present
-	if (!map.contains("designation"))
+	if (!map.contains("designation") || !map.contains("RA") || !map.contains("Dec"))
+	{
+		qWarning() << "Nova: INVALID nova!" << map.value("designation").toString();
+		qWarning() << "Nova: Please, check your 'novae.json' catalog!";
 		return;
-		
+	}
+
 	designation  = map.value("designation").toString();
 	novaName = map.value("name").toString();
 	novaType = map.value("type").toString();

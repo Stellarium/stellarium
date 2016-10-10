@@ -200,6 +200,7 @@ void PointerCoordinatesWindow::populateCoordinateSystemsList()
 	csys->addItem(q_("Ecliptic Longitude/Latitude (J2000.0)"), "EclipticJ2000");
 	csys->addItem(q_("Altitude/Azimuth"), "AltAzi");
 	csys->addItem(q_("Galactic Longitude/Latitude"), "Galactic");
+	csys->addItem(q_("Supergalactic Longitude/Latitude"), "Supergalactic");
 
 	//Restore the selection
 	index = csys->findData(selectedSystemId, Qt::UserRole, Qt::MatchCaseSensitive);

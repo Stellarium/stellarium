@@ -44,53 +44,53 @@ class ConstellationMgr : public StelObjectModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool artDisplayed
-			   READ getFlagArt
-			   WRITE setFlagArt
-			   NOTIFY artDisplayedChanged)
+		   READ getFlagArt
+		   WRITE setFlagArt
+		   NOTIFY artDisplayedChanged)
 	Q_PROPERTY(float artFadeDuration
-			   READ getArtFadeDuration
-			   WRITE setArtFadeDuration
-			   NOTIFY artFadeDurationChanged)
+		   READ getArtFadeDuration
+		   WRITE setArtFadeDuration
+		   NOTIFY artFadeDurationChanged)
 	Q_PROPERTY(float artIntensity
-			   READ getArtIntensity
-			   WRITE setArtIntensity
-			   NOTIFY artIntensityChanged)
+		   READ getArtIntensity
+		   WRITE setArtIntensity
+		   NOTIFY artIntensityChanged)
 	Q_PROPERTY(Vec3f boundariesColor
-			   READ getBoundariesColor
-			   WRITE setBoundariesColor
-			   NOTIFY boundariesColorChanged)
+		   READ getBoundariesColor
+		   WRITE setBoundariesColor
+		   NOTIFY boundariesColorChanged)
 	Q_PROPERTY(bool boundariesDisplayed
-			   READ getFlagBoundaries
-			   WRITE setFlagBoundaries
-			   NOTIFY boundariesDisplayedChanged)
+		   READ getFlagBoundaries
+		   WRITE setFlagBoundaries
+		   NOTIFY boundariesDisplayedChanged)
 	Q_PROPERTY(float fontSize
-			   READ getFontSize
-			   WRITE setFontSize
-			   NOTIFY fontSizeChanged)
+		   READ getFontSize
+		   WRITE setFontSize
+		   NOTIFY fontSizeChanged)
 	Q_PROPERTY(bool isolateSelected
-			   READ getFlagIsolateSelected
-			   WRITE setFlagIsolateSelected
-			   NOTIFY isolateSelectedChanged)	
+		   READ getFlagIsolateSelected
+		   WRITE setFlagIsolateSelected
+		   NOTIFY isolateSelectedChanged)
 	Q_PROPERTY(Vec3f linesColor
-			   READ getLinesColor
-			   WRITE setLinesColor
-			   NOTIFY linesColorChanged)
+		   READ getLinesColor
+		   WRITE setLinesColor
+		   NOTIFY linesColorChanged)
 	Q_PROPERTY(bool linesDisplayed
-			   READ getFlagLines
-			   WRITE setFlagLines
-			   NOTIFY linesDisplayedChanged)
+		   READ getFlagLines
+		   WRITE setFlagLines
+		   NOTIFY linesDisplayedChanged)
 	Q_PROPERTY(Vec3f namesColor
-			   READ getLabelsColor
-			   WRITE setLabelsColor
-			   NOTIFY namesColorChanged)
+		   READ getLabelsColor
+		   WRITE setLabelsColor
+		   NOTIFY namesColorChanged)
 	Q_PROPERTY(bool namesDisplayed
-			   READ getFlagLabels
-			   WRITE setFlagLabels
-			   NOTIFY namesDisplayedChanged)
+		   READ getFlagLabels
+		   WRITE setFlagLabels
+		   NOTIFY namesDisplayedChanged)
 	Q_PROPERTY(ConstellationDisplayStyle constellationDisplayStyle
-			   READ getConstellationDisplayStyle
-			   WRITE setConstellationDisplayStyle
-			   NOTIFY constellationsDisplayStyleChanged)
+		   READ getConstellationDisplayStyle
+		   WRITE setConstellationDisplayStyle
+		   NOTIFY constellationsDisplayStyleChanged)
 	Q_PROPERTY(float constellationLineThickness
 		   READ getConstellationLineThickness
 		   WRITE setConstellationLineThickness
@@ -137,20 +137,13 @@ public:
 
 	// GZ: I see dubious descriptions and non-fitting var names: objPrefix should just be "string" or "obj",
 	// and useStartOfWord likely should be described as "decide if start of word is searched"  (2x)
-	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
+	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing matches
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
-	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
-	//! @param objPrefix the case insensitive first letters of the searched object
-	//! @param maxNbItem the maximum number of returned object names
-	//! @param useStartOfWords the autofill mode for returned objects names
-	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing matches
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
 	virtual QStringList listAllObjects(bool inEnglish) const;
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
 	virtual QString getName() const { return "Constellations"; }
 	//! Describes how to display constellation labels. The viewDialog GUI has a combobox which corresponds to these values.
 	enum ConstellationDisplayStyle
@@ -266,7 +259,7 @@ public slots:
 	ConstellationMgr::ConstellationDisplayStyle getConstellationDisplayStyle();
 	//! Returns the currently set constellation display style as string, instead of enum
 	//! @see getConstellationDisplayStyle()
-	QString getConstellationDisplayStyleString();
+	static QString getConstellationDisplayStyleString(ConstellationMgr::ConstellationDisplayStyle style);
 
 	//! Set the thickness of lines of the constellations
 	//! @param thickness of line in pixels
