@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-10 20:50+0700\n"
+"POT-Creation-Date: 2016-10-11 02:35+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2068,7 +2068,7 @@ msgstr ""
 msgid "Keys"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:140 src/gui/HelpDialog.cpp:218
+#: src/gui/HelpDialog.cpp:140 src/gui/HelpDialog.cpp:219
 msgid "Further Reading"
 msgstr ""
 
@@ -2135,37 +2135,45 @@ msgid ""
 "available via the \"%1\" button."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:219
+#: src/gui/HelpDialog.cpp:209
+msgid "Text User Interface (TUI)"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:211
+msgid "Activate TUI"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:220
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:220
+#: src/gui/HelpDialog.cpp:221
 msgid "The Stellarium User Guide"
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:224
+#: src/gui/HelpDialog.cpp:225
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:229
+#: src/gui/HelpDialog.cpp:230
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:234
+#: src/gui/HelpDialog.cpp:235
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:239
+#: src/gui/HelpDialog.cpp:240
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -2173,73 +2181,73 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:244
+#: src/gui/HelpDialog.cpp:245
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:303
-msgid "Developers"
-msgstr ""
-
 #: src/gui/HelpDialog.cpp:304
-#, qt-format
-msgid "Project coordinator & lead developer: %1"
+msgid "Developers"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:305
 #, qt-format
+msgid "Project coordinator & lead developer: %1"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:306
+#, qt-format
 msgid "Graphic/other designer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:306 src/gui/HelpDialog.cpp:307
-#: src/gui/HelpDialog.cpp:308 src/gui/HelpDialog.cpp:309
-#: src/gui/HelpDialog.cpp:310 src/gui/HelpDialog.cpp:311
-#: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:318
-#: src/gui/HelpDialog.cpp:319 src/gui/HelpDialog.cpp:320
-#: src/gui/HelpDialog.cpp:321 src/gui/HelpDialog.cpp:322
-#: src/gui/HelpDialog.cpp:323
+#: src/gui/HelpDialog.cpp:307 src/gui/HelpDialog.cpp:308
+#: src/gui/HelpDialog.cpp:309 src/gui/HelpDialog.cpp:310
+#: src/gui/HelpDialog.cpp:311 src/gui/HelpDialog.cpp:312
+#: src/gui/HelpDialog.cpp:313 src/gui/HelpDialog.cpp:319
+#: src/gui/HelpDialog.cpp:320 src/gui/HelpDialog.cpp:321
+#: src/gui/HelpDialog.cpp:322 src/gui/HelpDialog.cpp:323
+#: src/gui/HelpDialog.cpp:324
 #, qt-format
 msgid "Developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:314
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:314
+#: src/gui/HelpDialog.cpp:315
 #, qt-format
 msgid "Tester: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:315
+#: src/gui/HelpDialog.cpp:316
 msgid "Former Developers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:316
+#: src/gui/HelpDialog.cpp:317
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:317
+#: src/gui/HelpDialog.cpp:318
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:324 src/gui/HelpDialog.cpp:325
+#: src/gui/HelpDialog.cpp:325 src/gui/HelpDialog.cpp:326
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:326
+#: src/gui/HelpDialog.cpp:327
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
 #: plugins/Oculars/src/gui/OcularDialog.cpp:517
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
 msgid "Contributors"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:327
+#: src/gui/HelpDialog.cpp:328
 #, qt-format
 msgid ""
 "Several people have made contributions to the project and their work has "
