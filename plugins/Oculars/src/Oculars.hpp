@@ -285,6 +285,9 @@ private:
 	bool flagEclipticJ2000Poles;	//!< Flag to track if EclipticJ2000Poles was displayed at activation.
 	bool flagEclipticPoles;		//!< Flag to track if EclipticPoles was displayed at activation.
 	bool flagGalacticPoles;		//!< Flag to track if GalacticPoles was displayed at activation.
+	bool flagSupergalacticPoles;	//!< Flag to track if SupergalacticPoles was displayed at activation.
+	bool flagEquinoxJ2000Points;	//!< Flag to track if EquinoxJ2000Points was displayed at activation.
+	bool flagEquinoxPoints;		//!< Flag to track if EquinoxPoints was displayed at activation.
 
 	bool flagAdaptation;		//!< Flag to track if adaptationCheckbox was enabled at activation.
 

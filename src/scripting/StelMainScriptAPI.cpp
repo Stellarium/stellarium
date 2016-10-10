@@ -1132,6 +1132,9 @@ void StelMainScriptAPI::clear(const QString& state)
 		glmgr->setFlagEclipticJ2000Poles(false);
 		glmgr->setFlagEclipticPoles(false);
 		glmgr->setFlagGalacticPoles(false);
+		glmgr->setFlagSupergalacticPoles(false);
+		glmgr->setFlagEquinoxJ2000Points(false);
+		glmgr->setFlagEquinoxPoints(false);
 		lmgr->setFlagCardinalsPoints(false);
 		cmgr->setFlagLines(false);
 		cmgr->setFlagLabels(false);
@@ -1177,6 +1180,9 @@ void StelMainScriptAPI::clear(const QString& state)
 		glmgr->setFlagEclipticJ2000Poles(false);
 		glmgr->setFlagEclipticPoles(false);
 		glmgr->setFlagGalacticPoles(false);
+		glmgr->setFlagSupergalacticPoles(false);
+		glmgr->setFlagEquinoxJ2000Points(false);
+		glmgr->setFlagEquinoxPoints(false);
 		lmgr->setFlagCardinalsPoints(false);
 		cmgr->setFlagLines(true);
 		cmgr->setFlagLabels(true);
@@ -1222,6 +1228,9 @@ void StelMainScriptAPI::clear(const QString& state)
 		glmgr->setFlagEclipticJ2000Poles(false);
 		glmgr->setFlagEclipticPoles(false);
 		glmgr->setFlagGalacticPoles(false);
+		glmgr->setFlagSupergalacticPoles(false);
+		glmgr->setFlagEquinoxJ2000Points(false);
+		glmgr->setFlagEquinoxPoints(false);
 		lmgr->setFlagCardinalsPoints(false);
 		cmgr->setFlagLines(false);
 		cmgr->setFlagLabels(false);
@@ -1267,6 +1276,9 @@ void StelMainScriptAPI::clear(const QString& state)
 		glmgr->setFlagEclipticJ2000Poles(false);
 		glmgr->setFlagEclipticPoles(false);
 		glmgr->setFlagGalacticPoles(false);
+		glmgr->setFlagSupergalacticPoles(false);
+		glmgr->setFlagEquinoxJ2000Points(false);
+		glmgr->setFlagEquinoxPoints(false);
 		lmgr->setFlagCardinalsPoints(false);
 		cmgr->setFlagLines(false);
 		cmgr->setFlagLabels(false);
@@ -1312,6 +1324,9 @@ void StelMainScriptAPI::clear(const QString& state)
 		glmgr->setFlagEclipticJ2000Poles(false);
 		glmgr->setFlagEclipticPoles(false);
 		glmgr->setFlagGalacticPoles(false);
+		glmgr->setFlagSupergalacticPoles(false);
+		glmgr->setFlagEquinoxJ2000Points(false);
+		glmgr->setFlagEquinoxPoints(false);
 		lmgr->setFlagCardinalsPoints(false);
 		cmgr->setFlagLines(false);
 		cmgr->setFlagLabels(false);
