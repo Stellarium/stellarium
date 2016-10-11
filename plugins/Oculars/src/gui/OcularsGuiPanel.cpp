@@ -808,6 +808,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 			prevTelescopeButton->setVisible(false);
 			nextTelescopeButton->setVisible(false);
 			fieldTelescopeName->setVisible(false);
+			fieldExitPupil->setVisible(false);
 			posY = 0.;
 			widgetHeight = 0.;
 
@@ -837,7 +838,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 		widgetHeight += fieldMagnification->boundingRect().height();
 
 		double mag = ocular->magnification(telescope, lens);
-		if (mag>0)
+		if (mag>0 && !ocular->isBinoculars())
 		{
 			double exitPupil = telescope->diameter()/mag;
 			QString exitPupilLabel = QString(q_("Exit pupil: %1 mm")).arg(QString::number(exitPupil, 'f', 2));
@@ -856,7 +857,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 
 		fieldMagnification->setVisible(true);
 		fieldFov->setVisible(true);
-		if (mag>0)
+		if (mag>0 && !ocular->isBinoculars())
 			fieldExitPupil->setVisible(true);
 		else
 			fieldExitPupil->setVisible(false);
