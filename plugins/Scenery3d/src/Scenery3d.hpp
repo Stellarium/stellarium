@@ -38,7 +38,6 @@
 #include <QMatrix4x4>
 
 //predeclarations
-class QOpenGLFramebufferObject;
 class Scenery3dMgr;
 class LandscapeMgr;
 
@@ -178,6 +177,7 @@ private:
 	bool supportsShadowFiltering; //if shadow filtering is supported
 	bool isANGLE; //true if running on ANGLE
 	unsigned int maximumFramebufferSize;
+	GLuint defaultFBO; //the default background FBO handle
 
 	float torchBrightness; // toggle light brightness
 	float torchRange; // used to calculate attenuation like in the second form at http://framebunker.com/blog/lighting-2-attenuation/

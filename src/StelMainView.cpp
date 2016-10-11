@@ -243,6 +243,8 @@ protected:
 		Q_UNUSED(painter);
 		Q_UNUSED(rect);
 
+		qDebug()<<"GLWidget FBO:"<<parent->glWidget->defaultFramebufferObject();
+
 		const double now = StelApp::getTotalRunTime();
 		double dt = now - previousPaintTime;
 		//qDebug()<<"dt"<<dt;
@@ -451,6 +453,7 @@ void StelMainView::setOpenGLFormat() const
 	fmt.setRenderableType(QSurfaceFormat::OpenGL);
 	fmt.setMajorVersion(2);
 	fmt.setMinorVersion(1);
+	fmt.setOption(QSurfaceFormat::DebugContext);
 	//it seems that VSync is now enabled by default (at least on Windows), uncomment this to try to disable it
 	//fmt.setSwapInterval(0);
 
