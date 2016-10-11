@@ -272,13 +272,18 @@ void StelLogger::debugLogHandler(QtMsgType type, const QMessageLogContext& ctx, 
 	//Send debug messages to Debugger, if one is attached, instead of stderr
 	//This seems to avoid output delays in Qt Creator, allowing for easier debugging
 	//Seems to work fine with MSVC and MinGW
-	if(IsDebuggerPresent())
+	if (IsDebuggerPresent())
+	{
 		OutputDebugStringW(reinterpret_cast<LPCWSTR>(fmt.utf16()));
+		OutputDebugStringW(L"\n");
+	}
 	else
 #endif
-	//this does the same as the default handler in qlogging.cpp
-	fprintf(stderr, "%s\n", qPrintable(fmt));
-	fflush(stderr);
+	{
+		//this does the same as the default handler in qlogging.cpp
+		fprintf(stderr, "%s\n", qPrintable(fmt));
+		fflush(stderr);
+	}
 	writeLog(fmt);
 }
 

@@ -619,11 +619,10 @@ void StelApp::prepareRenderBuffer()
 	renderBuffer->bind();
 }
 
-void StelApp::applyRenderBuffer(int drawFbo)
+void StelApp::applyRenderBuffer(GLuint drawFbo)
 {
 	if (!renderBuffer) return;
-	renderBuffer->release();
-	if (drawFbo) GL(glBindFramebuffer(GL_FRAMEBUFFER, drawFbo));
+	GL(glBindFramebuffer(GL_FRAMEBUFFER, drawFbo));
 	viewportEffect->paintViewportBuffer(renderBuffer);
 }
 
@@ -633,10 +632,16 @@ void StelApp::draw()
 	if (!initialized)
 		return;
 
-	int drawFbo;
+	//find out which framebuffer is the current one
+	//this is usually NOT the "zero" FBO, but one provided by QOpenGLWidget
+	GLint drawFbo;
 	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &drawFbo);
+	qDebug()<<"StelApp drawFBO:"<<drawFbo;
 
 	prepareRenderBuffer();
+
+	currentFbo = renderBuffer ? renderBuffer->handle() : drawFbo;
+	qDebug()<<"StelApp currentFBO:"<<currentFbo;
 	core->preDraw();
 
 	const QList<StelModule*> modules = moduleMgr->getCallOrders(StelModule::ActionDraw);

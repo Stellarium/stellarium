@@ -43,13 +43,13 @@
 #include <stdexcept>
 #include <cmath>
 #include <QOpenGLShaderProgram>
-#include <QOpenGLFramebufferObject>
 
 #define GET_GLERROR()                                   \
 {                                                       \
     GLenum err = glGetError();                          \
-    if (err != GL_NO_ERROR) {                           \
+    while (err != GL_NO_ERROR) {                        \
     qWarning("[line %d] GL Error: %d",__LINE__, err);   \
+    err = glGetError();                                 \
     }                                                   \
 }
 
@@ -796,7 +796,7 @@ bool Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 			}
 		}
 
-
+		GET_GLERROR()
 		glDrawElements(GL_TRIANGLES, pStelModel->triangleCount * 3, indexDataType, reinterpret_cast<const void*>(pStelModel->startIndex * indexDataTypeSize));
 		drawnTriangles+=pStelModel->triangleCount;
 	}
@@ -1124,7 +1124,7 @@ bool Scenery3d::renderShadowMaps()
 
 
 	//Unbind
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glBindFramebuffer(GL_FRAMEBUFFER, defaultFBO);
 
 	//reset viewport (see StelPainter::setProjector)
 	const Vec4i& vp = altAzProjector->getViewport();
@@ -1570,7 +1570,7 @@ void Scenery3d::generateCubeMap()
 	}
 
 	//cubemap fbo must be released
-	glBindFramebuffer(GL_FRAMEBUFFER,0);
+	glBindFramebuffer(GL_FRAMEBUFFER,defaultFBO);
 
 	//reset GL state
 	glDepthMask(GL_FALSE);
@@ -2356,7 +2356,7 @@ bool Scenery3d::initCubemapping()
 	}
 
 	//unbind last framebuffer
-	glBindFramebuffer(GL_FRAMEBUFFER,0);
+	glBindFramebuffer(GL_FRAMEBUFFER,defaultFBO);
 
 	//initialize cube rotations... found by trial and error :)
 	QMatrix4x4 stackBase;
@@ -2676,7 +2676,7 @@ bool Scenery3d::initShadowmapping()
 		}
 
 		//Done. Unbind and switch to normal texture unit 0
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glBindFramebuffer(GL_FRAMEBUFFER, defaultFBO);
 		glActiveTexture(GL_TEXTURE0);
 
 		qDebug()<<"[Scenery3D] shadowmapping initialized";
@@ -2699,6 +2699,14 @@ void Scenery3d::draw(StelCore* core)
 	//cant draw if no models
 	if(!objModel || !objModel->hasStelModels())
 		return;
+
+	//find out the default FBO
+	defaultFBO = StelApp::getInstance().getDefaultFBO();
+
+	qDebug()<<"OGLContext FBO:"<<QOpenGLContext::currentContext()->defaultFramebufferObject();
+	GLint meh;
+	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &meh);
+	qDebug()<<"Cur FBO:"<<meh;
 
 	//reset render statistic
 	drawnTriangles = drawnModels = materialSwitches = shaderSwitches = 0;

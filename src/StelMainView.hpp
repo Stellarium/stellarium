@@ -41,6 +41,7 @@ class StelMainView : public QGraphicsView
 {
 	friend class StelGuiItem;
 	friend class StelSkyItem;
+	friend class StelGraphicsScene;
 	Q_OBJECT
 	Q_PROPERTY(bool fullScreen READ isFullScreen WRITE setFullScreen NOTIFY fullScreenChanged)
 
@@ -68,8 +69,6 @@ public:
 	QGraphicsWidget* getGuiWidget() const {return guiItem;}
 	//! Return mouse position coordinates
 	QPoint getMousePos();
-
-	void drawEnded();
 public slots:
 
 	//! Set whether fullscreen is activated or not
@@ -155,6 +154,8 @@ private slots:
 	void minFPSUpdate();
 
 private:
+	//! The graphics scene notifies us when a draw finished, so that we can queue the next one
+	void drawEnded();
 	//! Sets the desired OpenGL format settings
 	void setOpenGLFormat() const;
 	//! provide extended OpenGL diagnostics in logfile.

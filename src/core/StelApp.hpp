@@ -231,6 +231,10 @@ public slots:
 	//! @return the FPS averaged on the last second
 	float getFps() const {return fps;}
 
+	//! Returns the default FBO handle, to be used when StelModule instances want to release their own FBOs.
+	//! Valid through a StelModule::draw() call, do not use elsewhere.
+	quint32 getDefaultFBO() const { return currentFbo; }
+
 	//! Return the time since when stellarium is running in second.
 	static double getTotalRunTime();
 
@@ -271,7 +275,7 @@ private:
 	void prepareRenderBuffer();
 	//! Used internally to set the viewport effects.
 	//! @param drawFbo the OpenGL fbo we need to render into.
-	void applyRenderBuffer(int drawFbo=0);
+	void applyRenderBuffer(quint32 drawFbo=0);
 
 	// The StelApp singleton
 	static StelApp* singleton;
@@ -384,6 +388,9 @@ private:
 	bool flagShowDecimalDegrees;
 	// flag to indicate we want calculate azimuth from south towards west (as in old astronomical literature)
 	bool flagUseAzimuthFromSouth;
+
+	// The current FBO/render target handle, without requiring GL queries. Valid through a draw() call
+	quint32 currentFbo;
 
 };
 
