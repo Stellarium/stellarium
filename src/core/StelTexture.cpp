@@ -47,6 +47,9 @@ StelTexture::~StelTexture()
 {
 	if (id != 0)
 	{
+		//make sure the correct GL context is bound!
+		StelApp::getInstance().ensureGLContextCurrent();
+
 		if (glIsTexture(id)==GL_FALSE)
 		{
 			qDebug() << "WARNING: in StelTexture::~StelTexture() tried to delete invalid texture with ID=" << id << "Current GL ERROR status is" << glGetError() << "(" << getGLErrorText(glGetError()) << ")";
@@ -262,6 +265,9 @@ bool StelTexture::glLoad(const GLData& data)
 
 	width = data.width;
 	height = data.height;
+
+	//make sure the correct GL context is bound!
+	StelApp::getInstance().ensureGLContextCurrent();
 
 	//check minimum texture size
 	GLint maxSize;
