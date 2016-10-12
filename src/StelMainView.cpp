@@ -59,6 +59,9 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLFramebufferObject>
 #include <QOpenGLPaintDevice>
+#ifdef OPENGL_DEBUG_LOGGING
+#include <QOpenGLDebugLogger>
+#endif
 
 #include <clocale>
 
@@ -404,6 +407,11 @@ StelMainView::StelMainView(QSettings* settings)
 
 	lastEventTimeSec = 0;
 
+#ifdef OPENGL_DEBUG_LOGGING
+	glLogger = new QOpenGLDebugLogger(this);
+	connect(glLogger, SIGNAL(messageLogged(QOpenGLDebugMessage)), this, SLOT(logGLMessage(QOpenGLDebugMessage)));
+#endif
+
 	//set the surface format BEFORE creating the widget
 	setOpenGLFormat();
 	glWidget = new StelGLWidget(this);
@@ -453,7 +461,12 @@ void StelMainView::setOpenGLFormat() const
 	fmt.setRenderableType(QSurfaceFormat::OpenGL);
 	fmt.setMajorVersion(2);
 	fmt.setMinorVersion(1);
+
+#ifdef OPENGL_DEBUG_LOGGING
+	//try to enable GL debugging using GL_KHR_debug
 	fmt.setOption(QSurfaceFormat::DebugContext);
+#endif
+
 	//it seems that VSync is now enabled by default (at least on Windows), uncomment this to try to disable it
 	//fmt.setSwapInterval(0);
 
@@ -464,6 +477,22 @@ void StelMainView::setOpenGLFormat() const
 
 void StelMainView::init()
 {
+#ifdef OPENGL_DEBUG_LOGGING
+	if(!QOpenGLContext::currentContext()->hasExtension(QByteArrayLiteral("GL_KHR_debug")))
+		qWarning()<<"GL_KHR_debug extension missing, OpenGL debug logger will likely not work";
+	if(glLogger->initialize())
+	{
+		qDebug()<<"OpenGL debug logger initialized";
+		glLogger->startLogging(QOpenGLDebugLogger::SynchronousLogging);
+		//the internal log buffer may not be empty, so check it
+		foreach(const QOpenGLDebugMessage& msg, glLogger->loggedMessages())
+		{
+			logGLMessage(msg);
+		}
+	}
+	else
+		qWarning()<<"Failed to initialize OpenGL debug logger";
+#endif
 	qDebug()<<"StelMainView::init";
 	gui = new StelGui();
 
@@ -988,6 +1017,11 @@ void StelMainView::minFPSUpdate()
 	{
 		//qDebug()<<"double update";
 	}
+}
+
+void StelMainView::logGLMessage(const QOpenGLDebugMessage &debugMessage)
+{
+	qDebug()<<debugMessage;
 }
 
 void StelMainView::thereWasAnEvent()
