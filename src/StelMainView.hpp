@@ -25,6 +25,9 @@
 #include <QEventLoop>
 #include <QOpenGLContext>
 #include <QTimer>
+#ifdef OPENGL_DEBUG_LOGGING
+#include <QOpenGLDebugMessage>
+#endif
 
 class StelGLWidget;
 class StelGraphicsScene;
@@ -152,6 +155,9 @@ private slots:
 	void doScreenshot(void);
 	void updateNightModeProperty();
 	void minFPSUpdate();
+#ifdef OPENGL_DEBUG_LOGGING
+	void logGLMessage(const QOpenGLDebugMessage& debugMessage);
+#endif
 
 private:
 	//! The graphics scene notifies us when a draw finished, so that we can queue the next one
@@ -200,6 +206,10 @@ private:
 	//! The maximum desired frame rate in frame per second.
 	float maxfps;
 	QTimer* minFpsTimer;
+
+#ifdef OPENGL_DEBUG_LOGGING
+	QOpenGLDebugLogger* glLogger;
+#endif
 };
 
 
