@@ -29,6 +29,7 @@ class StelTextureMgr;
 class StelObjectMgr;
 class StelLocaleMgr;
 class StelModuleMgr;
+class StelMainView;
 class StelSkyCultureMgr;
 class StelViewportEffect;
 class QOpenGLFramebufferObject;
@@ -72,7 +73,7 @@ public:
 	//! The configFile will be search for in the search path by the StelFileMgr,
 	//! it is therefor possible to specify either just a file name or path within the
 	//! search path, or use a full path or even a relative path to an existing file
-	StelApp(QObject* parent=NULL);
+	StelApp(StelMainView* parent);
 
 	//! Deinitialize and destroy the main Stellarium application.
 	virtual ~StelApp();
@@ -232,8 +233,15 @@ public slots:
 	float getFps() const {return fps;}
 
 	//! Returns the default FBO handle, to be used when StelModule instances want to release their own FBOs.
+	//! Note that this is usually not the same as QOpenGLContext::defaultFramebufferObject(),
+	//! so use this call instead of the Qt version!
 	//! Valid through a StelModule::draw() call, do not use elsewhere.
 	quint32 getDefaultFBO() const { return currentFbo; }
+
+	//! Makes sure the correct GL context used for main drawing is made current.
+	//! This is always the case during init() and draw() calls, but if OpenGL access is required elsewhere,
+	//! this MUST be called before using any GL functions.
+	void ensureGLContextCurrent();
 
 	//! Return the time since when stellarium is running in second.
 	static double getTotalRunTime();
@@ -279,6 +287,9 @@ private:
 
 	// The StelApp singleton
 	static StelApp* singleton;
+
+	//! The main window which is the parent of this object
+	StelMainView* mainWin;
 
 	// The associated StelCore instance
 	StelCore* core;
@@ -389,7 +400,7 @@ private:
 	// flag to indicate we want calculate azimuth from south towards west (as in old astronomical literature)
 	bool flagUseAzimuthFromSouth;
 
-	// The current FBO/render target handle, without requiring GL queries. Valid through a draw() call
+	// The current main FBO/render target handle, without requiring GL queries. Valid through a draw() call
 	quint32 currentFbo;
 
 };

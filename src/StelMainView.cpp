@@ -198,6 +198,9 @@ protected:
 		//GL related stuff of the application
 		//this includes all the init() calls of the modules
 
+		Q_ASSERT(context() == QOpenGLContext::currentContext());
+		mainContext = context(); //throw an error when StelOpenGL functions are executed in another context
+
 		qDebug()<<"initializeGL";
 		qDebug() << "OpenGL supported version: " << QString((char*)glGetString(GL_VERSION));
 		qDebug() << "Current Format: " << this->format();
@@ -246,7 +249,8 @@ protected:
 		Q_UNUSED(painter);
 		Q_UNUSED(rect);
 
-		qDebug()<<"GLWidget FBO:"<<parent->glWidget->defaultFramebufferObject();
+		//a sanity check
+		Q_ASSERT(parent->glWidget->context() == QOpenGLContext::currentContext());
 
 		const double now = StelApp::getTotalRunTime();
 		double dt = now - previousPaintTime;
@@ -505,7 +509,8 @@ void StelMainView::init()
 		processOpenGLdiagnosticsAndWarnings(conf, QOpenGLContext::currentContext());
 	}
 
-	stelApp= new StelApp();
+	//create and initialize main app
+	stelApp = new StelApp(this);
 	stelApp->setGui(gui);
 	stelApp->init(conf);
 	//this makes sure the app knows how large the window is
@@ -574,23 +579,23 @@ void StelMainView::init()
 
 	// XXX: This should be done in StelApp::init(), unfortunately for the moment we need init the gui before the
 	// plugins, because the gui create the QActions needed by some plugins.
-	StelApp::getInstance().initPlugIns();
+	stelApp->initPlugIns();
 
 	// The script manager can only be fully initialized after the plugins have loaded.
-	StelApp::getInstance().initScriptMgr();
+	stelApp->initScriptMgr();
 
 	// Set the global stylesheet, this is only useful for the tooltips.
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	StelGui* gui = dynamic_cast<StelGui*>(stelApp->getGui());
 	if (gui!=NULL)
 		setStyleSheet(gui->getStelStyle().qtStyleSheet);
-	connect(&StelApp::getInstance(), SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty()));
+	connect(stelApp, SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty()));
 }
 
 void StelMainView::updateNightModeProperty()
 {
 	// So that the bottom bar tooltips get properly rendered in night mode.
-	setProperty("nightMode", StelApp::getInstance().getVisionModeNight());
-	nightModeEffect->setEnabled(StelApp::getInstance().getVisionModeNight());
+	setProperty("nightMode", stelApp->getVisionModeNight());
+	nightModeEffect->setEnabled(stelApp->getVisionModeNight());
 }
 
 // This is a series of various diagnostics based on "bugs" reported for 0.13.0 and 0.13.1.
@@ -947,6 +952,7 @@ void StelMainView::dumpOpenGLdiagnostics() const
 
 void StelMainView::deinit()
 {
+	glContextMakeCurrent();
 	deinitGL();
 	delete stelApp;
 	stelApp = NULL;
@@ -970,7 +976,7 @@ void StelMainView::setFullScreen(bool b)
 		// Therefore moving is not possible. We must move to the stored position or at least defaults.
 		if ( (x()<0)  && (y()<0))
 		{
-			QSettings *conf = StelApp::getInstance().getSettings();
+			QSettings *conf = stelApp->getSettings();
 			QDesktopWidget *desktop = QApplication::desktop();
 			int screen = conf->value("video/screen_number", 0).toInt();
 			if (screen < 0 || screen >= desktop->screenCount())
@@ -1019,10 +1025,12 @@ void StelMainView::minFPSUpdate()
 	}
 }
 
+#ifdef OPENGL_DEBUG_LOGGING
 void StelMainView::logGLMessage(const QOpenGLDebugMessage &debugMessage)
 {
 	qDebug()<<debugMessage;
 }
+#endif
 
 void StelMainView::thereWasAnEvent()
 {
@@ -1038,7 +1046,7 @@ bool StelMainView::needsMaxFPS() const
 	// The current policy is that after an event, the FPS is maximum for 2.5 seconds
 	// after that, it switches back to the default minfps value to save power.
 	// The fps is also kept to max if the timerate is higher than normal speed.
-	const float timeRate = StelApp::getInstance().getCore()->getTimeRate();
+	const float timeRate = stelApp->getCore()->getTimeRate();
 	return (now - lastEventTimeSec < 2.5) || fabs(timeRate) > StelCore::JD_SECOND;
 }
 
@@ -1049,19 +1057,19 @@ void StelMainView::moveEvent(QMoveEvent * event)
 	// We use the glWidget instead of the even, as we want the screen that shows most of the widget.
 	QWindow* win = glWidget->windowHandle();
 	if(win)
-		StelApp::getInstance().setDevicePixelsPerPixel(win->devicePixelRatio());
+		stelApp->setDevicePixelsPerPixel(win->devicePixelRatio());
 }
 
 void StelMainView::closeEvent(QCloseEvent* event)
 {
 	Q_UNUSED(event);
-	StelApp::getInstance().quit();
+	stelApp->quit();
 }
 
 //! Delete openGL textures (to call before the GLContext disappears)
 void StelMainView::deinitGL()
 {
-	StelApp::getInstance().deinit();
+	stelApp->deinit();
 	delete gui;
 	gui = NULL;
 }
@@ -1121,6 +1129,21 @@ void StelMainView::doScreenshot(void)
 QPoint StelMainView::getMousePos()
 {
 	return glWidget->mapFromGlobal(QCursor::pos());
+}
+
+QOpenGLContext* StelMainView::glContext() const
+{
+	return glWidget->context();
+}
+
+void StelMainView::glContextMakeCurrent()
+{
+	glWidget->makeCurrent();
+}
+
+void StelMainView::glContextDoneCurrent()
+{
+	glWidget->doneCurrent();
 }
 
 void StelMainView::setFocusOnSky()
