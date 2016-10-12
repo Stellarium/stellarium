@@ -99,6 +99,7 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
 	shaderParameters.geometryShader = false;
 	shaderParameters.torchLight = false;
 	shaderParameters.frustumSplits = 0;
+	shaderParameters.hwShadowSamplers = false;
 
 	sceneBoundingBox = AABB(Vec3f(0.0f), Vec3f(0.0f));
 
@@ -2618,7 +2619,23 @@ bool Scenery3d::initShadowmapping()
 			//for OpenGL ES2, type has to be UNSIGNED_SHORT or UNSIGNED_INT for depth textures, desktop does probably not care
 			glTexImage2D(GL_TEXTURE_2D, 0, (pcssEnabled ? depthPcss : depthNormal), shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, NULL);
 
-			GLint filter = (shaderParameters.shadowFilterQuality == S3DEnum::SFQ_HARDWARE
+			//we use hardware-accelerated depth compare mode, unless pcss is used
+			shaderParameters.hwShadowSamplers = false;
+			//NOTE: cant use depth compare mode on ES2
+			if(!pcssEnabled)
+			{
+#ifndef QT_OPENGL_ES_2
+				if(!isEs)
+				{
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+					shaderParameters.hwShadowSamplers = true;
+				}
+#endif
+			}
+
+			//IF we support hw shadow sampling, then we may enable linear filtering, otherwise filtering depth values directly would not make much sense
+			GLint filter = shaderParameters.hwShadowSamplers && (shaderParameters.shadowFilterQuality == S3DEnum::SFQ_HARDWARE
 					|| shaderParameters.shadowFilterQuality == S3DEnum::SFQ_LOW_HARDWARE
 					|| shaderParameters.shadowFilterQuality == S3DEnum::SFQ_HIGH_HARDWARE) ? GL_LINEAR : GL_NEAREST;
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
@@ -2634,18 +2651,6 @@ bool Scenery3d::initShadowmapping()
 				glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ones);
 			}
 #endif
-			//we use hardware-accelerated depth compare mode, unless pcss is used
-			//NOTE: cant use depth compare mode on ES2
-			if(!pcssEnabled)
-			{
-#ifndef QT_OPENGL_ES_2
-				if(!isEs)
-				{
-					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
-					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
-				}
-#endif
-			}
 
 			//Attach the depthmap to the Buffer
 			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapsArray[i], 0);
