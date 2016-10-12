@@ -18,13 +18,13 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-11 02:35+0700\n"
-"PO-Revision-Date: 2016-09-21 16:15+0000\n"
+"PO-Revision-Date: 2016-10-11 19:00+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-10-11 05:58+0000\n"
+"X-Launchpad-Export-Date: 2016-10-12 05:48+0000\n"
 "X-Generator: Launchpad (build 18227)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -41,15 +41,15 @@ msgstr "Type : <b>%1</b>"
 
 #: src/core/modules/CustomObject.cpp:67
 msgid "custom marker"
-msgstr ""
+msgstr "marqueur personnalisé"
 
 #: src/core/modules/CustomObject.cpp:69
 msgid "custom object"
-msgstr ""
+msgstr "objet personnalisé"
 
 #: src/core/modules/CustomObjectMgr.cpp:81
 msgid "Marker"
-msgstr ""
+msgstr "Marqueur"
 
 #: src/core/modules/Constellation.cpp:296
 msgid "constellation"
@@ -131,7 +131,7 @@ msgstr "Équateur galactique"
 
 #: src/core/modules/GridLinesMgr.cpp:678
 msgid "Supergalactic Equator"
-msgstr ""
+msgstr "Équateur supergalactique"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:683 src/ui_viewDialog.h:2075
@@ -158,24 +158,24 @@ msgstr "Cercle circumpolaire"
 #. TRANSLATORS: North Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:917 src/core/modules/GridLinesMgr.cpp:926
 msgid "NCP"
-msgstr ""
+msgstr "PNC"
 
 #. TRANSLATORS: South Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:919 src/core/modules/GridLinesMgr.cpp:928
 msgid "SCP"
-msgstr ""
+msgstr "PSC"
 
 #. TRANSLATORS: Zenith
 #: src/core/modules/GridLinesMgr.cpp:935
 msgctxt "zenith"
 msgid "Z"
-msgstr ""
+msgstr "Z"
 
 #. TRANSLATORS: Nadir
 #: src/core/modules/GridLinesMgr.cpp:937
 msgctxt "nadir"
 msgid "Z'"
-msgstr ""
+msgstr "Z'"
 
 #. TRANSLATORS: North Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:944 src/core/modules/GridLinesMgr.cpp:953
@@ -190,22 +190,22 @@ msgstr ""
 #. TRANSLATORS: North Galactic Pole
 #: src/core/modules/GridLinesMgr.cpp:962
 msgid "NGP"
-msgstr ""
+msgstr "PNG"
 
 #. TRANSLATORS: South Galactic Pole
 #: src/core/modules/GridLinesMgr.cpp:964
 msgid "SGP"
-msgstr ""
+msgstr "PSG"
 
 #. TRANSLATORS: North Supergalactic Pole
 #: src/core/modules/GridLinesMgr.cpp:971
 msgid "NSGP"
-msgstr ""
+msgstr "PNSG"
 
 #. TRANSLATORS: South Supergalactic Pole
 #: src/core/modules/GridLinesMgr.cpp:973
 msgid "SSGP"
-msgstr ""
+msgstr "PSSG"
 
 #: src/core/modules/GridLinesMgr.cpp:1215
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:339
@@ -269,11 +269,11 @@ msgstr "Équateur galactique"
 
 #: src/core/modules/GridLinesMgr.cpp:1228 src/ui_viewDialog.h:2171
 msgid "Supergalactic grid"
-msgstr ""
+msgstr "Grille supergalactique"
 
 #: src/core/modules/GridLinesMgr.cpp:1229 src/ui_viewDialog.h:2064
 msgid "Supergalactic equator"
-msgstr ""
+msgstr "Équateur supergalactique"
 
 #: src/core/modules/GridLinesMgr.cpp:1230
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:405
@@ -294,39 +294,39 @@ msgstr "Cercles circumpolaires"
 
 #: src/core/modules/GridLinesMgr.cpp:1235
 msgid "Celestial J2000 poles"
-msgstr ""
+msgstr "Pôles célestes J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1236
 msgid "Celestial poles"
-msgstr ""
+msgstr "Pôles célestes"
 
 #: src/core/modules/GridLinesMgr.cpp:1237
 msgid "Zenith and nadir"
-msgstr ""
+msgstr "Zénith et nadir"
 
 #: src/core/modules/GridLinesMgr.cpp:1238
 msgid "Ecliptic J2000 poles"
-msgstr ""
+msgstr "Pôles de l'écliptique J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1239
 msgid "Ecliptic poles"
-msgstr ""
+msgstr "Pôles de l'écliptique"
 
 #: src/core/modules/GridLinesMgr.cpp:1240 src/ui_viewDialog.h:2125
 msgid "Galactic poles"
-msgstr ""
+msgstr "Pôles galactiques"
 
 #: src/core/modules/GridLinesMgr.cpp:1241 src/ui_viewDialog.h:2086
 msgid "Supergalactic poles"
-msgstr ""
+msgstr "Pôles supergalactiques"
 
 #: src/core/modules/GridLinesMgr.cpp:1242
 msgid "Equinox J2000 points"
-msgstr ""
+msgstr "Points équinoxiaux J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1243
 msgid "Equinox points"
-msgstr ""
+msgstr "Points équinoxiaux"
 
 #: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1897
 msgid "Atmosphere"
@@ -1880,7 +1880,7 @@ msgstr "Longitude/latitude galactique : %1/%2"
 #: src/core/StelObject.cpp:256 src/core/StelObject.cpp:258
 #, qt-format
 msgid "Supergalactic longitude/latitude: %1/%2"
-msgstr ""
+msgstr "Longitude/latitude supergalactique : %1/%2"
 
 #: src/core/StelObject.cpp:267
 #, qt-format
@@ -2263,19 +2263,19 @@ msgstr "CTRL + Clic gauche"
 
 #: src/gui/HelpDialog.cpp:173
 msgid "Add custom marker"
-msgstr ""
+msgstr "Ajouter un marqueur"
 
 #: src/gui/HelpDialog.cpp:174
 msgid "Shift + Left click"
-msgstr ""
+msgstr "Maj + clic gauche"
 
 #: src/gui/HelpDialog.cpp:176
 msgid "Delete all custom markers"
-msgstr ""
+msgstr "Supprimer tous les marqueurs personnalisés"
 
 #: src/gui/HelpDialog.cpp:177
 msgid "Shift + Right click"
-msgstr ""
+msgstr "Maj + clic droit"
 
 #: src/gui/HelpDialog.cpp:180
 #, qt-format
@@ -2289,11 +2289,11 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:209
 msgid "Text User Interface (TUI)"
-msgstr ""
+msgstr "Interface texte"
 
 #: src/gui/HelpDialog.cpp:211
 msgid "Activate TUI"
-msgstr ""
+msgstr "Activer l'interface texte"
 
 #: src/gui/HelpDialog.cpp:220
 msgid ""
@@ -2764,7 +2764,7 @@ msgstr "Galactique"
 #: src/gui/SearchDialog.cpp:216
 msgctxt "coordinate system"
 msgid "Supergalactic"
-msgstr ""
+msgstr "Supergalactique"
 
 #: src/gui/SearchDialog.cpp:217
 msgctxt "coordinate system"
@@ -2899,7 +2899,7 @@ msgstr "Jour julien"
 #. TRANSLATORS: visible magnitude
 #: src/gui/AstroCalcDialog.cpp:283
 msgid "Vis. mag."
-msgstr ""
+msgstr "Mag. vis."
 
 #: src/gui/AstroCalcDialog.cpp:386 src/gui/AstroCalcDialog.cpp:760
 msgid "CSV (Comma delimited)"
@@ -3204,7 +3204,7 @@ msgstr "Constellations"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:86
 msgid "Custom Objects"
-msgstr ""
+msgstr "Objets personnalisés"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:91
@@ -5014,7 +5014,7 @@ msgstr "Annuler"
 
 #: src/translations.h:614
 msgid "&Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #: src/translations.h:615
 msgid "Files of type:"
@@ -5730,7 +5730,7 @@ msgstr "Afficher l'équateur galactique"
 
 #: src/ui_viewDialog.h:2046
 msgid "Color of supergalactic equator"
-msgstr ""
+msgstr "Couleur de l'équateur supergalactique"
 
 #: src/ui_viewDialog.h:2049
 msgid "Color of ecliptic (of date)"
@@ -5789,7 +5789,7 @@ msgstr "Couleur des colures"
 
 #: src/ui_viewDialog.h:2088
 msgid "Color of the ecliptic poles (J2000.0)"
-msgstr ""
+msgstr "Couleur des pôles de l'écliptique (J2000.0)"
 
 #: src/ui_viewDialog.h:2091
 msgid "Color of Prime Vertical"
@@ -5797,43 +5797,43 @@ msgstr "Couleur du premier vertical"
 
 #: src/ui_viewDialog.h:2094
 msgid "Show ecliptic poles of J2000.0"
-msgstr ""
+msgstr "Afficher les pôles de l'écliptique (J2000.0)"
 
 #: src/ui_viewDialog.h:2096
 msgid "Ecliptic poles (J2000)"
-msgstr ""
+msgstr "Pôles de l'écliptique (J2000)"
 
 #: src/ui_viewDialog.h:2098
 msgid "Color of the celestial poles (J2000.0)"
-msgstr ""
+msgstr "Couleur des pôles célestes (J2000.0)"
 
 #: src/ui_viewDialog.h:2101
 msgid "Show celestial poles of current planet and date."
-msgstr ""
+msgstr "Afficher les pôles célestes de la planète actuelle et de la date."
 
 #: src/ui_viewDialog.h:2103
 msgid "Celestial poles (of date)"
-msgstr ""
+msgstr "Pôles célestes (de la date)"
 
 #: src/ui_viewDialog.h:2105
 msgid "Color of ecliptic poles (of date)"
-msgstr ""
+msgstr "Couleur des pôles de l'écliptique (de la date)"
 
 #: src/ui_viewDialog.h:2108
 msgid "Color of celestial poles (of date)"
-msgstr ""
+msgstr "Couleur des pôles célestes (de la date)"
 
 #: src/ui_viewDialog.h:2111
 msgid "Color of supergalactic poles"
-msgstr ""
+msgstr "Couleur des pôles supergalactiques"
 
 #: src/ui_viewDialog.h:2114
 msgid "Show ecliptic poles of current date."
-msgstr ""
+msgstr "Afficher les pôles de l'écliptique de la date."
 
 #: src/ui_viewDialog.h:2116
 msgid "Ecliptic poles (of date)"
-msgstr ""
+msgstr "Pôles de l'écliptique (de la date)"
 
 #: src/ui_viewDialog.h:2118
 msgid "Show Prime (East-West) Vertical."
@@ -5841,23 +5841,23 @@ msgstr "Afficher le premier vertical (Est-Ouest)."
 
 #: src/ui_viewDialog.h:2122
 msgid "Color of galactic poles"
-msgstr ""
+msgstr "Couleur des pôles galactiques"
 
 #: src/ui_viewDialog.h:2124
 msgid "Zenith and Nadir"
-msgstr ""
+msgstr "Zénith et nadir"
 
 #: src/ui_viewDialog.h:2127
 msgid "Color of Zenith and Nadir"
-msgstr ""
+msgstr "Couleur du zénith et du nadir"
 
 #: src/ui_viewDialog.h:2130
 msgid "Show celestial poles of J2000.0."
-msgstr ""
+msgstr "Afficher les pôles célestes J2000.0"
 
 #: src/ui_viewDialog.h:2132
 msgid "Celestial poles (J2000)"
-msgstr ""
+msgstr "Pôles célestes (J2000)"
 
 #: src/ui_viewDialog.h:2134
 msgid ""
@@ -5909,7 +5909,7 @@ msgstr "Couleur de la grille équatoriale (J2000.0)"
 
 #: src/ui_viewDialog.h:2159
 msgid "Color of the equinox points (J2000.0)"
-msgstr ""
+msgstr "Couleur des points équinoxiaux (J2000.0)"
 
 #: src/ui_viewDialog.h:2162
 msgid "Ecliptical coordinates for J2000.0."
@@ -5921,7 +5921,7 @@ msgstr "Grille écliptique (J2000.0)"
 
 #: src/ui_viewDialog.h:2166
 msgid "Color of the supergalactic grid"
-msgstr ""
+msgstr "Couleur de la grille supergalactique"
 
 #: src/ui_viewDialog.h:2169
 msgid "Color of the galactic grid"
@@ -5945,7 +5945,7 @@ msgstr "Coordonnées galactiques, système II ((IAU 1958)"
 
 #: src/ui_viewDialog.h:2183
 msgid "Equinoxes (J2000)"
-msgstr ""
+msgstr "Équinoxes (J2000)"
 
 #: src/ui_viewDialog.h:2185
 msgid "Color of the ecliptical grid (of date)"
@@ -5969,11 +5969,11 @@ msgstr "Grille équatoriale (de la date)"
 
 #: src/ui_viewDialog.h:2197
 msgid "Equinoxes (of date)"
-msgstr ""
+msgstr "Équinoxes (de la date)"
 
 #: src/ui_viewDialog.h:2199
 msgid "Color of the equinox points (of date)"
-msgstr ""
+msgstr "Couleur des points équinoxiaux (de la date)"
 
 #: src/ui_viewDialog.h:2202
 msgid "Labels for the Cardinal directions."
@@ -7754,7 +7754,7 @@ msgstr "Utiliser un masque semi-transparent"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1140
 msgid "Hide grids and lines when enabled"
-msgstr ""
+msgstr "Masque les grilles et lignes lorsqu'activé"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1141
 msgid "Sensor view"
@@ -13940,7 +13940,7 @@ msgstr "Long/lat gal."
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:221
 msgctxt "abbreviated in the plugin"
 msgid "Supergal. Long/Lat"
-msgstr ""
+msgstr "Lon/Lat supergal."
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:240
 msgctxt "abbreviated in the plugin"
@@ -14003,7 +14003,7 @@ msgstr "Longitude/latitude galactique"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:203
 msgid "Supergalactic Longitude/Latitude"
-msgstr ""
+msgstr "Longitude/Latitude supergalactique"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:233
 msgid "Coordinates of custom position:"
