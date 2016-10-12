@@ -102,6 +102,7 @@ ShaderMgr::ShaderMgr()
 		featureFlagsStrings["PCSS"] = PCSS;
 		featureFlagsStrings["SINGLE_SHADOW_FRUSTUM"] = SINGLE_SHADOW_FRUSTUM;
 		featureFlagsStrings["OGL_ES2"] = OGL_ES2;
+		featureFlagsStrings["HW_SHADOW_SAMPLERS"] = HW_SHADOW_SAMPLERS;
 	}
 }
 
