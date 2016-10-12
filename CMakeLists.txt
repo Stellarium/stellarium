@@ -59,6 +59,11 @@ if(NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
     ADD_DEFINITIONS(-DQT_NO_DEBUG -DNDEBUG)
 endif()
 
+set(OPENGL_DEBUG_LOGGING 0 CACHE BOOL "Enable to log OpenGL information using the GL_KHR_debug extension/QOpenGLLogger")
+if(OPENGL_DEBUG_LOGGING)
+    add_definitions(-DOPENGL_DEBUG_LOGGING)
+endif()
+
 # Use ccache if possible
 find_program(CCACHE_PROGRAM ccache)
 if(CCACHE_PROGRAM)
