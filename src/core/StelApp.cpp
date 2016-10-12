@@ -20,6 +20,7 @@
 #include "StelApp.hpp"
 
 #include "StelCore.hpp"
+#include "StelMainView.hpp"
 #include "StelUtils.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
@@ -202,8 +203,9 @@ void StelApp::deinitStatic()
 /*************************************************************************
  Create and initialize the main Stellarium application.
 *************************************************************************/
-StelApp::StelApp(QObject* parent)
+StelApp::StelApp(StelMainView *parent)
 	: QObject(parent)
+	, mainWin(parent)
 	, core(NULL)
 	, planetLocationMgr(NULL)
 	, audioMgr(NULL)
@@ -636,12 +638,10 @@ void StelApp::draw()
 	//this is usually NOT the "zero" FBO, but one provided by QOpenGLWidget
 	GLint drawFbo;
 	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &drawFbo);
-	qDebug()<<"StelApp drawFBO:"<<drawFbo;
 
 	prepareRenderBuffer();
-
 	currentFbo = renderBuffer ? renderBuffer->handle() : drawFbo;
-	qDebug()<<"StelApp currentFBO:"<<currentFbo;
+
 	core->preDraw();
 
 	const QList<StelModule*> modules = moduleMgr->getCallOrders(StelModule::ActionDraw);
@@ -667,6 +667,7 @@ void StelApp::glWindowHasBeenResized(const QRectF& rect)
 	}
 	if (renderBuffer)
 	{
+		ensureGLContextCurrent();
 		delete renderBuffer;
 		renderBuffer = NULL;
 	}
@@ -804,6 +805,11 @@ void StelApp::updateI18n()
 #endif
 }
 
+void StelApp::ensureGLContextCurrent()
+{
+	mainWin->glContextMakeCurrent();
+}
+
 // Return the time since when stellarium is running in second.
 double StelApp::getTotalRunTime()
 {
@@ -854,6 +860,7 @@ void StelApp::setViewportEffect(const QString& name)
 	if (name == getViewportEffect()) return;
 	if (renderBuffer)
 	{
+		ensureGLContextCurrent();
 		delete renderBuffer;
 		renderBuffer = NULL;
 	}

@@ -72,6 +72,10 @@ public:
 	QGraphicsWidget* getGuiWidget() const {return guiItem;}
 	//! Return mouse position coordinates
 	QPoint getMousePos();
+
+	QOpenGLContext* glContext() const;
+	void glContextMakeCurrent();
+	void glContextDoneCurrent();
 public slots:
 
 	//! Set whether fullscreen is activated or not

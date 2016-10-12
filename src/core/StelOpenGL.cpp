@@ -19,6 +19,8 @@
 #include <cstdio>
 #include "StelOpenGL.hpp"
 
+QOpenGLContext* mainContext = NULL;
+
 const char* getGLErrorText(int code) {
 	switch (code) {
 		case GL_INVALID_ENUM:

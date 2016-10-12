@@ -44,14 +44,7 @@
 #include <cmath>
 #include <QOpenGLShaderProgram>
 
-#define GET_GLERROR()                                   \
-{                                                       \
-    GLenum err = glGetError();                          \
-    while (err != GL_NO_ERROR) {                        \
-    qWarning("[line %d] GL Error: %d",__LINE__, err);   \
-    err = glGetError();                                 \
-    }                                                   \
-}
+#define GET_GLERROR() checkGLErrors(__FILE__,__LINE__);
 
 //macro for easier uniform setting
 #define SET_UNIFORM(shd,uni,val) shd->setUniformValue(shaderManager.uniformLocation(shd,uni),val)
@@ -247,6 +240,10 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 
 void Scenery3d::finalizeLoad()
 {
+	//must ensure the correct GL context is active!
+	//this is not guaranteed with the new QOpenGLWidget outside of init() and draw()!
+	StelApp::getInstance().ensureGLContextCurrent();
+
 	currentScene = loadingScene;
 
 	//move load data to current one
@@ -2044,6 +2041,7 @@ void Scenery3d::init()
 	OBJ::setupGL();
 
 	QOpenGLContext* ctx = QOpenGLContext::currentContext();
+	Q_ASSERT(ctx);
 
 #ifndef QT_OPENGL_ES_2
 	//initialize additional functions needed and not provided through StelOpenGL
@@ -2702,11 +2700,6 @@ void Scenery3d::draw(StelCore* core)
 
 	//find out the default FBO
 	defaultFBO = StelApp::getInstance().getDefaultFBO();
-
-	qDebug()<<"OGLContext FBO:"<<QOpenGLContext::currentContext()->defaultFramebufferObject();
-	GLint meh;
-	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &meh);
-	qDebug()<<"Cur FBO:"<<meh;
 
 	//reset render statistic
 	drawnTriangles = drawnModels = materialSwitches = shaderSwitches = 0;

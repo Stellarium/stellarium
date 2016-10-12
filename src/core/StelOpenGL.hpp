@@ -22,7 +22,13 @@
 
 #include <QOpenGLFunctions>
 
-#define GLFUNC_(x) QOpenGLContext::currentContext()->functions()->x
+extern QOpenGLContext* mainContext;
+#define GLFUNC2_(x) QOpenGLContext::currentContext()->functions()->x
+#ifdef QT_NO_DEBUG
+#define GLFUNC_(x) GLFUNC2_(x)
+#else
+#define GLFUNC_(x) (Q_ASSERT(QOpenGLContext::currentContext() == mainContext), GLFUNC2_(x))
+#endif
 
 #define glActiveTexture(...)        GLFUNC_(glActiveTexture(__VA_ARGS__))
 #define glAttachShader(...)         GLFUNC_(glAttachShader(__VA_ARGS__))
