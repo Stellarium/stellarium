@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-11 02:35+0700\n"
-"PO-Revision-Date: 2016-09-30 09:34+0000\n"
+"PO-Revision-Date: 2016-10-12 11:22+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-10-11 05:53+0000\n"
-"X-Generator: Launchpad (build 18227)\n"
+"X-Launchpad-Export-Date: 2016-10-13 05:49+0000\n"
+"X-Generator: Launchpad (build 18232)\n"
 "Language: bn\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -32,15 +32,15 @@ msgstr "ধরন : <b>%1</b>"
 
 #: src/core/modules/CustomObject.cpp:67
 msgid "custom marker"
-msgstr ""
+msgstr "পছন্দসই বিন্দু"
 
 #: src/core/modules/CustomObject.cpp:69
 msgid "custom object"
-msgstr ""
+msgstr "অলীক বস্তু"
 
 #: src/core/modules/CustomObjectMgr.cpp:81
 msgid "Marker"
-msgstr ""
+msgstr "বিন্দু"
 
 #: src/core/modules/Constellation.cpp:296
 msgid "constellation"
@@ -122,7 +122,7 @@ msgstr "ছায়াপথ নির্দেশক রেখা"
 
 #: src/core/modules/GridLinesMgr.cpp:678
 msgid "Supergalactic Equator"
-msgstr ""
+msgstr "নক্ষত্রলোকীয় বিষুবরেখা"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:683 src/ui_viewDialog.h:2075
@@ -149,54 +149,54 @@ msgstr "ধ্রুব বৃত্ত"
 #. TRANSLATORS: North Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:917 src/core/modules/GridLinesMgr.cpp:926
 msgid "NCP"
-msgstr ""
+msgstr "উঃ মেরু"
 
 #. TRANSLATORS: South Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:919 src/core/modules/GridLinesMgr.cpp:928
 msgid "SCP"
-msgstr ""
+msgstr "দঃ মেরু"
 
 #. TRANSLATORS: Zenith
 #: src/core/modules/GridLinesMgr.cpp:935
 msgctxt "zenith"
 msgid "Z"
-msgstr ""
+msgstr "সুবিন্দু"
 
 #. TRANSLATORS: Nadir
 #: src/core/modules/GridLinesMgr.cpp:937
 msgctxt "nadir"
 msgid "Z'"
-msgstr ""
+msgstr "কুবিন্দু"
 
 #. TRANSLATORS: North Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:944 src/core/modules/GridLinesMgr.cpp:953
 msgid "NEP"
-msgstr ""
+msgstr "সৌঃ উঃ মেরু"
 
 #. TRANSLATORS: South Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:946 src/core/modules/GridLinesMgr.cpp:955
 msgid "SEP"
-msgstr ""
+msgstr "সৌঃ দঃ মেরু"
 
 #. TRANSLATORS: North Galactic Pole
 #: src/core/modules/GridLinesMgr.cpp:962
 msgid "NGP"
-msgstr ""
+msgstr "ছাঃ উঃ মেরু"
 
 #. TRANSLATORS: South Galactic Pole
 #: src/core/modules/GridLinesMgr.cpp:964
 msgid "SGP"
-msgstr ""
+msgstr "ছাঃ দঃ মেরু"
 
 #. TRANSLATORS: North Supergalactic Pole
 #: src/core/modules/GridLinesMgr.cpp:971
 msgid "NSGP"
-msgstr ""
+msgstr "নঃ উঃ মেরু"
 
 #. TRANSLATORS: South Supergalactic Pole
 #: src/core/modules/GridLinesMgr.cpp:973
 msgid "SSGP"
-msgstr ""
+msgstr "নঃ দঃ মেরু"
 
 #: src/core/modules/GridLinesMgr.cpp:1215
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:339
@@ -260,11 +260,11 @@ msgstr "ছায়াপথ নির্দেশক রেখা"
 
 #: src/core/modules/GridLinesMgr.cpp:1228 src/ui_viewDialog.h:2171
 msgid "Supergalactic grid"
-msgstr ""
+msgstr "নক্ষত্রলোকীয় ছক"
 
 #: src/core/modules/GridLinesMgr.cpp:1229 src/ui_viewDialog.h:2064
 msgid "Supergalactic equator"
-msgstr ""
+msgstr "নক্ষত্রলোকীয় বিষুবরেখা"
 
 #: src/core/modules/GridLinesMgr.cpp:1230
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:405
@@ -285,39 +285,39 @@ msgstr "ধ্রুব বৃত্ত"
 
 #: src/core/modules/GridLinesMgr.cpp:1235
 msgid "Celestial J2000 poles"
-msgstr ""
+msgstr "J2000 অনুযায়ী মেরু"
 
 #: src/core/modules/GridLinesMgr.cpp:1236
 msgid "Celestial poles"
-msgstr ""
+msgstr "মেরু বিন্দু"
 
 #: src/core/modules/GridLinesMgr.cpp:1237
 msgid "Zenith and nadir"
-msgstr ""
+msgstr "সুবিন্দু ও কুবিন্দু"
 
 #: src/core/modules/GridLinesMgr.cpp:1238
 msgid "Ecliptic J2000 poles"
-msgstr ""
+msgstr "J2000 অনুযায়ী সৌরপথীয় মেরু"
 
 #: src/core/modules/GridLinesMgr.cpp:1239
 msgid "Ecliptic poles"
-msgstr ""
+msgstr "সৌরপথীয় মেরু"
 
 #: src/core/modules/GridLinesMgr.cpp:1240 src/ui_viewDialog.h:2125
 msgid "Galactic poles"
-msgstr ""
+msgstr "ছায়াপথীয় মেরু"
 
 #: src/core/modules/GridLinesMgr.cpp:1241 src/ui_viewDialog.h:2086
 msgid "Supergalactic poles"
-msgstr ""
+msgstr "নক্ষত্রলোকীয় মেরু"
 
 #: src/core/modules/GridLinesMgr.cpp:1242
 msgid "Equinox J2000 points"
-msgstr ""
+msgstr "J2000 অনুযায়ী বিষুব বিন্দু"
 
 #: src/core/modules/GridLinesMgr.cpp:1243
 msgid "Equinox points"
-msgstr ""
+msgstr "বিষুব বিন্দু"
 
 #: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1897
 msgid "Atmosphere"
@@ -1866,7 +1866,7 @@ msgstr "ছায়াপথ কেন্দিক স্থানাঙ্ক, �
 #: src/core/StelObject.cpp:256 src/core/StelObject.cpp:258
 #, qt-format
 msgid "Supergalactic longitude/latitude: %1/%2"
-msgstr ""
+msgstr "নক্ষত্রলোকীয় দ্রাঘিমাংশ/অক্ষাংশ : %1/%2"
 
 #: src/core/StelObject.cpp:267
 #, qt-format
@@ -2249,19 +2249,19 @@ msgstr "CTRL + Left click"
 
 #: src/gui/HelpDialog.cpp:173
 msgid "Add custom marker"
-msgstr ""
+msgstr "পছন্দসই বিন্দু যোগ করুন"
 
 #: src/gui/HelpDialog.cpp:174
 msgid "Shift + Left click"
-msgstr ""
+msgstr "Shift + Left click"
 
 #: src/gui/HelpDialog.cpp:176
 msgid "Delete all custom markers"
-msgstr ""
+msgstr "বিন্দুগুলি মুছে ফেলুন"
 
 #: src/gui/HelpDialog.cpp:177
 msgid "Shift + Right click"
-msgstr ""
+msgstr "Shift + Right click"
 
 #: src/gui/HelpDialog.cpp:180
 #, qt-format
@@ -2272,11 +2272,11 @@ msgstr "নীচে চটজলদি ব্যবহারের উপায়
 
 #: src/gui/HelpDialog.cpp:209
 msgid "Text User Interface (TUI)"
-msgstr ""
+msgstr "টেক্সট ইউজার ইন্টারফেস (TUI)"
 
 #: src/gui/HelpDialog.cpp:211
 msgid "Activate TUI"
-msgstr ""
+msgstr "ইন্টারফেস চালু করুন"
 
 #: src/gui/HelpDialog.cpp:220
 msgid ""
@@ -2746,7 +2746,7 @@ msgstr "ছায়াপথ কেন্দ্রিক স্থানাঙ্�
 #: src/gui/SearchDialog.cpp:216
 msgctxt "coordinate system"
 msgid "Supergalactic"
-msgstr ""
+msgstr "নক্ষত্রলোকীয় স্থানাঙ্ক"
 
 #: src/gui/SearchDialog.cpp:217
 msgctxt "coordinate system"
@@ -2881,7 +2881,7 @@ msgstr "জুলিয়ান পঞ্জিকা অনুসারে দি
 #. TRANSLATORS: visible magnitude
 #: src/gui/AstroCalcDialog.cpp:283
 msgid "Vis. mag."
-msgstr ""
+msgstr "দৃশ্যমান উজ্জ্বল্যতা"
 
 #: src/gui/AstroCalcDialog.cpp:386 src/gui/AstroCalcDialog.cpp:760
 msgid "CSV (Comma delimited)"
@@ -3183,7 +3183,7 @@ msgstr "তারামণ্ডল"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:86
 msgid "Custom Objects"
-msgstr ""
+msgstr "অলীক বস্তু"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:91
@@ -4981,7 +4981,7 @@ msgstr "বাতিল করুন"
 
 #: src/translations.h:614
 msgid "&Cancel"
-msgstr ""
+msgstr "বাতি&ল"
 
 #: src/translations.h:615
 msgid "Files of type:"
@@ -5300,8 +5300,7 @@ msgstr "স্থানাঙ্ক পদ্ধতি :"
 #: src/ui_searchDialogGui.h:706
 msgid ""
 "Note: this tool doesn't apply the refraction correction for coordinates."
-msgstr ""
-"বিঃদ্রঃ - এই সরঞ্জামটি প্রতিসরণ জনিত অবস্থানের ত্রুটি সংশোধন করে না ।"
+msgstr "বিঃদ্রঃ - এই সরঞ্জামটি প্রতিসরণ জনিত ত্রুটি সংশোধন করে না ।"
 
 #: src/ui_searchDialogGui.h:707
 msgid "Position"
@@ -5683,7 +5682,7 @@ msgstr "ছায়াপথ নির্দেশক রেখা দেখা �
 
 #: src/ui_viewDialog.h:2046
 msgid "Color of supergalactic equator"
-msgstr ""
+msgstr "নক্ষত্রলোকীয় বিষুবরেখার রং"
 
 #: src/ui_viewDialog.h:2049
 msgid "Color of ecliptic (of date)"
@@ -5741,7 +5740,7 @@ msgstr "বিষুব ও ক্রান্তি বৃত্তের র�
 
 #: src/ui_viewDialog.h:2088
 msgid "Color of the ecliptic poles (J2000.0)"
-msgstr ""
+msgstr "সৌরপথীয় মেরু বিন্দুর রং (J2000.0 অনুয়াযী)"
 
 #: src/ui_viewDialog.h:2091
 msgid "Color of Prime Vertical"
@@ -5749,43 +5748,43 @@ msgstr "মধ্যরেখার রং"
 
 #: src/ui_viewDialog.h:2094
 msgid "Show ecliptic poles of J2000.0"
-msgstr ""
+msgstr "J2000.0 অনুয়াযী সৌরপথীয় মেরু দুটি দেখা যাবে"
 
 #: src/ui_viewDialog.h:2096
 msgid "Ecliptic poles (J2000)"
-msgstr ""
+msgstr "সৌরপথীয় মেরু (J2000.0 অনুয়াযী)"
 
 #: src/ui_viewDialog.h:2098
 msgid "Color of the celestial poles (J2000.0)"
-msgstr ""
+msgstr "মেরু দ্বয়ের রং (J2000.0 অনুয়াযী)"
 
 #: src/ui_viewDialog.h:2101
 msgid "Show celestial poles of current planet and date."
-msgstr ""
+msgstr "গ্রহ ও তারিখ অনুযায়ী মেরু দ্বয় দেখা যাবে"
 
 #: src/ui_viewDialog.h:2103
 msgid "Celestial poles (of date)"
-msgstr ""
+msgstr "মেরু বিন্দু (তারিখ অনুযায়ী)"
 
 #: src/ui_viewDialog.h:2105
 msgid "Color of ecliptic poles (of date)"
-msgstr ""
+msgstr "সৌরপথীয় মেরু বিন্দুর রং (তারিখ অনুযায়ী)"
 
 #: src/ui_viewDialog.h:2108
 msgid "Color of celestial poles (of date)"
-msgstr ""
+msgstr "মেরু বিন্দুর রং (তারিখ অনুযায়ী)"
 
 #: src/ui_viewDialog.h:2111
 msgid "Color of supergalactic poles"
-msgstr ""
+msgstr "নক্ষত্রলোকীয় মেরু বিন্দুর রং"
 
 #: src/ui_viewDialog.h:2114
 msgid "Show ecliptic poles of current date."
-msgstr ""
+msgstr "তারিখ অনুযায়ী সৌরপথীয় মেরু দ্বয় দেখা যাবে"
 
 #: src/ui_viewDialog.h:2116
 msgid "Ecliptic poles (of date)"
-msgstr ""
+msgstr "সৌরপথীয় মেরু (তারিখ অনুযায়ী)"
 
 #: src/ui_viewDialog.h:2118
 msgid "Show Prime (East-West) Vertical."
@@ -5793,23 +5792,23 @@ msgstr "মধ্যরেখা (পূর্ব পশ্চিম গাম�
 
 #: src/ui_viewDialog.h:2122
 msgid "Color of galactic poles"
-msgstr ""
+msgstr "ছায়াপথীয় মেরু বিন্দুর রং"
 
 #: src/ui_viewDialog.h:2124
 msgid "Zenith and Nadir"
-msgstr ""
+msgstr "সুবিন্দু ও কুবিন্দু"
 
 #: src/ui_viewDialog.h:2127
 msgid "Color of Zenith and Nadir"
-msgstr ""
+msgstr "সুবিন্দু ও কুবিন্দু এর রং"
 
 #: src/ui_viewDialog.h:2130
 msgid "Show celestial poles of J2000.0."
-msgstr ""
+msgstr "J2000.0 অনুযায়ী মেরু দ্বয় দেখা যাবে"
 
 #: src/ui_viewDialog.h:2132
 msgid "Celestial poles (J2000)"
-msgstr ""
+msgstr "মেরু বিন্দু (J2000.0 অনুযায়ী)"
 
 #: src/ui_viewDialog.h:2134
 msgid ""
@@ -5861,7 +5860,7 @@ msgstr "ভূ-বিষুব ছকের (J2000.0 অনুযায়ী) র�
 
 #: src/ui_viewDialog.h:2159
 msgid "Color of the equinox points (J2000.0)"
-msgstr ""
+msgstr "বিষুব বিন্দুর রং (J2000.0 অনুযায়ী)"
 
 #: src/ui_viewDialog.h:2162
 msgid "Ecliptical coordinates for J2000.0."
@@ -5873,7 +5872,7 @@ msgstr "সৌরপথীয় ছক (J2000 অনুযায়ী)"
 
 #: src/ui_viewDialog.h:2166
 msgid "Color of the supergalactic grid"
-msgstr ""
+msgstr "নক্ষত্রলোকীয় ছকের রং"
 
 #: src/ui_viewDialog.h:2169
 msgid "Color of the galactic grid"
@@ -5897,7 +5896,7 @@ msgstr "ছায়াপথ কেন্দ্রিক স্থানাঙ্�
 
 #: src/ui_viewDialog.h:2183
 msgid "Equinoxes (J2000)"
-msgstr ""
+msgstr "বিষুব বিন্দু (J2000.0 অনুযায়ী)"
 
 #: src/ui_viewDialog.h:2185
 msgid "Color of the ecliptical grid (of date)"
@@ -5921,11 +5920,11 @@ msgstr "ভূ-বিষুব ছক (তারিখ অনুযায়ী)"
 
 #: src/ui_viewDialog.h:2197
 msgid "Equinoxes (of date)"
-msgstr ""
+msgstr "বিষুব বিন্দু (তারিখ অনুযায়ী)"
 
 #: src/ui_viewDialog.h:2199
 msgid "Color of the equinox points (of date)"
-msgstr ""
+msgstr "বিষুব বিন্দুর রং (তারিখ অনুযায়ী)"
 
 #: src/ui_viewDialog.h:2202
 msgid "Labels for the Cardinal directions."
@@ -7682,7 +7681,7 @@ msgstr "অর্ধ স্বচ্ছ আচ্ছাদন ব্যবহা
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1140
 msgid "Hide grids and lines when enabled"
-msgstr ""
+msgstr "স্থানাঙ্ক ছক এবং নির্দেশক রেখা গুলি অদৃশ্য হবে"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1141
 msgid "Sensor view"
@@ -13741,7 +13740,7 @@ msgstr "ছায়াপথ কেন্দ্রিক স্থানাঙ্�
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:221
 msgctxt "abbreviated in the plugin"
 msgid "Supergal. Long/Lat"
-msgstr ""
+msgstr "নক্ষত্রলোকীয় দ্রাঘিমা/অক্ষ"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:240
 msgctxt "abbreviated in the plugin"
@@ -13804,7 +13803,7 @@ msgstr "ছায়াপথ কেন্দিক স্থানাঙ্ক, �
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:203
 msgid "Supergalactic Longitude/Latitude"
-msgstr ""
+msgstr "নক্ষত্রলোকীয় দ্রাঘিমাংশ/অক্ষাংশ"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:233
 msgid "Coordinates of custom position:"
