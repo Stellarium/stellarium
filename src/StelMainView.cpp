@@ -246,7 +246,6 @@ public:
 protected:
 	void drawBackground(QPainter *painter, const QRectF &rect) Q_DECL_OVERRIDE
 	{
-		Q_UNUSED(painter);
 		Q_UNUSED(rect);
 
 		//a sanity check
@@ -260,7 +259,11 @@ protected:
 		//update and draw
 		StelApp& app = StelApp::getInstance();
 		app.update(dt);
+
+		//important to call this, or Qt may have invalid state after we have drawn (wrong textures, etc...)
+		painter->beginNativePainting();
 		app.draw();
+		painter->endNativePainting();
 
 		parent->drawEnded();
 	}
