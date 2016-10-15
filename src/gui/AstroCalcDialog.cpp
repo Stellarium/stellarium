@@ -196,7 +196,7 @@ void AstroCalcDialog::currentPlanetaryPositions()
 			treeItem->setText(ColumnDec, StelUtils::radToDmsStr(dec, true));
 			treeItem->setTextAlignment(ColumnDec, Qt::AlignRight);
 			treeItem->setText(ColumnMagnitude, QString::number(planet->getVMagnitudeWithExtinction(core), 'f', 2));
-			treeItem->setTextAlignment(ColumnMagnitude, Qt::AlignRight);
+			treeItem->setTextAlignment(ColumnMagnitude, Qt::AlignRight);			
 			treeItem->setText(ColumnType, q_(planet->getPlanetTypeString()));
 		}
 	}
@@ -279,8 +279,6 @@ void AstroCalcDialog::setEphemerisHeaderNames()
 	ephemerisHeader << q_("Dec (J2000)");
 	//TRANSLATORS: magnitude
 	ephemerisHeader << q_("Mag.");
-	//TRANSLATORS: visible magnitude
-	ephemerisHeader << q_("Vis. mag.");
 	ui->ephemerisTreeWidget->setHeaderLabels(ephemerisHeader);
 
 	// adjust the column width
@@ -363,10 +361,8 @@ void AstroCalcDialog::generateEphemeris()
 			treeItem->setTextAlignment(EphemerisRA, Qt::AlignRight);
 			treeItem->setText(EphemerisDec, StelUtils::radToDmsStr(dec, true));
 			treeItem->setTextAlignment(EphemerisDec, Qt::AlignRight);
-			treeItem->setText(EphemerisMagnitude, QString::number(obj->getVMagnitude(core), 'f', 2));
+			treeItem->setText(EphemerisMagnitude, QString::number(obj->getVMagnitudeWithExtinction(core), 'f', 2));
 			treeItem->setTextAlignment(EphemerisMagnitude, Qt::AlignRight);
-			treeItem->setText(EphemerisVMagnitude, QString::number(obj->getVMagnitudeWithExtinction(core), 'f', 2));
-			treeItem->setTextAlignment(EphemerisVMagnitude, Qt::AlignRight);
 		}
 		core->setJD(currentJD); // restore time
 	}
