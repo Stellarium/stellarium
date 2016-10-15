@@ -73,8 +73,15 @@ public:
 	//! Return mouse position coordinates
 	QPoint getMousePos();
 
+	//! Returns the main application OpenGL context,
+	//! which should be used for all drawing Stellarium does
+	//! @sa glContextMakeCurrent()
+	//! @sa glContextDoneCurrent()
 	QOpenGLContext* glContext() const;
+	//! Make the main GL context (the one returned from glContext()) current
+	//! on the main view surface
 	void glContextMakeCurrent();
+	//! Releases the main GL context
 	void glContextDoneCurrent();
 public slots:
 
@@ -140,17 +147,18 @@ public slots:
 protected:
 	//! Hack to determine current monitor pixel ratio
 	//! @todo Find a better way to handle this
-	virtual void moveEvent(QMoveEvent* event);
+	virtual void moveEvent(QMoveEvent* event) Q_DECL_OVERRIDE;
 	//! Handle window closed event, calling StelApp::quit()
-	virtual void closeEvent(QCloseEvent* event);
+	virtual void closeEvent(QCloseEvent* event) Q_DECL_OVERRIDE;
 	//! Handle window resized events, and change the size of the underlying
 	//! QGraphicsScene to be the same
-	virtual void resizeEvent(QResizeEvent* event);
-
+	virtual void resizeEvent(QResizeEvent* event) Q_DECL_OVERRIDE;
 signals:
 	//! emitted when saveScreenShot is requested with saveScreenShot().
 	//! doScreenshot() does the actual work (it has to do it in the main
 	//! thread, where as saveScreenShot() might get called from another one.
+	//!
+	//! @remark FS: is threaded access here even a possibility anymore, or a remnant of older code?
 	void screenshotRequested(void);
 	void fullScreenChanged(bool b);
 

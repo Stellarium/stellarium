@@ -342,12 +342,28 @@ protected:
 		}
 		//pass event on to GUI otherwise
 		QGraphicsScene::keyPressEvent(event);
+
+		//if not accepted, handle it further
+		if(!event->isAccepted())
+		{
+			StelApp::getInstance().handleKeys(event);
+			if(event->isAccepted())
+				parent->thereWasAnEvent();
+		}
 	}
 
 	void keyReleaseEvent(QKeyEvent* event) Q_DECL_OVERRIDE
 	{
-		parent->thereWasAnEvent(); // Refresh screen ASAP
+		//pass event to GUI
 		QGraphicsScene::keyReleaseEvent(event);
+
+		//if not accepted, handle it further
+		if(!event->isAccepted())
+		{
+			StelApp::getInstance().handleKeys(event);
+			if(event->isAccepted())
+				parent->thereWasAnEvent();
+		}
 	}
 
 private:
