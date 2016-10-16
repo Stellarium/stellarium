@@ -37,6 +37,7 @@ Ocular::Ocular(const QObject& other)
 	  m_effectiveFocalLength(other.property("effectiveFocalLength").toDouble()),
 	  m_fieldStop(other.property("fieldStop").toDouble()),
 	  m_name(other.property("name").toString()),
+	  m_reticlePath(other.property("reticlePath").toString()),
 	  m_reticleFOV(other.property("reticleFOV").toDouble())
 {
 }

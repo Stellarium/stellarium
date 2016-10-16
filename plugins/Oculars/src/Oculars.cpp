@@ -2058,7 +2058,7 @@ void Oculars::validateAndLoadIniFile()
 	{
 		qDebug() << "Oculars::validateIniFile ocular.ini exists at: " << QDir::toNativeSeparators(ocularIniPath) << ". Checking version...";
 		QSettings settings(ocularIniPath, QSettings::IniFormat);
-		double ocularsVersion = settings.value("oculars_version", "0.0").toDouble();
+		float ocularsVersion = settings.value("oculars_version", 0.0).toFloat();
 		qWarning() << "Oculars::validateIniFile found existing ini file version " << ocularsVersion;
 
 		if (ocularsVersion < MIN_OCULARS_INI_VERSION)

@@ -638,7 +638,12 @@ void OcularsGuiPanel::updateLensControls()
 	lensControls->setMinimumSize(widgetWidth, widgetHeight);
 	lensControls->resize(widgetWidth, widgetHeight);
 
-	setLensControlsVisible(true);
+	int oindex = ocularsPlugin->selectedOcularIndex;
+	Ocular* ocular = ocularsPlugin->oculars[oindex];
+	if (ocular->isBinoculars())
+		setLensControlsVisible(false);
+	else
+		setLensControlsVisible(true);
 }
 
 void OcularsGuiPanel::updateCcdControls()
