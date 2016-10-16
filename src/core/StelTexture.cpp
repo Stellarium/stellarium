@@ -44,7 +44,7 @@ StelTexture::StelTexture() : networkReply(NULL), loader(NULL), errorOccured(fals
 
 StelTexture::~StelTexture()
 {
-	if (id != 0)
+	if (id != 0 && QOpenGLContext::currentContext())
 	{
 		//make sure the correct GL context is bound!
 		StelApp::getInstance().ensureGLContextCurrent();

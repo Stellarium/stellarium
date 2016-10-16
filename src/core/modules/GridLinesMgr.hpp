@@ -271,6 +271,33 @@ class GridLinesMgr : public StelModule
 		   WRITE setColorGalacticPoles
 		   NOTIFY galacticPolesColorChanged)
 
+	Q_PROPERTY(bool supergalacticPolesDisplayed
+		   READ getFlagSupergalacticPoles
+		   WRITE setFlagSupergalacticPoles
+		   NOTIFY supergalacticPolesDisplayedChanged)
+	Q_PROPERTY(Vec3f supergalacticPolesColor
+		   READ getColorSupergalacticPoles
+		   WRITE setColorSupergalacticPoles
+		   NOTIFY supergalacticPolesColorChanged)
+
+	Q_PROPERTY(bool equinoxJ2000PointsDisplayed
+		   READ getFlagEquinoxJ2000Points
+		   WRITE setFlagEquinoxJ2000Points
+		   NOTIFY equinoxJ2000PointsDisplayedChanged)
+	Q_PROPERTY(Vec3f equinoxJ2000PointsColor
+		   READ getColorEquinoxJ2000Points
+		   WRITE setColorEquinoxJ2000Points
+		   NOTIFY equinoxJ2000PointsColorChanged)
+
+	Q_PROPERTY(bool equinoxPointsDisplayed
+		   READ getFlagEquinoxPoints
+		   WRITE setFlagEquinoxPoints
+		   NOTIFY equinoxPointsDisplayedChanged)
+	Q_PROPERTY(Vec3f equinoxPointsColor
+		   READ getColorEquinoxPoints
+		   WRITE setColorEquinoxPoints
+		   NOTIFY equinoxPointsColorChanged)
+
 public:
 	GridLinesMgr();
 	virtual ~GridLinesMgr();
@@ -672,6 +699,48 @@ public slots:
 	//! @endcode
 	void setColorGalacticPoles(const Vec3f& newColor);
 
+	//! Setter for displaying supergalactic poles.
+	void setFlagSupergalacticPoles(const bool displayed);
+	//! Accessor for displaying supergalactic poles.
+	bool getFlagSupergalacticPoles(void) const;
+	//! Get the current color of the supergalactic poles.
+	Vec3f getColorSupergalacticPoles(void) const;
+	//! Set the color of the supergalactic poles.
+	//! @param newColor The color of supergalactic poles
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorSupergalacticPoles(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorSupergalacticPoles(const Vec3f& newColor);
+
+	//! Setter for displaying equinox points of J2000.
+	void setFlagEquinoxJ2000Points(const bool displayed);
+	//! Accessor for displaying equinox points of J2000.
+	bool getFlagEquinoxJ2000Points(void) const;
+	//! Get the current color of the equinox points of J2000.
+	Vec3f getColorEquinoxJ2000Points(void) const;
+	//! Set the color of the equinox points of J2000.
+	//! @param newColor The color of equinox points
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorEquinoxJ2000Points(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorEquinoxJ2000Points(const Vec3f& newColor);
+
+	//! Setter for displaying equinox points.
+	void setFlagEquinoxPoints(const bool displayed);
+	//! Accessor for displaying equinox points.
+	bool getFlagEquinoxPoints(void) const;
+	//! Get the current color of the equinox points.
+	Vec3f getColorEquinoxPoints(void) const;
+	//! Set the color of the equinox points.
+	//! @param newColor The color of equinox points
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorEquinoxPoints(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorEquinoxPoints(const Vec3f& newColor);
+
 signals:
 	void azimuthalGridDisplayedChanged(const bool) const;
 	void azimuthalGridColorChanged(const Vec3f & newColor) const;
@@ -725,6 +794,12 @@ signals:
 	void eclipticPolesColorChanged(const Vec3f & newColor) const;
 	void galacticPolesDisplayedChanged(const bool displayed) const;
 	void galacticPolesColorChanged(const Vec3f & newColor) const;
+	void supergalacticPolesDisplayedChanged(const bool displayed) const;
+	void supergalacticPolesColorChanged(const Vec3f & newColor) const;
+	void equinoxJ2000PointsDisplayedChanged(const bool displayed) const;
+	void equinoxJ2000PointsColorChanged(const Vec3f & newColor) const;
+	void equinoxPointsDisplayedChanged(const bool displayed) const;
+	void equinoxPointsColorChanged(const Vec3f & newColor) const;
 
 private slots:
 	//! Re-translate the labels of the great circles.
@@ -761,6 +836,9 @@ private:
 	SkyPoint * eclipticJ2000Poles;		// Ecliptic poles of J2000
 	SkyPoint * eclipticPoles;		// Ecliptic poles
 	SkyPoint * galacticPoles;		// Galactic poles
+	SkyPoint * supergalacticPoles;		// Supergalactic poles
+	SkyPoint * equinoxJ2000Points;		// Equinox points of J2000
+	SkyPoint * equinoxPoints;		// Equinox points
 };
 
 #endif // _GRIDLINESMGR_HPP_

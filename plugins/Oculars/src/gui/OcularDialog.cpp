@@ -498,11 +498,13 @@ void OcularDialog::setLabelsDescriptionText(bool state)
 		ui->labelFOV->setText(q_("tFOV:"));
 		// TRANSLATORS: Magnification factor for binoculars
 		ui->labelFL->setText(q_("Magnification factor:"));
+		ui->labelFS->setText(q_("Diameter:"));
 	}
 	else
 	{
 		ui->labelFOV->setText(q_("aFOV:"));
 		ui->labelFL->setText(q_("Focal length:"));
+		ui->labelFS->setText(q_("Field stop:"));
 	}
 }
 
