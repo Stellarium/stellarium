@@ -242,6 +242,7 @@ ADD_PLUGIN(CompassMarks 1)
 ADD_PLUGIN(Exoplanets 1)
 ADD_PLUGIN(EquationOfTime 1)
 ADD_PLUGIN(FOV 1)
+# TODO: Logbook build is broken for quite some time
 ADD_PLUGIN(LogBook 0)
 ADD_PLUGIN(MeteorShowers 1)
 ADD_PLUGIN(NavStars 1)
@@ -287,7 +288,11 @@ FIND_PACKAGE(Qt5Concurrent REQUIRED)
 FIND_PACKAGE(Qt5Gui REQUIRED)
 FIND_PACKAGE(Qt5Network REQUIRED)
 FIND_PACKAGE(Qt5Widgets REQUIRED)
-FIND_PACKAGE(Qt5PrintSupport REQUIRED)
+IF(USE_PLUGIN_EXOPLANETS)
+    # required for qcustomplot external dependency
+    # not used elsewhere
+    FIND_PACKAGE(Qt5PrintSupport REQUIRED)
+ENDIF()
 IF(USE_PLUGIN_TELESCOPECONTROL)
      FIND_PACKAGE(Qt5SerialPort REQUIRED)
 ENDIF()
@@ -329,13 +334,33 @@ IF(ENABLE_MEDIA)
     FIND_PACKAGE(Qt5MultimediaWidgets REQUIRED)
 ENDIF()
 
-IF(NOT WIN32)
-    FIND_PACKAGE(ZLIB)
-ELSE()
-    SET(ZLIB_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/src/core/external/zlib)
-ENDIF()
-
 FIND_PACKAGE(Qt5Test)
+
+### Setup external packages
+
+find_package(ZLIB QUIET) #quiet warnings about not found, we have our own version anyway
+
+# if a system zlib is found, let the user choose if to instead use our bundled version
+if(ZLIB_FOUND)
+    if(WIN32) #on win, we default to "no"
+        set(USE_SYSTEM_ZLIB 0 CACHE BOOL "Use system-provided zlib instead of the bundled version")
+    else() #else, we default to "yes"
+        set(USE_SYSTEM_ZLIB 1 CACHE BOOL "Use system-provided zlib instead of the bundled version")
+    endif()
+else()
+    set(USE_SYSTEM_ZLIB 0)
+endif()
+
+if(NOT USE_SYSTEM_ZLIB)
+    #use our own zlib
+    message(STATUS "Using bundled zlib version at ${CMAKE_SOURCE_DIR}/external/zlib")
+    set(ZLIB_LIBRARIES zlib_stel)
+else()
+    message(STATUS "Using system-provided zlib at ${ZLIB_LIBRARIES}")
+endif()
+
+#add our external files
+add_subdirectory(external)
 
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)
@@ -456,7 +481,12 @@ IF(WIN32)
     GET_TARGET_PROPERTY(QtWidgets_location Qt5::Widgets LOCATION)
     GET_TARGET_PROPERTY(QtSql_location Qt5::Sql LOCATION)    
     GET_TARGET_PROPERTY(QtXmlPatterns_location Qt5::XmlPatterns LOCATION)
-    GET_TARGET_PROPERTY(QtPrintSupport_location Qt5::PrintSupport LOCATION)
+    IF(USE_PLUGIN_EXOPLANETS)
+        GET_TARGET_PROPERTY(QtPrintSupport_location Qt5::PrintSupport LOCATION)
+        SET(ISS_QT_PRINTSUPPORT "Source: \"${QtPrintSupport_location}\"; DestDir: \"{app}\";")
+    ELSE()
+        SET(ISS_QT_PRINTSUPPORT "; QtPrintSupport isn't used")
+    ENDIF()
     IF(ENABLE_SCRIPTING)
         GET_TARGET_PROPERTY(QtScript_location Qt5::Script LOCATION)
         SET(ISS_QT_SCRIPT "Source: \"${QtScript_location}\"; DestDir: \"{app}\";")
@@ -611,16 +641,10 @@ INCLUDE_DIRECTORIES(
      ${CMAKE_SOURCE_DIR}/src/core
      ${CMAKE_SOURCE_DIR}/src/core/modules
      ${CMAKE_SOURCE_DIR}/src/core/planetsephems
-     ${CMAKE_SOURCE_DIR}/src/core/external
-     ${CMAKE_SOURCE_DIR}/src/core/external/qtcompress
-     ${CMAKE_SOURCE_DIR}/src/core/external/qcustomplot
-     ${CMAKE_SOURCE_DIR}/src/core/external/glues_stel/source/
-     ${CMAKE_SOURCE_DIR}/src/core/external/glues_stel/source/libtess
      ${CMAKE_SOURCE_DIR}/src/gui
      ${CMAKE_SOURCE_DIR}/src/scripting
      ${INTL_INCLUDE_DIR}
      ${CMAKE_BINARY_DIR}/src
-     ${ZLIB_INCLUDE_DIR}
 )
 
 ########### Subdirectories ###############

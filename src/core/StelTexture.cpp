@@ -19,7 +19,6 @@
 
 #include "StelTexture.hpp"
 #include "StelTextureMgr.hpp"
-#include "glues.h"
 #include "StelFileMgr.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
