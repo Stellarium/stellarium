@@ -7,6 +7,13 @@ INCLUDE_DIRECTORIES(
 
 LINK_DIRECTORIES(${BUILD_DIR}/src)
 
+set(qcustomplot_SRCS
+    gui/qcustomplot/qcustomplot.cpp
+    gui/qcustomplot/qcustomplot.h
+    )
+add_library(qcustomplot_stel STATIC EXCLUDE_FROM_ALL ${qcustomplot_SRCS})
+target_link_libraries(qcustomplot_stel Qt5::PrintSupport Qt5::Widgets)
+
 SET(Exoplanets_SRCS
      Exoplanets.hpp
      Exoplanets.cpp
@@ -25,7 +32,7 @@ SET(Exoplanets_RES ../resources/Exoplanets.qrc)
 QT5_ADD_RESOURCES(Exoplanets_RES_CXX ${Exoplanets_RES})
 
 ADD_LIBRARY(Exoplanets-static STATIC ${Exoplanets_SRCS} ${Exoplanets_RES_CXX} ${ExoplanetsDialog_UIS_H})
-TARGET_LINK_LIBRARIES(Exoplanets-static Qt5::Core Qt5::Network Qt5::Widgets)
+TARGET_LINK_LIBRARIES(Exoplanets-static Qt5::Core Qt5::Network Qt5::Widgets qcustomplot_stel)
 SET_TARGET_PROPERTIES(Exoplanets-static PROPERTIES OUTPUT_NAME "Exoplanets")
 SET_TARGET_PROPERTIES(Exoplanets-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins Exoplanets-static)

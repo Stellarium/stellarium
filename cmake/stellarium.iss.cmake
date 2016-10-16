@@ -52,7 +52,7 @@ Source: "@QtWidgets_location@"; DestDir: "{app}";
 Source: "@QtSql_location@"; DestDir: "{app}";
 Source: "@QtXmlPatterns_location@"; DestDir: "{app}";
 Source: "@QtConcurrent_location@"; DestDir: "{app}";
-Source: "@QtPrintSupport_location@"; DestDir: "{app}";
+@ISS_QT_PRINTSUPPORT@
 @ISS_QT_SCRIPT@
 @ISS_QT_MULTIMEDIA@
 @ISS_QT_SERIALPORT@
