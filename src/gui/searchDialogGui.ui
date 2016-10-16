@@ -870,8 +870,11 @@
        </property>
        <item>
         <widget class="QGroupBox" name="simbadGroupBox">
-         <property name="title">
+         <property name="toolTip">
           <string>Use on-line astronomical database SIMBAD</string>
+         </property>
+         <property name="title">
+          <string>Use SIMBAD</string>
          </property>
          <property name="flat">
           <bool>true</bool>
