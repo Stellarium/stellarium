@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-10-11 02:35+0700\n"
+"POT-Creation-Date: 2016-10-16 01:10+0700\n"
 "PO-Revision-Date: 2013-07-29 23:06+0000\n"
 "Last-Translator: ivarela <ivarela@ubuntu.com>\n"
 "Language-Team: Asturian <ast@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-10-11 05:51+0000\n"
-"X-Generator: Launchpad (build 18227)\n"
+"X-Launchpad-Export-Date: 2016-10-16 05:47+0000\n"
+"X-Generator: Launchpad (build 18232)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:188
@@ -973,7 +973,7 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:204 src/gui/AstroCalcDialog.cpp:526
+#: src/core/modules/SolarSystem.cpp:204 src/gui/AstroCalcDialog.cpp:522
 #: src/translations.h:66
 msgid "Planets"
 msgstr "Planetes"
@@ -1084,7 +1084,7 @@ msgid "Position angle"
 msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:285 src/core/modules/StarWrapper.cpp:287
-#: src/gui/AstroCalcDialog.cpp:555
+#: src/gui/AstroCalcDialog.cpp:551
 msgid "Separation"
 msgstr ""
 
@@ -1101,7 +1101,7 @@ msgid "Night mode"
 msgstr "Mou nocherniegu"
 
 #: src/core/StelCore.cpp:222 src/gui/StelGui.cpp:199
-#: src/gui/AstroCalcDialog.cpp:274 src/gui/AstroCalcDialog.cpp:552
+#: src/gui/AstroCalcDialog.cpp:274 src/gui/AstroCalcDialog.cpp:548
 #: src/gui/BookmarksDialog.cpp:102 src/ui_dateTimeDialogGui.h:376
 #: src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:173
@@ -1811,6 +1811,14 @@ msgstr ""
 
 #: src/core/StelMovementMgr.cpp:165
 msgid "Look towards Zenith"
+msgstr ""
+
+#: src/core/StelMovementMgr.cpp:167
+msgid "Look towards North Celestial pole"
+msgstr ""
+
+#: src/core/StelMovementMgr.cpp:168
+msgid "Look towards South Celestial pole"
 msgstr ""
 
 #: src/core/SimbadSearcher.cpp:78
@@ -2758,137 +2766,132 @@ msgstr ""
 msgid "Julian Day"
 msgstr ""
 
-#. TRANSLATORS: visible magnitude
-#: src/gui/AstroCalcDialog.cpp:283
-msgid "Vis. mag."
-msgstr ""
-
-#: src/gui/AstroCalcDialog.cpp:386 src/gui/AstroCalcDialog.cpp:760
+#: src/gui/AstroCalcDialog.cpp:382 src/gui/AstroCalcDialog.cpp:756
 msgid "CSV (Comma delimited)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:388
+#: src/gui/AstroCalcDialog.cpp:384
 msgid "Save calculated ephemerides as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:464
+#: src/gui/AstroCalcDialog.cpp:460
 msgid "10 minutes"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:465
+#: src/gui/AstroCalcDialog.cpp:461
 msgid "1 hour"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:466
+#: src/gui/AstroCalcDialog.cpp:462
 msgid "1 day"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:467
+#: src/gui/AstroCalcDialog.cpp:463
 msgid "5 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:468
+#: src/gui/AstroCalcDialog.cpp:464
 msgid "10 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:469
+#: src/gui/AstroCalcDialog.cpp:465
 msgid "15 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:470
+#: src/gui/AstroCalcDialog.cpp:466
 msgid "30 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:471
+#: src/gui/AstroCalcDialog.cpp:467
 msgid "60 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:525
+#: src/gui/AstroCalcDialog.cpp:521
 msgid "Solar system"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:527 src/translations.h:70
+#: src/gui/AstroCalcDialog.cpp:523 src/translations.h:70
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
 msgstr "Asteroides"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:528 src/translations.h:74
+#: src/gui/AstroCalcDialog.cpp:524 src/translations.h:74
 msgid "Plutinos"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:529 src/translations.h:68
+#: src/gui/AstroCalcDialog.cpp:525 src/translations.h:68
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
 msgstr "Cometes"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:530 src/translations.h:76
+#: src/gui/AstroCalcDialog.cpp:526 src/translations.h:76
 msgid "Dwarf planets"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:531 src/translations.h:78
+#: src/gui/AstroCalcDialog.cpp:527 src/translations.h:78
 msgid "Cubewanos"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:532 src/translations.h:80
+#: src/gui/AstroCalcDialog.cpp:528 src/translations.h:80
 msgid "Scattered disc objects"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:533 src/translations.h:82
+#: src/gui/AstroCalcDialog.cpp:529 src/translations.h:82
 msgid "Oort cloud objects"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:534 src/translations.h:117
+#: src/gui/AstroCalcDialog.cpp:530 src/translations.h:117
 #: src/ui_viewDialog.h:1993
 msgid "Star clusters"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:535 src/translations.h:99
+#: src/gui/AstroCalcDialog.cpp:531 src/translations.h:99
 msgid "Planetary nebulae"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:536
+#: src/gui/AstroCalcDialog.cpp:532
 msgid "Bright nebulae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:537 src/translations.h:101
+#: src/gui/AstroCalcDialog.cpp:533 src/translations.h:101
 msgid "Dark nebulae"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:538 src/ui_viewDialog.h:1995
+#: src/gui/AstroCalcDialog.cpp:534 src/ui_viewDialog.h:1995
 msgid "Galaxies"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:551
+#: src/gui/AstroCalcDialog.cpp:547
 msgid "Phenomenon"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:553
+#: src/gui/AstroCalcDialog.cpp:549
 msgid "Object 1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:554
+#: src/gui/AstroCalcDialog.cpp:550
 msgid "Object 2"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:762
+#: src/gui/AstroCalcDialog.cpp:758
 msgid "Save calculated phenomena as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:801 src/gui/AstroCalcDialog.cpp:955
+#: src/gui/AstroCalcDialog.cpp:797 src/gui/AstroCalcDialog.cpp:951
 msgid "Conjunction"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:805
+#: src/gui/AstroCalcDialog.cpp:801
 msgid "Opposition"
 msgstr ""
 
@@ -7075,19 +7078,19 @@ msgid "Telescope #%1"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1971
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:833
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:834
 #, qt-format
 msgid "Magnification: %1"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1974
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:843
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:844
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1977
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:852
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:853
 #, qt-format
 msgid "FOV: %1"
 msgstr ""
@@ -7246,28 +7249,28 @@ msgstr ""
 msgid "Rotation: %1"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:814
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:815
 msgid "Magnification provided by these binoculars"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:815
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:816
 msgid "Actual field of view provided by these binoculars"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:816
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:817
 msgid "Exit pupil provided by these binoculars"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:824
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
 msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:827
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
 msgstr ""
 
