@@ -1717,7 +1717,7 @@ void Oculars::paintCrosshairs()
 			   projector->getViewportPosY()+projector->getViewportHeight()/2);
 	float length = 0.5 * params.viewportFovDiameter;
 	// See if we need to scale the length
-	if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->appearentFOV() > 0.0)
+	if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->appearentFOV() > 0.0 && !oculars[selectedOcularIndex]->isBinoculars())
 	{
 		length = oculars[selectedOcularIndex]->appearentFOV() * length / maxEyepieceAngle;
 	}
