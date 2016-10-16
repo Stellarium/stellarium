@@ -32,7 +32,7 @@
 #include <QFont>
 #include <QSettings>
 
-#define MIN_OCULARS_INI_VERSION 3.0f
+#define MIN_OCULARS_INI_VERSION 3.1f
 
 QT_BEGIN_NAMESPACE
 class QKeyEvent;
