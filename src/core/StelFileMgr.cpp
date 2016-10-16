@@ -103,7 +103,7 @@ void StelFileMgr::init()
 		}
 		QFileInfo installLocation(ResourcesDir.absolutePath());
 		QFileInfo checkFile(installLocation.filePath() + QString("/") + QString(CHECK_FILE));
-	#elif defined(Q_OS_WIN)
+	#elif defined(Q_OS_WIN)		
 		QFileInfo installLocation(QCoreApplication::applicationDirPath());
 		QFileInfo checkFile(installLocation.filePath() + QDir::separator() + QString(CHECK_FILE));
 	#else
@@ -112,6 +112,16 @@ void StelFileMgr::init()
 		QFileInfo installLocation(QFile::decodeName(INSTALL_DATADIR));
 		QFileInfo checkFile(QFile::decodeName(INSTALL_DATADIR "/" CHECK_FILE));
 	#endif
+
+	#ifndef NDEBUG
+		if (!checkFile.exists())
+		{	// for DEBUG use sources location 
+			QString debugDataPath = INSTALL_DATADIR_FOR_DEBUG;
+			checkFile = QFileInfo(debugDataPath + QDir::separator() + CHECK_FILE);
+			installLocation = QFileInfo(debugDataPath);
+		}
+	#endif
+
 		if (checkFile.exists())
 		{
 			installDir = installLocation.filePath();

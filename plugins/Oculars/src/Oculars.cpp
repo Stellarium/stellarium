@@ -131,6 +131,9 @@ Oculars::Oculars():
 	flagEclipticJ2000Poles(false),
 	flagEclipticPoles(false),
 	flagGalacticPoles(false),
+	flagSupergalacticPoles(false),
+	flagEquinoxJ2000Points(false),
+	flagEquinoxPoints(false),
 	flagAdaptation(false),
 	flagLimitStars(false),
 	magLimitStars(0.0),
@@ -1713,7 +1716,7 @@ void Oculars::paintCrosshairs()
 			   projector->getViewportPosY()+projector->getViewportHeight()/2);
 	float length = 0.5 * params.viewportFovDiameter;
 	// See if we need to scale the length
-	if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->appearentFOV() > 0.0)
+	if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->appearentFOV() > 0.0 && !oculars[selectedOcularIndex]->isBinoculars())
 	{
 		length = oculars[selectedOcularIndex]->appearentFOV() * length / maxEyepieceAngle;
 	}
@@ -1916,7 +1919,7 @@ void Oculars::paintText(const StelCore* core)
 			// Barlow and Shapley lens
 			if (lens != NULL) // it's null if lens is not selected (lens index = -1)
 			{
-				QString lensName = lens->name();
+				QString lensName = lens->getName();
 				if (lensName.isEmpty())
 				{
 					lensNumberLabel = QString(q_("Lens #%1")).arg(selectedLensIndex);
@@ -2054,7 +2057,7 @@ void Oculars::validateAndLoadIniFile()
 	{
 		qDebug() << "Oculars::validateIniFile ocular.ini exists at: " << QDir::toNativeSeparators(ocularIniPath) << ". Checking version...";
 		QSettings settings(ocularIniPath, QSettings::IniFormat);
-		double ocularsVersion = settings.value("oculars_version", "0.0").toDouble();
+		float ocularsVersion = settings.value("oculars_version", 0.0).toFloat();
 		qWarning() << "Oculars::validateIniFile found existing ini file version " << ocularsVersion;
 
 		if (ocularsVersion < MIN_OCULARS_INI_VERSION)
@@ -2129,6 +2132,9 @@ void Oculars::unzoomOcular()
 		gridManager->setFlagEclipticJ2000Poles(flagEclipticJ2000Poles);
 		gridManager->setFlagEclipticPoles(flagEclipticPoles);
 		gridManager->setFlagGalacticPoles(flagGalacticPoles);
+		gridManager->setFlagSupergalacticPoles(flagSupergalacticPoles);
+		gridManager->setFlagEquinoxJ2000Points(flagEquinoxJ2000Points);
+		gridManager->setFlagEquinoxPoints(flagEquinoxPoints);
 
 		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(flagCardinalPoints);
 	}
@@ -2202,6 +2208,9 @@ void Oculars::zoom(bool zoomedIn)
 				flagEclipticJ2000Poles = gridManager->getFlagEclipticJ2000Poles();
 				flagEclipticPoles = gridManager->getFlagEclipticPoles();
 				flagGalacticPoles = gridManager->getFlagGalacticPoles();
+				flagSupergalacticPoles = gridManager->getFlagSupergalacticPoles();
+				flagEquinoxJ2000Points = gridManager->getFlagEquinoxJ2000Points();
+				flagEquinoxPoints = gridManager->getFlagEquinoxPoints();
 				flagCardinalPoints = GETSTELMODULE(LandscapeMgr)->getFlagCardinalsPoints();
 			}
 
@@ -2272,6 +2281,9 @@ void Oculars::zoomOcular()
 		gridManager->setFlagEclipticJ2000Poles(false);
 		gridManager->setFlagEclipticPoles(false);
 		gridManager->setFlagGalacticPoles(false);
+		gridManager->setFlagSupergalacticPoles(false);
+		gridManager->setFlagEquinoxJ2000Points(false);
+		gridManager->setFlagEquinoxPoints(false);
 
 		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(false);
 	}
@@ -2318,10 +2330,15 @@ void Oculars::zoomOcular()
 	skyManager->setAbsoluteStarScale(0.75);
 
 	// Limit stars and DSOs	if it enable and it's telescope + eyepiece combination
-	if (getFlagLimitMagnitude() && !ocular->isBinoculars())
+	if (getFlagLimitMagnitude())
 	{
 		// Simplified calculation of the penetrating power of the telescope
-		double limitMag = 2.1 + 5*std::log10(telescope->diameter());
+		double diameter = 0.;
+		if (ocular->isBinoculars())
+			diameter = ocular->fieldStop();
+		else
+			diameter = telescope->diameter();
+		double limitMag = 2.1 + 5*std::log10(diameter);
 
 		skyManager->setFlagStarMagnitudeLimit(true);
 		skyManager->setFlagNebulaMagnitudeLimit(true);
@@ -2373,11 +2390,11 @@ QMenu* Oculars::addLensSubmenu(QMenu* parent)
 		QString label;
 		if (index < 10)
 		{
-			label = QString("&%1: %2").arg(index).arg(lense[index]->name());
+			label = QString("&%1: %2").arg(index).arg(lense[index]->getName());
 		}
 		else
 		{
-			label = lense[index]->name();
+			label = lense[index]->getName();
 		}
 		QAction* action = submenu->addAction(label, lenseSignalMapper, SLOT(map()));
 		if (index == selectedLensIndex)

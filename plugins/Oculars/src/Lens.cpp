@@ -39,39 +39,39 @@ Lens::~Lens()
 static QMap<int, QString> mapping;
 QMap<int, QString> Lens::propertyMap()
 {
-    if(mapping.isEmpty()) {
-        mapping = QMap<int, QString>();
-        mapping[0] = "name";
-        mapping[1] = "multipler";
-     }
-    return mapping;
+	if(mapping.isEmpty()) {
+		mapping = QMap<int, QString>();
+		mapping[0] = "name";
+		mapping[1] = "multipler";
+	}
+	return mapping;
 }
 
-const QString Lens::name() const
+const QString Lens::getName() const
 {
-    return m_name;
+	return m_name;
 }
 
 void Lens::setName(const QString& theValue)
 {
-    m_name = theValue;
+	m_name = theValue;
 }
 
-double Lens::multipler() const
+double Lens::getMultipler() const
 {
-    return m_multipler;
+	return m_multipler;
 }
 
 void Lens::setMultipler(double theValue)
 {
-    m_multipler = theValue;
+	m_multipler = theValue;
 }
 
 void Lens::writeToSettings(QSettings * settings, const int index)
 {
 	QString prefix = "lens/" + QVariant(index).toString() + "/";
-	settings->setValue(prefix + "name", this->name());
-	settings->setValue(prefix + "multipler", this->multipler());
+	settings->setValue(prefix + "name", this->getName());
+	settings->setValue(prefix + "multipler", this->getMultipler());
 }
 
 /* ********************************************************************* */
@@ -83,19 +83,19 @@ void Lens::writeToSettings(QSettings * settings, const int index)
 
 Lens* Lens:: lensFromSettings(QSettings* theSettings, int lensIndex)
 {
-    Lens* lens = new Lens();
-    QString prefix = "lens/" + QVariant(lensIndex).toString() + "/";
+	Lens* lens = new Lens();
+	QString prefix = "lens/" + QVariant(lensIndex).toString() + "/";
 
-    lens->setName(theSettings->value(prefix + "name", "").toString());
-    lens->setMultipler(theSettings->value(prefix + "multipler", "1").toDouble());
+	lens->setName(theSettings->value(prefix + "name", "").toString());
+	lens->setMultipler(theSettings->value(prefix + "multipler", "1").toDouble());
 
-    return lens;
+	return lens;
 }
 
 Lens* Lens::lensModel()
 {
-    Lens* model = new Lens();
-    model->setName("My Lens");
-    model->setMultipler(2.0f);
-    return model;
+	Lens* model = new Lens();
+	model->setName("My Lens");
+	model->setMultipler(2.0f);
+	return model;
 }
