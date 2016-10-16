@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>725</width>
-    <height>540</height>
+    <width>722</width>
+    <height>584</height>
    </rect>
   </property>
   <property name="font">
@@ -1591,13 +1591,63 @@
               <layout class="QGridLayout" name="gridLayout_16">
                <item row="0" column="1">
                 <layout class="QGridLayout" name="gridLayout_14">
-                 <item row="7" column="0">
-                  <widget class="QCheckBox" name="showCelestialPolesCheckBox">
+                 <item row="2" column="0">
+                  <widget class="QCheckBox" name="showEclipticLineJ2000CheckBox">
                    <property name="toolTip">
-                    <string>Show celestial poles of current planet and date.</string>
+                    <string>Show ecliptic line of J2000.0 (VSOP87A fundamental plane).</string>
                    </property>
                    <property name="text">
-                    <string>Celestial poles (of date)</string>
+                    <string>Ecliptic (J2000)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QCheckBox" name="showEquatorLineCheckBox">
+                   <property name="toolTip">
+                    <string>Show celestial equator of current planet and date.</string>
+                   </property>
+                   <property name="text">
+                    <string>Equator (of date)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QCheckBox" name="showEquatorJ2000LineCheckBox">
+                   <property name="toolTip">
+                    <string>Show celestial equator of J2000.0.</string>
+                   </property>
+                   <property name="text">
+                    <string>Equator (J2000)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QToolButton" name="colorEquatorJ2000Line">
+                   <property name="toolTip">
+                    <string>Color of equator (J2000.0)</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="0">
+                  <widget class="QCheckBox" name="showEclipticLineOfDateCheckBox">
+                   <property name="toolTip">
+                    <string>Show ecliptic line of current date.</string>
+                   </property>
+                   <property name="text">
+                    <string>Ecliptic (of date)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QToolButton" name="colorEquatorLine">
+                   <property name="toolTip">
+                    <string>Color of equator (of date)</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
                    </property>
                   </widget>
                  </item>
@@ -1621,23 +1671,6 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="4" column="1">
-                  <widget class="QToolButton" name="colorHorizonLine">
-                   <property name="toolTip">
-                    <string>Color of horizon</string>
-                   </property>
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="6" column="0">
-                  <widget class="QCheckBox" name="showSupergalacticEquatorLineCheckBox">
-                   <property name="text">
-                    <string>Supergalactic equator</string>
-                   </property>
-                  </widget>
-                 </item>
                  <item row="3" column="1">
                   <widget class="QToolButton" name="colorEclipticLineOfDate">
                    <property name="toolTip">
@@ -1648,53 +1681,13 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="1">
-                  <widget class="QToolButton" name="colorEquatorJ2000Line">
+                 <item row="2" column="1">
+                  <widget class="QToolButton" name="colorEclipticLineJ2000">
                    <property name="toolTip">
-                    <string>Color of equator (J2000.0)</string>
+                    <string>Color of ecliptic (J2000.0)</string>
                    </property>
                    <property name="text">
                     <string notr="true"/>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="0">
-                  <widget class="QCheckBox" name="showEquatorJ2000LineCheckBox">
-                   <property name="toolTip">
-                    <string>Show celestial equator of J2000.0.</string>
-                   </property>
-                   <property name="text">
-                    <string>Equator (J2000)</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="1">
-                  <widget class="QToolButton" name="colorEquatorLine">
-                   <property name="toolTip">
-                    <string>Color of equator (of date)</string>
-                   </property>
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="0">
-                  <widget class="QCheckBox" name="showEclipticLineJ2000CheckBox">
-                   <property name="toolTip">
-                    <string>Show ecliptic line of J2000.0 (VSOP87A fundamental plane).</string>
-                   </property>
-                   <property name="text">
-                    <string>Ecliptic (J2000)</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="0">
-                  <widget class="QCheckBox" name="showEclipticLineOfDateCheckBox">
-                   <property name="toolTip">
-                    <string>Show ecliptic line of current date.</string>
-                   </property>
-                   <property name="text">
-                    <string>Ecliptic (of date)</string>
                    </property>
                   </widget>
                  </item>
@@ -1718,50 +1711,77 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="1">
-                  <widget class="QToolButton" name="colorEclipticLineJ2000">
+                 <item row="4" column="1">
+                  <widget class="QToolButton" name="colorHorizonLine">
                    <property name="toolTip">
-                    <string>Color of ecliptic (J2000.0)</string>
+                    <string>Color of horizon</string>
                    </property>
                    <property name="text">
                     <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="6" column="0">
+                  <widget class="QCheckBox" name="showSupergalacticEquatorLineCheckBox">
+                   <property name="text">
+                    <string>Supergalactic equator</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="7" column="0">
+                  <widget class="QCheckBox" name="showMeridianLineCheckBox">
+                   <property name="toolTip">
+                    <string>Show meridian line.</string>
+                   </property>
+                   <property name="text">
+                    <string>Meridian</string>
                    </property>
                   </widget>
                  </item>
                  <item row="7" column="1">
-                  <widget class="QToolButton" name="colorCelestialPoles">
+                  <widget class="QToolButton" name="colorMeridianLine">
                    <property name="toolTip">
-                    <string>Color of celestial poles (of date)</string>
+                    <string>Color of meridian</string>
                    </property>
                    <property name="text">
                     <string notr="true"/>
                    </property>
                   </widget>
                  </item>
-                 <item row="1" column="0">
-                  <widget class="QCheckBox" name="showEquatorLineCheckBox">
-                   <property name="toolTip">
-                    <string>Show celestial equator of current planet and date.</string>
-                   </property>
-                   <property name="text">
-                    <string>Equator (of date)</string>
-                   </property>
-                  </widget>
-                 </item>
                  <item row="8" column="0">
-                  <widget class="QCheckBox" name="showEclipticPolesCheckBox">
+                  <widget class="QCheckBox" name="showLongitudeLineCheckBox">
                    <property name="toolTip">
-                    <string>Show ecliptic poles of current date.</string>
+                    <string>Opposition/conjunction longitude line - the line of ecliptic longitude which passes through both ecliptic poles, the Sun and opposition point.</string>
                    </property>
                    <property name="text">
-                    <string>Ecliptic poles (of date)</string>
+                    <string>O./C. longitude</string>
                    </property>
                   </widget>
                  </item>
                  <item row="8" column="1">
-                  <widget class="QToolButton" name="colorEclipticPoles">
+                  <widget class="QToolButton" name="colorLongitudeLine">
                    <property name="toolTip">
-                    <string>Color of ecliptic poles (of date)</string>
+                    <string>Color of the opposition/conjunction longitude line</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="0">
+                  <widget class="QCheckBox" name="showColuresLineCheckBox">
+                   <property name="toolTip">
+                    <string>Show colures (great circles through poles and solstices/equinoxes).</string>
+                   </property>
+                   <property name="text">
+                    <string>Colures</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="1">
+                  <widget class="QToolButton" name="colorColuresLine">
+                   <property name="toolTip">
+                    <string>Color of colures</string>
                    </property>
                    <property name="text">
                     <string notr="true"/>
@@ -1772,17 +1792,24 @@
                </item>
                <item row="0" column="2">
                 <layout class="QGridLayout" name="gridLayout_17">
-                 <item row="2" column="0">
-                  <widget class="QCheckBox" name="showPrimeVerticalLineCheckBox">
-                   <property name="toolTip">
-                    <string>Show Prime (East-West) Vertical.</string>
-                   </property>
+                 <item row="6" column="0">
+                  <widget class="QCheckBox" name="showSupergalacticPolesCheckBox">
                    <property name="text">
-                    <string>Prime Vertical</string>
+                    <string>Supergalactic poles</string>
                    </property>
                   </widget>
                  </item>
                  <item row="2" column="1">
+                  <widget class="QToolButton" name="colorEclipticJ2000Poles">
+                   <property name="toolTip">
+                    <string>Color of the ecliptic poles (J2000.0)</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="7" column="1">
                   <widget class="QToolButton" name="colorPrimeVerticalLine">
                    <property name="toolTip">
                     <string>Color of Prime Vertical</string>
@@ -1792,50 +1819,40 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="1" column="0">
-                  <widget class="QCheckBox" name="showMeridianLineCheckBox">
+                 <item row="2" column="0">
+                  <widget class="QCheckBox" name="showEclipticJ2000PolesCheckBox">
                    <property name="toolTip">
-                    <string>Show meridian line.</string>
+                    <string>Show ecliptic poles of J2000.0</string>
                    </property>
                    <property name="text">
-                    <string>Meridian</string>
+                    <string>Ecliptic poles (J2000)</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="4" column="1">
-                  <widget class="QToolButton" name="colorLongitudeLine">
+                 <item row="0" column="1">
+                  <widget class="QToolButton" name="colorCelestialJ2000Poles">
                    <property name="toolTip">
-                    <string>Color of the opposition/conjunction longitude line</string>
+                    <string>Color of the celestial poles (J2000.0)</string>
                    </property>
                    <property name="text">
                     <string notr="true"/>
                    </property>
                   </widget>
                  </item>
-                 <item row="6" column="0">
-                  <widget class="QCheckBox" name="showPrecessionCirclesCheckBox">
+                 <item row="1" column="0">
+                  <widget class="QCheckBox" name="showCelestialPolesCheckBox">
                    <property name="toolTip">
-                    <string>Instantaneous circles of earth's axis on its motion around ecliptical poles. Displayed on Earth only.</string>
+                    <string>Show celestial poles of current planet and date.</string>
                    </property>
                    <property name="text">
-                    <string>Precession circles</string>
+                    <string>Celestial poles (of date)</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="4" column="0">
-                  <widget class="QCheckBox" name="showLongitudeLineCheckBox">
+                 <item row="3" column="1">
+                  <widget class="QToolButton" name="colorEclipticPoles">
                    <property name="toolTip">
-                    <string>Opposition/conjunction longitude line - the line of ecliptic longitude which passes through both ecliptic poles, the Sun and opposition point.</string>
-                   </property>
-                   <property name="text">
-                    <string>O./C. longitude</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="1">
-                  <widget class="QToolButton" name="colorCardinalPoints">
-                   <property name="toolTip">
-                    <string>Color of cardinal points</string>
+                    <string>Color of ecliptic poles (of date)</string>
                    </property>
                    <property name="text">
                     <string notr="true"/>
@@ -1843,33 +1860,70 @@
                   </widget>
                  </item>
                  <item row="1" column="1">
-                  <widget class="QToolButton" name="colorMeridianLine">
+                  <widget class="QToolButton" name="colorCelestialPoles">
                    <property name="toolTip">
-                    <string>Color of meridian</string>
+                    <string>Color of celestial poles (of date)</string>
                    </property>
                    <property name="text">
                     <string notr="true"/>
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="0">
-                  <widget class="QCheckBox" name="showCardinalPointsCheckBox">
+                 <item row="6" column="1">
+                  <widget class="QToolButton" name="colorSupergalacticPoles">
                    <property name="toolTip">
-                    <string>Labels for the Cardinal directions.</string>
+                    <string>Color of supergalactic poles</string>
                    </property>
                    <property name="text">
-                    <string>Cardinal points</string>
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="0">
+                  <widget class="QCheckBox" name="showEclipticPolesCheckBox">
+                   <property name="toolTip">
+                    <string>Show ecliptic poles of current date.</string>
+                   </property>
+                   <property name="text">
+                    <string>Ecliptic poles (of date)</string>
                    </property>
                   </widget>
                  </item>
                  <item row="7" column="0">
+                  <widget class="QCheckBox" name="showPrimeVerticalLineCheckBox">
+                   <property name="toolTip">
+                    <string>Show Prime (East-West) Vertical.</string>
+                   </property>
+                   <property name="text">
+                    <string>Prime Vertical</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="1">
+                  <widget class="QToolButton" name="colorGalacticPoles">
+                   <property name="toolTip">
+                    <string>Color of galactic poles</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="0">
                   <widget class="QCheckBox" name="showZenithNadirCheckBox">
                    <property name="text">
                     <string>Zenith and Nadir</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="7" column="1">
+                 <item row="5" column="0">
+                  <widget class="QCheckBox" name="showGalacticPolesCheckBox">
+                   <property name="text">
+                    <string>Galactic poles</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="1">
                   <widget class="QToolButton" name="colorZenithNadir">
                    <property name="toolTip">
                     <string>Color of Zenith and Nadir</string>
@@ -1879,47 +1933,17 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="6" column="1">
-                  <widget class="QToolButton" name="colorPrecessionCircles">
+                 <item row="0" column="0">
+                  <widget class="QCheckBox" name="showCelestialJ2000PolesCheckBox">
                    <property name="toolTip">
-                    <string>Color of precession circles</string>
+                    <string>Show celestial poles of J2000.0.</string>
                    </property>
                    <property name="text">
-                    <string notr="true"/>
+                    <string>Celestial poles (J2000)</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="3" column="1">
-                  <widget class="QToolButton" name="colorColuresLine">
-                   <property name="toolTip">
-                    <string>Color of colures</string>
-                   </property>
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="0">
-                  <widget class="QCheckBox" name="showColuresLineCheckBox">
-                   <property name="toolTip">
-                    <string>Show colures (great circles through poles and solstices/equinoxes).</string>
-                   </property>
-                   <property name="text">
-                    <string>Colures</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="5" column="1">
-                  <widget class="QToolButton" name="colorCircumpolarCircles">
-                   <property name="toolTip">
-                    <string>Color of circumpolar circles</string>
-                   </property>
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="5" column="0">
+                 <item row="8" column="0">
                   <widget class="QCheckBox" name="showCircumpolarCirclesCheckBox">
                    <property name="toolTip">
                     <string>These circles delimit stars which stay always above (respectively below) the mathematical horizon.</string>
@@ -1929,17 +1953,30 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="8" column="0">
-                  <widget class="QCheckBox" name="showGalacticPolesCheckBox">
+                 <item row="8" column="1">
+                  <widget class="QToolButton" name="colorCircumpolarCircles">
+                   <property name="toolTip">
+                    <string>Color of circumpolar circles</string>
+                   </property>
                    <property name="text">
-                    <string>Galactic poles</string>
+                    <string notr="true"/>
                    </property>
                   </widget>
                  </item>
-                 <item row="8" column="1">
-                  <widget class="QToolButton" name="colorGalacticPoles">
+                 <item row="9" column="0">
+                  <widget class="QCheckBox" name="showPrecessionCirclesCheckBox">
                    <property name="toolTip">
-                    <string>Color of galactic poles</string>
+                    <string>Instantaneous circles of earth's axis on its motion around ecliptical poles. Displayed on Earth only.</string>
+                   </property>
+                   <property name="text">
+                    <string>Precession circles</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="1">
+                  <widget class="QToolButton" name="colorPrecessionCircles">
+                   <property name="toolTip">
+                    <string>Color of precession circles</string>
                    </property>
                    <property name="text">
                     <string notr="true"/>
@@ -1950,10 +1987,40 @@
                </item>
                <item row="0" column="0">
                 <layout class="QGridLayout" name="gridLayout_9">
-                 <item row="3" column="1">
-                  <widget class="QToolButton" name="colorEclipticGridOfDate">
+                 <item row="4" column="0">
+                  <widget class="QCheckBox" name="showAzimuthalGridCheckBox">
                    <property name="toolTip">
-                    <string>Color of the ecliptical grid (of date)</string>
+                    <string>Altitudes and azimuth (counted from North towards East).</string>
+                   </property>
+                   <property name="text">
+                    <string>Azimuthal grid</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="0">
+                  <widget class="QCheckBox" name="showEclipticGridOfDateCheckBox">
+                   <property name="toolTip">
+                    <string>Ecliptical coordinates for current date. Displayed on Earth only.</string>
+                   </property>
+                   <property name="text">
+                    <string>Ecliptic grid (of date)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QToolButton" name="colorEquatorialJ2000Grid">
+                   <property name="toolTip">
+                    <string>Color of the equatorial grid (J2000.0)</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="7" column="1">
+                  <widget class="QToolButton" name="colorEquinoxJ2000Points">
+                   <property name="toolTip">
+                    <string>Color of the equinox points (J2000.0)</string>
                    </property>
                    <property name="text">
                     <string notr="true"/>
@@ -1970,6 +2037,16 @@
                    </property>
                   </widget>
                  </item>
+                 <item row="6" column="1">
+                  <widget class="QToolButton" name="colorSupergalacticGrid">
+                   <property name="toolTip">
+                    <string>Color of the supergalactic grid</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
                  <item row="5" column="1">
                   <widget class="QToolButton" name="colorGalacticGrid">
                    <property name="toolTip">
@@ -1980,43 +2057,20 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="1" column="1">
-                  <widget class="QToolButton" name="colorEquatorialGrid">
-                   <property name="toolTip">
-                    <string>Color of the equatorial grid (of date)</string>
-                   </property>
+                 <item row="6" column="0">
+                  <widget class="QCheckBox" name="showSupergalacticGridCheckBox">
                    <property name="text">
-                    <string notr="true"/>
+                    <string>Supergalactic grid</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="4" column="0">
-                  <widget class="QCheckBox" name="showAzimuthalGridCheckBox">
+                 <item row="0" column="0">
+                  <widget class="QCheckBox" name="showEquatorialJ2000GridCheckBox">
                    <property name="toolTip">
-                    <string>Altitudes and azimuth (counted from North towards East).</string>
+                    <string>Equatorial coordinates of J2000.0.</string>
                    </property>
                    <property name="text">
-                    <string>Azimuthal grid</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="1">
-                  <widget class="QToolButton" name="colorAzimuthalGrid">
-                   <property name="toolTip">
-                    <string>Color of the azimuthal grid</string>
-                   </property>
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="7" column="1">
-                  <widget class="QToolButton" name="colorCelestialJ2000Poles">
-                   <property name="toolTip">
-                    <string>Color of the celestial poles (J2000.0)</string>
-                   </property>
-                   <property name="text">
-                    <string notr="true"/>
+                    <string>Equatorial grid (J2000)</string>
                    </property>
                   </widget>
                  </item>
@@ -2040,60 +2094,40 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="6" column="1">
-                  <widget class="QToolButton" name="colorSupergalacticGrid">
-                   <property name="toolTip">
-                    <string>Color of the supergalactic grid</string>
-                   </property>
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="1">
-                  <widget class="QToolButton" name="colorEquatorialJ2000Grid">
-                   <property name="toolTip">
-                    <string>Color of the equatorial grid (J2000.0)</string>
-                   </property>
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                  </widget>
-                 </item>
                  <item row="7" column="0">
-                  <widget class="QCheckBox" name="showCelestialJ2000PolesCheckBox">
-                   <property name="toolTip">
-                    <string>Show celestial poles of J2000.0.</string>
-                   </property>
+                  <widget class="QCheckBox" name="showEquinoxJ2000PointsCheckBox">
                    <property name="text">
-                    <string>Celestial poles (J2000)</string>
+                    <string>Equinoxes (J2000)</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="3" column="0">
-                  <widget class="QCheckBox" name="showEclipticGridOfDateCheckBox">
+                 <item row="3" column="1">
+                  <widget class="QToolButton" name="colorEclipticGridOfDate">
                    <property name="toolTip">
-                    <string>Ecliptical coordinates for current date. Displayed on Earth only.</string>
+                    <string>Color of the ecliptical grid (of date)</string>
                    </property>
                    <property name="text">
-                    <string>Ecliptic grid (of date)</string>
+                    <string notr="true"/>
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="0">
-                  <widget class="QCheckBox" name="showEquatorialJ2000GridCheckBox">
+                 <item row="1" column="1">
+                  <widget class="QToolButton" name="colorEquatorialGrid">
                    <property name="toolTip">
-                    <string>Equatorial coordinates of J2000.0.</string>
+                    <string>Color of the equatorial grid (of date)</string>
                    </property>
                    <property name="text">
-                    <string>Equatorial grid (J2000)</string>
+                    <string notr="true"/>
                    </property>
                   </widget>
                  </item>
-                 <item row="6" column="0">
-                  <widget class="QCheckBox" name="showSupergalacticGridCheckBox">
+                 <item row="4" column="1">
+                  <widget class="QToolButton" name="colorAzimuthalGrid">
+                   <property name="toolTip">
+                    <string>Color of the azimuthal grid</string>
+                   </property>
                    <property name="text">
-                    <string>Supergalactic grid</string>
+                    <string notr="true"/>
                    </property>
                   </widget>
                  </item>
@@ -2108,19 +2142,36 @@
                   </widget>
                  </item>
                  <item row="8" column="0">
-                  <widget class="QCheckBox" name="showEclipticJ2000PolesCheckBox">
-                   <property name="toolTip">
-                    <string>Show ecliptic poles of J2000.0</string>
-                   </property>
+                  <widget class="QCheckBox" name="showEquinoxPointsCheckBox">
                    <property name="text">
-                    <string>Ecliptic poles (J2000)</string>
+                    <string>Equinoxes (of date)</string>
                    </property>
                   </widget>
                  </item>
                  <item row="8" column="1">
-                  <widget class="QToolButton" name="colorEclipticJ2000Poles">
+                  <widget class="QToolButton" name="colorEquinoxPoints">
                    <property name="toolTip">
-                    <string>Color of the ecliptic poles (J2000.0)</string>
+                    <string>Color of the equinox points (of date)</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="0">
+                  <widget class="QCheckBox" name="showCardinalPointsCheckBox">
+                   <property name="toolTip">
+                    <string>Labels for the Cardinal directions.</string>
+                   </property>
+                   <property name="text">
+                    <string>Cardinal points</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="1">
+                  <widget class="QToolButton" name="colorCardinalPoints">
+                   <property name="toolTip">
+                    <string>Color of cardinal points</string>
                    </property>
                    <property name="text">
                     <string notr="true"/>

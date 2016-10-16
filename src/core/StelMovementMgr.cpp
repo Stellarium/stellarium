@@ -163,6 +163,9 @@ void StelMovementMgr::init()
 	addAction("actionLook_Towards_North", movementGroup, N_("Look towards North"), "lookNorth()", "Shift+N");
 	addAction("actionLook_Towards_South", movementGroup, N_("Look towards South"), "lookSouth()", "Shift+S");
 	addAction("actionLook_Towards_Zenith", movementGroup, N_("Look towards Zenith"), "lookZenith()", "Shift+Z");
+	// Additional hooks
+	addAction("actionLook_Towards_NCP", movementGroup, N_("Look towards North Celestial pole"), "lookTowardsNCP()", "Alt+Shift+N");
+	addAction("actionLook_Towards_SCP", movementGroup, N_("Look towards South Celestial pole"), "lookTowardsSCP()", "Alt+Shift+S");
 
 	viewportOffsetTimeline=new QTimeLine(1000, this);
 	viewportOffsetTimeline->setFrameRange(0, 100);
@@ -635,6 +638,15 @@ void StelMovementMgr::lookZenith(void)
 	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
 }
 
+void StelMovementMgr::lookTowardsNCP(void)
+{
+	setViewDirectionJ2000(core->equinoxEquToJ2000(Vec3d(0,0,1)));
+}
+
+void StelMovementMgr::lookTowardsSCP(void)
+{
+	setViewDirectionJ2000(core->equinoxEquToJ2000(Vec3d(0,0,-1)));
+}
 
 // Increment/decrement smoothly the vision field and position
 void StelMovementMgr::updateMotion(double deltaTime)

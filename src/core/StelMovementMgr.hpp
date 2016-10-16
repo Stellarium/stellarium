@@ -250,6 +250,10 @@ public slots:
 	void lookSouth(void);
 	//! Look immediately towards Zenith.
 	void lookZenith(void);
+	//! Look immediately towards North Celestial pole.
+	void lookTowardsNCP(void);
+	//! Look immediately towards South Celestial pole.
+	void lookTowardsSCP(void);
 
 	//! start animated move of the viewport offset.
 	//! @param offsetX new horizontal viewport offset, percent. clamped to [-50...50]
