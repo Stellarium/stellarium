@@ -1,62 +1,3 @@
-SET(glues_lib_SRCS
-     core/external/glues_stel/source/glues_error.c
-     core/external/glues_stel/source/glues_error.h
-     core/external/glues_stel/source/glues.h
-     core/external/glues_stel/source/libtess/dict.h
-     core/external/glues_stel/source/libtess/dict.c
-     core/external/glues_stel/source/libtess/dict-list.h
-     core/external/glues_stel/source/libtess/geom.c
-     core/external/glues_stel/source/libtess/geom.h
-     core/external/glues_stel/source/libtess/memalloc.c
-     core/external/glues_stel/source/libtess/memalloc.h
-     core/external/glues_stel/source/libtess/mesh.c
-     core/external/glues_stel/source/libtess/mesh.h
-     core/external/glues_stel/source/libtess/normal.c
-     core/external/glues_stel/source/libtess/normal.h
-     core/external/glues_stel/source/libtess/priorityq.c
-     core/external/glues_stel/source/libtess/priorityq.h
-     core/external/glues_stel/source/libtess/priorityq-heap.h
-     core/external/glues_stel/source/libtess/priorityq-heap.i
-     core/external/glues_stel/source/libtess/priorityq-sort.h
-     core/external/glues_stel/source/libtess/render.c
-     core/external/glues_stel/source/libtess/render.h
-     core/external/glues_stel/source/libtess/sweep.c
-     core/external/glues_stel/source/libtess/sweep.h
-     core/external/glues_stel/source/libtess/tess.c
-     core/external/glues_stel/source/libtess/tess.h
-     core/external/glues_stel/source/libtess/tessmono.c
-     core/external/glues_stel/source/libtess/tessmono.h
-)
-
-SET(zlib_SRCS
-     core/external/zlib/adler32.c
-     core/external/zlib/compress.c
-     core/external/zlib/crc32.c
-     core/external/zlib/crc32.h
-     core/external/zlib/deflate.c
-     core/external/zlib/deflate.h
-     core/external/zlib/gzclose.c
-     core/external/zlib/gzguts.h
-     core/external/zlib/gzlib.c
-     core/external/zlib/gzread.c
-     core/external/zlib/gzwrite.c
-     core/external/zlib/infback.c
-     core/external/zlib/inffast.c
-     core/external/zlib/inffast.h
-     core/external/zlib/inffixed.h
-     core/external/zlib/inflate.c
-     core/external/zlib/inflate.h
-     core/external/zlib/inftrees.c
-     core/external/zlib/inftrees.h
-     core/external/zlib/trees.c
-     core/external/zlib/trees.h
-     core/external/zlib/uncompr.c
-     core/external/zlib/zconf.h
-     core/external/zlib/zlib.h
-     core/external/zlib/zutil.c
-     core/external/zlib/zutil.h
-)
-
 SET(stellarium_lib_SRCS
      core/StelAudioMgr.hpp
      core/StelAudioMgr.cpp
@@ -158,10 +99,6 @@ SET(stellarium_lib_SRCS
      core/StelProgressController.hpp
      core/StelPropertyMgr.hpp
      core/StelPropertyMgr.cpp
-
-     ${gl_lib_SRCS}
-
-     ${glues_lib_SRCS}
 
      core/planetsephems/calc_interpolated_elements.c
      core/planetsephems/calc_interpolated_elements.h
@@ -278,14 +215,6 @@ IF("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 3.0)
      )
 ENDIF()
 
-SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
-     core/external/qtcompress/qzip.cpp
-     core/external/qtcompress/qzipreader.h
-     core/external/qtcompress/qzipwriter.h
-     core/external/qcustomplot/qcustomplot.cpp
-     core/external/qcustomplot/qcustomplot.h
-)
-
 IF(ENABLE_SCRIPTING)
      SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
           scripting/StelScriptOutput.hpp
@@ -298,12 +227,6 @@ IF(ENABLE_SCRIPTING)
           scripting/StelMainScriptAPI.hpp
           scripting/StelMainScriptAPIProxy.cpp
           scripting/StelMainScriptAPIProxy.hpp
-     )
-ENDIF()
-
-IF(WIN32)
-     SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
-          ${zlib_SRCS}
      )
 ENDIF()
 
@@ -444,10 +367,9 @@ ENDIF()
 ################################ Build main program #########################################
 #############################################################################################
 
-SET(extLinkerOption ${extLinkerOption} ${ZLIB_LIBRARIES})
 IF(WIN32 AND NOT MSVC)
     # This library is required on MinGW builds for some native methods used in a fix in main.cpp
-     SET(extLinkerOption ${extLinkerOption} libwinmm.a)
+     SET(winMMLib libwinmm.a)
 ENDIF()
 
 IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
@@ -464,27 +386,25 @@ IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
 ENDIF()
 
 # Setup Qt5 dependencies
-SET(STELLARIUM_QT_LIBRARIES Qt5::Core Qt5::Concurrent Qt5::Gui ${STEL_GLES_LIBS} Qt5::Network Qt5::Widgets Qt5::PrintSupport)
+SET(STELLARIUM_QT_LIBRARIES Qt5::Core Qt5::Concurrent Qt5::Gui ${STEL_GLES_LIBS} Qt5::Network Qt5::Widgets)
 IF(ENABLE_MEDIA)
      SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Multimedia Qt5::MultimediaWidgets)
 ENDIF()
 IF(ENABLE_SCRIPTING)
      SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Script)
 ENDIF()
-IF(USE_PLUGIN_TELESCOPECONTROL)
-     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::SerialPort)
-ENDIF()
 
+# Main executable/library setup
 IF(GENERATE_STELMAINLIB)
      ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
-     TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES})
+     TARGET_LINK_LIBRARIES(stelMain ${ZLIB_LIBRARIES} qtcompress_stel glues_stel ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES})
      INSTALL(TARGETS stelMain DESTINATION lib)
      ADD_EXECUTABLE(stellarium ${stellarium_exe_SRCS})
      #stelMain should be after the plug-ins, otherwise the build crashes
-     TARGET_LINK_LIBRARIES(stellarium ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} stelMain ${extLinkerOption})
+     TARGET_LINK_LIBRARIES(stellarium ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} stelMain ${winMMLib})
 ELSE()
      ADD_EXECUTABLE(stellarium ${stellarium_lib_SRCS} ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
-     TARGET_LINK_LIBRARIES(stellarium ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES})
+     TARGET_LINK_LIBRARIES(stellarium ${winMMLib} ${ZLIB_LIBRARIES} qtcompress_stel glues_stel ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES})
 
      IF(APPLE)
           SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
@@ -515,7 +435,7 @@ MACRO(ADD_TEST NAME)
      SET(STELLARIUM_TESTS ${STELLARIUM_TESTS} ${NAME})
 ENDMACRO()
 
-SET(TESTS_LIBRARIES Qt5::Core Qt5::Gui Qt5::Test)
+SET(TESTS_LIBRARIES ${ZLIB_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Test)
 
 # Custom target used to build all tests at once
 ADD_CUSTOM_TARGET(buildTests)
@@ -526,10 +446,6 @@ SET(tests_testDates_SRCS
      core/StelUtils.hpp
      core/StelUtils.cpp
 )
-IF(WIN32)
-     # StelUtils required zlib sources
-     SET(tests_testDates_SRCS ${tests_testDates_SRCS} ${zlib_SRCS})
-ENDIF()
 ADD_EXECUTABLE(testDates EXCLUDE_FROM_ALL ${tests_testDates_SRCS})
 TARGET_LINK_LIBRARIES(testDates ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testDates)
@@ -565,14 +481,9 @@ SET(tests_testStelSphereGeometry_SRCS
      core/StelFileMgr.cpp
      core/StelTranslator.hpp
      core/StelTranslator.cpp
-     ${glues_lib_SRCS}
 )
-IF(WIN32)
-     # StelUtils required zlib sources
-     SET(tests_testStelSphereGeometry_SRCS ${tests_testStelSphereGeometry_SRCS} ${zlib_SRCS})
-ENDIF()
 ADD_EXECUTABLE(testStelSphereGeometry EXCLUDE_FROM_ALL ${tests_testStelSphereGeometry_SRCS})
-TARGET_LINK_LIBRARIES(testStelSphereGeometry ${TESTS_LIBRARIES})
+TARGET_LINK_LIBRARIES(testStelSphereGeometry ${TESTS_LIBRARIES} glues_stel)
 ADD_DEPENDENCIES(buildTests testStelSphereGeometry)
 ADD_TEST(testStelSphereGeometry)
 
@@ -627,10 +538,6 @@ SET(tests_testDeltaT_SRCS
      core/StelUtils.hpp
      core/StelUtils.cpp
 )
-IF(WIN32)
-     # StelUtils required zlib sources
-     SET(tests_testDeltaT_SRCS ${tests_testDeltaT_SRCS} ${zlib_SRCS})
-ENDIF()
 ADD_EXECUTABLE(testDeltaT EXCLUDE_FROM_ALL ${tests_testDeltaT_SRCS})
 TARGET_LINK_LIBRARIES(testDeltaT ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testDeltaT)
@@ -642,10 +549,6 @@ SET(tests_testConversions_SRCS
      core/StelUtils.hpp
      core/StelUtils.cpp
 )
-IF(WIN32)
-     # StelUtils required zlib sources
-     SET(tests_testConversions_SRCS ${tests_testConversions_SRCS} ${zlib_SRCS})
-ENDIF()
 ADD_EXECUTABLE(testConversions EXCLUDE_FROM_ALL ${tests_testConversions_SRCS})
 TARGET_LINK_LIBRARIES(testConversions ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testConversions)
@@ -670,10 +573,6 @@ SET(tests_testRefraction_SRCS
      core/StelUtils.hpp
      core/StelUtils.cpp
 )
-IF(WIN32)
-     # StelUtils required zlib sources
-     SET(tests_testRefraction_SRCS ${tests_testRefraction_SRCS} ${zlib_SRCS})
-ENDIF()
 ADD_EXECUTABLE(testRefraction EXCLUDE_FROM_ALL ${tests_testRefraction_SRCS})
 TARGET_LINK_LIBRARIES(testRefraction ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testRefraction)
@@ -687,10 +586,6 @@ SET(tests_testPrecession_SRCS
      core/StelUtils.hpp
      core/StelUtils.cpp
 )
-IF(WIN32)
-     # StelUtils required zlib sources
-     SET(tests_testPrecession_SRCS ${tests_testPrecession_SRCS} ${zlib_SRCS})
-ENDIF()
 ADD_EXECUTABLE(testPrecession EXCLUDE_FROM_ALL ${tests_testPrecession_SRCS})
 TARGET_LINK_LIBRARIES(testPrecession ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testPrecession)
