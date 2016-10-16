@@ -2331,10 +2331,15 @@ void Oculars::zoomOcular()
 	skyManager->setAbsoluteStarScale(0.75);
 
 	// Limit stars and DSOs	if it enable and it's telescope + eyepiece combination
-	if (getFlagLimitMagnitude() && !ocular->isBinoculars())
+	if (getFlagLimitMagnitude())
 	{
 		// Simplified calculation of the penetrating power of the telescope
-		double limitMag = 2.1 + 5*std::log10(telescope->diameter());
+		double diameter = 0.;
+		if (ocular->isBinoculars())
+			diameter = ocular->fieldStop();
+		else
+			diameter = telescope->diameter();
+		double limitMag = 2.1 + 5*std::log10(diameter);
 
 		skyManager->setFlagStarMagnitudeLimit(true);
 		skyManager->setFlagNebulaMagnitudeLimit(true);
