@@ -588,7 +588,7 @@ void OcularsGuiPanel::updateLensControls()
 	QString multiplerString;
 	if (lens != NULL)
 	{
-		QString name = lens->name();
+		QString name = lens->getName();
 		if (name.isEmpty())
 		{
 			fullName = QString(q_("Lens #%1")).arg(index);
@@ -597,7 +597,7 @@ void OcularsGuiPanel::updateLensControls()
 		{
 			fullName = QString(q_("Lens #%1: %2")).arg(index).arg(name);
 		}
-		multiplerString = QString(q_("Multiplicity: %1")).arg(lens->multipler());
+		multiplerString = QString(q_("Multiplicity: %1")).arg(lens->getMultipler());
 		multiplerString.append(QChar(0x00D7));
 	}
 	else
