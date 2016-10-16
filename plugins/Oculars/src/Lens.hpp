@@ -30,27 +30,27 @@ class QSettings;
 //! @ingroup oculars
 class Lens : public QObject
 {
-    Q_OBJECT
-    Q_PROPERTY(QString name READ name WRITE setName)
-    Q_PROPERTY(double multipler READ multipler WRITE setMultipler)
+	Q_OBJECT
+	Q_PROPERTY(QString name READ getName WRITE setName)
+	Q_PROPERTY(double multipler READ getMultipler WRITE setMultipler)
 
 public:
-    Lens();
-    Q_INVOKABLE Lens(const QObject& other);
-    virtual ~Lens();
-    static Lens* lensFromSettings(QSettings* theSettings, int lensIndex);
-	 void writeToSettings(QSettings * settings, const int index);
-	 static Lens* lensModel();
+	Lens();
+	Q_INVOKABLE Lens(const QObject& other);
+	virtual ~Lens();
+	static Lens* lensFromSettings(QSettings* theSettings, int lensIndex);
+	void writeToSettings(QSettings * settings, const int index);
+	static Lens* lensModel();
 
-    double multipler() const;
-    void setMultipler(double theValue);
-    const QString name() const;
-    void setName(const QString& theValue);
-    QMap<int, QString> propertyMap();
+	double getMultipler() const;
+	void setMultipler(double theValue);
+	const QString getName() const;
+	void setName(const QString& theValue);
+	QMap<int, QString> propertyMap();
 
 private:
-    QString m_name;
-    double m_multipler;
+	QString m_name;
+	double m_multipler;
 };
 
 #endif

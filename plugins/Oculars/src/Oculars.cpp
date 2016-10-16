@@ -1920,7 +1920,7 @@ void Oculars::paintText(const StelCore* core)
 			// Barlow and Shapley lens
 			if (lens != NULL) // it's null if lens is not selected (lens index = -1)
 			{
-				QString lensName = lens->name();
+				QString lensName = lens->getName();
 				if (lensName.isEmpty())
 				{
 					lensNumberLabel = QString(q_("Lens #%1")).arg(selectedLensIndex);
@@ -2386,11 +2386,11 @@ QMenu* Oculars::addLensSubmenu(QMenu* parent)
 		QString label;
 		if (index < 10)
 		{
-			label = QString("&%1: %2").arg(index).arg(lense[index]->name());
+			label = QString("&%1: %2").arg(index).arg(lense[index]->getName());
 		}
 		else
 		{
-			label = lense[index]->name();
+			label = lense[index]->getName();
 		}
 		QAction* action = submenu->addAction(label, lenseSignalMapper, SLOT(map()));
 		if (index == selectedLensIndex)
