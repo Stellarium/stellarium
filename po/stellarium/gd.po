@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-10-16 01:10+0700\n"
+"POT-Creation-Date: 2016-10-16 21:53+0700\n"
 "PO-Revision-Date: 2016-09-29 12:09+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-10-16 05:57+0000\n"
+"X-Launchpad-Export-Date: 2016-10-17 06:03+0000\n"
 "X-Generator: Launchpad (build 18232)\n"
 "Language: gd\n"
 
@@ -1994,7 +1994,7 @@ msgstr "Fios"
 
 #: src/gui/ConfigurationDialog.cpp:876
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
-#: plugins/Oculars/src/gui/OcularDialog.cpp:515
+#: plugins/Oculars/src/gui/OcularDialog.cpp:517
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:408
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:252
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:120
@@ -2414,7 +2414,7 @@ msgstr "Leasaichear OSX: %1"
 
 #: src/gui/HelpDialog.cpp:327
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
-#: plugins/Oculars/src/gui/OcularDialog.cpp:517
+#: plugins/Oculars/src/gui/OcularDialog.cpp:519
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
 msgid "Contributors"
 msgstr "Co-thabhartaichean"
@@ -5375,27 +5375,31 @@ msgstr "Lorg air an liosta ..."
 msgid "Lists"
 msgstr "Liostaichean"
 
-#: src/ui_searchDialogGui.h:714
+#: src/ui_searchDialogGui.h:715
 msgid "Use on-line astronomical database SIMBAD"
 msgstr "Cleachd stòr-dàta reul-eòlais air loidhne SIMBAD"
 
-#: src/ui_searchDialogGui.h:715
+#: src/ui_searchDialogGui.h:717
+msgid "Use SIMBAD"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:718
 msgid "Server:"
 msgstr "Frithealaiche:"
 
-#: src/ui_searchDialogGui.h:716
+#: src/ui_searchDialogGui.h:719
 msgid "Search options"
 msgstr "Roghainnean luirg"
 
-#: src/ui_searchDialogGui.h:717
+#: src/ui_searchDialogGui.h:720
 msgid "Use autofill only from the beginning of words"
 msgstr "Cha lìon gu fèin-obrachail ach o thoiseach facail"
 
-#: src/ui_searchDialogGui.h:718
+#: src/ui_searchDialogGui.h:721
 msgid "Lock position when coordinates are used"
 msgstr "Glais an t-ionad nuair a bhios co-chomharran ’gan cleachdadh"
 
-#: src/ui_searchDialogGui.h:719 src/ui_viewDialog.h:2210
+#: src/ui_searchDialogGui.h:722 src/ui_viewDialog.h:2210
 #: src/ui_viewDialog.h:2232 src/ui_viewDialog.h:2249
 #: src/ui_configurationDialog.h:1302 src/ui_configurationDialog.h:1313
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
@@ -6270,7 +6274,7 @@ msgstr "Na h-uile ri làimh"
 msgid "Display no information"
 msgstr "Na seall fiosrachadh"
 
-#: src/ui_configurationDialog.h:1141 plugins/Oculars/src/Oculars.cpp:2382
+#: src/ui_configurationDialog.h:1141 plugins/Oculars/src/Oculars.cpp:2387
 #: plugins/Observability/src/Observability.cpp:205
 msgid "None"
 msgstr "Gun ghin"
@@ -7001,7 +7005,7 @@ msgid "Angle Measure Plug-in"
 msgstr "Plugan tomhas cheàrnan"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:516
+#: plugins/Oculars/src/gui/OcularDialog.cpp:518
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:91
 #: plugins/Novae/src/gui/NovaeDialog.cpp:120
@@ -7408,75 +7412,75 @@ msgid "Lens: none"
 msgstr "Gun lionsa"
 
 #: plugins/Oculars/src/Oculars.cpp:1968 plugins/Oculars/src/Oculars.cpp:2013
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:750
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:755
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Glainne-amhairc %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1971
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:834
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:839
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Meudachadh: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1974
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:844
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:851
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "Fradharc fàgail: %1 mm"
 
 #: plugins/Oculars/src/Oculars.cpp:1977
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:853
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:860
 #, qt-format
 msgid "FOV: %1"
 msgstr "R-s: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1997
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:696
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:792
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:701
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:797
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Dimeinseanan: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2001
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:656
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:661
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Mothaichear #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:2005
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:660
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:665
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Mothaichear #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:2018
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:754
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:759
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Glainne-amhairc %1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2378
+#: plugins/Oculars/src/Oculars.cpp:2383
 msgid "&Lens"
 msgstr "&Lionsa"
 
-#: plugins/Oculars/src/Oculars.cpp:2379
+#: plugins/Oculars/src/Oculars.cpp:2384
 msgid "&Previous lens"
 msgstr "An lionsa &roimhe"
 
-#: plugins/Oculars/src/Oculars.cpp:2380
+#: plugins/Oculars/src/Oculars.cpp:2385
 msgid "&Next lens"
 msgstr "A&n ath-lionsa"
 
-#: plugins/Oculars/src/Oculars.cpp:2410
+#: plugins/Oculars/src/Oculars.cpp:2415
 msgid "&Telescope"
 msgstr "Prosbai&g"
 
-#: plugins/Oculars/src/Oculars.cpp:2411
+#: plugins/Oculars/src/Oculars.cpp:2416
 msgid "&Previous telescope"
 msgstr "A’ p&hrosbaig roimhpe"
 
-#: plugins/Oculars/src/Oculars.cpp:2412
+#: plugins/Oculars/src/Oculars.cpp:2417
 msgid "&Next telescope"
 msgstr "A&n ath-ghlainne-amhairc"
 
@@ -7580,37 +7584,37 @@ msgstr "Chan eil iomadachd iomchaidh"
 msgid "Focal length of eyepiece"
 msgstr "Faid an fhòcais aig an lionsa sùla"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:708
 #, qt-format
 msgid "Rotation: %1"
 msgstr "Cuairteachadh: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:815
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:820
 msgid "Magnification provided by these binoculars"
 msgstr "Am meudachd a bheir an glainne dhà-shùileach seo dhut"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:816
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:821
 msgid "Actual field of view provided by these binoculars"
 msgstr "An dearbh raon-seallaidh a bheir an glainne dhà-shùileach seo dhut"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:817
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:822
 msgid "Exit pupil provided by these binoculars"
 msgstr "Am fradharc fàgail a bheir an glainne dhà-shùileach seo dhut"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:830
 msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr ""
 "Am meudachadh a bheir an co-mheasgachadh sùilich/lionsa/glainne-amhairc seo "
 "dhut"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:831
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr ""
 "An dearbh raon-seallaidh a bheir an co-mheasgachadh sùilich/lionsa/glainne-"
 "amhairc seo dhut"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:827
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:832
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
 msgstr ""
 "Am fradharc fàgail a bheir an co-mheasgachadh sùilich/lionsa/glainne-amhairc "
@@ -7626,30 +7630,40 @@ msgstr "d r-s:"
 msgid "Magnification factor:"
 msgstr "Factar a’ mheudachaidh:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:504
+#: plugins/Oculars/src/gui/OcularDialog.cpp:501
+#: plugins/Oculars/src/ui_ocularDialog.h:1187
+msgid "Diameter:"
+msgstr "Trast-thomhas:"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:505
 #: plugins/Oculars/src/ui_ocularDialog.h:1152
 msgid "aFOV:"
 msgstr "R-s l:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:505
+#: plugins/Oculars/src/gui/OcularDialog.cpp:506
 #: plugins/Oculars/src/ui_ocularDialog.h:1153
 #: plugins/Oculars/src/ui_ocularDialog.h:1186
 msgid "Focal length:"
 msgstr "Faid an fhòcais:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:514
+#: plugins/Oculars/src/gui/OcularDialog.cpp:507
+#: plugins/Oculars/src/ui_ocularDialog.h:1154
+msgid "Field stop:"
+msgstr "Raon-stad:"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:516
 msgid "Oculars Plug-in"
 msgstr "Plugan nan sùileach"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:517
+#: plugins/Oculars/src/gui/OcularDialog.cpp:519
 msgid "Barlow lens feature"
 msgstr "Gleus lionsa Bharlow"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:521
+#: plugins/Oculars/src/gui/OcularDialog.cpp:523
 msgid "Overview"
 msgstr "Foir-shealladh"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:523
+#: plugins/Oculars/src/gui/OcularDialog.cpp:525
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece.  "
 "This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -7662,12 +7676,12 @@ msgstr ""
 "no a sguabadh às. Thèid buill-eisimpleir a chur ris a’ chiad turas a "
 "ruitheas tu an aplacaid seo ach am bi toiseach-tòiseachaidh agad."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:524
+#: plugins/Oculars/src/gui/OcularDialog.cpp:526
 msgid "You can choose to scale the image you see on the screen."
 msgstr ""
 "’S urrainn dhut cur romhad an dealbh a chì thu air an sgrìn ath-mheudachadh."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:525
+#: plugins/Oculars/src/gui/OcularDialog.cpp:527
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
@@ -7675,7 +7689,7 @@ msgstr ""
 "Tha seo ann ach an urrainn dhut coimeas nas fhearr a dhèanamh eadar dè bhios "
 "co-cheanglaidhean lionsa sùla/glainne-amhairc diofraichte coltach."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:526
+#: plugins/Oculars/src/gui/OcularDialog.cpp:528
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will "
 "produce two different exit pupils, changing the view somewhat."
@@ -7684,7 +7698,7 @@ msgstr ""
 "fhòcais eadar-dhealaichte dhut fradharc fàgail eadar-dhealaichte, ag "
 "atharrachadh an t-seallaidh."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:527
+#: plugins/Oculars/src/gui/OcularDialog.cpp:529
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
@@ -7692,14 +7706,14 @@ msgstr ""
 "Ach air an làimh eile, le ath-mheudachadh an deilbh, dh’fhaoidte gun dèid "
 "cnap mòr dhen sgrìn a chaitheamh."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:528
+#: plugins/Oculars/src/gui/OcularDialog.cpp:530
 msgid ""
 "Therefore I recommend that you leave it off, unless you feel you have a need "
 "of it."
 msgstr ""
 "Mar sin, mholainn gun cum thu dheth e ach ma tha dearbh-fheum agad air."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:529
+#: plugins/Oculars/src/gui/OcularDialog.cpp:531
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
@@ -7709,7 +7723,7 @@ msgstr ""
 "thaobhachadh gu tuath ach cha deach leam. Thèid a cho-thaobhachadh ri barr "
 "na sgrìne ri linn sin."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:530
+#: plugins/Oculars/src/gui/OcularDialog.cpp:532
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -7723,29 +7737,29 @@ msgstr ""
 "chuidicheas ach am faic thu air an robh thu an dùil leis an t-sùil lom tro "
 "lorgan-seallaidh Telrad (no fear coltach ris)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:531
+#: plugins/Oculars/src/gui/OcularDialog.cpp:533
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr "Ma tha duilgheadas sam bith agad, nach innis thu dhomh? Gabh tlachd!"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:534
+#: plugins/Oculars/src/gui/OcularDialog.cpp:536
 msgid "Hot Keys"
 msgstr "Hotkeys"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:535
+#: plugins/Oculars/src/gui/OcularDialog.cpp:537
 msgid "The plug-in's key bindings can be edited in the General Tab."
 msgstr ""
 "’S urrainn dhut nasgadh nan iuchraichean a dheasachadh san taba Choitcheann."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:549
-#: plugins/Oculars/src/gui/OcularDialog.cpp:554
+#: plugins/Oculars/src/gui/OcularDialog.cpp:551
+#: plugins/Oculars/src/gui/OcularDialog.cpp:556
 msgid "[no key defined]"
 msgstr "[cha deach iuchair a shònrachadh]"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:558
+#: plugins/Oculars/src/gui/OcularDialog.cpp:560
 msgid "Switches on/off the ocular overlay."
 msgstr "Cuiridh seo tar-chòmhdachadh an t-sùilich air no dheth."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:562
+#: plugins/Oculars/src/gui/OcularDialog.cpp:564
 msgid "Opens the pop-up navigation menu."
 msgstr "Fosglaidh e priob-chlàr-taice na seòladaireachd."
 
@@ -7844,10 +7858,6 @@ msgstr "Cuir ris"
 msgid "Name:"
 msgstr "Ainm:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1154
-msgid "Field stop:"
-msgstr "Raon-stad:"
-
 #: plugins/Oculars/src/ui_ocularDialog.h:1155
 msgid "Binoculars"
 msgstr "Glainne dhà-shùileach"
@@ -7932,10 +7942,6 @@ msgstr "Ceàrn a’ chuairteachaidh (ceum):"
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
 msgstr "Glainneachan-amhairc"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1187
-msgid "Diameter:"
-msgstr "Trast-thomhas:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1188
 msgid "Horizontal flip"
