@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-16 01:10+0700\n"
+"POT-Creation-Date: 2016-10-16 21:53+0700\n"
 "PO-Revision-Date: 2016-10-04 19:25+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-10-16 05:46+0000\n"
+"X-Launchpad-Export-Date: 2016-10-17 05:52+0000\n"
 "X-Generator: Launchpad (build 18232)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -1957,7 +1957,7 @@ msgstr "<P DIR=RTL>للمراسلة"
 
 #: src/gui/ConfigurationDialog.cpp:876
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
-#: plugins/Oculars/src/gui/OcularDialog.cpp:515
+#: plugins/Oculars/src/gui/OcularDialog.cpp:517
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:408
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:252
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:120
@@ -2374,7 +2374,7 @@ msgstr "مطور نظام %1 :OSX"
 
 #: src/gui/HelpDialog.cpp:327
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
-#: plugins/Oculars/src/gui/OcularDialog.cpp:517
+#: plugins/Oculars/src/gui/OcularDialog.cpp:519
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
 msgid "Contributors"
 msgstr "المساهمون"
@@ -5294,27 +5294,31 @@ msgstr "ابحث في القائمة"
 msgid "Lists"
 msgstr "القوائم"
 
-#: src/ui_searchDialogGui.h:714
+#: src/ui_searchDialogGui.h:715
 msgid "Use on-line astronomical database SIMBAD"
 msgstr "على الإنترنت SIMBAD استخدم قاعدة معلومات سيمباد"
 
-#: src/ui_searchDialogGui.h:715
+#: src/ui_searchDialogGui.h:717
+msgid "Use SIMBAD"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:718
 msgid "Server:"
 msgstr "الخادم"
 
-#: src/ui_searchDialogGui.h:716
+#: src/ui_searchDialogGui.h:719
 msgid "Search options"
 msgstr "خيارات البحث"
 
-#: src/ui_searchDialogGui.h:717
+#: src/ui_searchDialogGui.h:720
 msgid "Use autofill only from the beginning of words"
 msgstr "استخدم التكملة التلقائية من بداية الكلمات فقط"
 
-#: src/ui_searchDialogGui.h:718
+#: src/ui_searchDialogGui.h:721
 msgid "Lock position when coordinates are used"
 msgstr "ثبّت الموقع عند استخدام الإحداثيات"
 
-#: src/ui_searchDialogGui.h:719 src/ui_viewDialog.h:2210
+#: src/ui_searchDialogGui.h:722 src/ui_viewDialog.h:2210
 #: src/ui_viewDialog.h:2232 src/ui_viewDialog.h:2249
 #: src/ui_configurationDialog.h:1302 src/ui_configurationDialog.h:1313
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
@@ -6162,7 +6166,7 @@ msgstr "أظهر جميع المعلومات"
 msgid "Display no information"
 msgstr "لاتظهر أي معلومات"
 
-#: src/ui_configurationDialog.h:1141 plugins/Oculars/src/Oculars.cpp:2382
+#: src/ui_configurationDialog.h:1141 plugins/Oculars/src/Oculars.cpp:2387
 #: plugins/Observability/src/Observability.cpp:205
 msgid "None"
 msgstr "لاتظهر أي معلومات"
@@ -6872,7 +6876,7 @@ msgid "Angle Measure Plug-in"
 msgstr "إضافة قياس البعد الزاوي"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:516
+#: plugins/Oculars/src/gui/OcularDialog.cpp:518
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:91
 #: plugins/Novae/src/gui/NovaeDialog.cpp:120
@@ -7276,75 +7280,75 @@ msgid "Lens: none"
 msgstr "العدسة: لايوجد"
 
 #: plugins/Oculars/src/Oculars.cpp:1968 plugins/Oculars/src/Oculars.cpp:2013
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:750
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:755
 #, qt-format
 msgid "Telescope #%1"
 msgstr "التلسكوب #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1971
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:834
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:839
 #, qt-format
 msgid "Magnification: %1"
 msgstr "التكبير: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1974
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:844
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:851
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "المسافة لبؤبؤ العين: %1 مم"
 
 #: plugins/Oculars/src/Oculars.cpp:1977
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:853
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:860
 #, qt-format
 msgid "FOV: %1"
 msgstr "حقل الرؤية: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1997
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:696
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:792
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:701
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:797
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "الأبعاد: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2001
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:656
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:661
 #, qt-format
 msgid "Sensor #%1"
 msgstr "المستشعر #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:2005
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:660
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:665
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "المستشعر #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:2018
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:754
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:759
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "التلسكوب #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2378
+#: plugins/Oculars/src/Oculars.cpp:2383
 msgid "&Lens"
 msgstr "&العدسة"
 
-#: plugins/Oculars/src/Oculars.cpp:2379
+#: plugins/Oculars/src/Oculars.cpp:2384
 msgid "&Previous lens"
 msgstr "&العدسة السابقة"
 
-#: plugins/Oculars/src/Oculars.cpp:2380
+#: plugins/Oculars/src/Oculars.cpp:2385
 msgid "&Next lens"
 msgstr "&العدسة التالية"
 
-#: plugins/Oculars/src/Oculars.cpp:2410
+#: plugins/Oculars/src/Oculars.cpp:2415
 msgid "&Telescope"
 msgstr "&التلسكوب"
 
-#: plugins/Oculars/src/Oculars.cpp:2411
+#: plugins/Oculars/src/Oculars.cpp:2416
 msgid "&Previous telescope"
 msgstr "&التلسكوب السابق"
 
-#: plugins/Oculars/src/Oculars.cpp:2412
+#: plugins/Oculars/src/Oculars.cpp:2417
 msgid "&Next telescope"
 msgstr "&التلسكوب التالي"
 
@@ -7448,34 +7452,34 @@ msgstr "التكبير: لاينطبق"
 msgid "Focal length of eyepiece"
 msgstr "البعد البؤري للعدسة العينية"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:708
 #, qt-format
 msgid "Rotation: %1"
 msgstr "التدوير: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:815
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:820
 msgid "Magnification provided by these binoculars"
 msgstr "التكبير المتاح بواسطة المنظار الثنائي"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:816
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:821
 msgid "Actual field of view provided by these binoculars"
 msgstr "حقل الرؤية الفعلي المتاح بواسطة هذا المنظار الثنائي"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:817
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:822
 msgid "Exit pupil provided by these binoculars"
 msgstr "مسافة بؤبؤ العين التي يوفرها هذا المنظار الثنائي"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:830
 msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr "التكبير الذي تعطيه هذه العدسة مع العدسة العينية وهذا التلسكوب"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:831
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr ""
 "حقل الرؤية الحقيقي الذي تعطيه هذه العدسة مع العدسة العينية وهذا التلسكوب"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:827
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:832
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
 msgstr ""
 "مسافة بؤبؤ العين التي تتوفر عند استخدام هذا المزيج من العدسة العينية "
@@ -7491,30 +7495,40 @@ msgstr "حقل الرؤية الحقيقي"
 msgid "Magnification factor:"
 msgstr "معامل التكبير"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:504
+#: plugins/Oculars/src/gui/OcularDialog.cpp:501
+#: plugins/Oculars/src/ui_ocularDialog.h:1187
+msgid "Diameter:"
+msgstr "القطر"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:505
 #: plugins/Oculars/src/ui_ocularDialog.h:1152
 msgid "aFOV:"
 msgstr "حقل الرؤية الظاهري ."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:505
+#: plugins/Oculars/src/gui/OcularDialog.cpp:506
 #: plugins/Oculars/src/ui_ocularDialog.h:1153
 #: plugins/Oculars/src/ui_ocularDialog.h:1186
 msgid "Focal length:"
 msgstr "الطول البؤري ."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:514
+#: plugins/Oculars/src/gui/OcularDialog.cpp:507
+#: plugins/Oculars/src/ui_ocularDialog.h:1154
+msgid "Field stop:"
+msgstr "النسبة البؤرية"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:516
 msgid "Oculars Plug-in"
 msgstr "<P DIR=RTL>إضافة العدسة العينية"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:517
+#: plugins/Oculars/src/gui/OcularDialog.cpp:519
 msgid "Barlow lens feature"
 msgstr "ميزة عدسة بارلو"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:521
+#: plugins/Oculars/src/gui/OcularDialog.cpp:523
 msgid "Overview"
 msgstr "<P DIR=RTL>تعريف"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:523
+#: plugins/Oculars/src/gui/OcularDialog.cpp:525
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece.  "
 "This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -7527,17 +7541,17 @@ msgstr ""
 "الرقمية. عند أول استخدام، سيضيف لك التطبيق نماذج من العدسات العينية "
 "والمستشعرات ليسهل لك البداية."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:524
+#: plugins/Oculars/src/gui/OcularDialog.cpp:526
 msgid "You can choose to scale the image you see on the screen."
 msgstr "<P DIR=RTL>تستطيع أن تتحكم بحجم المشهد على الشاشة."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:525
+#: plugins/Oculars/src/gui/OcularDialog.cpp:527
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
 msgstr "سوف يعطي ذلك مقارنة لما تراه عند استخدام عدسات مختلفة مع التلسكوبات."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:526
+#: plugins/Oculars/src/gui/OcularDialog.cpp:528
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will "
 "produce two different exit pupils, changing the view somewhat."
@@ -7545,19 +7559,19 @@ msgstr ""
 "نفس العدسة العينية مع تلسكوبين لهما طول بؤري مختلف سينتج عنها مسافة مختلفة "
 "للبؤبؤ مما يجعل المشهد مختلفا نوعا ما."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:527
+#: plugins/Oculars/src/gui/OcularDialog.cpp:529
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
 msgstr "عند استخدام ذلك سوف تضيع مساحة معتبرة من الشاشة بدون فائدة."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:528
+#: plugins/Oculars/src/gui/OcularDialog.cpp:530
 msgid ""
 "Therefore I recommend that you leave it off, unless you feel you have a need "
 "of it."
 msgstr "لذلك لا أنصح بتفعيل هذا الخيار إلا إذا كان له فائدة معينة لك."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:529
+#: plugins/Oculars/src/gui/OcularDialog.cpp:531
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
@@ -7567,7 +7581,7 @@ msgstr ""
 "أردت أن يكون الاتجاه إلى الشمال، ولم أستطع ذلك. حالياً الاتجاه هو لأعلى "
 "الشاشة."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:530
+#: plugins/Oculars/src/gui/OcularDialog.cpp:532
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -7581,31 +7595,31 @@ msgstr ""
 "2.0%1 و 4.0%1 تساعدك في توقع مايمكن رؤيته بالعين المجردة من خلال  كاشف "
 "التلراد أو مايشابهه من الأدوات."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:531
+#: plugins/Oculars/src/gui/OcularDialog.cpp:533
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr ""
 "<P DIR=RTL>إذا وجدت مشاكل في هذا التطبيق، تفضل بإخباري. أرجو لك المتعة."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:534
+#: plugins/Oculars/src/gui/OcularDialog.cpp:536
 msgid "Hot Keys"
 msgstr "<P DIR=RTL>مفاتيح الاختصار"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:535
+#: plugins/Oculars/src/gui/OcularDialog.cpp:537
 msgid "The plug-in's key bindings can be edited in the General Tab."
 msgstr ""
 "<P DIR=RTL>مفاتيح الاختصار الخاصة بهذا التطبيق يمكن تحديدها تحت علامة "
 "التبويب \"عام\""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:549
-#: plugins/Oculars/src/gui/OcularDialog.cpp:554
+#: plugins/Oculars/src/gui/OcularDialog.cpp:551
+#: plugins/Oculars/src/gui/OcularDialog.cpp:556
 msgid "[no key defined]"
 msgstr "[لم يعرّف أي مفتاح]"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:558
+#: plugins/Oculars/src/gui/OcularDialog.cpp:560
 msgid "Switches on/off the ocular overlay."
 msgstr "إظهار وإخفاء المشهد الدائري من خلال العدسة العينية"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:562
+#: plugins/Oculars/src/gui/OcularDialog.cpp:564
 msgid "Opens the pop-up navigation menu."
 msgstr "فتح قائمة التنقّل المنبثقة"
 
@@ -7702,10 +7716,6 @@ msgstr "أضف"
 msgid "Name:"
 msgstr "الاسم"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1154
-msgid "Field stop:"
-msgstr "النسبة البؤرية"
-
 #: plugins/Oculars/src/ui_ocularDialog.h:1155
 msgid "Binoculars"
 msgstr "المنظار الثنائي"
@@ -7790,10 +7800,6 @@ msgstr "زاوية التدوير بالدرجات"
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
 msgstr "التلسكوبات"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1187
-msgid "Diameter:"
-msgstr "القطر"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1188
 msgid "Horizontal flip"
