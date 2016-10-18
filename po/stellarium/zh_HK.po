@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-11 02:35+0700\n"
+"POT-Creation-Date: 2016-10-16 21:53+0700\n"
 "PO-Revision-Date: 2016-09-30 22:53+0000\n"
 "Last-Translator: henrysky <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-10-11 06:23+0000\n"
-"X-Generator: Launchpad (build 18227)\n"
+"X-Launchpad-Export-Date: 2016-10-17 06:26+0000\n"
+"X-Generator: Launchpad (build 18232)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:188
@@ -973,7 +973,7 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "氣體尾長度 (估計): %1 Mio km"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:204 src/gui/AstroCalcDialog.cpp:526
+#: src/core/modules/SolarSystem.cpp:204 src/gui/AstroCalcDialog.cpp:522
 #: src/translations.h:66
 msgid "Planets"
 msgstr "行星"
@@ -1084,7 +1084,7 @@ msgid "Position angle"
 msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:285 src/core/modules/StarWrapper.cpp:287
-#: src/gui/AstroCalcDialog.cpp:555
+#: src/gui/AstroCalcDialog.cpp:551
 msgid "Separation"
 msgstr "分隔"
 
@@ -1101,7 +1101,7 @@ msgid "Night mode"
 msgstr "夜間模式"
 
 #: src/core/StelCore.cpp:222 src/gui/StelGui.cpp:199
-#: src/gui/AstroCalcDialog.cpp:274 src/gui/AstroCalcDialog.cpp:552
+#: src/gui/AstroCalcDialog.cpp:274 src/gui/AstroCalcDialog.cpp:548
 #: src/gui/BookmarksDialog.cpp:102 src/ui_dateTimeDialogGui.h:376
 #: src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:173
@@ -1834,6 +1834,14 @@ msgstr "向南望"
 msgid "Look towards Zenith"
 msgstr ""
 
+#: src/core/StelMovementMgr.cpp:167
+msgid "Look towards North Celestial pole"
+msgstr ""
+
+#: src/core/StelMovementMgr.cpp:168
+msgid "Look towards South Celestial pole"
+msgstr ""
+
 #: src/core/SimbadSearcher.cpp:78
 msgid "Network error"
 msgstr "網絡錯誤"
@@ -1880,7 +1888,7 @@ msgstr "聯絡"
 
 #: src/gui/ConfigurationDialog.cpp:876
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
-#: plugins/Oculars/src/gui/OcularDialog.cpp:515
+#: plugins/Oculars/src/gui/OcularDialog.cpp:517
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:408
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:252
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:120
@@ -2282,7 +2290,7 @@ msgstr "OSX開發: %1"
 
 #: src/gui/HelpDialog.cpp:327
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
-#: plugins/Oculars/src/gui/OcularDialog.cpp:517
+#: plugins/Oculars/src/gui/OcularDialog.cpp:519
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
 msgid "Contributors"
 msgstr "貢獻者"
@@ -2767,137 +2775,132 @@ msgstr ""
 msgid "Julian Day"
 msgstr "儒略日"
 
-#. TRANSLATORS: visible magnitude
-#: src/gui/AstroCalcDialog.cpp:283
-msgid "Vis. mag."
-msgstr ""
-
-#: src/gui/AstroCalcDialog.cpp:386 src/gui/AstroCalcDialog.cpp:760
+#: src/gui/AstroCalcDialog.cpp:382 src/gui/AstroCalcDialog.cpp:756
 msgid "CSV (Comma delimited)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:388
+#: src/gui/AstroCalcDialog.cpp:384
 msgid "Save calculated ephemerides as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:464
+#: src/gui/AstroCalcDialog.cpp:460
 msgid "10 minutes"
 msgstr "10 分鐘"
 
-#: src/gui/AstroCalcDialog.cpp:465
+#: src/gui/AstroCalcDialog.cpp:461
 msgid "1 hour"
 msgstr "1 小時"
 
-#: src/gui/AstroCalcDialog.cpp:466
+#: src/gui/AstroCalcDialog.cpp:462
 msgid "1 day"
 msgstr "1 天"
 
-#: src/gui/AstroCalcDialog.cpp:467
+#: src/gui/AstroCalcDialog.cpp:463
 msgid "5 days"
 msgstr "5 天"
 
-#: src/gui/AstroCalcDialog.cpp:468
+#: src/gui/AstroCalcDialog.cpp:464
 msgid "10 days"
 msgstr "10 天"
 
-#: src/gui/AstroCalcDialog.cpp:469
+#: src/gui/AstroCalcDialog.cpp:465
 msgid "15 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:470
+#: src/gui/AstroCalcDialog.cpp:466
 msgid "30 days"
 msgstr "30 天"
 
-#: src/gui/AstroCalcDialog.cpp:471
+#: src/gui/AstroCalcDialog.cpp:467
 msgid "60 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:525
+#: src/gui/AstroCalcDialog.cpp:521
 msgid "Solar system"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:527 src/translations.h:70
+#: src/gui/AstroCalcDialog.cpp:523 src/translations.h:70
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
 msgstr "小行星"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:528 src/translations.h:74
+#: src/gui/AstroCalcDialog.cpp:524 src/translations.h:74
 msgid "Plutinos"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:529 src/translations.h:68
+#: src/gui/AstroCalcDialog.cpp:525 src/translations.h:68
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
 msgstr "彗星"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:530 src/translations.h:76
+#: src/gui/AstroCalcDialog.cpp:526 src/translations.h:76
 msgid "Dwarf planets"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:531 src/translations.h:78
+#: src/gui/AstroCalcDialog.cpp:527 src/translations.h:78
 msgid "Cubewanos"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:532 src/translations.h:80
+#: src/gui/AstroCalcDialog.cpp:528 src/translations.h:80
 msgid "Scattered disc objects"
 msgstr "黃道離散天體"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:533 src/translations.h:82
+#: src/gui/AstroCalcDialog.cpp:529 src/translations.h:82
 msgid "Oort cloud objects"
 msgstr "奧爾特雲天體"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:534 src/translations.h:117
+#: src/gui/AstroCalcDialog.cpp:530 src/translations.h:117
 #: src/ui_viewDialog.h:1993
 msgid "Star clusters"
 msgstr "星團"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:535 src/translations.h:99
+#: src/gui/AstroCalcDialog.cpp:531 src/translations.h:99
 msgid "Planetary nebulae"
 msgstr "星雲"
 
-#: src/gui/AstroCalcDialog.cpp:536
+#: src/gui/AstroCalcDialog.cpp:532
 msgid "Bright nebulae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:537 src/translations.h:101
+#: src/gui/AstroCalcDialog.cpp:533 src/translations.h:101
 msgid "Dark nebulae"
 msgstr "暗星雲"
 
-#: src/gui/AstroCalcDialog.cpp:538 src/ui_viewDialog.h:1995
+#: src/gui/AstroCalcDialog.cpp:534 src/ui_viewDialog.h:1995
 msgid "Galaxies"
 msgstr "星系"
 
-#: src/gui/AstroCalcDialog.cpp:551
+#: src/gui/AstroCalcDialog.cpp:547
 msgid "Phenomenon"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:553
+#: src/gui/AstroCalcDialog.cpp:549
 msgid "Object 1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:554
+#: src/gui/AstroCalcDialog.cpp:550
 msgid "Object 2"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:762
+#: src/gui/AstroCalcDialog.cpp:758
 msgid "Save calculated phenomena as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:801 src/gui/AstroCalcDialog.cpp:955
+#: src/gui/AstroCalcDialog.cpp:797 src/gui/AstroCalcDialog.cpp:951
 msgid "Conjunction"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:805
+#: src/gui/AstroCalcDialog.cpp:801
 msgid "Opposition"
 msgstr ""
 
@@ -5143,27 +5146,31 @@ msgstr "在列表中搜索..."
 msgid "Lists"
 msgstr "清單"
 
-#: src/ui_searchDialogGui.h:714
+#: src/ui_searchDialogGui.h:715
 msgid "Use on-line astronomical database SIMBAD"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:715
+#: src/ui_searchDialogGui.h:717
+msgid "Use SIMBAD"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:718
 msgid "Server:"
 msgstr "伺服器："
 
-#: src/ui_searchDialogGui.h:716
+#: src/ui_searchDialogGui.h:719
 msgid "Search options"
 msgstr "搜尋設定"
 
-#: src/ui_searchDialogGui.h:717
+#: src/ui_searchDialogGui.h:720
 msgid "Use autofill only from the beginning of words"
 msgstr "只有從單詞開始使用自動填寫"
 
-#: src/ui_searchDialogGui.h:718
+#: src/ui_searchDialogGui.h:721
 msgid "Lock position when coordinates are used"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:719 src/ui_viewDialog.h:2210
+#: src/ui_searchDialogGui.h:722 src/ui_viewDialog.h:2210
 #: src/ui_viewDialog.h:2232 src/ui_viewDialog.h:2249
 #: src/ui_configurationDialog.h:1302 src/ui_configurationDialog.h:1313
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
@@ -5982,7 +5989,7 @@ msgstr "完整顯示"
 msgid "Display no information"
 msgstr "不顯示任何資料"
 
-#: src/ui_configurationDialog.h:1141 plugins/Oculars/src/Oculars.cpp:2382
+#: src/ui_configurationDialog.h:1141 plugins/Oculars/src/Oculars.cpp:2387
 #: plugins/Observability/src/Observability.cpp:205
 msgid "None"
 msgstr "無"
@@ -6676,7 +6683,7 @@ msgid "Angle Measure Plug-in"
 msgstr "角度測量插件"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:516
+#: plugins/Oculars/src/gui/OcularDialog.cpp:518
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:91
 #: plugins/Novae/src/gui/NovaeDialog.cpp:120
@@ -7061,75 +7068,75 @@ msgid "Lens: none"
 msgstr "鏡片: 沒有"
 
 #: plugins/Oculars/src/Oculars.cpp:1968 plugins/Oculars/src/Oculars.cpp:2013
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:750
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:755
 #, qt-format
 msgid "Telescope #%1"
 msgstr "望遠鏡 #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1971
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:833
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:839
 #, qt-format
 msgid "Magnification: %1"
 msgstr "倍數: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1974
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:843
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:851
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1977
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:852
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:860
 #, qt-format
 msgid "FOV: %1"
 msgstr "視場: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1997
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:696
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:792
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:701
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:797
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "尺寸: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2001
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:656
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:661
 #, qt-format
 msgid "Sensor #%1"
 msgstr "感光元件 #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:2005
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:660
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:665
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "感光元件 #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:2018
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:754
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:759
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "望遠鏡 #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2378
+#: plugins/Oculars/src/Oculars.cpp:2383
 msgid "&Lens"
 msgstr "&鏡片"
 
-#: plugins/Oculars/src/Oculars.cpp:2379
+#: plugins/Oculars/src/Oculars.cpp:2384
 msgid "&Previous lens"
 msgstr "&上一塊鏡片"
 
-#: plugins/Oculars/src/Oculars.cpp:2380
+#: plugins/Oculars/src/Oculars.cpp:2385
 msgid "&Next lens"
 msgstr "&下一塊鏡片"
 
-#: plugins/Oculars/src/Oculars.cpp:2410
+#: plugins/Oculars/src/Oculars.cpp:2415
 msgid "&Telescope"
 msgstr "&Telescope"
 
-#: plugins/Oculars/src/Oculars.cpp:2411
+#: plugins/Oculars/src/Oculars.cpp:2416
 msgid "&Previous telescope"
 msgstr "&上一支望遠鏡"
 
-#: plugins/Oculars/src/Oculars.cpp:2412
+#: plugins/Oculars/src/Oculars.cpp:2417
 msgid "&Next telescope"
 msgstr "&下一支望遠鏡"
 
@@ -7233,33 +7240,33 @@ msgstr "多個: 不適用"
 msgid "Focal length of eyepiece"
 msgstr "焦距目鏡"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:708
 #, qt-format
 msgid "Rotation: %1"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:814
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:820
 msgid "Magnification provided by these binoculars"
 msgstr "這些雙筒望遠鏡的放大倍率"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:815
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:821
 msgid "Actual field of view provided by these binoculars"
 msgstr "這些雙筒望遠鏡之實際視野"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:816
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:822
 msgid "Exit pupil provided by these binoculars"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:824
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:830
 msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr "由目鏡/鏡片/望遠鏡組合的倍率"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:831
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr "目鏡/鏡片/望遠鏡組合的實際視埸"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:832
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
 msgstr ""
 
@@ -7273,30 +7280,40 @@ msgstr ""
 msgid "Magnification factor:"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:504
+#: plugins/Oculars/src/gui/OcularDialog.cpp:501
+#: plugins/Oculars/src/ui_ocularDialog.h:1187
+msgid "Diameter:"
+msgstr "直徑:"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:505
 #: plugins/Oculars/src/ui_ocularDialog.h:1152
 msgid "aFOV:"
 msgstr "視場:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:505
+#: plugins/Oculars/src/gui/OcularDialog.cpp:506
 #: plugins/Oculars/src/ui_ocularDialog.h:1153
 #: plugins/Oculars/src/ui_ocularDialog.h:1186
 msgid "Focal length:"
 msgstr "焦距："
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:514
+#: plugins/Oculars/src/gui/OcularDialog.cpp:507
+#: plugins/Oculars/src/ui_ocularDialog.h:1154
+msgid "Field stop:"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:516
 msgid "Oculars Plug-in"
 msgstr "觀測模擬插件"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:517
+#: plugins/Oculars/src/gui/OcularDialog.cpp:519
 msgid "Barlow lens feature"
 msgstr "巴羅鏡"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:521
+#: plugins/Oculars/src/gui/OcularDialog.cpp:523
 msgid "Overview"
 msgstr "概覽"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:523
+#: plugins/Oculars/src/gui/OcularDialog.cpp:525
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece.  "
 "This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -7305,42 +7322,42 @@ msgid ""
 msgstr ""
 "此插件可讓你模擬目鏡所看到的效果. 你可以透過這些設定去新增, 更改或刪除目鏡, 望遠鏡及CCD感光元件. 第一次可使用預設儀器去模擬效果."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:524
+#: plugins/Oculars/src/gui/OcularDialog.cpp:526
 msgid "You can choose to scale the image you see on the screen."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:525
+#: plugins/Oculars/src/gui/OcularDialog.cpp:527
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:526
+#: plugins/Oculars/src/gui/OcularDialog.cpp:528
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will "
 "produce two different exit pupils, changing the view somewhat."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:527
+#: plugins/Oculars/src/gui/OcularDialog.cpp:529
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:528
+#: plugins/Oculars/src/gui/OcularDialog.cpp:530
 msgid ""
 "Therefore I recommend that you leave it off, unless you feel you have a need "
 "of it."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:529
+#: plugins/Oculars/src/gui/OcularDialog.cpp:531
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
 "top of the screen."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:530
+#: plugins/Oculars/src/gui/OcularDialog.cpp:532
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -7349,28 +7366,28 @@ msgid ""
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:531
+#: plugins/Oculars/src/gui/OcularDialog.cpp:533
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr "如果說有任何問題, 請話我知. 享受!"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:534
+#: plugins/Oculars/src/gui/OcularDialog.cpp:536
 msgid "Hot Keys"
 msgstr "熱鍵"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:535
+#: plugins/Oculars/src/gui/OcularDialog.cpp:537
 msgid "The plug-in's key bindings can be edited in the General Tab."
 msgstr "插件的綁定鍵可以在一般設定編輯."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:549
-#: plugins/Oculars/src/gui/OcularDialog.cpp:554
+#: plugins/Oculars/src/gui/OcularDialog.cpp:551
+#: plugins/Oculars/src/gui/OcularDialog.cpp:556
 msgid "[no key defined]"
 msgstr "[無按鍵定義]"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:558
+#: plugins/Oculars/src/gui/OcularDialog.cpp:560
 msgid "Switches on/off the ocular overlay."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:562
+#: plugins/Oculars/src/gui/OcularDialog.cpp:564
 msgid "Opens the pop-up navigation menu."
 msgstr "打開彈出式導航選單."
 
@@ -7463,10 +7480,6 @@ msgstr "新增"
 msgid "Name:"
 msgstr "名稱:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1154
-msgid "Field stop:"
-msgstr ""
-
 #: plugins/Oculars/src/ui_ocularDialog.h:1155
 msgid "Binoculars"
 msgstr "雙筒望遠鏡"
@@ -7549,10 +7562,6 @@ msgstr ""
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
 msgstr "望遠鏡"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1187
-msgid "Diameter:"
-msgstr "直徑:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1188
 msgid "Horizontal flip"
