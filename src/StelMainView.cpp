@@ -484,6 +484,8 @@ void StelMainView::setOpenGLFormat() const
 	fmt.setRenderableType(QSurfaceFormat::OpenGL);
 	fmt.setMajorVersion(2);
 	fmt.setMinorVersion(1);
+	//disable vsync
+	fmt.setSwapInterval(0);
 
 #ifdef OPENGL_DEBUG_LOGGING
 	//try to enable GL debugging using GL_KHR_debug
