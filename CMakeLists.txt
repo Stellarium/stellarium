@@ -62,6 +62,8 @@ endif()
 set(OPENGL_DEBUG_LOGGING 0 CACHE BOOL "Enable to log OpenGL information using the GL_KHR_debug extension/QOpenGLLogger")
 if(OPENGL_DEBUG_LOGGING)
     add_definitions(-DOPENGL_DEBUG_LOGGING)
+    # This enables logging of QOpenGLFunctions through forced glGetError after each call
+    add_definitions(-DQ_ENABLE_OPENGL_FUNCTIONS_DEBUG)
 endif()
 
 # Use ccache if possible
