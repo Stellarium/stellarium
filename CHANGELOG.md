@@ -1,0 +1,1048 @@
+### 0.15.0 *[2016-07-31]*
+In memory of our team member Barry Gerdes.
+
+Version 0.15.0 is based on Qt5.6. Starting with this version, some graphics cards
+have been blacklisted by Qt and are automatically forced to use ANGLE on Windows.
+We introduce a major internal change with the StelProperty system.
+This allows simpler access to internal variables and therefore more ways of operation.
+Most notably this version introduces an alternative control option via RemoteControl,
+a new webserver interface plugin.
+We also introduce another milestone towards providing better astronomical accuracy for
+historical applications: experimental support of getting planetary positions from JPL DE430 and
+  DE431 ephemerides. This feature is however not fully tested yet.
+The major changes:
+- Added StelProperty system
+- Added new plugin for exhibitions and planetariums - Remote Control
+- Added new skycultures: Macedonian, Ojibwe, Dakota/Lakota/Nakota,
+  Kamilaroi/Euahlayi
+- Updated code of plugins
+- Added Bookmarks tool and updated AstroCalc tool
+- Added new functions for Scripting Engine and new scripts
+- Added Miller Cylindrical Projection
+- Added updates and improvements in DSO and star catalogues (include initial
+  support of The Washington Double Star Catalog)
+- azimuth lines (also targetting geographic locations) in ArchaeoLines plugin
+- Many fixes and improvements...
+
+In addition, we prepared a new user guide.
+
+Full list of changes: https://launchpad.net/stellarium/0.15/0.15.0
+
+### 0.14.3 *[2016-03-20]*
+Bugfix release:
+- Added Bengali description for landscapes (LP: #1548627)
+- Added background transparency in Oculars plugin (LP: #1511393)
+- Fixed serial port issue on Windows version (LP: #1543813)
+- Fixed MESA mode on Windows (LP: #1509735)
+- Fixed Stellarium crashes in ocular view of Saturn/Neptune/Uranus (LP: #1495232)
+- Fixed artifacts in rendering of Mercury in the Sun (LP: #1533647)
+- Fixed loading scenes for Scenery 3D plugin (LP: #1533069)
+- Fixed movement of radiant when time is switched manually (LP: #1535950)
+- Fixed changing name of planet (LP: #1548008)
+
+### 0.14.2 *[2016-01-08]*
+Bugfix release:
+- Reduce planet brightness in daylight (LP: #1503248)
+- Fixed perspective mode with offset viewport in scenery3d (LP: #1509728)
+- Fixed wrong altitudes for some locations (LP: #1530759)
+- Fixed some skyculture links
+- Fixed editing some shortcut keys (LP: #1530567)
+- Fixed drawing reticle for telescope (LP: #1526348)
+- Refactoring coloring markers of the DSO
+- Removed info about Moon phases (avoid inconsistency for strings).
+- Updated default config options
+- Updated icons for View dialog
+- Updated Stellarium DSO Catalog
+- Added list of dwarf galaxies (Search Tool)
+- Added improvements in Scenery 3D plugin
+
+### 0.14.1 *[2015-12-02]*
+Bugfix release:
+- Added support for side-by-side assembly technology (LP: #1400045)
+- Enhancements of the Ocular plugin: add OAG support (LP: #1354427)
+- Added Belarusian translation for landscapes and sky cultures (LP: #1520303)
+- Added designations for few stars in Scorpius (LP: #1518437)
+- Fixed constellation art brightness and zooming (LP: #1520783)
+- Fixed number of satellite orbit segments resets (LP: #1510592)
+- Fixed certain outplanet moons with wrong Longitudes (LP: #1509693, #1509692)
+- Fixed saving settings for some View panel options (LP: #1509639)
+- Fixed fails to run up on Windows when invoked from a different directory (LP: #1410529)
+- Fixed wrong value of ecliptic obliquity (LP: #1520792)
+- Fixed segmentation fault (core dumped) while try update stars catalog (LP: #1514542)
+- Tentative fix for support 4K resolution (GUI scaling) (LP: #1372781)
+
+### 0.14.0 *[2015-10-24]*
+A big leap forward in astronomical accuracy for historical applications:
+ - Precession now follows the IAU2006 model in the long-time version from Vondrak
+   et al. 2011.
+ - Nutation is applied (IAU2000B solution). Given that nobody has observed it without
+   telescope and the model does not give limits of applicability, we limit its application
+   to 1500..2500
+ - Application of DeltaT has been simplified and made a bit more intuitive.
+
+We now dare to add another coordinate system: Ecliptic coordinates of date.
+
+We can therefore now show that planetary positions given by the commonly used solution
+VSOP87 is applicable to -4000..+8000 only, and its use outside this range will give
+somewhat artificial results. There is more to follow in future versions.
+
+The other big addition is a greatly improved collection of DSO data with lots of
+possibilities in a new GUI tab to select for object type and/or catalog. In total,
+15 catalogs are now built-in!
+
+Also the Meteor Shower, Satellites, Telescope Control and 3D Sceneries plugins have
+been improved.
+
+Landscapes can have switchable labels, so you can e.g. indicate mountain peaks.
+
+In total 83 bugs and wishlist items were fixed or at least decided.
+
+A platform-specific change for Windows: OpenGL binding is now dynamic. That means, there are
+no more separate OpenGL/ANGLE/MESA downloads, but after installation you will have separate
+commands in the start menu which force ANGLE or MESA modes.
+
+Full list of changes: https://launchpad.net/stellarium/0.14/0.14.0
+
+### 0.13.3 *[2015-04-25]*
+Bugfix release with few new features.
+
+This version is contains over 30 closed bugs, who include some wishes and new nice features - like
+visualization of the 3D landscapes and extra DSO catalogs.
+
+Full list of changes: https://launchpad.net/stellarium/0.13/0.13.3
+
+### 0.13.2 *[2015-01-20]*
+Major bugfix release with few new features.
+
+This version is contains over 70 closed bugs, who include some wishes and new nice features - like
+visualization of the zodiacal light and new sky cultures.
+
+Full list of changes: https://launchpad.net/stellarium/0.13/0.13.2
+
+### 0.13.1 *[2014-10-19]*
+Bugfix release with few new features.
+- Added: Light layer for old_style landscapes
+- Added: Auto-detect location via network lookup.
+- Added: Seasonal rules for displaying constellations
+- Added: Coordinates can be displayed as decimal degrees (LP: #1106743)
+- Added: Support of multi-touch gestures on Windows 8 (LP: #1165754)
+- Added: FOV on bottom bar can be displayed in DMS rather than fractional degrees (LP: #1361582)
+- Added: Oculars plugins support eyepieces with permanent crosshairs (LP: #1364139)
+- Added: Pointer Coordinates Plugin can displayed not only RA/Dec (J2000.0) (LP: #1365784, #1377995)
+- Added: Angle Measure Plugin can measure positional angles to the horizon now (LP: #1208143)
+- Added: Search tool can search position not only for RA/Dec (J2000.0) (LP: #1358706)
+- Fixed: Galactic plane renamed to correct: Galactic equator (LP: #1367744)
+- Fixed: Speed issues when computing lots of comets (LP: #1350418)
+- Fixed: Spherical mirror distortion work correctly now (LP: #676260, #1338252)
+- Fixed: Location coordinates on the bottom bar displayed correctly now (LP: #1357799)
+- Fixed: Ecliptic coordinates for J2000.0 and grids diplayed correctly now (LP: #1366567, #1369166)
+- Fixed: Rule for select a celestial objects (LP: #1357917)
+- Fixed: Loading extra star catalogs (LP: #1329500, #1379241)
+- Fixed: Creates spurious directory on startup (LP: #1357758)
+- Fixed: Various GUI/rendering improvements (LP: #1380502, #1320065, #1338252, #1096050, #1376550, #1382689)
+- Fixed: "missing disk in drive <whatever>" (LP: #1371183)
+
+Full list of changes: https://launchpad.net/stellarium/0.13/0.13.1
+
+### 0.13.0 *[2014-07-19]*
+This version based on Qt 5 and has new modulated core, and new features (example: normal mapping) and fixes for 115 bugs, including:
+- New plugin: Equation of Time - provides solution for Equation of Time.
+- New plugin: Field of View - provides shortcuts for quick changes field of view.
+- New plugin: Navigational Stars - marks 58 navigational stars on the sky.
+- New plugin: Pointer Coordinates - shows the coordinates of the mouse pointer.
+- New plugin: Meteor Showers - provides visualization of meteor showers.
+- New translatable strings and new textures.
+- Improved Landscapes: New Polygonal type, texture saving for shperical, and optional light pollution/streetlight layer.
+- Comet Tails
+- New version of the Satellites plugin: introduces star-like satellites and bug fixes.
+- New version of the Exoplanets plugin: displaying of the potential habitable exoplanets; improvements for performance and code refactoring.
+- New version of the Angle Measure plugin: displaying of the position angle.
+- New version of the Quasars plugin: improvements for performance; added marker_color parameter.
+- New version of the Pulsars plugin: improvements for performance; display pulsars with glitches; setting color for marker for different types of the pulsars.
+- New versions of the Compass Marks, Oculars, Historical Supernovae, Observability analysis and Bright Novae plugins: bug fixing, code refactoring and improvements.
+
+Full list of changes: https://launchpad.net/stellarium/0.13/0.13.0
+
+### 0.12.4 *[2013-09-26]*
+Bugfix release.
+- fixed crash Stellarium when enabled binoculars in the Oculars plugin (LP: #1222742);
+- added render nighttime landscapes without lighting (LP: #1223052);
+
+### 0.12.3 *[2013-09-08]*
+Bugfix release with new plugin.
+- new plugin - Bright Novae;
+- added intermediate value to ZHR of shooting stars between 80 and 10000 (LP: #1208106);
+- fixed search tool (LP: #1208296, #1211198);
+- fixed behaviour for shortkeys of few plugins (LP: #1208291);
+- fixed Flamsteed designations for few Virgo stars (LP: #1222094);
+- fixed saving Milky Way brightness via GUI (LP: #1220477)
+
+### 0.12.2 *[2013-08-04]*
+Bugfix release with few new features.
+New version of the Satellites plug-in (0.8.1):
+- automatic adding of new satellites on update from selected update sources;
+by default, only new naked-eye satellites are auto-added
+- automatic removal of satellites if they are no longer listed in the update
+sources
+- "user-defined" flag protecting satellites from update/removal
+- satellites can be added to/removed from satellite groups from the GUI
+- custom satellite groups can be defined
+- the default satellite group names and satellite descriptions are translatable
+Added:
+- Variable stars support (LP: #665014)
+- Automatic change of landscape on planet change (LP: #1173254)
+- Flamsteed designation for stars and search tool (LP: #1190503)
+Changed:
+- Repacked default star catalogs (LP: #926588)
+- Update DSO features (LP: #1115035, #1172402, #1180493)
+- Improved Quasars plugin (LP: #1169232, #1181688)
+- Improved Pulsars plugin (LP: #1169230, #1181688)
+- Improved Oculars plugin (LP: #1170239, #1188340)
+- Improved Historical Supernovae plugin (LP: #1180962)
+- Improved Observability analysis plugin (LP: #1171182)
+- Improved Exoplanets plugin (LP: #1177871)
+- Improved Satellites plugin (LP: #955780)
+- Improved search tool (LP: #1181534, #1184599, #1180962)
+- Improved scripting engine (LP: #1202637, #1091626)
+Fixed:
+- Satellites plugin cause crash when enabled in distant past (LP: #955780)
+- Landscape colour saturation at summer noon (LP: #1115364)
+- wrong rendering of Planet's shadow (LP: #1131847)
+- stellarium crashes (LP: #1157930, #1177871, #1194838, #1173355, #1184599)
+- mismatched malloc/delete (LP: #1172931)
+- error in template code (LP: #1178257)
+- undefined template function in vecmath (LP: #1178391)
+- Setting Startup date and time (Other:) sets time to UTC, not my local (EDT) time (LP: #1198570)
+- Debug messages don't completely convert paths to local directory separator (LP: #682633)
+- Garbled text hovering over time/date (LP: #1176424)
+- Set time to now (Icon not illuminated) (LP: #1178498)
+- Tongan translation discrepancies (LP: #1181945)
+- POD document (LP: #1184459)
+- No orbits displayed for some planets' satellites (LP: #834727)
+
+### 0.12.1 *[2013-04-21]*
+Bugfix release with few new features.
+Added:
+- Use different formulae for DeltaT calculations (LP: #1106658)
+- Show/hide starts at magnitude > X feature (LP: #880256, #1132010)
+- Added translations for Inno Setup installer (LP: #1159080)
+- Added Caldwell catalog
+- New skyculture: Tongan
+- New feature for Oculars plugin: support Barlow/Shapley lenses
+- Control brightness of the milky way (LP: #1106755)
+- Satellites plugin: New Galileo satellites (LP: #1169252)
+- Control brightness of the landscapes at startup (LP: #1149882, #603376)
+Changed:
+- Repacked default star catalogs (LP: #1124221)
+- Repacked locations catalog (LP: #1131036)
+- Refactored GUI
+- Update textures for DSO (LP: #1126959, #1114645)
+- Improved accuracy for NEO (LP: #1100766, #1080154)
+Fixed:
+- Sidereal day & sunrise/sunset (LP: #1106754)
+- Wrong solar day (LP: #1113249)
+- Pluto and Charon are not tidally locked in Stellarium (LP: #968738)
+- Search problem in different language (LP: #1131034)
+- Bortle light pollution scale setting not working (LP: #1121630)
+- The preference of "Render Solar Shadow" cannot be saved (LP: #1114279)
+- Background color of the night sky (LP: #1085375)
+- Time is slightly off (from system time) (LP: #1113222)
+- Dynamic plugins don't load on windows (LP: #1168958)
+- Cursor jumps out of altitude input box (LP: #1156112)
+- Missing splash screen on Windows and Mac OS X (LP: #1131942)
+- Satellite event times differ (LP: #1114644)
+- Plugin "Time Zone" display problem on Mac OSX (LP: #1114330)
+- Yellow/Black Checkered Flag while Object Picture is Loading (LP: #1113064)
+- Omega Centauri strange appearance on Mac (LP: #1114645)
+- Planet display bug (LP: #1114036)
+- Star on meridian has wrong hour angle (LP: #1131206)
+- Location window spin box up/down behavior (LP: #1093229)
+
+### 0.12.0 *[2013-01-31]*
+New rendering engine, editable keybindings, bug fixes and improvements.
+
+Added:
+- New rendering engine (LP: #673183)
+- Editable keybindings (LP: #1098851, #1035635, #832256, #789002)
+- Scripting for plugins (LP: #1040242)
+- Some transneptunian objects (LP: #899084, #1051205)
+- New geographical locations (LP: #1051803)
+- New textures for DSO
+- DeltaT and lunar acceleration computation (LP: #575621)
+
+Changed:
+- Improving the scripting engine (LP: #1059368)
+- Improving the plugins (LP: #1082167, #1042714)
+- Improving the coordinate grids (LP: #1036294)
+- Improving the constellation boundaries (LP: #1039072)
+- Improving the search tool
+
+Fixed:
+- Clang Wself-assign warning during build process on some platforms (LP: #1097358)
+- Bugs in Observability plugin (LP: #1042059, #1054599, #1053058)
+- Bugs in TUI plugin (LP: #1083380)
+- Bugs in Satellites plugin (LP: #1048220)
+- Bugs in Compass plugin (LP: #695891)
+- Bugs in scripting engine (LP: #1046518, #1092781)
+- Font corruption bugs (LP: #597633, #778747, #819278, #903310)
+- Screen flashing in fullscreen mode (LP: #716695, #824788)
+- Lost nebula images (LP: #1042393, #1051038)
+- Bugs in Night Vision mode (LP: #578367)
+- Bugs in GUI and Core (LP: #1090722, #1082510, #1071455, #1071458, #1056868, #1054600, #1045111, #1040944, #1077545)
+- Crashes (LP: #1043640, #1044654, #1045783)
+
+### 0.11.4 *[2012-08-26]*
+Bug fix release with new features.
+
+Added:
+- New plugin: Exoplanets
+- New plugin: Observability analysis
+- Get geometric altitude and azimuth for script engine (LP: #1010617)
+- Sky image loading with altitude/azimuth coordinates (LP: #1023548)
+- New hotkey for star name labels (LP: #1032989)
+- Option to activate/deactivate the Nebula Background Images button via GUI (LP: #925247)
+- Return to user set location and landscape (LP: #981507)
+- Display degrees and minutes for FOV of CCD (LP: #998761)
+- Adding all possible satellites (LP: #1006495)
+- Building a Windows x64 packages (LP: #1003041, #1027607)
+- Apply atmosphere effect only on bodies with atmosphere (LP: #971875)
+
+Fixed:
+- Various Stellarium freezes and crashed (LP: #1005155, #1030913, #940638, #992267, #1033380, #951967, #1040054)
+- Various plugins issues (LP: #751381, #892027, #1006134, #1040066, #1040085)
+- Various issues for nebulae (LP: #1026021, #744517)
+- Add/subtract one sidereal year jumps wrong amount (LP: #1006208)
+- Various small issues, typos and mistakes (LP: #1022506, #1032469, #1019247, #985204)
+- Various issues in Scripting Engine (LP: #1023934, #1017148, #1017154, #730180)
+
+Changed:
+- New tab in the configuration window to control the selected object information.
+- Improvement Night Vision mode
+- Extend list of default scripts
+
+### 0.11.3 *[2012-05-18]*
+Bug fix release.
+
+Added:
+- ecliptic grid (LP: #834307)
+- world observatories to the locations list (LP: #891643)
+- allow configuration of url for SIMBAD lookups (LP: #948528)
+- opportunity to freely choose the object information to display (LP: #834325)
+- Pluto texture (LP: #906766)
+
+Fixed:
+- No objects under horizon (LP: #952532)
+- (MinGW-w64) CMake does not detect Win64 (LP: #951465)
+- (MinGW-w64) Compilation errors (LP: #951405, #951742)
+- Oculars FOV (LP: #971066, #962691)
+- "Galactic Plane" string does not get translated when language is switched (LP: #976515)
+- Use freedesktop specification for Unity quicklists (LP: #959893)
+- Apparent diameter of planets with rings (LP: #960904)
+- Crash [assert] when FOV is small and Quasars or Historical Supernovae plugins is enabled (LP: #961011)
+- Angle Measure plug-in reads the wrong options from the configuration file (LP: #954205)
+- Crash in debug mode on displaying constellation borders (LP: #951967)
+- Star halo "dances" for small Solar System objects (LP: #805810)
+- RTL-languages is not displayed correctly when using gravity labels (LP: #801668)
+- Orbits with close perihelions are not displayed correctly (LP: #640455)
+- Precision of angular diameter lower than intended (LP: #955635)
+- Moons' orbit lines broken by parent planet movement with time (LP: #889712)
+- Invalid user defined location cause Stellarium to crash (LP: #860220)
+- Difficulty to select zoomed in planets and moons (LP: #854374)
+- Altazimutal grid not overlapping equatorial grid when located on poles (LP: #775972)
+- Global key bindings not global (LP: #687288)
+- Screenshot write permission fail (Vista/7) (LP: #568086)
+- Wrong planet phases as seen from more outer planets (LP: #803305)
+- Zoom in/out command sticks (LP: #712112)
+- Importing SSOs causes some strange effects (LP: #969211)
+- Not updated values of dimensions of CCD while changes telescopes (LP: #998726)
+- Gravity labels rendered incorrectly (LP: #998121)
+- Keyboard shortcut for subtract one sidereal year don't works (LP: #997873)
+
+### 0.11.2 *[2012-03-10]*
+The main theme of this version seems to be localization:
+- most of the text used by the default plug-ins is now translatable
+- landscape names are now translatable
+- country names are now translatable
+- scripts names and descriptions are now translatable
+
+Oculars plug-in:
+- added an optional control panel displayed in the upper-right corner of the screen as an alternative to the pop-up menu that was used to control it in the previous version;
+- overhaul of the pop-up menu, the underlined letters in it can be used as keyboard shortcuts;
+- added the ability to rearrange the items in the lists of oculars, telescopes and sensors;
+- fixed the inappropriate flipping of the binoculars view;
+
+Satellites plug-in:
+- fixed title bar of the Satellites config window not being resized with the rest of the window (LP: #900575)
+- catalog numbers are now used to identify satellites, preventing bugs with duplicate satellites and satellites renamed in the source lists
+- catalog number and international designator are now displayed for each satellite
+- a simple windows to add satellites has been added (LP: #898476)
+
+Added:
+- Ctrl+C binding to copy selected object info text to clipboard.
+- to the Windows installer options to remove files left over from the previous installation.
+- windows no longer can be dragged to unreachable positions.
+- the "Save settings" button now saves the current main window position, too.
+- the language list is now sorted by language name, not language code.
+- the "Reload style" action has been removed, as the underlying feature no longer works. If you decide to design a new visual style for Stellarium, please contact us to give you a version where it works.
+- distance in km (if the distance is below 0.1 AU) to the information displayed about Solar System objects. (LP: #894472)
+- the StelGui::getSkyGui() method to allow plug-in developers to create their own toolbars and other GUI elements.
+- an option to show the galactic coordinates grid and the galactic plane.
+- several trans-Neptunian objects (TNOs): Sedna, Quaoar, Orcus, Haumea.
+- the Quasars plug-in.
+- the Pulsars plug-in.
+- more detailed information is now added to the log file for Mac OS X.
+- (experimental) modelling of atmospheric extinction for point objects.
+- changed the position of the text in the Text User Interface plug-in. (LP: #911594)
+- a checkbox allowing the SIMBAD on-line search to be enabled/disabled.
+
+Fixed:
+- startup script crash (LP: #689657)
+- plugin names localization in the Configuration window (LP: #807402)
+- resizing of the tabs in Configuration and View windows on language change (LP: #821386)
+- sky lines' labels not translated on language change (LP: #811659)
+- "Get catalog" button not translated on language change (LP: #890608)
+- last star catalog not being offered for download (LP: #538291, LP: #890789)
+- proxy configuration without username/password
+- Telescope Control plug-in: mishandling of IP connections in the telescope configuration window (LP: #843837)
+- Pluto's moon Hydra preventing the constellation from being selected in Search and scripts (LP: #894780)
+- scripting code still being included despite ENABLE_SCRIPTING set to 0 (LP: #811505)
+- constellations lines and names not displayed (LP: #945146)
+- newly created location cannot be set as default (LP: #889931)
+
+### 0.11.1 *[2011-11-04]*
+Bug fix release.
+Added:
+- new skyculture: Arabic
+- new moons and rings (LP: #815484, #834336)
+- new translations for landscapes and sky cultures (LP: #849292)
+- geostationary satellites (LP: #837274)
+- new cities (LP: #856343, #860206)
+Fixed:
+- misspelling on a star name (LP: #884795)
+- location window: map pointer position is updated on longitude/latitude change.
+- location window: fixed checking "Use as default" changing the name of the selected location to "New Location" (LP: #881613)
+- Solar System Editor plug-in: a bug in the parsing of MPC lists: the epoch's Julian Day value was wrong by 0.5 JD (LP: #836839)
+- Solar System Editor plug-in: crash while trying to browse for a local file (LP: #837396)
+- Historical Supernovae plug-in: the plug-in's name (LP: #803157)
+- Historical Supernovae plug-in: supernovae selected instead of nearby stars (LP: #835815)
+- doesn't load localised description of skyculture/landscape if applanguage=system_default (LP: #845924)
+- add/remove landscapes dialog bug in OSX 10.6.8 (LP: #812008)
+- horizon line setting not saved (LP: #811945)
+- the orbital period of Himalia (LP: #806174)
+- "flag_show_fps" and "flag_show_fov" had no effect (LP: #728294)
+- crash on selecting a landscape with misspelled planet name (LP: #835422)
+- crash on selecting off-Earth location in the Location window (LP: #834886)
+- crash on switching language while the Location window is open (LP: #824936)
+- crash on using custom distortion file (LP: #871313)
+
+### 0.11.0
+- New feature: atmosphere refraction support.
+- New plugin: Historical Supernovae.
+- New translatable strings: landscapes.
+- New moons of solar system planets (LP: #730686).
+- New feature: using different symbols for nebula icons.
+- TimeZone plug-in: fixed a bug preventing the saving of custom time zones. (LP: #720107)
+- Ocular plug-in: Corrected the calculation of CCD FOV.
+- Ocular plug-in: Implemented rotating the CCD bounding box.
+- Ocular plug-in: Made Telrad & CCD mutually exclusive.
+- Ocular plug-in: Implemented better binoculars support (LP: #695568).
+- Ocular plug-in: Redesign dialog.
+- SVMT plug-in: Adding QtWebKit dependency.
+- Satellite plug-in: improve of code.
+- Solar System Editor plug-in: fixed MPES online search and updated hard-coded URLs (LP: #725870).
+- Skycultures: two new skyculture descriptions in Norwegian (Bokmål).
+- Redesign search tool (LP: #730687).
+- Improved texture manager.
+- Various problems resolved (LP: #730069, #772206, #683255, #657455, #785574, #515311, #730075, #711887, #688978, #616748, #589634)
+
+### 0.10.6 *[2010-12-05]*
+- New feature for installing landscapes from ZIP archives.
+- New plugin: Solar System editor.
+- New plugin: Time Zone manual override.
+- New translatable strings: stars and nebulae.
+- Selected plugins loaded by default.
+- Fixed on change of sky culture. (LP: #595914).
+- Fixed clearing of single constellation selection. (LP: #600889).
+- Fixed constellation art engine, removing distortion of images. (LP: #629405).
+- Changed GUI styles (all dialogs now use "Title Bar", the two different tabbed widget implementations are styled consistently).
+- Changed Solar System engine, allowing "Comets" and "Minor planets" to be handled as classes of objects separate from "Planets".
+- Translatable plugin names, descriptions and some other strings.
+Oculars plugin: now uses a configuration file instead of SQL (LP: #596453).
+- Oculars plugin: added manual override of keyboard shortcuts (LP: #514530).
+- Oculars plugin: CCD sensors formula fixed (LP: #604975).
+- Satellites plugin: added new orbit prediction engine.
+- Satellites plugin: added trajectory visualization.
+- Satellites plugin: fixed problems leaving satellite TLEs out of date (LP: #616627).
+- Satellites plugin: can now update TLEs from a local file.
+- Satellites plugin: satellite visibility can now be saved from satellites dialog.
+- Telescope control plugin: fixed bad serial port names on Windows (LP: #596167).
+- Telescope control plugin: fixed telescopes disappearance on startup (LP: #608533).
+- Telescope control plugin: added manual equinox/epoch override (LP: #608544).
+- Various rendering problems resolved (LP: #569701, #596678, #641855, #642990, #666837, #629405, #591971, #615006, #671633).
+- SQLite dependency dropped. The Qt SQLite driver no longer needs to be packaged with Stellarium.
+
+
+### 0.10.5 *[2010-06-02]*
+Bug fix release.
+Fixed:
+- various problems with OpenGL shaders. If you experience problems with unreadable fonts, try adding the line "use_qpaintenginegl2 = false" in the [main] section of the configuration file (config.ini).
+- distorted menu icons on Windows. (LP: #512060)
+- LC_NUMERIC locale not being set properly, causing problems on some systems with old_style landscapes (LP: #518809) and the Satellites plug-in (LP: #522520). (fix proposed by Hleb Valoshka and others)
+- planet orbits not being toggled by pressing 'O'. (LP: #536684)
+- setting landscape altitude (patch by Georg Zotti).
+- making a series of location changes in a script. (LP: #500192)
+- telescope control sending RA=0 for objects with RA between (12 and 24?) on Intel Macs. (LP: #544250, fix proposed by David Hulse)
+- windows and toolbars not being affected by night vision mode. (LP: #539665)
+- a crash on Windows when exiting Stellarium after a search. (LP: #534674)
+- the Oculars plug-in not closing its SQL database on exit.
+- the last star catalog not being offered for download. (LP: #538291)
+- system clock running fast on some Windows systems using ACPI power managment (LP: #514184)
+- the top labels of vertical grid lines not being displayed, and improper label rotation.
+- script engine was recoded thread-free, this fixes many script related bugs.
+- handling of negative/large dates in scripts.
+- wrong time at startup when a time zone different than "system_default" is set in the configuration file (LP: #487232)
+
+Changed:
+- the Date/Time window is now synchronised with the date/time displayed in the toolbar, instead of showing the last date/time that has been entered.
+- the visual style of some plug-ins.
+- optimized loading of cities.
+- optimized loading of planet textures (lazy loading).
+- restructured src/ subdirectories to match code dependencies. Directories modules/, external/ and planetsephems/ are now under core/.
+- stars positions and grid are now coded in float instead of double, to avoid huge memory consomption when loading all 9 star catalogs.
+- improved management of OpenGL context in StelPainter.
+- StelStyle class was moved from core to GUI library.
+- GUI related resources are now compiled as part of GUI library.
+- don't use a generated config.h anymore (use simple compile definitions instead).
+- suppressed most compilation warnings with -Wextra even without the -Wno-unused-parameter flag.
+- suppressed all the TelescopeMgr/Telescope code within the core. It is replaced by the TelescopeControl plugin.
+- suppressed many unused files from installation target.
+
+Added:
+- option to create a desktop shortcut in the Windows installer.
+- time dragging: Hold down Ctrl+Space and drag the mouse across the sky to change time speed.
+- re-added the "planet trails" feature. Toggle with Shift+T.
+- some Sky-Watcher mounts to the list of devices supported by the Telescope Control plug-in.
+- yet unused code for computing atmosphere refraction and extinction.
+
+
+### 0.10.4 *[2010-02-22]*
+Bug fix release.
+- Fixed unpredictable openGL related crashes on win32.
+- Fixed run on MacOSX Tiger/Leopard/Snow Leopard.
+- Disable OpenGL shaders by default for stars and atmosphere. User activate it by setting use_glshaders = true in the [main] section of the config.ini
+- Fixed the handling of the Qt -graphicssystem parameter. Now it is ignored if it is not used properly.
+- Improved OpenGLES2 support (not finished yet).
+- Added Qt widgets flags on the main windows to avoid filling background (this boosted the program a lot on linux).
+
+### 0.10.3 *[2010-01-28]*
+Based on Qt 4.6.x
+- Bundling of plugins: Satellites, Oculars, AngleMeasure, CompassMarks, TelescopeControl, TextUserInterface.
+- New script engine improvements including variable script running speed, and a script console (activate with F12).
+- Made tabs in GUI smaller by moving titles under the icons.
+- Updated the plugin API to allow to compilation and easy distribution of static plugins.
+- Added plugins window.
+- Got rid of the boost library dependency.
+- The whole sky display viewport is now contained in a class deriving from QGraphicsWidget, allowing to move and resize it as a normal widget.
+- Generalized the use of shared pointers for StelObject management.
+- Use vertex shaders for computation of atmosphere color if OpenGL supports it.
+- Optimized openGL calls by replacing glBegin()/glEnd() by the use of vertexArray.
+- Optimization of critical parts of the projection code.
+- Added code for managing and displaying non-convex polygons + unit tests.
+- Recoded the StelGrid code to support non ponctual sky regions, and optimized API (new class StelSphericalIndex + unit tests)
+- Optimized many part of the code by reducing creation of temporary Vec3d/Vec3f.
+- Optimized JSON parser (x25 speed improvement) + unit tests.
+- Migrated all text drawing system to QFont. This fixes long standing bugs for displaying arabic and asian characters in the sky. Also allow to get rid of 6 source files and of the freetype dependency (managed internally to Qt)
+- Switch default back end mode to native for Windows as ATI drivers often have problems, still raster default for other platforms.  Add --graphics-system option.
+- Fixed magnitude computation for most of the planets.
+- Use GL Shader for stars rendering if OpenGL >= 2.1.
+- Re-organized the startup by moving log and command line processing to main.cpp.
+- Re-coded all the management of extra star catalogs.
+- Implemented partial support of OpenGLES 2.0.
+- Moved official plugins code into plugins/ and changed the cmake config so that they are automatically compiled in static.
+- Re-coded the texture engine based on Qt loading features (Got rid of explicit libjpeg and libpng dependencies!).
+- Allowed to first render the sky in a frame buffer.
+- Moved the code related to viewport distortions into a new class StelViewportEffect based on frame buffer object.
+- Added working cmake targets for compilig and runing unit tests.
+- Added a delay before making Simbad name lookup queries to avoid sending too many requests.
+- Added the Aztec sky culture.
+- Many minor fixes and optimizations.
+
+### 0.10.2 *[2009-03-09]*
+Based on Qt 4.5.
+- Display constellations lines using nicely distorted arcs.
+- Fixed GUI problems when creating a new location.
+- Fixed the grid lines wrap around at the discontinuities in cylindrical and Mercator projection.
+- Hide the planet computation problems after year 80608.
+- Use the Qt raster engine by default. This fixes mac rendering bugs and speeds up greatly the GUI rendering.
+- Improved management of intersection of viewports with large FOV and projections with singularities.
+- Added Hammer-Aitoff projection allowing full sky overview.
+- Fixed various bugs.
+
+### 0.10.1 *[2009-02-02]*
+- Added reset all config options button.
+- Added code for uncompressing gzip files (borrowed from from libkde)
+- Allowed for gzip compressed JSON files.
+- Fixed flip buttons bug.
+- Fixed min FPS feature.
+- Implemented screenshots inverted colors feature + associated GUI.
+- Re-coded grid display from scratch. It is now much faster and much more robust.
+- Refactored large part of the Navigator and Projector classes. Added a StelPainter class allowing many optimizations and simpler API.
+- Re-added telescope control key bindings.
+- Improved the doxygen developers documentation.
+- Added Simbad lookup to the search window.
+- Fixed ecliptic line rendering.
+- Fixed grid rendering bugs.
+- Added ZIP archive support with code copied from KDE SVN.
+- Fixed sun's magnitude bug.
+- Added automatic star catalog downloader to GUI. Star catalog settings are now defined in a config file.
+- Converted system-dependent star catalog memory mapping code to QFile::map().
+- Added log file for debugging output. Prepends system specs, such as memory and CPU information.
+- Imported KdeWin32 code for POSIX emulation on Windows.
+- Fixed build with Qt 4.5.
+- Fixed full screen problems at init.
+- Optimized VecXX contructors (no more default values).
+- Added translations for Albanian and Bosnian.
+- Fixed many bugs.
+
+### 0.10.0 beta *[2008-09-22]*
+- Global switch to Qt. Don't support SDL main application anymore.
+- The whole StelApp class is managed by a QGraphicsScene, inside a QGraphicsView.
+- Removed deprecated sources from the core of stellarium (old GUI, TUI and scripting).
+- - Continued API cleaning and simplifications.
+- Performed large refactorings to use portable Qt API (migrated from std::string and std::wstring to QString).
+- Re-organized the source files into sub-directories.
+- Migrated config file parsing to a QSettings based implementation.
+- Exposed some methods as slots so that they can be scripted in the future.
+- Created the new Qt-based GUI button bars (QGraphicsItems).
+- Recoded from scratch the new QWidget based GUI rendered in the QGraphicsView using style sheets.
+- Moved stars/planets halo rendering into SkyDrawer.
+- Implemented dynamic eye adaptation for bright objects.
+- Optimized atmosphere computation and others, speed can be increased up to a factor of 2.
+- Implemented light pollution following the Bortle scale index.
+- Improved and optimized stars rendering (updated colors, sizes and added large halo for very bright ones, use GL lists for drawing stars by bunch)
+- Made testing python wrappers using SIP (unused)
+- Created a new SkyTile class supporting lazy dynamic multi-resolution images loading and display. Image trees can be stored as JSON files.
+- Startup is much faster.
+- Migrated the previous nebula textures to the new format.
+- Added a LocationManager for managing observing locations and cleaned the code of observer.
+- Changed key bindings, use F1.. F6 for opening dialogs.
+- Tab completion on the search dialog.
+- Added descriptions for the sky cultures and improved the ones for landscapes.
+- Added a new mars landscape.
+- Fixed many bugs.
+
+### 0.9.1 *[2008-01-17]*
+- Got rid of autoconf/automake (Hooray!)
+- Fixed a grid RA labeling bug.
+- Improved the plug-in managment.
+- Fixed nebula names loading (bug #1740287)
+- Recoded time methods based on Qt time function (this fixed bug #1740595, LANG=en_IN crash).
+- Use the new Grid class by Guillaume Chéreau for NebulaMgr.
+- Made StelUI and StelCommandMgr real StelModules.
+- Increased grid labeling brightness.
+- Fixed splash screen flickering and logo image truncation in full screen mode.
+- Fixed wrong nebula size (bug #1673142)
+- Fixed constellation art intensity bug (bug #1733482)
+- Got rid of all wstreamstring and therefore don't require STLPort anymore for MinGW compilation.
+- Added more command line options.
+- Re-coded StelAppQt4 init and deinit to prevent GLContext errors.
+- New config parameters for controlling star brigthness, size, color
+- Circles around telescope markers indicating ocular FOV
+- Applied patches for bugs #1769632 (bad init in get_tm_from_Julian), #1769584 (NebulaMgr.cpp reports wrong name on error) and #1758435 (segfault)
+- Fixed bug #1781617 (added altitude unit) and #1751366 (segfault when changing projection mode).
+- StelModule now derive from QObject.
+- First testing new script engine based on QObject slots.
+- Recoded fully the texture manager now based on Qt signal/slots. It handles multithreading loading and downloading of images. As a direct result, loading time is divided by 2!
+- Now use Qt4.3, and replaced CURL by QtNetwork.
+- Fixed some date display bugs in config window.
+- Added new translations for th ml he fil tl eo lt mk
+- Added new sky culture, Tupi-Guarani from Brazil (thanks to pmarcelopontes)
+
+### 0.9.0 *[2007-06-6]*
+- Larger star catalog including stars from Hipparcos, Tycho2 and NOMAD
+- Can select multiple constellations at one time
+- Local script directory is reread when enter TUI
+- Inuit constellation art by Johan Meuris
+- More sky cultures
+- Large code reorganization into a modular structure based on StelModule, StelApp singleton and its "manager" classes providing services to the modules.
+- Projection code cleaned and splitted into Mapping classes.
+- Movement control code encapsulated into the MovementMgr module.
+- Code cleaning and commenting.
+- Sidereal day/week keystrokes (ALT -, ALT =, ALT [, ALT ]).
+- Data files reorganized
+- Added back Hawaiian translations (invented locale "hw")
+- Orthographic projection, Lamberts Equal Area projection, Cylinder projection.
+- Interpolate the elliptic coordinates (or the spherical coordinates in case of the moon).
+- Do not place the Earth at the EMB but at its proper position.
+- New orbit type comet_orbit for proper calculation of elliptic, parabolic, hyperbolic orbits.
+- Added loading of jpeg textures and re-coded most of the texture manager.
+- Allow loading of plug-ins (unstable until version 1.0).
+- Selection of object is managed per module, and by the StelObjectManager.
+- Recoded Grid display to allow for adaptative scale wrt zoom and labeling.
+- The main window managed by QT4.2 instead of SDL.
+- Window resizing
+- Smooth go to selected solar system body by pressing control-g
+- Location map updates on changing observer to new solar system body
+- Titlebar updates after moving to new planet
+- Landscapes may now have location, can update observer by selecting landscape
+- More nebula textures and better placement of most existing textures
+- Build is now managed by cmake instead of autoconf/automake. These old tools are still supported for this version.
+
+### 0.8.2 *[2006-10-5]*
+- Re-enabled some script recording features (select, pan/tilt, zoom)
+- Fixed win95/98 missing .dll bug.
+- Applied patch for sun C/C++ compiler to work.
+- Hopefully fixed buggy text display using patch from David ZH.R. Huang
+- Applied patch for MacOSX compilation.
+- Display real language names instead of two letters codes in the GUI.
+- Removed HR landscape and added Ocean instead.
+- Many bug fixes from sf.net.
+- Added new translations for af vi he mt bg th ar and updated the others.
+
+### 0.8.1 *[2006-06-26]*
+- radial texture for planetary rings
+- telescope control using external telescope server programs
+- minimum_fps patch by nuisance78
+- image flipping
+- Automatically get locale codes on win32 (works sometimes)
+- Many bugs fixes, thanks to bug reporters on sf.net!
+
+### 0.8.0 *[2006-04-30]*
+- BaseFont selectable in config
+- Constellation select from script fixed
+- TUI editing of some colors
+- Added constellation boundaries
+- Added full NGC nebula catalog.
+- Mouse cursor optional timeout
+- RA/DE displays corrected for precession
+- Option to allow UI use during scripts (flag_script_allow_ui)
+- Select location by city
+- Meridian line (first press of 'z')
+- Popup error windows as script debugging option
+- Alt-Az readout for selected object
+- Changed font rendering system with new TTF compliant font adapted from the glGooey library.
+- Integrated the use of wide characters for all translatable string and UI.
+- Added a Translator class managing all translation in an Object Oriented way over gettext.
+- Included many increadible patches from Johannes Gajdosik : Reimplemented faster and more accurate solutions for all planet computation (VSOP87A), moon (ELP82B), added Saturnian satellites (TASS17), added Uranus satellites (GUST86), Mars satellites (ESAPHODEI).
+- The observer may be located on any planet (or satellite)
+- Planet twilight zones are darker than bright zones of a planet (as it was already in 0.5.1)
+- new projection types: stereographic (quite ok), spheric_mirror (just early alpha)
+- Planet oblateness
+- Splitted StelCore class into two separated classes : StelCore and StelApp.
+- Added many new .po files for translation in more languages.
+- Auto-scan available translations.
+- Auto-scan available sku cultures.
+- Improved mouse zoom control.
+- Viewport distortion for spheric mirror projection
+- Replaced calculation of galilean and mars satellites with newer and better calculations made by V.Lainey
+- Replaced current implementation of VSOP87B with faster and more accurate implementation of VSOP87
+- When displaying Mercury-Neptune orbits, the osculating orbits are shown
+- Light travel time compensation for solar system objects
+- Added Language section in the GUI.
+- Added meteor control and other things in the GUI
+- Re-made and improved object search feature.
+- Updated GUI button graphics.
+- Fixed many bugs.
+
+### 0.7.1 *[2005-09-17]*
+- Fixed location saving bug.
+- Fixed date before 1970 crash on windows
+- Fixed search star crash.
+- Added the forgotten sts scripts to the package.
+- Fixed autoconf problem with libpng.
+- Fixed compilation with --disable-nls
+- Fixed option saving for flaglandscape and flagmoonscale
+
+### 0.7.0 *[2005-08-08]*
+- Added planet trails - hit "4" or "," once for ecliptic, again for trails (advance time to observe).
+- Added precession of the equinoxes.
+- Added daylight savings accounting for all platforms (needs testing).
+- More realistic and efficient meteor showers.
+- Added and set-up gettext facilities.
+- Added maximum_fps configuration setting to allow limiting CPU usage.
+- Added rudimentary scripting features - see doc/commands.html.
+- Atmosphere now darkens during solar eclipses.
+- Added lunar eclipse simulation.
+- Added a fader class, lines and objects fade in/out easily now.
+- Added MacosX Xcode project file from Da-Woon Joung.
+- Added patches from Fumio Yamamoto for various fixes.
+- Removed all the libpng/zlib .c files from the glgpng directory, use host system libpng instead (fix debian bug #318026).
+- Fix to work with non-US keyboards.
+- Added more sky label languages.
+- Sky languages are no longer hard coded.
+- Cardinal points are now translated based on sky language.
+- TUI is now using gettext.
+- Added some accented characters to spacefont.
+- Fixed various typos and other bugs.
+- Added a Loading Bar class.
+- Started a code spring clean aiming at removing the design mistakes with the core class. The goal is to split the current stel_core into 2 classes, one being the actual core managing sky display, the other one stel_app will manage all I/O, parameters managment, UI, locales etc..Added fader on stars labels.
+- Added loading bars for nebulae and stars loading.
+- Corrected Sun rotational period.
+- Added missing hipparcos stars to database.
+- Added splash screen, new icons and improved pointers by Johan.
+- Improved Milky Way tone conversion.
+- Added more star names.
+- Sky labels now default to user locale language if possible.
+- Added fader on nebula hints (hints can now draw even when atmosphere is on).
+- Added fader on cardinal points.
+- Now display star distances.
+- Added Spanish translation by Sergio Trujillo.
+- Fixed deselect while zooming in crash bug.
+- Added Dutch translation by Johan Meuris.
+- Slowed down pan and tilt speed.
+- Viewing direction is changed when mouse is dragged.
+- Added configuration menu to select landscape.
+- Added part of Tony Furr's patch to add long nebula names, fix loading bar bugs and fix win32 compilation issue.
+- Added Dev-C++ projetc file and win32 compilation HOWTO by Tony Furr.
+- Added Chinese and Egyptian constellations.
+- Limited maximum FOV to 180 deg to prevent buggy side effects, set fisheye projection as default.
+- Added Kdevelop project file.
+- Added Johan last landscape "Hoge Rielen".
+- Added some accented characters to courrierfont.
+- Updated windows installer.
+
+### 0.6.2 *[2004-11-18]*
+- Fixed time display bug (1 hour ahead of actual sky time during standard time if your timezone has daylight savings).
+- NOTE: Time is only displayed as standard time (no daylight savings effects).
+- Fixed Milky Way drawing incorrectly (inside out) in desktop mode.
+- Fixed Milky Way always on regardless of config setting.
+- Fixed atmosphere flashing bug (for the final time, we hope).
+
+### 0.6.1 *[2004-10-17]*
+- Added time control buttons on bottom right part of the screen.
+- Fixed the flashy background bug when zooming out too much in fisheye mode.
+- Fixed landscape gap bug in textures on some 3D card on windows.
+- Added all the impressive constellation art images by Johan Meuris.
+- Applied patches from Fumio Yamamoto for MacOSX portability.
+- Recoded landscape ground displaying.
+- Added a nice landscape from a panorama made in my own village!
+- Rudimentary sky localization (no accented characters) for English, Spanish, French, and some Hawaiian sky labels (needs UI)
+- Improved constellation art fade in/out (still need more art) and added atmosphere fade in/out
+- Added planet orbits feature
+- Added concept of sky cultures for different constellations (currently western and polynesian, needs UI)
+- Added meteor showers (key 9)
+- Added deep space object image credits
+- Added manual (really semi-auto) zoom option (centers for you when you start zooming, zooms in increments with key presses)
+- Brightened star labels for readability
+
+### 0.6.0 *[2004-05-31]*
+- Fixed atmosphere flash bug.
+- Fixed disk viewport windows version bug.
+- Improved portability for timezone management.
+- Made windows package installer.
+
+### 0.6.0rc2 *[2004-04-28]*
+- Fixed Venus too small bug.
+- Fixed minor bugs from sourceforge bug reports.
+
+### 0.6.0rc1 *[2004-04-27]*
+- Removed the previous patch to configure SDL because it caused some error on some systems.
+- Changed the global coordinate system into the conventionnal astronomical one (ie with z axis toward top and x toward us)
+- Stopped using the previous unreliable astro library with badly defined licence and use 2 libraries created from modified/simplified version of the LGPL library libnova. One called stellastro which manages the astronomical operations like time management etc. and another one called stellplanet which only computes the planetary positions.
+- Removed the module/class planet_mgr and use a hierarchical unified planet class instead to manage all the solar system bodies with objective to add planet satellites, asteroids, comete and manage planet obliquity, and rotation of the textures.
+- Remade in a coherent way all the s_utility conversion functions (in double precision).
+- Created a new class "stel_object" to manage the selected object in a good object oriented way.
+- Abandoned my previous vector class for a recreated version of the vecmath class (originally from celestia).
+- Use double precision for every planet, orbit and navigation calculation.
+- Centralized all the navigation/time variables and operations in a new class "navigator" instead of the non-object old navigation module.
+- The position of the observer on the earth is now taken into account in every calculation : the precision is dramaticaly improved, sun eclipses works etc...
+- Changed the command line handling : changes submitted by Cedric Delfosse.
+- Simplified 3D lighting operation for planets.
+- Fixed many many bugs related with coordinate.
+- Added an orbit calculation class stolen from the GPL soft celestia.
+- Added experimentaly jupiter satellites.
+- Improved object search and planets hints displaying.
+- Created a new class to render daylight atmosphere, with a faster and better algorithm.
+- Created a new class used to convert tone from high range luminance to CRT display luminance : the aim is to have an homogeneous luminance conversion to use with daylight sky as well as night sky and stars.
+- Changed the configuration file parser. The new one is much more convenient. It is based on a library called iniparser made by N.Devillard. I made a c++ wraper (init_parser class).
+- Re-made the old ui widget classes in a better way using functor callbacks and painters.
+- Re-thinked and made all the interface. stel_ui is now correct object oriented code.
+- Added a tab widget.
+- Created a new class to complete the daylight atmosphere model with the previously used model.
+- Now display computed atmosphere moon halo and realistic night sky brightness.
+- The stars appear in function of the sky luminance.
+- Made a correct object oriented solarsystem class. The planets are read from a file.
+- Added some planet satellites.
+- Improved optimization using gprof.
+- Finally fixed the planet shaking bug!
+- Updated fog and decor displaying (faster and nicer).
+- Added a projector class which will handle different projection mode (fisheye, ortho etc..)
+- Made a fisheye projection mode which override gl/glu functions so that 3D drawing occures in fisheye projection mode.
+- Added gravity font.
+- Added many options in the configuration files.
+- Made a class for landscapes managment. Handle fisheye projection and panoramic fisheye pictures projection. The landscapes are loaded from a file so that it's easy to add custom landscapes.
+- Stellarium is now fully object oriented.
+- Replaced most of the char* with c++ strings to prevent bugs.
+- Added a full text user interface.
+- Improved configuration managment.
+- Added a class "observator" for observer managment : i.e. observer's position and locales managment for timezone and time formating.
+- Improved the mouse selection of objects. The new algorithm is more intelligent.
+- Updated all the nebulas textures with clearly copyrighted pictures (See credits in README). This will fix the debian Bug#198495.
+- Re-made the graphical interface using tabs widgets etc..
+- Colors for lines and grid an other misc things are now a parameter in the config file.
+- Added a screen shot function (big thanks to cmdtab for his code).
+- Added handling of non-integer time zones (Thanks to Cool Andrew for his warning).
+- Added equatorial mode viewing.
+- Re-made all the GUI : new functions such as time setting, projection mode choice, saving in config file etc...
+
+### 0.5.2 *[2003-04-29]*
+- Changed the configuration file to $HOME/.stellarium/VERSION/ on unix system to prevent conflicts between versions.
+- Correctly configure SDL in configure.in (patch by Kipp Canon)
+- Fixed some configuration files bugs.
+- Added the gui color parameters in the configuration file.
+- Catch the --version command line argument.
+
+### 0.5.1 *[2004-04-11]*
+- Added an win32 installer script to use with inno setup.
+- Succeed compilation on MSYS with MinGW32.
+- Fixed the seg fault when quiting.
+- Fixed the fantom planets bug.
+- Implemented the ClickablePicture ui component to set the position easily by clicking the world map.
+- Found and eliminate the boring memory leak i knew since months.
+- Set the gui non-dynamic ie the size in pixel of the windows are fixed.
+- Fixed the SDL fullscreen bug in linux.
+- Fixed some gui bugs.
+- Fixed the timezone +13 bug.
+- Added a config.h.in file to set the compilation macros. The compilation output is now more readable.
+- Removed all the bugs that the glut->SDL change created.
+- Totally stopped the use of the glut library! Use the good SDL library instead. Increase the compatibility with every plateforms especially full screen mode in unix.
+- Added the CTRL + Up/Down keys to control the zoom.
+- Removed a lot of warnings which occured during the compilation on some plateforms.
+
+### 0.5.0 *[2003-01-15]*
+- Changed the directories used for configuration files. They are now in $HOME/.stellarium/ for unix systems. --> Unix standard is respected.
+- Improved the grid class for optimisation.
+- Removed the stars drawing bug when zooming.
+- Fixed the fog texture bug (black vertical line) which occured on some plateform.
+- Added a "current time" button to the time control panel.
+- Created a new module stelconfig.h/cpp to manage the configuration files and multiplateform options.
+- Added the CTRL + clic = right clic (usefull for MacOSX users).
+- Fixed a configure.in problem for MACOSX portability.
+
+### 0.4.9 *[2002-10-17]*
+- Fixed the binary file bug under win32 (just forget a "b" in the file open mode....)
+- Use the Hipparcos catalog : there are now 120 000 stars (10 000 before).
+- Added a grid class for spherical star data optimisation.
+- Modified star names files and constellation files structures.
+- MACOSX version now compile and execute with the autoconf script.
+
+### 0.4.8 *[2002-08-14]*
+- Improved automake/autoconf portability.
+- Full installation with make intall now supported.
+- Compile and works perfectly on CYGWIN.
+- Fixed the (famous ;) ) negative time display bug (with time zones).
+- Started to work on Hipparcos catalog.
+
+### 0.4.7 *[2002-07-17]*
+- Autoconf/automake now works! Linux version available.
+- Added the possibility to change the landscape skin.
+- Added a new landscape : rocky mountains.
+- Added location control in the Configuration Panel.
+- Added a time control panel.
+- Added landscape control in the Configuration Panel.
+- Removed bugs in the windows widget.
+- ADDED REALISTIC ATMOSPHERE RENDERING : it's very impressive!!! : Code borrowed on VISLIMIT.CPP by the author of "the guide", who adapted the method from Brad Schaefer's article and code on pages 57-60, May 1998 _Sky & Telescope_,  "To the Visual Limits".
+- Fixed orientation of the moon, improved rendering and make it visible during the day.
+- Changed the bottom button bar.
+- Changed the landscape : the new one is the mountain borrowed from tuxracer and modified.
+- Added an automatic ground and landscape brightness.
+
+### 0.4.6 *[2002-04-25]*
+- Added a real configuration panel for stars with the new ui objects.
+- Added the info window viewable with the "I" key.
+- Improved the navigation system. You now can track an object : usefull to track a planet in accelered time mode.
+- Use fopen fclose etc... in place of the c fstream function which are less portable.
+- Completely changed the texture management : now use classes.
+- The textures are now in png format : use the (included) glpng library.
+- Added the possibility to show the names of the stars.
+- Added some gui elements in s_gui.h/.cpp
+- Improved the memory management for objects labels (dynamic variables).
+- Removed a lot of segmentations faults bugs....
+- Added the visualisation of the star's name.
+
+### 0.4.5 *[2002-03-06]*
+- Added uranus, neptune and pluto (from the code proposed by Nick Porcino).
+- Added a function to find the planets easily (from the code proposed by Nick Porcino).
+- Re-mapped the keys : the new mapping is more intuitive for english speaking people.
+- Fixed minor bugs.
+
+### 0.4.4 *[2002-02-04]*
+- Added a "Follow earth rotation" function to compensate the rotation of the earth.
+- Added a goto function and a "center on selected object" function.
+- Fixed the help window problems.
+- Added a MilkyWay Flag. Disabling it improves performances in software rendering mode.
+- Added a background under the selection infos.
+- Added the windows mode support.
+
+### 0.4.3 *[2002-01-16]*
+- Fixed a lot of minor bugs.
+- Compiled the new version with gcc/g++ on win32 and linux.
+- Reorganised the project files structure.
+
+### 0.4.2 *[2002-01-15]*
+- Finished the full reorganisation : almost a weekend of work!
+- The program looks like the version 0.3.9 but the sources are infinitely more readable and clear.
+- Almost all the variable and file/class names are now in english.
+- Created/renamed a lot of new modules (navigation, stellarium_ui, etc...)
+- Added a GPL header on every sources files.
+- Globaly cleaned the code source.
+- Continued the gui.
+- Handle the Keyboard on the top of Glut.
+- Changed the drawing of the stars : 2D drawing is a lot faster and really only draw those which are in the field of view. The program is 20% faster!!
+- We now can't switch between resolution mode or fullscreen/windowed mode during the execution. This will prevent the program from crashs and hardware dependent bugs. Everything is statically configurable in config.txt.
+- Fixed hundred of minor bugs (and probably added others...).
+- I now have written about 4300 lines of real code for this project!
+
+### 0.4.1 *[2002-01-13]*
+- Started a full reorganisation of the modules.
+- Continued the gui. Now use it for every interaction with the user.
+- Handle the Mouse on the top of Glut : I'd like the program to be glut independent.
+- The program use a file stellarium.h with a lot of macro, commons include ect...
+- Encapsuled all the global variables in the struct "global" shared bye every module.
+- This version has never worked.
+
+### 0.4.0.1 *[2002-01-07]*
+- Added a real manager to use a config file. I have found an excellent library made by NINOMIYA <gm@debian.or.jp> called parsecfg.c. I included it with success (minor changes for windows porting).
+- Continued the gui : added classes like windows and label and a full implementation of callbacks.
+- Started to change the structure of the program.
+
+### 0.4.0 *[2002-01-06]*
+- Started to write my own Graphic User Interface starting from the embryon of the one made by Chris Laurel in "Celestia" because MUI (given with the glut package isn't beautiful enought...). This gui will be independent of stellarium and very re-usable.
+- Did an attempt to use a tcl parser to manage a real config file but it was to heavy-> so i changed my mind and stop that...
+
+### 0.3.9 *[2002-01-04]*
+- Create my own font manager : faster and more beautiful than before (I used bitmap font before).
+- Handle the change of resolution (reduce the menu, the font etc...)
+- Added a texture module to manage textures.
+- Added some messier objects.
+- Added a horizontal line.
+- Fixed minor bugs.
+- Compile under linux, and windows with gcc.
+
+### 0.3.8 *[2002-01-03]*
+- Added a config file with date, time and location parameters.
+- Add a button and a functionality to show where are the nebulaes with a dot.
+- Added some messier nebulaes.
+
+### 0.3.7 *[2001-12-27]*
+One more day of work :
+- Added SUPER moving pointers for each type of object.
+- Planets and moon now have shading which works correctly!! I had a lot of problems with that. But it's OK now...
+- Improve planet drawing perfomance.
+- Added some messier nebulaes.
+- Fixed minor bugs and visuals.
+
+### 0.3.6 *[2001-12-26]*
+- Add a class LesNebuleuses to manage Nebulaes and add some nebulaes -> very beautiful and realistic!
+- We can now select with the mouse planets and nebulaes.
+- Fixed a texture bug when changing resolution.
+- Translate the help in english.
+- Fixed minor bugs and visuals.
+
+### 0.3.4 *[2001-06-17]*
+- Fixed the bug for the selection, improve global perfomance, and continue to comment the code.
+
+### 0.3.3 *[Before]*
+I succed to compile my program in linux and windows with the same sources files!
+I decided to share my source code in GPL.
+My code was yet free but not very "readable" so i will try to comment it in english, and to make a version file (this file) etc... I now have to read docs to produce a "standard GNU code"...
