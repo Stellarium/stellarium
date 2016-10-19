@@ -586,7 +586,7 @@ void Scenery3d::setupPassUniforms(QOpenGLShaderProgram *shader)
 		{
 			//send size of light ortho for each frustum
 			loc = shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_VEC_LIGHTORTHOSCALE);
-			shader->setUniformValueArray(loc,shadowFrustumSize.constData(),4);
+			shader->setUniformValueArray(loc,shadowFrustumSize.constData(),shaderParameters.frustumSplits);
 		}
 	}
 
