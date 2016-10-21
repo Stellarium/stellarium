@@ -18,13 +18,13 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-16 21:53+0700\n"
-"PO-Revision-Date: 2016-10-11 19:00+0000\n"
+"PO-Revision-Date: 2016-10-18 18:00+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-10-17 06:01+0000\n"
+"X-Launchpad-Export-Date: 2016-10-19 05:49+0000\n"
 "X-Generator: Launchpad (build 18232)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -180,12 +180,12 @@ msgstr "Z'"
 #. TRANSLATORS: North Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:944 src/core/modules/GridLinesMgr.cpp:953
 msgid "NEP"
-msgstr ""
+msgstr "PNC"
 
 #. TRANSLATORS: South Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:946 src/core/modules/GridLinesMgr.cpp:955
 msgid "SEP"
-msgstr ""
+msgstr "PSC"
 
 #. TRANSLATORS: North Galactic Pole
 #: src/core/modules/GridLinesMgr.cpp:962
@@ -1943,11 +1943,11 @@ msgstr "Regarder vers le zénith"
 
 #: src/core/StelMovementMgr.cpp:167
 msgid "Look towards North Celestial pole"
-msgstr ""
+msgstr "Regarder vers le Pôle Nord céleste"
 
 #: src/core/StelMovementMgr.cpp:168
 msgid "Look towards South Celestial pole"
-msgstr ""
+msgstr "Regarder vers le Pôle Sud céleste"
 
 #: src/core/SimbadSearcher.cpp:78
 msgid "Network error"
@@ -5368,7 +5368,7 @@ msgstr "Utiliser la base de données en ligne SIMBAD"
 
 #: src/ui_searchDialogGui.h:717
 msgid "Use SIMBAD"
-msgstr ""
+msgstr "Utiliser SIMBAD"
 
 #: src/ui_searchDialogGui.h:718
 msgid "Server:"
