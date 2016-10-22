@@ -78,8 +78,7 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 	const QStringList& splitline = rawline.split("\t");
 	loc.name    = splitline.at(0).trimmed();
 	loc.state   = splitline.at(1).trimmed();
-	loc.country = StelLocaleMgr::countryCodeToString(splitline.at(2).trimmed());
-	qWarning() << "Country:" << splitline.at(2) << loc.country;
+	loc.country = StelLocaleMgr::countryCodeToString(splitline.at(2).trimmed());	
 	if (loc.country.isEmpty())
 		loc.country = splitline.at(2).trimmed();
 
