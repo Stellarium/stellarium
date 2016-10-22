@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-16 21:53+0700\n"
-"PO-Revision-Date: 2016-10-04 19:25+0000\n"
+"POT-Creation-Date: 2016-10-21 17:56+0700\n"
+"PO-Revision-Date: 2016-10-21 07:24+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-10-17 05:52+0000\n"
-"X-Generator: Launchpad (build 18232)\n"
+"X-Launchpad-Export-Date: 2016-10-22 04:36+0000\n"
+"X-Generator: Launchpad (build 18246)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:188
@@ -121,7 +121,7 @@ msgstr "الاستواء المجري"
 
 #: src/core/modules/GridLinesMgr.cpp:678
 msgid "Supergalactic Equator"
-msgstr ""
+msgstr "استواء المجموعة المجرية"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:683 src/ui_viewDialog.h:2075
@@ -148,54 +148,54 @@ msgstr "الدائرة القطبية"
 #. TRANSLATORS: North Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:917 src/core/modules/GridLinesMgr.cpp:926
 msgid "NCP"
-msgstr ""
+msgstr "القطب الشمالي السماوي"
 
 #. TRANSLATORS: South Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:919 src/core/modules/GridLinesMgr.cpp:928
 msgid "SCP"
-msgstr ""
+msgstr "القطب الجنوبي السماوي"
 
 #. TRANSLATORS: Zenith
 #: src/core/modules/GridLinesMgr.cpp:935
 msgctxt "zenith"
 msgid "Z"
-msgstr ""
+msgstr "السمت"
 
 #. TRANSLATORS: Nadir
 #: src/core/modules/GridLinesMgr.cpp:937
 msgctxt "nadir"
 msgid "Z'"
-msgstr ""
+msgstr "النظير"
 
 #. TRANSLATORS: North Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:944 src/core/modules/GridLinesMgr.cpp:953
 msgid "NEP"
-msgstr ""
+msgstr "القطب الشمالي الكسوفي"
 
 #. TRANSLATORS: South Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:946 src/core/modules/GridLinesMgr.cpp:955
 msgid "SEP"
-msgstr ""
+msgstr "القطب الجنوبي الكسوفي"
 
 #. TRANSLATORS: North Galactic Pole
 #: src/core/modules/GridLinesMgr.cpp:962
 msgid "NGP"
-msgstr ""
+msgstr "القطب الشمالي المجري"
 
 #. TRANSLATORS: South Galactic Pole
 #: src/core/modules/GridLinesMgr.cpp:964
 msgid "SGP"
-msgstr ""
+msgstr "القطب الجنوبي المجري"
 
 #. TRANSLATORS: North Supergalactic Pole
 #: src/core/modules/GridLinesMgr.cpp:971
 msgid "NSGP"
-msgstr ""
+msgstr "القطب الشمالي للمجموعة المجرية"
 
 #. TRANSLATORS: South Supergalactic Pole
 #: src/core/modules/GridLinesMgr.cpp:973
 msgid "SSGP"
-msgstr ""
+msgstr "القطب الجنوبي للمجموعة المجرية"
 
 #: src/core/modules/GridLinesMgr.cpp:1215
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:339
@@ -259,11 +259,11 @@ msgstr "الاستواء المجري"
 
 #: src/core/modules/GridLinesMgr.cpp:1228 src/ui_viewDialog.h:2171
 msgid "Supergalactic grid"
-msgstr ""
+msgstr "شبكة إحداثيات المجموعة المجرية"
 
 #: src/core/modules/GridLinesMgr.cpp:1229 src/ui_viewDialog.h:2064
 msgid "Supergalactic equator"
-msgstr ""
+msgstr "استواء المجموعة المجرية"
 
 #: src/core/modules/GridLinesMgr.cpp:1230
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:405
@@ -284,39 +284,39 @@ msgstr "الدوائر القطبية"
 
 #: src/core/modules/GridLinesMgr.cpp:1235
 msgid "Celestial J2000 poles"
-msgstr ""
+msgstr "القطبان السماويان J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1236
 msgid "Celestial poles"
-msgstr ""
+msgstr "القطبان السماويان"
 
 #: src/core/modules/GridLinesMgr.cpp:1237
 msgid "Zenith and nadir"
-msgstr ""
+msgstr "السمت والنظير"
 
 #: src/core/modules/GridLinesMgr.cpp:1238
 msgid "Ecliptic J2000 poles"
-msgstr ""
+msgstr "القطبان الكسوفيان J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1239
 msgid "Ecliptic poles"
-msgstr ""
+msgstr "القطبان الكسوفيان"
 
 #: src/core/modules/GridLinesMgr.cpp:1240 src/ui_viewDialog.h:2125
 msgid "Galactic poles"
-msgstr ""
+msgstr "القطبان للإحداثيات المجرية"
 
 #: src/core/modules/GridLinesMgr.cpp:1241 src/ui_viewDialog.h:2086
 msgid "Supergalactic poles"
-msgstr ""
+msgstr "القطبان لإحداثيات المجموعة المجرية"
 
 #: src/core/modules/GridLinesMgr.cpp:1242
 msgid "Equinox J2000 points"
-msgstr ""
+msgstr "نقاط الاعتدالين J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1243
 msgid "Equinox points"
-msgstr ""
+msgstr "نقاط الاعتدالين"
 
 #: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1897
 msgid "Atmosphere"
@@ -1842,7 +1842,7 @@ msgstr "‎العرض/الطول المجرّي‎: %1/%2"
 #: src/core/StelObject.cpp:256 src/core/StelObject.cpp:258
 #, qt-format
 msgid "Supergalactic longitude/latitude: %1/%2"
-msgstr ""
+msgstr "‎خطالعرض/خط الطول لإحداثيات المجموعة المجرية‎:%1%2"
 
 #: src/core/StelObject.cpp:267
 #, qt-format
@@ -1905,11 +1905,11 @@ msgstr "انظر إلى كبد السماء"
 
 #: src/core/StelMovementMgr.cpp:167
 msgid "Look towards North Celestial pole"
-msgstr ""
+msgstr "انظر باتجاه القطب السماوي الشمالي"
 
 #: src/core/StelMovementMgr.cpp:168
 msgid "Look towards South Celestial pole"
-msgstr ""
+msgstr "انظر باتجاه القطب السماوي الجنوبي"
 
 #: src/core/SimbadSearcher.cpp:78
 msgid "Network error"
@@ -2258,11 +2258,11 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:209
 msgid "Text User Interface (TUI)"
-msgstr ""
+msgstr "واجهة المستخدم النصية"
 
 #: src/gui/HelpDialog.cpp:211
 msgid "Activate TUI"
-msgstr ""
+msgstr "فعّل واجهة المستخددم النصية"
 
 #: src/gui/HelpDialog.cpp:220
 msgid ""
@@ -2732,7 +2732,7 @@ msgstr "مجرّي"
 #: src/gui/SearchDialog.cpp:216
 msgctxt "coordinate system"
 msgid "Supergalactic"
-msgstr ""
+msgstr "إحداثيات المجموعة المجرية"
 
 #: src/gui/SearchDialog.cpp:217
 msgctxt "coordinate system"
@@ -4953,7 +4953,7 @@ msgstr "إلغاء"
 
 #: src/translations.h:614
 msgid "&Cancel"
-msgstr ""
+msgstr "&إلغاء"
 
 #: src/translations.h:615
 msgid "Files of type:"
@@ -5296,11 +5296,11 @@ msgstr "القوائم"
 
 #: src/ui_searchDialogGui.h:715
 msgid "Use on-line astronomical database SIMBAD"
-msgstr "على الإنترنت SIMBAD استخدم قاعدة معلومات سيمباد"
+msgstr "استخدم قاعدة معلومات SIMBAD على الإنترنت"
 
 #: src/ui_searchDialogGui.h:717
 msgid "Use SIMBAD"
-msgstr ""
+msgstr "SIMBAD استخدم"
 
 #: src/ui_searchDialogGui.h:718
 msgid "Server:"
@@ -5661,7 +5661,7 @@ msgstr "أظهر خط الاستواء المجري"
 
 #: src/ui_viewDialog.h:2046
 msgid "Color of supergalactic equator"
-msgstr ""
+msgstr "لون خط استواء المجموعة المجرية"
 
 #: src/ui_viewDialog.h:2049
 msgid "Color of ecliptic (of date)"
@@ -5719,7 +5719,7 @@ msgstr "لون دائرتي الاعتدال والانقلاب"
 
 #: src/ui_viewDialog.h:2088
 msgid "Color of the ecliptic poles (J2000.0)"
-msgstr ""
+msgstr "لون القطبين الكسوفيين (j2000.0)"
 
 #: src/ui_viewDialog.h:2091
 msgid "Color of Prime Vertical"
@@ -5727,43 +5727,43 @@ msgstr "لون دائرة الغرب - الشرق العظمى"
 
 #: src/ui_viewDialog.h:2094
 msgid "Show ecliptic poles of J2000.0"
-msgstr ""
+msgstr "أظهر القطبين الكسوفيين  J2000.0"
 
 #: src/ui_viewDialog.h:2096
 msgid "Ecliptic poles (J2000)"
-msgstr ""
+msgstr "(J2000) القطبان الكسوفيان"
 
 #: src/ui_viewDialog.h:2098
 msgid "Color of the celestial poles (J2000.0)"
-msgstr ""
+msgstr "(J2000.0)  لون الأقطاب السماوية"
 
 #: src/ui_viewDialog.h:2101
 msgid "Show celestial poles of current planet and date."
-msgstr ""
+msgstr "أظهر القطبين السماويين للتاريخ الحالي والكوكب الحالي"
 
 #: src/ui_viewDialog.h:2103
 msgid "Celestial poles (of date)"
-msgstr ""
+msgstr "(القطبان السماويان (التاريخ الحالي"
 
 #: src/ui_viewDialog.h:2105
 msgid "Color of ecliptic poles (of date)"
-msgstr ""
+msgstr "لون القطبين الكسوفيين للتاريخ الحالي"
 
 #: src/ui_viewDialog.h:2108
 msgid "Color of celestial poles (of date)"
-msgstr ""
+msgstr "لون القطبين السماويين للتاريخ الحالي"
 
 #: src/ui_viewDialog.h:2111
 msgid "Color of supergalactic poles"
-msgstr ""
+msgstr "لون القطبين لإحداثيات المجموعة المجرية"
 
 #: src/ui_viewDialog.h:2114
 msgid "Show ecliptic poles of current date."
-msgstr ""
+msgstr "أظهر القطبين الكسوفيين للتاريخ الحالي"
 
 #: src/ui_viewDialog.h:2116
 msgid "Ecliptic poles (of date)"
-msgstr ""
+msgstr "(القطبان الكسوفيان (التاريخ الحالي"
 
 #: src/ui_viewDialog.h:2118
 msgid "Show Prime (East-West) Vertical."
@@ -5771,23 +5771,23 @@ msgstr "أظهر دائرة الشرق - الغرب العظمى"
 
 #: src/ui_viewDialog.h:2122
 msgid "Color of galactic poles"
-msgstr ""
+msgstr "لون القطبين للإحداثيات المجرية"
 
 #: src/ui_viewDialog.h:2124
 msgid "Zenith and Nadir"
-msgstr ""
+msgstr "السمت والنظير"
 
 #: src/ui_viewDialog.h:2127
 msgid "Color of Zenith and Nadir"
-msgstr ""
+msgstr "لون السمت والنظير"
 
 #: src/ui_viewDialog.h:2130
 msgid "Show celestial poles of J2000.0."
-msgstr ""
+msgstr "أظهر القطبين السماويين ل J2000.0"
 
 #: src/ui_viewDialog.h:2132
 msgid "Celestial poles (J2000)"
-msgstr ""
+msgstr "(J2000) القطبان السماويان"
 
 #: src/ui_viewDialog.h:2134
 msgid ""
@@ -5835,7 +5835,7 @@ msgstr "لون الشبكة الاستوائية (J2000.0)"
 
 #: src/ui_viewDialog.h:2159
 msgid "Color of the equinox points (J2000.0)"
-msgstr ""
+msgstr "(J2000.0) لون نقطتي الاعتدال"
 
 #: src/ui_viewDialog.h:2162
 msgid "Ecliptical coordinates for J2000.0."
@@ -5847,7 +5847,7 @@ msgstr "(J2000) الشبكة الكسوفية"
 
 #: src/ui_viewDialog.h:2166
 msgid "Color of the supergalactic grid"
-msgstr ""
+msgstr "لون شبكة إحداثيات المجموعة المجرية"
 
 #: src/ui_viewDialog.h:2169
 msgid "Color of the galactic grid"
@@ -5871,7 +5871,7 @@ msgstr "الإحداثيات المجرية، النظام 2 ، الإتحاد �
 
 #: src/ui_viewDialog.h:2183
 msgid "Equinoxes (J2000)"
-msgstr ""
+msgstr "(J2000) الاعتدالان"
 
 #: src/ui_viewDialog.h:2185
 msgid "Color of the ecliptical grid (of date)"
@@ -5895,11 +5895,11 @@ msgstr "(الشبكة الاستوائية (التاريخ الحالي"
 
 #: src/ui_viewDialog.h:2197
 msgid "Equinoxes (of date)"
-msgstr ""
+msgstr "(الاعتدالان (التاريخ الحالي"
 
 #: src/ui_viewDialog.h:2199
 msgid "Color of the equinox points (of date)"
-msgstr ""
+msgstr "لون نقطتي الاعتدال للتاريخ الحالي"
 
 #: src/ui_viewDialog.h:2202
 msgid "Labels for the Cardinal directions."
@@ -7664,7 +7664,7 @@ msgstr "استخدم قناع شبه شفاف"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1140
 msgid "Hide grids and lines when enabled"
-msgstr ""
+msgstr "أخف الخطوط وشبكات الإحداثيات عند التفعيل"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1141
 msgid "Sensor view"
@@ -13691,7 +13691,7 @@ msgstr "‎العرض المجرّي / الطول المجرّي‎"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:221
 msgctxt "abbreviated in the plugin"
 msgid "Supergal. Long/Lat"
-msgstr ""
+msgstr "‎العرض/الطول لإحاثيات المجموعة المجرية‎"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:240
 msgctxt "abbreviated in the plugin"
@@ -13754,7 +13754,7 @@ msgstr "العرض المجرّي / الطول المجرّي"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:203
 msgid "Supergalactic Longitude/Latitude"
-msgstr ""
+msgstr "العرض/الطول لإحداثيات المجموعة المجرية"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:233
 msgid "Coordinates of custom position:"
