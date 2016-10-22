@@ -150,6 +150,14 @@ void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName, bool refre
 		StelApp::getInstance().updateI18n();
 }
 
+bool StelLocaleMgr::isAppRTL() const
+{
+	bool rtl = false;
+	if (QString("ar fa ckb ug ur he yi").contains(getAppLanguage()))
+		rtl = true;
+	return rtl;
+}
+
 /*************************************************************************
  Set the sky language.
 *************************************************************************/
@@ -169,6 +177,14 @@ void StelLocaleMgr::setSkyLanguage(const QString& newSkyLanguageName, bool refre
 QString StelLocaleMgr::getSkyLanguage() const
 {
 	return skyTranslator->getTrueLocaleName();
+}
+
+bool StelLocaleMgr::isSkyRTL() const
+{
+	bool rtl = false;
+	if (QString("ar fa ckb ug ur he yi").contains(getSkyLanguage()))
+		rtl = true;
+	return rtl;
 }
 
 // Get the StelTranslator currently used for sky objects.
