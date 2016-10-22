@@ -380,7 +380,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 		float latitude=locMap.value("latitude").toFloat();
 		float longitude=locMap.value("longitude").toFloat();
 
-		qDebug() << "Got location" << QString("%1, %2, %3 (%4, %5)").arg(ipCity).arg(ipRegion).arg(ipCountry).arg(latitude).arg(longitude) << "for IP" << locMap.value("ip").toString();
+		qDebug() << "Got location" << QString("%1, %2, %3 (%4, %5; %6)").arg(ipCity).arg(ipRegion).arg(ipCountry).arg(latitude).arg(longitude).arg(ipTimeZone) << "for IP" << locMap.value("ip").toString();
 
 		QString locLine= // we re-pack into a new line that will be parsed back by StelLocation...
 				QString("%1\t%2\t%3\tX\t0\t%4\t%5\t0\t\t%6")
