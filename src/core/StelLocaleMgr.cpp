@@ -41,8 +41,6 @@ StelLocaleMgr::StelLocaleMgr()
 	, timeZoneMode()
 	, GMTShift(0)
 {
-	//generateCountryList();
-
 	// Load from file
 	QString path = StelFileMgr::findFile("data/countryCodes.dat");
 	if (path.isEmpty())
@@ -55,7 +53,7 @@ StelLocaleMgr::StelLocaleMgr()
 	if(file.open(QIODevice::ReadOnly))
 	{
 		QDataStream in(&file);	// read the data serialized from the file
-		in.setVersion(QDataStream::Qt_4_5);
+		in.setVersion(QDataStream::Qt_5_2);
 		in >> countryCodeToStringMap;
 		file.close();
 	}
@@ -73,25 +71,36 @@ void StelLocaleMgr::generateCountryList()
 {
 	// Load ISO 3166-1 two-letter country codes from file (slow)
 	// The format is "[code][tab][country name containing spaces][newline]"
-	QFile textFile("data/iso3166-1-alpha-2.utf8");
+	qWarning() << "Generating a country list...";
+	QFile textFile(StelFileMgr::findFile("data/iso3166.tab"));
 	if(textFile.open(QFile::ReadOnly | QFile::Text))
 	{
-		QTextStream list(&textFile);
 		QString line;
-		while(!(line = list.readLine()).isNull())
+		while(!textFile.atEnd())
 		{
-			qDebug() << line.section(QChar('\t'), 0, 0) << ":" << line.section(QChar('\t'), 1, 1);
-			countryCodeToStringMap.insert(line.section(QChar('\t'), 0, 0), line.section(QChar('\t'), 1, 1));
+			line = QString::fromUtf8(textFile.readLine());
+			if (line.startsWith("//") || line.startsWith("#"))
+				continue;
+
+			if (!line.isEmpty())
+			{
+				QStringList list=line.split("\t", QString::KeepEmptyParts);
+				QString code = list.at(0).trimmed().toLower();
+				QString country = list.at(1).trimmed().replace("&", "and");
+
+				qDebug() << code << ":" << country;
+				countryCodeToStringMap.insert(code, country);
+			}
 		}
 		textFile.close();
 	}
 
 	// Save to binary file
-	QFile binaryFile("data/countryCodes.dat");
+	QFile binaryFile(StelFileMgr::findFile("data/countryCodes.dat"));
 	if(binaryFile.open(QIODevice::WriteOnly))
 	{
 		QDataStream out(&binaryFile);    // save the data serialized to the file
-		out.setVersion(QDataStream::Qt_4_5);
+		out.setVersion(QDataStream::Qt_5_2);
 		out << countryCodeToStringMap;
 		binaryFile.close();
 	}
@@ -101,6 +110,9 @@ void StelLocaleMgr::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
+
+	if (conf->value("devel/convert_countries_list", false).toBool())
+		generateCountryList();
 
 	setSkyLanguage(conf->value("localization/sky_locale", "system").toString(), false);
 	setAppLanguage(conf->value("localization/app_locale", "system").toString(), false);
@@ -133,7 +145,7 @@ void StelLocaleMgr::init()
 			timeZoneMode = STzCustom;
 			setCustomTzName(tzstr);
 		}
-	}
+	}	
 }
 
 /*************************************************************************
