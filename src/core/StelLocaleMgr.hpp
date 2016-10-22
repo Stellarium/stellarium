@@ -52,6 +52,9 @@ public:
 	
 	//! Get the StelTranslator object currently used for global application.
 	const StelTranslator& getAppStelTranslator() const;
+
+	//! Get the type (RTL or LTR) of application language currently used for GUI etc.
+	bool isAppRTL() const;
 	
 	//! Get the language currently used for sky objects.
 	//! This function has no permanent effect on the global locale.
@@ -66,6 +69,9 @@ public:
 	
 	//! Get a reference to the StelTranslator object currently used for sky objects.
 	const StelTranslator &getSkyTranslator() const;
+
+	//! Get the type (RTL or LTR) of language currently used for sky objects
+	bool isSkyRTL() const;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// DATE & TIME LOCALIZATION
