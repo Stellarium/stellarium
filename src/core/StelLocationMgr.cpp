@@ -40,7 +40,8 @@ StelLocationMgr::StelLocationMgr()
 	QSettings* conf = StelApp::getInstance().getSettings();
 
 	// The line below allows to re-generate the location file, you still need to gunzip it manually afterward.
-	// generateBinaryLocationFile("data/base_locations.txt", false, "data/base_locations.bin");
+	if (conf->value("devel/convert_locations_list", false).toBool())
+		generateBinaryLocationFile("data/base_locations.txt", false, "data/base_locations.bin");
 
 	locations = loadCitiesBin("data/base_locations.bin.gz");
 	locations.unite(loadCities("data/user_locations.txt", true));
@@ -70,12 +71,13 @@ void StelLocationMgr::setLocations(const LocationList &locations)
 
 void StelLocationMgr::generateBinaryLocationFile(const QString& fileName, bool isUserLocation, const QString& binFilePath) const
 {
+	qWarning() << "Generating a locations list...";
 	const QMap<QString, StelLocation>& cities = loadCities(fileName, isUserLocation);
-	QFile binfile(binFilePath);
+	QFile binfile(StelFileMgr::findFile(binFilePath));
 	if(binfile.open(QIODevice::WriteOnly))
 	{
 		QDataStream out(&binfile);
-		out.setVersion(QDataStream::Qt_4_6);
+		out.setVersion(QDataStream::Qt_5_2);
 		out << cities;
 		binfile.close();
 	}
@@ -98,14 +100,14 @@ LocationMap StelLocationMgr::loadCitiesBin(const QString& fileName)
 	if (fileName.endsWith(".gz"))
 	{
 		QDataStream in(StelUtils::uncompress(sourcefile.readAll()));
-		in.setVersion(QDataStream::Qt_4_6);
+		in.setVersion(QDataStream::Qt_5_2);
 		in >> res;
 		return res;
 	}
 	else
 	{
 		QDataStream in(&sourcefile);
-		in.setVersion(QDataStream::Qt_4_6);
+		in.setVersion(QDataStream::Qt_5_2);
 		in >> res;
 		return res;
 	}

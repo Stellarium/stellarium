@@ -261,6 +261,7 @@ SET(stellarium_lib_SRCS
      CLIProcessor.hpp
      CLIProcessor.cpp
      translations.h
+     translations_countries.h
 )
 
 ### CMake < 3.0 does not AUTOMOC Q_GADGET which some files use, so we have to manually add it
