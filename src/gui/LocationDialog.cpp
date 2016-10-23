@@ -538,6 +538,7 @@ void LocationDialog::reportEdit()
 	}
 	ui->addLocationToListPushButton->setEnabled(isEditingNew && canSave);
 	ui->deleteLocationFromListPushButton->setEnabled(locationMgr.canDeleteUserLocation(loc.getID()));
+	ui->timeZoneNameComboBox->setEnabled(isEditingNew && canSave);
 }
 
 // Called when the user clicks on the save button
