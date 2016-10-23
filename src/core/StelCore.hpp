@@ -274,6 +274,8 @@ public:
 	//! Get the informations on the current location
 	const StelLocation& getCurrentLocation() const;
 
+	float getUTCOffset(const double JD) const;
+
 	const QSharedPointer<class Planet> getCurrentPlanet() const;
 
 	//! Unfortunately we also need this.

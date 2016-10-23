@@ -436,3 +436,4 @@ LocationMap StelLocationMgr::pickLocationsInCountry(const QString country)
 	}
 	return results;
 }
+

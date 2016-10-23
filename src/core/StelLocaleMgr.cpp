@@ -26,13 +26,14 @@
 #include <QDebug>
 #include <QSettings>
 #include <QString>
+#include <QStringList>
 #include <QTextStream>
-
 #include <QFile>
 
 #include <ctime>
 
 QMap<QString, QString> StelLocaleMgr::countryCodeToStringMap;
+QStringList StelLocaleMgr::tzNameList;
 
 StelLocaleMgr::StelLocaleMgr()
 	: skyTranslator(NULL)
@@ -57,6 +58,8 @@ StelLocaleMgr::StelLocaleMgr()
 		in >> countryCodeToStringMap;
 		file.close();
 	}
+
+	core = StelApp::getInstance().getCore();
 }
 
 
@@ -113,6 +116,8 @@ void StelLocaleMgr::init()
 
 	if (conf->value("devel/convert_countries_list", false).toBool())
 		generateCountryList();
+
+	readTzNames();
 
 	setSkyLanguage(conf->value("localization/sky_locale", "system").toString(), false);
 	setAppLanguage(conf->value("localization/app_locale", "system").toString(), false);
@@ -221,7 +226,7 @@ QString StelLocaleMgr::getISO8601TimeLocal(double JD) const
 	}
 	else
 	{
-		shift = StelUtils::getGMTShiftFromQT(JD)*0.041666666666;
+		shift = core->getUTCOffset(JD)*0.041666666666;
 	}
 	return StelUtils::julianDayToISO8601String(JD + shift);
 }
@@ -241,7 +246,7 @@ double StelLocaleMgr::getJdFromISO8601TimeLocal(const QString& t, bool* ok) cons
 	if (timeZoneMode == STzGMTShift)
 		jd -= GMTShift;
 	else
-		jd -= StelUtils::getGMTShiftFromQT(jd)*0.041666666666;
+		jd -= core->getUTCOffset(jd)*0.041666666666;
 	return jd;
 }
 
@@ -257,7 +262,7 @@ QString StelLocaleMgr::getPrintableDateLocal(double JD) const
 	}
 	else
 	{
-		shift = StelUtils::getGMTShiftFromQT(JD)*0.041666666666;
+		shift = core->getUTCOffset(JD)*0.041666666666;
 	}
 	StelUtils::getDateFromJulianDay(JD+shift, &year, &month, &day);
 	dayOfWeek = (int)floor(fmod(JD, 7));
@@ -295,7 +300,7 @@ QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 	}
 	else
 	{
-		shift = StelUtils::getGMTShiftFromQT(JD)*0.041666666666;
+		shift = core->getUTCOffset(JD)*0.041666666666;
 	}
 	StelUtils::getTimeFromJulianDay(JD+shift, &hour, &minute, &second);
 
@@ -317,7 +322,7 @@ QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 
 QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
 {
-	double shift = StelUtils::getGMTShiftFromQT(JD);
+	double shift = core->getUTCOffset(JD);
 	QTime tz = QTime(0, 0, 0).addSecs(3600*qAbs(shift));
 	if(shift<0.0f)
 		return "UTC-" + tz.toString("hh:mm");
@@ -406,7 +411,7 @@ void StelLocaleMgr::setCustomTzName(const QString& tzname)
 float StelLocaleMgr::getGMTShift(double JD) const
 {
 	if (timeZoneMode == STzGMTShift) return GMTShift;
-	else return StelUtils::getGMTShiftFromQT(JD);
+	else return core->getUTCOffset(JD);
 }
 
 // Convert a 2 letter country code to string
@@ -425,3 +430,43 @@ QStringList StelLocaleMgr::getAllCountryNames()
 	res.sort();
 	return res;
 }
+
+void StelLocaleMgr::readTzNames()
+{
+	// Load from file
+	QString path = StelFileMgr::findFile("data/zone1970.tab");
+	if (path.isEmpty())
+	{
+		qWarning() << "ERROR - could not find time zone data file.";
+		return;
+	}
+
+	QFile file(path);
+	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+		return;
+
+	tzNameList.clear();
+	QString tzrecord;
+	while (!file.atEnd())
+	{
+		tzrecord = QString::fromUtf8(file.readLine());
+
+		// skip comments
+		if (tzrecord.startsWith("//") || tzrecord.startsWith("#"))
+			continue;
+
+		if (!tzrecord.isEmpty())
+		{
+			QStringList tzitem=tzrecord.split("\t", QString::KeepEmptyParts);
+			tzNameList.append(tzitem.at(2).trimmed());
+		}
+	}
+	file.close();
+}
+
+QStringList StelLocaleMgr::getAllTimeZoneNames()
+{
+	tzNameList.sort();
+	return tzNameList;
+}
+

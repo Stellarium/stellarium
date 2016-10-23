@@ -45,6 +45,7 @@
 #include <QSettings>
 #include <QDebug>
 #include <QMetaEnum>
+#include <QTimeZone>
 
 #include <iostream>
 #include <fstream>
@@ -194,7 +195,7 @@ void StelCore::init()
 	setInitTodayTime(QTime::fromString(conf->value("navigation/today_time", "22:00").toString()));
 	startupTimeMode = conf->value("navigation/startup_time_mode", "actual").toString().toLower();
 	if (startupTimeMode=="preset")	
-		setJD(presetSkyTime - StelUtils::getGMTShiftFromQT(presetSkyTime) * JD_HOUR);
+		setJD(presetSkyTime - getUTCOffset(presetSkyTime) * JD_HOUR);
 	else if (startupTimeMode=="today")
 		setTodayTime(getInitTodayTime());
 
@@ -1136,6 +1137,47 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 	}
 }
 
+float StelCore::getUTCOffset(const double JD) const
+{
+	int year, month, day, hour, minute, second;
+	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
+	StelUtils::getTimeFromJulianDay(JD, &hour, &minute, &second);
+	// as analogous to second statement in getJDFromDate, nkerr
+	if ( year <= 0 )
+	{
+		year = year - 1;
+	}
+	//getTime/DateFromJulianDay returns UTC time, not local time
+	QDateTime universal(QDate(year, month, day), QTime(hour, minute, second), Qt::UTC);
+	if (! universal.isValid())
+	{
+		//qWarning() << "JD " << QString("%1").arg(JD) << " out of bounds of QT help with GMT shift, using current datetime";
+		// Assumes the GMT shift was always the same before year -4710
+		universal = QDateTime(QDate(-4710, month, day), QTime(hour, minute, second), Qt::UTC);
+	}
+
+	StelLocation loc = getCurrentLocation();
+	QDateTime local;
+	int shiftInSeconds = 0;
+	if (loc.timeZone=="system_default" || loc.timeZone.isEmpty())
+	{
+		local = universal.toLocalTime();
+		//Both timezones should be interpreted as UTC because secsTo() converts both
+		//times to UTC if their zones have different daylight saving time rules.
+		local.setTimeSpec(Qt::UTC);
+
+		shiftInSeconds = universal.secsTo(local);
+	}
+	else
+	{
+		QTimeZone* tz = new QTimeZone(loc.timeZone.toUtf8());
+		if (tz->isValid())
+			shiftInSeconds = tz->offsetFromUtc(universal);
+	}
+
+	float shiftInHours = shiftInSeconds / 3600.0f;
+	return shiftInHours;
+}
 
 //! Set stellarium time to current real world time
 void StelCore::setTimeNow()
@@ -1150,7 +1192,7 @@ void StelCore::setTodayTime(const QTime& target)
 	{
 		dt.setTime(target);
 		// don't forget to adjust for timezone / daylight savings.
-		double JD = StelUtils::qDateTimeToJd(dt)-(StelUtils::getGMTShiftFromQT(StelUtils::getJDFromSystem()) * JD_HOUR);
+		double JD = StelUtils::qDateTimeToJd(dt)-(getUTCOffset(StelUtils::getJDFromSystem()) * JD_HOUR);
 		setJD(JD);
 	}
 	else

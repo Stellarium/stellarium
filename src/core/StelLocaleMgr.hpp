@@ -21,6 +21,9 @@
 #define _STELLOCALEMGR_HPP_
 
 #include "StelTranslator.hpp"
+#include "StelCore.hpp"
+
+#include <QStringList>
 
 //! @class StelLocaleMgr
 //! Manage i18n operations such as message translation and date/time localization.
@@ -176,10 +179,14 @@ public:
 	
 	//! Return an alphabetically ordered list of all the known country names
 	static QStringList getAllCountryNames();
+
+	//! Return an alphabetically ordered list of all the known time zone names
+	static QStringList getAllTimeZoneNames();
 	
 private:
 	// The translator used for astronomical object naming
 	StelTranslator* skyTranslator;
+	StelCore* core;
 	
 	// Date and time variables
 	STimeFormat timeFormat;
@@ -188,6 +195,8 @@ private:
 	
 	QString customTzName;			// Something like "Europe/Paris"
 	float GMTShift;				// Time shift between GMT time and local time in hour. (positive for Est of GMT)
+	static QStringList tzNameList;
+	void readTzNames();
 	
 	// Convert the time format enum to its associated string and reverse
 	STimeFormat stringToSTimeFormat(const QString&) const;
