@@ -1174,7 +1174,7 @@ float StelCore::getUTCOffset(const double JD) const
 	else
 	{
 		QTimeZone* tz = new QTimeZone(tzName.toUtf8());
-		if (tz->isValid() && loc.planetName=="Earth")
+		if (tz->isValid() && loc.planetName=="Earth" && year>=1886)
 			shiftInSeconds = tz->offsetFromUtc(universal);
 		else
 			shiftInSeconds = (loc.longitude/15.f)*3600.f; // Local Mean Solar Time
