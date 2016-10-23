@@ -997,7 +997,7 @@ void SatellitesDialog::selectCurrentIridiumFlare(const QModelIndex &modelIndex)
 	QString date = modelIndex.sibling(modelIndex.row(), IridiumFlaresDate).data().toString();
 	bool ok;
 	double JD  = StelUtils::getJulianDayFromISO8601String(date.left(10) + "T" + date.right(8), &ok);
-	JD -= StelUtils::getGMTShiftFromQT(JD)/24.;
+	JD -= StelApp::getInstance().getCore()->getUTCOffset(JD)/24.;
 
 	StelObjectMgr* objectMgr = GETSTELMODULE(StelObjectMgr);
 	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))

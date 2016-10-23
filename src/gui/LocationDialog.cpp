@@ -64,6 +64,7 @@ void LocationDialog::retranslate()
 		ui->retranslateUi(dialog);
 		populatePlanetList();
 		populateCountryList();
+		populateTimeZonesList();
 	}
 }
 
@@ -113,6 +114,7 @@ void LocationDialog::createDialogContent()
 
 	populatePlanetList();
 	populateCountryList();
+	populateTimeZonesList();
 
 	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
 	connect(ui->citiesListView, SIGNAL(clicked(const QModelIndex&)),
@@ -179,7 +181,9 @@ void LocationDialog::updateFromProgram(const StelLocation& currentLocation)
 
 	const QString& key1 = currentLocation.getID();
 	const QString& key2 = locationFromFields().getID();
-	if (key1!=key2)
+	const QString& key3 = currentLocation.timeZone;
+	const QString& key4 = locationFromFields().timeZone;
+	if (key1!=key2 || key3!=key4)
 	{
 		setFieldsFromLocation(currentLocation);
 	}
@@ -192,6 +196,7 @@ void LocationDialog::disconnectEditSignals()
 	disconnect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setPositionFromCoords(int)));
 	disconnect(ui->planetNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(moveToAnotherPlanet(const QString&)));
 	disconnect(ui->countryNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(reportEdit()));
+	disconnect(ui->timeZoneNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(reportEdit()));
 	disconnect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)), this, SLOT(reportEdit()));
 }
 
@@ -202,6 +207,7 @@ void LocationDialog::connectEditSignals()
 	connect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setPositionFromCoords(int)));
 	connect(ui->planetNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(moveToAnotherPlanet(const QString&)));
 	connect(ui->countryNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(reportEdit()));
+	connect(ui->timeZoneNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(reportEdit()));
 	connect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)), this, SLOT(reportEdit()));
 }
 
@@ -230,6 +236,15 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 		idx = ui->planetNameComboBox->findData(QVariant("Earth"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->planetNameComboBox->setCurrentIndex(idx);
+
+	idx = ui->timeZoneNameComboBox->findData(loc.timeZone, Qt::UserRole, Qt::MatchCaseSensitive);
+	if (idx==-1)
+	{
+		// Use system_default as default
+		idx = ui->timeZoneNameComboBox->findData(QVariant("system_default"), Qt::UserRole, Qt::MatchCaseSensitive);
+	}
+	ui->timeZoneNameComboBox->setCurrentIndex(idx);
+
 	setMapForLocation(loc);
 
 	// Set pointer position
@@ -343,6 +358,33 @@ void LocationDialog::populateCountryList()
 
 }
 
+void LocationDialog::populateTimeZonesList()
+{
+	Q_ASSERT(ui->timeZoneNameComboBox);
+
+	QComboBox* timeZones = ui->timeZoneNameComboBox;
+	QStringList tzNames(StelLocaleMgr::getAllTimeZoneNames());
+
+	//Save the current selection to be restored later
+	timeZones->blockSignals(true);
+	int index = timeZones->currentIndex();
+	QVariant selectedTzId = timeZones->itemData(index);
+	timeZones->clear();
+	//For each time zone, display the localized name and store the original as user
+	//data. Unfortunately, there's no other way to do this than with a cycle.
+	foreach(const QString& name, tzNames)
+	{
+		timeZones->addItem(q_(name), name);
+	}
+	timeZones->addItem(q_("System default"), "system_default");
+	//Restore the selection
+	index = timeZones->findData(selectedTzId, Qt::UserRole, Qt::MatchCaseSensitive);
+	timeZones->setCurrentIndex(index);
+	timeZones->model()->sort(0);
+	timeZones->blockSignals(false);
+
+}
+
 // Create a StelLocation instance from the fields
 StelLocation LocationDialog::locationFromFields() const
 {
@@ -361,6 +403,12 @@ StelLocation LocationDialog::locationFromFields() const
 		loc.country = QString();//As returned by QComboBox::currentText()
 	else
 		loc.country = ui->countryNameComboBox->itemData(index).toString();
+
+	index = ui->timeZoneNameComboBox->currentIndex();
+	if (index < 0)
+		loc.timeZone = QString(); //As returned by QComboBox::currentText()
+	else
+		loc.timeZone = ui->timeZoneNameComboBox->itemData(index).toString();
 
 	return loc;
 }

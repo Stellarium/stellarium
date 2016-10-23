@@ -1689,7 +1689,7 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 					if (angle>angle0 && (v<1) && lat>5*M_PI/180)
 					{
 						IridiumFlaresPrediction flare;
-						flare.datetime = StelUtils::julianDayToISO8601String(currentJD+dt+StelUtils::getGMTShiftFromQT(currentJD+dt)/24.f);
+						flare.datetime = StelUtils::julianDayToISO8601String(currentJD+dt+StelApp::getInstance().getCore()->getUTCOffset(currentJD+dt)/24.f);
 						flare.satellite = sat.data()->getEnglishName();
 						flare.azimuth   = lon;
 						flare.altitude  = lat;
