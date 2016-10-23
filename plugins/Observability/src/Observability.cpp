@@ -287,7 +287,6 @@ void Observability::draw(StelCore* core)
 	double currheight = (6371.+(core->getCurrentLocation().altitude)/1000.)/UA;
 	double currJD = core->getJD();
 	double currJDint;
-//	GMTShift = StelUtils::getGMTShiftFromQT(currJD)/24.0;
 	GMTShift = core->getUTCOffset(currJD)/24.0;
 
 
