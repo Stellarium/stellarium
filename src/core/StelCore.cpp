@@ -1173,6 +1173,8 @@ float StelCore::getUTCOffset(const double JD) const
 		QTimeZone* tz = new QTimeZone(loc.timeZone.toUtf8());
 		if (tz->isValid())
 			shiftInSeconds = tz->offsetFromUtc(universal);
+		else
+			shiftInSeconds = (loc.longitude/15.f)*3600.f; // time offset from longitude of location
 	}
 
 	float shiftInHours = shiftInSeconds / 3600.0f;
