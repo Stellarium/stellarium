@@ -504,7 +504,7 @@ void LocationDialog::setPositionFromCoords(int )
 void LocationDialog::saveTimeZone()
 {
 	int index = ui->timeZoneNameComboBox->currentIndex();
-	if (index > -1)
+	if (index > -1 && !ui->addLocationToListPushButton->isEnabled())
 		StelApp::getInstance().getSettings()->setValue("localization/time_zone", ui->timeZoneNameComboBox->itemData(index).toString());
 }
 
