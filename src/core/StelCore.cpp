@@ -1149,7 +1149,7 @@ float StelCore::getUTCOffset(const double JD) const
 	}
 	//getTime/DateFromJulianDay returns UTC time, not local time
 	QDateTime universal(QDate(year, month, day), QTime(hour, minute, second), Qt::UTC);
-	if (! universal.isValid())
+	if (!universal.isValid())
 	{
 		//qWarning() << "JD " << QString("%1").arg(JD) << " out of bounds of QT help with GMT shift, using current datetime";
 		// Assumes the GMT shift was always the same before year -4710
@@ -1157,11 +1157,15 @@ float StelCore::getUTCOffset(const double JD) const
 	}
 
 	StelLocation loc = getCurrentLocation();
-	QDateTime local;
+	QString customTimeZone = StelApp::getInstance().getSettings()->value("localization/time_zone", "").toString();
+	QString tzName = loc.timeZone;
+	if (!customTimeZone.isEmpty())
+		tzName = customTimeZone;
+
 	int shiftInSeconds = 0;
-	if (loc.timeZone=="system_default" || loc.timeZone.isEmpty())
+	if (tzName=="system_default")
 	{
-		local = universal.toLocalTime();
+		QDateTime local = universal.toLocalTime();
 		//Both timezones should be interpreted as UTC because secsTo() converts both
 		//times to UTC if their zones have different daylight saving time rules.
 		local.setTimeSpec(Qt::UTC);
@@ -1170,11 +1174,11 @@ float StelCore::getUTCOffset(const double JD) const
 	}
 	else
 	{
-		QTimeZone* tz = new QTimeZone(loc.timeZone.toUtf8());
-		if (tz->isValid())
+		QTimeZone* tz = new QTimeZone(tzName.toUtf8());
+		if (tz->isValid() && loc.planetName=="Earth")
 			shiftInSeconds = tz->offsetFromUtc(universal);
 		else
-			shiftInSeconds = (loc.longitude/15.f)*3600.f; // time offset from longitude of location
+			shiftInSeconds = (loc.longitude/15.f)*3600.f; // Local Mean Solar Time
 	}
 
 	float shiftInHours = shiftInSeconds / 3600.0f;

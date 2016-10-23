@@ -139,13 +139,21 @@ void LocationDialog::createDialogContent()
 		ui->useIpQueryCheckBox->setChecked(true);
 		b = false;
 	}
+	updateDefaultLocationControls(b);
+
+	customTimeZone = conf->value("localization/time_zone", "").toString();
+	if (!customTimeZone.isEmpty())
+		b = true;
+	else
+		b = false;
+	updateTimeZoneControls(b);
 
 	setFieldsFromLocation(currentLocation);
-	updateDefaultLocationControls(b);
 
 	connect(ui->useIpQueryCheckBox, SIGNAL(clicked(bool)), this, SLOT(ipQueryLocation(bool)));
 	connect(ui->useAsDefaultLocationCheckBox, SIGNAL(clicked(bool)), this, SLOT(setDefaultLocation(bool)));
 	connect(ui->pushButtonReturnToDefault, SIGNAL(clicked()), core, SLOT(returnToDefaultLocation()));
+	connect(ui->useCustomTimeZoneCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateTimeZoneControls(bool)));
 
 	connectEditSignals();
 
@@ -180,10 +188,8 @@ void LocationDialog::updateFromProgram(const StelLocation& currentLocation)
 	}
 
 	const QString& key1 = currentLocation.getID();
-	const QString& key2 = locationFromFields().getID();
-	const QString& key3 = currentLocation.timeZone;
-	const QString& key4 = locationFromFields().timeZone;
-	if (key1!=key2 || key3!=key4)
+	const QString& key2 = locationFromFields().getID();	
+	if (key1!=key2)
 	{
 		setFieldsFromLocation(currentLocation);
 	}
@@ -196,7 +202,7 @@ void LocationDialog::disconnectEditSignals()
 	disconnect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setPositionFromCoords(int)));
 	disconnect(ui->planetNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(moveToAnotherPlanet(const QString&)));
 	disconnect(ui->countryNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(reportEdit()));
-	disconnect(ui->timeZoneNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(reportEdit()));
+	disconnect(ui->timeZoneNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(saveTimeZone()));
 	disconnect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)), this, SLOT(reportEdit()));
 }
 
@@ -207,7 +213,7 @@ void LocationDialog::connectEditSignals()
 	connect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setPositionFromCoords(int)));
 	connect(ui->planetNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(moveToAnotherPlanet(const QString&)));
 	connect(ui->countryNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(reportEdit()));
-	connect(ui->timeZoneNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(reportEdit()));
+	connect(ui->timeZoneNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(saveTimeZone()));
 	connect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)), this, SLOT(reportEdit()));
 }
 
@@ -237,11 +243,14 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	}
 	ui->planetNameComboBox->setCurrentIndex(idx);
 
-	idx = ui->timeZoneNameComboBox->findData(loc.timeZone, Qt::UserRole, Qt::MatchCaseSensitive);
+	QString tz = loc.timeZone;
+	if (!customTimeZone.isEmpty())
+		tz = customTimeZone;
+	idx = ui->timeZoneNameComboBox->findData(tz, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
-		// Use system_default as default
-		idx = ui->timeZoneNameComboBox->findData(QVariant("system_default"), Qt::UserRole, Qt::MatchCaseSensitive);
+		// Use LMST as default
+		idx = ui->timeZoneNameComboBox->findData(QVariant("LMST"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->timeZoneNameComboBox->setCurrentIndex(idx);
 
@@ -376,6 +385,7 @@ void LocationDialog::populateTimeZonesList()
 	{
 		timeZones->addItem(q_(name), name);
 	}
+	timeZones->addItem(q_("Local Mean Solar Time"), "LMST");
 	timeZones->addItem(q_("System default"), "system_default");
 	//Restore the selection
 	index = timeZones->findData(selectedTzId, Qt::UserRole, Qt::MatchCaseSensitive);
@@ -436,7 +446,7 @@ void LocationDialog::setPositionFromMap(double longitude, double latitude)
 	pickedModel->setStringList(results.keys());
 	proxyModel->setSourceModel(pickedModel);
 	proxyModel->sort(0, Qt::AscendingOrder);
-	ui->citySearchLineEdit->clear();
+	ui->citySearchLineEdit->clear();	
 }
 
 // Called when the planet name is changed by hand
@@ -489,6 +499,13 @@ void LocationDialog::setPositionFromCoords(int )
 	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.);
 	//Update the position of the map pointer
 	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
+}
+
+void LocationDialog::saveTimeZone()
+{
+	int index = ui->timeZoneNameComboBox->currentIndex();
+	if (index > -1)
+		StelApp::getInstance().getSettings()->setValue("localization/time_zone", ui->timeZoneNameComboBox->itemData(index).toString());
 }
 
 void LocationDialog::reportEdit()
@@ -581,6 +598,29 @@ void LocationDialog::updateDefaultLocationControls(bool currentIsDefault)
 {
 	ui->useAsDefaultLocationCheckBox->setChecked(currentIsDefault);
 	ui->useAsDefaultLocationCheckBox->setEnabled(!currentIsDefault);
+}
+
+void LocationDialog::updateTimeZoneControls(bool useCustomTimeZone)
+{
+	if (useCustomTimeZone)
+	{
+		ui->useCustomTimeZoneCheckBox->setChecked(useCustomTimeZone);
+		saveTimeZone();
+	}
+	else
+	{
+		StelLocation loc = StelApp::getInstance().getCore()->getCurrentLocation();
+		int idx = ui->timeZoneNameComboBox->findData(loc.timeZone, Qt::UserRole, Qt::MatchCaseSensitive);
+		if (idx==-1)
+		{
+			// Use LMST as default
+			idx = ui->timeZoneNameComboBox->findData(QVariant("LMST"), Qt::UserRole, Qt::MatchCaseSensitive);
+		}
+		ui->timeZoneNameComboBox->setCurrentIndex(idx);
+		StelApp::getInstance().getSettings()->remove("localization/time_zone");
+	}
+
+	ui->timeZoneNameComboBox->setEnabled(useCustomTimeZone);
 }
 
 // called when the user clicks on the IP Query button
