@@ -23,8 +23,6 @@
 #include "StelTranslator.hpp"
 #include "StelCore.hpp"
 
-#include <QStringList>
-
 //! @class StelLocaleMgr
 //! Manage i18n operations such as message translation and date/time localization.
 //! @author Fabien Chereau
@@ -146,9 +144,6 @@ public:
 	
 	//! Return an alphabetically ordered list of all the known country names
 	static QStringList getAllCountryNames();
-
-	//! Return an alphabetically ordered list of all the known time zone names
-	static QStringList getAllTimeZoneNames();
 	
 private:
 	// The translator used for astronomical object naming
@@ -159,9 +154,6 @@ private:
 	STimeFormat timeFormat;
 	SDateFormat dateFormat;
 
-	static QStringList tzNameList;
-	void readTzNames();
-	
 	// Convert the time format enum to its associated string and reverse
 	STimeFormat stringToSTimeFormat(const QString&) const;
 	QString sTimeFormatToString(STimeFormat) const;

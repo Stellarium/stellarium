@@ -1169,7 +1169,6 @@ float StelCore::getUTCOffset(const double JD) const
 		//Both timezones should be interpreted as UTC because secsTo() converts both
 		//times to UTC if their zones have different daylight saving time rules.
 		local.setTimeSpec(Qt::UTC);
-
 		shiftInSeconds = universal.secsTo(local);
 	}
 	else
@@ -1179,6 +1178,7 @@ float StelCore::getUTCOffset(const double JD) const
 			shiftInSeconds = tz->offsetFromUtc(universal);
 		else
 			shiftInSeconds = (loc.longitude/15.f)*3600.f; // Local Mean Solar Time
+
 	}
 
 	float shiftInHours = shiftInSeconds / 3600.0f;

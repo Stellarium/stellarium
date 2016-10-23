@@ -26,14 +26,12 @@
 #include <QDebug>
 #include <QSettings>
 #include <QString>
-#include <QStringList>
 #include <QTextStream>
 #include <QFile>
 
 #include <ctime>
 
 QMap<QString, QString> StelLocaleMgr::countryCodeToStringMap;
-QStringList StelLocaleMgr::tzNameList;
 
 StelLocaleMgr::StelLocaleMgr()
 	: skyTranslator(NULL)
@@ -114,8 +112,6 @@ void StelLocaleMgr::init()
 
 	if (conf->value("devel/convert_countries_list", false).toBool())
 		generateCountryList();
-
-	readTzNames();
 
 	setSkyLanguage(conf->value("localization/sky_locale", "system").toString(), false);
 	setAppLanguage(conf->value("localization/app_locale", "system").toString(), false);
@@ -353,44 +349,5 @@ QStringList StelLocaleMgr::getAllCountryNames()
 		res.append(i.value());
 	res.sort();
 	return res;
-}
-
-void StelLocaleMgr::readTzNames()
-{
-	// Load from file
-	QString path = StelFileMgr::findFile("data/zone1970.tab");
-	if (path.isEmpty())
-	{
-		qWarning() << "ERROR - could not find time zone data file.";
-		return;
-	}
-
-	QFile file(path);
-	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-		return;
-
-	tzNameList.clear();
-	QString tzrecord;
-	while (!file.atEnd())
-	{
-		tzrecord = QString::fromUtf8(file.readLine());
-
-		// skip comments
-		if (tzrecord.startsWith("//") || tzrecord.startsWith("#"))
-			continue;
-
-		if (!tzrecord.isEmpty())
-		{
-			QStringList tzitem=tzrecord.split("\t", QString::KeepEmptyParts);
-			tzNameList.append(tzitem.at(2).trimmed());
-		}
-	}
-	file.close();
-}
-
-QStringList StelLocaleMgr::getAllTimeZoneNames()
-{
-	tzNameList.sort();
-	return tzNameList;
 }
 
