@@ -40,6 +40,7 @@
 #include <QSortFilterProxyModel>
 #include <QTimer>
 #include <QStringListModel>
+#include <QTimeZone>
 
 LocationDialog::LocationDialog(QObject* parent)
 	: StelDialog(parent)
@@ -372,7 +373,14 @@ void LocationDialog::populateTimeZonesList()
 	Q_ASSERT(ui->timeZoneNameComboBox);
 
 	QComboBox* timeZones = ui->timeZoneNameComboBox;
-	QStringList tzNames(StelLocaleMgr::getAllTimeZoneNames());
+	// Return a list of all the known time zone names (from Qt)
+	QStringList tzNames;
+	QList<QByteArray> tzList = QTimeZone::availableTimeZoneIds();
+	QList<QByteArray>::iterator i;
+	for (i = tzList.begin(); i!= tzList.end(); ++i)
+		tzNames.append(*i);
+
+	tzNames.sort();
 
 	//Save the current selection to be restored later
 	timeZones->blockSignals(true);
@@ -390,7 +398,6 @@ void LocationDialog::populateTimeZonesList()
 	//Restore the selection
 	index = timeZones->findData(selectedTzId, Qt::UserRole, Qt::MatchCaseSensitive);
 	timeZones->setCurrentIndex(index);
-	timeZones->model()->sort(0);
 	timeZones->blockSignals(false);
 
 }
