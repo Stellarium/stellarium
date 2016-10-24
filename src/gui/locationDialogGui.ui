@@ -517,6 +517,20 @@
             <property name="horizontalSpacing">
              <number>6</number>
             </property>
+            <item row="3" column="0" colspan="2">
+             <widget class="QCheckBox" name="useIpQueryCheckBox">
+              <property name="text">
+               <string>Get location from Network</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Longitude:</string>
+              </property>
+             </widget>
+            </item>
             <item row="0" column="0">
              <widget class="QLabel" name="label_5">
               <property name="text">
@@ -531,10 +545,38 @@
               </property>
              </widget>
             </item>
-            <item row="5" column="0" colspan="2">
+            <item row="4" column="0" colspan="2">
              <widget class="QCheckBox" name="useAsDefaultLocationCheckBox">
               <property name="text">
                <string>Use current location as default</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QSpinBox" name="altitudeSpinBox">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Enter the altitude in meter</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="suffix">
+               <string> m</string>
+              </property>
+              <property name="minimum">
+               <number>-2000</number>
+              </property>
+              <property name="maximum">
+               <number>200000</number>
+              </property>
+              <property name="singleStep">
+               <number>100</number>
               </property>
              </widget>
             </item>
@@ -569,61 +611,6 @@
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
-            </item>
-            <item row="4" column="0" colspan="2">
-             <widget class="QCheckBox" name="useIpQueryCheckBox">
-              <property name="text">
-               <string>Get location from Network</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QSpinBox" name="altitudeSpinBox">
-              <property name="minimumSize">
-               <size>
-                <width>100</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="toolTip">
-               <string>Enter the altitude in meter</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="suffix">
-               <string> m</string>
-              </property>
-              <property name="minimum">
-               <number>-2000</number>
-              </property>
-              <property name="maximum">
-               <number>200000</number>
-              </property>
-              <property name="singleStep">
-               <number>100</number>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="label">
-              <property name="text">
-               <string>Longitude:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <spacer name="verticalSpacer">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
             </item>
            </layout>
           </widget>
@@ -734,7 +721,7 @@
             <item row="3" column="1">
              <widget class="QComboBox" name="timeZoneNameComboBox">
               <property name="enabled">
-               <bool>true</bool>
+               <bool>false</bool>
               </property>
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
