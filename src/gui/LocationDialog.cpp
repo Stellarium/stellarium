@@ -364,6 +364,7 @@ void LocationDialog::populateCountryList()
 	{
 		countries->addItem(q_(name), name);
 	}
+	countries->addItem(QChar(0x2014), "");
 	//Restore the selection
 	index = countries->findData(selectedCountryId, Qt::UserRole, Qt::MatchCaseSensitive);
 	countries->setCurrentIndex(index);
@@ -492,6 +493,7 @@ void LocationDialog::moveToAnotherPlanet(const QString&)
 			LocationMap results = locMgr.pickLocationsNearby(loc.planetName, 0.0f, 0.0f, 180.0f);
 			pickedModel->setStringList(results.keys());
 			proxyModel->setSourceModel(pickedModel);
+			ui->countryNameComboBox->setCurrentIndex(ui->countryNameComboBox->findData("", Qt::UserRole, Qt::MatchCaseSensitive));
 			if (customTimeZone.isEmpty())
 				ui->timeZoneNameComboBox->setCurrentIndex(ui->timeZoneNameComboBox->findData("LMST", Qt::UserRole, Qt::MatchCaseSensitive));
 
@@ -638,7 +640,9 @@ void LocationDialog::updateTimeZoneControls(bool useCustomTimeZone)
 		StelApp::getInstance().getSettings()->remove("localization/time_zone");
 	}
 
+	ui->timeZoneNameComboBox->setVisible(useCustomTimeZone);
 	ui->timeZoneNameComboBox->setEnabled(useCustomTimeZone);
+	ui->timeZoneLabel->setVisible(useCustomTimeZone);
 }
 
 // called when the user clicks on the IP Query button
