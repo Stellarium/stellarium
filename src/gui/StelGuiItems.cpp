@@ -641,15 +641,17 @@ void BottomStelBar::updateText(bool updatePos)
 			else
 				deltaTInfo = QString("%1s%2").arg(deltaT, 3, 'f', 3).arg(validRangeMarker);
 
-			QString currTZ = core->getCurrentTimeZone();
-			if (currTZ=="system_default")
+			QString currTZ = QString("%1: %2").arg(q_("Time zone")).arg(core->getCurrentTimeZone());
+			if (currTZ.contains("system_default"))
 				currTZ = QString("%1: %2").arg(q_("Time zone")).arg(q_("System default"));
-			else if (currTZ=="LMST")
+
+			QString planetName = core->getCurrentLocation().planetName;
+			if (currTZ.contains("LMST") || (planetName=="Earth" && jd<=2409907.5) || planetName!="Earth")
 				currTZ = q_("Local Mean Solar Time");
-			else if (currTZ=="LTST")
+
+			if (currTZ.contains("LTST"))
 				currTZ = q_("Local True Solar Time");
-			else
-				currTZ = QString("%1: %2").arg(q_("Time zone")).arg(currTZ);
+
 			datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n-dot @ -23.8946\"/cy%3%4]<br>%5<br>%6</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QChar(0x00B2)).arg(sigmaInfo).arg(newDateAppx).arg(currTZ));
 		}
 		else

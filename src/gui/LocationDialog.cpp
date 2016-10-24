@@ -492,6 +492,9 @@ void LocationDialog::moveToAnotherPlanet(const QString&)
 			LocationMap results = locMgr.pickLocationsNearby(loc.planetName, 0.0f, 0.0f, 180.0f);
 			pickedModel->setStringList(results.keys());
 			proxyModel->setSourceModel(pickedModel);
+			if (customTimeZone.isEmpty())
+				ui->timeZoneNameComboBox->setCurrentIndex(ui->timeZoneNameComboBox->findData("LMST", Qt::UserRole, Qt::MatchCaseSensitive));
+
 		}
 		proxyModel->sort(0, Qt::AscendingOrder);
 		ui->citySearchLineEdit->clear();
