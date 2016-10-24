@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>700</width>
-    <height>482</height>
+    <height>506</height>
    </rect>
   </property>
   <property name="styleSheet">
@@ -517,6 +517,66 @@
             <property name="horizontalSpacing">
              <number>6</number>
             </property>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>Latitude:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_7">
+              <property name="text">
+               <string>Altitude:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0" colspan="2">
+             <widget class="QCheckBox" name="useAsDefaultLocationCheckBox">
+              <property name="text">
+               <string>Use current location as default</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="AngleSpinBox" name="longitudeSpinBox">
+              <property name="minimumSize">
+               <size>
+                <width>140</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>You can enter values in decimal degrees, or using dms format, for example: +1d 12m 8s</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="AngleSpinBox" name="latitudeSpinBox">
+              <property name="minimumSize">
+               <size>
+                <width>180</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>You can enter values in decimal degrees, or using dms format, for example: +1d 12m 8s</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0" colspan="2">
+             <widget class="QCheckBox" name="useIpQueryCheckBox">
+              <property name="text">
+               <string>Get location from Network</string>
+              </property>
+             </widget>
+            </item>
             <item row="2" column="1">
              <widget class="QSpinBox" name="altitudeSpinBox">
               <property name="minimumSize">
@@ -545,22 +605,6 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="1">
-             <widget class="AngleSpinBox" name="latitudeSpinBox">
-              <property name="minimumSize">
-               <size>
-                <width>180</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="toolTip">
-               <string>You can enter values in decimal degrees, or using dms format, for example: +1d 12m 8s</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="0">
              <widget class="QLabel" name="label">
               <property name="text">
@@ -568,49 +612,18 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="1">
-             <widget class="AngleSpinBox" name="longitudeSpinBox">
-              <property name="minimumSize">
+            <item row="3" column="0">
+             <spacer name="verticalSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
                <size>
-                <width>140</width>
-                <height>24</height>
+                <width>20</width>
+                <height>40</height>
                </size>
               </property>
-              <property name="toolTip">
-               <string>You can enter values in decimal degrees, or using dms format, for example: +1d 12m 8s</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="label_7">
-              <property name="text">
-               <string>Altitude:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="label_5">
-              <property name="text">
-               <string>Latitude:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0" colspan="2">
-             <widget class="QCheckBox" name="useIpQueryCheckBox">
-              <property name="text">
-               <string>Get location from Network</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="0" colspan="2">
-             <widget class="QCheckBox" name="useAsDefaultLocationCheckBox">
-              <property name="text">
-               <string>Use current location as default</string>
-              </property>
-             </widget>
+             </spacer>
             </item>
            </layout>
           </widget>
@@ -655,10 +668,31 @@
             <property name="bottomMargin">
              <number>0</number>
             </property>
-            <item row="0" column="0">
-             <widget class="QLabel" name="label_3">
-              <property name="text">
-               <string>Name/City:</string>
+            <item row="1" column="1">
+             <widget class="QComboBox" name="countryNameComboBox">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
               </property>
              </widget>
             </item>
@@ -669,13 +703,6 @@
               </property>
              </widget>
             </item>
-            <item row="3" column="0">
-             <widget class="QLabel" name="label_2">
-              <property name="text">
-               <string>Time Zone:</string>
-              </property>
-             </widget>
-            </item>
             <item row="2" column="0">
              <widget class="QLabel" name="label_6">
               <property name="text">
@@ -683,10 +710,55 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="label_4">
+            <item row="4" column="0" colspan="2">
+             <widget class="QCheckBox" name="useCustomTimeZoneCheckBox">
               <property name="text">
-               <string>Country:</string>
+               <string>Use custom time zone</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="timeZoneLabel">
+              <property name="text">
+               <string>Time zone:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Name/City:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QComboBox" name="timeZoneNameComboBox">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
               </property>
              </widget>
             </item>
@@ -718,66 +790,20 @@
               </property>
              </widget>
             </item>
-            <item row="3" column="1">
-             <widget class="QComboBox" name="timeZoneNameComboBox">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="editable">
-               <bool>true</bool>
-              </property>
-              <property name="insertPolicy">
-               <enum>QComboBox::NoInsert</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QComboBox" name="countryNameComboBox">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="editable">
-               <bool>true</bool>
-              </property>
-              <property name="insertPolicy">
-               <enum>QComboBox::NoInsert</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="0" colspan="2">
-             <widget class="QCheckBox" name="useCustomTimeZoneCheckBox">
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_4">
               <property name="text">
-               <string>Use custom time zone</string>
+               <string>Country:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0" colspan="2">
+             <widget class="QCheckBox" name="dstCheckBox">
+              <property name="toolTip">
+               <string/>
+              </property>
+              <property name="text">
+               <string>Enable daylight saving time</string>
               </property>
              </widget>
             </item>

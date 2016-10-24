@@ -79,7 +79,8 @@ StelCore::StelCore()
 	, JD(0.,0.)
 	, presetSkyTime(0.)
 	, milliSecondsOfLastJDUpdate(0.)
-	, jdOfLastJDUpdate(0.)
+	, jdOfLastJDUpdate(0.)	
+	, flagUseDST(true)
 	, deltaTCustomNDot(-26.0)
 	, deltaTCustomYear(1820.0)
 	, de430Available(false)
@@ -119,7 +120,8 @@ StelCore::StelCore()
 	currentProjectorParams.devicePixelsPerPixel = StelApp::getInstance().getDevicePixelsPerPixel();
 
 	flagUseNutation=conf->value("astro/flag_nutation", true).toBool();
-	flagUseTopocentricCoordinates=conf->value("astro/flag_topocentric_coordinates", true).toBool();	
+	flagUseTopocentricCoordinates=conf->value("astro/flag_topocentric_coordinates", true).toBool();
+	flagUseDST=conf->value("localization/flag_dst", true).toBool();
 }
 
 
@@ -164,6 +166,8 @@ void StelCore::init()
 		location = locationMgr->getLastResortLocation();
 	}
 	position = new StelObserver(location);
+
+	setCurrentTimeZone(conf->value("localization/time_zone", getCurrentLocation().timeZone).toString());
 
 	// Delta-T stuff
 	// Define default algorithm for time correction (Delta T)
@@ -1157,10 +1161,7 @@ float StelCore::getUTCOffset(const double JD) const
 	}
 
 	StelLocation loc = getCurrentLocation();
-	QString customTimeZone = StelApp::getInstance().getSettings()->value("localization/time_zone", "").toString();
-	QString tzName = loc.timeZone;
-	if (!customTimeZone.isEmpty())
-		tzName = customTimeZone;
+	QString tzName = getCurrentTimeZone();
 
 	int shiftInSeconds = 0;
 	if (tzName=="system_default")
@@ -1175,14 +1176,79 @@ float StelCore::getUTCOffset(const double JD) const
 	{
 		QTimeZone* tz = new QTimeZone(tzName.toUtf8());
 		if (tz->isValid() && loc.planetName=="Earth" && year>=1886)
-			shiftInSeconds = tz->offsetFromUtc(universal);
+		{
+			if (getUseDST())
+				shiftInSeconds = tz->offsetFromUtc(universal);
+			else
+				shiftInSeconds = tz->standardTimeOffset(universal);
+		}
 		else
 			shiftInSeconds = (loc.longitude/15.f)*3600.f; // Local Mean Solar Time
+
+		if (tzName=="LTST")
+			shiftInSeconds += getSolutionEquationOfTime(JD)*60;
 
 	}
 
 	float shiftInHours = shiftInSeconds / 3600.0f;
 	return shiftInHours;
+}
+
+QString StelCore::getCurrentTimeZone() const
+{
+	return currentTimeZone;
+}
+
+void StelCore::setCurrentTimeZone(const QString& tz)
+{
+	currentTimeZone = tz;
+}
+
+bool StelCore::getUseDST() const
+{
+	return flagUseDST;
+}
+
+void StelCore::setUseDST(const bool b)
+{
+	flagUseDST = b;
+	StelApp::getInstance().getSettings()->setValue("localization/flag_dst", b);
+}
+
+double StelCore::getSolutionEquationOfTime(const double JDE) const
+{
+	double tau = (JDE - 2451545.0)/365250.0;
+	double sunMeanLongitude = 280.4664567 + tau*(360007.6892779 + tau*(0.03032028 + tau*(1./49931. - tau*(1./15300. - tau/2000000.))));
+
+	// reduce the angle
+	sunMeanLongitude = std::fmod(sunMeanLongitude, 360.);
+	// force it to be the positive remainder, so that 0 <= angle < 360
+	sunMeanLongitude = std::fmod(sunMeanLongitude + 360., 360.);
+
+	Vec3d pos = GETSTELMODULE(StelObjectMgr)->searchByName("Sun")->getEquinoxEquatorialPos(this);
+	double ra, dec;
+	StelUtils::rectToSphe(&ra, &dec, pos);
+
+	// covert radians to degrees and reduce the angle
+	double alpha = std::fmod(ra*180./M_PI, 360.);
+	// force it to be the positive remainder, so that 0 <= angle < 360
+	alpha = std::fmod(alpha + 360., 360.);
+
+	double deltaPsi, deltaEps;
+	getNutationAngles(JDE, &deltaPsi, &deltaEps); // these are radians!
+	//double equation = 4*(sunMeanLongitude - 0.0057183 - alpha + get_nutation_longitude(JDE)*cos(get_mean_ecliptical_obliquity(JDE)));
+	double equation = 4*(sunMeanLongitude - 0.0057183 - alpha + deltaPsi*180./M_PI*cos(getPrecessionAngleVondrakEpsilon(JDE)));
+	// The equation of time is always smaller 20 minutes in absolute value
+	if (qAbs(equation)>20)
+	{
+		// If absolute value of the equation of time appears to be too large, add 24 hours (1440 minutes) to or subtract it from our result
+		if (equation>0.)
+			equation -= 1440.;
+		else
+			equation += 1440.;
+	}
+
+	return equation;
 }
 
 //! Set stellarium time to current real world time
