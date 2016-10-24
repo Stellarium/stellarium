@@ -436,8 +436,9 @@ StelMainView::StelMainView(QSettings* settings)
 #endif
 
 	//set the surface format BEFORE creating the widget
-	setOpenGLFormat();
+	QSurfaceFormat fmt = getDesiredGLFormat();
 	glWidget = new StelGLWidget(this);
+	glWidget->setFormat(fmt);
 	setViewport(glWidget);
 
 	stelScene = new StelGraphicsScene(this);
@@ -475,29 +476,38 @@ StelMainView::~StelMainView()
 	StelApp::deinitStatic();
 }
 
-void StelMainView::setOpenGLFormat() const
+QSurfaceFormat StelMainView::getDesiredGLFormat() const
 {
+	QSurfaceFormat fmt = QSurfaceFormat::defaultFormat();
+	qDebug()<<"Default surface format: "<<fmt;
+
 	//if on an GLES build, do not set the format
 #ifndef QT_OPENGL_ES_2
-	//this is the place to set the desired surface format!
-	QSurfaceFormat fmt = QSurfaceFormat::defaultFormat();
 	fmt.setRenderableType(QSurfaceFormat::OpenGL);
 	fmt.setMajorVersion(2);
 	fmt.setMinorVersion(1);
-	//disable vsync
-	fmt.setSwapInterval(0);
+	//fmt.setProfile(QSurfaceFormat::CoreProfile);
+	//fmt.setOption(QSurfaceFormat::DeprecatedFunctions);
+#endif
+
+	fmt.setRedBufferSize(8);
+	fmt.setGreenBufferSize(8);
+	fmt.setBlueBufferSize(8);
+	fmt.setAlphaBufferSize(8);
+	fmt.setDepthBufferSize(24);
+	//I dont think we use the stencil buffer for anything
+	//but maybe Qt needs it
+	fmt.setStencilBufferSize(8);
 
 #ifdef OPENGL_DEBUG_LOGGING
 	//try to enable GL debugging using GL_KHR_debug
 	fmt.setOption(QSurfaceFormat::DebugContext);
 #endif
-
-	//it seems that VSync is now enabled by default (at least on Windows), uncomment this to try to disable it
-	//fmt.setSwapInterval(0);
+	//disable vsync, if possible
+	fmt.setSwapInterval(0);
 
 	qDebug()<<"Desired surface format: "<<fmt;
-	QSurfaceFormat::setDefaultFormat(fmt);
-#endif
+	return fmt;
 }
 
 void StelMainView::init()
