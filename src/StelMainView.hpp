@@ -175,7 +175,7 @@ private:
 	//! The graphics scene notifies us when a draw finished, so that we can queue the next one
 	void drawEnded();
 	//! Sets the desired OpenGL format settings
-	void setOpenGLFormat() const;
+	QSurfaceFormat getDesiredGLFormat() const;
 	//! provide extended OpenGL diagnostics in logfile.
 	void dumpOpenGLdiagnostics() const;
 	//! Startup diagnostics, providing test for various circumstances of bad OS/OpenGL driver combinations
