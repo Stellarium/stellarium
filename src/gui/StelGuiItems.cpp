@@ -626,6 +626,17 @@ void BottomStelBar::updateText(bool updatePos)
 		newDateInfo = QString("JD %1").arg(jd, 0, 'f', 6);
 	}
 
+	QString currTZ = QString("%1: %2").arg(q_("Time zone")).arg(core->getCurrentTimeZone());
+	if (currTZ.contains("system_default"))
+		currTZ = QString("%1: %2").arg(q_("Time zone")).arg(q_("System default"));
+
+	QString planetName = core->getCurrentLocation().planetName;
+	if (currTZ.contains("LMST") || (planetName=="Earth" && jd<=2409907.5) || planetName!="Earth")
+		currTZ = q_("Local Mean Solar Time");
+
+	if (currTZ.contains("LTST"))
+		currTZ = q_("Local True Solar Time");
+
 	if (datetime->text()!=newDateInfo)
 	{
 		updatePos = true;		
@@ -641,21 +652,11 @@ void BottomStelBar::updateText(bool updatePos)
 			else
 				deltaTInfo = QString("%1s%2").arg(deltaT, 3, 'f', 3).arg(validRangeMarker);
 
-			QString currTZ = QString("%1: %2").arg(q_("Time zone")).arg(core->getCurrentTimeZone());
-			if (currTZ.contains("system_default"))
-				currTZ = QString("%1: %2").arg(q_("Time zone")).arg(q_("System default"));
-
-			QString planetName = core->getCurrentLocation().planetName;
-			if (currTZ.contains("LMST") || (planetName=="Earth" && jd<=2409907.5) || planetName!="Earth")
-				currTZ = q_("Local Mean Solar Time");
-
-			if (currTZ.contains("LTST"))
-				currTZ = q_("Local True Solar Time");
-
 			datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n-dot @ -23.8946\"/cy%3%4]<br>%5<br>%6</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QChar(0x00B2)).arg(sigmaInfo).arg(newDateAppx).arg(currTZ));
 		}
 		else
-			datetime->setToolTip(QString("%1").arg(newDateAppx));
+			datetime->setToolTip(QString("<p style='white-space:pre'>%1<br>%2</p>").arg(newDateAppx).arg(currTZ));
+
 		if (qApp->property("text_texture")==true) // CLI option -t given?
 		{
 			datetime->setVisible(false); // hide normal thingy.
