@@ -156,6 +156,9 @@ void LocationDialog::createDialogContent()
 	connect(ui->pushButtonReturnToDefault, SIGNAL(clicked()), core, SLOT(returnToDefaultLocation()));
 	connect(ui->useCustomTimeZoneCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateTimeZoneControls(bool)));
 
+	ui->dstCheckBox->setChecked(core->getUseDST());
+	connect(ui->dstCheckBox, SIGNAL(clicked(bool)), core, SLOT(setUseDST(bool)));
+
 	connectEditSignals();
 
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateFromProgram(StelLocation)));
@@ -254,6 +257,7 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 		idx = ui->timeZoneNameComboBox->findData(QVariant("LMST"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->timeZoneNameComboBox->setCurrentIndex(idx);
+	StelApp::getInstance().getCore()->setCurrentTimeZone(tz);
 
 	setMapForLocation(loc);
 
@@ -394,6 +398,7 @@ void LocationDialog::populateTimeZonesList()
 		timeZones->addItem(q_(name), name);
 	}
 	timeZones->addItem(q_("Local Mean Solar Time"), "LMST");
+	timeZones->addItem(q_("Local True Solar Time"), "LTST");
 	timeZones->addItem(q_("System default"), "system_default");
 	//Restore the selection
 	index = timeZones->findData(selectedTzId, Qt::UserRole, Qt::MatchCaseSensitive);
@@ -511,8 +516,10 @@ void LocationDialog::setPositionFromCoords(int )
 void LocationDialog::saveTimeZone()
 {
 	int index = ui->timeZoneNameComboBox->currentIndex();
+	QString tz = ui->timeZoneNameComboBox->itemData(index).toString();
+	StelApp::getInstance().getCore()->setCurrentTimeZone(tz);
 	if (index > -1 && !ui->addLocationToListPushButton->isEnabled())
-		StelApp::getInstance().getSettings()->setValue("localization/time_zone", ui->timeZoneNameComboBox->itemData(index).toString());
+		StelApp::getInstance().getSettings()->setValue("localization/time_zone", tz);
 }
 
 void LocationDialog::reportEdit()
@@ -612,7 +619,7 @@ void LocationDialog::updateTimeZoneControls(bool useCustomTimeZone)
 {
 	if (useCustomTimeZone)
 	{
-		ui->useCustomTimeZoneCheckBox->setChecked(useCustomTimeZone);
+		ui->useCustomTimeZoneCheckBox->setChecked(true);
 		saveTimeZone();
 	}
 	else
@@ -644,6 +651,8 @@ void LocationDialog::ipQueryLocation(bool state)
 		locMgr.locationFromIP(); // This just triggers asynchronous lookup.
 		ui->useAsDefaultLocationCheckBox->setChecked(!state);
 		ui->pushButtonReturnToDefault->setEnabled(!state);
+		ui->useCustomTimeZoneCheckBox->setChecked(!state);
+		updateTimeZoneControls(!state);
 		connectEditSignals();
 		ui->citySearchLineEdit->setFocus();
 	}
