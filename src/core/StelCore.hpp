@@ -276,6 +276,9 @@ public:
 
 	float getUTCOffset(const double JD) const;
 
+	QString getCurrentTimeZone() const;
+	void setCurrentTimeZone(const QString& tz);
+
 	const QSharedPointer<class Planet> getCurrentPlanet() const;
 
 	//! Unfortunately we also need this.
@@ -432,6 +435,14 @@ public slots:
 	//! It is still frequently used in the literature.
 	double getJDE() const;
 
+	//! Get solution of equation of time
+	//! Source: J. Meeus "Astronomical Algorithms" (2nd ed., with corrections as of August 10, 2009) p.183-187.
+	//! @param JDE JD in Dynamical Time (previously called Ephemeris Time)
+	//! @return time in minutes
+	double getSolutionEquationOfTime(const double JDE) const;
+
+	bool getUseDST() const;
+	void setUseDST(const bool b);
 
 	//! Set the current date in Modified Julian Day (UT).
 	//! MJD is simply JD-2400000.5, getting rid of large numbers and starting days at midnight.
@@ -729,12 +740,15 @@ private:
 	double timeSpeed;           // Positive : forward, Negative : Backward, 1 = 1sec/sec
 	//double JDay;              // Current time in Julian day. IN V0.12 TO V0.14, this was JD in TT, and all places where UT was required had to subtract getDeltaT() explicitly.
 	QPair<double,double> JD;    // From 0.14 on: JD.first=JD_UT, JD.second=DeltaT=TT-UT. To gain JD_TT, compute JDE=JD.first+JD.second or better just call getJDE()
-				// Use is best with calls getJD()/setJD() and getJDE()/setJDE() to explicitly state which flavour of JD you need.
+				    // Use is best with calls getJD()/setJD() and getJDE()/setJDE() to explicitly state which flavour of JD you need.
 	double presetSkyTime;
 	QTime initTodayTime;
 	QString startupTimeMode;
 	double milliSecondsOfLastJDUpdate;    // Time in seconds when the time rate or time last changed
 	double jdOfLastJDUpdate;         // JD when the time rate or time last changed
+
+	QString currentTimeZone;
+	bool flagUseDST;
 
 	// Variables for custom equation of Delta-T
 	Vec3f deltaTCustomEquationCoeff;

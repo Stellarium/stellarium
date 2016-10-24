@@ -33,9 +33,6 @@
 #include "EquationOfTime.hpp"
 #include "EquationOfTimeWindow.hpp"
 
-//#include "sidereal_time.h"
-#include "precession.h"
-
 #include <QFontMetrics>
 #include <QSettings>
 #include <QPixmap>
@@ -123,7 +120,7 @@ void EquationOfTime::draw(StelCore *core)
 	sPainter.setFont(font);
 
 	QString timeText;
-	double eqTime = getSolutionEquationOfTime(core->getJDE());
+	double eqTime = core->getSolutionEquationOfTime(core->getJDE());
 
 	if (getFlagInvertedValue())
 		eqTime *= -1;
@@ -213,44 +210,6 @@ void EquationOfTime::saveSettingsToConfig(void)
 	conf->setValue("font_size", getFontSize());
 
 	conf->endGroup();
-}
-
-double EquationOfTime::getSolutionEquationOfTime(const double JDE) const
-{
-	StelCore* core = StelApp::getInstance().getCore();
-
-	double tau = (JDE - 2451545.0)/365250.0;
-	double sunMeanLongitude = 280.4664567 + tau*(360007.6892779 + tau*(0.03032028 + tau*(1./49931. - tau*(1./15300. - tau/2000000.))));
-
-	// reduce the angle
-	sunMeanLongitude = std::fmod(sunMeanLongitude, 360.);
-	// force it to be the positive remainder, so that 0 <= angle < 360
-	sunMeanLongitude = std::fmod(sunMeanLongitude + 360., 360.);
-
-	Vec3d pos = GETSTELMODULE(StelObjectMgr)->searchByName("Sun")->getEquinoxEquatorialPos(core);
-	double ra, dec;
-	StelUtils::rectToSphe(&ra, &dec, pos);
-
-	// covert radians to degrees and reduce the angle
-	double alpha = std::fmod(ra*180./M_PI, 360.);
-	// force it to be the positive remainder, so that 0 <= angle < 360
-	alpha = std::fmod(alpha + 360., 360.);
-
-	double deltaPsi, deltaEps;
-	getNutationAngles(JDE, &deltaPsi, &deltaEps); // these are radians!
-	//double equation = 4*(sunMeanLongitude - 0.0057183 - alpha + get_nutation_longitude(JDE)*cos(get_mean_ecliptical_obliquity(JDE)));
-	double equation = 4*(sunMeanLongitude - 0.0057183 - alpha + deltaPsi*180./M_PI*cos(getPrecessionAngleVondrakEpsilon(JDE)));
-	// The equation of time is always smaller 20 minutes in absolute value
-	if (qAbs(equation)>20)
-	{
-		// If absolute value of the equation of time appears to be too large, add 24 hours (1440 minutes) to or subtract it from our result
-		if (equation>0.)
-			equation -= 1440.;
-		else
-			equation += 1440.;
-	}
-
-	return equation;
 }
 
 void EquationOfTime::updateMessageText()

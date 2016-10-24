@@ -641,7 +641,16 @@ void BottomStelBar::updateText(bool updatePos)
 			else
 				deltaTInfo = QString("%1s%2").arg(deltaT, 3, 'f', 3).arg(validRangeMarker);
 
-			datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n-dot @ -23.8946\"/cy%3%4]<br>%5</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QChar(0x00B2)).arg(sigmaInfo).arg(newDateAppx));
+			QString currTZ = core->getCurrentTimeZone();
+			if (currTZ=="system_default")
+				currTZ = QString("%1: %2").arg(q_("Time zone")).arg(q_("System default"));
+			else if (currTZ=="LMST")
+				currTZ = q_("Local Mean Solar Time");
+			else if (currTZ=="LTST")
+				currTZ = q_("Local True Solar Time");
+			else
+				currTZ = QString("%1: %2").arg(q_("Time zone")).arg(currTZ);
+			datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n-dot @ -23.8946\"/cy%3%4]<br>%5<br>%6</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QChar(0x00B2)).arg(sigmaInfo).arg(newDateAppx).arg(currTZ));
 		}
 		else
 			datetime->setToolTip(QString("%1").arg(newDateAppx));
