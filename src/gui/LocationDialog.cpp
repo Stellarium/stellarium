@@ -522,10 +522,9 @@ void LocationDialog::setPositionFromCoords(int )
 
 void LocationDialog::saveTimeZone()
 {
-	int index = ui->timeZoneNameComboBox->currentIndex();
-	QString tz = ui->timeZoneNameComboBox->itemData(index).toString();
+	QString tz = ui->timeZoneNameComboBox->itemData(ui->timeZoneNameComboBox->currentIndex()).toString();
 	StelApp::getInstance().getCore()->setCurrentTimeZone(tz);
-	if (index > -1 && !ui->addLocationToListPushButton->isEnabled())
+	if (ui->useCustomTimeZoneCheckBox->isChecked())
 		StelApp::getInstance().getSettings()->setValue("localization/time_zone", tz);
 }
 
