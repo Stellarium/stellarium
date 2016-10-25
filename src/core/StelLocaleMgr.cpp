@@ -281,7 +281,7 @@ QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
 			timeZone.append("+" + tz.toString("hh:mm"));
 
 		if (!timeZoneST.isEmpty())
-			timeZone = timeZoneST;
+			timeZone.append(" (" + timeZoneST + ")");
 
 		return timeZone;
 	}
