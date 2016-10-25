@@ -263,12 +263,27 @@ QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
 {
 	if (core->getCurrentLocation().planetName=="Earth")
 	{
+		QString timeZone = "UTC";
+		QString currTZ = core->getCurrentTimeZone();
+		QString timeZoneST = "";
+
+		if (JD<=2409907.5)
+			timeZoneST = "LMST";
+
+		if (currTZ.contains("LMST") || currTZ.contains("LTST"))
+			timeZoneST = currTZ;
+
 		float shift = core->getUTCOffset(JD);
 		QTime tz = QTime(0, 0, 0).addSecs(3600*qAbs(shift));
 		if(shift<0.0f)
-			return "UTC-" + tz.toString("hh:mm");
+			timeZone.append("-" + tz.toString("hh:mm"));
 		else
-			return "UTC+" + tz.toString("hh:mm");
+			timeZone.append("+" + tz.toString("hh:mm"));
+
+		if (!timeZoneST.isEmpty())
+			timeZone = timeZoneST;
+
+		return timeZone;
 	}
 	else
 		return QString();

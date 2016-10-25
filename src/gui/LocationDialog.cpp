@@ -640,9 +640,7 @@ void LocationDialog::updateTimeZoneControls(bool useCustomTimeZone)
 		StelApp::getInstance().getSettings()->remove("localization/time_zone");
 	}
 
-	ui->timeZoneNameComboBox->setVisible(useCustomTimeZone);
-	ui->timeZoneNameComboBox->setEnabled(useCustomTimeZone);
-	ui->timeZoneLabel->setVisible(useCustomTimeZone);
+	ui->timeZoneNameComboBox->setEnabled(useCustomTimeZone);	
 }
 
 // called when the user clicks on the IP Query button
