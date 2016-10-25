@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>512</width>
-    <height>548</height>
+    <height>563</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -148,7 +148,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="configurationStackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -495,6 +495,18 @@
              <string>Selected object information</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_2">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item row="0" column="0">
               <widget class="QRadioButton" name="allSelectedInfoRadio">
                <property name="toolTip">
@@ -766,16 +778,6 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="enableKeysNavigationCheckBox">
-               <property name="toolTip">
-                <string>Allow keyboard to pan and zoom</string>
-               </property>
-               <property name="text">
-                <string>Enable keyboard navigation</string>
-               </property>
-              </widget>
-             </item>
              <item row="1" column="0">
               <widget class="QCheckBox" name="enableMouseNavigationCheckBox">
                <property name="toolTip">
@@ -790,6 +792,16 @@
               <widget class="QPushButton" name="editShortcutsPushButton">
                <property name="text">
                 <string>Edit keyboard shortcuts...</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="enableKeysNavigationCheckBox">
+               <property name="toolTip">
+                <string>Allow keyboard to pan and zoom</string>
+               </property>
+               <property name="text">
+                <string>Enable keyboard navigation</string>
                </property>
               </widget>
              </item>
@@ -866,63 +878,6 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="2" column="0">
-              <layout class="QHBoxLayout" name="_4">
-               <item>
-                <widget class="QRadioButton" name="fixedTimeRadio">
-                 <property name="toolTip">
-                  <string>Use a specific date and time when Stellarium starts up</string>
-                 </property>
-                 <property name="text">
-                  <string>Other:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDateTimeEdit" name="fixedDateTimeEdit">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="date">
-                  <date>
-                   <year>1952</year>
-                   <month>5</month>
-                   <day>11</day>
-                  </date>
-                 </property>
-                 <property name="time">
-                  <time>
-                   <hour>0</hour>
-                   <minute>42</minute>
-                   <second>0</second>
-                  </time>
-                 </property>
-                 <property name="calendarPopup">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="2" column="1">
-              <widget class="QPushButton" name="fixedDateTimeCurrentButton">
-               <property name="toolTip">
-                <string>Use current local date and time</string>
-               </property>
-               <property name="text">
-                <string>use current</string>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="0">
               <widget class="QRadioButton" name="systemTimeRadio">
                <property name="toolTip">
@@ -990,6 +945,63 @@
                 </widget>
                </item>
               </layout>
+             </item>
+             <item row="2" column="0">
+              <layout class="QHBoxLayout" name="_4">
+               <item>
+                <widget class="QRadioButton" name="fixedTimeRadio">
+                 <property name="toolTip">
+                  <string>Use a specific date and time when Stellarium starts up</string>
+                 </property>
+                 <property name="text">
+                  <string>Other:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDateTimeEdit" name="fixedDateTimeEdit">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="date">
+                  <date>
+                   <year>1952</year>
+                   <month>5</month>
+                   <day>11</day>
+                  </date>
+                 </property>
+                 <property name="time">
+                  <time>
+                   <hour>0</hour>
+                   <minute>42</minute>
+                   <second>0</second>
+                  </time>
+                 </property>
+                 <property name="calendarPopup">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="2" column="1">
+              <widget class="QPushButton" name="fixedDateTimeCurrentButton">
+               <property name="toolTip">
+                <string>Use current local date and time</string>
+               </property>
+               <property name="text">
+                <string>use current</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -1139,6 +1151,18 @@
              <string>Planetarium options</string>
             </property>
             <layout class="QGridLayout" name="gridLayoutOptions">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item row="3" column="0">
               <widget class="QCheckBox" name="autoEnableAtmosphereCheckBox">
                <property name="toolTip">
@@ -1774,7 +1798,7 @@
   <customwidget>
    <class>BarFrame</class>
    <extends>QFrame</extends>
-   <header location="global">Dialog.hpp</header>
+   <header>Dialog.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
