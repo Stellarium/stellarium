@@ -148,7 +148,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="configurationStackedWidget">
         <property name="currentIndex">
-         <number>2</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -1002,6 +1002,56 @@
                 <string>use current</string>
                </property>
               </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_2">
+            <property name="toolTip">
+             <string>These settings control the way time and date are displayed in the bottom bar.</string>
+            </property>
+            <property name="title">
+             <string>Display formats of date and time</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayoutFmt">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QLabel" name="dateFormatsLabel">
+               <property name="text">
+                <string>Date:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="timeFormatsLabel">
+               <property name="text">
+                <string>Time:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QComboBox" name="dateFormatsComboBox"/>
+             </item>
+             <item row="0" column="3">
+              <widget class="QComboBox" name="timeFormatsComboBox"/>
              </item>
             </layout>
            </widget>
