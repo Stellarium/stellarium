@@ -113,7 +113,7 @@ void AstroCalcDialog::createDialogContent()
 	populateMajorPlanetList();
 	populateGroupCelestialBodyList();
 
-	double JD = core->getJD() + StelUtils::getGMTShiftFromQT(core->getJD())/24;
+	double JD = core->getJD() + core->getUTCOffset(core->getJD())/24;
 	ui->dateFromDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(JD));
 	ui->dateToDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(JD + 30.f));
 	ui->phenomenFromDateEdit->setDateTime(StelUtils::jdToQDateTime(JD));
@@ -181,8 +181,9 @@ void AstroCalcDialog::currentPlanetaryPositions()
 
 	initListPlanetaryPositions();
 
-	double JD = StelApp::getInstance().getCore()->getJD();
-	ui->positionsTimeLabel->setText(q_("Positions on %1").arg(StelUtils::jdToQDateTime(JD + StelUtils::getGMTShiftFromQT(JD)/24).toString("yyyy-MM-dd hh:mm")));
+	StelCore* core = StelApp::getInstance().getCore();
+	double JD = core->getJD();
+	ui->positionsTimeLabel->setText(q_("Positions on %1").arg(StelUtils::jdToQDateTime(JD + core->getUTCOffset(JD)/24).toString("yyyy-MM-dd hh:mm")));
 
 	foreach (const PlanetP& planet, allPlanets)
 	{
@@ -338,7 +339,7 @@ void AstroCalcDialog::generateEphemeris()
 	{
 		double currentJD = core->getJD(); // save current JD
 		double firstJD = StelUtils::qDateTimeToJd(ui->dateFromDateTimeEdit->dateTime());
-		firstJD = firstJD - StelUtils::getGMTShiftFromQT(firstJD)/24;
+		firstJD = firstJD - core->getUTCOffset(firstJD)/24;
 		int elements = (int)((StelUtils::qDateTimeToJd(ui->dateToDateTimeEdit->dateTime()) - firstJD)/currentStep);
 		EphemerisListJ2000.clear();
 		EphemerisListJ2000.reserve(elements);
@@ -351,11 +352,11 @@ void AstroCalcDialog::generateEphemeris()
 			core->update(0); // force update to get new coordinates			
 			Vec3d pos = obj->getJ2000EquatorialPos(core);
 			EphemerisListJ2000.append(pos);
-			EphemerisListDates.append(StelUtils::jdToQDateTime(JD + StelUtils::getGMTShiftFromQT(JD)/24).toString("yyyy-MM-dd"));
+			EphemerisListDates.append(StelUtils::jdToQDateTime(JD + core->getUTCOffset(JD)/24).toString("yyyy-MM-dd"));
 			StelUtils::rectToSphe(&ra,&dec,pos);
 			ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->ephemerisTreeWidget);
 			// local date and time
-			treeItem->setText(EphemerisDate, StelUtils::jdToQDateTime(JD + StelUtils::getGMTShiftFromQT(JD)/24).toString("yyyy-MM-dd hh:mm:ss"));
+			treeItem->setText(EphemerisDate, StelUtils::jdToQDateTime(JD + core->getUTCOffset(JD)/24).toString("yyyy-MM-dd hh:mm:ss"));
 			treeItem->setText(EphemerisJD, QString::number(JD, 'f', 5));
 			treeItem->setText(EphemerisRA, StelUtils::radToHmsStr(ra));
 			treeItem->setTextAlignment(EphemerisRA, Qt::AlignRight);
@@ -573,7 +574,7 @@ void AstroCalcDialog::selectCurrentPhenomen(const QModelIndex &modelIndex)
 	QString date = modelIndex.sibling(modelIndex.row(), PhenomenaDate).data().toString();
 	bool ok;
 	double JD  = StelUtils::getJulianDayFromISO8601String(date.left(10) + "T" + date.right(8), &ok);
-	JD -= StelUtils::getGMTShiftFromQT(JD)/24.;
+	JD -= core->getUTCOffset(JD)/24.;
 
 	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
 	{
@@ -712,8 +713,8 @@ void AstroCalcDialog::calculatePhenomena()
 		double currentJD = core->getJD(); // save current JD
 		double startJD = StelUtils::qDateTimeToJd(ui->phenomenFromDateEdit->dateTime());
 		double stopJD = StelUtils::qDateTimeToJd(ui->phenomenToDateEdit->dateTime());
-		startJD = startJD - StelUtils::getGMTShiftFromQT(startJD)/24;
-		stopJD = stopJD - StelUtils::getGMTShiftFromQT(stopJD)/24;
+		startJD = startJD - core->getUTCOffset(startJD)/24;
+		stopJD = stopJD - core->getUTCOffset(stopJD)/24;
 
 		if (obj2Type<9)
 		{
@@ -805,7 +806,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->phenomenaTreeWidget);
 		treeItem->setText(PhenomenaType, phenomenType);
 		// local date and time
-		treeItem->setText(PhenomenaDate, StelUtils::jdToQDateTime(it.key() + StelUtils::getGMTShiftFromQT(it.key())/24).toString("yyyy-MM-dd hh:mm:ss"));
+		treeItem->setText(PhenomenaDate, StelUtils::jdToQDateTime(it.key() + core->getUTCOffset(it.key())/24).toString("yyyy-MM-dd hh:mm:ss"));
 		treeItem->setText(PhenomenaObject1, object1->getNameI18n());
 		treeItem->setText(PhenomenaObject2, object2->getNameI18n());
 		treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation));
@@ -954,7 +955,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->phenomenaTreeWidget);
 		treeItem->setText(PhenomenaType, phenomenType);
 		// local date and time
-		treeItem->setText(PhenomenaDate, StelUtils::jdToQDateTime(it.key() + StelUtils::getGMTShiftFromQT(it.key())/24).toString("yyyy-MM-dd hh:mm:ss"));
+		treeItem->setText(PhenomenaDate, StelUtils::jdToQDateTime(it.key() + core->getUTCOffset(it.key())/24).toString("yyyy-MM-dd hh:mm:ss"));
 		treeItem->setText(PhenomenaObject1, object1->getNameI18n());
 		if (!object2->getNameI18n().isEmpty())
 			treeItem->setText(PhenomenaObject2, object2->getNameI18n());

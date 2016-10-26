@@ -55,7 +55,6 @@ flag_use_ext_framebuffer_object     = false
 sky_culture                         = western
 sky_locale                          = system
 app_locale                          = system
-time_zone                           = system_default
 time_display_format                 = system_default
 date_display_format                 = yyyymmdd
 
