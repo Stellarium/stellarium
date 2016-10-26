@@ -21,6 +21,7 @@
 #define _STELLOCALEMGR_HPP_
 
 #include "StelTranslator.hpp"
+#include "StelCore.hpp"
 
 //! @class StelLocaleMgr
 //! Manage i18n operations such as message translation and date/time localization.
@@ -101,11 +102,6 @@ public:
 	//! Get the format string which describes the current date format (Qt style).
 	QString getQtDateFormatStr(void) const;
 	
-	//! Set the time zone.
-	//! @param tZ the time zone string as parsed from the TZ environment 
-	//! varibale by the tzset function from libc.
-	void setCustomTimezone(QString tZ) { setCustomTzName(tZ); }
-
 	//! @enum STimeFormat
 	//! The time display format.
 	enum STimeFormat {
@@ -131,35 +127,7 @@ public:
 
 	//! Get a localized, formatted string representation of the time zone of a Julian date.
 	QString getPrintableTimeZoneLocal(double JD) const;
-	
-	//! @enum STzFormat
-	enum STzFormat
-	{
-		STzCustom,		//!< User-specified timezone.
-		STzGMTShift,		//!< GMT + offset.
-		STzSystemDefault	//!< System default.
-	};
-	
-	//! Get the current time shift at observator time zone with respect to GMT time.
-	void setGMTShift(int t)
-	{
-		GMTShift=t;
-	}
-	//! Get the current time shift in hours at observator time zone with respect to GMT time.
-	float getGMTShift(double JD = 0) const;
-	//! Set the timezone by a TZ-style string (see tzset in the libc manual).
-	void setCustomTzName(const QString& tzname);
-	//! Get the timezone name (a TZ-style string - see tzset in the libc manual).
-	QString getCustomTzName(void) const
-	{
-		return customTzName;
-	}
-	//! Get the current timezone format mode.
-	STzFormat getTzFormat(void) const
-	{
-		return timeZoneMode;
-	}
-	
+
 	//! Return the time in ISO 8601 format that is : %Y-%m-%dT%H:%M:%S
 	//! @param JD the time and date expressed as a Julian date value.
 	QString getISO8601TimeLocal(double JD) const;
@@ -180,15 +148,12 @@ public:
 private:
 	// The translator used for astronomical object naming
 	StelTranslator* skyTranslator;
+	StelCore* core;
 	
 	// Date and time variables
 	STimeFormat timeFormat;
 	SDateFormat dateFormat;
-	STzFormat timeZoneMode;		// Can be the system default or a user defined value
-	
-	QString customTzName;			// Something like "Europe/Paris"
-	float GMTShift;				// Time shift between GMT time and local time in hour. (positive for Est of GMT)
-	
+
 	// Convert the time format enum to its associated string and reverse
 	STimeFormat stringToSTimeFormat(const QString&) const;
 	QString sTimeFormatToString(STimeFormat) const;

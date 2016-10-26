@@ -175,7 +175,7 @@ QString StelMainScriptAPI::getDate(const QString& spec)
 	if (spec=="utc")
 		return StelUtils::julianDayToISO8601String(getJDay());
 	else
-		return StelUtils::julianDayToISO8601String(getJDay()+StelUtils::getGMTShiftFromQT(getJDay())/24);
+		return StelUtils::julianDayToISO8601String(getJDay()+StelApp::getInstance().getCore()->getUTCOffset(getJDay())/24);
 }
 
 QString StelMainScriptAPI::getDeltaT() const
