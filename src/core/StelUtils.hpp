@@ -265,9 +265,6 @@ namespace StelUtils
 	//! Convert a fraction of a Julian Day to a QTime
 	QTime jdFractionToQTime(const double jd);
 
-	//! Return number of hours offset from GMT, using Qt functions.
-	float getGMTShiftFromQT(const double jd);
-
 	//! Convert a QT QDateTime class to julian day.
 	//! @param dateTime the UTC QDateTime to convert
 	//! @result the matching decimal Julian Day
