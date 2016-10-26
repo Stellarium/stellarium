@@ -626,15 +626,17 @@ void BottomStelBar::updateText(bool updatePos)
 		newDateInfo = QString("JD %1").arg(jd, 0, 'f', 6);
 	}
 
-	QString currTZ = QString("%1: %2").arg(q_("Time zone")).arg(core->getCurrentTimeZone());
-	if (currTZ.contains("system_default"))
-		currTZ = QString("%1: %2").arg(q_("Time zone")).arg(q_("System default"));
-
 	QString planetName = core->getCurrentLocation().planetName;
-	if (currTZ.contains("LMST") || currTZ.contains("auto") || (planetName=="Earth" && jd<=2409907.5) || planetName!="Earth")
+	QString tzName = core->getCurrentTimeZone();
+	if (tzName.contains("system_default") || (tzName.isEmpty() && planetName=="Earth"))
+		tzName = q_("System default");
+
+	QString currTZ = QString("%1: %2").arg(q_("Time zone")).arg(tzName);
+
+	if (tzName.contains("LMST") || tzName.contains("auto") || (planetName=="Earth" && jd<=2409907.5) || planetName!="Earth")
 		currTZ = q_("Local Mean Solar Time");
 
-	if (currTZ.contains("LTST"))
+	if (tzName.contains("LTST"))
 		currTZ = q_("Local True Solar Time");
 
 	if (datetime->text()!=newDateInfo)
