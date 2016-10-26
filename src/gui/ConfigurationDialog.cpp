@@ -120,7 +120,11 @@ void ConfigurationDialog::retranslate()
 		//Plug-in information
 		populatePluginsList();
 
-		populateDeltaTAlgorithmsList();		
+		populateDeltaTAlgorithmsList();
+
+		populateDateFormatsList();
+
+		populateTimeFormatsList();
 	}
 }
 
@@ -234,9 +238,32 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->fixedDateTimeCurrentButton, SIGNAL(clicked()), this, SLOT(setFixedDateTimeToCurrent()));
 	connect(ui->editShortcutsPushButton, SIGNAL(clicked()), this, SLOT(showShortcutsWindow()));
 
+	StelLocaleMgr & localeManager = StelApp::getInstance().getLocaleMgr();
+	// Display formats of date
+	populateDateFormatsList();
+	int idx = ui->dateFormatsComboBox->findData(localeManager.getDateFormatStr(), Qt::UserRole, Qt::MatchCaseSensitive);
+	if (idx==-1)
+	{
+		// Use system_deafult as default
+		idx = ui->dateFormatsComboBox->findData(QVariant("system_deafult"), Qt::UserRole, Qt::MatchCaseSensitive);
+	}
+	ui->dateFormatsComboBox->setCurrentIndex(idx);
+	connect(ui->dateFormatsComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(setDateFormat()));
+
+	// Display formats of time
+	populateTimeFormatsList();
+	idx = ui->timeFormatsComboBox->findData(localeManager.getTimeFormatStr(), Qt::UserRole, Qt::MatchCaseSensitive);
+	if (idx==-1)
+	{
+		// Use system_deafult as default
+		idx = ui->timeFormatsComboBox->findData(QVariant("system_deafult"), Qt::UserRole, Qt::MatchCaseSensitive);
+	}
+	ui->timeFormatsComboBox->setCurrentIndex(idx);
+	connect(ui->timeFormatsComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(setTimeFormat()));
+
 	// Delta-T
 	populateDeltaTAlgorithmsList();	
-	int idx = ui->deltaTAlgorithmComboBox->findData(core->getCurrentDeltaTAlgorithmKey(), Qt::UserRole, Qt::MatchCaseSensitive);
+	idx = ui->deltaTAlgorithmComboBox->findData(core->getCurrentDeltaTAlgorithmKey(), Qt::UserRole, Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
 		// Use Espenak & Meeus (2006) as default
@@ -1401,4 +1428,75 @@ void ConfigurationDialog::showCustomDeltaTEquationDialog()
 		customDeltaTEquationDialog = new CustomDeltaTEquationDialog();
 
 	customDeltaTEquationDialog->setVisible(true);
+}
+
+void ConfigurationDialog::populateDateFormatsList()
+{
+	Q_ASSERT(ui->dateFormatsComboBox);
+
+	QComboBox* dfmts = ui->dateFormatsComboBox;
+
+	//Save the current selection to be restored later
+	dfmts->blockSignals(true);
+	int index = dfmts->currentIndex();
+	QVariant selectedDateFormat = dfmts->itemData(index);
+	dfmts->clear();
+	//For each format, display the localized name and store the key as user
+	//data. Unfortunately, there's no other way to do this than with a cycle.
+	dfmts->addItem(q_("System default"), "system_default");
+	dfmts->addItem(q_("yyyy-mm-dd (ISO 8601)"), "yyyymmdd");
+	dfmts->addItem(q_("dd-mm-yyyy"), "ddmmyyyy");
+	dfmts->addItem(q_("mm-dd-yyyy"), "mmddyyyy");
+
+	//Restore the selection
+	index = dfmts->findData(selectedDateFormat, Qt::UserRole, Qt::MatchCaseSensitive);
+	dfmts->setCurrentIndex(index);
+	dfmts->blockSignals(false);
+}
+
+void ConfigurationDialog::setDateFormat()
+{
+	QString selectedFormat = ui->dateFormatsComboBox->itemData(ui->dateFormatsComboBox->currentIndex()).toString();
+
+	StelLocaleMgr & localeManager = StelApp::getInstance().getLocaleMgr();
+	if (selectedFormat == localeManager.getDateFormatStr())
+		return;
+
+	localeManager.setDateFormatStr(selectedFormat);
+	StelApp::getInstance().getSettings()->setValue("localization/date_display_format", selectedFormat);
+}
+
+void ConfigurationDialog::populateTimeFormatsList()
+{
+	Q_ASSERT(ui->timeFormatsComboBox);
+
+	QComboBox* tfmts = ui->timeFormatsComboBox;
+
+	//Save the current selection to be restored later
+	tfmts->blockSignals(true);
+	int index = tfmts->currentIndex();
+	QVariant selectedTimeFormat = tfmts->itemData(index);
+	tfmts->clear();
+	//For each format, display the localized name and store the key as user
+	//data. Unfortunately, there's no other way to do this than with a cycle.
+	tfmts->addItem(q_("System default"), "system_default");
+	tfmts->addItem(q_("12-hour format"), "12h");
+	tfmts->addItem(q_("24-hour format"), "24h");
+
+	//Restore the selection
+	index = tfmts->findData(selectedTimeFormat, Qt::UserRole, Qt::MatchCaseSensitive);
+	tfmts->setCurrentIndex(index);
+	tfmts->blockSignals(false);
+}
+
+void ConfigurationDialog::setTimeFormat()
+{
+	QString selectedFormat = ui->timeFormatsComboBox->itemData(ui->timeFormatsComboBox->currentIndex()).toString();
+
+	StelLocaleMgr & localeManager = StelApp::getInstance().getLocaleMgr();
+	if (selectedFormat == localeManager.getTimeFormatStr())
+		return;
+
+	localeManager.setTimeFormatStr(selectedFormat);
+	StelApp::getInstance().getSettings()->setValue("localization/time_display_format", selectedFormat);
 }

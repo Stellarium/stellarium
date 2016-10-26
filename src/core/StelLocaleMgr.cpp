@@ -252,7 +252,7 @@ QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 		case STime24h:
 			return t.toString("hh:mm:ss");
 		case STime12h:
-			return t.toString("hh:mm:ss ap");
+			return t.toString("hh:mm:ss AP");
 		default:
 			qWarning() << "WARNING: unknown date format, fallback to system default";
 			return t.toString(Qt::LocaleDate);
