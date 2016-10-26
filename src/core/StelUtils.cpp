@@ -942,35 +942,6 @@ QTime jdFractionToQTime(const double jd)
 	return QTime::fromString(QString("%1.%2").arg(hours).arg(mins), "h.m");
 }
 
-// Use Qt's own sense of time and offset instead of platform specific code.
-float getGMTShiftFromQT(const double JD)
-{
-	int year, month, day, hour, minute, second;
-	getDateFromJulianDay(JD, &year, &month, &day);
-	getTimeFromJulianDay(JD, &hour, &minute, &second);
-	// as analogous to second statement in getJDFromDate, nkerr
-	if ( year <= 0 )
-	{
-		year = year - 1;
-	}
-	//getTime/DateFromJulianDay returns UTC time, not local time
-	QDateTime universal(QDate(year, month, day), QTime(hour, minute, second), Qt::UTC);
-	if (! universal.isValid())
-	{
-		//qWarning() << "JD " << QString("%1").arg(JD) << " out of bounds of QT help with GMT shift, using current datetime";
-		// Assumes the GMT shift was always the same before year -4710
-		universal = QDateTime(QDate(-4710, month, day), QTime(hour, minute, second), Qt::UTC);
-	}
-	QDateTime local = universal.toLocalTime();
-	//Both timezones should be interpreted as UTC because secsTo() converts both
-	//times to UTC if their zones have different daylight saving time rules.
-	local.setTimeSpec(Qt::UTC);
-
-	int shiftInSeconds = universal.secsTo(local);
-	float shiftInHours = shiftInSeconds / 3600.0f;
-	return shiftInHours;
-}
-
 // UTC !
 bool getJDFromDate(double* newjd, const int y, const int m, const int d, const int h, const int min, const int s)
 {
