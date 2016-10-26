@@ -124,10 +124,6 @@ Q_IMPORT_PLUGIN(TelescopeControlStelPluginInterface)
 Q_IMPORT_PLUGIN(SolarSystemEditorStelPluginInterface)
 #endif
 
-#ifdef USE_STATIC_PLUGIN_TIMEZONECONFIGURATION
-Q_IMPORT_PLUGIN(TimeZoneConfigurationStelPluginInterface)
-#endif
-
 #ifdef USE_STATIC_PLUGIN_METEORSHOWERS
 Q_IMPORT_PLUGIN(MeteorShowersStelPluginInterface)
 #endif

@@ -391,6 +391,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 				.arg(longitude<0 ? QString("%1W").arg(-longitude, 0, 'f', 6) : QString("%1E").arg(longitude, 0, 'f', 6))
 				.arg(ipTimeZone.isEmpty() ? "" : ipTimeZone);
 		location=StelLocation::createFromLine(locLine); // in lack of a regular constructor ;-)
+		core->setCurrentTimeZone(ipTimeZone.isEmpty() ? "LMST" : ipTimeZone);
 		core->moveObserverTo(location, 0.0f, 0.0f);
 		QSettings* conf = StelApp::getInstance().getSettings();
 		conf->setValue("init_location/last_location", QString("%1,%2").arg(latitude).arg(longitude));
@@ -436,3 +437,4 @@ LocationMap StelLocationMgr::pickLocationsInCountry(const QString country)
 	}
 	return results;
 }
+

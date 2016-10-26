@@ -27,7 +27,6 @@
 #include <QSettings>
 #include <QString>
 #include <QTextStream>
-
 #include <QFile>
 
 #include <ctime>
@@ -37,9 +36,7 @@ QMap<QString, QString> StelLocaleMgr::countryCodeToStringMap;
 StelLocaleMgr::StelLocaleMgr()
 	: skyTranslator(NULL)
 	, timeFormat()
-	, dateFormat()
-	, timeZoneMode()
-	, GMTShift(0)
+	, dateFormat()	
 {
 	// Load from file
 	QString path = StelFileMgr::findFile("data/countryCodes.dat");
@@ -57,6 +54,8 @@ StelLocaleMgr::StelLocaleMgr()
 		in >> countryCodeToStringMap;
 		file.close();
 	}
+
+	core = StelApp::getInstance().getCore();
 }
 
 
@@ -119,33 +118,6 @@ void StelLocaleMgr::init()
 
 	timeFormat = stringToSTimeFormat(conf->value("localization/time_display_format", "system_default").toString());
 	dateFormat = stringToSDateFormat(conf->value("localization/date_display_format", "system_default").toString());
-	// time_zone used to be in init_location section of config,
-	// so use that as fallback when reading config - Rob
-	QString tzstr = conf->value("localization/time_zone", conf->value("init_location/time_zone", "system_default").toString()).toString();
-	if (tzstr == "system_default")
-	{
-		timeZoneMode = STzSystemDefault;
-		// Set the program global intern timezones variables from the system locale
-		#ifdef _MSC_BUILD
-		_tzset();
-		#else
-		tzset();
-		#endif
-	}
-	else
-	{
-		if (tzstr == "gmt+x") // TODO : handle GMT+X timezones form
-		{
-			timeZoneMode = STzGMTShift;
-			// GMTShift = x;
-		}
-		else
-		{
-			// We have a custom time zone name
-			timeZoneMode = STzCustom;
-			setCustomTzName(tzstr);
-		}
-	}	
 }
 
 /*************************************************************************
@@ -214,16 +186,7 @@ const StelTranslator &StelLocaleMgr::getAppStelTranslator() const
 // Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S
 QString StelLocaleMgr::getISO8601TimeLocal(double JD) const
 {
-	double shift = 0.0;
-	if (timeZoneMode == STzGMTShift)
-	{
-		shift = GMTShift;
-	}
-	else
-	{
-		shift = StelUtils::getGMTShiftFromQT(JD)*0.041666666666;
-	}
-	return StelUtils::julianDayToISO8601String(JD + shift);
+	return StelUtils::julianDayToISO8601String(JD + core->getUTCOffset(JD)*0.041666666666);
 }
 
 //! get the six ints from an ISO8601 date time, understood to be local time, make a jdate out
@@ -237,11 +200,7 @@ double StelLocaleMgr::getJdFromISO8601TimeLocal(const QString& t, bool* ok) cons
 		return 0.0;
 	}
 	
-	// modified by shift
-	if (timeZoneMode == STzGMTShift)
-		jd -= GMTShift;
-	else
-		jd -= StelUtils::getGMTShiftFromQT(jd)*0.041666666666;
+	jd -= core->getUTCOffset(jd)*0.041666666666;
 	return jd;
 }
 
@@ -250,15 +209,7 @@ double StelLocaleMgr::getJdFromISO8601TimeLocal(const QString& t, bool* ok) cons
 QString StelLocaleMgr::getPrintableDateLocal(double JD) const
 {
 	int year, month, day, dayOfWeek;
-	double shift = 0.0;
-	if (timeZoneMode == STzGMTShift)
-	{
-		shift = GMTShift;
-	}
-	else
-	{
-		shift = StelUtils::getGMTShiftFromQT(JD)*0.041666666666;
-	}
+	double shift = core->getUTCOffset(JD)*0.041666666666;
 	StelUtils::getDateFromJulianDay(JD+shift, &year, &month, &day);
 	dayOfWeek = (int)floor(fmod(JD, 7));
 	QString str;
@@ -288,15 +239,8 @@ QString StelLocaleMgr::getPrintableDateLocal(double JD) const
 QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 {
 	int hour, minute, second;
-	double shift = 0.0;
-	if (timeZoneMode == STzGMTShift)
-	{
-		shift = GMTShift;
-	}
-	else
-	{
-		shift = StelUtils::getGMTShiftFromQT(JD)*0.041666666666;
-	}
+	double shift = core->getUTCOffset(JD)*0.041666666666;
+
 	StelUtils::getTimeFromJulianDay(JD+shift, &hour, &minute, &second);
 
 	QTime t(hour, minute, second);
@@ -317,12 +261,32 @@ QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 
 QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
 {
-	double shift = StelUtils::getGMTShiftFromQT(JD);
-	QTime tz = QTime(0, 0, 0).addSecs(3600*qAbs(shift));
-	if(shift<0.0f)
-		return "UTC-" + tz.toString("hh:mm");
+	if (core->getCurrentLocation().planetName=="Earth")
+	{
+		QString timeZone = "UTC";
+		QString currTZ = core->getCurrentTimeZone();
+		QString timeZoneST = "";
+
+		if (JD<=2409907.5 || currTZ.contains("auto"))
+			timeZoneST = "LMST";
+
+		if (currTZ.contains("LMST") || currTZ.contains("LTST"))
+			timeZoneST = currTZ;
+
+		float shift = core->getUTCOffset(JD);
+		QTime tz = QTime(0, 0, 0).addSecs(3600*qAbs(shift));
+		if(shift<0.0f)
+			timeZone.append("-" + tz.toString("hh:mm"));
+		else
+			timeZone.append("+" + tz.toString("hh:mm"));
+
+		if (!timeZoneST.isEmpty())
+			timeZone.append(" (" + timeZoneST + ")");
+
+		return timeZone;
+	}
 	else
-		return "UTC+" + tz.toString("hh:mm");
+		return QString();
 }
 
 // Convert the time format enum to its associated string and reverse
@@ -385,30 +349,6 @@ QString StelLocaleMgr::getQtDateFormatStr() const
 	return dfmt;
 }
 
-void StelLocaleMgr::setCustomTzName(const QString& tzname)
-{
-	customTzName = tzname;
-	timeZoneMode = STzCustom;
-
-	if( customTzName != "")
-	{
-		// set the TZ environement variable and update c locale stuff
-		#ifdef _MSC_BUILD
-		_putenv(_strdup(qPrintable("TZ=" + customTzName)));
-		_tzset();
-		#else
-		putenv(strdup(qPrintable("TZ=" + customTzName)));
-		tzset();
-		#endif
-    }
-}
-
-float StelLocaleMgr::getGMTShift(double JD) const
-{
-	if (timeZoneMode == STzGMTShift) return GMTShift;
-	else return StelUtils::getGMTShiftFromQT(JD);
-}
-
 // Convert a 2 letter country code to string
 QString StelLocaleMgr::countryCodeToString(const QString& countryCode)
 {
@@ -425,3 +365,4 @@ QStringList StelLocaleMgr::getAllCountryNames()
 	res.sort();
 	return res;
 }
+

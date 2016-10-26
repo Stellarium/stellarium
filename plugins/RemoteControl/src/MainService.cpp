@@ -163,7 +163,7 @@ void MainService::getImpl(const QByteArray& operation, const APIParameters &para
 			double jday = core->getJD();
 			double deltaT = core->getDeltaT() * StelCore::JD_SECOND;
 
-			double gmtShift = localeMgr->getGMTShift(jday) / 24.0;
+			double gmtShift = core->getUTCOffset(jday) / 24.0;
 
 			QString utcIso = StelUtils::julianDayToISO8601String(jday,true).append('Z');
 			QString localIso = StelUtils::julianDayToISO8601String(jday+gmtShift,true);
