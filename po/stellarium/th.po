@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-21 17:56+0700\n"
+"POT-Creation-Date: 2016-10-26 20:38+0700\n"
 "PO-Revision-Date: 2015-08-10 03:01+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-10-22 05:08+0000\n"
+"X-Launchpad-Export-Date: 2016-10-27 05:45+0000\n"
 "X-Generator: Launchpad (build 18246)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -51,8 +51,8 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:1214 src/core/modules/LandscapeMgr.cpp:414
 #: src/core/modules/NebulaMgr.cpp:364 src/core/modules/NebulaMgr.cpp:365
 #: src/core/modules/SolarSystem.cpp:203 src/core/modules/MilkyWay.cpp:74
-#: src/core/modules/ZodiacalLight.cpp:80 src/core/StelApp.cpp:522
-#: src/core/StelCore.cpp:224 src/core/StelSkyLayerMgr.cpp:88
+#: src/core/modules/ZodiacalLight.cpp:80 src/core/StelApp.cpp:518
+#: src/core/StelCore.cpp:229 src/core/StelSkyLayerMgr.cpp:88
 #: src/StelMainView.cpp:575
 msgid "Display Options"
 msgstr "ตัวเลือกการแสดงผล"
@@ -76,7 +76,7 @@ msgstr "ชื่อกลุ่มดาว"
 msgid "Constellation boundaries"
 msgstr "ขอบเขตของกลุ่มดาว"
 
-#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1267
+#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1311
 msgid "Select single constellation"
 msgstr "เลือกกลุ่มดาวหนึ่ง"
 
@@ -975,7 +975,7 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "ความยาวของหางแก๊ส (โดยประมาณ): %1 ล้าน กม."
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:204 src/gui/AstroCalcDialog.cpp:522
+#: src/core/modules/SolarSystem.cpp:204 src/gui/AstroCalcDialog.cpp:523
 #: src/translations.h:66
 msgid "Planets"
 msgstr "ดาวเคราะห์"
@@ -1086,7 +1086,7 @@ msgid "Position angle"
 msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:285 src/core/modules/StarWrapper.cpp:287
-#: src/gui/AstroCalcDialog.cpp:551
+#: src/gui/AstroCalcDialog.cpp:552
 msgid "Separation"
 msgstr ""
 
@@ -1098,237 +1098,237 @@ msgstr "ทางช้างเผือก"
 msgid "Zodiacal Light"
 msgstr "แสงจักรราศี"
 
-#: src/core/StelApp.cpp:522
+#: src/core/StelApp.cpp:518
 msgid "Night mode"
 msgstr "โหมดกลางคืน"
 
-#: src/core/StelCore.cpp:222 src/gui/StelGui.cpp:199
-#: src/gui/AstroCalcDialog.cpp:274 src/gui/AstroCalcDialog.cpp:548
+#: src/core/StelCore.cpp:227 src/gui/StelGui.cpp:199
+#: src/gui/AstroCalcDialog.cpp:275 src/gui/AstroCalcDialog.cpp:549
 #: src/gui/BookmarksDialog.cpp:102 src/ui_dateTimeDialogGui.h:376
 #: src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:173
 msgid "Date and Time"
 msgstr "วันที่และเวลา"
 
-#: src/core/StelCore.cpp:223 src/core/StelMovementMgr.cpp:154
+#: src/core/StelCore.cpp:228 src/core/StelMovementMgr.cpp:154
 msgid "Movement and Selection"
 msgstr "การเคลื่อนไหวและการเลือก"
 
-#: src/core/StelCore.cpp:226
+#: src/core/StelCore.cpp:231
 msgid "Increase time speed"
 msgstr "เวลาเดินหน้า"
 
-#: src/core/StelCore.cpp:227
+#: src/core/StelCore.cpp:232
 msgid "Decrease time speed"
 msgstr "เวลาถอยหลัง"
 
-#: src/core/StelCore.cpp:228
+#: src/core/StelCore.cpp:233
 msgid "Increase time speed (a little)"
 msgstr "เวลาเดินหน้า (เล็กน้อย)"
 
-#: src/core/StelCore.cpp:229
+#: src/core/StelCore.cpp:234
 msgid "Decrease time speed (a little)"
 msgstr "เวลาถอยหลัง (เล็กน้อย)"
 
-#: src/core/StelCore.cpp:230
+#: src/core/StelCore.cpp:235
 msgid "Set normal time rate"
 msgstr "ปรับเวลาเดินตามปกติ"
 
-#: src/core/StelCore.cpp:231
+#: src/core/StelCore.cpp:236
 msgid "Set time rate to zero"
 msgstr "ตั้งอัตราเวลาไปที่ศูนย์"
 
-#: src/core/StelCore.cpp:232
+#: src/core/StelCore.cpp:237
 msgid "Set reverse time direction"
 msgstr ""
 
-#: src/core/StelCore.cpp:233
+#: src/core/StelCore.cpp:238
 msgid "Set time to now"
 msgstr "กลับสู่เวลาปัจจุบัน"
 
-#: src/core/StelCore.cpp:234
+#: src/core/StelCore.cpp:239
 msgid "Add 1 solar minute"
 msgstr ""
 
-#: src/core/StelCore.cpp:235
+#: src/core/StelCore.cpp:240
 msgid "Add 1 solar hour"
 msgstr "เพิ่ม ๑ ชั่วโมงสุริยะ"
 
-#: src/core/StelCore.cpp:236
+#: src/core/StelCore.cpp:241
 msgid "Add 1 solar day"
 msgstr "เพิ่ม ๑ วันสุริยะ"
 
-#: src/core/StelCore.cpp:237
+#: src/core/StelCore.cpp:242
 msgid "Add 7 solar days"
 msgstr "เพิ่ม 7 วันสุริยคติ"
 
-#: src/core/StelCore.cpp:238
+#: src/core/StelCore.cpp:243
 msgid "Subtract 1 solar minute"
 msgstr ""
 
-#: src/core/StelCore.cpp:239
+#: src/core/StelCore.cpp:244
 msgid "Subtract 1 solar hour"
 msgstr "ลบ ๑ ชั่วโมงสุริยะ"
 
-#: src/core/StelCore.cpp:240
+#: src/core/StelCore.cpp:245
 msgid "Subtract 1 solar day"
 msgstr "ลบ ๑ วันสุริยะ"
 
-#: src/core/StelCore.cpp:241
+#: src/core/StelCore.cpp:246
 msgid "Subtract 7 solar days"
 msgstr ""
 
-#: src/core/StelCore.cpp:242
+#: src/core/StelCore.cpp:247
 msgid "Add 1 sidereal day"
 msgstr "เพิ่ม ๑ วันดาราคติ"
 
-#: src/core/StelCore.cpp:243
+#: src/core/StelCore.cpp:248
 msgid "Add 1 sidereal year"
 msgstr "เพิ่ม 1 ปีดาราคติ"
 
-#: src/core/StelCore.cpp:244
+#: src/core/StelCore.cpp:249
 msgid "Add 100 sidereal years"
 msgstr ""
 
-#: src/core/StelCore.cpp:245
+#: src/core/StelCore.cpp:250
 msgid "Add 1 synodic month"
 msgstr "เพิ่ม 1 เดือนดิถี"
 
-#: src/core/StelCore.cpp:246
+#: src/core/StelCore.cpp:251
 msgid "Add 1 draconic month"
 msgstr "เพิ่ม 1 เดือนราหู"
 
-#: src/core/StelCore.cpp:247
+#: src/core/StelCore.cpp:252
 msgid "Add 1 draconic year"
 msgstr "เพิ่ม 1 ปีราหู"
 
-#: src/core/StelCore.cpp:248
+#: src/core/StelCore.cpp:253
 msgid "Add 1 anomalistic month"
 msgstr "เพิ่ม 1 เดือนจุดใกล้"
 
-#: src/core/StelCore.cpp:249
+#: src/core/StelCore.cpp:254
 msgid "Add 1 anomalistic year"
 msgstr ""
 
-#: src/core/StelCore.cpp:250
+#: src/core/StelCore.cpp:255
 msgid "Add 100 anomalistic years"
 msgstr ""
 
-#: src/core/StelCore.cpp:251
+#: src/core/StelCore.cpp:256
 msgid "Add 1 mean tropical month"
 msgstr "เพิ่ม 1 เดือนฤดูกาลเฉลี่ย"
 
-#: src/core/StelCore.cpp:252
+#: src/core/StelCore.cpp:257
 msgid "Add 1 mean tropical year"
 msgstr "เพิ่ม 1 ปีฤดูกาลเฉลี่ย"
 
-#: src/core/StelCore.cpp:253
+#: src/core/StelCore.cpp:258
 msgid "Add 100 mean tropical years"
 msgstr ""
 
-#: src/core/StelCore.cpp:254
+#: src/core/StelCore.cpp:259
 msgid "Add 1 tropical year"
 msgstr ""
 
-#: src/core/StelCore.cpp:255
+#: src/core/StelCore.cpp:260
 msgid "Add 1 Julian year"
 msgstr ""
 
-#: src/core/StelCore.cpp:256
+#: src/core/StelCore.cpp:261
 msgid "Add 1 Julian century"
 msgstr ""
 
-#: src/core/StelCore.cpp:257
+#: src/core/StelCore.cpp:262
 msgid "Add 1 Gaussian year"
 msgstr ""
 
-#: src/core/StelCore.cpp:258
+#: src/core/StelCore.cpp:263
 msgid "Subtract 1 sidereal day"
 msgstr "ลบ ๑ วันดาราคติ"
 
-#: src/core/StelCore.cpp:259
+#: src/core/StelCore.cpp:264
 msgid "Subtract 1 sidereal year"
 msgstr "ลด 1 ปีดาราคติ"
 
-#: src/core/StelCore.cpp:260
+#: src/core/StelCore.cpp:265
 msgid "Subtract 100 sidereal years"
 msgstr ""
 
-#: src/core/StelCore.cpp:261
+#: src/core/StelCore.cpp:266
 msgid "Subtract 1 synodic month"
 msgstr "ลบ 1 เดือนดิถี"
 
-#: src/core/StelCore.cpp:262
+#: src/core/StelCore.cpp:267
 msgid "Subtract 1 draconic month"
 msgstr "ลบ 1 เดือนราหู"
 
-#: src/core/StelCore.cpp:263
+#: src/core/StelCore.cpp:268
 msgid "Subtract 1 draconic year"
 msgstr "ลบ 1 เดือนราหู"
 
-#: src/core/StelCore.cpp:264
+#: src/core/StelCore.cpp:269
 msgid "Subtract 1 anomalistic month"
 msgstr "ลบ 1 เดือนจุดใกล้"
 
-#: src/core/StelCore.cpp:265
+#: src/core/StelCore.cpp:270
 msgid "Subtract 1 anomalistic year"
 msgstr ""
 
-#: src/core/StelCore.cpp:266
+#: src/core/StelCore.cpp:271
 msgid "Subtract 100 anomalistic years"
 msgstr ""
 
-#: src/core/StelCore.cpp:267
+#: src/core/StelCore.cpp:272
 msgid "Subtract 1 mean tropical month"
 msgstr "ลบ 1 เดือนฤดูกาลเฉลี่ย"
 
-#: src/core/StelCore.cpp:268
+#: src/core/StelCore.cpp:273
 msgid "Subtract 1 mean tropical year"
 msgstr "ลบ 1 ปีฤดูกาลเฉลี่ย"
 
-#: src/core/StelCore.cpp:269
+#: src/core/StelCore.cpp:274
 msgid "Subtract 100 mean tropical years"
 msgstr ""
 
-#: src/core/StelCore.cpp:270
+#: src/core/StelCore.cpp:275
 msgid "Subtract 1 tropical year"
 msgstr ""
 
-#: src/core/StelCore.cpp:271
+#: src/core/StelCore.cpp:276
 msgid "Subtract 1 Julian year"
 msgstr ""
 
-#: src/core/StelCore.cpp:272
+#: src/core/StelCore.cpp:277
 msgid "Subtract 1 Julian century"
 msgstr ""
 
-#: src/core/StelCore.cpp:273
+#: src/core/StelCore.cpp:278
 msgid "Subtract 1 Gaussian year"
 msgstr ""
 
-#: src/core/StelCore.cpp:275
+#: src/core/StelCore.cpp:280
 msgid "Set home planet to selected planet"
 msgstr "กำหนดดาวเคราะห์ที่เลือกให้เป็นดาวเคราะห์บ้าน"
 
-#: src/core/StelCore.cpp:276
+#: src/core/StelCore.cpp:281
 msgid "Go to home"
 msgstr "ไปที่ตำแหน่งเริ่มต้น"
 
-#: src/core/StelCore.cpp:278
+#: src/core/StelCore.cpp:283
 msgid "Flip scene horizontally"
 msgstr "กลับภาพในแนวนอน"
 
-#: src/core/StelCore.cpp:279
+#: src/core/StelCore.cpp:284
 msgid "Flip scene vertically"
 msgstr "กลับภาพในแนวตั้ง"
 
-#: src/core/StelCore.cpp:1819
+#: src/core/StelCore.cpp:1933
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "การตรวจแก้ถูกปิดการใช้งาน "
 "ใช้ตัวเลือกนี้ก็ต่อเมื่อคุณทราบดีว่ากำลังทำอะไรอยู่!"
 
-#: src/core/StelCore.cpp:1822
+#: src/core/StelCore.cpp:1936
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1339,7 +1339,7 @@ msgstr ""
 "<em>Einstein's Theory of Relativity Confirmed by Ancient Solar Eclipses</em> "
 "(%1) สำหรับข้อมูลเพิ่มเติม ให้ดู %2ที่นี่%3"
 
-#: src/core/StelCore.cpp:1825
+#: src/core/StelCore.cpp:1939
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1348,7 +1348,7 @@ msgstr ""
 "สมการเอมพิริคัลนี้เผยแพร่โดย G. M. Clemence ในบทความ <em>On the system of "
 "astronomical constants</em> (%1)"
 
-#: src/core/StelCore.cpp:1828
+#: src/core/StelCore.cpp:1942
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1361,7 +1361,7 @@ msgstr ""
 "Formulae for Calculators</em> และถูกนำมาใช้ในโปรแกรมคอมพิวเตอร์ SunTracker "
 "Pro"
 
-#: src/core/StelCore.cpp:1832
+#: src/core/StelCore.cpp:1946
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1371,7 +1371,7 @@ msgstr ""
 "<em>Astronomical Ephemeris</em> และ <em>Canon of Solar Eclipses</em> โดย "
 "Mucke & Meeus (ค.ศ. 1983)"
 
-#: src/core/StelCore.cpp:1836
+#: src/core/StelCore.cpp:1950
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1383,7 +1383,7 @@ msgstr ""
 "ความสัมพันธ์เดียวกันยังนำไปดัดแปลงใช้ในตารางการร่วมแนว (syzygy) ของ "
 "Goldstine (ค.ศ. 1973)"
 
-#: src/core/StelCore.cpp:1840
+#: src/core/StelCore.cpp:1954
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1394,7 +1394,7 @@ msgstr ""
 "accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)"
 
-#: src/core/StelCore.cpp:1843
+#: src/core/StelCore.cpp:1957
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1403,7 +1403,7 @@ msgstr ""
 "สมการนี้แผยแพร่โดย F. R. Stephenson ในบทความ <em>Pre-Telescopic Astronomical "
 "Observations</em> (%1)"
 
-#: src/core/StelCore.cpp:1846
+#: src/core/StelCore.cpp:1960
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1416,7 +1416,7 @@ msgstr ""
 "for the correction delta T E.T.-U.T. in the period 1800-1975</em> (%1) "
 "จากข้อมูลของ Brouwer (1952)"
 
-#: src/core/StelCore.cpp:1849
+#: src/core/StelCore.cpp:1963
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1425,7 +1425,7 @@ msgstr ""
 "สูตรนี้ใช้ใน <em>Planetary Programs and Tables from -4000 to +2800</em> "
 "(ค.ศ. 1986) โดย P. Bretagnon & L. Simon และในโปรแกรม RedShift"
 
-#: src/core/StelCore.cpp:1852
+#: src/core/StelCore.cpp:1966
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1435,11 +1435,11 @@ msgstr ""
 "สูตรนี้เผยแพร่โดย F. R. Stephenson และ L. V. Morrison ในบทความ <em>Long-term "
 "changes in the rotation of the earth - 700 B.C. to A.D. 1980</em> (%1)"
 
-#: src/core/StelCore.cpp:1855
+#: src/core/StelCore.cpp:1969
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "สูตรนี้ใช้ในโปรแกรม Guide 7"
 
-#: src/core/StelCore.cpp:1858
+#: src/core/StelCore.cpp:1972
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -1449,7 +1449,7 @@ msgstr ""
 "2035</em> (ค.ศ. 1987) และ <em>Fifty Year Canon of Lunar Eclipses: 1986-"
 "2035</em> (ค.ศ. 1989)"
 
-#: src/core/StelCore.cpp:1861
+#: src/core/StelCore.cpp:1975
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -1458,7 +1458,7 @@ msgstr ""
 "สูตรนี้ใช้โดย K.M. Borkowski (%1) จากการวิเคราะห์บันทึกสุริยุปราคา 31 ครั้ง "
 "ระหว่าง 2137 ปี ก่อนคริสต์ศักราช ถึง ค.ศ. 1715"
 
-#: src/core/StelCore.cpp:1864
+#: src/core/StelCore.cpp:1978
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1470,7 +1470,7 @@ msgstr ""
 "<em>Empirical Transformations from U.T. to E.T. for the Period 1800-"
 "1988</em> (%1) จากข้อมูลของ Stephenson & Morrison (1984)"
 
-#: src/core/StelCore.cpp:1867
+#: src/core/StelCore.cpp:1981
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -1480,7 +1480,7 @@ msgstr ""
 "ในทฤษฎีการเคลื่อนที่ของดวงจันทร์ ELP 2000-85 รุ่นย่อ และใน <em>Lunar Tables "
 "and Programs from 4000 B.C. to A.D. 8000</em> (ค.ศ. 1991)"
 
-#: src/core/StelCore.cpp:1870
+#: src/core/StelCore.cpp:1984
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1490,7 +1490,7 @@ msgstr ""
 "สูตรนี้เผยแพร่โดย F. R. Stephenson และ L. V. Morrison ในบทความ <em>Long-Term "
 "Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> (%1)"
 
-#: src/core/StelCore.cpp:1873
+#: src/core/StelCore.cpp:1987
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1499,14 +1499,14 @@ msgstr ""
 "F. R. Stephenson เผยแพร่สูตรนี้ในหนังสือ <em>Historical Eclipses and Earth's "
 "Rotation</em> (%1)"
 
-#: src/core/StelCore.cpp:1876
+#: src/core/StelCore.cpp:1990
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:1879
+#: src/core/StelCore.cpp:1993
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1515,7 +1515,7 @@ msgstr ""
 "JPL Solar System Dynamics Group ของ NASA Jet Propulsion Laboratory "
 "ใช้สูตรนี้บนเว็บไซต์ %1JPL Horizons%2"
 
-#: src/core/StelCore.cpp:1882
+#: src/core/StelCore.cpp:1996
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1524,7 +1524,7 @@ msgstr ""
 "สมการพหุนามที่เผยแพร่โดย J. Meeus และ L. Simons ในบทความ <em>Polynomial "
 "approximations to Delta T, 1620-2000 AD</em> (%1)"
 
-#: src/core/StelCore.cpp:1885
+#: src/core/StelCore.cpp:1999
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1534,7 +1534,7 @@ msgstr ""
 "4 ของ O. Montenbruck และ T. Pfleger ใช้สมการพหุนามกำลัง 3 "
 "ที่ทำให้เข้ากับข้อมูลในอดีตเมื่อไม่นานมานี้"
 
-#: src/core/StelCore.cpp:1888
+#: src/core/StelCore.cpp:2002
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1545,7 +1545,7 @@ msgstr ""
 "Calculations</em> (3rd ed. 2007) และ <em>Calendrical Tabulations</em> (2002) "
 "มีรากฐานจาก <em>Astronomical Algorithms</em> (1991) ของ Jean Meeus"
 
-#: src/core/StelCore.cpp:1891
+#: src/core/StelCore.cpp:2005
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1556,7 +1556,7 @@ msgstr ""
 "<em>Historical values of the Earth's clock error %1T and the calculation of "
 "eclipses</em> (%2) และบทเพิ่มเติมใน (%3)"
 
-#: src/core/StelCore.cpp:1894
+#: src/core/StelCore.cpp:2008
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1565,7 +1565,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:1897 src/core/StelCore.cpp:1900
+#: src/core/StelCore.cpp:2011 src/core/StelCore.cpp:2014
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1580,15 +1580,15 @@ msgstr ""
 "Eclipses: -1900 to +3000</em> (ค.ศ. 2006) สูตรนี้ยังนำไปใช้ในโปรแกรม SOLEX "
 "ซึ่งเป็นโปรแกรมคำนวณอิเฟเมอริสของดวงอาทิตย์ ดวงจันทร์ และดาวเคราะห์ด้วย"
 
-#: src/core/StelCore.cpp:1897
+#: src/core/StelCore.cpp:2011
 msgid "Used by default."
 msgstr "ถูกใช้โดยปริยาย"
 
-#: src/core/StelCore.cpp:1900
+#: src/core/StelCore.cpp:2014
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr ""
 
-#: src/core/StelCore.cpp:1903
+#: src/core/StelCore.cpp:2017
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1599,7 +1599,7 @@ msgstr ""
 "1984) เผยแพร่ในบทความ <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)"
 
-#: src/core/StelCore.cpp:1906
+#: src/core/StelCore.cpp:2020
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1610,7 +1610,7 @@ msgstr ""
 "และ Simons (ค.ศ. 2000) เผยแพร่ในบทความ <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em> (%1) และปรับปรุงโดย Sana Islam ใน ค.ศ. 2013"
 
-#: src/core/StelCore.cpp:1909
+#: src/core/StelCore.cpp:2023
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1621,7 +1621,7 @@ msgstr ""
 "Sultana และ Faheem Zaidi ตีพิมพ์ใน <em>Delta T: Polynomial Approximation of "
 "Time Period 1620-2013</em> (%1)"
 
-#: src/core/StelCore.cpp:1912
+#: src/core/StelCore.cpp:2026
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1629,15 +1629,15 @@ msgid ""
 msgstr ""
 "นี่คือสูตรกำลังสองสำหรับการคำนวณ %1T โดยมีสัมประสิทธ์ตามที่ผู้ใช้กำหนด"
 
-#: src/core/StelCore.cpp:1915 src/core/SimbadSearcher.cpp:156
+#: src/core/StelCore.cpp:2029 src/core/SimbadSearcher.cpp:156
 msgid "Error"
 msgstr "เกิดข้อผิดพลาด"
 
-#: src/core/StelCore.cpp:1965
+#: src/core/StelCore.cpp:2079
 msgid "with meaningless values outside this range"
 msgstr "ไม่มีความหมายเมื่ออยู่นอกช่วงเวลานี้"
 
-#: src/core/StelCore.cpp:1991
+#: src/core/StelCore.cpp:2105
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -1645,23 +1645,23 @@ msgstr ""
 "ด้วยค่าผิดพลาดเฉลี่ยน้อยกว่า 1 วินาที, ค่าผิดพลาดสูงสุด 1.9 วินาที, "
 "และไม่มีความหมายเมื่ออยู่นอกช่วงเวลานี้"
 
-#: src/core/StelCore.cpp:2013 src/core/StelCore.cpp:2018
-#: src/core/StelCore.cpp:2046 src/core/StelCore.cpp:2051
-#: src/core/StelCore.cpp:2056
+#: src/core/StelCore.cpp:2127 src/core/StelCore.cpp:2132
+#: src/core/StelCore.cpp:2160 src/core/StelCore.cpp:2165
+#: src/core/StelCore.cpp:2170
 msgid "with zero values outside this range"
 msgstr "มีค่าเป็นศูนย์เมื่ออยู่นอกช่วงเวลานี้"
 
-#: src/core/StelCore.cpp:2023
+#: src/core/StelCore.cpp:2137
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "ด้วยความแม่นยำปรกติที่ 1 วินาที และมีค่าเป็นศูนย์เมื่ออยู่นอกช่วงเวลานี้"
 
-#: src/core/StelCore.cpp:2066
+#: src/core/StelCore.cpp:2180
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "ช่วงที่ใช้งานได้: ระหว่าง ค.ศ. %1 ถึง %2, %3"
 
-#: src/core/StelCore.cpp:2068
+#: src/core/StelCore.cpp:2182
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "ช่วงที่ใช้งานได้: ระหว่าง ค.ศ. %1 ถึง %2"
@@ -1918,31 +1918,31 @@ msgstr "หาไม่พบ"
 msgid "Found"
 msgstr "พบ"
 
-#: src/gui/ConfigurationDialog.cpp:498
+#: src/gui/ConfigurationDialog.cpp:525
 msgid "Select screenshot directory"
 msgstr "เลือกไดเร็กทอรีสำหรับเก็บภาพหน้าจอ"
 
-#: src/gui/ConfigurationDialog.cpp:803
+#: src/gui/ConfigurationDialog.cpp:830
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "พื้นที่การมองเห็นเริ่มต้น: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:811
+#: src/gui/ConfigurationDialog.cpp:838
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "ทิศทางการเริ่มต้นของการมองมุมทิศ/มุมเงย: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:873
+#: src/gui/ConfigurationDialog.cpp:900
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:253
 msgid "Authors"
 msgstr "ผู้สร้าง"
 
-#: src/gui/ConfigurationDialog.cpp:874 src/gui/ViewDialog.cpp:1191
+#: src/gui/ConfigurationDialog.cpp:901 src/gui/ViewDialog.cpp:1191
 msgid "Contact"
 msgstr "ติดต่อ"
 
-#: src/gui/ConfigurationDialog.cpp:876
+#: src/gui/ConfigurationDialog.cpp:903
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:517
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:408
@@ -1961,15 +1961,15 @@ msgstr "ติดต่อ"
 msgid "Version"
 msgstr "รุ่น"
 
-#: src/gui/ConfigurationDialog.cpp:973
+#: src/gui/ConfigurationDialog.cpp:1000
 msgid "Running script: "
 msgstr "สคริปต์ที่กำลังดำเนินงานอยู่: "
 
-#: src/gui/ConfigurationDialog.cpp:980
+#: src/gui/ConfigurationDialog.cpp:1007
 msgid "Running script: [none]"
 msgstr "สคริปต์ที่กำลังดำเนินงานอยู่: [ไม่มี]"
 
-#: src/gui/ConfigurationDialog.cpp:1045
+#: src/gui/ConfigurationDialog.cpp:1072
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -1977,16 +1977,16 @@ msgstr ""
 "เสร็จสิ้นการดาวน์โหลดบัญชีดาวใหม่!\n"
 "เริ่ม Stellarium ใหม่เพื่อแสดง"
 
-#: src/gui/ConfigurationDialog.cpp:1049
+#: src/gui/ConfigurationDialog.cpp:1076
 msgid "All available star catalogs have been installed."
 msgstr "บัญชีดาวที่มีอยู่ทั้งหมดได้รับการติดตั้งแล้ว"
 
-#: src/gui/ConfigurationDialog.cpp:1054
+#: src/gui/ConfigurationDialog.cpp:1081
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "รับวัตถุหรือดวงดาว %1 จาก %2"
 
-#: src/gui/ConfigurationDialog.cpp:1061
+#: src/gui/ConfigurationDialog.cpp:1088
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -1995,7 +1995,7 @@ msgstr ""
 "กำลังดาวน์โหลด %1...\n"
 "(คุณสามารถปิดหน้าต่างนี้ได้)"
 
-#: src/gui/ConfigurationDialog.cpp:1068
+#: src/gui/ConfigurationDialog.cpp:1095
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -2006,7 +2006,7 @@ msgstr ""
 "จำนวนดาว: %2 ล้านดวง\n"
 "พิสัยโชติมาตร: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1111 src/gui/ConfigurationDialog.cpp:1147
+#: src/gui/ConfigurationDialog.cpp:1138 src/gui/ConfigurationDialog.cpp:1174
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2015,11 +2015,11 @@ msgstr ""
 "เกิดข้อผิดพลาดในการดาวน์โหลด %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1200
+#: src/gui/ConfigurationDialog.cpp:1227
 msgid "Verifying file integrity..."
 msgstr "กำลังทวนสอบบูรณภาพของแฟ้มข้อมูล..."
 
-#: src/gui/ConfigurationDialog.cpp:1204
+#: src/gui/ConfigurationDialog.cpp:1231
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2028,144 +2028,169 @@ msgstr ""
 "เกิดข้อผิดพลาดในการดาวน์โหลด %1:\n"
 "ไฟล์เสียหาย"
 
-#: src/gui/ConfigurationDialog.cpp:1250 src/gui/ConfigurationDialog.cpp:1259
+#: src/gui/ConfigurationDialog.cpp:1277 src/gui/ConfigurationDialog.cpp:1286
 msgid "Available"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1252 src/gui/ConfigurationDialog.cpp:1261
+#: src/gui/ConfigurationDialog.cpp:1279 src/gui/ConfigurationDialog.cpp:1288
 msgid "Not Available"
 msgstr ""
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1324
+#: src/gui/ConfigurationDialog.cpp:1351
 msgid "Algorithm of"
 msgstr "วิธีคำนวณ"
 
-#: src/gui/ConfigurationDialog.cpp:1335
+#: src/gui/ConfigurationDialog.cpp:1362
 msgid "Without correction"
 msgstr "ไม่มีการปรับแก้"
 
-#: src/gui/ConfigurationDialog.cpp:1336
+#: src/gui/ConfigurationDialog.cpp:1363
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1337
+#: src/gui/ConfigurationDialog.cpp:1364
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1338
+#: src/gui/ConfigurationDialog.cpp:1365
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1339
+#: src/gui/ConfigurationDialog.cpp:1366
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Astronomical Ephemeris (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1340
+#: src/gui/ConfigurationDialog.cpp:1367
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1341
+#: src/gui/ConfigurationDialog.cpp:1368
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller & Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1342
+#: src/gui/ConfigurationDialog.cpp:1369
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1343
+#: src/gui/ConfigurationDialog.cpp:1370
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel & Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1344
+#: src/gui/ConfigurationDialog.cpp:1371
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison & Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1345
+#: src/gui/ConfigurationDialog.cpp:1372
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson & Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1346
+#: src/gui/ConfigurationDialog.cpp:1373
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson & Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1347
+#: src/gui/ConfigurationDialog.cpp:1374
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1348
+#: src/gui/ConfigurationDialog.cpp:1375
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1349
+#: src/gui/ConfigurationDialog.cpp:1376
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel & Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1350
+#: src/gui/ConfigurationDialog.cpp:1377
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze & Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1351
+#: src/gui/ConfigurationDialog.cpp:1378
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson & Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1352
+#: src/gui/ConfigurationDialog.cpp:1379
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1354
+#: src/gui/ConfigurationDialog.cpp:1381
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr ""
 "Meeus (ค.ศ. 1998) (กับ Chapront, Chapront-Touze & Francou (ค.ศ. 1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1355
+#: src/gui/ConfigurationDialog.cpp:1382
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1356
+#: src/gui/ConfigurationDialog.cpp:1383
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus & Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1357
+#: src/gui/ConfigurationDialog.cpp:1384
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1358
+#: src/gui/ConfigurationDialog.cpp:1385
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold & Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1359
+#: src/gui/ConfigurationDialog.cpp:1386
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison & Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1361
+#: src/gui/ConfigurationDialog.cpp:1388
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak & Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1364
+#: src/gui/ConfigurationDialog.cpp:1391
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1366
+#: src/gui/ConfigurationDialog.cpp:1393
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1367
+#: src/gui/ConfigurationDialog.cpp:1394
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1368
+#: src/gui/ConfigurationDialog.cpp:1395
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1369
+#: src/gui/ConfigurationDialog.cpp:1396
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana & Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1370
+#: src/gui/ConfigurationDialog.cpp:1397
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "สมการ %1T ที่กำหนดเอง"
+
+#: src/gui/ConfigurationDialog.cpp:1446 src/gui/ConfigurationDialog.cpp:1482
+#: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:405
+msgid "System default"
+msgstr "ค่าปริยายของระบบ"
+
+#: src/gui/ConfigurationDialog.cpp:1447
+msgid "yyyy-mm-dd (ISO 8601)"
+msgstr "yyyy-mm-dd (ISO 8601)"
+
+#: src/gui/ConfigurationDialog.cpp:1448
+msgid "dd-mm-yyyy"
+msgstr "dd-mm-yyyy"
+
+#: src/gui/ConfigurationDialog.cpp:1449
+msgid "mm-dd-yyyy"
+msgstr "mm-dd-yyyy"
+
+#: src/gui/ConfigurationDialog.cpp:1483
+msgid "12-hour format"
+msgstr "รูปแบบ 12 ชั่วโมง"
+
+#: src/gui/ConfigurationDialog.cpp:1484
+msgid "24-hour format"
+msgstr "รูปแบบ 24 ชั่วโมง"
 
 #: src/gui/HelpDialog.cpp:133
 msgid "Stellarium Help"
@@ -2463,29 +2488,41 @@ msgstr "ซ่อนแถบแนวตั้งโดยอัตโนมั
 msgid "Toggle visibility of GUI"
 msgstr "สลับการแสดงส่วนต่อประสานกราฟิกกับผู้ใช้"
 
-#: src/gui/StelGuiItems.cpp:322 src/gui/StelGuiItems.cpp:838
+#: src/gui/StelGuiItems.cpp:322 src/gui/StelGuiItems.cpp:852
 msgid "Space"
 msgstr "Space"
 
-#: src/gui/StelGuiItems.cpp:661
+#: src/gui/StelGuiItems.cpp:634
+msgid "Time zone"
+msgstr "เขตเวลา"
+
+#: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:403
+msgid "Local Mean Solar Time"
+msgstr ""
+
+#: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:404
+msgid "Local True Solar Time"
+msgstr ""
+
+#: src/gui/StelGuiItems.cpp:675
 #, c-format, qt-format
 msgid "%1m"
 msgstr "%1 ม."
 
-#: src/gui/StelGuiItems.cpp:693
+#: src/gui/StelGuiItems.cpp:707
 #, qt-format
 msgid "planetocentric distance %1 km"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:695
+#: src/gui/StelGuiItems.cpp:709
 msgid "planetocentric observer"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:724
+#: src/gui/StelGuiItems.cpp:738
 msgid "Field of view"
 msgstr "ขอบเขตภาพ"
 
-#: src/gui/StelGuiItems.cpp:749
+#: src/gui/StelGuiItems.cpp:763
 msgid "Frames per second"
 msgstr "เฟรมต่อวินาที"
 
@@ -2810,7 +2847,7 @@ msgid "year"
 msgstr "ปี"
 
 #. TRANSLATORS: name of object
-#: src/gui/AstroCalcDialog.cpp:159 src/ui_configurationDialog.h:1151
+#: src/gui/AstroCalcDialog.cpp:159 src/ui_configurationDialog.h:1189
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:450
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:96
 #: plugins/Exoplanets/src/Exoplanet.cpp:324
@@ -2819,162 +2856,162 @@ msgid "Name"
 msgstr "ชื่อ"
 
 #. TRANSLATORS: right ascension
-#: src/gui/AstroCalcDialog.cpp:161 src/gui/AstroCalcDialog.cpp:277
+#: src/gui/AstroCalcDialog.cpp:161 src/gui/AstroCalcDialog.cpp:278
 msgid "RA (J2000)"
 msgstr ""
 
 #. TRANSLATORS: declination
-#: src/gui/AstroCalcDialog.cpp:163 src/gui/AstroCalcDialog.cpp:279
+#: src/gui/AstroCalcDialog.cpp:163 src/gui/AstroCalcDialog.cpp:280
 msgid "Dec (J2000)"
 msgstr ""
 
 #. TRANSLATORS: magnitude
-#: src/gui/AstroCalcDialog.cpp:165 src/gui/AstroCalcDialog.cpp:281
+#: src/gui/AstroCalcDialog.cpp:165 src/gui/AstroCalcDialog.cpp:282
 msgid "Mag."
 msgstr ""
 
 #. TRANSLATORS: type of object
-#: src/gui/AstroCalcDialog.cpp:167 src/ui_configurationDialog.h:1171
+#: src/gui/AstroCalcDialog.cpp:167 src/ui_configurationDialog.h:1209
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
 msgid "Type"
 msgstr "ชนิด"
 
-#: src/gui/AstroCalcDialog.cpp:185
+#: src/gui/AstroCalcDialog.cpp:186
 #, qt-format
 msgid "Positions on %1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:275 src/ui_dateTimeDialogGui.h:382
+#: src/gui/AstroCalcDialog.cpp:276 src/ui_dateTimeDialogGui.h:382
 #: src/ui_dateTimeDialogGui.h:387
 msgid "Julian Day"
 msgstr "วันจูเลียน"
 
-#: src/gui/AstroCalcDialog.cpp:382 src/gui/AstroCalcDialog.cpp:756
+#: src/gui/AstroCalcDialog.cpp:383 src/gui/AstroCalcDialog.cpp:757
 msgid "CSV (Comma delimited)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:384
+#: src/gui/AstroCalcDialog.cpp:385
 msgid "Save calculated ephemerides as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:460
+#: src/gui/AstroCalcDialog.cpp:461
 msgid "10 minutes"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:461
+#: src/gui/AstroCalcDialog.cpp:462
 msgid "1 hour"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:462
+#: src/gui/AstroCalcDialog.cpp:463
 msgid "1 day"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:463
+#: src/gui/AstroCalcDialog.cpp:464
 msgid "5 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:464
+#: src/gui/AstroCalcDialog.cpp:465
 msgid "10 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:465
+#: src/gui/AstroCalcDialog.cpp:466
 msgid "15 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:466
+#: src/gui/AstroCalcDialog.cpp:467
 msgid "30 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:467
+#: src/gui/AstroCalcDialog.cpp:468
 msgid "60 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:521
+#: src/gui/AstroCalcDialog.cpp:522
 msgid "Solar system"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:523 src/translations.h:70
+#: src/gui/AstroCalcDialog.cpp:524 src/translations.h:70
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
 msgstr "ดาวเคราะห์น้อย"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:524 src/translations.h:74
+#: src/gui/AstroCalcDialog.cpp:525 src/translations.h:74
 msgid "Plutinos"
 msgstr "พลูติโน"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:525 src/translations.h:68
+#: src/gui/AstroCalcDialog.cpp:526 src/translations.h:68
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
 msgstr "ดาวหาง"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:526 src/translations.h:76
+#: src/gui/AstroCalcDialog.cpp:527 src/translations.h:76
 msgid "Dwarf planets"
 msgstr "ดาวเคราะห์แคระ"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:527 src/translations.h:78
+#: src/gui/AstroCalcDialog.cpp:528 src/translations.h:78
 msgid "Cubewanos"
 msgstr "คิวบีวันโอ"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:528 src/translations.h:80
+#: src/gui/AstroCalcDialog.cpp:529 src/translations.h:80
 msgid "Scattered disc objects"
 msgstr "วัตถุกระจายบนจานกำเนิดระบบสุริยะ"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:529 src/translations.h:82
+#: src/gui/AstroCalcDialog.cpp:530 src/translations.h:82
 msgid "Oort cloud objects"
 msgstr "วัตถุในเมฆของออร์ต"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:530 src/translations.h:117
+#: src/gui/AstroCalcDialog.cpp:531 src/translations.h:117
 #: src/ui_viewDialog.h:1993
 msgid "Star clusters"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:531 src/translations.h:99
+#: src/gui/AstroCalcDialog.cpp:532 src/translations.h:99
 msgid "Planetary nebulae"
 msgstr "เนบิวลาดาวเคราะห์"
 
-#: src/gui/AstroCalcDialog.cpp:532
+#: src/gui/AstroCalcDialog.cpp:533
 msgid "Bright nebulae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:533 src/translations.h:101
+#: src/gui/AstroCalcDialog.cpp:534 src/translations.h:101
 msgid "Dark nebulae"
 msgstr "เนบิวลามืด"
 
-#: src/gui/AstroCalcDialog.cpp:534 src/ui_viewDialog.h:1995
+#: src/gui/AstroCalcDialog.cpp:535 src/ui_viewDialog.h:1995
 msgid "Galaxies"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:547
+#: src/gui/AstroCalcDialog.cpp:548
 msgid "Phenomenon"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:549
+#: src/gui/AstroCalcDialog.cpp:550
 msgid "Object 1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:550
+#: src/gui/AstroCalcDialog.cpp:551
 msgid "Object 2"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:758
+#: src/gui/AstroCalcDialog.cpp:759
 msgid "Save calculated phenomena as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:797 src/gui/AstroCalcDialog.cpp:951
+#: src/gui/AstroCalcDialog.cpp:798 src/gui/AstroCalcDialog.cpp:952
 msgid "Conjunction"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:801
+#: src/gui/AstroCalcDialog.cpp:802
 msgid "Opposition"
 msgstr ""
 
@@ -3909,1114 +3946,1141 @@ msgid ""
 msgstr ""
 
 #: src/translations.h:357
-msgid "Andorra"
-msgstr "อันดอร์รา"
-
-#: src/translations.h:358
-msgid "United Arab Emirates"
-msgstr "สหรัฐอาหรับเอมิเรตส์"
-
-#: src/translations.h:359
-msgid "Afghanistan"
-msgstr "อัฟกานิสถาน"
-
-#: src/translations.h:360
-msgid "Antigua and Barbuda"
-msgstr "แอนติกาและบารบูดา"
-
-#: src/translations.h:361
-msgid "Anguilla"
-msgstr "แองกวิลลา"
-
-#: src/translations.h:362
-msgid "Albania"
-msgstr "แอลเบเนีย"
-
-#: src/translations.h:363
-msgid "Armenia"
-msgstr "อารเมเนีย"
-
-#: src/translations.h:364
-msgid "Netherlands Antilles"
-msgstr "เนเธอร์แลนด์แอนทิลลิส"
-
-#: src/translations.h:365
-msgid "Angola"
-msgstr "แองโกลา"
-
-#: src/translations.h:366
-msgid "Antarctica"
-msgstr "แอนตาร์กติกา"
-
-#: src/translations.h:367
-msgid "Argentina"
-msgstr "อารเจนตินา"
-
-#: src/translations.h:368
-msgid "American Samoa"
-msgstr "อเมริกันซามัว"
-
-#: src/translations.h:369
-msgid "Austria"
-msgstr "ออสเตรีย"
-
-#: src/translations.h:370
-msgid "Australia"
-msgstr "ออสเตรเลีย"
-
-#: src/translations.h:371
-msgid "Aruba"
-msgstr "อารูบา"
-
-#: src/translations.h:372
-msgid "Azerbaijan"
-msgstr "อาเซอรไบจาน"
-
-#: src/translations.h:373
-msgid "Bosnia and Herzegowina"
-msgstr "บอสเนียและเฮอร์เซโกวีนา"
-
-#: src/translations.h:374
-msgid "Barbados"
-msgstr "บารเบโดส"
-
-#: src/translations.h:375
-msgid "Bangladesh"
-msgstr "บังกลาเทศ"
-
-#: src/translations.h:376
-msgid "Belgium"
-msgstr "เบลเยียม"
-
-#: src/translations.h:377
-msgid "Burkina Faso"
-msgstr "บูรกินาฟาโซ"
-
-#: src/translations.h:378
-msgid "Bulgaria"
-msgstr "บัลแกเรีย"
-
-#: src/translations.h:379
-msgid "Bahrain"
-msgstr "บาหเรน"
-
-#: src/translations.h:380
-msgid "Burundi"
-msgstr "บุรุนดี"
-
-#: src/translations.h:381
-msgid "Benin"
-msgstr "เบนิน"
-
-#: src/translations.h:382
-msgid "Bermuda"
-msgstr "เบอร์มิวดา"
-
-#: src/translations.h:383
-msgid "Brunei Darussalam"
-msgstr "บรูไนดารุสซาลาม"
-
-#: src/translations.h:384
-msgid "Bolivia"
-msgstr "โบลิเวีย"
-
-#: src/translations.h:385
-msgid "Brazil"
-msgstr "บราซิล"
-
-#: src/translations.h:386
-msgid "Bahamas"
-msgstr "บาฮามาส"
-
-#: src/translations.h:387
-msgid "Bhutan"
-msgstr "ภูฏาน"
-
-#: src/translations.h:388
-msgid "Bouvet Island"
-msgstr "เกาะบูเวต์"
-
-#: src/translations.h:389
-msgid "Botswana"
-msgstr "บอตสวานา"
-
-#: src/translations.h:390
-msgid "Belarus"
-msgstr "เบลารุส"
-
-#: src/translations.h:391
-msgid "Belize"
-msgstr "เบลีซ"
-
-#: src/translations.h:392
-msgid "Canada"
-msgstr "แคนาดา"
-
-#: src/translations.h:393
-msgid "Cocos Islands"
-msgstr "หมู่เกาะโคโคส"
-
-#: src/translations.h:394
-msgid "Democratic Republic of the Congo"
-msgstr "สาธารณรัฐประชาธิปไตยคองโก"
-
-#: src/translations.h:395
-msgid "Central African Republic"
-msgstr "สาธารณรัฐแอฟริกากลาง"
-
-#: src/translations.h:396
-msgid "Republic of the Congo"
-msgstr "สาธารณรัฐคองโก"
-
-#: src/translations.h:397
-msgid "Switzerland"
-msgstr "สวิตเซอรแลนด์"
-
-#: src/translations.h:398
-msgid "Cote d'Ivoire"
-msgstr "โกตดิวัวร์"
-
-#: src/translations.h:399
-msgid "Cook Islands"
-msgstr "หมู่เกาะคุก"
-
-#: src/translations.h:400
-msgid "Chile"
-msgstr "ชิลี"
-
-#: src/translations.h:401
-msgid "Cameroon"
-msgstr "แคเมอรูน"
-
-#: src/translations.h:402
-msgid "China"
-msgstr "จีน"
-
-#: src/translations.h:403
-msgid "Colombia"
-msgstr "โคลอมเบีย"
-
-#: src/translations.h:404
-msgid "Costa Rica"
-msgstr "คอสตาริกา"
-
-#: src/translations.h:405
-msgid "Serbia and Montenegro"
-msgstr "เซอร์เบียและมอนเตเนโกร"
-
-#: src/translations.h:406
-msgid "Montenegro"
-msgstr ""
-
-#: src/translations.h:407
-msgid "Cuba"
-msgstr "คิวบา"
-
-#: src/translations.h:408
-msgid "Cape Verde"
-msgstr "เคปเวิรด"
-
-#: src/translations.h:409
-msgid "Christmas Island"
-msgstr "เกาะคริสต์มาส"
-
-#: src/translations.h:410
-msgid "Cyprus"
-msgstr "ไซปรัส"
-
-#: src/translations.h:411
-msgid "Czech Republic"
-msgstr "สาธารณรัฐเช็ก"
-
-#: src/translations.h:412
-msgid "Germany"
-msgstr "เยอรมนี"
-
-#: src/translations.h:413
-msgid "Djibouti"
-msgstr "จิบูตี"
-
-#: src/translations.h:414
-msgid "Denmark"
-msgstr "เดนมารก"
-
-#: src/translations.h:415
-msgid "Dominica"
-msgstr "โดมินิกา"
-
-#: src/translations.h:416
-msgid "Dominican Republic"
-msgstr "สาธารณรัฐโดมินิกัน"
-
-#: src/translations.h:417
-msgid "Algeria"
-msgstr "แอลจีเรีย"
-
-#: src/translations.h:418
-msgid "Ecuador"
-msgstr "เอกวาดอร์"
-
-#: src/translations.h:419
-msgid "Estonia"
-msgstr "เอสโตเนีย"
-
-#: src/translations.h:420
-msgid "Egypt"
-msgstr "อียิปต์"
-
-#: src/translations.h:421
-msgid "Western Sahara"
-msgstr "เวสเทิร์นสะฮารา"
-
-#: src/translations.h:422
-msgid "Eritrea"
-msgstr "เอริเทรีย"
-
-#: src/translations.h:423
-msgid "Spain"
-msgstr "สเปน"
-
-#: src/translations.h:424
-msgid "Ethiopia"
-msgstr "เอธิโอเปย"
-
-#: src/translations.h:425
-msgid "Finland"
-msgstr "ฟนแลนด"
-
-#: src/translations.h:426
-msgid "Fiji"
-msgstr "ฟิจิ"
-
-#: src/translations.h:427
-msgid "Falkland Islands"
-msgstr "หมู่เกาะฟอล์กแลนด์"
-
-#: src/translations.h:428
-msgid "Micronesia"
-msgstr "ไมโครนีเซีย"
-
-#: src/translations.h:429
-msgid "Faroe Islands"
-msgstr "หมู่เกาะแฟโร"
-
-#: src/translations.h:430
-msgid "France"
-msgstr "ฝรั่งเศส"
-
-#: src/translations.h:431
-msgid "Gabon"
-msgstr "กาบอง"
-
-#: src/translations.h:432
-msgid "United Kingdom"
-msgstr "สหราชอาณาจักร"
-
-#: src/translations.h:433
-msgid "Grenada"
-msgstr "เกรเนดา"
-
-#: src/translations.h:434
-msgid "Georgia"
-msgstr "จอรเจีย"
-
-#: src/translations.h:435
-msgid "French Guiana"
-msgstr "เฟรนชเกียนา"
-
-#: src/translations.h:436
-msgid "Ghana"
-msgstr "กานา"
-
-#: src/translations.h:437
-msgid "Gibraltar"
-msgstr "ยิบรอลตาร์"
-
-#: src/translations.h:438
-msgid "Greenland"
-msgstr "กรีนแลนด์"
-
-#: src/translations.h:439
-msgid "Gambia"
-msgstr "แกมเบีย"
-
-#: src/translations.h:440
-msgid "Guinea"
-msgstr "กินี"
-
-#: src/translations.h:441
-msgid "Guadeloupe"
-msgstr "กวาเดอลูป"
-
-#: src/translations.h:442
-msgid "Equatorial Guinea"
-msgstr "อิเควทอเรียลกินี"
-
-#: src/translations.h:443
-msgid "Greece"
-msgstr "กรีซ"
-
-#: src/translations.h:444
-msgid "South Georgia and the South Sandwich Islands"
-msgstr "เกาะเซาท์จอร์เจียและหมู่เกาะเซาท์แซนด์วิช"
-
-#: src/translations.h:445
-msgid "Guatemala"
-msgstr "กัวเตมาลา"
-
-#: src/translations.h:446
-msgid "Guam"
-msgstr "กวม"
-
-#: src/translations.h:447
-msgid "Guinea-Bissau"
-msgstr "กินี-บิสเซา"
-
-#: src/translations.h:448
-msgid "Guyana"
-msgstr "กายอานา"
-
-#: src/translations.h:449
-msgid "Hong Kong"
-msgstr "ฮองกง"
-
-#: src/translations.h:450
-msgid "Heard Island and McDonald Islands"
-msgstr "เกาะเฮิร์ดและหมู่เกาะแมกดอนัลด์"
-
-#: src/translations.h:451
-msgid "Honduras"
-msgstr "ฮอนดูรัส"
-
-#: src/translations.h:452
-msgid "Croatia"
-msgstr "โครเอเชีย"
-
-#: src/translations.h:453
-msgid "Haiti"
-msgstr "เฮติ"
-
-#: src/translations.h:454
-msgid "Hungary"
-msgstr "ฮังการี"
-
-#: src/translations.h:455
-msgid "Indonesia"
-msgstr "อินโดนีเซีย"
-
-#: src/translations.h:456
-msgid "Ireland"
-msgstr "ไอรแลนด์"
-
-#: src/translations.h:457
-msgid "Israel"
-msgstr "อิสราเอล"
-
-#: src/translations.h:458
-msgid "India"
-msgstr "อินเดีย"
-
-#: src/translations.h:459
-msgid "British Indian Ocean Territory"
-msgstr "บริติชอินเดียนโอเชียนเทร์ริทอรี"
-
-#: src/translations.h:460
-msgid "Iraq"
-msgstr "อิรัก"
-
-#: src/translations.h:461
-msgid "Iran"
-msgstr "อิหร่าน"
-
-#: src/translations.h:462
-msgid "Iceland"
-msgstr "ไอซแลนด์"
-
-#: src/translations.h:463
-msgid "Italy"
-msgstr "อิตาลี"
-
-#: src/translations.h:464
-msgid "Jamaica"
-msgstr "จาเมกา"
-
-#: src/translations.h:465
-msgid "Jordan"
-msgstr "จอรแดน"
-
-#: src/translations.h:466
-msgid "Japan"
-msgstr "ญี่ปุน"
-
-#: src/translations.h:467
-msgid "Kenya"
-msgstr "เคนยา"
-
-#: src/translations.h:468
-msgid "Kyrgyzstan"
-msgstr "คีรกีซสถาน"
-
-#: src/translations.h:469
-msgid "Cambodia"
-msgstr "กัมพูชา"
-
-#: src/translations.h:470
-msgid "Kiribati"
-msgstr "คิริบาส"
-
-#: src/translations.h:471
-msgid "Comoros"
-msgstr "คอโมโรส"
-
-#: src/translations.h:472
-msgid "Saint Kitts and Nevis"
-msgstr "เซนต์คิตส์และเนวิส"
-
-#: src/translations.h:473
-msgid "Democratic People's Republic of Korea"
-msgstr "สาธารณรัฐประชาธิปไตยประชาชนเกาหลี"
-
-#: src/translations.h:474
-msgid "Republic of Korea"
-msgstr "สาธารณรัฐเกาหลี"
-
-#: src/translations.h:475
-msgid "Kuwait"
-msgstr "คูเวต"
-
-#: src/translations.h:476
-msgid "Cayman Islands"
-msgstr "หมู่เกาะเคย์แมน"
-
-#: src/translations.h:477
-msgid "Kazakhstan"
-msgstr "คาซัคสถาน"
-
-#: src/translations.h:478
-msgid "Lao"
-msgstr "ลาว"
-
-#: src/translations.h:479
-msgid "Lebanon"
-msgstr "เลบานอน"
-
-#: src/translations.h:480
-msgid "Saint Lucia"
-msgstr "เซนต์ลูเซีย"
-
-#: src/translations.h:481
-msgid "Liechtenstein"
-msgstr "ลิกเตนสไตน์"
-
-#: src/translations.h:482
-msgid "Sri Lanka"
-msgstr "ศรีลังกา"
-
-#: src/translations.h:483
-msgid "Liberia"
-msgstr "ไลบีเรีย"
-
-#: src/translations.h:484
-msgid "Lesotho"
-msgstr "เลโซโท"
-
-#: src/translations.h:485
-msgid "Lithuania"
-msgstr "ลิทัวเนีย"
-
-#: src/translations.h:486
-msgid "Luxembourg"
-msgstr "ลักเซมเบิรก"
-
-#: src/translations.h:487
-msgid "Latvia"
-msgstr "ลัตเวีย"
-
-#: src/translations.h:488
-msgid "Libyan Arab Jamahiriya"
-msgstr "ลิเบีย"
-
-#: src/translations.h:489
-msgid "Morocco"
-msgstr "โมร็อกโก"
-
-#: src/translations.h:490
-msgid "Monaco"
-msgstr "โมนาโก"
-
-#: src/translations.h:491
-msgid "Moldova"
-msgstr "มอลโดวา"
-
-#: src/translations.h:492
-msgid "Madagascar"
-msgstr "มาดากัสการ"
-
-#: src/translations.h:493
-msgid "Marshall Islands"
-msgstr "หมู่เกาะมาร์แชลล์"
-
-#: src/translations.h:494
-msgid "Macedonia"
-msgstr "มาซิโดเนีย"
-
-#: src/translations.h:495
-msgid "Mali"
-msgstr "มาลี"
-
-#: src/translations.h:496
-msgid "Myanmar"
-msgstr "พมา"
-
-#: src/translations.h:497
-msgid "Mongolia"
-msgstr "มองโกเลีย"
-
-#: src/translations.h:498
-msgid "Macau"
-msgstr "มาเก๊า"
-
-#: src/translations.h:499
-msgid "Northern Mariana Islands"
-msgstr "หมู่เกาะนอร์เทิร์นมาเรียนา"
-
-#: src/translations.h:500
-msgid "Martinique"
-msgstr "มาร์ตินีก"
-
-#: src/translations.h:501
-msgid "Mauritania"
-msgstr "มอริเตเนีย"
-
-#: src/translations.h:502
-msgid "Montserrat"
-msgstr "มอนต์เซอร์รัต"
-
-#: src/translations.h:503
-msgid "Malta"
-msgstr "มอลตา"
-
-#: src/translations.h:504
-msgid "Mauritius"
-msgstr "มอริเชียส"
-
-#: src/translations.h:505
-msgid "Maldives"
-msgstr "มัลดีฟส์"
-
-#: src/translations.h:506
-msgid "Malawi"
-msgstr "มาลาวี"
-
-#: src/translations.h:507
-msgid "Mexico"
-msgstr "เม็กซิโก"
-
-#: src/translations.h:508
-msgid "Malaysia"
-msgstr "มาเลเซีย"
-
-#: src/translations.h:509
-msgid "Mozambique"
-msgstr "โมซัมบิก"
-
-#: src/translations.h:510
-msgid "Namibia"
-msgstr "นามิเบีย"
-
-#: src/translations.h:511
-msgid "New Caledonia"
-msgstr "นิวแคลิโดเนีย"
-
-#: src/translations.h:512
-msgid "Niger"
-msgstr "ไนเจอร์"
-
-#: src/translations.h:513
-msgid "Norfolk Island"
-msgstr "เกาะนอร์ฟอล์ก"
-
-#: src/translations.h:514
-msgid "Nigeria"
-msgstr "ไนจีเรีย"
-
-#: src/translations.h:515
-msgid "Nicaragua"
-msgstr "นิการากัว"
-
-#: src/translations.h:516
-msgid "Netherlands"
-msgstr "เนเธอรแลนด์"
-
-#: src/translations.h:517
-msgid "Norway"
-msgstr "นอรเวย์"
-
-#: src/translations.h:518
-msgid "Nepal"
-msgstr "เนปาล"
-
-#: src/translations.h:519
-msgid "Nauru"
-msgstr "นาอูรู"
-
-#: src/translations.h:520
-msgid "Niue"
-msgstr "นีอูเอ"
-
-#: src/translations.h:521
-msgid "New Zealand"
-msgstr "นิวซีแลนด์"
-
-#: src/translations.h:522
-msgid "Oman"
-msgstr "โอมาน"
-
-#: src/translations.h:523
-msgid "Panama"
-msgstr "ปานามา"
-
-#: src/translations.h:524
-msgid "Peru"
-msgstr "เปรู"
-
-#: src/translations.h:525
-msgid "French Polynesia"
-msgstr "เฟรนช์โปลินีเซีย"
-
-#: src/translations.h:526
-msgid "Papua New Guinea"
-msgstr "ปาปวนิวกินี"
-
-#: src/translations.h:527
-msgid "Philippines"
-msgstr "ฟลิปปนส"
-
-#: src/translations.h:528
-msgid "Pakistan"
-msgstr "ปากีสถาน"
-
-#: src/translations.h:529
-msgid "Poland"
-msgstr "โปแลนด์"
-
-#: src/translations.h:530
-msgid "Saint Pierre and Miquelon"
-msgstr "แซงปีแยร์และมีเกอลง"
-
-#: src/translations.h:531
-msgid "Pitcairn"
-msgstr "หมู่เกาะพิตแคร์น"
-
-#: src/translations.h:532
-msgid "Puerto Rico"
-msgstr "เปอร์โตริโก"
-
-#: src/translations.h:533
-msgid "Palestinian Territories"
-msgstr "ดินแดนปาเลสไตน์"
-
-#: src/translations.h:534
-msgid "Portugal"
-msgstr "โปรตุเกส"
-
-#: src/translations.h:535
-msgid "Palau"
-msgstr "ปาเลา"
-
-#: src/translations.h:536
-msgid "Paraguay"
-msgstr "ปารากวัย"
-
-#: src/translations.h:537
-msgid "Qatar"
-msgstr "กาตาร์"
-
-#: src/translations.h:538
-msgid "Réunion"
-msgstr "เรอูนียง"
-
-#: src/translations.h:539
-msgid "Romania"
-msgstr "โรมาเนีย"
-
-#: src/translations.h:540
-msgid "Serbia"
-msgstr "เซอร์เบีย"
-
-#: src/translations.h:541
-msgid "Russian Federation"
-msgstr "สหพันธรัฐรัสเซีย"
-
-#: src/translations.h:542
-msgid "Rwanda"
-msgstr "รวันดา"
-
-#: src/translations.h:543
-msgid "Saudi Arabia"
-msgstr "ซาอุดีอาระเบีย"
-
-#: src/translations.h:544
-msgid "Solomon Islands"
-msgstr "หมู่เกาะโซโลมอน"
-
-#: src/translations.h:545
-msgid "Seychelles"
-msgstr "เซเชลส์"
-
-#: src/translations.h:546
-msgid "Sudan"
-msgstr "ซูดาน"
-
-#: src/translations.h:547
-msgid "Sweden"
-msgstr "สวีเดน"
-
-#: src/translations.h:548
-msgid "Singapore"
-msgstr "สิงคโปร์"
-
-#: src/translations.h:549
-msgid "Saint Helena"
-msgstr "เซนต์เฮเลนา"
-
-#: src/translations.h:550
-msgid "Slovenia"
-msgstr "สโลวีเนีย"
-
-#: src/translations.h:551
-msgid "Svalbard and Jan Mayen"
-msgstr "สฟาลบาร์และยานไมเอน"
-
-#: src/translations.h:552
-msgid "Slovakia"
-msgstr "สโลวาเกีย"
-
-#: src/translations.h:553
-msgid "Sierra Leone"
-msgstr "เซียรราลีโอน"
-
-#: src/translations.h:554
-msgid "San Marino"
-msgstr "ซานมารีโน"
-
-#: src/translations.h:555
-msgid "Senegal"
-msgstr "เซเนกัล"
-
-#: src/translations.h:556
-msgid "Somalia"
-msgstr "โซมาเลีย"
-
-#: src/translations.h:557
-msgid "Suriname"
-msgstr "ซูรินาเม"
-
-#: src/translations.h:558
-msgid "Sao Tome and Principe"
-msgstr "เซาตูเมและปรินซิปี"
-
-#: src/translations.h:559
-msgid "El Salvador"
-msgstr "เอลซัลวาดอร์"
-
-#: src/translations.h:560
-msgid "Syrian Arab Republic"
-msgstr "สาธารณรัฐอาหรับซีเรีย"
-
-#: src/translations.h:561
-msgid "Swaziland"
-msgstr "สวาซิแลนด์"
-
-#: src/translations.h:562
-msgid "Turks and Caicos Islands"
-msgstr "หมู่เกาะเติกส์และหมู่เกาะเคคอส"
-
-#: src/translations.h:563
-msgid "Chad"
-msgstr "ชาด"
-
-#: src/translations.h:564
-msgid "French Southern Territories"
-msgstr "เฟรนช์เซาเทิร์นเทร์ริทอรีส์"
-
-#: src/translations.h:565
-msgid "Togo"
-msgstr "โตโก"
-
-#: src/translations.h:566
-msgid "Thailand"
-msgstr "ไทย"
-
-#: src/translations.h:567
-msgid "Tajikistan"
-msgstr "ทาจิกิสถาน"
-
-#: src/translations.h:568
-msgid "Tokelau"
-msgstr "โตเกเลา"
-
-#: src/translations.h:569
-msgid "East Timor"
-msgstr "ติมอร์ตะวันออก"
-
-#: src/translations.h:570
-msgid "Turkmenistan"
-msgstr "เติรกเมนิสถาน"
-
-#: src/translations.h:571
-msgid "Tunisia"
-msgstr "ตูนิเซีย"
-
-#: src/translations.h:572
-msgid "Tonga"
-msgstr "ตองกา"
-
-#: src/translations.h:573
-msgid "Turkey"
-msgstr "ตุรกี"
-
-#: src/translations.h:574
-msgid "Trinidad and Tobago"
-msgstr "ตรินิแดดและโตเบโก"
-
-#: src/translations.h:575
-msgid "Tuvalu"
-msgstr "ตูวาลู"
-
-#: src/translations.h:576
-msgid "Taiwan"
-msgstr "ไต้หวัน"
-
-#: src/translations.h:577
-msgid "Tanzania"
-msgstr "แทนซาเนีย"
-
-#: src/translations.h:578
-msgid "Ukraine"
-msgstr "ยูเครน"
-
-#: src/translations.h:579
-msgid "Uganda"
-msgstr "ยูกันดา"
-
-#: src/translations.h:580
-msgid "United States Minor Outlying Islands"
-msgstr "เกาะเล็กรอบนอกของสหรัฐอเมริกา"
-
-#: src/translations.h:581
-msgid "United States"
-msgstr "สหรัฐอเมริกา"
-
-#: src/translations.h:582
-msgid "Uruguay"
-msgstr "อุรุกวัย"
-
-#: src/translations.h:583
-msgid "Uzbekistan"
-msgstr "อุซเบกิสถาน"
-
-#: src/translations.h:584
-msgid "Vatican City State"
-msgstr "นครรัฐวาติกัน"
-
-#: src/translations.h:585
-msgid "Saint Vincent and the Grenadines"
-msgstr "เซนต์วินเซนต์และเกรนาดีนส์"
-
-#: src/translations.h:586
-msgid "Venezuela"
-msgstr "เวเนซุเอลา"
-
-#: src/translations.h:587
-msgid "British Virgin Islands"
-msgstr "หมู่เกาะบริติชเวอร์จิน"
-
-#: src/translations.h:588
-msgid "United States Virgin Islands"
-msgstr "หมู่เกาะเวอร์จินของสหรัฐอเมริกา"
-
-#: src/translations.h:589
-msgid "Viet Nam"
-msgstr "เวียดนาม"
-
-#: src/translations.h:590
-msgid "Vanuatu"
-msgstr "วานูอาตู"
-
-#: src/translations.h:591
-msgid "Wallis and Futuna"
-msgstr "วาลลิสและฟุตูนา"
-
-#: src/translations.h:592
-msgid "Samoa"
-msgstr "ซามัว"
-
-#: src/translations.h:593
-msgid "Yemen"
-msgstr "เยเมน"
-
-#: src/translations.h:594
-msgid "Mayotte"
-msgstr "มายอต"
-
-#: src/translations.h:595
-msgid "Yugoslavia"
-msgstr "ยูโกสลาเวีย"
-
-#: src/translations.h:596
-msgid "South Africa"
-msgstr "แอฟริกาใต้"
-
-#: src/translations.h:597
-msgid "Zambia"
-msgstr "แซมเบีย"
-
-#: src/translations.h:598
-msgid "Zimbabwe"
-msgstr "ซิมบับเว"
-
-#: src/translations.h:602
 msgid "&Undo"
 msgstr "เ&ลิกทำ"
 
-#: src/translations.h:603
+#: src/translations.h:358
 msgid "&Redo"
 msgstr "&ทำซ้ำ"
 
-#: src/translations.h:604
+#: src/translations.h:359
 msgid "Cu&t"
 msgstr "&ตัด"
 
-#: src/translations.h:605
+#: src/translations.h:360
 msgid "&Copy"
 msgstr "&คัดลอก"
 
-#: src/translations.h:606
+#: src/translations.h:361
 msgid "&Paste"
 msgstr "&วาง"
 
-#: src/translations.h:607 src/ui_locationDialogGui.h:432
-#: plugins/Oculars/src/ui_ocularDialog.h:1150
+#: src/translations.h:362 plugins/Oculars/src/ui_ocularDialog.h:1150
 #: plugins/Oculars/src/ui_ocularDialog.h:1160
 #: plugins/Oculars/src/ui_ocularDialog.h:1167
 #: plugins/Oculars/src/ui_ocularDialog.h:1184
 msgid "Delete"
 msgstr "ลบทิ้ง"
 
-#: src/translations.h:608
+#: src/translations.h:363
 msgid "Select All"
 msgstr "เลือกทั้งหมด"
 
-#: src/translations.h:609
+#: src/translations.h:364
 msgid "Look in:"
 msgstr "ค้นหาใน:"
 
-#: src/translations.h:610
+#: src/translations.h:365
 msgid "Directory:"
 msgstr "ไดเรกทอรี:"
 
-#: src/translations.h:611
+#: src/translations.h:366
 msgid "Folder"
 msgstr "โฟลเดอร์"
 
-#: src/translations.h:612
+#: src/translations.h:367
 msgid "&Choose"
 msgstr "เลือก"
 
-#: src/translations.h:613 src/ui_configurationDialog.h:1301
+#: src/translations.h:368 src/ui_configurationDialog.h:1345
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "Cancel"
 msgstr "ยกเลิก"
 
-#: src/translations.h:614
+#: src/translations.h:369
 msgid "&Cancel"
 msgstr ""
 
-#: src/translations.h:615
+#: src/translations.h:370
 msgid "Files of type:"
 msgstr "ชนิดไฟล์:"
 
-#: src/translations.h:616
+#: src/translations.h:371
 msgid "Date Modified"
 msgstr "แก้ไขเมื่อ"
 
-#: src/translations.h:617
+#: src/translations.h:372
 msgid "Directories"
 msgstr "ไดเรกทอรี"
 
-#: src/translations.h:618
+#: src/translations.h:373
 msgid "Computer"
 msgstr "คอมพิวเตอร์"
 
-#: src/translations.h:619
+#: src/translations.h:374
 msgid "&Open"
 msgstr "เ&ปิด"
 
-#: src/translations.h:620
+#: src/translations.h:375
 msgid "File &name:"
 msgstr "&ชื่อไฟล์:"
 
-#: src/translations.h:621
+#: src/translations.h:376
 msgid "Copy &Link Location"
 msgstr "คัดลอก&ตำแหน่งลิงก์"
 
-#: src/translations.h:622
+#: src/translations.h:377
 msgid "Abort"
 msgstr "ยกเลิก"
 
-#: src/translations.h:623
+#: src/translations.h:378
 msgid "Ignore"
 msgstr "ไม่ใช้"
 
-#: src/translations.h:624
+#: src/translations.h:379
 msgid "&Basic colors"
 msgstr ""
 
-#: src/translations.h:625
+#: src/translations.h:380
 msgid "Pick Screen Color"
 msgstr ""
 
-#: src/translations.h:626
+#: src/translations.h:381
 msgid "&Custom colors"
 msgstr ""
 
-#: src/translations.h:627
+#: src/translations.h:382
 msgid "&Add to Custom Colors"
 msgstr ""
 
-#: src/translations.h:628
+#: src/translations.h:383
 msgid "Hu&e:"
 msgstr ""
 
-#: src/translations.h:629
+#: src/translations.h:384
 msgid "&Sat:"
 msgstr ""
 
-#: src/translations.h:630
+#: src/translations.h:385
 msgid "&Val:"
 msgstr ""
 
-#: src/translations.h:631
+#: src/translations.h:386
 msgid "&Red:"
 msgstr ""
 
-#: src/translations.h:632
+#: src/translations.h:387
 msgid "&Green:"
 msgstr ""
 
-#: src/translations.h:633
+#: src/translations.h:388
 msgid "Bl&ue:"
 msgstr ""
 
-#: src/translations.h:634
+#: src/translations.h:389
 msgid "Select Color"
 msgstr ""
 
-#: src/translations.h:635
+#: src/translations.h:390
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr ""
+
+#: src/translations_countries.h:31
+msgid "Andorra"
+msgstr "อันดอร์รา"
+
+#: src/translations_countries.h:32
+msgid "United Arab Emirates"
+msgstr "สหรัฐอาหรับเอมิเรตส์"
+
+#: src/translations_countries.h:33
+msgid "Afghanistan"
+msgstr "อัฟกานิสถาน"
+
+#: src/translations_countries.h:34
+msgid "Antigua and Barbuda"
+msgstr "แอนติกาและบารบูดา"
+
+#: src/translations_countries.h:35
+msgid "Anguilla"
+msgstr "แองกวิลลา"
+
+#: src/translations_countries.h:36
+msgid "Albania"
+msgstr "แอลเบเนีย"
+
+#: src/translations_countries.h:37
+msgid "Armenia"
+msgstr "อารเมเนีย"
+
+#: src/translations_countries.h:38
+msgid "Angola"
+msgstr "แองโกลา"
+
+#: src/translations_countries.h:39
+msgid "Antarctica"
+msgstr "แอนตาร์กติกา"
+
+#: src/translations_countries.h:40
+msgid "Argentina"
+msgstr "อารเจนตินา"
+
+#: src/translations_countries.h:41
+msgid "Samoa (American)"
+msgstr ""
+
+#: src/translations_countries.h:42
+msgid "Austria"
+msgstr "ออสเตรีย"
+
+#: src/translations_countries.h:43
+msgid "Australia"
+msgstr "ออสเตรเลีย"
+
+#: src/translations_countries.h:44
+msgid "Aruba"
+msgstr "อารูบา"
+
+#: src/translations_countries.h:45
+msgid "Åland Islands"
+msgstr ""
+
+#: src/translations_countries.h:46
+msgid "Azerbaijan"
+msgstr "อาเซอรไบจาน"
+
+#: src/translations_countries.h:47
+msgid "Bosnia and Herzegovina"
+msgstr ""
+
+#: src/translations_countries.h:48
+msgid "Barbados"
+msgstr "บารเบโดส"
+
+#: src/translations_countries.h:49
+msgid "Bangladesh"
+msgstr "บังกลาเทศ"
+
+#: src/translations_countries.h:50
+msgid "Belgium"
+msgstr "เบลเยียม"
+
+#: src/translations_countries.h:51
+msgid "Burkina Faso"
+msgstr "บูรกินาฟาโซ"
+
+#: src/translations_countries.h:52
+msgid "Bulgaria"
+msgstr "บัลแกเรีย"
+
+#: src/translations_countries.h:53
+msgid "Bahrain"
+msgstr "บาหเรน"
+
+#: src/translations_countries.h:54
+msgid "Burundi"
+msgstr "บุรุนดี"
+
+#: src/translations_countries.h:55
+msgid "Benin"
+msgstr "เบนิน"
+
+#: src/translations_countries.h:56
+msgid "St Barthelemy"
+msgstr ""
+
+#: src/translations_countries.h:57
+msgid "Bermuda"
+msgstr "เบอร์มิวดา"
+
+#: src/translations_countries.h:58
+msgid "Brunei"
+msgstr ""
+
+#: src/translations_countries.h:59
+msgid "Bolivia"
+msgstr "โบลิเวีย"
+
+#: src/translations_countries.h:60
+msgid "Caribbean NL"
+msgstr ""
+
+#: src/translations_countries.h:61
+msgid "Brazil"
+msgstr "บราซิล"
+
+#: src/translations_countries.h:62
+msgid "Bahamas"
+msgstr "บาฮามาส"
+
+#: src/translations_countries.h:63
+msgid "Bhutan"
+msgstr "ภูฏาน"
+
+#: src/translations_countries.h:64
+msgid "Bouvet Island"
+msgstr "เกาะบูเวต์"
+
+#: src/translations_countries.h:65
+msgid "Botswana"
+msgstr "บอตสวานา"
+
+#: src/translations_countries.h:66
+msgid "Belarus"
+msgstr "เบลารุส"
+
+#: src/translations_countries.h:67
+msgid "Belize"
+msgstr "เบลีซ"
+
+#: src/translations_countries.h:68
+msgid "Canada"
+msgstr "แคนาดา"
+
+#: src/translations_countries.h:69
+msgid "Cocos (Keeling) Islands"
+msgstr ""
+
+#: src/translations_countries.h:70
+msgid "Congo (Dem. Rep.)"
+msgstr ""
+
+#: src/translations_countries.h:71
+msgid "Central African Rep."
+msgstr ""
+
+#: src/translations_countries.h:72
+msgid "Congo (Rep.)"
+msgstr ""
+
+#: src/translations_countries.h:73
+msgid "Switzerland"
+msgstr "สวิตเซอรแลนด์"
+
+#: src/translations_countries.h:74
+msgid "Côte d'Ivoire"
+msgstr ""
+
+#: src/translations_countries.h:75
+msgid "Cook Islands"
+msgstr "หมู่เกาะคุก"
+
+#: src/translations_countries.h:76
+msgid "Chile"
+msgstr "ชิลี"
+
+#: src/translations_countries.h:77
+msgid "Cameroon"
+msgstr "แคเมอรูน"
+
+#: src/translations_countries.h:78
+msgid "China"
+msgstr "จีน"
+
+#: src/translations_countries.h:79
+msgid "Colombia"
+msgstr "โคลอมเบีย"
+
+#: src/translations_countries.h:80
+msgid "Costa Rica"
+msgstr "คอสตาริกา"
+
+#: src/translations_countries.h:81
+msgid "Cuba"
+msgstr "คิวบา"
+
+#: src/translations_countries.h:82
+msgid "Cape Verde"
+msgstr "เคปเวิรด"
+
+#: src/translations_countries.h:83
+msgid "Curacao"
+msgstr ""
+
+#: src/translations_countries.h:84
+msgid "Christmas Island"
+msgstr "เกาะคริสต์มาส"
+
+#: src/translations_countries.h:85
+msgid "Cyprus"
+msgstr "ไซปรัส"
+
+#: src/translations_countries.h:86
+msgid "Czech Republic"
+msgstr "สาธารณรัฐเช็ก"
+
+#: src/translations_countries.h:87
+msgid "Germany"
+msgstr "เยอรมนี"
+
+#: src/translations_countries.h:88
+msgid "Djibouti"
+msgstr "จิบูตี"
+
+#: src/translations_countries.h:89
+msgid "Denmark"
+msgstr "เดนมารก"
+
+#: src/translations_countries.h:90
+msgid "Dominica"
+msgstr "โดมินิกา"
+
+#: src/translations_countries.h:91
+msgid "Dominican Republic"
+msgstr "สาธารณรัฐโดมินิกัน"
+
+#: src/translations_countries.h:92
+msgid "Algeria"
+msgstr "แอลจีเรีย"
+
+#: src/translations_countries.h:93
+msgid "Ecuador"
+msgstr "เอกวาดอร์"
+
+#: src/translations_countries.h:94
+msgid "Estonia"
+msgstr "เอสโตเนีย"
+
+#: src/translations_countries.h:95
+msgid "Egypt"
+msgstr "อียิปต์"
+
+#: src/translations_countries.h:96
+msgid "Western Sahara"
+msgstr "เวสเทิร์นสะฮารา"
+
+#: src/translations_countries.h:97
+msgid "Eritrea"
+msgstr "เอริเทรีย"
+
+#: src/translations_countries.h:98
+msgid "Spain"
+msgstr "สเปน"
+
+#: src/translations_countries.h:99
+msgid "Ethiopia"
+msgstr "เอธิโอเปย"
+
+#: src/translations_countries.h:100
+msgid "Finland"
+msgstr "ฟนแลนด"
+
+#: src/translations_countries.h:101
+msgid "Fiji"
+msgstr "ฟิจิ"
+
+#: src/translations_countries.h:102
+msgid "Falkland Islands"
+msgstr "หมู่เกาะฟอล์กแลนด์"
+
+#: src/translations_countries.h:103
+msgid "Micronesia"
+msgstr "ไมโครนีเซีย"
+
+#: src/translations_countries.h:104
+msgid "Faroe Islands"
+msgstr "หมู่เกาะแฟโร"
+
+#: src/translations_countries.h:105
+msgid "France"
+msgstr "ฝรั่งเศส"
+
+#: src/translations_countries.h:106
+msgid "Gabon"
+msgstr "กาบอง"
+
+#: src/translations_countries.h:107
+msgid "Britain (UK)"
+msgstr ""
+
+#: src/translations_countries.h:108
+msgid "Grenada"
+msgstr "เกรเนดา"
+
+#: src/translations_countries.h:109
+msgid "Georgia"
+msgstr "จอรเจีย"
+
+#: src/translations_countries.h:110
+msgid "French Guiana"
+msgstr "เฟรนชเกียนา"
+
+#: src/translations_countries.h:111
+msgid "Guernsey"
+msgstr ""
+
+#: src/translations_countries.h:112
+msgid "Ghana"
+msgstr "กานา"
+
+#: src/translations_countries.h:113
+msgid "Gibraltar"
+msgstr "ยิบรอลตาร์"
+
+#: src/translations_countries.h:114
+msgid "Greenland"
+msgstr "กรีนแลนด์"
+
+#: src/translations_countries.h:115
+msgid "Gambia"
+msgstr "แกมเบีย"
+
+#: src/translations_countries.h:116
+msgid "Guinea"
+msgstr "กินี"
+
+#: src/translations_countries.h:117
+msgid "Guadeloupe"
+msgstr "กวาเดอลูป"
+
+#: src/translations_countries.h:118
+msgid "Equatorial Guinea"
+msgstr "อิเควทอเรียลกินี"
+
+#: src/translations_countries.h:119
+msgid "Greece"
+msgstr "กรีซ"
+
+#: src/translations_countries.h:120
+msgid "South Georgia and the South Sandwich Islands"
+msgstr "เกาะเซาท์จอร์เจียและหมู่เกาะเซาท์แซนด์วิช"
+
+#: src/translations_countries.h:121
+msgid "Guatemala"
+msgstr "กัวเตมาลา"
+
+#: src/translations_countries.h:122
+msgid "Guam"
+msgstr "กวม"
+
+#: src/translations_countries.h:123
+msgid "Guinea-Bissau"
+msgstr "กินี-บิสเซา"
+
+#: src/translations_countries.h:124
+msgid "Guyana"
+msgstr "กายอานา"
+
+#: src/translations_countries.h:125
+msgid "Hong Kong"
+msgstr "ฮองกง"
+
+#: src/translations_countries.h:126
+msgid "Heard Island and McDonald Islands"
+msgstr "เกาะเฮิร์ดและหมู่เกาะแมกดอนัลด์"
+
+#: src/translations_countries.h:127
+msgid "Honduras"
+msgstr "ฮอนดูรัส"
+
+#: src/translations_countries.h:128
+msgid "Croatia"
+msgstr "โครเอเชีย"
+
+#: src/translations_countries.h:129
+msgid "Haiti"
+msgstr "เฮติ"
+
+#: src/translations_countries.h:130
+msgid "Hungary"
+msgstr "ฮังการี"
+
+#: src/translations_countries.h:131
+msgid "Indonesia"
+msgstr "อินโดนีเซีย"
+
+#: src/translations_countries.h:132
+msgid "Ireland"
+msgstr "ไอรแลนด์"
+
+#: src/translations_countries.h:133
+msgid "Israel"
+msgstr "อิสราเอล"
+
+#: src/translations_countries.h:134
+msgid "Isle of Man"
+msgstr ""
+
+#: src/translations_countries.h:135
+msgid "India"
+msgstr "อินเดีย"
+
+#: src/translations_countries.h:136
+msgid "British Indian Ocean Territory"
+msgstr "บริติชอินเดียนโอเชียนเทร์ริทอรี"
+
+#: src/translations_countries.h:137
+msgid "Iraq"
+msgstr "อิรัก"
+
+#: src/translations_countries.h:138
+msgid "Iran"
+msgstr "อิหร่าน"
+
+#: src/translations_countries.h:139
+msgid "Iceland"
+msgstr "ไอซแลนด์"
+
+#: src/translations_countries.h:140
+msgid "Italy"
+msgstr "อิตาลี"
+
+#: src/translations_countries.h:141
+msgid "Jersey"
+msgstr ""
+
+#: src/translations_countries.h:142
+msgid "Jamaica"
+msgstr "จาเมกา"
+
+#: src/translations_countries.h:143
+msgid "Jordan"
+msgstr "จอรแดน"
+
+#: src/translations_countries.h:144
+msgid "Japan"
+msgstr "ญี่ปุน"
+
+#: src/translations_countries.h:145
+msgid "Kenya"
+msgstr "เคนยา"
+
+#: src/translations_countries.h:146
+msgid "Kyrgyzstan"
+msgstr "คีรกีซสถาน"
+
+#: src/translations_countries.h:147
+msgid "Cambodia"
+msgstr "กัมพูชา"
+
+#: src/translations_countries.h:148
+msgid "Kiribati"
+msgstr "คิริบาส"
+
+#: src/translations_countries.h:149
+msgid "Comoros"
+msgstr "คอโมโรส"
+
+#: src/translations_countries.h:150
+msgid "St Kitts and Nevis"
+msgstr ""
+
+#: src/translations_countries.h:151
+msgid "Korea (North)"
+msgstr ""
+
+#: src/translations_countries.h:152
+msgid "Korea (South)"
+msgstr ""
+
+#: src/translations_countries.h:153
+msgid "Kuwait"
+msgstr "คูเวต"
+
+#: src/translations_countries.h:154
+msgid "Cayman Islands"
+msgstr "หมู่เกาะเคย์แมน"
+
+#: src/translations_countries.h:155
+msgid "Kazakhstan"
+msgstr "คาซัคสถาน"
+
+#: src/translations_countries.h:156
+msgid "Laos"
+msgstr ""
+
+#: src/translations_countries.h:157
+msgid "Lebanon"
+msgstr "เลบานอน"
+
+#: src/translations_countries.h:158
+msgid "St Lucia"
+msgstr ""
+
+#: src/translations_countries.h:159
+msgid "Liechtenstein"
+msgstr "ลิกเตนสไตน์"
+
+#: src/translations_countries.h:160
+msgid "Sri Lanka"
+msgstr "ศรีลังกา"
+
+#: src/translations_countries.h:161
+msgid "Liberia"
+msgstr "ไลบีเรีย"
+
+#: src/translations_countries.h:162
+msgid "Lesotho"
+msgstr "เลโซโท"
+
+#: src/translations_countries.h:163
+msgid "Lithuania"
+msgstr "ลิทัวเนีย"
+
+#: src/translations_countries.h:164
+msgid "Luxembourg"
+msgstr "ลักเซมเบิรก"
+
+#: src/translations_countries.h:165
+msgid "Latvia"
+msgstr "ลัตเวีย"
+
+#: src/translations_countries.h:166
+msgid "Libya"
+msgstr ""
+
+#: src/translations_countries.h:167
+msgid "Morocco"
+msgstr "โมร็อกโก"
+
+#: src/translations_countries.h:168
+msgid "Monaco"
+msgstr "โมนาโก"
+
+#: src/translations_countries.h:169
+msgid "Moldova"
+msgstr "มอลโดวา"
+
+#: src/translations_countries.h:170
+msgid "Montenegro"
+msgstr ""
+
+#: src/translations_countries.h:171
+msgid "St Martin (French)"
+msgstr ""
+
+#: src/translations_countries.h:172
+msgid "Madagascar"
+msgstr "มาดากัสการ"
+
+#: src/translations_countries.h:173
+msgid "Marshall Islands"
+msgstr "หมู่เกาะมาร์แชลล์"
+
+#: src/translations_countries.h:174
+msgid "Macedonia"
+msgstr "มาซิโดเนีย"
+
+#: src/translations_countries.h:175
+msgid "Mali"
+msgstr "มาลี"
+
+#: src/translations_countries.h:176
+msgid "Myanmar (Burma)"
+msgstr ""
+
+#: src/translations_countries.h:177
+msgid "Mongolia"
+msgstr "มองโกเลีย"
+
+#: src/translations_countries.h:178
+msgid "Macau"
+msgstr "มาเก๊า"
+
+#: src/translations_countries.h:179
+msgid "Northern Mariana Islands"
+msgstr "หมู่เกาะนอร์เทิร์นมาเรียนา"
+
+#: src/translations_countries.h:180
+msgid "Martinique"
+msgstr "มาร์ตินีก"
+
+#: src/translations_countries.h:181
+msgid "Mauritania"
+msgstr "มอริเตเนีย"
+
+#: src/translations_countries.h:182
+msgid "Montserrat"
+msgstr "มอนต์เซอร์รัต"
+
+#: src/translations_countries.h:183
+msgid "Malta"
+msgstr "มอลตา"
+
+#: src/translations_countries.h:184
+msgid "Mauritius"
+msgstr "มอริเชียส"
+
+#: src/translations_countries.h:185
+msgid "Maldives"
+msgstr "มัลดีฟส์"
+
+#: src/translations_countries.h:186
+msgid "Malawi"
+msgstr "มาลาวี"
+
+#: src/translations_countries.h:187
+msgid "Mexico"
+msgstr "เม็กซิโก"
+
+#: src/translations_countries.h:188
+msgid "Malaysia"
+msgstr "มาเลเซีย"
+
+#: src/translations_countries.h:189
+msgid "Mozambique"
+msgstr "โมซัมบิก"
+
+#: src/translations_countries.h:190
+msgid "Namibia"
+msgstr "นามิเบีย"
+
+#: src/translations_countries.h:191
+msgid "New Caledonia"
+msgstr "นิวแคลิโดเนีย"
+
+#: src/translations_countries.h:192
+msgid "Niger"
+msgstr "ไนเจอร์"
+
+#: src/translations_countries.h:193
+msgid "Norfolk Island"
+msgstr "เกาะนอร์ฟอล์ก"
+
+#: src/translations_countries.h:194
+msgid "Nigeria"
+msgstr "ไนจีเรีย"
+
+#: src/translations_countries.h:195
+msgid "Nicaragua"
+msgstr "นิการากัว"
+
+#: src/translations_countries.h:196
+msgid "Netherlands"
+msgstr "เนเธอรแลนด์"
+
+#: src/translations_countries.h:197
+msgid "Norway"
+msgstr "นอรเวย์"
+
+#: src/translations_countries.h:198
+msgid "Nepal"
+msgstr "เนปาล"
+
+#: src/translations_countries.h:199
+msgid "Nauru"
+msgstr "นาอูรู"
+
+#: src/translations_countries.h:200
+msgid "Niue"
+msgstr "นีอูเอ"
+
+#: src/translations_countries.h:201
+msgid "New Zealand"
+msgstr "นิวซีแลนด์"
+
+#: src/translations_countries.h:202
+msgid "Oman"
+msgstr "โอมาน"
+
+#: src/translations_countries.h:203
+msgid "Panama"
+msgstr "ปานามา"
+
+#: src/translations_countries.h:204
+msgid "Peru"
+msgstr "เปรู"
+
+#: src/translations_countries.h:205
+msgid "French Polynesia"
+msgstr "เฟรนช์โปลินีเซีย"
+
+#: src/translations_countries.h:206
+msgid "Papua New Guinea"
+msgstr "ปาปวนิวกินี"
+
+#: src/translations_countries.h:207
+msgid "Philippines"
+msgstr "ฟลิปปนส"
+
+#: src/translations_countries.h:208
+msgid "Pakistan"
+msgstr "ปากีสถาน"
+
+#: src/translations_countries.h:209
+msgid "Poland"
+msgstr "โปแลนด์"
+
+#: src/translations_countries.h:210
+msgid "St Pierre and Miquelon"
+msgstr ""
+
+#: src/translations_countries.h:211
+msgid "Pitcairn"
+msgstr "หมู่เกาะพิตแคร์น"
+
+#: src/translations_countries.h:212
+msgid "Puerto Rico"
+msgstr "เปอร์โตริโก"
+
+#: src/translations_countries.h:213
+msgid "Palestine"
+msgstr ""
+
+#: src/translations_countries.h:214
+msgid "Portugal"
+msgstr "โปรตุเกส"
+
+#: src/translations_countries.h:215
+msgid "Palau"
+msgstr "ปาเลา"
+
+#: src/translations_countries.h:216
+msgid "Paraguay"
+msgstr "ปารากวัย"
+
+#: src/translations_countries.h:217
+msgid "Qatar"
+msgstr "กาตาร์"
+
+#: src/translations_countries.h:218
+msgid "Réunion"
+msgstr "เรอูนียง"
+
+#: src/translations_countries.h:219
+msgid "Romania"
+msgstr "โรมาเนีย"
+
+#: src/translations_countries.h:220
+msgid "Serbia"
+msgstr "เซอร์เบีย"
+
+#: src/translations_countries.h:221
+msgid "Russia"
+msgstr ""
+
+#: src/translations_countries.h:222
+msgid "Rwanda"
+msgstr "รวันดา"
+
+#: src/translations_countries.h:223
+msgid "Saudi Arabia"
+msgstr "ซาอุดีอาระเบีย"
+
+#: src/translations_countries.h:224
+msgid "Solomon Islands"
+msgstr "หมู่เกาะโซโลมอน"
+
+#: src/translations_countries.h:225
+msgid "Seychelles"
+msgstr "เซเชลส์"
+
+#: src/translations_countries.h:226
+msgid "Sudan"
+msgstr "ซูดาน"
+
+#: src/translations_countries.h:227
+msgid "Sweden"
+msgstr "สวีเดน"
+
+#: src/translations_countries.h:228
+msgid "Singapore"
+msgstr "สิงคโปร์"
+
+#: src/translations_countries.h:229
+msgid "St Helena"
+msgstr ""
+
+#: src/translations_countries.h:230
+msgid "Slovenia"
+msgstr "สโลวีเนีย"
+
+#: src/translations_countries.h:231
+msgid "Svalbard and Jan Mayen"
+msgstr "สฟาลบาร์และยานไมเอน"
+
+#: src/translations_countries.h:232
+msgid "Slovakia"
+msgstr "สโลวาเกีย"
+
+#: src/translations_countries.h:233
+msgid "Sierra Leone"
+msgstr "เซียรราลีโอน"
+
+#: src/translations_countries.h:234
+msgid "San Marino"
+msgstr "ซานมารีโน"
+
+#: src/translations_countries.h:235
+msgid "Senegal"
+msgstr "เซเนกัล"
+
+#: src/translations_countries.h:236
+msgid "Somalia"
+msgstr "โซมาเลีย"
+
+#: src/translations_countries.h:237
+msgid "Suriname"
+msgstr "ซูรินาเม"
+
+#: src/translations_countries.h:238
+msgid "South Sudan"
+msgstr ""
+
+#: src/translations_countries.h:239
+msgid "Sao Tome and Principe"
+msgstr "เซาตูเมและปรินซิปี"
+
+#: src/translations_countries.h:240
+msgid "El Salvador"
+msgstr "เอลซัลวาดอร์"
+
+#: src/translations_countries.h:241
+msgid "St Maarten (Dutch)"
+msgstr ""
+
+#: src/translations_countries.h:242
+msgid "Syria"
+msgstr ""
+
+#: src/translations_countries.h:243
+msgid "Swaziland"
+msgstr "สวาซิแลนด์"
+
+#: src/translations_countries.h:244
+msgid "Turks and Caicos Is"
+msgstr ""
+
+#: src/translations_countries.h:245
+msgid "Chad"
+msgstr "ชาด"
+
+#: src/translations_countries.h:246
+msgid "French Southern and Antarctic Lands"
+msgstr ""
+
+#: src/translations_countries.h:247
+msgid "Togo"
+msgstr "โตโก"
+
+#: src/translations_countries.h:248
+msgid "Thailand"
+msgstr "ไทย"
+
+#: src/translations_countries.h:249
+msgid "Tajikistan"
+msgstr "ทาจิกิสถาน"
+
+#: src/translations_countries.h:250
+msgid "Tokelau"
+msgstr "โตเกเลา"
+
+#: src/translations_countries.h:251
+msgid "East Timor"
+msgstr "ติมอร์ตะวันออก"
+
+#: src/translations_countries.h:252
+msgid "Turkmenistan"
+msgstr "เติรกเมนิสถาน"
+
+#: src/translations_countries.h:253
+msgid "Tunisia"
+msgstr "ตูนิเซีย"
+
+#: src/translations_countries.h:254
+msgid "Tonga"
+msgstr "ตองกา"
+
+#: src/translations_countries.h:255
+msgid "Turkey"
+msgstr "ตุรกี"
+
+#: src/translations_countries.h:256
+msgid "Trinidad and Tobago"
+msgstr "ตรินิแดดและโตเบโก"
+
+#: src/translations_countries.h:257
+msgid "Tuvalu"
+msgstr "ตูวาลู"
+
+#: src/translations_countries.h:258
+msgid "Taiwan"
+msgstr "ไต้หวัน"
+
+#: src/translations_countries.h:259
+msgid "Tanzania"
+msgstr "แทนซาเนีย"
+
+#: src/translations_countries.h:260
+msgid "Ukraine"
+msgstr "ยูเครน"
+
+#: src/translations_countries.h:261
+msgid "Uganda"
+msgstr "ยูกันดา"
+
+#: src/translations_countries.h:262
+msgid "US minor outlying islands"
+msgstr ""
+
+#: src/translations_countries.h:263
+msgid "United States"
+msgstr "สหรัฐอเมริกา"
+
+#: src/translations_countries.h:264
+msgid "Uruguay"
+msgstr "อุรุกวัย"
+
+#: src/translations_countries.h:265
+msgid "Uzbekistan"
+msgstr "อุซเบกิสถาน"
+
+#: src/translations_countries.h:266
+msgid "Vatican City"
+msgstr ""
+
+#: src/translations_countries.h:267
+msgid "St Vincent"
+msgstr ""
+
+#: src/translations_countries.h:268
+msgid "Venezuela"
+msgstr "เวเนซุเอลา"
+
+#: src/translations_countries.h:269
+msgid "Virgin Islands (UK)"
+msgstr ""
+
+#: src/translations_countries.h:270
+msgid "Virgin Islands (US)"
+msgstr ""
+
+#: src/translations_countries.h:271
+msgid "Vietnam"
+msgstr ""
+
+#: src/translations_countries.h:272
+msgid "Vanuatu"
+msgstr "วานูอาตู"
+
+#: src/translations_countries.h:273
+msgid "Wallis and Futuna"
+msgstr "วาลลิสและฟุตูนา"
+
+#: src/translations_countries.h:274
+msgid "Samoa (western)"
+msgstr ""
+
+#: src/translations_countries.h:275
+msgid "Yemen"
+msgstr "เยเมน"
+
+#: src/translations_countries.h:276
+msgid "Mayotte"
+msgstr "มายอต"
+
+#: src/translations_countries.h:277
+msgid "South Africa"
+msgstr "แอฟริกาใต้"
+
+#: src/translations_countries.h:278
+msgid "Zambia"
+msgstr "แซมเบีย"
+
+#: src/translations_countries.h:279
+msgid "Zimbabwe"
+msgstr "ซิมบับเว"
 
 #: src/ui_dateTimeDialogGui.h:380
 msgid "Date and Time in Gregorian calendar"
@@ -5039,7 +5103,7 @@ msgstr "เกี่ยวกับ"
 msgid "Log"
 msgstr "บันทึก"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1198
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1232
 msgid "Edit keyboard shortcuts..."
 msgstr "แก้ปุ่มลัดแป้นพิมพ์..."
 
@@ -5047,35 +5111,60 @@ msgstr "แก้ปุ่มลัดแป้นพิมพ์..."
 msgid "Refresh"
 msgstr "เรียกใหม่"
 
-#: src/ui_locationDialogGui.h:403
+#: src/ui_locationDialogGui.h:434
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 msgid "Location"
 msgstr "ตำแหน่งที่ตั้ง"
 
-#: src/ui_locationDialogGui.h:407 src/ui_locationDialogGui.h:410
+#: src/ui_locationDialogGui.h:438 src/ui_locationDialogGui.h:441
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr ""
 "รายการมาตรฐานของสถานที่ในชื่อภาษาอังกฤษ (ไม่มีเครื่องหมายเสริมสัทอักษร!)"
 
-#: src/ui_locationDialogGui.h:414
+#: src/ui_locationDialogGui.h:445
 msgid "Reset location list to show all known locations"
 msgstr "รีเซตรายชื่อที่ตั้งเพื่อแสดงที่ตั้งทั้งหมด"
 
-#: src/ui_locationDialogGui.h:416
+#: src/ui_locationDialogGui.h:447
 msgid "Reset Location List"
 msgstr "รีเซตรายชื่อที่ตั้ง"
 
-#: src/ui_locationDialogGui.h:417
+#: src/ui_locationDialogGui.h:448
 msgid "Current location information"
 msgstr "ข้อมูลที่ตั้งปัจจุบัน"
 
-#: src/ui_locationDialogGui.h:418
+#: src/ui_locationDialogGui.h:449
+msgid "Add to list"
+msgstr "เพิ่มไปยังรายการ"
+
+#: src/ui_locationDialogGui.h:450
+msgid "Delete from list"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:451
+msgid "Return to default location"
+msgstr "กลับไปใช้ตำแหน่งที่ตั้งปริยาย"
+
+#: src/ui_locationDialogGui.h:452
+msgid "Use current location as default"
+msgstr "ใช้ที่ตั้งปัจจุบันเป็นค่าปริยาย"
+
+#: src/ui_locationDialogGui.h:453
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:150
+msgid "Longitude:"
+msgstr "ลองจิจูด:"
+
+#: src/ui_locationDialogGui.h:454
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:147
 msgid "Latitude:"
 msgstr "ละติจูด:"
 
-#: src/ui_locationDialogGui.h:420 src/ui_locationDialogGui.h:424
+#: src/ui_locationDialogGui.h:455
+msgid "Get location from Network"
+msgstr "รับที่ตั้งจากเครือข่าย"
+
+#: src/ui_locationDialogGui.h:457 src/ui_locationDialogGui.h:464
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
@@ -5083,55 +5172,46 @@ msgstr ""
 "คุณสามารถป้อนค่าเป็นเลขทศนิยม หรือใช้รูปแบบ องศา ลิปดา พิลิปดา เช่น +1d 12m "
 "8s"
 
-#: src/ui_locationDialogGui.h:422
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:150
-msgid "Longitude:"
-msgstr "ลองจิจูด:"
+#: src/ui_locationDialogGui.h:460
+msgid "Enter the altitude in meter"
+msgstr "ป้อนระดับความสูงในหน่วยเมตร"
 
-#: src/ui_locationDialogGui.h:426
+#: src/ui_locationDialogGui.h:462
+msgid " m"
+msgstr " ม."
+
+#: src/ui_locationDialogGui.h:466
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:153
 msgid "Altitude:"
 msgstr "ระดับความสูง:"
 
-#: src/ui_locationDialogGui.h:428
-msgid "Enter the altitude in meter"
-msgstr "ป้อนระดับความสูงในหน่วยเมตร"
-
-#: src/ui_locationDialogGui.h:430
-msgid " m"
-msgstr " ม."
-
-#: src/ui_locationDialogGui.h:431
-msgid "Return to default location"
-msgstr "กลับไปใช้ตำแหน่งที่ตั้งปริยาย"
-
-#: src/ui_locationDialogGui.h:433
-msgid "Add to list"
-msgstr "เพิ่มไปยังรายการ"
-
-#: src/ui_locationDialogGui.h:434
-msgid "Name/City:"
-msgstr "ชื่อ/เมือง:"
-
-#: src/ui_locationDialogGui.h:435
+#: src/ui_locationDialogGui.h:467
 msgid "New Location"
 msgstr "ตำแหน่งใหม่"
 
-#: src/ui_locationDialogGui.h:436
-msgid "Country:"
-msgstr "ประเทศ:"
-
-#: src/ui_locationDialogGui.h:437
+#: src/ui_locationDialogGui.h:468
 msgid "Planet:"
 msgstr "ดาวเคราะห์:"
 
-#: src/ui_locationDialogGui.h:438
-msgid "Use current location as default"
-msgstr "ใช้ที่ตั้งปัจจุบันเป็นค่าปริยาย"
+#: src/ui_locationDialogGui.h:469
+msgid "Use custom time zone"
+msgstr ""
 
-#: src/ui_locationDialogGui.h:439
-msgid "Get location from Network"
-msgstr "รับที่ตั้งจากเครือข่าย"
+#: src/ui_locationDialogGui.h:470
+msgid "Time zone:"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:471
+msgid "Name/City:"
+msgstr "ชื่อ/เมือง:"
+
+#: src/ui_locationDialogGui.h:472
+msgid "Country:"
+msgstr "ประเทศ:"
+
+#: src/ui_locationDialogGui.h:476
+msgid "Enable daylight saving time"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:617
 msgid "Find Object"
@@ -5298,7 +5378,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:722 src/ui_viewDialog.h:2210
 #: src/ui_viewDialog.h:2232 src/ui_viewDialog.h:2249
-#: src/ui_configurationDialog.h:1302 src/ui_configurationDialog.h:1313
+#: src/ui_configurationDialog.h:1346 src/ui_configurationDialog.h:1357
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "ตัวเลือก"
@@ -6001,68 +6081,68 @@ msgstr "ภูมิทัศน์"
 msgid "Starlore"
 msgstr "ตำนานดาว"
 
-#: src/ui_configurationDialog.h:1094
+#: src/ui_configurationDialog.h:1132
 msgid "Configuration"
 msgstr "การตั้งค่า"
 
-#: src/ui_configurationDialog.h:1096
+#: src/ui_configurationDialog.h:1134
 msgid "Language settings"
 msgstr "การตั้งค่าภาษา"
 
-#: src/ui_configurationDialog.h:1097
+#: src/ui_configurationDialog.h:1135
 msgid "Program Language"
 msgstr "ภาษาในโปรแกรม"
 
-#: src/ui_configurationDialog.h:1098
+#: src/ui_configurationDialog.h:1136
 msgid "Sky Culture Language"
 msgstr "ภาษาของกลุ่มดาวตามวัฒนธรรม"
 
-#: src/ui_configurationDialog.h:1100
+#: src/ui_configurationDialog.h:1138
 msgid "This feature has not been thoroughly tested yet!"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1102
+#: src/ui_configurationDialog.h:1140
 msgid "Ephemeris settings (experimental)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1103 src/ui_configurationDialog.h:1104
+#: src/ui_configurationDialog.h:1141 src/ui_configurationDialog.h:1142
 msgid "Not installed"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1106
+#: src/ui_configurationDialog.h:1144
 msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1108
+#: src/ui_configurationDialog.h:1146
 msgid "Use DE431 (long-time data)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1110
+#: src/ui_configurationDialog.h:1148
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1112
+#: src/ui_configurationDialog.h:1150
 msgid "Use DE430 (high accuracy)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1114
+#: src/ui_configurationDialog.h:1152
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1116
+#: src/ui_configurationDialog.h:1154
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1117
+#: src/ui_configurationDialog.h:1155
 msgid "Default options"
 msgstr "ตัวเลือกปริยาย"
 
-#: src/ui_configurationDialog.h:1119
+#: src/ui_configurationDialog.h:1157
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -6070,8 +6150,7 @@ msgstr ""
 "บันทึกการตั้งค่าที่คุณได้เปลี่ยนแปลงนี้ ให้เป็นแบบเดียวกันเมื่อเริ่ม "
 "Stellarium ในครั้งต่อไป"
 
-#: src/ui_configurationDialog.h:1121
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
+#: src/ui_configurationDialog.h:1159
 #: plugins/NavStars/src/ui_navStarsWindow.h:211
 #: plugins/FOV/src/ui_fovWindow.h:391
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:281
@@ -6079,11 +6158,11 @@ msgstr ""
 msgid "Save settings"
 msgstr "บันทึกการตั้งค่าต่าง ๆ"
 
-#: src/ui_configurationDialog.h:1123
+#: src/ui_configurationDialog.h:1161
 msgid "Restore the default settings that came with Stellarium"
 msgstr "คืนค่าเดิมที่มาพร้อมกับ Stellarium"
 
-#: src/ui_configurationDialog.h:1125
+#: src/ui_configurationDialog.h:1163
 #: plugins/NavStars/src/ui_navStarsWindow.h:212
 #: plugins/FOV/src/ui_fovWindow.h:408
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:282
@@ -6091,7 +6170,7 @@ msgstr "คืนค่าเดิมที่มาพร้อมกับ St
 msgid "Restore defaults"
 msgstr "คืนค่าเริ่มต้นเดิม"
 
-#: src/ui_configurationDialog.h:1126
+#: src/ui_configurationDialog.h:1164
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -6101,290 +6180,308 @@ msgstr ""
 "บันทึกทุกตัวเลือกปัจจุบัน รวมทั้งพื้นที่การมองเห็น "
 "และทิศทางของมุมมองสำหรับใช้ในการเริ่มต้นถัดไป"
 
-#: src/ui_configurationDialog.h:1128
+#: src/ui_configurationDialog.h:1166
 msgid "The width of your view when Stellarium starts"
 msgstr "ความกว้างของมุมมองเมื่อเริ่มต้น Stellarium"
 
-#: src/ui_configurationDialog.h:1131
+#: src/ui_configurationDialog.h:1169
 msgid "The direction you're looking when Stellarium starts"
 msgstr "ทิศทางที่คุณต้องการเมื่อเริ่ม Stellarium"
 
-#: src/ui_configurationDialog.h:1133 src/ui_configurationDialog.h:1324
+#: src/ui_configurationDialog.h:1171 src/ui_configurationDialog.h:1368
 msgid "Selected object information"
 msgstr "ข้อมูลวัตถุที่เลือก"
 
-#: src/ui_configurationDialog.h:1135
+#: src/ui_configurationDialog.h:1173
 msgid "Display all information available"
 msgstr "แสดงข้อมูลทั้งหมด"
 
-#: src/ui_configurationDialog.h:1137
+#: src/ui_configurationDialog.h:1175
 msgid "All available"
 msgstr "ทั้งหมดที่มี"
 
-#: src/ui_configurationDialog.h:1139
+#: src/ui_configurationDialog.h:1177
 msgid "Display no information"
 msgstr "ไม่แสดงข้อมูล"
 
-#: src/ui_configurationDialog.h:1141 plugins/Oculars/src/Oculars.cpp:2387
+#: src/ui_configurationDialog.h:1179 plugins/Oculars/src/Oculars.cpp:2387
 #: plugins/Observability/src/Observability.cpp:205
 msgid "None"
 msgstr "ไม่มี"
 
-#: src/ui_configurationDialog.h:1143
+#: src/ui_configurationDialog.h:1181
 msgid "Display less information"
 msgstr "แสดงข้อมูลโดยสังเขป"
 
-#: src/ui_configurationDialog.h:1145
+#: src/ui_configurationDialog.h:1183
 msgid "Short"
 msgstr "สั้น"
 
-#: src/ui_configurationDialog.h:1147
+#: src/ui_configurationDialog.h:1185
 msgid "Display user settings information"
 msgstr "แสดงข้อมูลการตั้งค่าโดยผู้ใช้"
 
-#: src/ui_configurationDialog.h:1149
+#: src/ui_configurationDialog.h:1187
 msgid "Customized"
 msgstr "ได้รับการปรับแต่ง"
 
-#: src/ui_configurationDialog.h:1150
+#: src/ui_configurationDialog.h:1188
 msgid "Displayed fields"
 msgstr "ขอบเขตที่แสดง"
 
-#: src/ui_configurationDialog.h:1153 src/ui_configurationDialog.h:1177
+#: src/ui_configurationDialog.h:1191 src/ui_configurationDialog.h:1215
 msgid "Equatorial coordinates, equinox of date"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1155
+#: src/ui_configurationDialog.h:1193
 msgid "Right ascension/Declination (of date)"
 msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (ของวัน)"
 
-#: src/ui_configurationDialog.h:1156
+#: src/ui_configurationDialog.h:1194
 msgid "Catalog number(s)"
 msgstr "หมายเลขบัญชี"
 
-#: src/ui_configurationDialog.h:1158
+#: src/ui_configurationDialog.h:1196
 msgid "Equatorial coordinates, equinox of J2000.0"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1160
+#: src/ui_configurationDialog.h:1198
 msgid "Right ascension/Declination (J2000)"
 msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (J2000)"
 
-#: src/ui_configurationDialog.h:1161
+#: src/ui_configurationDialog.h:1199
 msgid "Absolute magnitude"
 msgstr "โชติมาตรสัมบูรณ์"
 
-#: src/ui_configurationDialog.h:1162
+#: src/ui_configurationDialog.h:1200
 msgid "Galactic coordinates"
 msgstr "พิกัดดาราจักร"
 
-#: src/ui_configurationDialog.h:1163
+#: src/ui_configurationDialog.h:1201
 msgid "Visual magnitude"
 msgstr "โชติมาตรปรากฏ"
 
-#: src/ui_configurationDialog.h:1165
+#: src/ui_configurationDialog.h:1203
 msgid "Angular or physical size"
 msgstr "ขนาดจริงหรือขนาดเชิงมุม"
 
-#: src/ui_configurationDialog.h:1167
+#: src/ui_configurationDialog.h:1205
 msgid "Size"
 msgstr "ขนาด"
 
-#: src/ui_configurationDialog.h:1169
+#: src/ui_configurationDialog.h:1207
 msgid "The type of the object (star, planet, etc.)"
 msgstr "ชนิดของวัตถุ (ดาวฤกษ์, ดาวเคราะห์ ฯลฯ)"
 
-#: src/ui_configurationDialog.h:1173
+#: src/ui_configurationDialog.h:1211
 msgid "Spectral class, nebula type, etc."
 msgstr "ชนิดสเปกตรัม, ชนิดเนบิวลา, ฯลฯ"
 
-#: src/ui_configurationDialog.h:1175
+#: src/ui_configurationDialog.h:1213
 msgid "Additional information"
 msgstr "รายละเอียดเพิ่มเติม"
 
-#: src/ui_configurationDialog.h:1179
+#: src/ui_configurationDialog.h:1217
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:198
 msgid "Hour angle/Declination"
 msgstr "มุมชั่วโมง/เดคลิเนชัน"
 
-#: src/ui_configurationDialog.h:1181
+#: src/ui_configurationDialog.h:1219
 msgid "Horizontal coordinates"
 msgstr "พิกัดขอบฟ้า"
 
-#: src/ui_configurationDialog.h:1183
+#: src/ui_configurationDialog.h:1221
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:201
 msgid "Altitude/Azimuth"
 msgstr "มุมเงย/มุมทิศ"
 
-#: src/ui_configurationDialog.h:1184
+#: src/ui_configurationDialog.h:1222
 msgid "Distance"
 msgstr "ระยะห่าง"
 
-#: src/ui_configurationDialog.h:1186
+#: src/ui_configurationDialog.h:1224
 msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 msgstr "พิกัดฟ้า, วิษุวัตของวันและ J2000 (สำหรับโลกเท่านั้น)"
 
-#: src/ui_configurationDialog.h:1188
+#: src/ui_configurationDialog.h:1226
 msgid "Ecliptic coordinates"
 msgstr "พิกัดสุริยวิถี"
 
-#: src/ui_configurationDialog.h:1189
+#: src/ui_configurationDialog.h:1227
 msgid "Control"
 msgstr "ควบคุม"
 
-#: src/ui_configurationDialog.h:1191
-msgid "Allow keyboard to pan and zoom"
-msgstr "ใช้แป้นพิมพ์เพื่อกวาดและซูม"
-
-#: src/ui_configurationDialog.h:1193
-msgid "Enable keyboard navigation"
-msgstr "เปิดใช้การนำทางผ่านแป้นพิมพ์"
-
-#: src/ui_configurationDialog.h:1195
+#: src/ui_configurationDialog.h:1229
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "ใช้เมาส์ในการกวาด (ลากเมาส์) และซูม (หมุนล้อของเมาส์)"
 
-#: src/ui_configurationDialog.h:1197
+#: src/ui_configurationDialog.h:1231
 msgid "Enable mouse navigation"
 msgstr "เปิดใช้การนำทางด้วยเมาส์"
 
-#: src/ui_configurationDialog.h:1200
+#: src/ui_configurationDialog.h:1234
+msgid "Allow keyboard to pan and zoom"
+msgstr "ใช้แป้นพิมพ์เพื่อกวาดและซูม"
+
+#: src/ui_configurationDialog.h:1236
+msgid "Enable keyboard navigation"
+msgstr "เปิดใช้การนำทางผ่านแป้นพิมพ์"
+
+#: src/ui_configurationDialog.h:1238
 msgid "Hides the mouse cursor when inactive"
 msgstr "ซ่อนตัวชี้เมาส์เมื่อไม่มีการใช้งาน"
 
-#: src/ui_configurationDialog.h:1202
+#: src/ui_configurationDialog.h:1240
 msgid "Mouse cursor timeout:"
 msgstr "เวลาที่แสดงตัวชี้เมาส์:"
 
-#: src/ui_configurationDialog.h:1204
+#: src/ui_configurationDialog.h:1242
 msgid "seconds"
 msgstr "วินาที"
 
-#: src/ui_configurationDialog.h:1206
+#: src/ui_configurationDialog.h:1244
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:192
 msgid "Startup date and time"
 msgstr "วันและเวลาเริ่มต้น"
 
-#: src/ui_configurationDialog.h:1208
-msgid "Use a specific date and time when Stellarium starts up"
-msgstr "ใช้วันที่และเวลาที่เจาะจงเมื่อเริ่ม Stellarium"
-
-#: src/ui_configurationDialog.h:1210
-msgid "Other:"
-msgstr "อื่น ๆ :"
-
-#: src/ui_configurationDialog.h:1212
-msgid "Use current local date and time"
-msgstr "ใช้วันและเวลาท้องถิ่นในขณะนี้"
-
-#: src/ui_configurationDialog.h:1214
-msgid "use current"
-msgstr "ใช้ค่าขณะนี้"
-
-#: src/ui_configurationDialog.h:1216
+#: src/ui_configurationDialog.h:1246
 msgid "Starts Stellarium at system clock date and time"
 msgstr "เริ่ม Stellarium ตามวันและเวลาของระบบ"
 
-#: src/ui_configurationDialog.h:1218
+#: src/ui_configurationDialog.h:1248
 msgid "System date and time"
 msgstr "ใช้วันที่และเวลาของระบบ"
 
-#: src/ui_configurationDialog.h:1220
+#: src/ui_configurationDialog.h:1250
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr "ตั้งค่าเวลาของการจำลองเหตุการณ์หากวันที่ตรงกับการใช้งาน Stellarium"
 
-#: src/ui_configurationDialog.h:1222
+#: src/ui_configurationDialog.h:1252
 msgid "System date at:"
 msgstr "เวลาของระบบ:"
 
-#: src/ui_configurationDialog.h:1223
+#: src/ui_configurationDialog.h:1254
+msgid "Use a specific date and time when Stellarium starts up"
+msgstr "ใช้วันที่และเวลาที่เจาะจงเมื่อเริ่ม Stellarium"
+
+#: src/ui_configurationDialog.h:1256
+msgid "Other:"
+msgstr "อื่น ๆ :"
+
+#: src/ui_configurationDialog.h:1258
+msgid "Use current local date and time"
+msgstr "ใช้วันและเวลาท้องถิ่นในขณะนี้"
+
+#: src/ui_configurationDialog.h:1260
+msgid "use current"
+msgstr "ใช้ค่าขณะนี้"
+
+#: src/ui_configurationDialog.h:1262
+msgid ""
+"These settings control the way time and date are displayed in the bottom bar."
+msgstr "การตั้งค่าเหล่านี้จะควบคุมการแสดงวันที่และเวลาบนแถบด้านล่าง"
+
+#: src/ui_configurationDialog.h:1264
+msgid "Display formats of date and time"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1265
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
+msgid "Date:"
+msgstr "วันที่:"
+
+#: src/ui_configurationDialog.h:1266
+msgid "Time:"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1267
 msgid "Time correction"
 msgstr "ค่าตรวจแก้เวลา"
 
-#: src/ui_configurationDialog.h:1226
+#: src/ui_configurationDialog.h:1270
 msgid "Edit equation"
 msgstr "แก้ไขสมการ"
 
-#: src/ui_configurationDialog.h:1228
+#: src/ui_configurationDialog.h:1272
 msgid "Planetarium options"
 msgstr "ตัวเลือกท้องฟ้าจำลอง"
 
-#: src/ui_configurationDialog.h:1230
+#: src/ui_configurationDialog.h:1274
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
 "เปิดการใช้งานบรรยากาศของวัตถุที่มีบรรยากาศโดยอัตโนมัติในหน้าต่างสถานที่"
 
-#: src/ui_configurationDialog.h:1232
+#: src/ui_configurationDialog.h:1276
 msgid "Auto-enabling for the atmosphere"
 msgstr "เปิดการใช้งานบรรยากาศโดยอัตโนมัติ"
 
-#: src/ui_configurationDialog.h:1234
+#: src/ui_configurationDialog.h:1278
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "สลับการแสดงภาพพื้นหลังของเนบิวลา"
 
-#: src/ui_configurationDialog.h:1236
+#: src/ui_configurationDialog.h:1280
 msgid "Show nebula background button"
 msgstr "แสดงปุ่มภาพพื้นหลังของเนบิวลา"
 
-#: src/ui_configurationDialog.h:1238
+#: src/ui_configurationDialog.h:1282
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1240
+#: src/ui_configurationDialog.h:1284
 msgid "Include nutation"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1242
+#: src/ui_configurationDialog.h:1286
 msgid "Activate this option to calculate azimuth from south towards west."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1244
+#: src/ui_configurationDialog.h:1288
 msgid "Azimuth from South"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1246
+#: src/ui_configurationDialog.h:1290
 msgid "Use decimal degrees for coordinates"
 msgstr "ใช้องศาแบบทศนิยมสำหรับพิกัด"
 
-#: src/ui_configurationDialog.h:1248
+#: src/ui_configurationDialog.h:1292
 msgid "Use decimal degrees"
 msgstr "ใช้องศาแบบทศนิยม"
 
-#: src/ui_configurationDialog.h:1250
+#: src/ui_configurationDialog.h:1294
 msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1252
+#: src/ui_configurationDialog.h:1296
 msgid "Topocentric coordinates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1254
+#: src/ui_configurationDialog.h:1298
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "สลับปุ่มพลิกภาพแนวตั้งและแนวนอน"
 
-#: src/ui_configurationDialog.h:1256
+#: src/ui_configurationDialog.h:1300
 msgid "Show flip buttons"
 msgstr "แสดงปุ่มพลิก"
 
-#: src/ui_configurationDialog.h:1258
+#: src/ui_configurationDialog.h:1302
 msgid "Align labels with the horizon"
 msgstr "วางป้ายอักษรให้อยู่ในแนวขนานกับขอบฟ้า"
 
-#: src/ui_configurationDialog.h:1260
+#: src/ui_configurationDialog.h:1304
 msgid "Gravity labels"
 msgstr "ป้ายแสดงความโน้มถ่วง"
 
-#: src/ui_configurationDialog.h:1262 src/ui_configurationDialog.h:1265
+#: src/ui_configurationDialog.h:1306 src/ui_configurationDialog.h:1309
 msgid "Hide other constellations when you click one"
 msgstr "ซ่อนกลุ่มดาวอื่นเมื่อคลิกที่กลุ่มดาวกลุ่มหนึ่ง"
 
-#: src/ui_configurationDialog.h:1269
+#: src/ui_configurationDialog.h:1313
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -6392,27 +6489,27 @@ msgstr ""
 "ปรับภาพเป็นการสะท้อนผิวโค้งสำหรับการใช้ในการฉายภาพลงบนกระจกโค้งของระบบท้องฟ้า"
 "จำลองราคาประหยัด"
 
-#: src/ui_configurationDialog.h:1271
+#: src/ui_configurationDialog.h:1315
 msgid "Spheric mirror distortion"
 msgstr "ปรับภาพให้เหมือนสะท้อนกระจกโค้งทรงกลม"
 
-#: src/ui_configurationDialog.h:1273
+#: src/ui_configurationDialog.h:1317
 msgid "Automatic change of landscape when planet is changed"
 msgstr "เปลี่ยนภูมิทัศน์โดยอัตโนมัติเมื่อเปลี่ยนดาวอันเป็นที่ตั้ง"
 
-#: src/ui_configurationDialog.h:1275
+#: src/ui_configurationDialog.h:1319
 msgid "Auto select landscapes"
 msgstr "เลือกภูมิทัศน์โดยอัตโนมัติ"
 
-#: src/ui_configurationDialog.h:1277
+#: src/ui_configurationDialog.h:1321
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "บังส่วนที่อยู่นอกมุมมองรูปวงกลม"
 
-#: src/ui_configurationDialog.h:1279
+#: src/ui_configurationDialog.h:1323
 msgid "Disc viewport"
 msgstr "มุมมองรูปวงกลม"
 
-#: src/ui_configurationDialog.h:1281
+#: src/ui_configurationDialog.h:1325
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -6420,93 +6517,93 @@ msgstr ""
 "เมื่อกำหนดให้ทำงาน, ปุ่ม \"ย่อภาพอัตโนมัติ\" "
 "จะถูกกำหนดเป็นค่าเริ่มต้นในทิศทางการมอง"
 
-#: src/ui_configurationDialog.h:1283
+#: src/ui_configurationDialog.h:1327
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:457
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "ซูมออกอัตโนมัติเพื่อกลับไปยังทิศทางของมุมมองเริ่มต้น"
 
-#: src/ui_configurationDialog.h:1284
+#: src/ui_configurationDialog.h:1328
 msgid "Show bookmarks button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1285
+#: src/ui_configurationDialog.h:1329
 msgid "Screenshots"
 msgstr "ภาพหน้าจอ"
 
-#: src/ui_configurationDialog.h:1286
+#: src/ui_configurationDialog.h:1330
 msgid "Screenshot Directory"
 msgstr "ไดเร็กทอรีที่บันทึกภาพหน้าจอ"
 
-#: src/ui_configurationDialog.h:1288
+#: src/ui_configurationDialog.h:1332
 msgid "Invert colors"
 msgstr "กลับสี"
 
-#: src/ui_configurationDialog.h:1289
+#: src/ui_configurationDialog.h:1333
 msgid "Star catalog updates"
 msgstr "ปรับปรุงบัญชีดาว"
 
-#: src/ui_configurationDialog.h:1291
+#: src/ui_configurationDialog.h:1335
 msgid "Click here to start downloading"
 msgstr "คลิกที่นี่เพื่อเริ่มการดาวน์โหลด"
 
-#: src/ui_configurationDialog.h:1293
+#: src/ui_configurationDialog.h:1337
 msgid "Download this file to view even more stars"
 msgstr "ดาวน์โหลดแฟ้มนี้เพื่อเพิ่มจำนวนดาวให้มากขึ้น"
 
-#: src/ui_configurationDialog.h:1295
+#: src/ui_configurationDialog.h:1339
 msgid "Restart the download"
 msgstr "เริ่มต้นการดาวน์โหลดใหม่"
 
-#: src/ui_configurationDialog.h:1297
+#: src/ui_configurationDialog.h:1341
 msgid "Retry"
 msgstr "ลองซ้ำ"
 
-#: src/ui_configurationDialog.h:1299
+#: src/ui_configurationDialog.h:1343
 msgid "Stop the download. You can always restart it later"
 msgstr "หยุดการดาวน์โหลด คุณสามารถเริ่มต้นใหม่ได้ในภายหลัง"
 
-#: src/ui_configurationDialog.h:1304
+#: src/ui_configurationDialog.h:1348
 msgid "Close window when script runs"
 msgstr "ปิดหน้าต่างเมื่อสคริปต์ทำงาน"
 
-#: src/ui_configurationDialog.h:1306
+#: src/ui_configurationDialog.h:1350
 msgid "Run the selected script"
 msgstr "สั่งให้สคริปต์ที่เลือกไว้ทำงาน"
 
-#: src/ui_configurationDialog.h:1310
+#: src/ui_configurationDialog.h:1354
 msgid "Stop a running script"
 msgstr "หยุดสคริปต์ที่กำลังทำงานอยู่"
 
-#: src/ui_configurationDialog.h:1314
+#: src/ui_configurationDialog.h:1358
 msgid "Load at startup"
 msgstr "โหลดเมื่อเริ่มต้นระบบ"
 
-#: src/ui_configurationDialog.h:1315
+#: src/ui_configurationDialog.h:1359
 msgid "configure"
 msgstr "ปรับแต่ง"
 
-#: src/ui_configurationDialog.h:1320
+#: src/ui_configurationDialog.h:1364
 msgid "Main"
 msgstr "หลัก"
 
-#: src/ui_configurationDialog.h:1322
+#: src/ui_configurationDialog.h:1366
 msgid "Information"
 msgstr "ข้อมูล"
 
-#: src/ui_configurationDialog.h:1327
+#: src/ui_configurationDialog.h:1371
 msgid "Navigation"
 msgstr "นำทาง"
 
-#: src/ui_configurationDialog.h:1329
+#: src/ui_configurationDialog.h:1373
 msgid "Tools"
 msgstr "เครื่องมือ"
 
-#: src/ui_configurationDialog.h:1331
+#: src/ui_configurationDialog.h:1375
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:497
 msgid "Scripts"
 msgstr "สคริปต์"
 
-#: src/ui_configurationDialog.h:1333
+#: src/ui_configurationDialog.h:1377
 msgid "Plugins"
 msgstr "โปรแกรมเสริม"
 
@@ -7042,7 +7139,6 @@ msgstr "คืนค่าเริ่มต้นเดิม"
 #: plugins/Oculars/src/ui_ocularDialog.h:1192
 #: plugins/Satellites/src/ui_satellitesDialog.h:793
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/NavStars/src/ui_navStarsWindow.h:214
@@ -9634,275 +9730,6 @@ msgstr ""
 msgid "Clear list"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
-msgid "Time Zone"
-msgstr "เขตเวลา"
-
-#: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:44
-msgid ""
-"A convenient interface for some of the more obscure options in Stellarium's "
-"configuration file. Allows setting the time zone and changing the way the "
-"time and the date are displayed in the bottom bar."
-msgstr ""
-"ส่วนต่อประสานสำหรับตั้งค่าตัวเลือกที่ซ่อนอยู่ในไฟล์การตั้งค่าของ Stellarium "
-"สามารถใช้สำหรับตั้งค่าเขตเวลาและเปลี่ยนแปลงรูปแบบวัน-เวลาในแถบด้านล่าง"
-
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
-msgid "January"
-msgstr "มกราคม"
-
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
-msgid "February"
-msgstr "กุมภาพันธ์"
-
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
-msgid "March"
-msgstr "มีนาคม"
-
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
-msgid "April"
-msgstr "เมษายน"
-
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
-msgid "May"
-msgstr "พฤษภาคม"
-
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
-msgid "June"
-msgstr "มิถุนายน"
-
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
-msgid "July"
-msgstr "กรกฎาคม"
-
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
-msgid "August"
-msgstr "สิงหาคม"
-
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
-msgid "September"
-msgstr "กันยายน"
-
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
-msgid "October"
-msgstr "ตุลาคม"
-
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:254
-#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
-msgid "November"
-msgstr "พฤศจิกายน"
-
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:255
-#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
-msgid "December"
-msgstr "ธันวาคม"
-
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:267
-msgid "First week"
-msgstr "สัปดาห์แรก"
-
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:268
-msgid "Second week"
-msgstr "สัปดาห์ที่ 2"
-
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:269
-msgid "Third week"
-msgstr "สัปดาห์ที่ 3"
-
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:270
-msgid "Fourth week"
-msgstr "สัปดาห์ที่ 4"
-
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:271
-msgid "Last week"
-msgstr "สัปดาห์สุดท้าย"
-
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:280
-msgid "Sunday"
-msgstr "อาทิตย์"
-
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:281
-msgid "Monday"
-msgstr "จันทร์"
-
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:282
-msgid "Tuesday"
-msgstr "อังคาร"
-
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:283
-msgid "Wednesday"
-msgstr "พุธ"
-
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:284
-msgid "Thursday"
-msgstr "พฤหัสบดี"
-
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:285
-msgid "Friday"
-msgstr "ศุกร์"
-
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:286
-msgid "Saturday"
-msgstr "เสาร์"
-
-#: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:106
-msgid "Time Zone plug-in"
-msgstr "โปรแกรมเสริมเขตเวลา"
-
-#: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:107
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:109
-#: plugins/FOV/src/gui/FOVWindow.cpp:81
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:83
-#, qt-format
-msgid "Version %1"
-msgstr "รุ่น %1"
-
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:448
-msgid "Define a time zone"
-msgstr "กำหนดเขตเวลา"
-
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:450
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:381
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:383
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:392
-msgid "Time zone"
-msgstr "เขตเวลา"
-
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:451
-msgid "Timezone name:"
-msgstr "ชื่อเขตเวลา:"
-
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:452
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:387
-msgid "Offset from UTC (hours):"
-msgstr "ผลต่างจากเวลาสากลเชิงพิกัด (ชั่วโมง):"
-
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
-msgid "Daylight saving time (summer time)"
-msgstr "เวลาออมแสง"
-
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:454
-msgid "DST timezone name:"
-msgstr "ชื่อเขตเวลาเมื่อใช้เวลาออมแสง:"
-
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:455
-msgid "DST offset from UTC (hours):"
-msgstr "ผลต่างของเวลาออมแสงกับเวลาสากลเชิงพิกัด (ชั่วโมง):"
-
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:456
-msgid "Daylight saving time start"
-msgstr "เริ่มใช้เวลาออมแสง"
-
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:457
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:461
-msgid "Day:"
-msgstr "วัน:"
-
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:462
-msgid "Time of change:"
-msgstr "เวลาที่เปลี่ยน:"
-
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:459
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:463
-#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
-msgid "Date:"
-msgstr "วันที่:"
-
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:460
-msgid "Daylight saving time end"
-msgstr "สิ้นสุดการใช้เวลาออมแสง"
-
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:464
-msgid "Use this definition"
-msgstr "ใช้ข้อกำหนดนี้"
-
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
-msgid ""
-"By default, the time displayed in Stellarium is interpreted as the local "
-"time in the system's time zone, not in the displayed location's time zone. "
-"This behaviour can be changed by changing Stellarium's global time zone "
-"settings."
-msgstr ""
-"โดยปริยาย เวลาที่แสดงใน Stellarium จะแปลงเป็นเวลาท้องถิ่นตามเขตเวลาของระบบ "
-"ไม่ใช่ตามเขตเวลาของสถานที่ที่แสดงในโปรแกรม "
-"คุณสามารถเปลี่ยนพฤติกรรมนี้ได้โดยการตั้งค่าเขตเวลาใน Stellarium"
-
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:385
-msgid "Use system settings (default)"
-msgstr "ใช่การตั้งค่าของระบบ (ปริยาย)"
-
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:386
-msgid "Universal Coordinated Time (UTC)"
-msgstr "เวลาสากลเชิงพิกัด (UTC)"
-
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
-msgid "(offset = local time - UTC time)"
-msgstr "(เวลาผลต่าง = เวลาท้องถิ่น - เวลาสากลเชิงพิกัด)"
-
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:389
-msgid "User-defined:"
-msgstr "ผู้ใช้กำหนด:"
-
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
-msgid "Any changes will take effect the next time Stellarium is started."
-msgstr "การเปลี่ยนแปลงใด ๆ จะมีผลเมื่อเริ่ม Stellarium ในครั้งถัดไป"
-
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:404
-msgid "Display formats"
-msgstr "รูปแบบการแสดงผล"
-
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:394
-msgid ""
-"These settings control the way time and date are displayed in the bottom bar."
-msgstr "การตั้งค่าเหล่านี้จะควบคุมการแสดงวันที่และเวลาบนแถบด้านล่าง"
-
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:211
-msgid "Time display format"
-msgstr "รูปแบบการแสดงเวลา"
-
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
-msgid "System default"
-msgstr "ค่าปริยายของระบบ"
-
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
-msgid "12-hour format"
-msgstr "รูปแบบ 12 ชั่วโมง"
-
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
-msgid "24-hour format"
-msgstr "รูปแบบ 24 ชั่วโมง"
-
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:200
-msgid "Date display format"
-msgstr "รูปแบบการแสดงวันที่"
-
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:401
-msgid "yyyy-mm-dd (ISO 8601)"
-msgstr "yyyy-mm-dd (ISO 8601)"
-
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:402
-msgid "dd-mm-yyyy"
-msgstr "dd-mm-yyyy"
-
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:403
-msgid "mm-dd-yyyy"
-msgstr "mm-dd-yyyy"
-
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:90
 msgid "Text User Interface"
 msgstr "ส่วนต่อประสานกับผู้ใช้แบบข้อความ"
@@ -9957,6 +9784,10 @@ msgstr "ddmmyyyy"
 msgid "yyyymmdd"
 msgstr "yyyymmdd"
 
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:200
+msgid "Date display format"
+msgstr "รูปแบบการแสดงวันที่"
+
 #. TRANSLATORS: 12-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:208
 msgid "12h"
@@ -9966,6 +9797,10 @@ msgstr "12h"
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:210
 msgid "24h"
 msgstr "24h"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:211
+msgid "Time display format"
+msgstr "รูปแบบการแสดงเวลา"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:235
 msgid "Sky Language"
@@ -10161,6 +9996,13 @@ msgstr ""
 msgid "Solar System Editor plug-in"
 msgstr "โปรแกรมเสริมสำหรับการปรับแต่งระบบสุริยะ"
 
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:109
+#: plugins/FOV/src/gui/FOVWindow.cpp:81
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:83
+#, qt-format
+msgid "Version %1"
+msgstr "รุ่น %1"
+
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:187
 msgid "Save the Solar System configuration file as..."
 msgstr ""
@@ -10320,6 +10162,54 @@ msgstr "โปรแกรมเสริมนี้แสดงซูเปอ
 #: plugins/Supernovae/src/Supernovae.cpp:148
 msgid "Historical Supernovae configuration window"
 msgstr "หน้าต่างการตั้งค่าซูเปอร์โนวาในประวัติศาสตร์"
+
+#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
+msgid "January"
+msgstr "มกราคม"
+
+#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
+msgid "February"
+msgstr "กุมภาพันธ์"
+
+#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
+msgid "March"
+msgstr "มีนาคม"
+
+#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
+msgid "April"
+msgstr "เมษายน"
+
+#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
+msgid "May"
+msgstr "พฤษภาคม"
+
+#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
+msgid "June"
+msgstr "มิถุนายน"
+
+#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
+msgid "July"
+msgstr "กรกฎาคม"
+
+#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
+msgid "August"
+msgstr "สิงหาคม"
+
+#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
+msgid "September"
+msgstr "กันยายน"
+
+#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
+msgid "October"
+msgstr "ตุลาคม"
+
+#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
+msgid "November"
+msgstr "พฤศจิกายน"
+
+#: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
+msgid "December"
+msgstr "ธันวาคม"
 
 #: plugins/Supernovae/src/Supernova.cpp:130
 msgid "supernova"
@@ -12379,31 +12269,31 @@ msgstr ""
 "Cartes du Ciel โปรแกรมเสริมนี้ช่วยให้ทำเช่นนั้นได้ "
 "คุณสามารถแก้ไขค่าและใช้แป้นพิมพ์เพื่อตั้งค่าขอบเขตภาพ มีหน่วยเป็นองศา"
 
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:56
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:97
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:258
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:53
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:94
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:217
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:272
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:274
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:283
 msgid "Equation of Time"
 msgstr "สมการเวลา"
 
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:59
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:56
 msgid "This plugin shows the solution of the equation of time."
 msgstr "โปรแกรมนี้ใช้แสดงผลการคำนวณสมการเวลา"
 
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:97
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:94
 msgid "Show solution for Equation of Time"
 msgstr "แสดงผลการคำนวณสมการเวลา"
 
 #. TRANSLATORS: minutes.
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:260
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:219
 msgctxt "time"
 msgid "m"
 msgstr "นาที"
 
 #. TRANSLATORS: seconds.
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:262
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:221
 msgctxt "time"
 msgid "s"
 msgstr "วินาที"
@@ -14653,6 +14543,9 @@ msgstr ""
 #~ "มันจะดาวน์โหลดรายชื่อวัตถุจากเว็บไซต์ของศูนย์ดาวเคราะห์น้อย "
 #~ "และค้นหาในฐานข้อมูลออนไลน์ ส่วนนี้ยังอยู่ระหว่างการพัฒนา"
 
+#~ msgid "Time Zone"
+#~ msgstr "เขตเวลา"
+
 #~ msgid "Pallas"
 #~ msgstr "แพลลัส"
 
@@ -14827,6 +14720,14 @@ msgstr ""
 #~ msgid "Laomedeia"
 #~ msgstr "เลโอมาเดีย"
 
+#~ msgid ""
+#~ "A convenient interface for some of the more obscure options in Stellarium's "
+#~ "configuration file. Allows setting the time zone and changing the way the "
+#~ "time and the date are displayed in the bottom bar."
+#~ msgstr ""
+#~ "ส่วนต่อประสานสำหรับตั้งค่าตัวเลือกที่ซ่อนอยู่ในไฟล์การตั้งค่าของ Stellarium "
+#~ "สามารถใช้สำหรับตั้งค่าเขตเวลาและเปลี่ยนแปลงรูปแบบวัน-เวลาในแถบด้านล่าง"
+
 #~ msgid "Nix"
 #~ msgstr "นิกซ์"
 
@@ -14861,6 +14762,72 @@ msgstr ""
 #~ msgid "Form"
 #~ msgstr "รูปแบบ"
 
+#~ msgid "First week"
+#~ msgstr "สัปดาห์แรก"
+
+#~ msgid "Second week"
+#~ msgstr "สัปดาห์ที่ 2"
+
+#~ msgid "Third week"
+#~ msgstr "สัปดาห์ที่ 3"
+
+#~ msgid "Fourth week"
+#~ msgstr "สัปดาห์ที่ 4"
+
+#~ msgid "Last week"
+#~ msgstr "สัปดาห์สุดท้าย"
+
+#~ msgid "Sunday"
+#~ msgstr "อาทิตย์"
+
+#~ msgid "Monday"
+#~ msgstr "จันทร์"
+
+#~ msgid "Tuesday"
+#~ msgstr "อังคาร"
+
+#~ msgid "Wednesday"
+#~ msgstr "พุธ"
+
+#~ msgid "Thursday"
+#~ msgstr "พฤหัสบดี"
+
+#~ msgid "Friday"
+#~ msgstr "ศุกร์"
+
+#~ msgid "Saturday"
+#~ msgstr "เสาร์"
+
+#~ msgid "Time Zone plug-in"
+#~ msgstr "โปรแกรมเสริมเขตเวลา"
+
+#~ msgid "Define a time zone"
+#~ msgstr "กำหนดเขตเวลา"
+
+#~ msgid "Timezone name:"
+#~ msgstr "ชื่อเขตเวลา:"
+
+#~ msgid "Daylight saving time (summer time)"
+#~ msgstr "เวลาออมแสง"
+
+#~ msgid "DST timezone name:"
+#~ msgstr "ชื่อเขตเวลาเมื่อใช้เวลาออมแสง:"
+
+#~ msgid "Daylight saving time start"
+#~ msgstr "เริ่มใช้เวลาออมแสง"
+
+#~ msgid "Day:"
+#~ msgstr "วัน:"
+
+#~ msgid "Time of change:"
+#~ msgstr "เวลาที่เปลี่ยน:"
+
+#~ msgid "Daylight saving time end"
+#~ msgstr "สิ้นสุดการใช้เวลาออมแสง"
+
+#~ msgid "Universal Coordinated Time (UTC)"
+#~ msgstr "เวลาสากลเชิงพิกัด (UTC)"
+
 #~ msgid "Manual zoom"
 #~ msgstr "ซูมด้วยมือ"
 
@@ -14894,6 +14861,24 @@ msgstr ""
 #~ msgid "CD/DVD script"
 #~ msgstr "สคริปต์จาก CD/DVD"
 
+#~ msgid "Offset from UTC (hours):"
+#~ msgstr "ผลต่างจากเวลาสากลเชิงพิกัด (ชั่วโมง):"
+
+#~ msgid "Use this definition"
+#~ msgstr "ใช้ข้อกำหนดนี้"
+
+#~ msgid "Any changes will take effect the next time Stellarium is started."
+#~ msgstr "การเปลี่ยนแปลงใด ๆ จะมีผลเมื่อเริ่ม Stellarium ในครั้งถัดไป"
+
+#~ msgid "Display formats"
+#~ msgstr "รูปแบบการแสดงผล"
+
+#~ msgid "User-defined:"
+#~ msgstr "ผู้ใช้กำหนด:"
+
+#~ msgid "Use system settings (default)"
+#~ msgstr "ใช่การตั้งค่าของระบบ (ปริยาย)"
+
 #~ msgid "Crosshairs"
 #~ msgstr "สายใยเล็ง"
 
@@ -14925,6 +14910,99 @@ msgstr ""
 #~ msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 #~ msgstr "โชติมาตร : <b>%1</b> (B-V: <b>%2</b>)"
 
+#~ msgid "American Samoa"
+#~ msgstr "อเมริกันซามัว"
+
+#~ msgid "Brunei Darussalam"
+#~ msgstr "บรูไนดารุสซาลาม"
+
+#~ msgid "Cocos Islands"
+#~ msgstr "หมู่เกาะโคโคส"
+
+#~ msgid "Democratic Republic of the Congo"
+#~ msgstr "สาธารณรัฐประชาธิปไตยคองโก"
+
+#~ msgid "Central African Republic"
+#~ msgstr "สาธารณรัฐแอฟริกากลาง"
+
+#~ msgid "Republic of the Congo"
+#~ msgstr "สาธารณรัฐคองโก"
+
+#~ msgid "Serbia and Montenegro"
+#~ msgstr "เซอร์เบียและมอนเตเนโกร"
+
+#~ msgid "United Kingdom"
+#~ msgstr "สหราชอาณาจักร"
+
+#~ msgid "Saint Kitts and Nevis"
+#~ msgstr "เซนต์คิตส์และเนวิส"
+
+#~ msgid "Democratic People's Republic of Korea"
+#~ msgstr "สาธารณรัฐประชาธิปไตยประชาชนเกาหลี"
+
+#~ msgid "Republic of Korea"
+#~ msgstr "สาธารณรัฐเกาหลี"
+
+#~ msgid "Lao"
+#~ msgstr "ลาว"
+
+#~ msgid "Saint Lucia"
+#~ msgstr "เซนต์ลูเซีย"
+
+#~ msgid "Libyan Arab Jamahiriya"
+#~ msgstr "ลิเบีย"
+
+#~ msgid "Myanmar"
+#~ msgstr "พมา"
+
+#~ msgid "Saint Pierre and Miquelon"
+#~ msgstr "แซงปีแยร์และมีเกอลง"
+
+#~ msgid "Russian Federation"
+#~ msgstr "สหพันธรัฐรัสเซีย"
+
+#~ msgid "Saint Helena"
+#~ msgstr "เซนต์เฮเลนา"
+
+#~ msgid "Syrian Arab Republic"
+#~ msgstr "สาธารณรัฐอาหรับซีเรีย"
+
+#~ msgid "Turks and Caicos Islands"
+#~ msgstr "หมู่เกาะเติกส์และหมู่เกาะเคคอส"
+
+#~ msgid "French Southern Territories"
+#~ msgstr "เฟรนช์เซาเทิร์นเทร์ริทอรีส์"
+
+#~ msgid "Vatican City State"
+#~ msgstr "นครรัฐวาติกัน"
+
+#~ msgid "Saint Vincent and the Grenadines"
+#~ msgstr "เซนต์วินเซนต์และเกรนาดีนส์"
+
+#~ msgid "British Virgin Islands"
+#~ msgstr "หมู่เกาะบริติชเวอร์จิน"
+
+#~ msgid "United States Virgin Islands"
+#~ msgstr "หมู่เกาะเวอร์จินของสหรัฐอเมริกา"
+
+#~ msgid "Viet Nam"
+#~ msgstr "เวียดนาม"
+
+#~ msgid "Samoa"
+#~ msgstr "ซามัว"
+
+#~ msgid "Yugoslavia"
+#~ msgstr "ยูโกสลาเวีย"
+
+#~ msgid "Netherlands Antilles"
+#~ msgstr "เนเธอร์แลนด์แอนทิลลิส"
+
+#~ msgid "Bosnia and Herzegowina"
+#~ msgstr "บอสเนียและเฮอร์เซโกวีนา"
+
+#~ msgid "Cote d'Ivoire"
+#~ msgstr "โกตดิวัวร์"
+
 #, qt-format
 #~ msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
 #~ msgstr "โชติมาตรปรากฏ: <b>%1</b> (โดยการสูญหายในบรรยากาศ)"
@@ -14932,6 +15010,9 @@ msgstr ""
 #, qt-format
 #~ msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 #~ msgstr "โชติมาตร: <b>%1</b> (จางลงไปที่: <b>%2</b>. B-V: <b>%3</b>)"
+
+#~ msgid "Palestinian Territories"
+#~ msgstr "ดินแดนปาเลสไตน์"
 
 #~ msgid "Toggle ocular view:"
 #~ msgstr "สลับมุมมองเลนส์ใกล้ตา:"
@@ -14952,11 +15033,30 @@ msgstr ""
 #~ "ความช่วยเหลือจะกระทำผ่านเว็บไซต์ Launchpad โปรดแน่ใจว่าได้เพิ่มข้อความ "
 #~ "\"Satellites plugin\" ไว้ในหัวข้อ"
 
+#~ msgid "United States Minor Outlying Islands"
+#~ msgstr "เกาะเล็กรอบนอกของสหรัฐอเมริกา"
+
 #~ msgid "Open pop-up navigation menu:"
 #~ msgstr "เปิดเมนูนำทางแบบผุดขึ้น:"
 
 #~ msgid "Nebula label frequency:"
 #~ msgstr "ความถี่ของการแสดงชื่อเนบิวลา:"
+
+#~ msgid "(offset = local time - UTC time)"
+#~ msgstr "(เวลาผลต่าง = เวลาท้องถิ่น - เวลาสากลเชิงพิกัด)"
+
+#~ msgid "DST offset from UTC (hours):"
+#~ msgstr "ผลต่างของเวลาออมแสงกับเวลาสากลเชิงพิกัด (ชั่วโมง):"
+
+#~ msgid ""
+#~ "By default, the time displayed in Stellarium is interpreted as the local "
+#~ "time in the system's time zone, not in the displayed location's time zone. "
+#~ "This behaviour can be changed by changing Stellarium's global time zone "
+#~ "settings."
+#~ msgstr ""
+#~ "โดยปริยาย เวลาที่แสดงใน Stellarium จะแปลงเป็นเวลาท้องถิ่นตามเขตเวลาของระบบ "
+#~ "ไม่ใช่ตามเขตเวลาของสถานที่ที่แสดงในโปรแกรม "
+#~ "คุณสามารถเปลี่ยนพฤติกรรมนี้ได้โดยการตั้งค่าเขตเวลาใน Stellarium"
 
 #~ msgid "Galaxy"
 #~ msgstr "ดาราจักร"
