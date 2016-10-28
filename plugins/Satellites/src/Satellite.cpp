@@ -182,6 +182,11 @@ double Satellite::roundToDp(float n, int dp)
 	return floor(n * pow(10., dp) + .5) / pow(10., dp);
 }
 
+QString Satellite::getNameI18n() const
+{
+	return q_(name);
+}
+
 QVariantMap Satellite::getMap(void)
 {
 	QVariantMap map;
