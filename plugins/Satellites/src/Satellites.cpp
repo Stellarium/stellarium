@@ -1776,7 +1776,7 @@ void Satellites::translations()
 	// TRANSLATORS: Satellite description.
 	N_("International Gamma-Ray Astrophysics Laboratory");
 	// TRANSLATORS: Satellite description.
-	N_("The Swift Gamma-Ray Burst Mission");
+	N_("The Gamma-Ray Observatory");
 
 	// Satellite names - a few famous objects only
 	// TRANSLATORS: Satellite name: International Space Station
@@ -1789,7 +1789,7 @@ void Satellites::translations()
 	N_("INTEGRAL");
 	// TRANSLATORS: China's first space station name
 	N_("TIANGONG 1");
-	// TRANSLATORS: Satellite name: The Swift Gamma-Ray Burst Mission (SWIFT)
+	// TRANSLATORS: Satellite name: The Gamma-Ray Observatory (SWIFT)
 	N_("SWIFT");
 
 #endif
