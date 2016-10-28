@@ -1788,9 +1788,7 @@ void Satellites::translations()
 	// TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
 	N_("INTEGRAL");
 	// TRANSLATORS: China's first space station name
-	N_("TIANGONG 1");
-	// TRANSLATORS: Satellite name: The Gamma-Ray Observatory (SWIFT)
-	N_("SWIFT");
+	N_("TIANGONG 1");	
 
 #endif
 }
