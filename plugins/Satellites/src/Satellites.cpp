@@ -1763,7 +1763,6 @@ void Satellites::translations()
 	N_("");
 	*/
 	
-	
 	// Satellite descriptions - bright and/or famous objects
 	// Just A FEW objects please! (I'm looking at you, Alex!)
 	// TRANSLATORS: Satellite description. "Hubble" is a person's name.
@@ -1772,5 +1771,26 @@ void Satellites::translations()
 	N_("The International Space Station");
 	// TRANSLATORS: Satellite description.
 	N_("China's first space station");
+	// TRANSLATORS: Satellite description.
+	N_("The russian space radio telescope RadioAstron");
+	// TRANSLATORS: Satellite description.
+	N_("International Gamma-Ray Astrophysics Laboratory");
+	// TRANSLATORS: Satellite description.
+	N_("The Swift Gamma-Ray Burst Mission");
+
+	// Satellite names - a few famous objects only
+	// TRANSLATORS: Satellite name: International Space Station
+	N_("ISS (ZARYA)");
+	// TRANSLATORS: Satellite name: Hubble Space Telescope
+	N_("HST");
+	// TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
+	N_("SPEKTR-R");
+	// TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
+	N_("INTEGRAL");
+	// TRANSLATORS: China's first space station name
+	N_("TIANGONG 1");
+	// TRANSLATORS: Satellite name: The Swift Gamma-Ray Burst Mission (SWIFT)
+	N_("SWIFT");
+
 #endif
 }
