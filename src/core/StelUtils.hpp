@@ -601,9 +601,10 @@ namespace StelUtils
 	//! For adapting from -26 to -23.895, use -0.91072 * (-23.895 + 26.0) = -1.9170656
 	//! @param jDay the JD
 	//! @param ndot value n-dot which use in the algorithm
+	//! @param useDE43x
 	//! @return SecularAcceleration in seconds
 	//! @note n-dot for secular acceleration of the Moon in ELP2000-82B is -23.8946 "/cy/cy
-	double getMoonSecularAcceleration(const double jDay, const double ndot);
+	double getMoonSecularAcceleration(const double jDay, const double ndot, const bool useDE43x);
 
 	//! Get the standard error (sigma) for the value of DeltaT
 	//! @param jDay the JD

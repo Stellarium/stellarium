@@ -1912,15 +1912,19 @@ double getDeltaTByKhalidSultanaZaidi(const double jDay)
 	return (((a4*u + a3)*u + a2)*u + a1)*u + a0;
 }
 
-double getMoonSecularAcceleration(const double jDay, const double nd)
+double getMoonSecularAcceleration(const double jDay, const double nd, const bool useDE43x)
 {
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
 	double t = (getDecYear(year, month, day)-1955.5)/100.0;
 	// n.dot for secular acceleration of the Moon in ELP2000-82B
-	// have value -23.8946 "/cy/cy
-	return -0.91072 * (-23.8946 + qAbs(nd))*t*t;
+	// have value -23.8946 "/cy/cy (or -25.8 for DE43x usage)
+	double ephND = -23.8946;
+	if (useDE43x)
+		ephND = -25.8;
+
+	return -0.91072 * (ephND + qAbs(nd))*t*t;
 }
 
 double getDeltaTStandardError(const double jDay)

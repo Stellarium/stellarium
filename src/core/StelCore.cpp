@@ -1896,7 +1896,7 @@ double StelCore::computeDeltaT(const double JD) const
 	}
 
 	if (!dontUseMoon)
-		DeltaT += StelUtils::getMoonSecularAcceleration(JD, ndot);
+		DeltaT += StelUtils::getMoonSecularAcceleration(JD, ndot, (de430Active || de431Active) && true);
 
 	return DeltaT;
 }
