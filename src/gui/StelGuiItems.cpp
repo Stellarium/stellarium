@@ -654,7 +654,11 @@ void BottomStelBar::updateText(bool updatePos)
 			else
 				deltaTInfo = QString("%1s%2").arg(deltaT, 3, 'f', 3).arg(validRangeMarker);
 
-			datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n-dot @ -23.8946\"/cy%3%4]<br>%5<br>%6</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QChar(0x00B2)).arg(sigmaInfo).arg(newDateAppx).arg(currTZ));
+			float ndot = -23.8946f;
+			if (core->de430IsActive() || core->de431IsActive())
+				ndot = -25.8f;
+
+			datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n-dot @ %3\"/cy%4%5]<br>%6<br>%7</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QString::number(ndot, 'f', 4)).arg(QChar(0x00B2)).arg(sigmaInfo).arg(newDateAppx).arg(currTZ));
 		}
 		else
 			datetime->setToolTip(QString("<p style='white-space:pre'>%1<br>%2</p>").arg(newDateAppx).arg(currTZ));
