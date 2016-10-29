@@ -841,28 +841,6 @@ StelAction* StelGui::getAction(const QString& actionName)
 	return StelApp::getInstance().getStelActionManager()->findAction(actionName);
 }
 
-/* ****************************************************************************************************************** */
-#if 0
-#pragma mark -
-#pragma mark Process changes from the ConstellationMgr
-#endif
-/* ****************************************************************************************************************** */
-
-/* ****************************************************************************************************************** */
-#if 0
-#pragma mark -
-#pragma mark Process changes from the GridLinesMgr
-#endif
-/* ****************************************************************************************************************** */
-
-/* ****************************************************************************************************************** */
-#if 0
-#pragma mark -
-#pragma mark Process changes from the GridLinesMgr
-#endif
-/* ****************************************************************************************************************** */
-
-
 void StelGui::copySelectedObjectInfo(void)
 {
 	QGuiApplication::clipboard()->setText(skyGui->infoPanel->getSelectedText());
