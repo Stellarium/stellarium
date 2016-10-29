@@ -1027,31 +1027,60 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="0" column="0">
+             <item row="0" column="2">
               <widget class="QLabel" name="dateFormatsLabel">
                <property name="text">
                 <string>Date:</string>
                </property>
                <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                <set>Qt::AlignCenter</set>
                </property>
               </widget>
              </item>
-             <item row="0" column="2">
+             <item row="0" column="4">
               <widget class="QLabel" name="timeFormatsLabel">
                <property name="text">
-                <string>Time:</string>
+                <string>and time:</string>
                </property>
                <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QComboBox" name="dateFormatsComboBox"/>
+             </item>
+             <item row="0" column="5">
+              <widget class="QComboBox" name="timeFormatsComboBox"/>
+             </item>
+             <item row="0" column="0">
+              <widget class="QRadioButton" name="jdRadioButton">
+               <property name="text">
+                <string notr="true">JD</string>
                </property>
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QComboBox" name="dateFormatsComboBox"/>
-             </item>
-             <item row="0" column="3">
-              <widget class="QComboBox" name="timeFormatsComboBox"/>
+              <widget class="QRadioButton" name="dtRadioButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>20</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text">
+                <string notr="true"/>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
