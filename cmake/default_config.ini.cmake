@@ -6,7 +6,6 @@ invert_screenshots_colors           = false
 Oculars                             = true
 Satellites                          = true
 SolarSystemEditor                   = true
-TimeZoneConfiguration               = true
 Exoplanets                          = true
 MeteorShowers                       = true
 Novae                               = true

@@ -592,7 +592,7 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 
 		painter->drawSprite2dMode(XYZ, distributionMode ? 4.f : 5.f);
 
-		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+1.f)<mlimit && smgr->getFlagLabels() && showDesignations)
+		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+1.75f)<mlimit && smgr->getFlagLabels() && showDesignations)
 		{
 			painter->drawText(XYZ, getNameI18n(), 0, shift, shift, false);
 		}

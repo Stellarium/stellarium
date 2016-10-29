@@ -375,9 +375,6 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	buttonTimeForward = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionIncrease_Time_Speed");
 	skyGui->buttonBar->addButton(buttonTimeForward, "070-timeGroup");
 
-	// TODO: Should we add a config option to manage margins between groups of buttons?
-	// skyGui->buttonBar->setGroupMargin("070-timeGroup", 32, 0);
-
 	pxmapOn = QPixmap(":/graphicGui/btQuit.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOn, pxmapGlow32x32, "actionQuit_Global");
 	skyGui->buttonBar->addButton(b, "080-quitGroup");
@@ -397,6 +394,14 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	atopLevelGraphicsWidget->setLayout(l);
 
 	setStelStyle(StelApp::getInstance().getCurrentStelStyle());
+
+	int margin = conf->value("gui/space_between_groups", 5).toInt();
+	skyGui->buttonBar->setGroupMargin("020-gridsGroup", margin, 0);
+	skyGui->buttonBar->setGroupMargin("030-landscapeGroup", margin, 0);
+	skyGui->buttonBar->setGroupMargin("040-nebulaeGroup", margin, 0);
+	skyGui->buttonBar->setGroupMargin("060-othersGroup", margin, margin);
+	skyGui->buttonBar->setGroupMargin("070-timeGroup", margin, 0);
+	skyGui->buttonBar->setGroupMargin("080-quitGroup", margin, 0);
 
 	skyGui->setGeometry(atopLevelGraphicsWidget->geometry());
 	skyGui->updateBarsPos();
