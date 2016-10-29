@@ -346,6 +346,7 @@ QString StelLocaleMgr::getQtDateFormatStr() const
 		default:
 			qWarning() << "WARNING: unknown date format, fallback to system default";
 			dfmt = "yyyy.MM.dd";
+			break;
 	}
 	return dfmt;
 }
