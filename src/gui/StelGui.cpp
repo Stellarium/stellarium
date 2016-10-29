@@ -375,7 +375,8 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	buttonTimeForward = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionIncrease_Time_Speed");
 	skyGui->buttonBar->addButton(buttonTimeForward, "070-timeGroup");
 
-	skyGui->buttonBar->setGroupMargin("070-timeGroup", 32, 0);
+	// TODO: Should we add a config option to manage margins between groups of buttons?
+	// skyGui->buttonBar->setGroupMargin("070-timeGroup", 32, 0);
 
 	pxmapOn = QPixmap(":/graphicGui/btQuit.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOn, pxmapGlow32x32, "actionQuit_Global");

@@ -260,6 +260,12 @@ void ConfigurationDialog::createDialogContent()
 	}
 	ui->timeFormatsComboBox->setCurrentIndex(idx);
 	connect(ui->timeFormatsComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(setTimeFormat()));
+	if (StelApp::getInstance().getSettings()->value("gui/flag_time_jd", false).toBool())
+		ui->jdRadioButton->setChecked(true);
+	else
+		ui->dtRadioButton->setChecked(true);
+	connect(ui->jdRadioButton, SIGNAL(clicked(bool)), this, SLOT(setButtonBarDTFormat()));
+	connect(ui->dtRadioButton, SIGNAL(clicked(bool)), this, SLOT(setButtonBarDTFormat()));
 
 	// Delta-T
 	populateDeltaTAlgorithmsList();	
@@ -415,6 +421,14 @@ void ConfigurationDialog::setStartupTimeMode()
 
 	StelApp::getInstance().getCore()->setInitTodayTime(ui->todayTimeSpinBox->time());
 	StelApp::getInstance().getCore()->setPresetSkyTime(ui->fixedDateTimeEdit->dateTime());
+}
+
+void ConfigurationDialog::setButtonBarDTFormat()
+{
+	if (ui->jdRadioButton->isChecked())
+		gui->getButtonBar()->setFlagTimeJd(true);
+	else
+		gui->getButtonBar()->setFlagTimeJd(false);
 }
 
 void ConfigurationDialog::showShortcutsWindow()
@@ -769,6 +783,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("gui/flag_show_nebulae_background_button", gui->getFlagShowNebulaBackgroundButton());
 	conf->setValue("gui/flag_show_decimal_degrees", StelApp::getInstance().getFlagShowDecimalDegrees());
 	conf->setValue("gui/flag_use_azimuth_from_south", StelApp::getInstance().getFlagSouthAzimuthUsage());
+	conf->setValue("gui/flag_time_jd", gui->getButtonBar()->getFlagTimeJd());
 
 	mvmgr->setInitFov(mvmgr->getCurrentFov());
 	mvmgr->setInitViewDirectionToCurrent();
@@ -787,6 +802,9 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	else
 		conf->setValue("navigation/viewing_mode", "equator");
 
+	StelLocaleMgr & localeManager = StelApp::getInstance().getLocaleMgr();
+	conf->setValue("localization/time_display_format", localeManager.getTimeFormatStr());
+	conf->setValue("localization/date_display_format", localeManager.getDateFormatStr());
 
 	// configuration dialog / tools tab
 	conf->setValue("gui/flag_show_flip_buttons", gui->getFlagShowFlipButtons());
@@ -1350,6 +1368,8 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	// TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 	ui->deltaTLabel->setText(QString("%1 %2T:").arg(q_("Algorithm of")).arg(QChar(0x0394)));
 
+	ui->pushButtonCustomDeltaTEquationDialog->setFixedHeight(ui->deltaTAlgorithmComboBox->height());
+
 	QComboBox* algorithms = ui->deltaTAlgorithmComboBox;
 
 	//Save the current selection to be restored later
@@ -1462,8 +1482,7 @@ void ConfigurationDialog::setDateFormat()
 	if (selectedFormat == localeManager.getDateFormatStr())
 		return;
 
-	localeManager.setDateFormatStr(selectedFormat);
-	StelApp::getInstance().getSettings()->setValue("localization/date_display_format", selectedFormat);
+	localeManager.setDateFormatStr(selectedFormat);	
 }
 
 void ConfigurationDialog::populateTimeFormatsList()
@@ -1497,6 +1516,5 @@ void ConfigurationDialog::setTimeFormat()
 	if (selectedFormat == localeManager.getTimeFormatStr())
 		return;
 
-	localeManager.setTimeFormatStr(selectedFormat);
-	StelApp::getInstance().getSettings()->setValue("localization/time_display_format", selectedFormat);
+	localeManager.setTimeFormatStr(selectedFormat);	
 }
