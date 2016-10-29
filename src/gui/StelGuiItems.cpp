@@ -615,9 +615,9 @@ void BottomStelBar::updateText(bool updatePos)
 	if (getFlagShowTime())
 	{
 		if (getFlagShowTz())
-			newDateInfo = QString("%1   %2 %3").arg(locmgr.getPrintableDateLocal(jd)).arg(locmgr.getPrintableTimeLocal(jd)).arg(tz);
+			newDateInfo = QString("%1 %2 %3").arg(locmgr.getPrintableDateLocal(jd)).arg(locmgr.getPrintableTimeLocal(jd)).arg(tz);
 		else
-			newDateInfo = QString("%1   %2").arg(locmgr.getPrintableDateLocal(jd)).arg(locmgr.getPrintableTimeLocal(jd));
+			newDateInfo = QString("%1 %2").arg(locmgr.getPrintableDateLocal(jd)).arg(locmgr.getPrintableTimeLocal(jd));
 	}
 	QString newDateAppx = QString("JD %1").arg(jd, 0, 'f', 6);
 	if (getFlagTimeJd())
@@ -776,21 +776,25 @@ void BottomStelBar::updateText(bool updatePos)
 
 	if (updatePos)
 	{
+		int fovShift = 170;
+		if (getFlagFovDms())
+			fovShift = 195;
+
 		QRectF rectCh = getButtonsBoundingRect();
 		location->setPos(0, 0);		
 		int dtp = rectCh.right()-datetime->boundingRect().width()-5;
 		if ((dtp%2) == 1) dtp--; // make even pixel
 		datetime->setPos(dtp,0);
-		fov->setPos(datetime->x()-200, 0);
-		fps->setPos(datetime->x()-95, 0);
+		fov->setPos(datetime->x()-fovShift, 0);
+		fps->setPos(datetime->x()-75, 0);
 		if (qApp->property("text_texture")==true) // CLI option -t given?
 		{
 			locationPixmap->setPos(0,0);
 			int dtp = rectCh.right()-datetimePixmap->boundingRect().width()-5;
 			if ((dtp%2) == 1) dtp--; // make even pixel
 			datetimePixmap->setPos(dtp,0);
-			fovPixmap->setPos(datetime->x()-200, 0);
-			fpsPixmap->setPos(datetime->x()-95, 0);
+			fovPixmap->setPos(datetime->x()-fovShift, 0);
+			fpsPixmap->setPos(datetime->x()-75, 0);
 		}
 	}
 }

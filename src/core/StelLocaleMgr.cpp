@@ -254,7 +254,7 @@ QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 		case STime12h:
 			return t.toString("hh:mm:ss AP");
 		default:
-			qWarning() << "WARNING: unknown date format, fallback to system default";
+			qWarning() << "WARNING: unknown time format, fallback to system default";
 			return t.toString(Qt::LocaleDate);
 	}
 }
@@ -340,11 +340,12 @@ QString StelLocaleMgr::getQtDateFormatStr() const
 			dfmt = "MM.dd.yyyy";
 			break;
 		case SDateYYYYMMDD:
+		case SDateSystemDefault:
 			dfmt = "yyyy.MM.dd";
 			break;
 		default:
+			qWarning() << "WARNING: unknown date format, fallback to system default";
 			dfmt = "yyyy.MM.dd";
-			break;
 	}
 	return dfmt;
 }
