@@ -279,7 +279,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			//TRANSLATORS: Unit of measure for distance - Light Years
 			QString duly = q_("ly");
 
-			if (nType==NebAGx || nType==NebGx || nType==NebRGx || nType==NebIGx || nType==NebQSO || nType==NebPossQSO || nType==NebISM)
+			if (nType==NebAGx || nType==NebGx || nType==NebRGx || nType==NebIGx || nType==NebQSO || nType==NebPossQSO)
 			{
 				dc = 3.262f;
 				ms = 3;
