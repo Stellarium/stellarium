@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-28 23:56+0700\n"
+"POT-Creation-Date: 2016-10-29 18:47+0700\n"
 "PO-Revision-Date: 2016-07-27 15:24+0000\n"
 "Last-Translator: Lê Văn Bách <levanbach1994ag@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-10-29 05:47+0000\n"
+"X-Launchpad-Export-Date: 2016-10-30 05:42+0000\n"
 "X-Generator: Launchpad (build 18246)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -74,7 +74,7 @@ msgstr "Tên của các chòm sao"
 msgid "Constellation boundaries"
 msgstr "Ranh giới các chòm sao"
 
-#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1311
+#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1332
 msgid "Select single constellation"
 msgstr "Lựa chọn chòm sao đơn"
 
@@ -1937,31 +1937,31 @@ msgstr "Không tìm thấy"
 msgid "Found"
 msgstr "Được tìm thấy"
 
-#: src/gui/ConfigurationDialog.cpp:525
+#: src/gui/ConfigurationDialog.cpp:539
 msgid "Select screenshot directory"
 msgstr "Chọn thư mục chứa hình"
 
-#: src/gui/ConfigurationDialog.cpp:830
+#: src/gui/ConfigurationDialog.cpp:848
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Trường nhìn khởi phát: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:838
+#: src/gui/ConfigurationDialog.cpp:856
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Hướng nhìn ban đầu Góc phương vị/Cao độ: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:900
+#: src/gui/ConfigurationDialog.cpp:918
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:253
 msgid "Authors"
 msgstr "Các tác giả"
 
-#: src/gui/ConfigurationDialog.cpp:901 src/gui/ViewDialog.cpp:1191
+#: src/gui/ConfigurationDialog.cpp:919 src/gui/ViewDialog.cpp:1191
 msgid "Contact"
 msgstr "Liên hệ"
 
-#: src/gui/ConfigurationDialog.cpp:903
+#: src/gui/ConfigurationDialog.cpp:921
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:517
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:408
@@ -1980,30 +1980,30 @@ msgstr "Liên hệ"
 msgid "Version"
 msgstr "Phiên bản"
 
-#: src/gui/ConfigurationDialog.cpp:1000
+#: src/gui/ConfigurationDialog.cpp:1018
 msgid "Running script: "
 msgstr "Script thực thi: "
 
-#: src/gui/ConfigurationDialog.cpp:1007
+#: src/gui/ConfigurationDialog.cpp:1025
 msgid "Running script: [none]"
 msgstr "Script thực thi: [không]"
 
-#: src/gui/ConfigurationDialog.cpp:1072
+#: src/gui/ConfigurationDialog.cpp:1090
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
 msgstr "Hoàn tất việc tải các catalô sao mới"
 
-#: src/gui/ConfigurationDialog.cpp:1076
+#: src/gui/ConfigurationDialog.cpp:1094
 msgid "All available star catalogs have been installed."
 msgstr "Tất cả danh mục sao sẵn có đã được cài đặt."
 
-#: src/gui/ConfigurationDialog.cpp:1081
+#: src/gui/ConfigurationDialog.cpp:1099
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Lấy catalog thứ %1 trong %2"
 
-#: src/gui/ConfigurationDialog.cpp:1088
+#: src/gui/ConfigurationDialog.cpp:1106
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -2012,7 +2012,7 @@ msgstr ""
 "Đang tải %1...\n"
 "(Bạn có thể đóng cữa sổ cấu hình)"
 
-#: src/gui/ConfigurationDialog.cpp:1095
+#: src/gui/ConfigurationDialog.cpp:1113
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -2023,7 +2023,7 @@ msgstr ""
 "Số lượng sao: %2 Million\n"
 "Khoảng độ sáng: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1138 src/gui/ConfigurationDialog.cpp:1174
+#: src/gui/ConfigurationDialog.cpp:1156 src/gui/ConfigurationDialog.cpp:1192
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2032,11 +2032,11 @@ msgstr ""
 "Lỗi khi đang tải xuống %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1227
+#: src/gui/ConfigurationDialog.cpp:1245
 msgid "Verifying file integrity..."
 msgstr "Kiểm tra sự toàn vẹn của tập tin..."
 
-#: src/gui/ConfigurationDialog.cpp:1231
+#: src/gui/ConfigurationDialog.cpp:1249
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2045,166 +2045,166 @@ msgstr ""
 "Lỗi khi đang tải xuống %1:\n"
 "Tập tin bị lỗi."
 
-#: src/gui/ConfigurationDialog.cpp:1277 src/gui/ConfigurationDialog.cpp:1286
+#: src/gui/ConfigurationDialog.cpp:1295 src/gui/ConfigurationDialog.cpp:1304
 msgid "Available"
 msgstr "Sẵn có"
 
-#: src/gui/ConfigurationDialog.cpp:1279 src/gui/ConfigurationDialog.cpp:1288
+#: src/gui/ConfigurationDialog.cpp:1297 src/gui/ConfigurationDialog.cpp:1306
 msgid "Not Available"
 msgstr "Không sẵn có"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1351
+#: src/gui/ConfigurationDialog.cpp:1369
 msgid "Algorithm of"
 msgstr "Thuật toán của"
 
-#: src/gui/ConfigurationDialog.cpp:1362
+#: src/gui/ConfigurationDialog.cpp:1382
 msgid "Without correction"
 msgstr "Không có sự chính xác"
 
-#: src/gui/ConfigurationDialog.cpp:1363
+#: src/gui/ConfigurationDialog.cpp:1383
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1364
+#: src/gui/ConfigurationDialog.cpp:1384
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1365
+#: src/gui/ConfigurationDialog.cpp:1385
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1366
+#: src/gui/ConfigurationDialog.cpp:1386
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Lịch vũ trụ (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1367
+#: src/gui/ConfigurationDialog.cpp:1387
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1368
+#: src/gui/ConfigurationDialog.cpp:1388
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller & Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1369
+#: src/gui/ConfigurationDialog.cpp:1389
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1370
+#: src/gui/ConfigurationDialog.cpp:1390
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel & Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1371
+#: src/gui/ConfigurationDialog.cpp:1391
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison & Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1372
+#: src/gui/ConfigurationDialog.cpp:1392
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson & Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1373
+#: src/gui/ConfigurationDialog.cpp:1393
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson & Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1374
+#: src/gui/ConfigurationDialog.cpp:1394
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1375
+#: src/gui/ConfigurationDialog.cpp:1395
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1376
+#: src/gui/ConfigurationDialog.cpp:1396
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel & Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1377
+#: src/gui/ConfigurationDialog.cpp:1397
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze & Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1378
+#: src/gui/ConfigurationDialog.cpp:1398
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson & Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1379
+#: src/gui/ConfigurationDialog.cpp:1399
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1381
+#: src/gui/ConfigurationDialog.cpp:1401
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (với Chapront, Chapront-Touze & Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1382
+#: src/gui/ConfigurationDialog.cpp:1402
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1383
+#: src/gui/ConfigurationDialog.cpp:1403
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus & Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1384
+#: src/gui/ConfigurationDialog.cpp:1404
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1385
+#: src/gui/ConfigurationDialog.cpp:1405
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold & Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1386
+#: src/gui/ConfigurationDialog.cpp:1406
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison & Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1388
+#: src/gui/ConfigurationDialog.cpp:1408
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak & Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1391
+#: src/gui/ConfigurationDialog.cpp:1411
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr "Espenak & Meeus (2006) không bổ sung gia tốc mặt trăng"
 
-#: src/gui/ConfigurationDialog.cpp:1393
+#: src/gui/ConfigurationDialog.cpp:1413
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1394
+#: src/gui/ConfigurationDialog.cpp:1414
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1395
+#: src/gui/ConfigurationDialog.cpp:1415
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1396
+#: src/gui/ConfigurationDialog.cpp:1416
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana & Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1397
+#: src/gui/ConfigurationDialog.cpp:1417
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Phương trình tùy chỉnh của %1T."
 
-#: src/gui/ConfigurationDialog.cpp:1446 src/gui/ConfigurationDialog.cpp:1482
+#: src/gui/ConfigurationDialog.cpp:1466 src/gui/ConfigurationDialog.cpp:1501
 #: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:405
 msgid "System default"
 msgstr "Mặc định hệ thống"
 
-#: src/gui/ConfigurationDialog.cpp:1447
+#: src/gui/ConfigurationDialog.cpp:1467
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "năm-tháng-ngày (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1448
+#: src/gui/ConfigurationDialog.cpp:1468
 msgid "dd-mm-yyyy"
 msgstr "ngày-tháng-năm"
 
-#: src/gui/ConfigurationDialog.cpp:1449
+#: src/gui/ConfigurationDialog.cpp:1469
 msgid "mm-dd-yyyy"
 msgstr "tháng-ngày-năm"
 
-#: src/gui/ConfigurationDialog.cpp:1483
+#: src/gui/ConfigurationDialog.cpp:1502
 msgid "12-hour format"
 msgstr "Định dạng 12-giờ"
 
-#: src/gui/ConfigurationDialog.cpp:1484
+#: src/gui/ConfigurationDialog.cpp:1503
 msgid "24-hour format"
 msgstr "Định dạng 24-giờ"
 
@@ -2507,7 +2507,7 @@ msgstr "Tự động ẩn thanh nút dọc"
 msgid "Toggle visibility of GUI"
 msgstr "Chuyển đổi tầm nhìn của giao diện người dùng"
 
-#: src/gui/StelGuiItems.cpp:322 src/gui/StelGuiItems.cpp:852
+#: src/gui/StelGuiItems.cpp:322 src/gui/StelGuiItems.cpp:856
 msgid "Space"
 msgstr "Phím cách"
 
@@ -2867,7 +2867,7 @@ msgid "year"
 msgstr "Năm"
 
 #. TRANSLATORS: name of object
-#: src/gui/AstroCalcDialog.cpp:159 src/ui_configurationDialog.h:1189
+#: src/gui/AstroCalcDialog.cpp:159 src/ui_configurationDialog.h:1210
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:450
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:96
 #: plugins/Exoplanets/src/Exoplanet.cpp:324
@@ -2891,7 +2891,7 @@ msgid "Mag."
 msgstr "Độ lớn"
 
 #. TRANSLATORS: type of object
-#: src/gui/AstroCalcDialog.cpp:167 src/ui_configurationDialog.h:1209
+#: src/gui/AstroCalcDialog.cpp:167 src/ui_configurationDialog.h:1230
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
 msgid "Type"
 msgstr "Loại"
@@ -4038,7 +4038,7 @@ msgstr "Thư mục"
 msgid "&Choose"
 msgstr "&Chọn"
 
-#: src/translations.h:368 src/ui_configurationDialog.h:1345
+#: src/translations.h:368 src/ui_configurationDialog.h:1366
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "Cancel"
 msgstr "Hủy bỏ"
@@ -5149,7 +5149,7 @@ msgstr "Giới thiệu về"
 msgid "Log"
 msgstr "Ghi nhận"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1232
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1253
 msgid "Edit keyboard shortcuts..."
 msgstr "Chỉnh sửa những phím tắt..."
 
@@ -5425,7 +5425,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:722 src/ui_viewDialog.h:2210
 #: src/ui_viewDialog.h:2232 src/ui_viewDialog.h:2249
-#: src/ui_configurationDialog.h:1346 src/ui_configurationDialog.h:1357
+#: src/ui_configurationDialog.h:1367 src/ui_configurationDialog.h:1378
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Tùy chọn"
@@ -6151,35 +6151,35 @@ msgstr "Khung cảnh"
 msgid "Starlore"
 msgstr "Truyền thuyết sao"
 
-#: src/ui_configurationDialog.h:1132
+#: src/ui_configurationDialog.h:1153
 msgid "Configuration"
 msgstr "Cấu hình"
 
-#: src/ui_configurationDialog.h:1134
+#: src/ui_configurationDialog.h:1155
 msgid "Language settings"
 msgstr "Thiết lập ngôn ngữ"
 
-#: src/ui_configurationDialog.h:1135
+#: src/ui_configurationDialog.h:1156
 msgid "Program Language"
 msgstr "Ngôn ngữ chương trình"
 
-#: src/ui_configurationDialog.h:1136
+#: src/ui_configurationDialog.h:1157
 msgid "Sky Culture Language"
 msgstr "Ngôn ngữ văn hóa bầu trời"
 
-#: src/ui_configurationDialog.h:1138
+#: src/ui_configurationDialog.h:1159
 msgid "This feature has not been thoroughly tested yet!"
 msgstr "Đặc điểm này chưa được kiểm tra hoàn toàn!"
 
-#: src/ui_configurationDialog.h:1140
+#: src/ui_configurationDialog.h:1161
 msgid "Ephemeris settings (experimental)"
 msgstr "Các cài đặt lịch thiên văn (thực nghiệm)"
 
-#: src/ui_configurationDialog.h:1141 src/ui_configurationDialog.h:1142
+#: src/ui_configurationDialog.h:1162 src/ui_configurationDialog.h:1163
 msgid "Not installed"
 msgstr "Không được cài đặt"
 
-#: src/ui_configurationDialog.h:1144
+#: src/ui_configurationDialog.h:1165
 msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
@@ -6187,19 +6187,19 @@ msgstr ""
 "DE431 cung cấp dữ liệu vị trí cho những năm -13000...+17000. Chỉ dành cho "
 "những chương trình đặc biệt."
 
-#: src/ui_configurationDialog.h:1146
+#: src/ui_configurationDialog.h:1167
 msgid "Use DE431 (long-time data)"
 msgstr "Sử dụng DE431 (Dữ liệu thời gian dài)"
 
-#: src/ui_configurationDialog.h:1148
+#: src/ui_configurationDialog.h:1169
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
 msgstr "DE430 cung cấp sự chính xác cao nhất, chỉ cho những năm 1550...2650."
 
-#: src/ui_configurationDialog.h:1150
+#: src/ui_configurationDialog.h:1171
 msgid "Use DE430 (high accuracy)"
 msgstr "Sử dụng DE430 (sự chính xác cao)"
 
-#: src/ui_configurationDialog.h:1152
+#: src/ui_configurationDialog.h:1173
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
@@ -6207,18 +6207,18 @@ msgstr ""
 "Sử dụng VSOP87 chỉ được đề nghị cho những năm -4000...+8000, nhưng phân phát "
 "vị trí hữu dụng nằm ngoài phạm vi này."
 
-#: src/ui_configurationDialog.h:1154
+#: src/ui_configurationDialog.h:1175
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
 "VSOP87/ELP2000-82B được sử dụng khi những cái này không được cài đặt hoặc "
 "không được kích hoạt."
 
-#: src/ui_configurationDialog.h:1155
+#: src/ui_configurationDialog.h:1176
 msgid "Default options"
 msgstr "Tùy chọn mặc định"
 
-#: src/ui_configurationDialog.h:1157
+#: src/ui_configurationDialog.h:1178
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -6226,7 +6226,7 @@ msgstr ""
 "Lưu các cài đặt bạn đã thay đổi lần này để sử dụng trong lần tới khi bạn "
 "chạy Stellarium"
 
-#: src/ui_configurationDialog.h:1159
+#: src/ui_configurationDialog.h:1180
 #: plugins/NavStars/src/ui_navStarsWindow.h:211
 #: plugins/FOV/src/ui_fovWindow.h:391
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:281
@@ -6234,11 +6234,11 @@ msgstr ""
 msgid "Save settings"
 msgstr "Lưu các thiết lập"
 
-#: src/ui_configurationDialog.h:1161
+#: src/ui_configurationDialog.h:1182
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Khôi phục cài đặt mặc định đi kèm với Stellarium"
 
-#: src/ui_configurationDialog.h:1163
+#: src/ui_configurationDialog.h:1184
 #: plugins/NavStars/src/ui_navStarsWindow.h:212
 #: plugins/FOV/src/ui_fovWindow.h:408
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:282
@@ -6246,7 +6246,7 @@ msgstr "Khôi phục cài đặt mặc định đi kèm với Stellarium"
 msgid "Restore defaults"
 msgstr "Khôi phục mặc định"
 
-#: src/ui_configurationDialog.h:1164
+#: src/ui_configurationDialog.h:1185
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -6256,179 +6256,179 @@ msgstr ""
 "tùy chọn hiện thời bao gồm trường nhìn và hướng nhìn cho việc sử dụng ở lần "
 "khởi động kế tiếp."
 
-#: src/ui_configurationDialog.h:1166
+#: src/ui_configurationDialog.h:1187
 msgid "The width of your view when Stellarium starts"
 msgstr "Chiều rộng tầm nhìn của bạn khi Stellarium bắt đầu"
 
-#: src/ui_configurationDialog.h:1169
+#: src/ui_configurationDialog.h:1190
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Hướng bạn đang nhìn khi Stellarium bắt đầu"
 
-#: src/ui_configurationDialog.h:1171 src/ui_configurationDialog.h:1368
+#: src/ui_configurationDialog.h:1192 src/ui_configurationDialog.h:1389
 msgid "Selected object information"
 msgstr "Thông tin đối tượng đã chọn"
 
-#: src/ui_configurationDialog.h:1173
+#: src/ui_configurationDialog.h:1194
 msgid "Display all information available"
 msgstr "Hiển thị tất cả thông tin sẵn có"
 
-#: src/ui_configurationDialog.h:1175
+#: src/ui_configurationDialog.h:1196
 msgid "All available"
 msgstr "Tất cả có sẵn"
 
-#: src/ui_configurationDialog.h:1177
+#: src/ui_configurationDialog.h:1198
 msgid "Display no information"
 msgstr "Hiển thị không có thông tin"
 
-#: src/ui_configurationDialog.h:1179 plugins/Oculars/src/Oculars.cpp:2387
+#: src/ui_configurationDialog.h:1200 plugins/Oculars/src/Oculars.cpp:2387
 #: plugins/Observability/src/Observability.cpp:205
 msgid "None"
 msgstr "Không"
 
-#: src/ui_configurationDialog.h:1181
+#: src/ui_configurationDialog.h:1202
 msgid "Display less information"
 msgstr "Hiển thị ít thông tin"
 
-#: src/ui_configurationDialog.h:1183
+#: src/ui_configurationDialog.h:1204
 msgid "Short"
 msgstr "Ngắn gọn"
 
-#: src/ui_configurationDialog.h:1185
+#: src/ui_configurationDialog.h:1206
 msgid "Display user settings information"
 msgstr "Hiển thị thông tin cài đặt người dùng"
 
-#: src/ui_configurationDialog.h:1187
+#: src/ui_configurationDialog.h:1208
 msgid "Customized"
 msgstr "Tùy chỉnh"
 
-#: src/ui_configurationDialog.h:1188
+#: src/ui_configurationDialog.h:1209
 msgid "Displayed fields"
 msgstr "Phạm vi hiển thị"
 
-#: src/ui_configurationDialog.h:1191 src/ui_configurationDialog.h:1215
+#: src/ui_configurationDialog.h:1212 src/ui_configurationDialog.h:1236
 msgid "Equatorial coordinates, equinox of date"
 msgstr "Tọa độ xích đạo, điểm phân của ngày"
 
-#: src/ui_configurationDialog.h:1193
+#: src/ui_configurationDialog.h:1214
 msgid "Right ascension/Declination (of date)"
 msgstr "Xích kinh/Xích vĩ (của ngày)"
 
-#: src/ui_configurationDialog.h:1194
+#: src/ui_configurationDialog.h:1215
 msgid "Catalog number(s)"
 msgstr "Số danh mục"
 
-#: src/ui_configurationDialog.h:1196
+#: src/ui_configurationDialog.h:1217
 msgid "Equatorial coordinates, equinox of J2000.0"
 msgstr "Tọa độ xích đạo, điểm phân của J2000.0"
 
-#: src/ui_configurationDialog.h:1198
+#: src/ui_configurationDialog.h:1219
 msgid "Right ascension/Declination (J2000)"
 msgstr "Xích kinh/Xích vĩ (J2000)"
 
-#: src/ui_configurationDialog.h:1199
+#: src/ui_configurationDialog.h:1220
 msgid "Absolute magnitude"
 msgstr "Độ sáng tuyệt đối"
 
-#: src/ui_configurationDialog.h:1200
+#: src/ui_configurationDialog.h:1221
 msgid "Galactic coordinates"
 msgstr "Tọa độ Ngân hà"
 
-#: src/ui_configurationDialog.h:1201
+#: src/ui_configurationDialog.h:1222
 msgid "Visual magnitude"
 msgstr "Độ sáng khả kiến"
 
-#: src/ui_configurationDialog.h:1203
+#: src/ui_configurationDialog.h:1224
 msgid "Angular or physical size"
 msgstr "Kích thước góc hoặc vật lí"
 
-#: src/ui_configurationDialog.h:1205
+#: src/ui_configurationDialog.h:1226
 msgid "Size"
 msgstr "Kích cỡ"
 
-#: src/ui_configurationDialog.h:1207
+#: src/ui_configurationDialog.h:1228
 msgid "The type of the object (star, planet, etc.)"
 msgstr "Loại đối tượng (sao, hành tinh,...)"
 
-#: src/ui_configurationDialog.h:1211
+#: src/ui_configurationDialog.h:1232
 msgid "Spectral class, nebula type, etc."
 msgstr "Lớp quang phổ, loại tinh vân,..."
 
-#: src/ui_configurationDialog.h:1213
+#: src/ui_configurationDialog.h:1234
 msgid "Additional information"
 msgstr "Thông tin bổ sung"
 
-#: src/ui_configurationDialog.h:1217
+#: src/ui_configurationDialog.h:1238
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:198
 msgid "Hour angle/Declination"
 msgstr "Góc giờ/Xích vĩ"
 
-#: src/ui_configurationDialog.h:1219
+#: src/ui_configurationDialog.h:1240
 msgid "Horizontal coordinates"
 msgstr "Tọa độ chân trời"
 
-#: src/ui_configurationDialog.h:1221
+#: src/ui_configurationDialog.h:1242
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:201
 msgid "Altitude/Azimuth"
 msgstr "Độ cao/Góc phương vị"
 
-#: src/ui_configurationDialog.h:1222
+#: src/ui_configurationDialog.h:1243
 msgid "Distance"
 msgstr "Khoảng cách"
 
-#: src/ui_configurationDialog.h:1224
+#: src/ui_configurationDialog.h:1245
 msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 msgstr "Tọa độ hoàng đạo, điểm phân của ngày và J2000 (chỉ đối với Trái đất)"
 
-#: src/ui_configurationDialog.h:1226
+#: src/ui_configurationDialog.h:1247
 msgid "Ecliptic coordinates"
 msgstr "Tọa độ hoàng đạo"
 
-#: src/ui_configurationDialog.h:1227
+#: src/ui_configurationDialog.h:1248
 msgid "Control"
 msgstr "Điều khiển"
 
-#: src/ui_configurationDialog.h:1229
+#: src/ui_configurationDialog.h:1250
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "Cho phép dùng chuột để xoay (kéo) và phóng to (con lăn chuột)"
 
-#: src/ui_configurationDialog.h:1231
+#: src/ui_configurationDialog.h:1252
 msgid "Enable mouse navigation"
 msgstr "Bật điều hướng chuột"
 
-#: src/ui_configurationDialog.h:1234
+#: src/ui_configurationDialog.h:1255
 msgid "Allow keyboard to pan and zoom"
 msgstr "Cho phép dùng bàn phím để xoay và phóng to"
 
-#: src/ui_configurationDialog.h:1236
+#: src/ui_configurationDialog.h:1257
 msgid "Enable keyboard navigation"
 msgstr "Bật điều hướng bàn phím"
 
-#: src/ui_configurationDialog.h:1238
+#: src/ui_configurationDialog.h:1259
 msgid "Hides the mouse cursor when inactive"
 msgstr "Dấu đầu chuột khi không hoạt động"
 
-#: src/ui_configurationDialog.h:1240
+#: src/ui_configurationDialog.h:1261
 msgid "Mouse cursor timeout:"
 msgstr "Thời gian trễ con trỏ chuột:"
 
-#: src/ui_configurationDialog.h:1242
+#: src/ui_configurationDialog.h:1263
 msgid "seconds"
 msgstr "giây"
 
-#: src/ui_configurationDialog.h:1244
+#: src/ui_configurationDialog.h:1265
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:192
 msgid "Startup date and time"
 msgstr "Khởi động ngày và giờ"
 
-#: src/ui_configurationDialog.h:1246
+#: src/ui_configurationDialog.h:1267
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Bắt đầu Stellarium tại ngày và giờ của đồng hồ hệ thống"
 
-#: src/ui_configurationDialog.h:1248
+#: src/ui_configurationDialog.h:1269
 msgid "System date and time"
 msgstr "Hệ thống ngày và giờ"
 
-#: src/ui_configurationDialog.h:1250
+#: src/ui_configurationDialog.h:1271
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -6436,105 +6436,105 @@ msgstr ""
 "Thiết lập thời gian mô phỏng cho các ví dụ tiếp theo của thời gian này trong "
 "ngày khi bắt đầu Stellarium"
 
-#: src/ui_configurationDialog.h:1252
+#: src/ui_configurationDialog.h:1273
 msgid "System date at:"
 msgstr "Ngày hệ thống tại:"
 
-#: src/ui_configurationDialog.h:1254
+#: src/ui_configurationDialog.h:1275
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Sử dụng một ngày cụ thể và thời gian khi Stellarium khởi động"
 
-#: src/ui_configurationDialog.h:1256
+#: src/ui_configurationDialog.h:1277
 msgid "Other:"
 msgstr "Loại Khác:"
 
-#: src/ui_configurationDialog.h:1258
+#: src/ui_configurationDialog.h:1279
 msgid "Use current local date and time"
 msgstr "Sử dụng ngày và giờ địa phương hiện tại"
 
-#: src/ui_configurationDialog.h:1260
+#: src/ui_configurationDialog.h:1281
 msgid "use current"
 msgstr "Dùng hiệnt tại"
 
-#: src/ui_configurationDialog.h:1262
+#: src/ui_configurationDialog.h:1283
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
 msgstr ""
 "Những cài đặt này điều khiển cách mà thời gian và ngày tháng được hiển thị "
 "trong thanh dưới cùng"
 
-#: src/ui_configurationDialog.h:1264
+#: src/ui_configurationDialog.h:1285
 msgid "Display formats of date and time"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1265
+#: src/ui_configurationDialog.h:1286
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
 msgid "Date:"
 msgstr "Ngày tháng:"
 
-#: src/ui_configurationDialog.h:1266
-msgid "Time:"
+#: src/ui_configurationDialog.h:1287
+msgid "and time:"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1267
+#: src/ui_configurationDialog.h:1288
 msgid "Time correction"
 msgstr "Thời gian điều chỉnh"
 
-#: src/ui_configurationDialog.h:1270
+#: src/ui_configurationDialog.h:1291
 msgid "Edit equation"
 msgstr "Phương trình chỉnh sửa"
 
-#: src/ui_configurationDialog.h:1272
+#: src/ui_configurationDialog.h:1293
 msgid "Planetarium options"
 msgstr "Tùy chọn mô hình vũ trụ"
 
-#: src/ui_configurationDialog.h:1274
+#: src/ui_configurationDialog.h:1295
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
 "Tự động bật khí quyển cho các vất thể với khí quyển trong cửa sổ vị trí"
 
-#: src/ui_configurationDialog.h:1276
+#: src/ui_configurationDialog.h:1297
 msgid "Auto-enabling for the atmosphere"
 msgstr "Tự động bật khí quyển"
 
-#: src/ui_configurationDialog.h:1278
+#: src/ui_configurationDialog.h:1299
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "Chuyển đổi hình nền của tinh vân"
 
-#: src/ui_configurationDialog.h:1280
+#: src/ui_configurationDialog.h:1301
 msgid "Show nebula background button"
 msgstr "Hiển thị nút nền tinh vân"
 
-#: src/ui_configurationDialog.h:1282
+#: src/ui_configurationDialog.h:1303
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr ""
 "Chương động là một dao động nhỏ của trục Trái Đất, chiếm tới một vài giây "
 "cung."
 
-#: src/ui_configurationDialog.h:1284
+#: src/ui_configurationDialog.h:1305
 msgid "Include nutation"
 msgstr "Bao gồm chương động"
 
-#: src/ui_configurationDialog.h:1286
+#: src/ui_configurationDialog.h:1307
 msgid "Activate this option to calculate azimuth from south towards west."
 msgstr ""
 "Kích hoạt vị trí này để tính toán góc phương vị từ hướng nam đến hướng tây."
 
-#: src/ui_configurationDialog.h:1288
+#: src/ui_configurationDialog.h:1309
 msgid "Azimuth from South"
 msgstr "Góc phương vị từ phía nam"
 
-#: src/ui_configurationDialog.h:1290
+#: src/ui_configurationDialog.h:1311
 msgid "Use decimal degrees for coordinates"
 msgstr "Sử dụng độ thập phân cho tọa độ"
 
-#: src/ui_configurationDialog.h:1292
+#: src/ui_configurationDialog.h:1313
 msgid "Use decimal degrees"
 msgstr "Sử dụng độ dưới dạng thập phân"
 
-#: src/ui_configurationDialog.h:1294
+#: src/ui_configurationDialog.h:1315
 msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
@@ -6542,31 +6542,31 @@ msgstr ""
 "Kích hoạt để như được nhìn thấy từ bề mặt của hành tinh (được khuyến khích). "
 "Nếu chuyển sang tắt, sẽ hiển thị tầm nhìn hành tinh tâm."
 
-#: src/ui_configurationDialog.h:1296
+#: src/ui_configurationDialog.h:1317
 msgid "Topocentric coordinates"
 msgstr "Tọa độ bề mặt trái đất"
 
-#: src/ui_configurationDialog.h:1298
+#: src/ui_configurationDialog.h:1319
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Chuyển đổi hình dọc và ngang của nút lật"
 
-#: src/ui_configurationDialog.h:1300
+#: src/ui_configurationDialog.h:1321
 msgid "Show flip buttons"
 msgstr "Hiển thị nút lật"
 
-#: src/ui_configurationDialog.h:1302
+#: src/ui_configurationDialog.h:1323
 msgid "Align labels with the horizon"
 msgstr "Căn chỉnh nhãn với đường chân trời"
 
-#: src/ui_configurationDialog.h:1304
+#: src/ui_configurationDialog.h:1325
 msgid "Gravity labels"
 msgstr "Nhãn trọng lực"
 
-#: src/ui_configurationDialog.h:1306 src/ui_configurationDialog.h:1309
+#: src/ui_configurationDialog.h:1327 src/ui_configurationDialog.h:1330
 msgid "Hide other constellations when you click one"
 msgstr "Ẩn các chòm sao khác khi bạn chọn một cái bất kì"
 
-#: src/ui_configurationDialog.h:1313
+#: src/ui_configurationDialog.h:1334
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -6574,28 +6574,28 @@ msgstr ""
 "Biến dạng hình ảnh bầu trời được sử dụng khi chiếu Stellarium đi tới một "
 "hình ảnh bầu trời cho các hệ thống vũ trụ chi phí thấp."
 
-#: src/ui_configurationDialog.h:1315
+#: src/ui_configurationDialog.h:1336
 msgid "Spheric mirror distortion"
 msgstr "Biến dạng hình ảnh bầu trời"
 
-#: src/ui_configurationDialog.h:1317
+#: src/ui_configurationDialog.h:1338
 msgid "Automatic change of landscape when planet is changed"
 msgstr "Tự động thay đổi phong cảnh khi hành tinh được thay đổi"
 
-#: src/ui_configurationDialog.h:1319
+#: src/ui_configurationDialog.h:1340
 msgid "Auto select landscapes"
 msgstr "Tự động chọn phong cảnh"
 
-#: src/ui_configurationDialog.h:1321
+#: src/ui_configurationDialog.h:1342
 msgid "Mask out everything outside a central circle in the main view"
 msgstr ""
 "Che tất cả mọi thứ bên ngoài  vòng tròn trung tâm trong giao diện chính"
 
-#: src/ui_configurationDialog.h:1323
+#: src/ui_configurationDialog.h:1344
 msgid "Disc viewport"
 msgstr "Chế độ xem đĩa"
 
-#: src/ui_configurationDialog.h:1325
+#: src/ui_configurationDialog.h:1346
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -6603,93 +6603,93 @@ msgstr ""
 "Khi được kích hoạt, lệnh \"tự động phóng to\" cũng sẽ thiết lập các hướng "
 "nhìn ban đầu"
 
-#: src/ui_configurationDialog.h:1327
+#: src/ui_configurationDialog.h:1348
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:457
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Tự động thu nhỏ về hướng nhìn ban đầu"
 
-#: src/ui_configurationDialog.h:1328
+#: src/ui_configurationDialog.h:1349
 msgid "Show bookmarks button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1329
+#: src/ui_configurationDialog.h:1350
 msgid "Screenshots"
 msgstr "Ảnh chụp màn hình"
 
-#: src/ui_configurationDialog.h:1330
+#: src/ui_configurationDialog.h:1351
 msgid "Screenshot Directory"
 msgstr "Hướng dẫn chụp màn hình"
 
-#: src/ui_configurationDialog.h:1332
+#: src/ui_configurationDialog.h:1353
 msgid "Invert colors"
 msgstr "Đảo ngược màu sắc"
 
-#: src/ui_configurationDialog.h:1333
+#: src/ui_configurationDialog.h:1354
 msgid "Star catalog updates"
 msgstr "Danh mục sao mới"
 
-#: src/ui_configurationDialog.h:1335
+#: src/ui_configurationDialog.h:1356
 msgid "Click here to start downloading"
 msgstr "Bấm vào đây để tải"
 
-#: src/ui_configurationDialog.h:1337
+#: src/ui_configurationDialog.h:1358
 msgid "Download this file to view even more stars"
 msgstr "Tải hồ sơ này xuống để xem nhiều sao hơn"
 
-#: src/ui_configurationDialog.h:1339
+#: src/ui_configurationDialog.h:1360
 msgid "Restart the download"
 msgstr "Tải xuống lại lần nữa"
 
-#: src/ui_configurationDialog.h:1341
+#: src/ui_configurationDialog.h:1362
 msgid "Retry"
 msgstr "Thử lại"
 
-#: src/ui_configurationDialog.h:1343
+#: src/ui_configurationDialog.h:1364
 msgid "Stop the download. You can always restart it later"
 msgstr "Ngừng tải.  Bạn có thể tải xuống lần khác"
 
-#: src/ui_configurationDialog.h:1348
+#: src/ui_configurationDialog.h:1369
 msgid "Close window when script runs"
 msgstr "Đóng cửa sổ khi chạy kịch bản"
 
-#: src/ui_configurationDialog.h:1350
+#: src/ui_configurationDialog.h:1371
 msgid "Run the selected script"
 msgstr "Chạy lệnh được chọn"
 
-#: src/ui_configurationDialog.h:1354
+#: src/ui_configurationDialog.h:1375
 msgid "Stop a running script"
 msgstr "Dừng lệnh đang chạy"
 
-#: src/ui_configurationDialog.h:1358
+#: src/ui_configurationDialog.h:1379
 msgid "Load at startup"
 msgstr "Tải lúc khởi động"
 
-#: src/ui_configurationDialog.h:1359
+#: src/ui_configurationDialog.h:1380
 msgid "configure"
 msgstr "Cấu hình"
 
-#: src/ui_configurationDialog.h:1364
+#: src/ui_configurationDialog.h:1385
 msgid "Main"
 msgstr "Chính"
 
-#: src/ui_configurationDialog.h:1366
+#: src/ui_configurationDialog.h:1387
 msgid "Information"
 msgstr "Thông tin"
 
-#: src/ui_configurationDialog.h:1371
+#: src/ui_configurationDialog.h:1392
 msgid "Navigation"
 msgstr "Điều hướng"
 
-#: src/ui_configurationDialog.h:1373
+#: src/ui_configurationDialog.h:1394
 msgid "Tools"
 msgstr "Công cụ"
 
-#: src/ui_configurationDialog.h:1375
+#: src/ui_configurationDialog.h:1396
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:497
 msgid "Scripts"
 msgstr "Nguyên bản"
 
-#: src/ui_configurationDialog.h:1377
+#: src/ui_configurationDialog.h:1398
 msgid "Plugins"
 msgstr "Phần bổ sung"
 
