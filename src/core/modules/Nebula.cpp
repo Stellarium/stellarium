@@ -285,8 +285,17 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 			if (nType==NebAGx || nType==NebGx || nType==NebRGx || nType==NebIGx || nType==NebQSO || nType==NebISM)
 			{
-				//TRANSLATORS: Unit of measure for distance - megaparsecs
-				du = q_("Mpc");
+				if (oDistanceErr>0.f)
+					dy = QString("%1%2%3").arg(QString::number(oDistance*3.262f, 'f', 1)).arg(QChar(0x00B1)).arg(QString::number(oDistanceErr*3.262f, 'f', 1));
+				else
+					dy = QString("%1").arg(QString::number(oDistance*3.262f, 'f', 1));
+				du = QString("%1 (%2 %3)")
+						//TRANSLATORS: Unit of measure for distance - Megaparsecs
+						.arg(q_("Mpc"))
+						.arg(dy)
+						//TRANSLATORS: Unit of measure for distance - Millions of Light Years
+						.arg(q_("Mio. ly"));
+
 			}
 			else
 			{
