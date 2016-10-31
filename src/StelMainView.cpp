@@ -68,116 +68,6 @@
 // Initialize static variables
 StelMainView* StelMainView::singleton = NULL;
 
-// A custom QGraphicsEffect to apply the night mode on top of the screen.
-class NightModeGraphicsEffect : public QGraphicsEffect
-{
-public:
-	NightModeGraphicsEffect(QObject* parent = NULL);
-protected:
-	virtual void draw(QPainter* painter);
-private:
-	QOpenGLFramebufferObject* fbo;
-	QOpenGLShaderProgram *program;
-	struct {
-		int pos;
-		int texCoord;
-		int source;
-	} vars;
-};
-
-NightModeGraphicsEffect::NightModeGraphicsEffect(QObject* parent) :
-	QGraphicsEffect(parent)
-	, fbo(NULL)
-{
-	program = new QOpenGLShaderProgram(this);
-	QString vertexCode =
-		"attribute highp vec4 a_pos;\n"
-		"attribute highp vec2 a_texCoord;\n"
-		"varying highp   vec2 v_texCoord;\n"
-		"void main(void)\n"
-		"{\n"
-			"v_texCoord = a_texCoord;\n"
-			"gl_Position = a_pos;\n"
-		"}\n";
-	QString fragmentCode =
-		"varying highp vec2 v_texCoord;\n"
-		"uniform sampler2D  u_source;\n"
-		"void main(void)\n"
-		"{\n"
-		"	mediump vec3 color = texture2D(u_source, v_texCoord).rgb;\n"
-		"	mediump float luminance = max(max(color.r, color.g), color.b);\n"
-		"	gl_FragColor = vec4(luminance, 0.0, 0.0, 1.0);\n"
-		"}\n";
-	program->addShaderFromSourceCode(QOpenGLShader::Vertex, vertexCode);
-	program->addShaderFromSourceCode(QOpenGLShader::Fragment, fragmentCode);
-	program->link();
-	vars.pos = program->attributeLocation("a_pos");
-	vars.texCoord = program->attributeLocation("a_texCoord");
-	vars.source = program->uniformLocation("u_source");
-}
-
-void NightModeGraphicsEffect::draw(QPainter* painter)
-{
-	int pixelRatio = painter->device()->devicePixelRatio();
-	QSize size(painter->device()->width() * pixelRatio, painter->device()->height() * pixelRatio);
-	if (fbo && fbo->size() != size)
-	{
-		delete fbo;
-		fbo = NULL;
-	}
-	if (!fbo)
-	{
-		QOpenGLFramebufferObjectFormat format;
-		format.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
-		format.setInternalTextureFormat(GL_RGBA);
-		fbo = new QOpenGLFramebufferObject(size, format);
-	}
-	QOpenGLPaintDevice device(size);
-	QPainter fboPainter(&device);
-	drawSource(&fboPainter);
-
-	painter->save();
-	painter->beginNativePainting();
-	program->bind();
-	const GLfloat pos[] = {-1, -1, +1, -1, -1, +1, +1, +1};
-	const GLfloat texCoord[] = {0, 0, 1, 0, 0, 1, 1, 1};
-	program->setUniformValue(vars.source, 0);
-	program->setAttributeArray(vars.pos, pos, 2);
-	program->setAttributeArray(vars.texCoord, texCoord, 2);
-	program->enableAttributeArray(vars.pos);
-	program->enableAttributeArray(vars.texCoord);
-	glBindTexture(GL_TEXTURE_2D, fbo->texture());
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-	program->release();
-	painter->endNativePainting();
-	painter->restore();
-}
-
-//! Initialize and render Stellarium gui.
-class StelGuiItem : public QGraphicsWidget
-{
-public:
-	StelGuiItem(QGraphicsItem* parent = NULL);
-protected:
-	void resizeEvent(QGraphicsSceneResizeEvent* event);
-private:
-	//QGraphicsWidget *widget;
-	// void onSizeChanged();
-};
-
-StelGuiItem::StelGuiItem(QGraphicsItem* parent) : QGraphicsWidget(parent)
-{
-	//widget = new QGraphicsWidget(this);
-	StelApp::getInstance().getGui()->init(this);
-}
-
-void StelGuiItem::resizeEvent(QGraphicsSceneResizeEvent* event)
-{
-	Q_UNUSED(event);
-	//widget->setGeometry(0, 0, size().width(), size().height());
-	StelApp::getInstance().getGui()->forceRefreshGui();
-}
-
 class StelGLWidget : public QOpenGLWidget
 {
 public:
@@ -189,6 +79,12 @@ public:
 		//because we always draw the full background,
 		//lets skip drawing the system background
 		setAttribute(Qt::WA_OpaquePaintEvent);
+		setAutoFillBackground(false);
+	}
+
+	~StelGLWidget()
+	{
+		qDebug()<<"StelGLWidget destroyed";
 	}
 
 protected:
@@ -232,42 +128,117 @@ private:
 	StelMainView* parent;
 };
 
+// A custom QGraphicsEffect to apply the night mode on top of the screen.
+class NightModeGraphicsEffect : public QGraphicsEffect
+{
+public:
+	NightModeGraphicsEffect(StelMainView* parent = NULL)
+		: QGraphicsEffect(parent),
+		  parent(parent), fbo(NULL)
+	{
+		Q_ASSERT(parent->glContext() == QOpenGLContext::currentContext());
+
+		program = new QOpenGLShaderProgram(this);
+		QString vertexCode =
+				"attribute highp vec4 a_pos;\n"
+				"attribute highp vec2 a_texCoord;\n"
+				"varying highp   vec2 v_texCoord;\n"
+				"void main(void)\n"
+				"{\n"
+				"v_texCoord = a_texCoord;\n"
+				"gl_Position = a_pos;\n"
+				"}\n";
+		QString fragmentCode =
+				"varying highp vec2 v_texCoord;\n"
+				"uniform sampler2D  u_source;\n"
+				"void main(void)\n"
+				"{\n"
+				"	mediump vec3 color = texture2D(u_source, v_texCoord).rgb;\n"
+				"	mediump float luminance = max(max(color.r, color.g), color.b);\n"
+				"	gl_FragColor = vec4(luminance, 0.0, 0.0, 1.0);\n"
+				"}\n";
+		program->addShaderFromSourceCode(QOpenGLShader::Vertex, vertexCode);
+		program->addShaderFromSourceCode(QOpenGLShader::Fragment, fragmentCode);
+		program->link();
+		vars.pos = program->attributeLocation("a_pos");
+		vars.texCoord = program->attributeLocation("a_texCoord");
+		vars.source = program->uniformLocation("u_source");
+	}
+
+	virtual ~NightModeGraphicsEffect()
+	{
+		Q_ASSERT(parent->glContext() == QOpenGLContext::currentContext());
+		//clean up fbo
+		delete fbo;
+	}
+protected:
+	virtual void draw(QPainter* painter) Q_DECL_OVERRIDE
+	{
+		Q_ASSERT(parent->glContext() == QOpenGLContext::currentContext());
+
+		int mainFBO;
+		glGetIntegerv(GL_FRAMEBUFFER_BINDING, &mainFBO);
+
+		int pixelRatio = painter->device()->devicePixelRatio();
+		QSize size(painter->device()->width() * pixelRatio, painter->device()->height() * pixelRatio);
+		if (fbo && fbo->size() != size)
+		{
+			delete fbo;
+			fbo = NULL;
+		}
+		if (!fbo)
+		{
+			QOpenGLFramebufferObjectFormat format;
+			format.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
+			format.setInternalTextureFormat(GL_RGBA);
+			fbo = new QOpenGLFramebufferObject(size, format);
+		}
+
+		fbo->bind();
+		QOpenGLPaintDevice device(size);
+		QPainter fboPainter(&device);
+		drawSource(&fboPainter);
+		//dont use QOpenGLFramebufferObject::release here
+		glBindFramebuffer(GL_FRAMEBUFFER,mainFBO);
+
+		painter->save();
+		painter->beginNativePainting();
+		program->bind();
+		const GLfloat pos[] = {-1, -1, +1, -1, -1, +1, +1, +1};
+		const GLfloat texCoord[] = {0, 0, 1, 0, 0, 1, 1, 1};
+		program->setUniformValue(vars.source, 0);
+		program->setAttributeArray(vars.pos, pos, 2);
+		program->setAttributeArray(vars.texCoord, texCoord, 2);
+		program->enableAttributeArray(vars.pos);
+		program->enableAttributeArray(vars.texCoord);
+		glBindTexture(GL_TEXTURE_2D, fbo->texture());
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+		program->release();
+		painter->endNativePainting();
+		painter->restore();
+	}
+
+private:
+	StelMainView* parent;
+	QOpenGLFramebufferObject* fbo;
+	QOpenGLShaderProgram *program;
+	struct {
+		int pos;
+		int texCoord;
+		int source;
+	} vars;
+};
+
 class StelGraphicsScene : public QGraphicsScene
 {
 public:
 	StelGraphicsScene(StelMainView* parent)
 		: QGraphicsScene(parent), parent(parent)
 	{
-		previousPaintTime = StelApp::getTotalRunTime();
-
 		qDebug()<<"StelGraphicsScene constructor";
 	}
 
 protected:
-	void drawBackground(QPainter *painter, const QRectF &rect) Q_DECL_OVERRIDE
-	{
-		Q_UNUSED(rect);
-
-		//a sanity check
-		Q_ASSERT(parent->glWidget->context() == QOpenGLContext::currentContext());
-
-		const double now = StelApp::getTotalRunTime();
-		double dt = now - previousPaintTime;
-		//qDebug()<<"dt"<<dt;
-		previousPaintTime = now;
-
-		//update and draw
-		StelApp& app = StelApp::getInstance();
-		app.update(dt);
-
-		//important to call this, or Qt may have invalid state after we have drawn (wrong textures, etc...)
-		painter->beginNativePainting();
-		app.draw();
-		painter->endNativePainting();
-
-		parent->drawEnded();
-	}
-
 	void mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE
 	{
 		QGraphicsScene::mousePressEvent(event);
@@ -393,7 +364,90 @@ private:
 	}
 
 	StelMainView* parent;
+};
+
+class StelRootItem : public QGraphicsObject
+{
+public:
+	StelRootItem(StelMainView* mainView, QGraphicsItem* parent = NULL)
+		: QGraphicsObject(parent), mainView(mainView)
+	{
+		setFlag(QGraphicsItem::ItemClipsToShape);
+		setFlag(QGraphicsItem::ItemContainsChildrenInShape);
+		setFlag(QGraphicsItem::ItemIsFocusable);
+
+		setAcceptHoverEvents(true);
+
+#ifdef Q_OS_WIN
+		setAcceptTouchEvents(true);
+		grabGesture(Qt::PinchGesture);
+#endif
+		setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
+		previousPaintTime = StelApp::getTotalRunTime();
+	}
+
+	void setSize(const QSize& size)
+	{
+		prepareGeometryChange();
+		rect.setSize(size);
+	}
+
+protected:
+	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE
+	{
+		Q_UNUSED(option);
+		Q_UNUSED(widget);
+
+		//a sanity check
+		Q_ASSERT(mainView->glWidget->context() == QOpenGLContext::currentContext());
+
+		const double now = StelApp::getTotalRunTime();
+		double dt = now - previousPaintTime;
+		//qDebug()<<"dt"<<dt;
+		previousPaintTime = now;
+
+		//update and draw
+		StelApp& app = StelApp::getInstance();
+		app.update(dt);
+
+		//important to call this, or Qt may have invalid state after we have drawn (wrong textures, etc...)
+		painter->beginNativePainting();
+		app.draw();
+		painter->endNativePainting();
+
+		mainView->drawEnded();
+	}
+
+	virtual QRectF boundingRect() const Q_DECL_OVERRIDE
+	{
+		return rect;
+	}
+private:
+	QRectF rect;
 	double previousPaintTime;
+	StelMainView* mainView;
+};
+
+//! Initialize and render Stellarium gui.
+class StelGuiItem : public QGraphicsWidget
+{
+public:
+	StelGuiItem(QGraphicsItem* parent = NULL)
+		: QGraphicsWidget(parent)
+	{
+		StelApp::getInstance().getGui()->init(this);
+	}
+
+protected:
+	void resizeEvent(QGraphicsSceneResizeEvent* event) Q_DECL_OVERRIDE
+	{
+		Q_UNUSED(event);
+		//widget->setGeometry(0, 0, size().width(), size().height());
+		StelApp::getInstance().getGui()->forceRefreshGui();
+	}
+private:
+	//QGraphicsWidget *widget;
+	// void onSizeChanged();
 };
 
 StelMainView::StelMainView(QSettings* settings)
@@ -405,6 +459,9 @@ StelMainView::StelMainView(QSettings* settings)
 	  screenShotDir(""),
 	  cursorTimeout(-1.f), flagCursorTimeout(false), maxfps(10000.f)
 {
+	setAttribute(Qt::WA_OpaquePaintEvent);
+	setAutoFillBackground(false);
+
 	configuration = settings;
 	StelApp::initStatic();
 
@@ -444,8 +501,7 @@ StelMainView::StelMainView(QSettings* settings)
 	stelScene = new StelGraphicsScene(this);
 	setScene(stelScene);
 	scene()->setItemIndexMethod(QGraphicsScene::NoIndex);
-	rootItem = new QGraphicsWidget();
-	rootItem->setFocusPolicy(Qt::NoFocus);
+	rootItem = new StelRootItem(this);
 
 	// Workaround (see Bug #940638) Although we have already explicitly set
 	// LC_NUMERIC to "C" in main.cpp there seems to be a bug in OpenGL where
@@ -460,8 +516,11 @@ void StelMainView::resizeEvent(QResizeEvent* event)
 {
 	if(scene())
 	{
-		scene()->setSceneRect(QRect(QPoint(0, 0), event->size()));
-		rootItem->setGeometry(0,0,event->size().width(),event->size().height());
+		const QSize& sz = event->size();
+		scene()->setSceneRect(QRect(QPoint(0, 0), sz));
+		rootItem->setSize(sz);
+		if(guiItem)
+			guiItem->setGeometry(QRectF(0.0f,0.0f,sz.width(),sz.height()));
 	}
 	QGraphicsView::resizeEvent(event);
 }
@@ -473,6 +532,8 @@ void StelMainView::focusSky() {
 
 StelMainView::~StelMainView()
 {
+	//delete the night view graphic effect here while GL context is still valid
+	rootItem->setGraphicsEffect(Q_NULLPTR);
 	StelApp::deinitStatic();
 }
 
@@ -518,6 +579,11 @@ void StelMainView::init()
 	if(glLogger->initialize())
 	{
 		qDebug()<<"OpenGL debug logger initialized";
+		QVector<GLuint> disabledMsgs;
+		//if your GL implementation spams some output you are not interested in,
+		//you can disable their message IDs here
+		//disabledMsgs.append(100);
+		glLogger->disableMessages(disabledMsgs);
 		glLogger->startLogging(QOpenGLDebugLogger::SynchronousLogging);
 		//the internal log buffer may not be empty, so check it
 		foreach(const QOpenGLDebugMessage& msg, glLogger->loggedMessages())
@@ -527,7 +593,12 @@ void StelMainView::init()
 	}
 	else
 		qWarning()<<"Failed to initialize OpenGL debug logger";
+
+	connect(QOpenGLContext::currentContext(),SIGNAL(aboutToBeDestroyed()),this,SLOT(contextDestroyed()));
+	//for easier debugging, print the adress of the main GL context
+	qDebug()<<"CurCtxPtr:"<<QOpenGLContext::currentContext();
 #endif
+
 	qDebug()<<"StelMainView::init";
 	gui = new StelGui();
 
@@ -555,16 +626,11 @@ void StelMainView::init()
 	
 	StelPainter::initGLShaders();
 
-	guiItem = new StelGuiItem();
-	QGraphicsAnchorLayout* l = new QGraphicsAnchorLayout(rootItem);
-	l->setSpacing(0);
-	l->setContentsMargins(0,0,0,0);
-	l->addCornerAnchors(guiItem, Qt::BottomLeftCorner, l, Qt::BottomLeftCorner);
-	l->addCornerAnchors(guiItem, Qt::TopRightCorner, l, Qt::TopRightCorner);
-	rootItem->setLayout(l);
+	guiItem = new StelGuiItem(rootItem);
 	scene()->addItem(rootItem);
 	nightModeEffect = new NightModeGraphicsEffect(this);
 	updateNightModeProperty();
+	//install the effect on the whole view
 	rootItem->setGraphicsEffect(nightModeEffect);
 
 	QDesktopWidget *desktop = QApplication::desktop();
@@ -1061,6 +1127,11 @@ void StelMainView::logGLMessage(const QOpenGLDebugMessage &debugMessage)
 {
 	qDebug()<<debugMessage;
 }
+
+void StelMainView::contextDestroyed()
+{
+	qDebug()<<"Main OpenGL context destroyed";
+}
 #endif
 
 void StelMainView::thereWasAnEvent()
@@ -1179,5 +1250,5 @@ void StelMainView::glContextDoneCurrent()
 
 void StelMainView::setFocusOnSky()
 {
-	clearFocus();
+	rootItem->setFocus();
 }

@@ -43,8 +43,9 @@ class QSettings;
 class StelMainView : public QGraphicsView
 {
 	friend class StelGuiItem;
-	friend class StelSkyItem;
+	friend class StelRootItem;
 	friend class StelGraphicsScene;
+	friend class NightModeGraphicsEffect;
 	Q_OBJECT
 	Q_PROPERTY(bool fullScreen READ isFullScreen WRITE setFullScreen NOTIFY fullScreenChanged)
 
@@ -161,7 +162,6 @@ signals:
 	//! @remark FS: is threaded access here even a possibility anymore, or a remnant of older code?
 	void screenshotRequested(void);
 	void fullScreenChanged(bool b);
-
 private slots:
 	// Do the actual screenshot generation in the main thread with this method.
 	void doScreenshot(void);
@@ -169,6 +169,7 @@ private slots:
 	void minFPSUpdate();
 #ifdef OPENGL_DEBUG_LOGGING
 	void logGLMessage(const QOpenGLDebugMessage& debugMessage);
+	void contextDestroyed();
 #endif
 
 private:
@@ -187,7 +188,7 @@ private:
 
 	QSettings* configuration;
 
-	QGraphicsWidget* rootItem;
+	class StelRootItem* rootItem;
 	QGraphicsWidget* guiItem;
 	QGraphicsEffect* nightModeEffect;
 
