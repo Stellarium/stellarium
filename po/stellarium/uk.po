@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-29 18:47+0700\n"
-"PO-Revision-Date: 2016-10-29 16:21+0000\n"
+"POT-Creation-Date: 2016-10-30 21:33+0700\n"
+"PO-Revision-Date: 2016-10-30 18:47+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-10-30 05:42+0000\n"
+"X-Launchpad-Export-Date: 2016-10-31 05:39+0000\n"
 "X-Generator: Launchpad (build 18246)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -84,7 +84,7 @@ msgstr "Межі сузір’їв"
 msgid "Select single constellation"
 msgstr "Виберіть одне сузір'я"
 
-#: src/core/modules/StarMgr.cpp:434 src/ui_viewDialog.h:1879
+#: src/core/modules/StarMgr.cpp:434 src/ui_viewDialog.h:1878
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:253
 msgid "Stars"
 msgstr "Зірки"
@@ -93,7 +93,7 @@ msgstr "Зірки"
 msgid "Stars labels"
 msgstr "Мітки зірок"
 
-#: src/core/modules/GridLinesMgr.cpp:645 src/ui_viewDialog.h:2068
+#: src/core/modules/GridLinesMgr.cpp:645 src/ui_viewDialog.h:2067
 msgid "Meridian"
 msgstr "Меридіан"
 
@@ -117,7 +117,7 @@ msgstr "Екватор"
 msgid "Precession Circle"
 msgstr "Коло прецесії"
 
-#: src/core/modules/GridLinesMgr.cpp:670 src/ui_viewDialog.h:2060
+#: src/core/modules/GridLinesMgr.cpp:670 src/ui_viewDialog.h:2059
 msgid "Horizon"
 msgstr "Горизонт"
 
@@ -130,12 +130,12 @@ msgid "Supergalactic Equator"
 msgstr "Супергалактичний екрватор"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
-#: src/core/modules/GridLinesMgr.cpp:683 src/ui_viewDialog.h:2075
+#: src/core/modules/GridLinesMgr.cpp:683 src/ui_viewDialog.h:2074
 msgid "O./C. longitude"
 msgstr "Довгота п./с."
 
 #: src/core/modules/GridLinesMgr.cpp:687 src/core/modules/GridLinesMgr.cpp:1232
-#: src/ui_viewDialog.h:2120
+#: src/ui_viewDialog.h:2119
 msgid "Prime Vertical"
 msgstr "Головна вертикаль"
 
@@ -208,7 +208,7 @@ msgstr "ПдСГП"
 msgid "Equatorial grid"
 msgstr "Екваторіальна сітка"
 
-#: src/core/modules/GridLinesMgr.cpp:1216 src/ui_viewDialog.h:2150
+#: src/core/modules/GridLinesMgr.cpp:1216 src/ui_viewDialog.h:2149
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:334
 msgid "Azimuthal grid"
 msgstr "Азимутальна сітка"
@@ -254,20 +254,20 @@ msgstr "Сітка екліптичних координат, J2000"
 msgid "Ecliptic grid"
 msgstr "Екліптична сітка"
 
-#: src/core/modules/GridLinesMgr.cpp:1226 src/ui_viewDialog.h:2182
+#: src/core/modules/GridLinesMgr.cpp:1226 src/ui_viewDialog.h:2181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Galactic grid"
 msgstr "Галактична сітка"
 
-#: src/core/modules/GridLinesMgr.cpp:1227 src/ui_viewDialog.h:2044
+#: src/core/modules/GridLinesMgr.cpp:1227 src/ui_viewDialog.h:2043
 msgid "Galactic equator"
 msgstr "Галактичний екватор"
 
-#: src/core/modules/GridLinesMgr.cpp:1228 src/ui_viewDialog.h:2171
+#: src/core/modules/GridLinesMgr.cpp:1228 src/ui_viewDialog.h:2170
 msgid "Supergalactic grid"
 msgstr "Супергалактична сітка"
 
-#: src/core/modules/GridLinesMgr.cpp:1229 src/ui_viewDialog.h:2064
+#: src/core/modules/GridLinesMgr.cpp:1229 src/ui_viewDialog.h:2063
 msgid "Supergalactic equator"
 msgstr "Супергалактичний екватор"
 
@@ -308,11 +308,11 @@ msgstr "Екліптичні полюси у J2000"
 msgid "Ecliptic poles"
 msgstr "Екліптичні полюси"
 
-#: src/core/modules/GridLinesMgr.cpp:1240 src/ui_viewDialog.h:2125
+#: src/core/modules/GridLinesMgr.cpp:1240 src/ui_viewDialog.h:2124
 msgid "Galactic poles"
 msgstr "Галактичні полюси"
 
-#: src/core/modules/GridLinesMgr.cpp:1241 src/ui_viewDialog.h:2086
+#: src/core/modules/GridLinesMgr.cpp:1241 src/ui_viewDialog.h:2085
 msgid "Supergalactic poles"
 msgstr "Супергалактичні полюси"
 
@@ -324,7 +324,7 @@ msgstr "Точки рівнодення J2000"
 msgid "Equinox points"
 msgstr "Точки рівнодення"
 
-#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1897
+#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1896
 msgid "Atmosphere"
 msgstr "Атмосфера"
 
@@ -332,7 +332,7 @@ msgstr "Атмосфера"
 msgid "Fog"
 msgstr "Туман"
 
-#: src/core/modules/LandscapeMgr.cpp:417 src/ui_viewDialog.h:2204
+#: src/core/modules/LandscapeMgr.cpp:417 src/ui_viewDialog.h:2203
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:311
 msgid "Cardinal points"
 msgstr "Частини світу"
@@ -345,12 +345,12 @@ msgstr "Земля"
 msgid "Illumination"
 msgstr "Освітлення"
 
-#: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:2000
+#: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:1999
 #: plugins/Satellites/src/ui_satellitesDialog.h:718
 msgid "Labels"
 msgstr "Надписи"
 
-#: src/core/modules/LandscapeMgr.cpp:421 src/ui_viewDialog.h:1901
+#: src/core/modules/LandscapeMgr.cpp:421 src/ui_viewDialog.h:1900
 msgid "Light pollution data from locations database"
 msgstr "Дані щодо світлового забруднення з бази даних місцевостей"
 
@@ -444,406 +444,411 @@ msgstr "Кут орієнтації: %1%2"
 msgid "Distance: %1 ly"
 msgstr "Відстань: %1 св. р."
 
-#. TRANSLATORS: Unit of measure for distance - megaparsecs
-#: src/core/modules/Nebula.cpp:289
-msgid "Mpc"
-msgstr "Мпк"
-
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:295
+#: src/core/modules/Nebula.cpp:278
 msgid "kpc"
 msgstr "кпк"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:298
+#: src/core/modules/Nebula.cpp:280
 msgid "ly"
 msgstr "св.р."
 
-#: src/core/modules/Nebula.cpp:300
-#, qt-format
-msgid "Distance: %1 %2"
-msgstr "Відстань: %1 %2"
+#. TRANSLATORS: Unit of measure for distance - Megaparsecs
+#: src/core/modules/Nebula.cpp:287
+msgid "Mpc"
+msgstr "Мпк"
 
-#: src/core/modules/Nebula.cpp:314
+#. TRANSLATORS: Unit of measure for distance - Millions of Light Years
+#: src/core/modules/Nebula.cpp:289
+msgid "Mio. ly"
+msgstr "млн. св. р."
+
+#: src/core/modules/Nebula.cpp:303
+#, qt-format
+msgid "Distance: %1 %2 (%3 %4)"
+msgstr "Відстань: %1 %2 (%3 %4)"
+
+#: src/core/modules/Nebula.cpp:317
 #, qt-format
 msgid "Redshift: %1"
 msgstr "Червоний зсув: %1"
 
-#: src/core/modules/Nebula.cpp:325 src/core/modules/StarWrapper.cpp:252
+#: src/core/modules/Nebula.cpp:328 src/core/modules/StarWrapper.cpp:252
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Паралакс: %1\""
 
-#: src/core/modules/Nebula.cpp:329
+#: src/core/modules/Nebula.cpp:332
 msgid "Morphological description: "
 msgstr "Морфологічний опис: "
 
-#: src/core/modules/Nebula.cpp:836
+#: src/core/modules/Nebula.cpp:839
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr "висока концентрація зірок у напрямку до центра"
 
-#: src/core/modules/Nebula.cpp:839
+#: src/core/modules/Nebula.cpp:842
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr "щільна центральна концентрація зірок"
 
-#: src/core/modules/Nebula.cpp:842
+#: src/core/modules/Nebula.cpp:845
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr "потужне зовнішнє ядро зірок"
 
-#: src/core/modules/Nebula.cpp:845
+#: src/core/modules/Nebula.cpp:848
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr "помірно збагачена концентрація зірок"
 
-#: src/core/modules/Nebula.cpp:850
+#: src/core/modules/Nebula.cpp:853
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr "помірна концентрація зірок"
 
-#: src/core/modules/Nebula.cpp:853
+#: src/core/modules/Nebula.cpp:856
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "rather loosely concentration of stars towards the center"
 msgstr "доволі розсіяна концентрація зірок у напрямку центра"
 
-#: src/core/modules/Nebula.cpp:856
+#: src/core/modules/Nebula.cpp:859
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr "розсіяна концентрація зіроку у напрямку центра"
 
-#: src/core/modules/Nebula.cpp:859
+#: src/core/modules/Nebula.cpp:862
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr "розсіяна концентрація зірок"
 
-#: src/core/modules/Nebula.cpp:862
+#: src/core/modules/Nebula.cpp:865
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr "дуже розсіяна коцентрація зіроку у напрямку центра"
 
-#: src/core/modules/Nebula.cpp:865
+#: src/core/modules/Nebula.cpp:868
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr "майже порожня у центрі"
 
-#: src/core/modules/Nebula.cpp:868
+#: src/core/modules/Nebula.cpp:871
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr "невідомий клас концентрації"
 
-#: src/core/modules/Nebula.cpp:888
+#: src/core/modules/Nebula.cpp:891
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr "потужна концентрація зірок"
 
-#: src/core/modules/Nebula.cpp:891
+#: src/core/modules/Nebula.cpp:894
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr "незначна центральна концентрація зірок"
 
-#: src/core/modules/Nebula.cpp:894
+#: src/core/modules/Nebula.cpp:897
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr "немає помітної концентрації зірок"
 
-#: src/core/modules/Nebula.cpp:897
+#: src/core/modules/Nebula.cpp:900
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr "конденсація зоряного поля"
 
-#: src/core/modules/Nebula.cpp:900
+#: src/core/modules/Nebula.cpp:903
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr "невідомий клас концентрації"
 
-#: src/core/modules/Nebula.cpp:906
+#: src/core/modules/Nebula.cpp:909
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr "вузький діапазон яскравостей зірок скупчення"
 
-#: src/core/modules/Nebula.cpp:909
+#: src/core/modules/Nebula.cpp:912
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr "середній діапазон яскравостей зірок скупчення"
 
-#: src/core/modules/Nebula.cpp:912
+#: src/core/modules/Nebula.cpp:915
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr "широкий діапазон яскравостей зірок скупчення"
 
-#: src/core/modules/Nebula.cpp:915
+#: src/core/modules/Nebula.cpp:918
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr "невідомий діапазон яскравостей зірок скупчення"
 
-#: src/core/modules/Nebula.cpp:921
+#: src/core/modules/Nebula.cpp:924
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr "бідне скупчення з кількістю зірок < 50"
 
-#: src/core/modules/Nebula.cpp:924
+#: src/core/modules/Nebula.cpp:927
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr "помірно багате скупчення з кількістю зірок 50-100"
 
-#: src/core/modules/Nebula.cpp:927
+#: src/core/modules/Nebula.cpp:930
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr "багате скупчення з понад 100 зірок"
 
-#: src/core/modules/Nebula.cpp:930
+#: src/core/modules/Nebula.cpp:933
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr "невідомий клас за кількістю компонентів"
 
-#: src/core/modules/Nebula.cpp:934
+#: src/core/modules/Nebula.cpp:937
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr "скупчення перебуває у туманності"
 
-#: src/core/modules/Nebula.cpp:955
+#: src/core/modules/Nebula.cpp:958
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr "дуже яскрава"
 
-#: src/core/modules/Nebula.cpp:958
+#: src/core/modules/Nebula.cpp:961
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr "яскрава"
 
-#: src/core/modules/Nebula.cpp:961
+#: src/core/modules/Nebula.cpp:964
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr "помірно яскрава"
 
-#: src/core/modules/Nebula.cpp:964
+#: src/core/modules/Nebula.cpp:967
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr "тьмяна"
 
-#: src/core/modules/Nebula.cpp:967
+#: src/core/modules/Nebula.cpp:970
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr "дуже тьмяна"
 
-#: src/core/modules/Nebula.cpp:970
+#: src/core/modules/Nebula.cpp:973
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr "невідома яскравість"
 
-#: src/core/modules/Nebula.cpp:973
+#: src/core/modules/Nebula.cpp:976
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr "невідома яскравість відбивної туманності"
 
-#: src/core/modules/Nebula.cpp:979
+#: src/core/modules/Nebula.cpp:982
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr "зірка-джерело світла перебуває у туманності"
 
-#: src/core/modules/Nebula.cpp:982
+#: src/core/modules/Nebula.cpp:985
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr "зірку розташовано поза підсвіченою туманністю"
 
-#: src/core/modules/Nebula.cpp:985
+#: src/core/modules/Nebula.cpp:988
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr "зірку розташовано на краю підсвіченою туманності"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:990
+#: src/core/modules/Nebula.cpp:993
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr "зірку розташова поза підсвіченою особливою туманністю"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:996
+#: src/core/modules/Nebula.cpp:999
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr "підсвічена особлива туманність"
 
-#: src/core/modules/Nebula.cpp:1000
+#: src/core/modules/Nebula.cpp:1003
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr "невідома відбивна туманність"
 
-#: src/core/modules/Nebula.cpp:1023
+#: src/core/modules/Nebula.cpp:1026
 msgid "circular form"
 msgstr "кругова форма"
 
-#: src/core/modules/Nebula.cpp:1026
+#: src/core/modules/Nebula.cpp:1029
 msgid "elliptical form"
 msgstr "еліптична форма"
 
-#: src/core/modules/Nebula.cpp:1029
+#: src/core/modules/Nebula.cpp:1032
 msgid "irregular form"
 msgstr "неправильна форма"
 
-#: src/core/modules/Nebula.cpp:1032
+#: src/core/modules/Nebula.cpp:1035
 msgid "undocumented form"
 msgstr "невідома форма"
 
-#: src/core/modules/Nebula.cpp:1038
+#: src/core/modules/Nebula.cpp:1041
 msgid "amorphous structure"
 msgstr "аморфна структура"
 
-#: src/core/modules/Nebula.cpp:1041
+#: src/core/modules/Nebula.cpp:1044
 msgid "conventional structure"
 msgstr "звичайна структура"
 
-#: src/core/modules/Nebula.cpp:1044
+#: src/core/modules/Nebula.cpp:1047
 msgid "filamentary structure"
 msgstr "ниткоподібна структура"
 
-#: src/core/modules/Nebula.cpp:1047
+#: src/core/modules/Nebula.cpp:1050
 msgid "undocumented structure"
 msgstr "невідома структура"
 
-#: src/core/modules/Nebula.cpp:1053
+#: src/core/modules/Nebula.cpp:1056
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "найтьмяніша"
 
-#: src/core/modules/Nebula.cpp:1056
+#: src/core/modules/Nebula.cpp:1059
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr "помірно яскрава"
 
-#: src/core/modules/Nebula.cpp:1059
+#: src/core/modules/Nebula.cpp:1062
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "найяскравіша"
 
-#: src/core/modules/Nebula.cpp:1062
+#: src/core/modules/Nebula.cpp:1065
 msgid "undocumented brightness"
 msgstr "недокументована яскравість"
 
-#: src/core/modules/Nebula.cpp:1078
+#: src/core/modules/Nebula.cpp:1081
 msgid "galaxy"
 msgstr "галактика"
 
-#: src/core/modules/Nebula.cpp:1081
+#: src/core/modules/Nebula.cpp:1084
 msgid "active galaxy"
 msgstr "активна галактика"
 
-#: src/core/modules/Nebula.cpp:1084
+#: src/core/modules/Nebula.cpp:1087
 msgid "radio galaxy"
 msgstr "радіогалактика"
 
-#: src/core/modules/Nebula.cpp:1087
+#: src/core/modules/Nebula.cpp:1090
 msgid "interacting galaxy"
 msgstr "взаємодія галактик"
 
-#: src/core/modules/Nebula.cpp:1090 plugins/Quasars/src/Quasar.cpp:101
+#: src/core/modules/Nebula.cpp:1093 plugins/Quasars/src/Quasar.cpp:101
 msgid "quasar"
 msgstr "квазар"
 
-#: src/core/modules/Nebula.cpp:1093
+#: src/core/modules/Nebula.cpp:1096
 msgid "star cluster"
 msgstr "зоряне скупчення"
 
-#: src/core/modules/Nebula.cpp:1096
+#: src/core/modules/Nebula.cpp:1099
 msgid "open star cluster"
 msgstr "розсіяне зоряне скупчення"
 
-#: src/core/modules/Nebula.cpp:1099
+#: src/core/modules/Nebula.cpp:1102
 msgid "globular star cluster"
 msgstr "кулясте зоряне скупчення"
 
-#: src/core/modules/Nebula.cpp:1102
+#: src/core/modules/Nebula.cpp:1105
 msgid "nebula"
 msgstr "туманність"
 
-#: src/core/modules/Nebula.cpp:1105
+#: src/core/modules/Nebula.cpp:1108
 msgid "planetary nebula"
 msgstr "планетарна туманність"
 
-#: src/core/modules/Nebula.cpp:1108
+#: src/core/modules/Nebula.cpp:1111
 msgid "dark nebula"
 msgstr "темна туманність"
 
-#: src/core/modules/Nebula.cpp:1111
+#: src/core/modules/Nebula.cpp:1114
 msgid "cluster associated with nebulosity"
 msgstr "скупчення, пов’язане із туманністю"
 
-#: src/core/modules/Nebula.cpp:1114
+#: src/core/modules/Nebula.cpp:1117
 msgid "bipolar nebula"
 msgstr "біполярна туманність"
 
-#: src/core/modules/Nebula.cpp:1117
+#: src/core/modules/Nebula.cpp:1120
 msgid "emission nebula"
 msgstr "емісійна туманність"
 
-#: src/core/modules/Nebula.cpp:1120
+#: src/core/modules/Nebula.cpp:1123
 msgid "HII region"
 msgstr "Область HII"
 
-#: src/core/modules/Nebula.cpp:1123
+#: src/core/modules/Nebula.cpp:1126
 msgid "reflection nebula"
 msgstr "відбивна туманність"
 
-#: src/core/modules/Nebula.cpp:1126
+#: src/core/modules/Nebula.cpp:1129
 msgid "supernova remnant"
 msgstr "залишок наднової"
 
-#: src/core/modules/Nebula.cpp:1129
+#: src/core/modules/Nebula.cpp:1132
 msgid "stellar association"
 msgstr "зоряна асоціація"
 
-#: src/core/modules/Nebula.cpp:1132
+#: src/core/modules/Nebula.cpp:1135
 msgid "star cloud"
 msgstr "зоряна хмара"
 
-#: src/core/modules/Nebula.cpp:1135
+#: src/core/modules/Nebula.cpp:1138
 msgid "interstellar matter"
 msgstr "міжзоряна речовина"
 
-#: src/core/modules/Nebula.cpp:1138
+#: src/core/modules/Nebula.cpp:1141
 msgid "emission object"
 msgstr "емісійний об’єкт"
 
-#: src/core/modules/Nebula.cpp:1141
+#: src/core/modules/Nebula.cpp:1144
 msgid "BL Lac object"
 msgstr "Лацертид"
 
-#: src/core/modules/Nebula.cpp:1144
+#: src/core/modules/Nebula.cpp:1147
 msgid "blazar"
 msgstr "блазар"
 
-#: src/core/modules/Nebula.cpp:1147
+#: src/core/modules/Nebula.cpp:1150
 msgid "molecular cloud"
 msgstr "молекулярна хмара"
 
-#: src/core/modules/Nebula.cpp:1150
+#: src/core/modules/Nebula.cpp:1153
 msgid "young stellar object"
 msgstr "молодий зоряний об’єкт"
 
-#: src/core/modules/Nebula.cpp:1153
+#: src/core/modules/Nebula.cpp:1156
 msgid "possible quasar"
 msgstr "можливий квазар"
 
-#: src/core/modules/Nebula.cpp:1156
+#: src/core/modules/Nebula.cpp:1159
 msgid "possible planetary nebula"
 msgstr "можлива планетарна туманність"
 
-#: src/core/modules/Nebula.cpp:1159
+#: src/core/modules/Nebula.cpp:1162
 msgid "protoplanetary nebula"
 msgstr "протопланетна туманність"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1162 src/core/modules/StarWrapper.cpp:53
+#: src/core/modules/Nebula.cpp:1165 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:185 src/translations.h:46
 msgid "star"
 msgstr "зірка"
 
-#: src/core/modules/Nebula.cpp:1165
+#: src/core/modules/Nebula.cpp:1168
 msgid "object of unknown nature"
 msgstr "об’єкт невідомої природи"
 
-#: src/core/modules/Nebula.cpp:1168
+#: src/core/modules/Nebula.cpp:1171
 msgid "undocumented type"
 msgstr "невідомий тип"
 
@@ -2543,7 +2548,7 @@ msgstr "Автоматично ховати вертикальні клавіш�
 msgid "Toggle visibility of GUI"
 msgstr "Увімкнути/Вимкнути графічний інтерфейс"
 
-#: src/gui/StelGuiItems.cpp:322 src/gui/StelGuiItems.cpp:856
+#: src/gui/StelGuiItems.cpp:322 src/gui/StelGuiItems.cpp:860
 msgid "Space"
 msgstr "Пробіл"
 
@@ -2559,25 +2564,25 @@ msgstr "Місцевий середній сонячний час"
 msgid "Local True Solar Time"
 msgstr "Місцевий справжній сонячний час"
 
-#: src/gui/StelGuiItems.cpp:675
+#: src/gui/StelGuiItems.cpp:679
 #, c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/StelGuiItems.cpp:707
+#: src/gui/StelGuiItems.cpp:711
 #, qt-format
 msgid "planetocentric distance %1 km"
 msgstr "планетоцентрична відстань: %1 км"
 
-#: src/gui/StelGuiItems.cpp:709
+#: src/gui/StelGuiItems.cpp:713
 msgid "planetocentric observer"
 msgstr "планетоцентричний спостерігач"
 
-#: src/gui/StelGuiItems.cpp:738
+#: src/gui/StelGuiItems.cpp:742
 msgid "Field of view"
 msgstr "Поле зору"
 
-#: src/gui/StelGuiItems.cpp:763
+#: src/gui/StelGuiItems.cpp:767
 msgid "Frames per second"
 msgstr "Кадрів в секунду"
 
@@ -3024,7 +3029,7 @@ msgstr "Об’єкти поясу Оорта"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:531 src/translations.h:117
-#: src/ui_viewDialog.h:1993
+#: src/ui_viewDialog.h:1992
 msgid "Star clusters"
 msgstr "Скупчення зірок"
 
@@ -3042,7 +3047,7 @@ msgstr "Яскраві туманності"
 msgid "Dark nebulae"
 msgstr "Темні туманності"
 
-#: src/gui/AstroCalcDialog.cpp:535 src/ui_viewDialog.h:1995
+#: src/gui/AstroCalcDialog.cpp:535 src/ui_viewDialog.h:1994
 msgid "Galaxies"
 msgstr "Галактики"
 
@@ -3283,7 +3288,7 @@ msgid "Reflection nebulae"
 msgstr "Відбивні туманності"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:109 src/ui_viewDialog.h:1996
+#: src/translations.h:109 src/ui_viewDialog.h:1995
 msgid "Active galaxies"
 msgstr "Активні галактики"
 
@@ -3293,7 +3298,7 @@ msgid "Radio galaxies"
 msgstr "Радіогалактики"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:113 src/ui_viewDialog.h:1990
+#: src/translations.h:113 src/ui_viewDialog.h:1989
 msgid "Interacting galaxies"
 msgstr "Взаємодія галактик"
 
@@ -3323,7 +3328,7 @@ msgid "Emission nebulae"
 msgstr "Емісійні туманності"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:127 src/ui_viewDialog.h:1989
+#: src/translations.h:127 src/ui_viewDialog.h:1988
 msgid "Supernova remnants"
 msgstr "Залишки наднових"
 
@@ -3373,12 +3378,12 @@ msgid "Protoplanetary Nebulae"
 msgstr "Протопланетні туманності"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:147 src/ui_viewDialog.h:1953
+#: src/translations.h:147 src/ui_viewDialog.h:1952
 msgid "Messier Catalogue"
 msgstr "Каталог Месьє"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:149 src/ui_viewDialog.h:1956
+#: src/translations.h:149 src/ui_viewDialog.h:1955
 msgid "Caldwell Catalogue"
 msgstr "Каталог Колдвелла"
 
@@ -5466,65 +5471,65 @@ msgstr "Використовувати автодоповнення лише д�
 msgid "Lock position when coordinates are used"
 msgstr "Заблокувати позицію, якщо використано координати"
 
-#: src/ui_searchDialogGui.h:722 src/ui_viewDialog.h:2210
-#: src/ui_viewDialog.h:2232 src/ui_viewDialog.h:2249
+#: src/ui_searchDialogGui.h:722 src/ui_viewDialog.h:2209
+#: src/ui_viewDialog.h:2231 src/ui_viewDialog.h:2248
 #: src/ui_configurationDialog.h:1367 src/ui_configurationDialog.h:1378
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Параметри"
 
-#: src/ui_viewDialog.h:1877
+#: src/ui_viewDialog.h:1876
 msgid "View"
 msgstr "Перегляд"
 
-#: src/ui_viewDialog.h:1880
+#: src/ui_viewDialog.h:1879
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:266
 msgid "Absolute scale:"
 msgstr "Абсолютна шкала:"
 
-#: src/ui_viewDialog.h:1881
+#: src/ui_viewDialog.h:1880
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Relative scale:"
 msgstr "Відносна шкала:"
 
-#: src/ui_viewDialog.h:1882
+#: src/ui_viewDialog.h:1881
 msgid "Milky Way brightness:"
 msgstr "Яскравість Чумацького Шляху:"
 
-#: src/ui_viewDialog.h:1883
+#: src/ui_viewDialog.h:1882
 msgid "Zodiacal Light brightness:"
 msgstr "Зодіакальна яскравість світла:"
 
-#: src/ui_viewDialog.h:1884
+#: src/ui_viewDialog.h:1883
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:272
 msgid "Twinkle:"
 msgstr "Мерехтіння:"
 
-#: src/ui_viewDialog.h:1886
+#: src/ui_viewDialog.h:1885
 msgid "Limit the magnitude of stars"
 msgstr "Обмежити зоряну величину зірок"
 
-#: src/ui_viewDialog.h:1888 src/ui_viewDialog.h:1927 src/ui_viewDialog.h:2013
+#: src/ui_viewDialog.h:1887 src/ui_viewDialog.h:1926 src/ui_viewDialog.h:2012
 msgid "Limit magnitude:"
 msgstr "Обмеження величини:"
 
-#: src/ui_viewDialog.h:1890
+#: src/ui_viewDialog.h:1889
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Робити слабкі зірки тьмянішими, якщо видимим є дуже яскравий об’єкт"
 
-#: src/ui_viewDialog.h:1892
+#: src/ui_viewDialog.h:1891
 msgid "Dynamic eye adaptation"
 msgstr "Динамічна зорова адаптація"
 
-#: src/ui_viewDialog.h:1893 src/ui_viewDialog.h:1932 src/ui_viewDialog.h:1999
+#: src/ui_viewDialog.h:1892 src/ui_viewDialog.h:1931 src/ui_viewDialog.h:1998
 msgid "Labels and Markers"
 msgstr "Мітки і позначки"
 
-#: src/ui_viewDialog.h:1895
+#: src/ui_viewDialog.h:1894
 msgid "Show atmosphere"
 msgstr "Показати атмосферу"
 
-#: src/ui_viewDialog.h:1899
+#: src/ui_viewDialog.h:1898
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
@@ -5532,34 +5537,34 @@ msgstr ""
 "Використовувати дані щодо світлового забруднення з бази даних місцевостей, "
 "ігнорувати значення, вказані нижче"
 
-#: src/ui_viewDialog.h:1902
+#: src/ui_viewDialog.h:1901
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:440
 msgid "Light pollution:"
 msgstr "Забруднення світлом:"
 
-#: src/ui_viewDialog.h:1904
+#: src/ui_viewDialog.h:1903
 msgid "pressure, temperature, extinction coefficient"
 msgstr "тиск, температура, коефіцієнт поглинання"
 
-#: src/ui_viewDialog.h:1906
+#: src/ui_viewDialog.h:1905
 msgid "Refraction/Extinction settings..."
 msgstr "Параметри розсіювання та поглинання…"
 
-#: src/ui_viewDialog.h:1907
+#: src/ui_viewDialog.h:1906
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:293
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Solar System objects"
 msgstr "Об'єкти Сонячної системи"
 
-#: src/ui_viewDialog.h:1908
+#: src/ui_viewDialog.h:1907
 msgid "Show planet markers"
 msgstr "Показати позначки планет"
 
-#: src/ui_viewDialog.h:1909
+#: src/ui_viewDialog.h:1908
 msgid "Show planet orbits"
 msgstr "Показати орбіти планет"
 
-#: src/ui_viewDialog.h:1911
+#: src/ui_viewDialog.h:1910
 msgid ""
 "Deactivate this option if you want to see orbit for selected planet and its "
 "moons."
@@ -5567,11 +5572,11 @@ msgstr ""
 "Зніміть позначку з цього пункту, якщо ви хочете бачити орбіту позначеної "
 "планети та її супутників."
 
-#: src/ui_viewDialog.h:1913
+#: src/ui_viewDialog.h:1912
 msgid "Show orbit for selected planet"
 msgstr "Показати орбіту позначеної планети"
 
-#: src/ui_viewDialog.h:1915
+#: src/ui_viewDialog.h:1914
 msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
@@ -5579,11 +5584,11 @@ msgstr ""
 "Зніміть цю позначку, якщо ви хочете бачити траєкторії усіх тіл Сонячної "
 "системи."
 
-#: src/ui_viewDialog.h:1917
+#: src/ui_viewDialog.h:1916
 msgid "Show trail only for selected planet"
 msgstr "Показати траєкторію лише для позначеної планети"
 
-#: src/ui_viewDialog.h:1919
+#: src/ui_viewDialog.h:1918
 msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
@@ -5591,137 +5596,137 @@ msgstr ""
 "Позначте цей пункт, якщо програма має імітувати ефект реальної швидкості "
 "світла (рекомендовано)."
 
-#: src/ui_viewDialog.h:1921
+#: src/ui_viewDialog.h:1920
 msgid "Simulate light speed"
 msgstr "Імітувати швидкість світла"
 
-#: src/ui_viewDialog.h:1922
+#: src/ui_viewDialog.h:1921
 msgid "Use custom settings of GRS:"
 msgstr "Використовувати нетипові параметри ВЧП:"
 
-#: src/ui_viewDialog.h:1923
+#: src/ui_viewDialog.h:1922
 msgid "GRS details..."
 msgstr "Подробиці щодо ВЧП…"
 
-#: src/ui_viewDialog.h:1925
+#: src/ui_viewDialog.h:1924
 msgid "Limit the magnitude of solar system objects"
 msgstr "Обмежити зоряну величину об’єктів Сонячної системи"
 
-#: src/ui_viewDialog.h:1928
+#: src/ui_viewDialog.h:1927
 msgid "Scale Moon:"
 msgstr "Масштаб Місяця:"
 
-#: src/ui_viewDialog.h:1930
+#: src/ui_viewDialog.h:1929
 msgid "Scale factor"
 msgstr "Коефіцієнт масштабування"
 
-#: src/ui_viewDialog.h:1934
+#: src/ui_viewDialog.h:1933
 msgid "Settings for sporadic meteors"
 msgstr "Параметри для спорадичних метеорів"
 
-#: src/ui_viewDialog.h:1936
+#: src/ui_viewDialog.h:1935
 msgid "Shooting Stars"
 msgstr "Метеори"
 
-#: src/ui_viewDialog.h:1938
+#: src/ui_viewDialog.h:1937
 msgid "Hourly zenith rate"
 msgstr "Зенітне годинне число"
 
-#: src/ui_viewDialog.h:1940
+#: src/ui_viewDialog.h:1939
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
 msgstr "ЗГЧ:"
 
-#: src/ui_viewDialog.h:1942
+#: src/ui_viewDialog.h:1941
 msgid "Display objects from catalogs"
 msgstr "Показувати об’єкти з каталогів"
 
-#: src/ui_viewDialog.h:1944
+#: src/ui_viewDialog.h:1943
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
 msgstr "Індексований каталог туманностей та скупчень зірок"
 
-#: src/ui_viewDialog.h:1947
+#: src/ui_viewDialog.h:1946
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
 msgstr "Новий загальний каталог туманностей та скупчень зірок"
 
-#: src/ui_viewDialog.h:1950
+#: src/ui_viewDialog.h:1949
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
 msgstr "Каталог яскравих туманностей Ліндс (Ліндс, 1965)"
 
-#: src/ui_viewDialog.h:1959
+#: src/ui_viewDialog.h:1958
 msgid "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
 msgstr "Каталог 349 темних об’єктів неба Барнарда (Барнард, 1927)"
 
-#: src/ui_viewDialog.h:1962
+#: src/ui_viewDialog.h:1961
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
 msgstr "Каталог областей HII (Шарплес, 1959)"
 
-#: src/ui_viewDialog.h:1965
+#: src/ui_viewDialog.h:1964
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
 msgstr "Каталог відбивних туманностей (Ван ден Берг, 1966)"
 
-#: src/ui_viewDialog.h:1968
+#: src/ui_viewDialog.h:1967
 msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, 1960)"
 msgstr ""
 "Каталог областей Hα-емісії південного Чумацького Шляху (Роджерс та ін., 1960)"
 
-#: src/ui_viewDialog.h:1971
+#: src/ui_viewDialog.h:1970
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
 msgstr "Каталог темних туманностей Ліндс (Ліндс, 1962)"
 
-#: src/ui_viewDialog.h:1974
+#: src/ui_viewDialog.h:1973
 msgid "Catalog of Open Galactic Clusters (Collinder, 1931)"
 msgstr "Каталог розсіяних галактичних скупчень (Коліндер, 1931)"
 
-#: src/ui_viewDialog.h:1977
+#: src/ui_viewDialog.h:1976
 msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
 msgstr ""
 "Каталог зоряних скупчень на зоряних картах Франкліна-Адамса (Мелот, 1915)"
 
-#: src/ui_viewDialog.h:1980
+#: src/ui_viewDialog.h:1979
 msgid "Catalog of galaxies"
 msgstr "Каталог галактик"
 
-#: src/ui_viewDialog.h:1983
+#: src/ui_viewDialog.h:1982
 msgid "The Uppsala General Catalogue of Galaxies"
 msgstr "Упсальський загальний каталог галактик"
 
-#: src/ui_viewDialog.h:1986
+#: src/ui_viewDialog.h:1985
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
 msgstr "Каталог яскравих дифузних галактичних туманностей (Седерблад, 1946)"
 
-#: src/ui_viewDialog.h:1988
+#: src/ui_viewDialog.h:1987
 msgid "Filter by type"
 msgstr "Фільтрувати за типом"
 
-#: src/ui_viewDialog.h:1991
+#: src/ui_viewDialog.h:1990
 msgid "Hydrogen regions"
 msgstr "Області гідрогену"
 
-#: src/ui_viewDialog.h:1992
+#: src/ui_viewDialog.h:1991
 msgid "Other"
 msgstr "Інше"
 
-#: src/ui_viewDialog.h:1994
+#: src/ui_viewDialog.h:1993
 msgid "Planetary Nebulae"
 msgstr "Планетарні туманності"
 
-#: src/ui_viewDialog.h:1997
+#: src/ui_viewDialog.h:1996
 msgid "Dark Nebulae"
 msgstr "Темна туманність"
 
-#: src/ui_viewDialog.h:1998
+#: src/ui_viewDialog.h:1997
 msgid "Bright Nebulae"
 msgstr "Яскрава туманність"
 
-#: src/ui_viewDialog.h:2001
+#: src/ui_viewDialog.h:2000
 msgid "Hints"
 msgstr "Підказки"
 
-#: src/ui_viewDialog.h:2003
+#: src/ui_viewDialog.h:2002
 msgid ""
 "Use surface brightness of deep-sky objects for scale of the visibility of "
 "their markers and labels."
@@ -5729,27 +5734,27 @@ msgstr ""
 "Використовувати поверхневу яскравість віддалених об’єктів для масштабування "
 "видимості відповідних позначок і міток."
 
-#: src/ui_viewDialog.h:2005
+#: src/ui_viewDialog.h:2004
 msgid "Use surface brightness"
 msgstr "Використовувати поверхневу яскравість"
 
-#: src/ui_viewDialog.h:2007
+#: src/ui_viewDialog.h:2006
 msgid "Use hints proportional to angular size of deep-sky objects"
 msgstr ""
 "Використовувати підказки, пропорційні до кутового розміру віддалених об’єктів"
 
-#: src/ui_viewDialog.h:2009
+#: src/ui_viewDialog.h:2008
 msgid "Use proportional hints"
 msgstr "Використовувати пропорційні підказки"
 
-#: src/ui_viewDialog.h:2011
+#: src/ui_viewDialog.h:2010
 msgid ""
 "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
 "Обмежити величину (для неозброєного ока і спостереження у бінокль) "
 "віддалених об’єктів."
 
-#: src/ui_viewDialog.h:2015
+#: src/ui_viewDialog.h:2014
 msgid ""
 "Use designations of deep-sky objects instead of their common names for "
 "screen labels"
@@ -5757,91 +5762,91 @@ msgstr ""
 "Використовувати для міток віддалених об’єктів позначення замість їхніх "
 "загальновживаних назв"
 
-#: src/ui_viewDialog.h:2017
+#: src/ui_viewDialog.h:2016
 msgid "Use designations for screen labels"
 msgstr "Використовувати позначення для міток"
 
-#: src/ui_viewDialog.h:2018
+#: src/ui_viewDialog.h:2017
 msgid "Celestial Sphere"
 msgstr "Небесна сфера"
 
-#: src/ui_viewDialog.h:2020
+#: src/ui_viewDialog.h:2019
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
 msgstr "Показати лінію екліптики J2000.0 (фундаментальна площина VSOP87A)."
 
-#: src/ui_viewDialog.h:2022
+#: src/ui_viewDialog.h:2021
 msgid "Ecliptic (J2000)"
 msgstr "Екліптика (J2000)"
 
-#: src/ui_viewDialog.h:2024
+#: src/ui_viewDialog.h:2023
 msgid "Show celestial equator of current planet and date."
 msgstr "Показати небесний екватор для поточної планети і поточної дати."
 
-#: src/ui_viewDialog.h:2026
+#: src/ui_viewDialog.h:2025
 msgid "Equator (of date)"
 msgstr "Екватор (дати)"
 
-#: src/ui_viewDialog.h:2028
+#: src/ui_viewDialog.h:2027
 msgid "Show celestial equator of J2000.0."
 msgstr "Показати небесний екватор для J2000.0."
 
-#: src/ui_viewDialog.h:2030
+#: src/ui_viewDialog.h:2029
 msgid "Equator (J2000)"
 msgstr "Екватор (J2000)"
 
-#: src/ui_viewDialog.h:2032
+#: src/ui_viewDialog.h:2031
 msgid "Color of equator (J2000.0)"
 msgstr "Колір екватора (J2000.0)"
 
-#: src/ui_viewDialog.h:2035
+#: src/ui_viewDialog.h:2034
 msgid "Show ecliptic line of current date."
 msgstr "Показати лінію екліптики для поточної дати."
 
-#: src/ui_viewDialog.h:2037
+#: src/ui_viewDialog.h:2036
 msgid "Ecliptic (of date)"
 msgstr "Екліптика (дати)"
 
-#: src/ui_viewDialog.h:2039
+#: src/ui_viewDialog.h:2038
 msgid "Color of equator (of date)"
 msgstr "Колір екватора (на дату)"
 
-#: src/ui_viewDialog.h:2042
+#: src/ui_viewDialog.h:2041
 msgid "Show Galactic equator line."
 msgstr "Показати лінію галактичного екватора."
 
-#: src/ui_viewDialog.h:2046
+#: src/ui_viewDialog.h:2045
 msgid "Color of supergalactic equator"
 msgstr "Колір супергалактичного екватора"
 
-#: src/ui_viewDialog.h:2049
+#: src/ui_viewDialog.h:2048
 msgid "Color of ecliptic (of date)"
 msgstr "Колір екліптики (на дату)"
 
-#: src/ui_viewDialog.h:2052
+#: src/ui_viewDialog.h:2051
 msgid "Color of ecliptic (J2000.0)"
 msgstr "Колір екліптики (J2000.0)"
 
-#: src/ui_viewDialog.h:2055
+#: src/ui_viewDialog.h:2054
 msgid "Color of galactic equator"
 msgstr "Колір галактичного екватора"
 
-#: src/ui_viewDialog.h:2058
+#: src/ui_viewDialog.h:2057
 msgid "Show horizon line."
 msgstr "Показати лінію горизонту."
 
-#: src/ui_viewDialog.h:2062
+#: src/ui_viewDialog.h:2061
 msgid "Color of horizon"
 msgstr "Колір горизонту"
 
-#: src/ui_viewDialog.h:2066
+#: src/ui_viewDialog.h:2065
 msgid "Show meridian line."
 msgstr "Показати лінію меридіана."
 
-#: src/ui_viewDialog.h:2070
+#: src/ui_viewDialog.h:2069
 msgid "Color of meridian"
 msgstr "Колір меридіана"
 
-#: src/ui_viewDialog.h:2073
+#: src/ui_viewDialog.h:2072
 msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which "
 "passes through both ecliptic poles, the Sun and opposition point."
@@ -5849,97 +5854,97 @@ msgstr ""
 "Лінія довготи протистояння-сполучення — лінія екліптичної довготи, яка "
 "проходить через обидва екліптичні полюси, Сонце і точку протистояння."
 
-#: src/ui_viewDialog.h:2077
+#: src/ui_viewDialog.h:2076
 msgid "Color of the opposition/conjunction longitude line"
 msgstr "Колір лінії довготи протистояння або сполучення"
 
-#: src/ui_viewDialog.h:2080
+#: src/ui_viewDialog.h:2079
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
 msgstr ""
 "Показувати колюри (великі кола, що проходять через точки "
 "сонцестоянь/рівнодень)."
 
-#: src/ui_viewDialog.h:2082
+#: src/ui_viewDialog.h:2081
 msgid "Colures"
 msgstr "Колюри"
 
-#: src/ui_viewDialog.h:2084
+#: src/ui_viewDialog.h:2083
 msgid "Color of colures"
 msgstr "Колір колюрів"
 
-#: src/ui_viewDialog.h:2088
+#: src/ui_viewDialog.h:2087
 msgid "Color of the ecliptic poles (J2000.0)"
 msgstr "Колір екліптичних полюсів (J2000.0)"
 
-#: src/ui_viewDialog.h:2091
+#: src/ui_viewDialog.h:2090
 msgid "Color of Prime Vertical"
 msgstr "Колір головної вертикалі"
 
-#: src/ui_viewDialog.h:2094
+#: src/ui_viewDialog.h:2093
 msgid "Show ecliptic poles of J2000.0"
 msgstr "Показати екліптичні полюси у J2000.0"
 
-#: src/ui_viewDialog.h:2096
+#: src/ui_viewDialog.h:2095
 msgid "Ecliptic poles (J2000)"
 msgstr "Екліптичні полюси (J2000)"
 
-#: src/ui_viewDialog.h:2098
+#: src/ui_viewDialog.h:2097
 msgid "Color of the celestial poles (J2000.0)"
 msgstr "Колір небесних полюсів (J2000.0)"
 
-#: src/ui_viewDialog.h:2101
+#: src/ui_viewDialog.h:2100
 msgid "Show celestial poles of current planet and date."
 msgstr "Показати небесні полюси для поточної планети і дати."
 
-#: src/ui_viewDialog.h:2103
+#: src/ui_viewDialog.h:2102
 msgid "Celestial poles (of date)"
 msgstr "Небесні полюси (на дату)"
 
-#: src/ui_viewDialog.h:2105
+#: src/ui_viewDialog.h:2104
 msgid "Color of ecliptic poles (of date)"
 msgstr "Колір екліптичних полюсів (на дату)"
 
-#: src/ui_viewDialog.h:2108
+#: src/ui_viewDialog.h:2107
 msgid "Color of celestial poles (of date)"
 msgstr "Колір небесних полюсів (на дату)"
 
-#: src/ui_viewDialog.h:2111
+#: src/ui_viewDialog.h:2110
 msgid "Color of supergalactic poles"
 msgstr "Колір супергалактичних полюсів"
 
-#: src/ui_viewDialog.h:2114
+#: src/ui_viewDialog.h:2113
 msgid "Show ecliptic poles of current date."
 msgstr "Показати екліптичні полюси для поточної дати."
 
-#: src/ui_viewDialog.h:2116
+#: src/ui_viewDialog.h:2115
 msgid "Ecliptic poles (of date)"
 msgstr "Екліптичні полюси (на дату)"
 
-#: src/ui_viewDialog.h:2118
+#: src/ui_viewDialog.h:2117
 msgid "Show Prime (East-West) Vertical."
 msgstr "Показуати головну вертикаль (Схід-Захід)"
 
-#: src/ui_viewDialog.h:2122
+#: src/ui_viewDialog.h:2121
 msgid "Color of galactic poles"
 msgstr "Колір галактичних полюсів"
 
-#: src/ui_viewDialog.h:2124
+#: src/ui_viewDialog.h:2123
 msgid "Zenith and Nadir"
 msgstr "Зеніт і надір"
 
-#: src/ui_viewDialog.h:2127
+#: src/ui_viewDialog.h:2126
 msgid "Color of Zenith and Nadir"
 msgstr "Колір зеніту і надіру"
 
-#: src/ui_viewDialog.h:2130
+#: src/ui_viewDialog.h:2129
 msgid "Show celestial poles of J2000.0."
 msgstr "Колір небесних полюсів у J2000.0."
 
-#: src/ui_viewDialog.h:2132
+#: src/ui_viewDialog.h:2131
 msgid "Celestial poles (J2000)"
 msgstr "Небесні полюси (J2000)"
 
-#: src/ui_viewDialog.h:2134
+#: src/ui_viewDialog.h:2133
 msgid ""
 "These circles delimit stars which stay always above (respectively below) the "
 "mathematical horizon."
@@ -5947,15 +5952,15 @@ msgstr ""
 "Ці кола відокремлять зірки, які завжди залишаються над (і, відповідно, під) "
 "математичним горизонтом."
 
-#: src/ui_viewDialog.h:2136
+#: src/ui_viewDialog.h:2135
 msgid "Circumpolar circles"
 msgstr "Навколополярні кола"
 
-#: src/ui_viewDialog.h:2138
+#: src/ui_viewDialog.h:2137
 msgid "Color of circumpolar circles"
 msgstr "Колір навколополярних кіл"
 
-#: src/ui_viewDialog.h:2141
+#: src/ui_viewDialog.h:2140
 msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
@@ -5963,235 +5968,235 @@ msgstr ""
 "Кола, які викреслює земна вісь під час руху навколо екліптичних полюсів. "
 "Може бути показано лише на Землі."
 
-#: src/ui_viewDialog.h:2143
+#: src/ui_viewDialog.h:2142
 msgid "Precession circles"
 msgstr "Кола прецесії"
 
-#: src/ui_viewDialog.h:2145
+#: src/ui_viewDialog.h:2144
 msgid "Color of precession circles"
 msgstr "Колір кіл прецесії"
 
-#: src/ui_viewDialog.h:2148
+#: src/ui_viewDialog.h:2147
 msgid "Altitudes and azimuth (counted from North towards East)."
 msgstr "Висоти і азимут (відлік від напрямку півночі на схід)"
 
-#: src/ui_viewDialog.h:2152
+#: src/ui_viewDialog.h:2151
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
 msgstr ""
 "Екліптичні координати для поточної дати. Може бути показано лише для Землі."
 
-#: src/ui_viewDialog.h:2154
+#: src/ui_viewDialog.h:2153
 msgid "Ecliptic grid (of date)"
 msgstr "Екліптична сітка (дати)"
 
-#: src/ui_viewDialog.h:2156
+#: src/ui_viewDialog.h:2155
 msgid "Color of the equatorial grid (J2000.0)"
 msgstr "Колір екваторіальної сітки (J2000.0)"
 
-#: src/ui_viewDialog.h:2159
+#: src/ui_viewDialog.h:2158
 msgid "Color of the equinox points (J2000.0)"
 msgstr "Колір точок рівнодення (J2000.0)"
 
-#: src/ui_viewDialog.h:2162
+#: src/ui_viewDialog.h:2161
 msgid "Ecliptical coordinates for J2000.0."
 msgstr "Екліптичні координати для J2000.0."
 
-#: src/ui_viewDialog.h:2164
+#: src/ui_viewDialog.h:2163
 msgid "Ecliptic grid (J2000)"
 msgstr "Екліптична сітка (J2000)"
 
-#: src/ui_viewDialog.h:2166
+#: src/ui_viewDialog.h:2165
 msgid "Color of the supergalactic grid"
 msgstr "Колір супергалактичної сітки"
 
-#: src/ui_viewDialog.h:2169
+#: src/ui_viewDialog.h:2168
 msgid "Color of the galactic grid"
 msgstr "Колір галактичної сітки"
 
-#: src/ui_viewDialog.h:2173
+#: src/ui_viewDialog.h:2172
 msgid "Equatorial coordinates of J2000.0."
 msgstr "Екваторіальні координати J2000.0."
 
-#: src/ui_viewDialog.h:2175
+#: src/ui_viewDialog.h:2174
 msgid "Equatorial grid (J2000)"
 msgstr "Екваторіальна сітка (J2000)"
 
-#: src/ui_viewDialog.h:2177
+#: src/ui_viewDialog.h:2176
 msgid "Color of the ecliptical grid (J2000.0)"
 msgstr "Колір екліптичної сітки (J2000.0)"
 
-#: src/ui_viewDialog.h:2180
+#: src/ui_viewDialog.h:2179
 msgid "Galactic Coordinates, System II (IAU 1958)."
 msgstr "Галактичні координати, система II (IAU 1958)."
 
-#: src/ui_viewDialog.h:2183
+#: src/ui_viewDialog.h:2182
 msgid "Equinoxes (J2000)"
 msgstr "Рівнодення (J2000)"
 
-#: src/ui_viewDialog.h:2185
+#: src/ui_viewDialog.h:2184
 msgid "Color of the ecliptical grid (of date)"
 msgstr "Колір екліптичної сітки (на дату)"
 
-#: src/ui_viewDialog.h:2188
+#: src/ui_viewDialog.h:2187
 msgid "Color of the equatorial grid (of date)"
 msgstr "Колір екваторіальної сітки (на дату)"
 
-#: src/ui_viewDialog.h:2191
+#: src/ui_viewDialog.h:2190
 msgid "Color of the azimuthal grid"
 msgstr "Колір азимутальної сітки"
 
-#: src/ui_viewDialog.h:2194
+#: src/ui_viewDialog.h:2193
 msgid "Equatorial coordinates of current date and planet."
 msgstr "Екваторіальні координати на поточну дати для поточної планети."
 
-#: src/ui_viewDialog.h:2196
+#: src/ui_viewDialog.h:2195
 msgid "Equatorial grid (of date)"
 msgstr "Екваторіальна сітка (дати)"
 
-#: src/ui_viewDialog.h:2197
+#: src/ui_viewDialog.h:2196
 msgid "Equinoxes (of date)"
 msgstr "Рівнодення (на дату)"
 
-#: src/ui_viewDialog.h:2199
+#: src/ui_viewDialog.h:2198
 msgid "Color of the equinox points (of date)"
 msgstr "Колір точок рівнодення (на дату)"
 
-#: src/ui_viewDialog.h:2202
+#: src/ui_viewDialog.h:2201
 msgid "Labels for the Cardinal directions."
 msgstr "Мітки для напрямків румбів."
 
-#: src/ui_viewDialog.h:2206
+#: src/ui_viewDialog.h:2205
 msgid "Color of cardinal points"
 msgstr "Колір головних румбів"
 
-#: src/ui_viewDialog.h:2208
+#: src/ui_viewDialog.h:2207
 msgid "Projection"
 msgstr "Проекція"
 
-#: src/ui_viewDialog.h:2209
+#: src/ui_viewDialog.h:2208
 msgid "Vertical viewport offset"
 msgstr "Вертикальний зсув місця перегляду"
 
-#: src/ui_viewDialog.h:2211
+#: src/ui_viewDialog.h:2210
 msgid "Show ground"
 msgstr "Показувати землю"
 
-#: src/ui_viewDialog.h:2212
+#: src/ui_viewDialog.h:2211
 msgid "Use this landscape as default"
 msgstr "Використовувати цей краєвид як типовий"
 
-#: src/ui_viewDialog.h:2213
+#: src/ui_viewDialog.h:2212
 msgid "Use associated planet and position"
 msgstr "Використовувати пов'язані планети та позиції"
 
-#: src/ui_viewDialog.h:2214
+#: src/ui_viewDialog.h:2213
 msgid "Show landscape labels"
 msgstr "Показувати мітки ландшафтів"
 
-#: src/ui_viewDialog.h:2215
+#: src/ui_viewDialog.h:2214
 msgid "Show fog"
 msgstr "Показувати туман"
 
-#: src/ui_viewDialog.h:2217
+#: src/ui_viewDialog.h:2216
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr "Показувати шар освітлення (яскраві вікна, світлове забруднення тощо)"
 
-#: src/ui_viewDialog.h:2219
+#: src/ui_viewDialog.h:2218
 msgid "Show illumination "
 msgstr "Показувати рівень освітлення "
 
-#: src/ui_viewDialog.h:2221
+#: src/ui_viewDialog.h:2220
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr "Мінімальна яскравість, щоб ландшафт було видно у пітьмі"
 
-#: src/ui_viewDialog.h:2223
+#: src/ui_viewDialog.h:2222
 msgid "Minimal brightness:"
 msgstr "Мінімальна яскравість:"
 
-#: src/ui_viewDialog.h:2225
+#: src/ui_viewDialog.h:2224
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr ""
 "Діапазон значень — від 0 до 1 (ландшафт не видно у пітьмі — яскравий "
 "ландшафт)"
 
-#: src/ui_viewDialog.h:2228
+#: src/ui_viewDialog.h:2227
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr ""
 "Використовувати значення мінімальної яскравості з landscape.ini, якщо його "
 "вказано"
 
-#: src/ui_viewDialog.h:2230
+#: src/ui_viewDialog.h:2229
 msgid "from landscape, if given"
 msgstr "із ландшафту, якщо вказано"
 
-#: src/ui_viewDialog.h:2231
+#: src/ui_viewDialog.h:2230
 msgid "Add/remove landscapes..."
 msgstr "Додати/Вилучити ландшафти…"
 
-#: src/ui_viewDialog.h:2233
+#: src/ui_viewDialog.h:2232
 msgid "Use this sky culture as default"
 msgstr "Використовувати цю культуру неба як типову"
 
-#: src/ui_viewDialog.h:2234
+#: src/ui_viewDialog.h:2233
 msgid "Show labels"
 msgstr "Показувати мітки"
 
-#: src/ui_viewDialog.h:2236
+#: src/ui_viewDialog.h:2235
 msgid "Select if you want names abbreviated, original or translated"
 msgstr "Виберіть спосіб показу назв: скорочені, рідною мовою чи перекладені."
 
-#: src/ui_viewDialog.h:2240
+#: src/ui_viewDialog.h:2239
 msgid "Use native names for planets from current culture"
 msgstr "Використовувати природні назви планет для поточної картини неба"
 
-#: src/ui_viewDialog.h:2242
+#: src/ui_viewDialog.h:2241
 msgid "Use native names for planets"
 msgstr "Використовувати перекладені назви планет"
 
-#: src/ui_viewDialog.h:2243
+#: src/ui_viewDialog.h:2242
 msgid "Show lines with thickness"
 msgstr "Показувати лінії із товщиною"
 
-#: src/ui_viewDialog.h:2245
+#: src/ui_viewDialog.h:2244
 msgid "Value in pixels"
 msgstr "Значення у пікселях"
 
-#: src/ui_viewDialog.h:2247
+#: src/ui_viewDialog.h:2246
 msgid "Show art in brightness"
 msgstr "Показувати малюнки яскравими"
 
-#: src/ui_viewDialog.h:2248
+#: src/ui_viewDialog.h:2247
 msgid "Show boundaries"
 msgstr "Показувати межі"
 
-#: src/ui_viewDialog.h:2250
+#: src/ui_viewDialog.h:2249
 msgid "Visible"
 msgstr "Видимий"
 
-#: src/ui_viewDialog.h:2255
+#: src/ui_viewDialog.h:2254
 msgid "Sky"
 msgstr "Небо"
 
-#: src/ui_viewDialog.h:2257
+#: src/ui_viewDialog.h:2256
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
 msgstr "Віддалений об’єкт"
 
-#: src/ui_viewDialog.h:2259
+#: src/ui_viewDialog.h:2258
 msgid "Deep-Sky Objects"
 msgstr "Віддалені об’єкти"
 
-#: src/ui_viewDialog.h:2262
+#: src/ui_viewDialog.h:2261
 msgid "Markings"
 msgstr "Розмітка"
 
-#: src/ui_viewDialog.h:2264
+#: src/ui_viewDialog.h:2263
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:445
 msgid "Landscape"
 msgstr "Ландшафт"
 
-#: src/ui_viewDialog.h:2266
+#: src/ui_viewDialog.h:2265
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:229
 msgid "Starlore"
 msgstr "Зіркова статистика"
@@ -16485,6 +16490,10 @@ msgstr "Поточне Сонце"
 
 #~ msgid "Show names"
 #~ msgstr "Показувати назви"
+
+#, qt-format
+#~ msgid "Distance: %1 %2"
+#~ msgstr "Відстань: %1 %2"
 
 #~ msgid ""
 #~ "Activate this option to calculate azimuth from south towards west (as in old "
