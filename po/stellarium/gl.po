@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-30 21:33+0700\n"
-"PO-Revision-Date: 2016-10-15 07:22+0000\n"
+"PO-Revision-Date: 2016-11-01 04:24+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-10-31 05:26+0000\n"
+"X-Launchpad-Export-Date: 2016-11-01 05:23+0000\n"
 "X-Generator: Launchpad (build 18246)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -456,12 +456,12 @@ msgstr "Mpc"
 #. TRANSLATORS: Unit of measure for distance - Millions of Light Years
 #: src/core/modules/Nebula.cpp:289
 msgid "Mio. ly"
-msgstr ""
+msgstr "Mio. al"
 
 #: src/core/modules/Nebula.cpp:303
 #, qt-format
 msgid "Distance: %1 %2 (%3 %4)"
-msgstr ""
+msgstr "Distancia: %1 %2 (%3 %4)"
 
 #: src/core/modules/Nebula.cpp:317
 #, qt-format
@@ -1929,11 +1929,11 @@ msgstr "Mirar para o Cénit"
 
 #: src/core/StelMovementMgr.cpp:167
 msgid "Look towards North Celestial pole"
-msgstr ""
+msgstr "Mirar para o polo norte celeste"
 
 #: src/core/StelMovementMgr.cpp:168
 msgid "Look towards South Celestial pole"
-msgstr ""
+msgstr "Mirar para o polo sur celeste"
 
 #: src/core/SimbadSearcher.cpp:78
 msgid "Network error"
@@ -2533,11 +2533,11 @@ msgstr "Zona horaria"
 
 #: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:403
 msgid "Local Mean Solar Time"
-msgstr ""
+msgstr "Tempo Solar Medio Local"
 
 #: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:404
 msgid "Local True Solar Time"
-msgstr ""
+msgstr "Tempo Solar Local Verdadeiro"
 
 #: src/gui/StelGuiItems.cpp:679
 #, c-format, qt-format
@@ -4188,7 +4188,7 @@ msgstr "Arxentina"
 
 #: src/translations_countries.h:41
 msgid "Samoa (American)"
-msgstr ""
+msgstr "Samoa (Americano)"
 
 #: src/translations_countries.h:42
 msgid "Austria"
@@ -4204,7 +4204,7 @@ msgstr "Aruba"
 
 #: src/translations_countries.h:45
 msgid "Åland Islands"
-msgstr ""
+msgstr "Illas Aland"
 
 #: src/translations_countries.h:46
 msgid "Azerbaijan"
@@ -4212,7 +4212,7 @@ msgstr "Acerbaixán"
 
 #: src/translations_countries.h:47
 msgid "Bosnia and Herzegovina"
-msgstr ""
+msgstr "Bosnia e Hercegovina"
 
 #: src/translations_countries.h:48
 msgid "Barbados"
@@ -4248,7 +4248,7 @@ msgstr "Benín"
 
 #: src/translations_countries.h:56
 msgid "St Barthelemy"
-msgstr ""
+msgstr "San Bartolomé"
 
 #: src/translations_countries.h:57
 msgid "Bermuda"
@@ -4256,7 +4256,7 @@ msgstr "Bermudas"
 
 #: src/translations_countries.h:58
 msgid "Brunei"
-msgstr ""
+msgstr "Brunei"
 
 #: src/translations_countries.h:59
 msgid "Bolivia"
@@ -4264,7 +4264,7 @@ msgstr "Bolivia"
 
 #: src/translations_countries.h:60
 msgid "Caribbean NL"
-msgstr ""
+msgstr "Caribe Neerlandés"
 
 #: src/translations_countries.h:61
 msgid "Brazil"
@@ -4300,19 +4300,19 @@ msgstr "Canadá"
 
 #: src/translations_countries.h:69
 msgid "Cocos (Keeling) Islands"
-msgstr ""
+msgstr "Illas Cocos (Keeling)"
 
 #: src/translations_countries.h:70
 msgid "Congo (Dem. Rep.)"
-msgstr ""
+msgstr "Congo (Rep.Dem.)"
 
 #: src/translations_countries.h:71
 msgid "Central African Rep."
-msgstr ""
+msgstr "Rep. Centroafricana"
 
 #: src/translations_countries.h:72
 msgid "Congo (Rep.)"
-msgstr ""
+msgstr "Congo (Rep.)"
 
 #: src/translations_countries.h:73
 msgid "Switzerland"
@@ -4320,7 +4320,7 @@ msgstr "Suíza"
 
 #: src/translations_countries.h:74
 msgid "Côte d'Ivoire"
-msgstr ""
+msgstr "Costa de Marfil"
 
 #: src/translations_countries.h:75
 msgid "Cook Islands"
@@ -4356,7 +4356,7 @@ msgstr "Cabo Verde"
 
 #: src/translations_countries.h:83
 msgid "Curacao"
-msgstr ""
+msgstr "Curaçao"
 
 #: src/translations_countries.h:84
 msgid "Christmas Island"
@@ -4452,7 +4452,7 @@ msgstr "Gabón"
 
 #: src/translations_countries.h:107
 msgid "Britain (UK)"
-msgstr ""
+msgstr "Bretaña (UK)"
 
 #: src/translations_countries.h:108
 msgid "Grenada"
@@ -4468,7 +4468,7 @@ msgstr "Guaiana Francesa"
 
 #: src/translations_countries.h:111
 msgid "Guernsey"
-msgstr ""
+msgstr "Guernsey"
 
 #: src/translations_countries.h:112
 msgid "Ghana"
@@ -4560,7 +4560,7 @@ msgstr "Israel"
 
 #: src/translations_countries.h:134
 msgid "Isle of Man"
-msgstr ""
+msgstr "Illa de Man"
 
 #: src/translations_countries.h:135
 msgid "India"
@@ -4588,7 +4588,7 @@ msgstr "Italia"
 
 #: src/translations_countries.h:141
 msgid "Jersey"
-msgstr ""
+msgstr "Jersey"
 
 #: src/translations_countries.h:142
 msgid "Jamaica"
@@ -4624,15 +4624,15 @@ msgstr "Comoros"
 
 #: src/translations_countries.h:150
 msgid "St Kitts and Nevis"
-msgstr ""
+msgstr "Saint Kitts e Nevis"
 
 #: src/translations_countries.h:151
 msgid "Korea (North)"
-msgstr ""
+msgstr "Corea do norte"
 
 #: src/translations_countries.h:152
 msgid "Korea (South)"
-msgstr ""
+msgstr "Corea do sur"
 
 #: src/translations_countries.h:153
 msgid "Kuwait"
@@ -4648,7 +4648,7 @@ msgstr "Cazaquistán"
 
 #: src/translations_countries.h:156
 msgid "Laos"
-msgstr ""
+msgstr "Laos"
 
 #: src/translations_countries.h:157
 msgid "Lebanon"
@@ -4656,7 +4656,7 @@ msgstr "Líbano"
 
 #: src/translations_countries.h:158
 msgid "St Lucia"
-msgstr ""
+msgstr "St Lucía"
 
 #: src/translations_countries.h:159
 msgid "Liechtenstein"
@@ -4688,7 +4688,7 @@ msgstr "Letonia"
 
 #: src/translations_countries.h:166
 msgid "Libya"
-msgstr ""
+msgstr "Libia"
 
 #: src/translations_countries.h:167
 msgid "Morocco"
@@ -4708,7 +4708,7 @@ msgstr "Montenegro"
 
 #: src/translations_countries.h:171
 msgid "St Martin (French)"
-msgstr ""
+msgstr "San Martiño (Francés)"
 
 #: src/translations_countries.h:172
 msgid "Madagascar"
@@ -4728,7 +4728,7 @@ msgstr "Mali"
 
 #: src/translations_countries.h:176
 msgid "Myanmar (Burma)"
-msgstr ""
+msgstr "Myanmar (Birmaña)"
 
 #: src/translations_countries.h:177
 msgid "Mongolia"
@@ -4864,7 +4864,7 @@ msgstr "Polonia"
 
 #: src/translations_countries.h:210
 msgid "St Pierre and Miquelon"
-msgstr ""
+msgstr "St Pierre e Miquelon"
 
 #: src/translations_countries.h:211
 msgid "Pitcairn"
@@ -4876,7 +4876,7 @@ msgstr "Porto Rico"
 
 #: src/translations_countries.h:213
 msgid "Palestine"
-msgstr ""
+msgstr "Palestina"
 
 #: src/translations_countries.h:214
 msgid "Portugal"
@@ -4908,7 +4908,7 @@ msgstr "Serbia"
 
 #: src/translations_countries.h:221
 msgid "Russia"
-msgstr ""
+msgstr "Rusia"
 
 #: src/translations_countries.h:222
 msgid "Rwanda"
@@ -4940,7 +4940,7 @@ msgstr "Singapur"
 
 #: src/translations_countries.h:229
 msgid "St Helena"
-msgstr ""
+msgstr "St Helena"
 
 #: src/translations_countries.h:230
 msgid "Slovenia"
@@ -4976,7 +4976,7 @@ msgstr "Suriname"
 
 #: src/translations_countries.h:238
 msgid "South Sudan"
-msgstr ""
+msgstr "Sudán do Sur"
 
 #: src/translations_countries.h:239
 msgid "Sao Tome and Principe"
@@ -4988,11 +4988,11 @@ msgstr "O Salvador"
 
 #: src/translations_countries.h:241
 msgid "St Maarten (Dutch)"
-msgstr ""
+msgstr "St Maarten (Alemán)"
 
 #: src/translations_countries.h:242
 msgid "Syria"
-msgstr ""
+msgstr "Siria"
 
 #: src/translations_countries.h:243
 msgid "Swaziland"
@@ -5000,7 +5000,7 @@ msgstr "Suazilandia"
 
 #: src/translations_countries.h:244
 msgid "Turks and Caicos Is"
-msgstr ""
+msgstr "Illas Turks e Caicos"
 
 #: src/translations_countries.h:245
 msgid "Chad"
@@ -5008,7 +5008,7 @@ msgstr "Chad"
 
 #: src/translations_countries.h:246
 msgid "French Southern and Antarctic Lands"
-msgstr ""
+msgstr "Territorios austrais franceses"
 
 #: src/translations_countries.h:247
 msgid "Togo"
@@ -5072,7 +5072,7 @@ msgstr "Uganda"
 
 #: src/translations_countries.h:262
 msgid "US minor outlying islands"
-msgstr ""
+msgstr "Illas menores exteriores de EEUU"
 
 #: src/translations_countries.h:263
 msgid "United States"
@@ -5088,11 +5088,11 @@ msgstr "Uzbequistán"
 
 #: src/translations_countries.h:266
 msgid "Vatican City"
-msgstr ""
+msgstr "Cidade do Vaticano"
 
 #: src/translations_countries.h:267
 msgid "St Vincent"
-msgstr ""
+msgstr "San Vicente"
 
 #: src/translations_countries.h:268
 msgid "Venezuela"
@@ -5100,15 +5100,15 @@ msgstr "Venezuela"
 
 #: src/translations_countries.h:269
 msgid "Virgin Islands (UK)"
-msgstr ""
+msgstr "Illas Virxinias (Reino Unido)"
 
 #: src/translations_countries.h:270
 msgid "Virgin Islands (US)"
-msgstr ""
+msgstr "Illas Virxinias (EEUU)"
 
 #: src/translations_countries.h:271
 msgid "Vietnam"
-msgstr ""
+msgstr "Vietnam"
 
 #: src/translations_countries.h:272
 msgid "Vanuatu"
@@ -5120,7 +5120,7 @@ msgstr "Wallis e Futuna"
 
 #: src/translations_countries.h:274
 msgid "Samoa (western)"
-msgstr ""
+msgstr "Samoa (oeste)"
 
 #: src/translations_countries.h:275
 msgid "Yemen"
@@ -5201,7 +5201,7 @@ msgstr "Engadir á lista"
 
 #: src/ui_locationDialogGui.h:450
 msgid "Delete from list"
-msgstr ""
+msgstr "Borrar da listaxe"
 
 #: src/ui_locationDialogGui.h:451
 msgid "Return to default location"
@@ -5256,11 +5256,11 @@ msgstr "Planeta:"
 
 #: src/ui_locationDialogGui.h:469
 msgid "Use custom time zone"
-msgstr ""
+msgstr "Usar zona horaria personalizada"
 
 #: src/ui_locationDialogGui.h:470
 msgid "Time zone:"
-msgstr ""
+msgstr "Zona horaria:"
 
 #: src/ui_locationDialogGui.h:471
 msgid "Name/City:"
@@ -5272,7 +5272,7 @@ msgstr "País:"
 
 #: src/ui_locationDialogGui.h:476
 msgid "Enable daylight saving time"
-msgstr ""
+msgstr "Activar o horario de verán"
 
 #: src/ui_searchDialogGui.h:617
 msgid "Find Object"
@@ -5422,7 +5422,7 @@ msgstr "Usar a base de datos astronómica SIMBAD"
 
 #: src/ui_searchDialogGui.h:717
 msgid "Use SIMBAD"
-msgstr ""
+msgstr "Usar SIMBAD"
 
 #: src/ui_searchDialogGui.h:718
 msgid "Server:"
@@ -6482,7 +6482,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1285
 msgid "Display formats of date and time"
-msgstr ""
+msgstr "Amosar formatos de data e tempo"
 
 #: src/ui_configurationDialog.h:1286
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
@@ -6491,7 +6491,7 @@ msgstr "Data:"
 
 #: src/ui_configurationDialog.h:1287
 msgid "and time:"
-msgstr ""
+msgstr "e tempo:"
 
 #: src/ui_configurationDialog.h:1288
 msgid "Time correction"
@@ -8100,42 +8100,42 @@ msgstr "Primeira estación espacial de China"
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1775
 msgid "The russian space radio telescope RadioAstron"
-msgstr ""
+msgstr "Radiotelescopio espacial ruso RadioAstron"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1777
 msgid "International Gamma-Ray Astrophysics Laboratory"
-msgstr ""
+msgstr "Laboratorio Internacional de Astrofísica de Raios Gamma"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1779
 msgid "The Gamma-Ray Observatory"
-msgstr ""
+msgstr "Observatorio de Raios Gamma"
 
 #. TRANSLATORS: Satellite name: International Space Station
 #: plugins/Satellites/src/Satellites.cpp:1783
 msgid "ISS (ZARYA)"
-msgstr ""
+msgstr "ISS (ZARYA)"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
 #: plugins/Satellites/src/Satellites.cpp:1785
 msgid "HST"
-msgstr ""
+msgstr "Hubble"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
 #: plugins/Satellites/src/Satellites.cpp:1787
 msgid "SPEKTR-R"
-msgstr ""
+msgstr "SPEKTR-R"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
 #: plugins/Satellites/src/Satellites.cpp:1789
 msgid "INTEGRAL"
-msgstr ""
+msgstr "INTEGRAL"
 
 #. TRANSLATORS: China's first space station name
 #: plugins/Satellites/src/Satellites.cpp:1791
 msgid "TIANGONG 1"
-msgstr ""
+msgstr "TIANGONG 1"
 
 #: plugins/Satellites/src/Satellite.cpp:261
 #: plugins/Satellites/src/Satellite.cpp:265
