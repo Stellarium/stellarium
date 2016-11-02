@@ -47,9 +47,9 @@ class StelMovementMgr : public StelModule
 public:
 
 	//! Possible mount modes defining the reference frame in which head movements occur.
-	//! MountGalactic is currently only available via scripting API: core.clear("galactic")
+	//! MountGalactic and MountSupergalactic is currently only available via scripting API: core.clear("galactic") and core.clear("supergalactic")
 	// TODO: add others: MountEcliptical, MountEq2000, MountEcliptical2000 and implement proper variants.
-	enum MountMode { MountAltAzimuthal, MountEquinoxEquatorial, MountGalactic};
+	enum MountMode { MountAltAzimuthal, MountEquinoxEquatorial, MountGalactic, MountSupergalactic};
 
 	//! Named constants for zoom operations.
 	enum ZoomingMode { ZoomOut=-1, ZoomNone=0, ZoomIn=1};
@@ -250,6 +250,10 @@ public slots:
 	void lookSouth(void);
 	//! Look immediately towards Zenith.
 	void lookZenith(void);
+	//! Look immediately towards North Celestial pole.
+	void lookTowardsNCP(void);
+	//! Look immediately towards South Celestial pole.
+	void lookTowardsSCP(void);
 
 	//! start animated move of the viewport offset.
 	//! @param offsetX new horizontal viewport offset, percent. clamped to [-50...50]

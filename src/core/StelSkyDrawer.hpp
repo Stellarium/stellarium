@@ -172,6 +172,13 @@ public slots:
 	//! Get flag for source twinkling.
 	bool getFlagTwinkle() const {return flagStarTwinkle;}
 
+	//! Set flag for enable twinkling of stars without atmosphere.
+	//! @note option for planetariums
+	void setFlagForcedTwinkle(bool b) {if(b!=flagForcedTwinkle){ flagForcedTwinkle=b;}}
+	//! Get flag for enable twinkling of stars without atmosphere.
+	//! @note option for planetariums
+	bool getFlagForcedTwinkle() const {return flagForcedTwinkle;}
+
 	//! Set the parameters so that the stars disappear at about the limit given by the bortle scale
 	//! The limit is valid only at a given zoom level (around 60 deg)
 	//! @see https://en.wikipedia.org/wiki/Bortle_scale
@@ -352,6 +359,7 @@ private:
 
 	float maxAdaptFov, minAdaptFov, lnfovFactor;
 	bool flagStarTwinkle;
+	bool flagForcedTwinkle;
 	double twinkleAmount;
 
 	//! Informing the drawer whether atmosphere is displayed.

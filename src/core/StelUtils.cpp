@@ -942,35 +942,6 @@ QTime jdFractionToQTime(const double jd)
 	return QTime::fromString(QString("%1.%2").arg(hours).arg(mins), "h.m");
 }
 
-// Use Qt's own sense of time and offset instead of platform specific code.
-float getGMTShiftFromQT(const double JD)
-{
-	int year, month, day, hour, minute, second;
-	getDateFromJulianDay(JD, &year, &month, &day);
-	getTimeFromJulianDay(JD, &hour, &minute, &second);
-	// as analogous to second statement in getJDFromDate, nkerr
-	if ( year <= 0 )
-	{
-		year = year - 1;
-	}
-	//getTime/DateFromJulianDay returns UTC time, not local time
-	QDateTime universal(QDate(year, month, day), QTime(hour, minute, second), Qt::UTC);
-	if (! universal.isValid())
-	{
-		//qWarning() << "JD " << QString("%1").arg(JD) << " out of bounds of QT help with GMT shift, using current datetime";
-		// Assumes the GMT shift was always the same before year -4710
-		universal = QDateTime(QDate(-4710, month, day), QTime(hour, minute, second), Qt::UTC);
-	}
-	QDateTime local = universal.toLocalTime();
-	//Both timezones should be interpreted as UTC because secsTo() converts both
-	//times to UTC if their zones have different daylight saving time rules.
-	local.setTimeSpec(Qt::UTC);
-
-	int shiftInSeconds = universal.secsTo(local);
-	float shiftInHours = shiftInSeconds / 3600.0f;
-	return shiftInHours;
-}
-
 // UTC !
 bool getJDFromDate(double* newjd, const int y, const int m, const int d, const int h, const int min, const int s)
 {
@@ -1941,15 +1912,19 @@ double getDeltaTByKhalidSultanaZaidi(const double jDay)
 	return (((a4*u + a3)*u + a2)*u + a1)*u + a0;
 }
 
-double getMoonSecularAcceleration(const double jDay, const double nd)
+double getMoonSecularAcceleration(const double jDay, const double nd, const bool useDE43x)
 {
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
 	double t = (getDecYear(year, month, day)-1955.5)/100.0;
 	// n.dot for secular acceleration of the Moon in ELP2000-82B
-	// have value -23.8946 "/cy/cy
-	return -0.91072 * (-23.8946 + qAbs(nd))*t*t;
+	// have value -23.8946 "/cy/cy (or -25.8 for DE43x usage)
+	double ephND = -23.8946;
+	if (useDE43x)
+		ephND = -25.8;
+
+	return -0.91072 * (ephND + qAbs(nd))*t*t;
 }
 
 double getDeltaTStandardError(const double jDay)

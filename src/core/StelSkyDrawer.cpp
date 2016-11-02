@@ -73,6 +73,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	setFlagHasAtmosphere(conf->value("landscape/flag_atmosphere", true).toBool());
 	setTwinkleAmount(conf->value("stars/star_twinkle_amount",0.3).toFloat());
 	setFlagTwinkle(conf->value("stars/flag_star_twinkle",true).toBool());
+	setFlagForcedTwinkle(conf->value("stars/flag_forced_twinkle",false).toBool());
 	setMaxAdaptFov(conf->value("stars/mag_converter_max_fov",70.0).toFloat());
 	setMinAdaptFov(conf->value("stars/mag_converter_min_fov",0.1).toFloat());
 	setFlagLuminanceAdaptation(conf->value("viewing/use_luminance_adaptation",true).toBool());
@@ -431,7 +432,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 
 	const float radius = rcMag.radius;
 	// Random coef for star twinkling. twinkleFactor can introduce height-dependent twinkling.
-	const float tw = (flagStarTwinkle && flagHasAtmosphere) ? (1.f-twinkleFactor*twinkleAmount*qrand()/RAND_MAX)*rcMag.luminance : rcMag.luminance;
+	const float tw = (flagStarTwinkle && (flagHasAtmosphere || flagForcedTwinkle)) ? (1.f-twinkleFactor*twinkleAmount*qrand()/RAND_MAX)*rcMag.luminance : rcMag.luminance;
 
 	// If the rmag is big, draw a big halo
 	if (radius>MAX_LINEAR_RADIUS+5.f)
@@ -520,6 +521,8 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 	// Now draw the halo according the object brightness
 	bool save = flagStarTwinkle;
 	flagStarTwinkle = false;
+	bool saveP = flagForcedTwinkle;
+	flagForcedTwinkle = false;
 
 	RCMag rcm;
 	computeRCMag(mag, &rcm);
@@ -567,6 +570,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 		postDrawPointSource(painter);
 	}
 	flagStarTwinkle=save;
+	flagForcedTwinkle=saveP;
 }
 
 float StelSkyDrawer::findWorldLumForMag(float mag, float targetRadius)

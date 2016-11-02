@@ -29,7 +29,7 @@
 
 class StelButton;
 class StelPainter;
-class StarMgr;
+class StelPropertyMgr;
 class NavStarsWindow;
 
 /*! @defgroup navigationalStars Navigational Stars Plug-in
@@ -131,7 +131,7 @@ private slots:
 
 private:
 	NavStarsWindow* mainWindow;
-	StarMgr* smgr;
+	StelPropertyMgr* propMgr;
 	QSettings* conf;	
 
 	// The current set of navigational stars
@@ -146,9 +146,6 @@ private:
 	//! Color used to paint each star's marker and additional label.
 	Vec3f markerColor;	
 	LinearFader markerFader;
-	
-	//! State of displaying stars labels.
-	bool starNamesState;
 
 	//! Button for the bottom toolbar.
 	StelButton* toolbarButton;

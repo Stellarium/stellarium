@@ -1,5 +1,31 @@
 0.15.0 [2016-07-31]
+In memory of our team member Barry Gerdes.
 
+Version 0.15.0 is based on Qt5.6. Starting with this version, some graphics cards 
+have been blacklisted by Qt and are automatically forced to use ANGLE on Windows. 
+We introduce a major internal change with the StelProperty system. 
+This allows simpler access to internal variables and therefore more ways of operation. 
+Most notably this version introduces an alternative control option via RemoteControl, 
+a new webserver interface plugin. 
+We also introduce another milestone towards providing better astronomical accuracy for 
+historical applications: experimental support of getting planetary positions from JPL DE430 and 
+  DE431 ephemerides. This feature is however not fully tested yet. 
+The major changes:
+- Added StelProperty system
+- Added new plugin for exhibitions and planetariums - Remote Control
+- Added new skycultures: Macedonian, Ojibwe, Dakota/Lakota/Nakota, 
+  Kamilaroi/Euahlayi
+- Updated code of plugins
+- Added Bookmarks tool and updated AstroCalc tool
+- Added new functions for Scripting Engine and new scripts
+- Added Miller Cylindrical Projection
+- Added updates and improvements in DSO and star catalogues (include initial 
+  support of The Washington Double Star Catalog)
+- azimuth lines (also targetting geographic locations) in ArchaeoLines plugin	
+- Many fixes and improvements...
+
+In addition, we prepared a new user guide.
+	
 Full list of changes: https://launchpad.net/stellarium/0.15/0.15.0
 
 0.14.3 [2016-03-20]

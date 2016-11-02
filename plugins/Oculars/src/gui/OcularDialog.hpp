@@ -84,8 +84,6 @@ protected:
 	Ui_ocularDialogForm* ui;
 
 private slots:
-	void keyBindingTogglePluginChanged(const QString& newString);
-	void keyBindingPopupNavigatorConfigChanged(const QString& newString);
 	void initAboutText();
 	void requireSelectionStateChanged(int state);
 	void scaleImageCircleStateChanged(int state);

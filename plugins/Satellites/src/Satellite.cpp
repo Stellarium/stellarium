@@ -51,7 +51,7 @@
 // static data members - will be initialised in the Satallites class (the StelObjectMgr)
 StelTextureSP Satellite::hintTexture;
 float Satellite::showLabels = true;
-float Satellite::hintBrightness = 0.0;
+float Satellite::hintBrightness = 0.f;
 float Satellite::hintScale = 1.f;
 SphericalCap Satellite::viewportHalfspace = SphericalCap();
 int Satellite::orbitLineSegments = 90;
@@ -59,7 +59,7 @@ int Satellite::orbitLineFadeSegments = 4;
 int Satellite::orbitLineSegmentDuration = 20;
 bool Satellite::orbitLinesFlag = true;
 bool Satellite::realisticModeFlag = false;
-Vec3f Satellite::invisibleSatelliteColor = Vec3f(0.2,0.2,0.2);
+Vec3f Satellite::invisibleSatelliteColor = Vec3f(0.2f,0.2f,0.2f);
 
 #ifdef IRIDIUM_SAT_TEXT_DEBUG
 QString Satellite::myText = "";
@@ -68,25 +68,24 @@ double Satellite::sunReflAngle = 180.;
 double Satellite::timeShift = 0.;
 
 Satellite::Satellite(const QString& identifier, const QVariantMap& map)
-    : initialized(false),
-      displayed(true),
-      orbitDisplayed(false),
-      userDefined(false),
-      newlyAdded(false),
-      orbitValid(false),
-      jdLaunchYearJan1(0),
-      stdMag(99.),
-      height(0.),
-      range(0.),
-      rangeRate(0.),
-      hintColor(0.0,0.0,0.0),
-      lastUpdated(),
-      pSatWrapper(NULL),
-      visibility(0),
-      phaseAngle(0.),
-      lastEpochCompForOrbit(0.),
-      epochTime(0.)
-
+	: initialized(false)
+	, displayed(true)
+	, orbitDisplayed(false)
+	, userDefined(false)
+	, newlyAdded(false)
+	, orbitValid(false)
+	, jdLaunchYearJan1(0)
+	, stdMag(99.)
+	, height(0.)
+	, range(0.)
+	, rangeRate(0.)
+	, hintColor(0.0,0.0,0.0)
+	, lastUpdated()
+	, pSatWrapper(NULL)
+	, visibility(0)
+	, phaseAngle(0.)
+	, lastEpochCompForOrbit(0.)
+	, epochTime(0.)
 {
 	// return initialized if the mandatory fields are not present
 	if (identifier.isEmpty())
@@ -181,6 +180,11 @@ double Satellite::roundToDp(float n, int dp)
 {
 	// round n to dp decimal places
 	return floor(n * pow(10., dp) + .5) / pow(10., dp);
+}
+
+QString Satellite::getNameI18n() const
+{
+	return q_(name);
 }
 
 QVariantMap Satellite::getMap(void)

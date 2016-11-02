@@ -265,9 +265,6 @@ namespace StelUtils
 	//! Convert a fraction of a Julian Day to a QTime
 	QTime jdFractionToQTime(const double jd);
 
-	//! Return number of hours offset from GMT, using Qt functions.
-	float getGMTShiftFromQT(const double jd);
-
 	//! Convert a QT QDateTime class to julian day.
 	//! @param dateTime the UTC QDateTime to convert
 	//! @result the matching decimal Julian Day
@@ -604,9 +601,10 @@ namespace StelUtils
 	//! For adapting from -26 to -23.895, use -0.91072 * (-23.895 + 26.0) = -1.9170656
 	//! @param jDay the JD
 	//! @param ndot value n-dot which use in the algorithm
+	//! @param useDE43x Define if function should adapt calculation of the secular acceleration of the Moon to the DE43x ephemeris
 	//! @return SecularAcceleration in seconds
-	//! @note n-dot for secular acceleration of the Moon in ELP2000-82B is -23.8946 "/cy/cy
-	double getMoonSecularAcceleration(const double jDay, const double ndot);
+	//! @note n-dot for secular acceleration of the Moon in ELP2000-82B is -23.8946 "/cy/cy and for DE43x is -25.8 "/cy/cy
+	double getMoonSecularAcceleration(const double jDay, const double ndot, const bool useDE43x);
 
 	//! Get the standard error (sigma) for the value of DeltaT
 	//! @param jDay the JD

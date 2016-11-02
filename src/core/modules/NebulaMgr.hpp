@@ -156,6 +156,9 @@ public:
 	//! @return a designation
 	QString getLatestSelectedDSODesignation();
 
+	//! Get the list of all the bodies of the solar system.
+	const QVector<NebulaP>& getAllDeepSkyObjects() const { return dsoArray; }
+
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 public slots:
@@ -476,11 +479,6 @@ public slots:
 	void setStarColor(const Vec3f& c);
 	//! Get current value of the star symbol color.
 	const Vec3f& getStarColor(void) const;
-
-	//! Set Nebulae Hints circle scale.
-	void setCircleScale(float scale);
-	//! Get Nebulae Hints circle scale.
-	float getCircleScale(void) const;
 
 	//! Set how long it takes for nebula hints to fade in and out when turned on and off.
 	//! @param duration given in seconds

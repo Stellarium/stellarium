@@ -1,13 +1,6 @@
 
 ########### install files ###############
-INSTALL(FILES base_locations.bin.gz DESTINATION share/${PACKAGE}/data)
-
-INSTALL(DIRECTORY ./ DESTINATION share/${PACKAGE}/data FILES_MATCHING 
-	PATTERN "*.ini" 
-	PATTERN "*.ttf"
-	PATTERN "*.dat"
-	PATTERN "*.utf8")
-
+INSTALL(FILES ssystem.ini ssystem_1000comets.ini base_locations.bin.gz DejaVuSans.ttf default_config.ini DejaVuSansMono.ttf iso639-1.utf8 iso3166.tab countryCodes.dat constellations_boundaries.dat DESTINATION share/${PACKAGE}/data)
 INSTALL(DIRECTORY shaders/ DESTINATION share/${PACKAGE}/data/shaders FILES_MATCHING 
 	PATTERN "planet*" 
 	)
@@ -68,10 +61,6 @@ INSTALL(DIRECTORY shaders/ DESTINATION share/${PACKAGE}/data/shaders FILES_MATCH
 	PATTERN "s3d_*.vert" 
 	PATTERN "s3d_*.geom" 
 	PATTERN "s3d_*.frag")
-# install Scenery3D docs for Windows
-IF(WIN32)
-	INSTALL(FILES ../plugins/Scenery3d/doc/Scenery3d.pdf DESTINATION share/${PACKAGE}/data)
-ENDIF(WIN32)
 ENDIF()
 
 IF (BUILD_FOR_MAEMO)

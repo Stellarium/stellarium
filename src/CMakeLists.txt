@@ -210,6 +210,10 @@ SET(stellarium_lib_SRCS
      core/modules/Constellation.hpp
      core/modules/ConstellationMgr.cpp
      core/modules/ConstellationMgr.hpp
+     core/modules/CustomObject.cpp
+     core/modules/CustomObject.hpp
+     core/modules/CustomObjectMgr.cpp
+     core/modules/CustomObjectMgr.hpp
      core/modules/GridLinesMgr.cpp
      core/modules/GridLinesMgr.hpp
      core/modules/LabelMgr.hpp
@@ -263,6 +267,7 @@ SET(stellarium_lib_SRCS
      CLIProcessor.hpp
      CLIProcessor.cpp
      translations.h
+     translations_countries.h
 )
 
 ### CMake < 3.0 does not AUTOMOC Q_GADGET which some files use, so we have to manually add it
@@ -474,9 +479,12 @@ ENDIF()
 IF(GENERATE_STELMAINLIB)
      ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
      TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
-     QT5_USE_MODULES(stelMain Core Concurrent Gui Network OpenGL Script Widgets PrintSupport)
+     QT5_USE_MODULES(stelMain Core Concurrent Gui Network OpenGL Widgets PrintSupport)
      IF(ENABLE_MEDIA)
-         QT5_USE_MODULES(stelMain Multimedia MultimediaWidgets)
+          QT5_USE_MODULES(stelMain Multimedia MultimediaWidgets)
+     ENDIF()
+     IF(ENABLE_SCRIPTING)
+          QT5_USE_MODULES(stelMain Script)
      ENDIF()
      IF(USE_PLUGIN_TELESCOPECONTROL)
           QT5_USE_MODULES(stelMain SerialPort)
@@ -491,9 +499,12 @@ ELSE()
      # This will add the ANGLE lib if the Qt version supports it.
      TARGET_LINK_LIBRARIES(stellarium ${Qt5Gui_LIBRARIES} ${Qt5Gui_OPENGL_LIBRARIES})
 
-     QT5_USE_MODULES(stellarium Core Concurrent Gui Network OpenGL Script Widgets PrintSupport)
+     QT5_USE_MODULES(stellarium Core Concurrent Gui Network OpenGL Widgets PrintSupport)
      IF(ENABLE_MEDIA)
           QT5_USE_MODULES(stellarium Multimedia MultimediaWidgets)
+     ENDIF()
+     IF(ENABLE_SCRIPTING)
+          QT5_USE_MODULES(stellarium Script)
      ENDIF()
      IF(USE_PLUGIN_TELESCOPECONTROL)
           QT5_USE_MODULES(stellarium SerialPort)
@@ -544,7 +555,7 @@ IF(WIN32)
      SET(tests_testDates_SRCS ${tests_testDates_SRCS} ${zlib_SRCS})
 ENDIF()
 ADD_EXECUTABLE(testDates EXCLUDE_FROM_ALL ${tests_testDates_SRCS})
-QT5_USE_MODULES(testDates Core Gui Widgets Script Test)
+QT5_USE_MODULES(testDates Core Test)
 TARGET_LINK_LIBRARIES(testDates ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testDates)
 ADD_TEST(testDates)
@@ -556,7 +567,7 @@ SET(tests_testStelFileMgr_SRCS
      core/StelFileMgr.cpp
 )
 ADD_EXECUTABLE(testStelFileMgr EXCLUDE_FROM_ALL ${tests_testStelFileMgr_SRCS})
-QT5_USE_MODULES(testStelFileMgr Core Gui Widgets Script Test)
+QT5_USE_MODULES(testStelFileMgr Core Test)
 TARGET_LINK_LIBRARIES(testStelFileMgr ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelFileMgr)
 ADD_TEST(testStelFileMgr)
@@ -587,35 +598,43 @@ IF(WIN32)
      SET(tests_testStelSphereGeometry_SRCS ${tests_testStelSphereGeometry_SRCS} ${zlib_SRCS})
 ENDIF()
 ADD_EXECUTABLE(testStelSphereGeometry EXCLUDE_FROM_ALL ${tests_testStelSphereGeometry_SRCS})
-QT5_USE_MODULES(testStelSphereGeometry Core Gui OpenGL Test)
+QT5_USE_MODULES(testStelSphereGeometry Core OpenGL Test)
 TARGET_LINK_LIBRARIES(testStelSphereGeometry ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelSphereGeometry)
 ADD_TEST(testStelSphereGeometry)
 
-#SET(tests_testStelSphericalIndex_SRCS
-#     tests/testStelSphericalIndex.hpp
-#     tests/testStelSphericalIndex.cpp
-#     core/StelSphericalIndex.hpp
-#     core/StelSphericalIndex.cpp
-#     core/StelSphereGeometry.hpp
-#     core/StelSphereGeometry.cpp
-#     core/StelVertexArray.hpp
-#     core/StelVertexArray.cpp
-#     core/OctahedronPolygon.hpp
-#     core/OctahedronPolygon.cpp
-#     core/StelJsonParser.hpp
-#     core/StelJsonParser.cpp
-#     core/StelUtils.cpp
-#     core/StelUtils.hpp
-#     core/StelProjector.cpp
-#     core/StelProjector.hpp
-#     core/StelTranslator.cpp
-#     core/StelTranslator.hpp
-#     ${glues_lib_SRCS})
-#ADD_EXECUTABLE(testStelSphericalIndex EXCLUDE_FROM_ALL ${tests_testStelSphericalIndex_SRCS})
-#QT5_USE_MODULES(testStelSphericalIndex Core Gui Widgets OpenGL Script Test)
-#TARGET_LINK_LIBRARIES(testStelSphericalIndex ${extLinkerOptionTest})
-#ADD_DEPENDENCIES(buildTests testStelSphericalIndex)
+SET(tests_testStelSphericalIndex_SRCS
+     tests/testStelSphericalIndex.hpp
+     tests/testStelSphericalIndex.cpp
+     core/StelSphericalIndex.hpp
+     core/StelSphericalIndex.cpp
+     core/StelSphereGeometry.hpp
+     core/StelSphereGeometry.cpp
+     core/StelVertexArray.hpp
+     core/StelVertexArray.cpp
+     core/OctahedronPolygon.hpp
+     core/OctahedronPolygon.cpp
+     core/StelJsonParser.hpp
+     core/StelJsonParser.cpp
+     core/StelUtils.cpp
+     core/StelUtils.hpp
+     core/StelProjector.cpp
+     core/StelProjector.hpp
+     core/StelTranslator.cpp
+     core/StelTranslator.hpp
+     core/StelFileMgr.cpp
+     core/StelFileMgr.hpp
+     ${glues_lib_SRCS}
+)
+IF(WIN32)
+     # StelUtils required zlib sources
+     SET(tests_testStelSphericalIndex_SRCS ${tests_testStelSphericalIndex_SRCS} ${zlib_SRCS})
+ENDIF()
+ADD_EXECUTABLE(testStelSphericalIndex EXCLUDE_FROM_ALL ${tests_testStelSphericalIndex_SRCS})
+QT5_USE_MODULES(testStelSphericalIndex Core OpenGL Test)
+TARGET_LINK_LIBRARIES(testStelSphericalIndex ${extLinkerOptionTest})
+ADD_DEPENDENCIES(buildTests testStelSphericalIndex)
+ADD_TEST(testStelSphericalIndex)
 
 SET(tests_testStelJsonParser_SRCS
      tests/testStelJsonParser.hpp
@@ -624,7 +643,7 @@ SET(tests_testStelJsonParser_SRCS
      core/StelJsonParser.cpp
 )
 ADD_EXECUTABLE(testStelJsonParser EXCLUDE_FROM_ALL ${tests_testStelJsonParser_SRCS})
-QT5_USE_MODULES(testStelJsonParser Core Gui Widgets Script Test)
+QT5_USE_MODULES(testStelJsonParser Core Test)
 TARGET_LINK_LIBRARIES(testStelJsonParser ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelJsonParser)
 ADD_TEST(testStelJsonParser)
@@ -635,7 +654,7 @@ SET(tests_testStelVertexArray_SRCS
      core/StelVertexArray.hpp
 )
 ADD_EXECUTABLE(testStelVertexArray EXCLUDE_FROM_ALL ${tests_testStelVertexArray_SRCS})
-QT5_USE_MODULES(testStelVertexArray Core Gui Test OpenGL)
+QT5_USE_MODULES(testStelVertexArray Core Test OpenGL)
 TARGET_LINK_LIBRARIES(testStelVertexArray ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelVertexArray)
 ADD_TEST(testStelVertexArray)
@@ -651,7 +670,7 @@ IF(WIN32)
      SET(tests_testDeltaT_SRCS ${tests_testDeltaT_SRCS} ${zlib_SRCS})
 ENDIF()
 ADD_EXECUTABLE(testDeltaT EXCLUDE_FROM_ALL ${tests_testDeltaT_SRCS})
-QT5_USE_MODULES(testDeltaT Core Gui Widgets Script Test)
+QT5_USE_MODULES(testDeltaT Core Test)
 TARGET_LINK_LIBRARIES(testDeltaT ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testDeltaT)
 ADD_TEST(testDeltaT)
@@ -667,7 +686,7 @@ IF(WIN32)
      SET(tests_testConversions_SRCS ${tests_testConversions_SRCS} ${zlib_SRCS})
 ENDIF()
 ADD_EXECUTABLE(testConversions EXCLUDE_FROM_ALL ${tests_testConversions_SRCS})
-QT5_USE_MODULES(testConversions Core Gui Widgets Script Test)
+QT5_USE_MODULES(testConversions Core Test)
 TARGET_LINK_LIBRARIES(testConversions ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testConversions)
 ADD_TEST(testConversions)
@@ -679,7 +698,7 @@ SET(tests_testExtinction_SRCS
      core/RefractionExtinction.cpp
 )
 ADD_EXECUTABLE(testExtinction EXCLUDE_FROM_ALL ${tests_testExtinction_SRCS})
-QT5_USE_MODULES(testExtinction Core Gui Widgets Script Test)
+QT5_USE_MODULES(testExtinction Core Test)
 TARGET_LINK_LIBRARIES(testExtinction ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testExtinction)
 ADD_TEST(testExtinction)
@@ -697,7 +716,7 @@ IF(WIN32)
      SET(tests_testRefraction_SRCS ${tests_testRefraction_SRCS} ${zlib_SRCS})
 ENDIF()
 ADD_EXECUTABLE(testRefraction EXCLUDE_FROM_ALL ${tests_testRefraction_SRCS})
-QT5_USE_MODULES(testRefraction Core Gui Widgets Script Test)
+QT5_USE_MODULES(testRefraction Core Test)
 TARGET_LINK_LIBRARIES(testRefraction ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testRefraction)
 ADD_TEST(testRefraction)
@@ -715,10 +734,38 @@ IF(WIN32)
      SET(tests_testPrecession_SRCS ${tests_testPrecession_SRCS} ${zlib_SRCS})
 ENDIF()
 ADD_EXECUTABLE(testPrecession EXCLUDE_FROM_ALL ${tests_testPrecession_SRCS})
-QT5_USE_MODULES(testPrecession Core Gui Widgets Script Test)
+QT5_USE_MODULES(testPrecession Core Test)
 TARGET_LINK_LIBRARIES(testPrecession ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testPrecession)
 ADD_TEST(testPrecession)
+
+SET(tests_testEphemeris_SRCS
+     tests/testEphemeris.hpp
+     tests/testEphemeris.cpp
+     core/StelFileMgr.hpp
+     core/StelFileMgr.cpp
+     core/VecMath.hpp
+     core/planetsephems/EphemWrapper.hpp
+     core/planetsephems/vsop87.h
+     core/planetsephems/vsop87.c
+     core/planetsephems/calc_interpolated_elements.h
+     core/planetsephems/calc_interpolated_elements.c
+     core/planetsephems/elliptic_to_rectangular.h
+     core/planetsephems/elliptic_to_rectangular.c
+     core/planetsephems/de430.hpp
+     core/planetsephems/de430.cpp
+     core/planetsephems/de431.hpp
+     core/planetsephems/de431.cpp
+     core/planetsephems/jpl_int.h
+     core/planetsephems/jpleph.h
+     core/planetsephems/jpleph.cpp
+)
+ADD_EXECUTABLE(testEphemeris EXCLUDE_FROM_ALL ${tests_testEphemeris_SRCS})
+QT5_USE_MODULES(testEphemeris Core Test)
+TARGET_LINK_LIBRARIES(testEphemeris ${extLinkerOptionTest})
+TARGET_COMPILE_DEFINITIONS(testEphemeris PRIVATE UNIT_TEST)
+ADD_DEPENDENCIES(buildTests testEphemeris)
+ADD_TEST(testEphemeris)
 
 ADD_CUSTOM_TARGET(tests COMMENT "Run the Stellarium unit tests")
 FOREACH(NAME ${STELLARIUM_TESTS})

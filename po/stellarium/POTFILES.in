@@ -1,4 +1,6 @@
 # Core source files
+src/core/modules/CustomObject.cpp
+src/core/modules/CustomObjectMgr.cpp
 src/core/modules/Constellation.cpp
 src/core/modules/ConstellationMgr.cpp
 src/core/modules/StarMgr.cpp
@@ -41,6 +43,7 @@ src/StelMainView.cpp
 
 # Translations of strings not contained in the source code
 src/translations.h
+src/translations_countries.h
 
 # Translations of GUI files generated at build time
 src/ui_dateTimeDialogGui.h
@@ -82,11 +85,6 @@ plugins/TelescopeControl/src/ui_slewDialog.h
 plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h
 plugins/TelescopeControl/src/ui_telescopeDialog.h
 plugins/TelescopeControl/src/ui_storedPointsDialog.h
-plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp
-plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp
-plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp
-plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h
-plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h
 plugins/TextUserInterface/src/TextUserInterface.cpp
 plugins/TextUserInterface/src/TuiNodeBool.cpp
 plugins/TextUserInterface/src/TuiNodeColor.cpp
