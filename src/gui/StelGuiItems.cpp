@@ -633,7 +633,7 @@ void BottomStelBar::updateText(bool updatePos)
 
 	QString currTZ = QString("%1: %2").arg(q_("Time zone")).arg(tzName);
 
-	if (tzName.contains("LMST") || tzName.contains("auto") || (planetName=="Earth" && jd<=2409907.5) || planetName!="Earth")
+	if (tzName.contains("LMST") || tzName.contains("auto") || (planetName=="Earth" && jd<=StelCore::TZ_ERA_BEGINNING) || planetName!="Earth")
 		currTZ = q_("Local Mean Solar Time");
 
 	if (tzName.contains("LTST"))

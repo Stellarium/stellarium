@@ -297,6 +297,7 @@ public:
 	static const double JD_HOUR;
 	static const double JD_DAY;
 	static const double ONE_OVER_JD_SECOND;
+	static const double TZ_ERA_BEGINNING;
 
 	//! Get the sidereal time shifted by the observer longitude
 	//! @return the local sidereal time in radian
