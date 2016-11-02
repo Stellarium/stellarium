@@ -59,12 +59,12 @@ const Mat4d StelCore::matGalacticToJ2000(matJ2000ToGalactic.transpose());
 const Mat4d StelCore::matJ2000ToSupergalactic(0.37501548, -0.89832046, 0.22887497, 0, 0.34135896, -0.09572714, -0.93504565, 0, 0.86188018, 0.42878511, 0.27075058, 0, 0, 0, 0, 1);
 const Mat4d StelCore::matSupergalacticToJ2000(matJ2000ToSupergalactic.transpose());
 
-const double StelCore::JD_SECOND=0.000011574074074074074074; // 1/(24*60*60)=1/86400
-const double StelCore::JD_MINUTE=0.00069444444444444444444;  // 1/(24*60)   =1/1440
-const double StelCore::JD_HOUR  =0.041666666666666666666;    // 1/24
-const double StelCore::JD_DAY   =1.;
-const double StelCore::ONE_OVER_JD_SECOND = 24 * 60 * 60;    // 86400
-
+const double StelCore::JD_SECOND = 0.000011574074074074074074;	// 1/(24*60*60)=1/86400
+const double StelCore::JD_MINUTE = 0.00069444444444444444444;	// 1/(24*60)   =1/1440
+const double StelCore::JD_HOUR   = 0.041666666666666666666;	// 1/24
+const double StelCore::JD_DAY    = 1.;
+const double StelCore::ONE_OVER_JD_SECOND = 86400;		// 86400
+const double StelCore::TZ_ERA_BEGINNING = 2395996.5;		// December 1, 1847
 
 StelCore::StelCore()
 	: skyDrawer(NULL)
@@ -1175,7 +1175,8 @@ float StelCore::getUTCOffset(const double JD) const
 	else
 	{
 		QTimeZone* tz = new QTimeZone(tzName.toUtf8());
-		if (tz->isValid() && loc.planetName=="Earth" && year>=1886)
+		// The first adoption of a standard time was on December 1, 1847 in Great Britain
+		if (tz->isValid() && loc.planetName=="Earth" && JD>=StelCore::TZ_ERA_BEGINNING)
 		{
 			if (getUseDST())
 				shiftInSeconds = tz->offsetFromUtc(universal);

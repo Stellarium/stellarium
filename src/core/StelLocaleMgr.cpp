@@ -267,7 +267,7 @@ QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
 		QString currTZ = core->getCurrentTimeZone();
 		QString timeZoneST = "";
 
-		if (JD<=2409907.5 || currTZ.contains("auto"))
+		if (JD<=StelCore::TZ_ERA_BEGINNING || currTZ.contains("auto"))
 			timeZoneST = "LMST";
 
 		if (currTZ.contains("LMST") || currTZ.contains("LTST"))
