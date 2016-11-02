@@ -32,7 +32,7 @@
 #include <QFont>
 #include <QSettings>
 
-#define MIN_OCULARS_INI_VERSION 2
+#define MIN_OCULARS_INI_VERSION 3.1f
 
 QT_BEGIN_NAMESPACE
 class QKeyEvent;
@@ -159,11 +159,14 @@ public slots:
 	void setFlagInitFovUsage(const bool b);
 	bool getFlagInitFovUsage(void) const;
 
-	void setFlagUseFlipForCCD(const bool b);
-	bool getFlagUseFlipForCCD(void) const;
+	void setFlagAutosetMountForCCD(const bool b);
+	bool getFlagAutosetMountForCCD(void) const;
 
 	void setFlagUseSemiTransparency(const bool b);
 	bool getFlagUseSemiTransparency(void) const;
+
+	void setFlagHideGridsLines(const bool b);
+	bool getFlagHideGridsLines(void) const;
 
 signals:
 	void enableOcularChanged(bool value);
@@ -256,15 +259,36 @@ private:
 
 	bool flagAzimuthalGrid;		//!< Flag to track if AzimuthalGrid was displayed at activation.
 	bool flagGalacticGrid;		//!< Flag to track if GalacticGrid was displayed at activation.
-	bool flagEquatorGrid;		//!< Flag to track if EquatorGrid was displayed at activation.
+	bool flagSupergalacticGrid;	//!< Flag to track if SupergalacticGrid was displayed at activation.
 	bool flagEquatorJ2000Grid;	//!< Flag to track if EquatorJ2000Grid was displayed at activation.
-	bool flagEquatorLine;		//!< Flag to track if EquatorLine was displayed at activation.
-	bool flagEclipticLine;		//!< Flag to track if EclipticLine was displayed at activation.
+	bool flagEquatorGrid;		//!< Flag to track if EquatorGrid was displayed at activation.
+	bool flagEquatorJ2000Line;	//!< Flag to track if EquatorJ2000Line was displayed at activation.
+	bool flagEquatorLine;		//!< Flag to track if EquatorLine was displayed at activation.	
+	bool flagEclipticJ2000Line;	//!< Flag to track if EclipticJ2000Line was displayed at activation.
+	bool flagEclipticLine;		//!< Flag to track if EclipticLine was displayed at activation.	
 	bool flagEclipticJ2000Grid;	//!< Flag to track if EclipticJ2000Grid was displayed at activation.
+	bool flagEclipticGrid;		//!< Flag to track if EclipticGrid was displayed at activation.
 	bool flagMeridianLine;		//!< Flag to track if MeridianLine was displayed at activation.
 	bool flagLongitudeLine;		//!< Flag to track if LongitudeLine was displayed at activation.
 	bool flagHorizonLine;		//!< Flag to track if HorizonLine was displayed at activation.
 	bool flagGalacticEquatorLine;	//!< Flag to track if GalacticEquatorLine was displayed at activation.
+	bool flagSupergalacticEquatorLine;	//!< Flag to track if SupergalacticEquatorLine was displayed at activation.
+	bool flagPrimeVerticalLine;	//!< Flag to track if PrimeVerticalLine was displayed at activation.
+	bool flagColureLines;		//!< Flag to track if ColureLines was displayed at activation.
+	bool flagCircumpolarCircles;	//!< Flag to track if CircumpolarCircles was displayed at activation.
+	bool flagPrecessionCircles;	//!< Flag to track if PrecessionCircles was displayed at activation.
+
+	bool flagCardinalPoints;	//!< Flag to track if CardinalPoints was displayed at activation.
+	bool flagCelestialJ2000Poles;	//!< Flag to track if CelestialJ2000Poles was displayed at activation.
+	bool flagCelestialPoles;	//!< Flag to track if CelestialPoles was displayed at activation.
+	bool flagZenithNadirPoints;	//!< Flag to track if ZenithNadir was displayed at activation.
+	bool flagEclipticJ2000Poles;	//!< Flag to track if EclipticJ2000Poles was displayed at activation.
+	bool flagEclipticPoles;		//!< Flag to track if EclipticPoles was displayed at activation.
+	bool flagGalacticPoles;		//!< Flag to track if GalacticPoles was displayed at activation.
+	bool flagSupergalacticPoles;	//!< Flag to track if SupergalacticPoles was displayed at activation.
+	bool flagEquinoxJ2000Points;	//!< Flag to track if EquinoxJ2000Points was displayed at activation.
+	bool flagEquinoxPoints;		//!< Flag to track if EquinoxPoints was displayed at activation.
+
 	bool flagAdaptation;		//!< Flag to track if adaptationCheckbox was enabled at activation.
 
 	bool flagLimitStars;		//!< Flag to track limit magnitude for stars
@@ -286,6 +310,7 @@ private:
 	bool guiPanelEnabled;
 	bool flagDecimalDegrees;
 	bool flagSemiTransporency;
+	bool flagHideGridsLines;
 	bool flipVert;
 	bool flipHorz;
 
@@ -326,7 +351,8 @@ private:
 	double actualFOV;		//!< Holds the FOV of the ocular/tescope/lens cobination; what the screen is zoomed to.
 	double initialFOV;		//!< Holds the initial FOV
 	bool flagInitFOVUsage;		//!< Flag used to track if we use default initial FOV (value at the startup of planetarium).
-	bool flagUseFlipForCCD;		//!< Flag used to track if we use flips for CCD
+	bool flagAutosetMountForCCD;	//!< Flag used to track if we use automatic switch to type of mount for CCD frame
+	bool equatorialMountEnabled;
 	double reticleRotation;
 };
 

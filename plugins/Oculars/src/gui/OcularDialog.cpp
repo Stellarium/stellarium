@@ -284,26 +284,6 @@ void OcularDialog::moveDownSelectedLens()
 #pragma mark Private Slot Methods
 #endif
 /* ********************************************************************* */
-void OcularDialog::keyBindingTogglePluginChanged(const QString& newString)
-{
-	Oculars::appSettings()->setValue("bindings/toggle_oculars", newString);
-	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
-	StelAction* action = actionMgr->findAction("actionShow_Ocular");
-	if (action != NULL) {
-		action->setShortcut(newString.trimmed());
-	}
-}
-
-void OcularDialog::keyBindingPopupNavigatorConfigChanged(const QString& newString)
-{
-	Oculars::appSettings()->setValue("bindings/popup_navigator", newString);
-	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
-	StelAction* action = actionMgr->findAction("actionShow_Ocular_Menu");
-	if (action != NULL) {
-		action->setShortcut(newString.trimmed());
-	}
-}
-
 void OcularDialog::requireSelectionStateChanged(int state)
 {
 	bool requireSelection = (state == Qt::Checked);
@@ -356,12 +336,13 @@ void OcularDialog::createDialogContent()
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->scaleImageCircleCheckBox, SIGNAL(stateChanged(int)), this, SLOT(scaleImageCircleStateChanged(int)));
 	connect(ui->requireSelectionCheckBox, SIGNAL(stateChanged(int)), this, SLOT(requireSelectionStateChanged(int)));
-	connect(ui->limitStellarMagnitudeCheckBox, SIGNAL(clicked(bool)), plugin, SLOT(setFlagLimitMagnitude(bool)));
+	connect(ui->limitStellarMagnitudeCheckBox, SIGNAL(clicked(bool)), plugin, SLOT(setFlagLimitMagnitude(bool)));	
 	connect(ui->semiTransparencyCheckBox, SIGNAL(clicked(bool)), plugin, SLOT(setFlagUseSemiTransparency(bool)));
+	connect(ui->hideGridsLinesCheckBox, SIGNAL(clicked(bool)), plugin, SLOT(setFlagHideGridsLines(bool)));
 	connect(ui->checkBoxControlPanel, SIGNAL(clicked(bool)), plugin, SLOT(enableGuiPanel(bool)));
 	connect(ui->checkBoxDecimalDegrees, SIGNAL(clicked(bool)), plugin, SLOT(setFlagDecimalDegrees(bool)));
-	connect(ui->checkBoxInitialFOV, SIGNAL(clicked(bool)), plugin, SLOT(setFlagInitFovUsage(bool)));
-	connect(ui->checkBoxUseFlipForCCD, SIGNAL(clicked(bool)), plugin, SLOT(setFlagUseFlipForCCD(bool)));
+	connect(ui->checkBoxInitialFOV, SIGNAL(clicked(bool)), plugin, SLOT(setFlagInitFovUsage(bool)));	
+	connect(ui->checkBoxTypeOfMount, SIGNAL(clicked(bool)), plugin, SLOT(setFlagAutosetMountForCCD(bool)));
 	
 	// The add & delete buttons
 	connect(ui->addCCD, SIGNAL(clicked()), this, SLOT(insertNewCCD()));
@@ -379,21 +360,7 @@ void OcularDialog::createDialogContent()
 	ui->telescopeName->setValidator(validatorName);
 	ui->lensName->setValidator(validatorName);
 
-	// The key bindings
-	QString bindingString = Oculars::appSettings()->value("bindings/toggle_oculars", "Ctrl+O").toString();
-	ui->togglePluginLineEdit->setText(bindingString);
-	bindingString = Oculars::appSettings()->value("bindings/popup_navigator", "Alt+O").toString();
-	ui->togglePopupNavigatorWindowLineEdit->setText(bindingString);
-	connect(ui->togglePluginLineEdit, SIGNAL(textEdited(const QString&)),
-		this, SLOT(keyBindingTogglePluginChanged(const QString&)));
-	connect(ui->togglePopupNavigatorWindowLineEdit, SIGNAL(textEdited(const QString&)),
-		this, SLOT(keyBindingPopupNavigatorConfigChanged(const QString&)));
-	
 	initAboutText();
-	connect(ui->togglePluginLineEdit, SIGNAL(textEdited(QString)),
-		this, SLOT(initAboutText()));
-	connect(ui->togglePopupNavigatorWindowLineEdit, SIGNAL(textEdited(QString)),
-		this, SLOT(initAboutText()));
 
 	connect(ui->pushButtonMoveOcularUp, SIGNAL(pressed()),
 		this, SLOT(moveUpSelectedOcular()));
@@ -504,14 +471,14 @@ void OcularDialog::createDialogContent()
 	if (settings->value("use_initial_fov", false).toBool())
 	{
 		ui->checkBoxInitialFOV->setChecked(true);
-	}
-	if (settings->value("use_ccd_flip", true).toBool())
-	{
-		ui->checkBoxUseFlipForCCD->setChecked(true);
-	}
+	}	
 	if (settings->value("use_semi_transparency", true).toBool())
 	{
 		ui->semiTransparencyCheckBox->setChecked(true);
+	}
+	if (settings->value("hide_grids_and_lines", true).toBool())
+	{
+		ui->hideGridsLinesCheckBox->setChecked(true);
 	}
 
 	//Initialize the style
@@ -531,11 +498,13 @@ void OcularDialog::setLabelsDescriptionText(bool state)
 		ui->labelFOV->setText(q_("tFOV:"));
 		// TRANSLATORS: Magnification factor for binoculars
 		ui->labelFL->setText(q_("Magnification factor:"));
+		ui->labelFS->setText(q_("Diameter:"));
 	}
 	else
 	{
 		ui->labelFOV->setText(q_("aFOV:"));
 		ui->labelFL->setText(q_("Focal length:"));
+		ui->labelFS->setText(q_("Field stop:"));
 	}
 }
 

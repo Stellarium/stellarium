@@ -132,6 +132,14 @@ private slots:
 	void setDeltaTAlgorithmDescription();
 	void showCustomDeltaTEquationDialog();
 
+	void populateDateFormatsList();
+	void setDateFormat();
+
+	void populateTimeFormatsList();
+	void setTimeFormat();
+
+	void setButtonBarDTFormat();
+
 	#ifndef DISABLE_SCRIPTING
 	//! The selection of script in the script list has changed
 	//! Updates the script information panel

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>509</width>
-    <height>538</height>
+    <width>512</width>
+    <height>563</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -270,8 +270,11 @@
           </item>
           <item>
            <widget class="QGroupBox" name="groupBox_EphemerisSettings">
+            <property name="toolTip">
+             <string>This feature has not been thoroughly tested yet!</string>
+            </property>
             <property name="title">
-             <string>Ephemeris settings</string>
+             <string>Ephemeris settings (experimental)</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_ephemeris">
              <property name="leftMargin">
@@ -492,6 +495,18 @@
              <string>Selected object information</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_2">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item row="0" column="0">
               <widget class="QRadioButton" name="allSelectedInfoRadio">
                <property name="toolTip">
@@ -763,16 +778,6 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="enableKeysNavigationCheckBox">
-               <property name="toolTip">
-                <string>Allow keyboard to pan and zoom</string>
-               </property>
-               <property name="text">
-                <string>Enable keyboard navigation</string>
-               </property>
-              </widget>
-             </item>
              <item row="1" column="0">
               <widget class="QCheckBox" name="enableMouseNavigationCheckBox">
                <property name="toolTip">
@@ -787,6 +792,16 @@
               <widget class="QPushButton" name="editShortcutsPushButton">
                <property name="text">
                 <string>Edit keyboard shortcuts...</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="enableKeysNavigationCheckBox">
+               <property name="toolTip">
+                <string>Allow keyboard to pan and zoom</string>
+               </property>
+               <property name="text">
+                <string>Enable keyboard navigation</string>
                </property>
               </widget>
              </item>
@@ -863,63 +878,6 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="2" column="0">
-              <layout class="QHBoxLayout" name="_4">
-               <item>
-                <widget class="QRadioButton" name="fixedTimeRadio">
-                 <property name="toolTip">
-                  <string>Use a specific date and time when Stellarium starts up</string>
-                 </property>
-                 <property name="text">
-                  <string>Other:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDateTimeEdit" name="fixedDateTimeEdit">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="date">
-                  <date>
-                   <year>1952</year>
-                   <month>5</month>
-                   <day>11</day>
-                  </date>
-                 </property>
-                 <property name="time">
-                  <time>
-                   <hour>0</hour>
-                   <minute>42</minute>
-                   <second>0</second>
-                  </time>
-                 </property>
-                 <property name="calendarPopup">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="2" column="1">
-              <widget class="QPushButton" name="fixedDateTimeCurrentButton">
-               <property name="toolTip">
-                <string>Use current local date and time</string>
-               </property>
-               <property name="text">
-                <string>use current</string>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="0">
               <widget class="QRadioButton" name="systemTimeRadio">
                <property name="toolTip">
@@ -987,6 +945,142 @@
                 </widget>
                </item>
               </layout>
+             </item>
+             <item row="2" column="0">
+              <layout class="QHBoxLayout" name="_4">
+               <item>
+                <widget class="QRadioButton" name="fixedTimeRadio">
+                 <property name="toolTip">
+                  <string>Use a specific date and time when Stellarium starts up</string>
+                 </property>
+                 <property name="text">
+                  <string>Other:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDateTimeEdit" name="fixedDateTimeEdit">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="date">
+                  <date>
+                   <year>1952</year>
+                   <month>5</month>
+                   <day>11</day>
+                  </date>
+                 </property>
+                 <property name="time">
+                  <time>
+                   <hour>0</hour>
+                   <minute>42</minute>
+                   <second>0</second>
+                  </time>
+                 </property>
+                 <property name="calendarPopup">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="2" column="1">
+              <widget class="QPushButton" name="fixedDateTimeCurrentButton">
+               <property name="toolTip">
+                <string>Use current local date and time</string>
+               </property>
+               <property name="text">
+                <string>use current</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_2">
+            <property name="toolTip">
+             <string>These settings control the way time and date are displayed in the bottom bar.</string>
+            </property>
+            <property name="title">
+             <string>Display formats of date and time</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayoutFmt">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item row="0" column="2">
+              <widget class="QLabel" name="dateFormatsLabel">
+               <property name="text">
+                <string>Date:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="4">
+              <widget class="QLabel" name="timeFormatsLabel">
+               <property name="text">
+                <string>and time:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QComboBox" name="dateFormatsComboBox"/>
+             </item>
+             <item row="0" column="5">
+              <widget class="QComboBox" name="timeFormatsComboBox"/>
+             </item>
+             <item row="0" column="0">
+              <widget class="QRadioButton" name="jdRadioButton">
+               <property name="text">
+                <string notr="true">JD</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QRadioButton" name="dtRadioButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>20</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text">
+                <string notr="true"/>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -1136,26 +1230,95 @@
              <string>Planetarium options</string>
             </property>
             <layout class="QGridLayout" name="gridLayoutOptions">
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="sphericMirrorCheckbox">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="autoEnableAtmosphereCheckBox">
                <property name="toolTip">
-                <string>Spheric mirror distortion is used when projecting Stellarium onto a spheric mirror for low-cost planetarium systems.</string>
+                <string>Auto-enabling of the atmosphere for bodies with atmosphere in location window</string>
                </property>
                <property name="text">
-                <string>Spheric mirror distortion</string>
-               </property>
-               <property name="checkable">
-                <bool>true</bool>
+                <string>Auto-enabling for the atmosphere</string>
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="diskViewportCheckbox">
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="showNebulaBgButtonCheckbox">
                <property name="toolTip">
-                <string>Mask out everything outside a central circle in the main view</string>
+                <string>Toggle display backgrounds of the nebulae.</string>
                </property>
                <property name="text">
-                <string>Disc viewport</string>
+                <string>Show nebula background button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="nutationCheckBox">
+               <property name="toolTip">
+                <string>Nutation is a small wobble of Earth's axis, amounting to a few arcseconds.</string>
+               </property>
+               <property name="text">
+                <string>Include nutation</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="azimuthFromSouthcheckBox">
+               <property name="toolTip">
+                <string>Activate this option to calculate azimuth from south towards west.</string>
+               </property>
+               <property name="text">
+                <string>Azimuth from South</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="decimalDegreeCheckBox">
+               <property name="toolTip">
+                <string>Use decimal degrees for coordinates</string>
+               </property>
+               <property name="text">
+                <string>Use decimal degrees</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="topocentricCheckBox">
+               <property name="toolTip">
+                <string>Activate to view as seen from surface of the planet (recommended). If switched off, display planetocentric view.</string>
+               </property>
+               <property name="text">
+                <string>Topocentric coordinates</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="showFlipButtonsCheckbox">
+               <property name="toolTip">
+                <string>Toggle vertical and horizontal image flip buttons.</string>
+               </property>
+               <property name="text">
+                <string>Show flip buttons</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="gravityLabelCheckbox">
+               <property name="toolTip">
+                <string>Align labels with the horizon</string>
+               </property>
+               <property name="text">
+                <string>Gravity labels</string>
                </property>
               </widget>
              </item>
@@ -1172,93 +1335,16 @@
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
-              <widget class="QCheckBox" name="gravityLabelCheckbox">
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="sphericMirrorCheckbox">
                <property name="toolTip">
-                <string>Align labels with the horizon</string>
+                <string>Spheric mirror distortion is used when projecting Stellarium onto a spheric mirror for low-cost planetarium systems.</string>
                </property>
                <property name="text">
-                <string>Gravity labels</string>
+                <string>Spheric mirror distortion</string>
                </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="showNebulaBgButtonCheckbox">
-               <property name="toolTip">
-                <string>Toggle display backgrounds of the nebulae.</string>
-               </property>
-               <property name="text">
-                <string>Show nebula background button</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QCheckBox" name="showFlipButtonsCheckbox">
-               <property name="toolTip">
-                <string>Toggle vertical and horizontal image flip buttons.</string>
-               </property>
-               <property name="text">
-                <string>Show flip buttons</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="autoEnableAtmosphereCheckBox">
-               <property name="toolTip">
-                <string>Auto-enabling of the atmosphere for bodies with atmosphere in location window</string>
-               </property>
-               <property name="text">
-                <string>Auto-enabling for the atmosphere</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QCheckBox" name="decimalDegreeCheckBox">
-               <property name="toolTip">
-                <string>Use decimal degrees for coordinates</string>
-               </property>
-               <property name="text">
-                <string>Use decimal degrees</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="nutationCheckBox">
-               <property name="toolTip">
-                <string>Nutation is a small wobble of Earth's axis, amounting to a few arcseconds.</string>
-               </property>
-               <property name="text">
-                <string>Include nutation</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QCheckBox" name="topocentricCheckBox">
-               <property name="toolTip">
-                <string>Activate to view as seen from surface of the planet (recommended). If switched off, display planetocentric view.</string>
-               </property>
-               <property name="text">
-                <string>Topocentric coordinates</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QCheckBox" name="azimuthFromSouthcheckBox">
-               <property name="toolTip">
-                <string>Activate this option to calculate azimuth from south towards west.</string>
-               </property>
-               <property name="text">
-                <string>Azimuth from South</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="0" colspan="2">
-              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
-               <property name="toolTip">
-                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
-               </property>
-               <property name="text">
-                <string>Auto zoom out returns to initial direction of view</string>
+               <property name="checkable">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
@@ -1269,6 +1355,33 @@
                </property>
                <property name="text">
                 <string>Auto select landscapes</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="diskViewportCheckbox">
+               <property name="toolTip">
+                <string>Mask out everything outside a central circle in the main view</string>
+               </property>
+               <property name="text">
+                <string>Disc viewport</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0" colspan="2">
+              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
+               <property name="toolTip">
+                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
+               </property>
+               <property name="text">
+                <string>Auto zoom out returns to initial direction of view</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="showBookmarksButtonCheckBox">
+               <property name="text">
+                <string>Show bookmarks button</string>
                </property>
               </widget>
              </item>

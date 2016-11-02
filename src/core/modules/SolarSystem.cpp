@@ -146,7 +146,7 @@ void SolarSystem::init()
 
 	// Compute position and matrix of sun and all the satellites (ie planets)
 	// for the first initialization Q_ASSERT that center is sun center (only impacts on light speed correction)	
-	computePositions(StelUtils::getJDFromSystem());
+	computePositions(StelApp::getInstance().getCore()->getJDE());
 
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
 	setFlagMoonScale(conf->value("viewing/flag_moon_scaled", conf->value("viewing/flag_init_moon_scaled", "false").toBool()).toBool());  // name change
@@ -181,7 +181,10 @@ void SolarSystem::init()
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
 	setLabelsColor(StelUtils::strToVec3f(conf->value("color/planet_names_color", defaultColor).toString()));
-	setOrbitsColor(StelUtils::strToVec3f(conf->value("color/planet_orbits_color", defaultColor).toString()));
+	setOrbitsColor(StelUtils::strToVec3f(conf->value("color/sso_orbits_color", defaultColor).toString()));
+	setPlanetsOrbitsColor(StelUtils::strToVec3f(conf->value("color/planet_orbits_color", defaultColor).toString()));
+	setAsteroidsOrbitsColor(StelUtils::strToVec3f(conf->value("color/asteroid_orbits_color", defaultColor).toString()));
+	setCometsOrbitsColor(StelUtils::strToVec3f(conf->value("color/comet_orbits_color", defaultColor).toString()));
 	setTrailsColor(StelUtils::strToVec3f(conf->value("color/object_trails_color", defaultColor).toString()));
 	setPointerColor(StelUtils::strToVec3f(conf->value("color/planet_pointers_color", "1.0,0.3,0.3").toString()));
 
@@ -1682,12 +1685,56 @@ bool SolarSystem::getFlagIsolatedOrbits() const
 
 
 // Set/Get planets names color
-void SolarSystem::setLabelsColor(const Vec3f& c) {Planet::setLabelColor(c);}
-const Vec3f& SolarSystem::getLabelsColor(void) const {return Planet::getLabelColor();}
+void SolarSystem::setLabelsColor(const Vec3f& c)
+{
+	Planet::setLabelColor(c);
+}
+
+const Vec3f& SolarSystem::getLabelsColor(void) const
+{
+	return Planet::getLabelColor();
+}
 
 // Set/Get orbits lines color
-void SolarSystem::setOrbitsColor(const Vec3f& c) {Planet::setOrbitColor(c);}
-Vec3f SolarSystem::getOrbitsColor(void) const {return Planet::getOrbitColor();}
+void SolarSystem::setOrbitsColor(const Vec3f& c)
+{
+	Planet::setOrbitColor(c);
+}
+
+Vec3f SolarSystem::getOrbitsColor(void) const
+{
+	return Planet::getOrbitColor();
+}
+
+void SolarSystem::setPlanetsOrbitsColor(const Vec3f& c)
+{
+	Planet::setPlanetOrbitColor(c);
+}
+
+Vec3f SolarSystem::getPlanetsOrbitsColor(void) const
+{
+	return Planet::getPlanetOrbitColor();
+}
+
+void SolarSystem::setAsteroidsOrbitsColor(const Vec3f& c)
+{
+	Planet::setAsteroidOrbitColor(c);
+}
+
+Vec3f SolarSystem::getAsteroidsOrbitsColor(void) const
+{
+	return Planet::getAsteroidOrbitColor();
+}
+
+void SolarSystem::setCometsOrbitsColor(const Vec3f& c)
+{
+	Planet::setCometOrbitColor(c);
+}
+
+Vec3f SolarSystem::getCometsOrbitsColor(void) const
+{
+	return Planet::getCometOrbitColor();
+}
 
 // Set/Get if Moon display is scaled
 void SolarSystem::setFlagMoonScale(bool b)
@@ -1794,7 +1841,7 @@ void SolarSystem::reloadPlanets()
 
 	// Re-load the ssystem.ini file
 	loadPlanets();	
-	computePositions(StelUtils::getJDFromSystem());
+	computePositions(core->getJDE());
 	setSelected("");
 	recreateTrails();
 	
@@ -1843,6 +1890,7 @@ void SolarSystem::setFlagCustomGrsSettings(bool b)
 	Planet::flagCustomGrsSettings=b;
 	// automatic saving of the setting
 	conf->setValue("astro/flag_grs_custom", b);
+	emit flagCustomGrsSettingsChanged(b);
 }
 
 bool SolarSystem::getFlagCustomGrsSettings()
@@ -1855,6 +1903,7 @@ void SolarSystem::setCustomGrsLongitude(int longitude)
 	Planet::customGrsLongitude = longitude;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_longitude", longitude);
+	emit customGrsLongitudeChanged(longitude);
 }
 
 int SolarSystem::getCustomGrsLongitude()
@@ -1867,6 +1916,7 @@ void SolarSystem::setCustomGrsDrift(double drift)
 	Planet::customGrsDrift = drift;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_drift", drift);
+	emit customGrsDriftChanged(drift);
 }
 
 double SolarSystem::getCustomGrsDrift()
@@ -1879,6 +1929,7 @@ void SolarSystem::setCustomGrsJD(double JD)
 	Planet::customGrsJD = JD;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_jd", JD);
+	emit customGrsJDChanged(JD);
 }
 
 double SolarSystem::getCustomGrsJD()

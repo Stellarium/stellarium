@@ -34,6 +34,8 @@ public:
 	QString englishName;
 	//! Name of the author
 	QString author;
+	//! Type of the boundaries (-1=none;0=generic;1=own)
+	int boundariesIdx;
 };
 
 //! @class StelSkyCultureMgr
@@ -71,7 +73,7 @@ public slots:
 	QString getCurrentSkyCultureNameI18() const;
 	//! Set the sky culture from i18n name.
 	//! @return true on success; false and doesn't change if skyculture is invalid.
-	bool setCurrentSkyCultureNameI18(const QString& cultureName) {return setCurrentSkyCultureID(skyCultureI18ToDirectory(cultureName));}
+	bool setCurrentSkyCultureNameI18(const QString& cultureName);
 	
 	//! Get the current sky culture ID.
 	QString getCurrentSkyCultureID() const {return currentSkyCultureDir;}
@@ -79,6 +81,14 @@ public slots:
 	//! @param id the sky culture ID.
 	//! @return true on success; else false.
 	bool setCurrentSkyCultureID(const QString& id);
+
+	//! Get the type of boundaries of the current sky culture
+	//! Config option: info/boundaries
+	//! Possible values:
+	//! none (-1; using by default)
+	//! generic (0)
+	//! own (1)
+	int getCurrentSkyCultureBoundariesIdx() const;
 
 	//! Returns a localized HTML description for the current sky culture.
 	//! @return a HTML description of the current sky culture, suitable for display

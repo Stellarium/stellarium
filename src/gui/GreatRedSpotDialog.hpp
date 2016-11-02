@@ -37,6 +37,7 @@ public:
 
 public slots:
         void retranslate();
+	void setVisible(bool);
 
 private slots:
 	void setGrsJD(QDateTime dt);

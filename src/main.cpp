@@ -323,7 +323,7 @@ int main(int argc, char **argv)
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
 
 	// Support hi-dpi pixmaps
-	app.setAttribute(Qt::AA_UseHighDpiPixmaps);
+	app.setAttribute(Qt::AA_UseHighDpiPixmaps, true);	
 
 	// Add the DejaVu font that we use everywhere in the program
 	const QString& fName = StelFileMgr::findFile("data/DejaVuSans.ttf");
