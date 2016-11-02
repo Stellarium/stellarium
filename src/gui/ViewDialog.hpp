@@ -26,6 +26,7 @@
 
 class Ui_viewDialogForm;
 class QListWidgetItem;
+class QToolButton;
 
 class AddRemoveLandscapesDialog;
 class AtmosphereDialog;
@@ -86,12 +87,46 @@ private slots:
 
 	void updateSelectedCatalogsCheckBoxes();
 	void updateSelectedTypesCheckBoxes();
+
+	void askEclipticJ2000GridColor();
+	void askEclipticGridColor();
+	void askEquatorJ2000GridColor();
+	void askEquatorGridColor();
+	void askGalacticGridColor();
+	void askSupergalacticGridColor();
+	void askAzimuthalGridColor();
+	void askEclipticLineJ2000Color();
+	void askEclipticLineColor();
+	void askEquatorLineJ2000Color();
+	void askEquatorLineColor();
+	void askGalacticEquatorLineColor();
+	void askSupergalacticEquatorLineColor();
+	void askLongitudeLineColor();
+	void askHorizonLineColor();
+	void askColureLinesColor();
+	void askCircumpolarCirclesColor();
+	void askPrecessionCirclesColor();
+	void askPrimeVerticalLineColor();
+	void askMeridianLineColor();
+	void askCardinalPointsColor();
+	void askCelestialJ2000PolesColor();
+	void askCelestialPolesColor();
+	void askZenithNadirColor();
+	void askEclipticJ2000PolesColor();
+	void askEclipticPolesColor();
+	void askGalacticPolesColor();
+	void askSupergalacticPolesColor();
+	void askEquinoxJ2000PointsColor();
+	void askEquinoxPointsColor();
+
 private:
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);
 	void updateSkyCultureText();
 	//! Make sure that no tabs icons are outside of the viewport.
 	//! @todo Limit the width to the width of the screen *available to the window*.
 	void updateTabBarListWidgetWidth();
+
+	void colorButton(QToolButton *toolButton, QString propName);
 
 	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;
 	AtmosphereDialog * atmosphereDialog;

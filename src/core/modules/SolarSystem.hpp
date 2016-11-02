@@ -131,6 +131,26 @@ class SolarSystem : public StelObjectModule
 		   NOTIFY ephemerisDatesChanged
 		   )
 
+	Q_PROPERTY(bool flagCustomGrsSettings
+		   READ getFlagCustomGrsSettings
+		   WRITE setFlagCustomGrsSettings
+		   NOTIFY flagCustomGrsSettingsChanged
+		   )
+	Q_PROPERTY(int customGrsLongitude
+		   READ getCustomGrsLongitude
+		   WRITE setCustomGrsLongitude
+		   NOTIFY customGrsLongitudeChanged
+		   )
+	Q_PROPERTY(double customGrsDrift
+		   READ getCustomGrsDrift
+		   WRITE setCustomGrsDrift
+		   NOTIFY customGrsDriftChanged
+		   )
+	Q_PROPERTY(double customGrsJD
+		   READ getCustomGrsJD
+		   WRITE setCustomGrsJD
+		   NOTIFY customGrsJDChanged
+		   )
 public:
 	SolarSystem();
 	virtual ~SolarSystem();
@@ -258,16 +278,49 @@ public slots:
 	//! @return current color
 	const Vec3f& getLabelsColor(void) const;
 
-	//! Set the color used to draw planet orbit lines.
-	//! @param c The color of the planet orbit lines (R,G,B)
+	//! Set the color used to draw solar system object orbit lines.
+	//! @param c The color of the solar system object orbit lines (R,G,B)
 	//! @code
 	//! // example of usage in scripts
 	//! SolarSystem.setOrbitsColor(Vec3f(1.0,0.0,0.0));
 	//! @endcode
 	void setOrbitsColor(const Vec3f& c);
-	//! Get the current color used to draw planet orbit lines.
+	//! Get the current color used to draw solar system object orbit lines.
 	//! @return current color
 	Vec3f getOrbitsColor(void) const;
+
+	//! Set the color used to draw planet and their moons orbit lines.
+	//! @param c The color of the planet and their moons orbit lines (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setPlanetsOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setPlanetsOrbitsColor(const Vec3f& c);
+	//! Get the current color used to draw planet and their moons orbit lines.
+	//! @return current color
+	Vec3f getPlanetsOrbitsColor(void) const;
+
+	//! Set the color used to draw minor planet orbit lines.
+	//! @param c The color of the minor planet orbit lines (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setAsteroidsOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setAsteroidsOrbitsColor(const Vec3f& c);
+	//! Get the current color used to draw minor planet orbit lines.
+	//! @return current color
+	Vec3f getAsteroidsOrbitsColor(void) const;
+
+	//! Set the color used to draw comet orbit lines.
+	//! @param c The color of the comet orbit lines (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setCometsOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setCometsOrbitsColor(const Vec3f& c);
+	//! Get the current color used to draw comet orbit lines.
+	//! @return current color
+	Vec3f getCometsOrbitsColor(void) const;
 
 	//! Set the color used to draw planet trails lines.
 	//! @param c The color of the planet trails lines (R,G,B)
@@ -394,6 +447,7 @@ public slots:
 
 	//! Set initial JD for calculation of position of Great Red Spot
 	//! @param JD
+	// TODO (GZ): Clarify whether this is JD or rather JDE?
 	void setCustomGrsJD(double JD);
 	//! Get initial JD for calculation of position of Great Red Spot
 	double getCustomGrsJD();
@@ -416,6 +470,10 @@ signals:
 	void labelsAmountChanged(double f);
 	void ephemerisMarkersChanged(bool b);
 	void ephemerisDatesChanged(bool b);
+	void flagCustomGrsSettingsChanged(bool b);
+	void customGrsLongitudeChanged(int l);
+	void customGrsDriftChanged(double drift);
+	void customGrsJDChanged(double JD);
 
 public:
 	///////////////////////////////////////////////////////////////////////////

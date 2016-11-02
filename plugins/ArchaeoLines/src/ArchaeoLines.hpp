@@ -56,7 +56,7 @@ these declinations are still important in everyday astronomy.
 Some religions, most notably Islam, adhere to a practice of observing a prayer direction towards a particular location.
 Azimuth lines (vertical semicircles from zenith to nadir) for two locations can be shown. Default locations are Mecca (Kaaba) and Jerusalem.
 The directions are computed based on spherical trigonometry on a spherical Earth.
-In addition, up to 2 custom azimuth lines can be drawn, also with a customized label.
+In addition, up to 2 custom azimuth lines, and up to 2 custom declination lines can be drawn, also with customized labels.
 
 The lunar lines include horizon parallax effects. There are two lines each
 drawn, for maximum and minimum distance of the moon. Note that declination
@@ -104,7 +104,9 @@ public:
 		SelectedObject,
 		CurrentSun,
 		CurrentMoon,
-		GeographicLocation1,
+		CustomDeclination1,
+		CustomDeclination2,
+		GeographicLocation1, // The following types are in altaz frame!
 		GeographicLocation2,
 		CustomAzimuth1,
 		CustomAzimuth2
@@ -255,7 +257,27 @@ class ArchaeoLines : public StelModule
 				READ getCustomAzimuth2
 				WRITE setCustomAzimuth2
 				NOTIFY customAzimuth2Changed)
-	// TODO: Maybe add properties for geo locations and custom azimuths: labels.
+	Q_PROPERTY(bool flagShowCustomDeclination1
+				READ   isCustomDeclination1Displayed
+				WRITE  showCustomDeclination1
+				NOTIFY showCustomDeclination1Changed
+		   )
+	Q_PROPERTY(bool flagShowCustomDeclination2
+				READ   isCustomDeclination2Displayed
+				WRITE  showCustomDeclination2
+				NOTIFY showCustomDeclination2Changed
+		   )
+	// Note: following 2 are only "forwarding properties", no proper variables!
+	Q_PROPERTY(double customDeclination1
+				READ getCustomDeclination1
+				WRITE setCustomDeclination1
+				NOTIFY customDeclination1Changed)
+	Q_PROPERTY(double customDeclination2
+				READ getCustomDeclination2
+				WRITE setCustomDeclination2
+				NOTIFY customDeclination2Changed)
+
+	// TODO: Maybe add properties for geo locations and custom azimuths/declinations: labels.
 
 public:
 	ArchaeoLines();
@@ -307,6 +329,10 @@ signals:
 	void showCustomAzimuth2Changed(bool on);
 	void customAzimuth1Changed(double az);
 	void customAzimuth2Changed(double az);
+	void showCustomDeclination1Changed(bool on);
+	void showCustomDeclination2Changed(bool on);
+	void customDeclination1Changed(double dec);
+	void customDeclination2Changed(double dec);
 	void currentPlanetChanged(ArchaeoLine::Line l); // meaningful only CurrentPlanetNone...CurrentPlanetSaturn.
 
 public slots:
@@ -329,6 +355,8 @@ public slots:
 	bool isGeographicLocation2Displayed() const {return flagShowGeographicLocation2;}
 	bool isCustomAzimuth1Displayed() const {return flagShowCustomAzimuth1;}
 	bool isCustomAzimuth2Displayed() const {return flagShowCustomAzimuth2;}
+	bool isCustomDeclination1Displayed() const {return flagShowCustomDeclination1;}
+	bool isCustomDeclination2Displayed() const {return flagShowCustomDeclination2;}
 
 
 	void showEquinox(bool b);
@@ -363,6 +391,14 @@ public slots:
 	double getCustomAzimuth2() const { return customAzimuth2Line->getDefiningAngle(); }
 	void setCustomAzimuth1Label(QString label);
 	void setCustomAzimuth2Label(QString label);
+	void showCustomDeclination1(bool b);
+	void showCustomDeclination2(bool b);
+	void setCustomDeclination1(double dec);
+	double getCustomDeclination1() const { return customDeclination1Line->getDefiningAngle(); }
+	void setCustomDeclination2(double dec);
+	double getCustomDeclination2() const { return customDeclination2Line->getDefiningAngle(); }
+	void setCustomDeclination1Label(QString label);
+	void setCustomDeclination2Label(QString label);
 
 	// called by the dialog GUI, converts GUI's QColor (0..255) to Stellarium's Vec3f float color.
 	void setLineColor(ArchaeoLine::Line whichLine, QColor color);
@@ -400,6 +436,8 @@ private:
 	Vec3f geographicLocation2Color;
 	Vec3f customAzimuth1Color;
 	Vec3f customAzimuth2Color;
+	Vec3f customDeclination1Color;
+	Vec3f customDeclination2Color;
 
 	bool flagShowEquinox;
 	bool flagShowSolstices;
@@ -420,6 +458,8 @@ private:
 	double geographicLocation2Latitude;
 	bool flagShowCustomAzimuth1;
 	bool flagShowCustomAzimuth2;
+	bool flagShowCustomDeclination1;
+	bool flagShowCustomDeclination2;
 	double lastJDE; // cache last-time-computed to every 10 days or so?
 
 	ArchaeoLine * equinoxLine;
@@ -445,6 +485,8 @@ private:
 	ArchaeoLine * geographicLocation2Line;
 	ArchaeoLine * customAzimuth1Line;
 	ArchaeoLine * customAzimuth2Line;
+	ArchaeoLine * customDeclination1Line;
+	ArchaeoLine * customDeclination2Line;
 
 	StelButton* toolbarButton;
   

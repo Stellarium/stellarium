@@ -164,11 +164,17 @@ QString HelpDialog::getHelpText(void)
 	htmlText += "<td>";
 #endif
 	htmlText += q_("Clear selection").toHtmlEscaped() + "</td>";
-	htmlText += "<td><b>" + q_("Right click").toHtmlEscaped() + "</b></td></tr>\n";
+	htmlText += "<td><b>" + q_("Right click").toHtmlEscaped() + "</b></td></tr>\n";	
 #ifdef Q_OS_MAC
 	htmlText += "<tr><td><b>" + q_("CTRL + Left click").toHtmlEscaped() + "</b></td></tr>\n";
 	//htmlText += "<td>" + E("Clear selection") + "</td>";
 #endif
+	// add custom marker
+	htmlText += "<tr><td>" + q_("Add custom marker").toHtmlEscaped() + "</td>";
+	htmlText += "<td><b>" + q_("Shift + Left click").toHtmlEscaped() + "</b></td></tr>\n";
+	// delete custom markers
+	htmlText += "<tr><td>" + q_("Delete all custom markers").toHtmlEscaped() + "</td>";
+	htmlText += "<td><b>" + q_("Shift + Right click").toHtmlEscaped() + "</b></td></tr>\n";
 	
 	htmlText += "</table>\n<p>" +
 	                q_("Below are listed only the actions with assigned keys. Further actions may be available via the \"%1\" button.")
@@ -200,9 +206,10 @@ QString HelpDialog::getHelpText(void)
 		}
 	}
 
-	// edit shortcuts
-//	htmlText += "<tr><td><b>" + Qt::escape(q_("F7")) + "</b></td>";
-//	htmlText += "<td>" + Qt::escape(q_("Show and edit all keyboard shortcuts")) + "</td></tr>\n";
+	htmlText += "<tr></tr><tr><td><b><u>" + q_("Text User Interface (TUI)") +
+		    ":</u></b></td></tr>\n";
+	htmlText += "<tr><td>" + q_("Activate TUI") + "</td>";
+	htmlText += "<td><b>Alt+T</b></td></tr>\n";
 	htmlText += "</table>";
 
 	// Regexp to replace {text} with an HTML link.
@@ -271,14 +278,14 @@ void HelpDialog::updateText(void)
 		     << "Allan Johnson" << "Felix Zeltner" << "Paolo Cancedda" << "Ross Mitchell"
 		     << "David Baucum" << "Maciej Serylak" << "Adriano Steffler" << "Sibi Antony"
 		     << "Tony Furr" << "misibacsi" << "Pavel Klimenko" << "Rumen G. Bogdanovski"
-		     << "Colin Gaudion" << "Annette S. Lee" << "Vancho Stojkoski";
+		     << "Colin Gaudion" << "Annette S. Lee" << "Vancho Stojkoski" << "Robert S. Fuller";
 	contributors.sort();
 
 	// populate About tab
 	newHtml = "<h1>" + StelUtils::getApplicationName() + "</h1>";
 	// Note: this legal notice is not suitable for traslation
 	newHtml += QString("<h3>Copyright &copy; %1 Stellarium Developers</h3>").arg(COPYRIGHT_YEARS);
-	newHtml += "<p><em>Version 0.15 is dedicated in memory of our team member Barry Gerdes.</em></p>";
+	// newHtml += "<p><em>Version 0.15 is dedicated in memory of our team member Barry Gerdes.</em></p>";
 	newHtml += "<p>This program is free software; you can redistribute it and/or ";
 	newHtml += "modify it under the terms of the GNU General Public License ";
 	newHtml += "as published by the Free Software Foundation; either version 2 ";

@@ -275,6 +275,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="displayShowDesignationsCheckBox">
+            <property name="text">
+             <string>Enable display designations of exoplanets</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="displayAtStartupCheckBox">
             <property name="text">
              <string>Enable display at startup</string>

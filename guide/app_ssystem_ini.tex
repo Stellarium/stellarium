@@ -5,7 +5,8 @@
 
 %\chapterimage{chapter-t1-bg} % Chapter heading image
 
-\chapter{Solar System Configuration File}
+%\chapter{Solar System Configuration File}
+\section{Solar System Configuration File}
 \label{sec:ssystem.ini}
 
 The file \file{ssystem.ini} (default file in \file{data/} in the
@@ -34,7 +35,7 @@ All elements are stored in alphabetic order in the file, however it
 makes more sense to present the elements in another structure which
 better reflects the meaning.
 
-\section{Planet section}
+\subsection{Planet section}
 \label{sec:ssystem.ini:Planet}
 
 Example:
@@ -126,17 +127,19 @@ In many cases, the attitude/rotation formula is given like
 These cases are covered by the data in \file{ssystem.ini}. Other cases are dealt with in a different way.
 
 
-\section{Moon section}
+\subsection{Moon section}
 \label{sec:ssystem.ini:Moon}
 
 Moons are special in that they orbit another planet. Therefore, the
 rotational elements used to be specified relative to the equatorial plane of the
-parent planet. However, current IAU reference material gives axis orientation
+parent planet, and \texttt{orbit\_SemiMajorAxis} in kilometers. However, current IAU reference material gives axis orientation
 with right ascension and declination values for the pole in ICRF
 coordinates, with some of them in motion. So again, if one of the
 \texttt{rot\_pole\_...} values exist, we assume the current
 standard. For more complicated motion, again some special functions
 are applied.
+
+%% TODO: CHANGE THIS WHEN AXES HAVE BEEN REMADE!
 
 \begin{configfile}
 [amalthea]
@@ -184,7 +187,7 @@ where
 \item[orbit\_LongOfPericenter] 
 \item[orbit\_MeanLongitude]
 \item[orbit\_Period]
-\item[orbit\_SemiMajorAxis] $a$
+\item[orbit\_SemiMajorAxis] $a$ [km]
 \item[orbit\_visualization\_period] Should be set to
   \texttt{orbit\_Period} to show orbit as closed line. Actually, this happens when omitted. So this is
   in fact only useful in case of special functions for positioning where \texttt{orbit\_Period} is not given.
@@ -211,7 +214,7 @@ where
 \item[tex\_map] name of spherical texture map. Many moons have been mapped by visiting spacecraft!
 \end{description}
 
-\section{Minor Planet section}
+\subsection{Minor Planet section}
 \label{sec:ssystem.ini:MinorPlanet}
 
 \begin{configfile}
@@ -261,7 +264,7 @@ Elements for rotational axis may be given just like for planets when
 they are known. It is recommended to use the modern specification
 (elements \texttt{rot\_pole\_...}).
 
-\section{Comet section}
+\subsection{Comet section}
 \label{sec:ssystem.ini:Comet}
 
 Comets are tiny, and their outgassing and close approaches to the
@@ -299,7 +302,7 @@ can copy\&paste what you need into your
 several sets of orbital elements for different epochs which would
 allow automatic changes.
 
-\subsection{Periodic Comet}
+\subsubsection{Periodic Comet}
 \label{sec:ssystem.ini:Comet:Periodic}
 
 \begin{configfile}
@@ -336,7 +339,7 @@ duration of orbit\_good, which means the comet is only displayed 78
 days before and after perihel.
 
 
-\subsection{Parabolic/Hyperbolic Comet}
+\subsubsection{Parabolic/Hyperbolic Comet}
 \label{sec:ssystem.ini:Comet:Parabolic}
 
 \begin{configfile}
@@ -369,12 +372,12 @@ tex_map=nomap.png
 
 This has basically the same format. Note eccentricity is larger 1,
 this means the comet is running on a slightly hyperbolic
-orbit. Stellarium shows data for this comet for almost 3 years (1000
-days) from perihel.
+orbit. Stellarium shows data for this comet for almost 3 years
+(\texttt{orbit\_good=1000} days) from perihel.
 
 
 
-\section{Solar System Observer}
+\subsection{Solar System Observer}
 \label{sec:ssystem.ini:SolarSystemObserver}
 
 Stellarium is great for excursions to the surface of any object with

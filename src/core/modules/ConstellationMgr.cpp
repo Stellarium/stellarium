@@ -52,7 +52,7 @@ using namespace std;
 ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 	: hipStarMgr(_hip_stars),
 	  constellationDisplayStyle(ConstellationMgr::constellationsTranslated),
-	  artFadeDuration(1.),
+	  artFadeDuration(2.),
 	  artIntensity(0),
 	  artIntensityMinimumFov(1.0),
 	  artIntensityMaximumFov(2.0),
@@ -145,7 +145,7 @@ void ConstellationMgr::init()
 	addAction("actionShow_Constellation_Art", displayGroup, N_("Constellation art"), "artDisplayed", "R");
 	addAction("actionShow_Constellation_Labels", displayGroup, N_("Constellation labels"), "namesDisplayed", "V");
 	addAction("actionShow_Constellation_Boundaries", displayGroup, N_("Constellation boundaries"), "boundariesDisplayed", "B");
-	addAction("actionShow_Constellation_Isolated", displayGroup, N_("Constellation selection isolated"), "isolateSelected"); // no shortcut
+	addAction("actionShow_Constellation_Isolated", displayGroup, N_("Select single constellation"), "isolateSelected"); // no shortcut, sync with GUI
 }
 
 /*************************************************************************
@@ -195,24 +195,28 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 	updateI18n();
 
 	// load constellation boundaries
-	// First try loading constellation boundaries from sky culture. You may inhibit borders with an empty file.
-	fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellations_boundaries.dat");
-	bool existBoundaries = false;
-	if (fic.isEmpty())
+	StelApp *app = &StelApp::getInstance();
+	int idx = app->getSkyCultureMgr().getCurrentSkyCultureBoundariesIdx();
+	if (idx>=0)
 	{
-		qWarning() << "No separate constellation boundaries file in sky culture dir" << skyCultureDir << "- Using generic IAU boundaries.";
-		// OK, Second try load generic constellation boundaries
-		fic = StelFileMgr::findFile("data/constellations_boundaries.dat");
-		if (fic.isEmpty())
-			qWarning() << "ERROR loading main constellation boundaries file: " << fic;
+		// OK, the current sky culture has boundaries!
+		if (idx==1)
+		{
+			// boundaries = own
+			fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellations_boundaries.dat");
+		}
 		else
-			existBoundaries = true;
-	}
-	else
-		existBoundaries = true;
+		{
+			// boundaries = generic
+			fic = StelFileMgr::findFile("data/constellations_boundaries.dat");
+		}
 
-	if (existBoundaries)
-		loadBoundaries(fic);
+		if (fic.isEmpty())
+			qWarning() << "ERROR loading constellation boundaries file: " << fic;
+		else
+			loadBoundaries(fic);
+
+	}
 
 	lastLoadedSkyCulture = skyCultureDir;
 }
@@ -353,10 +357,9 @@ void ConstellationMgr::setConstellationDisplayStyle(ConstellationDisplayStyle st
 	}
 }
 
-QString ConstellationMgr::getConstellationDisplayStyleString()
+QString ConstellationMgr::getConstellationDisplayStyleString(ConstellationDisplayStyle style)
 {
-	ConstellationDisplayStyle displayStyle = getConstellationDisplayStyle();
-	return (displayStyle == constellationsAbbreviated ? "abbreviated" : (displayStyle == constellationsNative ? "native" : "translated"));
+	return (style == constellationsAbbreviated ? "abbreviated" : (style == constellationsNative ? "native" : "translated"));
 }
 
 ConstellationMgr::ConstellationDisplayStyle ConstellationMgr::getConstellationDisplayStyle()

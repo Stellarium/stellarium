@@ -131,7 +131,7 @@ void Supernovae::init()
 		// If no settings in the main config file, create with defaults
 		if (!conf->childGroups().contains("Supernovae"))
 		{
-			qDebug() << "Supernovae: no Supernovae section exists in main config file - creating with defaults";
+			qDebug() << "[Supernovae] no Supernovae section exists in main config file - creating with defaults";
 			restoreDefaultConfigIni();
 		}
 
@@ -170,11 +170,11 @@ void Supernovae::init()
 	}
 	else
 	{
-		qDebug() << "Supernovae: supernovae.json does not exist - copying default file to" << QDir::toNativeSeparators(sneJsonPath);
+		qDebug() << "[Supernovae] supernovae.json does not exist - copying default file to" << QDir::toNativeSeparators(sneJsonPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "Supernovae: loading catalog file:" << QDir::toNativeSeparators(sneJsonPath);
+	qDebug() << "[Supernovae] loading catalog file:" << QDir::toNativeSeparators(sneJsonPath);
 
 	readJsonFile();
 
@@ -312,11 +312,11 @@ void Supernovae::restoreDefaultJsonFile(void)
 	QFile src(":/Supernovae/supernovae.json");
 	if (!src.copy(sneJsonPath))
 	{
-		qWarning() << "Supernovae: cannot copy JSON resource to" + QDir::toNativeSeparators(sneJsonPath);
+		qWarning() << "[Supernovae] cannot copy JSON resource to" + QDir::toNativeSeparators(sneJsonPath);
 	}
 	else
 	{
-		qDebug() << "Supernovae: copied default supernovae.json to" << QDir::toNativeSeparators(sneJsonPath);
+		qDebug() << "[Supernovae] copied default supernovae.json to" << QDir::toNativeSeparators(sneJsonPath);
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(sneJsonPath);
@@ -338,7 +338,7 @@ bool Supernovae::backupJsonFile(bool deleteOriginal)
 	QFile old(sneJsonPath);
 	if (!old.exists())
 	{
-		qWarning() << "Supernovae: no file to backup";
+		qWarning() << "[Supernovae] no file to backup";
 		return false;
 	}
 
@@ -352,14 +352,14 @@ bool Supernovae::backupJsonFile(bool deleteOriginal)
 		{
 			if (!old.remove())
 			{
-				qWarning() << "Supernovae: WARNING - could not remove old supernovas.json file";
+				qWarning() << "[Supernovae] WARNING - could not remove old supernovas.json file";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "Supernovae: WARNING - failed to copy supernovae.json to supernovae.json.old";
+		qWarning() << "[Supernovae] WARNING - failed to copy supernovae.json to supernovae.json.old";
 		return false;
 	}
 
@@ -385,7 +385,7 @@ QVariantMap Supernovae::loadSNeMap(QString path)
 	QVariantMap map;
 	QFile jsonFile(path);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-		qWarning() << "Supernovae: cannot open" << QDir::toNativeSeparators(path);
+		qWarning() << "[Supernovae] cannot open" << QDir::toNativeSeparators(path);
 	else
 	{
 		map = StelJsonParser::parse(jsonFile.readAll()).toMap();
@@ -424,7 +424,7 @@ int Supernovae::getJsonFileVersion(void)
 	QFile sneJsonFile(sneJsonPath);
 	if (!sneJsonFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Supernovae: cannot open" << QDir::toNativeSeparators(sneJsonPath);
+		qWarning() << "[Supernovae] cannot open" << QDir::toNativeSeparators(sneJsonPath);
 		return jsonVersion;
 	}
 
@@ -436,7 +436,7 @@ int Supernovae::getJsonFileVersion(void)
 	}
 
 	sneJsonFile.close();
-	qDebug() << "Supernovae: version of the catalog:" << jsonVersion;
+	qDebug() << "[Supernovae] version of the catalog:" << jsonVersion;
 	return jsonVersion;
 }
 
@@ -445,7 +445,7 @@ bool Supernovae::checkJsonFileFormat()
 	QFile sneJsonFile(sneJsonPath);
 	if (!sneJsonFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Supernovae: cannot open " << QDir::toNativeSeparators(sneJsonPath);
+		qWarning() << "[Supernovae] cannot open " << QDir::toNativeSeparators(sneJsonPath);
 		return false;
 	}
 
@@ -457,7 +457,7 @@ bool Supernovae::checkJsonFileFormat()
 	}
 	catch (std::runtime_error& e)
 	{
-		qDebug() << "Supernovae: file format is wrong! Error:" << e.what();
+		qDebug() << "[Supernovae] file format is wrong! Error:" << e.what();
 		return false;
 	}
 
@@ -470,7 +470,7 @@ float Supernovae::getLowerLimitBrightness()
 	QFile sneJsonFile(sneJsonPath);
 	if (!sneJsonFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Supernovae: cannot open" << QDir::toNativeSeparators(sneJsonPath);
+		qWarning() << "[Supernovae] cannot open" << QDir::toNativeSeparators(sneJsonPath);
 		return lowerLimit;
 	}
 
@@ -562,12 +562,12 @@ void Supernovae::updateJSON(void)
 {
 	if (updateState==Supernovae::Updating)
 	{
-		qWarning() << "Supernovae: already updating...  will not start again current update is complete.";
+		qWarning() << "[Supernovae] already updating...  will not start again current update is complete.";
 		return;
 	}
 	else
 	{
-		qDebug() << "Supernovae: starting update...";
+		qDebug() << "[Supernovae] starting update...";
 	}
 
 	lastUpdate = QDateTime::currentDateTime();
@@ -598,7 +598,7 @@ void Supernovae::updateDownloadComplete(QNetworkReply* reply)
 	// check the download worked, and save the data to file if this is the case.
 	if (reply->error() != QNetworkReply::NoError)
 	{
-		qWarning() << "Supernovae: FAILED to download" << reply->url() << " Error: " << reply->errorString();
+		qWarning() << "[Supernovae] FAILED to download" << reply->url() << " Error: " << reply->errorString();
 	}
 	else
 	{
@@ -606,7 +606,7 @@ void Supernovae::updateDownloadComplete(QNetworkReply* reply)
 		QString jsonFilePath = StelFileMgr::findFile("modules/Supernovae", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/supernovae.json";
 		if (jsonFilePath.isEmpty())
 		{
-			qWarning() << "Supernovae: cannot write JSON data to file:" << QDir::toNativeSeparators(jsonFilePath);
+			qWarning() << "[Supernovae] cannot write JSON data to file:" << QDir::toNativeSeparators(jsonFilePath);
 			return;
 		}
 		QFile jsonFile(jsonFilePath);

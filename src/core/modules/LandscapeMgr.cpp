@@ -459,8 +459,9 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 
 	if (getFlagLandscapeSetsLocation() && landscape->hasLocation())
 	{
-		StelApp::getInstance().getCore()->moveObserverTo(landscape->getLocation(), changeLocationDuration);
-		StelSkyDrawer* drawer=StelApp::getInstance().getCore()->getSkyDrawer();
+		StelCore *core = StelApp::getInstance().getCore();
+		core->moveObserverTo(landscape->getLocation(), changeLocationDuration);
+		StelSkyDrawer* drawer=core->getSkyDrawer();
 
 		if (landscape->getDefaultFogSetting() >-1)
 		{
@@ -471,19 +472,19 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 		{
 			drawer->setBortleScaleIndex(landscape->getDefaultBortleIndex());
 		}
-		if (landscape->getDefaultAtmosphericExtinction() >= 0.0)
+		if (landscape->getDefaultAtmosphericExtinction() >= 0.0f)
 		{
 			drawer->setExtinctionCoefficient(landscape->getDefaultAtmosphericExtinction());
 		}
-		if (landscape->getDefaultAtmosphericTemperature() > -273.15)
+		if (landscape->getDefaultAtmosphericTemperature() > -273.15f)
 		{
 			drawer->setAtmosphereTemperature(landscape->getDefaultAtmosphericTemperature());
 		}
-		if (landscape->getDefaultAtmosphericPressure() >= 0.0)
+		if (landscape->getDefaultAtmosphericPressure() >= 0.0f)
 		{
 			drawer->setAtmospherePressure(landscape->getDefaultAtmosphericPressure());
 		}
-		else if (landscape->getDefaultAtmosphericPressure() == -1.0)
+		else if (landscape->getDefaultAtmosphericPressure() == -1.0f)
 		{
 			// compute standard pressure for standard atmosphere in given altitude if landscape.ini coded as atmospheric_pressure=-1
 			// International altitude formula found in Wikipedia.
@@ -745,7 +746,11 @@ bool LandscapeMgr::getFlagCardinalsPoints() const
 //! Set Cardinals Points color
 void LandscapeMgr::setColorCardinalPoints(const Vec3f& v)
 {
-	cardinalsPoints->setColor(v);
+	if(v != getColorCardinalPoints())
+	{
+		cardinalsPoints->setColor(v);
+		emit cardinalsPointsColorChanged(v);
+	}
 }
 
 //! Get Cardinals Points color

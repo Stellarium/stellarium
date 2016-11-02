@@ -20,8 +20,8 @@ ENDIF()
 PROJECT(Stellarium)
 # Use integer versions instead of strings for easier handling if required
 SET(STELLARIUM_MAJOR 0)
-SET(STELLARIUM_MINOR 14)
-SET(STELLARIUM_PATCH 90)
+SET(STELLARIUM_MINOR 90)
+SET(STELLARIUM_PATCH 0)
 ADD_DEFINITIONS(
 -DSTELLARIUM_MAJOR=${STELLARIUM_MAJOR}
 -DSTELLARIUM_MINOR=${STELLARIUM_MINOR}
@@ -206,6 +206,15 @@ ELSE()
      SET(GENERATE_STELMAINLIB 0)
 ENDIF()
 
+########### User Guide ###############
+IF(EXISTS "${CMAKE_SOURCE_DIR}/guide/guide.pdf")
+     MESSAGE(STATUS "Found Stellarium User Guide")
+     INSTALL(FILES guide/guide.pdf DESTINATION share/${PACKAGE}/guide)
+     SET(ISS_GUIDE "Name: \"{group}\\{cm:UserGuide}\"; Filename: \"{app}\\guide\\guide.pdf\"")
+ELSE()
+     SET(ISS_GUIDE "; No link to Stellarium User Guide")
+ENDIF()
+
 ########### Plugin setup #############
 
 SET(STELLARIUM_PLUGINS) # Global list of all the plugins.
@@ -235,7 +244,9 @@ ADD_PLUGIN(PointerCoordinates 1)
 ADD_PLUGIN(Pulsars 1)
 ADD_PLUGIN(Quasars 1)
 # SOCIS 2015:
-ADD_PLUGIN(RemoteControl 1)
+IF(ENABLE_SCRIPTING)
+     ADD_PLUGIN(RemoteControl 1)
+ENDIF()
 ADD_PLUGIN(RemoteSync 0)
 ADD_PLUGIN(Satellites 1)
 ADD_PLUGIN(Scenery3d 1)
@@ -243,7 +254,6 @@ ADD_PLUGIN(SolarSystemEditor 1)
 ADD_PLUGIN(Supernovae 1)
 ADD_PLUGIN(TextUserInterface 1)
 ADD_PLUGIN(TelescopeControl 1)
-ADD_PLUGIN(TimeZoneConfiguration 1)
 
 ########## Static plugins need to define includes and libraries
 ########## for the compilation of Stellarium itself
@@ -325,6 +335,12 @@ ELSE()
     ADD_DEFINITIONS(-DINSTALL_DATADIR=".")
     ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="./locale")
 ENDIF()
+# For not installed debug builds with build directory path that not match sources directory path ${PROJECT_BINARY_DIR} != ${CMAKE_SOURCE_DIR}
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    ADD_DEFINITIONS(-DINSTALL_DATADIR_FOR_DEBUG="${CMAKE_SOURCE_DIR}")
+    ADD_DEFINITIONS(-DINSTALL_LOCALEDIR_FOR_DEBUG="${CMAKE_SOURCE_DIR}")
+endif()
+
 
 ########### Get revision number for non-release builds ###########
 IF(NOT STELLARIUM_RELEASE_BUILD)
@@ -510,7 +526,7 @@ IF(GENERATE_PACKAGE_TARGET)
     SET(CPACK_GENERATOR "TGZ")
     SET(CPACK_STRIP_FILES "bin/stellarium")
     SET(CPACK_PACKAGE_EXECUTABLES "stellarium" "Stellarium")
-    SET(CPACK_SOURCE_IGNORE_FILES "/CVS/" "/.svn/" "/.git/" "/.bzr/" "builds/" "installers/" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "/CMakeLists.txt.user$" "\\\\.bzrignore$" "\\\\.yml$" "~$" "\\\\.swp$" "\\\\.#" "/#")
+    SET(CPACK_SOURCE_IGNORE_FILES "/CVS/" "/.svn/" "/.git/" "/.bzr/" "guide/" "builds/" "installers/" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "/CMakeLists.txt.user$" "\\\\.bzrignore$" "\\\\.yml$" "~$" "\\\\.swp$" "\\\\.#" "/#")
     SET(CPACK_RPM_PACKAGE_LICENSE "GPLv2+")
     SET(CPACK_RPM_PACKAGE_GROUP "Amusements/Graphics")
     SET(CPACK_RPM_PACKAGE_URL "http://stellarium.org/")
