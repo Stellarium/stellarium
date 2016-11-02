@@ -54,8 +54,6 @@ StelLocaleMgr::StelLocaleMgr()
 		in >> countryCodeToStringMap;
 		file.close();
 	}
-
-	core = StelApp::getInstance().getCore();
 }
 
 
@@ -109,6 +107,8 @@ void StelLocaleMgr::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
+
+	core = StelApp::getInstance().getCore();
 
 	if (conf->value("devel/convert_countries_list", false).toBool())
 		generateCountryList();
