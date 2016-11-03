@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-01 18:32+0700\n"
-"PO-Revision-Date: 2016-10-31 22:03+0000\n"
-"Last-Translator: 375gnu <Unknown>\n"
+"PO-Revision-Date: 2016-11-02 20:09+0000\n"
+"Last-Translator: Vikrar Malyshchyts <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-02 05:22+0000\n"
+"X-Launchpad-Export-Date: 2016-11-03 05:22+0000\n"
 "X-Generator: Launchpad (build 18246)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -95,11 +95,11 @@ msgstr "Мэрыдыян"
 
 #: src/core/modules/GridLinesMgr.cpp:649
 msgid "Ecliptic of J2000.0"
-msgstr "Экліптычная J2000.0"
+msgstr "Экліптыка J2000.0"
 
 #: src/core/modules/GridLinesMgr.cpp:653
 msgid "Ecliptic of Date"
-msgstr "Экліптычная даты"
+msgstr "Экліптыка на дату"
 
 #: src/core/modules/GridLinesMgr.cpp:657
 msgid "Equator of J2000.0"
@@ -145,7 +145,7 @@ msgstr "Калюр сонцастаяньня"
 
 #: src/core/modules/GridLinesMgr.cpp:700
 msgid "Circumpolar Circle"
-msgstr "Каляпалярная акружына"
+msgstr "Каляпалярная акружнасць"
 
 #. TRANSLATORS: North Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:917 src/core/modules/GridLinesMgr.cpp:926
@@ -443,7 +443,7 @@ msgstr "Адлегласьць: %1 с.г."
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
 #: src/core/modules/Nebula.cpp:278
 msgid "kpc"
-msgstr "кпарс"
+msgstr "кпк"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:280
@@ -453,17 +453,17 @@ msgstr "сьв.г."
 #. TRANSLATORS: Unit of measure for distance - Megaparsecs
 #: src/core/modules/Nebula.cpp:287
 msgid "Mpc"
-msgstr "Мпарс"
+msgstr "Мпк"
 
 #. TRANSLATORS: Unit of measure for distance - Millions of Light Years
 #: src/core/modules/Nebula.cpp:289
 msgid "Mio. ly"
-msgstr ""
+msgstr "Млн. св. г."
 
 #: src/core/modules/Nebula.cpp:303
 #, qt-format
 msgid "Distance: %1 %2 (%3 %4)"
-msgstr ""
+msgstr "Адлегласьць: %1 %2 (%3 %4)"
 
 #: src/core/modules/Nebula.cpp:317
 #, qt-format
