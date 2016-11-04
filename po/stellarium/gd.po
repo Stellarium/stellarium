@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-11-01 18:32+0700\n"
-"PO-Revision-Date: 2016-09-29 12:09+0000\n"
+"PO-Revision-Date: 2016-11-03 21:12+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-02 05:27+0000\n"
+"X-Launchpad-Export-Date: 2016-11-04 05:21+0000\n"
 "X-Generator: Launchpad (build 18246)\n"
 "Language: gd\n"
 
@@ -32,15 +32,15 @@ msgstr "Seòrsa: <b>%1</b>"
 
 #: src/core/modules/CustomObject.cpp:67
 msgid "custom marker"
-msgstr ""
+msgstr "comharra gnàthaichte"
 
 #: src/core/modules/CustomObject.cpp:69
 msgid "custom object"
-msgstr ""
+msgstr "cuspair gnàthaichte"
 
 #: src/core/modules/CustomObjectMgr.cpp:81
 msgid "Marker"
-msgstr ""
+msgstr "Comharra"
 
 #: src/core/modules/Constellation.cpp:296
 msgid "constellation"
@@ -122,7 +122,7 @@ msgstr "An crios-meadhain reul-chriosach"
 
 #: src/core/modules/GridLinesMgr.cpp:678
 msgid "Supergalactic Equator"
-msgstr ""
+msgstr "An crios-meadhain os-reul-chriosach"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:683 src/ui_viewDialog.h:2074
@@ -149,54 +149,54 @@ msgstr "Cearcall pòlarach"
 #. TRANSLATORS: North Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:917 src/core/modules/GridLinesMgr.cpp:926
 msgid "NCP"
-msgstr ""
+msgstr "Pòla a tuath speurach"
 
 #. TRANSLATORS: South Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:919 src/core/modules/GridLinesMgr.cpp:928
 msgid "SCP"
-msgstr ""
+msgstr "Pòla a deas speurach"
 
 #. TRANSLATORS: Zenith
 #: src/core/modules/GridLinesMgr.cpp:935
 msgctxt "zenith"
 msgid "Z"
-msgstr ""
+msgstr "Barr"
 
 #. TRANSLATORS: Nadir
 #: src/core/modules/GridLinesMgr.cpp:937
 msgctxt "nadir"
 msgid "Z'"
-msgstr ""
+msgstr "Nèidir"
 
 #. TRANSLATORS: North Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:944 src/core/modules/GridLinesMgr.cpp:953
 msgid "NEP"
-msgstr ""
+msgstr "Pòla a tuath èiclipteach"
 
 #. TRANSLATORS: South Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:946 src/core/modules/GridLinesMgr.cpp:955
 msgid "SEP"
-msgstr ""
+msgstr "Pòla a deas èiclipteach"
 
 #. TRANSLATORS: North Galactic Pole
 #: src/core/modules/GridLinesMgr.cpp:962
 msgid "NGP"
-msgstr ""
+msgstr "Pòla a tuath reul-chriosach"
 
 #. TRANSLATORS: South Galactic Pole
 #: src/core/modules/GridLinesMgr.cpp:964
 msgid "SGP"
-msgstr ""
+msgstr "Pòla a deas reul-chriosach"
 
 #. TRANSLATORS: North Supergalactic Pole
 #: src/core/modules/GridLinesMgr.cpp:971
 msgid "NSGP"
-msgstr ""
+msgstr "Pòla a tuath os-reul-chriosach"
 
 #. TRANSLATORS: South Supergalactic Pole
 #: src/core/modules/GridLinesMgr.cpp:973
 msgid "SSGP"
-msgstr ""
+msgstr "Pòla a deas os-reul-chriosach"
 
 #: src/core/modules/GridLinesMgr.cpp:1215
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:339
@@ -260,11 +260,11 @@ msgstr "An crios-meadhain reul-chriosach"
 
 #: src/core/modules/GridLinesMgr.cpp:1228 src/ui_viewDialog.h:2170
 msgid "Supergalactic grid"
-msgstr ""
+msgstr "Grioda os-reul-chriosach"
 
 #: src/core/modules/GridLinesMgr.cpp:1229 src/ui_viewDialog.h:2063
 msgid "Supergalactic equator"
-msgstr ""
+msgstr "An crios-meadhain os-reul-chriosach"
 
 #: src/core/modules/GridLinesMgr.cpp:1230
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:405
@@ -285,39 +285,39 @@ msgstr "Cearcaill phòlarach"
 
 #: src/core/modules/GridLinesMgr.cpp:1235
 msgid "Celestial J2000 poles"
-msgstr ""
+msgstr "Pòlaichean speurach J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1236
 msgid "Celestial poles"
-msgstr ""
+msgstr "Pòlaichean speurach"
 
 #: src/core/modules/GridLinesMgr.cpp:1237
 msgid "Zenith and nadir"
-msgstr ""
+msgstr "Barr is nèidir"
 
 #: src/core/modules/GridLinesMgr.cpp:1238
 msgid "Ecliptic J2000 poles"
-msgstr ""
+msgstr "Pòlaichean èiclipteach J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1239
 msgid "Ecliptic poles"
-msgstr ""
+msgstr "Pòlaichean èiclipteach"
 
 #: src/core/modules/GridLinesMgr.cpp:1240 src/ui_viewDialog.h:2124
 msgid "Galactic poles"
-msgstr ""
+msgstr "Pòlaichean reul-chriosach"
 
 #: src/core/modules/GridLinesMgr.cpp:1241 src/ui_viewDialog.h:2085
 msgid "Supergalactic poles"
-msgstr ""
+msgstr "Pòlaichean os-reul-chriosach"
 
 #: src/core/modules/GridLinesMgr.cpp:1242
 msgid "Equinox J2000 points"
-msgstr ""
+msgstr "Puingean co-fhaid-thràth J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1243
 msgid "Equinox points"
-msgstr ""
+msgstr "Puingean co-fhaid-thràth"
 
 #: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1896
 msgid "Atmosphere"
@@ -458,12 +458,12 @@ msgstr "Mpc"
 #. TRANSLATORS: Unit of measure for distance - Millions of Light Years
 #: src/core/modules/Nebula.cpp:289
 msgid "Mio. ly"
-msgstr ""
+msgstr "Mill. ly"
 
 #: src/core/modules/Nebula.cpp:303
 #, qt-format
 msgid "Distance: %1 %2 (%3 %4)"
-msgstr ""
+msgstr "Astar: %1 %2 (%3 %4)"
 
 #: src/core/modules/Nebula.cpp:317
 #, qt-format
@@ -1884,7 +1884,7 @@ msgstr "Domhan-fhad/domhan-leud reul-chriosach: %1/%2"
 #: src/core/StelObject.cpp:256 src/core/StelObject.cpp:258
 #, qt-format
 msgid "Supergalactic longitude/latitude: %1/%2"
-msgstr ""
+msgstr "Domhan-fhad/domhan-leud os-reul-chriosach: %1/%2"
 
 #: src/core/StelObject.cpp:267
 #, qt-format
@@ -1947,11 +1947,11 @@ msgstr "Coimhead dhan bharr"
 
 #: src/core/StelMovementMgr.cpp:167
 msgid "Look towards North Celestial pole"
-msgstr ""
+msgstr "Seall an coinneamh a’ phòla a tuath speuraich"
 
 #: src/core/StelMovementMgr.cpp:168
 msgid "Look towards South Celestial pole"
-msgstr ""
+msgstr "Seall an coinneamh a’ phòla a deas speuraich"
 
 #: src/core/SimbadSearcher.cpp:78
 msgid "Network error"
@@ -2300,19 +2300,19 @@ msgstr "CTRL + Briogadh clì"
 
 #: src/gui/HelpDialog.cpp:173
 msgid "Add custom marker"
-msgstr ""
+msgstr "Cuir comharra gnàthaichte ris"
 
 #: src/gui/HelpDialog.cpp:174
 msgid "Shift + Left click"
-msgstr ""
+msgstr "Shift + Briogadh clì"
 
 #: src/gui/HelpDialog.cpp:176
 msgid "Delete all custom markers"
-msgstr ""
+msgstr "Sguab às gach comharra gnàthaichte"
 
 #: src/gui/HelpDialog.cpp:177
 msgid "Shift + Right click"
-msgstr ""
+msgstr "Shift + Briogadh deas"
 
 #: src/gui/HelpDialog.cpp:180
 #, qt-format
@@ -2326,11 +2326,11 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:209
 msgid "Text User Interface (TUI)"
-msgstr ""
+msgstr "Eadar-aghaidh teacsa (TUI)"
 
 #: src/gui/HelpDialog.cpp:211
 msgid "Activate TUI"
-msgstr ""
+msgstr "Gnìomhaich an TUI"
 
 #: src/gui/HelpDialog.cpp:220
 msgid ""
@@ -2557,11 +2557,11 @@ msgstr "Roinn-tìde"
 
 #: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:403
 msgid "Local Mean Solar Time"
-msgstr ""
+msgstr "Àm grianail meadhain ionadail"
 
 #: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:404
 msgid "Local True Solar Time"
-msgstr ""
+msgstr "Fìor-àm grianail ionadail"
 
 #: src/gui/StelGuiItems.cpp:679
 #, c-format, qt-format
@@ -2815,7 +2815,7 @@ msgstr "Reul-chriosach"
 #: src/gui/SearchDialog.cpp:216
 msgctxt "coordinate system"
 msgid "Supergalactic"
-msgstr ""
+msgstr "Os-reul-chriosach"
 
 #: src/gui/SearchDialog.cpp:217
 msgctxt "coordinate system"
@@ -3251,7 +3251,7 @@ msgstr "Reul-bhadan"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:86
 msgid "Custom Objects"
-msgstr ""
+msgstr "Cuspairean gnàthaichte"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:91
@@ -4100,7 +4100,7 @@ msgstr "Sguir dheth"
 
 #: src/translations.h:369
 msgid "&Cancel"
-msgstr ""
+msgstr "&Sguir dheth"
 
 #: src/translations.h:370
 msgid "Files of type:"
@@ -4229,7 +4229,7 @@ msgstr "An Argantain"
 
 #: src/translations_countries.h:41
 msgid "Samoa (American)"
-msgstr ""
+msgstr "Samotha na h-Aimeireaga"
 
 #: src/translations_countries.h:42
 msgid "Austria"
@@ -4245,7 +4245,7 @@ msgstr "Arùba"
 
 #: src/translations_countries.h:45
 msgid "Åland Islands"
-msgstr ""
+msgstr "Na h-Eileanan Åland"
 
 #: src/translations_countries.h:46
 msgid "Azerbaijan"
@@ -4253,7 +4253,7 @@ msgstr "Asarbaideàn"
 
 #: src/translations_countries.h:47
 msgid "Bosnia and Herzegovina"
-msgstr ""
+msgstr "Bosna agus Hearsagobhana"
 
 #: src/translations_countries.h:48
 msgid "Barbados"
@@ -4289,7 +4289,7 @@ msgstr "Beinin"
 
 #: src/translations_countries.h:56
 msgid "St Barthelemy"
-msgstr ""
+msgstr "Saint Barthélemy"
 
 #: src/translations_countries.h:57
 msgid "Bermuda"
@@ -4297,7 +4297,7 @@ msgstr "Bearmùda"
 
 #: src/translations_countries.h:58
 msgid "Brunei"
-msgstr ""
+msgstr "Brùnaigh"
 
 #: src/translations_countries.h:59
 msgid "Bolivia"
@@ -4305,7 +4305,7 @@ msgstr "Boilibhia"
 
 #: src/translations_countries.h:60
 msgid "Caribbean NL"
-msgstr ""
+msgstr "Eileanan Caraibeach nan Tìrean Ìsle"
 
 #: src/translations_countries.h:61
 msgid "Brazil"
@@ -4341,19 +4341,19 @@ msgstr "Canada"
 
 #: src/translations_countries.h:69
 msgid "Cocos (Keeling) Islands"
-msgstr ""
+msgstr "Na h-Eileanan Cocos (Keeling)"
 
 #: src/translations_countries.h:70
 msgid "Congo (Dem. Rep.)"
-msgstr ""
+msgstr "Poblachd Dheamocratach na Congo"
 
 #: src/translations_countries.h:71
 msgid "Central African Rep."
-msgstr ""
+msgstr "Poblachd Meadhan Afraga"
 
 #: src/translations_countries.h:72
 msgid "Congo (Rep.)"
-msgstr ""
+msgstr "Poblachd na Congo"
 
 #: src/translations_countries.h:73
 msgid "Switzerland"
@@ -4361,7 +4361,7 @@ msgstr "An Eilbheis"
 
 #: src/translations_countries.h:74
 msgid "Côte d'Ivoire"
-msgstr ""
+msgstr "An Costa Ìbhri"
 
 #: src/translations_countries.h:75
 msgid "Cook Islands"
@@ -4397,7 +4397,7 @@ msgstr "An Ceap Uaine"
 
 #: src/translations_countries.h:83
 msgid "Curacao"
-msgstr ""
+msgstr "Curaçao"
 
 #: src/translations_countries.h:84
 msgid "Christmas Island"
@@ -4493,7 +4493,7 @@ msgstr "Gabon"
 
 #: src/translations_countries.h:107
 msgid "Britain (UK)"
-msgstr ""
+msgstr "Breatann (RA)"
 
 #: src/translations_countries.h:108
 msgid "Grenada"
@@ -4509,7 +4509,7 @@ msgstr "Guidheàna na Frainge"
 
 #: src/translations_countries.h:111
 msgid "Guernsey"
-msgstr ""
+msgstr "Geàrnsaidh"
 
 #: src/translations_countries.h:112
 msgid "Ghana"
@@ -4601,7 +4601,7 @@ msgstr "Iosrael"
 
 #: src/translations_countries.h:134
 msgid "Isle of Man"
-msgstr ""
+msgstr "Eilean Mhanainn"
 
 #: src/translations_countries.h:135
 msgid "India"
@@ -4629,7 +4629,7 @@ msgstr "An Eadailt"
 
 #: src/translations_countries.h:141
 msgid "Jersey"
-msgstr ""
+msgstr "Deàrsaidh"
 
 #: src/translations_countries.h:142
 msgid "Jamaica"
@@ -4665,15 +4665,15 @@ msgstr "Comoros"
 
 #: src/translations_countries.h:150
 msgid "St Kitts and Nevis"
-msgstr ""
+msgstr "Naomh Crìstean agus Nibheis"
 
 #: src/translations_countries.h:151
 msgid "Korea (North)"
-msgstr ""
+msgstr "Coirèa a Tuath"
 
 #: src/translations_countries.h:152
 msgid "Korea (South)"
-msgstr ""
+msgstr "Coirèa a Deas"
 
 #: src/translations_countries.h:153
 msgid "Kuwait"
@@ -4689,7 +4689,7 @@ msgstr "Casachstàn"
 
 #: src/translations_countries.h:156
 msgid "Laos"
-msgstr ""
+msgstr "Làthos"
 
 #: src/translations_countries.h:157
 msgid "Lebanon"
@@ -4697,7 +4697,7 @@ msgstr "Leabanon"
 
 #: src/translations_countries.h:158
 msgid "St Lucia"
-msgstr ""
+msgstr "Naomh Lùisea"
 
 #: src/translations_countries.h:159
 msgid "Liechtenstein"
@@ -4729,7 +4729,7 @@ msgstr "An Laitbhe"
 
 #: src/translations_countries.h:166
 msgid "Libya"
-msgstr ""
+msgstr "Libia"
 
 #: src/translations_countries.h:167
 msgid "Morocco"
@@ -4749,7 +4749,7 @@ msgstr "Am Monadh Neagrach"
 
 #: src/translations_countries.h:171
 msgid "St Martin (French)"
-msgstr ""
+msgstr "Naomh Màrtainn (pàirt na Frainge)"
 
 #: src/translations_countries.h:172
 msgid "Madagascar"
@@ -4769,7 +4769,7 @@ msgstr "Màili"
 
 #: src/translations_countries.h:176
 msgid "Myanmar (Burma)"
-msgstr ""
+msgstr "Miànmar (Burma)"
 
 #: src/translations_countries.h:177
 msgid "Mongolia"
@@ -4905,7 +4905,7 @@ msgstr "A’ Phòlainn"
 
 #: src/translations_countries.h:210
 msgid "St Pierre and Miquelon"
-msgstr ""
+msgstr "St. Pierre agus Miquelon"
 
 #: src/translations_countries.h:211
 msgid "Pitcairn"
@@ -4917,7 +4917,7 @@ msgstr "Porto Rìceo"
 
 #: src/translations_countries.h:213
 msgid "Palestine"
-msgstr ""
+msgstr "Palastain"
 
 #: src/translations_countries.h:214
 msgid "Portugal"
@@ -4949,7 +4949,7 @@ msgstr "An t-Sèirb"
 
 #: src/translations_countries.h:221
 msgid "Russia"
-msgstr ""
+msgstr "An Ruis"
 
 #: src/translations_countries.h:222
 msgid "Rwanda"
@@ -4981,7 +4981,7 @@ msgstr "Singeapòr"
 
 #: src/translations_countries.h:229
 msgid "St Helena"
-msgstr ""
+msgstr "Eilean Naomh Eilidh"
 
 #: src/translations_countries.h:230
 msgid "Slovenia"
@@ -5017,7 +5017,7 @@ msgstr "Suranam"
 
 #: src/translations_countries.h:238
 msgid "South Sudan"
-msgstr ""
+msgstr "Sudàn a Deas"
 
 #: src/translations_countries.h:239
 msgid "Sao Tome and Principe"
@@ -5029,11 +5029,11 @@ msgstr "An Salbhador"
 
 #: src/translations_countries.h:241
 msgid "St Maarten (Dutch)"
-msgstr ""
+msgstr "Sint Maarten (pàirt nan Tìrean Ìsle)"
 
 #: src/translations_countries.h:242
 msgid "Syria"
-msgstr ""
+msgstr "Siria"
 
 #: src/translations_countries.h:243
 msgid "Swaziland"
@@ -5041,7 +5041,7 @@ msgstr "Dùthaich nan Suasaidh"
 
 #: src/translations_countries.h:244
 msgid "Turks and Caicos Is"
-msgstr ""
+msgstr "Na h-Eileanan Turcach is Caiceo"
 
 #: src/translations_countries.h:245
 msgid "Chad"
@@ -5049,7 +5049,7 @@ msgstr "An t-Seàd"
 
 #: src/translations_countries.h:246
 msgid "French Southern and Antarctic Lands"
-msgstr ""
+msgstr "Talmhan Deasach is Antartaigeach na Frainge"
 
 #: src/translations_countries.h:247
 msgid "Togo"
@@ -5113,7 +5113,7 @@ msgstr "Uganda"
 
 #: src/translations_countries.h:262
 msgid "US minor outlying islands"
-msgstr ""
+msgstr "Meanbh-Eileanan Iomallach nan Stàitean Aonaichte"
 
 #: src/translations_countries.h:263
 msgid "United States"
@@ -5129,11 +5129,11 @@ msgstr "Usbagastan"
 
 #: src/translations_countries.h:266
 msgid "Vatican City"
-msgstr ""
+msgstr "Cathair na Bhatacain"
 
 #: src/translations_countries.h:267
 msgid "St Vincent"
-msgstr ""
+msgstr "Naomh Bhionsant"
 
 #: src/translations_countries.h:268
 msgid "Venezuela"
@@ -5141,15 +5141,15 @@ msgstr "A’ Bheiniseala"
 
 #: src/translations_countries.h:269
 msgid "Virgin Islands (UK)"
-msgstr ""
+msgstr "Eileanan Breatannach na Maighdinn"
 
 #: src/translations_countries.h:270
 msgid "Virgin Islands (US)"
-msgstr ""
+msgstr "Eileanan na Maighdinn aig na Stàitean Aonaichte"
 
 #: src/translations_countries.h:271
 msgid "Vietnam"
-msgstr ""
+msgstr "Bhiet-Nam"
 
 #: src/translations_countries.h:272
 msgid "Vanuatu"
@@ -5161,7 +5161,7 @@ msgstr "Uallas agus Futuna"
 
 #: src/translations_countries.h:274
 msgid "Samoa (western)"
-msgstr ""
+msgstr "Samotha an Iar"
 
 #: src/translations_countries.h:275
 msgid "Yemen"
@@ -5244,7 +5244,7 @@ msgstr "Cuir ris an liosta"
 
 #: src/ui_locationDialogGui.h:450
 msgid "Delete from list"
-msgstr ""
+msgstr "Thoir air falbh on liosta"
 
 #: src/ui_locationDialogGui.h:451
 msgid "Return to default location"
@@ -5299,11 +5299,11 @@ msgstr "Planaid:"
 
 #: src/ui_locationDialogGui.h:469
 msgid "Use custom time zone"
-msgstr ""
+msgstr "Cleachd roinn-tìde ghnàthaichte"
 
 #: src/ui_locationDialogGui.h:470
 msgid "Time zone:"
-msgstr ""
+msgstr "Roinn-tìde:"
 
 #: src/ui_locationDialogGui.h:471
 msgid "Name/City:"
@@ -5315,7 +5315,7 @@ msgstr "Dùthaich:"
 
 #: src/ui_locationDialogGui.h:476
 msgid "Enable daylight saving time"
-msgstr ""
+msgstr "Cuir an tìde samhraidh an comas"
 
 #: src/ui_searchDialogGui.h:617
 msgid "Find Object"
@@ -5466,7 +5466,7 @@ msgstr "Cleachd stòr-dàta reul-eòlais air loidhne SIMBAD"
 
 #: src/ui_searchDialogGui.h:717
 msgid "Use SIMBAD"
-msgstr ""
+msgstr "Cleachd SIMBAD"
 
 #: src/ui_searchDialogGui.h:718
 msgid "Server:"
@@ -5832,7 +5832,7 @@ msgstr "Seall loidhne a’ chriosa-mheadhain reul-chriosaich."
 
 #: src/ui_viewDialog.h:2045
 msgid "Color of supergalactic equator"
-msgstr ""
+msgstr "Dath a’ chriosa-mheadhain os-reul-chriosaich"
 
 #: src/ui_viewDialog.h:2048
 msgid "Color of ecliptic (of date)"
@@ -5891,7 +5891,7 @@ msgstr "Dath nan coluran"
 
 #: src/ui_viewDialog.h:2087
 msgid "Color of the ecliptic poles (J2000.0)"
-msgstr ""
+msgstr "Dath nam pòla èiclipteach (J2000.0)"
 
 #: src/ui_viewDialog.h:2090
 msgid "Color of Prime Vertical"
@@ -5899,43 +5899,43 @@ msgstr "Dath a’ phrìomh-chearcaill inghearaich"
 
 #: src/ui_viewDialog.h:2093
 msgid "Show ecliptic poles of J2000.0"
-msgstr ""
+msgstr "Seall na pòlaichean èiclipteach aig J2000.0"
 
 #: src/ui_viewDialog.h:2095
 msgid "Ecliptic poles (J2000)"
-msgstr ""
+msgstr "Pòlaichean èiclipteach (J2000)"
 
 #: src/ui_viewDialog.h:2097
 msgid "Color of the celestial poles (J2000.0)"
-msgstr ""
+msgstr "Dath nam pòla speurach (J2000.0)"
 
 #: src/ui_viewDialog.h:2100
 msgid "Show celestial poles of current planet and date."
-msgstr ""
+msgstr "Seall na pòlaichean speurach aig a’ phlanaid is ceann-là làithreach."
 
 #: src/ui_viewDialog.h:2102
 msgid "Celestial poles (of date)"
-msgstr ""
+msgstr "Pòlaichean speurach (an-diugh)"
 
 #: src/ui_viewDialog.h:2104
 msgid "Color of ecliptic poles (of date)"
-msgstr ""
+msgstr "Dath nam pòla èiclipteach (an-diugh)"
 
 #: src/ui_viewDialog.h:2107
 msgid "Color of celestial poles (of date)"
-msgstr ""
+msgstr "Dath nam pòla speurach (an-diugh)"
 
 #: src/ui_viewDialog.h:2110
 msgid "Color of supergalactic poles"
-msgstr ""
+msgstr "Dath nam pòla os-reul-chriosach"
 
 #: src/ui_viewDialog.h:2113
 msgid "Show ecliptic poles of current date."
-msgstr ""
+msgstr "Seall na pòlaichean èiclipteach airson an-diugh."
 
 #: src/ui_viewDialog.h:2115
 msgid "Ecliptic poles (of date)"
-msgstr ""
+msgstr "Pòlaichean èiclipteach (an-diugh)"
 
 #: src/ui_viewDialog.h:2117
 msgid "Show Prime (East-West) Vertical."
@@ -5943,23 +5943,23 @@ msgstr "Seall a’ phrìomh-inghearach (ear-iar)."
 
 #: src/ui_viewDialog.h:2121
 msgid "Color of galactic poles"
-msgstr ""
+msgstr "Dath nam pòla reul-chriosach"
 
 #: src/ui_viewDialog.h:2123
 msgid "Zenith and Nadir"
-msgstr ""
+msgstr "Barr is nèidir"
 
 #: src/ui_viewDialog.h:2126
 msgid "Color of Zenith and Nadir"
-msgstr ""
+msgstr "Dath a’ bharra is an nèidir"
 
 #: src/ui_viewDialog.h:2129
 msgid "Show celestial poles of J2000.0."
-msgstr ""
+msgstr "Seall na pòlaichean speurach aig J2000.0."
 
 #: src/ui_viewDialog.h:2131
 msgid "Celestial poles (J2000)"
-msgstr ""
+msgstr "Pòlaichean speurach (J2000)"
 
 #: src/ui_viewDialog.h:2133
 msgid ""
@@ -6012,7 +6012,7 @@ msgstr "Dath a’ ghrioda mheadhan-chriosaich (J2000.0)"
 
 #: src/ui_viewDialog.h:2158
 msgid "Color of the equinox points (J2000.0)"
-msgstr ""
+msgstr "Dath nam puingean co-fhaid-thràth (J2000.0)"
 
 #: src/ui_viewDialog.h:2161
 msgid "Ecliptical coordinates for J2000.0."
@@ -6024,7 +6024,7 @@ msgstr "Griod èiclipteach (J2000)"
 
 #: src/ui_viewDialog.h:2165
 msgid "Color of the supergalactic grid"
-msgstr ""
+msgstr "Dath a’ ghrioda os-reul-chriosaich"
 
 #: src/ui_viewDialog.h:2168
 msgid "Color of the galactic grid"
@@ -6048,7 +6048,7 @@ msgstr "Co-chomharran reul-chriosach, Siostam II (IAU 1958)."
 
 #: src/ui_viewDialog.h:2182
 msgid "Equinoxes (J2000)"
-msgstr ""
+msgstr "Co-fhadan-tràth (J2000)"
 
 #: src/ui_viewDialog.h:2184
 msgid "Color of the ecliptical grid (of date)"
@@ -6072,11 +6072,11 @@ msgstr "Griod meadhan-chriosach (an-diugh)"
 
 #: src/ui_viewDialog.h:2196
 msgid "Equinoxes (of date)"
-msgstr ""
+msgstr "Co-fhadan-tràth (an-diugh)"
 
 #: src/ui_viewDialog.h:2198
 msgid "Color of the equinox points (of date)"
-msgstr ""
+msgstr "Dath nam puingean co-fhaid-thràth (an-diugh)"
 
 #: src/ui_viewDialog.h:2201
 msgid "Labels for the Cardinal directions."
@@ -6545,7 +6545,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1285
 msgid "Display formats of date and time"
-msgstr ""
+msgstr "Fòrmatan taisbeanaidh a’ chinn-latha ’s an ama"
 
 #: src/ui_configurationDialog.h:1286
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
@@ -6554,7 +6554,7 @@ msgstr "Ceann-latha:"
 
 #: src/ui_configurationDialog.h:1287
 msgid "and time:"
-msgstr ""
+msgstr "agus àm:"
 
 #: src/ui_configurationDialog.h:1288
 msgid "Time correction"
@@ -7909,7 +7909,7 @@ msgstr "Cleachd masg leth thrìd-shoilleir"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1140
 msgid "Hide grids and lines when enabled"
-msgstr ""
+msgstr "Falaich na griodaichean is loidhnichean nuair a bhios e an comas"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1141
 msgid "Sensor view"
@@ -8204,27 +8204,27 @@ msgstr ""
 #. TRANSLATORS: Satellite name: International Space Station
 #: plugins/Satellites/src/Satellites.cpp:1783
 msgid "ISS (ZARYA)"
-msgstr ""
+msgstr "ISS (ZARYA)"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
 #: plugins/Satellites/src/Satellites.cpp:1785
 msgid "HST"
-msgstr ""
+msgstr "HST"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
 #: plugins/Satellites/src/Satellites.cpp:1787
 msgid "SPEKTR-R"
-msgstr ""
+msgstr "SPEKTR-R"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
 #: plugins/Satellites/src/Satellites.cpp:1789
 msgid "INTEGRAL"
-msgstr ""
+msgstr "INTEGRAL"
 
 #. TRANSLATORS: China's first space station name
 #: plugins/Satellites/src/Satellites.cpp:1791
 msgid "TIANGONG 1"
-msgstr ""
+msgstr "TIANGONG 1"
 
 #: plugins/Satellites/src/Satellite.cpp:261
 #: plugins/Satellites/src/Satellite.cpp:265
@@ -13967,7 +13967,7 @@ msgstr "D-leud/D-fhad reul-chr."
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:221
 msgctxt "abbreviated in the plugin"
 msgid "Supergal. Long/Lat"
-msgstr ""
+msgstr "D-leud/D-fhad os-reul-chr."
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:240
 msgctxt "abbreviated in the plugin"
@@ -14030,7 +14030,7 @@ msgstr "Domhan-fhad/domhan-leud reul-chriosach"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:203
 msgid "Supergalactic Longitude/Latitude"
-msgstr ""
+msgstr "Domhan-fhad/domhan-leud os-reul-chriosach"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:233
 msgid "Coordinates of custom position:"
@@ -14689,11 +14689,11 @@ msgstr "Seall loidhne an azimuth ghnàthaichte 2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:259
 msgid "Show Line for Custom Declination 1"
-msgstr ""
+msgstr "Seall loidhne an dì-chlaonaidh ghnàthaichte 1"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:260
 msgid "Show Line for Custom Declination 2"
-msgstr ""
+msgstr "Seall loidhne an dì-chlaonaidh ghnàthaichte 2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1253
 msgid "Equinox"
@@ -14831,6 +14831,9 @@ msgid ""
 "In addition, up to two vertical lines with arbitrary azimuth and declination "
 "lines with custom label can be shown."
 msgstr ""
+"A bharrachd air sin, gabhaidh dà loidhne inghearach a shealltainn leis an "
+"azimuth agus na loidhnichean dì-chlaonaidh a thogras tu le leubail "
+"gnàthaichte."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:364
 msgid "Select color for equinox line"
@@ -14894,11 +14897,11 @@ msgstr "Tagh an dath air loidhne an azimuth ghnàthaichte 2"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:529
 msgid "Select color for Custom Declination 1 line"
-msgstr ""
+msgstr "Tagh an dath air loidhne an dì-chlaonaidh ghnàthaichte 1"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:540
 msgid "Select color for Custom Declination 2 line"
-msgstr ""
+msgstr "Tagh an dath air loidhne an dì-chlaonaidh ghnàthaichte 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:525
 msgid "ArchaeoLines Configuration"
@@ -14915,11 +14918,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:531
 msgid "Custom Declination 1"
-msgstr ""
+msgstr "Dì-chlaonadh gnàthaichte 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:532
 msgid "Custom Declination 1 Color..."
-msgstr ""
+msgstr "Dath a’ dhì-chlaonaidh ghnàthaichte 1…"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:533
 msgid "Current Sun"
@@ -15013,11 +15016,11 @@ msgstr "Loidhnichean nam mòr-ghealach-stadan"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:573
 msgid "Custom Declination 2 Color..."
-msgstr ""
+msgstr "Dath a’ dhì-chlaonaidh ghnàthaichte 2…"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:574
 msgid "Custom Declination 2"
-msgstr ""
+msgstr "Dì-chlaonadh gnàthaichte 2"
 
 #~ msgid "Planet: "
 #~ msgstr "Planaid: "
