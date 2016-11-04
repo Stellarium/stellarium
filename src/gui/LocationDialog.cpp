@@ -255,11 +255,12 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	idx = ui->timeZoneNameComboBox->findData(tz, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
-		QString defTZ = "LMST";
 		if (loc.planetName=="Earth")
-			defTZ = "system_default";
+			tz = "system_default";
+		else
+			tz = "LMST";
 		// Use LMST/system_default as default
-		idx = ui->timeZoneNameComboBox->findData(defTZ, Qt::UserRole, Qt::MatchCaseSensitive);
+		idx = ui->timeZoneNameComboBox->findData(tz, Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->timeZoneNameComboBox->setCurrentIndex(idx);
 	StelApp::getInstance().getCore()->setCurrentTimeZone(tz);
