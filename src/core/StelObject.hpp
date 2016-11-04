@@ -58,17 +58,15 @@ public:
 		HourAngle		= 0x00000200, //!< The hour angle + DE (of date)
 		AbsoluteMagnitude	= 0x00000400, //!< The absolute magnitude
 		GalacticCoord		= 0x00000800, //!< The galactic position
-		ObjectType		= 0x00001000, //!< The type of the object (star, planet, etc.)
-		EclipticCoord		= 0x00002000, //!< The ecliptic position
-		EclipticCoordXYZ	= 0x00004000, //!< The ecliptic position, XYZ of VSOP87A (used mainly for debugging, not public)
-		NoFont			= 0x00008000,
-		PlainText		= 0x00010000,  //!< Strip HTML tags from output
+		SupergalacticCoord	= 0x00001000, //!< The supergalactic position
+		ObjectType		= 0x00002000, //!< The type of the object (star, planet, etc.)
+		EclipticCoordJ2000	= 0x00004000, //!< The ecliptic position (J2000.0 ref) [+ XYZ of VSOP87A (used mainly for debugging, not public)]
+		EclipticCoordOfDate	= 0x00008000, //!< The ecliptic position (of date)
+		NoFont			= 0x00010000,
+		PlainText		= 0x00020000,  //!< Strip HTML tags from output
 // TODO GZ
 //		RaDecJ2000Planetocentric  = 0x00020000, //!< The planetocentric equatorial position (J2000 ref) [Mostly to compare with almanacs]
 //		RaDecOfDatePlanetocentric = 0x00040000  //!< The planetocentric equatorial position (of date)
-//		// and split Ecliptical into
-//		EclipticCoordJ2000	= 0x00002000, //!< The ecliptic position w.r.t. ecliptic of eq.J2000.0
-//		EclipticCoordOfDate	= 0x00002000, //!< The ecliptic position w.r.t. ecliptic of eq. of date
 
 
 	};
@@ -76,7 +74,8 @@ public:
 
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
 	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra|HourAngle|
-									   AbsoluteMagnitude|GalacticCoord|ObjectType|EclipticCoord|EclipticCoordXYZ);
+									   AbsoluteMagnitude|GalacticCoord|SupergalacticCoord|ObjectType|EclipticCoordJ2000|
+									   EclipticCoordOfDate);
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
 	static const InfoStringGroupFlags ShortInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000);
 
