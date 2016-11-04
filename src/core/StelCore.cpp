@@ -1162,9 +1162,10 @@ float StelCore::getUTCOffset(const double JD) const
 
 	StelLocation loc = getCurrentLocation();
 	QString tzName = getCurrentTimeZone();
+	QTimeZone* tz = new QTimeZone(tzName.toUtf8());
 
 	int shiftInSeconds = 0;
-	if (tzName=="system_default")
+	if (tzName=="system_default" || (loc.planetName=="Earth" && !tz->isValid()))
 	{
 		QDateTime local = universal.toLocalTime();
 		//Both timezones should be interpreted as UTC because secsTo() converts both
@@ -1174,7 +1175,6 @@ float StelCore::getUTCOffset(const double JD) const
 	}
 	else
 	{
-		QTimeZone* tz = new QTimeZone(tzName.toUtf8());
 		// The first adoption of a standard time was on December 1, 1847 in Great Britain
 		if (tz->isValid() && loc.planetName=="Earth" && JD>=StelCore::TZ_ERA_BEGINNING)
 		{
