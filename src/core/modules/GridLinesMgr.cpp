@@ -940,18 +940,18 @@ void SkyPoint::updateLabel()
 		case ECLIPTICPOLES_J2000:
 		{
 			frameType = StelCore::FrameObservercentricEclipticJ2000;
-			// TRANSLATORS: North Celestial Pole
+			// TRANSLATORS: North Ecliptic Pole
 			northernLabel = q_("NEP");
-			// TRANSLATORS: South Celestial Pole
+			// TRANSLATORS: South Ecliptic Pole
 			southernLabel = q_("SEP");
 			break;
 		}
 		case ECLIPTICPOLES_OF_DATE:
 		{
 			frameType = StelCore::FrameObservercentricEclipticOfDate;
-			// TRANSLATORS: North Celestial Pole
+			// TRANSLATORS: North Ecliptic Pole
 			northernLabel = q_("NEP");
-			// TRANSLATORS: South Celestial Pole
+			// TRANSLATORS: South Ecliptic Pole
 			southernLabel = q_("SEP");
 			break;
 		}
