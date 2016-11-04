@@ -402,7 +402,7 @@ void LocationDialog::populateTimeZonesList()
 	//data. Unfortunately, there's no other way to do this than with a cycle.
 	foreach(const QString& name, tzNames)
 	{
-		timeZones->addItem(q_(name), name);
+		timeZones->addItem(name, name);
 	}
 	timeZones->addItem(q_("Local Mean Solar Time"), "LMST");
 	timeZones->addItem(q_("Local True Solar Time"), "LTST");
