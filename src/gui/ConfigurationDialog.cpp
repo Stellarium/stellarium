@@ -513,10 +513,14 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 		flags |= StelObject::Extra;
 	if (ui->checkBoxGalacticCoordinates->isChecked())
 		flags |= StelObject::GalacticCoord;
+	if (ui->checkBoxSupergalacticCoordinates->isChecked())
+		flags |= StelObject::SupergalacticCoord;
 	if (ui->checkBoxType->isChecked())
 		flags |= StelObject::ObjectType;
-	if (ui->checkBoxEclipticCoords->isChecked())
-		flags |= StelObject::EclipticCoord;
+	if (ui->checkBoxEclipticCoordsJ2000->isChecked())
+		flags |= StelObject::EclipticCoordJ2000;
+	if (ui->checkBoxEclipticCoordsOfDate->isChecked())
+		flags |= StelObject::EclipticCoordOfDate;
 
 	gui->setInfoTextFilters(flags);
 }
@@ -770,10 +774,14 @@ void ConfigurationDialog::saveCurrentViewOptions()
 			       (bool) (flags & StelObject::Extra));
 		conf->setValue("flag_show_galcoord",
 			       (bool) (flags & StelObject::GalacticCoord));
+		conf->setValue("flag_show_supergalcoord",
+			       (bool) (flags & StelObject::SupergalacticCoord));
 		conf->setValue("flag_show_type",
 			       (bool) (flags & StelObject::ObjectType));
-		conf->setValue("flag_show_eclcoord",
-			       (bool) (flags & StelObject::EclipticCoord));
+		conf->setValue("flag_show_eclcoordofdate",
+			       (bool) (flags & StelObject::EclipticCoordOfDate));
+		conf->setValue("flag_show_eclcoordj2000",
+			       (bool) (flags & StelObject::EclipticCoordJ2000));
 		conf->endGroup();
 	}
 
@@ -1323,8 +1331,10 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxSize->setChecked(flags & StelObject::Size);
 	ui->checkBoxExtra->setChecked(flags & StelObject::Extra);
 	ui->checkBoxGalacticCoordinates->setChecked(flags & StelObject::GalacticCoord);
+	ui->checkBoxSupergalacticCoordinates->setChecked(flags & StelObject::SupergalacticCoord);
 	ui->checkBoxType->setChecked(flags & StelObject::ObjectType);
-	ui->checkBoxEclipticCoords->setChecked(flags & StelObject::EclipticCoord);
+	ui->checkBoxEclipticCoordsJ2000->setChecked(flags & StelObject::EclipticCoordJ2000);
+	ui->checkBoxEclipticCoordsOfDate->setChecked(flags & StelObject::EclipticCoordOfDate);
 }
 
 void ConfigurationDialog::updateTabBarListWidgetWidth()
