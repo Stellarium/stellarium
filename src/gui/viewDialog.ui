@@ -2565,37 +2565,6 @@
           <property name="spacing">
            <number>0</number>
           </property>
-          <item row="0" column="0" rowspan="2">
-           <widget class="QListWidget" name="culturesListWidget">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-              <horstretch>100</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>220</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>120</width>
-              <height>16777213</height>
-             </size>
-            </property>
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-            <property name="horizontalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOff</enum>
-            </property>
-            <property name="selectionRectVisible">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="1">
            <widget class="QTextBrowser" name="skyCultureTextBrowser">
             <property name="sizePolicy">
@@ -2626,6 +2595,37 @@
             </property>
             <property name="openExternalLinks">
              <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" rowspan="3">
+           <widget class="QListWidget" name="culturesListWidget">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+              <horstretch>100</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>220</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>120</width>
+              <height>16777213</height>
+             </size>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
+            <property name="horizontalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+            <property name="selectionRectVisible">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -2662,45 +2662,31 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="useAsDefaultSkyCultureCheckBox">
-               <property name="text">
-                <string>Use this sky culture as default</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout_constLabels">
+             <item row="3" column="1">
+              <layout class="QHBoxLayout" name="horizontalLayout_constArtbrightness">
                <item>
-                <widget class="QCheckBox" name="showConstellationLabelsCheckBox">
+                <widget class="QCheckBox" name="showConstellationArtCheckBox">
                  <property name="text">
-                  <string>Show labels</string>
+                  <string>Show art in brightness</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QComboBox" name="skyCultureNamesStyleComboBox">
-                 <property name="toolTip">
-                  <string>Select if you want names abbreviated, original or translated</string>
+                <widget class="QDoubleSpinBox" name="constellationArtBrightnessSpinBox">
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
-                 <property name="currentText">
-                  <string/>
+                 <property name="maximum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.050000000000000</double>
                  </property>
                 </widget>
                </item>
               </layout>
              </item>
-             <item row="1" column="1">
-              <widget class="QCheckBox" name="nativeNameCheckBox">
-               <property name="toolTip">
-                <string>Use native names for planets from current culture</string>
-               </property>
-               <property name="text">
-                <string>Use native names for planets</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
+             <item row="3" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_constLines">
                <item>
                 <widget class="QCheckBox" name="showConstellationLinesCheckBox">
@@ -2731,38 +2717,80 @@
                  </property>
                 </widget>
                </item>
+               <item>
+                <widget class="QToolButton" name="colorConstellationLines">
+                 <property name="toolTip">
+                  <string>Color of lines of constellations</string>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </item>
              <item row="2" column="1">
-              <layout class="QHBoxLayout" name="horizontalLayout_constArtbrightness">
+              <widget class="QCheckBox" name="nativeNameCheckBox">
+               <property name="toolTip">
+                <string>Use native names for planets from current culture</string>
+               </property>
+               <property name="text">
+                <string>Use native names for planets</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="useAsDefaultSkyCultureCheckBox">
+               <property name="text">
+                <string>Use this sky culture as default</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_constLabels">
                <item>
-                <widget class="QCheckBox" name="showConstellationArtCheckBox">
+                <widget class="QCheckBox" name="showConstellationLabelsCheckBox">
                  <property name="text">
-                  <string>Show art in brightness</string>
+                  <string>Show labels</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QDoubleSpinBox" name="constellationArtBrightnessSpinBox">
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                <widget class="QComboBox" name="skyCultureNamesStyleComboBox">
+                 <property name="toolTip">
+                  <string>Select if you want names abbreviated, original or translated</string>
                  </property>
-                 <property name="maximum">
-                  <double>1.000000000000000</double>
+                 <property name="currentText">
+                  <string/>
                  </property>
-                 <property name="singleStep">
-                  <double>0.050000000000000</double>
+                </widget>
+               </item>
+               <item>
+                <widget class="QToolButton" name="colorConstellationLabels">
+                 <property name="toolTip">
+                  <string>Color of names of constellations</string>
                  </property>
                 </widget>
                </item>
               </layout>
              </item>
              <item row="0" column="1">
-              <widget class="QCheckBox" name="showConstellationBoundariesCheckBox">
-               <property name="text">
-                <string>Show boundaries</string>
+              <layout class="QHBoxLayout" name="horizontalLayout_5">
+               <property name="bottomMargin">
+                <number>0</number>
                </property>
-              </widget>
+               <item>
+                <widget class="QCheckBox" name="showConstellationBoundariesCheckBox">
+                 <property name="text">
+                  <string>Show boundaries</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QToolButton" name="colorConstellationBoundaries">
+                 <property name="toolTip">
+                  <string>Color of boundaries of constellations</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </widget>
@@ -3053,12 +3081,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
