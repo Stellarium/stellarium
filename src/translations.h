@@ -377,7 +377,7 @@ class Translations
 		N_("Abort");
 		N_("Ignore");
 		N_("&Basic colors");
-		N_("Pick Screen Color");
+		N_("&Pick Screen Color");
 		N_("&Custom colors");
 		N_("&Add to Custom Colors");
 		N_("Hu&e:");

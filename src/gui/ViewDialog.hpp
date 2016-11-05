@@ -118,6 +118,10 @@ private slots:
 	void askSupergalacticPolesColor();
 	void askEquinoxJ2000PointsColor();
 	void askEquinoxPointsColor();
+	// constellations colors
+	void askConstellationLabelsColor();
+	void askConstellationLinesColor();
+	void askConstellationBoundariesColor();
 
 private:
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);

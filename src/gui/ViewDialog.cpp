@@ -395,6 +395,14 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->constellationArtBrightnessSpinBox,"ConstellationMgr.artIntensity");
 	connectDoubleProperty(ui->constellationLineThicknessSpinBox,"ConstellationMgr.constellationLineThickness");
 
+	colorButton(ui->colorConstellationBoundaries,	"ConstellationMgr.boundariesColor");
+	colorButton(ui->colorConstellationLabels,	"ConstellationMgr.namesColor");
+	colorButton(ui->colorConstellationLines,	"ConstellationMgr.linesColor");
+
+	connect(ui->colorConstellationBoundaries,	SIGNAL(released()), this, SLOT(askConstellationBoundariesColor()));
+	connect(ui->colorConstellationLabels,		SIGNAL(released()), this, SLOT(askConstellationLabelsColor()));
+	connect(ui->colorConstellationLines,		SIGNAL(released()), this, SLOT(askConstellationLinesColor()));
+
 	// Starlore
 	connect(ui->useAsDefaultSkyCultureCheckBox, SIGNAL(clicked()), this, SLOT(setCurrentCultureAsDefault()));
 	connect(&StelApp::getInstance().getSkyCultureMgr(), SIGNAL(defaultSkyCultureChanged(QString)),this,SLOT(updateDefaultSkyCulture()));
@@ -873,6 +881,51 @@ void ViewDialog::askCardinalPointsColor()
 		GETSTELMODULE(LandscapeMgr)->setColorCardinalPoints(vColor);
 		StelApp::getInstance().getSettings()->setValue("color/cardinal_color", StelUtils::vec3fToStr(vColor));
 		ui->colorCardinalPoints->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
+void ViewDialog::askConstellationBoundariesColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("ConstellationMgr.boundariesColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorConstellationBoundaries->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		GETSTELMODULE(ConstellationMgr)->setBoundariesColor(vColor);
+		StelApp::getInstance().getSettings()->setValue("color/const_boundary_color", StelUtils::vec3fToStr(vColor));
+		ui->colorConstellationBoundaries->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
+void ViewDialog::askConstellationLabelsColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("ConstellationMgr.namesColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorConstellationLabels->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		GETSTELMODULE(ConstellationMgr)->setLabelsColor(vColor);
+		StelApp::getInstance().getSettings()->setValue("color/const_names_color", StelUtils::vec3fToStr(vColor));
+		ui->colorConstellationLabels->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
+void ViewDialog::askConstellationLinesColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("ConstellationMgr.linesColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorConstellationLines->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		GETSTELMODULE(ConstellationMgr)->setLinesColor(vColor);
+		StelApp::getInstance().getSettings()->setValue("color/const_lines_color", StelUtils::vec3fToStr(vColor));
+		ui->colorConstellationLines->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
 }
 

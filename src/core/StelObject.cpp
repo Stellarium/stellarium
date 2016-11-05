@@ -135,7 +135,7 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 	if (flags&RaDecOfDate)
 	{
 		double dec_equ, ra_equ;
-		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));		
+		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
 		if (withDecimalDegree)
 			res += q_("RA/Dec") + QString(" (%1): %2/%3").arg(cepoch, StelUtils::radToDecDegStr(ra_equ,5,false,true), StelUtils::radToDecDegStr(dec_equ)) + "<br>";
 		else
