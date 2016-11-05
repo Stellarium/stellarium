@@ -24,6 +24,7 @@
 #include "AddRemoveLandscapesDialog.hpp"
 #include "AtmosphereDialog.hpp"
 #include "GreatRedSpotDialog.hpp"
+#include "ConfigureDSOColorsDialog.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelSkyCultureMgr.hpp"
@@ -66,6 +67,7 @@ ViewDialog::ViewDialog(QObject* parent) : StelDialog(parent)
 	addRemoveLandscapesDialog = NULL;
 	atmosphereDialog=NULL;
 	greatRedSpotDialog=NULL;
+	configureDSOColorsDialog=NULL;
 }
 
 ViewDialog::~ViewDialog()
@@ -78,6 +80,8 @@ ViewDialog::~ViewDialog()
 	atmosphereDialog = NULL;
 	delete greatRedSpotDialog;
 	greatRedSpotDialog = NULL;
+	delete configureDSOColorsDialog;
+	configureDSOColorsDialog = NULL;
 }
 
 void ViewDialog::retranslate()
@@ -163,6 +167,7 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxProportionalHints, "NebulaMgr.hintsProportional");
 	connectBoolProperty(ui->checkBoxSurfaceBrightnessUsage, "NebulaMgr.flagSurfaceBrightnessUsage");
 	connectBoolProperty(ui->checkBoxDesignationsOnlyUsage, "NebulaMgr.flagDesignationLabels");
+	connect(ui->pushButtonConfigureDSOColors, SIGNAL(clicked()), this, SLOT(showConfigureDSOColorsDialog()));
 
 	// From Trunk, but seems OK here. It was close to end before.
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
@@ -1340,6 +1345,14 @@ void ViewDialog::showGreatRedSpotDialog()
 		greatRedSpotDialog = new GreatRedSpotDialog();
 
 	greatRedSpotDialog->setVisible(true);
+}
+
+void ViewDialog::showConfigureDSOColorsDialog()
+{
+	if(configureDSOColorsDialog == NULL)
+		configureDSOColorsDialog = new ConfigureDSOColorsDialog();
+
+	configureDSOColorsDialog->setVisible(true);
 }
 
 void ViewDialog::updateZhrDescription(int zhr)

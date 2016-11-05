@@ -236,7 +236,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QGridLayout" name="gridLayout">
@@ -1362,7 +1362,7 @@
              <item row="4" column="1">
               <widget class="QCheckBox" name="checkBoxPlanetaryNebulaeType">
                <property name="text">
-                <string>Planetary Nebulae</string>
+                <string>Planetary nebulae</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOTypes</string>
@@ -1392,7 +1392,7 @@
              <item row="3" column="1">
               <widget class="QCheckBox" name="checkBoxDarkNebulaeType">
                <property name="text">
-                <string>Dark Nebulae</string>
+                <string>Dark nebulae</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOTypes</string>
@@ -1402,7 +1402,7 @@
              <item row="1" column="1">
               <widget class="QCheckBox" name="checkBoxBrightNebulaeType">
                <property name="text">
-                <string>Bright Nebulae</string>
+                <string>Bright nebulae</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOTypes</string>
@@ -1444,43 +1444,15 @@
                <property name="spacing">
                 <number>6</number>
                </property>
-               <item row="2" column="0">
-                <layout class="QGridLayout" name="gridLayout_15">
-                 <item row="0" column="1">
-                  <widget class="QSlider" name="nebulasLabelsHorizontalSlider">
-                   <property name="value">
-                    <number>33</number>
-                   </property>
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="labelLabels">
-                   <property name="text">
-                    <string>Labels</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="0">
-                  <widget class="QLabel" name="labelHints">
-                   <property name="text">
-                    <string>Hints</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="1">
-                  <widget class="QSlider" name="nebulasHintsHorizontalSlider">
-                   <property name="value">
-                    <number>33</number>
-                   </property>
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
+               <item row="4" column="0">
+                <widget class="QCheckBox" name="checkBoxProportionalHints">
+                 <property name="toolTip">
+                  <string>Use hints proportional to angular size of deep-sky objects</string>
+                 </property>
+                 <property name="text">
+                  <string>Use proportional hints</string>
+                 </property>
+                </widget>
                </item>
                <item row="5" column="0">
                 <widget class="QCheckBox" name="checkBoxSurfaceBrightnessUsage">
@@ -1489,16 +1461,6 @@
                  </property>
                  <property name="text">
                   <string>Use surface brightness</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0">
-                <widget class="QCheckBox" name="checkBoxProportionalHints">
-                 <property name="toolTip">
-                  <string>Use hints proportional to angular size of deep-sky objects</string>
-                 </property>
-                 <property name="text">
-                  <string>Use proportional hints</string>
                  </property>
                 </widget>
                </item>
@@ -1539,6 +1501,51 @@
                  </property>
                  <property name="text">
                   <string>Use designations for screen labels</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <layout class="QGridLayout" name="gridLayout_15">
+                 <item row="0" column="1">
+                  <widget class="QSlider" name="nebulasLabelsHorizontalSlider">
+                   <property name="value">
+                    <number>33</number>
+                   </property>
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="labelLabels">
+                   <property name="text">
+                    <string>Labels</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="labelHints">
+                   <property name="text">
+                    <string>Hints</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QSlider" name="nebulasHintsHorizontalSlider">
+                   <property name="value">
+                    <number>33</number>
+                   </property>
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item row="7" column="0">
+                <widget class="QPushButton" name="pushButtonConfigureDSOColors">
+                 <property name="text">
+                  <string>Configure colors of markers</string>
                  </property>
                 </widget>
                </item>
