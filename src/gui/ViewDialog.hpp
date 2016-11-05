@@ -31,6 +31,7 @@ class QToolButton;
 class AddRemoveLandscapesDialog;
 class AtmosphereDialog;
 class GreatRedSpotDialog;
+class ConfigureDSOColorsDialog;
 
 class ViewDialog : public StelDialog
 {
@@ -70,6 +71,7 @@ private slots:
 	void showAddRemoveLandscapesDialog();
         void showAtmosphereDialog();
 	void showGreatRedSpotDialog();
+	void showConfigureDSOColorsDialog();
 
 	void setLightPollutionSpinBoxStatus();
 	// Two new from the unwanted trunk-rework Not sure if we need them at all?
@@ -135,6 +137,7 @@ private:
 	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;
 	AtmosphereDialog * atmosphereDialog;
 	GreatRedSpotDialog * greatRedSpotDialog;
+	ConfigureDSOColorsDialog * configureDSOColorsDialog;
 };
 
 #endif // _VIEWDIALOG_HPP_

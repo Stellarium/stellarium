@@ -93,6 +93,163 @@ class NebulaMgr : public StelObjectModule
 		   WRITE setDesignationUsage
 		   NOTIFY designationUsageChanged
 		   )
+	// Colors
+	Q_PROPERTY(Vec3f labelsColor
+		   READ getLabelsColor
+		   WRITE setLabelsColor
+		   NOTIFY labelsColorChanged
+		   )
+	Q_PROPERTY(Vec3f circlesColor
+		   READ getCirclesColor
+		   WRITE setCirclesColor
+		   NOTIFY circlesColorChanged
+		   )
+	Q_PROPERTY(Vec3f galaxiesColor
+		   READ getGalaxyColor
+		   WRITE setGalaxyColor
+		   NOTIFY galaxiesColorChanged
+		   )
+	Q_PROPERTY(Vec3f activeGalaxiesColor
+		   READ getActiveGalaxyColor
+		   WRITE setActiveGalaxyColor
+		   NOTIFY activeGalaxiesColorChanged
+		   )
+	Q_PROPERTY(Vec3f radioGalaxiesColor
+		   READ getRadioGalaxyColor
+		   WRITE setRadioGalaxyColor
+		   NOTIFY radioGalaxiesColorChanged
+		   )
+	Q_PROPERTY(Vec3f interactingGalaxiesColor
+		   READ getInteractingGalaxyColor
+		   WRITE setInteractingGalaxyColor
+		   NOTIFY interactingGalaxiesColorChanged
+		   )
+	Q_PROPERTY(Vec3f quasarsColor
+		   READ getQuasarColor
+		   WRITE setQuasarColor
+		   NOTIFY quasarsColorChanged
+		   )
+	Q_PROPERTY(Vec3f possibleQuasarsColor
+		   READ getPossibleQuasarColor
+		   WRITE setPossibleQuasarColor
+		   NOTIFY possibleQuasarsColorChanged
+		   )
+	Q_PROPERTY(Vec3f clustersColor
+		   READ getClusterColor
+		   WRITE setClusterColor
+		   NOTIFY clustersColorChanged
+		   )
+	Q_PROPERTY(Vec3f openClustersColor
+		   READ getOpenClusterColor
+		   WRITE setOpenClusterColor
+		   NOTIFY openClustersColorChanged
+		   )
+	Q_PROPERTY(Vec3f globularClustersColor
+		   READ getGlobularClusterColor
+		   WRITE setGlobularClusterColor
+		   NOTIFY globularClustersColorChanged
+		   )
+	Q_PROPERTY(Vec3f stellarAssociationsColor
+		   READ getStellarAssociationColor
+		   WRITE setStellarAssociationColor
+		   NOTIFY stellarAssociationsColorChanged
+		   )
+	Q_PROPERTY(Vec3f starCloudsColor
+		   READ getStarCloudColor
+		   WRITE setStarCloudColor
+		   NOTIFY starCloudsColorChanged
+		   )
+	Q_PROPERTY(Vec3f starsColor
+		   READ getStarColor
+		   WRITE setStarColor
+		   NOTIFY starsColorChanged
+		   )
+	Q_PROPERTY(Vec3f nebulaeColor
+		   READ getNebulaColor
+		   WRITE setNebulaColor
+		   NOTIFY nebulaeColorChanged
+		   )
+	Q_PROPERTY(Vec3f planetaryNebulaeColor
+		   READ getPlanetaryNebulaColor
+		   WRITE setPlanetaryNebulaColor
+		   NOTIFY planetaryNebulaeColorChanged
+		   )
+	Q_PROPERTY(Vec3f darkNebulaeColor
+		   READ getDarkNebulaColor
+		   WRITE setDarkNebulaColor
+		   NOTIFY darkNebulaeColorChanged
+		   )
+	Q_PROPERTY(Vec3f reflectionNebulaeColor
+		   READ getReflectionNebulaColor
+		   WRITE setReflectionNebulaColor
+		   NOTIFY reflectionNebulaeColorChanged
+		   )
+	Q_PROPERTY(Vec3f bipolarNebulaeColor
+		   READ getBipolarNebulaColor
+		   WRITE setBipolarNebulaColor
+		   NOTIFY bipolarNebulaeColorChanged
+		   )
+	Q_PROPERTY(Vec3f emissionNebulaeColor
+		   READ getEmissionNebulaColor
+		   WRITE setEmissionNebulaColor
+		   NOTIFY emissionNebulaeColorChanged
+		   )
+	Q_PROPERTY(Vec3f possiblePlanetaryNebulaeColor
+		   READ getPossiblePlanetaryNebulaColor
+		   WRITE setPossiblePlanetaryNebulaColor
+		   NOTIFY possiblePlanetaryNebulaeColorChanged
+		   )
+	Q_PROPERTY(Vec3f protoplanetaryNebulaeColor
+		   READ getProtoplanetaryNebulaColor
+		   WRITE setProtoplanetaryNebulaColor
+		   NOTIFY protoplanetaryNebulaeColorChanged
+		   )
+	Q_PROPERTY(Vec3f clusterWithNebulosityColor
+		   READ getClusterWithNebulosityColor
+		   WRITE setClusterWithNebulosityColor
+		   NOTIFY clusterWithNebulosityColorChanged
+		   )
+	Q_PROPERTY(Vec3f hydrogenRegionsColor
+		   READ getHydrogenRegionColor
+		   WRITE setHydrogenRegionColor
+		   NOTIFY hydrogenRegionsColorChanged
+		   )
+	Q_PROPERTY(Vec3f interstellarMatterColor
+		   READ getInterstellarMatterColor
+		   WRITE setInterstellarMatterColor
+		   NOTIFY interstellarMatterColorChanged
+		   )
+	Q_PROPERTY(Vec3f emissionObjectsColor
+		   READ getEmissionObjectColor
+		   WRITE setEmissionObjectColor
+		   NOTIFY emissionObjectsColorChanged
+		   )
+	Q_PROPERTY(Vec3f molecularCloudsColor
+		   READ getMolecularCloudColor
+		   WRITE setMolecularCloudColor
+		   NOTIFY molecularCloudsColorChanged
+		   )
+	Q_PROPERTY(Vec3f blLacObjectsColor
+		   READ getBlLacObjectColor
+		   WRITE setBlLacObjectColor
+		   NOTIFY blLacObjectsColorChanged
+		   )
+	Q_PROPERTY(Vec3f blazarsColor
+		   READ getBlazarColor
+		   WRITE setBlazarColor
+		   NOTIFY blazarsColorChanged
+		   )
+	Q_PROPERTY(Vec3f youngStellarObjectsColor
+		   READ getYoungStellarObjectColor
+		   WRITE setYoungStellarObjectColor
+		   NOTIFY youngStellarObjectsColorChanged
+		   )
+	Q_PROPERTY(Vec3f supernovaRemnantsColor
+		   READ getSupernovaRemnantColor
+		   WRITE setSupernovaRemnantColor
+		   NOTIFY supernovaRemnantsColorChanged
+		   )
+
 public:
 	NebulaMgr();
 	virtual ~NebulaMgr();
@@ -553,6 +710,38 @@ signals:
 	void flagSurfaceBrightnessUsageChanged(bool b);
 	void labelsAmountChanged(double a);
 	void hintsAmountChanged(double f);
+
+	void labelsColorChanged(const Vec3f & color) const;
+	void circlesColorChanged(const Vec3f & color) const;
+	void galaxiesColorChanged(const Vec3f & color) const;
+	void activeGalaxiesColorChanged(const Vec3f & color) const;
+	void radioGalaxiesColorChanged(const Vec3f & color) const;
+	void interactingGalaxiesColorChanged(const Vec3f & color) const;
+	void quasarsColorChanged(const Vec3f & color) const;
+	void possibleQuasarsColorChanged(const Vec3f & color) const;
+	void clustersColorChanged(const Vec3f & color) const;
+	void openClustersColorChanged(const Vec3f & color) const;
+	void globularClustersColorChanged(const Vec3f & color) const;
+	void stellarAssociationsColorChanged(const Vec3f & color) const;
+	void starCloudsColorChanged(const Vec3f & color) const;
+	void starsColorChanged(const Vec3f & color) const;
+	void nebulaeColorChanged(const Vec3f & color) const;
+	void planetaryNebulaeColorChanged(const Vec3f & color) const;
+	void darkNebulaeColorChanged(const Vec3f & color) const;
+	void reflectionNebulaeColorChanged(const Vec3f & color) const;
+	void bipolarNebulaeColorChanged(const Vec3f & color) const;
+	void emissionNebulaeColorChanged(const Vec3f & color) const;
+	void possiblePlanetaryNebulaeColorChanged(const Vec3f & color) const;
+	void protoplanetaryNebulaeColorChanged(const Vec3f & color) const;
+	void clusterWithNebulosityColorChanged(const Vec3f & color) const;
+	void hydrogenRegionsColorChanged(const Vec3f & color) const;
+	void interstellarMatterColorChanged(const Vec3f & color) const;
+	void emissionObjectsColorChanged(const Vec3f & color) const;
+	void molecularCloudsColorChanged(const Vec3f & color) const;
+	void blLacObjectsColorChanged(const Vec3f & color) const;
+	void blazarsColorChanged(const Vec3f & color) const;
+	void youngStellarObjectsColorChanged(const Vec3f & color) const;
+	void supernovaRemnantsColorChanged(const Vec3f & color) const;
 
 private slots:
 	//! Update i18 names from English names according to passed translator.
