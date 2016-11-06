@@ -716,35 +716,33 @@ void MpcImportWindow::sendQuery()
 
 void MpcImportWindow::sendQueryToUrl(QUrl url)
 {
-	QUrlQuery q(url);
-	q.addQueryItem("ty","e");//Type: ephemerides
-	q.addQueryItem("TextArea", query);//Object name query
-	q.addQueryItem("e", "-1");//Elements format: MPC 1-line
+	url.addQueryItem("ty","e");//Type: ephemerides
+	url.addQueryItem("TextArea", query);//Object name query
+	url.addQueryItem("e", "-1");//Elements format: MPC 1-line
 	//Switch to MPC 1-line format --AW
 	//XEphem's format is used instead because it doesn't truncate object names.
-	//q.addQueryItem("e", "3");//Elements format: XEphem
+	//url.addQueryItem("e", "3");//Elements format: XEphem
 	//Yes, all of the rest are necessary
-	q.addQueryItem("d","");
-	q.addQueryItem("l","");
-	q.addQueryItem("i","");
-	q.addQueryItem("u","d");
-	q.addQueryItem("uto", "0");
-	q.addQueryItem("c", "");
-	q.addQueryItem("long", "");
-	q.addQueryItem("lat", "");
-	q.addQueryItem("alt", "");
-	q.addQueryItem("raty", "a");
-	q.addQueryItem("s", "t");
-	q.addQueryItem("m", "m");
-	q.addQueryItem("adir", "S");
-	q.addQueryItem("oed", "");
-	q.addQueryItem("resoc", "");
-	q.addQueryItem("tit", "");
-	q.addQueryItem("bu", "");
-	q.addQueryItem("ch", "c");
-	q.addQueryItem("ce", "f");
-	q.addQueryItem("js", "f");
-	url.setQuery(q);
+	url.addQueryItem("d","");
+	url.addQueryItem("l","");
+	url.addQueryItem("i","");
+	url.addQueryItem("u","d");
+	url.addQueryItem("uto", "0");
+	url.addQueryItem("c", "");
+	url.addQueryItem("long", "");
+	url.addQueryItem("lat", "");
+	url.addQueryItem("alt", "");
+	url.addQueryItem("raty", "a");
+	url.addQueryItem("s", "t");
+	url.addQueryItem("m", "m");
+	url.addQueryItem("adir", "S");
+	url.addQueryItem("oed", "");
+	url.addQueryItem("resoc", "");
+	url.addQueryItem("tit", "");
+	url.addQueryItem("bu", "");
+	url.addQueryItem("ch", "c");
+	url.addQueryItem("ce", "f");
+	url.addQueryItem("js", "f");
 
 	QNetworkRequest request(url);
 	request.setHeader(QNetworkRequest::ContentTypeHeader,
