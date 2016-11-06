@@ -1175,7 +1175,14 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 		if (e)
 		{
 			if (transRx.exactMatch(name))
-				e->setProperName(transRx.capturedTexts().at(1).trimmed());
+			{
+				QString propName = transRx.capturedTexts().at(1).trimmed();
+				if (e->getEnglishName().isEmpty())
+					e->setProperName(propName);
+				else
+					e->addNameAlias(propName);
+			}
+
 
 			readOk++;
 		}
@@ -1215,6 +1222,14 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	{
 		QString objwcap = n->nameI18.toUpper();
 		if (objwcap==objw)
+			return qSharedPointerCast<StelObject>(n);
+	}
+
+	// Search by aliases of common names
+	foreach (const NebulaP& n, dsoArray)
+	{
+		QString objwcap = n->nameI18Aliases.join(" - ").toUpper();
+		if (objwcap==objw && !objwcap.isEmpty())
 			return qSharedPointerCast<StelObject>(n);
 	}
 
@@ -1384,6 +1399,14 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	{
 		QString objwcap = n->englishName.toUpper();
 		if (objwcap==objw)
+			return qSharedPointerCast<StelObject>(n);
+	}
+
+	// Search by aliases of common names
+	foreach (const NebulaP& n, dsoArray)
+	{
+		QString objwcap = n->englishAliases.join(" - ").toUpper();
+		if (objwcap==objw && !objwcap.isEmpty())
 			return qSharedPointerCast<StelObject>(n);
 	}
 
@@ -1842,6 +1865,16 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	foreach (const NebulaP& n, dsoArray)
 	{
 		QString name = inEnglish ? n->englishName : n->nameI18;
+		if (matchObjectName(name, objPrefix, useStartOfWords))
+		{
+			result.append(name);
+		}
+	}
+
+	// Search by aliases of common names
+	foreach (const NebulaP& n, dsoArray)
+	{
+		QString name = inEnglish ? n->englishAliases.join(" - ") : n->nameI18Aliases.join(" - ");
 		if (matchObjectName(name, objPrefix, useStartOfWords))
 		{
 			result.append(name);

@@ -141,6 +141,8 @@ public:
 	virtual Vec3f getInfoColor() const;
 	virtual QString getNameI18n() const {return nameI18;}
 	virtual QString getEnglishName() const {return englishName;}
+	QString getEnglishAliases() const;
+	QString getI18nAliases() const;
 	virtual double getAngularSize(const StelCore*) const;
 	virtual SphericalRegionP getRegion() const {return pointRegion;}
 
@@ -166,6 +168,7 @@ public:
 	float getSurfaceArea(void) const;
 
 	void setProperName(QString name) { englishName = name; }
+	void addNameAlias(QString name) { englishAliases.append(name); }
 
 	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced)
 	//! @return a designation
@@ -175,7 +178,13 @@ private:
 	friend struct DrawNebulaFuncObject;
 
 	//! Translate nebula name using the passed translator
-	void translateName(const StelTranslator& trans) {nameI18 = trans.qtranslate(englishName);}
+	void translateName(const StelTranslator& trans)
+	{
+		nameI18 = trans.qtranslate(englishName);
+		nameI18Aliases.clear();
+		foreach(QString alias, englishAliases)
+			nameI18Aliases.append(trans.qtranslate(alias));
+	}
 
 	void readDSO(QDataStream& in);
 
@@ -205,7 +214,9 @@ private:
 	unsigned int UGC_nb;            // UGC number (The Uppsala General Catalogue of Galaxies)
 	QString Ced_nb;			// Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)	
 	QString englishName;            // English name
+	QStringList englishAliases;	// English aliases
 	QString nameI18;                // Nebula name
+	QStringList nameI18Aliases;     // Nebula aliases
 	QString mTypeString;		// Morphological type of object (as string)	
 	float bMag;                     // B magnitude
 	float vMag;                     // V magnitude. For Dark Nebulae, opacity is stored here.	

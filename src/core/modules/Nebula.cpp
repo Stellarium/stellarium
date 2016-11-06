@@ -136,6 +136,9 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	if (!nameI18.isEmpty() && flags&Name)
 	{
 		oss << getNameI18n();
+		QString aliases = getI18nAliases();
+		if (!aliases.isEmpty())
+			oss << " (" << aliases << ")";
 	}
 
 	if (flags&CatalogNumber)
@@ -336,6 +339,22 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	postProcessInfoString(str, flags);
 
 	return str;
+}
+
+QString Nebula::getEnglishAliases() const
+{
+	QString aliases = "";
+	if (englishAliases.size()!=0)
+		aliases = englishAliases.join(" - ");
+	return aliases;
+}
+
+QString Nebula::getI18nAliases() const
+{
+	QString aliases = "";
+	if (nameI18Aliases.size()!=0)
+		aliases = nameI18Aliases.join(" - ");
+	return aliases;
 }
 
 float Nebula::getVMagnitude(const StelCore* core) const
