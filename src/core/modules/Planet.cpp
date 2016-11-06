@@ -142,6 +142,7 @@ Planet::Planet(const QString& englishName,
 	       double oblateness,
 	       Vec3f halocolor,
 	       float albedo,
+	       float roughness,
 	       const QString& atexMapName,
 	       const QString& anormalMapName,
 	       const QString& aobjModelName,
@@ -159,6 +160,7 @@ Planet::Planet(const QString& englishName,
 	  oneMinusOblateness(1.0-oblateness),
 	  haloColor(halocolor),
 	  albedo(albedo),
+	  roughness(roughness),
 	  axisRotation(0.),
 	  objModel(NULL),
 	  objModelLoader(NULL),
@@ -1316,6 +1318,7 @@ void Planet::PlanetShaderVars::initLocations(QOpenGLShaderProgram* p)
 	GL(shadowData = p->uniformLocation("shadowData"));
 	GL(sunInfo = p->uniformLocation("sunInfo"));
 	GL(skyBrightness = p->uniformLocation("skyBrightness"));
+	GL(orenNayarParameters = p->uniformLocation("orenNayarParameters"));
 
 	// Moon-specific variables
 	GL(earthShadow = p->uniformLocation("earthShadow"));
@@ -2038,6 +2041,19 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 	GL(shader->setUniformValue(shaderVars.shadowData, data.shadowCandidatesData));
 	GL(shader->setUniformValue(shaderVars.sunInfo, data.mTarget[12], data.mTarget[13], data.mTarget[14], sun->getRadius()));
 	GL(shader->setUniformValue(shaderVars.skyBrightness, lmgr->getLuminance()));
+
+	if(shaderVars.orenNayarParameters>=0)
+	{
+		//calculate and set oren-nayar parameters
+		float roughnessSq = roughness * roughness;
+		QVector3D vec(
+				1.0f - 0.5f * roughnessSq / (roughnessSq + 0.57f), //x = A
+				0.45f * roughnessSq / (roughnessSq + 0.09f),	//y = B
+				albedo * 15.0f	//z = scale factor, with the lunar albedo of 0.12, this produces roughly the same scaling as before (1.8)
+				);
+
+		GL(shader->setUniformValue(shaderVars.orenNayarParameters, vec));
+	}
 
 	return data;
 }

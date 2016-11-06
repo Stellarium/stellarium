@@ -120,6 +120,7 @@ public:
 	       double oblateness,
 	       Vec3f halocolor,
 	       float albedo,
+	       float roughness,
 	       const QString& texMapName,
 	       const QString& normalMapName,
 	       const QString& objModelName,
@@ -386,6 +387,7 @@ protected:
 	Vec3f haloColor;                 // exclusively used for drawing the planet halo
 
 	float albedo;                    // Planet albedo. Used for magnitude computation (but formula dubious!)
+	float roughness;                 // Oren-Nayar roughness for Moon and OBJ-based models
 	Mat4d rotLocalToParent;          // GZ2015: was undocumented.
 					 // Apparently this is the axis orientation with respect to the parent body. For planets, this is axis orientation w.r.t. VSOP87A/J2000 ecliptical system.
 	float axisRotation;              // Rotation angle of the Planet on its axis.
@@ -452,6 +454,7 @@ private:
 		int shadowData;
 		int sunInfo;
 		int skyBrightness;
+		int orenNayarParameters;
 
 		// Moon-specific variables
 		int earthShadow;
