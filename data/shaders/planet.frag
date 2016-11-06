@@ -53,6 +53,8 @@ varying highp vec4 shadowCoord;
     //light and eye direction in model space
     uniform highp vec3 lightDirection;
     uniform highp vec3 eyeDirection;
+    //x = A, y = B, z = scaling factor (rho/pi * E0)
+    uniform mediump vec3 orenNayarParameters;
 #endif
 #ifdef IS_MOON
     uniform sampler2D earthShadow;
@@ -118,26 +120,22 @@ lowp float sampleShadowMap(in highp sampler2D sTex, in highp vec4 coord)
 }
 #endif
 
-// Calculates the Oren-Nayar reflectance with fixed sigma and E0 (https://en.wikipedia.org/wiki/Oren%E2%80%93Nayar_reflectance_model)
-mediump float orenNayar(in mediump vec3 normal, in highp vec3 lightDir, in highp vec3 viewDir)
+// Calculates the Oren-Nayar reflectance (https://en.wikipedia.org/wiki/Oren%E2%80%93Nayar_reflectance_model)
+// the scale parameter is actually rho/pi * E_0 here
+// A and B are precalculated on the CPU side
+mediump float orenNayar(in mediump vec3 normal, in highp vec3 lightDir, in highp vec3 viewDir, in mediump float A, in mediump float B, in mediump float scale)
 {
     // GZ next 2 dont require highp IMHO
-    mediump float cosAngleLightNormal = dot(normal, lightDir);
-    mediump float cosAngleEyeNormal = dot(normal, viewDir);
+    mediump float cosAngleLightNormal = dot(normal, lightDir);  //cos theta_i
+    mediump float cosAngleEyeNormal = dot(normal, viewDir); //cos theta_r
     //acos can be quite expensive, can we avoid it?
-    mediump float angleLightNormal = acos(cosAngleLightNormal);
-    mediump float angleEyeNormal = acos(cosAngleEyeNormal);
-    mediump float alpha = max(angleEyeNormal, angleLightNormal);
-    mediump float beta = min(angleEyeNormal, angleLightNormal);
+    mediump float angleLightNormal = acos(cosAngleLightNormal); //theta_i
+    mediump float angleEyeNormal = acos(cosAngleEyeNormal); //theta_r
+    mediump float alpha = max(angleEyeNormal, angleLightNormal); //alpha = max(theta_i, theta_r)
+    mediump float beta = min(angleEyeNormal, angleLightNormal); //beta = min(theta_i, theta_r)
     mediump float gamma = dot(viewDir - normal * cosAngleEyeNormal, lightDir - normal * cosAngleLightNormal);
-    // GZ next 5 can be lowp instead of mediump. Roughness original 1.0, then 0.8 in 0.14.0.
-    lowp float roughness = 0.9;
-    lowp float roughnessSquared = roughness * roughness;
-    lowp float A = 1.0 - 0.5 * (roughnessSquared / (roughnessSquared + 0.57));
-    lowp float B = 0.45 * (roughnessSquared / (roughnessSquared + 0.09));
-    lowp float C = sin(alpha) * tan(beta);
-    // GZ final number was 2, but this causes overly bright moon. was 1.5 in 0.14.0.
-    return max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C) * 1.85;
+    mediump float C = sin(alpha) * tan(beta);
+    return max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C) * scale;
 }
 
 void main()
@@ -234,7 +232,7 @@ void main()
 #if defined(IS_OBJ) || defined(IS_MOON)
     // Use an Oren-Nayar model for rough surfaces
     // Ref: http://content.gpwiki.org/index.php/D3DBook:(Lighting)_Oren-Nayar
-    lum = orenNayar(normal, lightDirection, eyeDirection);
+    lum = orenNayar(normal, lightDirection, eyeDirection, orenNayarParameters.x, orenNayarParameters.y, orenNayarParameters.z);
 #endif
 //Reduce lum if sky is bright, to avoid burnt-out look in daylight sky.
     lum *= (1.0-0.4*skyBrightness);
