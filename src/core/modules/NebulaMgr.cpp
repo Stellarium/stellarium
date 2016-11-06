@@ -1228,9 +1228,11 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	// Search by aliases of common names
 	foreach (const NebulaP& n, dsoArray)
 	{
-		QString objwcap = n->nameI18Aliases.join(" - ").toUpper();
-		if (objwcap==objw && !objwcap.isEmpty())
-			return qSharedPointerCast<StelObject>(n);
+		foreach(QString objwcapa, n->nameI18Aliases)
+		{
+			if (objwcapa.toUpper()==objw)
+				return qSharedPointerCast<StelObject>(n);
+		}
 	}
 
 	// Search by IC numbers (possible formats are "IC466" or "IC 466")
@@ -1405,9 +1407,11 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	// Search by aliases of common names
 	foreach (const NebulaP& n, dsoArray)
 	{
-		QString objwcap = n->englishAliases.join(" - ").toUpper();
-		if (objwcap==objw && !objwcap.isEmpty())
-			return qSharedPointerCast<StelObject>(n);
+		foreach(QString objwcapa, n->englishAliases)
+		{
+			if (objwcapa.toUpper()==objw)
+				return qSharedPointerCast<StelObject>(n);
+		}
 	}
 
 	// Search by IC numbers (possible formats are "IC466" or "IC 466")
@@ -1874,10 +1878,11 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	// Search by aliases of common names
 	foreach (const NebulaP& n, dsoArray)
 	{
-		QString name = inEnglish ? n->englishAliases.join(" - ") : n->nameI18Aliases.join(" - ");
-		if (matchObjectName(name, objPrefix, useStartOfWords))
+		QStringList nameList = inEnglish ? n->englishAliases : n->nameI18Aliases;
+		foreach(QString name, nameList)
 		{
-			result.append(name);
+			if (matchObjectName(name, objPrefix, useStartOfWords))
+				result.append(name);
 		}
 	}
 
