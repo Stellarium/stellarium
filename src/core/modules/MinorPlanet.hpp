@@ -44,6 +44,7 @@ public:
 		    double oblateness,
 		    Vec3f halocolor,
 		    float albedo,
+		    float roughness,
 		    const QString& texMapName,
 		    const QString& objModelName,
 		    posFuncType _coordFunc,
