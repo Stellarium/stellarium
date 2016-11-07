@@ -7,18 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-05 20:34+0700\n"
+"POT-Creation-Date: 2016-11-06 21:01+0700\n"
 "PO-Revision-Date: 2016-07-03 18:15+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-06 05:37+0000\n"
+"X-Launchpad-Export-Date: 2016-11-07 05:39+0000\n"
 "X-Generator: Launchpad (build 18246)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
-#: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:188
+#: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:191
 #: src/core/modules/Planet.cpp:229 src/core/modules/MinorPlanet.cpp:213
 #: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:192
 #: src/core/modules/StarWrapper.cpp:195
@@ -74,7 +74,7 @@ msgstr "Називи сазвежђа"
 msgid "Constellation boundaries"
 msgstr "Границе сазвежђа"
 
-#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1353
+#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1368
 msgid "Select single constellation"
 msgstr "Изаберите једно сазвежђе"
 
@@ -319,7 +319,7 @@ msgstr ""
 msgid "Equinox points"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1927
+#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1936
 msgid "Atmosphere"
 msgstr "Атмосфера"
 
@@ -345,7 +345,7 @@ msgstr "Осветљеност"
 msgid "Labels"
 msgstr "Називи"
 
-#: src/core/modules/LandscapeMgr.cpp:421 src/ui_viewDialog.h:1931
+#: src/core/modules/LandscapeMgr.cpp:421 src/ui_viewDialog.h:1940
 msgid "Light pollution data from locations database"
 msgstr "Подаци о светлосном загађењу за локације из базе података"
 
@@ -367,26 +367,26 @@ msgstr ", %1 m"
 msgid "Celestial body:"
 msgstr "Небеско тело"
 
-#: src/core/modules/Nebula.cpp:190 src/core/modules/Comet.cpp:176
+#: src/core/modules/Nebula.cpp:193 src/core/modules/Comet.cpp:176
 #: plugins/Novae/src/Nova.cpp:136 plugins/Pulsars/src/Pulsar.cpp:169
 #: plugins/MeteorShowers/src/MeteorShower.cpp:547
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
 msgstr "Тип: <b>%1</b> (%2)"
 
-#: src/core/modules/Nebula.cpp:197
+#: src/core/modules/Nebula.cpp:200
 #, qt-format
 msgid "Opacity: <b>%1</b>"
 msgstr "Непрозирност: %1"
 
-#: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:235
+#: src/core/modules/Nebula.cpp:205 src/core/modules/Planet.cpp:235
 #: src/core/modules/MinorPlanet.cpp:219 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:202
 #, qt-format
 msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
+#: src/core/modules/Nebula.cpp:208 src/core/modules/Nebula.cpp:213
 #: src/core/modules/Planet.cpp:238 src/core/modules/MinorPlanet.cpp:222
 #: src/core/modules/Comet.cpp:185 src/core/modules/StarWrapper.cpp:63
 #: src/core/modules/StarWrapper.cpp:205
@@ -396,43 +396,43 @@ msgstr ""
 msgid "Magnitude: <b>%1</b>"
 msgstr "Магнитуда: <b> %1 </b>"
 
-#: src/core/modules/Nebula.cpp:211
+#: src/core/modules/Nebula.cpp:214
 msgid " (Photometric system: B)"
 msgstr " Фотометријски систем: B"
 
-#: src/core/modules/Nebula.cpp:217 src/core/modules/StarWrapper.cpp:68
+#: src/core/modules/Nebula.cpp:220 src/core/modules/StarWrapper.cpp:68
 #: src/core/modules/StarWrapper.cpp:213 plugins/Quasars/src/Quasar.cpp:122
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
 msgstr "Боја (П-В): <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:224
+#: src/core/modules/Nebula.cpp:227
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:230
+#: src/core/modules/Nebula.cpp:233
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
 msgstr "Површински сјај: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:239
+#: src/core/modules/Nebula.cpp:242
 #, qt-format
 msgid "Size: %1"
 msgstr "Величина: %1"
 
-#: src/core/modules/Nebula.cpp:242
+#: src/core/modules/Nebula.cpp:245
 #, qt-format
 msgid "Size: %1 x %2"
 msgstr "Величина: %1 x %2"
 
-#: src/core/modules/Nebula.cpp:244
+#: src/core/modules/Nebula.cpp:247
 #, qt-format
 msgid "Orientation angle: %1%2"
 msgstr "Оријентациони угао: %1 %2"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:268 src/core/modules/StarWrapper.cpp:243
+#: src/core/modules/Nebula.cpp:271 src/core/modules/StarWrapper.cpp:243
 #: plugins/Supernovae/src/Supernova.cpp:150 plugins/Novae/src/Nova.cpp:156
 #: plugins/Exoplanets/src/Exoplanet.cpp:300
 #, qt-format
@@ -440,410 +440,410 @@ msgid "Distance: %1 ly"
 msgstr "Даљина: %1сг"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:278
+#: src/core/modules/Nebula.cpp:281
 msgid "kpc"
 msgstr "kpc"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:280
+#: src/core/modules/Nebula.cpp:283
 msgid "ly"
 msgstr "сг"
 
 #. TRANSLATORS: Unit of measure for distance - Megaparsecs
-#: src/core/modules/Nebula.cpp:287
+#: src/core/modules/Nebula.cpp:290
 msgid "Mpc"
 msgstr "Mpc"
 
 #. TRANSLATORS: Unit of measure for distance - Millions of Light Years
-#: src/core/modules/Nebula.cpp:289
+#: src/core/modules/Nebula.cpp:292
 msgid "Mio. ly"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:303
+#: src/core/modules/Nebula.cpp:306
 #, qt-format
 msgid "Distance: %1 %2 (%3 %4)"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:317
+#: src/core/modules/Nebula.cpp:320
 #, qt-format
 msgid "Redshift: %1"
 msgstr "Црвени помак: %1"
 
-#: src/core/modules/Nebula.cpp:328 src/core/modules/StarWrapper.cpp:252
+#: src/core/modules/Nebula.cpp:331 src/core/modules/StarWrapper.cpp:252
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Паралакса: %1\""
 
-#: src/core/modules/Nebula.cpp:332
+#: src/core/modules/Nebula.cpp:335
 msgid "Morphological description: "
 msgstr "Морфолошки опис: "
 
-#: src/core/modules/Nebula.cpp:839
+#: src/core/modules/Nebula.cpp:858
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:842
+#: src/core/modules/Nebula.cpp:861
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:845
+#: src/core/modules/Nebula.cpp:864
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:848
+#: src/core/modules/Nebula.cpp:867
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:853
+#: src/core/modules/Nebula.cpp:872
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:856
+#: src/core/modules/Nebula.cpp:875
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "rather loosely concentration of stars towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:859
+#: src/core/modules/Nebula.cpp:878
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:862
+#: src/core/modules/Nebula.cpp:881
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:865
+#: src/core/modules/Nebula.cpp:884
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:868
+#: src/core/modules/Nebula.cpp:887
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:871
+#: src/core/modules/Nebula.cpp:890
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:891
+#: src/core/modules/Nebula.cpp:910
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:894
+#: src/core/modules/Nebula.cpp:913
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:897
+#: src/core/modules/Nebula.cpp:916
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:900
+#: src/core/modules/Nebula.cpp:919
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:903
+#: src/core/modules/Nebula.cpp:922
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:909
+#: src/core/modules/Nebula.cpp:928
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:912
+#: src/core/modules/Nebula.cpp:931
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:915
+#: src/core/modules/Nebula.cpp:934
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:918
+#: src/core/modules/Nebula.cpp:937
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:924
+#: src/core/modules/Nebula.cpp:943
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:927
+#: src/core/modules/Nebula.cpp:946
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:930
+#: src/core/modules/Nebula.cpp:949
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:933
+#: src/core/modules/Nebula.cpp:952
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:937
+#: src/core/modules/Nebula.cpp:956
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:958
+#: src/core/modules/Nebula.cpp:977
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:961
+#: src/core/modules/Nebula.cpp:980
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:964
+#: src/core/modules/Nebula.cpp:983
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:967
+#: src/core/modules/Nebula.cpp:986
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:970
+#: src/core/modules/Nebula.cpp:989
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:973
+#: src/core/modules/Nebula.cpp:992
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:976
+#: src/core/modules/Nebula.cpp:995
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:982
+#: src/core/modules/Nebula.cpp:1001
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:985
+#: src/core/modules/Nebula.cpp:1004
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:988
+#: src/core/modules/Nebula.cpp:1007
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr ""
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:993
+#: src/core/modules/Nebula.cpp:1012
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr ""
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:999
+#: src/core/modules/Nebula.cpp:1018
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1003
+#: src/core/modules/Nebula.cpp:1022
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1026
+#: src/core/modules/Nebula.cpp:1045
 msgid "circular form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1029
+#: src/core/modules/Nebula.cpp:1048
 msgid "elliptical form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1032
+#: src/core/modules/Nebula.cpp:1051
 msgid "irregular form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1035
+#: src/core/modules/Nebula.cpp:1054
 msgid "undocumented form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1041
+#: src/core/modules/Nebula.cpp:1060
 msgid "amorphous structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1044
+#: src/core/modules/Nebula.cpp:1063
 msgid "conventional structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1047
+#: src/core/modules/Nebula.cpp:1066
 msgid "filamentary structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1050
+#: src/core/modules/Nebula.cpp:1069
 msgid "undocumented structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1056
+#: src/core/modules/Nebula.cpp:1075
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "најблеђи"
 
-#: src/core/modules/Nebula.cpp:1059
+#: src/core/modules/Nebula.cpp:1078
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1062
+#: src/core/modules/Nebula.cpp:1081
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "најсветлији"
 
-#: src/core/modules/Nebula.cpp:1065
+#: src/core/modules/Nebula.cpp:1084
 msgid "undocumented brightness"
 msgstr "недокументован сјај"
 
-#: src/core/modules/Nebula.cpp:1081
+#: src/core/modules/Nebula.cpp:1100
 msgid "galaxy"
 msgstr "галаксија"
 
-#: src/core/modules/Nebula.cpp:1084
+#: src/core/modules/Nebula.cpp:1103
 msgid "active galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1087
+#: src/core/modules/Nebula.cpp:1106
 msgid "radio galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1090
+#: src/core/modules/Nebula.cpp:1109
 msgid "interacting galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1093 plugins/Quasars/src/Quasar.cpp:101
+#: src/core/modules/Nebula.cpp:1112 plugins/Quasars/src/Quasar.cpp:101
 msgid "quasar"
 msgstr "квазар"
 
-#: src/core/modules/Nebula.cpp:1096
+#: src/core/modules/Nebula.cpp:1115
 msgid "star cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1099
+#: src/core/modules/Nebula.cpp:1118
 msgid "open star cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1102
+#: src/core/modules/Nebula.cpp:1121
 msgid "globular star cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1105
+#: src/core/modules/Nebula.cpp:1124
 msgid "nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1108
+#: src/core/modules/Nebula.cpp:1127
 msgid "planetary nebula"
 msgstr "планетарна маглина"
 
-#: src/core/modules/Nebula.cpp:1111
+#: src/core/modules/Nebula.cpp:1130
 msgid "dark nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1114
+#: src/core/modules/Nebula.cpp:1133
 msgid "cluster associated with nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1117
+#: src/core/modules/Nebula.cpp:1136
 msgid "bipolar nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1120
+#: src/core/modules/Nebula.cpp:1139
 msgid "emission nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1123
+#: src/core/modules/Nebula.cpp:1142
 msgid "HII region"
 msgstr "HII регион"
 
-#: src/core/modules/Nebula.cpp:1126
+#: src/core/modules/Nebula.cpp:1145
 msgid "reflection nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1129
+#: src/core/modules/Nebula.cpp:1148
 msgid "supernova remnant"
 msgstr "остаци супернове"
 
-#: src/core/modules/Nebula.cpp:1132
+#: src/core/modules/Nebula.cpp:1151
 msgid "stellar association"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1135
+#: src/core/modules/Nebula.cpp:1154
 msgid "star cloud"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1138
+#: src/core/modules/Nebula.cpp:1157
 msgid "interstellar matter"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1141
+#: src/core/modules/Nebula.cpp:1160
 msgid "emission object"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1144
+#: src/core/modules/Nebula.cpp:1163
 msgid "BL Lac object"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1147
+#: src/core/modules/Nebula.cpp:1166
 msgid "blazar"
 msgstr "блазар"
 
-#: src/core/modules/Nebula.cpp:1150
+#: src/core/modules/Nebula.cpp:1169
 msgid "molecular cloud"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1153
+#: src/core/modules/Nebula.cpp:1172
 msgid "young stellar object"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1156
+#: src/core/modules/Nebula.cpp:1175
 msgid "possible quasar"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1159
+#: src/core/modules/Nebula.cpp:1178
 msgid "possible planetary nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1162
+#: src/core/modules/Nebula.cpp:1181
 msgid "protoplanetary nebula"
 msgstr ""
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1165 src/core/modules/StarWrapper.cpp:53
+#: src/core/modules/Nebula.cpp:1184 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:185 src/translations.h:46
 msgid "star"
 msgstr "звезда"
 
-#: src/core/modules/Nebula.cpp:1168
+#: src/core/modules/Nebula.cpp:1187
 msgid "object of unknown nature"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1171
+#: src/core/modules/Nebula.cpp:1190
 msgid "undocumented type"
 msgstr ""
 
@@ -2866,7 +2866,7 @@ msgid "year"
 msgstr "година"
 
 #. TRANSLATORS: name of object
-#: src/gui/AstroCalcDialog.cpp:159 src/ui_configurationDialog.h:1243
+#: src/gui/AstroCalcDialog.cpp:159 src/ui_configurationDialog.h:1274
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:450
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:96
 #: plugins/Exoplanets/src/Exoplanet.cpp:324
@@ -2890,7 +2890,7 @@ msgid "Mag."
 msgstr ""
 
 #. TRANSLATORS: type of object
-#: src/gui/AstroCalcDialog.cpp:167 src/ui_configurationDialog.h:1233
+#: src/gui/AstroCalcDialog.cpp:167 src/ui_configurationDialog.h:1253
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
 msgid "Type"
 msgstr "Врста"
@@ -4013,7 +4013,7 @@ msgstr "Директоријум"
 msgid "&Choose"
 msgstr "&Изабери"
 
-#: src/translations.h:368 src/ui_configurationDialog.h:1387
+#: src/translations.h:368 src/ui_configurationDialog.h:1402
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "Cancel"
 msgstr "Одустани"
@@ -5124,7 +5124,7 @@ msgstr "О програму"
 msgid "Log"
 msgstr "Дневник"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1274
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1289
 msgid "Edit keyboard shortcuts..."
 msgstr "Измени пречице на тастатури..."
 
@@ -5400,7 +5400,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:722 src/ui_viewDialog.h:2241
 #: src/ui_viewDialog.h:2263 src/ui_viewDialog.h:2289
-#: src/ui_configurationDialog.h:1388 src/ui_configurationDialog.h:1399
+#: src/ui_configurationDialog.h:1403 src/ui_configurationDialog.h:1414
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Опције"
@@ -5436,7 +5436,7 @@ msgstr "Светлуцање:"
 msgid "Limit the magnitude of stars"
 msgstr "Ограничи магнитуде звезда"
 
-#: src/ui_viewDialog.h:1918 src/ui_viewDialog.h:1957 src/ui_viewDialog.h:2041
+#: src/ui_viewDialog.h:1918 src/ui_viewDialog.h:1966 src/ui_viewDialog.h:2041
 msgid "Limit magnitude:"
 msgstr ""
 
@@ -5448,15 +5448,32 @@ msgstr "Затамни слабо приметне звезде када је в
 msgid "Dynamic eye adaptation"
 msgstr "Динамичко прилагођавање ока"
 
-#: src/ui_viewDialog.h:1923 src/ui_viewDialog.h:1962 src/ui_viewDialog.h:2029
+#: src/ui_viewDialog.h:1923 src/ui_viewDialog.h:1971 src/ui_viewDialog.h:2029
 msgid "Labels and Markers"
 msgstr "Ознаке и индикатори"
 
 #: src/ui_viewDialog.h:1925
+msgid "Settings for sporadic meteors"
+msgstr "Подешавања за спорадичне метеоре"
+
+#: src/ui_viewDialog.h:1927
+msgid "Shooting Stars"
+msgstr "Звезде падалице"
+
+#: src/ui_viewDialog.h:1930
+msgid "Hourly zenith rate"
+msgstr "Часовна зенитна стопа"
+
+#: src/ui_viewDialog.h:1932
+msgctxt "Zenithal Hourly Rate"
+msgid "ZHR:"
+msgstr "ЗЧО:"
+
+#: src/ui_viewDialog.h:1934
 msgid "Show atmosphere"
 msgstr "Прикажи атмосферу"
 
-#: src/ui_viewDialog.h:1929
+#: src/ui_viewDialog.h:1938
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
@@ -5464,99 +5481,82 @@ msgstr ""
 "Користи податке о светлосном загађењу  локација из базе података и игнориши "
 "подешавања за светлосно загађење која се налазе испод."
 
-#: src/ui_viewDialog.h:1932
+#: src/ui_viewDialog.h:1941
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:440
 msgid "Light pollution:"
 msgstr "Светлосна загађеност:"
 
-#: src/ui_viewDialog.h:1934
+#: src/ui_viewDialog.h:1943
 msgid "pressure, temperature, extinction coefficient"
 msgstr "притисак, температура, коефицијент пригушавања"
 
-#: src/ui_viewDialog.h:1936
+#: src/ui_viewDialog.h:1945
 msgid "Refraction/Extinction settings..."
 msgstr "Поставке преламања/пригушивања..."
 
-#: src/ui_viewDialog.h:1937
+#: src/ui_viewDialog.h:1946
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:293
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Solar System objects"
 msgstr "Објекти Сунчевог система"
 
-#: src/ui_viewDialog.h:1938
+#: src/ui_viewDialog.h:1947
 msgid "Show planet markers"
 msgstr "Прикажи индикаторе планета"
 
-#: src/ui_viewDialog.h:1939
+#: src/ui_viewDialog.h:1948
 msgid "Show planet orbits"
 msgstr "Прикажи орбите планета"
 
-#: src/ui_viewDialog.h:1941
+#: src/ui_viewDialog.h:1950
 msgid ""
 "Deactivate this option if you want to see orbit for selected planet and its "
 "moons."
 msgstr ""
 
-#: src/ui_viewDialog.h:1943
+#: src/ui_viewDialog.h:1952
 msgid "Show orbit for selected planet"
 msgstr ""
 
-#: src/ui_viewDialog.h:1945
+#: src/ui_viewDialog.h:1954
 msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
 msgstr ""
 
-#: src/ui_viewDialog.h:1947
+#: src/ui_viewDialog.h:1956
 msgid "Show trail only for selected planet"
 msgstr ""
 
-#: src/ui_viewDialog.h:1949
+#: src/ui_viewDialog.h:1958
 msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
 msgstr ""
 
-#: src/ui_viewDialog.h:1951
+#: src/ui_viewDialog.h:1960
 msgid "Simulate light speed"
 msgstr "Симулирај брзину светлости"
 
-#: src/ui_viewDialog.h:1952
+#: src/ui_viewDialog.h:1961
 msgid "Use custom settings of GRS:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1953
+#: src/ui_viewDialog.h:1962
 msgid "GRS details..."
 msgstr ""
 
-#: src/ui_viewDialog.h:1955
+#: src/ui_viewDialog.h:1964
 msgid "Limit the magnitude of solar system objects"
 msgstr ""
 
-#: src/ui_viewDialog.h:1958
+#: src/ui_viewDialog.h:1967
 msgid "Scale Moon:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1960
+#: src/ui_viewDialog.h:1969
 msgid "Scale factor"
 msgstr "Фактор повећавања"
-
-#: src/ui_viewDialog.h:1964
-msgid "Settings for sporadic meteors"
-msgstr "Подешавања за спорадичне метеоре"
-
-#: src/ui_viewDialog.h:1966
-msgid "Shooting Stars"
-msgstr "Звезде падалице"
-
-#: src/ui_viewDialog.h:1968
-msgid "Hourly zenith rate"
-msgstr "Часовна зенитна стопа"
-
-#: src/ui_viewDialog.h:1970
-msgctxt "Zenithal Hourly Rate"
-msgid "ZHR:"
-msgstr "ЗЧО:"
 
 #: src/ui_viewDialog.h:1972
 msgid "Display objects from catalogs"
@@ -5977,53 +5977,53 @@ msgid "Vertical viewport offset"
 msgstr "Вертикална даљина до видног поља"
 
 #: src/ui_viewDialog.h:2242
-msgid "Show ground"
-msgstr "Прикажи тло"
-
-#: src/ui_viewDialog.h:2243
-msgid "Use this landscape as default"
-msgstr "Користи овај пејзаж као почетни"
-
-#: src/ui_viewDialog.h:2244
-msgid "Use associated planet and position"
-msgstr "Користи повезану планету и позицију"
-
-#: src/ui_viewDialog.h:2245
-msgid "Show landscape labels"
-msgstr "Прикажи пејзажне маркере."
-
-#: src/ui_viewDialog.h:2246
 msgid "Show fog"
 msgstr "Прикажи маглу"
 
-#: src/ui_viewDialog.h:2248
-msgid "Show illumination layer (bright windows, light pollution, etc.)"
-msgstr "Прикажи слој осветљења (светли прозори,мало загађења и тд.)"
+#: src/ui_viewDialog.h:2243
+msgid "Use associated planet and position"
+msgstr "Користи повезану планету и позицију"
 
-#: src/ui_viewDialog.h:2250
-msgid "Show illumination "
-msgstr ""
+#: src/ui_viewDialog.h:2244
+msgid "Use this landscape as default"
+msgstr "Користи овај пејзаж као почетни"
 
-#: src/ui_viewDialog.h:2252
+#: src/ui_viewDialog.h:2245
+msgid "Show ground"
+msgstr "Прикажи тло"
+
+#: src/ui_viewDialog.h:2247
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr "Користи минимално осветљење како би оставио пејзаж видљив у тами."
 
-#: src/ui_viewDialog.h:2254
+#: src/ui_viewDialog.h:2249
 msgid "Minimal brightness:"
 msgstr "Минимално осветљење:"
 
-#: src/ui_viewDialog.h:2256
+#: src/ui_viewDialog.h:2251
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr "Опсег 0-1 ( предео је црн ноћу - предео је потпуно осветљен)"
 
-#: src/ui_viewDialog.h:2259
+#: src/ui_viewDialog.h:2254
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr "Користи минимално осветљење које може бити назначено за предео."
 
-#: src/ui_viewDialog.h:2261
+#: src/ui_viewDialog.h:2256
 msgid "from landscape, if given"
 msgstr "са пејзажа, ако је задата"
+
+#: src/ui_viewDialog.h:2258
+msgid "Show illumination layer (bright windows, light pollution, etc.)"
+msgstr "Прикажи слој осветљења (светли прозори,мало загађења и тд.)"
+
+#: src/ui_viewDialog.h:2260
+msgid "Show illumination "
+msgstr ""
+
+#: src/ui_viewDialog.h:2261
+msgid "Show landscape labels"
+msgstr "Прикажи пејзажне маркере."
 
 #: src/ui_viewDialog.h:2262
 msgid "Add/remove landscapes..."
@@ -6108,68 +6108,68 @@ msgstr "Пејзаж"
 msgid "Starlore"
 msgstr "Приче о звездама"
 
-#: src/ui_configurationDialog.h:1169
+#: src/ui_configurationDialog.h:1184
 msgid "Configuration"
 msgstr "Конфигурација"
 
-#: src/ui_configurationDialog.h:1171
+#: src/ui_configurationDialog.h:1186
 msgid "Language settings"
 msgstr "Подешавања језика"
 
-#: src/ui_configurationDialog.h:1172
+#: src/ui_configurationDialog.h:1187
 msgid "Program Language"
 msgstr "Програмски језик"
 
-#: src/ui_configurationDialog.h:1173
+#: src/ui_configurationDialog.h:1188
 msgid "Sky Culture Language"
 msgstr "Језик разних култура сазвежђа"
 
-#: src/ui_configurationDialog.h:1175
+#: src/ui_configurationDialog.h:1190
 msgid "This feature has not been thoroughly tested yet!"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1177
+#: src/ui_configurationDialog.h:1192
 msgid "Ephemeris settings (experimental)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1178 src/ui_configurationDialog.h:1179
+#: src/ui_configurationDialog.h:1193 src/ui_configurationDialog.h:1194
 msgid "Not installed"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1181
+#: src/ui_configurationDialog.h:1196
 msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1183
+#: src/ui_configurationDialog.h:1198
 msgid "Use DE431 (long-time data)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1185
+#: src/ui_configurationDialog.h:1200
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1187
+#: src/ui_configurationDialog.h:1202
 msgid "Use DE430 (high accuracy)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1189
+#: src/ui_configurationDialog.h:1204
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1191
+#: src/ui_configurationDialog.h:1206
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1192
+#: src/ui_configurationDialog.h:1207
 msgid "Default options"
 msgstr "Подразумеване опције"
 
-#: src/ui_configurationDialog.h:1194
+#: src/ui_configurationDialog.h:1209
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -6177,7 +6177,7 @@ msgstr ""
 "Сними подешавања која сте изменили приликом ове сесије да буду иста када "
 "следећи пут покренете Стеларијум"
 
-#: src/ui_configurationDialog.h:1196
+#: src/ui_configurationDialog.h:1211
 #: plugins/NavStars/src/ui_navStarsWindow.h:211
 #: plugins/FOV/src/ui_fovWindow.h:391
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:281
@@ -6185,11 +6185,11 @@ msgstr ""
 msgid "Save settings"
 msgstr "Сачувај подешавања"
 
-#: src/ui_configurationDialog.h:1198
+#: src/ui_configurationDialog.h:1213
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Поврати почетна подешавања која су дошла са Стеларијумом"
 
-#: src/ui_configurationDialog.h:1200
+#: src/ui_configurationDialog.h:1215
 #: plugins/NavStars/src/ui_navStarsWindow.h:212
 #: plugins/FOV/src/ui_fovWindow.h:408
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:282
@@ -6197,7 +6197,7 @@ msgstr "Поврати почетна подешавања која су дош�
 msgid "Restore defaults"
 msgstr "Поврати подразумевано"
 
-#: src/ui_configurationDialog.h:1201
+#: src/ui_configurationDialog.h:1216
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -6207,192 +6207,192 @@ msgstr ""
 "Снимање свих тренутних опција укључује тренутно видно поље и правац "
 "посматрања за употребу приликом следећег покретања."
 
-#: src/ui_configurationDialog.h:1203
+#: src/ui_configurationDialog.h:1218
 msgid "The width of your view when Stellarium starts"
 msgstr "Ширина твог погледа када покренеш Стеларијум"
 
-#: src/ui_configurationDialog.h:1206
+#: src/ui_configurationDialog.h:1221
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Правац гледања када покренеш Стеларијум"
 
-#: src/ui_configurationDialog.h:1208 src/ui_configurationDialog.h:1410
+#: src/ui_configurationDialog.h:1223 src/ui_configurationDialog.h:1425
 msgid "Selected object information"
 msgstr "Информације о изабраном објекту"
 
-#: src/ui_configurationDialog.h:1210
+#: src/ui_configurationDialog.h:1225
 msgid "Display all information available"
 msgstr "Прикажи све доступне информације"
 
-#: src/ui_configurationDialog.h:1212
+#: src/ui_configurationDialog.h:1227
 msgid "All available"
 msgstr "Све доступно"
 
-#: src/ui_configurationDialog.h:1214
+#: src/ui_configurationDialog.h:1229
 msgid "Display no information"
 msgstr "Немој приказати информације"
 
-#: src/ui_configurationDialog.h:1216 plugins/Oculars/src/Oculars.cpp:2387
+#: src/ui_configurationDialog.h:1231 plugins/Oculars/src/Oculars.cpp:2387
 #: plugins/Observability/src/Observability.cpp:205
 msgid "None"
 msgstr "Ништа"
 
-#: src/ui_configurationDialog.h:1218
+#: src/ui_configurationDialog.h:1233
 msgid "Display less information"
 msgstr "Прикажи мање информација"
 
-#: src/ui_configurationDialog.h:1220
+#: src/ui_configurationDialog.h:1235
 msgid "Short"
 msgstr "Кратко"
 
-#: src/ui_configurationDialog.h:1222
+#: src/ui_configurationDialog.h:1237
 msgid "Display user settings information"
 msgstr "Приказ информације о подешавањима за употребу"
 
-#: src/ui_configurationDialog.h:1224
+#: src/ui_configurationDialog.h:1239
 msgid "Customized"
 msgstr "Прилагођено"
 
-#: src/ui_configurationDialog.h:1225
+#: src/ui_configurationDialog.h:1240
 msgid "Displayed fields"
 msgstr "Приказана поља"
 
-#: src/ui_configurationDialog.h:1227
-msgid "Angular or physical size"
-msgstr "Угловна или физичка величина"
-
-#: src/ui_configurationDialog.h:1229
-msgid "Size"
-msgstr "Величина"
-
-#: src/ui_configurationDialog.h:1231
-msgid "The type of the object (star, planet, etc.)"
-msgstr "Тип објекта (звезда, планета ...)"
-
-#: src/ui_configurationDialog.h:1235
-msgid "Spectral class, nebula type, etc."
-msgstr "Спектрални тип, тип маглине..."
-
-#: src/ui_configurationDialog.h:1237
-msgid "Additional information"
-msgstr "Додатне информације"
-
-#: src/ui_configurationDialog.h:1238
-msgid "Distance"
-msgstr "Растојање"
-
-#: src/ui_configurationDialog.h:1240
-msgid "Ecliptic coordinates, equinox J2000"
-msgstr ""
-
-#: src/ui_configurationDialog.h:1242
-msgid "Ecliptic coordinates (J2000)"
-msgstr ""
-
-#: src/ui_configurationDialog.h:1245 src/ui_configurationDialog.h:1265
+#: src/ui_configurationDialog.h:1242 src/ui_configurationDialog.h:1280
 msgid "Equatorial coordinates, equinox of date"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1247
+#: src/ui_configurationDialog.h:1244
 msgid "Right ascension/Declination (of date)"
 msgstr "Ректасцензија / деклинација (за датум)"
 
-#: src/ui_configurationDialog.h:1248
-msgid "Catalog number(s)"
-msgstr "Каталошки број(еви)"
-
-#: src/ui_configurationDialog.h:1250
-msgid "Equatorial coordinates, equinox of J2000.0"
+#: src/ui_configurationDialog.h:1245
+msgid "Supergalactic coordinates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1252
-msgid "Right ascension/Declination (J2000)"
-msgstr "Ректасцензија / Деклинација (Ј2000)"
+#: src/ui_configurationDialog.h:1247
+msgid "Spectral class, nebula type, etc."
+msgstr "Спектрални тип, тип маглине..."
 
-#: src/ui_configurationDialog.h:1253
+#: src/ui_configurationDialog.h:1249
+msgid "Additional information"
+msgstr "Додатне информације"
+
+#: src/ui_configurationDialog.h:1251
+msgid "The type of the object (star, planet, etc.)"
+msgstr "Тип објекта (звезда, планета ...)"
+
+#: src/ui_configurationDialog.h:1254
 msgid "Absolute magnitude"
 msgstr "Апсолутна величина"
 
-#: src/ui_configurationDialog.h:1254
-msgid "Galactic coordinates"
-msgstr "Галактичке координате"
-
-#: src/ui_configurationDialog.h:1255
-msgid "Visual magnitude"
-msgstr "Визуелна величина"
-
-#: src/ui_configurationDialog.h:1257
+#: src/ui_configurationDialog.h:1256
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1259
+#: src/ui_configurationDialog.h:1258
 msgid "Ecliptic coordinates (of date)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1261
+#: src/ui_configurationDialog.h:1260
 msgid "Horizontal coordinates"
 msgstr "Хоризонтске координате"
 
-#: src/ui_configurationDialog.h:1263
+#: src/ui_configurationDialog.h:1262
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:201
 msgid "Altitude/Azimuth"
 msgstr "Висина / азимут"
 
+#: src/ui_configurationDialog.h:1263
+msgid "Catalog number(s)"
+msgstr "Каталошки број(еви)"
+
+#: src/ui_configurationDialog.h:1265
+msgid "Angular or physical size"
+msgstr "Угловна или физичка величина"
+
 #: src/ui_configurationDialog.h:1267
+msgid "Size"
+msgstr "Величина"
+
+#: src/ui_configurationDialog.h:1268
+msgid "Galactic coordinates"
+msgstr "Галактичке координате"
+
+#: src/ui_configurationDialog.h:1269
+msgid "Distance"
+msgstr "Растојање"
+
+#: src/ui_configurationDialog.h:1271
+msgid "Equatorial coordinates, equinox of J2000.0"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1273
+msgid "Right ascension/Declination (J2000)"
+msgstr "Ректасцензија / Деклинација (Ј2000)"
+
+#: src/ui_configurationDialog.h:1276
+msgid "Ecliptic coordinates, equinox J2000.0"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1278
+msgid "Ecliptic coordinates (J2000)"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1282
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:198
 msgid "Hour angle/Declination"
 msgstr "Часовни угао / деклинација"
 
-#: src/ui_configurationDialog.h:1268
-msgid "Supergalactic coordinates"
-msgstr ""
+#: src/ui_configurationDialog.h:1283
+msgid "Visual magnitude"
+msgstr "Визуелна величина"
 
-#: src/ui_configurationDialog.h:1269
+#: src/ui_configurationDialog.h:1284
 msgid "Control"
 msgstr "Управљање"
 
-#: src/ui_configurationDialog.h:1271
+#: src/ui_configurationDialog.h:1286
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
 "Дозвољено померање мишем (вучењем) и увећање/смањење (точкић на мишу)"
 
-#: src/ui_configurationDialog.h:1273
+#: src/ui_configurationDialog.h:1288
 msgid "Enable mouse navigation"
 msgstr "Омогућите навигацију преко миша"
 
-#: src/ui_configurationDialog.h:1276
+#: src/ui_configurationDialog.h:1291
 msgid "Allow keyboard to pan and zoom"
 msgstr "Дозвољено померање и увећање/смањење тастатуром"
 
-#: src/ui_configurationDialog.h:1278
+#: src/ui_configurationDialog.h:1293
 msgid "Enable keyboard navigation"
 msgstr "Омогућите навигацију преко тастатуре"
 
-#: src/ui_configurationDialog.h:1280
+#: src/ui_configurationDialog.h:1295
 msgid "Hides the mouse cursor when inactive"
 msgstr "Сакривање курсора када је неактиван"
 
-#: src/ui_configurationDialog.h:1282
+#: src/ui_configurationDialog.h:1297
 msgid "Mouse cursor timeout:"
 msgstr "Сакриј курсор миша након:"
 
-#: src/ui_configurationDialog.h:1284
+#: src/ui_configurationDialog.h:1299
 msgid "seconds"
 msgstr "секунди"
 
-#: src/ui_configurationDialog.h:1286
+#: src/ui_configurationDialog.h:1301
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:192
 msgid "Startup date and time"
 msgstr "Почетни датум и време"
 
-#: src/ui_configurationDialog.h:1288
+#: src/ui_configurationDialog.h:1303
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Покреће Стеларијум са системским датумом и временом"
 
-#: src/ui_configurationDialog.h:1290
+#: src/ui_configurationDialog.h:1305
 msgid "System date and time"
 msgstr "Системски датум и време"
 
-#: src/ui_configurationDialog.h:1292
+#: src/ui_configurationDialog.h:1307
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -6400,132 +6400,132 @@ msgstr ""
 "Поставља опонашајуће време на следећу појаву тог доба дана када се покрене "
 "Стеларијум"
 
-#: src/ui_configurationDialog.h:1294
+#: src/ui_configurationDialog.h:1309
 msgid "System date at:"
 msgstr "Системски датум на:"
 
-#: src/ui_configurationDialog.h:1296
+#: src/ui_configurationDialog.h:1311
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Користите одређени датум и време када се Стеларијум покрене"
 
-#: src/ui_configurationDialog.h:1298
+#: src/ui_configurationDialog.h:1313
 msgid "Other:"
 msgstr "Друго:"
 
-#: src/ui_configurationDialog.h:1300
+#: src/ui_configurationDialog.h:1315
 msgid "Use current local date and time"
 msgstr "Користи текући датум и време"
 
-#: src/ui_configurationDialog.h:1302
+#: src/ui_configurationDialog.h:1317
 msgid "use current"
 msgstr "користи тренутно"
 
-#: src/ui_configurationDialog.h:1304
+#: src/ui_configurationDialog.h:1319
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
 msgstr ""
 "Ове поставке контролишу приказ времена и датума који се приказују у доњој "
 "траци."
 
-#: src/ui_configurationDialog.h:1306
+#: src/ui_configurationDialog.h:1321
 msgid "Display formats of date and time"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1307
+#: src/ui_configurationDialog.h:1322
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
 msgid "Date:"
 msgstr "Датум:"
 
-#: src/ui_configurationDialog.h:1308
+#: src/ui_configurationDialog.h:1323
 msgid "and time:"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1309
+#: src/ui_configurationDialog.h:1324
 msgid "Time correction"
 msgstr "Корекција времена"
 
-#: src/ui_configurationDialog.h:1312
+#: src/ui_configurationDialog.h:1327
 msgid "Edit equation"
 msgstr "Измени једначине"
 
-#: src/ui_configurationDialog.h:1314
+#: src/ui_configurationDialog.h:1329
 msgid "Planetarium options"
 msgstr "Опције планетаријума"
 
-#: src/ui_configurationDialog.h:1316
+#: src/ui_configurationDialog.h:1331
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
 "Аутоматски омогући атмосферу за објекте са атмосфером у прозору локације"
 
-#: src/ui_configurationDialog.h:1318
+#: src/ui_configurationDialog.h:1333
 msgid "Auto-enabling for the atmosphere"
 msgstr "Аутоматско омогућавање атмосфере."
 
-#: src/ui_configurationDialog.h:1320
+#: src/ui_configurationDialog.h:1335
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "Прикажи/сакриј позадине маглина"
 
-#: src/ui_configurationDialog.h:1322
+#: src/ui_configurationDialog.h:1337
 msgid "Show nebula background button"
 msgstr "Прикажи позадински тастер маглине"
 
-#: src/ui_configurationDialog.h:1324
+#: src/ui_configurationDialog.h:1339
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1326
+#: src/ui_configurationDialog.h:1341
 msgid "Include nutation"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1328
+#: src/ui_configurationDialog.h:1343
 msgid "Activate this option to calculate azimuth from south towards west."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1330
+#: src/ui_configurationDialog.h:1345
 msgid "Azimuth from South"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1332
+#: src/ui_configurationDialog.h:1347
 msgid "Use decimal degrees for coordinates"
 msgstr "Користи децималне степене за координате"
 
-#: src/ui_configurationDialog.h:1334
+#: src/ui_configurationDialog.h:1349
 msgid "Use decimal degrees"
 msgstr "Користи децималне степене"
 
-#: src/ui_configurationDialog.h:1336
+#: src/ui_configurationDialog.h:1351
 msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1338
+#: src/ui_configurationDialog.h:1353
 msgid "Topocentric coordinates"
 msgstr "Топоцентричне координате"
 
-#: src/ui_configurationDialog.h:1340
+#: src/ui_configurationDialog.h:1355
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Приказ дугмади за хоризонтално и вертикално преокретање слике"
 
-#: src/ui_configurationDialog.h:1342
+#: src/ui_configurationDialog.h:1357
 msgid "Show flip buttons"
 msgstr "Прикажи дугмад за преокретање"
 
-#: src/ui_configurationDialog.h:1344
+#: src/ui_configurationDialog.h:1359
 msgid "Align labels with the horizon"
 msgstr "Поравнајте ознаке са хоризонтом"
 
-#: src/ui_configurationDialog.h:1346
+#: src/ui_configurationDialog.h:1361
 msgid "Gravity labels"
 msgstr "Гравитационе ознаке"
 
-#: src/ui_configurationDialog.h:1348 src/ui_configurationDialog.h:1351
+#: src/ui_configurationDialog.h:1363 src/ui_configurationDialog.h:1366
 msgid "Hide other constellations when you click one"
 msgstr "Сакриј остала сазвежђа када је једно обележено"
 
-#: src/ui_configurationDialog.h:1355
+#: src/ui_configurationDialog.h:1370
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -6533,120 +6533,120 @@ msgstr ""
 "Изобличење сферног огледала користи се при пројекцији Стеларијума на сферно "
 "огледало код јефтиних планетарних  система."
 
-#: src/ui_configurationDialog.h:1357
+#: src/ui_configurationDialog.h:1372
 msgid "Spheric mirror distortion"
 msgstr "Деформисање сферног огледала"
 
-#: src/ui_configurationDialog.h:1359
+#: src/ui_configurationDialog.h:1374
 msgid "Automatic change of landscape when planet is changed"
 msgstr "Аутоматска промена пејзажа када се планета промени"
 
-#: src/ui_configurationDialog.h:1361
+#: src/ui_configurationDialog.h:1376
 msgid "Auto select landscapes"
 msgstr "Аутоматски изабери пејзаж"
 
-#: src/ui_configurationDialog.h:1363
+#: src/ui_configurationDialog.h:1378
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Замаскирај све ван централног круга у главном видокругу"
 
-#: src/ui_configurationDialog.h:1365
+#: src/ui_configurationDialog.h:1380
 msgid "Disc viewport"
 msgstr "Кружни поглед"
 
-#: src/ui_configurationDialog.h:1367
+#: src/ui_configurationDialog.h:1382
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr ""
 "Када је омогућено, \"самоумањивање\" биће постављено на почетни смер погледа"
 
-#: src/ui_configurationDialog.h:1369
+#: src/ui_configurationDialog.h:1384
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:457
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Самоумањивање враћа на почетни смер погледа"
 
-#: src/ui_configurationDialog.h:1370
+#: src/ui_configurationDialog.h:1385
 msgid "Show bookmarks button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1371
+#: src/ui_configurationDialog.h:1386
 msgid "Screenshots"
 msgstr "Снимци екрана"
 
-#: src/ui_configurationDialog.h:1372
+#: src/ui_configurationDialog.h:1387
 msgid "Screenshot Directory"
 msgstr "Директоријум снимака екрана"
 
-#: src/ui_configurationDialog.h:1374
+#: src/ui_configurationDialog.h:1389
 msgid "Invert colors"
 msgstr "Замени боје"
 
-#: src/ui_configurationDialog.h:1375
+#: src/ui_configurationDialog.h:1390
 msgid "Star catalog updates"
 msgstr "Ажурирање каталога звезда"
 
-#: src/ui_configurationDialog.h:1377
+#: src/ui_configurationDialog.h:1392
 msgid "Click here to start downloading"
 msgstr "Кликни овде да почнете преузимање"
 
-#: src/ui_configurationDialog.h:1379
+#: src/ui_configurationDialog.h:1394
 msgid "Download this file to view even more stars"
 msgstr "Преузми ову датотеку како би видео још више звезда"
 
-#: src/ui_configurationDialog.h:1381
+#: src/ui_configurationDialog.h:1396
 msgid "Restart the download"
 msgstr "Поново покрени преузимање"
 
-#: src/ui_configurationDialog.h:1383
+#: src/ui_configurationDialog.h:1398
 msgid "Retry"
 msgstr "Покушај опет"
 
-#: src/ui_configurationDialog.h:1385
+#: src/ui_configurationDialog.h:1400
 msgid "Stop the download. You can always restart it later"
 msgstr "Заустави преузимање. Можеш касније  поново да покренеш преузимање"
 
-#: src/ui_configurationDialog.h:1390
+#: src/ui_configurationDialog.h:1405
 msgid "Close window when script runs"
 msgstr "Затвори прозор док се скрипта извршава"
 
-#: src/ui_configurationDialog.h:1392
+#: src/ui_configurationDialog.h:1407
 msgid "Run the selected script"
 msgstr "Покрени изабрану скрипту"
 
-#: src/ui_configurationDialog.h:1396
+#: src/ui_configurationDialog.h:1411
 msgid "Stop a running script"
 msgstr "Заустави скрипту која се извршава"
 
-#: src/ui_configurationDialog.h:1400
+#: src/ui_configurationDialog.h:1415
 msgid "Load at startup"
 msgstr "Учитај приликом покретања програма"
 
-#: src/ui_configurationDialog.h:1401
+#: src/ui_configurationDialog.h:1416
 msgid "configure"
 msgstr "подеси"
 
-#: src/ui_configurationDialog.h:1406
+#: src/ui_configurationDialog.h:1421
 msgid "Main"
 msgstr "Главно"
 
-#: src/ui_configurationDialog.h:1408
+#: src/ui_configurationDialog.h:1423
 msgid "Information"
 msgstr "Информације"
 
-#: src/ui_configurationDialog.h:1413
+#: src/ui_configurationDialog.h:1428
 msgid "Navigation"
 msgstr "Навигација"
 
-#: src/ui_configurationDialog.h:1415
+#: src/ui_configurationDialog.h:1430
 msgid "Tools"
 msgstr "Алатке"
 
-#: src/ui_configurationDialog.h:1417
+#: src/ui_configurationDialog.h:1432
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:497
 msgid "Scripts"
 msgstr "Скрипте"
 
-#: src/ui_configurationDialog.h:1419
+#: src/ui_configurationDialog.h:1434
 msgid "Plugins"
 msgstr "Прикључци"
 

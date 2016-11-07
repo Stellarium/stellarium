@@ -7,18 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-05 20:34+0700\n"
+"POT-Creation-Date: 2016-11-06 21:01+0700\n"
 "PO-Revision-Date: 2016-07-27 15:24+0000\n"
 "Last-Translator: Lê Văn Bách <levanbach1994ag@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-06 05:42+0000\n"
+"X-Launchpad-Export-Date: 2016-11-07 05:43+0000\n"
 "X-Generator: Launchpad (build 18246)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
-#: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:188
+#: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:191
 #: src/core/modules/Planet.cpp:229 src/core/modules/MinorPlanet.cpp:213
 #: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:192
 #: src/core/modules/StarWrapper.cpp:195
@@ -74,7 +74,7 @@ msgstr "Tên của các chòm sao"
 msgid "Constellation boundaries"
 msgstr "Ranh giới các chòm sao"
 
-#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1353
+#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1368
 msgid "Select single constellation"
 msgstr "Lựa chọn chòm sao đơn"
 
@@ -319,7 +319,7 @@ msgstr ""
 msgid "Equinox points"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1927
+#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1936
 msgid "Atmosphere"
 msgstr "Khí quyển"
 
@@ -345,7 +345,7 @@ msgstr "Sự chiếu sáng"
 msgid "Labels"
 msgstr "Nhãn"
 
-#: src/core/modules/LandscapeMgr.cpp:421 src/ui_viewDialog.h:1931
+#: src/core/modules/LandscapeMgr.cpp:421 src/ui_viewDialog.h:1940
 msgid "Light pollution data from locations database"
 msgstr "Dữ liệu ô nhiễm ánh sáng từ cơ sở dữ liệu địa điểm"
 
@@ -367,26 +367,26 @@ msgstr ", %1 m"
 msgid "Celestial body:"
 msgstr "Thiên thể"
 
-#: src/core/modules/Nebula.cpp:190 src/core/modules/Comet.cpp:176
+#: src/core/modules/Nebula.cpp:193 src/core/modules/Comet.cpp:176
 #: plugins/Novae/src/Nova.cpp:136 plugins/Pulsars/src/Pulsar.cpp:169
 #: plugins/MeteorShowers/src/MeteorShower.cpp:547
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
 msgstr "Loại: <b>%1</b> (%2)"
 
-#: src/core/modules/Nebula.cpp:197
+#: src/core/modules/Nebula.cpp:200
 #, qt-format
 msgid "Opacity: <b>%1</b>"
 msgstr "Độ chắn sáng: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:235
+#: src/core/modules/Nebula.cpp:205 src/core/modules/Planet.cpp:235
 #: src/core/modules/MinorPlanet.cpp:219 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:202
 #, qt-format
 msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
 msgstr "Độ sáng: <b>%1</b> (sau khi dập tắt: <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
+#: src/core/modules/Nebula.cpp:208 src/core/modules/Nebula.cpp:213
 #: src/core/modules/Planet.cpp:238 src/core/modules/MinorPlanet.cpp:222
 #: src/core/modules/Comet.cpp:185 src/core/modules/StarWrapper.cpp:63
 #: src/core/modules/StarWrapper.cpp:205
@@ -396,43 +396,43 @@ msgstr "Độ sáng: <b>%1</b> (sau khi dập tắt: <b>%2</b>)"
 msgid "Magnitude: <b>%1</b>"
 msgstr "Độ sáng: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:211
+#: src/core/modules/Nebula.cpp:214
 msgid " (Photometric system: B)"
 msgstr " (Hệ thống đo độ sáng: B)"
 
-#: src/core/modules/Nebula.cpp:217 src/core/modules/StarWrapper.cpp:68
+#: src/core/modules/Nebula.cpp:220 src/core/modules/StarWrapper.cpp:68
 #: src/core/modules/StarWrapper.cpp:213 plugins/Quasars/src/Quasar.cpp:122
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
 msgstr "Chỉ số màu (B-V): <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:224
+#: src/core/modules/Nebula.cpp:227
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:230
+#: src/core/modules/Nebula.cpp:233
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
 msgstr "Độ sáng bề mặt: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:239
+#: src/core/modules/Nebula.cpp:242
 #, qt-format
 msgid "Size: %1"
 msgstr "Kích thước: %1"
 
-#: src/core/modules/Nebula.cpp:242
+#: src/core/modules/Nebula.cpp:245
 #, qt-format
 msgid "Size: %1 x %2"
 msgstr "Cỡ: %1 x %2"
 
-#: src/core/modules/Nebula.cpp:244
+#: src/core/modules/Nebula.cpp:247
 #, qt-format
 msgid "Orientation angle: %1%2"
 msgstr "Góc định hướng: %1%2"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:268 src/core/modules/StarWrapper.cpp:243
+#: src/core/modules/Nebula.cpp:271 src/core/modules/StarWrapper.cpp:243
 #: plugins/Supernovae/src/Supernova.cpp:150 plugins/Novae/src/Nova.cpp:156
 #: plugins/Exoplanets/src/Exoplanet.cpp:300
 #, qt-format
@@ -440,410 +440,410 @@ msgid "Distance: %1 ly"
 msgstr "Khoảng cách: %1 n.a.s"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:278
+#: src/core/modules/Nebula.cpp:281
 msgid "kpc"
 msgstr "kpc"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:280
+#: src/core/modules/Nebula.cpp:283
 msgid "ly"
 msgstr "n.a.s"
 
 #. TRANSLATORS: Unit of measure for distance - Megaparsecs
-#: src/core/modules/Nebula.cpp:287
+#: src/core/modules/Nebula.cpp:290
 msgid "Mpc"
 msgstr "Mpc"
 
 #. TRANSLATORS: Unit of measure for distance - Millions of Light Years
-#: src/core/modules/Nebula.cpp:289
+#: src/core/modules/Nebula.cpp:292
 msgid "Mio. ly"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:303
+#: src/core/modules/Nebula.cpp:306
 #, qt-format
 msgid "Distance: %1 %2 (%3 %4)"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:317
+#: src/core/modules/Nebula.cpp:320
 #, qt-format
 msgid "Redshift: %1"
 msgstr "Dịch chuyển đỏ: %1"
 
-#: src/core/modules/Nebula.cpp:328 src/core/modules/StarWrapper.cpp:252
+#: src/core/modules/Nebula.cpp:331 src/core/modules/StarWrapper.cpp:252
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Thị sai: %1\""
 
-#: src/core/modules/Nebula.cpp:332
+#: src/core/modules/Nebula.cpp:335
 msgid "Morphological description: "
 msgstr "Mô tả hình thái: "
 
-#: src/core/modules/Nebula.cpp:839
+#: src/core/modules/Nebula.cpp:858
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr "mật độ sao cao về hướng trung tâm"
 
-#: src/core/modules/Nebula.cpp:842
+#: src/core/modules/Nebula.cpp:861
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr "mật độ sao trung tâm dày đặc"
 
-#: src/core/modules/Nebula.cpp:845
+#: src/core/modules/Nebula.cpp:864
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr "lõi trong mạnh mẽ của các ngôi sao"
 
-#: src/core/modules/Nebula.cpp:848
+#: src/core/modules/Nebula.cpp:867
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr "mật độ đậm đặc trung bình của các ngôi sao"
 
-#: src/core/modules/Nebula.cpp:853
+#: src/core/modules/Nebula.cpp:872
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr "mật độ trung bình của các ngôi sao"
 
-#: src/core/modules/Nebula.cpp:856
+#: src/core/modules/Nebula.cpp:875
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "rather loosely concentration of stars towards the center"
 msgstr "mật độ tập trung khá lỏng lẻo của các ngôi sao về hướng trung tâm"
 
-#: src/core/modules/Nebula.cpp:859
+#: src/core/modules/Nebula.cpp:878
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr "mật độ tập trung lỏng lẻo của các ngôi sao về hướng trung tâm"
 
-#: src/core/modules/Nebula.cpp:862
+#: src/core/modules/Nebula.cpp:881
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr "mật độ tập trung lỏng lẻo của các ngôi sao"
 
-#: src/core/modules/Nebula.cpp:865
+#: src/core/modules/Nebula.cpp:884
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr "mật độ tập trung rất lỏng lẻo của các ngôi sao về hướng trung tâm"
 
-#: src/core/modules/Nebula.cpp:868
+#: src/core/modules/Nebula.cpp:887
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr "hầu như không có sự tập trung về hướng trung tâm"
 
-#: src/core/modules/Nebula.cpp:871
+#: src/core/modules/Nebula.cpp:890
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr "Lớp mật độ không có tư liệu"
 
-#: src/core/modules/Nebula.cpp:891
+#: src/core/modules/Nebula.cpp:910
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr "mật độ trung tâm mạnh mẽ của các ngôi sao"
 
-#: src/core/modules/Nebula.cpp:894
+#: src/core/modules/Nebula.cpp:913
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr "mật độ sao trung tâm nhỏ"
 
-#: src/core/modules/Nebula.cpp:897
+#: src/core/modules/Nebula.cpp:916
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr "mật độ tập trung không đáng kể của các ngôi sao"
 
-#: src/core/modules/Nebula.cpp:900
+#: src/core/modules/Nebula.cpp:919
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr "sự cô đặc sao"
 
-#: src/core/modules/Nebula.cpp:903
+#: src/core/modules/Nebula.cpp:922
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr "Lớp mật độ không có tư liệu"
 
-#: src/core/modules/Nebula.cpp:909
+#: src/core/modules/Nebula.cpp:928
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr "phạm vi độ sáng nhỏ của những thành viên trong cụm sao"
 
-#: src/core/modules/Nebula.cpp:912
+#: src/core/modules/Nebula.cpp:931
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr "phạm vị độ sáng trung bình của các thành viên trong cụm sao"
 
-#: src/core/modules/Nebula.cpp:915
+#: src/core/modules/Nebula.cpp:934
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr "phạm vi độ sáng lớn của các thành viên trong cụm sao"
 
-#: src/core/modules/Nebula.cpp:918
+#: src/core/modules/Nebula.cpp:937
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr "phạm vi độ sáng không có cơ sở của các thành viên trong cụm sao"
 
-#: src/core/modules/Nebula.cpp:924
+#: src/core/modules/Nebula.cpp:943
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr "cụm sao nghèo với ít hơn 50 sao"
 
-#: src/core/modules/Nebula.cpp:927
+#: src/core/modules/Nebula.cpp:946
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr "cụm sao khá với 50-100 sao"
 
-#: src/core/modules/Nebula.cpp:930
+#: src/core/modules/Nebula.cpp:949
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr "cụm sao giàu với hơn 100 sao"
 
-#: src/core/modules/Nebula.cpp:933
+#: src/core/modules/Nebula.cpp:952
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr "Số lớp thành viên không có tư liệu"
 
-#: src/core/modules/Nebula.cpp:937
+#: src/core/modules/Nebula.cpp:956
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr "các cụm sao nằm trong tinh vân"
 
-#: src/core/modules/Nebula.cpp:958
+#: src/core/modules/Nebula.cpp:977
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr "rất sáng"
 
-#: src/core/modules/Nebula.cpp:961
+#: src/core/modules/Nebula.cpp:980
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr "sáng"
 
-#: src/core/modules/Nebula.cpp:964
+#: src/core/modules/Nebula.cpp:983
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr "độ sáng vừa phải"
 
-#: src/core/modules/Nebula.cpp:967
+#: src/core/modules/Nebula.cpp:986
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr "mờ rạt"
 
-#: src/core/modules/Nebula.cpp:970
+#: src/core/modules/Nebula.cpp:989
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr "rất mờ"
 
-#: src/core/modules/Nebula.cpp:973
+#: src/core/modules/Nebula.cpp:992
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr "độ sáng không ổn định"
 
-#: src/core/modules/Nebula.cpp:976
+#: src/core/modules/Nebula.cpp:995
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr "độ sáng không có cơ sở của tinh vân phản xạ"
 
-#: src/core/modules/Nebula.cpp:982
+#: src/core/modules/Nebula.cpp:1001
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr "ngôi sao chiếu sáng được lồng vào trong tinh vân"
 
-#: src/core/modules/Nebula.cpp:985
+#: src/core/modules/Nebula.cpp:1004
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr "ngôi sao được định vị bên ngoài tinh vân được chiếu sáng"
 
-#: src/core/modules/Nebula.cpp:988
+#: src/core/modules/Nebula.cpp:1007
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr "ngôi sao được định vị ở góc của tinh vân được chiếu sáng"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:993
+#: src/core/modules/Nebula.cpp:1012
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr "ngôi sao được định vị bên ngoài tinh vân đặc biệt được chiếu sáng"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:999
+#: src/core/modules/Nebula.cpp:1018
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr "tinh vân tự phát sáng"
 
-#: src/core/modules/Nebula.cpp:1003
+#: src/core/modules/Nebula.cpp:1022
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr "tinh vân phản xạ không có cơ sở"
 
-#: src/core/modules/Nebula.cpp:1026
+#: src/core/modules/Nebula.cpp:1045
 msgid "circular form"
 msgstr "dạng tròn"
 
-#: src/core/modules/Nebula.cpp:1029
+#: src/core/modules/Nebula.cpp:1048
 msgid "elliptical form"
 msgstr "dạng elip"
 
-#: src/core/modules/Nebula.cpp:1032
+#: src/core/modules/Nebula.cpp:1051
 msgid "irregular form"
 msgstr "dạng bất thường"
 
-#: src/core/modules/Nebula.cpp:1035
+#: src/core/modules/Nebula.cpp:1054
 msgid "undocumented form"
 msgstr "dạng không có dữ liệu"
 
-#: src/core/modules/Nebula.cpp:1041
+#: src/core/modules/Nebula.cpp:1060
 msgid "amorphous structure"
 msgstr "cấu trúc vô định hình"
 
-#: src/core/modules/Nebula.cpp:1044
+#: src/core/modules/Nebula.cpp:1063
 msgid "conventional structure"
 msgstr "cấu trúc thông thường"
 
-#: src/core/modules/Nebula.cpp:1047
+#: src/core/modules/Nebula.cpp:1066
 msgid "filamentary structure"
 msgstr "cấu trúc sợi"
 
-#: src/core/modules/Nebula.cpp:1050
+#: src/core/modules/Nebula.cpp:1069
 msgid "undocumented structure"
 msgstr "cấu trúc không có dữ liệu"
 
-#: src/core/modules/Nebula.cpp:1056
+#: src/core/modules/Nebula.cpp:1075
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "mờ nhạt nhất"
 
-#: src/core/modules/Nebula.cpp:1059
+#: src/core/modules/Nebula.cpp:1078
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr "độ sáng vừa phải"
 
-#: src/core/modules/Nebula.cpp:1062
+#: src/core/modules/Nebula.cpp:1081
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "sáng nhất"
 
-#: src/core/modules/Nebula.cpp:1065
+#: src/core/modules/Nebula.cpp:1084
 msgid "undocumented brightness"
 msgstr "độ sáng không có dữ liệu"
 
-#: src/core/modules/Nebula.cpp:1081
+#: src/core/modules/Nebula.cpp:1100
 msgid "galaxy"
 msgstr "thiên hà"
 
-#: src/core/modules/Nebula.cpp:1084
+#: src/core/modules/Nebula.cpp:1103
 msgid "active galaxy"
 msgstr "thiên hà hoạt động"
 
-#: src/core/modules/Nebula.cpp:1087
+#: src/core/modules/Nebula.cpp:1106
 msgid "radio galaxy"
 msgstr "thiên hà vô tuyến"
 
-#: src/core/modules/Nebula.cpp:1090
+#: src/core/modules/Nebula.cpp:1109
 msgid "interacting galaxy"
 msgstr "thiên hà tương tác"
 
-#: src/core/modules/Nebula.cpp:1093 plugins/Quasars/src/Quasar.cpp:101
+#: src/core/modules/Nebula.cpp:1112 plugins/Quasars/src/Quasar.cpp:101
 msgid "quasar"
 msgstr "Chuẩn tinh"
 
-#: src/core/modules/Nebula.cpp:1096
+#: src/core/modules/Nebula.cpp:1115
 msgid "star cluster"
 msgstr "cụm sao"
 
-#: src/core/modules/Nebula.cpp:1099
+#: src/core/modules/Nebula.cpp:1118
 msgid "open star cluster"
 msgstr "cụm sao mở"
 
-#: src/core/modules/Nebula.cpp:1102
+#: src/core/modules/Nebula.cpp:1121
 msgid "globular star cluster"
 msgstr "cụm sao cầu"
 
-#: src/core/modules/Nebula.cpp:1105
+#: src/core/modules/Nebula.cpp:1124
 msgid "nebula"
 msgstr "tinh vân"
 
-#: src/core/modules/Nebula.cpp:1108
+#: src/core/modules/Nebula.cpp:1127
 msgid "planetary nebula"
 msgstr "tinh vân hành tinh"
 
-#: src/core/modules/Nebula.cpp:1111
+#: src/core/modules/Nebula.cpp:1130
 msgid "dark nebula"
 msgstr "tinh vân tối"
 
-#: src/core/modules/Nebula.cpp:1114
+#: src/core/modules/Nebula.cpp:1133
 msgid "cluster associated with nebulosity"
 msgstr "cụm sao liên kết với tinh vân"
 
-#: src/core/modules/Nebula.cpp:1117
+#: src/core/modules/Nebula.cpp:1136
 msgid "bipolar nebula"
 msgstr "tinh vân lưỡng tính"
 
-#: src/core/modules/Nebula.cpp:1120
+#: src/core/modules/Nebula.cpp:1139
 msgid "emission nebula"
 msgstr "tinh vân phát xạ"
 
-#: src/core/modules/Nebula.cpp:1123
+#: src/core/modules/Nebula.cpp:1142
 msgid "HII region"
 msgstr "Vùng H II"
 
-#: src/core/modules/Nebula.cpp:1126
+#: src/core/modules/Nebula.cpp:1145
 msgid "reflection nebula"
 msgstr "tinh vân phản xạ"
 
-#: src/core/modules/Nebula.cpp:1129
+#: src/core/modules/Nebula.cpp:1148
 msgid "supernova remnant"
 msgstr "dấu vết siêu tân tinh"
 
-#: src/core/modules/Nebula.cpp:1132
+#: src/core/modules/Nebula.cpp:1151
 msgid "stellar association"
 msgstr "quần sao"
 
-#: src/core/modules/Nebula.cpp:1135
+#: src/core/modules/Nebula.cpp:1154
 msgid "star cloud"
 msgstr "đám mây sao"
 
-#: src/core/modules/Nebula.cpp:1138
+#: src/core/modules/Nebula.cpp:1157
 msgid "interstellar matter"
 msgstr "vật chất liên sao"
 
-#: src/core/modules/Nebula.cpp:1141
+#: src/core/modules/Nebula.cpp:1160
 msgid "emission object"
 msgstr "vật thể phát xạ"
 
-#: src/core/modules/Nebula.cpp:1144
+#: src/core/modules/Nebula.cpp:1163
 msgid "BL Lac object"
 msgstr "Vật thể BL Lac"
 
-#: src/core/modules/Nebula.cpp:1147
+#: src/core/modules/Nebula.cpp:1166
 msgid "blazar"
 msgstr "bùng cháy"
 
-#: src/core/modules/Nebula.cpp:1150
+#: src/core/modules/Nebula.cpp:1169
 msgid "molecular cloud"
 msgstr "mây phân tử"
 
-#: src/core/modules/Nebula.cpp:1153
+#: src/core/modules/Nebula.cpp:1172
 msgid "young stellar object"
 msgstr "vật thể sao trẻ"
 
-#: src/core/modules/Nebula.cpp:1156
+#: src/core/modules/Nebula.cpp:1175
 msgid "possible quasar"
 msgstr "chuẩn tinh khả thi"
 
-#: src/core/modules/Nebula.cpp:1159
+#: src/core/modules/Nebula.cpp:1178
 msgid "possible planetary nebula"
 msgstr "tinh vân hành tinh khả thi"
 
-#: src/core/modules/Nebula.cpp:1162
+#: src/core/modules/Nebula.cpp:1181
 msgid "protoplanetary nebula"
 msgstr "tinh vân tiền hành tinh"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1165 src/core/modules/StarWrapper.cpp:53
+#: src/core/modules/Nebula.cpp:1184 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:185 src/translations.h:46
 msgid "star"
 msgstr "sao"
 
-#: src/core/modules/Nebula.cpp:1168
+#: src/core/modules/Nebula.cpp:1187
 msgid "object of unknown nature"
 msgstr "vật thể không rõ bản chất"
 
-#: src/core/modules/Nebula.cpp:1171
+#: src/core/modules/Nebula.cpp:1190
 msgid "undocumented type"
 msgstr "loại không có dữ liệu"
 
@@ -2873,7 +2873,7 @@ msgid "year"
 msgstr "Năm"
 
 #. TRANSLATORS: name of object
-#: src/gui/AstroCalcDialog.cpp:159 src/ui_configurationDialog.h:1243
+#: src/gui/AstroCalcDialog.cpp:159 src/ui_configurationDialog.h:1274
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:450
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:96
 #: plugins/Exoplanets/src/Exoplanet.cpp:324
@@ -2897,7 +2897,7 @@ msgid "Mag."
 msgstr "Độ lớn"
 
 #. TRANSLATORS: type of object
-#: src/gui/AstroCalcDialog.cpp:167 src/ui_configurationDialog.h:1233
+#: src/gui/AstroCalcDialog.cpp:167 src/ui_configurationDialog.h:1253
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
 msgid "Type"
 msgstr "Loại"
@@ -4047,7 +4047,7 @@ msgstr "Thư mục"
 msgid "&Choose"
 msgstr "&Chọn"
 
-#: src/translations.h:368 src/ui_configurationDialog.h:1387
+#: src/translations.h:368 src/ui_configurationDialog.h:1402
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "Cancel"
 msgstr "Hủy bỏ"
@@ -5158,7 +5158,7 @@ msgstr "Giới thiệu về"
 msgid "Log"
 msgstr "Ghi nhận"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1274
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1289
 msgid "Edit keyboard shortcuts..."
 msgstr "Chỉnh sửa những phím tắt..."
 
@@ -5434,7 +5434,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:722 src/ui_viewDialog.h:2241
 #: src/ui_viewDialog.h:2263 src/ui_viewDialog.h:2289
-#: src/ui_configurationDialog.h:1388 src/ui_configurationDialog.h:1399
+#: src/ui_configurationDialog.h:1403 src/ui_configurationDialog.h:1414
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Tùy chọn"
@@ -5470,7 +5470,7 @@ msgstr "Nhấp nháy:"
 msgid "Limit the magnitude of stars"
 msgstr "Giới hạn độ sáng của sao"
 
-#: src/ui_viewDialog.h:1918 src/ui_viewDialog.h:1957 src/ui_viewDialog.h:2041
+#: src/ui_viewDialog.h:1918 src/ui_viewDialog.h:1966 src/ui_viewDialog.h:2041
 msgid "Limit magnitude:"
 msgstr "Độ sáng giới hạn:"
 
@@ -5482,15 +5482,32 @@ msgstr "Sao mờ nhạt khi một đối tượng rất sáng nhìn thấy"
 msgid "Dynamic eye adaptation"
 msgstr "Thích ứng mắt động"
 
-#: src/ui_viewDialog.h:1923 src/ui_viewDialog.h:1962 src/ui_viewDialog.h:2029
+#: src/ui_viewDialog.h:1923 src/ui_viewDialog.h:1971 src/ui_viewDialog.h:2029
 msgid "Labels and Markers"
 msgstr "Nhãn và đánh dấu"
 
 #: src/ui_viewDialog.h:1925
+msgid "Settings for sporadic meteors"
+msgstr "Cài đặt sao băng lẻ tẻ"
+
+#: src/ui_viewDialog.h:1927
+msgid "Shooting Stars"
+msgstr "Sao băng"
+
+#: src/ui_viewDialog.h:1930
+msgid "Hourly zenith rate"
+msgstr "Tỷ lệ cực điểm theo giờ"
+
+#: src/ui_viewDialog.h:1932
+msgctxt "Zenithal Hourly Rate"
+msgid "ZHR:"
+msgstr "Tỉ lệ cực điểm theo giờ:"
+
+#: src/ui_viewDialog.h:1934
 msgid "Show atmosphere"
 msgstr "Thể hiện khí quyển"
 
-#: src/ui_viewDialog.h:1929
+#: src/ui_viewDialog.h:1938
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
@@ -5498,34 +5515,34 @@ msgstr ""
 "Sử dụng dữ liệu ô nhiễm ánh sáng từ cơ sở dữ liệu địa điểm và bỏ qua các "
 "thiết lập cho ô nhiễm ánh sáng bên dưới"
 
-#: src/ui_viewDialog.h:1932
+#: src/ui_viewDialog.h:1941
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:440
 msgid "Light pollution:"
 msgstr "Ô nhiễm ánh sáng:"
 
-#: src/ui_viewDialog.h:1934
+#: src/ui_viewDialog.h:1943
 msgid "pressure, temperature, extinction coefficient"
 msgstr "áp suất, nhiệt độ, hệ số mất đi"
 
-#: src/ui_viewDialog.h:1936
+#: src/ui_viewDialog.h:1945
 msgid "Refraction/Extinction settings..."
 msgstr "Cài đặt khúc xạ/Tán xạ..."
 
-#: src/ui_viewDialog.h:1937
+#: src/ui_viewDialog.h:1946
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:293
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Solar System objects"
 msgstr "Vật thể hệ Mặt Trời"
 
-#: src/ui_viewDialog.h:1938
+#: src/ui_viewDialog.h:1947
 msgid "Show planet markers"
 msgstr "Hiển thị đánh dấu hành tinh"
 
-#: src/ui_viewDialog.h:1939
+#: src/ui_viewDialog.h:1948
 msgid "Show planet orbits"
 msgstr "Hiển thị quỹ đạo hành tinh"
 
-#: src/ui_viewDialog.h:1941
+#: src/ui_viewDialog.h:1950
 msgid ""
 "Deactivate this option if you want to see orbit for selected planet and its "
 "moons."
@@ -5533,11 +5550,11 @@ msgstr ""
 "Bỏ tùy chọn này nếu bạn muốn thấy quỹ đạo của hành tinh được chọn và mặt "
 "trăng của nó."
 
-#: src/ui_viewDialog.h:1943
+#: src/ui_viewDialog.h:1952
 msgid "Show orbit for selected planet"
 msgstr "Hiển thị quỹ đạo cho hành tinh được chọn"
 
-#: src/ui_viewDialog.h:1945
+#: src/ui_viewDialog.h:1954
 msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
@@ -5545,11 +5562,11 @@ msgstr ""
 "Vô hiệu hóa tùy chọn này nếu bạn muốn thấy đường đi của tất cả các bộ phận "
 "của hệ Mặt Trời"
 
-#: src/ui_viewDialog.h:1947
+#: src/ui_viewDialog.h:1956
 msgid "Show trail only for selected planet"
 msgstr "Chỉ hiển thị đường đi của hành tinh được chọn"
 
-#: src/ui_viewDialog.h:1949
+#: src/ui_viewDialog.h:1958
 msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
@@ -5557,46 +5574,29 @@ msgstr ""
 "Kích hoạt tùy chọn này để mô phỏng ảnh hưởng của tốc độ thực của ánh sáng "
 "(được đề nghị)."
 
-#: src/ui_viewDialog.h:1951
+#: src/ui_viewDialog.h:1960
 msgid "Simulate light speed"
 msgstr "Dựa theo tốc độ ánh sáng"
 
-#: src/ui_viewDialog.h:1952
+#: src/ui_viewDialog.h:1961
 msgid "Use custom settings of GRS:"
 msgstr "Sử dụng các cài đặt tùy chỉnh của Vết Đỏ Lớn"
 
-#: src/ui_viewDialog.h:1953
+#: src/ui_viewDialog.h:1962
 msgid "GRS details..."
 msgstr "Chi tiết Vết Đỏ Lớn..."
 
-#: src/ui_viewDialog.h:1955
+#: src/ui_viewDialog.h:1964
 msgid "Limit the magnitude of solar system objects"
 msgstr "Giới hạn độ sáng của các vật thể hệ mặt trời"
 
-#: src/ui_viewDialog.h:1958
+#: src/ui_viewDialog.h:1967
 msgid "Scale Moon:"
 msgstr "Tỉ lệ Mặt trăng:"
 
-#: src/ui_viewDialog.h:1960
+#: src/ui_viewDialog.h:1969
 msgid "Scale factor"
 msgstr "Hệ số tỉ lệ"
-
-#: src/ui_viewDialog.h:1964
-msgid "Settings for sporadic meteors"
-msgstr "Cài đặt sao băng lẻ tẻ"
-
-#: src/ui_viewDialog.h:1966
-msgid "Shooting Stars"
-msgstr "Sao băng"
-
-#: src/ui_viewDialog.h:1968
-msgid "Hourly zenith rate"
-msgstr "Tỷ lệ cực điểm theo giờ"
-
-#: src/ui_viewDialog.h:1970
-msgctxt "Zenithal Hourly Rate"
-msgid "ZHR:"
-msgstr "Tỉ lệ cực điểm theo giờ:"
 
 #: src/ui_viewDialog.h:1972
 msgid "Display objects from catalogs"
@@ -6029,57 +6029,57 @@ msgid "Vertical viewport offset"
 msgstr "Sự bù điểm nhìn dọc"
 
 #: src/ui_viewDialog.h:2242
-msgid "Show ground"
-msgstr "Hiển thị mặt đất"
-
-#: src/ui_viewDialog.h:2243
-msgid "Use this landscape as default"
-msgstr "Sử dụng phong cảnh này làm mặc định"
-
-#: src/ui_viewDialog.h:2244
-msgid "Use associated planet and position"
-msgstr "Sử dụng liên hành tinh và vị trí"
-
-#: src/ui_viewDialog.h:2245
-msgid "Show landscape labels"
-msgstr "Hiển thị nhãn quang cảnh"
-
-#: src/ui_viewDialog.h:2246
 msgid "Show fog"
 msgstr "Thể hiện sương mù"
 
-#: src/ui_viewDialog.h:2248
-msgid "Show illumination layer (bright windows, light pollution, etc.)"
-msgstr "Hiển thị lớp chiếu sáng (cửa sổ sáng, ô nhiễm ánh sáng,...)"
+#: src/ui_viewDialog.h:2243
+msgid "Use associated planet and position"
+msgstr "Sử dụng liên hành tinh và vị trí"
 
-#: src/ui_viewDialog.h:2250
-msgid "Show illumination "
-msgstr "Hiển thị độ chiếu sáng "
+#: src/ui_viewDialog.h:2244
+msgid "Use this landscape as default"
+msgstr "Sử dụng phong cảnh này làm mặc định"
 
-#: src/ui_viewDialog.h:2252
+#: src/ui_viewDialog.h:2245
+msgid "Show ground"
+msgstr "Hiển thị mặt đất"
+
+#: src/ui_viewDialog.h:2247
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr ""
 "Sử dụng độ sáng tối thiểu để rời khỏi quang cảnh cũng có thể được nhìn thấy "
 "trong bống tối"
 
-#: src/ui_viewDialog.h:2254
+#: src/ui_viewDialog.h:2249
 msgid "Minimal brightness:"
 msgstr "Độ sáng tối thiểu"
 
-#: src/ui_viewDialog.h:2256
+#: src/ui_viewDialog.h:2251
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr ""
 "Phạm vi giá trị 0..1 (Phong cảnh màu đen vào ban đêm - phong cảnh sáng hoàn "
 "toàn."
 
-#: src/ui_viewDialog.h:2259
+#: src/ui_viewDialog.h:2254
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr "Sử dụng độ sáng tối thiểu có thể được quy định tại landscape.ini"
 
-#: src/ui_viewDialog.h:2261
+#: src/ui_viewDialog.h:2256
 msgid "from landscape, if given"
 msgstr "Từ phong cảnh, nếu được"
+
+#: src/ui_viewDialog.h:2258
+msgid "Show illumination layer (bright windows, light pollution, etc.)"
+msgstr "Hiển thị lớp chiếu sáng (cửa sổ sáng, ô nhiễm ánh sáng,...)"
+
+#: src/ui_viewDialog.h:2260
+msgid "Show illumination "
+msgstr "Hiển thị độ chiếu sáng "
+
+#: src/ui_viewDialog.h:2261
+msgid "Show landscape labels"
+msgstr "Hiển thị nhãn quang cảnh"
 
 #: src/ui_viewDialog.h:2262
 msgid "Add/remove landscapes..."
@@ -6164,35 +6164,35 @@ msgstr "Khung cảnh"
 msgid "Starlore"
 msgstr "Truyền thuyết sao"
 
-#: src/ui_configurationDialog.h:1169
+#: src/ui_configurationDialog.h:1184
 msgid "Configuration"
 msgstr "Cấu hình"
 
-#: src/ui_configurationDialog.h:1171
+#: src/ui_configurationDialog.h:1186
 msgid "Language settings"
 msgstr "Thiết lập ngôn ngữ"
 
-#: src/ui_configurationDialog.h:1172
+#: src/ui_configurationDialog.h:1187
 msgid "Program Language"
 msgstr "Ngôn ngữ chương trình"
 
-#: src/ui_configurationDialog.h:1173
+#: src/ui_configurationDialog.h:1188
 msgid "Sky Culture Language"
 msgstr "Ngôn ngữ văn hóa bầu trời"
 
-#: src/ui_configurationDialog.h:1175
+#: src/ui_configurationDialog.h:1190
 msgid "This feature has not been thoroughly tested yet!"
 msgstr "Đặc điểm này chưa được kiểm tra hoàn toàn!"
 
-#: src/ui_configurationDialog.h:1177
+#: src/ui_configurationDialog.h:1192
 msgid "Ephemeris settings (experimental)"
 msgstr "Các cài đặt lịch thiên văn (thực nghiệm)"
 
-#: src/ui_configurationDialog.h:1178 src/ui_configurationDialog.h:1179
+#: src/ui_configurationDialog.h:1193 src/ui_configurationDialog.h:1194
 msgid "Not installed"
 msgstr "Không được cài đặt"
 
-#: src/ui_configurationDialog.h:1181
+#: src/ui_configurationDialog.h:1196
 msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
@@ -6200,19 +6200,19 @@ msgstr ""
 "DE431 cung cấp dữ liệu vị trí cho những năm -13000...+17000. Chỉ dành cho "
 "những chương trình đặc biệt."
 
-#: src/ui_configurationDialog.h:1183
+#: src/ui_configurationDialog.h:1198
 msgid "Use DE431 (long-time data)"
 msgstr "Sử dụng DE431 (Dữ liệu thời gian dài)"
 
-#: src/ui_configurationDialog.h:1185
+#: src/ui_configurationDialog.h:1200
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
 msgstr "DE430 cung cấp sự chính xác cao nhất, chỉ cho những năm 1550...2650."
 
-#: src/ui_configurationDialog.h:1187
+#: src/ui_configurationDialog.h:1202
 msgid "Use DE430 (high accuracy)"
 msgstr "Sử dụng DE430 (sự chính xác cao)"
 
-#: src/ui_configurationDialog.h:1189
+#: src/ui_configurationDialog.h:1204
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
@@ -6220,18 +6220,18 @@ msgstr ""
 "Sử dụng VSOP87 chỉ được đề nghị cho những năm -4000...+8000, nhưng phân phát "
 "vị trí hữu dụng nằm ngoài phạm vi này."
 
-#: src/ui_configurationDialog.h:1191
+#: src/ui_configurationDialog.h:1206
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
 "VSOP87/ELP2000-82B được sử dụng khi những cái này không được cài đặt hoặc "
 "không được kích hoạt."
 
-#: src/ui_configurationDialog.h:1192
+#: src/ui_configurationDialog.h:1207
 msgid "Default options"
 msgstr "Tùy chọn mặc định"
 
-#: src/ui_configurationDialog.h:1194
+#: src/ui_configurationDialog.h:1209
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -6239,7 +6239,7 @@ msgstr ""
 "Lưu các cài đặt bạn đã thay đổi lần này để sử dụng trong lần tới khi bạn "
 "chạy Stellarium"
 
-#: src/ui_configurationDialog.h:1196
+#: src/ui_configurationDialog.h:1211
 #: plugins/NavStars/src/ui_navStarsWindow.h:211
 #: plugins/FOV/src/ui_fovWindow.h:391
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:281
@@ -6247,11 +6247,11 @@ msgstr ""
 msgid "Save settings"
 msgstr "Lưu các thiết lập"
 
-#: src/ui_configurationDialog.h:1198
+#: src/ui_configurationDialog.h:1213
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Khôi phục cài đặt mặc định đi kèm với Stellarium"
 
-#: src/ui_configurationDialog.h:1200
+#: src/ui_configurationDialog.h:1215
 #: plugins/NavStars/src/ui_navStarsWindow.h:212
 #: plugins/FOV/src/ui_fovWindow.h:408
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:282
@@ -6259,7 +6259,7 @@ msgstr "Khôi phục cài đặt mặc định đi kèm với Stellarium"
 msgid "Restore defaults"
 msgstr "Khôi phục mặc định"
 
-#: src/ui_configurationDialog.h:1201
+#: src/ui_configurationDialog.h:1216
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -6269,191 +6269,191 @@ msgstr ""
 "tùy chọn hiện thời bao gồm trường nhìn và hướng nhìn cho việc sử dụng ở lần "
 "khởi động kế tiếp."
 
-#: src/ui_configurationDialog.h:1203
+#: src/ui_configurationDialog.h:1218
 msgid "The width of your view when Stellarium starts"
 msgstr "Chiều rộng tầm nhìn của bạn khi Stellarium bắt đầu"
 
-#: src/ui_configurationDialog.h:1206
+#: src/ui_configurationDialog.h:1221
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Hướng bạn đang nhìn khi Stellarium bắt đầu"
 
-#: src/ui_configurationDialog.h:1208 src/ui_configurationDialog.h:1410
+#: src/ui_configurationDialog.h:1223 src/ui_configurationDialog.h:1425
 msgid "Selected object information"
 msgstr "Thông tin đối tượng đã chọn"
 
-#: src/ui_configurationDialog.h:1210
+#: src/ui_configurationDialog.h:1225
 msgid "Display all information available"
 msgstr "Hiển thị tất cả thông tin sẵn có"
 
-#: src/ui_configurationDialog.h:1212
+#: src/ui_configurationDialog.h:1227
 msgid "All available"
 msgstr "Tất cả có sẵn"
 
-#: src/ui_configurationDialog.h:1214
+#: src/ui_configurationDialog.h:1229
 msgid "Display no information"
 msgstr "Hiển thị không có thông tin"
 
-#: src/ui_configurationDialog.h:1216 plugins/Oculars/src/Oculars.cpp:2387
+#: src/ui_configurationDialog.h:1231 plugins/Oculars/src/Oculars.cpp:2387
 #: plugins/Observability/src/Observability.cpp:205
 msgid "None"
 msgstr "Không"
 
-#: src/ui_configurationDialog.h:1218
+#: src/ui_configurationDialog.h:1233
 msgid "Display less information"
 msgstr "Hiển thị ít thông tin"
 
-#: src/ui_configurationDialog.h:1220
+#: src/ui_configurationDialog.h:1235
 msgid "Short"
 msgstr "Ngắn gọn"
 
-#: src/ui_configurationDialog.h:1222
+#: src/ui_configurationDialog.h:1237
 msgid "Display user settings information"
 msgstr "Hiển thị thông tin cài đặt người dùng"
 
-#: src/ui_configurationDialog.h:1224
+#: src/ui_configurationDialog.h:1239
 msgid "Customized"
 msgstr "Tùy chỉnh"
 
-#: src/ui_configurationDialog.h:1225
+#: src/ui_configurationDialog.h:1240
 msgid "Displayed fields"
 msgstr "Phạm vi hiển thị"
 
-#: src/ui_configurationDialog.h:1227
-msgid "Angular or physical size"
-msgstr "Kích thước góc hoặc vật lí"
-
-#: src/ui_configurationDialog.h:1229
-msgid "Size"
-msgstr "Kích cỡ"
-
-#: src/ui_configurationDialog.h:1231
-msgid "The type of the object (star, planet, etc.)"
-msgstr "Loại đối tượng (sao, hành tinh,...)"
-
-#: src/ui_configurationDialog.h:1235
-msgid "Spectral class, nebula type, etc."
-msgstr "Lớp quang phổ, loại tinh vân,..."
-
-#: src/ui_configurationDialog.h:1237
-msgid "Additional information"
-msgstr "Thông tin bổ sung"
-
-#: src/ui_configurationDialog.h:1238
-msgid "Distance"
-msgstr "Khoảng cách"
-
-#: src/ui_configurationDialog.h:1240
-msgid "Ecliptic coordinates, equinox J2000"
-msgstr ""
-
-#: src/ui_configurationDialog.h:1242
-msgid "Ecliptic coordinates (J2000)"
-msgstr ""
-
-#: src/ui_configurationDialog.h:1245 src/ui_configurationDialog.h:1265
+#: src/ui_configurationDialog.h:1242 src/ui_configurationDialog.h:1280
 msgid "Equatorial coordinates, equinox of date"
 msgstr "Tọa độ xích đạo, điểm phân của ngày"
 
-#: src/ui_configurationDialog.h:1247
+#: src/ui_configurationDialog.h:1244
 msgid "Right ascension/Declination (of date)"
 msgstr "Xích kinh/Xích vĩ (của ngày)"
 
-#: src/ui_configurationDialog.h:1248
-msgid "Catalog number(s)"
-msgstr "Số danh mục"
+#: src/ui_configurationDialog.h:1245
+msgid "Supergalactic coordinates"
+msgstr ""
 
-#: src/ui_configurationDialog.h:1250
-msgid "Equatorial coordinates, equinox of J2000.0"
-msgstr "Tọa độ xích đạo, điểm phân của J2000.0"
+#: src/ui_configurationDialog.h:1247
+msgid "Spectral class, nebula type, etc."
+msgstr "Lớp quang phổ, loại tinh vân,..."
 
-#: src/ui_configurationDialog.h:1252
-msgid "Right ascension/Declination (J2000)"
-msgstr "Xích kinh/Xích vĩ (J2000)"
+#: src/ui_configurationDialog.h:1249
+msgid "Additional information"
+msgstr "Thông tin bổ sung"
 
-#: src/ui_configurationDialog.h:1253
+#: src/ui_configurationDialog.h:1251
+msgid "The type of the object (star, planet, etc.)"
+msgstr "Loại đối tượng (sao, hành tinh,...)"
+
+#: src/ui_configurationDialog.h:1254
 msgid "Absolute magnitude"
 msgstr "Độ sáng tuyệt đối"
 
-#: src/ui_configurationDialog.h:1254
-msgid "Galactic coordinates"
-msgstr "Tọa độ Ngân hà"
-
-#: src/ui_configurationDialog.h:1255
-msgid "Visual magnitude"
-msgstr "Độ sáng khả kiến"
-
-#: src/ui_configurationDialog.h:1257
+#: src/ui_configurationDialog.h:1256
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1259
+#: src/ui_configurationDialog.h:1258
 msgid "Ecliptic coordinates (of date)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1261
+#: src/ui_configurationDialog.h:1260
 msgid "Horizontal coordinates"
 msgstr "Tọa độ chân trời"
 
-#: src/ui_configurationDialog.h:1263
+#: src/ui_configurationDialog.h:1262
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:201
 msgid "Altitude/Azimuth"
 msgstr "Độ cao/Góc phương vị"
 
+#: src/ui_configurationDialog.h:1263
+msgid "Catalog number(s)"
+msgstr "Số danh mục"
+
+#: src/ui_configurationDialog.h:1265
+msgid "Angular or physical size"
+msgstr "Kích thước góc hoặc vật lí"
+
 #: src/ui_configurationDialog.h:1267
+msgid "Size"
+msgstr "Kích cỡ"
+
+#: src/ui_configurationDialog.h:1268
+msgid "Galactic coordinates"
+msgstr "Tọa độ Ngân hà"
+
+#: src/ui_configurationDialog.h:1269
+msgid "Distance"
+msgstr "Khoảng cách"
+
+#: src/ui_configurationDialog.h:1271
+msgid "Equatorial coordinates, equinox of J2000.0"
+msgstr "Tọa độ xích đạo, điểm phân của J2000.0"
+
+#: src/ui_configurationDialog.h:1273
+msgid "Right ascension/Declination (J2000)"
+msgstr "Xích kinh/Xích vĩ (J2000)"
+
+#: src/ui_configurationDialog.h:1276
+msgid "Ecliptic coordinates, equinox J2000.0"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1278
+msgid "Ecliptic coordinates (J2000)"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1282
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:198
 msgid "Hour angle/Declination"
 msgstr "Góc giờ/Xích vĩ"
 
-#: src/ui_configurationDialog.h:1268
-msgid "Supergalactic coordinates"
-msgstr ""
+#: src/ui_configurationDialog.h:1283
+msgid "Visual magnitude"
+msgstr "Độ sáng khả kiến"
 
-#: src/ui_configurationDialog.h:1269
+#: src/ui_configurationDialog.h:1284
 msgid "Control"
 msgstr "Điều khiển"
 
-#: src/ui_configurationDialog.h:1271
+#: src/ui_configurationDialog.h:1286
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "Cho phép dùng chuột để xoay (kéo) và phóng to (con lăn chuột)"
 
-#: src/ui_configurationDialog.h:1273
+#: src/ui_configurationDialog.h:1288
 msgid "Enable mouse navigation"
 msgstr "Bật điều hướng chuột"
 
-#: src/ui_configurationDialog.h:1276
+#: src/ui_configurationDialog.h:1291
 msgid "Allow keyboard to pan and zoom"
 msgstr "Cho phép dùng bàn phím để xoay và phóng to"
 
-#: src/ui_configurationDialog.h:1278
+#: src/ui_configurationDialog.h:1293
 msgid "Enable keyboard navigation"
 msgstr "Bật điều hướng bàn phím"
 
-#: src/ui_configurationDialog.h:1280
+#: src/ui_configurationDialog.h:1295
 msgid "Hides the mouse cursor when inactive"
 msgstr "Dấu đầu chuột khi không hoạt động"
 
-#: src/ui_configurationDialog.h:1282
+#: src/ui_configurationDialog.h:1297
 msgid "Mouse cursor timeout:"
 msgstr "Thời gian trễ con trỏ chuột:"
 
-#: src/ui_configurationDialog.h:1284
+#: src/ui_configurationDialog.h:1299
 msgid "seconds"
 msgstr "giây"
 
-#: src/ui_configurationDialog.h:1286
+#: src/ui_configurationDialog.h:1301
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:192
 msgid "Startup date and time"
 msgstr "Khởi động ngày và giờ"
 
-#: src/ui_configurationDialog.h:1288
+#: src/ui_configurationDialog.h:1303
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Bắt đầu Stellarium tại ngày và giờ của đồng hồ hệ thống"
 
-#: src/ui_configurationDialog.h:1290
+#: src/ui_configurationDialog.h:1305
 msgid "System date and time"
 msgstr "Hệ thống ngày và giờ"
 
-#: src/ui_configurationDialog.h:1292
+#: src/ui_configurationDialog.h:1307
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -6461,105 +6461,105 @@ msgstr ""
 "Thiết lập thời gian mô phỏng cho các ví dụ tiếp theo của thời gian này trong "
 "ngày khi bắt đầu Stellarium"
 
-#: src/ui_configurationDialog.h:1294
+#: src/ui_configurationDialog.h:1309
 msgid "System date at:"
 msgstr "Ngày hệ thống tại:"
 
-#: src/ui_configurationDialog.h:1296
+#: src/ui_configurationDialog.h:1311
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Sử dụng một ngày cụ thể và thời gian khi Stellarium khởi động"
 
-#: src/ui_configurationDialog.h:1298
+#: src/ui_configurationDialog.h:1313
 msgid "Other:"
 msgstr "Loại Khác:"
 
-#: src/ui_configurationDialog.h:1300
+#: src/ui_configurationDialog.h:1315
 msgid "Use current local date and time"
 msgstr "Sử dụng ngày và giờ địa phương hiện tại"
 
-#: src/ui_configurationDialog.h:1302
+#: src/ui_configurationDialog.h:1317
 msgid "use current"
 msgstr "Dùng hiệnt tại"
 
-#: src/ui_configurationDialog.h:1304
+#: src/ui_configurationDialog.h:1319
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
 msgstr ""
 "Những cài đặt này điều khiển cách mà thời gian và ngày tháng được hiển thị "
 "trong thanh dưới cùng"
 
-#: src/ui_configurationDialog.h:1306
+#: src/ui_configurationDialog.h:1321
 msgid "Display formats of date and time"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1307
+#: src/ui_configurationDialog.h:1322
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
 msgid "Date:"
 msgstr "Ngày tháng:"
 
-#: src/ui_configurationDialog.h:1308
+#: src/ui_configurationDialog.h:1323
 msgid "and time:"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1309
+#: src/ui_configurationDialog.h:1324
 msgid "Time correction"
 msgstr "Thời gian điều chỉnh"
 
-#: src/ui_configurationDialog.h:1312
+#: src/ui_configurationDialog.h:1327
 msgid "Edit equation"
 msgstr "Phương trình chỉnh sửa"
 
-#: src/ui_configurationDialog.h:1314
+#: src/ui_configurationDialog.h:1329
 msgid "Planetarium options"
 msgstr "Tùy chọn mô hình vũ trụ"
 
-#: src/ui_configurationDialog.h:1316
+#: src/ui_configurationDialog.h:1331
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
 "Tự động bật khí quyển cho các vất thể với khí quyển trong cửa sổ vị trí"
 
-#: src/ui_configurationDialog.h:1318
+#: src/ui_configurationDialog.h:1333
 msgid "Auto-enabling for the atmosphere"
 msgstr "Tự động bật khí quyển"
 
-#: src/ui_configurationDialog.h:1320
+#: src/ui_configurationDialog.h:1335
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "Chuyển đổi hình nền của tinh vân"
 
-#: src/ui_configurationDialog.h:1322
+#: src/ui_configurationDialog.h:1337
 msgid "Show nebula background button"
 msgstr "Hiển thị nút nền tinh vân"
 
-#: src/ui_configurationDialog.h:1324
+#: src/ui_configurationDialog.h:1339
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr ""
 "Chương động là một dao động nhỏ của trục Trái Đất, chiếm tới một vài giây "
 "cung."
 
-#: src/ui_configurationDialog.h:1326
+#: src/ui_configurationDialog.h:1341
 msgid "Include nutation"
 msgstr "Bao gồm chương động"
 
-#: src/ui_configurationDialog.h:1328
+#: src/ui_configurationDialog.h:1343
 msgid "Activate this option to calculate azimuth from south towards west."
 msgstr ""
 "Kích hoạt vị trí này để tính toán góc phương vị từ hướng nam đến hướng tây."
 
-#: src/ui_configurationDialog.h:1330
+#: src/ui_configurationDialog.h:1345
 msgid "Azimuth from South"
 msgstr "Góc phương vị từ phía nam"
 
-#: src/ui_configurationDialog.h:1332
+#: src/ui_configurationDialog.h:1347
 msgid "Use decimal degrees for coordinates"
 msgstr "Sử dụng độ thập phân cho tọa độ"
 
-#: src/ui_configurationDialog.h:1334
+#: src/ui_configurationDialog.h:1349
 msgid "Use decimal degrees"
 msgstr "Sử dụng độ dưới dạng thập phân"
 
-#: src/ui_configurationDialog.h:1336
+#: src/ui_configurationDialog.h:1351
 msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
@@ -6567,31 +6567,31 @@ msgstr ""
 "Kích hoạt để như được nhìn thấy từ bề mặt của hành tinh (được khuyến khích). "
 "Nếu chuyển sang tắt, sẽ hiển thị tầm nhìn hành tinh tâm."
 
-#: src/ui_configurationDialog.h:1338
+#: src/ui_configurationDialog.h:1353
 msgid "Topocentric coordinates"
 msgstr "Tọa độ bề mặt trái đất"
 
-#: src/ui_configurationDialog.h:1340
+#: src/ui_configurationDialog.h:1355
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Chuyển đổi hình dọc và ngang của nút lật"
 
-#: src/ui_configurationDialog.h:1342
+#: src/ui_configurationDialog.h:1357
 msgid "Show flip buttons"
 msgstr "Hiển thị nút lật"
 
-#: src/ui_configurationDialog.h:1344
+#: src/ui_configurationDialog.h:1359
 msgid "Align labels with the horizon"
 msgstr "Căn chỉnh nhãn với đường chân trời"
 
-#: src/ui_configurationDialog.h:1346
+#: src/ui_configurationDialog.h:1361
 msgid "Gravity labels"
 msgstr "Nhãn trọng lực"
 
-#: src/ui_configurationDialog.h:1348 src/ui_configurationDialog.h:1351
+#: src/ui_configurationDialog.h:1363 src/ui_configurationDialog.h:1366
 msgid "Hide other constellations when you click one"
 msgstr "Ẩn các chòm sao khác khi bạn chọn một cái bất kì"
 
-#: src/ui_configurationDialog.h:1355
+#: src/ui_configurationDialog.h:1370
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -6599,28 +6599,28 @@ msgstr ""
 "Biến dạng hình ảnh bầu trời được sử dụng khi chiếu Stellarium đi tới một "
 "hình ảnh bầu trời cho các hệ thống vũ trụ chi phí thấp."
 
-#: src/ui_configurationDialog.h:1357
+#: src/ui_configurationDialog.h:1372
 msgid "Spheric mirror distortion"
 msgstr "Biến dạng hình ảnh bầu trời"
 
-#: src/ui_configurationDialog.h:1359
+#: src/ui_configurationDialog.h:1374
 msgid "Automatic change of landscape when planet is changed"
 msgstr "Tự động thay đổi phong cảnh khi hành tinh được thay đổi"
 
-#: src/ui_configurationDialog.h:1361
+#: src/ui_configurationDialog.h:1376
 msgid "Auto select landscapes"
 msgstr "Tự động chọn phong cảnh"
 
-#: src/ui_configurationDialog.h:1363
+#: src/ui_configurationDialog.h:1378
 msgid "Mask out everything outside a central circle in the main view"
 msgstr ""
 "Che tất cả mọi thứ bên ngoài  vòng tròn trung tâm trong giao diện chính"
 
-#: src/ui_configurationDialog.h:1365
+#: src/ui_configurationDialog.h:1380
 msgid "Disc viewport"
 msgstr "Chế độ xem đĩa"
 
-#: src/ui_configurationDialog.h:1367
+#: src/ui_configurationDialog.h:1382
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -6628,93 +6628,93 @@ msgstr ""
 "Khi được kích hoạt, lệnh \"tự động phóng to\" cũng sẽ thiết lập các hướng "
 "nhìn ban đầu"
 
-#: src/ui_configurationDialog.h:1369
+#: src/ui_configurationDialog.h:1384
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:457
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Tự động thu nhỏ về hướng nhìn ban đầu"
 
-#: src/ui_configurationDialog.h:1370
+#: src/ui_configurationDialog.h:1385
 msgid "Show bookmarks button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1371
+#: src/ui_configurationDialog.h:1386
 msgid "Screenshots"
 msgstr "Ảnh chụp màn hình"
 
-#: src/ui_configurationDialog.h:1372
+#: src/ui_configurationDialog.h:1387
 msgid "Screenshot Directory"
 msgstr "Hướng dẫn chụp màn hình"
 
-#: src/ui_configurationDialog.h:1374
+#: src/ui_configurationDialog.h:1389
 msgid "Invert colors"
 msgstr "Đảo ngược màu sắc"
 
-#: src/ui_configurationDialog.h:1375
+#: src/ui_configurationDialog.h:1390
 msgid "Star catalog updates"
 msgstr "Danh mục sao mới"
 
-#: src/ui_configurationDialog.h:1377
+#: src/ui_configurationDialog.h:1392
 msgid "Click here to start downloading"
 msgstr "Bấm vào đây để tải"
 
-#: src/ui_configurationDialog.h:1379
+#: src/ui_configurationDialog.h:1394
 msgid "Download this file to view even more stars"
 msgstr "Tải hồ sơ này xuống để xem nhiều sao hơn"
 
-#: src/ui_configurationDialog.h:1381
+#: src/ui_configurationDialog.h:1396
 msgid "Restart the download"
 msgstr "Tải xuống lại lần nữa"
 
-#: src/ui_configurationDialog.h:1383
+#: src/ui_configurationDialog.h:1398
 msgid "Retry"
 msgstr "Thử lại"
 
-#: src/ui_configurationDialog.h:1385
+#: src/ui_configurationDialog.h:1400
 msgid "Stop the download. You can always restart it later"
 msgstr "Ngừng tải.  Bạn có thể tải xuống lần khác"
 
-#: src/ui_configurationDialog.h:1390
+#: src/ui_configurationDialog.h:1405
 msgid "Close window when script runs"
 msgstr "Đóng cửa sổ khi chạy kịch bản"
 
-#: src/ui_configurationDialog.h:1392
+#: src/ui_configurationDialog.h:1407
 msgid "Run the selected script"
 msgstr "Chạy lệnh được chọn"
 
-#: src/ui_configurationDialog.h:1396
+#: src/ui_configurationDialog.h:1411
 msgid "Stop a running script"
 msgstr "Dừng lệnh đang chạy"
 
-#: src/ui_configurationDialog.h:1400
+#: src/ui_configurationDialog.h:1415
 msgid "Load at startup"
 msgstr "Tải lúc khởi động"
 
-#: src/ui_configurationDialog.h:1401
+#: src/ui_configurationDialog.h:1416
 msgid "configure"
 msgstr "Cấu hình"
 
-#: src/ui_configurationDialog.h:1406
+#: src/ui_configurationDialog.h:1421
 msgid "Main"
 msgstr "Chính"
 
-#: src/ui_configurationDialog.h:1408
+#: src/ui_configurationDialog.h:1423
 msgid "Information"
 msgstr "Thông tin"
 
-#: src/ui_configurationDialog.h:1413
+#: src/ui_configurationDialog.h:1428
 msgid "Navigation"
 msgstr "Điều hướng"
 
-#: src/ui_configurationDialog.h:1415
+#: src/ui_configurationDialog.h:1430
 msgid "Tools"
 msgstr "Công cụ"
 
-#: src/ui_configurationDialog.h:1417
+#: src/ui_configurationDialog.h:1432
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:497
 msgid "Scripts"
 msgstr "Nguyên bản"
 
-#: src/ui_configurationDialog.h:1419
+#: src/ui_configurationDialog.h:1434
 msgid "Plugins"
 msgstr "Phần bổ sung"
 
