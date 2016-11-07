@@ -1165,7 +1165,7 @@ float StelCore::getUTCOffset(const double JD) const
 	QTimeZone* tz = new QTimeZone(tzName.toUtf8());
 
 	int shiftInSeconds = 0;
-	if (tzName=="system_default" || (loc.planetName=="Earth" && !tz->isValid()))
+	if (tzName=="system_default" || (loc.planetName=="Earth" && !tz->isValid() && !QString("LMST LTST").contains(tzName)))
 	{
 		QDateTime local = universal.toLocalTime();
 		//Both timezones should be interpreted as UTC because secsTo() converts both
