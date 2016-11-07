@@ -802,6 +802,8 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			phenomenType = q_("Opposition");
 			separation += M_PI;
 		}
+		else if (separation<(object2->getAngularSize(core)*M_PI/180.) || separation<(object1->getAngularSize(core)*M_PI/180.))
+			phenomenType = q_("Occultation");
 
 		ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->phenomenaTreeWidget);
 		treeItem->setText(PhenomenaType, phenomenType);
@@ -951,6 +953,8 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 
 		QString phenomenType = q_("Conjunction");
 		double separation = it.value();
+		if (separation<(object2->getAngularSize(core)*M_PI/180.) || separation<(object1->getAngularSize(core)*M_PI/180.))
+			phenomenType = q_("Occultation");
 
 		ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->phenomenaTreeWidget);
 		treeItem->setText(PhenomenaType, phenomenType);

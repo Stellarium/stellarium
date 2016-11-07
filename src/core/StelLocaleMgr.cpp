@@ -267,11 +267,17 @@ QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
 		QString currTZ = core->getCurrentTimeZone();
 		QString timeZoneST = "";
 
-		if (JD<=StelCore::TZ_ERA_BEGINNING || currTZ.contains("auto"))
-			timeZoneST = "LMST";
+		if (JD<=StelCore::TZ_ERA_BEGINNING || currTZ.contains("auto") || currTZ.contains("LMST"))
+		{
+			// TRANSLATORS: Local Mean Solar Time. Please use abbreviation.
+			timeZoneST = qc_("LMST", "solar time");
+		}
 
-		if (currTZ.contains("LMST") || currTZ.contains("LTST"))
-			timeZoneST = currTZ;
+		if (currTZ.contains("LTST"))
+		{
+			// TRANSLATORS: Local True Solar Time. Please use abbreviation.
+			timeZoneST = qc_("LTST", "solar time");
+		}
 
 		float shift = core->getUTCOffset(JD);
 		QTime tz = QTime(0, 0, 0).addSecs(3600*qAbs(shift));
