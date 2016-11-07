@@ -724,13 +724,15 @@ void BottomStelBar::updateText(bool updatePos)
 
 	// build fov tooltip
 	QTextStream wos(&str);
+	// TRANSLATORS: Field of view. Please use abbreviation.
+	QString fovstr = QString("%1 ").arg(qc_("FOV", "abbreviation"));
 	if (getFlagFovDms())
 	{
-		wos << "FOV " << StelUtils::decDegToDmsStr(core->getMovementMgr()->getCurrentFov());
+		wos << fovstr << StelUtils::decDegToDmsStr(core->getMovementMgr()->getCurrentFov());
 	}
 	else
 	{
-		wos << "FOV " << qSetRealNumberPrecision(3) << core->getMovementMgr()->getCurrentFov() << QChar(0x00B0);
+		wos << fovstr << qSetRealNumberPrecision(3) << core->getMovementMgr()->getCurrentFov() << QChar(0x00B0);
 	}
 
 	if (fov->text()!=str)
@@ -757,7 +759,9 @@ void BottomStelBar::updateText(bool updatePos)
 
 	// build fps tooltip
 	QTextStream wos2(&str);
-	wos2 << qSetRealNumberPrecision(3) << StelApp::getInstance().getFps() << " FPS";
+	// TRANSLATORS: Frames per second. Please use abbreviation.
+	QString fpsstr = QString(" %1").arg(qc_("FPS", "abbreviation"));
+	wos2 << qSetRealNumberPrecision(3) << StelApp::getInstance().getFps() << fpsstr;
 	if (fps->text()!=str)
 	{
 		updatePos = true;
