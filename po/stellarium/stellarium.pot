@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-07 19:12+0700\n"
+"POT-Creation-Date: 2016-11-07 21:06+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -917,27 +917,67 @@ msgstr ""
 msgid "The period of rotation is chaotic"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:346 src/core/modules/Planet.cpp:351
+#: src/core/modules/Planet.cpp:355
+msgctxt "Moon phase"
+msgid "Waxing Crescent"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:357
+msgctxt "Moon phase"
+msgid "First Quarter"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:359
+msgctxt "Moon phase"
+msgid "Waxing Gibbous"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:361
+msgctxt "Moon phase"
+msgid "Full Moon"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:363
+msgctxt "Moon phase"
+msgid "Waning Gibbous"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:365
+msgctxt "Moon phase"
+msgid "Third Quarter"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:367
+msgctxt "Moon phase"
+msgid "Waning Crescent"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:369
+msgctxt "Moon phase"
+msgid "New Moon"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:374 src/core/modules/Planet.cpp:379
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:347 src/core/modules/Planet.cpp:352
+#: src/core/modules/Planet.cpp:375 src/core/modules/Planet.cpp:380
 #, qt-format
 msgid "Elongation: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:355
+#: src/core/modules/Planet.cpp:383
 #, qt-format
 msgid "Phase: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:356
+#: src/core/modules/Planet.cpp:387
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:368
+#: src/core/modules/Planet.cpp:399
 #, qt-format
 msgid "Eclipse Factor: %1%"
 msgstr ""
