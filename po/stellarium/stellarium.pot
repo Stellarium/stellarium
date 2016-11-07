@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-08 01:55+0700\n"
+"POT-Creation-Date: 2016-11-08 02:44+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2935,8 +2935,8 @@ msgstr ""
 msgid "Planetary nebulae"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:533 src/ui_viewDialog.h:2028
-msgid "Bright nebulae"
+#: src/gui/AstroCalcDialog.cpp:533
+msgid "Bright nebulae (<10 mag.)"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
@@ -2945,9 +2945,8 @@ msgstr ""
 msgid "Dark nebulae"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:535 src/ui_viewDialog.h:2025
-#: src/ui_dsoColorsDialog.h:542
-msgid "Galaxies"
+#: src/gui/AstroCalcDialog.cpp:535
+msgid "Bright galaxies (<10 mag.)"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:548
@@ -2966,15 +2965,15 @@ msgstr ""
 msgid "Save calculated phenomena as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:798 src/gui/AstroCalcDialog.cpp:954
+#: src/gui/AstroCalcDialog.cpp:798 src/gui/AstroCalcDialog.cpp:961
 msgid "Conjunction"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:802
+#: src/gui/AstroCalcDialog.cpp:803
 msgid "Opposition"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:806 src/gui/AstroCalcDialog.cpp:957
+#: src/gui/AstroCalcDialog.cpp:808 src/gui/AstroCalcDialog.cpp:966
 msgid "Occultation"
 msgstr ""
 
@@ -5512,6 +5511,14 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2022
 msgid "Other"
+msgstr ""
+
+#: src/ui_viewDialog.h:2025 src/ui_dsoColorsDialog.h:542
+msgid "Galaxies"
+msgstr ""
+
+#: src/ui_viewDialog.h:2028
+msgid "Bright nebulae"
 msgstr ""
 
 #: src/ui_viewDialog.h:2031

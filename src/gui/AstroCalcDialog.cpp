@@ -530,9 +530,9 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	groups->addItem(q_("Oort cloud objects"), "8");
 	groups->addItem(q_("Star clusters"), "9");
 	groups->addItem(q_("Planetary nebulae"), "10");
-	groups->addItem(q_("Bright nebulae"), "11");
+	groups->addItem(q_("Bright nebulae (<10 mag.)"), "11");
 	groups->addItem(q_("Dark nebulae"), "12");
-	groups->addItem(q_("Galaxies"), "13");
+	groups->addItem(q_("Bright galaxies (<10 mag.)"), "13");
 
 	index = groups->findData(selectedGroupId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
@@ -687,7 +687,7 @@ void AstroCalcDialog::calculatePhenomena()
 		case 11: // Bright nebulae
 			foreach(const NebulaP& object, allDSO)
 			{
-				if (object->getDSOType()==Nebula::NebN || object->getDSOType()==Nebula::NebBn || object->getDSOType()==Nebula::NebEn || object->getDSOType()==Nebula::NebRn || object->getDSOType()==Nebula::NebHII || object->getDSOType()==Nebula::NebISM || object->getDSOType()==Nebula::NebCn || object->getDSOType()==Nebula::NebSNR)
+				if (object->getVMagnitude(core)<10.f && (object->getDSOType()==Nebula::NebN || object->getDSOType()==Nebula::NebBn || object->getDSOType()==Nebula::NebEn || object->getDSOType()==Nebula::NebRn || object->getDSOType()==Nebula::NebHII || object->getDSOType()==Nebula::NebISM || object->getDSOType()==Nebula::NebCn || object->getDSOType()==Nebula::NebSNR))
 					dso.append(object);
 			}
 			break;
@@ -701,7 +701,7 @@ void AstroCalcDialog::calculatePhenomena()
 		case 13: // Galaxies
 			foreach(const NebulaP& object, allDSO)
 			{
-				if (object->getDSOType()==Nebula::NebGx || object->getDSOType()==Nebula::NebAGx || object->getDSOType()==Nebula::NebRGx || object->getDSOType()==Nebula::NebQSO || object->getDSOType()==Nebula::NebPossQSO || object->getDSOType()==Nebula::NebBLL || object->getDSOType()==Nebula::NebBLA || object->getDSOType()==Nebula::NebIGx)
+				if (object->getVMagnitude(core)<10.f && (object->getDSOType()==Nebula::NebGx || object->getDSOType()==Nebula::NebAGx || object->getDSOType()==Nebula::NebRGx || object->getDSOType()==Nebula::NebQSO || object->getDSOType()==Nebula::NebPossQSO || object->getDSOType()==Nebula::NebBLL || object->getDSOType()==Nebula::NebBLA || object->getDSOType()==Nebula::NebIGx))
 					dso.append(object);
 			}
 			break;
@@ -797,13 +797,17 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 
 		QString phenomenType = q_("Conjunction");
 		double separation = it.value();
+		bool occultation = false;
 		if (opposition)
 		{
 			phenomenType = q_("Opposition");
 			separation += M_PI;
 		}
 		else if (separation<(object2->getAngularSize(core)*M_PI/180.) || separation<(object1->getAngularSize(core)*M_PI/180.))
+		{
 			phenomenType = q_("Occultation");
+			occultation = true;
+		}
 
 		ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->phenomenaTreeWidget);
 		treeItem->setText(PhenomenaType, phenomenType);
@@ -811,7 +815,10 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		treeItem->setText(PhenomenaDate, StelUtils::jdToQDateTime(it.key() + core->getUTCOffset(it.key())/24).toString("yyyy-MM-dd hh:mm:ss"));
 		treeItem->setText(PhenomenaObject1, object1->getNameI18n());
 		treeItem->setText(PhenomenaObject2, object2->getNameI18n());
-		treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation));
+		if (occultation)
+			treeItem->setText(PhenomenaSeparation, QChar(0x2014));
+		else
+			treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation));
 	}
 }
 
@@ -953,8 +960,12 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 
 		QString phenomenType = q_("Conjunction");
 		double separation = it.value();
+		bool occultation = false;
 		if (separation<(object2->getAngularSize(core)*M_PI/180.) || separation<(object1->getAngularSize(core)*M_PI/180.))
+		{
 			phenomenType = q_("Occultation");
+			occultation = true;
+		}
 
 		ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->phenomenaTreeWidget);
 		treeItem->setText(PhenomenaType, phenomenType);
@@ -965,7 +976,10 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			treeItem->setText(PhenomenaObject2, object2->getNameI18n());
 		else
 			treeItem->setText(PhenomenaObject2, object2->getDSODesignation());
-		treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation));
+		if (occultation)
+			treeItem->setText(PhenomenaSeparation, QChar(0x2014));
+		else
+			treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation));
 	}
 }
 
