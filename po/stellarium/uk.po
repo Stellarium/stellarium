@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-06 21:01+0700\n"
-"PO-Revision-Date: 2016-11-06 16:39+0000\n"
+"POT-Creation-Date: 2016-11-08 02:44+0700\n"
+"PO-Revision-Date: 2016-11-07 15:18+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-07 05:42+0000\n"
+"X-Launchpad-Export-Date: 2016-11-08 04:57+0000\n"
 "X-Generator: Launchpad (build 18246)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -923,27 +923,67 @@ msgstr "Середній сонячний день: %1"
 msgid "The period of rotation is chaotic"
 msgstr "Період обертання є хаотичним"
 
-#: src/core/modules/Planet.cpp:346 src/core/modules/Planet.cpp:351
+#: src/core/modules/Planet.cpp:355
+msgctxt "Moon phase"
+msgid "Waxing Crescent"
+msgstr "Зростаючий півмісяць"
+
+#: src/core/modules/Planet.cpp:357
+msgctxt "Moon phase"
+msgid "First Quarter"
+msgstr "Перша чверть"
+
+#: src/core/modules/Planet.cpp:359
+msgctxt "Moon phase"
+msgid "Waxing Gibbous"
+msgstr "Зростаючий опуклий місяць"
+
+#: src/core/modules/Planet.cpp:361
+msgctxt "Moon phase"
+msgid "Full Moon"
+msgstr "Повня"
+
+#: src/core/modules/Planet.cpp:363
+msgctxt "Moon phase"
+msgid "Waning Gibbous"
+msgstr "Спадний опуклий місяць"
+
+#: src/core/modules/Planet.cpp:365
+msgctxt "Moon phase"
+msgid "Third Quarter"
+msgstr "Третя чверть"
+
+#: src/core/modules/Planet.cpp:367
+msgctxt "Moon phase"
+msgid "Waning Crescent"
+msgstr "Спадний півмісяць"
+
+#: src/core/modules/Planet.cpp:369
+msgctxt "Moon phase"
+msgid "New Moon"
+msgstr "Молодик"
+
+#: src/core/modules/Planet.cpp:374 src/core/modules/Planet.cpp:379
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Фазовий кут: %1"
 
-#: src/core/modules/Planet.cpp:347 src/core/modules/Planet.cpp:352
+#: src/core/modules/Planet.cpp:375 src/core/modules/Planet.cpp:380
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Видовження: %1"
 
-#: src/core/modules/Planet.cpp:355
+#: src/core/modules/Planet.cpp:383
 #, qt-format
 msgid "Phase: %1"
 msgstr "Фаза: %1"
 
-#: src/core/modules/Planet.cpp:356
+#: src/core/modules/Planet.cpp:387
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Освітленість: %1%"
 
-#: src/core/modules/Planet.cpp:368
+#: src/core/modules/Planet.cpp:399
 #, qt-format
 msgid "Eclipse Factor: %1%"
 msgstr "Коефіцієнт затемнення: %1%"
@@ -1978,6 +2018,18 @@ msgstr "Не знайдено"
 msgid "Found"
 msgstr "Знайдено"
 
+#. TRANSLATORS: Local Mean Solar Time. Please use abbreviation.
+#: src/core/StelLocaleMgr.cpp:273
+msgctxt "solar time"
+msgid "LMST"
+msgstr ""
+
+#. TRANSLATORS: Local True Solar Time. Please use abbreviation.
+#: src/core/StelLocaleMgr.cpp:279
+msgctxt "solar time"
+msgid "LTST"
+msgstr ""
+
 #: src/gui/ConfigurationDialog.cpp:543
 msgid "Select screenshot directory"
 msgstr "Оберіть каталог для знімків екрана"
@@ -2549,7 +2601,7 @@ msgstr "Автоматично ховати вертикальні клавіш�
 msgid "Toggle visibility of GUI"
 msgstr "Увімкнути/Вимкнути графічний інтерфейс"
 
-#: src/gui/StelGuiItems.cpp:322 src/gui/StelGuiItems.cpp:860
+#: src/gui/StelGuiItems.cpp:322 src/gui/StelGuiItems.cpp:864
 msgid "Space"
 msgstr "Пробіл"
 
@@ -2579,11 +2631,23 @@ msgstr "планетоцентрична відстань: %1 км"
 msgid "planetocentric observer"
 msgstr "планетоцентричний спостерігач"
 
-#: src/gui/StelGuiItems.cpp:742
+#. TRANSLATORS: Field of view. Please use abbreviation.
+#: src/gui/StelGuiItems.cpp:728
+msgctxt "abbreviation"
+msgid "FOV"
+msgstr "ПЗ"
+
+#: src/gui/StelGuiItems.cpp:744
 msgid "Field of view"
 msgstr "Поле зору"
 
-#: src/gui/StelGuiItems.cpp:767
+#. TRANSLATORS: Frames per second. Please use abbreviation.
+#: src/gui/StelGuiItems.cpp:763
+msgctxt "abbreviation"
+msgid "FPS"
+msgstr "кд/c"
+
+#: src/gui/StelGuiItems.cpp:771
 msgid "Frames per second"
 msgstr "Кадрів в секунду"
 
@@ -3040,9 +3104,9 @@ msgstr "Скупчення зірок"
 msgid "Planetary nebulae"
 msgstr "Планетарні туманності"
 
-#: src/gui/AstroCalcDialog.cpp:533 src/ui_viewDialog.h:2028
-msgid "Bright nebulae"
-msgstr "Яскраві туманності"
+#: src/gui/AstroCalcDialog.cpp:533
+msgid "Bright nebulae (<10 mag.)"
+msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:534 src/translations.h:101
@@ -3050,10 +3114,9 @@ msgstr "Яскраві туманності"
 msgid "Dark nebulae"
 msgstr "Темні туманності"
 
-#: src/gui/AstroCalcDialog.cpp:535 src/ui_viewDialog.h:2025
-#: src/ui_dsoColorsDialog.h:542
-msgid "Galaxies"
-msgstr "Галактики"
+#: src/gui/AstroCalcDialog.cpp:535
+msgid "Bright galaxies (<10 mag.)"
+msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:548
 msgid "Phenomenon"
@@ -3071,13 +3134,17 @@ msgstr "Об'єкт 2"
 msgid "Save calculated phenomena as..."
 msgstr "Зберегти обчислені події як…"
 
-#: src/gui/AstroCalcDialog.cpp:798 src/gui/AstroCalcDialog.cpp:952
+#: src/gui/AstroCalcDialog.cpp:798 src/gui/AstroCalcDialog.cpp:961
 msgid "Conjunction"
 msgstr "З’єднання"
 
-#: src/gui/AstroCalcDialog.cpp:802
+#: src/gui/AstroCalcDialog.cpp:803
 msgid "Opposition"
 msgstr "Протистояння"
+
+#: src/gui/AstroCalcDialog.cpp:808 src/gui/AstroCalcDialog.cpp:966
+msgid "Occultation"
+msgstr ""
 
 #: src/gui/BookmarksDialog.cpp:100 src/ui_searchDialogGui.h:702
 msgid "Object"
@@ -5713,6 +5780,14 @@ msgstr "Області гідрогену"
 #: src/ui_viewDialog.h:2022
 msgid "Other"
 msgstr "Інше"
+
+#: src/ui_viewDialog.h:2025 src/ui_dsoColorsDialog.h:542
+msgid "Galaxies"
+msgstr "Галактики"
+
+#: src/ui_viewDialog.h:2028
+msgid "Bright nebulae"
+msgstr "Яскраві туманності"
 
 #: src/ui_viewDialog.h:2031
 msgid "Use hints proportional to angular size of deep-sky objects"
