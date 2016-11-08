@@ -359,6 +359,7 @@ void NebulaMgr::init()
 	
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));	
+	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(updateSkyCulture(const QString&)));
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
 	addAction("actionShow_Nebulas", N_("Display Options"), N_("Deep-sky objects"), "flagHintDisplayed", "D", "N");
@@ -1177,9 +1178,10 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 			if (transRx.exactMatch(name))
 			{
 				QString propName = transRx.capturedTexts().at(1).trimmed();
-				if (e->getEnglishName().isEmpty())
+				QString currName = e->getEnglishName();
+				if (currName.isEmpty())
 					e->setProperName(propName);
-				else
+				else if (currName!=propName)
 					e->addNameAlias(propName);
 			}
 
@@ -1192,6 +1194,73 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 	dsoNameFile.close();
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "DSO name records successfully";
 	return true;
+}
+
+
+void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
+{
+	QString namesFile = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/dso_names.fab");
+
+	foreach (const NebulaP& n, dsoArray)
+		n->removeAllNames();
+
+	if (namesFile.isEmpty())
+		loadDSONames(StelFileMgr::findFile("nebulae/default/names.dat"));
+	else
+	{
+		// Open file
+		QFile dsoNamesFile(namesFile);
+		if (!dsoNamesFile.open(QIODevice::ReadOnly | QIODevice::Text))
+		{
+			qDebug() << "Cannot open file" << QDir::toNativeSeparators(namesFile);
+			return;
+		}
+
+		// Now parse the file
+		// lines to ignore which start with a # or are empty
+		QRegExp commentRx("^(\\s*#.*|\\s*)$");
+
+		// lines which look like records - we use the RE to extract the fields
+		// which will be available in recRx.capturedTexts()
+		QRegExp recRx("^\\s*([\\w\\s]+)\\s*\\|_[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
+
+		QString record, dsoId, nativeName;
+		int totalRecords=0;
+		int readOk=0;
+		int lineNumber=0;
+		while (!dsoNamesFile.atEnd())
+		{
+			record = QString::fromUtf8(dsoNamesFile.readLine());
+			lineNumber++;
+
+			// Skip comments
+			if (commentRx.exactMatch(record))
+				continue;
+
+			totalRecords++;
+
+			if (!recRx.exactMatch(record))
+			{
+				qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in native deep-sky object names file" << QDir::toNativeSeparators(namesFile);
+			}
+			else
+			{
+				dsoId = recRx.capturedTexts().at(1).trimmed();
+				nativeName = recRx.capturedTexts().at(2).trimmed(); // Use translatable text
+				NebulaP e = search(dsoId);
+				QString currentName = e->getEnglishName();
+				if (currentName.isEmpty()) // Set native name of DSO
+					e->setProperName(nativeName);
+				else if (currentName!=nativeName) // Add traditional (well-known?) name of DSO as alias
+					e->addNameAlias(nativeName);
+				readOk++;
+			}
+		}
+		dsoNamesFile.close();
+		qDebug() << "Loaded" << readOk << "/" << totalRecords << "native names of deep-sky objects";
+	}
+
+	updateI18n();
 }
 
 void NebulaMgr::updateI18n()
