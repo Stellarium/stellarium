@@ -696,6 +696,7 @@ public slots:
 	//! Get the amount of nebulae labels. The real amount is also proportional with FOV.
 	//! @return the amount between 0 and 10. 0 is no hints, 10 is maximum of hints
 	double getHintsAmount(void) const {return hintsAmount;}
+
 signals:
 	//! Emitted when hints are toggled.
 	void flagHintsDisplayedChanged(bool b);
@@ -749,6 +750,10 @@ private slots:
 	//! in translations.h
 	void updateI18n();
 	
+	//! Called when the sky culture is updated.
+	//! Loads native names of deep-sky objects for a given sky culture.
+	//! @param skyCultureDir the name of the directory containing the sky culture to use.
+	void updateSkyCulture(const QString& skyCultureDir);
 
 private:
 
