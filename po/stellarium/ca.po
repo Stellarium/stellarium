@@ -10,14 +10,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-06 21:01+0700\n"
-"PO-Revision-Date: 2016-11-06 22:27+0000\n"
+"POT-Creation-Date: 2016-11-08 02:44+0700\n"
+"PO-Revision-Date: 2016-11-07 20:47+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-07 05:25+0000\n"
+"X-Launchpad-Export-Date: 2016-11-08 04:38+0000\n"
 "X-Generator: Launchpad (build 18246)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -920,27 +920,67 @@ msgstr "Dia solar mitjà: %1"
 msgid "The period of rotation is chaotic"
 msgstr "El període de rotació és caòtic"
 
-#: src/core/modules/Planet.cpp:346 src/core/modules/Planet.cpp:351
+#: src/core/modules/Planet.cpp:355
+msgctxt "Moon phase"
+msgid "Waxing Crescent"
+msgstr "Nova visible"
+
+#: src/core/modules/Planet.cpp:357
+msgctxt "Moon phase"
+msgid "First Quarter"
+msgstr "Quart creixent"
+
+#: src/core/modules/Planet.cpp:359
+msgctxt "Moon phase"
+msgid "Waxing Gibbous"
+msgstr "Gibosa creixent"
+
+#: src/core/modules/Planet.cpp:361
+msgctxt "Moon phase"
+msgid "Full Moon"
+msgstr "Lluna plena"
+
+#: src/core/modules/Planet.cpp:363
+msgctxt "Moon phase"
+msgid "Waning Gibbous"
+msgstr "Gibosa Minvant"
+
+#: src/core/modules/Planet.cpp:365
+msgctxt "Moon phase"
+msgid "Third Quarter"
+msgstr "Minvant"
+
+#: src/core/modules/Planet.cpp:367
+msgctxt "Moon phase"
+msgid "Waning Crescent"
+msgstr "Quart minvant"
+
+#: src/core/modules/Planet.cpp:369
+msgctxt "Moon phase"
+msgid "New Moon"
+msgstr "Lluna nova"
+
+#: src/core/modules/Planet.cpp:374 src/core/modules/Planet.cpp:379
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Angle de fase: %1"
 
-#: src/core/modules/Planet.cpp:347 src/core/modules/Planet.cpp:352
+#: src/core/modules/Planet.cpp:375 src/core/modules/Planet.cpp:380
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Elongació: %1"
 
-#: src/core/modules/Planet.cpp:355
+#: src/core/modules/Planet.cpp:383
 #, qt-format
 msgid "Phase: %1"
 msgstr "Fase: %1"
 
-#: src/core/modules/Planet.cpp:356
+#: src/core/modules/Planet.cpp:387
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Il·luminat: %1%"
 
-#: src/core/modules/Planet.cpp:368
+#: src/core/modules/Planet.cpp:399
 #, qt-format
 msgid "Eclipse Factor: %1%"
 msgstr "Factor d'eclipsi: %1%"
@@ -1965,6 +2005,18 @@ msgstr "No trobat"
 msgid "Found"
 msgstr "Trobat"
 
+#. TRANSLATORS: Local Mean Solar Time. Please use abbreviation.
+#: src/core/StelLocaleMgr.cpp:273
+msgctxt "solar time"
+msgid "LMST"
+msgstr "TSLM"
+
+#. TRANSLATORS: Local True Solar Time. Please use abbreviation.
+#: src/core/StelLocaleMgr.cpp:279
+msgctxt "solar time"
+msgid "LTST"
+msgstr "TLSV"
+
 #: src/gui/ConfigurationDialog.cpp:543
 msgid "Select screenshot directory"
 msgstr "Selecciona la carpeta per les captures de pantalles"
@@ -2535,7 +2587,7 @@ msgstr "Ocultar automàticament la barra de botons vertical"
 msgid "Toggle visibility of GUI"
 msgstr "Commuta la visibilitat de la IUG"
 
-#: src/gui/StelGuiItems.cpp:322 src/gui/StelGuiItems.cpp:860
+#: src/gui/StelGuiItems.cpp:322 src/gui/StelGuiItems.cpp:864
 msgid "Space"
 msgstr "Espai"
 
@@ -2549,7 +2601,7 @@ msgstr "Temps Solar Local Mitjà"
 
 #: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:408
 msgid "Local True Solar Time"
-msgstr "Temps Solar Local Real"
+msgstr "Temps Solar Local Vertader"
 
 #: src/gui/StelGuiItems.cpp:679
 #, c-format, qt-format
@@ -2565,11 +2617,23 @@ msgstr "distància planetocèntrica %1 km"
 msgid "planetocentric observer"
 msgstr "observador planetocèntric"
 
-#: src/gui/StelGuiItems.cpp:742
+#. TRANSLATORS: Field of view. Please use abbreviation.
+#: src/gui/StelGuiItems.cpp:728
+msgctxt "abbreviation"
+msgid "FOV"
+msgstr "CDV"
+
+#: src/gui/StelGuiItems.cpp:744
 msgid "Field of view"
 msgstr "Camp de visió"
 
-#: src/gui/StelGuiItems.cpp:767
+#. TRANSLATORS: Frames per second. Please use abbreviation.
+#: src/gui/StelGuiItems.cpp:763
+msgctxt "abbreviation"
+msgid "FPS"
+msgstr "QPS"
+
+#: src/gui/StelGuiItems.cpp:771
 msgid "Frames per second"
 msgstr "Fotogrames per segon"
 
@@ -3026,9 +3090,9 @@ msgstr "Clúster d'estels"
 msgid "Planetary nebulae"
 msgstr "Nebuloses planetàries"
 
-#: src/gui/AstroCalcDialog.cpp:533 src/ui_viewDialog.h:2028
-msgid "Bright nebulae"
-msgstr "Nebuloses brillants"
+#: src/gui/AstroCalcDialog.cpp:533
+msgid "Bright nebulae (<10 mag.)"
+msgstr "Nebuloses brillants (<10 mag.)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:534 src/translations.h:101
@@ -3036,10 +3100,9 @@ msgstr "Nebuloses brillants"
 msgid "Dark nebulae"
 msgstr "Nebuloses fosques"
 
-#: src/gui/AstroCalcDialog.cpp:535 src/ui_viewDialog.h:2025
-#: src/ui_dsoColorsDialog.h:542
-msgid "Galaxies"
-msgstr "Galàxies"
+#: src/gui/AstroCalcDialog.cpp:535
+msgid "Bright galaxies (<10 mag.)"
+msgstr "Galàxies brillants (<10 mag.)"
 
 #: src/gui/AstroCalcDialog.cpp:548
 msgid "Phenomenon"
@@ -3057,13 +3120,17 @@ msgstr "Objecte 2"
 msgid "Save calculated phenomena as..."
 msgstr "Guardeu els fenòmens calculats com..."
 
-#: src/gui/AstroCalcDialog.cpp:798 src/gui/AstroCalcDialog.cpp:952
+#: src/gui/AstroCalcDialog.cpp:798 src/gui/AstroCalcDialog.cpp:961
 msgid "Conjunction"
 msgstr "Conjunció"
 
-#: src/gui/AstroCalcDialog.cpp:802
+#: src/gui/AstroCalcDialog.cpp:803
 msgid "Opposition"
 msgstr "Oposició"
+
+#: src/gui/AstroCalcDialog.cpp:808 src/gui/AstroCalcDialog.cpp:966
+msgid "Occultation"
+msgstr "Ocultació"
 
 #: src/gui/BookmarksDialog.cpp:100 src/ui_searchDialogGui.h:702
 msgid "Object"
@@ -5699,6 +5766,14 @@ msgstr "Regions d'hidrogen"
 #: src/ui_viewDialog.h:2022
 msgid "Other"
 msgstr "Altre"
+
+#: src/ui_viewDialog.h:2025 src/ui_dsoColorsDialog.h:542
+msgid "Galaxies"
+msgstr "Galàxies"
+
+#: src/ui_viewDialog.h:2028
+msgid "Bright nebulae"
+msgstr "Nebuloses brillants"
 
 #: src/ui_viewDialog.h:2031
 msgid "Use hints proportional to angular size of deep-sky objects"
