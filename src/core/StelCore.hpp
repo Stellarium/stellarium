@@ -399,6 +399,8 @@ public slots:
 	//! Setting to a negative value will move the visible horizon down, this may be desired esp. in cylindrical projection.
 	//! Animation is available via StelMovementMgr::moveViewport()
 	void setViewportVerticalOffset(double newOffsetPct);
+	// Set both viewport offsets. Arguments will be clamped to be inside [-50...50]. I (GZ) hope this will avoid some of the shaking.
+	void setViewportOffset(double newHorizontalOffsetPct, double newVerticalOffsetPct);
 
 	//! Can be used in specialized setups, intended e.g. for multi-projector installations with edge blending.
 	//! @param stretch [default 1] enlarge to stretch image to non-square pixels. A minimum value of 0.001 is enforced.
@@ -643,10 +645,10 @@ public slots:
 	//! @param y the year, e.g. 1820
 	void setDeltaTCustomYear(float y) { deltaTCustomYear=y; }
 	//! Set n-dot for custom equation for calculation of Delta-T
-	//! @param y the n-dot value, e.g. -26.0
+	//! @param v the n-dot value, e.g. -26.0
 	void setDeltaTCustomNDot(float v) { deltaTCustomNDot=v; }
 	//! Set coefficients for custom equation for calculation of Delta-T
-	//! @param y the coefficients, e.g. -20,0,32
+	//! @param c the coefficients, e.g. -20,0,32
 	void setDeltaTCustomEquationCoefficients(Vec3f c) { deltaTCustomEquationCoeff=c; }
 
 	//! Get central year for custom equation for calculation of Delta-T
@@ -663,7 +665,7 @@ public slots:
 	bool de431IsAvailable();            //!< true if DE431 ephemeris file has been found
 	bool de430IsActive();               //!< true if DE430 ephemeris is in use
 	bool de431IsActive();               //!< true if DE431 ephemeris is in use
-	void setDe430Active(bool status);   //!< switch DE430 use to @param status (if de430IsAvailable()) DE430 is only used if date is within range of DE430.
+	void setDe430Active(bool status);   //!< switch DE430 use to @param status (if de430IsAvailable()). DE430 is only used if date is within range of DE430.
 	void setDe431Active(bool status);   //!< switch DE431 use to @param status (if de431IsAvailable()). DE431 is only used if DE430 is not used and the date is within range of DE431.
 
 signals:
