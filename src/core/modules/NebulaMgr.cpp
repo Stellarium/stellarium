@@ -557,7 +557,7 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 {
 	QString srcCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.txt");
 	QString dsoCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.dat");
-	QString dsoNamesPath		= StelFileMgr::findFile("nebulae/" + setName + "/names.dat");
+
 
 	if (flagConverter)
 	{
@@ -568,14 +568,13 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 
 	}
 
-	if (dsoCatalogPath.isEmpty() || dsoNamesPath.isEmpty())
+	if (dsoCatalogPath.isEmpty())
 	{
-		qWarning() << "ERROR while loading deep-sky data set " << setName;
+		qWarning() << "ERROR while loading deep-sky catalog data set " << setName;
 		return;
 	}
 
-	loadDSOCatalog(dsoCatalogPath);	
-	loadDSONames(dsoNamesPath);
+	loadDSOCatalog(dsoCatalogPath);		
 }
 
 // Look for a nebulae by XYZ coords
@@ -1205,7 +1204,16 @@ void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
 		n->removeAllNames();
 
 	if (namesFile.isEmpty())
-		loadDSONames(StelFileMgr::findFile("nebulae/default/names.dat"));
+	{
+		QString setName = "default";
+		QString dsoNamesPath = StelFileMgr::findFile("nebulae/" + setName + "/names.dat");
+		if (dsoNamesPath.isEmpty())
+		{
+			qWarning() << "ERROR while loading deep-sky names data set " << setName;
+			return;
+		}
+		loadDSONames(dsoNamesPath);
+	}
 	else
 	{
 		// Open file
