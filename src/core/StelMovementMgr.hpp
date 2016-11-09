@@ -25,6 +25,7 @@
 #include "StelProjector.hpp"
 #include "StelObjectType.hpp"
 #include <QTimeLine>
+#include <QCursor>
 
 //! @class StelMovementMgr
 //! Manages the head movements and zoom operations.
@@ -44,6 +45,10 @@ class StelMovementMgr : public StelModule
 	Q_PROPERTY(float viewportHorizontalOffsetTarget READ getViewportHorizontalOffsetTarget WRITE setViewportHorizontalOffsetTarget NOTIFY viewportHorizontalOffsetTargetChanged)
 	Q_PROPERTY(float viewportVerticalOffsetTarget READ getViewportVerticalOffsetTarget WRITE setViewportVerticalOffsetTarget NOTIFY viewportVerticalOffsetTargetChanged)
 
+	Q_PROPERTY(bool flagAutoZoomOutResetsDirection
+		   READ getFlagAutoZoomOutResetsDirection
+		   WRITE setFlagAutoZoomOutResetsDirection
+		   NOTIFY flagAutoZoomOutResetsDirectionChanged)
 public:
 
 	//! Possible mount modes defining the reference frame in which head movements occur.
@@ -69,8 +74,9 @@ public:
 	//! - Sets the auto-zoom duration and mode.
 	virtual void init();
 
-	//! Update time-dependent things (does nothing).
-	virtual void update(double) {;}
+	//! Update time-dependent things (triggers a time dragging record if required)
+	virtual void update(double) {
+		if (dragTimeMode) addTimeDragPoint(QCursor::pos().x(), QCursor::pos().y());}
 	//! Implement required draw function.  Does nothing.
 	virtual void draw(StelCore*) {;}
 	//! Handle keyboard events.
@@ -142,7 +148,7 @@ public slots:
 	float getAutoMoveDuration(void) const {return autoMoveDuration;}
 
 	//! Set whether auto zoom out will reset the viewing direction to the inital value
-	void setFlagAutoZoomOutResetsDirection(bool b) {flagAutoZoomOutResetsDirection = b;}
+	void setFlagAutoZoomOutResetsDirection(bool b) {if (flagAutoZoomOutResetsDirection != b) { flagAutoZoomOutResetsDirection = b; emit flagAutoZoomOutResetsDirectionChanged(b);}}
 	//! Get whether auto zoom out will reset the viewing direction to the inital value
 	bool getFlagAutoZoomOutResetsDirection(void) {return flagAutoZoomOutResetsDirection;}
 
@@ -288,6 +294,8 @@ signals:
 	void flagTrackingChanged(bool b);
 	void equatorialMountChanged(bool b);
 
+	void flagAutoZoomOutResetsDirectionChanged(bool b);
+
 	void viewportHorizontalOffsetTargetChanged(float f);
 	void viewportVerticalOffsetTargetChanged(float f);
 
@@ -382,7 +390,7 @@ private:
 	bool isDragging, hasDragged;
 	int previousX, previousY;
 
-	// Contains the last N real time / JD times pairs associated with the last N mouse move events
+	// Contains the last N real time / JD times pairs associated with the last N mouse move events at screen coordinates x/y
 	struct DragHistoryEntry
 	{
 		double runTime;
@@ -390,8 +398,7 @@ private:
 		int x;
 		int y;
 	};
-
-	QList<DragHistoryEntry> timeDragHistory;
+	QList<DragHistoryEntry> timeDragHistory; // list of max 3 entries.
 	void addTimeDragPoint(int x, int y);
 	float beforeTimeDragTimeRate;
 
