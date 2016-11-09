@@ -622,6 +622,15 @@ void StelCore::setViewportVerticalOffset(double newOffsetPct)
 						currentProjectorParams.viewportXywh[1]+(0.5f+currentProjectorParams.viewportCenterOffset.v[1])*currentProjectorParams.viewportXywh[3]);
 }
 
+// Set both viewport offsets. Arguments will be clamped to be inside [-50...50]. I (GZ) hope this will avoid some of the shaking.
+void StelCore::setViewportOffset(double newHorizontalOffsetPct, double newVerticalOffsetPct)
+{
+	currentProjectorParams.viewportCenterOffset[0]=0.01f* qMin(50., qMax(-50., newHorizontalOffsetPct));
+	currentProjectorParams.viewportCenterOffset[1]=0.01f* qMin(50., qMax(-50., newVerticalOffsetPct));
+	currentProjectorParams.viewportCenter.set(currentProjectorParams.viewportXywh[0]+(0.5f+currentProjectorParams.viewportCenterOffset.v[0])*currentProjectorParams.viewportXywh[2],
+						currentProjectorParams.viewportXywh[1]+(0.5f+currentProjectorParams.viewportCenterOffset.v[1])*currentProjectorParams.viewportXywh[3]);
+}
+
 void StelCore::setViewportStretch(float stretch)
 {
 	currentProjectorParams.widthStretch=qMax(0.001f, stretch);

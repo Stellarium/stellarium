@@ -53,7 +53,7 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, keyMoveSpeed(0.00025)
 	, keyZoomSpeed(0.00025)
 	, flagMoveSlow(false)
-	, movementsSpeedFactor(1.5)
+	, movementsSpeedFactor(1.0)
 	, flagAutoMove(false)
 	, zoomingMode(ZoomNone)
 	, deltaFov(0.)
@@ -61,6 +61,7 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, deltaAz(0.)
 	, flagManualZoom(false)
 	, autoMoveDuration(1.5)
+	, isDragging(false)
 	, hasDragged(false)
 	, previousX(0)
 	, previousY(0)
@@ -69,12 +70,11 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, zoomMove()
 	, flagAutoZoom(0)
 	, flagAutoZoomOutResetsDirection(0)
+	, mountMode(MountAltAzimuthal)
 	, dragTriggerDistance(4.f)
 	, viewportOffsetTimeline(NULL)
 {
 	setObjectName("StelMovementMgr");
-	isDragging = false;
-	mountMode = MountAltAzimuthal;  // default
 	upVectorMountFrame.set(0.,0.,1.);
 }
 
@@ -92,7 +92,6 @@ void StelMovementMgr::init()
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
 			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 
-	movementsSpeedFactor=1.;
 	flagEnableMoveAtScreenEdge = conf->value("navigation/flag_enable_move_at_screen_edge",false).toBool();
 	mouseZoomSpeed = conf->value("navigation/mouse_zoom",30).toInt();
 	flagEnableZoomKeys = conf->value("navigation/flag_enable_zoom_keys").toBool();
@@ -212,33 +211,33 @@ bool StelMovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons)
 	{
 		if (x <= 1)
 		{
-			turnLeft(1);
+			turnLeft(true);
 			isMouseMovingHoriz = true;
 		}
 		else if (x >= core->getProjection2d()->getViewportWidth() - 2)
 		{
-			turnRight(1);
+			turnRight(true);
 			isMouseMovingHoriz = true;
 		}
 		else if (isMouseMovingHoriz)
 		{
-			turnLeft(0);
+			turnLeft(false);
 			isMouseMovingHoriz = false;
 		}
 
 		if (y <= 1)
 		{
-			turnUp(1);
+			turnUp(true);
 			isMouseMovingVert = true;
 		}
 		else if (y >= core->getProjection2d()->getViewportHeight() - 2)
 		{
-			turnDown(1);
+			turnDown(true);
 			isMouseMovingVert = true;
 		}
 		else if (isMouseMovingVert)
 		{
-			turnUp(0);
+			turnUp(false);
 			isMouseMovingVert = false;
 		}
 	}
@@ -263,7 +262,7 @@ bool StelMovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons)
 
 double StelMovementMgr::getCallOrder(StelModuleActionName actionName) const
 {
-	// GZ: allow a few plugins to intercept keys!
+	// allow plugins to intercept keys by using a lower number than this!
 	if (actionName == StelModule::ActionHandleKeys)
 		return 5;
 	return 0;
@@ -419,16 +418,16 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 				hasDragged = false;
 				previousX = event->x();
 				previousY = event->y();
-				beforeTimeDragTimeRate=core->getTimeRate();
 				if (dragTimeMode)
 				{
+					beforeTimeDragTimeRate=core->getTimeRate();
 					timeDragHistory.clear();
-					addTimeDragPoint(event->pos().x(), event->pos().y());
+					addTimeDragPoint(event->x(), event->y());
 				}
 				event->accept();
 				return;
 			}
-			else
+			else if (event->type()==QEvent::MouseButtonRelease)
 			{
 				isDragging = false;
 				if (hasDragged)
@@ -464,7 +463,7 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 					}
 					return;
 				}
-				else
+				else // has not dragged...
 				{
 					// It's a normal click release
 					// TODO: Leave time dragging in Natural speed or zero speed (config option?) if mouse was resting
@@ -492,6 +491,10 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 					//event->accept();
 					return;
 				}
+			}
+			else
+			{
+				qDebug() << "StelMovementMgr::handleMouseClicks: unknown mouse event type, skipping: " << event->type();
 			}
 			break;
 		case Qt::MidButton :
@@ -861,7 +864,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 //			}
 		// qDebug() << "setting view direction to " << tmp.v[0] << "/" << tmp.v[1] << "/" << tmp.v[2];
 	}
-	else
+	else // no autoMove
 	{
 		if (flagTracking && objectMgr->getWasSelected()) // Equatorial vision vector locked on selected object
 		{
@@ -1067,7 +1070,10 @@ void StelMovementMgr::moveToObject(const StelObjectP& target, float moveDuration
 void StelMovementMgr::moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float moveDuration, ZoomingMode zooming)
 {
 	if (mountMode!=StelMovementMgr::MountAltAzimuthal)
+	{
+		qDebug() << "StelMovementMgr: called moveToAltAzi, but not in AltAz mount frame. Ignoring.";
 		return;
+	}
 
 	moveDuration /= movementsSpeedFactor;
 
@@ -1354,8 +1360,9 @@ void StelMovementMgr::moveViewport(float offsetX, float offsetY, const float dur
 	if (duration<=0.0f)
 	{
 		//avoid using the timeline to minimize overhead
-		core->setViewportHorizontalOffset(targetViewportOffset[0]);
-		core->setViewportVerticalOffset(targetViewportOffset[1]);
+		//core->setViewportHorizontalOffset(targetViewportOffset[0]);
+		//core->setViewportVerticalOffset(targetViewportOffset[1]);
+		core->setViewportOffset(offsetX, offsetY);
 		return;
 	}
 
@@ -1376,6 +1383,7 @@ void StelMovementMgr::handleViewportOffsetMovement(qreal value)
 	float offsetX=oldViewportOffset.v[0] + (targetViewportOffset.v[0]-oldViewportOffset.v[0])*value;
 	float offsetY=oldViewportOffset.v[1] + (targetViewportOffset.v[1]-oldViewportOffset.v[1])*value;
 	//qDebug() << "handleViewportOffsetMovement(" << value << "): Setting viewport offset to " << offsetX << "/" << offsetY;
-	core->setViewportHorizontalOffset(offsetX);
-	core->setViewportVerticalOffset(offsetY);
+	//core->setViewportHorizontalOffset(offsetX);
+	//core->setViewportVerticalOffset(offsetY);
+	core->setViewportOffset(offsetX, offsetY);
 }
