@@ -360,11 +360,26 @@ void StelMovementMgr::handleMouseWheel(QWheelEvent* event)
 	if (event->orientation() != Qt::Vertical)
 		return;
   
-	const float numSteps = event->delta() / 120.f;
-	const float zoomFactor = std::exp(-mouseZoomSpeed * numSteps / 60.f);
-	const float zoomDuration = 0.2f * qAbs(numSteps);
-	zoomTo(getAimFov() * zoomFactor, zoomDuration);
-
+	const float numSteps = event->angleDelta().y() / 120.f;
+	if (dragTimeMode)
+	{
+		if (event->modifiers() & Qt::ShiftModifier)
+		{
+			// move time by hours
+			core->setJD(core->getJD()+numSteps/(24.f));
+		}
+		else
+		{
+			// move time by minutes
+			core->setJD(core->getJD()+numSteps/(24.f*60.f));
+		}
+	}
+	else
+	{
+		const float zoomFactor = std::exp(-mouseZoomSpeed * numSteps / 60.f);
+		const float zoomDuration = 0.2f * qAbs(numSteps);
+		zoomTo(getAimFov() * zoomFactor, zoomDuration);
+	}
 	event->accept();
 }
 

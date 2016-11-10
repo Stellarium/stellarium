@@ -87,7 +87,7 @@ public:
 	virtual void handleMouseWheel(class QWheelEvent* event);
 	//! Handle mouse click events.
 	virtual void handleMouseClicks(class QMouseEvent* event);
-	// GZ: allow some keypress interaction by plugins.
+	// allow some keypress interaction by plugins.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	//! Handle pinch gesture.
 	virtual bool handlePinch(qreal scale, bool started);
@@ -99,7 +99,7 @@ public:
 	void updateMotion(double deltaTime);
 
 	// These are hopefully temporary.
-	bool getHasDragged() const {return hasDragged;}
+	//bool getHasDragged() const {return hasDragged;}
 
 	//! Get the zoom speed
 	// TODO: what are the units?
