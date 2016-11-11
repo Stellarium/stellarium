@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-08 02:44+0700\n"
+"POT-Creation-Date: 2016-11-10 23:38+0700\n"
 "PO-Revision-Date: 2016-11-01 16:22+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-08 04:41+0000\n"
-"X-Generator: Launchpad (build 18246)\n"
+"X-Launchpad-Export-Date: 2016-11-11 05:27+0000\n"
+"X-Generator: Launchpad (build 18255)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:191
@@ -47,7 +47,7 @@ msgstr "tähdistö"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:433
 #: src/core/modules/GridLinesMgr.cpp:1214 src/core/modules/LandscapeMgr.cpp:414
-#: src/core/modules/NebulaMgr.cpp:364 src/core/modules/NebulaMgr.cpp:365
+#: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:203 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/StelApp.cpp:518
 #: src/core/StelCore.cpp:229 src/core/StelSkyLayerMgr.cpp:88
@@ -341,7 +341,7 @@ msgid "Illumination"
 msgstr "Maiseman valot"
 
 #: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:2046
-#: plugins/Satellites/src/ui_satellitesDialog.h:718
+#: plugins/Satellites/src/ui_satellitesDialog.h:720
 msgid "Labels"
 msgstr "Nimet"
 
@@ -847,11 +847,11 @@ msgstr "tuntematon kohde"
 msgid "undocumented type"
 msgstr "tuntematon tyyppi"
 
-#: src/core/modules/NebulaMgr.cpp:364
+#: src/core/modules/NebulaMgr.cpp:365
 msgid "Deep-sky objects"
 msgstr "Syvän taivaan kohteet"
 
-#: src/core/modules/NebulaMgr.cpp:365
+#: src/core/modules/NebulaMgr.cpp:366
 msgid "Toggle DSO type filter"
 msgstr "Suodata tyypin mukaan"
 
@@ -1155,7 +1155,7 @@ msgstr "Yötila"
 msgid "Date and Time"
 msgstr "Päiväys ja aika"
 
-#: src/core/StelCore.cpp:228 src/core/StelMovementMgr.cpp:154
+#: src/core/StelCore.cpp:228 src/core/StelMovementMgr.cpp:153
 msgid "Movement and Selection"
 msgstr "Liikkuminen ja valinta"
 
@@ -1367,12 +1367,12 @@ msgstr "Peilaa vaakasuunnassa"
 msgid "Flip scene vertically"
 msgstr "Peilaa pystysuunnassa"
 
-#: src/core/StelCore.cpp:1934
+#: src/core/StelCore.cpp:1943
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Korjaus on poistettu käytöstä. Käytä vain, jos tiedät mitä olet tekemässä!"
 
-#: src/core/StelCore.cpp:1937
+#: src/core/StelCore.cpp:1946
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1383,7 +1383,7 @@ msgstr ""
 "artikkelissaan <em>Einstein's Theory of Relativity Confirmed by Ancient "
 "Solar Eclipses</em> (%1). Katso lisätietoa %2täältä%3."
 
-#: src/core/StelCore.cpp:1940
+#: src/core/StelCore.cpp:1949
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1392,7 +1392,7 @@ msgstr ""
 "Tämän empiirisen yhtälön julkaisi G. M. Clemence artikkelissaan <em>On the "
 "system of astronomical constants</em> (%1)."
 
-#: src/core/StelCore.cpp:1943
+#: src/core/StelCore.cpp:1952
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1405,7 +1405,7 @@ msgstr ""
 "teoksessaan <em>Astronomical Formulae for Calculators</em>. Se otettiin "
 "käyttöön myös SunTracker Pro -ohjelmistoon."
 
-#: src/core/StelCore.cpp:1947
+#: src/core/StelCore.cpp:1956
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1415,7 +1415,7 @@ msgstr ""
 "<em>Astronomical Ephemeris</em> -almanakkaan, sekä Mucken ja Meeuksen (1983) "
 "<em>Canon of Solar Eclipses</em> -teokseen."
 
-#: src/core/StelCore.cpp:1951
+#: src/core/StelCore.cpp:1960
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1428,7 +1428,7 @@ msgstr ""
 "aikaa eli 16.00 GMT. Sama suhde otettiin epäsuorasti käyttöön myös "
 "Goldstinen (1973) syzygitaulukoihin."
 
-#: src/core/StelCore.cpp:1955
+#: src/core/StelCore.cpp:1964
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1439,7 +1439,7 @@ msgstr ""
 "<em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 
-#: src/core/StelCore.cpp:1958
+#: src/core/StelCore.cpp:1967
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1448,7 +1448,7 @@ msgstr ""
 "Tämän yhtälön julkaisi F. R. Stephenson artikkelissaan <em>Pre-Telescopic "
 "Astronomical Observations</em> (%1)."
 
-#: src/core/StelCore.cpp:1961
+#: src/core/StelCore.cpp:1970
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1461,7 +1461,7 @@ msgstr ""
 "U.T. in the period 1800-1975</em> (%1). Schmadel ja Zech korvasivat tämän "
 "yhtälön uudella vuonna 1988."
 
-#: src/core/StelCore.cpp:1964
+#: src/core/StelCore.cpp:1973
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1471,7 +1471,7 @@ msgstr ""
 "<em>Planetary Programs and Tables from -4000 to +2800</em> (1986). Sen "
 "otettiin käyttöön myös RedShift-planetaario-ohjelmaan."
 
-#: src/core/StelCore.cpp:1967
+#: src/core/StelCore.cpp:1976
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1482,11 +1482,11 @@ msgstr ""
 "<em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. "
 "1980</em> (%1)."
 
-#: src/core/StelCore.cpp:1970
+#: src/core/StelCore.cpp:1979
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "Tämä algoritmi on käytössä Guide 7 -planetaario-ohjelmassa."
 
-#: src/core/StelCore.cpp:1973
+#: src/core/StelCore.cpp:1982
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -1496,7 +1496,7 @@ msgstr ""
 "Solar Eclipses: 1986-2035</em> (1987) ja <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:1976
+#: src/core/StelCore.cpp:1985
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -1505,7 +1505,7 @@ msgstr ""
 "Tämän kaavan laski K. M. Borkowski (%1) analysoimalla 31:tä vuosien 2173 "
 "eKr.–1715 jKr. välillä tapahtunutta auringonpimennystä."
 
-#: src/core/StelCore.cpp:1979
+#: src/core/StelCore.cpp:1988
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1517,7 +1517,7 @@ msgstr ""
 "artikkelissaan <em>Empirical Transformations from U.T. to E.T. for the "
 "Period 1800-1988</em> (%1)."
 
-#: src/core/StelCore.cpp:1982
+#: src/core/StelCore.cpp:1991
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -1527,7 +1527,7 @@ msgstr ""
 "ELP 2000-85 -kuuteoriaan teoksessaan <em>Lunar Tables and Programs from 4000 "
 "B.C. to A.D. 8000</em> (1991)."
 
-#: src/core/StelCore.cpp:1985
+#: src/core/StelCore.cpp:1994
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1538,7 +1538,7 @@ msgstr ""
 "<em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> "
 "(%1)."
 
-#: src/core/StelCore.cpp:1988
+#: src/core/StelCore.cpp:1997
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1547,7 +1547,7 @@ msgstr ""
 "F. R. Stephenson julkaisi tämän kaavan kirjassaan <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 
-#: src/core/StelCore.cpp:1991
+#: src/core/StelCore.cpp:2000
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1557,7 +1557,7 @@ msgstr ""
 "laajasti käytetty. Taulukko vuosille 1620–2000, sisältää myös Chaprontin, "
 "Chapront-Touzen ja Francoun variantin tämän aikavälin ulkopuolelle."
 
-#: src/core/StelCore.cpp:1994
+#: src/core/StelCore.cpp:2003
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1566,7 +1566,7 @@ msgstr ""
 "JPL:n Solar System Dynamics -ryhmä käyttää tätä kaavaa interaktiivisella "
 "%1JPL Horizons%2 -sivustollaan."
 
-#: src/core/StelCore.cpp:1997
+#: src/core/StelCore.cpp:2006
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1575,7 +1575,7 @@ msgstr ""
 "Tämän polynomin julkaisivat J. Meeus ja L. Simons artikkelissaan "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 
-#: src/core/StelCore.cpp:2000
+#: src/core/StelCore.cpp:2009
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1585,7 +1585,7 @@ msgstr ""
 "Computer</em> neljäs painos (2000) tarjoaa kolmannen asteen polynomeja "
 "lähimenneisyydelle."
 
-#: src/core/StelCore.cpp:2003
+#: src/core/StelCore.cpp:2012
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1597,7 +1597,7 @@ msgstr ""
 "<em>Calendrical Tabulations</em> (2002). Kaava perustuu Jean Meeuksen "
 "teokseen <em>Astronomical Algorithms</em> (1991)."
 
-#: src/core/StelCore.cpp:2006
+#: src/core/StelCore.cpp:2015
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1608,7 +1608,7 @@ msgstr ""
 "artikkelissaan <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2), seuraavin lisäyksin (%3)."
 
-#: src/core/StelCore.cpp:2009
+#: src/core/StelCore.cpp:2018
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1621,7 +1621,7 @@ msgstr ""
 "neliöfunktion kanssa. Tämä perustuu Stephensonin kuvailemaan mahdolliseen "
 "jaksollisuuteen (%2). Lisätietoa %3täällä%4."
 
-#: src/core/StelCore.cpp:2012 src/core/StelCore.cpp:2015
+#: src/core/StelCore.cpp:2021 src/core/StelCore.cpp:2024
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1636,15 +1636,15 @@ msgstr ""
 "käytössä %1NASA:n pimennyssivustolla%2. Käytössä myös aurinko-, kuu-, ja "
 "planeettaefemeridiohjelma SOLEXissa."
 
-#: src/core/StelCore.cpp:2012
+#: src/core/StelCore.cpp:2021
 msgid "Used by default."
 msgstr "Käytössä oletuksena."
 
-#: src/core/StelCore.cpp:2015
+#: src/core/StelCore.cpp:2024
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "Päivitetty versio ilman erillistä Kuun kiihtyvyyttä"
 
-#: src/core/StelCore.cpp:2018
+#: src/core/StelCore.cpp:2027
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1655,7 +1655,7 @@ msgstr ""
 "julkaistiin artikkelissa <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 
-#: src/core/StelCore.cpp:2021
+#: src/core/StelCore.cpp:2030
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1667,7 +1667,7 @@ msgstr ""
 "Polynomial Approximation of DeltaT</em> (%1), ja Sana Islam tarkisti sen "
 "2013."
 
-#: src/core/StelCore.cpp:2024
+#: src/core/StelCore.cpp:2033
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1678,7 +1678,7 @@ msgstr ""
 "M. Khalid, Mariam Sultana ja Faheem Zaidi <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2027
+#: src/core/StelCore.cpp:2036
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1687,15 +1687,15 @@ msgstr ""
 "Tämä on toisen asteen kaava %1T:n laskemiseksi käyttäjän määrittelemillä "
 "arvoilla."
 
-#: src/core/StelCore.cpp:2030 src/core/SimbadSearcher.cpp:156
+#: src/core/StelCore.cpp:2039 src/core/SimbadSearcher.cpp:156
 msgid "Error"
 msgstr "Virhe"
 
-#: src/core/StelCore.cpp:2080
+#: src/core/StelCore.cpp:2089
 msgid "with meaningless values outside this range"
 msgstr "mielivaltaiset arvot alueen ulkopuolella"
 
-#: src/core/StelCore.cpp:2106
+#: src/core/StelCore.cpp:2115
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -1703,22 +1703,22 @@ msgstr ""
 "keskimääräinen virhe alle yksi sekunti, max. 1,9 s, mielivaltaiset arvot "
 "alueen ulkopuolella"
 
-#: src/core/StelCore.cpp:2128 src/core/StelCore.cpp:2133
-#: src/core/StelCore.cpp:2161 src/core/StelCore.cpp:2166
-#: src/core/StelCore.cpp:2171
+#: src/core/StelCore.cpp:2137 src/core/StelCore.cpp:2142
+#: src/core/StelCore.cpp:2170 src/core/StelCore.cpp:2175
+#: src/core/StelCore.cpp:2180
 msgid "with zero values outside this range"
 msgstr "nolla-arvo alueen ulkopuolella"
 
-#: src/core/StelCore.cpp:2138
+#: src/core/StelCore.cpp:2147
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "tyypillinen yhden sekunnin tarkkuus, nolla-arvo alueen ulkopuolella"
 
-#: src/core/StelCore.cpp:2181
+#: src/core/StelCore.cpp:2190
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Käyttökelpoinen aikaväli: vuodesta %1 vuoteen %2, %3."
 
-#: src/core/StelCore.cpp:2183
+#: src/core/StelCore.cpp:2192
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Käyttökelpoinen aikaväli: vuodesta %1 vuoteen %2."
@@ -1922,56 +1922,56 @@ msgstr "Todellinen tähtiaika: %1"
 msgid "Deep-sky objects background images"
 msgstr "Syvän taivaan kohteiden kuvat"
 
-#: src/core/StelMovementMgr.cpp:155 src/gui/StelGui.cpp:201
+#: src/core/StelMovementMgr.cpp:154 src/gui/StelGui.cpp:201
 #: src/StelMainView.cpp:574
 msgid "Miscellaneous"
 msgstr "Sekalaista"
 
-#: src/core/StelMovementMgr.cpp:155
+#: src/core/StelMovementMgr.cpp:154
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Vaihda ekvatoriaali- ja atsimutaalijalustan välillä"
 
-#: src/core/StelMovementMgr.cpp:156
+#: src/core/StelMovementMgr.cpp:155
 msgid "Center on selected object"
 msgstr "Keskitä valittuun kohteeseen"
 
-#: src/core/StelMovementMgr.cpp:157
+#: src/core/StelMovementMgr.cpp:156
 msgid "Zoom in on selected object"
 msgstr "Suurenna valittuun kohteeseen"
 
-#: src/core/StelMovementMgr.cpp:158
+#: src/core/StelMovementMgr.cpp:157
 msgid "Zoom out"
 msgstr "Loitonna"
 
-#: src/core/StelMovementMgr.cpp:159
+#: src/core/StelMovementMgr.cpp:158
 msgid "Track object"
 msgstr "Seuraa kohdetta"
 
-#: src/core/StelMovementMgr.cpp:161
+#: src/core/StelMovementMgr.cpp:160
 msgid "Look towards East"
 msgstr "Katso itään"
 
-#: src/core/StelMovementMgr.cpp:162
+#: src/core/StelMovementMgr.cpp:161
 msgid "Look towards West"
 msgstr "Katso länteen"
 
-#: src/core/StelMovementMgr.cpp:163
+#: src/core/StelMovementMgr.cpp:162
 msgid "Look towards North"
 msgstr "Katso pohjoiseen"
 
-#: src/core/StelMovementMgr.cpp:164
+#: src/core/StelMovementMgr.cpp:163
 msgid "Look towards South"
 msgstr "Katso etelään"
 
-#: src/core/StelMovementMgr.cpp:165
+#: src/core/StelMovementMgr.cpp:164
 msgid "Look towards Zenith"
 msgstr "Katso zeniittiin"
 
-#: src/core/StelMovementMgr.cpp:167
+#: src/core/StelMovementMgr.cpp:166
 msgid "Look towards North Celestial pole"
 msgstr "Katso kohti pohjoista taivaannapaa"
 
-#: src/core/StelMovementMgr.cpp:168
+#: src/core/StelMovementMgr.cpp:167
 msgid "Look towards South Celestial pole"
 msgstr "Katso kohti eteläistä taivaannapaa"
 
@@ -3113,7 +3113,7 @@ msgstr "Taivaankappale 2"
 msgid "Save calculated phenomena as..."
 msgstr "Tallenna lasketut tapahtumat nimellä..."
 
-#: src/gui/AstroCalcDialog.cpp:798 src/gui/AstroCalcDialog.cpp:961
+#: src/gui/AstroCalcDialog.cpp:798 src/gui/AstroCalcDialog.cpp:964
 msgid "Conjunction"
 msgstr "Konjunktio"
 
@@ -3121,7 +3121,11 @@ msgstr "Konjunktio"
 msgid "Opposition"
 msgstr "Oppositio"
 
-#: src/gui/AstroCalcDialog.cpp:808 src/gui/AstroCalcDialog.cpp:966
+#: src/gui/AstroCalcDialog.cpp:809
+msgid "Transit"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:811 src/gui/AstroCalcDialog.cpp:969
 msgid "Occultation"
 msgstr ""
 
@@ -7511,7 +7515,7 @@ msgid "Use dms format for angles"
 msgstr "Näytä kulmat dms-muodossa"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
-#: plugins/Satellites/src/ui_satellitesDialog.h:743
+#: plugins/Satellites/src/ui_satellitesDialog.h:745
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/Novae/src/ui_novaeDialog.h:241
 #: plugins/Quasars/src/ui_quasarsDialog.h:273
@@ -7526,7 +7530,7 @@ msgstr "Palauta oletusasetukset"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
 #: plugins/Oculars/src/ui_ocularDialog.h:1192
-#: plugins/Satellites/src/ui_satellitesDialog.h:793
+#: plugins/Satellites/src/ui_satellitesDialog.h:795
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
@@ -8144,7 +8148,7 @@ msgstr "Lisää"
 #: plugins/Oculars/src/ui_ocularDialog.h:1161
 #: plugins/Oculars/src/ui_ocularDialog.h:1168
 #: plugins/Oculars/src/ui_ocularDialog.h:1185
-#: plugins/Satellites/src/ui_satellitesDialog.h:760
+#: plugins/Satellites/src/ui_satellitesDialog.h:762
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:246
 msgid "Name:"
@@ -8249,7 +8253,7 @@ msgstr "Ekvatoriaalijalusta"
 
 #: plugins/Satellites/src/Satellites.cpp:68
 #: plugins/Satellites/src/Satellites.cpp:142
-#: plugins/Satellites/src/ui_satellitesDialog.h:777
+#: plugins/Satellites/src/ui_satellitesDialog.h:779
 msgid "Satellites"
 msgstr "Satelliitit"
 
@@ -8500,7 +8504,7 @@ msgid "Stellarium Satellites Plugin"
 msgstr "Stellariumin Satelliitit-laajennus"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:412
-#: plugins/Satellites/src/ui_satellitesDialog.h:792
+#: plugins/Satellites/src/ui_satellitesDialog.h:794
 msgid "Iridium flares"
 msgstr "Iridium-välähdykset"
 
@@ -8712,7 +8716,7 @@ msgid "[new source]"
 msgstr "[uusi lähde]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:626
-#: plugins/Satellites/src/ui_satellitesDialog.h:715
+#: plugins/Satellites/src/ui_satellitesDialog.h:717
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:194
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
 #: plugins/Novae/src/gui/NovaeDialog.cpp:191
@@ -8807,20 +8811,20 @@ msgstr "Tietoja ei voitu hakea. Yritä myöhemmin uudelleen."
 msgid "Catalog Number: %1"
 msgstr "Luettelonumero: %1"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:708
-#: plugins/Satellites/src/ui_satellitesDialog.h:709
+#: plugins/Satellites/src/ui_satellitesDialog.h:710
+#: plugins/Satellites/src/ui_satellitesDialog.h:711
 msgid "Satellites Configuration"
 msgstr "Satelliittien asetukset"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:711
+#: plugins/Satellites/src/ui_satellitesDialog.h:713
 msgid "Updates"
 msgstr "Päivitykset"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:712
+#: plugins/Satellites/src/ui_satellitesDialog.h:714
 msgid "Update satellite data from Internet sources"
 msgstr "Päivitä satelliittien tiedot internetlähteistä"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:713
+#: plugins/Satellites/src/ui_satellitesDialog.h:715
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 #: plugins/Novae/src/ui_novaeDialog.h:237
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
@@ -8829,62 +8833,62 @@ msgstr "Päivitä satelliittien tiedot internetlähteistä"
 msgid "Last update:"
 msgstr "Viimeisin päivitys:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:714
+#: plugins/Satellites/src/ui_satellitesDialog.h:716
 msgid "On update, add all new satellites from the selected source(s)"
 msgstr "Päivittäessä lisää kaikki uudet satelliitit valituista lähteistä"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:716
+#: plugins/Satellites/src/ui_satellitesDialog.h:718
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
 msgstr "Päivittäessä poista satelliitit joita ei ole enää listattu lähteissä"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:717
+#: plugins/Satellites/src/ui_satellitesDialog.h:719
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:468
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:454
 msgid "Update frequency (hours):"
 msgstr "Päivitysväli (tuntia):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:719
+#: plugins/Satellites/src/ui_satellitesDialog.h:721
 msgid "Label font size (pixels):"
 msgstr "Nimien kirjasinkoko (kuvapistettä):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:720
+#: plugins/Satellites/src/ui_satellitesDialog.h:722
 msgid "Orbit lines"
 msgstr "Radat"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:722
-#: plugins/Satellites/src/ui_satellitesDialog.h:726
+#: plugins/Satellites/src/ui_satellitesDialog.h:724
+#: plugins/Satellites/src/ui_satellitesDialog.h:728
 msgid "Number of segments used to draw the line"
 msgstr "Viivan piirtämiseen käytettyjen segmenttien määrä"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:724
+#: plugins/Satellites/src/ui_satellitesDialog.h:726
 msgid "Number of  segments:"
 msgstr "Segmenttien määrä:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:729
-#: plugins/Satellites/src/ui_satellitesDialog.h:733
+#: plugins/Satellites/src/ui_satellitesDialog.h:731
+#: plugins/Satellites/src/ui_satellitesDialog.h:735
 msgid "Duration of a single segment in seconds"
 msgstr "Yhden segmentin kesto sekunneissa"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:731
+#: plugins/Satellites/src/ui_satellitesDialog.h:733
 msgid "Segment length (s):"
 msgstr "Segmenttien pituudet"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:736
-#: plugins/Satellites/src/ui_satellitesDialog.h:739
+#: plugins/Satellites/src/ui_satellitesDialog.h:738
+#: plugins/Satellites/src/ui_satellitesDialog.h:741
 msgid "Number of segments used to draw each end of the line"
 msgstr "Viivan päiden piirtämiseen käytettävien segmenttien määrä"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:741
+#: plugins/Satellites/src/ui_satellitesDialog.h:743
 msgid "Fade length:"
 msgstr "Häivytyksen pituus"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:742
+#: plugins/Satellites/src/ui_satellitesDialog.h:744
 msgid "Realistic mode for the artificial satellites"
 msgstr "Realistiset satelliitit"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:744
+#: plugins/Satellites/src/ui_satellitesDialog.h:746
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Novae/src/ui_novaeDialog.h:242
 #: plugins/Quasars/src/ui_quasarsDialog.h:274
@@ -8895,7 +8899,7 @@ msgstr "Realistiset satelliitit"
 msgid "Save settings as default"
 msgstr "Tallenna asetukset oletukseksi"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:745
+#: plugins/Satellites/src/ui_satellitesDialog.h:747
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Novae/src/ui_novaeDialog.h:243
 #: plugins/Quasars/src/ui_quasarsDialog.h:275
@@ -8905,64 +8909,64 @@ msgstr "Tallenna asetukset oletukseksi"
 msgid "Settings"
 msgstr "Asetukset"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:747
+#: plugins/Satellites/src/ui_satellitesDialog.h:749
 msgid "Double-click a satellite to start tracking it."
 msgstr "Tuplaklikkaa satelliittia seurataksesi sitä."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:750
+#: plugins/Satellites/src/ui_satellitesDialog.h:752
 msgid "Add more satellites"
 msgstr "Lisää enemmän satelliitteja"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:753
+#: plugins/Satellites/src/ui_satellitesDialog.h:755
 msgid "Remove the selected satellites"
 msgstr "Poista valitut satelliitit"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:757
+#: plugins/Satellites/src/ui_satellitesDialog.h:759
 msgid "Save changes"
 msgstr "Tallenna muutokset"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:761
+#: plugins/Satellites/src/ui_satellitesDialog.h:763
 msgid "Catalog number:"
 msgstr "Luettelonumero:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:763
+#: plugins/Satellites/src/ui_satellitesDialog.h:765
 msgid "Display the selected satellite(s)"
 msgstr "Näytä valitut satelliitit"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:765
+#: plugins/Satellites/src/ui_satellitesDialog.h:767
 msgid "Displayed"
 msgstr "Näytettävät"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:767
+#: plugins/Satellites/src/ui_satellitesDialog.h:769
 msgid "Display orbit line(s) for the selected satellite(s)"
 msgstr "Näytä valittujen satelliittien kiertoradat"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:769
+#: plugins/Satellites/src/ui_satellitesDialog.h:771
 msgid "Orbit"
 msgstr "Rata"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:771
+#: plugins/Satellites/src/ui_satellitesDialog.h:773
 msgid "Do not update (or remove on update) the selected satellite(s)"
 msgstr "Älä päivitä tai (tai poista) valittuja satelliitteja"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:773
+#: plugins/Satellites/src/ui_satellitesDialog.h:775
 msgid "Do not update"
 msgstr "Älä päivitä"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:774
+#: plugins/Satellites/src/ui_satellitesDialog.h:776
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:219
 msgid "Description:"
 msgstr "Kuvaus:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:775
+#: plugins/Satellites/src/ui_satellitesDialog.h:777
 msgid "Groups:"
 msgstr "Ryhmät:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:776
+#: plugins/Satellites/src/ui_satellitesDialog.h:778
 msgid "TLE set:"
 msgstr "TLE-asetus:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:778
+#: plugins/Satellites/src/ui_satellitesDialog.h:780
 msgid ""
 "Satellites in the marked source lists will be automatically added on the "
 "next update if they are not already in the collection."
@@ -8970,7 +8974,7 @@ msgstr ""
 "Satelliitit valituista lähteissä lisätään automaattisesti seuraavassa "
 "päivityksessä ellei niitä ole jo olemassa."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:780
+#: plugins/Satellites/src/ui_satellitesDialog.h:782
 msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
@@ -8978,19 +8982,19 @@ msgstr ""
 "Mene valittuun lähteeseen tai muokkaa sen osoitetta. Muutokset tallennetaan "
 "painamalla Enter-näppäintä."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:783
+#: plugins/Satellites/src/ui_satellitesDialog.h:785
 msgid "Add new source"
 msgstr "Lisää uusi lähde"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:787
+#: plugins/Satellites/src/ui_satellitesDialog.h:789
 msgid "Remove selected source"
 msgstr "Poista valittu lähde"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:790
+#: plugins/Satellites/src/ui_satellitesDialog.h:792
 msgid "Sources"
 msgstr "Lähteet"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:791
+#: plugins/Satellites/src/ui_satellitesDialog.h:793
 msgid "Predict Iridium flares"
 msgstr "Ennusta Iridium-välähdykset"
 

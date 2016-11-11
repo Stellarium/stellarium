@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-08 02:44+0700\n"
-"PO-Revision-Date: 2016-11-05 08:11+0000\n"
+"POT-Creation-Date: 2016-11-10 23:38+0700\n"
+"PO-Revision-Date: 2016-11-09 17:24+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-08 04:36+0000\n"
-"X-Generator: Launchpad (build 18246)\n"
+"X-Launchpad-Export-Date: 2016-11-11 05:23+0000\n"
+"X-Generator: Launchpad (build 18255)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -49,7 +49,7 @@ msgstr "сузор'е"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:433
 #: src/core/modules/GridLinesMgr.cpp:1214 src/core/modules/LandscapeMgr.cpp:414
-#: src/core/modules/NebulaMgr.cpp:364 src/core/modules/NebulaMgr.cpp:365
+#: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:203 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/StelApp.cpp:518
 #: src/core/StelCore.cpp:229 src/core/StelSkyLayerMgr.cpp:88
@@ -343,7 +343,7 @@ msgid "Illumination"
 msgstr "Асьвятленьне"
 
 #: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:2046
-#: plugins/Satellites/src/ui_satellitesDialog.h:718
+#: plugins/Satellites/src/ui_satellitesDialog.h:720
 msgid "Labels"
 msgstr "Назвы"
 
@@ -849,11 +849,11 @@ msgstr "аб'ект невядомай прыроды"
 msgid "undocumented type"
 msgstr "незадакумэнтаваны тып"
 
-#: src/core/modules/NebulaMgr.cpp:364
+#: src/core/modules/NebulaMgr.cpp:365
 msgid "Deep-sky objects"
 msgstr "Аб'екты глыбокага космасу"
 
-#: src/core/modules/NebulaMgr.cpp:365
+#: src/core/modules/NebulaMgr.cpp:366
 msgid "Toggle DSO type filter"
 msgstr "Укл/выкл фільтар тыпаў АГК"
 
@@ -1157,7 +1157,7 @@ msgstr "Начны рэжым"
 msgid "Date and Time"
 msgstr "Дата й час"
 
-#: src/core/StelCore.cpp:228 src/core/StelMovementMgr.cpp:154
+#: src/core/StelCore.cpp:228 src/core/StelMovementMgr.cpp:153
 msgid "Movement and Selection"
 msgstr "Рух і вылучэньне"
 
@@ -1369,12 +1369,12 @@ msgstr "Перакуліць сцэну гарызантальна"
 msgid "Flip scene vertically"
 msgstr "Перакуліць сцэну вэртыкальна"
 
-#: src/core/StelCore.cpp:1934
+#: src/core/StelCore.cpp:1943
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Выпраўленьне абязьдзейненае. Выкарыстоўвай толькі калі ведаеш што робіш!"
 
-#: src/core/StelCore.cpp:1937
+#: src/core/StelCore.cpp:1946
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1386,7 +1386,7 @@ msgstr ""
 "Айнштайна, пацьверджаная даўнімі зацьменнямі Сонца</em> (%1). Болей зьвестак "
 "глядзі %2тут%3."
 
-#: src/core/StelCore.cpp:1940
+#: src/core/StelCore.cpp:1949
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1395,7 +1395,7 @@ msgstr ""
 "Гэтая эмпірычная формула была апублікаваная Дж.М. Клемэнсам у артыкуле "
 "<em>Наконт сыстэмы астранамічных канстантаў</em> (%1)."
 
-#: src/core/StelCore.cpp:1943
+#: src/core/StelCore.cpp:1952
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1409,7 +1409,7 @@ msgstr ""
 "калькулятараў</em>. Таксама яна выкарыстоўваецца ў кампутарнай праґраме "
 "SunTracker Pro."
 
-#: src/core/StelCore.cpp:1947
+#: src/core/StelCore.cpp:1956
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1419,7 +1419,7 @@ msgstr ""
 "эфэмэрыдамі</em> і<em>Канонам сонечных зацьменьняў</em>, напісаных Муке й "
 "Мэёсам (1983)."
 
-#: src/core/StelCore.cpp:1951
+#: src/core/StelCore.cpp:1960
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1430,7 +1430,7 @@ msgstr ""
 "з 5-ці і 10-ці дзённымі прамежкамі ад 601 г. да н.э. да 1649 г. н.э. Такія ж "
 "дачыненьні былі няяўна прынятыя сыґізійных табліцах Ґалдстайна (1973)."
 
-#: src/core/StelCore.cpp:1955
+#: src/core/StelCore.cpp:1964
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1440,7 +1440,7 @@ msgstr ""
 "Гэты раўнаньне было апублікаванае П.М. Мюлерам і Ф.Р. Стэфэнсанам у артыкуле "
 "<em>Паскарэньні Зямлі й Месяца ад першых астранамічных назіраньняў</em> (%1)."
 
-#: src/core/StelCore.cpp:1958
+#: src/core/StelCore.cpp:1967
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1449,7 +1449,7 @@ msgstr ""
 "Гэты раўнаньне было апублікаванае Ф.Р. Стэфэнсанам у артыкуле "
 "<em>Астранамічныя назіраньні да эпохі тэлескопаў</em> (%1)."
 
-#: src/core/StelCore.cpp:1961
+#: src/core/StelCore.cpp:1970
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1462,7 +1462,7 @@ msgstr ""
 "<em>Палінамінальная апраксымацыя паправак дэльты T E.T.-U.T. у пэрыяд 1800-"
 "1975</em> (%1) як апраксымацыя даньняў, апублікаваных Браўэрам (1952)."
 
-#: src/core/StelCore.cpp:1964
+#: src/core/StelCore.cpp:1973
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1471,7 +1471,7 @@ msgstr ""
 "Гэты альґарытм быў прыняты <em>Плянэтарнымі праґрамамі й табліцамі ад -4000 "
 "да +2800</em> (1986) і кампутарнай праґрамай RedShift."
 
-#: src/core/StelCore.cpp:1967
+#: src/core/StelCore.cpp:1976
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1482,11 +1482,11 @@ msgstr ""
 "артыкуле <em>Доўгачасовыя зьмены аварачэньня Зямлі ад 700 г. да н.э. да 1980 "
 "г. н.э.</em> (%1)."
 
-#: src/core/StelCore.cpp:1970
+#: src/core/StelCore.cpp:1979
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "Гэты альґарытм выкарыстоўваецца ў праґраме-плянэтару Guide 7."
 
-#: src/core/StelCore.cpp:1973
+#: src/core/StelCore.cpp:1982
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -1496,7 +1496,7 @@ msgstr ""
 "каноне сонечных зацьменьняў 1986-2035</em> (1987) і<em>Пяцідзесяцігадовым "
 "каноне месячных зацьменьняў 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:1976
+#: src/core/StelCore.cpp:1985
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -1505,7 +1505,7 @@ msgstr ""
 "Гэтая формула была атрыманая К.М. Баркоўскім (%1) з аналізу 31 запісу аб "
 "сонечных зацьменьняў, што адбываліся між 2137 г. да н.э. і 1715 г. н.э."
 
-#: src/core/StelCore.cpp:1979
+#: src/core/StelCore.cpp:1988
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1517,7 +1517,7 @@ msgstr ""
 "Зэхам у артыкуле <em>Эмпірычныя ператварэньні з U.T. у E.T. для пэрыяду 1800-"
 "1988</em> (%1) як апраксымацыя даньняў Стэфэнсана й Морысана (1984)."
 
-#: src/core/StelCore.cpp:1982
+#: src/core/StelCore.cpp:1991
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -1527,7 +1527,7 @@ msgstr ""
 "вэрсіі месячнай тэорыі ELP 2000-85 у іхнай кнізе <em>Месячныя табліцы й "
 "праґрамы ад 4000 г. да н.э. да 8000 г. н.э.</em> (1991)."
 
-#: src/core/StelCore.cpp:1985
+#: src/core/StelCore.cpp:1994
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1538,7 +1538,7 @@ msgstr ""
 "артыкуле <em>Доўгачасовыя флюнктуацыі аварачэньня Зямлі: ад 700 г. да н.э. "
 "да 1990 г. н.э.</em> (%1)."
 
-#: src/core/StelCore.cpp:1988
+#: src/core/StelCore.cpp:1997
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1547,7 +1547,7 @@ msgstr ""
 "Ф.Р. Стэфэнсан апублікаваў гэтую формулу ў сваёй кнізе <em>Гістарычныя "
 "зацьменьні й аварачэньне Зямлі</em> (%1)."
 
-#: src/core/StelCore.cpp:1991
+#: src/core/StelCore.cpp:2000
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1557,7 +1557,7 @@ msgstr ""
 "ўжываецца. Табліцы для 1620—2000 гг., улучае варыянт Шапрона, Шапронам-Тузэ "
 "й Франку (1997) для гадаў па-за абсягам 1620—2000."
 
-#: src/core/StelCore.cpp:1994
+#: src/core/StelCore.cpp:2003
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1567,7 +1567,7 @@ msgstr ""
 "выкарыстоўвае гэтую формулу на сваёй інтэрактыўнай старонцы %1Гарызонты "
 "ЛРР%2."
 
-#: src/core/StelCore.cpp:1997
+#: src/core/StelCore.cpp:2006
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1576,7 +1576,7 @@ msgstr ""
 "Гэты паліном быў апублікаваны Ж. Мэёсам і Л. Сімансам у артыкуле "
 "<em>Палінамінальнае набліжэньне да дэльта T, 1620-2000 н.э.</em> (%1)."
 
-#: src/core/StelCore.cpp:2000
+#: src/core/StelCore.cpp:2009
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1586,7 +1586,7 @@ msgstr ""
 "Мантэнбрука й Т. Пфлеґера ўтрымлівае просты паліном 3-га парадку для "
 "нядаўняй мінуўшчыны."
 
-#: src/core/StelCore.cpp:2003
+#: src/core/StelCore.cpp:2012
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1598,7 +1598,7 @@ msgstr ""
 "табліцах</em> (2002). Яна базуецца на <em>Астранамічных альґарытмах</em> "
 "Жана Мэёса (1991)."
 
-#: src/core/StelCore.cpp:2006
+#: src/core/StelCore.cpp:2015
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1609,7 +1609,7 @@ msgstr ""
 "артыкуле <em>Гістарычныя значэньні памылкі зямнога гадзіньніка %1T і разьлік "
 "зацьменьняў </em> (%2) з дадаткам у (%3)."
 
-#: src/core/StelCore.cpp:2009
+#: src/core/StelCore.cpp:2018
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1622,7 +1622,7 @@ msgstr ""
 "вывеў формулу %1T. Яна базуецца на магчымай пэрыядычнасьці, апісанай "
 "Стэфэнсанам (%2). Болей зьвестак глядзі %3тут%4."
 
-#: src/core/StelCore.cpp:2012 src/core/StelCore.cpp:2015
+#: src/core/StelCore.cpp:2021 src/core/StelCore.cpp:2024
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1638,15 +1638,15 @@ msgstr ""
 "(2006). Гэтая формула таксама выкарыстоўваецца ў праґраме разьліку сонечных, "
 "месячных і плянэтарных эфэмэрыд SOLEX."
 
-#: src/core/StelCore.cpp:2012
+#: src/core/StelCore.cpp:2021
 msgid "Used by default."
 msgstr "Прадвызначанае."
 
-#: src/core/StelCore.cpp:2015
+#: src/core/StelCore.cpp:2024
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "ПРАЎЛЕНАЯ ВЭРСІЯ БЕЗ ДАДАТКОВАГА ПАСКАРЭНЬНЯ МЕСЯЦА"
 
-#: src/core/StelCore.cpp:2018
+#: src/core/StelCore.cpp:2027
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1657,7 +1657,7 @@ msgstr ""
 "было апублікаванае ў артыкуле em>Старажытныя зацьменьні й датаваньне "
 "падзеньня Бабілёну</em> (%1)."
 
-#: src/core/StelCore.cpp:2021
+#: src/core/StelCore.cpp:2030
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1669,7 +1669,7 @@ msgstr ""
 "палінінальнай апраксымацыі дэльтаT</em> (%1) і перагледжаны Санам Ісламам у "
 "2013."
 
-#: src/core/StelCore.cpp:2024
+#: src/core/StelCore.cpp:2033
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1680,7 +1680,7 @@ msgstr ""
 "М. Халідам, Марыям Султана й Фахімам Зайдзі было апублікаванае ў <em>Дэльта "
 "T: палімінальнае апраксымацыя часавага пэрыяду 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2027
+#: src/core/StelCore.cpp:2036
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1689,15 +1689,15 @@ msgstr ""
 "Гэта — квадратычная формула разьліку %1T з каэфіцыентамі, вызначанымі "
 "карыстальнікам."
 
-#: src/core/StelCore.cpp:2030 src/core/SimbadSearcher.cpp:156
+#: src/core/StelCore.cpp:2039 src/core/SimbadSearcher.cpp:156
 msgid "Error"
 msgstr "Памылка"
 
-#: src/core/StelCore.cpp:2080
+#: src/core/StelCore.cpp:2089
 msgid "with meaningless values outside this range"
 msgstr "зь нязначнымі велічынямі па-за гэтым прамежкам"
 
-#: src/core/StelCore.cpp:2106
+#: src/core/StelCore.cpp:2115
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -1705,24 +1705,24 @@ msgstr ""
 "са значнай памылкай, меншай за сэкунду, найбольшай памылкай 1,9 с і "
 "нязначнымі велічынямі па-за гэтым прамежкам"
 
-#: src/core/StelCore.cpp:2128 src/core/StelCore.cpp:2133
-#: src/core/StelCore.cpp:2161 src/core/StelCore.cpp:2166
-#: src/core/StelCore.cpp:2171
+#: src/core/StelCore.cpp:2137 src/core/StelCore.cpp:2142
+#: src/core/StelCore.cpp:2170 src/core/StelCore.cpp:2175
+#: src/core/StelCore.cpp:2180
 msgid "with zero values outside this range"
 msgstr "з нулявымі значэньнямі па-за гэтым прамежкам"
 
-#: src/core/StelCore.cpp:2138
+#: src/core/StelCore.cpp:2147
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "з тыповай 1-сэкунднай дакладнасьцю й нулявымі значэньнямі па-за гэтым "
 "прамежкам"
 
-#: src/core/StelCore.cpp:2181
+#: src/core/StelCore.cpp:2190
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Дыяпазон, дапушчальны да выкарыстаньня: гады ад %1 да %2, %3."
 
-#: src/core/StelCore.cpp:2183
+#: src/core/StelCore.cpp:2192
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Дыяпазон, дапушчальны да выкарыстаньня: гады ад %1 да %2."
@@ -1925,56 +1925,56 @@ msgstr "Бачны зоркавы дзень: %1"
 msgid "Deep-sky objects background images"
 msgstr "Відарысы асноведзі аб'ектаў глыбокага космасу"
 
-#: src/core/StelMovementMgr.cpp:155 src/gui/StelGui.cpp:201
+#: src/core/StelMovementMgr.cpp:154 src/gui/StelGui.cpp:201
 #: src/StelMainView.cpp:574
 msgid "Miscellaneous"
 msgstr "Рознае"
 
-#: src/core/StelMovementMgr.cpp:155
+#: src/core/StelMovementMgr.cpp:154
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Пераключыцца між экватарыяльным і азімутальным мацаваньнем"
 
-#: src/core/StelMovementMgr.cpp:156
+#: src/core/StelMovementMgr.cpp:155
 msgid "Center on selected object"
 msgstr "Перайсьці да вылучанага аб'екту"
 
-#: src/core/StelMovementMgr.cpp:157
+#: src/core/StelMovementMgr.cpp:156
 msgid "Zoom in on selected object"
 msgstr "Наблізіць вылучаны аб'ект"
 
-#: src/core/StelMovementMgr.cpp:158
+#: src/core/StelMovementMgr.cpp:157
 msgid "Zoom out"
 msgstr "Аддаліць"
 
-#: src/core/StelMovementMgr.cpp:159
+#: src/core/StelMovementMgr.cpp:158
 msgid "Track object"
 msgstr "Сачыць за аб'ектам"
 
-#: src/core/StelMovementMgr.cpp:161
+#: src/core/StelMovementMgr.cpp:160
 msgid "Look towards East"
 msgstr "Паглядзець у напрамку Ўсходу"
 
-#: src/core/StelMovementMgr.cpp:162
+#: src/core/StelMovementMgr.cpp:161
 msgid "Look towards West"
 msgstr "Паглядзець у напрамку Захаду"
 
-#: src/core/StelMovementMgr.cpp:163
+#: src/core/StelMovementMgr.cpp:162
 msgid "Look towards North"
 msgstr "Паглядзець у напрамку Поўначы"
 
-#: src/core/StelMovementMgr.cpp:164
+#: src/core/StelMovementMgr.cpp:163
 msgid "Look towards South"
 msgstr "Паглядзець у напрамку Поўдня"
 
-#: src/core/StelMovementMgr.cpp:165
+#: src/core/StelMovementMgr.cpp:164
 msgid "Look towards Zenith"
 msgstr "Паглядзець у напрамку Зэніту"
 
-#: src/core/StelMovementMgr.cpp:167
+#: src/core/StelMovementMgr.cpp:166
 msgid "Look towards North Celestial pole"
 msgstr "Глядзець у напрамку паўночнага нябеснага полюса"
 
-#: src/core/StelMovementMgr.cpp:168
+#: src/core/StelMovementMgr.cpp:167
 msgid "Look towards South Celestial pole"
 msgstr "Глядзець у напрамку паўднёвага нябеснага полюса"
 
@@ -3115,7 +3115,7 @@ msgstr "Аб'ект 2"
 msgid "Save calculated phenomena as..."
 msgstr "Захаваць разьлічаную зьяву як…"
 
-#: src/gui/AstroCalcDialog.cpp:798 src/gui/AstroCalcDialog.cpp:961
+#: src/gui/AstroCalcDialog.cpp:798 src/gui/AstroCalcDialog.cpp:964
 msgid "Conjunction"
 msgstr "Злучэньне"
 
@@ -3123,7 +3123,11 @@ msgstr "Злучэньне"
 msgid "Opposition"
 msgstr "Супрацьстаяньне"
 
-#: src/gui/AstroCalcDialog.cpp:808 src/gui/AstroCalcDialog.cpp:966
+#: src/gui/AstroCalcDialog.cpp:809
+msgid "Transit"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:811 src/gui/AstroCalcDialog.cpp:969
 msgid "Occultation"
 msgstr ""
 
@@ -4176,7 +4180,7 @@ msgstr "&Асноўныя колеры"
 
 #: src/translations.h:380
 msgid "&Pick Screen Color"
-msgstr ""
+msgstr "&Узяць колер экрану"
 
 #: src/translations.h:381
 msgid "&Custom colors"
@@ -5803,7 +5807,7 @@ msgstr "Намінкі"
 
 #: src/ui_viewDialog.h:2048
 msgid "Configure colors of markers"
-msgstr ""
+msgstr "Наставіць колеры пазнак"
 
 #: src/ui_viewDialog.h:2049
 msgid "Celestial Sphere"
@@ -6185,7 +6189,7 @@ msgstr "Значэньне ў піксалях"
 
 #: src/ui_viewDialog.h:2270
 msgid "Color of lines of constellations"
-msgstr ""
+msgstr "Колер ліній сузор'яў"
 
 #: src/ui_viewDialog.h:2273
 msgid "Use native names for planets from current culture"
@@ -6209,7 +6213,7 @@ msgstr "Выберы якія жадаеш назвы: абрэвіятуры, �
 
 #: src/ui_viewDialog.h:2283
 msgid "Color of names of constellations"
-msgstr ""
+msgstr "Колер назваў сузор'яў"
 
 #: src/ui_viewDialog.h:2285
 msgid "Show boundaries"
@@ -6217,7 +6221,7 @@ msgstr "Паказваць межы"
 
 #: src/ui_viewDialog.h:2287
 msgid "Color of boundaries of constellations"
-msgstr ""
+msgstr "Колер меж сузор'яў"
 
 #: src/ui_viewDialog.h:2290
 msgid "Visible"
@@ -6413,7 +6417,7 @@ msgstr "Прамое ўзыходжаньне/Схіленьне (даты)"
 
 #: src/ui_configurationDialog.h:1245
 msgid "Supergalactic coordinates"
-msgstr ""
+msgstr "Звышґаляктычныя каардынаты"
 
 #: src/ui_configurationDialog.h:1247
 msgid "Spectral class, nebula type, etc."
@@ -6433,11 +6437,11 @@ msgstr "Абсалютная велічыня"
 
 #: src/ui_configurationDialog.h:1256
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
-msgstr ""
+msgstr "Экліптычныя каардынаты, раўнадзенства даты (толькі для Зямлі)."
 
 #: src/ui_configurationDialog.h:1258
 msgid "Ecliptic coordinates (of date)"
-msgstr ""
+msgstr "Экліптычныя каардынаты (даты)"
 
 #: src/ui_configurationDialog.h:1260
 msgid "Horizontal coordinates"
@@ -6482,7 +6486,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1278
 msgid "Ecliptic coordinates (J2000)"
-msgstr ""
+msgstr "Экліптычныя каардынаты (J2000)"
 
 #: src/ui_configurationDialog.h:1282
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:198
@@ -6584,7 +6588,7 @@ msgstr "Дата:"
 
 #: src/ui_configurationDialog.h:1323
 msgid "and time:"
-msgstr ""
+msgstr "і час:"
 
 #: src/ui_configurationDialog.h:1324
 msgid "Time correction"
@@ -7083,83 +7087,83 @@ msgstr "&Перайсьці да…"
 
 #: src/ui_dsoColorsDialog.h:476
 msgid "Colors settings"
-msgstr ""
+msgstr "Настаўленьні колераў"
 
 #: src/ui_dsoColorsDialog.h:478
 msgid "Colors of labels and markers of deep-sky objects"
-msgstr ""
+msgstr "Колер надпісаў і пазнак аб'ектаў глыбокага космосу"
 
 #: src/ui_dsoColorsDialog.h:480
 msgid "Color of markers of open star clusters"
-msgstr ""
+msgstr "Колер пазнак адкрытых скопішчаў"
 
 #: src/ui_dsoColorsDialog.h:483
 msgid "Color of markers of BL Lac objects"
-msgstr ""
+msgstr "Колер пазнак лацэртыд"
 
 #: src/ui_dsoColorsDialog.h:487
 msgid "Color of markers of dark nebulae"
-msgstr ""
+msgstr "Колер пазнак цёмных туманнасьцяў"
 
 #: src/ui_dsoColorsDialog.h:491
 msgid "Color of markers of star clouds"
-msgstr ""
+msgstr "Колер пазнак зоркавых аблокаў"
 
 #: src/ui_dsoColorsDialog.h:494
 msgid "Color of markers of reflection nebulae"
-msgstr ""
+msgstr "Колер пазнак адбіваючых туманнасьцяў"
 
 #: src/ui_dsoColorsDialog.h:499
 msgid "Clusters with neb."
-msgstr ""
+msgstr "Скопішчы з тум."
 
 #: src/ui_dsoColorsDialog.h:502
 msgid "Color of markers of stars"
-msgstr ""
+msgstr "Колер пазнак зорак"
 
 #: src/ui_dsoColorsDialog.h:505
 msgid "Color of markers of nebulae"
-msgstr ""
+msgstr "Колер пазнак туманнасьцяў"
 
 #: src/ui_dsoColorsDialog.h:509
 msgid "Color of markers of quasars"
-msgstr ""
+msgstr "Колер пазнак квазараў"
 
 #: src/ui_dsoColorsDialog.h:512
 msgid "Color of markers of blazars"
-msgstr ""
+msgstr "Колер пазнак блазараў"
 
 #: src/ui_dsoColorsDialog.h:515
 msgid "Possible quasars"
-msgstr ""
+msgstr "Магчымыя квазары"
 
 #: src/ui_dsoColorsDialog.h:517
 msgid "Color of markers of clusters associated with nebulosity"
-msgstr ""
+msgstr "Колер пазнак скопішчаў, зьвязаных з туманнасьцю"
 
 #: src/ui_dsoColorsDialog.h:521
 msgid "Color of markers of interacting galaxies"
-msgstr ""
+msgstr "Колер пазнак узаемадзейных ґаляктык"
 
 #: src/ui_dsoColorsDialog.h:524
 msgid "Markers of deep-sky objects"
-msgstr ""
+msgstr "Пазнакі аб'ектаў глыбокага космасу"
 
 #: src/ui_dsoColorsDialog.h:526
 msgid "Markers of DSOs"
-msgstr ""
+msgstr "Пазнакі АГК"
 
 #: src/ui_dsoColorsDialog.h:528
 msgid "Color of markers of possible quasars"
-msgstr ""
+msgstr "Колер пазнак магчымых квазараў"
 
 #: src/ui_dsoColorsDialog.h:531
 msgid "Color of markers of active galaxies"
-msgstr ""
+msgstr "Колер пазнак актыўных ґаляктык"
 
 #: src/ui_dsoColorsDialog.h:538
 msgid "Color of markers of globular star clusters"
-msgstr ""
+msgstr "Колер пазнак шаравых скопішчаў"
 
 #: src/ui_dsoColorsDialog.h:543 plugins/Quasars/src/Quasars.cpp:72
 #: plugins/Quasars/src/Quasars.cpp:169 plugins/Quasars/src/Quasars.cpp:170
@@ -7168,99 +7172,99 @@ msgstr "Квазары"
 
 #: src/ui_dsoColorsDialog.h:545
 msgid "Color of markers of galaxies"
-msgstr ""
+msgstr "Колер пазнак ґаляктык"
 
 #: src/ui_dsoColorsDialog.h:548
 msgid "Color of markers of bipolar nebulae"
-msgstr ""
+msgstr "Колер пазнак біпалярных туманнасьцяў"
 
 #: src/ui_dsoColorsDialog.h:552
 msgid "Color of markers of emission objects"
-msgstr ""
+msgstr "Колер пазнак эмісійных аб'ектаў"
 
 #: src/ui_dsoColorsDialog.h:555
 msgid "Color of markers of deep-sky objects"
-msgstr ""
+msgstr "Колер пазнак аб'ектаў глыбокага космасу"
 
 #: src/ui_dsoColorsDialog.h:558
 msgid "Labels of deep-sky objects"
-msgstr ""
+msgstr "Назвы глыбокага космасу"
 
 #: src/ui_dsoColorsDialog.h:560
 msgid "Labels of DSOs"
-msgstr ""
+msgstr "Назвы АГК"
 
 #: src/ui_dsoColorsDialog.h:562
 msgid "Color of labels of deep-sky objects"
-msgstr ""
+msgstr "Колер назваў аб'ектаў глыбокага космасу"
 
 #: src/ui_dsoColorsDialog.h:566
 msgid "Color of markers of interstellar matter"
-msgstr ""
+msgstr "Колер пазнак міжзоркавай матэрыі"
 
 #: src/ui_dsoColorsDialog.h:569
 msgid "Color of markers of stellar associations"
-msgstr ""
+msgstr "Колер пазнак зоркавых асацыяцый"
 
 #: src/ui_dsoColorsDialog.h:574
 msgid "Color of markers of radio galaxies"
-msgstr ""
+msgstr "Колер пазнак радыёґаляктык"
 
 #: src/ui_dsoColorsDialog.h:578
 msgid "Color of markers of star clusters"
-msgstr ""
+msgstr "Колер пазнак зоркавых скопішчаў"
 
 #: src/ui_dsoColorsDialog.h:582
 msgid "Color of markers of planetary nebulae"
-msgstr ""
+msgstr "Колер пазнак плянэтарных туманнасьцяў"
 
 #: src/ui_dsoColorsDialog.h:585
 msgid "Possible planetary nebulae"
-msgstr ""
+msgstr "Магчымыя плянэтарныя туманнасьці"
 
 #: src/ui_dsoColorsDialog.h:587
 msgid "Possible pl. nebulae"
-msgstr ""
+msgstr "Магчымыя пл. туманнасьці"
 
 #: src/ui_dsoColorsDialog.h:589
 msgid "Color of markers of possible planetary nebulae"
-msgstr ""
+msgstr "Колер пазнак магчымых плянэтарных туманнасьцяў"
 
 #: src/ui_dsoColorsDialog.h:591
 msgid "Protoplanetary nebulae"
-msgstr ""
+msgstr "Протаплянэтная туманнасьць"
 
 #: src/ui_dsoColorsDialog.h:593
 msgid "Color of markers of protoplanetary nebulae"
-msgstr ""
+msgstr "Колер пазнак протаплянэтных туманнасьцяў"
 
 #: src/ui_dsoColorsDialog.h:597
 msgid "Color of markers of emission nebulae"
-msgstr ""
+msgstr "Колер пазнак эмісійных туманнасьцяў"
 
 #: src/ui_dsoColorsDialog.h:601
 msgid "Color of markers of hydrogen regions"
-msgstr ""
+msgstr "Колер пазнак вобласьцяў вадароду"
 
 #: src/ui_dsoColorsDialog.h:603
 msgid "Molecular clouds"
-msgstr ""
+msgstr "Малекулярныя аблокі"
 
 #: src/ui_dsoColorsDialog.h:605
 msgid "Color of markers of molecular clouds"
-msgstr ""
+msgstr "Колер пазнак малекулярных аблокаў"
 
 #: src/ui_dsoColorsDialog.h:610
 msgid "YSOs"
-msgstr ""
+msgstr "МЗА"
 
 #: src/ui_dsoColorsDialog.h:612
 msgid "Color of markers of Young Stellar Objects"
-msgstr ""
+msgstr "Колер пазнак маладых зоркавых аб'ектаў"
 
 #: src/ui_dsoColorsDialog.h:616
 msgid "Color of markers of supernova remnants"
-msgstr ""
+msgstr "Колер пазнак рэштак звышновых"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:138
@@ -7503,7 +7507,7 @@ msgid "Use dms format for angles"
 msgstr "Паказваць вуглы ў фармаце ГМС"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
-#: plugins/Satellites/src/ui_satellitesDialog.h:743
+#: plugins/Satellites/src/ui_satellitesDialog.h:745
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/Novae/src/ui_novaeDialog.h:241
 #: plugins/Quasars/src/ui_quasarsDialog.h:273
@@ -7518,7 +7522,7 @@ msgstr "Аднавіць прадвызначаныя настройкі"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
 #: plugins/Oculars/src/ui_ocularDialog.h:1192
-#: plugins/Satellites/src/ui_satellitesDialog.h:793
+#: plugins/Satellites/src/ui_satellitesDialog.h:795
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
@@ -8141,7 +8145,7 @@ msgstr "Дадаць"
 #: plugins/Oculars/src/ui_ocularDialog.h:1161
 #: plugins/Oculars/src/ui_ocularDialog.h:1168
 #: plugins/Oculars/src/ui_ocularDialog.h:1185
-#: plugins/Satellites/src/ui_satellitesDialog.h:760
+#: plugins/Satellites/src/ui_satellitesDialog.h:762
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:246
 msgid "Name:"
@@ -8246,7 +8250,7 @@ msgstr "Экватарыяльнае мацаваньне"
 
 #: plugins/Satellites/src/Satellites.cpp:68
 #: plugins/Satellites/src/Satellites.cpp:142
-#: plugins/Satellites/src/ui_satellitesDialog.h:777
+#: plugins/Satellites/src/ui_satellitesDialog.h:779
 msgid "Satellites"
 msgstr "Спадарожнікі"
 
@@ -8497,7 +8501,7 @@ msgid "Stellarium Satellites Plugin"
 msgstr "Дададак Stellarium «Спадарожнікі»"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:412
-#: plugins/Satellites/src/ui_satellitesDialog.h:792
+#: plugins/Satellites/src/ui_satellitesDialog.h:794
 msgid "Iridium flares"
 msgstr "Бліскі Iridium"
 
@@ -8712,7 +8716,7 @@ msgid "[new source]"
 msgstr "[новая крыніца]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:626
-#: plugins/Satellites/src/ui_satellitesDialog.h:715
+#: plugins/Satellites/src/ui_satellitesDialog.h:717
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:194
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
 #: plugins/Novae/src/gui/NovaeDialog.cpp:191
@@ -8809,20 +8813,20 @@ msgstr "Немагчыма загрузіць зьвесткі. Паспрабу
 msgid "Catalog Number: %1"
 msgstr "Нумар у каталёґу: %1"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:708
-#: plugins/Satellites/src/ui_satellitesDialog.h:709
+#: plugins/Satellites/src/ui_satellitesDialog.h:710
+#: plugins/Satellites/src/ui_satellitesDialog.h:711
 msgid "Satellites Configuration"
 msgstr "Настаўленьні спадарожнікаў"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:711
+#: plugins/Satellites/src/ui_satellitesDialog.h:713
 msgid "Updates"
 msgstr "Абнаўленьні"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:712
+#: plugins/Satellites/src/ui_satellitesDialog.h:714
 msgid "Update satellite data from Internet sources"
 msgstr "Абнавіць сьпісы спадарожнікаў з крыніц у Сеціве"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:713
+#: plugins/Satellites/src/ui_satellitesDialog.h:715
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 #: plugins/Novae/src/ui_novaeDialog.h:237
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
@@ -8831,11 +8835,11 @@ msgstr "Абнавіць сьпісы спадарожнікаў з крыніц
 msgid "Last update:"
 msgstr "Апошняе абнаўленьне:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:714
+#: plugins/Satellites/src/ui_satellitesDialog.h:716
 msgid "On update, add all new satellites from the selected source(s)"
 msgstr "пры абнаўленьні дадаваць усе новыя спадарожнікі з вылучаных крыніц"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:716
+#: plugins/Satellites/src/ui_satellitesDialog.h:718
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
@@ -8843,52 +8847,52 @@ msgstr ""
 "Пры абнаўленьні выдаляць спадарожнікі, які болей не наяўныя ў крыніцах "
 "абнаўленьня"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:717
+#: plugins/Satellites/src/ui_satellitesDialog.h:719
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:468
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:454
 msgid "Update frequency (hours):"
 msgstr "Часьціня абнаўленьняў (у гадзінах):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:719
+#: plugins/Satellites/src/ui_satellitesDialog.h:721
 msgid "Label font size (pixels):"
 msgstr "Кеґль назваў (у піксэлях):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:720
+#: plugins/Satellites/src/ui_satellitesDialog.h:722
 msgid "Orbit lines"
 msgstr "Лініі арбіт"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:722
-#: plugins/Satellites/src/ui_satellitesDialog.h:726
+#: plugins/Satellites/src/ui_satellitesDialog.h:724
+#: plugins/Satellites/src/ui_satellitesDialog.h:728
 msgid "Number of segments used to draw the line"
 msgstr "Колькасьць адрэзкаў, якімі рысуецца лінія"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:724
+#: plugins/Satellites/src/ui_satellitesDialog.h:726
 msgid "Number of  segments:"
 msgstr "Колькасьць адрэзкаў:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:729
-#: plugins/Satellites/src/ui_satellitesDialog.h:733
+#: plugins/Satellites/src/ui_satellitesDialog.h:731
+#: plugins/Satellites/src/ui_satellitesDialog.h:735
 msgid "Duration of a single segment in seconds"
 msgstr "Працягласьць аднаго адрэзку ў сэкундах"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:731
+#: plugins/Satellites/src/ui_satellitesDialog.h:733
 msgid "Segment length (s):"
 msgstr "Даўжыня адрэзка (с):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:736
-#: plugins/Satellites/src/ui_satellitesDialog.h:739
+#: plugins/Satellites/src/ui_satellitesDialog.h:738
+#: plugins/Satellites/src/ui_satellitesDialog.h:741
 msgid "Number of segments used to draw each end of the line"
 msgstr "Колькасьць адрэзкаў, якімі рысуецца кожны канец лініі"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:741
+#: plugins/Satellites/src/ui_satellitesDialog.h:743
 msgid "Fade length:"
 msgstr "Даўжыня зьнікненьня:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:742
+#: plugins/Satellites/src/ui_satellitesDialog.h:744
 msgid "Realistic mode for the artificial satellites"
 msgstr "Праўдападобны рэжым штучных спадарожнікаў"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:744
+#: plugins/Satellites/src/ui_satellitesDialog.h:746
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Novae/src/ui_novaeDialog.h:242
 #: plugins/Quasars/src/ui_quasarsDialog.h:274
@@ -8899,7 +8903,7 @@ msgstr "Праўдападобны рэжым штучных спадарожн�
 msgid "Save settings as default"
 msgstr "Зрабіць настройкі прадвызначанымі"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:745
+#: plugins/Satellites/src/ui_satellitesDialog.h:747
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Novae/src/ui_novaeDialog.h:243
 #: plugins/Quasars/src/ui_quasarsDialog.h:275
@@ -8909,64 +8913,64 @@ msgstr "Зрабіць настройкі прадвызначанымі"
 msgid "Settings"
 msgstr "Настройкі"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:747
+#: plugins/Satellites/src/ui_satellitesDialog.h:749
 msgid "Double-click a satellite to start tracking it."
 msgstr "Двойчы пстрыкні спадарожнік каб пачаць яго адсочваць."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:750
+#: plugins/Satellites/src/ui_satellitesDialog.h:752
 msgid "Add more satellites"
 msgstr "Дадаць болей спадарожнікаў"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:753
+#: plugins/Satellites/src/ui_satellitesDialog.h:755
 msgid "Remove the selected satellites"
 msgstr "Выдаліць вылучаныя спадарожнікі"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:757
+#: plugins/Satellites/src/ui_satellitesDialog.h:759
 msgid "Save changes"
 msgstr "Захаваць зьмены"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:761
+#: plugins/Satellites/src/ui_satellitesDialog.h:763
 msgid "Catalog number:"
 msgstr "Нумар у каталёґу:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:763
+#: plugins/Satellites/src/ui_satellitesDialog.h:765
 msgid "Display the selected satellite(s)"
 msgstr "Паказаць вылучаныя спадарожнікі"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:765
+#: plugins/Satellites/src/ui_satellitesDialog.h:767
 msgid "Displayed"
 msgstr "Паказаны"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:767
+#: plugins/Satellites/src/ui_satellitesDialog.h:769
 msgid "Display orbit line(s) for the selected satellite(s)"
 msgstr "Паказваць лініі арбіт для вылучаных спадарожнікаў"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:769
+#: plugins/Satellites/src/ui_satellitesDialog.h:771
 msgid "Orbit"
 msgstr "Арбіта"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:771
+#: plugins/Satellites/src/ui_satellitesDialog.h:773
 msgid "Do not update (or remove on update) the selected satellite(s)"
 msgstr "Не абнаўляць (ці не выдаляць пры абнаўленьні) вылучаныя спадарожнікі"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:773
+#: plugins/Satellites/src/ui_satellitesDialog.h:775
 msgid "Do not update"
 msgstr "Не абнаўляць"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:774
+#: plugins/Satellites/src/ui_satellitesDialog.h:776
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:219
 msgid "Description:"
 msgstr "Апісаньне:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:775
+#: plugins/Satellites/src/ui_satellitesDialog.h:777
 msgid "Groups:"
 msgstr "Ґрупы:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:776
+#: plugins/Satellites/src/ui_satellitesDialog.h:778
 msgid "TLE set:"
 msgstr "Набор TLE:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:778
+#: plugins/Satellites/src/ui_satellitesDialog.h:780
 msgid ""
 "Satellites in the marked source lists will be automatically added on the "
 "next update if they are not already in the collection."
@@ -8974,7 +8978,7 @@ msgstr ""
 "Спадарожнікі ў пазначаных крынічных сьпісах будуць аўтаматычна дададзеныя "
 "пры наступным абнаўленьні, калі яны яшчэ не ў калекцыі."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:780
+#: plugins/Satellites/src/ui_satellitesDialog.h:782
 msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
@@ -8982,19 +8986,19 @@ msgstr ""
 "Увядзі ці папраў URL вылучанай крыніцы. Зьмены будуць захаваныя па "
 "націсканьні Enter."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:783
+#: plugins/Satellites/src/ui_satellitesDialog.h:785
 msgid "Add new source"
 msgstr "Дадаць новую крыніцу"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:787
+#: plugins/Satellites/src/ui_satellitesDialog.h:789
 msgid "Remove selected source"
 msgstr "Прыбраць выбраную крыніцу"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:790
+#: plugins/Satellites/src/ui_satellitesDialog.h:792
 msgid "Sources"
 msgstr "Крыніцы"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:791
+#: plugins/Satellites/src/ui_satellitesDialog.h:793
 msgid "Predict Iridium flares"
 msgstr "Прадказваць бліскі Iridium"
 
@@ -14719,11 +14723,11 @@ msgstr "Паказваць лінію свайго азімуту 2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:259
 msgid "Show Line for Custom Declination 1"
-msgstr ""
+msgstr "Паказваць лінію свайго схіленьня 1"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:260
 msgid "Show Line for Custom Declination 2"
-msgstr ""
+msgstr "Паказваць лінію свайго схіленьня 2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1253
 msgid "Equinox"
@@ -14856,6 +14860,8 @@ msgid ""
 "In addition, up to two vertical lines with arbitrary azimuth and declination "
 "lines with custom label can be shown."
 msgstr ""
+"Дадаткова можна паказаць адну ці дзьве вэртыкальныя ліній з адвольнымі "
+"азімутам і схіленьнем са сваім подпісам."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:364
 msgid "Select color for equinox line"
@@ -14919,11 +14925,11 @@ msgstr "Выберы колер лініі свайго азімуту 2"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:529
 msgid "Select color for Custom Declination 1 line"
-msgstr ""
+msgstr "Выберы колер лініі свайго схіленьня 1"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:540
 msgid "Select color for Custom Declination 2 line"
-msgstr ""
+msgstr "Выберы колер лініі свайго схіленьня 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:525
 msgid "ArchaeoLines Configuration"
@@ -14939,11 +14945,11 @@ msgstr "Каб зьмяніць колер трэба выйсьці з поўн
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:531
 msgid "Custom Declination 1"
-msgstr ""
+msgstr "Сваё схіленьне 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:532
 msgid "Custom Declination 1 Color..."
-msgstr ""
+msgstr "Колер свайго схіленьня 1…"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:533
 msgid "Current Sun"
@@ -15037,11 +15043,11 @@ msgstr "Лініі вялікіх спыненьняў Месяца"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:573
 msgid "Custom Declination 2 Color..."
-msgstr ""
+msgstr "Колер свайго схіленьня 2…"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:574
 msgid "Custom Declination 2"
-msgstr ""
+msgstr "Сваё схіленьне 2"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Экватарыяльная сетка"
@@ -16709,3 +16715,6 @@ msgstr ""
 
 #~ msgid "JD"
 #~ msgstr "JD"
+
+#~ msgid "Ecliptic coordinates, equinox J2000"
+#~ msgstr "Экліптычныя каардынаты, раўнадзенства J2000"
