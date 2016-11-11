@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-08 02:44+0700\n"
+"POT-Creation-Date: 2016-11-10 23:38+0700\n"
 "PO-Revision-Date: 2016-09-30 22:53+0000\n"
 "Last-Translator: henrysky <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-08 04:58+0000\n"
-"X-Generator: Launchpad (build 18246)\n"
+"X-Launchpad-Export-Date: 2016-11-11 05:43+0000\n"
+"X-Generator: Launchpad (build 18255)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:191
@@ -47,7 +47,7 @@ msgstr "星座"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:433
 #: src/core/modules/GridLinesMgr.cpp:1214 src/core/modules/LandscapeMgr.cpp:414
-#: src/core/modules/NebulaMgr.cpp:364 src/core/modules/NebulaMgr.cpp:365
+#: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:203 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/StelApp.cpp:518
 #: src/core/StelCore.cpp:229 src/core/StelSkyLayerMgr.cpp:88
@@ -341,7 +341,7 @@ msgid "Illumination"
 msgstr "地面照明"
 
 #: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:2046
-#: plugins/Satellites/src/ui_satellitesDialog.h:718
+#: plugins/Satellites/src/ui_satellitesDialog.h:720
 msgid "Labels"
 msgstr "標示"
 
@@ -847,11 +847,11 @@ msgstr "性質不明天體"
 msgid "undocumented type"
 msgstr "未證實類型"
 
-#: src/core/modules/NebulaMgr.cpp:364
+#: src/core/modules/NebulaMgr.cpp:365
 msgid "Deep-sky objects"
 msgstr "深空天體"
 
-#: src/core/modules/NebulaMgr.cpp:365
+#: src/core/modules/NebulaMgr.cpp:366
 msgid "Toggle DSO type filter"
 msgstr ""
 
@@ -1154,7 +1154,7 @@ msgstr "夜間模式"
 msgid "Date and Time"
 msgstr "日期與時間"
 
-#: src/core/StelCore.cpp:228 src/core/StelMovementMgr.cpp:154
+#: src/core/StelCore.cpp:228 src/core/StelMovementMgr.cpp:153
 msgid "Movement and Selection"
 msgstr "移動和選擇"
 
@@ -1366,11 +1366,11 @@ msgstr "水平翻轉"
 msgid "Flip scene vertically"
 msgstr "垂直翻轉"
 
-#: src/core/StelCore.cpp:1934
+#: src/core/StelCore.cpp:1943
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "修正已被禁用, 只有當你知道你在做什麼才禁用！"
 
-#: src/core/StelCore.cpp:1937
+#: src/core/StelCore.cpp:1946
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1381,7 +1381,7 @@ msgstr ""
 "在他的文章《古代的日食證明瞭愛因斯坦的相對論》[<em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em>](%1). 要了解更多信息，請點擊%2這裡%3."
 
-#: src/core/StelCore.cpp:1940
+#: src/core/StelCore.cpp:1949
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1390,7 +1390,7 @@ msgstr ""
 "這個經驗公式由GM Clemence 在文章《關於天文常數係統》[<em>On the system of astronomical "
 "constants</em>] (%1)中公佈."
 
-#: src/core/StelCore.cpp:1943
+#: src/core/StelCore.cpp:1952
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1402,7 +1402,7 @@ msgstr ""
 "在他的《用於計算器的天文學公式》[<em>Astronomical Formulae for Calculators</em> ] "
 "中使用。計算機程序SunTracker Pro 也使用了這一公式."
 
-#: src/core/StelCore.cpp:1947
+#: src/core/StelCore.cpp:1956
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1412,7 +1412,7 @@ msgstr ""
 "Ephemeris</em>]和《日食的法規》[<em>Canon of Solar Eclipses</em>]中使用的IAU (1952) "
 "公式稍加修改之後的版本."
 
-#: src/core/StelCore.cpp:1951
+#: src/core/StelCore.cpp:1960
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1420,7 +1420,7 @@ msgid ""
 "(1973)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1955
+#: src/core/StelCore.cpp:1964
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1429,14 +1429,14 @@ msgid ""
 msgstr ""
 "此方程由P. M. Muller及F. R. Stephenson在<em>從早期天文觀測地球和月球的加速現象</em>中發佈 (%1)."
 
-#: src/core/StelCore.cpp:1958
+#: src/core/StelCore.cpp:1967
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr "此方程由F. R. Stephenson在<em>前期望遠鏡時代天文觀察</em>中發佈 (%1)."
 
-#: src/core/StelCore.cpp:1961
+#: src/core/StelCore.cpp:1970
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1448,7 +1448,7 @@ msgstr ""
 "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
 "period 1800-1975</em> (%1) 以符合由Brouwer (1952)發表之數據"
 
-#: src/core/StelCore.cpp:1964
+#: src/core/StelCore.cpp:1973
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1457,7 +1457,7 @@ msgstr ""
 "此演算法被應用在 P. Bretagnon & L. Simon's <em>Planetary Programs and Tables from -"
 "4000 to +2800</em> (1986) 及PC星象軟件 RedShift."
 
-#: src/core/StelCore.cpp:1967
+#: src/core/StelCore.cpp:1976
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1467,11 +1467,11 @@ msgstr ""
 "此方程由F. R. Stephenson及L. V. Morrison<em>公元前700年到公元1980 - 地球自轉的長期變化</em>中發佈 "
 "(%1)"
 
-#: src/core/StelCore.cpp:1970
+#: src/core/StelCore.cpp:1979
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "此演算法被應用在PC星象軟件 Guide 7."
 
-#: src/core/StelCore.cpp:1973
+#: src/core/StelCore.cpp:1982
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -1480,14 +1480,14 @@ msgstr ""
 "此修正由F. Espenak提供, 並在<em>五十年日食大典: 1986-2035</em>和<em>五十年月食大典: 1986-"
 "2035</em>中提及 (1989)."
 
-#: src/core/StelCore.cpp:1976
+#: src/core/StelCore.cpp:1985
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr "此修正由K.M. Borkowski (%1)在硏究由公元前2137至公元1715有紀錄的31次日食所得出."
 
-#: src/core/StelCore.cpp:1979
+#: src/core/StelCore.cpp:1988
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1496,7 +1496,7 @@ msgid ""
 "Morrison (1984)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1982
+#: src/core/StelCore.cpp:1991
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -1505,7 +1505,7 @@ msgstr ""
 "此修正由M. Chapront-Touze及J. Chapront在<em>公元前4000至公元月球方程和數據</em> ELP 2000-"
 "85簡化月球理論中所用."
 
-#: src/core/StelCore.cpp:1985
+#: src/core/StelCore.cpp:1994
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1513,42 +1513,42 @@ msgid ""
 "1990</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1988
+#: src/core/StelCore.cpp:1997
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1991
+#: src/core/StelCore.cpp:2000
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:1994
+#: src/core/StelCore.cpp:2003
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr "NASA噴射推進實驗室之太陽系動態小組在他們互動網站 %1JPL Horizons%2 使用此方程式."
 
-#: src/core/StelCore.cpp:1997
+#: src/core/StelCore.cpp:2006
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2000
+#: src/core/StelCore.cpp:2009
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
 
-#: src/core/StelCore.cpp:2003
+#: src/core/StelCore.cpp:2012
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1556,7 +1556,7 @@ msgid ""
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2006
+#: src/core/StelCore.cpp:2015
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1564,7 +1564,7 @@ msgid ""
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2009
+#: src/core/StelCore.cpp:2018
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1573,7 +1573,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:2012 src/core/StelCore.cpp:2015
+#: src/core/StelCore.cpp:2021 src/core/StelCore.cpp:2024
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1586,15 +1586,15 @@ msgstr ""
 "並通過由1600至2000年列表值多項式擬合, 用作%1NASA日月蝕信息網站%2 及他們的 <em>五千年日食寶典: -1900 到 "
 "+3000</em> (2006). 此方程式亦用在太陽, 月球及行星星歷軟件SOLEX"
 
-#: src/core/StelCore.cpp:2012
+#: src/core/StelCore.cpp:2021
 msgid "Used by default."
 msgstr "預設值"
 
-#: src/core/StelCore.cpp:2015
+#: src/core/StelCore.cpp:2024
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr ""
 
-#: src/core/StelCore.cpp:2018
+#: src/core/StelCore.cpp:2027
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1604,7 +1604,7 @@ msgstr ""
 "此修正由B. Banjevic提供, 基於Stephenson & Morrison (1984), 並發表在<em>Ancient eclipses "
 "and dating the fall of Babylon</em> (%1)."
 
-#: src/core/StelCore.cpp:2021
+#: src/core/StelCore.cpp:2030
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1615,7 +1615,7 @@ msgstr ""
 "並發表在<em>Error Minimization of Polynomial Approximation of DeltaT</em> (%1) "
 "及由 Sana Islam 在2013年審視."
 
-#: src/core/StelCore.cpp:2024
+#: src/core/StelCore.cpp:2033
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1623,43 +1623,43 @@ msgid ""
 "Approximation of Time Period 1620-2013</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2027
+#: src/core/StelCore.cpp:2036
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr "這是一個計算%1T由用戶定義的係數的的二次方程式."
 
-#: src/core/StelCore.cpp:2030 src/core/SimbadSearcher.cpp:156
+#: src/core/StelCore.cpp:2039 src/core/SimbadSearcher.cpp:156
 msgid "Error"
 msgstr "錯誤"
 
-#: src/core/StelCore.cpp:2080
+#: src/core/StelCore.cpp:2089
 msgid "with meaningless values outside this range"
 msgstr "超出此範圍之無意義值"
 
-#: src/core/StelCore.cpp:2106
+#: src/core/StelCore.cpp:2115
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2128 src/core/StelCore.cpp:2133
-#: src/core/StelCore.cpp:2161 src/core/StelCore.cpp:2166
-#: src/core/StelCore.cpp:2171
+#: src/core/StelCore.cpp:2137 src/core/StelCore.cpp:2142
+#: src/core/StelCore.cpp:2170 src/core/StelCore.cpp:2175
+#: src/core/StelCore.cpp:2180
 msgid "with zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2138
+#: src/core/StelCore.cpp:2147
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "典型1秒準確度和沒有值超出範圍"
 
-#: src/core/StelCore.cpp:2181
+#: src/core/StelCore.cpp:2190
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "有效使日期用範: 在%1 及 %2, %3之間."
 
-#: src/core/StelCore.cpp:2183
+#: src/core/StelCore.cpp:2192
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "有效使日期用範: 在%1 及 %2之間."
@@ -1835,56 +1835,56 @@ msgstr "實在際恆星時: %1"
 msgid "Deep-sky objects background images"
 msgstr "深空天體背景圖片"
 
-#: src/core/StelMovementMgr.cpp:155 src/gui/StelGui.cpp:201
+#: src/core/StelMovementMgr.cpp:154 src/gui/StelGui.cpp:201
 #: src/StelMainView.cpp:574
 msgid "Miscellaneous"
 msgstr "其它"
 
-#: src/core/StelMovementMgr.cpp:155
+#: src/core/StelMovementMgr.cpp:154
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "赤道儀/水平儀切換"
 
-#: src/core/StelMovementMgr.cpp:156
+#: src/core/StelMovementMgr.cpp:155
 msgid "Center on selected object"
 msgstr "將已選天體置中"
 
-#: src/core/StelMovementMgr.cpp:157
+#: src/core/StelMovementMgr.cpp:156
 msgid "Zoom in on selected object"
 msgstr "放大已選的天體"
 
-#: src/core/StelMovementMgr.cpp:158
+#: src/core/StelMovementMgr.cpp:157
 msgid "Zoom out"
 msgstr "縮小"
 
-#: src/core/StelMovementMgr.cpp:159
+#: src/core/StelMovementMgr.cpp:158
 msgid "Track object"
 msgstr "追蹤天體"
 
-#: src/core/StelMovementMgr.cpp:161
+#: src/core/StelMovementMgr.cpp:160
 msgid "Look towards East"
 msgstr "向東望"
 
-#: src/core/StelMovementMgr.cpp:162
+#: src/core/StelMovementMgr.cpp:161
 msgid "Look towards West"
 msgstr "向西望"
 
-#: src/core/StelMovementMgr.cpp:163
+#: src/core/StelMovementMgr.cpp:162
 msgid "Look towards North"
 msgstr "向北望"
 
-#: src/core/StelMovementMgr.cpp:164
+#: src/core/StelMovementMgr.cpp:163
 msgid "Look towards South"
 msgstr "向南望"
 
-#: src/core/StelMovementMgr.cpp:165
+#: src/core/StelMovementMgr.cpp:164
 msgid "Look towards Zenith"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:167
+#: src/core/StelMovementMgr.cpp:166
 msgid "Look towards North Celestial pole"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:168
+#: src/core/StelMovementMgr.cpp:167
 msgid "Look towards South Celestial pole"
 msgstr ""
 
@@ -3005,7 +3005,7 @@ msgstr ""
 msgid "Save calculated phenomena as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:798 src/gui/AstroCalcDialog.cpp:961
+#: src/gui/AstroCalcDialog.cpp:798 src/gui/AstroCalcDialog.cpp:964
 msgid "Conjunction"
 msgstr ""
 
@@ -3013,7 +3013,11 @@ msgstr ""
 msgid "Opposition"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:808 src/gui/AstroCalcDialog.cpp:966
+#: src/gui/AstroCalcDialog.cpp:809
+msgid "Transit"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:811 src/gui/AstroCalcDialog.cpp:969
 msgid "Occultation"
 msgstr ""
 
@@ -7243,7 +7247,7 @@ msgid "Use dms format for angles"
 msgstr "角度使用角分秒作格式"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
-#: plugins/Satellites/src/ui_satellitesDialog.h:743
+#: plugins/Satellites/src/ui_satellitesDialog.h:745
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/Novae/src/ui_novaeDialog.h:241
 #: plugins/Quasars/src/ui_quasarsDialog.h:273
@@ -7258,7 +7262,7 @@ msgstr "回復預設設定"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
 #: plugins/Oculars/src/ui_ocularDialog.h:1192
-#: plugins/Satellites/src/ui_satellitesDialog.h:793
+#: plugins/Satellites/src/ui_satellitesDialog.h:795
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
@@ -7851,7 +7855,7 @@ msgstr "新增"
 #: plugins/Oculars/src/ui_ocularDialog.h:1161
 #: plugins/Oculars/src/ui_ocularDialog.h:1168
 #: plugins/Oculars/src/ui_ocularDialog.h:1185
-#: plugins/Satellites/src/ui_satellitesDialog.h:760
+#: plugins/Satellites/src/ui_satellitesDialog.h:762
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:246
 msgid "Name:"
@@ -7954,7 +7958,7 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:68
 #: plugins/Satellites/src/Satellites.cpp:142
-#: plugins/Satellites/src/ui_satellitesDialog.h:777
+#: plugins/Satellites/src/ui_satellitesDialog.h:779
 msgid "Satellites"
 msgstr "衛星插件"
 
@@ -8201,7 +8205,7 @@ msgid "Stellarium Satellites Plugin"
 msgstr "Stellarium衛星插件"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:412
-#: plugins/Satellites/src/ui_satellitesDialog.h:792
+#: plugins/Satellites/src/ui_satellitesDialog.h:794
 msgid "Iridium flares"
 msgstr ""
 
@@ -8385,7 +8389,7 @@ msgid "[new source]"
 msgstr "[新來源]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:626
-#: plugins/Satellites/src/ui_satellitesDialog.h:715
+#: plugins/Satellites/src/ui_satellitesDialog.h:717
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:194
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
 #: plugins/Novae/src/gui/NovaeDialog.cpp:191
@@ -8480,20 +8484,20 @@ msgstr "沒有任何數據可以被下載, 請稍後再試!"
 msgid "Catalog Number: %1"
 msgstr "登錄號碼: %1"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:708
-#: plugins/Satellites/src/ui_satellitesDialog.h:709
+#: plugins/Satellites/src/ui_satellitesDialog.h:710
+#: plugins/Satellites/src/ui_satellitesDialog.h:711
 msgid "Satellites Configuration"
 msgstr "衛星插件設定"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:711
+#: plugins/Satellites/src/ui_satellitesDialog.h:713
 msgid "Updates"
 msgstr "更新"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:712
+#: plugins/Satellites/src/ui_satellitesDialog.h:714
 msgid "Update satellite data from Internet sources"
 msgstr "從網絡更新衛星數據"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:713
+#: plugins/Satellites/src/ui_satellitesDialog.h:715
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 #: plugins/Novae/src/ui_novaeDialog.h:237
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
@@ -8502,62 +8506,62 @@ msgstr "從網絡更新衛星數據"
 msgid "Last update:"
 msgstr "最後更新:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:714
+#: plugins/Satellites/src/ui_satellitesDialog.h:716
 msgid "On update, add all new satellites from the selected source(s)"
 msgstr "在更新時, 新增更新來源中的新衛星"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:716
+#: plugins/Satellites/src/ui_satellitesDialog.h:718
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
 msgstr "在更新時, 移除本機在更新來源中沒有的衛星"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:717
+#: plugins/Satellites/src/ui_satellitesDialog.h:719
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:468
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:454
 msgid "Update frequency (hours):"
 msgstr "更新頻率 (小時):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:719
+#: plugins/Satellites/src/ui_satellitesDialog.h:721
 msgid "Label font size (pixels):"
 msgstr "標示字型大小 (像素):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:720
+#: plugins/Satellites/src/ui_satellitesDialog.h:722
 msgid "Orbit lines"
 msgstr "軌道線"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:722
-#: plugins/Satellites/src/ui_satellitesDialog.h:726
+#: plugins/Satellites/src/ui_satellitesDialog.h:724
+#: plugins/Satellites/src/ui_satellitesDialog.h:728
 msgid "Number of segments used to draw the line"
 msgstr "段數用於繪製線條"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:724
+#: plugins/Satellites/src/ui_satellitesDialog.h:726
 msgid "Number of  segments:"
 msgstr "段數:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:729
-#: plugins/Satellites/src/ui_satellitesDialog.h:733
+#: plugins/Satellites/src/ui_satellitesDialog.h:731
+#: plugins/Satellites/src/ui_satellitesDialog.h:735
 msgid "Duration of a single segment in seconds"
 msgstr "每一節持續時間 (秒)"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:731
+#: plugins/Satellites/src/ui_satellitesDialog.h:733
 msgid "Segment length (s):"
 msgstr "段長段 (s):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:736
-#: plugins/Satellites/src/ui_satellitesDialog.h:739
+#: plugins/Satellites/src/ui_satellitesDialog.h:738
+#: plugins/Satellites/src/ui_satellitesDialog.h:741
 msgid "Number of segments used to draw each end of the line"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:741
+#: plugins/Satellites/src/ui_satellitesDialog.h:743
 msgid "Fade length:"
 msgstr "淡出長度:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:742
+#: plugins/Satellites/src/ui_satellitesDialog.h:744
 msgid "Realistic mode for the artificial satellites"
 msgstr "人造衛星真實化顯示"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:744
+#: plugins/Satellites/src/ui_satellitesDialog.h:746
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Novae/src/ui_novaeDialog.h:242
 #: plugins/Quasars/src/ui_quasarsDialog.h:274
@@ -8568,7 +8572,7 @@ msgstr "人造衛星真實化顯示"
 msgid "Save settings as default"
 msgstr "儲存預設設定"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:745
+#: plugins/Satellites/src/ui_satellitesDialog.h:747
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Novae/src/ui_novaeDialog.h:243
 #: plugins/Quasars/src/ui_quasarsDialog.h:275
@@ -8578,88 +8582,88 @@ msgstr "儲存預設設定"
 msgid "Settings"
 msgstr "設定"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:747
+#: plugins/Satellites/src/ui_satellitesDialog.h:749
 msgid "Double-click a satellite to start tracking it."
 msgstr "按兩下衛星來追蹤"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:750
+#: plugins/Satellites/src/ui_satellitesDialog.h:752
 msgid "Add more satellites"
 msgstr "増加更多衛星"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:753
+#: plugins/Satellites/src/ui_satellitesDialog.h:755
 msgid "Remove the selected satellites"
 msgstr "移除已選衛星"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:757
+#: plugins/Satellites/src/ui_satellitesDialog.h:759
 msgid "Save changes"
 msgstr "儲存變更"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:761
+#: plugins/Satellites/src/ui_satellitesDialog.h:763
 msgid "Catalog number:"
 msgstr "登錄號碼:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:763
+#: plugins/Satellites/src/ui_satellitesDialog.h:765
 msgid "Display the selected satellite(s)"
 msgstr "顯示已選衛星"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:765
+#: plugins/Satellites/src/ui_satellitesDialog.h:767
 msgid "Displayed"
 msgstr "已顯示"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:767
+#: plugins/Satellites/src/ui_satellitesDialog.h:769
 msgid "Display orbit line(s) for the selected satellite(s)"
 msgstr "顯示已選衛星軌道"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:769
+#: plugins/Satellites/src/ui_satellitesDialog.h:771
 msgid "Orbit"
 msgstr "軌道"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:771
+#: plugins/Satellites/src/ui_satellitesDialog.h:773
 msgid "Do not update (or remove on update) the selected satellite(s)"
 msgstr "不要更新 (或移除更新)已選的衛星"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:773
+#: plugins/Satellites/src/ui_satellitesDialog.h:775
 msgid "Do not update"
 msgstr "不要更新"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:774
+#: plugins/Satellites/src/ui_satellitesDialog.h:776
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:219
 msgid "Description:"
 msgstr "描述:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:775
+#: plugins/Satellites/src/ui_satellitesDialog.h:777
 msgid "Groups:"
 msgstr "組別:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:776
+#: plugins/Satellites/src/ui_satellitesDialog.h:778
 msgid "TLE set:"
 msgstr "TLE資料:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:778
+#: plugins/Satellites/src/ui_satellitesDialog.h:780
 msgid ""
 "Satellites in the marked source lists will be automatically added on the "
 "next update if they are not already in the collection."
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:780
+#: plugins/Satellites/src/ui_satellitesDialog.h:782
 msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:783
+#: plugins/Satellites/src/ui_satellitesDialog.h:785
 msgid "Add new source"
 msgstr "新增新來源"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:787
+#: plugins/Satellites/src/ui_satellitesDialog.h:789
 msgid "Remove selected source"
 msgstr "刪除選定的來源"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:790
+#: plugins/Satellites/src/ui_satellitesDialog.h:792
 msgid "Sources"
 msgstr "來源"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:791
+#: plugins/Satellites/src/ui_satellitesDialog.h:793
 msgid "Predict Iridium flares"
 msgstr ""
 
