@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-08 02:44+0700\n"
+"POT-Creation-Date: 2016-11-10 23:38+0700\n"
 "PO-Revision-Date: 2016-07-27 15:24+0000\n"
 "Last-Translator: Lê Văn Bách <levanbach1994ag@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-08 04:57+0000\n"
-"X-Generator: Launchpad (build 18246)\n"
+"X-Launchpad-Export-Date: 2016-11-11 05:42+0000\n"
+"X-Generator: Launchpad (build 18255)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:191
@@ -47,7 +47,7 @@ msgstr "Chòm sao"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:433
 #: src/core/modules/GridLinesMgr.cpp:1214 src/core/modules/LandscapeMgr.cpp:414
-#: src/core/modules/NebulaMgr.cpp:364 src/core/modules/NebulaMgr.cpp:365
+#: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:203 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/StelApp.cpp:518
 #: src/core/StelCore.cpp:229 src/core/StelSkyLayerMgr.cpp:88
@@ -341,7 +341,7 @@ msgid "Illumination"
 msgstr "Sự chiếu sáng"
 
 #: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:2046
-#: plugins/Satellites/src/ui_satellitesDialog.h:718
+#: plugins/Satellites/src/ui_satellitesDialog.h:720
 msgid "Labels"
 msgstr "Nhãn"
 
@@ -847,11 +847,11 @@ msgstr "vật thể không rõ bản chất"
 msgid "undocumented type"
 msgstr "loại không có dữ liệu"
 
-#: src/core/modules/NebulaMgr.cpp:364
+#: src/core/modules/NebulaMgr.cpp:365
 msgid "Deep-sky objects"
 msgstr "Vật thể xa"
 
-#: src/core/modules/NebulaMgr.cpp:365
+#: src/core/modules/NebulaMgr.cpp:366
 msgid "Toggle DSO type filter"
 msgstr ""
 
@@ -1154,7 +1154,7 @@ msgstr "Chế độ đêm"
 msgid "Date and Time"
 msgstr "Ngày và Giờ"
 
-#: src/core/StelCore.cpp:228 src/core/StelMovementMgr.cpp:154
+#: src/core/StelCore.cpp:228 src/core/StelMovementMgr.cpp:153
 msgid "Movement and Selection"
 msgstr "Di chuyển và chọn"
 
@@ -1366,11 +1366,11 @@ msgstr "Lật cảnh theo chiều ngang"
 msgid "Flip scene vertically"
 msgstr "Lật cảnh theo chiều dọc"
 
-#: src/core/StelCore.cpp:1934
+#: src/core/StelCore.cpp:1943
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "Sửa chữa bị vô hiệu hóa. Chỉ sử dụng nếu bạn biết đang làm gì"
 
-#: src/core/StelCore.cpp:1937
+#: src/core/StelCore.cpp:1946
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1381,7 +1381,7 @@ msgstr ""
 "G. Henriksson trong bài báo của ông ấy <em>Thuyết tương đối của Einstein phù "
 "hợp với những lần nhật thực cổ xưa</em> (%1). Xem thêm thông tin %2ở đây%3."
 
-#: src/core/StelCore.cpp:1940
+#: src/core/StelCore.cpp:1949
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1390,7 +1390,7 @@ msgstr ""
 "Phương trình kinh nghiệm này được xuất bản bởi G. M. Clemence trong bài báo "
 "<em>Trên hệ thống của những hằng số vũ trụ</em> (%1)."
 
-#: src/core/StelCore.cpp:1943
+#: src/core/StelCore.cpp:1952
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1403,7 +1403,7 @@ msgstr ""
 "dụng bởi Jean Meeus trong bài viết của ông ấy <em>Công thức vũ trụ cho những "
 "máy tính</em>.  Nó cũng được thực hiện trong PC program Sun Tracker Pro."
 
-#: src/core/StelCore.cpp:1947
+#: src/core/StelCore.cpp:1956
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1413,7 +1413,7 @@ msgstr ""
 "trong <em>Lịch vũ trụ</em> và trong <em>Tiêu chuẩn của nhật thực</em> bởi "
 "Mucke và Meeus (1983)."
 
-#: src/core/StelCore.cpp:1951
+#: src/core/StelCore.cpp:1960
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1425,7 +1425,7 @@ msgstr ""
 "601 TCN đến 1649. Một cái tương tự cũng được thực hiện hoàn toàn trong những "
 "bảng syzygy của Goldstine (1973)."
 
-#: src/core/StelCore.cpp:1955
+#: src/core/StelCore.cpp:1964
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1436,7 +1436,7 @@ msgstr ""
 "bài <em>Gia tốc của trái đất và mặt trăng từ những quan sát vũ trụ cổ "
 "xưa</em> (%1)."
 
-#: src/core/StelCore.cpp:1958
+#: src/core/StelCore.cpp:1967
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1445,7 +1445,7 @@ msgstr ""
 "Phương trình này được xuất bản bởi F. R. Stephenson trong bài <em>Những quan "
 "sát vũ trụ trước khi có kính thiên văn</em> (%1)."
 
-#: src/core/StelCore.cpp:1961
+#: src/core/StelCore.cpp:1970
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1458,7 +1458,7 @@ msgstr ""
 "<em>Xấp xỉ đa thức cho chính xác delta T E.T.-U.T. trong giai đoạn 1800-"
 "1975</em> (%1) là phù hợp thông qua dữ liệu được xuất bản bởi Brouwer (1952)."
 
-#: src/core/StelCore.cpp:1964
+#: src/core/StelCore.cpp:1973
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1468,7 +1468,7 @@ msgstr ""
 "bảng và chương trình hành tinh từ năm 4000 TCN đến năm 2800</em> (1986) và "
 "trong PC planetarium program RedShift."
 
-#: src/core/StelCore.cpp:1967
+#: src/core/StelCore.cpp:1976
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1479,11 +1479,11 @@ msgstr ""
 "bài <em>Những thay đổi lâu dài trong chu kỳ của trái đất từ 700 TCN đến "
 "1980</em> (%1)."
 
-#: src/core/StelCore.cpp:1970
+#: src/core/StelCore.cpp:1979
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "Thuật toán này được sử dụng trong PC planetarium program Guide 7."
 
-#: src/core/StelCore.cpp:1973
+#: src/core/StelCore.cpp:1982
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -1493,7 +1493,7 @@ msgstr ""
 "trong 50 năm: 1986-2035</em> (1987) và trong bài <em>Danh sách nguyệt thực "
 "trong 50 năm: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:1976
+#: src/core/StelCore.cpp:1985
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -1502,7 +1502,7 @@ msgstr ""
 "Công thức này có được bởi K. M. Borkowsky (%1) từ việc phân tích những ghi "
 "chép của 31 lần nhật thực giữa 2137 TCN và 1715."
 
-#: src/core/StelCore.cpp:1979
+#: src/core/StelCore.cpp:1988
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1515,7 +1515,7 @@ msgstr ""
 "1800-1988</em> (%1) như là dữ liệu phù hợp thông qua các giá trị được đưa ra "
 "bởi Stephenson & Morrison (1984)."
 
-#: src/core/StelCore.cpp:1982
+#: src/core/StelCore.cpp:1991
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -1525,7 +1525,7 @@ msgstr ""
 "phiên bản ngắn của thuyết mặt trăng ELP 2000-85 trong bài <em>Những chương "
 "trình và bảng về mặt trăng từ năm 4000 TCN đến 8000</em> (1991)."
 
-#: src/core/StelCore.cpp:1985
+#: src/core/StelCore.cpp:1994
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1536,7 +1536,7 @@ msgstr ""
 "bài <em>Những dao động dài hạn trong chu kỳ của trái đất: năm 700 TCN đến "
 "1990</em> (%1)."
 
-#: src/core/StelCore.cpp:1988
+#: src/core/StelCore.cpp:1997
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1545,7 +1545,7 @@ msgstr ""
 "F. R. Stepenson đã xuất bản công thức này trong cuốn sách <em>Lịch sử che "
 "khuất và chu kỳ của trái đất</em> (%1)."
 
-#: src/core/StelCore.cpp:1991
+#: src/core/StelCore.cpp:2000
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1555,7 +1555,7 @@ msgstr ""
 "dụng rộng rãi. Bảng cho 1620..2000, và bao gồm một biến thể của Chapront, "
 "Chapront-Touze và Francou (1997) cho những dữ liệu ngoài 1620..2000."
 
-#: src/core/StelCore.cpp:1994
+#: src/core/StelCore.cpp:2003
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1564,7 +1564,7 @@ msgstr ""
 "Nhóm Động lực học Hệ Mặt trời JPL của Phòng thí nghiệm tên lửa đẩy NASA sử "
 "dụng công thức này trong trang web tương tác %1JPL Horizons%2 của họ."
 
-#: src/core/StelCore.cpp:1997
+#: src/core/StelCore.cpp:2006
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1573,7 +1573,7 @@ msgstr ""
 "Đa thức này được xuất bản bởi J. Meeus và L. Simons trong bài <em> Xấp xỉ đa "
 "thức đối với Delta T, 1620-2000</em> (%1)."
 
-#: src/core/StelCore.cpp:2000
+#: src/core/StelCore.cpp:2009
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1583,7 +1583,7 @@ msgstr ""
 "Montenbruck & T. Pfleger (2000) cung cấp dữ liệu đa thức bậc 3 đơn giản phù "
 "hợp cho quá khứ gần đây."
 
-#: src/core/StelCore.cpp:2003
+#: src/core/StelCore.cpp:2012
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1595,7 +1595,7 @@ msgstr ""
 "(2002). Nó được dựa trên <em>Thuật toán thiên văn học</em> của Jean Meeus "
 "(1991)."
 
-#: src/core/StelCore.cpp:2006
+#: src/core/StelCore.cpp:2015
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1606,7 +1606,7 @@ msgstr ""
 "Stephenson trong bài <em>Giá trị lịch sử của sai số đồng hồ của trái đất %1T "
 "và sự tính toán nhật thực</em> (%2) với phụ lục trong (%3)."
 
-#: src/core/StelCore.cpp:2009
+#: src/core/StelCore.cpp:2018
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1619,7 +1619,7 @@ msgstr ""
 "với cosin và hàm bình phương. Điều này dược trên một tính được mô tả bởi "
 "Stephenson (%2). Xem thêm thông tin %3ở đây%4."
 
-#: src/core/StelCore.cpp:2012 src/core/StelCore.cpp:2015
+#: src/core/StelCore.cpp:2021 src/core/StelCore.cpp:2024
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1634,15 +1634,15 @@ msgstr ""
 "Solar Eclipse: -1900 to +3000</em> (2006) của họ. Công thức này cũng được sử "
 "dụng trong chương trình thiên văn SOLEX mặt trời, mặt trăng và hành tinh."
 
-#: src/core/StelCore.cpp:2012
+#: src/core/StelCore.cpp:2021
 msgid "Used by default."
 msgstr "Được sử dụng bởi mặc định"
 
-#: src/core/StelCore.cpp:2015
+#: src/core/StelCore.cpp:2024
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "PHIÊN BẢN VÁ LỖI MÀ KHÔNG BỔ SUNG GIA TỐC MẶT TRĂNG"
 
-#: src/core/StelCore.cpp:2018
+#: src/core/StelCore.cpp:2027
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1653,7 +1653,7 @@ msgstr ""
 "xuất bản trong bài <em>Thiên thực cổ đại và ngày sụp đổ của Babylon</em> "
 "(%1)."
 
-#: src/core/StelCore.cpp:2021
+#: src/core/StelCore.cpp:2030
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1664,7 +1664,7 @@ msgstr ""
 "Simons (2000), được xuất bản trong bài viết <em>Giảm thiểu lỗi của xấp xỉ đa "
 "thức của Delta T</em> (%1) và được xem xét lại bới Sana Islam vào năm 2003."
 
-#: src/core/StelCore.cpp:2024
+#: src/core/StelCore.cpp:2033
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1675,7 +1675,7 @@ msgstr ""
 "Sultana và Faheem Zaidi được xuất bản trong <em>Delata T: Xấp xỉ đa thức của "
 "chu kỳ thời gian 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2027
+#: src/core/StelCore.cpp:2036
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1684,15 +1684,15 @@ msgstr ""
 "Đây là công thức bậc hai cho phép tính của %1T với hệ số được xác định với "
 "người dùng."
 
-#: src/core/StelCore.cpp:2030 src/core/SimbadSearcher.cpp:156
+#: src/core/StelCore.cpp:2039 src/core/SimbadSearcher.cpp:156
 msgid "Error"
 msgstr "Lỗi"
 
-#: src/core/StelCore.cpp:2080
+#: src/core/StelCore.cpp:2089
 msgid "with meaningless values outside this range"
 msgstr "với giá trị vô nghĩa bên ngoài phạm vi này"
 
-#: src/core/StelCore.cpp:2106
+#: src/core/StelCore.cpp:2115
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -1700,23 +1700,23 @@ msgstr ""
 "với một lỗi trung bình ít hơn 1s, tối đa 1,9s, và giá trị vô nghĩa nằm ngoài "
 "phạm vi này"
 
-#: src/core/StelCore.cpp:2128 src/core/StelCore.cpp:2133
-#: src/core/StelCore.cpp:2161 src/core/StelCore.cpp:2166
-#: src/core/StelCore.cpp:2171
+#: src/core/StelCore.cpp:2137 src/core/StelCore.cpp:2142
+#: src/core/StelCore.cpp:2170 src/core/StelCore.cpp:2175
+#: src/core/StelCore.cpp:2180
 msgid "with zero values outside this range"
 msgstr "với giá trị zero nằm ngoài phạm vi này"
 
-#: src/core/StelCore.cpp:2138
+#: src/core/StelCore.cpp:2147
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "với một độ chính xác 1s điển hình và giá trị zero nằm ngoài khoảng này"
 
-#: src/core/StelCore.cpp:2181
+#: src/core/StelCore.cpp:2190
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Khoảng hợp lệ thường dùng: giữa những năm %1 và %2, %3."
 
-#: src/core/StelCore.cpp:2183
+#: src/core/StelCore.cpp:2192
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Khoảng hợp lệ thường dùng: giữa những năm %1 và %2."
@@ -1910,56 +1910,56 @@ msgstr "Giờ thiên văn biểu kiến: %1"
 msgid "Deep-sky objects background images"
 msgstr "Hình ảnh nền những vật thể xa"
 
-#: src/core/StelMovementMgr.cpp:155 src/gui/StelGui.cpp:201
+#: src/core/StelMovementMgr.cpp:154 src/gui/StelGui.cpp:201
 #: src/StelMainView.cpp:574
 msgid "Miscellaneous"
 msgstr "Đặc tính khác"
 
-#: src/core/StelMovementMgr.cpp:155
+#: src/core/StelMovementMgr.cpp:154
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Quay theo Xích đạo/Phương vị"
 
-#: src/core/StelMovementMgr.cpp:156
+#: src/core/StelMovementMgr.cpp:155
 msgid "Center on selected object"
 msgstr "Chuyển đến đối tượng đã chọn"
 
-#: src/core/StelMovementMgr.cpp:157
+#: src/core/StelMovementMgr.cpp:156
 msgid "Zoom in on selected object"
 msgstr "Phóng to vật thể được chọn"
 
-#: src/core/StelMovementMgr.cpp:158
+#: src/core/StelMovementMgr.cpp:157
 msgid "Zoom out"
 msgstr "Thu nhỏ"
 
-#: src/core/StelMovementMgr.cpp:159
+#: src/core/StelMovementMgr.cpp:158
 msgid "Track object"
 msgstr "Theo dõi đối tượng"
 
-#: src/core/StelMovementMgr.cpp:161
+#: src/core/StelMovementMgr.cpp:160
 msgid "Look towards East"
 msgstr "Nhìn về hướng Đông"
 
-#: src/core/StelMovementMgr.cpp:162
+#: src/core/StelMovementMgr.cpp:161
 msgid "Look towards West"
 msgstr "Nhìn về hướng Tây"
 
-#: src/core/StelMovementMgr.cpp:163
+#: src/core/StelMovementMgr.cpp:162
 msgid "Look towards North"
 msgstr "Nhìn về hướng Bắc"
 
-#: src/core/StelMovementMgr.cpp:164
+#: src/core/StelMovementMgr.cpp:163
 msgid "Look towards South"
 msgstr "Nhìn về hướng Nam"
 
-#: src/core/StelMovementMgr.cpp:165
+#: src/core/StelMovementMgr.cpp:164
 msgid "Look towards Zenith"
 msgstr "Nhìn lên Thiên đỉnh"
 
-#: src/core/StelMovementMgr.cpp:167
+#: src/core/StelMovementMgr.cpp:166
 msgid "Look towards North Celestial pole"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:168
+#: src/core/StelMovementMgr.cpp:167
 msgid "Look towards South Celestial pole"
 msgstr ""
 
@@ -3099,7 +3099,7 @@ msgstr "Đối tượng 2"
 msgid "Save calculated phenomena as..."
 msgstr "Lưu hiện tượng được tính toán như..."
 
-#: src/gui/AstroCalcDialog.cpp:798 src/gui/AstroCalcDialog.cpp:961
+#: src/gui/AstroCalcDialog.cpp:798 src/gui/AstroCalcDialog.cpp:964
 msgid "Conjunction"
 msgstr "Giao hội"
 
@@ -3107,7 +3107,11 @@ msgstr "Giao hội"
 msgid "Opposition"
 msgstr "Đối lập"
 
-#: src/gui/AstroCalcDialog.cpp:808 src/gui/AstroCalcDialog.cpp:966
+#: src/gui/AstroCalcDialog.cpp:809
+msgid "Transit"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:811 src/gui/AstroCalcDialog.cpp:969
 msgid "Occultation"
 msgstr ""
 
@@ -7494,7 +7498,7 @@ msgid "Use dms format for angles"
 msgstr "Sử dụng đinh dạng độ phút giây cho góc"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
-#: plugins/Satellites/src/ui_satellitesDialog.h:743
+#: plugins/Satellites/src/ui_satellitesDialog.h:745
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/Novae/src/ui_novaeDialog.h:241
 #: plugins/Quasars/src/ui_quasarsDialog.h:273
@@ -7509,7 +7513,7 @@ msgstr "Khôi phục cài đặt mặc định"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
 #: plugins/Oculars/src/ui_ocularDialog.h:1192
-#: plugins/Satellites/src/ui_satellitesDialog.h:793
+#: plugins/Satellites/src/ui_satellitesDialog.h:795
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
@@ -8133,7 +8137,7 @@ msgstr "Thêm"
 #: plugins/Oculars/src/ui_ocularDialog.h:1161
 #: plugins/Oculars/src/ui_ocularDialog.h:1168
 #: plugins/Oculars/src/ui_ocularDialog.h:1185
-#: plugins/Satellites/src/ui_satellitesDialog.h:760
+#: plugins/Satellites/src/ui_satellitesDialog.h:762
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:246
 msgid "Name:"
@@ -8238,7 +8242,7 @@ msgstr "Đỉnh Xích đạo"
 
 #: plugins/Satellites/src/Satellites.cpp:68
 #: plugins/Satellites/src/Satellites.cpp:142
-#: plugins/Satellites/src/ui_satellitesDialog.h:777
+#: plugins/Satellites/src/ui_satellitesDialog.h:779
 msgid "Satellites"
 msgstr "Vệ tinh"
 
@@ -8489,7 +8493,7 @@ msgid "Stellarium Satellites Plugin"
 msgstr "Phần bổ trợ Vệ tinh Stellarium"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:412
-#: plugins/Satellites/src/ui_satellitesDialog.h:792
+#: plugins/Satellites/src/ui_satellitesDialog.h:794
 msgid "Iridium flares"
 msgstr "Pháo sáng Iridium"
 
@@ -8702,7 +8706,7 @@ msgid "[new source]"
 msgstr "[tài nguyên mới]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:626
-#: plugins/Satellites/src/ui_satellitesDialog.h:715
+#: plugins/Satellites/src/ui_satellitesDialog.h:717
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:194
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
 #: plugins/Novae/src/gui/NovaeDialog.cpp:191
@@ -8798,20 +8802,20 @@ msgstr "Không có dữ liệu có thể tải về. Hãy thử lại sau."
 msgid "Catalog Number: %1"
 msgstr "Số danh mục: %1"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:708
-#: plugins/Satellites/src/ui_satellitesDialog.h:709
+#: plugins/Satellites/src/ui_satellitesDialog.h:710
+#: plugins/Satellites/src/ui_satellitesDialog.h:711
 msgid "Satellites Configuration"
 msgstr "Cấu hình Vệ tinh"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:711
+#: plugins/Satellites/src/ui_satellitesDialog.h:713
 msgid "Updates"
 msgstr "Cập nhật"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:712
+#: plugins/Satellites/src/ui_satellitesDialog.h:714
 msgid "Update satellite data from Internet sources"
 msgstr "Cập nhật dữ liệu vệ tinh từ tài nguyên mạng"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:713
+#: plugins/Satellites/src/ui_satellitesDialog.h:715
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 #: plugins/Novae/src/ui_novaeDialog.h:237
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
@@ -8820,11 +8824,11 @@ msgstr "Cập nhật dữ liệu vệ tinh từ tài nguyên mạng"
 msgid "Last update:"
 msgstr "Lần cập nhật cuối:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:714
+#: plugins/Satellites/src/ui_satellitesDialog.h:716
 msgid "On update, add all new satellites from the selected source(s)"
 msgstr "Đang cập nhật, thêm tất cả vệ tinh mới từ các nguồn được chọn"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:716
+#: plugins/Satellites/src/ui_satellitesDialog.h:718
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
@@ -8832,52 +8836,52 @@ msgstr ""
 "Đang cập nhật, xóa các vệ tinh không còn được liệt kê trong các nguồn cập "
 "nhật"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:717
+#: plugins/Satellites/src/ui_satellitesDialog.h:719
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:468
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:454
 msgid "Update frequency (hours):"
 msgstr "Tần suất cập nhật (giờ):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:719
+#: plugins/Satellites/src/ui_satellitesDialog.h:721
 msgid "Label font size (pixels):"
 msgstr "Kính thước nhãn"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:720
+#: plugins/Satellites/src/ui_satellitesDialog.h:722
 msgid "Orbit lines"
 msgstr "Đường quỹ đạo"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:722
-#: plugins/Satellites/src/ui_satellitesDialog.h:726
+#: plugins/Satellites/src/ui_satellitesDialog.h:724
+#: plugins/Satellites/src/ui_satellitesDialog.h:728
 msgid "Number of segments used to draw the line"
 msgstr "Số đoạn được sử dụng để vẽ đường"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:724
+#: plugins/Satellites/src/ui_satellitesDialog.h:726
 msgid "Number of  segments:"
 msgstr "Số đoạn:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:729
-#: plugins/Satellites/src/ui_satellitesDialog.h:733
+#: plugins/Satellites/src/ui_satellitesDialog.h:731
+#: plugins/Satellites/src/ui_satellitesDialog.h:735
 msgid "Duration of a single segment in seconds"
 msgstr "Thời gian của một đoạn đơn trong vài giây"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:731
+#: plugins/Satellites/src/ui_satellitesDialog.h:733
 msgid "Segment length (s):"
 msgstr "Độ dài phân đoạn"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:736
-#: plugins/Satellites/src/ui_satellitesDialog.h:739
+#: plugins/Satellites/src/ui_satellitesDialog.h:738
+#: plugins/Satellites/src/ui_satellitesDialog.h:741
 msgid "Number of segments used to draw each end of the line"
 msgstr "Số phân đoạn được dùng để vẽ mỗi đoạn cuối của đường"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:741
+#: plugins/Satellites/src/ui_satellitesDialog.h:743
 msgid "Fade length:"
 msgstr "Độ dài fade:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:742
+#: plugins/Satellites/src/ui_satellitesDialog.h:744
 msgid "Realistic mode for the artificial satellites"
 msgstr "Chế độ thực cho vệ tinh nhân tạo"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:744
+#: plugins/Satellites/src/ui_satellitesDialog.h:746
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Novae/src/ui_novaeDialog.h:242
 #: plugins/Quasars/src/ui_quasarsDialog.h:274
@@ -8888,7 +8892,7 @@ msgstr "Chế độ thực cho vệ tinh nhân tạo"
 msgid "Save settings as default"
 msgstr "Lưu cài đặt như là mặc định"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:745
+#: plugins/Satellites/src/ui_satellitesDialog.h:747
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Novae/src/ui_novaeDialog.h:243
 #: plugins/Quasars/src/ui_quasarsDialog.h:275
@@ -8898,64 +8902,64 @@ msgstr "Lưu cài đặt như là mặc định"
 msgid "Settings"
 msgstr "Cài đặt"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:747
+#: plugins/Satellites/src/ui_satellitesDialog.h:749
 msgid "Double-click a satellite to start tracking it."
 msgstr "Nhấp đôi vào một vệ tinh để bắt đầu theo dõi nó"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:750
+#: plugins/Satellites/src/ui_satellitesDialog.h:752
 msgid "Add more satellites"
 msgstr "Thêm nhiều vệ tinh hơn"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:753
+#: plugins/Satellites/src/ui_satellitesDialog.h:755
 msgid "Remove the selected satellites"
 msgstr "Xóa vệ tinh được chọn"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:757
+#: plugins/Satellites/src/ui_satellitesDialog.h:759
 msgid "Save changes"
 msgstr "Lưu thay đổi"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:761
+#: plugins/Satellites/src/ui_satellitesDialog.h:763
 msgid "Catalog number:"
 msgstr "Số danh mục"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:763
+#: plugins/Satellites/src/ui_satellitesDialog.h:765
 msgid "Display the selected satellite(s)"
 msgstr "Hiển thị vệ tinh được chọn"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:765
+#: plugins/Satellites/src/ui_satellitesDialog.h:767
 msgid "Displayed"
 msgstr "Đã hiển thị"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:767
+#: plugins/Satellites/src/ui_satellitesDialog.h:769
 msgid "Display orbit line(s) for the selected satellite(s)"
 msgstr "Hiển thị đường quỹ đạo cho những vệ tinh được chọn"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:769
+#: plugins/Satellites/src/ui_satellitesDialog.h:771
 msgid "Orbit"
 msgstr "Quỹ đạo"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:771
+#: plugins/Satellites/src/ui_satellitesDialog.h:773
 msgid "Do not update (or remove on update) the selected satellite(s)"
 msgstr "Không cập nhật (hoặc hủy mở cập nhật) những vệ tinh được chọn"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:773
+#: plugins/Satellites/src/ui_satellitesDialog.h:775
 msgid "Do not update"
 msgstr "Không cập nhật"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:774
+#: plugins/Satellites/src/ui_satellitesDialog.h:776
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:219
 msgid "Description:"
 msgstr "Mô tả:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:775
+#: plugins/Satellites/src/ui_satellitesDialog.h:777
 msgid "Groups:"
 msgstr "Nhóm:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:776
+#: plugins/Satellites/src/ui_satellitesDialog.h:778
 msgid "TLE set:"
 msgstr "Cài đặt TLE:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:778
+#: plugins/Satellites/src/ui_satellitesDialog.h:780
 msgid ""
 "Satellites in the marked source lists will be automatically added on the "
 "next update if they are not already in the collection."
@@ -8963,26 +8967,26 @@ msgstr ""
 "Các vệ tinh trong danh sách nguồn được đánh dấu sẽ được tự động thêm vào lần "
 "cập nhật kế tiếp nếu chúng chưa có trong bộ sưu tập"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:780
+#: plugins/Satellites/src/ui_satellitesDialog.h:782
 msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
 msgstr ""
 "Nhấp hoặc sửa URL của nguồn được chọn. Thay đổi được lưu bằng việc nhấn Enter"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:783
+#: plugins/Satellites/src/ui_satellitesDialog.h:785
 msgid "Add new source"
 msgstr "Thêm nguồn mới"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:787
+#: plugins/Satellites/src/ui_satellitesDialog.h:789
 msgid "Remove selected source"
 msgstr "Xóa nguồn được chọn"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:790
+#: plugins/Satellites/src/ui_satellitesDialog.h:792
 msgid "Sources"
 msgstr "Các nguồn tài nguyên"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:791
+#: plugins/Satellites/src/ui_satellitesDialog.h:793
 msgid "Predict Iridium flares"
 msgstr "Dự đoán pháo sáng Iridium"
 

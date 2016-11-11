@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-08 02:44+0700\n"
+"POT-Creation-Date: 2016-11-10 23:38+0700\n"
 "PO-Revision-Date: 2016-11-06 23:55+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-08 04:42+0000\n"
-"X-Generator: Launchpad (build 18246)\n"
+"X-Launchpad-Export-Date: 2016-11-11 05:27+0000\n"
+"X-Generator: Launchpad (build 18255)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:191
@@ -49,7 +49,7 @@ msgstr "Sternbild"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:433
 #: src/core/modules/GridLinesMgr.cpp:1214 src/core/modules/LandscapeMgr.cpp:414
-#: src/core/modules/NebulaMgr.cpp:364 src/core/modules/NebulaMgr.cpp:365
+#: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:203 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/StelApp.cpp:518
 #: src/core/StelCore.cpp:229 src/core/StelSkyLayerMgr.cpp:88
@@ -343,7 +343,7 @@ msgid "Illumination"
 msgstr "Beleuchtung"
 
 #: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:2046
-#: plugins/Satellites/src/ui_satellitesDialog.h:718
+#: plugins/Satellites/src/ui_satellitesDialog.h:720
 msgid "Labels"
 msgstr "Beschriftungen"
 
@@ -849,11 +849,11 @@ msgstr "Objekt unbekannter Natur"
 msgid "undocumented type"
 msgstr "(undokumentierter Typ)"
 
-#: src/core/modules/NebulaMgr.cpp:364
+#: src/core/modules/NebulaMgr.cpp:365
 msgid "Deep-sky objects"
 msgstr "Deep-Sky-Objekte"
 
-#: src/core/modules/NebulaMgr.cpp:365
+#: src/core/modules/NebulaMgr.cpp:366
 msgid "Toggle DSO type filter"
 msgstr "Deepsky-Filter umschalten"
 
@@ -1158,7 +1158,7 @@ msgstr "Nachtmodus"
 msgid "Date and Time"
 msgstr "Datum und Uhrzeit"
 
-#: src/core/StelCore.cpp:228 src/core/StelMovementMgr.cpp:154
+#: src/core/StelCore.cpp:228 src/core/StelMovementMgr.cpp:153
 msgid "Movement and Selection"
 msgstr "Bewegung und Auswahl"
 
@@ -1370,12 +1370,12 @@ msgstr "Horizontal spiegeln"
 msgid "Flip scene vertically"
 msgstr "Vertikal spiegeln"
 
-#: src/core/StelCore.cpp:1934
+#: src/core/StelCore.cpp:1943
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Korrektur ist ausgeschaltet. Nur verwenden, wenn Sie wissen, was Sie tun!"
 
-#: src/core/StelCore.cpp:1937
+#: src/core/StelCore.cpp:1946
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1386,7 +1386,7 @@ msgstr ""
 "seinen Artikel <em>Einstein's Theory of Relativity Confirmed by Ancient "
 "Solar Eclipses</em> (%1) verwendet. Mehr dazu %2hier%3."
 
-#: src/core/StelCore.cpp:1940
+#: src/core/StelCore.cpp:1949
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1395,7 +1395,7 @@ msgstr ""
 "Diese empirische Gleichung wurde von G. M. Clemence im Artikel <em>On the "
 "system of astronomical constants</em> veröffentlicht (%1)."
 
-#: src/core/StelCore.cpp:1943
+#: src/core/StelCore.cpp:1952
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1408,7 +1408,7 @@ msgstr ""
 "in seinen <em>Astronomical Formulae for Calculators</em> verwendet. Sie "
 "wurde auch im PC-Programm SunTracker Pro eingesetzt."
 
-#: src/core/StelCore.cpp:1947
+#: src/core/StelCore.cpp:1956
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1418,7 +1418,7 @@ msgstr ""
 "der <em>Astronomical Ephemeris</em> und im <em>Canon of Solar Eclipses</em> "
 "von Mucke & Meeus (1983)."
 
-#: src/core/StelCore.cpp:1951
+#: src/core/StelCore.cpp:1960
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1429,7 +1429,7 @@ msgstr ""
 "und Planeten in 5- und 10-Tagesintervallen von 601 v. Chr. bis 1649 n. Chr. "
 "Auf denselben Grundlagen beruhen die Syzygientafeln von Goldstine (1973)."
 
-#: src/core/StelCore.cpp:1955
+#: src/core/StelCore.cpp:1964
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1440,7 +1440,7 @@ msgstr ""
 "<em>The accelerations of the earth and moon from early astronomical "
 "observations</em> publiziert (%1)."
 
-#: src/core/StelCore.cpp:1958
+#: src/core/StelCore.cpp:1967
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1449,7 +1449,7 @@ msgstr ""
 "Diese Gleichung wurde von F. R. Stephenson im Artikel <em>Pre-Telescopic "
 "Astronomical Observations</em> publiziert (%1)."
 
-#: src/core/StelCore.cpp:1961
+#: src/core/StelCore.cpp:1970
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1462,7 +1462,7 @@ msgstr ""
 "approximations for the correction delta T E.T.-U.T. in the period 1800-"
 "1975</em> (%1) als Anpassungskurve durch Daten von Brouwer (1952) publiziert."
 
-#: src/core/StelCore.cpp:1964
+#: src/core/StelCore.cpp:1973
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1472,7 +1472,7 @@ msgstr ""
 "to +2800</em> (P. Bretagnon & L. Simon 1986) und im PC Planetariumsprogramm "
 "RedShift übernommen."
 
-#: src/core/StelCore.cpp:1967
+#: src/core/StelCore.cpp:1976
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1483,12 +1483,12 @@ msgstr ""
 "<em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. "
 "1980</em> veröffentlicht (%1)."
 
-#: src/core/StelCore.cpp:1970
+#: src/core/StelCore.cpp:1979
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "Dieser Algorithmus wird im PC-Planetariumsprogramm Guide 7 verwendet."
 
-#: src/core/StelCore.cpp:1973
+#: src/core/StelCore.cpp:1982
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -1498,7 +1498,7 @@ msgstr ""
 "Eclipses: 1986-2035</em> (1987) und in seinem <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989) beschrieben."
 
-#: src/core/StelCore.cpp:1976
+#: src/core/StelCore.cpp:1985
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -1507,7 +1507,7 @@ msgstr ""
 "Die Formel  wurde von K.M. Borkowski (%1) aus einer Analyse von 31 "
 "Sonnenfinsternisberichten aus der Zeit 2137 v. Chr. und 1715 n.Chr. erstellt."
 
-#: src/core/StelCore.cpp:1979
+#: src/core/StelCore.cpp:1988
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1520,7 +1520,7 @@ msgstr ""
 "1988</em> (%1) als Anpassungskurve durch Werte von Stephenson & Morrison "
 "(1984) veröffentlicht."
 
-#: src/core/StelCore.cpp:1982
+#: src/core/StelCore.cpp:1991
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -1530,7 +1530,7 @@ msgstr ""
 "Version der Mondbahntheorie ELP 2000-85 in ihren <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991) verwendet."
 
-#: src/core/StelCore.cpp:1985
+#: src/core/StelCore.cpp:1994
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1541,7 +1541,7 @@ msgstr ""
 "Artikel <em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD "
 "1990</em> veröffentlicht (%1)."
 
-#: src/core/StelCore.cpp:1988
+#: src/core/StelCore.cpp:1997
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1550,7 +1550,7 @@ msgstr ""
 "F. R. Stephenson veröffentlichte diese Formel in seinem Buch <em>Historical "
 "Eclipses and Earth's Rotation</em> (%1)."
 
-#: src/core/StelCore.cpp:1991
+#: src/core/StelCore.cpp:2000
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1561,7 +1561,7 @@ msgstr ""
 "verwendet eine Variante von Chapront, Chapront-Touze & Francou (1997) für "
 "Daten außerhalb 1620..2000."
 
-#: src/core/StelCore.cpp:1994
+#: src/core/StelCore.cpp:2003
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1571,7 +1571,7 @@ msgstr ""
 "verwenden diese Formel für historische Angaben auf ihrer interaktiven "
 "Website %1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:1997
+#: src/core/StelCore.cpp:2006
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1581,7 +1581,7 @@ msgstr ""
 "Artikel <em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1) "
 "veröffentlicht."
 
-#: src/core/StelCore.cpp:2000
+#: src/core/StelCore.cpp:2009
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1591,7 +1591,7 @@ msgstr ""
 "Personal Computer</em> (2000) enthält einfache Polynome dritten Grades für "
 "die nahe Vergangenheit."
 
-#: src/core/StelCore.cpp:2003
+#: src/core/StelCore.cpp:2012
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1603,7 +1603,7 @@ msgstr ""
 "<em>Calendrical Tabulations</em> (2002). Sie basiert auf Werten aus Jean "
 "Meeus' <em>Astronomical Algorithms</em> (1991)."
 
-#: src/core/StelCore.cpp:2006
+#: src/core/StelCore.cpp:2015
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1614,7 +1614,7 @@ msgstr ""
 "Artikel <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> veröffentlicht (%2), mit einem Zusatz in (%3)."
 
-#: src/core/StelCore.cpp:2009
+#: src/core/StelCore.cpp:2018
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1628,7 +1628,7 @@ msgstr ""
 "Parabelfunktion. Sie basiert auf einer möglichen Periodizität wie von "
 "Stephenson beschrieben (%2). Näheres dazu %3hier%4."
 
-#: src/core/StelCore.cpp:2012 src/core/StelCore.cpp:2015
+#: src/core/StelCore.cpp:2021 src/core/StelCore.cpp:2024
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1643,15 +1643,15 @@ msgstr ""
 "Millennium Canon of Solar Eclipses: -1999 to +3000</em> (2006) verwendet, "
 "ebenso auch im Sonnen- Mond- und Planeten-Ephemeridenprogramm SOLEX."
 
-#: src/core/StelCore.cpp:2012
+#: src/core/StelCore.cpp:2021
 msgid "Used by default."
 msgstr "Als Vorgabe verwendet."
 
-#: src/core/StelCore.cpp:2015
+#: src/core/StelCore.cpp:2024
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "(EXPERIMENTELL, OHNE LUNARE AKZELERATION)"
 
-#: src/core/StelCore.cpp:2018
+#: src/core/StelCore.cpp:2027
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1662,7 +1662,7 @@ msgstr ""
 "wurde im Artikel <em>Ancient eclipses and dating the fall of Babylon</em> "
 "publiziert (%1)."
 
-#: src/core/StelCore.cpp:2021
+#: src/core/StelCore.cpp:2030
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1674,7 +1674,7 @@ msgstr ""
 "Approximation of DeltaT</em> (%1) veröffentlicht und 2013 begutachtet von "
 "Sana Islam."
 
-#: src/core/StelCore.cpp:2024
+#: src/core/StelCore.cpp:2033
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1685,7 +1685,7 @@ msgstr ""
 "und Faheem Zaidi wurde veröffentlicht in <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2027
+#: src/core/StelCore.cpp:2036
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1694,15 +1694,15 @@ msgstr ""
 "Platz für Ihre frei programmierbare quadratische Formel für %1T mit "
 "benutzerdefinerten Koeffizienten!"
 
-#: src/core/StelCore.cpp:2030 src/core/SimbadSearcher.cpp:156
+#: src/core/StelCore.cpp:2039 src/core/SimbadSearcher.cpp:156
 msgid "Error"
 msgstr "Fehler"
 
-#: src/core/StelCore.cpp:2080
+#: src/core/StelCore.cpp:2089
 msgid "with meaningless values outside this range"
 msgstr "mit sinnlosen Werten außerhalb dieses Bereichs"
 
-#: src/core/StelCore.cpp:2106
+#: src/core/StelCore.cpp:2115
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -1710,24 +1710,24 @@ msgstr ""
 "mit einem mittleren Fehler unter einer Sekunde, max. Fehler 1.9s, und "
 "sinnlosen Werten außerhalb des Bereichs"
 
-#: src/core/StelCore.cpp:2128 src/core/StelCore.cpp:2133
-#: src/core/StelCore.cpp:2161 src/core/StelCore.cpp:2166
-#: src/core/StelCore.cpp:2171
+#: src/core/StelCore.cpp:2137 src/core/StelCore.cpp:2142
+#: src/core/StelCore.cpp:2170 src/core/StelCore.cpp:2175
+#: src/core/StelCore.cpp:2180
 msgid "with zero values outside this range"
 msgstr "mit Nullwerten außerhalb dieses Bereichs"
 
-#: src/core/StelCore.cpp:2138
+#: src/core/StelCore.cpp:2147
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "mit typischer Genauigkeit von 1 Sekunde und Nullwerten außerhalb dieses "
 "Bereichs"
 
-#: src/core/StelCore.cpp:2181
+#: src/core/StelCore.cpp:2190
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Gültigkeitsbereich: Jahre %1 bis %2, %3."
 
-#: src/core/StelCore.cpp:2183
+#: src/core/StelCore.cpp:2192
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Gültigkeitsbereich: Jahre %1 bis %2."
@@ -1932,56 +1932,56 @@ msgstr "Scheinbare Sternzeit: %1"
 msgid "Deep-sky objects background images"
 msgstr "Hintergrundbilder für Deep-Sky-Objekte"
 
-#: src/core/StelMovementMgr.cpp:155 src/gui/StelGui.cpp:201
+#: src/core/StelMovementMgr.cpp:154 src/gui/StelGui.cpp:201
 #: src/StelMainView.cpp:574
 msgid "Miscellaneous"
 msgstr "Verschiedenes"
 
-#: src/core/StelMovementMgr.cpp:155
+#: src/core/StelMovementMgr.cpp:154
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Zwischen äquatorialer und azimutaler Montierung umschalten"
 
-#: src/core/StelMovementMgr.cpp:156
+#: src/core/StelMovementMgr.cpp:155
 msgid "Center on selected object"
 msgstr "Auf ausgewähltes Objekt zentrieren"
 
-#: src/core/StelMovementMgr.cpp:157
+#: src/core/StelMovementMgr.cpp:156
 msgid "Zoom in on selected object"
 msgstr "Ausgewähltes Objekt vergrößern"
 
-#: src/core/StelMovementMgr.cpp:158
+#: src/core/StelMovementMgr.cpp:157
 msgid "Zoom out"
 msgstr "Verkleinern"
 
-#: src/core/StelMovementMgr.cpp:159
+#: src/core/StelMovementMgr.cpp:158
 msgid "Track object"
 msgstr "Objekt verfolgen"
 
-#: src/core/StelMovementMgr.cpp:161
+#: src/core/StelMovementMgr.cpp:160
 msgid "Look towards East"
 msgstr "Blick nach Osten"
 
-#: src/core/StelMovementMgr.cpp:162
+#: src/core/StelMovementMgr.cpp:161
 msgid "Look towards West"
 msgstr "Blick nach Westen"
 
-#: src/core/StelMovementMgr.cpp:163
+#: src/core/StelMovementMgr.cpp:162
 msgid "Look towards North"
 msgstr "Blick nach Norden"
 
-#: src/core/StelMovementMgr.cpp:164
+#: src/core/StelMovementMgr.cpp:163
 msgid "Look towards South"
 msgstr "Blick nach Süden"
 
-#: src/core/StelMovementMgr.cpp:165
+#: src/core/StelMovementMgr.cpp:164
 msgid "Look towards Zenith"
 msgstr "Blick zum Zenit"
 
-#: src/core/StelMovementMgr.cpp:167
+#: src/core/StelMovementMgr.cpp:166
 msgid "Look towards North Celestial pole"
 msgstr "Blicke zum Himmelsnordpol"
 
-#: src/core/StelMovementMgr.cpp:168
+#: src/core/StelMovementMgr.cpp:167
 msgid "Look towards South Celestial pole"
 msgstr "Blicke zum Himmelssüdpol"
 
@@ -3126,7 +3126,7 @@ msgstr "Objekt 2"
 msgid "Save calculated phenomena as..."
 msgstr "Speichere berechnete Phänomene als..."
 
-#: src/gui/AstroCalcDialog.cpp:798 src/gui/AstroCalcDialog.cpp:961
+#: src/gui/AstroCalcDialog.cpp:798 src/gui/AstroCalcDialog.cpp:964
 msgid "Conjunction"
 msgstr "Konjunktion"
 
@@ -3134,7 +3134,11 @@ msgstr "Konjunktion"
 msgid "Opposition"
 msgstr "Opposition"
 
-#: src/gui/AstroCalcDialog.cpp:808 src/gui/AstroCalcDialog.cpp:966
+#: src/gui/AstroCalcDialog.cpp:809
+msgid "Transit"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:811 src/gui/AstroCalcDialog.cpp:969
 msgid "Occultation"
 msgstr ""
 
@@ -7533,7 +7537,7 @@ msgid "Use dms format for angles"
 msgstr "Grad, Minuten, Sekunden-Format für Winkel"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
-#: plugins/Satellites/src/ui_satellitesDialog.h:743
+#: plugins/Satellites/src/ui_satellitesDialog.h:745
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/Novae/src/ui_novaeDialog.h:241
 #: plugins/Quasars/src/ui_quasarsDialog.h:273
@@ -7548,7 +7552,7 @@ msgstr "Standardwerte wiederherstellen"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
 #: plugins/Oculars/src/ui_ocularDialog.h:1192
-#: plugins/Satellites/src/ui_satellitesDialog.h:793
+#: plugins/Satellites/src/ui_satellitesDialog.h:795
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
@@ -8162,7 +8166,7 @@ msgstr "Hinzufügen"
 #: plugins/Oculars/src/ui_ocularDialog.h:1161
 #: plugins/Oculars/src/ui_ocularDialog.h:1168
 #: plugins/Oculars/src/ui_ocularDialog.h:1185
-#: plugins/Satellites/src/ui_satellitesDialog.h:760
+#: plugins/Satellites/src/ui_satellitesDialog.h:762
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:246
 msgid "Name:"
@@ -8267,7 +8271,7 @@ msgstr "Äquatoriale Montierung"
 
 #: plugins/Satellites/src/Satellites.cpp:68
 #: plugins/Satellites/src/Satellites.cpp:142
-#: plugins/Satellites/src/ui_satellitesDialog.h:777
+#: plugins/Satellites/src/ui_satellitesDialog.h:779
 msgid "Satellites"
 msgstr "Satelliten"
 
@@ -8517,7 +8521,7 @@ msgid "Stellarium Satellites Plugin"
 msgstr "Stellarium Satelliten-Erweiterung"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:412
-#: plugins/Satellites/src/ui_satellitesDialog.h:792
+#: plugins/Satellites/src/ui_satellitesDialog.h:794
 msgid "Iridium flares"
 msgstr "Iridium-Blitze"
 
@@ -8736,7 +8740,7 @@ msgid "[new source]"
 msgstr "[neue Quelle]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:626
-#: plugins/Satellites/src/ui_satellitesDialog.h:715
+#: plugins/Satellites/src/ui_satellitesDialog.h:717
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:194
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
 #: plugins/Novae/src/gui/NovaeDialog.cpp:191
@@ -8834,20 +8838,20 @@ msgstr ""
 msgid "Catalog Number: %1"
 msgstr "Katalognummer: %1"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:708
-#: plugins/Satellites/src/ui_satellitesDialog.h:709
+#: plugins/Satellites/src/ui_satellitesDialog.h:710
+#: plugins/Satellites/src/ui_satellitesDialog.h:711
 msgid "Satellites Configuration"
 msgstr "Satelliten-Konfiguration"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:711
+#: plugins/Satellites/src/ui_satellitesDialog.h:713
 msgid "Updates"
 msgstr "Aktualisierungen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:712
+#: plugins/Satellites/src/ui_satellitesDialog.h:714
 msgid "Update satellite data from Internet sources"
 msgstr "Bahndaten aus dem Internet aktualisieren"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:713
+#: plugins/Satellites/src/ui_satellitesDialog.h:715
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 #: plugins/Novae/src/ui_novaeDialog.h:237
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
@@ -8856,63 +8860,63 @@ msgstr "Bahndaten aus dem Internet aktualisieren"
 msgid "Last update:"
 msgstr "Zuletzt aktualisiert:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:714
+#: plugins/Satellites/src/ui_satellitesDialog.h:716
 msgid "On update, add all new satellites from the selected source(s)"
 msgstr ""
 "Beim Aktualisieren alle Bahndaten von der gewählten Quelle übernehmen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:716
+#: plugins/Satellites/src/ui_satellitesDialog.h:718
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
 msgstr "Beim Aktualisieren Satelliten ohne aktualisierten Eintrag entfernen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:717
+#: plugins/Satellites/src/ui_satellitesDialog.h:719
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:468
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:454
 msgid "Update frequency (hours):"
 msgstr "Aktualisierungs-Rhythmus (Stunden):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:719
+#: plugins/Satellites/src/ui_satellitesDialog.h:721
 msgid "Label font size (pixels):"
 msgstr "Schriftgröße der Beschriftung (Pixel):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:720
+#: plugins/Satellites/src/ui_satellitesDialog.h:722
 msgid "Orbit lines"
 msgstr "Bahnlinien"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:722
-#: plugins/Satellites/src/ui_satellitesDialog.h:726
+#: plugins/Satellites/src/ui_satellitesDialog.h:724
+#: plugins/Satellites/src/ui_satellitesDialog.h:728
 msgid "Number of segments used to draw the line"
 msgstr "Anzahl der Bahnlinien-Segmente"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:724
+#: plugins/Satellites/src/ui_satellitesDialog.h:726
 msgid "Number of  segments:"
 msgstr "Anzahl der Segmente:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:729
-#: plugins/Satellites/src/ui_satellitesDialog.h:733
+#: plugins/Satellites/src/ui_satellitesDialog.h:731
+#: plugins/Satellites/src/ui_satellitesDialog.h:735
 msgid "Duration of a single segment in seconds"
 msgstr "Dauer eines einzelnen Segments in Sekunden"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:731
+#: plugins/Satellites/src/ui_satellitesDialog.h:733
 msgid "Segment length (s):"
 msgstr "Segment-Länge (s):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:736
-#: plugins/Satellites/src/ui_satellitesDialog.h:739
+#: plugins/Satellites/src/ui_satellitesDialog.h:738
+#: plugins/Satellites/src/ui_satellitesDialog.h:741
 msgid "Number of segments used to draw each end of the line"
 msgstr "Anzahl der Segmente am Ende jeder Bahnllinie"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:741
+#: plugins/Satellites/src/ui_satellitesDialog.h:743
 msgid "Fade length:"
 msgstr "Dauer des Überblendens:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:742
+#: plugins/Satellites/src/ui_satellitesDialog.h:744
 msgid "Realistic mode for the artificial satellites"
 msgstr "Realistische Darstellung für künstliche Satelliten"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:744
+#: plugins/Satellites/src/ui_satellitesDialog.h:746
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Novae/src/ui_novaeDialog.h:242
 #: plugins/Quasars/src/ui_quasarsDialog.h:274
@@ -8923,7 +8927,7 @@ msgstr "Realistische Darstellung für künstliche Satelliten"
 msgid "Save settings as default"
 msgstr "Einstellungen als Standard speichern"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:745
+#: plugins/Satellites/src/ui_satellitesDialog.h:747
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Novae/src/ui_novaeDialog.h:243
 #: plugins/Quasars/src/ui_quasarsDialog.h:275
@@ -8933,66 +8937,66 @@ msgstr "Einstellungen als Standard speichern"
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:747
+#: plugins/Satellites/src/ui_satellitesDialog.h:749
 msgid "Double-click a satellite to start tracking it."
 msgstr "Doppelklick auf den Satelliten um ihn zu verfolgen."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:750
+#: plugins/Satellites/src/ui_satellitesDialog.h:752
 msgid "Add more satellites"
 msgstr "Mehr Satelliten hinzufügen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:753
+#: plugins/Satellites/src/ui_satellitesDialog.h:755
 msgid "Remove the selected satellites"
 msgstr "Ausgewählte Satelliten entfernen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:757
+#: plugins/Satellites/src/ui_satellitesDialog.h:759
 msgid "Save changes"
 msgstr "Änderungen speichern"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:761
+#: plugins/Satellites/src/ui_satellitesDialog.h:763
 msgid "Catalog number:"
 msgstr "Katalognummer:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:763
+#: plugins/Satellites/src/ui_satellitesDialog.h:765
 msgid "Display the selected satellite(s)"
 msgstr "Gewählte(n) Satelliten anzeigen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:765
+#: plugins/Satellites/src/ui_satellitesDialog.h:767
 msgid "Displayed"
 msgstr "Angezeigt"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:767
+#: plugins/Satellites/src/ui_satellitesDialog.h:769
 msgid "Display orbit line(s) for the selected satellite(s)"
 msgstr "Bahnlinie(n) des/der ausgewählten Satelliten anzeigen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:769
+#: plugins/Satellites/src/ui_satellitesDialog.h:771
 msgid "Orbit"
 msgstr "Umlaufbahn"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:771
+#: plugins/Satellites/src/ui_satellitesDialog.h:773
 msgid "Do not update (or remove on update) the selected satellite(s)"
 msgstr ""
 "Gewählte(n) Satelliten nicht aktualisieren (oder beim Aktualisieren "
 "entfernen)"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:773
+#: plugins/Satellites/src/ui_satellitesDialog.h:775
 msgid "Do not update"
 msgstr "Nicht aktualisieren"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:774
+#: plugins/Satellites/src/ui_satellitesDialog.h:776
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:219
 msgid "Description:"
 msgstr "Beschreibung:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:775
+#: plugins/Satellites/src/ui_satellitesDialog.h:777
 msgid "Groups:"
 msgstr "Gruppen:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:776
+#: plugins/Satellites/src/ui_satellitesDialog.h:778
 msgid "TLE set:"
 msgstr "TLE-Eintrag:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:778
+#: plugins/Satellites/src/ui_satellitesDialog.h:780
 msgid ""
 "Satellites in the marked source lists will be automatically added on the "
 "next update if they are not already in the collection."
@@ -9000,7 +9004,7 @@ msgstr ""
 "Satelliten in den markierten Quellen werden gegebenenfalls automatisch bei "
 "der nächsten Aktualisierung hinzugefügt."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:780
+#: plugins/Satellites/src/ui_satellitesDialog.h:782
 msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
@@ -9008,19 +9012,19 @@ msgstr ""
 "URL der gewählten Quelle eintragen/ändern. Änderungen werden mit Druck auf "
 "die Entertaste gespeichert."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:783
+#: plugins/Satellites/src/ui_satellitesDialog.h:785
 msgid "Add new source"
 msgstr "Neue Quelle hinzufügen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:787
+#: plugins/Satellites/src/ui_satellitesDialog.h:789
 msgid "Remove selected source"
 msgstr "Ausgewählte Quelle entfernen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:790
+#: plugins/Satellites/src/ui_satellitesDialog.h:792
 msgid "Sources"
 msgstr "Quellen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:791
+#: plugins/Satellites/src/ui_satellitesDialog.h:793
 msgid "Predict Iridium flares"
 msgstr "Iridium-Blitz vorhersagen"
 
