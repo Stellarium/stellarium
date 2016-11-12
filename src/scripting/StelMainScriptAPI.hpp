@@ -808,8 +808,7 @@ public slots:
 
 	//! Pauses the script for \e t seconds
 	//! @param t the number of seconds to wait
-	//! @note This method is pure JavaScript implementation.
-	void wait(double t) { Q_UNUSED(t) }
+	void wait(double t);
 
 	//! Waits until a specified simulation date/time. This function
 	//! will take into account the rate (and direction) in which simulation
@@ -819,8 +818,7 @@ public slots:
 	//! prevent infinite wait time.
 	//! @param dt the date string to use
 	//! @param spec "local" or "utc"
-	//! @note This method is pure JavaScript implementation.
-	void waitFor(const QString& dt, const QString& spec="utc") { Q_UNUSED(dt); Q_UNUSED(spec) }
+	void waitFor(const QString& dt, const QString& spec="utc");
 
 signals:
 	void requestLoadSkyImage(const QString& id, const QString& filename,

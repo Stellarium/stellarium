@@ -62,6 +62,8 @@
 #include <QSet>
 #include <QStringList>
 #include <QTemporaryFile>
+#include <QTimer>
+#include <QEventLoop>
 
 #include <cmath>
 
@@ -792,6 +794,31 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 	qWarning() << "StelMainScriptAPI::jdFromDateString error: date string" << dt << "not recognised, returning \"now\"";
 	return StelUtils::getJDFromSystem();
 }
+
+void StelMainScriptAPI::wait(double t) {
+	QEventLoop loop;
+	QTimer timer;
+	timer.setInterval(1000*t);
+	connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
+	timer.start();
+	loop.exec();
+}
+
+void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
+{
+	double deltaJD = jdFromDateString(dt, spec) - getJDay();
+	double timeSpeed = getTimeRate();
+	if (timeSpeed == 0.) { qDebug() << "waitFor() called with no time passing - would be infinite. not waiting!"; return;}
+	QEventLoop loop;
+	QTimer timer;
+	int interval=1000*deltaJD*86400/timeSpeed;
+	qDebug() << "timeSpeed is" << timeSpeed << " interval:" << interval;
+	timer.setInterval(interval);
+	connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
+	timer.start();
+	loop.exec();
+}
+
 
 void StelMainScriptAPI::selectObjectByName(const QString& name, bool pointer)
 {
