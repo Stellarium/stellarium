@@ -114,10 +114,11 @@ void AstroCalcDialog::createDialogContent()
 	populateGroupCelestialBodyList();
 
 	double JD = core->getJD() + core->getUTCOffset(core->getJD())/24;
-	ui->dateFromDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(JD));
-	ui->dateToDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(JD + 30.f));
-	ui->phenomenFromDateEdit->setDateTime(StelUtils::jdToQDateTime(JD));
-	ui->phenomenToDateEdit->setDateTime(StelUtils::jdToQDateTime(JD + 365.f));
+	QDateTime currentDT = StelUtils::jdToQDateTime(JD);
+	ui->dateFromDateTimeEdit->setDateTime(currentDT);
+	ui->dateToDateTimeEdit->setDateTime(currentDT.addMonths(1));
+	ui->phenomenFromDateEdit->setDateTime(currentDT);
+	ui->phenomenToDateEdit->setDateTime(currentDT.addYears(1));
 
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	connect(ui->planetaryPositionsTreeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
@@ -442,7 +443,7 @@ void AstroCalcDialog::populateCelestialBodyList()
 	//Restore the selection
 	index = planets->findData(selectedPlanetId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
-		index = planets->findData("Moon", Qt::UserRole, Qt::MatchCaseSensitive);;
+		index = planets->findData("Moon", Qt::UserRole, Qt::MatchCaseSensitive);
 	planets->setCurrentIndex(index);
 	planets->model()->sort(0);
 	planets->blockSignals(false);
@@ -503,7 +504,7 @@ void AstroCalcDialog::populateMajorPlanetList()
 	//Restore the selection
 	index = majorPlanet->findData(selectedPlanetId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
-		index = majorPlanet->findData("Mercury", Qt::UserRole, Qt::MatchCaseSensitive);;
+		index = majorPlanet->findData("Venus", Qt::UserRole, Qt::MatchCaseSensitive);
 	majorPlanet->setCurrentIndex(index);
 	majorPlanet->model()->sort(0);
 	majorPlanet->blockSignals(false);
@@ -710,11 +711,9 @@ void AstroCalcDialog::calculatePhenomena()
 	PlanetP planet = solarSystem->searchByEnglishName(currentPlanet);
 	if (planet)
 	{
-		double currentJD = core->getJD(); // save current JD
-		QDateTime startDT = QDateTime(ui->phenomenFromDateEdit->date());
-		QDateTime stopDT = QDateTime(ui->phenomenToDateEdit->date().addDays(1));
-		double startJD = StelUtils::qDateTimeToJd(startDT);
-		double stopJD = StelUtils::qDateTimeToJd(stopDT);
+		double currentJD = core->getJD(); // save current JD		
+		double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenFromDateEdit->date()));
+		double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenToDateEdit->date().addDays(1)));
 		startJD = startJD - core->getUTCOffset(startJD)/24;
 		stopJD = stopJD - core->getUTCOffset(stopJD)/24;
 
