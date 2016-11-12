@@ -798,15 +798,18 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		QString phenomenType = q_("Conjunction");
 		double separation = it.value();
 		bool occultation = false;
+		double s1 = object1->getSpheroidAngularSize(core);
+		double s2 = object2->getSpheroidAngularSize(core);
 		if (opposition)
 		{
 			phenomenType = q_("Opposition");
 			separation += M_PI;
 		}
-		else if (separation<(object2->getSpheroidAngularSize(core)*M_PI/180.) || separation<(object1->getSpheroidAngularSize(core)*M_PI/180.))
+		else if (separation<(s2*M_PI/180.) || separation<(s1*M_PI/180.))
 		{
-			if ((object1->getJ2000EquatorialPos(core).length()<object2->getJ2000EquatorialPos(core).length() && object1->getSpheroidAngularSize(core)<=object2->getSpheroidAngularSize(core)) ||
-			    (object1->getJ2000EquatorialPos(core).length()>object2->getJ2000EquatorialPos(core).length() && object1->getSpheroidAngularSize(core)>object2->getSpheroidAngularSize(core)))
+			double d1 = object1->getJ2000EquatorialPos(core).length();
+			double d2 = object2->getJ2000EquatorialPos(core).length();
+			if ((d1<d2 && s1<=s2) || (d1>d2 && s1>s2))
 				phenomenType = q_("Transit");
 			else
 				phenomenType = q_("Occultation");
