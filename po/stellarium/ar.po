@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-10 23:38+0700\n"
-"PO-Revision-Date: 2016-11-09 00:45+0000\n"
+"PO-Revision-Date: 2016-11-12 03:27+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-11 05:21+0000\n"
+"X-Launchpad-Export-Date: 2016-11-12 05:24+0000\n"
 "X-Generator: Launchpad (build 18255)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -920,42 +920,42 @@ msgstr "فترة الدوران مضطربة"
 #: src/core/modules/Planet.cpp:355
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
-msgstr ""
+msgstr "‎هلال متزايد‎"
 
 #: src/core/modules/Planet.cpp:357
 msgctxt "Moon phase"
 msgid "First Quarter"
-msgstr ""
+msgstr "‎ربع أول‎"
 
 #: src/core/modules/Planet.cpp:359
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
-msgstr ""
+msgstr "‎أحدب متزايد‎"
 
 #: src/core/modules/Planet.cpp:361
 msgctxt "Moon phase"
 msgid "Full Moon"
-msgstr ""
+msgstr "‎بدر تام‎"
 
 #: src/core/modules/Planet.cpp:363
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
-msgstr ""
+msgstr "‎أحدب متناقص‎"
 
 #: src/core/modules/Planet.cpp:365
 msgctxt "Moon phase"
 msgid "Third Quarter"
-msgstr ""
+msgstr "‎ربع  ثالث‎"
 
 #: src/core/modules/Planet.cpp:367
 msgctxt "Moon phase"
 msgid "Waning Crescent"
-msgstr ""
+msgstr "‎هلال متناقص‎"
 
 #: src/core/modules/Planet.cpp:369
 msgctxt "Moon phase"
 msgid "New Moon"
-msgstr ""
+msgstr "‎محاق‎"
 
 #: src/core/modules/Planet.cpp:374 src/core/modules/Planet.cpp:379
 #, qt-format
@@ -1123,16 +1123,16 @@ msgstr "‎وقت الشروق:‎%1%"
 
 #: src/core/modules/StarWrapper.cpp:280
 msgid "Year of last satisfactory observation"
-msgstr "سنة آخر رصد مقبول"
+msgstr "‎سنة آخر رصد مقبول‎"
 
 #: src/core/modules/StarWrapper.cpp:281
 msgid "Position angle"
-msgstr "زاوية الموقع"
+msgstr "‎زاوية الموقع‎"
 
 #: src/core/modules/StarWrapper.cpp:285 src/core/modules/StarWrapper.cpp:287
 #: src/gui/AstroCalcDialog.cpp:552
 msgid "Separation"
-msgstr "البعد الزاوي"
+msgstr "‎البعد الزاوي‎"
 
 #: src/core/modules/MilkyWay.cpp:75
 msgid "Milky Way"
@@ -1888,7 +1888,7 @@ msgstr "‎العرض/الطول المجرّي‎: %1/%2"
 #: src/core/StelObject.cpp:263 src/core/StelObject.cpp:265
 #, qt-format
 msgid "Supergalactic longitude/latitude: %1/%2"
-msgstr "‎خطالعرض/خط الطول لإحداثيات المجموعة المجرية‎:%1%2"
+msgstr "العرض/الطول لإحداثيات المجموعة المجرية‎: %1/%2"
 
 #: src/core/StelObject.cpp:274
 #, qt-format
@@ -3104,7 +3104,7 @@ msgstr "تقابل"
 
 #: src/gui/AstroCalcDialog.cpp:809
 msgid "Transit"
-msgstr ""
+msgstr "عبور"
 
 #: src/gui/AstroCalcDialog.cpp:811 src/gui/AstroCalcDialog.cpp:969
 msgid "Occultation"
@@ -3377,7 +3377,7 @@ msgstr "الأجرام الإشعاعية"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:133 src/ui_dsoColorsDialog.h:576
 msgid "BL Lac objects"
-msgstr "أجرام  BL Lac ب ل الورل"
+msgstr "أجرام ب ل الورل BL Lac Objects"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:135 src/ui_dsoColorsDialog.h:535
@@ -4145,7 +4145,7 @@ msgstr "الألوان الأساسية"
 
 #: src/translations.h:380
 msgid "&Pick Screen Color"
-msgstr ""
+msgstr "&اختر لون الشاشة"
 
 #: src/translations.h:381
 msgid "&Custom colors"
