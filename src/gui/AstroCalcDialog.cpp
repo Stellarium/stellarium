@@ -805,7 +805,8 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		}
 		else if (separation<(object2->getSpheroidAngularSize(core)*M_PI/180.) || separation<(object1->getSpheroidAngularSize(core)*M_PI/180.))
 		{
-			if (object1->getJ2000EquatorialPos(core).length()>object2->getJ2000EquatorialPos(core).length())
+			if ((object1->getJ2000EquatorialPos(core).length()<object2->getJ2000EquatorialPos(core).length() && object1->getSpheroidAngularSize(core)<=object2->getSpheroidAngularSize(core)) ||
+			    (object1->getJ2000EquatorialPos(core).length()>object2->getJ2000EquatorialPos(core).length() && object1->getSpheroidAngularSize(core)>object2->getSpheroidAngularSize(core)))
 				phenomenType = q_("Transit");
 			else
 				phenomenType = q_("Occultation");
