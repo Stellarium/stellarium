@@ -363,7 +363,13 @@ void StelMovementMgr::handleMouseWheel(QWheelEvent* event)
 	const float numSteps = event->angleDelta().y() / 120.f;
 	if (dragTimeMode)
 	{
-		if (event->modifiers() & Qt::ShiftModifier)
+		//qDebug() << "Modifiers: " << event->modifiers();
+		if (event->modifiers() & Qt::AltModifier) // DOES NOT WORK ON WINDOWS!
+		{
+			// move time by days
+			core->setJD(core->getJD()+numSteps);
+		}
+		else if (event->modifiers() & Qt::ShiftModifier)
 		{
 			// move time by hours
 			core->setJD(core->getJD()+numSteps/(24.f));
@@ -791,18 +797,14 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 //			}
 		}
 		move.coef+=move.speed*deltaTime*1000;
+		setViewUpVectorJ2000(move.aimUp);
 		if (move.coef>=1.)
 		{
-			setViewUpVectorJ2000(move.aimUp);
 			//qDebug() << "AutoMove finished. Setting Up vector (in mount frame) to " << upVectorMountFrame.v[0] << "/" << upVectorMountFrame.v[1] << "/" << upVectorMountFrame.v[2];
 			flagAutoMove=false;
 			move.coef=1.;
 		}
-		else
-		{	// 2016-03 Maybe this is the culprit?
-			//setViewUpVectorJ2000(move.startUp*(1.-move.coef) + move.aimUp*move.coef);
-			setViewUpVectorJ2000(move.aimUp);
-		}
+
 		// Use a smooth function
 		float smooth = 4.f;
 		double c;
@@ -1092,14 +1094,13 @@ void StelMovementMgr::moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float m
 
 	moveDuration /= movementsSpeedFactor;
 
-	// TODO: Specify start and aim vectors in AltAz system! Then the auto functions should be able to work it out properly with only minor edits.
+	// Specify start and aim vectors in AltAz system! Then the auto functions can work it out properly.
 	zoomingMode = zooming;
 	move.aim=aim;
 	move.aim.normalize();
 	move.aim*=2.;
 	move.aimUp=aimUp; // the new up vector. We cannot simply keep vertical axis, there may be the intention to look into the zenith or so.
 	move.aimUp.normalize();
-	// TODO: Replace by fixed current orientation!
 	move.start=core->j2000ToAltAz(viewDirectionJ2000, StelCore::RefractionOff);
 	move.start.normalize();
 	move.startUp.set(0., 0., 1.);
@@ -1121,7 +1122,7 @@ Vec3d StelMovementMgr::j2000ToMountFrame(const Vec3d& v) const
 	switch (mountMode)
 	{
 		case MountAltAzimuthal:
-			return core->j2000ToAltAz(v, StelCore::RefractionOff);
+			return core->j2000ToAltAz(v, StelCore::RefractionOff); // TODO: Decide if RefractionAuto?
 		case MountEquinoxEquatorial:
 			return core->j2000ToEquinoxEqu(v);
 		case MountGalactic:
@@ -1138,7 +1139,7 @@ Vec3d StelMovementMgr::mountFrameToJ2000(const Vec3d& v) const
 	switch (mountMode)
 	{
 		case MountAltAzimuthal:
-			return core->altAzToJ2000(v, StelCore::RefractionOff);
+			return core->altAzToJ2000(v, StelCore::RefractionOff); // TODO: Decide if RefractionAuto?
 		case MountEquinoxEquatorial:
 			return core->equinoxEquToJ2000(v);
 		case MountGalactic:
@@ -1208,7 +1209,7 @@ void StelMovementMgr::panView(const double deltaAz, const double deltaAlt)
 }
 
 
-//! Make the first screen position correspond to the second (useful for mouse dragging)
+// Make the first screen position correspond to the second (useful for mouse dragging)
 void StelMovementMgr::dragView(int x1, int y1, int x2, int y2)
 {
 	if (dragTimeMode)
@@ -1375,8 +1376,6 @@ void StelMovementMgr::moveViewport(float offsetX, float offsetY, const float dur
 	if (duration<=0.0f)
 	{
 		//avoid using the timeline to minimize overhead
-		//core->setViewportHorizontalOffset(targetViewportOffset[0]);
-		//core->setViewportVerticalOffset(targetViewportOffset[1]);
 		core->setViewportOffset(offsetX, offsetY);
 		return;
 	}
@@ -1398,7 +1397,5 @@ void StelMovementMgr::handleViewportOffsetMovement(qreal value)
 	float offsetX=oldViewportOffset.v[0] + (targetViewportOffset.v[0]-oldViewportOffset.v[0])*value;
 	float offsetY=oldViewportOffset.v[1] + (targetViewportOffset.v[1]-oldViewportOffset.v[1])*value;
 	//qDebug() << "handleViewportOffsetMovement(" << value << "): Setting viewport offset to " << offsetX << "/" << offsetY;
-	//core->setViewportHorizontalOffset(offsetX);
-	//core->setViewportVerticalOffset(offsetY);
 	core->setViewportOffset(offsetX, offsetY);
 }
