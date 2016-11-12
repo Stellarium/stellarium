@@ -711,8 +711,10 @@ void AstroCalcDialog::calculatePhenomena()
 	if (planet)
 	{
 		double currentJD = core->getJD(); // save current JD
-		double startJD = StelUtils::qDateTimeToJd(ui->phenomenFromDateEdit->dateTime());
-		double stopJD = StelUtils::qDateTimeToJd(ui->phenomenToDateEdit->dateTime());
+		QDateTime startDT = QDateTime(ui->phenomenFromDateEdit->date());
+		QDateTime stopDT = QDateTime(ui->phenomenToDateEdit->date().addDays(1));
+		double startJD = StelUtils::qDateTimeToJd(startDT);
+		double stopJD = StelUtils::qDateTimeToJd(stopDT);
 		startJD = startJD - core->getUTCOffset(startJD)/24;
 		stopJD = stopJD - core->getUTCOffset(stopJD)/24;
 
@@ -813,6 +815,11 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 				phenomenType = q_("Transit");
 			else
 				phenomenType = q_("Occultation");
+
+			// Added a special case - eclipse
+			if (qAbs(s1-s2)<=0.05 && (object1->getEnglishName()=="Sun" || object2->getEnglishName()=="Sun")) // 5% error of difference of sizes
+				phenomenType = q_("Eclipse");
+
 			occultation = true;
 		}
 
@@ -836,7 +843,7 @@ QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP &object1, Plan
 	QMap<double, double> separations;
 	QPair<double, double> extremum;
 
-	step0 = (stopJD - startJD)/4.0;
+	step0 = (stopJD - startJD)/10.0;
 	if (step0>24.8*365.25)
 		step0 = 24.8*365.25;
 
