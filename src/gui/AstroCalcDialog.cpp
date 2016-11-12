@@ -843,7 +843,7 @@ QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP &object1, Plan
 	QMap<double, double> separations;
 	QPair<double, double> extremum;
 
-	step0 = (stopJD - startJD)/10.0;
+	step0 = (stopJD - startJD)/12.0;
 	if (step0>24.8*365.25)
 		step0 = 24.8*365.25;
 
@@ -1004,7 +1004,7 @@ QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP &object1, Nebu
 	QMap<double, double> separations;
 	QPair<double, double> extremum;
 
-	step0 = (stopJD - startJD)/4.0;
+	step0 = (stopJD - startJD)/8.0;
 	if (step0>24.8*365.25)
 		step0 = 24.8*365.25;
 
