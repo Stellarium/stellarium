@@ -153,6 +153,14 @@ QString HelpDialog::getHelpText(void)
 	            "</b></td></tr>\n";
 	htmlText += "<tr><td><b>" + q_("CTRL + Up/Down").toHtmlEscaped() +
 	            "</b></td></tr>\n";
+	// time dragging/scrolling
+	htmlText += "<tr><td>" + q_("Time dragging").toHtmlEscaped() + "</td><td><b>" +
+			q_("CTRL+Space & left mouse drag").toHtmlEscaped() + "</b></td></tr>";
+	htmlText += "<tr><td>" + q_("Time scrolling: minutes").toHtmlEscaped() + "</td><td><b>" +
+			q_("CTRL+Space & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+	htmlText += "<tr><td>" + q_("Time scrolling: hours").toHtmlEscaped() + "</td><td><b>" +
+			q_("CTRL+SHIFT+Space & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+
 	// select object
 	htmlText += "<tr><td>" + q_("Select object").toHtmlEscaped() + "</td>";
 	htmlText += "<td><b>" + q_("Left click").toHtmlEscaped() + "</b></td></tr>\n";
