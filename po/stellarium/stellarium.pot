@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-10 23:38+0700\n"
+"POT-Creation-Date: 2016-11-12 15:42+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2842,7 +2842,7 @@ msgstr ""
 msgid "Julian Day"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:383 src/gui/AstroCalcDialog.cpp:757
+#: src/gui/AstroCalcDialog.cpp:383 src/gui/AstroCalcDialog.cpp:759
 msgid "CSV (Comma delimited)"
 msgstr ""
 
@@ -2961,24 +2961,28 @@ msgstr ""
 msgid "Object 2"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:759
+#: src/gui/AstroCalcDialog.cpp:761
 msgid "Save calculated phenomena as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:798 src/gui/AstroCalcDialog.cpp:964
+#: src/gui/AstroCalcDialog.cpp:800 src/gui/AstroCalcDialog.cpp:975
 msgid "Conjunction"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:803
+#: src/gui/AstroCalcDialog.cpp:807
 msgid "Opposition"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:809
+#: src/gui/AstroCalcDialog.cpp:815
 msgid "Transit"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:811 src/gui/AstroCalcDialog.cpp:969
+#: src/gui/AstroCalcDialog.cpp:817 src/gui/AstroCalcDialog.cpp:980
 msgid "Occultation"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:821
+msgid "Eclipse"
 msgstr ""
 
 #: src/gui/BookmarksDialog.cpp:100 src/ui_searchDialogGui.h:702
