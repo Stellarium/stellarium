@@ -331,7 +331,7 @@ private:
 	void updateVisionVector(double deltaTime);
 	void updateAutoZoom(double deltaTime); // Update autoZoom if activated
 
-	//! Make the first screen position correspond to the second (useful for mouse dragging)
+	//! Make the first screen position correspond to the second (useful for mouse dragging and also time dragging.)
 	void dragView(int x1, int y1, int x2, int y2);
 
 	StelCore* core;          // The core on which the movement are applied

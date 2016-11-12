@@ -853,7 +853,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 		if (posfunc==NULL)
 		{
-			qWarning() << "ERROR : can't find posfunc " << funcName << " for " << englishName;
+			qCritical() << "ERROR : can't find posfunc " << funcName << " for " << englishName;
 			exit(-1);
 		}
 
