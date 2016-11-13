@@ -165,17 +165,12 @@ QString HelpDialog::getHelpText(void)
 	htmlText += "<tr><td>" + q_("Select object").toHtmlEscaped() + "</td>";
 	htmlText += "<td><b>" + q_("Left click").toHtmlEscaped() + "</b></td></tr>\n";
 	// clear selection
-	htmlText += "<tr>";
-#ifdef Q_OS_MAC
-	htmlText += "<td rowspan='2'>";
-#else
-	htmlText += "<td>";
-#endif
+	htmlText += "<tr><td>";
 	htmlText += q_("Clear selection").toHtmlEscaped() + "</td>";
-	htmlText += "<td><b>" + q_("Right click").toHtmlEscaped() + "</b></td></tr>\n";	
 #ifdef Q_OS_MAC
-	htmlText += "<tr><td><b>" + q_("CTRL + Left click").toHtmlEscaped() + "</b></td></tr>\n";
-	//htmlText += "<td>" + E("Clear selection") + "</td>";
+	htmlText += "<td><b>" + q_("CTRL + Left click").toHtmlEscaped() + "</b></td></tr>\n";
+#else
+	htmlText += "<td><b>" + q_("Right click").toHtmlEscaped() + "</b></td></tr>\n";	
 #endif
 	// add custom marker
 	htmlText += "<tr><td>" + q_("Add custom marker").toHtmlEscaped() + "</td>";
