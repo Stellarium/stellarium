@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-10 23:38+0700\n"
-"PO-Revision-Date: 2016-11-01 16:22+0000\n"
+"POT-Creation-Date: 2016-11-12 17:14+0700\n"
+"PO-Revision-Date: 2016-11-11 17:56+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-11 05:27+0000\n"
+"X-Launchpad-Export-Date: 2016-11-13 05:36+0000\n"
 "X-Generator: Launchpad (build 18255)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -920,42 +920,42 @@ msgstr "Pyörähdysaika on kaoottinen"
 #: src/core/modules/Planet.cpp:355
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
-msgstr ""
+msgstr "kasvava sirppi"
 
 #: src/core/modules/Planet.cpp:357
 msgctxt "Moon phase"
 msgid "First Quarter"
-msgstr ""
+msgstr "ensimmäinen neljännes"
 
 #: src/core/modules/Planet.cpp:359
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
-msgstr ""
+msgstr "kasvava kuperakuu"
 
 #: src/core/modules/Planet.cpp:361
 msgctxt "Moon phase"
 msgid "Full Moon"
-msgstr ""
+msgstr "täysikuu"
 
 #: src/core/modules/Planet.cpp:363
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
-msgstr ""
+msgstr "vähenevä kuperakuu"
 
 #: src/core/modules/Planet.cpp:365
 msgctxt "Moon phase"
 msgid "Third Quarter"
-msgstr ""
+msgstr "viimeinen neljännes"
 
 #: src/core/modules/Planet.cpp:367
 msgctxt "Moon phase"
 msgid "Waning Crescent"
-msgstr ""
+msgstr "vähenevä sirppi"
 
 #: src/core/modules/Planet.cpp:369
 msgctxt "Moon phase"
 msgid "New Moon"
-msgstr ""
+msgstr "uusikuu"
 
 #: src/core/modules/Planet.cpp:374 src/core/modules/Planet.cpp:379
 #, qt-format
@@ -1999,13 +1999,13 @@ msgstr "löytyi"
 #: src/core/StelLocaleMgr.cpp:273
 msgctxt "solar time"
 msgid "LMST"
-msgstr ""
+msgstr "PKAA"
 
 #. TRANSLATORS: Local True Solar Time. Please use abbreviation.
 #: src/core/StelLocaleMgr.cpp:279
 msgctxt "solar time"
 msgid "LTST"
-msgstr ""
+msgstr "PTAA"
 
 #: src/gui/ConfigurationDialog.cpp:543
 msgid "Select screenshot directory"
@@ -2612,7 +2612,7 @@ msgstr "havainnoija planeetan keskustassa"
 #: src/gui/StelGuiItems.cpp:728
 msgctxt "abbreviation"
 msgid "FOV"
-msgstr ""
+msgstr "FOV"
 
 #: src/gui/StelGuiItems.cpp:744
 msgid "Field of view"
@@ -2622,7 +2622,7 @@ msgstr "Näkökenttä"
 #: src/gui/StelGuiItems.cpp:763
 msgctxt "abbreviation"
 msgid "FPS"
-msgstr ""
+msgstr "FPS"
 
 #: src/gui/StelGuiItems.cpp:771
 msgid "Frames per second"
@@ -2990,7 +2990,7 @@ msgstr "Sijainnit %1"
 msgid "Julian Day"
 msgstr "Juliaaninen päivämäärä"
 
-#: src/gui/AstroCalcDialog.cpp:383 src/gui/AstroCalcDialog.cpp:757
+#: src/gui/AstroCalcDialog.cpp:383 src/gui/AstroCalcDialog.cpp:759
 msgid "CSV (Comma delimited)"
 msgstr "CSV (pilkkuerotettu)"
 
@@ -3085,7 +3085,7 @@ msgstr "Planetaariset sumut"
 
 #: src/gui/AstroCalcDialog.cpp:533
 msgid "Bright nebulae (<10 mag.)"
-msgstr ""
+msgstr "Kirkkaat sumut (<10 mag.)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:534 src/translations.h:101
@@ -3095,7 +3095,7 @@ msgstr "Pimeät sumut"
 
 #: src/gui/AstroCalcDialog.cpp:535
 msgid "Bright galaxies (<10 mag.)"
-msgstr ""
+msgstr "Kirkkaat galaksit (<10 mag.)"
 
 #: src/gui/AstroCalcDialog.cpp:548
 msgid "Phenomenon"
@@ -3109,24 +3109,28 @@ msgstr "Taivaankappale 1"
 msgid "Object 2"
 msgstr "Taivaankappale 2"
 
-#: src/gui/AstroCalcDialog.cpp:759
+#: src/gui/AstroCalcDialog.cpp:761
 msgid "Save calculated phenomena as..."
 msgstr "Tallenna lasketut tapahtumat nimellä..."
 
-#: src/gui/AstroCalcDialog.cpp:798 src/gui/AstroCalcDialog.cpp:964
+#: src/gui/AstroCalcDialog.cpp:800 src/gui/AstroCalcDialog.cpp:975
 msgid "Conjunction"
 msgstr "Konjunktio"
 
-#: src/gui/AstroCalcDialog.cpp:803
+#: src/gui/AstroCalcDialog.cpp:807
 msgid "Opposition"
 msgstr "Oppositio"
 
-#: src/gui/AstroCalcDialog.cpp:809
+#: src/gui/AstroCalcDialog.cpp:815
 msgid "Transit"
-msgstr ""
+msgstr "Ylikulku"
 
-#: src/gui/AstroCalcDialog.cpp:811 src/gui/AstroCalcDialog.cpp:969
+#: src/gui/AstroCalcDialog.cpp:817 src/gui/AstroCalcDialog.cpp:980
 msgid "Occultation"
+msgstr "Peitto"
+
+#: src/gui/AstroCalcDialog.cpp:821
+msgid "Eclipse"
 msgstr ""
 
 #: src/gui/BookmarksDialog.cpp:100 src/ui_searchDialogGui.h:702
@@ -4179,7 +4183,7 @@ msgstr "&Perusvärit"
 
 #: src/translations.h:380
 msgid "&Pick Screen Color"
-msgstr ""
+msgstr "&Valitse näyttöväri"
 
 #: src/translations.h:381
 msgid "&Custom colors"
@@ -5804,7 +5808,7 @@ msgstr "Osoittimet"
 
 #: src/ui_viewDialog.h:2048
 msgid "Configure colors of markers"
-msgstr ""
+msgstr "Aseta osoittimien värit"
 
 #: src/ui_viewDialog.h:2049
 msgid "Celestial Sphere"
@@ -5901,7 +5905,7 @@ msgstr "Oppositio–konjunktiolinjan väri"
 #: src/ui_viewDialog.h:2111
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
 msgstr ""
-"Näytä koluurit (napojen ja päivänseisaus- sekä tasauspisteiden kautta "
+"Näytä koluurit (napojen sekä päivänseisaus- ja tasauspisteiden kautta "
 "kulkevat isoympyrät)."
 
 #: src/ui_viewDialog.h:2113
@@ -6188,7 +6192,7 @@ msgstr "Arvo kuvapisteinä"
 
 #: src/ui_viewDialog.h:2270
 msgid "Color of lines of constellations"
-msgstr ""
+msgstr "Tähdistöviivojen väri"
 
 #: src/ui_viewDialog.h:2273
 msgid "Use native names for planets from current culture"
@@ -6212,7 +6216,7 @@ msgstr "Valitse haluatko nimet lyhennettyinä, alkuperäisinä vai käännettyin
 
 #: src/ui_viewDialog.h:2283
 msgid "Color of names of constellations"
-msgstr ""
+msgstr "Tähdistöjen nimien väri"
 
 #: src/ui_viewDialog.h:2285
 msgid "Show boundaries"
@@ -6220,7 +6224,7 @@ msgstr "Näytä rajat"
 
 #: src/ui_viewDialog.h:2287
 msgid "Color of boundaries of constellations"
-msgstr ""
+msgstr "Tähdistöjen rajojen väri"
 
 #: src/ui_viewDialog.h:2290
 msgid "Visible"
@@ -6418,7 +6422,7 @@ msgstr "Rektaskensio/deklinaatio (nykyinen)"
 
 #: src/ui_configurationDialog.h:1245
 msgid "Supergalactic coordinates"
-msgstr ""
+msgstr "Supergalaktiset koordinaatit"
 
 #: src/ui_configurationDialog.h:1247
 msgid "Spectral class, nebula type, etc."
@@ -6438,11 +6442,11 @@ msgstr "Absoluuttinen magnitudi"
 
 #: src/ui_configurationDialog.h:1256
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
-msgstr ""
+msgstr "Ekliptiset koordinaatit, nykyinen epookki (vain Maalle)"
 
 #: src/ui_configurationDialog.h:1258
 msgid "Ecliptic coordinates (of date)"
-msgstr ""
+msgstr "Ekliptiset koordinaatit (nykyinen epookki)"
 
 #: src/ui_configurationDialog.h:1260
 msgid "Horizontal coordinates"
@@ -6483,11 +6487,11 @@ msgstr "Rektaskensio/deklinaatio (J2000)"
 
 #: src/ui_configurationDialog.h:1276
 msgid "Ecliptic coordinates, equinox J2000.0"
-msgstr ""
+msgstr "Ekliptiset koordinaatit, epookki J2000.0"
 
 #: src/ui_configurationDialog.h:1278
 msgid "Ecliptic coordinates (J2000)"
-msgstr ""
+msgstr "Ekliptiset koordinaatit (J2000)"
 
 #: src/ui_configurationDialog.h:1282
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:198
@@ -7093,83 +7097,83 @@ msgstr "&Mene..."
 
 #: src/ui_dsoColorsDialog.h:476
 msgid "Colors settings"
-msgstr ""
+msgstr "Väriasetukset"
 
 #: src/ui_dsoColorsDialog.h:478
 msgid "Colors of labels and markers of deep-sky objects"
-msgstr ""
+msgstr "Syvän taivaan kohteiden osoittimien ja nimien värit"
 
 #: src/ui_dsoColorsDialog.h:480
 msgid "Color of markers of open star clusters"
-msgstr ""
+msgstr "Avoimien tähtijoukkojen osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:483
 msgid "Color of markers of BL Lac objects"
-msgstr ""
+msgstr "BL Lacertae -kohteiden osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:487
 msgid "Color of markers of dark nebulae"
-msgstr ""
+msgstr "Pimeiden sumujen osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:491
 msgid "Color of markers of star clouds"
-msgstr ""
+msgstr "Tähtipilvien osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:494
 msgid "Color of markers of reflection nebulae"
-msgstr ""
+msgstr "Heijastussumujen osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:499
 msgid "Clusters with neb."
-msgstr ""
+msgstr "Tähtijoukot ja sumut"
 
 #: src/ui_dsoColorsDialog.h:502
 msgid "Color of markers of stars"
-msgstr ""
+msgstr "Tähtien osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:505
 msgid "Color of markers of nebulae"
-msgstr ""
+msgstr "Sumujen osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:509
 msgid "Color of markers of quasars"
-msgstr ""
+msgstr "Kvasaarien osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:512
 msgid "Color of markers of blazars"
-msgstr ""
+msgstr "Blasaarien osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:515
 msgid "Possible quasars"
-msgstr ""
+msgstr "Mahdolliset kvasaarit"
 
 #: src/ui_dsoColorsDialog.h:517
 msgid "Color of markers of clusters associated with nebulosity"
-msgstr ""
+msgstr "Sumujen kanssa esiintyvien tähtijoukkojen osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:521
 msgid "Color of markers of interacting galaxies"
-msgstr ""
+msgstr "Törmäävien galaksien osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:524
 msgid "Markers of deep-sky objects"
-msgstr ""
+msgstr "Syvän taivaan kohteiden osoittimet"
 
 #: src/ui_dsoColorsDialog.h:526
 msgid "Markers of DSOs"
-msgstr ""
+msgstr "Syv. taivaan koht. osoittimet"
 
 #: src/ui_dsoColorsDialog.h:528
 msgid "Color of markers of possible quasars"
-msgstr ""
+msgstr "Mahdollisten kvasaarien osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:531
 msgid "Color of markers of active galaxies"
-msgstr ""
+msgstr "Aktiivisten galaksien osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:538
 msgid "Color of markers of globular star clusters"
-msgstr ""
+msgstr "Pallomaisten tähtijoukkojen osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:543 plugins/Quasars/src/Quasars.cpp:72
 #: plugins/Quasars/src/Quasars.cpp:169 plugins/Quasars/src/Quasars.cpp:170
@@ -7178,99 +7182,99 @@ msgstr "Kvasaarit"
 
 #: src/ui_dsoColorsDialog.h:545
 msgid "Color of markers of galaxies"
-msgstr ""
+msgstr "Galaksien osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:548
 msgid "Color of markers of bipolar nebulae"
-msgstr ""
+msgstr "Kaksisuuntaisten sumujen osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:552
 msgid "Color of markers of emission objects"
-msgstr ""
+msgstr "Emissiokohteiden osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:555
 msgid "Color of markers of deep-sky objects"
-msgstr ""
+msgstr "Syvän taivaan kohteiden osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:558
 msgid "Labels of deep-sky objects"
-msgstr ""
+msgstr "Syvän taivaan kohteiden nimet"
 
 #: src/ui_dsoColorsDialog.h:560
 msgid "Labels of DSOs"
-msgstr ""
+msgstr "Syv. taiv. kohteiden nimet"
 
 #: src/ui_dsoColorsDialog.h:562
 msgid "Color of labels of deep-sky objects"
-msgstr ""
+msgstr "Syvän taivaan kohteiden nimien väri"
 
 #: src/ui_dsoColorsDialog.h:566
 msgid "Color of markers of interstellar matter"
-msgstr ""
+msgstr "Tähtienvälisen aineen osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:569
 msgid "Color of markers of stellar associations"
-msgstr ""
+msgstr "Tähtiassosiaatioiden osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:574
 msgid "Color of markers of radio galaxies"
-msgstr ""
+msgstr "Radioglaksien osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:578
 msgid "Color of markers of star clusters"
-msgstr ""
+msgstr "Tähtijoukkojen osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:582
 msgid "Color of markers of planetary nebulae"
-msgstr ""
+msgstr "Planetaaristen sumujen osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:585
 msgid "Possible planetary nebulae"
-msgstr ""
+msgstr "Mahdolliset planetaariset sumut"
 
 #: src/ui_dsoColorsDialog.h:587
 msgid "Possible pl. nebulae"
-msgstr ""
+msgstr "Mahdolliset planet. sumut"
 
 #: src/ui_dsoColorsDialog.h:589
 msgid "Color of markers of possible planetary nebulae"
-msgstr ""
+msgstr "Mahdollisten planetaaristen sumujen osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:591
 msgid "Protoplanetary nebulae"
-msgstr ""
+msgstr "Esiplanetaariset sumut"
 
 #: src/ui_dsoColorsDialog.h:593
 msgid "Color of markers of protoplanetary nebulae"
-msgstr ""
+msgstr "Esiplanetaaristen sumujen osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:597
 msgid "Color of markers of emission nebulae"
-msgstr ""
+msgstr "Emissiosumujen osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:601
 msgid "Color of markers of hydrogen regions"
-msgstr ""
+msgstr "Vetyalueiden osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:603
 msgid "Molecular clouds"
-msgstr ""
+msgstr "Molekyylipilvet"
 
 #: src/ui_dsoColorsDialog.h:605
 msgid "Color of markers of molecular clouds"
-msgstr ""
+msgstr "Molekyylipilvien osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:610
 msgid "YSOs"
-msgstr ""
+msgstr "Nuoret tähtimäiset kohteet"
 
 #: src/ui_dsoColorsDialog.h:612
 msgid "Color of markers of Young Stellar Objects"
-msgstr ""
+msgstr "Nuorten tähtimäisten kohteiden osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:616
 msgid "Color of markers of supernova remnants"
-msgstr ""
+msgstr "Supernovajäänteiden osoittimien väri"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:138

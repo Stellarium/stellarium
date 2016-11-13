@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-10 23:38+0700\n"
-"PO-Revision-Date: 2016-11-01 04:51+0000\n"
+"POT-Creation-Date: 2016-11-12 17:14+0700\n"
+"PO-Revision-Date: 2016-11-12 09:51+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-11 05:23+0000\n"
+"X-Launchpad-Export-Date: 2016-11-13 05:31+0000\n"
 "X-Generator: Launchpad (build 18255)\n"
 "Language: bn\n"
 
@@ -921,42 +921,42 @@ msgstr "আবর্তন কাল খুব অনিয়মিত"
 #: src/core/modules/Planet.cpp:355
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
-msgstr ""
+msgstr "কৃষ্ণপক্ষ দ্বিতীয়ার্ধ"
 
 #: src/core/modules/Planet.cpp:357
 msgctxt "Moon phase"
 msgid "First Quarter"
-msgstr ""
+msgstr "কৃষ্ণপক্ষ অষ্টমী"
 
 #: src/core/modules/Planet.cpp:359
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
-msgstr ""
+msgstr "কৃষ্ণপক্ষ প্রথমার্ধ"
 
 #: src/core/modules/Planet.cpp:361
 msgctxt "Moon phase"
 msgid "Full Moon"
-msgstr ""
+msgstr "পূর্ণিমা"
 
 #: src/core/modules/Planet.cpp:363
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
-msgstr ""
+msgstr "শুক্লপক্ষ প্রথমার্ধ"
 
 #: src/core/modules/Planet.cpp:365
 msgctxt "Moon phase"
 msgid "Third Quarter"
-msgstr ""
+msgstr "শুক্লপক্ষ অষ্টমী"
 
 #: src/core/modules/Planet.cpp:367
 msgctxt "Moon phase"
 msgid "Waning Crescent"
-msgstr ""
+msgstr "শুক্লপক্ষ দ্বিতীয়ার্ধ"
 
 #: src/core/modules/Planet.cpp:369
 msgctxt "Moon phase"
 msgid "New Moon"
-msgstr ""
+msgstr "অমাবস্যা"
 
 #: src/core/modules/Planet.cpp:374 src/core/modules/Planet.cpp:379
 #, qt-format
@@ -1907,7 +1907,7 @@ msgstr "অক্ষের তীর্যকতা"
 #: src/core/StelObject.cpp:253 src/core/StelObject.cpp:255
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
-msgstr "ছায়াপথ কেন্দিক স্থানাঙ্ক, দ্রাঘিমাংশ/অক্ষাংশ : %1/%2"
+msgstr "ছায়াপথ কেন্দ্রিক স্থানাঙ্ক, দ্রাঘিমাংশ/অক্ষাংশ : %1/%2"
 
 #: src/core/StelObject.cpp:263 src/core/StelObject.cpp:265
 #, qt-format
@@ -2005,13 +2005,13 @@ msgstr "খুঁজে পাওয়া গেছে"
 #: src/core/StelLocaleMgr.cpp:273
 msgctxt "solar time"
 msgid "LMST"
-msgstr ""
+msgstr "ঘড়ির সময়"
 
 #. TRANSLATORS: Local True Solar Time. Please use abbreviation.
 #: src/core/StelLocaleMgr.cpp:279
 msgctxt "solar time"
 msgid "LTST"
-msgstr ""
+msgstr "প্রকৃত সময়"
 
 #: src/gui/ConfigurationDialog.cpp:543
 msgid "Select screenshot directory"
@@ -2615,7 +2615,7 @@ msgstr "গ্রহ কেন্দ্রিক দৃশ্যপট"
 #: src/gui/StelGuiItems.cpp:728
 msgctxt "abbreviation"
 msgid "FOV"
-msgstr ""
+msgstr "দৃষ্টিক্ষেত্র"
 
 #: src/gui/StelGuiItems.cpp:744
 msgid "Field of view"
@@ -2625,7 +2625,7 @@ msgstr "দৃষ্টিক্ষেত্র"
 #: src/gui/StelGuiItems.cpp:763
 msgctxt "abbreviation"
 msgid "FPS"
-msgstr ""
+msgstr "FPS"
 
 #: src/gui/StelGuiItems.cpp:771
 msgid "Frames per second"
@@ -2993,7 +2993,7 @@ msgstr "%1 সময়ে অবস্থান"
 msgid "Julian Day"
 msgstr "জুলিয়ান পঞ্জিকা অনুসারে দিন"
 
-#: src/gui/AstroCalcDialog.cpp:383 src/gui/AstroCalcDialog.cpp:757
+#: src/gui/AstroCalcDialog.cpp:383 src/gui/AstroCalcDialog.cpp:759
 msgid "CSV (Comma delimited)"
 msgstr "CSV (কমা দ্বারা বিভাজিত)"
 
@@ -3088,7 +3088,7 @@ msgstr "গ্রহরূপী নীহারিকা"
 
 #: src/gui/AstroCalcDialog.cpp:533
 msgid "Bright nebulae (<10 mag.)"
-msgstr ""
+msgstr "উজ্জ্বল নিহারীকা (< ১০ উজ্জ্ব্যলতা)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:534 src/translations.h:101
@@ -3098,7 +3098,7 @@ msgstr "কৃষ্ণবর্ণ নিহারীকা"
 
 #: src/gui/AstroCalcDialog.cpp:535
 msgid "Bright galaxies (<10 mag.)"
-msgstr ""
+msgstr "উজ্জ্বল নক্ষত্রলোক (< ১০ উজ্জ্ব্যলতা)"
 
 #: src/gui/AstroCalcDialog.cpp:548
 msgid "Phenomenon"
@@ -3112,25 +3112,29 @@ msgstr "১ম বস্তু"
 msgid "Object 2"
 msgstr "২য় বস্তু"
 
-#: src/gui/AstroCalcDialog.cpp:759
+#: src/gui/AstroCalcDialog.cpp:761
 msgid "Save calculated phenomena as..."
 msgstr "নিম্নলিখিত নামে সঞ্চয় করুন ...."
 
-#: src/gui/AstroCalcDialog.cpp:798 src/gui/AstroCalcDialog.cpp:964
+#: src/gui/AstroCalcDialog.cpp:800 src/gui/AstroCalcDialog.cpp:975
 msgid "Conjunction"
 msgstr "সংযোগ"
 
-#: src/gui/AstroCalcDialog.cpp:803
+#: src/gui/AstroCalcDialog.cpp:807
 msgid "Opposition"
 msgstr "প্রতিযোগ"
 
-#: src/gui/AstroCalcDialog.cpp:809
+#: src/gui/AstroCalcDialog.cpp:815
 msgid "Transit"
-msgstr ""
+msgstr "সরণ"
 
-#: src/gui/AstroCalcDialog.cpp:811 src/gui/AstroCalcDialog.cpp:969
+#: src/gui/AstroCalcDialog.cpp:817 src/gui/AstroCalcDialog.cpp:980
 msgid "Occultation"
-msgstr ""
+msgstr "সমাপতন"
+
+#: src/gui/AstroCalcDialog.cpp:821
+msgid "Eclipse"
+msgstr "গ্রহন"
 
 #: src/gui/BookmarksDialog.cpp:100 src/ui_searchDialogGui.h:702
 msgid "Object"
@@ -4176,7 +4180,7 @@ msgstr "প্রা&থমিক রং"
 
 #: src/translations.h:380
 msgid "&Pick Screen Color"
-msgstr ""
+msgstr "স্ক্রীন থেকে &রং বাছুন"
 
 #: src/translations.h:381
 msgid "&Custom colors"
@@ -5797,7 +5801,7 @@ msgstr "নির্দেশক"
 
 #: src/ui_viewDialog.h:2048
 msgid "Configure colors of markers"
-msgstr ""
+msgstr "পছন্দসই রং নির্বাচন"
 
 #: src/ui_viewDialog.h:2049
 msgid "Celestial Sphere"
@@ -6176,7 +6180,7 @@ msgstr "পিক্সেলে ব্যবহৃত মান"
 
 #: src/ui_viewDialog.h:2270
 msgid "Color of lines of constellations"
-msgstr ""
+msgstr "রেখার রং"
 
 #: src/ui_viewDialog.h:2273
 msgid "Use native names for planets from current culture"
@@ -6201,7 +6205,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2283
 msgid "Color of names of constellations"
-msgstr ""
+msgstr "নামের রং"
 
 #: src/ui_viewDialog.h:2285
 msgid "Show boundaries"
@@ -6209,7 +6213,7 @@ msgstr "সীমানা"
 
 #: src/ui_viewDialog.h:2287
 msgid "Color of boundaries of constellations"
-msgstr ""
+msgstr "সীমানার রং"
 
 #: src/ui_viewDialog.h:2290
 msgid "Visible"
@@ -6407,7 +6411,7 @@ msgstr "বিষুবাংশ / বিষুবলম্ব (তারিখ 
 
 #: src/ui_configurationDialog.h:1245
 msgid "Supergalactic coordinates"
-msgstr ""
+msgstr "নক্ষত্রলোকীয় স্থানাঙ্ক"
 
 #: src/ui_configurationDialog.h:1247
 msgid "Spectral class, nebula type, etc."
@@ -6427,11 +6431,11 @@ msgstr "পরম ঔজ্জ্বল্য"
 
 #: src/ui_configurationDialog.h:1256
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
-msgstr ""
+msgstr "সৌরপথীয় স্থানাঙ্ক, বর্তমান বিষুব অনুযায়ী (পৃথিবীর জন্য শুধু)"
 
 #: src/ui_configurationDialog.h:1258
 msgid "Ecliptic coordinates (of date)"
-msgstr ""
+msgstr "সৌরপথীয় স্থানাঙ্ক (তারিখ অনুযায়ী)"
 
 #: src/ui_configurationDialog.h:1260
 msgid "Horizontal coordinates"
@@ -6472,11 +6476,11 @@ msgstr "বিষুবাংশ / বিষুবলম্ব (J2000 অনু�
 
 #: src/ui_configurationDialog.h:1276
 msgid "Ecliptic coordinates, equinox J2000.0"
-msgstr ""
+msgstr "সৌরপথীয় স্থানাঙ্ক, J2000.0 বিষুব অনুযায়ী"
 
 #: src/ui_configurationDialog.h:1278
 msgid "Ecliptic coordinates (J2000)"
-msgstr ""
+msgstr "সৌরপথীয় স্থানাঙ্ক (J2000.0 অনুযায়ী)"
 
 #: src/ui_configurationDialog.h:1282
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:198
@@ -7079,83 +7083,83 @@ msgstr "বু&কমার্কটি দেখুন"
 
 #: src/ui_dsoColorsDialog.h:476
 msgid "Colors settings"
-msgstr ""
+msgstr "রং নির্বাচন"
 
 #: src/ui_dsoColorsDialog.h:478
 msgid "Colors of labels and markers of deep-sky objects"
-msgstr ""
+msgstr "পছন্দসই রং নির্বাচন"
 
 #: src/ui_dsoColorsDialog.h:480
 msgid "Color of markers of open star clusters"
-msgstr ""
+msgstr "মুক্ত তারাগুচ্ছ নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:483
 msgid "Color of markers of BL Lac objects"
-msgstr ""
+msgstr "ব্ল ল্যাকটরে বস্তু নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:487
 msgid "Color of markers of dark nebulae"
-msgstr ""
+msgstr "কৃষ্ণবর্ণ নিহারীকা নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:491
 msgid "Color of markers of star clouds"
-msgstr ""
+msgstr "নক্ষত্র মেঘ নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:494
 msgid "Color of markers of reflection nebulae"
-msgstr ""
+msgstr "প্রতিফলিত নিহারীকা নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:499
 msgid "Clusters with neb."
-msgstr ""
+msgstr "নিহারীকা যুক্ত তারাগুচ্ছ"
 
 #: src/ui_dsoColorsDialog.h:502
 msgid "Color of markers of stars"
-msgstr ""
+msgstr "নক্ষত্র নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:505
 msgid "Color of markers of nebulae"
-msgstr ""
+msgstr "নিহারীকা নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:509
 msgid "Color of markers of quasars"
-msgstr ""
+msgstr "কোয়াসার নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:512
 msgid "Color of markers of blazars"
-msgstr ""
+msgstr "ব্লেজার নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:515
 msgid "Possible quasars"
-msgstr ""
+msgstr "সম্ভবত কোয়াসার"
 
 #: src/ui_dsoColorsDialog.h:517
 msgid "Color of markers of clusters associated with nebulosity"
-msgstr ""
+msgstr "নিহারীকা যুক্ত তারাগুচ্ছ নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:521
 msgid "Color of markers of interacting galaxies"
-msgstr ""
+msgstr "পারস্পরিক ক্রিয়াশীল নক্ষত্রলোক নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:524
 msgid "Markers of deep-sky objects"
-msgstr ""
+msgstr "মহাজাগতিক বস্তু নির্দেশক"
 
 #: src/ui_dsoColorsDialog.h:526
 msgid "Markers of DSOs"
-msgstr ""
+msgstr "মহাজাগতিক বস্তু নির্দেশক"
 
 #: src/ui_dsoColorsDialog.h:528
 msgid "Color of markers of possible quasars"
-msgstr ""
+msgstr "সম্ভবত কোয়াসার নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:531
 msgid "Color of markers of active galaxies"
-msgstr ""
+msgstr "সক্রিয় নক্ষত্রলোক নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:538
 msgid "Color of markers of globular star clusters"
-msgstr ""
+msgstr "গোলাকার তারাগুচ্ছ নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:543 plugins/Quasars/src/Quasars.cpp:72
 #: plugins/Quasars/src/Quasars.cpp:169 plugins/Quasars/src/Quasars.cpp:170
@@ -7164,99 +7168,99 @@ msgstr "কোয়াসার"
 
 #: src/ui_dsoColorsDialog.h:545
 msgid "Color of markers of galaxies"
-msgstr ""
+msgstr "নক্ষত্রলোক নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:548
 msgid "Color of markers of bipolar nebulae"
-msgstr ""
+msgstr "ডাম্বেলাকার নিহারীকা নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:552
 msgid "Color of markers of emission objects"
-msgstr ""
+msgstr "উৎক্ষেপিত পদার্থ নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:555
 msgid "Color of markers of deep-sky objects"
-msgstr ""
+msgstr "মহাজাগতিক বস্তু নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:558
 msgid "Labels of deep-sky objects"
-msgstr ""
+msgstr "মহাজাগতিক বস্তুর নাম"
 
 #: src/ui_dsoColorsDialog.h:560
 msgid "Labels of DSOs"
-msgstr ""
+msgstr "ম‌হাজাগতিক বস্তুর নাম"
 
 #: src/ui_dsoColorsDialog.h:562
 msgid "Color of labels of deep-sky objects"
-msgstr ""
+msgstr "ম‌হাজাগতিক বস্তুর নামের রং"
 
 #: src/ui_dsoColorsDialog.h:566
 msgid "Color of markers of interstellar matter"
-msgstr ""
+msgstr "আন্তঃনক্ষত্রিক গ্যাস নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:569
 msgid "Color of markers of stellar associations"
-msgstr ""
+msgstr "নক্ষত্র সমাবেশ নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:574
 msgid "Color of markers of radio galaxies"
-msgstr ""
+msgstr "বেতার নক্ষত্রলোক নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:578
 msgid "Color of markers of star clusters"
-msgstr ""
+msgstr "তারাগুচ্ছ নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:582
 msgid "Color of markers of planetary nebulae"
-msgstr ""
+msgstr "গ্রহরূপী নিহারীকা নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:585
 msgid "Possible planetary nebulae"
-msgstr ""
+msgstr "সম্ভবত গ্রহরূপী নিহারীকা"
 
 #: src/ui_dsoColorsDialog.h:587
 msgid "Possible pl. nebulae"
-msgstr ""
+msgstr "সম্ভবত গ্রহরূপী নিহারীকা"
 
 #: src/ui_dsoColorsDialog.h:589
 msgid "Color of markers of possible planetary nebulae"
-msgstr ""
+msgstr "সম্ভবত গ্রহরূপী নিহারীকা নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:591
 msgid "Protoplanetary nebulae"
-msgstr ""
+msgstr "প্রাকগ্রহরূপী নীহারিকা"
 
 #: src/ui_dsoColorsDialog.h:593
 msgid "Color of markers of protoplanetary nebulae"
-msgstr ""
+msgstr "প্রাকগ্রহরূপী নীহারিকা নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:597
 msgid "Color of markers of emission nebulae"
-msgstr ""
+msgstr "নিঃসরণ নিহারীকা নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:601
 msgid "Color of markers of hydrogen regions"
-msgstr ""
+msgstr "হাইড্রোজেন এলাকা নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:603
 msgid "Molecular clouds"
-msgstr ""
+msgstr "নক্ষত্র সৃষ্টিকারী গ্যাস"
 
 #: src/ui_dsoColorsDialog.h:605
 msgid "Color of markers of molecular clouds"
-msgstr ""
+msgstr "নক্ষত্র সৃষ্টিকারী গ্যাস নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:610
 msgid "YSOs"
-msgstr ""
+msgstr "প্রাক নাক্ষত্রিক জ্যোতিষ্ক"
 
 #: src/ui_dsoColorsDialog.h:612
 msgid "Color of markers of Young Stellar Objects"
-msgstr ""
+msgstr "প্রাক নাক্ষত্রিক জ্যোতিষ্ক নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:616
 msgid "Color of markers of supernova remnants"
-msgstr ""
+msgstr "আতিনোভার ধ্বংসাবশেষ নির্দেশকের রং"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:138
@@ -14016,7 +14020,7 @@ msgstr "সৌরপথীয় স্থানাঙ্ক, দ্রাঘিম
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:202
 msgid "Galactic Longitude/Latitude"
-msgstr "ছায়াপথ কেন্দিক স্থানাঙ্ক, দ্রাঘিমাংশ/অক্ষাংশ"
+msgstr "ছায়াপথ কেন্দ্রিক স্থানাঙ্ক, দ্রাঘিমাংশ/অক্ষাংশ"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:203
 msgid "Supergalactic Longitude/Latitude"
@@ -14650,11 +14654,11 @@ msgstr "পছন্দসই দিগংশ ২ নির্দেশক র�
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:259
 msgid "Show Line for Custom Declination 1"
-msgstr ""
+msgstr "পছন্দসই অক্ষাংশ ১ নির্দেশক রেখা দেখুন"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:260
 msgid "Show Line for Custom Declination 2"
-msgstr ""
+msgstr "পছন্দসই অক্ষাংশ ২ নির্দেশক রেখা দেখুন"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1253
 msgid "Equinox"
@@ -14785,6 +14789,8 @@ msgid ""
 "In addition, up to two vertical lines with arbitrary azimuth and declination "
 "lines with custom label can be shown."
 msgstr ""
+"এছাড়া অতিরিক্ত হিসাবে পছন্দসই দিগংশ ও অক্ষাংশ অনুসারে দুটো লম্বালম্বি ও দুটো "
+"আড়াআড়ি রেখা দেখানো যায় ।"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:364
 msgid "Select color for equinox line"
@@ -14848,11 +14854,11 @@ msgstr "পছন্দসই দিগংশ ২ রেখার রং"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:529
 msgid "Select color for Custom Declination 1 line"
-msgstr ""
+msgstr "পছন্দসই অক্ষাংশ ১ নির্দেশক রেখার রং"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:540
 msgid "Select color for Custom Declination 2 line"
-msgstr ""
+msgstr "পছন্দসই অক্ষাংশ ২ নির্দেশক রেখার রং"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:525
 msgid "ArchaeoLines Configuration"
@@ -14868,11 +14874,11 @@ msgstr "রং পরিবর্তনের সময় ফুলস্ক্র
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:531
 msgid "Custom Declination 1"
-msgstr ""
+msgstr "পছন্দসই অক্ষাংশ ১"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:532
 msgid "Custom Declination 1 Color..."
-msgstr ""
+msgstr "পছন্দসই অক্ষাংশ ১ নির্দেশক রেখার রং"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:533
 msgid "Current Sun"
@@ -14966,11 +14972,11 @@ msgstr "সর্বোচ্চ চন্দ্রায়ণ"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:573
 msgid "Custom Declination 2 Color..."
-msgstr ""
+msgstr "পছন্দসই অক্ষাংশ ২ নির্দেশক রেখার রং"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:574
 msgid "Custom Declination 2"
-msgstr ""
+msgstr "পছন্দসই অক্ষাংশ ২"
 
 #~ msgid "Planet: "
 #~ msgstr "গ্রহ "

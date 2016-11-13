@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-10 23:38+0700\n"
-"PO-Revision-Date: 2016-11-06 23:55+0000\n"
+"POT-Creation-Date: 2016-11-12 17:14+0700\n"
+"PO-Revision-Date: 2016-11-12 19:50+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-11 05:27+0000\n"
+"X-Launchpad-Export-Date: 2016-11-13 05:37+0000\n"
 "X-Generator: Launchpad (build 18255)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -922,42 +922,42 @@ msgstr "Die Rotationszeit ist chaotisch"
 #: src/core/modules/Planet.cpp:355
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
-msgstr ""
+msgstr "Zunehmend im 1. Viertel"
 
 #: src/core/modules/Planet.cpp:357
 msgctxt "Moon phase"
 msgid "First Quarter"
-msgstr ""
+msgstr "Erstes Viertel"
 
 #: src/core/modules/Planet.cpp:359
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
-msgstr ""
+msgstr "Zunehmend im 2. Viertel"
 
 #: src/core/modules/Planet.cpp:361
 msgctxt "Moon phase"
 msgid "Full Moon"
-msgstr ""
+msgstr "Vollmond"
 
 #: src/core/modules/Planet.cpp:363
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
-msgstr ""
+msgstr "Abnehmend im 3. Viertel"
 
 #: src/core/modules/Planet.cpp:365
 msgctxt "Moon phase"
 msgid "Third Quarter"
-msgstr ""
+msgstr "Letztes Viertel"
 
 #: src/core/modules/Planet.cpp:367
 msgctxt "Moon phase"
 msgid "Waning Crescent"
-msgstr ""
+msgstr "Abnehmend im letzten Viertel"
 
 #: src/core/modules/Planet.cpp:369
 msgctxt "Moon phase"
 msgid "New Moon"
-msgstr ""
+msgstr "Neumond"
 
 #: src/core/modules/Planet.cpp:374 src/core/modules/Planet.cpp:379
 #, qt-format
@@ -2009,13 +2009,13 @@ msgstr "Gefunden"
 #: src/core/StelLocaleMgr.cpp:273
 msgctxt "solar time"
 msgid "LMST"
-msgstr ""
+msgstr "MOZ"
 
 #. TRANSLATORS: Local True Solar Time. Please use abbreviation.
 #: src/core/StelLocaleMgr.cpp:279
 msgctxt "solar time"
 msgid "LTST"
-msgstr ""
+msgstr "WOZ"
 
 #: src/gui/ConfigurationDialog.cpp:543
 msgid "Select screenshot directory"
@@ -2417,8 +2417,9 @@ msgid ""
 "properly or is missing and is not listed in the tracker, you can open bug "
 "reports here."
 msgstr ""
-"Wenn etwas nicht richtig funktionieren oder fehlen sollte, dass noch nicht "
-"gemeldet wurde, kannst du hier eine neue Fehlerbeschreibung anlegen."
+"{System zur Fehlerberichterstattung und Vorschlag zur Funktionsverbesserung "
+"} - wenn etwas nicht richtig funktionieren oder fehlen sollte, das noch "
+"nicht gemeldet wurde, können Sie hier eine neue Fehlerbeschreibung anlegen."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:245
@@ -2621,7 +2622,7 @@ msgstr "Planetozentrischer Beobachter"
 #: src/gui/StelGuiItems.cpp:728
 msgctxt "abbreviation"
 msgid "FOV"
-msgstr ""
+msgstr "FOV"
 
 #: src/gui/StelGuiItems.cpp:744
 msgid "Field of view"
@@ -2631,7 +2632,7 @@ msgstr "Sichtfeld"
 #: src/gui/StelGuiItems.cpp:763
 msgctxt "abbreviation"
 msgid "FPS"
-msgstr ""
+msgstr "BPS"
 
 #: src/gui/StelGuiItems.cpp:771
 msgid "Frames per second"
@@ -3003,7 +3004,7 @@ msgstr "Positionen am %1"
 msgid "Julian Day"
 msgstr "Julianischer Tag"
 
-#: src/gui/AstroCalcDialog.cpp:383 src/gui/AstroCalcDialog.cpp:757
+#: src/gui/AstroCalcDialog.cpp:383 src/gui/AstroCalcDialog.cpp:759
 msgid "CSV (Comma delimited)"
 msgstr "CSV (Komma-begrenzt)"
 
@@ -3122,24 +3123,28 @@ msgstr "Objekt 1"
 msgid "Object 2"
 msgstr "Objekt 2"
 
-#: src/gui/AstroCalcDialog.cpp:759
+#: src/gui/AstroCalcDialog.cpp:761
 msgid "Save calculated phenomena as..."
 msgstr "Speichere berechnete Phänomene als..."
 
-#: src/gui/AstroCalcDialog.cpp:798 src/gui/AstroCalcDialog.cpp:964
+#: src/gui/AstroCalcDialog.cpp:800 src/gui/AstroCalcDialog.cpp:975
 msgid "Conjunction"
 msgstr "Konjunktion"
 
-#: src/gui/AstroCalcDialog.cpp:803
+#: src/gui/AstroCalcDialog.cpp:807
 msgid "Opposition"
 msgstr "Opposition"
 
-#: src/gui/AstroCalcDialog.cpp:809
+#: src/gui/AstroCalcDialog.cpp:815
 msgid "Transit"
-msgstr ""
+msgstr "Durchgang"
 
-#: src/gui/AstroCalcDialog.cpp:811 src/gui/AstroCalcDialog.cpp:969
+#: src/gui/AstroCalcDialog.cpp:817 src/gui/AstroCalcDialog.cpp:980
 msgid "Occultation"
+msgstr "Bedeckung"
+
+#: src/gui/AstroCalcDialog.cpp:821
+msgid "Eclipse"
 msgstr ""
 
 #: src/gui/BookmarksDialog.cpp:100 src/ui_searchDialogGui.h:702
