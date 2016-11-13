@@ -40,7 +40,8 @@ StelLocationMgr::StelLocationMgr()
 	QSettings* conf = StelApp::getInstance().getSettings();
 
 	// The line below allows to re-generate the location file, you still need to gunzip it manually afterward.
-	// generateBinaryLocationFile("data/base_locations.txt", false, "data/base_locations.bin");
+	if (conf->value("devel/convert_locations_list", false).toBool())
+		generateBinaryLocationFile("data/base_locations.txt", false, "data/base_locations.bin");
 
 	locations = loadCitiesBin("data/base_locations.bin.gz");
 	locations.unite(loadCities("data/user_locations.txt", true));
@@ -70,12 +71,13 @@ void StelLocationMgr::setLocations(const LocationList &locations)
 
 void StelLocationMgr::generateBinaryLocationFile(const QString& fileName, bool isUserLocation, const QString& binFilePath) const
 {
+	qWarning() << "Generating a locations list...";
 	const QMap<QString, StelLocation>& cities = loadCities(fileName, isUserLocation);
-	QFile binfile(binFilePath);
+	QFile binfile(StelFileMgr::findFile(binFilePath));
 	if(binfile.open(QIODevice::WriteOnly))
 	{
 		QDataStream out(&binfile);
-		out.setVersion(QDataStream::Qt_4_6);
+		out.setVersion(QDataStream::Qt_5_2);
 		out << cities;
 		binfile.close();
 	}
@@ -98,14 +100,14 @@ LocationMap StelLocationMgr::loadCitiesBin(const QString& fileName)
 	if (fileName.endsWith(".gz"))
 	{
 		QDataStream in(StelUtils::uncompress(sourcefile.readAll()));
-		in.setVersion(QDataStream::Qt_4_6);
+		in.setVersion(QDataStream::Qt_5_2);
 		in >> res;
 		return res;
 	}
 	else
 	{
 		QDataStream in(&sourcefile);
-		in.setVersion(QDataStream::Qt_4_6);
+		in.setVersion(QDataStream::Qt_5_2);
 		in >> res;
 		return res;
 	}
@@ -378,7 +380,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 		float latitude=locMap.value("latitude").toFloat();
 		float longitude=locMap.value("longitude").toFloat();
 
-		qDebug() << "Got location" << QString("%1, %2, %3 (%4, %5)").arg(ipCity).arg(ipRegion).arg(ipCountry).arg(latitude).arg(longitude) << "for IP" << locMap.value("ip").toString();
+		qDebug() << "Got location" << QString("%1, %2, %3 (%4, %5; %6)").arg(ipCity).arg(ipRegion).arg(ipCountry).arg(latitude).arg(longitude).arg(ipTimeZone) << "for IP" << locMap.value("ip").toString();
 
 		QString locLine= // we re-pack into a new line that will be parsed back by StelLocation...
 				QString("%1\t%2\t%3\tX\t0\t%4\t%5\t0\t\t%6")
@@ -389,6 +391,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 				.arg(longitude<0 ? QString("%1W").arg(-longitude, 0, 'f', 6) : QString("%1E").arg(longitude, 0, 'f', 6))
 				.arg(ipTimeZone.isEmpty() ? "" : ipTimeZone);
 		location=StelLocation::createFromLine(locLine); // in lack of a regular constructor ;-)
+		core->setCurrentTimeZone(ipTimeZone.isEmpty() ? "LMST" : ipTimeZone);
 		core->moveObserverTo(location, 0.0f, 0.0f);
 		QSettings* conf = StelApp::getInstance().getSettings();
 		conf->setValue("init_location/last_location", QString("%1,%2").arg(latitude).arg(longitude));
@@ -434,3 +437,4 @@ LocationMap StelLocationMgr::pickLocationsInCountry(const QString country)
 	}
 	return results;
 }
+

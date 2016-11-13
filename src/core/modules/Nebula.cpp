@@ -136,6 +136,9 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	if (!nameI18.isEmpty() && flags&Name)
 	{
 		oss << getNameI18n();
+		QString aliases = getI18nAliases();
+		if (!aliases.isEmpty())
+			oss << " (" << aliases << ")";
 	}
 
 	if (flags&CatalogNumber)
@@ -271,33 +274,36 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 		if (oDistance>0.f)
 		{
-			QString dx, dy, du;
+			QString dx, dy;
+			float dc = 3262.f;
+			int ms = 1;
+			//TRANSLATORS: Unit of measure for distance - kiloparsecs
+			QString dupc = q_("kpc");
+			//TRANSLATORS: Unit of measure for distance - Light Years
+			QString duly = q_("ly");
+
+			if (nType==NebAGx || nType==NebGx || nType==NebRGx || nType==NebIGx || nType==NebQSO || nType==NebPossQSO)
+			{
+				dc = 3.262f;
+				ms = 3;
+				//TRANSLATORS: Unit of measure for distance - Megaparsecs
+				dupc = q_("Mpc");
+				//TRANSLATORS: Unit of measure for distance - Millions of Light Years
+				duly = q_("Mio. ly");
+			}
+
 			if (oDistanceErr>0.f)
 			{
 				dx = QString("%1%2%3").arg(QString::number(oDistance, 'f', 3)).arg(QChar(0x00B1)).arg(QString::number(oDistanceErr, 'f', 3));
-				dy = QString("%1%2%3").arg(QString::number(oDistance*3262, 'f', 1)).arg(QChar(0x00B1)).arg(QString::number(oDistanceErr*3262, 'f', 1));
+				dy = QString("%1%2%3").arg(QString::number(oDistance*dc, 'f', ms)).arg(QChar(0x00B1)).arg(QString::number(oDistanceErr*dc, 'f', ms));
 			}
 			else
 			{
 				dx = QString("%1").arg(QString::number(oDistance, 'f', 3));
-				dy = QString("%1").arg(QString::number(oDistance*3262, 'f', 1));
+				dy = QString("%1").arg(QString::number(oDistance*dc, 'f', ms));
 			}
 
-			if (nType==NebAGx || nType==NebGx || nType==NebRGx || nType==NebIGx || nType==NebQSO || nType==NebISM)
-			{
-				//TRANSLATORS: Unit of measure for distance - megaparsecs
-				du = q_("Mpc");
-			}
-			else
-			{
-				du = QString("%1 (%2 %3)")
-						//TRANSLATORS: Unit of measure for distance - kiloparsecs
-						.arg(q_("kpc"))
-						.arg(dy)
-						//TRANSLATORS: Unit of measure for distance - Light Years
-						.arg(q_("ly"));
-			}
-			oss << q_("Distance: %1 %2").arg(dx).arg(du) << "<br>";
+			oss << q_("Distance: %1 %2 (%3 %4)").arg(dx).arg(dupc).arg(dy).arg(duly) << "<br>";
 		}
 	}
 
@@ -333,6 +339,22 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	postProcessInfoString(str, flags);
 
 	return str;
+}
+
+QString Nebula::getEnglishAliases() const
+{
+	QString aliases = "";
+	if (englishAliases.size()!=0)
+		aliases = englishAliases.join(" - ");
+	return aliases;
+}
+
+QString Nebula::getI18nAliases() const
+{
+	QString aliases = "";
+	if (nameI18Aliases.size()!=0)
+		aliases = nameI18Aliases.join(" - ");
+	return aliases;
 }
 
 float Nebula::getVMagnitude(const StelCore* core) const

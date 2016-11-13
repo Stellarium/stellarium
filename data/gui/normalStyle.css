@@ -230,7 +230,7 @@ QPushButton {
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(183, 184, 185), stop: 1 rgb(111, 113, 114));
 }
 
-QPushButton::Disabled {
+QPushButton::disabled {
         color: #f0f0f0;
 }
 
@@ -717,6 +717,11 @@ QComboBox QAbstractItemView {
 QComboBox {
 	padding-left: 3px;
 }
+
+QComboBox:disabled, QSpinBox:disabled {
+        color: #f0f0f0;
+}
+
 
 QProgressBar {
 	border: 1px solid rgba(102, 102, 128, 50%);

@@ -65,7 +65,7 @@ static QStringList component_array;
 // This number must be incremented each time the content or file format of the stars catalogs change
 // It can also be incremented when the defaultStarsConfig.json file change.
 // It should always matchs the version field of the defaultStarsConfig.json file
-static const int StarCatalogFormatVersion = 8;
+static const int StarCatalogFormatVersion = 9;
 
 // Initialise statics
 bool StarMgr::flagSciNames = true;
@@ -1280,11 +1280,12 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 		return searchHP(it.value());
 	}
 
-	// Search by I18n additional common names
-	QMap<QString,int>::const_iterator ita(additionalNamesIndexI18n.find(objw));
-	if (ita!=additionalNamesIndexI18n.end())
+	// Search by I18n additional common names	
+	QMap<QString, int>::iterator ita;
+	for (ita = additionalNamesIndexI18n.begin(); ita != additionalNamesIndexI18n.end(); ++ita)
 	{
-		return searchHP(ita.value());
+		if (ita.key().contains(objw, Qt::CaseInsensitive))
+			return searchHP(ita.value());
 	}
 
 	// Search by sci name
@@ -1361,10 +1362,11 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	}
 
 	// Search by English additional common names
-	QMap<QString,int>::const_iterator ita(additionalNamesIndex.find(objw));
-	if (ita!=additionalNamesIndex.end())
+	QMap<QString, int>::iterator ita;
+	for (ita = additionalNamesIndex.begin(); ita != additionalNamesIndex.end(); ++ita)
 	{
-		return searchHP(ita.value());
+		if (ita.key().contains(objw, Qt::CaseInsensitive))
+			return searchHP(ita.value());
 	}
 
 	// Search by sci name
@@ -1419,8 +1421,15 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			{
 				if (maxNbItem<=0)
 					break;
-				result.append(inEnglish ? getAdditionalEnglishNames(ita.value()) : getAdditionalNames(ita.value()));
-				--maxNbItem;
+				QStringList names = (inEnglish ? getAdditionalEnglishNames(ita.value()) : getAdditionalNames(ita.value())).split(" - ");
+				foreach (QString name, names)
+				{
+					if (name.contains(objw, Qt::CaseInsensitive))
+					{
+						result.append(name);
+						--maxNbItem;
+					}
+				}
 			}
 			else
 				break;
@@ -1449,8 +1458,15 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			{
 				if (maxNbItem<=0)
 					break;
-				result.append(inEnglish ? getAdditionalEnglishNames(j.value()) : getAdditionalNames(j.value()));
-				--maxNbItem;
+				QStringList names = (inEnglish ? getAdditionalEnglishNames(j.value()) : getAdditionalNames(j.value())).split(" - ");
+				foreach (QString name, names)
+				{
+					if (name.contains(objw, Qt::CaseInsensitive))
+					{
+						result.append(name);
+						--maxNbItem;
+					}
+				}
 			}
 		}
 
