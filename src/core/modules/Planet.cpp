@@ -143,6 +143,8 @@ Planet::Planet(const QString& englishName,
 	       Vec3f halocolor,
 	       float albedo,
 	       float roughness,
+	       float outgas_intensity,
+	       float outgas_falloff,
 	       const QString& atexMapName,
 	       const QString& anormalMapName,
 	       const QString& aobjModelName,
@@ -161,6 +163,8 @@ Planet::Planet(const QString& englishName,
 	  haloColor(halocolor),
 	  albedo(albedo),
 	  roughness(roughness),
+	  outgas_intensity(outgas_intensity),
+	  outgas_falloff(outgas_falloff),
 	  axisRotation(0.),
 	  objModel(NULL),
 	  objModelLoader(NULL),
@@ -1319,6 +1323,7 @@ void Planet::PlanetShaderVars::initLocations(QOpenGLShaderProgram* p)
 	GL(sunInfo = p->uniformLocation("sunInfo"));
 	GL(skyBrightness = p->uniformLocation("skyBrightness"));
 	GL(orenNayarParameters = p->uniformLocation("orenNayarParameters"));
+	GL(outgasParameters = p->uniformLocation("outgasParameters"));
 
 	// Moon-specific variables
 	GL(earthShadow = p->uniformLocation("earthShadow"));
@@ -2054,6 +2059,8 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 
 		GL(shader->setUniformValue(shaderVars.orenNayarParameters, vec));
 	}
+
+	GL(shader->setUniformValue(shaderVars.outgasParameters, QVector2D(outgas_intensity, outgas_falloff)));
 
 	return data;
 }

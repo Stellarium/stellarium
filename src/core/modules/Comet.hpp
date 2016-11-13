@@ -45,6 +45,8 @@ public:
 	      Vec3f halocolor,
 	      float albedo,
 	      float roughness,
+	      float outgas_intensity,
+	      float outgas_falloff,
 	      const QString& texMapName,
 	      const QString& objModelName,
 	      posFuncType _coordFunc,

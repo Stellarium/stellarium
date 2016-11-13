@@ -121,6 +121,8 @@ public:
 	       Vec3f halocolor,
 	       float albedo,
 	       float roughness,
+	       float outgas_intensity,
+	       float outgas_falloff,
 	       const QString& texMapName,
 	       const QString& normalMapName,
 	       const QString& objModelName,
@@ -388,6 +390,8 @@ protected:
 
 	float albedo;                    // Planet albedo. Used for magnitude computation (but formula dubious!)
 	float roughness;                 // Oren-Nayar roughness for Moon and OBJ-based models
+	float outgas_intensity;          // The intensity of a pseudo-outgas effect, based on an inverse exponential Lambert shading, with the light at the viewing position
+	float outgas_falloff;            // Exponent for falloff of outgas effect, should probably be < 1
 	Mat4d rotLocalToParent;          // GZ2015: was undocumented.
 					 // Apparently this is the axis orientation with respect to the parent body. For planets, this is axis orientation w.r.t. VSOP87A/J2000 ecliptical system.
 	float axisRotation;              // Rotation angle of the Planet on its axis.
@@ -455,6 +459,7 @@ private:
 		int sunInfo;
 		int skyBrightness;
 		int orenNayarParameters;
+		int outgasParameters;
 
 		// Moon-specific variables
 		int earthShadow;

@@ -24,7 +24,7 @@
 varying mediump vec2 texc; //texture coord
 varying highp vec3 P; //original vertex pos in model space
 #ifdef IS_OBJ
-    varying mediump vec3 normal; //pre-calculated normals
+    varying mediump vec3 normalVS; //pre-calculated normals
 #endif
 
 uniform sampler2D tex;
@@ -50,11 +50,14 @@ varying highp vec4 shadowCoord;
 #endif
 
 #if defined(IS_OBJ) || defined(IS_MOON)
-    //light and eye direction in model space
+    #define ADVANCED_SHADING 1
+    //light and eye direction in model space, pre-normalized
     uniform highp vec3 lightDirection;
-    uniform highp vec3 eyeDirection;
+    uniform highp vec3 eyeDirection;    
     //x = A, y = B, z = scaling factor (rho/pi * E0)
     uniform mediump vec3 orenNayarParameters;
+    //x = scaling, y = exponential falloff
+    uniform mediump vec2 outgasParameters;
 #endif
 #ifdef IS_MOON
     uniform sampler2D earthShadow;
@@ -94,13 +97,8 @@ mediump float random(in mediump vec4 seed4)
     return fract(sin(dot_product) * 43758.5453);
 }
 
-lowp float sampleShadowMap(in highp sampler2D sTex, in highp vec4 coord)
-{
-    //z-bias is modified using the angle between the surface and the light
-    //gives less shadow acne
-    highp float zbias = 0.0025 * tan(acos(dot(normal, normalize(sunInfo.xyz))));
-    zbias = clamp(zbias, 0.0, 0.01);
-    
+lowp float sampleShadowMap(in highp sampler2D sTex, in highp vec4 coord, in highp float zbias)
+{    
     // for some reason > 5 samples do not seem to work on my Ubuntu VM 
     // (no matter if ES2 or GL 2.1)
     // everything gets shadowed, but no errors?!
@@ -138,10 +136,19 @@ mediump float orenNayar(in mediump vec3 normal, in highp vec3 lightDir, in highp
     return max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C) * scale;
 }
 
+// calculate pseudo-outgassing effect, inspired by MeshLab's "electronic microscope" shader
+lowp float outgasFactor(in mediump vec3 normal, in highp vec3 lightDir, in mediump float falloff)
+{
+    mediump float opac = dot(normal,lightDir);
+    //opac = abs(opac); //probably not necessary
+    opac = 1.0 - pow(opac, falloff);
+    return opac;
+}
+
 void main()
 {
     mediump float final_illumination = 1.0;
-#if defined(IS_OBJ) || defined(IS_MOON)
+#ifdef ADVANCED_SHADING
     mediump float lum = 1.;
 #else
     mediump float lum = lum_;
@@ -228,32 +235,61 @@ void main()
     mediump vec3 normal = texture2D(normalMap, texc).rgb-vec3(0.5, 0.5, 0);
     normal = normalize(normalX*normal.x+normalY*normal.y+normalZ*normal.z);
     // normal now contains the real surface normal taking normal map into account
+#elif defined(IS_OBJ)
+    // important to normalize here again
+    mediump vec3 normal = normalize(normalVS);
 #endif
-#if defined(IS_OBJ) || defined(IS_MOON)
+#ifdef ADVANCED_SHADING
     // Use an Oren-Nayar model for rough surfaces
     // Ref: http://content.gpwiki.org/index.php/D3DBook:(Lighting)_Oren-Nayar
     lum = orenNayar(normal, lightDirection, eyeDirection, orenNayarParameters.x, orenNayarParameters.y, orenNayarParameters.z);
+    //calculate pseudo-outgassing/rim-lighting effect
+    lowp float outgas = 0.0;
+    if(outgasParameters.x > 0.0)
+    {
+        outgas = outgasParameters.x * outgasFactor(normal, eyeDirection, outgasParameters.y);
+    }
 #endif
 //Reduce lum if sky is bright, to avoid burnt-out look in daylight sky.
     lum *= (1.0-0.4*skyBrightness);
 #ifdef SHADOWMAP
     //use shadowmapping
-    lowp float shadow = sampleShadowMap(shadowTex, shadowCoord);
+    //z-bias is modified using the angle between the surface and the light
+    //gives less shadow acne
+    highp float zbias = 0.0025 * tan(acos(dot(normal, normalize(sunInfo.xyz))));
+    zbias = clamp(zbias, 0.0, 0.01);
+    lowp float shadow = sampleShadowMap(shadowTex, shadowCoord, zbias);
     lum*=shadow;
 #endif
+
+    //final lighting color
     mediump vec4 litColor = vec4(lum * final_illumination * diffuseLight + ambientLight, 1.0);
+#ifdef ADVANCED_SHADING
+    //apply texture-colored rimlight
+    //litColor.xyz = clamp( litColor.xyz + vec3(outgas), 0.0, 1.0);
+#endif
+    mediump vec4 finalColor = texture2D(tex,texc);
 #ifdef IS_MOON
     if(final_illumination < 0.99)
     {
         lowp vec4 shadowColor = texture2D(earthShadow, vec2(final_illumination, 0.5));
-        gl_FragColor = mix(texture2D(tex, texc) * litColor, shadowColor, shadowColor.a);
+        finalColor = mix(finalColor * litColor, shadowColor, shadowColor.a);
     }
     else
 #endif
     {
-        gl_FragColor = texture2D(tex, texc) * litColor;
-        #ifdef SHADOWMAP
-        //gl_FragColor = vec4(shadow,shadow,shadow,1.0);
-        #endif
+        finalColor *= litColor;
     }
+
+#ifdef ADVANCED_SHADING
+    //apply white rimlight
+    finalColor.xyz = clamp( finalColor.xyz + vec3(outgas), 0.0, 1.0);
+#endif
+
+    gl_FragColor = finalColor;
+
+#ifdef ADVANCED_SHADING
+    //to debug the outgas effect contribution, uncomment this line
+    //gl_FragColor = vec4(vec3(outgas),1.0);
+#endif
 }

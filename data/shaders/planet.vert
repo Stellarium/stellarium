@@ -39,7 +39,7 @@ varying highp vec3 P; //original unprojected position (in AU)
 
 #ifdef IS_OBJ
     //OBJ uses single normal for oren-nayar
-    varying mediump vec3 normal;
+    varying mediump vec3 normalVS;
 #else
     #ifdef IS_MOON
         //Luna uses normal mapping
@@ -64,7 +64,8 @@ void main()
 #endif
 #ifdef IS_OBJ
     //OBJ uses imported normals
-    normal = normalIn;
+    //assume it is pre-normalized by the importer
+    normalVS = normalIn;
     
     //The unprojectedVertex here is in km, so we have to scale to AU
     P = unprojectedVertex.xyz / 149597870.691;
