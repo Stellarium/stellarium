@@ -113,7 +113,11 @@ void ConfigurationDialog::retranslate()
 		//Plug-in information
 		populatePluginsList();
 
-		populateDeltaTAlgorithmsList();		
+		populateDeltaTAlgorithmsList();
+
+		populateDateFormatsList();
+
+		populateTimeFormatsList();
 	}
 }
 
@@ -227,9 +231,38 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->fixedDateTimeCurrentButton, SIGNAL(clicked()), this, SLOT(setFixedDateTimeToCurrent()));
 	connect(ui->editShortcutsPushButton, SIGNAL(clicked()), this, SLOT(showShortcutsWindow()));
 
+	StelLocaleMgr & localeManager = StelApp::getInstance().getLocaleMgr();
+	// Display formats of date
+	populateDateFormatsList();
+	int idx = ui->dateFormatsComboBox->findData(localeManager.getDateFormatStr(), Qt::UserRole, Qt::MatchCaseSensitive);
+	if (idx==-1)
+	{
+		// Use system_deafult as default
+		idx = ui->dateFormatsComboBox->findData(QVariant("system_deafult"), Qt::UserRole, Qt::MatchCaseSensitive);
+	}
+	ui->dateFormatsComboBox->setCurrentIndex(idx);
+	connect(ui->dateFormatsComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(setDateFormat()));
+
+	// Display formats of time
+	populateTimeFormatsList();
+	idx = ui->timeFormatsComboBox->findData(localeManager.getTimeFormatStr(), Qt::UserRole, Qt::MatchCaseSensitive);
+	if (idx==-1)
+	{
+		// Use system_deafult as default
+		idx = ui->timeFormatsComboBox->findData(QVariant("system_deafult"), Qt::UserRole, Qt::MatchCaseSensitive);
+	}
+	ui->timeFormatsComboBox->setCurrentIndex(idx);
+	connect(ui->timeFormatsComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(setTimeFormat()));
+	if (StelApp::getInstance().getSettings()->value("gui/flag_time_jd", false).toBool())
+		ui->jdRadioButton->setChecked(true);
+	else
+		ui->dtRadioButton->setChecked(true);
+	connect(ui->jdRadioButton, SIGNAL(clicked(bool)), this, SLOT(setButtonBarDTFormat()));
+	connect(ui->dtRadioButton, SIGNAL(clicked(bool)), this, SLOT(setButtonBarDTFormat()));
+
 	// Delta-T
 	populateDeltaTAlgorithmsList();	
-	int idx = ui->deltaTAlgorithmComboBox->findData(core->getCurrentDeltaTAlgorithmKey(), Qt::UserRole, Qt::MatchCaseSensitive);
+	idx = ui->deltaTAlgorithmComboBox->findData(core->getCurrentDeltaTAlgorithmKey(), Qt::UserRole, Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
 		// Use Espenak & Meeus (2006) as default
@@ -386,6 +419,14 @@ void ConfigurationDialog::setStartupTimeMode()
 	StelApp::getInstance().getCore()->setPresetSkyTime(ui->fixedDateTimeEdit->dateTime());
 }
 
+void ConfigurationDialog::setButtonBarDTFormat()
+{
+	if (ui->jdRadioButton->isChecked())
+		gui->getButtonBar()->setFlagTimeJd(true);
+	else
+		gui->getButtonBar()->setFlagTimeJd(false);
+}
+
 void ConfigurationDialog::showShortcutsWindow()
 {
 	StelAction* action = StelApp::getInstance().getStelActionManager()->findAction("actionShow_Shortcuts_Window_Global");
@@ -468,10 +509,14 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 		flags |= StelObject::Extra;
 	if (ui->checkBoxGalacticCoordinates->isChecked())
 		flags |= StelObject::GalacticCoord;
+	if (ui->checkBoxSupergalacticCoordinates->isChecked())
+		flags |= StelObject::SupergalacticCoord;
 	if (ui->checkBoxType->isChecked())
 		flags |= StelObject::ObjectType;
-	if (ui->checkBoxEclipticCoords->isChecked())
-		flags |= StelObject::EclipticCoord;
+	if (ui->checkBoxEclipticCoordsJ2000->isChecked())
+		flags |= StelObject::EclipticCoordJ2000;
+	if (ui->checkBoxEclipticCoordsOfDate->isChecked())
+		flags |= StelObject::EclipticCoordOfDate;
 
 	gui->setInfoTextFilters(flags);
 }
@@ -537,84 +582,94 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	Q_ASSERT(proj);
 
 	// view dialog / sky tab settings
-	conf->setValue("stars/absolute_scale",              propMgr->getStelPropertyValue("StelSkyDrawer.absoluteStarScale").toFloat());
-	conf->setValue("stars/relative_scale",              propMgr->getStelPropertyValue("StelSkyDrawer.relativeStarScale").toFloat());
-	conf->setValue("stars/flag_star_twinkle",           propMgr->getStelPropertyValue("StelSkyDrawer.flagTwinkle").toFloat());
-	conf->setValue("stars/star_twinkle_amount",         propMgr->getStelPropertyValue("StelSkyDrawer.twinkleAmount").toFloat());
-	conf->setValue("astro/flag_star_magnitude_limit",   propMgr->getStelPropertyValue("StelSkyDrawer.flagStarMagnitudeLimit").toBool());
-	conf->setValue("astro/star_magnitude_limit",        propMgr->getStelPropertyValue("StelSkyDrawer.customStarMagLimit").toFloat());
-	conf->setValue("astro/flag_planet_magnitude_limit", propMgr->getStelPropertyValue("StelSkyDrawer.flagPlanetMagnitudeLimit").toBool());
-	conf->setValue("astro/planet_magnitude_limit",      propMgr->getStelPropertyValue("StelSkyDrawer.customPlanetMagLimit").toFloat());
-	conf->setValue("astro/flag_nebula_magnitude_limit", propMgr->getStelPropertyValue("StelSkyDrawer.flagNebulaMagnitudeLimit").toBool());
-	conf->setValue("astro/nebula_magnitude_limit",      propMgr->getStelPropertyValue("StelSkyDrawer.customNebulaMagLimit").toFloat());
-	conf->setValue("viewing/use_luminance_adaptation",  propMgr->getStelPropertyValue("StelSkyDrawer.flagLuminanceAdaptation").toBool());
-	conf->setValue("astro/flag_planets",                propMgr->getStelPropertyValue("SolarSystem.planetsDisplayed").toBool());
-	conf->setValue("astro/flag_planets_hints",          propMgr->getStelPropertyValue("SolarSystem.flagHints").toBool());
-	conf->setValue("astro/flag_planets_orbits",         propMgr->getStelPropertyValue("SolarSystem.flagOrbits").toBool());
-	conf->setValue("viewing/flag_isolated_trails",      propMgr->getStelPropertyValue("SolarSystem.flagIsolatedTrails").toBool());
-	conf->setValue("viewing/flag_isolated_orbits",      propMgr->getStelPropertyValue("SolarSystem.flagIsolatedOrbits").toBool());
-	conf->setValue("astro/flag_light_travel_time",      propMgr->getStelPropertyValue("SolarSystem.flagLightTravelTime").toBool());
-	conf->setValue("viewing/flag_moon_scaled",          propMgr->getStelPropertyValue("SolarSystem.flagMoonScale").toBool());
-	conf->setValue("viewing/moon_scale",                propMgr->getStelPropertyValue("SolarSystem.moonScale").toDouble());
-	conf->setValue("astro/meteor_zhr",                  propMgr->getStelPropertyValue("SporadicMeteorMgr.zhr").toInt());
-	conf->setValue("astro/milky_way_intensity",         propMgr->getStelPropertyValue("MilkyWay.intensity").toDouble());
-	conf->setValue("astro/zodiacal_light_intensity",    propMgr->getStelPropertyValue("ZodiacalLight.intensity").toDouble());
-	conf->setValue("astro/flag_grs_custom",             propMgr->getStelPropertyValue("SolarSystem.flagCustomGrsSettings").toBool());
-	conf->setValue("astro/grs_longitude",               propMgr->getStelPropertyValue("SolarSystem.customGrsLongitude").toInt());
-	conf->setValue("astro/grs_drift",                   propMgr->getStelPropertyValue("SolarSystem.customGrsDrift").toDouble());
-	conf->setValue("astro/grs_jd",                      propMgr->getStelPropertyValue("SolarSystem.customGrsJD").toDouble());
-	conf->setValue("astro/flag_planets_labels",         propMgr->getStelPropertyValue("SolarSystem.labelsDisplayed").toBool());
-	conf->setValue("astro/labels_amount",               propMgr->getStelPropertyValue("SolarSystem.labelsAmount").toDouble());
-	conf->setValue("viewing/flag_planets_native_names", propMgr->getStelPropertyValue("SolarSystem.flagNativeNames").toBool());
+	conf->setValue("stars/absolute_scale",			propMgr->getStelPropertyValue("StelSkyDrawer.absoluteStarScale").toFloat());
+	conf->setValue("stars/relative_scale",			propMgr->getStelPropertyValue("StelSkyDrawer.relativeStarScale").toFloat());
+	conf->setValue("stars/flag_star_twinkle",		propMgr->getStelPropertyValue("StelSkyDrawer.flagTwinkle").toFloat());
+	conf->setValue("stars/star_twinkle_amount",		propMgr->getStelPropertyValue("StelSkyDrawer.twinkleAmount").toFloat());
+	conf->setValue("astro/flag_star_magnitude_limit",	propMgr->getStelPropertyValue("StelSkyDrawer.flagStarMagnitudeLimit").toBool());
+	conf->setValue("astro/star_magnitude_limit",		propMgr->getStelPropertyValue("StelSkyDrawer.customStarMagLimit").toFloat());
+	conf->setValue("astro/flag_planet_magnitude_limit",	propMgr->getStelPropertyValue("StelSkyDrawer.flagPlanetMagnitudeLimit").toBool());
+	conf->setValue("astro/planet_magnitude_limit",		propMgr->getStelPropertyValue("StelSkyDrawer.customPlanetMagLimit").toFloat());
+	conf->setValue("astro/flag_nebula_magnitude_limit",	propMgr->getStelPropertyValue("StelSkyDrawer.flagNebulaMagnitudeLimit").toBool());
+	conf->setValue("astro/nebula_magnitude_limit",		propMgr->getStelPropertyValue("StelSkyDrawer.customNebulaMagLimit").toFloat());
+	conf->setValue("viewing/use_luminance_adaptation",	propMgr->getStelPropertyValue("StelSkyDrawer.flagLuminanceAdaptation").toBool());
+	conf->setValue("astro/flag_planets",			propMgr->getStelPropertyValue("SolarSystem.planetsDisplayed").toBool());
+	conf->setValue("astro/flag_planets_hints",		propMgr->getStelPropertyValue("SolarSystem.flagHints").toBool());
+	conf->setValue("astro/flag_planets_orbits",		propMgr->getStelPropertyValue("SolarSystem.flagOrbits").toBool());
+	conf->setValue("viewing/flag_isolated_trails",		propMgr->getStelPropertyValue("SolarSystem.flagIsolatedTrails").toBool());
+	conf->setValue("viewing/flag_isolated_orbits",		propMgr->getStelPropertyValue("SolarSystem.flagIsolatedOrbits").toBool());
+	conf->setValue("astro/flag_light_travel_time",		propMgr->getStelPropertyValue("SolarSystem.flagLightTravelTime").toBool());
+	conf->setValue("viewing/flag_moon_scaled",		propMgr->getStelPropertyValue("SolarSystem.flagMoonScale").toBool());
+	conf->setValue("viewing/moon_scale",			propMgr->getStelPropertyValue("SolarSystem.moonScale").toDouble());
+	conf->setValue("astro/meteor_zhr",			propMgr->getStelPropertyValue("SporadicMeteorMgr.zhr").toInt());
+	conf->setValue("astro/milky_way_intensity",		propMgr->getStelPropertyValue("MilkyWay.intensity").toDouble());
+	conf->setValue("astro/zodiacal_light_intensity",	propMgr->getStelPropertyValue("ZodiacalLight.intensity").toDouble());
+	conf->setValue("astro/flag_grs_custom",			propMgr->getStelPropertyValue("SolarSystem.flagCustomGrsSettings").toBool());
+	conf->setValue("astro/grs_longitude",			propMgr->getStelPropertyValue("SolarSystem.customGrsLongitude").toInt());
+	conf->setValue("astro/grs_drift",			propMgr->getStelPropertyValue("SolarSystem.customGrsDrift").toDouble());
+	conf->setValue("astro/grs_jd",				propMgr->getStelPropertyValue("SolarSystem.customGrsJD").toDouble());
+	conf->setValue("astro/flag_planets_labels",		propMgr->getStelPropertyValue("SolarSystem.labelsDisplayed").toBool());
+	conf->setValue("astro/labels_amount",			propMgr->getStelPropertyValue("SolarSystem.labelsAmount").toDouble());
+	conf->setValue("viewing/flag_planets_native_names",	propMgr->getStelPropertyValue("SolarSystem.flagNativeNames").toBool());
 
 	// view dialog / markings tab settings
-	conf->setValue("viewing/flag_azimuthal_grid",        propMgr->getStelPropertyValue("GridLinesMgr.azimuthalGridDisplayed").toBool());
-	conf->setValue("viewing/flag_equatorial_grid",       propMgr->getStelPropertyValue("GridLinesMgr.equatorGridDisplayed").toBool());
-	conf->setValue("viewing/flag_equatorial_J2000_grid", propMgr->getStelPropertyValue("GridLinesMgr.equatorJ2000GridDisplayed").toBool());
-	conf->setValue("viewing/flag_equator_line",          propMgr->getStelPropertyValue("GridLinesMgr.equatorLineDisplayed").toBool());
-	conf->setValue("viewing/flag_equator_J2000_line",    propMgr->getStelPropertyValue("GridLinesMgr.equatorJ2000LineDisplayed").toBool());
-	conf->setValue("viewing/flag_ecliptic_line",         propMgr->getStelPropertyValue("GridLinesMgr.eclipticLineDisplayed").toBool());
-	conf->setValue("viewing/flag_ecliptic_J2000_line",   propMgr->getStelPropertyValue("GridLinesMgr.eclipticJ2000LineDisplayed").toBool());
-	conf->setValue("viewing/flag_ecliptic_grid",         propMgr->getStelPropertyValue("GridLinesMgr.eclipticGridDisplayed").toBool());
-	conf->setValue("viewing/flag_ecliptic_J2000_grid",   propMgr->getStelPropertyValue("GridLinesMgr.eclipticJ2000GridDisplayed").toBool());
-	conf->setValue("viewing/flag_meridian_line",         propMgr->getStelPropertyValue("GridLinesMgr.meridianLineDisplayed").toBool());
-	conf->setValue("viewing/flag_longitude_line",        propMgr->getStelPropertyValue("GridLinesMgr.longitudeLineDisplayed").toBool());
-	conf->setValue("viewing/flag_horizon_line",          propMgr->getStelPropertyValue("GridLinesMgr.horizonLineDisplayed").toBool());
-	conf->setValue("viewing/flag_galactic_grid",         propMgr->getStelPropertyValue("GridLinesMgr.galacticGridDisplayed").toBool());
-	conf->setValue("viewing/flag_galactic_equator_line", propMgr->getStelPropertyValue("GridLinesMgr.galacticEquatorLineDisplayed").toBool());
-	conf->setValue("viewing/flag_cardinal_points",       propMgr->getStelPropertyValue("LandscapeMgr.cardinalsPointsDisplayed").toBool());
-	conf->setValue("viewing/flag_prime_vertical_line",   propMgr->getStelPropertyValue("GridLinesMgr.primeVerticalLineDisplayed").toBool());
-	conf->setValue("viewing/flag_colure_lines",          propMgr->getStelPropertyValue("GridLinesMgr.colureLinesDisplayed").toBool());
-	conf->setValue("viewing/flag_precession_circles",    propMgr->getStelPropertyValue("GridLinesMgr.precessionCirclesDisplayed").toBool());
-	conf->setValue("viewing/flag_circumpolar_circles",   propMgr->getStelPropertyValue("GridLinesMgr.circumpolarCirclesDisplayed").toBool());
+	conf->setValue("viewing/flag_azimuthal_grid",		propMgr->getStelPropertyValue("GridLinesMgr.azimuthalGridDisplayed").toBool());
+	conf->setValue("viewing/flag_equatorial_grid",		propMgr->getStelPropertyValue("GridLinesMgr.equatorGridDisplayed").toBool());
+	conf->setValue("viewing/flag_equatorial_J2000_grid",	propMgr->getStelPropertyValue("GridLinesMgr.equatorJ2000GridDisplayed").toBool());
+	conf->setValue("viewing/flag_equator_line",		propMgr->getStelPropertyValue("GridLinesMgr.equatorLineDisplayed").toBool());
+	conf->setValue("viewing/flag_equator_J2000_line",	propMgr->getStelPropertyValue("GridLinesMgr.equatorJ2000LineDisplayed").toBool());
+	conf->setValue("viewing/flag_ecliptic_line",		propMgr->getStelPropertyValue("GridLinesMgr.eclipticLineDisplayed").toBool());
+	conf->setValue("viewing/flag_ecliptic_J2000_line",	propMgr->getStelPropertyValue("GridLinesMgr.eclipticJ2000LineDisplayed").toBool());
+	conf->setValue("viewing/flag_ecliptic_grid",		propMgr->getStelPropertyValue("GridLinesMgr.eclipticGridDisplayed").toBool());
+	conf->setValue("viewing/flag_ecliptic_J2000_grid",	propMgr->getStelPropertyValue("GridLinesMgr.eclipticJ2000GridDisplayed").toBool());
+	conf->setValue("viewing/flag_meridian_line",		propMgr->getStelPropertyValue("GridLinesMgr.meridianLineDisplayed").toBool());
+	conf->setValue("viewing/flag_longitude_line",		propMgr->getStelPropertyValue("GridLinesMgr.longitudeLineDisplayed").toBool());
+	conf->setValue("viewing/flag_horizon_line",		propMgr->getStelPropertyValue("GridLinesMgr.horizonLineDisplayed").toBool());
+	conf->setValue("viewing/flag_galactic_grid",		propMgr->getStelPropertyValue("GridLinesMgr.galacticGridDisplayed").toBool());
+	conf->setValue("viewing/flag_galactic_equator_line",	propMgr->getStelPropertyValue("GridLinesMgr.galacticEquatorLineDisplayed").toBool());
+	conf->setValue("viewing/flag_cardinal_points",		propMgr->getStelPropertyValue("LandscapeMgr.cardinalsPointsDisplayed").toBool());
+	conf->setValue("viewing/flag_prime_vertical_line",	propMgr->getStelPropertyValue("GridLinesMgr.primeVerticalLineDisplayed").toBool());
+	conf->setValue("viewing/flag_colure_lines",		propMgr->getStelPropertyValue("GridLinesMgr.colureLinesDisplayed").toBool());
+	conf->setValue("viewing/flag_precession_circles",	propMgr->getStelPropertyValue("GridLinesMgr.precessionCirclesDisplayed").toBool());
+	conf->setValue("viewing/flag_circumpolar_circles",	propMgr->getStelPropertyValue("GridLinesMgr.circumpolarCirclesDisplayed").toBool());
+	conf->setValue("viewing/flag_supergalactic_grid",	propMgr->getStelPropertyValue("GridLinesMgr.supergalacticGridDisplayed").toBool());
+	conf->setValue("viewing/flag_supergalactic_equator_line", propMgr->getStelPropertyValue("GridLinesMgr.supergalacticEquatorLineDisplayed").toBool());
+	conf->setValue("viewing/flag_celestial_J2000_poles",	propMgr->getStelPropertyValue("GridLinesMgr.celestialJ2000PolesDisplayed").toBool());
+	conf->setValue("viewing/flag_celestial_poles",		propMgr->getStelPropertyValue("GridLinesMgr.celestialPolesDisplayed").toBool());
+	conf->setValue("viewing/flag_zenith_nadir",		propMgr->getStelPropertyValue("GridLinesMgr.zenithNadirDisplayed").toBool());
+	conf->setValue("viewing/flag_ecliptic_J2000_poles",	propMgr->getStelPropertyValue("GridLinesMgr.eclipticJ2000PolesDisplayed").toBool());
+	conf->setValue("viewing/flag_ecliptic_poles",		propMgr->getStelPropertyValue("GridLinesMgr.eclipticPolesDisplayed").toBool());
+	conf->setValue("viewing/flag_galactic_poles",		propMgr->getStelPropertyValue("GridLinesMgr.galacticPolesDisplayed").toBool());
+	conf->setValue("viewing/flag_supergalactic_poles",	propMgr->getStelPropertyValue("GridLinesMgr.supergalacticPolesDisplayed").toBool());
+	conf->setValue("viewing/flag_equinox_J2000_points",	propMgr->getStelPropertyValue("GridLinesMgr.equinoxJ2000PointsDisplayed").toBool());
+	conf->setValue("viewing/flag_equinox_points",		propMgr->getStelPropertyValue("GridLinesMgr.equinoxPointsDisplayed").toBool());
 
-	conf->setValue("viewing/flag_constellation_drawing",          propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool());
-	conf->setValue("viewing/flag_constellation_name",             propMgr->getStelPropertyValue("ConstellationMgr.namesDisplayed").toBool());
-	conf->setValue("viewing/flag_constellation_boundaries",       propMgr->getStelPropertyValue("ConstellationMgr.boundariesDisplayed").toBool());
-	conf->setValue("viewing/flag_constellation_art",              propMgr->getStelPropertyValue("ConstellationMgr.artDisplayed").toBool());
+	conf->setValue("viewing/flag_constellation_drawing",	propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool());
+	conf->setValue("viewing/flag_constellation_name",	propMgr->getStelPropertyValue("ConstellationMgr.namesDisplayed").toBool());
+	conf->setValue("viewing/flag_constellation_boundaries",	propMgr->getStelPropertyValue("ConstellationMgr.boundariesDisplayed").toBool());
+	conf->setValue("viewing/flag_constellation_art",	propMgr->getStelPropertyValue("ConstellationMgr.artDisplayed").toBool());
 	conf->setValue("viewing/flag_constellation_isolate_selected", propMgr->getStelPropertyValue("ConstellationMgr.isolateSelected").toBool());
-	conf->setValue("viewing/flag_landscape_autoselection",        propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeAutoSelection").toBool());
-	conf->setValue("viewing/flag_light_pollution_database",       propMgr->getStelPropertyValue("LandscapeMgr.databaseUsage").toBool());
-	conf->setValue("viewing/flag_atmosphere_auto_enable",         propMgr->getStelPropertyValue("LandscapeMgr.flagAtmosphereAutoEnabling").toBool());
-	conf->setValue("viewing/constellation_art_intensity",         propMgr->getStelPropertyValue("ConstellationMgr.artIntensity").toFloat());
-	conf->setValue("viewing/constellation_name_style",            ConstellationMgr::getConstellationDisplayStyleString(
-			       static_cast<ConstellationMgr::ConstellationDisplayStyle> (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())  ));
-	conf->setValue("viewing/constellation_line_thickness",        propMgr->getStelPropertyValue("ConstellationMgr.constellationLineThickness").toFloat());
-	conf->setValue("viewing/flag_night", StelApp::getInstance().getVisionModeNight());
-	conf->setValue("astro/flag_stars",     propMgr->getStelPropertyValue("StarMgr.flagStarsDisplayed").toBool());
-	conf->setValue("astro/flag_star_name", propMgr->getStelPropertyValue("StarMgr.flagLabelsDisplayed").toBool());
-	conf->setValue("stars/labels_amount",  propMgr->getStelPropertyValue("StarMgr.labelsAmount").toDouble());
-	conf->setValue("astro/nebula_hints_amount", nmgr->getHintsAmount());
-	conf->setValue("astro/nebula_labels_amount", nmgr->getLabelsAmount());
-	conf->setValue("astro/flag_nebula_hints_proportional", nmgr->getHintsProportional());
-	conf->setValue("astro/flag_surface_brightness_usage", nmgr->getFlagSurfaceBrightnessUsage());
-	conf->setValue("gui/flag_dso_designation_usage", nmgr->getDesignationUsage());
-	conf->setValue("astro/flag_nebula_name", nmgr->getFlagHints());
-	conf->setValue("astro/flag_nebula_display_no_texture", ! propMgr->getStelPropertyValue("StelSkyLayerMgr.flagShow").toBool() );
-	conf->setValue("astro/flag_use_type_filter", nmgr->getFlagUseTypeFilters());
-	conf->setValue("projection/type", core->getCurrentProjectionTypeKey());
-	conf->setValue("astro/flag_nutation", core->getUseNutation());
-	conf->setValue("astro/flag_topocentric_coordinates", core->getUseTopocentricCoordinates());
+	conf->setValue("viewing/flag_landscape_autoselection",	propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeAutoSelection").toBool());
+	conf->setValue("viewing/flag_light_pollution_database",	propMgr->getStelPropertyValue("LandscapeMgr.databaseUsage").toBool());
+	conf->setValue("viewing/flag_atmosphere_auto_enable",	propMgr->getStelPropertyValue("LandscapeMgr.flagAtmosphereAutoEnabling").toBool());
+	conf->setValue("viewing/constellation_art_intensity",	propMgr->getStelPropertyValue("ConstellationMgr.artIntensity").toFloat());
+	conf->setValue("viewing/constellation_name_style",	ConstellationMgr::getConstellationDisplayStyleString(static_cast<ConstellationMgr::ConstellationDisplayStyle> (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())  ));
+	conf->setValue("viewing/constellation_line_thickness",	propMgr->getStelPropertyValue("ConstellationMgr.constellationLineThickness").toFloat());
+	conf->setValue("viewing/flag_night",			StelApp::getInstance().getVisionModeNight());
+	conf->setValue("astro/flag_stars",			propMgr->getStelPropertyValue("StarMgr.flagStarsDisplayed").toBool());
+	conf->setValue("astro/flag_star_name",			propMgr->getStelPropertyValue("StarMgr.flagLabelsDisplayed").toBool());
+	conf->setValue("stars/labels_amount",			propMgr->getStelPropertyValue("StarMgr.labelsAmount").toDouble());
+	conf->setValue("astro/nebula_hints_amount",		nmgr->getHintsAmount());
+	conf->setValue("astro/nebula_labels_amount",		nmgr->getLabelsAmount());
+	conf->setValue("astro/flag_nebula_hints_proportional",	nmgr->getHintsProportional());
+	conf->setValue("astro/flag_surface_brightness_usage",	nmgr->getFlagSurfaceBrightnessUsage());
+	conf->setValue("gui/flag_dso_designation_usage",	nmgr->getDesignationUsage());
+	conf->setValue("astro/flag_nebula_name",		nmgr->getFlagHints());
+	conf->setValue("astro/flag_nebula_display_no_texture",	!propMgr->getStelPropertyValue("StelSkyLayerMgr.flagShow").toBool() );
+	conf->setValue("astro/flag_use_type_filter",		nmgr->getFlagUseTypeFilters());
+	conf->setValue("projection/type",			core->getCurrentProjectionTypeKey());
+	conf->setValue("astro/flag_nutation",			core->getUseNutation());
+	conf->setValue("astro/flag_topocentric_coordinates",	core->getUseTopocentricCoordinates());
 
 	// view dialog / DSO tag settings
 	const Nebula::CatalogGroup& cflags = nmgr->getCatalogFilters();
@@ -715,10 +770,14 @@ void ConfigurationDialog::saveCurrentViewOptions()
 			       (bool) (flags & StelObject::Extra));
 		conf->setValue("flag_show_galcoord",
 			       (bool) (flags & StelObject::GalacticCoord));
+		conf->setValue("flag_show_supergalcoord",
+			       (bool) (flags & StelObject::SupergalacticCoord));
 		conf->setValue("flag_show_type",
 			       (bool) (flags & StelObject::ObjectType));
-		conf->setValue("flag_show_eclcoord",
-			       (bool) (flags & StelObject::EclipticCoord));
+		conf->setValue("flag_show_eclcoordofdate",
+			       (bool) (flags & StelObject::EclipticCoordOfDate));
+		conf->setValue("flag_show_eclcoordj2000",
+			       (bool) (flags & StelObject::EclipticCoordJ2000));
 		conf->endGroup();
 	}
 
@@ -729,6 +788,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("gui/flag_show_toast_survey_button", gui->getFlagShowToastSurveyButton());
 	conf->setValue("gui/flag_show_decimal_degrees", StelApp::getInstance().getFlagShowDecimalDegrees());
 	conf->setValue("gui/flag_use_azimuth_from_south", StelApp::getInstance().getFlagSouthAzimuthUsage());
+	conf->setValue("gui/flag_time_jd", gui->getButtonBar()->getFlagTimeJd());
 
 	mvmgr->setInitFov(mvmgr->getCurrentFov());
 	mvmgr->setInitViewDirectionToCurrent();
@@ -747,6 +807,9 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	else
 		conf->setValue("navigation/viewing_mode", "equator");
 
+	StelLocaleMgr & localeManager = StelApp::getInstance().getLocaleMgr();
+	conf->setValue("localization/time_display_format", localeManager.getTimeFormatStr());
+	conf->setValue("localization/date_display_format", localeManager.getDateFormatStr());
 
 	// configuration dialog / tools tab
 	conf->setValue("gui/flag_show_flip_buttons", gui->getFlagShowFlipButtons());
@@ -975,7 +1038,7 @@ void ConfigurationDialog::setFixedDateTimeToCurrent(void)
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	double JD = core->getJD();
-	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(JD+StelUtils::getGMTShiftFromQT(JD)/24));
+	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(JD+core->getUTCOffset(JD)/24));
 	ui->fixedTimeRadio->setChecked(true);
 	setStartupTimeMode();
 }
@@ -1265,8 +1328,10 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxSize->setChecked(flags & StelObject::Size);
 	ui->checkBoxExtra->setChecked(flags & StelObject::Extra);
 	ui->checkBoxGalacticCoordinates->setChecked(flags & StelObject::GalacticCoord);
+	ui->checkBoxSupergalacticCoordinates->setChecked(flags & StelObject::SupergalacticCoord);
 	ui->checkBoxType->setChecked(flags & StelObject::ObjectType);
-	ui->checkBoxEclipticCoords->setChecked(flags & StelObject::EclipticCoord);
+	ui->checkBoxEclipticCoordsJ2000->setChecked(flags & StelObject::EclipticCoordJ2000);
+	ui->checkBoxEclipticCoordsOfDate->setChecked(flags & StelObject::EclipticCoordOfDate);
 }
 
 void ConfigurationDialog::updateTabBarListWidgetWidth()
@@ -1309,6 +1374,8 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 
 	// TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 	ui->deltaTLabel->setText(QString("%1 %2T:").arg(q_("Algorithm of")).arg(QChar(0x0394)));
+
+	ui->pushButtonCustomDeltaTEquationDialog->setFixedHeight(ui->deltaTAlgorithmComboBox->height());
 
 	QComboBox* algorithms = ui->deltaTAlgorithmComboBox;
 
@@ -1388,4 +1455,73 @@ void ConfigurationDialog::showCustomDeltaTEquationDialog()
 		customDeltaTEquationDialog = new CustomDeltaTEquationDialog();
 
 	customDeltaTEquationDialog->setVisible(true);
+}
+
+void ConfigurationDialog::populateDateFormatsList()
+{
+	Q_ASSERT(ui->dateFormatsComboBox);
+
+	QComboBox* dfmts = ui->dateFormatsComboBox;
+
+	//Save the current selection to be restored later
+	dfmts->blockSignals(true);
+	int index = dfmts->currentIndex();
+	QVariant selectedDateFormat = dfmts->itemData(index);
+	dfmts->clear();
+	//For each format, display the localized name and store the key as user
+	//data. Unfortunately, there's no other way to do this than with a cycle.
+	dfmts->addItem(q_("System default"), "system_default");
+	dfmts->addItem(q_("yyyy-mm-dd (ISO 8601)"), "yyyymmdd");
+	dfmts->addItem(q_("dd-mm-yyyy"), "ddmmyyyy");
+	dfmts->addItem(q_("mm-dd-yyyy"), "mmddyyyy");
+
+	//Restore the selection
+	index = dfmts->findData(selectedDateFormat, Qt::UserRole, Qt::MatchCaseSensitive);
+	dfmts->setCurrentIndex(index);
+	dfmts->blockSignals(false);
+}
+
+void ConfigurationDialog::setDateFormat()
+{
+	QString selectedFormat = ui->dateFormatsComboBox->itemData(ui->dateFormatsComboBox->currentIndex()).toString();
+
+	StelLocaleMgr & localeManager = StelApp::getInstance().getLocaleMgr();
+	if (selectedFormat == localeManager.getDateFormatStr())
+		return;
+
+	localeManager.setDateFormatStr(selectedFormat);	
+}
+
+void ConfigurationDialog::populateTimeFormatsList()
+{
+	Q_ASSERT(ui->timeFormatsComboBox);
+
+	QComboBox* tfmts = ui->timeFormatsComboBox;
+
+	//Save the current selection to be restored later
+	tfmts->blockSignals(true);
+	int index = tfmts->currentIndex();
+	QVariant selectedTimeFormat = tfmts->itemData(index);
+	tfmts->clear();
+	//For each format, display the localized name and store the key as user
+	//data. Unfortunately, there's no other way to do this than with a cycle.
+	tfmts->addItem(q_("System default"), "system_default");
+	tfmts->addItem(q_("12-hour format"), "12h");
+	tfmts->addItem(q_("24-hour format"), "24h");
+
+	//Restore the selection
+	index = tfmts->findData(selectedTimeFormat, Qt::UserRole, Qt::MatchCaseSensitive);
+	tfmts->setCurrentIndex(index);
+	tfmts->blockSignals(false);
+}
+
+void ConfigurationDialog::setTimeFormat()
+{
+	QString selectedFormat = ui->timeFormatsComboBox->itemData(ui->timeFormatsComboBox->currentIndex()).toString();
+
+	StelLocaleMgr & localeManager = StelApp::getInstance().getLocaleMgr();
+	if (selectedFormat == localeManager.getTimeFormatStr())
+		return;
+
+	localeManager.setTimeFormatStr(selectedFormat);	
 }

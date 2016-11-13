@@ -37,6 +37,7 @@ Ocular::Ocular(const QObject& other)
 	  m_effectiveFocalLength(other.property("effectiveFocalLength").toDouble()),
 	  m_fieldStop(other.property("fieldStop").toDouble()),
 	  m_name(other.property("name").toString()),
+	  m_reticlePath(other.property("reticlePath").toString()),
 	  m_reticleFOV(other.property("reticleFOV").toDouble())
 {
 }
@@ -70,7 +71,7 @@ QMap<int, QString> Ocular::propertyMap(void)
 /* ********************************************************************* */
 double Ocular::actualFOV(const Telescope * telescope, const Lens * lens) const
 {
-	const double lens_multipler = (lens != NULL ? lens->multipler() : 1.0f);
+	const double lens_multipler = (lens != NULL ? lens->getMultipler() : 1.0f);
 	double actualFOV = 0.0;
 	if (m_binoculars) {
 		actualFOV = appearentFOV();
@@ -89,7 +90,7 @@ double Ocular::magnification(const Telescope * telescope, const Lens * lens) con
 	if (m_binoculars) {
 		magnifiction = effectiveFocalLength();
 	} else {
-		const double lens_multipler = (lens != NULL ? lens->multipler() : 1.0f);
+		const double lens_multipler = (lens != NULL ? lens->getMultipler() : 1.0f);
 		magnifiction = telescope->focalLength() * lens_multipler / effectiveFocalLength();
 	}
 	return magnifiction;

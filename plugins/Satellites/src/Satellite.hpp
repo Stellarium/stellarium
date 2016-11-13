@@ -123,10 +123,7 @@ public:
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const;
 	virtual float getVMagnitude(const StelCore* core) const;
 	virtual double getAngularSize(const StelCore* core) const;
-	virtual QString getNameI18n(void) const
-	{
-		return name;
-	}
+	virtual QString getNameI18n(void) const;
 	virtual QString getEnglishName(void) const
 	{
 		return name;

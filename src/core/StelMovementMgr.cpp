@@ -53,7 +53,7 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, keyMoveSpeed(0.00025)
 	, keyZoomSpeed(0.00025)
 	, flagMoveSlow(false)
-	, movementsSpeedFactor(1.5)
+	, movementsSpeedFactor(1.0)
 	, flagAutoMove(false)
 	, zoomingMode(ZoomNone)
 	, deltaFov(0.)
@@ -61,6 +61,7 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, deltaAz(0.)
 	, flagManualZoom(false)
 	, autoMoveDuration(1.5)
+	, isDragging(false)
 	, hasDragged(false)
 	, previousX(0)
 	, previousY(0)
@@ -69,12 +70,11 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, zoomMove()
 	, flagAutoZoom(0)
 	, flagAutoZoomOutResetsDirection(0)
+	, mountMode(MountAltAzimuthal)
 	, dragTriggerDistance(4.f)
 	, viewportOffsetTimeline(NULL)
 {
 	setObjectName("StelMovementMgr");
-	isDragging = false;
-	mountMode = MountAltAzimuthal;  // default
 	upVectorMountFrame.set(0.,0.,1.);
 }
 
@@ -92,7 +92,6 @@ void StelMovementMgr::init()
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
 			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 
-	movementsSpeedFactor=1.;
 	flagEnableMoveAtScreenEdge = conf->value("navigation/flag_enable_move_at_screen_edge",false).toBool();
 	mouseZoomSpeed = conf->value("navigation/mouse_zoom",30).toInt();
 	flagEnableZoomKeys = conf->value("navigation/flag_enable_zoom_keys").toBool();
@@ -163,6 +162,9 @@ void StelMovementMgr::init()
 	addAction("actionLook_Towards_North", movementGroup, N_("Look towards North"), "lookNorth()", "Shift+N");
 	addAction("actionLook_Towards_South", movementGroup, N_("Look towards South"), "lookSouth()", "Shift+S");
 	addAction("actionLook_Towards_Zenith", movementGroup, N_("Look towards Zenith"), "lookZenith()", "Shift+Z");
+	// Additional hooks
+	addAction("actionLook_Towards_NCP", movementGroup, N_("Look towards North Celestial pole"), "lookTowardsNCP()", "Alt+Shift+N");
+	addAction("actionLook_Towards_SCP", movementGroup, N_("Look towards South Celestial pole"), "lookTowardsSCP()", "Alt+Shift+S");
 
 	viewportOffsetTimeline=new QTimeLine(1000, this);
 	viewportOffsetTimeline->setFrameRange(0, 100);
@@ -209,33 +211,33 @@ bool StelMovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons)
 	{
 		if (x <= 1)
 		{
-			turnLeft(1);
+			turnLeft(true);
 			isMouseMovingHoriz = true;
 		}
 		else if (x >= core->getProjection2d()->getViewportWidth() - 2)
 		{
-			turnRight(1);
+			turnRight(true);
 			isMouseMovingHoriz = true;
 		}
 		else if (isMouseMovingHoriz)
 		{
-			turnLeft(0);
+			turnLeft(false);
 			isMouseMovingHoriz = false;
 		}
 
 		if (y <= 1)
 		{
-			turnUp(1);
+			turnUp(true);
 			isMouseMovingVert = true;
 		}
 		else if (y >= core->getProjection2d()->getViewportHeight() - 2)
 		{
-			turnDown(1);
+			turnDown(true);
 			isMouseMovingVert = true;
 		}
 		else if (isMouseMovingVert)
 		{
-			turnUp(0);
+			turnUp(false);
 			isMouseMovingVert = false;
 		}
 	}
@@ -260,7 +262,7 @@ bool StelMovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons)
 
 double StelMovementMgr::getCallOrder(StelModuleActionName actionName) const
 {
-	// GZ: allow a few plugins to intercept keys!
+	// allow plugins to intercept keys by using a lower number than this!
 	if (actionName == StelModule::ActionHandleKeys)
 		return 5;
 	return 0;
@@ -358,11 +360,32 @@ void StelMovementMgr::handleMouseWheel(QWheelEvent* event)
 	if (event->orientation() != Qt::Vertical)
 		return;
   
-	const float numSteps = event->delta() / 120.f;
-	const float zoomFactor = std::exp(-mouseZoomSpeed * numSteps / 60.f);
-	const float zoomDuration = 0.2f * qAbs(numSteps);
-	zoomTo(getAimFov() * zoomFactor, zoomDuration);
-
+	const float numSteps = event->angleDelta().y() / 120.f;
+	if (dragTimeMode)
+	{
+		//qDebug() << "Modifiers: " << event->modifiers();
+		if (event->modifiers() & Qt::AltModifier) // DOES NOT WORK ON WINDOWS!
+		{
+			// move time by days
+			core->setJD(core->getJD()+numSteps);
+		}
+		else if (event->modifiers() & Qt::ShiftModifier)
+		{
+			// move time by hours
+			core->setJD(core->getJD()+numSteps/(24.f));
+		}
+		else
+		{
+			// move time by minutes
+			core->setJD(core->getJD()+numSteps/(24.f*60.f));
+		}
+	}
+	else
+	{
+		const float zoomFactor = std::exp(-mouseZoomSpeed * numSteps / 60.f);
+		const float zoomDuration = 0.2f * qAbs(numSteps);
+		zoomTo(getAimFov() * zoomFactor, zoomDuration);
+	}
 	event->accept();
 }
 
@@ -416,16 +439,16 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 				hasDragged = false;
 				previousX = event->x();
 				previousY = event->y();
-				beforeTimeDragTimeRate=core->getTimeRate();
 				if (dragTimeMode)
 				{
+					beforeTimeDragTimeRate=core->getTimeRate();
 					timeDragHistory.clear();
-					addTimeDragPoint(event->pos().x(), event->pos().y());
+					addTimeDragPoint(event->x(), event->y());
 				}
 				event->accept();
 				return;
 			}
-			else
+			else if (event->type()==QEvent::MouseButtonRelease)
 			{
 				isDragging = false;
 				if (hasDragged)
@@ -461,7 +484,7 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 					}
 					return;
 				}
-				else
+				else // has not dragged...
 				{
 					// It's a normal click release
 					// TODO: Leave time dragging in Natural speed or zero speed (config option?) if mouse was resting
@@ -489,6 +512,10 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 					//event->accept();
 					return;
 				}
+			}
+			else
+			{
+				qDebug() << "StelMovementMgr::handleMouseClicks: unknown mouse event type, skipping: " << event->type();
 			}
 			break;
 		case Qt::MidButton :
@@ -635,6 +662,15 @@ void StelMovementMgr::lookZenith(void)
 	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
 }
 
+void StelMovementMgr::lookTowardsNCP(void)
+{
+	setViewDirectionJ2000(core->equinoxEquToJ2000(Vec3d(0,0,1)));
+}
+
+void StelMovementMgr::lookTowardsSCP(void)
+{
+	setViewDirectionJ2000(core->equinoxEquToJ2000(Vec3d(0,0,-1)));
+}
 
 // Increment/decrement smoothly the vision field and position
 void StelMovementMgr::updateMotion(double deltaTime)
@@ -761,18 +797,14 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 //			}
 		}
 		move.coef+=move.speed*deltaTime*1000;
+		setViewUpVectorJ2000(move.aimUp);
 		if (move.coef>=1.)
 		{
-			setViewUpVectorJ2000(move.aimUp);
 			//qDebug() << "AutoMove finished. Setting Up vector (in mount frame) to " << upVectorMountFrame.v[0] << "/" << upVectorMountFrame.v[1] << "/" << upVectorMountFrame.v[2];
 			flagAutoMove=false;
 			move.coef=1.;
 		}
-		else
-		{	// 2016-03 Maybe this is the culprit?
-			//setViewUpVectorJ2000(move.startUp*(1.-move.coef) + move.aimUp*move.coef);
-			setViewUpVectorJ2000(move.aimUp);
-		}
+
 		// Use a smooth function
 		float smooth = 4.f;
 		double c;
@@ -849,7 +881,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 //			}
 		// qDebug() << "setting view direction to " << tmp.v[0] << "/" << tmp.v[1] << "/" << tmp.v[2];
 	}
-	else
+	else // no autoMove
 	{
 		if (flagTracking && objectMgr->getWasSelected()) // Equatorial vision vector locked on selected object
 		{
@@ -1055,18 +1087,20 @@ void StelMovementMgr::moveToObject(const StelObjectP& target, float moveDuration
 void StelMovementMgr::moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float moveDuration, ZoomingMode zooming)
 {
 	if (mountMode!=StelMovementMgr::MountAltAzimuthal)
+	{
+		qDebug() << "StelMovementMgr: called moveToAltAzi, but not in AltAz mount frame. Ignoring.";
 		return;
+	}
 
 	moveDuration /= movementsSpeedFactor;
 
-	// TODO: Specify start and aim vectors in AltAz system! Then the auto functions should be able to work it out properly with only minor edits.
+	// Specify start and aim vectors in AltAz system! Then the auto functions can work it out properly.
 	zoomingMode = zooming;
 	move.aim=aim;
 	move.aim.normalize();
 	move.aim*=2.;
 	move.aimUp=aimUp; // the new up vector. We cannot simply keep vertical axis, there may be the intention to look into the zenith or so.
 	move.aimUp.normalize();
-	// TODO: Replace by fixed current orientation!
 	move.start=core->j2000ToAltAz(viewDirectionJ2000, StelCore::RefractionOff);
 	move.start.normalize();
 	move.startUp.set(0., 0., 1.);
@@ -1088,7 +1122,7 @@ Vec3d StelMovementMgr::j2000ToMountFrame(const Vec3d& v) const
 	switch (mountMode)
 	{
 		case MountAltAzimuthal:
-			return core->j2000ToAltAz(v, StelCore::RefractionOff);
+			return core->j2000ToAltAz(v, StelCore::RefractionOff); // TODO: Decide if RefractionAuto?
 		case MountEquinoxEquatorial:
 			return core->j2000ToEquinoxEqu(v);
 		case MountGalactic:
@@ -1105,7 +1139,7 @@ Vec3d StelMovementMgr::mountFrameToJ2000(const Vec3d& v) const
 	switch (mountMode)
 	{
 		case MountAltAzimuthal:
-			return core->altAzToJ2000(v, StelCore::RefractionOff);
+			return core->altAzToJ2000(v, StelCore::RefractionOff); // TODO: Decide if RefractionAuto?
 		case MountEquinoxEquatorial:
 			return core->equinoxEquToJ2000(v);
 		case MountGalactic:
@@ -1175,7 +1209,7 @@ void StelMovementMgr::panView(const double deltaAz, const double deltaAlt)
 }
 
 
-//! Make the first screen position correspond to the second (useful for mouse dragging)
+// Make the first screen position correspond to the second (useful for mouse dragging)
 void StelMovementMgr::dragView(int x1, int y1, int x2, int y2)
 {
 	if (dragTimeMode)
@@ -1342,8 +1376,7 @@ void StelMovementMgr::moveViewport(float offsetX, float offsetY, const float dur
 	if (duration<=0.0f)
 	{
 		//avoid using the timeline to minimize overhead
-		core->setViewportHorizontalOffset(targetViewportOffset[0]);
-		core->setViewportVerticalOffset(targetViewportOffset[1]);
+		core->setViewportOffset(offsetX, offsetY);
 		return;
 	}
 
@@ -1364,6 +1397,5 @@ void StelMovementMgr::handleViewportOffsetMovement(qreal value)
 	float offsetX=oldViewportOffset.v[0] + (targetViewportOffset.v[0]-oldViewportOffset.v[0])*value;
 	float offsetY=oldViewportOffset.v[1] + (targetViewportOffset.v[1]-oldViewportOffset.v[1])*value;
 	//qDebug() << "handleViewportOffsetMovement(" << value << "): Setting viewport offset to " << offsetX << "/" << offsetY;
-	core->setViewportHorizontalOffset(offsetX);
-	core->setViewportVerticalOffset(offsetY);
+	core->setViewportOffset(offsetX, offsetY);
 }

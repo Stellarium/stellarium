@@ -113,11 +113,12 @@ void AstroCalcDialog::createDialogContent()
 	populateMajorPlanetList();
 	populateGroupCelestialBodyList();
 
-	double JD = core->getJD() + StelUtils::getGMTShiftFromQT(core->getJD())/24;
-	ui->dateFromDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(JD));
-	ui->dateToDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(JD + 30.f));
-	ui->phenomenFromDateEdit->setDateTime(StelUtils::jdToQDateTime(JD));
-	ui->phenomenToDateEdit->setDateTime(StelUtils::jdToQDateTime(JD + 365.f));
+	double JD = core->getJD() + core->getUTCOffset(core->getJD())/24;
+	QDateTime currentDT = StelUtils::jdToQDateTime(JD);
+	ui->dateFromDateTimeEdit->setDateTime(currentDT);
+	ui->dateToDateTimeEdit->setDateTime(currentDT.addMonths(1));
+	ui->phenomenFromDateEdit->setDateTime(currentDT);
+	ui->phenomenToDateEdit->setDateTime(currentDT.addYears(1));
 
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	connect(ui->planetaryPositionsTreeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
@@ -181,8 +182,9 @@ void AstroCalcDialog::currentPlanetaryPositions()
 
 	initListPlanetaryPositions();
 
-	double JD = StelApp::getInstance().getCore()->getJD();
-	ui->positionsTimeLabel->setText(q_("Positions on %1").arg(StelUtils::jdToQDateTime(JD + StelUtils::getGMTShiftFromQT(JD)/24).toString("yyyy-MM-dd hh:mm")));
+	StelCore* core = StelApp::getInstance().getCore();
+	double JD = core->getJD();
+	ui->positionsTimeLabel->setText(q_("Positions on %1").arg(StelUtils::jdToQDateTime(JD + core->getUTCOffset(JD)/24).toString("yyyy-MM-dd hh:mm")));
 
 	foreach (const PlanetP& planet, allPlanets)
 	{
@@ -196,7 +198,7 @@ void AstroCalcDialog::currentPlanetaryPositions()
 			treeItem->setText(ColumnDec, StelUtils::radToDmsStr(dec, true));
 			treeItem->setTextAlignment(ColumnDec, Qt::AlignRight);
 			treeItem->setText(ColumnMagnitude, QString::number(planet->getVMagnitudeWithExtinction(core), 'f', 2));
-			treeItem->setTextAlignment(ColumnMagnitude, Qt::AlignRight);
+			treeItem->setTextAlignment(ColumnMagnitude, Qt::AlignRight);			
 			treeItem->setText(ColumnType, q_(planet->getPlanetTypeString()));
 		}
 	}
@@ -279,8 +281,6 @@ void AstroCalcDialog::setEphemerisHeaderNames()
 	ephemerisHeader << q_("Dec (J2000)");
 	//TRANSLATORS: magnitude
 	ephemerisHeader << q_("Mag.");
-	//TRANSLATORS: visible magnitude
-	ephemerisHeader << q_("Vis. mag.");
 	ui->ephemerisTreeWidget->setHeaderLabels(ephemerisHeader);
 
 	// adjust the column width
@@ -340,7 +340,7 @@ void AstroCalcDialog::generateEphemeris()
 	{
 		double currentJD = core->getJD(); // save current JD
 		double firstJD = StelUtils::qDateTimeToJd(ui->dateFromDateTimeEdit->dateTime());
-		firstJD = firstJD - StelUtils::getGMTShiftFromQT(firstJD)/24;
+		firstJD = firstJD - core->getUTCOffset(firstJD)/24;
 		int elements = (int)((StelUtils::qDateTimeToJd(ui->dateToDateTimeEdit->dateTime()) - firstJD)/currentStep);
 		EphemerisListJ2000.clear();
 		EphemerisListJ2000.reserve(elements);
@@ -353,20 +353,18 @@ void AstroCalcDialog::generateEphemeris()
 			core->update(0); // force update to get new coordinates			
 			Vec3d pos = obj->getJ2000EquatorialPos(core);
 			EphemerisListJ2000.append(pos);
-			EphemerisListDates.append(StelUtils::jdToQDateTime(JD + StelUtils::getGMTShiftFromQT(JD)/24).toString("yyyy-MM-dd"));
+			EphemerisListDates.append(StelUtils::jdToQDateTime(JD + core->getUTCOffset(JD)/24).toString("yyyy-MM-dd"));
 			StelUtils::rectToSphe(&ra,&dec,pos);
 			ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->ephemerisTreeWidget);
 			// local date and time
-			treeItem->setText(EphemerisDate, StelUtils::jdToQDateTime(JD + StelUtils::getGMTShiftFromQT(JD)/24).toString("yyyy-MM-dd hh:mm:ss"));
+			treeItem->setText(EphemerisDate, StelUtils::jdToQDateTime(JD + core->getUTCOffset(JD)/24).toString("yyyy-MM-dd hh:mm:ss"));
 			treeItem->setText(EphemerisJD, QString::number(JD, 'f', 5));
 			treeItem->setText(EphemerisRA, StelUtils::radToHmsStr(ra));
 			treeItem->setTextAlignment(EphemerisRA, Qt::AlignRight);
 			treeItem->setText(EphemerisDec, StelUtils::radToDmsStr(dec, true));
 			treeItem->setTextAlignment(EphemerisDec, Qt::AlignRight);
-			treeItem->setText(EphemerisMagnitude, QString::number(obj->getVMagnitude(core), 'f', 2));
+			treeItem->setText(EphemerisMagnitude, QString::number(obj->getVMagnitudeWithExtinction(core), 'f', 2));
 			treeItem->setTextAlignment(EphemerisMagnitude, Qt::AlignRight);
-			treeItem->setText(EphemerisVMagnitude, QString::number(obj->getVMagnitudeWithExtinction(core), 'f', 2));
-			treeItem->setTextAlignment(EphemerisVMagnitude, Qt::AlignRight);
 		}
 		core->setJD(currentJD); // restore time
 	}
@@ -445,7 +443,7 @@ void AstroCalcDialog::populateCelestialBodyList()
 	//Restore the selection
 	index = planets->findData(selectedPlanetId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
-		index = planets->findData("Moon", Qt::UserRole, Qt::MatchCaseSensitive);;
+		index = planets->findData("Moon", Qt::UserRole, Qt::MatchCaseSensitive);
 	planets->setCurrentIndex(index);
 	planets->model()->sort(0);
 	planets->blockSignals(false);
@@ -506,7 +504,7 @@ void AstroCalcDialog::populateMajorPlanetList()
 	//Restore the selection
 	index = majorPlanet->findData(selectedPlanetId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
-		index = majorPlanet->findData("Mercury", Qt::UserRole, Qt::MatchCaseSensitive);;
+		index = majorPlanet->findData("Venus", Qt::UserRole, Qt::MatchCaseSensitive);
 	majorPlanet->setCurrentIndex(index);
 	majorPlanet->model()->sort(0);
 	majorPlanet->blockSignals(false);
@@ -533,9 +531,9 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	groups->addItem(q_("Oort cloud objects"), "8");
 	groups->addItem(q_("Star clusters"), "9");
 	groups->addItem(q_("Planetary nebulae"), "10");
-	groups->addItem(q_("Bright nebulae"), "11");
+	groups->addItem(q_("Bright nebulae (<10 mag.)"), "11");
 	groups->addItem(q_("Dark nebulae"), "12");
-	groups->addItem(q_("Galaxies"), "13");
+	groups->addItem(q_("Bright galaxies (<10 mag.)"), "13");
 
 	index = groups->findData(selectedGroupId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
@@ -577,7 +575,7 @@ void AstroCalcDialog::selectCurrentPhenomen(const QModelIndex &modelIndex)
 	QString date = modelIndex.sibling(modelIndex.row(), PhenomenaDate).data().toString();
 	bool ok;
 	double JD  = StelUtils::getJulianDayFromISO8601String(date.left(10) + "T" + date.right(8), &ok);
-	JD -= StelUtils::getGMTShiftFromQT(JD)/24.;
+	JD -= core->getUTCOffset(JD)/24.;
 
 	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
 	{
@@ -690,7 +688,7 @@ void AstroCalcDialog::calculatePhenomena()
 		case 11: // Bright nebulae
 			foreach(const NebulaP& object, allDSO)
 			{
-				if (object->getDSOType()==Nebula::NebN || object->getDSOType()==Nebula::NebBn || object->getDSOType()==Nebula::NebEn || object->getDSOType()==Nebula::NebRn || object->getDSOType()==Nebula::NebHII || object->getDSOType()==Nebula::NebISM || object->getDSOType()==Nebula::NebCn || object->getDSOType()==Nebula::NebSNR)
+				if (object->getVMagnitude(core)<10.f && (object->getDSOType()==Nebula::NebN || object->getDSOType()==Nebula::NebBn || object->getDSOType()==Nebula::NebEn || object->getDSOType()==Nebula::NebRn || object->getDSOType()==Nebula::NebHII || object->getDSOType()==Nebula::NebISM || object->getDSOType()==Nebula::NebCn || object->getDSOType()==Nebula::NebSNR))
 					dso.append(object);
 			}
 			break;
@@ -704,7 +702,7 @@ void AstroCalcDialog::calculatePhenomena()
 		case 13: // Galaxies
 			foreach(const NebulaP& object, allDSO)
 			{
-				if (object->getDSOType()==Nebula::NebGx || object->getDSOType()==Nebula::NebAGx || object->getDSOType()==Nebula::NebRGx || object->getDSOType()==Nebula::NebQSO || object->getDSOType()==Nebula::NebPossQSO || object->getDSOType()==Nebula::NebBLL || object->getDSOType()==Nebula::NebBLA || object->getDSOType()==Nebula::NebIGx)
+				if (object->getVMagnitude(core)<10.f && (object->getDSOType()==Nebula::NebGx || object->getDSOType()==Nebula::NebAGx || object->getDSOType()==Nebula::NebRGx || object->getDSOType()==Nebula::NebQSO || object->getDSOType()==Nebula::NebPossQSO || object->getDSOType()==Nebula::NebBLL || object->getDSOType()==Nebula::NebBLA || object->getDSOType()==Nebula::NebIGx))
 					dso.append(object);
 			}
 			break;
@@ -713,11 +711,11 @@ void AstroCalcDialog::calculatePhenomena()
 	PlanetP planet = solarSystem->searchByEnglishName(currentPlanet);
 	if (planet)
 	{
-		double currentJD = core->getJD(); // save current JD
-		double startJD = StelUtils::qDateTimeToJd(ui->phenomenFromDateEdit->dateTime());
-		double stopJD = StelUtils::qDateTimeToJd(ui->phenomenToDateEdit->dateTime());
-		startJD = startJD - StelUtils::getGMTShiftFromQT(startJD)/24;
-		stopJD = stopJD - StelUtils::getGMTShiftFromQT(stopJD)/24;
+		double currentJD = core->getJD(); // save current JD		
+		double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenFromDateEdit->date()));
+		double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenToDateEdit->date().addDays(1)));
+		startJD = startJD - core->getUTCOffset(startJD)/24;
+		stopJD = stopJD - core->getUTCOffset(stopJD)/24;
 
 		if (obj2Type<9)
 		{
@@ -800,19 +798,40 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 
 		QString phenomenType = q_("Conjunction");
 		double separation = it.value();
+		bool occultation = false;
+		double s1 = object1->getSpheroidAngularSize(core);
+		double s2 = object2->getSpheroidAngularSize(core);
 		if (opposition)
 		{
 			phenomenType = q_("Opposition");
 			separation += M_PI;
 		}
+		else if (separation<(s2*M_PI/180.) || separation<(s1*M_PI/180.))
+		{
+			double d1 = object1->getJ2000EquatorialPos(core).length();
+			double d2 = object2->getJ2000EquatorialPos(core).length();
+			if ((d1<d2 && s1<=s2) || (d1>d2 && s1>s2))
+				phenomenType = q_("Transit");
+			else
+				phenomenType = q_("Occultation");
+
+			// Added a special case - eclipse
+			if (qAbs(s1-s2)<=0.05 && (object1->getEnglishName()=="Sun" || object2->getEnglishName()=="Sun")) // 5% error of difference of sizes
+				phenomenType = q_("Eclipse");
+
+			occultation = true;
+		}
 
 		ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->phenomenaTreeWidget);
 		treeItem->setText(PhenomenaType, phenomenType);
 		// local date and time
-		treeItem->setText(PhenomenaDate, StelUtils::jdToQDateTime(it.key() + StelUtils::getGMTShiftFromQT(it.key())/24).toString("yyyy-MM-dd hh:mm:ss"));
+		treeItem->setText(PhenomenaDate, StelUtils::jdToQDateTime(it.key() + core->getUTCOffset(it.key())/24).toString("yyyy-MM-dd hh:mm:ss"));
 		treeItem->setText(PhenomenaObject1, object1->getNameI18n());
 		treeItem->setText(PhenomenaObject2, object2->getNameI18n());
-		treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation));
+		if (occultation)
+			treeItem->setText(PhenomenaSeparation, QChar(0x2014));
+		else
+			treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation));
 	}
 }
 
@@ -823,7 +842,7 @@ QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP &object1, Plan
 	QMap<double, double> separations;
 	QPair<double, double> extremum;
 
-	step0 = (stopJD - startJD)/4.0;
+	step0 = (stopJD - startJD)/12.0;
 	if (step0>24.8*365.25)
 		step0 = 24.8*365.25;
 
@@ -954,17 +973,26 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 
 		QString phenomenType = q_("Conjunction");
 		double separation = it.value();
+		bool occultation = false;
+		if (separation<(object2->getAngularSize(core)*M_PI/180.) || separation<(object1->getSpheroidAngularSize(core)*M_PI/180.))
+		{
+			phenomenType = q_("Occultation");
+			occultation = true;
+		}
 
 		ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->phenomenaTreeWidget);
 		treeItem->setText(PhenomenaType, phenomenType);
 		// local date and time
-		treeItem->setText(PhenomenaDate, StelUtils::jdToQDateTime(it.key() + StelUtils::getGMTShiftFromQT(it.key())/24).toString("yyyy-MM-dd hh:mm:ss"));
+		treeItem->setText(PhenomenaDate, StelUtils::jdToQDateTime(it.key() + core->getUTCOffset(it.key())/24).toString("yyyy-MM-dd hh:mm:ss"));
 		treeItem->setText(PhenomenaObject1, object1->getNameI18n());
 		if (!object2->getNameI18n().isEmpty())
 			treeItem->setText(PhenomenaObject2, object2->getNameI18n());
 		else
 			treeItem->setText(PhenomenaObject2, object2->getDSODesignation());
-		treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation));
+		if (occultation)
+			treeItem->setText(PhenomenaSeparation, QChar(0x2014));
+		else
+			treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation));
 	}
 }
 
@@ -975,7 +1003,7 @@ QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP &object1, Nebu
 	QMap<double, double> separations;
 	QPair<double, double> extremum;
 
-	step0 = (stopJD - startJD)/4.0;
+	step0 = (stopJD - startJD)/8.0;
 	if (step0>24.8*365.25)
 		step0 = 24.8*365.25;
 

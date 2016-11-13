@@ -376,7 +376,7 @@ private:
 
 	QList<StelProgressController*> progressControllers;
 
-	int baseFontSize;
+	int baseFontSize;	
 
 	// Framebuffer object used for viewport effects.
 	QOpenGLFramebufferObject* renderBuffer;
