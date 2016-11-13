@@ -301,10 +301,6 @@ void StelMovementMgr::handleKeys(QKeyEvent* event)
 				zoomOut(true); break;
 			case Qt::Key_Shift:
 				moveSlow(true); break;
-			case Qt::Key_Space:
-				if (event->modifiers().testFlag(Qt::ControlModifier))
-					setDragTimeMode(true);
-				break;
 			default:
 				return;
 		}
@@ -341,7 +337,7 @@ void StelMovementMgr::handleKeys(QKeyEvent* event)
 				zoomOut(false);
 				turnDown(false);
 				turnUp(false);
-				setDragTimeMode(false);
+				dragTimeMode=false;
 				break;
 			default:
 				return;
@@ -356,15 +352,24 @@ void StelMovementMgr::handleMouseWheel(QWheelEvent* event)
 	if (flagEnableMouseNavigation==false)
 		return;
 
-	// Manage only vertical wheel event
-	if (event->orientation() != Qt::Vertical)
-		return;
-  
-	const float numSteps = event->angleDelta().y() / 120.f;
-	if (dragTimeMode)
+	// This managed only vertical wheel events.
+	// However, Alt-wheel switches this to horizontal, so allow alt-wheel and handle angles properly!
+	const float numSteps = (event->angleDelta().x() + event->angleDelta().y()) / 120.f;
+
+	if (event->modifiers() & Qt::ControlModifier)
 	{
-		//qDebug() << "Modifiers: " << event->modifiers();
-		if (event->modifiers() & Qt::AltModifier) // DOES NOT WORK ON WINDOWS!
+		if ((event->modifiers() & Qt::AltModifier) && (event->modifiers() & Qt::ShiftModifier))
+		{
+			// move time by years
+			double jdNow=core->getJD();
+			int year, month, day, hour, min, sec, millis;
+			StelUtils::getDateFromJulianDay(jdNow, &year, &month, &day);
+			StelUtils::getTimeFromJulianDay(jdNow, &hour, &min, &sec, &millis);
+			double jdNew;
+			StelUtils::getJDFromDate(&jdNew, year+numSteps, month, day, hour, min, sec);
+			core->setJD(jdNew);
+		}
+		else if (event->modifiers() & Qt::AltModifier)
 		{
 			// move time by days
 			core->setJD(core->getJD()+numSteps);
@@ -435,16 +440,17 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 		case Qt::LeftButton :
 			if (event->type()==QEvent::MouseButtonPress)
 			{
-				isDragging = true;
-				hasDragged = false;
-				previousX = event->x();
-				previousY = event->y();
-				if (dragTimeMode)
+				if (event->modifiers() & Qt::ControlModifier)
 				{
+					dragTimeMode=true;
 					beforeTimeDragTimeRate=core->getTimeRate();
 					timeDragHistory.clear();
 					addTimeDragPoint(event->x(), event->y());
 				}
+				isDragging = true;
+				hasDragged = false;
+				previousX = event->x();
+				previousY = event->y();
 				event->accept();
 				return;
 			}
