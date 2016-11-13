@@ -155,11 +155,15 @@ QString HelpDialog::getHelpText(void)
 	            "</b></td></tr>\n";
 	// time dragging/scrolling
 	htmlText += "<tr><td>" + q_("Time dragging").toHtmlEscaped() + "</td><td><b>" +
-			q_("CTRL+Space & left mouse drag").toHtmlEscaped() + "</b></td></tr>";
+			q_("CTRL & left mouse drag").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: minutes").toHtmlEscaped() + "</td><td><b>" +
-			q_("CTRL+Space & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+			q_("CTRL & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: hours").toHtmlEscaped() + "</td><td><b>" +
-			q_("CTRL+Shift+Space & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+			q_("CTRL+SHIFT & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+	htmlText += "<tr><td>" + q_("Time scrolling: days").toHtmlEscaped() + "</td><td><b>" +
+			q_("CTRL+ALT & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+	htmlText += "<tr><td>" + q_("Time scrolling: years").toHtmlEscaped() + "</td><td><b>" +
+			q_("CTRL+ALT+SHIFT & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 
 	// select object
 	htmlText += "<tr><td>" + q_("Select object").toHtmlEscaped() + "</td>";
