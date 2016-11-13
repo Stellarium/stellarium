@@ -156,7 +156,7 @@ void BookmarksDialog::addBookmarkButtonPressed()
 			if (dateTimeFlag)
 			{
 				JD = core->getJD();
-				JDs = StelUtils::julianDayToISO8601String(JD + StelUtils::getGMTShiftFromQT(JD)/24.).replace("T", " ");
+				JDs = StelUtils::julianDayToISO8601String(JD + core->getUTCOffset(JD)/24.).replace("T", " ");
 			}
 
 			QString Location = "";
@@ -277,7 +277,7 @@ void BookmarksDialog::loadBookmarks()
 		if (!JD.isEmpty())
 		{
 			bm.jd = JD;
-			JDs = StelUtils::julianDayToISO8601String(JD.toDouble() + StelUtils::getGMTShiftFromQT(JD.toDouble())/24.).replace("T", " ");
+			JDs = StelUtils::julianDayToISO8601String(JD.toDouble() + core->getUTCOffset(JD.toDouble())/24.).replace("T", " ");
 		}
 		QString Location = bookmarkData.value("location").toString();
 		if (!Location.isEmpty())

@@ -44,6 +44,7 @@ void StelSkyImageTile::initCtor()
 	alphaBlend = false;
 	noTexture = false;
 	texFader = NULL;
+	birthJD = -1e10;
 }
 
 // Constructor

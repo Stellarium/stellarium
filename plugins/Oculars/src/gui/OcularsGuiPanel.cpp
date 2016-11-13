@@ -588,7 +588,7 @@ void OcularsGuiPanel::updateLensControls()
 	QString multiplerString;
 	if (lens != NULL)
 	{
-		QString name = lens->name();
+		QString name = lens->getName();
 		if (name.isEmpty())
 		{
 			fullName = QString(q_("Lens #%1")).arg(index);
@@ -597,7 +597,7 @@ void OcularsGuiPanel::updateLensControls()
 		{
 			fullName = QString(q_("Lens #%1: %2")).arg(index).arg(name);
 		}
-		multiplerString = QString(q_("Multiplicity: %1")).arg(lens->multipler());
+		multiplerString = QString(q_("Multiplicity: %1")).arg(lens->getMultipler());
 		multiplerString.append(QChar(0x00D7));
 	}
 	else
@@ -638,7 +638,12 @@ void OcularsGuiPanel::updateLensControls()
 	lensControls->setMinimumSize(widgetWidth, widgetHeight);
 	lensControls->resize(widgetWidth, widgetHeight);
 
-	setLensControlsVisible(true);
+	int oindex = ocularsPlugin->selectedOcularIndex;
+	Ocular* ocular = ocularsPlugin->oculars[oindex];
+	if (ocular->isBinoculars())
+		setLensControlsVisible(false);
+	else
+		setLensControlsVisible(true);
 }
 
 void OcularsGuiPanel::updateCcdControls()
@@ -808,6 +813,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 			prevTelescopeButton->setVisible(false);
 			nextTelescopeButton->setVisible(false);
 			fieldTelescopeName->setVisible(false);
+			fieldExitPupil->setVisible(false);
 			posY = 0.;
 			widgetHeight = 0.;
 
@@ -840,6 +846,8 @@ void OcularsGuiPanel::updateTelescopeControls()
 		if (mag>0)
 		{
 			double exitPupil = telescope->diameter()/mag;
+			if (ocular->isBinoculars())
+				exitPupil = ocular->fieldStop()/mag;
 			QString exitPupilLabel = QString(q_("Exit pupil: %1 mm")).arg(QString::number(exitPupil, 'f', 2));
 			fieldExitPupil->setPlainText(exitPupilLabel);
 			fieldExitPupil->setPos(posX, posY);

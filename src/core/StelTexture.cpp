@@ -45,7 +45,7 @@ StelTexture::StelTexture() : networkReply(NULL), loader(NULL), errorOccured(fals
 
 StelTexture::~StelTexture()
 {
-	if (id != 0)
+	if (id != 0 && QOpenGLContext::currentContext())
 	{
 		if (glIsTexture(id)==GL_FALSE)
 		{
