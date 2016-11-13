@@ -870,8 +870,13 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 
 		// Create the Solar System body and add it to the list
-		QString type = pd.value(secname+"/type").toString();		
+		QString type = pd.value(secname+"/type").toString();
+
+		//TODO: Refactor the subclass selection to reduce duplicate code mess here,
+		// by at least using this base class pointer and using setXXX functions instead of mega-constructors
+		// that have to pass most of it on to the Planet class
 		PlanetP p;
+
 		// New class objects, named "plutino", "cubewano", "dwarf planet", "SDO", "OCO", has properties
 		// similar to asteroids and we should calculate their positions like for asteroids. Dwarf planets
 		// have one exception: Pluto - we should use special function for calculation of orbit of Pluto.
@@ -884,6 +889,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 						    StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
 						    pd.value(secname+"/albedo").toFloat(),
 						    pd.value(secname+"/roughness",0.9f).toFloat(),
+						    pd.value(secname+"/outgas_intensity",0.0f).toFloat(),
+						    pd.value(secname+"/outgas_falloff", 0.1f).toFloat(),
 						    pd.value(secname+"/tex_map").toString(),
 						    pd.value(secname+"/model").toString(),
 						    posfunc,
@@ -936,6 +943,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					      StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
 					      pd.value(secname+"/albedo").toFloat(),
 					      pd.value(secname+"/roughness",0.9f).toFloat(),
+					      pd.value(secname+"/outgas_intensity",0.0f).toFloat(),
+					      pd.value(secname+"/outgas_falloff", 0.1f).toFloat(),
 					      pd.value(secname+"/tex_map").toString(),
 					      pd.value(secname+"/model").toString(),
 					      posfunc,
@@ -986,6 +995,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
 					       pd.value(secname+"/albedo").toFloat(),
 					       pd.value(secname+"/roughness",0.9f).toFloat(),
+					       pd.value(secname+"/outgas_intensity",0.0f).toFloat(),
+					       pd.value(secname+"/outgas_falloff", 0.1f).toFloat(),
 					       pd.value(secname+"/tex_map").toString(),
 					       pd.value(secname+"/normals_map", normalMapName).toString(),
 					       pd.value(secname+"/model").toString(),
