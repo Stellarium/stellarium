@@ -159,7 +159,7 @@ QString HelpDialog::getHelpText(void)
 	htmlText += "<tr><td>" + q_("Time scrolling: minutes").toHtmlEscaped() + "</td><td><b>" +
 			q_("CTRL+Space & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: hours").toHtmlEscaped() + "</td><td><b>" +
-			q_("CTRL+SHIFT+Space & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+			q_("CTRL+Shift+Space & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 
 	// select object
 	htmlText += "<tr><td>" + q_("Select object").toHtmlEscaped() + "</td>";
