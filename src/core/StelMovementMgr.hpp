@@ -274,9 +274,6 @@ public slots:
 	MountMode getMountMode(void) const {return mountMode;}
 	bool getEquatorialMount(void) const {return mountMode == MountEquinoxEquatorial;}
 
-	void setDragTimeMode(bool b) {dragTimeMode=b;}
-	bool getDragTimeMode() const {return dragTimeMode;}
-
 	//! Function designed only for scripting context. Put the function into the startup.ssc of your planetarium setup,
 	//! this will avoid any unwanted tracking.
 	void setInhibitAllAutomoves(bool inhibit) { flagInhibitAllAutomoves=inhibit;}
@@ -403,7 +400,7 @@ private:
 	float beforeTimeDragTimeRate;
 
 	// Time mouse control
-	bool dragTimeMode; // true during mouse time motion.
+	bool dragTimeMode; // Internal flag, true during mouse time motion. This is set true when mouse is moving with ctrl pressed. Set false when releasing ctrl.
 
 	//! @internal
 	//! Store data for auto-zoom.
