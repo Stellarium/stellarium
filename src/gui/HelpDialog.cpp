@@ -151,19 +151,19 @@ QString HelpDialog::getHelpText(void)
 	            "</td>";
 	htmlText += "<td><b>" + q_("Page Up/Down").toHtmlEscaped() +
 	            "</b></td></tr>\n";
-	htmlText += "<tr><td><b>" + q_("CTRL + Up/Down").toHtmlEscaped() +
+	htmlText += "<tr><td><b>" + q_("Ctrl+Up/Down").toHtmlEscaped() +
 	            "</b></td></tr>\n";
 	// time dragging/scrolling
 	htmlText += "<tr><td>" + q_("Time dragging").toHtmlEscaped() + "</td><td><b>" +
-			q_("CTRL & left mouse drag").toHtmlEscaped() + "</b></td></tr>";
+			q_("Ctrl & left mouse drag").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: minutes").toHtmlEscaped() + "</td><td><b>" +
-			q_("CTRL & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+			q_("Ctrl & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: hours").toHtmlEscaped() + "</td><td><b>" +
-			q_("CTRL+SHIFT & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+			q_("Ctrl+Shift & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: days").toHtmlEscaped() + "</td><td><b>" +
-			q_("CTRL+ALT & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+			q_("Ctrl+Alt & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: years").toHtmlEscaped() + "</td><td><b>" +
-			q_("CTRL+ALT+SHIFT & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+			q_("Ctrl+Alt+Shift & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 
 	// select object
 	htmlText += "<tr><td>" + q_("Select object").toHtmlEscaped() + "</td>";
@@ -172,16 +172,16 @@ QString HelpDialog::getHelpText(void)
 	htmlText += "<tr><td>";
 	htmlText += q_("Clear selection").toHtmlEscaped() + "</td>";
 #ifdef Q_OS_MAC
-	htmlText += "<td><b>" + q_("CTRL + Left click").toHtmlEscaped() + "</b></td></tr>\n";
+	htmlText += "<td><b>" + q_("Ctrl & left click").toHtmlEscaped() + "</b></td></tr>\n";
 #else
 	htmlText += "<td><b>" + q_("Right click").toHtmlEscaped() + "</b></td></tr>\n";	
 #endif
 	// add custom marker
 	htmlText += "<tr><td>" + q_("Add custom marker").toHtmlEscaped() + "</td>";
-	htmlText += "<td><b>" + q_("Shift + Left click").toHtmlEscaped() + "</b></td></tr>\n";
+	htmlText += "<td><b>" + q_("Shift & left click").toHtmlEscaped() + "</b></td></tr>\n";
 	// delete custom markers
 	htmlText += "<tr><td>" + q_("Delete all custom markers").toHtmlEscaped() + "</td>";
-	htmlText += "<td><b>" + q_("Shift + Right click").toHtmlEscaped() + "</b></td></tr>\n";
+	htmlText += "<td><b>" + q_("Shift & right click").toHtmlEscaped() + "</b></td></tr>\n";
 	
 	htmlText += "</table>\n<p>" +
 	                q_("Below are listed only the actions with assigned keys. Further actions may be available via the \"%1\" button.")
