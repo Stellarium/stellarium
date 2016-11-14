@@ -291,7 +291,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Size)
 	{
-		double angularSize = 2.*getAngularSize(core)*M_PI/180.;
+		double angularSize = 2.*getAngularSize(core)*M_PI/180. / sphereScale; // We must give correct diameters even if upscaling (e.g. Moon)
 		if (rings)
 		{
 			double withoutRings = 2.*getSpheroidAngularSize(core)*M_PI/180.;
