@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-13 14:59+0700\n"
+"POT-Creation-Date: 2016-11-14 12:46+0700\n"
 "PO-Revision-Date: 2016-11-09 17:24+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-14 05:24+0000\n"
-"X-Generator: Launchpad (build 18255)\n"
+"X-Launchpad-Export-Date: 2016-11-15 05:25+0000\n"
+"X-Generator: Launchpad (build 18261)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -2291,7 +2291,7 @@ msgstr "Дапамога па Stellarium"
 msgid "Keys"
 msgstr "Клявішы"
 
-#: src/gui/HelpDialog.cpp:140 src/gui/HelpDialog.cpp:227
+#: src/gui/HelpDialog.cpp:140 src/gui/HelpDialog.cpp:226
 msgid "Further Reading"
 msgstr "Далей варта чытаць"
 
@@ -2312,15 +2312,15 @@ msgid "Page Up/Down"
 msgstr "Page Up/Down"
 
 #: src/gui/HelpDialog.cpp:154
-msgid "CTRL + Up/Down"
-msgstr "CTRL + стрэлкі «уверх»/«уніз»"
+msgid "Ctrl+Up/Down"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:157
 msgid "Time dragging"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:158
-msgid "CTRL+Space & left mouse drag"
+msgid "Ctrl & left mouse drag"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:159
@@ -2328,7 +2328,7 @@ msgid "Time scrolling: minutes"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:160
-msgid "CTRL+Space & mouse wheel"
+msgid "Ctrl & mouse wheel"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:161
@@ -2336,46 +2336,62 @@ msgid "Time scrolling: hours"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:162
-msgid "CTRL+Shift+Space & mouse wheel"
+msgid "Ctrl+Shift & mouse wheel"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:163
+msgid "Time scrolling: days"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:164
+msgid "Ctrl+Alt & mouse wheel"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:165
+msgid "Time scrolling: years"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:166
+msgid "Ctrl+Alt+Shift & mouse wheel"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:169
 msgid "Select object"
 msgstr "Вылучыць аб'ект"
 
-#: src/gui/HelpDialog.cpp:166
+#: src/gui/HelpDialog.cpp:170
 msgid "Left click"
 msgstr "Левы пстрык"
 
-#: src/gui/HelpDialog.cpp:174
+#: src/gui/HelpDialog.cpp:173
 msgid "Clear selection"
 msgstr "Ачысьціць вылучэньне"
 
 #: src/gui/HelpDialog.cpp:175
+msgid "Ctrl & left click"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:177
 msgid "Right click"
 msgstr "Правы пстрык"
 
-#: src/gui/HelpDialog.cpp:177
-msgid "CTRL + Left click"
-msgstr "CTRL + левы пстрык"
-
-#: src/gui/HelpDialog.cpp:181
+#: src/gui/HelpDialog.cpp:180
 msgid "Add custom marker"
 msgstr "Дадаць сваю пазнаку"
 
-#: src/gui/HelpDialog.cpp:182
-msgid "Shift + Left click"
-msgstr "Shift + пстрык левай"
+#: src/gui/HelpDialog.cpp:181
+msgid "Shift & left click"
+msgstr ""
 
-#: src/gui/HelpDialog.cpp:184
+#: src/gui/HelpDialog.cpp:183
 msgid "Delete all custom markers"
 msgstr "Выдаліць усе свае пазнакі"
 
-#: src/gui/HelpDialog.cpp:185
-msgid "Shift + Right click"
-msgstr "Shift + пстрык правай"
+#: src/gui/HelpDialog.cpp:184
+msgid "Shift & right click"
+msgstr ""
 
-#: src/gui/HelpDialog.cpp:188
+#: src/gui/HelpDialog.cpp:187
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
@@ -2384,15 +2400,15 @@ msgstr ""
 "Ніжэй пададзеныя  толькі дзеяньні з прызначанымі клявішамі. Каб пабачыць "
 "болей націсьні «%1»."
 
-#: src/gui/HelpDialog.cpp:217
+#: src/gui/HelpDialog.cpp:216
 msgid "Text User Interface (TUI)"
 msgstr "Тэкставы інтэрфэйс карыстальніка (ТІК)"
 
-#: src/gui/HelpDialog.cpp:219
+#: src/gui/HelpDialog.cpp:218
 msgid "Activate TUI"
 msgstr "Актываваць ТІК"
 
-#: src/gui/HelpDialog.cpp:228
+#: src/gui/HelpDialog.cpp:227
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
@@ -2400,17 +2416,17 @@ msgstr ""
 "Наступныя спасылкі — гэта Сеціўныя спасылкі, для іх будзе выкананы гартач "
 "Сеціва:\n"
 
-#: src/gui/HelpDialog.cpp:229
+#: src/gui/HelpDialog.cpp:228
 msgid "The Stellarium User Guide"
 msgstr "Кіраўніцтва карыстальніка Stellarium"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:233
+#: src/gui/HelpDialog.cpp:232
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{Частыя пытаньні} пра Stellarium.  І адказы таксама."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:238
+#: src/gui/HelpDialog.cpp:237
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
@@ -2419,7 +2435,7 @@ msgstr ""
 "карыстальнікамі краявіды й сцэнары."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:243
+#: src/gui/HelpDialog.cpp:242
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
@@ -2429,7 +2445,7 @@ msgstr ""
 "дапамагчы."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:248
+#: src/gui/HelpDialog.cpp:247
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -2440,50 +2456,50 @@ msgstr ""
 "адкрыць паведамленьне пра хібу."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:253
+#: src/gui/HelpDialog.cpp:252
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Форумы} — абмеркаваньне Stellarium зь іншымі карыстальнікамі."
 
-#: src/gui/HelpDialog.cpp:312
+#: src/gui/HelpDialog.cpp:311
 msgid "Developers"
 msgstr "Распрацоўнікі"
 
-#: src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:312
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Каардынатар і галоўны распрацоўнік: %1"
 
-#: src/gui/HelpDialog.cpp:314
+#: src/gui/HelpDialog.cpp:313
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Дызайнэр ґрафікі й іншага: %1"
 
-#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
-#: src/gui/HelpDialog.cpp:317 src/gui/HelpDialog.cpp:318
-#: src/gui/HelpDialog.cpp:319 src/gui/HelpDialog.cpp:320
-#: src/gui/HelpDialog.cpp:321 src/gui/HelpDialog.cpp:327
-#: src/gui/HelpDialog.cpp:328 src/gui/HelpDialog.cpp:329
-#: src/gui/HelpDialog.cpp:330 src/gui/HelpDialog.cpp:331
-#: src/gui/HelpDialog.cpp:332
+#: src/gui/HelpDialog.cpp:314 src/gui/HelpDialog.cpp:315
+#: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
+#: src/gui/HelpDialog.cpp:318 src/gui/HelpDialog.cpp:319
+#: src/gui/HelpDialog.cpp:320 src/gui/HelpDialog.cpp:326
+#: src/gui/HelpDialog.cpp:327 src/gui/HelpDialog.cpp:328
+#: src/gui/HelpDialog.cpp:329 src/gui/HelpDialog.cpp:330
+#: src/gui/HelpDialog.cpp:331
 #, qt-format
 msgid "Developer: %1"
 msgstr "Распрацоўнік: %1"
 
-#: src/gui/HelpDialog.cpp:322
+#: src/gui/HelpDialog.cpp:321
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "Няспынная інтэґрацыя: %1"
 
-#: src/gui/HelpDialog.cpp:323
+#: src/gui/HelpDialog.cpp:322
 #, qt-format
 msgid "Tester: %1"
 msgstr "Тэставальнік: %1"
 
-#: src/gui/HelpDialog.cpp:324
+#: src/gui/HelpDialog.cpp:323
 msgid "Former Developers"
 msgstr "Колішнія распрацоўнікі"
 
-#: src/gui/HelpDialog.cpp:325
+#: src/gui/HelpDialog.cpp:324
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -2491,24 +2507,24 @@ msgstr ""
 "Некалькі чалавек зрабілі значны ўнёсак, але болей яны не актыўныя. Іхняя "
 "праца істотна зьмяніла праект:"
 
-#: src/gui/HelpDialog.cpp:326
+#: src/gui/HelpDialog.cpp:325
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Аўтар дакумэнтацыі/распрацоўнік: %1"
 
-#: src/gui/HelpDialog.cpp:333 src/gui/HelpDialog.cpp:334
+#: src/gui/HelpDialog.cpp:332 src/gui/HelpDialog.cpp:333
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Распрацоўнік для OSX: %1"
 
-#: src/gui/HelpDialog.cpp:335
+#: src/gui/HelpDialog.cpp:334
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
 #: plugins/Oculars/src/gui/OcularDialog.cpp:519
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
 msgid "Contributors"
 msgstr "Укладальнікі"
 
-#: src/gui/HelpDialog.cpp:336
+#: src/gui/HelpDialog.cpp:335
 #, qt-format
 msgid ""
 "Several people have made contributions to the project and their work has "
@@ -2915,14 +2931,14 @@ msgid "Altitude"
 msgstr "Вышыня"
 
 #: src/gui/SearchDialog.cpp:271
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:529
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:538
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:531
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:539
 msgid "Longitude"
 msgstr "Даўгата"
 
 #: src/gui/SearchDialog.cpp:274
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:530
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:539
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:532
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:540
 msgid "Latitude"
 msgstr "Шырата"
 
@@ -14786,7 +14802,7 @@ msgid "Nadir Passage"
 msgstr "Праходжаньне надыру"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1274
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:547
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:548
 msgid "Selected Object"
 msgstr "Выбраны аб'ект"
 
@@ -14959,119 +14975,111 @@ msgstr "Выберы колер лініі свайго схіленьня 1"
 msgid "Select color for Custom Declination 2 line"
 msgstr "Выберы колер лініі свайго схіленьня 2"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:525
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:527
 msgid "ArchaeoLines Configuration"
 msgstr "Настаўленьні археаліній"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:526
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:528
 msgid "ArchaeoLines Plug-in Configuration"
 msgstr "Настаўленьні дадатку «Археалініі»"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:528
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:530
 msgid "To change colors you may have to leave fullscreen mode!"
 msgstr "Каб зьмяніць колер трэба выйсьці з поўнаэкраннага рэжыму!"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:531
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:533
 msgid "Custom Declination 1"
 msgstr "Сваё схіленьне 1"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:532
-msgid "Custom Declination 1 Color..."
-msgstr "Колер свайго схіленьня 1…"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:533
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:534
 msgid "Current Sun"
 msgstr "Бягучае Сонца"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:535
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:541
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:536
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:542
 msgid "Enter a label (location name) for this line"
 msgstr "Увядзі подпіс (назву месца) гэтай лініі"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:537
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:538
 msgid "Geographic Location 1"
 msgstr "Ґеаґрафічнае месца 1"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:543
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:544
 msgid "Geographic Location 2"
 msgstr "Ґеаґрафічнае месца 2"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:545
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:546
 msgid "Change color"
 msgstr "Зьмяніць колер"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:548
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:549
 msgid "Minor Lunar Standstill lines"
 msgstr "Лініі малых спыненьняў Месяца"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:551
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:552
 msgid "Current Planet: None"
 msgstr "Бягучая плянэта: адсутнічае"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:552
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:553
 msgid "Current Planet: Mercury"
 msgstr "Бягучая плянэта: Мэркуры"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:553
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:554
 msgid "Current Planet: Venus"
 msgstr "Бягучая плянэта: Вэнэра"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:554
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:555
 msgid "Current Planet: Mars"
 msgstr "Бягучая плянэта: Марс"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:555
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:556
 msgid "Current Planet: Jupiter"
 msgstr "Бягучая плянэта: Юпітэр"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:556
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:557
 msgid "Current Planet: Saturn"
 msgstr "Бягучая плянэта: Сатурн"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:558
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:559
 msgid "Declination of Nadir passage"
 msgstr "Схіленьне праходжаньня надыру"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:559
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:560
 msgid "Custom Azimuth 1"
 msgstr "Свой азімут 1"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:560
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:561
 msgid "Custom Azimuth 2"
 msgstr "Свой азімут 2"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:562
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:565
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:563
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:566
 msgid "Enter a label for this line"
 msgstr "Увядзі подпіс гэтай лініі"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:567
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:568
 msgid "Solstice Lines"
 msgstr "Лініі сонцастаяньня"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:568
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:569
 msgid "Current Moon"
 msgstr "Бягучы Месяц"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:569
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:570
 msgid "Declination of Zenith passage"
 msgstr "Схіленьне праходжаньня зэніту"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:570
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:571
 msgid "Crossquarter Lines"
 msgstr "Лініі перасячэньня чвэрці"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:571
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:572
 msgid "Equinox line (Equator)"
 msgstr "Лінія раўнадзенства (экватар)"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:572
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:573
 msgid "Major Lunar Standstill lines"
 msgstr "Лініі вялікіх спыненьняў Месяца"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:573
-msgid "Custom Declination 2 Color..."
-msgstr "Колер свайго схіленьня 2…"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:574
 msgid "Custom Declination 2"
@@ -15347,6 +15355,9 @@ msgstr "Сваё схіленьне 2"
 #~ msgid "Load Default Configuration: "
 #~ msgstr "Загрузіць прадвызначаныя настаўленьні: "
 
+#~ msgid "CTRL + Up/Down"
+#~ msgstr "CTRL + стрэлкі «уверх»/«уніз»"
+
 #~ msgid "Nebulas background images"
 #~ msgstr "Фонавыя відарысы туманнасьцяў"
 
@@ -15504,6 +15515,9 @@ msgstr "Сваё схіленьне 2"
 #~ "Стэрэаґрафічная праекцыя вядомая з часоў антычнасьці й спачатку была вядомая "
 #~ "як плянісфэрная праекцыя. Пры ёй захоўваюцца вуглы, пад якімі перасякаюцца "
 #~ "крывыя, але не захоўваецца плошча."
+
+#~ msgid "CTRL + Left click"
+#~ msgstr "CTRL + левы пстрык"
 
 #~ msgid "Planet Names"
 #~ msgstr "Назвы плянэтаў"
@@ -16744,5 +16758,17 @@ msgstr "Сваё схіленьне 2"
 #~ msgid "JD"
 #~ msgstr "JD"
 
+#~ msgid "Shift + Left click"
+#~ msgstr "Shift + пстрык левай"
+
+#~ msgid "Shift + Right click"
+#~ msgstr "Shift + пстрык правай"
+
 #~ msgid "Ecliptic coordinates, equinox J2000"
 #~ msgstr "Экліптычныя каардынаты, раўнадзенства J2000"
+
+#~ msgid "Custom Declination 1 Color..."
+#~ msgstr "Колер свайго схіленьня 1…"
+
+#~ msgid "Custom Declination 2 Color..."
+#~ msgstr "Колер свайго схіленьня 2…"
