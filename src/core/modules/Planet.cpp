@@ -291,7 +291,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Size)
 	{
-		double angularSize = 2.*getAngularSize(core)*M_PI/180. / sphereScale; // We must give correct diameters even if upscaling (e.g. Moon)
+		double angularSize = 2.*getAngularSize(core)*M_PI/180.;
 		if (rings)
 		{
 			double withoutRings = 2.*getSpheroidAngularSize(core)*M_PI/180.;
@@ -306,10 +306,24 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		}
 		else
 		{
-			if (withDecimalDegree)
-				oss << q_("Apparent diameter: %1").arg(StelUtils::radToDecDegStr(angularSize,5,false,true));
+			if (sphereScale>1.f) // We must give correct diameters even if upscaling (e.g. Moon)
+			{
+				if (withDecimalDegree)
+					oss << q_("Apparent diameter: %1, scaled up to: %2")
+					       .arg(StelUtils::radToDecDegStr(angularSize / sphereScale,5,false,true))
+					       .arg(StelUtils::radToDecDegStr(angularSize,5,false,true));
+				else
+					oss << q_("Apparent diameter: %1, scaled up to: %2")
+					       .arg(StelUtils::radToDmsStr(angularSize / sphereScale, true))
+					       .arg(StelUtils::radToDmsStr(angularSize, true));
+			}
 			else
-				oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(angularSize, true));
+			{
+				if (withDecimalDegree)
+					oss << q_("Apparent diameter: %1").arg(StelUtils::radToDecDegStr(angularSize,5,false,true));
+				else
+					oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(angularSize, true));
+			}
 		}
 		oss << "<br>";
 	}
