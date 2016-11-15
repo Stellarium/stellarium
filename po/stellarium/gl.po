@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-13 14:59+0700\n"
+"POT-Creation-Date: 2016-11-14 12:46+0700\n"
 "PO-Revision-Date: 2016-11-10 20:56+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-14 05:30+0000\n"
-"X-Generator: Launchpad (build 18255)\n"
+"X-Launchpad-Export-Date: 2016-11-15 05:30+0000\n"
+"X-Generator: Launchpad (build 18261)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:191
@@ -2289,7 +2289,7 @@ msgstr "Axuda do Stellarium"
 msgid "Keys"
 msgstr "Teclas"
 
-#: src/gui/HelpDialog.cpp:140 src/gui/HelpDialog.cpp:227
+#: src/gui/HelpDialog.cpp:140 src/gui/HelpDialog.cpp:226
 msgid "Further Reading"
 msgstr "Ler máis"
 
@@ -2310,15 +2310,15 @@ msgid "Page Up/Down"
 msgstr "Páxina anterior/seguinte"
 
 #: src/gui/HelpDialog.cpp:154
-msgid "CTRL + Up/Down"
-msgstr "CTRL + arriba/abaixo"
+msgid "Ctrl+Up/Down"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:157
 msgid "Time dragging"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:158
-msgid "CTRL+Space & left mouse drag"
+msgid "Ctrl & left mouse drag"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:159
@@ -2326,7 +2326,7 @@ msgid "Time scrolling: minutes"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:160
-msgid "CTRL+Space & mouse wheel"
+msgid "Ctrl & mouse wheel"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:161
@@ -2334,46 +2334,62 @@ msgid "Time scrolling: hours"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:162
-msgid "CTRL+Shift+Space & mouse wheel"
+msgid "Ctrl+Shift & mouse wheel"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:163
+msgid "Time scrolling: days"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:164
+msgid "Ctrl+Alt & mouse wheel"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:165
+msgid "Time scrolling: years"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:166
+msgid "Ctrl+Alt+Shift & mouse wheel"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:169
 msgid "Select object"
 msgstr "Seleccionar obxecto"
 
-#: src/gui/HelpDialog.cpp:166
+#: src/gui/HelpDialog.cpp:170
 msgid "Left click"
 msgstr "Click esquerdo"
 
-#: src/gui/HelpDialog.cpp:174
+#: src/gui/HelpDialog.cpp:173
 msgid "Clear selection"
 msgstr "Limpar a selección"
 
 #: src/gui/HelpDialog.cpp:175
+msgid "Ctrl & left click"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:177
 msgid "Right click"
 msgstr "Click dereito"
 
-#: src/gui/HelpDialog.cpp:177
-msgid "CTRL + Left click"
-msgstr "CTRL + clic esquerdo"
-
-#: src/gui/HelpDialog.cpp:181
+#: src/gui/HelpDialog.cpp:180
 msgid "Add custom marker"
 msgstr "Engadir marcador personalizado"
 
-#: src/gui/HelpDialog.cpp:182
-msgid "Shift + Left click"
-msgstr "Maiusc+Clic esquerdo"
+#: src/gui/HelpDialog.cpp:181
+msgid "Shift & left click"
+msgstr ""
 
-#: src/gui/HelpDialog.cpp:184
+#: src/gui/HelpDialog.cpp:183
 msgid "Delete all custom markers"
 msgstr "Borrar todos os marcadores personalizados"
 
-#: src/gui/HelpDialog.cpp:185
-msgid "Shift + Right click"
-msgstr "Maiusc+Clic dereito"
+#: src/gui/HelpDialog.cpp:184
+msgid "Shift & right click"
+msgstr ""
 
-#: src/gui/HelpDialog.cpp:188
+#: src/gui/HelpDialog.cpp:187
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
@@ -2382,32 +2398,32 @@ msgstr ""
 "Abaixo amósanse as últimas accións con claves asignadas. Outras accións "
 "poden esta dispoñibles no botón \"%1\""
 
-#: src/gui/HelpDialog.cpp:217
+#: src/gui/HelpDialog.cpp:216
 msgid "Text User Interface (TUI)"
 msgstr "Interface de usuario de texto (IUT)"
 
-#: src/gui/HelpDialog.cpp:219
+#: src/gui/HelpDialog.cpp:218
 msgid "Activate TUI"
 msgstr "Activar IUT"
 
-#: src/gui/HelpDialog.cpp:228
+#: src/gui/HelpDialog.cpp:227
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
 msgstr ""
 "As seguintes ligazóns son a webs externas e abrirán o teu navegador.\n"
 
-#: src/gui/HelpDialog.cpp:229
+#: src/gui/HelpDialog.cpp:228
 msgid "The Stellarium User Guide"
 msgstr "Guía do usuario de Stellarium"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:233
+#: src/gui/HelpDialog.cpp:232
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{Preguntas frecuentes} sobre Stellarium. E tamén respostas."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:238
+#: src/gui/HelpDialog.cpp:237
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
@@ -2416,7 +2432,7 @@ msgstr ""
 "scripts feitos por usuarios."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:243
+#: src/gui/HelpDialog.cpp:242
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
@@ -2425,7 +2441,7 @@ msgstr ""
 "e tentaremos axudarte."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:248
+#: src/gui/HelpDialog.cpp:247
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -2435,50 +2451,50 @@ msgstr ""
 "desapareceu ou non está listado, podes informar aquí."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:253
+#: src/gui/HelpDialog.cpp:252
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Foros} - fala sobre Stellarium con outros usuarios."
 
-#: src/gui/HelpDialog.cpp:312
+#: src/gui/HelpDialog.cpp:311
 msgid "Developers"
 msgstr "Desenvolvedores"
 
-#: src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:312
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Coordinador do proxecto e director de desenvolvemento: %1"
 
-#: src/gui/HelpDialog.cpp:314
+#: src/gui/HelpDialog.cpp:313
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Deseñador gráfico/outro: %1"
 
-#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
-#: src/gui/HelpDialog.cpp:317 src/gui/HelpDialog.cpp:318
-#: src/gui/HelpDialog.cpp:319 src/gui/HelpDialog.cpp:320
-#: src/gui/HelpDialog.cpp:321 src/gui/HelpDialog.cpp:327
-#: src/gui/HelpDialog.cpp:328 src/gui/HelpDialog.cpp:329
-#: src/gui/HelpDialog.cpp:330 src/gui/HelpDialog.cpp:331
-#: src/gui/HelpDialog.cpp:332
+#: src/gui/HelpDialog.cpp:314 src/gui/HelpDialog.cpp:315
+#: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
+#: src/gui/HelpDialog.cpp:318 src/gui/HelpDialog.cpp:319
+#: src/gui/HelpDialog.cpp:320 src/gui/HelpDialog.cpp:326
+#: src/gui/HelpDialog.cpp:327 src/gui/HelpDialog.cpp:328
+#: src/gui/HelpDialog.cpp:329 src/gui/HelpDialog.cpp:330
+#: src/gui/HelpDialog.cpp:331
 #, qt-format
 msgid "Developer: %1"
 msgstr "Desenvolvedor: %1"
 
-#: src/gui/HelpDialog.cpp:322
+#: src/gui/HelpDialog.cpp:321
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "Integración continua:: %1"
 
-#: src/gui/HelpDialog.cpp:323
+#: src/gui/HelpDialog.cpp:322
 #, qt-format
 msgid "Tester: %1"
 msgstr "Probador: %1"
 
-#: src/gui/HelpDialog.cpp:324
+#: src/gui/HelpDialog.cpp:323
 msgid "Former Developers"
 msgstr "Antigos Desenvolvedores"
 
-#: src/gui/HelpDialog.cpp:325
+#: src/gui/HelpDialog.cpp:324
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -2486,24 +2502,24 @@ msgstr ""
 "Moitas persoas fixeron contribucións significativas, pero xa non están "
 "activos. O seu traballo marcou unha gran diferenza para o proxecto:"
 
-#: src/gui/HelpDialog.cpp:326
+#: src/gui/HelpDialog.cpp:325
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Autor do documento/desenvolvedor: %1"
 
-#: src/gui/HelpDialog.cpp:333 src/gui/HelpDialog.cpp:334
+#: src/gui/HelpDialog.cpp:332 src/gui/HelpDialog.cpp:333
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Desenvolvedor OSX: %1"
 
-#: src/gui/HelpDialog.cpp:335
+#: src/gui/HelpDialog.cpp:334
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
 #: plugins/Oculars/src/gui/OcularDialog.cpp:519
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
 msgid "Contributors"
 msgstr "Colaboradores"
 
-#: src/gui/HelpDialog.cpp:336
+#: src/gui/HelpDialog.cpp:335
 #, qt-format
 msgid ""
 "Several people have made contributions to the project and their work has "
@@ -2910,14 +2926,14 @@ msgid "Altitude"
 msgstr "Altitude"
 
 #: src/gui/SearchDialog.cpp:271
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:529
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:538
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:531
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:539
 msgid "Longitude"
 msgstr "Lonxitude"
 
 #: src/gui/SearchDialog.cpp:274
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:530
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:539
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:532
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:540
 msgid "Latitude"
 msgstr "Latitude"
 
@@ -14839,7 +14855,7 @@ msgid "Nadir Passage"
 msgstr "Paso polo Nadir"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1274
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:547
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:548
 msgid "Selected Object"
 msgstr "Obxecto seleccionado"
 
@@ -15013,119 +15029,111 @@ msgstr "Seleccionar cor para a liña de Declinación 1 personalizada"
 msgid "Select color for Custom Declination 2 line"
 msgstr "Seleccionar cor para a liña de Declinación 2 personalizada"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:525
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:527
 msgid "ArchaeoLines Configuration"
 msgstr "Configuración de ArqueoLiñas"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:526
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:528
 msgid "ArchaeoLines Plug-in Configuration"
 msgstr "Configuración do plugin de ArqueoLiñas"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:528
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:530
 msgid "To change colors you may have to leave fullscreen mode!"
 msgstr "Para mudar as cores debes abandonar o modo de pantalla completa!"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:531
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:533
 msgid "Custom Declination 1"
 msgstr "Declinación 1 personalizada"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:532
-msgid "Custom Declination 1 Color..."
-msgstr "Cor de eclinación 1 personalizada..."
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:533
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:534
 msgid "Current Sun"
 msgstr "Sol actual"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:535
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:541
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:536
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:542
 msgid "Enter a label (location name) for this line"
 msgstr "Insire unha etiqueta (nome de localización) para esta liña"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:537
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:538
 msgid "Geographic Location 1"
 msgstr "Localización Xeográfica 1"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:543
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:544
 msgid "Geographic Location 2"
 msgstr "Localización Xeográfica 2"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:545
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:546
 msgid "Change color"
 msgstr "Mudar a cor"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:548
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:549
 msgid "Minor Lunar Standstill lines"
 msgstr "Liñas de menor parada lunar"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:551
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:552
 msgid "Current Planet: None"
 msgstr "Planeta actual: Non"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:552
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:553
 msgid "Current Planet: Mercury"
 msgstr "Planeta actual: Mercurio"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:553
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:554
 msgid "Current Planet: Venus"
 msgstr "Planeta actual: Venus"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:554
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:555
 msgid "Current Planet: Mars"
 msgstr "Planeta actual: Marte"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:555
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:556
 msgid "Current Planet: Jupiter"
 msgstr "Planeta actual: Xúpiter"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:556
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:557
 msgid "Current Planet: Saturn"
 msgstr "Planeta actual: Saturno"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:558
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:559
 msgid "Declination of Nadir passage"
 msgstr "Declinación do paso polo Nadir"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:559
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:560
 msgid "Custom Azimuth 1"
 msgstr "Acimut Personalizado 1"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:560
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:561
 msgid "Custom Azimuth 2"
 msgstr "Acimut Personalizado 2"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:562
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:565
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:563
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:566
 msgid "Enter a label for this line"
 msgstr "Insire unha etiqueta para esta liña."
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:567
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:568
 msgid "Solstice Lines"
 msgstr "Liñas de solsticio"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:568
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:569
 msgid "Current Moon"
 msgstr "Lúa actual"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:569
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:570
 msgid "Declination of Zenith passage"
 msgstr "Declinación do paso polo Zénit"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:570
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:571
 msgid "Crossquarter Lines"
 msgstr "Liñas de Cruces de cuartos (Crossquarter)"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:571
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:572
 msgid "Equinox line (Equator)"
 msgstr "Liña de equinoccio (Ecuador)"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:572
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:573
 msgid "Major Lunar Standstill lines"
 msgstr "Liñas da maior parada lunar"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:573
-msgid "Custom Declination 2 Color..."
-msgstr "Cor de Declinación 2 personalizada..."
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:574
 msgid "Custom Declination 2"
@@ -15509,6 +15517,12 @@ msgstr "Declinación 2 personalizada"
 
 #~ msgid "Update me via Internet: "
 #~ msgstr "Actualizar ao traves da Internet: "
+
+#~ msgid "CTRL + Left click"
+#~ msgstr "CTRL + clic esquerdo"
+
+#~ msgid "CTRL + Up/Down"
+#~ msgstr "CTRL + arriba/abaixo"
 
 #~ msgid "Nebulas"
 #~ msgstr "Nebulosas"
@@ -16793,6 +16807,18 @@ msgstr "Declinación 2 personalizada"
 
 #~ msgid "Show Solar System objects"
 #~ msgstr "Amosa Obxectos do Sistema Solar"
+
+#~ msgid "Shift + Left click"
+#~ msgstr "Maiusc+Clic esquerdo"
+
+#~ msgid "Shift + Right click"
+#~ msgstr "Maiusc+Clic dereito"
+
+#~ msgid "Custom Declination 2 Color..."
+#~ msgstr "Cor de Declinación 2 personalizada..."
+
+#~ msgid "Custom Declination 1 Color..."
+#~ msgstr "Cor de eclinación 1 personalizada..."
 
 #~ msgid "Ecliptic coordinates, equinox J2000"
 #~ msgstr "Coordenadas da eclíptica, equinoccio J2000"
