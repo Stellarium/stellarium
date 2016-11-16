@@ -89,11 +89,6 @@ float CustomObject::getVMagnitude(const StelCore* core) const
 		return 99.f;
 }
 
-float CustomObject::getVMagnitudeWithExtinction(const StelCore *core) const
-{
-	return getVMagnitude(core);
-}
-
 double CustomObject::getAngularSize(const StelCore*) const
 {
 	return 0.00001;

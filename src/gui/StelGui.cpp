@@ -375,8 +375,6 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	buttonTimeForward = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionIncrease_Time_Speed");
 	skyGui->buttonBar->addButton(buttonTimeForward, "070-timeGroup");
 
-	skyGui->buttonBar->setGroupMargin("070-timeGroup", 32, 0);
-
 	pxmapOn = QPixmap(":/graphicGui/btQuit.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOn, pxmapGlow32x32, "actionQuit_Global");
 	skyGui->buttonBar->addButton(b, "080-quitGroup");
@@ -396,6 +394,14 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	atopLevelGraphicsWidget->setLayout(l);
 
 	setStelStyle(StelApp::getInstance().getCurrentStelStyle());
+
+	int margin = conf->value("gui/space_between_groups", 5).toInt();
+	skyGui->buttonBar->setGroupMargin("020-gridsGroup", margin, 0);
+	skyGui->buttonBar->setGroupMargin("030-landscapeGroup", margin, 0);
+	skyGui->buttonBar->setGroupMargin("040-nebulaeGroup", margin, 0);
+	skyGui->buttonBar->setGroupMargin("060-othersGroup", margin, margin);
+	skyGui->buttonBar->setGroupMargin("070-timeGroup", margin, 0);
+	skyGui->buttonBar->setGroupMargin("080-quitGroup", margin, 0);
 
 	skyGui->setGeometry(atopLevelGraphicsWidget->geometry());
 	skyGui->updateBarsPos();
@@ -839,28 +845,6 @@ StelAction* StelGui::getAction(const QString& actionName)
 {
 	return StelApp::getInstance().getStelActionManager()->findAction(actionName);
 }
-
-/* ****************************************************************************************************************** */
-#if 0
-#pragma mark -
-#pragma mark Process changes from the ConstellationMgr
-#endif
-/* ****************************************************************************************************************** */
-
-/* ****************************************************************************************************************** */
-#if 0
-#pragma mark -
-#pragma mark Process changes from the GridLinesMgr
-#endif
-/* ****************************************************************************************************************** */
-
-/* ****************************************************************************************************************** */
-#if 0
-#pragma mark -
-#pragma mark Process changes from the GridLinesMgr
-#endif
-/* ****************************************************************************************************************** */
-
 
 void StelGui::copySelectedObjectInfo(void)
 {

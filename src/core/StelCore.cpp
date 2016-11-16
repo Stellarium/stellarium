@@ -45,6 +45,7 @@
 #include <QSettings>
 #include <QDebug>
 #include <QMetaEnum>
+#include <QTimeZone>
 
 #include <iostream>
 #include <fstream>
@@ -58,12 +59,12 @@ const Mat4d StelCore::matGalacticToJ2000(matJ2000ToGalactic.transpose());
 const Mat4d StelCore::matJ2000ToSupergalactic(0.37501548, -0.89832046, 0.22887497, 0, 0.34135896, -0.09572714, -0.93504565, 0, 0.86188018, 0.42878511, 0.27075058, 0, 0, 0, 0, 1);
 const Mat4d StelCore::matSupergalacticToJ2000(matJ2000ToSupergalactic.transpose());
 
-const double StelCore::JD_SECOND=0.000011574074074074074074; // 1/(24*60*60)=1/86400
-const double StelCore::JD_MINUTE=0.00069444444444444444444;  // 1/(24*60)   =1/1440
-const double StelCore::JD_HOUR  =0.041666666666666666666;    // 1/24
-const double StelCore::JD_DAY   =1.;
-const double StelCore::ONE_OVER_JD_SECOND = 24 * 60 * 60;    // 86400
-
+const double StelCore::JD_SECOND = 0.000011574074074074074074;	// 1/(24*60*60)=1/86400
+const double StelCore::JD_MINUTE = 0.00069444444444444444444;	// 1/(24*60)   =1/1440
+const double StelCore::JD_HOUR   = 0.041666666666666666666;	// 1/24
+const double StelCore::JD_DAY    = 1.;
+const double StelCore::ONE_OVER_JD_SECOND = 86400;		// 86400
+const double StelCore::TZ_ERA_BEGINNING = 2395996.5;		// December 1, 1847
 
 StelCore::StelCore()
 	: skyDrawer(NULL)
@@ -79,6 +80,7 @@ StelCore::StelCore()
 	, presetSkyTime(0.)
 	, milliSecondsOfLastJDUpdate(0.)
 	, jdOfLastJDUpdate(0.)
+	, flagUseDST(true)
 	, deltaTCustomNDot(-26.0)
 	, deltaTCustomYear(1820.0)
 	, de430Available(false)
@@ -118,7 +120,8 @@ StelCore::StelCore()
 	currentProjectorParams.devicePixelsPerPixel = StelApp::getInstance().getDevicePixelsPerPixel();
 
 	flagUseNutation=conf->value("astro/flag_nutation", true).toBool();
-	flagUseTopocentricCoordinates=conf->value("astro/flag_topocentric_coordinates", true).toBool();	
+	flagUseTopocentricCoordinates=conf->value("astro/flag_topocentric_coordinates", true).toBool();
+	flagUseDST=conf->value("localization/flag_dst", true).toBool();
 }
 
 
@@ -164,6 +167,8 @@ void StelCore::init()
 	}
 	position = new StelObserver(location);
 
+	setCurrentTimeZone(conf->value("localization/time_zone", getCurrentLocation().timeZone).toString());
+
 	// Delta-T stuff
 	// Define default algorithm for time correction (Delta T)
 	QString tmpDT = conf->value("navigation/time_correction_algorithm", "EspenakMeeus").toString();
@@ -194,7 +199,7 @@ void StelCore::init()
 	setInitTodayTime(QTime::fromString(conf->value("navigation/today_time", "22:00").toString()));
 	startupTimeMode = conf->value("navigation/startup_time_mode", "actual").toString().toLower();
 	if (startupTimeMode=="preset")	
-		setJD(presetSkyTime - StelUtils::getGMTShiftFromQT(presetSkyTime) * JD_HOUR);
+		setJD(presetSkyTime - getUTCOffset(presetSkyTime) * JD_HOUR);
 	else if (startupTimeMode=="today")
 		setTodayTime(getInitTodayTime());
 
@@ -514,6 +519,7 @@ void StelCore::setCurrentProjectionType(ProjectionType type)
 
 		emit currentProjectionTypeChanged(type);
 		emit currentProjectionTypeKeyChanged(getCurrentProjectionTypeKey());
+		emit currentProjectionNameI18nChanged(getCurrentProjectionNameI18n());
 	}
 }
 
@@ -539,6 +545,11 @@ void StelCore::setCurrentProjectionTypeKey(QString key)
 QString StelCore::getCurrentProjectionTypeKey(void) const
 {
 	return metaObject()->enumerator(metaObject()->indexOfEnumerator("ProjectionType")).key(currentProjectionType);
+}
+
+QString StelCore::getCurrentProjectionNameI18n() const
+{
+	return projectionTypeKeyToNameI18n(getCurrentProjectionTypeKey());
 }
 
 //! Get the list of all the available projections
@@ -616,6 +627,15 @@ double StelCore::getViewportVerticalOffset(void)
 void StelCore::setViewportVerticalOffset(double newOffsetPct)
 {
 	currentProjectorParams.viewportCenterOffset[1]=0.01f* qMin(50., qMax(-50., newOffsetPct));
+	currentProjectorParams.viewportCenter.set(currentProjectorParams.viewportXywh[0]+(0.5f+currentProjectorParams.viewportCenterOffset.v[0])*currentProjectorParams.viewportXywh[2],
+						currentProjectorParams.viewportXywh[1]+(0.5f+currentProjectorParams.viewportCenterOffset.v[1])*currentProjectorParams.viewportXywh[3]);
+}
+
+// Set both viewport offsets. Arguments will be clamped to be inside [-50...50]. I (GZ) hope this will avoid some of the shaking.
+void StelCore::setViewportOffset(double newHorizontalOffsetPct, double newVerticalOffsetPct)
+{
+	currentProjectorParams.viewportCenterOffset[0]=0.01f* qMin(50., qMax(-50., newHorizontalOffsetPct));
+	currentProjectorParams.viewportCenterOffset[1]=0.01f* qMin(50., qMax(-50., newVerticalOffsetPct));
 	currentProjectorParams.viewportCenter.set(currentProjectorParams.viewportXywh[0]+(0.5f+currentProjectorParams.viewportCenterOffset.v[0])*currentProjectorParams.viewportXywh[2],
 						currentProjectorParams.viewportXywh[1]+(0.5f+currentProjectorParams.viewportCenterOffset.v[1])*currentProjectorParams.viewportXywh[3]);
 }
@@ -1139,6 +1159,116 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 	}
 }
 
+float StelCore::getUTCOffset(const double JD) const
+{
+	int year, month, day, hour, minute, second;
+	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
+	StelUtils::getTimeFromJulianDay(JD, &hour, &minute, &second);
+	// as analogous to second statement in getJDFromDate, nkerr
+	if ( year <= 0 )
+	{
+		year = year - 1;
+	}
+	//getTime/DateFromJulianDay returns UTC time, not local time
+	QDateTime universal(QDate(year, month, day), QTime(hour, minute, second), Qt::UTC);
+	if (!universal.isValid())
+	{
+		//qWarning() << "JD " << QString("%1").arg(JD) << " out of bounds of QT help with GMT shift, using current datetime";
+		// Assumes the GMT shift was always the same before year -4710
+		universal = QDateTime(QDate(-4710, month, day), QTime(hour, minute, second), Qt::UTC);
+	}
+
+	StelLocation loc = getCurrentLocation();
+	QString tzName = getCurrentTimeZone();
+	QTimeZone* tz = new QTimeZone(tzName.toUtf8());
+
+	int shiftInSeconds = 0;
+	if (tzName=="system_default" || (loc.planetName=="Earth" && !tz->isValid() && !QString("LMST LTST").contains(tzName)))
+	{
+		QDateTime local = universal.toLocalTime();
+		//Both timezones should be interpreted as UTC because secsTo() converts both
+		//times to UTC if their zones have different daylight saving time rules.
+		local.setTimeSpec(Qt::UTC);
+		shiftInSeconds = universal.secsTo(local);
+	}
+	else
+	{
+		// The first adoption of a standard time was on December 1, 1847 in Great Britain
+		if (tz->isValid() && loc.planetName=="Earth" && JD>=StelCore::TZ_ERA_BEGINNING)
+		{
+			if (getUseDST())
+				shiftInSeconds = tz->offsetFromUtc(universal);
+			else
+				shiftInSeconds = tz->standardTimeOffset(universal);
+		}
+		else
+			shiftInSeconds = (loc.longitude/15.f)*3600.f; // Local Mean Solar Time
+
+		if (tzName=="LTST")
+			shiftInSeconds += getSolutionEquationOfTime(JD)*60;
+
+	}
+
+	float shiftInHours = shiftInSeconds / 3600.0f;
+	return shiftInHours;
+}
+
+QString StelCore::getCurrentTimeZone() const
+{
+	return currentTimeZone;
+}
+
+void StelCore::setCurrentTimeZone(const QString& tz)
+{
+	currentTimeZone = tz;
+}
+
+bool StelCore::getUseDST() const
+{
+	return flagUseDST;
+}
+
+void StelCore::setUseDST(const bool b)
+{
+	flagUseDST = b;
+	StelApp::getInstance().getSettings()->setValue("localization/flag_dst", b);
+}
+
+double StelCore::getSolutionEquationOfTime(const double JDE) const
+{
+	double tau = (JDE - 2451545.0)/365250.0;
+	double sunMeanLongitude = 280.4664567 + tau*(360007.6892779 + tau*(0.03032028 + tau*(1./49931. - tau*(1./15300. - tau/2000000.))));
+
+	// reduce the angle
+	sunMeanLongitude = std::fmod(sunMeanLongitude, 360.);
+	// force it to be the positive remainder, so that 0 <= angle < 360
+	sunMeanLongitude = std::fmod(sunMeanLongitude + 360., 360.);
+
+	Vec3d pos = GETSTELMODULE(StelObjectMgr)->searchByName("Sun")->getEquinoxEquatorialPos(this);
+	double ra, dec;
+	StelUtils::rectToSphe(&ra, &dec, pos);
+
+	// covert radians to degrees and reduce the angle
+	double alpha = std::fmod(ra*180./M_PI, 360.);
+	// force it to be the positive remainder, so that 0 <= angle < 360
+	alpha = std::fmod(alpha + 360., 360.);
+
+	double deltaPsi, deltaEps;
+	getNutationAngles(JDE, &deltaPsi, &deltaEps); // these are radians!
+	//double equation = 4*(sunMeanLongitude - 0.0057183 - alpha + get_nutation_longitude(JDE)*cos(get_mean_ecliptical_obliquity(JDE)));
+	double equation = 4*(sunMeanLongitude - 0.0057183 - alpha + deltaPsi*180./M_PI*cos(getPrecessionAngleVondrakEpsilon(JDE)));
+	// The equation of time is always smaller 20 minutes in absolute value
+	if (qAbs(equation)>20)
+	{
+		// If absolute value of the equation of time appears to be too large, add 24 hours (1440 minutes) to or subtract it from our result
+		if (equation>0.)
+			equation -= 1440.;
+		else
+			equation += 1440.;
+	}
+
+	return equation;
+}
 
 //! Set stellarium time to current real world time
 void StelCore::setTimeNow()
@@ -1153,7 +1283,7 @@ void StelCore::setTodayTime(const QTime& target)
 	{
 		dt.setTime(target);
 		// don't forget to adjust for timezone / daylight savings.
-		double JD = StelUtils::qDateTimeToJd(dt)-(StelUtils::getGMTShiftFromQT(StelUtils::getJDFromSystem()) * JD_HOUR);
+		double JD = StelUtils::qDateTimeToJd(dt)-(getUTCOffset(StelUtils::getJDFromSystem()) * JD_HOUR);
 		setJD(JD);
 	}
 	else
@@ -1785,7 +1915,7 @@ double StelCore::computeDeltaT(const double JD) const
 	}
 
 	if (!dontUseMoon)
-		DeltaT += StelUtils::getMoonSecularAcceleration(JD, ndot);
+		DeltaT += StelUtils::getMoonSecularAcceleration(JD, ndot, (de430Active || de431Active) && true);
 
 	return DeltaT;
 }
