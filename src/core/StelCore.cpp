@@ -516,6 +516,7 @@ void StelCore::setCurrentProjectionType(ProjectionType type)
 
 		emit currentProjectionTypeChanged(type);
 		emit currentProjectionTypeKeyChanged(getCurrentProjectionTypeKey());
+		emit currentProjectionNameI18nChanged(getCurrentProjectionNameI18n());
 	}
 }
 
@@ -541,6 +542,11 @@ void StelCore::setCurrentProjectionTypeKey(QString key)
 QString StelCore::getCurrentProjectionTypeKey(void) const
 {
 	return metaObject()->enumerator(metaObject()->indexOfEnumerator("ProjectionType")).key(currentProjectionType);
+}
+
+QString StelCore::getCurrentProjectionNameI18n() const
+{
+	return projectionTypeKeyToNameI18n(getCurrentProjectionTypeKey());
 }
 
 //! Get the list of all the available projections

@@ -59,6 +59,8 @@ class StelCore : public QObject
 	Q_PROPERTY(ProjectionType currentProjectionType READ getCurrentProjectionType WRITE setCurrentProjectionType NOTIFY currentProjectionTypeChanged)
 	//! This is just another way to access the projection type, by string instead of enum
 	Q_PROPERTY(QString currentProjectionTypeKey READ getCurrentProjectionTypeKey WRITE setCurrentProjectionTypeKey NOTIFY currentProjectionTypeKeyChanged STORED false)
+	//! Read-only property returning the localized projection name
+	Q_PROPERTY(QString currentProjectionNameI18n READ getCurrentProjectionNameI18n NOTIFY currentProjectionNameI18nChanged STORED false)
 
 public:
 
@@ -347,6 +349,8 @@ public slots:
 	QString getCurrentProjectionTypeKey(void) const;
 	//! Set the current ProjectionType to use from its key
 	void setCurrentProjectionTypeKey(QString type);
+
+	QString getCurrentProjectionNameI18n() const;
 
 	//! Get the list of all the available projections
 	QStringList getAllProjectionTypeKeys() const;
@@ -689,6 +693,8 @@ signals:
 	void currentProjectionTypeChanged(StelCore::ProjectionType newType);
 	//! Emitted whenever the projection type changes
 	void currentProjectionTypeKeyChanged(const QString& newValue);
+	//! Emitted whenever the projection type changes
+	void currentProjectionNameI18nChanged(const QString& newValue);
 
 private:
 	StelToneReproducer* toneReproducer;		// Tones conversion between stellarium world and display device

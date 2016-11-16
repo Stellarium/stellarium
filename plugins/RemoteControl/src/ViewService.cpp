@@ -191,7 +191,7 @@ void ViewService::getImpl(const QByteArray &operation, const APIParameters &para
 		//returns the description of the current projection
 		QString str = core->getProjection(StelCore::FrameJ2000)->getHtmlSummary();
 		response.setHeader("Content-Type","text/html; charset=UTF-8");
-		response.setData(wrapHtml(str, core->projectionTypeKeyToNameI18n(core->getCurrentProjectionTypeKey())).toUtf8());
+		response.setData(wrapHtml(str, core->getCurrentProjectionNameI18n()).toUtf8());
 	}
 	else
 	{
