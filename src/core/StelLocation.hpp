@@ -69,6 +69,8 @@ public:
 	//! @li @p X is an unknown or user-defined location (the default value).
 	//! @li @p ! is an invalid location.
 	QChar role;
+	//! IANA identificator of time zone
+	QString timeZone;
 
 	//! Parse a location from a line serialization
 	static StelLocation createFromLine(const QString& line);

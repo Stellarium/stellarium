@@ -59,6 +59,8 @@ class StelCore : public QObject
 	Q_PROPERTY(ProjectionType currentProjectionType READ getCurrentProjectionType WRITE setCurrentProjectionType NOTIFY currentProjectionTypeChanged)
 	//! This is just another way to access the projection type, by string instead of enum
 	Q_PROPERTY(QString currentProjectionTypeKey READ getCurrentProjectionTypeKey WRITE setCurrentProjectionTypeKey NOTIFY currentProjectionTypeKeyChanged STORED false)
+	//! Read-only property returning the localized projection name
+	Q_PROPERTY(QString currentProjectionNameI18n READ getCurrentProjectionNameI18n NOTIFY currentProjectionNameI18nChanged STORED false)
 
 public:
 
@@ -274,6 +276,11 @@ public:
 	//! Get the informations on the current location
 	const StelLocation& getCurrentLocation() const;
 
+	float getUTCOffset(const double JD) const;
+
+	QString getCurrentTimeZone() const;
+	void setCurrentTimeZone(const QString& tz);
+
 	const QSharedPointer<class Planet> getCurrentPlanet() const;
 
 	//! Unfortunately we also need this.
@@ -292,6 +299,7 @@ public:
 	static const double JD_HOUR;
 	static const double JD_DAY;
 	static const double ONE_OVER_JD_SECOND;
+	static const double TZ_ERA_BEGINNING;
 
 	//! Get the sidereal time shifted by the observer longitude
 	//! @return the local sidereal time in radian
@@ -341,6 +349,8 @@ public slots:
 	QString getCurrentProjectionTypeKey(void) const;
 	//! Set the current ProjectionType to use from its key
 	void setCurrentProjectionTypeKey(QString type);
+
+	QString getCurrentProjectionNameI18n() const;
 
 	//! Get the list of all the available projections
 	QStringList getAllProjectionTypeKeys() const;
@@ -393,6 +403,8 @@ public slots:
 	//! Setting to a negative value will move the visible horizon down, this may be desired esp. in cylindrical projection.
 	//! Animation is available via StelMovementMgr::moveViewport()
 	void setViewportVerticalOffset(double newOffsetPct);
+	// Set both viewport offsets. Arguments will be clamped to be inside [-50...50]. I (GZ) hope this will avoid some of the shaking.
+	void setViewportOffset(double newHorizontalOffsetPct, double newVerticalOffsetPct);
 
 	//! Can be used in specialized setups, intended e.g. for multi-projector installations with edge blending.
 	//! @param stretch [default 1] enlarge to stretch image to non-square pixels. A minimum value of 0.001 is enforced.
@@ -430,6 +442,14 @@ public slots:
 	//! It is still frequently used in the literature.
 	double getJDE() const;
 
+	//! Get solution of equation of time
+	//! Source: J. Meeus "Astronomical Algorithms" (2nd ed., with corrections as of August 10, 2009) p.183-187.
+	//! @param JDE JD in Dynamical Time (previously called Ephemeris Time)
+	//! @return time in minutes
+	double getSolutionEquationOfTime(const double JDE) const;
+
+	bool getUseDST() const;
+	void setUseDST(const bool b);
 
 	//! Set the current date in Modified Julian Day (UT).
 	//! MJD is simply JD-2400000.5, getting rid of large numbers and starting days at midnight.
@@ -629,10 +649,10 @@ public slots:
 	//! @param y the year, e.g. 1820
 	void setDeltaTCustomYear(float y) { deltaTCustomYear=y; }
 	//! Set n-dot for custom equation for calculation of Delta-T
-	//! @param y the n-dot value, e.g. -26.0
+	//! @param v the n-dot value, e.g. -26.0
 	void setDeltaTCustomNDot(float v) { deltaTCustomNDot=v; }
 	//! Set coefficients for custom equation for calculation of Delta-T
-	//! @param y the coefficients, e.g. -20,0,32
+	//! @param c the coefficients, e.g. -20,0,32
 	void setDeltaTCustomEquationCoefficients(Vec3f c) { deltaTCustomEquationCoeff=c; }
 
 	//! Get central year for custom equation for calculation of Delta-T
@@ -649,7 +669,7 @@ public slots:
 	bool de431IsAvailable();            //!< true if DE431 ephemeris file has been found
 	bool de430IsActive();               //!< true if DE430 ephemeris is in use
 	bool de431IsActive();               //!< true if DE431 ephemeris is in use
-	void setDe430Active(bool status);   //!< switch DE430 use to @param status (if de430IsAvailable()) DE430 is only used if date is within range of DE430.
+	void setDe430Active(bool status);   //!< switch DE430 use to @param status (if de430IsAvailable()). DE430 is only used if date is within range of DE430.
 	void setDe431Active(bool status);   //!< switch DE431 use to @param status (if de431IsAvailable()). DE431 is only used if DE430 is not used and the date is within range of DE431.
 
 signals:
@@ -673,6 +693,8 @@ signals:
 	void currentProjectionTypeChanged(StelCore::ProjectionType newType);
 	//! Emitted whenever the projection type changes
 	void currentProjectionTypeKeyChanged(const QString& newValue);
+	//! Emitted whenever the projection type changes
+	void currentProjectionNameI18nChanged(const QString& newValue);
 
 private:
 	StelToneReproducer* toneReproducer;		// Tones conversion between stellarium world and display device
@@ -727,12 +749,15 @@ private:
 	double timeSpeed;           // Positive : forward, Negative : Backward, 1 = 1sec/sec
 	//double JDay;              // Current time in Julian day. IN V0.12 TO V0.14, this was JD in TT, and all places where UT was required had to subtract getDeltaT() explicitly.
 	QPair<double,double> JD;    // From 0.14 on: JD.first=JD_UT, JD.second=DeltaT=TT-UT. To gain JD_TT, compute JDE=JD.first+JD.second or better just call getJDE()
-				// Use is best with calls getJD()/setJD() and getJDE()/setJDE() to explicitly state which flavour of JD you need.
+				    // Use is best with calls getJD()/setJD() and getJDE()/setJDE() to explicitly state which flavour of JD you need.
 	double presetSkyTime;
 	QTime initTodayTime;
 	QString startupTimeMode;
 	double milliSecondsOfLastJDUpdate;    // Time in seconds when the time rate or time last changed
 	double jdOfLastJDUpdate;         // JD when the time rate or time last changed
+
+	QString currentTimeZone;
+	bool flagUseDST;
 
 	// Variables for custom equation of Delta-T
 	Vec3f deltaTCustomEquationCoeff;
