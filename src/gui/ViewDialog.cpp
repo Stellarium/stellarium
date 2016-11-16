@@ -24,6 +24,7 @@
 #include "AddRemoveLandscapesDialog.hpp"
 #include "AtmosphereDialog.hpp"
 #include "GreatRedSpotDialog.hpp"
+#include "ConfigureDSOColorsDialog.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelSkyCultureMgr.hpp"
@@ -66,6 +67,7 @@ ViewDialog::ViewDialog(QObject* parent) : StelDialog(parent)
 	addRemoveLandscapesDialog = NULL;
 	atmosphereDialog=NULL;
 	greatRedSpotDialog=NULL;
+	configureDSOColorsDialog=NULL;
 }
 
 ViewDialog::~ViewDialog()
@@ -78,6 +80,8 @@ ViewDialog::~ViewDialog()
 	atmosphereDialog = NULL;
 	delete greatRedSpotDialog;
 	greatRedSpotDialog = NULL;
+	delete configureDSOColorsDialog;
+	configureDSOColorsDialog = NULL;
 }
 
 void ViewDialog::retranslate()
@@ -163,6 +167,7 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxProportionalHints, "NebulaMgr.hintsProportional");
 	connectBoolProperty(ui->checkBoxSurfaceBrightnessUsage, "NebulaMgr.flagSurfaceBrightnessUsage");
 	connectBoolProperty(ui->checkBoxDesignationsOnlyUsage, "NebulaMgr.flagDesignationLabels");
+	connect(ui->pushButtonConfigureDSOColors, SIGNAL(clicked()), this, SLOT(showConfigureDSOColorsDialog()));
 
 	// From Trunk, but seems OK here. It was close to end before.
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
@@ -394,6 +399,14 @@ void ViewDialog::createDialogContent()
 
 	connectDoubleProperty(ui->constellationArtBrightnessSpinBox,"ConstellationMgr.artIntensity");
 	connectDoubleProperty(ui->constellationLineThicknessSpinBox,"ConstellationMgr.constellationLineThickness");
+
+	colorButton(ui->colorConstellationBoundaries,	"ConstellationMgr.boundariesColor");
+	colorButton(ui->colorConstellationLabels,	"ConstellationMgr.namesColor");
+	colorButton(ui->colorConstellationLines,	"ConstellationMgr.linesColor");
+
+	connect(ui->colorConstellationBoundaries,	SIGNAL(released()), this, SLOT(askConstellationBoundariesColor()));
+	connect(ui->colorConstellationLabels,		SIGNAL(released()), this, SLOT(askConstellationLabelsColor()));
+	connect(ui->colorConstellationLines,		SIGNAL(released()), this, SLOT(askConstellationLinesColor()));
 
 	// Starlore
 	connect(ui->useAsDefaultSkyCultureCheckBox, SIGNAL(clicked()), this, SLOT(setCurrentCultureAsDefault()));
@@ -876,6 +889,51 @@ void ViewDialog::askCardinalPointsColor()
 	}
 }
 
+void ViewDialog::askConstellationBoundariesColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("ConstellationMgr.boundariesColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorConstellationBoundaries->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		GETSTELMODULE(ConstellationMgr)->setBoundariesColor(vColor);
+		StelApp::getInstance().getSettings()->setValue("color/const_boundary_color", StelUtils::vec3fToStr(vColor));
+		ui->colorConstellationBoundaries->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
+void ViewDialog::askConstellationLabelsColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("ConstellationMgr.namesColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorConstellationLabels->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		GETSTELMODULE(ConstellationMgr)->setLabelsColor(vColor);
+		StelApp::getInstance().getSettings()->setValue("color/const_names_color", StelUtils::vec3fToStr(vColor));
+		ui->colorConstellationLabels->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
+void ViewDialog::askConstellationLinesColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("ConstellationMgr.linesColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorConstellationLines->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		GETSTELMODULE(ConstellationMgr)->setLinesColor(vColor);
+		StelApp::getInstance().getSettings()->setValue("color/const_lines_color", StelUtils::vec3fToStr(vColor));
+		ui->colorConstellationLines->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
 void ViewDialog::updateTabBarListWidgetWidth()
 {
 	ui->stackListWidget->setWrapping(false);
@@ -1135,7 +1193,7 @@ void ViewDialog::populateLists()
 	{
 		l->addItem(core->projectionTypeKeyToNameI18n(s));
 	}
-	l->setCurrentItem(l->findItems(core->projectionTypeKeyToNameI18n(core->getCurrentProjectionTypeKey()), Qt::MatchExactly).at(0));
+	l->setCurrentItem(l->findItems(core->getCurrentProjectionNameI18n(), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
 	ui->projectionTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->projectionTextBrowser->setHtml(core->getProjection(StelCore::FrameJ2000)->getHtmlSummary());
@@ -1235,7 +1293,7 @@ void ViewDialog::projectionChanged()
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	QListWidget* l = ui->projectionListWidget;
-	l->setCurrentItem(l->findItems(core->projectionTypeKeyToNameI18n(core->getCurrentProjectionTypeKey()), Qt::MatchExactly).at(0),QItemSelectionModel::SelectCurrent);
+	l->setCurrentItem(l->findItems(core->getCurrentProjectionNameI18n(), Qt::MatchExactly).at(0),QItemSelectionModel::SelectCurrent);
 	ui->projectionTextBrowser->setHtml(core->getProjection(StelCore::FrameJ2000)->getHtmlSummary());
 }
 
@@ -1287,6 +1345,14 @@ void ViewDialog::showGreatRedSpotDialog()
 		greatRedSpotDialog = new GreatRedSpotDialog();
 
 	greatRedSpotDialog->setVisible(true);
+}
+
+void ViewDialog::showConfigureDSOColorsDialog()
+{
+	if(configureDSOColorsDialog == NULL)
+		configureDSOColorsDialog = new ConfigureDSOColorsDialog();
+
+	configureDSOColorsDialog->setVisible(true);
 }
 
 void ViewDialog::updateZhrDescription(int zhr)

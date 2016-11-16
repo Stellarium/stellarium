@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>512</width>
-    <height>548</height>
+    <height>563</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -464,6 +464,19 @@
             </layout>
            </widget>
           </item>
+          <item>
+           <spacer name="verticalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
          </layout>
         </widget>
         <widget class="QWidget" name="pageSelectedObjectInfo">
@@ -495,6 +508,18 @@
              <string>Selected object information</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_2">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item row="0" column="0">
               <widget class="QRadioButton" name="allSelectedInfoRadio">
                <property name="toolTip">
@@ -562,16 +587,6 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="checkBoxName">
-               <property name="text">
-                <string>Name</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
              <item row="3" column="0">
               <widget class="QCheckBox" name="checkBoxRaDecOfDate">
                <property name="toolTip">
@@ -585,10 +600,115 @@
                </attribute>
               </widget>
              </item>
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="checkBoxSupergalacticCoordinates">
+               <property name="text">
+                <string>Supergalactic coordinates</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="7" column="1">
+              <widget class="QCheckBox" name="checkBoxExtra">
+               <property name="toolTip">
+                <string>Spectral class, nebula type, etc.</string>
+               </property>
+               <property name="text">
+                <string>Additional information</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QCheckBox" name="checkBoxType">
+               <property name="toolTip">
+                <string>The type of the object (star, planet, etc.)</string>
+               </property>
+               <property name="text">
+                <string>Type</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="checkBoxAbsoluteMag">
+               <property name="text">
+                <string>Absolute magnitude</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="checkBoxEclipticCoordsOfDate">
+               <property name="toolTip">
+                <string>Ecliptic coordinates, equinox of date (only for Earth)</string>
+               </property>
+               <property name="text">
+                <string>Ecliptic coordinates (of date)</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QCheckBox" name="checkBoxAltAz">
+               <property name="toolTip">
+                <string>Horizontal coordinates</string>
+               </property>
+               <property name="text">
+                <string>Altitude/Azimuth</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
              <item row="1" column="0">
               <widget class="QCheckBox" name="checkBoxCatalogNumbers">
                <property name="text">
                 <string>Catalog number(s)</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="checkBoxSize">
+               <property name="toolTip">
+                <string>Angular or physical size</string>
+               </property>
+               <property name="text">
+                <string>Size</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="checkBoxGalacticCoordinates">
+               <property name="text">
+                <string>Galactic coordinates</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QCheckBox" name="checkBoxDistance">
+               <property name="text">
+                <string>Distance</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedFields</string>
@@ -608,20 +728,36 @@
                </attribute>
               </widget>
              </item>
-             <item row="1" column="1">
-              <widget class="QCheckBox" name="checkBoxAbsoluteMag">
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBoxName">
                <property name="text">
-                <string>Absolute magnitude</string>
+                <string>Name</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedFields</string>
                </attribute>
               </widget>
              </item>
-             <item row="2" column="1">
-              <widget class="QCheckBox" name="checkBoxGalacticCoordinates">
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="checkBoxEclipticCoordsJ2000">
+               <property name="toolTip">
+                <string>Ecliptic coordinates, equinox J2000.0</string>
+               </property>
                <property name="text">
-                <string>Galactic coordinates</string>
+                <string>Ecliptic coordinates (J2000)</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="checkBoxHourAngle">
+               <property name="toolTip">
+                <string>Equatorial coordinates, equinox of date</string>
+               </property>
+               <property name="text">
+                <string>Hour angle/Declination</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedFields</string>
@@ -638,96 +774,21 @@
                </attribute>
               </widget>
              </item>
-             <item row="5" column="0">
-              <widget class="QCheckBox" name="checkBoxSize">
-               <property name="toolTip">
-                <string>Angular or physical size</string>
-               </property>
-               <property name="text">
-                <string>Size</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="6" column="0">
-              <widget class="QCheckBox" name="checkBoxType">
-               <property name="toolTip">
-                <string>The type of the object (star, planet, etc.)</string>
-               </property>
-               <property name="text">
-                <string>Type</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="6" column="1">
-              <widget class="QCheckBox" name="checkBoxExtra">
-               <property name="toolTip">
-                <string>Spectral class, nebula type, etc.</string>
-               </property>
-               <property name="text">
-                <string>Additional information</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QCheckBox" name="checkBoxHourAngle">
-               <property name="toolTip">
-                <string>Equatorial coordinates, equinox of date</string>
-               </property>
-               <property name="text">
-                <string>Hour angle/Declination</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QCheckBox" name="checkBoxAltAz">
-               <property name="toolTip">
-                <string>Horizontal coordinates</string>
-               </property>
-               <property name="text">
-                <string>Altitude/Azimuth</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="QCheckBox" name="checkBoxDistance">
-               <property name="text">
-                <string>Distance</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="checkBoxEclipticCoords">
-               <property name="toolTip">
-                <string>Ecliptic coordinates, equinox of date and J2000 (only for Earth)</string>
-               </property>
-               <property name="text">
-                <string>Ecliptic coordinates</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
             </layout>
            </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </widget>
@@ -766,16 +827,6 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="enableKeysNavigationCheckBox">
-               <property name="toolTip">
-                <string>Allow keyboard to pan and zoom</string>
-               </property>
-               <property name="text">
-                <string>Enable keyboard navigation</string>
-               </property>
-              </widget>
-             </item>
              <item row="1" column="0">
               <widget class="QCheckBox" name="enableMouseNavigationCheckBox">
                <property name="toolTip">
@@ -790,6 +841,16 @@
               <widget class="QPushButton" name="editShortcutsPushButton">
                <property name="text">
                 <string>Edit keyboard shortcuts...</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="enableKeysNavigationCheckBox">
+               <property name="toolTip">
+                <string>Allow keyboard to pan and zoom</string>
+               </property>
+               <property name="text">
+                <string>Enable keyboard navigation</string>
                </property>
               </widget>
              </item>
@@ -866,63 +927,6 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="2" column="0">
-              <layout class="QHBoxLayout" name="_4">
-               <item>
-                <widget class="QRadioButton" name="fixedTimeRadio">
-                 <property name="toolTip">
-                  <string>Use a specific date and time when Stellarium starts up</string>
-                 </property>
-                 <property name="text">
-                  <string>Other:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDateTimeEdit" name="fixedDateTimeEdit">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="date">
-                  <date>
-                   <year>1952</year>
-                   <month>5</month>
-                   <day>11</day>
-                  </date>
-                 </property>
-                 <property name="time">
-                  <time>
-                   <hour>0</hour>
-                   <minute>42</minute>
-                   <second>0</second>
-                  </time>
-                 </property>
-                 <property name="calendarPopup">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="2" column="1">
-              <widget class="QPushButton" name="fixedDateTimeCurrentButton">
-               <property name="toolTip">
-                <string>Use current local date and time</string>
-               </property>
-               <property name="text">
-                <string>use current</string>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="0">
               <widget class="QRadioButton" name="systemTimeRadio">
                <property name="toolTip">
@@ -990,6 +994,142 @@
                 </widget>
                </item>
               </layout>
+             </item>
+             <item row="2" column="0">
+              <layout class="QHBoxLayout" name="_4">
+               <item>
+                <widget class="QRadioButton" name="fixedTimeRadio">
+                 <property name="toolTip">
+                  <string>Use a specific date and time when Stellarium starts up</string>
+                 </property>
+                 <property name="text">
+                  <string>Other:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDateTimeEdit" name="fixedDateTimeEdit">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="date">
+                  <date>
+                   <year>1952</year>
+                   <month>5</month>
+                   <day>11</day>
+                  </date>
+                 </property>
+                 <property name="time">
+                  <time>
+                   <hour>0</hour>
+                   <minute>42</minute>
+                   <second>0</second>
+                  </time>
+                 </property>
+                 <property name="calendarPopup">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="2" column="1">
+              <widget class="QPushButton" name="fixedDateTimeCurrentButton">
+               <property name="toolTip">
+                <string>Use current local date and time</string>
+               </property>
+               <property name="text">
+                <string>use current</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_2">
+            <property name="toolTip">
+             <string>These settings control the way time and date are displayed in the bottom bar.</string>
+            </property>
+            <property name="title">
+             <string>Display formats of date and time</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayoutFmt">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item row="0" column="2">
+              <widget class="QLabel" name="dateFormatsLabel">
+               <property name="text">
+                <string>Date:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="4">
+              <widget class="QLabel" name="timeFormatsLabel">
+               <property name="text">
+                <string>and time:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QComboBox" name="dateFormatsComboBox"/>
+             </item>
+             <item row="0" column="5">
+              <widget class="QComboBox" name="timeFormatsComboBox"/>
+             </item>
+             <item row="0" column="0">
+              <widget class="QRadioButton" name="jdRadioButton">
+               <property name="text">
+                <string notr="true">JD</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QRadioButton" name="dtRadioButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>20</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text">
+                <string notr="true"/>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -1139,6 +1279,18 @@
              <string>Planetarium options</string>
             </property>
             <layout class="QGridLayout" name="gridLayoutOptions">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item row="3" column="0">
               <widget class="QCheckBox" name="autoEnableAtmosphereCheckBox">
                <property name="toolTip">
@@ -1423,6 +1575,19 @@
              </item>
             </layout>
            </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </widget>
@@ -1774,7 +1939,7 @@
   <customwidget>
    <class>BarFrame</class>
    <extends>QFrame</extends>
-   <header location="global">Dialog.hpp</header>
+   <header>Dialog.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
@@ -1787,11 +1952,13 @@
   <tabstop>checkBoxAbsoluteMag</tabstop>
   <tabstop>checkBoxRaDecJ2000</tabstop>
   <tabstop>checkBoxGalacticCoordinates</tabstop>
+  <tabstop>checkBoxSupergalacticCoordinates</tabstop>
   <tabstop>checkBoxRaDecOfDate</tabstop>
   <tabstop>checkBoxSize</tabstop>
   <tabstop>checkBoxDistance</tabstop>
   <tabstop>checkBoxType</tabstop>
-  <tabstop>checkBoxEclipticCoords</tabstop>
+  <tabstop>checkBoxEclipticCoordsJ2000</tabstop>
+  <tabstop>checkBoxEclipticCoordsOfDate</tabstop>
   <tabstop>enableKeysNavigationCheckBox</tabstop>
   <tabstop>editShortcutsPushButton</tabstop>
   <tabstop>systemTimeRadio</tabstop>

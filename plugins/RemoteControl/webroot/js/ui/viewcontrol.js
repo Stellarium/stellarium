@@ -3,7 +3,6 @@ define(["jquery", "api/viewcontrol", "api/viewoptions", "api/actions", "jquery-u
 
 	var $view_fov;
 	var view_fov_text;
-	var view_projection;
 
 	var minFov = 0.001389;
 	//TODO make this depend on current projection
@@ -72,12 +71,7 @@ define(["jquery", "api/viewcontrol", "api/viewoptions", "api/actions", "jquery-u
 		});
 
 		view_fov_text = document.getElementById("view_fov_text");
-		view_projection = document.getElementById("view_projection");
 	}
-
-	$(viewOptionApi).on("projectionChanged", function(evt, proj, str) {
-		view_projection.textContent = str;
-	});
 
 	$(viewControlApi).on("fovChanged", function(evt, fov) {
 		setFovText(fov);

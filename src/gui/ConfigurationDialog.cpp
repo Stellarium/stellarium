@@ -120,7 +120,11 @@ void ConfigurationDialog::retranslate()
 		//Plug-in information
 		populatePluginsList();
 
-		populateDeltaTAlgorithmsList();		
+		populateDeltaTAlgorithmsList();
+
+		populateDateFormatsList();
+
+		populateTimeFormatsList();
 	}
 }
 
@@ -234,9 +238,38 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->fixedDateTimeCurrentButton, SIGNAL(clicked()), this, SLOT(setFixedDateTimeToCurrent()));
 	connect(ui->editShortcutsPushButton, SIGNAL(clicked()), this, SLOT(showShortcutsWindow()));
 
+	StelLocaleMgr & localeManager = StelApp::getInstance().getLocaleMgr();
+	// Display formats of date
+	populateDateFormatsList();
+	int idx = ui->dateFormatsComboBox->findData(localeManager.getDateFormatStr(), Qt::UserRole, Qt::MatchCaseSensitive);
+	if (idx==-1)
+	{
+		// Use system_deafult as default
+		idx = ui->dateFormatsComboBox->findData(QVariant("system_deafult"), Qt::UserRole, Qt::MatchCaseSensitive);
+	}
+	ui->dateFormatsComboBox->setCurrentIndex(idx);
+	connect(ui->dateFormatsComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(setDateFormat()));
+
+	// Display formats of time
+	populateTimeFormatsList();
+	idx = ui->timeFormatsComboBox->findData(localeManager.getTimeFormatStr(), Qt::UserRole, Qt::MatchCaseSensitive);
+	if (idx==-1)
+	{
+		// Use system_deafult as default
+		idx = ui->timeFormatsComboBox->findData(QVariant("system_deafult"), Qt::UserRole, Qt::MatchCaseSensitive);
+	}
+	ui->timeFormatsComboBox->setCurrentIndex(idx);
+	connect(ui->timeFormatsComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(setTimeFormat()));
+	if (StelApp::getInstance().getSettings()->value("gui/flag_time_jd", false).toBool())
+		ui->jdRadioButton->setChecked(true);
+	else
+		ui->dtRadioButton->setChecked(true);
+	connect(ui->jdRadioButton, SIGNAL(clicked(bool)), this, SLOT(setButtonBarDTFormat()));
+	connect(ui->dtRadioButton, SIGNAL(clicked(bool)), this, SLOT(setButtonBarDTFormat()));
+
 	// Delta-T
 	populateDeltaTAlgorithmsList();	
-	int idx = ui->deltaTAlgorithmComboBox->findData(core->getCurrentDeltaTAlgorithmKey(), Qt::UserRole, Qt::MatchCaseSensitive);
+	idx = ui->deltaTAlgorithmComboBox->findData(core->getCurrentDeltaTAlgorithmKey(), Qt::UserRole, Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
 		// Use Espenak & Meeus (2006) as default
@@ -390,6 +423,14 @@ void ConfigurationDialog::setStartupTimeMode()
 	StelApp::getInstance().getCore()->setPresetSkyTime(ui->fixedDateTimeEdit->dateTime());
 }
 
+void ConfigurationDialog::setButtonBarDTFormat()
+{
+	if (ui->jdRadioButton->isChecked())
+		gui->getButtonBar()->setFlagTimeJd(true);
+	else
+		gui->getButtonBar()->setFlagTimeJd(false);
+}
+
 void ConfigurationDialog::showShortcutsWindow()
 {
 	StelAction* action = StelApp::getInstance().getStelActionManager()->findAction("actionShow_Shortcuts_Window_Global");
@@ -472,10 +513,14 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 		flags |= StelObject::Extra;
 	if (ui->checkBoxGalacticCoordinates->isChecked())
 		flags |= StelObject::GalacticCoord;
+	if (ui->checkBoxSupergalacticCoordinates->isChecked())
+		flags |= StelObject::SupergalacticCoord;
 	if (ui->checkBoxType->isChecked())
 		flags |= StelObject::ObjectType;
-	if (ui->checkBoxEclipticCoords->isChecked())
-		flags |= StelObject::EclipticCoord;
+	if (ui->checkBoxEclipticCoordsJ2000->isChecked())
+		flags |= StelObject::EclipticCoordJ2000;
+	if (ui->checkBoxEclipticCoordsOfDate->isChecked())
+		flags |= StelObject::EclipticCoordOfDate;
 
 	gui->setInfoTextFilters(flags);
 }
@@ -729,10 +774,14 @@ void ConfigurationDialog::saveCurrentViewOptions()
 			       (bool) (flags & StelObject::Extra));
 		conf->setValue("flag_show_galcoord",
 			       (bool) (flags & StelObject::GalacticCoord));
+		conf->setValue("flag_show_supergalcoord",
+			       (bool) (flags & StelObject::SupergalacticCoord));
 		conf->setValue("flag_show_type",
 			       (bool) (flags & StelObject::ObjectType));
-		conf->setValue("flag_show_eclcoord",
-			       (bool) (flags & StelObject::EclipticCoord));
+		conf->setValue("flag_show_eclcoordofdate",
+			       (bool) (flags & StelObject::EclipticCoordOfDate));
+		conf->setValue("flag_show_eclcoordj2000",
+			       (bool) (flags & StelObject::EclipticCoordJ2000));
 		conf->endGroup();
 	}
 
@@ -742,6 +791,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("gui/flag_show_nebulae_background_button", gui->getFlagShowNebulaBackgroundButton());
 	conf->setValue("gui/flag_show_decimal_degrees", StelApp::getInstance().getFlagShowDecimalDegrees());
 	conf->setValue("gui/flag_use_azimuth_from_south", StelApp::getInstance().getFlagSouthAzimuthUsage());
+	conf->setValue("gui/flag_time_jd", gui->getButtonBar()->getFlagTimeJd());
 
 	mvmgr->setInitFov(mvmgr->getCurrentFov());
 	mvmgr->setInitViewDirectionToCurrent();
@@ -760,6 +810,9 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	else
 		conf->setValue("navigation/viewing_mode", "equator");
 
+	StelLocaleMgr & localeManager = StelApp::getInstance().getLocaleMgr();
+	conf->setValue("localization/time_display_format", localeManager.getTimeFormatStr());
+	conf->setValue("localization/date_display_format", localeManager.getDateFormatStr());
 
 	// configuration dialog / tools tab
 	conf->setValue("gui/flag_show_flip_buttons", gui->getFlagShowFlipButtons());
@@ -988,7 +1041,7 @@ void ConfigurationDialog::setFixedDateTimeToCurrent(void)
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	double JD = core->getJD();
-	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(JD+StelUtils::getGMTShiftFromQT(JD)/24));
+	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(JD+core->getUTCOffset(JD)/24));
 	ui->fixedTimeRadio->setChecked(true);
 	setStartupTimeMode();
 }
@@ -1278,8 +1331,10 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxSize->setChecked(flags & StelObject::Size);
 	ui->checkBoxExtra->setChecked(flags & StelObject::Extra);
 	ui->checkBoxGalacticCoordinates->setChecked(flags & StelObject::GalacticCoord);
+	ui->checkBoxSupergalacticCoordinates->setChecked(flags & StelObject::SupergalacticCoord);
 	ui->checkBoxType->setChecked(flags & StelObject::ObjectType);
-	ui->checkBoxEclipticCoords->setChecked(flags & StelObject::EclipticCoord);
+	ui->checkBoxEclipticCoordsJ2000->setChecked(flags & StelObject::EclipticCoordJ2000);
+	ui->checkBoxEclipticCoordsOfDate->setChecked(flags & StelObject::EclipticCoordOfDate);
 }
 
 void ConfigurationDialog::updateTabBarListWidgetWidth()
@@ -1322,6 +1377,8 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 
 	// TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 	ui->deltaTLabel->setText(QString("%1 %2T:").arg(q_("Algorithm of")).arg(QChar(0x0394)));
+
+	ui->pushButtonCustomDeltaTEquationDialog->setFixedHeight(ui->deltaTAlgorithmComboBox->height());
 
 	QComboBox* algorithms = ui->deltaTAlgorithmComboBox;
 
@@ -1401,4 +1458,73 @@ void ConfigurationDialog::showCustomDeltaTEquationDialog()
 		customDeltaTEquationDialog = new CustomDeltaTEquationDialog();
 
 	customDeltaTEquationDialog->setVisible(true);
+}
+
+void ConfigurationDialog::populateDateFormatsList()
+{
+	Q_ASSERT(ui->dateFormatsComboBox);
+
+	QComboBox* dfmts = ui->dateFormatsComboBox;
+
+	//Save the current selection to be restored later
+	dfmts->blockSignals(true);
+	int index = dfmts->currentIndex();
+	QVariant selectedDateFormat = dfmts->itemData(index);
+	dfmts->clear();
+	//For each format, display the localized name and store the key as user
+	//data. Unfortunately, there's no other way to do this than with a cycle.
+	dfmts->addItem(q_("System default"), "system_default");
+	dfmts->addItem(q_("yyyy-mm-dd (ISO 8601)"), "yyyymmdd");
+	dfmts->addItem(q_("dd-mm-yyyy"), "ddmmyyyy");
+	dfmts->addItem(q_("mm-dd-yyyy"), "mmddyyyy");
+
+	//Restore the selection
+	index = dfmts->findData(selectedDateFormat, Qt::UserRole, Qt::MatchCaseSensitive);
+	dfmts->setCurrentIndex(index);
+	dfmts->blockSignals(false);
+}
+
+void ConfigurationDialog::setDateFormat()
+{
+	QString selectedFormat = ui->dateFormatsComboBox->itemData(ui->dateFormatsComboBox->currentIndex()).toString();
+
+	StelLocaleMgr & localeManager = StelApp::getInstance().getLocaleMgr();
+	if (selectedFormat == localeManager.getDateFormatStr())
+		return;
+
+	localeManager.setDateFormatStr(selectedFormat);	
+}
+
+void ConfigurationDialog::populateTimeFormatsList()
+{
+	Q_ASSERT(ui->timeFormatsComboBox);
+
+	QComboBox* tfmts = ui->timeFormatsComboBox;
+
+	//Save the current selection to be restored later
+	tfmts->blockSignals(true);
+	int index = tfmts->currentIndex();
+	QVariant selectedTimeFormat = tfmts->itemData(index);
+	tfmts->clear();
+	//For each format, display the localized name and store the key as user
+	//data. Unfortunately, there's no other way to do this than with a cycle.
+	tfmts->addItem(q_("System default"), "system_default");
+	tfmts->addItem(q_("12-hour format"), "12h");
+	tfmts->addItem(q_("24-hour format"), "24h");
+
+	//Restore the selection
+	index = tfmts->findData(selectedTimeFormat, Qt::UserRole, Qt::MatchCaseSensitive);
+	tfmts->setCurrentIndex(index);
+	tfmts->blockSignals(false);
+}
+
+void ConfigurationDialog::setTimeFormat()
+{
+	QString selectedFormat = ui->timeFormatsComboBox->itemData(ui->timeFormatsComboBox->currentIndex()).toString();
+
+	StelLocaleMgr & localeManager = StelApp::getInstance().getLocaleMgr();
+	if (selectedFormat == localeManager.getTimeFormatStr())
+		return;
+
+	localeManager.setTimeFormatStr(selectedFormat);	
 }

@@ -25,6 +25,7 @@ src/core/StelObject.cpp
 src/core/StelSkyLayerMgr.cpp
 src/core/StelMovementMgr.cpp
 src/core/SimbadSearcher.cpp
+src/core/StelLocaleMgr.cpp
 src/gui/ConfigurationDialog.cpp
 src/gui/HelpDialog.cpp
 src/gui/StelGui.cpp
@@ -38,11 +39,13 @@ src/gui/ShortcutsDialog.cpp
 src/gui/CustomDeltaTEquationDialog.cpp
 src/gui/AstroCalcDialog.cpp
 src/gui/BookmarksDialog.cpp
+src/gui/ConfigureDSOColorsDialog.cpp
 src/main.cpp
 src/StelMainView.cpp
 
 # Translations of strings not contained in the source code
 src/translations.h
+src/translations_countries.h
 
 # Translations of GUI files generated at build time
 src/ui_dateTimeDialogGui.h
@@ -58,6 +61,7 @@ src/ui_greatRedSpotDialog.h
 src/ui_scriptConsole.h
 src/ui_astroCalcDialog.h
 src/ui_bookmarksDialog.h
+src/ui_dsoColorsDialog.h
 
 # Plug-in translations
 # NOTE: Plugins should be enabled for building
@@ -84,11 +88,6 @@ plugins/TelescopeControl/src/ui_slewDialog.h
 plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h
 plugins/TelescopeControl/src/ui_telescopeDialog.h
 plugins/TelescopeControl/src/ui_storedPointsDialog.h
-plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp
-plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp
-plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp
-plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h
-plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h
 plugins/TextUserInterface/src/TextUserInterface.cpp
 plugins/TextUserInterface/src/TuiNodeBool.cpp
 plugins/TextUserInterface/src/TuiNodeColor.cpp
