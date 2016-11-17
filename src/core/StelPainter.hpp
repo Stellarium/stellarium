@@ -37,7 +37,7 @@ class QOpenGLShaderProgram;
 //! Because openGL is not thread safe, only one instance of StelPainter can exist at a time, enforcing thread safety.
 //! As a coding rule, no openGL calls should be performed when no instance of StelPainter exist.
 //! Typical usage is to create a local instance of StelPainter where drawing operations are needed.
-class StelPainter
+class StelPainter : protected QOpenGLFunctions
 {
 public:
 	friend class VertexArrayProjector;
@@ -65,6 +65,11 @@ public:
 
 	explicit StelPainter(const StelProjectorP& prj);
 	~StelPainter();
+
+	//! Returns a QOpenGLFunctions object suitable for drawing directly with OpenGL while this StelPainter is active.
+	//! This is recommended to be used instead of QOpenGLContext::currentContext()->functions() when a StelPainter is available,
+	//! and you only need to call a few GL functions directly.
+	inline QOpenGLFunctions* glFuncs() { return this; }
 
 	//! Return the instance of projector associated to this painter
 	const StelProjectorP& getProjector() const {return prj;}
@@ -236,6 +241,7 @@ public:
 	static void deinitGLShaders();
 
 	//! Set whether texturing is enabled.
+	//! @deprecated Relict of old GL1 drawing code, does nothing anymore
 	void enableTexture2d(bool b);
 
 	// Thoses methods should eventually be replaced by a single setVertexArray
@@ -262,7 +268,7 @@ public:
 		normalArray.size = 3; normalArray.type = type; normalArray.pointer = pointer;
 	}
 
-	//! use instead of glEnableClient
+	//! Simulates glEnableClientState, basically you describe what data the ::drawFromArray call has available
 	void enableClientStates(bool vertex, bool texture=false, bool color=false, bool normal=false);
 
 	//! convenience method that enable and set all the given arrays.
@@ -289,18 +295,6 @@ private:
 
 	friend class StelTextureMgr;
 	friend class StelTexture;
-
-	//! RAII class used to store and restore the opengl state.
-	//! to use it we just need to instanciate it at the beginning of a method that might change the state.
-	class GLState
-	{
-	public:
-		GLState();
-		~GLState();
-	private:
-		bool blend;
-		int blendSrcRGB, blendDstRGB, blendSrcAlpha, blendDstAlpha;
-	};
 
 	// From text-use-opengl-buffer
 	static QCache<QByteArray, struct StringTexture> texCache;

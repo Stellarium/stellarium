@@ -34,8 +34,8 @@ static QVector<Vec3d> vertexArray;
 static QVector<Vec4f> colorArray;
 void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 {
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	sPainter->glFuncs()->glEnable(GL_BLEND);
+	sPainter->glFuncs()->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	float currentTime = core->getJDE();
 	StelProjector::ModelViewTranformP transfo = core->getJ2000ModelViewTransform();
 	transfo->combine(j2000ToTrailNativeInverted);

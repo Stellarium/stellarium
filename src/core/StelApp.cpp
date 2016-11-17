@@ -387,6 +387,7 @@ void StelApp::initScriptMgr() {}
 
 void StelApp::init(QSettings* conf)
 {
+	gl = QOpenGLContext::currentContext()->functions();
 	confSettings = conf;
 
 	devicePixelsPerPixel = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
@@ -620,7 +621,7 @@ void StelApp::prepareRenderBuffer()
 void StelApp::applyRenderBuffer(GLuint drawFbo)
 {
 	if (!renderBuffer) return;
-	GL(glBindFramebuffer(GL_FRAMEBUFFER, drawFbo));
+	GL(gl->glBindFramebuffer(GL_FRAMEBUFFER, drawFbo));
 	viewportEffect->paintViewportBuffer(renderBuffer);
 }
 
@@ -633,12 +634,15 @@ void StelApp::draw()
 	//find out which framebuffer is the current one
 	//this is usually NOT the "zero" FBO, but one provided by QOpenGLWidget
 	GLint drawFbo;
-	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &drawFbo);
+	GL(gl->glGetIntegerv(GL_FRAMEBUFFER_BINDING, &drawFbo));
 
 	prepareRenderBuffer();
 	currentFbo = renderBuffer ? renderBuffer->handle() : drawFbo;
 
 	core->preDraw();
+	// Clear areas not redrawn by main viewport (i.e. fisheye square viewport)
+	GL(gl->glClearColor(0,0,0,0));
+	GL(gl->glClear(GL_COLOR_BUFFER_BIT));
 
 	const QList<StelModule*> modules = moduleMgr->getCallOrders(StelModule::ActionDraw);
 	foreach(StelModule* module, modules)

@@ -33,6 +33,7 @@ class StelMainView;
 class StelSkyCultureMgr;
 class StelViewportEffect;
 class QOpenGLFramebufferObject;
+class QOpenGLFunctions;
 class QSettings;
 class QNetworkAccessManager;
 class QNetworkReply;
@@ -393,8 +394,8 @@ private:
 
 	// Framebuffer object used for viewport effects.
 	QOpenGLFramebufferObject* renderBuffer;
-
 	StelViewportEffect* viewportEffect;
+	QOpenGLFunctions* gl;
 	
 	bool flagShowDecimalDegrees;
 	// flag to indicate we want calculate azimuth from south towards west (as in old astronomical literature)
