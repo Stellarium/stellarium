@@ -42,7 +42,7 @@ class Scenery3dMgr;
 class LandscapeMgr;
 
 //! Representation of a complete 3D scenery
-class Scenery3d
+class Scenery3d : protected QOpenGLFunctions
 {
 public:
 	//! Initializes an empty Scenery3d object.

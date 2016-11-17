@@ -787,8 +787,8 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 			if (Satellite::showLabels)
 				painter.drawText(xy[0], xy[1], name, 0, 10, 10, false);
 
-			glEnable(GL_BLEND);
-			glBlendFunc(GL_ONE, GL_ONE);
+			painter.glFuncs()->glEnable(GL_BLEND);
+			painter.glFuncs()->glBlendFunc(GL_ONE, GL_ONE);
 
 			Satellite::hintTexture->bind();
 			painter.drawSprite2dMode(xy[0], xy[1], 11);			
@@ -803,8 +803,6 @@ void Satellite::drawOrbit(StelPainter& painter)
 	Vec3d position, onscreen;
 	Vec3f drawColor;
 	int size = orbitPoints.size();
-
-	glDisable(GL_TEXTURE_2D);
 
 	QList<Vec3d>::iterator it= orbitPoints.begin();
 	it++;
@@ -834,8 +832,6 @@ void Satellite::drawOrbit(StelPainter& painter)
 		}
 	}
 	painter.drawPath(vertexArray, colorArray);
-
-	glEnable(GL_TEXTURE_2D);
 	painter.enableClientStates(false);
 }
 

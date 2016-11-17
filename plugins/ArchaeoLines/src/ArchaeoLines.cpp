@@ -1222,9 +1222,8 @@ void alViewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& direct
 
 	d->sPainter->drawText(screenPos[0], screenPos[1], text, angleDeg, xshift, 3);
 	//d->sPainter->setColor(tmpColor[0], tmpColor[1], tmpColor[2], tmpColor[3]); // RESTORE
-	glDisable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	d->sPainter->glFuncs()->glEnable(GL_BLEND);
+	d->sPainter->glFuncs()->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 
@@ -1323,14 +1322,13 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 
 	// Initialize a painter and set OpenGL state
 	StelPainter sPainter(prj);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-	glDisable(GL_TEXTURE_2D);
+	sPainter.glFuncs()->glEnable(GL_BLEND);
+	sPainter.glFuncs()->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
 	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
 	#ifdef GL_LINE_SMOOTH
 	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-		glEnable(GL_LINE_SMOOTH);
+		sPainter.glFuncs()->glEnable(GL_LINE_SMOOTH);
 	#endif
 
 	sPainter.setColor(color[0], color[1], color[2], intensity*fader.getInterstate());
@@ -1420,18 +1418,18 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 			sPainter.drawSmallCircleArc(pt3, pt1, rotCenter, alViewportEdgeIntersectCallback, &userData);
 			#ifdef GL_LINE_SMOOTH
 			if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-				glDisable(GL_LINE_SMOOTH);
+				sPainter.glFuncs()->glDisable(GL_LINE_SMOOTH);
 			#endif
-			glDisable(GL_BLEND);
+			sPainter.glFuncs()->glDisable(GL_BLEND);
 			return;
 		}
 		else
 		{
 			#ifdef GL_LINE_SMOOTH
 			if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-				glDisable(GL_LINE_SMOOTH);
+				sPainter.glFuncs()->glDisable(GL_LINE_SMOOTH);
 			#endif
-			glDisable(GL_BLEND);
+			sPainter.glFuncs()->glDisable(GL_BLEND);
 			return;
 		}
 	}
@@ -1453,8 +1451,8 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
 	#ifdef GL_LINE_SMOOTH
 	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-		glDisable(GL_LINE_SMOOTH);
+		sPainter.glFuncs()->glDisable(GL_LINE_SMOOTH);
 	#endif
 
-	glDisable(GL_BLEND);
+	sPainter.glFuncs()->glDisable(GL_BLEND);
 }

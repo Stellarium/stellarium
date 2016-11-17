@@ -549,25 +549,22 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 
 void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, bool gas)
 {	
-	StelPainter* sPainter = new StelPainter(core->getProjection(transfo));
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
-	glDisable(GL_CULL_FACE);
+	StelPainter sPainter(core->getProjection(transfo));
+	sPainter.glFuncs()->glEnable(GL_BLEND);
+	sPainter.glFuncs()->glBlendFunc(GL_ONE, GL_ONE);
+	sPainter.glFuncs()->glDisable(GL_CULL_FACE);
 
 	tailTexture->bind();
 
 	if (gas) {
-		sPainter->setArrays((Vec3d*)gastailVertexArr.constData(), (Vec2f*)tailTexCoordArr.constData(), (Vec3f*)gastailColorArr.constData());
-		sPainter->drawFromArray(StelPainter::Triangles, tailIndices.size(), 0, true, tailIndices.constData());
+		sPainter.setArrays((Vec3d*)gastailVertexArr.constData(), (Vec2f*)tailTexCoordArr.constData(), (Vec3f*)gastailColorArr.constData());
+		sPainter.drawFromArray(StelPainter::Triangles, tailIndices.size(), 0, true, tailIndices.constData());
 
 	} else {
-		sPainter->setArrays((Vec3d*)dusttailVertexArr.constData(), (Vec2f*)tailTexCoordArr.constData(), (Vec3f*)dusttailColorArr.constData());
-		sPainter->drawFromArray(StelPainter::Triangles, tailIndices.size(), 0, true, tailIndices.constData());
+		sPainter.setArrays((Vec3d*)dusttailVertexArr.constData(), (Vec2f*)tailTexCoordArr.constData(), (Vec3f*)dusttailColorArr.constData());
+		sPainter.drawFromArray(StelPainter::Triangles, tailIndices.size(), 0, true, tailIndices.constData());
 	}
-	glDisable(GL_BLEND);
-
-	delete sPainter;
-	sPainter=NULL;
+	sPainter.glFuncs()->glDisable(GL_BLEND);
 }
 
 void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
@@ -577,11 +574,11 @@ void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
 	Mat4d comarot=Mat4d::rotation(Vec3d(0.0, 0.0, 1.0)^(eclposNrm), std::acos(Vec3d(0.0, 0.0, 1.0).dot(eclposNrm)) );
 	StelProjector::ModelViewTranformP transfo2 = transfo->clone();
 	transfo2->combine(comarot);
-	StelPainter* sPainter = new StelPainter(core->getProjection(transfo2));
+	StelPainter sPainter(core->getProjection(transfo2));
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
-	glDisable(GL_CULL_FACE);
+	sPainter.glFuncs()->glEnable(GL_BLEND);
+	sPainter.glFuncs()->glBlendFunc(GL_ONE, GL_ONE);
+	sPainter.glFuncs()->glDisable(GL_CULL_FACE);
 
 	StelToneReproducer* eye = core->getToneReproducer();
 	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(getVMagnitudeWithExtinction(core)+11.0f); // How to calibrate?
@@ -589,14 +586,11 @@ void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
 	float aLum =eye->adaptLuminanceScaled(lum);
 	float magFactor=qMin(qMax(aLum, 0.25f), 2.0f);
 	comaTexture->bind();
-	sPainter->setColor(0.3f*magFactor,0.7*magFactor,magFactor);
-	sPainter->setArrays((Vec3d*)comaVertexArr.constData(), (Vec2f*)comaTexCoordArr.constData());
-	sPainter->drawFromArray(StelPainter::Triangles, comaVertexArr.size()/3);
+	sPainter.setColor(0.3f*magFactor,0.7*magFactor,magFactor);
+	sPainter.setArrays((Vec3d*)comaVertexArr.constData(), (Vec2f*)comaTexCoordArr.constData());
+	sPainter.drawFromArray(StelPainter::Triangles, comaVertexArr.size()/3);
 
-	glDisable(GL_BLEND);
-
-	delete sPainter;
-	sPainter=NULL;
+	sPainter.glFuncs()->glDisable(GL_BLEND);
 }
 
 // Formula found at http://www.projectpluto.com/update7b.htm#comet_tail_formula

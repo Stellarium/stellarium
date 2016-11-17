@@ -24,6 +24,7 @@
 #include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
 #include "VecMath.hpp"
+#include "StelOpenGL.hpp"
 
 #include <QObject>
 
@@ -42,7 +43,7 @@ struct RCMag
 //! @class StelSkyDrawer
 //! Provide a set of methods used to draw sky objects taking into account
 //! eyes adaptation, zoom level, instrument model and artificially set magnitude limits
-class StelSkyDrawer : public QObject
+class StelSkyDrawer : public QObject, protected QOpenGLFunctions
 {
 	Q_OBJECT
 

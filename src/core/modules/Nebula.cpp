@@ -477,8 +477,8 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 	if (!(sPainter.getProjector()->projectCheck(XYZ, win)))
 		return;
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
+	sPainter.glFuncs()->glEnable(GL_BLEND);
+	sPainter.glFuncs()->glBlendFunc(GL_ONE, GL_ONE);
 	float lum = 1.f;//qMin(1,4.f/getOnScreenSize(core))*0.8;
 
 	Vec3f color=circleColor;

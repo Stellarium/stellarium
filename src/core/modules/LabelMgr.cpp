@@ -296,8 +296,8 @@ bool SkyLabel::draw(StelCore* core, StelPainter& sPainter)
 	if (labelStyle == SkyLabel::Line)
 	{
 		sPainter.enableTexture2d(false);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		sPainter.glFuncs()->glEnable(GL_BLEND);
+		sPainter.glFuncs()->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		// screen coordinates of object
 		Vec3d objXY;

@@ -95,10 +95,10 @@ protected:
 		//this includes all the init() calls of the modules
 
 		Q_ASSERT(context() == QOpenGLContext::currentContext());
-		mainContext = context(); //throw an error when StelOpenGL functions are executed in another context
+		StelOpenGL::mainContext = context(); //throw an error when StelOpenGL functions are executed in another context
 
 		qDebug()<<"initializeGL";
-		qDebug() << "OpenGL supported version: " << QString((char*)glGetString(GL_VERSION));
+		qDebug() << "OpenGL supported version: " << QString((char*)context()->functions()->glGetString(GL_VERSION));
 		qDebug() << "Current Format: " << this->format();
 
 		if (qApp->property("onetime_compat33")==true)
@@ -175,9 +175,10 @@ protected:
 	virtual void draw(QPainter* painter) Q_DECL_OVERRIDE
 	{
 		Q_ASSERT(parent->glContext() == QOpenGLContext::currentContext());
+		QOpenGLFunctions* gl = QOpenGLContext::currentContext()->functions();
 
 		int mainFBO;
-		glGetIntegerv(GL_FRAMEBUFFER_BINDING, &mainFBO);
+		gl->glGetIntegerv(GL_FRAMEBUFFER_BINDING, &mainFBO);
 
 		int pixelRatio = painter->device()->devicePixelRatio();
 		QSize size(painter->device()->width() * pixelRatio, painter->device()->height() * pixelRatio);
@@ -199,7 +200,7 @@ protected:
 		QPainter fboPainter(&device);
 		drawSource(&fboPainter);
 		//dont use QOpenGLFramebufferObject::release here
-		glBindFramebuffer(GL_FRAMEBUFFER,mainFBO);
+		gl->glBindFramebuffer(GL_FRAMEBUFFER,mainFBO);
 
 		painter->save();
 		painter->beginNativePainting();
@@ -211,8 +212,8 @@ protected:
 		program->setAttributeArray(vars.texCoord, texCoord, 2);
 		program->enableAttributeArray(vars.pos);
 		program->enableAttributeArray(vars.texCoord);
-		glBindTexture(GL_TEXTURE_2D, fbo->texture());
-		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+		gl->glBindTexture(GL_TEXTURE_2D, fbo->texture());
+		gl->glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		program->release();
 		painter->endNativePainting();
 		painter->restore();
@@ -600,6 +601,12 @@ void StelMainView::init()
 #endif
 
 	qDebug()<<"StelMainView::init";
+
+	glInfo.mainContext = QOpenGLContext::currentContext();
+	glInfo.functions = glInfo.mainContext->functions();
+	glInfo.vendor = QString(reinterpret_cast<const char*>(glInfo.functions->glGetString(GL_VENDOR)));
+	glInfo.renderer = QString(reinterpret_cast<const char*>(glInfo.functions->glGetString(GL_RENDERER)));
+
 	gui = new StelGui();
 
 	QSettings* conf = configuration;
@@ -721,11 +728,12 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 		qDebug() << "Neither OpenGL nor OpenGL ES detected: Unsupported Format!";
 	}
 #endif
+	QOpenGLFunctions* gl = context->functions();
 
-	QString glDriver(reinterpret_cast<const char*>(glGetString(GL_VERSION)));
+	QString glDriver(reinterpret_cast<const char*>(gl->glGetString(GL_VERSION)));
 	qDebug() << "Driver version string:" << glDriver;
-	qDebug() << "GL vendor is" << QString(reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
-	QString glRenderer(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
+	qDebug() << "GL vendor is" << QString(reinterpret_cast<const char*>(gl->glGetString(GL_VENDOR)));
+	QString glRenderer(reinterpret_cast<const char*>(gl->glGetString(GL_RENDERER)));
 	qDebug() << "GL renderer is" << glRenderer;
 
 	// Minimal required version of OpenGL for Qt5 is 2.1 and OpenGL Shading Language may be 1.20 (or OpenGL ES is 2.0 and GLSL ES is 1.0).
@@ -762,7 +770,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	}
 #endif
 	// This call requires OpenGL2+.
-	QString glslString(reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION)));
+	QString glslString(reinterpret_cast<const char*>(gl->glGetString(GL_SHADING_LANGUAGE_VERSION)));
 	qDebug() << "GL Shading Language version is" << glslString;
 
 	// Only give extended info if called on command line, for diagnostic.

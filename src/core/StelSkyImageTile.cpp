@@ -92,7 +92,7 @@ void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, float)
 
 	// Draw in the good order
 	sPainter.enableTexture2d(true);
-	glBlendFunc(GL_ONE, GL_ONE);
+	sPainter.glFuncs()->glBlendFunc(GL_ONE, GL_ONE);
 	QMap<double, StelSkyImageTile*>::Iterator i = result.end();
 	while (i!=result.begin())
 	{
@@ -253,6 +253,8 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 		texFader->start();
 	}
 
+	QOpenGLFunctions* gl = sPainter.glFuncs();
+
 	// Draw the real texture for this image
 	float ad_lum = (luminance>0) ? core->getToneReproducer()->adaptLuminanceScaled(luminance) : 1.f;
 	ad_lum=std::min(1.f, ad_lum);
@@ -260,15 +262,15 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 	if (alphaBlend==true || texFader->state()==QTimeLine::Running)
 	{
 		if (!alphaBlend)
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+			gl->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 		else
-			glBlendFunc(GL_ONE, GL_ONE);
-		glEnable(GL_BLEND);
+			gl->glBlendFunc(GL_ONE, GL_ONE);
+		gl->glEnable(GL_BLEND);
 		color.set(ad_lum,ad_lum,ad_lum, texFader->currentValue());
 	}
 	else
 	{
-		glDisable(GL_BLEND);
+		gl->glDisable(GL_BLEND);
 		color.set(ad_lum,ad_lum,ad_lum, 1.f);
 	}
 

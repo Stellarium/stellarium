@@ -400,8 +400,8 @@ void Meteor::drawBolide(StelPainter& sPainter, const float& bolideSize)
 	vertexArrayBolide.push_back(radiantToAltAz(bottomLeft));
 	colorArrayBolide.push_back(bolideColor);
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
+	sPainter.glFuncs()->glEnable(GL_BLEND);
+	sPainter.glFuncs()->glBlendFunc(GL_ONE, GL_ONE);
 	sPainter.enableClientStates(true, true, true);
 	m_bolideTexture->bind();
 	static const float texCoordData[] = {1.,0., 0.,0., 0.,1., 1.,1.};
@@ -410,7 +410,7 @@ void Meteor::drawBolide(StelPainter& sPainter, const float& bolideSize)
 	sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayBolide.constData());
 	sPainter.drawFromArray(StelPainter::TriangleFan, vertexArrayBolide.size(), 0, true);
 
-	glDisable(GL_BLEND);
+	sPainter.glFuncs()->glDisable(GL_BLEND);
 	sPainter.enableClientStates(false);
 }
 
@@ -467,8 +467,8 @@ void Meteor::drawTrain(StelPainter& sPainter, const float& thickness)
 		m_trainColorVector[i*2+1][3] = mag;
 	}
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	sPainter.glFuncs()->glEnable(GL_BLEND);
+	sPainter.glFuncs()->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	sPainter.enableClientStates(true, false, true);
 	if (thickness)
 	{
@@ -487,6 +487,6 @@ void Meteor::drawTrain(StelPainter& sPainter, const float& thickness)
 	sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayLine.constData());
 	sPainter.drawFromArray(StelPainter::LineStrip, vertexArrayLine.size(), 0, true);
 
-	glDisable(GL_BLEND);
+	sPainter.glFuncs()->glDisable(GL_BLEND);
 	sPainter.enableClientStates(false);
 }
