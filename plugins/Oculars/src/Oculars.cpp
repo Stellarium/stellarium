@@ -337,9 +337,9 @@ void Oculars::draw(StelCore* core)
 			if (guiPanelEnabled)
 			{
 				// Reset the state to allow the panel to be painted normally
-				glDisable(GL_TEXTURE_2D);
-				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-				glEnable(GL_BLEND);
+				QOpenGLFunctions* gl = QOpenGLContext::currentContext()->functions();
+				gl->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+				gl->glEnable(GL_BLEND);
 			}
 			else
 			{
@@ -354,9 +354,9 @@ void Oculars::draw(StelCore* core)
 		if (guiPanelEnabled)
 		{
 			// Reset the state to allow the panel to be painted normally
-			glDisable(GL_TEXTURE_2D);
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			glEnable(GL_BLEND);
+			QOpenGLFunctions* gl = QOpenGLContext::currentContext()->functions();
+			gl->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			gl->glEnable(GL_BLEND);
 		}
 		else
 		{
@@ -1762,8 +1762,8 @@ void Oculars::paintOcularMask(const StelCore *core)
 		inner = oculars[selectedOcularIndex]->appearentFOV() * inner / maxEyepieceAngle;
 	}
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+	painter.glFuncs()->glEnable(GL_BLEND);
+	painter.glFuncs()->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
 	Vec2i centerScreen(prj->getViewportPosX()+prj->getViewportWidth()/2, prj->getViewportPosY()+prj->getViewportHeight()/2);
 
@@ -1863,9 +1863,8 @@ void Oculars::paintText(const StelCore* core)
 
 	// set up the color and the GL state
 	painter.setColor(0.8f, 0.48f, 0.f, 1.f);
-	glDisable(GL_TEXTURE_2D);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
+	painter.glFuncs()->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	painter.glFuncs()->glEnable(GL_BLEND);
 
 	// Get the X & Y positions, and the line height
 	painter.setFont(font);

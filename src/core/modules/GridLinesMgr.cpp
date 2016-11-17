@@ -353,9 +353,8 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 
 	d->sPainter->drawText(screenPos[0], screenPos[1], text, angleDeg, xshift, 3);
 	d->sPainter->setColor(tmpColor[0], tmpColor[1], tmpColor[2], tmpColor[3]);
-	glDisable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	d->sPainter->glFuncs()->glEnable(GL_BLEND);
+	d->sPainter->glFuncs()->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 //! Draw the sky grid in the current frame
@@ -407,12 +406,12 @@ void SkyGrid::draw(const StelCore* core) const
 
 	// Initialize a painter and set OpenGL state
 	StelPainter sPainter(prj);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+	sPainter.glFuncs()->glEnable(GL_BLEND);
+	sPainter.glFuncs()->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
 	#ifdef GL_LINE_SMOOTH
 	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-		glEnable(GL_LINE_SMOOTH);
+		sPainter.glFuncs()->glEnable(GL_LINE_SMOOTH);
 	#endif
 
 	// make text colors just a bit brighter. (But if >1, QColor::setRgb fails and makes text invisible.)
@@ -613,7 +612,7 @@ void SkyGrid::draw(const StelCore* core) const
 	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
 	#ifdef GL_LINE_SMOOTH
 	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-		glDisable(GL_LINE_SMOOTH);
+		sPainter.glFuncs()->glDisable(GL_LINE_SMOOTH);
 	#endif
 }
 
@@ -717,11 +716,11 @@ void SkyLine::draw(StelCore *core) const
 	// Initialize a painter and set openGL state
 	StelPainter sPainter(prj);
 	sPainter.setColor(color[0], color[1], color[2], fader.getInterstate());
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+	sPainter.glFuncs()->glEnable(GL_BLEND);
+	sPainter.glFuncs()->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 	#ifdef GL_LINE_SMOOTH
 	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-		glEnable(GL_LINE_SMOOTH);
+		sPainter.glFuncs()->glEnable(GL_LINE_SMOOTH);
 	#endif
 	Vec4f textColor(color[0], color[1], color[2], 0);		
 	textColor[3]=fader.getInterstate();
@@ -778,18 +777,18 @@ void SkyLine::draw(StelCore *core) const
 				sPainter.drawSmallCircleArc(pt3, pt1, rotCenter, viewportEdgeIntersectCallback, &userData);
 				#ifdef GL_LINE_SMOOTH
 				if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-					glDisable(GL_LINE_SMOOTH);
+					sPainter.glFuncs()->glDisable(GL_LINE_SMOOTH);
 				#endif
-				glDisable(GL_BLEND);
+				sPainter.glFuncs()->glDisable(GL_BLEND);
 				return;
 			}
 			else
 			{
 				#ifdef GL_LINE_SMOOTH
 				if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-					glDisable(GL_LINE_SMOOTH);
+					sPainter.glFuncs()->glDisable(GL_LINE_SMOOTH);
 				#endif
-				glDisable(GL_BLEND);
+				sPainter.glFuncs()->glDisable(GL_BLEND);
 				return;
 			}
 		}
@@ -811,10 +810,10 @@ void SkyLine::draw(StelCore *core) const
 		// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
 		#ifdef GL_LINE_SMOOTH
 		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-			glDisable(GL_LINE_SMOOTH);
+			sPainter.glFuncs()->glDisable(GL_LINE_SMOOTH);
 		#endif
 
-		glDisable(GL_BLEND);
+		sPainter.glFuncs()->glDisable(GL_BLEND);
 
 
 		return;
@@ -876,10 +875,10 @@ void SkyLine::draw(StelCore *core) const
 	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
 	#ifdef GL_LINE_SMOOTH
 	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-		glDisable(GL_LINE_SMOOTH);
+		sPainter.glFuncs()->glDisable(GL_LINE_SMOOTH);
 	#endif
 
-	glDisable(GL_BLEND);
+	sPainter.glFuncs()->glDisable(GL_BLEND);
 
 // 	// Johannes: use a big radius as a dirty workaround for the bug that the
 // 	// ecliptic line is not drawn around the observer, but around the sun:
@@ -1024,14 +1023,14 @@ void SkyPoint::draw(StelCore *core) const
 		case SUPERGALACTICPOLES:
 		{
 			// North Pole
-			glEnable(GL_BLEND);
-			glBlendFunc(GL_ONE, GL_ONE);
+			sPainter.glFuncs()->glEnable(GL_BLEND);
+			sPainter.glFuncs()->glBlendFunc(GL_ONE, GL_ONE);
 			sPainter.drawSprite2dMode(Vec3d(0,0,1), 5.f);
 			sPainter.drawText(Vec3d(0,0,1), northernLabel, 0, shift, shift, false);
 
 			// South Pole
-			glEnable(GL_BLEND);
-			glBlendFunc(GL_ONE, GL_ONE);
+			sPainter.glFuncs()->glEnable(GL_BLEND);
+			sPainter.glFuncs()->glBlendFunc(GL_ONE, GL_ONE);
 			sPainter.drawSprite2dMode(Vec3d(0,0,-1), 5.f);
 			sPainter.drawText(Vec3d(0,0,-1), southernLabel, 0, shift, shift, false);
 			break;
@@ -1040,14 +1039,14 @@ void SkyPoint::draw(StelCore *core) const
 		case EQUINOXES_OF_DATE:
 		{
 			// Vernal equinox
-			glEnable(GL_BLEND);
-			glBlendFunc(GL_ONE, GL_ONE);
+			sPainter.glFuncs()->glEnable(GL_BLEND);
+			sPainter.glFuncs()->glBlendFunc(GL_ONE, GL_ONE);
 			sPainter.drawSprite2dMode(Vec3d(1,0,0), 5.f);
 			sPainter.drawText(Vec3d(1,0,0), northernLabel, 0, shift, shift, false);
 
 			// Autumnal equinox
-			glEnable(GL_BLEND);
-			glBlendFunc(GL_ONE, GL_ONE);
+			sPainter.glFuncs()->glEnable(GL_BLEND);
+			sPainter.glFuncs()->glBlendFunc(GL_ONE, GL_ONE);
 			sPainter.drawSprite2dMode(Vec3d(-1,0,0), 5.f);
 			sPainter.drawText(Vec3d(-1,0,0), southernLabel, 0, shift, shift, false);
 			break;

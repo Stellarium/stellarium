@@ -589,10 +589,11 @@ void ConstellationMgr::draw(StelCore* core)
 // Draw constellations art textures
 void ConstellationMgr::drawArt(StelPainter& sPainter) const
 {
-	glBlendFunc(GL_ONE, GL_ONE);
+	QOpenGLFunctions* gl = sPainter.glFuncs();
+	gl->glBlendFunc(GL_ONE, GL_ONE);
 	sPainter.enableTexture2d(true);
-	glEnable(GL_BLEND);
-	glEnable(GL_CULL_FACE);
+	gl->glEnable(GL_BLEND);
+	gl->glEnable(GL_CULL_FACE);
 
 	vector < Constellation * >::const_iterator iter;
 	SphericalRegionP region = sPainter.getProjector()->getViewportConvexPolygon();
@@ -601,21 +602,22 @@ void ConstellationMgr::drawArt(StelPainter& sPainter) const
 		(*iter)->drawArtOptim(sPainter, *region);
 	}
 
-	glDisable(GL_CULL_FACE);
+	gl->glDisable(GL_CULL_FACE);
 }
 
 // Draw constellations lines
 void ConstellationMgr::drawLines(StelPainter& sPainter, const StelCore* core) const
 {
+	QOpenGLFunctions* gl = sPainter.glFuncs();
 	sPainter.enableTexture2d(false);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	gl->glEnable(GL_BLEND);
+	gl->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	if (constellationLineThickness>1.f)
-		glLineWidth(constellationLineThickness); // set line thickness
+		gl->glLineWidth(constellationLineThickness); // set line thickness
 	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH. But it looks much better.
 	#ifdef GL_LINE_SMOOTH
 	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-		glEnable(GL_LINE_SMOOTH);
+		gl->glEnable(GL_LINE_SMOOTH);
 	#endif
 
 	const SphericalCap& viewportHalfspace = sPainter.getProjector()->getBoundingCap();
@@ -625,20 +627,21 @@ void ConstellationMgr::drawLines(StelPainter& sPainter, const StelCore* core) co
 		(*iter)->drawOptim(sPainter, core, viewportHalfspace);
 	}
 	if (constellationLineThickness>1.f)
-		glLineWidth(1.f); // restore line thickness
+		gl->glLineWidth(1.f); // restore line thickness
 	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH. But it looks much better.
 	#ifdef GL_LINE_SMOOTH
 	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-		glDisable(GL_LINE_SMOOTH);
+		gl->glDisable(GL_LINE_SMOOTH);
 	#endif
 }
 
 // Draw the names of all the constellations
 void ConstellationMgr::drawNames(StelPainter& sPainter) const
 {
-	glEnable(GL_BLEND);
+	QOpenGLFunctions* gl = sPainter.glFuncs();
+	gl->glEnable(GL_BLEND);
 	sPainter.enableTexture2d(true);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	gl->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); iter++)
 	{
@@ -1323,7 +1326,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 void ConstellationMgr::drawBoundaries(StelPainter& sPainter) const
 {
 	sPainter.enableTexture2d(false);
-	glDisable(GL_BLEND);
+	sPainter.glFuncs()->glDisable(GL_BLEND);
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{

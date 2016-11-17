@@ -17,12 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef GL_POINT_SPRITE
- #define GL_POINT_SPRITE 0x8861
-#endif
-#ifndef GL_VERTEX_PROGRAM_POINT_SIZE
- #define GL_VERTEX_PROGRAM_POINT_SIZE 0x8642
-#endif
 
 #include "StelSkyDrawer.hpp"
 #include "StelProjector.hpp"
@@ -147,6 +141,8 @@ StelSkyDrawer::~StelSkyDrawer()
 // Init parameters from config file
 void StelSkyDrawer::init()
 {
+	initializeOpenGLFunctions();
+
 	// Load star texture no mipmap:
 	texHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/star16x16.png");
 	texBigHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/haloLune.png");

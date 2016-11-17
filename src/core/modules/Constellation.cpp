@@ -179,14 +179,15 @@ void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& r
 // Draw the art texture
 void Constellation::drawArt(StelPainter& sPainter) const
 {
-	glBlendFunc(GL_ONE, GL_ONE);
+	QOpenGLFunctions* gl = sPainter.glFuncs();
+	gl->glBlendFunc(GL_ONE, GL_ONE);
 	sPainter.enableTexture2d(true);
-	glEnable(GL_BLEND);
-	glEnable(GL_CULL_FACE);
+	gl->glEnable(GL_BLEND);
+	gl->glEnable(GL_CULL_FACE);
 	SphericalRegionP region = sPainter.getProjector()->getViewportConvexPolygon();
 	drawArtOptim(sPainter, *region);
 
-	glDisable(GL_CULL_FACE);
+	gl->glDisable(GL_CULL_FACE);
 }
 
 const Constellation* Constellation::isStarIn(const StelObject* s) const
@@ -218,8 +219,8 @@ void Constellation::drawBoundaryOptim(StelPainter& sPainter) const
 		return;
 
 	sPainter.enableTexture2d(false);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+	sPainter.glFuncs()->glEnable(GL_BLEND);
+	sPainter.glFuncs()->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
 	sPainter.setColor(boundaryColor[0], boundaryColor[1], boundaryColor[2], boundaryFader.getInterstate());
 

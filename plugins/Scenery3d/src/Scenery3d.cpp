@@ -44,7 +44,7 @@
 #include <cmath>
 #include <QOpenGLShaderProgram>
 
-#define GET_GLERROR() checkGLErrors(__FILE__,__LINE__);
+#define GET_GLERROR() StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 
 //macro for easier uniform setting
 #define SET_UNIFORM(shd,uni,val) shd->setUniformValue(shaderManager.uniformLocation(shd,uni),val)
@@ -2039,6 +2039,7 @@ void Scenery3d::determineFeatureSupport()
 
 void Scenery3d::init()
 {
+	initializeOpenGLFunctions();
 	OBJ::setupGL();
 
 	QOpenGLContext* ctx = QOpenGLContext::currentContext();

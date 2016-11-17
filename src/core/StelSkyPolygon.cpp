@@ -62,7 +62,7 @@ void StelSkyPolygon::draw(StelCore* core, StelPainter& sPainter, float)
 
 	// Draw in the good order
 	sPainter.enableTexture2d(false);
-	glBlendFunc(GL_ONE, GL_ONE);
+	QOpenGLContext::currentContext()->functions()->glBlendFunc(GL_ONE, GL_ONE);
 	QMap<double, StelSkyPolygon*>::Iterator i = result.end();
 	while (i!=result.begin())
 	{

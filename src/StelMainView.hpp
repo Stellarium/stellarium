@@ -50,6 +50,15 @@ class StelMainView : public QGraphicsView
 	Q_PROPERTY(bool fullScreen READ isFullScreen WRITE setFullScreen NOTIFY fullScreenChanged)
 
 public:
+	//! Contains some basic info about the OpenGL context used
+	struct GLInfo
+	{
+		QString vendor;
+		QString renderer;
+		QOpenGLContext* mainContext;
+		QOpenGLFunctions* functions;
+	};
+
 	StelMainView(QSettings* settings);
 	virtual ~StelMainView();
 
@@ -84,6 +93,9 @@ public:
 	void glContextMakeCurrent();
 	//! Releases the main GL context
 	void glContextDoneCurrent();
+
+	//! Returns the information about the GL context, this does not require the context to be active.
+	GLInfo getGLInformation() const { return glInfo; }
 public slots:
 
 	//! Set whether fullscreen is activated or not
@@ -185,6 +197,8 @@ private:
 
 	//! The StelMainView singleton
 	static StelMainView* singleton;
+
+	GLInfo glInfo;
 
 	QSettings* configuration;
 
