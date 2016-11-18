@@ -480,7 +480,7 @@ bool Exoplanets::backupJsonFile(bool deleteOriginal)
 */
 void Exoplanets::readJsonFile(void)
 {
-	setEPMap(loadEPMap());	
+	setEPMap(loadEPMap());
 }
 
 void Exoplanets::reloadCatalog(void)

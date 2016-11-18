@@ -245,7 +245,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	
 	if (flags & Name)
 	{
-		oss << "<h2>" << name << "</h2>";
+		oss << "<h2>" << getNameI18n() << "</h2>";
 		if (!description.isEmpty())
 		{
 			// Let's convert possibile \n chars into <br/> in description of satellite

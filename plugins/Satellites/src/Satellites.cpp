@@ -294,7 +294,7 @@ StelObjectP Satellites::searchByNameI18n(const QString& nameI18n) const
 	{
 		if (sat->initialized && sat->displayed)
 		{
-			if (sat->getNameI18n().toUpper() == nameI18n)
+			if (sat->getNameI18n().toUpper() == objw)
 				return qSharedPointerCast<StelObject>(sat);
 		}
 	}
@@ -317,7 +317,7 @@ StelObjectP Satellites::searchByName(const QString& englishName) const
 	{
 		if (sat->initialized && sat->displayed)
 		{
-			if (sat->getEnglishName().toUpper() == englishName)
+			if (sat->getEnglishName().toUpper() == objw)
 				return qSharedPointerCast<StelObject>(sat);
 		}
 	}
