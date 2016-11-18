@@ -82,20 +82,17 @@ bool writeStelIniFile(QIODevice &device, const QSettings::SettingsMap &map)
 	QRegExp reKeyXt("^([^/]+)/(.+)$");  // for extracting keys/values
 
 	// first go over map and find longest key length
-	for(int i=0; i<map.keys().size(); i++)
+	foreach(QString key, map.keys())
 	{
-		QString k = map.keys().at(i);
-		QString key = k;
-		if (reKeyXt.exactMatch(k))
+		if (reKeyXt.exactMatch(key))
 			key = reKeyXt.cap(2);
 		if (key.size() > maxKeyWidth) maxKeyWidth = key.size();
 	}
 
 	// OK, this time actually write to the file - first non-section values
 	QString outputLine;
-	for(int i=0; i<map.keys().size(); i++)
+	foreach(QString k, map.keys())
 	{
-		QString k = map.keys().at(i);
 		if (!reKeyXt.exactMatch(k))
 		{
 			// this is for those keys without a section
@@ -106,9 +103,8 @@ bool writeStelIniFile(QIODevice &device, const QSettings::SettingsMap &map)
 
 	// Now those values with sections.
 	QString currentSection("");
-	for(int i=0; i<map.keys().size(); i++)
+	foreach(QString k, map.keys())
 	{
-		QString k = map.keys().at(i);
 		if (reKeyXt.exactMatch(k))
 		{
 			QString sec = reKeyXt.cap(1); QString key = reKeyXt.cap(2);
