@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-11-16 09:51+0700\n"
-"PO-Revision-Date: 2016-11-15 21:29+0000\n"
+"PO-Revision-Date: 2016-11-16 21:40+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-16 05:51+0000\n"
+"X-Launchpad-Export-Date: 2016-11-18 05:48+0000\n"
 "X-Generator: Launchpad (build 18269)\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
@@ -74,7 +74,7 @@ msgstr "Error (%1)"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:53
 msgid "Error performing Simbad lookup"
-msgstr ""
+msgstr "Error al realitzar operacions de recerca Simbad"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:71 index.html:146
 #: tablet7in.html:230
@@ -341,206 +341,210 @@ msgstr "Etiquetes i marcadors"
 
 #: index.html:375 tablet7in.html:547
 msgid "Show illumination"
-msgstr ""
+msgstr "Mostrar il·luminació"
 
 #: index.html:380 tablet7in.html:553
 msgid "Current landscape"
-msgstr ""
+msgstr "Paisatge actual"
 
 #: index.html:407 tablet7in.html:581
 msgid "Current sky culture"
-msgstr ""
+msgstr "Cultura del cel actual"
 
 #: index.html:420 tablet7in.html:606
 msgid "Active script:"
-msgstr ""
+msgstr "Script actiu:"
 
 #: index.html:421 tablet7in.html:607
 msgid "Run selected script"
-msgstr ""
+msgstr "Executar script seleccionat"
 
 #: index.html:421 tablet7in.html:607
 msgid "Stop current script"
-msgstr ""
+msgstr "Aturar script actual"
 
 #: index.html:426 tablet7in.html:41 tablet7in.html:591
 msgid "Actions"
-msgstr ""
+msgstr "Accions"
 
 #: index.html:430 tablet7in.html:595
 msgid "Run/toggle action"
-msgstr ""
+msgstr "Executar/commutar acció"
 
 #: index.html:441 tablet7in.html:630
 msgid "Planet map"
-msgstr ""
+msgstr "Mapa de planeta"
 
 #: index.html:442 tablet7in.html:631
 msgid "Planet map pointer"
-msgstr ""
+msgstr "Punter del mapa del planeta"
 
 #: index.html:446 tablet7in.html:635
 msgid "Type to search location"
-msgstr ""
+msgstr "Escrigui per cercar ubicació"
 
 #: index.html:491 tablet7in.html:681
 msgid "No response from server"
-msgstr ""
+msgstr "Ńo hi ha resposta del sevidor"
 
 #: index.html:492
 msgid ""
 "No response from server since %1 seconds. Is Stellarium still running?"
 msgstr ""
+"No hi ha resposta del servidor des de fa %1 segons. Està Stellarium "
+"executant-se?"
 
 #: tablet7in.html:32
 msgid "Time Jump"
-msgstr ""
+msgstr "Salt temporal"
 
 #: tablet7in.html:37
 msgid "Grids"
-msgstr ""
+msgstr "Graelles"
 
 #: tablet7in.html:96
 msgid "View towards horizon at Azimuth"
-msgstr ""
+msgstr "Vista cap a l'horitzó en l'Azimut"
 
 #: tablet7in.html:128
 msgid "Reset"
-msgstr ""
+msgstr "Reinicia"
 
 #: tablet7in.html:260
 msgid "Sirius"
-msgstr ""
+msgstr "Sirius"
 
 #: tablet7in.html:261
 msgid "Arcturus"
-msgstr ""
+msgstr "Arcturus"
 
 #: tablet7in.html:262
 msgid "Capella"
-msgstr ""
+msgstr "Capella"
 
 #: tablet7in.html:263
 msgid "Vega"
-msgstr ""
+msgstr "Vega"
 
 #: tablet7in.html:264
 msgid "Deneb"
-msgstr ""
+msgstr "Deneb"
 
 #: tablet7in.html:265
 msgid "Altair"
-msgstr ""
+msgstr "Altair"
 
 #: tablet7in.html:266
 msgid "Andromeda Galaxy"
-msgstr ""
+msgstr "Galàxia d'Andròmeda"
 
 #: tablet7in.html:267
 msgid "Hercules Cluster"
-msgstr ""
+msgstr "Clúster d'Hércules"
 
 #: tablet7in.html:268
 msgid "Orion Nebula"
-msgstr ""
+msgstr "Nebulosa d'Orió"
 
 #: tablet7in.html:269
 msgid "Eta Carinae Nebula"
-msgstr ""
+msgstr "Nebulosa Eta Carinae"
 
 #: tablet7in.html:270
 msgid "47 Tucanae Cluster"
-msgstr ""
+msgstr "Clúster 47 Tucanae"
 
 #: tablet7in.html:271
 msgid "Aries"
-msgstr ""
+msgstr "Àries"
 
 #: tablet7in.html:272
 msgid "Taurus"
-msgstr ""
+msgstr "Taure"
 
 #: tablet7in.html:273
 msgid "Gemini"
-msgstr ""
+msgstr "Bessons"
 
 #: tablet7in.html:274
 msgid "Cancer"
-msgstr ""
+msgstr "Cranc"
 
 #: tablet7in.html:275
 msgid "Leo"
-msgstr ""
+msgstr "Lleó"
 
 #: tablet7in.html:276
 msgid "Virgo"
-msgstr ""
+msgstr "Verge"
 
 #: tablet7in.html:277
 msgid "Libra"
-msgstr ""
+msgstr "Balança"
 
 #: tablet7in.html:278
 msgid "Scorpius"
-msgstr ""
+msgstr "Escorpí"
 
 #: tablet7in.html:279
 msgid "Sagittarius"
-msgstr ""
+msgstr "Sagitari"
 
 #: tablet7in.html:280
 msgid "Capricornus"
-msgstr ""
+msgstr "Capricorni"
 
 #: tablet7in.html:281
 msgid "Aquarius"
-msgstr ""
+msgstr "Aquari"
 
 #: tablet7in.html:282
 msgid "Pisces"
-msgstr ""
+msgstr "Peixos"
 
 #: tablet7in.html:386
 msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
 msgstr ""
+"Cercles instantanis del eix de la Terra en el seu moviment al voltant dels "
+"pols de l'eclíptica. Es mostra només en la Terra."
 
 #: tablet7in.html:406
 msgid "Solstices"
-msgstr ""
+msgstr "Solsticis"
 
 #: tablet7in.html:407
 msgid "Crossquarters"
-msgstr ""
+msgstr "Punt intermedi entre Solstici i Equinocci"
 
 #: tablet7in.html:408
 msgid "Major Standstill"
-msgstr ""
+msgstr "Lunistici Major"
 
 #: tablet7in.html:409
 msgid "Minor Standstill"
-msgstr ""
+msgstr "Lunistici Menor"
 
 #: tablet7in.html:420
 msgid "Current Planet:"
-msgstr ""
+msgstr "Planeta Actual:"
 
 #: tablet7in.html:577
 msgid "Constellation selection isolated"
-msgstr ""
+msgstr "Selecció de constel·lació aïllada"
 
 #: tablet7in.html:615
 msgid "Favorites"
-msgstr ""
+msgstr "Favorits"
 
 #: tablet7in.html:617
 msgid "Show 1"
-msgstr ""
+msgstr "Mostrar 1"
 
 #: tablet7in.html:618
 msgid "Remove Labels and Images"
-msgstr ""
+msgstr "Eliminar Etiquetes i Imatges"
 
 #: tablet7in.html:618
 msgid "Cleanup Screen"
@@ -549,3 +553,5 @@ msgstr "Neteja Pantalla"
 #: tablet7in.html:682
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
+"No hi ha resposta del servidor des de fa %1 segons. Està Stellarium encara "
+"en marxa?"
