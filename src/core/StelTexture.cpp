@@ -57,10 +57,12 @@ StelTexture::~StelTexture()
 		}
 		id = 0;
 	}
-	if (networkReply != NULL)
+	if (networkReply)
 	{
 		networkReply->abort();
-		networkReply->deleteLater();
+		//networkReply->deleteLater();
+		delete networkReply;
+		networkReply = NULL;
 	}
 	if (loader != NULL) {
 		delete loader;
@@ -124,9 +126,9 @@ bool StelTexture::bind(int slot)
 		QNetworkRequest req = QNetworkRequest(QUrl(fullPath));
 		// Define that preference should be given to cached files (no etag checks)
 		req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
-		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
+		req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
 		networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-		connect(networkReply, SIGNAL(finished()), this, SLOT(onNetworkReply()));
+		connect(networkReply, SIGNAL(finished()), this, SLOT(onNetworkReply()));		
 		return false;
 	}
 	// The network connection is still running.

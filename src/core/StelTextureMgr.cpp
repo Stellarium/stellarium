@@ -67,7 +67,7 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 
 	StelTextureSP tex = StelTextureSP(new StelTexture());
 	tex->loadParams = params;
-	tex->fullPath = url;
+	tex->fullPath = url;	
 	if (!lazyLoading)
 	{
 		tex->bind();

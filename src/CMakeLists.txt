@@ -153,6 +153,10 @@ SET(stellarium_lib_SRCS
      core/TrailGroup.cpp
      core/RefractionExtinction.hpp
      core/RefractionExtinction.cpp
+     core/StelToast.hpp
+     core/StelToast.cpp
+     core/StelToastGrid.hpp
+     core/StelToastGrid.cpp
      core/StelActionMgr.hpp
      core/StelActionMgr.cpp
      core/StelProgressController.hpp
@@ -249,6 +253,8 @@ SET(stellarium_lib_SRCS
      core/modules/StarMgr.hpp
      core/modules/StarWrapper.cpp
      core/modules/StarWrapper.hpp
+     core/modules/ToastMgr.hpp
+     core/modules/ToastMgr.cpp
      core/modules/ZoneArray.cpp
      core/modules/ZodiacalLight.hpp
      core/modules/ZodiacalLight.cpp
@@ -313,7 +319,6 @@ SET(stellarium_exe_SRCS main.cpp)
 ################# compiles resources files ############
 SET(stellarium_RES ${CMAKE_SOURCE_DIR}/data/mainRes.qrc)
 QT5_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
-
 
 #############################################################################################
 ############################# Standard GUI plugin compilation ###############################

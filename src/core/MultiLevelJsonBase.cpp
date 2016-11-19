@@ -169,7 +169,7 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 		}
 		Q_ASSERT(httpReply==NULL);
 		QNetworkRequest req(qurl);
-		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
+		req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
 		httpReply = getNetworkAccessManager().get(req);
 		//qDebug() << "Started downloading " << httpReply->request().url().path();
 		Q_ASSERT(httpReply->error()==QNetworkReply::NoError);
