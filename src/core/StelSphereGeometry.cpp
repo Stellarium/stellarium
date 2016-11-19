@@ -1314,6 +1314,11 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantList& l)
 	{
 		return SphericalRegionP(new SphericalPolygon(pathFromQVariantList(l)));
 	}
+	else if (code=="CONVEX_POLYGON")
+	{
+		return SphericalRegionP(new SphericalConvexPolygon(singleContourFromQVariantList(l.at(1).toList())));
+	}
+
 	Q_ASSERT(0);
 	return EmptySphericalRegion::staticInstance;
 }

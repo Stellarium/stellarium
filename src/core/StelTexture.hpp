@@ -147,7 +147,7 @@ private:
 
 
 	//! The URL where to download the file
-	QString fullPath;
+	QString fullPath;	
 
 	//! True when something when wrong in the loading process
 	bool errorOccured;
