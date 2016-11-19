@@ -54,6 +54,7 @@
 #include "StelJsonParser.hpp"
 #include "StelTranslator.hpp"
 #include "EphemWrapper.hpp"
+#include "ToastMgr.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -77,15 +78,7 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
 	customDeltaTEquationDialog = NULL;
 	hasDownloadedStarCatalog = false;
 	isDownloadingStarCatalog = false;
-	savedProjectionType = StelApp::getInstance().getCore()->getCurrentProjectionType();
-	// Get info about operating system
-	QString platform = StelUtils::getOperatingSystemInfo();
-	if (platform.contains("Linux"))
-		platform = "Linux";
-	if (platform.contains("FreeBSD"))
-		platform = "FreeBSD";
-	// Set user agent as "Stellarium/$version$ ($platform$)"
-	userAgent = QString("Stellarium/%1 (%2)").arg(StelUtils::getApplicationVersion()).arg(platform);
+	savedProjectionType = StelApp::getInstance().getCore()->getCurrentProjectionType();	
 }
 
 ConfigurationDialog::~ConfigurationDialog()
@@ -297,6 +290,9 @@ void ConfigurationDialog::createDialogContent()
 
 	ui->showNebulaBgButtonCheckbox->setChecked(gui->getFlagShowNebulaBackgroundButton());
 	connect(ui->showNebulaBgButtonCheckbox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowNebulaBackgroundButton(bool)));
+
+	ui->showToastSurveyButtonCheckbox->setChecked(gui->getFlagShowToastSurveyButton());
+	connect(ui->showToastSurveyButtonCheckbox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowToastSurveyButton(bool)));
 
 	ui->showBookmarksButtonCheckBox->setChecked(gui->getFlagShowBookmarksButton());
 	connect(ui->showBookmarksButtonCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowBookmarksButton(bool)));
@@ -789,6 +785,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("gui/auto_hide_horizontal_toolbar", gui->getAutoHideHorizontalButtonBar());
 	conf->setValue("gui/auto_hide_vertical_toolbar", gui->getAutoHideVerticalButtonBar());
 	conf->setValue("gui/flag_show_nebulae_background_button", gui->getFlagShowNebulaBackgroundButton());
+	conf->setValue("gui/flag_show_toast_survey_button", gui->getFlagShowToastSurveyButton());
 	conf->setValue("gui/flag_show_decimal_degrees", StelApp::getInstance().getFlagShowDecimalDegrees());
 	conf->setValue("gui/flag_use_azimuth_from_south", StelApp::getInstance().getFlagSouthAzimuthUsage());
 	conf->setValue("gui/flag_time_jd", gui->getButtonBar()->getFlagTimeJd());
@@ -1176,7 +1173,7 @@ void ConfigurationDialog::downloadStars()
 	QNetworkRequest req(nextStarCatalogToDownload.value("url").toString());
 	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
 	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
-	req.setRawHeader("User-Agent", userAgent.toLatin1());
+	req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
 	starCatalogDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 	starCatalogDownloadReply->setReadBufferSize(1024*1024*2);	
 	connect(starCatalogDownloadReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
@@ -1230,7 +1227,7 @@ void ConfigurationDialog::downloadFinished()
 		QNetworkRequest req(redirect.toUrl());
 		req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
 		req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
-		req.setRawHeader("User-Agent", userAgent.toLatin1());
+		req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
 		starCatalogDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 		starCatalogDownloadReply->setReadBufferSize(1024*1024*2);
 		connect(starCatalogDownloadReply, SIGNAL(readyRead()), this, SLOT(newStarCatalogData()));
