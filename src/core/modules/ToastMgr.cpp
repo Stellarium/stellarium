@@ -81,6 +81,16 @@ void ToastMgr::update(double deltaTime)
 	fader->update((int)(deltaTime*1000));
 }
 
+/*************************************************************************
+ Reimplementation of the getCallOrder method
+*************************************************************************/
+double ToastMgr::getCallOrder(StelModuleActionName actionName) const
+{
+	if (actionName==StelModule::ActionDraw)
+		return 7;
+	return 0;
+}
+
 void ToastMgr::setFlagSurveyShow(const bool displayed)
 {
 	if (*fader != displayed)

@@ -35,8 +35,8 @@ public:
 	virtual void init();
 	virtual void update(double deltaTime);
 	virtual void draw(StelCore* core);
-	//! Used to determine the order in which the various modules are drawn. MilkyWay=1, we use 7.
-	virtual double getCallOrder(StelModuleActionName actionName) const {Q_UNUSED(actionName); return 7.;}
+	//! Used to determine the order in which the various modules are drawn. MilkyWay=1, we use 7 for actionDraw, else 0.
+	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 public slots:
 	void setFlagSurveyShow(bool displayed);

@@ -77,8 +77,9 @@ public:
 	//! Zodiacal Light rendering is being changed from on to off or off to on.
 	virtual void update(double deltaTime);
 	
-	//! Used to determine the order in which the various modules are drawn. MilkyWay=1, we use 6.
-	virtual double getCallOrder(StelModuleActionName actionName) const {Q_UNUSED(actionName); return 6.;}
+	//! Used to determine the order in which the various modules are drawn. MilkyWay=1, TOAST=7, we use 8.
+	//! Other actions return 0 for "nothing special".
+	virtual double getCallOrder(StelModuleActionName actionName) const;
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Setter and getters

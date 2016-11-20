@@ -27,40 +27,40 @@
 inline int pow2(int x) {return 1 << x;}
 
 //! @class ToastGrid
-//! Convenience class that can be used to compute the toast grid points.
-//! The ToastGrid class allow to compute the vertex arrays associated
-//! with Toast tiles. Each method refers to a tile by its level and x
+//! Convenience class that can be used to compute the TOAST grid points.
+//! The ToastGrid class allows to compute the vertex arrays associated
+//! with TOAST tiles. Each method refers to a tile by its level and x
 //! and y coordinates.
 class ToastGrid
 {
 public:
 	ToastGrid(int maxLevel);
-	//! Get the vertice array for a given tile.
+	//! Get the vertex array for a given tile.
 	//! The position are stored in a grid.
-	//! @param level the level of the tile.
+	//! @param level the TOAST level of the tile.
 	//! @param x the x coordinate of the tile.
 	//! @param y the y coordinate of the tile.
-	//! @param resolution the resolution of the returned array.
+	//! @param resolution the resolution of the returned array. TODO: UNITS?
 	QVector<Vec3d> getVertexArray(int level, int x, int y, int resolution) const;
 	//! Get the texture array for a given tile.
 	//! The position are stored in a grid
-	//! @param level the level of the tile.
+	//! @param level the TOAST level of the tile.
 	//! @param x the x coordinate of the tile.
 	//! @param y the y coordinate of the tile.
-	//! @param resolution the resolution of the returned array.
+	//! @param resolution the resolution of the returned array. TODO: UNITS?
 	QVector<Vec2f> getTextureArray(int level, int x, int y, int resolution) const;
 	//! Get the index of the vertex from getVertexArray sorted as a list of triangles.
-	//! @param level the level of the tile.
+	//! @param level the TOAST level of the tile.
 	//! @param x the x coordinate of the tile.
 	//! @param y the y coordinate of the tile.
-	//! @param resolution the resolution of the returned array.
+	//! @param resolution the resolution of the returned array.  TODO: UNITS?
 	QVector<unsigned short> getTrianglesIndex(int level, int x, int y, int resolution) const;
 	//! Returns the polygon contouring a given tile.
-	//! @param level the level of the tile.
+	//! @param level the TOAST level of the tile.
 	//! @param x the x coordinate of the tile.
 	//! @param y the y coordinate of the tile.
 	QVector<Vec3d> getPolygon(int level, int x, int y) const;
-	//! Return the max level of this grid.
+	//! Return the max TOAST level of this grid.
 	int getMaxLevel() const {return maxLevel;}
 
 private:

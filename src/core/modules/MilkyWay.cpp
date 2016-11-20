@@ -81,6 +81,16 @@ void MilkyWay::update(double deltaTime)
 	fader->update((int)(deltaTime*1000));
 }
 
+/*************************************************************************
+ Reimplementation of the getCallOrder method
+*************************************************************************/
+double MilkyWay::getCallOrder(StelModuleActionName actionName) const
+{
+	if (actionName==StelModule::ActionDraw)
+		return 1;
+	return 0;
+}
+
 void MilkyWay::setFlagShow(bool b){*fader = b; emit milkyWayDisplayedChanged(b);}
 bool MilkyWay::getFlagShow() const {return *fader;}
 

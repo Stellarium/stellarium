@@ -141,7 +141,7 @@ QVector<unsigned short> ToastGrid::getTrianglesIndex(int level, int x, int y, in
 	Q_ASSERT(resolution <= maxLevel);
 	int size = pow2(resolution - level) + 1;
 	int nbTiles = (size - 1) * (size - 1);
-	// If we are in the top right or the bottom left quadran we invert the diagonal of the triangles.
+	// If we are in the top right or the bottom left quadrant we invert the diagonal of the triangles.
 	int middleIndex = pow2(level) / 2;
 	bool invert = (x >= middleIndex) == (y >= middleIndex);
 	QVector<unsigned short> ret;
