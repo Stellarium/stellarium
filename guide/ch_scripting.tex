@@ -112,7 +112,10 @@ planet Mars (Fig.~\ref{fig:Mars2005}).
 Any ``complex'' script should contain a few lines in the first part 
 of the file, which contains important data for humans --- the 
 name of the script and its description --- and some rules for 
-Stellarium.
+Stellarium. You can even assign default shortcuts in the script header, 
+but make sure you assign a key not used elsewhere! The description 
+may cover several lines (until the end of the commented header) 
+and should therefore be the last entry of the header.
 
 \begin{script}
 //
@@ -120,6 +123,7 @@ Stellarium.
 // Author: John Doe
 // License: Public Domain
 // Version: 1.0
+// Shortcut: Ctrl+M
 // Description: A demo of retrograde motion of Mars.
 //
 \end{script}
