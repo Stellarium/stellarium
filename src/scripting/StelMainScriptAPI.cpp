@@ -812,7 +812,7 @@ void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
 	QEventLoop loop;
 	QTimer timer;
 	int interval=1000*deltaJD*86400/timeSpeed;
-	qDebug() << "timeSpeed is" << timeSpeed << " interval:" << interval;
+	//qDebug() << "timeSpeed is" << timeSpeed << " interval:" << interval;
 	timer.setInterval(interval);
 	connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
 	timer.start();
