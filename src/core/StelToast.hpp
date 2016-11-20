@@ -34,7 +34,7 @@ class StelPainter;
 class ToastSurvey;
 
 //! @class ToastTile
-//! Represents a tile in a Toast image.
+//! Represents a tile in a TOAST image.
 //! The tiles are stored in a tree structure, using the QObject
 //! children/parent relationships.
 class ToastTile : public QObject
@@ -60,15 +60,15 @@ protected:
 	void prepareDraw();
 
 private:
-	//! The level of the tile
+	//! The TOAST level of the tile
 	int level;
-	// x coordinate of the tile
+	//! x coordinate of the tile
 	int x;
-	// y coordinate of the tile
+	//! y coordinate of the tile
 	int y;
 	//! Path to the tile image
 	QString imagePath;
-	// Set to true if the tile has no texture
+	//! Set to true if the tile has no texture
 	bool empty;
 	//! Set to true if the tile is ready to draw
 	bool ready;
@@ -80,7 +80,7 @@ private:
 	QList<ToastTile*> subTiles;
 
 	// QList<SphericalRegionP> skyConvexPolygons;
-	//! OpenGl arrays
+	//! OpenGL arrays
 	QVector<Vec3d> vertexArray;
 	QVector<Vec2f> textureArray;
 	QVector<unsigned short> indexArray;

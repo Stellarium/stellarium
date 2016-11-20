@@ -634,8 +634,8 @@ void StelMainView::init(QSettings* conf)
 	minfps = conf->value("video/minimum_fps",10000.f).toFloat();
 	flagMaxFpsUpdatePending = false;
 
-	// XXX: This should be done in StelApp::init(), unfortunately for the moment we need init the gui before the
-	// plugins, because the gui create the QActions needed by some plugins.
+	// XXX: This should be done in StelApp::init(), unfortunately for the moment we need to init the gui before the
+	// plugins, because the gui creates the QActions needed by some plugins.
 	StelApp::getInstance().initPlugIns();
 
 	// activate DE430/431 
@@ -651,6 +651,17 @@ void StelMainView::init(QSettings* conf)
 	connect(&StelApp::getInstance(), SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty()));
 
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
+#ifndef NDEBUG
+	// Get an overview of module callOrders
+	if (qApp->property("verbose")==true)
+	{
+		StelApp::getInstance().dumpModuleActionPriorities(StelModule::ActionDraw);
+		StelApp::getInstance().dumpModuleActionPriorities(StelModule::ActionUpdate);
+		StelApp::getInstance().dumpModuleActionPriorities(StelModule::ActionHandleMouseClicks);
+		StelApp::getInstance().dumpModuleActionPriorities(StelModule::ActionHandleMouseMoves);
+		StelApp::getInstance().dumpModuleActionPriorities(StelModule::ActionHandleKeys);
+	}
+#endif
 	startMainLoop();
 }
 

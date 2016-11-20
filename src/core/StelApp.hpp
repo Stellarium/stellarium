@@ -22,6 +22,7 @@
 
 #include <QString>
 #include <QObject>
+#include "StelModule.hpp"
 
 // Predeclaration of some classes
 class StelCore;
@@ -200,6 +201,9 @@ public:
 	void setViewportEffect(const QString& effectName);
 	//! Get the type of viewport effect currently used
 	QString getViewportEffect() const;
+
+	//! Dump diagnostics about action call priorities
+	void dumpModuleActionPriorities(StelModule::StelModuleActionName actionName);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
