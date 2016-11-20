@@ -110,6 +110,16 @@ void ZodiacalLight::update(double deltaTime)
 	}
 }
 
+/*************************************************************************
+ Reimplementation of the getCallOrder method
+*************************************************************************/
+double ZodiacalLight::getCallOrder(StelModuleActionName actionName) const
+{
+	if (actionName==StelModule::ActionDraw)
+		return 8;
+	return 0;
+}
+
 void ZodiacalLight::setFlagShow(bool b)
 {
 	*fader = b;

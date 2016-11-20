@@ -880,3 +880,17 @@ QString StelApp::getViewportEffect() const
 		return viewportEffect->getName();
 	return "none";
 }
+
+// Diagnostics
+void StelApp::dumpModuleActionPriorities(StelModule::StelModuleActionName actionName)
+{
+	const QList<StelModule*> modules = moduleMgr->getCallOrders(actionName);
+	QMetaEnum me = QMetaEnum::fromType<StelModule::StelModuleActionName>();
+	qDebug() << "Module Priorities for action named" << me.valueToKey(actionName);
+
+	foreach(StelModule* module, modules)
+	{
+		module->draw(core);
+		qDebug() << " -- " << module->getCallOrder(actionName) << "Module: " << module->objectName();
+	}
+}
