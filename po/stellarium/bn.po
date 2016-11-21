@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-19 16:37+0700\n"
-"PO-Revision-Date: 2016-11-14 15:45+0000\n"
+"PO-Revision-Date: 2016-11-20 07:09+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-20 05:23+0000\n"
+"X-Launchpad-Export-Date: 2016-11-21 05:23+0000\n"
 "X-Generator: Launchpad (build 18269)\n"
 "Language: bn\n"
 
@@ -895,7 +895,7 @@ msgstr "অাপাত ব্যাস : %1, বলয় সহ : %2"
 #: src/core/modules/Planet.cpp:312 src/core/modules/Planet.cpp:316
 #, qt-format
 msgid "Apparent diameter: %1, scaled up to: %2"
-msgstr ""
+msgstr "আপাত ব্যাস : %1, বর্ধিত : %2"
 
 #: src/core/modules/Planet.cpp:323 src/core/modules/Planet.cpp:325
 #: src/core/modules/MinorPlanet.cpp:286 src/core/modules/MinorPlanet.cpp:288
@@ -1151,7 +1151,7 @@ msgstr "সৌর আভা"
 
 #: src/core/modules/ToastMgr.cpp:67
 msgid "Digitized Sky Survey (experimental)"
-msgstr ""
+msgstr "ডিজিটাল মহাকাশ নিরীক্ষা (পরীক্ষামূলক)"
 
 #: src/core/StelApp.cpp:523
 msgid "Night mode"
@@ -6754,11 +6754,11 @@ msgstr "দক্ষিন দিক থেকে দিগংশ পরিম�
 
 #: src/ui_configurationDialog.h:1388
 msgid "Toggle display the button of Digitized Sky Survey."
-msgstr ""
+msgstr "ডিজিটাল মহাকাশ নিরীক্ষায় প্রাপ্ত ছবি দেখা যাবে ।"
 
 #: src/ui_configurationDialog.h:1390
 msgid "Show DSS button"
-msgstr ""
+msgstr "ডিজিটাল মহাকাশ নিরীক্ষা প্রাপ্ত ছবি"
 
 #: src/ui_configurationDialog.h:1392
 msgid "Automatic change of landscape when planet is changed"
