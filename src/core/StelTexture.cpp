@@ -37,7 +37,7 @@
 
 #include <cstdlib>
 
-StelTexture::StelTexture() : networkReply(NULL), loader(NULL), errorOccured(false), alphaChannel(false), id(0), avgLuminance(-1.f)
+StelTexture::StelTexture(StelTextureMgr *mgr) : textureMgr(mgr), networkReply(NULL), loader(NULL), errorOccured(false), alphaChannel(false), id(0), avgLuminance(-1.f), glSize(0)
 {
 	width = -1;
 	height = -1;
@@ -54,8 +54,15 @@ StelTexture::~StelTexture()
 		else
 		{
 			glDeleteTextures(1, &id);
+			textureMgr->glMemoryUsage -= glSize;
+			glSize = 0;
 		}
+		qDebug()<<"Deleted StelTexture"<<id<<", total memory usage "<<textureMgr->glMemoryUsage / (1024.0 * 1024.0)<<"MB";
 		id = 0;
+	}
+	else if (id)
+	{
+		qWarning()<<"Cannot delete texture"<<id<<", no GL context";
 	}
 	if (networkReply)
 	{
@@ -160,7 +167,10 @@ void StelTexture::onNetworkReply()
 	else
 	{
 		QByteArray data = networkReply->readAll();
-		loader = new QFuture<GLData>(QtConcurrent::run(loadFromData, data));
+		if(data.isEmpty()) //prevent starting the loader when there is nothing to load
+			reportError(QString("Empty result received for URL: %1").arg(networkReply->url().toString()));
+		else
+			loader = new QFuture<GLData>(QtConcurrent::run(loadFromData, data));
 	}
 	networkReply->deleteLater();
 	networkReply = NULL;
@@ -223,6 +233,7 @@ QByteArray StelTexture::convertToGLFormat(const QImage& image, GLint *format, GL
 	}
 
 	// convert data
+	// we always use a tightly packed format, with 1-4 bpp
 	for (int i = 0; i < height; ++i)
 	{
 		uint *p = (uint *) tmp.scanLine(i);
@@ -308,6 +319,12 @@ bool StelTexture::glLoad(const GLData& data)
 	//do pixel transfer
 	glTexImage2D(GL_TEXTURE_2D, 0, data.format, width, height, 0, data.format,
 				 data.type, data.data.constData());
+
+	//for now, assume full sized 8 bit GL formats used internally
+	glSize = data.data.size();
+	textureMgr->glMemoryUsage += glSize;
+
+	qDebug()<<"StelTexture"<<id<<"uploaded, total memory usage "<<textureMgr->glMemoryUsage / (1024.0 * 1024.0)<<"MB";
 
 	//restore old value
 	glPixelStorei(GL_UNPACK_ALIGNMENT, oldalignment);

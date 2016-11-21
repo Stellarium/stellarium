@@ -403,6 +403,9 @@ void StelApp::init(QSettings* conf)
 	networkAccessManager = new QNetworkAccessManager(this);
 	// Activate http cache if Qt version >= 4.5
 	QNetworkDiskCache* cache = new QNetworkDiskCache(networkAccessManager);
+	//make maximum cache size configurable (in MB)
+	//the default Qt value (50 MB) is quite low, especially for DSS
+	cache->setMaximumCacheSize(confSettings->value("main/network_cache_size",300).toInt() * 1024 * 1024);
 	QString cachePath = StelFileMgr::getCacheDir();
 
 	qDebug() << "Cache directory is: " << QDir::toNativeSeparators(cachePath);
