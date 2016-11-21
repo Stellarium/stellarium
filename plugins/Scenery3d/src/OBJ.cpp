@@ -44,6 +44,7 @@
 
 #include "StelOpenGL.hpp"
 #include "OBJ.hpp"
+#include "StelApp.hpp"
 #include "ShaderManager.hpp"
 #include "StelFileMgr.hpp"
 #include "StelTextureMgr.hpp"
@@ -1499,7 +1500,7 @@ void OBJ::transparencyDepthSort(const Vec3f &position)
 
 void OBJ::uploadTexturesGL()
 {
-	StelTextureMgr textureMgr;
+	StelTextureMgr& textureMgr = StelApp::getInstance().getTextureManager();
 
 	for(unsigned int i=0; i<m_numberOfMaterials; ++i)
 	{
