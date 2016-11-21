@@ -1465,12 +1465,18 @@ void Oculars::toggleTelrad(bool show)
 {
 	if(show!=flagShowTelrad)
 	{
+		StelMovementMgr* movementMgr = StelApp::getInstance().getCore()->getMovementMgr();
 		if (show)
 		{
 			hideUsageMessageIfDisplayed();
 			enableOcular(false);
 			toggleCCD(false);
+			// NOTE: Added special zoom level for Telrad
+			// Seems problem was introduced with introducing StelProperty feature
+			movementMgr->zoomTo(10.0);
 		}
+		else if (getFlagInitFovUsage()) // Restoration of FOV is needed?
+			movementMgr->zoomTo(movementMgr->getInitFov());
 		flagShowTelrad = show;
 		emit enableTelradChanged(flagShowTelrad);
 	}
