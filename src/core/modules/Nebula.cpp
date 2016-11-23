@@ -155,7 +155,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		if (B_nb > 0)
 			catIds << QString("B %1").arg(B_nb);
 		if (Sh2_nb > 0)
-			catIds << QString("Sh 2-%1").arg(Sh2_nb);
+			catIds << QString("SH 2-%1").arg(Sh2_nb);
 		if (VdB_nb > 0)
 			catIds << QString("VdB %1").arg(VdB_nb);
 		if (RCW_nb > 0)
@@ -701,7 +701,7 @@ QString Nebula::getDSODesignation()
 	else if (catalogFilters&CatB && B_nb>0)
 		str = QString("B %1").arg(B_nb);
 	else if (catalogFilters&CatSh2 && Sh2_nb>0)
-		str = QString("Sh 2-%1").arg(Sh2_nb);
+		str = QString("SH 2-%1").arg(Sh2_nb);
 	else if (catalogFilters&CatVdB && VdB_nb>0)
 		str = QString("VdB %1").arg(VdB_nb);
 	else if (catalogFilters&CatRCW && RCW_nb>0)
