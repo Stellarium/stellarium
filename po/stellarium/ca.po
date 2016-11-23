@@ -10,14 +10,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-22 03:19+0700\n"
-"PO-Revision-Date: 2016-11-21 18:08+0000\n"
+"POT-Creation-Date: 2016-11-22 19:43+0700\n"
+"PO-Revision-Date: 2016-11-22 21:20+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-22 05:24+0000\n"
+"X-Launchpad-Export-Date: 2016-11-23 05:27+0000\n"
 "X-Generator: Launchpad (build 18269)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -53,7 +53,7 @@ msgstr "constel·lació"
 #: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:203 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/modules/ToastMgr.cpp:67
-#: src/core/StelApp.cpp:523 src/core/StelCore.cpp:229
+#: src/core/StelApp.cpp:526 src/core/StelCore.cpp:229
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:575
 msgid "Display Options"
 msgstr "Opcions de visualització"
@@ -1154,7 +1154,7 @@ msgstr "Llum Zodiacal"
 msgid "Digitized Sky Survey (experimental)"
 msgstr "Estudi Digitalitzat del Cel EDC (experimental)"
 
-#: src/core/StelApp.cpp:523
+#: src/core/StelApp.cpp:526
 msgid "Night mode"
 msgstr "Mode nocturn"
 
@@ -8568,7 +8568,7 @@ msgstr "Angle de reflexió solar: %1%2"
 #: plugins/Satellites/src/Satellite.cpp:337
 #, qt-format
 msgid "Operational status: %1"
-msgstr ""
+msgstr "Estat operatiu: %1"
 
 #: plugins/Satellites/src/Satellite.cpp:344
 msgid "The satellite and the observer are in sunlight."
@@ -8595,42 +8595,42 @@ msgstr "%1 MHz (%2%3 kHz)"
 #: plugins/Satellites/src/Satellite.cpp:620
 msgctxt "operational status"
 msgid "unknown"
-msgstr ""
+msgstr "desconegut"
 
 #: plugins/Satellites/src/Satellite.cpp:599
 msgctxt "operational status"
 msgid "operational"
-msgstr ""
+msgstr "operatiu"
 
 #: plugins/Satellites/src/Satellite.cpp:602
 msgctxt "operational status"
 msgid "nonoperational"
-msgstr ""
+msgstr "no operatiu"
 
 #: plugins/Satellites/src/Satellite.cpp:605
 msgctxt "operational status"
 msgid "partially operational"
-msgstr ""
+msgstr "operatiu parcialment"
 
 #: plugins/Satellites/src/Satellite.cpp:608
 msgctxt "operational status"
 msgid "standby"
-msgstr ""
+msgstr "en espera"
 
 #: plugins/Satellites/src/Satellite.cpp:611
 msgctxt "operational status"
 msgid "spare"
-msgstr ""
+msgstr "en reparació"
 
 #: plugins/Satellites/src/Satellite.cpp:614
 msgctxt "operational status"
 msgid "extended mission"
-msgstr ""
+msgstr "missió estesa"
 
 #: plugins/Satellites/src/Satellite.cpp:617
 msgctxt "operational status"
 msgid "decayed"
-msgstr ""
+msgstr "deteriorat"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:407
 msgid "Stellarium Satellites Plugin"

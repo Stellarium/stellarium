@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-22 03:19+0700\n"
-"PO-Revision-Date: 2016-11-19 18:27+0000\n"
+"POT-Creation-Date: 2016-11-22 19:43+0700\n"
+"PO-Revision-Date: 2016-11-22 16:19+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-22 05:42+0000\n"
+"X-Launchpad-Export-Date: 2016-11-23 05:44+0000\n"
 "X-Generator: Launchpad (build 18269)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -56,7 +56,7 @@ msgstr "сузір'я"
 #: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:203 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/modules/ToastMgr.cpp:67
-#: src/core/StelApp.cpp:523 src/core/StelCore.cpp:229
+#: src/core/StelApp.cpp:526 src/core/StelCore.cpp:229
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:575
 msgid "Display Options"
 msgstr "Параметри показу"
@@ -1158,7 +1158,7 @@ msgstr "Зодіакальне світло"
 msgid "Digitized Sky Survey (experimental)"
 msgstr "Цифровий огляд неба (експериментальний)"
 
-#: src/core/StelApp.cpp:523
+#: src/core/StelApp.cpp:526
 msgid "Night mode"
 msgstr "Нічний режим"
 
@@ -8585,7 +8585,7 @@ msgstr "Кут відбиття Сонця: %1%2"
 #: plugins/Satellites/src/Satellite.cpp:337
 #, qt-format
 msgid "Operational status: %1"
-msgstr ""
+msgstr "Стан працездатності: %1"
 
 #: plugins/Satellites/src/Satellite.cpp:344
 msgid "The satellite and the observer are in sunlight."
@@ -8612,42 +8612,42 @@ msgstr "%1 МГц (%2%3 кГц)"
 #: plugins/Satellites/src/Satellite.cpp:620
 msgctxt "operational status"
 msgid "unknown"
-msgstr ""
+msgstr "невідомий"
 
 #: plugins/Satellites/src/Satellite.cpp:599
 msgctxt "operational status"
 msgid "operational"
-msgstr ""
+msgstr "працездатний"
 
 #: plugins/Satellites/src/Satellite.cpp:602
 msgctxt "operational status"
 msgid "nonoperational"
-msgstr ""
+msgstr "непрацездатний"
 
 #: plugins/Satellites/src/Satellite.cpp:605
 msgctxt "operational status"
 msgid "partially operational"
-msgstr ""
+msgstr "частково працездатний"
 
 #: plugins/Satellites/src/Satellite.cpp:608
 msgctxt "operational status"
 msgid "standby"
-msgstr ""
+msgstr "приспаний"
 
 #: plugins/Satellites/src/Satellite.cpp:611
 msgctxt "operational status"
 msgid "spare"
-msgstr ""
+msgstr "резервний"
 
 #: plugins/Satellites/src/Satellite.cpp:614
 msgctxt "operational status"
 msgid "extended mission"
-msgstr ""
+msgstr "розширена місія"
 
 #: plugins/Satellites/src/Satellite.cpp:617
 msgctxt "operational status"
 msgid "decayed"
-msgstr ""
+msgstr "зруйнований"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:407
 msgid "Stellarium Satellites Plugin"
