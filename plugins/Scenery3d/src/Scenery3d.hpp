@@ -243,6 +243,7 @@ private:
 	QVector<Vec3f> cubeVertices, transformedCubeVertices;
 	QVector<Vec2f> cubeTexcoords;
 	QOpenGLBuffer cubeVertexBuffer;
+	QOpenGLBuffer transformedCubeVertexBuffer;
 	QOpenGLBuffer cubeIndexBuffer;
 	int cubeIndexCount;
 
