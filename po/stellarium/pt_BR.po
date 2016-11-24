@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-19 16:37+0700\n"
+"POT-Creation-Date: 2016-11-22 19:43+0700\n"
 "PO-Revision-Date: 2016-07-03 18:38+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-20 05:43+0000\n"
+"X-Launchpad-Export-Date: 2016-11-23 05:46+0000\n"
 "X-Generator: Launchpad (build 18269)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -22,7 +22,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:229 src/core/modules/MinorPlanet.cpp:213
 #: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:192
 #: src/core/modules/StarWrapper.cpp:195
-#: plugins/Satellites/src/Satellite.cpp:274
+#: plugins/Satellites/src/Satellite.cpp:276
 #: plugins/Supernovae/src/Supernova.cpp:130 plugins/Quasars/src/Quasar.cpp:101
 #: plugins/Pulsars/src/Pulsar.cpp:158 plugins/Exoplanets/src/Exoplanet.cpp:270
 #, qt-format
@@ -50,7 +50,7 @@ msgstr "constelação"
 #: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:203 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/modules/ToastMgr.cpp:67
-#: src/core/StelApp.cpp:523 src/core/StelCore.cpp:229
+#: src/core/StelApp.cpp:526 src/core/StelCore.cpp:229
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:575
 msgid "Display Options"
 msgstr "Opções de exibição"
@@ -1154,7 +1154,7 @@ msgstr "Luz zodiacal"
 msgid "Digitized Sky Survey (experimental)"
 msgstr ""
 
-#: src/core/StelApp.cpp:523
+#: src/core/StelApp.cpp:526
 msgid "Night mode"
 msgstr "Modo noturno"
 
@@ -3211,7 +3211,7 @@ msgstr "Salvar captura de tela"
 msgid "Full-screen mode"
 msgstr "Modo de tela cheia"
 
-#: src/StelMainView.cpp:728
+#: src/StelMainView.cpp:739
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -3220,14 +3220,14 @@ msgstr ""
 "drivers de vídeo (ou atualize seu hardware) ou utilize a opção --angle-mode "
 "(ou --mesa-mode)."
 
-#: src/StelMainView.cpp:731
+#: src/StelMainView.cpp:742
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "A versão do OpenGL é insuficiente. Por favor, atualize os drivers da sua "
 "placa gráfica."
 
-#: src/StelMainView.cpp:773
+#: src/StelMainView.cpp:784
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3238,7 +3238,7 @@ msgstr ""
 "Ignorar e suprimir este aviso no futuro e tentar continuar de qualquer "
 "maneira no modo degradado?"
 
-#: src/StelMainView.cpp:824
+#: src/StelMainView.cpp:835
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3249,7 +3249,7 @@ msgstr ""
 "Ignorar e suprimir este aviso no futuro e tentar continuar de qualquer "
 "maneira no modo degradado?"
 
-#: src/StelMainView.cpp:880
+#: src/StelMainView.cpp:891
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3260,7 +3260,7 @@ msgstr ""
 "Ignorar e suprimir este aviso no futuro e tentar continuar de qualquer "
 "maneira no modo degradado?"
 
-#: src/StelMainView.cpp:921
+#: src/StelMainView.cpp:932
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3271,7 +3271,7 @@ msgstr ""
 "Ignorar e suprimir este aviso no futuro e tentar continuar de qualquer "
 "maneira no modo degradado?"
 
-#: src/StelMainView.cpp:1032
+#: src/StelMainView.cpp:1043
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -6432,7 +6432,7 @@ msgstr "Todas as informações disponíveis"
 msgid "Display no information"
 msgstr "Não exibe nenhuma informação"
 
-#: src/ui_configurationDialog.h:1237 plugins/Oculars/src/Oculars.cpp:2387
+#: src/ui_configurationDialog.h:1237 plugins/Oculars/src/Oculars.cpp:2393
 #: plugins/Observability/src/Observability.cpp:205
 msgid "None"
 msgstr "Nenhuma informação"
@@ -7620,7 +7620,7 @@ msgstr "Exibe uma bússola que possui marcações ao longo do horizonte"
 msgid "Compass marks"
 msgstr "Marcações da bússola"
 
-#: plugins/Oculars/src/Oculars.cpp:83 plugins/Oculars/src/Oculars.cpp:1495
+#: plugins/Oculars/src/Oculars.cpp:83 plugins/Oculars/src/Oculars.cpp:1501
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:176
 #: plugins/Oculars/src/ui_ocularDialog.h:1121
 msgid "Oculars"
@@ -7688,164 +7688,164 @@ msgstr "&Girar CCD"
 msgid "&Reset rotation"
 msgstr "&Redefinir rotação"
 
-#: plugins/Oculars/src/Oculars.cpp:1496
+#: plugins/Oculars/src/Oculars.cpp:1502
 #: plugins/Oculars/src/ui_ocularDialog.h:1129
 msgid "Ocular view"
 msgstr "Visão ocular"
 
-#: plugins/Oculars/src/Oculars.cpp:1511
+#: plugins/Oculars/src/Oculars.cpp:1517
 msgid "Oculars popup menu"
 msgstr "Menu instantâneo para as oculares"
 
-#: plugins/Oculars/src/Oculars.cpp:1512
+#: plugins/Oculars/src/Oculars.cpp:1518
 msgid "Show crosshairs"
 msgstr "Exibir retículos"
 
-#: plugins/Oculars/src/Oculars.cpp:1513
+#: plugins/Oculars/src/Oculars.cpp:1519
 msgid "Image sensor frame"
 msgstr "Moldura de sensor de imagem"
 
-#: plugins/Oculars/src/Oculars.cpp:1514
+#: plugins/Oculars/src/Oculars.cpp:1520
 msgid "Telrad sight"
 msgstr "Mira Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1515
+#: plugins/Oculars/src/Oculars.cpp:1521
 msgid "Oculars plugin configuration"
 msgstr "Configuração do complemento de oculares"
 
-#: plugins/Oculars/src/Oculars.cpp:1517
+#: plugins/Oculars/src/Oculars.cpp:1523
 msgid "Select next telescope"
 msgstr "Selecionar o telescópio seguinte"
 
-#: plugins/Oculars/src/Oculars.cpp:1519
+#: plugins/Oculars/src/Oculars.cpp:1525
 msgid "Select previous telescope"
 msgstr "Selecionar o telescópio anterior"
 
-#: plugins/Oculars/src/Oculars.cpp:1521
+#: plugins/Oculars/src/Oculars.cpp:1527
 msgid "Select next eyepiece"
 msgstr "Selecionar a ocular seguinte"
 
-#: plugins/Oculars/src/Oculars.cpp:1523
+#: plugins/Oculars/src/Oculars.cpp:1529
 msgid "Select previous eyepiece"
 msgstr "Selecionar a ocular anterior"
 
-#: plugins/Oculars/src/Oculars.cpp:1700
+#: plugins/Oculars/src/Oculars.cpp:1706
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "Ascensão reta/Declinação (J2000.0) do retículo"
 
-#: plugins/Oculars/src/Oculars.cpp:1890
+#: plugins/Oculars/src/Oculars.cpp:1896
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:513
 #, qt-format
 msgid "Ocular #%1"
 msgstr "Ocular nº %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1894
+#: plugins/Oculars/src/Oculars.cpp:1900
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:517
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "Ocular nº %1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1908
+#: plugins/Oculars/src/Oculars.cpp:1914
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:554
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Distância focal da ocular: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1915
+#: plugins/Oculars/src/Oculars.cpp:1921
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:564
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Campo de visão aparente da ocular: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1926
+#: plugins/Oculars/src/Oculars.cpp:1932
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:594
 #, qt-format
 msgid "Lens #%1"
 msgstr "Lente nº%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1930
+#: plugins/Oculars/src/Oculars.cpp:1936
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Lente nº%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1935
+#: plugins/Oculars/src/Oculars.cpp:1941
 msgid "Lens: none"
 msgstr "Lente: nenhuma"
 
-#: plugins/Oculars/src/Oculars.cpp:1968 plugins/Oculars/src/Oculars.cpp:2013
+#: plugins/Oculars/src/Oculars.cpp:1974 plugins/Oculars/src/Oculars.cpp:2019
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:755
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Telescópio nº %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1971
+#: plugins/Oculars/src/Oculars.cpp:1977
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:839
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Magnificação: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1974
+#: plugins/Oculars/src/Oculars.cpp:1980
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:851
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1977
+#: plugins/Oculars/src/Oculars.cpp:1983
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:860
 #, qt-format
 msgid "FOV: %1"
 msgstr "Campo de visão: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1997
+#: plugins/Oculars/src/Oculars.cpp:2003
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:701
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:797
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Dimensões: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2001
+#: plugins/Oculars/src/Oculars.cpp:2007
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:661
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Sensor nº %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2005
+#: plugins/Oculars/src/Oculars.cpp:2011
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:665
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Sensor nº %1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2018
+#: plugins/Oculars/src/Oculars.cpp:2024
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:759
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Telescópio nº %1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2383
+#: plugins/Oculars/src/Oculars.cpp:2389
 msgid "&Lens"
 msgstr "&Lente"
 
-#: plugins/Oculars/src/Oculars.cpp:2384
+#: plugins/Oculars/src/Oculars.cpp:2390
 msgid "&Previous lens"
 msgstr "&Lente anterior"
 
-#: plugins/Oculars/src/Oculars.cpp:2385
+#: plugins/Oculars/src/Oculars.cpp:2391
 msgid "&Next lens"
 msgstr "&Lente seguinte"
 
-#: plugins/Oculars/src/Oculars.cpp:2415
+#: plugins/Oculars/src/Oculars.cpp:2421
 msgid "&Telescope"
 msgstr "&Telescópio"
 
-#: plugins/Oculars/src/Oculars.cpp:2416
+#: plugins/Oculars/src/Oculars.cpp:2422
 msgid "&Previous telescope"
 msgstr "Telescópio &anterior"
 
-#: plugins/Oculars/src/Oculars.cpp:2417
+#: plugins/Oculars/src/Oculars.cpp:2423
 msgid "&Next telescope"
 msgstr "Telescópio &seguinte"
 
@@ -8340,77 +8340,77 @@ msgstr ""
 "arquivo padrão"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1731
+#: plugins/Satellites/src/Satellites.cpp:1774
 msgid "visual"
 msgstr "visual"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1733
+#: plugins/Satellites/src/Satellites.cpp:1776
 msgid "scientific"
 msgstr "científico"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1735
+#: plugins/Satellites/src/Satellites.cpp:1778
 msgid "communications"
 msgstr "de comunicação"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1737
+#: plugins/Satellites/src/Satellites.cpp:1780
 msgid "navigation"
 msgstr "de navegação"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1739
+#: plugins/Satellites/src/Satellites.cpp:1782
 msgid "amateur"
 msgstr "amador"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1741
+#: plugins/Satellites/src/Satellites.cpp:1784
 msgid "weather"
 msgstr "meteorológico"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1743
+#: plugins/Satellites/src/Satellites.cpp:1786
 msgid "geostationary"
 msgstr "geoestacionário"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1745
+#: plugins/Satellites/src/Satellites.cpp:1788
 msgid "non-operational"
 msgstr "não operacional"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1747
+#: plugins/Satellites/src/Satellites.cpp:1790
 msgid "gps"
 msgstr "de posicionamento global"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:1749
+#: plugins/Satellites/src/Satellites.cpp:1792
 msgid "glonass"
 msgstr "glonass"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:1751
+#: plugins/Satellites/src/Satellites.cpp:1794
 msgid "galileo"
 msgstr "galileo"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1753
+#: plugins/Satellites/src/Satellites.cpp:1796
 msgid "iridium"
 msgstr "Iridium"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:1755
+#: plugins/Satellites/src/Satellites.cpp:1798
 msgid "stations"
 msgstr "estação"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:1757
+#: plugins/Satellites/src/Satellites.cpp:1800
 msgid "education"
 msgstr "educacional"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:1759
+#: plugins/Satellites/src/Satellites.cpp:1802
 msgid "observatory"
 msgstr "observatório"
 
@@ -8420,139 +8420,185 @@ msgstr "observatório"
 #. Satellite descriptions - bright and/or famous objects
 #. Just A FEW objects please! (I'm looking at you, Alex!)
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1769
+#: plugins/Satellites/src/Satellites.cpp:1812
 msgid "The Hubble Space Telescope"
 msgstr "O Telescópio Espacial Hubble"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1771
+#: plugins/Satellites/src/Satellites.cpp:1814
 msgid "The International Space Station"
 msgstr "A Estação Espacial Internacional"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1773
+#: plugins/Satellites/src/Satellites.cpp:1816
 msgid "China's first space station"
 msgstr "Primeira estação espacial da China"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1775
+#: plugins/Satellites/src/Satellites.cpp:1818
 msgid "The russian space radio telescope RadioAstron"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1777
+#: plugins/Satellites/src/Satellites.cpp:1820
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1779
+#: plugins/Satellites/src/Satellites.cpp:1822
 msgid "The Gamma-Ray Observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:1783
+#: plugins/Satellites/src/Satellites.cpp:1826
 msgid "ISS (ZARYA)"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:1785
+#: plugins/Satellites/src/Satellites.cpp:1828
 msgid "HST"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:1787
+#: plugins/Satellites/src/Satellites.cpp:1830
 msgid "SPEKTR-R"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:1789
+#: plugins/Satellites/src/Satellites.cpp:1832
 msgid "INTEGRAL"
 msgstr ""
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:1791
+#: plugins/Satellites/src/Satellites.cpp:1834
 msgid "TIANGONG 1"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:261
-#: plugins/Satellites/src/Satellite.cpp:265
+#: plugins/Satellites/src/Satellite.cpp:263
+#: plugins/Satellites/src/Satellite.cpp:267
 msgid "Catalog #"
 msgstr "Catálogo nº"
 
-#: plugins/Satellites/src/Satellite.cpp:267
+#: plugins/Satellites/src/Satellite.cpp:269
 msgid "International Designator"
 msgstr "Designador internacional"
 
-#: plugins/Satellites/src/Satellite.cpp:274
+#: plugins/Satellites/src/Satellite.cpp:276
 msgid "artificial satellite"
 msgstr "satélite artificial"
 
-#: plugins/Satellites/src/Satellite.cpp:279
+#: plugins/Satellites/src/Satellite.cpp:281
 #, qt-format
 msgid "Approx. magnitude: <b>%1</b>"
 msgstr "Magnitude aproximada: <b>%1</b>"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:292
+#: plugins/Satellites/src/Satellite.cpp:294
 #, qt-format
 msgid "Range (km): %1"
 msgstr "Distância (km): %1"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:295
+#: plugins/Satellites/src/Satellite.cpp:297
 #, qt-format
 msgid "Range rate (km/s): %1"
 msgstr "Taxa de distanciamento (km/s): %1"
 
 #. TRANSLATORS: Satellite altitude
-#: plugins/Satellites/src/Satellite.cpp:298
+#: plugins/Satellites/src/Satellite.cpp:300
 #, qt-format
 msgid "Altitude (km): %1"
 msgstr "Altitude (km): %1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:301
+#: plugins/Satellites/src/Satellite.cpp:303
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
 msgstr "Subponto (Latitude/Longitude): %1%2/%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:315
+#: plugins/Satellites/src/Satellite.cpp:317
 #, qt-format
 msgid "TEME coordinates (km): %1"
 msgstr "Coordenadas TEME (km): %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:323
+#: plugins/Satellites/src/Satellite.cpp:325
 #, qt-format
 msgid "TEME velocity (km/s): %1"
 msgstr "Velocidade TEME (km/s): %1"
 
-#: plugins/Satellites/src/Satellite.cpp:328
+#: plugins/Satellites/src/Satellite.cpp:330
 #, qt-format
 msgid "Sun reflection angle: %1%2"
 msgstr "Ângulo de reflexão do Sol: %1%2"
 
-#: plugins/Satellites/src/Satellite.cpp:339
+#: plugins/Satellites/src/Satellite.cpp:337
+#, qt-format
+msgid "Operational status: %1"
+msgstr ""
+
+#: plugins/Satellites/src/Satellite.cpp:344
 msgid "The satellite and the observer are in sunlight."
 msgstr "O satélite e o observador estão na luz do sol."
 
-#: plugins/Satellites/src/Satellite.cpp:342
+#: plugins/Satellites/src/Satellite.cpp:347
 msgid "The satellite is visible."
 msgstr "O satélite está visível"
 
-#: plugins/Satellites/src/Satellite.cpp:345
+#: plugins/Satellites/src/Satellite.cpp:350
 msgid "The satellite is eclipsed."
 msgstr "O satélite está eclipsado."
 
-#: plugins/Satellites/src/Satellite.cpp:348
+#: plugins/Satellites/src/Satellite.cpp:353
 msgid "The satellite is not visible"
 msgstr "O satélite não está visível."
 
-#: plugins/Satellites/src/Satellite.cpp:373
+#: plugins/Satellites/src/Satellite.cpp:378
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 MHz (%2%3 kHz)"
+
+#: plugins/Satellites/src/Satellite.cpp:595
+#: plugins/Satellites/src/Satellite.cpp:620
+msgctxt "operational status"
+msgid "unknown"
+msgstr ""
+
+#: plugins/Satellites/src/Satellite.cpp:599
+msgctxt "operational status"
+msgid "operational"
+msgstr ""
+
+#: plugins/Satellites/src/Satellite.cpp:602
+msgctxt "operational status"
+msgid "nonoperational"
+msgstr ""
+
+#: plugins/Satellites/src/Satellite.cpp:605
+msgctxt "operational status"
+msgid "partially operational"
+msgstr ""
+
+#: plugins/Satellites/src/Satellite.cpp:608
+msgctxt "operational status"
+msgid "standby"
+msgstr ""
+
+#: plugins/Satellites/src/Satellite.cpp:611
+msgctxt "operational status"
+msgid "spare"
+msgstr ""
+
+#: plugins/Satellites/src/Satellite.cpp:614
+msgctxt "operational status"
+msgid "extended mission"
+msgstr ""
+
+#: plugins/Satellites/src/Satellite.cpp:617
+msgctxt "operational status"
+msgid "decayed"
+msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:407
 msgid "Stellarium Satellites Plugin"
