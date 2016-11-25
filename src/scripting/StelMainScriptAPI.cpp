@@ -1059,7 +1059,7 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 	map.insert("elongJ2000", lambda*180./M_PI);
 	map.insert("elatJ2000", beta*180./M_PI);
 
-	if (core->getCurrentLocation().planetName == "Earth")
+	if (QString("Earth Sun").contains(core->getCurrentLocation().planetName))
 	{
 		// ecliptic longitude/latitude
 		StelUtils::rectToSphe(&ra_equ,&dec_equ, obj->getEquinoxEquatorialPos(core));
