@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-22 19:43+0700\n"
-"PO-Revision-Date: 2016-11-16 18:16+0000\n"
+"POT-Creation-Date: 2016-11-24 21:47+0700\n"
+"PO-Revision-Date: 2016-11-24 15:23+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-23 05:30+0000\n"
-"X-Generator: Launchpad (build 18269)\n"
+"X-Launchpad-Export-Date: 2016-11-25 05:31+0000\n"
+"X-Generator: Launchpad (build 18282)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:191
@@ -1150,7 +1150,7 @@ msgstr "Eläinratavalo"
 
 #: src/core/modules/ToastMgr.cpp:67
 msgid "Digitized Sky Survey (experimental)"
-msgstr ""
+msgstr "Digitoitu taivasmosaiikki (kokeellinen)"
 
 #: src/core/StelApp.cpp:526
 msgid "Night mode"
@@ -2014,7 +2014,7 @@ msgstr "PKAA"
 #: src/core/StelLocaleMgr.cpp:279
 msgctxt "solar time"
 msgid "LTST"
-msgstr "PTAA"
+msgstr "TPAA"
 
 #: src/gui/ConfigurationDialog.cpp:539
 msgid "Select screenshot directory"
@@ -2319,47 +2319,47 @@ msgstr "Sivu ylös/alas"
 
 #: src/gui/HelpDialog.cpp:154
 msgid "Ctrl+Up/Down"
-msgstr ""
+msgstr "Ctrl+Ylös/Alas"
 
 #: src/gui/HelpDialog.cpp:157
 msgid "Time dragging"
-msgstr ""
+msgstr "Ajan raahaus"
 
 #: src/gui/HelpDialog.cpp:158
 msgid "Ctrl & left mouse drag"
-msgstr ""
+msgstr "Ctrl & hiiren vasemmalla raahaus"
 
 #: src/gui/HelpDialog.cpp:159
 msgid "Time scrolling: minutes"
-msgstr ""
+msgstr "Ajan rullaus: minuutit"
 
 #: src/gui/HelpDialog.cpp:160
 msgid "Ctrl & mouse wheel"
-msgstr ""
+msgstr "Ctrl & hiiren rulla"
 
 #: src/gui/HelpDialog.cpp:161
 msgid "Time scrolling: hours"
-msgstr ""
+msgstr "Ajan rullaus: tunnit"
 
 #: src/gui/HelpDialog.cpp:162
 msgid "Ctrl+Shift & mouse wheel"
-msgstr ""
+msgstr "Ctrl+Shift & hiiren rulla"
 
 #: src/gui/HelpDialog.cpp:163
 msgid "Time scrolling: days"
-msgstr ""
+msgstr "Ajan rullaus: päivät"
 
 #: src/gui/HelpDialog.cpp:164
 msgid "Ctrl+Alt & mouse wheel"
-msgstr ""
+msgstr "Ctrl+Alt & hiiren rulla"
 
 #: src/gui/HelpDialog.cpp:165
 msgid "Time scrolling: years"
-msgstr ""
+msgstr "Ajan rullaus: vuodet"
 
 #: src/gui/HelpDialog.cpp:166
 msgid "Ctrl+Alt+Shift & mouse wheel"
-msgstr ""
+msgstr "Ctrl+Alt+Shift & hiiren rulla"
 
 #: src/gui/HelpDialog.cpp:169
 msgid "Select object"
@@ -2375,7 +2375,7 @@ msgstr "Poista valinta"
 
 #: src/gui/HelpDialog.cpp:175
 msgid "Ctrl & left click"
-msgstr ""
+msgstr "Ctrl & vasen klikkaus"
 
 #: src/gui/HelpDialog.cpp:177
 msgid "Right click"
@@ -2387,7 +2387,7 @@ msgstr "Lisää oma osoitin"
 
 #: src/gui/HelpDialog.cpp:181
 msgid "Shift & left click"
-msgstr ""
+msgstr "Shift & vasen klikkaus"
 
 #: src/gui/HelpDialog.cpp:183
 msgid "Delete all custom markers"
@@ -2395,7 +2395,7 @@ msgstr "Poista kaikki omat osoittimet"
 
 #: src/gui/HelpDialog.cpp:184
 msgid "Shift & right click"
-msgstr ""
+msgstr "Shift & oikea klikkaus"
 
 #: src/gui/HelpDialog.cpp:187
 #, qt-format
@@ -2641,7 +2641,7 @@ msgstr "Paikallinen keskiaurinkoaika"
 
 #: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:408
 msgid "Local True Solar Time"
-msgstr "Todellinen paikallinen keskiaurinkoaika"
+msgstr "Todellinen paikallinen aurinkoaika"
 
 #: src/gui/StelGuiItems.cpp:679
 #, c-format, qt-format
@@ -3180,7 +3180,7 @@ msgstr "Peitto"
 
 #: src/gui/AstroCalcDialog.cpp:820
 msgid "Eclipse"
-msgstr ""
+msgstr "Pimennys"
 
 #: src/gui/BookmarksDialog.cpp:100 src/ui_searchDialogGui.h:702
 msgid "Object"
@@ -5277,7 +5277,7 @@ msgstr "Päivämäärä ja aika gregoriaanisen kalenterin mukaan"
 
 #: src/ui_dateTimeDialogGui.h:385
 msgid "Modified Julian Day"
-msgstr "Korjattu juliaaninen päivämäärä"
+msgstr "Muunneltu juliaaninen päivämäärä"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
@@ -6770,11 +6770,11 @@ msgstr "Atsimuutti etelästä laskien"
 
 #: src/ui_configurationDialog.h:1388
 msgid "Toggle display the button of Digitized Sky Survey."
-msgstr ""
+msgstr "Näytä digitoidun taivasmosaiikin painike."
 
 #: src/ui_configurationDialog.h:1390
 msgid "Show DSS button"
-msgstr ""
+msgstr "Näytä syvän taivaan kohteiden kuvien painike."
 
 #: src/ui_configurationDialog.h:1392
 msgid "Automatic change of landscape when planet is changed"
@@ -8542,7 +8542,7 @@ msgstr "Auringon heijastuskulma: %1%2"
 #: plugins/Satellites/src/Satellite.cpp:337
 #, qt-format
 msgid "Operational status: %1"
-msgstr ""
+msgstr "Toimintatila: %1"
 
 #: plugins/Satellites/src/Satellite.cpp:344
 msgid "The satellite and the observer are in sunlight."
@@ -8569,42 +8569,42 @@ msgstr "%1 MHz (%2%3 kHz)"
 #: plugins/Satellites/src/Satellite.cpp:620
 msgctxt "operational status"
 msgid "unknown"
-msgstr ""
+msgstr "tuntematon"
 
 #: plugins/Satellites/src/Satellite.cpp:599
 msgctxt "operational status"
 msgid "operational"
-msgstr ""
+msgstr "käytössä"
 
 #: plugins/Satellites/src/Satellite.cpp:602
 msgctxt "operational status"
 msgid "nonoperational"
-msgstr ""
+msgstr "ei käytössä"
 
 #: plugins/Satellites/src/Satellite.cpp:605
 msgctxt "operational status"
 msgid "partially operational"
-msgstr ""
+msgstr "osittain käytössä"
 
 #: plugins/Satellites/src/Satellite.cpp:608
 msgctxt "operational status"
 msgid "standby"
-msgstr ""
+msgstr "valmiustilassa"
 
 #: plugins/Satellites/src/Satellite.cpp:611
 msgctxt "operational status"
 msgid "spare"
-msgstr ""
+msgstr "varalla"
 
 #: plugins/Satellites/src/Satellite.cpp:614
 msgctxt "operational status"
 msgid "extended mission"
-msgstr ""
+msgstr "pidennetty tehtävä"
 
 #: plugins/Satellites/src/Satellite.cpp:617
 msgctxt "operational status"
 msgid "decayed"
-msgstr ""
+msgstr "ei enää toimintakuntoinen"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:407
 msgid "Stellarium Satellites Plugin"
@@ -11105,7 +11105,7 @@ msgid ""
 msgstr ""
 "57 valittua tähteä, jotka on listattu Hänen Majesteettinsa "
 "Merenkulkualmanakkatoimiston ja Yhdysvaltain merivoimien observatorion "
-"yhteistyönä vuodesta 1958 lähtien laatimassa merenkulkualmanakassa (”<em>The "
+"yhteistyönä vuodesta 1958 lähtien laaditussa merenkulkualmanakassa (”<em>The "
 "Nautical Almanac</em>”).  Näitä tähtiä on käytetty myös "
 "navigointiapuvälineissä, kuten <em>2102D-tähdenetsijässä</em> ja <em>-"
 "tunnistajassa</em>."
@@ -11147,7 +11147,7 @@ msgstr ""
 #. TRANSLATORS: Part of full phrase: Anglo-American set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:143
 msgid "Anglo-American"
-msgstr "Anglo-Amerikkalaiset"
+msgstr "Angloamerikkalaiset"
 
 #. TRANSLATORS: Part of full phrase: French set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:145
@@ -12469,7 +12469,7 @@ msgstr "Eksoplaneetta-datan tutkija"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
 msgid "The Anglo-Australian Planet Search"
-msgstr "Anglo-Australialainen planeettojen etsintä"
+msgstr "Anglo-australialainen planeettojen etsintä"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
 msgid "Geneva Extrasolar Planet Search Programmes"
@@ -16683,9 +16683,3 @@ msgstr ""
 
 #~ msgid "Last week"
 #~ msgstr "Viimeinen viikko"
-
-#~ msgid "Shift + Left click"
-#~ msgstr "Shift + vasen hiiri"
-
-#~ msgid "Shift + Right click"
-#~ msgstr "Shift + oikea hiiri"
