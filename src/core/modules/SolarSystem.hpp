@@ -433,6 +433,11 @@ public slots:
 	void setCustomGrsJD(double JD);
 	//! Get initial JD for calculation of position of Great Red Spot
 	double getCustomGrsJD();
+
+	//! Get list of objects by type
+	//! @param objType object type
+	QStringList getObjectsList(QString objType="all") const;
+
 signals:
 	void labelsDisplayedChanged(bool b);
 	void flagOrbitsChanged(bool b);
