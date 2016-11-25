@@ -55,9 +55,9 @@ StelTranslator::StelTranslator(const QString& adomain, const QString& alangName)
 	translator = new QTranslator();
 	bool res = translator->load(StelFileMgr::getLocaleDir()+"/"+adomain+"/"+getTrueLocaleName()+".qm");
 	if (!res)
-		qWarning() << "Couldn't load translations for language " << getTrueLocaleName();
+		qWarning() << "Couldn't load translations for language " << getTrueLocaleName() << "in section" << adomain;
 	if (translator->isEmpty())
-		qWarning() << "Empty translation file for language " << getTrueLocaleName();
+		qWarning() << "Empty translation file for language " << getTrueLocaleName() << "in section" << adomain;
 }
 
 StelTranslator::~StelTranslator()
