@@ -1276,6 +1276,24 @@ float SolarSystem::getPhaseForPlanet(QString planetName) const
 	return r;
 }
 
+QStringList SolarSystem::getObjectsList(QString objType) const
+{
+	QStringList r;
+	if (objType.toLower()=="all")
+	{
+		r = listAllObjects(true);
+		// Remove the Sun
+		r.removeOne("Sun");
+		// Remove special objects
+		r.removeOne("Solar System Observer");
+		r.removeOne("Earth Observer");
+	}
+	else
+		r = listAllObjectsByType(objType, true);
+
+	return r;
+}
+
 // Search if any Planet is close to position given in earth equatorial position and return the distance
 StelObjectP SolarSystem::search(Vec3d pos, const StelCore* core) const
 {
