@@ -536,6 +536,18 @@
             </item>
             <item>
              <widget class="QLabel" name="andLabel">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>50</width>
+                <height>0</height>
+               </size>
+              </property>
               <property name="text">
                <string>and</string>
               </property>
@@ -546,6 +558,12 @@
             </item>
             <item>
              <widget class="QComboBox" name="object2ComboBox">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="editable">
                <bool>true</bool>
               </property>
