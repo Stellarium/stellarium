@@ -41,6 +41,7 @@
 QVector<Vec3d> AstroCalcDialog::EphemerisListJ2000;
 QVector<QString> AstroCalcDialog::EphemerisListDates;
 int AstroCalcDialog::DisplayedPositionIndex = -1;
+float AstroCalcDialog::brightLimit = 10.f;
 
 AstroCalcDialog::AstroCalcDialog(QObject *parent)
 	: StelDialog(parent)	
@@ -529,11 +530,11 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	groups->addItem(q_("Cubewanos"), "6");
 	groups->addItem(q_("Scattered disc objects"), "7");
 	groups->addItem(q_("Oort cloud objects"), "8");
-	groups->addItem(q_("Star clusters"), "9");
+	groups->addItem(q_("Bright star clusters (<%1 mag.)").arg(QString::number(brightLimit, 'f', 1)), "9");
 	groups->addItem(q_("Planetary nebulae"), "10");
-	groups->addItem(q_("Bright nebulae (<10 mag.)"), "11");
+	groups->addItem(q_("Bright nebulae (<%1 mag.)").arg(QString::number(brightLimit, 'f', 1)), "11");
 	groups->addItem(q_("Dark nebulae"), "12");
-	groups->addItem(q_("Bright galaxies (<10 mag.)"), "13");
+	groups->addItem(q_("Bright galaxies (<%1 mag.)").arg(QString::number(brightLimit, 'f', 1)), "13");
 
 	index = groups->findData(selectedGroupId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
@@ -674,7 +675,7 @@ void AstroCalcDialog::calculatePhenomena()
 		case 9: // Star clusters
 			foreach(const NebulaP& object, allDSO)
 			{
-				if (object->getDSOType()==Nebula::NebCl || object->getDSOType()==Nebula::NebOc || object->getDSOType()==Nebula::NebGc || object->getDSOType()==Nebula::NebSA || object->getDSOType()==Nebula::NebSC || object->getDSOType()==Nebula::NebCn)
+				if (object->getVMagnitude(core)<brightLimit && (object->getDSOType()==Nebula::NebCl || object->getDSOType()==Nebula::NebOc || object->getDSOType()==Nebula::NebGc || object->getDSOType()==Nebula::NebSA || object->getDSOType()==Nebula::NebSC || object->getDSOType()==Nebula::NebCn))
 					dso.append(object);
 			}
 			break;
@@ -688,7 +689,7 @@ void AstroCalcDialog::calculatePhenomena()
 		case 11: // Bright nebulae
 			foreach(const NebulaP& object, allDSO)
 			{
-				if (object->getVMagnitude(core)<10.f && (object->getDSOType()==Nebula::NebN || object->getDSOType()==Nebula::NebBn || object->getDSOType()==Nebula::NebEn || object->getDSOType()==Nebula::NebRn || object->getDSOType()==Nebula::NebHII || object->getDSOType()==Nebula::NebISM || object->getDSOType()==Nebula::NebCn || object->getDSOType()==Nebula::NebSNR))
+				if (object->getVMagnitude(core)<brightLimit && (object->getDSOType()==Nebula::NebN || object->getDSOType()==Nebula::NebBn || object->getDSOType()==Nebula::NebEn || object->getDSOType()==Nebula::NebRn || object->getDSOType()==Nebula::NebHII || object->getDSOType()==Nebula::NebISM || object->getDSOType()==Nebula::NebCn || object->getDSOType()==Nebula::NebSNR))
 					dso.append(object);
 			}
 			break;
@@ -702,7 +703,7 @@ void AstroCalcDialog::calculatePhenomena()
 		case 13: // Galaxies
 			foreach(const NebulaP& object, allDSO)
 			{
-				if (object->getVMagnitude(core)<10.f && (object->getDSOType()==Nebula::NebGx || object->getDSOType()==Nebula::NebAGx || object->getDSOType()==Nebula::NebRGx || object->getDSOType()==Nebula::NebQSO || object->getDSOType()==Nebula::NebPossQSO || object->getDSOType()==Nebula::NebBLL || object->getDSOType()==Nebula::NebBLA || object->getDSOType()==Nebula::NebIGx))
+				if (object->getVMagnitude(core)<brightLimit && (object->getDSOType()==Nebula::NebGx || object->getDSOType()==Nebula::NebAGx || object->getDSOType()==Nebula::NebRGx || object->getDSOType()==Nebula::NebQSO || object->getDSOType()==Nebula::NebPossQSO || object->getDSOType()==Nebula::NebBLL || object->getDSOType()==Nebula::NebBLA || object->getDSOType()==Nebula::NebIGx))
 					dso.append(object);
 			}
 			break;

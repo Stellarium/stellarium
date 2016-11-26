@@ -94,10 +94,6 @@ void ConfigurationDialog::retranslate()
 	if (dialog) {
 		ui->retranslateUi(dialog);
 
-		//Hack to shrink the tabs to optimal size after language change
-		//by causing the list items to be laid out again.
-		updateTabBarListWidgetWidth();
-		
 		//Initial FOV and direction on the "Main" page
 		updateConfigLabels();
 		
@@ -114,10 +110,12 @@ void ConfigurationDialog::retranslate()
 		populatePluginsList();
 
 		populateDeltaTAlgorithmsList();
-
 		populateDateFormatsList();
-
 		populateTimeFormatsList();
+
+		//Hack to shrink the tabs to optimal size after language change
+		//by causing the list items to be laid out again.
+		updateTabBarListWidgetWidth();
 	}
 }
 
