@@ -160,6 +160,7 @@ private:
 
 	QString delimiter, acEndl;
 	QStringList ephemerisHeader, phenomenaHeader, planetaryPositionsHeader;
+	static float brightLimit;
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug
