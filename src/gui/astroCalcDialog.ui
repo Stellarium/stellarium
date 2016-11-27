@@ -153,13 +153,13 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>74</height>
+          <height>72</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>74</height>
+          <height>72</height>
          </size>
         </property>
         <property name="focusPolicy">
@@ -173,8 +173,8 @@
         </property>
         <property name="iconSize">
          <size>
-          <width>50</width>
-          <height>50</height>
+          <width>48</width>
+          <height>48</height>
          </size>
         </property>
         <property name="flow">
@@ -196,9 +196,12 @@
          <property name="toolTip">
           <string>Planetary positions</string>
          </property>
+         <property name="textAlignment">
+          <set>AlignLeading|AlignVCenter</set>
+         </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-sky.png</normalon>
+           <normalon>:/graphicGui/tabicon-AstroCalc-PlanetPos.png</normalon>
           </iconset>
          </property>
         </item>
@@ -206,9 +209,12 @@
          <property name="text">
           <string>Ephemeris</string>
          </property>
+         <property name="textAlignment">
+          <set>AlignLeading|AlignVCenter</set>
+         </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-sky.png</normalon>
+           <normalon>:/graphicGui/tabicon-AstroCalc-Ephemeris.png</normalon>
           </iconset>
          </property>
         </item>
@@ -218,7 +224,7 @@
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-sky.png</normalon>
+           <normalon>:/graphicGui/tabicon-AstroCalc-Phenomena.png</normalon>
           </iconset>
          </property>
         </item>
