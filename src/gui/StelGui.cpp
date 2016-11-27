@@ -704,10 +704,9 @@ void StelGui::setFlagShowBookmarksButton(bool b)
 	if (b==true) {
 		if (btShowBookmarks==NULL) {
 			// Create the nebulae background button
-			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
-			// FIXME: Updated icons for bookmarks button
-			QPixmap pxmapOn(":/graphicGui/btDSS-on.png");
-			QPixmap pxmapOff(":/graphicGui/btDSS-off.png");
+			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");			
+			QPixmap pxmapOn(":/graphicGui/btBookmarksA-on.png");
+			QPixmap pxmapOff(":/graphicGui/btBookmarksA-off.png");
 			btShowBookmarks = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Bookmarks_Window_Global");
 		}
 		getButtonBar()->addButton(btShowBookmarks, "060-othersGroup");
