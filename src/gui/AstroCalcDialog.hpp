@@ -33,6 +33,7 @@
 #include "SolarSystem.hpp"
 #include "Nebula.hpp"
 #include "NebulaMgr.hpp"
+#include "StarMgr.hpp"
 
 class Ui_astroCalcDialogForm;
 class QListWidgetItem;
@@ -116,6 +117,7 @@ private:
 	class StelCore* core;
 	class SolarSystem* solarSystem;
 	class NebulaMgr* dsoMgr;
+	class StarMgr* starMgr;
 	class StelObjectMgr* objectMgr;
 
 	//! Update header names for planetary positions table
@@ -157,6 +159,11 @@ private:
 	double findDistance(double JD, PlanetP object1, NebulaP object2);
 	bool findPrecise(QPair<double, double>* out, PlanetP object1, NebulaP object2, double JD, double step, int prevSign);
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const NebulaP object2);
+
+	QMap<double, double> findClosestApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD, double maxSeparation);
+	double findDistance(double JD, PlanetP object1, StelObjectP object2);
+	bool findPrecise(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double step, int prevSign);
+	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const StelObjectP object2);
 
 	QString delimiter, acEndl;
 	QStringList ephemerisHeader, phenomenaHeader, planetaryPositionsHeader;
