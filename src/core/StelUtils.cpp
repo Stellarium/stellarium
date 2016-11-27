@@ -1114,7 +1114,7 @@ int numberOfDaysInMonthInYear(const int month, const int year)
 //! normalize into an actual year/month/day.  values can be positive, 0,
 //! or negative.  start assessing from seconds to larger increments.
 bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
-				int* ry, int* rm, int* rd, int* rh, int* rmin, int* rs)
+			       int* ry, int* rm, int* rd, int* rh, int* rmin, int* rs)
 {
 	bool change = false;
 
