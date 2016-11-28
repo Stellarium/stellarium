@@ -69,6 +69,7 @@ void StelSkyLayerMgr::init()
 		qWarning() << "ERROR while loading nebula texture set default";
 	else
 		insertSkyImage(path);
+
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("skylayers");
 	foreach (const QString& key, conf->childKeys())

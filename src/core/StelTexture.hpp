@@ -121,7 +121,7 @@ private:
 	static GLData loadFromData(const QByteArray& data);
 
 	//! Private constructor
-	StelTexture();
+	StelTexture(StelTextureMgr* mgr);
 
 	//! Convert a QImage into opengl compatible format.
 	static QByteArray convertToGLFormat(const QImage& image, GLint* format, GLint* type);
@@ -137,6 +137,9 @@ private:
 	//! Same as glLoad(QImage), but with an image already in OpenGl format
 	bool glLoad(const GLData& data);
 
+	//! The parent texture manager
+	StelTextureMgr* textureMgr;
+
 	StelTextureParams loadParams;
 
 	//! Used to handle the connection for remote textures.
@@ -147,7 +150,7 @@ private:
 
 
 	//! The URL where to download the file
-	QString fullPath;
+	QString fullPath;	
 
 	//! True when something when wrong in the loading process
 	bool errorOccured;
@@ -166,6 +169,9 @@ private:
 
 	GLsizei width;	//! Texture image width
 	GLsizei height;	//! Texture image height
+
+	//! Size in GL memory
+	int glSize;
 };
 
 

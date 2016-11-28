@@ -92,6 +92,9 @@ public:
 	//! Get whether the button toggling nebulae background is visible
 	bool getFlagShowNebulaBackgroundButton() const;
 
+	//! Get whether the button toggling TOAST survey is visible
+	bool getFlagShowToastSurveyButton() const;
+
 	//! Get whether the button toggling bookmarks is visible
 	bool getFlagShowBookmarksButton() const;
 
@@ -122,6 +125,9 @@ public slots:
 	
 	//! Define whether the button toggling nebulae background should be visible
 	void setFlagShowNebulaBackgroundButton(bool b);
+
+	//! Define whether the button toggling TOAST survey should be visible
+	void setFlagShowToastSurveyButton(bool b);
 
 	//! Define whether the button toggling bookmarks should be visible
 	void setFlagShowBookmarksButton(bool b);
@@ -211,6 +217,9 @@ private:
 
 	bool flagShowNebulaBackgroundButton;
 	StelButton* btShowNebulaeBackground;
+
+	bool flagShowToastSurveyButton;
+	StelButton* btShowToastSurvey;
 
 	bool flagShowBookmarksButton;
 	StelButton* btShowBookmarks;

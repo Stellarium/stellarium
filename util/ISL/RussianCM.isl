@@ -23,6 +23,7 @@ RemoveUILandscapes=Удалить пользовательские ландшафты
 RemoveShortcutsConfig=Удалить конфигурацию клавиатурных сокращений
 RemoveCache=Удалить файлы кэша
 LastRunLog=Журнал последнего запуска
+OutputDataFile=Выходные данные
 ChangeLog=Журнал изменений
 FallbackMode=(режим совместимости)
 AngleMode=(режим ANGLE)

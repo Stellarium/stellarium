@@ -56,6 +56,23 @@ QString getApplicationVersion()
 #endif
 }
 
+QString getUserAgentString()
+{
+	// Get info about operating system
+	QString platform = StelUtils::getOperatingSystemInfo();
+	if (platform.contains("Linux"))
+		platform = "Linux";
+	if (platform.contains("FreeBSD"))
+		platform = "FreeBSD";
+	if (platform.contains("NetBSD"))
+		platform = "NetBSD";
+	if (platform.contains("OpenBSD"))
+		platform = "OpenBSD";
+
+	// Set user agent as "Stellarium/$version$ ($platform$)"
+	return QString("Stellarium/%1 (%2)").arg(StelUtils::getApplicationVersion()).arg(platform);
+}
+
 QString getOperatingSystemInfo()
 {
 	QString OS = "Unknown operating system";
@@ -1097,7 +1114,7 @@ int numberOfDaysInMonthInYear(const int month, const int year)
 //! normalize into an actual year/month/day.  values can be positive, 0,
 //! or negative.  start assessing from seconds to larger increments.
 bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
-				int* ry, int* rm, int* rd, int* rh, int* rmin, int* rs)
+			       int* ry, int* rm, int* rd, int* rh, int* rmin, int* rs)
 {
 	bool change = false;
 

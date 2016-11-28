@@ -329,6 +329,9 @@ public:
 	//! @return false in case of failure.
 	bool checkAndLoadCatalog(const QVariantMap& m);
 
+	//! Get the list of all Hipparcos stars.
+	const QList<StelObjectP>& getHipparcosStars() const { return hipparcosStars; }
+
 private slots:
 	//! Translate text.
 	void updateI18n();
@@ -381,6 +384,9 @@ private:
 
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(StelPainter& sPainter, const StelCore* core);
+
+	//! List of all Hipparcos stars.
+	QList<StelObjectP> hipparcosStars;
 
 	LinearFader labelsFader;
 	LinearFader starsFader;

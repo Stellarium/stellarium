@@ -49,6 +49,9 @@ namespace StelUtils
 	//! Return the name and the version of operating system, i.e. "Mac OS X 10.7"
 	QString getOperatingSystemInfo();
 
+	//! Return the user agent name, i.e. "Stellarium/0.15.0 (Linux)"
+	QString getUserAgentString();
+
 	//! Convert an angle in hms format to radian.
 	//! @param h hour component
 	//! @param m minute component
@@ -290,7 +293,7 @@ namespace StelUtils
 
 	int numberOfDaysInMonthInYear(const int month, const int year);
 	bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
-					int* ry, int* rm, int* rd, int* rh, int* rmin, int* rs);
+				       int* ry, int* rm, int* rd, int* rh, int* rmin, int* rs);
 
 	//! Output a QVariantMap to qDebug().  Formats like a tree where there are nested objects.
 	void debugQVariantMap(const QVariant& m, const QString& indent="", const QString& key="");

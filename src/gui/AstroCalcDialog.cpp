@@ -41,6 +41,7 @@
 QVector<Vec3d> AstroCalcDialog::EphemerisListJ2000;
 QVector<QString> AstroCalcDialog::EphemerisListDates;
 int AstroCalcDialog::DisplayedPositionIndex = -1;
+float AstroCalcDialog::brightLimit = 10.f;
 
 AstroCalcDialog::AstroCalcDialog(QObject *parent)
 	: StelDialog(parent)	
@@ -53,6 +54,7 @@ AstroCalcDialog::AstroCalcDialog(QObject *parent)
 	solarSystem = GETSTELMODULE(SolarSystem);
 	dsoMgr = GETSTELMODULE(NebulaMgr);
 	objectMgr = GETSTELMODULE(StelObjectMgr);
+	starMgr = GETSTELMODULE(StarMgr);
 	ephemerisHeader.clear();
 	phenomenaHeader.clear();
 	planetaryPositionsHeader.clear();
@@ -519,6 +521,7 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	int index = groups->currentIndex();
 	QVariant selectedGroupId = groups->itemData(index);
 
+	QString brLimit = QString::number(brightLimit, 'f', 1);
 	groups->clear();
 	groups->addItem(q_("Solar system"), "0");
 	groups->addItem(q_("Planets"), "1");
@@ -529,11 +532,12 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	groups->addItem(q_("Cubewanos"), "6");
 	groups->addItem(q_("Scattered disc objects"), "7");
 	groups->addItem(q_("Oort cloud objects"), "8");
-	groups->addItem(q_("Star clusters"), "9");
-	groups->addItem(q_("Planetary nebulae"), "10");
-	groups->addItem(q_("Bright nebulae (<10 mag.)"), "11");
-	groups->addItem(q_("Dark nebulae"), "12");
-	groups->addItem(q_("Bright galaxies (<10 mag.)"), "13");
+	groups->addItem(q_("Bright stars (<%1 mag.)").arg(QString::number(brightLimit-3.9f, 'f', 1)), "9");
+	groups->addItem(q_("Bright star clusters (<%1 mag.)").arg(brLimit), "10");
+	groups->addItem(q_("Planetary nebulae"), "11");
+	groups->addItem(q_("Bright nebulae (<%1 mag.)").arg(brLimit), "12");
+	groups->addItem(q_("Dark nebulae"), "13");
+	groups->addItem(q_("Bright galaxies (<%1 mag.)").arg(brLimit), "14");
 
 	index = groups->findData(selectedGroupId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
@@ -605,6 +609,10 @@ void AstroCalcDialog::calculatePhenomena()
 	dso.clear();
 	QVector<NebulaP> allDSO = dsoMgr->getAllDeepSkyObjects();
 
+	QList<StelObjectP> star;
+	star.clear();
+	QList<StelObjectP> hipStars = starMgr->getHipparcosStars();
+
 	int obj2Type = ui->object2ComboBox->currentData().toInt();
 	switch (obj2Type)
 	{
@@ -671,38 +679,45 @@ void AstroCalcDialog::calculatePhenomena()
 					objects.append(object);
 			}
 			break;
-		case 9: // Star clusters
+		case 9: // Stars
+			foreach(const StelObjectP& object, hipStars)
+			{
+				if (object->getVMagnitude(core)<(brightLimit-3.9f))
+					star.append(object);
+			}
+			break;
+		case 10: // Star clusters
 			foreach(const NebulaP& object, allDSO)
 			{
-				if (object->getDSOType()==Nebula::NebCl || object->getDSOType()==Nebula::NebOc || object->getDSOType()==Nebula::NebGc || object->getDSOType()==Nebula::NebSA || object->getDSOType()==Nebula::NebSC || object->getDSOType()==Nebula::NebCn)
+				if (object->getVMagnitude(core)<brightLimit && (object->getDSOType()==Nebula::NebCl || object->getDSOType()==Nebula::NebOc || object->getDSOType()==Nebula::NebGc || object->getDSOType()==Nebula::NebSA || object->getDSOType()==Nebula::NebSC || object->getDSOType()==Nebula::NebCn))
 					dso.append(object);
 			}
 			break;
-		case 10: // Planetary nebulae
+		case 11: // Planetary nebulae
 			foreach(const NebulaP& object, allDSO)
 			{
 				if (object->getDSOType()==Nebula::NebPn || object->getDSOType()==Nebula::NebPossPN || object->getDSOType()==Nebula::NebPPN)
 					dso.append(object);
 			}
 			break;
-		case 11: // Bright nebulae
+		case 12: // Bright nebulae
 			foreach(const NebulaP& object, allDSO)
 			{
-				if (object->getVMagnitude(core)<10.f && (object->getDSOType()==Nebula::NebN || object->getDSOType()==Nebula::NebBn || object->getDSOType()==Nebula::NebEn || object->getDSOType()==Nebula::NebRn || object->getDSOType()==Nebula::NebHII || object->getDSOType()==Nebula::NebISM || object->getDSOType()==Nebula::NebCn || object->getDSOType()==Nebula::NebSNR))
+				if (object->getVMagnitude(core)<brightLimit && (object->getDSOType()==Nebula::NebN || object->getDSOType()==Nebula::NebBn || object->getDSOType()==Nebula::NebEn || object->getDSOType()==Nebula::NebRn || object->getDSOType()==Nebula::NebHII || object->getDSOType()==Nebula::NebISM || object->getDSOType()==Nebula::NebCn || object->getDSOType()==Nebula::NebSNR))
 					dso.append(object);
 			}
 			break;
-		case 12: // Dark nebulae
+		case 13: // Dark nebulae
 			foreach(const NebulaP& object, allDSO)
 			{
 				if (object->getDSOType()==Nebula::NebDn || object->getDSOType()==Nebula::NebMolCld || object->getDSOType()==Nebula::NebYSO)
 					dso.append(object);
 			}
 			break;
-		case 13: // Galaxies
+		case 14: // Galaxies
 			foreach(const NebulaP& object, allDSO)
 			{
-				if (object->getVMagnitude(core)<10.f && (object->getDSOType()==Nebula::NebGx || object->getDSOType()==Nebula::NebAGx || object->getDSOType()==Nebula::NebRGx || object->getDSOType()==Nebula::NebQSO || object->getDSOType()==Nebula::NebPossQSO || object->getDSOType()==Nebula::NebBLL || object->getDSOType()==Nebula::NebBLA || object->getDSOType()==Nebula::NebIGx))
+				if (object->getVMagnitude(core)<brightLimit && (object->getDSOType()==Nebula::NebGx || object->getDSOType()==Nebula::NebAGx || object->getDSOType()==Nebula::NebRGx || object->getDSOType()==Nebula::NebQSO || object->getDSOType()==Nebula::NebPossQSO || object->getDSOType()==Nebula::NebBLL || object->getDSOType()==Nebula::NebBLA || object->getDSOType()==Nebula::NebIGx))
 					dso.append(object);
 			}
 			break;
@@ -726,6 +741,15 @@ void AstroCalcDialog::calculatePhenomena()
 				fillPhenomenaTable(findClosestApproach(planet, obj, startJD, stopJD, separation, false), planet, obj, false);
 				// opposition
 				fillPhenomenaTable(findClosestApproach(planet, obj, startJD, stopJD, separation, true), planet, obj, true);
+			}
+		}
+		else if (obj2Type==9)
+		{
+			// Stars
+			foreach (StelObjectP obj, star)
+			{
+				// conjunction
+				fillPhenomenaTable(findClosestApproach(planet, obj, startJD, stopJD, separation), planet, obj);
 			}
 		}
 		else
@@ -1113,6 +1137,161 @@ bool AstroCalcDialog::findPrecise(QPair<double, double> *out, PlanetP object1, N
 }
 
 double AstroCalcDialog::findDistance(double JD, PlanetP object1, NebulaP object2)
+{
+	core->setJD(JD);
+	core->update(0);
+	Vec3d obj1 = object1->getJ2000EquatorialPos(core);
+	Vec3d obj2 = object2->getJ2000EquatorialPos(core);
+	return obj1.angle(obj2);
+}
+
+void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const StelObjectP object2)
+{
+	QMap<double, double>::ConstIterator it;
+	for (it=list.constBegin(); it!=list.constEnd(); ++it)
+	{
+		core->setJD(it.key());
+		core->update(0);
+
+		QString phenomenType = q_("Conjunction");
+		double separation = it.value();
+		bool occultation = false;
+		if (separation<(object2->getAngularSize(core)*M_PI/180.) || separation<(object1->getSpheroidAngularSize(core)*M_PI/180.))
+		{
+			phenomenType = q_("Occultation");
+			occultation = true;
+		}
+
+		ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->phenomenaTreeWidget);
+		treeItem->setText(PhenomenaType, phenomenType);
+		// local date and time
+		treeItem->setText(PhenomenaDate, StelUtils::jdToQDateTime(it.key() + core->getUTCOffset(it.key())/24).toString("yyyy-MM-dd hh:mm:ss"));
+		treeItem->setText(PhenomenaObject1, object1->getNameI18n());
+		treeItem->setText(PhenomenaObject2, object2->getNameI18n());
+		if (occultation)
+			treeItem->setText(PhenomenaSeparation, QChar(0x2014));
+		else
+			treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation));
+	}
+}
+
+QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP &object1, StelObjectP &object2, double startJD, double stopJD, double maxSeparation)
+{
+	double dist, prevDist, step, step0;
+	int sgn, prevSgn = 0;
+	QMap<double, double> separations;
+	QPair<double, double> extremum;
+
+	step0 = (stopJD - startJD)/8.0;
+	if (step0>24.8*365.25)
+		step0 = 24.8*365.25;
+
+	if (object1->getEnglishName()=="Neptune" || object1->getEnglishName()=="Uranus")
+		if (step0 > 3652.5)
+			step0 = 3652.5;
+	if (object1->getEnglishName()=="Jupiter" || object1->getEnglishName()=="Saturn")
+		if (step0 > 365.25)
+			step0 = 365.f;
+	if (object1->getEnglishName()=="Mars")
+		if (step0 > 10.f)
+			step0 = 10.f;
+	if (object1->getEnglishName()=="Venus" || object1->getEnglishName()=="Mercury")
+		if (step0 > 5.f)
+			step0 = 5.f;
+	if (object1->getEnglishName()=="Moon")
+		if (step0 > 0.25)
+			step0 = 0.25;
+
+	step = step0;
+	double jd = startJD;
+	prevDist = findDistance(jd, object1, object2);
+	jd += step;
+	while(jd <= stopJD)
+	{
+		dist = findDistance(jd, object1, object2);
+		sgn = StelUtils::sign(dist - prevDist);
+
+		double factor = qAbs((dist - prevDist)/dist);
+		if (factor>10.f)
+			step = step0 * factor/10.f;
+		else
+			step = step0;
+
+		if (sgn != prevSgn && prevSgn == -1)
+		{
+			if (step > step0)
+			{
+				jd -= step;
+				step = step0;
+				sgn = prevSgn;
+				while(jd <= stopJD)
+				{
+					dist = findDistance(jd, object1, object2);
+					sgn = StelUtils::sign(dist - prevDist);
+					if (sgn!=prevSgn)
+						break;
+
+					prevDist = dist;
+					prevSgn = sgn;
+					jd += step;
+				}
+			}
+
+			if (findPrecise(&extremum, object1, object2, jd, step, sgn))
+			{
+				double sep = extremum.second*180./M_PI;
+				if (sep<maxSeparation)
+					separations.insert(extremum.first, extremum.second);
+			}
+
+		}
+
+		prevDist = dist;
+		prevSgn = sgn;
+		jd += step;
+	}
+
+	return separations;
+}
+
+bool AstroCalcDialog::findPrecise(QPair<double, double> *out, PlanetP object1, StelObjectP object2, double JD, double step, int prevSign)
+{
+	int sgn;
+	double dist, prevDist;
+
+	if (out==NULL)
+		return false;
+
+	prevDist = findDistance(JD, object1, object2);
+	step = -step/2.f;
+	prevSign = -prevSign;
+
+	while(true)
+	{
+		JD += step;
+		dist = findDistance(JD, object1, object2);
+
+		if (qAbs(step)< 1.f/1440.f)
+		{
+			out->first = JD - step/2.0;
+			out->second = findDistance(JD - step/2.0, object1, object2);
+			if (out->second < findDistance(JD - 5.0, object1, object2))
+				return true;
+			else
+				return false;
+		}
+		sgn = StelUtils::sign(dist - prevDist);
+		if (sgn!=prevSign)
+		{
+			step = -step/2.0;
+			sgn = -sgn;
+		}
+		prevDist = dist;
+		prevSign = sgn;
+	}
+}
+
+double AstroCalcDialog::findDistance(double JD, PlanetP object1, StelObjectP object2)
 {
 	core->setJD(JD);
 	core->update(0);
