@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Stellarium
  * Copyright (C) 2008 Fabien Chereau
  *
@@ -232,6 +232,25 @@ public:
 	//! Get the font metrics for the current font.
 	QFontMetrics getFontMetrics() const;
 
+	//! Enable OpenGL blending. By default, blending is disabled.
+	//! The additional parameters specify the blending mode, the default parameters are suitable for
+	//! "normal" blending operations that you want in most cases. Blending will be automatically disabled when
+	//! the StelPainter is destroyed.
+	void setBlending(bool enableBlending, GLenum blendSrc = GL_SRC_ALPHA, GLenum blendDst = GL_ONE_MINUS_SRC_ALPHA);
+
+	void setDepthTest(bool enable);
+
+	void setDepthMask(bool enable);
+
+	//! Set the OpenGL GL_CULL_FACE state, by default face culling is disabled
+	void setCullFace(bool enable);
+
+	//! Enables/disables line smoothing. By default, smoothing is disabled.
+	void setLineSmooth(bool enable);
+
+	//! Sets the line width. Default is 1.0f.
+	void setLineWidth(float width);
+
 	//! Create the OpenGL shaders programs used by the StelPainter.
 	//! This method needs to be called once at init.
 	static void initGLShaders();
@@ -239,10 +258,6 @@ public:
 	//! Delete the OpenGL shaders objects.
 	//! This method needs to be called once before exit.
 	static void deinitGLShaders();
-
-	//! Set whether texturing is enabled.
-	//! @deprecated Relict of old GL1 drawing code, does nothing anymore
-	void enableTexture2d(bool b);
 
 	// Thoses methods should eventually be replaced by a single setVertexArray
 	//! use instead of glVertexPointer
@@ -296,6 +311,28 @@ private:
 	friend class StelTextureMgr;
 	friend class StelTexture;
 
+	//! Helper struct to track the GL state and restore it to canonical values on StelPainter creation/destruction
+	struct GLState
+	{
+		GLState(QOpenGLFunctions *gl);
+
+		bool blend;
+		GLenum blendSrc, blendDst;
+		bool depthTest;
+		bool depthMask;
+		bool cullFace;
+		bool lineSmooth;
+		GLfloat lineWidth;
+
+		//! Applies the values stored here to set the GL state
+		void apply();
+		//! Resets the state to the default values (like a GLState was newly constructed)
+		//! and calls apply()
+		void reset();
+	private:
+		QOpenGLFunctions* gl;
+	} glState;
+
 	// From text-use-opengl-buffer
 	static QCache<QByteArray, struct StringTexture> texCache;
 	struct StringTexture* getTexTexture(const QString& str, int pixelSize);
@@ -346,7 +383,6 @@ private:
 	QFont currentFont;
 
 	Vec4f currentColor;
-	bool texture2dEnabled;
 	
 	static QOpenGLShaderProgram* basicShaderProgram;
 	struct BasicShaderVars {

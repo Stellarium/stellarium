@@ -35,7 +35,6 @@ void StelViewportEffect::paintViewportBuffer(const QOpenGLFramebufferObject* buf
 {
 	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
 	sPainter.setColor(1,1,1);
-	sPainter.enableTexture2d(true);
 	sPainter.glFuncs()->glBindTexture(GL_TEXTURE_2D, buf->texture());
 	sPainter.drawRect2d(0, 0, buf->size().width(), buf->size().height());
 }
@@ -330,12 +329,11 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) 
 void StelViewportDistorterFisheyeToSphericMirror::paintViewportBuffer(const QOpenGLFramebufferObject* buf) const
 {
 	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
-	sPainter.enableTexture2d(true);
 	QOpenGLFunctions* gl = sPainter.glFuncs();
 	GL(gl->glBindTexture(GL_TEXTURE_2D, buf->texture()));
 	GL(gl->glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 	GL(gl->glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-	GL(gl->glDisable(GL_BLEND));
+	sPainter.setBlending(false);
 
 	sPainter.enableClientStates(true, true, true);
 	sPainter.setColorPointer(4, GL_FLOAT, displayColorList.constData());

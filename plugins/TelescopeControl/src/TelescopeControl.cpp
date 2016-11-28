@@ -285,8 +285,7 @@ void TelescopeControl::draw(StelCore* core)
 				}
 				if (reticleFader.getInterstate() >= 0)
 				{
-					sPainter.glFuncs()->glEnable(GL_BLEND);
-					sPainter.glFuncs()->glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+					sPainter.setBlending(true, GL_SRC_ALPHA, GL_ONE);
 					sPainter.setColor(reticleColor[0], reticleColor[1], reticleColor[2], reticleFader.getInterstate());
 					sPainter.drawSprite2dMode(XY[0],XY[1],15.f);
 				}
@@ -419,8 +418,7 @@ void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelCore* co
 		const Vec3f& c(obj->getInfoColor());
 		sPainter.setColor(c[0], c[1], c[2]);
 		selectionTexture->bind();
-		sPainter.glFuncs()->glEnable(GL_BLEND);
-		sPainter.glFuncs()->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		sPainter.setBlending(true);
 		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 25., StelApp::getInstance().getTotalRunTime() * 40.);
 	}
 #endif //COMPATIBILITY_001002

@@ -340,9 +340,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 
 		texPointer->bind();
 
-		sPainter.enableTexture2d(true);
-		sPainter.glFuncs()->glEnable(GL_BLEND);
-		sPainter.glFuncs()->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		sPainter.setBlending(true);
 
 		size*=0.5;
 		const float angleBase = StelApp::getInstance().getAnimationTime() * 10;
@@ -1180,9 +1178,7 @@ void SolarSystem::draw(StelCore* core)
 				size = 4.f;
 			}
 
-			sPainter.glFuncs()->glEnable(GL_BLEND);
-			sPainter.enableTexture2d(true);
-			sPainter.glFuncs()->glBlendFunc(GL_ONE, GL_ONE);
+			sPainter.setBlending(true, GL_ONE, GL_ONE);
 
 			texCircle->bind();
 			sPainter.drawSprite2dMode(AstroCalcDialog::EphemerisListJ2000[i], size);

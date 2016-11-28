@@ -787,8 +787,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 			if (Satellite::showLabels)
 				painter.drawText(xy[0], xy[1], name, 0, 10, 10, false);
 
-			painter.glFuncs()->glEnable(GL_BLEND);
-			painter.glFuncs()->glBlendFunc(GL_ONE, GL_ONE);
+			painter.setBlending(true, GL_ONE, GL_ONE);
 
 			Satellite::hintTexture->bind();
 			painter.drawSprite2dMode(xy[0], xy[1], 11);			

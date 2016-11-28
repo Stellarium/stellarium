@@ -128,13 +128,8 @@ void CompassMarks::draw(StelCore* core)
 	painter.setFont(font);
 
 	painter.setColor(markColor[0], markColor[1], markColor[2], markFader.getInterstate());
-	painter.glFuncs()->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	painter.glFuncs()->glEnable(GL_BLEND);
-	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH. But it looks much better.
-	#ifdef GL_LINE_SMOOTH
-	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-		painter.glFuncs()->glEnable(GL_LINE_SMOOTH);
-	#endif
+	painter.setBlending(true);
+	painter.setLineSmooth(true);
 
 	for(int i=0; i<360; i++)
 	{
@@ -162,13 +157,8 @@ void CompassMarks::draw(StelCore* core)
 			painter.drawGreatCircleArc(pos, Vec3d(pos[0], pos[1], h), NULL);
 		}
 	}
-	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
-	#ifdef GL_LINE_SMOOTH
-	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-		painter.glFuncs()->glDisable(GL_LINE_SMOOTH);
-	#endif
-	painter.glFuncs()->glDisable(GL_BLEND);
-
+	painter.setBlending(false);
+	painter.setLineSmooth(false);
 }
 
 void CompassMarks::update(double deltaTime)
