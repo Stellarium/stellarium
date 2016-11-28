@@ -97,6 +97,7 @@ struct TleData
 	QString name;
 	QString first;
 	QString second;
+	int status;
 	//! Flag indicating whether this satellite should be added.
 	//! See Satellites::autoAddEnabled.
 	bool addThis;

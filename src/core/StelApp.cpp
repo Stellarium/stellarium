@@ -38,9 +38,9 @@
 #include "StelIniParser.hpp"
 #include "StelProjector.hpp"
 #include "StelLocationMgr.hpp"
+#include "ToastMgr.hpp"
 #include "StelActionMgr.hpp"
 #include "StelPropertyMgr.hpp"
-
 #include "StelProgressController.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelLocaleMgr.hpp"
@@ -405,6 +405,9 @@ void StelApp::init(QSettings* conf)
 	networkAccessManager = new QNetworkAccessManager(this);
 	// Activate http cache if Qt version >= 4.5
 	QNetworkDiskCache* cache = new QNetworkDiskCache(networkAccessManager);
+	//make maximum cache size configurable (in MB)
+	//the default Qt value (50 MB) is quite low, especially for DSS
+	cache->setMaximumCacheSize(confSettings->value("main/network_cache_size",300).toInt() * 1024 * 1024);
 	QString cachePath = StelFileMgr::getCacheDir();
 
 	qDebug() << "Cache directory is: " << QDir::toNativeSeparators(cachePath);
@@ -458,6 +461,11 @@ void StelApp::init(QSettings* conf)
 	skyImageMgr = new StelSkyLayerMgr();
 	skyImageMgr->init();
 	getModuleMgr().registerModule(skyImageMgr);
+
+	// Toast surveys
+	ToastMgr* toasts = new ToastMgr();
+	toasts->init();
+	getModuleMgr().registerModule(toasts);
 
 	// Init audio manager
 	audioMgr = new StelAudioMgr();
@@ -890,4 +898,22 @@ QString StelApp::getViewportEffect() const
 	if (viewportEffect)
 		return viewportEffect->getName();
 	return "none";
+}
+
+// Diagnostics
+void StelApp::dumpModuleActionPriorities(StelModule::StelModuleActionName actionName)
+{
+	const QList<StelModule*> modules = moduleMgr->getCallOrders(actionName);
+#if QT_VERSION >= 0x050500
+	QMetaEnum me = QMetaEnum::fromType<StelModule::StelModuleActionName>();
+	qDebug() << "Module Priorities for action named" << me.valueToKey(actionName);
+#else
+	qDebug() << "Module Priorities for action named" << actionName;
+#endif
+
+	foreach(StelModule* module, modules)
+	{
+		module->draw(core);
+		qDebug() << " -- " << module->getCallOrder(actionName) << "Module: " << module->objectName();
+	}
 }
