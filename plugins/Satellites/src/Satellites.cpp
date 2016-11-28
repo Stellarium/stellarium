@@ -294,7 +294,7 @@ StelObjectP Satellites::searchByNameI18n(const QString& nameI18n) const
 	{
 		if (sat->initialized && sat->displayed)
 		{
-			if (sat->getNameI18n().toUpper() == nameI18n)
+			if (sat->getNameI18n().toUpper() == objw)
 				return qSharedPointerCast<StelObject>(sat);
 		}
 	}
@@ -317,7 +317,7 @@ StelObjectP Satellites::searchByName(const QString& englishName) const
 	{
 		if (sat->initialized && sat->displayed)
 		{
-			if (sat->getEnglishName().toUpper() == englishName)
+			if (sat->getEnglishName().toUpper() == objw)
 				return qSharedPointerCast<StelObject>(sat);
 		}
 	}
@@ -803,6 +803,9 @@ QVariantMap Satellites::createDataMap(void)
 		if (satMap["stdMag"].toFloat() == 99.f)
 			satMap.remove("stdMag");
 
+		if (satMap["status"].toInt() == Satellite::StatusUnknown)
+			satMap.remove("status");
+
 		sats[sat->id] = satMap;		
 	}
 	map["satellites"] = sats;
@@ -911,6 +914,8 @@ bool Satellites::add(const TleData& tleData)
 	satProperties.insert("orbitVisible", false);
 	if (qsMagList.contains(tleData.id))
 		satProperties.insert("stdMag", qsMagList[tleData.id]);
+	if (tleData.status != Satellite::StatusUnknown)
+		satProperties.insert("status", tleData.status);
 	
 	SatelliteP sat(new Satellite(tleData.id, satProperties));
 	if (sat->initialized)
@@ -1372,6 +1377,9 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 				// Update the name if it has been changed in the source list
 				sat->name = newTle.name;
 
+				// Update operational status
+				sat->status = newTle.status;
+
 				// we reset this to "now" when we started the update.
 				sat->lastUpdated = lastUpdate;
 				updatedCount++;
@@ -1463,11 +1471,47 @@ void Satellites::parseTleFile(QFile& openFile,
 			lastData = TleData();
 			lastData.addThis = addFlagValue;
 			
+			// The thing in square brackets after the name is actually
+			// Celestrak's "status code". Parse it!
+			QStringList codes;
+			codes << "+" << "-" << "P" << "B" << "S" << "X" << "D" << "?";
+
+			QRegExp statusRx("\\s*\\[(\\D{1})\\]\\s*$");
+			statusRx.setMinimal(true);
+			if (statusRx.indexIn(line)>-1)
+			{
+				lastData.status = Satellite::StatusUnknown;
+				switch (codes.indexOf(statusRx.capturedTexts().at(1).toUpper()))
+				{
+					case 0:
+						lastData.status = Satellite::StatusOperational;
+						break;
+					case 1:
+						lastData.status = Satellite::StatusNonoperational;
+						break;
+					case 2:
+						lastData.status = Satellite::StatusPartiallyOperational;
+						break;
+					case 3:
+						lastData.status = Satellite::StatusStandby;
+						break;
+					case 4:
+						lastData.status = Satellite::StatusSpare;
+						break;
+					case 5:
+						lastData.status = Satellite::StatusExtendedMission;
+						break;
+					case 6:
+						lastData.status = Satellite::StatusDecayed;
+						break;
+					default:
+						lastData.status = Satellite::StatusUnknown;
+				}
+			}
+
 			//TODO: We need to think of some kind of ecaping these
 			//characters in the JSON parser. --BM
-			// The thing in square brackets after the name is actually
-			// Celestrak's "status code". Parse automatically? --BM
-			line.replace(QRegExp("\\s*\\[([^\\]])*\\]\\s*$"),"");  // remove things in square brackets
+			line.replace(QRegExp("\\s*\\[([^\\]])*\\]\\s*$"),"");  // remove "status code" from name
 			lastData.name = line;
 		}
 		else
@@ -1487,8 +1531,7 @@ void Satellites::parseTleFile(QFile& openFile,
 				
 				// This is the second line and there will be no more,
 				// so if everything is OK, save the elements.
-				if (!lastData.name.isEmpty() &&
-						!lastData.first.isEmpty())
+				if (!lastData.name.isEmpty() &&	!lastData.first.isEmpty())
 				{
 					// Some satellites can be listed in multiple files,
 					// and only some of those files may be marked for adding,

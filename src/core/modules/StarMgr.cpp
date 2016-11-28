@@ -621,6 +621,18 @@ void StarMgr::loadData(QVariantMap starsConfig)
 
 	lastMaxSearchLevel = maxGeodesicGridLevel;
 	qDebug() << "Finished loading star catalogue data, max_geodesic_level: " << maxGeodesicGridLevel;
+
+	hipparcosStars.clear();
+	for (int hip=0; hip<=NR_OF_HIP; hip++)
+	{
+		const Star1 *const s = hipIndex[hip].s;
+		if (s)
+		{
+			const SpecialZoneArray<Star1> *const a = hipIndex[hip].a;
+			const SpecialZoneData<Star1> *const z = hipIndex[hip].z;
+			hipparcosStars.push_back(s->createStelObject(a,z));
+		}
+	}
 }
 
 // Load common names from file

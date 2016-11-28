@@ -2038,7 +2038,7 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 			foreach(const NebulaP& n, dsoArray)
 			{
 				if (n->Sh2_nb>0)
-					result << QString("Sh 2-%1").arg(n->Sh2_nb);
+					result << QString("SH 2-%1").arg(n->Sh2_nb);
 			}
 			break;
 		case 104: // Van den Bergh Catalogue
@@ -2150,7 +2150,7 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 					else if (n->B_nb>0)
 						result << QString("B %1").arg(n->B_nb);
 					else if (n->Sh2_nb>0)
-						result << QString("Sh 2-%1").arg(n->Sh2_nb);
+						result << QString("SH 2-%1").arg(n->Sh2_nb);
 					else if (n->VdB_nb>0)
 						result << QString("VdB %1").arg(n->VdB_nb);
 					else if (n->RCW_nb>0)

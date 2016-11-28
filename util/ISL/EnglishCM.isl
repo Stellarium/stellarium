@@ -23,6 +23,7 @@ RemoveCache=Remove cache files
 UserGuide=Stellarium User Guide
 DevelopersDocsOnTheWeb=Stellarium Developers Documentation on the web
 LastRunLog=Last run log
+OutputDataFile=Output data
 ChangeLog=Change log
 FallbackMode=(fallback mode)
 AngleMode=(ANGLE mode)

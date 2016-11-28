@@ -93,8 +93,22 @@ class Satellite : public StelObject
 	friend class Satellites;
 	friend class SatellitesDialog;
 	friend class SatellitesListModel;
-	
+
+	Q_ENUMS(OptStatus)
 public:
+	//! @enum OptStatus operational statuses
+	enum OptStatus
+	{
+		StatusOperational		= 1,
+		StatusNonoperational		= 2,
+		StatusPartiallyOperational	= 3,
+		StatusStandby			= 4,
+		StatusSpare			= 5,
+		StatusExtendedMission		= 6,
+		StatusDecayed			= 7,
+		StatusUnknown			= 0
+	};
+
 	//! \param identifier unique identifier (currently the Catalog Number)
 	//! \param data a QMap which contains the details of the satellite
 	//! (TLE set, description etc.)
@@ -164,6 +178,9 @@ public:
 	//! Calculation of illuminated fraction of the satellite.
 	float calculateIlluminatedFraction() const;
 
+	//! Get operational status of satellite
+	QString getOperationalStatus() const;
+
 private:
 	//draw orbits methods
 	void computeOrbitPoints();
@@ -206,6 +223,8 @@ private:
 	double jdLaunchYearJan1;
 	//! Standard visual magnitude of the satellite.
 	double stdMag;
+	//! Operational status code
+	int status;
 	//! Contains the J2000 position.
 	Vec3d XYZ;
 	QPair< QByteArray, QByteArray > tleElements;

@@ -105,6 +105,7 @@ Name: "{group}\Stellarium {cm:MesaMode}"; Filename: "{app}\stellarium.exe"; Para
 Name: "{group}\{cm:UninstallProgram,Stellarium}"; Filename: "{uninstallexe}"
 Name: "{group}\config.ini"; Filename: "{userappdata}\Stellarium\config.ini"
 Name: "{group}\{cm:LastRunLog}"; Filename: "{userappdata}\Stellarium\log.txt"
+Name: "{group}\{cm:OutputDataFile}"; Filename: "{userappdata}\Stellarium\output.txt"
 Name: "{group}\{cm:ChangeLog}"; Filename: "{app}\ChangeLog.rtf"
 @ISS_GUIDE@
 Name: "{commondesktop}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"; Tasks: desktopicon\common

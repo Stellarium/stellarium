@@ -681,8 +681,8 @@ void StelMainView::init()
 	setMaxFps(conf->value("video/maximum_fps",10000.f).toFloat());
 	setMinFps(conf->value("video/minimum_fps",10000.f).toFloat());
 
-	// XXX: This should be done in StelApp::init(), unfortunately for the moment we need init the gui before the
-	// plugins, because the gui create the QActions needed by some plugins.
+	// XXX: This should be done in StelApp::init(), unfortunately for the moment we need to init the gui before the
+	// plugins, because the gui creates the QActions needed by some plugins.
 	stelApp->initPlugIns();
 
 	// The script manager can only be fully initialized after the plugins have loaded.
@@ -693,6 +693,20 @@ void StelMainView::init()
 	if (gui!=NULL)
 		setStyleSheet(gui->getStelStyle().qtStyleSheet);
 	connect(stelApp, SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty()));
+
+	// I doubt this will have any effect on framerate, but may cause problems elsewhere?
+	QThread::currentThread()->setPriority(QThread::HighestPriority);
+#ifndef NDEBUG
+	// Get an overview of module callOrders
+	if (qApp->property("verbose")==true)
+	{
+		StelApp::getInstance().dumpModuleActionPriorities(StelModule::ActionDraw);
+		StelApp::getInstance().dumpModuleActionPriorities(StelModule::ActionUpdate);
+		StelApp::getInstance().dumpModuleActionPriorities(StelModule::ActionHandleMouseClicks);
+		StelApp::getInstance().dumpModuleActionPriorities(StelModule::ActionHandleMouseMoves);
+		StelApp::getInstance().dumpModuleActionPriorities(StelModule::ActionHandleKeys);
+	}
+#endif
 }
 
 void StelMainView::updateNightModeProperty()

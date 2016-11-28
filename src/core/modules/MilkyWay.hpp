@@ -57,8 +57,9 @@ public:
 	//! Milky way rendering is being changed from on to off or off to on.
 	virtual void update(double deltaTime);
 	
-	//! Used to determine the order in which the various modules are drawn.
-	virtual double getCallOrder(StelModuleActionName actionName) const {Q_UNUSED(actionName); return 1.;}
+	//! actionDraw returns 1 (because this is background, very early drawing).
+	//! Other actions return 0 for no action.
+	virtual double getCallOrder(StelModuleActionName actionName) const;
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Setter and getters
