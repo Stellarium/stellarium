@@ -180,8 +180,7 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 
 	if (distributionMode)
 	{
-		painter.glFuncs()->glEnable(GL_BLEND);
-		painter.glFuncs()->glBlendFunc(GL_ONE, GL_ONE);
+		painter.setBlending(true, GL_ONE, GL_ONE);
 		painter.setColor(markerColor[0], markerColor[1], markerColor[2], 1);
 
 		Quasar::markerTexture->bind();

@@ -369,9 +369,7 @@ void StelSkyDrawer::preDrawPointSource(StelPainter* p)
 
 	// Blending is really important. Otherwise faint stars in the vicinity of
 	// bright star will cause tiny black squares on the bright star, e.g. see Procyon.
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
-	p->enableTexture2d(true);
+	p->setBlending(true, GL_ONE, GL_ONE);
 }
 
 // Finalize the drawing of point sources
@@ -382,9 +380,7 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 	if (nbPointSources==0)
 		return;
 	texHalo->bind();
-	sPainter->enableTexture2d(true);
-	glBlendFunc(GL_ONE, GL_ONE);
-	glEnable(GL_BLEND);
+	sPainter->setBlending(true, GL_ONE, GL_ONE);
 
 	const Mat4f& m = sPainter->getProjector()->getProjectionMatrix();
 	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);
@@ -439,9 +435,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 			cmag = 1.f;
 
 		texBigHalo->bind();
-		sPainter->enableTexture2d(true);
-		glBlendFunc(GL_ONE, GL_ONE);
-		glEnable(GL_BLEND);				
+		sPainter->setBlending(true, GL_ONE, GL_ONE);
 		sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
 		sPainter->drawSprite2dModeNoDeviceScale(win[0], win[1], rmag);
 	}
@@ -473,9 +467,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3f& v, float radius, const Vec3f& color, const float alpha)
 {
 	texSunCorona->bind();
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
-	painter->enableTexture2d(true);
+	painter->setBlending(true, GL_ONE, GL_ONE);
 
 	Vec3f win;
 	painter->getProjector()->project(v, win);
@@ -500,9 +492,8 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 		// Sun, halo size varies in function of the magnitude because sun as seen from pluto should look dimmer
 		// as the sun as seen from earth
 		texSunHalo->bind();
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_ONE, GL_ONE);
-		painter->enableTexture2d(true);
+		painter->setBlending(true, GL_ONE, GL_ONE);
+
 		float rmag = big3dModelHaloRadius*(mag+15.f)/-11.f;
 		float cmag = 1.f;
 		if (rmag<pixRadius*3.f+100.)

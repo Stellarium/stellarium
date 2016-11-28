@@ -159,8 +159,7 @@ void StelSkyLayerMgr::draw(StelCore* core)
 		return;
 
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	sPainter.glFuncs()->glBlendFunc(GL_ONE, GL_ONE);
-	sPainter.glFuncs()->glEnable(GL_BLEND);
+	sPainter.setBlending(true, GL_ONE, GL_ONE); //additive blending
 	foreach (SkyLayerElem* s, allSkyLayers)
 	{
 		if (s->show) 

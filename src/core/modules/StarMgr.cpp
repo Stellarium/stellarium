@@ -452,9 +452,7 @@ void StarMgr::drawPointer(StelPainter& sPainter, const StelCore* core)
 		Vec3f c(obj->getInfoColor());
 		sPainter.setColor(c[0], c[1], c[2]);
 		texPointer->bind();
-		sPainter.enableTexture2d(true);
-		sPainter.glFuncs()->glEnable(GL_BLEND);
-		sPainter.glFuncs()->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		sPainter.setBlending(true);
 		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getAnimationTime()*40.);
 	}
 }

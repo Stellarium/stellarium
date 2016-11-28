@@ -187,9 +187,8 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 	const StelProjectorP prj = core->getProjection(frameType, refractionMode);
 	StelPainter painter(prj);
 	painter.setFont(font);
+	painter.setBlending(true);
 
-	painter.glFuncs()->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	painter.glFuncs()->glEnable(GL_BLEND);
 	if (lineVisible.getInterstate() > 0.000001f)
 	{
 		Vec3d xy;
@@ -219,11 +218,7 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 			}
 		}
 
-		// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH. But it looks much better.
-		#ifdef GL_LINE_SMOOTH
-		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-			painter.glFuncs()->glEnable(GL_LINE_SMOOTH);
-		#endif
+		painter.setLineSmooth(true);
 
 		// main line is a great circle
 		painter.setColor(lineColor[0], lineColor[1], lineColor[2], lineVisible.getInterstate());
@@ -243,10 +238,8 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 			painter.drawGreatCircleArc(perp1StartPointHor, perp1EndPointHor, NULL);
 			painter.drawGreatCircleArc(perp2StartPointHor, perp2EndPointHor, NULL);
 		}
-		#ifdef GL_LINE_SMOOTH
-		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-			painter.glFuncs()->glDisable(GL_LINE_SMOOTH);
-		#endif
+
+		painter.setLineSmooth(false);
 	}
 	if (messageFader.getInterstate() > 0.000001f)
 	{
@@ -260,7 +253,7 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 		y -= ls;
 		painter.drawText(x, y, messageRightButton);
 	}
-	painter.glFuncs()->glDisable(GL_BLEND);
+	painter.setBlending(false);
 }
 
 //! Draw any parts on the screen which are for our module
