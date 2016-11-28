@@ -109,10 +109,7 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	if (latitude == -90.0 ) d[0] = d[1] = d[2] = d[3] = sNorth;
 
 	sPainter.setColor(color[0],color[1],color[2],fader.getInterstate());
-	sPainter.glFuncs()->glEnable(GL_BLEND);
-	sPainter.enableTexture2d(true);
-	// Normal transparency mode
-	sPainter.glFuncs()->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	sPainter.setBlending(true);
 
 	Vec3f pos;
 	Vec3f xy;

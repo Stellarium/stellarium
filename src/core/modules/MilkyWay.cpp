@@ -161,10 +161,9 @@ void MilkyWay::draw(StelCore* core)
 		vertexArray->colors.fill(Vec3f(c[0], c[1], c[2]));
 
 	StelPainter sPainter(prj);
-	sPainter.glFuncs()->glEnable(GL_CULL_FACE);
-	sPainter.enableTexture2d(true);
-	sPainter.glFuncs()->glDisable(GL_BLEND);
+	sPainter.setCullFace(true);
+	sPainter.setBlending(false);
 	tex->bind();
 	sPainter.drawStelVertexArray(*vertexArray);
-	sPainter.glFuncs()->glDisable(GL_CULL_FACE);
+	sPainter.setCullFace(false);
 }

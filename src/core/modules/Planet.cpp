@@ -1789,11 +1789,9 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 			return;
 		}
 	}
-	painter->enableTexture2d(true);
 
-	QOpenGLFunctions* gl = painter->glFuncs();
-	gl->glDisable(GL_BLEND);
-	gl->glEnable(GL_CULL_FACE);
+	painter->setBlending(false);
+	painter->setCullFace(true);
 
 	// Draw the spheroid itself
 	// Adapt the number of facets according with the size of the sphere for optimization
@@ -1926,11 +1924,13 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	GL(shader->setAttributeArray(shaderVars->texCoord, (const GLfloat*)model.texCoordArr.constData(), 2));
 	GL(shader->enableAttributeArray(shaderVars->texCoord));
 
+	QOpenGLFunctions* gl = painter->glFuncs();
+
 	if (rings)
 	{
-		gl->glDepthMask(GL_TRUE);
+		painter->setDepthMask(true);
+		painter->setDepthTest(true);
 		gl->glClear(GL_DEPTH_BUFFER_BIT);
-		gl->glEnable(GL_DEPTH_TEST);
 	}
 	
 	if (!drawOnlyRing)
@@ -1939,11 +1939,10 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	if (rings)
 	{
 		// Draw the rings just after the planet
-		gl->glDepthMask(GL_FALSE);
+		painter->setDepthMask(false);
 	
 		// Normal transparency mode
-		gl->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		gl->glEnable(GL_BLEND);
+		painter->setBlending(true);
 	
 		Ring3DModel ringModel;
 		sRing(&ringModel, rings->radiusMin, rings->radiusMax, 128, 32);
@@ -1980,12 +1979,12 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 		if (eyePos[2]<0)
 			gl->glCullFace(GL_BACK);
 		
-		gl->glDisable(GL_DEPTH_TEST);
+		painter->setDepthTest(false);
 	}
 	
 	GL(shader->release());
 	
-	gl->glDisable(GL_CULL_FACE);
+	painter->setCullFace(false);
 }
 
 
@@ -2010,9 +2009,7 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate()*hintFader.getInterstate()/tmp*0.7f);
 
 	// Draw the 2D small circle
-	sPainter.glFuncs()->glEnable(GL_BLEND);
-	sPainter.enableTexture2d(true);
-	sPainter.glFuncs()->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	sPainter.setBlending(true);
 	Planet::hintCircleTex->bind();
 	sPainter.drawSprite2dMode(screenPos[0], screenPos[1], 11);
 }
@@ -2037,8 +2034,7 @@ void Planet::drawOrbit(const StelCore* core)
 	StelPainter sPainter(prj);
 
 	// Normal transparency mode
-	sPainter.glFuncs()->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	sPainter.glFuncs()->glEnable(GL_BLEND);
+	sPainter.setBlending(true);
 
 	Vec3f orbColor = orbitColor;
 	switch (pType)

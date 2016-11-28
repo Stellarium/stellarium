@@ -550,9 +550,8 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, bool gas)
 {	
 	StelPainter sPainter(core->getProjection(transfo));
-	sPainter.glFuncs()->glEnable(GL_BLEND);
-	sPainter.glFuncs()->glBlendFunc(GL_ONE, GL_ONE);
-	sPainter.glFuncs()->glDisable(GL_CULL_FACE);
+	sPainter.setBlending(true, GL_ONE, GL_ONE);
+	sPainter.setCullFace(false);
 
 	tailTexture->bind();
 
@@ -564,7 +563,7 @@ void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, 
 		sPainter.setArrays((Vec3d*)dusttailVertexArr.constData(), (Vec2f*)tailTexCoordArr.constData(), (Vec3f*)dusttailColorArr.constData());
 		sPainter.drawFromArray(StelPainter::Triangles, tailIndices.size(), 0, true, tailIndices.constData());
 	}
-	sPainter.glFuncs()->glDisable(GL_BLEND);
+	sPainter.setBlending(false);
 }
 
 void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
@@ -576,9 +575,8 @@ void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
 	transfo2->combine(comarot);
 	StelPainter sPainter(core->getProjection(transfo2));
 
-	sPainter.glFuncs()->glEnable(GL_BLEND);
-	sPainter.glFuncs()->glBlendFunc(GL_ONE, GL_ONE);
-	sPainter.glFuncs()->glDisable(GL_CULL_FACE);
+	sPainter.setBlending(true, GL_ONE, GL_ONE);
+	sPainter.setCullFace(false);
 
 	StelToneReproducer* eye = core->getToneReproducer();
 	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(getVMagnitudeWithExtinction(core)+11.0f); // How to calibrate?
@@ -590,7 +588,7 @@ void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
 	sPainter.setArrays((Vec3d*)comaVertexArr.constData(), (Vec2f*)comaTexCoordArr.constData());
 	sPainter.drawFromArray(StelPainter::Triangles, comaVertexArr.size()/3);
 
-	sPainter.glFuncs()->glDisable(GL_BLEND);
+	sPainter.setBlending(false);
 }
 
 // Formula found at http://www.projectpluto.com/update7b.htm#comet_tail_formula
