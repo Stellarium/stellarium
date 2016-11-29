@@ -1187,20 +1187,20 @@ QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP &object1, Stel
 		step0 = 24.8*365.25;
 
 	if (object1->getEnglishName()=="Neptune" || object1->getEnglishName()=="Uranus")
-		if (step0 > 3652.5)
-			step0 = 3652.5;
+		if (step0 > 1811.25)
+			step0 = 1811.25;
 	if (object1->getEnglishName()=="Jupiter" || object1->getEnglishName()=="Saturn")
-		if (step0 > 365.25)
-			step0 = 365.f;
+		if (step0 > 181.125)
+			step0 = 181.125;
 	if (object1->getEnglishName()=="Mars")
-		if (step0 > 10.f)
-			step0 = 10.f;
-	if (object1->getEnglishName()=="Venus" || object1->getEnglishName()=="Mercury")
 		if (step0 > 5.f)
-			step0 = 5.f;
+			step0 = 5.0;
+	if (object1->getEnglishName()=="Venus" || object1->getEnglishName()=="Mercury")
+		if (step0 > 2.5f)
+			step0 = 2.5;
 	if (object1->getEnglishName()=="Moon")
-		if (step0 > 0.25)
-			step0 = 0.25;
+		if (step0 > 0.125)
+			step0 = 0.125;
 
 	step = step0;
 	double jd = startJD;
