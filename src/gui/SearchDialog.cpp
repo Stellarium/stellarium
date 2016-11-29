@@ -535,8 +535,7 @@ void SearchDialog::manualPositionChanged()
 	}
 	mvmgr->setFlagTracking(false);
 	mvmgr->moveToJ2000(pos, aimUp, 0.05);
-	if (useLockPosition)
-		mvmgr->setFlagLockEquPos(true);
+	mvmgr->setFlagLockEquPos(useLockPosition);
 }
 
 void SearchDialog::onSearchTextChanged(const QString& text)
