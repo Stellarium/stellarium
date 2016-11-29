@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-11-27 16:10+0700\n"
-"PO-Revision-Date: 2016-11-14 15:06+0000\n"
+"PO-Revision-Date: 2016-11-28 15:51+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-28 04:41+0000\n"
+"X-Launchpad-Export-Date: 2016-11-29 04:34+0000\n"
 "X-Generator: Launchpad (build 18282)\n"
 "Language: gd\n"
 
@@ -896,7 +896,7 @@ msgstr "Trast-thomhas san lèirsinn: %1, le fàinneachan: %2"
 #: src/core/modules/Planet.cpp:312 src/core/modules/Planet.cpp:316
 #, qt-format
 msgid "Apparent diameter: %1, scaled up to: %2"
-msgstr ""
+msgstr "Trast-thomhas san lèirsinn: %1, air a mheudachadh gu: %2"
 
 #: src/core/modules/Planet.cpp:323 src/core/modules/Planet.cpp:325
 #: src/core/modules/MinorPlanet.cpp:286 src/core/modules/MinorPlanet.cpp:288
@@ -1153,7 +1153,7 @@ msgstr "Solas grian-chriosach"
 
 #: src/core/modules/ToastMgr.cpp:67
 msgid "Digitized Sky Survey (experimental)"
-msgstr ""
+msgstr "Digitized Sky Survey (deuchainnean)"
 
 #: src/core/StelApp.cpp:526
 msgid "Night mode"
@@ -3145,12 +3145,12 @@ msgstr "Cuspairean neul Oort"
 #: src/gui/AstroCalcDialog.cpp:535
 #, qt-format
 msgid "Bright stars (<%1 mag.)"
-msgstr ""
+msgstr "Reultan soilleir (<%1 meud.)"
 
 #: src/gui/AstroCalcDialog.cpp:536
 #, qt-format
 msgid "Bright star clusters (<%1 mag.)"
-msgstr ""
+msgstr "Grioglachain soilleir (<%1 meud.)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:537 src/translations.h:99
@@ -3161,7 +3161,7 @@ msgstr "Deargan-doireannan planaideach"
 #: src/gui/AstroCalcDialog.cpp:538
 #, qt-format
 msgid "Bright nebulae (<%1 mag.)"
-msgstr ""
+msgstr "Deargan-doireannan soilleir (<%1 meud.)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:539 src/translations.h:101
@@ -3172,7 +3172,7 @@ msgstr "Deargan-doireannan dorcha"
 #: src/gui/AstroCalcDialog.cpp:540
 #, qt-format
 msgid "Bright galaxies (<%1 mag.)"
-msgstr ""
+msgstr "Reul-chriosan soilleir (<%1 meud.)"
 
 #: src/gui/AstroCalcDialog.cpp:553
 msgid "Phenomenon"
@@ -6855,10 +6855,11 @@ msgstr "Azimuth on taobh deas"
 #: src/ui_configurationDialog.h:1388
 msgid "Toggle display the button of Digitized Sky Survey."
 msgstr ""
+"Toglaich an dèid putan an Digitized Sky Survey a shealltainn gus nach dèid."
 
 #: src/ui_configurationDialog.h:1390
 msgid "Show DSS button"
-msgstr ""
+msgstr "Seall putan an DSS"
 
 #: src/ui_configurationDialog.h:1392
 msgid "Automatic change of landscape when planet is changed"
@@ -8643,7 +8644,7 @@ msgstr "Ceàrn aig ath-thilgeadh na grèine: %1%2"
 #: plugins/Satellites/src/Satellite.cpp:338
 #, qt-format
 msgid "Operational status: %1"
-msgstr ""
+msgstr "Staid an obrachaidh: %1"
 
 #: plugins/Satellites/src/Satellite.cpp:345
 msgid "The satellite and the observer are in sunlight."
@@ -8670,42 +8671,42 @@ msgstr "%1 MHz (%2%3 kHz)"
 #: plugins/Satellites/src/Satellite.cpp:621
 msgctxt "operational status"
 msgid "unknown"
-msgstr ""
+msgstr "chan eil fios"
 
 #: plugins/Satellites/src/Satellite.cpp:600
 msgctxt "operational status"
 msgid "operational"
-msgstr ""
+msgstr "ag obrachadh"
 
 #: plugins/Satellites/src/Satellite.cpp:603
 msgctxt "operational status"
 msgid "nonoperational"
-msgstr ""
+msgstr "gun obrachadh"
 
 #: plugins/Satellites/src/Satellite.cpp:606
 msgctxt "operational status"
 msgid "partially operational"
-msgstr ""
+msgstr "pàirt dheth ag obrachadh"
 
 #: plugins/Satellites/src/Satellite.cpp:609
 msgctxt "operational status"
 msgid "standby"
-msgstr ""
+msgstr "fuireachas"
 
 #: plugins/Satellites/src/Satellite.cpp:612
 msgctxt "operational status"
 msgid "spare"
-msgstr ""
+msgstr "saideal a chorr"
 
 #: plugins/Satellites/src/Satellite.cpp:615
 msgctxt "operational status"
 msgid "extended mission"
-msgstr ""
+msgstr "misean fada"
 
 #: plugins/Satellites/src/Satellite.cpp:618
 msgctxt "operational status"
 msgid "decayed"
-msgstr ""
+msgstr "crìonta"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:407
 msgid "Stellarium Satellites Plugin"

@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-27 16:10+0700\n"
-"PO-Revision-Date: 2016-11-13 21:24+0000\n"
+"PO-Revision-Date: 2016-11-28 23:39+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-28 04:34+0000\n"
+"X-Launchpad-Export-Date: 2016-11-29 04:33+0000\n"
 "X-Generator: Launchpad (build 18282)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -894,7 +894,7 @@ msgstr "‎القطر الظاهري‎: %1, مع الحلقات‎: %2"
 #: src/core/modules/Planet.cpp:312 src/core/modules/Planet.cpp:316
 #, qt-format
 msgid "Apparent diameter: %1, scaled up to: %2"
-msgstr ""
+msgstr "‎القطر الظاهري‎: %1, ‎مكبر إلى‎: %2"
 
 #: src/core/modules/Planet.cpp:323 src/core/modules/Planet.cpp:325
 #: src/core/modules/MinorPlanet.cpp:286 src/core/modules/MinorPlanet.cpp:288
@@ -1149,7 +1149,7 @@ msgstr "الضوء البروجي"
 
 #: src/core/modules/ToastMgr.cpp:67
 msgid "Digitized Sky Survey (experimental)"
-msgstr ""
+msgstr "(مسح السماء الرقمي (تجريبي"
 
 #: src/core/StelApp.cpp:526
 msgid "Night mode"
@@ -2301,7 +2301,7 @@ msgstr "Page Up/Down"
 
 #: src/gui/HelpDialog.cpp:154
 msgid "Ctrl+Up/Down"
-msgstr ""
+msgstr "Ctrl+Up/Down"
 
 #: src/gui/HelpDialog.cpp:157
 msgid "Time dragging"
@@ -2309,7 +2309,7 @@ msgstr "سحب الوقت"
 
 #: src/gui/HelpDialog.cpp:158
 msgid "Ctrl & left mouse drag"
-msgstr ""
+msgstr "Ctrl مع السحب بزر الفأرة الأيسر"
 
 #: src/gui/HelpDialog.cpp:159
 msgid "Time scrolling: minutes"
@@ -2317,7 +2317,7 @@ msgstr "تغيير الوقت: دقائق"
 
 #: src/gui/HelpDialog.cpp:160
 msgid "Ctrl & mouse wheel"
-msgstr ""
+msgstr "Ctrl مع عجلة الفأرة"
 
 #: src/gui/HelpDialog.cpp:161
 msgid "Time scrolling: hours"
@@ -2325,23 +2325,23 @@ msgstr "تغيير الوقت: ساعات"
 
 #: src/gui/HelpDialog.cpp:162
 msgid "Ctrl+Shift & mouse wheel"
-msgstr ""
+msgstr "Ctrl+Shift مع عجلة الفأرة"
 
 #: src/gui/HelpDialog.cpp:163
 msgid "Time scrolling: days"
-msgstr ""
+msgstr "تغيير الوقت: بالأيام"
 
 #: src/gui/HelpDialog.cpp:164
 msgid "Ctrl+Alt & mouse wheel"
-msgstr ""
+msgstr "Ctrl+Alt مع عجلة الفأرة"
 
 #: src/gui/HelpDialog.cpp:165
 msgid "Time scrolling: years"
-msgstr ""
+msgstr "تغيير الوقت: بالسنين"
 
 #: src/gui/HelpDialog.cpp:166
 msgid "Ctrl+Alt+Shift & mouse wheel"
-msgstr ""
+msgstr "Ctrl+Alt+Shift مع عجلة الفأرة"
 
 #: src/gui/HelpDialog.cpp:169
 msgid "Select object"
@@ -2357,7 +2357,7 @@ msgstr "إلغ الاختيار"
 
 #: src/gui/HelpDialog.cpp:175
 msgid "Ctrl & left click"
-msgstr ""
+msgstr "Ctrl مع زر الفأرة الأيسر"
 
 #: src/gui/HelpDialog.cpp:177
 msgid "Right click"
@@ -2369,7 +2369,7 @@ msgstr "أضف علامة مخصصة"
 
 #: src/gui/HelpDialog.cpp:181
 msgid "Shift & left click"
-msgstr ""
+msgstr "Shift مع زر الفأرة الأيسر"
 
 #: src/gui/HelpDialog.cpp:183
 msgid "Delete all custom markers"
@@ -2377,7 +2377,7 @@ msgstr "امسح جميع العلامات المخصصة"
 
 #: src/gui/HelpDialog.cpp:184
 msgid "Shift & right click"
-msgstr ""
+msgstr "Shift مع زر الفأرة الأيمن"
 
 #: src/gui/HelpDialog.cpp:187
 #, qt-format
@@ -3131,7 +3131,7 @@ msgstr "سديم معتم"
 #: src/gui/AstroCalcDialog.cpp:540
 #, qt-format
 msgid "Bright galaxies (<%1 mag.)"
-msgstr ""
+msgstr "(المجرات الساطعة (أسطع من القدر %1"
 
 #: src/gui/AstroCalcDialog.cpp:553
 msgid "Phenomenon"
@@ -6730,11 +6730,11 @@ msgstr "زاوية السمت من الجنوب"
 
 #: src/ui_configurationDialog.h:1388
 msgid "Toggle display the button of Digitized Sky Survey."
-msgstr ""
+msgstr "أظهر وأخف زر عرض مسح السماء الرقمي"
 
 #: src/ui_configurationDialog.h:1390
 msgid "Show DSS button"
-msgstr ""
+msgstr "أظهر زر عرض مسح السماء الرقمي"
 
 #: src/ui_configurationDialog.h:1392
 msgid "Automatic change of landscape when planet is changed"
@@ -8498,7 +8498,7 @@ msgstr "‎زاوية انعكاس الشمس‎: %1%2‎"
 #: plugins/Satellites/src/Satellite.cpp:338
 #, qt-format
 msgid "Operational status: %1"
-msgstr ""
+msgstr "‎حالة التشغيل‎: %1‎"
 
 #: plugins/Satellites/src/Satellite.cpp:345
 msgid "The satellite and the observer are in sunlight."
@@ -8525,42 +8525,42 @@ msgstr "%1 ‎ميجا هرتز ‎(%2%3 ‎كيلوهرتز ‎)"
 #: plugins/Satellites/src/Satellite.cpp:621
 msgctxt "operational status"
 msgid "unknown"
-msgstr ""
+msgstr "‎غير معروفة‎"
 
 #: plugins/Satellites/src/Satellite.cpp:600
 msgctxt "operational status"
 msgid "operational"
-msgstr ""
+msgstr "‎عامل‎"
 
 #: plugins/Satellites/src/Satellite.cpp:603
 msgctxt "operational status"
 msgid "nonoperational"
-msgstr ""
+msgstr "‎غير عامل‎"
 
 #: plugins/Satellites/src/Satellite.cpp:606
 msgctxt "operational status"
 msgid "partially operational"
-msgstr ""
+msgstr "‎عامل جزئياً‎"
 
 #: plugins/Satellites/src/Satellite.cpp:609
 msgctxt "operational status"
 msgid "standby"
-msgstr ""
+msgstr "‎جاهز‎"
 
 #: plugins/Satellites/src/Satellite.cpp:612
 msgctxt "operational status"
 msgid "spare"
-msgstr ""
+msgstr "‎احتياطي‎"
 
 #: plugins/Satellites/src/Satellite.cpp:615
 msgctxt "operational status"
 msgid "extended mission"
-msgstr ""
+msgstr "‎مهمة ممددة‎"
 
 #: plugins/Satellites/src/Satellite.cpp:618
 msgctxt "operational status"
 msgid "decayed"
-msgstr ""
+msgstr "‎متفتت‎"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:407
 msgid "Stellarium Satellites Plugin"
