@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-27 16:10+0700\n"
-"PO-Revision-Date: 2016-11-26 08:56+0000\n"
+"PO-Revision-Date: 2016-11-29 03:21+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-28 04:36+0000\n"
+"X-Launchpad-Export-Date: 2016-11-29 04:34+0000\n"
 "X-Generator: Launchpad (build 18282)\n"
 "Language: bn\n"
 
@@ -3126,12 +3126,12 @@ msgstr "উর্ট ক্লাউডে থাকা বস্তু"
 #: src/gui/AstroCalcDialog.cpp:535
 #, qt-format
 msgid "Bright stars (<%1 mag.)"
-msgstr ""
+msgstr "উজ্জ্বল তারা (< %1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:536
 #, qt-format
 msgid "Bright star clusters (<%1 mag.)"
-msgstr ""
+msgstr "উজ্জ্বল তারকাগুচ্ছ (< %1 mag)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:537 src/translations.h:99
@@ -3142,7 +3142,7 @@ msgstr "গ্রহরূপী নীহারিকা"
 #: src/gui/AstroCalcDialog.cpp:538
 #, qt-format
 msgid "Bright nebulae (<%1 mag.)"
-msgstr ""
+msgstr "উজ্জ্বল নীহারিকা (< %1 mag)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:539 src/translations.h:101
@@ -3153,7 +3153,7 @@ msgstr "কৃষ্ণবর্ণ নীহারিকা"
 #: src/gui/AstroCalcDialog.cpp:540
 #, qt-format
 msgid "Bright galaxies (<%1 mag.)"
-msgstr ""
+msgstr "উজ্জ্বল নক্ষত্রলোক (< %1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:553
 msgid "Phenomenon"
