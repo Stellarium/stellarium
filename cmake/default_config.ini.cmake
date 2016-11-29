@@ -22,6 +22,7 @@ minimum_fps                         = 18
 maximum_fps                         = 10000
 #viewport_effect                     = sphericMirrorDistorter
 viewport_effect                     = none
+vsync                               = true
 
 [projection]
 type                                = ProjectionStereographic
