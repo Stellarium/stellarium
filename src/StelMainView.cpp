@@ -493,7 +493,16 @@ StelMainView::StelMainView(QSettings* settings)
 	connect(glLogger, SIGNAL(messageLogged(QOpenGLDebugMessage)), this, SLOT(logGLMessage(QOpenGLDebugMessage)));
 #endif
 
-	//set the surface format BEFORE creating the widget
+	// VSync control, needs to be set on default surface format before creating any windows
+	bool vsync = configuration->value("video/vsync", true).toBool();
+	QSurfaceFormat defFmt = QSurfaceFormat::defaultFormat();
+	defFmt.setSwapInterval(vsync);
+	QSurfaceFormat::setDefaultFormat(defFmt);
+
+	//Set the surface format BEFORE creating the widget
+	//We could also set this as default format instead of just the widget's format,
+	//but I don't know if some background Qt stuff needs another buffer configuration or something,
+	//so let's be safe and just set it here
 	QSurfaceFormat fmt = getDesiredGLFormat();
 	glWidget = new StelGLWidget(this);
 	glWidget->setFormat(fmt);
@@ -540,18 +549,25 @@ StelMainView::~StelMainView()
 
 QSurfaceFormat StelMainView::getDesiredGLFormat() const
 {
+	//use the default format as basis
 	QSurfaceFormat fmt = QSurfaceFormat::defaultFormat();
 	qDebug()<<"Default surface format: "<<fmt;
 
 	//if on an GLES build, do not set the format
 #ifndef QT_OPENGL_ES_2
+	// OGL 2.1 + FBOs should basically be the minimum required for Stellarium
 	fmt.setRenderableType(QSurfaceFormat::OpenGL);
 	fmt.setMajorVersion(2);
 	fmt.setMinorVersion(1);
-	//fmt.setProfile(QSurfaceFormat::CoreProfile);
+
+	// The following is NOT needed (or even supported) when we request a 2.1 context
+	// The implementation may give us a newer context,
+	// but compatibility with 2.1 should be ensured automatically
+	//fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
 	//fmt.setOption(QSurfaceFormat::DeprecatedFunctions);
 #endif
 
+	//request some sane buffer formats
 	fmt.setRedBufferSize(8);
 	fmt.setGreenBufferSize(8);
 	fmt.setBlueBufferSize(8);
@@ -565,8 +581,8 @@ QSurfaceFormat StelMainView::getDesiredGLFormat() const
 	//try to enable GL debugging using GL_KHR_debug
 	fmt.setOption(QSurfaceFormat::DebugContext);
 #endif
-	//disable vsync, if possible
-	fmt.setSwapInterval(0);
+	//vsync needs to be set on the default format for it to work
+	//fmt.setSwapInterval(0);
 
 	qDebug()<<"Desired surface format: "<<fmt;
 	return fmt;
