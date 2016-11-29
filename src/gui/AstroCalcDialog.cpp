@@ -532,12 +532,12 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	groups->addItem(q_("Cubewanos"), "6");
 	groups->addItem(q_("Scattered disc objects"), "7");
 	groups->addItem(q_("Oort cloud objects"), "8");
-	groups->addItem(q_("Bright stars (<%1 mag.)").arg(QString::number(brightLimit-3.9f, 'f', 1)), "9");
-	groups->addItem(q_("Bright star clusters (<%1 mag.)").arg(brLimit), "10");
+	groups->addItem(q_("Bright stars (<%1 mag)").arg(QString::number(brightLimit-3.9f, 'f', 1)), "9");
+	groups->addItem(q_("Bright star clusters (<%1 mag)").arg(brLimit), "10");
 	groups->addItem(q_("Planetary nebulae"), "11");
-	groups->addItem(q_("Bright nebulae (<%1 mag.)").arg(brLimit), "12");
+	groups->addItem(q_("Bright nebulae (<%1 mag)").arg(brLimit), "12");
 	groups->addItem(q_("Dark nebulae"), "13");
-	groups->addItem(q_("Bright galaxies (<%1 mag.)").arg(brLimit), "14");
+	groups->addItem(q_("Bright galaxies (<%1 mag)").arg(brLimit), "14");
 
 	index = groups->findData(selectedGroupId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
