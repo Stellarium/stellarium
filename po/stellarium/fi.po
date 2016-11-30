@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-27 16:10+0700\n"
+"POT-Creation-Date: 2016-11-29 20:31+0700\n"
 "PO-Revision-Date: 2016-11-24 15:23+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-28 04:40+0000\n"
+"X-Launchpad-Export-Date: 2016-11-30 04:40+0000\n"
 "X-Generator: Launchpad (build 18282)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -363,7 +363,7 @@ msgstr "Sijainti: "
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:721 src/ui_astroCalcDialog.h:496
+#: src/core/modules/LandscapeMgr.cpp:721 src/ui_astroCalcDialog.h:502
 msgid "Celestial body:"
 msgstr "Taivaankappale:"
 
@@ -2949,23 +2949,23 @@ msgstr "Pituus"
 msgid "Latitude"
 msgstr "Leveys"
 
-#: src/gui/SearchDialog.cpp:609
+#: src/gui/SearchDialog.cpp:608
 msgid "Simbad Lookup Error"
 msgstr "Simbad-hakuvirhe"
 
-#: src/gui/SearchDialog.cpp:617
+#: src/gui/SearchDialog.cpp:616
 msgid "Simbad Lookup"
 msgstr "Simbad-haku"
 
-#: src/gui/SearchDialog.cpp:830
+#: src/gui/SearchDialog.cpp:829
 msgid "University of Strasbourg (France)"
 msgstr "Strasbourgin yliopisto (Ranska)"
 
-#: src/gui/SearchDialog.cpp:831
+#: src/gui/SearchDialog.cpp:830
 msgid "Harvard University (USA)"
 msgstr "Harvardin yliopisto (USA)"
 
-#: src/gui/SearchDialog.cpp:904
+#: src/gui/SearchDialog.cpp:903
 msgid "Paste and Search"
 msgstr "Liitä ja hae"
 
@@ -3122,12 +3122,12 @@ msgstr "Oortin pilven kohteet"
 
 #: src/gui/AstroCalcDialog.cpp:535
 #, qt-format
-msgid "Bright stars (<%1 mag.)"
+msgid "Bright stars (<%1 mag)"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:536
 #, qt-format
-msgid "Bright star clusters (<%1 mag.)"
+msgid "Bright star clusters (<%1 mag)"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
@@ -3138,7 +3138,7 @@ msgstr "Planetaariset sumut"
 
 #: src/gui/AstroCalcDialog.cpp:538
 #, qt-format
-msgid "Bright nebulae (<%1 mag.)"
+msgid "Bright nebulae (<%1 mag)"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
@@ -3149,7 +3149,7 @@ msgstr "Pimeät sumut"
 
 #: src/gui/AstroCalcDialog.cpp:540
 #, qt-format
-msgid "Bright galaxies (<%1 mag.)"
+msgid "Bright galaxies (<%1 mag)"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:553
@@ -6782,8 +6782,8 @@ msgid "Azimuth from South"
 msgstr "Atsimuutti etelästä laskien"
 
 #: src/ui_configurationDialog.h:1388
-msgid "Toggle display the button of Digitized Sky Survey."
-msgstr "Näytä digitoidun taivasmosaiikin painike."
+msgid "Toggle display of the button for Digitized Sky Survey."
+msgstr ""
 
 #: src/ui_configurationDialog.h:1390
 msgid "Show DSS button"
@@ -7047,93 +7047,93 @@ msgstr "Sisällytä hakemisto:"
 msgid "..."
 msgstr "..."
 
-#: src/ui_astroCalcDialog.h:470
+#: src/ui_astroCalcDialog.h:476
 msgid "Astronomical calculations"
 msgstr "Tähtitieteellinen laskin"
 
-#: src/ui_astroCalcDialog.h:476
+#: src/ui_astroCalcDialog.h:482
 msgid "Positions"
 msgstr "Sijainnit"
 
-#: src/ui_astroCalcDialog.h:478
+#: src/ui_astroCalcDialog.h:484
 msgid "Planetary positions"
 msgstr "Taivaankappaleitten asemat"
 
-#: src/ui_astroCalcDialog.h:481
+#: src/ui_astroCalcDialog.h:487
 msgid "Ephemeris"
 msgstr "Efemeridit"
 
-#: src/ui_astroCalcDialog.h:483
+#: src/ui_astroCalcDialog.h:489
 msgid "Phenomena"
 msgstr "Tapahtumat"
 
-#: src/ui_astroCalcDialog.h:487
+#: src/ui_astroCalcDialog.h:493
 msgid "Update of planetary positions"
 msgstr "Päivitä taivaankappaleitten asemat"
 
-#: src/ui_astroCalcDialog.h:489
+#: src/ui_astroCalcDialog.h:495
 msgid "Show dates of positions of current celestial body near markers"
 msgstr "Näytä päivämäärät sijaintimerkintöjen vieressä"
 
-#: src/ui_astroCalcDialog.h:491
+#: src/ui_astroCalcDialog.h:497
 msgid "Show dates of positions"
 msgstr "Näytä päivämäärät"
 
-#: src/ui_astroCalcDialog.h:493
+#: src/ui_astroCalcDialog.h:499
 msgid "Show markers of positions of the current celestial body on the sky"
 msgstr "Näytä nykyisen taivaankappaleen sijaintimerkinnät"
 
-#: src/ui_astroCalcDialog.h:495
+#: src/ui_astroCalcDialog.h:501
 msgid "Show markers of positions"
 msgstr "Näytä sijaintimerkinnät"
 
-#: src/ui_astroCalcDialog.h:498
+#: src/ui_astroCalcDialog.h:504
 msgid "Cleanup ephemerides"
 msgstr "Tyhjennä efemeridit"
 
-#: src/ui_astroCalcDialog.h:499
+#: src/ui_astroCalcDialog.h:505
 msgid "Calculate ephemeris"
 msgstr "Laske efemeridi"
 
-#: src/ui_astroCalcDialog.h:500
+#: src/ui_astroCalcDialog.h:506
 msgid "Save ephemeris"
 msgstr "Tallenna efemeridit"
 
-#: src/ui_astroCalcDialog.h:501
+#: src/ui_astroCalcDialog.h:507
 msgid "Time step:"
 msgstr "Aika-askel:"
 
-#: src/ui_astroCalcDialog.h:502 src/ui_astroCalcDialog.h:509
+#: src/ui_astroCalcDialog.h:508 src/ui_astroCalcDialog.h:515
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
 msgstr "Mihin:"
 
-#: src/ui_astroCalcDialog.h:503 src/ui_astroCalcDialog.h:506
+#: src/ui_astroCalcDialog.h:509 src/ui_astroCalcDialog.h:512
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
 msgstr "Mistä:"
 
-#: src/ui_astroCalcDialog.h:504
+#: src/ui_astroCalcDialog.h:510
 msgid "Calculate phenomena"
 msgstr "Laske tapahtumat"
 
-#: src/ui_astroCalcDialog.h:505
+#: src/ui_astroCalcDialog.h:511
 msgid "Save phenomena"
 msgstr "Tallenna tapahtumat"
 
-#: src/ui_astroCalcDialog.h:507
+#: src/ui_astroCalcDialog.h:513
 msgid "Between objects:"
 msgstr "Seuraavien kohteiden välillä:"
 
-#: src/ui_astroCalcDialog.h:508
+#: src/ui_astroCalcDialog.h:514
 msgid "and"
 msgstr "ja"
 
-#: src/ui_astroCalcDialog.h:510
+#: src/ui_astroCalcDialog.h:516
 msgid "Maximum allowed separation:"
 msgstr "Suurin sallittu kulmaerotus:"
 
-#: src/ui_astroCalcDialog.h:512
+#: src/ui_astroCalcDialog.h:518
 msgid "Value in decimal degrees"
 msgstr "Arvo desimaaliasteina"
 
@@ -8184,15 +8184,13 @@ msgstr "Kuvailmaisinnäkymä"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1143
 msgid ""
-"Enable automatic install the type of mount from the telescope settings for "
-"saving horizontal orientation of CCD frame."
+"Enable automatic switch of mount type from the telescope settings for "
+"horizontal orientation of CCD frame."
 msgstr ""
-"Ota käyttöön automaattinen jalustatyypin asetus kaukoputken asetuksista "
-"kennon asennon tallentamiseksi."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1145
-msgid "Enable automatic install the type of mount"
-msgstr "Otakäyttöön  automaattinen jalustatyypin asetus"
+msgid "Enable automatic switch of mount type"
+msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1146
 msgid "Use degrees and minutes for FOV of CCD"
@@ -12604,8 +12602,8 @@ msgstr ""
 "eksoplaneettoja"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:484
-msgid "Enable display designations of exoplanets"
-msgstr "Näytä eksoplaneettojen tunnukset"
+msgid "Enable display of designations for exoplanets"
+msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:486
 msgid "Show exoplanets button on toolbar"
@@ -16686,6 +16684,16 @@ msgstr ""
 #~ msgid "Use system settings (default)"
 #~ msgstr "Käytä järjestelmän asetuksia (oletus)"
 
+#~ msgid ""
+#~ "Enable automatic install the type of mount from the telescope settings for "
+#~ "saving horizontal orientation of CCD frame."
+#~ msgstr ""
+#~ "Ota käyttöön automaattinen jalustatyypin asetus kaukoputken asetuksista "
+#~ "kennon asennon tallentamiseksi."
+
+#~ msgid "Enable automatic install the type of mount"
+#~ msgstr "Otakäyttöön  automaattinen jalustatyypin asetus"
+
 #~ msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 #~ msgstr ""
 #~ "Ekliptikaaliset koordinaatit, nykyinen ja J2000.0-epookki (vain Maalle)"
@@ -16693,6 +16701,9 @@ msgstr ""
 #~ msgid "Any changes will take effect the next time Stellarium is started."
 #~ msgstr ""
 #~ "Muutokset tulevat voimaan Stellariumin seuraavassa käynnistyksen yhteydessä."
+
+#~ msgid "Enable display designations of exoplanets"
+#~ msgstr "Näytä eksoplaneettojen tunnukset"
 
 #~ msgid "Last week"
 #~ msgstr "Viimeinen viikko"
@@ -16702,3 +16713,6 @@ msgstr ""
 
 #~ msgid "Bright galaxies (<10 mag.)"
 #~ msgstr "Kirkkaat galaksit (<10 mag.)"
+
+#~ msgid "Toggle display the button of Digitized Sky Survey."
+#~ msgstr "Näytä digitoidun taivasmosaiikin painike."
