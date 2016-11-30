@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-27 16:10+0700\n"
+"POT-Creation-Date: 2016-11-29 20:31+0700\n"
 "PO-Revision-Date: 2016-10-23 14:26+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-28 04:43+0000\n"
+"X-Launchpad-Export-Date: 2016-11-30 04:43+0000\n"
 "X-Generator: Launchpad (build 18282)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -365,7 +365,7 @@ msgstr "Hely: "
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:721 src/ui_astroCalcDialog.h:496
+#: src/core/modules/LandscapeMgr.cpp:721 src/ui_astroCalcDialog.h:502
 msgid "Celestial body:"
 msgstr "Égi objektum:"
 
@@ -2947,23 +2947,23 @@ msgstr "Hosszúság"
 msgid "Latitude"
 msgstr "Szélesség"
 
-#: src/gui/SearchDialog.cpp:609
+#: src/gui/SearchDialog.cpp:608
 msgid "Simbad Lookup Error"
 msgstr "Simbad keresési hiba"
 
-#: src/gui/SearchDialog.cpp:617
+#: src/gui/SearchDialog.cpp:616
 msgid "Simbad Lookup"
 msgstr "Simbad keresés"
 
-#: src/gui/SearchDialog.cpp:830
+#: src/gui/SearchDialog.cpp:829
 msgid "University of Strasbourg (France)"
 msgstr "Strasbourg Egyetem (Franciaország)"
 
-#: src/gui/SearchDialog.cpp:831
+#: src/gui/SearchDialog.cpp:830
 msgid "Harvard University (USA)"
 msgstr "Harvard Egyetem (USA)"
 
-#: src/gui/SearchDialog.cpp:904
+#: src/gui/SearchDialog.cpp:903
 msgid "Paste and Search"
 msgstr "Beilleszt és keres"
 
@@ -3120,12 +3120,12 @@ msgstr "Oort felhő objektumok"
 
 #: src/gui/AstroCalcDialog.cpp:535
 #, qt-format
-msgid "Bright stars (<%1 mag.)"
+msgid "Bright stars (<%1 mag)"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:536
 #, qt-format
-msgid "Bright star clusters (<%1 mag.)"
+msgid "Bright star clusters (<%1 mag)"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
@@ -3136,7 +3136,7 @@ msgstr "Planetáris köd"
 
 #: src/gui/AstroCalcDialog.cpp:538
 #, qt-format
-msgid "Bright nebulae (<%1 mag.)"
+msgid "Bright nebulae (<%1 mag)"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
@@ -3147,7 +3147,7 @@ msgstr "Sötét ködök"
 
 #: src/gui/AstroCalcDialog.cpp:540
 #, qt-format
-msgid "Bright galaxies (<%1 mag.)"
+msgid "Bright galaxies (<%1 mag)"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:553
@@ -6758,7 +6758,7 @@ msgid "Azimuth from South"
 msgstr "Azimut délről"
 
 #: src/ui_configurationDialog.h:1388
-msgid "Toggle display the button of Digitized Sky Survey."
+msgid "Toggle display of the button for Digitized Sky Survey."
 msgstr ""
 
 #: src/ui_configurationDialog.h:1390
@@ -7020,93 +7020,93 @@ msgstr "keresési könyvtár:"
 msgid "..."
 msgstr "…"
 
-#: src/ui_astroCalcDialog.h:470
+#: src/ui_astroCalcDialog.h:476
 msgid "Astronomical calculations"
 msgstr "Csillagászati számítások"
 
-#: src/ui_astroCalcDialog.h:476
+#: src/ui_astroCalcDialog.h:482
 msgid "Positions"
 msgstr "Pozíciók"
 
-#: src/ui_astroCalcDialog.h:478
+#: src/ui_astroCalcDialog.h:484
 msgid "Planetary positions"
 msgstr "Bolygók pozíciója"
 
-#: src/ui_astroCalcDialog.h:481
+#: src/ui_astroCalcDialog.h:487
 msgid "Ephemeris"
 msgstr "Efemerisz"
 
-#: src/ui_astroCalcDialog.h:483
+#: src/ui_astroCalcDialog.h:489
 msgid "Phenomena"
 msgstr "Jelenség"
 
-#: src/ui_astroCalcDialog.h:487
+#: src/ui_astroCalcDialog.h:493
 msgid "Update of planetary positions"
 msgstr "Bolygópozíciók frissítése"
 
-#: src/ui_astroCalcDialog.h:489
+#: src/ui_astroCalcDialog.h:495
 msgid "Show dates of positions of current celestial body near markers"
 msgstr "Pozíció dátumának mutatása a kiválasztott égi objektum közelében"
 
-#: src/ui_astroCalcDialog.h:491
+#: src/ui_astroCalcDialog.h:497
 msgid "Show dates of positions"
 msgstr "Pozíciók dátumának mutatása"
 
-#: src/ui_astroCalcDialog.h:493
+#: src/ui_astroCalcDialog.h:499
 msgid "Show markers of positions of the current celestial body on the sky"
 msgstr "A kiválasztott égi objektum pozíciójának jelölése."
 
-#: src/ui_astroCalcDialog.h:495
+#: src/ui_astroCalcDialog.h:501
 msgid "Show markers of positions"
 msgstr "Pozíció jelölése"
 
-#: src/ui_astroCalcDialog.h:498
+#: src/ui_astroCalcDialog.h:504
 msgid "Cleanup ephemerides"
 msgstr "Efemeridák tisztítása"
 
-#: src/ui_astroCalcDialog.h:499
+#: src/ui_astroCalcDialog.h:505
 msgid "Calculate ephemeris"
 msgstr "Efemerisz számítása"
 
-#: src/ui_astroCalcDialog.h:500
+#: src/ui_astroCalcDialog.h:506
 msgid "Save ephemeris"
 msgstr "Efemeriszek mentése"
 
-#: src/ui_astroCalcDialog.h:501
+#: src/ui_astroCalcDialog.h:507
 msgid "Time step:"
 msgstr "Időlépés:"
 
-#: src/ui_astroCalcDialog.h:502 src/ui_astroCalcDialog.h:509
+#: src/ui_astroCalcDialog.h:508 src/ui_astroCalcDialog.h:515
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
 msgstr "Eddig:"
 
-#: src/ui_astroCalcDialog.h:503 src/ui_astroCalcDialog.h:506
+#: src/ui_astroCalcDialog.h:509 src/ui_astroCalcDialog.h:512
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
 msgstr "Ettől:"
 
-#: src/ui_astroCalcDialog.h:504
+#: src/ui_astroCalcDialog.h:510
 msgid "Calculate phenomena"
 msgstr "Jelenség számítása"
 
-#: src/ui_astroCalcDialog.h:505
+#: src/ui_astroCalcDialog.h:511
 msgid "Save phenomena"
 msgstr "Jelenség mentése"
 
-#: src/ui_astroCalcDialog.h:507
+#: src/ui_astroCalcDialog.h:513
 msgid "Between objects:"
 msgstr "Objektum:"
 
-#: src/ui_astroCalcDialog.h:508
+#: src/ui_astroCalcDialog.h:514
 msgid "and"
 msgstr "és"
 
-#: src/ui_astroCalcDialog.h:510
+#: src/ui_astroCalcDialog.h:516
 msgid "Maximum allowed separation:"
 msgstr "Maximális engedélyezett elválasztás:"
 
-#: src/ui_astroCalcDialog.h:512
+#: src/ui_astroCalcDialog.h:518
 msgid "Value in decimal degrees"
 msgstr "Decimális fokok"
 
@@ -8136,12 +8136,12 @@ msgstr "Szenzornézet"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1143
 msgid ""
-"Enable automatic install the type of mount from the telescope settings for "
-"saving horizontal orientation of CCD frame."
+"Enable automatic switch of mount type from the telescope settings for "
+"horizontal orientation of CCD frame."
 msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1145
-msgid "Enable automatic install the type of mount"
+msgid "Enable automatic switch of mount type"
 msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1146
@@ -12352,8 +12352,8 @@ msgid "Enable display of the potential habitable exoplanets only"
 msgstr "Csak a lakható exobolygók mutatása"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:484
-msgid "Enable display designations of exoplanets"
-msgstr "Exobolygók jelöléseinek mutatása"
+msgid "Enable display of designations for exoplanets"
+msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:486
 msgid "Show exoplanets button on toolbar"
@@ -16272,3 +16272,6 @@ msgstr ""
 
 #~ msgid "Show Solar System objects"
 #~ msgstr "Naprendszerbeli objektumok mutatása"
+
+#~ msgid "Enable display designations of exoplanets"
+#~ msgstr "Exobolygók jelöléseinek mutatása"
