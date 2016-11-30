@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-27 16:10+0700\n"
-"PO-Revision-Date: 2016-11-29 03:21+0000\n"
+"POT-Creation-Date: 2016-11-29 20:31+0700\n"
+"PO-Revision-Date: 2016-11-29 15:35+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-29 04:34+0000\n"
+"X-Launchpad-Export-Date: 2016-11-30 04:36+0000\n"
 "X-Generator: Launchpad (build 18282)\n"
 "Language: bn\n"
 
@@ -364,7 +364,7 @@ msgstr "ঠিকানা : "
 msgid ", %1 m"
 msgstr ", %1 মিটার"
 
-#: src/core/modules/LandscapeMgr.cpp:721 src/ui_astroCalcDialog.h:496
+#: src/core/modules/LandscapeMgr.cpp:721 src/ui_astroCalcDialog.h:502
 msgid "Celestial body:"
 msgstr "স্থান :"
 
@@ -2952,23 +2952,23 @@ msgstr "দ্রাঘিমাংশ"
 msgid "Latitude"
 msgstr "অক্ষাংশ"
 
-#: src/gui/SearchDialog.cpp:609
+#: src/gui/SearchDialog.cpp:608
 msgid "Simbad Lookup Error"
 msgstr "সিমবাড তালিকায় অনুসন্ধানে ত্রুটি"
 
-#: src/gui/SearchDialog.cpp:617
+#: src/gui/SearchDialog.cpp:616
 msgid "Simbad Lookup"
 msgstr "সিমবাড তালিকায় অনুসন্ধান"
 
-#: src/gui/SearchDialog.cpp:830
+#: src/gui/SearchDialog.cpp:829
 msgid "University of Strasbourg (France)"
 msgstr "স্ট্রসবুর্গ বিশ্ববিদ্যালয় (ফ্রান্স)"
 
-#: src/gui/SearchDialog.cpp:831
+#: src/gui/SearchDialog.cpp:830
 msgid "Harvard University (USA)"
 msgstr "হার্ভাড বিশ্ববিদ্যালয় (আমেরিকা)"
 
-#: src/gui/SearchDialog.cpp:904
+#: src/gui/SearchDialog.cpp:903
 msgid "Paste and Search"
 msgstr "অনুকৃত নাম অনুসন্ধান করুন"
 
@@ -3125,13 +3125,13 @@ msgstr "উর্ট ক্লাউডে থাকা বস্তু"
 
 #: src/gui/AstroCalcDialog.cpp:535
 #, qt-format
-msgid "Bright stars (<%1 mag.)"
-msgstr "উজ্জ্বল তারা (< %1 mag)"
+msgid "Bright stars (<%1 mag)"
+msgstr "উজ্জ্বল তারা (<%1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:536
 #, qt-format
-msgid "Bright star clusters (<%1 mag.)"
-msgstr "উজ্জ্বল তারকাগুচ্ছ (< %1 mag)"
+msgid "Bright star clusters (<%1 mag)"
+msgstr "উজ্জ্বল তারকাগুচ্ছ (<%1 mag)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:537 src/translations.h:99
@@ -3141,8 +3141,8 @@ msgstr "গ্রহরূপী নীহারিকা"
 
 #: src/gui/AstroCalcDialog.cpp:538
 #, qt-format
-msgid "Bright nebulae (<%1 mag.)"
-msgstr "উজ্জ্বল নীহারিকা (< %1 mag)"
+msgid "Bright nebulae (<%1 mag)"
+msgstr "উজ্জ্বল নীহারিকা (<%1 mag)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:539 src/translations.h:101
@@ -3152,8 +3152,8 @@ msgstr "কৃষ্ণবর্ণ নীহারিকা"
 
 #: src/gui/AstroCalcDialog.cpp:540
 #, qt-format
-msgid "Bright galaxies (<%1 mag.)"
-msgstr "উজ্জ্বল নক্ষত্রলোক (< %1 mag)"
+msgid "Bright galaxies (<%1 mag)"
+msgstr "উজ্জ্বল নক্ষত্রলোক (<%1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:553
 msgid "Phenomenon"
@@ -6766,8 +6766,8 @@ msgid "Azimuth from South"
 msgstr "দক্ষিন দিক থেকে দিগংশ পরিমাপ"
 
 #: src/ui_configurationDialog.h:1388
-msgid "Toggle display the button of Digitized Sky Survey."
-msgstr "ডিজিটাল মহাকাশ নিরীক্ষায় প্রাপ্ত ছবি দেখা যাবে ।"
+msgid "Toggle display of the button for Digitized Sky Survey."
+msgstr ""
 
 #: src/ui_configurationDialog.h:1390
 msgid "Show DSS button"
@@ -7033,93 +7033,93 @@ msgstr "অন্তর্ভুক্ত স্থান :"
 msgid "..."
 msgstr "..."
 
-#: src/ui_astroCalcDialog.h:470
+#: src/ui_astroCalcDialog.h:476
 msgid "Astronomical calculations"
 msgstr "ঘটনাপঞ্জী"
 
-#: src/ui_astroCalcDialog.h:476
+#: src/ui_astroCalcDialog.h:482
 msgid "Positions"
 msgstr "অবস্থান"
 
-#: src/ui_astroCalcDialog.h:478
+#: src/ui_astroCalcDialog.h:484
 msgid "Planetary positions"
 msgstr "অবস্থান"
 
-#: src/ui_astroCalcDialog.h:481
+#: src/ui_astroCalcDialog.h:487
 msgid "Ephemeris"
 msgstr "পঞ্জিকা"
 
-#: src/ui_astroCalcDialog.h:483
+#: src/ui_astroCalcDialog.h:489
 msgid "Phenomena"
 msgstr "ঘটনা"
 
-#: src/ui_astroCalcDialog.h:487
+#: src/ui_astroCalcDialog.h:493
 msgid "Update of planetary positions"
 msgstr "টাটকা তথ্য দেখুন"
 
-#: src/ui_astroCalcDialog.h:489
+#: src/ui_astroCalcDialog.h:495
 msgid "Show dates of positions of current celestial body near markers"
 msgstr "পঞ্জিকা অনুসারে দেখানো অবস্থান গুলির সময় দেখানো হবে"
 
-#: src/ui_astroCalcDialog.h:491
+#: src/ui_astroCalcDialog.h:497
 msgid "Show dates of positions"
 msgstr "অবস্থান গুলির সময়"
 
-#: src/ui_astroCalcDialog.h:493
+#: src/ui_astroCalcDialog.h:499
 msgid "Show markers of positions of the current celestial body on the sky"
 msgstr "পঞ্জিকা অনুসারে আকাশে অবস্থান গুলি চিহ্নিত করে দেখানো হবে"
 
-#: src/ui_astroCalcDialog.h:495
+#: src/ui_astroCalcDialog.h:501
 msgid "Show markers of positions"
 msgstr "পঞ্জিকা অনুযায়ী অবস্থান"
 
-#: src/ui_astroCalcDialog.h:498
+#: src/ui_astroCalcDialog.h:504
 msgid "Cleanup ephemerides"
 msgstr "মুছে ফেলুন"
 
-#: src/ui_astroCalcDialog.h:499
+#: src/ui_astroCalcDialog.h:505
 msgid "Calculate ephemeris"
 msgstr "গণনা করুন"
 
-#: src/ui_astroCalcDialog.h:500
+#: src/ui_astroCalcDialog.h:506
 msgid "Save ephemeris"
 msgstr "সঞ্চয় করে রাখুন"
 
-#: src/ui_astroCalcDialog.h:501
+#: src/ui_astroCalcDialog.h:507
 msgid "Time step:"
 msgstr "অবকাশ :"
 
-#: src/ui_astroCalcDialog.h:502 src/ui_astroCalcDialog.h:509
+#: src/ui_astroCalcDialog.h:508 src/ui_astroCalcDialog.h:515
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
 msgstr "শেষ :"
 
-#: src/ui_astroCalcDialog.h:503 src/ui_astroCalcDialog.h:506
+#: src/ui_astroCalcDialog.h:509 src/ui_astroCalcDialog.h:512
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
 msgstr "শুরু :"
 
-#: src/ui_astroCalcDialog.h:504
+#: src/ui_astroCalcDialog.h:510
 msgid "Calculate phenomena"
 msgstr "গণনা করুন"
 
-#: src/ui_astroCalcDialog.h:505
+#: src/ui_astroCalcDialog.h:511
 msgid "Save phenomena"
 msgstr "সঞ্চয় করে রাখুন"
 
-#: src/ui_astroCalcDialog.h:507
+#: src/ui_astroCalcDialog.h:513
 msgid "Between objects:"
 msgstr "এদের মধ্যে :"
 
-#: src/ui_astroCalcDialog.h:508
+#: src/ui_astroCalcDialog.h:514
 msgid "and"
 msgstr "ও"
 
-#: src/ui_astroCalcDialog.h:510
+#: src/ui_astroCalcDialog.h:516
 msgid "Maximum allowed separation:"
 msgstr "সর্বাধিক ত্রুটি :"
 
-#: src/ui_astroCalcDialog.h:512
+#: src/ui_astroCalcDialog.h:518
 msgid "Value in decimal degrees"
 msgstr "দশমিক যুক্ত ডিগ্রি ব্যবহার"
 
@@ -8161,15 +8161,13 @@ msgstr "সেনসরে প্রাপ্ত ছবি বিষয়ক"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1143
 msgid ""
-"Enable automatic install the type of mount from the telescope settings for "
-"saving horizontal orientation of CCD frame."
+"Enable automatic switch of mount type from the telescope settings for "
+"horizontal orientation of CCD frame."
 msgstr ""
-"আলোক সংবেদকের ঘুর্ণন কতটা হবে তা নির্ধারণের জন্য দূরবীনের বিন্যাস অনুযায়ী "
-"স্বয়ংক্রিয় ভাবে আলম্ব বা বিচলন নির্ধারিত হবে ।"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1145
-msgid "Enable automatic install the type of mount"
-msgstr "বিচলন বা আলম্বের স্বয়ংক্রিয় নির্ধারণ"
+msgid "Enable automatic switch of mount type"
+msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1146
 msgid "Use degrees and minutes for FOV of CCD"
@@ -12553,8 +12551,8 @@ msgid "Enable display of the potential habitable exoplanets only"
 msgstr "শুধু আপাত বসবাসযোগ্য বহির গ্রহগুলি দেখানো হবে"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:484
-msgid "Enable display designations of exoplanets"
-msgstr "গ্রহজগতের নাম দেখানো হবে"
+msgid "Enable display of designations for exoplanets"
+msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:486
 msgid "Show exoplanets button on toolbar"
@@ -16519,8 +16517,24 @@ msgstr "পছন্দসই অক্ষাংশ ২"
 #~ msgid "yyyy.MM.dd"
 #~ msgstr "yyyy.MM.dd"
 
+#~ msgid "Enable automatic install the type of mount"
+#~ msgstr "বিচলন বা আলম্বের স্বয়ংক্রিয় নির্ধারণ"
+
+#~ msgid ""
+#~ "Enable automatic install the type of mount from the telescope settings for "
+#~ "saving horizontal orientation of CCD frame."
+#~ msgstr ""
+#~ "আলোক সংবেদকের ঘুর্ণন কতটা হবে তা নির্ধারণের জন্য দূরবীনের বিন্যাস অনুযায়ী "
+#~ "স্বয়ংক্রিয় ভাবে আলম্ব বা বিচলন নির্ধারিত হবে ।"
+
+#~ msgid "Enable display designations of exoplanets"
+#~ msgstr "গ্রহজগতের নাম দেখানো হবে"
+
 #~ msgid "Bright galaxies (<10 mag.)"
 #~ msgstr "উজ্জ্বল নক্ষত্রলোক (< ১০ উজ্জ্ব্যলতা)"
+
+#~ msgid "Toggle display the button of Digitized Sky Survey."
+#~ msgstr "ডিজিটাল মহাকাশ নিরীক্ষায় প্রাপ্ত ছবি দেখা যাবে ।"
 
 #~ msgid "Bright nebulae (<10 mag.)"
 #~ msgstr "উজ্জ্বল নীহারিকা (< ১০ উজ্জ্ব্যলতা)"

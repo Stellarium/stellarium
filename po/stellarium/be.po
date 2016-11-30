@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-27 16:10+0700\n"
+"POT-Creation-Date: 2016-11-29 20:31+0700\n"
 "PO-Revision-Date: 2016-11-09 17:24+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-28 04:36+0000\n"
+"X-Launchpad-Export-Date: 2016-11-30 04:36+0000\n"
 "X-Generator: Launchpad (build 18282)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -365,7 +365,7 @@ msgstr "Месца: "
 msgid ", %1 m"
 msgstr ", %1 м"
 
-#: src/core/modules/LandscapeMgr.cpp:721 src/ui_astroCalcDialog.h:496
+#: src/core/modules/LandscapeMgr.cpp:721 src/ui_astroCalcDialog.h:502
 msgid "Celestial body:"
 msgstr "Нябеснае цела:"
 
@@ -2951,23 +2951,23 @@ msgstr "Даўгата"
 msgid "Latitude"
 msgstr "Шырата"
 
-#: src/gui/SearchDialog.cpp:609
+#: src/gui/SearchDialog.cpp:608
 msgid "Simbad Lookup Error"
 msgstr "Памылка пошуку Simbad"
 
-#: src/gui/SearchDialog.cpp:617
+#: src/gui/SearchDialog.cpp:616
 msgid "Simbad Lookup"
 msgstr "Пошук Simbad"
 
-#: src/gui/SearchDialog.cpp:830
+#: src/gui/SearchDialog.cpp:829
 msgid "University of Strasbourg (France)"
 msgstr "Унівэрсытэт Страсбуру (Францыя)"
 
-#: src/gui/SearchDialog.cpp:831
+#: src/gui/SearchDialog.cpp:830
 msgid "Harvard University (USA)"
 msgstr "Гарвардзкі ўнівэрсытэт (ЗША)"
 
-#: src/gui/SearchDialog.cpp:904
+#: src/gui/SearchDialog.cpp:903
 msgid "Paste and Search"
 msgstr "Уставіць і шукаць"
 
@@ -3124,12 +3124,12 @@ msgstr "Аб'екты воблака Аорта"
 
 #: src/gui/AstroCalcDialog.cpp:535
 #, qt-format
-msgid "Bright stars (<%1 mag.)"
+msgid "Bright stars (<%1 mag)"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:536
 #, qt-format
-msgid "Bright star clusters (<%1 mag.)"
+msgid "Bright star clusters (<%1 mag)"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
@@ -3140,7 +3140,7 @@ msgstr "Плянэтарная туманнасьць"
 
 #: src/gui/AstroCalcDialog.cpp:538
 #, qt-format
-msgid "Bright nebulae (<%1 mag.)"
+msgid "Bright nebulae (<%1 mag)"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
@@ -3151,7 +3151,7 @@ msgstr "Цёмная туманнасьць"
 
 #: src/gui/AstroCalcDialog.cpp:540
 #, qt-format
-msgid "Bright galaxies (<%1 mag.)"
+msgid "Bright galaxies (<%1 mag)"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:553
@@ -6778,7 +6778,7 @@ msgid "Azimuth from South"
 msgstr "Азімут ад поўдня"
 
 #: src/ui_configurationDialog.h:1388
-msgid "Toggle display the button of Digitized Sky Survey."
+msgid "Toggle display of the button for Digitized Sky Survey."
 msgstr ""
 
 #: src/ui_configurationDialog.h:1390
@@ -7041,93 +7041,93 @@ msgstr "Уключыць каталёґ:"
 msgid "..."
 msgstr "…"
 
-#: src/ui_astroCalcDialog.h:470
+#: src/ui_astroCalcDialog.h:476
 msgid "Astronomical calculations"
 msgstr "Астранамічныя разьлікі"
 
-#: src/ui_astroCalcDialog.h:476
+#: src/ui_astroCalcDialog.h:482
 msgid "Positions"
 msgstr "Становішчы"
 
-#: src/ui_astroCalcDialog.h:478
+#: src/ui_astroCalcDialog.h:484
 msgid "Planetary positions"
 msgstr "Становішчы плянэтаў"
 
-#: src/ui_astroCalcDialog.h:481
+#: src/ui_astroCalcDialog.h:487
 msgid "Ephemeris"
 msgstr "Эфэмэрыды"
 
-#: src/ui_astroCalcDialog.h:483
+#: src/ui_astroCalcDialog.h:489
 msgid "Phenomena"
 msgstr "Зьява"
 
-#: src/ui_astroCalcDialog.h:487
+#: src/ui_astroCalcDialog.h:493
 msgid "Update of planetary positions"
 msgstr "Абнаўленьне становішчаў плянэт"
 
-#: src/ui_astroCalcDialog.h:489
+#: src/ui_astroCalcDialog.h:495
 msgid "Show dates of positions of current celestial body near markers"
 msgstr "Паказваць даты становішчаў бягучага нябеснага цела ля пазнак"
 
-#: src/ui_astroCalcDialog.h:491
+#: src/ui_astroCalcDialog.h:497
 msgid "Show dates of positions"
 msgstr "Паказваць даты становішчаў"
 
-#: src/ui_astroCalcDialog.h:493
+#: src/ui_astroCalcDialog.h:499
 msgid "Show markers of positions of the current celestial body on the sky"
 msgstr "Паказваць пазнакі становішча бягучага нябеснага цела"
 
-#: src/ui_astroCalcDialog.h:495
+#: src/ui_astroCalcDialog.h:501
 msgid "Show markers of positions"
 msgstr "Паказваць пазнакі становішчаў"
 
-#: src/ui_astroCalcDialog.h:498
+#: src/ui_astroCalcDialog.h:504
 msgid "Cleanup ephemerides"
 msgstr "Ачысьціць эфэмэрыды"
 
-#: src/ui_astroCalcDialog.h:499
+#: src/ui_astroCalcDialog.h:505
 msgid "Calculate ephemeris"
 msgstr "Разьлічыць эфэмэрыды"
 
-#: src/ui_astroCalcDialog.h:500
+#: src/ui_astroCalcDialog.h:506
 msgid "Save ephemeris"
 msgstr "Захаваць эфэмэрыду"
 
-#: src/ui_astroCalcDialog.h:501
+#: src/ui_astroCalcDialog.h:507
 msgid "Time step:"
 msgstr "Крок часу:"
 
-#: src/ui_astroCalcDialog.h:502 src/ui_astroCalcDialog.h:509
+#: src/ui_astroCalcDialog.h:508 src/ui_astroCalcDialog.h:515
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
 msgstr "Да:"
 
-#: src/ui_astroCalcDialog.h:503 src/ui_astroCalcDialog.h:506
+#: src/ui_astroCalcDialog.h:509 src/ui_astroCalcDialog.h:512
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
 msgstr "Ад:"
 
-#: src/ui_astroCalcDialog.h:504
+#: src/ui_astroCalcDialog.h:510
 msgid "Calculate phenomena"
 msgstr "Разьлічыць зьяву"
 
-#: src/ui_astroCalcDialog.h:505
+#: src/ui_astroCalcDialog.h:511
 msgid "Save phenomena"
 msgstr "Захаваць зьяву"
 
-#: src/ui_astroCalcDialog.h:507
+#: src/ui_astroCalcDialog.h:513
 msgid "Between objects:"
 msgstr "Між абʼектамі:"
 
-#: src/ui_astroCalcDialog.h:508
+#: src/ui_astroCalcDialog.h:514
 msgid "and"
 msgstr "і"
 
-#: src/ui_astroCalcDialog.h:510
+#: src/ui_astroCalcDialog.h:516
 msgid "Maximum allowed separation:"
 msgstr "Найбольшае дазволенае аддаленьне:"
 
-#: src/ui_astroCalcDialog.h:512
+#: src/ui_astroCalcDialog.h:518
 msgid "Value in decimal degrees"
 msgstr "Значэньне ў дзесятковых ґрадусах"
 
@@ -8181,15 +8181,13 @@ msgstr "Від у сэнсар"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1143
 msgid ""
-"Enable automatic install the type of mount from the telescope settings for "
-"saving horizontal orientation of CCD frame."
+"Enable automatic switch of mount type from the telescope settings for "
+"horizontal orientation of CCD frame."
 msgstr ""
-"Задзейнічаць аўтаматычнае ўсталяваньне тыпу мацаваньня з настаўленьняў "
-"тэлескопа каб захаваць гарызантальную арыентацыю рамкі ПЗС."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1145
-msgid "Enable automatic install the type of mount"
-msgstr "Аўтаматычна ўсталяваць тып мацаваньня"
+msgid "Enable automatic switch of mount type"
+msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1146
 msgid "Use degrees and minutes for FOV of CCD"
@@ -12597,8 +12595,8 @@ msgstr ""
 "Задзейнічак адлюстроўваньне толькі патэнцыйна прыдатных да пражывання плянэт"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:484
-msgid "Enable display designations of exoplanets"
-msgstr "Задзейнічаць паказ абазначэньняў экзаплянэт"
+msgid "Enable display of designations for exoplanets"
+msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:486
 msgid "Show exoplanets button on toolbar"
@@ -16833,3 +16831,16 @@ msgstr "Сваё схіленьне 2"
 
 #~ msgid "JD"
 #~ msgstr "JD"
+
+#~ msgid "Enable display designations of exoplanets"
+#~ msgstr "Задзейнічаць паказ абазначэньняў экзаплянэт"
+
+#~ msgid ""
+#~ "Enable automatic install the type of mount from the telescope settings for "
+#~ "saving horizontal orientation of CCD frame."
+#~ msgstr ""
+#~ "Задзейнічаць аўтаматычнае ўсталяваньне тыпу мацаваньня з настаўленьняў "
+#~ "тэлескопа каб захаваць гарызантальную арыентацыю рамкі ПЗС."
+
+#~ msgid "Enable automatic install the type of mount"
+#~ msgstr "Аўтаматычна ўсталяваць тып мацаваньня"
