@@ -34,6 +34,7 @@
 
 #include "AstroCalcDialog.hpp"
 #include "ui_astroCalcDialog.h"
+#include "qcustomplot/qcustomplot.h"
 
 #include <QFileDialog>
 #include <QDir>
@@ -77,6 +78,7 @@ void AstroCalcDialog::retranslate()
 		populateEphemerisTimeStepsList();
 		populateMajorPlanetList();
 		populateGroupCelestialBodyList();
+		populateCelestialObjectsList();
 		currentPlanetaryPositions();
 	}
 }
@@ -114,6 +116,9 @@ void AstroCalcDialog::createDialogContent()
 	populateEphemerisTimeStepsList();
 	populateMajorPlanetList();
 	populateGroupCelestialBodyList();
+	// Let's prepare Alt. vs Time diagram
+	populateCelestialObjectsList();
+	drawAltVsTimeDiagram();
 
 	double JD = core->getJD() + core->getUTCOffset(core->getJD())/24;
 	QDateTime currentDT = StelUtils::jdToQDateTime(JD);
@@ -138,6 +143,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->phenomenaPushButton, SIGNAL(clicked()), this, SLOT(calculatePhenomena()));
 	connect(ui->phenomenaTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentPhenomen(QModelIndex)));
 	connect(ui->phenomenaSaveButton, SIGNAL(clicked()), this, SLOT(savePhenomena()));
+
+	connect(ui->avtPlotButton, SIGNAL(clicked()), this, SLOT(drawAltVsTimeDiagram()));
 
 	connectBoolProperty(ui->ephemerisShowMarkersCheckBox, "SolarSystem.ephemerisMarkersDisplayed");
 	connectBoolProperty(ui->ephemerisShowDatesCheckBox, "SolarSystem.ephemerisDatesDisplayed");
@@ -545,6 +552,128 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	groups->setCurrentIndex(index);
 	groups->model()->sort(0);
 	groups->blockSignals(false);
+}
+
+void AstroCalcDialog::populateCelestialObjectsList()
+{
+	Q_ASSERT(ui->celestialObjectsList);
+
+	QComboBox* celObj = ui->celestialObjectsList;
+
+	QList<PlanetP> allSSO = solarSystem->getAllPlanets();
+	QVector<NebulaP> allDSO = dsoMgr->getAllDeepSkyObjects();
+	QList<StelObjectP> allHIP = starMgr->getHipparcosStars();
+
+	//Save the current selection to be restored later
+	celObj->blockSignals(true);
+	int index = celObj->currentIndex();
+	QVariant selectedObjectId = celObj->itemData(index);
+	celObj->clear();
+	//For each planet, display the localized name and store the original as user
+	//data. Unfortunately, there's no other way to do this than with a cycle.
+	foreach(const PlanetP& planet, allSSO)
+	{
+		// celestial bodies Solar system, except moons
+		if ((planet->getPlanetType()==Planet::isPlanet || planet->getPlanetType()==Planet::isAsteroid || planet->getPlanetType()==Planet::isComet || planet->getPlanetType()==Planet::isCubewano || planet->getPlanetType()==Planet::isDwarfPlanet || planet->getPlanetType()==Planet::isOCO || planet->getPlanetType()==Planet::isPlutino || planet->getPlanetType()==Planet::isSDO || planet->getPlanetType()==Planet::isStar) && planet->getEnglishName()!=core->getCurrentPlanet()->getEnglishName())
+			celObj->addItem(planet->getNameI18n(), planet->getEnglishName());
+
+		// moons of the current planet
+		if (planet->getPlanetType()==Planet::isMoon && planet->getEnglishName()!=core->getCurrentPlanet()->getEnglishName() && planet->getParent()==core->getCurrentPlanet())
+			celObj->addItem(planet->getNameI18n(), planet->getEnglishName());
+	}
+
+	foreach (const NebulaP& dso, allDSO)
+	{
+		if (!dso->getEnglishName().isEmpty())
+		{
+			QString designation = dso->getDSODesignation();
+			if (designation.isEmpty())
+				celObj->addItem(dso->getNameI18n(), dso->getEnglishName());
+			else
+				celObj->addItem(QString("%1 (%2)").arg(dso->getNameI18n(), designation), designation);
+		}
+	}
+
+	foreach (const StelObjectP& hip, allHIP)
+	{
+		if (!hip->getNameI18n().contains("HIP", Qt::CaseSensitive) && hip->getVMagnitude(core)<=6.f)
+			celObj->addItem(hip->getNameI18n(), hip->getEnglishName());
+	}
+
+	//Restore the selection
+	index = celObj->findData(selectedObjectId, Qt::UserRole, Qt::MatchCaseSensitive);
+	if (index<0)
+		index = celObj->findData(QVariant("Sun"), Qt::UserRole, Qt::MatchCaseSensitive);
+	celObj->setCurrentIndex(index);
+	celObj->model()->sort(0);
+	celObj->blockSignals(false);
+}
+
+void AstroCalcDialog::drawAltVsTimeDiagram()
+{
+	QString xAxisStr = QString("%1, %2").arg(q_("Time"), q_("JD"));
+	QString yAxisStr = QString("%1, %2").arg(q_("Altitude"), QChar(0x00B0));
+
+	// X axis - time; Y axis - altitude
+	QList<double> aX, aY;
+
+	StelObjectP selectedObject = objectMgr->searchByName(ui->celestialObjectsList->currentData(Qt::UserRole).toString());
+	double currentJD = core->getJD();
+	double midnight = std::ceil(currentJD);
+	double az, alt, deg;
+	bool sign;
+
+	for(int i=0;i<180;i++) // Every 10 minutes (~30 hours)
+	{
+		double JD = midnight + (i*10 - 1080)*StelCore::JD_MINUTE;
+		core->setJD(JD);
+		StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosApparent(core));
+		aX.append(JD);
+		StelUtils::radToDecDeg(alt, sign, deg);
+		if (!sign)
+			deg *= -1;
+		aY.append(deg);
+		core->update(0);
+	}
+	core->setJD(currentJD);
+
+	QVector<double> x = aX.toVector(), y = aY.toVector();
+
+	double minX, minY, maxX, maxY;
+	minX = maxX = aX.first();
+	minY = maxY = aY.first();
+
+	foreach (double temp, aX)
+	{
+		if(maxX < temp) maxX = temp;
+		if(minX > temp) minX = temp;
+	}
+	foreach (double temp, aY)
+	{
+		if(maxY < temp) maxY = temp;
+		if(minY > temp) minY = temp;
+	}
+
+	if (!ui->altVsTimePlot->isEnabled())
+		ui->altVsTimePlot->setEnabled(true);
+	ui->altVsTimePlot->clearGraphs();
+	ui->altVsTimePlot->addGraph();
+	ui->altVsTimePlot->graph(0)->setData(x, y);
+	ui->altVsTimePlot->graph(0)->setPen(QPen(Qt::red));
+	ui->altVsTimePlot->graph(0)->setLineStyle(QCPGraph::lsLine);
+	ui->altVsTimePlot->graph(0)->rescaleAxes(true);
+	ui->altVsTimePlot->xAxis->setLabel(xAxisStr);
+	ui->altVsTimePlot->yAxis->setLabel(yAxisStr);
+
+	ui->altVsTimePlot->xAxis->setRange(minX+0.1, maxX);
+	ui->altVsTimePlot->xAxis->setScaleType(QCPAxis::stLinear);
+	ui->altVsTimePlot->xAxis->setNumberFormat("f");
+	ui->altVsTimePlot->xAxis->setNumberPrecision(1);
+
+	ui->altVsTimePlot->yAxis->setRange(minY-5, maxY+5);
+	ui->altVsTimePlot->yAxis->setScaleType(QCPAxis::stLinear);
+
+	ui->altVsTimePlot->replot();
 }
 
 void AstroCalcDialog::setPhenomenaHeaderNames()
