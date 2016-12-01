@@ -111,6 +111,8 @@ private slots:
 	void selectCurrentPhenomen(const QModelIndex &modelIndex);
 	void savePhenomena();
 
+	void drawAltVsTimeDiagram();
+
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 
 private:
@@ -145,6 +147,8 @@ private:
 	void populateMajorPlanetList();
 	//! Populates the drop-down list of groups of celestial bodies.
 	void populateGroupCelestialBodyList();
+	//! Populates the drop-down list of celestial bodies.
+	void populateCelestialObjectsList();
 
 	//! Calculation conjunctions and oppositions.
 	//! @note Ported from KStars, should be improved, because this feature calculate
