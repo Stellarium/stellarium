@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-24 21:47+0700\n"
+"POT-Creation-Date: 2016-12-02 00:53+0700\n"
 "PO-Revision-Date: 2016-07-27 15:24+0000\n"
 "Last-Translator: Lê Văn Bách <levanbach1994ag@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-25 05:46+0000\n"
+"X-Launchpad-Export-Date: 2016-12-02 04:57+0000\n"
 "X-Generator: Launchpad (build 18282)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -22,7 +22,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:229 src/core/modules/MinorPlanet.cpp:213
 #: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:192
 #: src/core/modules/StarWrapper.cpp:195
-#: plugins/Satellites/src/Satellite.cpp:276
+#: plugins/Satellites/src/Satellite.cpp:277
 #: plugins/Supernovae/src/Supernova.cpp:130 plugins/Quasars/src/Quasar.cpp:101
 #: plugins/Pulsars/src/Pulsar.cpp:158 plugins/Exoplanets/src/Exoplanet.cpp:270
 #, qt-format
@@ -363,7 +363,7 @@ msgstr "Vị trí: "
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:721 src/ui_astroCalcDialog.h:485
+#: src/core/modules/LandscapeMgr.cpp:721 src/ui_astroCalcDialog.h:538
 msgid "Celestial body:"
 msgstr "Thiên thể"
 
@@ -1024,7 +1024,7 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "Chiều dài đuôi khí (ước lượng): %1 triệu km"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:204 src/gui/AstroCalcDialog.cpp:524
+#: src/core/modules/SolarSystem.cpp:204 src/gui/AstroCalcDialog.cpp:534
 #: src/translations.h:66
 msgid "Planets"
 msgstr "Hành tinh"
@@ -1135,7 +1135,7 @@ msgid "Position angle"
 msgstr "Góc vị trí"
 
 #: src/core/modules/StarWrapper.cpp:285 src/core/modules/StarWrapper.cpp:287
-#: src/gui/AstroCalcDialog.cpp:553
+#: src/gui/AstroCalcDialog.cpp:686
 msgid "Separation"
 msgstr "cách xa"
 
@@ -1156,7 +1156,7 @@ msgid "Night mode"
 msgstr "Chế độ đêm"
 
 #: src/core/StelCore.cpp:227 src/gui/StelGui.cpp:202
-#: src/gui/AstroCalcDialog.cpp:276 src/gui/AstroCalcDialog.cpp:550
+#: src/gui/AstroCalcDialog.cpp:285 src/gui/AstroCalcDialog.cpp:683
 #: src/gui/BookmarksDialog.cpp:102 src/ui_dateTimeDialogGui.h:376
 #: src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:173
@@ -2004,31 +2004,31 @@ msgctxt "solar time"
 msgid "LTST"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:539
+#: src/gui/ConfigurationDialog.cpp:537
 msgid "Select screenshot directory"
 msgstr "Chọn thư mục chứa hình"
 
-#: src/gui/ConfigurationDialog.cpp:853
+#: src/gui/ConfigurationDialog.cpp:851
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Trường nhìn khởi phát: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:861
+#: src/gui/ConfigurationDialog.cpp:859
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Hướng nhìn ban đầu Góc phương vị/Cao độ: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:923
+#: src/gui/ConfigurationDialog.cpp:921
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:253
 msgid "Authors"
 msgstr "Các tác giả"
 
-#: src/gui/ConfigurationDialog.cpp:924 src/gui/ViewDialog.cpp:1249
+#: src/gui/ConfigurationDialog.cpp:922 src/gui/ViewDialog.cpp:1249
 msgid "Contact"
 msgstr "Liên hệ"
 
-#: src/gui/ConfigurationDialog.cpp:926
+#: src/gui/ConfigurationDialog.cpp:924
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:517
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:408
@@ -2047,30 +2047,30 @@ msgstr "Liên hệ"
 msgid "Version"
 msgstr "Phiên bản"
 
-#: src/gui/ConfigurationDialog.cpp:1023
+#: src/gui/ConfigurationDialog.cpp:1021
 msgid "Running script: "
 msgstr "Script thực thi: "
 
-#: src/gui/ConfigurationDialog.cpp:1030
+#: src/gui/ConfigurationDialog.cpp:1028
 msgid "Running script: [none]"
 msgstr "Script thực thi: [không]"
 
-#: src/gui/ConfigurationDialog.cpp:1095
+#: src/gui/ConfigurationDialog.cpp:1093
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
 msgstr "Hoàn tất việc tải các catalô sao mới"
 
-#: src/gui/ConfigurationDialog.cpp:1099
+#: src/gui/ConfigurationDialog.cpp:1097
 msgid "All available star catalogs have been installed."
 msgstr "Tất cả danh mục sao sẵn có đã được cài đặt."
 
-#: src/gui/ConfigurationDialog.cpp:1104
+#: src/gui/ConfigurationDialog.cpp:1102
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Lấy catalog thứ %1 trong %2"
 
-#: src/gui/ConfigurationDialog.cpp:1111
+#: src/gui/ConfigurationDialog.cpp:1109
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -2079,7 +2079,7 @@ msgstr ""
 "Đang tải %1...\n"
 "(Bạn có thể đóng cữa sổ cấu hình)"
 
-#: src/gui/ConfigurationDialog.cpp:1118
+#: src/gui/ConfigurationDialog.cpp:1116
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -2090,7 +2090,7 @@ msgstr ""
 "Số lượng sao: %2 Million\n"
 "Khoảng độ sáng: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1161 src/gui/ConfigurationDialog.cpp:1197
+#: src/gui/ConfigurationDialog.cpp:1159 src/gui/ConfigurationDialog.cpp:1195
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2099,11 +2099,11 @@ msgstr ""
 "Lỗi khi đang tải xuống %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1250
+#: src/gui/ConfigurationDialog.cpp:1248
 msgid "Verifying file integrity..."
 msgstr "Kiểm tra sự toàn vẹn của tập tin..."
 
-#: src/gui/ConfigurationDialog.cpp:1254
+#: src/gui/ConfigurationDialog.cpp:1252
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2112,166 +2112,166 @@ msgstr ""
 "Lỗi khi đang tải xuống %1:\n"
 "Tập tin bị lỗi."
 
-#: src/gui/ConfigurationDialog.cpp:1300 src/gui/ConfigurationDialog.cpp:1309
+#: src/gui/ConfigurationDialog.cpp:1298 src/gui/ConfigurationDialog.cpp:1307
 msgid "Available"
 msgstr "Sẵn có"
 
-#: src/gui/ConfigurationDialog.cpp:1302 src/gui/ConfigurationDialog.cpp:1311
+#: src/gui/ConfigurationDialog.cpp:1300 src/gui/ConfigurationDialog.cpp:1309
 msgid "Not Available"
 msgstr "Không sẵn có"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1376
+#: src/gui/ConfigurationDialog.cpp:1374
 msgid "Algorithm of"
 msgstr "Thuật toán của"
 
-#: src/gui/ConfigurationDialog.cpp:1389
+#: src/gui/ConfigurationDialog.cpp:1387
 msgid "Without correction"
 msgstr "Không có sự chính xác"
 
-#: src/gui/ConfigurationDialog.cpp:1390
+#: src/gui/ConfigurationDialog.cpp:1388
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1391
+#: src/gui/ConfigurationDialog.cpp:1389
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1392
+#: src/gui/ConfigurationDialog.cpp:1390
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1393
+#: src/gui/ConfigurationDialog.cpp:1391
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Lịch vũ trụ (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1394
+#: src/gui/ConfigurationDialog.cpp:1392
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1395
+#: src/gui/ConfigurationDialog.cpp:1393
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller & Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1396
+#: src/gui/ConfigurationDialog.cpp:1394
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1397
+#: src/gui/ConfigurationDialog.cpp:1395
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel & Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1398
+#: src/gui/ConfigurationDialog.cpp:1396
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison & Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1399
+#: src/gui/ConfigurationDialog.cpp:1397
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson & Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1400
+#: src/gui/ConfigurationDialog.cpp:1398
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson & Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1401
+#: src/gui/ConfigurationDialog.cpp:1399
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1402
+#: src/gui/ConfigurationDialog.cpp:1400
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1403
+#: src/gui/ConfigurationDialog.cpp:1401
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel & Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1404
+#: src/gui/ConfigurationDialog.cpp:1402
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze & Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1405
+#: src/gui/ConfigurationDialog.cpp:1403
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson & Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1406
+#: src/gui/ConfigurationDialog.cpp:1404
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1408
+#: src/gui/ConfigurationDialog.cpp:1406
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (với Chapront, Chapront-Touze & Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1409
+#: src/gui/ConfigurationDialog.cpp:1407
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1410
+#: src/gui/ConfigurationDialog.cpp:1408
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus & Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1411
+#: src/gui/ConfigurationDialog.cpp:1409
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1412
+#: src/gui/ConfigurationDialog.cpp:1410
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold & Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1413
+#: src/gui/ConfigurationDialog.cpp:1411
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison & Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1415
+#: src/gui/ConfigurationDialog.cpp:1413
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak & Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1418
+#: src/gui/ConfigurationDialog.cpp:1416
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr "Espenak & Meeus (2006) không bổ sung gia tốc mặt trăng"
 
-#: src/gui/ConfigurationDialog.cpp:1420
+#: src/gui/ConfigurationDialog.cpp:1418
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1421
+#: src/gui/ConfigurationDialog.cpp:1419
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1422
+#: src/gui/ConfigurationDialog.cpp:1420
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1423
+#: src/gui/ConfigurationDialog.cpp:1421
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana & Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1424
+#: src/gui/ConfigurationDialog.cpp:1422
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Phương trình tùy chỉnh của %1T."
 
-#: src/gui/ConfigurationDialog.cpp:1473 src/gui/ConfigurationDialog.cpp:1508
+#: src/gui/ConfigurationDialog.cpp:1471 src/gui/ConfigurationDialog.cpp:1506
 #: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:409
 msgid "System default"
 msgstr "Mặc định hệ thống"
 
-#: src/gui/ConfigurationDialog.cpp:1474
+#: src/gui/ConfigurationDialog.cpp:1472
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "năm-tháng-ngày (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1475
+#: src/gui/ConfigurationDialog.cpp:1473
 msgid "dd-mm-yyyy"
 msgstr "ngày-tháng-năm"
 
-#: src/gui/ConfigurationDialog.cpp:1476
+#: src/gui/ConfigurationDialog.cpp:1474
 msgid "mm-dd-yyyy"
 msgstr "tháng-ngày-năm"
 
-#: src/gui/ConfigurationDialog.cpp:1509
+#: src/gui/ConfigurationDialog.cpp:1507
 msgid "12-hour format"
 msgstr "Định dạng 12-giờ"
 
-#: src/gui/ConfigurationDialog.cpp:1510
+#: src/gui/ConfigurationDialog.cpp:1508
 msgid "24-hour format"
 msgstr "Định dạng 24-giờ"
 
@@ -2918,7 +2918,7 @@ msgstr "Xích vĩ"
 msgid "Azimuth"
 msgstr "Góc phương vị"
 
-#: src/gui/SearchDialog.cpp:260
+#: src/gui/SearchDialog.cpp:260 src/gui/AstroCalcDialog.cpp:615
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
 msgid "Altitude"
 msgstr "Độ cao"
@@ -2935,23 +2935,23 @@ msgstr "Kinh độ"
 msgid "Latitude"
 msgstr "Vĩ độ"
 
-#: src/gui/SearchDialog.cpp:609
+#: src/gui/SearchDialog.cpp:608
 msgid "Simbad Lookup Error"
 msgstr "Lỗi tra cứu SIMBAD"
 
-#: src/gui/SearchDialog.cpp:617
+#: src/gui/SearchDialog.cpp:616
 msgid "Simbad Lookup"
 msgstr "Tra cứu SIMBAD"
 
-#: src/gui/SearchDialog.cpp:830
+#: src/gui/SearchDialog.cpp:829
 msgid "University of Strasbourg (France)"
 msgstr "Đại học Strasbourg (Pháp)"
 
-#: src/gui/SearchDialog.cpp:831
+#: src/gui/SearchDialog.cpp:830
 msgid "Harvard University (USA)"
 msgstr "Đại học Harvard (Hoa Kỳ)"
 
-#: src/gui/SearchDialog.cpp:904
+#: src/gui/SearchDialog.cpp:903
 msgid "Paste and Search"
 msgstr "Dán và tìm kiếm"
 
@@ -2986,7 +2986,7 @@ msgid "year"
 msgstr "Năm"
 
 #. TRANSLATORS: name of object
-#: src/gui/AstroCalcDialog.cpp:160 src/ui_configurationDialog.h:1280
+#: src/gui/AstroCalcDialog.cpp:169 src/ui_configurationDialog.h:1280
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:450
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:96
 #: plugins/Exoplanets/src/Exoplanet.cpp:324
@@ -2995,176 +2995,193 @@ msgid "Name"
 msgstr "Tên"
 
 #. TRANSLATORS: right ascension
-#: src/gui/AstroCalcDialog.cpp:162 src/gui/AstroCalcDialog.cpp:279
+#: src/gui/AstroCalcDialog.cpp:171 src/gui/AstroCalcDialog.cpp:288
 msgid "RA (J2000)"
 msgstr "Xích kinh (J2000)"
 
 #. TRANSLATORS: declination
-#: src/gui/AstroCalcDialog.cpp:164 src/gui/AstroCalcDialog.cpp:281
+#: src/gui/AstroCalcDialog.cpp:173 src/gui/AstroCalcDialog.cpp:290
 msgid "Dec (J2000)"
 msgstr "Xích vĩ (J2000)"
 
 #. TRANSLATORS: magnitude
-#: src/gui/AstroCalcDialog.cpp:166 src/gui/AstroCalcDialog.cpp:283
+#: src/gui/AstroCalcDialog.cpp:175 src/gui/AstroCalcDialog.cpp:292
 msgid "Mag."
 msgstr "Độ lớn"
 
 #. TRANSLATORS: type of object
-#: src/gui/AstroCalcDialog.cpp:168 src/ui_configurationDialog.h:1259
+#: src/gui/AstroCalcDialog.cpp:177 src/ui_configurationDialog.h:1259
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
 msgid "Type"
 msgstr "Loại"
 
-#: src/gui/AstroCalcDialog.cpp:187
+#: src/gui/AstroCalcDialog.cpp:196
 #, qt-format
 msgid "Positions on %1"
 msgstr "Vị trí ở %1"
 
-#: src/gui/AstroCalcDialog.cpp:277 src/ui_dateTimeDialogGui.h:382
+#: src/gui/AstroCalcDialog.cpp:286 src/ui_dateTimeDialogGui.h:382
 #: src/ui_dateTimeDialogGui.h:387
 msgid "Julian Day"
 msgstr "Ngày Julian"
 
-#: src/gui/AstroCalcDialog.cpp:384 src/gui/AstroCalcDialog.cpp:758
+#: src/gui/AstroCalcDialog.cpp:393 src/gui/AstroCalcDialog.cpp:911
 msgid "CSV (Comma delimited)"
 msgstr "CSV (Dấu phẩy được giới hạn)"
 
-#: src/gui/AstroCalcDialog.cpp:386
+#: src/gui/AstroCalcDialog.cpp:395
 msgid "Save calculated ephemerides as..."
 msgstr "Lưu lịch thiên văn được tính toán như..."
 
-#: src/gui/AstroCalcDialog.cpp:462
+#: src/gui/AstroCalcDialog.cpp:471
 msgid "10 minutes"
 msgstr "10 phút"
 
-#: src/gui/AstroCalcDialog.cpp:463
+#: src/gui/AstroCalcDialog.cpp:472
 msgid "1 hour"
 msgstr "1 giờ"
 
-#: src/gui/AstroCalcDialog.cpp:464
+#: src/gui/AstroCalcDialog.cpp:473
 msgid "1 day"
 msgstr "1 ngày"
 
-#: src/gui/AstroCalcDialog.cpp:465
+#: src/gui/AstroCalcDialog.cpp:474
 msgid "5 days"
 msgstr "5 ngày"
 
-#: src/gui/AstroCalcDialog.cpp:466
+#: src/gui/AstroCalcDialog.cpp:475
 msgid "10 days"
 msgstr "10 ngày"
 
-#: src/gui/AstroCalcDialog.cpp:467
+#: src/gui/AstroCalcDialog.cpp:476
 msgid "15 days"
 msgstr "15 ngày"
 
-#: src/gui/AstroCalcDialog.cpp:468
+#: src/gui/AstroCalcDialog.cpp:477
 msgid "30 days"
 msgstr "30 ngày"
 
-#: src/gui/AstroCalcDialog.cpp:469
+#: src/gui/AstroCalcDialog.cpp:478
 msgid "60 days"
 msgstr "60 ngày"
 
-#: src/gui/AstroCalcDialog.cpp:523
+#: src/gui/AstroCalcDialog.cpp:533
 msgid "Solar system"
 msgstr "Hệ Mặt Trời"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:525 src/translations.h:70
+#: src/gui/AstroCalcDialog.cpp:535 src/translations.h:70
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
 msgstr "Tiểu hành tinh"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:526 src/translations.h:74
+#: src/gui/AstroCalcDialog.cpp:536 src/translations.h:74
 msgid "Plutinos"
 msgstr "Thiên thể vành đai Kuiper cộng hưởng"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:527 src/translations.h:68
+#: src/gui/AstroCalcDialog.cpp:537 src/translations.h:68
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
 msgstr "Sao chổi"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:528 src/translations.h:76
+#: src/gui/AstroCalcDialog.cpp:538 src/translations.h:76
 msgid "Dwarf planets"
 msgstr "Hành tinh lùn"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:529 src/translations.h:78
+#: src/gui/AstroCalcDialog.cpp:539 src/translations.h:78
 msgid "Cubewanos"
 msgstr "Thiên thể vành đai Kuiper cổ điển"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:530 src/translations.h:80
+#: src/gui/AstroCalcDialog.cpp:540 src/translations.h:80
 msgid "Scattered disc objects"
 msgstr "Vật thể đĩa phân tán"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:531 src/translations.h:82
+#: src/gui/AstroCalcDialog.cpp:541 src/translations.h:82
 msgid "Oort cloud objects"
 msgstr "Vật thể đám mây Oort"
 
-#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:532 src/translations.h:117
-#: src/ui_viewDialog.h:2023 src/ui_dsoColorsDialog.h:534
-msgid "Star clusters"
-msgstr "Cụm sao"
+#: src/gui/AstroCalcDialog.cpp:542
+#, qt-format
+msgid "Bright stars (<%1 mag)"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:543
+#, qt-format
+msgid "Bright star clusters (<%1 mag)"
+msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:533 src/translations.h:99
+#: src/gui/AstroCalcDialog.cpp:544 src/translations.h:99
 #: src/ui_viewDialog.h:2024 src/ui_dsoColorsDialog.h:580
 msgid "Planetary nebulae"
 msgstr "Tinh vân hành tinh"
 
-#: src/gui/AstroCalcDialog.cpp:534
-msgid "Bright nebulae (<10 mag.)"
+#: src/gui/AstroCalcDialog.cpp:545
+#, qt-format
+msgid "Bright nebulae (<%1 mag)"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:535 src/translations.h:101
+#: src/gui/AstroCalcDialog.cpp:546 src/translations.h:101
 #: src/ui_viewDialog.h:2027 src/ui_dsoColorsDialog.h:540
 msgid "Dark nebulae"
 msgstr "Tinh vân tối"
 
-#: src/gui/AstroCalcDialog.cpp:536
-msgid "Bright galaxies (<10 mag.)"
+#: src/gui/AstroCalcDialog.cpp:547
+#, qt-format
+msgid "Bright galaxies (<%1 mag)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:549
+#: src/gui/AstroCalcDialog.cpp:614
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:942
+msgid "Time"
+msgstr "Thời gian"
+
+#: src/gui/AstroCalcDialog.cpp:614
+msgid "JD"
+msgstr "Julian date"
+
+#: src/gui/AstroCalcDialog.cpp:682
 msgid "Phenomenon"
 msgstr "Hiện tượng"
 
-#: src/gui/AstroCalcDialog.cpp:551
+#: src/gui/AstroCalcDialog.cpp:684
 msgid "Object 1"
 msgstr "Đối tượng 1"
 
-#: src/gui/AstroCalcDialog.cpp:552
+#: src/gui/AstroCalcDialog.cpp:685
 msgid "Object 2"
 msgstr "Đối tượng 2"
 
-#: src/gui/AstroCalcDialog.cpp:760
+#: src/gui/AstroCalcDialog.cpp:913
 msgid "Save calculated phenomena as..."
 msgstr "Lưu hiện tượng được tính toán như..."
 
-#: src/gui/AstroCalcDialog.cpp:799 src/gui/AstroCalcDialog.cpp:974
+#: src/gui/AstroCalcDialog.cpp:952 src/gui/AstroCalcDialog.cpp:1127
+#: src/gui/AstroCalcDialog.cpp:1285
 msgid "Conjunction"
 msgstr "Giao hội"
 
-#: src/gui/AstroCalcDialog.cpp:806
+#: src/gui/AstroCalcDialog.cpp:959
 msgid "Opposition"
 msgstr "Đối lập"
 
-#: src/gui/AstroCalcDialog.cpp:814
+#: src/gui/AstroCalcDialog.cpp:967
 msgid "Transit"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:816 src/gui/AstroCalcDialog.cpp:979
+#: src/gui/AstroCalcDialog.cpp:969 src/gui/AstroCalcDialog.cpp:1132
+#: src/gui/AstroCalcDialog.cpp:1290
 msgid "Occultation"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:820
+#: src/gui/AstroCalcDialog.cpp:973
 msgid "Eclipse"
 msgstr ""
 
@@ -3393,6 +3410,11 @@ msgstr "Thiên hà tương tác"
 #: src/translations.h:115
 msgid "Bright quasars"
 msgstr "Chuẩn tinh sáng"
+
+#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
+#: src/translations.h:117 src/ui_viewDialog.h:2023 src/ui_dsoColorsDialog.h:534
+msgid "Star clusters"
+msgstr "Cụm sao"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:119 src/ui_dsoColorsDialog.h:485
@@ -6758,7 +6780,7 @@ msgid "Azimuth from South"
 msgstr "Góc phương vị từ phía nam"
 
 #: src/ui_configurationDialog.h:1388
-msgid "Toggle display the button of Digitized Sky Survey."
+msgid "Toggle display of the button for Digitized Sky Survey."
 msgstr ""
 
 #: src/ui_configurationDialog.h:1390
@@ -7022,95 +7044,108 @@ msgstr "Bao gồm các thư mục:"
 msgid "..."
 msgstr "…"
 
-#: src/ui_astroCalcDialog.h:459
-msgid "Astronomical calculations"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:465
+#: src/ui_astroCalcDialog.h:513
 msgid "Positions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:467
+#: src/ui_astroCalcDialog.h:515
 msgid "Planetary positions"
 msgstr "Vị trí hành tinh"
 
-#: src/ui_astroCalcDialog.h:470
+#: src/ui_astroCalcDialog.h:518
 msgid "Ephemeris"
 msgstr "lịch thiên văn"
 
-#: src/ui_astroCalcDialog.h:472
+#: src/ui_astroCalcDialog.h:520
 msgid "Phenomena"
 msgstr "Hiện tượng"
 
-#: src/ui_astroCalcDialog.h:476
+#: src/ui_astroCalcDialog.h:522
+msgid "Alt. vs Time"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:524
+msgid "Altitude vs Time"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:529
 msgid "Update of planetary positions"
 msgstr "Cập nhật vị trí hành tinh"
 
-#: src/ui_astroCalcDialog.h:478
+#: src/ui_astroCalcDialog.h:531
 msgid "Show dates of positions of current celestial body near markers"
 msgstr "Hiển thị ngày của vị trí của thiên thể hiện tại gần các đánh dấu"
 
-#: src/ui_astroCalcDialog.h:480
+#: src/ui_astroCalcDialog.h:533
 msgid "Show dates of positions"
 msgstr "Hiển thị ngày của vị trí"
 
-#: src/ui_astroCalcDialog.h:482
+#: src/ui_astroCalcDialog.h:535
 msgid "Show markers of positions of the current celestial body on the sky"
 msgstr "Hiển thị đánh dấu vị trí của các thiên thể hiện tại trên bầu trời"
 
-#: src/ui_astroCalcDialog.h:484
+#: src/ui_astroCalcDialog.h:537
 msgid "Show markers of positions"
 msgstr "Hiển thị đánh dấu vị trí"
 
-#: src/ui_astroCalcDialog.h:487
+#: src/ui_astroCalcDialog.h:540
 msgid "Cleanup ephemerides"
 msgstr "Lịch thiên văn thu gọn"
 
-#: src/ui_astroCalcDialog.h:488
+#: src/ui_astroCalcDialog.h:541
 msgid "Calculate ephemeris"
 msgstr "tính toán lịch thiên văn"
 
-#: src/ui_astroCalcDialog.h:489
+#: src/ui_astroCalcDialog.h:542
 msgid "Save ephemeris"
 msgstr "Lưu lịch thiên văn"
 
-#: src/ui_astroCalcDialog.h:490
+#: src/ui_astroCalcDialog.h:543
 msgid "Time step:"
 msgstr "Thời gian dừng:"
 
-#: src/ui_astroCalcDialog.h:491 src/ui_astroCalcDialog.h:498
+#: src/ui_astroCalcDialog.h:544 src/ui_astroCalcDialog.h:551
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
 msgstr "Tới:"
 
-#: src/ui_astroCalcDialog.h:492 src/ui_astroCalcDialog.h:495
+#: src/ui_astroCalcDialog.h:545 src/ui_astroCalcDialog.h:548
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
 msgstr "Từ:"
 
-#: src/ui_astroCalcDialog.h:493
+#: src/ui_astroCalcDialog.h:546
 msgid "Calculate phenomena"
 msgstr "Tính toán hiện tượng"
 
-#: src/ui_astroCalcDialog.h:494
+#: src/ui_astroCalcDialog.h:547
 msgid "Save phenomena"
 msgstr "Lưu hiện tượng"
 
-#: src/ui_astroCalcDialog.h:496
+#: src/ui_astroCalcDialog.h:549
 msgid "Between objects:"
 msgstr "Giữa các vật thể"
 
-#: src/ui_astroCalcDialog.h:497
+#: src/ui_astroCalcDialog.h:550
 msgid "and"
 msgstr "và"
 
-#: src/ui_astroCalcDialog.h:499
+#: src/ui_astroCalcDialog.h:552
 msgid "Maximum allowed separation:"
 msgstr "Cách xa cho phép tối đa:"
 
-#: src/ui_astroCalcDialog.h:501
+#: src/ui_astroCalcDialog.h:554
 msgid "Value in decimal degrees"
 msgstr "Giá trị trong độ thập phân"
+
+#: src/ui_astroCalcDialog.h:556
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:491
+msgid "Plot"
+msgstr "Biểu đồ"
+
+#: src/ui_astroCalcDialog.h:557
+msgid "Astronomical calculations"
+msgstr ""
 
 #: src/ui_bookmarksDialog.h:176
 msgid "Add date and time"
@@ -8162,12 +8197,12 @@ msgstr "Xem cảm biến"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1143
 msgid ""
-"Enable automatic install the type of mount from the telescope settings for "
-"saving horizontal orientation of CCD frame."
+"Enable automatic switch of mount type from the telescope settings for "
+"horizontal orientation of CCD frame."
 msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1145
-msgid "Enable automatic install the type of mount"
+msgid "Enable automatic switch of mount type"
 msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1146
@@ -8469,128 +8504,128 @@ msgstr ""
 msgid "TIANGONG 1"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:263
-#: plugins/Satellites/src/Satellite.cpp:267
+#: plugins/Satellites/src/Satellite.cpp:264
+#: plugins/Satellites/src/Satellite.cpp:268
 msgid "Catalog #"
 msgstr "Danh mục #"
 
-#: plugins/Satellites/src/Satellite.cpp:269
+#: plugins/Satellites/src/Satellite.cpp:270
 msgid "International Designator"
 msgstr "Chỉ định quốc tế"
 
-#: plugins/Satellites/src/Satellite.cpp:276
+#: plugins/Satellites/src/Satellite.cpp:277
 msgid "artificial satellite"
 msgstr "Vệ tinh nhân tạo"
 
-#: plugins/Satellites/src/Satellite.cpp:281
+#: plugins/Satellites/src/Satellite.cpp:282
 #, qt-format
 msgid "Approx. magnitude: <b>%1</b>"
 msgstr "Độ sáng xấp xỉ: <b>%1</b>"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:294
+#: plugins/Satellites/src/Satellite.cpp:295
 #, qt-format
 msgid "Range (km): %1"
 msgstr "Phạm vi (km): %1"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:297
+#: plugins/Satellites/src/Satellite.cpp:298
 #, qt-format
 msgid "Range rate (km/s): %1"
 msgstr "Độ dịch chuyển (km/s): %1"
 
 #. TRANSLATORS: Satellite altitude
-#: plugins/Satellites/src/Satellite.cpp:300
+#: plugins/Satellites/src/Satellite.cpp:301
 #, qt-format
 msgid "Altitude (km): %1"
 msgstr "Độ cao (km): %1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:303
+#: plugins/Satellites/src/Satellite.cpp:304
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
 msgstr "Điểm phụ (vĩ độ/kinh độ): %1%2/%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:317
+#: plugins/Satellites/src/Satellite.cpp:318
 #, qt-format
 msgid "TEME coordinates (km): %1"
 msgstr "Tọa độ TEME (km): %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:325
+#: plugins/Satellites/src/Satellite.cpp:326
 #, qt-format
 msgid "TEME velocity (km/s): %1"
 msgstr "Tốc độ TEME (km/s): %1"
 
-#: plugins/Satellites/src/Satellite.cpp:330
+#: plugins/Satellites/src/Satellite.cpp:331
 #, qt-format
 msgid "Sun reflection angle: %1%2"
 msgstr "Góc phản chiếu mặt trời: %1%2"
 
-#: plugins/Satellites/src/Satellite.cpp:337
+#: plugins/Satellites/src/Satellite.cpp:338
 #, qt-format
 msgid "Operational status: %1"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:344
+#: plugins/Satellites/src/Satellite.cpp:345
 msgid "The satellite and the observer are in sunlight."
 msgstr "Vệ tinh và người quan sát thì trong ánh nắng mặt trời"
 
-#: plugins/Satellites/src/Satellite.cpp:347
+#: plugins/Satellites/src/Satellite.cpp:348
 msgid "The satellite is visible."
 msgstr "Vệ tinh thì nhìn thấy được"
 
-#: plugins/Satellites/src/Satellite.cpp:350
+#: plugins/Satellites/src/Satellite.cpp:351
 msgid "The satellite is eclipsed."
 msgstr "Vệ tinh bị che khuất"
 
-#: plugins/Satellites/src/Satellite.cpp:353
+#: plugins/Satellites/src/Satellite.cpp:354
 msgid "The satellite is not visible"
 msgstr "Vệ tinh không thể nhìn thấy"
 
-#: plugins/Satellites/src/Satellite.cpp:378
+#: plugins/Satellites/src/Satellite.cpp:379
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 MHz (%2%3 kHz)"
 
-#: plugins/Satellites/src/Satellite.cpp:595
-#: plugins/Satellites/src/Satellite.cpp:620
+#: plugins/Satellites/src/Satellite.cpp:596
+#: plugins/Satellites/src/Satellite.cpp:621
 msgctxt "operational status"
 msgid "unknown"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:599
+#: plugins/Satellites/src/Satellite.cpp:600
 msgctxt "operational status"
 msgid "operational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:602
+#: plugins/Satellites/src/Satellite.cpp:603
 msgctxt "operational status"
 msgid "nonoperational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:605
+#: plugins/Satellites/src/Satellite.cpp:606
 msgctxt "operational status"
 msgid "partially operational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:608
+#: plugins/Satellites/src/Satellite.cpp:609
 msgctxt "operational status"
 msgid "standby"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:611
+#: plugins/Satellites/src/Satellite.cpp:612
 msgctxt "operational status"
 msgid "spare"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:614
+#: plugins/Satellites/src/Satellite.cpp:615
 msgctxt "operational status"
 msgid "extended mission"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:617
+#: plugins/Satellites/src/Satellite.cpp:618
 msgctxt "operational status"
 msgid "decayed"
 msgstr ""
@@ -8865,10 +8900,6 @@ msgstr "Nhóm mới..."
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:924
 msgid "Select TLE Update File"
 msgstr "Chọn tập tin cập nhật TLE"
-
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:942
-msgid "Time"
-msgstr "Thời gian"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:943
 msgid "Brightness"
@@ -12572,7 +12603,7 @@ msgid "Enable display of the potential habitable exoplanets only"
 msgstr "Bật hiển thị chỉ những ngoại hành tinh tiềm năng có sự sống"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:484
-msgid "Enable display designations of exoplanets"
+msgid "Enable display of designations for exoplanets"
 msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:486
@@ -12582,10 +12613,6 @@ msgstr "Thể hiện nút ngọa hành tinh ở thanh dưới cùng"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:490
 msgid "Diagrams: scatter plot"
 msgstr "Sơ đồ: biểu đồ phân tán"
-
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:491
-msgid "Plot"
-msgstr "Biểu đồ"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:492
 msgid "Y axis"
@@ -14245,7 +14272,7 @@ msgstr ""
 "Scener3d shader bị lỗi, không thể vẽ. Hãy kiểm tra đầu ra gỡ rối để biết chi "
 "tiết."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2158
+#: plugins/Scenery3d/src/Scenery3d.cpp:2165
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
@@ -14253,16 +14280,16 @@ msgstr ""
 "Phần cứng của bạn không hỗ trợ hình chiếu khối, vui lòng chuyển sang hình "
 "chiếu 'phối cảnh'!"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2167
+#: plugins/Scenery3d/src/Scenery3d.cpp:2174
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr ""
 "Vẽ bóng hình học thi không được hỗ trợ. Hạ trở lại chế độ '6 Textures'."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2177
+#: plugins/Scenery3d/src/Scenery3d.cpp:2184
 msgid "Falling back to '6 Textures' because of ANGLE bug"
 msgstr "Hạ trở lại '6 Textures' bởi vì lỗi GÓC"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2698
+#: plugins/Scenery3d/src/Scenery3d.cpp:2705
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
@@ -16270,9 +16297,6 @@ msgstr ""
 
 #~ msgid "Horizon altitude: 0 deg."
 #~ msgstr "Độ cao chân trời: 0 độ."
-
-#~ msgid "JD"
-#~ msgstr "Julian date"
 
 #~ msgid "United States Minor Outlying Islands"
 #~ msgstr "Quần đảo nhỏ ở xa của Mỹ"

@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-11-24 21:47+0700\n"
+"POT-Creation-Date: 2016-12-02 00:53+0700\n"
 "PO-Revision-Date: 2015-11-30 07:20+0000\n"
 "Last-Translator: Balaji பாலாஜி <Unknown>\n"
 "Language-Team: Tamil <ta@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-25 05:44+0000\n"
+"X-Launchpad-Export-Date: 2016-12-02 04:55+0000\n"
 "X-Generator: Launchpad (build 18282)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -22,7 +22,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:229 src/core/modules/MinorPlanet.cpp:213
 #: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:192
 #: src/core/modules/StarWrapper.cpp:195
-#: plugins/Satellites/src/Satellite.cpp:276
+#: plugins/Satellites/src/Satellite.cpp:277
 #: plugins/Supernovae/src/Supernova.cpp:130 plugins/Quasars/src/Quasar.cpp:101
 #: plugins/Pulsars/src/Pulsar.cpp:158 plugins/Exoplanets/src/Exoplanet.cpp:270
 #, qt-format
@@ -363,7 +363,7 @@ msgstr "இடம்: "
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:721 src/ui_astroCalcDialog.h:485
+#: src/core/modules/LandscapeMgr.cpp:721 src/ui_astroCalcDialog.h:538
 msgid "Celestial body:"
 msgstr ""
 
@@ -1024,7 +1024,7 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:204 src/gui/AstroCalcDialog.cpp:524
+#: src/core/modules/SolarSystem.cpp:204 src/gui/AstroCalcDialog.cpp:534
 #: src/translations.h:66
 msgid "Planets"
 msgstr "கோள்கள்"
@@ -1135,7 +1135,7 @@ msgid "Position angle"
 msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:285 src/core/modules/StarWrapper.cpp:287
-#: src/gui/AstroCalcDialog.cpp:553
+#: src/gui/AstroCalcDialog.cpp:686
 msgid "Separation"
 msgstr ""
 
@@ -1156,7 +1156,7 @@ msgid "Night mode"
 msgstr "இரவு நிலை"
 
 #: src/core/StelCore.cpp:227 src/gui/StelGui.cpp:202
-#: src/gui/AstroCalcDialog.cpp:276 src/gui/AstroCalcDialog.cpp:550
+#: src/gui/AstroCalcDialog.cpp:285 src/gui/AstroCalcDialog.cpp:683
 #: src/gui/BookmarksDialog.cpp:102 src/ui_dateTimeDialogGui.h:376
 #: src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:173
@@ -1898,31 +1898,31 @@ msgctxt "solar time"
 msgid "LTST"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:539
+#: src/gui/ConfigurationDialog.cpp:537
 msgid "Select screenshot directory"
 msgstr "திரைப்பிடிப்பு அடைவை தேர்வு செய்க"
 
-#: src/gui/ConfigurationDialog.cpp:853
+#: src/gui/ConfigurationDialog.cpp:851
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "தொடக்க பார்வைப் புலம்: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:861
+#: src/gui/ConfigurationDialog.cpp:859
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "தொடங்களின்ப் பொழுது பார்வை திசை திசைவில்/உயரம்: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:923
+#: src/gui/ConfigurationDialog.cpp:921
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:253
 msgid "Authors"
 msgstr "படைப்பாளர்கள்"
 
-#: src/gui/ConfigurationDialog.cpp:924 src/gui/ViewDialog.cpp:1249
+#: src/gui/ConfigurationDialog.cpp:922 src/gui/ViewDialog.cpp:1249
 msgid "Contact"
 msgstr "தொடர்புகொள்"
 
-#: src/gui/ConfigurationDialog.cpp:926
+#: src/gui/ConfigurationDialog.cpp:924
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:517
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:408
@@ -1941,15 +1941,15 @@ msgstr "தொடர்புகொள்"
 msgid "Version"
 msgstr "பதிப்பு"
 
-#: src/gui/ConfigurationDialog.cpp:1023
+#: src/gui/ConfigurationDialog.cpp:1021
 msgid "Running script: "
 msgstr "குறுநிரலை இயக்குகிறது: "
 
-#: src/gui/ConfigurationDialog.cpp:1030
+#: src/gui/ConfigurationDialog.cpp:1028
 msgid "Running script: [none]"
 msgstr "குறுநிரலை இயக்குகிறது: [எதுவுமில்லை]"
 
-#: src/gui/ConfigurationDialog.cpp:1095
+#: src/gui/ConfigurationDialog.cpp:1093
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -1957,16 +1957,16 @@ msgstr ""
 "புது நட்சத்திரங்களின் விவர ஏடுகள் பதிவிறக்கம் செய்யப்பட்டுவிட்டது!\n"
 "அவைகளை காட்சிக்கு வைக்க மறுதொடக்கம் செய்யவும்."
 
-#: src/gui/ConfigurationDialog.cpp:1099
+#: src/gui/ConfigurationDialog.cpp:1097
 msgid "All available star catalogs have been installed."
 msgstr "இருக்ககூடிய எல்லா விண்மீன் விவர ஏடுகளும் உள்ளீடு செய்யப்பட்டுள்ளது."
 
-#: src/gui/ConfigurationDialog.cpp:1104
+#: src/gui/ConfigurationDialog.cpp:1102
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "விவர ஏட்டை பெறு %1 யில் %2"
 
-#: src/gui/ConfigurationDialog.cpp:1111
+#: src/gui/ConfigurationDialog.cpp:1109
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -1975,7 +1975,7 @@ msgstr ""
 "பதிவிறக்கம் நடைப்பெறுகிறது %1 \n"
 "(நீங்கள் இந்த சாளரத்தை மூடலாம்)"
 
-#: src/gui/ConfigurationDialog.cpp:1118
+#: src/gui/ConfigurationDialog.cpp:1116
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -1986,7 +1986,7 @@ msgstr ""
 "நட்சத்திர எண்ணிக்கை: %2 மில்லியன் \n"
 "எண் மதிப்பு வரையறை: %3- %4"
 
-#: src/gui/ConfigurationDialog.cpp:1161 src/gui/ConfigurationDialog.cpp:1197
+#: src/gui/ConfigurationDialog.cpp:1159 src/gui/ConfigurationDialog.cpp:1195
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1995,11 +1995,11 @@ msgstr ""
 "பதிவிறக்கத்தில் பிழை %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1250
+#: src/gui/ConfigurationDialog.cpp:1248
 msgid "Verifying file integrity..."
 msgstr "கோப்பு ஒழுங்கமைவு பரிசோதிக்கபடுகிறது..."
 
-#: src/gui/ConfigurationDialog.cpp:1254
+#: src/gui/ConfigurationDialog.cpp:1252
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2008,166 +2008,166 @@ msgstr ""
 "பதிவிறக்கத்தில் பிழை %1:\n"
 "கோப்பு பழுதுபட்டுள்ளது."
 
-#: src/gui/ConfigurationDialog.cpp:1300 src/gui/ConfigurationDialog.cpp:1309
+#: src/gui/ConfigurationDialog.cpp:1298 src/gui/ConfigurationDialog.cpp:1307
 msgid "Available"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1302 src/gui/ConfigurationDialog.cpp:1311
+#: src/gui/ConfigurationDialog.cpp:1300 src/gui/ConfigurationDialog.cpp:1309
 msgid "Not Available"
 msgstr ""
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1376
+#: src/gui/ConfigurationDialog.cpp:1374
 msgid "Algorithm of"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1389
+#: src/gui/ConfigurationDialog.cpp:1387
 msgid "Without correction"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1390
+#: src/gui/ConfigurationDialog.cpp:1388
 msgid "Schoch (1931)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1391
+#: src/gui/ConfigurationDialog.cpp:1389
 msgid "Clemence (1948)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1392
+#: src/gui/ConfigurationDialog.cpp:1390
 msgid "IAU (1952)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1393
+#: src/gui/ConfigurationDialog.cpp:1391
 msgid "Astronomical Ephemeris (1960)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1394
+#: src/gui/ConfigurationDialog.cpp:1392
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1395
+#: src/gui/ConfigurationDialog.cpp:1393
 msgid "Muller & Stephenson (1975)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1396
+#: src/gui/ConfigurationDialog.cpp:1394
 msgid "Stephenson (1978)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1397
+#: src/gui/ConfigurationDialog.cpp:1395
 msgid "Schmadel & Zech (1979)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1398
+#: src/gui/ConfigurationDialog.cpp:1396
 msgid "Morrison & Stephenson (1982)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1399
+#: src/gui/ConfigurationDialog.cpp:1397
 msgid "Stephenson & Morrison (1984)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1400
+#: src/gui/ConfigurationDialog.cpp:1398
 msgid "Stephenson & Houlden (1986)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1401
+#: src/gui/ConfigurationDialog.cpp:1399
 msgid "Espenak (1987, 1989)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1402
+#: src/gui/ConfigurationDialog.cpp:1400
 msgid "Borkowski (1988)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1403
+#: src/gui/ConfigurationDialog.cpp:1401
 msgid "Schmadel & Zech (1988)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1404
+#: src/gui/ConfigurationDialog.cpp:1402
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1405
+#: src/gui/ConfigurationDialog.cpp:1403
 msgid "Stephenson & Morrison (1995)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1406
+#: src/gui/ConfigurationDialog.cpp:1404
 msgid "Stephenson (1997)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1408
+#: src/gui/ConfigurationDialog.cpp:1406
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1409
+#: src/gui/ConfigurationDialog.cpp:1407
 msgid "JPL Horizons"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1410
+#: src/gui/ConfigurationDialog.cpp:1408
 msgid "Meeus & Simons (2000)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1411
+#: src/gui/ConfigurationDialog.cpp:1409
 msgid "Montenbruck & Pfleger (2000)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1412
+#: src/gui/ConfigurationDialog.cpp:1410
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1413
+#: src/gui/ConfigurationDialog.cpp:1411
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1415
+#: src/gui/ConfigurationDialog.cpp:1413
 msgid "Espenak & Meeus (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1418
+#: src/gui/ConfigurationDialog.cpp:1416
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1420
+#: src/gui/ConfigurationDialog.cpp:1418
 msgid "Reijs (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1421
+#: src/gui/ConfigurationDialog.cpp:1419
 msgid "Banjevic (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1422
+#: src/gui/ConfigurationDialog.cpp:1420
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1423
+#: src/gui/ConfigurationDialog.cpp:1421
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1424
+#: src/gui/ConfigurationDialog.cpp:1422
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1473 src/gui/ConfigurationDialog.cpp:1508
+#: src/gui/ConfigurationDialog.cpp:1471 src/gui/ConfigurationDialog.cpp:1506
 #: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:409
 msgid "System default"
 msgstr "கணிணி முன்னிருப்பு"
 
-#: src/gui/ConfigurationDialog.cpp:1474
+#: src/gui/ConfigurationDialog.cpp:1472
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "yyyy-mm-dd (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1475
+#: src/gui/ConfigurationDialog.cpp:1473
 msgid "dd-mm-yyyy"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1476
+#: src/gui/ConfigurationDialog.cpp:1474
 msgid "mm-dd-yyyy"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1509
+#: src/gui/ConfigurationDialog.cpp:1507
 msgid "12-hour format"
 msgstr "12-மணி வடிவமைப்பு"
 
-#: src/gui/ConfigurationDialog.cpp:1510
+#: src/gui/ConfigurationDialog.cpp:1508
 msgid "24-hour format"
 msgstr "24-மணி வடிவமைப்பு"
 
@@ -2800,7 +2800,7 @@ msgstr ""
 msgid "Azimuth"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:260
+#: src/gui/SearchDialog.cpp:260 src/gui/AstroCalcDialog.cpp:615
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
 msgid "Altitude"
 msgstr ""
@@ -2817,23 +2817,23 @@ msgstr ""
 msgid "Latitude"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:609
+#: src/gui/SearchDialog.cpp:608
 msgid "Simbad Lookup Error"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:617
+#: src/gui/SearchDialog.cpp:616
 msgid "Simbad Lookup"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:830
+#: src/gui/SearchDialog.cpp:829
 msgid "University of Strasbourg (France)"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:831
+#: src/gui/SearchDialog.cpp:830
 msgid "Harvard University (USA)"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:904
+#: src/gui/SearchDialog.cpp:903
 msgid "Paste and Search"
 msgstr ""
 
@@ -2868,7 +2868,7 @@ msgid "year"
 msgstr ""
 
 #. TRANSLATORS: name of object
-#: src/gui/AstroCalcDialog.cpp:160 src/ui_configurationDialog.h:1280
+#: src/gui/AstroCalcDialog.cpp:169 src/ui_configurationDialog.h:1280
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:450
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:96
 #: plugins/Exoplanets/src/Exoplanet.cpp:324
@@ -2877,176 +2877,193 @@ msgid "Name"
 msgstr "பெயர்"
 
 #. TRANSLATORS: right ascension
-#: src/gui/AstroCalcDialog.cpp:162 src/gui/AstroCalcDialog.cpp:279
+#: src/gui/AstroCalcDialog.cpp:171 src/gui/AstroCalcDialog.cpp:288
 msgid "RA (J2000)"
 msgstr ""
 
 #. TRANSLATORS: declination
-#: src/gui/AstroCalcDialog.cpp:164 src/gui/AstroCalcDialog.cpp:281
+#: src/gui/AstroCalcDialog.cpp:173 src/gui/AstroCalcDialog.cpp:290
 msgid "Dec (J2000)"
 msgstr ""
 
 #. TRANSLATORS: magnitude
-#: src/gui/AstroCalcDialog.cpp:166 src/gui/AstroCalcDialog.cpp:283
+#: src/gui/AstroCalcDialog.cpp:175 src/gui/AstroCalcDialog.cpp:292
 msgid "Mag."
 msgstr ""
 
 #. TRANSLATORS: type of object
-#: src/gui/AstroCalcDialog.cpp:168 src/ui_configurationDialog.h:1259
+#: src/gui/AstroCalcDialog.cpp:177 src/ui_configurationDialog.h:1259
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
 msgid "Type"
 msgstr "வகை"
 
-#: src/gui/AstroCalcDialog.cpp:187
+#: src/gui/AstroCalcDialog.cpp:196
 #, qt-format
 msgid "Positions on %1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:277 src/ui_dateTimeDialogGui.h:382
+#: src/gui/AstroCalcDialog.cpp:286 src/ui_dateTimeDialogGui.h:382
 #: src/ui_dateTimeDialogGui.h:387
 msgid "Julian Day"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:384 src/gui/AstroCalcDialog.cpp:758
+#: src/gui/AstroCalcDialog.cpp:393 src/gui/AstroCalcDialog.cpp:911
 msgid "CSV (Comma delimited)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:386
+#: src/gui/AstroCalcDialog.cpp:395
 msgid "Save calculated ephemerides as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:462
+#: src/gui/AstroCalcDialog.cpp:471
 msgid "10 minutes"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:463
+#: src/gui/AstroCalcDialog.cpp:472
 msgid "1 hour"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:464
+#: src/gui/AstroCalcDialog.cpp:473
 msgid "1 day"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:465
+#: src/gui/AstroCalcDialog.cpp:474
 msgid "5 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:466
+#: src/gui/AstroCalcDialog.cpp:475
 msgid "10 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:467
+#: src/gui/AstroCalcDialog.cpp:476
 msgid "15 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:468
+#: src/gui/AstroCalcDialog.cpp:477
 msgid "30 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:469
+#: src/gui/AstroCalcDialog.cpp:478
 msgid "60 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:523
+#: src/gui/AstroCalcDialog.cpp:533
 msgid "Solar system"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:525 src/translations.h:70
+#: src/gui/AstroCalcDialog.cpp:535 src/translations.h:70
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
 msgstr "விண்கற்கள்"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:526 src/translations.h:74
+#: src/gui/AstroCalcDialog.cpp:536 src/translations.h:74
 msgid "Plutinos"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:527 src/translations.h:68
+#: src/gui/AstroCalcDialog.cpp:537 src/translations.h:68
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
 msgstr "வால் நட்சத்திரங்கள்"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:528 src/translations.h:76
+#: src/gui/AstroCalcDialog.cpp:538 src/translations.h:76
 msgid "Dwarf planets"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:529 src/translations.h:78
+#: src/gui/AstroCalcDialog.cpp:539 src/translations.h:78
 msgid "Cubewanos"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:530 src/translations.h:80
+#: src/gui/AstroCalcDialog.cpp:540 src/translations.h:80
 msgid "Scattered disc objects"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:531 src/translations.h:82
+#: src/gui/AstroCalcDialog.cpp:541 src/translations.h:82
 msgid "Oort cloud objects"
 msgstr ""
 
-#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:532 src/translations.h:117
-#: src/ui_viewDialog.h:2023 src/ui_dsoColorsDialog.h:534
-msgid "Star clusters"
+#: src/gui/AstroCalcDialog.cpp:542
+#, qt-format
+msgid "Bright stars (<%1 mag)"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:543
+#, qt-format
+msgid "Bright star clusters (<%1 mag)"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:533 src/translations.h:99
+#: src/gui/AstroCalcDialog.cpp:544 src/translations.h:99
 #: src/ui_viewDialog.h:2024 src/ui_dsoColorsDialog.h:580
 msgid "Planetary nebulae"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:534
-msgid "Bright nebulae (<10 mag.)"
+#: src/gui/AstroCalcDialog.cpp:545
+#, qt-format
+msgid "Bright nebulae (<%1 mag)"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:535 src/translations.h:101
+#: src/gui/AstroCalcDialog.cpp:546 src/translations.h:101
 #: src/ui_viewDialog.h:2027 src/ui_dsoColorsDialog.h:540
 msgid "Dark nebulae"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:536
-msgid "Bright galaxies (<10 mag.)"
+#: src/gui/AstroCalcDialog.cpp:547
+#, qt-format
+msgid "Bright galaxies (<%1 mag)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:549
+#: src/gui/AstroCalcDialog.cpp:614
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:942
+msgid "Time"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:614
+msgid "JD"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:682
 msgid "Phenomenon"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:551
+#: src/gui/AstroCalcDialog.cpp:684
 msgid "Object 1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:552
+#: src/gui/AstroCalcDialog.cpp:685
 msgid "Object 2"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:760
+#: src/gui/AstroCalcDialog.cpp:913
 msgid "Save calculated phenomena as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:799 src/gui/AstroCalcDialog.cpp:974
+#: src/gui/AstroCalcDialog.cpp:952 src/gui/AstroCalcDialog.cpp:1127
+#: src/gui/AstroCalcDialog.cpp:1285
 msgid "Conjunction"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:806
+#: src/gui/AstroCalcDialog.cpp:959
 msgid "Opposition"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:814
+#: src/gui/AstroCalcDialog.cpp:967
 msgid "Transit"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:816 src/gui/AstroCalcDialog.cpp:979
+#: src/gui/AstroCalcDialog.cpp:969 src/gui/AstroCalcDialog.cpp:1132
+#: src/gui/AstroCalcDialog.cpp:1290
 msgid "Occultation"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:820
+#: src/gui/AstroCalcDialog.cpp:973
 msgid "Eclipse"
 msgstr ""
 
@@ -3257,6 +3274,11 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:115
 msgid "Bright quasars"
+msgstr ""
+
+#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
+#: src/translations.h:117 src/ui_viewDialog.h:2023 src/ui_dsoColorsDialog.h:534
+msgid "Star clusters"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
@@ -6509,7 +6531,7 @@ msgid "Azimuth from South"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1388
-msgid "Toggle display the button of Digitized Sky Survey."
+msgid "Toggle display of the button for Digitized Sky Survey."
 msgstr ""
 
 #: src/ui_configurationDialog.h:1390
@@ -6766,94 +6788,107 @@ msgstr ""
 msgid "..."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:459
-msgid "Astronomical calculations"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:465
+#: src/ui_astroCalcDialog.h:513
 msgid "Positions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:467
+#: src/ui_astroCalcDialog.h:515
 msgid "Planetary positions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:470
+#: src/ui_astroCalcDialog.h:518
 msgid "Ephemeris"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:472
+#: src/ui_astroCalcDialog.h:520
 msgid "Phenomena"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:476
+#: src/ui_astroCalcDialog.h:522
+msgid "Alt. vs Time"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:524
+msgid "Altitude vs Time"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:529
 msgid "Update of planetary positions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:478
+#: src/ui_astroCalcDialog.h:531
 msgid "Show dates of positions of current celestial body near markers"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:480
+#: src/ui_astroCalcDialog.h:533
 msgid "Show dates of positions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:482
+#: src/ui_astroCalcDialog.h:535
 msgid "Show markers of positions of the current celestial body on the sky"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:484
+#: src/ui_astroCalcDialog.h:537
 msgid "Show markers of positions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:487
+#: src/ui_astroCalcDialog.h:540
 msgid "Cleanup ephemerides"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:488
+#: src/ui_astroCalcDialog.h:541
 msgid "Calculate ephemeris"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:489
+#: src/ui_astroCalcDialog.h:542
 msgid "Save ephemeris"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:490
+#: src/ui_astroCalcDialog.h:543
 msgid "Time step:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:491 src/ui_astroCalcDialog.h:498
+#: src/ui_astroCalcDialog.h:544 src/ui_astroCalcDialog.h:551
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:492 src/ui_astroCalcDialog.h:495
+#: src/ui_astroCalcDialog.h:545 src/ui_astroCalcDialog.h:548
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:493
+#: src/ui_astroCalcDialog.h:546
 msgid "Calculate phenomena"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:494
+#: src/ui_astroCalcDialog.h:547
 msgid "Save phenomena"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:496
+#: src/ui_astroCalcDialog.h:549
 msgid "Between objects:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:497
+#: src/ui_astroCalcDialog.h:550
 msgid "and"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:499
+#: src/ui_astroCalcDialog.h:552
 msgid "Maximum allowed separation:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:501
+#: src/ui_astroCalcDialog.h:554
 msgid "Value in decimal degrees"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:556
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:491
+msgid "Plot"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:557
+msgid "Astronomical calculations"
 msgstr ""
 
 #: src/ui_bookmarksDialog.h:176
@@ -7857,12 +7892,12 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1143
 msgid ""
-"Enable automatic install the type of mount from the telescope settings for "
-"saving horizontal orientation of CCD frame."
+"Enable automatic switch of mount type from the telescope settings for "
+"horizontal orientation of CCD frame."
 msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1145
-msgid "Enable automatic install the type of mount"
+msgid "Enable automatic switch of mount type"
 msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1146
@@ -8158,128 +8193,128 @@ msgstr ""
 msgid "TIANGONG 1"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:263
-#: plugins/Satellites/src/Satellite.cpp:267
+#: plugins/Satellites/src/Satellite.cpp:264
+#: plugins/Satellites/src/Satellite.cpp:268
 msgid "Catalog #"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:269
+#: plugins/Satellites/src/Satellite.cpp:270
 msgid "International Designator"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:276
+#: plugins/Satellites/src/Satellite.cpp:277
 msgid "artificial satellite"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:281
+#: plugins/Satellites/src/Satellite.cpp:282
 #, qt-format
 msgid "Approx. magnitude: <b>%1</b>"
 msgstr ""
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:294
+#: plugins/Satellites/src/Satellite.cpp:295
 #, qt-format
 msgid "Range (km): %1"
 msgstr ""
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:297
+#: plugins/Satellites/src/Satellite.cpp:298
 #, qt-format
 msgid "Range rate (km/s): %1"
 msgstr ""
 
 #. TRANSLATORS: Satellite altitude
-#: plugins/Satellites/src/Satellite.cpp:300
+#: plugins/Satellites/src/Satellite.cpp:301
 #, qt-format
 msgid "Altitude (km): %1"
 msgstr "குத்தியரம் (கி.மி.):%1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:303
+#: plugins/Satellites/src/Satellite.cpp:304
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
 msgstr ""
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:317
+#: plugins/Satellites/src/Satellite.cpp:318
 #, qt-format
 msgid "TEME coordinates (km): %1"
 msgstr ""
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:325
+#: plugins/Satellites/src/Satellite.cpp:326
 #, qt-format
 msgid "TEME velocity (km/s): %1"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:330
+#: plugins/Satellites/src/Satellite.cpp:331
 #, qt-format
 msgid "Sun reflection angle: %1%2"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:337
+#: plugins/Satellites/src/Satellite.cpp:338
 #, qt-format
 msgid "Operational status: %1"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:344
+#: plugins/Satellites/src/Satellite.cpp:345
 msgid "The satellite and the observer are in sunlight."
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:347
+#: plugins/Satellites/src/Satellite.cpp:348
 msgid "The satellite is visible."
 msgstr "சையர்கைக்கோள் தெரிகிறது"
 
-#: plugins/Satellites/src/Satellite.cpp:350
+#: plugins/Satellites/src/Satellite.cpp:351
 msgid "The satellite is eclipsed."
 msgstr "சையர்கைக்கோள் மறைக்கப்பட்டுள்ளது"
 
-#: plugins/Satellites/src/Satellite.cpp:353
+#: plugins/Satellites/src/Satellite.cpp:354
 msgid "The satellite is not visible"
 msgstr "சையர்கைக்கோள் தென்படவில்லை"
 
-#: plugins/Satellites/src/Satellite.cpp:378
+#: plugins/Satellites/src/Satellite.cpp:379
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 MHz (%2%3 kHz)"
 
-#: plugins/Satellites/src/Satellite.cpp:595
-#: plugins/Satellites/src/Satellite.cpp:620
+#: plugins/Satellites/src/Satellite.cpp:596
+#: plugins/Satellites/src/Satellite.cpp:621
 msgctxt "operational status"
 msgid "unknown"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:599
+#: plugins/Satellites/src/Satellite.cpp:600
 msgctxt "operational status"
 msgid "operational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:602
+#: plugins/Satellites/src/Satellite.cpp:603
 msgctxt "operational status"
 msgid "nonoperational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:605
+#: plugins/Satellites/src/Satellite.cpp:606
 msgctxt "operational status"
 msgid "partially operational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:608
+#: plugins/Satellites/src/Satellite.cpp:609
 msgctxt "operational status"
 msgid "standby"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:611
+#: plugins/Satellites/src/Satellite.cpp:612
 msgctxt "operational status"
 msgid "spare"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:614
+#: plugins/Satellites/src/Satellite.cpp:615
 msgctxt "operational status"
 msgid "extended mission"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:617
+#: plugins/Satellites/src/Satellite.cpp:618
 msgctxt "operational status"
 msgid "decayed"
 msgstr ""
@@ -8526,10 +8561,6 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:924
 msgid "Select TLE Update File"
-msgstr ""
-
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:942
-msgid "Time"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:943
@@ -11811,7 +11842,7 @@ msgid "Enable display of the potential habitable exoplanets only"
 msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:484
-msgid "Enable display designations of exoplanets"
+msgid "Enable display of designations for exoplanets"
 msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:486
@@ -11820,10 +11851,6 @@ msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:490
 msgid "Diagrams: scatter plot"
-msgstr ""
-
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:491
-msgid "Plot"
 msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:492
@@ -13337,21 +13364,21 @@ msgstr ""
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2158
+#: plugins/Scenery3d/src/Scenery3d.cpp:2165
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2167
+#: plugins/Scenery3d/src/Scenery3d.cpp:2174
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2177
+#: plugins/Scenery3d/src/Scenery3d.cpp:2184
 msgid "Falling back to '6 Textures' because of ANGLE bug"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2698
+#: plugins/Scenery3d/src/Scenery3d.cpp:2705
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
