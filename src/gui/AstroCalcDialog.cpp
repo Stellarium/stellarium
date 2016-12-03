@@ -615,7 +615,7 @@ void AstroCalcDialog::populateCelestialObjectsList()
 
 void AstroCalcDialog::drawAltVsTimeDiagram()
 {
-	QString xAxisStr = QString("%1, %2").arg(q_("Time"), q_("JD"));
+	QString xAxisStr = q_("Local Time");
 	QString yAxisStr = QString("%1, %2").arg(q_("Altitude"), QChar(0x00B0));
 
 	// X axis - time; Y axis - altitude
@@ -623,45 +623,51 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 
 	StelObjectP selectedObject = objectMgr->searchByName(ui->celestialObjectsList->currentData(Qt::UserRole).toString());
 	double currentJD = core->getJD();
-	double midnight = std::ceil(currentJD);
+	double noon = (int)currentJD;
 	double az, alt, deg;
 	bool sign;
 
-	for(int i=0;i<180;i++) // Every 10 minutes (~30 hours)
+	const double xStartJD = 2440587.5;
+	const double xSeconds = 86400.0;
+	const double shift = core->getUTCOffset(noon)/24;
+	double minX = (noon + shift - xStartJD)*xSeconds + xSeconds*0.005; // The last member of sum was added to avoid artifacts
+	double maxX = (noon + shift + 24.0*StelCore::JD_HOUR - xStartJD)*xSeconds;
+
+	for(int i=0;i<144;i++) // Every 10 minutes (24 hours)
 	{
-		double JD = midnight + (i*10 - 1080)*StelCore::JD_MINUTE;
+		double JD = noon + (i*10.0)*StelCore::JD_MINUTE;
 		core->setJD(JD);
 		StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosApparent(core));
-		aX.append(JD);
+		aX.append((JD + core->getUTCOffset(JD)/24 - xStartJD)*xSeconds);
 		StelUtils::radToDecDeg(alt, sign, deg);
 		if (!sign)
 			deg *= -1;
 		aY.append(deg);
-		core->update(0);
+		core->update(0.0);
 	}
 	core->setJD(currentJD);
 
 	QVector<double> x = aX.toVector(), y = aY.toVector();
 
-	double minX, minY, maxX, maxY;
-	minX = maxX = aX.first();
-	minY = maxY = aY.first();
+	double minY = aY.first();
+	double maxY = aY.first();
 
-	foreach (double temp, aX)
-	{
-		if(maxX < temp) maxX = temp;
-		if(minX > temp) minX = temp;
-	}
 	foreach (double temp, aY)
 	{
 		if(maxY < temp) maxY = temp;
 		if(minY > temp) minY = temp;
 	}
 
+	minY -= 2.0;
+	maxY += 2.0;
+
+	QColor axisColor(Qt::white);
+	QPen axisPen(axisColor,1 );
 	if (!ui->altVsTimePlot->isEnabled())
 		ui->altVsTimePlot->setEnabled(true);
 	ui->altVsTimePlot->clearGraphs();
 	ui->altVsTimePlot->addGraph();
+	ui->altVsTimePlot->setBackground(QBrush(QColor(86, 87, 90)));
 	ui->altVsTimePlot->graph(0)->setData(x, y);
 	ui->altVsTimePlot->graph(0)->setPen(QPen(Qt::red));
 	ui->altVsTimePlot->graph(0)->setLineStyle(QCPGraph::lsLine);
@@ -669,13 +675,27 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 	ui->altVsTimePlot->xAxis->setLabel(xAxisStr);
 	ui->altVsTimePlot->yAxis->setLabel(yAxisStr);
 
-	ui->altVsTimePlot->xAxis->setRange(minX+0.1, maxX);
+	ui->altVsTimePlot->xAxis->setRange(minX, maxX);
 	ui->altVsTimePlot->xAxis->setScaleType(QCPAxis::stLinear);
-	ui->altVsTimePlot->xAxis->setNumberFormat("f");
-	ui->altVsTimePlot->xAxis->setNumberPrecision(1);
+	ui->altVsTimePlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
+	ui->altVsTimePlot->xAxis->setDateTimeFormat("H:mm");
+	ui->altVsTimePlot->xAxis->setDateTimeSpec(Qt::UTC); // Qt::UTC + core->getUTCOffset() give local time
+	ui->altVsTimePlot->xAxis->setAutoTickCount(12);
+	ui->altVsTimePlot->xAxis->setAutoSubTicks(false);
+	ui->altVsTimePlot->xAxis->setSubTickCount(6);
+	ui->altVsTimePlot->xAxis->setLabelColor(axisColor);
+	ui->altVsTimePlot->xAxis->setTickLabelColor(axisColor);
+	ui->altVsTimePlot->xAxis->setBasePen(axisPen);
+	ui->altVsTimePlot->xAxis->setTickPen(axisPen);
+	ui->altVsTimePlot->xAxis->setSubTickPen(axisPen);
 
-	ui->altVsTimePlot->yAxis->setRange(minY-5, maxY+5);
+	ui->altVsTimePlot->yAxis->setRange(minY, maxY);
 	ui->altVsTimePlot->yAxis->setScaleType(QCPAxis::stLinear);
+	ui->altVsTimePlot->yAxis->setLabelColor(axisColor);
+	ui->altVsTimePlot->yAxis->setTickLabelColor(axisColor);
+	ui->altVsTimePlot->yAxis->setBasePen(axisPen);
+	ui->altVsTimePlot->yAxis->setTickPen(axisPen);
+	ui->altVsTimePlot->yAxis->setSubTickPen(axisPen);
 
 	ui->altVsTimePlot->replot();
 }
