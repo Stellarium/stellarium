@@ -25,11 +25,10 @@
 #include "StelTextureMgr.hpp"
 #include "StelToast.hpp"
 
-ToastTile::ToastTile(QObject* parent, int level, int x, int y)
-	: QObject(parent), level(level), x(x), y(y), empty(false), ready(false), texture(NULL), texFader(NULL)
+ToastTile::ToastTile(ToastSurvey* survey, int level, int x, int y)
+	: survey(survey), level(level), x(x), y(y), empty(false), prepared(false), readyDraw(false), texFader(1000)
 {
 	Q_ASSERT(level <= getGrid()->getMaxLevel());
-	const ToastSurvey* survey = getSurvey();
 	// create the texture
 	imagePath = survey->getTilePath(level, x, y);
 
@@ -51,6 +50,16 @@ ToastTile::ToastTile(QObject* parent, int level, int x, int y)
 		boundingCap.d=qMin(qMin(n*pts.at(0), n*pts.at(1)), qMin(n*pts.at(2), n*pts.at(3)));
 }
 
+ToastTile::~ToastTile()
+{
+	//delete all currently owned tiles
+	foreach(ToastTile* child, subTiles)
+	{
+		delete child;
+	}
+	subTiles.clear();
+}
+
 const ToastGrid* ToastTile::getGrid() const
 {
 	return getSurvey()->getGrid();
@@ -59,13 +68,8 @@ const ToastGrid* ToastTile::getGrid() const
 
 const ToastSurvey* ToastTile::getSurvey() const
 {
-	// the parent can either be a ToastSurvey either be a ToastTile
-	ToastSurvey* ret = qobject_cast<ToastSurvey*>(parent());
-	if (ret)
-		return ret;
-	ToastTile* tile = qobject_cast<ToastTile*>(parent());
-	Q_ASSERT(tile);
-	return tile->getSurvey();
+	// the survey is stored directly for increased efficiency
+	return survey;
 }
 
 
@@ -89,7 +93,7 @@ bool ToastTile::isCovered(const SphericalCap& viewportShape) const
 		if (!viewportShape.intersects(child->boundingCap))
 			continue;
 		nbVisibleChildren++;
-		if (!child->ready || child->texFader->state()==QTimeLine::Running)
+		if (!child->readyDraw || child->texFader.state()==QTimeLine::Running)
 			return false;
 	}
 	return nbVisibleChildren > 0;
@@ -130,33 +134,43 @@ void ToastTile::prepareDraw()
 		// Create the children
 		for (int i = 0; i < 2; ++i)
 			for (int j = 0; j < 2; ++j)
-				subTiles.append(new ToastTile(this, level + 1, 2 * this->x + i, 2 * this->y + j));
+			{
+				int newLvl = level+1;
+				int newX = 2 * this->x + i;
+				int newY = 2 * this->y + j;
+				ToastTile* tile = survey->getCachedTile(newLvl,newX,newY);
+				//if(tile)
+				//	qDebug()<<"Cache hit";
+				subTiles.append( tile ? tile : new ToastTile(survey, newLvl, newX, newY) );
+			}
+
 		Q_ASSERT(subTiles.size() == 4);
 	}
-	ready = true;
+	prepared = true;
 }
 
 
 void ToastTile::drawTile(StelPainter* sPainter)
 {
-	if (!ready)
+	if (!prepared)
 		prepareDraw();
 
 	// Still not ready
 	if (texture.isNull() || !texture->bind())
 		return;
 
-	if (!texFader)
+	if(!readyDraw)
 	{
-		texFader = new QTimeLine(1000, this);
-		texFader->start();
+		// Just finished loading all resources, start the fader
+		texFader.start();
+		readyDraw = true;
 	}
 
-	if (texFader->state()==QTimeLine::Running)
+	if (texFader.state()==QTimeLine::Running)
 	{
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 		glEnable(GL_BLEND);
-		sPainter->setColor(1,1,1, texFader->currentValue());
+		sPainter->setColor(1,1,1, texFader.currentValue());
 	}
 	else
 	{
@@ -186,10 +200,14 @@ void ToastTile::draw(StelPainter* sPainter, const SphericalCap& viewportShape, i
 		// Clean up to save memory.
 		foreach (ToastTile* child, subTiles)
 		{
-			child->deleteLater();
+			//put into cache instead of delete
+			//the subtiles of the child remain owned by it
+			survey->putIntoCache(child);
 		}
 		subTiles.clear();
-		ready = false;
+		prepared = false;
+		//dont reset the fader
+		//readyDraw = false;
 		return;
 	}
 	if (level==maxVisibleLevel || !isCovered(viewportShape))
@@ -204,9 +222,15 @@ void ToastTile::draw(StelPainter* sPainter, const SphericalCap& viewportShape, i
 
 /////// ToastSurvey methods ////////////
 ToastSurvey::ToastSurvey(const QString& path, int amaxLevel)
-	: grid(amaxLevel), path(path), maxLevel(amaxLevel)
+	: grid(amaxLevel), path(path), maxLevel(amaxLevel), toastCache(200)
 {
 	rootTile = new ToastTile(this, 0, 0, 0);
+}
+
+ToastSurvey::~ToastSurvey()
+{
+	delete rootTile;
+	rootTile = NULL;
 }
 
 
@@ -232,4 +256,18 @@ void ToastSurvey::draw(StelPainter* sPainter)
 	// We also get the viewport shape to discard invisibly tiles.
 	const SphericalCap& viewportRegion = sPainter->getProjector()->getBoundingCap();
 	rootTile->draw(sPainter, viewportRegion, maxVisibleLevel);
+}
+
+
+ToastTile* ToastSurvey::getCachedTile(int level, int x, int y)
+{
+	ToastTile::Coord c = {level, x, y};
+	return toastCache.take(c);
+}
+
+
+void ToastSurvey::putIntoCache(ToastTile *tile)
+{
+	//TODO: calculate varying cost depending on tile level and/or loaded subtiles?
+	toastCache.insert(tile->getCoord(),tile);
 }

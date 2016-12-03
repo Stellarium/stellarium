@@ -39,12 +39,6 @@ ToastMgr::ToastMgr() : survey(NULL)
 
 ToastMgr::~ToastMgr()
 {
-	if (survey)
-	{
-		delete survey;
-		survey = NULL;
-	}
-
 	delete fader;
 	fader = NULL;
 }
@@ -65,6 +59,12 @@ void ToastMgr::init()
 	setFlagSurveyShow(conf->value("astro/flag_toast_survey", false).toBool());
 
 	addAction("actionShow_Toast_Survey", N_("Display Options"), N_("Digitized Sky Survey (experimental)"), "surveyDisplayed", "Ctrl+Alt+D");
+}
+
+void ToastMgr::deinit()
+{
+	delete survey;
+	survey = NULL;
 }
 
 void ToastMgr::draw(StelCore* core)
