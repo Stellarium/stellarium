@@ -112,6 +112,7 @@ private slots:
 	void savePhenomena();
 
 	void drawAltVsTimeDiagram();
+	void mouseOverLine(QMouseEvent *event);
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 

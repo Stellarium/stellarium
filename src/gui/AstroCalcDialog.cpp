@@ -147,6 +147,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->phenomenaSaveButton, SIGNAL(clicked()), this, SLOT(savePhenomena()));
 
 	connect(ui->avtPlotButton, SIGNAL(clicked()), this, SLOT(drawAltVsTimeDiagram()));
+	connect(ui->altVsTimePlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverLine(QMouseEvent*)));
 
 	connectBoolProperty(ui->ephemerisShowMarkersCheckBox, "SolarSystem.ephemerisMarkersDisplayed");
 	connectBoolProperty(ui->ephemerisShowDatesCheckBox, "SolarSystem.ephemerisDatesDisplayed");
@@ -630,7 +631,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 	const double xStartJD = 2440587.5;
 	const double xSeconds = 86400.0;
 	const double shift = core->getUTCOffset(noon)/24;
-	double minX = (noon + shift - xStartJD)*xSeconds + xSeconds*0.005; // The last member of sum was added to avoid artifacts
+	double minX = (noon + shift - xStartJD)*xSeconds + xSeconds*0.01; // The last member of sum was added to avoid artifacts
 	double maxX = (noon + shift + 24.0*StelCore::JD_HOUR - xStartJD)*xSeconds;
 
 	for(int i=0;i<144;i++) // Every 10 minutes (24 hours)
@@ -669,8 +670,8 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 	ui->altVsTimePlot->addGraph();
 	ui->altVsTimePlot->setBackground(QBrush(QColor(86, 87, 90)));
 	ui->altVsTimePlot->graph(0)->setData(x, y);
-	ui->altVsTimePlot->graph(0)->setPen(QPen(Qt::red));
-	ui->altVsTimePlot->graph(0)->setLineStyle(QCPGraph::lsLine);
+	ui->altVsTimePlot->graph(0)->setPen(QPen(Qt::red, 1));
+	ui->altVsTimePlot->graph(0)->setLineStyle(QCPGraph::lsLine);	
 	ui->altVsTimePlot->graph(0)->rescaleAxes(true);
 	ui->altVsTimePlot->xAxis->setLabel(xAxisStr);
 	ui->altVsTimePlot->yAxis->setLabel(yAxisStr);
@@ -697,6 +698,35 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 	ui->altVsTimePlot->yAxis->setTickPen(axisPen);
 	ui->altVsTimePlot->yAxis->setSubTickPen(axisPen);
 
+	ui->altVsTimePlot->replot();
+}
+
+void AstroCalcDialog::mouseOverLine(QMouseEvent *event)
+{
+	double x = ui->altVsTimePlot->xAxis->pixelToCoord(event->pos().x());
+	double y = ui->altVsTimePlot->yAxis->pixelToCoord(event->pos().y());
+
+	QCPAbstractPlottable *abstractGraph = ui->altVsTimePlot->plottableAt(event->pos(), false);
+	QCPGraph *graph = qobject_cast<QCPGraph *>(abstractGraph);
+
+	const double xStartJD = 2440587.5;
+	const double xSeconds = 86400.0;
+
+	if (x>ui->altVsTimePlot->xAxis->range().lower && x<ui->altVsTimePlot->xAxis->range().upper && y>ui->altVsTimePlot->yAxis->range().lower && y<ui->altVsTimePlot->yAxis->range().upper)
+	{
+		if (graph)
+		{
+			double JD = x/xSeconds + xStartJD;
+			QString LT = StelUtils::jdToQDateTime(JD + core->getUTCOffset(JD)).toString("H:mm");
+
+			QToolTip::hideText();
+			QToolTip::showText(event->globalPos(), QString("%1: %2<br />%3: %4%5").arg(q_("Local Time"), LT, q_("Altitude"), QString::number(y, 'f', 2), QChar(0x00B0)), ui->altVsTimePlot, ui->altVsTimePlot->rect());
+		}
+		else
+			QToolTip::hideText();
+	}
+
+	ui->altVsTimePlot->update();
 	ui->altVsTimePlot->replot();
 }
 
