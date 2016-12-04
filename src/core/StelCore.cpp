@@ -46,6 +46,8 @@
 #include <QDebug>
 #include <QMetaEnum>
 #include <QTimeZone>
+#include <QFile>
+#include <QDir>
 
 #include <iostream>
 #include <fstream>
@@ -58,6 +60,7 @@ const Mat4d StelCore::matJ2000ToGalactic(-0.054875539726, 0.494109453312, -0.867
 const Mat4d StelCore::matGalacticToJ2000(matJ2000ToGalactic.transpose());
 const Mat4d StelCore::matJ2000ToSupergalactic(0.37501548, -0.89832046, 0.22887497, 0, 0.34135896, -0.09572714, -0.93504565, 0, 0.86188018, 0.42878511, 0.27075058, 0, 0, 0, 0, 1);
 const Mat4d StelCore::matSupergalacticToJ2000(matJ2000ToSupergalactic.transpose());
+Mat4d StelCore::matJ2000ToJ1875; // gets to be initialized in constructor.
 
 const double StelCore::JD_SECOND = 0.000011574074074074074074;	// 1/(24*60*60)=1/86400
 const double StelCore::JD_MINUTE = 0.00069444444444444444444;	// 1/(24*60)   =1/1440
@@ -122,6 +125,13 @@ StelCore::StelCore()
 	flagUseNutation=conf->value("astro/flag_nutation", true).toBool();
 	flagUseTopocentricCoordinates=conf->value("astro/flag_topocentric_coordinates", true).toBool();
 	flagUseDST=conf->value("localization/flag_dst", true).toBool();
+
+	// Initialize matJ2000ToJ1875 matrix
+	double jd1875, eps1875, chi1875, omega1875, psi1875;
+	StelUtils::getJDFromDate(&jd1875, 1875, 1, 0, 0, 0, 0);
+	getPrecessionAnglesVondrak(jd1875, &eps1875, &chi1875, &omega1875, &psi1875);
+	matJ2000ToJ1875= Mat4d::xrotation(84381.406*1./3600.*M_PI/180.) * Mat4d::zrotation(-psi1875) * Mat4d::xrotation(-omega1875) * Mat4d::zrotation(chi1875);
+	matJ2000ToJ1875=matJ2000ToJ1875.transpose();
 }
 
 
@@ -754,6 +764,11 @@ Vec3d StelCore::equinoxEquToJ2000(const Vec3d& v) const
 Vec3d StelCore::j2000ToEquinoxEqu(const Vec3d& v) const
 {
 	return matJ2000ToEquinoxEqu*v;
+}
+
+Vec3d StelCore::j2000ToJ1875(const Vec3d& v) const
+{
+	return matJ2000ToJ1875*v;
 }
 
 Vec3d StelCore::j2000ToGalactic(const Vec3d& v) const
@@ -2292,4 +2307,91 @@ void StelCore::initEphemeridesFunctions()
 		EphemWrapper::init_de431(de431FilePath.toStdString().c_str());
 	}
 	setDe431Active(de431Available && conf->value("astro/flag_use_de431", false).toBool());
+}
+
+// Methods for finding constellation from J2000 position.
+typedef struct iau_constline{
+	float RAlow;  // low value of 1875.0 right ascension segment, HH.dddd
+	float RAhigh; // high value of 1875.0 right ascension segment, HH.dddd
+	float decLow; // declination 1875.0 of southern border, DD.dddd
+	QString constellation; // 3-letter code of constellation
+} iau_constelspan;
+
+static QVector<iau_constelspan> iau_constlineVec;
+static bool iau_constlineVecInitialized=false;
+
+// File iau_constellations_spans.dat is file data.dat from ADC catalog VI/42
+QString StelCore::getIAUConstellation(const Vec3d positionJ2000) const
+{
+	// Precess positionJ2000 to 1875.0
+	Vec3d pos1875=j2000ToJ1875(positionJ2000);
+	float RA1875;
+	float dec1875;
+	StelUtils::rectToSphe(&RA1875, &dec1875, pos1875);
+	RA1875 *= 12./M_PI; // hours
+	if (RA1875 <0.f) RA1875+=24.f;
+	dec1875 *= 180./M_PI; // degrees
+	Q_ASSERT(RA1875>=0.0f);
+	Q_ASSERT(RA1875<=24.0f);
+	Q_ASSERT(dec1875<=90.0f);
+	Q_ASSERT(dec1875>=-90.0f);
+
+	// read file into structure.
+	if (!iau_constlineVecInitialized)
+	{
+		//struct iau_constline line;
+		QFile file("data/constellations_spans.dat");
+
+		if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+		{
+			qWarning() << "IAU constellation line data file data/constellations_spans.dat not found.";
+			return "err";
+		}
+		iau_constelspan span;
+		QRegExp emptyLine("^\\s*$");
+		QTextStream in(&file);
+		while (!in.atEnd())
+		{
+			// Build list of entries. The checks can certainly become more robust. Actually the file must have 4-part lines.
+			QString line = in.readLine();
+			if (line.length()==0) continue;
+			if (emptyLine.exactMatch((line))) continue;
+			if (line.at(0)=='#') continue; // skip comment lines.
+			//QStringList list = line.split(QRegExp("\\b\\s+\\b"));
+			QStringList list = line.trimmed().split(QRegExp("\\s+"));
+			if (list.count() != 4)
+			{
+				qWarning() << "IAU constellation file constellations_spans.dat has bad line:" << line << "with" << list.count() << "elements";
+				continue;
+			}
+			//qDebug() << "Creating span for decl=" << list.at(2) << " from RA=" << list.at(0) << "to" << list.at(1) << ": " << list.at(3);
+			span.RAlow=atof(list.at(0).toLatin1());
+			span.RAhigh=atof(list.at(1).toLatin1());
+			span.decLow=atof(list.at(2).toLatin1());
+			span.constellation=list.at(3);
+			iau_constlineVec.append(span);
+		}
+		file.close();
+		iau_constlineVecInitialized=true;
+	}
+
+	// iterate through vector, find entry where declination is lower.
+	int entry=0;
+	while (iau_constlineVec.at(entry).decLow > dec1875)
+		entry++;
+	step3:
+	while (iau_constlineVec.at(entry).RAhigh <= RA1875)
+		entry++;
+	while (iau_constlineVec.at(entry).RAlow >= RA1875)
+		entry++;
+	if (iau_constlineVec.at(entry).RAhigh > RA1875)
+		return iau_constlineVec.at(entry).constellation;
+	else
+		if (entry >= iau_constlineVec.size())
+		{
+			qDebug() << "getIAUconstellation error: Cannot determine, algorithm failed.";
+			return "(?)";
+		}
+	else
+		goto step3;
 }

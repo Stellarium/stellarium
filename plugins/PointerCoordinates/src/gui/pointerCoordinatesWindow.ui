@@ -220,6 +220,16 @@
            </layout>
           </item>
           <item>
+           <widget class="QCheckBox" name="checkBoxConstellation">
+            <property name="toolTip">
+             <string>3-letter IAU constellation abbreviation</string>
+            </property>
+            <property name="text">
+             <string>IAU constellation code</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
              <widget class="QLabel" name="labelFontSize">

@@ -2,6 +2,7 @@
  * Pointer Coordinates plug-in for Stellarium
  *
  * Copyright (C) 2014 Alexander Wolf
+ * Copyright (C) 2016 Georg Zotti (Constellation code)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,7 +55,7 @@ StelPluginInfo PointerCoordinatesStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
 	info.id = "PointerCoordinates";
 	info.displayedName = N_("Pointer Coordinates");
-	info.authors = "Alexander Wolf";
+	info.authors = "Alexander Wolf, Georg Zotti";
 	info.contact = "http://stellarium.org";
 	info.description = N_("This plugin shows the coordinates of the mouse pointer.");
 	info.version = POINTERCOORDINATES_PLUGIN_VERSION;
@@ -67,6 +68,7 @@ PointerCoordinates::PointerCoordinates()
 	, flagShowCoordinates(false)
 	, flagEnableAtStartup(false)
 	, flagShowCoordinatesButton(false)
+	, flagShowConstellation(false)
 	, textColor(Vec3f(1,0.5,0))
 	, coordinatesPoint(Vec3d(0,0,0))
 	, fontSize(14)
@@ -99,6 +101,7 @@ void PointerCoordinates::init()
 
 	enableCoordinates(getFlagEnableAtStartup());
 	setFlagShowCoordinatesButton(flagShowCoordinatesButton);
+	setFlagShowConstellation(flagShowConstellation);
 }
 
 void PointerCoordinates::deinit()
@@ -293,7 +296,12 @@ void PointerCoordinates::draw(StelCore *core)
 		}
 	}
 
-	QString coordsText = QString("%1: %2/%3").arg(coordsSystem).arg(cxt).arg(cyt);
+	QString constel;
+	if (flagShowConstellation)
+	{
+		constel=QString(" (%1)").arg(core->getIAUConstellation(mousePosition));
+	}
+	QString coordsText = QString("%1: %2/%3%4").arg(coordsSystem).arg(cxt).arg(cyt).arg(constel);
 	sPainter.drawText(getCoordinatesPlace(coordsText).first, getCoordinatesPlace(coordsText).second, coordsText);
 }
 
@@ -349,6 +357,7 @@ void PointerCoordinates::loadConfiguration(void)
 	setCurrentCoordinateSystemKey(conf->value("current_coordinate_system", "RaDecJ2000").toString());
 	QStringList cc = conf->value("custom_coordinates", "1,1").toString().split(",");
 	setCustomCoordinatesPlace(cc[0].toInt(), cc[1].toInt());
+	flagShowConstellation = conf->value("flag_show_constellation", false).toBool();
 
 	conf->endGroup();
 }
@@ -365,6 +374,7 @@ void PointerCoordinates::saveConfiguration(void)
 	conf->setValue("custom_coordinates", QString("%1,%2").arg(cc.first).arg(cc.second));
 	//conf->setValue("text_color", "1,0.5,0");
 	conf->setValue("font_size", getFontSize());
+	conf->setValue("flag_show_constellation", getFlagShowConstellation());
 
 	conf->endGroup();
 }

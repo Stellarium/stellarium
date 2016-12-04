@@ -86,6 +86,8 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
 			infoTextFilters |= StelObject::EclipticCoordOfDate;
 		if (conf->value("flag_show_eclcoordj2000", false).toBool())
 			infoTextFilters |= StelObject::EclipticCoordJ2000;
+		if (conf->value("flag_show_constellation", false).toBool())
+			infoTextFilters |= StelObject::IAUConstellation;
 		conf->endGroup();
 	}
 	else
