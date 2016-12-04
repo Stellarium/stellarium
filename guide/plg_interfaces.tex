@@ -520,44 +520,6 @@ minor bodies (and maybe even planetary moons) to improve performance.
 
 On this tab, you find the option to connect to the MPC and download current orbital elements. 
 
-
-\newpage
-
-\section{Timezone Configuration Plugin}
-\label{sec:plugins:Timezones}
-
-
-\begin{figure}[h]\centering
-\includegraphics[width=.9\textwidth]{Timezone}
-\label{fig:plugins:Timezones}
-\caption{Interface of the TimeZone Configuration Plugin}
-\end{figure}
-
-
-\noindent After installation, Stellarium uses the timezone configured in the
-computer's operating system. This may have unwanted consequences,
-e.g.\ when you want to check the sky for a location on another
-continent. You may set location in the location panel (see
-\ref{sec:gui:location}), but the time will not be the zone time of
-this location but still zone time of your computer!
-
-Another effect of our civilisation that sometimes brings unwanted side
-effects concerns daylight saving time (DST): When you run a timelapse
-with 1-day intervals, you will see what appear to be wrong jumps on
-the days when DST is switched (e.g., end of March/end of October, but
-rules evolve over time and regions). You may want to keep a single
-time zone without DST for such simulations.
-
-
-If enabled (see section~\ref{sec:Plugins:EnablingPlugins}), you can
-choose to use your timezone (default), or plain Universal Coordinated
-Time (UTC) (equivalent to what used to be called Greenwich Mean Time
-GMT), or select a time zone (in steps of 15 minutes). 
-
-Note that you must exit and restart Stellarium to activate the new
-timezone, so jumping from location to location on Earth and showing
-correct zone time is not possible.
-
 %% TODO: Obviously, we should adapt our TZ handling to make this
 %% possible! Store TZ in location list, and suggest/guess TZ from
 %% longitude of map-clicked location.

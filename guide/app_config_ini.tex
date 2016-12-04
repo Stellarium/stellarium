@@ -84,7 +84,11 @@ meteor\_zhr                       & int & 10 & ZHR for sporadic meteors.\\\midru
 de430\_path	  					  & string &  & Path to JPL DE430 ephemerides.\\\midrule
 flag\_use\_de430				  & bool & false & Enables/disables usage JPL DE430 ephemerides (if available).\\\midrule
 de431\_path	  					  & string &  & Path to JPL DE431 ephemerides.\\\midrule
-flag\_use\_de431				  & bool & false & Enables/disables usage JPL DE431 ephemerides (if available).\\\bottomrule
+flag\_use\_de431				  & bool & false & Enables/disables usage JPL DE431 ephemerides (if available).\\\midrule
+flag\_toast\_survey				  & bool & false & Enables/disables usage Digitized Sky Survey in TOAST format.\\\midrule
+toast\_survey\_host				  & string &  & Host of Digitized Sky Survey storage data.\\\midrule
+toast\_survey\_directory		  & string & results & Directory name of Digitized Sky Survey storage data.\\\midrule
+toast\_survey\_levels			  & int & 11 & Count of levels for Digitized Sky Survey storage data.\\\bottomrule
 \end{longtabu}
 
 \subsection{\big[color\big]}
@@ -107,6 +111,8 @@ ecliptical\_color        				& \ccbox{0.6,0.3,0.1} &  ecliptical grid (of date).
 ecliptical\_J2000\_color 				& \ccbox{0.4,0.1,0.1} &  ecliptical grid (J2000). \\\midrule
 galactic\_color          				& \ccbox{0.0,0.3,0.2} &  galactic grid. \\\midrule
 galactic\_equator\_color 				& \ccbox{0.5,0.3,0.1} &  galactic equator line. \\\midrule
+supergalactic\_color       				& \ccbox{0.5,0.5,0.7} &  supergalactic grid. \\\midrule
+supergalactic\_equator\_color 			& \ccbox{0.5,0.5,0.7} &  supergalactic equator line. \\\midrule
 equator\_color           				& \ccbox{0.3,0.5,1.0} &  equatorial line. \\\midrule
 ecliptic\_color          				& \ccbox{0.9,0.6,0.2} &  ecliptic line (of date). \\\midrule
 ecliptic\_J2000\_color   				& \ccbox{0.7,0.2,0.2} &  ecliptic grid (J2000). \\\midrule
@@ -122,10 +128,19 @@ planet\_orbits\_color    				& \ccbox{0.7,0.2,0.2} &  orbits. \\\midrule
 planet\_pointers\_color  				& \ccbox{1.0,0.3,0.3} &  planet pointers. \\\midrule
 object\_trails\_color    				& \ccbox{1.0,0.7,0.0} &  planet trails. \\\midrule
 precession\_circles\_color 				& \ccbox{0.9,0.6,0.2} &  precession circles. \\\midrule
-prime\_vertical\_color   				& \ccbox{0.18,0.54,0.18} &  prime vertical. \\\midrule
+prime\_vertical\_color   				& \ccbox{0.2,0.5,0.2} &  prime vertical. \\\midrule
 longitude\_color	     				& \ccbox{0.2,0.4,0.4} &  opposition/conjunction longitude. \\\midrule
 circumpolar\_circles\_color 			& \ccbox{0.5,0.5,0.7} &  circumpolar circles. \\\midrule
 colures\_color 			 				& \ccbox{0.5,0.5,0.7} &  colures. \\\midrule
+celestial\_J2000\_poles\_color			& \ccbox{0.5,0.5,0.7} &  celestial poles (J2000.0 frame). \\\midrule
+celestial\_poles\_color					& \ccbox{0.5,0.5,0.7} &  celestial poles. \\\midrule
+zenith\_nadir\_color					& \ccbox{0.5,0.5,0.7} &  zenith and nadir. \\\midrule
+ecliptic\_J2000\_poles\_color			& \ccbox{0.5,0.5,0.7} &  ecliptic poles (J2000.0 frame). \\\midrule
+ecliptic\_poles\_color					& \ccbox{0.5,0.5,0.7} &  ecliptic poles. \\\midrule
+galactic\_poles\_color					& \ccbox{0.5,0.5,0.7} &  galactic poles. \\\midrule
+supergalactic\_poles\_color				& \ccbox{0.5,0.5,0.7} &  supergalactic poles. \\\midrule
+equinox\_J2000\_points\_color			& \ccbox{0.5,0.5,0.7} &  equinox points (J2000.0 frame). \\\midrule
+equinox\_points\_color					& \ccbox{0.5,0.5,0.7} &  equinox points. \\\midrule
 telescope\_circle\_color 				& \ccbox{0.6,0.4,0.0} &  telescope location indicator. \\\midrule
 telescope\_label\_color  				& \ccbox{0.6,0.4,0.0} &  telescope label (next to location circle). \\\midrule
 script\_console\_keyword\_color  		& \ccbox{1.0,0.0,1.0} & syntax highlight for keywords in the script console. \\\midrule
@@ -183,11 +198,13 @@ flag\_show\_extra             & bool & extra info for object.\\\midrule
 flag\_show\_hourangle         & bool & hour angle for object.\\\midrule
 flag\_show\_magnitude         & bool & magnitude for object.\\\midrule
 flag\_show\_name              & bool & common name for object.\\\midrule
-flag\_show\_radecj2000        & bool & equatorial coordinates (J2000) of object.\\\midrule
+flag\_show\_radecj2000        & bool & equatorial coordinates (J2000.0 frame) of object.\\\midrule
 flag\_show\_radecofdate       & bool & equatorial coordinates (of date) of object.\\\midrule
 flag\_show\_size              & bool & size of object.\\\midrule
 flag\_show\_galcoord          & bool & galactic coordinates (System~II) of object.\\\midrule
-flag\_show\_eclcoord          & bool & ecliptic coordinates (J2000 and of date) of object.\\\midrule
+flag\_show\_supergalcoord     & bool & supergalactic coordinates of object.\\\midrule
+flag\_show\_eclcoordj2000     & bool & ecliptic coordinates (J2000.0 frame) of object.\\\midrule
+flag\_show\_eclcoordofdate    & bool & ecliptic coordinates (of date) of object.\\\midrule
 flag\_show\_type              & bool & type of object\\\bottomrule
 \end{longtabu}
 
@@ -284,6 +301,7 @@ flag\_show\_flip\_buttons       & bool  & false & Enables/disables display of th
                                                   toolbar (see section \ref{sec:gui:configuration:tools})\\\midrule
 flag\_show\_nebulae\_background\_button & bool & false & Set to \emph{true} if you want to have access to the 
                                                          button for enabling/disabling backgrounds for deep-sky objects\\\midrule
+flag\_show\_toast\_survey\_button & bool & false & Set to \emph{true} if you want to have access to the button for enabling/disabling Digitized Sky Survey for deep-sky objects\\\midrule
 selected\_object\_info          & string & all  & Values: \emph{all}, \emph{short}, \emph{none}, 
                                                   and \emph{custom} (since V0.12.0; see~\ref{sec:gui:configuration:info}).\\\midrule
 auto\_hide\_horizontal\_toolbar & bool   & true & Set to \emph{true} if you want auto hide the horizontal toolbar.\\\midrule
