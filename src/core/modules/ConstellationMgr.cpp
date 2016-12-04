@@ -421,6 +421,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		if(cons->read(record, hipStarMgr))
 		{
 			cons->artFader.setMaxValue(artIntensity);
+			cons->artFader.setDuration((int) (artFadeDuration * 1000.f));
 			cons->setFlagArt(artDisplayed);
 			cons->setFlagBoundaries(boundariesDisplayed);
 			cons->setFlagLines(linesDisplayed);
