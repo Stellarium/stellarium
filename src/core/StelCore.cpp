@@ -2340,7 +2340,7 @@ QString StelCore::getIAUConstellation(const Vec3d positionJ2000) const
 	if (!iau_constlineVecInitialized)
 	{
 		//struct iau_constline line;
-		QFile file("data/constellations_spans.dat");
+		QFile file(StelFileMgr::findFile("data/constellations_spans.dat"));
 
 		if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
 		{
