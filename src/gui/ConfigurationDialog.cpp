@@ -473,7 +473,7 @@ void ConfigurationDialog::setBriefSelectedInfo(void)
 
 void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 {
-	// As this signal will be called when a checbox is toggled,
+	// As this signal will be called when a checkbox is toggled,
 	// change the general mode to Custom.
 	if (!ui->customSelectedInfoRadio->isChecked())
 		ui->customSelectedInfoRadio->setChecked(true);
@@ -512,6 +512,8 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 		flags |= StelObject::EclipticCoordJ2000;
 	if (ui->checkBoxEclipticCoordsOfDate->isChecked())
 		flags |= StelObject::EclipticCoordOfDate;
+	if (ui->checkBoxConstellation->isChecked())
+		flags |= StelObject::IAUConstellation;
 
 	gui->setInfoTextFilters(flags);
 }
@@ -773,6 +775,8 @@ void ConfigurationDialog::saveCurrentViewOptions()
 			       (bool) (flags & StelObject::EclipticCoordOfDate));
 		conf->setValue("flag_show_eclcoordj2000",
 			       (bool) (flags & StelObject::EclipticCoordJ2000));
+		conf->setValue("flag_show_constellation",
+			       (bool) (flags & StelObject::IAUConstellation));
 		conf->endGroup();
 	}
 
@@ -1327,6 +1331,7 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxType->setChecked(flags & StelObject::ObjectType);
 	ui->checkBoxEclipticCoordsJ2000->setChecked(flags & StelObject::EclipticCoordJ2000);
 	ui->checkBoxEclipticCoordsOfDate->setChecked(flags & StelObject::EclipticCoordOfDate);
+	ui->checkBoxConstellation->setChecked(flags & StelObject::IAUConstellation);
 }
 
 void ConfigurationDialog::updateTabBarListWidgetWidth()

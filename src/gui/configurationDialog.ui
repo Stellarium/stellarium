@@ -610,19 +610,6 @@
                </attribute>
               </widget>
              </item>
-             <item row="7" column="1">
-              <widget class="QCheckBox" name="checkBoxExtra">
-               <property name="toolTip">
-                <string>Spectral class, nebula type, etc.</string>
-               </property>
-               <property name="text">
-                <string>Additional information</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
              <item row="7" column="0">
               <widget class="QCheckBox" name="checkBoxType">
                <property name="toolTip">
@@ -659,6 +646,32 @@
                </attribute>
               </widget>
              </item>
+             <item row="7" column="1">
+              <widget class="QCheckBox" name="checkBoxExtra">
+               <property name="toolTip">
+                <string>Spectral class, nebula type, etc.</string>
+               </property>
+               <property name="text">
+                <string>Additional information</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="checkBoxSize">
+               <property name="toolTip">
+                <string>Angular or physical size</string>
+               </property>
+               <property name="text">
+                <string>Size</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
              <item row="5" column="1">
               <widget class="QCheckBox" name="checkBoxAltAz">
                <property name="toolTip">
@@ -682,13 +695,10 @@
                </attribute>
               </widget>
              </item>
-             <item row="6" column="0">
-              <widget class="QCheckBox" name="checkBoxSize">
-               <property name="toolTip">
-                <string>Angular or physical size</string>
-               </property>
+             <item row="6" column="1">
+              <widget class="QCheckBox" name="checkBoxDistance">
                <property name="text">
-                <string>Size</string>
+                <string>Distance</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedFields</string>
@@ -699,16 +709,6 @@
               <widget class="QCheckBox" name="checkBoxGalacticCoordinates">
                <property name="text">
                 <string>Galactic coordinates</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="6" column="1">
-              <widget class="QCheckBox" name="checkBoxDistance">
-               <property name="text">
-                <string>Distance</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedFields</string>
@@ -772,6 +772,19 @@
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedFields</string>
                </attribute>
+              </widget>
+             </item>
+             <item row="8" column="0">
+              <widget class="QCheckBox" name="checkBoxConstellation">
+               <property name="toolTip">
+                <string>3-letter IAU constellation abbreviation</string>
+               </property>
+               <attribute name="buttonGroup">
+               <string notr="true">buttonGroupDisplayedFields</string>
+              </attribute>
+               <property name="text">
+                <string>Constellation</string>
+               </property>
               </widget>
              </item>
             </layout>

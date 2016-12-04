@@ -265,6 +265,12 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 			res += q_("Supergalactic longitude/latitude: %1/%2").arg(StelUtils::radToDmsStr(sglong,true), StelUtils::radToDmsStr(sglat,true)) + "<br>";
 	}
 
+	if (flags&IAUConstellation)
+	{
+		QString constel=core->getIAUConstellation(getJ2000EquatorialPos(core));
+		res += q_("IAU Constellation: %1").arg(constel) + "<br>";
+	}
+
 	if ((flags&Extra) && (currentPlanet=="Earth"))
 	{
 		double longitude=core->getCurrentLocation().longitude;
