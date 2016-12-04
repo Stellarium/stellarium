@@ -2379,19 +2379,17 @@ QString StelCore::getIAUConstellation(const Vec3d positionJ2000) const
 	int entry=0;
 	while (iau_constlineVec.at(entry).decLow > dec1875)
 		entry++;
-	step3:
-	while (iau_constlineVec.at(entry).RAhigh <= RA1875)
-		entry++;
-	while (iau_constlineVec.at(entry).RAlow >= RA1875)
-		entry++;
-	if (iau_constlineVec.at(entry).RAhigh > RA1875)
-		return iau_constlineVec.at(entry).constellation;
-	else
-		if (entry >= iau_constlineVec.size())
-		{
-			qDebug() << "getIAUconstellation error: Cannot determine, algorithm failed.";
-			return "(?)";
-		}
-	else
-		goto step3;
+	while (entry<iau_constlineVec.size()){
+
+		while (iau_constlineVec.at(entry).RAhigh <= RA1875)
+			entry++;
+		while (iau_constlineVec.at(entry).RAlow >= RA1875)
+			entry++;
+		if (iau_constlineVec.at(entry).RAhigh > RA1875)
+			return iau_constlineVec.at(entry).constellation;
+		else
+			entry++;
+	}
+	qDebug() << "getIAUconstellation error: Cannot determine, algorithm failed.";
+	return "(?)";
 }
