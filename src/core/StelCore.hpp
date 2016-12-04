@@ -219,6 +219,7 @@ public:
 	Vec3d galacticToJ2000(const Vec3d& v) const;
 	Vec3d supergalacticToJ2000(const Vec3d& v) const;
 	Vec3d equinoxEquToJ2000(const Vec3d& v) const;
+	Vec3d j2000ToJ1875(const Vec3d& v) const;
 	Vec3d j2000ToEquinoxEqu(const Vec3d& v) const;
 	Vec3d j2000ToGalactic(const Vec3d& v) const;
 	Vec3d j2000ToSupergalactic(const Vec3d& v) const;
@@ -269,6 +270,8 @@ public:
 	static const Mat4d matJ2000ToSupergalactic;
 	//! Rotation matrix from Supergalactic to J2000 reference frame.
 	static const Mat4d matSupergalacticToJ2000;
+	//! Precession matrix for IAU constellation lookup.
+	static Mat4d matJ2000ToJ1875;
 
 	//! Return the observer heliocentric ecliptic position
 	Vec3d getObserverHeliocentricEclipticPos() const;
@@ -671,6 +674,12 @@ public slots:
 	bool de431IsActive();               //!< true if DE431 ephemeris is in use
 	void setDe430Active(bool status);   //!< switch DE430 use to @param status (if de430IsAvailable()). DE430 is only used if date is within range of DE430.
 	void setDe431Active(bool status);   //!< switch DE431 use to @param status (if de431IsAvailable()). DE431 is only used if DE430 is not used and the date is within range of DE431.
+
+	//! Return 3-letter abbreviation of IAU constellation name for position in J2000 coordinates.
+	//! Follows 1987PASP...99..695R: Nancy Roman: Identification of a Constellation from a Position
+	//! Data file from ADC catalog VI/42 with her amendment from 1999-12-30.
+	QString getIAUConstellation(const Vec3d positionJ2000) const;
+
 
 signals:
 	//! This signal is emitted when the observer location has changed.
