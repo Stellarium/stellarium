@@ -267,7 +267,6 @@ public slots:
 	//! Get the thickness of lines of the constellations
 	float getConstellationLineThickness() const { return constellationLineThickness; }
 
-
 signals:
 	void artDisplayedChanged(const bool displayed) const;
 	void artFadeDurationChanged(const float duration) const;
@@ -299,6 +298,9 @@ private slots:
 	//! The translation is done using gettext with translated strings defined
 	//! in translations.h
 	void updateI18n();
+
+	//! Remove constellations from selected objects
+	void deselectConstellations(void);
 
 private:
 	//! Read constellation names from the given file.
@@ -350,19 +352,18 @@ private:
 	//! Define which constellation is selected and return brightest star.
 	StelObjectP setSelectedStar(const QString& abbreviation);
 	//! Define which constellation is selected from a star number.
-	void setSelected(const StelObject* s) {if (!s) setSelectedConst(NULL); else setSelectedConst(isStarIn(s));}
+	void setSelected(const StelObject* s);
 	//! Remove all selected constellations.
-	void deselect() {setSelected(NULL);}
+	void deselect() { setSelected(NULL); }
 	//! Get the first selected constellation.
 	//! NOTE: this function should return a list of all, or may be deleted. Please
 	//! do not use until it exhibits the proper behaviour.
 	StelObject* getSelected(void) const;
-	//! Remove constellations from selected objects
-	void deselectConstellations(void);
 
 	std::vector<Constellation*> selected; // More than one can be selected at a time
 
 	Constellation* isStarIn(const StelObject *s) const;
+	Constellation* isObjectIn(const StelObject *s) const;
 	Constellation* findFromAbbreviation(const QString& abbreviation) const;
 	std::vector<Constellation*> asterisms;
 	QFont asterFont;
