@@ -146,6 +146,7 @@ void ConstellationMgr::init()
 	addAction("actionShow_Constellation_Labels", displayGroup, N_("Constellation labels"), "namesDisplayed", "V");
 	addAction("actionShow_Constellation_Boundaries", displayGroup, N_("Constellation boundaries"), "boundariesDisplayed", "B");
 	addAction("actionShow_Constellation_Isolated", displayGroup, N_("Select single constellation"), "isolateSelected"); // no shortcut, sync with GUI
+	addAction("actionShow_Constellation_Deselect", displayGroup, N_("Remove selection of constellations"), this, "deselectConstellations()", "Alt+Esc");
 }
 
 /*************************************************************************
@@ -250,17 +251,19 @@ void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction a
 	}
 	else
 	{
-		const QList<StelObjectP> newSelectedStar = omgr->getSelectedObject("Star");
-		if (!newSelectedStar.empty())
+		QList<StelObjectP> newSelectedObject;
+		if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesIdx()==0) // generic IAU boundaries
+			newSelectedObject = omgr->getSelectedObject();
+		else
+			newSelectedObject = omgr->getSelectedObject("Star");
+
+		if (!newSelectedObject.empty())
 		{
-//			if (!added)
-//				setSelected(NULL);
-			setSelected(newSelectedStar[0].data());
+			setSelected(newSelectedObject[0].data());
 		}
 		else
 		{
-//			if (!added)
-				setSelected(NULL);
+			setSelected(NULL);
 		}
 	}
 }
@@ -1406,4 +1409,31 @@ QStringList ConstellationMgr::listAllObjects(bool inEnglish) const
 		}
 	}
 	return result;
+}
+
+void ConstellationMgr::setSelected(const StelObject *s)
+{
+	if (!s)
+		setSelectedConst(NULL);
+	else
+	{
+		if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesIdx()==0) // generic IAU boundaries
+			setSelectedConst(isObjectIn(s));
+		else
+			setSelectedConst(isStarIn(s));
+	}
+}
+
+Constellation* ConstellationMgr::isObjectIn(const StelObject *s) const
+{
+	StelCore *core = StelApp::getInstance().getCore();
+	QString IAUConst = core->getIAUConstellation(s->getJ2000EquatorialPos(core));
+	vector < Constellation * >::const_iterator iter;
+	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	{
+		// Check if the object is in the constellation
+		if ((*iter)->getShortName().toUpper()==IAUConst.toUpper())
+			return (*iter);
+	}
+	return NULL;
 }
