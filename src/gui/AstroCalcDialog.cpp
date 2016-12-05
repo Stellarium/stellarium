@@ -623,6 +623,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 	QList<double> aX, aY;
 
 	StelObjectP selectedObject = objectMgr->searchByName(ui->celestialObjectsList->currentData(Qt::UserRole).toString());
+
 	double currentJD = core->getJD();
 	double noon = (int)currentJD;
 	double az, alt, deg;
@@ -673,6 +674,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 	ui->altVsTimePlot->graph(0)->setPen(QPen(Qt::red, 1));
 	ui->altVsTimePlot->graph(0)->setLineStyle(QCPGraph::lsLine);	
 	ui->altVsTimePlot->graph(0)->rescaleAxes(true);
+	ui->altVsTimePlot->graph(0)->setName(selectedObject->getNameI18n());
 	ui->altVsTimePlot->xAxis->setLabel(xAxisStr);
 	ui->altVsTimePlot->yAxis->setLabel(yAxisStr);
 
@@ -698,6 +700,19 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 	ui->altVsTimePlot->yAxis->setTickPen(axisPen);
 	ui->altVsTimePlot->yAxis->setSubTickPen(axisPen);
 
+	// Added vertical line indicating "now"
+	double now = ((currentJD + core->getUTCOffset(currentJD)/24 - xStartJD)*xSeconds);
+	QList<double> ax1, ay1;
+	ax1.append(now);
+	ax1.append(now);
+	ay1.append(minY);
+	ay1.append(maxY);
+	QVector<double> x1 = ax1.toVector(), y1 = ay1.toVector();
+	ui->altVsTimePlot->addGraph();
+	ui->altVsTimePlot->graph(1)->setData(x1, y1);
+	ui->altVsTimePlot->graph(1)->setPen(QPen(Qt::yellow, 1));
+	ui->altVsTimePlot->graph(1)->setLineStyle(QCPGraph::lsLine);
+
 	ui->altVsTimePlot->replot();
 }
 
@@ -720,7 +735,7 @@ void AstroCalcDialog::mouseOverLine(QMouseEvent *event)
 			QString LT = StelUtils::jdToQDateTime(JD + core->getUTCOffset(JD)).toString("H:mm");
 
 			QToolTip::hideText();
-			QToolTip::showText(event->globalPos(), QString("%1: %2<br />%3: %4%5").arg(q_("Local Time"), LT, q_("Altitude"), QString::number(y, 'f', 2), QChar(0x00B0)), ui->altVsTimePlot, ui->altVsTimePlot->rect());
+			QToolTip::showText(event->globalPos(), QString("%1<br />%2: %3<br />%4: %5%6").arg(ui->altVsTimePlot->graph(0)->name(), q_("Local Time"), LT, q_("Altitude"), QString::number(y, 'f', 2), QChar(0x00B0)), ui->altVsTimePlot, ui->altVsTimePlot->rect());
 		}
 		else
 			QToolTip::hideText();
