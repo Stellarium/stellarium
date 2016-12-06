@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-05 01:54+0700\n"
-"PO-Revision-Date: 2016-12-03 19:17+0000\n"
+"POT-Creation-Date: 2016-12-05 20:05+0700\n"
+"PO-Revision-Date: 2016-12-05 18:03+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-05 04:41+0000\n"
+"X-Launchpad-Export-Date: 2016-12-06 04:40+0000\n"
 "X-Generator: Launchpad (build 18282)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -77,6 +77,10 @@ msgstr "Tähdistöjen rajaviivat"
 #: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1385
 msgid "Select single constellation"
 msgstr "Valitse yksittäinen tähdistö"
+
+#: src/core/modules/ConstellationMgr.cpp:149
+msgid "Remove selection of constellations"
+msgstr "Poista tähdistöjen valinnat"
 
 #: src/core/modules/StarMgr.cpp:434 src/ui_viewDialog.h:1909
 #: src/ui_dsoColorsDialog.h:541
@@ -1920,7 +1924,7 @@ msgstr "Supergalaktinen pituus/leveys: %1/%2"
 #: src/core/StelObject.cpp:271
 #, qt-format
 msgid "IAU Constellation: %1"
-msgstr ""
+msgstr "IAU:n tähdistö: %1"
 
 #: src/core/StelObject.cpp:280
 #, qt-format
@@ -3160,7 +3164,7 @@ msgstr "Kirkkaat galaksit (<%1 mag.)"
 
 #: src/gui/AstroCalcDialog.cpp:619 src/gui/AstroCalcDialog.cpp:723
 msgid "Local Time"
-msgstr ""
+msgstr "Paikallinen aika"
 
 #: src/gui/AstroCalcDialog.cpp:736
 msgid "Phenomenon"
@@ -6577,11 +6581,11 @@ msgstr "Visuaalinen magnitudi"
 #: src/ui_configurationDialog.h:1298
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
 msgid "3-letter IAU constellation abbreviation"
-msgstr ""
+msgstr "IAU:n kolmikirjaiminen tähdistölyhenne"
 
 #: src/ui_configurationDialog.h:1300
 msgid "Constellation"
-msgstr ""
+msgstr "Tähdistö"
 
 #: src/ui_configurationDialog.h:1301
 msgid "Control"
@@ -6802,7 +6806,7 @@ msgstr "Atsimuutti etelästä laskien"
 
 #: src/ui_configurationDialog.h:1399
 msgid "Toggle display of the button for Digitized Sky Survey."
-msgstr ""
+msgstr "Näytä digitoidun taivasmosaiikin käyttöönottopainike."
 
 #: src/ui_configurationDialog.h:1401
 msgid "Show DSS button"
@@ -7096,11 +7100,11 @@ msgstr "Päivitä taivaankappaleitten asemat"
 
 #: src/ui_astroCalcDialog.h:531
 msgid "Show dates of positions of current celestial body near markers"
-msgstr "Näytä päivämäärät sijaintimerkintöjen vieressä"
+msgstr "Näytä aikamerkinnät sijaintimerkintöjen vieressä"
 
 #: src/ui_astroCalcDialog.h:533
 msgid "Show dates of positions"
-msgstr "Näytä päivämäärät"
+msgstr "Näytä aikamerkinnät"
 
 #: src/ui_astroCalcDialog.h:535
 msgid "Show markers of positions of the current celestial body on the sky"
@@ -15080,11 +15084,11 @@ msgstr "Valitse väri omalle atsimuuttilinjalle 1"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:529
 msgid "Select color for Custom Declination 1 line"
-msgstr ""
+msgstr "Valitse oman deklinaatiolinjan 1 väri"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:540
 msgid "Select color for Custom Declination 2 line"
-msgstr ""
+msgstr "Valitse oman deklinaatiolinjan 2 väri"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:527
 msgid "ArchaeoLines Configuration"
@@ -15100,7 +15104,7 @@ msgstr "Saatat joutua poistumaan kokonäyttötilasta valitaksesi värin!"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:533
 msgid "Custom Declination 1"
-msgstr ""
+msgstr "Oma deklinaatio 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:534
 msgid "Current Sun"
@@ -15194,7 +15198,7 @@ msgstr "Yläkuunseisauslinjat"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:574
 msgid "Custom Declination 2"
-msgstr ""
+msgstr "Oma deklinaatio 2"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Ekvatoriaaliasteikko"
