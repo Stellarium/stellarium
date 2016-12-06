@@ -306,7 +306,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		}
 		else
 		{
-			if (sphereScale>1.f) // We must give correct diameters even if upscaling (e.g. Moon)
+			if (sphereScale!=1.f) // We must give correct diameters even if upscaling (e.g. Moon)
 			{
 				if (withDecimalDegree)
 					oss << q_("Apparent diameter: %1, scaled up to: %2")

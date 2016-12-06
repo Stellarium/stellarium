@@ -152,6 +152,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	QTextStream oss(&str);
 	double az_app, alt_app;
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	Q_UNUSED(az_app);
 
 	if (flags&Name)
@@ -200,24 +201,21 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	{
 		double distanceAu = getHeliocentricEclipticPos().length();
 		double distanceKm = AU * distanceAu;
-		if (englishName!="Sun")
+		if (distanceAu < 0.1)
 		{
-			if (distanceAu < 0.1)
-			{
-				// xgettext:no-c-format
-				oss << QString(q_("Distance from Sun: %1AU (%2 km)"))
-				       .arg(distanceAu, 0, 'f', 6)
-				       .arg(distanceKm, 0, 'f', 3);
-			}
-			else
-			{
-				// xgettext:no-c-format
-				oss << QString(q_("Distance from Sun: %1AU (%2 Mio km)"))
-				       .arg(distanceAu, 0, 'f', 3)
-				       .arg(distanceKm / 1.0e6, 0, 'f', 3);
-			}
-			oss << "<br>";
+			// xgettext:no-c-format
+			oss << QString(q_("Distance from Sun: %1AU (%2 km)"))
+			       .arg(distanceAu, 0, 'f', 6)
+			       .arg(distanceKm, 0, 'f', 3);
 		}
+		else
+		{
+			// xgettext:no-c-format
+			oss << QString(q_("Distance from Sun: %1AU (%2 Mio km)"))
+			       .arg(distanceAu, 0, 'f', 3)
+			       .arg(distanceKm / 1.0e6, 0, 'f', 3);
+		}
+		oss << "<br>";
 		distanceAu = getJ2000EquatorialPos(core).length();
 		distanceKm = AU * distanceAu;
 		if (distanceAu < 0.1)
@@ -251,6 +249,21 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		oss << QString(q_("Speed: %1 km/s"))
 			   .arg(((CometOrbit*)userDataPtr)->getVelocity().length()*AU/86400.0, 0, 'f', 3);
 		oss << "<br>";
+
+		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
+		const double elongation = getElongation(observerHelioPos);
+
+		if (withDecimalDegree)
+		{
+			oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDecDegStr(getPhaseAngle(observerHelioPos),4,false,true)) << "<br>";
+			oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDecDegStr(elongation,4,false,true)) << "<br>";
+		}
+		else
+		{
+			oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos), true)) << "<br>";
+			oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(elongation, true)) << "<br>";
+		}
+
 
 	}
 
