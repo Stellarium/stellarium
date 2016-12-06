@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-05 01:54+0700\n"
-"PO-Revision-Date: 2016-12-04 07:07+0000\n"
+"POT-Creation-Date: 2016-12-05 20:05+0700\n"
+"PO-Revision-Date: 2016-12-05 17:27+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-05 04:57+0000\n"
+"X-Launchpad-Export-Date: 2016-12-06 04:56+0000\n"
 "X-Generator: Launchpad (build 18282)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -83,6 +83,10 @@ msgstr "Межі сузір’їв"
 #: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1385
 msgid "Select single constellation"
 msgstr "Виберіть одне сузір'я"
+
+#: src/core/modules/ConstellationMgr.cpp:149
+msgid "Remove selection of constellations"
+msgstr "Вилучити позначення сузір’їв"
 
 #: src/core/modules/StarMgr.cpp:434 src/ui_viewDialog.h:1909
 #: src/ui_dsoColorsDialog.h:541
@@ -1943,7 +1947,7 @@ msgstr "Супергалактична довгота/широта: %1/%2"
 #: src/core/StelObject.cpp:271
 #, qt-format
 msgid "IAU Constellation: %1"
-msgstr ""
+msgstr "Сузір’я МАС: %1"
 
 #: src/core/StelObject.cpp:280
 #, qt-format
@@ -6613,11 +6617,11 @@ msgstr "Видима величина"
 #: src/ui_configurationDialog.h:1298
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
 msgid "3-letter IAU constellation abbreviation"
-msgstr ""
+msgstr "3-літерне скорочення МАС для сузір’я"
 
 #: src/ui_configurationDialog.h:1300
 msgid "Constellation"
-msgstr ""
+msgstr "Сузір’я"
 
 #: src/ui_configurationDialog.h:1301
 msgid "Control"
@@ -14357,7 +14361,7 @@ msgstr "Показувати кнопку додатка на панелі ін�
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:291
 msgid "Show IAU constellation code"
-msgstr ""
+msgstr "Показувати код МАС сузір’я"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:293
 msgid "Which coordinate system will be used for displaying"
