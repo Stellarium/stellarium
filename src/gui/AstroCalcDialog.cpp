@@ -38,11 +38,14 @@
 
 #include <QFileDialog>
 #include <QDir>
+#include <QTimer>
 
 QVector<Vec3d> AstroCalcDialog::EphemerisListJ2000;
 QVector<QString> AstroCalcDialog::EphemerisListDates;
 int AstroCalcDialog::DisplayedPositionIndex = -1;
 float AstroCalcDialog::brightLimit = 10.f;
+float AstroCalcDialog::minY = -90.f;
+float AstroCalcDialog::maxY = 90.f;
 
 AstroCalcDialog::AstroCalcDialog(QObject *parent)
 	: StelDialog(parent)	
@@ -77,12 +80,13 @@ void AstroCalcDialog::retranslate()
 		populateCelestialBodyList();
 		populateEphemerisTimeStepsList();
 		populateMajorPlanetList();
-		populateGroupCelestialBodyList();
-		populateCelestialObjectsList();
+		populateGroupCelestialBodyList();		
 		currentPlanetaryPositions();
+		if (objectMgr->getWasSelected())
+			drawAltVsTimeDiagram();
 		//Hack to shrink the tabs to optimal size after language change
 		//by causing the list items to be laid out again.
-		updateTabBarListWidgetWidth();
+		updateTabBarListWidgetWidth();		
 	}
 }
 
@@ -119,8 +123,9 @@ void AstroCalcDialog::createDialogContent()
 	populateEphemerisTimeStepsList();
 	populateMajorPlanetList();
 	populateGroupCelestialBodyList();
-	// Let's prepare Alt. vs Time diagram
-	populateCelestialObjectsList();
+	// Altitude vs. Time feature
+	prepareAxesAndGraph();
+	drawCurrentTimeDiagram();
 
 	double JD = core->getJD() + core->getUTCOffset(core->getJD())/24;
 	QDateTime currentDT = StelUtils::jdToQDateTime(JD);
@@ -146,13 +151,23 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->phenomenaTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentPhenomen(QModelIndex)));
 	connect(ui->phenomenaSaveButton, SIGNAL(clicked()), this, SLOT(savePhenomena()));
 
-	connect(ui->avtPlotButton, SIGNAL(clicked()), this, SLOT(drawAltVsTimeDiagram()));
 	connect(ui->altVsTimePlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverLine(QMouseEvent*)));
+	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAltVsTimeDiagram()));
+	if (objectMgr->getWasSelected())
+	{
+		connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawAltVsTimeDiagram(StelLocation)));
+		drawAltVsTimeDiagram();
+	}
 
 	connectBoolProperty(ui->ephemerisShowMarkersCheckBox, "SolarSystem.ephemerisMarkersDisplayed");
 	connectBoolProperty(ui->ephemerisShowDatesCheckBox, "SolarSystem.ephemerisDatesDisplayed");
 
 	currentPlanetaryPositions();
+
+	QTimer* currentTimeLine = new QTimer(this);
+	currentTimeLine->setInterval(10000);
+	currentTimeLine->setSingleShot(true);
+	connect(currentTimeLine, SIGNAL(timeout()), this, SLOT(drawCurrentTimeDiagram()));
 
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 }
@@ -557,90 +572,32 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	groups->blockSignals(false);
 }
 
-void AstroCalcDialog::populateCelestialObjectsList()
+void AstroCalcDialog::drawAltVsTimeDiagram(StelLocation loc)
 {
-	Q_ASSERT(ui->celestialObjectsList);
-
-	QComboBox* celObj = ui->celestialObjectsList;
-
-	QList<PlanetP> allSSO = solarSystem->getAllPlanets();
-	QVector<NebulaP> allDSO = dsoMgr->getAllDeepSkyObjects();
-	QList<StelObjectP> allHIP = starMgr->getHipparcosStars();
-
-	//Save the current selection to be restored later
-	celObj->blockSignals(true);
-	int index = celObj->currentIndex();
-	QVariant selectedObjectId = celObj->itemData(index);
-	celObj->clear();
-	//For each planet, display the localized name and store the original as user
-	//data. Unfortunately, there's no other way to do this than with a cycle.
-	foreach(const PlanetP& planet, allSSO)
-	{
-		// celestial bodies Solar system, except moons
-		if ((planet->getPlanetType()==Planet::isPlanet || planet->getPlanetType()==Planet::isAsteroid || planet->getPlanetType()==Planet::isComet || planet->getPlanetType()==Planet::isCubewano || planet->getPlanetType()==Planet::isDwarfPlanet || planet->getPlanetType()==Planet::isOCO || planet->getPlanetType()==Planet::isPlutino || planet->getPlanetType()==Planet::isSDO || planet->getPlanetType()==Planet::isStar) && planet->getEnglishName()!=core->getCurrentPlanet()->getEnglishName())
-			celObj->addItem(planet->getNameI18n(), planet->getEnglishName());
-
-		// moons of the current planet
-		if (planet->getPlanetType()==Planet::isMoon && planet->getEnglishName()!=core->getCurrentPlanet()->getEnglishName() && planet->getParent()==core->getCurrentPlanet())
-			celObj->addItem(planet->getNameI18n(), planet->getEnglishName());
-	}
-
-	foreach (const NebulaP& dso, allDSO)
-	{
-		if (!dso->getEnglishName().isEmpty())
-		{
-			QString designation = dso->getDSODesignation();
-			if (designation.isEmpty())
-				celObj->addItem(dso->getNameI18n(), dso->getEnglishName());
-			else
-				celObj->addItem(QString("%1 (%2)").arg(dso->getNameI18n(), designation), designation);
-		}
-	}
-
-	foreach (const StelObjectP& hip, allHIP)
-	{
-		if (!hip->getNameI18n().contains("HIP", Qt::CaseSensitive) && hip->getVMagnitude(core)<=6.f)
-			celObj->addItem(hip->getNameI18n(), hip->getEnglishName());
-	}
-
-	//Restore the selection
-	index = celObj->findData(selectedObjectId, Qt::UserRole, Qt::MatchCaseSensitive);
-	if (index<0)
-		index = celObj->findData(QVariant("Sun"), Qt::UserRole, Qt::MatchCaseSensitive);
-	celObj->setCurrentIndex(index);
-	celObj->model()->sort(0);
-	celObj->blockSignals(false);
-
+	Q_UNUSED(loc);
 	drawAltVsTimeDiagram();
 }
 
 void AstroCalcDialog::drawAltVsTimeDiagram()
 {
-	QString xAxisStr = q_("Local Time");
-	QString yAxisStr = QString("%1, %2").arg(q_("Altitude"), QChar(0x00B0));
-
 	// X axis - time; Y axis - altitude
 	QList<double> aX, aY;
 
-	StelObjectP selectedObject = objectMgr->searchByName(ui->celestialObjectsList->currentData(Qt::UserRole).toString());
+	StelObjectP selectedObject = objectMgr->getSelectedObject()[0];
 
 	double currentJD = core->getJD();
 	double noon = (int)currentJD;
 	double az, alt, deg;
 	bool sign;
 
-	const double xStartJD = 2440587.5;
-	const double xSeconds = 86400.0;
-	const double shift = core->getUTCOffset(noon)/24;
-	double minX = (noon + shift - xStartJD)*xSeconds + xSeconds*0.01; // The last member of sum was added to avoid artifacts
-	double maxX = (noon + shift + 24.0*StelCore::JD_HOUR - xStartJD)*xSeconds;
-
-	for(int i=0;i<144;i++) // Every 10 minutes (24 hours)
+	double shift = core->getUTCOffset(currentJD)/24;
+	for(int i=-1;i<=289;i++) // Every 10 minutes (24 hours)
 	{
-		double JD = noon + (i*10.0)*StelCore::JD_MINUTE;
+		double ltime = i*300 + 43200;
+		aX.append(ltime);
+		double JD = noon + ltime/86400 - shift - 0.5;
 		core->setJD(JD);
 		StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosApparent(core));
-		aX.append((JD + core->getUTCOffset(JD)/24 - xStartJD)*xSeconds);
 		StelUtils::radToDecDeg(alt, sign, deg);
 		if (!sign)
 			deg *= -1;
@@ -651,46 +608,82 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 
 	QVector<double> x = aX.toVector(), y = aY.toVector();
 
-	double minY = aY.first();
-	double maxY = aY.first();
+	double minYa = aY.first();
+	double maxYa = aY.first();
 
 	foreach (double temp, aY)
 	{
-		if(maxY < temp) maxY = temp;
-		if(minY > temp) minY = temp;
+		if(maxYa < temp) maxYa = temp;
+		if(minYa > temp) minYa = temp;
 	}
 
-	minY -= 2.0;
-	maxY += 2.0;
+	minY = minYa - 2.0;
+	maxY = maxYa + 2.0;
+
+	prepareAxesAndGraph();
+	drawCurrentTimeDiagram();
+
+	ui->altVsTimePlot->graph(0)->setData(x, y);
+	ui->altVsTimePlot->graph(0)->setName(selectedObject->getNameI18n());
+	ui->altVsTimePlot->replot();
+}
+
+// Added vertical line indicating "now"
+void AstroCalcDialog::drawCurrentTimeDiagram()
+{
+	double currentJD = core->getJD();
+	double now = ((currentJD + 0.5 - (int)currentJD) * 86400.0) + core->getUTCOffset(currentJD)*3600.0;
+	if (now>129600)
+		now -= 86400;
+	if (now<43200)
+		now += 86400;
+	QList<double> ax, ay;
+	ax.append(now);
+	ax.append(now);
+	ay.append(minY);
+	ay.append(maxY);
+	QVector<double> x = ax.toVector(), y = ay.toVector();
+	ui->altVsTimePlot->removeGraph(1);
+	ui->altVsTimePlot->addGraph();
+	ui->altVsTimePlot->graph(1)->setData(x, y);
+	ui->altVsTimePlot->graph(1)->setPen(QPen(Qt::yellow, 1));
+	ui->altVsTimePlot->graph(1)->setLineStyle(QCPGraph::lsLine);
+	ui->altVsTimePlot->graph(1)->setName("[Now]");
+
+	ui->altVsTimePlot->replot();
+}
+
+void AstroCalcDialog::prepareAxesAndGraph()
+{
+	QString xAxisStr = q_("Local Time");
+	QString yAxisStr = QString("%1, %2").arg(q_("Altitude"), QChar(0x00B0));
 
 	QColor axisColor(Qt::white);
-	QPen axisPen(axisColor,1 );
-	if (!ui->altVsTimePlot->isEnabled())
-		ui->altVsTimePlot->setEnabled(true);
+	QPen axisPen(axisColor, 1);
+
 	ui->altVsTimePlot->clearGraphs();
 	ui->altVsTimePlot->addGraph();
 	ui->altVsTimePlot->setBackground(QBrush(QColor(86, 87, 90)));
-	ui->altVsTimePlot->graph(0)->setData(x, y);
 	ui->altVsTimePlot->graph(0)->setPen(QPen(Qt::red, 1));
-	ui->altVsTimePlot->graph(0)->setLineStyle(QCPGraph::lsLine);	
+	ui->altVsTimePlot->graph(0)->setLineStyle(QCPGraph::lsLine);
 	ui->altVsTimePlot->graph(0)->rescaleAxes(true);
-	ui->altVsTimePlot->graph(0)->setName(selectedObject->getNameI18n());
 	ui->altVsTimePlot->xAxis->setLabel(xAxisStr);
 	ui->altVsTimePlot->yAxis->setLabel(yAxisStr);
 
-	ui->altVsTimePlot->xAxis->setRange(minX, maxX);
+	ui->altVsTimePlot->xAxis->setRange(43200, 129600); // 24 hours since 12h00m (range in seconds)
 	ui->altVsTimePlot->xAxis->setScaleType(QCPAxis::stLinear);
 	ui->altVsTimePlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
-	ui->altVsTimePlot->xAxis->setDateTimeFormat("H:mm");
-	ui->altVsTimePlot->xAxis->setDateTimeSpec(Qt::UTC); // Qt::UTC + core->getUTCOffset() give local time
-	ui->altVsTimePlot->xAxis->setAutoTickCount(12);
-	ui->altVsTimePlot->xAxis->setAutoSubTicks(false);
-	ui->altVsTimePlot->xAxis->setSubTickCount(6);
 	ui->altVsTimePlot->xAxis->setLabelColor(axisColor);
 	ui->altVsTimePlot->xAxis->setTickLabelColor(axisColor);
 	ui->altVsTimePlot->xAxis->setBasePen(axisPen);
 	ui->altVsTimePlot->xAxis->setTickPen(axisPen);
 	ui->altVsTimePlot->xAxis->setSubTickPen(axisPen);
+	ui->altVsTimePlot->xAxis->setDateTimeFormat("H:mm");
+	ui->altVsTimePlot->xAxis->setDateTimeSpec(Qt::UTC); // Qt::UTC + core->getUTCOffset() give local time
+	ui->altVsTimePlot->xAxis->setAutoTickStep(false);
+	ui->altVsTimePlot->xAxis->setTickStep(7200); // step is 2 hours (in seconds)
+	ui->altVsTimePlot->xAxis->setAutoSubTicks(false);
+	ui->altVsTimePlot->xAxis->setSubTickCount(7);
 
 	ui->altVsTimePlot->yAxis->setRange(minY, maxY);
 	ui->altVsTimePlot->yAxis->setScaleType(QCPAxis::stLinear);
@@ -699,21 +692,6 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 	ui->altVsTimePlot->yAxis->setBasePen(axisPen);
 	ui->altVsTimePlot->yAxis->setTickPen(axisPen);
 	ui->altVsTimePlot->yAxis->setSubTickPen(axisPen);
-
-	// Added vertical line indicating "now"
-	double now = ((currentJD + core->getUTCOffset(currentJD)/24 - xStartJD)*xSeconds);
-	QList<double> ax1, ay1;
-	ax1.append(now);
-	ax1.append(now);
-	ay1.append(minY);
-	ay1.append(maxY);
-	QVector<double> x1 = ax1.toVector(), y1 = ay1.toVector();
-	ui->altVsTimePlot->addGraph();
-	ui->altVsTimePlot->graph(1)->setData(x1, y1);
-	ui->altVsTimePlot->graph(1)->setPen(QPen(Qt::yellow, 1));
-	ui->altVsTimePlot->graph(1)->setLineStyle(QCPGraph::lsLine);
-
-	ui->altVsTimePlot->replot();
 }
 
 void AstroCalcDialog::mouseOverLine(QMouseEvent *event)
@@ -724,18 +702,26 @@ void AstroCalcDialog::mouseOverLine(QMouseEvent *event)
 	QCPAbstractPlottable *abstractGraph = ui->altVsTimePlot->plottableAt(event->pos(), false);
 	QCPGraph *graph = qobject_cast<QCPGraph *>(abstractGraph);
 
-	const double xStartJD = 2440587.5;
-	const double xSeconds = 86400.0;
-
 	if (x>ui->altVsTimePlot->xAxis->range().lower && x<ui->altVsTimePlot->xAxis->range().upper && y>ui->altVsTimePlot->yAxis->range().lower && y<ui->altVsTimePlot->yAxis->range().upper)
 	{
 		if (graph)
 		{
-			double JD = x/xSeconds + xStartJD;
+			double JD = x/86400.0 + (int)core->getJD() - 0.5;
 			QString LT = StelUtils::jdToQDateTime(JD + core->getUTCOffset(JD)).toString("H:mm");
 
+			QString info;
+			if (graph->name()=="[Now]")
+				info = q_("Now is %1").arg(LT);
+			else
+			{
+				if (StelApp::getInstance().getFlagShowDecimalDegrees())
+					info = QString("%1<br />%2: %3<br />%4: %5%6").arg(ui->altVsTimePlot->graph(0)->name(), q_("Local Time"), LT, q_("Altitude"), QString::number(y, 'f', 2), QChar(0x00B0));
+				else
+					info = QString("%1<br />%2: %3<br />%4: %5%6").arg(ui->altVsTimePlot->graph(0)->name(), q_("Local Time"), LT, q_("Altitude"), StelUtils::decDegToDmsStr(y), QChar(0x00B0));
+			}
+
 			QToolTip::hideText();
-			QToolTip::showText(event->globalPos(), QString("%1<br />%2: %3<br />%4: %5%6").arg(ui->altVsTimePlot->graph(0)->name(), q_("Local Time"), LT, q_("Altitude"), QString::number(y, 'f', 2), QChar(0x00B0)), ui->altVsTimePlot, ui->altVsTimePlot->rect());
+			QToolTip::showText(event->globalPos(), info, ui->altVsTimePlot, ui->altVsTimePlot->rect());
 		}
 		else
 			QToolTip::hideText();

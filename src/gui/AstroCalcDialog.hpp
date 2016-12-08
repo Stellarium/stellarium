@@ -112,6 +112,8 @@ private slots:
 	void savePhenomena();
 
 	void drawAltVsTimeDiagram();
+	void drawAltVsTimeDiagram(StelLocation loc);
+	void drawCurrentTimeDiagram();
 	void mouseOverLine(QMouseEvent *event);
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
@@ -147,9 +149,9 @@ private:
 	//! Populates the drop-down list of major planets.
 	void populateMajorPlanetList();
 	//! Populates the drop-down list of groups of celestial bodies.
-	void populateGroupCelestialBodyList();
-	//! Populates the drop-down list of celestial bodies.
-	void populateCelestialObjectsList();
+	void populateGroupCelestialBodyList();	
+	//! Prepare graph settings
+	void prepareAxesAndGraph();
 
 	//! Calculation conjunctions and oppositions.
 	//! @note Ported from KStars, should be improved, because this feature calculate
@@ -173,6 +175,7 @@ private:
 	QString delimiter, acEndl;
 	QStringList ephemerisHeader, phenomenaHeader, planetaryPositionsHeader;
 	static float brightLimit;
+	static float minY, maxY;
 
 	//! Make sure that no tabs icons are outside of the viewport.
 	//! @todo Limit the width to the width of the screen *available to the window*.
