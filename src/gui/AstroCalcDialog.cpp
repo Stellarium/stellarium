@@ -66,6 +66,8 @@ AstroCalcDialog::AstroCalcDialog(QObject *parent)
 
 AstroCalcDialog::~AstroCalcDialog()
 {
+	ui->altVsTimePlot->clearGraphs();
+	objectMgr->unSelect();
 	if (currentTimeLine)
 	{
 		currentTimeLine->stop();
@@ -585,52 +587,56 @@ void AstroCalcDialog::drawAltVsTimeDiagram(StelLocation loc)
 
 void AstroCalcDialog::drawAltVsTimeDiagram()
 {
-	// X axis - time; Y axis - altitude
-	QList<double> aX, aY;
-
-	StelObjectP selectedObject = objectMgr->getSelectedObject()[0];
-
-	double currentJD = core->getJD();
-	double noon = (int)currentJD;
-	double az, alt, deg;
-	bool sign;
-
-	double shift = core->getUTCOffset(currentJD)/24;
-	for(int i=-1;i<=289;i++) // Every 10 minutes (24 hours)
+	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
+	if (!selectedObjects.isEmpty())
 	{
-		double ltime = i*300 + 43200;
-		aX.append(ltime);
-		double JD = noon + ltime/86400 - shift - 0.5;
-		core->setJD(JD);
-		StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosApparent(core));
-		StelUtils::radToDecDeg(alt, sign, deg);
-		if (!sign)
-			deg *= -1;
-		aY.append(deg);
-		core->update(0.0);
+		// X axis - time; Y axis - altitude
+		QList<double> aX, aY;
+
+		StelObjectP selectedObject = selectedObjects[0];
+
+		double currentJD = core->getJD();
+		double noon = (int)currentJD;
+		double az, alt, deg;
+		bool sign;
+
+		double shift = core->getUTCOffset(currentJD)/24;
+		for(int i=-1;i<=289;i++) // Every 10 minutes (24 hours)
+		{
+			double ltime = i*300 + 43200;
+			aX.append(ltime);
+			double JD = noon + ltime/86400 - shift - 0.5;
+			core->setJD(JD);
+			StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
+			StelUtils::radToDecDeg(alt, sign, deg);
+			if (!sign)
+				deg *= -1;
+			aY.append(deg);
+			core->update(0.0);
+		}
+		core->setJD(currentJD);
+
+		QVector<double> x = aX.toVector(), y = aY.toVector();
+
+		double minYa = aY.first();
+		double maxYa = aY.first();
+
+		foreach (double temp, aY)
+		{
+			if(maxYa < temp) maxYa = temp;
+			if(minYa > temp) minYa = temp;
+		}
+
+		minY = minYa - 2.0;
+		maxY = maxYa + 2.0;
+
+		prepareAxesAndGraph();
+		drawCurrentTimeDiagram();
+
+		ui->altVsTimePlot->graph(0)->setData(x, y);
+		ui->altVsTimePlot->graph(0)->setName(selectedObject->getNameI18n());
+		ui->altVsTimePlot->replot();
 	}
-	core->setJD(currentJD);
-
-	QVector<double> x = aX.toVector(), y = aY.toVector();
-
-	double minYa = aY.first();
-	double maxYa = aY.first();
-
-	foreach (double temp, aY)
-	{
-		if(maxYa < temp) maxYa = temp;
-		if(minYa > temp) minYa = temp;
-	}
-
-	minY = minYa - 2.0;
-	maxY = maxYa + 2.0;
-
-	prepareAxesAndGraph();
-	drawCurrentTimeDiagram();
-
-	ui->altVsTimePlot->graph(0)->setData(x, y);
-	ui->altVsTimePlot->graph(0)->setName(selectedObject->getNameI18n());
-	ui->altVsTimePlot->replot();
 }
 
 // Added vertical line indicating "now"
