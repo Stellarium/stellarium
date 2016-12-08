@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-05 20:05+0700\n"
-"PO-Revision-Date: 2016-12-04 05:03+0000\n"
+"PO-Revision-Date: 2016-12-08 03:40+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-06 04:36+0000\n"
-"X-Generator: Launchpad (build 18282)\n"
+"X-Launchpad-Export-Date: 2016-12-08 04:32+0000\n"
+"X-Generator: Launchpad (build 18292)\n"
 "Language: bn\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -81,7 +81,7 @@ msgstr "একটি করে তারামন্ডল নির্বাচ
 
 #: src/core/modules/ConstellationMgr.cpp:149
 msgid "Remove selection of constellations"
-msgstr ""
+msgstr "নতুন করে তারামণ্ডল নির্বাচন করুন"
 
 #: src/core/modules/StarMgr.cpp:434 src/ui_viewDialog.h:1909
 #: src/ui_dsoColorsDialog.h:541
@@ -1930,7 +1930,7 @@ msgstr "নক্ষত্রলোকীয় দ্রাঘিমাংশ/অ�
 #: src/core/StelObject.cpp:271
 #, qt-format
 msgid "IAU Constellation: %1"
-msgstr ""
+msgstr "আঃজ্যো‌ঃসঃ অনুযায়ী তারামণ্ডল : %1"
 
 #: src/core/StelObject.cpp:280
 #, qt-format
@@ -6570,11 +6570,11 @@ msgstr "দৃষ্টিনির্ভর ঔজ্জ্বল্য"
 #: src/ui_configurationDialog.h:1298
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
 msgid "3-letter IAU constellation abbreviation"
-msgstr ""
+msgstr "আঃজ্যো‌ঃসঃ প্রবর্তিত তিন বর্ণের সংক্ষিপ্ত নাম"
 
 #: src/ui_configurationDialog.h:1300
 msgid "Constellation"
-msgstr ""
+msgstr "তারামণ্ডল"
 
 #: src/ui_configurationDialog.h:1301
 msgid "Control"
@@ -14190,7 +14190,7 @@ msgstr "টুলবারে সরঞ্জামটি দেখানো হ
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:291
 msgid "Show IAU constellation code"
-msgstr ""
+msgstr "আঃজ্যো‌ঃসঃ প্রবর্তিত সাংকেতিক নাম"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:293
 msgid "Which coordinate system will be used for displaying"
