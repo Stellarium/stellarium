@@ -38,7 +38,6 @@
 
 #include <QFileDialog>
 #include <QDir>
-#include <QTimer>
 
 QVector<Vec3d> AstroCalcDialog::EphemerisListJ2000;
 QVector<QString> AstroCalcDialog::EphemerisListDates;
@@ -48,7 +47,8 @@ float AstroCalcDialog::minY = -90.f;
 float AstroCalcDialog::maxY = 90.f;
 
 AstroCalcDialog::AstroCalcDialog(QObject *parent)
-	: StelDialog(parent)	
+	: StelDialog(parent)
+	, currentTimeLine(NULL)
 	, delimiter(", ")
 	, acEndl("\n")
 {
@@ -66,6 +66,12 @@ AstroCalcDialog::AstroCalcDialog(QObject *parent)
 
 AstroCalcDialog::~AstroCalcDialog()
 {
+	if (currentTimeLine)
+	{
+		currentTimeLine->stop();
+		delete currentTimeLine;
+		currentTimeLine = NULL;
+	}
 	delete ui;
 }
 
@@ -164,10 +170,9 @@ void AstroCalcDialog::createDialogContent()
 
 	currentPlanetaryPositions();
 
-	QTimer* currentTimeLine = new QTimer(this);
-	currentTimeLine->setInterval(10000);
-	currentTimeLine->setSingleShot(true);
+	currentTimeLine = new QTimer(this);
 	connect(currentTimeLine, SIGNAL(timeout()), this, SLOT(drawCurrentTimeDiagram()));
+	currentTimeLine->start(500); // Update 'now' line position every 0.5 seconds
 
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 }
