@@ -26,6 +26,7 @@
 #include <QTreeWidgetItem>
 #include <QMap>
 #include <QVector>
+#include <QTimer>
 
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
@@ -124,6 +125,7 @@ private:
 	class NebulaMgr* dsoMgr;
 	class StarMgr* starMgr;
 	class StelObjectMgr* objectMgr;
+	QTimer *currentTimeLine;
 
 	//! Update header names for planetary positions table
 	void setPlanetaryPositionsHeaderNames();
