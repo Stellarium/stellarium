@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-12-05 20:05+0700\n"
-"PO-Revision-Date: 2016-12-04 14:10+0000\n"
+"PO-Revision-Date: 2016-12-07 19:26+0000\n"
 "Last-Translator: pentile <pentile@ya.ru>\n"
 "Language-Team: Chuvash <cv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-06 04:38+0000\n"
-"X-Generator: Launchpad (build 18282)\n"
+"X-Launchpad-Export-Date: 2016-12-08 04:32+0000\n"
+"X-Generator: Launchpad (build 18292)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:191
@@ -76,7 +76,7 @@ msgstr "Ҫӑлтӑр ушкӑнӗн чиккисем"
 
 #: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1385
 msgid "Select single constellation"
-msgstr ""
+msgstr "Уйрӑм ҫӑлтӑр ушкӑнне суйла"
 
 #: src/core/modules/ConstellationMgr.cpp:149
 msgid "Remove selection of constellations"
@@ -164,13 +164,13 @@ msgstr "КТП"
 #: src/core/modules/GridLinesMgr.cpp:935
 msgctxt "zenith"
 msgid "Z"
-msgstr ""
+msgstr "Z"
 
 #. TRANSLATORS: Nadir
 #: src/core/modules/GridLinesMgr.cpp:937
 msgctxt "nadir"
 msgid "Z'"
-msgstr ""
+msgstr "Z'"
 
 #. TRANSLATORS: North Ecliptic Pole
 #: src/core/modules/GridLinesMgr.cpp:944 src/core/modules/GridLinesMgr.cpp:953
@@ -205,12 +205,12 @@ msgstr "КСГП"
 #: src/core/modules/GridLinesMgr.cpp:1215
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:339
 msgid "Equatorial grid"
-msgstr ""
+msgstr "Екватӑрла сетке"
 
 #: src/core/modules/GridLinesMgr.cpp:1216 src/ui_viewDialog.h:2181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:334
 msgid "Azimuthal grid"
-msgstr ""
+msgstr "Аҫимутла сетке"
 
 #: src/core/modules/GridLinesMgr.cpp:1217
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
@@ -243,20 +243,20 @@ msgstr "Горисонт линийӗ"
 #: src/core/modules/GridLinesMgr.cpp:1223
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:344
 msgid "Equatorial J2000 grid"
-msgstr ""
+msgstr "J.2000 екватӑрла сетке"
 
 #: src/core/modules/GridLinesMgr.cpp:1224
 msgid "Ecliptic J2000 grid"
-msgstr ""
+msgstr "J.2000 еклиптӗк сетки"
 
 #: src/core/modules/GridLinesMgr.cpp:1225
 msgid "Ecliptic grid"
-msgstr ""
+msgstr "Еклиптӗк сетки"
 
 #: src/core/modules/GridLinesMgr.cpp:1226 src/ui_viewDialog.h:2213
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Galactic grid"
-msgstr ""
+msgstr "Галактӗк сетки"
 
 #: src/core/modules/GridLinesMgr.cpp:1227 src/ui_viewDialog.h:2075
 msgid "Galactic equator"
@@ -264,7 +264,7 @@ msgstr "Галактикӑ екватӑрӗ"
 
 #: src/core/modules/GridLinesMgr.cpp:1228 src/ui_viewDialog.h:2202
 msgid "Supergalactic grid"
-msgstr ""
+msgstr "Супӗргалактӗк сетки"
 
 #: src/core/modules/GridLinesMgr.cpp:1229 src/ui_viewDialog.h:2095
 msgid "Supergalactic equator"
@@ -281,7 +281,7 @@ msgstr "Претсесси ункисем"
 
 #: src/core/modules/GridLinesMgr.cpp:1233
 msgid "Colure Lines"
-msgstr ""
+msgstr "Кольур линийӗсем"
 
 #: src/core/modules/GridLinesMgr.cpp:1234
 msgid "Circumpolar Circles"
@@ -301,7 +301,7 @@ msgstr "Сенит тата надир"
 
 #: src/core/modules/GridLinesMgr.cpp:1238
 msgid "Ecliptic J2000 poles"
-msgstr ""
+msgstr "J.2000 еклиптӗк польусӗсем"
 
 #: src/core/modules/GridLinesMgr.cpp:1239
 msgid "Ecliptic poles"
@@ -676,15 +676,15 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1045
 msgid "circular form"
-msgstr ""
+msgstr "ҫавра ӗлке"
 
 #: src/core/modules/Nebula.cpp:1048
 msgid "elliptical form"
-msgstr ""
+msgstr "еллиптӗкле ӗлке"
 
 #: src/core/modules/Nebula.cpp:1051
 msgid "irregular form"
-msgstr ""
+msgstr "тӗрӗс мар ӗлке"
 
 #: src/core/modules/Nebula.cpp:1054
 msgid "undocumented form"
@@ -692,7 +692,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1060
 msgid "amorphous structure"
-msgstr ""
+msgstr "аморфлӑ структур"
 
 #: src/core/modules/Nebula.cpp:1063
 msgid "conventional structure"
@@ -755,19 +755,19 @@ msgstr "усӑ ҫӑлтӑр кластӑрӗ"
 
 #: src/core/modules/Nebula.cpp:1121
 msgid "globular star cluster"
-msgstr ""
+msgstr "глобулла ҫӑлтӑр кластӑрӗ"
 
 #: src/core/modules/Nebula.cpp:1124
 msgid "nebula"
-msgstr ""
+msgstr "тӗтрелӗх"
 
 #: src/core/modules/Nebula.cpp:1127
 msgid "planetary nebula"
-msgstr ""
+msgstr "планетла тӗтрелӗх"
 
 #: src/core/modules/Nebula.cpp:1130
 msgid "dark nebula"
-msgstr ""
+msgstr "тӗттӗм тӗтрелӗх"
 
 #: src/core/modules/Nebula.cpp:1133
 msgid "cluster associated with nebulosity"
@@ -779,11 +779,11 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1139
 msgid "emission nebula"
-msgstr ""
+msgstr "емисси тӗтрелӗхӗ"
 
 #: src/core/modules/Nebula.cpp:1142
 msgid "HII region"
-msgstr ""
+msgstr "HII хутлӑхӗ"
 
 #: src/core/modules/Nebula.cpp:1145
 msgid "reflection nebula"
@@ -799,7 +799,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1154
 msgid "star cloud"
-msgstr ""
+msgstr "ҫӑлтӑр пӗлӗчӗ"
 
 #: src/core/modules/Nebula.cpp:1157
 msgid "interstellar matter"
@@ -807,7 +807,7 @@ msgstr "ҫӑлтӑр хушшинчи матери"
 
 #: src/core/modules/Nebula.cpp:1160
 msgid "emission object"
-msgstr ""
+msgstr "емисси обйекчӗ"
 
 #: src/core/modules/Nebula.cpp:1163
 msgid "BL Lac object"
@@ -815,7 +815,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1166
 msgid "blazar"
-msgstr ""
+msgstr "бласар"
 
 #: src/core/modules/Nebula.cpp:1169
 msgid "molecular cloud"
@@ -823,7 +823,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1172
 msgid "young stellar object"
-msgstr ""
+msgstr "ҫамрӑк ҫӑлтӑрла обйект"
 
 #: src/core/modules/Nebula.cpp:1175
 msgid "possible quasar"
@@ -831,11 +831,11 @@ msgstr "пуласла кавасар"
 
 #: src/core/modules/Nebula.cpp:1178
 msgid "possible planetary nebula"
-msgstr ""
+msgstr "пп планетла тӗтрелӗх"
 
 #: src/core/modules/Nebula.cpp:1181
 msgid "protoplanetary nebula"
-msgstr ""
+msgstr "протопланетла тӗтрелӗх"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1184 src/core/modules/StarWrapper.cpp:53
@@ -915,12 +915,12 @@ msgstr ""
 #: src/core/modules/Planet.cpp:345
 #, qt-format
 msgid "Sidereal day: %1"
-msgstr ""
+msgstr "Сидерле кун: %1"
 
 #: src/core/modules/Planet.cpp:346
 #, qt-format
 msgid "Mean solar day: %1"
-msgstr ""
+msgstr "Вӑтам хӗвелле кун: %1"
 
 #: src/core/modules/Planet.cpp:350
 msgid "The period of rotation is chaotic"
@@ -929,7 +929,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:369
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
-msgstr ""
+msgstr "Ҫамрӑк уйӑх"
 
 #: src/core/modules/Planet.cpp:371
 msgctxt "Moon phase"
@@ -939,7 +939,7 @@ msgstr "Пӗрремӗш чӗрӗк"
 #: src/core/modules/Planet.cpp:373
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
-msgstr ""
+msgstr "Уйӑх хутшӑнни"
 
 #: src/core/modules/Planet.cpp:375
 msgctxt "Moon phase"
@@ -949,7 +949,7 @@ msgstr "Тулли Уйӑх"
 #: src/core/modules/Planet.cpp:377
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
-msgstr ""
+msgstr "Уйӑх таврӑнни"
 
 #: src/core/modules/Planet.cpp:379
 msgctxt "Moon phase"
@@ -959,7 +959,7 @@ msgstr "Виҫҫӗмӗш чӗрӗк"
 #: src/core/modules/Planet.cpp:381
 msgctxt "Moon phase"
 msgid "Waning Crescent"
-msgstr ""
+msgstr "Ватӑ уйӑх"
 
 #: src/core/modules/Planet.cpp:383
 msgctxt "Moon phase"
@@ -969,12 +969,12 @@ msgstr "Ҫӗнӗ Уйӑх"
 #: src/core/modules/Planet.cpp:388 src/core/modules/Planet.cpp:393
 #, qt-format
 msgid "Phase Angle: %1"
-msgstr ""
+msgstr "Фасӑ кӗтесӗ: %1"
 
 #: src/core/modules/Planet.cpp:389 src/core/modules/Planet.cpp:394
 #, qt-format
 msgid "Elongation: %1"
-msgstr ""
+msgstr "Елонгинатси: %1"
 
 #: src/core/modules/Planet.cpp:397
 #, qt-format
@@ -1036,17 +1036,17 @@ msgstr "Планет"
 #: src/core/modules/SolarSystem.cpp:205
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:316
 msgid "Planet labels"
-msgstr ""
+msgstr "Планет йачӗсем"
 
 #: src/core/modules/SolarSystem.cpp:206
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Planet orbits"
-msgstr ""
+msgstr "Планет орбичӗ"
 
 #: src/core/modules/SolarSystem.cpp:207
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:324
 msgid "Planet trails"
-msgstr ""
+msgstr "Планет йӗрӗсем"
 
 #: src/core/modules/SolarSystem.cpp:209
 msgid "Planet markers"
@@ -1078,7 +1078,7 @@ msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:179
 msgid "variable star"
-msgstr ""
+msgstr "улшӑнакан ҫӑлтӑр"
 
 #: src/core/modules/StarWrapper.cpp:183
 msgid "double star"
