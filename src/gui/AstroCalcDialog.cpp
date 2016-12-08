@@ -712,7 +712,7 @@ void AstroCalcDialog::mouseOverLine(QMouseEvent *event)
 		if (graph)
 		{
 			double JD = x/86400.0 + (int)core->getJD() - 0.5;
-			QString LT = StelUtils::jdToQDateTime(JD + core->getUTCOffset(JD)).toString("H:mm");
+			QString LT = StelUtils::jdToQDateTime(JD - core->getUTCOffset(JD)).toString("H:mm");
 
 			QString info;
 			if (graph->name()=="[Now]")
