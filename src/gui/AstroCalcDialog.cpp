@@ -631,8 +631,12 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		prepareAxesAndGraph();
 		drawCurrentTimeDiagram();
 
+		QString name = selectedObject->getNameI18n();
+		if (name.isEmpty() && selectedObject->getType()=="Nebula")
+			name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
+
 		ui->altVsTimePlot->graph(0)->setData(x, y);
-		ui->altVsTimePlot->graph(0)->setName(selectedObject->getNameI18n());
+		ui->altVsTimePlot->graph(0)->setName(name);
 		ui->altVsTimePlot->replot();
 	}
 }
