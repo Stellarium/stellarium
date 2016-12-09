@@ -1709,7 +1709,7 @@ void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 	if (fic.isEmpty())
 		qWarning() << "WARNING: could not load double stars file: stars/default/wds_hip_part.dat";
 	else
-		(fic);
+		loadWds(fic);
 
 	fic = StelFileMgr::findFile("stars/default/cross-id.dat");
 	if (fic.isEmpty())
