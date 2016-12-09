@@ -72,6 +72,11 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  << "                          and want to send a bug report\n"
 			  << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides\n"
 			  << "                          the full screen setting in the config file\n"
+			#ifdef Q_OS_WIN
+			#ifdef ENABLE_SPOUT
+			  << "--spout (or -S)         : Act as SPOUT sender\n"
+			#endif
+			#endif
 			  << "--screenshot-dir        : Specify directory to save screenshots\n"
 			  << "--startup-script        : Specify name of startup script\n"
 			  << "--home-planet           : Specify observer planet (English name)\n"
@@ -131,6 +136,12 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 	{
 		qApp->setProperty("onetime_mesa_mode", true);
 	}
+	#ifdef ENABLE_SPOUT
+	if (argsGetOption(argList, "-S", "--spout"))
+	{
+		qApp->setProperty("spout", true);
+	}
+	#endif
 	#endif
 	if (argsGetOption(argList, "", "--list-landscapes"))
 	{
