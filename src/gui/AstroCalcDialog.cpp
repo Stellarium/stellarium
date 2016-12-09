@@ -66,8 +66,6 @@ AstroCalcDialog::AstroCalcDialog(QObject *parent)
 
 AstroCalcDialog::~AstroCalcDialog()
 {
-	ui->altVsTimePlot->clearGraphs();
-	objectMgr->unSelect();
 	if (currentTimeLine)
 	{
 		currentTimeLine->stop();
