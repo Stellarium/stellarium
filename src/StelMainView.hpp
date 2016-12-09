@@ -24,6 +24,9 @@
 #include <QGraphicsView>
 #include <QEventLoop>
 #include <QOpenGLContext>
+#ifdef 	ENABLE_SPOUT
+#include "SpoutLibrary.h"
+#endif
 
 // This define (only used here and in StelMainView.cpp) is temporarily used
 // to allow uncompromised compiling while the migration to the new QOpenGL... classes
@@ -162,7 +165,7 @@ private slots:
 	// Do the actual screenshot generation in the main thread with this method.
 	void doScreenshot(void);
 	void minFpsChanged();
-	void updateNightModeProperty();
+	void updateNightModeProperty(bool b);
 
 private:
 	//! Start the display loop
@@ -185,6 +188,10 @@ private:
 	QGraphicsWidget* skyItem;
 	QGraphicsWidget* guiItem;
 	QGraphicsEffect* nightModeEffect;
+#ifdef 	ENABLE_SPOUT
+	SPOUTLIBRARY * spoutSender;
+	char spoutName[256];
+#endif
 
 	//! The openGL window
 #if STEL_USE_NEW_OPENGL_WIDGETS
