@@ -397,6 +397,7 @@ private:
 	SPOUTLIBRARY * spoutSender;
 	char spoutName[256];
 	GLuint spoutTexID;
+	bool spoutValid; // true when the named sender instance has been created.
 	//void initSpoutTexture(GLuint &texID, unsigned int width, unsigned int height);
 	void initSpoutTexture(unsigned int width, unsigned int height);
 #endif

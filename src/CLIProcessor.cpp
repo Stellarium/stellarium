@@ -74,7 +74,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  << "                          the full screen setting in the config file\n"
 			#ifdef Q_OS_WIN
 			#ifdef ENABLE_SPOUT
-			  << "--spout (or -S)         : Act as SPOUT sender\n"
+			  << "--spout (or -S) <sky|all> : Act as SPOUT sender (Sky only/including GUI)\n"
 			#endif
 			#endif
 			  << "--screenshot-dir        : Specify directory to save screenshots\n"
@@ -139,7 +139,17 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 	#ifdef ENABLE_SPOUT
 	if (argsGetOption(argList, "-S", "--spout"))
 	{
-		qApp->setProperty("spout", true);
+		QString spoutStr = argsGetOptionWithArg(argList, "-S", "--spout", "").toString();
+
+		if (!spoutStr.isEmpty())
+		{
+			if (spoutStr=="all")
+				qApp->setProperty("spout", "all");
+			else
+				qApp->setProperty("spout", "sky");
+		}
+		else
+			qApp->setProperty("spout", "sky");
 	}
 	#endif
 	#endif

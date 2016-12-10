@@ -200,8 +200,16 @@ void StelApp::deinitStatic()
 *************************************************************************/
 StelApp::StelApp(QObject* parent)
 	: QObject(parent)
-	, core(NULL)
+	, core(NULL)	
+	, moduleMgr(NULL)
+	, localeMgr(NULL)
+	, skyCultureMgr(NULL)
+	, actionMgr(NULL)
+	, propMgr(NULL)
+	, textureMgr(NULL)
+	, stelObjectMgr(NULL)
 	, planetLocationMgr(NULL)
+	, networkAccessManager(NULL)
 	, audioMgr(NULL)
 	, videoMgr(NULL)
 	, skyImageMgr(NULL)
@@ -221,6 +229,10 @@ StelApp::StelApp(QObject* parent)
 	, initialized(false)
 	, saveProjW(-1)
 	, saveProjH(-1)
+	, nbDownloadedFiles(0)
+	, totalDownloadedSize(0)
+	, nbUsedCache(0)
+	, totalUsedCacheSize(0)
 	, baseFontSize(13)
 	, renderBuffer(NULL)
 	, viewportEffect(NULL)
@@ -229,24 +241,10 @@ StelApp::StelApp(QObject* parent)
 	#ifdef ENABLE_SPOUT
 	, spoutSender(NULL)
 	, spoutTexID(0)
+	, spoutValid(false)
 	#endif
 {
-	// Stat variables
-	nbDownloadedFiles=0;
-	totalDownloadedSize=0;
-	nbUsedCache=0;
-	totalUsedCacheSize=0;
-
 	setObjectName("StelApp");
-
-	skyCultureMgr=NULL;
-	localeMgr=NULL;
-	stelObjectMgr=NULL;
-	textureMgr=NULL;
-	moduleMgr=NULL;
-	networkAccessManager=NULL;
-	actionMgr = NULL;
-	propMgr = NULL;
 
 	// Can't create 2 StelApp instances
 	Q_ASSERT(!singleton);
@@ -260,31 +258,6 @@ StelApp::StelApp(QObject* parent)
 
 	// Reset delta accumulators
 	wheelEventDelta[0] = wheelEventDelta[1] = 0;
-#ifdef ENABLE_SPOUT
-	if (qApp->property("spout")==true)
-	{
-		// Initialize the SpoutSender object. This does not create a spout sender yet.
-		memset(spoutName, 0, 256);
-		//memcpy(spoutName, "Stellarium ", 11);
-		//QByteArray stelVersion=StelUtils::getApplicationVersion().toLocal8Bit();
-		//memcpy(spoutName+11,  stelVersion.constData(), qMin(190, stelVersion.length())); // still a qMin for safety.
-		//sprintf(spoutName+11+stelVersion.length(), " (PID%lli)", QCoreApplication::applicationPid());
-		sprintf(spoutName, "Stellarium (PID%lli)", QCoreApplication::applicationPid());
-		qDebug() << "Spout name is: " << spoutName;
-		spoutSender = GetSpout();
-		int numAdapters=spoutSender->GetNumAdapters();
-		qDebug() << "Spout: Found " << numAdapters << "GPUs";
-		for (int i=0; i<numAdapters; i++){
-			char name[256];
-			spoutSender->GetAdapterName(i, name, 255);
-			qDebug() << "       GPU" << i << ": " << name;
-		}
-		qDebug() << "       Currently used: GPU " << spoutSender->GetAdapter();
-		spoutSender->CreateSender(spoutName, 500, 500); // this size seems odd. Maybe move this all to init()?
-		qDebug() << "       Sender has been created in" << (spoutSender->GetMemoryShareMode() ? "Memory Share Mode" : "OpenGL/DirectX interop mode");
-		qDebug() << "       Sender is" << (spoutSender->GetDX9()? "working" : "not working") << "with DX9 textures";
-	}
-#endif
 }
 
 /*************************************************************************
@@ -292,14 +265,6 @@ StelApp::StelApp(QObject* parent)
 *************************************************************************/
 StelApp::~StelApp()
 {
-#ifdef 	ENABLE_SPOUT
-	if (spoutSender)
-	{
-		spoutSender->ReleaseSender();
-		spoutSender->Release();
-		spoutSender=NULL;
-	}
-#endif
 	qDebug() << qPrintable(QString("Downloaded %1 files (%2 kbytes) in a session of %3 sec (average of %4 kB/s + %5 files from cache (%6 kB)).").arg(nbDownloadedFiles).arg(totalDownloadedSize/1024).arg(getTotalRunTime()).arg((double)(totalDownloadedSize/1024)/getTotalRunTime()).arg(nbUsedCache).arg(totalUsedCacheSize/1024));
 
 	stelObjectMgr->unSelect();
@@ -568,6 +533,38 @@ void StelApp::init(QSettings* conf)
 	// Animation
 	animationScale = confSettings->value("gui/pointer_animation_speed", 1.f).toFloat();
 	
+#ifdef ENABLE_SPOUT
+	if (qApp->property("spout") != "")
+	{
+		// Initialize the SpoutSender object. This does not create a spout sender yet.
+		memset(spoutName, 0, 256);
+		//memcpy(spoutName, "Stellarium ", 11);
+		//QByteArray stelVersion=StelUtils::getApplicationVersion().toLocal8Bit();
+		//memcpy(spoutName+11,  stelVersion.constData(), qMin(190, stelVersion.length())); // still a qMin for safety.
+		//sprintf(spoutName+11+stelVersion.length(), " (PID%lli)", QCoreApplication::applicationPid());
+		sprintf(spoutName, "Stellarium (PID%lli)", QCoreApplication::applicationPid());
+		qDebug() << "Spout name is: " << spoutName;
+		spoutSender = GetSpout();
+		int numAdapters=spoutSender->GetNumAdapters();
+		qDebug() << "Spout: Found " << numAdapters << "GPUs";
+		for (int i=0; i<numAdapters; i++){
+			char name[256];
+			spoutSender->GetAdapterName(i, name, 255);
+			qDebug() << "       GPU" << i << ": " << name;
+		}
+		qDebug() << "       Currently used: GPU " << spoutSender->GetAdapter();
+		spoutValid=spoutSender->CreateSender(spoutName, 500, 500); // this size seems odd.
+		if (spoutValid){
+		qDebug() << "       Sender has been created in" << (spoutSender->GetMemoryShareMode() ? "Memory Share Mode" : "OpenGL/DirectX interop mode");
+		qDebug() << "       Sender is" << (spoutSender->GetDX9()? "working" : "not working") << "with DX9 textures";
+		}else{
+			qDebug() << "       Sender creation failed!";
+			qApp->setProperty("spout", "");
+
+		}
+	}
+#endif
+
 	initialized = true;
 }
 
@@ -591,6 +588,16 @@ void StelApp::initPlugIns()
 
 void StelApp::deinit()
 {
+#ifdef 	ENABLE_SPOUT
+	if (spoutSender)
+	{
+		qDebug() << "SPOUT: Releasing ...";
+		spoutSender->ReleaseSender();
+		spoutSender->Release();
+		spoutSender=NULL;
+		qDebug() << "SPOUT: Releasing ... DONE.";
+	}
+#endif
 #ifndef DISABLE_SCRIPTING
 	if (scriptMgr->scriptIsRunning())
 		scriptMgr->stopScript();
@@ -725,7 +732,7 @@ void StelApp::glWindowHasBeenResized(float x, float y, float w, float h)
 		renderBuffer = NULL;
 	}
 #ifdef ENABLE_SPOUT
-	if (spoutSender)
+	if (spoutValid)
 	{
 		spoutSender->UpdateSender(spoutName, w, h);
 	}
