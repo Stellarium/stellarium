@@ -690,6 +690,8 @@ signals:
 	//! This happens whenever the internal jDay is changed through setJDay/setMJDay and similar,
 	//! and whenever the time rate changes.
 	void timeSyncOccurred(double jDay);
+	//! This signal is emitted when the date has changed.
+	void dateChanged();
 	//! This signal indicates a horizontal display flip
 	void flipHorzChanged(bool b);
 	//! This signal indicates a vertical display flip

@@ -178,10 +178,13 @@ float Supernova::getVMagnitude(const StelCore* core) const
 				vmag = maxMagnitude + 0.05 * deltaJD;
 
 			if (deltaJD>30 && deltaJD<=80)
-				vmag = maxMagnitude + 0.013 * deltaJD + 1.5;
+				vmag = maxMagnitude + 0.013 * (deltaJD - 30) + 1.5;
 
-			if (deltaJD>80)
-				vmag = maxMagnitude + 0.05 * deltaJD + 2.15;
+			if (deltaJD>80 && deltaJD<=100)
+				vmag = maxMagnitude + 0.075 * (deltaJD - 80) + 2.15;
+
+			if (deltaJD>100)
+				vmag = maxMagnitude + 0.025 * (deltaJD - 100) + 3.65;
 
 		}
 		else
@@ -201,7 +204,7 @@ float Supernova::getVMagnitude(const StelCore* core) const
 				vmag = maxMagnitude + 0.1 * deltaJD;
 
 			if (deltaJD>25)
-				vmag = maxMagnitude + 0.016 * deltaJD + 2.5;
+				vmag = maxMagnitude + 0.016 * (deltaJD - 25) + 2.5;
 
 		}
 		else

@@ -113,7 +113,6 @@ private slots:
 	void savePhenomena();
 
 	void drawAltVsTimeDiagram();
-	void drawAltVsTimeDiagram(StelLocation loc);
 	void drawCurrentTimeDiagram();
 	void mouseOverLine(QMouseEvent *event);
 
