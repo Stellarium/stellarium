@@ -162,6 +162,7 @@ void AstroCalcDialog::createDialogContent()
 	if (objectMgr->getWasSelected())
 	{
 		connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawAltVsTimeDiagram(StelLocation)));
+		connect(core, SIGNAL(dateChanged()), this, SLOT(drawAltVsTimeDiagram()));
 		drawAltVsTimeDiagram();
 	}
 
