@@ -115,7 +115,7 @@
              <div class="flex-expand">
              <!-- It would be more intuitive to have this slider in vertical orientation.  -->
              <div id="view_offset" class="slider stelproperty flex-expand" data-prop="StelMovementMgr.viewportVerticalOffsetTarget" data-min="-50" data-max="50" data-step="1"></div>
-             Vertical View offset: <span class="stelproperty" style="margin-left: 5px; min-width: 48px;" data-prop="StelMovementMgr.viewportVerticalOffsetTarget" data-numberformat="n0"></span>
+             <?= tr("Vertical View offset")?>: <span class="stelproperty" style="margin-left: 5px; min-width: 48px;" data-prop="StelMovementMgr.viewportVerticalOffsetTarget" data-numberformat="n0"></span>
              <!-- GZ Add a few buttons with defined values to set here -->
              <table><tr>
              <td><button type="button" class="stelssc" value="StelMovementMgr.moveViewport(0.,-50., 3.)">-50%</button></td>
@@ -130,7 +130,7 @@
             </div>
             <div id="view_wrapper">
               <div id="view_fov"></div>
-              <p title='<?= tr("Field of view")?>'>FOV: <span id="view_fov_text"></span></p>
+              <p title='<?= tr("Field of view")?>'><?= tr("FOV")?>: <span id="view_fov_text"></span></p>
 
               <div id="view_fovbuttons" class="ui-corner-all ui-widget-content">
               <table>
