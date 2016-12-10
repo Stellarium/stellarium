@@ -179,7 +179,7 @@ public:
 
 	//! Get the GUI instance implementing the abstract GUI interface.
 	StelGuiBase* getGui() const {return stelGui;}
-	//! Tell the StelApp instance which GUI si currently being used.
+	//! Tell the StelApp instance which GUI is currently being used.
 	//! The caller is responsible for destroying the GUI.
 	void setGui(StelGuiBase* b) {stelGui=b;}
 

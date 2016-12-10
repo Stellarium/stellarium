@@ -537,28 +537,24 @@ void StelApp::init(QSettings* conf)
 	if (qApp->property("spout") != "")
 	{
 		// Initialize the SpoutSender object. This does not create a spout sender yet.
-		memset(spoutName, 0, 256);
-		//memcpy(spoutName, "Stellarium ", 11);
-		//QByteArray stelVersion=StelUtils::getApplicationVersion().toLocal8Bit();
-		//memcpy(spoutName+11,  stelVersion.constData(), qMin(190, stelVersion.length())); // still a qMin for safety.
-		//sprintf(spoutName+11+stelVersion.length(), " (PID%lli)", QCoreApplication::applicationPid());
+		memset(spoutName, 0, sizeof(spoutName));
 		sprintf(spoutName, "Stellarium (PID%lli)", QCoreApplication::applicationPid());
-		qDebug() << "Spout name is: " << spoutName;
+		qDebug() << "SPOUT name is: " << spoutName;
 		spoutSender = GetSpout();
 		int numAdapters=spoutSender->GetNumAdapters();
-		qDebug() << "Spout: Found " << numAdapters << "GPUs";
+		qDebug() << "SPOUT: Found " << numAdapters << "GPUs";
 		for (int i=0; i<numAdapters; i++){
 			char name[256];
 			spoutSender->GetAdapterName(i, name, 255);
 			qDebug() << "       GPU" << i << ": " << name;
 		}
-		qDebug() << "       Currently used: GPU " << spoutSender->GetAdapter();
+		qDebug() << "       Currently used: GPU" << spoutSender->GetAdapter();
 		spoutValid=spoutSender->CreateSender(spoutName, 500, 500); // this size seems odd.
 		if (spoutValid){
 		qDebug() << "       Sender has been created in" << (spoutSender->GetMemoryShareMode() ? "Memory Share Mode" : "OpenGL/DirectX interop mode");
 		qDebug() << "       Sender is" << (spoutSender->GetDX9()? "working" : "not working") << "with DX9 textures";
 		}else{
-			qDebug() << "       Sender creation failed!";
+			qDebug() << "       Sender creation failed! Start with NVidia GPU!";
 			qApp->setProperty("spout", "");
 
 		}
@@ -695,19 +691,23 @@ void StelApp::draw()
 	}
 	core->postDraw();
 #ifdef ENABLE_SPOUT
-	if (spoutSender)
+	// At this point, the sky scene has been drawn, but no GUI panels.
+	// GZ: It is rather unclear to me how to draw also the GUI into the Spout texture.
+	//if (qApp->property("spout")=="sky")
+	if (qApp->property("spout")!="") // first version.
 	{
-		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
-		int w = params.viewportXywh[2];
-		int h = params.viewportXywh[3];
+		if (spoutSender)
+		{
+			StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+			int w = params.viewportXywh[2];
+			int h = params.viewportXywh[3];
 
-		// This is not ideal: SendTexture would be preferred!
-
-		initSpoutTexture(w, h);
-		glBindTexture(GL_TEXTURE_2D, spoutTexID);
-		glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, w, h);
-		glBindTexture(GL_TEXTURE_2D, 0);
-		spoutSender->SendTexture(spoutTexID, GL_TEXTURE_2D, w, h, true, drawFbo);
+			initSpoutTexture(w, h);
+			glBindTexture(GL_TEXTURE_2D, spoutTexID);
+			glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, w, h);
+			glBindTexture(GL_TEXTURE_2D, 0);
+			spoutSender->SendTexture(spoutTexID, GL_TEXTURE_2D, w, h, true, drawFbo);
+		}
 	}
 #endif
 	applyRenderBuffer(drawFbo);
@@ -734,7 +734,10 @@ void StelApp::glWindowHasBeenResized(float x, float y, float w, float h)
 #ifdef ENABLE_SPOUT
 	if (spoutValid)
 	{
-		spoutSender->UpdateSender(spoutName, w, h);
+		// UpdateSender does not seem to work and keep the name,
+		// it creates a new Sender entry and keeps a dead old texture. Better recreate.
+		spoutSender->ReleaseSender();
+		spoutSender->CreateSender(spoutName, w, h);
 	}
 #endif
 }
