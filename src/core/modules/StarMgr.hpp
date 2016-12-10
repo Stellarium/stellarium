@@ -442,6 +442,8 @@ private:
 	static QMap<int, int> saoStarsIndex;
 	static QHash<int, int> hdStarsMap;
 	static QMap<int, int> hdStarsIndex;
+	static QHash<int, int> hrStarsMap;
+	static QMap<int, int> hrStarsIndex;
 
 	static QHash<int, QString> referenceMap;
 
