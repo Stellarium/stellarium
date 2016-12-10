@@ -1024,8 +1024,11 @@ qint64 StelCore::getMilliSecondsOfLastJDUpdate() const
 
 void StelCore::setJD(double newJD)
 {
+	if (qAbs(JD.first - newJD)>=1.0)
+		emit(dateChanged());
+
 	JD.first=newJD;
-	JD.second=computeDeltaT(newJD);
+	JD.second=computeDeltaT(newJD);	
 	resetSync();
 }
 
@@ -1286,6 +1289,8 @@ double StelCore::getSolutionEquationOfTime(const double JDE) const
 void StelCore::setTimeNow()
 {
 	setJD(StelUtils::getJDFromSystem());
+	// Force emit dateChanged
+	emit(dateChanged());
 }
 
 void StelCore::setTodayTime(const QTime& target)
@@ -1572,6 +1577,7 @@ void StelCore::addSiderealDays(double d)
 	const PlanetP& home = position->getHomePlanet();
 	if (!home->getEnglishName().contains("Observer", Qt::CaseInsensitive))
 		d *= home->getSiderealDay();
+
 	setJD(getJD() + d);
 }
 

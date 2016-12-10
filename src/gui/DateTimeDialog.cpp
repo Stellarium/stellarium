@@ -120,8 +120,8 @@ bool DateTimeDialog::valid(int y, int m, int d, int h, int min, int s)
 bool DateTimeDialog::validJd(double jday)
 {
 	pushToWidgets();
-	StelApp::getInstance().getCore()->setJD(jday);
-
+	StelCore* core = StelApp::getInstance().getCore();
+	core->setJD(jday);
 	return true;
 }
 
@@ -151,7 +151,7 @@ void DateTimeDialog::yearChanged(int newyear)
 {
 	if ( year != newyear )
 	{
-		valid( newyear, month, day, hour, minute, second );
+		valid( newyear, month, day, hour, minute, second );		
 	}
 }
 
@@ -159,14 +159,14 @@ void DateTimeDialog::monthChanged(int newmonth)
 {
 	if ( month != newmonth )
 	{
-		valid( year, newmonth, day, hour, minute, second );
+		valid( year, newmonth, day, hour, minute, second );		
 	}
 }
 
 void DateTimeDialog::dayChanged(int newday)
 {
 	int delta = newday - day;
-	validJd(jd + delta);
+	validJd(jd + delta);	
 }
 
 void DateTimeDialog::hourChanged(int newhour)
