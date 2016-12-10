@@ -273,10 +273,9 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, "actionShow_Configuration_Window_Global");
 	skyGui->winBar->addButton(b);
 
-	// NOTE: Should be a toggle of visibility for this button?
-	// FIXME: Update icons for AstroCalc window
-	pxmapOn = QPixmap(":/graphicGui/5-on-labels.png");
-	pxmapOff = QPixmap(":/graphicGui/5-off-labels.png");
+	// NOTE: Should be a toggle of visibility for this button?	
+	pxmapOn = QPixmap(":/graphicGui/11-on-AstroCalc.png");
+	pxmapOff = QPixmap(":/graphicGui/11-off-AstroCalc.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, "actionShow_AstroCalc_Window_Global");
 	skyGui->winBar->addButton(b);
 
