@@ -120,8 +120,7 @@ bool DateTimeDialog::valid(int y, int m, int d, int h, int min, int s)
 bool DateTimeDialog::validJd(double jday)
 {
 	pushToWidgets();
-	StelCore* core = StelApp::getInstance().getCore();
-	core->setJD(jday);
+	StelApp::getInstance().getCore()->setJD(jday);
 	return true;
 }
 
