@@ -534,7 +534,8 @@ void StelApp::init(QSettings* conf)
 	animationScale = confSettings->value("gui/pointer_animation_speed", 1.f).toFloat();
 	
 #ifdef ENABLE_SPOUT
-	if (qApp->property("spout") != "")
+	//qDebug() << "Property spout is" << qApp->property("spout").toString();
+	if (qApp->property("spout").toString() != "none")
 	{
 		// Initialize the SpoutSender object. This does not create a spout sender yet.
 		memset(spoutName, 0, sizeof(spoutName));
@@ -556,8 +557,11 @@ void StelApp::init(QSettings* conf)
 		}else{
 			qDebug() << "       Sender creation failed! Start with NVidia GPU!";
 			qApp->setProperty("spout", "");
-
 		}
+	}
+	else
+	{
+		qApp->setProperty("spout", "");
 	}
 #endif
 
