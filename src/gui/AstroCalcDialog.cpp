@@ -66,8 +66,6 @@ AstroCalcDialog::AstroCalcDialog(QObject *parent)
 
 AstroCalcDialog::~AstroCalcDialog()
 {
-	ui->altVsTimePlot->clearGraphs();
-	objectMgr->unSelect();
 	if (currentTimeLine)
 	{
 		currentTimeLine->stop();
@@ -90,8 +88,7 @@ void AstroCalcDialog::retranslate()
 		populateMajorPlanetList();
 		populateGroupCelestialBodyList();		
 		currentPlanetaryPositions();
-		if (objectMgr->getWasSelected())
-			drawAltVsTimeDiagram();
+		drawAltVsTimeDiagram();
 		//Hack to shrink the tabs to optimal size after language change
 		//by causing the list items to be laid out again.
 		updateTabBarListWidgetWidth();		
@@ -160,12 +157,10 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->phenomenaSaveButton, SIGNAL(clicked()), this, SLOT(savePhenomena()));
 
 	connect(ui->altVsTimePlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverLine(QMouseEvent*)));
-	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAltVsTimeDiagram()));
-	if (objectMgr->getWasSelected())
-	{
-		connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawAltVsTimeDiagram(StelLocation)));
-		drawAltVsTimeDiagram();
-	}
+	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAltVsTimeDiagram()));	
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawAltVsTimeDiagram()));
+	connect(core, SIGNAL(dateChanged()), this, SLOT(drawAltVsTimeDiagram()));
+	drawAltVsTimeDiagram();
 
 	connectBoolProperty(ui->ephemerisShowMarkersCheckBox, "SolarSystem.ephemerisMarkersDisplayed");
 	connectBoolProperty(ui->ephemerisShowDatesCheckBox, "SolarSystem.ephemerisDatesDisplayed");
@@ -579,12 +574,6 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	groups->blockSignals(false);
 }
 
-void AstroCalcDialog::drawAltVsTimeDiagram(StelLocation loc)
-{
-	Q_UNUSED(loc);
-	drawAltVsTimeDiagram();
-}
-
 void AstroCalcDialog::drawAltVsTimeDiagram()
 {
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
@@ -601,7 +590,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		bool sign;
 
 		double shift = core->getUTCOffset(currentJD)/24;
-		for(int i=-1;i<=289;i++) // Every 10 minutes (24 hours)
+		for(int i=-1;i<=289;i++) // Every 5 minutes (24 hours + 5 min extension in both directions)
 		{
 			double ltime = i*300 + 43200;
 			aX.append(ltime);
@@ -633,8 +622,12 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		prepareAxesAndGraph();
 		drawCurrentTimeDiagram();
 
+		QString name = selectedObject->getNameI18n();
+		if (name.isEmpty() && selectedObject->getType()=="Nebula")
+			name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
+
 		ui->altVsTimePlot->graph(0)->setData(x, y);
-		ui->altVsTimePlot->graph(0)->setName(selectedObject->getNameI18n());
+		ui->altVsTimePlot->graph(0)->setName(name);
 		ui->altVsTimePlot->replot();
 	}
 }
