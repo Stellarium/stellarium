@@ -88,8 +88,7 @@ void AstroCalcDialog::retranslate()
 		populateMajorPlanetList();
 		populateGroupCelestialBodyList();		
 		currentPlanetaryPositions();
-		if (objectMgr->getWasSelected())
-			drawAltVsTimeDiagram();
+		drawAltVsTimeDiagram();
 		//Hack to shrink the tabs to optimal size after language change
 		//by causing the list items to be laid out again.
 		updateTabBarListWidgetWidth();		
@@ -159,12 +158,9 @@ void AstroCalcDialog::createDialogContent()
 
 	connect(ui->altVsTimePlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverLine(QMouseEvent*)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAltVsTimeDiagram()));
-	if (objectMgr->getWasSelected())
-	{
-		connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawAltVsTimeDiagram(StelLocation)));
-		connect(core, SIGNAL(dateChanged()), this, SLOT(drawAltVsTimeDiagram()));
-		drawAltVsTimeDiagram();
-	}
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawAltVsTimeDiagram(StelLocation)));
+	connect(core, SIGNAL(dateChanged()), this, SLOT(drawAltVsTimeDiagram()));
+	drawAltVsTimeDiagram();
 
 	connectBoolProperty(ui->ephemerisShowMarkersCheckBox, "SolarSystem.ephemerisMarkersDisplayed");
 	connectBoolProperty(ui->ephemerisShowDatesCheckBox, "SolarSystem.ephemerisDatesDisplayed");
