@@ -427,9 +427,6 @@ protected:
 
 StelMainView::StelMainView(QWidget* parent)
 	: QGraphicsView(parent), guiItem(NULL),
-	  #ifdef ENABLE_SPOUT
-	  spoutSender(NULL),
-	  #endif
 	  gui(NULL),
 	  flagInvertScreenShotColors(false),
 	  flagOverwriteScreenshots(false),
@@ -532,21 +529,6 @@ StelMainView::StelMainView(QWidget* parent)
 	// circumstances, so here we set it again just to be on the safe side.
 	setlocale(LC_NUMERIC, "C");
 	// End workaround
-
-	#ifdef ENABLE_SPOUT
-	if (qApp->property("spout")==true)
-	{
-		// Initialize the SpoutSender object. This does not create a spout sender yet.
-		memset(spoutName, 0, 256);
-		memcpy(spoutName, "Stellarium ", 11);
-		QByteArray stelVersion=StelUtils::getApplicationVersion().toLocal8Bit();
-		memcpy(spoutName+11,  stelVersion.constData(), qMin(190, stelVersion.length())); // still a qMin for safety.
-		qint64 PID=QCoreApplication::applicationPid();
-		sprintf(spoutName+11+stelVersion.length(), " PID%lli", PID);
-		qDebug() << "Spout name is: " << spoutName;
-		spoutSender = GetSpout();
-	}
-	#endif
 }
 
 void StelMainView::resizeEvent(QResizeEvent* event)
@@ -563,14 +545,6 @@ void StelMainView::focusSky() {
 
 StelMainView::~StelMainView()
 {
-#ifdef 	ENABLE_SPOUT
-	if (spoutSender)
-	{
-		spoutSender->ReleaseSender();
-		spoutSender->Release();
-		spoutSender=NULL;
-	}
-#endif
 	StelApp::deinitStatic();
 }
 
