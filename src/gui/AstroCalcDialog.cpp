@@ -157,8 +157,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->phenomenaSaveButton, SIGNAL(clicked()), this, SLOT(savePhenomena()));
 
 	connect(ui->altVsTimePlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverLine(QMouseEvent*)));
-	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAltVsTimeDiagram()));
-	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawAltVsTimeDiagram(StelLocation)));
+	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAltVsTimeDiagram()));	
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawAltVsTimeDiagram()));
 	connect(core, SIGNAL(dateChanged()), this, SLOT(drawAltVsTimeDiagram()));
 	drawAltVsTimeDiagram();
 
@@ -572,12 +572,6 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	groups->setCurrentIndex(index);
 	groups->model()->sort(0);
 	groups->blockSignals(false);
-}
-
-void AstroCalcDialog::drawAltVsTimeDiagram(StelLocation loc)
-{
-	Q_UNUSED(loc);
-	drawAltVsTimeDiagram();
 }
 
 void AstroCalcDialog::drawAltVsTimeDiagram()

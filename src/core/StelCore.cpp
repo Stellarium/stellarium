@@ -1024,9 +1024,6 @@ qint64 StelCore::getMilliSecondsOfLastJDUpdate() const
 
 void StelCore::setJD(double newJD)
 {
-	if (qAbs(JD.first - newJD)>=1.0)
-		emit(dateChanged());
-
 	JD.first=newJD;
 	JD.second=computeDeltaT(newJD);	
 	resetSync();
@@ -1290,7 +1287,7 @@ void StelCore::setTimeNow()
 {
 	setJD(StelUtils::getJDFromSystem());
 	// Force emit dateChanged
-	emit(dateChanged());
+	emit dateChanged();
 }
 
 void StelCore::setTodayTime(const QTime& target)
@@ -1570,6 +1567,9 @@ void StelCore::addSolarDays(double d)
 		d *= home->getMeanSolarDay();
 
 	setJD(getJD() + d);
+
+	if (d>=1.0)
+		emit dateChanged();
 }
 
 void StelCore::addSiderealDays(double d)
@@ -1579,6 +1579,9 @@ void StelCore::addSiderealDays(double d)
 		d *= home->getSiderealDay();
 
 	setJD(getJD() + d);
+
+	if (d>=1.0)
+		emit dateChanged();
 }
 
 // Get the sidereal time shifted by the observer longitude
