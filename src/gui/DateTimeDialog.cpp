@@ -150,7 +150,8 @@ void DateTimeDialog::yearChanged(int newyear)
 {
 	if ( year != newyear )
 	{
-		valid( newyear, month, day, hour, minute, second );		
+		valid( newyear, month, day, hour, minute, second );
+		emit StelApp::getInstance().getCore()->dateChanged();
 	}
 }
 
@@ -158,14 +159,16 @@ void DateTimeDialog::monthChanged(int newmonth)
 {
 	if ( month != newmonth )
 	{
-		valid( year, newmonth, day, hour, minute, second );		
+		valid( year, newmonth, day, hour, minute, second );
+		emit StelApp::getInstance().getCore()->dateChanged();
 	}
 }
 
 void DateTimeDialog::dayChanged(int newday)
 {
 	int delta = newday - day;
-	validJd(jd + delta);	
+	validJd(jd + delta);
+	emit StelApp::getInstance().getCore()->dateChanged();
 }
 
 void DateTimeDialog::hourChanged(int newhour)
