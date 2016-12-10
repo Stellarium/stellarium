@@ -226,6 +226,10 @@ StelApp::StelApp(QObject* parent)
 	, viewportEffect(NULL)
 	, flagShowDecimalDegrees(false)
 	, flagUseAzimuthFromSouth(false)
+	#ifdef ENABLE_SPOUT
+	, spoutSender(NULL)
+	, spoutTexID(0)
+	#endif
 {
 	// Stat variables
 	nbDownloadedFiles=0;
@@ -256,6 +260,31 @@ StelApp::StelApp(QObject* parent)
 
 	// Reset delta accumulators
 	wheelEventDelta[0] = wheelEventDelta[1] = 0;
+#ifdef ENABLE_SPOUT
+	if (qApp->property("spout")==true)
+	{
+		// Initialize the SpoutSender object. This does not create a spout sender yet.
+		memset(spoutName, 0, 256);
+		//memcpy(spoutName, "Stellarium ", 11);
+		//QByteArray stelVersion=StelUtils::getApplicationVersion().toLocal8Bit();
+		//memcpy(spoutName+11,  stelVersion.constData(), qMin(190, stelVersion.length())); // still a qMin for safety.
+		//sprintf(spoutName+11+stelVersion.length(), " (PID%lli)", QCoreApplication::applicationPid());
+		sprintf(spoutName, "Stellarium (PID%lli)", QCoreApplication::applicationPid());
+		qDebug() << "Spout name is: " << spoutName;
+		spoutSender = GetSpout();
+		int numAdapters=spoutSender->GetNumAdapters();
+		qDebug() << "Spout: Found " << numAdapters << "GPUs";
+		for (int i=0; i<numAdapters; i++){
+			char name[256];
+			spoutSender->GetAdapterName(i, name, 255);
+			qDebug() << "       GPU" << i << ": " << name;
+		}
+		qDebug() << "       Currently used: GPU " << spoutSender->GetAdapter();
+		spoutSender->CreateSender(spoutName, 500, 500); // this size seems odd. Maybe move this all to init()?
+		qDebug() << "       Sender has been created in" << (spoutSender->GetMemoryShareMode() ? "Memory Share Mode" : "OpenGL/DirectX interop mode");
+		qDebug() << "       Sender is" << (spoutSender->GetDX9()? "working" : "not working") << "with DX9 textures";
+	}
+#endif
 }
 
 /*************************************************************************
@@ -263,6 +292,14 @@ StelApp::StelApp(QObject* parent)
 *************************************************************************/
 StelApp::~StelApp()
 {
+#ifdef 	ENABLE_SPOUT
+	if (spoutSender)
+	{
+		spoutSender->ReleaseSender();
+		spoutSender->Release();
+		spoutSender=NULL;
+	}
+#endif
 	qDebug() << qPrintable(QString("Downloaded %1 files (%2 kbytes) in a session of %3 sec (average of %4 kB/s + %5 files from cache (%6 kB)).").arg(nbDownloadedFiles).arg(totalDownloadedSize/1024).arg(getTotalRunTime()).arg((double)(totalDownloadedSize/1024)/getTotalRunTime()).arg(nbUsedCache).arg(totalUsedCacheSize/1024));
 
 	stelObjectMgr->unSelect();
@@ -650,7 +687,24 @@ void StelApp::draw()
 		module->draw(core);
 	}
 	core->postDraw();
+#ifdef ENABLE_SPOUT
+	if (spoutSender)
+	{
+		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+		int w = params.viewportXywh[2];
+		int h = params.viewportXywh[3];
+
+		// This is not ideal: SendTexture would be preferred!
+
+		initSpoutTexture(w, h);
+		glBindTexture(GL_TEXTURE_2D, spoutTexID);
+		glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, w, h);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		spoutSender->SendTexture(spoutTexID, GL_TEXTURE_2D, w, h, true, drawFbo);
+	}
+#endif
 	applyRenderBuffer(drawFbo);
+
 }
 
 /*************************************************************************
@@ -670,6 +724,12 @@ void StelApp::glWindowHasBeenResized(float x, float y, float w, float h)
 		delete renderBuffer;
 		renderBuffer = NULL;
 	}
+#ifdef ENABLE_SPOUT
+	if (spoutSender)
+	{
+		spoutSender->UpdateSender(spoutName, w, h);
+	}
+#endif
 }
 
 // Handle mouse clics
@@ -901,3 +961,19 @@ void StelApp::dumpModuleActionPriorities(StelModule::StelModuleActionName action
 		qDebug() << " -- " << module->getCallOrder(actionName) << "Module: " << module->objectName();
 	}
 }
+
+#ifdef ENABLE_SPOUT
+void StelApp::initSpoutTexture(unsigned int width, unsigned int height)
+{
+    if(spoutTexID != 0) glDeleteTextures(1, &spoutTexID);
+
+	glGenTextures(1, &spoutTexID);
+	glBindTexture(GL_TEXTURE_2D, spoutTexID);
+	glTexImage2D(GL_TEXTURE_2D, 0,  GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glBindTexture(GL_TEXTURE_2D, 0);
+}
+#endif
