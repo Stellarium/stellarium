@@ -137,17 +137,12 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		qApp->setProperty("onetime_mesa_mode", true);
 	}
 	#ifdef ENABLE_SPOUT
-	if (argsGetOption(argList, "-S", "--spout"))
+	qApp->setProperty("spout", "none");
+	QString spoutStr = argsGetOptionWithArg(argList, "-S", "--spout", "").toString();
+	if (!spoutStr.isEmpty())
 	{
-		QString spoutStr = argsGetOptionWithArg(argList, "-S", "--spout", "").toString();
-
-		if (!spoutStr.isEmpty())
-		{
-			if (spoutStr=="all")
-				qApp->setProperty("spout", "all");
-			else
-				qApp->setProperty("spout", "sky");
-		}
+		if (spoutStr=="all")
+			qApp->setProperty("spout", "all");
 		else
 			qApp->setProperty("spout", "sky");
 	}
