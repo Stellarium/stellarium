@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-10 00:03+0700\n"
-"PO-Revision-Date: 2016-12-01 20:30+0000\n"
+"POT-Creation-Date: 2016-12-10 15:56+0700\n"
+"PO-Revision-Date: 2016-12-10 23:37+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-10 04:41+0000\n"
+"X-Launchpad-Export-Date: 2016-12-11 04:41+0000\n"
 "X-Generator: Launchpad (build 18292)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -82,7 +82,7 @@ msgstr "Einzelnes Sternbild auswählen"
 
 #: src/core/modules/ConstellationMgr.cpp:149
 msgid "Remove selection of constellations"
-msgstr ""
+msgstr "Auswahl von Sternbildern entfernen"
 
 #: src/core/modules/StarMgr.cpp:445 src/ui_viewDialog.h:1909
 #: src/ui_dsoColorsDialog.h:541
@@ -1938,7 +1938,7 @@ msgstr "Supergalaktische Länge/Breite: %1/%2"
 #: src/core/StelObject.cpp:271
 #, qt-format
 msgid "IAU Constellation: %1"
-msgstr ""
+msgstr "IAU Sternbild: %1"
 
 #: src/core/StelObject.cpp:280
 #, qt-format
@@ -3183,12 +3183,12 @@ msgstr "Helle Galaxien (<%1 mag)"
 #: src/gui/AstroCalcDialog.cpp:671 src/gui/AstroCalcDialog.cpp:731
 #: src/gui/AstroCalcDialog.cpp:733
 msgid "Local Time"
-msgstr ""
+msgstr "Ortszeit"
 
 #: src/gui/AstroCalcDialog.cpp:727
 #, qt-format
 msgid "Now is %1"
-msgstr ""
+msgstr "Zeit ist %1"
 
 #: src/gui/AstroCalcDialog.cpp:750
 msgid "Phenomenon"
@@ -6613,11 +6613,11 @@ msgstr "Scheinbare Helligkeit"
 #: src/ui_configurationDialog.h:1298
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
 msgid "3-letter IAU constellation abbreviation"
-msgstr ""
+msgstr "IAU 3-Buchstaben-Kürzel des Sternbilds"
 
 #: src/ui_configurationDialog.h:1300
 msgid "Constellation"
-msgstr ""
+msgstr "Sternbild"
 
 #: src/ui_configurationDialog.h:1301
 msgid "Control"
@@ -7122,11 +7122,11 @@ msgstr "Erscheinungen"
 
 #: src/ui_astroCalcDialog.h:522
 msgid "Alt. vs. Time"
-msgstr ""
+msgstr "Höhe vs. Zeit"
 
 #: src/ui_astroCalcDialog.h:524
 msgid "Altitude vs. Time"
-msgstr ""
+msgstr "Höhe und Zeit"
 
 #: src/ui_astroCalcDialog.h:529
 msgid "Update of planetary positions"
@@ -14328,7 +14328,7 @@ msgstr "Zeige Schaltfläche in der Werkzeugleiste"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:291
 msgid "Show IAU constellation code"
-msgstr ""
+msgstr "Zeige IAU Sternbildkürzel"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:293
 msgid "Which coordinate system will be used for displaying"
