@@ -79,6 +79,9 @@
 #include <QCoreApplication>
 #include <QScreen>
 #include <QDateTime>
+#ifdef ENABLE_SPOUT
+#include <QMessageBox>
+#endif
 
 #ifdef USE_STATIC_PLUGIN_HELLOSTELMODULE
 Q_IMPORT_PLUGIN(HelloStelModuleStelPluginInterface)
@@ -534,28 +537,47 @@ void StelApp::init(QSettings* conf)
 	animationScale = confSettings->value("gui/pointer_animation_speed", 1.f).toFloat();
 	
 #ifdef ENABLE_SPOUT
-	//qDebug() << "Property spout is" << qApp->property("spout").toString();
+	qDebug() << "Property spout is" << qApp->property("spout").toString();
 	if (qApp->property("spout").toString() != "none")
 	{
-		// Initialize the SpoutSender object. This does not create a spout sender yet.
-		memset(spoutName, 0, sizeof(spoutName));
-		sprintf(spoutName, "Stellarium (PID%lli)", QCoreApplication::applicationPid());
-		qDebug() << "SPOUT name is: " << spoutName;
-		spoutSender = GetSpout();
-		int numAdapters=spoutSender->GetNumAdapters();
-		qDebug() << "SPOUT: Found " << numAdapters << "GPUs";
-		for (int i=0; i<numAdapters; i++){
-			char name[256];
-			spoutSender->GetAdapterName(i, name, 255);
-			qDebug() << "       GPU" << i << ": " << name;
+		QString glRenderer(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
+		bool isANGLE=glRenderer.startsWith("ANGLE", Qt::CaseSensitive);
+
+		if (isANGLE)
+		{
+			qDebug() << "SPOUT: Does not run in ANGLE mode!";
 		}
-		qDebug() << "       Currently used: GPU" << spoutSender->GetAdapter();
-		spoutValid=spoutSender->CreateSender(spoutName, 500, 500); // this size seems odd.
-		if (spoutValid){
-		qDebug() << "       Sender has been created in" << (spoutSender->GetMemoryShareMode() ? "Memory Share Mode" : "OpenGL/DirectX interop mode");
-		qDebug() << "       Sender is" << (spoutSender->GetDX9()? "working" : "not working") << "with DX9 textures";
-		}else{
-			qDebug() << "       Sender creation failed! Start with NVidia GPU!";
+		else
+		{
+			// Initialize the SpoutSender object. This does not create a spout sender yet.
+			memset(spoutName, 0, sizeof(spoutName));
+			sprintf(spoutName, "Stellarium (PID%lli)", QCoreApplication::applicationPid());
+			qDebug() << "SPOUT name is: " << spoutName;
+			spoutSender = GetSpout();
+			int numAdapters=spoutSender->GetNumAdapters();
+			qDebug() << "SPOUT: Found " << numAdapters << "GPUs";
+			for (int i=0; i<numAdapters; i++){
+				char name[256];
+				spoutSender->GetAdapterName(i, name, 255);
+				qDebug() << "       GPU" << i << ": " << name;
+			}
+			qDebug() << "       Currently used: GPU" << spoutSender->GetAdapter();
+			spoutValid=spoutSender->CreateSender(spoutName, 500, 500); // try any size, will be resized later.
+
+		}
+		if (spoutValid)
+		{
+			qDebug() << "       Sender has been created in" << (spoutSender->GetMemoryShareMode() ? "Memory Share Mode" : "OpenGL/DirectX interop mode");
+			qDebug() << "       Sender is" << (spoutSender->GetDX9()? "working" : "not working") << "with DX9 textures";
+		}
+		else
+		{
+			qDebug() << "SPOUT: Sender creation failed!";
+			qDebug() << "       You may need a better GPU for this function, see SPOUT docs.";
+			qDebug() << "       On a notebook with NVidia Optimus, force running Stellarium on the NVidia GPU.";
+			QMessageBox::warning(0, "Stellarium SPOUT", q_("Cannot create SPOUT sender. See log for details."),
+							      QMessageBox::Ok);
+			qDebug() << "SPOUT: Continuing without SPOUT sender.";
 			qApp->setProperty("spout", "");
 		}
 	}
@@ -588,8 +610,13 @@ void StelApp::initPlugIns()
 
 void StelApp::deinit()
 {
+	// GZ I don't know why QCoreApplication::processEvents(); is called several times here.
+	// Calling it after unloadAllPlugins() sometimes crashes.
+	// Calling it already before releasing Spout seems to prevent a crash after stopScript().
+	qDebug() << "StelApp: Deinit 0... .";
+	QCoreApplication::processEvents();
 #ifdef 	ENABLE_SPOUT
-	if (spoutSender)
+	if (spoutValid)
 	{
 		qDebug() << "SPOUT: Releasing ...";
 		spoutSender->ReleaseSender();
@@ -602,11 +629,15 @@ void StelApp::deinit()
 	if (scriptMgr->scriptIsRunning())
 		scriptMgr->stopScript();
 #endif
-	QCoreApplication::processEvents();
+	qDebug() << "StelApp: Deinit 1... .";
+	QCoreApplication::processEvents();       // sometimes it crashes here.
+	qDebug() << "StelApp: Deinit 2... .";
 	getModuleMgr().unloadAllPlugins();
-	QCoreApplication::processEvents();
-	
+	qDebug() << "StelApp: Deinit 3... .";    // sometimes it crashes here.
+	//QCoreApplication::processEvents(QEventLoop::ExcludeSocketNotifiers | QEventLoop::ExcludeUserInputEvents | QEventLoop::WaitForMoreEvents	);
+	qDebug() << "StelApp: Deinit shaders... .";
 	StelPainter::deinitGLShaders();
+	qDebug() << "StelApp: Deinit shaders ... DONE.";
 }
 
 
@@ -700,7 +731,7 @@ void StelApp::draw()
 	//if (qApp->property("spout")=="sky")
 	if (qApp->property("spout")!="") // first version.
 	{
-		if (spoutSender)
+		if (spoutValid)
 		{
 			StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 			int w = params.viewportXywh[2];

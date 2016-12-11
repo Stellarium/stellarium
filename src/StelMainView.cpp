@@ -570,45 +570,7 @@ void StelMainView::init(QSettings* conf)
 
 	stelApp= new StelApp();
 	stelApp->setGui(gui);
-	/* If we can identify what to test for Spout, this code can be adapted. The extension tried here is wrong.
-#ifdef ENABLE_SPOUT
-	// This block must be before StelApp->init()!
-	// We must test an NVidia extension for Spout. If not present, we must disable Spout.
-	if (qApp->property("spout") != "")
-	{
-		dumpOpenGLdiagnostics();
-		qDebug() << "SPOUT Now test again...\n\n\n";
-		//QOpenGLContext *context = QOpenGLContext::currentContext();
-		QOpenGLContext* context=glWidget->context()->contextHandle();
-		if (context)
-		{
-			context->functions()->initializeOpenGLFunctions();
-			QSet<QByteArray> extensionSet=context->extensions();
-			bool interopOK=extensionSet.contains("WGL_NV_DX_interop");
-			qDebug() << "SPOUT: WGL_NV_DX_interop" << (interopOK ? "present, OK." : "missing! SPOUT disabled.");
-			if (!interopOK)
-			{
-				qDebug() << "SPOUT: You may need an NVidia card for this function.";
-				qDebug() << "       On a notebook with NVidia Optimus, force running Stellarium on the NVidia GPU.";
-				QMessageBox::StandardButton answerButton=
-				QMessageBox::critical(0, "Stellarium SPOUT", q_("The WGL_NV_DX_interop extension is missing. No SPOUT sender. See log for details."),
-						      QMessageBox::Ignore|QMessageBox::Abort, QMessageBox::Abort);
-				if (answerButton == QMessageBox::Abort)
-				{
-					qDebug() << "SPOUT: Aborting due to SPOUT problems.";
-					exit(1);
-				}
-				else
-				{
-					qDebug() << "SPOUT: Continuing without SPOUT sender.";
-					//qApp->setProperty("spout", "");
 
-				}
-			}
-		}
-	}
-#endif
-*/
 	stelApp->init(conf);
 	StelActionMgr *actionMgr = stelApp->getStelActionManager();
 	actionMgr->addAction("actionSave_Screenshot_Global", N_("Miscellaneous"), N_("Save screenshot"), this, "saveScreenShot()", "Ctrl+S");
