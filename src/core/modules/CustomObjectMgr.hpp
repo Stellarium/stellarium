@@ -87,8 +87,13 @@ public slots:
 	//! @return The matching custom object pointer if exists or NULL.
 	CustomObjectP searchByEnglishName(QString customObjectEnglishName) const;
 
+	//! Add custom object on the sky
+	//! @param designation - designation of custom object
+	//! @param coordinates - coordinates of custom object
+	//! @param isVisible - flag of visibility of custom object
 	void addCustomObject(QString designation, Vec3d coordinates, bool isVisible=false);
 
+	//! Remove all custom objects
 	void removeCustomObjects();
 
 	//! Set the color used to draw custom object markers.
