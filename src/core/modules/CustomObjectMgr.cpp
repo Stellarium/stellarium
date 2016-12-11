@@ -124,6 +124,40 @@ void CustomObjectMgr::addCustomObject(QString designation, Vec3d coordinates, bo
 	}
 }
 
+void CustomObjectMgr::addCustomObject(QString designation, const QString &ra, const QString &dec, bool isVisible)
+{
+	Vec3d J2000;
+	double dRa = StelUtils::getDecAngle(ra);
+	double dDec = StelUtils::getDecAngle(dec);
+	StelUtils::spheToRect(dRa,dDec,J2000);
+
+	addCustomObject(designation, J2000, isVisible);
+}
+
+void CustomObjectMgr::addCustomObjectRaDec(QString designation, const QString &ra, const QString &dec, bool isVisible)
+{
+	Vec3d aim;
+	double dRa = StelUtils::getDecAngle(ra);
+	double dDec = StelUtils::getDecAngle(dec);
+	StelUtils::spheToRect(dRa, dDec, aim);
+
+	addCustomObject(designation, StelApp::getInstance().getCore()->equinoxEquToJ2000(aim), isVisible);
+}
+
+void CustomObjectMgr::addCustomObjectAltAzi(QString designation, const QString &alt, const QString &azi, bool isVisible)
+{
+	Vec3d aim;
+	double dAlt = StelUtils::getDecAngle(alt);
+	double dAzi = M_PI - StelUtils::getDecAngle(azi);
+
+	if (StelApp::getInstance().getFlagSouthAzimuthUsage())
+		dAzi -= M_PI;
+
+	StelUtils::spheToRect(dAzi, dAlt, aim);
+
+	addCustomObject(designation, StelApp::getInstance().getCore()->altAzToJ2000(aim, StelCore::RefractionAuto), isVisible);
+}
+
 void CustomObjectMgr::removeCustomObjects()
 {
 	setSelected("");
