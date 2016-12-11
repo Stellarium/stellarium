@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-10 00:03+0700\n"
-"PO-Revision-Date: 2016-07-03 18:15+0000\n"
+"POT-Creation-Date: 2016-12-10 15:56+0700\n"
+"PO-Revision-Date: 2016-12-10 05:48+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-10 04:53+0000\n"
+"X-Launchpad-Export-Date: 2016-12-11 04:52+0000\n"
 "X-Generator: Launchpad (build 18292)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -3148,7 +3148,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:671 src/gui/AstroCalcDialog.cpp:731
 #: src/gui/AstroCalcDialog.cpp:733
 msgid "Local Time"
-msgstr ""
+msgstr "Локално време"
 
 #: src/gui/AstroCalcDialog.cpp:727
 #, qt-format
@@ -3199,7 +3199,7 @@ msgstr "Објекат"
 
 #: src/gui/BookmarksDialog.cpp:101
 msgid "Localized name"
-msgstr ""
+msgstr "Име на матерњем језику"
 
 #: src/gui/BookmarksDialog.cpp:103
 msgid "Location of observer"
@@ -4229,39 +4229,39 @@ msgstr ""
 
 #: src/translations.h:381
 msgid "&Custom colors"
-msgstr ""
+msgstr "&Произвољне боје"
 
 #: src/translations.h:382
 msgid "&Add to Custom Colors"
-msgstr ""
+msgstr "&Додај у биране боје"
 
 #: src/translations.h:383
 msgid "Hu&e:"
-msgstr ""
+msgstr "Нијансира&ј:"
 
 #: src/translations.h:384
 msgid "&Sat:"
-msgstr ""
+msgstr "&Зас:"
 
 #: src/translations.h:385
 msgid "&Val:"
-msgstr ""
+msgstr "&Вре:"
 
 #: src/translations.h:386
 msgid "&Red:"
-msgstr ""
+msgstr "&Црвена:"
 
 #: src/translations.h:387
 msgid "&Green:"
-msgstr ""
+msgstr "&Зелена:"
 
 #: src/translations.h:388
 msgid "Bl&ue:"
-msgstr ""
+msgstr "Пл&ава:"
 
 #: src/translations.h:389
 msgid "Select Color"
-msgstr ""
+msgstr "Изаберите боју"
 
 #: src/translations.h:390
 #, qt-format
@@ -4326,7 +4326,7 @@ msgstr "Аруба"
 
 #: src/translations_countries.h:45
 msgid "Åland Islands"
-msgstr ""
+msgstr "Аландска острва"
 
 #: src/translations_countries.h:46
 msgid "Azerbaijan"
@@ -4334,7 +4334,7 @@ msgstr "Азербејџан"
 
 #: src/translations_countries.h:47
 msgid "Bosnia and Herzegovina"
-msgstr ""
+msgstr "Босна и Херцеговина"
 
 #: src/translations_countries.h:48
 msgid "Barbados"
@@ -4378,7 +4378,7 @@ msgstr "Бермуди"
 
 #: src/translations_countries.h:58
 msgid "Brunei"
-msgstr ""
+msgstr "Брунеј"
 
 #: src/translations_countries.h:59
 msgid "Bolivia"
@@ -4422,7 +4422,7 @@ msgstr "Канада"
 
 #: src/translations_countries.h:69
 msgid "Cocos (Keeling) Islands"
-msgstr ""
+msgstr "Кокосова острва"
 
 #: src/translations_countries.h:70
 msgid "Congo (Dem. Rep.)"
@@ -4442,7 +4442,7 @@ msgstr "Швајцарска"
 
 #: src/translations_countries.h:74
 msgid "Côte d'Ivoire"
-msgstr ""
+msgstr "Обала Слоноваче"
 
 #: src/translations_countries.h:75
 msgid "Cook Islands"
@@ -4478,7 +4478,7 @@ msgstr "Зеленортска острва"
 
 #: src/translations_countries.h:83
 msgid "Curacao"
-msgstr ""
+msgstr "Куракао"
 
 #: src/translations_countries.h:84
 msgid "Christmas Island"
@@ -4590,7 +4590,7 @@ msgstr "Француска Гвајана"
 
 #: src/translations_countries.h:111
 msgid "Guernsey"
-msgstr ""
+msgstr "Гернзи"
 
 #: src/translations_countries.h:112
 msgid "Ghana"
@@ -4682,7 +4682,7 @@ msgstr "Израел"
 
 #: src/translations_countries.h:134
 msgid "Isle of Man"
-msgstr ""
+msgstr "Острво Мен"
 
 #: src/translations_countries.h:135
 msgid "India"
@@ -4710,7 +4710,7 @@ msgstr "Италија"
 
 #: src/translations_countries.h:141
 msgid "Jersey"
-msgstr ""
+msgstr "Џерси"
 
 #: src/translations_countries.h:142
 msgid "Jamaica"
@@ -4770,7 +4770,7 @@ msgstr "Казахстан"
 
 #: src/translations_countries.h:156
 msgid "Laos"
-msgstr ""
+msgstr "Лаос"
 
 #: src/translations_countries.h:157
 msgid "Lebanon"
@@ -4810,7 +4810,7 @@ msgstr "Летонија"
 
 #: src/translations_countries.h:166
 msgid "Libya"
-msgstr ""
+msgstr "Либија"
 
 #: src/translations_countries.h:167
 msgid "Morocco"
@@ -4998,7 +4998,7 @@ msgstr "Порторико"
 
 #: src/translations_countries.h:213
 msgid "Palestine"
-msgstr ""
+msgstr "Палестина"
 
 #: src/translations_countries.h:214
 msgid "Portugal"
@@ -5030,7 +5030,7 @@ msgstr "Србија"
 
 #: src/translations_countries.h:221
 msgid "Russia"
-msgstr ""
+msgstr "Русија"
 
 #: src/translations_countries.h:222
 msgid "Rwanda"
@@ -5098,7 +5098,7 @@ msgstr "Суринам"
 
 #: src/translations_countries.h:238
 msgid "South Sudan"
-msgstr ""
+msgstr "Јужни Судан"
 
 #: src/translations_countries.h:239
 msgid "Sao Tome and Principe"
@@ -5114,7 +5114,7 @@ msgstr ""
 
 #: src/translations_countries.h:242
 msgid "Syria"
-msgstr ""
+msgstr "Сирија"
 
 #: src/translations_countries.h:243
 msgid "Swaziland"
@@ -5210,7 +5210,7 @@ msgstr "Узбекистан"
 
 #: src/translations_countries.h:266
 msgid "Vatican City"
-msgstr ""
+msgstr "Ватикан"
 
 #: src/translations_countries.h:267
 msgid "St Vincent"
@@ -5230,7 +5230,7 @@ msgstr ""
 
 #: src/translations_countries.h:271
 msgid "Vietnam"
-msgstr ""
+msgstr "Вијетнам"
 
 #: src/translations_countries.h:272
 msgid "Vanuatu"
@@ -5380,7 +5380,7 @@ msgstr ""
 
 #: src/ui_locationDialogGui.h:466
 msgid "Time zone:"
-msgstr ""
+msgstr "Временска зона:"
 
 #: src/ui_locationDialogGui.h:467
 msgid "Name/City:"
@@ -6522,7 +6522,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1300
 msgid "Constellation"
-msgstr ""
+msgstr "Сазвежђе"
 
 #: src/ui_configurationDialog.h:1301
 msgid "Control"
@@ -7022,7 +7022,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:524
 msgid "Altitude vs. Time"
-msgstr ""
+msgstr "Висина према времену"
 
 #: src/ui_astroCalcDialog.h:529
 msgid "Update of planetary positions"
@@ -7058,7 +7058,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:543
 msgid "Time step:"
-msgstr ""
+msgstr "Временски корак:"
 
 #: src/ui_astroCalcDialog.h:544 src/ui_astroCalcDialog.h:551
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
@@ -7104,11 +7104,11 @@ msgstr ""
 
 #: src/ui_bookmarksDialog.h:176
 msgid "Add date and time"
-msgstr ""
+msgstr "Додај датум и време"
 
 #: src/ui_bookmarksDialog.h:177
 msgid "Add location"
-msgstr ""
+msgstr "Додај место"
 
 #: src/ui_bookmarksDialog.h:179
 msgid "Add selected object to bookmarks"
