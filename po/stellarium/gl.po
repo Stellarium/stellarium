@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-10 00:03+0700\n"
-"PO-Revision-Date: 2016-11-10 20:56+0000\n"
+"POT-Creation-Date: 2016-12-10 15:56+0700\n"
+"PO-Revision-Date: 2016-12-10 20:14+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-10 04:41+0000\n"
+"X-Launchpad-Export-Date: 2016-12-11 04:41+0000\n"
 "X-Generator: Launchpad (build 18292)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -80,7 +80,7 @@ msgstr "Seleccionar unha constelación"
 
 #: src/core/modules/ConstellationMgr.cpp:149
 msgid "Remove selection of constellations"
-msgstr ""
+msgstr "Quitar selección de constelacións"
 
 #: src/core/modules/StarMgr.cpp:445 src/ui_viewDialog.h:1909
 #: src/ui_dsoColorsDialog.h:541
@@ -898,7 +898,7 @@ msgstr "Diámetro aparente: %1, con aneis: %2"
 #: src/core/modules/Planet.cpp:312 src/core/modules/Planet.cpp:316
 #, qt-format
 msgid "Apparent diameter: %1, scaled up to: %2"
-msgstr ""
+msgstr "Diámetro aparente: %1, escalado ata: %2"
 
 #: src/core/modules/Planet.cpp:323 src/core/modules/Planet.cpp:325
 #: src/core/modules/MinorPlanet.cpp:286 src/core/modules/MinorPlanet.cpp:288
@@ -1158,7 +1158,7 @@ msgstr "Luz zodiacal"
 
 #: src/core/modules/ToastMgr.cpp:61
 msgid "Digitized Sky Survey (experimental)"
-msgstr ""
+msgstr "Exame do Ceo Dixitalizado (experimental)"
 
 #: src/core/StelApp.cpp:526
 msgid "Night mode"
@@ -1929,7 +1929,7 @@ msgstr "Lonxitude/latitude supergalácticas: %1/%2"
 #: src/core/StelObject.cpp:271
 #, qt-format
 msgid "IAU Constellation: %1"
-msgstr ""
+msgstr "IAU Constelación: %1"
 
 #: src/core/StelObject.cpp:280
 #, qt-format
@@ -2333,47 +2333,47 @@ msgstr "Páxina anterior/seguinte"
 
 #: src/gui/HelpDialog.cpp:154
 msgid "Ctrl+Up/Down"
-msgstr ""
+msgstr "Ctrl+Arr/Abx"
 
 #: src/gui/HelpDialog.cpp:157
 msgid "Time dragging"
-msgstr ""
+msgstr "Arrastramento de tempo"
 
 #: src/gui/HelpDialog.cpp:158
 msgid "Ctrl & left mouse drag"
-msgstr ""
+msgstr "Ctrl & arrastre esquerdo do rato"
 
 #: src/gui/HelpDialog.cpp:159
 msgid "Time scrolling: minutes"
-msgstr ""
+msgstr "Tempo de desprazamento: minutos"
 
 #: src/gui/HelpDialog.cpp:160
 msgid "Ctrl & mouse wheel"
-msgstr ""
+msgstr "Ctrl & roda do rato"
 
 #: src/gui/HelpDialog.cpp:161
 msgid "Time scrolling: hours"
-msgstr ""
+msgstr "Tempo de desprazamento: horas"
 
 #: src/gui/HelpDialog.cpp:162
 msgid "Ctrl+Shift & mouse wheel"
-msgstr ""
+msgstr "Ctrl+Mai & roda do rato"
 
 #: src/gui/HelpDialog.cpp:163
 msgid "Time scrolling: days"
-msgstr ""
+msgstr "Tempo de desprazamento: días"
 
 #: src/gui/HelpDialog.cpp:164
 msgid "Ctrl+Alt & mouse wheel"
-msgstr ""
+msgstr "Ctrl+Alt & roda do rato"
 
 #: src/gui/HelpDialog.cpp:165
 msgid "Time scrolling: years"
-msgstr ""
+msgstr "Tempo de desprazamento: anos"
 
 #: src/gui/HelpDialog.cpp:166
 msgid "Ctrl+Alt+Shift & mouse wheel"
-msgstr ""
+msgstr "Ctrl+Alt+Mai & roda do rato"
 
 #: src/gui/HelpDialog.cpp:169
 msgid "Select object"
@@ -2389,7 +2389,7 @@ msgstr "Limpar a selección"
 
 #: src/gui/HelpDialog.cpp:175
 msgid "Ctrl & left click"
-msgstr ""
+msgstr "Ctrl & clic esquerdo"
 
 #: src/gui/HelpDialog.cpp:177
 msgid "Right click"
@@ -2401,7 +2401,7 @@ msgstr "Engadir marcador personalizado"
 
 #: src/gui/HelpDialog.cpp:181
 msgid "Shift & left click"
-msgstr ""
+msgstr "Mai & clic esquerdo"
 
 #: src/gui/HelpDialog.cpp:183
 msgid "Delete all custom markers"
@@ -2409,7 +2409,7 @@ msgstr "Borrar todos os marcadores personalizados"
 
 #: src/gui/HelpDialog.cpp:184
 msgid "Shift & right click"
-msgstr ""
+msgstr "Mai & clic dereito"
 
 #: src/gui/HelpDialog.cpp:187
 #, qt-format
@@ -3134,12 +3134,12 @@ msgstr "Obxectos da nube de Oort"
 #: src/gui/AstroCalcDialog.cpp:565
 #, qt-format
 msgid "Bright stars (<%1 mag)"
-msgstr ""
+msgstr "Estrelas brillantes (<%1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:566
 #, qt-format
 msgid "Bright star clusters (<%1 mag)"
-msgstr ""
+msgstr "Cúmulos de estrelas brillantes (<%1 mag)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:567 src/translations.h:99
@@ -3150,7 +3150,7 @@ msgstr "Nebulosas planetarias"
 #: src/gui/AstroCalcDialog.cpp:568
 #, qt-format
 msgid "Bright nebulae (<%1 mag)"
-msgstr ""
+msgstr "Nebulosas brillantes (<%1 mag)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:569 src/translations.h:101
@@ -3161,17 +3161,17 @@ msgstr "Nebulosa escura"
 #: src/gui/AstroCalcDialog.cpp:570
 #, qt-format
 msgid "Bright galaxies (<%1 mag)"
-msgstr ""
+msgstr "Galaxias brillantes (<%1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:671 src/gui/AstroCalcDialog.cpp:731
 #: src/gui/AstroCalcDialog.cpp:733
 msgid "Local Time"
-msgstr ""
+msgstr "Hora local"
 
 #: src/gui/AstroCalcDialog.cpp:727
 #, qt-format
 msgid "Now is %1"
-msgstr ""
+msgstr "Agora é %1"
 
 #: src/gui/AstroCalcDialog.cpp:750
 msgid "Phenomenon"
@@ -3209,7 +3209,7 @@ msgstr "Ocultación"
 
 #: src/gui/AstroCalcDialog.cpp:1041
 msgid "Eclipse"
-msgstr ""
+msgstr "Eclipse"
 
 #: src/gui/BookmarksDialog.cpp:100 src/ui_searchDialogGui.h:702
 msgid "Object"
@@ -6591,11 +6591,11 @@ msgstr "Magnitude visual"
 #: src/ui_configurationDialog.h:1298
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
 msgid "3-letter IAU constellation abbreviation"
-msgstr ""
+msgstr "Abreviatura de constelación IAU de 3 letras"
 
 #: src/ui_configurationDialog.h:1300
 msgid "Constellation"
-msgstr ""
+msgstr "Constelación"
 
 #: src/ui_configurationDialog.h:1301
 msgid "Control"
@@ -6814,11 +6814,11 @@ msgstr "Azimut dende o Sur"
 
 #: src/ui_configurationDialog.h:1399
 msgid "Toggle display of the button for Digitized Sky Survey."
-msgstr ""
+msgstr "Alterna a visualización do botón para Exame do Ceo Dixitalizado."
 
 #: src/ui_configurationDialog.h:1401
 msgid "Show DSS button"
-msgstr ""
+msgstr "Amosa o botón DSS"
 
 #: src/ui_configurationDialog.h:1403
 msgid "Automatic change of landscape when planet is changed"
@@ -7095,11 +7095,11 @@ msgstr "Fenómenos"
 
 #: src/ui_astroCalcDialog.h:522
 msgid "Alt. vs. Time"
-msgstr ""
+msgstr "Alt. vs. Tempo"
 
 #: src/ui_astroCalcDialog.h:524
 msgid "Altitude vs. Time"
-msgstr ""
+msgstr "Altitude vs. Tempo"
 
 #: src/ui_astroCalcDialog.h:529
 msgid "Update of planetary positions"
@@ -7175,6 +7175,7 @@ msgstr "Valor en graos decimais"
 #: src/ui_astroCalcDialog.h:556
 msgid "Please select object to drawing diagram 'Altitude vs. Time' for it."
 msgstr ""
+"Elixe un obxecto para deseñar o seu diagrama de 'Altitude vs. Tempo'."
 
 #: src/ui_astroCalcDialog.h:557
 msgid "Astronomical calculations"
@@ -8229,10 +8230,12 @@ msgid ""
 "Enable automatic switch of mount type from the telescope settings for "
 "horizontal orientation of CCD frame."
 msgstr ""
+"Activa a selección automática do tipo de montura a partir das definicións do "
+"telescopio para a orientación horizontal do cadro da CCD."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1145
 msgid "Enable automatic switch of mount type"
-msgstr ""
+msgstr "Activa a selección automática do tipo de montura"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1146
 msgid "Use degrees and minutes for FOV of CCD"
@@ -8595,7 +8598,7 @@ msgstr "Ángulo de reflexión do Sol: %1%2"
 #: plugins/Satellites/src/Satellite.cpp:338
 #, qt-format
 msgid "Operational status: %1"
-msgstr ""
+msgstr "Estatus operativo: %1"
 
 #: plugins/Satellites/src/Satellite.cpp:345
 msgid "The satellite and the observer are in sunlight."
@@ -8622,42 +8625,42 @@ msgstr "%1 MHz (%2%3 kHz)"
 #: plugins/Satellites/src/Satellite.cpp:621
 msgctxt "operational status"
 msgid "unknown"
-msgstr ""
+msgstr "descoñecido"
 
 #: plugins/Satellites/src/Satellite.cpp:600
 msgctxt "operational status"
 msgid "operational"
-msgstr ""
+msgstr "operativo"
 
 #: plugins/Satellites/src/Satellite.cpp:603
 msgctxt "operational status"
 msgid "nonoperational"
-msgstr ""
+msgstr "non operativo"
 
 #: plugins/Satellites/src/Satellite.cpp:606
 msgctxt "operational status"
 msgid "partially operational"
-msgstr ""
+msgstr "parcialmente operativo"
 
 #: plugins/Satellites/src/Satellite.cpp:609
 msgctxt "operational status"
 msgid "standby"
-msgstr ""
+msgstr "En repouso"
 
 #: plugins/Satellites/src/Satellite.cpp:612
 msgctxt "operational status"
 msgid "spare"
-msgstr ""
+msgstr "recambio"
 
 #: plugins/Satellites/src/Satellite.cpp:615
 msgctxt "operational status"
 msgid "extended mission"
-msgstr ""
+msgstr "misión prolongada"
 
 #: plugins/Satellites/src/Satellite.cpp:618
 msgctxt "operational status"
 msgid "decayed"
-msgstr ""
+msgstr "deteriorado"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:407
 msgid "Stellarium Satellites Plugin"
@@ -12684,7 +12687,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:484
 msgid "Enable display of designations for exoplanets"
-msgstr ""
+msgstr "Activar a visualización das denominacións de exoplanetas"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:486
 msgid "Show exoplanets button on toolbar"
@@ -14310,7 +14313,7 @@ msgstr "Amosar o botón de plugin na barra de ferramentas"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:291
 msgid "Show IAU constellation code"
-msgstr ""
+msgstr "Amosar o código de constelación IAU"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:293
 msgid "Which coordinate system will be used for displaying"
