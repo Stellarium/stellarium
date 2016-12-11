@@ -51,6 +51,8 @@ using namespace std;
 // constructor which loads all data from appropriate files
 ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 	: hipStarMgr(_hip_stars),
+	  isolateSelected(false),
+	  constellationPickEnabled(false),
 	  constellationDisplayStyle(ConstellationMgr::constellationsTranslated),
 	  artFadeDuration(2.),
 	  artIntensity(0),
@@ -64,8 +66,6 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 {
 	setObjectName("ConstellationMgr");
 	Q_ASSERT(hipStarMgr);
-	isolateSelected = false;
-	constellationPickEnabled = false;
 }
 
 ConstellationMgr::~ConstellationMgr()

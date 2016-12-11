@@ -618,11 +618,10 @@ void SkyGrid::draw(const StelCore* core) const
 }
 
 
-SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : color(0.f, 0.f, 1.f)
+SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : line_type(_line_type), color(0.f, 0.f, 1.f)
 {
 	// Font size is 14
 	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
-	line_type = _line_type;
 
 	updateLabel();
 }
@@ -887,11 +886,10 @@ void SkyLine::draw(StelCore *core) const
 
 }
 
-SkyPoint::SkyPoint(SKY_POINT_TYPE _point_type) : color(0.f, 0.f, 1.f)
+SkyPoint::SkyPoint(SKY_POINT_TYPE _point_type) : point_type(_point_type), color(0.f, 0.f, 1.f)
 {
 	// Font size is 14
 	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
-	point_type = _point_type;
 	texCross = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cross.png");
 	updateLabel();
 }
