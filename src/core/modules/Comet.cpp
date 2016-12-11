@@ -82,43 +82,31 @@ Comet::Comet(const QString& englishName,
 		  false, //No atmosphere
 		  true, //halo
 		  pTypeStr),
+	  absoluteMagnitude(0.),
+	  slopeParameter(-1.), //== uninitialized: used in getVMagnitude()
+	  semiMajorAxis(0.),
+	  isCometFragment(false),
+	  nameIsProvisionalDesignation(false),
+	  tailFactors(-1., -1.), // mark "invalid"
 	  tailActive(false),
 	  tailBright(false),
+	  deltaJDEtail(15.0*StelCore::JD_MINUTE), // update tail geometry every 15 minutes only
+	  lastJDEtail(0.0),
 	  dustTailWidthFactor(dustTailWidthFact),
 	  dustTailLengthFactor(dustTailLengthFact),
 	  dustTailBrightnessFactor(dustTailBrightnessFact)
 {
-	texMapName = atexMapName;
-	lastOrbitJDE =0;
-	deltaJDE = StelCore::JD_SECOND;
-	deltaJDEtail=15.0*StelCore::JD_MINUTE; // update tail geometry every 15 minutes only
-	lastJDEtail=0.0;
-	orbitCached = 0;
-	closeOrbit = acloseOrbit;
-
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
 	texMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
-	tailFactors[0]=-1.0f; tailFactors[1]=-1.0f; // mark "invalid"
 	gastailVertexArr.clear();
 	dusttailVertexArr.clear();
 	comaVertexArr.clear();
 	gastailColorArr.clear();
 	dusttailColorArr.clear();
 
-	//Comet specific members
-	absoluteMagnitude = 0;
-	slopeParameter = -1;//== uninitialized: used in getVMagnitude()
-
 	//TODO: Name processing?
-	nameI18 = englishName;
-
-	flagLabels = true;
-
-	semiMajorAxis = 0.;
-	isCometFragment = false;
-	nameIsProvisionalDesignation = false;
 }
 
 Comet::~Comet()

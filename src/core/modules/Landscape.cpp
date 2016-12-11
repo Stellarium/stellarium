@@ -40,6 +40,7 @@ Landscape::Landscape(float _radius)
 	, minBrightness(-1.)
 	, landscapeBrightness(1.)
 	, lightScapeBrightness(0.)
+	, validLandscape(false)
 	, rows(20)
 	, cols(40)
 	, angleRotateZ(0.)
@@ -53,7 +54,6 @@ Landscape::Landscape(float _radius)
 	, horizonPolygon(NULL)
 	, fontSize(18)
 {
-	validLandscape = 0;
 }
 
 Landscape::~Landscape()
@@ -72,12 +72,12 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	{
 		qWarning() << "No valid landscape definition (no name) found for landscape ID "
 			<< landscapeId << ". No landscape in use." << endl;
-		validLandscape = 0;
+		validLandscape = false;
 		return;
 	}
 	else
 	{
-		validLandscape = 1;
+		validLandscape = true;
 	}
 
 	// Optional data
