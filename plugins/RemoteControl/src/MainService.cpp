@@ -446,7 +446,7 @@ bool MainService::focusObject(const QString &name)
 void MainService::focusPosition(const Vec3d &pos)
 {
 	objMgr->unSelect();
-	mvmgr->moveToJ2000(pos, mvmgr->getAutoMoveDuration());
+	mvmgr->moveToJ2000(pos, mvmgr->mountFrameToJ2000(Vec3d(0., 0., 1.)), mvmgr->getAutoMoveDuration());
 }
 
 void MainService::updateMovement(float x, float y, bool xUpdated, bool yUpdated)

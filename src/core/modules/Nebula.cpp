@@ -101,6 +101,7 @@ Nebula::Nebula()
 	, PGC_nb(0)
 	, UGC_nb(0)
 	, Ced_nb()
+	, nameI18("")
 	, mTypeString()
 	, bMag(99.)
 	, vMag(99.)
@@ -115,7 +116,6 @@ Nebula::Nebula()
 	, parallaxErr(0.)
 	, nType()	
 {
-	nameI18 = "";	
 }
 
 Nebula::~Nebula()

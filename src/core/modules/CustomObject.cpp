@@ -34,11 +34,11 @@ float CustomObject::markerSize = 1.f;
 
 CustomObject::CustomObject(const QString& codesignation, const Vec3d& coordinates, const bool isVisible)
 	: initialized(false)
+	, XYZ(coordinates)
 	, markerTexture(NULL)
+	, designation(codesignation)
+	, isMarker(isVisible)
 {
-	designation = codesignation;
-	XYZ = coordinates;
-	isMarker = isVisible;
 	markerTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cross.png");
 	initialized = true;	
 }

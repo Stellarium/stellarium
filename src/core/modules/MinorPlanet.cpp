@@ -61,23 +61,17 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 		  hidden,
 		  false, //No atmosphere
 		  true,  //Halo
-		  pTypeStr)
+		  pTypeStr),
+	minorPlanetNumber(0),
+	absoluteMagnitude(0.0f),
+	slopeParameter(-1.0f), //== mark as uninitialized: used in getVMagnitude()
+	semiMajorAxis(0.),
+	nameIsProvisionalDesignation(false),
+	properName(englishName)
 {
-	texMapName = atexMapName;
-	lastOrbitJDE =0;
-	deltaJDE = StelCore::JD_SECOND;
-	orbitCached = 0;
-	closeOrbit = acloseOrbit;
-	semiMajorAxis = 0.;
-
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
 	texMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
-
-	//MinorPlanet specific members
-	minorPlanetNumber = 0;
-	absoluteMagnitude = 0;
-	slopeParameter = -1;//== uninitialized: used in getVMagnitude()	
 
 	//TODO: Fix the name
 	// - Detect numeric prefix and set number if any
@@ -117,21 +111,14 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 	//Try to detect a naming conflict
 	if (englishName.endsWith('*'))
 		properName = englishName.left(englishName.count() - 1);
-	else
-		properName = englishName;
 
-	//Try to detect provisional designation
-	nameIsProvisionalDesignation = false;
+	//Try to detect provisional designation	
 	QString provisionalDesignation = renderProvisionalDesignationinHtml(englishName);
 	if (!provisionalDesignation.isEmpty())
 	{
 		nameIsProvisionalDesignation = true;
 		provisionalDesignationHtml = provisionalDesignation;
 	}
-
-	nameI18 = englishName;
-
-	flagLabels = true;
 }
 
 MinorPlanet::~MinorPlanet()
