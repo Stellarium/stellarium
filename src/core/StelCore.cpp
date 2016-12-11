@@ -1568,7 +1568,7 @@ void StelCore::addSolarDays(double d)
 
 	setJD(getJD() + d);
 
-	if (d>=1.0)
+	if (qAbs(d)>0.99) // WTF: qAbs(d)>=1.0 not working here!
 		emit dateChanged();
 }
 
@@ -1579,9 +1579,6 @@ void StelCore::addSiderealDays(double d)
 		d *= home->getSiderealDay();
 
 	setJD(getJD() + d);
-
-	if (d>=1.0)
-		emit dateChanged();
 }
 
 // Get the sidereal time shifted by the observer longitude
