@@ -538,6 +538,7 @@ void StelApp::init(QSettings* conf)
 	
 #ifdef ENABLE_SPOUT
 	qDebug() << "Property spout is" << qApp->property("spout").toString();
+	qDebug() << "Property spoutName is" << qApp->property("spoutName").toString();
 	if (qApp->property("spout").toString() != "none")
 	{
 		QString glRenderer(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
@@ -551,7 +552,11 @@ void StelApp::init(QSettings* conf)
 		{
 			// Initialize the SpoutSender object. This does not create a spout sender yet.
 			memset(spoutName, 0, sizeof(spoutName));
-			sprintf(spoutName, "Stellarium (PID%lli)", QCoreApplication::applicationPid());
+			if (qApp->property("spoutName").toString().isEmpty())
+				sprintf(spoutName, "Stellarium");
+			else
+				sprintf(spoutName, qApp->property("spoutName").toString().toLocal8Bit());
+
 			qDebug() << "SPOUT name is: " << spoutName;
 			spoutSender = GetSpout();
 			int numAdapters=spoutSender->GetNumAdapters();
@@ -562,8 +567,8 @@ void StelApp::init(QSettings* conf)
 				qDebug() << "       GPU" << i << ": " << name;
 			}
 			qDebug() << "       Currently used: GPU" << spoutSender->GetAdapter();
+			// Now try to create the SpoutSender.
 			spoutValid=spoutSender->CreateSender(spoutName, 500, 500); // try any size, will be resized later.
-
 		}
 		if (spoutValid)
 		{
@@ -614,14 +619,14 @@ void StelApp::deinit()
 	// Calling it after unloadAllPlugins() sometimes crashes.
 	// Calling it already before releasing Spout seems to prevent a crash after stopScript().
 	qDebug() << "StelApp: Deinit 0... .";
-	QCoreApplication::processEvents();
+	//QCoreApplication::processEvents();
 #ifdef 	ENABLE_SPOUT
 	if (spoutValid)
 	{
 		qDebug() << "SPOUT: Releasing ...";
 		spoutSender->ReleaseSender();
 		spoutSender->Release();
-		spoutSender=NULL;
+		spoutValid=false;
 		qDebug() << "SPOUT: Releasing ... DONE.";
 	}
 #endif
@@ -634,7 +639,7 @@ void StelApp::deinit()
 	qDebug() << "StelApp: Deinit 2... .";
 	getModuleMgr().unloadAllPlugins();
 	qDebug() << "StelApp: Deinit 3... .";    // sometimes it crashes here.
-	//QCoreApplication::processEvents(QEventLoop::ExcludeSocketNotifiers | QEventLoop::ExcludeUserInputEvents | QEventLoop::WaitForMoreEvents	);
+	QCoreApplication::processEvents(); //QEventLoop::ExcludeSocketNotifiers | QEventLoop::ExcludeUserInputEvents | QEventLoop::WaitForMoreEvents	);
 	qDebug() << "StelApp: Deinit shaders... .";
 	StelPainter::deinitGLShaders();
 	qDebug() << "StelApp: Deinit shaders ... DONE.";

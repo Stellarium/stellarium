@@ -75,6 +75,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			#ifdef Q_OS_WIN
 			#ifdef ENABLE_SPOUT
 			  << "--spout (or -S) <sky|all> : Act as SPOUT sender (Sky only/including GUI)\n"
+			  << "--spout-name <name>     : Set particular name for SPOUT sender.\n"
 			#endif
 			#endif
 			  << "--screenshot-dir        : Specify directory to save screenshots\n"
@@ -136,17 +137,6 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 	{
 		qApp->setProperty("onetime_mesa_mode", true);
 	}
-	#ifdef ENABLE_SPOUT
-	qApp->setProperty("spout", "none");
-	QString spoutStr = argsGetOptionWithArg(argList, "-S", "--spout", "").toString();
-	if (!spoutStr.isEmpty())
-	{
-		if (spoutStr=="all")
-			qApp->setProperty("spout", "all");
-		else
-			qApp->setProperty("spout", "sky");
-	}
-	#endif
 	#endif
 	if (argsGetOption(argList, "", "--list-landscapes"))
 	{
@@ -176,13 +166,16 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 }
 
 void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings* confSettings)
-{
+{	
 	// Over-ride config file options with command line options
 	// We should catch exceptions from argsGetOptionWithArg...
 	int fullScreen, altitude;
 	float fov;
 	QString landscapeId, homePlanet, longitude, latitude, skyDate, skyTime;
 	QString projectionType, screenshotDir, multiresImage, startupScript;
+#ifdef ENABLE_SPOUT
+	QString spoutStr, spoutName;
+#endif
 	try
 	{
 		bool dumpOpenGLDetails = argsGetOption(argList, "-d", "--dump-opengl-details");
@@ -200,6 +193,12 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 		screenshotDir = argsGetOptionWithArg(argList, "", "--screenshot-dir", "").toString();
 		multiresImage = argsGetOptionWithArg(argList, "", "--multires-image", "").toString();
 		startupScript = argsGetOptionWithArg(argList, "", "--startup-script", "").toString();
+#ifdef ENABLE_SPOUT
+		// For now, we default to spout=sky when no extra option is given. Later, we should also accept "all".
+		// Unfortunately, this still throws an exception when no optarg string is given.
+		spoutStr  = argsGetOptionWithArg(argList, "-S", "--spout", "sky").toString();
+		spoutName = argsGetOptionWithArg(argList, "", "--spout-name", "").toString();
+#endif
 	}
 	catch (std::runtime_error& e)
 	{
@@ -315,6 +314,23 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 			}
 		}
 	}
+
+
+
+#ifdef ENABLE_SPOUT
+	if (!spoutStr.isEmpty())
+	{
+		if (spoutStr=="all")
+			qApp->setProperty("spout", "all");
+		else
+			qApp->setProperty("spout", "sky");
+	}
+	else
+		qApp->setProperty("spout", "none");
+	if (!spoutName.isEmpty())
+		qApp->setProperty("spoutName", spoutName);
+#endif
+
 }
 
 
