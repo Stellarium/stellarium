@@ -537,8 +537,8 @@ void StelApp::init(QSettings* conf)
 	animationScale = confSettings->value("gui/pointer_animation_speed", 1.f).toFloat();
 	
 #ifdef ENABLE_SPOUT
-	qDebug() << "Property spout is" << qApp->property("spout").toString();
-	qDebug() << "Property spoutName is" << qApp->property("spoutName").toString();
+	//qDebug() << "Property spout is" << qApp->property("spout").toString();
+	//qDebug() << "Property spoutName is" << qApp->property("spoutName").toString();
 	if (qApp->property("spout").toString() != "none")
 	{
 		QString glRenderer(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
@@ -562,7 +562,7 @@ void StelApp::init(QSettings* conf)
 			int numAdapters=spoutSender->GetNumAdapters();
 			qDebug() << "SPOUT: Found " << numAdapters << "GPUs";
 			for (int i=0; i<numAdapters; i++){
-				char name[256];
+				char name[256]; // 256 chars min required by Spout specs!
 				spoutSender->GetAdapterName(i, name, 255);
 				qDebug() << "       GPU" << i << ": " << name;
 			}
@@ -577,12 +577,11 @@ void StelApp::init(QSettings* conf)
 		}
 		else
 		{
-			qDebug() << "SPOUT: Sender creation failed!";
-			qDebug() << "       You may need a better GPU for this function, see SPOUT docs.";
+			qDebug() << "       Sender creation failed!";
+			qDebug() << "       You may need a better GPU for this function, see Spout docs.";
 			qDebug() << "       On a notebook with NVidia Optimus, force running Stellarium on the NVidia GPU.";
-			QMessageBox::warning(0, "Stellarium SPOUT", q_("Cannot create SPOUT sender. See log for details."),
-							      QMessageBox::Ok);
-			qDebug() << "SPOUT: Continuing without SPOUT sender.";
+			QMessageBox::warning(0, "Stellarium SPOUT", q_("Cannot create Spout sender. See log for details."), QMessageBox::Ok);
+			qDebug() << "       Continuing without SPOUT sender.";
 			qApp->setProperty("spout", "");
 		}
 	}
@@ -615,34 +614,24 @@ void StelApp::initPlugIns()
 
 void StelApp::deinit()
 {
-	// GZ I don't know why QCoreApplication::processEvents(); is called several times here.
-	// Calling it after unloadAllPlugins() sometimes crashes.
-	// Calling it already before releasing Spout seems to prevent a crash after stopScript().
-	qDebug() << "StelApp: Deinit 0... .";
-	//QCoreApplication::processEvents();
 #ifdef 	ENABLE_SPOUT
 	if (spoutValid)
 	{
-		qDebug() << "SPOUT: Releasing ...";
+		//qDebug() << "SPOUT: Releasing ...";
 		spoutSender->ReleaseSender();
 		spoutSender->Release();
 		spoutValid=false;
-		qDebug() << "SPOUT: Releasing ... DONE.";
+		//qDebug() << "SPOUT: Releasing ... DONE.";
 	}
 #endif
 #ifndef DISABLE_SCRIPTING
 	if (scriptMgr->scriptIsRunning())
 		scriptMgr->stopScript();
 #endif
-	qDebug() << "StelApp: Deinit 1... .";
-	QCoreApplication::processEvents();       // sometimes it crashes here.
-	qDebug() << "StelApp: Deinit 2... .";
+	QCoreApplication::processEvents();
 	getModuleMgr().unloadAllPlugins();
-	qDebug() << "StelApp: Deinit 3... .";    // sometimes it crashes here.
-	QCoreApplication::processEvents(); //QEventLoop::ExcludeSocketNotifiers | QEventLoop::ExcludeUserInputEvents | QEventLoop::WaitForMoreEvents	);
-	qDebug() << "StelApp: Deinit shaders... .";
+	QCoreApplication::processEvents();
 	StelPainter::deinitGLShaders();
-	qDebug() << "StelApp: Deinit shaders ... DONE.";
 }
 
 
