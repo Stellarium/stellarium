@@ -315,8 +315,6 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 		}
 	}
 
-
-
 #ifdef ENABLE_SPOUT
 	if (!spoutStr.isEmpty())
 	{
@@ -383,7 +381,15 @@ QVariant CLIProcessor::argsGetOptionWithArg(const QStringList& args, QString sho
 		{
 			if (i+1>=lastOptIdx)
 			{
-				throw (std::runtime_error(qPrintable("optarg_missing ("+longOpt+")")));
+				// i.e., option given as last option, but without arguments. Last chance: default value!
+				if (defaultValue.isValid())
+				{
+					return defaultValue;
+				}
+				else
+				{
+					throw (std::runtime_error(qPrintable("optarg_missing ("+longOpt+")")));
+				}
 			}
 			else
 			{
