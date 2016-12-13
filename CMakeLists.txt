@@ -510,7 +510,6 @@ IF(WIN32)
     IF(ENABLE_MEDIA)
     	SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${QT5_LIBS}/../plugins/mediaservice/dsengine.dll\"; DestDir: \"{app}/mediaservice/\";\nSource: \"${QT5_LIBS}/../plugins/mediaservice/qtmedia_audioengine.dll\"; DestDir: \"{app}/mediaservice/\";\nSource: \"${QT5_LIBS}/../plugins/playlistformats/qtmultimedia_m3u.dll\"; DestDir: \"{app}/playlistformats/\";")
     ENDIF()
-	
     IF(ENABLE_SPOUT)
         IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4") # 32bit build?
             SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${CMAKE_SOURCE_DIR}/util/spout2/Win32/SpoutLibrary.dll\"; DestDir: \"{app}\";")

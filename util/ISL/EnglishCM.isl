@@ -31,5 +31,6 @@ AngleD3D9Mode=(ANGLE Direct3D 9 mode)
 AngleD3D11Mode=(ANGLE Direct3D 11 mode)
 AngleWarpMode=(ANGLE WARP mode)
 MesaMode=(MESA mode)
-DebugMode=(debug mode)
+DebugMode=(with OpenGL diagnostics)
+SpoutMode=(with Spout sender)
 RedistRun=Installing Microsoft's C/C++ runtime...
