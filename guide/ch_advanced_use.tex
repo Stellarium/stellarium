@@ -365,12 +365,15 @@ Apart from stand-alone use, Stellarium can be used as multimedia source in large
 output window as texture in DirectX applications on Windows. Simply start Stellarium with 
 the \texttt{-\/-spout=sky} command line option. (Currently \program{Spout} output is limited to the main window 
 without GUI panels, but this may change in future versions.) 
-Your master application must obviously embed a \program{Spout} receiver. If you need more than one instance of Stellarium, 
-you can use option \texttt{-\/-spout-name=StelSpout2} to create another \program{Spout} sender without a name conflict. 
-In such cases, it may be useful to also have separate user data directories and use option \texttt{-\/-use-dir}. 
+Your master application must obviously embed a \program{Spout} receiver. 
+The default name of the \program{Spout} sender is \texttt{Stellarium}. If you need more than one instance of Stellarium acting as source, 
+you can use option \texttt{-\/-spout-name=StelSpout2} in addition to create another \program{Spout} sender without a name conflict. 
+In such cases, it may be useful to also have separate user data directories and use option \texttt{-\/-user-dir}. 
 
 This mode does not work in ANGLE mode and requires modern graphics hardware with the \texttt{WGL\_NV\_DX\_interop} 
-driver extension running in OpenGL mode. Some NVidia GPUs work without this extension listed explicitly.
+driver extension running in OpenGL mode. Some NVidia GPUs work without this extension listed explicitly. 
+On a notebook with NVidia Optimus technology, make sure to launch Stellarium on the NVidia hardware. 
+For permanent setting, use the NVidia configuration dialog to configure Stellarium explicitly to run always on the NVidia card.
 
 %%% Local Variables: 
 %%% mode: latex
