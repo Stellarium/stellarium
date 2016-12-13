@@ -162,7 +162,7 @@ private slots:
 	// Do the actual screenshot generation in the main thread with this method.
 	void doScreenshot(void);
 	void minFpsChanged();
-	void updateNightModeProperty();
+	void updateNightModeProperty(bool b);
 
 private:
 	//! Start the display loop

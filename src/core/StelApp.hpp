@@ -23,6 +23,9 @@
 #include <QString>
 #include <QObject>
 #include "StelModule.hpp"
+#ifdef 	ENABLE_SPOUT
+#include "SpoutLibrary.h"
+#endif
 
 // Predeclaration of some classes
 class StelCore;
@@ -176,7 +179,7 @@ public:
 
 	//! Get the GUI instance implementing the abstract GUI interface.
 	StelGuiBase* getGui() const {return stelGui;}
-	//! Tell the StelApp instance which GUI si currently being used.
+	//! Tell the StelApp instance which GUI is currently being used.
 	//! The caller is responsible for destroying the GUI.
 	void setGui(StelGuiBase* b) {stelGui=b;}
 
@@ -390,6 +393,14 @@ private:
 	bool flagShowDecimalDegrees;
 	// flag to indicate we want calculate azimuth from south towards west (as in old astronomical literature)
 	bool flagUseAzimuthFromSouth;
+#ifdef 	ENABLE_SPOUT
+	SPOUTLIBRARY * spoutSender;
+	char spoutName[256];
+	GLuint spoutTexID;
+	bool spoutValid; // true when the named sender instance has been created.
+	//void initSpoutTexture(GLuint &texID, unsigned int width, unsigned int height);
+	void initSpoutTexture(unsigned int width, unsigned int height);
+#endif
 
 };
 
