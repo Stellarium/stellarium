@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-12 02:04+0700\n"
-"PO-Revision-Date: 2016-12-11 20:57+0000\n"
+"POT-Creation-Date: 2016-12-12 20:13+0700\n"
+"PO-Revision-Date: 2016-12-12 18:29+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-12 04:36+0000\n"
-"X-Generator: Launchpad (build 18292)\n"
+"X-Launchpad-Export-Date: 2016-12-13 04:36+0000\n"
+"X-Generator: Launchpad (build 18293)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -82,7 +82,7 @@ msgstr "Выбіраць асобнае сузор'е"
 
 #: src/core/modules/ConstellationMgr.cpp:149
 msgid "Remove selection of constellations"
-msgstr ""
+msgstr "Прыбраць вылучэньне сузор'яў"
 
 #: src/core/modules/StarMgr.cpp:445 src/ui_viewDialog.h:1909
 #: src/ui_dsoColorsDialog.h:541
@@ -1931,7 +1931,7 @@ msgstr "Звышґаляктычныя даўгата/шырата: %1/%2"
 #: src/core/StelObject.cpp:271
 #, qt-format
 msgid "IAU Constellation: %1"
-msgstr ""
+msgstr "Сузор'е МАЗ: %1"
 
 #: src/core/StelObject.cpp:280
 #, qt-format
@@ -3176,7 +3176,7 @@ msgstr "Мясцовы час"
 #: src/gui/AstroCalcDialog.cpp:718
 #, qt-format
 msgid "Now is %1"
-msgstr ""
+msgstr "Цяпер %1"
 
 #: src/gui/AstroCalcDialog.cpp:741
 msgid "Phenomenon"
@@ -6590,11 +6590,11 @@ msgstr "Бачная велічыня"
 #: src/ui_configurationDialog.h:1298
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
 msgid "3-letter IAU constellation abbreviation"
-msgstr ""
+msgstr "Трохлітарная абрэвіятура сузор'я МАЗ"
 
 #: src/ui_configurationDialog.h:1300
 msgid "Constellation"
-msgstr ""
+msgstr "Сузор'е"
 
 #: src/ui_configurationDialog.h:1301
 msgid "Control"
@@ -7092,11 +7092,11 @@ msgstr "Зьява"
 
 #: src/ui_astroCalcDialog.h:522
 msgid "Alt. vs. Time"
-msgstr ""
+msgstr "Выш. ад часу"
 
 #: src/ui_astroCalcDialog.h:524
 msgid "Altitude vs. Time"
-msgstr ""
+msgstr "Вышыня ад часу"
 
 #: src/ui_astroCalcDialog.h:529
 msgid "Update of planetary positions"
@@ -7169,8 +7169,9 @@ msgid "Value in decimal degrees"
 msgstr "Значэньне ў дзесятковых ґрадусах"
 
 #: src/ui_astroCalcDialog.h:556
-msgid "Please select object to plotting graph 'Altitude vs. Time' for it."
+msgid "Please select object to plot its graph 'Altitude vs. Time'."
 msgstr ""
+"Калі ласка, вылучы аб'ект, для якога будаваць ґрафік «Вышыня ад часу»."
 
 #: src/ui_astroCalcDialog.h:557
 msgid "Astronomical calculations"
@@ -14262,7 +14263,7 @@ msgstr "Паказваць ґузік дадатку на панэлі прыл�
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:291
 msgid "Show IAU constellation code"
-msgstr ""
+msgstr "Паказваць коды сузор'яў МАЗ"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:293
 msgid "Which coordinate system will be used for displaying"
