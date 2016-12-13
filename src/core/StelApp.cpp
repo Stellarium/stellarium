@@ -79,6 +79,9 @@
 #include <QCoreApplication>
 #include <QScreen>
 #include <QDateTime>
+#ifdef ENABLE_SPOUT
+#include <QMessageBox>
+#endif
 
 #ifdef USE_STATIC_PLUGIN_HELLOSTELMODULE
 Q_IMPORT_PLUGIN(HelloStelModuleStelPluginInterface)
@@ -200,8 +203,16 @@ void StelApp::deinitStatic()
 *************************************************************************/
 StelApp::StelApp(QObject* parent)
 	: QObject(parent)
-	, core(NULL)
+	, core(NULL)	
+	, moduleMgr(NULL)
+	, localeMgr(NULL)
+	, skyCultureMgr(NULL)
+	, actionMgr(NULL)
+	, propMgr(NULL)
+	, textureMgr(NULL)
+	, stelObjectMgr(NULL)
 	, planetLocationMgr(NULL)
+	, networkAccessManager(NULL)
 	, audioMgr(NULL)
 	, videoMgr(NULL)
 	, skyImageMgr(NULL)
@@ -221,28 +232,22 @@ StelApp::StelApp(QObject* parent)
 	, initialized(false)
 	, saveProjW(-1)
 	, saveProjH(-1)
+	, nbDownloadedFiles(0)
+	, totalDownloadedSize(0)
+	, nbUsedCache(0)
+	, totalUsedCacheSize(0)
 	, baseFontSize(13)
 	, renderBuffer(NULL)
 	, viewportEffect(NULL)
 	, flagShowDecimalDegrees(false)
 	, flagUseAzimuthFromSouth(false)
+	#ifdef ENABLE_SPOUT
+	, spoutSender(NULL)
+	, spoutTexID(0)
+	, spoutValid(false)
+	#endif
 {
-	// Stat variables
-	nbDownloadedFiles=0;
-	totalDownloadedSize=0;
-	nbUsedCache=0;
-	totalUsedCacheSize=0;
-
 	setObjectName("StelApp");
-
-	skyCultureMgr=NULL;
-	localeMgr=NULL;
-	stelObjectMgr=NULL;
-	textureMgr=NULL;
-	moduleMgr=NULL;
-	networkAccessManager=NULL;
-	actionMgr = NULL;
-	propMgr = NULL;
 
 	// Can't create 2 StelApp instances
 	Q_ASSERT(!singleton);
@@ -531,6 +536,61 @@ void StelApp::init(QSettings* conf)
 	// Animation
 	animationScale = confSettings->value("gui/pointer_animation_speed", 1.f).toFloat();
 	
+#ifdef ENABLE_SPOUT
+	//qDebug() << "Property spout is" << qApp->property("spout").toString();
+	//qDebug() << "Property spoutName is" << qApp->property("spoutName").toString();
+	if (qApp->property("spout").toString() != "none")
+	{
+		QString glRenderer(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
+		bool isANGLE=glRenderer.startsWith("ANGLE", Qt::CaseSensitive);
+
+		if (isANGLE)
+		{
+			qDebug() << "SPOUT: Does not run in ANGLE mode!";
+		}
+		else
+		{
+			// Initialize the SpoutSender object. This does not create a spout sender yet.
+			memset(spoutName, 0, sizeof(spoutName));
+			if (qApp->property("spoutName").toString().isEmpty())
+				sprintf(spoutName, "Stellarium");
+			else
+				sprintf(spoutName, qApp->property("spoutName").toString().toLocal8Bit());
+
+			qDebug() << "SPOUT name is: " << spoutName;
+			spoutSender = GetSpout();
+			int numAdapters=spoutSender->GetNumAdapters();
+			qDebug() << "SPOUT: Found " << numAdapters << "GPUs";
+			for (int i=0; i<numAdapters; i++){
+				char name[256]; // 256 chars min required by Spout specs!
+				spoutSender->GetAdapterName(i, name, 255);
+				qDebug() << "       GPU" << i << ": " << name;
+			}
+			qDebug() << "       Currently used: GPU" << spoutSender->GetAdapter();
+			// Now try to create the SpoutSender.
+			spoutValid=spoutSender->CreateSender(spoutName, 500, 500); // try any size, will be resized later.
+		}
+		if (spoutValid)
+		{
+			qDebug() << "       Sender has been created in" << (spoutSender->GetMemoryShareMode() ? "Memory Share Mode" : "OpenGL/DirectX interop mode");
+			qDebug() << "       Sender is" << (spoutSender->GetDX9()? "working" : "not working") << "with DX9 textures";
+		}
+		else
+		{
+			qDebug() << "       Sender creation failed!";
+			qDebug() << "       You may need a better GPU for this function, see Spout docs.";
+			qDebug() << "       On a notebook with NVidia Optimus, force running Stellarium on the NVidia GPU.";
+			QMessageBox::warning(0, "Stellarium SPOUT", q_("Cannot create Spout sender. See log for details."), QMessageBox::Ok);
+			qDebug() << "       Continuing without SPOUT sender.";
+			qApp->setProperty("spout", "");
+		}
+	}
+	else
+	{
+		qApp->setProperty("spout", "");
+	}
+#endif
+
 	initialized = true;
 }
 
@@ -554,6 +614,16 @@ void StelApp::initPlugIns()
 
 void StelApp::deinit()
 {
+#ifdef 	ENABLE_SPOUT
+	if (spoutValid)
+	{
+		//qDebug() << "SPOUT: Releasing ...";
+		spoutSender->ReleaseSender();
+		spoutSender->Release();
+		spoutValid=false;
+		//qDebug() << "SPOUT: Releasing ... DONE.";
+	}
+#endif
 #ifndef DISABLE_SCRIPTING
 	if (scriptMgr->scriptIsRunning())
 		scriptMgr->stopScript();
@@ -561,7 +631,6 @@ void StelApp::deinit()
 	QCoreApplication::processEvents();
 	getModuleMgr().unloadAllPlugins();
 	QCoreApplication::processEvents();
-	
 	StelPainter::deinitGLShaders();
 }
 
@@ -650,7 +719,28 @@ void StelApp::draw()
 		module->draw(core);
 	}
 	core->postDraw();
+#ifdef ENABLE_SPOUT
+	// At this point, the sky scene has been drawn, but no GUI panels.
+	// GZ: It is rather unclear to me how to draw also the GUI into the Spout texture.
+	//if (qApp->property("spout")=="sky")
+	if (qApp->property("spout")!="") // first version.
+	{
+		if (spoutValid)
+		{
+			StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+			int w = params.viewportXywh[2];
+			int h = params.viewportXywh[3];
+
+			initSpoutTexture(w, h);
+			glBindTexture(GL_TEXTURE_2D, spoutTexID);
+			glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, w, h);
+			glBindTexture(GL_TEXTURE_2D, 0);
+			spoutSender->SendTexture(spoutTexID, GL_TEXTURE_2D, w, h, true, drawFbo);
+		}
+	}
+#endif
 	applyRenderBuffer(drawFbo);
+
 }
 
 /*************************************************************************
@@ -670,6 +760,15 @@ void StelApp::glWindowHasBeenResized(float x, float y, float w, float h)
 		delete renderBuffer;
 		renderBuffer = NULL;
 	}
+#ifdef ENABLE_SPOUT
+	if (spoutValid)
+	{
+		// UpdateSender does not seem to work and keep the name,
+		// it creates a new Sender entry and keeps a dead old texture. Better recreate.
+		spoutSender->ReleaseSender();
+		spoutSender->CreateSender(spoutName, w, h);
+	}
+#endif
 }
 
 // Handle mouse clics
@@ -901,3 +1000,19 @@ void StelApp::dumpModuleActionPriorities(StelModule::StelModuleActionName action
 		qDebug() << " -- " << module->getCallOrder(actionName) << "Module: " << module->objectName();
 	}
 }
+
+#ifdef ENABLE_SPOUT
+void StelApp::initSpoutTexture(unsigned int width, unsigned int height)
+{
+    if(spoutTexID != 0) glDeleteTextures(1, &spoutTexID);
+
+	glGenTextures(1, &spoutTexID);
+	glBindTexture(GL_TEXTURE_2D, spoutTexID);
+	glTexImage2D(GL_TEXTURE_2D, 0,  GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glBindTexture(GL_TEXTURE_2D, 0);
+}
+#endif

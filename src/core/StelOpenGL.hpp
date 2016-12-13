@@ -53,6 +53,7 @@
 #define glCompileShader(...)        GLFUNC_(glCompileShader(__VA_ARGS__))
 #define glCompressedTexImage2D(...) GLFUNC_(glCompressedTexImage2D(__VA_ARGS__))
 #define glCompressedTexSubImage2D(...)  GLFUNC_(glCompressedTexSubImage2D(__VA_ARGS__))
+#define glCopyTexSubImage2D(...)    GLFUNC_(glCopyTexSubImage2D(__VA_ARGS__)) // new for spout
 #define glCreateProgram(...)        GLFUNC_(glCreateProgram(__VA_ARGS__))
 #define glCreateShader(...)         GLFUNC_(glCreateShader(__VA_ARGS__))
 #define glDeleteBuffers(...)        GLFUNC_(glDeleteBuffers(__VA_ARGS__))

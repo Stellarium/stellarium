@@ -57,6 +57,12 @@ SET(zlib_SRCS
      core/external/zlib/zutil.h
 )
 
+IF(ENABLE_SPOUT)
+    SET(spout_SRCS
+     core/external/SpoutLibrary.h
+	 )
+ENDIF()
+
 SET(stellarium_lib_SRCS
      core/StelAudioMgr.hpp
      core/StelAudioMgr.cpp
@@ -166,6 +172,8 @@ SET(stellarium_lib_SRCS
      ${gl_lib_SRCS}
 
      ${glues_lib_SRCS}
+	 
+     ${spout_SRCS}
 
      core/planetsephems/calc_interpolated_elements.c
      core/planetsephems/calc_interpolated_elements.h
@@ -491,6 +499,10 @@ IF(GENERATE_STELMAINLIB)
      IF(USE_PLUGIN_TELESCOPECONTROL)
           QT5_USE_MODULES(stelMain SerialPort)
      ENDIF()
+     IF(ENABLE_SPOUT)
+          TARGET_LINK_LIBRARIES(stelMain SpoutLibrary)
+     ENDIF(ENABLE_SPOUT)
+
      INSTALL(TARGETS stelMain DESTINATION lib)
      ADD_EXECUTABLE(stellarium ${stellarium_exe_SRCS})
      #stelMain should be after the plug-ins, otherwise the build crashes
@@ -511,6 +523,9 @@ ELSE()
      IF(USE_PLUGIN_TELESCOPECONTROL)
           QT5_USE_MODULES(stellarium SerialPort)
      ENDIF()
+     IF(ENABLE_SPOUT)
+          TARGET_LINK_LIBRARIES(stellarium SpoutLibrary)
+     ENDIF(ENABLE_SPOUT)
 
      IF(APPLE)
           SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
