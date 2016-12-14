@@ -38,6 +38,7 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, initFov(60.)
 	, minFov(0.001389)
 	, maxFov(100.)
+	, deltaFov(0.)
 	, core(acore)
 	, objectMgr(NULL)
 	, flagLockEquPos(false)
@@ -56,7 +57,6 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, movementsSpeedFactor(1.0)
 	, flagAutoMove(false)
 	, zoomingMode(ZoomNone)
-	, deltaFov(0.)
 	, deltaAlt(0.)
 	, deltaAz(0.)
 	, flagManualZoom(false)
@@ -68,8 +68,8 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, beforeTimeDragTimeRate(0.)
 	, dragTimeMode(false)
 	, zoomMove()
-	, flagAutoZoom(0)
-	, flagAutoZoomOutResetsDirection(0)
+	, flagAutoZoom(false)
+	, flagAutoZoomOutResetsDirection(false)
 	, mountMode(MountAltAzimuthal)
 	, dragTriggerDistance(4.f)
 	, viewportOffsetTimeline(NULL)
@@ -104,37 +104,8 @@ void StelMovementMgr::init()
 	flagEnableMouseNavigation = conf->value("navigation/flag_enable_mouse_navigation",true).toBool();
 
 	minFov = conf->value("navigation/min_fov",0.001389).toDouble(); // default: minimal FOV = 5"
-	maxFov = 100.;
 	initFov = conf->value("navigation/init_fov",60.f).toFloat();
 	currentFov = initFov;
-
-
-	// With a special code of init_view_position=x/y/1 (or actually, anything equal or larger to 1) you can set zenith into the center and atan2(x/y) to bottom of screen.
-	// examples: 1/0->0         NORTH is bottom
-	//           -1/0 ->180     SOUTH is bottom
-	//            0/-1 --> 90   EAST is bottom
-	//            0/1  ->270    WEST is bottom
-	Vec3f tmp = StelUtils::strToVec3f(conf->value("navigation/init_view_pos").toString());
-	if (tmp[2]>=1)
-	{
-		//qDebug() << "Special zenith setup:";
-		setViewDirectionJ2000(mountFrameToJ2000(Vec3d(0., 0., 1.)));
-		initViewPos.set(0., 0., 1.);
-
-		// It is not good to code 0/0/1 as view vector: bottom azimuth is undefined. Use default-south:
-		if ((tmp[0]==0.) && (tmp[1]==0.))
-			tmp[0]=-1.;
-
-		upVectorMountFrame.set(tmp[0], tmp[1], 0.);
-		upVectorMountFrame.normalize();
-		initViewUp=upVectorMountFrame;
-	}
-	else
-	{
-		initViewPos.set(tmp[0], tmp[1], tmp[2]);
-		initViewUp.set(0., 0., 1.);
-		viewDirectionJ2000 = core->altAzToJ2000(initViewPos, StelCore::RefractionOff);
-	}
 
 	QString tmpstr = conf->value("navigation/viewing_mode", "horizon").toString();
 	if (tmpstr=="equator")
@@ -149,6 +120,35 @@ void StelMovementMgr::init()
 			setMountMode(StelMovementMgr::MountEquinoxEquatorial);
 		}
 	}
+
+	// With a special code of init_view_position=x/y/1 (or actually, anything equal or larger to 1) you can set zenith into the center and atan2(x/y) to bottom of screen.
+	// examples: 1/0->0         NORTH is bottom
+	//           -1/0 ->180     SOUTH is bottom
+	//            0/-1 --> 90   EAST is bottom
+	//            0/1  ->270    WEST is bottom
+	Vec3f tmp = StelUtils::strToVec3f(conf->value("navigation/init_view_pos").toString());
+	if (tmp[2]>=1)
+	{
+		qDebug() << "Special zenith setup:";
+		setViewDirectionJ2000(mountFrameToJ2000(Vec3d(0., 0., 1.)));
+		initViewPos.set(0., 0., 1.);
+
+		// It is not good to code 0/0/1 as view vector: bottom azimuth is undefined. Use default-south:
+		if ((tmp[0]==0.) && (tmp[1]==0.))
+			tmp[0]=-1.;
+
+		upVectorMountFrame.set(tmp[0], tmp[1], 0.);
+		upVectorMountFrame.normalize();
+		initViewUp=upVectorMountFrame;
+		qDebug() << "InitViewUp: " << initViewUp;
+	}
+	else
+	{
+		initViewPos.set(tmp[0], tmp[1], tmp[2]);
+		initViewUp.set(0., 0., 1.);
+		viewDirectionJ2000 = core->altAzToJ2000(initViewPos, StelCore::RefractionOff);
+	}
+
 
 	QString movementGroup = N_("Movement and Selection");
 	addAction("actionSwitch_Equatorial_Mount", N_("Miscellaneous"), N_("Switch between equatorial and azimuthal mount"), "equatorialMount", "Ctrl+M");
@@ -189,6 +189,7 @@ void StelMovementMgr::setFlagLockEquPos(bool b)
 
 void StelMovementMgr::setViewUpVectorJ2000(const Vec3d& up)
 {
+	qDebug() << "setViewUpvectorJ2000()";
 	upVectorMountFrame = j2000ToMountFrame(up);
 }
 
@@ -196,6 +197,7 @@ void StelMovementMgr::setViewUpVectorJ2000(const Vec3d& up)
 // We have a problem if alt=+/-90degrees: view and up angles are ill-defined (actually, angle between them=0 and therefore we saw shaky rounding effects), therefore Bug LP:1068529
 void StelMovementMgr::setViewUpVector(const Vec3d& up)
 {
+	qDebug() << "setViewUpvector()";
 	upVectorMountFrame = up;
 }
 
@@ -242,8 +244,6 @@ bool StelMovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons)
 		}
 	}
 
-	// We can hardly use the mouse exactly enough to go to the zenith/pole. Any mouse motion can safely reset the simplified up vector.
-	setViewUpVector(Vec3d(0., 0., 1.));
 
 	if (isDragging && flagEnableMouseNavigation)
 	{
@@ -254,6 +254,9 @@ bool StelMovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons)
 			dragView(previousX, previousY, x, y);
 			previousX = x;
 			previousY = y;
+			// We can hardly use the mouse exactly enough to go to the zenith/pole. Any mouse motion can safely reset the simplified up vector.
+			qDebug() << "handleMouseMoves: resetting Up vector.";
+			setViewUpVector(Vec3d(0., 0., 1.));
 			return true;
 		}
 	}
@@ -497,7 +500,7 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 					// It's a normal click release
 					// TODO: Leave time dragging in Natural speed or zero speed (config option?) if mouse was resting
 			#ifdef Q_OS_MAC
-					// CTRL + left clic = right clic for 1 button mouse
+					// CTRL + left click = right click for 1 button mouse
 					if (event->modifiers().testFlag(Qt::ControlModifier))
 					{
 						StelApp::getInstance().getStelObjectMgr().unSelect();
@@ -543,6 +546,7 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 
 void StelMovementMgr::setInitViewDirectionToCurrent()
 {
+	// 2016-12 TODO: Create azimuth indication for zenith views.
 	initViewPos = core->j2000ToAltAz(viewDirectionJ2000, StelCore::RefractionOff);
 	QString dirStr = QString("%1,%2,%3").arg(initViewPos[0]).arg(initViewPos[1]).arg(initViewPos[2]);
 	StelApp::getInstance().getSettings()->setValue("navigation/init_view_pos", dirStr);
@@ -724,15 +728,14 @@ void StelMovementMgr::updateMotion(double deltaTime)
 
 	if (deltaFov<0)
 	{
-		deltaFov = -deplzoom*5;
-		if (deltaFov<-0.15*currentFov)
-			deltaFov = -0.15*currentFov;
+//		deltaFov = -deplzoom*5;
+//		if (deltaFov<-0.15*currentFov)
+//			deltaFov = -0.15*currentFov;
+		deltaFov=qMax(-0.15*currentFov, -deplzoom*5);
 	}
 	else if (deltaFov>0)
 	{
-		deltaFov = deplzoom*5;
-		if (deltaFov>20)
-			deltaFov = 20;
+		deltaFov = qMin(20., deplzoom*5.);
 	}
 
 	if (deltaFov != 0 )
@@ -743,7 +746,7 @@ void StelMovementMgr::updateMotion(double deltaTime)
 	updateAutoZoom(deltaTime);
 }
 
-
+// called at begin of updateMotion()
 void StelMovementMgr::updateVisionVector(double deltaTime)
 {
 	// Specialized setups cannot use this functionality!
@@ -791,7 +794,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 			move.startUp=getViewUpVectorJ2000();
 			move.aimUp=mountFrameToJ2000(Vec3d(0., 0., 1.));
 		}
-		else
+		else // no targetObject:
 		{
 //			if (move.mountMode == MountAltAzimuthal)
 //			{
@@ -805,6 +808,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 //			}
 		}
 		move.coef+=move.speed*deltaTime*1000;
+		qDebug() << "updateVisionVector: setViewUpvectorJ2000 L813";
 		setViewUpVectorJ2000(move.aimUp);
 		if (move.coef>=1.)
 		{
@@ -814,11 +818,12 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		}
 
 		// Use a smooth function
-		float smooth = 4.f;
+		const float smooth = 4.f; // (empirically tested)
 		double c;
 		if (zoomingMode==ZoomIn)
 		{
-			if (move.coef>.9)
+			c=(move.coef>.9 ? 1. : 1. - pow(1.-1.11*move.coef,3.));
+/*			if (move.coef>.9)
 			{
 				c = 1.;
 			}
@@ -826,10 +831,11 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 			{
 				c = 1. - pow(1.-1.11*move.coef,3.);
 			}
-		}
+*/		}
 		else if (zoomingMode==ZoomOut)
 		{
-			if (move.coef<0.1)
+			c=(move.coef<0.1 ? 0. : pow(1.11*(move.coef-.1),3.));
+/*			if (move.coef<0.1)
 			{
 				// keep in view at first as zoom out
 				c = 0;
@@ -838,7 +844,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 			{
 				c =  pow(1.11*(move.coef-.1),3.);
 			}
-		}
+*/		}
 		else
 			c = std::atan(smooth * 2.*move.coef-smooth)/std::atan(smooth)/2+0.5;
 
@@ -921,9 +927,10 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 			StelUtils::spheToRect(lon, lat, v);
 
 			setViewDirectionJ2000(mountFrameToJ2000(v));
+			qDebug() << "setViewUpVector() L930";
 			setViewUpVectorJ2000(mountFrameToJ2000(Vec3d(0., 0., 1.))); // Does not disturb to reassure this former default.
 		}
-		else
+		else // not tracking or no selection
 		{
 			if (flagLockEquPos) // Equatorial vision vector locked
 			{
@@ -937,7 +944,9 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 				// After setting time, moveToAltAz broke the up vector without this:
 				// Make sure this does not now break zenith views!
 				// Or make sure to call moveToAltAz twice.
-				setViewUpVectorJ2000(mountFrameToJ2000(Vec3d(0.,0.,1.)));
+				//qDebug() << "setUpVectorJ2000 woe L947";
+				//setViewUpVectorJ2000(mountFrameToJ2000(Vec3d(0.,0.,1.)));
+				setViewUpVectorJ2000(mountFrameToJ2000(upVectorMountFrame)); // maybe fixes? / < < < < < < < < < < THIS WAS THE BIG ONE
 			}
 		}
 	}
@@ -1168,6 +1177,7 @@ void StelMovementMgr::setViewDirectionJ2000(const Vec3d& v)
 
 void StelMovementMgr::panView(const double deltaAz, const double deltaAlt)
 {
+	// DONE 2016-12 FIX UP VECTOR PROBLEM
 	// The function is called in update loops, so make a quick check for exit.
 	if ((deltaAz==0.) && (deltaAlt==0.))
 		return;
@@ -1176,7 +1186,7 @@ void StelMovementMgr::panView(const double deltaAz, const double deltaAlt)
 	StelUtils::rectToSphe(&azVision,&altVision,j2000ToMountFrame(viewDirectionJ2000));
 	// Az is counted from South, eastward.
 
-	// qDebug() << "Azimuth:" << azVision * 180./M_PI << "Altitude:" << altVision * 180./M_PI << "Up.X=" << upVectorMountFrame.v[0] << "Up.Y=" << upVectorMountFrame.v[1] << "Up.Z=" << upVectorMountFrame.v[2];
+	 qDebug() << "Azimuth:" << azVision * 180./M_PI << "Altitude:" << altVision * 180./M_PI << "Up.X=" << upVectorMountFrame.v[0] << "Up.Y=" << upVectorMountFrame.v[1] << "Up.Z=" << upVectorMountFrame.v[2];
 
 	// if we are just looking into the pole, azimuth can hopefully be recovered from the customized up vector!
 	// When programmatically centering on a pole, we should have set a better up vector for |alt|>0.9*M_PI/2.
@@ -1184,15 +1194,16 @@ void StelMovementMgr::panView(const double deltaAz, const double deltaAlt)
 	{
 		if (upVectorMountFrame.v[2] < 0.9)
 		{
-			// qDebug() << "Recovering azimuth...";
+			 qDebug() << "panView: Recovering azimuth...";
 			azVision=atan2(-upVectorMountFrame.v[1], -upVectorMountFrame.v[0]);
 			if (altVision < 0.)
 				azVision+=M_PI;
 		}
-//		else
-//		{
-//			// qDebug() << "UpVector:" << upVectorMountFrame.v[0] << "/" << upVectorMountFrame.v[1] << "/" << upVectorMountFrame.v[2] << "Cannot recover azimuth. Hope it's OK";
-//		}
+		// Remove these lines if all is OK.
+		else
+		{
+			 qDebug() << "panView: UpVector:" << upVectorMountFrame.v[0] << "/" << upVectorMountFrame.v[1] << "/" << upVectorMountFrame.v[2] << "Cannot recover azimuth. Hope it's OK";
+		}
 	}
 
 	// if we are moving in the Azimuthal angle (left/right)
@@ -1201,8 +1212,8 @@ void StelMovementMgr::panView(const double deltaAz, const double deltaAlt)
 	if (deltaAlt)
 	{
 		if (altVision+deltaAlt <= M_PI_2 && altVision+deltaAlt >= -M_PI_2) altVision+=deltaAlt;
-		if (altVision+deltaAlt > M_PI_2) altVision = M_PI_2 - 0.000001;		// Prevent bug
-		if (altVision+deltaAlt < -M_PI_2) altVision = -M_PI_2 + 0.000001;	// Prevent bug
+		if (altVision+deltaAlt >  M_PI_2) altVision =  M_PI_2; // - 0.000001;	// Prevent bug: manual pans can never really reach the zenith, but we can accept this.
+		if (altVision+deltaAlt < -M_PI_2) altVision = -M_PI_2; // + 0.000001;	// Prevent bug  ... the solution below is even better! No more correction.
 	}
 
 	// recalc all the position variables
@@ -1212,7 +1223,14 @@ void StelMovementMgr::panView(const double deltaAz, const double deltaAlt)
 		Vec3d tmp;
 		StelUtils::spheToRect(azVision, altVision, tmp);
 		setViewDirectionJ2000(mountFrameToJ2000(tmp));
-		setViewUpVector(Vec3d(0., 0., 1.)); // We ensured above that view vector is never parallel to this simple up vector.
+		if (fabs(altVision)>0.95*M_PI/2.)
+		{ // do something about zenith
+			setViewUpVector(Vec3d(-cos(azVision), -sin(azVision), 0.) * (altVision>0. ? 1. : -1. )); // 2016-12-14: WORKS AGAIN!
+		}
+		else
+		{
+			setViewUpVector(Vec3d(0., 0., 1.));
+		}
 	}
 }
 
@@ -1327,6 +1345,7 @@ void StelMovementMgr::updateAutoZoom(double deltaTime)
 			else
 			{
 				setViewDirectionJ2000(mountFrameToJ2000(v));
+				//qDebug() << "setViewUpVector L1340";
 				setViewUpVectorJ2000(mountFrameToJ2000(vUp));
 			}
 		}
