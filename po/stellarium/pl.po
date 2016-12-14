@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-12 20:13+0700\n"
-"PO-Revision-Date: 2016-09-29 00:57+0000\n"
+"PO-Revision-Date: 2016-12-14 02:38+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-13 04:51+0000\n"
+"X-Launchpad-Export-Date: 2016-12-14 04:33+0000\n"
 "X-Generator: Launchpad (build 18293)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -35,15 +35,15 @@ msgstr "Typ: <b>%1</b>"
 
 #: src/core/modules/CustomObject.cpp:67
 msgid "custom marker"
-msgstr ""
+msgstr "własny znacznik"
 
 #: src/core/modules/CustomObject.cpp:69
 msgid "custom object"
-msgstr ""
+msgstr "własny obiekt"
 
 #: src/core/modules/CustomObjectMgr.cpp:81
 msgid "Marker"
-msgstr ""
+msgstr "Marker"
 
 #: src/core/modules/Constellation.cpp:296
 msgid "constellation"
@@ -84,7 +84,7 @@ msgstr "Wybierz pojedynczy gwiazdozbiór"
 
 #: src/core/modules/ConstellationMgr.cpp:149
 msgid "Remove selection of constellations"
-msgstr ""
+msgstr "Usuń zaznaczenie gwiazdozbiorów"
 
 #: src/core/modules/StarMgr.cpp:445 src/ui_viewDialog.h:1909
 #: src/ui_dsoColorsDialog.h:541
@@ -130,7 +130,7 @@ msgstr "Równik galaktyczny"
 
 #: src/core/modules/GridLinesMgr.cpp:677
 msgid "Supergalactic Equator"
-msgstr ""
+msgstr "Równik supergalaktyczny"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:682 src/ui_viewDialog.h:2106
@@ -152,7 +152,7 @@ msgstr "Kolur stanowisk"
 
 #: src/core/modules/GridLinesMgr.cpp:699
 msgid "Circumpolar Circle"
-msgstr ""
+msgstr "Koło okołobiegunowe"
 
 #. TRANSLATORS: North Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:915 src/core/modules/GridLinesMgr.cpp:924
@@ -268,11 +268,11 @@ msgstr "Równik galaktyczny"
 
 #: src/core/modules/GridLinesMgr.cpp:1226 src/ui_viewDialog.h:2202
 msgid "Supergalactic grid"
-msgstr ""
+msgstr "Siatka supergalaktyczna"
 
 #: src/core/modules/GridLinesMgr.cpp:1227 src/ui_viewDialog.h:2095
 msgid "Supergalactic equator"
-msgstr ""
+msgstr "Równik supergalaktyczny"
 
 #: src/core/modules/GridLinesMgr.cpp:1228
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:405
@@ -289,43 +289,43 @@ msgstr "Linie koluru"
 
 #: src/core/modules/GridLinesMgr.cpp:1232
 msgid "Circumpolar Circles"
-msgstr ""
+msgstr "Koła okołobiegunowe"
 
 #: src/core/modules/GridLinesMgr.cpp:1233
 msgid "Celestial J2000 poles"
-msgstr ""
+msgstr "Koła niebieskie J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1234
 msgid "Celestial poles"
-msgstr ""
+msgstr "Koła niebieskie"
 
 #: src/core/modules/GridLinesMgr.cpp:1235
 msgid "Zenith and nadir"
-msgstr ""
+msgstr "Zenit i nadir"
 
 #: src/core/modules/GridLinesMgr.cpp:1236
 msgid "Ecliptic J2000 poles"
-msgstr ""
+msgstr "Koła ekliptyczne J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1237
 msgid "Ecliptic poles"
-msgstr ""
+msgstr "Koła ekliptyczne"
 
 #: src/core/modules/GridLinesMgr.cpp:1238 src/ui_viewDialog.h:2156
 msgid "Galactic poles"
-msgstr ""
+msgstr "Koła galaktyczne"
 
 #: src/core/modules/GridLinesMgr.cpp:1239 src/ui_viewDialog.h:2117
 msgid "Supergalactic poles"
-msgstr ""
+msgstr "Koła supergalaktyczne"
 
 #: src/core/modules/GridLinesMgr.cpp:1240
 msgid "Equinox J2000 points"
-msgstr ""
+msgstr "Punkty równonocy J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1241
 msgid "Equinox points"
-msgstr ""
+msgstr "Punkty równonocy"
 
 #: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1936
 msgid "Atmosphere"
@@ -465,12 +465,12 @@ msgstr "Mpc"
 #. TRANSLATORS: Unit of measure for distance - Millions of Light Years
 #: src/core/modules/Nebula.cpp:292
 msgid "Mio. ly"
-msgstr ""
+msgstr "mln l.ś."
 
 #: src/core/modules/Nebula.cpp:306
 #, qt-format
 msgid "Distance: %1 %2 (%3 %4)"
-msgstr ""
+msgstr "Odległość: %1 %2 (%3 %4)"
 
 #: src/core/modules/Nebula.cpp:320
 #, qt-format
@@ -861,7 +861,7 @@ msgstr "Obiekty głębokiego nieba"
 
 #: src/core/modules/NebulaMgr.cpp:366
 msgid "Toggle DSO type filter"
-msgstr ""
+msgstr "Włącz/wyłącz filtr typu DSO"
 
 #: src/core/modules/Planet.cpp:242 src/core/modules/MinorPlanet.cpp:219
 #: src/core/modules/MinorPlanet.cpp:223 src/core/modules/Comet.cpp:183
@@ -902,7 +902,7 @@ msgstr "Średnica pozorna: %1, z pierścieniami: %2"
 #: src/core/modules/Planet.cpp:313 src/core/modules/Planet.cpp:317
 #, qt-format
 msgid "Apparent diameter: %1, scaled up to: %2"
-msgstr ""
+msgstr "Średnica pozorna: %1, powiększona do: %2"
 
 #: src/core/modules/Planet.cpp:324 src/core/modules/Planet.cpp:326
 #: src/core/modules/MinorPlanet.cpp:273 src/core/modules/MinorPlanet.cpp:275
@@ -938,7 +938,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:372
 msgctxt "Moon phase"
 msgid "First Quarter"
-msgstr ""
+msgstr "Pierwsza kwadra"
 
 #: src/core/modules/Planet.cpp:374
 msgctxt "Moon phase"
@@ -948,7 +948,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:376
 msgctxt "Moon phase"
 msgid "Full Moon"
-msgstr ""
+msgstr "Pełnia"
 
 #: src/core/modules/Planet.cpp:378
 msgctxt "Moon phase"
@@ -958,7 +958,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:380
 msgctxt "Moon phase"
 msgid "Third Quarter"
-msgstr ""
+msgstr "Trzecia kwadra"
 
 #: src/core/modules/Planet.cpp:382
 msgctxt "Moon phase"
@@ -968,7 +968,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:384
 msgctxt "Moon phase"
 msgid "New Moon"
-msgstr ""
+msgstr "Nów"
 
 #: src/core/modules/Planet.cpp:389 src/core/modules/Planet.cpp:394
 #: src/core/modules/MinorPlanet.cpp:293 src/core/modules/MinorPlanet.cpp:298
@@ -1208,7 +1208,7 @@ msgstr "Ustaw tempo upływu czasu na zero"
 
 #: src/core/StelCore.cpp:247
 msgid "Set reverse time direction"
-msgstr ""
+msgstr "Ustaw odwrotny kierunek upływu czasu"
 
 #: src/core/StelCore.cpp:248
 msgid "Set time to now"
@@ -1434,7 +1434,7 @@ msgid ""
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
-"Jest to nieznacznie zmodyfikowana wersja formuły IAU (1952), która została "
+"Jest to nieznacznie zmodyfikowana wersja formuły MUA (1952), która została "
 "przyjęta w <em>Astronomical Ephemeris</em> oraz w <em>Canon of Solar "
 "Eclipses</em> autorstwa Muckego i Meeusa (1983)."
 
@@ -1916,12 +1916,12 @@ msgstr "Długość/szerokość galaktyczna: %1/%2"
 #: src/core/StelObject.cpp:263 src/core/StelObject.cpp:265
 #, qt-format
 msgid "Supergalactic longitude/latitude: %1/%2"
-msgstr ""
+msgstr "Długość/szerokość supergalaktyczna: %1/%2"
 
 #: src/core/StelObject.cpp:271
 #, qt-format
 msgid "IAU Constellation: %1"
-msgstr ""
+msgstr "Gwiazdozbiór MUA: %1"
 
 #: src/core/StelObject.cpp:280
 #, qt-format
@@ -1984,11 +1984,11 @@ msgstr "Spójrz w kierunku zenitu"
 
 #: src/core/StelMovementMgr.cpp:166
 msgid "Look towards North Celestial pole"
-msgstr ""
+msgstr "Spójrz w kierunku północnego bieguna niebieskiego"
 
 #: src/core/StelMovementMgr.cpp:167
 msgid "Look towards South Celestial pole"
-msgstr ""
+msgstr "Spójrz w kierunku południowego bieguna niebieskiego"
 
 #: src/core/SimbadSearcher.cpp:78
 msgid "Network error"
@@ -2325,7 +2325,7 @@ msgstr "Page Up/Page Down"
 
 #: src/gui/HelpDialog.cpp:154
 msgid "Ctrl+Up/Down"
-msgstr ""
+msgstr "Ctrl+góra/dół"
 
 #: src/gui/HelpDialog.cpp:157
 msgid "Time dragging"
@@ -2389,7 +2389,7 @@ msgstr "Kliknięcie PPM"
 
 #: src/gui/HelpDialog.cpp:180
 msgid "Add custom marker"
-msgstr ""
+msgstr "Dodaj własny znacznik"
 
 #: src/gui/HelpDialog.cpp:181
 msgid "Shift & left click"
@@ -2397,7 +2397,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:183
 msgid "Delete all custom markers"
-msgstr ""
+msgstr "Usuń wszystkie własne znaczniki"
 
 #: src/gui/HelpDialog.cpp:184
 msgid "Shift & right click"
@@ -2414,11 +2414,11 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:216
 msgid "Text User Interface (TUI)"
-msgstr ""
+msgstr "Tekstowy interfejs użytkownika (TUI)"
 
 #: src/gui/HelpDialog.cpp:218
 msgid "Activate TUI"
-msgstr ""
+msgstr "Uaktywnij TUI"
 
 #: src/gui/HelpDialog.cpp:227
 msgid ""
@@ -2679,7 +2679,7 @@ msgstr "Pole widzenia"
 #: src/gui/StelGuiItems.cpp:763
 msgctxt "abbreviation"
 msgid "FPS"
-msgstr ""
+msgstr "kl./s"
 
 #: src/gui/StelGuiItems.cpp:771
 msgid "Frames per second"
@@ -2915,7 +2915,7 @@ msgstr "Galaktyczny"
 #: src/gui/SearchDialog.cpp:216
 msgctxt "coordinate system"
 msgid "Supergalactic"
-msgstr ""
+msgstr "Supergalaktyczny"
 
 #: src/gui/SearchDialog.cpp:217
 msgctxt "coordinate system"
@@ -3132,12 +3132,12 @@ msgstr "Obiekty Obłoku Oorta"
 #: src/gui/AstroCalcDialog.cpp:562
 #, qt-format
 msgid "Bright stars (<%1 mag)"
-msgstr ""
+msgstr "Jasne gwiazdy (<%1 mag.)"
 
 #: src/gui/AstroCalcDialog.cpp:563
 #, qt-format
 msgid "Bright star clusters (<%1 mag)"
-msgstr ""
+msgstr "Jasne gromady gwiazd (<%1 mag.)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:564 src/translations.h:99
@@ -3148,7 +3148,7 @@ msgstr "Mgławice planetarne"
 #: src/gui/AstroCalcDialog.cpp:565
 #, qt-format
 msgid "Bright nebulae (<%1 mag)"
-msgstr ""
+msgstr "Jasne mgławice (<%1 mag.)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:566 src/translations.h:101
@@ -3159,17 +3159,17 @@ msgstr "Ciemne mgławice"
 #: src/gui/AstroCalcDialog.cpp:567
 #, qt-format
 msgid "Bright galaxies (<%1 mag)"
-msgstr ""
+msgstr "Jasne galaktyki (<%1 mag.)"
 
 #: src/gui/AstroCalcDialog.cpp:662 src/gui/AstroCalcDialog.cpp:722
 #: src/gui/AstroCalcDialog.cpp:724
 msgid "Local Time"
-msgstr ""
+msgstr "Czas lokalny"
 
 #: src/gui/AstroCalcDialog.cpp:718
 #, qt-format
 msgid "Now is %1"
-msgstr ""
+msgstr "Teraz jest %1"
 
 #: src/gui/AstroCalcDialog.cpp:741
 msgid "Phenomenon"
@@ -3198,16 +3198,16 @@ msgstr "Opozycja"
 
 #: src/gui/AstroCalcDialog.cpp:1026
 msgid "Transit"
-msgstr ""
+msgstr "Tranzyt"
 
 #: src/gui/AstroCalcDialog.cpp:1028 src/gui/AstroCalcDialog.cpp:1191
 #: src/gui/AstroCalcDialog.cpp:1349
 msgid "Occultation"
-msgstr ""
+msgstr "Okultacja"
 
 #: src/gui/AstroCalcDialog.cpp:1032
 msgid "Eclipse"
-msgstr ""
+msgstr "Zaćmienie"
 
 #: src/gui/BookmarksDialog.cpp:100 src/ui_searchDialogGui.h:702
 msgid "Object"
@@ -3383,7 +3383,7 @@ msgstr "Gwiazdozbiory"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:86
 msgid "Custom Objects"
-msgstr ""
+msgstr "Obiekty niestandardowe"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:91
@@ -3625,7 +3625,7 @@ msgstr ""
 
 #: src/translations.h:188
 msgid "Macedonian"
-msgstr ""
+msgstr "Macedońska"
 
 #: src/translations.h:189
 msgid "Maori"
@@ -4216,7 +4216,7 @@ msgstr "Anuluj"
 
 #: src/translations.h:369
 msgid "&Cancel"
-msgstr ""
+msgstr "&Anuluj"
 
 #: src/translations.h:370
 msgid "Files of type:"
@@ -5359,7 +5359,7 @@ msgstr "Dodaj do listy"
 
 #: src/ui_locationDialogGui.h:446
 msgid "Delete from list"
-msgstr ""
+msgstr "Usuń z listy"
 
 #: src/ui_locationDialogGui.h:447
 msgid "Return to default location"
@@ -5414,11 +5414,11 @@ msgstr "Planeta:"
 
 #: src/ui_locationDialogGui.h:465
 msgid "Use custom time zone"
-msgstr ""
+msgstr "Użyj niestandardowej strefy czasowej"
 
 #: src/ui_locationDialogGui.h:466
 msgid "Time zone:"
-msgstr ""
+msgstr "Strefa czasowa:"
 
 #: src/ui_locationDialogGui.h:467
 msgid "Name/City:"
@@ -5430,7 +5430,7 @@ msgstr "Kraj:"
 
 #: src/ui_locationDialogGui.h:472
 msgid "Enable daylight saving time"
-msgstr ""
+msgstr "Włącz czas letni"
 
 #: src/ui_searchDialogGui.h:617
 msgid "Find Object"
@@ -5596,7 +5596,7 @@ msgstr "Używaj autouzupełniania tylko od początku słów"
 
 #: src/ui_searchDialogGui.h:721
 msgid "Lock position when coordinates are used"
-msgstr ""
+msgstr "Blokuj położenie gdy są używane współrzędne"
 
 #: src/ui_searchDialogGui.h:722 src/ui_viewDialog.h:2241
 #: src/ui_viewDialog.h:2263 src/ui_viewDialog.h:2289
@@ -5875,10 +5875,12 @@ msgid ""
 "Use designations of deep-sky objects instead of their common names for "
 "screen labels"
 msgstr ""
+"Używaj w etykietach ekranowych oznaczeń obiektów głębokiego nieba zamiast "
+"ich nazw zwyczajowych."
 
 #: src/ui_viewDialog.h:2045
 msgid "Use designations for screen labels"
-msgstr ""
+msgstr "Używaj oznaczeń w etykietach ekranowych"
 
 #: src/ui_viewDialog.h:2047
 msgid "Hints"
@@ -5886,7 +5888,7 @@ msgstr "Podpowiedzi"
 
 #: src/ui_viewDialog.h:2048
 msgid "Configure colors of markers"
-msgstr ""
+msgstr "Konfiguruj kolory znaczników"
 
 #: src/ui_viewDialog.h:2049
 msgid "Celestial Sphere"
@@ -11855,7 +11857,7 @@ msgid ""
 "In December 2015, the International Astronomical Union (IAU) has officially "
 "approved names for several exoplanets after a public vote."
 msgstr ""
-"W grudniu 2015 r. Międzynarodowa Unia Astronomiczna (IAU) oficjalnie "
+"W grudniu 2015 r. Międzynarodowa Unia Astronomiczna (MUA) oficjalnie "
 "zatwierdziła nazwy kilkudziesięciu egzoplanet wybrane w publicznym "
 "głosowaniu."
 
@@ -12149,7 +12151,7 @@ msgid ""
 "with the IAU rules."
 msgstr ""
 "Te nazwy zostały zmodyfikowane w stosunku do pierwotnych propozycji w celu "
-"dostosowania do zasad IAU."
+"dostosowania do zasad MUA."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
 msgid ""
