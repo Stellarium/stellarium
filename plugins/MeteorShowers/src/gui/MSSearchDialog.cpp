@@ -52,7 +52,7 @@ void MSSearchDialog::retranslate()
 			//Name
 			(*it)->setText(ColumnName, q_((*it)->text(ColumnName)));
 			//Data type
-			(*it)->setText(ColumnDataType, q_((*it)->text(ColumnDataType)));
+			(*it)->setText(ColumnDataType, q_((*it)->text(ColumnDataType)));			
 			++it;
 		}
 	}
