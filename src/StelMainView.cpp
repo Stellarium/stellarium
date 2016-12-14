@@ -32,7 +32,11 @@
 
 #include <QDebug>
 #include <QDir>
+#ifdef USE_OLD_QGLWIDGET
+#include <QGLWidget>
+#else
 #include <QOpenGLWidget>
+#endif
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QGuiApplication>
@@ -68,11 +72,22 @@
 // Initialize static variables
 StelMainView* StelMainView::singleton = NULL;
 
+#ifdef USE_OLD_QGLWIDGET
+class StelGLWidget : public QGLWidget
+#else
 class StelGLWidget : public QOpenGLWidget
+#endif
 {
 public:
 	StelGLWidget(StelMainView* parent)
-		: QOpenGLWidget(parent), parent(parent)
+		:
+#ifdef USE_OLD_QGLWIDGET
+		  QGLWidget(parent),
+#else
+		  QOpenGLWidget(parent),
+#endif
+		  parent(parent),
+		  initialized(false)
 	{
 		qDebug()<<"StelGLWidget constructor";
 
@@ -87,34 +102,49 @@ public:
 		qDebug()<<"StelGLWidget destroyed";
 	}
 
-protected:
 	virtual void initializeGL() Q_DECL_OVERRIDE
 	{
+		if(initialized)
+		{
+			qWarning()<<"Double initialization, should not happen";
+			Q_ASSERT(false);
+			return;
+		}
+
 		//This seems to be the correct place to initialize all
 		//GL related stuff of the application
 		//this includes all the init() calls of the modules
 
-		Q_ASSERT(context() == QOpenGLContext::currentContext());
-		StelOpenGL::mainContext = context(); //throw an error when StelOpenGL functions are executed in another context
+#ifdef USE_OLD_QGLWIDGET
+		QOpenGLContext* ctx = context()->contextHandle();
+#else
+		QOpenGLContext* ctx = context();
+#endif
+		Q_ASSERT(ctx == QOpenGLContext::currentContext());
+		StelOpenGL::mainContext = ctx; //throw an error when StelOpenGL functions are executed in another context
 
 		qDebug()<<"initializeGL";
-		qDebug() << "OpenGL supported version: " << QString((char*)context()->functions()->glGetString(GL_VERSION));
+		qDebug() << "OpenGL supported version: " << QString((char*)ctx->functions()->glGetString(GL_VERSION));
 		qDebug() << "Current Format: " << this->format();
 
 		if (qApp->property("onetime_compat33")==true)
 		{
 			// This may not return the version number set previously!
-			qDebug() << "StelGLWidget context format version:" << context()->format().majorVersion() << "." << context()->format().minorVersion();
-			qDebug() << "StelGLWidget has CompatibilityProfile:" << (context()->format().profile()==QSurfaceFormat::CompatibilityProfile ? "yes" : "no") << "(" <<context()->format().profile() << ")";
+			qDebug() << "StelGLWidget context format version:" << ctx->format().majorVersion() << "." << context()->format().minorVersion();
+			qDebug() << "StelGLWidget has CompatibilityProfile:" << (ctx->format().profile()==QSurfaceFormat::CompatibilityProfile ? "yes" : "no") << "(" <<context()->format().profile() << ")";
 		}
 
 		parent->init();
+		initialized = true;
 	}
+
+protected:
 	virtual void paintGL() Q_DECL_OVERRIDE
 	{
 		//this is actually never called because the
 		//QGraphicsView intercepts the paint event
 		//we have to draw in the background of the scene
+		//or as a QGraphicsItem
 		qDebug()<<"paintGL";
 	}
 	virtual void resizeGL(int w, int h) Q_DECL_OVERRIDE
@@ -126,6 +156,7 @@ protected:
 
 private:
 	StelMainView* parent;
+	bool initialized;
 };
 
 // A custom QGraphicsEffect to apply the night mode on top of the screen.
@@ -374,7 +405,7 @@ public:
 		: QGraphicsObject(parent), mainView(mainView)
 	{
 		setFlag(QGraphicsItem::ItemClipsToShape);
-		setFlag(QGraphicsItem::ItemContainsChildrenInShape);
+		setFlag(QGraphicsItem::ItemClipsChildrenToShape);
 		setFlag(QGraphicsItem::ItemIsFocusable);
 
 		setAcceptHoverEvents(true);
@@ -400,7 +431,7 @@ protected:
 		Q_UNUSED(widget);
 
 		//a sanity check
-		Q_ASSERT(mainView->glWidget->context() == QOpenGLContext::currentContext());
+		Q_ASSERT(mainView->glContext() == QOpenGLContext::currentContext());
 
 		const double now = StelApp::getTotalRunTime();
 		double dt = now - previousPaintTime;
@@ -452,7 +483,7 @@ private:
 };
 
 StelMainView::StelMainView(QSettings* settings)
-	: QGraphicsView(), guiItem(NULL), gui(NULL),
+	: QGraphicsView(), guiItem(NULL), gui(NULL), stelApp(NULL),
 	  updateQueued(false),
 	  flagInvertScreenShotColors(false),
 	  flagOverwriteScreenshots(false),
@@ -493,19 +524,27 @@ StelMainView::StelMainView(QSettings* settings)
 	connect(glLogger, SIGNAL(messageLogged(QOpenGLDebugMessage)), this, SLOT(logGLMessage(QOpenGLDebugMessage)));
 #endif
 
-	// VSync control, needs to be set on default surface format before creating any windows
+	// VSync control
 	bool vsync = configuration->value("video/vsync", true).toBool();
+#if QT_VERSION >= QT_VERSION_CHECK(5,4,0)
+	// with the QOpenGLWidget, this seems to be needed on the default surface format before creating any windows
 	QSurfaceFormat defFmt = QSurfaceFormat::defaultFormat();
 	defFmt.setSwapInterval(vsync);
 	QSurfaceFormat::setDefaultFormat(defFmt);
+#endif
 
-	//Set the surface format BEFORE creating the widget
+	QSurfaceFormat widgetFormat = getDesiredGLFormat();
+	widgetFormat.setSwapInterval(vsync);
+	glWidget = new StelGLWidget(this);
+	//Set the surface format BEFORE showing the widget
 	//We could also set this as default format instead of just the widget's format,
 	//but I don't know if some background Qt stuff needs another buffer configuration or something,
 	//so let's be safe and just set it here
-	QSurfaceFormat fmt = getDesiredGLFormat();
-	glWidget = new StelGLWidget(this);
-	glWidget->setFormat(fmt);
+#ifdef USE_OLD_QGLWIDGET
+	glWidget->setFormat(QGLFormat::fromSurfaceFormat(widgetFormat));
+#else
+	glWidget->setFormat(widgetFormat);
+#endif
 	setViewport(glWidget);
 
 	stelScene = new StelGraphicsScene(this);
@@ -520,6 +559,13 @@ StelMainView::StelMainView(QSettings* settings)
 	// circumstances, so here we set it again just to be on the safe side.
 	setlocale(LC_NUMERIC, "C");
 	// End workaround
+
+#ifdef USE_OLD_QGLWIDGET
+	// StelGLWidget::initializeGL is seemingly never called automatically with the QGLWidget, so we have to do it ourselves
+	//we have to force context creation here
+	glWidget->makeCurrent();
+	glWidget->initializeGL();
+#endif
 }
 
 void StelMainView::resizeEvent(QResizeEvent* event)
@@ -549,9 +595,14 @@ StelMainView::~StelMainView()
 
 QSurfaceFormat StelMainView::getDesiredGLFormat() const
 {
+#if QT_VERSION < QT_VERSION_CHECK(5,4,0)
+	//default-constructed format
+	QSurfaceFormat fmt;
+#else
 	//use the default format as basis
 	QSurfaceFormat fmt = QSurfaceFormat::defaultFormat();
 	qDebug()<<"Default surface format: "<<fmt;
+#endif
 
 	//if on an GLES build, do not set the format
 #ifndef QT_OPENGL_ES_2
@@ -1194,7 +1245,7 @@ void StelMainView::moveEvent(QMoveEvent * event)
 {
 	Q_UNUSED(event);
 
-	// We use the glWidget instead of the even, as we want the screen that shows most of the widget.
+	// We use the glWidget instead of the event, as we want the screen that shows most of the widget.
 	QWindow* win = glWidget->windowHandle();
 	if(win)
 		stelApp->setDevicePixelsPerPixel(win->devicePixelRatio());
@@ -1225,7 +1276,11 @@ void StelMainView::saveScreenShot(const QString& filePrefix, const QString& save
 void StelMainView::doScreenshot(void)
 {
 	QFileInfo shotDir;
+#ifdef USE_OLD_QGLWIDGET
+	QImage im = glWidget->grabFrameBuffer();
+#else
 	QImage im = glWidget->grabFramebuffer();
+#endif
 
 	if (flagInvertScreenShotColors)
 		im.invertPixels();
@@ -1273,7 +1328,11 @@ QPoint StelMainView::getMousePos()
 
 QOpenGLContext* StelMainView::glContext() const
 {
+#ifdef USE_OLD_QGLWIDGET
+	return glWidget->context()->contextHandle();
+#else
 	return glWidget->context();
+#endif
 }
 
 void StelMainView::glContextMakeCurrent()
