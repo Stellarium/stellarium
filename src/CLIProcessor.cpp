@@ -196,7 +196,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 #ifdef ENABLE_SPOUT
 		// For now, we default to spout=sky when no extra option is given. Later, we should also accept "all".
 		// Unfortunately, this still throws an exception when no optarg string is given.
-		spoutStr  = argsGetOptionWithArg(argList, "-S", "--spout", "sky").toString();
+		spoutStr  = argsGetOptionWithArg(argList, "-S", "--spout", "").toString();
 		spoutName = argsGetOptionWithArg(argList, "", "--spout-name", "").toString();
 #endif
 	}
