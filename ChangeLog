@@ -1,3 +1,16 @@
+0.15.1 [2016-12-XX]
+
+Version 0.15.1 introduces a few new exciting features.
+- The Digital Sky Survey (DSS) can be shown (requires online connection).
+- AstroCalc is now available from the main menu and gives interesting new computational insight.
+- Stellarium can act as Spout sender (important for multimedia environments; Windows only).
+In addition, a lot of bugs have been fixed.
+- wait() and waitFor() in the Scripting Engine no longer inhibits performance of moves.  
+- DE430/431 DeltaT may be OK now. We still want to test a bit more, though.
+- ArchaeoLines also offers two arbitrary declination lines.
+
+Full list of changes: https://launchpad.net/stellarium/0.15/0.15.1
+
 0.15.0 [2016-07-31]
 In memory of our team member Barry Gerdes.
 
