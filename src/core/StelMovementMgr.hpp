@@ -95,11 +95,8 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to StelMovementMgr
 
-	//! Increment/decrement smoothly the vision field and position.
+	//! Increment/decrement smoothly the vision field and position. Called in StelCore.update().
 	void updateMotion(double deltaTime);
-
-	// These are hopefully temporary.
-	//bool getHasDragged() const {return hasDragged;}
 
 	//! Get the zoom speed
 	// TODO: what are the units?
@@ -312,15 +309,12 @@ private:
 	double initFov;    // The FOV at startup
 	double minFov;     // Minimum FOV in degrees
 	double maxFov;     // Maximum FOV in degrees
-
+	double deltaFov;   // requested change of FOV (degrees) used during zooming.
 	void setFov(double f)
 	{
-		currentFov = f;
-		if (f>maxFov)
-			currentFov = maxFov;
-		if (f<minFov)
-			currentFov = minFov;
+		currentFov=qMax(minFov, qMin(f, maxFov));
 	}
+	// immediately add deltaFov argument to FOV - does not change private var.
 	void changeFov(double deltaFov);
 
 	// Move (a bit) to selected/tracked object until move.coef reaches 1, or auto-follow (track) selected object.
@@ -378,7 +372,7 @@ private:
 	bool flagAutoMove;       // Define if automove is on or off
 	ZoomingMode zoomingMode;
 
-	double deltaFov,deltaAlt,deltaAz; // View movement
+	double deltaAlt,deltaAz; // View movement
 
 	bool flagManualZoom;     // Define whether auto zoom can go further
 	float autoMoveDuration; // Duration of movement for the auto move to a selected object in seconds
