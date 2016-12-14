@@ -38,7 +38,8 @@ SET(PACKAGE_VERSION "${VERSION}")
 ADD_DEFINITIONS(-DPACKAGE_VERSION="${PACKAGE_VERSION}")
 ADD_DEFINITIONS(-DCOPYRIGHT_YEARS="${COPYRIGHT_YEARS}")
 
-SET(MINIMAL_QT_VERSION "5.4.0")
+# currently Qt 5.4 - 5.6 is recommended, we can still build with Qt 5.3, and 5.7 may have some bugs
+SET(MINIMAL_QT_VERSION "5.3.0")
 
 # Use customized cmake macros
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
@@ -301,6 +302,20 @@ IF(WIN32)
      FIND_PACKAGE(Qt5Sql REQUIRED)
      FIND_PACKAGE(Qt5XmlPatterns REQUIRED)
 ENDIF()
+
+# when using Qt 5.3, default to using the old QGLWidget, but warn
+if(${Qt5Core_VERSION_STRING} VERSION_LESS "5.4")
+    set(USE_OLD_QGLWIDGET 1)
+    message(WARNING "You are using Qt ${Qt5Core_VERSION_STRING} to build, falling back to legacy QGLWidget rendering. Consider using at least Qt 5.4 if possible.")
+else()
+    # offer the old widget as an alternative, default off
+    set(USE_OLD_QGLWIDGET 0 CACHE BOOL "Use the legacy QGLWidget instead of the new QOpenGLWidget for the main viewport, and link to the QtOpenGL module")
+endif()
+
+if(USE_OLD_QGLWIDGET)
+    add_definitions(-DUSE_OLD_QGLWIDGET)
+    find_package(Qt5OpenGL REQUIRED)
+endif()
 
 # Since Qt 5.4, linking to OpenGL is basically not required anymore,
 # because the QtGui module re-implements the GL functions, and perhaps even

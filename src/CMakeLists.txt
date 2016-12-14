@@ -402,6 +402,10 @@ ENDIF()
 IF(ENABLE_SCRIPTING)
      SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Script)
 ENDIF()
+if(USE_OLD_QGLWIDGET)
+    # The Qt5OpenGL library is only required when using the legacy viewport
+    SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::OpenGL)
+endif()
 
 # Main executable/library setup
 IF(GENERATE_STELMAINLIB)

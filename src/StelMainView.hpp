@@ -187,7 +187,9 @@ private slots:
 private:
 	//! The graphics scene notifies us when a draw finished, so that we can queue the next one
 	void drawEnded();
-	//! Sets the desired OpenGL format settings
+	//! Returns the desired OpenGL format settings,
+	//! on desktop this corresponds to a GL 2.1 context,
+	//! with 32bit RGBA buffer and 24/8 depth/stencil buffer
 	QSurfaceFormat getDesiredGLFormat() const;
 	//! provide extended OpenGL diagnostics in logfile.
 	void dumpOpenGLdiagnostics() const;
