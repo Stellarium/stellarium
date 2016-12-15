@@ -173,33 +173,61 @@ class Translations
 		
 		// =====================================================================
 		// Constellation cultures
+		// TRANSLATORS: Name of the sky culture
 		N_("Arabic");
+		// TRANSLATORS: Name of the sky culture
 		N_("Arabic Moon Stations");
+		// TRANSLATORS: Name of the sky culture
 		N_("Aztec");
+		// TRANSLATORS: Name of the sky culture
 		N_("Boorong");
+		// TRANSLATORS: Name of the sky culture
 		N_("Chinese");
+		// TRANSLATORS: Name of the sky culture
 		N_("Egyptian");
+		// TRANSLATORS: Name of the sky culture
 		N_("Inuit");
+		// TRANSLATORS: Name of the sky culture
 		N_("Indian Vedic");
+		// TRANSLATORS: Name of the sky culture
 		N_("Japanese Moon Stations");
+		// TRANSLATORS: Name of the sky culture
 		N_("Kamilaroi/Euahlayi");
+		// TRANSLATORS: Name of the sky culture
 		N_("Korean");
+		// TRANSLATORS: Name of the sky culture
 		N_("Dakota/Lakota/Nakota");
+		// TRANSLATORS: Name of the sky culture
 		N_("Macedonian");
+		// TRANSLATORS: Name of the sky culture
 		N_("Maori");
+		// TRANSLATORS: Name of the sky culture
 		N_("Mongolian");
+		// TRANSLATORS: Name of the sky culture
 		N_("Navajo");
+		// TRANSLATORS: Name of the sky culture
 		N_("Norse");
+		// TRANSLATORS: Name of the sky culture
 		N_("Ojibwe");
+		// TRANSLATORS: Name of the sky culture
 		N_("Polynesian");
+		// TRANSLATORS: Name of the sky culture
 		N_("Romanian");
+		// TRANSLATORS: Name of the sky culture
 		N_("Sami");
 		// TRANSLATORS: Name of the sky culture
+		N_("Sardinian");
+		// TRANSLATORS: Name of the sky culture
 		N_("Siberian");
+		// TRANSLATORS: Name of the sky culture
 		N_("Tukano");
+		// TRANSLATORS: Name of the sky culture
 		N_("Tupi-Guarani");
+		// TRANSLATORS: Name of the sky culture
 		N_("Tongan");
+		// TRANSLATORS: Name of the sky culture
 		N_("Western");
+		// TRANSLATORS: Name of the sky culture
 		N_("Western (H.A.Rey)");
 
 		
