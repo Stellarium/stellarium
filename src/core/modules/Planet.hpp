@@ -101,7 +101,7 @@ public:
 	{
 		ocsOneColor,		// One color for all orbits
 		ocsGroups,		// Separate colors for each group of Solar system bodies
-		ocsGreatPlanets		// Separate colors for each of big planets of Solar system
+		ocsMajorPlanets		// Separate colors for each of major planets of Solar system
 	};
 
 	enum ApparentMagnitudeAlgorithm
