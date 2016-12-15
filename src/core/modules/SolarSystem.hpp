@@ -304,6 +304,94 @@ public slots:
 	//! @return current color
 	Vec3f getCometsOrbitsColor(void) const;
 
+	//! Set the color used to draw Mercury orbit line.
+	//! @param c The color of Mercury orbit line (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setMercuryOrbitColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setMercuryOrbitColor(const Vec3f& c);
+	//! Get the current color used to draw Mercury orbit line.
+	//! @return current color
+	Vec3f getMercuryOrbitColor(void) const;
+
+	//! Set the color used to draw Venus orbit line.
+	//! @param c The color of Venus orbit line (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setVenusOrbitColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setVenusOrbitColor(const Vec3f& c);
+	//! Get the current color used to draw Venus orbit line.
+	//! @return current color
+	Vec3f getVenusOrbitColor(void) const;
+
+	//! Set the color used to draw Earth orbit line.
+	//! @param c The color of Earth orbit line (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setEarthOrbitColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setEarthOrbitColor(const Vec3f& c);
+	//! Get the current color used to draw Earth orbit line.
+	//! @return current color
+	Vec3f getEarthOrbitColor(void) const;
+
+	//! Set the color used to draw Mars orbit line.
+	//! @param c The color of Mars orbit line (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setMarsOrbitColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setMarsOrbitColor(const Vec3f& c);
+	//! Get the current color used to draw Mars orbit line.
+	//! @return current color
+	Vec3f getMarsOrbitColor(void) const;
+
+	//! Set the color used to draw Jupiter orbit line.
+	//! @param c The color of Jupiter orbit line (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setJupiterOrbitColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setJupiterOrbitColor(const Vec3f& c);
+	//! Get the current color used to draw Jupiter orbit line.
+	//! @return current color
+	Vec3f getJupiterOrbitColor(void) const;
+
+	//! Set the color used to draw Saturn orbit line.
+	//! @param c The color of Saturn orbit line (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setSaturnOrbitColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setSaturnOrbitColor(const Vec3f& c);
+	//! Get the current color used to draw Saturn orbit line.
+	//! @return current color
+	Vec3f getSaturnOrbitColor(void) const;
+
+	//! Set the color used to draw Uranus orbit line.
+	//! @param c The color of Uranus orbit line (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setUranusOrbitColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setUranusOrbitColor(const Vec3f& c);
+	//! Get the current color used to draw Uranus orbit line.
+	//! @return current color
+	Vec3f getUranusOrbitColor(void) const;
+
+	//! Set the color used to draw Neptune orbit line.
+	//! @param c The color of Neptune orbit line (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setNeptuneOrbitColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setNeptuneOrbitColor(const Vec3f& c);
+	//! Get the current color used to draw Neptune orbit line.
+	//! @return current color
+	Vec3f getNeptuneOrbitColor(void) const;
+
 	//! Set the color used to draw planet trails lines.
 	//! @param c The color of the planet trails lines (R,G,B)
 	//! @code
@@ -433,6 +521,11 @@ public slots:
 	void setCustomGrsJD(double JD);
 	//! Get initial JD for calculation of position of Great Red Spot
 	double getCustomGrsJD();
+
+	//! Set style of colors of orbits for Solar system bodies
+	void setOrbitColorStyle(QString style);
+	//! Get style of colors of orbits for Solar system bodies
+	QString getOrbitColorStyle() const;
 
 	//! Get list of objects by type
 	//! @param objType object type
