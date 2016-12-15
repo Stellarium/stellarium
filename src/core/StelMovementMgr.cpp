@@ -1194,7 +1194,7 @@ void StelMovementMgr::panView(const double deltaAz, const double deltaAlt)
 	{
 		if (upVectorMountFrame.v[2] < 0.9)
 		{
-			 qDebug() << "panView: Recovering azimuth...";
+			 //qDebug() << "panView: Recovering azimuth...";
 			azVision=atan2(-upVectorMountFrame.v[1], -upVectorMountFrame.v[0]);
 			if (altVision < 0.)
 				azVision+=M_PI;
@@ -1202,7 +1202,7 @@ void StelMovementMgr::panView(const double deltaAz, const double deltaAlt)
 		// Remove these lines if all is OK.
 		else
 		{
-			 qDebug() << "panView: UpVector:" << upVectorMountFrame.v[0] << "/" << upVectorMountFrame.v[1] << "/" << upVectorMountFrame.v[2] << "Cannot recover azimuth. Hope it's OK";
+			 //qDebug() << "panView: UpVector:" << upVectorMountFrame.v[0] << "/" << upVectorMountFrame.v[1] << "/" << upVectorMountFrame.v[2] << "Cannot recover azimuth. Hope it's OK";
 		}
 	}
 
@@ -1212,8 +1212,8 @@ void StelMovementMgr::panView(const double deltaAz, const double deltaAlt)
 	if (deltaAlt)
 	{
 		if (altVision+deltaAlt <= M_PI_2 && altVision+deltaAlt >= -M_PI_2) altVision+=deltaAlt;
-		if (altVision+deltaAlt >  M_PI_2) altVision =  M_PI_2; // - 0.000001;	// Prevent bug: manual pans can never really reach the zenith, but we can accept this.
-		if (altVision+deltaAlt < -M_PI_2) altVision = -M_PI_2; // + 0.000001;	// Prevent bug  ... the solution below is even better! No more correction.
+		if (altVision+deltaAlt >  M_PI_2) altVision =  M_PI_2 - 0.000001; // Prevent bug: manual pans (keyboard or mouse!) can never really reach the zenith, but we can accept this.
+		if (altVision+deltaAlt < -M_PI_2) altVision = -M_PI_2 + 0.000001;
 	}
 
 	// recalc all the position variables
