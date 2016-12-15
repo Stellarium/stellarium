@@ -189,7 +189,7 @@ void StelMovementMgr::setFlagLockEquPos(bool b)
 
 void StelMovementMgr::setViewUpVectorJ2000(const Vec3d& up)
 {
-	qDebug() << "setViewUpvectorJ2000()";
+	//qDebug() << "setViewUpvectorJ2000()";
 	upVectorMountFrame = j2000ToMountFrame(up);
 }
 
@@ -197,7 +197,7 @@ void StelMovementMgr::setViewUpVectorJ2000(const Vec3d& up)
 // We have a problem if alt=+/-90degrees: view and up angles are ill-defined (actually, angle between them=0 and therefore we saw shaky rounding effects), therefore Bug LP:1068529
 void StelMovementMgr::setViewUpVector(const Vec3d& up)
 {
-	qDebug() << "setViewUpvector()";
+	//qDebug() << "setViewUpvector()";
 	upVectorMountFrame = up;
 }
 
@@ -255,7 +255,7 @@ bool StelMovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons)
 			previousX = x;
 			previousY = y;
 			// We can hardly use the mouse exactly enough to go to the zenith/pole. Any mouse motion can safely reset the simplified up vector.
-			qDebug() << "handleMouseMoves: resetting Up vector.";
+			//qDebug() << "handleMouseMoves: resetting Up vector.";
 			setViewUpVector(Vec3d(0., 0., 1.));
 			return true;
 		}
@@ -1186,7 +1186,7 @@ void StelMovementMgr::panView(const double deltaAz, const double deltaAlt)
 	StelUtils::rectToSphe(&azVision,&altVision,j2000ToMountFrame(viewDirectionJ2000));
 	// Az is counted from South, eastward.
 
-	 qDebug() << "Azimuth:" << azVision * 180./M_PI << "Altitude:" << altVision * 180./M_PI << "Up.X=" << upVectorMountFrame.v[0] << "Up.Y=" << upVectorMountFrame.v[1] << "Up.Z=" << upVectorMountFrame.v[2];
+	 //qDebug() << "Azimuth:" << azVision * 180./M_PI << "Altitude:" << altVision * 180./M_PI << "Up.X=" << upVectorMountFrame.v[0] << "Up.Y=" << upVectorMountFrame.v[1] << "Up.Z=" << upVectorMountFrame.v[2];
 
 	// if we are just looking into the pole, azimuth can hopefully be recovered from the customized up vector!
 	// When programmatically centering on a pole, we should have set a better up vector for |alt|>0.9*M_PI/2.
