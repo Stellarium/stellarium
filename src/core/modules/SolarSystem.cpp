@@ -2022,8 +2022,8 @@ void SolarSystem::setOrbitColorStyle(QString style)
 {
 	if (style.toLower()=="groups")
 		Planet::orbitColorStyle = Planet::ocsGroups;
-	else if (style.toLower()=="great_planets")
-		Planet::orbitColorStyle = Planet::ocsGreatPlanets;
+	else if (style.toLower()=="major_planets")
+		Planet::orbitColorStyle = Planet::ocsMajorPlanets;
 	else
 		Planet::orbitColorStyle = Planet::ocsOneColor;
 }
@@ -2039,8 +2039,8 @@ QString SolarSystem::getOrbitColorStyle() const
 		case Planet::ocsGroups:
 			r = "groups";
 			break;
-		case Planet::ocsGreatPlanets:
-			r = "great_planets";
+		case Planet::ocsMajorPlanets:
+			r = "major_planets";
 			break;
 	}
 	return r;

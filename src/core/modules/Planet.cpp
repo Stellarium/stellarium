@@ -2060,7 +2060,7 @@ Vec3f Planet::getCurrentOrbitColor()
 			}
 			break;
 		}
-		case ocsGreatPlanets:
+		case ocsMajorPlanets:
 		{
 			QString pName = getEnglishName().toLower();
 			if (pName=="mercury")
