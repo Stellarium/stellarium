@@ -8,20 +8,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-12 20:13+0700\n"
+"POT-Creation-Date: 2016-12-15 23:53+0700\n"
 "PO-Revision-Date: 2016-12-14 13:34+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-15 04:34+0000\n"
+"X-Launchpad-Export-Date: 2016-12-16 04:43+0000\n"
 "X-Generator: Launchpad (build 18293)\n"
 "X-Poedit-Language: Hungarian\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:191
-#: src/core/modules/Planet.cpp:230 src/core/modules/MinorPlanet.cpp:200
+#: src/core/modules/Planet.cpp:239 src/core/modules/MinorPlanet.cpp:200
 #: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:192
 #: src/core/modules/StarWrapper.cpp:195
 #: plugins/Satellites/src/Satellite.cpp:277
@@ -50,10 +50,10 @@ msgstr "csillagkép"
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:444
 #: src/core/modules/GridLinesMgr.cpp:1212 src/core/modules/LandscapeMgr.cpp:414
 #: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
-#: src/core/modules/SolarSystem.cpp:203 src/core/modules/MilkyWay.cpp:74
+#: src/core/modules/SolarSystem.cpp:212 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/modules/ToastMgr.cpp:61
-#: src/core/StelApp.cpp:526 src/core/StelCore.cpp:239
-#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:575
+#: src/core/StelApp.cpp:531 src/core/StelCore.cpp:239
+#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:577
 msgid "Display Options"
 msgstr "Megjelenítés beállításai"
 
@@ -385,7 +385,7 @@ msgstr "Típus: <b>%1</b> (%2)"
 msgid "Opacity: <b>%1</b>"
 msgstr "Átlátszatlanság: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:205 src/core/modules/Planet.cpp:236
+#: src/core/modules/Nebula.cpp:205 src/core/modules/Planet.cpp:245
 #: src/core/modules/MinorPlanet.cpp:206 src/core/modules/Comet.cpp:171
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:202
 #, qt-format
@@ -393,7 +393,7 @@ msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:208 src/core/modules/Nebula.cpp:213
-#: src/core/modules/Planet.cpp:239 src/core/modules/MinorPlanet.cpp:209
+#: src/core/modules/Planet.cpp:248 src/core/modules/MinorPlanet.cpp:209
 #: src/core/modules/Comet.cpp:174 src/core/modules/StarWrapper.cpp:63
 #: src/core/modules/StarWrapper.cpp:205
 #: plugins/Supernovae/src/Supernova.cpp:137 plugins/Novae/src/Nova.cpp:144
@@ -861,138 +861,138 @@ msgstr "Mélyég-objektumok"
 msgid "Toggle DSO type filter"
 msgstr "DSO típusú szűrő ki/be"
 
-#: src/core/modules/Planet.cpp:242 src/core/modules/MinorPlanet.cpp:219
+#: src/core/modules/Planet.cpp:251 src/core/modules/MinorPlanet.cpp:219
 #: src/core/modules/MinorPlanet.cpp:223 src/core/modules/Comet.cpp:183
 #: src/core/modules/StarWrapper.cpp:209 plugins/Quasars/src/Quasar.cpp:116
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Abszolút fényesség: %1"
 
-#: src/core/modules/Planet.cpp:262 src/core/modules/MinorPlanet.cpp:238
+#: src/core/modules/Planet.cpp:271 src/core/modules/MinorPlanet.cpp:238
 #: src/core/modules/Comet.cpp:195
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
 msgstr "Távolság a Naptól: %1CsE (%2 km)"
 
-#: src/core/modules/Planet.cpp:269 src/core/modules/MinorPlanet.cpp:245
+#: src/core/modules/Planet.cpp:278 src/core/modules/MinorPlanet.cpp:245
 #: src/core/modules/Comet.cpp:202
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
 msgstr "Távolság a Naptól: %1CsE (%2 millió km)"
 
-#: src/core/modules/Planet.cpp:279 src/core/modules/MinorPlanet.cpp:255
+#: src/core/modules/Planet.cpp:288 src/core/modules/MinorPlanet.cpp:255
 #: src/core/modules/Comet.cpp:212
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Távolság: %1 CSE (%2 km)"
 
-#: src/core/modules/Planet.cpp:286 src/core/modules/MinorPlanet.cpp:262
+#: src/core/modules/Planet.cpp:295 src/core/modules/MinorPlanet.cpp:262
 #: src/core/modules/Comet.cpp:219
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "Távolság: %1CsE (%2 millió km)"
 
-#: src/core/modules/Planet.cpp:300 src/core/modules/Planet.cpp:304
+#: src/core/modules/Planet.cpp:309 src/core/modules/Planet.cpp:313
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "Látszó átmérő: %1, gyűrűkkel: %2"
 
-#: src/core/modules/Planet.cpp:313 src/core/modules/Planet.cpp:317
+#: src/core/modules/Planet.cpp:322 src/core/modules/Planet.cpp:326
 #, qt-format
 msgid "Apparent diameter: %1, scaled up to: %2"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:324 src/core/modules/Planet.cpp:326
+#: src/core/modules/Planet.cpp:333 src/core/modules/Planet.cpp:335
 #: src/core/modules/MinorPlanet.cpp:273 src/core/modules/MinorPlanet.cpp:275
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Látszó átmérő: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:343 src/core/modules/MinorPlanet.cpp:285
+#: src/core/modules/Planet.cpp:352 src/core/modules/MinorPlanet.cpp:285
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "Sziderikus periódus: %1 nap (%2 év)"
 
-#: src/core/modules/Planet.cpp:346
+#: src/core/modules/Planet.cpp:355
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "Sziderikus nap: %1"
 
-#: src/core/modules/Planet.cpp:347
+#: src/core/modules/Planet.cpp:356
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "Középnap: %1"
 
-#: src/core/modules/Planet.cpp:351
+#: src/core/modules/Planet.cpp:360
 msgid "The period of rotation is chaotic"
 msgstr "A forgási periódus kaotikus"
 
-#: src/core/modules/Planet.cpp:370
+#: src/core/modules/Planet.cpp:379
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:372
+#: src/core/modules/Planet.cpp:381
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "Első negyed"
 
-#: src/core/modules/Planet.cpp:374
+#: src/core/modules/Planet.cpp:383
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "Növekvő Hold"
 
-#: src/core/modules/Planet.cpp:376
+#: src/core/modules/Planet.cpp:385
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "Holdtölte"
 
-#: src/core/modules/Planet.cpp:378
+#: src/core/modules/Planet.cpp:387
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "Fogyó Hold"
 
-#: src/core/modules/Planet.cpp:380
+#: src/core/modules/Planet.cpp:389
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "Harmadik negyed"
 
-#: src/core/modules/Planet.cpp:382
+#: src/core/modules/Planet.cpp:391
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "Fogyó Hold"
 
-#: src/core/modules/Planet.cpp:384
+#: src/core/modules/Planet.cpp:393
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "Újhold"
 
-#: src/core/modules/Planet.cpp:389 src/core/modules/Planet.cpp:394
+#: src/core/modules/Planet.cpp:398 src/core/modules/Planet.cpp:403
 #: src/core/modules/MinorPlanet.cpp:293 src/core/modules/MinorPlanet.cpp:298
 #: src/core/modules/Comet.cpp:246 src/core/modules/Comet.cpp:251
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Fázisszög: %1"
 
-#: src/core/modules/Planet.cpp:390 src/core/modules/Planet.cpp:395
+#: src/core/modules/Planet.cpp:399 src/core/modules/Planet.cpp:404
 #: src/core/modules/MinorPlanet.cpp:294 src/core/modules/MinorPlanet.cpp:299
 #: src/core/modules/Comet.cpp:247 src/core/modules/Comet.cpp:252
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Elongáció: %1"
 
-#: src/core/modules/Planet.cpp:398
+#: src/core/modules/Planet.cpp:407
 #, qt-format
 msgid "Phase: %1"
 msgstr "Fázis: %1"
 
-#: src/core/modules/Planet.cpp:402
+#: src/core/modules/Planet.cpp:411
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Megvilágítva: %1%"
 
-#: src/core/modules/Planet.cpp:414
+#: src/core/modules/Planet.cpp:423
 #, qt-format
 msgid "Eclipse Factor: %1%"
 msgstr "Fogyatkozási tényező: %1%"
@@ -1034,31 +1034,35 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "A gázcsóva hossza  (becsült érték): %1 km"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:204 src/gui/AstroCalcDialog.cpp:554
+#: src/core/modules/SolarSystem.cpp:213 src/gui/AstroCalcDialog.cpp:554
 #: src/translations.h:66
 msgid "Planets"
 msgstr "Bolygók"
 
-#: src/core/modules/SolarSystem.cpp:205
+#: src/core/modules/SolarSystem.cpp:214
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:316
 msgid "Planet labels"
 msgstr "Bolygók neve"
 
-#: src/core/modules/SolarSystem.cpp:206
+#: src/core/modules/SolarSystem.cpp:215
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Planet orbits"
 msgstr "Bolygópályák"
 
-#: src/core/modules/SolarSystem.cpp:207
+#: src/core/modules/SolarSystem.cpp:216
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:324
 msgid "Planet trails"
 msgstr "Bolygók pályája"
 
-#: src/core/modules/SolarSystem.cpp:209
+#: src/core/modules/SolarSystem.cpp:218
 msgid "Planet markers"
 msgstr "Bolygók jelölése"
 
-#: src/core/modules/SolarSystem.cpp:211
+#: src/core/modules/SolarSystem.cpp:219
+msgid "Planet selection marker"
+msgstr ""
+
+#: src/core/modules/SolarSystem.cpp:220
 msgid "Native planet names (from starlore)"
 msgstr "Eredeti bolygónév"
 
@@ -1163,9 +1167,13 @@ msgstr "Állatövi fény"
 msgid "Digitized Sky Survey (experimental)"
 msgstr "Digitalizált égboltfelmérés (kísérleti)"
 
-#: src/core/StelApp.cpp:526
+#: src/core/StelApp.cpp:531
 msgid "Night mode"
 msgstr "Éjszakai mód"
+
+#: src/core/StelApp.cpp:583
+msgid "Cannot create Spout sender. See log for details."
+msgstr ""
 
 #: src/core/StelCore.cpp:237 src/gui/StelGui.cpp:202
 #: src/gui/AstroCalcDialog.cpp:305 src/gui/AstroCalcDialog.cpp:742
@@ -1950,7 +1958,7 @@ msgid "Deep-sky objects background images"
 msgstr "Mélyég objektumok háttérképei"
 
 #: src/core/StelMovementMgr.cpp:154 src/gui/StelGui.cpp:204
-#: src/StelMainView.cpp:574
+#: src/StelMainView.cpp:576
 msgid "Miscellaneous"
 msgstr "Egyebek"
 
@@ -3016,7 +3024,7 @@ msgstr "év"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:450
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:96
 #: plugins/Exoplanets/src/Exoplanet.cpp:324
-#: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:185
+#: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:177
 msgid "Name"
 msgstr "Név"
 
@@ -3224,7 +3232,7 @@ msgstr "Helyi név"
 msgid "Location of observer"
 msgstr "Megfigyelő helye"
 
-#: src/StelMainView.cpp:462 src/StelMainView.cpp:477
+#: src/StelMainView.cpp:463 src/StelMainView.cpp:478
 msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
@@ -3232,19 +3240,19 @@ msgstr ""
 "Nem található OpenGL 2 a rendszeren. Kérjük használjon új hardvert, vagy "
 "használja a MESA-t."
 
-#: src/StelMainView.cpp:505
+#: src/StelMainView.cpp:506
 msgid "Cannot acquire necessary OpenGL resources."
 msgstr "Nem található a szükséges OpenGL 2 erőforrás."
 
-#: src/StelMainView.cpp:574
+#: src/StelMainView.cpp:576
 msgid "Save screenshot"
 msgstr "Képernyő mentése"
 
-#: src/StelMainView.cpp:575
+#: src/StelMainView.cpp:577
 msgid "Full-screen mode"
 msgstr "Teljes képernyős mód"
 
-#: src/StelMainView.cpp:739
+#: src/StelMainView.cpp:741
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -3252,14 +3260,14 @@ msgstr ""
 "Nem megfelelő OpenGL verzió.  Javasoljuk a driver-programok frissítését, a "
 "video-hardver megújítását, vagy az ANGLE opció használatát."
 
-#: src/StelMainView.cpp:742
+#: src/StelMainView.cpp:744
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Az OpenGL verziója nem elégséges. Kérjük frissítse a megjelenítő hardverét "
 "vagy meghajtóprogramját."
 
-#: src/StelMainView.cpp:784
+#: src/StelMainView.cpp:786
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3269,7 +3277,7 @@ msgstr ""
 "fájlban. \n"
 "Hagyjuk figyelmen kívül az üzenetet, és folytassuk alacsonyabb módban?"
 
-#: src/StelMainView.cpp:835
+#: src/StelMainView.cpp:837
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3278,7 +3286,7 @@ msgstr ""
 "Az OpenGL/Mesa alrendszerrel problémák vannak. További infó a log fájlban. \n"
 "Hagyjuk figyelmen kívül az üzenetet, és folytassuk alacsonyabb módban?"
 
-#: src/StelMainView.cpp:891
+#: src/StelMainView.cpp:893
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3287,7 +3295,7 @@ msgstr ""
 "Az OpenGL alrendszerrel problémák vannak. További infó a log fájlban. \n"
 "Hagyjuk figyelmen kívül az üzenetet, és folytassuk alacsonyabb módban?"
 
-#: src/StelMainView.cpp:932
+#: src/StelMainView.cpp:934
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3296,7 +3304,7 @@ msgstr ""
 "Az OpenGL ES alrendszerrel problémák vannak. További infó a log fájlban. \n"
 "Hagyjuk figyelmen kívül az üzenetet, és folytassuk alacsonyabb módban?"
 
-#: src/StelMainView.cpp:1043
+#: src/StelMainView.cpp:1045
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -3571,410 +3579,441 @@ msgstr "Érdekes kettőscsillagok"
 msgid "Interesting variable stars"
 msgstr "Érdekes változócsillagok"
 
-#: src/translations.h:176
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:177
 msgid "Arabic"
 msgstr "Arab"
 
-#: src/translations.h:177
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:179
 msgid "Arabic Moon Stations"
 msgstr "Arab Hold-házak"
 
-#: src/translations.h:178
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:181
 msgid "Aztec"
 msgstr "Azték"
 
-#: src/translations.h:179
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:183
 msgid "Boorong"
 msgstr "Burong"
 
-#: src/translations.h:180
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:185
 msgid "Chinese"
 msgstr "Kínai"
 
-#: src/translations.h:181
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:187
 msgid "Egyptian"
 msgstr "Egyiptomi"
 
-#: src/translations.h:182
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:189
 msgid "Inuit"
 msgstr "Inuit"
 
-#: src/translations.h:183
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:191
 msgid "Indian Vedic"
 msgstr "Indiai védikus"
 
-#: src/translations.h:184
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:193
 msgid "Japanese Moon Stations"
 msgstr "Japán Hold-házak"
 
-#: src/translations.h:185
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:195
 msgid "Kamilaroi/Euahlayi"
 msgstr "Kamilaroi/Euahlayi"
 
-#: src/translations.h:186
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:197
 msgid "Korean"
 msgstr "Koreai"
 
-#: src/translations.h:187
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:199
 msgid "Dakota/Lakota/Nakota"
 msgstr "Dakota/Lakota/Nakota"
 
-#: src/translations.h:188
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:201
 msgid "Macedonian"
 msgstr "Macedón"
 
-#: src/translations.h:189
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:203
 msgid "Maori"
 msgstr "Maori"
 
-#: src/translations.h:190
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:205
 msgid "Mongolian"
 msgstr "Mongol"
 
-#: src/translations.h:191
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:207
 msgid "Navajo"
 msgstr "Navahó"
 
-#: src/translations.h:192
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:209
 msgid "Norse"
 msgstr "Norvég"
 
-#: src/translations.h:193
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:211
 msgid "Ojibwe"
 msgstr "Odzsibve"
 
-#: src/translations.h:194
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:213
 msgid "Polynesian"
 msgstr "Polinéziai"
 
-#: src/translations.h:195
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:215
 msgid "Romanian"
 msgstr "Román"
 
-#: src/translations.h:196
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:217
 msgid "Sami"
 msgstr "Számi"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:198
+#: src/translations.h:219
+msgid "Sardinian"
+msgstr ""
+
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:221
 msgid "Siberian"
 msgstr "Szibériai"
 
-#: src/translations.h:199
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:223
 msgid "Tukano"
 msgstr "Tukán"
 
-#: src/translations.h:200
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:225
 msgid "Tupi-Guarani"
 msgstr "Tupi-guarani"
 
-#: src/translations.h:201
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:227
 msgid "Tongan"
 msgstr "Tongai"
 
-#: src/translations.h:202
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:229
 msgid "Western"
 msgstr "Nyugati"
 
-#: src/translations.h:203
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:231
 msgid "Western (H.A.Rey)"
 msgstr "Nyugati (H.A.Rey)"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:209
+#: src/translations.h:237
 msgid "Guereins"
 msgstr "Guereins"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:211
+#: src/translations.h:239
 msgid "Trees"
 msgstr "Fák"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:213 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1280
+#: src/translations.h:241 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1280
 msgid "Moon"
 msgstr "Hold"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:215
+#: src/translations.h:243
 msgid "Hurricane"
 msgstr "Hurricane Ridge"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:217
+#: src/translations.h:245
 msgid "Ocean"
 msgstr "Óceán"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:219
+#: src/translations.h:247
 msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:221 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1292
+#: src/translations.h:249 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1292
 msgid "Mars"
 msgstr "Mars"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:223 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1295
+#: src/translations.h:251 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1295
 msgid "Jupiter"
 msgstr "Jupiter"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:225 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1298
+#: src/translations.h:253 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1298
 msgid "Saturn"
 msgstr "Szaturnusz"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:227
+#: src/translations.h:255
 msgid "Uranus"
 msgstr "Uránusz"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:229
+#: src/translations.h:257
 msgid "Neptune"
 msgstr "Neptunusz"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:231
+#: src/translations.h:259
 msgid "Geneva"
 msgstr "Genf"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:233
+#: src/translations.h:261
 msgid "Grossmugl"
 msgstr "Grossmugl"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:235
+#: src/translations.h:263
 msgid "Zero Horizon"
 msgstr "Zéró horizont"
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:240
+#: src/translations.h:268
 msgid "Vienna Sterngarten"
 msgstr "Vienna Sterngarten"
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:242
+#: src/translations.h:270
 msgid "Testscene"
 msgstr "Teszt tájkép"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:247
+#: src/translations.h:275
 msgid "Landscape Tour"
 msgstr "Tájkép túra"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:249
+#: src/translations.h:277
 msgid "Partial Lunar Eclipse"
 msgstr "Részleges holdfogyatkozás"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:251
+#: src/translations.h:279
 msgid "Total Lunar Eclipse"
 msgstr "Teljes holdfogyatkozás"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:253
+#: src/translations.h:281
 msgid "Screensaver"
 msgstr "Képernyőkímélő"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:255
+#: src/translations.h:283
 msgid "Solar Eclipse 2009"
 msgstr "2009-es napfogyatkozás"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:257
+#: src/translations.h:285
 msgid "Startup Script"
 msgstr "Induló szkript"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:259
+#: src/translations.h:287
 msgid "Zodiac"
 msgstr "Zodiákus"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:261
+#: src/translations.h:289
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "A Merkúr háromszoros napfelkeltéje és naplementéje"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:263
+#: src/translations.h:291
 msgid "Double eclipse from Deimos in 2017"
 msgstr "Kettős fogyatkozás a Deimosról 2017-ben"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:265
+#: src/translations.h:293
 msgid "Double eclipse from Deimos in 2031"
 msgstr "Kettős fogyatkozás a Deimosról 2031-ben"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:267
+#: src/translations.h:295
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr "Fogyatkozás az Olympus Monsról nézve 2068. január 10-én"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:269
+#: src/translations.h:297
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "A Föld és a Jupiter együttállása 2048-ban"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:271
+#: src/translations.h:299
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr ""
 "A Deimoszról látható 2027-es háromszori áthaladás és kétszeri fogyatkozás"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:273
+#: src/translations.h:301
 msgid "Solar System Screensaver"
 msgstr "Naprendszer képernyőkímélő"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:275
+#: src/translations.h:303
 msgid "Constellations Tour"
 msgstr "Csillagkép túra"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:277
+#: src/translations.h:305
 msgid "Sun from different planets"
 msgstr "A Nap különböző bolygókról nézve"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:279
+#: src/translations.h:307
 msgid "Earth best views from other bodies"
 msgstr "A Föld legjobb nézetei más objektumokról"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:281
+#: src/translations.h:309
 msgid "Transit of Venus"
 msgstr "Vénuszátvonulás"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:283
+#: src/translations.h:311
 msgid "Analemma"
 msgstr "Analemma"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:285
+#: src/translations.h:313
 msgid "Sky Culture Tour"
 msgstr "Égi kultúrák túrája"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:287
+#: src/translations.h:315
 msgid "Earth Events from Mercury"
 msgstr "Földi események a Merkúrról nézve"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:289
+#: src/translations.h:317
 msgid "Earth Events from a floating city on Venus"
 msgstr "Földi események egy Vénusz légkörében lebegő városból"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:291
+#: src/translations.h:319
 msgid "Earth Events from Mars"
 msgstr "Földi események a Marsról nézve"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:293
+#: src/translations.h:321
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr ""
 "A Föld és más bolygók legnagyobb elongációja és oppozíciója a Marsról nézve."
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:295
+#: src/translations.h:323
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr ""
 "A Föld és a Mars legnagyobb látszó távolsága és átvonulása a Callistóról "
 "nézve"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:297
+#: src/translations.h:325
 msgid "Tycho's Supernova"
 msgstr "Tycho szupernovája"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:299
+#: src/translations.h:327
 msgid "Earth and other Planets from Ceres"
 msgstr "A Föld és más bolygók a Ceresről nézve."
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:301
+#: src/translations.h:329
 msgid "Messier Objects Tour"
 msgstr "Messier objektumok túra"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:303
+#: src/translations.h:331
 msgid "Binocular Highlights"
 msgstr "Távcsöves érdekességek"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:305
+#: src/translations.h:333
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr "20 érdekes, szabad szemes kettőscsillag"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:307
+#: src/translations.h:335
 msgid "List of largest known stars"
 msgstr "A legnagyobb ismert csillagok listája"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:309
+#: src/translations.h:337
 msgid "Herschel 400 Tour"
 msgstr "Herschel 400 túra"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:311
+#: src/translations.h:339
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr "Távcsöves mélyégi objektumok"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:313
+#: src/translations.h:341
 msgid "The Jack Bennett Catalog"
 msgstr "Jack Bennett katalógus"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:315
+#: src/translations.h:343
 msgid "Best objects in the New General Catalog"
 msgstr "A New General Catalog legjobb objektumai"
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:321
+#: src/translations.h:349
 msgid "Look around each installed landscape."
 msgstr "Mindegyik felrakott tájkép megtekintése"
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:323
+#: src/translations.h:351
 msgid "Look at each installed sky culture."
 msgstr "A rendelkezésre álló égi kultúrák bemutatása."
 
-#: src/translations.h:324
+#: src/translations.h:352
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Részleges holdfogyatkozás bemutatása"
 
-#: src/translations.h:325
+#: src/translations.h:353
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Teljes holdfogyatkozás bemutatása"
 
-#: src/translations.h:326
+#: src/translations.h:354
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr ""
 "Az égbolt lassú, vég nélküli bejárása, véletlenszerűen választott "
 "objektumokkal"
 
-#: src/translations.h:327
+#: src/translations.h:355
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr "Teljes napfogyatkozás bemutatása (2009, Rangpur, Banglades)"
 
-#: src/translations.h:328
+#: src/translations.h:356
 msgid "Script which runs automatically at startup"
 msgstr "Induláskor automatikusan lefutó szkript"
 
-#: src/translations.h:329
+#: src/translations.h:357
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -3983,7 +4022,7 @@ msgstr ""
 "Ez a szkript az Állatövi csillagképeket mutatja be, ahogy a Nap áthalad "
 "rajtuk az év során."
 
-#: src/translations.h:330
+#: src/translations.h:358
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -3991,7 +4030,7 @@ msgstr ""
 "A Merkúr sajátos pályája és forgása miatt a Nap bizonyos helyeken napi "
 "háromszor látszik felkelni és lenyugodni."
 
-#: src/translations.h:331
+#: src/translations.h:359
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -3999,7 +4038,7 @@ msgstr ""
 "Épp mielőtt a Mars eltakarná a Napot, a Phobosz előkerül. 2017. április 26-"
 "án, a Skorpió és a Nyilas között."
 
-#: src/translations.h:332
+#: src/translations.h:360
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -4007,11 +4046,11 @@ msgstr ""
 "Épp mielőtt a Mars eltakarná a Napot, a Phobosz előkerül. 2031. július 23-"
 "án, a Bika és az Ikrek között."
 
-#: src/translations.h:333
+#: src/translations.h:361
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr "A Phobos a Nap előtt az Olympus Monsról nézve 2068. január 10-én."
 
-#: src/translations.h:334
+#: src/translations.h:362
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
@@ -4021,7 +4060,7 @@ msgstr ""
 "mindkettővel egyszerre ritkán. Egy ilyen esemény 2048. január 23-án lesz. "
 "Tényleges sebességgel mutatva."
 
-#: src/translations.h:335
+#: src/translations.h:363
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -4036,35 +4075,35 @@ msgstr ""
 "sötétségben halad a Mars és a Deimos között. Amikor a Phobos előtűnik a Mars "
 "mögül, fogyatkozásban látszik a Mars árnyéka miatt."
 
-#: src/translations.h:336
+#: src/translations.h:364
 msgid ""
 "Screensaver of various happenings in the Solar System. 261 events in all!"
 msgstr "Képernyővédő a Naprendszer 261 eseményének bemutatásával."
 
-#: src/translations.h:337
+#: src/translations.h:365
 msgid "A tour of the western constellations."
 msgstr "Nyugati csillagképek meglátogatása"
 
-#: src/translations.h:338
+#: src/translations.h:366
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "A Nap a nagyobb bolygókról és a Plutóról nézve."
 
-#: src/translations.h:339
+#: src/translations.h:367
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr "A Föld legjobb látványa a Naprendszer égitestjeiről a 21. században."
 
-#: src/translations.h:340
+#: src/translations.h:368
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr "Vénuszátvonulás, Sydney, Ausztrália, 2012. június 6."
 
-#: src/translations.h:341
+#: src/translations.h:369
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr "Az analemma bemutatása - a Nap útja az égbolton az év során."
 
-#: src/translations.h:342
+#: src/translations.h:370
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -4072,7 +4111,7 @@ msgstr ""
 "A Tycho Brahe által megfigyelt szupernóva fellobbanása 1572-ben.  (a "
 "\"szupernóva\" bővítményt be kell tölteni hozzá)"
 
-#: src/translations.h:343
+#: src/translations.h:371
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
@@ -4080,7 +4119,7 @@ msgstr ""
 "A Föld és más bolygók legnagyobb elongációja és oppozíciója a Marstól (2000-"
 "3000)"
 
-#: src/translations.h:344
+#: src/translations.h:372
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -4092,7 +4131,7 @@ msgstr ""
 "melyik a Jupiter sugárzási övezetén kívül van, így egy lehetséges emberi "
 "kolonizáció célpontja."
 
-#: src/translations.h:345
+#: src/translations.h:373
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
@@ -4100,11 +4139,11 @@ msgstr ""
 "A Föld és más bolygók legnagyobb elongációja és oppozíciója a Cerestől (2000-"
 "3000)"
 
-#: src/translations.h:346
+#: src/translations.h:374
 msgid "A tour of Messier Objects"
 msgstr "Messier objektumok túra"
 
-#: src/translations.h:347
+#: src/translations.h:375
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
@@ -4113,7 +4152,7 @@ msgstr ""
 "Távcsővel felfedezhető érdekes égi objektumok. Az adatok Gary Seronik "
 "könyvéből származnak."
 
-#: src/translations.h:348
+#: src/translations.h:376
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list "
 "has been collected by Jerry Lodriguss and published in Sky & Telescope "
@@ -4122,15 +4161,15 @@ msgstr ""
 "A szkript kirándulást tesz a Jerry Lodriguss által összeállított \"Húsz "
 "kettőscsillag\" listán, amit a Sky & Telescope 09/2014.  számban publikáltak."
 
-#: src/translations.h:349
+#: src/translations.h:377
 msgid "This script helps you make an excursion around largest known stars."
 msgstr "A szkript a legnagyobb ismert csillagok között tesz kirándulást."
 
-#: src/translations.h:350
+#: src/translations.h:378
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr "A Herschel 400 katalógus érdekes objektumai."
 
-#: src/translations.h:351
+#: src/translations.h:379
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
@@ -4140,7 +4179,7 @@ msgstr ""
 "távcsöves megfigyelés számára.    A szkript ezek közül 31 objektumot mutat "
 "be rektaszcenció szerinti sorrendben (2000.0)."
 
-#: src/translations.h:352
+#: src/translations.h:380
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects. The Bennett catalog "
 "was contributed by Auke Slotegraaf."
@@ -4148,7 +4187,7 @@ msgstr ""
 "A Jack Bennett katalógus déli mélyégi objektumokat tartalmaz.   Auke "
 "Slotegraaf jóvoltából."
 
-#: src/translations.h:353
+#: src/translations.h:381
 msgid ""
 "This list by A.J. Crayon and Steve Coe is used by members of the Saguaro "
 "Astronomy Club of Phoenix, AZ. for the Best of the NGC achievement award."
@@ -4156,143 +4195,143 @@ msgstr ""
 "A listát A.J. Crayon és Steve Coe állította össze, akik a  Saguaro Astronomy "
 "Club of Phoenix tagjai."
 
-#: src/translations.h:357
+#: src/translations.h:385
 msgid "&Undo"
 msgstr "&Visszavonás"
 
-#: src/translations.h:358
+#: src/translations.h:386
 msgid "&Redo"
 msgstr "&Újra"
 
-#: src/translations.h:359
+#: src/translations.h:387
 msgid "Cu&t"
 msgstr "Ki&vágás"
 
-#: src/translations.h:360
+#: src/translations.h:388
 msgid "&Copy"
 msgstr "&Másolás"
 
-#: src/translations.h:361
+#: src/translations.h:389
 msgid "&Paste"
 msgstr "&Beillesztés"
 
-#: src/translations.h:362 plugins/Oculars/src/ui_ocularDialog.h:1150
+#: src/translations.h:390 plugins/Oculars/src/ui_ocularDialog.h:1150
 #: plugins/Oculars/src/ui_ocularDialog.h:1160
 #: plugins/Oculars/src/ui_ocularDialog.h:1167
 #: plugins/Oculars/src/ui_ocularDialog.h:1184
 msgid "Delete"
 msgstr "Törlés"
 
-#: src/translations.h:363
+#: src/translations.h:391
 msgid "Select All"
 msgstr "Összes kijelölése"
 
-#: src/translations.h:364
+#: src/translations.h:392
 msgid "Look in:"
 msgstr "Keresés:"
 
-#: src/translations.h:365
+#: src/translations.h:393
 msgid "Directory:"
 msgstr "Mappa:"
 
-#: src/translations.h:366
+#: src/translations.h:394
 msgid "Folder"
 msgstr "Mappa"
 
-#: src/translations.h:367
+#: src/translations.h:395
 msgid "&Choose"
 msgstr "&Választ"
 
-#: src/translations.h:368 src/ui_configurationDialog.h:1423
+#: src/translations.h:396 src/ui_configurationDialog.h:1423
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "Cancel"
 msgstr "Mégsem"
 
-#: src/translations.h:369
+#: src/translations.h:397
 msgid "&Cancel"
 msgstr ""
 
-#: src/translations.h:370
+#: src/translations.h:398
 msgid "Files of type:"
 msgstr "Fájltípus:"
 
-#: src/translations.h:371
+#: src/translations.h:399
 msgid "Date Modified"
 msgstr "Módosítás dátuma"
 
-#: src/translations.h:372
+#: src/translations.h:400
 msgid "Directories"
 msgstr "Mappák"
 
-#: src/translations.h:373
+#: src/translations.h:401
 msgid "Computer"
 msgstr "Számítógép"
 
-#: src/translations.h:374
+#: src/translations.h:402
 msgid "&Open"
 msgstr "&Megnyit"
 
-#: src/translations.h:375
+#: src/translations.h:403
 msgid "File &name:"
 msgstr "Fájl&név:"
 
-#: src/translations.h:376
+#: src/translations.h:404
 msgid "Copy &Link Location"
 msgstr "&Link másolása"
 
-#: src/translations.h:377
+#: src/translations.h:405
 msgid "Abort"
 msgstr "Megszakít"
 
-#: src/translations.h:378
+#: src/translations.h:406
 msgid "Ignore"
 msgstr "Kihagy"
 
-#: src/translations.h:379
+#: src/translations.h:407
 msgid "&Basic colors"
 msgstr ""
 
-#: src/translations.h:380
+#: src/translations.h:408
 msgid "&Pick Screen Color"
 msgstr ""
 
-#: src/translations.h:381
+#: src/translations.h:409
 msgid "&Custom colors"
 msgstr ""
 
-#: src/translations.h:382
+#: src/translations.h:410
 msgid "&Add to Custom Colors"
 msgstr ""
 
-#: src/translations.h:383
+#: src/translations.h:411
 msgid "Hu&e:"
 msgstr ""
 
-#: src/translations.h:384
+#: src/translations.h:412
 msgid "&Sat:"
 msgstr ""
 
-#: src/translations.h:385
+#: src/translations.h:413
 msgid "&Val:"
 msgstr ""
 
-#: src/translations.h:386
+#: src/translations.h:414
 msgid "&Red:"
 msgstr ""
 
-#: src/translations.h:387
+#: src/translations.h:415
 msgid "&Green:"
 msgstr ""
 
-#: src/translations.h:388
+#: src/translations.h:416
 msgid "Bl&ue:"
 msgstr ""
 
-#: src/translations.h:389
+#: src/translations.h:417
 msgid "Select Color"
 msgstr "Szín kiválasztása"
 
-#: src/translations.h:390
+#: src/translations.h:418
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "Kurzorpozíció %1, %2 kilépés: ESC"
@@ -13719,23 +13758,23 @@ msgstr ""
 "Támogatás a Launchpad weboldalon (angolul). A téma címében legyen benne a(z) "
 "\"%1\"."
 
-#: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:107
+#: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:99
 msgid "Start date greater than end date!"
 msgstr "A kezdődátum nagyobb, mint a végdátum!"
 
-#: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:111
+#: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:103
 msgid "Time interval must be less than one year!"
 msgstr "Az időintervallum legfeljebb 1 év lehet."
 
-#: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:186
+#: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:178
 msgid "ZHR"
 msgstr "ZHR"
 
-#: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:187
+#: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:179
 msgid "Data Type"
 msgstr "Adattípus"
 
-#: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:188
+#: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:180
 msgid "Peak"
 msgstr "Csúcs"
 
