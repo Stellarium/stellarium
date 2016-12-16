@@ -300,13 +300,37 @@ public:
 	static void setOrbitColor(const Vec3f& oc) {orbitColor = oc;}
 	static const Vec3f& getOrbitColor() {return orbitColor;}
 
-	static Vec3f orbitPlanetsColor;
-	static void setPlanetOrbitColor(const Vec3f& oc) { orbitPlanetsColor = oc;}
-	static const Vec3f& getPlanetOrbitColor() {return orbitPlanetsColor;}
+	static Vec3f orbitMajorPlanetsColor;
+	static void setMajorPlanetOrbitColor(const Vec3f& oc) { orbitMajorPlanetsColor = oc;}
+	static const Vec3f& getMajorPlanetOrbitColor() {return orbitMajorPlanetsColor;}
 
-	static Vec3f orbitAsteroidsColor;
-	static void setAsteroidOrbitColor(const Vec3f& oc) { orbitAsteroidsColor = oc;}
-	static const Vec3f& getAsteroidOrbitColor() {return orbitAsteroidsColor;}
+	static Vec3f orbitMoonsColor;
+	static void setMoonOrbitColor(const Vec3f& oc) { orbitMoonsColor = oc;}
+	static const Vec3f& getMoonOrbitColor() {return orbitMoonsColor;}
+
+	static Vec3f orbitMinorPlanetsColor;
+	static void setMinorPlanetOrbitColor(const Vec3f& oc) { orbitMinorPlanetsColor = oc;}
+	static const Vec3f& getMinorPlanetOrbitColor() {return orbitMinorPlanetsColor;}
+
+	static Vec3f orbitDwarfPlanetsColor;
+	static void setDwarfPlanetOrbitColor(const Vec3f& oc) { orbitDwarfPlanetsColor = oc;}
+	static const Vec3f& getDwarfPlanetOrbitColor() {return orbitDwarfPlanetsColor;}
+
+	static Vec3f orbitCubewanosColor;
+	static void setCubewanoOrbitColor(const Vec3f& oc) { orbitCubewanosColor = oc;}
+	static const Vec3f& getCubewanoOrbitColor() {return orbitCubewanosColor;}
+
+	static Vec3f orbitPlutinosColor;
+	static void setPlutinoOrbitColor(const Vec3f& oc) { orbitPlutinosColor = oc;}
+	static const Vec3f& getPlutinoOrbitColor() {return orbitPlutinosColor;}
+
+	static Vec3f orbitScatteredDiscObjectsColor;
+	static void setScatteredDiscObjectOrbitColor(const Vec3f& oc) { orbitScatteredDiscObjectsColor = oc;}
+	static const Vec3f& getScatteredDiscObjectOrbitColor() {return orbitScatteredDiscObjectsColor;}
+
+	static Vec3f orbitOortCloudObjectsColor;
+	static void setOortCloudObjectOrbitColor(const Vec3f& oc) { orbitOortCloudObjectsColor = oc;}
+	static const Vec3f& getOortCloudObjectOrbitColor() {return orbitOortCloudObjectsColor;}
 
 	static Vec3f orbitCometsColor;
 	static void setCometOrbitColor(const Vec3f& oc) { orbitCometsColor = oc;}

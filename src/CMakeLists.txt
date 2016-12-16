@@ -357,7 +357,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/DateTimeDialog.hpp
           gui/DateTimeDialog.cpp
           gui/ViewDialog.hpp
-          gui/ViewDialog.cpp          
+          gui/ViewDialog.cpp
           gui/SearchDialog.hpp
           gui/SearchDialog.cpp
           gui/ConfigurationDialog.hpp
@@ -368,6 +368,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/AtmosphereDialog.cpp
           gui/ConfigureDSOColorsDialog.hpp
           gui/ConfigureDSOColorsDialog.cpp
+          gui/ConfigureOrbitColorsDialog.hpp
+          gui/ConfigureOrbitColorsDialog.cpp
           gui/GreatRedSpotDialog.hpp
           gui/GreatRedSpotDialog.cpp
           gui/CustomDeltaTEquationDialog.hpp
@@ -397,6 +399,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/bookmarksDialog.ui
           gui/addRemoveLandscapesDialog.ui
           gui/dsoColorsDialog.ui
+          gui/orbitColorsDialog.ui
      )
 
      IF(ENABLE_SCRIPTING)

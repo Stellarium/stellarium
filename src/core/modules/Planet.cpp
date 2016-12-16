@@ -49,8 +49,14 @@
 
 Vec3f Planet::labelColor = Vec3f(0.4f,0.4f,0.8f);
 Vec3f Planet::orbitColor = Vec3f(1.0f,0.6f,1.0f);
-Vec3f Planet::orbitPlanetsColor = Vec3f(1.0f,0.6f,1.0f);
-Vec3f Planet::orbitAsteroidsColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitMajorPlanetsColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitMoonsColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitMinorPlanetsColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitDwarfPlanetsColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitCubewanosColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitPlutinosColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitScatteredDiscObjectsColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitOortCloudObjectsColor = Vec3f(1.0f,0.6f,1.0f);
 Vec3f Planet::orbitCometsColor = Vec3f(1.0f,0.6f,1.0f);
 Vec3f Planet::orbitMercuryColor = Vec3f(1.0f,0.6f,1.0f);
 Vec3f Planet::orbitVenusColor = Vec3f(1.0f,0.6f,1.0f);
@@ -2041,16 +2047,28 @@ Vec3f Planet::getCurrentOrbitColor()
 			switch (pType)
 			{
 				case isMoon:
+					orbColor = orbitMoonsColor;
+					break;
 				case isPlanet:
-					orbColor = orbitPlanetsColor;
+					orbColor = orbitMajorPlanetsColor;
 					break;
 				case isAsteroid:
+					orbColor = orbitMinorPlanetsColor;
+					break;
 				case isDwarfPlanet:
+					orbColor = orbitDwarfPlanetsColor;
+					break;
 				case isCubewano:
+					orbColor = orbitCubewanosColor;
+					break;
 				case isPlutino:
+					orbColor = orbitPlutinosColor;
+					break;
 				case isSDO:
+					orbColor = orbitScatteredDiscObjectsColor;
+					break;
 				case isOCO:
-					orbColor = orbitAsteroidsColor;
+					orbColor = orbitOortCloudObjectsColor;
 					break;
 				case isComet:
 					orbColor = orbitCometsColor;
