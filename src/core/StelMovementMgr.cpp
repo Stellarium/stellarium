@@ -871,7 +871,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 //			}
 		}
 		move.coef+=move.speed*deltaTime*1000;
-		qDebug() << "updateVisionVector: setViewUpvectorJ2000 L813";
+		//qDebug() << "updateVisionVector: setViewUpvectorJ2000 L813";
 		setViewUpVectorJ2000(move.aimUp);
 		if (move.coef>=1.)
 		{
@@ -972,7 +972,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 			StelUtils::spheToRect(lon, lat, v);
 
 			setViewDirectionJ2000(mountFrameToJ2000(v));
-			qDebug() << "setViewUpVector() L930";
+			//qDebug() << "setViewUpVector() L930";
 			setViewUpVectorJ2000(mountFrameToJ2000(Vec3d(0., 0., 1.))); // Does not disturb to reassure this former default.
 		}
 		else // not tracking or no selection
