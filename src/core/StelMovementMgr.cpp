@@ -16,7 +16,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
- */
+ *
+ * TODO: Rewrite this class. It has been much of the easy feel of Stellarium, but is terribly complicated to maintain.
+ * Very likely some things can be  made clearer, more efficient, use modern Qt things instead of manual solutions, etc.
+ * Esp. the up-vector requirements for zenith views cause lots of headache.
+ * In case we want to have other mount modes (ecliptical, galactical, ...), several parts have to be extended.
+*/
 
 #include "StelMovementMgr.hpp"
 #include "StelObjectMgr.hpp"
@@ -71,11 +76,16 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, flagAutoZoom(false)
 	, flagAutoZoomOutResetsDirection(false)
 	, mountMode(MountAltAzimuthal)
+	, initViewPos(1., 0., 0.)
+	, initViewUp(0., 0., 1.)
+	, viewDirectionJ2000(0., 1., 0)
+	, viewDirectionMountFrame(0., 1., 0)
+	, upVectorMountFrame(0.,0.,1.)
+
 	, dragTriggerDistance(4.f)
 	, viewportOffsetTimeline(NULL)
 {
 	setObjectName("StelMovementMgr");
-	upVectorMountFrame.set(0.,0.,1.);
 }
 
 StelMovementMgr::~StelMovementMgr()
@@ -107,6 +117,8 @@ void StelMovementMgr::init()
 	initFov = conf->value("navigation/init_fov",60.f).toFloat();
 	currentFov = initFov;
 
+
+	// we must set mount mode before potentially loading zenith views etc.
 	QString tmpstr = conf->value("navigation/viewing_mode", "horizon").toString();
 	if (tmpstr=="equator")
 		setMountMode(StelMovementMgr::MountEquinoxEquatorial);
@@ -122,14 +134,15 @@ void StelMovementMgr::init()
 	}
 
 	// With a special code of init_view_position=x/y/1 (or actually, anything equal or larger to 1) you can set zenith into the center and atan2(x/y) to bottom of screen.
-	// examples: 1/0->0         NORTH is bottom
-	//           -1/0 ->180     SOUTH is bottom
-	//            0/-1 --> 90   EAST is bottom
-	//            0/1  ->270    WEST is bottom
-	Vec3f tmp = StelUtils::strToVec3f(conf->value("navigation/init_view_pos").toString());
+	// examples:  1/0   ->0     NORTH is bottom
+	//           -1/0   ->180   SOUTH is bottom
+	//            0/-1  -> 90   EAST is bottom
+	//            0/1   ->270   WEST is bottom
+	Vec3f tmp = StelUtils::strToVec3f(conf->value("navigation/init_view_pos", "1,0,0").toString());
+	//qDebug() << "initViewPos" << tmp[0] << "/" << tmp[1] << "/" << tmp[2];
 	if (tmp[2]>=1)
 	{
-		qDebug() << "Special zenith setup:";
+		//qDebug() << "Special zenith setup:";
 		setViewDirectionJ2000(mountFrameToJ2000(Vec3d(0., 0., 1.)));
 		initViewPos.set(0., 0., 1.);
 
@@ -140,13 +153,21 @@ void StelMovementMgr::init()
 		upVectorMountFrame.set(tmp[0], tmp[1], 0.);
 		upVectorMountFrame.normalize();
 		initViewUp=upVectorMountFrame;
-		qDebug() << "InitViewUp: " << initViewUp;
+		//qDebug() << "InitViewUp: " << initViewUp;
 	}
 	else
 	{
+		//qDebug() << "simpler view vectors...";
+		//qDebug() << "   initViewPos becomes " << tmp[0] << "/" << tmp[1] << "/" << tmp[2];
 		initViewPos.set(tmp[0], tmp[1], tmp[2]);
-		initViewUp.set(0., 0., 1.);
+		//qDebug() << "   initViewPos is " << initViewPos[0] << "/" << initViewPos[1] << "/" << initViewPos[2];
 		viewDirectionJ2000 = core->altAzToJ2000(initViewPos, StelCore::RefractionOff);
+		//qDebug() << "viewDirectionJ2000: " << viewDirectionJ2000[0] << "/" << viewDirectionJ2000[1] << "/" << viewDirectionJ2000[2];
+
+		//qDebug() << "   up2000 initViewUp becomes " << initViewUp[0] << "/" << initViewUp[1] << "/" << initViewUp[2];
+		setViewUpVector(initViewUp);
+
+		//qDebug() << "   upVectorMountFrame becomes " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
 	}
 
 
