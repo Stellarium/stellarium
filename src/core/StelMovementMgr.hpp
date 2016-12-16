@@ -243,15 +243,15 @@ public slots:
 	void zoomIn(bool);
 	void zoomOut(bool);
 
-	//! Look immediately towards East.
+	//! Look immediately towards East, but keep altitude. When looking to the zenith already, turn eastern horizon to screen bottom.
 	void lookEast(void);
-	//! Look immediately towards West.
+	//! Look immediately towards West, but keep altitude. When looking to the zenith already, turn western horizon to screen bottom.
 	void lookWest(void);
-	//! Look immediately towards North.
+	//! Look immediately towards North, but keep altitude. When looking to the zenith already, turn northern horizon to screen bottom.
 	void lookNorth(void);
-	//! Look immediately towards South.
+	//! Look immediately towards South, but keep altitude. When looking to the zenith already, turn southern horizon to screen bottom.
 	void lookSouth(void);
-	//! Look immediately towards Zenith.
+	//! Look immediately towards Zenith, turning southern horizon to screen bottom.
 	void lookZenith(void);
 	//! Look immediately towards North Celestial pole.
 	void lookTowardsNCP(void);

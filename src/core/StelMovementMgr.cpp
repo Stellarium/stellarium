@@ -60,6 +60,7 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, keyZoomSpeed(0.00025)
 	, flagMoveSlow(false)
 	, movementsSpeedFactor(1.0)
+	, move()
 	, flagAutoMove(false)
 	, zoomingMode(ZoomNone)
 	, deltaAlt(0.)
@@ -78,12 +79,13 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, mountMode(MountAltAzimuthal)
 	, initViewPos(1., 0., 0.)
 	, initViewUp(0., 0., 1.)
-	, viewDirectionJ2000(0., 1., 0)
-	, viewDirectionMountFrame(0., 1., 0)
+	, viewDirectionJ2000(0., 1., 0.)
+	, viewDirectionMountFrame(0., 1., 0.)
 	, upVectorMountFrame(0.,0.,1.)
-
 	, dragTriggerDistance(4.f)
 	, viewportOffsetTimeline(NULL)
+	, oldViewportOffset(0.0f, 0.0f)
+	, targetViewportOffset(0.0f, 0.0f)
 {
 	setObjectName("StelMovementMgr");
 }
@@ -656,6 +658,13 @@ void StelMovementMgr::lookEast(void)
 	cy = M_PI/2.;
 	StelUtils::spheToRect(cy, cx, dir);
 	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
+	//qDebug() << "Setting East at Alt:" << cx*180./M_PI;
+	if ((mountMode==MountAltAzimuthal) && (cx>M_PI/2-0.0001) && (upVectorMountFrame[2]<0.001))
+	{
+		// Special case: we already look into zenith (with rounding tolerance). Bring East to bottom of screen.
+		upVectorMountFrame.set(0., -1., 0.);
+		//qDebug() << "lookEast: better Up is " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
+	}
 }
 
 void StelMovementMgr::lookWest(void)
@@ -666,6 +675,13 @@ void StelMovementMgr::lookWest(void)
 	cy = 3.*M_PI/2.;
 	StelUtils::spheToRect(cy, cx, dir);
 	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
+	//qDebug() << "Setting West at Alt:" << cx*180./M_PI;
+	if ((mountMode==MountAltAzimuthal) &&  (cx>M_PI/2-0.0001) && (upVectorMountFrame[2]<0.001))
+	{
+		// Special case: we already look into zenith (with rounding tolerance). Bring West to bottom of screen.
+		upVectorMountFrame.set(0., 1., 0.);
+		//qDebug() << "lookEast: better Up is " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
+	}
 }
 
 void StelMovementMgr::lookNorth(void)
@@ -673,9 +689,18 @@ void StelMovementMgr::lookNorth(void)
 	float cx, cy;
 	Vec3f dir;
 	StelUtils::rectToSphe(&cy,&cx,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
+
 	cy = M_PI;
 	StelUtils::spheToRect(cy, cx, dir);
 	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
+
+	//qDebug() << "Setting North at Alt:" << cx*180./M_PI;
+	if ((mountMode==MountAltAzimuthal) &&  (cx>M_PI/2-0.0001) && (upVectorMountFrame[2]<0.001))
+	{
+		// Special case: we already look into zenith (with rounding tolerance). Bring North to bottom of screen.
+		upVectorMountFrame.set(1., 0., 0.);
+		//qDebug() << "lookNorth: better Up is " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
+	}
 }
 
 void StelMovementMgr::lookSouth(void)
@@ -683,16 +708,33 @@ void StelMovementMgr::lookSouth(void)
 	float cx, cy;
 	Vec3f dir;
 	StelUtils::rectToSphe(&cy,&cx,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
+
 	cy = 0.;
 	StelUtils::spheToRect(cy, cx, dir);
 	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
+
+	//qDebug() << "Setting South at Alt:" << cx*180./M_PI;
+	if ((mountMode==MountAltAzimuthal) &&  (cx>M_PI/2-0.0001) && (upVectorMountFrame[2]<0.001))
+	{
+		// Special case: we already look into zenith (with rounding tolerance). Bring South to bottom of screen.
+		upVectorMountFrame.set(-1., 0., 0.);
+		//qDebug() << "lookSouth: better Up is " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
+	}
 }
 
 void StelMovementMgr::lookZenith(void)
 {
 	Vec3f dir;
 	StelUtils::spheToRect(M_PI, M_PI/2., dir);
+	qDebug() << "lookZenith: Up is " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
 	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
+	//qDebug() << "lookZenith: View is " << viewDirectionMountFrame[0] << "/" << viewDirectionMountFrame[1] << "/" << viewDirectionMountFrame[2];
+	if (mountMode==MountAltAzimuthal)
+	{	// ensure a stable up vector that makes the bottom of the screen point south.
+		upVectorMountFrame.set(-1., 0., 0.);
+		//qDebug() << "lookZenith: better Up is " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
+	}
+
 }
 
 void StelMovementMgr::lookTowardsNCP(void)
@@ -841,33 +883,15 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		// Use a smooth function
 		const float smooth = 4.f; // (empirically tested)
 		double c;
-		if (zoomingMode==ZoomIn)
-		{
-			c=(move.coef>.9 ? 1. : 1. - pow(1.-1.11*move.coef,3.));
-/*			if (move.coef>.9)
-			{
-				c = 1.;
-			}
-			else
-			{
-				c = 1. - pow(1.-1.11*move.coef,3.);
-			}
-*/		}
-		else if (zoomingMode==ZoomOut)
-		{
-			c=(move.coef<0.1 ? 0. : pow(1.11*(move.coef-.1),3.));
-/*			if (move.coef<0.1)
-			{
+		switch (zoomingMode){
+			case ZoomIn:
+				c=(move.coef>.9 ? 1. : 1. - pow(1.-1.11*move.coef,3.)); break;
+			case ZoomOut:
 				// keep in view at first as zoom out
-				c = 0;
-			}
-			else
-			{
-				c =  pow(1.11*(move.coef-.1),3.);
-			}
-*/		}
-		else
-			c = std::atan(smooth * 2.*move.coef-smooth)/std::atan(smooth)/2+0.5;
+				c=(move.coef<0.1 ? 0. : pow(1.11*(move.coef-.1),3.)); break;
+			default:
+				c = std::atan(smooth * 2.*move.coef-smooth)/std::atan(smooth)/2+0.5;
+		}
 
 		// 2016-03: In case of azimuthal moves, it is not useful to compute anything from J2000 coordinates.
 		// Imagine a slow AltAz move during speedy timelapse: Aim will move!
@@ -1232,9 +1256,12 @@ void StelMovementMgr::panView(const double deltaAz, const double deltaAlt)
 		azVision-=deltaAz;
 	if (deltaAlt)
 	{
-		if (altVision+deltaAlt <= M_PI_2 && altVision+deltaAlt >= -M_PI_2) altVision+=deltaAlt;
-		if (altVision+deltaAlt >  M_PI_2) altVision =  M_PI_2 - 0.000001; // Prevent bug: manual pans (keyboard or mouse!) can never really reach the zenith, but we can accept this.
-		if (altVision+deltaAlt < -M_PI_2) altVision = -M_PI_2 + 0.000001;
+		//if (altVision+deltaAlt <= M_PI_2 && altVision+deltaAlt >= -M_PI_2)
+			altVision+=deltaAlt;
+		//if (altVision+deltaAlt >  M_PI_2) altVision =  M_PI_2 - 0.000001; // Prevent bug: manual pans (keyboard or mouse!) can never really reach the zenith, but we can accept this.
+		//if (altVision+deltaAlt < -M_PI_2) altVision = -M_PI_2 + 0.000001;
+		if (altVision >  M_PI_2) altVision =  M_PI_2 - 0.000001; // Prevent bug: manual pans (keyboard or mouse!) can never really reach the zenith, but we can accept this.
+		if (altVision < -M_PI_2) altVision = -M_PI_2 + 0.000001;
 	}
 
 	// recalc all the position variables
