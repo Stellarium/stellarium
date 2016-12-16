@@ -178,17 +178,23 @@ void SolarSystem::init()
 	QString defaultColor = conf->value("color/default_color").toString();
 	setLabelsColor(StelUtils::strToVec3f(conf->value("color/planet_names_color", defaultColor).toString()));
 	setOrbitsColor(StelUtils::strToVec3f(conf->value("color/sso_orbits_color", defaultColor).toString()));
-	setPlanetsOrbitsColor(StelUtils::strToVec3f(conf->value("color/planet_orbits_color", defaultColor).toString()));
-	setAsteroidsOrbitsColor(StelUtils::strToVec3f(conf->value("color/asteroid_orbits_color", defaultColor).toString()));
-	setCometsOrbitsColor(StelUtils::strToVec3f(conf->value("color/comet_orbits_color", defaultColor).toString()));
+	setMajorPlanetsOrbitsColor(StelUtils::strToVec3f(conf->value("color/major_planet_orbits_color", "0.7,0.2,0.2").toString()));
+	setMoonsOrbitsColor(StelUtils::strToVec3f(conf->value("color/moon_orbits_color", "0.7,0.2,0.2").toString()));
+	setMinorPlanetsOrbitsColor(StelUtils::strToVec3f(conf->value("color/minor_planet_orbits_color", "0.7,0.5,0.5").toString()));
+	setDwarfPlanetsOrbitsColor(StelUtils::strToVec3f(conf->value("color/dwarf_planet_orbits_color", "0.7,0.5,0.5").toString()));
+	setCubewanosOrbitsColor(StelUtils::strToVec3f(conf->value("color/cubewano_orbits_color", "0.7,0.5,0.5").toString()));
+	setPlutinosOrbitsColor(StelUtils::strToVec3f(conf->value("color/plutino_orbits_color", "0.7,0.5,0.5").toString()));
+	setScatteredDiskObjectsOrbitsColor(StelUtils::strToVec3f(conf->value("color/sdo_orbits_color", "0.7,0.5,0.5").toString()));
+	setOortCloudObjectsOrbitsColor(StelUtils::strToVec3f(conf->value("color/oco_orbits_color", "0.7,0.5,0.5").toString()));
+	setCometsOrbitsColor(StelUtils::strToVec3f(conf->value("color/comet_orbits_color", "0.7,0.8,0.8").toString()));
 	setMercuryOrbitColor(StelUtils::strToVec3f(conf->value("color/mercury_orbit_color", "0.5,0.5,0.5").toString()));
 	setVenusOrbitColor(StelUtils::strToVec3f(conf->value("color/venus_orbit_color", "0.9,0.9,0.7").toString()));
 	setEarthOrbitColor(StelUtils::strToVec3f(conf->value("color/earth_orbit_color", "0.0,0.0,1.0").toString()));
 	setMarsOrbitColor(StelUtils::strToVec3f(conf->value("color/mars_orbit_color", "0.8,0.4,0.1").toString()));
 	setJupiterOrbitColor(StelUtils::strToVec3f(conf->value("color/jupiter_orbit_color", "1.0,0.6,0.0").toString()));
 	setSaturnOrbitColor(StelUtils::strToVec3f(conf->value("color/saturn_orbit_color", "1.0,0.8,0.0").toString()));
-	setUranusOrbitColor(StelUtils::strToVec3f(conf->value("color/uranus_orbit_color", "0.5,0.8,0.9").toString()));
-	setNeptuneOrbitColor(StelUtils::strToVec3f(conf->value("color/neptune_orbit_color", "0.1,0.6,1.0").toString()));
+	setUranusOrbitColor(StelUtils::strToVec3f(conf->value("color/uranus_orbit_color", "0.0,0.7,1.0").toString()));
+	setNeptuneOrbitColor(StelUtils::strToVec3f(conf->value("color/neptune_orbit_color", "0.0,0.3,1.0").toString()));
 	setTrailsColor(StelUtils::strToVec3f(conf->value("color/object_trails_color", defaultColor).toString()));
 	setPointerColor(StelUtils::strToVec3f(conf->value("color/planet_pointers_color", "1.0,0.3,0.3").toString()));
 
@@ -1707,24 +1713,84 @@ Vec3f SolarSystem::getOrbitsColor(void) const
 	return Planet::getOrbitColor();
 }
 
-void SolarSystem::setPlanetsOrbitsColor(const Vec3f& c)
+void SolarSystem::setMajorPlanetsOrbitsColor(const Vec3f &c)
 {
-	Planet::setPlanetOrbitColor(c);
+	Planet::setMajorPlanetOrbitColor(c);
 }
 
-Vec3f SolarSystem::getPlanetsOrbitsColor(void) const
+Vec3f SolarSystem::getMajorPlanetsOrbitsColor(void) const
 {
-	return Planet::getPlanetOrbitColor();
+	return Planet::getMajorPlanetOrbitColor();
 }
 
-void SolarSystem::setAsteroidsOrbitsColor(const Vec3f& c)
+void SolarSystem::setMinorPlanetsOrbitsColor(const Vec3f &c)
 {
-	Planet::setAsteroidOrbitColor(c);
+	Planet::setMinorPlanetOrbitColor(c);
 }
 
-Vec3f SolarSystem::getAsteroidsOrbitsColor(void) const
+Vec3f SolarSystem::getMinorPlanetsOrbitsColor(void) const
 {
-	return Planet::getAsteroidOrbitColor();
+	return Planet::getMinorPlanetOrbitColor();
+}
+
+void SolarSystem::setDwarfPlanetsOrbitsColor(const Vec3f &c)
+{
+	Planet::setDwarfPlanetOrbitColor(c);
+}
+
+Vec3f SolarSystem::getDwarfPlanetsOrbitsColor(void) const
+{
+	return Planet::getDwarfPlanetOrbitColor();
+}
+
+void SolarSystem::setMoonsOrbitsColor(const Vec3f &c)
+{
+	Planet::setMoonOrbitColor(c);
+}
+
+Vec3f SolarSystem::getMoonsOrbitsColor(void) const
+{
+	return Planet::getMoonOrbitColor();
+}
+
+void SolarSystem::setCubewanosOrbitsColor(const Vec3f &c)
+{
+	Planet::setCubewanoOrbitColor(c);
+}
+
+Vec3f SolarSystem::getCubewanosOrbitsColor(void) const
+{
+	return Planet::getCubewanoOrbitColor();
+}
+
+void SolarSystem::setPlutinosOrbitsColor(const Vec3f &c)
+{
+	Planet::setPlutinoOrbitColor(c);
+}
+
+Vec3f SolarSystem::getPlutinosOrbitsColor(void) const
+{
+	return Planet::getPlutinoOrbitColor();
+}
+
+void SolarSystem::setScatteredDiskObjectsOrbitsColor(const Vec3f &c)
+{
+	Planet::setScatteredDiscObjectOrbitColor(c);
+}
+
+Vec3f SolarSystem::getScatteredDiskObjectsOrbitsColor(void) const
+{
+	return Planet::getScatteredDiscObjectOrbitColor();
+}
+
+void SolarSystem::setOortCloudObjectsOrbitsColor(const Vec3f &c)
+{
+	Planet::setOortCloudObjectOrbitColor(c);
+}
+
+Vec3f SolarSystem::getOortCloudObjectsOrbitsColor(void) const
+{
+	return Planet::getOortCloudObjectOrbitColor();
 }
 
 void SolarSystem::setCometsOrbitsColor(const Vec3f& c)
@@ -1809,7 +1875,7 @@ Vec3f SolarSystem::getUranusOrbitColor(void) const
 
 void SolarSystem::setNeptuneOrbitColor(const Vec3f &c)
 {
-	Planet::setUranusOrbitColor(c);
+	Planet::setNeptuneOrbitColor(c);
 }
 
 Vec3f SolarSystem::getNeptuneOrbitColor(void) const

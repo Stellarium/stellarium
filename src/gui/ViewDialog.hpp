@@ -32,6 +32,7 @@ class AddRemoveLandscapesDialog;
 class AtmosphereDialog;
 class GreatRedSpotDialog;
 class ConfigureDSOColorsDialog;
+class ConfigureOrbitColorsDialog;
 
 class ViewDialog : public StelDialog
 {
@@ -62,7 +63,7 @@ private slots:
 	void setCurrentCultureAsDefault(void);
 	void updateDefaultSkyCulture();
 	void updateDefaultLandscape();
-	void setFlagCustomGrsSettings(bool b);
+	void setFlagCustomGrsSettings(bool b);	
 	//! Update the widget to make sure it is synchrone if a value was changed programmatically
 	//! This function should be called repeatidly with e.g. a timer
 	// NO LONGER NEEDED!
@@ -72,6 +73,7 @@ private slots:
         void showAtmosphereDialog();
 	void showGreatRedSpotDialog();
 	void showConfigureDSOColorsDialog();
+	void showConfigureOrbitColorsDialog();
 
 	void setLightPollutionSpinBoxStatus();
 	// Two new from the unwanted trunk-rework Not sure if we need them at all?
@@ -138,6 +140,7 @@ private:
 	AtmosphereDialog * atmosphereDialog;
 	GreatRedSpotDialog * greatRedSpotDialog;
 	ConfigureDSOColorsDialog * configureDSOColorsDialog;
+	ConfigureOrbitColorsDialog * configureOrbitColorsDialog;
 };
 
 #endif // _VIEWDIALOG_HPP_
