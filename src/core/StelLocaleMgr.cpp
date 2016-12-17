@@ -279,7 +279,7 @@ QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
 			timeZoneST = qc_("LTST", "solar time");
 		}
 
-		float shift = core->getUTCOffset(JD);
+		float shift = core->getUTCOffset(JD);		
 		QTime tz = QTime(0, 0, 0).addSecs(3600*qAbs(shift));
 		if(shift<0.0f)
 			timeZone.append("-" + tz.toString("hh:mm"));
