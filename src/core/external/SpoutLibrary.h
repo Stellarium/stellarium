@@ -1,13 +1,49 @@
+/*
+SpoutSDK is released under the Simplified BSD licence.
+
+Copyright (C) 2014-2016. Lynn Jarvis. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice,
+   this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE	ARE DISCLAIMED.
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+
 //
 //	SpoutLibrary.dll
 //
 //	Spout SDK dll compatible with any C++ compiler
 //
 
-#include <windows.h>
-#include <GL/GL.h>
 
-#define SPOUTLIBRARY_EXPORTS // defined for this DLL. The application imports rather than exports
+// Note from FS: We need this because the Spout source is compilable only with MSVC, so we use a C/COM-style interface
+// to access a precompiled .dll, this *should* work with all Windows compilers.
+
+#include <windows.h>
+//FS: we probably should not include GL directly here, use Qt's wrapper headers instead
+//#include <GL/GL.h>
+#include <QOpenGLContext>
+
+// FS: We actually want to IMPORT the dll functions, so we have to comment this
+// Note that it worked before because it seems dllimport is not strictly required (but strongly recommended):
+// http://stackoverflow.com/a/58031, also, we don't really want to EXPORT the functions again either, and MinGW
+// seems to sometimes have problems without it
+//#define SPOUTLIBRARY_EXPORTS // defined for this DLL. The application imports rather than exports
 
 #ifdef SPOUTLIBRARY_EXPORTS
 #define SPOUTAPI __declspec(dllexport)
