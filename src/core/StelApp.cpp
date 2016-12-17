@@ -81,6 +81,7 @@
 #include <QDateTime>
 #ifdef ENABLE_SPOUT
 #include <QMessageBox>
+#include "SpoutLibrary.h"
 #endif
 
 #ifdef USE_STATIC_PLUGIN_HELLOSTELMODULE
