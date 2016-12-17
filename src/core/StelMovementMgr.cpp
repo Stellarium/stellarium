@@ -165,8 +165,8 @@ void StelMovementMgr::init()
 		//qDebug() << "   initViewPos is " << initViewPos[0] << "/" << initViewPos[1] << "/" << initViewPos[2];
 		viewDirectionJ2000 = core->altAzToJ2000(initViewPos, StelCore::RefractionOff);
 		//qDebug() << "viewDirectionJ2000: " << viewDirectionJ2000[0] << "/" << viewDirectionJ2000[1] << "/" << viewDirectionJ2000[2];
-
-		//qDebug() << "   up2000 initViewUp becomes " << initViewUp[0] << "/" << initViewUp[1] << "/" << initViewUp[2];
+		setViewDirectionJ2000(viewDirectionJ2000);
+		//qDebug() << "   up2000 initViewUp becomes " << initViewUp[0] << "/" << initViewUp[1] << "/" << initViewUp[2];		
 		setViewUpVector(initViewUp);
 
 		//qDebug() << "   upVectorMountFrame becomes " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
