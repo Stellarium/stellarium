@@ -183,8 +183,6 @@ SET(ENABLE_MEDIA 1 CACHE BOOL "Define whether media support should be activated.
 
 # SPOUT allows relaying the Stellarium OpenGL framebuffer as DirectX texture in other programs.
 # It exists on Windows only. Syphon is a similar system for MacOS, this might be added by a Mac developer.
-# Note that we may also link with the real OpenGL library in this case!
-# or find a way to define all of Spout's OpenGL calls to Qt5's version?
 IF(WIN32)
      SET(ENABLE_SPOUT 1 CACHE BOOL "Define whether SPOUT support should be activated.")
 ELSE()
@@ -192,12 +190,35 @@ ELSE()
 ENDIF()
 IF(ENABLE_SPOUT)
 	ADD_DEFINITIONS(-DENABLE_SPOUT)
-#    FIND_PACKAGE(OpenGL REQUIRED) # maybe we don't need it. Then remove part of comment above.
 	IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4") # 32bit build?
-		LINK_DIRECTORIES(${CMAKE_SOURCE_DIR}/util/spout2/Win32/)
-	ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8") # 64bit build?
-		LINK_DIRECTORIES(${CMAKE_SOURCE_DIR}/util/spout2/x64/)
+            set(SPOUT_PATH_HINT ${CMAKE_SOURCE_DIR}/util/spout2/Win32/)
+        ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8") # 64bit build?
+            set(SPOUT_PATH_HINT ${CMAKE_SOURCE_DIR}/util/spout2/x64/)
 	ENDIF()
+
+        # make sure the .lib file is used, otherwise MinGW will try the .dll directly and fails to link
+        find_library(SPOUT_LIBRARY NAMES SpoutLibrary.lib SpoutLibrary PATHS ${SPOUT_PATH_HINT})
+        mark_as_advanced(SPOUT_LIBRARY)
+
+        if(NOT SPOUT_LIBRARY)
+            message(FATAL_ERROR "Spout library not found. Try setting SPOUT_LIBRARY or disable Spout support.")
+        endif()
+
+        # try to find the .dll for automatic copy
+        get_filename_component(SPOUT_LIBRARY_DIR ${SPOUT_LIBRARY} DIRECTORY)
+        set(SPOUT_LIBRARY_DLL ${SPOUT_LIBRARY_DIR}/SpoutLibrary.dll CACHE FILEPATH "The path to the Spout .dll file")
+
+        if(NOT EXISTS ${SPOUT_LIBRARY_DLL})
+            unset(SPOUT_LIBRARY_DLL)
+            # try to find it with find_library (note that this does not work with MSVC, but with MinGW it does, so the above manual version is necessary)
+            find_library(SPOUT_LIBRARY_DLL SpoutLibrary.dll PATHS ${SPOUT_PATH_HINT})
+        endif()
+
+        if(NOT SPOUT_LIBRARY_DLL)
+            message(WARNING "Could not find SpoutLibrary.dll, you may have to manually copy it to the binary directory.\
+                Try setting SPOUT_LIBRARY_DLL. Note that this is necessary for correct installer generation.")
+        endif()
+        mark_as_advanced(SPOUT_LIBRARY_DLL)
 ENDIF(ENABLE_SPOUT)
 
 
@@ -511,10 +532,8 @@ IF(WIN32)
     	SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${QT5_LIBS}/../plugins/mediaservice/dsengine.dll\"; DestDir: \"{app}/mediaservice/\";\nSource: \"${QT5_LIBS}/../plugins/mediaservice/qtmedia_audioengine.dll\"; DestDir: \"{app}/mediaservice/\";\nSource: \"${QT5_LIBS}/../plugins/playlistformats/qtmultimedia_m3u.dll\"; DestDir: \"{app}/playlistformats/\";")
     ENDIF()
     IF(ENABLE_SPOUT)
-        IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4") # 32bit build?
-            SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${CMAKE_SOURCE_DIR}/util/spout2/Win32/SpoutLibrary.dll\"; DestDir: \"{app}\";")
-        ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8") # 64bit build?
-            SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${CMAKE_SOURCE_DIR}/util/spout2/x64/SpoutLibrary.dll\"; DestDir: \"{app}\";")
+        IF(SPOUT_LIBRARY_DLL) # we know the dll
+            SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${SPOUT_LIBRARY_DLL}\"; DestDir: \"{app}\";")
         ENDIF()
     ENDIF(ENABLE_SPOUT)
 

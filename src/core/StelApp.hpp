@@ -23,9 +23,6 @@
 #include <QString>
 #include <QObject>
 #include "StelModule.hpp"
-#ifdef 	ENABLE_SPOUT
-#include "SpoutLibrary.h"
-#endif
 
 // Predeclaration of some classes
 class StelCore;
@@ -50,6 +47,10 @@ class StelScriptMgr;
 class StelActionMgr;
 class StelPropertyMgr;
 class StelProgressController;
+
+#ifdef 	ENABLE_SPOUT
+struct SPOUTLIBRARY;
+#endif
 
 //! @class StelApp
 //! Singleton main Stellarium application class.
@@ -396,9 +397,8 @@ private:
 #ifdef 	ENABLE_SPOUT
 	SPOUTLIBRARY * spoutSender;
 	char spoutName[256];
-	GLuint spoutTexID;
+	quint32 spoutTexID;
 	bool spoutValid; // true when the named sender instance has been created.
-	//void initSpoutTexture(GLuint &texID, unsigned int width, unsigned int height);
 	void initSpoutTexture(unsigned int width, unsigned int height);
 #endif
 
