@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-17 00:57+0700\n"
+"POT-Creation-Date: 2016-12-17 16:39+0700\n"
 "PO-Revision-Date: 2016-12-16 10:53+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-17 04:37+0000\n"
+"X-Launchpad-Export-Date: 2016-12-18 04:37+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -341,13 +341,12 @@ msgid "Ground"
 msgstr "الأرض"
 
 #: src/core/modules/LandscapeMgr.cpp:419
-msgid "Illumination"
-msgstr "الإضاءة"
+msgid "Landscape illumination"
+msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:2068
-#: plugins/Satellites/src/ui_satellitesDialog.h:720
-msgid "Labels"
-msgstr "الأسماء"
+#: src/core/modules/LandscapeMgr.cpp:420
+msgid "Landscape labels"
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:421 src/ui_viewDialog.h:1958
 msgid "Light pollution data from locations database"
@@ -5902,6 +5901,10 @@ msgstr ""
 msgid "Use designations for screen labels"
 msgstr "استخدم أرقام الدليل لأجرام الفضاء السحيق حين العرض على الشاشة"
 
+#: src/ui_viewDialog.h:2068 plugins/Satellites/src/ui_satellitesDialog.h:720
+msgid "Labels"
+msgstr "الأسماء"
+
 #: src/ui_viewDialog.h:2069
 msgid "Hints"
 msgstr "العلامات ."
@@ -7307,7 +7310,7 @@ msgstr "لون علامات الأجرام المشعة"
 msgid "Color of markers of deep-sky objects"
 msgstr "لون علامات أجرام الفضاء السحيق"
 
-#: src/ui_dsoColorsDialog.h:558 src/ui_orbitColorsDialog.h:435
+#: src/ui_dsoColorsDialog.h:558
 msgid "Labels of deep-sky objects"
 msgstr "أسماء أجرام الفضاء السحيق"
 
@@ -16847,6 +16850,9 @@ msgstr "الميل المخصص 2"
 #~ msgid "Shortcut"
 #~ msgstr "الاختصار"
 
+#~ msgid "Illumination"
+#~ msgstr "الإضاءة"
+
 #~ msgid "Use flip for CCD"
 #~ msgstr "استخدم قلب المشهد للسي سي دي"
 
@@ -16907,31 +16913,3 @@ msgstr "الميل المخصص 2"
 
 #~ msgid "Show names"
 #~ msgstr ". اعرض الأسماء ."
-
-#~ msgid ""
-#~ "Enable automatic install the type of mount from the telescope settings for "
-#~ "saving horizontal orientation of CCD frame."
-#~ msgstr ""
-#~ "مكن من تنصيب نوع الحامل من غعدادات التلسكوب لحفظ الاتجاه الأفقي لإطار السي "
-#~ "سي دي"
-
-#~ msgid "Enable automatic install the type of mount"
-#~ msgstr "مكن من تنصيب نوع الحامل"
-
-#~ msgid "Enable display designations of exoplanets"
-#~ msgstr "فعّل عرض تسميات الكواكب الخارجية"
-
-#~ msgid "Bright nebulae (<10 mag.)"
-#~ msgstr "(سديم ساطع ( أسطع من القدر 10"
-
-#~ msgid "Bright galaxies (<10 mag.)"
-#~ msgstr "(مجرة ساطعة ( أسطع من القدر 10"
-
-#~ msgid "YSOs"
-#~ msgstr "الأجرام النجمية الفتية"
-
-#~ msgid "Color of markers of Young Stellar Objects"
-#~ msgstr "لون علامات الأجرام النجمية الفتية"
-
-#~ msgid "Toggle display the button of Digitized Sky Survey."
-#~ msgstr "أظهر وأخف زر عرض مسح السماء الرقمي"

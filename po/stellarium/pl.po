@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-17 00:57+0700\n"
-"PO-Revision-Date: 2016-12-17 02:27+0000\n"
+"POT-Creation-Date: 2016-12-17 16:39+0700\n"
+"PO-Revision-Date: 2016-12-18 04:01+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-17 04:55+0000\n"
+"X-Launchpad-Export-Date: 2016-12-18 04:53+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -345,13 +345,12 @@ msgid "Ground"
 msgstr "Ziemia"
 
 #: src/core/modules/LandscapeMgr.cpp:419
-msgid "Illumination"
-msgstr "Oświetlenie"
+msgid "Landscape illumination"
+msgstr "Oświetlenie krajobrazu"
 
-#: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:2068
-#: plugins/Satellites/src/ui_satellitesDialog.h:720
-msgid "Labels"
-msgstr "Podpisy"
+#: src/core/modules/LandscapeMgr.cpp:420
+msgid "Landscape labels"
+msgstr "Etykiety krajobrazu"
 
 #: src/core/modules/LandscapeMgr.cpp:421 src/ui_viewDialog.h:1958
 msgid "Light pollution data from locations database"
@@ -4398,7 +4397,7 @@ msgstr "Argentyna"
 
 #: src/translations_countries.h:41
 msgid "Samoa (American)"
-msgstr ""
+msgstr "Samoa (Amerykańskie)"
 
 #: src/translations_countries.h:42
 msgid "Austria"
@@ -4414,7 +4413,7 @@ msgstr "Aruba"
 
 #: src/translations_countries.h:45
 msgid "Åland Islands"
-msgstr ""
+msgstr "Wyspy Alandzkie"
 
 #: src/translations_countries.h:46
 msgid "Azerbaijan"
@@ -4422,7 +4421,7 @@ msgstr "Azerbejdżan"
 
 #: src/translations_countries.h:47
 msgid "Bosnia and Herzegovina"
-msgstr ""
+msgstr "Bośnia i Hercegowina"
 
 #: src/translations_countries.h:48
 msgid "Barbados"
@@ -4466,7 +4465,7 @@ msgstr "Bermudy"
 
 #: src/translations_countries.h:58
 msgid "Brunei"
-msgstr ""
+msgstr "Brunei"
 
 #: src/translations_countries.h:59
 msgid "Bolivia"
@@ -4474,7 +4473,7 @@ msgstr "Boliwia"
 
 #: src/translations_countries.h:60
 msgid "Caribbean NL"
-msgstr ""
+msgstr "Holandia Karaibska"
 
 #: src/translations_countries.h:61
 msgid "Brazil"
@@ -4510,19 +4509,19 @@ msgstr "Kanada"
 
 #: src/translations_countries.h:69
 msgid "Cocos (Keeling) Islands"
-msgstr ""
+msgstr "Wyspy Kokosowe (Keelinga)"
 
 #: src/translations_countries.h:70
 msgid "Congo (Dem. Rep.)"
-msgstr ""
+msgstr "Kongo (Dem. Rep.)"
 
 #: src/translations_countries.h:71
 msgid "Central African Rep."
-msgstr ""
+msgstr "Rep. Środkowoafrykańska"
 
 #: src/translations_countries.h:72
 msgid "Congo (Rep.)"
-msgstr ""
+msgstr "Kongo (Rep.)"
 
 #: src/translations_countries.h:73
 msgid "Switzerland"
@@ -4530,7 +4529,7 @@ msgstr "Szwajcaria"
 
 #: src/translations_countries.h:74
 msgid "Côte d'Ivoire"
-msgstr ""
+msgstr "Wybrzeże Kości Słoniowej"
 
 #: src/translations_countries.h:75
 msgid "Cook Islands"
@@ -4566,7 +4565,7 @@ msgstr "Zielony Przylądek"
 
 #: src/translations_countries.h:83
 msgid "Curacao"
-msgstr ""
+msgstr "Curacao"
 
 #: src/translations_countries.h:84
 msgid "Christmas Island"
@@ -4662,7 +4661,7 @@ msgstr "Gabon"
 
 #: src/translations_countries.h:107
 msgid "Britain (UK)"
-msgstr ""
+msgstr "Wielka Brytania (Zjedn. Król.)"
 
 #: src/translations_countries.h:108
 msgid "Grenada"
@@ -4770,7 +4769,7 @@ msgstr "Izrael"
 
 #: src/translations_countries.h:134
 msgid "Isle of Man"
-msgstr ""
+msgstr "Wyspa Man"
 
 #: src/translations_countries.h:135
 msgid "India"
@@ -4798,7 +4797,7 @@ msgstr "Włochy"
 
 #: src/translations_countries.h:141
 msgid "Jersey"
-msgstr ""
+msgstr "Jersey"
 
 #: src/translations_countries.h:142
 msgid "Jamaica"
@@ -4834,15 +4833,15 @@ msgstr "Komory"
 
 #: src/translations_countries.h:150
 msgid "St Kitts and Nevis"
-msgstr ""
+msgstr "Saint Kitts i Nevis"
 
 #: src/translations_countries.h:151
 msgid "Korea (North)"
-msgstr ""
+msgstr "Korea (Północna)"
 
 #: src/translations_countries.h:152
 msgid "Korea (South)"
-msgstr ""
+msgstr "Korea (Południowa)"
 
 #: src/translations_countries.h:153
 msgid "Kuwait"
@@ -4858,7 +4857,7 @@ msgstr "Kazachstan"
 
 #: src/translations_countries.h:156
 msgid "Laos"
-msgstr ""
+msgstr "Laos"
 
 #: src/translations_countries.h:157
 msgid "Lebanon"
@@ -4866,7 +4865,7 @@ msgstr "Liban"
 
 #: src/translations_countries.h:158
 msgid "St Lucia"
-msgstr ""
+msgstr "Saint Lucia"
 
 #: src/translations_countries.h:159
 msgid "Liechtenstein"
@@ -4914,11 +4913,11 @@ msgstr "Mołdawia"
 
 #: src/translations_countries.h:170
 msgid "Montenegro"
-msgstr ""
+msgstr "Czarnogóra"
 
 #: src/translations_countries.h:171
 msgid "St Martin (French)"
-msgstr ""
+msgstr "Saint Martin (Fr.)"
 
 #: src/translations_countries.h:172
 msgid "Madagascar"
@@ -4938,7 +4937,7 @@ msgstr "Mali"
 
 #: src/translations_countries.h:176
 msgid "Myanmar (Burma)"
-msgstr ""
+msgstr "Mjanma (Birma)"
 
 #: src/translations_countries.h:177
 msgid "Mongolia"
@@ -5074,7 +5073,7 @@ msgstr "Polska"
 
 #: src/translations_countries.h:210
 msgid "St Pierre and Miquelon"
-msgstr ""
+msgstr "Saint Pierre i Miquelon"
 
 #: src/translations_countries.h:211
 msgid "Pitcairn"
@@ -5086,7 +5085,7 @@ msgstr "Portoryko"
 
 #: src/translations_countries.h:213
 msgid "Palestine"
-msgstr ""
+msgstr "Palestyna"
 
 #: src/translations_countries.h:214
 msgid "Portugal"
@@ -5118,7 +5117,7 @@ msgstr "Serbia"
 
 #: src/translations_countries.h:221
 msgid "Russia"
-msgstr ""
+msgstr "Rosja"
 
 #: src/translations_countries.h:222
 msgid "Rwanda"
@@ -5150,7 +5149,7 @@ msgstr "Singapur"
 
 #: src/translations_countries.h:229
 msgid "St Helena"
-msgstr ""
+msgstr "Wyspa Świętej Heleny"
 
 #: src/translations_countries.h:230
 msgid "Slovenia"
@@ -5186,7 +5185,7 @@ msgstr "Surinam"
 
 #: src/translations_countries.h:238
 msgid "South Sudan"
-msgstr ""
+msgstr "Sudan Południowy"
 
 #: src/translations_countries.h:239
 msgid "Sao Tome and Principe"
@@ -5198,11 +5197,11 @@ msgstr "Salwador"
 
 #: src/translations_countries.h:241
 msgid "St Maarten (Dutch)"
-msgstr ""
+msgstr "Sint Maarten (Hol.)"
 
 #: src/translations_countries.h:242
 msgid "Syria"
-msgstr ""
+msgstr "Syria"
 
 #: src/translations_countries.h:243
 msgid "Swaziland"
@@ -5210,7 +5209,7 @@ msgstr "Suazi"
 
 #: src/translations_countries.h:244
 msgid "Turks and Caicos Is"
-msgstr ""
+msgstr "Turks i Caicos"
 
 #: src/translations_countries.h:245
 msgid "Chad"
@@ -5218,7 +5217,7 @@ msgstr "Czad"
 
 #: src/translations_countries.h:246
 msgid "French Southern and Antarctic Lands"
-msgstr ""
+msgstr "Francuskie Terytoria Południowe i Antarktyczne"
 
 #: src/translations_countries.h:247
 msgid "Togo"
@@ -5282,7 +5281,7 @@ msgstr "Uganda"
 
 #: src/translations_countries.h:262
 msgid "US minor outlying islands"
-msgstr ""
+msgstr "Dalekie Wyspy Mniejsze Stanów Zjednoczonych"
 
 #: src/translations_countries.h:263
 msgid "United States"
@@ -5298,11 +5297,11 @@ msgstr "Uzbekistan"
 
 #: src/translations_countries.h:266
 msgid "Vatican City"
-msgstr ""
+msgstr "Watykan"
 
 #: src/translations_countries.h:267
 msgid "St Vincent"
-msgstr ""
+msgstr "Saint Vincent"
 
 #: src/translations_countries.h:268
 msgid "Venezuela"
@@ -5310,15 +5309,15 @@ msgstr "Wenezuela"
 
 #: src/translations_countries.h:269
 msgid "Virgin Islands (UK)"
-msgstr ""
+msgstr "Wyspy Dziewicze (Brytyjskie)"
 
 #: src/translations_countries.h:270
 msgid "Virgin Islands (US)"
-msgstr ""
+msgstr "Wyspy Dziewicze Stanów Zjednoczonych"
 
 #: src/translations_countries.h:271
 msgid "Vietnam"
-msgstr ""
+msgstr "Wietnam"
 
 #: src/translations_countries.h:272
 msgid "Vanuatu"
@@ -5330,7 +5329,7 @@ msgstr "Wallis i Futuna"
 
 #: src/translations_countries.h:274
 msgid "Samoa (western)"
-msgstr ""
+msgstr "Samoa (zach.)"
 
 #: src/translations_countries.h:275
 msgid "Yemen"
@@ -5943,6 +5942,10 @@ msgstr ""
 msgid "Use designations for screen labels"
 msgstr "Używaj oznaczeń w etykietach ekranowych"
 
+#: src/ui_viewDialog.h:2068 plugins/Satellites/src/ui_satellitesDialog.h:720
+msgid "Labels"
+msgstr "Podpisy"
+
 #: src/ui_viewDialog.h:2069
 msgid "Hints"
 msgstr "Podpowiedzi"
@@ -6070,7 +6073,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2149
 msgid "Ecliptic poles (J2000)"
-msgstr ""
+msgstr "Bieguny ekliptyki (J2000)"
 
 #: src/ui_viewDialog.h:2151
 msgid "Color of the celestial poles (J2000.0)"
@@ -6082,7 +6085,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2156
 msgid "Celestial poles (of date)"
-msgstr ""
+msgstr "Bieguny niebieskie (na dzień)"
 
 #: src/ui_viewDialog.h:2158
 msgid "Color of ecliptic poles (of date)"
@@ -6102,11 +6105,11 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2169
 msgid "Ecliptic poles (of date)"
-msgstr ""
+msgstr "Bieguny ekliptyki (na dzień)"
 
 #: src/ui_viewDialog.h:2171
 msgid "Show Prime (East-West) Vertical."
-msgstr ""
+msgstr "Pokazuj pierwszy wertykał (wschód-zachód)"
 
 #: src/ui_viewDialog.h:2175
 msgid "Color of galactic poles"
@@ -6114,7 +6117,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2177
 msgid "Zenith and Nadir"
-msgstr ""
+msgstr "Zenit i nadir"
 
 #: src/ui_viewDialog.h:2180
 msgid "Color of Zenith and Nadir"
@@ -6126,17 +6129,19 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2185
 msgid "Celestial poles (J2000)"
-msgstr ""
+msgstr "Bieguny niebieskie (J2000)"
 
 #: src/ui_viewDialog.h:2187
 msgid ""
 "These circles delimit stars which stay always above (respectively below) the "
 "mathematical horizon."
 msgstr ""
+"Te koła wyznaczają granice między gwiazdami, które zawsze pozostają powyżej "
+"i poniżej matematycznego horyzontu."
 
 #: src/ui_viewDialog.h:2189
 msgid "Circumpolar circles"
-msgstr ""
+msgstr "Koła okołobiegunowe"
 
 #: src/ui_viewDialog.h:2191
 msgid "Color of circumpolar circles"
@@ -6213,7 +6218,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2236
 msgid "Equinoxes (J2000)"
-msgstr ""
+msgstr "Równonoce (J2000)"
 
 #: src/ui_viewDialog.h:2238
 msgid "Color of the ecliptical grid (of date)"
@@ -6237,7 +6242,7 @@ msgstr "Siatka równikowa (na dzień)"
 
 #: src/ui_viewDialog.h:2250
 msgid "Equinoxes (of date)"
-msgstr ""
+msgstr "Równonoce (na dzień)"
 
 #: src/ui_viewDialog.h:2252
 msgid "Color of the equinox points (of date)"
@@ -6419,7 +6424,7 @@ msgstr "Ta funkcja nie została jeszcze gruntownie przetestowana!"
 
 #: src/ui_configurationDialog.h:1205
 msgid "Ephemeris settings (experimental)"
-msgstr ""
+msgstr "Ustawienia efemerydy (eksperymentalne)"
 
 #: src/ui_configurationDialog.h:1206 src/ui_configurationDialog.h:1207
 msgid "Not installed"
@@ -6547,7 +6552,7 @@ msgstr "Wyświetlane pola"
 
 #: src/ui_configurationDialog.h:1255 src/ui_configurationDialog.h:1293
 msgid "Equatorial coordinates, equinox of date"
-msgstr ""
+msgstr "Współrzędne równikowe, równonoc na dzień"
 
 #: src/ui_configurationDialog.h:1257
 msgid "Right ascension/Declination (of date)"
@@ -6555,7 +6560,7 @@ msgstr "Rektascensja/Deklinacja (na dzień)"
 
 #: src/ui_configurationDialog.h:1258
 msgid "Supergalactic coordinates"
-msgstr ""
+msgstr "Współrzędne supergalaktyczne"
 
 #: src/ui_configurationDialog.h:1260
 msgid "The type of the object (star, planet, etc.)"
@@ -6567,11 +6572,11 @@ msgstr "Absolutna wielkość gwiazdowa"
 
 #: src/ui_configurationDialog.h:1265
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
-msgstr ""
+msgstr "Współrzędne ekliptyczne, równonoc na dzień (tylko dla Ziemi)"
 
 #: src/ui_configurationDialog.h:1267
 msgid "Ecliptic coordinates (of date)"
-msgstr ""
+msgstr "Współrzędne ekliptyczne (na dzień)"
 
 #: src/ui_configurationDialog.h:1269
 msgid "Spectral class, nebula type, etc."
@@ -6612,7 +6617,7 @@ msgstr "Współrzędne galaktyczne"
 
 #: src/ui_configurationDialog.h:1284
 msgid "Equatorial coordinates, equinox of J2000.0"
-msgstr ""
+msgstr "Współrzędne ekliptyczne, równonoc J2000.0"
 
 #: src/ui_configurationDialog.h:1286
 msgid "Right ascension/Declination (J2000)"
@@ -6620,11 +6625,11 @@ msgstr "Rektascensja/Deklinacja (J2000)"
 
 #: src/ui_configurationDialog.h:1289
 msgid "Ecliptic coordinates, equinox J2000.0"
-msgstr ""
+msgstr "Współrzędne ekliptyczne, równonoc J2000.0"
 
 #: src/ui_configurationDialog.h:1291
 msgid "Ecliptic coordinates (J2000)"
-msgstr ""
+msgstr "Ecliptic coordinates (J2000)"
 
 #: src/ui_configurationDialog.h:1295
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:201
@@ -6638,11 +6643,11 @@ msgstr "Obserwowana wielkość gwiazdowa"
 #: src/ui_configurationDialog.h:1298
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
 msgid "3-letter IAU constellation abbreviation"
-msgstr ""
+msgstr "3-literowy skrót nazwy gwiazdozbioru wg MUA"
 
 #: src/ui_configurationDialog.h:1300
 msgid "Constellation"
-msgstr ""
+msgstr "Gwiazdozbiór"
 
 #: src/ui_configurationDialog.h:1301
 msgid "Control"
@@ -7071,7 +7076,7 @@ msgstr ""
 
 #: src/ui_greatRedSpotDialog.h:180
 msgid "Date and Time (UTC):"
-msgstr ""
+msgstr "Data i czas (UTC):"
 
 #: src/ui_greatRedSpotDialog.h:184
 msgid "Get the recent GRS measurement"
@@ -7360,7 +7365,7 @@ msgstr ""
 msgid "Color of markers of deep-sky objects"
 msgstr ""
 
-#: src/ui_dsoColorsDialog.h:558 src/ui_orbitColorsDialog.h:435
+#: src/ui_dsoColorsDialog.h:558
 msgid "Labels of deep-sky objects"
 msgstr ""
 
@@ -16518,6 +16523,9 @@ msgstr ""
 #, qt-format
 #~ msgid "Set FOV to %1%2"
 #~ msgstr "Ustaw pole widzenia na %1%2"
+
+#~ msgid "Illumination"
+#~ msgstr "Oświetlenie"
 
 #~ msgid "Democratic Republic of the Congo"
 #~ msgstr "Demokratyczna Republika Konga"
