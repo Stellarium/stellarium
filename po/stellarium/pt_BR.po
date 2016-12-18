@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-17 00:57+0700\n"
-"PO-Revision-Date: 2016-12-11 09:15+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"POT-Creation-Date: 2016-12-17 16:39+0700\n"
+"PO-Revision-Date: 2016-12-17 11:48+0000\n"
+"Last-Translator: Marcos Cardinot <mcardinot@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-17 05:02+0000\n"
+"X-Launchpad-Export-Date: 2016-12-18 04:59+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -31,15 +31,15 @@ msgstr "Tipo: <b>%1</b>"
 
 #: src/core/modules/CustomObject.cpp:67
 msgid "custom marker"
-msgstr ""
+msgstr "marcador customizado"
 
 #: src/core/modules/CustomObject.cpp:69
 msgid "custom object"
-msgstr ""
+msgstr "objeto customizado"
 
 #: src/core/modules/CustomObjectMgr.cpp:81
 msgid "Marker"
-msgstr ""
+msgstr "Marcador"
 
 #: src/core/modules/Constellation.cpp:296
 msgid "constellation"
@@ -126,7 +126,7 @@ msgstr "Equador galáctico"
 
 #: src/core/modules/GridLinesMgr.cpp:677
 msgid "Supergalactic Equator"
-msgstr ""
+msgstr "Equador Supergaláctico"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:682 src/ui_viewDialog.h:2128
@@ -153,18 +153,18 @@ msgstr ""
 #. TRANSLATORS: North Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:915 src/core/modules/GridLinesMgr.cpp:924
 msgid "NCP"
-msgstr ""
+msgstr "PNC"
 
 #. TRANSLATORS: South Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:917 src/core/modules/GridLinesMgr.cpp:926
 msgid "SCP"
-msgstr ""
+msgstr "PSC"
 
 #. TRANSLATORS: Zenith
 #: src/core/modules/GridLinesMgr.cpp:933
 msgctxt "zenith"
 msgid "Z"
-msgstr ""
+msgstr "Z"
 
 #. TRANSLATORS: Nadir
 #: src/core/modules/GridLinesMgr.cpp:935
@@ -175,32 +175,32 @@ msgstr ""
 #. TRANSLATORS: North Ecliptic Pole
 #: src/core/modules/GridLinesMgr.cpp:942 src/core/modules/GridLinesMgr.cpp:951
 msgid "NEP"
-msgstr ""
+msgstr "PNE"
 
 #. TRANSLATORS: South Ecliptic Pole
 #: src/core/modules/GridLinesMgr.cpp:944 src/core/modules/GridLinesMgr.cpp:953
 msgid "SEP"
-msgstr ""
+msgstr "PSE"
 
 #. TRANSLATORS: North Galactic Pole
 #: src/core/modules/GridLinesMgr.cpp:960
 msgid "NGP"
-msgstr ""
+msgstr "PNG"
 
 #. TRANSLATORS: South Galactic Pole
 #: src/core/modules/GridLinesMgr.cpp:962
 msgid "SGP"
-msgstr ""
+msgstr "PSG"
 
 #. TRANSLATORS: North Supergalactic Pole
 #: src/core/modules/GridLinesMgr.cpp:969
 msgid "NSGP"
-msgstr ""
+msgstr "PNSG"
 
 #. TRANSLATORS: South Supergalactic Pole
 #: src/core/modules/GridLinesMgr.cpp:971
 msgid "SSGP"
-msgstr ""
+msgstr "PSSG"
 
 #: src/core/modules/GridLinesMgr.cpp:1213
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:339
@@ -268,7 +268,7 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:1227 src/ui_viewDialog.h:2117
 msgid "Supergalactic equator"
-msgstr ""
+msgstr "Equador supergaláctico"
 
 #: src/core/modules/GridLinesMgr.cpp:1228
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:405
@@ -293,11 +293,11 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:1234
 msgid "Celestial poles"
-msgstr ""
+msgstr "Polos celestiais"
 
 #: src/core/modules/GridLinesMgr.cpp:1235
 msgid "Zenith and nadir"
-msgstr ""
+msgstr "Zênite e nadir"
 
 #: src/core/modules/GridLinesMgr.cpp:1236
 msgid "Ecliptic J2000 poles"
@@ -305,15 +305,15 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:1237
 msgid "Ecliptic poles"
-msgstr ""
+msgstr "Polos eclípticos"
 
 #: src/core/modules/GridLinesMgr.cpp:1238 src/ui_viewDialog.h:2178
 msgid "Galactic poles"
-msgstr ""
+msgstr "Polos galácticos"
 
 #: src/core/modules/GridLinesMgr.cpp:1239 src/ui_viewDialog.h:2139
 msgid "Supergalactic poles"
-msgstr ""
+msgstr "Polos supergalácticos"
 
 #: src/core/modules/GridLinesMgr.cpp:1240
 msgid "Equinox J2000 points"
@@ -341,13 +341,12 @@ msgid "Ground"
 msgstr "Superfície"
 
 #: src/core/modules/LandscapeMgr.cpp:419
-msgid "Illumination"
-msgstr "Iluminação"
+msgid "Landscape illumination"
+msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:2068
-#: plugins/Satellites/src/ui_satellitesDialog.h:720
-msgid "Labels"
-msgstr "Rótulos"
+#: src/core/modules/LandscapeMgr.cpp:420
+msgid "Landscape labels"
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:421 src/ui_viewDialog.h:1958
 msgid "Light pollution data from locations database"
@@ -468,7 +467,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:306
 #, qt-format
 msgid "Distance: %1 %2 (%3 %4)"
-msgstr ""
+msgstr "Distância: %1 %2 (%3 %4)"
 
 #: src/core/modules/Nebula.cpp:320
 #, qt-format
@@ -859,7 +858,7 @@ msgstr "Objetos do céu profundo"
 
 #: src/core/modules/NebulaMgr.cpp:366
 msgid "Toggle DSO type filter"
-msgstr ""
+msgstr "Alternar tipo de filtro DSO"
 
 #: src/core/modules/Planet.cpp:257 src/core/modules/MinorPlanet.cpp:219
 #: src/core/modules/MinorPlanet.cpp:223 src/core/modules/Comet.cpp:183
@@ -900,7 +899,7 @@ msgstr "Diâmetro aparente: %1, com os anéis: %2"
 #: src/core/modules/Planet.cpp:328 src/core/modules/Planet.cpp:332
 #, qt-format
 msgid "Apparent diameter: %1, scaled up to: %2"
-msgstr ""
+msgstr "Diâmetro aparente: %1, ampliado para: %2"
 
 #: src/core/modules/Planet.cpp:339 src/core/modules/Planet.cpp:341
 #: src/core/modules/MinorPlanet.cpp:273 src/core/modules/MinorPlanet.cpp:275
@@ -931,42 +930,42 @@ msgstr "O período de rotação é caótico"
 #: src/core/modules/Planet.cpp:385
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
-msgstr ""
+msgstr "Lua crescente"
 
 #: src/core/modules/Planet.cpp:387
 msgctxt "Moon phase"
 msgid "First Quarter"
-msgstr ""
+msgstr "Quarto crescente"
 
 #: src/core/modules/Planet.cpp:389
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
-msgstr ""
+msgstr "Lua crescente gibosa"
 
 #: src/core/modules/Planet.cpp:391
 msgctxt "Moon phase"
 msgid "Full Moon"
-msgstr ""
+msgstr "Lua cheia"
 
 #: src/core/modules/Planet.cpp:393
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
-msgstr ""
+msgstr "Lua minguante gibosa"
 
 #: src/core/modules/Planet.cpp:395
 msgctxt "Moon phase"
 msgid "Third Quarter"
-msgstr ""
+msgstr "Quarto minguante"
 
 #: src/core/modules/Planet.cpp:397
 msgctxt "Moon phase"
 msgid "Waning Crescent"
-msgstr ""
+msgstr "Lua minguante"
 
 #: src/core/modules/Planet.cpp:399
 msgctxt "Moon phase"
 msgid "New Moon"
-msgstr ""
+msgstr "Lua nova"
 
 #: src/core/modules/Planet.cpp:404 src/core/modules/Planet.cpp:409
 #: src/core/modules/MinorPlanet.cpp:293 src/core/modules/MinorPlanet.cpp:298
@@ -5940,6 +5939,10 @@ msgstr ""
 msgid "Use designations for screen labels"
 msgstr ""
 
+#: src/ui_viewDialog.h:2068 plugins/Satellites/src/ui_satellitesDialog.h:720
+msgid "Labels"
+msgstr "Rótulos"
+
 #: src/ui_viewDialog.h:2069
 msgid "Hints"
 msgstr "Indicações"
@@ -7356,7 +7359,7 @@ msgstr ""
 msgid "Color of markers of deep-sky objects"
 msgstr ""
 
-#: src/ui_dsoColorsDialog.h:558 src/ui_orbitColorsDialog.h:435
+#: src/ui_dsoColorsDialog.h:558
 msgid "Labels of deep-sky objects"
 msgstr ""
 
@@ -8424,7 +8427,7 @@ msgstr "Aumentar a escala do círculo da imagem"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1139
 msgid "Use semi-transparent mask"
-msgstr ""
+msgstr "Usar máscara semi-transparente"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1140
 msgid "Hide grids and lines when enabled"
@@ -16780,6 +16783,9 @@ msgstr ""
 
 #~ msgid "Shortcut"
 #~ msgstr "Atalho"
+
+#~ msgid "Illumination"
+#~ msgstr "Iluminação"
 
 #~ msgid "Use flip for CCD"
 #~ msgstr "Utilizar inversão do CCD"
