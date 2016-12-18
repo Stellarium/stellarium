@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-17 00:57+0700\n"
+"POT-Creation-Date: 2016-12-17 16:39+0700\n"
 "PO-Revision-Date: 2011-07-18 20:26+0000\n"
 "Last-Translator: Kiril <Unknown>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-17 04:47+0000\n"
+"X-Launchpad-Export-Date: 2016-12-18 04:45+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -341,13 +341,12 @@ msgid "Ground"
 msgstr "Ground"
 
 #: src/core/modules/LandscapeMgr.cpp:419
-msgid "Illumination"
-msgstr "Illumination"
+msgid "Landscape illumination"
+msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:2068
-#: plugins/Satellites/src/ui_satellitesDialog.h:720
-msgid "Labels"
-msgstr "Labels"
+#: src/core/modules/LandscapeMgr.cpp:420
+msgid "Landscape labels"
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:421 src/ui_viewDialog.h:1958
 msgid "Light pollution data from locations database"
@@ -5924,6 +5923,10 @@ msgstr ""
 msgid "Use designations for screen labels"
 msgstr "Use designations for screen labels"
 
+#: src/ui_viewDialog.h:2068 plugins/Satellites/src/ui_satellitesDialog.h:720
+msgid "Labels"
+msgstr "Labels"
+
 #: src/ui_viewDialog.h:2069
 msgid "Hints"
 msgstr "Hints"
@@ -7334,7 +7337,7 @@ msgstr "Color of markers of emission objects"
 msgid "Color of markers of deep-sky objects"
 msgstr "Color of markers of deep-sky objects"
 
-#: src/ui_dsoColorsDialog.h:558 src/ui_orbitColorsDialog.h:435
+#: src/ui_dsoColorsDialog.h:558
 msgid "Labels of deep-sky objects"
 msgstr "Labels of deep-sky objects"
 
@@ -15909,8 +15912,5 @@ msgstr "Custom Declination 2"
 #~ msgid "(geometric)"
 #~ msgstr "(גאומטרי)"
 
-#~ msgid "YSOs"
-#~ msgstr "YSOs"
-
-#~ msgid "Color of markers of Young Stellar Objects"
-#~ msgstr "Color of markers of Young Stellar Objects"
+#~ msgid "Illumination"
+#~ msgstr "Illumination"

@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-17 00:57+0700\n"
+"POT-Creation-Date: 2016-12-17 16:39+0700\n"
 "PO-Revision-Date: 2016-10-24 14:28+0000\n"
 "Last-Translator: Miguel Angel <maportilloserra@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-17 04:58+0000\n"
+"X-Launchpad-Export-Date: 2016-12-18 04:55+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 "Language: es_ES\n"
 
@@ -346,13 +346,12 @@ msgid "Ground"
 msgstr "Suelo"
 
 #: src/core/modules/LandscapeMgr.cpp:419
-msgid "Illumination"
-msgstr "Iluminación"
+msgid "Landscape illumination"
+msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:2068
-#: plugins/Satellites/src/ui_satellitesDialog.h:720
-msgid "Labels"
-msgstr "Etiquetas"
+#: src/core/modules/LandscapeMgr.cpp:420
+msgid "Landscape labels"
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:421 src/ui_viewDialog.h:1958
 msgid "Light pollution data from locations database"
@@ -5965,6 +5964,10 @@ msgstr "Usar nombre de catálogo en vez del nombre comun para las etiquetas"
 msgid "Use designations for screen labels"
 msgstr "Usar nombres de catálogo para las etiquetas en pantalla"
 
+#: src/ui_viewDialog.h:2068 plugins/Satellites/src/ui_satellitesDialog.h:720
+msgid "Labels"
+msgstr "Etiquetas"
+
 #: src/ui_viewDialog.h:2069
 msgid "Hints"
 msgstr "Pistas"
@@ -7396,7 +7399,7 @@ msgstr ""
 msgid "Color of markers of deep-sky objects"
 msgstr ""
 
-#: src/ui_dsoColorsDialog.h:558 src/ui_orbitColorsDialog.h:435
+#: src/ui_dsoColorsDialog.h:558
 msgid "Labels of deep-sky objects"
 msgstr ""
 
@@ -17077,6 +17080,9 @@ msgstr ""
 #~ msgstr ""
 #~ "Coordenadas eclípticas, equinoccio de fecha y J2000 (sólo para la Tierra)"
 
+#~ msgid "Illumination"
+#~ msgstr "Iluminación"
+
 #~ msgid "Show names"
 #~ msgstr "Mostrar nombres"
 
@@ -17120,16 +17126,3 @@ msgstr ""
 
 #~ msgid "JD"
 #~ msgstr "JD"
-
-#~ msgid ""
-#~ "Enable automatic install the type of mount from the telescope settings for "
-#~ "saving horizontal orientation of CCD frame."
-#~ msgstr ""
-#~ "Activar la instalación automática del tipo de montaje de la configuración "
-#~ "del telescopio para guardar la orientación horizontal del bastidor de la CCD."
-
-#~ msgid "Enable automatic install the type of mount"
-#~ msgstr "Activar la instalación automática del tipo de montaje"
-
-#~ msgid "Enable display designations of exoplanets"
-#~ msgstr "Activar la visualización de las denominaciones de los exoplanetas"

@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-17 00:57+0700\n"
+"POT-Creation-Date: 2016-12-17 16:39+0700\n"
 "PO-Revision-Date: 2016-12-16 18:59+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-17 04:54+0000\n"
+"X-Launchpad-Export-Date: 2016-12-18 04:51+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
@@ -344,13 +344,12 @@ msgid "Ground"
 msgstr "Landskap"
 
 #: src/core/modules/LandscapeMgr.cpp:419
-msgid "Illumination"
-msgstr "Belysning"
+msgid "Landscape illumination"
+msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:2068
-#: plugins/Satellites/src/ui_satellitesDialog.h:720
-msgid "Labels"
-msgstr "Påskrifter"
+#: src/core/modules/LandscapeMgr.cpp:420
+msgid "Landscape labels"
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:421 src/ui_viewDialog.h:1958
 msgid "Light pollution data from locations database"
@@ -5822,6 +5821,10 @@ msgstr ""
 msgid "Use designations for screen labels"
 msgstr "Bruk DSO-betegnelser for skjermpåskrifter"
 
+#: src/ui_viewDialog.h:2068 plugins/Satellites/src/ui_satellitesDialog.h:720
+msgid "Labels"
+msgstr "Påskrifter"
+
 #: src/ui_viewDialog.h:2069
 msgid "Hints"
 msgstr "Hint"
@@ -7231,7 +7234,7 @@ msgstr ""
 msgid "Color of markers of deep-sky objects"
 msgstr ""
 
-#: src/ui_dsoColorsDialog.h:558 src/ui_orbitColorsDialog.h:435
+#: src/ui_dsoColorsDialog.h:558
 msgid "Labels of deep-sky objects"
 msgstr ""
 
@@ -16407,6 +16410,9 @@ msgstr ""
 #~ msgid "Geocentric equatorial coordinates, equinox of date"
 #~ msgstr "Geosentriske ekvatorialkoordinater, ekvinoktium av dato"
 
+#~ msgid "Illumination"
+#~ msgstr "Belysning"
+
 #~ msgid "Use flip for CCD"
 #~ msgstr "Bruk speilvending for CCD"
 
@@ -16444,9 +16450,3 @@ msgstr ""
 #~ msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 #~ msgstr ""
 #~ "Ekliptiske koordinater, ekvinoktium for dato og J2000 (bare for jorden)"
-
-#~ msgid "Bright nebulae (<10 mag.)"
-#~ msgstr "Lyse stjernetåker (<10 mag.)"
-
-#~ msgid "Bright galaxies (<10 mag.)"
-#~ msgstr "Lyse galakser (<10 mag.)"

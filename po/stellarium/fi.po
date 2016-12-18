@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-17 00:57+0700\n"
-"PO-Revision-Date: 2016-12-16 17:42+0000\n"
+"POT-Creation-Date: 2016-12-17 16:39+0700\n"
+"PO-Revision-Date: 2016-12-17 21:07+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-17 04:43+0000\n"
+"X-Launchpad-Export-Date: 2016-12-18 04:43+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -341,13 +341,12 @@ msgid "Ground"
 msgstr "Maanpinta"
 
 #: src/core/modules/LandscapeMgr.cpp:419
-msgid "Illumination"
-msgstr "Maiseman valot"
+msgid "Landscape illumination"
+msgstr "Maiseman valaistus"
 
-#: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:2068
-#: plugins/Satellites/src/ui_satellitesDialog.h:720
-msgid "Labels"
-msgstr "Nimet"
+#: src/core/modules/LandscapeMgr.cpp:420
+msgid "Landscape labels"
+msgstr "Maiseman tekstit"
 
 #: src/core/modules/LandscapeMgr.cpp:421 src/ui_viewDialog.h:1958
 msgid "Light pollution data from locations database"
@@ -1058,7 +1057,7 @@ msgstr "Planeettojen osoittimet"
 
 #: src/core/modules/SolarSystem.cpp:225
 msgid "Planet selection marker"
-msgstr ""
+msgstr "Planeettojen valintaosoitin"
 
 #: src/core/modules/SolarSystem.cpp:226
 msgid "Native planet names (from starlore)"
@@ -5756,11 +5755,11 @@ msgstr "Näytä planeettojen radat"
 
 #: src/ui_viewDialog.h:1968
 msgid "Configure colors of lines of orbits"
-msgstr ""
+msgstr "Aseta kiertoratojen värit"
 
 #: src/ui_viewDialog.h:1970
 msgid "Colors..."
-msgstr ""
+msgstr "Värit..."
 
 #: src/ui_viewDialog.h:1972
 msgid ""
@@ -5935,6 +5934,10 @@ msgstr "Käytä syvän taivaan kohteiden näyttöniminä niiden tunnuksia."
 #: src/ui_viewDialog.h:2067
 msgid "Use designations for screen labels"
 msgstr "Käytä tunnuksia näyttöniminä"
+
+#: src/ui_viewDialog.h:2068 plugins/Satellites/src/ui_satellitesDialog.h:720
+msgid "Labels"
+msgstr "Nimet"
 
 #: src/ui_viewDialog.h:2069
 msgid "Hints"
@@ -7146,7 +7149,7 @@ msgstr "Tapahtumat"
 
 #: src/ui_astroCalcDialog.h:522
 msgid "Alt. vs. Time"
-msgstr ""
+msgstr "Aika- ja korkeusvertailu"
 
 #: src/ui_astroCalcDialog.h:524
 msgid "Altitude vs. Time"
@@ -7224,7 +7227,7 @@ msgstr "Arvo desimaaliasteina"
 
 #: src/ui_astroCalcDialog.h:556
 msgid "Please select object to plot its graph 'Altitude vs. Time'."
-msgstr ""
+msgstr "Valitse kohde, jonka kaavion haluat piirtää."
 
 #: src/ui_astroCalcDialog.h:557
 msgid "Astronomical calculations"
@@ -7359,7 +7362,7 @@ msgstr "Emissiokohteiden osoittimien väri"
 msgid "Color of markers of deep-sky objects"
 msgstr "Syvän taivaan kohteiden osoittimien väri"
 
-#: src/ui_dsoColorsDialog.h:558 src/ui_orbitColorsDialog.h:435
+#: src/ui_dsoColorsDialog.h:558
 msgid "Labels of deep-sky objects"
 msgstr "Syvän taivaan kohteiden nimet"
 
@@ -7429,11 +7432,11 @@ msgstr "Molekyylipilvien osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:610
 msgid "Young stellar objects"
-msgstr ""
+msgstr "Nuoret tähtimäiset kohteet"
 
 #: src/ui_dsoColorsDialog.h:612
 msgid "Color of markers of young stellar objects"
-msgstr ""
+msgstr "Nuorten tähtimäisten kohteiden osoittimien väri"
 
 #: src/ui_dsoColorsDialog.h:616
 msgid "Color of markers of supernova remnants"
@@ -7441,11 +7444,11 @@ msgstr "Supernovajäänteiden osoittimien väri"
 
 #: src/ui_orbitColorsDialog.h:368
 msgid "Style of colors of orbits"
-msgstr ""
+msgstr "Kiertoratojen värien tyyli"
 
 #: src/ui_orbitColorsDialog.h:369
 msgid "One color for all orbits"
-msgstr ""
+msgstr "Sama väri kaikille kiertoradoille"
 
 #: src/ui_orbitColorsDialog.h:370
 msgid "Separate colors for orbits of groups of objects by type"
@@ -7457,151 +7460,151 @@ msgstr ""
 
 #: src/ui_orbitColorsDialog.h:372
 msgid "Colors of orbits of Solar system bodies"
-msgstr ""
+msgstr "Aurinkokunnan kohteiden kiertoratojen värit"
 
 #: src/ui_orbitColorsDialog.h:374
 msgid "Color of orbits of comets"
-msgstr ""
+msgstr "Komeettojen kiertoratojen värit"
 
 #: src/ui_orbitColorsDialog.h:376
 msgid "Orbit of Uranus"
-msgstr ""
+msgstr "Uranuksen kiertorata"
 
 #: src/ui_orbitColorsDialog.h:377
 msgid "Orbit of Mars"
-msgstr ""
+msgstr "Marsin kiertorata"
 
 #: src/ui_orbitColorsDialog.h:379
 msgid "Color of orbit of Neptune"
-msgstr ""
+msgstr "Neptunuksen kiertoradan väri"
 
 #: src/ui_orbitColorsDialog.h:382
 msgid "Color of orbits of moons of planets"
-msgstr ""
+msgstr "Planeettojen kuiden kiertoratojen väri"
 
 #: src/ui_orbitColorsDialog.h:385
 msgid "Color of generic orbit"
-msgstr ""
+msgstr "Geneerisen kiertoradan väri"
 
 #: src/ui_orbitColorsDialog.h:387
 msgid "Orbit of Mercury"
-msgstr ""
+msgstr "Merkuriuksen kiertorata"
 
 #: src/ui_orbitColorsDialog.h:389
 msgid "Color of orbits of major planets"
-msgstr ""
+msgstr "Planeettojen kiertoratojen väri"
 
 #: src/ui_orbitColorsDialog.h:391
 msgid "Orbits of major planets"
-msgstr ""
+msgstr "Planeettojen kiertoradat"
 
 #: src/ui_orbitColorsDialog.h:393
 msgid "Color of orbit of Saturn"
-msgstr ""
+msgstr "Saturnuksen kiertoradan väri"
 
 #: src/ui_orbitColorsDialog.h:395
 msgid "Orbit of Jupiter"
-msgstr ""
+msgstr "Jupiterin kiertorata"
 
 #: src/ui_orbitColorsDialog.h:399
 msgid "Orbit of Neptune"
-msgstr ""
+msgstr "Neptunuksen kiertorata"
 
 #: src/ui_orbitColorsDialog.h:400
 msgid "Orbits of moons of planets"
-msgstr ""
+msgstr "Planeettojen kuiden kiertoradat"
 
 #: src/ui_orbitColorsDialog.h:402
 msgid "Color of orbits of cubewanos"
-msgstr ""
+msgstr "Cubewanojen kiertoratojen väri"
 
 #: src/ui_orbitColorsDialog.h:405
 msgid "Color of orbit of Venus"
-msgstr ""
+msgstr "Venuksen kiertoradan väri"
 
 #: src/ui_orbitColorsDialog.h:408
 msgid "Color of orbits of minor planets"
-msgstr ""
+msgstr "Pikkuplaneettojen kiertoratojen väri"
 
 #: src/ui_orbitColorsDialog.h:411
 msgid "Color of orbits of scattered disk objects"
-msgstr ""
+msgstr "Hajanaisen kiekon kohteiden kiertoratojen väri"
 
 #: src/ui_orbitColorsDialog.h:416
 msgid "Orbit of Saturn"
-msgstr ""
+msgstr "Saturnuksen kiertorata"
 
 #: src/ui_orbitColorsDialog.h:418
 msgid "Color of orbit of Uranus"
-msgstr ""
+msgstr "Uranuksen kiertoradan väri"
 
 #: src/ui_orbitColorsDialog.h:421
 msgid "Color of orbit of Earth"
-msgstr ""
+msgstr "Maan kiertoradan väri"
 
 #: src/ui_orbitColorsDialog.h:423
 msgid "Orbit of Earth"
-msgstr ""
+msgstr "Maan kiertorata"
 
 #: src/ui_orbitColorsDialog.h:425
 msgid "Color of orbits of dwarf planets"
-msgstr ""
+msgstr "Kääpiöplaneettojen kiertoratojen väri"
 
 #: src/ui_orbitColorsDialog.h:427
 msgid "Orbits of comets"
-msgstr ""
+msgstr "Komeettojen kiertoradat"
 
 #: src/ui_orbitColorsDialog.h:428
 msgid "Orbits of dwarf planets"
-msgstr ""
+msgstr "Kääpiöplaneettojen kiertoradat"
 
 #: src/ui_orbitColorsDialog.h:430
 msgid "Color of orbit of Mercury"
-msgstr ""
+msgstr "Merkuriuksen kiertoradan väri"
 
 #: src/ui_orbitColorsDialog.h:432
 msgid "Orbits of plutinos"
-msgstr ""
+msgstr "Plutinojen kiertoradat"
 
 #: src/ui_orbitColorsDialog.h:433
 msgid "Orbits of scattered disk objects"
-msgstr ""
+msgstr "Hajanaisen kiekon kohteiden kiertoradat"
 
 #: src/ui_orbitColorsDialog.h:437
 msgid "Generic orbit"
-msgstr ""
+msgstr "Geneerinen kiertorata"
 
 #: src/ui_orbitColorsDialog.h:438
 msgid "Orbits of cubewanos"
-msgstr ""
+msgstr "Cubewanojen kiertoradat"
 
 #: src/ui_orbitColorsDialog.h:440
 msgid "Color of orbit of Mars"
-msgstr ""
+msgstr "Marsin kiertoradan väri"
 
 #: src/ui_orbitColorsDialog.h:443
 msgid "Color of orbit of Jupiter"
-msgstr ""
+msgstr "Jupiterin kiertoradan väri"
 
 #: src/ui_orbitColorsDialog.h:445
 msgid "Orbit of Venus"
-msgstr ""
+msgstr "Venuksen kiertorata"
 
 #: src/ui_orbitColorsDialog.h:447
 msgid "Color of orbits of plutinos"
-msgstr ""
+msgstr "Plutinojen kiertoratojen väri"
 
 #: src/ui_orbitColorsDialog.h:452
 msgid "Orbits of minor planets"
-msgstr ""
+msgstr "Pikkuplaneettojen kiertoradat"
 
 #: src/ui_orbitColorsDialog.h:453
 msgid "Orbits of Oort cloud objects"
-msgstr ""
+msgstr "Oortin pilven kohteiden kiertoradat"
 
 #: src/ui_orbitColorsDialog.h:455
 msgid "Color of orbits of Oort cloud objects"
-msgstr ""
+msgstr "Oortin pilven kohteiden kiertoratojen väri"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:138
@@ -16896,6 +16899,9 @@ msgstr "Oma deklinaatio 2"
 #~ msgid "Use flip for CCD"
 #~ msgstr "Käytä ilmaisimen kääntöä"
 
+#~ msgid "Illumination"
+#~ msgstr "Maiseman valot"
+
 #~ msgid "Topocentric equatorial coordinates"
 #~ msgstr "Paikkakeskiset ekvatoriaaliset koordinaatit"
 
@@ -16947,16 +16953,6 @@ msgstr "Oma deklinaatio 2"
 #~ msgid "Use system settings (default)"
 #~ msgstr "Käytä järjestelmän asetuksia (oletus)"
 
-#~ msgid ""
-#~ "Enable automatic install the type of mount from the telescope settings for "
-#~ "saving horizontal orientation of CCD frame."
-#~ msgstr ""
-#~ "Ota käyttöön automaattinen jalustatyypin asetus kaukoputken asetuksista "
-#~ "kennon asennon tallentamiseksi."
-
-#~ msgid "Enable automatic install the type of mount"
-#~ msgstr "Otakäyttöön  automaattinen jalustatyypin asetus"
-
 #~ msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 #~ msgstr ""
 #~ "Ekliptikaaliset koordinaatit, nykyinen ja J2000.0-epookki (vain Maalle)"
@@ -16965,23 +16961,5 @@ msgstr "Oma deklinaatio 2"
 #~ msgstr ""
 #~ "Muutokset tulevat voimaan Stellariumin seuraavassa käynnistyksen yhteydessä."
 
-#~ msgid "Enable display designations of exoplanets"
-#~ msgstr "Näytä eksoplaneettojen tunnukset"
-
 #~ msgid "Last week"
 #~ msgstr "Viimeinen viikko"
-
-#~ msgid "Bright nebulae (<10 mag.)"
-#~ msgstr "Kirkkaat sumut (<10 mag.)"
-
-#~ msgid "Bright galaxies (<10 mag.)"
-#~ msgstr "Kirkkaat galaksit (<10 mag.)"
-
-#~ msgid "YSOs"
-#~ msgstr "Nuoret tähtimäiset kohteet"
-
-#~ msgid "Color of markers of Young Stellar Objects"
-#~ msgstr "Nuorten tähtimäisten kohteiden osoittimien väri"
-
-#~ msgid "Toggle display the button of Digitized Sky Survey."
-#~ msgstr "Näytä digitoidun taivasmosaiikin painike."

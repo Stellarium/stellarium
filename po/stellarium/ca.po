@@ -10,14 +10,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-17 00:57+0700\n"
-"PO-Revision-Date: 2016-12-16 15:39+0000\n"
+"POT-Creation-Date: 2016-12-17 16:39+0700\n"
+"PO-Revision-Date: 2016-12-17 23:10+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-17 04:41+0000\n"
+"X-Launchpad-Export-Date: 2016-12-18 04:40+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -344,13 +344,12 @@ msgid "Ground"
 msgstr "Terra"
 
 #: src/core/modules/LandscapeMgr.cpp:419
-msgid "Illumination"
-msgstr "Il·luminació"
+msgid "Landscape illumination"
+msgstr "Il·luminació del paisatge"
 
-#: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:2068
-#: plugins/Satellites/src/ui_satellitesDialog.h:720
-msgid "Labels"
-msgstr "Etiquetes"
+#: src/core/modules/LandscapeMgr.cpp:420
+msgid "Landscape labels"
+msgstr "Etiquetes del paisatge"
 
 #: src/core/modules/LandscapeMgr.cpp:421 src/ui_viewDialog.h:1958
 msgid "Light pollution data from locations database"
@@ -5774,11 +5773,11 @@ msgstr "Mostra les orbites dels planetes"
 
 #: src/ui_viewDialog.h:1968
 msgid "Configure colors of lines of orbits"
-msgstr ""
+msgstr "Configura colors de les línies de les òrbites"
 
 #: src/ui_viewDialog.h:1970
 msgid "Colors..."
-msgstr ""
+msgstr "Colors..."
 
 #: src/ui_viewDialog.h:1972
 msgid ""
@@ -5957,6 +5956,10 @@ msgstr ""
 #: src/ui_viewDialog.h:2067
 msgid "Use designations for screen labels"
 msgstr "Utilitza les denominacions per les etiquetes de pantalla"
+
+#: src/ui_viewDialog.h:2068 plugins/Satellites/src/ui_satellitesDialog.h:720
+msgid "Labels"
+msgstr "Etiquetes"
 
 #: src/ui_viewDialog.h:2069
 msgid "Hints"
@@ -7382,7 +7385,7 @@ msgstr "Color dels marcadors d'objecte d'emissió"
 msgid "Color of markers of deep-sky objects"
 msgstr "Color dels marcadors d'objectes de cel profund"
 
-#: src/ui_dsoColorsDialog.h:558 src/ui_orbitColorsDialog.h:435
+#: src/ui_dsoColorsDialog.h:558
 msgid "Labels of deep-sky objects"
 msgstr "Etiquetes d'objectes de cel profund"
 
@@ -7452,11 +7455,11 @@ msgstr "Color dels marcadors de núvols moleculars"
 
 #: src/ui_dsoColorsDialog.h:610
 msgid "Young stellar objects"
-msgstr ""
+msgstr "Objectes estel·lars joves"
 
 #: src/ui_dsoColorsDialog.h:612
 msgid "Color of markers of young stellar objects"
-msgstr ""
+msgstr "Colors de les marques dels objectes estel·lars joves"
 
 #: src/ui_dsoColorsDialog.h:616
 msgid "Color of markers of supernova remnants"
@@ -7464,167 +7467,167 @@ msgstr "Color dels marcadors de romanents de supernova"
 
 #: src/ui_orbitColorsDialog.h:368
 msgid "Style of colors of orbits"
-msgstr ""
+msgstr "Estil de colors de les òrbites"
 
 #: src/ui_orbitColorsDialog.h:369
 msgid "One color for all orbits"
-msgstr ""
+msgstr "Un color per totes les òrbites"
 
 #: src/ui_orbitColorsDialog.h:370
 msgid "Separate colors for orbits of groups of objects by type"
-msgstr ""
+msgstr "Colors diferents per a les òrbites dels grups d'objectes per tipus"
 
 #: src/ui_orbitColorsDialog.h:371
 msgid "Separate colors for orbits of major planets only"
-msgstr ""
+msgstr "Colors diferents només per a les òrbites dels planetes majors"
 
 #: src/ui_orbitColorsDialog.h:372
 msgid "Colors of orbits of Solar system bodies"
-msgstr ""
+msgstr "Colors de les òrbites dels cossos del sistema solar"
 
 #: src/ui_orbitColorsDialog.h:374
 msgid "Color of orbits of comets"
-msgstr ""
+msgstr "Color de les òrbites dels cometes"
 
 #: src/ui_orbitColorsDialog.h:376
 msgid "Orbit of Uranus"
-msgstr ""
+msgstr "Òrbita d'Urà"
 
 #: src/ui_orbitColorsDialog.h:377
 msgid "Orbit of Mars"
-msgstr ""
+msgstr "Òrbita de Mart"
 
 #: src/ui_orbitColorsDialog.h:379
 msgid "Color of orbit of Neptune"
-msgstr ""
+msgstr "Color de l'òrbita de Neptú"
 
 #: src/ui_orbitColorsDialog.h:382
 msgid "Color of orbits of moons of planets"
-msgstr ""
+msgstr "Color de les òrbites de les llunes i planetes"
 
 #: src/ui_orbitColorsDialog.h:385
 msgid "Color of generic orbit"
-msgstr ""
+msgstr "Color d'òrbita genèrica"
 
 #: src/ui_orbitColorsDialog.h:387
 msgid "Orbit of Mercury"
-msgstr ""
+msgstr "Òrbita de Mercuri"
 
 #: src/ui_orbitColorsDialog.h:389
 msgid "Color of orbits of major planets"
-msgstr ""
+msgstr "Color de les òrbites dels planetes majors"
 
 #: src/ui_orbitColorsDialog.h:391
 msgid "Orbits of major planets"
-msgstr ""
+msgstr "Òrbites dels planetes majors"
 
 #: src/ui_orbitColorsDialog.h:393
 msgid "Color of orbit of Saturn"
-msgstr ""
+msgstr "Color de l'òrbita de Saturn"
 
 #: src/ui_orbitColorsDialog.h:395
 msgid "Orbit of Jupiter"
-msgstr ""
+msgstr "Òrbita de Júpiter"
 
 #: src/ui_orbitColorsDialog.h:399
 msgid "Orbit of Neptune"
-msgstr ""
+msgstr "Òrbita de Neptú"
 
 #: src/ui_orbitColorsDialog.h:400
 msgid "Orbits of moons of planets"
-msgstr ""
+msgstr "Òrbites de llunes i planetes"
 
 #: src/ui_orbitColorsDialog.h:402
 msgid "Color of orbits of cubewanos"
-msgstr ""
+msgstr "Color de les òrbites d'objectes cubewanos"
 
 #: src/ui_orbitColorsDialog.h:405
 msgid "Color of orbit of Venus"
-msgstr ""
+msgstr "Color de l'òrbita de Venus"
 
 #: src/ui_orbitColorsDialog.h:408
 msgid "Color of orbits of minor planets"
-msgstr ""
+msgstr "Color de les òrbites dels planetes menors"
 
 #: src/ui_orbitColorsDialog.h:411
 msgid "Color of orbits of scattered disk objects"
-msgstr ""
+msgstr "Color de les òrbites dels objectes de disc disperses"
 
 #: src/ui_orbitColorsDialog.h:416
 msgid "Orbit of Saturn"
-msgstr ""
+msgstr "Òrbita de Saturn"
 
 #: src/ui_orbitColorsDialog.h:418
 msgid "Color of orbit of Uranus"
-msgstr ""
+msgstr "Color de l'òrbita d'Urà"
 
 #: src/ui_orbitColorsDialog.h:421
 msgid "Color of orbit of Earth"
-msgstr ""
+msgstr "Color de l'òrbita de la Terra"
 
 #: src/ui_orbitColorsDialog.h:423
 msgid "Orbit of Earth"
-msgstr ""
+msgstr "Òrbita de la Terra"
 
 #: src/ui_orbitColorsDialog.h:425
 msgid "Color of orbits of dwarf planets"
-msgstr ""
+msgstr "Color de les òrbites dels planetes nans"
 
 #: src/ui_orbitColorsDialog.h:427
 msgid "Orbits of comets"
-msgstr ""
+msgstr "Òrbites de cometes"
 
 #: src/ui_orbitColorsDialog.h:428
 msgid "Orbits of dwarf planets"
-msgstr ""
+msgstr "Òrbites de planetes nans"
 
 #: src/ui_orbitColorsDialog.h:430
 msgid "Color of orbit of Mercury"
-msgstr ""
+msgstr "Color de l'òrbita de Mercuri"
 
 #: src/ui_orbitColorsDialog.h:432
 msgid "Orbits of plutinos"
-msgstr ""
+msgstr "Òrbites de plutins"
 
 #: src/ui_orbitColorsDialog.h:433
 msgid "Orbits of scattered disk objects"
-msgstr ""
+msgstr "Òrbites dels objectes de disc disperses"
 
 #: src/ui_orbitColorsDialog.h:437
 msgid "Generic orbit"
-msgstr ""
+msgstr "Òrbita genèrica"
 
 #: src/ui_orbitColorsDialog.h:438
 msgid "Orbits of cubewanos"
-msgstr ""
+msgstr "Òrbites de cubewanos"
 
 #: src/ui_orbitColorsDialog.h:440
 msgid "Color of orbit of Mars"
-msgstr ""
+msgstr "Color de l'òrbita de Mart"
 
 #: src/ui_orbitColorsDialog.h:443
 msgid "Color of orbit of Jupiter"
-msgstr ""
+msgstr "Color de l'òrbita de Júpiter"
 
 #: src/ui_orbitColorsDialog.h:445
 msgid "Orbit of Venus"
-msgstr ""
+msgstr "Òrbita de Venus"
 
 #: src/ui_orbitColorsDialog.h:447
 msgid "Color of orbits of plutinos"
-msgstr ""
+msgstr "Color de les òrbites dels plutins"
 
 #: src/ui_orbitColorsDialog.h:452
 msgid "Orbits of minor planets"
-msgstr ""
+msgstr "Òrbites dels planetes menors"
 
 #: src/ui_orbitColorsDialog.h:453
 msgid "Orbits of Oort cloud objects"
-msgstr ""
+msgstr "Òrbites d'objectes del núvol d'Oort"
 
 #: src/ui_orbitColorsDialog.h:455
 msgid "Color of orbits of Oort cloud objects"
-msgstr ""
+msgstr "Color de les òrbites d'objectes del núvol d'Oort"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:138
@@ -17139,6 +17142,9 @@ msgstr "Declinació Personalitzada 2"
 #~ msgstr ""
 #~ "Coordenades eclíptica, equinocci de data i J2000 (només per a la Terra)"
 
+#~ msgid "Illumination"
+#~ msgstr "Il·luminació"
+
 #~ msgid "Show names"
 #~ msgstr "Mostra els noms"
 
@@ -17199,31 +17205,3 @@ msgstr "Declinació Personalitzada 2"
 
 #~ msgid "Show Solar System objects"
 #~ msgstr "Mostra objectes del Sistema Solar"
-
-#~ msgid ""
-#~ "Enable automatic install the type of mount from the telescope settings for "
-#~ "saving horizontal orientation of CCD frame."
-#~ msgstr ""
-#~ "Habilitar instal·lació automàtica del tipus de muntura de la configuració "
-#~ "del telescopi per a l'estalviar l'orientació horitzontal del marc CCD."
-
-#~ msgid "Enable automatic install the type of mount"
-#~ msgstr "Habilitar instal·lació automàtica del tipus de muntura"
-
-#~ msgid "Enable display designations of exoplanets"
-#~ msgstr "Activar la visualització de les denominacions dels exoplanetes"
-
-#~ msgid "YSOs"
-#~ msgstr "OEJ"
-
-#~ msgid "Color of markers of Young Stellar Objects"
-#~ msgstr "Color dels marcadors d'Objectes Estel·lars Joves"
-
-#~ msgid "Bright nebulae (<10 mag.)"
-#~ msgstr "Nebuloses brillants (<10 mag.)"
-
-#~ msgid "Bright galaxies (<10 mag.)"
-#~ msgstr "Galàxies brillants (<10 mag.)"
-
-#~ msgid "Toggle display the button of Digitized Sky Survey."
-#~ msgstr "Commuta visualització del botó del Estudi Digital del Cel"
