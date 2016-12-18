@@ -37,13 +37,19 @@ class StelMovementMgr : public StelModule
 		   WRITE setEquatorialMount
 		   NOTIFY equatorialMountChanged)
 	Q_PROPERTY(bool tracking
-			   READ getFlagTracking
-			   WRITE setFlagTracking
-			   NOTIFY flagTrackingChanged)
+		   READ getFlagTracking
+		   WRITE setFlagTracking
+		   NOTIFY flagTrackingChanged)
 
 	//The targets of viewport offset animation
-	Q_PROPERTY(float viewportHorizontalOffsetTarget READ getViewportHorizontalOffsetTarget WRITE setViewportHorizontalOffsetTarget NOTIFY viewportHorizontalOffsetTargetChanged)
-	Q_PROPERTY(float viewportVerticalOffsetTarget READ getViewportVerticalOffsetTarget WRITE setViewportVerticalOffsetTarget NOTIFY viewportVerticalOffsetTargetChanged)
+	Q_PROPERTY(float viewportHorizontalOffsetTarget
+		   READ getViewportHorizontalOffsetTarget
+		   WRITE setViewportHorizontalOffsetTarget
+		   NOTIFY viewportHorizontalOffsetTargetChanged)
+	Q_PROPERTY(float viewportVerticalOffsetTarget
+		   READ getViewportVerticalOffsetTarget
+		   WRITE setViewportVerticalOffsetTarget
+		   NOTIFY viewportVerticalOffsetTargetChanged)
 
 	Q_PROPERTY(bool flagAutoZoomOutResetsDirection
 		   READ getFlagAutoZoomOutResetsDirection
@@ -75,8 +81,11 @@ public:
 	virtual void init();
 
 	//! Update time-dependent things (triggers a time dragging record if required)
-	virtual void update(double) {
-		if (dragTimeMode) addTimeDragPoint(QCursor::pos().x(), QCursor::pos().y());}
+	virtual void update(double)
+	{
+		if (dragTimeMode)
+			addTimeDragPoint(QCursor::pos().x(), QCursor::pos().y());
+	}
 	//! Implement required draw function.  Does nothing.
 	virtual void draw(StelCore*) {;}
 	//! Handle keyboard events.
@@ -209,7 +218,7 @@ public slots:
 	void setInitFov(double fov) {initFov=fov;}
 
 	//! Return the inital viewing direction in altazimuthal coordinates
-	const Vec3d& getInitViewingDirection() {return initViewPos;}
+	const Vec3d getInitViewingDirection() {return initViewPos;}
 	//! Sets the initial direction of view to the current altitude and azimuth.
 	//! Note: Updates the configuration file.
 	void setInitViewDirectionToCurrent();

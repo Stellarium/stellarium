@@ -50,69 +50,69 @@
 #include <QDir>
 
 void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c; emit labelsColorChanged(c);}
-const Vec3f &NebulaMgr::getLabelsColor(void) const {return Nebula::labelColor;}
+const Vec3f NebulaMgr::getLabelsColor(void) const {return Nebula::labelColor;}
 void NebulaMgr::setCirclesColor(const Vec3f& c) {Nebula::circleColor = c; emit circlesColorChanged(c); }
-const Vec3f &NebulaMgr::getCirclesColor(void) const {return Nebula::circleColor;}
+const Vec3f NebulaMgr::getCirclesColor(void) const {return Nebula::circleColor;}
 void NebulaMgr::setGalaxyColor(const Vec3f& c) {Nebula::galaxyColor = c; emit galaxiesColorChanged(c); }
-const Vec3f &NebulaMgr::getGalaxyColor(void) const {return Nebula::galaxyColor;}
+const Vec3f NebulaMgr::getGalaxyColor(void) const {return Nebula::galaxyColor;}
 void NebulaMgr::setRadioGalaxyColor(const Vec3f& c) {Nebula::radioGalaxyColor = c; emit radioGalaxiesColorChanged(c); }
-const Vec3f &NebulaMgr::getRadioGalaxyColor(void) const {return Nebula::radioGalaxyColor;}
+const Vec3f NebulaMgr::getRadioGalaxyColor(void) const {return Nebula::radioGalaxyColor;}
 void NebulaMgr::setActiveGalaxyColor(const Vec3f& c) {Nebula::activeGalaxyColor = c; emit activeGalaxiesColorChanged(c); }
-const Vec3f &NebulaMgr::getActiveGalaxyColor(void) const {return Nebula::activeGalaxyColor;}
+const Vec3f NebulaMgr::getActiveGalaxyColor(void) const {return Nebula::activeGalaxyColor;}
 void NebulaMgr::setInteractingGalaxyColor(const Vec3f& c) {Nebula::interactingGalaxyColor = c; emit interactingGalaxiesColorChanged(c); }
-const Vec3f &NebulaMgr::getInteractingGalaxyColor(void) const {return Nebula::interactingGalaxyColor;}
+const Vec3f NebulaMgr::getInteractingGalaxyColor(void) const {return Nebula::interactingGalaxyColor;}
 void NebulaMgr::setQuasarColor(const Vec3f& c) {Nebula::quasarColor = c; emit quasarsColorChanged(c); }
-const Vec3f &NebulaMgr::getQuasarColor(void) const {return Nebula::quasarColor;}
+const Vec3f NebulaMgr::getQuasarColor(void) const {return Nebula::quasarColor;}
 void NebulaMgr::setBrightNebulaColor(const Vec3f& c) {Nebula::nebulaColor = c; emit nebulaeColorChanged(c); }
-const Vec3f &NebulaMgr::getBrightNebulaColor(void) const {return Nebula::nebulaColor;}
+const Vec3f NebulaMgr::getBrightNebulaColor(void) const {return Nebula::nebulaColor;}
 void NebulaMgr::setNebulaColor(const Vec3f& c) {Nebula::nebulaColor = c; emit nebulaeColorChanged(c); }
-const Vec3f &NebulaMgr::getNebulaColor(void) const {return Nebula::nebulaColor;}
+const Vec3f NebulaMgr::getNebulaColor(void) const {return Nebula::nebulaColor;}
 void NebulaMgr::setPlanetaryNebulaColor(const Vec3f& c) {Nebula::planetaryNebulaColor = c; emit planetaryNebulaeColorChanged(c);}
-const Vec3f &NebulaMgr::getPlanetaryNebulaColor(void) const {return Nebula::planetaryNebulaColor;}
+const Vec3f NebulaMgr::getPlanetaryNebulaColor(void) const {return Nebula::planetaryNebulaColor;}
 void NebulaMgr::setReflectionNebulaColor(const Vec3f& c) {Nebula::reflectionNebulaColor = c; emit reflectionNebulaeColorChanged(c);}
-const Vec3f &NebulaMgr::getReflectionNebulaColor(void) const {return Nebula::reflectionNebulaColor;}
+const Vec3f NebulaMgr::getReflectionNebulaColor(void) const {return Nebula::reflectionNebulaColor;}
 void NebulaMgr::setBipolarNebulaColor(const Vec3f& c) {Nebula::bipolarNebulaColor = c; emit bipolarNebulaeColorChanged(c);}
-const Vec3f &NebulaMgr::getBipolarNebulaColor(void) const {return Nebula::bipolarNebulaColor;}
+const Vec3f NebulaMgr::getBipolarNebulaColor(void) const {return Nebula::bipolarNebulaColor;}
 void NebulaMgr::setEmissionNebulaColor(const Vec3f& c) {Nebula::emissionNebulaColor = c; emit emissionNebulaeColorChanged(c);}
-const Vec3f &NebulaMgr::getEmissionNebulaColor(void) const {return Nebula::emissionNebulaColor;}
+const Vec3f NebulaMgr::getEmissionNebulaColor(void) const {return Nebula::emissionNebulaColor;}
 void NebulaMgr::setDarkNebulaColor(const Vec3f& c) {Nebula::darkNebulaColor= c; emit darkNebulaeColorChanged(c);}
-const Vec3f &NebulaMgr::getDarkNebulaColor(void) const {return Nebula::darkNebulaColor;}
+const Vec3f NebulaMgr::getDarkNebulaColor(void) const {return Nebula::darkNebulaColor;}
 void NebulaMgr::setHydrogenRegionColor(const Vec3f& c) {Nebula::hydrogenRegionColor= c; emit hydrogenRegionsColorChanged(c);}
-const Vec3f &NebulaMgr::getHydrogenRegionColor(void) const {return Nebula::hydrogenRegionColor;}
+const Vec3f NebulaMgr::getHydrogenRegionColor(void) const {return Nebula::hydrogenRegionColor;}
 void NebulaMgr::setSupernovaRemnantColor(const Vec3f& c) {Nebula::supernovaRemnantColor = c; emit supernovaRemnantsColorChanged(c);}
-const Vec3f &NebulaMgr::getSupernovaRemnantColor(void) const {return Nebula::supernovaRemnantColor;}
+const Vec3f NebulaMgr::getSupernovaRemnantColor(void) const {return Nebula::supernovaRemnantColor;}
 void NebulaMgr::setInterstellarMatterColor(const Vec3f& c) {Nebula::interstellarMatterColor = c; emit interstellarMatterColorChanged(c);}
-const Vec3f &NebulaMgr::getInterstellarMatterColor(void) const {return Nebula::interstellarMatterColor;}
+const Vec3f NebulaMgr::getInterstellarMatterColor(void) const {return Nebula::interstellarMatterColor;}
 void NebulaMgr::setClusterWithNebulosityColor(const Vec3f& c) {Nebula::clusterWithNebulosityColor= c; emit clusterWithNebulosityColorChanged(c);}
-const Vec3f &NebulaMgr::getClusterWithNebulosityColor(void) const {return Nebula::clusterWithNebulosityColor;}
+const Vec3f NebulaMgr::getClusterWithNebulosityColor(void) const {return Nebula::clusterWithNebulosityColor;}
 void NebulaMgr::setClusterColor(const Vec3f& c) {Nebula::clusterColor= c; emit clustersColorChanged(c);}
-const Vec3f &NebulaMgr::getClusterColor(void) const {return Nebula::clusterColor;}
+const Vec3f NebulaMgr::getClusterColor(void) const {return Nebula::clusterColor;}
 void NebulaMgr::setOpenClusterColor(const Vec3f& c) {Nebula::openClusterColor = c; emit openClustersColorChanged(c);}
-const Vec3f &NebulaMgr::getOpenClusterColor(void) const {return Nebula::openClusterColor;}
+const Vec3f NebulaMgr::getOpenClusterColor(void) const {return Nebula::openClusterColor;}
 void NebulaMgr::setGlobularClusterColor(const Vec3f& c) {Nebula::globularClusterColor = c; emit globularClustersColorChanged(c);}
-const Vec3f &NebulaMgr::getGlobularClusterColor(void) const {return Nebula::globularClusterColor;}
+const Vec3f NebulaMgr::getGlobularClusterColor(void) const {return Nebula::globularClusterColor;}
 void NebulaMgr::setStellarAssociationColor(const Vec3f& c) {Nebula::stellarAssociationColor = c; emit stellarAssociationsColorChanged(c);}
-const Vec3f &NebulaMgr::getStellarAssociationColor(void) const {return Nebula::stellarAssociationColor;}
+const Vec3f NebulaMgr::getStellarAssociationColor(void) const {return Nebula::stellarAssociationColor;}
 void NebulaMgr::setStarCloudColor(const Vec3f& c) {Nebula::starCloudColor = c; emit starCloudsColorChanged(c);}
-const Vec3f &NebulaMgr::getStarCloudColor(void) const {return Nebula::starCloudColor;}
+const Vec3f NebulaMgr::getStarCloudColor(void) const {return Nebula::starCloudColor;}
 void NebulaMgr::setEmissionObjectColor(const Vec3f& c) {Nebula::emissionObjectColor = c; emit emissionObjectsColorChanged(c);}
-const Vec3f &NebulaMgr::getEmissionObjectColor(void) const {return Nebula::emissionObjectColor;}
+const Vec3f NebulaMgr::getEmissionObjectColor(void) const {return Nebula::emissionObjectColor;}
 void NebulaMgr::setBlLacObjectColor(const Vec3f& c) {Nebula::blLacObjectColor = c; emit blLacObjectsColorChanged(c);}
-const Vec3f &NebulaMgr::getBlLacObjectColor(void) const {return Nebula::blLacObjectColor;}
+const Vec3f NebulaMgr::getBlLacObjectColor(void) const {return Nebula::blLacObjectColor;}
 void NebulaMgr::setBlazarColor(const Vec3f& c) {Nebula::blazarColor = c; emit blazarsColorChanged(c);}
-const Vec3f &NebulaMgr::getBlazarColor(void) const {return Nebula::blazarColor;}
+const Vec3f NebulaMgr::getBlazarColor(void) const {return Nebula::blazarColor;}
 void NebulaMgr::setMolecularCloudColor(const Vec3f& c) {Nebula::molecularCloudColor = c; emit molecularCloudsColorChanged(c);}
-const Vec3f &NebulaMgr::getMolecularCloudColor(void) const {return Nebula::molecularCloudColor;}
+const Vec3f NebulaMgr::getMolecularCloudColor(void) const {return Nebula::molecularCloudColor;}
 void NebulaMgr::setYoungStellarObjectColor(const Vec3f& c) {Nebula::youngStellarObjectColor = c; emit youngStellarObjectsColorChanged(c);}
-const Vec3f &NebulaMgr::getYoungStellarObjectColor(void) const {return Nebula::youngStellarObjectColor;}
+const Vec3f NebulaMgr::getYoungStellarObjectColor(void) const {return Nebula::youngStellarObjectColor;}
 void NebulaMgr::setPossibleQuasarColor(const Vec3f& c) {Nebula::possibleQuasarColor = c; emit possibleQuasarsColorChanged(c);}
-const Vec3f &NebulaMgr::getPossibleQuasarColor(void) const {return Nebula::possibleQuasarColor;}
+const Vec3f NebulaMgr::getPossibleQuasarColor(void) const {return Nebula::possibleQuasarColor;}
 void NebulaMgr::setPossiblePlanetaryNebulaColor(const Vec3f& c) {Nebula::possiblePlanetaryNebulaColor = c; emit possiblePlanetaryNebulaeColorChanged(c);}
-const Vec3f &NebulaMgr::getPossiblePlanetaryNebulaColor(void) const {return Nebula::possiblePlanetaryNebulaColor;}
+const Vec3f NebulaMgr::getPossiblePlanetaryNebulaColor(void) const {return Nebula::possiblePlanetaryNebulaColor;}
 void NebulaMgr::setProtoplanetaryNebulaColor(const Vec3f& c) {Nebula::protoplanetaryNebulaColor = c; emit protoplanetaryNebulaeColorChanged(c);}
-const Vec3f &NebulaMgr::getProtoplanetaryNebulaColor(void) const {return Nebula::protoplanetaryNebulaColor;}
+const Vec3f NebulaMgr::getProtoplanetaryNebulaColor(void) const {return Nebula::protoplanetaryNebulaColor;}
 void NebulaMgr::setStarColor(const Vec3f& c) {Nebula::starColor = c; emit starsColorChanged(c);}
-const Vec3f &NebulaMgr::getStarColor(void) const {return Nebula::starColor;}
+const Vec3f NebulaMgr::getStarColor(void) const {return Nebula::starColor;}
 void NebulaMgr::setHintsProportional(const bool proportional) {if(Nebula::drawHintProportional!=proportional){ Nebula::drawHintProportional=proportional; emit hintsProportionalChanged(proportional);}}
 bool NebulaMgr::getHintsProportional(void) const {return Nebula::drawHintProportional;}
 void NebulaMgr::setDesignationUsage(const bool flag) {if(Nebula::designationUsage!=flag){ Nebula::designationUsage=flag; emit designationUsageChanged(flag);}}
