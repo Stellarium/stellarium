@@ -196,7 +196,7 @@ public slots:
 	QStringList getUserLandscapeIDs() const;
 
 	//! Get the current landscape ID.
-	const QString& getCurrentLandscapeID() const {return currentLandscapeID;}
+	const QString getCurrentLandscapeID() const {return currentLandscapeID;}
 	//! Change the current landscape to the landscape with the ID specified.
 	//! Emits currentLandscapeChanged() if the landscape changed (true returned)
 	//! @param id the ID of the new landscape
@@ -216,7 +216,7 @@ public slots:
 	Landscape* getCurrentLandscape() const { return landscape; }
 
 	//! Get the default landscape ID.
-	const QString& getDefaultLandscapeID() const {return defaultLandscapeID;}
+	const QString getDefaultLandscapeID() const {return defaultLandscapeID;}
 	//! Change the default landscape to the landscape with the ID specified.
 	//! @param id the ID of the landscape to use by default
 	//! @return false if the new landscape could not be set (e.g. no landscape of that ID was found). True on success.

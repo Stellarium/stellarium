@@ -92,7 +92,11 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 
 StelMovementMgr::~StelMovementMgr()
 {
-	if (viewportOffsetTimeline) delete viewportOffsetTimeline; viewportOffsetTimeline=NULL;
+	if (viewportOffsetTimeline)
+	{
+		delete viewportOffsetTimeline;
+		viewportOffsetTimeline=NULL;
+	}
 }
 
 void StelMovementMgr::init()
@@ -102,7 +106,7 @@ void StelMovementMgr::init()
 	Q_ASSERT(conf);
 	Q_ASSERT(objectMgr);
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
-			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
+		this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 
 	flagEnableMoveAtScreenEdge = conf->value("navigation/flag_enable_move_at_screen_edge",false).toBool();
 	mouseZoomSpeed = conf->value("navigation/mouse_zoom",30).toInt();
