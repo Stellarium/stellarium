@@ -559,7 +559,7 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	groups->addItem(q_("Cubewanos"), "6");
 	groups->addItem(q_("Scattered disc objects"), "7");
 	groups->addItem(q_("Oort cloud objects"), "8");
-	groups->addItem(q_("Bright stars (<%1 mag)").arg(QString::number(brightLimit-3.9f, 'f', 1)), "9");
+	groups->addItem(q_("Bright stars (<%1 mag)").arg(QString::number(brightLimit-5.0f, 'f', 1)), "9");
 	groups->addItem(q_("Bright star clusters (<%1 mag)").arg(brLimit), "10");
 	groups->addItem(q_("Planetary nebulae"), "11");
 	groups->addItem(q_("Bright nebulae (<%1 mag)").arg(brLimit), "12");
@@ -870,7 +870,7 @@ void AstroCalcDialog::calculatePhenomena()
 		case 9: // Stars
 			foreach(const StelObjectP& object, hipStars)
 			{
-				if (object->getVMagnitude(core)<(brightLimit-3.9f))
+				if (object->getVMagnitude(core)<(brightLimit-5.0f))
 					star.append(object);
 			}
 			break;
@@ -1387,8 +1387,8 @@ QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP &object1, Stel
 		if (step0 > 2.5f)
 			step0 = 2.5;
 	if (object1->getEnglishName()=="Moon")
-		if (step0 > 0.125)
-			step0 = 0.125;
+		if (step0 > 0.25)
+			step0 = 0.25;
 
 	step = step0;
 	double jd = startJD;
