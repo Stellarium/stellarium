@@ -60,6 +60,8 @@ SET(zlib_SRCS
 IF(ENABLE_SPOUT)
     SET(spout_SRCS
      core/external/SpoutLibrary.h
+     core/SpoutSender.hpp
+     core/SpoutSender.cpp
 	 )
 ENDIF()
 
@@ -489,7 +491,7 @@ IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
      ENDIF()
 ENDIF()
 
-if(WIN32 AND SPOUT_LIBRARY_DLL)
+if(ENABLE_SPOUT AND SPOUT_LIBRARY_DLL)
     # automatically copy the spout .dll to the binary directory, if possible
     configure_file(${SPOUT_LIBRARY_DLL} ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 endif()
