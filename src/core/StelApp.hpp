@@ -49,7 +49,7 @@ class StelPropertyMgr;
 class StelProgressController;
 
 #ifdef 	ENABLE_SPOUT
-struct SPOUTLIBRARY;
+class SpoutSender;
 #endif
 
 //! @class StelApp
@@ -395,11 +395,7 @@ private:
 	// flag to indicate we want calculate azimuth from south towards west (as in old astronomical literature)
 	bool flagUseAzimuthFromSouth;
 #ifdef 	ENABLE_SPOUT
-	SPOUTLIBRARY * spoutSender;
-	char spoutName[256];
-	quint32 spoutTexID;
-	bool spoutValid; // true when the named sender instance has been created.
-	void initSpoutTexture(unsigned int width, unsigned int height);
+	SpoutSender* spoutSender;
 #endif
 
 };
