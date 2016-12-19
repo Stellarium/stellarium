@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-17 16:39+0700\n"
-"PO-Revision-Date: 2016-10-24 14:28+0000\n"
-"Last-Translator: Miguel Angel <maportilloserra@gmail.com>\n"
+"POT-Creation-Date: 2016-12-18 13:50+0700\n"
+"PO-Revision-Date: 2016-12-18 14:40+0000\n"
+"Last-Translator: Sergio Robledo <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-18 04:55+0000\n"
+"X-Launchpad-Export-Date: 2016-12-19 04:57+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 "Language: es_ES\n"
 
@@ -54,7 +54,7 @@ msgstr "constelación"
 #: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:218 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/modules/ToastMgr.cpp:61
-#: src/core/StelApp.cpp:531 src/core/StelCore.cpp:239
+#: src/core/StelApp.cpp:532 src/core/StelCore.cpp:239
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:577
 msgid "Display Options"
 msgstr "Ver Opciones"
@@ -84,7 +84,7 @@ msgstr "Seleccionar una constelación"
 
 #: src/core/modules/ConstellationMgr.cpp:149
 msgid "Remove selection of constellations"
-msgstr ""
+msgstr "Borrar selección de constelaciones"
 
 #: src/core/modules/StarMgr.cpp:445 src/ui_viewDialog.h:1927
 #: src/ui_dsoColorsDialog.h:541
@@ -347,11 +347,11 @@ msgstr "Suelo"
 
 #: src/core/modules/LandscapeMgr.cpp:419
 msgid "Landscape illumination"
-msgstr ""
+msgstr "Iluminación del paisaje"
 
 #: src/core/modules/LandscapeMgr.cpp:420
 msgid "Landscape labels"
-msgstr ""
+msgstr "Nombres del paisaje"
 
 #: src/core/modules/LandscapeMgr.cpp:421 src/ui_viewDialog.h:1958
 msgid "Light pollution data from locations database"
@@ -934,27 +934,27 @@ msgstr "El período de rotación es caótico"
 #: src/core/modules/Planet.cpp:385
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
-msgstr ""
+msgstr "Luna Creciente"
 
 #: src/core/modules/Planet.cpp:387
 msgctxt "Moon phase"
 msgid "First Quarter"
-msgstr ""
+msgstr "Cuarto creciente"
 
 #: src/core/modules/Planet.cpp:389
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
-msgstr ""
+msgstr "Luna creciente gibosa"
 
 #: src/core/modules/Planet.cpp:391
 msgctxt "Moon phase"
 msgid "Full Moon"
-msgstr ""
+msgstr "Luna llena"
 
 #: src/core/modules/Planet.cpp:393
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
-msgstr ""
+msgstr "Luna que comienza a menguar"
 
 #: src/core/modules/Planet.cpp:395
 msgctxt "Moon phase"
@@ -969,7 +969,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:399
 msgctxt "Moon phase"
 msgid "New Moon"
-msgstr ""
+msgstr "Luna nueva"
 
 #: src/core/modules/Planet.cpp:404 src/core/modules/Planet.cpp:409
 #: src/core/modules/MinorPlanet.cpp:293 src/core/modules/MinorPlanet.cpp:298
@@ -1168,11 +1168,11 @@ msgstr "Luz Zodiacal"
 msgid "Digitized Sky Survey (experimental)"
 msgstr ""
 
-#: src/core/StelApp.cpp:531
+#: src/core/StelApp.cpp:532
 msgid "Night mode"
 msgstr "Modo nocturno"
 
-#: src/core/StelApp.cpp:583
+#: src/core/StelApp.cpp:584
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 
@@ -1184,7 +1184,7 @@ msgstr ""
 msgid "Date and Time"
 msgstr "Fecha y Hora"
 
-#: src/core/StelCore.cpp:238 src/core/StelMovementMgr.cpp:176
+#: src/core/StelCore.cpp:238 src/core/StelMovementMgr.cpp:180
 msgid "Movement and Selection"
 msgstr "Movimiento y selección"
 
@@ -1959,56 +1959,56 @@ msgstr "Tiempo Sideral Aparente: %1"
 msgid "Deep-sky objects background images"
 msgstr "Imágenes de fondo de objetos del espacio profundo"
 
-#: src/core/StelMovementMgr.cpp:177 src/gui/StelGui.cpp:204
+#: src/core/StelMovementMgr.cpp:181 src/gui/StelGui.cpp:204
 #: src/StelMainView.cpp:576
 msgid "Miscellaneous"
 msgstr "Miscelánea"
 
-#: src/core/StelMovementMgr.cpp:177
+#: src/core/StelMovementMgr.cpp:181
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Alternar entre montura ecuatorial y azimutal"
 
-#: src/core/StelMovementMgr.cpp:178
+#: src/core/StelMovementMgr.cpp:182
 msgid "Center on selected object"
 msgstr "Centrar sobre el objeto seleccionado"
 
-#: src/core/StelMovementMgr.cpp:179
+#: src/core/StelMovementMgr.cpp:183
 msgid "Zoom in on selected object"
 msgstr "Zum sobre el objeto seleccionado"
 
-#: src/core/StelMovementMgr.cpp:180
+#: src/core/StelMovementMgr.cpp:184
 msgid "Zoom out"
 msgstr "Disminuir zoom"
 
-#: src/core/StelMovementMgr.cpp:181
+#: src/core/StelMovementMgr.cpp:185
 msgid "Track object"
 msgstr "Seguir objeto"
 
-#: src/core/StelMovementMgr.cpp:183
+#: src/core/StelMovementMgr.cpp:187
 msgid "Look towards East"
 msgstr "Mirar hacia Oriente"
 
-#: src/core/StelMovementMgr.cpp:184
+#: src/core/StelMovementMgr.cpp:188
 msgid "Look towards West"
 msgstr "Mirar hacia el oeste"
 
-#: src/core/StelMovementMgr.cpp:185
+#: src/core/StelMovementMgr.cpp:189
 msgid "Look towards North"
 msgstr "Mirar hacia el Norte"
 
-#: src/core/StelMovementMgr.cpp:186
+#: src/core/StelMovementMgr.cpp:190
 msgid "Look towards South"
 msgstr "Mirar hacia el Sur"
 
-#: src/core/StelMovementMgr.cpp:187
+#: src/core/StelMovementMgr.cpp:191
 msgid "Look towards Zenith"
 msgstr "Mirar hacia el Zenith"
 
-#: src/core/StelMovementMgr.cpp:189
+#: src/core/StelMovementMgr.cpp:193
 msgid "Look towards North Celestial pole"
 msgstr "Mira hacia el polo norte celeste"
 
-#: src/core/StelMovementMgr.cpp:190
+#: src/core/StelMovementMgr.cpp:194
 msgid "Look towards South Celestial pole"
 msgstr "Mira hacia el polo sur celeste"
 
@@ -2293,7 +2293,7 @@ msgid "Custom equation of %1T"
 msgstr "Ecuación personalizada de %1T"
 
 #: src/gui/ConfigurationDialog.cpp:1473 src/gui/ConfigurationDialog.cpp:1508
-#: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:409
+#: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:408
 msgid "System default"
 msgstr "Sistema por defecto"
 
@@ -2662,11 +2662,11 @@ msgstr "Espacio"
 msgid "Time zone"
 msgstr "Zona horaria"
 
-#: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:407
+#: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:406
 msgid "Local Mean Solar Time"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:408
+#: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:407
 msgid "Local True Solar Time"
 msgstr ""
 
@@ -3427,7 +3427,6 @@ msgstr "Nebulosas"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:103 src/ui_dsoColorsDialog.h:497
-#: src/ui_orbitColorsDialog.h:414
 msgid "Clusters associated with nebulosity"
 msgstr "Cúmulos asociados con nebulosidad"
 
@@ -7299,7 +7298,7 @@ msgid "&Go to..."
 msgstr "&Ir a..."
 
 #: src/ui_dsoColorsDialog.h:476 src/ui_orbitColorsDialog.h:366
-msgid "Colors settings"
+msgid "Color settings"
 msgstr ""
 
 #: src/ui_dsoColorsDialog.h:478
@@ -7431,7 +7430,7 @@ msgstr ""
 msgid "Color of markers of planetary nebulae"
 msgstr ""
 
-#: src/ui_dsoColorsDialog.h:585 src/ui_orbitColorsDialog.h:397
+#: src/ui_dsoColorsDialog.h:585
 msgid "Possible planetary nebulae"
 msgstr ""
 
@@ -7480,7 +7479,7 @@ msgid "Color of markers of supernova remnants"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:368
-msgid "Style of colors of orbits"
+msgid "Style of orbit colors"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:369
@@ -7488,7 +7487,7 @@ msgid "One color for all orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:370
-msgid "Separate colors for orbits of groups of objects by type"
+msgid "Separate colors for orbits by object type"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:371
@@ -7500,7 +7499,7 @@ msgid "Colors of orbits of Solar system bodies"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:374
-msgid "Color of orbits of comets"
+msgid "Color of comet orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:376
@@ -7512,11 +7511,11 @@ msgid "Orbit of Mars"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:379
-msgid "Color of orbit of Neptune"
+msgid "Color of Neptune orbit"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:382
-msgid "Color of orbits of moons of planets"
+msgid "Color of planet moon orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:385
@@ -7528,7 +7527,7 @@ msgid "Orbit of Mercury"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:389
-msgid "Color of orbits of major planets"
+msgid "Color of major planet orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:391
@@ -7536,7 +7535,7 @@ msgid "Orbits of major planets"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:393
-msgid "Color of orbit of Saturn"
+msgid "Color of Saturn orbit"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:395
@@ -7552,19 +7551,19 @@ msgid "Orbits of moons of planets"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:402
-msgid "Color of orbits of cubewanos"
+msgid "Color of cubewano orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:405
-msgid "Color of orbit of Venus"
+msgid "Color of Venus orbit"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:408
-msgid "Color of orbits of minor planets"
+msgid "Color of minor planet orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:411
-msgid "Color of orbits of scattered disk objects"
+msgid "Color of scattered disk object orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:416
@@ -7572,11 +7571,11 @@ msgid "Orbit of Saturn"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:418
-msgid "Color of orbit of Uranus"
+msgid "Color of Uranus orbit"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:421
-msgid "Color of orbit of Earth"
+msgid "Color of Earth orbit"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:423
@@ -7584,7 +7583,7 @@ msgid "Orbit of Earth"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:425
-msgid "Color of orbits of dwarf planets"
+msgid "Color of dwarf planet orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:427
@@ -7596,7 +7595,7 @@ msgid "Orbits of dwarf planets"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:430
-msgid "Color of orbit of Mercury"
+msgid "Color of Mercury orbit"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:432
@@ -7616,11 +7615,11 @@ msgid "Orbits of cubewanos"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:440
-msgid "Color of orbit of Mars"
+msgid "Color of Mars orbit"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:443
-msgid "Color of orbit of Jupiter"
+msgid "Color of Jupiter orbit"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:445
@@ -7628,7 +7627,7 @@ msgid "Orbit of Venus"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:447
-msgid "Color of orbits of plutinos"
+msgid "Color of plutino orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:452
@@ -7640,7 +7639,7 @@ msgid "Orbits of Oort cloud objects"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:455
-msgid "Color of orbits of Oort cloud objects"
+msgid "Color of Oort cloud object orbits"
 msgstr ""
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57

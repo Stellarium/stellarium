@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-17 16:39+0700\n"
+"POT-Creation-Date: 2016-12-18 13:50+0700\n"
 "PO-Revision-Date: 2016-12-17 10:02+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-18 04:39+0000\n"
+"X-Launchpad-Export-Date: 2016-12-19 04:38+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 "Language: bn\n"
 
@@ -51,7 +51,7 @@ msgstr "তারামণ্ডল"
 #: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:218 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/modules/ToastMgr.cpp:61
-#: src/core/StelApp.cpp:531 src/core/StelCore.cpp:239
+#: src/core/StelApp.cpp:532 src/core/StelCore.cpp:239
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:577
 msgid "Display Options"
 msgstr "দৃশ্যপটের বিকল্পগুলি"
@@ -1164,11 +1164,11 @@ msgstr "সৌর আভা"
 msgid "Digitized Sky Survey (experimental)"
 msgstr "ডিজিটাল মহাকাশ নিরীক্ষা (পরীক্ষামূলক)"
 
-#: src/core/StelApp.cpp:531
+#: src/core/StelApp.cpp:532
 msgid "Night mode"
 msgstr "রাত্রিকালীন প্রদর্শণ সুবিধা"
 
-#: src/core/StelApp.cpp:583
+#: src/core/StelApp.cpp:584
 msgid "Cannot create Spout sender. See log for details."
 msgstr "স্পাউট প্রেরক তৈরী করা যায় নি । বিশদ তথ্যের জন্য কার্যবিবরণী দেখুন ।"
 
@@ -1180,7 +1180,7 @@ msgstr "স্পাউট প্রেরক তৈরী করা যায় �
 msgid "Date and Time"
 msgstr "তারিখ ও সময়"
 
-#: src/core/StelCore.cpp:238 src/core/StelMovementMgr.cpp:176
+#: src/core/StelCore.cpp:238 src/core/StelMovementMgr.cpp:180
 msgid "Movement and Selection"
 msgstr "পরিচালনা এবং নির্বাচন"
 
@@ -1957,56 +1957,56 @@ msgstr "আহ্নিকগতি অনুসারে সময় : %1"
 msgid "Deep-sky objects background images"
 msgstr "মহাজাগতিক জ্যোতিষ্কগুলির ছবি"
 
-#: src/core/StelMovementMgr.cpp:177 src/gui/StelGui.cpp:204
+#: src/core/StelMovementMgr.cpp:181 src/gui/StelGui.cpp:204
 #: src/StelMainView.cpp:576
 msgid "Miscellaneous"
 msgstr "অন্যান্য"
 
-#: src/core/StelMovementMgr.cpp:177
+#: src/core/StelMovementMgr.cpp:181
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "নিরক্ষীয় এবং দিগংশিক বিচলন বা আলম্বের মধ্যে অদলবদল"
 
-#: src/core/StelMovementMgr.cpp:178
+#: src/core/StelMovementMgr.cpp:182
 msgid "Center on selected object"
 msgstr "জ্যোতিষ্কটিকে দৃশ্যপটের মাঝে আনুন"
 
-#: src/core/StelMovementMgr.cpp:179
+#: src/core/StelMovementMgr.cpp:183
 msgid "Zoom in on selected object"
 msgstr "আরও কাছে থেকে দেখুন"
 
-#: src/core/StelMovementMgr.cpp:180
+#: src/core/StelMovementMgr.cpp:184
 msgid "Zoom out"
 msgstr "আরও দূর থেকে দেখুন"
 
-#: src/core/StelMovementMgr.cpp:181
+#: src/core/StelMovementMgr.cpp:185
 msgid "Track object"
 msgstr "নির্বাচিত জ্যোতিষ্কটিকে অনুসরণ করুন"
 
-#: src/core/StelMovementMgr.cpp:183
+#: src/core/StelMovementMgr.cpp:187
 msgid "Look towards East"
 msgstr "পূর্ব দিকে দেখুন"
 
-#: src/core/StelMovementMgr.cpp:184
+#: src/core/StelMovementMgr.cpp:188
 msgid "Look towards West"
 msgstr "পশ্চিম দিকে দেখুন"
 
-#: src/core/StelMovementMgr.cpp:185
+#: src/core/StelMovementMgr.cpp:189
 msgid "Look towards North"
 msgstr "উত্তর দিকে দেখুন"
 
-#: src/core/StelMovementMgr.cpp:186
+#: src/core/StelMovementMgr.cpp:190
 msgid "Look towards South"
 msgstr "দক্ষিন দিকে দেখুন"
 
-#: src/core/StelMovementMgr.cpp:187
+#: src/core/StelMovementMgr.cpp:191
 msgid "Look towards Zenith"
 msgstr "উপরের দিকে দেখুন"
 
-#: src/core/StelMovementMgr.cpp:189
+#: src/core/StelMovementMgr.cpp:193
 msgid "Look towards North Celestial pole"
 msgstr "উত্তর মেরুর দিকে তাক করুন"
 
-#: src/core/StelMovementMgr.cpp:190
+#: src/core/StelMovementMgr.cpp:194
 msgid "Look towards South Celestial pole"
 msgstr "দক্ষিন মেরুর দিকে তাক করুন"
 
@@ -2291,7 +2291,7 @@ msgid "Custom equation of %1T"
 msgstr "%1T নির্ণয়ের পছন্দসই সমীকরন"
 
 #: src/gui/ConfigurationDialog.cpp:1473 src/gui/ConfigurationDialog.cpp:1508
-#: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:409
+#: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:408
 msgid "System default"
 msgstr "সিস্টেমে ব্যবহৃত"
 
@@ -2658,11 +2658,11 @@ msgstr "Space"
 msgid "Time zone"
 msgstr "প্রাদেশিক সময় অঞ্চল"
 
-#: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:407
+#: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:406
 msgid "Local Mean Solar Time"
 msgstr "স্থানীয় সময় (ঘড়ি)"
 
-#: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:408
+#: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:407
 msgid "Local True Solar Time"
 msgstr "স্থানীয় সময় (প্রকৃত)"
 
@@ -3419,7 +3419,6 @@ msgstr "নীহারিকা"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:103 src/ui_dsoColorsDialog.h:497
-#: src/ui_orbitColorsDialog.h:414
 msgid "Clusters associated with nebulosity"
 msgstr "নীহারিকা যুক্ত তারকা গুচ্ছ"
 
@@ -7250,8 +7249,8 @@ msgid "&Go to..."
 msgstr "বু&কমার্কটি দেখুন"
 
 #: src/ui_dsoColorsDialog.h:476 src/ui_orbitColorsDialog.h:366
-msgid "Colors settings"
-msgstr "রং নির্বাচন"
+msgid "Color settings"
+msgstr ""
 
 #: src/ui_dsoColorsDialog.h:478
 msgid "Colors of labels and markers of deep-sky objects"
@@ -7382,7 +7381,7 @@ msgstr "তারকাগুচ্ছ নির্দেশকের রং"
 msgid "Color of markers of planetary nebulae"
 msgstr "গ্রহরূপী নীহারিকা নির্দেশকের রং"
 
-#: src/ui_dsoColorsDialog.h:585 src/ui_orbitColorsDialog.h:397
+#: src/ui_dsoColorsDialog.h:585
 msgid "Possible planetary nebulae"
 msgstr "সম্ভবত গ্রহরূপী নীহারিকা"
 
@@ -7431,16 +7430,16 @@ msgid "Color of markers of supernova remnants"
 msgstr "আতিনোভার ধ্বংসাবশেষ নির্দেশকের রং"
 
 #: src/ui_orbitColorsDialog.h:368
-msgid "Style of colors of orbits"
-msgstr "কক্ষপথের রঙের ধরন"
+msgid "Style of orbit colors"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:369
 msgid "One color for all orbits"
 msgstr "সবার জন্য একই রঙের কক্ষপথ"
 
 #: src/ui_orbitColorsDialog.h:370
-msgid "Separate colors for orbits of groups of objects by type"
-msgstr "প্রত্যেক শ্রেণীর জন্য আলাদা রঙের কক্ষপথ"
+msgid "Separate colors for orbits by object type"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:371
 msgid "Separate colors for orbits of major planets only"
@@ -7451,8 +7450,8 @@ msgid "Colors of orbits of Solar system bodies"
 msgstr "কক্ষপথের রং"
 
 #: src/ui_orbitColorsDialog.h:374
-msgid "Color of orbits of comets"
-msgstr "ধূমকেতুর কক্ষপথের রং"
+msgid "Color of comet orbits"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:376
 msgid "Orbit of Uranus"
@@ -7463,12 +7462,12 @@ msgid "Orbit of Mars"
 msgstr "মঙ্গলের কক্ষপথ"
 
 #: src/ui_orbitColorsDialog.h:379
-msgid "Color of orbit of Neptune"
-msgstr "নেপচুনের কক্ষপথের রং"
+msgid "Color of Neptune orbit"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:382
-msgid "Color of orbits of moons of planets"
-msgstr "উপগ্রহের কক্ষপথের রং"
+msgid "Color of planet moon orbits"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:385
 msgid "Color of generic orbit"
@@ -7479,16 +7478,16 @@ msgid "Orbit of Mercury"
 msgstr "বুধের কক্ষপথ"
 
 #: src/ui_orbitColorsDialog.h:389
-msgid "Color of orbits of major planets"
-msgstr "প্রধান গ্রহগুলির কক্ষপথের রং"
+msgid "Color of major planet orbits"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:391
 msgid "Orbits of major planets"
 msgstr "প্রধান গ্রহগুলির কক্ষপথ"
 
 #: src/ui_orbitColorsDialog.h:393
-msgid "Color of orbit of Saturn"
-msgstr "শনির কক্ষপথের রং"
+msgid "Color of Saturn orbit"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:395
 msgid "Orbit of Jupiter"
@@ -7503,40 +7502,40 @@ msgid "Orbits of moons of planets"
 msgstr "উপগ্রহের কক্ষপথ"
 
 #: src/ui_orbitColorsDialog.h:402
-msgid "Color of orbits of cubewanos"
-msgstr "কাইপার বেল্টের বস্তুগুলির কক্ষপথের রং"
+msgid "Color of cubewano orbits"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:405
-msgid "Color of orbit of Venus"
-msgstr "শুক্রের কক্ষপথের রং"
+msgid "Color of Venus orbit"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:408
-msgid "Color of orbits of minor planets"
-msgstr "গ্রহাণুর কক্ষপথের রং"
+msgid "Color of minor planet orbits"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:411
-msgid "Color of orbits of scattered disk objects"
-msgstr "বিক্ষিপ্ত বলয়ের বস্তুগুলির কক্ষপথের রং"
+msgid "Color of scattered disk object orbits"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:416
 msgid "Orbit of Saturn"
 msgstr "শনির কক্ষপথ"
 
 #: src/ui_orbitColorsDialog.h:418
-msgid "Color of orbit of Uranus"
-msgstr "ইউরেনাসের কক্ষপথের রং"
+msgid "Color of Uranus orbit"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:421
-msgid "Color of orbit of Earth"
-msgstr "পৃথিবীর কক্ষপথের রং"
+msgid "Color of Earth orbit"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:423
 msgid "Orbit of Earth"
 msgstr "পৃথিবীর কক্ষপথ"
 
 #: src/ui_orbitColorsDialog.h:425
-msgid "Color of orbits of dwarf planets"
-msgstr "বামন গ্রহগুলির কক্ষপথের রং"
+msgid "Color of dwarf planet orbits"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:427
 msgid "Orbits of comets"
@@ -7547,8 +7546,8 @@ msgid "Orbits of dwarf planets"
 msgstr "বামন গ্রহগুলির কক্ষপথ"
 
 #: src/ui_orbitColorsDialog.h:430
-msgid "Color of orbit of Mercury"
-msgstr "বুধের কক্ষপথের রং"
+msgid "Color of Mercury orbit"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:432
 msgid "Orbits of plutinos"
@@ -7567,20 +7566,20 @@ msgid "Orbits of cubewanos"
 msgstr "কাইপার বেল্টের বস্তুগুলির কক্ষপথ"
 
 #: src/ui_orbitColorsDialog.h:440
-msgid "Color of orbit of Mars"
-msgstr "মঙ্গলের কক্ষপথের রং"
+msgid "Color of Mars orbit"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:443
-msgid "Color of orbit of Jupiter"
-msgstr "বৃহস্পতির কক্ষপথের রং"
+msgid "Color of Jupiter orbit"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:445
 msgid "Orbit of Venus"
 msgstr "শুক্রের কক্ষপথ"
 
 #: src/ui_orbitColorsDialog.h:447
-msgid "Color of orbits of plutinos"
-msgstr "প্লুটো সদৃশ বস্তু গুলির কক্ষপথের রং"
+msgid "Color of plutino orbits"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:452
 msgid "Orbits of minor planets"
@@ -7591,8 +7590,8 @@ msgid "Orbits of Oort cloud objects"
 msgstr "উর্ট ক্লাউডের বস্তুগুলির কক্ষপথ"
 
 #: src/ui_orbitColorsDialog.h:455
-msgid "Color of orbits of Oort cloud objects"
-msgstr "উর্ট ক্লাউডের বস্তুগুলির কক্ষপথের রং"
+msgid "Color of Oort cloud object orbits"
+msgstr ""
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:138
@@ -16784,6 +16783,66 @@ msgstr "পছন্দসই অক্ষাংশ ২"
 
 #~ msgid "yyyy.MM.dd"
 #~ msgstr "yyyy.MM.dd"
+
+#~ msgid "Colors settings"
+#~ msgstr "রং নির্বাচন"
+
+#~ msgid "Separate colors for orbits of groups of objects by type"
+#~ msgstr "প্রত্যেক শ্রেণীর জন্য আলাদা রঙের কক্ষপথ"
+
+#~ msgid "Color of orbits of moons of planets"
+#~ msgstr "উপগ্রহের কক্ষপথের রং"
+
+#~ msgid "Color of orbit of Neptune"
+#~ msgstr "নেপচুনের কক্ষপথের রং"
+
+#~ msgid "Color of orbit of Saturn"
+#~ msgstr "শনির কক্ষপথের রং"
+
+#~ msgid "Color of orbits of major planets"
+#~ msgstr "প্রধান গ্রহগুলির কক্ষপথের রং"
+
+#~ msgid "Color of orbits of comets"
+#~ msgstr "ধূমকেতুর কক্ষপথের রং"
+
+#~ msgid "Color of orbit of Venus"
+#~ msgstr "শুক্রের কক্ষপথের রং"
+
+#~ msgid "Color of orbit of Uranus"
+#~ msgstr "ইউরেনাসের কক্ষপথের রং"
+
+#~ msgid "Color of orbit of Earth"
+#~ msgstr "পৃথিবীর কক্ষপথের রং"
+
+#~ msgid "Color of orbit of Mercury"
+#~ msgstr "বুধের কক্ষপথের রং"
+
+#~ msgid "Color of orbit of Mars"
+#~ msgstr "মঙ্গলের কক্ষপথের রং"
+
+#~ msgid "Color of orbits of dwarf planets"
+#~ msgstr "বামন গ্রহগুলির কক্ষপথের রং"
+
+#~ msgid "Color of orbits of cubewanos"
+#~ msgstr "কাইপার বেল্টের বস্তুগুলির কক্ষপথের রং"
+
+#~ msgid "Style of colors of orbits"
+#~ msgstr "কক্ষপথের রঙের ধরন"
+
+#~ msgid "Color of orbits of Oort cloud objects"
+#~ msgstr "উর্ট ক্লাউডের বস্তুগুলির কক্ষপথের রং"
+
+#~ msgid "Color of orbits of minor planets"
+#~ msgstr "গ্রহাণুর কক্ষপথের রং"
+
+#~ msgid "Color of orbit of Jupiter"
+#~ msgstr "বৃহস্পতির কক্ষপথের রং"
+
+#~ msgid "Color of orbits of scattered disk objects"
+#~ msgstr "বিক্ষিপ্ত বলয়ের বস্তুগুলির কক্ষপথের রং"
+
+#~ msgid "Color of orbits of plutinos"
+#~ msgstr "প্লুটো সদৃশ বস্তু গুলির কক্ষপথের রং"
 
 #~ msgid "Illumination"
 #~ msgstr "দীপনস্তর"
