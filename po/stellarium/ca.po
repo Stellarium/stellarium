@@ -10,14 +10,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-17 16:39+0700\n"
+"POT-Creation-Date: 2016-12-18 13:50+0700\n"
 "PO-Revision-Date: 2016-12-17 23:10+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-18 04:40+0000\n"
+"X-Launchpad-Export-Date: 2016-12-19 04:40+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -53,7 +53,7 @@ msgstr "constel·lació"
 #: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:218 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/modules/ToastMgr.cpp:61
-#: src/core/StelApp.cpp:531 src/core/StelCore.cpp:239
+#: src/core/StelApp.cpp:532 src/core/StelCore.cpp:239
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:577
 msgid "Display Options"
 msgstr "Opcions de visualització"
@@ -1165,11 +1165,11 @@ msgstr "Llum Zodiacal"
 msgid "Digitized Sky Survey (experimental)"
 msgstr "Estudi Digitalitzat del Cel EDC (experimental)"
 
-#: src/core/StelApp.cpp:531
+#: src/core/StelApp.cpp:532
 msgid "Night mode"
 msgstr "Mode nocturn"
 
-#: src/core/StelApp.cpp:583
+#: src/core/StelApp.cpp:584
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 "No es pot crear el remitent Spout. Vegeu el registre per obtenir detalls."
@@ -1182,7 +1182,7 @@ msgstr ""
 msgid "Date and Time"
 msgstr "Data i hora"
 
-#: src/core/StelCore.cpp:238 src/core/StelMovementMgr.cpp:176
+#: src/core/StelCore.cpp:238 src/core/StelMovementMgr.cpp:180
 msgid "Movement and Selection"
 msgstr "Moviment i selecció"
 
@@ -1962,56 +1962,56 @@ msgstr "Temps Sideral aparent: %1"
 msgid "Deep-sky objects background images"
 msgstr "Imatges de fons d'objectes de l'espai profund"
 
-#: src/core/StelMovementMgr.cpp:177 src/gui/StelGui.cpp:204
+#: src/core/StelMovementMgr.cpp:181 src/gui/StelGui.cpp:204
 #: src/StelMainView.cpp:576
 msgid "Miscellaneous"
 msgstr "Miscel·lània"
 
-#: src/core/StelMovementMgr.cpp:177
+#: src/core/StelMovementMgr.cpp:181
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Commuta entre muntura equatorial i azimutal"
 
-#: src/core/StelMovementMgr.cpp:178
+#: src/core/StelMovementMgr.cpp:182
 msgid "Center on selected object"
 msgstr "Centra en l'objecte seleccionat"
 
-#: src/core/StelMovementMgr.cpp:179
+#: src/core/StelMovementMgr.cpp:183
 msgid "Zoom in on selected object"
 msgstr "Apropat a l'objecte seleccionat"
 
-#: src/core/StelMovementMgr.cpp:180
+#: src/core/StelMovementMgr.cpp:184
 msgid "Zoom out"
 msgstr "Redueix el zoom"
 
-#: src/core/StelMovementMgr.cpp:181
+#: src/core/StelMovementMgr.cpp:185
 msgid "Track object"
 msgstr "Segueix objecte"
 
-#: src/core/StelMovementMgr.cpp:183
+#: src/core/StelMovementMgr.cpp:187
 msgid "Look towards East"
 msgstr "Mirar cap a l'Est"
 
-#: src/core/StelMovementMgr.cpp:184
+#: src/core/StelMovementMgr.cpp:188
 msgid "Look towards West"
 msgstr "Mirar cap a l'Oest"
 
-#: src/core/StelMovementMgr.cpp:185
+#: src/core/StelMovementMgr.cpp:189
 msgid "Look towards North"
 msgstr "Mirar cap al Nord"
 
-#: src/core/StelMovementMgr.cpp:186
+#: src/core/StelMovementMgr.cpp:190
 msgid "Look towards South"
 msgstr "Mirar cap al Sud"
 
-#: src/core/StelMovementMgr.cpp:187
+#: src/core/StelMovementMgr.cpp:191
 msgid "Look towards Zenith"
 msgstr "Mirar cap al Zenit"
 
-#: src/core/StelMovementMgr.cpp:189
+#: src/core/StelMovementMgr.cpp:193
 msgid "Look towards North Celestial pole"
 msgstr "Mira cap al Pol Nord Celeste"
 
-#: src/core/StelMovementMgr.cpp:190
+#: src/core/StelMovementMgr.cpp:194
 msgid "Look towards South Celestial pole"
 msgstr "Mira cap al Pol Sud Celeste"
 
@@ -2296,7 +2296,7 @@ msgid "Custom equation of %1T"
 msgstr "Equació personalitzada per %1T"
 
 #: src/gui/ConfigurationDialog.cpp:1473 src/gui/ConfigurationDialog.cpp:1508
-#: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:409
+#: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:408
 msgid "System default"
 msgstr "Predeterminat del sistema"
 
@@ -2665,11 +2665,11 @@ msgstr "Espai"
 msgid "Time zone"
 msgstr "Fus horari"
 
-#: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:407
+#: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:406
 msgid "Local Mean Solar Time"
 msgstr "Temps Solar Local Mitjà"
 
-#: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:408
+#: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:407
 msgid "Local True Solar Time"
 msgstr "Temps Solar Local Vertader"
 
@@ -3427,7 +3427,6 @@ msgstr "Nebuloses"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:103 src/ui_dsoColorsDialog.h:497
-#: src/ui_orbitColorsDialog.h:414
 msgid "Clusters associated with nebulosity"
 msgstr "Cúmuls associat amb nebulositat"
 
@@ -7285,8 +7284,8 @@ msgid "&Go to..."
 msgstr "&Vés a..."
 
 #: src/ui_dsoColorsDialog.h:476 src/ui_orbitColorsDialog.h:366
-msgid "Colors settings"
-msgstr "Ajustos dels colors"
+msgid "Color settings"
+msgstr ""
 
 #: src/ui_dsoColorsDialog.h:478
 msgid "Colors of labels and markers of deep-sky objects"
@@ -7417,7 +7416,7 @@ msgstr "Color dels marcadors de cúmuls oberts"
 msgid "Color of markers of planetary nebulae"
 msgstr "Color dels marcadors de nebuloses planetàries"
 
-#: src/ui_dsoColorsDialog.h:585 src/ui_orbitColorsDialog.h:397
+#: src/ui_dsoColorsDialog.h:585
 msgid "Possible planetary nebulae"
 msgstr "Possible nebulosa planetària"
 
@@ -7466,16 +7465,16 @@ msgid "Color of markers of supernova remnants"
 msgstr "Color dels marcadors de romanents de supernova"
 
 #: src/ui_orbitColorsDialog.h:368
-msgid "Style of colors of orbits"
-msgstr "Estil de colors de les òrbites"
+msgid "Style of orbit colors"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:369
 msgid "One color for all orbits"
 msgstr "Un color per totes les òrbites"
 
 #: src/ui_orbitColorsDialog.h:370
-msgid "Separate colors for orbits of groups of objects by type"
-msgstr "Colors diferents per a les òrbites dels grups d'objectes per tipus"
+msgid "Separate colors for orbits by object type"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:371
 msgid "Separate colors for orbits of major planets only"
@@ -7486,8 +7485,8 @@ msgid "Colors of orbits of Solar system bodies"
 msgstr "Colors de les òrbites dels cossos del sistema solar"
 
 #: src/ui_orbitColorsDialog.h:374
-msgid "Color of orbits of comets"
-msgstr "Color de les òrbites dels cometes"
+msgid "Color of comet orbits"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:376
 msgid "Orbit of Uranus"
@@ -7498,12 +7497,12 @@ msgid "Orbit of Mars"
 msgstr "Òrbita de Mart"
 
 #: src/ui_orbitColorsDialog.h:379
-msgid "Color of orbit of Neptune"
-msgstr "Color de l'òrbita de Neptú"
+msgid "Color of Neptune orbit"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:382
-msgid "Color of orbits of moons of planets"
-msgstr "Color de les òrbites de les llunes i planetes"
+msgid "Color of planet moon orbits"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:385
 msgid "Color of generic orbit"
@@ -7514,16 +7513,16 @@ msgid "Orbit of Mercury"
 msgstr "Òrbita de Mercuri"
 
 #: src/ui_orbitColorsDialog.h:389
-msgid "Color of orbits of major planets"
-msgstr "Color de les òrbites dels planetes majors"
+msgid "Color of major planet orbits"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:391
 msgid "Orbits of major planets"
 msgstr "Òrbites dels planetes majors"
 
 #: src/ui_orbitColorsDialog.h:393
-msgid "Color of orbit of Saturn"
-msgstr "Color de l'òrbita de Saturn"
+msgid "Color of Saturn orbit"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:395
 msgid "Orbit of Jupiter"
@@ -7538,40 +7537,40 @@ msgid "Orbits of moons of planets"
 msgstr "Òrbites de llunes i planetes"
 
 #: src/ui_orbitColorsDialog.h:402
-msgid "Color of orbits of cubewanos"
-msgstr "Color de les òrbites d'objectes cubewanos"
+msgid "Color of cubewano orbits"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:405
-msgid "Color of orbit of Venus"
-msgstr "Color de l'òrbita de Venus"
+msgid "Color of Venus orbit"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:408
-msgid "Color of orbits of minor planets"
-msgstr "Color de les òrbites dels planetes menors"
+msgid "Color of minor planet orbits"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:411
-msgid "Color of orbits of scattered disk objects"
-msgstr "Color de les òrbites dels objectes de disc disperses"
+msgid "Color of scattered disk object orbits"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:416
 msgid "Orbit of Saturn"
 msgstr "Òrbita de Saturn"
 
 #: src/ui_orbitColorsDialog.h:418
-msgid "Color of orbit of Uranus"
-msgstr "Color de l'òrbita d'Urà"
+msgid "Color of Uranus orbit"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:421
-msgid "Color of orbit of Earth"
-msgstr "Color de l'òrbita de la Terra"
+msgid "Color of Earth orbit"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:423
 msgid "Orbit of Earth"
 msgstr "Òrbita de la Terra"
 
 #: src/ui_orbitColorsDialog.h:425
-msgid "Color of orbits of dwarf planets"
-msgstr "Color de les òrbites dels planetes nans"
+msgid "Color of dwarf planet orbits"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:427
 msgid "Orbits of comets"
@@ -7582,8 +7581,8 @@ msgid "Orbits of dwarf planets"
 msgstr "Òrbites de planetes nans"
 
 #: src/ui_orbitColorsDialog.h:430
-msgid "Color of orbit of Mercury"
-msgstr "Color de l'òrbita de Mercuri"
+msgid "Color of Mercury orbit"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:432
 msgid "Orbits of plutinos"
@@ -7602,20 +7601,20 @@ msgid "Orbits of cubewanos"
 msgstr "Òrbites de cubewanos"
 
 #: src/ui_orbitColorsDialog.h:440
-msgid "Color of orbit of Mars"
-msgstr "Color de l'òrbita de Mart"
+msgid "Color of Mars orbit"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:443
-msgid "Color of orbit of Jupiter"
-msgstr "Color de l'òrbita de Júpiter"
+msgid "Color of Jupiter orbit"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:445
 msgid "Orbit of Venus"
 msgstr "Òrbita de Venus"
 
 #: src/ui_orbitColorsDialog.h:447
-msgid "Color of orbits of plutinos"
-msgstr "Color de les òrbites dels plutins"
+msgid "Color of plutino orbits"
+msgstr ""
 
 #: src/ui_orbitColorsDialog.h:452
 msgid "Orbits of minor planets"
@@ -7626,8 +7625,8 @@ msgid "Orbits of Oort cloud objects"
 msgstr "Òrbites d'objectes del núvol d'Oort"
 
 #: src/ui_orbitColorsDialog.h:455
-msgid "Color of orbits of Oort cloud objects"
-msgstr "Color de les òrbites d'objectes del núvol d'Oort"
+msgid "Color of Oort cloud object orbits"
+msgstr ""
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:138
@@ -17205,3 +17204,63 @@ msgstr "Declinació Personalitzada 2"
 
 #~ msgid "Show Solar System objects"
 #~ msgstr "Mostra objectes del Sistema Solar"
+
+#~ msgid "Colors settings"
+#~ msgstr "Ajustos dels colors"
+
+#~ msgid "Separate colors for orbits of groups of objects by type"
+#~ msgstr "Colors diferents per a les òrbites dels grups d'objectes per tipus"
+
+#~ msgid "Style of colors of orbits"
+#~ msgstr "Estil de colors de les òrbites"
+
+#~ msgid "Color of orbits of moons of planets"
+#~ msgstr "Color de les òrbites de les llunes i planetes"
+
+#~ msgid "Color of orbit of Neptune"
+#~ msgstr "Color de l'òrbita de Neptú"
+
+#~ msgid "Color of orbits of major planets"
+#~ msgstr "Color de les òrbites dels planetes majors"
+
+#~ msgid "Color of orbits of comets"
+#~ msgstr "Color de les òrbites dels cometes"
+
+#~ msgid "Color of orbit of Saturn"
+#~ msgstr "Color de l'òrbita de Saturn"
+
+#~ msgid "Color of orbit of Venus"
+#~ msgstr "Color de l'òrbita de Venus"
+
+#~ msgid "Color of orbits of minor planets"
+#~ msgstr "Color de les òrbites dels planetes menors"
+
+#~ msgid "Color of orbit of Uranus"
+#~ msgstr "Color de l'òrbita d'Urà"
+
+#~ msgid "Color of orbit of Mercury"
+#~ msgstr "Color de l'òrbita de Mercuri"
+
+#~ msgid "Color of orbits of dwarf planets"
+#~ msgstr "Color de les òrbites dels planetes nans"
+
+#~ msgid "Color of orbit of Earth"
+#~ msgstr "Color de l'òrbita de la Terra"
+
+#~ msgid "Color of orbit of Jupiter"
+#~ msgstr "Color de l'òrbita de Júpiter"
+
+#~ msgid "Color of orbit of Mars"
+#~ msgstr "Color de l'òrbita de Mart"
+
+#~ msgid "Color of orbits of cubewanos"
+#~ msgstr "Color de les òrbites d'objectes cubewanos"
+
+#~ msgid "Color of orbits of scattered disk objects"
+#~ msgstr "Color de les òrbites dels objectes de disc disperses"
+
+#~ msgid "Color of orbits of Oort cloud objects"
+#~ msgstr "Color de les òrbites d'objectes del núvol d'Oort"
+
+#~ msgid "Color of orbits of plutinos"
+#~ msgstr "Color de les òrbites dels plutins"
