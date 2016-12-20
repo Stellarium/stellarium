@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-18 13:50+0700\n"
-"PO-Revision-Date: 2016-12-18 04:01+0000\n"
+"PO-Revision-Date: 2016-12-20 01:23+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-19 04:54+0000\n"
+"X-Launchpad-Export-Date: 2016-12-20 04:34+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -2353,7 +2353,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:158
 msgid "Ctrl & left mouse drag"
-msgstr ""
+msgstr "Ctrl + przeciąganie LPM"
 
 #: src/gui/HelpDialog.cpp:159
 msgid "Time scrolling: minutes"
@@ -2361,7 +2361,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:160
 msgid "Ctrl & mouse wheel"
-msgstr ""
+msgstr "Ctrl + kółko myszy"
 
 #: src/gui/HelpDialog.cpp:161
 msgid "Time scrolling: hours"
@@ -2369,7 +2369,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:162
 msgid "Ctrl+Shift & mouse wheel"
-msgstr ""
+msgstr "Ctrl + Shift + kółko myszy"
 
 #: src/gui/HelpDialog.cpp:163
 msgid "Time scrolling: days"
@@ -2377,7 +2377,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:164
 msgid "Ctrl+Alt & mouse wheel"
-msgstr ""
+msgstr "Ctrl + Alt + kółko myszy"
 
 #: src/gui/HelpDialog.cpp:165
 msgid "Time scrolling: years"
@@ -2385,7 +2385,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:166
 msgid "Ctrl+Alt+Shift & mouse wheel"
-msgstr ""
+msgstr "Ctrl + Alt + Shift + kółko myszy"
 
 #: src/gui/HelpDialog.cpp:169
 msgid "Select object"
@@ -2401,7 +2401,7 @@ msgstr "Usuń zaznaczenie"
 
 #: src/gui/HelpDialog.cpp:175
 msgid "Ctrl & left click"
-msgstr ""
+msgstr "Ctrl + kliknięcie LPM"
 
 #: src/gui/HelpDialog.cpp:177
 msgid "Right click"
@@ -2413,7 +2413,7 @@ msgstr "Dodaj własny znacznik"
 
 #: src/gui/HelpDialog.cpp:181
 msgid "Shift & left click"
-msgstr ""
+msgstr "Shift + kliknięcie LPM"
 
 #: src/gui/HelpDialog.cpp:183
 msgid "Delete all custom markers"
@@ -2421,7 +2421,7 @@ msgstr "Usuń wszystkie własne znaczniki"
 
 #: src/gui/HelpDialog.cpp:184
 msgid "Shift & right click"
-msgstr ""
+msgstr "Shift + kliknięcie PPM"
 
 #: src/gui/HelpDialog.cpp:187
 #, qt-format
@@ -4456,7 +4456,7 @@ msgstr "Benin"
 
 #: src/translations_countries.h:56
 msgid "St Barthelemy"
-msgstr ""
+msgstr "Saint Barthelemy"
 
 #: src/translations_countries.h:57
 msgid "Bermuda"
@@ -4676,7 +4676,7 @@ msgstr "Gujana Francuska"
 
 #: src/translations_countries.h:111
 msgid "Guernsey"
-msgstr ""
+msgstr "Guernsey"
 
 #: src/translations_countries.h:112
 msgid "Ghana"
@@ -4896,7 +4896,7 @@ msgstr "Łotwa"
 
 #: src/translations_countries.h:166
 msgid "Libya"
-msgstr ""
+msgstr "Libia"
 
 #: src/translations_countries.h:167
 msgid "Morocco"
@@ -5984,7 +5984,7 @@ msgstr "Równik (J2000)"
 
 #: src/ui_viewDialog.h:2085
 msgid "Color of equator (J2000.0)"
-msgstr ""
+msgstr "Kolor równika (J2000.0)"
 
 #: src/ui_viewDialog.h:2088
 msgid "Show ecliptic line of current date."
@@ -5996,27 +5996,27 @@ msgstr "Ekliptyka (na dzień)"
 
 #: src/ui_viewDialog.h:2092
 msgid "Color of equator (of date)"
-msgstr ""
+msgstr "Kolor równika (na dzień)"
 
 #: src/ui_viewDialog.h:2095
 msgid "Show Galactic equator line."
-msgstr ""
+msgstr "Pokaż równik galaktyczny"
 
 #: src/ui_viewDialog.h:2099
 msgid "Color of supergalactic equator"
-msgstr ""
+msgstr "Kolor równika supergalaktycznego"
 
 #: src/ui_viewDialog.h:2102
 msgid "Color of ecliptic (of date)"
-msgstr ""
+msgstr "Kolor ekliptyki (na dzień)"
 
 #: src/ui_viewDialog.h:2105
 msgid "Color of ecliptic (J2000.0)"
-msgstr ""
+msgstr "Kolor ekliptyki (J2000.0)"
 
 #: src/ui_viewDialog.h:2108
 msgid "Color of galactic equator"
-msgstr ""
+msgstr "Kolor równika galaktycznego"
 
 #: src/ui_viewDialog.h:2111
 msgid "Show horizon line."
@@ -6024,7 +6024,7 @@ msgstr "Pokaż horyzont."
 
 #: src/ui_viewDialog.h:2115
 msgid "Color of horizon"
-msgstr ""
+msgstr "Kolor horyzontu"
 
 #: src/ui_viewDialog.h:2119
 msgid "Show meridian line."
@@ -6032,7 +6032,7 @@ msgstr "Pokaż południk."
 
 #: src/ui_viewDialog.h:2123
 msgid "Color of meridian"
-msgstr ""
+msgstr "Kolor południka"
 
 #: src/ui_viewDialog.h:2126
 msgid ""
@@ -6056,19 +6056,19 @@ msgstr "Kolury"
 
 #: src/ui_viewDialog.h:2137
 msgid "Color of colures"
-msgstr ""
+msgstr "Kolor kolurów"
 
 #: src/ui_viewDialog.h:2141
 msgid "Color of the ecliptic poles (J2000.0)"
-msgstr ""
+msgstr "Kolor biegunów ekliptyki (J2000.0)"
 
 #: src/ui_viewDialog.h:2144
 msgid "Color of Prime Vertical"
-msgstr ""
+msgstr "Kolor wertykału pierwszego"
 
 #: src/ui_viewDialog.h:2147
 msgid "Show ecliptic poles of J2000.0"
-msgstr ""
+msgstr "Pokaż bieguny ekliptyki - J2000.0"
 
 #: src/ui_viewDialog.h:2149
 msgid "Ecliptic poles (J2000)"
@@ -6076,11 +6076,11 @@ msgstr "Bieguny ekliptyki (J2000)"
 
 #: src/ui_viewDialog.h:2151
 msgid "Color of the celestial poles (J2000.0)"
-msgstr ""
+msgstr "Kolor biegunów niebieskich (J2000.0)"
 
 #: src/ui_viewDialog.h:2154
 msgid "Show celestial poles of current planet and date."
-msgstr ""
+msgstr "Pokaż bieguny niebieskie bieżącej planety na bieżący dzień."
 
 #: src/ui_viewDialog.h:2156
 msgid "Celestial poles (of date)"
@@ -6088,19 +6088,19 @@ msgstr "Bieguny niebieskie (na dzień)"
 
 #: src/ui_viewDialog.h:2158
 msgid "Color of ecliptic poles (of date)"
-msgstr ""
+msgstr "Kolor biegunów ekliptyki (na dzień)"
 
 #: src/ui_viewDialog.h:2161
 msgid "Color of celestial poles (of date)"
-msgstr ""
+msgstr "Kolor biegunów niebieskich (na dzień)"
 
 #: src/ui_viewDialog.h:2164
 msgid "Color of supergalactic poles"
-msgstr ""
+msgstr "Kolor biegunów supergalaktycznych"
 
 #: src/ui_viewDialog.h:2167
 msgid "Show ecliptic poles of current date."
-msgstr ""
+msgstr "Pokaż bieguny ekliptyki na bieżący dzień."
 
 #: src/ui_viewDialog.h:2169
 msgid "Ecliptic poles (of date)"
@@ -6112,7 +6112,7 @@ msgstr "Pokazuj pierwszy wertykał (wschód-zachód)"
 
 #: src/ui_viewDialog.h:2175
 msgid "Color of galactic poles"
-msgstr ""
+msgstr "Kolor biegunów galaktycznych"
 
 #: src/ui_viewDialog.h:2177
 msgid "Zenith and Nadir"
@@ -6120,11 +6120,11 @@ msgstr "Zenit i nadir"
 
 #: src/ui_viewDialog.h:2180
 msgid "Color of Zenith and Nadir"
-msgstr ""
+msgstr "Kolor zenitu i nadiru"
 
 #: src/ui_viewDialog.h:2183
 msgid "Show celestial poles of J2000.0."
-msgstr ""
+msgstr "Pokaż bieguny niebieskie - J2000.0"
 
 #: src/ui_viewDialog.h:2185
 msgid "Celestial poles (J2000)"
@@ -6160,7 +6160,7 @@ msgstr "Koła precesji"
 
 #: src/ui_viewDialog.h:2198
 msgid "Color of precession circles"
-msgstr ""
+msgstr "Kolor kół precesji"
 
 #: src/ui_viewDialog.h:2201
 msgid "Altitudes and azimuth (counted from North towards East)."
@@ -6177,11 +6177,11 @@ msgstr "Siatka ekliptyczna (na dzień)"
 
 #: src/ui_viewDialog.h:2209
 msgid "Color of the equatorial grid (J2000.0)"
-msgstr ""
+msgstr "Kolor siatki równikowej (J2000.0)"
 
 #: src/ui_viewDialog.h:2212
 msgid "Color of the equinox points (J2000.0)"
-msgstr ""
+msgstr "Kolor punktów równonocy (J2000.0)"
 
 #: src/ui_viewDialog.h:2215
 msgid "Ecliptical coordinates for J2000.0."
@@ -6193,11 +6193,11 @@ msgstr "Siatka ekliptyki (J2000)"
 
 #: src/ui_viewDialog.h:2219
 msgid "Color of the supergalactic grid"
-msgstr ""
+msgstr "Kolor siatki supergalaktycznej"
 
 #: src/ui_viewDialog.h:2222
 msgid "Color of the galactic grid"
-msgstr ""
+msgstr "Kolor siatki galaktycznej"
 
 #: src/ui_viewDialog.h:2226
 msgid "Equatorial coordinates of J2000.0."
@@ -6209,7 +6209,7 @@ msgstr "Siatka równikowa (J2000)"
 
 #: src/ui_viewDialog.h:2230
 msgid "Color of the ecliptical grid (J2000.0)"
-msgstr ""
+msgstr "Kolor siatki ekliptycznej (J2000.0)"
 
 #: src/ui_viewDialog.h:2233
 msgid "Galactic Coordinates, System II (IAU 1958)."
@@ -6221,15 +6221,15 @@ msgstr "Równonoce (J2000)"
 
 #: src/ui_viewDialog.h:2238
 msgid "Color of the ecliptical grid (of date)"
-msgstr ""
+msgstr "Kolor siatki ekliptycznej (na dzień)"
 
 #: src/ui_viewDialog.h:2241
 msgid "Color of the equatorial grid (of date)"
-msgstr ""
+msgstr "Kolor siatki równikowej (na dzień)"
 
 #: src/ui_viewDialog.h:2244
 msgid "Color of the azimuthal grid"
-msgstr ""
+msgstr "Kolor siatki azymutalnej"
 
 #: src/ui_viewDialog.h:2247
 msgid "Equatorial coordinates of current date and planet."
@@ -6245,7 +6245,7 @@ msgstr "Równonoce (na dzień)"
 
 #: src/ui_viewDialog.h:2252
 msgid "Color of the equinox points (of date)"
-msgstr ""
+msgstr "Kolor punktów równonocy (na dzień)"
 
 #: src/ui_viewDialog.h:2255
 msgid "Labels for the Cardinal directions."
@@ -6253,7 +6253,7 @@ msgstr "Etykiety stron świata."
 
 #: src/ui_viewDialog.h:2259
 msgid "Color of cardinal points"
-msgstr ""
+msgstr "Kolor punktów kardynalnych"
 
 #: src/ui_viewDialog.h:2261
 msgid "Projection"
@@ -6335,7 +6335,7 @@ msgstr "Wartość w pikselach"
 
 #: src/ui_viewDialog.h:2292
 msgid "Color of lines of constellations"
-msgstr ""
+msgstr "Kolor linii gwiazdozbiorów"
 
 #: src/ui_viewDialog.h:2295
 msgid "Use native names for planets from current culture"
@@ -6360,7 +6360,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2305
 msgid "Color of names of constellations"
-msgstr ""
+msgstr "Kolor nazw gwiazdozbiorów"
 
 #: src/ui_viewDialog.h:2307
 msgid "Show boundaries"
@@ -6368,7 +6368,7 @@ msgstr "Pokaż granice gwiazdozbiorów"
 
 #: src/ui_viewDialog.h:2309
 msgid "Color of boundaries of constellations"
-msgstr ""
+msgstr "Kolor granic gwiazdozbiorów"
 
 #: src/ui_viewDialog.h:2312
 msgid "Visible"
@@ -6873,7 +6873,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1401
 msgid "Show DSS button"
-msgstr ""
+msgstr "Pokaż przycisk DSS"
 
 #: src/ui_configurationDialog.h:1403
 msgid "Automatic change of landscape when planet is changed"
@@ -7067,7 +7067,7 @@ msgstr "rrrr.MM.dd gg:mm"
 
 #: src/ui_greatRedSpotDialog.h:172
 msgid "Annual drift (degrees):"
-msgstr ""
+msgstr "Roczne przemieszczenie (stopni)"
 
 #: src/ui_greatRedSpotDialog.h:173
 msgid "Longitude of GRS (degrees):"
@@ -7265,7 +7265,7 @@ msgstr "%Przejdź do..."
 
 #: src/ui_dsoColorsDialog.h:476 src/ui_orbitColorsDialog.h:366
 msgid "Color settings"
-msgstr ""
+msgstr "Ustawienia kolorów"
 
 #: src/ui_dsoColorsDialog.h:478
 msgid "Colors of labels and markers of deep-sky objects"
@@ -11152,8 +11152,8 @@ msgid ""
 msgstr ""
 "W tej wtyczce stosowany jest prosty model krzywych blasku dla różnych "
 "supernowych. Typowe obrazy krzywych światła supernowych typu I i typu II "
-"można zobaczyć %1tutaj%2 (skala w dniach); model ten został zastosowany w "
-"tej wtyczce."
+"można zobaczyć %1tutaj%2 (skala po prawej w dniach); model ten został "
+"zastosowany w tej wtyczce."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:132
 msgid "Acknowledgments"
