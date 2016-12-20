@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-12-18 13:50+0700\n"
-"PO-Revision-Date: 2016-12-16 11:11+0000\n"
+"PO-Revision-Date: 2016-12-19 16:38+0000\n"
 "Last-Translator: Giuseppe Putzolu <giuseppe.putzolu@gmail.com>\n"
 "Language-Team: Sardinian <sc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-19 04:57+0000\n"
+"X-Launchpad-Export-Date: 2016-12-20 04:34+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -342,11 +342,11 @@ msgstr "Terrinu"
 
 #: src/core/modules/LandscapeMgr.cpp:419
 msgid "Landscape illumination"
-msgstr ""
+msgstr "Illuminatzione panorama"
 
 #: src/core/modules/LandscapeMgr.cpp:420
 msgid "Landscape labels"
-msgstr ""
+msgstr "Etichetas panorama"
 
 #: src/core/modules/LandscapeMgr.cpp:421 src/ui_viewDialog.h:1958
 msgid "Light pollution data from locations database"
@@ -1195,207 +1195,208 @@ msgstr "Diminui sa velocidade de su tempus"
 
 #: src/core/StelCore.cpp:243
 msgid "Increase time speed (a little)"
-msgstr ""
+msgstr "Aumentu de sa velocidade de su tempus (pagu)"
 
 #: src/core/StelCore.cpp:244
 msgid "Decrease time speed (a little)"
-msgstr ""
+msgstr "Diminui sa velocidade de su tempus (pagu)"
 
 #: src/core/StelCore.cpp:245
 msgid "Set normal time rate"
-msgstr ""
+msgstr "Imposta a normale sa propriedade de su tempus"
 
 #: src/core/StelCore.cpp:246
 msgid "Set time rate to zero"
-msgstr ""
+msgstr "Imposta a normale sa propriedade a zero"
 
 #: src/core/StelCore.cpp:247
 msgid "Set reverse time direction"
-msgstr ""
+msgstr "Imposta sa propriedade de su tempus a s'imbesse"
 
 #: src/core/StelCore.cpp:248
 msgid "Set time to now"
-msgstr ""
+msgstr "Imposta su tempus a i como"
 
 #: src/core/StelCore.cpp:249
 msgid "Add 1 solar minute"
-msgstr ""
+msgstr "Azunghe 1 minutu solare"
 
 #: src/core/StelCore.cpp:250
 msgid "Add 1 solar hour"
-msgstr ""
+msgstr "Azunghe 1 ora solare"
 
 #: src/core/StelCore.cpp:251
 msgid "Add 1 solar day"
-msgstr ""
+msgstr "Azunghe 1 die solare"
 
 #: src/core/StelCore.cpp:252
 msgid "Add 7 solar days"
-msgstr ""
+msgstr "Azunghe 7 dies solares"
 
 #: src/core/StelCore.cpp:253
 msgid "Subtract 1 solar minute"
-msgstr ""
+msgstr "Bogache 1 minutu solare"
 
 #: src/core/StelCore.cpp:254
 msgid "Subtract 1 solar hour"
-msgstr ""
+msgstr "Bogache 1 ora  solare"
 
 #: src/core/StelCore.cpp:255
 msgid "Subtract 1 solar day"
-msgstr ""
+msgstr "Bogache 1 die solare"
 
 #: src/core/StelCore.cpp:256
 msgid "Subtract 7 solar days"
-msgstr ""
+msgstr "Bogache 7 dies solares"
 
 #: src/core/StelCore.cpp:257
 msgid "Add 1 sidereal day"
-msgstr ""
+msgstr "Azunghe 1 die siderale"
 
 #: src/core/StelCore.cpp:258
 msgid "Add 1 sidereal year"
-msgstr ""
+msgstr "Azunghe 1 annu siderale"
 
 #: src/core/StelCore.cpp:259
 msgid "Add 100 sidereal years"
-msgstr ""
+msgstr "Azunghe 100 annos siderales"
 
 #: src/core/StelCore.cpp:260
 msgid "Add 1 synodic month"
-msgstr ""
+msgstr "Azunghe 1 mese sinodicu"
 
 #: src/core/StelCore.cpp:261
 msgid "Add 1 draconic month"
-msgstr ""
+msgstr "Azunghe 1 mese draconicu"
 
 #: src/core/StelCore.cpp:262
 msgid "Add 1 draconic year"
-msgstr ""
+msgstr "Azunghe 1 annu draconicu"
 
 #: src/core/StelCore.cpp:263
 msgid "Add 1 anomalistic month"
-msgstr ""
+msgstr "Azunghe 1 mese anomalisticu"
 
 #: src/core/StelCore.cpp:264
 msgid "Add 1 anomalistic year"
-msgstr ""
+msgstr "Azunghe 1 annu anomalisticu"
 
 #: src/core/StelCore.cpp:265
 msgid "Add 100 anomalistic years"
-msgstr ""
+msgstr "Azunghe 100 annos anomalisticos"
 
 #: src/core/StelCore.cpp:266
 msgid "Add 1 mean tropical month"
-msgstr ""
+msgstr "Azunghe 1 mese printzipale tropicale"
 
 #: src/core/StelCore.cpp:267
 msgid "Add 1 mean tropical year"
-msgstr ""
+msgstr "Azunghe 1 annu printzipale tropicale"
 
 #: src/core/StelCore.cpp:268
 msgid "Add 100 mean tropical years"
-msgstr ""
+msgstr "Azunghe 100 annos printzipales tropicale"
 
 #: src/core/StelCore.cpp:269
 msgid "Add 1 tropical year"
-msgstr ""
+msgstr "Azunghe 1 annu tropicale"
 
 #: src/core/StelCore.cpp:270
 msgid "Add 1 Julian year"
-msgstr ""
+msgstr "Azunghe 1 annu Zulianu"
 
 #: src/core/StelCore.cpp:271
 msgid "Add 1 Julian century"
-msgstr ""
+msgstr "Azunghe 1 seculu Zulianu"
 
 #: src/core/StelCore.cpp:272
 msgid "Add 1 Gaussian year"
-msgstr ""
+msgstr "Azunghe 1 annu Gaussianu"
 
 #: src/core/StelCore.cpp:273
 msgid "Subtract 1 sidereal day"
-msgstr ""
+msgstr "Bogache 1 die siderale"
 
 #: src/core/StelCore.cpp:274
 msgid "Subtract 1 sidereal year"
-msgstr ""
+msgstr "Bogache 1 annu siderale"
 
 #: src/core/StelCore.cpp:275
 msgid "Subtract 100 sidereal years"
-msgstr ""
+msgstr "Bogache 100 annos siderales"
 
 #: src/core/StelCore.cpp:276
 msgid "Subtract 1 synodic month"
-msgstr ""
+msgstr "Bogache 1 mese sinodicu"
 
 #: src/core/StelCore.cpp:277
 msgid "Subtract 1 draconic month"
-msgstr ""
+msgstr "Bogache 1 mese draconicu"
 
 #: src/core/StelCore.cpp:278
 msgid "Subtract 1 draconic year"
-msgstr ""
+msgstr "Bogache 1 annu draconicu"
 
 #: src/core/StelCore.cpp:279
 msgid "Subtract 1 anomalistic month"
-msgstr ""
+msgstr "Bogache 1 mese anomalisticu"
 
 #: src/core/StelCore.cpp:280
 msgid "Subtract 1 anomalistic year"
-msgstr ""
+msgstr "Bogache 1 annu anomalisticu"
 
 #: src/core/StelCore.cpp:281
 msgid "Subtract 100 anomalistic years"
-msgstr ""
+msgstr "Bogache 100 annos anomalisticos"
 
 #: src/core/StelCore.cpp:282
 msgid "Subtract 1 mean tropical month"
-msgstr ""
+msgstr "Bogache 1 mese printzipale tropicale"
 
 #: src/core/StelCore.cpp:283
 msgid "Subtract 1 mean tropical year"
-msgstr ""
+msgstr "Bogache 1 annu printzipale tropicale"
 
 #: src/core/StelCore.cpp:284
 msgid "Subtract 100 mean tropical years"
-msgstr ""
+msgstr "Bogache 100 annos printzipales tropicales"
 
 #: src/core/StelCore.cpp:285
 msgid "Subtract 1 tropical year"
-msgstr ""
+msgstr "Bogache 1 annu tropicale"
 
 #: src/core/StelCore.cpp:286
 msgid "Subtract 1 Julian year"
-msgstr ""
+msgstr "Bogache 1 annu Zulianu"
 
 #: src/core/StelCore.cpp:287
 msgid "Subtract 1 Julian century"
-msgstr ""
+msgstr "Bogache 1 seculu Zulianu"
 
 #: src/core/StelCore.cpp:288
 msgid "Subtract 1 Gaussian year"
-msgstr ""
+msgstr "Bogache 1 annu Gaussianu"
 
 #: src/core/StelCore.cpp:290
 msgid "Set home planet to selected planet"
-msgstr ""
+msgstr "Imposta comente su pianeta de omo, su pianeta seberau"
 
 #: src/core/StelCore.cpp:291
 msgid "Go to home"
-msgstr ""
+msgstr "Torra a domo"
 
 #: src/core/StelCore.cpp:293
 msgid "Flip scene horizontally"
-msgstr ""
+msgstr "Pone s'iscena a cucur'in besse orizzontale s'iscena"
 
 #: src/core/StelCore.cpp:294
 msgid "Flip scene vertically"
-msgstr ""
+msgstr "Pone s'iscena a cucur'in besse verticale s'iscena"
 
 #: src/core/StelCore.cpp:1970
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
+"Curretzione disabilitatda. Manizaddu si ischis ite ses faghinde ebbia."
 
 #: src/core/StelCore.cpp:1973
 #, qt-format
@@ -1404,6 +1405,10 @@ msgid ""
 "Henriksson in his article <em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
+"Custa formula antiga est bistada otennia de C. Schoch in su 1931 et est "
+"istada usada dae G. Henriksson in custu articulu <em>Sa Teoria de sa "
+"Relatividade de Einstein cinfrimada dae sas antigas eclisses de Sole</em> "
+"(%1). Po ateras informatziones abbaida %2innoghe%3."
 
 #: src/core/StelCore.cpp:1976
 #, qt-format
@@ -1411,6 +1416,8 @@ msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
+"Custa ecuatzione empirica est bistada pubblicada de G. M. Clemence in "
+"s'articulu <em>Suba de su sistema de costantes astronomicas</em> (%1)."
 
 #: src/core/StelCore.cpp:1979
 #, qt-format
@@ -1420,6 +1427,10 @@ msgid ""
 "<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
 "PC program SunTracker Pro."
 msgstr ""
+"Custa formula est fundada in d'unu istudiu a pustis de 1650 osservatziones "
+"de su Sole, de sa Luna et de sos pianetas dae Spencer Jones (%1) et usada "
+"dae Jean Meeus in su <em>Formula Astronomica po Carculadore</em>. Est "
+"bistada usada fintzas in su programma po PC SunTracker Pro."
 
 #: src/core/StelCore.cpp:1983
 msgid ""
@@ -1427,6 +1438,9 @@ msgid ""
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
+"Custa est una versione appena cambiada dae su IAU (1952) formula chi est "
+"bistada usada in su <em>Efemerides Astronomicas</em> et in sa <em>Regula po "
+"sas Eclisses Solares</em> de Mucke & Meeus (1983)."
 
 #: src/core/StelCore.cpp:1987
 msgid ""
@@ -1435,6 +1449,10 @@ msgid ""
 "relation was also implicitly adopted in the syzygy tables of Goldstine "
 "(1973)."
 msgstr ""
+"Sas Tabellas de Tuckerman (1962, 1964) lista de sas positziones de su Sole, "
+"de sa Luna et de sos pianetas a 5-dies et 10-dies de intervallu dae 601 BCE "
+"a 1649 CE. Sa matessi relatzione fudi istada impreada implicitamente in sa "
+"syzygy tablellas de Goldstine (1973)."
 
 #: src/core/StelCore.cpp:1991
 #, qt-format
@@ -1443,6 +1461,9 @@ msgid ""
 "article <em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 msgstr ""
+"Custa ecuqtzione est istada pubblicada dae P. M. Muller et F. R. Stephenson "
+"in s'articulu <em>S'atzelleratzione de sa Terra e de sa Luna dae sas prima "
+"osservatziones</em> (%1)."
 
 #: src/core/StelCore.cpp:1994
 #, qt-format
@@ -1450,6 +1471,8 @@ msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
+"Custa ecuqtzione est istada pubblicada dae F. R. Stephenson in s'articulu "
+"<em>Osservatziones Astronomicas prima de sos telescopios</em> (%1)."
 
 #: src/core/StelCore.cpp:1997
 #, qt-format
@@ -1459,6 +1482,11 @@ msgid ""
 "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
+"Custa ecuatzione polinomiale de 12esimu ordine (betza et cambiada dae  "
+"Schmadel & Zech (1988)) est bistada pubblicada dae L. D. Schmadel et G. Zech "
+"in s'articulu <em>Aprossimatziones Polinomiale po correzere su delta T E.T.-"
+"U.T. in s'opeca de su 1800-1975</em> (%1) comente forma de sos datos "
+"pubblicaos dae Brouwer (1952)."
 
 #: src/core/StelCore.cpp:2000
 msgid ""
@@ -1466,6 +1494,9 @@ msgid ""
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
+"Custu algoritimu est bistau impreau dae P. Bretagnon & L. "
+"Simon's<em>Programmas Planetarios e Tabellas dae su -4000 a +2800</em> "
+"(1986) et in su programma planetariu po PC RedShift."
 
 #: src/core/StelCore.cpp:2003
 #, qt-format
@@ -1474,10 +1505,14 @@ msgid ""
 "article <em>Long-term changes in the rotation of the earth - 700 B.C. to "
 "A.D. 1980</em> (%1)."
 msgstr ""
+"Custa formula est bistada pubblicada dae F. R. Stephenson et L. V. Morrison "
+"in s'articulu <em>Cambiamentas de su zirare de sa Terra in tempus longu - "
+"700 A.C. a P.C. 1980</em> (%1)."
 
 #: src/core/StelCore.cpp:2006
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
+"Custu algoritimu est impreau in su programma planetariu po PC Guide 7."
 
 #: src/core/StelCore.cpp:2009
 msgid ""
@@ -1485,6 +1520,9 @@ msgid ""
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
+"Custu algoritimu est bistau pubblicau dae F. Espenak in s'opera <em>Regula "
+"de Chimbanta Annos de sas Eclisses Solares: 1986-2035</em> (1987) et in su "
+"<em>Regula de Chimbanta Annos de sas Eclisses Lunares: 1986-2035</em> (1989)."
 
 #: src/core/StelCore.cpp:2012
 #, qt-format
@@ -1492,6 +1530,8 @@ msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
+"Custa formula est bistada otennia dae K.M. Borkowski (%1) dae una analisi de "
+"31 eclisses solares rezistrasdas tra su 2137 A.C. et 1715 P.C."
 
 #: src/core/StelCore.cpp:2015
 #, qt-format
@@ -1628,7 +1668,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:2066 src/core/SimbadSearcher.cpp:156
 msgid "Error"
-msgstr ""
+msgstr "Irballiu"
 
 #: src/core/StelCore.cpp:2116
 msgid "with meaningless values outside this range"
