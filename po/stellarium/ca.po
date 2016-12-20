@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-18 13:50+0700\n"
-"PO-Revision-Date: 2016-12-17 23:10+0000\n"
+"PO-Revision-Date: 2016-12-19 16:21+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-19 04:40+0000\n"
+"X-Launchpad-Export-Date: 2016-12-20 04:33+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -3142,7 +3142,7 @@ msgstr "Cubewanos"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:560 src/translations.h:80
 msgid "Scattered disc objects"
-msgstr "Objectes de disc dispers"
+msgstr "Objectes de disc dispersos"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:561 src/translations.h:82
@@ -3383,7 +3383,7 @@ msgstr "cubewano"
 #. TRANSLATORS: Type of object
 #: src/translations.h:62
 msgid "scattered disc object"
-msgstr "objecte disc dispers"
+msgstr "objecte de disc dispersos"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:64
@@ -6276,7 +6276,7 @@ msgstr "Projecció"
 
 #: src/ui_viewDialog.h:2262
 msgid "Vertical viewport offset"
-msgstr "Desfasament vertical de la finestra"
+msgstr "Desfasament de la vista vertical"
 
 #: src/ui_viewDialog.h:2264
 msgid "Show fog"
@@ -7285,7 +7285,7 @@ msgstr "&Vés a..."
 
 #: src/ui_dsoColorsDialog.h:476 src/ui_orbitColorsDialog.h:366
 msgid "Color settings"
-msgstr ""
+msgstr "Arranjament dels colors"
 
 #: src/ui_dsoColorsDialog.h:478
 msgid "Colors of labels and markers of deep-sky objects"
@@ -7466,7 +7466,7 @@ msgstr "Color dels marcadors de romanents de supernova"
 
 #: src/ui_orbitColorsDialog.h:368
 msgid "Style of orbit colors"
-msgstr ""
+msgstr "Estil de colors de l'òrbita"
 
 #: src/ui_orbitColorsDialog.h:369
 msgid "One color for all orbits"
@@ -7474,7 +7474,7 @@ msgstr "Un color per totes les òrbites"
 
 #: src/ui_orbitColorsDialog.h:370
 msgid "Separate colors for orbits by object type"
-msgstr ""
+msgstr "Colors diferents per a les òrbites per tipus d'objecte"
 
 #: src/ui_orbitColorsDialog.h:371
 msgid "Separate colors for orbits of major planets only"
@@ -7486,7 +7486,7 @@ msgstr "Colors de les òrbites dels cossos del sistema solar"
 
 #: src/ui_orbitColorsDialog.h:374
 msgid "Color of comet orbits"
-msgstr ""
+msgstr "Color de les òrbites dels cometes"
 
 #: src/ui_orbitColorsDialog.h:376
 msgid "Orbit of Uranus"
@@ -7498,11 +7498,11 @@ msgstr "Òrbita de Mart"
 
 #: src/ui_orbitColorsDialog.h:379
 msgid "Color of Neptune orbit"
-msgstr ""
+msgstr "Color de l'òrbita de Neptú"
 
 #: src/ui_orbitColorsDialog.h:382
 msgid "Color of planet moon orbits"
-msgstr ""
+msgstr "Color de les òrbites de la llunes dels planetes"
 
 #: src/ui_orbitColorsDialog.h:385
 msgid "Color of generic orbit"
@@ -7514,7 +7514,7 @@ msgstr "Òrbita de Mercuri"
 
 #: src/ui_orbitColorsDialog.h:389
 msgid "Color of major planet orbits"
-msgstr ""
+msgstr "Color de les òrbites dels planetes majors"
 
 #: src/ui_orbitColorsDialog.h:391
 msgid "Orbits of major planets"
@@ -7522,7 +7522,7 @@ msgstr "Òrbites dels planetes majors"
 
 #: src/ui_orbitColorsDialog.h:393
 msgid "Color of Saturn orbit"
-msgstr ""
+msgstr "Color de l'òrbita de Saturn"
 
 #: src/ui_orbitColorsDialog.h:395
 msgid "Orbit of Jupiter"
@@ -7538,19 +7538,19 @@ msgstr "Òrbites de llunes i planetes"
 
 #: src/ui_orbitColorsDialog.h:402
 msgid "Color of cubewano orbits"
-msgstr ""
+msgstr "Color de les òrbites dels cubewano"
 
 #: src/ui_orbitColorsDialog.h:405
 msgid "Color of Venus orbit"
-msgstr ""
+msgstr "Color de l'òrbita de Venus"
 
 #: src/ui_orbitColorsDialog.h:408
 msgid "Color of minor planet orbits"
-msgstr ""
+msgstr "Color de les òrbites dels planetes menors"
 
 #: src/ui_orbitColorsDialog.h:411
 msgid "Color of scattered disk object orbits"
-msgstr ""
+msgstr "Color de les òrbites dels objectes de disc dispersos"
 
 #: src/ui_orbitColorsDialog.h:416
 msgid "Orbit of Saturn"
@@ -7558,11 +7558,11 @@ msgstr "Òrbita de Saturn"
 
 #: src/ui_orbitColorsDialog.h:418
 msgid "Color of Uranus orbit"
-msgstr ""
+msgstr "Color de l'òrbita d'Urà"
 
 #: src/ui_orbitColorsDialog.h:421
 msgid "Color of Earth orbit"
-msgstr ""
+msgstr "Color de l'òrbita de la Terra"
 
 #: src/ui_orbitColorsDialog.h:423
 msgid "Orbit of Earth"
@@ -7570,7 +7570,7 @@ msgstr "Òrbita de la Terra"
 
 #: src/ui_orbitColorsDialog.h:425
 msgid "Color of dwarf planet orbits"
-msgstr ""
+msgstr "Color de les òrbites dels planetes nans"
 
 #: src/ui_orbitColorsDialog.h:427
 msgid "Orbits of comets"
@@ -7582,7 +7582,7 @@ msgstr "Òrbites de planetes nans"
 
 #: src/ui_orbitColorsDialog.h:430
 msgid "Color of Mercury orbit"
-msgstr ""
+msgstr "Color de l'òrbita de Mercuri"
 
 #: src/ui_orbitColorsDialog.h:432
 msgid "Orbits of plutinos"
@@ -7590,7 +7590,7 @@ msgstr "Òrbites de plutins"
 
 #: src/ui_orbitColorsDialog.h:433
 msgid "Orbits of scattered disk objects"
-msgstr "Òrbites dels objectes de disc disperses"
+msgstr "Òrbites dels objectes de disc dispersos"
 
 #: src/ui_orbitColorsDialog.h:437
 msgid "Generic orbit"
@@ -7602,11 +7602,11 @@ msgstr "Òrbites de cubewanos"
 
 #: src/ui_orbitColorsDialog.h:440
 msgid "Color of Mars orbit"
-msgstr ""
+msgstr "Color de l'òrbita de Mart"
 
 #: src/ui_orbitColorsDialog.h:443
 msgid "Color of Jupiter orbit"
-msgstr ""
+msgstr "Color de l'òrbita de Júpiter"
 
 #: src/ui_orbitColorsDialog.h:445
 msgid "Orbit of Venus"
@@ -7614,7 +7614,7 @@ msgstr "Òrbita de Venus"
 
 #: src/ui_orbitColorsDialog.h:447
 msgid "Color of plutino orbits"
-msgstr ""
+msgstr "Color de les òrbites dels plutins"
 
 #: src/ui_orbitColorsDialog.h:452
 msgid "Orbits of minor planets"
@@ -7626,7 +7626,7 @@ msgstr "Òrbites d'objectes del núvol d'Oort"
 
 #: src/ui_orbitColorsDialog.h:455
 msgid "Color of Oort cloud object orbits"
-msgstr ""
+msgstr "Color de les òrbites dels objectes del núvol d'Oort"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:138
