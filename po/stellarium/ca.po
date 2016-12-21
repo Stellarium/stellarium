@@ -10,14 +10,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-18 13:50+0700\n"
+"POT-Creation-Date: 2016-12-21 10:47+0700\n"
 "PO-Revision-Date: 2016-12-19 16:21+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-20 04:33+0000\n"
+"X-Launchpad-Export-Date: 2016-12-21 04:37+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -49,11 +49,11 @@ msgid "constellation"
 msgstr "constel·lació"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:444
-#: src/core/modules/GridLinesMgr.cpp:1212 src/core/modules/LandscapeMgr.cpp:414
+#: src/core/modules/GridLinesMgr.cpp:1212 src/core/modules/LandscapeMgr.cpp:408
 #: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:218 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/modules/ToastMgr.cpp:61
-#: src/core/StelApp.cpp:532 src/core/StelCore.cpp:239
+#: src/core/StelApp.cpp:530 src/core/StelCore.cpp:239
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:577
 msgid "Display Options"
 msgstr "Opcions de visualització"
@@ -326,50 +326,50 @@ msgstr "Punts equinocci J2000"
 msgid "Equinox points"
 msgstr "Punts equinocci"
 
-#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1954
+#: src/core/modules/LandscapeMgr.cpp:409 src/ui_viewDialog.h:1954
 msgid "Atmosphere"
 msgstr "Atmosfera"
 
-#: src/core/modules/LandscapeMgr.cpp:416
+#: src/core/modules/LandscapeMgr.cpp:410
 msgid "Fog"
 msgstr "Boira"
 
-#: src/core/modules/LandscapeMgr.cpp:417 src/ui_viewDialog.h:2257
+#: src/core/modules/LandscapeMgr.cpp:411 src/ui_viewDialog.h:2257
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:311
 msgid "Cardinal points"
 msgstr "Punts cardinals"
 
-#: src/core/modules/LandscapeMgr.cpp:418
+#: src/core/modules/LandscapeMgr.cpp:412
 msgid "Ground"
 msgstr "Terra"
 
-#: src/core/modules/LandscapeMgr.cpp:419
+#: src/core/modules/LandscapeMgr.cpp:413
 msgid "Landscape illumination"
 msgstr "Il·luminació del paisatge"
 
-#: src/core/modules/LandscapeMgr.cpp:420
+#: src/core/modules/LandscapeMgr.cpp:414
 msgid "Landscape labels"
 msgstr "Etiquetes del paisatge"
 
-#: src/core/modules/LandscapeMgr.cpp:421 src/ui_viewDialog.h:1958
+#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1958
 msgid "Light pollution data from locations database"
 msgstr "Dades sobre contaminació lumínica de la base de dades d'ubicacions"
 
-#: src/core/modules/LandscapeMgr.cpp:707
+#: src/core/modules/LandscapeMgr.cpp:701
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:448
 msgid "Author: "
 msgstr "Autor/a: "
 
-#: src/core/modules/LandscapeMgr.cpp:713
+#: src/core/modules/LandscapeMgr.cpp:707
 msgid "Location: "
 msgstr "Ubicació: "
 
-#: src/core/modules/LandscapeMgr.cpp:716
+#: src/core/modules/LandscapeMgr.cpp:710
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:721 src/ui_astroCalcDialog.h:538
+#: src/core/modules/LandscapeMgr.cpp:715 src/ui_astroCalcDialog.h:538
 msgid "Celestial body:"
 msgstr "Cos celeste:"
 
@@ -1165,11 +1165,11 @@ msgstr "Llum Zodiacal"
 msgid "Digitized Sky Survey (experimental)"
 msgstr "Estudi Digitalitzat del Cel EDC (experimental)"
 
-#: src/core/StelApp.cpp:532
+#: src/core/StelApp.cpp:530
 msgid "Night mode"
 msgstr "Mode nocturn"
 
-#: src/core/StelApp.cpp:584
+#: src/core/StelApp.cpp:561
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 "No es pot crear el remitent Spout. Vegeu el registre per obtenir detalls."
@@ -5771,8 +5771,8 @@ msgid "Show planet orbits"
 msgstr "Mostra les orbites dels planetes"
 
 #: src/ui_viewDialog.h:1968
-msgid "Configure colors of lines of orbits"
-msgstr "Configura colors de les línies de les òrbites"
+msgid "Configure colors of orbit lines"
+msgstr ""
 
 #: src/ui_viewDialog.h:1970
 msgid "Colors..."
@@ -7147,7 +7147,7 @@ msgstr "Posició del cursor"
 msgid "Include dir:"
 msgstr "Inclou el directori:"
 
-#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:329
+#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:327
 msgid "..."
 msgstr "..."
 
@@ -7212,12 +7212,12 @@ msgid "Time step:"
 msgstr "Pas de temps:"
 
 #: src/ui_astroCalcDialog.h:544 src/ui_astroCalcDialog.h:551
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
 msgstr "Per a:"
 
 #: src/ui_astroCalcDialog.h:545 src/ui_astroCalcDialog.h:548
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
 msgstr "Des de"
 
@@ -10552,67 +10552,67 @@ msgstr "Declinació (J2000)"
 msgid "Select one"
 msgstr "Selecciona un"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:321
+#: plugins/TelescopeControl/src/ui_slewDialog.h:319
 msgid "Slew telescope to"
 msgstr "Gira el telescopi cap a"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:323
+#: plugins/TelescopeControl/src/ui_slewDialog.h:321
 msgid "There are no active devices."
 msgstr "No hi ha cap dispositiu actiu"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:324
+#: plugins/TelescopeControl/src/ui_slewDialog.h:322
 msgid "Slew telescope to coordinates"
 msgstr "Gira el telescopi cap a les coordenades"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:325
+#: plugins/TelescopeControl/src/ui_slewDialog.h:323
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:247
 msgid "&Right Ascension (J2000):"
 msgstr "&Ascensió recta (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:326
+#: plugins/TelescopeControl/src/ui_slewDialog.h:324
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:248
 msgid "De&clination (J2000):"
 msgstr "&Declinació (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:327
+#: plugins/TelescopeControl/src/ui_slewDialog.h:325
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:244
 msgid "&Current object"
 msgstr "&Objecte actual"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:328
+#: plugins/TelescopeControl/src/ui_slewDialog.h:326
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:245
 msgid "Center of the screen"
 msgstr "Centre de la pantalla"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:331
+#: plugins/TelescopeControl/src/ui_slewDialog.h:329
 msgid "Hours-minutes-seconds format"
 msgstr "Format hores-minuts-segons"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:333
+#: plugins/TelescopeControl/src/ui_slewDialog.h:331
 msgid "&HMS"
 msgstr "&HMS"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:335
+#: plugins/TelescopeControl/src/ui_slewDialog.h:333
 msgid "Degrees-minutes-seconds format"
 msgstr "Format graus-minuts-segons"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:337
+#: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "&DMS"
 msgstr "&GMS"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:339
+#: plugins/TelescopeControl/src/ui_slewDialog.h:337
 msgid "Decimal degrees"
 msgstr "Graus decimals"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:341
+#: plugins/TelescopeControl/src/ui_slewDialog.h:339
 msgid "D&ecimal"
 msgstr "D&ecimal"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:342
+#: plugins/TelescopeControl/src/ui_slewDialog.h:340
 msgid "&Slew"
 msgstr "&Gira"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:343
+#: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "Configure &telescopes..."
 msgstr "Configura &telescopis..."
 
@@ -14352,7 +14352,7 @@ msgid "Peak"
 msgstr "Pic"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:421
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:190
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:188
 msgid "Meteor Showers Configuration"
 msgstr "Configuració de Pluges de Meteors"
 
@@ -14432,21 +14432,21 @@ msgstr "Estat:"
 msgid "Update"
 msgstr "Actualitza"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
 msgid "Meteor Showers: Search"
 msgstr "Pluja de Meteors: Cerca"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:198
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "Search"
 msgstr "Cercar"
 
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "dd/MM/yyyy"
 msgstr "dd/MM/aaaa"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:199
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "Results"
 msgstr "Resultats"
 
@@ -17213,6 +17213,9 @@ msgstr "Declinació Personalitzada 2"
 
 #~ msgid "Style of colors of orbits"
 #~ msgstr "Estil de colors de les òrbites"
+
+#~ msgid "Configure colors of lines of orbits"
+#~ msgstr "Configura colors de les línies de les òrbites"
 
 #~ msgid "Color of orbits of moons of planets"
 #~ msgstr "Color de les òrbites de les llunes i planetes"

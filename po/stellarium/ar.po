@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-18 13:50+0700\n"
+"POT-Creation-Date: 2016-12-21 10:47+0700\n"
 "PO-Revision-Date: 2016-12-18 15:42+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-19 04:36+0000\n"
+"X-Launchpad-Export-Date: 2016-12-21 04:33+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -46,11 +46,11 @@ msgid "constellation"
 msgstr "كوكبة - مجموعة نجمية"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:444
-#: src/core/modules/GridLinesMgr.cpp:1212 src/core/modules/LandscapeMgr.cpp:414
+#: src/core/modules/GridLinesMgr.cpp:1212 src/core/modules/LandscapeMgr.cpp:408
 #: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:218 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/modules/ToastMgr.cpp:61
-#: src/core/StelApp.cpp:532 src/core/StelCore.cpp:239
+#: src/core/StelApp.cpp:530 src/core/StelCore.cpp:239
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:577
 msgid "Display Options"
 msgstr "اختيارات العرض"
@@ -323,50 +323,50 @@ msgstr "نقاط الاعتدالين J2000"
 msgid "Equinox points"
 msgstr "نقاط الاعتدالين"
 
-#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1954
+#: src/core/modules/LandscapeMgr.cpp:409 src/ui_viewDialog.h:1954
 msgid "Atmosphere"
 msgstr ". الغلاف الجوي ."
 
-#: src/core/modules/LandscapeMgr.cpp:416
+#: src/core/modules/LandscapeMgr.cpp:410
 msgid "Fog"
 msgstr "الضباب"
 
-#: src/core/modules/LandscapeMgr.cpp:417 src/ui_viewDialog.h:2257
+#: src/core/modules/LandscapeMgr.cpp:411 src/ui_viewDialog.h:2257
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:311
 msgid "Cardinal points"
 msgstr "الجهات الاربع"
 
-#: src/core/modules/LandscapeMgr.cpp:418
+#: src/core/modules/LandscapeMgr.cpp:412
 msgid "Ground"
 msgstr "الأرض"
 
-#: src/core/modules/LandscapeMgr.cpp:419
+#: src/core/modules/LandscapeMgr.cpp:413
 msgid "Landscape illumination"
 msgstr "إضاءة المنظر الأرضي"
 
-#: src/core/modules/LandscapeMgr.cpp:420
+#: src/core/modules/LandscapeMgr.cpp:414
 msgid "Landscape labels"
 msgstr "الأسماء في المنظر الرضي"
 
-#: src/core/modules/LandscapeMgr.cpp:421 src/ui_viewDialog.h:1958
+#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1958
 msgid "Light pollution data from locations database"
 msgstr "استخدم بيانات التلوث الضوئي من قاعدة معلومات المواقع"
 
-#: src/core/modules/LandscapeMgr.cpp:707
+#: src/core/modules/LandscapeMgr.cpp:701
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:448
 msgid "Author: "
 msgstr "المؤلف: ‎ "
 
-#: src/core/modules/LandscapeMgr.cpp:713
+#: src/core/modules/LandscapeMgr.cpp:707
 msgid "Location: "
 msgstr "الموقع‎: ‏ "
 
-#: src/core/modules/LandscapeMgr.cpp:716
+#: src/core/modules/LandscapeMgr.cpp:710
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 متر"
 
-#: src/core/modules/LandscapeMgr.cpp:721 src/ui_astroCalcDialog.h:538
+#: src/core/modules/LandscapeMgr.cpp:715 src/ui_astroCalcDialog.h:538
 msgid "Celestial body:"
 msgstr "الجرم السماوي"
 
@@ -1162,11 +1162,11 @@ msgstr "الضوء البروجي"
 msgid "Digitized Sky Survey (experimental)"
 msgstr "(مسح السماء الرقمي (تجريبي"
 
-#: src/core/StelApp.cpp:532
+#: src/core/StelApp.cpp:530
 msgid "Night mode"
 msgstr "نَسَق الرؤية الليلية"
 
-#: src/core/StelApp.cpp:584
+#: src/core/StelApp.cpp:561
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 "لم يتمكن البرنامج من إنشاء Spout sender . إرجع إلى السجل لمزيد من التفاصيل."
@@ -5719,8 +5719,8 @@ msgid "Show planet orbits"
 msgstr "أظهر مدارات الكواكب"
 
 #: src/ui_viewDialog.h:1968
-msgid "Configure colors of lines of orbits"
-msgstr "ضبط إعدادات الألوان لخطوط المدارات"
+msgid "Configure colors of orbit lines"
+msgstr ""
 
 #: src/ui_viewDialog.h:1970
 msgid "Colors..."
@@ -7074,7 +7074,7 @@ msgstr "موضع المؤشر"
 msgid "Include dir:"
 msgstr "ضمِّن المسار"
 
-#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:329
+#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:327
 msgid "..."
 msgstr "..."
 
@@ -7139,12 +7139,12 @@ msgid "Time step:"
 msgstr "الفاصل الزمني"
 
 #: src/ui_astroCalcDialog.h:544 src/ui_astroCalcDialog.h:551
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
 msgstr "إلى ."
 
 #: src/ui_astroCalcDialog.h:545 src/ui_astroCalcDialog.h:548
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
 msgstr "من ."
 
@@ -10424,67 +10424,67 @@ msgstr "(J2000) الميل"
 msgid "Select one"
 msgstr "اختر نقطة"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:321
+#: plugins/TelescopeControl/src/ui_slewDialog.h:319
 msgid "Slew telescope to"
 msgstr "وجِّه التلسكوب إلى"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:323
+#: plugins/TelescopeControl/src/ui_slewDialog.h:321
 msgid "There are no active devices."
 msgstr "لايوجد أجهزة نشطة"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:324
+#: plugins/TelescopeControl/src/ui_slewDialog.h:322
 msgid "Slew telescope to coordinates"
 msgstr "وجِّه التلسكوب إلى الإحداثيات"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:325
+#: plugins/TelescopeControl/src/ui_slewDialog.h:323
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:247
 msgid "&Right Ascension (J2000):"
 msgstr "(J2000) المطلع المستقيم"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:326
+#: plugins/TelescopeControl/src/ui_slewDialog.h:324
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:248
 msgid "De&clination (J2000):"
 msgstr "(J2000) الميل"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:327
+#: plugins/TelescopeControl/src/ui_slewDialog.h:325
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:244
 msgid "&Current object"
 msgstr "الجرم الحالي"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:328
+#: plugins/TelescopeControl/src/ui_slewDialog.h:326
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:245
 msgid "Center of the screen"
 msgstr "مركز الشاشة"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:331
+#: plugins/TelescopeControl/src/ui_slewDialog.h:329
 msgid "Hours-minutes-seconds format"
 msgstr "تنسيق ساعة-دقيقة-ثانية"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:333
+#: plugins/TelescopeControl/src/ui_slewDialog.h:331
 msgid "&HMS"
 msgstr "س د ث"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:335
+#: plugins/TelescopeControl/src/ui_slewDialog.h:333
 msgid "Degrees-minutes-seconds format"
 msgstr "تنسيق درجة-دقيقة-ثانية"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:337
+#: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "&DMS"
 msgstr "د د ث"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:339
+#: plugins/TelescopeControl/src/ui_slewDialog.h:337
 msgid "Decimal degrees"
 msgstr "درجات عشرية"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:341
+#: plugins/TelescopeControl/src/ui_slewDialog.h:339
 msgid "D&ecimal"
 msgstr "عشري"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:342
+#: plugins/TelescopeControl/src/ui_slewDialog.h:340
 msgid "&Slew"
 msgstr "وجِّه"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:343
+#: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "Configure &telescopes..."
 msgstr "هيئ  التلسكوبات"
 
@@ -14143,7 +14143,7 @@ msgid "Peak"
 msgstr "الذروة"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:421
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:190
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:188
 msgid "Meteor Showers Configuration"
 msgstr "إعدادات زخات الشهب"
 
@@ -14223,21 +14223,21 @@ msgstr ":الحالة"
 msgid "Update"
 msgstr "التحديث"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
 msgid "Meteor Showers: Search"
 msgstr "زخات الشهب: البحث  ."
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:198
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "Search"
 msgstr "ابحث"
 
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "dd/MM/yyyy"
 msgstr "ي ي / ش ش / س س س س"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:199
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "Results"
 msgstr "النتائج"
 
@@ -16915,3 +16915,6 @@ msgstr "الميل المخصص 2"
 
 #~ msgid "Colors settings"
 #~ msgstr "إعدادات الألوان"
+
+#~ msgid "Configure colors of lines of orbits"
+#~ msgstr "ضبط إعدادات الألوان لخطوط المدارات"

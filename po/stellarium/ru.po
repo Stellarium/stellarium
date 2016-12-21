@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-18 13:50+0700\n"
+"POT-Creation-Date: 2016-12-21 10:47+0700\n"
 "PO-Revision-Date: 2016-12-18 07:55+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-19 04:55+0000\n"
+"X-Launchpad-Export-Date: 2016-12-21 04:54+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -46,11 +46,11 @@ msgid "constellation"
 msgstr "созвездие"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:444
-#: src/core/modules/GridLinesMgr.cpp:1212 src/core/modules/LandscapeMgr.cpp:414
+#: src/core/modules/GridLinesMgr.cpp:1212 src/core/modules/LandscapeMgr.cpp:408
 #: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:218 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/modules/ToastMgr.cpp:61
-#: src/core/StelApp.cpp:532 src/core/StelCore.cpp:239
+#: src/core/StelApp.cpp:530 src/core/StelCore.cpp:239
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:577
 msgid "Display Options"
 msgstr "Параметры отображения"
@@ -323,50 +323,50 @@ msgstr "Точки равноденствия J2000"
 msgid "Equinox points"
 msgstr "Точки равноденствия"
 
-#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1954
+#: src/core/modules/LandscapeMgr.cpp:409 src/ui_viewDialog.h:1954
 msgid "Atmosphere"
 msgstr "Атмосфера"
 
-#: src/core/modules/LandscapeMgr.cpp:416
+#: src/core/modules/LandscapeMgr.cpp:410
 msgid "Fog"
 msgstr "Дымка"
 
-#: src/core/modules/LandscapeMgr.cpp:417 src/ui_viewDialog.h:2257
+#: src/core/modules/LandscapeMgr.cpp:411 src/ui_viewDialog.h:2257
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:311
 msgid "Cardinal points"
 msgstr "Стороны света"
 
-#: src/core/modules/LandscapeMgr.cpp:418
+#: src/core/modules/LandscapeMgr.cpp:412
 msgid "Ground"
 msgstr "Земля"
 
-#: src/core/modules/LandscapeMgr.cpp:419
+#: src/core/modules/LandscapeMgr.cpp:413
 msgid "Landscape illumination"
 msgstr "Ландшафтное освещение"
 
-#: src/core/modules/LandscapeMgr.cpp:420
+#: src/core/modules/LandscapeMgr.cpp:414
 msgid "Landscape labels"
 msgstr "Ландшафтные названия"
 
-#: src/core/modules/LandscapeMgr.cpp:421 src/ui_viewDialog.h:1958
+#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1958
 msgid "Light pollution data from locations database"
 msgstr "Данные о засветке из базы местоположений"
 
-#: src/core/modules/LandscapeMgr.cpp:707
+#: src/core/modules/LandscapeMgr.cpp:701
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:448
 msgid "Author: "
 msgstr "Автор: "
 
-#: src/core/modules/LandscapeMgr.cpp:713
+#: src/core/modules/LandscapeMgr.cpp:707
 msgid "Location: "
 msgstr "Местоположение: "
 
-#: src/core/modules/LandscapeMgr.cpp:716
+#: src/core/modules/LandscapeMgr.cpp:710
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 м"
 
-#: src/core/modules/LandscapeMgr.cpp:721 src/ui_astroCalcDialog.h:538
+#: src/core/modules/LandscapeMgr.cpp:715 src/ui_astroCalcDialog.h:538
 msgid "Celestial body:"
 msgstr "Небесное тело:"
 
@@ -1165,11 +1165,11 @@ msgstr "Зодиакальный свет"
 msgid "Digitized Sky Survey (experimental)"
 msgstr "Оцифрованный обзор неба (экспериментальная функция)"
 
-#: src/core/StelApp.cpp:532
+#: src/core/StelApp.cpp:530
 msgid "Night mode"
 msgstr "Ночной режим"
 
-#: src/core/StelApp.cpp:584
+#: src/core/StelApp.cpp:561
 msgid "Cannot create Spout sender. See log for details."
 msgstr "Не могу создать отправитель Spout. Смотри подробности в журнале."
 
@@ -5756,7 +5756,7 @@ msgid "Show planet orbits"
 msgstr "Показывать орбиты планет"
 
 #: src/ui_viewDialog.h:1968
-msgid "Configure colors of lines of orbits"
+msgid "Configure colors of orbit lines"
 msgstr "Настройка цвета линий орбит"
 
 #: src/ui_viewDialog.h:1970
@@ -7132,7 +7132,7 @@ msgstr "Позиция курсора"
 msgid "Include dir:"
 msgstr "Включая каталог:"
 
-#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:329
+#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:327
 msgid "..."
 msgstr "..."
 
@@ -7197,12 +7197,12 @@ msgid "Time step:"
 msgstr "Шаг времени:"
 
 #: src/ui_astroCalcDialog.h:544 src/ui_astroCalcDialog.h:551
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
 msgstr "До:"
 
 #: src/ui_astroCalcDialog.h:545 src/ui_astroCalcDialog.h:548
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
 msgstr "От:"
 
@@ -10526,67 +10526,67 @@ msgstr "Склонение (J2000)"
 msgid "Select one"
 msgstr "Выбрать один..."
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:321
+#: plugins/TelescopeControl/src/ui_slewDialog.h:319
 msgid "Slew telescope to"
 msgstr "Навести телескоп на"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:323
+#: plugins/TelescopeControl/src/ui_slewDialog.h:321
 msgid "There are no active devices."
 msgstr "Нет ни одного активного устройства."
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:324
+#: plugins/TelescopeControl/src/ui_slewDialog.h:322
 msgid "Slew telescope to coordinates"
 msgstr "Навести телескоп по координатам"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:325
+#: plugins/TelescopeControl/src/ui_slewDialog.h:323
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:247
 msgid "&Right Ascension (J2000):"
 msgstr "&Прямое восхождение (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:326
+#: plugins/TelescopeControl/src/ui_slewDialog.h:324
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:248
 msgid "De&clination (J2000):"
 msgstr "&Склонение (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:327
+#: plugins/TelescopeControl/src/ui_slewDialog.h:325
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:244
 msgid "&Current object"
 msgstr "&Текущий объект"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:328
+#: plugins/TelescopeControl/src/ui_slewDialog.h:326
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:245
 msgid "Center of the screen"
 msgstr "Центр экрана"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:331
+#: plugins/TelescopeControl/src/ui_slewDialog.h:329
 msgid "Hours-minutes-seconds format"
 msgstr "Формат часы-минуты-секунды"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:333
+#: plugins/TelescopeControl/src/ui_slewDialog.h:331
 msgid "&HMS"
 msgstr "&ЧМС"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:335
+#: plugins/TelescopeControl/src/ui_slewDialog.h:333
 msgid "Degrees-minutes-seconds format"
 msgstr "Формат градусы-минуты-секунды"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:337
+#: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "&DMS"
 msgstr "&ГМС"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:339
+#: plugins/TelescopeControl/src/ui_slewDialog.h:337
 msgid "Decimal degrees"
 msgstr "Десятичные градусы"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:341
+#: plugins/TelescopeControl/src/ui_slewDialog.h:339
 msgid "D&ecimal"
 msgstr "&Десятичный"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:342
+#: plugins/TelescopeControl/src/ui_slewDialog.h:340
 msgid "&Slew"
 msgstr "&Навести"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:343
+#: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "Configure &telescopes..."
 msgstr "Настроить &телескопы..."
 
@@ -14315,7 +14315,7 @@ msgid "Peak"
 msgstr "Максимум"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:421
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:190
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:188
 msgid "Meteor Showers Configuration"
 msgstr "Настройки метеорных потоков"
 
@@ -14395,21 +14395,21 @@ msgstr "Статус:"
 msgid "Update"
 msgstr "Обновление"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
 msgid "Meteor Showers: Search"
 msgstr "Метеорные потоки: поиск"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:198
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "Search"
 msgstr "Найти"
 
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "dd/MM/yyyy"
 msgstr "дд/мм/гггг"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:199
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "Results"
 msgstr "Результаты поиска"
 
@@ -17174,6 +17174,9 @@ msgstr "Пользовательское склонение 2"
 
 #~ msgid "Style of colors of orbits"
 #~ msgstr "Стиль цвета орбит"
+
+#~ msgid "Configure colors of lines of orbits"
+#~ msgstr "Настройка цвета линий орбит"
 
 #~ msgid "Color of orbits of comets"
 #~ msgstr "Цвет орбит комет"
