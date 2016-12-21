@@ -70,16 +70,10 @@ private:
 };
 
 
-Cardinals::Cardinals(float _radius) : radius(_radius), color(0.6,0.2,0.2)
+Cardinals::Cardinals(float _radius) : radius(_radius), color(0.6,0.2,0.2), sNorth("N"), sSouth("S"), sEast("E"), sWest("W")
 {
 	// Font size is 30
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+17);
-	// Default labels - if sky locale specified, loaded later
-	// Improvement for gettext translation
-	sNorth = "N";
-	sSouth = "S";
-	sEast = "E";
-	sWest = "W";
+	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+17);	
 }
 
 Cardinals::~Cardinals()
