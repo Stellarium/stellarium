@@ -214,7 +214,7 @@ void StelSkyDrawer::update(double)
 	// These value have been calibrated by hand, looking at the faintest star in stellarium at around 40 deg FOV
 	// They should roughly match the scale described at http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
 	static const float bortleToInScale[9] = {2.45f, 1.55f, 1.0f, 0.63f, 0.40f, 0.24f, 0.23f, 0.145f, 0.09f};
-	if (getFlagHasAtmosphere())
+	if (getFlagHasAtmosphere() && core->getJD()>2387992.0)
 	    setInputScale(bortleToInScale[bortleScaleIndex-1]);
 	else
 	    setInputScale(bortleToInScale[0]);
