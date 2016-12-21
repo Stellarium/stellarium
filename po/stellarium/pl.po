@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-17 00:57+0700\n"
-"PO-Revision-Date: 2016-12-17 02:27+0000\n"
+"POT-Creation-Date: 2016-12-21 10:47+0700\n"
+"PO-Revision-Date: 2016-12-20 01:23+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-17 04:55+0000\n"
+"X-Launchpad-Export-Date: 2016-12-21 04:54+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -50,11 +50,11 @@ msgid "constellation"
 msgstr "gwiazdozbiór"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:444
-#: src/core/modules/GridLinesMgr.cpp:1212 src/core/modules/LandscapeMgr.cpp:414
+#: src/core/modules/GridLinesMgr.cpp:1212 src/core/modules/LandscapeMgr.cpp:408
 #: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:218 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/modules/ToastMgr.cpp:61
-#: src/core/StelApp.cpp:531 src/core/StelCore.cpp:239
+#: src/core/StelApp.cpp:530 src/core/StelCore.cpp:239
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:577
 msgid "Display Options"
 msgstr "Ustawienia wyświetlania"
@@ -327,51 +327,50 @@ msgstr "Punkty równonocy J2000"
 msgid "Equinox points"
 msgstr "Punkty równonocy"
 
-#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1954
+#: src/core/modules/LandscapeMgr.cpp:409 src/ui_viewDialog.h:1954
 msgid "Atmosphere"
 msgstr "Atmosfera"
 
-#: src/core/modules/LandscapeMgr.cpp:416
+#: src/core/modules/LandscapeMgr.cpp:410
 msgid "Fog"
 msgstr "Mgła"
 
-#: src/core/modules/LandscapeMgr.cpp:417 src/ui_viewDialog.h:2257
+#: src/core/modules/LandscapeMgr.cpp:411 src/ui_viewDialog.h:2257
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:311
 msgid "Cardinal points"
 msgstr "Punkty kardynalne"
 
-#: src/core/modules/LandscapeMgr.cpp:418
+#: src/core/modules/LandscapeMgr.cpp:412
 msgid "Ground"
 msgstr "Ziemia"
 
-#: src/core/modules/LandscapeMgr.cpp:419
-msgid "Illumination"
-msgstr "Oświetlenie"
+#: src/core/modules/LandscapeMgr.cpp:413
+msgid "Landscape illumination"
+msgstr "Oświetlenie krajobrazu"
 
-#: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:2068
-#: plugins/Satellites/src/ui_satellitesDialog.h:720
-msgid "Labels"
-msgstr "Podpisy"
+#: src/core/modules/LandscapeMgr.cpp:414
+msgid "Landscape labels"
+msgstr "Etykiety krajobrazu"
 
-#: src/core/modules/LandscapeMgr.cpp:421 src/ui_viewDialog.h:1958
+#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1958
 msgid "Light pollution data from locations database"
 msgstr "Dane o zaświetleniu nieba z bazy danych lokalizacji"
 
-#: src/core/modules/LandscapeMgr.cpp:707
+#: src/core/modules/LandscapeMgr.cpp:701
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:448
 msgid "Author: "
 msgstr "Autor: "
 
-#: src/core/modules/LandscapeMgr.cpp:713
+#: src/core/modules/LandscapeMgr.cpp:707
 msgid "Location: "
 msgstr "Lokalizacja: "
 
-#: src/core/modules/LandscapeMgr.cpp:716
+#: src/core/modules/LandscapeMgr.cpp:710
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:721 src/ui_astroCalcDialog.h:538
+#: src/core/modules/LandscapeMgr.cpp:715 src/ui_astroCalcDialog.h:538
 msgid "Celestial body:"
 msgstr "Ciało niebieskie:"
 
@@ -1170,11 +1169,11 @@ msgstr "Światło zodiakalne"
 msgid "Digitized Sky Survey (experimental)"
 msgstr ""
 
-#: src/core/StelApp.cpp:531
+#: src/core/StelApp.cpp:530
 msgid "Night mode"
 msgstr "Tryb nocny"
 
-#: src/core/StelApp.cpp:583
+#: src/core/StelApp.cpp:561
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 
@@ -1186,7 +1185,7 @@ msgstr ""
 msgid "Date and Time"
 msgstr "Data i godzina"
 
-#: src/core/StelCore.cpp:238 src/core/StelMovementMgr.cpp:176
+#: src/core/StelCore.cpp:238 src/core/StelMovementMgr.cpp:180
 msgid "Movement and Selection"
 msgstr "Przesuwanie i wybór"
 
@@ -1958,56 +1957,56 @@ msgstr "Pozorny czas gwiazdowy: %1"
 msgid "Deep-sky objects background images"
 msgstr "Obrazy obiektów głębokiego nieba"
 
-#: src/core/StelMovementMgr.cpp:177 src/gui/StelGui.cpp:204
+#: src/core/StelMovementMgr.cpp:181 src/gui/StelGui.cpp:204
 #: src/StelMainView.cpp:576
 msgid "Miscellaneous"
 msgstr "Różne"
 
-#: src/core/StelMovementMgr.cpp:177
+#: src/core/StelMovementMgr.cpp:181
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Przełącz między montażem paralaktycznym i azymutalnym"
 
-#: src/core/StelMovementMgr.cpp:178
+#: src/core/StelMovementMgr.cpp:182
 msgid "Center on selected object"
 msgstr "Wyśrodkuj na wybranym obiekcie"
 
-#: src/core/StelMovementMgr.cpp:179
+#: src/core/StelMovementMgr.cpp:183
 msgid "Zoom in on selected object"
 msgstr "Przybliż wybrany obiekt"
 
-#: src/core/StelMovementMgr.cpp:180
+#: src/core/StelMovementMgr.cpp:184
 msgid "Zoom out"
 msgstr "Oddal"
 
-#: src/core/StelMovementMgr.cpp:181
+#: src/core/StelMovementMgr.cpp:185
 msgid "Track object"
 msgstr "Śledź obiekt"
 
-#: src/core/StelMovementMgr.cpp:183
+#: src/core/StelMovementMgr.cpp:187
 msgid "Look towards East"
 msgstr "Spójrz na wschód"
 
-#: src/core/StelMovementMgr.cpp:184
+#: src/core/StelMovementMgr.cpp:188
 msgid "Look towards West"
 msgstr "Spójrz na zachód"
 
-#: src/core/StelMovementMgr.cpp:185
+#: src/core/StelMovementMgr.cpp:189
 msgid "Look towards North"
 msgstr "Spójrz na północ"
 
-#: src/core/StelMovementMgr.cpp:186
+#: src/core/StelMovementMgr.cpp:190
 msgid "Look towards South"
 msgstr "Spójrz na południe"
 
-#: src/core/StelMovementMgr.cpp:187
+#: src/core/StelMovementMgr.cpp:191
 msgid "Look towards Zenith"
 msgstr "Spójrz w kierunku zenitu"
 
-#: src/core/StelMovementMgr.cpp:189
+#: src/core/StelMovementMgr.cpp:193
 msgid "Look towards North Celestial pole"
 msgstr "Spójrz w kierunku północnego bieguna niebieskiego"
 
-#: src/core/StelMovementMgr.cpp:190
+#: src/core/StelMovementMgr.cpp:194
 msgid "Look towards South Celestial pole"
 msgstr "Spójrz w kierunku południowego bieguna niebieskiego"
 
@@ -2292,7 +2291,7 @@ msgid "Custom equation of %1T"
 msgstr "Własne równanie %1T"
 
 #: src/gui/ConfigurationDialog.cpp:1473 src/gui/ConfigurationDialog.cpp:1508
-#: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:409
+#: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:408
 msgid "System default"
 msgstr "Domyślny w systemie"
 
@@ -2354,7 +2353,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:158
 msgid "Ctrl & left mouse drag"
-msgstr ""
+msgstr "Ctrl + przeciąganie LPM"
 
 #: src/gui/HelpDialog.cpp:159
 msgid "Time scrolling: minutes"
@@ -2362,7 +2361,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:160
 msgid "Ctrl & mouse wheel"
-msgstr ""
+msgstr "Ctrl + kółko myszy"
 
 #: src/gui/HelpDialog.cpp:161
 msgid "Time scrolling: hours"
@@ -2370,7 +2369,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:162
 msgid "Ctrl+Shift & mouse wheel"
-msgstr ""
+msgstr "Ctrl + Shift + kółko myszy"
 
 #: src/gui/HelpDialog.cpp:163
 msgid "Time scrolling: days"
@@ -2378,7 +2377,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:164
 msgid "Ctrl+Alt & mouse wheel"
-msgstr ""
+msgstr "Ctrl + Alt + kółko myszy"
 
 #: src/gui/HelpDialog.cpp:165
 msgid "Time scrolling: years"
@@ -2386,7 +2385,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:166
 msgid "Ctrl+Alt+Shift & mouse wheel"
-msgstr ""
+msgstr "Ctrl + Alt + Shift + kółko myszy"
 
 #: src/gui/HelpDialog.cpp:169
 msgid "Select object"
@@ -2402,7 +2401,7 @@ msgstr "Usuń zaznaczenie"
 
 #: src/gui/HelpDialog.cpp:175
 msgid "Ctrl & left click"
-msgstr ""
+msgstr "Ctrl + kliknięcie LPM"
 
 #: src/gui/HelpDialog.cpp:177
 msgid "Right click"
@@ -2414,7 +2413,7 @@ msgstr "Dodaj własny znacznik"
 
 #: src/gui/HelpDialog.cpp:181
 msgid "Shift & left click"
-msgstr ""
+msgstr "Shift + kliknięcie LPM"
 
 #: src/gui/HelpDialog.cpp:183
 msgid "Delete all custom markers"
@@ -2422,7 +2421,7 @@ msgstr "Usuń wszystkie własne znaczniki"
 
 #: src/gui/HelpDialog.cpp:184
 msgid "Shift & right click"
-msgstr ""
+msgstr "Shift + kliknięcie PPM"
 
 #: src/gui/HelpDialog.cpp:187
 #, qt-format
@@ -2664,11 +2663,11 @@ msgstr "Spacja"
 msgid "Time zone"
 msgstr "Strefa czasowa"
 
-#: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:407
+#: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:406
 msgid "Local Mean Solar Time"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:408
+#: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:407
 msgid "Local True Solar Time"
 msgstr ""
 
@@ -3428,7 +3427,6 @@ msgstr "Mgławice"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:103 src/ui_dsoColorsDialog.h:497
-#: src/ui_orbitColorsDialog.h:414
 msgid "Clusters associated with nebulosity"
 msgstr "Gromady powiązane z obszarem mgławicowym"
 
@@ -4398,7 +4396,7 @@ msgstr "Argentyna"
 
 #: src/translations_countries.h:41
 msgid "Samoa (American)"
-msgstr ""
+msgstr "Samoa (Amerykańskie)"
 
 #: src/translations_countries.h:42
 msgid "Austria"
@@ -4414,7 +4412,7 @@ msgstr "Aruba"
 
 #: src/translations_countries.h:45
 msgid "Åland Islands"
-msgstr ""
+msgstr "Wyspy Alandzkie"
 
 #: src/translations_countries.h:46
 msgid "Azerbaijan"
@@ -4422,7 +4420,7 @@ msgstr "Azerbejdżan"
 
 #: src/translations_countries.h:47
 msgid "Bosnia and Herzegovina"
-msgstr ""
+msgstr "Bośnia i Hercegowina"
 
 #: src/translations_countries.h:48
 msgid "Barbados"
@@ -4458,7 +4456,7 @@ msgstr "Benin"
 
 #: src/translations_countries.h:56
 msgid "St Barthelemy"
-msgstr ""
+msgstr "Saint Barthelemy"
 
 #: src/translations_countries.h:57
 msgid "Bermuda"
@@ -4466,7 +4464,7 @@ msgstr "Bermudy"
 
 #: src/translations_countries.h:58
 msgid "Brunei"
-msgstr ""
+msgstr "Brunei"
 
 #: src/translations_countries.h:59
 msgid "Bolivia"
@@ -4474,7 +4472,7 @@ msgstr "Boliwia"
 
 #: src/translations_countries.h:60
 msgid "Caribbean NL"
-msgstr ""
+msgstr "Holandia Karaibska"
 
 #: src/translations_countries.h:61
 msgid "Brazil"
@@ -4510,19 +4508,19 @@ msgstr "Kanada"
 
 #: src/translations_countries.h:69
 msgid "Cocos (Keeling) Islands"
-msgstr ""
+msgstr "Wyspy Kokosowe (Keelinga)"
 
 #: src/translations_countries.h:70
 msgid "Congo (Dem. Rep.)"
-msgstr ""
+msgstr "Kongo (Dem. Rep.)"
 
 #: src/translations_countries.h:71
 msgid "Central African Rep."
-msgstr ""
+msgstr "Rep. Środkowoafrykańska"
 
 #: src/translations_countries.h:72
 msgid "Congo (Rep.)"
-msgstr ""
+msgstr "Kongo (Rep.)"
 
 #: src/translations_countries.h:73
 msgid "Switzerland"
@@ -4530,7 +4528,7 @@ msgstr "Szwajcaria"
 
 #: src/translations_countries.h:74
 msgid "Côte d'Ivoire"
-msgstr ""
+msgstr "Wybrzeże Kości Słoniowej"
 
 #: src/translations_countries.h:75
 msgid "Cook Islands"
@@ -4566,7 +4564,7 @@ msgstr "Zielony Przylądek"
 
 #: src/translations_countries.h:83
 msgid "Curacao"
-msgstr ""
+msgstr "Curacao"
 
 #: src/translations_countries.h:84
 msgid "Christmas Island"
@@ -4662,7 +4660,7 @@ msgstr "Gabon"
 
 #: src/translations_countries.h:107
 msgid "Britain (UK)"
-msgstr ""
+msgstr "Wielka Brytania (Zjedn. Król.)"
 
 #: src/translations_countries.h:108
 msgid "Grenada"
@@ -4678,7 +4676,7 @@ msgstr "Gujana Francuska"
 
 #: src/translations_countries.h:111
 msgid "Guernsey"
-msgstr ""
+msgstr "Guernsey"
 
 #: src/translations_countries.h:112
 msgid "Ghana"
@@ -4770,7 +4768,7 @@ msgstr "Izrael"
 
 #: src/translations_countries.h:134
 msgid "Isle of Man"
-msgstr ""
+msgstr "Wyspa Man"
 
 #: src/translations_countries.h:135
 msgid "India"
@@ -4798,7 +4796,7 @@ msgstr "Włochy"
 
 #: src/translations_countries.h:141
 msgid "Jersey"
-msgstr ""
+msgstr "Jersey"
 
 #: src/translations_countries.h:142
 msgid "Jamaica"
@@ -4834,15 +4832,15 @@ msgstr "Komory"
 
 #: src/translations_countries.h:150
 msgid "St Kitts and Nevis"
-msgstr ""
+msgstr "Saint Kitts i Nevis"
 
 #: src/translations_countries.h:151
 msgid "Korea (North)"
-msgstr ""
+msgstr "Korea (Północna)"
 
 #: src/translations_countries.h:152
 msgid "Korea (South)"
-msgstr ""
+msgstr "Korea (Południowa)"
 
 #: src/translations_countries.h:153
 msgid "Kuwait"
@@ -4858,7 +4856,7 @@ msgstr "Kazachstan"
 
 #: src/translations_countries.h:156
 msgid "Laos"
-msgstr ""
+msgstr "Laos"
 
 #: src/translations_countries.h:157
 msgid "Lebanon"
@@ -4866,7 +4864,7 @@ msgstr "Liban"
 
 #: src/translations_countries.h:158
 msgid "St Lucia"
-msgstr ""
+msgstr "Saint Lucia"
 
 #: src/translations_countries.h:159
 msgid "Liechtenstein"
@@ -4898,7 +4896,7 @@ msgstr "Łotwa"
 
 #: src/translations_countries.h:166
 msgid "Libya"
-msgstr ""
+msgstr "Libia"
 
 #: src/translations_countries.h:167
 msgid "Morocco"
@@ -4914,11 +4912,11 @@ msgstr "Mołdawia"
 
 #: src/translations_countries.h:170
 msgid "Montenegro"
-msgstr ""
+msgstr "Czarnogóra"
 
 #: src/translations_countries.h:171
 msgid "St Martin (French)"
-msgstr ""
+msgstr "Saint Martin (Fr.)"
 
 #: src/translations_countries.h:172
 msgid "Madagascar"
@@ -4938,7 +4936,7 @@ msgstr "Mali"
 
 #: src/translations_countries.h:176
 msgid "Myanmar (Burma)"
-msgstr ""
+msgstr "Mjanma (Birma)"
 
 #: src/translations_countries.h:177
 msgid "Mongolia"
@@ -5074,7 +5072,7 @@ msgstr "Polska"
 
 #: src/translations_countries.h:210
 msgid "St Pierre and Miquelon"
-msgstr ""
+msgstr "Saint Pierre i Miquelon"
 
 #: src/translations_countries.h:211
 msgid "Pitcairn"
@@ -5086,7 +5084,7 @@ msgstr "Portoryko"
 
 #: src/translations_countries.h:213
 msgid "Palestine"
-msgstr ""
+msgstr "Palestyna"
 
 #: src/translations_countries.h:214
 msgid "Portugal"
@@ -5118,7 +5116,7 @@ msgstr "Serbia"
 
 #: src/translations_countries.h:221
 msgid "Russia"
-msgstr ""
+msgstr "Rosja"
 
 #: src/translations_countries.h:222
 msgid "Rwanda"
@@ -5150,7 +5148,7 @@ msgstr "Singapur"
 
 #: src/translations_countries.h:229
 msgid "St Helena"
-msgstr ""
+msgstr "Wyspa Świętej Heleny"
 
 #: src/translations_countries.h:230
 msgid "Slovenia"
@@ -5186,7 +5184,7 @@ msgstr "Surinam"
 
 #: src/translations_countries.h:238
 msgid "South Sudan"
-msgstr ""
+msgstr "Sudan Południowy"
 
 #: src/translations_countries.h:239
 msgid "Sao Tome and Principe"
@@ -5198,11 +5196,11 @@ msgstr "Salwador"
 
 #: src/translations_countries.h:241
 msgid "St Maarten (Dutch)"
-msgstr ""
+msgstr "Sint Maarten (Hol.)"
 
 #: src/translations_countries.h:242
 msgid "Syria"
-msgstr ""
+msgstr "Syria"
 
 #: src/translations_countries.h:243
 msgid "Swaziland"
@@ -5210,7 +5208,7 @@ msgstr "Suazi"
 
 #: src/translations_countries.h:244
 msgid "Turks and Caicos Is"
-msgstr ""
+msgstr "Turks i Caicos"
 
 #: src/translations_countries.h:245
 msgid "Chad"
@@ -5218,7 +5216,7 @@ msgstr "Czad"
 
 #: src/translations_countries.h:246
 msgid "French Southern and Antarctic Lands"
-msgstr ""
+msgstr "Francuskie Terytoria Południowe i Antarktyczne"
 
 #: src/translations_countries.h:247
 msgid "Togo"
@@ -5282,7 +5280,7 @@ msgstr "Uganda"
 
 #: src/translations_countries.h:262
 msgid "US minor outlying islands"
-msgstr ""
+msgstr "Dalekie Wyspy Mniejsze Stanów Zjednoczonych"
 
 #: src/translations_countries.h:263
 msgid "United States"
@@ -5298,11 +5296,11 @@ msgstr "Uzbekistan"
 
 #: src/translations_countries.h:266
 msgid "Vatican City"
-msgstr ""
+msgstr "Watykan"
 
 #: src/translations_countries.h:267
 msgid "St Vincent"
-msgstr ""
+msgstr "Saint Vincent"
 
 #: src/translations_countries.h:268
 msgid "Venezuela"
@@ -5310,15 +5308,15 @@ msgstr "Wenezuela"
 
 #: src/translations_countries.h:269
 msgid "Virgin Islands (UK)"
-msgstr ""
+msgstr "Wyspy Dziewicze (Brytyjskie)"
 
 #: src/translations_countries.h:270
 msgid "Virgin Islands (US)"
-msgstr ""
+msgstr "Wyspy Dziewicze Stanów Zjednoczonych"
 
 #: src/translations_countries.h:271
 msgid "Vietnam"
-msgstr ""
+msgstr "Wietnam"
 
 #: src/translations_countries.h:272
 msgid "Vanuatu"
@@ -5330,7 +5328,7 @@ msgstr "Wallis i Futuna"
 
 #: src/translations_countries.h:274
 msgid "Samoa (western)"
-msgstr ""
+msgstr "Samoa (zach.)"
 
 #: src/translations_countries.h:275
 msgid "Yemen"
@@ -5762,8 +5760,8 @@ msgid "Show planet orbits"
 msgstr "Pokaż orbity planet"
 
 #: src/ui_viewDialog.h:1968
-msgid "Configure colors of lines of orbits"
-msgstr "Konfiguruj kolory orbit"
+msgid "Configure colors of orbit lines"
+msgstr ""
 
 #: src/ui_viewDialog.h:1970
 msgid "Colors..."
@@ -5943,6 +5941,10 @@ msgstr ""
 msgid "Use designations for screen labels"
 msgstr "Używaj oznaczeń w etykietach ekranowych"
 
+#: src/ui_viewDialog.h:2068 plugins/Satellites/src/ui_satellitesDialog.h:720
+msgid "Labels"
+msgstr "Podpisy"
+
 #: src/ui_viewDialog.h:2069
 msgid "Hints"
 msgstr "Podpowiedzi"
@@ -5982,7 +5984,7 @@ msgstr "Równik (J2000)"
 
 #: src/ui_viewDialog.h:2085
 msgid "Color of equator (J2000.0)"
-msgstr ""
+msgstr "Kolor równika (J2000.0)"
 
 #: src/ui_viewDialog.h:2088
 msgid "Show ecliptic line of current date."
@@ -5994,27 +5996,27 @@ msgstr "Ekliptyka (na dzień)"
 
 #: src/ui_viewDialog.h:2092
 msgid "Color of equator (of date)"
-msgstr ""
+msgstr "Kolor równika (na dzień)"
 
 #: src/ui_viewDialog.h:2095
 msgid "Show Galactic equator line."
-msgstr ""
+msgstr "Pokaż równik galaktyczny"
 
 #: src/ui_viewDialog.h:2099
 msgid "Color of supergalactic equator"
-msgstr ""
+msgstr "Kolor równika supergalaktycznego"
 
 #: src/ui_viewDialog.h:2102
 msgid "Color of ecliptic (of date)"
-msgstr ""
+msgstr "Kolor ekliptyki (na dzień)"
 
 #: src/ui_viewDialog.h:2105
 msgid "Color of ecliptic (J2000.0)"
-msgstr ""
+msgstr "Kolor ekliptyki (J2000.0)"
 
 #: src/ui_viewDialog.h:2108
 msgid "Color of galactic equator"
-msgstr ""
+msgstr "Kolor równika galaktycznego"
 
 #: src/ui_viewDialog.h:2111
 msgid "Show horizon line."
@@ -6022,7 +6024,7 @@ msgstr "Pokaż horyzont."
 
 #: src/ui_viewDialog.h:2115
 msgid "Color of horizon"
-msgstr ""
+msgstr "Kolor horyzontu"
 
 #: src/ui_viewDialog.h:2119
 msgid "Show meridian line."
@@ -6030,7 +6032,7 @@ msgstr "Pokaż południk."
 
 #: src/ui_viewDialog.h:2123
 msgid "Color of meridian"
-msgstr ""
+msgstr "Kolor południka"
 
 #: src/ui_viewDialog.h:2126
 msgid ""
@@ -6054,89 +6056,91 @@ msgstr "Kolury"
 
 #: src/ui_viewDialog.h:2137
 msgid "Color of colures"
-msgstr ""
+msgstr "Kolor kolurów"
 
 #: src/ui_viewDialog.h:2141
 msgid "Color of the ecliptic poles (J2000.0)"
-msgstr ""
+msgstr "Kolor biegunów ekliptyki (J2000.0)"
 
 #: src/ui_viewDialog.h:2144
 msgid "Color of Prime Vertical"
-msgstr ""
+msgstr "Kolor wertykału pierwszego"
 
 #: src/ui_viewDialog.h:2147
 msgid "Show ecliptic poles of J2000.0"
-msgstr ""
+msgstr "Pokaż bieguny ekliptyki - J2000.0"
 
 #: src/ui_viewDialog.h:2149
 msgid "Ecliptic poles (J2000)"
-msgstr ""
+msgstr "Bieguny ekliptyki (J2000)"
 
 #: src/ui_viewDialog.h:2151
 msgid "Color of the celestial poles (J2000.0)"
-msgstr ""
+msgstr "Kolor biegunów niebieskich (J2000.0)"
 
 #: src/ui_viewDialog.h:2154
 msgid "Show celestial poles of current planet and date."
-msgstr ""
+msgstr "Pokaż bieguny niebieskie bieżącej planety na bieżący dzień."
 
 #: src/ui_viewDialog.h:2156
 msgid "Celestial poles (of date)"
-msgstr ""
+msgstr "Bieguny niebieskie (na dzień)"
 
 #: src/ui_viewDialog.h:2158
 msgid "Color of ecliptic poles (of date)"
-msgstr ""
+msgstr "Kolor biegunów ekliptyki (na dzień)"
 
 #: src/ui_viewDialog.h:2161
 msgid "Color of celestial poles (of date)"
-msgstr ""
+msgstr "Kolor biegunów niebieskich (na dzień)"
 
 #: src/ui_viewDialog.h:2164
 msgid "Color of supergalactic poles"
-msgstr ""
+msgstr "Kolor biegunów supergalaktycznych"
 
 #: src/ui_viewDialog.h:2167
 msgid "Show ecliptic poles of current date."
-msgstr ""
+msgstr "Pokaż bieguny ekliptyki na bieżący dzień."
 
 #: src/ui_viewDialog.h:2169
 msgid "Ecliptic poles (of date)"
-msgstr ""
+msgstr "Bieguny ekliptyki (na dzień)"
 
 #: src/ui_viewDialog.h:2171
 msgid "Show Prime (East-West) Vertical."
-msgstr ""
+msgstr "Pokazuj pierwszy wertykał (wschód-zachód)"
 
 #: src/ui_viewDialog.h:2175
 msgid "Color of galactic poles"
-msgstr ""
+msgstr "Kolor biegunów galaktycznych"
 
 #: src/ui_viewDialog.h:2177
 msgid "Zenith and Nadir"
-msgstr ""
+msgstr "Zenit i nadir"
 
 #: src/ui_viewDialog.h:2180
 msgid "Color of Zenith and Nadir"
-msgstr ""
+msgstr "Kolor zenitu i nadiru"
 
 #: src/ui_viewDialog.h:2183
 msgid "Show celestial poles of J2000.0."
-msgstr ""
+msgstr "Pokaż bieguny niebieskie - J2000.0"
 
 #: src/ui_viewDialog.h:2185
 msgid "Celestial poles (J2000)"
-msgstr ""
+msgstr "Bieguny niebieskie (J2000)"
 
 #: src/ui_viewDialog.h:2187
 msgid ""
 "These circles delimit stars which stay always above (respectively below) the "
 "mathematical horizon."
 msgstr ""
+"Te koła wyznaczają granice między gwiazdami, które zawsze pozostają powyżej "
+"i poniżej matematycznego horyzontu."
 
 #: src/ui_viewDialog.h:2189
 msgid "Circumpolar circles"
-msgstr ""
+msgstr "Koła okołobiegunowe"
 
 #: src/ui_viewDialog.h:2191
 msgid "Color of circumpolar circles"
@@ -6156,7 +6160,7 @@ msgstr "Koła precesji"
 
 #: src/ui_viewDialog.h:2198
 msgid "Color of precession circles"
-msgstr ""
+msgstr "Kolor kół precesji"
 
 #: src/ui_viewDialog.h:2201
 msgid "Altitudes and azimuth (counted from North towards East)."
@@ -6173,11 +6177,11 @@ msgstr "Siatka ekliptyczna (na dzień)"
 
 #: src/ui_viewDialog.h:2209
 msgid "Color of the equatorial grid (J2000.0)"
-msgstr ""
+msgstr "Kolor siatki równikowej (J2000.0)"
 
 #: src/ui_viewDialog.h:2212
 msgid "Color of the equinox points (J2000.0)"
-msgstr ""
+msgstr "Kolor punktów równonocy (J2000.0)"
 
 #: src/ui_viewDialog.h:2215
 msgid "Ecliptical coordinates for J2000.0."
@@ -6189,11 +6193,11 @@ msgstr "Siatka ekliptyki (J2000)"
 
 #: src/ui_viewDialog.h:2219
 msgid "Color of the supergalactic grid"
-msgstr ""
+msgstr "Kolor siatki supergalaktycznej"
 
 #: src/ui_viewDialog.h:2222
 msgid "Color of the galactic grid"
-msgstr ""
+msgstr "Kolor siatki galaktycznej"
 
 #: src/ui_viewDialog.h:2226
 msgid "Equatorial coordinates of J2000.0."
@@ -6205,7 +6209,7 @@ msgstr "Siatka równikowa (J2000)"
 
 #: src/ui_viewDialog.h:2230
 msgid "Color of the ecliptical grid (J2000.0)"
-msgstr ""
+msgstr "Kolor siatki ekliptycznej (J2000.0)"
 
 #: src/ui_viewDialog.h:2233
 msgid "Galactic Coordinates, System II (IAU 1958)."
@@ -6213,19 +6217,19 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2236
 msgid "Equinoxes (J2000)"
-msgstr ""
+msgstr "Równonoce (J2000)"
 
 #: src/ui_viewDialog.h:2238
 msgid "Color of the ecliptical grid (of date)"
-msgstr ""
+msgstr "Kolor siatki ekliptycznej (na dzień)"
 
 #: src/ui_viewDialog.h:2241
 msgid "Color of the equatorial grid (of date)"
-msgstr ""
+msgstr "Kolor siatki równikowej (na dzień)"
 
 #: src/ui_viewDialog.h:2244
 msgid "Color of the azimuthal grid"
-msgstr ""
+msgstr "Kolor siatki azymutalnej"
 
 #: src/ui_viewDialog.h:2247
 msgid "Equatorial coordinates of current date and planet."
@@ -6237,11 +6241,11 @@ msgstr "Siatka równikowa (na dzień)"
 
 #: src/ui_viewDialog.h:2250
 msgid "Equinoxes (of date)"
-msgstr ""
+msgstr "Równonoce (na dzień)"
 
 #: src/ui_viewDialog.h:2252
 msgid "Color of the equinox points (of date)"
-msgstr ""
+msgstr "Kolor punktów równonocy (na dzień)"
 
 #: src/ui_viewDialog.h:2255
 msgid "Labels for the Cardinal directions."
@@ -6249,7 +6253,7 @@ msgstr "Etykiety stron świata."
 
 #: src/ui_viewDialog.h:2259
 msgid "Color of cardinal points"
-msgstr ""
+msgstr "Kolor punktów kardynalnych"
 
 #: src/ui_viewDialog.h:2261
 msgid "Projection"
@@ -6331,7 +6335,7 @@ msgstr "Wartość w pikselach"
 
 #: src/ui_viewDialog.h:2292
 msgid "Color of lines of constellations"
-msgstr ""
+msgstr "Kolor linii gwiazdozbiorów"
 
 #: src/ui_viewDialog.h:2295
 msgid "Use native names for planets from current culture"
@@ -6356,7 +6360,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2305
 msgid "Color of names of constellations"
-msgstr ""
+msgstr "Kolor nazw gwiazdozbiorów"
 
 #: src/ui_viewDialog.h:2307
 msgid "Show boundaries"
@@ -6364,7 +6368,7 @@ msgstr "Pokaż granice gwiazdozbiorów"
 
 #: src/ui_viewDialog.h:2309
 msgid "Color of boundaries of constellations"
-msgstr ""
+msgstr "Kolor granic gwiazdozbiorów"
 
 #: src/ui_viewDialog.h:2312
 msgid "Visible"
@@ -6419,7 +6423,7 @@ msgstr "Ta funkcja nie została jeszcze gruntownie przetestowana!"
 
 #: src/ui_configurationDialog.h:1205
 msgid "Ephemeris settings (experimental)"
-msgstr ""
+msgstr "Ustawienia efemerydy (eksperymentalne)"
 
 #: src/ui_configurationDialog.h:1206 src/ui_configurationDialog.h:1207
 msgid "Not installed"
@@ -6547,7 +6551,7 @@ msgstr "Wyświetlane pola"
 
 #: src/ui_configurationDialog.h:1255 src/ui_configurationDialog.h:1293
 msgid "Equatorial coordinates, equinox of date"
-msgstr ""
+msgstr "Współrzędne równikowe, równonoc na dzień"
 
 #: src/ui_configurationDialog.h:1257
 msgid "Right ascension/Declination (of date)"
@@ -6555,7 +6559,7 @@ msgstr "Rektascensja/Deklinacja (na dzień)"
 
 #: src/ui_configurationDialog.h:1258
 msgid "Supergalactic coordinates"
-msgstr ""
+msgstr "Współrzędne supergalaktyczne"
 
 #: src/ui_configurationDialog.h:1260
 msgid "The type of the object (star, planet, etc.)"
@@ -6567,11 +6571,11 @@ msgstr "Absolutna wielkość gwiazdowa"
 
 #: src/ui_configurationDialog.h:1265
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
-msgstr ""
+msgstr "Współrzędne ekliptyczne, równonoc na dzień (tylko dla Ziemi)"
 
 #: src/ui_configurationDialog.h:1267
 msgid "Ecliptic coordinates (of date)"
-msgstr ""
+msgstr "Współrzędne ekliptyczne (na dzień)"
 
 #: src/ui_configurationDialog.h:1269
 msgid "Spectral class, nebula type, etc."
@@ -6612,7 +6616,7 @@ msgstr "Współrzędne galaktyczne"
 
 #: src/ui_configurationDialog.h:1284
 msgid "Equatorial coordinates, equinox of J2000.0"
-msgstr ""
+msgstr "Współrzędne ekliptyczne, równonoc J2000.0"
 
 #: src/ui_configurationDialog.h:1286
 msgid "Right ascension/Declination (J2000)"
@@ -6620,11 +6624,11 @@ msgstr "Rektascensja/Deklinacja (J2000)"
 
 #: src/ui_configurationDialog.h:1289
 msgid "Ecliptic coordinates, equinox J2000.0"
-msgstr ""
+msgstr "Współrzędne ekliptyczne, równonoc J2000.0"
 
 #: src/ui_configurationDialog.h:1291
 msgid "Ecliptic coordinates (J2000)"
-msgstr ""
+msgstr "Ecliptic coordinates (J2000)"
 
 #: src/ui_configurationDialog.h:1295
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:201
@@ -6638,11 +6642,11 @@ msgstr "Obserwowana wielkość gwiazdowa"
 #: src/ui_configurationDialog.h:1298
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
 msgid "3-letter IAU constellation abbreviation"
-msgstr ""
+msgstr "3-literowy skrót nazwy gwiazdozbioru wg MUA"
 
 #: src/ui_configurationDialog.h:1300
 msgid "Constellation"
-msgstr ""
+msgstr "Gwiazdozbiór"
 
 #: src/ui_configurationDialog.h:1301
 msgid "Control"
@@ -6869,7 +6873,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1401
 msgid "Show DSS button"
-msgstr ""
+msgstr "Pokaż przycisk DSS"
 
 #: src/ui_configurationDialog.h:1403
 msgid "Automatic change of landscape when planet is changed"
@@ -7063,7 +7067,7 @@ msgstr "rrrr.MM.dd gg:mm"
 
 #: src/ui_greatRedSpotDialog.h:172
 msgid "Annual drift (degrees):"
-msgstr ""
+msgstr "Roczne przemieszczenie (stopni)"
 
 #: src/ui_greatRedSpotDialog.h:173
 msgid "Longitude of GRS (degrees):"
@@ -7071,7 +7075,7 @@ msgstr ""
 
 #: src/ui_greatRedSpotDialog.h:180
 msgid "Date and Time (UTC):"
-msgstr ""
+msgstr "Data i czas (UTC):"
 
 #: src/ui_greatRedSpotDialog.h:184
 msgid "Get the recent GRS measurement"
@@ -7125,7 +7129,7 @@ msgstr "Pozycja kursora"
 msgid "Include dir:"
 msgstr "Uwzględnij katalog:"
 
-#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:329
+#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:327
 msgid "..."
 msgstr "..."
 
@@ -7190,12 +7194,12 @@ msgid "Time step:"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:544 src/ui_astroCalcDialog.h:551
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
 msgstr "Do:"
 
 #: src/ui_astroCalcDialog.h:545 src/ui_astroCalcDialog.h:548
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
 msgstr "Od:"
 
@@ -7260,8 +7264,8 @@ msgid "&Go to..."
 msgstr "%Przejdź do..."
 
 #: src/ui_dsoColorsDialog.h:476 src/ui_orbitColorsDialog.h:366
-msgid "Colors settings"
-msgstr ""
+msgid "Color settings"
+msgstr "Ustawienia kolorów"
 
 #: src/ui_dsoColorsDialog.h:478
 msgid "Colors of labels and markers of deep-sky objects"
@@ -7360,7 +7364,7 @@ msgstr ""
 msgid "Color of markers of deep-sky objects"
 msgstr ""
 
-#: src/ui_dsoColorsDialog.h:558 src/ui_orbitColorsDialog.h:435
+#: src/ui_dsoColorsDialog.h:558
 msgid "Labels of deep-sky objects"
 msgstr ""
 
@@ -7392,7 +7396,7 @@ msgstr ""
 msgid "Color of markers of planetary nebulae"
 msgstr ""
 
-#: src/ui_dsoColorsDialog.h:585 src/ui_orbitColorsDialog.h:397
+#: src/ui_dsoColorsDialog.h:585
 msgid "Possible planetary nebulae"
 msgstr ""
 
@@ -7441,7 +7445,7 @@ msgid "Color of markers of supernova remnants"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:368
-msgid "Style of colors of orbits"
+msgid "Style of orbit colors"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:369
@@ -7449,7 +7453,7 @@ msgid "One color for all orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:370
-msgid "Separate colors for orbits of groups of objects by type"
+msgid "Separate colors for orbits by object type"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:371
@@ -7461,7 +7465,7 @@ msgid "Colors of orbits of Solar system bodies"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:374
-msgid "Color of orbits of comets"
+msgid "Color of comet orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:376
@@ -7473,11 +7477,11 @@ msgid "Orbit of Mars"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:379
-msgid "Color of orbit of Neptune"
+msgid "Color of Neptune orbit"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:382
-msgid "Color of orbits of moons of planets"
+msgid "Color of planet moon orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:385
@@ -7489,7 +7493,7 @@ msgid "Orbit of Mercury"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:389
-msgid "Color of orbits of major planets"
+msgid "Color of major planet orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:391
@@ -7497,7 +7501,7 @@ msgid "Orbits of major planets"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:393
-msgid "Color of orbit of Saturn"
+msgid "Color of Saturn orbit"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:395
@@ -7513,19 +7517,19 @@ msgid "Orbits of moons of planets"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:402
-msgid "Color of orbits of cubewanos"
+msgid "Color of cubewano orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:405
-msgid "Color of orbit of Venus"
+msgid "Color of Venus orbit"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:408
-msgid "Color of orbits of minor planets"
+msgid "Color of minor planet orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:411
-msgid "Color of orbits of scattered disk objects"
+msgid "Color of scattered disk object orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:416
@@ -7533,11 +7537,11 @@ msgid "Orbit of Saturn"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:418
-msgid "Color of orbit of Uranus"
+msgid "Color of Uranus orbit"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:421
-msgid "Color of orbit of Earth"
+msgid "Color of Earth orbit"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:423
@@ -7545,7 +7549,7 @@ msgid "Orbit of Earth"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:425
-msgid "Color of orbits of dwarf planets"
+msgid "Color of dwarf planet orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:427
@@ -7557,7 +7561,7 @@ msgid "Orbits of dwarf planets"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:430
-msgid "Color of orbit of Mercury"
+msgid "Color of Mercury orbit"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:432
@@ -7577,11 +7581,11 @@ msgid "Orbits of cubewanos"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:440
-msgid "Color of orbit of Mars"
+msgid "Color of Mars orbit"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:443
-msgid "Color of orbit of Jupiter"
+msgid "Color of Jupiter orbit"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:445
@@ -7589,7 +7593,7 @@ msgid "Orbit of Venus"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:447
-msgid "Color of orbits of plutinos"
+msgid "Color of plutino orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:452
@@ -7601,7 +7605,7 @@ msgid "Orbits of Oort cloud objects"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:455
-msgid "Color of orbits of Oort cloud objects"
+msgid "Color of Oort cloud object orbits"
 msgstr ""
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
@@ -10356,67 +10360,67 @@ msgstr "Deklinacja (J2000)"
 msgid "Select one"
 msgstr "Wybierz 1 element"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:321
+#: plugins/TelescopeControl/src/ui_slewDialog.h:319
 msgid "Slew telescope to"
 msgstr "Ustaw teleskop na"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:323
+#: plugins/TelescopeControl/src/ui_slewDialog.h:321
 msgid "There are no active devices."
 msgstr "Brak aktywnych urządzeń."
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:324
+#: plugins/TelescopeControl/src/ui_slewDialog.h:322
 msgid "Slew telescope to coordinates"
 msgstr "Ustaw teleskop na współrzędne"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:325
+#: plugins/TelescopeControl/src/ui_slewDialog.h:323
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:247
 msgid "&Right Ascension (J2000):"
 msgstr "&Rektascensja (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:326
+#: plugins/TelescopeControl/src/ui_slewDialog.h:324
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:248
 msgid "De&clination (J2000):"
 msgstr "Deklina&cja (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:327
+#: plugins/TelescopeControl/src/ui_slewDialog.h:325
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:244
 msgid "&Current object"
 msgstr "&Aktualny obiekt"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:328
+#: plugins/TelescopeControl/src/ui_slewDialog.h:326
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:245
 msgid "Center of the screen"
 msgstr "Środek ekranu"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:331
+#: plugins/TelescopeControl/src/ui_slewDialog.h:329
 msgid "Hours-minutes-seconds format"
 msgstr "Format godziny-minuty-sekundy"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:333
+#: plugins/TelescopeControl/src/ui_slewDialog.h:331
 msgid "&HMS"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:335
+#: plugins/TelescopeControl/src/ui_slewDialog.h:333
 msgid "Degrees-minutes-seconds format"
 msgstr "Format stopnie-minuty-sekundy"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:337
+#: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "&DMS"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:339
+#: plugins/TelescopeControl/src/ui_slewDialog.h:337
 msgid "Decimal degrees"
 msgstr "Stopnie w postaci ułamka dziesiętnego"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:341
+#: plugins/TelescopeControl/src/ui_slewDialog.h:339
 msgid "D&ecimal"
 msgstr "D&ziesiętne"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:342
+#: plugins/TelescopeControl/src/ui_slewDialog.h:340
 msgid "&Slew"
 msgstr "&Ustaw"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:343
+#: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "Configure &telescopes..."
 msgstr "Konfiguruj &teleskopy..."
 
@@ -11148,8 +11152,8 @@ msgid ""
 msgstr ""
 "W tej wtyczce stosowany jest prosty model krzywych blasku dla różnych "
 "supernowych. Typowe obrazy krzywych światła supernowych typu I i typu II "
-"można zobaczyć %1tutaj%2 (skala w dniach); model ten został zastosowany w "
-"tej wtyczce."
+"można zobaczyć %1tutaj%2 (skala po prawej w dniach); model ten został "
+"zastosowany w tej wtyczce."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:132
 msgid "Acknowledgments"
@@ -13952,7 +13956,7 @@ msgid "Peak"
 msgstr "Szczyt"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:421
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:190
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:188
 msgid "Meteor Showers Configuration"
 msgstr "Konfiguracja Deszczów meteorów"
 
@@ -14032,21 +14036,21 @@ msgstr "Status:"
 msgid "Update"
 msgstr "Aktualizuj"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
 msgid "Meteor Showers: Search"
 msgstr "Deszcze meteorów: Wyszukiwanie"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:198
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "Search"
 msgstr "Szukaj"
 
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "dd/MM/yyyy"
 msgstr "dd/MM/rrrr"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:199
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "Results"
 msgstr "Wyniki"
 
@@ -16519,6 +16523,9 @@ msgstr ""
 #~ msgid "Set FOV to %1%2"
 #~ msgstr "Ustaw pole widzenia na %1%2"
 
+#~ msgid "Illumination"
+#~ msgstr "Oświetlenie"
+
 #~ msgid "Democratic Republic of the Congo"
 #~ msgstr "Demokratyczna Republika Konga"
 
@@ -16562,3 +16569,6 @@ msgstr ""
 
 #~ msgid "Active"
 #~ msgstr "Aktywny"
+
+#~ msgid "Configure colors of lines of orbits"
+#~ msgstr "Konfiguruj kolory orbit"

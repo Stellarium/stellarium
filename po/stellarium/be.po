@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-17 00:57+0700\n"
-"PO-Revision-Date: 2016-12-15 19:58+0000\n"
+"POT-Creation-Date: 2016-12-21 10:47+0700\n"
+"PO-Revision-Date: 2016-12-19 22:45+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-17 04:39+0000\n"
+"X-Launchpad-Export-Date: 2016-12-21 04:35+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -48,11 +48,11 @@ msgid "constellation"
 msgstr "сузор'е"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:444
-#: src/core/modules/GridLinesMgr.cpp:1212 src/core/modules/LandscapeMgr.cpp:414
+#: src/core/modules/GridLinesMgr.cpp:1212 src/core/modules/LandscapeMgr.cpp:408
 #: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:218 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/modules/ToastMgr.cpp:61
-#: src/core/StelApp.cpp:531 src/core/StelCore.cpp:239
+#: src/core/StelApp.cpp:530 src/core/StelCore.cpp:239
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:577
 msgid "Display Options"
 msgstr "Настройкі адлюстраваньня"
@@ -325,51 +325,50 @@ msgstr "Пункты раўнадзенства J2000"
 msgid "Equinox points"
 msgstr "Пункты раўнадзенства"
 
-#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1954
+#: src/core/modules/LandscapeMgr.cpp:409 src/ui_viewDialog.h:1954
 msgid "Atmosphere"
 msgstr "Атмасфэра"
 
-#: src/core/modules/LandscapeMgr.cpp:416
+#: src/core/modules/LandscapeMgr.cpp:410
 msgid "Fog"
 msgstr "Туман"
 
-#: src/core/modules/LandscapeMgr.cpp:417 src/ui_viewDialog.h:2257
+#: src/core/modules/LandscapeMgr.cpp:411 src/ui_viewDialog.h:2257
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:311
 msgid "Cardinal points"
 msgstr "Бакі сьвету"
 
-#: src/core/modules/LandscapeMgr.cpp:418
+#: src/core/modules/LandscapeMgr.cpp:412
 msgid "Ground"
 msgstr "Зямля"
 
-#: src/core/modules/LandscapeMgr.cpp:419
-msgid "Illumination"
-msgstr "Асьвятленьне"
+#: src/core/modules/LandscapeMgr.cpp:413
+msgid "Landscape illumination"
+msgstr "Асьвятленьне краявіду"
 
-#: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:2068
-#: plugins/Satellites/src/ui_satellitesDialog.h:720
-msgid "Labels"
-msgstr "Назвы"
+#: src/core/modules/LandscapeMgr.cpp:414
+msgid "Landscape labels"
+msgstr "Пазнакі краявіду"
 
-#: src/core/modules/LandscapeMgr.cpp:421 src/ui_viewDialog.h:1958
+#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1958
 msgid "Light pollution data from locations database"
 msgstr "Засьветленьне паводле базы мясцовасьцяў"
 
-#: src/core/modules/LandscapeMgr.cpp:707
+#: src/core/modules/LandscapeMgr.cpp:701
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:448
 msgid "Author: "
 msgstr "Стваральнік: "
 
-#: src/core/modules/LandscapeMgr.cpp:713
+#: src/core/modules/LandscapeMgr.cpp:707
 msgid "Location: "
 msgstr "Месца: "
 
-#: src/core/modules/LandscapeMgr.cpp:716
+#: src/core/modules/LandscapeMgr.cpp:710
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 м"
 
-#: src/core/modules/LandscapeMgr.cpp:721 src/ui_astroCalcDialog.h:538
+#: src/core/modules/LandscapeMgr.cpp:715 src/ui_astroCalcDialog.h:538
 msgid "Celestial body:"
 msgstr "Нябеснае цела:"
 
@@ -1166,13 +1165,13 @@ msgstr "Задыякальнае сьвятло"
 msgid "Digitized Sky Survey (experimental)"
 msgstr "Лічбаваны агляд неба (экпэрымэнтальны)"
 
-#: src/core/StelApp.cpp:531
+#: src/core/StelApp.cpp:530
 msgid "Night mode"
 msgstr "Начны рэжым"
 
-#: src/core/StelApp.cpp:583
+#: src/core/StelApp.cpp:561
 msgid "Cannot create Spout sender. See log for details."
-msgstr ""
+msgstr "Немагчыма стварыць адпраўнік Spout. Падрабязнасьці ў часопісе."
 
 #: src/core/StelCore.cpp:237 src/gui/StelGui.cpp:202
 #: src/gui/AstroCalcDialog.cpp:305 src/gui/AstroCalcDialog.cpp:742
@@ -1182,7 +1181,7 @@ msgstr ""
 msgid "Date and Time"
 msgstr "Дата й час"
 
-#: src/core/StelCore.cpp:238 src/core/StelMovementMgr.cpp:176
+#: src/core/StelCore.cpp:238 src/core/StelMovementMgr.cpp:180
 msgid "Movement and Selection"
 msgstr "Рух і вылучэньне"
 
@@ -1955,56 +1954,56 @@ msgstr "Бачны зоркавы дзень: %1"
 msgid "Deep-sky objects background images"
 msgstr "Відарысы асноведзі аб'ектаў глыбокага космасу"
 
-#: src/core/StelMovementMgr.cpp:177 src/gui/StelGui.cpp:204
+#: src/core/StelMovementMgr.cpp:181 src/gui/StelGui.cpp:204
 #: src/StelMainView.cpp:576
 msgid "Miscellaneous"
 msgstr "Рознае"
 
-#: src/core/StelMovementMgr.cpp:177
+#: src/core/StelMovementMgr.cpp:181
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Пераключыцца між экватарыяльным і азімутальным мацаваньнем"
 
-#: src/core/StelMovementMgr.cpp:178
+#: src/core/StelMovementMgr.cpp:182
 msgid "Center on selected object"
 msgstr "Перайсьці да вылучанага аб'екту"
 
-#: src/core/StelMovementMgr.cpp:179
+#: src/core/StelMovementMgr.cpp:183
 msgid "Zoom in on selected object"
 msgstr "Наблізіць вылучаны аб'ект"
 
-#: src/core/StelMovementMgr.cpp:180
+#: src/core/StelMovementMgr.cpp:184
 msgid "Zoom out"
 msgstr "Аддаліць"
 
-#: src/core/StelMovementMgr.cpp:181
+#: src/core/StelMovementMgr.cpp:185
 msgid "Track object"
 msgstr "Сачыць за аб'ектам"
 
-#: src/core/StelMovementMgr.cpp:183
+#: src/core/StelMovementMgr.cpp:187
 msgid "Look towards East"
 msgstr "Паглядзець у напрамку Ўсходу"
 
-#: src/core/StelMovementMgr.cpp:184
+#: src/core/StelMovementMgr.cpp:188
 msgid "Look towards West"
 msgstr "Паглядзець у напрамку Захаду"
 
-#: src/core/StelMovementMgr.cpp:185
+#: src/core/StelMovementMgr.cpp:189
 msgid "Look towards North"
 msgstr "Паглядзець у напрамку Поўначы"
 
-#: src/core/StelMovementMgr.cpp:186
+#: src/core/StelMovementMgr.cpp:190
 msgid "Look towards South"
 msgstr "Паглядзець у напрамку Поўдня"
 
-#: src/core/StelMovementMgr.cpp:187
+#: src/core/StelMovementMgr.cpp:191
 msgid "Look towards Zenith"
 msgstr "Паглядзець у напрамку Зэніту"
 
-#: src/core/StelMovementMgr.cpp:189
+#: src/core/StelMovementMgr.cpp:193
 msgid "Look towards North Celestial pole"
 msgstr "Глядзець у напрамку паўночнага нябеснага полюса"
 
-#: src/core/StelMovementMgr.cpp:190
+#: src/core/StelMovementMgr.cpp:194
 msgid "Look towards South Celestial pole"
 msgstr "Глядзець у напрамку паўднёвага нябеснага полюса"
 
@@ -2289,7 +2288,7 @@ msgid "Custom equation of %1T"
 msgstr "Сваё раўнаньне %1T"
 
 #: src/gui/ConfigurationDialog.cpp:1473 src/gui/ConfigurationDialog.cpp:1508
-#: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:409
+#: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:408
 msgid "System default"
 msgstr "Прадвызначаны сыстэмны"
 
@@ -2659,11 +2658,11 @@ msgstr "Прабел"
 msgid "Time zone"
 msgstr "Часавая зона"
 
-#: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:407
+#: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:406
 msgid "Local Mean Solar Time"
 msgstr "Мясцовы сярэдні сонечны дзень"
 
-#: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:408
+#: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:407
 msgid "Local True Solar Time"
 msgstr "Мясцовы сапраўдны сонечны дзень"
 
@@ -3419,7 +3418,6 @@ msgstr "Туманнасьць"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:103 src/ui_dsoColorsDialog.h:497
-#: src/ui_orbitColorsDialog.h:414
 msgid "Clusters associated with nebulosity"
 msgstr "Скопішчы, зьвязаныя з туманнасьцю"
 
@@ -5756,12 +5754,12 @@ msgid "Show planet orbits"
 msgstr "Паказваць арбіты плянэт"
 
 #: src/ui_viewDialog.h:1968
-msgid "Configure colors of lines of orbits"
+msgid "Configure colors of orbit lines"
 msgstr ""
 
 #: src/ui_viewDialog.h:1970
 msgid "Colors..."
-msgstr ""
+msgstr "Колеры…"
 
 #: src/ui_viewDialog.h:1972
 msgid ""
@@ -5938,6 +5936,10 @@ msgstr ""
 #: src/ui_viewDialog.h:2067
 msgid "Use designations for screen labels"
 msgstr "Выкарыстоўваць абазначэньні ў пазнаках на экране"
+
+#: src/ui_viewDialog.h:2068 plugins/Satellites/src/ui_satellitesDialog.h:720
+msgid "Labels"
+msgstr "Назвы"
 
 #: src/ui_viewDialog.h:2069
 msgid "Hints"
@@ -7118,7 +7120,7 @@ msgstr "Становішча курсора"
 msgid "Include dir:"
 msgstr "Уключыць каталёґ:"
 
-#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:329
+#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:327
 msgid "..."
 msgstr "…"
 
@@ -7183,12 +7185,12 @@ msgid "Time step:"
 msgstr "Крок часу:"
 
 #: src/ui_astroCalcDialog.h:544 src/ui_astroCalcDialog.h:551
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
 msgstr "Да:"
 
 #: src/ui_astroCalcDialog.h:545 src/ui_astroCalcDialog.h:548
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
 msgstr "Ад:"
 
@@ -7254,8 +7256,8 @@ msgid "&Go to..."
 msgstr "&Перайсьці да…"
 
 #: src/ui_dsoColorsDialog.h:476 src/ui_orbitColorsDialog.h:366
-msgid "Colors settings"
-msgstr "Настаўленьні колераў"
+msgid "Color settings"
+msgstr "Настройкі колераў"
 
 #: src/ui_dsoColorsDialog.h:478
 msgid "Colors of labels and markers of deep-sky objects"
@@ -7354,7 +7356,7 @@ msgstr "Колер пазнак эмісійных аб'ектаў"
 msgid "Color of markers of deep-sky objects"
 msgstr "Колер пазнак аб'ектаў глыбокага космасу"
 
-#: src/ui_dsoColorsDialog.h:558 src/ui_orbitColorsDialog.h:435
+#: src/ui_dsoColorsDialog.h:558
 msgid "Labels of deep-sky objects"
 msgstr "Назвы глыбокага космасу"
 
@@ -7386,7 +7388,7 @@ msgstr "Колер пазнак зоркавых скопішчаў"
 msgid "Color of markers of planetary nebulae"
 msgstr "Колер пазнак плянэтарных туманнасьцяў"
 
-#: src/ui_dsoColorsDialog.h:585 src/ui_orbitColorsDialog.h:397
+#: src/ui_dsoColorsDialog.h:585
 msgid "Possible planetary nebulae"
 msgstr "Магчымыя плянэтарныя туманнасьці"
 
@@ -7424,179 +7426,179 @@ msgstr "Колер пазнак малекулярных аблокаў"
 
 #: src/ui_dsoColorsDialog.h:610
 msgid "Young stellar objects"
-msgstr ""
+msgstr "Маладыя зоркавыя аб'екты"
 
 #: src/ui_dsoColorsDialog.h:612
 msgid "Color of markers of young stellar objects"
-msgstr ""
+msgstr "Колер пазнак маладых зоркавых аб'ектаў"
 
 #: src/ui_dsoColorsDialog.h:616
 msgid "Color of markers of supernova remnants"
 msgstr "Колер пазнак рэштак звышновых"
 
 #: src/ui_orbitColorsDialog.h:368
-msgid "Style of colors of orbits"
-msgstr ""
+msgid "Style of orbit colors"
+msgstr "Стыль колераў арбіт"
 
 #: src/ui_orbitColorsDialog.h:369
 msgid "One color for all orbits"
-msgstr ""
+msgstr "Адзін колер для ўсіх арбіт"
 
 #: src/ui_orbitColorsDialog.h:370
-msgid "Separate colors for orbits of groups of objects by type"
-msgstr ""
+msgid "Separate colors for orbits by object type"
+msgstr "Асобныя колер арбіт паводле тыпу аб'екту"
 
 #: src/ui_orbitColorsDialog.h:371
 msgid "Separate colors for orbits of major planets only"
-msgstr ""
+msgstr "Асобныя колер арбіт толькі для галоўных плянэт"
 
 #: src/ui_orbitColorsDialog.h:372
 msgid "Colors of orbits of Solar system bodies"
-msgstr ""
+msgstr "Колеры арбіт целаў Сонечнай сыстэмы"
 
 #: src/ui_orbitColorsDialog.h:374
-msgid "Color of orbits of comets"
-msgstr ""
+msgid "Color of comet orbits"
+msgstr "Колер арбіт камэт"
 
 #: src/ui_orbitColorsDialog.h:376
 msgid "Orbit of Uranus"
-msgstr ""
+msgstr "Арбіта Урана"
 
 #: src/ui_orbitColorsDialog.h:377
 msgid "Orbit of Mars"
-msgstr ""
+msgstr "Арбіта Марса"
 
 #: src/ui_orbitColorsDialog.h:379
-msgid "Color of orbit of Neptune"
-msgstr ""
+msgid "Color of Neptune orbit"
+msgstr "Колер арбіты Нэптуна"
 
 #: src/ui_orbitColorsDialog.h:382
-msgid "Color of orbits of moons of planets"
-msgstr ""
+msgid "Color of planet moon orbits"
+msgstr "Колер арбіт месяцаў плянэт"
 
 #: src/ui_orbitColorsDialog.h:385
 msgid "Color of generic orbit"
-msgstr ""
+msgstr "Колер агульнай арбіты"
 
 #: src/ui_orbitColorsDialog.h:387
 msgid "Orbit of Mercury"
-msgstr ""
+msgstr "Арбіта Мэркурыя"
 
 #: src/ui_orbitColorsDialog.h:389
-msgid "Color of orbits of major planets"
-msgstr ""
+msgid "Color of major planet orbits"
+msgstr "Колер арбіт галоўных плянэт"
 
 #: src/ui_orbitColorsDialog.h:391
 msgid "Orbits of major planets"
-msgstr ""
+msgstr "Арбіты галоўных плянэт"
 
 #: src/ui_orbitColorsDialog.h:393
-msgid "Color of orbit of Saturn"
-msgstr ""
+msgid "Color of Saturn orbit"
+msgstr "Колер арбіты Сатурна"
 
 #: src/ui_orbitColorsDialog.h:395
 msgid "Orbit of Jupiter"
-msgstr ""
+msgstr "Арбіта Юпітэра"
 
 #: src/ui_orbitColorsDialog.h:399
 msgid "Orbit of Neptune"
-msgstr ""
+msgstr "Рабіта Нэптуна"
 
 #: src/ui_orbitColorsDialog.h:400
 msgid "Orbits of moons of planets"
-msgstr ""
+msgstr "Арбіты месяцаў плянэт"
 
 #: src/ui_orbitColorsDialog.h:402
-msgid "Color of orbits of cubewanos"
-msgstr ""
+msgid "Color of cubewano orbits"
+msgstr "Колер арбіт кубэванаў"
 
 #: src/ui_orbitColorsDialog.h:405
-msgid "Color of orbit of Venus"
-msgstr ""
+msgid "Color of Venus orbit"
+msgstr "Колер арбіты Вэнэры"
 
 #: src/ui_orbitColorsDialog.h:408
-msgid "Color of orbits of minor planets"
-msgstr ""
+msgid "Color of minor planet orbits"
+msgstr "Колер арбіт малых плянэт"
 
 #: src/ui_orbitColorsDialog.h:411
-msgid "Color of orbits of scattered disk objects"
-msgstr ""
+msgid "Color of scattered disk object orbits"
+msgstr "Колер арбіт аб'ектаў раскіданага дыску"
 
 #: src/ui_orbitColorsDialog.h:416
 msgid "Orbit of Saturn"
-msgstr ""
+msgstr "Арбіта Сатурна"
 
 #: src/ui_orbitColorsDialog.h:418
-msgid "Color of orbit of Uranus"
-msgstr ""
+msgid "Color of Uranus orbit"
+msgstr "Колер арбіты Ўрана"
 
 #: src/ui_orbitColorsDialog.h:421
-msgid "Color of orbit of Earth"
-msgstr ""
+msgid "Color of Earth orbit"
+msgstr "Колер арбіты Зямлі"
 
 #: src/ui_orbitColorsDialog.h:423
 msgid "Orbit of Earth"
-msgstr ""
+msgstr "Арбіта Зямлі"
 
 #: src/ui_orbitColorsDialog.h:425
-msgid "Color of orbits of dwarf planets"
-msgstr ""
+msgid "Color of dwarf planet orbits"
+msgstr "Колер арбіт карлікавых плянэт"
 
 #: src/ui_orbitColorsDialog.h:427
 msgid "Orbits of comets"
-msgstr ""
+msgstr "Арбіты камэт"
 
 #: src/ui_orbitColorsDialog.h:428
 msgid "Orbits of dwarf planets"
-msgstr ""
+msgstr "Арбіты карлікавых плянэт"
 
 #: src/ui_orbitColorsDialog.h:430
-msgid "Color of orbit of Mercury"
-msgstr ""
+msgid "Color of Mercury orbit"
+msgstr "Колер арбіты Мэркурыя"
 
 #: src/ui_orbitColorsDialog.h:432
 msgid "Orbits of plutinos"
-msgstr ""
+msgstr "Арбіты плютын"
 
 #: src/ui_orbitColorsDialog.h:433
 msgid "Orbits of scattered disk objects"
-msgstr ""
+msgstr "Арбіты аб'ектаў раскіданага дыску"
 
 #: src/ui_orbitColorsDialog.h:437
 msgid "Generic orbit"
-msgstr ""
+msgstr "Агульныя арбіты"
 
 #: src/ui_orbitColorsDialog.h:438
 msgid "Orbits of cubewanos"
-msgstr ""
+msgstr "Арбіты кубэванаў"
 
 #: src/ui_orbitColorsDialog.h:440
-msgid "Color of orbit of Mars"
-msgstr ""
+msgid "Color of Mars orbit"
+msgstr "Колер арбіты Марса"
 
 #: src/ui_orbitColorsDialog.h:443
-msgid "Color of orbit of Jupiter"
-msgstr ""
+msgid "Color of Jupiter orbit"
+msgstr "Колер арбіты Юпітэра"
 
 #: src/ui_orbitColorsDialog.h:445
 msgid "Orbit of Venus"
-msgstr ""
+msgstr "Арбіта Вэнэры"
 
 #: src/ui_orbitColorsDialog.h:447
-msgid "Color of orbits of plutinos"
-msgstr ""
+msgid "Color of plutino orbits"
+msgstr "Колер арбіт плютын"
 
 #: src/ui_orbitColorsDialog.h:452
 msgid "Orbits of minor planets"
-msgstr ""
+msgstr "Арбіты малых плянэт"
 
 #: src/ui_orbitColorsDialog.h:453
 msgid "Orbits of Oort cloud objects"
-msgstr ""
+msgstr "Арбіты аб'ектаў воблака Аорта"
 
 #: src/ui_orbitColorsDialog.h:455
-msgid "Color of orbits of Oort cloud objects"
-msgstr ""
+msgid "Color of Oort cloud object orbits"
+msgstr "Колер арбіт аб'ектаў воблака Аорта"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:138
@@ -10501,67 +10503,67 @@ msgstr "Схіленьне (J2000)"
 msgid "Select one"
 msgstr "Вылучы адзін"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:321
+#: plugins/TelescopeControl/src/ui_slewDialog.h:319
 msgid "Slew telescope to"
 msgstr "Павернуць тэлескоп да"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:323
+#: plugins/TelescopeControl/src/ui_slewDialog.h:321
 msgid "There are no active devices."
 msgstr "Няма актыўных прыладаў."
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:324
+#: plugins/TelescopeControl/src/ui_slewDialog.h:322
 msgid "Slew telescope to coordinates"
 msgstr "Павернуць тэлескоп да каардынат"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:325
+#: plugins/TelescopeControl/src/ui_slewDialog.h:323
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:247
 msgid "&Right Ascension (J2000):"
 msgstr "&Прамое ўзыходжаньне (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:326
+#: plugins/TelescopeControl/src/ui_slewDialog.h:324
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:248
 msgid "De&clination (J2000):"
 msgstr "&Схіленьне (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:327
+#: plugins/TelescopeControl/src/ui_slewDialog.h:325
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:244
 msgid "&Current object"
 msgstr "&Бягучы аб'ект"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:328
+#: plugins/TelescopeControl/src/ui_slewDialog.h:326
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:245
 msgid "Center of the screen"
 msgstr "Цэнтр экрана"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:331
+#: plugins/TelescopeControl/src/ui_slewDialog.h:329
 msgid "Hours-minutes-seconds format"
 msgstr "Фармат гадзіны-хвіліны-сэкунды"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:333
+#: plugins/TelescopeControl/src/ui_slewDialog.h:331
 msgid "&HMS"
 msgstr "&ГХС"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:335
+#: plugins/TelescopeControl/src/ui_slewDialog.h:333
 msgid "Degrees-minutes-seconds format"
 msgstr "Фармат ґрадусы-мінуты-сэкунды"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:337
+#: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "&DMS"
 msgstr "Ґ&МС"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:339
+#: plugins/TelescopeControl/src/ui_slewDialog.h:337
 msgid "Decimal degrees"
 msgstr "Дзесятковыя ґрадусы"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:341
+#: plugins/TelescopeControl/src/ui_slewDialog.h:339
 msgid "D&ecimal"
 msgstr "Дз&есятковыя"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:342
+#: plugins/TelescopeControl/src/ui_slewDialog.h:340
 msgid "&Slew"
 msgstr "&Павернуць"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:343
+#: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "Configure &telescopes..."
 msgstr "Наставіць &тэлескопы…"
 
@@ -14259,7 +14261,7 @@ msgid "Peak"
 msgstr "Пік"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:421
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:190
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:188
 msgid "Meteor Showers Configuration"
 msgstr "Настаўленьні «Мэтэорных плыняў»"
 
@@ -14339,21 +14341,21 @@ msgstr "Статус:"
 msgid "Update"
 msgstr "Абнаўленьне"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
 msgid "Meteor Showers: Search"
 msgstr "Мэтэорныя плыні: пошук"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:198
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "Search"
 msgstr "Шукаць"
 
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "dd/MM/yyyy"
 msgstr "дд/мм/гггг"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:199
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "Results"
 msgstr "Вынікі"
 
@@ -17055,6 +17057,9 @@ msgstr "Сваё схіленьне 2"
 #~ msgid "Show names"
 #~ msgstr "Паказваць назвы"
 
+#~ msgid "Illumination"
+#~ msgstr "Асьвятленьне"
+
 #~ msgid "Use flip for CCD"
 #~ msgstr "Перакульваць ПЗС"
 
@@ -17096,21 +17101,65 @@ msgstr "Сваё схіленьне 2"
 #~ msgid "JD"
 #~ msgstr "JD"
 
-#~ msgid "Enable display designations of exoplanets"
-#~ msgstr "Задзейнічаць паказ абазначэньняў экзаплянэт"
+#~ msgid "Colors settings"
+#~ msgstr "Настаўленьні колераў"
 
-#~ msgid ""
-#~ "Enable automatic install the type of mount from the telescope settings for "
-#~ "saving horizontal orientation of CCD frame."
-#~ msgstr ""
-#~ "Задзейнічаць аўтаматычнае ўсталяваньне тыпу мацаваньня з настаўленьняў "
-#~ "тэлескопа каб захаваць гарызантальную арыентацыю рамкі ПЗС."
+#~ msgid "Configure colors of lines of orbits"
+#~ msgstr "Наставіць колеры ліній арбіт"
 
-#~ msgid "Enable automatic install the type of mount"
-#~ msgstr "Аўтаматычна ўсталяваць тып мацаваньня"
+#~ msgid "Style of colors of orbits"
+#~ msgstr "Стыль колераў арбіт"
 
-#~ msgid "YSOs"
-#~ msgstr "МЗА"
+#~ msgid "Separate colors for orbits of groups of objects by type"
+#~ msgstr "Асобныя колер арбіт ґруп аб'ектаў паводле тыпу"
 
-#~ msgid "Color of markers of Young Stellar Objects"
-#~ msgstr "Колер пазнак маладых зоркавых аб'ектаў"
+#~ msgid "Color of orbits of comets"
+#~ msgstr "Колер арбіт камэт"
+
+#~ msgid "Color of orbit of Neptune"
+#~ msgstr "Колер арбіты Нэптуна"
+
+#~ msgid "Color of orbits of moons of planets"
+#~ msgstr "Колер арбіт месяцаў плянэт"
+
+#~ msgid "Color of orbits of major planets"
+#~ msgstr "Колер арбіт галоўных плянэт"
+
+#~ msgid "Color of orbit of Saturn"
+#~ msgstr "Колер арбіты Сатурна"
+
+#~ msgid "Color of orbits of cubewanos"
+#~ msgstr "Колер арбіт кубэванаў"
+
+#~ msgid "Color of orbit of Venus"
+#~ msgstr "Колер арбіты Вэнэры"
+
+#~ msgid "Color of orbits of minor planets"
+#~ msgstr "Колер арбіт малых плянэт"
+
+#~ msgid "Color of orbits of scattered disk objects"
+#~ msgstr "Колер арбіт аб'ектаў раскіданага дыску"
+
+#~ msgid "Color of orbit of Uranus"
+#~ msgstr "Колер арбіты Ўрана"
+
+#~ msgid "Color of orbit of Earth"
+#~ msgstr "Колер арбіты Зямлі"
+
+#~ msgid "Color of orbits of dwarf planets"
+#~ msgstr "Колер арбіт карлікавых плянэт"
+
+#~ msgid "Color of orbit of Mercury"
+#~ msgstr "Колер арбіты Мэркурыя"
+
+#~ msgid "Color of orbit of Mars"
+#~ msgstr "Колер арбіты Марса"
+
+#~ msgid "Color of orbit of Jupiter"
+#~ msgstr "Колер арбіты Юпітэра"
+
+#~ msgid "Color of orbits of plutinos"
+#~ msgstr "Колер арбіт плютын"
+
+#~ msgid "Color of orbits of Oort cloud objects"
+#~ msgstr "Колер арбіт аб'ектаў воблака Аорта"
