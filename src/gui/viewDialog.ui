@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>755</width>
-    <height>587</height>
+    <height>597</height>
    </rect>
   </property>
   <property name="font">
@@ -892,7 +892,7 @@
                <item>
                 <widget class="QPushButton" name="pushButtonOrbitColors">
                  <property name="toolTip">
-                  <string>Configure colors of lines of orbits</string>
+                  <string>Configure colors of orbit lines</string>
                  </property>
                  <property name="text">
                   <string>Colors...</string>
@@ -3118,12 +3118,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
