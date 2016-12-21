@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-17 00:57+0700\n"
+"POT-Creation-Date: 2016-12-21 10:47+0700\n"
 "PO-Revision-Date: 2015-12-02 13:01+0000\n"
 "Last-Translator: JimmyChi <9307662@qq.com>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-17 05:03+0000\n"
+"X-Launchpad-Export-Date: 2016-12-21 05:03+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -46,11 +46,11 @@ msgid "constellation"
 msgstr ""
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:444
-#: src/core/modules/GridLinesMgr.cpp:1212 src/core/modules/LandscapeMgr.cpp:414
+#: src/core/modules/GridLinesMgr.cpp:1212 src/core/modules/LandscapeMgr.cpp:408
 #: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:218 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/modules/ToastMgr.cpp:61
-#: src/core/StelApp.cpp:531 src/core/StelCore.cpp:239
+#: src/core/StelApp.cpp:530 src/core/StelCore.cpp:239
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:577
 msgid "Display Options"
 msgstr "显示选项"
@@ -323,51 +323,50 @@ msgstr ""
 msgid "Equinox points"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1954
+#: src/core/modules/LandscapeMgr.cpp:409 src/ui_viewDialog.h:1954
 msgid "Atmosphere"
 msgstr "大气层"
 
-#: src/core/modules/LandscapeMgr.cpp:416
+#: src/core/modules/LandscapeMgr.cpp:410
 msgid "Fog"
 msgstr "雾"
 
-#: src/core/modules/LandscapeMgr.cpp:417 src/ui_viewDialog.h:2257
+#: src/core/modules/LandscapeMgr.cpp:411 src/ui_viewDialog.h:2257
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:311
 msgid "Cardinal points"
 msgstr "基点"
 
-#: src/core/modules/LandscapeMgr.cpp:418
+#: src/core/modules/LandscapeMgr.cpp:412
 msgid "Ground"
 msgstr "地面"
 
-#: src/core/modules/LandscapeMgr.cpp:419
-msgid "Illumination"
+#: src/core/modules/LandscapeMgr.cpp:413
+msgid "Landscape illumination"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:2068
-#: plugins/Satellites/src/ui_satellitesDialog.h:720
-msgid "Labels"
-msgstr "标签"
+#: src/core/modules/LandscapeMgr.cpp:414
+msgid "Landscape labels"
+msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:421 src/ui_viewDialog.h:1958
+#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1958
 msgid "Light pollution data from locations database"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:707
+#: src/core/modules/LandscapeMgr.cpp:701
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:448
 msgid "Author: "
 msgstr "作者： "
 
-#: src/core/modules/LandscapeMgr.cpp:713
+#: src/core/modules/LandscapeMgr.cpp:707
 msgid "Location: "
 msgstr "位置： "
 
-#: src/core/modules/LandscapeMgr.cpp:716
+#: src/core/modules/LandscapeMgr.cpp:710
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 米"
 
-#: src/core/modules/LandscapeMgr.cpp:721 src/ui_astroCalcDialog.h:538
+#: src/core/modules/LandscapeMgr.cpp:715 src/ui_astroCalcDialog.h:538
 msgid "Celestial body:"
 msgstr "天体"
 
@@ -1163,11 +1162,11 @@ msgstr ""
 msgid "Digitized Sky Survey (experimental)"
 msgstr ""
 
-#: src/core/StelApp.cpp:531
+#: src/core/StelApp.cpp:530
 msgid "Night mode"
 msgstr "夜间模式"
 
-#: src/core/StelApp.cpp:583
+#: src/core/StelApp.cpp:561
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 
@@ -1179,7 +1178,7 @@ msgstr ""
 msgid "Date and Time"
 msgstr "日期及时间"
 
-#: src/core/StelCore.cpp:238 src/core/StelMovementMgr.cpp:176
+#: src/core/StelCore.cpp:238 src/core/StelMovementMgr.cpp:180
 msgid "Movement and Selection"
 msgstr "移动和选择"
 
@@ -1875,56 +1874,56 @@ msgstr ""
 msgid "Deep-sky objects background images"
 msgstr "深空天体背景图像"
 
-#: src/core/StelMovementMgr.cpp:177 src/gui/StelGui.cpp:204
+#: src/core/StelMovementMgr.cpp:181 src/gui/StelGui.cpp:204
 #: src/StelMainView.cpp:576
 msgid "Miscellaneous"
 msgstr "杂项"
 
-#: src/core/StelMovementMgr.cpp:177
+#: src/core/StelMovementMgr.cpp:181
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "赤道仪/水平仪切换"
 
-#: src/core/StelMovementMgr.cpp:178
+#: src/core/StelMovementMgr.cpp:182
 msgid "Center on selected object"
 msgstr "将已选物体置中"
 
-#: src/core/StelMovementMgr.cpp:179
+#: src/core/StelMovementMgr.cpp:183
 msgid "Zoom in on selected object"
 msgstr "放大已选的物体"
 
-#: src/core/StelMovementMgr.cpp:180
+#: src/core/StelMovementMgr.cpp:184
 msgid "Zoom out"
 msgstr "缩小"
 
-#: src/core/StelMovementMgr.cpp:181
+#: src/core/StelMovementMgr.cpp:185
 msgid "Track object"
 msgstr "追随物体"
 
-#: src/core/StelMovementMgr.cpp:183
+#: src/core/StelMovementMgr.cpp:187
 msgid "Look towards East"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:184
+#: src/core/StelMovementMgr.cpp:188
 msgid "Look towards West"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:185
+#: src/core/StelMovementMgr.cpp:189
 msgid "Look towards North"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:186
+#: src/core/StelMovementMgr.cpp:190
 msgid "Look towards South"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:187
+#: src/core/StelMovementMgr.cpp:191
 msgid "Look towards Zenith"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:189
+#: src/core/StelMovementMgr.cpp:193
 msgid "Look towards North Celestial pole"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:190
+#: src/core/StelMovementMgr.cpp:194
 msgid "Look towards South Celestial pole"
 msgstr ""
 
@@ -2209,7 +2208,7 @@ msgid "Custom equation of %1T"
 msgstr "%1T 的自定义公式"
 
 #: src/gui/ConfigurationDialog.cpp:1473 src/gui/ConfigurationDialog.cpp:1508
-#: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:409
+#: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:408
 msgid "System default"
 msgstr "系统默认"
 
@@ -2563,11 +2562,11 @@ msgstr "空格键"
 msgid "Time zone"
 msgstr "时区"
 
-#: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:407
+#: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:406
 msgid "Local Mean Solar Time"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:408
+#: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:407
 msgid "Local True Solar Time"
 msgstr ""
 
@@ -3302,7 +3301,6 @@ msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:103 src/ui_dsoColorsDialog.h:497
-#: src/ui_orbitColorsDialog.h:414
 msgid "Clusters associated with nebulosity"
 msgstr ""
 
@@ -5582,7 +5580,7 @@ msgid "Show planet orbits"
 msgstr "显示行星轨道"
 
 #: src/ui_viewDialog.h:1968
-msgid "Configure colors of lines of orbits"
+msgid "Configure colors of orbit lines"
 msgstr ""
 
 #: src/ui_viewDialog.h:1970
@@ -5750,6 +5748,10 @@ msgstr ""
 #: src/ui_viewDialog.h:2067
 msgid "Use designations for screen labels"
 msgstr ""
+
+#: src/ui_viewDialog.h:2068 plugins/Satellites/src/ui_satellitesDialog.h:720
+msgid "Labels"
+msgstr "标签"
 
 #: src/ui_viewDialog.h:2069
 msgid "Hints"
@@ -6893,7 +6895,7 @@ msgstr "光标位置"
 msgid "Include dir:"
 msgstr "包含目录："
 
-#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:329
+#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:327
 msgid "..."
 msgstr "..."
 
@@ -6958,12 +6960,12 @@ msgid "Time step:"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:544 src/ui_astroCalcDialog.h:551
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:545 src/ui_astroCalcDialog.h:548
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
 msgstr ""
 
@@ -7028,7 +7030,7 @@ msgid "&Go to..."
 msgstr ""
 
 #: src/ui_dsoColorsDialog.h:476 src/ui_orbitColorsDialog.h:366
-msgid "Colors settings"
+msgid "Color settings"
 msgstr ""
 
 #: src/ui_dsoColorsDialog.h:478
@@ -7128,7 +7130,7 @@ msgstr ""
 msgid "Color of markers of deep-sky objects"
 msgstr ""
 
-#: src/ui_dsoColorsDialog.h:558 src/ui_orbitColorsDialog.h:435
+#: src/ui_dsoColorsDialog.h:558
 msgid "Labels of deep-sky objects"
 msgstr ""
 
@@ -7160,7 +7162,7 @@ msgstr ""
 msgid "Color of markers of planetary nebulae"
 msgstr ""
 
-#: src/ui_dsoColorsDialog.h:585 src/ui_orbitColorsDialog.h:397
+#: src/ui_dsoColorsDialog.h:585
 msgid "Possible planetary nebulae"
 msgstr ""
 
@@ -7209,7 +7211,7 @@ msgid "Color of markers of supernova remnants"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:368
-msgid "Style of colors of orbits"
+msgid "Style of orbit colors"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:369
@@ -7217,7 +7219,7 @@ msgid "One color for all orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:370
-msgid "Separate colors for orbits of groups of objects by type"
+msgid "Separate colors for orbits by object type"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:371
@@ -7229,7 +7231,7 @@ msgid "Colors of orbits of Solar system bodies"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:374
-msgid "Color of orbits of comets"
+msgid "Color of comet orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:376
@@ -7241,11 +7243,11 @@ msgid "Orbit of Mars"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:379
-msgid "Color of orbit of Neptune"
+msgid "Color of Neptune orbit"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:382
-msgid "Color of orbits of moons of planets"
+msgid "Color of planet moon orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:385
@@ -7257,7 +7259,7 @@ msgid "Orbit of Mercury"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:389
-msgid "Color of orbits of major planets"
+msgid "Color of major planet orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:391
@@ -7265,7 +7267,7 @@ msgid "Orbits of major planets"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:393
-msgid "Color of orbit of Saturn"
+msgid "Color of Saturn orbit"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:395
@@ -7281,19 +7283,19 @@ msgid "Orbits of moons of planets"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:402
-msgid "Color of orbits of cubewanos"
+msgid "Color of cubewano orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:405
-msgid "Color of orbit of Venus"
+msgid "Color of Venus orbit"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:408
-msgid "Color of orbits of minor planets"
+msgid "Color of minor planet orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:411
-msgid "Color of orbits of scattered disk objects"
+msgid "Color of scattered disk object orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:416
@@ -7301,11 +7303,11 @@ msgid "Orbit of Saturn"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:418
-msgid "Color of orbit of Uranus"
+msgid "Color of Uranus orbit"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:421
-msgid "Color of orbit of Earth"
+msgid "Color of Earth orbit"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:423
@@ -7313,7 +7315,7 @@ msgid "Orbit of Earth"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:425
-msgid "Color of orbits of dwarf planets"
+msgid "Color of dwarf planet orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:427
@@ -7325,7 +7327,7 @@ msgid "Orbits of dwarf planets"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:430
-msgid "Color of orbit of Mercury"
+msgid "Color of Mercury orbit"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:432
@@ -7345,11 +7347,11 @@ msgid "Orbits of cubewanos"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:440
-msgid "Color of orbit of Mars"
+msgid "Color of Mars orbit"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:443
-msgid "Color of orbit of Jupiter"
+msgid "Color of Jupiter orbit"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:445
@@ -7357,7 +7359,7 @@ msgid "Orbit of Venus"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:447
-msgid "Color of orbits of plutinos"
+msgid "Color of plutino orbits"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:452
@@ -7369,7 +7371,7 @@ msgid "Orbits of Oort cloud objects"
 msgstr ""
 
 #: src/ui_orbitColorsDialog.h:455
-msgid "Color of orbits of Oort cloud objects"
+msgid "Color of Oort cloud object orbits"
 msgstr ""
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
@@ -9992,67 +9994,67 @@ msgstr ""
 msgid "Select one"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:321
+#: plugins/TelescopeControl/src/ui_slewDialog.h:319
 msgid "Slew telescope to"
 msgstr "把望远镜指向"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:323
+#: plugins/TelescopeControl/src/ui_slewDialog.h:321
 msgid "There are no active devices."
 msgstr "没有活动设备。"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:324
+#: plugins/TelescopeControl/src/ui_slewDialog.h:322
 msgid "Slew telescope to coordinates"
 msgstr "把望远镜指向坐标"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:325
+#: plugins/TelescopeControl/src/ui_slewDialog.h:323
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:247
 msgid "&Right Ascension (J2000):"
 msgstr "赤经 (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:326
+#: plugins/TelescopeControl/src/ui_slewDialog.h:324
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:248
 msgid "De&clination (J2000):"
 msgstr "赤纬 (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:327
+#: plugins/TelescopeControl/src/ui_slewDialog.h:325
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:244
 msgid "&Current object"
 msgstr "&当前目标"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:328
+#: plugins/TelescopeControl/src/ui_slewDialog.h:326
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:245
 msgid "Center of the screen"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:331
+#: plugins/TelescopeControl/src/ui_slewDialog.h:329
 msgid "Hours-minutes-seconds format"
 msgstr "时分秒格式"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:333
+#: plugins/TelescopeControl/src/ui_slewDialog.h:331
 msgid "&HMS"
 msgstr "&HMS"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:335
+#: plugins/TelescopeControl/src/ui_slewDialog.h:333
 msgid "Degrees-minutes-seconds format"
 msgstr "度分秒格式"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:337
+#: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "&DMS"
 msgstr "&DMS"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:339
+#: plugins/TelescopeControl/src/ui_slewDialog.h:337
 msgid "Decimal degrees"
 msgstr "十进制度"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:341
+#: plugins/TelescopeControl/src/ui_slewDialog.h:339
 msgid "D&ecimal"
 msgstr "十进制 (&e)"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:342
+#: plugins/TelescopeControl/src/ui_slewDialog.h:340
 msgid "&Slew"
 msgstr "指向 (&S)"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:343
+#: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "Configure &telescopes..."
 msgstr "配置望远镜 (%T)"
 
@@ -13411,7 +13413,7 @@ msgid "Peak"
 msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:421
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:190
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:188
 msgid "Meteor Showers Configuration"
 msgstr ""
 
@@ -13491,21 +13493,21 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
 msgid "Meteor Showers: Search"
 msgstr ""
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:198
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "Search"
 msgstr ""
 
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "dd/MM/yyyy"
 msgstr ""
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:199
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "Results"
 msgstr ""
 
