@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-12-21 10:47+0700\n"
-"PO-Revision-Date: 2016-12-20 15:26+0000\n"
+"PO-Revision-Date: 2016-12-21 19:59+0000\n"
 "Last-Translator: Giuseppe Putzolu <giuseppe.putzolu@gmail.com>\n"
 "Language-Team: Sardinian <sc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-21 04:57+0000\n"
+"X-Launchpad-Export-Date: 2016-12-22 04:57+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -1706,6 +1706,9 @@ msgid ""
 "Mariam Sultana and Faheem Zaidi was published in <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 msgstr ""
+"Custa apossimatzione polinomiale cun 0.6 segundos de accuratesa dae M. "
+"Khalid, Mariam Sultana et Faheem Zaidi est istada pubblicada in <em>Delta T: "
+"Aprossimatzione Polinomiale de s'opeca 1620-2013</em> (%1)."
 
 #: src/core/StelCore.cpp:2063
 #, qt-format
@@ -1713,6 +1716,8 @@ msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
+"Custa est una formula cuadratica po su calculu de %1T cun coeficientes "
+"definios de s'utente."
 
 #: src/core/StelCore.cpp:2066 src/core/SimbadSearcher.cpp:156
 msgid "Error"
@@ -1720,28 +1725,31 @@ msgstr "Irballiu"
 
 #: src/core/StelCore.cpp:2116
 msgid "with meaningless values outside this range"
-msgstr ""
+msgstr "cun valores incoerentes fora de s'intervallu"
 
 #: src/core/StelCore.cpp:2142
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr ""
+"cun s'irballiu printzipale prus pagu de unu segundu, irballiu massimu 1.9s, "
+"et cun valores incoerentes fora de s'intervallu"
 
 #: src/core/StelCore.cpp:2164 src/core/StelCore.cpp:2169
 #: src/core/StelCore.cpp:2197 src/core/StelCore.cpp:2202
 #: src/core/StelCore.cpp:2207
 msgid "with zero values outside this range"
-msgstr ""
+msgstr "cun perunu valore fora de s'intevallu"
 
 #: src/core/StelCore.cpp:2174
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
+"cun 1 tipucu segundu de acuradesa et perunu valore fora de s'intervallu"
 
 #: src/core/StelCore.cpp:2217
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
-msgstr ""
+msgstr "Intervallu validu de impreu: fra %1 annos e %2, %3."
 
 #: src/core/StelCore.cpp:2219
 #, qt-format
@@ -1938,126 +1946,126 @@ msgstr "Longitudine/Latitudine Supergalatica: %1/%2"
 #: src/core/StelObject.cpp:271
 #, qt-format
 msgid "IAU Constellation: %1"
-msgstr ""
+msgstr "Costellatzione IAU: %1"
 
 #: src/core/StelObject.cpp:280
 #, qt-format
 msgid "Mean Sidereal Time: %1"
-msgstr ""
+msgstr "Tempus Siderale Printzipale: %1"
 
 #: src/core/StelObject.cpp:286
 #, qt-format
 msgid "Apparent Sidereal Time: %1"
-msgstr ""
+msgstr "Tempus Siderale Apparente: %1"
 
 #: src/core/StelSkyLayerMgr.cpp:89
 msgid "Deep-sky objects background images"
-msgstr ""
+msgstr "Imazines de fundu cun ogettos de s'ispaziu profundu"
 
 #: src/core/StelMovementMgr.cpp:181 src/gui/StelGui.cpp:204
 #: src/StelMainView.cpp:576
 msgid "Miscellaneous"
-msgstr ""
+msgstr "Miscellanea"
 
 #: src/core/StelMovementMgr.cpp:181
 msgid "Switch between equatorial and azimuthal mount"
-msgstr ""
+msgstr "Cambia tra sa montadura ecuatoriale et cussa azimutale"
 
 #: src/core/StelMovementMgr.cpp:182
 msgid "Center on selected object"
-msgstr ""
+msgstr "Cintra s'ogettu seberau"
 
 #: src/core/StelMovementMgr.cpp:183
 msgid "Zoom in on selected object"
-msgstr ""
+msgstr "Fae su zoom a s'ogettu seberau"
 
 #: src/core/StelMovementMgr.cpp:184
 msgid "Zoom out"
-msgstr ""
+msgstr "Impitica"
 
 #: src/core/StelMovementMgr.cpp:185
 msgid "Track object"
-msgstr ""
+msgstr "Sighi s'ogettu"
 
 #: src/core/StelMovementMgr.cpp:187
 msgid "Look towards East"
-msgstr ""
+msgstr "Abbaida cara a Levante"
 
 #: src/core/StelMovementMgr.cpp:188
 msgid "Look towards West"
-msgstr ""
+msgstr "Abbaida cara a Ponente"
 
 #: src/core/StelMovementMgr.cpp:189
 msgid "Look towards North"
-msgstr ""
+msgstr "Abbaida cara a Norte"
 
 #: src/core/StelMovementMgr.cpp:190
 msgid "Look towards South"
-msgstr ""
+msgstr "Abbaida cara a Sud"
 
 #: src/core/StelMovementMgr.cpp:191
 msgid "Look towards Zenith"
-msgstr ""
+msgstr "Abbaida cara a su Zenith"
 
 #: src/core/StelMovementMgr.cpp:193
 msgid "Look towards North Celestial pole"
-msgstr ""
+msgstr "Abbaida cara a su polu Norte de su Chelu"
 
 #: src/core/StelMovementMgr.cpp:194
 msgid "Look towards South Celestial pole"
-msgstr ""
+msgstr "Abbaida cara a su polu Sud de su Chelu"
 
 #: src/core/SimbadSearcher.cpp:78
 msgid "Network error"
-msgstr ""
+msgstr "Irballiu de rete"
 
 #: src/core/SimbadSearcher.cpp:115 src/core/SimbadSearcher.cpp:127
 msgid "Error parsing position"
-msgstr ""
+msgstr "Irballiu analizande sa positzione"
 
 #: src/core/SimbadSearcher.cpp:154
 msgid "Querying"
-msgstr ""
+msgstr "Pregontande"
 
 #: src/core/SimbadSearcher.cpp:158
 msgid "Not found"
-msgstr ""
+msgstr "No d'hapo agatau"
 
 #: src/core/SimbadSearcher.cpp:158
 msgid "Found"
-msgstr ""
+msgstr "Agatau"
 
 #. TRANSLATORS: Local Mean Solar Time. Please use abbreviation.
 #: src/core/StelLocaleMgr.cpp:273
 msgctxt "solar time"
 msgid "LMST"
-msgstr ""
+msgstr "LMST"
 
 #. TRANSLATORS: Local True Solar Time. Please use abbreviation.
 #: src/core/StelLocaleMgr.cpp:279
 msgctxt "solar time"
 msgid "LTST"
-msgstr ""
+msgstr "LTST"
 
 #: src/gui/ConfigurationDialog.cpp:536
 msgid "Select screenshot directory"
-msgstr ""
+msgstr "Sebera sa cartedda de su screenshot"
 
 #: src/gui/ConfigurationDialog.cpp:852
 #, qt-format
 msgid "Startup FOV: %1%2"
-msgstr ""
+msgstr "Partinde su FOV: %1 %2"
 
 #: src/gui/ConfigurationDialog.cpp:860
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
-msgstr ""
+msgstr "Partinde sa diretzione de vista Az/Alt: %1 %2"
 
 #: src/gui/ConfigurationDialog.cpp:922
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:253
 msgid "Authors"
-msgstr ""
+msgstr "Autores"
 
 #: src/gui/ConfigurationDialog.cpp:923 src/gui/ViewDialog.cpp:1253
 msgid "Contact"
@@ -2084,33 +2092,36 @@ msgstr "Versione"
 
 #: src/gui/ConfigurationDialog.cpp:1022
 msgid "Running script: "
-msgstr ""
+msgstr "Script andande: "
 
 #: src/gui/ConfigurationDialog.cpp:1029
 msgid "Running script: [none]"
-msgstr ""
+msgstr "Script andande: [manc'unu]"
 
 #: src/gui/ConfigurationDialog.cpp:1094
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
 msgstr ""
+"Ch'est finiu de iscarrigare su catalogu nou de sos isteddos!\n"
+"Torra  a faere partire Stellarium po dos poder biere."
 
 #: src/gui/ConfigurationDialog.cpp:1098
 msgid "All available star catalogs have been installed."
 msgstr ""
+"Totu sos catalogos disponibiles de sos isteddos sun bistaos installaos."
 
 #: src/gui/ConfigurationDialog.cpp:1103
 #, qt-format
 msgid "Get catalog %1 of %2"
-msgstr ""
+msgstr "Piga su catalogu %1 de %2"
 
 #: src/gui/ConfigurationDialog.cpp:1110
 #, qt-format
 msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
-msgstr ""
+msgstr "Seo iscarrigande %1..."
 
 #: src/gui/ConfigurationDialog.cpp:1117
 #, qt-format
@@ -2119,6 +2130,9 @@ msgid ""
 "Star count: %2 Million\n"
 "Magnitude range: %3 - %4"
 msgstr ""
+"Mannaria de su iscarrigamentu: %1MB\n"
+"Contu de isteddos: %2 Miliones\n"
+"Intervallu de mannitudine: %3 - %4"
 
 #: src/gui/ConfigurationDialog.cpp:1160 src/gui/ConfigurationDialog.cpp:1196
 #, qt-format
@@ -2126,10 +2140,12 @@ msgid ""
 "Error downloading %1:\n"
 "%2"
 msgstr ""
+"Irballiu de iscarrigamentu%1: \n"
+"%2"
 
 #: src/gui/ConfigurationDialog.cpp:1249
 msgid "Verifying file integrity..."
-msgstr ""
+msgstr "Seo controllande s'integridade de su file..."
 
 #: src/gui/ConfigurationDialog.cpp:1253
 #, qt-format
@@ -2137,277 +2153,279 @@ msgid ""
 "Error downloading %1:\n"
 "File is corrupted."
 msgstr ""
+"Irballiu de iscarrigamentu %1:\n"
+"Su file est mantzau."
 
 #: src/gui/ConfigurationDialog.cpp:1299 src/gui/ConfigurationDialog.cpp:1308
 msgid "Available"
-msgstr ""
+msgstr "Disponibile"
 
 #: src/gui/ConfigurationDialog.cpp:1301 src/gui/ConfigurationDialog.cpp:1310
 msgid "Not Available"
-msgstr ""
+msgstr "Non Disponibile"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1376
 msgid "Algorithm of"
-msgstr ""
+msgstr "Algoritimu de"
 
 #: src/gui/ConfigurationDialog.cpp:1389
 msgid "Without correction"
-msgstr ""
+msgstr "Chentza currezere"
 
 #: src/gui/ConfigurationDialog.cpp:1390
 msgid "Schoch (1931)"
-msgstr ""
+msgstr "Schoch (1931)"
 
 #: src/gui/ConfigurationDialog.cpp:1391
 msgid "Clemence (1948)"
-msgstr ""
+msgstr "Clemence (1948)"
 
 #: src/gui/ConfigurationDialog.cpp:1392
 msgid "IAU (1952)"
-msgstr ""
+msgstr "IAU (1952)"
 
 #: src/gui/ConfigurationDialog.cpp:1393
 msgid "Astronomical Ephemeris (1960)"
-msgstr ""
+msgstr "Efemerides Astronomicas (1960)"
 
 #: src/gui/ConfigurationDialog.cpp:1394
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
-msgstr ""
+msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
 #: src/gui/ConfigurationDialog.cpp:1395
 msgid "Muller & Stephenson (1975)"
-msgstr ""
+msgstr "Muller & Stephenson (1975)"
 
 #: src/gui/ConfigurationDialog.cpp:1396
 msgid "Stephenson (1978)"
-msgstr ""
+msgstr "Stephenson (1978)"
 
 #: src/gui/ConfigurationDialog.cpp:1397
 msgid "Schmadel & Zech (1979)"
-msgstr ""
+msgstr "Schmadel & Zech (1979)"
 
 #: src/gui/ConfigurationDialog.cpp:1398
 msgid "Morrison & Stephenson (1982)"
-msgstr ""
+msgstr "Morrison & Stephenson (1982)"
 
 #: src/gui/ConfigurationDialog.cpp:1399
 msgid "Stephenson & Morrison (1984)"
-msgstr ""
+msgstr "Stephenson & Morrison (1984)"
 
 #: src/gui/ConfigurationDialog.cpp:1400
 msgid "Stephenson & Houlden (1986)"
-msgstr ""
+msgstr "Stephenson & Houlden (1986)"
 
 #: src/gui/ConfigurationDialog.cpp:1401
 msgid "Espenak (1987, 1989)"
-msgstr ""
+msgstr "Espenak (1987, 1989)"
 
 #: src/gui/ConfigurationDialog.cpp:1402
 msgid "Borkowski (1988)"
-msgstr ""
+msgstr "Borkowski (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1403
 msgid "Schmadel & Zech (1988)"
-msgstr ""
+msgstr "Schmadel & Zech (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1404
 msgid "Chapront-Touze & Chapront (1991)"
-msgstr ""
+msgstr "Chapront-Touze & Chapront (1991)"
 
 #: src/gui/ConfigurationDialog.cpp:1405
 msgid "Stephenson & Morrison (1995)"
-msgstr ""
+msgstr "Stephenson & Morrison (1995)"
 
 #: src/gui/ConfigurationDialog.cpp:1406
 msgid "Stephenson (1997)"
-msgstr ""
+msgstr "Stephenson (1997)"
 
 #: src/gui/ConfigurationDialog.cpp:1408
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
-msgstr ""
+msgstr "Meeus (1998) (cun Chapront, Chapront-Touze & Francou (1997))"
 
 #: src/gui/ConfigurationDialog.cpp:1409
 msgid "JPL Horizons"
-msgstr ""
+msgstr "Orizontes JPL"
 
 #: src/gui/ConfigurationDialog.cpp:1410
 msgid "Meeus & Simons (2000)"
-msgstr ""
+msgstr "Meeus & Simons (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1411
 msgid "Montenbruck & Pfleger (2000)"
-msgstr ""
+msgstr "Montenbruck & Pfleger (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1412
 msgid "Reingold & Dershowitz (2002, 2007)"
-msgstr ""
+msgstr "Reingold & Dershowitz (2002, 2007)"
 
 #: src/gui/ConfigurationDialog.cpp:1413
 msgid "Morrison & Stephenson (2004, 2005)"
-msgstr ""
+msgstr "Morrison & Stephenson (2004, 2005)"
 
 #: src/gui/ConfigurationDialog.cpp:1415
 msgid "Espenak & Meeus (2006)"
-msgstr ""
+msgstr "Espenak & Meeus (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1418
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
-msgstr ""
+msgstr "Espenak & Meeus (2006) no extra moon acceleration"
 
 #: src/gui/ConfigurationDialog.cpp:1420
 msgid "Reijs (2006)"
-msgstr ""
+msgstr "Reijs (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1421
 msgid "Banjevic (2006)"
-msgstr ""
+msgstr "Banjevic (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1422
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
-msgstr ""
+msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
 #: src/gui/ConfigurationDialog.cpp:1423
 msgid "Khalid, Sultana & Zaidi (2014)"
-msgstr ""
+msgstr "Khalid, Sultana & Zaidi (2014)"
 
 #: src/gui/ConfigurationDialog.cpp:1424
 #, qt-format
 msgid "Custom equation of %1T"
-msgstr ""
+msgstr "Ecuatzione Personalizada de %1T"
 
 #: src/gui/ConfigurationDialog.cpp:1473 src/gui/ConfigurationDialog.cpp:1508
 #: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:408
 msgid "System default"
-msgstr ""
+msgstr "Sistema predefiniu"
 
 #: src/gui/ConfigurationDialog.cpp:1474
 msgid "yyyy-mm-dd (ISO 8601)"
-msgstr ""
+msgstr "yyyy-mm-dd (ISO 8601)"
 
 #: src/gui/ConfigurationDialog.cpp:1475
 msgid "dd-mm-yyyy"
-msgstr ""
+msgstr "dd-mm-yyyy"
 
 #: src/gui/ConfigurationDialog.cpp:1476
 msgid "mm-dd-yyyy"
-msgstr ""
+msgstr "mm-dd-yyyy"
 
 #: src/gui/ConfigurationDialog.cpp:1509
 msgid "12-hour format"
-msgstr ""
+msgstr "Formau de sas 12-oras"
 
 #: src/gui/ConfigurationDialog.cpp:1510
 msgid "24-hour format"
-msgstr ""
+msgstr "Formau de sas 24-oras"
 
 #: src/gui/HelpDialog.cpp:133
 msgid "Stellarium Help"
-msgstr ""
+msgstr "Guida de Stellarium"
 
 #: src/gui/HelpDialog.cpp:138 src/gui/HelpDialog.cpp:143
 msgid "Keys"
-msgstr ""
+msgstr "Tastos"
 
 #: src/gui/HelpDialog.cpp:140 src/gui/HelpDialog.cpp:226
 msgid "Further Reading"
-msgstr ""
+msgstr "Ateras Leturas"
 
 #: src/gui/HelpDialog.cpp:147
 msgid "Pan view around the sky"
-msgstr ""
+msgstr "Vista ampia a ziru tundu de su chelu"
 
 #: src/gui/HelpDialog.cpp:148
 msgid "Arrow keys & left mouse drag"
-msgstr ""
+msgstr "Tastos fretzas et trasina a sinistra cun su mouse"
 
 #: src/gui/HelpDialog.cpp:150
 msgid "Zoom in/out"
-msgstr ""
+msgstr "Zoom +/-"
 
 #: src/gui/HelpDialog.cpp:152
 msgid "Page Up/Down"
-msgstr ""
+msgstr "Pazina a susu/a bassu"
 
 #: src/gui/HelpDialog.cpp:154
 msgid "Ctrl+Up/Down"
-msgstr ""
+msgstr "Ctrl+fretza a susu/a bassu"
 
 #: src/gui/HelpDialog.cpp:157
 msgid "Time dragging"
-msgstr ""
+msgstr "Trasinande su tempus"
 
 #: src/gui/HelpDialog.cpp:158
 msgid "Ctrl & left mouse drag"
-msgstr ""
+msgstr "Ctrl & trasina a sinistra cun su mouse"
 
 #: src/gui/HelpDialog.cpp:159
 msgid "Time scrolling: minutes"
-msgstr ""
+msgstr "Iscurre su tempus: minutos"
 
 #: src/gui/HelpDialog.cpp:160
 msgid "Ctrl & mouse wheel"
-msgstr ""
+msgstr "Ctrl & sa roda de su mouse"
 
 #: src/gui/HelpDialog.cpp:161
 msgid "Time scrolling: hours"
-msgstr ""
+msgstr "Iscurre su tempus: oras"
 
 #: src/gui/HelpDialog.cpp:162
 msgid "Ctrl+Shift & mouse wheel"
-msgstr ""
+msgstr "Ctrl+Shift & sa roda de su mouse"
 
 #: src/gui/HelpDialog.cpp:163
 msgid "Time scrolling: days"
-msgstr ""
+msgstr "Iscurre su tempus: dies"
 
 #: src/gui/HelpDialog.cpp:164
 msgid "Ctrl+Alt & mouse wheel"
-msgstr ""
+msgstr "Ctrl+Alt & roda de su mouse"
 
 #: src/gui/HelpDialog.cpp:165
 msgid "Time scrolling: years"
-msgstr ""
+msgstr "Iscurre su tempus: annos"
 
 #: src/gui/HelpDialog.cpp:166
 msgid "Ctrl+Alt+Shift & mouse wheel"
-msgstr ""
+msgstr "Ctrl+Alt+Shift & roda de su mouse"
 
 #: src/gui/HelpDialog.cpp:169
 msgid "Select object"
-msgstr ""
+msgstr "Sebera s'ogettu"
 
 #: src/gui/HelpDialog.cpp:170
 msgid "Left click"
-msgstr ""
+msgstr "Clicca a sinistra"
 
 #: src/gui/HelpDialog.cpp:173
 msgid "Clear selection"
-msgstr ""
+msgstr "Annulla sa sebera"
 
 #: src/gui/HelpDialog.cpp:175
 msgid "Ctrl & left click"
-msgstr ""
+msgstr "Ctrl & clicca a sinistra"
 
 #: src/gui/HelpDialog.cpp:177
 msgid "Right click"
-msgstr ""
+msgstr "Clicca a destra"
 
 #: src/gui/HelpDialog.cpp:180
 msgid "Add custom marker"
-msgstr ""
+msgstr "Azunghe su marcadore personalizau"
 
 #: src/gui/HelpDialog.cpp:181
 msgid "Shift & left click"
-msgstr ""
+msgstr "Shift & clicca a sinistra"
 
 #: src/gui/HelpDialog.cpp:183
 msgid "Delete all custom markers"
-msgstr ""
+msgstr "Cantzella totu sos marcadore personalizaos"
 
 #: src/gui/HelpDialog.cpp:184
 msgid "Shift & right click"
-msgstr ""
+msgstr "Shift & clicca a destra"
 
 #: src/gui/HelpDialog.cpp:187
 #, qt-format
@@ -2415,14 +2433,18 @@ msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
+"Below are listed only the actions with assigned keys. Further actions may be "
+"available via the \"%1\" button.\r\n"
+"In fatu suni elencadas totu sas atzione assinnadas a sos tastos. Ateras "
+"atziones suni disponibiles cun su tastu \"%1\"."
 
 #: src/gui/HelpDialog.cpp:216
 msgid "Text User Interface (TUI)"
-msgstr ""
+msgstr "Interfatza Utente a Testu (TUI)"
 
 #: src/gui/HelpDialog.cpp:218
 msgid "Activate TUI"
-msgstr ""
+msgstr "Attiva sa TUI"
 
 #: src/gui/HelpDialog.cpp:227
 msgid ""
@@ -2432,12 +2454,12 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:228
 msgid "The Stellarium User Guide"
-msgstr ""
+msgstr "Sa Guida de Stellarium"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:232
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-msgstr ""
+msgstr "{Domandas Fecuentes} suba de Stellarium. Rispostas puru."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:237
@@ -2445,6 +2467,8 @@ msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
 msgstr ""
+"{Wiki de Stellarium} - Informatziones zenerales. Innoghe podes agattare sos "
+"panoramas po Stellarium fatos de sos utentes paris cun sos iscript."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:242
