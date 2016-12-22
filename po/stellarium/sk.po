@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-21 10:47+0700\n"
-"PO-Revision-Date: 2016-08-04 20:56+0000\n"
-"Last-Translator: Juraj Kubica <Juraj.Kubica@seznam.cz>\n"
+"PO-Revision-Date: 2016-12-21 17:54+0000\n"
+"Last-Translator: Pavol Gajdoš <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-21 04:56+0000\n"
+"X-Launchpad-Export-Date: 2016-12-22 04:56+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -126,7 +126,7 @@ msgstr "Galaktický Rovník"
 
 #: src/core/modules/GridLinesMgr.cpp:677
 msgid "Supergalactic Equator"
-msgstr ""
+msgstr "Supergalaktický rovník"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:682 src/ui_viewDialog.h:2128
@@ -164,7 +164,7 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:933
 msgctxt "zenith"
 msgid "Z"
-msgstr ""
+msgstr "Z"
 
 #. TRANSLATORS: Nadir
 #: src/core/modules/GridLinesMgr.cpp:935
@@ -268,7 +268,7 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:1227 src/ui_viewDialog.h:2117
 msgid "Supergalactic equator"
-msgstr ""
+msgstr "Supergalaktický rovník"
 
 #: src/core/modules/GridLinesMgr.cpp:1228
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:405
@@ -289,31 +289,31 @@ msgstr "Cirkumpolárne kruhy"
 
 #: src/core/modules/GridLinesMgr.cpp:1233
 msgid "Celestial J2000 poles"
-msgstr ""
+msgstr "Svetové póly J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1234
 msgid "Celestial poles"
-msgstr ""
+msgstr "Svetové póly"
 
 #: src/core/modules/GridLinesMgr.cpp:1235
 msgid "Zenith and nadir"
-msgstr ""
+msgstr "Zenit a nadir"
 
 #: src/core/modules/GridLinesMgr.cpp:1236
 msgid "Ecliptic J2000 poles"
-msgstr ""
+msgstr "Póly ekliptiky J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1237
 msgid "Ecliptic poles"
-msgstr ""
+msgstr "Póly ekliptiky"
 
 #: src/core/modules/GridLinesMgr.cpp:1238 src/ui_viewDialog.h:2178
 msgid "Galactic poles"
-msgstr ""
+msgstr "Galaktické póly"
 
 #: src/core/modules/GridLinesMgr.cpp:1239 src/ui_viewDialog.h:2139
 msgid "Supergalactic poles"
-msgstr ""
+msgstr "Supergalaktické póly"
 
 #: src/core/modules/GridLinesMgr.cpp:1240
 msgid "Equinox J2000 points"
@@ -321,7 +321,7 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:1241
 msgid "Equinox points"
-msgstr ""
+msgstr "Body rovnodenností"
 
 #: src/core/modules/LandscapeMgr.cpp:409 src/ui_viewDialog.h:1954
 msgid "Atmosphere"
@@ -465,7 +465,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:306
 #, qt-format
 msgid "Distance: %1 %2 (%3 %4)"
-msgstr ""
+msgstr "Vzdialenosť: %1 %2 (%3 %4)"
 
 #: src/core/modules/Nebula.cpp:320
 #, qt-format
@@ -928,42 +928,42 @@ msgstr "Perióda rotácie je chaotická"
 #: src/core/modules/Planet.cpp:385
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
-msgstr ""
+msgstr "Dorastajúci polmesiac"
 
 #: src/core/modules/Planet.cpp:387
 msgctxt "Moon phase"
 msgid "First Quarter"
-msgstr ""
+msgstr "Prvá štvrť"
 
 #: src/core/modules/Planet.cpp:389
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
-msgstr ""
+msgstr "Dorastajúci mesiac"
 
 #: src/core/modules/Planet.cpp:391
 msgctxt "Moon phase"
 msgid "Full Moon"
-msgstr ""
+msgstr "Spln"
 
 #: src/core/modules/Planet.cpp:393
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
-msgstr ""
+msgstr "Ubúdajúci mesiac"
 
 #: src/core/modules/Planet.cpp:395
 msgctxt "Moon phase"
 msgid "Third Quarter"
-msgstr ""
+msgstr "Posledná štvrť"
 
 #: src/core/modules/Planet.cpp:397
 msgctxt "Moon phase"
 msgid "Waning Crescent"
-msgstr ""
+msgstr "Ubúdajúci polmesiac"
 
 #: src/core/modules/Planet.cpp:399
 msgctxt "Moon phase"
 msgid "New Moon"
-msgstr ""
+msgstr "Nov"
 
 #: src/core/modules/Planet.cpp:404 src/core/modules/Planet.cpp:409
 #: src/core/modules/MinorPlanet.cpp:293 src/core/modules/MinorPlanet.cpp:298
@@ -1163,7 +1163,7 @@ msgstr "Zodiakálne svetlo"
 
 #: src/core/modules/ToastMgr.cpp:61
 msgid "Digitized Sky Survey (experimental)"
-msgstr ""
+msgstr "Digitized Sky Survey (experimentálne)"
 
 #: src/core/StelApp.cpp:530
 msgid "Night mode"
@@ -2675,7 +2675,7 @@ msgstr "planétocentrický pozorovateľ"
 #: src/gui/StelGuiItems.cpp:728
 msgctxt "abbreviation"
 msgid "FOV"
-msgstr ""
+msgstr "FOV"
 
 #: src/gui/StelGuiItems.cpp:744
 msgid "Field of view"
@@ -2685,7 +2685,7 @@ msgstr "Zorné pole"
 #: src/gui/StelGuiItems.cpp:763
 msgctxt "abbreviation"
 msgid "FPS"
-msgstr ""
+msgstr "FPS"
 
 #: src/gui/StelGuiItems.cpp:771
 msgid "Frames per second"
@@ -2919,7 +2919,7 @@ msgstr "Galaktické"
 #: src/gui/SearchDialog.cpp:216
 msgctxt "coordinate system"
 msgid "Supergalactic"
-msgstr ""
+msgstr "Supergalaktický"
 
 #: src/gui/SearchDialog.cpp:217
 msgctxt "coordinate system"
@@ -3136,12 +3136,12 @@ msgstr "Objekty Oortovho oblaku"
 #: src/gui/AstroCalcDialog.cpp:562
 #, qt-format
 msgid "Bright stars (<%1 mag)"
-msgstr ""
+msgstr "Jasné hviezdy (<%1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:563
 #, qt-format
 msgid "Bright star clusters (<%1 mag)"
-msgstr ""
+msgstr "Jasné hviezdokopy (<%1 mag)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:564 src/translations.h:99
@@ -3152,7 +3152,7 @@ msgstr "Planetárne hmloviny"
 #: src/gui/AstroCalcDialog.cpp:565
 #, qt-format
 msgid "Bright nebulae (<%1 mag)"
-msgstr ""
+msgstr "Jasné hmloviny (<%1 mag)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:566 src/translations.h:101
@@ -3163,17 +3163,17 @@ msgstr "Tmavé hmloviny"
 #: src/gui/AstroCalcDialog.cpp:567
 #, qt-format
 msgid "Bright galaxies (<%1 mag)"
-msgstr ""
+msgstr "Jasné galaxie (<%1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:662 src/gui/AstroCalcDialog.cpp:722
 #: src/gui/AstroCalcDialog.cpp:724
 msgid "Local Time"
-msgstr ""
+msgstr "Miestny čas"
 
 #: src/gui/AstroCalcDialog.cpp:718
 #, qt-format
 msgid "Now is %1"
-msgstr ""
+msgstr "Teraz je %1"
 
 #: src/gui/AstroCalcDialog.cpp:741
 msgid "Phenomenon"
@@ -3202,16 +3202,16 @@ msgstr "Opozícia"
 
 #: src/gui/AstroCalcDialog.cpp:1026
 msgid "Transit"
-msgstr ""
+msgstr "Prechod"
 
 #: src/gui/AstroCalcDialog.cpp:1028 src/gui/AstroCalcDialog.cpp:1191
 #: src/gui/AstroCalcDialog.cpp:1349
 msgid "Occultation"
-msgstr ""
+msgstr "Zákryt"
 
 #: src/gui/AstroCalcDialog.cpp:1032
 msgid "Eclipse"
-msgstr ""
+msgstr "Zatmenie"
 
 #: src/gui/BookmarksDialog.cpp:100 src/ui_searchDialogGui.h:702
 msgid "Object"
@@ -4248,7 +4248,7 @@ msgstr "Zrušiť"
 
 #: src/translations.h:397
 msgid "&Cancel"
-msgstr ""
+msgstr "&Zrušiť"
 
 #: src/translations.h:398
 msgid "Files of type:"
@@ -4393,7 +4393,7 @@ msgstr "Aruba"
 
 #: src/translations_countries.h:45
 msgid "Åland Islands"
-msgstr ""
+msgstr "Alandské ostrovy"
 
 #: src/translations_countries.h:46
 msgid "Azerbaijan"
@@ -4401,7 +4401,7 @@ msgstr "Azerbajdžan"
 
 #: src/translations_countries.h:47
 msgid "Bosnia and Herzegovina"
-msgstr ""
+msgstr "Bosna a Hercegovina"
 
 #: src/translations_countries.h:48
 msgid "Barbados"
@@ -4445,7 +4445,7 @@ msgstr "Bermudy"
 
 #: src/translations_countries.h:58
 msgid "Brunei"
-msgstr ""
+msgstr "Brunej"
 
 #: src/translations_countries.h:59
 msgid "Bolivia"
@@ -4489,11 +4489,11 @@ msgstr "Kanada"
 
 #: src/translations_countries.h:69
 msgid "Cocos (Keeling) Islands"
-msgstr ""
+msgstr "Kokosové (Keeling) ostrovy"
 
 #: src/translations_countries.h:70
 msgid "Congo (Dem. Rep.)"
-msgstr ""
+msgstr "Demokratická Republika Kongo"
 
 #: src/translations_countries.h:71
 msgid "Central African Rep."
@@ -4501,7 +4501,7 @@ msgstr ""
 
 #: src/translations_countries.h:72
 msgid "Congo (Rep.)"
-msgstr ""
+msgstr "Republika Kongo"
 
 #: src/translations_countries.h:73
 msgid "Switzerland"
@@ -4509,7 +4509,7 @@ msgstr "Švajčiarsko"
 
 #: src/translations_countries.h:74
 msgid "Côte d'Ivoire"
-msgstr ""
+msgstr "Pobrežie Slonoviny"
 
 #: src/translations_countries.h:75
 msgid "Cook Islands"
@@ -4749,7 +4749,7 @@ msgstr "Izrael"
 
 #: src/translations_countries.h:134
 msgid "Isle of Man"
-msgstr ""
+msgstr "Ostrov Man"
 
 #: src/translations_countries.h:135
 msgid "India"
@@ -4777,7 +4777,7 @@ msgstr "Taliansko"
 
 #: src/translations_countries.h:141
 msgid "Jersey"
-msgstr ""
+msgstr "Jersey"
 
 #: src/translations_countries.h:142
 msgid "Jamaica"
@@ -4837,7 +4837,7 @@ msgstr "Kazachstan"
 
 #: src/translations_countries.h:156
 msgid "Laos"
-msgstr ""
+msgstr "Laos"
 
 #: src/translations_countries.h:157
 msgid "Lebanon"
@@ -4877,7 +4877,7 @@ msgstr "Lotyšsko"
 
 #: src/translations_countries.h:166
 msgid "Libya"
-msgstr ""
+msgstr "Líbia"
 
 #: src/translations_countries.h:167
 msgid "Morocco"
@@ -5065,7 +5065,7 @@ msgstr "Portoriko"
 
 #: src/translations_countries.h:213
 msgid "Palestine"
-msgstr ""
+msgstr "Palestína"
 
 #: src/translations_countries.h:214
 msgid "Portugal"
@@ -5097,7 +5097,7 @@ msgstr "Srbsko"
 
 #: src/translations_countries.h:221
 msgid "Russia"
-msgstr ""
+msgstr "Rusko"
 
 #: src/translations_countries.h:222
 msgid "Rwanda"
@@ -5165,7 +5165,7 @@ msgstr "Surinam"
 
 #: src/translations_countries.h:238
 msgid "South Sudan"
-msgstr ""
+msgstr "Južný Sudán"
 
 #: src/translations_countries.h:239
 msgid "Sao Tome and Principe"
@@ -5181,7 +5181,7 @@ msgstr ""
 
 #: src/translations_countries.h:242
 msgid "Syria"
-msgstr ""
+msgstr "Sýria"
 
 #: src/translations_countries.h:243
 msgid "Swaziland"
@@ -5277,7 +5277,7 @@ msgstr "Uzbekistan"
 
 #: src/translations_countries.h:266
 msgid "Vatican City"
-msgstr ""
+msgstr "Vatikán"
 
 #: src/translations_countries.h:267
 msgid "St Vincent"
@@ -5297,7 +5297,7 @@ msgstr ""
 
 #: src/translations_countries.h:271
 msgid "Vietnam"
-msgstr ""
+msgstr "Vietnam"
 
 #: src/translations_countries.h:272
 msgid "Vanuatu"
@@ -5447,7 +5447,7 @@ msgstr ""
 
 #: src/ui_locationDialogGui.h:466
 msgid "Time zone:"
-msgstr ""
+msgstr "Časové pásmo:"
 
 #: src/ui_locationDialogGui.h:467
 msgid "Name/City:"
@@ -5740,7 +5740,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1970
 msgid "Colors..."
-msgstr ""
+msgstr "Farby..."
 
 #: src/ui_viewDialog.h:1972
 msgid ""
@@ -5876,7 +5876,7 @@ msgstr "Galaxie"
 
 #: src/ui_viewDialog.h:2050
 msgid "Bright nebulae"
-msgstr ""
+msgstr "Jasné hmloviny"
 
 #: src/ui_viewDialog.h:2053
 msgid "Use hints proportional to angular size of deep-sky objects"
@@ -6033,7 +6033,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2141
 msgid "Color of the ecliptic poles (J2000.0)"
-msgstr ""
+msgstr "Farba pólov ekliptiky (J2000.0)"
 
 #: src/ui_viewDialog.h:2144
 msgid "Color of Prime Vertical"
@@ -6041,19 +6041,19 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2147
 msgid "Show ecliptic poles of J2000.0"
-msgstr ""
+msgstr "Zobraz póly ekliptiky J2000.0"
 
 #: src/ui_viewDialog.h:2149
 msgid "Ecliptic poles (J2000)"
-msgstr ""
+msgstr "Póly ekliptiky (J2000)"
 
 #: src/ui_viewDialog.h:2151
 msgid "Color of the celestial poles (J2000.0)"
-msgstr ""
+msgstr "Farba svetových pólov (J2000.0)"
 
 #: src/ui_viewDialog.h:2154
 msgid "Show celestial poles of current planet and date."
-msgstr ""
+msgstr "Zobraz svetové póly pre aktuálnu planétu a dátum."
 
 #: src/ui_viewDialog.h:2156
 msgid "Celestial poles (of date)"
