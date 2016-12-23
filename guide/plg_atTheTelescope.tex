@@ -202,7 +202,8 @@ This section is active only for DIRECT connections (see above).
   \item On Windows, serial ports \texttt{COM1} to \texttt{COM10}
   \item On Linux, serial ports \texttt{/dev/ttyS0} to
     \texttt{/dev/ttyS3} and USB ports \texttt{/dev/ttyUSB0} to
-    \texttt{/dev/ttyUSB3}
+    \texttt{/dev/ttyUSB3}. Make sure you have read/write access to the \texttt{tty} device. 
+	Depending on your flavour of Linux, this may e.g.\ require some group membership.
   \item On Mac OS X, the list is empty as it names its ports in a
     peculiar way.
   If you are using an USB cable, the default serial port of your
