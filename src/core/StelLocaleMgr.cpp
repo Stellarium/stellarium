@@ -38,6 +38,8 @@ StelLocaleMgr::StelLocaleMgr()
 	, timeFormat()
 	, dateFormat()	
 {
+	core = StelApp::getInstance().getCore();
+
 	// Load from file
 	QString path = StelFileMgr::findFile("data/countryCodes.dat");
 	if (path.isEmpty())
@@ -107,8 +109,6 @@ void StelLocaleMgr::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
-
-	core = StelApp::getInstance().getCore();
 
 	if (conf->value("devel/convert_countries_list", false).toBool())
 		generateCountryList();
