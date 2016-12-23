@@ -22,7 +22,7 @@
 #include "StelDialog_p.hpp"
 #include "StelMainView.hpp"
 #include "StelGui.hpp"
-#include "StelApp.hpp"
+//#include "StelApp.hpp"
 #include "StelActionMgr.hpp"
 #include "StelPropertyMgr.hpp"
 
@@ -30,10 +30,11 @@
 #include <QAbstractButton>
 #include <QComboBox>
 #include <QDialog>
-#include <QGraphicsProxyWidget>
+//#include <QGraphicsProxyWidget>
+//#include <QGraphicsSceneResizeEvent>
 #include <QMetaProperty>
 #include <QStyleOptionGraphicsItem>
-#include <QSettings>
+//#include <QSettings>
 #include <QSlider>
 #include <QSpinBox>
 #include <QDoubleSpinBox>
@@ -41,44 +42,54 @@
 	#include <QScroller>
 #endif
 
-class CustomProxy : public QGraphicsProxyWidget
-{
-	public:
-		CustomProxy(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0) : QGraphicsProxyWidget(parent, wFlags)
-		{
-			setFocusPolicy(Qt::StrongFocus);
-		}
-		//! Reimplement this method to add windows decorations. Currently there are invisible 2 px decorations
-		void paintWindowFrame(QPainter*, const QStyleOptionGraphicsItem*, QWidget*)
-		{
-/*			QStyleOptionTitleBar bar;
-			initStyleOption(&bar);
-			bar.subControls = QStyle::SC_TitleBarCloseButton;
-			qWarning() << style()->subControlRect(QStyle::CC_TitleBar, &bar, QStyle::SC_TitleBarCloseButton);
-			QGraphicsProxyWidget::paintWindowFrame(painter, option, widget);*/
-		}
-	protected:
+//class CustomProxy : public QGraphicsProxyWidget
+//{	private:
+//	Q_OBJECT
+//	public:
+//		CustomProxy(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0) : QGraphicsProxyWidget(parent, wFlags)
+//		{
+//			setFocusPolicy(Qt::StrongFocus);
+//		}
+//		//! Reimplement this method to add windows decorations. Currently there are invisible 2 px decorations
+//		void paintWindowFrame(QPainter*, const QStyleOptionGraphicsItem*, QWidget*)
+//		{
+///*			QStyleOptionTitleBar bar;
+//			initStyleOption(&bar);
+//			bar.subControls = QStyle::SC_TitleBarCloseButton;
+//			qWarning() << style()->subControlRect(QStyle::CC_TitleBar, &bar, QStyle::SC_TitleBarCloseButton);
+//			QGraphicsProxyWidget::paintWindowFrame(painter, option, widget);*/
+//		}
+//	//signals: void sizeChanged(QSizeF);
+//	protected:
 
-		virtual bool event(QEvent* event)
-		{
-			if (StelApp::getInstance().getSettings()->value("gui/flag_use_window_transparency", true).toBool())
-			{
-				switch (event->type())
-				{
-					case QEvent::WindowDeactivate:
-						widget()->setWindowOpacity(0.4);
-						break;
-					case QEvent::WindowActivate:
-					case QEvent::GrabMouse:
-						widget()->setWindowOpacity(0.9);
-						break;
-					default:
-						break;
-				}
-			}
-			return QGraphicsProxyWidget::event(event);
-		}
-};
+//		virtual bool event(QEvent* event)
+//		{
+//			if (StelApp::getInstance().getSettings()->value("gui/flag_use_window_transparency", true).toBool())
+//			{
+//				switch (event->type())
+//				{
+//					case QEvent::WindowDeactivate:
+//						widget()->setWindowOpacity(0.4);
+//						break;
+//					case QEvent::WindowActivate:
+//					case QEvent::GrabMouse:
+//						widget()->setWindowOpacity(0.9);
+//						break;
+//					default:
+//						break;
+//				}
+//			}
+//			return QGraphicsProxyWidget::event(event);
+//		}
+//		virtual void resizeEvent(QGraphicsSceneResizeEvent *event)
+//		{
+//			if (event->newSize() != event->oldSize())
+//			{
+//				//emit sizeChanged(event->newSize());
+//			}
+//			QGraphicsProxyWidget::resizeEvent(event);
+//		}
+//};
 
 StelDialog::StelDialog(QObject* parent)
 	: QObject(parent)
@@ -146,6 +157,8 @@ void StelDialog::setVisible(bool v)
 			proxy->setWidget(dialog);
 			QSizeF size = proxy->size();
 
+			connect(proxy, SIGNAL(sizeChanged(QSizeF)), this, SLOT(handleDialogSizeChanged(QSizeF)));
+
 			int newX, newY;
 
 			// Retrieve panel locations from config.ini, but shift if required to a visible position.
@@ -182,7 +195,28 @@ void StelDialog::setVisible(bool v)
 			proxy->setWindowFrameMargins(2,0,2,2);
 			// (this also changes the bounding rectangle size)
 
-			// The caching is buggy on all plateforms with Qt 4.5.2
+			// Retrieve stored panel sizes, scale panel up if it was stored larger than default.
+			QString confNameSize="DialogSizes/" + dialogName;
+			QString storedSizeString=conf->value(confNameSize, QString("0,0")).toString();
+			QStringList sizeList=storedSizeString.split(",");
+			if (sizeList.length()==2)
+			{
+				newX=sizeList.at(0).toInt();
+				newY=sizeList.at(1).toInt();
+			}
+			else	// in case there is an invalid string?
+			{
+				newX=0;
+				newY=0;
+			}
+			// resize only if number was valid and larger than default loaded size.
+			if ( (newX>=proxy->size().width()) || (newY>=proxy->size().height()) )
+			{
+				//qDebug() << confNameSize << ": resize to " << storedSizeString;
+				proxy->resize(qMax((qreal)newX, proxy->size().width()), qMax((qreal)newY, proxy->size().height()));
+			}
+
+			// The caching is buggy on all platforms with Qt 4.5.2
 			proxy->setCacheMode(QGraphicsItem::ItemCoordinateCache);
 
 			proxy->setZValue(100);
@@ -284,6 +318,13 @@ void StelDialog::handleMovedTo(QPoint newPos)
 	QSettings *conf=StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	conf->setValue("DialogPositions/" + dialogName, QString("%1,%2").arg(newPos.x()).arg(newPos.y()));
+}
+
+void StelDialog::handleDialogSizeChanged(QSizeF size)
+{
+	QSettings *conf=StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	conf->setValue("DialogSizes/" + dialogName, QString("%1,%2").arg((int)size.width()).arg((int)size.height()));
 }
 
 
