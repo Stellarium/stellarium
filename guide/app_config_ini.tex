@@ -677,6 +677,40 @@ use\_luminance\_adaptation         & bool  & Enable dynamic eye adaptation.\\ %%
 
 
 
+\subsection{\big[DialogPositions\big]}\label{sec:config.ini:DialogPositions}
+
+By default, GUI panels appear centered in the screen. You can move them to your favorite location, 
+and on next start they will appear on that location instead.
+The entries in this section define the upper left pixel coordinate where panels are stored.
+
+Examples:
+
+\begin{longtabu} to \textwidth {l|l|l|X}
+\toprule
+\emph{ID}     & \emph{Type} & \emph{Example}&\emph{Description}     \\\midrule
+Help          & int,int     &  58,39        & Position of Help panel\\\midrule
+DateTime      & int,int     &  1338,944     & Position of time panel\\\bottomrule
+\end{longtabu}
+
+\newpage
+
+\subsection{\big[DialogSizes\big]}\label{sec:config.ini:DialogSizes}
+
+\newFeature{0.15.1}
+GUI panels can be resized by dragging on their lower corners or borders.  
+Enlarged sizes are stored here, and on next start they will appear in this size.
+The entries in this section define the size.
+
+Examples:
+
+\begin{longtabu} to \textwidth {l|l|l|X}
+\toprule
+\emph{ID}     & \emph{Type} & \emph{Example}&\emph{Description}      \\\midrule
+Help          & int,int     &  895,497      & Size of Help panel     \\\midrule
+AstroCalc     & int,int     &  913,493      & Size of AstroCalc panel\\\bottomrule
+\end{longtabu}
+
+
 
 
 %%% Local Variables: 
