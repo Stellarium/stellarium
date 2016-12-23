@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-21 10:47+0700\n"
-"PO-Revision-Date: 2016-01-11 03:06+0000\n"
+"PO-Revision-Date: 2016-12-22 20:51+0000\n"
 "Last-Translator: Giorgi Gzirishvili <Unknown>\n"
 "Language-Team: Georgian <ka@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-22 04:42+0000\n"
+"X-Launchpad-Export-Date: 2016-12-23 04:33+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 "X-Poedit-Country: GEORGIA\n"
 "X-Poedit-Language: Georgian\n"
@@ -37,15 +37,15 @@ msgstr ""
 
 #: src/core/modules/CustomObject.cpp:69
 msgid "custom object"
-msgstr ""
+msgstr "მორგებული ობიექტი"
 
 #: src/core/modules/CustomObjectMgr.cpp:81
 msgid "Marker"
-msgstr ""
+msgstr "მარკერი"
 
 #: src/core/modules/Constellation.cpp:296
 msgid "constellation"
-msgstr ""
+msgstr "თანავარსკვლავედი"
 
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:444
 #: src/core/modules/GridLinesMgr.cpp:1212 src/core/modules/LandscapeMgr.cpp:408
@@ -60,29 +60,29 @@ msgstr "ჩვენების პარამეტრები"
 #: src/core/modules/ConstellationMgr.cpp:144
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:287
 msgid "Constellation lines"
-msgstr "ხომლთა ხაზები"
+msgstr "თანავარსკვლავედების ხაზები"
 
 #: src/core/modules/ConstellationMgr.cpp:145
 msgid "Constellation art"
-msgstr "ხომლთა ნახატები"
+msgstr "თანავარსკვლავედების ნახატები"
 
 #: src/core/modules/ConstellationMgr.cpp:146
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Constellation labels"
-msgstr "ხომლთა წარწერები"
+msgstr "თანავარსკვლავედების წარწერები"
 
 #: src/core/modules/ConstellationMgr.cpp:147
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Constellation boundaries"
-msgstr "ხომლთა საზღვრები"
+msgstr "თანავარსკვლავედების საზღვრები"
 
 #: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1385
 msgid "Select single constellation"
-msgstr "ცალკეული ხომლის შერჩევა"
+msgstr "ცალკეული თანავარსკვლავედის არჩევა"
 
 #: src/core/modules/ConstellationMgr.cpp:149
 msgid "Remove selection of constellations"
-msgstr ""
+msgstr "თანავარსკვლავედების შერჩევის გაუქმება"
 
 #: src/core/modules/StarMgr.cpp:445 src/ui_viewDialog.h:1927
 #: src/ui_dsoColorsDialog.h:541
@@ -92,7 +92,7 @@ msgstr "ვარსკვლავები"
 
 #: src/core/modules/StarMgr.cpp:446
 msgid "Stars labels"
-msgstr ""
+msgstr "ვარსკვლავების წარწერები"
 
 #: src/core/modules/GridLinesMgr.cpp:644 src/ui_viewDialog.h:2121
 msgid "Meridian"
@@ -100,15 +100,15 @@ msgstr "მერიდიანი"
 
 #: src/core/modules/GridLinesMgr.cpp:648
 msgid "Ecliptic of J2000.0"
-msgstr ""
+msgstr "J2000.0-ის ეკლიპტიკა"
 
 #: src/core/modules/GridLinesMgr.cpp:652
 msgid "Ecliptic of Date"
-msgstr ""
+msgstr "თარიღის ეკლიპტიკა"
 
 #: src/core/modules/GridLinesMgr.cpp:656
 msgid "Equator of J2000.0"
-msgstr ""
+msgstr "J2000.0-ის ეკვატორი"
 
 #: src/core/modules/GridLinesMgr.cpp:660
 msgid "Equator"
@@ -116,7 +116,7 @@ msgstr "ეკვატორი"
 
 #: src/core/modules/GridLinesMgr.cpp:665
 msgid "Precession Circle"
-msgstr ""
+msgstr "პრეცესიის წრე"
 
 #: src/core/modules/GridLinesMgr.cpp:669 src/ui_viewDialog.h:2113
 msgid "Horizon"
@@ -128,25 +128,25 @@ msgstr "გალაქტიკური ეკვატორი"
 
 #: src/core/modules/GridLinesMgr.cpp:677
 msgid "Supergalactic Equator"
-msgstr ""
+msgstr "ზეგალაქტიკური ეკვატორი"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:682 src/ui_viewDialog.h:2128
 msgid "O./C. longitude"
-msgstr ""
+msgstr "პ.დ./შ. გრძედი"
 
 #: src/core/modules/GridLinesMgr.cpp:686 src/core/modules/GridLinesMgr.cpp:1230
 #: src/ui_viewDialog.h:2173
 msgid "Prime Vertical"
-msgstr ""
+msgstr "მთავარი ვერტიკალი"
 
 #: src/core/modules/GridLinesMgr.cpp:690
 msgid "Equinoctial Colure"
-msgstr ""
+msgstr "ბუნიობის კოლიურა"
 
 #: src/core/modules/GridLinesMgr.cpp:694
 msgid "Solstitial Colure"
-msgstr ""
+msgstr "მზედგომის კოლიურა"
 
 #: src/core/modules/GridLinesMgr.cpp:699
 msgid "Circumpolar Circle"
@@ -155,18 +155,18 @@ msgstr ""
 #. TRANSLATORS: North Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:915 src/core/modules/GridLinesMgr.cpp:924
 msgid "NCP"
-msgstr ""
+msgstr "ჩცპ"
 
 #. TRANSLATORS: South Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:917 src/core/modules/GridLinesMgr.cpp:926
 msgid "SCP"
-msgstr ""
+msgstr "სცპ"
 
 #. TRANSLATORS: Zenith
 #: src/core/modules/GridLinesMgr.cpp:933
 msgctxt "zenith"
 msgid "Z"
-msgstr ""
+msgstr "ზ"
 
 #. TRANSLATORS: Nadir
 #: src/core/modules/GridLinesMgr.cpp:935
