@@ -22,7 +22,6 @@
 #include "StelDialog_p.hpp"
 #include "StelMainView.hpp"
 #include "StelGui.hpp"
-//#include "StelApp.hpp"
 #include "StelActionMgr.hpp"
 #include "StelPropertyMgr.hpp"
 
@@ -30,66 +29,14 @@
 #include <QAbstractButton>
 #include <QComboBox>
 #include <QDialog>
-//#include <QGraphicsProxyWidget>
-//#include <QGraphicsSceneResizeEvent>
 #include <QMetaProperty>
 #include <QStyleOptionGraphicsItem>
-//#include <QSettings>
 #include <QSlider>
 #include <QSpinBox>
 #include <QDoubleSpinBox>
 #ifdef Q_OS_WIN
 	#include <QScroller>
 #endif
-
-//class CustomProxy : public QGraphicsProxyWidget
-//{	private:
-//	Q_OBJECT
-//	public:
-//		CustomProxy(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0) : QGraphicsProxyWidget(parent, wFlags)
-//		{
-//			setFocusPolicy(Qt::StrongFocus);
-//		}
-//		//! Reimplement this method to add windows decorations. Currently there are invisible 2 px decorations
-//		void paintWindowFrame(QPainter*, const QStyleOptionGraphicsItem*, QWidget*)
-//		{
-///*			QStyleOptionTitleBar bar;
-//			initStyleOption(&bar);
-//			bar.subControls = QStyle::SC_TitleBarCloseButton;
-//			qWarning() << style()->subControlRect(QStyle::CC_TitleBar, &bar, QStyle::SC_TitleBarCloseButton);
-//			QGraphicsProxyWidget::paintWindowFrame(painter, option, widget);*/
-//		}
-//	//signals: void sizeChanged(QSizeF);
-//	protected:
-
-//		virtual bool event(QEvent* event)
-//		{
-//			if (StelApp::getInstance().getSettings()->value("gui/flag_use_window_transparency", true).toBool())
-//			{
-//				switch (event->type())
-//				{
-//					case QEvent::WindowDeactivate:
-//						widget()->setWindowOpacity(0.4);
-//						break;
-//					case QEvent::WindowActivate:
-//					case QEvent::GrabMouse:
-//						widget()->setWindowOpacity(0.9);
-//						break;
-//					default:
-//						break;
-//				}
-//			}
-//			return QGraphicsProxyWidget::event(event);
-//		}
-//		virtual void resizeEvent(QGraphicsSceneResizeEvent *event)
-//		{
-//			if (event->newSize() != event->oldSize())
-//			{
-//				//emit sizeChanged(event->newSize());
-//			}
-//			QGraphicsProxyWidget::resizeEvent(event);
-//		}
-//};
 
 StelDialog::StelDialog(QObject* parent)
 	: QObject(parent)
@@ -103,7 +50,6 @@ StelDialog::StelDialog(QObject* parent)
 StelDialog::~StelDialog()
 {
 }
-
 
 void StelDialog::close()
 {
