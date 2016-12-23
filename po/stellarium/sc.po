@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-12-21 10:47+0700\n"
-"PO-Revision-Date: 2016-12-21 19:59+0000\n"
+"PO-Revision-Date: 2016-12-22 19:23+0000\n"
 "Last-Translator: Giuseppe Putzolu <giuseppe.putzolu@gmail.com>\n"
 "Language-Team: Sardinian <sc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-22 04:57+0000\n"
+"X-Launchpad-Export-Date: 2016-12-23 04:34+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 
 #: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
@@ -2451,6 +2451,8 @@ msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
 msgstr ""
+"Sos cullegamentos in fatu suni ciìullegamentos esternos et poden esser bisos "
+"aperinde su browser:\n"
 
 #: src/gui/HelpDialog.cpp:228
 msgid "The Stellarium User Guide"
@@ -2476,6 +2478,9 @@ msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
 msgstr ""
+"{Sistema de azudu cun sos ticket} - si tenes bisonzu de azudu po usare "
+"Stellarium, imbia una domanda de azudu innoghe et nois provamos a ti jare "
+"azudu."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:247
@@ -2484,25 +2489,28 @@ msgid ""
 "properly or is missing and is not listed in the tracker, you can open bug "
 "reports here."
 msgstr ""
+"{Sistema po sinnalare bacos et pedire caratteristicas noas} - si cachi cosa "
+"non funtzionat comente s'ispettat o mancat et non est in lista, podes "
+"aperrere unu bacu innoghe."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:252
 msgid "{Forums} - discuss Stellarium with other users."
-msgstr ""
+msgstr "{Forums} - faedda de Stellarium cun sos ateros utentes."
 
 #: src/gui/HelpDialog.cpp:311
 msgid "Developers"
-msgstr ""
+msgstr "Isviluppadores"
 
 #: src/gui/HelpDialog.cpp:312
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
-msgstr ""
+msgstr "Coordinadore de su progettu et su capu de s'isviluppu: %1"
 
 #: src/gui/HelpDialog.cpp:313
 #, qt-format
 msgid "Graphic/other designer: %1"
-msgstr ""
+msgstr "Graficu/ateru disinnadore: %1"
 
 #: src/gui/HelpDialog.cpp:314 src/gui/HelpDialog.cpp:315
 #: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
@@ -2513,44 +2521,47 @@ msgstr ""
 #: src/gui/HelpDialog.cpp:331
 #, qt-format
 msgid "Developer: %1"
-msgstr ""
+msgstr "Isviluppadore: %1"
 
 #: src/gui/HelpDialog.cpp:321
 #, qt-format
 msgid "Continuous Integration: %1"
-msgstr ""
+msgstr "Integratzione continua: %1"
 
 #: src/gui/HelpDialog.cpp:322
 #, qt-format
 msgid "Tester: %1"
-msgstr ""
+msgstr "Testadore: %1"
 
 #: src/gui/HelpDialog.cpp:323
 msgid "Former Developers"
-msgstr ""
+msgstr "Ex Isviluppadores"
 
 #: src/gui/HelpDialog.cpp:324
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
+"Medas pessones han zau importantes contributos, ma non suni prus "
+"triballandebi. Su triballu issoro hat fattu sa diferentzia manna in su "
+"progettu:"
 
 #: src/gui/HelpDialog.cpp:325
 #, qt-format
 msgid "Doc author/developer: %1"
-msgstr ""
+msgstr "Autore de documentatzione/isviluppadore: %1"
 
 #: src/gui/HelpDialog.cpp:332 src/gui/HelpDialog.cpp:333
 #, qt-format
 msgid "OSX Developer: %1"
-msgstr ""
+msgstr "Isviluppadore OSX: %1"
 
 #: src/gui/HelpDialog.cpp:334
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
 #: plugins/Oculars/src/gui/OcularDialog.cpp:519
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
 msgid "Contributors"
-msgstr ""
+msgstr "Contribudores"
 
 #: src/gui/HelpDialog.cpp:335
 #, qt-format
@@ -2558,6 +2569,8 @@ msgid ""
 "Several people have made contributions to the project and their work has "
 "made Stellarium better (sorted alphabetically): %1."
 msgstr ""
+"Zente meda hat contribuiu a su progettu et su triballu isssoro hat mezorau "
+"meda Stellarium (postos in ordine alfabeticu): %1"
 
 #: src/gui/StelGui.cpp:203
 msgid "Windows"
@@ -2569,264 +2582,264 @@ msgstr "Essi"
 
 #: src/gui/StelGui.cpp:206
 msgid "Speed up the script execution rate"
-msgstr ""
+msgstr "Aumenta sa velocidade de esecutzione de s'iscript"
 
 #: src/gui/StelGui.cpp:207
 msgid "Slow down the script execution rate"
-msgstr ""
+msgstr "Diminui sa velocidade de esecutzione de s'iscript"
 
 #: src/gui/StelGui.cpp:208
 msgid "Set the normal script execution rate"
-msgstr ""
+msgstr "Imposta sa velocidade normale de esecutzione de s'iscript"
 
 #: src/gui/StelGui.cpp:209
 msgid "Stop script execution"
-msgstr ""
+msgstr "Frima s'iscript"
 
 #: src/gui/StelGui.cpp:210
 msgid "Pause script execution"
-msgstr ""
+msgstr "Pausa s'iscript"
 
 #: src/gui/StelGui.cpp:211
 msgid "Resume script execution"
-msgstr ""
+msgstr "Torra a faere partire s'iscript"
 
 #: src/gui/StelGui.cpp:214
 msgid "Script console window"
-msgstr ""
+msgstr "Fentana de console de s'iscript"
 
 #: src/gui/StelGui.cpp:217
 msgid "Help window"
-msgstr ""
+msgstr "Fentana de azudu"
 
 #: src/gui/StelGui.cpp:218
 msgid "Configuration window"
-msgstr ""
+msgstr "Fentana de configuratzione"
 
 #: src/gui/StelGui.cpp:219 src/ui_searchDialogGui.h:618
 msgid "Search window"
-msgstr ""
+msgstr "Fentana po cricare"
 
 #: src/gui/StelGui.cpp:220
 msgid "Sky and viewing options window"
-msgstr ""
+msgstr "Fentana de sas optziones de vista et de chelu"
 
 #: src/gui/StelGui.cpp:221
 msgid "Date/time window"
-msgstr ""
+msgstr "Fentana de data/ora"
 
 #: src/gui/StelGui.cpp:222
 msgid "Location window"
-msgstr ""
+msgstr "Fentana de sa localidade"
 
 #: src/gui/StelGui.cpp:223
 msgid "Shortcuts window"
-msgstr ""
+msgstr "Fentana po fagher prus in presse"
 
 #: src/gui/StelGui.cpp:224
 msgid "Astronomical calculations window"
-msgstr ""
+msgstr "Fentana de sos calculos astronomicos"
 
 #: src/gui/StelGui.cpp:225 src/ui_bookmarksDialog.h:174
 msgid "Bookmarks"
-msgstr ""
+msgstr "Sinnalibros"
 
 #: src/gui/StelGui.cpp:226
 msgid "Copy selected object information to clipboard"
-msgstr ""
+msgstr "Copia s'ogettu seberau in sos appuntos"
 
 #: src/gui/StelGui.cpp:232
 msgid "Auto hide horizontal button bar"
-msgstr ""
+msgstr "Tastu po che cuare sa barra orizontale automaticamente"
 
 #: src/gui/StelGui.cpp:233
 msgid "Auto hide vertical button bar"
-msgstr ""
+msgstr "Tastu po che cuare sa barra vericale automaticamente"
 
 #: src/gui/StelGui.cpp:236
 msgid "Toggle visibility of GUI"
-msgstr ""
+msgstr "Interrutore po sa visibilidade de sa GUI"
 
 #: src/gui/StelGuiItems.cpp:322 src/gui/StelGuiItems.cpp:864
 msgid "Space"
-msgstr ""
+msgstr "Ispatziu"
 
 #: src/gui/StelGuiItems.cpp:634
 msgid "Time zone"
-msgstr ""
+msgstr "Fusu orariu"
 
 #: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:406
 msgid "Local Mean Solar Time"
-msgstr ""
+msgstr "Tempus solare locale printzipale"
 
 #: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:407
 msgid "Local True Solar Time"
-msgstr ""
+msgstr "Tempus solare locale beru"
 
 #: src/gui/StelGuiItems.cpp:679
 #, c-format, qt-format
 msgid "%1m"
-msgstr ""
+msgstr "%1m"
 
 #: src/gui/StelGuiItems.cpp:711
 #, qt-format
 msgid "planetocentric distance %1 km"
-msgstr ""
+msgstr "distanzia planetocentrica %1 km"
 
 #: src/gui/StelGuiItems.cpp:713
 msgid "planetocentric observer"
-msgstr ""
+msgstr "Osservdore planetocentricu"
 
 #. TRANSLATORS: Field of view. Please use abbreviation.
 #: src/gui/StelGuiItems.cpp:728
 msgctxt "abbreviation"
 msgid "FOV"
-msgstr ""
+msgstr "FOV"
 
 #: src/gui/StelGuiItems.cpp:744
 msgid "Field of view"
-msgstr ""
+msgstr "Campu 'e vista"
 
 #. TRANSLATORS: Frames per second. Please use abbreviation.
 #: src/gui/StelGuiItems.cpp:763
 msgctxt "abbreviation"
 msgid "FPS"
-msgstr ""
+msgstr "FPS"
 
 #: src/gui/StelGuiItems.cpp:771
 msgid "Frames per second"
-msgstr ""
+msgstr "Frame po segundu"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:1123
 msgid "Excellent dark-sky site"
-msgstr ""
+msgstr "Logu onu iscurosu"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
 #: src/gui/ViewDialog.cpp:1125
 msgid "Typical truly dark site"
-msgstr ""
+msgstr "Tipicu logu iscurosu"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
 #: src/gui/ViewDialog.cpp:1127
 msgid "Rural sky"
-msgstr ""
+msgstr "Chelu 'e sartu"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
 #: src/gui/ViewDialog.cpp:1129
 msgid "Rural/suburban transition"
-msgstr ""
+msgstr "Cambiu de chelu 'e sartu/idda"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
 #: src/gui/ViewDialog.cpp:1131
 msgid "Suburban sky"
-msgstr ""
+msgstr "Chelu 'e bidda"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
 #: src/gui/ViewDialog.cpp:1133
 msgid "Bright suburban sky"
-msgstr ""
+msgstr "Luminosidade de su che de idda"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
 #: src/gui/ViewDialog.cpp:1135
 msgid "Suburban/urban transition"
-msgstr ""
+msgstr "Cambiu de su che de idda/tzitade"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
 #: src/gui/ViewDialog.cpp:1137
 msgid "City sky"
-msgstr ""
+msgstr "Chelu 'e tzitade"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
 #: src/gui/ViewDialog.cpp:1139
 msgid "Inner-city sky"
-msgstr ""
+msgstr "Chelu de tzentru 'e tzitade"
 
 #: src/gui/ViewDialog.cpp:1153
 msgid "The naked-eye limiting magnitude is"
-msgstr ""
+msgstr "Su limite de sa mannitudine chi si podet biere a ogu nu est:"
 
 #: src/gui/ViewDialog.cpp:1177
 msgid "Abbreviated"
-msgstr ""
+msgstr "Incutzau"
 
 #: src/gui/ViewDialog.cpp:1178
 msgid "Native"
-msgstr ""
+msgstr "Nativu"
 
 #: src/gui/ViewDialog.cpp:1179
 msgid "Translated"
-msgstr ""
+msgstr "Tradutu"
 
 #: src/gui/ViewDialog.cpp:1374
 msgid "No shooting stars"
-msgstr ""
+msgstr "Chena isteddos tramudantes"
 
 #: src/gui/ViewDialog.cpp:1376
 msgid "Normal rate"
-msgstr ""
+msgstr "Velocidade normale"
 
 #: src/gui/ViewDialog.cpp:1378
 msgid "Standard Orionids rate"
-msgstr ""
+msgstr "Cantidae Istandard de sas Orionides"
 
 #: src/gui/ViewDialog.cpp:1380
 msgid "Standard Perseids rate"
-msgstr ""
+msgstr "Cantidae Istandard de sas Perseides"
 
 #: src/gui/ViewDialog.cpp:1382
 msgid "Standard Geminids rate"
-msgstr ""
+msgstr "Cantidae Istandard de sas Geminieds"
 
 #: src/gui/ViewDialog.cpp:1384
 msgid "Exceptional Perseid rate"
-msgstr ""
+msgstr "Cantidade ecetzionale de sas Perseides"
 
 #: src/gui/ViewDialog.cpp:1386
 msgid "Meteor storm rate"
-msgstr ""
+msgstr "Candidade de su fiotu de isteddos tramudantes"
 
 #: src/gui/ViewDialog.cpp:1388
 msgid "Exceptional Draconid rate"
-msgstr ""
+msgstr "Cantidade ecetzionale de sas Darconides"
 
 #: src/gui/ViewDialog.cpp:1390
 msgid "Exceptional Leonid rate"
-msgstr ""
+msgstr "Cantidade ecetzionale de sas Leonides"
 
 #: src/gui/ViewDialog.cpp:1392
 msgid "Very high rate (1966 Leonids)"
-msgstr ""
+msgstr "Cantidade manna meda (Leonides 1966)"
 
 #: src/gui/ViewDialog.cpp:1394
 msgid "Highest rate ever (1833 Leonids)"
-msgstr ""
+msgstr "Sa prus manna cantidade (Leonides 1833)"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:114
 msgid "Select a ZIP archive that contains a Stellarium landscape"
-msgstr ""
+msgstr "Sebera unu file  ZIP chi b'hat unu panorama de Stellarium"
 
 #. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
 #: src/gui/AddRemoveLandscapesDialog.cpp:116
 msgid "ZIP archives"
-msgstr ""
+msgstr "File ZIP"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:129
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
-msgstr ""
+msgstr "Su panorama %1 est bistau installau bene."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:130
 #: src/gui/AddRemoveLandscapesDialog.cpp:157
 msgid "Success"
-msgstr ""
+msgstr "Totu a postu."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:143
 #: src/gui/AddRemoveLandscapesDialog.cpp:213
 #: src/gui/AddRemoveLandscapesDialog.cpp:222
 #: src/gui/AddRemoveLandscapesDialog.cpp:230
 msgid "No landscape was installed."
-msgstr ""
+msgstr "Perunu panorama est bistau installau."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:144
 #: src/gui/AddRemoveLandscapesDialog.cpp:168
@@ -2835,125 +2848,126 @@ msgstr ""
 #: src/gui/AddRemoveLandscapesDialog.cpp:231
 #: src/gui/AddRemoveLandscapesDialog.cpp:241
 msgid "Error!"
-msgstr ""
+msgstr "Irballiu!"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:156
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
-msgstr ""
+msgstr "Su panorama \"%1\" ch'est bistau cantzellau bene."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:167
 #: src/gui/AddRemoveLandscapesDialog.cpp:237
 msgid "The selected landscape could not be (completely) removed."
-msgstr ""
+msgstr "Su panorama seberau non che podet essere cantzellau (de su totu)."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:190
 #, qt-format
 msgid "Size on disk: %1 MiB"
-msgstr ""
+msgstr "Mannaria in su discu: %1 MiB"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
 #: src/gui/AddRemoveLandscapesDialog.cpp:216
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
-msgstr ""
+msgstr "Stellarium non resurtat a d'aperrere po lezere o iscriere %1"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:222
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
-msgstr ""
+msgstr "Su file ZIP seberau non tenet perunu panorama de Stellarium."
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
 #: src/gui/AddRemoveLandscapesDialog.cpp:229
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
 msgstr ""
+"Unu panorama cun su matessu numene o identificadore (%1) esistit zai."
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
 #: src/gui/AddRemoveLandscapesDialog.cpp:240
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
-msgstr ""
+msgstr "Du podes cantzellare a manos cantzellande custa cartedda: %1"
 
 #: src/gui/ScriptConsole.cpp:76
 msgid "quickrun..."
-msgstr ""
+msgstr "parti impresse..."
 
 #: src/gui/ScriptConsole.cpp:77
 msgid "selected text"
-msgstr ""
+msgstr "testu seberau"
 
 #: src/gui/ScriptConsole.cpp:78
 msgid "clear text"
-msgstr ""
+msgstr "cantzella su testu"
 
 #: src/gui/ScriptConsole.cpp:79
 msgid "clear images"
-msgstr ""
+msgstr "canztella s'imazine"
 
 #: src/gui/ScriptConsole.cpp:80
 msgid "natural"
-msgstr ""
+msgstr "naturale"
 
 #: src/gui/ScriptConsole.cpp:81
 msgid "starchart"
-msgstr ""
+msgstr "graficu de isteddos"
 
 #: src/gui/SearchDialog.cpp:212
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
-msgstr ""
+msgstr "Ecuatoriale (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:213
 msgctxt "coordinate system"
 msgid "Equatorial"
-msgstr ""
+msgstr "Ecuatoriale"
 
 #: src/gui/SearchDialog.cpp:214
 msgctxt "coordinate system"
 msgid "Horizontal"
-msgstr ""
+msgstr "Orizontale"
 
 #: src/gui/SearchDialog.cpp:215
 msgctxt "coordinate system"
 msgid "Galactic"
-msgstr ""
+msgstr "Gatlatica"
 
 #: src/gui/SearchDialog.cpp:216
 msgctxt "coordinate system"
 msgid "Supergalactic"
-msgstr ""
+msgstr "Supergalatica"
 
 #: src/gui/SearchDialog.cpp:217
 msgctxt "coordinate system"
 msgid "Ecliptic"
-msgstr ""
+msgstr "Eclitica"
 
 #: src/gui/SearchDialog.cpp:218
 msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
-msgstr ""
+msgstr "Eclitica (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:246
 msgid "Right ascension"
-msgstr ""
+msgstr "Ascensione retta"
 
 #: src/gui/SearchDialog.cpp:249
 msgid "Declination"
-msgstr ""
+msgstr "Declinatzione"
 
 #: src/gui/SearchDialog.cpp:257
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:945
 msgid "Azimuth"
-msgstr ""
+msgstr "Azimut"
 
 #: src/gui/SearchDialog.cpp:260 src/gui/AstroCalcDialog.cpp:663
 #: src/gui/AstroCalcDialog.cpp:722 src/gui/AstroCalcDialog.cpp:724
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
 msgid "Altitude"
-msgstr ""
+msgstr "Artaria"
 
 #: src/gui/SearchDialog.cpp:271
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:531
@@ -2989,7 +3003,7 @@ msgstr ""
 
 #: src/gui/ShortcutsDialog.cpp:498
 msgid "Action"
-msgstr ""
+msgstr "Atzione"
 
 #: src/gui/ShortcutsDialog.cpp:499 src/ui_shortcutsDialog.h:197
 msgid "Primary shortcut"
