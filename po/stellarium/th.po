@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-21 10:47+0700\n"
-"PO-Revision-Date: 2016-12-18 02:27+0000\n"
+"PO-Revision-Date: 2016-12-24 03:11+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-22 04:59+0000\n"
+"X-Launchpad-Export-Date: 2016-12-24 04:32+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -481,17 +481,17 @@ msgstr "แพรัลแลกซ์: %1\""
 
 #: src/core/modules/Nebula.cpp:335
 msgid "Morphological description: "
-msgstr ""
+msgstr "คำอธิบายสัณฐาน: "
 
 #: src/core/modules/Nebula.cpp:858
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
-msgstr ""
+msgstr "มีการกระจุกตัวของดาวที่ใจกลางสูง"
 
 #: src/core/modules/Nebula.cpp:861
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "dense central concentration of stars"
-msgstr ""
+msgstr "มีการกระจุกตัวของดาวที่ใจกลางอย่างหนาแน่น"
 
 #: src/core/modules/Nebula.cpp:864
 msgctxt "Shapley–Sawyer Concentration Class"
@@ -5933,19 +5933,19 @@ msgstr "แสดงเส้นศูนย์สูตรดาราจัก
 
 #: src/ui_viewDialog.h:2099
 msgid "Color of supergalactic equator"
-msgstr ""
+msgstr "สีของเส้นศูนย์สูตรมหาดาราจักร"
 
 #: src/ui_viewDialog.h:2102
 msgid "Color of ecliptic (of date)"
-msgstr ""
+msgstr "สีของสุริยวิถี (ของวัน)"
 
 #: src/ui_viewDialog.h:2105
 msgid "Color of ecliptic (J2000.0)"
-msgstr ""
+msgstr "สีของสุริยวิถี (J2000.0)"
 
 #: src/ui_viewDialog.h:2108
 msgid "Color of galactic equator"
-msgstr ""
+msgstr "สีของเส้นศูนย์สูตรดาราจักร"
 
 #: src/ui_viewDialog.h:2111
 msgid "Show horizon line."
@@ -6087,7 +6087,7 @@ msgstr "วงกลมการหมุนควง"
 
 #: src/ui_viewDialog.h:2198
 msgid "Color of precession circles"
-msgstr ""
+msgstr "สีของวงกลมการหมุนควง"
 
 #: src/ui_viewDialog.h:2201
 msgid "Altitudes and azimuth (counted from North towards East)."
@@ -6650,7 +6650,7 @@ msgstr "การตั้งค่าเหล่านี้จะควบค
 
 #: src/ui_configurationDialog.h:1338
 msgid "Display formats of date and time"
-msgstr "แสดงรูปแบบของวันที่และเวลา"
+msgstr "รูปแบบของวันที่และเวลา"
 
 #: src/ui_configurationDialog.h:1339
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
@@ -11547,7 +11547,7 @@ msgstr "ใช้สีที่ต่างออกไปสำหรับพ
 #: plugins/RemoteControl/src/RemoteControl.cpp:147
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:260
 msgid "Remote Control"
-msgstr ""
+msgstr "การควบคุมระยะไกล"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:61
 msgid ""
@@ -13067,20 +13067,20 @@ msgstr "ฝนดาวตก"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
 msgid "Toggle meteor showers"
-msgstr ""
+msgstr "สลับการแสดงฝนดาวตก"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:150
 msgid "Toggle radiant labels"
-msgstr ""
+msgstr "สลับการแสดงชื่อฝนดาวตกที่จุดกระจาย"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:151
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:234
 msgid "Show settings dialog"
-msgstr ""
+msgstr "แสดงหน้าต่างการตั้งค่าภูมิทัศน์ 3 มิติ"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:152
 msgid "Show search dialog"
-msgstr ""
+msgstr "แสดงหน้าต่างการค้นหาดาวตก"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:258
 msgid "Using the default Meteor Showers catalog."
@@ -14093,15 +14093,15 @@ msgstr "สลับการแสดงเงา"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:237
 msgid "Toggle debug information"
-msgstr ""
+msgstr "สลับการแสดงข้อมูลสำหรับการแก้จุดบกพร่อง"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:238
 msgid "Toggle location text"
-msgstr ""
+msgstr "สลับการแสดงข้อความระบุที่ตั้ง"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:239
 msgid "Toggle torchlight"
-msgstr ""
+msgstr "สลับการแสดงแสงไฟ"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:240
 msgid "Reload shaders"
@@ -14515,19 +14515,20 @@ msgstr ""
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:225
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:576
 msgid "ArchaeoLines"
-msgstr ""
+msgstr "เส้นเชิงโบราณคดีดาราศาสตร์"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:62
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
 msgstr ""
+"เครื่องมือสำหรับการศึกษาการเรียงตัวที่เกี่ยวข้องกับโบราณคดีดาราศาสตร์"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:245
 msgid "Show Line for Equinox"
-msgstr ""
+msgstr "แสดงเส้นสำหรับจุดวิษุวัต"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:246
 msgid "Show Line for Solstices"
-msgstr ""
+msgstr "แสดงเส้นสำหรับจุดอายัน"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:247
 msgid "Show Line for Crossquarter"
@@ -14632,17 +14633,19 @@ msgstr "ดาวศุกร์"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:248
 msgid "ArchaeoLines Plug-in"
-msgstr ""
+msgstr "โปรแกรมเสริมเส้นเชิงโบราณคดีดาราศาสตร์"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:254
 msgid ""
 "The ArchaeoLines plugin displays any combination of declination arcs most "
 "relevant to archaeo- or ethnoastronomical studies."
 msgstr ""
+"โปรแกรมเสริมเส้นเชิงโบราณคดีดาราศาสตร์แสดงวงเดคลิเนชันที่เกี่ยวข้องกับการศึกษ"
+"าโบราณคดีดาราศาสตร์"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:255
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
-msgstr ""
+msgstr "เดคลิเนชันของจุดวิษุวัต (เส้นศูนย์สูตร) และจุดอายัน"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:256
 msgid ""
@@ -14783,28 +14786,28 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:530
 msgid "To change colors you may have to leave fullscreen mode!"
-msgstr ""
+msgstr "ในการเปลี่ยนสี คุณอาจต้องออกจากโหมดเต็มจอ!"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:533
 msgid "Custom Declination 1"
-msgstr ""
+msgstr "เดคลิเนชันที่กำหนดเอง 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:534
 msgid "Current Sun"
-msgstr ""
+msgstr "ดวงอาทิตย์ขณะนี้"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:536
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:542
 msgid "Enter a label (location name) for this line"
-msgstr ""
+msgstr "ป้อนชื่อ (ของสถานที่) สำหรับเส้นนี้"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:538
 msgid "Geographic Location 1"
-msgstr ""
+msgstr "ที่ตั้งทางภูมิศาสตร์ 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:544
 msgid "Geographic Location 2"
-msgstr ""
+msgstr "ที่ตั้งทางภูมิศาสตร์ 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:546
 msgid "Change color"
@@ -14873,7 +14876,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:572
 msgid "Equinox line (Equator)"
-msgstr ""
+msgstr "เส้นของจุดวิษุวัต (เส้นศูนย์สูตรฟ้า)"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:573
 msgid "Major Lunar Standstill lines"
@@ -14881,7 +14884,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:574
 msgid "Custom Declination 2"
-msgstr ""
+msgstr "เดคลิเนชันที่กำหนดเอง 2"
 
 #~ msgid "Ecliptic Line"
 #~ msgstr "เส้นสุริยวิถี"
