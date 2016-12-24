@@ -529,8 +529,6 @@
                </item>
               </layout>
              </item>
-			 
-			 
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_starLabel">
                <item>
@@ -978,7 +976,7 @@
           <item row="1" column="0">
            <widget class="QGroupBox" name="largeObjectsGroupbox">
             <property name="title">
-             <string notr="true"/>
+             <string notr="true">Sky</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignLeading</set>
@@ -1074,7 +1072,7 @@
                </item>
               </layout>
              </item>
-              <item>
+             <item>
               <widget class="QCheckBox" name="adaptationCheckbox">
                <property name="toolTip">
                 <string>Dim faint stars when a very bright object is visible</string>
@@ -1087,8 +1085,6 @@
                </property>
               </widget>
              </item>
-
-			 
             </layout>
            </widget>
           </item>
@@ -3152,12 +3148,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
