@@ -210,7 +210,7 @@ on the main tool-bar and the side tool-bar, and gives their default
 keyboard shortcuts.
 
 %% TODO: Check default keys!
-
+\newpage
 \begin{longtabu} to \textwidth {llcX}\toprule
 \emph{Feature}           & \emph{Button} & \emph{Key} & \emph{Description}\\\midrule
 Constellations           & \guibutton[0.75]{2.5}{bt_constellation}     & \key{C} & Draw constellations as ``stick figures'' \\
@@ -223,11 +223,16 @@ Toggle Cardinal Points   & \guibutton[0.75]{2.5}{bt_cardinal}          & \key{Q}
 Toggle Atmosphere        & \guibutton[0.75]{2.5}{bt_atmosphere}        & \key{A} & Toggle atmospheric effects. Most notably makes the stars visible in the daytime.  \\
 Deep-Sky Objects         & \guibutton[0.75]{2.5}{bt_nebulae}           & \key{D} & Toggle marking the positions of Deep-Sky Objects. \\
 Planet Hints             & \guibutton[0.75]{2.5}{bt_planets}           & \key{P} & Toggle indicators to show the position of planets. \\
+Nebula images            & \guibutton[0.75]{2.5}{bt_DSS}        
+& \key{I} & Toggle ``nebula images''. This button must be enabled first, see section~\ref{sec:gui:configuration:tools}\\
+Digitized Sky Survey     & \guibutton[0.75]{2.5}{bt_ToastSurvey}        
+& \key{\ctrl+Alt+D} & Toggle ``Digitized Sky Survey''. This button must be enabled first, see section~\ref{sec:gui:configuration:tools}\\
 Coordinate System        & \guibutton[0.75]{2.5}{bt_coord_type}        & \key{\ctrl+M} & Toggle between Alt/Azi \& RA/Dec coordinate systems. \\
 Goto                     & \guibutton[0.75]{2.5}{bt_goto}              & \key{\Space} & Center the view on the selected object \\
 Night Mode               & \guibutton[0.75]{2.5}{bt_night_mode}        & \key{\ctrl+N} & Toggle ``night mode'', which applies a red-only filter to the view to be easier on the dark-adapted eye. \\
-Nebula images            & \guibutton[0.75]{2.5}{bt_DSS}        & \key{I} & Toggle ``nebula images''. This button must be enabled first, see section~\ref{sec:gui:configuration:tools}\\
 Full Screen Mode         & \guibutton[0.75]{2.5}{bt_fullscreen} & \key{F11} & Toggle full screen mode. \\
+Bookmarks                & \guibutton[0.75]{2.5}{bt_bookmarks}        
+& \key{Alt+B} & Toggle bookmarks window. This button must be enabled first, see section~\ref{sec:gui:configuration:tools}\\
 Flip view (horizontal)   & \guibutton[0.75]{2.5}{bt_fliph}      & \key{\ctrl+Shift+H} & Flip the image in the horizontal plane. This button must be enabled first, see section~\ref{sec:gui:configuration:tools} \\
 Flip view (vertical)     & \guibutton[0.75]{2.5}{bt_flipv}      & \key{\ctrl+Shift+V} & Flip the image in the vertical plane. This button must be enabled first, see section~\ref{sec:gui:configuration:tools} \\
 Quit Stellarium          & \guibutton[0.75]{2.5}{bt_quit}       & \key{\ctrl+Q} & Close Stellarium.\\
@@ -237,6 +242,7 @@ Search Window            & \guibutton[0.5]{2.5}{btd_find}       & \key{F3} or \k
 View Window              & \guibutton[0.5]{2.5}{btd_view}       & \key{F4} & Show the view window \\
 Time Window              & \guibutton[0.5]{2.5}{btd_time}       & \key{F5} & Show the time window \\
 Location Window          & \guibutton[0.5]{2.5}{btd_location}   & \key{F6} & Show the observer location window (map) \\
+AstroCalc Window         & \guibutton[0.5]{2.5}{btd_astrocalc}  & \key{F10} & Show the astronomical calculations window \\
 \bottomrule
 \caption{Stellarium's standard menu buttons}
 \label{tab:tour:buttons}
