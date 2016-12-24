@@ -461,7 +461,7 @@ void ArchaeoLines::restoreDefaultSettings()
 
 void ArchaeoLines::loadSettings()
 {
-	equinoxColor         = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_equinox",          "1.00,1.00,0.5").toString());
+	equinoxColor         = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_equinox",          "1.00,1.00,0.50").toString());
 	equinoxLine->setColor(equinoxColor);
 	solsticesColor       = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_solstices",        "1.00,0.15,0.15").toString());
 	northernSolsticeLine->setColor(solsticesColor);
