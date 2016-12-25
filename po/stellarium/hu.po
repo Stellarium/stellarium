@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-21 10:47+0700\n"
-"PO-Revision-Date: 2016-12-14 13:34+0000\n"
+"POT-Creation-Date: 2016-12-24 14:58+0700\n"
+"PO-Revision-Date: 2016-12-21 10:35+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-21 04:44+0000\n"
+"X-Launchpad-Export-Date: 2016-12-25 04:43+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -84,7 +84,7 @@ msgstr "Egy csillagkép kijelölése"
 msgid "Remove selection of constellations"
 msgstr ""
 
-#: src/core/modules/StarMgr.cpp:445 src/ui_viewDialog.h:1927
+#: src/core/modules/StarMgr.cpp:445 src/ui_viewDialog.h:1940
 #: src/ui_dsoColorsDialog.h:541
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:253
 msgid "Stars"
@@ -94,7 +94,7 @@ msgstr "Csillagok"
 msgid "Stars labels"
 msgstr "Csillagok neve"
 
-#: src/core/modules/GridLinesMgr.cpp:644 src/ui_viewDialog.h:2121
+#: src/core/modules/GridLinesMgr.cpp:644 src/ui_viewDialog.h:2135
 msgid "Meridian"
 msgstr "Meridián"
 
@@ -118,7 +118,7 @@ msgstr "Egyenlítő"
 msgid "Precession Circle"
 msgstr "Precessziós kör"
 
-#: src/core/modules/GridLinesMgr.cpp:669 src/ui_viewDialog.h:2113
+#: src/core/modules/GridLinesMgr.cpp:669 src/ui_viewDialog.h:2127
 msgid "Horizon"
 msgstr "Horizont"
 
@@ -131,12 +131,12 @@ msgid "Supergalactic Equator"
 msgstr "Szupergalaktikus egyenlítő"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
-#: src/core/modules/GridLinesMgr.cpp:682 src/ui_viewDialog.h:2128
+#: src/core/modules/GridLinesMgr.cpp:682 src/ui_viewDialog.h:2142
 msgid "O./C. longitude"
 msgstr "O./C. hosszúság"
 
 #: src/core/modules/GridLinesMgr.cpp:686 src/core/modules/GridLinesMgr.cpp:1230
-#: src/ui_viewDialog.h:2173
+#: src/ui_viewDialog.h:2187
 msgid "Prime Vertical"
 msgstr "Elsődleges függőleges"
 
@@ -166,13 +166,13 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:933
 msgctxt "zenith"
 msgid "Z"
-msgstr ""
+msgstr "Z"
 
 #. TRANSLATORS: Nadir
 #: src/core/modules/GridLinesMgr.cpp:935
 msgctxt "nadir"
 msgid "Z'"
-msgstr ""
+msgstr "Z'"
 
 #. TRANSLATORS: North Ecliptic Pole
 #: src/core/modules/GridLinesMgr.cpp:942 src/core/modules/GridLinesMgr.cpp:951
@@ -209,7 +209,7 @@ msgstr ""
 msgid "Equatorial grid"
 msgstr "Egyenlítői rács"
 
-#: src/core/modules/GridLinesMgr.cpp:1214 src/ui_viewDialog.h:2203
+#: src/core/modules/GridLinesMgr.cpp:1214 src/ui_viewDialog.h:2217
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:334
 msgid "Azimuthal grid"
 msgstr "Azimut háló"
@@ -255,20 +255,20 @@ msgstr "Ekliptikus háló J2000"
 msgid "Ecliptic grid"
 msgstr "Ekliptikus háló"
 
-#: src/core/modules/GridLinesMgr.cpp:1224 src/ui_viewDialog.h:2235
+#: src/core/modules/GridLinesMgr.cpp:1224 src/ui_viewDialog.h:2249
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Galactic grid"
 msgstr "Galaktikus háló"
 
-#: src/core/modules/GridLinesMgr.cpp:1225 src/ui_viewDialog.h:2097
+#: src/core/modules/GridLinesMgr.cpp:1225 src/ui_viewDialog.h:2111
 msgid "Galactic equator"
 msgstr "Galaktikus egyenlítő"
 
-#: src/core/modules/GridLinesMgr.cpp:1226 src/ui_viewDialog.h:2224
+#: src/core/modules/GridLinesMgr.cpp:1226 src/ui_viewDialog.h:2238
 msgid "Supergalactic grid"
 msgstr "Szupergalaktikus háló"
 
-#: src/core/modules/GridLinesMgr.cpp:1227 src/ui_viewDialog.h:2117
+#: src/core/modules/GridLinesMgr.cpp:1227 src/ui_viewDialog.h:2131
 msgid "Supergalactic equator"
 msgstr "Szupergalaktikus egyenlítő"
 
@@ -309,11 +309,11 @@ msgstr ""
 msgid "Ecliptic poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1238 src/ui_viewDialog.h:2178
+#: src/core/modules/GridLinesMgr.cpp:1238 src/ui_viewDialog.h:2192
 msgid "Galactic poles"
 msgstr "Galaktikus pólusok"
 
-#: src/core/modules/GridLinesMgr.cpp:1239 src/ui_viewDialog.h:2139
+#: src/core/modules/GridLinesMgr.cpp:1239 src/ui_viewDialog.h:2153
 msgid "Supergalactic poles"
 msgstr "Szupergalaktikus pólusok"
 
@@ -325,7 +325,7 @@ msgstr "Napéjegyenlőségi pontok (J2000)"
 msgid "Equinox points"
 msgstr "Napéjegyenlőségi pontok"
 
-#: src/core/modules/LandscapeMgr.cpp:409 src/ui_viewDialog.h:1954
+#: src/core/modules/LandscapeMgr.cpp:409 src/ui_viewDialog.h:1952
 msgid "Atmosphere"
 msgstr "Légkör"
 
@@ -333,7 +333,7 @@ msgstr "Légkör"
 msgid "Fog"
 msgstr "Köd"
 
-#: src/core/modules/LandscapeMgr.cpp:411 src/ui_viewDialog.h:2257
+#: src/core/modules/LandscapeMgr.cpp:411 src/ui_viewDialog.h:2271
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:311
 msgid "Cardinal points"
 msgstr "Égtájak"
@@ -344,13 +344,13 @@ msgstr "Felszín"
 
 #: src/core/modules/LandscapeMgr.cpp:413
 msgid "Landscape illumination"
-msgstr ""
+msgstr "Tájkép megvilágítás"
 
 #: src/core/modules/LandscapeMgr.cpp:414
 msgid "Landscape labels"
-msgstr ""
+msgstr "Tájkép címkék"
 
-#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1958
+#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1956
 msgid "Light pollution data from locations database"
 msgstr "Fényszennyezési értékek használata adatbázisból"
 
@@ -930,7 +930,7 @@ msgstr "A forgási periódus kaotikus"
 #: src/core/modules/Planet.cpp:385
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
-msgstr ""
+msgstr "Növő félhold"
 
 #: src/core/modules/Planet.cpp:387
 msgctxt "Moon phase"
@@ -1059,7 +1059,7 @@ msgstr "Bolygók jelölése"
 
 #: src/core/modules/SolarSystem.cpp:225
 msgid "Planet selection marker"
-msgstr ""
+msgstr "Bolygókiválasztás jelölése"
 
 #: src/core/modules/SolarSystem.cpp:226
 msgid "Native planet names (from starlore)"
@@ -1212,7 +1212,7 @@ msgstr "Az időráta nullára állítása"
 
 #: src/core/StelCore.cpp:247
 msgid "Set reverse time direction"
-msgstr ""
+msgstr "Idő iránya visszafelé"
 
 #: src/core/StelCore.cpp:248
 msgid "Set time to now"
@@ -2061,7 +2061,7 @@ msgstr "Kezdeti látóirány Az/Alt: %1/%2"
 msgid "Authors"
 msgstr "Szerzők"
 
-#: src/gui/ConfigurationDialog.cpp:923 src/gui/ViewDialog.cpp:1253
+#: src/gui/ConfigurationDialog.cpp:923 src/gui/ViewDialog.cpp:1254
 msgid "Contact"
 msgstr "Kapcsolat"
 
@@ -2406,7 +2406,7 @@ msgstr "Jobb kattintás"
 
 #: src/gui/HelpDialog.cpp:180
 msgid "Add custom marker"
-msgstr ""
+msgstr "Egyéni jelölés"
 
 #: src/gui/HelpDialog.cpp:181
 msgid "Shift & left click"
@@ -2697,107 +2697,107 @@ msgid "Frames per second"
 msgstr "Másodpercenkénti képkockaszám"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1123
+#: src/gui/ViewDialog.cpp:1124
 msgid "Excellent dark-sky site"
 msgstr "Kivételesen sötét égbolt"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1125
+#: src/gui/ViewDialog.cpp:1126
 msgid "Typical truly dark site"
 msgstr "Átlagosan sötét égbolt"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1127
+#: src/gui/ViewDialog.cpp:1128
 msgid "Rural sky"
 msgstr "Vidéki égbolt"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1129
+#: src/gui/ViewDialog.cpp:1130
 msgid "Rural/suburban transition"
 msgstr "Vidéki/kertvárosi átmenet"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1131
+#: src/gui/ViewDialog.cpp:1132
 msgid "Suburban sky"
 msgstr "Külvárosi égbolt"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1133
+#: src/gui/ViewDialog.cpp:1134
 msgid "Bright suburban sky"
 msgstr "Világos külvárosi égbolt"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1135
+#: src/gui/ViewDialog.cpp:1136
 msgid "Suburban/urban transition"
 msgstr "Külvárosi/városi átmenet"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1137
+#: src/gui/ViewDialog.cpp:1138
 msgid "City sky"
 msgstr "Városi égbolt"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1139
+#: src/gui/ViewDialog.cpp:1140
 msgid "Inner-city sky"
 msgstr "Nagyvárosi égbolt"
 
-#: src/gui/ViewDialog.cpp:1153
+#: src/gui/ViewDialog.cpp:1154
 msgid "The naked-eye limiting magnitude is"
 msgstr "A szabadszemes megfigyelés magnitúdó-határa"
 
-#: src/gui/ViewDialog.cpp:1177
+#: src/gui/ViewDialog.cpp:1178
 msgid "Abbreviated"
 msgstr "Rövidítve"
 
-#: src/gui/ViewDialog.cpp:1178
+#: src/gui/ViewDialog.cpp:1179
 msgid "Native"
 msgstr "Eredeti írásmóddal"
 
-#: src/gui/ViewDialog.cpp:1179
+#: src/gui/ViewDialog.cpp:1180
 msgid "Translated"
 msgstr "Magyarra fordítva"
 
-#: src/gui/ViewDialog.cpp:1374
+#: src/gui/ViewDialog.cpp:1375
 msgid "No shooting stars"
 msgstr "Nincsenek hullócsillagok"
 
-#: src/gui/ViewDialog.cpp:1376
+#: src/gui/ViewDialog.cpp:1377
 msgid "Normal rate"
 msgstr "Normál gyakoriság"
 
-#: src/gui/ViewDialog.cpp:1378
+#: src/gui/ViewDialog.cpp:1379
 msgid "Standard Orionids rate"
 msgstr "Átlagos Orionidák gyakoriság"
 
-#: src/gui/ViewDialog.cpp:1380
+#: src/gui/ViewDialog.cpp:1381
 msgid "Standard Perseids rate"
 msgstr "Szokásos Perseida-gyakoriság"
 
-#: src/gui/ViewDialog.cpp:1382
+#: src/gui/ViewDialog.cpp:1383
 msgid "Standard Geminids rate"
 msgstr "Átlagos Geminidák gyakoriság"
 
-#: src/gui/ViewDialog.cpp:1384
+#: src/gui/ViewDialog.cpp:1385
 msgid "Exceptional Perseid rate"
 msgstr "Kivételes Perseidák gyakoriság"
 
-#: src/gui/ViewDialog.cpp:1386
+#: src/gui/ViewDialog.cpp:1387
 msgid "Meteor storm rate"
 msgstr "Meteorzáporok gyakorisága"
 
-#: src/gui/ViewDialog.cpp:1388
+#: src/gui/ViewDialog.cpp:1389
 msgid "Exceptional Draconid rate"
 msgstr "Kivételes Drakonidák gyakoriság"
 
-#: src/gui/ViewDialog.cpp:1390
+#: src/gui/ViewDialog.cpp:1391
 msgid "Exceptional Leonid rate"
 msgstr "Rendkívüli Leonida-gyakoriság"
 
-#: src/gui/ViewDialog.cpp:1392
+#: src/gui/ViewDialog.cpp:1393
 msgid "Very high rate (1966 Leonids)"
 msgstr "Nagyon nagy gyakoriság (1966-os Leonidák)"
 
-#: src/gui/ViewDialog.cpp:1394
+#: src/gui/ViewDialog.cpp:1395
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Az eddigi legnagyobb gyakoriság (1833-as Leonidák)"
 
@@ -2925,7 +2925,7 @@ msgstr "Galaktikus"
 #: src/gui/SearchDialog.cpp:216
 msgctxt "coordinate system"
 msgid "Supergalactic"
-msgstr ""
+msgstr "Szupergalaktikus"
 
 #: src/gui/SearchDialog.cpp:217
 msgctxt "coordinate system"
@@ -3142,34 +3142,34 @@ msgstr "Oort felhő objektumok"
 #: src/gui/AstroCalcDialog.cpp:562
 #, qt-format
 msgid "Bright stars (<%1 mag)"
-msgstr ""
+msgstr "Fényes csillagok (<%1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:563
 #, qt-format
 msgid "Bright star clusters (<%1 mag)"
-msgstr ""
+msgstr "Fényes csillagcsoportok (<%1 mag)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:564 src/translations.h:99
-#: src/ui_viewDialog.h:2046 src/ui_dsoColorsDialog.h:580
+#: src/ui_viewDialog.h:2060 src/ui_dsoColorsDialog.h:580
 msgid "Planetary nebulae"
 msgstr "Planetáris köd"
 
 #: src/gui/AstroCalcDialog.cpp:565
 #, qt-format
 msgid "Bright nebulae (<%1 mag)"
-msgstr ""
+msgstr "Fényes ködök (<%1 mag)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:566 src/translations.h:101
-#: src/ui_viewDialog.h:2049 src/ui_dsoColorsDialog.h:540
+#: src/ui_viewDialog.h:2063 src/ui_dsoColorsDialog.h:540
 msgid "Dark nebulae"
 msgstr "Sötét ködök"
 
 #: src/gui/AstroCalcDialog.cpp:567
 #, qt-format
 msgid "Bright galaxies (<%1 mag)"
-msgstr ""
+msgstr "Fényes galaxisok (<%1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:662 src/gui/AstroCalcDialog.cpp:722
 #: src/gui/AstroCalcDialog.cpp:724
@@ -3424,7 +3424,7 @@ msgid "Reflection nebulae"
 msgstr "Reflexiós köd"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:109 src/ui_viewDialog.h:2048 src/ui_dsoColorsDialog.h:507
+#: src/translations.h:109 src/ui_viewDialog.h:2062 src/ui_dsoColorsDialog.h:507
 msgid "Active galaxies"
 msgstr "Aktív galaxis"
 
@@ -3434,7 +3434,7 @@ msgid "Radio galaxies"
 msgstr "Rádiógalaxis"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:113 src/ui_viewDialog.h:2042 src/ui_dsoColorsDialog.h:514
+#: src/translations.h:113 src/ui_viewDialog.h:2056 src/ui_dsoColorsDialog.h:514
 msgid "Interacting galaxies"
 msgstr "Közreható galaxis"
 
@@ -3444,7 +3444,7 @@ msgid "Bright quasars"
 msgstr "fényes kvazár"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:117 src/ui_viewDialog.h:2045 src/ui_dsoColorsDialog.h:534
+#: src/translations.h:117 src/ui_viewDialog.h:2059 src/ui_dsoColorsDialog.h:534
 msgid "Star clusters"
 msgstr "Csillagcsoport"
 
@@ -3469,7 +3469,7 @@ msgid "Emission nebulae"
 msgstr "Emissziós köd"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:127 src/ui_viewDialog.h:2041 src/ui_dsoColorsDialog.h:614
+#: src/translations.h:127 src/ui_viewDialog.h:2055 src/ui_dsoColorsDialog.h:614
 msgid "Supernova remnants"
 msgstr "Szupernóva maradvány"
 
@@ -3519,12 +3519,12 @@ msgid "Protoplanetary Nebulae"
 msgstr "Protoplanetáris köd"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:147 src/ui_viewDialog.h:2005
+#: src/translations.h:147 src/ui_viewDialog.h:2019
 msgid "Messier Catalogue"
 msgstr "Messier katalógus"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:149 src/ui_viewDialog.h:2008
+#: src/translations.h:149 src/ui_viewDialog.h:2022
 msgid "Caldwell Catalogue"
 msgstr "Caldwell katalógus"
 
@@ -3686,7 +3686,7 @@ msgstr "Számi"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:219
 msgid "Sardinian"
-msgstr ""
+msgstr "Szárd"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:221
@@ -4377,7 +4377,7 @@ msgstr "Argentína"
 
 #: src/translations_countries.h:41
 msgid "Samoa (American)"
-msgstr ""
+msgstr "Amerikai Szamoa"
 
 #: src/translations_countries.h:42
 msgid "Austria"
@@ -4437,7 +4437,7 @@ msgstr "Benin"
 
 #: src/translations_countries.h:56
 msgid "St Barthelemy"
-msgstr ""
+msgstr "St Barthelemy"
 
 #: src/translations_countries.h:57
 msgid "Bermuda"
@@ -4493,15 +4493,15 @@ msgstr "Kókusz-szigetek (Keeling)"
 
 #: src/translations_countries.h:70
 msgid "Congo (Dem. Rep.)"
-msgstr ""
+msgstr "Kongói Demokratikus Köztársaság"
 
 #: src/translations_countries.h:71
 msgid "Central African Rep."
-msgstr ""
+msgstr "Közép-afrikai Köztársaság"
 
 #: src/translations_countries.h:72
 msgid "Congo (Rep.)"
-msgstr ""
+msgstr "Kongói Köztársaság"
 
 #: src/translations_countries.h:73
 msgid "Switzerland"
@@ -4641,7 +4641,7 @@ msgstr "Gabon"
 
 #: src/translations_countries.h:107
 msgid "Britain (UK)"
-msgstr ""
+msgstr "Nagy Britannia"
 
 #: src/translations_countries.h:108
 msgid "Grenada"
@@ -4813,15 +4813,15 @@ msgstr "Comore-szigetek"
 
 #: src/translations_countries.h:150
 msgid "St Kitts and Nevis"
-msgstr ""
+msgstr "Saint Kitts és Nevis"
 
 #: src/translations_countries.h:151
 msgid "Korea (North)"
-msgstr ""
+msgstr "Észak-Korea"
 
 #: src/translations_countries.h:152
 msgid "Korea (South)"
-msgstr ""
+msgstr "Dél-Korea"
 
 #: src/translations_countries.h:153
 msgid "Kuwait"
@@ -4897,7 +4897,7 @@ msgstr "Montenegró"
 
 #: src/translations_countries.h:171
 msgid "St Martin (French)"
-msgstr ""
+msgstr "Saint-Martin"
 
 #: src/translations_countries.h:172
 msgid "Madagascar"
@@ -5053,7 +5053,7 @@ msgstr "Lengyelország"
 
 #: src/translations_countries.h:210
 msgid "St Pierre and Miquelon"
-msgstr ""
+msgstr "Saint-Pierre és Miquelon"
 
 #: src/translations_countries.h:211
 msgid "Pitcairn"
@@ -5129,7 +5129,7 @@ msgstr "Szingapúr"
 
 #: src/translations_countries.h:229
 msgid "St Helena"
-msgstr ""
+msgstr "St Helena"
 
 #: src/translations_countries.h:230
 msgid "Slovenia"
@@ -5177,7 +5177,7 @@ msgstr "Salvador"
 
 #: src/translations_countries.h:241
 msgid "St Maarten (Dutch)"
-msgstr ""
+msgstr "Sint Maarten"
 
 #: src/translations_countries.h:242
 msgid "Syria"
@@ -5189,7 +5189,7 @@ msgstr "Szváziföld"
 
 #: src/translations_countries.h:244
 msgid "Turks and Caicos Is"
-msgstr ""
+msgstr "Turks- és Caicos-szigetek"
 
 #: src/translations_countries.h:245
 msgid "Chad"
@@ -5289,11 +5289,11 @@ msgstr "Venezuela"
 
 #: src/translations_countries.h:269
 msgid "Virgin Islands (UK)"
-msgstr ""
+msgstr "Brit Virgin-szigetek"
 
 #: src/translations_countries.h:270
 msgid "Virgin Islands (US)"
-msgstr ""
+msgstr "Amerikai Virgin-szigetek"
 
 #: src/translations_countries.h:271
 msgid "Vietnam"
@@ -5309,7 +5309,7 @@ msgstr "Wallis és Futuna"
 
 #: src/translations_countries.h:274
 msgid "Samoa (western)"
-msgstr ""
+msgstr "Szamoa"
 
 #: src/translations_countries.h:275
 msgid "Yemen"
@@ -5628,82 +5628,49 @@ msgstr "Automatikus kitöltés csak a szó elejétől"
 msgid "Lock position when coordinates are used"
 msgstr "Pozíció rögzítése, ha koordináták vannak megadva"
 
-#: src/ui_searchDialogGui.h:722 src/ui_viewDialog.h:2263
-#: src/ui_viewDialog.h:2285 src/ui_viewDialog.h:2311
+#: src/ui_searchDialogGui.h:722 src/ui_viewDialog.h:2277
+#: src/ui_viewDialog.h:2299 src/ui_viewDialog.h:2325
 #: src/ui_configurationDialog.h:1424 src/ui_configurationDialog.h:1435
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Beállítások"
 
-#: src/ui_viewDialog.h:1925
+#: src/ui_viewDialog.h:1938
 msgid "View"
 msgstr "Nézet"
 
-#: src/ui_viewDialog.h:1928
+#: src/ui_viewDialog.h:1941
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:266
 msgid "Absolute scale:"
 msgstr "Abszolút méret:"
 
-#: src/ui_viewDialog.h:1929
+#: src/ui_viewDialog.h:1942
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Relative scale:"
 msgstr "Relatív méret:"
 
-#: src/ui_viewDialog.h:1930
-msgid "Milky Way brightness:"
-msgstr "A Tejút fényessége:"
-
-#: src/ui_viewDialog.h:1931
-msgid "Zodiacal Light brightness:"
-msgstr "Állatövi fény fényessége:"
-
-#: src/ui_viewDialog.h:1932
+#: src/ui_viewDialog.h:1943
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:272
 msgid "Twinkle:"
 msgstr "Vibrálás:"
 
-#: src/ui_viewDialog.h:1934
+#: src/ui_viewDialog.h:1945
 msgid "Limit the magnitude of stars"
 msgstr "Csillagok fényességének határa"
 
-#: src/ui_viewDialog.h:1936 src/ui_viewDialog.h:1988 src/ui_viewDialog.h:2063
+#: src/ui_viewDialog.h:1947 src/ui_viewDialog.h:1995 src/ui_viewDialog.h:2077
 msgid "Limit magnitude:"
 msgstr "Magnitúdó limit:"
 
-#: src/ui_viewDialog.h:1938
-msgid "Dim faint stars when a very bright object is visible"
-msgstr "A halvány csillagok elhalványulnak egy nagyon fényes égitest mellett"
-
-#: src/ui_viewDialog.h:1940
-msgid "Dynamic eye adaptation"
-msgstr "Dinamikus szem adaptálása"
-
-#: src/ui_viewDialog.h:1941 src/ui_viewDialog.h:1993 src/ui_viewDialog.h:2051
+#: src/ui_viewDialog.h:1948 src/ui_viewDialog.h:2000 src/ui_viewDialog.h:2065
 msgid "Labels and Markers"
 msgstr "Címkék és jelölések"
 
-#: src/ui_viewDialog.h:1943
-msgid "Settings for sporadic meteors"
-msgstr "Sporadikus meteorok beállításai"
-
-#: src/ui_viewDialog.h:1945
-msgid "Shooting Stars"
-msgstr "Hullócsillagok"
-
-#: src/ui_viewDialog.h:1948
-msgid "Hourly zenith rate"
-msgstr "Óránkénti gyakoriság a zeniten (ZHR)"
-
 #: src/ui_viewDialog.h:1950
-msgctxt "Zenithal Hourly Rate"
-msgid "ZHR:"
-msgstr "ZHR:"
-
-#: src/ui_viewDialog.h:1952
 msgid "Show atmosphere"
 msgstr "Légkör mutatása"
 
-#: src/ui_viewDialog.h:1956
+#: src/ui_viewDialog.h:1954
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
@@ -5711,42 +5678,59 @@ msgstr ""
 "Fényszennyezési értékek használata adatbázisból, figyelmen kívül hagyva a "
 "lenti beállítást"
 
-#: src/ui_viewDialog.h:1959
+#: src/ui_viewDialog.h:1957
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:440
 msgid "Light pollution:"
 msgstr "Fényszennyezés"
 
-#: src/ui_viewDialog.h:1961
+#: src/ui_viewDialog.h:1959
 msgid "pressure, temperature, extinction coefficient"
 msgstr "nyomás, hőmérséklet, kioltás együtthatója"
 
-#: src/ui_viewDialog.h:1963
+#: src/ui_viewDialog.h:1961
 msgid "Refraction/Extinction settings..."
 msgstr "Visszaverődési/kioltási beállítások"
 
-#: src/ui_viewDialog.h:1964
+#: src/ui_viewDialog.h:1963
+msgid "Settings for sporadic meteors"
+msgstr "Sporadikus meteorok beállításai"
+
+#: src/ui_viewDialog.h:1965
+msgid "Shooting Stars"
+msgstr "Hullócsillagok"
+
+#: src/ui_viewDialog.h:1968
+msgid "Hourly zenith rate"
+msgstr "Óránkénti gyakoriság a zeniten (ZHR)"
+
+#: src/ui_viewDialog.h:1970
+msgctxt "Zenithal Hourly Rate"
+msgid "ZHR:"
+msgstr "ZHR:"
+
+#: src/ui_viewDialog.h:1971
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:293
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Solar System objects"
 msgstr "Naprendszerbeli objektumok"
 
-#: src/ui_viewDialog.h:1965
+#: src/ui_viewDialog.h:1972
 msgid "Show planet markers"
 msgstr "Bolygók jelölése"
 
-#: src/ui_viewDialog.h:1966
+#: src/ui_viewDialog.h:1973
 msgid "Show planet orbits"
 msgstr "Bolygópályák mutatása"
 
-#: src/ui_viewDialog.h:1968
+#: src/ui_viewDialog.h:1975
 msgid "Configure colors of orbit lines"
-msgstr ""
+msgstr "Keringési pályák színének beállítása"
 
-#: src/ui_viewDialog.h:1970
+#: src/ui_viewDialog.h:1977
 msgid "Colors..."
-msgstr ""
+msgstr "Színek..."
 
-#: src/ui_viewDialog.h:1972
+#: src/ui_viewDialog.h:1979
 msgid ""
 "Deactivate this option if you want to see orbit for selected planet and its "
 "moons."
@@ -5754,11 +5738,11 @@ msgstr ""
 "Kapcsolja ki ezt az opciót, ha látni akarja a kiválasztott bolygó és holdjai "
 "pályáját."
 
-#: src/ui_viewDialog.h:1974
+#: src/ui_viewDialog.h:1981
 msgid "Show orbit for selected planet"
 msgstr "A kiválasztott bolygó pályájának mutatása"
 
-#: src/ui_viewDialog.h:1976
+#: src/ui_viewDialog.h:1983
 msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
@@ -5766,11 +5750,11 @@ msgstr ""
 "Kapcsolja ki ezt az opciót, ha meg akarja figyelni a Naprendszer összes "
 "objektumainak pályáját."
 
-#: src/ui_viewDialog.h:1978
+#: src/ui_viewDialog.h:1985
 msgid "Show trail only for selected planet"
 msgstr "Csak a kiválasztott bolygó pályájának mutatása"
 
-#: src/ui_viewDialog.h:1980
+#: src/ui_viewDialog.h:1987
 msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
@@ -5778,72 +5762,92 @@ msgstr ""
 "Kapcsolja be ezt az opciót a fénysebesség hatásának szimulációjához "
 "(ajánlott)."
 
-#: src/ui_viewDialog.h:1982
+#: src/ui_viewDialog.h:1989
 msgid "Simulate light speed"
 msgstr "Fénysebesség szimulálása"
 
-#: src/ui_viewDialog.h:1983
+#: src/ui_viewDialog.h:1990
 msgid "Use custom settings of GRS:"
 msgstr "GRS egyéni beállításai:"
 
-#: src/ui_viewDialog.h:1984
+#: src/ui_viewDialog.h:1991
 msgid "GRS details..."
 msgstr "GRS részletek"
 
-#: src/ui_viewDialog.h:1986
+#: src/ui_viewDialog.h:1993
 msgid "Limit the magnitude of solar system objects"
 msgstr "Naprendszerbeli objektumok magnitúdó behatárolása"
 
-#: src/ui_viewDialog.h:1989
+#: src/ui_viewDialog.h:1996
 msgid "Scale Moon:"
 msgstr "Holdskála:"
 
-#: src/ui_viewDialog.h:1991
+#: src/ui_viewDialog.h:1998
 msgid "Scale factor"
 msgstr "Méretezési tényező"
 
-#: src/ui_viewDialog.h:1994
+#: src/ui_viewDialog.h:2001 src/ui_viewDialog.h:2331
+msgid "Sky"
+msgstr "Ég"
+
+#: src/ui_viewDialog.h:2002
+msgid "Milky Way brightness:"
+msgstr "A Tejút fényessége:"
+
+#: src/ui_viewDialog.h:2003
+msgid "Zodiacal Light brightness:"
+msgstr "Állatövi fény fényessége:"
+
+#: src/ui_viewDialog.h:2005
+msgid "Dim faint stars when a very bright object is visible"
+msgstr "A halvány csillagok elhalványulnak egy nagyon fényes égitest mellett"
+
+#: src/ui_viewDialog.h:2007
+msgid "Dynamic eye adaptation"
+msgstr "Dinamikus szem adaptálása"
+
+#: src/ui_viewDialog.h:2008
 msgid "Display objects from catalogs"
 msgstr "Objektumok mutatása katalógusból"
 
-#: src/ui_viewDialog.h:1996
+#: src/ui_viewDialog.h:2010
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
 msgstr "Ködök és csillagcsoportok katalógusa"
 
-#: src/ui_viewDialog.h:1999
+#: src/ui_viewDialog.h:2013
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
 msgstr "Ködök és csillagcsoportok NGC katalógusa"
 
-#: src/ui_viewDialog.h:2002
+#: src/ui_viewDialog.h:2016
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
 msgstr "Fényes ködök Lynds katalógusa (Lynds, 1965)"
 
-#: src/ui_viewDialog.h:2011
+#: src/ui_viewDialog.h:2025
 msgid "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
 msgstr "349 sötét objektum Barnard katalógusa  (Barnard, 1927)"
 
-#: src/ui_viewDialog.h:2014
+#: src/ui_viewDialog.h:2028
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
 msgstr "HII régiók katalógusa (Sharpless, 1959)"
 
-#: src/ui_viewDialog.h:2017
+#: src/ui_viewDialog.h:2031
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
 msgstr "Reflexiós ködök katalógusa (Van den Bergh, 1966)"
 
-#: src/ui_viewDialog.h:2020
+#: src/ui_viewDialog.h:2034
 msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, 1960)"
 msgstr "H-alfa régiók a déli Tejúton katalógusa  (Rodgers+, 1960)"
 
-#: src/ui_viewDialog.h:2023
+#: src/ui_viewDialog.h:2037
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
 msgstr "Sötét ködök Lynds katalógusa (Lynds, 1962)"
 
-#: src/ui_viewDialog.h:2026
+#: src/ui_viewDialog.h:2040
 msgid "Catalog of Open Galactic Clusters (Collinder, 1931)"
 msgstr "Nyílt galaktikus halmazok katalógusa (Collinder, 1931)"
 
-#: src/ui_viewDialog.h:2029
+#: src/ui_viewDialog.h:2043
 msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
@@ -5851,47 +5855,47 @@ msgstr ""
 "Csillagcsoportok katalógusa ahogy a  Franklin–Adams féle égbolt térképeken "
 "ábrázolva van  (Melotte, 1915)"
 
-#: src/ui_viewDialog.h:2032
+#: src/ui_viewDialog.h:2046
 msgid "Catalog of galaxies"
 msgstr "Galaxiskatalógus"
 
-#: src/ui_viewDialog.h:2035
+#: src/ui_viewDialog.h:2049
 msgid "The Uppsala General Catalogue of Galaxies"
 msgstr "Galaxisok általános Uppsala katalógusa"
 
-#: src/ui_viewDialog.h:2038
+#: src/ui_viewDialog.h:2052
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
 msgstr "Galaktikus fényes diffúz ködök  katalógusa (Cederblad, 1946)"
 
-#: src/ui_viewDialog.h:2040
+#: src/ui_viewDialog.h:2054
 msgid "Filter by type"
 msgstr "Típus szerinti szűrés"
 
-#: src/ui_viewDialog.h:2043 src/ui_dsoColorsDialog.h:599
+#: src/ui_viewDialog.h:2057 src/ui_dsoColorsDialog.h:599
 msgid "Hydrogen regions"
 msgstr "Hidrogén régiók"
 
-#: src/ui_viewDialog.h:2044
+#: src/ui_viewDialog.h:2058
 msgid "Other"
 msgstr "Egyéb"
 
-#: src/ui_viewDialog.h:2047 src/ui_dsoColorsDialog.h:542
+#: src/ui_viewDialog.h:2061 src/ui_dsoColorsDialog.h:542
 msgid "Galaxies"
 msgstr "Galaxis"
 
-#: src/ui_viewDialog.h:2050
+#: src/ui_viewDialog.h:2064
 msgid "Bright nebulae"
 msgstr "Fényes ködök"
 
-#: src/ui_viewDialog.h:2053
+#: src/ui_viewDialog.h:2067
 msgid "Use hints proportional to angular size of deep-sky objects"
 msgstr ""
 
-#: src/ui_viewDialog.h:2055
+#: src/ui_viewDialog.h:2069
 msgid "Use proportional hints"
 msgstr "Tippek mutatása"
 
-#: src/ui_viewDialog.h:2057
+#: src/ui_viewDialog.h:2071
 msgid ""
 "Use surface brightness of deep-sky objects for scale of the visibility of "
 "their markers and labels."
@@ -5899,120 +5903,120 @@ msgstr ""
 "Mélyég-objektumok felszíni fényességének használata a jelzések és feliratok "
 "láthatóságához."
 
-#: src/ui_viewDialog.h:2059
+#: src/ui_viewDialog.h:2073
 msgid "Use surface brightness"
 msgstr "Felszíni fényesség használata"
 
-#: src/ui_viewDialog.h:2061
+#: src/ui_viewDialog.h:2075
 msgid ""
 "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
 "Magnitúdó korlátozása szabad szemes vagy binokuláros megfigyeléshez mélyég "
 "objektumokhoz."
 
-#: src/ui_viewDialog.h:2065
+#: src/ui_viewDialog.h:2079
 msgid ""
 "Use designations of deep-sky objects instead of their common names for "
 "screen labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:2067
+#: src/ui_viewDialog.h:2081
 msgid "Use designations for screen labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:2068 plugins/Satellites/src/ui_satellitesDialog.h:720
+#: src/ui_viewDialog.h:2082 plugins/Satellites/src/ui_satellitesDialog.h:720
 msgid "Labels"
 msgstr "Címkék"
 
-#: src/ui_viewDialog.h:2069
+#: src/ui_viewDialog.h:2083
 msgid "Hints"
 msgstr "Tippek"
 
-#: src/ui_viewDialog.h:2070
+#: src/ui_viewDialog.h:2084
 msgid "Configure colors of markers"
-msgstr ""
+msgstr "Jelölők színének beállítása"
 
-#: src/ui_viewDialog.h:2071
+#: src/ui_viewDialog.h:2085
 msgid "Celestial Sphere"
 msgstr "Éggömb"
 
-#: src/ui_viewDialog.h:2073
+#: src/ui_viewDialog.h:2087
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
 msgstr ""
 
-#: src/ui_viewDialog.h:2075
+#: src/ui_viewDialog.h:2089
 msgid "Ecliptic (J2000)"
 msgstr "Ekliptika (J2000)"
 
-#: src/ui_viewDialog.h:2077
+#: src/ui_viewDialog.h:2091
 msgid "Show celestial equator of current planet and date."
 msgstr "Jelenlegi dátum és bolygó égi egyenlítője."
 
-#: src/ui_viewDialog.h:2079
+#: src/ui_viewDialog.h:2093
 msgid "Equator (of date)"
 msgstr "Jelenlegi egyenlítő"
 
-#: src/ui_viewDialog.h:2081
+#: src/ui_viewDialog.h:2095
 msgid "Show celestial equator of J2000.0."
 msgstr "Égi egyenlítő mutatása (J2000.0)"
 
-#: src/ui_viewDialog.h:2083
+#: src/ui_viewDialog.h:2097
 msgid "Equator (J2000)"
 msgstr "Egyenlítő (J2000)"
 
-#: src/ui_viewDialog.h:2085
+#: src/ui_viewDialog.h:2099
 msgid "Color of equator (J2000.0)"
 msgstr "Egyenlítő színe (J2000.0)"
 
-#: src/ui_viewDialog.h:2088
+#: src/ui_viewDialog.h:2102
 msgid "Show ecliptic line of current date."
 msgstr "Ekliptika vonala dátum szerint"
 
-#: src/ui_viewDialog.h:2090
+#: src/ui_viewDialog.h:2104
 msgid "Ecliptic (of date)"
 msgstr "Jelenlegi ekliptika"
 
-#: src/ui_viewDialog.h:2092
+#: src/ui_viewDialog.h:2106
 msgid "Color of equator (of date)"
 msgstr "Egyenlítő színe (dátum)"
 
-#: src/ui_viewDialog.h:2095
+#: src/ui_viewDialog.h:2109
 msgid "Show Galactic equator line."
 msgstr "Galaktikus egyenlítő"
 
-#: src/ui_viewDialog.h:2099
+#: src/ui_viewDialog.h:2113
 msgid "Color of supergalactic equator"
-msgstr ""
+msgstr "Szupergalaktikus egyenlítő színe"
 
-#: src/ui_viewDialog.h:2102
+#: src/ui_viewDialog.h:2116
 msgid "Color of ecliptic (of date)"
 msgstr "Ekliptika színe (dátum)"
 
-#: src/ui_viewDialog.h:2105
+#: src/ui_viewDialog.h:2119
 msgid "Color of ecliptic (J2000.0)"
 msgstr "Ekliptika színe (J2000.0)"
 
-#: src/ui_viewDialog.h:2108
+#: src/ui_viewDialog.h:2122
 msgid "Color of galactic equator"
 msgstr "Galaktikus egyenlítő színe"
 
-#: src/ui_viewDialog.h:2111
+#: src/ui_viewDialog.h:2125
 msgid "Show horizon line."
 msgstr "Vízszintes vonal"
 
-#: src/ui_viewDialog.h:2115
+#: src/ui_viewDialog.h:2129
 msgid "Color of horizon"
 msgstr "Horizont színe"
 
-#: src/ui_viewDialog.h:2119
+#: src/ui_viewDialog.h:2133
 msgid "Show meridian line."
 msgstr "Meridiánvonal"
 
-#: src/ui_viewDialog.h:2123
+#: src/ui_viewDialog.h:2137
 msgid "Color of meridian"
 msgstr "Délkör színe"
 
-#: src/ui_viewDialog.h:2126
+#: src/ui_viewDialog.h:2140
 msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which "
 "passes through both ecliptic poles, the Sun and opposition point."
@@ -6021,97 +6025,97 @@ msgstr ""
 "vonala, ami átmegy mindkét ekliptikai póluson, a Napon és az ellenkező "
 "ponton is."
 
-#: src/ui_viewDialog.h:2130
+#: src/ui_viewDialog.h:2144
 msgid "Color of the opposition/conjunction longitude line"
 msgstr ""
 
-#: src/ui_viewDialog.h:2133
+#: src/ui_viewDialog.h:2147
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
 msgstr ""
 "Kolurok mutatása (nagy körök a pólusokon és a napéjegyenlőségi vagy "
 "napfordulói pontokon)."
 
-#: src/ui_viewDialog.h:2135
+#: src/ui_viewDialog.h:2149
 msgid "Colures"
 msgstr "Kolurok"
 
-#: src/ui_viewDialog.h:2137
+#: src/ui_viewDialog.h:2151
 msgid "Color of colures"
 msgstr ""
 
-#: src/ui_viewDialog.h:2141
+#: src/ui_viewDialog.h:2155
 msgid "Color of the ecliptic poles (J2000.0)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2144
+#: src/ui_viewDialog.h:2158
 msgid "Color of Prime Vertical"
 msgstr ""
 
-#: src/ui_viewDialog.h:2147
+#: src/ui_viewDialog.h:2161
 msgid "Show ecliptic poles of J2000.0"
 msgstr ""
 
-#: src/ui_viewDialog.h:2149
+#: src/ui_viewDialog.h:2163
 msgid "Ecliptic poles (J2000)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2151
+#: src/ui_viewDialog.h:2165
 msgid "Color of the celestial poles (J2000.0)"
-msgstr ""
+msgstr "Égi pólusok színe (J2000.0)"
 
-#: src/ui_viewDialog.h:2154
+#: src/ui_viewDialog.h:2168
 msgid "Show celestial poles of current planet and date."
 msgstr ""
 
-#: src/ui_viewDialog.h:2156
+#: src/ui_viewDialog.h:2170
 msgid "Celestial poles (of date)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2158
+#: src/ui_viewDialog.h:2172
 msgid "Color of ecliptic poles (of date)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2161
+#: src/ui_viewDialog.h:2175
 msgid "Color of celestial poles (of date)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2164
+#: src/ui_viewDialog.h:2178
 msgid "Color of supergalactic poles"
-msgstr ""
+msgstr "Szupergalaktikus pólusok színe"
 
-#: src/ui_viewDialog.h:2167
+#: src/ui_viewDialog.h:2181
 msgid "Show ecliptic poles of current date."
 msgstr ""
 
-#: src/ui_viewDialog.h:2169
+#: src/ui_viewDialog.h:2183
 msgid "Ecliptic poles (of date)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2171
+#: src/ui_viewDialog.h:2185
 msgid "Show Prime (East-West) Vertical."
 msgstr "Elsődleges vertikális mutatása (É-Ny)"
 
-#: src/ui_viewDialog.h:2175
+#: src/ui_viewDialog.h:2189
 msgid "Color of galactic poles"
-msgstr ""
+msgstr "Galaktikus pólusok színe"
 
-#: src/ui_viewDialog.h:2177
+#: src/ui_viewDialog.h:2191
 msgid "Zenith and Nadir"
 msgstr "Zenit és nadír"
 
-#: src/ui_viewDialog.h:2180
+#: src/ui_viewDialog.h:2194
 msgid "Color of Zenith and Nadir"
 msgstr "Zenit és nadír színe"
 
-#: src/ui_viewDialog.h:2183
+#: src/ui_viewDialog.h:2197
 msgid "Show celestial poles of J2000.0."
 msgstr ""
 
-#: src/ui_viewDialog.h:2185
+#: src/ui_viewDialog.h:2199
 msgid "Celestial poles (J2000)"
-msgstr ""
+msgstr "Égi pólusok (J2000)"
 
-#: src/ui_viewDialog.h:2187
+#: src/ui_viewDialog.h:2201
 msgid ""
 "These circles delimit stars which stay always above (respectively below) the "
 "mathematical horizon."
@@ -6119,260 +6123,256 @@ msgstr ""
 "Ezek a körök elhatárolják egymástól azokat a csillagokat, amik mindig a "
 "matematikai horizont fölött, illetve alatt vannak."
 
-#: src/ui_viewDialog.h:2189
+#: src/ui_viewDialog.h:2203
 msgid "Circumpolar circles"
 msgstr "Cirkumpoláris körök"
 
-#: src/ui_viewDialog.h:2191
+#: src/ui_viewDialog.h:2205
 msgid "Color of circumpolar circles"
 msgstr "Cirkumpoláris körök színe"
 
-#: src/ui_viewDialog.h:2194
+#: src/ui_viewDialog.h:2208
 msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
 msgstr ""
 
-#: src/ui_viewDialog.h:2196
+#: src/ui_viewDialog.h:2210
 msgid "Precession circles"
 msgstr "Precessziós körök"
 
-#: src/ui_viewDialog.h:2198
+#: src/ui_viewDialog.h:2212
 msgid "Color of precession circles"
 msgstr "Precessziós körök színe"
 
-#: src/ui_viewDialog.h:2201
+#: src/ui_viewDialog.h:2215
 msgid "Altitudes and azimuth (counted from North towards East)."
 msgstr "Magasság és azimut (északról kelet felé számolva)"
 
-#: src/ui_viewDialog.h:2205
+#: src/ui_viewDialog.h:2219
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
 msgstr "Jelenlegi dátum ekliptikus koordinátái. Csak a Föld esetén mutatva."
 
-#: src/ui_viewDialog.h:2207
+#: src/ui_viewDialog.h:2221
 msgid "Ecliptic grid (of date)"
 msgstr "Jelenlegi dátum ekliptikus hálója"
 
-#: src/ui_viewDialog.h:2209
+#: src/ui_viewDialog.h:2223
 msgid "Color of the equatorial grid (J2000.0)"
-msgstr ""
+msgstr "Egyenlítői háló színe  (J2000.0)"
 
-#: src/ui_viewDialog.h:2212
+#: src/ui_viewDialog.h:2226
 msgid "Color of the equinox points (J2000.0)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2215
+#: src/ui_viewDialog.h:2229
 msgid "Ecliptical coordinates for J2000.0."
 msgstr "Ekliptikus koordináták (J2000.0)."
 
-#: src/ui_viewDialog.h:2217
+#: src/ui_viewDialog.h:2231
 msgid "Ecliptic grid (J2000)"
 msgstr "Ekliptikus háló (J2000)"
 
-#: src/ui_viewDialog.h:2219
+#: src/ui_viewDialog.h:2233
 msgid "Color of the supergalactic grid"
 msgstr ""
 
-#: src/ui_viewDialog.h:2222
+#: src/ui_viewDialog.h:2236
 msgid "Color of the galactic grid"
 msgstr "Galaktikus háló színe"
 
-#: src/ui_viewDialog.h:2226
+#: src/ui_viewDialog.h:2240
 msgid "Equatorial coordinates of J2000.0."
 msgstr "Egyenlítői koordináták (J2000.0)."
 
-#: src/ui_viewDialog.h:2228
+#: src/ui_viewDialog.h:2242
 msgid "Equatorial grid (J2000)"
 msgstr "Egyenlítői háló  (J2000)"
 
-#: src/ui_viewDialog.h:2230
+#: src/ui_viewDialog.h:2244
 msgid "Color of the ecliptical grid (J2000.0)"
 msgstr "Ekliptikus háló színe (J2000)"
 
-#: src/ui_viewDialog.h:2233
+#: src/ui_viewDialog.h:2247
 msgid "Galactic Coordinates, System II (IAU 1958)."
 msgstr "Galaktikus Koordináták, System II (IAU 1958)."
 
-#: src/ui_viewDialog.h:2236
+#: src/ui_viewDialog.h:2250
 msgid "Equinoxes (J2000)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2238
+#: src/ui_viewDialog.h:2252
 msgid "Color of the ecliptical grid (of date)"
 msgstr "Ekliptikus háló színe (dátum szerint)"
 
-#: src/ui_viewDialog.h:2241
+#: src/ui_viewDialog.h:2255
 msgid "Color of the equatorial grid (of date)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2244
+#: src/ui_viewDialog.h:2258
 msgid "Color of the azimuthal grid"
 msgstr "Azimut háló színe"
 
-#: src/ui_viewDialog.h:2247
+#: src/ui_viewDialog.h:2261
 msgid "Equatorial coordinates of current date and planet."
 msgstr "Jelenlegi bolygó és dátum egyenlítői koordinátái."
 
-#: src/ui_viewDialog.h:2249
+#: src/ui_viewDialog.h:2263
 msgid "Equatorial grid (of date)"
 msgstr "Jelenlegi dátum egyenlítői hálója"
 
-#: src/ui_viewDialog.h:2250
+#: src/ui_viewDialog.h:2264
 msgid "Equinoxes (of date)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2252
+#: src/ui_viewDialog.h:2266
 msgid "Color of the equinox points (of date)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2255
+#: src/ui_viewDialog.h:2269
 msgid "Labels for the Cardinal directions."
 msgstr "Fő égtájak feliratai"
 
-#: src/ui_viewDialog.h:2259
+#: src/ui_viewDialog.h:2273
 msgid "Color of cardinal points"
 msgstr "Kardinális pontok színe"
 
-#: src/ui_viewDialog.h:2261
+#: src/ui_viewDialog.h:2275
 msgid "Projection"
 msgstr "Vetület"
 
-#: src/ui_viewDialog.h:2262
+#: src/ui_viewDialog.h:2276
 msgid "Vertical viewport offset"
 msgstr "Függőleges nézőpont eltolás"
 
-#: src/ui_viewDialog.h:2264
+#: src/ui_viewDialog.h:2278
 msgid "Show fog"
 msgstr "Köd mutatása"
 
-#: src/ui_viewDialog.h:2265
+#: src/ui_viewDialog.h:2279
 msgid "Use associated planet and position"
 msgstr "Ugrás a tájképhez társított bolygóra és helyre"
 
-#: src/ui_viewDialog.h:2266
+#: src/ui_viewDialog.h:2280
 msgid "Use this landscape as default"
 msgstr "Tájkép beállítása alapértelmezettnek"
 
-#: src/ui_viewDialog.h:2267
+#: src/ui_viewDialog.h:2281
 msgid "Show ground"
 msgstr "Felszín mutatása"
 
-#: src/ui_viewDialog.h:2269
+#: src/ui_viewDialog.h:2283
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr ""
 "Minimális fényesség alkalmazása, hogy a horizont látható legyen sötétben is"
 
-#: src/ui_viewDialog.h:2271
+#: src/ui_viewDialog.h:2285
 msgid "Minimal brightness:"
 msgstr "Minimális fényesség:"
 
-#: src/ui_viewDialog.h:2273
+#: src/ui_viewDialog.h:2287
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr "Értéktartomány 0...1 (a táj teljesen sötét - jól megvilágított)"
 
-#: src/ui_viewDialog.h:2276
+#: src/ui_viewDialog.h:2290
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr ""
 "Minimális fényesség alkalmazása, a  landscape.ini fájlban megadottak szerint"
 
-#: src/ui_viewDialog.h:2278
+#: src/ui_viewDialog.h:2292
 msgid "from landscape, if given"
 msgstr "tájkép alapján, ha van"
 
-#: src/ui_viewDialog.h:2280
+#: src/ui_viewDialog.h:2294
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr "Megvilágítási réteg mutatása (fényesség ablak, fényszennyezés, stb)"
 
-#: src/ui_viewDialog.h:2282
+#: src/ui_viewDialog.h:2296
 msgid "Show illumination "
 msgstr "Megvilágítás mutatása "
 
-#: src/ui_viewDialog.h:2283
+#: src/ui_viewDialog.h:2297
 msgid "Show landscape labels"
 msgstr "Tájkép feliratok mutatása"
 
-#: src/ui_viewDialog.h:2284
+#: src/ui_viewDialog.h:2298
 msgid "Add/remove landscapes..."
 msgstr "Tájkép hozzáadása/törlése..."
 
-#: src/ui_viewDialog.h:2286
+#: src/ui_viewDialog.h:2300
 msgid "Show art in brightness"
 msgstr "Rajzok fényessége"
 
-#: src/ui_viewDialog.h:2287
+#: src/ui_viewDialog.h:2301
 msgid "Show lines with thickness"
 msgstr "Vonalak vastagsága"
 
-#: src/ui_viewDialog.h:2289
+#: src/ui_viewDialog.h:2303
 msgid "Value in pixels"
 msgstr "Érték pixelben:"
 
-#: src/ui_viewDialog.h:2292
+#: src/ui_viewDialog.h:2306
 msgid "Color of lines of constellations"
-msgstr ""
+msgstr "Csillagképek vonalának színe"
 
-#: src/ui_viewDialog.h:2295
+#: src/ui_viewDialog.h:2309
 msgid "Use native names for planets from current culture"
 msgstr "A bolygók eredeti nevei az adott kultúrában"
 
-#: src/ui_viewDialog.h:2297
+#: src/ui_viewDialog.h:2311
 msgid "Use native names for planets"
 msgstr "Bolygók helyi nevei"
 
-#: src/ui_viewDialog.h:2298
+#: src/ui_viewDialog.h:2312
 msgid "Use this sky culture as default"
 msgstr "Kultúrkör beállítása alapértelmezettnek"
 
-#: src/ui_viewDialog.h:2299
+#: src/ui_viewDialog.h:2313
 msgid "Show labels"
 msgstr "Címkék mutatása"
 
-#: src/ui_viewDialog.h:2301
+#: src/ui_viewDialog.h:2315
 msgid "Select if you want names abbreviated, original or translated"
 msgstr ""
 "Válassza ki, hogy a neveket eredetiben, rövidítve vagy lefordítva akarja "
 "látni"
 
-#: src/ui_viewDialog.h:2305
+#: src/ui_viewDialog.h:2319
 msgid "Color of names of constellations"
-msgstr ""
+msgstr "Csillagképek nevének színe"
 
-#: src/ui_viewDialog.h:2307
+#: src/ui_viewDialog.h:2321
 msgid "Show boundaries"
 msgstr "Határok mutatása"
 
-#: src/ui_viewDialog.h:2309
+#: src/ui_viewDialog.h:2323
 msgid "Color of boundaries of constellations"
 msgstr "Csillagképek határainak színe"
 
-#: src/ui_viewDialog.h:2312
+#: src/ui_viewDialog.h:2326
 msgid "Visible"
 msgstr "Látható"
 
-#: src/ui_viewDialog.h:2317
-msgid "Sky"
-msgstr "Ég"
-
-#: src/ui_viewDialog.h:2319
+#: src/ui_viewDialog.h:2333
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
 msgstr "DSO"
 
-#: src/ui_viewDialog.h:2321
+#: src/ui_viewDialog.h:2335
 msgid "Deep-Sky Objects"
 msgstr "Mélyég objektumok"
 
-#: src/ui_viewDialog.h:2324
+#: src/ui_viewDialog.h:2338
 msgid "Markings"
 msgstr "Jelölések"
 
-#: src/ui_viewDialog.h:2326
+#: src/ui_viewDialog.h:2340
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:445
 msgid "Landscape"
 msgstr "Tájkép"
 
-#: src/ui_viewDialog.h:2328
+#: src/ui_viewDialog.h:2342
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:229
 msgid "Starlore"
 msgstr "Csillaghagyomány"
@@ -6538,7 +6538,7 @@ msgstr "RA/deklináció (megadott dátumra)"
 
 #: src/ui_configurationDialog.h:1258
 msgid "Supergalactic coordinates"
-msgstr ""
+msgstr "Szupergalaktikus koordináták"
 
 #: src/ui_configurationDialog.h:1260
 msgid "The type of the object (star, planet, etc.)"
@@ -6621,7 +6621,7 @@ msgstr "Vizuális magnitúdó"
 #: src/ui_configurationDialog.h:1298
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
 msgid "3-letter IAU constellation abbreviation"
-msgstr ""
+msgstr "Hárombetűs IAU csillagkép-rövidítés"
 
 #: src/ui_configurationDialog.h:1300
 msgid "Constellation"
@@ -7235,15 +7235,15 @@ msgstr ""
 
 #: src/ui_dsoColorsDialog.h:476 src/ui_orbitColorsDialog.h:366
 msgid "Color settings"
-msgstr ""
+msgstr "Színbeállítások"
 
 #: src/ui_dsoColorsDialog.h:478
 msgid "Colors of labels and markers of deep-sky objects"
-msgstr ""
+msgstr "Mélyég-objektumok címke és jelölés színe"
 
 #: src/ui_dsoColorsDialog.h:480
 msgid "Color of markers of open star clusters"
-msgstr ""
+msgstr "Nyílt csillagcsoport jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:483
 msgid "Color of markers of BL Lac objects"
@@ -7251,15 +7251,15 @@ msgstr ""
 
 #: src/ui_dsoColorsDialog.h:487
 msgid "Color of markers of dark nebulae"
-msgstr ""
+msgstr "Sötét köd jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:491
 msgid "Color of markers of star clouds"
-msgstr ""
+msgstr "Csillagköd jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:494
 msgid "Color of markers of reflection nebulae"
-msgstr ""
+msgstr "Reflexiós köd jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:499
 msgid "Clusters with neb."
@@ -7267,19 +7267,19 @@ msgstr ""
 
 #: src/ui_dsoColorsDialog.h:502
 msgid "Color of markers of stars"
-msgstr ""
+msgstr "Csillagok jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:505
 msgid "Color of markers of nebulae"
-msgstr ""
+msgstr "Ködök  jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:509
 msgid "Color of markers of quasars"
-msgstr ""
+msgstr "Kvazárok  jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:512
 msgid "Color of markers of blazars"
-msgstr ""
+msgstr "Blazárok  jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:515
 msgid "Possible quasars"
@@ -7291,7 +7291,7 @@ msgstr ""
 
 #: src/ui_dsoColorsDialog.h:521
 msgid "Color of markers of interacting galaxies"
-msgstr ""
+msgstr "Közreható galaxisok  jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:524
 msgid "Markers of deep-sky objects"
@@ -7303,15 +7303,15 @@ msgstr ""
 
 #: src/ui_dsoColorsDialog.h:528
 msgid "Color of markers of possible quasars"
-msgstr ""
+msgstr "Lehetséges kvazárok  jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:531
 msgid "Color of markers of active galaxies"
-msgstr ""
+msgstr "Aktív galaxisok  jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:538
 msgid "Color of markers of globular star clusters"
-msgstr ""
+msgstr "Gömbhalmazok  jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:543 plugins/Quasars/src/Quasars.cpp:72
 #: plugins/Quasars/src/Quasars.cpp:169 plugins/Quasars/src/Quasars.cpp:170
@@ -7320,23 +7320,23 @@ msgstr "Kvazárok"
 
 #: src/ui_dsoColorsDialog.h:545
 msgid "Color of markers of galaxies"
-msgstr ""
+msgstr "Galaxisok  jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:548
 msgid "Color of markers of bipolar nebulae"
-msgstr ""
+msgstr "Bipoláris ködök  jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:552
 msgid "Color of markers of emission objects"
-msgstr ""
+msgstr "Emissziós objektumok  jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:555
 msgid "Color of markers of deep-sky objects"
-msgstr ""
+msgstr "Mélyég-objektumok  jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:558
 msgid "Labels of deep-sky objects"
-msgstr ""
+msgstr "Mélyég-objektumok címkéi"
 
 #: src/ui_dsoColorsDialog.h:560
 msgid "Labels of DSOs"
@@ -7344,11 +7344,11 @@ msgstr ""
 
 #: src/ui_dsoColorsDialog.h:562
 msgid "Color of labels of deep-sky objects"
-msgstr ""
+msgstr "Mélyég-objektumok címkéinek színe"
 
 #: src/ui_dsoColorsDialog.h:566
 msgid "Color of markers of interstellar matter"
-msgstr ""
+msgstr "Csillagközi anyag  jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:569
 msgid "Color of markers of stellar associations"
@@ -7356,15 +7356,15 @@ msgstr ""
 
 #: src/ui_dsoColorsDialog.h:574
 msgid "Color of markers of radio galaxies"
-msgstr ""
+msgstr "Rádiógalaxisok  jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:578
 msgid "Color of markers of star clusters"
-msgstr ""
+msgstr "Csillagcsoportok  jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:582
 msgid "Color of markers of planetary nebulae"
-msgstr ""
+msgstr "Planetáris ködök  jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:585
 msgid "Possible planetary nebulae"
@@ -7372,11 +7372,11 @@ msgstr "Lehetséges planetáris köd"
 
 #: src/ui_dsoColorsDialog.h:587
 msgid "Possible pl. nebulae"
-msgstr ""
+msgstr "Lehetséges planetáris köd"
 
 #: src/ui_dsoColorsDialog.h:589
 msgid "Color of markers of possible planetary nebulae"
-msgstr ""
+msgstr "Lehetséges planetáris köd  jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:591
 msgid "Protoplanetary nebulae"
@@ -7384,15 +7384,15 @@ msgstr "Planetáris köd"
 
 #: src/ui_dsoColorsDialog.h:593
 msgid "Color of markers of protoplanetary nebulae"
-msgstr ""
+msgstr "Protoplanetáris köd  jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:597
 msgid "Color of markers of emission nebulae"
-msgstr ""
+msgstr "Emissziós köd   jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:601
 msgid "Color of markers of hydrogen regions"
-msgstr ""
+msgstr "Hidrogén régiók   jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:603
 msgid "Molecular clouds"
@@ -7400,19 +7400,19 @@ msgstr "Molekulafelhők"
 
 #: src/ui_dsoColorsDialog.h:605
 msgid "Color of markers of molecular clouds"
-msgstr ""
+msgstr "Molekulafelhők   jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:610
 msgid "Young stellar objects"
-msgstr ""
+msgstr "Fiatal csillagobjektumok"
 
 #: src/ui_dsoColorsDialog.h:612
 msgid "Color of markers of young stellar objects"
-msgstr ""
+msgstr "Fiatal csillagobjektumok jelölésének színe"
 
 #: src/ui_dsoColorsDialog.h:616
 msgid "Color of markers of supernova remnants"
-msgstr ""
+msgstr "Szupernova maradványok  jelölésének színe"
 
 #: src/ui_orbitColorsDialog.h:368
 msgid "Style of orbit colors"
@@ -7420,163 +7420,163 @@ msgstr ""
 
 #: src/ui_orbitColorsDialog.h:369
 msgid "One color for all orbits"
-msgstr ""
+msgstr "Minden pályának azonos szín"
 
 #: src/ui_orbitColorsDialog.h:370
 msgid "Separate colors for orbits by object type"
-msgstr ""
+msgstr "Objektum típusától függő pálya-szín"
 
 #: src/ui_orbitColorsDialog.h:371
 msgid "Separate colors for orbits of major planets only"
-msgstr ""
+msgstr "Csak a főbb bolygók pályájának eltérő szín"
 
 #: src/ui_orbitColorsDialog.h:372
 msgid "Colors of orbits of Solar system bodies"
-msgstr ""
+msgstr "A Naprendszer objektumai pályájának színe"
 
 #: src/ui_orbitColorsDialog.h:374
 msgid "Color of comet orbits"
-msgstr ""
+msgstr "Üstökösök pályáinak színe"
 
 #: src/ui_orbitColorsDialog.h:376
 msgid "Orbit of Uranus"
-msgstr ""
+msgstr "Az Uránusz pályája"
 
 #: src/ui_orbitColorsDialog.h:377
 msgid "Orbit of Mars"
-msgstr ""
+msgstr "A Mars pályája"
 
 #: src/ui_orbitColorsDialog.h:379
 msgid "Color of Neptune orbit"
-msgstr ""
+msgstr "A Neptunusz pályájának színe"
 
 #: src/ui_orbitColorsDialog.h:382
 msgid "Color of planet moon orbits"
-msgstr ""
+msgstr "A holdak pályájának színe"
 
 #: src/ui_orbitColorsDialog.h:385
 msgid "Color of generic orbit"
-msgstr ""
+msgstr "Pálya színe általában"
 
 #: src/ui_orbitColorsDialog.h:387
 msgid "Orbit of Mercury"
-msgstr ""
+msgstr "A Merkúr pályája"
 
 #: src/ui_orbitColorsDialog.h:389
 msgid "Color of major planet orbits"
-msgstr ""
+msgstr "A főbb bolygók pályájának színe"
 
 #: src/ui_orbitColorsDialog.h:391
 msgid "Orbits of major planets"
-msgstr ""
+msgstr "A főbb bolygók pályái"
 
 #: src/ui_orbitColorsDialog.h:393
 msgid "Color of Saturn orbit"
-msgstr ""
+msgstr "A Szaturnusz pályájának színe"
 
 #: src/ui_orbitColorsDialog.h:395
 msgid "Orbit of Jupiter"
-msgstr ""
+msgstr "A Jupiter pályája"
 
 #: src/ui_orbitColorsDialog.h:399
 msgid "Orbit of Neptune"
-msgstr ""
+msgstr "A Neptunusz pályája"
 
 #: src/ui_orbitColorsDialog.h:400
 msgid "Orbits of moons of planets"
-msgstr ""
+msgstr "A bolygók holdjainak pályái"
 
 #: src/ui_orbitColorsDialog.h:402
 msgid "Color of cubewano orbits"
-msgstr ""
+msgstr "Kubevanó objektumok pályáinak színe"
 
 #: src/ui_orbitColorsDialog.h:405
 msgid "Color of Venus orbit"
-msgstr ""
+msgstr "A Vénusz pályájának színe"
 
 #: src/ui_orbitColorsDialog.h:408
 msgid "Color of minor planet orbits"
-msgstr ""
+msgstr "Kisbolygók pályáinak színe"
 
 #: src/ui_orbitColorsDialog.h:411
 msgid "Color of scattered disk object orbits"
-msgstr ""
+msgstr "Szórt korong objektumok pályáinak színe"
 
 #: src/ui_orbitColorsDialog.h:416
 msgid "Orbit of Saturn"
-msgstr ""
+msgstr "A Szaturnusz pályája"
 
 #: src/ui_orbitColorsDialog.h:418
 msgid "Color of Uranus orbit"
-msgstr ""
+msgstr "Az Uránusz pályája"
 
 #: src/ui_orbitColorsDialog.h:421
 msgid "Color of Earth orbit"
-msgstr ""
+msgstr "A Föld pályájának színe"
 
 #: src/ui_orbitColorsDialog.h:423
 msgid "Orbit of Earth"
-msgstr ""
+msgstr "A Föld pályája"
 
 #: src/ui_orbitColorsDialog.h:425
 msgid "Color of dwarf planet orbits"
-msgstr ""
+msgstr "Törpebolygók pályáinak színe"
 
 #: src/ui_orbitColorsDialog.h:427
 msgid "Orbits of comets"
-msgstr ""
+msgstr "Üstökösök pályái"
 
 #: src/ui_orbitColorsDialog.h:428
 msgid "Orbits of dwarf planets"
-msgstr ""
+msgstr "Törpebolygók pályái"
 
 #: src/ui_orbitColorsDialog.h:430
 msgid "Color of Mercury orbit"
-msgstr ""
+msgstr "A Merkúr pályájának színe"
 
 #: src/ui_orbitColorsDialog.h:432
 msgid "Orbits of plutinos"
-msgstr ""
+msgstr "A plutinók pályái"
 
 #: src/ui_orbitColorsDialog.h:433
 msgid "Orbits of scattered disk objects"
-msgstr ""
+msgstr "A szórt korong objektumainak pályái"
 
 #: src/ui_orbitColorsDialog.h:437
 msgid "Generic orbit"
-msgstr ""
+msgstr "Pálya általában"
 
 #: src/ui_orbitColorsDialog.h:438
 msgid "Orbits of cubewanos"
-msgstr ""
+msgstr "A kubevanók pályái"
 
 #: src/ui_orbitColorsDialog.h:440
 msgid "Color of Mars orbit"
-msgstr ""
+msgstr "A Mars pályájának színe"
 
 #: src/ui_orbitColorsDialog.h:443
 msgid "Color of Jupiter orbit"
-msgstr ""
+msgstr "A Jupiter pályájának színe"
 
 #: src/ui_orbitColorsDialog.h:445
 msgid "Orbit of Venus"
-msgstr ""
+msgstr "A Vénusz pályája"
 
 #: src/ui_orbitColorsDialog.h:447
 msgid "Color of plutino orbits"
-msgstr ""
+msgstr "A plutinók pályáinak színe"
 
 #: src/ui_orbitColorsDialog.h:452
 msgid "Orbits of minor planets"
-msgstr ""
+msgstr "Kisbolygók pályái"
 
 #: src/ui_orbitColorsDialog.h:453
 msgid "Orbits of Oort cloud objects"
-msgstr ""
+msgstr "Az Oort-felhő objektumainak pályái"
 
 #: src/ui_orbitColorsDialog.h:455
 msgid "Color of Oort cloud object orbits"
-msgstr ""
+msgstr "Az Oort-felhő objektumai pályáinak színe"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:138
@@ -8662,12 +8662,12 @@ msgstr "Kína első űrállomása"
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1818
 msgid "The russian space radio telescope RadioAstron"
-msgstr ""
+msgstr "Ragyioasztron orosz csillagászati műhold"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1820
 msgid "International Gamma-Ray Astrophysics Laboratory"
-msgstr ""
+msgstr "International Gamma-Ray Astrophysics Laboratory"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1822
@@ -8761,7 +8761,7 @@ msgstr "A Nap visszaverődési szöge: %1%2"
 #: plugins/Satellites/src/Satellite.cpp:338
 #, qt-format
 msgid "Operational status: %1"
-msgstr ""
+msgstr "Működési állapot: %1"
 
 #: plugins/Satellites/src/Satellite.cpp:345
 msgid "The satellite and the observer are in sunlight."
@@ -14170,7 +14170,7 @@ msgstr "Bővítmény gombja az eszköztáron"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:291
 msgid "Show IAU constellation code"
-msgstr ""
+msgstr "IAU csillagkép rövidítések"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:293
 msgid "Which coordinate system will be used for displaying"
@@ -16538,6 +16538,3 @@ msgstr ""
 
 #~ msgid "Show Solar System objects"
 #~ msgstr "Naprendszerbeli objektumok mutatása"
-
-#~ msgid "Colors settings"
-#~ msgstr "Színek beállítása"
