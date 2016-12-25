@@ -11,20 +11,20 @@ LanguageID=$0407
 LanguageCodePage=1252
 
 [CustomMessages]
-ForAllUsers=FÃ¼r alle Benutzer
-ForCurrentUserOnly=Nur fÃ¼r den aktuellen Benutzer
-RemoveFromPreviousInstallation=Dateien frÃ¼herer Installationen entfernen:
+ForAllUsers=Für alle Benutzer
+ForCurrentUserOnly=Nur für den aktuellen Benutzer
+RemoveFromPreviousInstallation=Dateien früherer Installationen entfernen:
 RemoveMainConfig=Entferne Haupt-Konfigurationsdatei
 RemovePluginsConfig=Entferne Plugin-Konfigurationsdateien
 RemoveSolarConfig=Entferne Sonnensystem-Datei
-RemoveUILandscapes=LÃ¶sche benutzer-installierte Landschaften
-RemoveShortcutsConfig=LÃ¶sche TastaturkÃ¼rzel
-RemoveCache=LÃ¶sche Cache-Dateien
+RemoveUILandscapes=Lösche benutzer-installierte Landschaften
+RemoveShortcutsConfig=Lösche Tastaturkürzel
+RemoveCache=Lösche Cache-Dateien
 UserGuide=Stellarium User Guide (englisch)
 DevelopersDocsOnTheWeb=Stellarium Entwickler-Dokumentation am Web
 LastRunLog=Logfile des letzten Durchlaufs
 OutputDataFile=Ausgabe-Datei
-ChangeLog=Change log (Ã„nderungsprotokoll)
+ChangeLog=Change log (Änderungsprotokoll)
 FallbackMode=(Fallback-Modus)
 AngleMode=(ANGLE-Modus)
 AngleD3D9Mode=(ANGLE Direct3D 9 Modus)
