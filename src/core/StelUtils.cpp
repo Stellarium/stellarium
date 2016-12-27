@@ -163,7 +163,7 @@ QString getOperatingSystemInfo()
 			OS = "Mac OS X 10.11 series";
 			break;
 		#endif
-		#if QT_VERSION >= 0x050700
+		#if QT_VERSION >= 0x050600
 		case QSysInfo::MV_SIERRA:
 			OS = "Mac OS X 10.12 series";
 			break;
