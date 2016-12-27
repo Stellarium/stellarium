@@ -69,7 +69,12 @@ QString getUserAgentString()
 	if (platform.contains("OpenBSD"))
 		platform = "OpenBSD";
 
-	// Set user agent as "Stellarium/$version$ ($platform$)"
+	// Set user agent as "Stellarium/$version$ ($platform$; $CPU architecture$)"
+	#if QT_VERSION >= 0x050400
+	// TODO: Remove #ifdef when Qt 5.4 will set as minimal
+	platform.append("; " + QSysInfo::currentCpuArchitecture());
+	#endif
+
 	return QString("Stellarium/%1 (%2)").arg(StelUtils::getApplicationVersion()).arg(platform);
 }
 
@@ -156,6 +161,11 @@ QString getOperatingSystemInfo()
 		#if QT_VERSION >= 0x050500
 		case QSysInfo::MV_ELCAPITAN:
 			OS = "Mac OS X 10.11 series";
+			break;
+		#endif
+		#if QT_VERSION >= 0x050700
+		case QSysInfo::MV_SIERRA:
+			OS = "Mac OS X 10.12 series";
 			break;
 		#endif
 		default:
