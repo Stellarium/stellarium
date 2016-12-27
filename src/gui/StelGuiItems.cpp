@@ -639,35 +639,32 @@ void BottomStelBar::updateText(bool updatePos)
 	if (tzName.contains("LTST"))
 		currTZ = q_("Local True Solar Time");
 
-	if (datetime->text()!=newDateInfo)
+	updatePos = true;
+	datetime->setText(newDateInfo);
+	if (core->getCurrentDeltaTAlgorithm()!=StelCore::WithoutCorrection)
 	{
-		updatePos = true;		
-		datetime->setText(newDateInfo);
-		if (core->getCurrentDeltaTAlgorithm()!=StelCore::WithoutCorrection)
-		{
-			if (sigma>0)
-				sigmaInfo = QString("; %1(%2T) = %3s").arg(QChar(0x03c3)).arg(QChar(0x0394)).arg(sigma, 3, 'f', 1);
+		if (sigma>0)
+			sigmaInfo = QString("; %1(%2T) = %3s").arg(QChar(0x03c3)).arg(QChar(0x0394)).arg(sigma, 3, 'f', 1);
 
-			QString deltaTInfo = "";
-			if (qAbs(deltaT)>60.)
-				deltaTInfo = QString("%1 (%2s)%3").arg(StelUtils::hoursToHmsStr(deltaT/3600.)).arg(deltaT, 5, 'f', 2).arg(validRangeMarker);
-			else
-				deltaTInfo = QString("%1s%2").arg(deltaT, 3, 'f', 3).arg(validRangeMarker);
-
-			float ndot = -23.8946f;
-			if (core->de430IsActive() || core->de431IsActive())
-				ndot = -25.8f;
-
-			datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n-dot @ %3\"/cy%4%5]<br>%6<br>%7</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QString::number(ndot, 'f', 4)).arg(QChar(0x00B2)).arg(sigmaInfo).arg(newDateAppx).arg(currTZ));
-		}
+		QString deltaTInfo = "";
+		if (qAbs(deltaT)>60.)
+			deltaTInfo = QString("%1 (%2s)%3").arg(StelUtils::hoursToHmsStr(deltaT/3600.)).arg(deltaT, 5, 'f', 2).arg(validRangeMarker);
 		else
-			datetime->setToolTip(QString("<p style='white-space:pre'>%1<br>%2</p>").arg(newDateAppx).arg(currTZ));
+			deltaTInfo = QString("%1s%2").arg(deltaT, 3, 'f', 3).arg(validRangeMarker);
 
-		if (qApp->property("text_texture")==true) // CLI option -t given?
-		{
-			datetime->setVisible(false); // hide normal thingy.
-			datetimePixmap->setPixmap(getTextPixmap(newDateInfo, datetime->font()));
-		}
+		float ndot = -23.8946f;
+		if (core->de430IsActive() || core->de431IsActive())
+			ndot = -25.8f;
+
+		datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n-dot @ %3\"/cy%4%5]<br>%6<br>%7</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QString::number(ndot, 'f', 4)).arg(QChar(0x00B2)).arg(sigmaInfo).arg(newDateAppx).arg(currTZ));
+	}
+	else
+		datetime->setToolTip(QString("<p style='white-space:pre'>%1<br>%2</p>").arg(newDateAppx).arg(currTZ));
+
+	if (qApp->property("text_texture")==true) // CLI option -t given?
+	{
+		datetime->setVisible(false); // hide normal thingy.
+		datetimePixmap->setPixmap(getTextPixmap(newDateInfo, datetime->font()));
 	}
 
 	// build location tooltip
