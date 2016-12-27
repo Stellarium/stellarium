@@ -454,6 +454,9 @@ public slots:
 	bool getUseDST() const;
 	void setUseDST(const bool b);
 
+	bool getUseCustomTimeZone(void) const;
+	void setUseCustomTimeZone(const bool b);
+
 	//! Set the current date in Modified Julian Day (UT).
 	//! MJD is simply JD-2400000.5, getting rid of large numbers and starting days at midnight.
 	//! It is mostly used in satellite contexts.
@@ -767,8 +770,9 @@ private:
 	double milliSecondsOfLastJDUpdate;    // Time in seconds when the time rate or time last changed
 	double jdOfLastJDUpdate;         // JD when the time rate or time last changed
 
-	QString currentTimeZone;
+	QString currentTimeZone;	
 	bool flagUseDST;
+	bool flagUseCTZ; // custom time zone
 
 	// Variables for custom equation of Delta-T
 	Vec3f deltaTCustomEquationCoeff;

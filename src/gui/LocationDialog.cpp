@@ -528,9 +528,13 @@ void LocationDialog::setPositionFromCoords(int )
 void LocationDialog::saveTimeZone()
 {
 	QString tz = ui->timeZoneNameComboBox->itemData(ui->timeZoneNameComboBox->currentIndex()).toString();
-	StelApp::getInstance().getCore()->setCurrentTimeZone(tz);
+	StelCore* core = StelApp::getInstance().getCore();
+	core->setCurrentTimeZone(tz);
 	if (ui->useCustomTimeZoneCheckBox->isChecked())
+	{
 		StelApp::getInstance().getSettings()->setValue("localization/time_zone", tz);
+		core->setUseCustomTimeZone(true);
+	}
 }
 
 void LocationDialog::reportEdit()
@@ -635,7 +639,8 @@ void LocationDialog::updateTimeZoneControls(bool useCustomTimeZone)
 	}
 	else
 	{
-		StelLocation loc = StelApp::getInstance().getCore()->getCurrentLocation();
+		StelCore* core = StelApp::getInstance().getCore();
+		StelLocation loc = core->getCurrentLocation();
 		QString tz = loc.timeZone;
 		if (loc.planetName=="Earth" && tz.isEmpty())
 			tz = "system_default";
@@ -650,6 +655,7 @@ void LocationDialog::updateTimeZoneControls(bool useCustomTimeZone)
 		}
 		ui->timeZoneNameComboBox->setCurrentIndex(idx);
 		StelApp::getInstance().getSettings()->remove("localization/time_zone");
+		core->setUseCustomTimeZone(false);
 	}
 
 	ui->timeZoneNameComboBox->setEnabled(useCustomTimeZone);	
