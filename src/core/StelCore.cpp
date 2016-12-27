@@ -84,6 +84,7 @@ StelCore::StelCore()
 	, milliSecondsOfLastJDUpdate(0.)
 	, jdOfLastJDUpdate(0.)
 	, flagUseDST(true)
+	, flagUseCTZ(false)
 	, deltaTCustomNDot(-26.0)
 	, deltaTCustomYear(1820.0)
 	, de430Available(false)
@@ -177,7 +178,12 @@ void StelCore::init()
 	}
 	position = new StelObserver(location);
 
-	setCurrentTimeZone(conf->value("localization/time_zone", getCurrentLocation().timeZone).toString());
+	QString ctz = conf->value("localization/time_zone", "").toString();
+	if (!ctz.isEmpty())
+		setUseCustomTimeZone(true);
+	else
+		ctz = getCurrentLocation().timeZone;
+	setCurrentTimeZone(ctz);
 
 	// Delta-T stuff
 	// Define default algorithm for time correction (Delta T)
@@ -1206,7 +1212,7 @@ float StelCore::getUTCOffset(const double JD) const
 	else
 	{
 		// The first adoption of a standard time was on December 1, 1847 in Great Britain
-		if (tz->isValid() && loc.planetName=="Earth" && JD>=StelCore::TZ_ERA_BEGINNING)
+		if (tz->isValid() && loc.planetName=="Earth" && (JD>=StelCore::TZ_ERA_BEGINNING || getUseCustomTimeZone()))
 		{
 			if (getUseDST())
 				shiftInSeconds = tz->offsetFromUtc(universal);
@@ -1244,6 +1250,16 @@ void StelCore::setUseDST(const bool b)
 {
 	flagUseDST = b;
 	StelApp::getInstance().getSettings()->setValue("localization/flag_dst", b);
+}
+
+bool StelCore::getUseCustomTimeZone() const
+{
+	return flagUseCTZ;
+}
+
+void StelCore::setUseCustomTimeZone(const bool b)
+{
+	flagUseCTZ = b;
 }
 
 double StelCore::getSolutionEquationOfTime(const double JDE) const
