@@ -1309,6 +1309,12 @@ QString hoursToHmsStr(const double hours)
 //  1625.0=1625-jan-0.5=2314579.0
 */
 
+double getDeltaTwithoutCorrection(const double jDay)
+{
+	Q_UNUSED(jDay)
+	return 0.;
+}
+
 // Implementation of algorithm by Espenak & Meeus (2006) for DeltaT computation
 double getDeltaTByEspenakMeeus(const double jDay)
 {

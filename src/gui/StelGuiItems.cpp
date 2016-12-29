@@ -51,7 +51,7 @@
 #include <QSettings>
 
 // Inspired by text-use-opengl-buffer branch: work around font problems in GUI buttons.
-// May be useful in other broken OpenGL font situations. RasPi necessity as of 2016-03-26.
+// May be useful in other broken OpenGL font situations. RasPi necessity as of 2016-03-26. Mesa 13 (2016-11) has finally fixed this on RasPi(VC4).
 QPixmap getTextPixmap(const QString& str, QFont font)
 {
 	// Render the text str into a QPixmap.
@@ -652,9 +652,8 @@ void BottomStelBar::updateText(bool updatePos)
 		else
 			deltaTInfo = QString("%1s%2").arg(deltaT, 3, 'f', 3).arg(validRangeMarker);
 
-		float ndot = -23.8946f;
-		if (core->de430IsActive() || core->de431IsActive())
-			ndot = -25.8f;
+		// the corrective ndot of course must be set according to the currently used DeltaT algorithm!
+		float ndot=core->getDeltaTnDot();
 
 		datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n-dot @ %3\"/cy%4%5]<br>%6<br>%7</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QString::number(ndot, 'f', 4)).arg(QChar(0x00B2)).arg(sigmaInfo).arg(newDateAppx).arg(currTZ));
 	}
