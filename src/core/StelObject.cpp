@@ -271,7 +271,7 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		res += q_("IAU Constellation: %1").arg(constel) + "<br>";
 	}
 
-	if ((flags&Extra) && (currentPlanet=="Earth"))
+	if ((flags&SiderealTime) && (currentPlanet=="Earth"))
 	{
 		double longitude=core->getCurrentLocation().longitude;
 		double sidereal=(get_mean_sidereal_time(core->getJD(), core->getJDE())  + longitude) / 15.;
