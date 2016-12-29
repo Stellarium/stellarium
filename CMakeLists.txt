@@ -286,7 +286,6 @@ ADD_PLUGIN(Oculars 1)
 ADD_PLUGIN(PointerCoordinates 1)
 ADD_PLUGIN(Pulsars 1)
 ADD_PLUGIN(Quasars 1)
-# SOCIS 2015:
 IF(ENABLE_SCRIPTING)
      ADD_PLUGIN(RemoteControl 1)
 ENDIF()
