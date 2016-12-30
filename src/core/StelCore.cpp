@@ -90,6 +90,8 @@ StelCore::StelCore()
 	, deltaTnDot(-26.0)
 	, deltaTdontUseMoon(false)
 	, deltaTfunc(StelUtils::getDeltaTByEspenakMeeus)
+	, deltaTstart(-1999)
+	, deltaTfinish(3000)
 	, de430Available(false)
 	, de431Available(false)
 	, de430Active(false)
@@ -1810,115 +1812,164 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			deltaTfunc = StelUtils::getDeltaTwithoutCorrection;
 			deltaTnDot = -26.0; // n.dot = -26.0"/cy/cy OR WHAT SHALL WE DO HERE?
 			deltaTdontUseMoon = true;
+			deltaTstart	= MININT;
+			deltaTfinish	= MAXINT;
 			break;
 		case Schoch:
 			// Schoch (1931) algorithm for DeltaT
 			deltaTnDot = -29.68; // n.dot = -29.68"/cy/cy
 			deltaTfunc = StelUtils::getDeltaTBySchoch;
+			deltaTstart	= MININT;
+			deltaTfinish	= MAXINT;
 			break;
 		case Clemence:
 			// Clemence (1948) algorithm for DeltaT
 			deltaTnDot = -22.44; // n.dot = -22.44 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByClemence;
+			deltaTstart	= 1681;
+			deltaTfinish	= 1900;
 			break;
 		case IAU:
 			// IAU (1952) algorithm for DeltaT, based on observations by Spencer Jones (1939)
 			deltaTnDot = -22.44; // n.dot = -22.44 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByIAU;
+			deltaTstart	= 1681;
+			deltaTfinish	= 1936; // Details in http://adsabs.harvard.edu/abs/1939MNRAS..99..541S
 			break;
 		case AstronomicalEphemeris:
 			// Astronomical Ephemeris (1960) algorithm for DeltaT
 			deltaTnDot = -22.44; // n.dot = -22.44 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByAstronomicalEphemeris;
+			// GZ: What is the source of "1681..1900"? Expl.Suppl.AE 1961-p87 says "...over periods extending back to ancient times"
+			// I changed to what I estimate.
+			deltaTstart	= -500; // 1681;
+			deltaTfinish	=  2000; // 1900;
 			break;
 		case TuckermanGoldstine:
 			// Tuckerman (1962, 1964) & Goldstine (1973) algorithm for DeltaT
 			//FIXME: n.dot
 			deltaTnDot = -22.44; // n.dot = -22.44 "/cy/cy ???
 			deltaTfunc = StelUtils::getDeltaTByTuckermanGoldstine;
+			deltaTstart	= -600;
+			deltaTfinish	= 1649;
 			break;
 		case MullerStephenson:
 			// Muller & Stephenson (1975) algorithm for DeltaT
 			deltaTnDot = -37.5; // n.dot = -37.5 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByMullerStephenson;
+			deltaTstart	= -1375;
+			deltaTfinish	= 1975;
 			break;
 		case Stephenson1978:
 			// Stephenson (1978) algorithm for DeltaT
 			deltaTnDot = -30.0; // n.dot = -30.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByStephenson1978;
+			deltaTstart	= MININT; // Range unknown!
+			deltaTfinish	= MAXINT;
 			break;
 		case SchmadelZech1979:
 			// Schmadel & Zech (1979) algorithm for DeltaT
 			deltaTnDot = -23.8946; // n.dot = -23.8946 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTBySchmadelZech1979;
+			deltaTstart	= 1800;
+			deltaTfinish	= 1975;
 			break;
 		case MorrisonStephenson1982:
 			// Morrison & Stephenson (1982) algorithm for DeltaT (used by RedShift)
 			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByMorrisonStephenson1982;
+			// FIXME: This is correct valid range?
+			deltaTstart	= -4000;
+			deltaTfinish	= 2800;
 			break;
 		case StephensonMorrison1984:
 			// Stephenson & Morrison (1984) algorithm for DeltaT
 			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByStephensonMorrison1984;
+			deltaTstart	= -391;
+			deltaTfinish	= 1600;
 			break;
 		case StephensonHoulden:
-			// Stephenson & Houlden (1986) algorithm for DeltaT
+			// Stephenson & Houlden (1986) algorithm for DeltaT. The limits are implicitly given by the tabulated values.
 			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByStephensonHoulden;
+			deltaTstart	= -600;
+			deltaTfinish	= 1650;
 			break;
 		case Espenak:
 			// Espenak (1987, 1989) algorithm for DeltaT
 			//FIXME: n.dot
 			deltaTnDot = -23.8946; // n.dot = -23.8946 "/cy/cy ???
 			deltaTfunc = StelUtils::getDeltaTByEspenak;
+			deltaTstart	= 1950;
+			deltaTfinish	= 2100;
 			break;
 		case Borkowski:
 			// Borkowski (1988) algorithm for DeltaT, relates to ELP2000-85!
 			deltaTnDot = -23.895; // GZ: I see -23.895 in the paper, not -23.859; (?) // n.dot = -23.859 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByBorkowski;
+			deltaTstart	= -2136;
+			deltaTfinish	= 1715;
 			break;
 		case SchmadelZech1988:
 			// Schmadel & Zech (1988) algorithm for DeltaT
 			//FIXME: n.dot
 			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy ???
 			deltaTfunc = StelUtils::getDeltaTBySchmadelZech1988;
+			deltaTstart	= 1800;
+			deltaTfinish	= 1988;
 			break;
 		case ChaprontTouze:
 			// Chapront-Touzé & Chapront (1991) algorithm for DeltaT
 			deltaTnDot = -23.8946; // n.dot = -23.8946 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByChaprontTouze;
+			// FIXME: Is it valid range?
+			deltaTstart	= -4000;
+			deltaTfinish	= 8000;
 			break;
 		case StephensonMorrison1995:
 			// Stephenson & Morrison (1995) algorithm for DeltaT
 			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByStephensonMorrison1995;
+			deltaTstart	= -700;
+			deltaTfinish	= 1600;
 			break;
 		case Stephenson1997:
 			// Stephenson (1997) algorithm for DeltaT
 			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByStephenson1997;
+			deltaTstart	= -500;
+			deltaTfinish	= 1600;
 			break;
 		case ChaprontMeeus:
 			// Chapront, Chapront-Touze & Francou (1997) & Meeus (1998) algorithm for DeltaT
 			deltaTnDot = -25.7376; // n.dot = -25.7376 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByChaprontMeeus;
+			deltaTstart	= -400; // 1800; // not explicitly given, but guess based on his using ChaprontFrancou which is cited elsewhere in a similar term with -391.
+			deltaTfinish	=  2150; // 1997;
 			break;
 		case JPLHorizons:
 			// JPL Horizons algorithm for DeltaT
 			deltaTnDot = -25.7376; // n.dot = -25.7376 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByJPLHorizons;
+			deltaTstart	= -2999;
+			deltaTfinish	= 1620;
 			break;
 		case MeeusSimons:
 			// Meeus & Simons (2000) algorithm for DeltaT
 			deltaTnDot = -25.7376; // n.dot = -25.7376 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByMeeusSimons;
+			deltaTstart	= 1620;
+			deltaTfinish	= 2000;
 			break;
 		case ReingoldDershowitz:
 			// Reingold & Dershowitz (2002, 2007) algorithm for DeltaT
 			// FIXME: n.dot
 			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy ???
 			deltaTfunc = StelUtils::getDeltaTByReingoldDershowitz;
+			// GZ: while not original work, it's based on Meeus and therefore the full implementation covers likewise approximately:
+			deltaTstart	= -400; //1620;
+			deltaTfinish	= 2100; //2019;
 			break;
 		case MontenbruckPfleger:
 			// Montenbruck & Pfleger (2000) algorithm for DeltaT
@@ -1926,21 +1977,29 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			// FIXME: n.dot
 			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy ???
 			deltaTfunc = StelUtils::getDeltaTByMontenbruckPfleger;
+			deltaTstart	= 1825;
+			deltaTfinish	= 2005;
 			break;
 		case MorrisonStephenson2004:
 			// Morrison & Stephenson (2004, 2005) algorithm for DeltaT
 			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByMorrisonStephenson2004;
+			deltaTstart	= -1000;
+			deltaTfinish	= 2000;
 			break;
 		case Reijs:
 			// Reijs (2006) algorithm for DeltaT
 			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByReijs;
+			deltaTstart	= -1500; // -500; // GZ: It models long-term variability, so we should reflect this. Not sure on the begin, though.
+			deltaTfinish	= 1100; // not 1620; // GZ: Not applicable for telescopic era, and better not after 1100 (pers.comm.)
 			break;
 		case EspenakMeeus:
 			// Espenak & Meeus (2006) algorithm for DeltaT
 			deltaTnDot = -25.858; // n.dot = -25.858 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByEspenakMeeus;
+			deltaTstart	= -1999;
+			deltaTfinish	= 3000;
 			break;
 		case EspenakMeeusZeroMoonAccel:
 			// This is a trying area. Something is wrong with DeltaT, maybe ndot is still not applied correctly.
@@ -1948,32 +2007,44 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			deltaTnDot = -25.858; // n.dot = -25.858 "/cy/cy
 			deltaTdontUseMoon = true;
 			deltaTfunc = StelUtils::getDeltaTByEspenakMeeus;
+			deltaTstart	= -1999;
+			deltaTfinish	= 3000;
 			break;
 		case Banjevic:
 			// Banjevic (2006) algorithm for DeltaT
 			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByBanjevic;
+			deltaTstart	= -2020;
+			deltaTfinish	= 1620;
 			break;
 		case IslamSadiqQureshi:
 			// Islam, Sadiq & Qureshi (2008 + revisited 2013) algorithm for DeltaT (6 polynomials)
 			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByIslamSadiqQureshi;
 			deltaTdontUseMoon = true; // Seems this solutions doesn't use value of secular acceleration of the Moon
+			deltaTstart	= 1620;
+			deltaTfinish	= 2007;
 			break;
 		case KhalidSultanaZaidi:
 			// M. Khalid, Mariam Sultana and Faheem Zaidi polinomial approximation of time period 1620-2013 (2014)
 			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByKhalidSultanaZaidi;
 			deltaTdontUseMoon = true; // Seems this solutions doesn't use value of secular acceleration of the Moon
+			deltaTstart	= 1620;
+			deltaTfinish	= 2013;
 			break;
 		case Custom:
 			// User defined coefficients for quadratic equation for DeltaT. These can change, and we don't use the function pointer here.
 			deltaTnDot = deltaTCustomNDot; // n.dot = custom value "/cy/cy
 			deltaTfunc=NULL;
+			deltaTstart	= MININT; // Range unknown!
+			deltaTfinish	= MAXINT;
 			break;
 		default:
 			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc=NULL;
+			deltaTstart	= MININT; // Range unknown!
+			deltaTfinish	= MAXINT;
 			qCritical() << "StelCore: unknown DeltaT algorithm selected (" << currentDeltaTAlgorithm << ")! (setting nDot=-26., but no function!!)";
 	}
 	Q_ASSERT((currentDeltaTAlgorithm==Custom) || (deltaTfunc!=NULL));
@@ -2115,154 +2186,67 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRangeDescription(const double JD
 	QString validRangeAppendix = "";
 	*marker = "";
 	int year, month, day;
-	int start = 0;
-	int finish = 0;
+
 	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
-	switch (getCurrentDeltaTAlgorithm())
+	switch (currentDeltaTAlgorithm)
 	{
-		case WithoutCorrection:
-			// say nothing
-			break;
-		case Schoch:
-			// Valid range unknown
-			break;
-		case Clemence:
-			start	= 1681;
-			finish	= 1900;
-			break;
-		case IAU:
-			start	= 1681;
-			finish	= 1936; // Details in http://adsabs.harvard.edu/abs/1939MNRAS..99..541S
-			break;
-		case AstronomicalEphemeris:
-			// GZ: What is the source of "1681..1900"? Expl.Suppl.AE 1961-p87 says "...over periods extending back to ancient times"
-			// I changed to what I estimate.
-			start	= -500; // 1681;
-			finish	=  2000; // 1900;
-			break;
-		case TuckermanGoldstine:
-			start	= -600;
-			finish	= 1649;
-			break;
-		case MullerStephenson:
-			start	= -1375;
-			finish	= 1975;
-			break;
-		case Stephenson1978:
-			// Valid range unknown
+		case WithoutCorrection:      // and
+		case Schoch:                 // and
+		case Clemence:               // and
+		case IAU:                    // and
+		case AstronomicalEphemeris:  // and
+		case TuckermanGoldstine:     // and
+		case StephensonHoulden:      // and
+		case MullerStephenson:       // and
+		case Stephenson1978:         // and
+		case MorrisonStephenson1982: // and
+		case StephensonMorrison1984: // and
+		case Espenak:                // and
+		case Borkowski:              // and
+		case StephensonMorrison1995: // and
+		case Stephenson1997:         // and
+		case ChaprontMeeus:          // and
+		case ReingoldDershowitz:     // and
+		case MorrisonStephenson2004: // and
+		case Reijs:                  // and
+		case EspenakMeeus: // the default, range stated in the Canon, p. 14.  ... and
+		case EspenakMeeusZeroMoonAccel:
 			break;
 		case SchmadelZech1979:
-			start	= 1800;
-			finish	= 1975;
 			validRangeAppendix = q_("with meaningless values outside this range");
 			break;
-		case MorrisonStephenson1982:
-			// FIXME: This is correct valid range?
-			start	= -4000;
-			finish	= 2800;
-			break;
-		case StephensonMorrison1984:
-			start	= -391;
-			finish	= 1600;
-			break;
-		case StephensonHoulden:
-			start	= -600;
-			finish	= 1600;
-			break;
-		case Espenak:
-			start	= 1950;
-			finish	= 2100;
-			break;
-		case Borkowski:
-			start	= -2136;
-			finish	= 1715;
-			break;
 		case SchmadelZech1988:
-			start	= 1800;
-			finish	= 1988;
 			validRangeAppendix = q_("with a mean error of less than one second, max. error 1.9s, and meaningless values outside this range");
 			break;
-		case ChaprontTouze:
-			// FIXME: Is it valid range?
-			start	= -4000;
-			finish	= 8000;
-			break;
-		case StephensonMorrison1995:
-			start	= -700;
-			finish	= 1600;
-			break;
-		case Stephenson1997:
-			start	= -500;
-			finish	= 1600;
-			break;
-		case ChaprontMeeus:
-			start	= -400; // 1800; // not explicitly given, but guess based on his using ChaprontFrancou which is cited elsewhere in a similar term with -391.
-			finish	=  2150; // 1997;
-			break;
-		case JPLHorizons:
-			start	= -2999;
-			finish	= 1620;
-			validRangeAppendix = q_("with zero values outside this range");
-			break;
+		case JPLHorizons: // and
 		case MeeusSimons:
-			start	= 1620;
-			finish	= 2000;
 			validRangeAppendix = q_("with zero values outside this range");
 			break;
 		case MontenbruckPfleger:
-			start	= 1825;
-			finish	= 2005;
 			validRangeAppendix = q_("with a typical 1-second accuracy and zero values outside this range");
 			break;
-		case ReingoldDershowitz:
-			// GZ: while not original work, it's based on Meeus and therefore the full implementation covers likewise approximately:
-			start	= -400; //1620;
-			finish	= 2100; //2019;
-			break;
-		case MorrisonStephenson2004:
-			start	= -1000;
-			finish	= 2000;
-			break;
-		case Reijs:
-			start	= -1500; // -500; // GZ: It models long-term variability, so we should reflect this. Not sure on the begin, though.
-			finish	= 1100; // not 1620; // GZ: Not applicable for telescopic era, and better not after 1100 (pers.comm.)
-			break;
-		case EspenakMeeus: // the default, range stated in the Canon, p. 14.
-		case EspenakMeeusZeroMoonAccel:
-			start	= -1999;
-			finish	= 3000;
-			break;
-		case Banjevic:
-			start	= -2020;
-			finish	= 1620;
-			validRangeAppendix = q_("with zero values outside this range");
-			break;
-		case IslamSadiqQureshi:
-			start	= 1620;
-			finish	= 2007;
-			validRangeAppendix = q_("with zero values outside this range");
-			break;
+		case ChaprontTouze:     // and
+		case Banjevic:          // and
+		case IslamSadiqQureshi: // and
 		case KhalidSultanaZaidi:
-			start	= 1620;
-			finish	= 2013;
-			validRangeAppendix = q_("with zero values outside this range");
+			validRangeAppendix = q_("with values for the limit years outside this range");
 			break;
 		case Custom:
 			// Valid range unknown
 			break;
 	}
 
-	if (start!=finish)
+	if (deltaTstart > MININT) // limits declared?
 	{
 		if (validRangeAppendix!="")
-			validRange = q_("Valid range of usage: between years %1 and %2, %3.").arg(start).arg(finish).arg(validRangeAppendix);
+			validRange = q_("Valid range of usage: between years %1 and %2, %3.").arg(deltaTstart).arg(deltaTfinish).arg(validRangeAppendix);
 		else
-			validRange = q_("Valid range of usage: between years %1 and %2.").arg(start).arg(finish);
-		if ((year < start) || (finish < year))
-			*marker = "*";
+			validRange = q_("Valid range of usage: between years %1 and %2.").arg(deltaTstart).arg(deltaTfinish);
+		if ((year < deltaTstart) || (deltaTfinish < year))
+			*marker = "*"; // mark "outside designed range, possible wrong"
 	}
 	else
-		*marker = "?";
+		*marker = "?"; // mark "no range given"
 
 	return QString(" %1").arg(validRange);
 }

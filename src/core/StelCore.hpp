@@ -474,6 +474,10 @@ public slots:
 	//! @return DeltaT in seconds
 	//! @note Thanks to Rob van Gent who created a collection from many formulas for calculation of DeltaT: http://www.staff.science.uu.nl/~gent0113/deltat/deltat.htm
 	//! @note Use this only if needed, prefer calling getDeltaT() for access to the current value.
+	//! @note Up to V0.15.1, if the requested year was outside validity range, we returned zero or some useless value.
+	//!       Starting with V0.15.2 the value from the edge of the defined range is returned instead if not explicitly zero is given in the source.
+	//!       Limits can be queried with getCurrentDeltaTAlgorithmValidRangeDescription()
+
 	double computeDeltaT(const double JD);
 	//! Get current DeltaT.
 	double getDeltaT() const;
@@ -783,6 +787,8 @@ private:
 	float deltaTnDot; // The currently applied nDot correction. (different per algorithm, and displayed in status line.)
 	bool  deltaTdontUseMoon; // true if the currenctly selected algorithm does not do a lunar correction (?????)
 	double (*deltaTfunc)(const double JD); // This is a function pointer which must be set to a function which computes DeltaT(JD).
+	int deltaTstart;   // begin year of validity range for the selected DeltaT algorithm. (SET MININT to mark infinite)
+	int deltaTfinish;  // end   year of validity range for the selected DeltaT algorithm. (Set MAXINT to mark infinite)
 
 	// Variables for DE430/431 ephem calculation
 	bool de430Available; // ephem file found
