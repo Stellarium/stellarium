@@ -2159,7 +2159,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 		case EspenakMeeus: // GENERAL SOLUTION
 			description = q_("This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson (2004) and a polynomial fit through tabulated values for 1600-2000, is used for the %1NASA Eclipse Web Site%2 and in their <em>Five Millennium Canon of Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the solar, lunar and planetary ephemeris program SOLEX.").arg("<a href='http://eclipse.gsfc.nasa.gov/eclipse.html'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker)).append(" <em>").append(q_("Used by default.")).append("</em>");
 			break;
-		case EspenakMeeusZeroMoonAccel: // PATCHED SOLUTION
+		case EspenakMeeusZeroMoonAccel: // PATCHED SOLUTION. Experimental, it may not make sense to keep it in V1.0.
 			description = QString("%1 %2").arg(q_("PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION.")).arg(q_("This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson (2004) and a polynomial fit through tabulated values for 1600-2000, is used for the %1NASA Eclipse Web Site%2 and in their <em>Five Millennium Canon of Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the solar, lunar and planetary ephemeris program SOLEX.").arg("<a href='http://eclipse.gsfc.nasa.gov/eclipse.html'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker)).append(" <em>").append("</em>"));
 			break;
 		case Banjevic:
@@ -2180,7 +2180,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 
 	// Put n-dot value info
 	if (getCurrentDeltaTAlgorithm()!=WithoutCorrection)
-		description.append(" " + q_("The solution use value %1\"/cy%2 for n-dot.").arg(QString::number(getDeltaTnDot(), 'f', 4)).arg(QChar(0x00B2)));
+		description.append(" " + q_("The solution's value of %1\"/cy%2 for nDot requires an adaptation, see Guide for details.").arg(QString::number(getDeltaTnDot(), 'f', 4)).arg(QChar(0x00B2)));
 
 	return description;
 }
