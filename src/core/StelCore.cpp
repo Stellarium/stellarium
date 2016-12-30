@@ -2179,7 +2179,8 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 	}
 
 	// Put n-dot value info
-	description.append(" " + q_("The solution use value %1\"/cy%2 for n-dot.").arg(QString::number(getDeltaTnDot(), 'f', 4)).arg(QChar(0x00B2)));
+	if (getCurrentDeltaTAlgorithm()!=WithoutCorrection)
+		description.append(" " + q_("The solution use value %1\"/cy%2 for n-dot.").arg(QString::number(getDeltaTnDot(), 'f', 4)).arg(QChar(0x00B2)));
 
 	return description;
 }
