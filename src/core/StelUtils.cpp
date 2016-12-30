@@ -1485,10 +1485,11 @@ double getDeltaTByStephenson1997(const double jDay)
 	return -20.0 + 35.0*u*u;
 }
 
-// Implementation of algorithm by Schmadel & Zech (1979) for DeltaT computation
+// Implementation of algorithm by Schmadel & Zech (1979) for DeltaT computation. STRICTLY 1800...1975 ONLY!! Now delivers values for the edges.
 double getDeltaTBySchmadelZech1979(const double jDay)
 {
 	double u=(jDay-2415020.0)/36525.0; // (1900-jan-0.5)
+	u=qMax(-1.0, qMin(u, 0.76));  // Limit range to 1800...1975. Else we have crazy values which cause strange artefacts.
 	double deltaT=(((((((((((-0.089491*u -0.117389)*u + 0.185489)*u + 0.247433)*u - 0.159732)*u - 0.200097)*u + 0.075456)*u
 			+ 0.076929)*u - 0.020446)*u - 0.013867)*u + 0.003081)*u + 0.001233)*u -0.000029;
 	return deltaT * 86400.0;
@@ -1573,10 +1574,11 @@ double getDeltaTByBorkowski(const double jDay)
 	return 40.0 + 35.0*u*u;
 }
 
-// Implementation of algorithm by Schmadel & Zech (1988) for DeltaT computation
+// Implementation of algorithm by Schmadel & Zech (1988) for DeltaT computation. STRICTLY 1800...1988 ONLY!! Now delivers values for the edges.
 double getDeltaTBySchmadelZech1988(const double jDay)
 {
 	double u=(jDay-2415020.0)/36525.0; // (1900-jan-0.5)
+	u=qMax(-1.0, qMin(u, 0.89));  // Limit range to 1800...1988. Else we have crazy values which cause strange artefacts.
 	double deltaT = (((((((((((-0.058091*u -0.067471)*u +.145932)*u +.161416)*u -.149279)*u -.146960)*u +.079441)*u +.062971)*u -.022542)*u -.012462)*u +.003357)*u +.001148)*u-.000014;
 	return deltaT * 86400.0;
 }
@@ -1911,12 +1913,12 @@ double getDeltaTByKhalidSultanaZaidi(const double jDay)
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 	//double a0, a1, a2, a3, a4;
-	const float k[9] ={     3.670,    3.120,    2.495,     1.925,     1.525,    1.220,     0.880,     0.455,      0.115};
-	const float a0[9]={    76.541,   10.872,   13.480,    12.584,     6.364,   -5.058,    13.392,    30.782,     55.281};
-	const float a1[9]={  -253.532,  -40.744,   13.075,     1.929,    11.004,   -1.701,   128.592,    34.348,     91.248};
-	const float a2[9]={   695.901,  236.890,    8.635,    60.896,   407.776,  -46.403,  -279.165,    46.452,     87.202};
-	const float a3[9]={ -1256.982, -351.537,   -3.307, -1432.216, -4168.394, -866.171, -1282.050,  1295.550,  -3092.565};
-	const float a4[9]={   627.152,   36.612, -128.294,  3129.071,  7561.686, 5917.585,  4039.490, -3210.913,   8255.422};
+	const float k[9] ={     3.670f,    3.120f,    2.495f,     1.925f,     1.525f,    1.220f,     0.880f,     0.455f,      0.115f};
+	const float a0[9]={    76.541f,   10.872f,   13.480f,    12.584f,     6.364f,   -5.058f,    13.392f,    30.782f,     55.281f};
+	const float a1[9]={  -253.532f,  -40.744f,   13.075f,     1.929f,    11.004f,   -1.701f,   128.592f,    34.348f,     91.248f};
+	const float a2[9]={   695.901f,  236.890f,    8.635f,    60.896f,   407.776f,  -46.403f,  -279.165f,    46.452f,     87.202f};
+	const float a3[9]={ -1256.982f, -351.537f,   -3.307f, -1432.216f, -4168.394f, -866.171f, -1282.050f,  1295.550f,  -3092.565f};
+	const float a4[9]={   627.152f,   36.612f, -128.294f,  3129.071f,  7561.686f, 5917.585f,  4039.490f, -3210.913f,   8255.422f};
 	int i;
 	// Limited years! Deliver border values.
 	year=qMax(1620, qMin(year, 2013));
