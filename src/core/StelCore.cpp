@@ -1812,15 +1812,15 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			deltaTfunc = StelUtils::getDeltaTwithoutCorrection;
 			deltaTnDot = -26.0; // n.dot = -26.0"/cy/cy OR WHAT SHALL WE DO HERE?
 			deltaTdontUseMoon = true;
-			deltaTstart	= MININT;
-			deltaTfinish	= MAXINT;
+			deltaTstart	= INT_MIN;
+			deltaTfinish	= INT_MAX;
 			break;
 		case Schoch:
 			// Schoch (1931) algorithm for DeltaT
 			deltaTnDot = -29.68; // n.dot = -29.68"/cy/cy
 			deltaTfunc = StelUtils::getDeltaTBySchoch;
-			deltaTstart	= MININT;
-			deltaTfinish	= MAXINT;
+			deltaTstart	= INT_MIN;
+			deltaTfinish	= INT_MAX;
 			break;
 		case Clemence:
 			// Clemence (1948) algorithm for DeltaT
@@ -1864,8 +1864,8 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			// Stephenson (1978) algorithm for DeltaT
 			deltaTnDot = -30.0; // n.dot = -30.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByStephenson1978;
-			deltaTstart	= MININT; // Range unknown!
-			deltaTfinish	= MAXINT;
+			deltaTstart	= INT_MIN; // Range unknown!
+			deltaTfinish	= INT_MAX;
 			break;
 		case SchmadelZech1979:
 			// Schmadel & Zech (1979) algorithm for DeltaT
@@ -2037,14 +2037,14 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			// User defined coefficients for quadratic equation for DeltaT. These can change, and we don't use the function pointer here.
 			deltaTnDot = deltaTCustomNDot; // n.dot = custom value "/cy/cy
 			deltaTfunc=NULL;
-			deltaTstart	= MININT; // Range unknown!
-			deltaTfinish	= MAXINT;
+			deltaTstart	= INT_MIN; // Range unknown!
+			deltaTfinish	= INT_MAX;
 			break;
 		default:
 			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc=NULL;
-			deltaTstart	= MININT; // Range unknown!
-			deltaTfinish	= MAXINT;
+			deltaTstart	= INT_MIN; // Range unknown!
+			deltaTfinish	= INT_MAX;
 			qCritical() << "StelCore: unknown DeltaT algorithm selected (" << currentDeltaTAlgorithm << ")! (setting nDot=-26., but no function!!)";
 	}
 	Q_ASSERT((currentDeltaTAlgorithm==Custom) || (deltaTfunc!=NULL));
@@ -2212,12 +2212,6 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRangeDescription(const double JD
 		case EspenakMeeus: // the default, range stated in the Canon, p. 14.  ... and
 		case EspenakMeeusZeroMoonAccel:
 			break;
-		case SchmadelZech1979:
-			validRangeAppendix = q_("with meaningless values outside this range");
-			break;
-		case SchmadelZech1988:
-			validRangeAppendix = q_("with a mean error of less than one second, max. error 1.9s, and meaningless values outside this range");
-			break;
 		case JPLHorizons: // and
 		case MeeusSimons:
 			validRangeAppendix = q_("with zero values outside this range");
@@ -2225,6 +2219,10 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRangeDescription(const double JD
 		case MontenbruckPfleger:
 			validRangeAppendix = q_("with a typical 1-second accuracy and zero values outside this range");
 			break;
+		case SchmadelZech1988:
+			validRangeAppendix = q_("with a mean error of less than one second, max. error 1.9s, and values for the limit years outside this range");
+			break;
+		case SchmadelZech1979:  // and
 		case ChaprontTouze:     // and
 		case Banjevic:          // and
 		case IslamSadiqQureshi: // and
@@ -2236,7 +2234,7 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRangeDescription(const double JD
 			break;
 	}
 
-	if (deltaTstart > MININT) // limits declared?
+	if (deltaTstart > INT_MIN) // limits declared?
 	{
 		if (validRangeAppendix!="")
 			validRange = q_("Valid range of usage: between years %1 and %2, %3.").arg(deltaTstart).arg(deltaTfinish).arg(validRangeAppendix);

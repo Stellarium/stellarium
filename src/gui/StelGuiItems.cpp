@@ -652,8 +652,10 @@ void BottomStelBar::updateText(bool updatePos)
 		else
 			deltaTInfo = QString("%1s%2").arg(deltaT, 3, 'f', 3).arg(validRangeMarker);
 
-		// the corrective ndot of course must be set according to the currently used DeltaT algorithm!
-		float ndot=core->getDeltaTnDot();
+		// the corrective ndot to be displayed could be set according to the currently used DeltaT algorithm.
+		//float ndot=core->getDeltaTnDot();
+		// or just to the used ephemeris. This has to be read as "Selected DeltaT formula used, but with the ephemeris's nDot applied it corrects DeltaT to..."
+		float ndot=( (core->de430IsActive() || core->de431IsActive()) ? -25.8f : -23.8946f );
 
 		datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n-dot @ %3\"/cy%4%5]<br>%6<br>%7</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QString::number(ndot, 'f', 4)).arg(QChar(0x00B2)).arg(sigmaInfo).arg(newDateAppx).arg(currTZ));
 	}

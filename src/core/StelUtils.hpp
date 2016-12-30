@@ -442,6 +442,7 @@ namespace StelUtils
 	//! 1979AcA....29..101S [http://adsabs.harvard.edu/abs/1979AcA....29..101S]
 	//! @param jDay the date and time expressed as a Julian day
 	//! @return Delta-T in seconds
+	//! @note The polynome is strictly applicable 1800...1975 only! Delivers values for the nearer edge (1800/1989) if jDay is outside.
 	double getDeltaTBySchmadelZech1979(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
@@ -501,6 +502,7 @@ namespace StelUtils
 	//! 1988AN....309..219S [http://adsabs.harvard.edu/abs/1988AN....309..219S]
 	//! @param jDay the date and time expressed as a Julian day
 	//! @return Delta-T in seconds
+	//! @note The polynome is strictly applicable 1800...1988 only! Delivers values for the nearer edge (1800/1989) if jDay is outside.
 	double getDeltaTBySchmadelZech1988(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
