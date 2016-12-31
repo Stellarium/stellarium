@@ -12,13 +12,13 @@ msgstr ""
 "Project-Id-Version: po_stellarium_stellarium-is\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-24 14:58+0700\n"
-"PO-Revision-Date: 2016-09-05 10:52+0000\n"
+"PO-Revision-Date: 2016-12-30 15:31+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-25 04:44+0000\n"
+"X-Launchpad-Export-Date: 2016-12-31 04:32+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 "Language: is\n"
 
@@ -36,15 +36,15 @@ msgstr "Gerð: <b>%1</b>"
 
 #: src/core/modules/CustomObject.cpp:67
 msgid "custom marker"
-msgstr ""
+msgstr "sérsniðið merki"
 
 #: src/core/modules/CustomObject.cpp:69
 msgid "custom object"
-msgstr ""
+msgstr "sérsniðið atriði"
 
 #: src/core/modules/CustomObjectMgr.cpp:81
 msgid "Marker"
-msgstr ""
+msgstr "Merki"
 
 #: src/core/modules/Constellation.cpp:296
 msgid "constellation"
@@ -85,7 +85,7 @@ msgstr "Veldu stakt stjörnumerki"
 
 #: src/core/modules/ConstellationMgr.cpp:149
 msgid "Remove selection of constellations"
-msgstr ""
+msgstr "Fjarlægja val af stjörnumerkjum"
 
 #: src/core/modules/StarMgr.cpp:445 src/ui_viewDialog.h:1940
 #: src/ui_dsoColorsDialog.h:541
@@ -314,7 +314,7 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:1238 src/ui_viewDialog.h:2192
 msgid "Galactic poles"
-msgstr ""
+msgstr "Pólar vetrarbrautar"
 
 #: src/core/modules/GridLinesMgr.cpp:1239 src/ui_viewDialog.h:2153
 msgid "Supergalactic poles"
@@ -347,11 +347,11 @@ msgstr "Jörð"
 
 #: src/core/modules/LandscapeMgr.cpp:413
 msgid "Landscape illumination"
-msgstr ""
+msgstr "Ljósvarp á landslag"
 
 #: src/core/modules/LandscapeMgr.cpp:414
 msgid "Landscape labels"
-msgstr ""
+msgstr "Merkingar á landslagi"
 
 #: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1956
 msgid "Light pollution data from locations database"
@@ -465,12 +465,12 @@ msgstr "Mparsek"
 #. TRANSLATORS: Unit of measure for distance - Millions of Light Years
 #: src/core/modules/Nebula.cpp:292
 msgid "Mio. ly"
-msgstr ""
+msgstr "Millj.ljósár"
 
 #: src/core/modules/Nebula.cpp:306
 #, qt-format
 msgid "Distance: %1 %2 (%3 %4)"
-msgstr ""
+msgstr "Fjarlægð: %1 %2 (%3 %4)"
 
 #: src/core/modules/Nebula.cpp:320
 #, qt-format
@@ -1062,7 +1062,7 @@ msgstr "Merki fyrir reikistjörnur"
 
 #: src/core/modules/SolarSystem.cpp:225
 msgid "Planet selection marker"
-msgstr ""
+msgstr "Valmerking pláneta"
 
 #: src/core/modules/SolarSystem.cpp:226
 msgid "Native planet names (from starlore)"
@@ -1827,7 +1827,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:512
 msgid "Miller cylindrical"
-msgstr "Miller hólklaga"
+msgstr "Miller-hólkvörpun"
 
 #: src/core/StelProjectorClasses.cpp:517
 msgid ""
@@ -2292,47 +2292,47 @@ msgstr "Upp/Niður (um síðu)"
 
 #: src/gui/HelpDialog.cpp:154
 msgid "Ctrl+Up/Down"
-msgstr ""
+msgstr "Ctrl+Upp/Niður"
 
 #: src/gui/HelpDialog.cpp:157
 msgid "Time dragging"
-msgstr ""
+msgstr "Draga til tíma"
 
 #: src/gui/HelpDialog.cpp:158
 msgid "Ctrl & left mouse drag"
-msgstr ""
+msgstr "Ctrl & draga með vinstri músarhnappi"
 
 #: src/gui/HelpDialog.cpp:159
 msgid "Time scrolling: minutes"
-msgstr ""
+msgstr "Tímaskrun: mínútur"
 
 #: src/gui/HelpDialog.cpp:160
 msgid "Ctrl & mouse wheel"
-msgstr ""
+msgstr "Ctrl & músarhjól"
 
 #: src/gui/HelpDialog.cpp:161
 msgid "Time scrolling: hours"
-msgstr ""
+msgstr "Tímaskrun: klukkustundir"
 
 #: src/gui/HelpDialog.cpp:162
 msgid "Ctrl+Shift & mouse wheel"
-msgstr ""
+msgstr "Ctrl+Shift & músarhjól"
 
 #: src/gui/HelpDialog.cpp:163
 msgid "Time scrolling: days"
-msgstr ""
+msgstr "Tímaskrun: dagar"
 
 #: src/gui/HelpDialog.cpp:164
 msgid "Ctrl+Alt & mouse wheel"
-msgstr ""
+msgstr "Ctrl+Alt & músarhjól"
 
 #: src/gui/HelpDialog.cpp:165
 msgid "Time scrolling: years"
-msgstr ""
+msgstr "Tímaskrun: ár"
 
 #: src/gui/HelpDialog.cpp:166
 msgid "Ctrl+Alt+Shift & mouse wheel"
-msgstr ""
+msgstr "Ctrl+Alt+Shift & músarhjól"
 
 #: src/gui/HelpDialog.cpp:169
 msgid "Select object"
@@ -2348,7 +2348,7 @@ msgstr "Hreinsa val"
 
 #: src/gui/HelpDialog.cpp:175
 msgid "Ctrl & left click"
-msgstr ""
+msgstr "Ctrl & vinstri músarsmellur"
 
 #: src/gui/HelpDialog.cpp:177
 msgid "Right click"
@@ -2356,19 +2356,19 @@ msgstr "Hægri músarsmellur"
 
 #: src/gui/HelpDialog.cpp:180
 msgid "Add custom marker"
-msgstr ""
+msgstr "Bæta við sérsniðnu merki"
 
 #: src/gui/HelpDialog.cpp:181
 msgid "Shift & left click"
-msgstr ""
+msgstr "Shift & vinstri músarsmellur"
 
 #: src/gui/HelpDialog.cpp:183
 msgid "Delete all custom markers"
-msgstr ""
+msgstr "Eyða öllum sérsniðnum merkjum"
 
 #: src/gui/HelpDialog.cpp:184
 msgid "Shift & right click"
-msgstr ""
+msgstr "Shift & hægri músarsmellur"
 
 #: src/gui/HelpDialog.cpp:187
 #, qt-format
@@ -2382,11 +2382,11 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:216
 msgid "Text User Interface (TUI)"
-msgstr ""
+msgstr "Textaviðmót (TUI)"
 
 #: src/gui/HelpDialog.cpp:218
 msgid "Activate TUI"
-msgstr ""
+msgstr "Virkja textaviðmót"
 
 #: src/gui/HelpDialog.cpp:227
 msgid ""
@@ -2633,7 +2633,7 @@ msgstr "plánetumiðjaður athugandi"
 #: src/gui/StelGuiItems.cpp:728
 msgctxt "abbreviation"
 msgid "FOV"
-msgstr ""
+msgstr "FOV"
 
 #: src/gui/StelGuiItems.cpp:744
 msgid "Field of view"
@@ -2643,7 +2643,7 @@ msgstr "Sjónsvið"
 #: src/gui/StelGuiItems.cpp:763
 msgctxt "abbreviation"
 msgid "FPS"
-msgstr ""
+msgstr "FPS"
 
 #: src/gui/StelGuiItems.cpp:771
 msgid "Frames per second"
@@ -3096,12 +3096,12 @@ msgstr "Oortsský"
 #: src/gui/AstroCalcDialog.cpp:562
 #, qt-format
 msgid "Bright stars (<%1 mag)"
-msgstr ""
+msgstr "Bjartar stjörnur (birtustig <%1)"
 
 #: src/gui/AstroCalcDialog.cpp:563
 #, qt-format
 msgid "Bright star clusters (<%1 mag)"
-msgstr ""
+msgstr "Bjartar stjörnuþyrpingar (birtustig <%1)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:564 src/translations.h:99
@@ -3112,7 +3112,7 @@ msgstr "Hringþokur"
 #: src/gui/AstroCalcDialog.cpp:565
 #, qt-format
 msgid "Bright nebulae (<%1 mag)"
-msgstr ""
+msgstr "Bjartar geimþokur (birtustig <%1)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:566 src/translations.h:101
@@ -3123,17 +3123,17 @@ msgstr "Gleypiþokur"
 #: src/gui/AstroCalcDialog.cpp:567
 #, qt-format
 msgid "Bright galaxies (<%1 mag)"
-msgstr ""
+msgstr "Bjartar vetrarbrautir (birtustig <%1)"
 
 #: src/gui/AstroCalcDialog.cpp:662 src/gui/AstroCalcDialog.cpp:722
 #: src/gui/AstroCalcDialog.cpp:724
 msgid "Local Time"
-msgstr ""
+msgstr "Staðartími"
 
 #: src/gui/AstroCalcDialog.cpp:718
 #, qt-format
 msgid "Now is %1"
-msgstr ""
+msgstr "Klukkan er núna %1"
 
 #: src/gui/AstroCalcDialog.cpp:741
 msgid "Phenomenon"
@@ -3162,16 +3162,16 @@ msgstr "Gagnstaða"
 
 #: src/gui/AstroCalcDialog.cpp:1026
 msgid "Transit"
-msgstr ""
+msgstr "Þverganga"
 
 #: src/gui/AstroCalcDialog.cpp:1028 src/gui/AstroCalcDialog.cpp:1191
 #: src/gui/AstroCalcDialog.cpp:1349
 msgid "Occultation"
-msgstr ""
+msgstr "Stjörnumyrkvi"
 
 #: src/gui/AstroCalcDialog.cpp:1032
 msgid "Eclipse"
-msgstr ""
+msgstr "Myrkvi"
 
 #: src/gui/BookmarksDialog.cpp:100 src/ui_searchDialogGui.h:702
 msgid "Object"
@@ -3344,7 +3344,7 @@ msgstr "Stjörnumerki"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:86
 msgid "Custom Objects"
-msgstr ""
+msgstr "Sérsniðin atriði"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:91
@@ -3644,7 +3644,7 @@ msgstr "Samísk"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:219
 msgid "Sardinian"
-msgstr ""
+msgstr "Sardiníska"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:221
@@ -4192,7 +4192,7 @@ msgstr "Hætta við"
 
 #: src/translations.h:397
 msgid "&Cancel"
-msgstr ""
+msgstr "&Hætta við"
 
 #: src/translations.h:398
 msgid "Files of type:"
@@ -4236,7 +4236,7 @@ msgstr "&Grunnlitir"
 
 #: src/translations.h:408
 msgid "&Pick Screen Color"
-msgstr ""
+msgstr "&Plokka lit af skjá"
 
 #: src/translations.h:409
 msgid "&Custom colors"
@@ -4321,7 +4321,7 @@ msgstr "Argentína"
 
 #: src/translations_countries.h:41
 msgid "Samoa (American)"
-msgstr ""
+msgstr "Samóa (ameríska)"
 
 #: src/translations_countries.h:42
 msgid "Austria"
@@ -4337,7 +4337,7 @@ msgstr "Arúba"
 
 #: src/translations_countries.h:45
 msgid "Åland Islands"
-msgstr ""
+msgstr "Álandseyjar"
 
 #: src/translations_countries.h:46
 msgid "Azerbaijan"
@@ -4345,7 +4345,7 @@ msgstr "Aserbaídsjan"
 
 #: src/translations_countries.h:47
 msgid "Bosnia and Herzegovina"
-msgstr ""
+msgstr "Bosnía og Herzegóvína"
 
 #: src/translations_countries.h:48
 msgid "Barbados"
@@ -4381,7 +4381,7 @@ msgstr "Benín"
 
 #: src/translations_countries.h:56
 msgid "St Barthelemy"
-msgstr ""
+msgstr "St Barthelemy"
 
 #: src/translations_countries.h:57
 msgid "Bermuda"
@@ -4389,7 +4389,7 @@ msgstr "Bermúda"
 
 #: src/translations_countries.h:58
 msgid "Brunei"
-msgstr ""
+msgstr "Brúnei"
 
 #: src/translations_countries.h:59
 msgid "Bolivia"
@@ -4397,7 +4397,7 @@ msgstr "Bólivía"
 
 #: src/translations_countries.h:60
 msgid "Caribbean NL"
-msgstr ""
+msgstr "Hollensku Karíbahafseyjar"
 
 #: src/translations_countries.h:61
 msgid "Brazil"
@@ -4433,19 +4433,19 @@ msgstr "Kanada"
 
 #: src/translations_countries.h:69
 msgid "Cocos (Keeling) Islands"
-msgstr ""
+msgstr "Kókoseyjar (Keeling)"
 
 #: src/translations_countries.h:70
 msgid "Congo (Dem. Rep.)"
-msgstr ""
+msgstr "Kongó (lýðveldið)"
 
 #: src/translations_countries.h:71
 msgid "Central African Rep."
-msgstr ""
+msgstr "Mið-Afríkulýðveldið"
 
 #: src/translations_countries.h:72
 msgid "Congo (Rep.)"
-msgstr ""
+msgstr "Kongó (alþyðulýðveldið)"
 
 #: src/translations_countries.h:73
 msgid "Switzerland"
@@ -4453,7 +4453,7 @@ msgstr "Sviss"
 
 #: src/translations_countries.h:74
 msgid "Côte d'Ivoire"
-msgstr ""
+msgstr "Fílabeinsströndin"
 
 #: src/translations_countries.h:75
 msgid "Cook Islands"
@@ -4489,7 +4489,7 @@ msgstr "Grænhöfðaeyjar"
 
 #: src/translations_countries.h:83
 msgid "Curacao"
-msgstr ""
+msgstr "Curacao"
 
 #: src/translations_countries.h:84
 msgid "Christmas Island"
@@ -4585,7 +4585,7 @@ msgstr "Gabon"
 
 #: src/translations_countries.h:107
 msgid "Britain (UK)"
-msgstr ""
+msgstr "Bretland (UK)"
 
 #: src/translations_countries.h:108
 msgid "Grenada"
@@ -4601,7 +4601,7 @@ msgstr "Franska Gvæjana"
 
 #: src/translations_countries.h:111
 msgid "Guernsey"
-msgstr ""
+msgstr "Guernsey"
 
 #: src/translations_countries.h:112
 msgid "Ghana"
@@ -4693,7 +4693,7 @@ msgstr "Ísrael"
 
 #: src/translations_countries.h:134
 msgid "Isle of Man"
-msgstr ""
+msgstr "Eyjan Mön"
 
 #: src/translations_countries.h:135
 msgid "India"
@@ -4721,7 +4721,7 @@ msgstr "Ítalía"
 
 #: src/translations_countries.h:141
 msgid "Jersey"
-msgstr ""
+msgstr "Jersey"
 
 #: src/translations_countries.h:142
 msgid "Jamaica"
@@ -4757,15 +4757,15 @@ msgstr "Kómoreyjar"
 
 #: src/translations_countries.h:150
 msgid "St Kitts and Nevis"
-msgstr ""
+msgstr "St Kitts og Nevis"
 
 #: src/translations_countries.h:151
 msgid "Korea (North)"
-msgstr ""
+msgstr "Kórea (norður)"
 
 #: src/translations_countries.h:152
 msgid "Korea (South)"
-msgstr ""
+msgstr "Kórea (suður)"
 
 #: src/translations_countries.h:153
 msgid "Kuwait"
@@ -4781,7 +4781,7 @@ msgstr "Kasakstan"
 
 #: src/translations_countries.h:156
 msgid "Laos"
-msgstr ""
+msgstr "Laos"
 
 #: src/translations_countries.h:157
 msgid "Lebanon"
@@ -4789,7 +4789,7 @@ msgstr "Líbanon"
 
 #: src/translations_countries.h:158
 msgid "St Lucia"
-msgstr ""
+msgstr "St Lúsía"
 
 #: src/translations_countries.h:159
 msgid "Liechtenstein"
@@ -4821,7 +4821,7 @@ msgstr "Lettland"
 
 #: src/translations_countries.h:166
 msgid "Libya"
-msgstr ""
+msgstr "Líbía"
 
 #: src/translations_countries.h:167
 msgid "Morocco"
@@ -4841,7 +4841,7 @@ msgstr "Svartfjallaland"
 
 #: src/translations_countries.h:171
 msgid "St Martin (French)"
-msgstr ""
+msgstr "Sankti Martin (franska)"
 
 #: src/translations_countries.h:172
 msgid "Madagascar"
@@ -4861,7 +4861,7 @@ msgstr "Malí"
 
 #: src/translations_countries.h:176
 msgid "Myanmar (Burma)"
-msgstr ""
+msgstr "Mjanmar (Búrma)"
 
 #: src/translations_countries.h:177
 msgid "Mongolia"
@@ -4997,7 +4997,7 @@ msgstr "Pólland"
 
 #: src/translations_countries.h:210
 msgid "St Pierre and Miquelon"
-msgstr ""
+msgstr "Sankti Pierre og Miquelon"
 
 #: src/translations_countries.h:211
 msgid "Pitcairn"
@@ -5009,7 +5009,7 @@ msgstr "Puerto Ríko"
 
 #: src/translations_countries.h:213
 msgid "Palestine"
-msgstr ""
+msgstr "Palestína"
 
 #: src/translations_countries.h:214
 msgid "Portugal"
@@ -5041,7 +5041,7 @@ msgstr "Serbía"
 
 #: src/translations_countries.h:221
 msgid "Russia"
-msgstr ""
+msgstr "Rússland"
 
 #: src/translations_countries.h:222
 msgid "Rwanda"
@@ -5073,7 +5073,7 @@ msgstr "Singapúr"
 
 #: src/translations_countries.h:229
 msgid "St Helena"
-msgstr ""
+msgstr "Sankti Helena"
 
 #: src/translations_countries.h:230
 msgid "Slovenia"
@@ -5109,7 +5109,7 @@ msgstr "Súrínam"
 
 #: src/translations_countries.h:238
 msgid "South Sudan"
-msgstr ""
+msgstr "Suður-Súdan"
 
 #: src/translations_countries.h:239
 msgid "Sao Tome and Principe"
@@ -5121,11 +5121,11 @@ msgstr "El Salvador"
 
 #: src/translations_countries.h:241
 msgid "St Maarten (Dutch)"
-msgstr ""
+msgstr "Sankti Maarten (hollenska)"
 
 #: src/translations_countries.h:242
 msgid "Syria"
-msgstr ""
+msgstr "Sýrland"
 
 #: src/translations_countries.h:243
 msgid "Swaziland"
@@ -5133,7 +5133,7 @@ msgstr "Svasíland"
 
 #: src/translations_countries.h:244
 msgid "Turks and Caicos Is"
-msgstr ""
+msgstr "Turks og Kaikós eyjar"
 
 #: src/translations_countries.h:245
 msgid "Chad"
@@ -5141,7 +5141,7 @@ msgstr "Tsjad"
 
 #: src/translations_countries.h:246
 msgid "French Southern and Antarctic Lands"
-msgstr ""
+msgstr "Frönsku suðurhafs- og suðurskautslandssvæðin"
 
 #: src/translations_countries.h:247
 msgid "Togo"
@@ -5205,7 +5205,7 @@ msgstr "Úganda"
 
 #: src/translations_countries.h:262
 msgid "US minor outlying islands"
-msgstr ""
+msgstr "Ytri-smáeyjar Bandaríkjanna"
 
 #: src/translations_countries.h:263
 msgid "United States"
@@ -5221,11 +5221,11 @@ msgstr "Úsbekistan"
 
 #: src/translations_countries.h:266
 msgid "Vatican City"
-msgstr ""
+msgstr "Borgríkið Vatíkanið"
 
 #: src/translations_countries.h:267
 msgid "St Vincent"
-msgstr ""
+msgstr "St Vincent"
 
 #: src/translations_countries.h:268
 msgid "Venezuela"
@@ -5233,15 +5233,15 @@ msgstr "Venesúela"
 
 #: src/translations_countries.h:269
 msgid "Virgin Islands (UK)"
-msgstr ""
+msgstr "Bresku Jómfrúreyjar"
 
 #: src/translations_countries.h:270
 msgid "Virgin Islands (US)"
-msgstr ""
+msgstr "Bandarísku Jómfrúareyjar"
 
 #: src/translations_countries.h:271
 msgid "Vietnam"
-msgstr ""
+msgstr "Víetnam"
 
 #: src/translations_countries.h:272
 msgid "Vanuatu"
@@ -5253,7 +5253,7 @@ msgstr "Wallis- og Fútúnaeyjar"
 
 #: src/translations_countries.h:274
 msgid "Samoa (western)"
-msgstr ""
+msgstr "Samóa (vestur)"
 
 #: src/translations_countries.h:275
 msgid "Yemen"
@@ -5334,7 +5334,7 @@ msgstr "Bæta við lista"
 
 #: src/ui_locationDialogGui.h:446
 msgid "Delete from list"
-msgstr ""
+msgstr "Eyða af lista"
 
 #: src/ui_locationDialogGui.h:447
 msgid "Return to default location"
@@ -5389,11 +5389,11 @@ msgstr "Reikistjarna:"
 
 #: src/ui_locationDialogGui.h:465
 msgid "Use custom time zone"
-msgstr ""
+msgstr "Nota sérsniðið tímabelti"
 
 #: src/ui_locationDialogGui.h:466
 msgid "Time zone:"
-msgstr ""
+msgstr "Tímabelti:"
 
 #: src/ui_locationDialogGui.h:467
 msgid "Name/City:"
@@ -5405,7 +5405,7 @@ msgstr "Land:"
 
 #: src/ui_locationDialogGui.h:472
 msgid "Enable daylight saving time"
-msgstr ""
+msgstr "Virkja sumar-/vetrartíma"
 
 #: src/ui_searchDialogGui.h:617
 msgid "Find Object"
@@ -5549,11 +5549,11 @@ msgstr "Listar"
 
 #: src/ui_searchDialogGui.h:715
 msgid "Use on-line astronomical database SIMBAD"
-msgstr ""
+msgstr "Nota SIMBAD stjörnufræðigagnagrunninn á vefnum"
 
 #: src/ui_searchDialogGui.h:717
 msgid "Use SIMBAD"
-msgstr ""
+msgstr "Nota SIMBAD"
 
 #: src/ui_searchDialogGui.h:718
 msgid "Server:"
@@ -5667,11 +5667,11 @@ msgstr "Sýna brautir reikistjarna"
 
 #: src/ui_viewDialog.h:1975
 msgid "Configure colors of orbit lines"
-msgstr ""
+msgstr "Stilla liti fyrir sporbrautir"
 
 #: src/ui_viewDialog.h:1977
 msgid "Colors..."
-msgstr ""
+msgstr "Litir..."
 
 #: src/ui_viewDialog.h:1979
 msgid ""
@@ -5875,7 +5875,7 @@ msgstr "Vísbendingar"
 
 #: src/ui_viewDialog.h:2084
 msgid "Configure colors of markers"
-msgstr ""
+msgstr "Stilla liti fyrir merkingar"
 
 #: src/ui_viewDialog.h:2085
 msgid "Celestial Sphere"
@@ -5947,7 +5947,7 @@ msgstr "Sýna sjóndeildarhringslínu."
 
 #: src/ui_viewDialog.h:2129
 msgid "Color of horizon"
-msgstr ""
+msgstr "Litur sjóndeildarhrings"
 
 #: src/ui_viewDialog.h:2133
 msgid "Show meridian line."
@@ -5955,7 +5955,7 @@ msgstr "Sýna hádegisbaugslínu."
 
 #: src/ui_viewDialog.h:2137
 msgid "Color of meridian"
-msgstr ""
+msgstr "Litur hádegisbaugs"
 
 #: src/ui_viewDialog.h:2140
 msgid ""
@@ -5965,7 +5965,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2144
 msgid "Color of the opposition/conjunction longitude line"
-msgstr ""
+msgstr "Litur lengdarbaugs gagnstöðu/samstöðu"
 
 #: src/ui_viewDialog.h:2147
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
@@ -5979,7 +5979,7 @@ msgstr "Baugar"
 
 #: src/ui_viewDialog.h:2151
 msgid "Color of colures"
-msgstr ""
+msgstr "Litur á baugum"
 
 #: src/ui_viewDialog.h:2155
 msgid "Color of the ecliptic poles (J2000.0)"
@@ -5995,7 +5995,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2163
 msgid "Ecliptic poles (J2000)"
-msgstr ""
+msgstr "Sólbaugspólar (J2000)"
 
 #: src/ui_viewDialog.h:2165
 msgid "Color of the celestial poles (J2000.0)"
@@ -6252,7 +6252,7 @@ msgstr "Stærð í mynddílum"
 
 #: src/ui_viewDialog.h:2306
 msgid "Color of lines of constellations"
-msgstr ""
+msgstr "Litur á línum í stjörnumerkjum"
 
 #: src/ui_viewDialog.h:2309
 msgid "Use native names for planets from current culture"
@@ -6276,7 +6276,7 @@ msgstr "Velja hvort þú vilt að nöfn séu stytt, upprunaleg eða þýdd"
 
 #: src/ui_viewDialog.h:2319
 msgid "Color of names of constellations"
-msgstr ""
+msgstr "Litur á nöfnum stjörnumerkja"
 
 #: src/ui_viewDialog.h:2321
 msgid "Show boundaries"
@@ -6563,7 +6563,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1300
 msgid "Constellation"
-msgstr ""
+msgstr "Stjörnumerki"
 
 #: src/ui_configurationDialog.h:1301
 msgid "Control"
@@ -6794,7 +6794,7 @@ msgstr "Velja landslag sjálfvirkt"
 
 #: src/ui_configurationDialog.h:1406
 msgid "Show bookmarks button"
-msgstr ""
+msgstr "Birta hnapp fyrir bókamerki"
 
 #: src/ui_configurationDialog.h:1407
 msgid "Screenshots"
@@ -7045,7 +7045,7 @@ msgstr "..."
 
 #: src/ui_astroCalcDialog.h:513
 msgid "Positions"
-msgstr ""
+msgstr "Staðsetningar"
 
 #: src/ui_astroCalcDialog.h:515
 msgid "Planetary positions"
@@ -7061,11 +7061,11 @@ msgstr "Fyrirbæri"
 
 #: src/ui_astroCalcDialog.h:522
 msgid "Alt. vs. Time"
-msgstr ""
+msgstr "Hæð vs. Tími"
 
 #: src/ui_astroCalcDialog.h:524
 msgid "Altitude vs. Time"
-msgstr ""
+msgstr "Hæð á móti Tíma"
 
 #: src/ui_astroCalcDialog.h:529
 msgid "Update of planetary positions"
@@ -7144,7 +7144,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:557
 msgid "Astronomical calculations"
-msgstr ""
+msgstr "Stjörnufræðilegir útreikningar"
 
 #: src/ui_bookmarksDialog.h:176
 msgid "Add date and time"
@@ -7176,7 +7176,7 @@ msgstr "&Fara á..."
 
 #: src/ui_dsoColorsDialog.h:476 src/ui_orbitColorsDialog.h:366
 msgid "Color settings"
-msgstr ""
+msgstr "Litastillingar"
 
 #: src/ui_dsoColorsDialog.h:478
 msgid "Colors of labels and markers of deep-sky objects"
@@ -7224,7 +7224,7 @@ msgstr ""
 
 #: src/ui_dsoColorsDialog.h:515
 msgid "Possible quasars"
-msgstr ""
+msgstr "Mögulegir kvasar"
 
 #: src/ui_dsoColorsDialog.h:517
 msgid "Color of markers of clusters associated with nebulosity"
@@ -7236,7 +7236,7 @@ msgstr ""
 
 #: src/ui_dsoColorsDialog.h:524
 msgid "Markers of deep-sky objects"
-msgstr ""
+msgstr "Merkingar djúpfyrirbæra"
 
 #: src/ui_dsoColorsDialog.h:526
 msgid "Markers of DSOs"
@@ -7277,7 +7277,7 @@ msgstr ""
 
 #: src/ui_dsoColorsDialog.h:558
 msgid "Labels of deep-sky objects"
-msgstr ""
+msgstr "Nöfn djúpfyrirbæra"
 
 #: src/ui_dsoColorsDialog.h:560
 msgid "Labels of DSOs"
@@ -7309,7 +7309,7 @@ msgstr ""
 
 #: src/ui_dsoColorsDialog.h:585
 msgid "Possible planetary nebulae"
-msgstr ""
+msgstr "Hugsanlegar hringþokur"
 
 #: src/ui_dsoColorsDialog.h:587
 msgid "Possible pl. nebulae"
@@ -7321,7 +7321,7 @@ msgstr ""
 
 #: src/ui_dsoColorsDialog.h:591
 msgid "Protoplanetary nebulae"
-msgstr ""
+msgstr "Frum-hringþokur"
 
 #: src/ui_dsoColorsDialog.h:593
 msgid "Color of markers of protoplanetary nebulae"
@@ -7337,7 +7337,7 @@ msgstr ""
 
 #: src/ui_dsoColorsDialog.h:603
 msgid "Molecular clouds"
-msgstr ""
+msgstr "Sameindaský"
 
 #: src/ui_dsoColorsDialog.h:605
 msgid "Color of markers of molecular clouds"
@@ -7345,7 +7345,7 @@ msgstr ""
 
 #: src/ui_dsoColorsDialog.h:610
 msgid "Young stellar objects"
-msgstr ""
+msgstr "Ungstirni"
 
 #: src/ui_dsoColorsDialog.h:612
 msgid "Color of markers of young stellar objects"
@@ -7381,11 +7381,11 @@ msgstr ""
 
 #: src/ui_orbitColorsDialog.h:376
 msgid "Orbit of Uranus"
-msgstr ""
+msgstr "Sporbraut Úranus"
 
 #: src/ui_orbitColorsDialog.h:377
 msgid "Orbit of Mars"
-msgstr ""
+msgstr "Sporbraut Mars"
 
 #: src/ui_orbitColorsDialog.h:379
 msgid "Color of Neptune orbit"
@@ -7401,7 +7401,7 @@ msgstr ""
 
 #: src/ui_orbitColorsDialog.h:387
 msgid "Orbit of Mercury"
-msgstr ""
+msgstr "Sporbraut Merkúrs"
 
 #: src/ui_orbitColorsDialog.h:389
 msgid "Color of major planet orbits"
@@ -7417,11 +7417,11 @@ msgstr ""
 
 #: src/ui_orbitColorsDialog.h:395
 msgid "Orbit of Jupiter"
-msgstr ""
+msgstr "Sporbraut  Júpíters"
 
 #: src/ui_orbitColorsDialog.h:399
 msgid "Orbit of Neptune"
-msgstr ""
+msgstr "Sporbraut Neptúnusar"
 
 #: src/ui_orbitColorsDialog.h:400
 msgid "Orbits of moons of planets"
@@ -7445,7 +7445,7 @@ msgstr ""
 
 #: src/ui_orbitColorsDialog.h:416
 msgid "Orbit of Saturn"
-msgstr ""
+msgstr "Sporbraut Satúrnusar"
 
 #: src/ui_orbitColorsDialog.h:418
 msgid "Color of Uranus orbit"
@@ -7457,7 +7457,7 @@ msgstr ""
 
 #: src/ui_orbitColorsDialog.h:423
 msgid "Orbit of Earth"
-msgstr ""
+msgstr "Sporbraut Jarðar"
 
 #: src/ui_orbitColorsDialog.h:425
 msgid "Color of dwarf planet orbits"
@@ -7465,7 +7465,7 @@ msgstr ""
 
 #: src/ui_orbitColorsDialog.h:427
 msgid "Orbits of comets"
-msgstr ""
+msgstr "Brautir halastjarna"
 
 #: src/ui_orbitColorsDialog.h:428
 msgid "Orbits of dwarf planets"
@@ -7477,7 +7477,7 @@ msgstr ""
 
 #: src/ui_orbitColorsDialog.h:432
 msgid "Orbits of plutinos"
-msgstr ""
+msgstr "Brautir plútóstirna"
 
 #: src/ui_orbitColorsDialog.h:433
 msgid "Orbits of scattered disk objects"
@@ -7485,11 +7485,11 @@ msgstr ""
 
 #: src/ui_orbitColorsDialog.h:437
 msgid "Generic orbit"
-msgstr ""
+msgstr "Almenn sporbraut"
 
 #: src/ui_orbitColorsDialog.h:438
 msgid "Orbits of cubewanos"
-msgstr ""
+msgstr "Sporbraut Kuipersbeltisstirna"
 
 #: src/ui_orbitColorsDialog.h:440
 msgid "Color of Mars orbit"
@@ -7501,7 +7501,7 @@ msgstr ""
 
 #: src/ui_orbitColorsDialog.h:445
 msgid "Orbit of Venus"
-msgstr ""
+msgstr "Sporbraut Venusar"
 
 #: src/ui_orbitColorsDialog.h:447
 msgid "Color of plutino orbits"
@@ -8313,11 +8313,11 @@ msgstr "Kvarða myndhring"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1139
 msgid "Use semi-transparent mask"
-msgstr ""
+msgstr "Nota hálfgegnsæjan maska"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1140
 msgid "Hide grids and lines when enabled"
-msgstr ""
+msgstr "Fela hnitanet og línur þegar þetta er virkt"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1141
 msgid "Sensor view"
@@ -8335,7 +8335,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1146
 msgid "Use degrees and minutes for FOV of CCD"
-msgstr ""
+msgstr "Nota gráður og mínútur fyrir sjónsvið (FOV) myndflögu (CCD)"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1147
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:226
@@ -8590,42 +8590,42 @@ msgstr "Fyrsta kínverska geimstöðin"
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1818
 msgid "The russian space radio telescope RadioAstron"
-msgstr ""
+msgstr "Rússneski geim-útvarpssjónaukinn RadioAstron"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1820
 msgid "International Gamma-Ray Astrophysics Laboratory"
-msgstr ""
+msgstr "Alþjóðlega gammageisla stjarneðlisfræði-rannsóknastofan"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1822
 msgid "The Gamma-Ray Observatory"
-msgstr ""
+msgstr "Gammageisla-athugunarstöðin"
 
 #. TRANSLATORS: Satellite name: International Space Station
 #: plugins/Satellites/src/Satellites.cpp:1826
 msgid "ISS (ZARYA)"
-msgstr ""
+msgstr "ISS (ZARYA)"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
 #: plugins/Satellites/src/Satellites.cpp:1828
 msgid "HST"
-msgstr ""
+msgstr "HST"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
 #: plugins/Satellites/src/Satellites.cpp:1830
 msgid "SPEKTR-R"
-msgstr ""
+msgstr "SPEKTR-R"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
 #: plugins/Satellites/src/Satellites.cpp:1832
 msgid "INTEGRAL"
-msgstr ""
+msgstr "INTEGRAL"
 
 #. TRANSLATORS: China's first space station name
 #: plugins/Satellites/src/Satellites.cpp:1834
 msgid "TIANGONG 1"
-msgstr ""
+msgstr "TIANGONG 1"
 
 #: plugins/Satellites/src/Satellite.cpp:264
 #: plugins/Satellites/src/Satellite.cpp:268
@@ -8689,7 +8689,7 @@ msgstr "Endurkastshorn sólar: %1%2"
 #: plugins/Satellites/src/Satellite.cpp:338
 #, qt-format
 msgid "Operational status: %1"
-msgstr ""
+msgstr "Staða á virkni: %1"
 
 #: plugins/Satellites/src/Satellite.cpp:345
 msgid "The satellite and the observer are in sunlight."
@@ -8716,42 +8716,42 @@ msgstr "%1 MHz (%2%3 kHz)"
 #: plugins/Satellites/src/Satellite.cpp:621
 msgctxt "operational status"
 msgid "unknown"
-msgstr ""
+msgstr "óþekkt"
 
 #: plugins/Satellites/src/Satellite.cpp:600
 msgctxt "operational status"
 msgid "operational"
-msgstr ""
+msgstr "í gangi"
 
 #: plugins/Satellites/src/Satellite.cpp:603
 msgctxt "operational status"
 msgid "nonoperational"
-msgstr ""
+msgstr "ekki í gangi"
 
 #: plugins/Satellites/src/Satellite.cpp:606
 msgctxt "operational status"
 msgid "partially operational"
-msgstr ""
+msgstr "virkt að hluta"
 
 #: plugins/Satellites/src/Satellite.cpp:609
 msgctxt "operational status"
 msgid "standby"
-msgstr ""
+msgstr "í biðstöðu"
 
 #: plugins/Satellites/src/Satellite.cpp:612
 msgctxt "operational status"
 msgid "spare"
-msgstr ""
+msgstr "til vara"
 
 #: plugins/Satellites/src/Satellite.cpp:615
 msgctxt "operational status"
 msgid "extended mission"
-msgstr ""
+msgstr "í framhaldsverkefni"
 
 #: plugins/Satellites/src/Satellite.cpp:618
 msgctxt "operational status"
 msgid "decayed"
-msgstr ""
+msgstr "sundrað"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:407
 msgid "Stellarium Satellites Plugin"
@@ -8834,7 +8834,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:437
 msgid "Adding new satellites"
-msgstr "Bæti við nýjum gervihnöttum"
+msgstr "Bæta við nýjum gervihnöttum"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:438
 msgid ""
@@ -14541,7 +14541,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:474
 msgid "Select color for current planet line"
-msgstr ""
+msgstr "Veldu lit fyrir núverandi plánetulínu"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:485
 msgid "Select color for Geographic Location 1 line"
