@@ -657,7 +657,7 @@ void BottomStelBar::updateText(bool updatePos)
 		// or just to the used ephemeris. This has to be read as "Selected DeltaT formula used, but with the ephemeris's nDot applied it corrects DeltaT to..."
 		float ndot=( (core->de430IsActive() || core->de431IsActive()) ? -25.8f : -23.8946f );
 
-		datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n-dot @ %3\"/cy%4%5]<br>%6<br>%7</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QString::number(ndot, 'f', 4)).arg(QChar(0x00B2)).arg(sigmaInfo).arg(newDateAppx).arg(currTZ));
+		datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n%8 @ %3\"/cy%4%5]<br>%6<br>%7</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QString::number(ndot, 'f', 4)).arg(QChar(0x00B2)).arg(sigmaInfo).arg(newDateAppx).arg(currTZ).arg(QChar(0x2032)));
 	}
 	else
 		datetime->setToolTip(QString("<p style='white-space:pre'>%1<br>%2</p>").arg(newDateAppx).arg(currTZ));

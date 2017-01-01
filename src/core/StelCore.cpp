@@ -2180,7 +2180,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 
 	// Put n-dot value info
 	if (getCurrentDeltaTAlgorithm()!=WithoutCorrection)
-		description.append(" " + q_("The solution's value of %1\"/cy%2 for nDot requires an adaptation, see Guide for details.").arg(QString::number(getDeltaTnDot(), 'f', 4)).arg(QChar(0x00B2)));
+		description.append(" " + q_("The solution's value of %1\"/cy%2 for n%3 (secular acceleration of the Moon) requires an adaptation, see Guide for details.").arg(QString::number(getDeltaTnDot(), 'f', 4)).arg(QChar(0x00B2)).arg(QChar(0x2032)));
 
 	return description;
 }
