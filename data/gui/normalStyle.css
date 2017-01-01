@@ -771,6 +771,14 @@ QHeaderView::section {
         border: 1px solid rgb(108, 108, 108);
 }
 
+QHeaderView::up-arrow {
+        image: url(:/graphicGui/spinup.png);
+}
+
+QHeaderView::down-arrow {
+        image: url(:/graphicGui/spindown.png);
+}
+
 #configurationDialogForm QPushButton#screenshotBrowseButton, QPushButton#pushButtonPickExecutablesDirectory {
         image: url(:/graphicGui/folder.png);
 }
