@@ -59,7 +59,7 @@ void CustomDeltaTEquationDialog::createDialogContent()
 	ui->setupUi(dialog);
 	setDescription();
 
-	ui->labelNDot->setText(QString("%1:").arg(QChar(0x1E45)));
+	ui->labelNDot->setText(QString("n%1:").arg(QChar(0x2032)));
 
 	ui->lineEditCoefficientA->setText(QString("%1").arg(coeff[0]));
 	ui->lineEditCoefficientB->setText(QString("%1").arg(coeff[1]));
