@@ -8,17 +8,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-24 14:58+0700\n"
+"POT-Creation-Date: 2017-01-01 21:32+0700\n"
 "PO-Revision-Date: 2016-12-10 12:46+0000\n"
 "Last-Translator: Ar Far <Unknown>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-25 04:51+0000\n"
+"X-Launchpad-Export-Date: 2017-01-02 04:53+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 
-#: src/core/modules/CustomObject.cpp:67 src/core/modules/CustomObject.cpp:69
+#: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:191
 #: src/core/modules/Planet.cpp:245 src/core/modules/MinorPlanet.cpp:200
 #: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:192
@@ -30,11 +30,11 @@ msgstr ""
 msgid "Type: <b>%1</b>"
 msgstr "نوع: <b>%1</b>"
 
-#: src/core/modules/CustomObject.cpp:67
+#: src/core/modules/CustomObject.cpp:78
 msgid "custom marker"
 msgstr "نشانگر سفارشی"
 
-#: src/core/modules/CustomObject.cpp:69
+#: src/core/modules/CustomObject.cpp:80
 msgid "custom object"
 msgstr "جرم سفارشی"
 
@@ -50,8 +50,8 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:1212 src/core/modules/LandscapeMgr.cpp:408
 #: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:218 src/core/modules/MilkyWay.cpp:74
-#: src/core/modules/ZodiacalLight.cpp:80 src/core/modules/ToastMgr.cpp:61
-#: src/core/StelApp.cpp:530 src/core/StelCore.cpp:239
+#: src/core/modules/ZodiacalLight.cpp:80 src/core/modules/ToastMgr.cpp:60
+#: src/core/StelApp.cpp:530 src/core/StelCore.cpp:250
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:577
 msgid "Display Options"
 msgstr "تنظیمات نمایش"
@@ -75,7 +75,7 @@ msgstr "برچسب صورت‌های فلکی"
 msgid "Constellation boundaries"
 msgstr "مرز صورت‌های فلکی"
 
-#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1385
+#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1393
 msgid "Select single constellation"
 msgstr "انتخاب تک صورت‌فلکی"
 
@@ -1159,7 +1159,7 @@ msgstr "راه شیری"
 msgid "Zodiacal Light"
 msgstr "نور منطقةالبروجی (فجر کاذب)"
 
-#: src/core/modules/ToastMgr.cpp:61
+#: src/core/modules/ToastMgr.cpp:60
 msgid "Digitized Sky Survey (experimental)"
 msgstr ""
 
@@ -1171,7 +1171,7 @@ msgstr "دید در شب"
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 
-#: src/core/StelCore.cpp:237 src/gui/StelGui.cpp:202
+#: src/core/StelCore.cpp:248 src/gui/StelGui.cpp:202
 #: src/gui/AstroCalcDialog.cpp:305 src/gui/AstroCalcDialog.cpp:742
 #: src/gui/BookmarksDialog.cpp:102 src/ui_dateTimeDialogGui.h:376
 #: src/ui_dateTimeDialogGui.h:379
@@ -1179,223 +1179,223 @@ msgstr ""
 msgid "Date and Time"
 msgstr "تاریخ و زمان"
 
-#: src/core/StelCore.cpp:238 src/core/StelMovementMgr.cpp:180
+#: src/core/StelCore.cpp:249 src/core/StelMovementMgr.cpp:180
 msgid "Movement and Selection"
 msgstr "حرکت و انتخاب"
 
-#: src/core/StelCore.cpp:241
+#: src/core/StelCore.cpp:252
 msgid "Increase time speed"
 msgstr "تند کردن زمان"
 
-#: src/core/StelCore.cpp:242
+#: src/core/StelCore.cpp:253
 msgid "Decrease time speed"
 msgstr "کند کردن زمان"
 
-#: src/core/StelCore.cpp:243
+#: src/core/StelCore.cpp:254
 msgid "Increase time speed (a little)"
 msgstr "تند کردن زمان (اندک)"
 
-#: src/core/StelCore.cpp:244
+#: src/core/StelCore.cpp:255
 msgid "Decrease time speed (a little)"
 msgstr "کند کردن زمان (اندک)"
 
-#: src/core/StelCore.cpp:245
+#: src/core/StelCore.cpp:256
 msgid "Set normal time rate"
 msgstr "گذر عادی زمان"
 
-#: src/core/StelCore.cpp:246
+#: src/core/StelCore.cpp:257
 msgid "Set time rate to zero"
 msgstr "توقف زمان"
 
-#: src/core/StelCore.cpp:247
+#: src/core/StelCore.cpp:258
 msgid "Set reverse time direction"
 msgstr ""
 
-#: src/core/StelCore.cpp:248
+#: src/core/StelCore.cpp:259
 msgid "Set time to now"
 msgstr "زمان حال"
 
-#: src/core/StelCore.cpp:249
+#: src/core/StelCore.cpp:260
 msgid "Add 1 solar minute"
 msgstr ""
 
-#: src/core/StelCore.cpp:250
+#: src/core/StelCore.cpp:261
 msgid "Add 1 solar hour"
 msgstr "افزودن ۱ ساعت خورشیدی"
 
-#: src/core/StelCore.cpp:251
+#: src/core/StelCore.cpp:262
 msgid "Add 1 solar day"
 msgstr "افزودن ۱ روز خورشیدی"
 
-#: src/core/StelCore.cpp:252
+#: src/core/StelCore.cpp:263
 msgid "Add 7 solar days"
 msgstr "افزودن ۷ روز خورشیدی"
 
-#: src/core/StelCore.cpp:253
+#: src/core/StelCore.cpp:264
 msgid "Subtract 1 solar minute"
 msgstr ""
 
-#: src/core/StelCore.cpp:254
+#: src/core/StelCore.cpp:265
 msgid "Subtract 1 solar hour"
 msgstr "کاستن ۱ ساعت خورشیدی"
 
-#: src/core/StelCore.cpp:255
+#: src/core/StelCore.cpp:266
 msgid "Subtract 1 solar day"
 msgstr "کاستن ۱ روز خورشیدی"
 
-#: src/core/StelCore.cpp:256
+#: src/core/StelCore.cpp:267
 msgid "Subtract 7 solar days"
 msgstr "کاستن ۷ روز خورشیدی"
 
-#: src/core/StelCore.cpp:257
+#: src/core/StelCore.cpp:268
 msgid "Add 1 sidereal day"
 msgstr "افزودن ۱ روز نجومی"
 
-#: src/core/StelCore.cpp:258
+#: src/core/StelCore.cpp:269
 msgid "Add 1 sidereal year"
 msgstr "افزودن ۱ سال نجومی"
 
-#: src/core/StelCore.cpp:259
+#: src/core/StelCore.cpp:270
 msgid "Add 100 sidereal years"
 msgstr "افزودن ۱۰۰ سال نجومی"
 
-#: src/core/StelCore.cpp:260
+#: src/core/StelCore.cpp:271
 msgid "Add 1 synodic month"
 msgstr "افزودن ۱ ماه هلالی"
 
-#: src/core/StelCore.cpp:261
+#: src/core/StelCore.cpp:272
 msgid "Add 1 draconic month"
 msgstr "افزودن ۱ ماه گرهی"
 
-#: src/core/StelCore.cpp:262
+#: src/core/StelCore.cpp:273
 msgid "Add 1 draconic year"
 msgstr "افزودن ۱ سال گرهی"
 
-#: src/core/StelCore.cpp:263
+#: src/core/StelCore.cpp:274
 msgid "Add 1 anomalistic month"
 msgstr "افزودن ۱ ماه بی‌هنجار"
 
-#: src/core/StelCore.cpp:264
+#: src/core/StelCore.cpp:275
 msgid "Add 1 anomalistic year"
 msgstr "افزودن ۱ سال بی‌هنجار"
 
-#: src/core/StelCore.cpp:265
+#: src/core/StelCore.cpp:276
 msgid "Add 100 anomalistic years"
 msgstr "افزودن ۱۰۰ سال بی‌هنجار"
 
-#: src/core/StelCore.cpp:266
+#: src/core/StelCore.cpp:277
 msgid "Add 1 mean tropical month"
 msgstr "افزودن ۱ ماه اعتدالی میانگین"
 
-#: src/core/StelCore.cpp:267
+#: src/core/StelCore.cpp:278
 msgid "Add 1 mean tropical year"
 msgstr "افزودن ۱ سال اعتدالی میانگین"
 
-#: src/core/StelCore.cpp:268
+#: src/core/StelCore.cpp:279
 msgid "Add 100 mean tropical years"
 msgstr "افزودن ۱۰۰ سال اعتدالی میانگین"
 
-#: src/core/StelCore.cpp:269
+#: src/core/StelCore.cpp:280
 msgid "Add 1 tropical year"
 msgstr "افزودن ۱ سال اعتدالی"
 
-#: src/core/StelCore.cpp:270
+#: src/core/StelCore.cpp:281
 msgid "Add 1 Julian year"
 msgstr "افزودن ۱ سال ژولیانی"
 
-#: src/core/StelCore.cpp:271
+#: src/core/StelCore.cpp:282
 msgid "Add 1 Julian century"
 msgstr "افزودن ۱ قرن ژولیانی"
 
-#: src/core/StelCore.cpp:272
+#: src/core/StelCore.cpp:283
 msgid "Add 1 Gaussian year"
 msgstr "افزودن ۱ سال گاوسی"
 
-#: src/core/StelCore.cpp:273
+#: src/core/StelCore.cpp:284
 msgid "Subtract 1 sidereal day"
 msgstr "کاستن ۱ روز نجومی"
 
-#: src/core/StelCore.cpp:274
+#: src/core/StelCore.cpp:285
 msgid "Subtract 1 sidereal year"
 msgstr "کاستن ۱ سال نجومی"
 
-#: src/core/StelCore.cpp:275
+#: src/core/StelCore.cpp:286
 msgid "Subtract 100 sidereal years"
 msgstr "کاستن ۱۰۰ سال نجومی"
 
-#: src/core/StelCore.cpp:276
+#: src/core/StelCore.cpp:287
 msgid "Subtract 1 synodic month"
 msgstr "کاستن ۱ ماه هلالی"
 
-#: src/core/StelCore.cpp:277
+#: src/core/StelCore.cpp:288
 msgid "Subtract 1 draconic month"
 msgstr "کاستن ۱ ماه گرهی"
 
-#: src/core/StelCore.cpp:278
+#: src/core/StelCore.cpp:289
 msgid "Subtract 1 draconic year"
 msgstr "کاستن ۱ سال گرهی"
 
-#: src/core/StelCore.cpp:279
+#: src/core/StelCore.cpp:290
 msgid "Subtract 1 anomalistic month"
 msgstr "کاستن ۱ ماه بی‌هنجار"
 
-#: src/core/StelCore.cpp:280
+#: src/core/StelCore.cpp:291
 msgid "Subtract 1 anomalistic year"
 msgstr "کاستن ۱ سال بی‌هنجار"
 
-#: src/core/StelCore.cpp:281
+#: src/core/StelCore.cpp:292
 msgid "Subtract 100 anomalistic years"
 msgstr "کاستن ۱۰۰ سال بی‌هنجار"
 
-#: src/core/StelCore.cpp:282
+#: src/core/StelCore.cpp:293
 msgid "Subtract 1 mean tropical month"
 msgstr "کاستن ۱ ماه اعتدالی میانگین"
 
-#: src/core/StelCore.cpp:283
+#: src/core/StelCore.cpp:294
 msgid "Subtract 1 mean tropical year"
 msgstr "کاستن ۱ سال اعتدالی میانگین"
 
-#: src/core/StelCore.cpp:284
+#: src/core/StelCore.cpp:295
 msgid "Subtract 100 mean tropical years"
 msgstr "کاستن ۱۰۰ سال اعتدالی میانگین"
 
-#: src/core/StelCore.cpp:285
+#: src/core/StelCore.cpp:296
 msgid "Subtract 1 tropical year"
 msgstr "کاستن ۱ سال اعتدالی"
 
-#: src/core/StelCore.cpp:286
+#: src/core/StelCore.cpp:297
 msgid "Subtract 1 Julian year"
 msgstr "کاستن ۱ سال ژولیانی"
 
-#: src/core/StelCore.cpp:287
+#: src/core/StelCore.cpp:298
 msgid "Subtract 1 Julian century"
 msgstr "کاستن ۱ قرن ژولیانی"
 
-#: src/core/StelCore.cpp:288
+#: src/core/StelCore.cpp:299
 msgid "Subtract 1 Gaussian year"
 msgstr "کاستن ۱ سال گاوسی"
 
-#: src/core/StelCore.cpp:290
+#: src/core/StelCore.cpp:301
 msgid "Set home planet to selected planet"
 msgstr "تعیین سیاره‌ی پیش‌فرض"
 
-#: src/core/StelCore.cpp:291
+#: src/core/StelCore.cpp:302
 msgid "Go to home"
 msgstr "بازگشت به خانه"
 
-#: src/core/StelCore.cpp:293
+#: src/core/StelCore.cpp:304
 msgid "Flip scene horizontally"
 msgstr "برگردان جانبی منظره"
 
-#: src/core/StelCore.cpp:294
+#: src/core/StelCore.cpp:305
 msgid "Flip scene vertically"
 msgstr "وارونگی منظره"
 
-#: src/core/StelCore.cpp:1970
+#: src/core/StelCore.cpp:2082
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "تصحیح غیرفعال است. تنها در صورت آگاهی استفاده کنید!"
 
-#: src/core/StelCore.cpp:1973
+#: src/core/StelCore.cpp:2085
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1406,7 +1406,7 @@ msgstr ""
 "را در مقاله خود <em>نظریه‌ی نسبیت انیشتن با خورشیدگرفتگی‌های کهن اثبات "
 "شد</em> به کار برد. (%1). اطلاعات بیشتر در %2اینجا%3."
 
-#: src/core/StelCore.cpp:1976
+#: src/core/StelCore.cpp:2088
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1415,7 +1415,7 @@ msgstr ""
 "این معادله تجربی را جی. ام. کلِمِنس در مقاله‌ی <em>در مورد دستگاه ثابت‌های "
 "نجومی</em> منتشر کرد (%1)."
 
-#: src/core/StelCore.cpp:1979
+#: src/core/StelCore.cpp:2091
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1427,7 +1427,7 @@ msgstr ""
 "سیاره‌ها  پایه‌گذاری کرد (%1) و ژان مويس در <em>فرمول هاي نجومی برای "
 "ماشین‌حساب‌ها</em>. همچنین در برنامه رایانه‌ای SunTracker Pro اتخاذ شد."
 
-#: src/core/StelCore.cpp:1983
+#: src/core/StelCore.cpp:2095
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1437,7 +1437,7 @@ msgstr ""
 "در <em>تقویم فلکی</em> و <em>جدول خورشیدگرفتگی‌ها</em>آن را موکه و مویس "
 "(۱۹۸۳ م.) اتخاذ کردند."
 
-#: src/core/StelCore.cpp:1987
+#: src/core/StelCore.cpp:2099
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1448,7 +1448,7 @@ msgstr ""
 "فاصله‌های ۵- و ۱۰-روزه از ۶۰۱ ق.م. تا ۱۶۴۹ م. فهرست می‌کند. \r\n"
 "به همان نسبت نیز به طور ضمنی در جدول‌های سیزیجی گلدستین (۱۹۷۳ م.) اتخاذ شد."
 
-#: src/core/StelCore.cpp:1991
+#: src/core/StelCore.cpp:2103
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1458,7 +1458,7 @@ msgstr ""
 "این مقاله را پی. ام. مولر و اف. آر. استِفِنسون در مقاله <em>شتاب زمین و ماه "
 "از رصدهای اولیه</em> منتشر کرد (%1)."
 
-#: src/core/StelCore.cpp:1994
+#: src/core/StelCore.cpp:2106
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1467,7 +1467,7 @@ msgstr ""
 "این معادله را اف. آر. استِفِنسون د مقاله <em>رصدهای پیشا-تلسکوپی</em> منتشر "
 "کرد (%1)."
 
-#: src/core/StelCore.cpp:1997
+#: src/core/StelCore.cpp:2109
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1476,7 +1476,7 @@ msgid ""
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2000
+#: src/core/StelCore.cpp:2112
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1486,7 +1486,7 @@ msgstr ""
 "سیاره‌ای از 4000- تا 2800+<em/> و در برنامه‌ی آسمان‌نمای RedShift برای "
 "کامپیوتر استفاده شد."
 
-#: src/core/StelCore.cpp:2003
+#: src/core/StelCore.cpp:2115
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1494,26 +1494,26 @@ msgid ""
 "A.D. 1980</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2006
+#: src/core/StelCore.cpp:2118
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "این الگوریتم در برنامه‌ی آسمان‌نمای Guide 7 برای کامپیوتر استفاده می‌شود."
 
-#: src/core/StelCore.cpp:2009
+#: src/core/StelCore.cpp:2121
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2012
+#: src/core/StelCore.cpp:2124
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
 
-#: src/core/StelCore.cpp:2015
+#: src/core/StelCore.cpp:2127
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1522,14 +1522,14 @@ msgid ""
 "Morrison (1984)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2018
+#: src/core/StelCore.cpp:2130
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2021
+#: src/core/StelCore.cpp:2133
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1537,42 +1537,42 @@ msgid ""
 "1990</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2024
+#: src/core/StelCore.cpp:2136
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2027
+#: src/core/StelCore.cpp:2139
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:2030
+#: src/core/StelCore.cpp:2142
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
 
-#: src/core/StelCore.cpp:2033
+#: src/core/StelCore.cpp:2145
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2036
+#: src/core/StelCore.cpp:2148
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
 
-#: src/core/StelCore.cpp:2039
+#: src/core/StelCore.cpp:2151
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1580,7 +1580,7 @@ msgid ""
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2042
+#: src/core/StelCore.cpp:2154
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1588,7 +1588,7 @@ msgid ""
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2045
+#: src/core/StelCore.cpp:2157
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1597,7 +1597,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:2048 src/core/StelCore.cpp:2051
+#: src/core/StelCore.cpp:2160 src/core/StelCore.cpp:2163
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1607,15 +1607,15 @@ msgid ""
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 
-#: src/core/StelCore.cpp:2048
+#: src/core/StelCore.cpp:2160
 msgid "Used by default."
 msgstr "استفاده‌شده از پیش‌فرض"
 
-#: src/core/StelCore.cpp:2051
+#: src/core/StelCore.cpp:2163
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 
-#: src/core/StelCore.cpp:2054
+#: src/core/StelCore.cpp:2166
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1623,7 +1623,7 @@ msgid ""
 "Babylon</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2057
+#: src/core/StelCore.cpp:2169
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1631,7 +1631,7 @@ msgid ""
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
 
-#: src/core/StelCore.cpp:2060
+#: src/core/StelCore.cpp:2172
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1639,45 +1639,48 @@ msgid ""
 "Approximation of Time Period 1620-2013</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2063
+#: src/core/StelCore.cpp:2175
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
 
-#: src/core/StelCore.cpp:2066 src/core/SimbadSearcher.cpp:156
+#: src/core/StelCore.cpp:2178 src/core/SimbadSearcher.cpp:156
 msgid "Error"
 msgstr "خطا"
 
-#: src/core/StelCore.cpp:2116
-msgid "with meaningless values outside this range"
-msgstr "با مقادیر بی‌معنی بیرون این بازه"
-
-#: src/core/StelCore.cpp:2142
+#: src/core/StelCore.cpp:2186
+#, qt-format
 msgid ""
-"with a mean error of less than one second, max. error 1.9s, and meaningless "
-"values outside this range"
+"The solution's value of %1 for %2 (secular acceleration of the Moon) "
+"requires an adaptation, see Guide for details."
 msgstr ""
-"با خطای میانگین کمتر از یک ثانیه، بیشینه‌ی خطا 1.9 ثانیه، و مقادیر بی‌معنی "
-"بیرون این بازه"
 
-#: src/core/StelCore.cpp:2164 src/core/StelCore.cpp:2169
-#: src/core/StelCore.cpp:2197 src/core/StelCore.cpp:2202
-#: src/core/StelCore.cpp:2207
+#: src/core/StelCore.cpp:2226
 msgid "with zero values outside this range"
 msgstr "با مقادیر صفر بیرون این بازه"
 
-#: src/core/StelCore.cpp:2174
+#: src/core/StelCore.cpp:2229
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "با مقادیر دارای خطای معمول 1 ثانیه و مقادیر صفر بیرون این بازه"
 
-#: src/core/StelCore.cpp:2217
+#: src/core/StelCore.cpp:2232
+msgid ""
+"with a mean error of less than one second, max. error 1.9s, and values for "
+"the limit years outside this range"
+msgstr ""
+
+#: src/core/StelCore.cpp:2239
+msgid "with values for the limit years outside this range"
+msgstr ""
+
+#: src/core/StelCore.cpp:2249
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "بازه‌ی معتبر استفاده: میان سال‌های %1 و %2، %3."
 
-#: src/core/StelCore.cpp:2219
+#: src/core/StelCore.cpp:2251
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "بازه‌ی معتبر استفاده: میان سال‌های %1 و %2."
@@ -1954,31 +1957,31 @@ msgctxt "solar time"
 msgid "LTST"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:536
+#: src/gui/ConfigurationDialog.cpp:538
 msgid "Select screenshot directory"
 msgstr "نشانی ذخیره عکس صفحه را مشخص کنید"
 
-#: src/gui/ConfigurationDialog.cpp:852
+#: src/gui/ConfigurationDialog.cpp:856
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "میدان دید هنگام راه‌اندازی: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:860
+#: src/gui/ConfigurationDialog.cpp:864
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "جهت‌گیری نمای سمت/ارتفاع هنگام راه‌اندازی: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:922
+#: src/gui/ConfigurationDialog.cpp:926
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:253
 msgid "Authors"
 msgstr "پدیدآوران"
 
-#: src/gui/ConfigurationDialog.cpp:923 src/gui/ViewDialog.cpp:1254
+#: src/gui/ConfigurationDialog.cpp:927 src/gui/ViewDialog.cpp:1254
 msgid "Contact"
 msgstr "تماس"
 
-#: src/gui/ConfigurationDialog.cpp:925
+#: src/gui/ConfigurationDialog.cpp:929
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:517
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:408
@@ -1997,15 +2000,15 @@ msgstr "تماس"
 msgid "Version"
 msgstr "نسخه"
 
-#: src/gui/ConfigurationDialog.cpp:1022
+#: src/gui/ConfigurationDialog.cpp:1026
 msgid "Running script: "
 msgstr "اسکریپت در حال اجرا: "
 
-#: src/gui/ConfigurationDialog.cpp:1029
+#: src/gui/ConfigurationDialog.cpp:1033
 msgid "Running script: [none]"
 msgstr "اسکریپت در حال اجرا: [هیچ]"
 
-#: src/gui/ConfigurationDialog.cpp:1094
+#: src/gui/ConfigurationDialog.cpp:1098
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -2013,16 +2016,16 @@ msgstr ""
 "دریافت فهرست‌های ستاره‌ای جدید تمام شد!\n"
 "برای نمایش آنها، استلاریوم را دوباره شروع کنید."
 
-#: src/gui/ConfigurationDialog.cpp:1098
+#: src/gui/ConfigurationDialog.cpp:1102
 msgid "All available star catalogs have been installed."
 msgstr "همه‌ی فهرست‌های موجود نصب شده‌اند."
 
-#: src/gui/ConfigurationDialog.cpp:1103
+#: src/gui/ConfigurationDialog.cpp:1107
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "دریافت فهرست %1 از %2"
 
-#: src/gui/ConfigurationDialog.cpp:1110
+#: src/gui/ConfigurationDialog.cpp:1114
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -2031,7 +2034,7 @@ msgstr ""
 "در حال دریافت %1...\n"
 "(می‌توانید این پنجره را ببندید.)"
 
-#: src/gui/ConfigurationDialog.cpp:1117
+#: src/gui/ConfigurationDialog.cpp:1121
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -2042,7 +2045,7 @@ msgstr ""
 "تعداد ستارگان: %2 میلیون\n"
 "بازه‌ی قدر: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1160 src/gui/ConfigurationDialog.cpp:1196
+#: src/gui/ConfigurationDialog.cpp:1164 src/gui/ConfigurationDialog.cpp:1200
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2051,11 +2054,11 @@ msgstr ""
 "خطا در دریافت %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1249
+#: src/gui/ConfigurationDialog.cpp:1253
 msgid "Verifying file integrity..."
 msgstr "بررسی کامل بودن فایل..."
 
-#: src/gui/ConfigurationDialog.cpp:1253
+#: src/gui/ConfigurationDialog.cpp:1257
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2064,166 +2067,166 @@ msgstr ""
 "خطا در دریافت %1:\n"
 "فایل خراب است."
 
-#: src/gui/ConfigurationDialog.cpp:1299 src/gui/ConfigurationDialog.cpp:1308
+#: src/gui/ConfigurationDialog.cpp:1303 src/gui/ConfigurationDialog.cpp:1312
 msgid "Available"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1301 src/gui/ConfigurationDialog.cpp:1310
+#: src/gui/ConfigurationDialog.cpp:1305 src/gui/ConfigurationDialog.cpp:1314
 msgid "Not Available"
 msgstr ""
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1376
+#: src/gui/ConfigurationDialog.cpp:1381
 msgid "Algorithm of"
 msgstr "الگوریتمِ"
 
-#: src/gui/ConfigurationDialog.cpp:1389
+#: src/gui/ConfigurationDialog.cpp:1394
 msgid "Without correction"
 msgstr "تصحیح نشده"
 
-#: src/gui/ConfigurationDialog.cpp:1390
+#: src/gui/ConfigurationDialog.cpp:1395
 msgid "Schoch (1931)"
 msgstr "شُخ (۱۹۳۱ م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1391
+#: src/gui/ConfigurationDialog.cpp:1396
 msgid "Clemence (1948)"
 msgstr "کلِمِنس (۱۹۴۸ م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1392
+#: src/gui/ConfigurationDialog.cpp:1397
 msgid "IAU (1952)"
 msgstr "اتحادیه‌ی بین‌المللی نجوم (۱۹۵۲ م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1393
+#: src/gui/ConfigurationDialog.cpp:1398
 msgid "Astronomical Ephemeris (1960)"
 msgstr "تقویم فلکی (۱۹۶۰ م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1394
+#: src/gui/ConfigurationDialog.cpp:1399
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "توکرمن (۱۹۶۲ م.، ۱۹۶۴ م.) و گلدستین (۱۹۷۳ م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1395
+#: src/gui/ConfigurationDialog.cpp:1400
 msgid "Muller & Stephenson (1975)"
 msgstr "مولر و استِفِنسون (۱۹۷۵ م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1396
+#: src/gui/ConfigurationDialog.cpp:1401
 msgid "Stephenson (1978)"
 msgstr "استِفِنسون (۱۹۷۸ م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1397
+#: src/gui/ConfigurationDialog.cpp:1402
 msgid "Schmadel & Zech (1979)"
 msgstr "اشمادِل و زِش (۱۹۷۹ م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1398
+#: src/gui/ConfigurationDialog.cpp:1403
 msgid "Morrison & Stephenson (1982)"
 msgstr "موریسون و استفنسون (1982 م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1399
+#: src/gui/ConfigurationDialog.cpp:1404
 msgid "Stephenson & Morrison (1984)"
 msgstr "موریسون و استفنسون (1984 م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1400
+#: src/gui/ConfigurationDialog.cpp:1405
 msgid "Stephenson & Houlden (1986)"
 msgstr "استفنسون و هولدن (1986 م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1401
+#: src/gui/ConfigurationDialog.cpp:1406
 msgid "Espenak (1987, 1989)"
 msgstr "اسپناک (1987، 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1402
+#: src/gui/ConfigurationDialog.cpp:1407
 msgid "Borkowski (1988)"
 msgstr "بورکوفسکی (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1403
+#: src/gui/ConfigurationDialog.cpp:1408
 msgid "Schmadel & Zech (1988)"
 msgstr "اشمادل و زِش (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1404
+#: src/gui/ConfigurationDialog.cpp:1409
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "شاپرون-توز و شاپرون (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1405
+#: src/gui/ConfigurationDialog.cpp:1410
 msgid "Stephenson & Morrison (1995)"
 msgstr "استفنسون و موریسون (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1406
+#: src/gui/ConfigurationDialog.cpp:1411
 msgid "Stephenson (1997)"
 msgstr "استفنسون (1997 م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1408
+#: src/gui/ConfigurationDialog.cpp:1413
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "میوس (1998 م.) (به همراه شاپرون، شاپرون-توز و فرانکو (1997 م.))"
 
-#: src/gui/ConfigurationDialog.cpp:1409
+#: src/gui/ConfigurationDialog.cpp:1414
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1410
+#: src/gui/ConfigurationDialog.cpp:1415
 msgid "Meeus & Simons (2000)"
 msgstr "میوس و سیمونز (2000 م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1411
+#: src/gui/ConfigurationDialog.cpp:1416
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "مونتن‌براک و فلگر (2000 م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1412
+#: src/gui/ConfigurationDialog.cpp:1417
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "رینگلد و دِرشویتز (2000، 2007 م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1413
+#: src/gui/ConfigurationDialog.cpp:1418
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "موریسون و استفنسون (2004، 2005 م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1415
+#: src/gui/ConfigurationDialog.cpp:1420
 msgid "Espenak & Meeus (2006)"
 msgstr "اسپناک و میوس (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1418
+#: src/gui/ConfigurationDialog.cpp:1423
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1420
+#: src/gui/ConfigurationDialog.cpp:1425
 msgid "Reijs (2006)"
 msgstr "ریس (2006 م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1421
+#: src/gui/ConfigurationDialog.cpp:1426
 msgid "Banjevic (2006)"
 msgstr "بانژویچ (2006 م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1422
+#: src/gui/ConfigurationDialog.cpp:1427
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "اسلام، صدیق و قریشی (2008، 2013 م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1423
+#: src/gui/ConfigurationDialog.cpp:1428
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "خالد، سلطان و زیدی (2014 م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1424
+#: src/gui/ConfigurationDialog.cpp:1429
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "معادله‌ی دلخواه %1T"
 
-#: src/gui/ConfigurationDialog.cpp:1473 src/gui/ConfigurationDialog.cpp:1508
+#: src/gui/ConfigurationDialog.cpp:1478 src/gui/ConfigurationDialog.cpp:1513
 #: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:408
 msgid "System default"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1474
+#: src/gui/ConfigurationDialog.cpp:1479
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1475
+#: src/gui/ConfigurationDialog.cpp:1480
 msgid "dd-mm-yyyy"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1476
+#: src/gui/ConfigurationDialog.cpp:1481
 msgid "mm-dd-yyyy"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1509
+#: src/gui/ConfigurationDialog.cpp:1514
 msgid "12-hour format"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1510
+#: src/gui/ConfigurationDialog.cpp:1515
 msgid "24-hour format"
 msgstr ""
 
@@ -2561,7 +2564,7 @@ msgstr "پنهان شدن خودکار نوار دکمه‌های عمودی"
 msgid "Toggle visibility of GUI"
 msgstr "نمایش/عدم نمایش رابط گرافیکی"
 
-#: src/gui/StelGuiItems.cpp:322 src/gui/StelGuiItems.cpp:864
+#: src/gui/StelGuiItems.cpp:322 src/gui/StelGuiItems.cpp:862
 msgid "Space"
 msgstr "فضا"
 
@@ -2577,37 +2580,37 @@ msgstr ""
 msgid "Local True Solar Time"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:679
+#: src/gui/StelGuiItems.cpp:677
 #, c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/StelGuiItems.cpp:711
+#: src/gui/StelGuiItems.cpp:709
 #, qt-format
 msgid "planetocentric distance %1 km"
 msgstr "فاصله از مرکز سیاره %1 کیلومتر"
 
-#: src/gui/StelGuiItems.cpp:713
+#: src/gui/StelGuiItems.cpp:711
 msgid "planetocentric observer"
 msgstr "ناظر سیاره‌مرکز"
 
 #. TRANSLATORS: Field of view. Please use abbreviation.
-#: src/gui/StelGuiItems.cpp:728
+#: src/gui/StelGuiItems.cpp:726
 msgctxt "abbreviation"
 msgid "FOV"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:744
+#: src/gui/StelGuiItems.cpp:742
 msgid "Field of view"
 msgstr "میدان دید"
 
 #. TRANSLATORS: Frames per second. Please use abbreviation.
-#: src/gui/StelGuiItems.cpp:763
+#: src/gui/StelGuiItems.cpp:761
 msgctxt "abbreviation"
 msgid "FPS"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:771
+#: src/gui/StelGuiItems.cpp:769
 msgid "Frames per second"
 msgstr "فریم بر ثانیه"
 
@@ -2914,26 +2917,30 @@ msgstr "میانبر اصلی"
 msgid "Alternative shortcut"
 msgstr "میانبر جایگزین"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:136
+#: src/gui/CustomDeltaTEquationDialog.cpp:134
 #, qt-format
 msgid "Custom equation for %1T"
 msgstr "معادله سفارشی برای %1T"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:137
+#: src/gui/CustomDeltaTEquationDialog.cpp:135
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
 msgstr "بایستی یک معادله‌ی معمول برای محاسبه‌ی %1T چنین باشد:"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:139
+#: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "where"
 msgstr ""
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:139
+#: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "year"
 msgstr "سال"
 
+#: src/gui/CustomDeltaTEquationDialog.cpp:138
+msgid "Secular acceleration of the Moon"
+msgstr ""
+
 #. TRANSLATORS: name of object
-#: src/gui/AstroCalcDialog.cpp:189 src/ui_configurationDialog.h:1287
+#: src/gui/AstroCalcDialog.cpp:189 src/ui_configurationDialog.h:1290
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:450
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:96
 #: plugins/Exoplanets/src/Exoplanet.cpp:324
@@ -2957,7 +2964,7 @@ msgid "Mag."
 msgstr "قدر"
 
 #. TRANSLATORS: type of object
-#: src/gui/AstroCalcDialog.cpp:197 src/ui_configurationDialog.h:1262
+#: src/gui/AstroCalcDialog.cpp:197 src/ui_configurationDialog.h:1269
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
 msgid "Type"
 msgstr "نوع"
@@ -4110,7 +4117,7 @@ msgstr "پوشه"
 msgid "&Choose"
 msgstr "&برگزیدن"
 
-#: src/translations.h:396 src/ui_configurationDialog.h:1423
+#: src/translations.h:396 src/ui_configurationDialog.h:1431
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "Cancel"
 msgstr "لغو"
@@ -5221,7 +5228,7 @@ msgstr "درباره"
 msgid "Log"
 msgstr "گزارش"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1306
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1314
 msgid "Edit keyboard shortcuts..."
 msgstr "ویرایش میانبرهای صفحه‌کلید..."
 
@@ -5497,7 +5504,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:722 src/ui_viewDialog.h:2277
 #: src/ui_viewDialog.h:2299 src/ui_viewDialog.h:2325
-#: src/ui_configurationDialog.h:1424 src/ui_configurationDialog.h:1435
+#: src/ui_configurationDialog.h:1432 src/ui_configurationDialog.h:1443
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "گزینه‌ها"
@@ -6233,68 +6240,68 @@ msgstr "چشم‌انداز"
 msgid "Starlore"
 msgstr "افسانه‌ها و ستارگان"
 
-#: src/ui_configurationDialog.h:1197
+#: src/ui_configurationDialog.h:1204
 msgid "Configuration"
 msgstr "پیکربندی"
 
-#: src/ui_configurationDialog.h:1199
+#: src/ui_configurationDialog.h:1206
 msgid "Language settings"
 msgstr "تنظیمات زبان"
 
-#: src/ui_configurationDialog.h:1200
+#: src/ui_configurationDialog.h:1207
 msgid "Program Language"
 msgstr "زبان برنامه"
 
-#: src/ui_configurationDialog.h:1201
+#: src/ui_configurationDialog.h:1208
 msgid "Sky Culture Language"
 msgstr "زبان فرهنگ آسمان"
 
-#: src/ui_configurationDialog.h:1203
+#: src/ui_configurationDialog.h:1210
 msgid "This feature has not been thoroughly tested yet!"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1205
+#: src/ui_configurationDialog.h:1212
 msgid "Ephemeris settings (experimental)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1206 src/ui_configurationDialog.h:1207
+#: src/ui_configurationDialog.h:1213 src/ui_configurationDialog.h:1214
 msgid "Not installed"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1209
+#: src/ui_configurationDialog.h:1216
 msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1211
+#: src/ui_configurationDialog.h:1218
 msgid "Use DE431 (long-time data)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1213
+#: src/ui_configurationDialog.h:1220
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1215
+#: src/ui_configurationDialog.h:1222
 msgid "Use DE430 (high accuracy)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1217
+#: src/ui_configurationDialog.h:1224
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1219
+#: src/ui_configurationDialog.h:1226
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1220
+#: src/ui_configurationDialog.h:1227
 msgid "Default options"
 msgstr "تنظيمات پيش‌فرض"
 
-#: src/ui_configurationDialog.h:1222
+#: src/ui_configurationDialog.h:1229
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -6302,7 +6309,7 @@ msgstr ""
 "ذخیره تنظیمات جاری این بار استلاریوم برای بار دیگر که استلاریوم را "
 "راه‌اندازی می‌شود"
 
-#: src/ui_configurationDialog.h:1224
+#: src/ui_configurationDialog.h:1231
 #: plugins/NavStars/src/ui_navStarsWindow.h:211
 #: plugins/FOV/src/ui_fovWindow.h:391
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:281
@@ -6310,11 +6317,11 @@ msgstr ""
 msgid "Save settings"
 msgstr "ذخیره تنظیمات"
 
-#: src/ui_configurationDialog.h:1226
+#: src/ui_configurationDialog.h:1233
 msgid "Restore the default settings that came with Stellarium"
 msgstr "بازگشت به تنظیمات اولیه استلاریوم"
 
-#: src/ui_configurationDialog.h:1228
+#: src/ui_configurationDialog.h:1235
 #: plugins/NavStars/src/ui_navStarsWindow.h:212
 #: plugins/FOV/src/ui_fovWindow.h:408
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:282
@@ -6322,7 +6329,7 @@ msgstr "بازگشت به تنظیمات اولیه استلاریوم"
 msgid "Restore defaults"
 msgstr "تنظیمات پیش‌فرض"
 
-#: src/ui_configurationDialog.h:1229
+#: src/ui_configurationDialog.h:1236
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -6332,256 +6339,260 @@ msgstr ""
 "همهٔ گزینه‌های کنونی شامل میدان دید و جهت‌گیری نمای کنونی است برای استفاده "
 "در راه‌اندازی بعدی."
 
-#: src/ui_configurationDialog.h:1231
+#: src/ui_configurationDialog.h:1238
 msgid "The width of your view when Stellarium starts"
 msgstr "پهنای دید هنگامی که استلاریوم دوباره راه‌اندازی می‌شود."
 
-#: src/ui_configurationDialog.h:1234
+#: src/ui_configurationDialog.h:1241
 msgid "The direction you're looking when Stellarium starts"
 msgstr "جهت‌گیری‌ای که هنگام راه‌اندازی استلاریوم مشاهده خواهید کرد"
 
-#: src/ui_configurationDialog.h:1236 src/ui_configurationDialog.h:1446
+#: src/ui_configurationDialog.h:1243 src/ui_configurationDialog.h:1454
 msgid "Selected object information"
 msgstr "اطلاعات جرم انتخابی"
 
-#: src/ui_configurationDialog.h:1238
+#: src/ui_configurationDialog.h:1245
 msgid "Display all information available"
 msgstr "نمایش تمام اطلاعات در دسترس"
 
-#: src/ui_configurationDialog.h:1240
+#: src/ui_configurationDialog.h:1247
 msgid "All available"
 msgstr "كامل"
 
-#: src/ui_configurationDialog.h:1242
+#: src/ui_configurationDialog.h:1249
 msgid "Display no information"
 msgstr "نمایش ندادن هیچ کدام از اطلاعات"
 
-#: src/ui_configurationDialog.h:1244 plugins/Oculars/src/Oculars.cpp:2393
+#: src/ui_configurationDialog.h:1251 plugins/Oculars/src/Oculars.cpp:2393
 #: plugins/Observability/src/Observability.cpp:205
 msgid "None"
 msgstr "هیچ"
 
-#: src/ui_configurationDialog.h:1246
+#: src/ui_configurationDialog.h:1253
 msgid "Display less information"
 msgstr "نمایش بخشی از اطلاعات"
 
-#: src/ui_configurationDialog.h:1248
+#: src/ui_configurationDialog.h:1255
 msgid "Short"
 msgstr "کوتاه"
 
-#: src/ui_configurationDialog.h:1250
+#: src/ui_configurationDialog.h:1257
 msgid "Display user settings information"
 msgstr "نمایش اطلاعات تنظیمات کاربر"
 
-#: src/ui_configurationDialog.h:1252
+#: src/ui_configurationDialog.h:1259
 msgid "Customized"
 msgstr "سفارشی"
 
-#: src/ui_configurationDialog.h:1253
+#: src/ui_configurationDialog.h:1260
 msgid "Displayed fields"
 msgstr "موردهایی که نمایش داده می‌شود"
 
-#: src/ui_configurationDialog.h:1255 src/ui_configurationDialog.h:1293
+#: src/ui_configurationDialog.h:1262 src/ui_configurationDialog.h:1296
 msgid "Equatorial coordinates, equinox of date"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1257
+#: src/ui_configurationDialog.h:1264
 msgid "Right ascension/Declination (of date)"
 msgstr "بعد/میل (از تاریخ)"
 
-#: src/ui_configurationDialog.h:1258
+#: src/ui_configurationDialog.h:1265
 msgid "Supergalactic coordinates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1260
+#: src/ui_configurationDialog.h:1267
 msgid "The type of the object (star, planet, etc.)"
 msgstr "گونهٔ جرم (ستاره، سیاره، ...)"
 
-#: src/ui_configurationDialog.h:1263
+#: src/ui_configurationDialog.h:1270
 msgid "Absolute magnitude"
 msgstr "قدر مطلق"
 
-#: src/ui_configurationDialog.h:1265
+#: src/ui_configurationDialog.h:1272
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1267
+#: src/ui_configurationDialog.h:1274
 msgid "Ecliptic coordinates (of date)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1269
-msgid "Spectral class, nebula type, etc."
-msgstr "رده طیفی، گونه سحابی، ..."
-
-#: src/ui_configurationDialog.h:1271
-msgid "Additional information"
-msgstr "اطلاعات بیشتر"
-
-#: src/ui_configurationDialog.h:1273
+#: src/ui_configurationDialog.h:1276
 msgid "Angular or physical size"
 msgstr "اندازه فیزیکی یا زاویه‌ای"
 
-#: src/ui_configurationDialog.h:1275
+#: src/ui_configurationDialog.h:1278
 msgid "Size"
 msgstr "اندازه‌"
 
-#: src/ui_configurationDialog.h:1277
+#: src/ui_configurationDialog.h:1280
 msgid "Horizontal coordinates"
 msgstr "مختصات سمتی/ارتفاعی"
 
-#: src/ui_configurationDialog.h:1279
+#: src/ui_configurationDialog.h:1282
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:204
 msgid "Altitude/Azimuth"
 msgstr "سمت/ارتفاع"
 
-#: src/ui_configurationDialog.h:1280
+#: src/ui_configurationDialog.h:1283
 msgid "Catalog number(s)"
 msgstr "شماره(های) فهرست"
 
-#: src/ui_configurationDialog.h:1281
+#: src/ui_configurationDialog.h:1284
 msgid "Distance"
 msgstr "فاصله"
 
-#: src/ui_configurationDialog.h:1282
+#: src/ui_configurationDialog.h:1285
 msgid "Galactic coordinates"
 msgstr "مختصات کهکشانی"
 
-#: src/ui_configurationDialog.h:1284
+#: src/ui_configurationDialog.h:1287
 msgid "Equatorial coordinates, equinox of J2000.0"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1286
+#: src/ui_configurationDialog.h:1289
 msgid "Right ascension/Declination (J2000)"
 msgstr "بعد/میل (J2000)"
 
-#: src/ui_configurationDialog.h:1289
+#: src/ui_configurationDialog.h:1292
 msgid "Ecliptic coordinates, equinox J2000.0"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1291
+#: src/ui_configurationDialog.h:1294
 msgid "Ecliptic coordinates (J2000)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1295
+#: src/ui_configurationDialog.h:1298
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:201
 msgid "Hour angle/Declination"
 msgstr "زاویه ساعتی/میل"
 
-#: src/ui_configurationDialog.h:1296
+#: src/ui_configurationDialog.h:1299
 msgid "Visual magnitude"
 msgstr "قدر دیداری"
 
-#: src/ui_configurationDialog.h:1298
+#: src/ui_configurationDialog.h:1301
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
 msgid "3-letter IAU constellation abbreviation"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1300
+#: src/ui_configurationDialog.h:1303
 msgid "Constellation"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1301
+#: src/ui_configurationDialog.h:1305
+msgid "Spectral class, nebula type, etc."
+msgstr "رده طیفی، گونه سحابی، ..."
+
+#: src/ui_configurationDialog.h:1307
+msgid "Additional information"
+msgstr "اطلاعات بیشتر"
+
+#: src/ui_configurationDialog.h:1308
+msgid "Sidereal time"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1309
 msgid "Control"
 msgstr "مهار"
 
-#: src/ui_configurationDialog.h:1303
+#: src/ui_configurationDialog.h:1311
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "امکان حرکت (با کشیدن) و بزرگ‌نمایی (با کلید وسط) با موشواره"
 
-#: src/ui_configurationDialog.h:1305
+#: src/ui_configurationDialog.h:1313
 msgid "Enable mouse navigation"
 msgstr "فعال کردن ناوبری با موشواره"
 
-#: src/ui_configurationDialog.h:1308
+#: src/ui_configurationDialog.h:1316
 msgid "Allow keyboard to pan and zoom"
 msgstr "امکان حرکت و بزرگ‌نمایی با صفحه‌کلید"
 
-#: src/ui_configurationDialog.h:1310
+#: src/ui_configurationDialog.h:1318
 msgid "Enable keyboard navigation"
 msgstr "فعال کردن ناوبری با صفحه‌کلید"
 
-#: src/ui_configurationDialog.h:1312
+#: src/ui_configurationDialog.h:1320
 msgid "Hides the mouse cursor when inactive"
 msgstr "پنهان کردن نشانگر موشواره هنگام بیکاری"
 
-#: src/ui_configurationDialog.h:1314
+#: src/ui_configurationDialog.h:1322
 msgid "Mouse cursor timeout:"
 msgstr "زمان محو اشاره‌گر موشواره:"
 
-#: src/ui_configurationDialog.h:1316
+#: src/ui_configurationDialog.h:1324
 msgid "seconds"
 msgstr "ثانیه"
 
-#: src/ui_configurationDialog.h:1318
+#: src/ui_configurationDialog.h:1326
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:192
 msgid "Startup date and time"
 msgstr "تاريخ و زمان هنگام راه‌اندازی"
 
-#: src/ui_configurationDialog.h:1320
+#: src/ui_configurationDialog.h:1328
 msgid "Starts Stellarium at system clock date and time"
 msgstr "راه‌اندازی استلاریوم با تاریخ و زمان رایانه"
 
-#: src/ui_configurationDialog.h:1322
+#: src/ui_configurationDialog.h:1330
 msgid "System date and time"
 msgstr "تاریخ و ساعت رایانه"
 
-#: src/ui_configurationDialog.h:1324
+#: src/ui_configurationDialog.h:1332
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1326
+#: src/ui_configurationDialog.h:1334
 msgid "System date at:"
 msgstr "ساعت در تاريخ رايانه"
 
-#: src/ui_configurationDialog.h:1328
+#: src/ui_configurationDialog.h:1336
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "استفاده از تاریخ و زمانی به‌خصوص هنگام راه‌اندازی استلاریوم"
 
-#: src/ui_configurationDialog.h:1330
+#: src/ui_configurationDialog.h:1338
 msgid "Other:"
 msgstr "دیگر:"
 
-#: src/ui_configurationDialog.h:1332
+#: src/ui_configurationDialog.h:1340
 msgid "Use current local date and time"
 msgstr "از تاریخ و زمان محلی کنونی استفاده شود"
 
-#: src/ui_configurationDialog.h:1334
+#: src/ui_configurationDialog.h:1342
 msgid "use current"
 msgstr "هم‌اکنون"
 
-#: src/ui_configurationDialog.h:1336
+#: src/ui_configurationDialog.h:1344
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1338
+#: src/ui_configurationDialog.h:1346
 msgid "Display formats of date and time"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1339
+#: src/ui_configurationDialog.h:1347
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
 msgid "Date:"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1340
+#: src/ui_configurationDialog.h:1348
 msgid "and time:"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1341
+#: src/ui_configurationDialog.h:1349
 msgid "Time correction"
 msgstr "تصحیح زمان"
 
-#: src/ui_configurationDialog.h:1344
+#: src/ui_configurationDialog.h:1352
 msgid "Edit equation"
 msgstr "ویرایش معادله"
 
-#: src/ui_configurationDialog.h:1346
+#: src/ui_configurationDialog.h:1354
 msgid "Planetarium options"
 msgstr "تنظیمات آسمان‌نما"
 
-#: src/ui_configurationDialog.h:1348
+#: src/ui_configurationDialog.h:1356
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -6589,200 +6600,200 @@ msgstr ""
 "وقتی فعال شود، دکمه ی \"کوچک نمایی خودکار\" جهت دید اولیه را نیز تقییر خواهد "
 "داد."
 
-#: src/ui_configurationDialog.h:1350
+#: src/ui_configurationDialog.h:1358
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:457
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "برگشت به زاويه ديدِ پيش‌فرض"
 
-#: src/ui_configurationDialog.h:1352
+#: src/ui_configurationDialog.h:1360
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "نمايش اجرام داخل يك دايره مركزي"
 
-#: src/ui_configurationDialog.h:1354
+#: src/ui_configurationDialog.h:1362
 msgid "Disc viewport"
 msgstr "نماي تلسكوپ"
 
-#: src/ui_configurationDialog.h:1356
+#: src/ui_configurationDialog.h:1364
 msgid "Align labels with the horizon"
 msgstr "همراسنا كردن نام‌ها با افق"
 
-#: src/ui_configurationDialog.h:1358
+#: src/ui_configurationDialog.h:1366
 msgid "Gravity labels"
 msgstr "دوران نام‌ها"
 
-#: src/ui_configurationDialog.h:1360
+#: src/ui_configurationDialog.h:1368
 msgid "Use decimal degrees for coordinates"
 msgstr "استفاده از درجه‌های اعشاری برای مختصات"
 
-#: src/ui_configurationDialog.h:1362
+#: src/ui_configurationDialog.h:1370
 msgid "Use decimal degrees"
 msgstr "استفاده از درجه‌های اعشاری"
 
-#: src/ui_configurationDialog.h:1364
+#: src/ui_configurationDialog.h:1372
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
 msgstr ""
 "اعوجاج آينه‌اي كروي هنگام تصوير بر روي آينه كروي براي آسمان‌نماي ضعيف"
 
-#: src/ui_configurationDialog.h:1366
+#: src/ui_configurationDialog.h:1374
 msgid "Spheric mirror distortion"
 msgstr "اعوجاج آينه كروي"
 
-#: src/ui_configurationDialog.h:1368
+#: src/ui_configurationDialog.h:1376
 msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1370
+#: src/ui_configurationDialog.h:1378
 msgid "Topocentric coordinates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1372
+#: src/ui_configurationDialog.h:1380
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1374
+#: src/ui_configurationDialog.h:1382
 msgid "Auto-enabling for the atmosphere"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1376
+#: src/ui_configurationDialog.h:1384
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "تغییر وضعیت دکمه‌های برگردان جانبی و وارونگی"
 
-#: src/ui_configurationDialog.h:1378
+#: src/ui_configurationDialog.h:1386
 msgid "Show flip buttons"
 msgstr "دكمه‌هاي تغيير جهت روشن"
 
-#: src/ui_configurationDialog.h:1380 src/ui_configurationDialog.h:1383
+#: src/ui_configurationDialog.h:1388 src/ui_configurationDialog.h:1391
 msgid "Hide other constellations when you click one"
 msgstr "نهفتن دیگر صورت‌فلکی‌ها هنگام کلیک کردن بر یکی"
 
-#: src/ui_configurationDialog.h:1387
+#: src/ui_configurationDialog.h:1395
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "نهفتن/نمایش پس‌زمینه سحابی‌ها"
 
-#: src/ui_configurationDialog.h:1389
+#: src/ui_configurationDialog.h:1397
 msgid "Show nebula background button"
 msgstr "نمایش دکمه پس‌زمینه سحابی"
 
-#: src/ui_configurationDialog.h:1391
+#: src/ui_configurationDialog.h:1399
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1393
+#: src/ui_configurationDialog.h:1401
 msgid "Include nutation"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1395
+#: src/ui_configurationDialog.h:1403
 msgid "Activate this option to calculate azimuth from south towards west."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1397
+#: src/ui_configurationDialog.h:1405
 msgid "Azimuth from South"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1399
+#: src/ui_configurationDialog.h:1407
 msgid "Toggle display of the button for Digitized Sky Survey."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1401
+#: src/ui_configurationDialog.h:1409
 msgid "Show DSS button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1403
+#: src/ui_configurationDialog.h:1411
 msgid "Automatic change of landscape when planet is changed"
 msgstr "تغییر خودکار چشم‌انداز با تغییر سیاره"
 
-#: src/ui_configurationDialog.h:1405
+#: src/ui_configurationDialog.h:1413
 msgid "Auto select landscapes"
 msgstr "گزینش خودکار چشم‌انداز"
 
-#: src/ui_configurationDialog.h:1406
+#: src/ui_configurationDialog.h:1414
 msgid "Show bookmarks button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1407
+#: src/ui_configurationDialog.h:1415
 msgid "Screenshots"
 msgstr "عكس از صفحه"
 
-#: src/ui_configurationDialog.h:1408
+#: src/ui_configurationDialog.h:1416
 msgid "Screenshot Directory"
 msgstr "پوشه تصاویر"
 
-#: src/ui_configurationDialog.h:1410
+#: src/ui_configurationDialog.h:1418
 msgid "Invert colors"
 msgstr "وارونه‌کردن رنگ‌ها"
 
-#: src/ui_configurationDialog.h:1411
+#: src/ui_configurationDialog.h:1419
 msgid "Star catalog updates"
 msgstr "بروزرساني زيج ستارگان"
 
-#: src/ui_configurationDialog.h:1413
+#: src/ui_configurationDialog.h:1421
 msgid "Click here to start downloading"
 msgstr "دريافت"
 
-#: src/ui_configurationDialog.h:1415
+#: src/ui_configurationDialog.h:1423
 msgid "Download this file to view even more stars"
 msgstr "برای مشاهده ستارگان بیشتر این فایل را دريافت کنید"
 
-#: src/ui_configurationDialog.h:1417
+#: src/ui_configurationDialog.h:1425
 msgid "Restart the download"
 msgstr "راه‌اندازی مجدد دريافت"
 
-#: src/ui_configurationDialog.h:1419
+#: src/ui_configurationDialog.h:1427
 msgid "Retry"
 msgstr "تلاش دوباره"
 
-#: src/ui_configurationDialog.h:1421
+#: src/ui_configurationDialog.h:1429
 msgid "Stop the download. You can always restart it later"
 msgstr "توقفِ دريافت. بعداً می‌توانید دوباره آن را دريافت کنید."
 
-#: src/ui_configurationDialog.h:1426
+#: src/ui_configurationDialog.h:1434
 msgid "Close window when script runs"
 msgstr "بستن پنجره هنگام اجرای اسکریپت"
 
-#: src/ui_configurationDialog.h:1428
+#: src/ui_configurationDialog.h:1436
 msgid "Run the selected script"
 msgstr "اجراي برنامه"
 
-#: src/ui_configurationDialog.h:1432
+#: src/ui_configurationDialog.h:1440
 msgid "Stop a running script"
 msgstr "توقف اجراي برنامه"
 
-#: src/ui_configurationDialog.h:1436
+#: src/ui_configurationDialog.h:1444
 msgid "Load at startup"
 msgstr "بارگذاری در هنگام راه‌اندازی"
 
-#: src/ui_configurationDialog.h:1437
+#: src/ui_configurationDialog.h:1445
 msgid "configure"
 msgstr "پیکربندی"
 
-#: src/ui_configurationDialog.h:1442
+#: src/ui_configurationDialog.h:1450
 msgid "Main"
 msgstr "اصلی"
 
-#: src/ui_configurationDialog.h:1444
+#: src/ui_configurationDialog.h:1452
 msgid "Information"
 msgstr "اطلاعات"
 
-#: src/ui_configurationDialog.h:1449
+#: src/ui_configurationDialog.h:1457
 msgid "Navigation"
 msgstr "کاوش"
 
-#: src/ui_configurationDialog.h:1451
+#: src/ui_configurationDialog.h:1459
 msgid "Tools"
 msgstr "ابزار"
 
-#: src/ui_configurationDialog.h:1453
+#: src/ui_configurationDialog.h:1461
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:497
 msgid "Scripts"
 msgstr "برنامه‌ها"
 
-#: src/ui_configurationDialog.h:1455
+#: src/ui_configurationDialog.h:1463
 msgid "Plugins"
 msgstr "افزونه‌ها"
 
@@ -6946,7 +6957,7 @@ msgstr "موقعیت مکان‌نما"
 msgid "Include dir:"
 msgstr ""
 
-#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:327
+#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:329
 msgid "..."
 msgstr "..."
 
@@ -7011,12 +7022,12 @@ msgid "Time step:"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:544 src/ui_astroCalcDialog.h:551
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "To:"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:545 src/ui_astroCalcDialog.h:548
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "From:"
 msgstr ""
 
@@ -10041,67 +10052,67 @@ msgstr ""
 msgid "Select one"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:319
+#: plugins/TelescopeControl/src/ui_slewDialog.h:321
 msgid "Slew telescope to"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:321
+#: plugins/TelescopeControl/src/ui_slewDialog.h:323
 msgid "There are no active devices."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:322
+#: plugins/TelescopeControl/src/ui_slewDialog.h:324
 msgid "Slew telescope to coordinates"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:323
+#: plugins/TelescopeControl/src/ui_slewDialog.h:325
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:247
 msgid "&Right Ascension (J2000):"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:324
+#: plugins/TelescopeControl/src/ui_slewDialog.h:326
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:248
 msgid "De&clination (J2000):"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:325
+#: plugins/TelescopeControl/src/ui_slewDialog.h:327
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:244
 msgid "&Current object"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:326
+#: plugins/TelescopeControl/src/ui_slewDialog.h:328
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:245
 msgid "Center of the screen"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:329
+#: plugins/TelescopeControl/src/ui_slewDialog.h:331
 msgid "Hours-minutes-seconds format"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:331
+#: plugins/TelescopeControl/src/ui_slewDialog.h:333
 msgid "&HMS"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:333
+#: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "Degrees-minutes-seconds format"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:335
+#: plugins/TelescopeControl/src/ui_slewDialog.h:337
 msgid "&DMS"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:337
+#: plugins/TelescopeControl/src/ui_slewDialog.h:339
 msgid "Decimal degrees"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:339
+#: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "D&ecimal"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:340
+#: plugins/TelescopeControl/src/ui_slewDialog.h:342
 msgid "&Slew"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:341
+#: plugins/TelescopeControl/src/ui_slewDialog.h:343
 msgid "Configure &telescopes..."
 msgstr ""
 
@@ -13436,7 +13447,7 @@ msgid "Peak"
 msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:421
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:188
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:190
 msgid "Meteor Showers Configuration"
 msgstr "پیکره بندی رگبارهای شهابی"
 
@@ -13516,21 +13527,21 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 msgid "Meteor Showers: Search"
 msgstr "رگبارهای شهابی: جستوجو"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:198
 msgid "Search"
 msgstr ""
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "dd/MM/yyyy"
 msgstr ""
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:199
 msgid "Results"
 msgstr ""
 
@@ -15264,6 +15275,16 @@ msgstr ""
 #, qt-format
 #~ msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
 #~ msgstr "روشنایی سطحی: <b>%1</b> (خاموش شده به: <b>%2</b>)"
+
+#~ msgid "with meaningless values outside this range"
+#~ msgstr "با مقادیر بی‌معنی بیرون این بازه"
+
+#~ msgid ""
+#~ "with a mean error of less than one second, max. error 1.9s, and meaningless "
+#~ "values outside this range"
+#~ msgstr ""
+#~ "با خطای میانگین کمتر از یک ثانیه، بیشینه‌ی خطا 1.9 ثانیه، و مقادیر بی‌معنی "
+#~ "بیرون این بازه"
 
 #~ msgid ""
 #~ "The full name of this projection method is, <i>Lambert azimuthal equal-area "
