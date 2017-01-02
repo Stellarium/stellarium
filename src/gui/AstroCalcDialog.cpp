@@ -171,6 +171,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(currentTimeLine, SIGNAL(timeout()), this, SLOT(drawCurrentTimeDiagram()));
 	currentTimeLine->start(500); // Update 'now' line position every 0.5 seconds
 
+	connect(solarSystem, SIGNAL(solarSystemChanged()), this, SLOT(updateSolarSystemData()));
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 }
 
@@ -1527,4 +1528,11 @@ void AstroCalcDialog::updateTabBarListWidgetWidth()
 
 	// Hack to force the window to be resized...
 	ui->stackListWidget->setMinimumWidth(width);
+}
+
+void AstroCalcDialog::updateSolarSystemData()
+{
+	populateCelestialBodyList();
+	populateGroupCelestialBodyList();
+	currentPlanetaryPositions();
 }

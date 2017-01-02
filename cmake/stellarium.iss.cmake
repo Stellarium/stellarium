@@ -72,7 +72,6 @@ Name: removeconfig; Description: "{cm:RemoveMainConfig}"; GroupDescription: "{cm
 Name: removeplugins; Description: "{cm:RemovePluginsConfig}"; GroupDescription: "{cm:RemoveFromPreviousInstallation}"; Flags: unchecked
 Name: removesolar; Description: "{cm:RemoveSolarConfig}"; GroupDescription: "{cm:RemoveFromPreviousInstallation}"
 Name: removelandscapes; Description: "{cm:RemoveUILandscapes}"; GroupDescription: "{cm:RemoveFromPreviousInstallation}"; Flags: unchecked
-Name: removestars; Description: "{cm:RemoveStarCatalogs}"; GroupDescription: "{cm:RemoveFromPreviousInstallation}"; Flags: unchecked
 ;Name: removeshortcuts; Description: "{cm:RemoveShortcutsConfig}"; GroupDescription: "{cm:RemoveFromPreviousInstallation}"; Flags: unchecked
 
 [Run]
