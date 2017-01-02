@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-31 13:28+0700\n"
+"POT-Creation-Date: 2017-01-01 21:32+0700\n"
 "PO-Revision-Date: 2016-07-17 20:37+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-01 04:45+0000\n"
+"X-Launchpad-Export-Date: 2017-01-02 04:41+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -1627,37 +1627,37 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: src/core/StelCore.cpp:2183
+#: src/core/StelCore.cpp:2186
 #, qt-format
 msgid ""
-"The solution's value of %1\"/cy%2 for nDot requires an adaptation, see Guide "
-"for details."
+"The solution's value of %1 for %2 (secular acceleration of the Moon) "
+"requires an adaptation, see Guide for details."
 msgstr ""
 
-#: src/core/StelCore.cpp:2222
+#: src/core/StelCore.cpp:2226
 msgid "with zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2225
+#: src/core/StelCore.cpp:2229
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2228
+#: src/core/StelCore.cpp:2232
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2235
+#: src/core/StelCore.cpp:2239
 msgid "with values for the limit years outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2245
+#: src/core/StelCore.cpp:2249
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr ""
 
-#: src/core/StelCore.cpp:2247
+#: src/core/StelCore.cpp:2251
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr ""
@@ -2863,22 +2863,26 @@ msgstr ""
 msgid "Alternative shortcut"
 msgstr ""
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:136
+#: src/gui/CustomDeltaTEquationDialog.cpp:134
 #, qt-format
 msgid "Custom equation for %1T"
 msgstr ""
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:137
+#: src/gui/CustomDeltaTEquationDialog.cpp:135
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
 msgstr ""
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:139
+#: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "where"
 msgstr ""
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:139
+#: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "year"
+msgstr ""
+
+#: src/gui/CustomDeltaTEquationDialog.cpp:138
+msgid "Secular acceleration of the Moon"
 msgstr ""
 
 #. TRANSLATORS: name of object
@@ -6853,7 +6857,7 @@ msgstr ""
 msgid "Include dir:"
 msgstr ""
 
-#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:327
+#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:329
 msgid "..."
 msgstr ""
 
@@ -6918,12 +6922,12 @@ msgid "Time step:"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:544 src/ui_astroCalcDialog.h:551
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "To:"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:545 src/ui_astroCalcDialog.h:548
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "From:"
 msgstr ""
 
@@ -9943,67 +9947,67 @@ msgstr ""
 msgid "Select one"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:319
+#: plugins/TelescopeControl/src/ui_slewDialog.h:321
 msgid "Slew telescope to"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:321
+#: plugins/TelescopeControl/src/ui_slewDialog.h:323
 msgid "There are no active devices."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:322
+#: plugins/TelescopeControl/src/ui_slewDialog.h:324
 msgid "Slew telescope to coordinates"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:323
+#: plugins/TelescopeControl/src/ui_slewDialog.h:325
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:247
 msgid "&Right Ascension (J2000):"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:324
+#: plugins/TelescopeControl/src/ui_slewDialog.h:326
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:248
 msgid "De&clination (J2000):"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:325
+#: plugins/TelescopeControl/src/ui_slewDialog.h:327
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:244
 msgid "&Current object"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:326
+#: plugins/TelescopeControl/src/ui_slewDialog.h:328
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:245
 msgid "Center of the screen"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:329
+#: plugins/TelescopeControl/src/ui_slewDialog.h:331
 msgid "Hours-minutes-seconds format"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:331
+#: plugins/TelescopeControl/src/ui_slewDialog.h:333
 msgid "&HMS"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:333
+#: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "Degrees-minutes-seconds format"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:335
+#: plugins/TelescopeControl/src/ui_slewDialog.h:337
 msgid "&DMS"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:337
+#: plugins/TelescopeControl/src/ui_slewDialog.h:339
 msgid "Decimal degrees"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:339
+#: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "D&ecimal"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:340
+#: plugins/TelescopeControl/src/ui_slewDialog.h:342
 msgid "&Slew"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:341
+#: plugins/TelescopeControl/src/ui_slewDialog.h:343
 msgid "Configure &telescopes..."
 msgstr ""
 
@@ -13338,7 +13342,7 @@ msgid "Peak"
 msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:421
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:188
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:190
 msgid "Meteor Showers Configuration"
 msgstr ""
 
@@ -13418,21 +13422,21 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 msgid "Meteor Showers: Search"
 msgstr ""
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:198
 msgid "Search"
 msgstr ""
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "dd/MM/yyyy"
 msgstr ""
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:199
 msgid "Results"
 msgstr ""
 

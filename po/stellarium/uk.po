@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-31 13:28+0700\n"
-"PO-Revision-Date: 2016-12-31 13:22+0000\n"
+"POT-Creation-Date: 2017-01-01 21:32+0700\n"
+"PO-Revision-Date: 2017-01-01 19:52+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-01 05:08+0000\n"
+"X-Launchpad-Export-Date: 2017-01-02 04:59+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -1738,25 +1738,25 @@ msgstr ""
 msgid "Error"
 msgstr "Помилка"
 
-#: src/core/StelCore.cpp:2183
+#: src/core/StelCore.cpp:2186
 #, qt-format
 msgid ""
-"The solution's value of %1\"/cy%2 for nDot requires an adaptation, see Guide "
-"for details."
+"The solution's value of %1 for %2 (secular acceleration of the Moon) "
+"requires an adaptation, see Guide for details."
 msgstr ""
-"Значення розв’язку %1\"/cy%2 для nDot потребує адаптації. Докладніше у "
-"підручнику."
+"Значення розв’язку %1 для %2 (секулярне прискорення Місяця) потребує "
+"адаптації, див. підручник, щоб дізнатися більше."
 
-#: src/core/StelCore.cpp:2222
+#: src/core/StelCore.cpp:2226
 msgid "with zero values outside this range"
 msgstr "з нульовими значеннями поза цим діапазоном"
 
-#: src/core/StelCore.cpp:2225
+#: src/core/StelCore.cpp:2229
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "з типовою односекундною точністю та нульовими значеннями поза цим діапазоном"
 
-#: src/core/StelCore.cpp:2228
+#: src/core/StelCore.cpp:2232
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -1764,16 +1764,16 @@ msgstr ""
 "із середньою похибкою у менше за одну секунду, макс. похибка 1.9 с, і "
 "значеннями років обмеження поза цим діапазоном"
 
-#: src/core/StelCore.cpp:2235
+#: src/core/StelCore.cpp:2239
 msgid "with values for the limit years outside this range"
 msgstr "із значеннями років обмеження поза цим діапазоном"
 
-#: src/core/StelCore.cpp:2245
+#: src/core/StelCore.cpp:2249
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Коректний діапазон використання: від %1 до %2 року, %3."
 
-#: src/core/StelCore.cpp:2247
+#: src/core/StelCore.cpp:2251
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Коректний діапазон використання: від %1 до %2 року."
@@ -3030,23 +3030,27 @@ msgstr "Основне скорочення"
 msgid "Alternative shortcut"
 msgstr "Альтернативне скорочення"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:136
+#: src/gui/CustomDeltaTEquationDialog.cpp:134
 #, qt-format
 msgid "Custom equation for %1T"
 msgstr "Нетипове рівняння для %1T"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:137
+#: src/gui/CustomDeltaTEquationDialog.cpp:135
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
 msgstr "Типове рівняння для обчислення %1T виглядає так:"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:139
+#: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "where"
 msgstr "де"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:139
+#: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "year"
 msgstr "рік"
+
+#: src/gui/CustomDeltaTEquationDialog.cpp:138
+msgid "Secular acceleration of the Moon"
+msgstr "Секулярне прискорення Місяця"
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:189 src/ui_configurationDialog.h:1290
@@ -7169,7 +7173,7 @@ msgstr "Розташування вказівника"
 msgid "Include dir:"
 msgstr "Каталог включення:"
 
-#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:327
+#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:329
 msgid "..."
 msgstr "…"
 
@@ -7235,12 +7239,12 @@ msgid "Time step:"
 msgstr "Крок часу:"
 
 #: src/ui_astroCalcDialog.h:544 src/ui_astroCalcDialog.h:551
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "To:"
 msgstr "До:"
 
 #: src/ui_astroCalcDialog.h:545 src/ui_astroCalcDialog.h:548
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "From:"
 msgstr "Від:"
 
@@ -10587,67 +10591,67 @@ msgstr "Схилення (J2000)"
 msgid "Select one"
 msgstr "Виберіть один"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:319
+#: plugins/TelescopeControl/src/ui_slewDialog.h:321
 msgid "Slew telescope to"
 msgstr "Спрямувати телескоп на"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:321
+#: plugins/TelescopeControl/src/ui_slewDialog.h:323
 msgid "There are no active devices."
 msgstr "Немає активних пристроїв."
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:322
+#: plugins/TelescopeControl/src/ui_slewDialog.h:324
 msgid "Slew telescope to coordinates"
 msgstr "Спрямувати телескоп за координатами"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:323
+#: plugins/TelescopeControl/src/ui_slewDialog.h:325
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:247
 msgid "&Right Ascension (J2000):"
 msgstr "&Пряме сходження (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:324
+#: plugins/TelescopeControl/src/ui_slewDialog.h:326
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:248
 msgid "De&clination (J2000):"
 msgstr "С&хилення (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:325
+#: plugins/TelescopeControl/src/ui_slewDialog.h:327
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:244
 msgid "&Current object"
 msgstr "&Поточний об’єкт"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:326
+#: plugins/TelescopeControl/src/ui_slewDialog.h:328
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:245
 msgid "Center of the screen"
 msgstr "Центр екрана"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:329
+#: plugins/TelescopeControl/src/ui_slewDialog.h:331
 msgid "Hours-minutes-seconds format"
 msgstr "Формат години-хвилини-секунди"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:331
+#: plugins/TelescopeControl/src/ui_slewDialog.h:333
 msgid "&HMS"
 msgstr "&ГХС"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:333
+#: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "Degrees-minutes-seconds format"
 msgstr "Формат грудуси-хвилини-секунди"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:335
+#: plugins/TelescopeControl/src/ui_slewDialog.h:337
 msgid "&DMS"
 msgstr "&ГХС"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:337
+#: plugins/TelescopeControl/src/ui_slewDialog.h:339
 msgid "Decimal degrees"
 msgstr "Десяткові градуси"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:339
+#: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "D&ecimal"
 msgstr "&Десятковий"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:340
+#: plugins/TelescopeControl/src/ui_slewDialog.h:342
 msgid "&Slew"
 msgstr "Сп&рямувати"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:341
+#: plugins/TelescopeControl/src/ui_slewDialog.h:343
 msgid "Configure &telescopes..."
 msgstr "Налаштувати &телескопи…"
 
@@ -14382,7 +14386,7 @@ msgid "Peak"
 msgstr "Пік"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:421
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:188
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:190
 msgid "Meteor Showers Configuration"
 msgstr "Налаштування метеорних потоків"
 
@@ -14462,21 +14466,21 @@ msgstr "Стан:"
 msgid "Update"
 msgstr "Оновити"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 msgid "Meteor Showers: Search"
 msgstr "Метеоритні дощі: пошук"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:198
 msgid "Search"
 msgstr "Пошук"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "dd/MM/yyyy"
 msgstr "dd-MM-yyyy"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:199
 msgid "Results"
 msgstr "Результати"
 

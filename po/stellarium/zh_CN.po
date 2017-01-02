@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-31 13:28+0700\n"
-"PO-Revision-Date: 2017-01-01 01:28+0000\n"
+"POT-Creation-Date: 2017-01-01 21:32+0700\n"
+"PO-Revision-Date: 2017-01-02 03:39+0000\n"
 "Last-Translator: sunshuwei <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-01 05:11+0000\n"
+"X-Launchpad-Export-Date: 2017-01-02 05:02+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -401,7 +401,7 @@ msgstr "星等：<b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:214
 msgid " (Photometric system: B)"
-msgstr " 光度系统: B)"
+msgstr " (测光系统: B)"
 
 #: src/core/modules/Nebula.cpp:220 src/core/modules/StarWrapper.cpp:68
 #: src/core/modules/StarWrapper.cpp:213 plugins/Quasars/src/Quasar.cpp:122
@@ -1688,37 +1688,37 @@ msgstr "这是一个用于计算 %1T 的二次方程，系数由用户定义。"
 msgid "Error"
 msgstr "错误"
 
-#: src/core/StelCore.cpp:2183
+#: src/core/StelCore.cpp:2186
 #, qt-format
 msgid ""
-"The solution's value of %1\"/cy%2 for nDot requires an adaptation, see Guide "
-"for details."
-msgstr "解决方案的值 %1\"/cy%2需要调整，详见指南。"
+"The solution's value of %1 for %2 (secular acceleration of the Moon) "
+"requires an adaptation, see Guide for details."
+msgstr ""
 
-#: src/core/StelCore.cpp:2222
+#: src/core/StelCore.cpp:2226
 msgid "with zero values outside this range"
 msgstr "此范围之外的值为零"
 
-#: src/core/StelCore.cpp:2225
+#: src/core/StelCore.cpp:2229
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "精确度一般在一秒内，超出该范围的数据无价值"
 
-#: src/core/StelCore.cpp:2228
+#: src/core/StelCore.cpp:2232
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
 msgstr "平均误差小于1秒，最大误差1.9s，以及超出年数限制的值"
 
-#: src/core/StelCore.cpp:2235
+#: src/core/StelCore.cpp:2239
 msgid "with values for the limit years outside this range"
 msgstr "超出限制年数范围的值"
 
-#: src/core/StelCore.cpp:2245
+#: src/core/StelCore.cpp:2249
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "在 %1 年和 %2，%3 年之间有效"
 
-#: src/core/StelCore.cpp:2247
+#: src/core/StelCore.cpp:2251
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "在 %1 年和 %2 年之间有效"
@@ -2932,23 +2932,27 @@ msgstr "主要快捷键"
 msgid "Alternative shortcut"
 msgstr "次要快捷键"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:136
+#: src/gui/CustomDeltaTEquationDialog.cpp:134
 #, qt-format
 msgid "Custom equation for %1T"
 msgstr "%1T 的自定义公式"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:137
+#: src/gui/CustomDeltaTEquationDialog.cpp:135
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
 msgstr "计算 %1T 的典型公式如下所示："
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:139
+#: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "where"
 msgstr "在"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:139
+#: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "year"
 msgstr "年"
+
+#: src/gui/CustomDeltaTEquationDialog.cpp:138
+msgid "Secular acceleration of the Moon"
+msgstr ""
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:189 src/ui_configurationDialog.h:1290
@@ -6941,7 +6945,7 @@ msgstr "光标位置"
 msgid "Include dir:"
 msgstr "包含目录："
 
-#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:327
+#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:329
 msgid "..."
 msgstr "..."
 
@@ -7006,12 +7010,12 @@ msgid "Time step:"
 msgstr "时间间隔："
 
 #: src/ui_astroCalcDialog.h:544 src/ui_astroCalcDialog.h:551
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "To:"
 msgstr "到："
 
 #: src/ui_astroCalcDialog.h:545 src/ui_astroCalcDialog.h:548
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "From:"
 msgstr "从："
 
@@ -10069,67 +10073,67 @@ msgstr "赤纬（J2000）"
 msgid "Select one"
 msgstr "选择一个"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:319
+#: plugins/TelescopeControl/src/ui_slewDialog.h:321
 msgid "Slew telescope to"
 msgstr "把望远镜指向"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:321
+#: plugins/TelescopeControl/src/ui_slewDialog.h:323
 msgid "There are no active devices."
 msgstr "没有活动设备。"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:322
+#: plugins/TelescopeControl/src/ui_slewDialog.h:324
 msgid "Slew telescope to coordinates"
 msgstr "把望远镜指向坐标"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:323
+#: plugins/TelescopeControl/src/ui_slewDialog.h:325
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:247
 msgid "&Right Ascension (J2000):"
 msgstr "赤经（J2000）:"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:324
+#: plugins/TelescopeControl/src/ui_slewDialog.h:326
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:248
 msgid "De&clination (J2000):"
 msgstr "赤纬（J2000）:"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:325
+#: plugins/TelescopeControl/src/ui_slewDialog.h:327
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:244
 msgid "&Current object"
 msgstr "&当前目标"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:326
+#: plugins/TelescopeControl/src/ui_slewDialog.h:328
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:245
 msgid "Center of the screen"
 msgstr "屏幕中间"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:329
+#: plugins/TelescopeControl/src/ui_slewDialog.h:331
 msgid "Hours-minutes-seconds format"
 msgstr "时分秒格式"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:331
+#: plugins/TelescopeControl/src/ui_slewDialog.h:333
 msgid "&HMS"
 msgstr "&HMS"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:333
+#: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "Degrees-minutes-seconds format"
 msgstr "度分秒格式"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:335
+#: plugins/TelescopeControl/src/ui_slewDialog.h:337
 msgid "&DMS"
 msgstr "&DMS"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:337
+#: plugins/TelescopeControl/src/ui_slewDialog.h:339
 msgid "Decimal degrees"
 msgstr "十进制度"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:339
+#: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "D&ecimal"
 msgstr "十进制 (&e)"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:340
+#: plugins/TelescopeControl/src/ui_slewDialog.h:342
 msgid "&Slew"
 msgstr "指向 (&S)"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:341
+#: plugins/TelescopeControl/src/ui_slewDialog.h:343
 msgid "Configure &telescopes..."
 msgstr "配置望远镜..."
 
@@ -13546,7 +13550,7 @@ msgid "Peak"
 msgstr "峰值"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:421
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:188
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:190
 msgid "Meteor Showers Configuration"
 msgstr "流星雨配置"
 
@@ -13626,21 +13630,21 @@ msgstr "状态："
 msgid "Update"
 msgstr "更新"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 msgid "Meteor Showers: Search"
 msgstr "流星雨：搜索"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:198
 msgid "Search"
 msgstr "搜索"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "dd/MM/yyyy"
 msgstr "dd/MM/yyyy"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:199
 msgid "Results"
 msgstr "结果"
 

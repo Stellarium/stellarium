@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-31 13:28+0700\n"
+"POT-Creation-Date: 2017-01-01 21:32+0700\n"
 "PO-Revision-Date: 2017-01-01 03:59+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-01 04:41+0000\n"
+"X-Launchpad-Export-Date: 2017-01-02 04:38+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 "Language: bn\n"
 
@@ -1721,39 +1721,39 @@ msgstr ""
 msgid "Error"
 msgstr "ত্রুটি"
 
-#: src/core/StelCore.cpp:2183
+#: src/core/StelCore.cpp:2186
 #, qt-format
 msgid ""
-"The solution's value of %1\"/cy%2 for nDot requires an adaptation, see Guide "
-"for details."
+"The solution's value of %1 for %2 (secular acceleration of the Moon) "
+"requires an adaptation, see Guide for details."
 msgstr ""
 
-#: src/core/StelCore.cpp:2222
+#: src/core/StelCore.cpp:2226
 msgid "with zero values outside this range"
 msgstr "এই সীমার বাইরের মান সবসময় শূন্য হয়"
 
-#: src/core/StelCore.cpp:2225
+#: src/core/StelCore.cpp:2229
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "সচরাচর হিসাবে ১ সেকেন্ডেরও কম ত্রুটি থাকে এবং এই সীমার বাইরের মান সবসময় "
 "শূন্য হয়"
 
-#: src/core/StelCore.cpp:2228
+#: src/core/StelCore.cpp:2232
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2235
+#: src/core/StelCore.cpp:2239
 msgid "with values for the limit years outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2245
+#: src/core/StelCore.cpp:2249
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "ব্যবহারিক সীমা : %1 থেকে %2 বছরের মধ্যে , %3 ।"
 
-#: src/core/StelCore.cpp:2247
+#: src/core/StelCore.cpp:2251
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "ব্যবহারিক সীমা : %1 থেকে %2 বছরের মধ্যে ।"
@@ -3008,23 +3008,27 @@ msgstr "মূল উপায়"
 msgid "Alternative shortcut"
 msgstr "বিকল্প উপায়"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:136
+#: src/gui/CustomDeltaTEquationDialog.cpp:134
 #, qt-format
 msgid "Custom equation for %1T"
 msgstr "%1T নির্ণয়ের পছন্দসই সমীকরন"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:137
+#: src/gui/CustomDeltaTEquationDialog.cpp:135
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
 msgstr "%1T নির্ণয়ে ব্যবহৃত সমীকরনের সাধারণ রূপ :"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:139
+#: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "where"
 msgstr "যেখানে"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:139
+#: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "year"
 msgstr "বছর"
+
+#: src/gui/CustomDeltaTEquationDialog.cpp:138
+msgid "Secular acceleration of the Moon"
+msgstr ""
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:189 src/ui_configurationDialog.h:1290
@@ -7121,7 +7125,7 @@ msgstr "কার্সারটির অবস্থান"
 msgid "Include dir:"
 msgstr "অন্তর্ভুক্ত স্থান :"
 
-#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:327
+#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:329
 msgid "..."
 msgstr "..."
 
@@ -7186,12 +7190,12 @@ msgid "Time step:"
 msgstr "অবকাশ :"
 
 #: src/ui_astroCalcDialog.h:544 src/ui_astroCalcDialog.h:551
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "To:"
 msgstr "শেষ :"
 
 #: src/ui_astroCalcDialog.h:545 src/ui_astroCalcDialog.h:548
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "From:"
 msgstr "শুরু :"
 
@@ -10462,67 +10466,67 @@ msgstr "বিষুবলম্ব (J2000 অনুযায়ী)"
 msgid "Select one"
 msgstr "যে কোনো একটি নির্বাচন করুন"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:319
+#: plugins/TelescopeControl/src/ui_slewDialog.h:321
 msgid "Slew telescope to"
 msgstr "দূরবীনটিকে ঘোরান"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:321
+#: plugins/TelescopeControl/src/ui_slewDialog.h:323
 msgid "There are no active devices."
 msgstr "কোনো দূরবীন সক্রিয় করা নেই ।"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:322
+#: plugins/TelescopeControl/src/ui_slewDialog.h:324
 msgid "Slew telescope to coordinates"
 msgstr "নিচের স্থানাঙ্কে দূরবীনটিকে ঘোরান"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:323
+#: plugins/TelescopeControl/src/ui_slewDialog.h:325
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:247
 msgid "&Right Ascension (J2000):"
 msgstr "বিষুবাং&শ (J2000 অনুযায়ী)"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:324
+#: plugins/TelescopeControl/src/ui_slewDialog.h:326
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:248
 msgid "De&clination (J2000):"
 msgstr "বিষুব&লম্ব (J2000 অনুযায়ী)"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:325
+#: plugins/TelescopeControl/src/ui_slewDialog.h:327
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:244
 msgid "&Current object"
 msgstr "নির্বাচি&ত জ্যোতিষ্কের স্থানাঙ্ক"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:326
+#: plugins/TelescopeControl/src/ui_slewDialog.h:328
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:245
 msgid "Center of the screen"
 msgstr "একদম মাঝখানে আনুন"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:329
+#: plugins/TelescopeControl/src/ui_slewDialog.h:331
 msgid "Hours-minutes-seconds format"
 msgstr "ঘন্টা-মিনিট-সেকেন্ড"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:331
+#: plugins/TelescopeControl/src/ui_slewDialog.h:333
 msgid "&HMS"
 msgstr "&ঘন্টা.মিনিট.সেকেন্ড"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:333
+#: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "Degrees-minutes-seconds format"
 msgstr "ডিগ্রি-মিনিট-সেকেন্ড"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:335
+#: plugins/TelescopeControl/src/ui_slewDialog.h:337
 msgid "&DMS"
 msgstr "ডিগ্রি.মিনি&ট.সেকেন্ড"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:337
+#: plugins/TelescopeControl/src/ui_slewDialog.h:339
 msgid "Decimal degrees"
 msgstr "দশমিক যুক্ত ডিগ্রি"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:339
+#: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "D&ecimal"
 msgstr "&দশমিক"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:340
+#: plugins/TelescopeControl/src/ui_slewDialog.h:342
 msgid "&Slew"
 msgstr "ঘোরা&ন"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:341
+#: plugins/TelescopeControl/src/ui_slewDialog.h:343
 msgid "Configure &telescopes..."
 msgstr "দূরবীন বিন্যা&স করুন..."
 
@@ -14208,7 +14212,7 @@ msgid "Peak"
 msgstr "সর্বোচ্চ"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:421
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:188
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:190
 msgid "Meteor Showers Configuration"
 msgstr "উল্কাবৃষ্টি সংক্রান্ত  বৈশিষ্ট্য বিন্যাস"
 
@@ -14288,21 +14292,21 @@ msgstr "পরিস্থিতি :"
 msgid "Update"
 msgstr "সংশোধনী"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 msgid "Meteor Showers: Search"
 msgstr "উল্কাবৃষ্টি অনুসন্ধান"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:198
 msgid "Search"
 msgstr "অনুসন্ধান"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "dd/MM/yyyy"
 msgstr "dd/MMM/yyyy"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:199
 msgid "Results"
 msgstr "ফলাফল"
 
