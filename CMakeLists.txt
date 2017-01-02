@@ -542,6 +542,9 @@ IF(WIN32)
         IF(SPOUT_LIBRARY_DLL) # we know the dll
             SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${SPOUT_LIBRARY_DLL}\"; DestDir: \"{app}\";")
         ENDIF()
+        SET(ISS_SPOUT "Name: \"{group}\\Stellarium {cm:SpoutMode}\"; Filename: \"{app}\\stellarium.exe\"; Parameters: \"--spout=sky\"; WorkingDir: \"{app}\"; IconFilename: \"{app}\\data\\stellarium.ico\"\n")
+    ELSE()
+        SET(ISS_SPOUT "; Spout support is disabled")
     ENDIF(ENABLE_SPOUT)
 
 ENDIF(WIN32)
