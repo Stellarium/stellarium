@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-12-31 13:28+0700\n"
-"PO-Revision-Date: 2016-12-31 22:25+0000\n"
+"POT-Creation-Date: 2017-01-01 21:32+0700\n"
+"PO-Revision-Date: 2017-01-01 19:06+0000\n"
 "Last-Translator: Giuseppe Putzolu <giuseppe.putzolu@gmail.com>\n"
 "Language-Team: Sardinian <sc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-01 05:04+0000\n"
+"X-Launchpad-Export-Date: 2017-01-02 04:57+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -1723,25 +1723,25 @@ msgstr ""
 msgid "Error"
 msgstr "Irballiu"
 
-#: src/core/StelCore.cpp:2183
+#: src/core/StelCore.cpp:2186
 #, qt-format
 msgid ""
-"The solution's value of %1\"/cy%2 for nDot requires an adaptation, see Guide "
-"for details."
+"The solution's value of %1 for %2 (secular acceleration of the Moon) "
+"requires an adaptation, see Guide for details."
 msgstr ""
-"Su valore de sa solutzione de %1 \"/cy%2 po nDot cheret un'addatadura, "
-"abbaida in sa guida po ateras informatzione."
+"Su valore de sa solutzione de %1 po %2 (acceleratzione seculare de sa Luna) "
+"cheret unu adattamentu, leze sa guida po informatziones prus pretzisas."
 
-#: src/core/StelCore.cpp:2222
+#: src/core/StelCore.cpp:2226
 msgid "with zero values outside this range"
 msgstr "cun perunu valore fora de s'intevallu"
 
-#: src/core/StelCore.cpp:2225
+#: src/core/StelCore.cpp:2229
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "cun 1 tipucu segundu de acuradesa et perunu valore fora de s'intervallu"
 
-#: src/core/StelCore.cpp:2228
+#: src/core/StelCore.cpp:2232
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -1749,16 +1749,16 @@ msgstr ""
 "cun unu irballiu mediu prus piticu de unu segundu, irballiu massimu 1.9s, et "
 "valores po su limite de sos annos fora de custu intervallu."
 
-#: src/core/StelCore.cpp:2235
+#: src/core/StelCore.cpp:2239
 msgid "with values for the limit years outside this range"
 msgstr "valores po su limite de sos annos fora de custu intervallu."
 
-#: src/core/StelCore.cpp:2245
+#: src/core/StelCore.cpp:2249
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Intervallu validu de impreu: fra %1 annos e %2, %3."
 
-#: src/core/StelCore.cpp:2247
+#: src/core/StelCore.cpp:2251
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Intervallu validu: tra sos annos %1 et %2."
@@ -3020,23 +3020,27 @@ msgstr "Segadura in curtzu primaria"
 msgid "Alternative shortcut"
 msgstr "Atera segadura in curtzu"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:136
+#: src/gui/CustomDeltaTEquationDialog.cpp:134
 #, qt-format
 msgid "Custom equation for %1T"
 msgstr "Ecuqtzione personalizada po %1T"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:137
+#: src/gui/CustomDeltaTEquationDialog.cpp:135
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
 msgstr "Una ecuatzione tipica po craculare de %1T si assimbizat:"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:139
+#: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "where"
 msgstr "inue"
 
-#: src/gui/CustomDeltaTEquationDialog.cpp:139
+#: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "year"
 msgstr "annu"
+
+#: src/gui/CustomDeltaTEquationDialog.cpp:138
+msgid "Secular acceleration of the Moon"
+msgstr "Acceleratzione seculare de sa Luna"
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:189 src/ui_configurationDialog.h:1290
@@ -6524,7 +6528,7 @@ msgstr "Sarva sas impostatziones"
 
 #: src/ui_configurationDialog.h:1233
 msgid "Restore the default settings that came with Stellarium"
-msgstr ""
+msgstr "Torra a sas impostatziones predefinias postas de Stellarium"
 
 #: src/ui_configurationDialog.h:1235
 #: plugins/NavStars/src/ui_navStarsWindow.h:212
@@ -6532,7 +6536,7 @@ msgstr ""
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:282
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:310
 msgid "Restore defaults"
-msgstr ""
+msgstr "Torra a sas impostaduras predefinias"
 
 #: src/ui_configurationDialog.h:1236
 msgid ""
@@ -6540,30 +6544,33 @@ msgid ""
 "current options includes the current FOV and direction of view for use at "
 "next startup."
 msgstr ""
+"Torrande a sas impostatziones predefinias cheret torrau a ponner in motu "
+"Stellarium. Sarva totus sas optziones currentes FOV et diretzione de vista "
+"de impreare in s'atera apertura de Stellarium."
 
 #: src/ui_configurationDialog.h:1238
 msgid "The width of your view when Stellarium starts"
-msgstr ""
+msgstr "Sa mannaria de sa vista tua cando partit Stellarium"
 
 #: src/ui_configurationDialog.h:1241
 msgid "The direction you're looking when Stellarium starts"
-msgstr ""
+msgstr "Sa diretzione inue ses abaidande cando partit Stellarium"
 
 #: src/ui_configurationDialog.h:1243 src/ui_configurationDialog.h:1454
 msgid "Selected object information"
-msgstr ""
+msgstr "Sebera s'informatzione de s'ogettu"
 
 #: src/ui_configurationDialog.h:1245
 msgid "Display all information available"
-msgstr ""
+msgstr "Fae biere totu sas informatziones disponibiles"
 
 #: src/ui_configurationDialog.h:1247
 msgid "All available"
-msgstr ""
+msgstr "Totu disponibile"
 
 #: src/ui_configurationDialog.h:1249
 msgid "Display no information"
-msgstr ""
+msgstr "Non fatzas biere peruna informatzione"
 
 #: src/ui_configurationDialog.h:1251 plugins/Oculars/src/Oculars.cpp:2393
 #: plugins/Observability/src/Observability.cpp:205
@@ -6572,122 +6579,122 @@ msgstr "Mancunu"
 
 #: src/ui_configurationDialog.h:1253
 msgid "Display less information"
-msgstr ""
+msgstr "Fae biere prus pagas informatziones"
 
 #: src/ui_configurationDialog.h:1255
 msgid "Short"
-msgstr ""
+msgstr "Curtzu"
 
 #: src/ui_configurationDialog.h:1257
 msgid "Display user settings information"
-msgstr ""
+msgstr "Fae biere sas informatziones de sas impostatziones de s'utente"
 
 #: src/ui_configurationDialog.h:1259
 msgid "Customized"
-msgstr ""
+msgstr "Personalizza"
 
 #: src/ui_configurationDialog.h:1260
 msgid "Displayed fields"
-msgstr ""
+msgstr "Campos fattos biere"
 
 #: src/ui_configurationDialog.h:1262 src/ui_configurationDialog.h:1296
 msgid "Equatorial coordinates, equinox of date"
-msgstr ""
+msgstr "Coordinadas ecuatoriales, ecuizotziu de data"
 
 #: src/ui_configurationDialog.h:1264
 msgid "Right ascension/Declination (of date)"
-msgstr ""
+msgstr "Ascensione Retta/Declinatzione (de data)"
 
 #: src/ui_configurationDialog.h:1265
 msgid "Supergalactic coordinates"
-msgstr ""
+msgstr "Coordinadas Supergalaticas"
 
 #: src/ui_configurationDialog.h:1267
 msgid "The type of the object (star, planet, etc.)"
-msgstr ""
+msgstr "Su tipu de s'ogettu (istella, pianeta, etc.)"
 
 #: src/ui_configurationDialog.h:1270
 msgid "Absolute magnitude"
-msgstr ""
+msgstr "Mannitudine assoluta"
 
 #: src/ui_configurationDialog.h:1272
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
-msgstr ""
+msgstr "Coordinadas ecliticas, ecuinotziu de data (po sa Terra ebbia)"
 
 #: src/ui_configurationDialog.h:1274
 msgid "Ecliptic coordinates (of date)"
-msgstr ""
+msgstr "Coordinadas eccliticas (de data)"
 
 #: src/ui_configurationDialog.h:1276
 msgid "Angular or physical size"
-msgstr ""
+msgstr "Mannesa angulare o fisica"
 
 #: src/ui_configurationDialog.h:1278
 msgid "Size"
-msgstr ""
+msgstr "Mannaria"
 
 #: src/ui_configurationDialog.h:1280
 msgid "Horizontal coordinates"
-msgstr ""
+msgstr "Coordinadas orizontales"
 
 #: src/ui_configurationDialog.h:1282
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:204
 msgid "Altitude/Azimuth"
-msgstr ""
+msgstr "Artaria/Azimut"
 
 #: src/ui_configurationDialog.h:1283
 msgid "Catalog number(s)"
-msgstr ""
+msgstr "Numeru/os de su Catalogu"
 
 #: src/ui_configurationDialog.h:1284
 msgid "Distance"
-msgstr ""
+msgstr "Distantzia"
 
 #: src/ui_configurationDialog.h:1285
 msgid "Galactic coordinates"
-msgstr ""
+msgstr "Coordinadas galaticas"
 
 #: src/ui_configurationDialog.h:1287
 msgid "Equatorial coordinates, equinox of J2000.0"
-msgstr ""
+msgstr "Coordinadas ecuatoriales, ecuinotziu de J2000.0"
 
 #: src/ui_configurationDialog.h:1289
 msgid "Right ascension/Declination (J2000)"
-msgstr ""
+msgstr "Ascensione Retta/Declinatzione (J2000)"
 
 #: src/ui_configurationDialog.h:1292
 msgid "Ecliptic coordinates, equinox J2000.0"
-msgstr ""
+msgstr "Coordinadas ecliticas, ecuinotziu de J2000.0"
 
 #: src/ui_configurationDialog.h:1294
 msgid "Ecliptic coordinates (J2000)"
-msgstr ""
+msgstr "Coordinadas ecliticas (J2000)"
 
 #: src/ui_configurationDialog.h:1298
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:201
 msgid "Hour angle/Declination"
-msgstr ""
+msgstr "Angulu orariu/Declinatzione"
 
 #: src/ui_configurationDialog.h:1299
 msgid "Visual magnitude"
-msgstr ""
+msgstr "Mannitudine a vista"
 
 #: src/ui_configurationDialog.h:1301
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
 msgid "3-letter IAU constellation abbreviation"
-msgstr ""
+msgstr "Abreviatziones IAU de sas costellatziones (3-litteras)"
 
 #: src/ui_configurationDialog.h:1303
 msgid "Constellation"
-msgstr ""
+msgstr "Costellatzione"
 
 #: src/ui_configurationDialog.h:1305
 msgid "Spectral class, nebula type, etc."
-msgstr ""
+msgstr "Classe Ispettrale, tipu de nebulosa, etc."
 
 #: src/ui_configurationDialog.h:1307
 msgid "Additional information"
-msgstr ""
+msgstr "Ateras informatziones"
 
 #: src/ui_configurationDialog.h:1308
 msgid "Sidereal time"
@@ -7149,7 +7156,7 @@ msgstr ""
 msgid "Include dir:"
 msgstr ""
 
-#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:327
+#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:329
 msgid "..."
 msgstr ""
 
@@ -7214,12 +7221,12 @@ msgid "Time step:"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:544 src/ui_astroCalcDialog.h:551
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "To:"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:545 src/ui_astroCalcDialog.h:548
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "From:"
 msgstr ""
 
@@ -10239,67 +10246,67 @@ msgstr ""
 msgid "Select one"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:319
+#: plugins/TelescopeControl/src/ui_slewDialog.h:321
 msgid "Slew telescope to"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:321
+#: plugins/TelescopeControl/src/ui_slewDialog.h:323
 msgid "There are no active devices."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:322
+#: plugins/TelescopeControl/src/ui_slewDialog.h:324
 msgid "Slew telescope to coordinates"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:323
+#: plugins/TelescopeControl/src/ui_slewDialog.h:325
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:247
 msgid "&Right Ascension (J2000):"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:324
+#: plugins/TelescopeControl/src/ui_slewDialog.h:326
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:248
 msgid "De&clination (J2000):"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:325
+#: plugins/TelescopeControl/src/ui_slewDialog.h:327
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:244
 msgid "&Current object"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:326
+#: plugins/TelescopeControl/src/ui_slewDialog.h:328
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:245
 msgid "Center of the screen"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:329
+#: plugins/TelescopeControl/src/ui_slewDialog.h:331
 msgid "Hours-minutes-seconds format"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:331
+#: plugins/TelescopeControl/src/ui_slewDialog.h:333
 msgid "&HMS"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:333
+#: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "Degrees-minutes-seconds format"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:335
+#: plugins/TelescopeControl/src/ui_slewDialog.h:337
 msgid "&DMS"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:337
+#: plugins/TelescopeControl/src/ui_slewDialog.h:339
 msgid "Decimal degrees"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:339
+#: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "D&ecimal"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:340
+#: plugins/TelescopeControl/src/ui_slewDialog.h:342
 msgid "&Slew"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:341
+#: plugins/TelescopeControl/src/ui_slewDialog.h:343
 msgid "Configure &telescopes..."
 msgstr ""
 
@@ -13634,7 +13641,7 @@ msgid "Peak"
 msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:421
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:188
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:190
 msgid "Meteor Showers Configuration"
 msgstr ""
 
@@ -13714,21 +13721,21 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 msgid "Meteor Showers: Search"
 msgstr ""
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:198
 msgid "Search"
 msgstr ""
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "dd/MM/yyyy"
 msgstr ""
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:199
 msgid "Results"
 msgstr ""
 
