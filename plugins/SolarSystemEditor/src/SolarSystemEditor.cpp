@@ -253,8 +253,9 @@ void SolarSystemEditor::resetSolarSystemToDefault()
 			//TODO
 			objectManager->unSelect();
 
-			solarSystemManager->reloadPlanets();
-			emit solarSystemChanged();
+			//solarSystemManager->reloadPlanets();
+			//emit solarSystemChanged();
+			emit solarSystemManager->solarSystemChanged();
 		}
 	}
 }
@@ -302,8 +303,9 @@ bool SolarSystemEditor::replaceSolarSystemConfigurationFileWith(QString filePath
 	//If the copy fails, reset to the default configuration
 	if (QFile::copy(filePath, customSolarSystemFilePath))
 	{
-		solarSystemManager->reloadPlanets();
-		emit solarSystemChanged();
+		//solarSystemManager->reloadPlanets();
+		//emit solarSystemChanged();
+		emit solarSystemManager->solarSystemChanged();
 		return true;
 	}
 	else
@@ -311,8 +313,9 @@ bool SolarSystemEditor::replaceSolarSystemConfigurationFileWith(QString filePath
 		//TODO: Message
 		if (cloneSolarSystemConfigurationFile())
 		{
-			solarSystemManager->reloadPlanets();
-			emit solarSystemChanged();
+			//solarSystemManager->reloadPlanets();
+			//emit solarSystemChanged();
+			emit solarSystemManager->solarSystemChanged();
 			return true;
 		}
 		else
@@ -402,8 +405,9 @@ bool SolarSystemEditor::removeSsoWithName(QString name)
 	GETSTELMODULE(StelObjectMgr)->unSelect();
 
 	//Reload the Solar System
-	solarSystemManager->reloadPlanets();
-	emit solarSystemChanged();
+	//solarSystemManager->reloadPlanets();
+	//emit solarSystemChanged();
+	emit solarSystemManager->solarSystemChanged();
 
 	return true;
 }

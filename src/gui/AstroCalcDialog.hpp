@@ -118,6 +118,8 @@ private slots:
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 
+	void updateSolarSystemData();
+
 private:
 	class StelCore* core;
 	class SolarSystem* solarSystem;
