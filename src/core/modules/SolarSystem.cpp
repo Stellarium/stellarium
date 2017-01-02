@@ -214,7 +214,6 @@ void SolarSystem::init()
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(updateSkyCulture(QString)));
-	connect(this, SIGNAL(solarSystemChanged()), this, SLOT(reloadPlanets()));
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Planets", displayGroup, N_("Planets"), "planetsDisplayed", "P");
@@ -2014,6 +2013,8 @@ void SolarSystem::reloadPlanets()
 
 	// Restore translations
 	updateI18n();
+
+	emit solarSystemDataReloaded();
 }
 
 // Set the algorithm for computation of apparent magnitudes for planets in case  observer on the Earth

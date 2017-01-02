@@ -697,9 +697,6 @@ public slots:
 	//! @param objType object type
 	QStringList getObjectsList(QString objType="all") const;
 
-	//! Reload the planets
-	void reloadPlanets();
-
 signals:
 	void labelsDisplayedChanged(bool b);
 	void flagOrbitsChanged(bool b);
@@ -743,7 +740,7 @@ signals:
 
 	void orbitColorStyleChanged(QString style) const;
 
-	void solarSystemChanged();
+	void solarSystemDataReloaded();
 
 public:
 	///////////////////////////////////////////////////////////////////////////
@@ -770,6 +767,9 @@ public:
 
 	//! Get the list of all the planet localized names
 	QStringList getAllPlanetLocalizedNames() const;
+
+	//! Reload the planets
+	void reloadPlanets();
 
 	//! Determines relative amount of sun visible from the observer's position.
 	double getEclipseFactor(const StelCore *core) const;
