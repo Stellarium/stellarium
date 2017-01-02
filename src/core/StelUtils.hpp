@@ -225,6 +225,9 @@ namespace StelUtils
 	//! Return the inverse sinus hyperbolic of z.
 	double asinh(const double z);
 
+	//! Integer modulo where the result is always positive.
+	int imod(const int a, const int b);
+
 	///////////////////////////////////////////////////
 	// New Qt based General Calendar Functions.
 	//! Make from julianDay a year, month, day for the Julian Date julianDay represents.
@@ -292,6 +295,14 @@ namespace StelUtils
 	bool getJDFromDate(double* newjd, const int y, const int m, const int d, const int h, const int min, const int s);
 
 	int numberOfDaysInMonthInYear(const int month, const int year);
+	//! @result true if year is a leap year. Observes 1582 switch from Julian to Gregorian Calendar.
+	bool isLeapYear(const int year);
+	//! Find day number for date in year.
+	//! Meeus, Astronomical Algorithms 2nd ed., 1998, ch.7, p.65
+	int dayInYear(const int year, const int month, const int day);
+	//! Return a fractional year like YYYY.ddddd. For negative years, the year number is decreased. E.g. -500.5 occurs in -501.
+	double yearFraction(const int year, const int month, const double day);
+
 	bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
 				       int* ry, int* rm, int* rd, int* rh, int* rmin, int* rs);
 
@@ -602,6 +613,15 @@ namespace StelUtils
 	//! @param jDay the date and time expressed as a Julian day
 	//! @return Delta-T in seconds
 	double getDeltaTByKhalidSultanaZaidi(const double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Implementation of a spline approximation for time period -720-2016.0 for DeltaT by Stephenson, Morrison and Hohenkerk (2016).
+	//! Source: Measurement of the Earth’s rotation: 720 BC to AD 2015
+	//! Proc. R. Soc. A 472: 20160404.
+	//! http://dx.doi.org/10.1098/rspa.2016.0404
+	//! @param jDay the date and time expressed as a Julian day
+	//! @return Delta-T in seconds. For times outside the limits, return result from the fitting parabola.
+	double getDeltaTByStephensonMorrisonHohenkerk2016(const double jDay);
 
 	//! Get Secular Acceleration estimation for a given year.
 	//! Method described is here: http://eclipse.gsfc.nasa.gov/SEcat5/secular.html

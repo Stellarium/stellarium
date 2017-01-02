@@ -139,7 +139,8 @@ public:
 		EspenakMeeusZeroMoonAccel,          //!< Espenak & Meeus (2006) algorithm for DeltaT (but without additional Lunar acceleration. FOR TESTING ONLY, NONPUBLIC)
 		Banjevic,                           //!< Banjevic (2006) algorithm for DeltaT
 		IslamSadiqQureshi,                  //!< Islam, Sadiq & Qureshi (2008 + revisited 2013) algorithm for DeltaT (6 polynomials)
-		KhalidSultanaZaidi,                 //!< M. Khalid, Mariam Sultana and Faheem Zaidi polinomial approximation of time period 1620-2013 (2014)
+		KhalidSultanaZaidi,                 //!< M. Khalid, Mariam Sultana and Faheem Zaidi polynomial approximation of time period 1620-2013 (2014)
+		StephensonMorrisonHohenkerk2016,    //!< Stephenson, Morrison, Hohenkerk (2016) RSPA paper provides spline fit to observations for -720..2016 and else parabolic fit.
 		Custom                              //!< User defined coefficients for quadratic equation for DeltaT
 	};
 

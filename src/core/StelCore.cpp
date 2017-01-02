@@ -2033,6 +2033,12 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			deltaTstart	= 1620;
 			deltaTfinish	= 2013;
 			break;
+		case StephensonMorrisonHohenkerk2016:
+			deltaTnDot = -25.82; // n.dot = -25.82 "/cy/cy
+			deltaTfunc=StelUtils::getDeltaTByStephensonMorrisonHohenkerk2016;
+			deltaTstart	= -720;
+			deltaTfinish	= 2015;
+			break;
 		case Custom:
 			// User defined coefficients for quadratic equation for DeltaT. These can change, and we don't use the function pointer here.
 			deltaTnDot = deltaTCustomNDot; // n.dot = custom value "/cy/cy
@@ -2171,6 +2177,9 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 		case KhalidSultanaZaidi:
 			description = q_("This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, Mariam Sultana and Faheem Zaidi was published in <em>Delta T: Polynomial Approximation of Time Period 1620-2013</em> (%1).").arg("<a href='http://dx.doi.org/10.1155/2014/480964'>2014</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
+		case StephensonMorrisonHohenkerk2016: // PRIMARY SOURCE, SEEMS VERY IMPORTANT
+			description = q_("This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016) was published in <em>Measurement of the Earth’s rotation: 720 BC to AD 2015</em> (%1). Outside of the named range (modelled with a spline fit) it provides values from an approximate parabola.").arg("<a href='http://dx.doi.org/10.1098/rspa.2016.0404'>2016</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
+			break;
 		case Custom:
 			description = q_("This is a quadratic formula for calculation of %1T with coefficients defined by the user.").arg(QChar(0x0394));
 			break;
@@ -2219,7 +2228,8 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRangeDescription(const double JD
 		case MorrisonStephenson2004: // and
 		case Reijs:                  // and
 		case EspenakMeeus: // the default, range stated in the Canon, p. 14.  ... and
-		case EspenakMeeusZeroMoonAccel:
+		case EspenakMeeusZeroMoonAccel: // and
+		case StephensonMorrisonHohenkerk2016:
 			break;
 		case JPLHorizons: // and
 		case MeeusSimons:
@@ -2276,7 +2286,8 @@ double StelCore::getCurrentEpoch() const
 	return 2000.0 + (getJD() - 2451545.0)/365.25;
 }
 
-// DE430/DE431 handling
+// DE430/DE431 handling.
+// FIXME: GZ observes: When DE431 is not available, DE430 installed, but date outside, de430IsActive() should return false because computations go back to VSOP!.
 
 bool StelCore::de430IsAvailable()
 {
