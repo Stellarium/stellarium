@@ -1400,12 +1400,12 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	algorithms->addItem(q_("Muller & Stephenson (1975)"), "MullerStephenson");
 	algorithms->addItem(q_("Stephenson (1978)"), "Stephenson1978");
 	algorithms->addItem(q_("Schmadel & Zech (1979)"), "SchmadelZech1979");
+	algorithms->addItem(q_("Schmadel & Zech (1988)"), "SchmadelZech1988");
 	algorithms->addItem(q_("Morrison & Stephenson (1982)"), "MorrisonStephenson1982");
 	algorithms->addItem(q_("Stephenson & Morrison (1984)"), "StephensonMorrison1984");
 	algorithms->addItem(q_("Stephenson & Houlden (1986)"), "StephensonHoulden");
 	algorithms->addItem(q_("Espenak (1987, 1989)"), "Espenak");
 	algorithms->addItem(q_("Borkowski (1988)"), "Borkowski");
-	algorithms->addItem(q_("Schmadel & Zech (1988)"), "SchmadelZech1988");
 	algorithms->addItem(q_("Chapront-Touze & Chapront (1991)"), "ChaprontTouze");	
 	algorithms->addItem(q_("Stephenson & Morrison (1995)"), "StephensonMorrison1995");
 	algorithms->addItem(q_("Stephenson (1997)"), "Stephenson1997");
@@ -1413,9 +1413,8 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	algorithms->addItem(q_("Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"), "ChaprontMeeus");
 	algorithms->addItem(q_("JPL Horizons"), "JPLHorizons");	
 	algorithms->addItem(q_("Meeus & Simons (2000)"), "MeeusSimons");
-	algorithms->addItem(q_("Montenbruck & Pfleger (2000)"), "MontenbruckPfleger");
-	algorithms->addItem(q_("Reingold & Dershowitz (2002, 2007)"), "ReingoldDershowitz");
 	algorithms->addItem(q_("Morrison & Stephenson (2004, 2005)"), "MorrisonStephenson2004");
+	algorithms->addItem(q_("Stephenson, Morrison & Hohenkerk (2016)"), "StephensonMorrisonHohenkerk2016");
 	// Espenak & Meeus (2006) used by default
 	algorithms->addItem(q_("Espenak & Meeus (2006)").append(" *"), "EspenakMeeus");
 	// GZ: I want to try out some things. Something is still wrong with eclipses, see lp:1275092.
@@ -1424,6 +1423,8 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	#endif
 	algorithms->addItem(q_("Reijs (2006)"), "Reijs");
 	algorithms->addItem(q_("Banjevic (2006)"), "Banjevic");
+	algorithms->addItem(q_("Montenbruck & Pfleger (2000)"), "MontenbruckPfleger");
+	algorithms->addItem(q_("Reingold & Dershowitz (2002, 2007)"), "ReingoldDershowitz");
 	algorithms->addItem(q_("Islam, Sadiq & Qureshi (2008, 2013)"), "IslamSadiqQureshi");
 	algorithms->addItem(q_("Khalid, Sultana & Zaidi (2014)"), "KhalidSultanaZaidi");
 	algorithms->addItem(q_("Custom equation of %1T").arg(QChar(0x0394)), "Custom");
