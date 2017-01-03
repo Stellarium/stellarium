@@ -518,13 +518,12 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	// GZ: We should reduce orbit_good for elliptical orbits to one half period before/after perihel!
 	if (eccentricity < 1.0)
 	{
-		// Heafner, p.71
-		const double mu=(0.01720209895*0.01720209895); // GAUSS_GRAV_CONST^2
-		const double meanMotion=std::sqrt(mu/(perihelionDistance*perihelionDistance*perihelionDistance)); // radians/day
+		// Heafner, Fundamental Ephemeris Computations, p.71
+		const double a=perihelionDistance/(1.-eccentricity); // semimajor axis.
+		const double meanMotion=0.01720209895/std::sqrt(a*a*a); // radians/day
 		double period=M_PI*2.0 / meanMotion; // period, days
 		result.insert("orbit_good", qMin(1000, (int) floor(0.5*period))); // validity for elliptical osculating elements, days. Goes from aphel to next aphel or max 1000 days.
-		//FIXME: Seems period is wrong!
-		//result.insert("orbit_visualization_period", period); // add period for visualization of orbit
+		result.insert("orbit_visualization_period", period); // add period for visualization of orbit
 	}
 	else
 		result.insert("orbit_good", 1000); // default validity for osculating elements, days
