@@ -60,6 +60,7 @@ Source: "@QtPrintSupport_location@"; DestDir: "{app}";
 @ISS_ANGLE_LIBS@
 @ISS_ICU_LIBS@
 @ISS_QT_PLUGINS@
+@ISS_OPENSSL_LIBS@
 ; Stellarium's stuff
 Source: "@CMAKE_INSTALL_PREFIX@\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs ignoreversion
 
