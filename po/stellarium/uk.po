@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-01 21:32+0700\n"
-"PO-Revision-Date: 2017-01-01 19:52+0000\n"
+"POT-Creation-Date: 2017-01-02 21:34+0700\n"
+"PO-Revision-Date: 2017-01-02 19:21+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-02 04:59+0000\n"
+"X-Launchpad-Export-Date: 2017-01-03 05:47+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -1037,7 +1037,7 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "Довжина газового хвоста (приблизна): %1 млн. км"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:219 src/gui/AstroCalcDialog.cpp:554
+#: src/core/modules/SolarSystem.cpp:219 src/gui/AstroCalcDialog.cpp:555
 #: src/translations.h:66
 msgid "Planets"
 msgstr "Планети"
@@ -1153,7 +1153,7 @@ msgid "Position angle"
 msgstr "Позиційний кут"
 
 #: src/core/modules/StarWrapper.cpp:285 src/core/modules/StarWrapper.cpp:287
-#: src/gui/AstroCalcDialog.cpp:745
+#: src/gui/AstroCalcDialog.cpp:746
 msgid "Separation"
 msgstr "Роз’єднання"
 
@@ -1178,7 +1178,7 @@ msgid "Cannot create Spout sender. See log for details."
 msgstr "Не вдалося створити надсилання Spout. Докладніше про це у журналі."
 
 #: src/core/StelCore.cpp:248 src/gui/StelGui.cpp:202
-#: src/gui/AstroCalcDialog.cpp:305 src/gui/AstroCalcDialog.cpp:742
+#: src/gui/AstroCalcDialog.cpp:306 src/gui/AstroCalcDialog.cpp:743
 #: src/gui/BookmarksDialog.cpp:102 src/ui_dateTimeDialogGui.h:376
 #: src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:173
@@ -1397,13 +1397,13 @@ msgstr "Повернути горизонтально"
 msgid "Flip scene vertically"
 msgstr "Повернути вертикально"
 
-#: src/core/StelCore.cpp:2082
+#: src/core/StelCore.cpp:2088
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Виправлення вимкнено! Користуйтеся ним, лише якщо вам добре відомі наслідки "
 "ваших дій!"
 
-#: src/core/StelCore.cpp:2085
+#: src/core/StelCore.cpp:2091
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1416,7 +1416,7 @@ msgstr ""
 "Айнштайна підтверджено на основі даних про сонячні затемнення, відомих з "
 "історії</em>). Докладніші відомості можна знайти %2тут%3."
 
-#: src/core/StelCore.cpp:2088
+#: src/core/StelCore.cpp:2094
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1426,7 +1426,7 @@ msgstr ""
 "system of astronomical constants</em> (%1) (<em>Про систему астрономічних "
 "сталих</em>)."
 
-#: src/core/StelCore.cpp:2091
+#: src/core/StelCore.cpp:2097
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1440,7 +1440,7 @@ msgstr ""
 "(<em>Астрономічні формули для обчислень</em>). Також цю формулу реалізовано "
 "у комп’ютерній програмі SunTracker Pro."
 
-#: src/core/StelCore.cpp:2095
+#: src/core/StelCore.cpp:2101
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1451,7 +1451,7 @@ msgstr ""
 "у книзі <em>Canon of Solar Eclipses</em> (<em>Закони сонячних "
 "затемнень</em>), авторами якої є Mucke та Meeus (1983)."
 
-#: src/core/StelCore.cpp:2099
+#: src/core/StelCore.cpp:2105
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1463,7 +1463,7 @@ msgstr ""
 "1649 р. н.е. Те саме співвідношення також неявно використано у таблицях "
 "Goldstine (1973)."
 
-#: src/core/StelCore.cpp:2103
+#: src/core/StelCore.cpp:2109
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1475,7 +1475,7 @@ msgstr ""
 "observations</em> (%1) (<em>Прискорення Землі та Місяця на основі нещодавніх "
 "астрономічних спостережень</em>)."
 
-#: src/core/StelCore.cpp:2106
+#: src/core/StelCore.cpp:2112
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1485,7 +1485,7 @@ msgstr ""
 "Astronomical Observations</em> (%1) (<em>Астрономічні спостереження до появи "
 "телескопів</em>)."
 
-#: src/core/StelCore.cpp:2109
+#: src/core/StelCore.cpp:2115
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1499,7 +1499,7 @@ msgstr ""
 "in the period 1800-1975</em> (%1) як апроксимацію даних, опублікованих "
 "Brouwer (1952)."
 
-#: src/core/StelCore.cpp:2112
+#: src/core/StelCore.cpp:2118
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1509,7 +1509,7 @@ msgstr ""
 "Programs and Tables from -4000 to +2800</em> (1986), а також у комп’ютерній "
 "програмі RedShift."
 
-#: src/core/StelCore.cpp:2115
+#: src/core/StelCore.cpp:2121
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1521,11 +1521,11 @@ msgstr ""
 "1980</em> (%1) (<em>Довготривалі зміни у обертанні Землі — від 700 р. до "
 "н.е. до 1980 р. н.е.</em>)."
 
-#: src/core/StelCore.cpp:2118
+#: src/core/StelCore.cpp:2124
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "Цей алгоритм використано у комп’ютерному планетарії Guide 7."
 
-#: src/core/StelCore.cpp:2121
+#: src/core/StelCore.cpp:2127
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -1535,7 +1535,7 @@ msgstr ""
 "Eclipses: 1986-2035</em> (1987) і <em>Fifty Year Canon of Lunar Eclipses: "
 "1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:2124
+#: src/core/StelCore.cpp:2130
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -1544,7 +1544,7 @@ msgstr ""
 "Цю формулу було отримано K.M. Borkowski (%1) на основі аналізу записів щодо "
 "31 сонячного затемнення від 2137 р. до н.е. до 1715 р. н.е."
 
-#: src/core/StelCore.cpp:2127
+#: src/core/StelCore.cpp:2133
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1557,7 +1557,7 @@ msgstr ""
 "1988</em> (%1) як апроксимацію за даними, наведеними Stephenson і Morrison "
 "(1984)."
 
-#: src/core/StelCore.cpp:2130
+#: src/core/StelCore.cpp:2136
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -1567,7 +1567,7 @@ msgstr ""
 "версії надточної теорії місячного руху у період 2000-85 у праці <em>Lunar "
 "Tables and Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 
-#: src/core/StelCore.cpp:2133
+#: src/core/StelCore.cpp:2139
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1579,7 +1579,7 @@ msgstr ""
 "(%1) (<em>Довготривалі зміни у обертанні Землі — від 700 р. до н.е. до 1990 "
 "р. н.е.</em>)."
 
-#: src/core/StelCore.cpp:2136
+#: src/core/StelCore.cpp:2142
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1589,7 +1589,7 @@ msgstr ""
 "Earth's Rotation</em> (%1) (<em>Історичні затемнення та обертання "
 "Землі</em>)."
 
-#: src/core/StelCore.cpp:2139
+#: src/core/StelCore.cpp:2145
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1599,7 +1599,7 @@ msgstr ""
 "Широко використовується. Таблиця для 1620–2000 років. Включено варіант "
 "Chapront, Chapront-Touze та Francou (1997) для дат поза діапазоном 1620–2000."
 
-#: src/core/StelCore.cpp:2142
+#: src/core/StelCore.cpp:2148
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1609,7 +1609,7 @@ msgstr ""
 "реактивного руху NASA для показу даних на інтерактивному сайті %1JPL "
 "Horizons%2."
 
-#: src/core/StelCore.cpp:2145
+#: src/core/StelCore.cpp:2151
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1618,7 +1618,7 @@ msgstr ""
 "Цей поліному було опубліковано J. Meeus і L. Simons у статті <em>Polynomial "
 "approximations to Delta T, 1620-2000 AD</em> (%1)."
 
-#: src/core/StelCore.cpp:2148
+#: src/core/StelCore.cpp:2154
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1629,7 +1629,7 @@ msgstr ""
 "комп’ютері</em>) наведено просте поліноміальне наближення 3-го порядку "
 "точності лише для нещодавніх дат у минулому."
 
-#: src/core/StelCore.cpp:2151
+#: src/core/StelCore.cpp:2157
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1641,7 +1641,7 @@ msgstr ""
 "<em>Calendrical Tabulations</em> (2002). Її засновано на даних книги Jean "
 "Meeus <em>Astronomical Algorithms</em> (1991)."
 
-#: src/core/StelCore.cpp:2154
+#: src/core/StelCore.cpp:2160
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1652,7 +1652,7 @@ msgstr ""
 "статті <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) з додатковими даними у (%3)."
 
-#: src/core/StelCore.cpp:2157
+#: src/core/StelCore.cpp:2163
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1666,7 +1666,7 @@ msgstr ""
 "можливій періодичності, описаній Stephenson (%2). Докладніші дані можна "
 "знайти %3тут%4."
 
-#: src/core/StelCore.cpp:2160 src/core/StelCore.cpp:2163
+#: src/core/StelCore.cpp:2166 src/core/StelCore.cpp:2169
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1682,15 +1682,15 @@ msgstr ""
 "Eclipses: -1900 to +3000</em> цих же авторів (2006). Також цю формулу "
 "використано у програмі для обчислення ефемерид Сонця, Місяця та планет SOLEX."
 
-#: src/core/StelCore.cpp:2160
+#: src/core/StelCore.cpp:2166
 msgid "Used by default."
 msgstr "Використовується типово."
 
-#: src/core/StelCore.cpp:2163
+#: src/core/StelCore.cpp:2169
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "ЛАТАНА ВЕРСІЯ БЕЗ ДОДАТКОВОГО ПРИСКОРЕННЯ МІСЯЦЯ"
 
-#: src/core/StelCore.cpp:2166
+#: src/core/StelCore.cpp:2172
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1702,7 +1702,7 @@ msgstr ""
 "eclipses and dating the fall of Babylon</em> (затемнення у давнину та "
 "датування падіння Вавилона) (%1)."
 
-#: src/core/StelCore.cpp:2169
+#: src/core/StelCore.cpp:2175
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1714,7 +1714,7 @@ msgstr ""
 "Polynomial Approximation of DeltaT</em> (%1), а потім уточнено Sana Islam у "
 "2013 році."
 
-#: src/core/StelCore.cpp:2172
+#: src/core/StelCore.cpp:2178
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1725,7 +1725,21 @@ msgstr ""
 "Khalid, Mariam Sultana та Faheem Zaidi у роботі <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2175
+#: src/core/StelCore.cpp:2181
+#, qt-format
+msgid ""
+"This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016) "
+"was published in <em>Measurement of the Earth’s rotation: 720 BC to AD "
+"2015</em> (%1). Outside of the named range (modelled with a spline fit) it "
+"provides values from an approximate parabola."
+msgstr ""
+"Цей розв’язок, що належить F. R. Stephenson, L. V. Morrison та C. Y. "
+"Hohenkerk (2016), було опубліковано у журналі <em>Measurement of the Earth’s "
+"rotation: 720 BC to AD 2015</em> (%1). Поза вказаним діапазоном (моделювання "
+"за допомогою сплайнового наближення) він дає значення параболічного "
+"наближення."
+
+#: src/core/StelCore.cpp:2184
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1734,11 +1748,11 @@ msgstr ""
 "Це квадратична формула для обчислення %1T з коефіцієнтами, визначеними "
 "користувачем."
 
-#: src/core/StelCore.cpp:2178 src/core/SimbadSearcher.cpp:156
+#: src/core/StelCore.cpp:2187 src/core/SimbadSearcher.cpp:156
 msgid "Error"
 msgstr "Помилка"
 
-#: src/core/StelCore.cpp:2186
+#: src/core/StelCore.cpp:2195
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -1747,16 +1761,16 @@ msgstr ""
 "Значення розв’язку %1 для %2 (секулярне прискорення Місяця) потребує "
 "адаптації, див. підручник, щоб дізнатися більше."
 
-#: src/core/StelCore.cpp:2226
+#: src/core/StelCore.cpp:2236
 msgid "with zero values outside this range"
 msgstr "з нульовими значеннями поза цим діапазоном"
 
-#: src/core/StelCore.cpp:2229
+#: src/core/StelCore.cpp:2239
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "з типовою односекундною точністю та нульовими значеннями поза цим діапазоном"
 
-#: src/core/StelCore.cpp:2232
+#: src/core/StelCore.cpp:2242
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -1764,16 +1778,16 @@ msgstr ""
 "із середньою похибкою у менше за одну секунду, макс. похибка 1.9 с, і "
 "значеннями років обмеження поза цим діапазоном"
 
-#: src/core/StelCore.cpp:2239
+#: src/core/StelCore.cpp:2249
 msgid "with values for the limit years outside this range"
 msgstr "із значеннями років обмеження поза цим діапазоном"
 
-#: src/core/StelCore.cpp:2249
+#: src/core/StelCore.cpp:2259
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Коректний діапазон використання: від %1 до %2 року, %3."
 
-#: src/core/StelCore.cpp:2251
+#: src/core/StelCore.cpp:2261
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Коректний діапазон використання: від %1 до %2 року."
@@ -2226,28 +2240,28 @@ msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel і Zech (1979)"
 
 #: src/gui/ConfigurationDialog.cpp:1403
+msgid "Schmadel & Zech (1988)"
+msgstr "Schmadel і Zech (1988)"
+
+#: src/gui/ConfigurationDialog.cpp:1404
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison і Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1404
+#: src/gui/ConfigurationDialog.cpp:1405
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson і Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1405
+#: src/gui/ConfigurationDialog.cpp:1406
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson і Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1406
+#: src/gui/ConfigurationDialog.cpp:1407
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1407
+#: src/gui/ConfigurationDialog.cpp:1408
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
-
-#: src/gui/ConfigurationDialog.cpp:1408
-msgid "Schmadel & Zech (1988)"
-msgstr "Schmadel і Zech (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1409
 msgid "Chapront-Touze & Chapront (1991)"
@@ -2274,68 +2288,72 @@ msgid "Meeus & Simons (2000)"
 msgstr "Meeus і Simons (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1416
-msgid "Montenbruck & Pfleger (2000)"
-msgstr "Montenbruck і Pfleger (2000)"
-
-#: src/gui/ConfigurationDialog.cpp:1417
-msgid "Reingold & Dershowitz (2002, 2007)"
-msgstr "Reingold і Dershowitz (2002, 2007)"
-
-#: src/gui/ConfigurationDialog.cpp:1418
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison і Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1420
+#: src/gui/ConfigurationDialog.cpp:1417
+msgid "Stephenson, Morrison & Hohenkerk (2016)"
+msgstr "Stephenson, Morrison і Hohenkerk (2016)"
+
+#: src/gui/ConfigurationDialog.cpp:1419
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak і Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1423
+#: src/gui/ConfigurationDialog.cpp:1422
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr "Espenak і Meeus (2006) без додаткового прискорення Місяця"
 
-#: src/gui/ConfigurationDialog.cpp:1425
+#: src/gui/ConfigurationDialog.cpp:1424
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1426
+#: src/gui/ConfigurationDialog.cpp:1425
 msgid "Banjevic (2006)"
 msgstr "Баньєвич (2006)"
 
+#: src/gui/ConfigurationDialog.cpp:1426
+msgid "Montenbruck & Pfleger (2000)"
+msgstr "Montenbruck і Pfleger (2000)"
+
 #: src/gui/ConfigurationDialog.cpp:1427
+msgid "Reingold & Dershowitz (2002, 2007)"
+msgstr "Reingold і Dershowitz (2002, 2007)"
+
+#: src/gui/ConfigurationDialog.cpp:1428
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq та Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1428
+#: src/gui/ConfigurationDialog.cpp:1429
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana та Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1429
+#: src/gui/ConfigurationDialog.cpp:1430
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Нетипове рівняння для %1T"
 
-#: src/gui/ConfigurationDialog.cpp:1478 src/gui/ConfigurationDialog.cpp:1513
+#: src/gui/ConfigurationDialog.cpp:1479 src/gui/ConfigurationDialog.cpp:1514
 #: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:408
 msgid "System default"
 msgstr "Типовий системний"
 
-#: src/gui/ConfigurationDialog.cpp:1479
+#: src/gui/ConfigurationDialog.cpp:1480
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "рррр-мм-дд (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1480
+#: src/gui/ConfigurationDialog.cpp:1481
 msgid "dd-mm-yyyy"
 msgstr "дд-мм-рррр"
 
-#: src/gui/ConfigurationDialog.cpp:1481
+#: src/gui/ConfigurationDialog.cpp:1482
 msgid "mm-dd-yyyy"
 msgstr "мм-дд-рррр"
 
-#: src/gui/ConfigurationDialog.cpp:1514
+#: src/gui/ConfigurationDialog.cpp:1515
 msgid "12-hour format"
 msgstr "12-годинний формат"
 
-#: src/gui/ConfigurationDialog.cpp:1515
+#: src/gui/ConfigurationDialog.cpp:1516
 msgid "24-hour format"
 msgstr "24-годинний формат"
 
@@ -2516,46 +2534,46 @@ msgstr ""
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Forums} — обговоріть Stellarium з іншими користувачами."
 
-#: src/gui/HelpDialog.cpp:311
+#: src/gui/HelpDialog.cpp:312
 msgid "Developers"
 msgstr "Розробники"
 
-#: src/gui/HelpDialog.cpp:312
+#: src/gui/HelpDialog.cpp:313
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Координатор проекту і основний розробник: %1"
 
-#: src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:314
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Створення графіки/інших елементів: %1"
 
-#: src/gui/HelpDialog.cpp:314 src/gui/HelpDialog.cpp:315
-#: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
-#: src/gui/HelpDialog.cpp:318 src/gui/HelpDialog.cpp:319
-#: src/gui/HelpDialog.cpp:320 src/gui/HelpDialog.cpp:326
-#: src/gui/HelpDialog.cpp:327 src/gui/HelpDialog.cpp:328
-#: src/gui/HelpDialog.cpp:329 src/gui/HelpDialog.cpp:330
-#: src/gui/HelpDialog.cpp:331
+#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
+#: src/gui/HelpDialog.cpp:317 src/gui/HelpDialog.cpp:318
+#: src/gui/HelpDialog.cpp:319 src/gui/HelpDialog.cpp:320
+#: src/gui/HelpDialog.cpp:321 src/gui/HelpDialog.cpp:327
+#: src/gui/HelpDialog.cpp:328 src/gui/HelpDialog.cpp:329
+#: src/gui/HelpDialog.cpp:330 src/gui/HelpDialog.cpp:331
+#: src/gui/HelpDialog.cpp:332
 #, qt-format
 msgid "Developer: %1"
 msgstr "Розробник: %1"
 
-#: src/gui/HelpDialog.cpp:321
+#: src/gui/HelpDialog.cpp:322
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "Неперервна інтеграція: %1"
 
-#: src/gui/HelpDialog.cpp:322
+#: src/gui/HelpDialog.cpp:323
 #, qt-format
 msgid "Tester: %1"
 msgstr "Перевірено: %1"
 
-#: src/gui/HelpDialog.cpp:323
+#: src/gui/HelpDialog.cpp:324
 msgid "Former Developers"
 msgstr "Колишні розробники"
 
-#: src/gui/HelpDialog.cpp:324
+#: src/gui/HelpDialog.cpp:325
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -2563,24 +2581,24 @@ msgstr ""
 "Дехто зробив значний внесок, але тепер не бере участі у розробці програми. "
 "Внесок цих людей значно вплинув на поточний стан проекту."
 
-#: src/gui/HelpDialog.cpp:325
+#: src/gui/HelpDialog.cpp:326
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Автор документації/розробник: %1"
 
-#: src/gui/HelpDialog.cpp:332 src/gui/HelpDialog.cpp:333
+#: src/gui/HelpDialog.cpp:333 src/gui/HelpDialog.cpp:334
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Розробник під OSX: %1"
 
-#: src/gui/HelpDialog.cpp:334
+#: src/gui/HelpDialog.cpp:335
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
 #: plugins/Oculars/src/gui/OcularDialog.cpp:519
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
 msgid "Contributors"
 msgstr "Учасники розробки"
 
-#: src/gui/HelpDialog.cpp:335
+#: src/gui/HelpDialog.cpp:336
 #, qt-format
 msgid ""
 "Several people have made contributions to the project and their work has "
@@ -2633,7 +2651,7 @@ msgstr "Вікно довідки"
 msgid "Configuration window"
 msgstr "Вікно налаштування"
 
-#: src/gui/StelGui.cpp:219 src/ui_searchDialogGui.h:618
+#: src/gui/StelGui.cpp:219 src/ui_searchDialogGui.h:611
 msgid "Search window"
 msgstr "Вікно пошуку"
 
@@ -2980,8 +2998,8 @@ msgstr "Схилення"
 msgid "Azimuth"
 msgstr "Азимут"
 
-#: src/gui/SearchDialog.cpp:260 src/gui/AstroCalcDialog.cpp:663
-#: src/gui/AstroCalcDialog.cpp:722 src/gui/AstroCalcDialog.cpp:724
+#: src/gui/SearchDialog.cpp:260 src/gui/AstroCalcDialog.cpp:664
+#: src/gui/AstroCalcDialog.cpp:723 src/gui/AstroCalcDialog.cpp:725
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
 msgid "Altitude"
 msgstr "Висота"
@@ -3053,7 +3071,7 @@ msgid "Secular acceleration of the Moon"
 msgstr "Секулярне прискорення Місяця"
 
 #. TRANSLATORS: name of object
-#: src/gui/AstroCalcDialog.cpp:189 src/ui_configurationDialog.h:1290
+#: src/gui/AstroCalcDialog.cpp:190 src/ui_configurationDialog.h:1290
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:450
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:96
 #: plugins/Exoplanets/src/Exoplanet.cpp:324
@@ -3062,198 +3080,198 @@ msgid "Name"
 msgstr "Назва"
 
 #. TRANSLATORS: right ascension
-#: src/gui/AstroCalcDialog.cpp:191 src/gui/AstroCalcDialog.cpp:308
+#: src/gui/AstroCalcDialog.cpp:192 src/gui/AstroCalcDialog.cpp:309
 msgid "RA (J2000)"
 msgstr "ПС (J2000)"
 
 #. TRANSLATORS: declination
-#: src/gui/AstroCalcDialog.cpp:193 src/gui/AstroCalcDialog.cpp:310
+#: src/gui/AstroCalcDialog.cpp:194 src/gui/AstroCalcDialog.cpp:311
 msgid "Dec (J2000)"
 msgstr "Схил (J2000)"
 
 #. TRANSLATORS: magnitude
-#: src/gui/AstroCalcDialog.cpp:195 src/gui/AstroCalcDialog.cpp:312
+#: src/gui/AstroCalcDialog.cpp:196 src/gui/AstroCalcDialog.cpp:313
 msgid "Mag."
 msgstr "Вел."
 
 #. TRANSLATORS: type of object
-#: src/gui/AstroCalcDialog.cpp:197 src/ui_configurationDialog.h:1269
+#: src/gui/AstroCalcDialog.cpp:198 src/ui_configurationDialog.h:1269
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
 msgid "Type"
 msgstr "Тип"
 
-#: src/gui/AstroCalcDialog.cpp:216
+#: src/gui/AstroCalcDialog.cpp:217
 #, qt-format
 msgid "Positions on %1"
 msgstr "Позиції на %1"
 
-#: src/gui/AstroCalcDialog.cpp:306 src/ui_dateTimeDialogGui.h:382
+#: src/gui/AstroCalcDialog.cpp:307 src/ui_dateTimeDialogGui.h:382
 #: src/ui_dateTimeDialogGui.h:387
 msgid "Julian Day"
 msgstr "Юліанський день"
 
-#: src/gui/AstroCalcDialog.cpp:413 src/gui/AstroCalcDialog.cpp:970
+#: src/gui/AstroCalcDialog.cpp:414 src/gui/AstroCalcDialog.cpp:971
 msgid "CSV (Comma delimited)"
 msgstr "CSV (із відокремленням комами)"
 
-#: src/gui/AstroCalcDialog.cpp:415
+#: src/gui/AstroCalcDialog.cpp:416
 msgid "Save calculated ephemerides as..."
 msgstr "Зберегти обчислені ефемериди як…"
 
-#: src/gui/AstroCalcDialog.cpp:491
+#: src/gui/AstroCalcDialog.cpp:492
 msgid "10 minutes"
 msgstr "10 хвилин"
 
-#: src/gui/AstroCalcDialog.cpp:492
+#: src/gui/AstroCalcDialog.cpp:493
 msgid "1 hour"
 msgstr "1 година"
 
-#: src/gui/AstroCalcDialog.cpp:493
+#: src/gui/AstroCalcDialog.cpp:494
 msgid "1 day"
 msgstr "1 день"
 
-#: src/gui/AstroCalcDialog.cpp:494
+#: src/gui/AstroCalcDialog.cpp:495
 msgid "5 days"
 msgstr "5 днів"
 
-#: src/gui/AstroCalcDialog.cpp:495
+#: src/gui/AstroCalcDialog.cpp:496
 msgid "10 days"
 msgstr "10 днів"
 
-#: src/gui/AstroCalcDialog.cpp:496
+#: src/gui/AstroCalcDialog.cpp:497
 msgid "15 days"
 msgstr "12 днів"
 
-#: src/gui/AstroCalcDialog.cpp:497
+#: src/gui/AstroCalcDialog.cpp:498
 msgid "30 days"
 msgstr "30 днів"
 
-#: src/gui/AstroCalcDialog.cpp:498
+#: src/gui/AstroCalcDialog.cpp:499
 msgid "60 days"
 msgstr "60 днів"
 
-#: src/gui/AstroCalcDialog.cpp:553
+#: src/gui/AstroCalcDialog.cpp:554
 msgid "Solar system"
 msgstr "Сонячна система"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:555 src/translations.h:70
+#: src/gui/AstroCalcDialog.cpp:556 src/translations.h:70
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
 msgstr "Астероїди"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:556 src/translations.h:74
+#: src/gui/AstroCalcDialog.cpp:557 src/translations.h:74
 msgid "Plutinos"
 msgstr "Плутино"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:557 src/translations.h:68
+#: src/gui/AstroCalcDialog.cpp:558 src/translations.h:68
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
 msgstr "Комети"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:558 src/translations.h:76
+#: src/gui/AstroCalcDialog.cpp:559 src/translations.h:76
 msgid "Dwarf planets"
 msgstr "Карликові планети"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:559 src/translations.h:78
+#: src/gui/AstroCalcDialog.cpp:560 src/translations.h:78
 msgid "Cubewanos"
 msgstr "К’юбівано"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:560 src/translations.h:80
+#: src/gui/AstroCalcDialog.cpp:561 src/translations.h:80
 msgid "Scattered disc objects"
 msgstr "Об’єкти розсіяного диска"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:561 src/translations.h:82
+#: src/gui/AstroCalcDialog.cpp:562 src/translations.h:82
 msgid "Oort cloud objects"
 msgstr "Об’єкти поясу Оорта"
 
-#: src/gui/AstroCalcDialog.cpp:562
+#: src/gui/AstroCalcDialog.cpp:563
 #, qt-format
 msgid "Bright stars (<%1 mag)"
 msgstr "Яскраві зірки (<%1 вел.)"
 
-#: src/gui/AstroCalcDialog.cpp:563
+#: src/gui/AstroCalcDialog.cpp:564
 #, qt-format
 msgid "Bright star clusters (<%1 mag)"
 msgstr "Яскраві зоряні скупчення (<%1 вел.)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:564 src/translations.h:99
+#: src/gui/AstroCalcDialog.cpp:565 src/translations.h:99
 #: src/ui_viewDialog.h:2060 src/ui_dsoColorsDialog.h:580
 msgid "Planetary nebulae"
 msgstr "Планетарні туманності"
 
-#: src/gui/AstroCalcDialog.cpp:565
+#: src/gui/AstroCalcDialog.cpp:566
 #, qt-format
 msgid "Bright nebulae (<%1 mag)"
 msgstr "Яскраві туманності (<%1 вел.)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:566 src/translations.h:101
+#: src/gui/AstroCalcDialog.cpp:567 src/translations.h:101
 #: src/ui_viewDialog.h:2063 src/ui_dsoColorsDialog.h:540
 msgid "Dark nebulae"
 msgstr "Темні туманності"
 
-#: src/gui/AstroCalcDialog.cpp:567
+#: src/gui/AstroCalcDialog.cpp:568
 #, qt-format
 msgid "Bright galaxies (<%1 mag)"
 msgstr "Яскраві галактики (<%1 вел.)"
 
-#: src/gui/AstroCalcDialog.cpp:662 src/gui/AstroCalcDialog.cpp:722
-#: src/gui/AstroCalcDialog.cpp:724
+#: src/gui/AstroCalcDialog.cpp:663 src/gui/AstroCalcDialog.cpp:723
+#: src/gui/AstroCalcDialog.cpp:725
 msgid "Local Time"
 msgstr "Місцевий час"
 
-#: src/gui/AstroCalcDialog.cpp:718
+#: src/gui/AstroCalcDialog.cpp:719
 #, qt-format
 msgid "Now is %1"
 msgstr "Зараз %1"
 
-#: src/gui/AstroCalcDialog.cpp:741
+#: src/gui/AstroCalcDialog.cpp:742
 msgid "Phenomenon"
 msgstr "Подія"
 
-#: src/gui/AstroCalcDialog.cpp:743
+#: src/gui/AstroCalcDialog.cpp:744
 msgid "Object 1"
 msgstr "Об'єкт 1"
 
-#: src/gui/AstroCalcDialog.cpp:744
+#: src/gui/AstroCalcDialog.cpp:745
 msgid "Object 2"
 msgstr "Об'єкт 2"
 
-#: src/gui/AstroCalcDialog.cpp:972
+#: src/gui/AstroCalcDialog.cpp:973
 msgid "Save calculated phenomena as..."
 msgstr "Зберегти обчислені події як…"
 
-#: src/gui/AstroCalcDialog.cpp:1011 src/gui/AstroCalcDialog.cpp:1186
-#: src/gui/AstroCalcDialog.cpp:1344
+#: src/gui/AstroCalcDialog.cpp:1012 src/gui/AstroCalcDialog.cpp:1187
+#: src/gui/AstroCalcDialog.cpp:1345
 msgid "Conjunction"
 msgstr "З’єднання"
 
-#: src/gui/AstroCalcDialog.cpp:1018
+#: src/gui/AstroCalcDialog.cpp:1019
 msgid "Opposition"
 msgstr "Протистояння"
 
-#: src/gui/AstroCalcDialog.cpp:1026
+#: src/gui/AstroCalcDialog.cpp:1027
 msgid "Transit"
 msgstr "Кульмінація"
 
-#: src/gui/AstroCalcDialog.cpp:1028 src/gui/AstroCalcDialog.cpp:1191
-#: src/gui/AstroCalcDialog.cpp:1349
+#: src/gui/AstroCalcDialog.cpp:1029 src/gui/AstroCalcDialog.cpp:1192
+#: src/gui/AstroCalcDialog.cpp:1350
 msgid "Occultation"
 msgstr "Затінення"
 
-#: src/gui/AstroCalcDialog.cpp:1032
+#: src/gui/AstroCalcDialog.cpp:1033
 msgid "Eclipse"
 msgstr "Затьмарення"
 
-#: src/gui/BookmarksDialog.cpp:100 src/ui_searchDialogGui.h:702
+#: src/gui/BookmarksDialog.cpp:100 src/ui_searchDialogGui.h:695
 msgid "Object"
 msgstr "Об’єкт"
 
@@ -5518,174 +5536,174 @@ msgstr "Країна:"
 msgid "Enable daylight saving time"
 msgstr "Увімкнути літній час"
 
-#: src/ui_searchDialogGui.h:617
+#: src/ui_searchDialogGui.h:610
 msgid "Find Object"
 msgstr "Знайти об'єкт"
 
-#: src/ui_searchDialogGui.h:621 src/ui_searchDialogGui.h:625
+#: src/ui_searchDialogGui.h:614 src/ui_searchDialogGui.h:618
 msgid "Use tab key for select of found items"
 msgstr "Використовувати клавішу Tab для позначення знайдених об’єктів"
 
-#: src/ui_searchDialogGui.h:630
+#: src/ui_searchDialogGui.h:623
 msgid "iota"
 msgstr "йота"
 
-#: src/ui_searchDialogGui.h:633
+#: src/ui_searchDialogGui.h:626
 msgid "alpha"
 msgstr "альфа"
 
-#: src/ui_searchDialogGui.h:636
+#: src/ui_searchDialogGui.h:629
 msgid "beta"
 msgstr "бета"
 
-#: src/ui_searchDialogGui.h:639
+#: src/ui_searchDialogGui.h:632
 msgid "gamma"
 msgstr "гамма"
 
-#: src/ui_searchDialogGui.h:642
+#: src/ui_searchDialogGui.h:635
 msgid "delta"
 msgstr "дельта"
 
-#: src/ui_searchDialogGui.h:645
+#: src/ui_searchDialogGui.h:638
 msgid "epsilon"
 msgstr "епсилон"
 
-#: src/ui_searchDialogGui.h:648
+#: src/ui_searchDialogGui.h:641
 msgid "zeta"
 msgstr "дзета"
 
-#: src/ui_searchDialogGui.h:651
+#: src/ui_searchDialogGui.h:644
 msgid "eta"
 msgstr "ета"
 
-#: src/ui_searchDialogGui.h:654
+#: src/ui_searchDialogGui.h:647
 msgid "theta"
 msgstr "тета"
 
-#: src/ui_searchDialogGui.h:657
+#: src/ui_searchDialogGui.h:650
 msgid "kappa"
 msgstr "каппа"
 
-#: src/ui_searchDialogGui.h:660
+#: src/ui_searchDialogGui.h:653
 msgid "lambda"
 msgstr "лямбда"
 
-#: src/ui_searchDialogGui.h:663
+#: src/ui_searchDialogGui.h:656
 msgid "mu"
 msgstr "мю"
 
-#: src/ui_searchDialogGui.h:666
+#: src/ui_searchDialogGui.h:659
 msgid "nu"
 msgstr "ню"
 
-#: src/ui_searchDialogGui.h:669
+#: src/ui_searchDialogGui.h:662
 msgid "xi"
 msgstr "ксі"
 
-#: src/ui_searchDialogGui.h:672
+#: src/ui_searchDialogGui.h:665
 msgid "omicron"
 msgstr "омікрон"
 
-#: src/ui_searchDialogGui.h:675
+#: src/ui_searchDialogGui.h:668
 msgid "pi"
 msgstr "пі"
 
-#: src/ui_searchDialogGui.h:678
+#: src/ui_searchDialogGui.h:671
 msgid "rho"
 msgstr "ро"
 
-#: src/ui_searchDialogGui.h:681
+#: src/ui_searchDialogGui.h:674
 msgid "sigma"
 msgstr "сигма"
 
-#: src/ui_searchDialogGui.h:684
+#: src/ui_searchDialogGui.h:677
 msgid "tau"
 msgstr "тау"
 
-#: src/ui_searchDialogGui.h:687
+#: src/ui_searchDialogGui.h:680
 msgid "upsilon"
 msgstr "іпсилон"
 
-#: src/ui_searchDialogGui.h:690
+#: src/ui_searchDialogGui.h:683
 msgid "phi"
 msgstr "фі"
 
-#: src/ui_searchDialogGui.h:693
+#: src/ui_searchDialogGui.h:686
 msgid "chi"
 msgstr "хі"
 
-#: src/ui_searchDialogGui.h:696
+#: src/ui_searchDialogGui.h:689
 msgid "psi"
 msgstr "псі"
 
-#: src/ui_searchDialogGui.h:699
+#: src/ui_searchDialogGui.h:692
 msgid "omega"
 msgstr "омега"
 
-#: src/ui_searchDialogGui.h:701
+#: src/ui_searchDialogGui.h:694
 msgid "Greek letters for Bayer designations"
 msgstr "Грецькі літери для позначень Баєра"
 
-#: src/ui_searchDialogGui.h:704
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
-msgid "Coordinate system:"
-msgstr "Система координат:"
-
-#: src/ui_searchDialogGui.h:706
+#: src/ui_searchDialogGui.h:696
 msgid ""
 "Note: this tool doesn't apply the refraction correction for coordinates."
 msgstr ""
 "Зауважте: дія цього інструмента не стосується виправлення рефракції для "
 "координат."
 
-#: src/ui_searchDialogGui.h:707
+#: src/ui_searchDialogGui.h:698
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
+msgid "Coordinate system:"
+msgstr "Система координат:"
+
+#: src/ui_searchDialogGui.h:700
 msgid "Position"
 msgstr "Позиція"
 
-#: src/ui_searchDialogGui.h:709
+#: src/ui_searchDialogGui.h:702
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr ""
 "Пошук деяких з об’єктів можна буде здійснити після вмикання відповідних "
 "додатків"
 
-#: src/ui_searchDialogGui.h:711
+#: src/ui_searchDialogGui.h:704
 msgid "names in English"
 msgstr "назви англійською"
 
-#: src/ui_searchDialogGui.h:712
+#: src/ui_searchDialogGui.h:705
 msgid "Search in list..."
 msgstr "Шукати у списку…"
 
-#: src/ui_searchDialogGui.h:713
+#: src/ui_searchDialogGui.h:706
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Lists"
 msgstr "Списки"
 
-#: src/ui_searchDialogGui.h:715
+#: src/ui_searchDialogGui.h:708
 msgid "Use on-line astronomical database SIMBAD"
 msgstr "Використовувати інтернет-базу астрономічних даних SIMBAD"
 
-#: src/ui_searchDialogGui.h:717
+#: src/ui_searchDialogGui.h:710
 msgid "Use SIMBAD"
 msgstr "Використовувати SIMBAD"
 
-#: src/ui_searchDialogGui.h:718
+#: src/ui_searchDialogGui.h:711
 msgid "Server:"
 msgstr "Сервер:"
 
-#: src/ui_searchDialogGui.h:719
+#: src/ui_searchDialogGui.h:712
 msgid "Search options"
 msgstr "Параметри пошуку"
 
-#: src/ui_searchDialogGui.h:720
+#: src/ui_searchDialogGui.h:713
 msgid "Use autofill only from the beginning of words"
 msgstr "Використовувати автодоповнення лише для початків слів"
 
-#: src/ui_searchDialogGui.h:721
+#: src/ui_searchDialogGui.h:714
 msgid "Lock position when coordinates are used"
 msgstr "Заблокувати позицію, якщо використано координати"
 
-#: src/ui_searchDialogGui.h:722 src/ui_viewDialog.h:2277
+#: src/ui_searchDialogGui.h:715 src/ui_viewDialog.h:2277
 #: src/ui_viewDialog.h:2299 src/ui_viewDialog.h:2325
 #: src/ui_configurationDialog.h:1432 src/ui_configurationDialog.h:1443
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
