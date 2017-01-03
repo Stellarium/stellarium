@@ -54,9 +54,10 @@ DateTimeDialog::~DateTimeDialog()
 void DateTimeDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	double jd = StelApp::getInstance().getCore()->getJD();
+	StelCore *core = StelApp::getInstance().getCore();
+	double jd = core->getJD();
 	// UTC -> local tz
-	setDateTime(jd + (StelApp::getInstance().getLocaleMgr().getGMTShift(jd)/24.0));
+	setDateTime(jd + (core->getUTCOffset(jd)/24.0));
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
@@ -120,7 +121,6 @@ bool DateTimeDialog::validJd(double jday)
 {
 	pushToWidgets();
 	StelApp::getInstance().getCore()->setJD(jday);
-
 	return true;
 }
 
@@ -151,6 +151,7 @@ void DateTimeDialog::yearChanged(int newyear)
 	if ( year != newyear )
 	{
 		valid( newyear, month, day, hour, minute, second );
+		emit StelApp::getInstance().getCore()->dateChanged();
 	}
 }
 
@@ -159,6 +160,7 @@ void DateTimeDialog::monthChanged(int newmonth)
 	if ( month != newmonth )
 	{
 		valid( year, newmonth, day, hour, minute, second );
+		emit StelApp::getInstance().getCore()->dateChanged();
 	}
 }
 
@@ -166,6 +168,7 @@ void DateTimeDialog::dayChanged(int newday)
 {
 	int delta = newday - day;
 	validJd(jd + delta);
+	emit StelApp::getInstance().getCore()->dateChanged();
 }
 
 void DateTimeDialog::hourChanged(int newhour)
@@ -202,7 +205,7 @@ double DateTimeDialog::newJd()
 {
 	double cjd;
 	StelUtils::getJDFromDate(&cjd, year, month, day, hour, minute, second);
-	cjd -= (StelApp::getInstance().getLocaleMgr().getGMTShift(cjd)/24.0); // local tz -> UTC
+	cjd -= (StelApp::getInstance().getCore()->getUTCOffset(cjd)/24.0); // local tz -> UTC
 
 	return cjd;
 }
@@ -232,7 +235,7 @@ void DateTimeDialog::setDateTime(double newJd)
 {
 	if (this->visible()) {
 		// JD and MJD should be at the UTC scale on the window!
-		double newJdC = newJd + StelApp::getInstance().getLocaleMgr().getGMTShift(newJd)/24.0; // UTC -> local tz
+		double newJdC = newJd + StelApp::getInstance().getCore()->getUTCOffset(newJd)/24.0; // UTC -> local tz
 		StelUtils::getDateFromJulianDay(newJdC, &year, &month, &day);
 		StelUtils::getTimeFromJulianDay(newJdC, &hour, &minute, &second);
 		jd = newJd;

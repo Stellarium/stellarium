@@ -37,7 +37,7 @@
 
 #include <cstdlib>
 
-StelTexture::StelTexture() : networkReply(NULL), loader(NULL), errorOccured(false), alphaChannel(false), id(0), avgLuminance(-1.f)
+StelTexture::StelTexture(StelTextureMgr *mgr) : textureMgr(mgr), networkReply(NULL), loader(NULL), errorOccured(false), alphaChannel(false), id(0), avgLuminance(-1.f), glSize(0)
 {
 	width = -1;
 	height = -1;
@@ -45,7 +45,7 @@ StelTexture::StelTexture() : networkReply(NULL), loader(NULL), errorOccured(fals
 
 StelTexture::~StelTexture()
 {
-	if (id != 0)
+	if (id != 0 && QOpenGLContext::currentContext())
 	{
 		if (glIsTexture(id)==GL_FALSE)
 		{
@@ -54,13 +54,24 @@ StelTexture::~StelTexture()
 		else
 		{
 			glDeleteTextures(1, &id);
+			textureMgr->glMemoryUsage -= glSize;
+			glSize = 0;
 		}
+		#ifndef NDEBUG
+		qDebug()<<"Deleted StelTexture"<<id<<", total memory usage "<<textureMgr->glMemoryUsage / (1024.0 * 1024.0)<<"MB";
+		#endif
 		id = 0;
 	}
-	if (networkReply != NULL)
+	else if (id)
+	{
+		qWarning()<<"Cannot delete texture"<<id<<", no GL context";
+	}
+	if (networkReply)
 	{
 		networkReply->abort();
-		networkReply->deleteLater();
+		//networkReply->deleteLater();
+		delete networkReply;
+		networkReply = NULL;
 	}
 	if (loader != NULL) {
 		delete loader;
@@ -124,9 +135,9 @@ bool StelTexture::bind(int slot)
 		QNetworkRequest req = QNetworkRequest(QUrl(fullPath));
 		// Define that preference should be given to cached files (no etag checks)
 		req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
-		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
+		req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
 		networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-		connect(networkReply, SIGNAL(finished()), this, SLOT(onNetworkReply()));
+		connect(networkReply, SIGNAL(finished()), this, SLOT(onNetworkReply()));		
 		return false;
 	}
 	// The network connection is still running.
@@ -158,7 +169,10 @@ void StelTexture::onNetworkReply()
 	else
 	{
 		QByteArray data = networkReply->readAll();
-		loader = new QFuture<GLData>(QtConcurrent::run(loadFromData, data));
+		if(data.isEmpty()) //prevent starting the loader when there is nothing to load
+			reportError(QString("Empty result received for URL: %1").arg(networkReply->url().toString()));
+		else
+			loader = new QFuture<GLData>(QtConcurrent::run(loadFromData, data));
 	}
 	networkReply->deleteLater();
 	networkReply = NULL;
@@ -221,6 +235,7 @@ QByteArray StelTexture::convertToGLFormat(const QImage& image, GLint *format, GL
 	}
 
 	// convert data
+	// we always use a tightly packed format, with 1-4 bpp
 	for (int i = 0; i < height; ++i)
 	{
 		uint *p = (uint *) tmp.scanLine(i);
@@ -306,6 +321,14 @@ bool StelTexture::glLoad(const GLData& data)
 	//do pixel transfer
 	glTexImage2D(GL_TEXTURE_2D, 0, data.format, width, height, 0, data.format,
 				 data.type, data.data.constData());
+
+	//for now, assume full sized 8 bit GL formats used internally
+	glSize = data.data.size();
+	textureMgr->glMemoryUsage += glSize;
+
+	#ifndef NDEBUG
+	qDebug()<<"StelTexture"<<id<<"uploaded, total memory usage "<<textureMgr->glMemoryUsage / (1024.0 * 1024.0)<<"MB";
+	#endif
 
 	//restore old value
 	glPixelStorei(GL_UNPACK_ALIGNMENT, oldalignment);

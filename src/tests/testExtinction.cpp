@@ -23,7 +23,7 @@
 
 #include "tests/testExtinction.hpp"
 
-QTEST_MAIN(TestExtinction)
+QTEST_GUILESS_MAIN(TestExtinction)
 
 void TestExtinction::initTestCase()
 {

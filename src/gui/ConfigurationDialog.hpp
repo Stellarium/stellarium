@@ -72,8 +72,6 @@ private:
 	QFile* currentDownloadFile;
 	class StelProgressController* progressBar;
 
-	QString userAgent;
-
 private slots:
 	void setNoSelectedInfo();
 	void setAllSelectedInfo();
@@ -131,6 +129,14 @@ private slots:
 	void setDeltaTAlgorithm(int algorithmID);
 	void setDeltaTAlgorithmDescription();
 	void showCustomDeltaTEquationDialog();
+
+	void populateDateFormatsList();
+	void setDateFormat();
+
+	void populateTimeFormatsList();
+	void setTimeFormat();
+
+	void setButtonBarDTFormat();
 
 	#ifndef DISABLE_SCRIPTING
 	//! The selection of script in the script list has changed

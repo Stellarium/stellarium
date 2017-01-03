@@ -44,7 +44,8 @@ public:
 	~StelObserver();
 
 	//! Update StelObserver info if needed. Default implementation does nothing.
-	virtual void update(double) {;}
+	//! returns whether we actually changed the position.
+	virtual bool update(double) {return false;}
 
 	//! Get the position of the home planet center in the heliocentric VSOP87 frame in AU
 	Vec3d getCenterVsop87Pos(void) const;
@@ -86,7 +87,7 @@ public:
 	~SpaceShipObserver();
 
 	//! Update StelObserver info if needed. Default implementation does nothing.
-	virtual void update(double deltaTime);
+	virtual bool update(double deltaTime);
 	virtual const QSharedPointer<Planet> getHomePlanet() const;
 	virtual bool isObserverLifeOver() const {return timeToGo <= 0.;}
 	virtual bool isTraveling() const {return !isObserverLifeOver();}

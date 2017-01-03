@@ -70,16 +70,10 @@ private:
 };
 
 
-Cardinals::Cardinals(float _radius) : radius(_radius), color(0.6,0.2,0.2)
+Cardinals::Cardinals(float _radius) : radius(_radius), color(0.6,0.2,0.2), sNorth("N"), sSouth("S"), sEast("E"), sWest("W")
 {
 	// Font size is 30
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+17);
-	// Default labels - if sky locale specified, loaded later
-	// Improvement for gettext translation
-	sNorth = "N";
-	sSouth = "S";
-	sEast = "E";
-	sWest = "W";
+	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+17);	
 }
 
 Cardinals::~Cardinals()
@@ -416,8 +410,8 @@ void LandscapeMgr::init()
 	addAction("actionShow_Fog", displayGroup, N_("Fog"), "fogDisplayed", "F");
 	addAction("actionShow_Cardinal_Points", displayGroup, N_("Cardinal points"), "cardinalsPointsDisplayed", "Q");
 	addAction("actionShow_Ground", displayGroup, N_("Ground"), "landscapeDisplayed", "G");
-	addAction("actionShow_LandscapeIllumination", displayGroup, N_("Illumination"), "illuminationDisplayed", "Shift+G");
-	addAction("actionShow_LandscapeLabels", displayGroup, N_("Labels"), "labelsDisplayed", "Ctrl+Shift+G");
+	addAction("actionShow_LandscapeIllumination", displayGroup, N_("Landscape illumination"), "illuminationDisplayed", "Shift+G");
+	addAction("actionShow_LandscapeLabels", displayGroup, N_("Landscape labels"), "labelsDisplayed", "Ctrl+Shift+G");
 	addAction("actionShow_LightPollution_Database", displayGroup, N_("Light pollution data from locations database"), "databaseUsage");
 }
 
@@ -459,8 +453,9 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 
 	if (getFlagLandscapeSetsLocation() && landscape->hasLocation())
 	{
-		StelApp::getInstance().getCore()->moveObserverTo(landscape->getLocation(), changeLocationDuration);
-		StelSkyDrawer* drawer=StelApp::getInstance().getCore()->getSkyDrawer();
+		StelCore *core = StelApp::getInstance().getCore();
+		core->moveObserverTo(landscape->getLocation(), changeLocationDuration);
+		StelSkyDrawer* drawer=core->getSkyDrawer();
 
 		if (landscape->getDefaultFogSetting() >-1)
 		{
@@ -471,19 +466,19 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 		{
 			drawer->setBortleScaleIndex(landscape->getDefaultBortleIndex());
 		}
-		if (landscape->getDefaultAtmosphericExtinction() >= 0.0)
+		if (landscape->getDefaultAtmosphericExtinction() >= 0.0f)
 		{
 			drawer->setExtinctionCoefficient(landscape->getDefaultAtmosphericExtinction());
 		}
-		if (landscape->getDefaultAtmosphericTemperature() > -273.15)
+		if (landscape->getDefaultAtmosphericTemperature() > -273.15f)
 		{
 			drawer->setAtmosphereTemperature(landscape->getDefaultAtmosphericTemperature());
 		}
-		if (landscape->getDefaultAtmosphericPressure() >= 0.0)
+		if (landscape->getDefaultAtmosphericPressure() >= 0.0f)
 		{
 			drawer->setAtmospherePressure(landscape->getDefaultAtmosphericPressure());
 		}
-		else if (landscape->getDefaultAtmosphericPressure() == -1.0)
+		else if (landscape->getDefaultAtmosphericPressure() == -1.0f)
 		{
 			// compute standard pressure for standard atmosphere in given altitude if landscape.ini coded as atmospheric_pressure=-1
 			// International altitude formula found in Wikipedia.
@@ -745,7 +740,11 @@ bool LandscapeMgr::getFlagCardinalsPoints() const
 //! Set Cardinals Points color
 void LandscapeMgr::setColorCardinalPoints(const Vec3f& v)
 {
-	cardinalsPoints->setColor(v);
+	if(v != getColorCardinalPoints())
+	{
+		cardinalsPoints->setColor(v);
+		emit cardinalsPointsColorChanged(v);
+	}
 }
 
 //! Get Cardinals Points color

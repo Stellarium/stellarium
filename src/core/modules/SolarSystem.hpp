@@ -112,6 +112,136 @@ class SolarSystem : public StelObjectModule
 		   WRITE setLabelsAmount
 		   NOTIFY labelsAmountChanged
 		   )
+	Q_PROPERTY(bool ephemerisMarkersDisplayed
+		   READ getFlagEphemerisMarkers
+		   WRITE setFlagEphemerisMarkers
+		   NOTIFY ephemerisMarkersChanged
+		   )
+	Q_PROPERTY(bool ephemerisDatesDisplayed
+		   READ getFlagEphemerisDates
+		   WRITE setFlagEphemerisDates
+		   NOTIFY ephemerisDatesChanged
+		   )
+
+	Q_PROPERTY(bool flagCustomGrsSettings
+		   READ getFlagCustomGrsSettings
+		   WRITE setFlagCustomGrsSettings
+		   NOTIFY flagCustomGrsSettingsChanged
+		   )
+	Q_PROPERTY(int customGrsLongitude
+		   READ getCustomGrsLongitude
+		   WRITE setCustomGrsLongitude
+		   NOTIFY customGrsLongitudeChanged
+		   )
+	Q_PROPERTY(double customGrsDrift
+		   READ getCustomGrsDrift
+		   WRITE setCustomGrsDrift
+		   NOTIFY customGrsDriftChanged
+		   )
+	Q_PROPERTY(double customGrsJD
+		   READ getCustomGrsJD
+		   WRITE setCustomGrsJD
+		   NOTIFY customGrsJDChanged
+		   )
+
+	// Colors
+	Q_PROPERTY(Vec3f orbitsColor
+		   READ getOrbitsColor
+		   WRITE setOrbitsColor
+		   NOTIFY orbitsColorChanged
+		   )
+	Q_PROPERTY(Vec3f majorPlanetsOrbitsColor
+		   READ getMajorPlanetsOrbitsColor
+		   WRITE setMajorPlanetsOrbitsColor
+		   NOTIFY majorPlanetsOrbitsColorChanged
+		   )
+	Q_PROPERTY(Vec3f minorPlanetsOrbitsColor
+		   READ getMinorPlanetsOrbitsColor
+		   WRITE setMinorPlanetsOrbitsColor
+		   NOTIFY minorPlanetsOrbitsColorChanged
+		   )
+	Q_PROPERTY(Vec3f dwarfPlanetsOrbitsColor
+		   READ getDwarfPlanetsOrbitsColor
+		   WRITE setDwarfPlanetsOrbitsColor
+		   NOTIFY dwarfPlanetsOrbitsColorChanged
+		   )
+	Q_PROPERTY(Vec3f moonsOrbitsColor
+		   READ getMoonsOrbitsColor
+		   WRITE setMoonsOrbitsColor
+		   NOTIFY moonsOrbitsColorChanged
+		   )
+	Q_PROPERTY(Vec3f cubewanosOrbitsColor
+		   READ getCubewanosOrbitsColor
+		   WRITE setCubewanosOrbitsColor
+		   NOTIFY cubewanosOrbitsColorChanged
+		   )
+	Q_PROPERTY(Vec3f plutinosOrbitsColor
+		   READ getPlutinosOrbitsColor
+		   WRITE setPlutinosOrbitsColor
+		   NOTIFY plutinosOrbitsColorChanged
+		   )
+	Q_PROPERTY(Vec3f scatteredDiskObjectsOrbitsColor
+		   READ getScatteredDiskObjectsOrbitsColor
+		   WRITE setScatteredDiskObjectsOrbitsColor
+		   NOTIFY scatteredDiskObjectsOrbitsColorChanged
+		   )
+	Q_PROPERTY(Vec3f oortCloudObjectsOrbitsColor
+		   READ getOortCloudObjectsOrbitsColor
+		   WRITE setOortCloudObjectsOrbitsColor
+		   NOTIFY oortCloudObjectsOrbitsColorChanged
+		   )
+	Q_PROPERTY(Vec3f cometsOrbitsColor
+		   READ getCometsOrbitsColor
+		   WRITE setCometsOrbitsColor
+		   NOTIFY cometsOrbitsColorChanged
+		   )
+	Q_PROPERTY(Vec3f mercuryOrbitColor
+		   READ getMercuryOrbitColor
+		   WRITE setMercuryOrbitColor
+		   NOTIFY mercuryOrbitColorChanged
+		   )
+	Q_PROPERTY(Vec3f venusOrbitColor
+		   READ getVenusOrbitColor
+		   WRITE setVenusOrbitColor
+		   NOTIFY venusOrbitColorChanged
+		   )
+	Q_PROPERTY(Vec3f earthOrbitColor
+		   READ getEarthOrbitColor
+		   WRITE setEarthOrbitColor
+		   NOTIFY earthOrbitColorChanged
+		   )
+	Q_PROPERTY(Vec3f marsOrbitColor
+		   READ getMarsOrbitColor
+		   WRITE setMarsOrbitColor
+		   NOTIFY marsOrbitColorChanged
+		   )
+	Q_PROPERTY(Vec3f jupiterOrbitColor
+		   READ getJupiterOrbitColor
+		   WRITE setJupiterOrbitColor
+		   NOTIFY jupiterOrbitColorChanged
+		   )
+	Q_PROPERTY(Vec3f saturnOrbitColor
+		   READ getSaturnOrbitColor
+		   WRITE setSaturnOrbitColor
+		   NOTIFY saturnOrbitColorChanged
+		   )
+	Q_PROPERTY(Vec3f uranusOrbitColor
+		   READ getUranusOrbitColor
+		   WRITE setUranusOrbitColor
+		   NOTIFY uranusOrbitColorChanged
+		   )
+	Q_PROPERTY(Vec3f neptuneOrbitColor
+		   READ getNeptuneOrbitColor
+		   WRITE setNeptuneOrbitColor
+		   NOTIFY neptuneOrbitColorChanged
+		   )
+
+	// Color style
+	Q_PROPERTY(QString orbitColorStyle
+		   READ getOrbitColorStyle
+		   WRITE setOrbitColorStyle
+		   NOTIFY orbitColorStyleChanged
+		   )
 
 public:
 	SolarSystem();
@@ -230,16 +360,203 @@ public slots:
 	//! @return current color
 	const Vec3f& getLabelsColor(void) const;
 
-	//! Set the color used to draw planet orbit lines.
-	//! @param c The color of the planet orbit lines (R,G,B)
+	//! Set the color used to draw solar system object orbit lines.
+	//! @param c The color of the solar system object orbit lines (R,G,B)
 	//! @code
 	//! // example of usage in scripts
 	//! SolarSystem.setOrbitsColor(Vec3f(1.0,0.0,0.0));
 	//! @endcode
 	void setOrbitsColor(const Vec3f& c);
-	//! Get the current color used to draw planet orbit lines.
+	//! Get the current color used to draw solar system object orbit lines.
 	//! @return current color
 	Vec3f getOrbitsColor(void) const;
+
+	//! Set the color used to draw orbits lines of the major planets.
+	//! @param c The color of orbits lines of the major planets (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setMajorPlanetsOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setMajorPlanetsOrbitsColor(const Vec3f& c);
+	//! Get the current color used to draw orbits lines of the major planets.
+	//! @return current color
+	Vec3f getMajorPlanetsOrbitsColor(void) const;
+
+	//! Set the color used to draw orbits lines of moons of planets.
+	//! @param c The color of orbits lines of moons of planets lines (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setMoonsOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setMoonsOrbitsColor(const Vec3f& c);
+	//! Get the current color used to draw orbits lines of moons of planets.
+	//! @return current color
+	Vec3f getMoonsOrbitsColor(void) const;
+
+	//! Set the color used to draw orbits lines of the minor planets.
+	//! @param c The color of orbits lines of the minor planets (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setMinorPlanetsOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setMinorPlanetsOrbitsColor(const Vec3f& c);
+	//! Get the current color used to draw orbits lines of the minor planets.
+	//! @return current color
+	Vec3f getMinorPlanetsOrbitsColor(void) const;
+
+	//! Set the color used to draw orbits lines of the dwarf planets.
+	//! @param c The color of orbits lines of the dwarf planets (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setDwarfPlanetsOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setDwarfPlanetsOrbitsColor(const Vec3f& c);
+	//! Get the current color used to draw orbits lines of the dwarf planets.
+	//! @return current color
+	Vec3f getDwarfPlanetsOrbitsColor(void) const;
+
+	//! Set the color used to draw orbits lines of cubewanos.
+	//! @param c The color of orbits lines of cubewanos (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setCubewanosOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setCubewanosOrbitsColor(const Vec3f& c);
+	//! Get the current color used to draw orbits lines of cubewanos.
+	//! @return current color
+	Vec3f getCubewanosOrbitsColor(void) const;
+
+	//! Set the color used to draw orbits lines of plutinos.
+	//! @param c The color of orbits lines of plutinos (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setPlutinosOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setPlutinosOrbitsColor(const Vec3f& c);
+	//! Get the current color used to draw orbits lines of plutinos.
+	//! @return current color
+	Vec3f getPlutinosOrbitsColor(void) const;
+
+	//! Set the color used to draw orbits lines of scattered disk objects.
+	//! @param c The color of orbits lines of scattered disk objects (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setScatteredDiskObjectsOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setScatteredDiskObjectsOrbitsColor(const Vec3f& c);
+	//! Get the current color used to draw orbits lines of scattered disk objects.
+	//! @return current color
+	Vec3f getScatteredDiskObjectsOrbitsColor(void) const;
+
+	//! Set the color used to draw orbits lines of Oort cloud objects.
+	//! @param c The color of orbits lines of Oort cloud objects (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setOortCloudObjectsOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setOortCloudObjectsOrbitsColor(const Vec3f& c);
+	//! Get the current color used to draw orbits lines of Oort cloud objects.
+	//! @return current color
+	Vec3f getOortCloudObjectsOrbitsColor(void) const;
+
+	//! Set the color used to draw comet orbit lines.
+	//! @param c The color of the comet orbit lines (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setCometsOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setCometsOrbitsColor(const Vec3f& c);
+	//! Get the current color used to draw comet orbit lines.
+	//! @return current color
+	Vec3f getCometsOrbitsColor(void) const;
+
+	//! Set the color used to draw Mercury orbit line.
+	//! @param c The color of Mercury orbit line (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setMercuryOrbitColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setMercuryOrbitColor(const Vec3f& c);
+	//! Get the current color used to draw Mercury orbit line.
+	//! @return current color
+	Vec3f getMercuryOrbitColor(void) const;
+
+	//! Set the color used to draw Venus orbit line.
+	//! @param c The color of Venus orbit line (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setVenusOrbitColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setVenusOrbitColor(const Vec3f& c);
+	//! Get the current color used to draw Venus orbit line.
+	//! @return current color
+	Vec3f getVenusOrbitColor(void) const;
+
+	//! Set the color used to draw Earth orbit line.
+	//! @param c The color of Earth orbit line (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setEarthOrbitColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setEarthOrbitColor(const Vec3f& c);
+	//! Get the current color used to draw Earth orbit line.
+	//! @return current color
+	Vec3f getEarthOrbitColor(void) const;
+
+	//! Set the color used to draw Mars orbit line.
+	//! @param c The color of Mars orbit line (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setMarsOrbitColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setMarsOrbitColor(const Vec3f& c);
+	//! Get the current color used to draw Mars orbit line.
+	//! @return current color
+	Vec3f getMarsOrbitColor(void) const;
+
+	//! Set the color used to draw Jupiter orbit line.
+	//! @param c The color of Jupiter orbit line (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setJupiterOrbitColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setJupiterOrbitColor(const Vec3f& c);
+	//! Get the current color used to draw Jupiter orbit line.
+	//! @return current color
+	Vec3f getJupiterOrbitColor(void) const;
+
+	//! Set the color used to draw Saturn orbit line.
+	//! @param c The color of Saturn orbit line (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setSaturnOrbitColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setSaturnOrbitColor(const Vec3f& c);
+	//! Get the current color used to draw Saturn orbit line.
+	//! @return current color
+	Vec3f getSaturnOrbitColor(void) const;
+
+	//! Set the color used to draw Uranus orbit line.
+	//! @param c The color of Uranus orbit line (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setUranusOrbitColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setUranusOrbitColor(const Vec3f& c);
+	//! Get the current color used to draw Uranus orbit line.
+	//! @return current color
+	Vec3f getUranusOrbitColor(void) const;
+
+	//! Set the color used to draw Neptune orbit line.
+	//! @param c The color of Neptune orbit line (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setNeptuneOrbitColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setNeptuneOrbitColor(const Vec3f& c);
+	//! Get the current color used to draw Neptune orbit line.
+	//! @return current color
+	Vec3f getNeptuneOrbitColor(void) const;
 
 	//! Set the color used to draw planet trails lines.
 	//! @param c The color of the planet trails lines (R,G,B)
@@ -366,9 +683,20 @@ public slots:
 
 	//! Set initial JD for calculation of position of Great Red Spot
 	//! @param JD
+	// TODO (GZ): Clarify whether this is JD or rather JDE?
 	void setCustomGrsJD(double JD);
 	//! Get initial JD for calculation of position of Great Red Spot
 	double getCustomGrsJD();
+
+	//! Set style of colors of orbits for Solar system bodies
+	void setOrbitColorStyle(QString style);
+	//! Get style of colors of orbits for Solar system bodies
+	QString getOrbitColorStyle() const;
+
+	//! Get list of objects by type
+	//! @param objType object type
+	QStringList getObjectsList(QString objType="all") const;
+
 signals:
 	void labelsDisplayedChanged(bool b);
 	void flagOrbitsChanged(bool b);
@@ -384,6 +712,35 @@ signals:
 	void flagMoonScaleChanged(bool b);
 	void moonScaleChanged(double f);
 	void labelsAmountChanged(double f);
+	void ephemerisMarkersChanged(bool b);
+	void ephemerisDatesChanged(bool b);
+	void flagCustomGrsSettingsChanged(bool b);
+	void customGrsLongitudeChanged(int l);
+	void customGrsDriftChanged(double drift);
+	void customGrsJDChanged(double JD);
+
+	void orbitsColorChanged(const Vec3f & color) const;
+	void majorPlanetsOrbitsColorChanged(const Vec3f & color) const;
+	void minorPlanetsOrbitsColorChanged(const Vec3f & color) const;
+	void dwarfPlanetsOrbitsColorChanged(const Vec3f & color) const;
+	void moonsOrbitsColorChanged(const Vec3f & color) const;
+	void cubewanosOrbitsColorChanged(const Vec3f & color) const;
+	void plutinosOrbitsColorChanged(const Vec3f & color) const;
+	void scatteredDiskObjectsOrbitsColorChanged(const Vec3f & color) const;
+	void oortCloudObjectsOrbitsColorChanged(const Vec3f & color) const;
+	void cometsOrbitsColorChanged(const Vec3f & color) const;
+	void mercuryOrbitColorChanged(const Vec3f & color) const;
+	void venusOrbitColorChanged(const Vec3f & color) const;
+	void earthOrbitColorChanged(const Vec3f & color) const;
+	void marsOrbitColorChanged(const Vec3f & color) const;
+	void jupiterOrbitColorChanged(const Vec3f & color) const;
+	void saturnOrbitColorChanged(const Vec3f & color) const;
+	void uranusOrbitColorChanged(const Vec3f & color) const;
+	void neptuneOrbitColorChanged(const Vec3f & color) const;
+
+	void orbitColorStyleChanged(QString style) const;
+
+	void solarSystemDataReloaded();
 
 public:
 	///////////////////////////////////////////////////////////////////////////
@@ -433,6 +790,12 @@ private slots:
 	//! Loads native names of planets for a given sky culture.
 	//! @param skyCultureDir the name of the directory containing the sky culture to use.
 	void updateSkyCulture(const QString& skyCultureDir);
+
+	void setFlagEphemerisMarkers(bool b);
+	bool getFlagEphemerisMarkers() const;
+
+	void setFlagEphemerisDates(bool b);
+	bool getFlagEphemerisDates() const;
 
 private:
 	//! Search for SolarSystem objects which are close to the position given
@@ -505,6 +868,8 @@ private:
 	bool flagTranslatedNames;                   // show translated names?
 	bool flagIsolatedTrails;
 	bool flagIsolatedOrbits;
+	bool ephemerisMarkersDisplayed;
+	bool ephemerisDatesDisplayed;
 
 	class TrailGroup* allTrails;
 	StelGui* gui;

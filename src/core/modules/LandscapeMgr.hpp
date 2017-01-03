@@ -52,33 +52,37 @@ class LandscapeMgr : public StelModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool atmosphereDisplayed
-			   READ getFlagAtmosphere
-			   WRITE setFlagAtmosphere
-			   NOTIFY atmosphereDisplayedChanged)
+		   READ getFlagAtmosphere
+		   WRITE setFlagAtmosphere
+		   NOTIFY atmosphereDisplayedChanged)
 	Q_PROPERTY(bool cardinalsPointsDisplayed
-			   READ getFlagCardinalsPoints
-			   WRITE setFlagCardinalsPoints
-			   NOTIFY cardinalsPointsDisplayedChanged)
+		   READ getFlagCardinalsPoints
+		   WRITE setFlagCardinalsPoints
+		   NOTIFY cardinalsPointsDisplayedChanged)
+	Q_PROPERTY(Vec3f cardinalsPointsColor
+		   READ getColorCardinalPoints
+		   WRITE setColorCardinalPoints
+		   NOTIFY cardinalsPointsColorChanged)
 	Q_PROPERTY(bool fogDisplayed
-			   READ getFlagFog
-			   WRITE setFlagFog
-			   NOTIFY fogDisplayedChanged)
+		   READ getFlagFog
+		   WRITE setFlagFog
+		   NOTIFY fogDisplayedChanged)
 	Q_PROPERTY(bool landscapeDisplayed
-			   READ getFlagLandscape
-			   WRITE setFlagLandscape
-			   NOTIFY landscapeDisplayedChanged)
+		   READ getFlagLandscape
+		   WRITE setFlagLandscape
+		   NOTIFY landscapeDisplayedChanged)
 	Q_PROPERTY(bool illuminationDisplayed
-			   READ getFlagIllumination
-			   WRITE setFlagIllumination
-			   NOTIFY illuminationDisplayedChanged)
+		   READ getFlagIllumination
+		   WRITE setFlagIllumination
+		   NOTIFY illuminationDisplayedChanged)
 	Q_PROPERTY(bool labelsDisplayed
-			   READ getFlagLabels
-			   WRITE setFlagLabels
-			   NOTIFY labelsDisplayedChanged)
+		   READ getFlagLabels
+		   WRITE setFlagLabels
+		   NOTIFY labelsDisplayedChanged)
 	Q_PROPERTY(bool databaseUsage
-			READ getFlagUseLightPollutionFromDatabase
-			WRITE setFlagUseLightPollutionFromDatabase
-			NOTIFY lightPollutionUsageChanged)
+		   READ getFlagUseLightPollutionFromDatabase
+		   WRITE setFlagUseLightPollutionFromDatabase
+		   NOTIFY lightPollutionUsageChanged)
 	Q_PROPERTY(bool flagLandscapeAutoSelection
 		   READ getFlagLandscapeAutoSelection
 		   WRITE setFlagLandscapeAutoSelection
@@ -86,33 +90,27 @@ class LandscapeMgr : public StelModule
 	Q_PROPERTY(bool flagLandscapeSetsLocation
 		   READ getFlagLandscapeSetsLocation
 		   WRITE setFlagLandscapeSetsLocation
-		   NOTIFY flagLandscapeSetsLocationChanged
-		   )
+		   NOTIFY flagLandscapeSetsLocationChanged)
 	Q_PROPERTY(bool flagLandscapeUseMinimalBrightness
 		   READ getFlagLandscapeUseMinimalBrightness
 		   WRITE setFlagLandscapeUseMinimalBrightness
-		   NOTIFY flagLandscapeUseMinimalBrightnessChanged
-		   )
+		   NOTIFY flagLandscapeUseMinimalBrightnessChanged)
 	Q_PROPERTY(bool flagLandscapeSetsMinimalBrightness
 		   READ getFlagLandscapeSetsMinimalBrightness
 		   WRITE setFlagLandscapeSetsMinimalBrightness
-		   NOTIFY flagLandscapeSetsMinimalBrightnessChanged
-		   )
+		   NOTIFY flagLandscapeSetsMinimalBrightnessChanged)
 	Q_PROPERTY(double defaultMinimalBrightness
 		   READ getDefaultMinimalBrightness
 		   WRITE setDefaultMinimalBrightness
-		   NOTIFY defaultMinimalBrightnessChanged
-		   )
+		   NOTIFY defaultMinimalBrightnessChanged)
 	Q_PROPERTY(bool flagAtmosphereAutoEnabling
 		   READ getFlagAtmosphereAutoEnable
 		   WRITE setFlagAtmosphereAutoEnable
-		   NOTIFY setFlagAtmosphereAutoEnableChanged
-		   )
+		   NOTIFY setFlagAtmosphereAutoEnableChanged)
 	Q_PROPERTY(QString currentLandscapeID
 		   READ getCurrentLandscapeID
 		   WRITE setCurrentLandscapeID
-		   NOTIFY currentLandscapeChanged
-		   )
+		   NOTIFY currentLandscapeChanged)
 public:
 	LandscapeMgr();
 	virtual ~LandscapeMgr();
@@ -198,7 +196,7 @@ public slots:
 	QStringList getUserLandscapeIDs() const;
 
 	//! Get the current landscape ID.
-	const QString& getCurrentLandscapeID() const {return currentLandscapeID;}
+	const QString getCurrentLandscapeID() const {return currentLandscapeID;}
 	//! Change the current landscape to the landscape with the ID specified.
 	//! Emits currentLandscapeChanged() if the landscape changed (true returned)
 	//! @param id the ID of the new landscape
@@ -218,7 +216,7 @@ public slots:
 	Landscape* getCurrentLandscape() const { return landscape; }
 
 	//! Get the default landscape ID.
-	const QString& getDefaultLandscapeID() const {return defaultLandscapeID;}
+	const QString getDefaultLandscapeID() const {return defaultLandscapeID;}
 	//! Change the default landscape to the landscape with the ID specified.
 	//! @param id the ID of the landscape to use by default
 	//! @return false if the new landscape could not be set (e.g. no landscape of that ID was found). True on success.
@@ -410,6 +408,7 @@ public slots:
 signals:
 	void atmosphereDisplayedChanged(const bool displayed);
 	void cardinalsPointsDisplayedChanged(const bool displayed);
+	void cardinalsPointsColorChanged(const Vec3f & newColor) const;
 	void fogDisplayedChanged(const bool displayed);
 	void landscapeDisplayedChanged(const bool displayed);
 	void illuminationDisplayedChanged(const bool displayed);

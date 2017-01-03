@@ -89,6 +89,8 @@ ArchaeoLines::ArchaeoLines()
 	, flagShowCustomAzimuth2(false)
 	//, customAzimuth1(0.0)
 	//, customAzimuth2(0.0)
+	, flagShowCustomDeclination1(false)
+	, flagShowCustomDeclination2(false)
 	, lastJDE(0.0)
 	, toolbarButton(NULL)
 {
@@ -127,6 +129,8 @@ ArchaeoLines::ArchaeoLines()
 	geographicLocation2Line = new ArchaeoLine(ArchaeoLine::GeographicLocation2, 0.0);
 	customAzimuth1Line = new ArchaeoLine(ArchaeoLine::CustomAzimuth1, 0.0);
 	customAzimuth2Line = new ArchaeoLine(ArchaeoLine::CustomAzimuth2, 0.0);
+	customDeclination1Line = new ArchaeoLine(ArchaeoLine::CustomDeclination1, 0.0);
+	customDeclination2Line = new ArchaeoLine(ArchaeoLine::CustomDeclination2, 0.0);
 
 	configDialog = new ArchaeoLinesDialog();
 	conf = StelApp::getInstance().getSettings();
@@ -160,6 +164,8 @@ ArchaeoLines::~ArchaeoLines()
 	delete geographicLocation2Line; geographicLocation2Line=NULL;
 	delete customAzimuth1Line; customAzimuth1Line=NULL;
 	delete customAzimuth2Line; customAzimuth2Line=NULL;
+	delete customDeclination1Line; customDeclination1Line=NULL;
+	delete customDeclination2Line; customDeclination2Line=NULL;
 
 	delete configDialog; configDialog=NULL;
 }
@@ -204,6 +210,8 @@ void ArchaeoLines::init()
 	Q_ASSERT(geographicLocation2Line);
 	Q_ASSERT(customAzimuth1Line);
 	Q_ASSERT(customAzimuth2Line);
+	Q_ASSERT(customDeclination1Line);
+	Q_ASSERT(customDeclination2Line);
 
 //	if (!conf->childGroups().contains("ArchaeoLines"))
 //		restoreDefaultSettings();
@@ -244,10 +252,12 @@ void ArchaeoLines::init()
 	addAction("actionAL_showSelectedObjectLine",   section, N_("Show Line for Selected Object"),    "flagShowSelectedObject"  ); // No Shortcuts configured.
 	addAction("actionAL_showCurrentSunLine",       section, N_("Show Line for Current Sun"),        "flagShowCurrentSun"      ); // No Shortcuts configured.
 	addAction("actionAL_showCurrentMoonLine",      section, N_("Show Line for Current Moon"),       "flagShowCurrentMoon"     ); // No Shortcuts configured.
-	addAction("actionAL_showGeographicLocation1Line",   section, N_("Show Line for Geographic Location 1"),   "flagShowGeographicLocation1"  ); // No Shortcuts configured.
-	addAction("actionAL_showGeographicLocation2Line",   section, N_("Show Line for Geographic Location 2"),   "flagShowGeographicLocation2"  ); // No Shortcuts configured.
-	addAction("actionAL_showCustomAzimuth1Line",   section, N_("Show Line for Custom Azimuth 1"),   "flagShowCustomAzimuth1"  ); // No Shortcuts configured.
-	addAction("actionAL_showCustomAzimuth2Line",   section, N_("Show Line for Custom Azimuth 2"),   "flagShowCustomAzimuth2"  ); // No Shortcuts configured.
+	addAction("actionAL_showGeographicLocation1Line",section, N_("Show Line for Geographic Location 1"),   "flagShowGeographicLocation1"  ); // No Shortcuts configured.
+	addAction("actionAL_showGeographicLocation2Line",section, N_("Show Line for Geographic Location 2"),   "flagShowGeographicLocation2"  ); // No Shortcuts configured.
+	addAction("actionAL_showCustomAzimuth1Line",     section, N_("Show Line for Custom Azimuth 1"),   "flagShowCustomAzimuth1"  ); // No Shortcuts configured.
+	addAction("actionAL_showCustomAzimuth2Line",     section, N_("Show Line for Custom Azimuth 2"),   "flagShowCustomAzimuth2"  ); // No Shortcuts configured.
+	addAction("actionAL_showCustomDeclination1Line", section, N_("Show Line for Custom Declination 1"),   "flagShowCustomDeclination1"  ); // No Shortcuts configured.
+	addAction("actionAL_showCustomDeclination2Line", section, N_("Show Line for Custom Declination 2"),   "flagShowCustomDeclination2"  ); // No Shortcuts configured.
 }
 
 void ArchaeoLines::update(double deltaTime)
@@ -386,6 +396,8 @@ void ArchaeoLines::update(double deltaTime)
 	geographicLocation2Line->update(deltaTime);
 	customAzimuth1Line->update(deltaTime);
 	customAzimuth2Line->update(deltaTime);
+	customDeclination1Line->update(deltaTime);
+	customDeclination2Line->update(deltaTime);
 
 	//withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();;
 }
@@ -422,6 +434,8 @@ void ArchaeoLines::draw(StelCore* core)
 	geographicLocation2Line->draw(core, lineFader.getInterstate());
 	customAzimuth1Line->draw(core, lineFader.getInterstate());
 	customAzimuth2Line->draw(core, lineFader.getInterstate());
+	customDeclination1Line->draw(core, lineFader.getInterstate());
+	customDeclination2Line->draw(core, lineFader.getInterstate());
 }
 
 
@@ -447,7 +461,7 @@ void ArchaeoLines::restoreDefaultSettings()
 
 void ArchaeoLines::loadSettings()
 {
-	equinoxColor         = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_equinox",          "1.00,1.00,0.5").toString());
+	equinoxColor         = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_equinox",          "1.00,1.00,0.50").toString());
 	equinoxLine->setColor(equinoxColor);
 	solsticesColor       = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_solstices",        "1.00,0.15,0.15").toString());
 	northernSolsticeLine->setColor(solsticesColor);
@@ -485,6 +499,10 @@ void ArchaeoLines::loadSettings()
 	customAzimuth1Line->setColor(customAzimuth1Color);
 	customAzimuth2Color   = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_custom_azimuth_2",    "0.25,0.50,0.75").toString());
 	customAzimuth2Line->setColor(customAzimuth2Color);
+	customDeclination1Color   = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_custom_declination_1",    "0.45,1.00,0.15").toString());
+	customDeclination1Line->setColor(customDeclination1Color);
+	customDeclination2Color   = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_custom_declination_2",    "0.45,0.50,0.65").toString());
+	customDeclination2Line->setColor(customDeclination2Color);
 
 	setGeographicLocation1Longitude(conf->value("ArchaeoLines/geographic_location_1_longitude",  39.826175).toDouble());
 	setGeographicLocation1Latitude( conf->value("ArchaeoLines/geographic_location_1_latitude",   21.422476).toDouble());
@@ -500,6 +518,10 @@ void ArchaeoLines::loadSettings()
 	customAzimuth2Line->setDefiningAngle(conf->value("ArchaeoLines/custom_azimuth_2_angle", 0.0).toDouble());
 	customAzimuth1Line->setLabel(conf->value("ArchaeoLines/custom_azimuth_1_label", "custAzi1").toString());
 	customAzimuth2Line->setLabel(conf->value("ArchaeoLines/custom_azimuth_2_label", "custAzi2").toString());
+	customDeclination1Line->setDefiningAngle(conf->value("ArchaeoLines/custom_declination_1_angle", 0.0).toDouble());
+	customDeclination2Line->setDefiningAngle(conf->value("ArchaeoLines/custom_declination_2_angle", 0.0).toDouble());
+	customDeclination1Line->setLabel(conf->value("ArchaeoLines/custom_declination_1_label", "custDec1").toString());
+	customDeclination2Line->setLabel(conf->value("ArchaeoLines/custom_declination_2_label", "custDec2").toString());
 
 	// Now activate line display if needed.
 	// 5 solar limits
@@ -523,6 +545,8 @@ void ArchaeoLines::loadSettings()
 	showGeographicLocation2(conf->value("ArchaeoLines/show_geographic_location_2", false).toBool());
 	showCustomAzimuth1(conf->value("ArchaeoLines/show_custom_azimuth_1", false).toBool());
 	showCustomAzimuth2(conf->value("ArchaeoLines/show_custom_azimuth_2", false).toBool());
+	showCustomDeclination1(conf->value("ArchaeoLines/show_custom_declination_1", false).toBool());
+	showCustomDeclination2(conf->value("ArchaeoLines/show_custom_declination_2", false).toBool());
 
 	enableArchaeoLines(conf->value("ArchaeoLines/enable_at_startup", false).toBool());
 }
@@ -713,6 +737,26 @@ void ArchaeoLines::showCustomAzimuth2(bool b)
 		emit showCustomAzimuth2Changed(b);
 	}
 }
+void ArchaeoLines::showCustomDeclination1(bool b)
+{
+	if (b!=flagShowCustomDeclination1)
+	{
+		flagShowCustomDeclination1=b;
+		conf->setValue("ArchaeoLines/show_custom_declination_1",       isCustomDeclination1Displayed());
+		customDeclination1Line->setDisplayed(b);
+		emit showCustomDeclination1Changed(b);
+	}
+}
+void ArchaeoLines::showCustomDeclination2(bool b)
+{
+	if (b!=flagShowCustomDeclination2)
+	{
+		flagShowCustomDeclination2=b;
+		conf->setValue("ArchaeoLines/show_custom_declination_2",       isCustomDeclination2Displayed());
+		customDeclination2Line->setDisplayed(b);
+		emit showCustomDeclination2Changed(b);
+	}
+}
 
 void ArchaeoLines::setGeographicLocation1Longitude(double lng)
 {
@@ -768,16 +812,19 @@ void ArchaeoLines::setCustomAzimuth1(double az)
 {
 	if (az!=customAzimuth1Line->getDefiningAngle())
 	{
-	customAzimuth1Line->setDefiningAngle(az);
-	conf->setValue("ArchaeoLines/custom_azimuth_1_angle", az);
-	emit customAzimuth1Changed(az);
+		customAzimuth1Line->setDefiningAngle(az);
+		conf->setValue("ArchaeoLines/custom_azimuth_1_angle", az);
+		emit customAzimuth1Changed(az);
 	}
 }
 void ArchaeoLines::setCustomAzimuth2(double az)
 {
-	customAzimuth2Line->setDefiningAngle(az);
-	conf->setValue("ArchaeoLines/custom_azimuth_2_angle", az);
-	emit customAzimuth2Changed(az);
+	if (az!=customAzimuth1Line->getDefiningAngle())
+	{
+		customAzimuth2Line->setDefiningAngle(az);
+		conf->setValue("ArchaeoLines/custom_azimuth_2_angle", az);
+		emit customAzimuth2Changed(az);
+	}
 }
 void ArchaeoLines::setCustomAzimuth1Label(QString label)
 {
@@ -788,6 +835,34 @@ void ArchaeoLines::setCustomAzimuth2Label(QString label)
 {
 	customAzimuth2Line->setLabel(label);
 	conf->setValue("ArchaeoLines/custom_azimuth_2_label", label);
+}
+void ArchaeoLines::setCustomDeclination1(double dec)
+{
+	if (dec!=customDeclination1Line->getDefiningAngle())
+	{
+		customDeclination1Line->setDefiningAngle(dec);
+		conf->setValue("ArchaeoLines/custom_declination_1_angle", dec);
+		emit customDeclination1Changed(dec);
+	}
+}
+void ArchaeoLines::setCustomDeclination2(double dec)
+{
+	if (dec!=customDeclination1Line->getDefiningAngle())
+	{
+		customDeclination2Line->setDefiningAngle(dec);
+		conf->setValue("ArchaeoLines/custom_declination_2_angle", dec);
+		emit customDeclination2Changed(dec);
+	}
+}
+void ArchaeoLines::setCustomDeclination1Label(QString label)
+{
+	customDeclination1Line->setLabel(label);
+	conf->setValue("ArchaeoLines/custom_declination_1_label", label);
+}
+void ArchaeoLines::setCustomDeclination2Label(QString label)
+{
+	customDeclination2Line->setLabel(label);
+	conf->setValue("ArchaeoLines/custom_declination_2_label", label);
 }
 
 
@@ -882,7 +957,18 @@ void ArchaeoLines::setLineColor(ArchaeoLine::Line whichLine, QColor color)
 			customAzimuth2Color.set(color.redF(), color.greenF(), color.blueF());
 			conf->setValue("ArchaeoLines/color_custom_azimuth_2",    QString("%1,%2,%3").arg(customAzimuth2Color.v[0]).arg(customAzimuth2Color.v[1]).arg(customAzimuth2Color.v[2]));
 			customAzimuth2Line->setColor(customAzimuth2Color);
-			break;		default:
+			break;
+		case ArchaeoLine::CustomDeclination1:
+			customDeclination1Color.set(color.redF(), color.greenF(), color.blueF());
+			conf->setValue("ArchaeoLines/color_custom_declination_1",    QString("%1,%2,%3").arg(customDeclination1Color.v[0]).arg(customDeclination1Color.v[1]).arg(customDeclination1Color.v[2]));
+			customDeclination1Line->setColor(customDeclination1Color);
+			break;
+		case ArchaeoLine::CustomDeclination2:
+			customDeclination2Color.set(color.redF(), color.greenF(), color.blueF());
+			conf->setValue("ArchaeoLines/color_custom_declination_2",    QString("%1,%2,%3").arg(customDeclination2Color.v[0]).arg(customDeclination2Color.v[1]).arg(customDeclination2Color.v[2]));
+			customDeclination2Line->setColor(customDeclination2Color);
+			break;
+		default:
 			Q_ASSERT(0);
 	}
 }
@@ -942,6 +1028,12 @@ QColor ArchaeoLines::getLineColor(ArchaeoLine::Line whichLine)
 			break;
 		case ArchaeoLine::CustomAzimuth2:
 			vColor=&customAzimuth2Color;
+			break;
+		case ArchaeoLine::CustomDeclination1:
+			vColor=&customDeclination1Color;
+			break;
+		case ArchaeoLine::CustomDeclination2:
+			vColor=&customDeclination2Color;
 			break;
 		default:
 			vColor=&selectedObjectColor; // this is only to silence compiler warning about uninitialized variable vColor.
@@ -1006,6 +1098,12 @@ double ArchaeoLines::getLineAngle(ArchaeoLine::Line whichLine)
 		case ArchaeoLine::CustomAzimuth2:
 			return customAzimuth2Line->getDefiningAngle();
 			break;
+		case ArchaeoLine::CustomDeclination1:
+			return customDeclination1Line->getDefiningAngle();
+			break;
+		case ArchaeoLine::CustomDeclination2:
+			return customDeclination2Line->getDefiningAngle();
+			break;
 		default:
 			Q_ASSERT(0);
 	}
@@ -1064,6 +1162,12 @@ QString ArchaeoLines::getLineLabel(ArchaeoLine::Line whichLine)
 			break;
 		case ArchaeoLine::CustomAzimuth2:
 			return customAzimuth2Line->getLabel();
+			break;
+		case ArchaeoLine::CustomDeclination1:
+			return customDeclination1Line->getLabel();
+			break;
+		case ArchaeoLine::CustomDeclination2:
+			return customDeclination2Line->getLabel();
 			break;
 		default:
 			Q_ASSERT(0);
@@ -1136,9 +1240,7 @@ ArchaeoLine::ArchaeoLine(ArchaeoLine::Line lineType, double definingAngle) :
 	fader.setDuration(1000);
 	// Initialize the message strings and make sure they are translated when the language changes.
 	StelApp& app = StelApp::getInstance();
-	//updateLabel(); // WHY AGAIN??
 	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateLabel()));
-
 }
 
 void ArchaeoLine::updateLabel()
@@ -1199,6 +1301,8 @@ void ArchaeoLine::updateLabel()
 		case ArchaeoLine::GeographicLocation2:
 		case ArchaeoLine::CustomAzimuth1:
 		case ArchaeoLine::CustomAzimuth2:
+		case ArchaeoLine::CustomDeclination1:
+		case ArchaeoLine::CustomDeclination2:
 			break;
 		default:
 			Q_ASSERT(0);

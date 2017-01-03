@@ -77,8 +77,8 @@ Satellites::Satellites()
 	: satelliteListModel(NULL)
 	, toolbarButton(NULL)
 	, earth(NULL)
-	, defaultHintColor(0.0, 0.4, 0.6)
-	, defaultOrbitColor(0.0, 0.3, 0.6)
+	, defaultHintColor(0.0f, 0.4f, 0.6f)
+	, defaultOrbitColor(0.0f, 0.3f, 0.6f)
 	, updateState(CompleteNoUpdates)
 	, downloadMgr(NULL)
 	, progressBar(NULL)
@@ -158,7 +158,7 @@ void Satellites::init()
 	}
 	catch (std::runtime_error &e)
 	{
-		qWarning() << "Satellites::init error: " << e.what();
+		qWarning() << "[Satellites] init error: " << e.what();
 		return;
 	}
 
@@ -180,7 +180,7 @@ void Satellites::init()
 	}
 	else
 	{
-		qDebug() << "Satellites::init satellites.json does not exist - copying default file to " << QDir::toNativeSeparators(catalogPath);
+		qDebug() << "[Satellites] satellites.json does not exist - copying default file to " << QDir::toNativeSeparators(catalogPath);
 		restoreDefaultCatalog();
 	}
 	
@@ -189,7 +189,7 @@ void Satellites::init()
 		restoreDefaultQSMagFile();
 	}
 
-	qDebug() << "Satellites: loading catalog file:" << QDir::toNativeSeparators(catalogPath);
+	qDebug() << "[Satellites] loading catalog file:" << QDir::toNativeSeparators(catalogPath);
 
 	// create satellites according to content os satellites.json file
 	loadCatalog();
@@ -209,10 +209,7 @@ void Satellites::init()
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
 	// Handle changes to the observer location:
-	connect(StelApp::getInstance().getCore(),
-	        SIGNAL(locationChanged(StelLocation)),
-	        this,
-	        SLOT(updateObserverLocation(StelLocation)));
+	connect(StelApp::getInstance().getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(updateObserverLocation(StelLocation)));
 }
 
 bool Satellites::backupCatalog(bool deleteOriginal)
@@ -220,7 +217,7 @@ bool Satellites::backupCatalog(bool deleteOriginal)
 	QFile old(catalogPath);
 	if (!old.exists())
 	{
-		qWarning() << "Satellites::backupJsonFile no file to backup";
+		qWarning() << "[Satellites] no file to backup";
 		return false;
 	}
 
@@ -234,14 +231,14 @@ bool Satellites::backupCatalog(bool deleteOriginal)
 		{
 			if (!old.remove())
 			{
-				qWarning() << "Satellites: WARNING: unable to remove old catalog file!";
+				qWarning() << "[Satellites] WARNING: unable to remove old catalog file!";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "Satellites: WARNING: failed to back up catalog file as" 
+		qWarning() << "[Satellites] WARNING: failed to back up catalog file as"
 			   << QDir::toNativeSeparators(backupPath);
 		return false;
 	}
@@ -297,7 +294,7 @@ StelObjectP Satellites::searchByNameI18n(const QString& nameI18n) const
 	{
 		if (sat->initialized && sat->displayed)
 		{
-			if (sat->getNameI18n().toUpper() == nameI18n)
+			if (sat->getNameI18n().toUpper() == objw)
 				return qSharedPointerCast<StelObject>(sat);
 		}
 	}
@@ -320,7 +317,7 @@ StelObjectP Satellites::searchByName(const QString& englishName) const
 	{
 		if (sat->initialized && sat->displayed)
 		{
-			if (sat->getEnglishName().toUpper() == englishName)
+			if (sat->getEnglishName().toUpper() == objw)
 				return qSharedPointerCast<StelObject>(sat);
 		}
 	}
@@ -515,11 +512,11 @@ void Satellites::restoreDefaultCatalog()
 	QFile src(":/satellites/satellites.json");
 	if (!src.copy(catalogPath))
 	{
-		qWarning() << "Satellites::restoreDefaultJsonFile cannot copy json resource to " + QDir::toNativeSeparators(catalogPath);
+		qWarning() << "[Satellites] cannot copy json resource to " + QDir::toNativeSeparators(catalogPath);
 	}
 	else
 	{
-		qDebug() << "Satellites::init copied default satellites.json to " << QDir::toNativeSeparators(catalogPath);
+		qDebug() << "[Satellites] copied default satellites.json to " << QDir::toNativeSeparators(catalogPath);
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(catalogPath);
@@ -539,11 +536,11 @@ void Satellites::restoreDefaultQSMagFile()
 	QFile src(":/satellites/qs.mag");
 	if (!src.copy(qsMagFilePath))
 	{
-		qWarning() << "Satellites::restoreDefaultQSMagFile cannot copy qs.mag resource to " + QDir::toNativeSeparators(qsMagFilePath);
+		qWarning() << "[Satellites] cannot copy qs.mag resource to " + QDir::toNativeSeparators(qsMagFilePath);
 	}
 	else
 	{
-		qDebug() << "Satellites::init copied default qs.mag to " << QDir::toNativeSeparators(qsMagFilePath);
+		qDebug() << "[Satellites] copied default qs.mag to " << QDir::toNativeSeparators(qsMagFilePath);
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(qsMagFilePath);
@@ -673,7 +670,7 @@ const QString Satellites::readCatalogVersion()
 	QFile satelliteJsonFile(catalogPath);
 	if (!satelliteJsonFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Satellites::init cannot open " << QDir::toNativeSeparators(catalogPath);
+		qWarning() << "[Satellites] cannot open " << QDir::toNativeSeparators(catalogPath);
 		return jsonVersion;
 	}
 
@@ -690,7 +687,7 @@ const QString Satellites::readCatalogVersion()
 	}
 
 	satelliteJsonFile.close();
-	//qDebug() << "Satellites: catalog version from file:" << jsonVersion;
+	//qDebug() << "[Satellites] catalog version from file:" << jsonVersion;
 	return jsonVersion;
 }
 
@@ -707,12 +704,12 @@ bool Satellites::saveDataMap(const QVariantMap& map, QString path)
 
 	if (!jsonFile.open(QIODevice::WriteOnly))
 	{
-		qWarning() << "Satellites::saveTleMap() cannot open for writing:" << QDir::toNativeSeparators(path);
+		qWarning() << "[Satellites] cannot open for writing:" << QDir::toNativeSeparators(path);
 		return false;
 	}
 	else
 	{
-		qDebug() << "Satellites::saveTleMap() writing to:" << QDir::toNativeSeparators(path);
+		qDebug() << "[Satellites] writing to:" << QDir::toNativeSeparators(path);
 		parser.write(map, &jsonFile);
 		jsonFile.close();
 		return true;
@@ -727,7 +724,7 @@ QVariantMap Satellites::loadDataMap(QString path)
 	QVariantMap map;
 	QFile jsonFile(path);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-		qWarning() << "Satellites::loadTleMap cannot open " << QDir::toNativeSeparators(path);
+		qWarning() << "[Satellites] cannot open " << QDir::toNativeSeparators(path);
 	else
 	{
 		map = StelJsonParser::parse(&jsonFile).toMap();
@@ -805,6 +802,9 @@ QVariantMap Satellites::createDataMap(void)
 
 		if (satMap["stdMag"].toFloat() == 99.f)
 			satMap.remove("stdMag");
+
+		if (satMap["status"].toInt() == Satellite::StatusUnknown)
+			satMap.remove("status");
 
 		sats[sat->id] = satMap;		
 	}
@@ -914,11 +914,13 @@ bool Satellites::add(const TleData& tleData)
 	satProperties.insert("orbitVisible", false);
 	if (qsMagList.contains(tleData.id))
 		satProperties.insert("stdMag", qsMagList[tleData.id]);
+	if (tleData.status != Satellite::StatusUnknown)
+		satProperties.insert("status", tleData.status);
 	
 	SatelliteP sat(new Satellite(tleData.id, satProperties));
 	if (sat->initialized)
 	{
-		qDebug() << "Satellite added:" << tleData.id << tleData.name;
+		qDebug() << "[Satellites] satellite added:" << tleData.id << tleData.name;
 		satellites.append(sat);
 		sat->setNew();
 		return true;
@@ -945,10 +947,10 @@ void Satellites::add(const TleDataList& newSatellites)
 	if (satelliteListModel)
 		satelliteListModel->endSatellitesChange();
 	
-	qDebug() << "Satellites: "
-					 << newSatellites.count() << "satellites proposed for addition, "
-					 << numAdded << " added, "
-					 << satellites.count() << " total after the operation.";
+	qDebug() << "[Satellites] "
+		 << newSatellites.count() << "satellites proposed for addition, "
+		 << numAdded << " added, "
+		 << satellites.count() << " total after the operation.";
 }
 
 void Satellites::remove(const QStringList& idList)
@@ -978,10 +980,10 @@ void Satellites::remove(const QStringList& idList)
 	if (satelliteListModel)
 		satelliteListModel->endSatellitesChange();
 
-	qDebug() << "Satellites: "
-					 << idList.count() << "satellites proposed for removal, "
-					 << numRemoved << " removed, "
-					 << satellites.count() << " remain.";
+	qDebug() << "[Satellites] "
+		 << idList.count() << "satellites proposed for removal, "
+		 << numRemoved << " removed, "
+		 << satellites.count() << " remain.";
 }
 
 int Satellites::getSecondsToUpdate(void)
@@ -1118,12 +1120,12 @@ void Satellites::updateFromOnlineSources()
 {
 	if (updateState==Satellites::Updating)
 	{
-		qWarning() << "Satellites: Internet update already in progress!";
+		qWarning() << "[Satellites] Internet update already in progress!";
 		return;
 	}
 	else
 	{
-		qDebug() << "Satellites: starting Internet update...";
+		qDebug() << "[Satellites] starting Internet update...";
 	}
 
 	// Setting lastUpdate should be done only when the update is finished. -BM
@@ -1131,7 +1133,7 @@ void Satellites::updateFromOnlineSources()
 	// TODO: Perhaps tie the emptyness of updateUrls to updatesEnabled... --BM
 	if (updateUrls.isEmpty())
 	{
-		qWarning() << "Satellites: update failed."
+		qWarning() << "[Satellites] update failed."
 		           << "No update sources are defined!";
 		
 		// Prevent from re-entering this method on the next check:
@@ -1184,7 +1186,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 	// check the download worked, and save the data to file if this is the case.
 	if (reply->error() != QNetworkReply::NoError)
 	{
-		qWarning() << "Satellites: FAILED to download"
+		qWarning() << "[Satellites] FAILED to download"
 		           << reply->url().toString(QUrl::RemoveUserInfo)
 		           << "Error:" << reply->errorString();
 	}
@@ -1219,7 +1221,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 		}
 		else
 		{
-			qWarning() << "Satellites: cannot save update file:"
+			qWarning() << "[Satellites] cannot save update file:"
 			           << tmpFile->error()
 			           << tmpFile->errorString();
 		}
@@ -1331,7 +1333,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	
 	if (newTleSets.isEmpty())
 	{
-		qWarning() << "Satellites: update files contain no TLE sets!";
+		qWarning() << "[Satellites] update files contain no TLE sets!";
 		updateState = OtherError;
 		emit(updateStateChanged(updateState));
 		return;
@@ -1375,6 +1377,9 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 				// Update the name if it has been changed in the source list
 				sat->name = newTle.name;
 
+				// Update operational status
+				sat->status = newTle.status;
+
 				// we reset this to "now" when we started the update.
 				sat->lastUpdated = lastUpdate;
 				updatedCount++;
@@ -1388,7 +1393,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 			if (autoRemoveEnabled)
 				toBeRemoved.append(sat->id);
 			else
-				qWarning() << "Satellites:" << sat->id << sat->name
+				qWarning() << "[Satellites]" << sat->id << sat->name
 				           << "is missing in the update lists.";
 			missingCount++;
 		}
@@ -1396,7 +1401,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 		if (!sat->orbitValid)
 		{
 			toBeRemoved.append(sat->id);
-			qWarning() << "Satellite" << sat->id << sat->name
+			qWarning() << "[Satellites]" << sat->id << sat->name
 				   << "has invalid orbit and will be removed.";
 			missingCount++;
 		}
@@ -1419,7 +1424,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	
 	if (autoRemoveEnabled && !toBeRemoved.isEmpty())
 	{
-		qWarning() << "Satellites: purging objects that were not updated...";
+		qWarning() << "[Satellites] purging objects that were not updated...";
 		remove(toBeRemoved);
 	}
 	
@@ -1435,7 +1440,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	if (satelliteListModel)
 		satelliteListModel->endSatellitesChange();
 
-	qDebug() << "Satellites: update finished."
+	qDebug() << "[Satellites] update finished."
 	         << updatedCount << "/" << totalCount << "updated,"
 	         << addedCount << "added,"
 	         << missingCount << "missing or removed."
@@ -1466,11 +1471,47 @@ void Satellites::parseTleFile(QFile& openFile,
 			lastData = TleData();
 			lastData.addThis = addFlagValue;
 			
+			// The thing in square brackets after the name is actually
+			// Celestrak's "status code". Parse it!
+			QStringList codes;
+			codes << "+" << "-" << "P" << "B" << "S" << "X" << "D" << "?";
+
+			QRegExp statusRx("\\s*\\[(\\D{1})\\]\\s*$");
+			statusRx.setMinimal(true);
+			if (statusRx.indexIn(line)>-1)
+			{
+				lastData.status = Satellite::StatusUnknown;
+				switch (codes.indexOf(statusRx.capturedTexts().at(1).toUpper()))
+				{
+					case 0:
+						lastData.status = Satellite::StatusOperational;
+						break;
+					case 1:
+						lastData.status = Satellite::StatusNonoperational;
+						break;
+					case 2:
+						lastData.status = Satellite::StatusPartiallyOperational;
+						break;
+					case 3:
+						lastData.status = Satellite::StatusStandby;
+						break;
+					case 4:
+						lastData.status = Satellite::StatusSpare;
+						break;
+					case 5:
+						lastData.status = Satellite::StatusExtendedMission;
+						break;
+					case 6:
+						lastData.status = Satellite::StatusDecayed;
+						break;
+					default:
+						lastData.status = Satellite::StatusUnknown;
+				}
+			}
+
 			//TODO: We need to think of some kind of ecaping these
 			//characters in the JSON parser. --BM
-			// The thing in square brackets after the name is actually
-			// Celestrak's "status code". Parse automatically? --BM
-			line.replace(QRegExp("\\s*\\[([^\\]])*\\]\\s*$"),"");  // remove things in square brackets
+			line.replace(QRegExp("\\s*\\[([^\\]])*\\]\\s*$"),"");  // remove "status code" from name
 			lastData.name = line;
 		}
 		else
@@ -1490,8 +1531,7 @@ void Satellites::parseTleFile(QFile& openFile,
 				
 				// This is the second line and there will be no more,
 				// so if everything is OK, save the elements.
-				if (!lastData.name.isEmpty() &&
-						!lastData.first.isEmpty())
+				if (!lastData.name.isEmpty() &&	!lastData.first.isEmpty())
 				{
 					// Some satellites can be listed in multiple files,
 					// and only some of those files may be marked for adding,
@@ -1505,7 +1545,7 @@ void Satellites::parseTleFile(QFile& openFile,
 				//TODO: Error warnings? --BM
 			}
 			else
-				qDebug() << "Satellites: unprocessed line " << lineNumber <<  " in file " << QDir::toNativeSeparators(openFile.fileName());
+				qDebug() << "[Satellites] unprocessed line " << lineNumber <<  " in file " << QDir::toNativeSeparators(openFile.fileName());
 		}
 	}
 }
@@ -1521,7 +1561,7 @@ void Satellites::parseQSMagFile(QString qsMagFile)
 	QFile qsmFile(qsMagFile);
 	if (!qsmFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Satellites: oops... cannot open " << QDir::toNativeSeparators(qsMagFile);
+		qWarning() << "[Satellites] oops... cannot open " << QDir::toNativeSeparators(qsMagFile);
 		return;
 	}
 
@@ -1619,7 +1659,7 @@ bool Satellites::checkJsonFileFormat()
 	QFile jsonFile(catalogPath);
 	if (!jsonFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Satellites::checkJsonFileFormat(): cannot open " << QDir::toNativeSeparators(catalogPath);
+		qWarning() << "[Satellites] cannot open " << QDir::toNativeSeparators(catalogPath);
 		return false;
 	}
 
@@ -1631,8 +1671,8 @@ bool Satellites::checkJsonFileFormat()
 	}
 	catch (std::runtime_error& e)
 	{
-		qDebug() << "Satellites::checkJsonFileFormat(): file format is wrong!";
-		qDebug() << "Satellites::checkJsonFileFormat() error:" << e.what();
+		qDebug() << "[Satellites] file format is wrong!";
+		qDebug() << "[Satellites] error:" << e.what();
 		return false;
 	}
 
@@ -1692,7 +1732,7 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 					if (angle>angle0 && (v<1) && lat>5*M_PI/180)
 					{
 						IridiumFlaresPrediction flare;
-						flare.datetime = StelUtils::julianDayToISO8601String(currentJD+dt+StelUtils::getGMTShiftFromQT(currentJD+dt)/24.f);
+						flare.datetime = StelUtils::julianDayToISO8601String(currentJD+dt+StelApp::getInstance().getCore()->getUTCOffset(currentJD+dt)/24.f);
 						flare.satellite = sat.data()->getEnglishName();
 						flare.azimuth   = lon;
 						flare.altitude  = lat;
@@ -1766,7 +1806,6 @@ void Satellites::translations()
 	N_("");
 	*/
 	
-	
 	// Satellite descriptions - bright and/or famous objects
 	// Just A FEW objects please! (I'm looking at you, Alex!)
 	// TRANSLATORS: Satellite description. "Hubble" is a person's name.
@@ -1775,5 +1814,24 @@ void Satellites::translations()
 	N_("The International Space Station");
 	// TRANSLATORS: Satellite description.
 	N_("China's first space station");
+	// TRANSLATORS: Satellite description.
+	N_("The russian space radio telescope RadioAstron");
+	// TRANSLATORS: Satellite description.
+	N_("International Gamma-Ray Astrophysics Laboratory");
+	// TRANSLATORS: Satellite description.
+	N_("The Gamma-Ray Observatory");
+
+	// Satellite names - a few famous objects only
+	// TRANSLATORS: Satellite name: International Space Station
+	N_("ISS (ZARYA)");
+	// TRANSLATORS: Satellite name: Hubble Space Telescope
+	N_("HST");
+	// TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
+	N_("SPEKTR-R");
+	// TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
+	N_("INTEGRAL");
+	// TRANSLATORS: China's first space station name
+	N_("TIANGONG 1");	
+
 #endif
 }

@@ -26,6 +26,7 @@
 #include "StelModule.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMainView.hpp"
+#include "StelOpenGL.hpp"
 
 ArchaeoLinesDialog::ArchaeoLinesDialog()
 	: al(NULL)
@@ -100,6 +101,15 @@ void ArchaeoLinesDialog::createDialogContent()
 	connect(ui->customAzimuth1LineEdit, SIGNAL(textChanged(QString)), al, SLOT(setCustomAzimuth1Label(QString)));
 	connect(ui->customAzimuth2LineEdit, SIGNAL(textChanged(QString)), al, SLOT(setCustomAzimuth2Label(QString)));
 
+	connectBoolProperty(ui->customDeclination1CheckBox,        "ArchaeoLines.flagShowCustomDeclination1");
+	connectBoolProperty(ui->customDeclination2CheckBox,        "ArchaeoLines.flagShowCustomDeclination2");
+	connectDoubleProperty(ui->customDeclination1DoubleSpinBox, "ArchaeoLines.customDeclination1");
+	connectDoubleProperty(ui->customDeclination2DoubleSpinBox, "ArchaeoLines.customDeclination2");
+	ui->customDeclination1LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomDeclination1));
+	ui->customDeclination2LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomDeclination2));
+	connect(ui->customDeclination1LineEdit, SIGNAL(textChanged(QString)), al, SLOT(setCustomDeclination1Label(QString)));
+	connect(ui->customDeclination2LineEdit, SIGNAL(textChanged(QString)), al, SLOT(setCustomDeclination2Label(QString)));
+
 	{ // just to allow code folding.
 	equinoxColor         = al->getLineColor(ArchaeoLine::Equinox);
 	solsticeColor        = al->getLineColor(ArchaeoLine::Solstices);
@@ -116,6 +126,8 @@ void ArchaeoLinesDialog::createDialogContent()
 	geographicLocation2Color  = al->getLineColor(ArchaeoLine::GeographicLocation2);
 	customAzimuth1Color  = al->getLineColor(ArchaeoLine::CustomAzimuth1);
 	customAzimuth2Color  = al->getLineColor(ArchaeoLine::CustomAzimuth2);
+	customDeclination1Color  = al->getLineColor(ArchaeoLine::CustomDeclination1);
+	customDeclination2Color  = al->getLineColor(ArchaeoLine::CustomDeclination2);
 	equinoxColorPixmap=QPixmap(48, 12);
 	equinoxColorPixmap.fill(equinoxColor);
 	ui->equinoxColorToolButton->setIconSize(QSize(48, 12));
@@ -176,6 +188,14 @@ void ArchaeoLinesDialog::createDialogContent()
 	customAzimuth2ColorPixmap.fill(customAzimuth2Color);
 	ui->customAzimuth2ColorToolButton->setIconSize(QSize(48, 12));
 	ui->customAzimuth2ColorToolButton->setIcon(QIcon(customAzimuth2ColorPixmap));
+	customDeclination1ColorPixmap=QPixmap(48, 12);
+	customDeclination1ColorPixmap.fill(customDeclination1Color);
+	ui->customDeclination1ColorToolButton->setIconSize(QSize(48, 12));
+	ui->customDeclination1ColorToolButton->setIcon(QIcon(customDeclination1ColorPixmap));
+	customDeclination2ColorPixmap=QPixmap(48, 12);
+	customDeclination2ColorPixmap.fill(customDeclination2Color);
+	ui->customDeclination2ColorToolButton->setIconSize(QSize(48, 12));
+	ui->customDeclination2ColorToolButton->setIcon(QIcon(customDeclination2ColorPixmap));
 }
 
 	connect(ui->equinoxColorToolButton,             SIGNAL(released()), this, SLOT(askEquinoxColor()));
@@ -193,12 +213,18 @@ void ArchaeoLinesDialog::createDialogContent()
 	connect(ui->geographicLocation2ColorToolButton, SIGNAL(released()), this, SLOT(askGeographicLocation2Color()));
 	connect(ui->customAzimuth1ColorToolButton,      SIGNAL(released()), this, SLOT(askCustomAzimuth1Color()));
 	connect(ui->customAzimuth2ColorToolButton,      SIGNAL(released()), this, SLOT(askCustomAzimuth2Color()));
+	connect(ui->customDeclination1ColorToolButton,  SIGNAL(released()), this, SLOT(askCustomDeclination1Color()));
+	connect(ui->customDeclination2ColorToolButton,  SIGNAL(released()), this, SLOT(askCustomDeclination2Color()));
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(resetArchaeoLinesSettings()));
 
-	// We must apparently warn about a potential problem, but only on Windows. (QTBUG-35302)
+	// We must apparently warn about a potential problem, but only on Windows in OpenGL mode. (QTBUG-35302?)
 	#ifndef Q_OS_WIN
 	ui->switchToWindowedModeLabel->hide();
+	#else
+	QString glRenderer(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
+	if (glRenderer.startsWith("ANGLE", Qt::CaseSensitive))
+		ui->switchToWindowedModeLabel->hide();
 	#endif
 	setAboutHtml();
 }
@@ -239,11 +265,11 @@ void ArchaeoLinesDialog::setAboutHtml(void)
 	html += "<p>" + q_("The lunar lines include horizon parallax effects. "
 			   "There are two lines each drawn, for maximum and minimum distance of the moon. "
 			   "Note that declination of the moon at the major standstill can exceed the "
-			   "indicated limits if it is high in the sky due to parallax effects.") + "</p>";
+			   "indicated limits if it is high in the sky due to parallax effects.") + "</p>";	
 	html += "<p>" + q_("Some religions, most notably Islam, adhere to a practice of observing a prayer direction towards a particular location. "
 			   "Azimuth lines for two locations can be shown. Default locations are Mecca (Kaaba) and Jerusalem. "
 			   "The directions are computed based on spherical trigonometry on a spherical Earth.") + "</p>";
-	html += "<p>" + q_("In addition, up to two vertical lines with arbitrary azimuth and custom label can be shown.") + "</p>";
+	html += "<p>" + q_("In addition, up to two vertical lines with arbitrary azimuth and declination lines with custom label can be shown.") + "</p>";
 
 	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("ArchaeoLines plugin") + "</p>";
@@ -287,6 +313,8 @@ void ArchaeoLinesDialog::resetArchaeoLinesSettings()
 	geographicLocation2Color  = al->getLineColor(ArchaeoLine::GeographicLocation2);
 	customAzimuth1Color  = al->getLineColor(ArchaeoLine::CustomAzimuth1);
 	customAzimuth2Color  = al->getLineColor(ArchaeoLine::CustomAzimuth2);
+	customDeclination1Color  = al->getLineColor(ArchaeoLine::CustomDeclination1);
+	customDeclination2Color  = al->getLineColor(ArchaeoLine::CustomDeclination2);
 	equinoxColorPixmap.fill(equinoxColor);
 	ui->equinoxColorToolButton->setIcon(QIcon(equinoxColorPixmap));
 	solsticeColorPixmap.fill(solsticeColor);
@@ -317,32 +345,17 @@ void ArchaeoLinesDialog::resetArchaeoLinesSettings()
 	ui->customAzimuth1ColorToolButton->setIcon(QIcon(customAzimuth1ColorPixmap));
 	customAzimuth2ColorPixmap.fill(customAzimuth2Color);
 	ui->customAzimuth2ColorToolButton->setIcon(QIcon(customAzimuth2ColorPixmap));
-
-	// These should no longer be required due to property connections.
-//	ui->equinoxCheckBox->setChecked(al->isEquinoxDisplayed());
-//	ui->solsticesCheckBox->setChecked(al->isSolsticesDisplayed());
-//	ui->crossquarterCheckBox->setChecked(al->isCrossquartersDisplayed());
-//	ui->majorStandstillCheckBox->setChecked(al->isMajorStandstillsDisplayed());
-//	ui->minorStandstillCheckBox->setChecked(al->isMinorStandstillsDisplayed());
-//	ui->zenithPassageCheckBox->setChecked(al->isZenithPassageDisplayed());
-//	ui->nadirPassageCheckBox->setChecked(al->isNadirPassageDisplayed());
-//	ui->selectedObjectCheckBox->setChecked(al->isSelectedObjectDisplayed());
-//	ui->currentSunCheckBox->setChecked(al->isCurrentSunDisplayed());
-//	ui->currentMoonCheckBox->setChecked(al->isCurrentMoonDisplayed());
-//	ui->currentPlanetComboBox->setCurrentIndex(al->whichCurrentPlanetDisplayed()-ArchaeoLine::CurrentPlanetNone);
-//	ui->geographicLocation1CheckBox->setChecked(al->isGeographicLocation1Displayed());
-//	ui->geographicLocation2CheckBox->setChecked(al->isGeographicLocation2Displayed());
-//	ui->customAzimuth1CheckBox->setChecked(al->isCustomAzimuth1Displayed());
-//	ui->customAzimuth2CheckBox->setChecked(al->isCustomAzimuth2Displayed());
-//	ui->geographicLocation1LongitudeDoubleSpinBox->setValue(al->getGeographicLocation1Longitude());
-//	ui->geographicLocation1LatitudeDoubleSpinBox->setValue(al->getGeographicLocation1Latitude());
-//	ui->geographicLocation2LongitudeDoubleSpinBox->setValue(al->getGeographicLocation2Longitude());
-//	ui->geographicLocation2LatitudeDoubleSpinBox->setValue(al->getGeographicLocation2Latitude());
+	customDeclination1ColorPixmap.fill(customDeclination1Color);
+	ui->customDeclination1ColorToolButton->setIcon(QIcon(customDeclination1ColorPixmap));
+	customDeclination2ColorPixmap.fill(customDeclination2Color);
+	ui->customDeclination2ColorToolButton->setIcon(QIcon(customDeclination2ColorPixmap));
 
 	ui->geographicLocation1LineEdit->setText(al->getLineLabel(ArchaeoLine::GeographicLocation1));
 	ui->geographicLocation2LineEdit->setText(al->getLineLabel(ArchaeoLine::GeographicLocation2));
 	ui->customAzimuth1LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomAzimuth1));
 	ui->customAzimuth2LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomAzimuth2));
+	ui->customDeclination1LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomDeclination1));
+	ui->customDeclination2LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomDeclination2));
 }
 
 // These are called by the respective buttons.
@@ -509,6 +522,28 @@ void ArchaeoLinesDialog::askCustomAzimuth2Color()
 		al->setLineColor(ArchaeoLine::CustomAzimuth2, c);
 		customAzimuth2ColorPixmap.fill(c);
 		ui->customAzimuth2ColorToolButton->setIcon(QIcon(customAzimuth2ColorPixmap));
+	}
+}
+void ArchaeoLinesDialog::askCustomDeclination1Color()
+{
+	QColor c=QColorDialog::getColor(customDeclination1Color, NULL, q_("Select color for Custom Declination 1 line"));
+	if (c.isValid())
+	{
+		customDeclination1Color=c;
+		al->setLineColor(ArchaeoLine::CustomDeclination1, c);
+		customDeclination1ColorPixmap.fill(c);
+		ui->customDeclination1ColorToolButton->setIcon(QIcon(customDeclination1ColorPixmap));
+	}
+}
+void ArchaeoLinesDialog::askCustomDeclination2Color()
+{
+	QColor c=QColorDialog::getColor(customDeclination2Color, NULL, q_("Select color for Custom Declination 2 line"));
+	if (c.isValid())
+	{
+		customDeclination2Color=c;
+		al->setLineColor(ArchaeoLine::CustomDeclination2, c);
+		customDeclination2ColorPixmap.fill(c);
+		ui->customDeclination2ColorToolButton->setIcon(QIcon(customDeclination2ColorPixmap));
 	}
 }
 

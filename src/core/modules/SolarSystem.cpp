@@ -73,6 +73,8 @@ SolarSystem::SolarSystem()
 	, flagTranslatedNames(false)
 	, flagIsolatedTrails(true)
 	, flagIsolatedOrbits(true)
+	, ephemerisMarkersDisplayed(true)
+	, ephemerisDatesDisplayed(false)
 	, allTrails(NULL)
 	, conf(StelApp::getInstance().getSettings())
 {
@@ -141,7 +143,7 @@ void SolarSystem::init()
 
 	// Compute position and matrix of sun and all the satellites (ie planets)
 	// for the first initialization Q_ASSERT that center is sun center (only impacts on light speed correction)	
-	computePositions(StelUtils::getJDFromSystem());
+	computePositions(StelApp::getInstance().getCore()->getJDE());
 
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
 	setFlagMoonScale(conf->value("viewing/flag_moon_scaled", conf->value("viewing/flag_init_moon_scaled", "false").toBool()).toBool());  // name change
@@ -161,6 +163,10 @@ void SolarSystem::init()
 	setFlagIsolatedTrails(conf->value("viewing/flag_isolated_trails", true).toBool());
 	setFlagIsolatedOrbits(conf->value("viewing/flag_isolated_orbits", true).toBool());
 	setFlagPermanentOrbits(conf->value("astro/flag_permanent_orbits", false).toBool());
+	setOrbitColorStyle(conf->value("astro/planets_orbits_color_style", "one_color").toString());
+
+	setFlagEphemerisMarkers(conf->value("astro/flag_ephemeris_markers", true).toBool());
+	setFlagEphemerisDates(conf->value("astro/flag_ephemeris_dates", false).toBool());
 
 	// Settings for calculation of position of Great Red Spot on Jupiter
 	setFlagCustomGrsSettings(conf->value("astro/flag_grs_custom", false).toBool());
@@ -171,7 +177,24 @@ void SolarSystem::init()
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
 	setLabelsColor(StelUtils::strToVec3f(conf->value("color/planet_names_color", defaultColor).toString()));
-	setOrbitsColor(StelUtils::strToVec3f(conf->value("color/planet_orbits_color", defaultColor).toString()));
+	setOrbitsColor(StelUtils::strToVec3f(conf->value("color/sso_orbits_color", defaultColor).toString()));
+	setMajorPlanetsOrbitsColor(StelUtils::strToVec3f(conf->value("color/major_planet_orbits_color", "0.7,0.2,0.2").toString()));
+	setMoonsOrbitsColor(StelUtils::strToVec3f(conf->value("color/moon_orbits_color", "0.7,0.2,0.2").toString()));
+	setMinorPlanetsOrbitsColor(StelUtils::strToVec3f(conf->value("color/minor_planet_orbits_color", "0.7,0.5,0.5").toString()));
+	setDwarfPlanetsOrbitsColor(StelUtils::strToVec3f(conf->value("color/dwarf_planet_orbits_color", "0.7,0.5,0.5").toString()));
+	setCubewanosOrbitsColor(StelUtils::strToVec3f(conf->value("color/cubewano_orbits_color", "0.7,0.5,0.5").toString()));
+	setPlutinosOrbitsColor(StelUtils::strToVec3f(conf->value("color/plutino_orbits_color", "0.7,0.5,0.5").toString()));
+	setScatteredDiskObjectsOrbitsColor(StelUtils::strToVec3f(conf->value("color/sdo_orbits_color", "0.7,0.5,0.5").toString()));
+	setOortCloudObjectsOrbitsColor(StelUtils::strToVec3f(conf->value("color/oco_orbits_color", "0.7,0.5,0.5").toString()));
+	setCometsOrbitsColor(StelUtils::strToVec3f(conf->value("color/comet_orbits_color", "0.7,0.8,0.8").toString()));
+	setMercuryOrbitColor(StelUtils::strToVec3f(conf->value("color/mercury_orbit_color", "0.5,0.5,0.5").toString()));
+	setVenusOrbitColor(StelUtils::strToVec3f(conf->value("color/venus_orbit_color", "0.9,0.9,0.7").toString()));
+	setEarthOrbitColor(StelUtils::strToVec3f(conf->value("color/earth_orbit_color", "0.0,0.0,1.0").toString()));
+	setMarsOrbitColor(StelUtils::strToVec3f(conf->value("color/mars_orbit_color", "0.8,0.4,0.1").toString()));
+	setJupiterOrbitColor(StelUtils::strToVec3f(conf->value("color/jupiter_orbit_color", "1.0,0.6,0.0").toString()));
+	setSaturnOrbitColor(StelUtils::strToVec3f(conf->value("color/saturn_orbit_color", "1.0,0.8,0.0").toString()));
+	setUranusOrbitColor(StelUtils::strToVec3f(conf->value("color/uranus_orbit_color", "0.0,0.7,1.0").toString()));
+	setNeptuneOrbitColor(StelUtils::strToVec3f(conf->value("color/neptune_orbit_color", "0.0,0.3,1.0").toString()));
 	setTrailsColor(StelUtils::strToVec3f(conf->value("color/object_trails_color", defaultColor).toString()));
 	setPointerColor(StelUtils::strToVec3f(conf->value("color/planet_pointers_color", "1.0,0.3,0.3").toString()));
 
@@ -182,7 +205,7 @@ void SolarSystem::init()
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);
 	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
-			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
+		this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur4.png");
 	texCircle = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb.png");	// Load circle texture
@@ -199,7 +222,7 @@ void SolarSystem::init()
 	addAction("actionShow_Planets_Trails", displayGroup, N_("Planet trails"), "trailsDisplayed", "Shift+T");
 	//there is a small discrepancy in the GUI: "Show planet markers" actually means show planet hints
 	addAction("actionShow_Planets_Hints", displayGroup, N_("Planet markers"), "flagHints", "Ctrl+P");
-	//addAction("actionShow_Planets_Markers", displayGroup, N_("Planet selection marker"), "markersDisplayed", "Ctrl+Shift+P");
+	addAction("actionShow_Planets_Pointers", displayGroup, N_("Planet selection marker"), "flagPointer", "Ctrl+Shift+P");
 	addAction("actionShow_Skyculture_Nativenames", displayGroup, N_("Native planet names (from starlore)"), "flagNativeNames", "Ctrl+Shift+N");
 }
 
@@ -845,7 +868,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 		if (posfunc==NULL)
 		{
-			qWarning() << "ERROR : can't find posfunc " << funcName << " for " << englishName;
+			qCritical() << "ERROR : can't find posfunc " << funcName << " for " << englishName;
 			exit(-1);
 		}
 
@@ -1149,15 +1172,12 @@ void SolarSystem::draw(StelCore* core)
 		drawPointer(core);
 
 	// AstroCalcDialog
-	if (gui && gui->getAstroCalcVisible())
+	if (getFlagEphemerisMarkers())
 	{
 		StelProjectorP prj = core->getProjection(StelCore::FrameJ2000); // , StelCore::RefractionOff);
 		StelPainter sPainter(prj);
 
-		float size;
-
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_ONE, GL_ONE);
+		float size, shift;
 
 		for (int i =0; i< AstroCalcDialog::EphemerisListJ2000.count(); i++)
 		{
@@ -1179,8 +1199,18 @@ void SolarSystem::draw(StelCore* core)
 				size = 4.f;
 			}
 
+			glEnable(GL_BLEND);
+			sPainter.enableTexture2d(true);
+			glBlendFunc(GL_ONE, GL_ONE);
+
 			texCircle->bind();
-			sPainter.drawSprite2dMode(win[0], win[1], size);
+			sPainter.drawSprite2dMode(AstroCalcDialog::EphemerisListJ2000[i], size);
+
+			if (getFlagEphemerisDates())
+			{
+				shift = 3.f + size/1.6f;
+				sPainter.drawText(AstroCalcDialog::EphemerisListJ2000[i], AstroCalcDialog::EphemerisListDates[i], 0, shift, shift, false);
+			}
 		}
 	}
 }
@@ -1262,6 +1292,24 @@ float SolarSystem::getPhaseForPlanet(QString planetName) const
 	PlanetP p = searchByEnglishName(planetName);
 	float r = 0.f;
 	r = p->getPhase(StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos());
+	return r;
+}
+
+QStringList SolarSystem::getObjectsList(QString objType) const
+{
+	QStringList r;
+	if (objType.toLower()=="all")
+	{
+		r = listAllObjects(true);
+		// Remove the Sun
+		r.removeOne("Sun");
+		// Remove special objects
+		r.removeOne("Solar System Observer");
+		r.removeOne("Earth Observer");
+	}
+	else
+		r = listAllObjectsByType(objType, true);
+
 	return r;
 }
 
@@ -1548,6 +1596,36 @@ bool SolarSystem::getFlagPlanets(void) const
 	return flagShow;
 }
 
+void SolarSystem::setFlagEphemerisMarkers(bool b)
+{
+	if (b!=ephemerisMarkersDisplayed)
+	{
+		ephemerisMarkersDisplayed=b;
+		conf->setValue("astro/flag_ephemeris_markers", b); // Immediate saving of state
+		emit ephemerisMarkersChanged(b);
+	}
+}
+
+bool SolarSystem::getFlagEphemerisMarkers() const
+{
+	return ephemerisMarkersDisplayed;
+}
+
+void SolarSystem::setFlagEphemerisDates(bool b)
+{
+	if (b!=ephemerisDatesDisplayed)
+	{
+		ephemerisDatesDisplayed=b;
+		conf->setValue("astro/flag_ephemeris_dates", b); // Immediate saving of state
+		emit ephemerisDatesChanged(b);
+	}
+}
+
+bool SolarSystem::getFlagEphemerisDates() const
+{
+	return ephemerisDatesDisplayed;
+}
+
 void SolarSystem::setFlagNativeNames(bool b)
 {
 	if (b!=flagNativeNames)
@@ -1618,12 +1696,196 @@ bool SolarSystem::getFlagIsolatedOrbits() const
 
 
 // Set/Get planets names color
-void SolarSystem::setLabelsColor(const Vec3f& c) {Planet::setLabelColor(c);}
-const Vec3f& SolarSystem::getLabelsColor(void) const {return Planet::getLabelColor();}
+void SolarSystem::setLabelsColor(const Vec3f& c)
+{
+	Planet::setLabelColor(c);
+}
+
+const Vec3f& SolarSystem::getLabelsColor(void) const
+{
+	return Planet::getLabelColor();
+}
 
 // Set/Get orbits lines color
-void SolarSystem::setOrbitsColor(const Vec3f& c) {Planet::setOrbitColor(c);}
-Vec3f SolarSystem::getOrbitsColor(void) const {return Planet::getOrbitColor();}
+void SolarSystem::setOrbitsColor(const Vec3f& c)
+{
+	Planet::setOrbitColor(c);
+}
+
+Vec3f SolarSystem::getOrbitsColor(void) const
+{
+	return Planet::getOrbitColor();
+}
+
+void SolarSystem::setMajorPlanetsOrbitsColor(const Vec3f &c)
+{
+	Planet::setMajorPlanetOrbitColor(c);
+}
+
+Vec3f SolarSystem::getMajorPlanetsOrbitsColor(void) const
+{
+	return Planet::getMajorPlanetOrbitColor();
+}
+
+void SolarSystem::setMinorPlanetsOrbitsColor(const Vec3f &c)
+{
+	Planet::setMinorPlanetOrbitColor(c);
+}
+
+Vec3f SolarSystem::getMinorPlanetsOrbitsColor(void) const
+{
+	return Planet::getMinorPlanetOrbitColor();
+}
+
+void SolarSystem::setDwarfPlanetsOrbitsColor(const Vec3f &c)
+{
+	Planet::setDwarfPlanetOrbitColor(c);
+}
+
+Vec3f SolarSystem::getDwarfPlanetsOrbitsColor(void) const
+{
+	return Planet::getDwarfPlanetOrbitColor();
+}
+
+void SolarSystem::setMoonsOrbitsColor(const Vec3f &c)
+{
+	Planet::setMoonOrbitColor(c);
+}
+
+Vec3f SolarSystem::getMoonsOrbitsColor(void) const
+{
+	return Planet::getMoonOrbitColor();
+}
+
+void SolarSystem::setCubewanosOrbitsColor(const Vec3f &c)
+{
+	Planet::setCubewanoOrbitColor(c);
+}
+
+Vec3f SolarSystem::getCubewanosOrbitsColor(void) const
+{
+	return Planet::getCubewanoOrbitColor();
+}
+
+void SolarSystem::setPlutinosOrbitsColor(const Vec3f &c)
+{
+	Planet::setPlutinoOrbitColor(c);
+}
+
+Vec3f SolarSystem::getPlutinosOrbitsColor(void) const
+{
+	return Planet::getPlutinoOrbitColor();
+}
+
+void SolarSystem::setScatteredDiskObjectsOrbitsColor(const Vec3f &c)
+{
+	Planet::setScatteredDiscObjectOrbitColor(c);
+}
+
+Vec3f SolarSystem::getScatteredDiskObjectsOrbitsColor(void) const
+{
+	return Planet::getScatteredDiscObjectOrbitColor();
+}
+
+void SolarSystem::setOortCloudObjectsOrbitsColor(const Vec3f &c)
+{
+	Planet::setOortCloudObjectOrbitColor(c);
+}
+
+Vec3f SolarSystem::getOortCloudObjectsOrbitsColor(void) const
+{
+	return Planet::getOortCloudObjectOrbitColor();
+}
+
+void SolarSystem::setCometsOrbitsColor(const Vec3f& c)
+{
+	Planet::setCometOrbitColor(c);
+}
+
+Vec3f SolarSystem::getCometsOrbitsColor(void) const
+{
+	return Planet::getCometOrbitColor();
+}
+
+void SolarSystem::setMercuryOrbitColor(const Vec3f &c)
+{
+	Planet::setMercuryOrbitColor(c);
+}
+
+Vec3f SolarSystem::getMercuryOrbitColor(void) const
+{
+	return Planet::getMercuryOrbitColor();
+}
+
+void SolarSystem::setVenusOrbitColor(const Vec3f &c)
+{
+	Planet::setVenusOrbitColor(c);
+}
+
+Vec3f SolarSystem::getVenusOrbitColor(void) const
+{
+	return Planet::getVenusOrbitColor();
+}
+
+void SolarSystem::setEarthOrbitColor(const Vec3f &c)
+{
+	Planet::setEarthOrbitColor(c);
+}
+
+Vec3f SolarSystem::getEarthOrbitColor(void) const
+{
+	return Planet::getEarthOrbitColor();
+}
+
+void SolarSystem::setMarsOrbitColor(const Vec3f &c)
+{
+	Planet::setMarsOrbitColor(c);
+}
+
+Vec3f SolarSystem::getMarsOrbitColor(void) const
+{
+	return Planet::getMarsOrbitColor();
+}
+
+void SolarSystem::setJupiterOrbitColor(const Vec3f &c)
+{
+	Planet::setJupiterOrbitColor(c);
+}
+
+Vec3f SolarSystem::getJupiterOrbitColor(void) const
+{
+	return Planet::getJupiterOrbitColor();
+}
+
+void SolarSystem::setSaturnOrbitColor(const Vec3f &c)
+{
+	Planet::setSaturnOrbitColor(c);
+}
+
+Vec3f SolarSystem::getSaturnOrbitColor(void) const
+{
+	return Planet::getSaturnOrbitColor();
+}
+
+void SolarSystem::setUranusOrbitColor(const Vec3f &c)
+{
+	Planet::setUranusOrbitColor(c);
+}
+
+Vec3f SolarSystem::getUranusOrbitColor(void) const
+{
+	return Planet::getUranusOrbitColor();
+}
+
+void SolarSystem::setNeptuneOrbitColor(const Vec3f &c)
+{
+	Planet::setNeptuneOrbitColor(c);
+}
+
+Vec3f SolarSystem::getNeptuneOrbitColor(void) const
+{
+	return Planet::getNeptuneOrbitColor();
+}
 
 // Set/Get if Moon display is scaled
 void SolarSystem::setFlagMoonScale(bool b)
@@ -1730,7 +1992,7 @@ void SolarSystem::reloadPlanets()
 
 	// Re-load the ssystem.ini file
 	loadPlanets();	
-	computePositions(StelUtils::getJDFromSystem());
+	computePositions(core->getJDE());
 	setSelected("");
 	recreateTrails();
 	
@@ -1755,6 +2017,8 @@ void SolarSystem::reloadPlanets()
 
 	// Restore translations
 	updateI18n();
+
+	emit solarSystemDataReloaded();
 }
 
 // Set the algorithm for computation of apparent magnitudes for planets in case  observer on the Earth
@@ -1779,6 +2043,7 @@ void SolarSystem::setFlagCustomGrsSettings(bool b)
 	Planet::flagCustomGrsSettings=b;
 	// automatic saving of the setting
 	conf->setValue("astro/flag_grs_custom", b);
+	emit flagCustomGrsSettingsChanged(b);
 }
 
 bool SolarSystem::getFlagCustomGrsSettings()
@@ -1791,6 +2056,7 @@ void SolarSystem::setCustomGrsLongitude(int longitude)
 	Planet::customGrsLongitude = longitude;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_longitude", longitude);
+	emit customGrsLongitudeChanged(longitude);
 }
 
 int SolarSystem::getCustomGrsLongitude()
@@ -1803,6 +2069,7 @@ void SolarSystem::setCustomGrsDrift(double drift)
 	Planet::customGrsDrift = drift;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_drift", drift);
+	emit customGrsDriftChanged(drift);
 }
 
 double SolarSystem::getCustomGrsDrift()
@@ -1815,11 +2082,40 @@ void SolarSystem::setCustomGrsJD(double JD)
 	Planet::customGrsJD = JD;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_jd", JD);
+	emit customGrsJDChanged(JD);
 }
 
 double SolarSystem::getCustomGrsJD()
 {
 	return Planet::customGrsJD;
+}
+
+void SolarSystem::setOrbitColorStyle(QString style)
+{
+	if (style.toLower()=="groups")
+		Planet::orbitColorStyle = Planet::ocsGroups;
+	else if (style.toLower()=="major_planets")
+		Planet::orbitColorStyle = Planet::ocsMajorPlanets;
+	else
+		Planet::orbitColorStyle = Planet::ocsOneColor;
+}
+
+QString SolarSystem::getOrbitColorStyle() const
+{
+	QString r = "one_color";
+	switch (Planet::orbitColorStyle)
+	{
+		case Planet::ocsOneColor:
+			r = "one_color";
+			break;
+		case Planet::ocsGroups:
+			r = "groups";
+			break;
+		case Planet::ocsMajorPlanets:
+			r = "major_planets";
+			break;
+	}
+	return r;
 }
 
 double SolarSystem::getEclipseFactor(const StelCore* core) const

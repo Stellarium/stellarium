@@ -12,8 +12,8 @@ at the telescope: Oculars (section~\ref{sec:plugins:Oculars}), which
 provides field of view hints for telescopes, oculars and sensors, and
 TelescopeControl (section~\ref{sec:plugins:TelescopeControl}), which
 allows you to send GOTO commands to many motorized telescopes. Other
-goto telescopes are supported by an external plugin which you must
-install separately: StellariumScope
+goto telescopes are supported by an external program which you must
+install separately: \program{StellariumScope}
 (section~\ref{sec:plugins:StellariumScope}).
 
 In addition, the Observability plugin (section~\ref{sec:plugins:Observability})
@@ -202,7 +202,8 @@ This section is active only for DIRECT connections (see above).
   \item On Windows, serial ports \texttt{COM1} to \texttt{COM10}
   \item On Linux, serial ports \texttt{/dev/ttyS0} to
     \texttt{/dev/ttyS3} and USB ports \texttt{/dev/ttyUSB0} to
-    \texttt{/dev/ttyUSB3}
+    \texttt{/dev/ttyUSB3}. Make sure you have read/write access to the \texttt{tty} device. 
+	Depending on your flavour of Linux, this may e.g.\ require some group membership.
   \item On Mac OS X, the list is empty as it names its ports in a
     peculiar way.
   If you are using an USB cable, the default serial port of your
@@ -356,22 +357,22 @@ circles).
 
 
 \newpage
-\section{StellariumScope plugin}
+\section{StellariumScope}
 \label{sec:plugins:StellariumScope}
-StellariumScope is a free add-on that enables you to control your telescope with Stellarium. 
+\program{StellariumScope} is a free add-on that enables you to control your telescope with Stellarium. 
 
 \begin{figure}[htp]
 \begin{center}
 \includegraphics[width=0.85\linewidth]{StellariumScopeFullWindow.jpg}
 \end{center}
+\caption{\program{StellariumScope} interface}
 \label{fig:StellariumScopeFullWindow}
-\caption{StellariumScope interface}
 \end{figure}
 
 
 \paragraph{Features}
 \begin{itemize}
-\item Provides an interface between Stellarium and the ASCOM telescope drivers.
+\item Provides an interface between Stellarium and ASCOM telescope drivers.
 \item Provides the ability to both ``Sync'' and ``Slew'' the
   telescope. It's also possible to issue a stop/cancel command from
   Stellarium.
@@ -379,12 +380,12 @@ StellariumScope is a free add-on that enables you to control your telescope with
   control computer that hosts the telescope driver.
 \item The installation program will automatically install the
   documentation, but the link to the documentation is provided
-  here\footnote{WHERE?} so you can read it before installation.
+  by developer\footnote{\program{StellariumScope} User's Guide --- \url{http://welshdragoncomputing.ca/x/st/misc/stellariumscope_user_guide.2015.10.24.pdf}} so you can read it before installation.
 \item There are earlier releases still available on the downloads page on
   Welsh Dragon Computing site.
 \end{itemize}
 
-The original StellariumScope program was designed and implemented by
+The original \program{StellariumScope} program was designed and implemented by
 Scott of ByteArts and is still available for
 download\footnote{\url{http://www.bytearts.com/stellarium/}}. If you
 have difficulties with the releases available on the Welsh Dragon
@@ -396,12 +397,6 @@ you may want to consider using the original version.
 Figure~\ref{fig:StellariumScopeFullWindow} shows the interface and
 some of the options.  Use this application (like all software that
 controls your mount) with supervision of your mount's movements.
-
-\subsection{Configure StellariumScope}
-\label{sec:plugins:StellariumScope:configure}
-TODO...
-\subsection{Download StellariumScope}
-TODO...
 
 \section{Other telescope servers and Stellarium}
 \label{sec:plugins:TelescopeControl:Other}

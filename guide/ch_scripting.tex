@@ -89,7 +89,7 @@ core.wait(3);
 LabelMgr.deleteLabel(label);
 \end{script}
 
-\section{Retrograde motion of Mars}
+\section{Example: Retrograde motion of Mars}
 \label{sec:scripting:RetrogradeMotionOfMars}
 A good way begin writing of scripts: set yourself a specific
 goal and try to achieve it with the help of few simple steps. Any
@@ -109,10 +109,13 @@ planet Mars (Fig.~\ref{fig:Mars2005}).
 \end{figure}
 
 \subsection{Script header...}
-Any ``complex'' script contains a few lines in the first part 
+Any ``complex'' script should contain a few lines in the first part 
 of the file, which contains important data for humans --- the 
 name of the script and its description --- and some rules for 
-Stellarium.
+Stellarium. You can even assign default shortcuts in the script header, 
+but make sure you assign a key not used elsewhere! The description 
+may cover several lines (until the end of the commented header) 
+and should therefore be the last entry of the header.
 
 \begin{script}
 //
@@ -120,20 +123,21 @@ Stellarium.
 // Author: John Doe
 // License: Public Domain
 // Version: 1.0
+// Shortcut: Ctrl+M
 // Description: A demo of retrograde motion of Mars.
 //
 \end{script}
 
 \subsection{A body of script...}
-At the first stage of writing of the script for demo of 
+At the first stage of writing of the script for a demo of 
 retrograde motion of Mars we should set some limits for 
-our demo. For example we want see motion of Mars every 
-day during 250 days since $1^{th}$ October 2009. 
-Choosing for value of field of view and of the coordinates 
+our demo. For example we want to see motion of Mars every 
+day during 250 days since October $1^{st}$,  2009. 
+Choosing a value of field of view and of the coordinates 
 of the center of the screen should be done at the this 
 stage also. 
 
-Let's add few lines of code into the script after header 
+Let's add few lines of code into the script after the header 
 and run it:
 \begin{script}
 core.setDate("2009-10-01T10:00:00");
@@ -146,7 +150,7 @@ for (i=0; i<250; i++)
 }
 \end{script}
 
-OK, Stellarium is doing something, but what exactly he 
+OK, Stellarium is doing something, but what exactly is it
 doing? The ground and atmosphere is enabled and any 
 motion of Mars is invisible. Let's add an another few 
 lines into the script (hiding the landscape and atmosphere) 
@@ -157,7 +161,7 @@ LandscapeMgr.setFlagLandscape(false);
 LandscapeMgr.setFlagAtmosphere(false);
 \end{script}
 
-Whole sky is moving now --- let's lock it! Add this line 
+The whole sky is moving now --- let's lock it! Add this line 
 after previous lines:
 \begin{script}
 StelMovementMgr.setFlagLockEquPos(true);
@@ -192,8 +196,8 @@ SolarSystem.setFlagIsolatedTrails(true);
 SolarSystem.setFlagTrails(true);
 \end{script}
 
-Hmm... let's add few strings with info for users (insert 
-those lines after header):
+Hmm\ldots let's add a few strings with info for users (insert 
+those lines after the header):
 \begin{script}
 var color = "#ff9900";
 var info = LabelMgr.labelScreen("A motion of Mars", 20, 20, 

@@ -131,10 +131,10 @@ observing a prayer direction towards a particular location.  Azimuth
 lines for two locations can be shown, these lines indicate the great
 circle direction towards the locations which can be edited in the
 configuration window. Default locations are Mecca (Kaaba) and
-Jerusalem.  The directions towards a location $T=(\lambda_T,
+Jerusalem.  The azimuth $q$ towards a location $T=(\lambda_T,
 \varphi_T)$ are computed for an observer at $O=(\lambda_O, \varphi_O)$
 based on spherical trigonometry on a spherical
-Earth\cite{Abdali:1997}:
+Earth~\cite{Abdali:1997}:
 \begin{equation}
   \label{eq:qibla}
   q=\arctan\left(\frac{\sin (\lambda_{T} - \lambda_O) } { \cos\varphi_O \tan\varphi_T - sin \varphi_O \cos(\lambda_{T} - \lambda_O) }\right)
@@ -143,6 +143,12 @@ Earth\cite{Abdali:1997}:
 In addition, up to two vertical lines with arbitrary azimuth and
 custom label can be shown.
 
+
+\subsection{Arbitrary Declination Lines}
+\label{sec:plugin:ArchaeoLines:Declinations}
+
+% 0.15.1:
+Up to two arbitrary declination lines can be shown with a custom label. 
 
 \subsection{Configuration Options}
 \label{sec:plugin:ArchaeoLines:configuration}
@@ -155,11 +161,11 @@ of interest to you.
 %been important. Also Venus or other planets may appear useful.
 %
 In addition, you can select the color of the lines by clicking on the
-color swatches.\footnote{Unfortunately, on Windows, the color dialog hides
+color swatches.\footnote{Unfortunately, on some systems with Windows in OpenGL mode, the color dialog hides
 behind the Stellarium window when in fullscreen mode. So, before
 editing line colors, please leave fullscreen mode!}
 
-\subsection*{Section [ArchaeoLines] in config.ini file}
+\subsection*{Section \big[ArchaeoLines\big] in config.ini file}
 
 Apart from changing settings using the plugin configuration dialog,
 you can also edit \file{config.ini} file by yourself for changes of the
@@ -168,60 +174,61 @@ settings for the ArchaeoLines plugin -- just make it carefully!
 \begin{longtabu} {l|l|l}\toprule
 \emph{ID}                      &\emph{Type} & \emph{Default}  \\\midrule
 enable\_at\_startup            &bool        & false           \\\midrule
-color\_equinox                 &float R,G,B & 1.00,1.00,0.5   \\\midrule
-color\_solstices               &float R,G,B & 1.00,1.00,0.25  \\\midrule
-color\_crossquarters           &float R,G,B & 1.00,0.75,0.25  \\\midrule
-color\_major\_standstill       &float R,G,B & 0.25,1.00,0.25  \\\midrule
-color\_minor\_standstill       &float R,G,B & 0.20,0.75,0.20  \\\midrule
-color\_zenith\_passage         &float R,G,B & 1.00,0.75,0.75  \\\midrule
-color\_nadir\_passage          &float R,G,B & 1.00,0.75,0.75  \\\midrule
-color\_selected\_object        &float R,G,B & 1.00,1.00,1.00  \\\midrule
-color\_current\_sun            &float R,G,B & 1.00,1.00,0.75  \\\midrule
-color\_current\_moon           &float R,G,B & 0.50,1.00,0.50  \\\midrule
-color\_current\_planet         &float R,G,B & 0.25,0.80,1.00  \\\midrule
-color\_geographic\_location\_1 &float R,G,B & 0.25,1.00,0.25  \\\midrule
-color\_geographic\_location\_2 &float R,G,B & 0.25,0.25,1.00  \\\midrule
-color\_custom\_azimuth\_1      &float R,G,B & 0.25,1.00,0.25  \\\midrule
-color\_custom\_azimuth\_2      &float R,G,B & 0.25,0.50,0.75  \\\midrule
-show\_equinox                  &bool        & true  \\\midrule
-show\_solstices                &bool        & true  \\\midrule
-show\_crossquarters            &bool        & true  \\\midrule
-show\_major\_standstills       &bool        & true  \\\midrule
-show\_minor\_standstills       &bool        & true  \\\midrule
-show\_zenith\_passage          &bool        & true  \\\midrule
-show\_nadir\_passage           &bool        & true  \\\midrule
-show\_selected\_object         &bool        & true  \\\midrule
-show\_current\_sun             &bool        & true  \\\midrule
-show\_current\_moon            &bool        & true  \\\midrule
+color\_equinox                 &float R,G,B & \ccbox{1.00,1.00,0.50}  \\
+color\_solstices               &float R,G,B & \ccbox{1.00,1.00,0.25}  \\
+color\_crossquarters           &float R,G,B & \ccbox{1.00,0.75,0.25}  \\
+color\_major\_standstill       &float R,G,B & \ccbox{0.25,1.00,0.25}  \\
+color\_minor\_standstill       &float R,G,B & \ccbox{0.20,0.75,0.20}  \\
+color\_zenith\_passage         &float R,G,B & \ccbox{1.00,0.75,0.75}  \\
+color\_nadir\_passage          &float R,G,B & \ccbox{1.00,0.75,0.75}  \\
+color\_selected\_object        &float R,G,B & \ccbox{1.00,1.00,1.00}  \\
+color\_current\_sun            &float R,G,B & \ccbox{1.00,1.00,0.75}  \\
+color\_current\_moon           &float R,G,B & \ccbox{0.50,1.00,0.50}  \\
+color\_current\_planet         &float R,G,B & \ccbox{0.25,0.80,1.00}  \\
+color\_geographic\_location\_1 &float R,G,B & \ccbox{0.25,1.00,0.25}  \\
+color\_geographic\_location\_2 &float R,G,B & \ccbox{0.25,0.25,1.00}  \\
+color\_custom\_azimuth\_1      &float R,G,B & \ccbox{0.25,1.00,0.25}  \\
+color\_custom\_azimuth\_2      &float R,G,B & \ccbox{0.25,0.50,0.75}  \\
+color\_custom\_declination\_1  &float R,G,B & \ccbox{0.45,1.00,0.15}  \\
+color\_custom\_declination\_2  &float R,G,B & \ccbox{0.45,0.50,0.65}  \\\midrule
+show\_equinox                  &bool        & true  \\
+show\_solstices                &bool        & true  \\
+show\_crossquarters            &bool        & true  \\
+show\_major\_standstills       &bool        & true  \\
+show\_minor\_standstills       &bool        & true  \\
+show\_zenith\_passage          &bool        & true  \\
+show\_nadir\_passage           &bool        & true  \\
+show\_selected\_object         &bool        & true  \\
+show\_current\_sun             &bool        & true  \\
+show\_current\_moon            &bool        & true  \\
 show\_current\_planet          &string      & none  \\\midrule
-show\_geographic\_location\_1  &bool        & false         \\\midrule
-show\_geographic\_location\_2  &bool        & false         \\\midrule
-geographic\_location\_1\_longitude &double  & 39.826175     \\\midrule
-geographic\_location\_1\_latitude  &double  & 21.4276       \\\midrule
-geographic\_location\_1\_label     &string  & Mecca (Qibla) \\\midrule
-geographic\_location\_2\_longitude &double  & 35.235774     \\\midrule
-geographic\_location\_2\_latitude  &double  & 31.778087     \\\midrule
+show\_geographic\_location\_1  &bool        & false         \\
+show\_geographic\_location\_2  &bool        & false         \\
+geographic\_location\_1\_longitude &double  & 39.826175     \\
+geographic\_location\_1\_latitude  &double  & 21.4276       \\
+geographic\_location\_1\_label     &string  & Mecca (Qibla) \\
+geographic\_location\_2\_longitude &double  & 35.235774     \\
+geographic\_location\_2\_latitude  &double  & 31.778087     \\
 geographic\_location\_2\_label     &string  & Jerusalem     \\\midrule
-show\_custom\_azimuth\_1       &bool        & false    \\\midrule
-show\_custom\_azimuth\_2       &bool        & false    \\\midrule
-custom\_azimuth\_1\_angle      &double      & 0.0      \\\midrule
-custom\_azimuth\_2\_angle      &double      & 0.0      \\\midrule
-custom\_azimuth\_1\_label      &string      & custAzi1 \\\midrule
-custom\_azimuth\_2\_label      &string      & custAzi2 \\\bottomrule
+show\_custom\_azimuth\_1       &bool        & false    \\
+show\_custom\_azimuth\_2       &bool        & false    \\
+custom\_azimuth\_1\_angle      &double      & 0.0      \\
+custom\_azimuth\_2\_angle      &double      & 0.0      \\
+custom\_azimuth\_1\_label      &string      & custAzi1 \\
+custom\_azimuth\_2\_label      &string      & custAzi2 \\
+custom\_altitude\_1\_angle     &double      & 0.0      \\
+custom\_altitude\_2\_angle     &double      & 0.0      \\
+custom\_altitude\_1\_label     &string      & custAlt1 \\
+custom\_altitude\_2\_label     &string      & custAlt2 \\\midrule
+show\_custom\_declination\_1   &bool        & false    \\
+show\_custom\_declination\_2   &bool        & false    \\
+custom\_declination\_1\_angle  &double      & 0.0      \\
+custom\_declination\_1\_label  &string      & custDec1 \\
+custom\_declination\_2\_angle  &double      & 0.0      \\
+custom\_declination\_2\_label  &string      & custDec2 \\\bottomrule
 \end{longtabu}
 
 
-% \section{Adding Sky Cultures}
-% \label{sec:SkyCultures}
-% 
-% Stellarium comes with a nice set of skycultures. For ethnographers or
-% historians of science it may be a worthwile consideration to
-% illustrate the sky culture of the people they are studying. It is not
-% very hard to do so, but depending on your data, may require some
-% skills in image processing.
-% 
-% TO BE CONTINUED.
-% 
 
 %%% Local Variables: 
 %%% mode: latex

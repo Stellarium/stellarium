@@ -82,41 +82,31 @@ Comet::Comet(const QString& englishName,
 		  false, //No atmosphere
 		  true, //halo
 		  pTypeStr),
+	  absoluteMagnitude(0.),
+	  slopeParameter(-1.), //== uninitialized: used in getVMagnitude()
+	  semiMajorAxis(0.),
+	  isCometFragment(false),
+	  nameIsProvisionalDesignation(false),
+	  tailFactors(-1., -1.), // mark "invalid"
 	  tailActive(false),
 	  tailBright(false),
+	  deltaJDEtail(15.0*StelCore::JD_MINUTE), // update tail geometry every 15 minutes only
+	  lastJDEtail(0.0),
 	  dustTailWidthFactor(dustTailWidthFact),
 	  dustTailLengthFactor(dustTailLengthFact),
 	  dustTailBrightnessFactor(dustTailBrightnessFact)
 {
-	texMapName = atexMapName;
-	deltaJDE = StelCore::JD_SECOND;
-	deltaJDEtail=15.0*StelCore::JD_MINUTE; // update tail geometry every 15 minutes only
-	lastJDEtail=0.0;
-	closeOrbit = acloseOrbit;
-
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
 	texMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
-	tailFactors[0]=-1.0f; tailFactors[1]=-1.0f; // mark "invalid"
 	gastailVertexArr.clear();
 	dusttailVertexArr.clear();
 	comaVertexArr.clear();
 	gastailColorArr.clear();
 	dusttailColorArr.clear();
 
-	//Comet specific members
-	absoluteMagnitude = 0;
-	slopeParameter = -1;//== uninitialized: used in getVMagnitude()
-
 	//TODO: Name processing?
-	nameI18 = englishName;
-
-	flagLabels = true;
-
-	semiMajorAxis = 0.;
-	isCometFragment = false;
-	nameIsProvisionalDesignation = false;
 }
 
 Comet::~Comet()
@@ -150,6 +140,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	QTextStream oss(&str);
 	double az_app, alt_app;
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	Q_UNUSED(az_app);
 
 	if (flags&Name)
@@ -198,24 +189,21 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	{
 		double distanceAu = getHeliocentricEclipticPos().length();
 		double distanceKm = AU * distanceAu;
-		if (englishName!="Sun")
+		if (distanceAu < 0.1)
 		{
-			if (distanceAu < 0.1)
-			{
-				// xgettext:no-c-format
-				oss << QString(q_("Distance from Sun: %1AU (%2 km)"))
-				       .arg(distanceAu, 0, 'f', 6)
-				       .arg(distanceKm, 0, 'f', 3);
-			}
-			else
-			{
-				// xgettext:no-c-format
-				oss << QString(q_("Distance from Sun: %1AU (%2 Mio km)"))
-				       .arg(distanceAu, 0, 'f', 3)
-				       .arg(distanceKm / 1.0e6, 0, 'f', 3);
-			}
-			oss << "<br>";
+			// xgettext:no-c-format
+			oss << QString(q_("Distance from Sun: %1AU (%2 km)"))
+			       .arg(distanceAu, 0, 'f', 6)
+			       .arg(distanceKm, 0, 'f', 3);
 		}
+		else
+		{
+			// xgettext:no-c-format
+			oss << QString(q_("Distance from Sun: %1AU (%2 Mio km)"))
+			       .arg(distanceAu, 0, 'f', 3)
+			       .arg(distanceKm / 1.0e6, 0, 'f', 3);
+		}
+		oss << "<br>";
 		distanceAu = getJ2000EquatorialPos(core).length();
 		distanceKm = AU * distanceAu;
 		if (distanceAu < 0.1)
@@ -249,6 +237,21 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		oss << QString(q_("Speed: %1 km/s"))
 			   .arg(((CometOrbit*)userDataPtr)->getVelocity().length()*AU/86400.0, 0, 'f', 3);
 		oss << "<br>";
+
+		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
+		const double elongation = getElongation(observerHelioPos);
+
+		if (withDecimalDegree)
+		{
+			oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDecDegStr(getPhaseAngle(observerHelioPos),4,false,true)) << "<br>";
+			oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDecDegStr(elongation,4,false,true)) << "<br>";
+		}
+		else
+		{
+			oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos), true)) << "<br>";
+			oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(elongation, true)) << "<br>";
+		}
+
 
 	}
 
@@ -483,7 +486,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	// Problematic: Early-out here of course disables the wanted hint circles for dim comets.
 	// The line makes hints for comets 5 magnitudes below sky limiting magnitude visible.
 	// If comet is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of comet elements!)
-	if ((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude())
+	if ((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude() && !core->getCurrentLocation().planetName.contains("Observer", Qt::CaseInsensitive))
 	{
 		return;
 	}

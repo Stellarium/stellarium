@@ -22,6 +22,7 @@
 
 #include <QString>
 #include <QObject>
+#include "StelModule.hpp"
 
 // Predeclaration of some classes
 class StelCore;
@@ -46,6 +47,10 @@ class StelScriptMgr;
 class StelActionMgr;
 class StelPropertyMgr;
 class StelProgressController;
+
+#ifdef 	ENABLE_SPOUT
+class SpoutSender;
+#endif
 
 //! @class StelApp
 //! Singleton main Stellarium application class.
@@ -175,7 +180,7 @@ public:
 
 	//! Get the GUI instance implementing the abstract GUI interface.
 	StelGuiBase* getGui() const {return stelGui;}
-	//! Tell the StelApp instance which GUI si currently being used.
+	//! Tell the StelApp instance which GUI is currently being used.
 	//! The caller is responsible for destroying the GUI.
 	void setGui(StelGuiBase* b) {stelGui=b;}
 
@@ -200,6 +205,9 @@ public:
 	void setViewportEffect(const QString& effectName);
 	//! Get the type of viewport effect currently used
 	QString getViewportEffect() const;
+
+	//! Dump diagnostics about action call priorities
+	void dumpModuleActionPriorities(StelModule::StelModuleActionName actionName);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
@@ -269,8 +277,11 @@ private:
 	//! Handle pinch on multi touch devices.
 	void handlePinch(qreal scale, bool started);
 
+	//! Used internally to set the viewport effects.
 	void prepareRenderBuffer();
-	void applyRenderBuffer();
+	//! Used internally to set the viewport effects.
+	//! @param drawFbo the OpenGL fbo we need to render into.
+	void applyRenderBuffer(int drawFbo=0);
 
 	// The StelApp singleton
 	static StelApp* singleton;
@@ -373,7 +384,7 @@ private:
 
 	QList<StelProgressController*> progressControllers;
 
-	int baseFontSize;
+	int baseFontSize;	
 
 	// Framebuffer object used for viewport effects.
 	QOpenGLFramebufferObject* renderBuffer;
@@ -383,6 +394,9 @@ private:
 	bool flagShowDecimalDegrees;
 	// flag to indicate we want calculate azimuth from south towards west (as in old astronomical literature)
 	bool flagUseAzimuthFromSouth;
+#ifdef 	ENABLE_SPOUT
+	SpoutSender* spoutSender;
+#endif
 
 };
 

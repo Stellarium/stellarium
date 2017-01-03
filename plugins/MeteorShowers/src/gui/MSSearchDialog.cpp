@@ -45,16 +45,8 @@ void MSSearchDialog::retranslate()
 		m_ui->retranslateUi(dialog);
 		setHeaderNames();
 
-		//Retranslate name and datatype strings
-		QTreeWidgetItemIterator it(m_ui->listEvents);
-		while (*it)
-		{
-			//Name
-			(*it)->setText(ColumnName, q_((*it)->text(ColumnName)));
-			//Data type
-			(*it)->setText(ColumnDataType, q_((*it)->text(ColumnDataType)));
-			++it;
-		}
+		if (!m_ui->listEvents->findItems("", Qt::MatchContains, 0).isEmpty())
+			searchEvents();
 	}
 }
 

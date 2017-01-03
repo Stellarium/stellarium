@@ -234,11 +234,23 @@ public:
 	//! @return common name of star (from skyculture file star_names.fab)
 	static QString getCommonEnglishName(int hip);
 
-	//! Get the cross-index designations for a star with a specified
+	//! Get the (translated) additional names for a star with a specified
 	//! Hipparcos catalogue number.
 	//! @param hip The Hipparcos number of star
-	//! @return cross-index data
-	static QString getCrossIndexDesignations(int hip);
+	//! @return translated additional names of star
+	static QString getAdditionalNames(int hip);
+
+	//! Get the English additional names for a star with a specified
+	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return additional names of star
+	static QString getAdditionalEnglishNames(int hip);
+
+	//! Get the cross-identification designations for a star with a specified
+	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return cross-identification data
+	static QString getCrossIdentificationDesignations(int hip);
 
 	//! Get the type of variability for a variable star with a specified
 	//! Hipparcos catalogue number.
@@ -317,6 +329,9 @@ public:
 	//! @return false in case of failure.
 	bool checkAndLoadCatalog(const QVariantMap& m);
 
+	//! Get the list of all Hipparcos stars.
+	const QList<StelObjectP>& getHipparcosStars() const { return hipparcosStars; }
+
 private slots:
 	//! Translate text.
 	void updateI18n();
@@ -356,9 +371,9 @@ private:
 	//! @param the path to a file containing the WDS.
 	void loadWds(const QString& WdsFile);
 
-	//! Loads cross-index data from a file.
-	//! @param the path to a file containing the cross-index data.
-	void loadCrossIndex(const QString& crossIndexFile);
+	//! Loads cross-identification data from a file.
+	//! @param the path to a file containing the cross-identification data.
+	void loadCrossIdentificationData(const QString& crossIdFile);
 
 	//! Gets the maximum search level.
 	// TODO: add a non-lame description - what is the purpose of the max search level?
@@ -369,6 +384,9 @@ private:
 
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(StelPainter& sPainter, const StelCore* core);
+
+	//! List of all Hipparcos stars.
+	QList<StelObjectP> hipparcosStars;
 
 	LinearFader labelsFader;
 	LinearFader starsFader;
@@ -403,6 +421,11 @@ private:
 	static QMap<QString, int> commonNamesIndexI18n;
 	static QMap<QString, int> commonNamesIndex;
 
+	static QHash<int, QString> additionalNamesMap; // additional names
+	static QHash<int, QString> additionalNamesMapI18n;
+	static QMap<QString, int> additionalNamesIndex;
+	static QMap<QString, int> additionalNamesIndexI18n;
+
 	static QHash<int, QString> sciNamesMapI18n;	
 	static QMap<QString, int> sciNamesIndexI18n;
 
@@ -419,6 +442,10 @@ private:
 	static QMap<int, int> saoStarsIndex;
 	static QHash<int, int> hdStarsMap;
 	static QMap<int, int> hdStarsIndex;
+	static QHash<int, int> hrStarsMap;
+	static QMap<int, int> hrStarsIndex;
+
+	static QHash<int, QString> referenceMap;
 
 	QFont starFont;
 	static bool flagSciNames;

@@ -26,10 +26,13 @@
 
 class Ui_viewDialogForm;
 class QListWidgetItem;
+class QToolButton;
 
 class AddRemoveLandscapesDialog;
 class AtmosphereDialog;
 class GreatRedSpotDialog;
+class ConfigureDSOColorsDialog;
+class ConfigureOrbitColorsDialog;
 
 class ViewDialog : public StelDialog
 {
@@ -60,7 +63,7 @@ private slots:
 	void setCurrentCultureAsDefault(void);
 	void updateDefaultSkyCulture();
 	void updateDefaultLandscape();
-	void setFlagCustomGrsSettings(bool b);
+	void setFlagCustomGrsSettings(bool b);	
 	//! Update the widget to make sure it is synchrone if a value was changed programmatically
 	//! This function should be called repeatidly with e.g. a timer
 	// NO LONGER NEEDED!
@@ -69,6 +72,8 @@ private slots:
 	void showAddRemoveLandscapesDialog();
         void showAtmosphereDialog();
 	void showGreatRedSpotDialog();
+	void showConfigureDSOColorsDialog();
+	void showConfigureOrbitColorsDialog();
 
 	void setLightPollutionSpinBoxStatus();
 	// Two new from the unwanted trunk-rework Not sure if we need them at all?
@@ -86,6 +91,42 @@ private slots:
 
 	void updateSelectedCatalogsCheckBoxes();
 	void updateSelectedTypesCheckBoxes();
+
+	void askEclipticJ2000GridColor();
+	void askEclipticGridColor();
+	void askEquatorJ2000GridColor();
+	void askEquatorGridColor();
+	void askGalacticGridColor();
+	void askSupergalacticGridColor();
+	void askAzimuthalGridColor();
+	void askEclipticLineJ2000Color();
+	void askEclipticLineColor();
+	void askEquatorLineJ2000Color();
+	void askEquatorLineColor();
+	void askGalacticEquatorLineColor();
+	void askSupergalacticEquatorLineColor();
+	void askLongitudeLineColor();
+	void askHorizonLineColor();
+	void askColureLinesColor();
+	void askCircumpolarCirclesColor();
+	void askPrecessionCirclesColor();
+	void askPrimeVerticalLineColor();
+	void askMeridianLineColor();
+	void askCardinalPointsColor();
+	void askCelestialJ2000PolesColor();
+	void askCelestialPolesColor();
+	void askZenithNadirColor();
+	void askEclipticJ2000PolesColor();
+	void askEclipticPolesColor();
+	void askGalacticPolesColor();
+	void askSupergalacticPolesColor();
+	void askEquinoxJ2000PointsColor();
+	void askEquinoxPointsColor();
+	// constellations colors
+	void askConstellationLabelsColor();
+	void askConstellationLinesColor();
+	void askConstellationBoundariesColor();
+
 private:
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);
 	void updateSkyCultureText();
@@ -93,9 +134,13 @@ private:
 	//! @todo Limit the width to the width of the screen *available to the window*.
 	void updateTabBarListWidgetWidth();
 
+	void colorButton(QToolButton *toolButton, QString propName);
+
 	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;
 	AtmosphereDialog * atmosphereDialog;
 	GreatRedSpotDialog * greatRedSpotDialog;
+	ConfigureDSOColorsDialog * configureDSOColorsDialog;
+	ConfigureOrbitColorsDialog * configureOrbitColorsDialog;
 };
 
 #endif // _VIEWDIALOG_HPP_

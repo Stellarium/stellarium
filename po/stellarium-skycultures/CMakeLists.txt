@@ -1,6 +1,8 @@
-GETTEXT_CREATE_TRANSLATIONS(stellarium-skycultures DEFAULT_TARGET
-     aa ab ae af ak am an ar as ast av az ba be bg bh bi bn bo br bs ca ce ckb cs csb cv cy da de dv el en en_AU en_CA en_GB en_US eo es et eu fa fi fil fj fr fy ga gd gl gn gu gv haw he hi hne hr hrx ht hu hy ia id is it ja jv ka kg kk km kn ko ky la lb lo lt lv mai mi mk ml mn mo mr ms mt na nan nb ne nds nl nn oc os oj pa pl pt pt_BR ro ru sah sco se si sk sl sm sq sr su sv sw ta te tg th tl tr tt ug uk uz vi wa xh zh_CN zh_HK zh_TW zu
-)
+FILE(GLOB poscfiles RELATIVE "${CMAKE_SOURCE_DIR}/po/stellarium-skycultures/" "*.po")
+LIST(SORT poscfiles)
+STRING(REGEX REPLACE ".po" "" outposcfiles "${poscfiles}")
+
+GETTEXT_CREATE_TRANSLATIONS(stellarium-skycultures DEFAULT_TARGET ${outposcfiles})
 
 # Discard this target if xgettext is not installed
 IF(${XGETTEXT_FOUND})

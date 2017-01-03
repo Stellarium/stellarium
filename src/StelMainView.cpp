@@ -426,7 +426,8 @@ protected:
 
 
 StelMainView::StelMainView(QWidget* parent)
-	: QGraphicsView(parent), guiItem(NULL), gui(NULL),
+	: QGraphicsView(parent), guiItem(NULL),
+	  gui(NULL),
 	  flagInvertScreenShotColors(false),
 	  flagOverwriteScreenshots(false),
 	  screenShotPrefix("stellarium-"),
@@ -569,6 +570,7 @@ void StelMainView::init(QSettings* conf)
 
 	stelApp= new StelApp();
 	stelApp->setGui(gui);
+
 	stelApp->init(conf);
 	StelActionMgr *actionMgr = stelApp->getStelActionManager();
 	actionMgr->addAction("actionSave_Screenshot_Global", N_("Miscellaneous"), N_("Save screenshot"), this, "saveScreenShot()", "Ctrl+S");
@@ -588,7 +590,7 @@ void StelMainView::init(QSettings* conf)
 	rootItem->setLayout(l);
 	scene()->addItem(rootItem);
 	nightModeEffect = new NightModeGraphicsEffect(this);
-	updateNightModeProperty();
+	updateNightModeProperty(StelApp::getInstance().getVisionModeNight());
 	rootItem->setGraphicsEffect(nightModeEffect);
 
 	QSize size = glWidget->windowHandle()->screen()->size();
@@ -634,8 +636,8 @@ void StelMainView::init(QSettings* conf)
 	minfps = conf->value("video/minimum_fps",10000.f).toFloat();
 	flagMaxFpsUpdatePending = false;
 
-	// XXX: This should be done in StelApp::init(), unfortunately for the moment we need init the gui before the
-	// plugins, because the gui create the QActions needed by some plugins.
+	// XXX: This should be done in StelApp::init(), unfortunately for the moment we need to init the gui before the
+	// plugins, because the gui creates the QActions needed by some plugins.
 	StelApp::getInstance().initPlugIns();
 
 	// activate DE430/431 
@@ -648,17 +650,28 @@ void StelMainView::init(QSettings* conf)
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui!=NULL)
 		setStyleSheet(gui->getStelStyle().qtStyleSheet);
-	connect(&StelApp::getInstance(), SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty()));
+	connect(&StelApp::getInstance(), SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty(bool)));
 
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
+#ifndef NDEBUG
+	// Get an overview of module callOrders
+	if (qApp->property("verbose")==true)
+	{
+		StelApp::getInstance().dumpModuleActionPriorities(StelModule::ActionDraw);
+		StelApp::getInstance().dumpModuleActionPriorities(StelModule::ActionUpdate);
+		StelApp::getInstance().dumpModuleActionPriorities(StelModule::ActionHandleMouseClicks);
+		StelApp::getInstance().dumpModuleActionPriorities(StelModule::ActionHandleMouseMoves);
+		StelApp::getInstance().dumpModuleActionPriorities(StelModule::ActionHandleKeys);
+	}
+#endif
 	startMainLoop();
 }
 
-void StelMainView::updateNightModeProperty()
+void StelMainView::updateNightModeProperty(bool b)
 {
 	// So that the bottom bar tooltips get properly rendered in night mode.
-	setProperty("nightMode", StelApp::getInstance().getVisionModeNight());
-	nightModeEffect->setEnabled(StelApp::getInstance().getVisionModeNight());
+	setProperty("nightMode", b);
+	nightModeEffect->setEnabled(b);
 }
 
 // This is a series of various diagnostics based on "bugs" reported for 0.13.0 and 0.13.1.
@@ -721,7 +734,7 @@ void StelMainView::updateNightModeProperty()
 		if ((!isANGLE) && (!isMesa))
 			qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, graphics hardware, or use --angle-mode (or even --mesa-mode) option.";
 		else if (isANGLE)
-			qWarning() << "Oops... Insufficient OpenGL version in ANGLE. Please update drivers, graphics hardware, or use --mesa-mode option.";
+			qWarning() << "Oops... Insufficient OpenGLES version in ANGLE. Please update drivers, graphics hardware, or use --mesa-mode option.";
 		else
 			qWarning() << "Oops... Insufficient OpenGL version. Mesa failed! Please send a bug report.";
 
@@ -1149,7 +1162,7 @@ void StelMainView::minFpsChanged()
 
 void StelMainView::mouseMoveEvent(QMouseEvent* event)
 {
-	// We notify the applicatio to increase the fps if a button has been
+	// We notify the application to increase the fps if a button has been
 	// clicked, but also if the cursor is currently hidden, so that it gets
 	// restored.
 	if (event->buttons() || QGuiApplication::overrideCursor()!=0)
@@ -1179,7 +1192,7 @@ void StelMainView::moveEvent(QMoveEvent * event)
 {
 	Q_UNUSED(event);
 
-	// We use the glWidget instead of the even, as we want the screen that shows most of the widget.
+	// We use the glWidget instead of the event, as we want the screen that shows most of the widget.
 	StelApp::getInstance().setDevicePixelsPerPixel(glWidget->windowHandle()->devicePixelRatio());
 }
 

@@ -27,7 +27,7 @@
 
 #include "StelUtils.hpp"
 
-QTEST_MAIN(TestDeltaT)
+QTEST_GUILESS_MAIN(TestDeltaT)
 
 void TestDeltaT::initTestCase()
 {

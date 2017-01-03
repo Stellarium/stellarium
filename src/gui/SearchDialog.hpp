@@ -83,6 +83,7 @@ public:
 		equatorial,
 		horizontal,
 		galactic,
+		supergalactic,
 		ecliptic,
 		eclipticJ2000
 	};
@@ -153,6 +154,9 @@ private slots:
 	//! Whether to use autofill for start of words or not.
 	void enableStartOfWordsAutofill(bool enable);
 
+	//! Whether to use lock position when coordinates are used or not.
+	void enableLockPosition(bool enable);
+
 	//! Set flagHasSelectedText as true, if search box has selected text
 	void setHasSelectedFlag();
 
@@ -220,6 +224,7 @@ private:
 	bool flagHasSelectedText;
 
 	bool useStartOfWords;
+	bool useLockPosition;
 	bool useSimbad;
 	//! URL of the server used for SIMBAD queries. 
 	QString simbadServerUrl;

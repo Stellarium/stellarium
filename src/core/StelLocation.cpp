@@ -42,7 +42,7 @@ QString StelLocation::serializeToLine() const
 			.arg(longitude<0 ? QString("%1W").arg(-longitude, 0, 'f', 6) : QString("%1E").arg(longitude, 0, 'f', 6))
 			.arg(altitude)
 			.arg(bortleScaleIndex)
-			.arg("")		// Reserve for time zone
+			.arg(timeZone)
 			.arg(planetName)
 			.arg(landscapeKey);
 }
@@ -61,13 +61,13 @@ QString StelLocation::getID() const
 
 QDataStream& operator<<(QDataStream& out, const StelLocation& loc)
 {
-	out << loc.name << loc.state << loc.country << loc.role << loc.population << loc.latitude << loc.longitude << loc.altitude << loc.bortleScaleIndex << loc.planetName << loc.landscapeKey << loc.isUserLocation;
+	out << loc.name << loc.state << loc.country << loc.role << loc.population << loc.latitude << loc.longitude << loc.altitude << loc.bortleScaleIndex << loc.timeZone << loc.planetName << loc.landscapeKey << loc.isUserLocation;
 	return out;
 }
 
 QDataStream& operator>>(QDataStream& in, StelLocation& loc)
 {
-	in >> loc.name >> loc.state >> loc.country >> loc.role >> loc.population >> loc.latitude >> loc.longitude >> loc.altitude >> loc.bortleScaleIndex >> loc.planetName >> loc.landscapeKey >> loc.isUserLocation;
+	in >> loc.name >> loc.state >> loc.country >> loc.role >> loc.population >> loc.latitude >> loc.longitude >> loc.altitude >> loc.bortleScaleIndex >> loc.timeZone >> loc.planetName >> loc.landscapeKey >> loc.isUserLocation;
 	return in;
 }
 
@@ -76,23 +76,23 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 {
 	StelLocation loc;
 	const QStringList& splitline = rawline.split("\t");
-	loc.name    = splitline.at(0);
-	loc.state   = splitline.at(1);
-	loc.country = StelLocaleMgr::countryCodeToString(splitline.at(2));
+	loc.name    = splitline.at(0).trimmed();
+	loc.state   = splitline.at(1).trimmed();
+	loc.country = StelLocaleMgr::countryCodeToString(splitline.at(2).trimmed());	
 	if (loc.country.isEmpty())
-		loc.country = splitline.at(2);
+		loc.country = splitline.at(2).trimmed();
 
-	loc.role    = splitline.at(3).at(0);
-	if (loc.role == '\0')
-		loc.role = 'X';
+	loc.role    = splitline.at(3).at(0).toUpper();
+	if (loc.role.isNull())
+		loc.role = QChar(0x0058); // char 'X'
 	loc.population = (int) (splitline.at(4).toFloat()*1000);
 
-	const QString& latstring = splitline.at(5);
+	const QString& latstring = splitline.at(5).trimmed();
 	loc.latitude = latstring.left(latstring.size() - 1).toFloat();
 	if (latstring.endsWith('S'))
 		loc.latitude=-loc.latitude;
 
-	const QString& lngstring = splitline.at(6);
+	const QString& lngstring = splitline.at(6).trimmed();
 	loc.longitude = lngstring.left(lngstring.size() - 1).toFloat();
 	if (lngstring.endsWith('W'))
 		loc.longitude=-loc.longitude;
@@ -109,13 +109,16 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 	else
 		loc.bortleScaleIndex = DEFAULT_BORTLE_SCALE_INDEX;
 
-	// Reserve for TimeZone
-	// if (splitline.size()>9) {}
+	if (splitline.size()>9)
+	{
+		// Parse time zone
+		loc.timeZone = splitline.at(9).trimmed();
+	}
 
 	if (splitline.size()>10)
 	{
 		// Parse planet name
-		loc.planetName = splitline.at(10);
+		loc.planetName = splitline.at(10).trimmed();
 	}
 	else
 	{
@@ -126,7 +129,7 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 	if (splitline.size()>11)
 	{
 		// Parse optional associated landscape key
-		loc.landscapeKey = splitline.at(11);
+		loc.landscapeKey = splitline.at(11).trimmed();
 	}
 	return loc;
 }
@@ -136,5 +139,6 @@ float StelLocation::distanceDegrees(const float long1, const float lat1, const f
 {
 	const float DEGREES=M_PI/180.0f;
 	return std::acos( std::sin(lat1*DEGREES)*std::sin(lat2*DEGREES) +
-					  std::cos(lat1*DEGREES)*std::cos(lat2*DEGREES)*std::cos((long1-long2)*DEGREES) ) / DEGREES;
+			  std::cos(lat1*DEGREES)*std::cos(lat2*DEGREES) *
+			  std::cos((long1-long2)*DEGREES) ) / DEGREES;
 }

@@ -432,8 +432,7 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 	float xom = x + xshift*cosr - yshift*sinr;
 	float yom = y + yshift*sinr + yshift*cosr;
 
-	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
-	if (!QString("ar fa ckb ug ur he yi").contains(lang))
+	if (!StelApp::getInstance().getLocaleMgr().isAppRTL())
 	{
 		for (int i=0; i<ws.length(); ++i)
 		{
@@ -540,7 +539,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	}
 	else if (qApp->property("text_texture")==true) // CLI option -t given?
 	{
-	  //qDebug() <<  "Text texture" << str;
+		//qDebug() <<  "Text texture" << str;
 		// This is taken from branch text-use-opengl-buffer. This is essential on devices like Raspberry Pi (2016-03).
 		StringTexture* tex = getTexTexture(str, currentFont.pixelSize());
 		Q_ASSERT(tex);
@@ -608,8 +607,9 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		painter.setFont(tmpFont);
 		painter.setPen(QColor(currentColor[0]*255, currentColor[1]*255, currentColor[2]*255, currentColor[3]*255));
 		
-		xshift*=StelApp::getInstance().getGlobalScalingRatio();
-		yshift*=StelApp::getInstance().getGlobalScalingRatio();
+		float scaleRatio = StelApp::getInstance().getGlobalScalingRatio();
+		xshift*=scaleRatio;
+		yshift*=scaleRatio;
 		
 		y = prj->getViewportHeight()-y;
 		yshift = -yshift;

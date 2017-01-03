@@ -97,6 +97,7 @@ struct TleData
 	QString name;
 	QString first;
 	QString second;
+	int status;
 	//! Flag indicating whether this satellite should be added.
 	//! See Satellites::autoAddEnabled.
 	bool addThis;
@@ -229,7 +230,6 @@ public:
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
 
 	virtual QStringList listAllObjects(bool inEnglish) const;
-	virtual QStringList listAllObjectsByType(const QString&, bool) const { return QStringList(); }
 
 	virtual QString getName() const { return "Satellites"; }
 

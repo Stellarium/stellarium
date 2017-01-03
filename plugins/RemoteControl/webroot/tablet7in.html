@@ -115,7 +115,7 @@
              <div class="flex-expand">
              <!-- It would be more intuitive to have this slider in vertical orientation.  -->
              <div id="view_offset" class="slider stelproperty flex-expand" data-prop="StelMovementMgr.viewportVerticalOffsetTarget" data-min="-50" data-max="50" data-step="1"></div>
-             Vertical View offset: <span class="stelproperty" style="margin-left: 5px; min-width: 48px;" data-prop="StelMovementMgr.viewportVerticalOffsetTarget" data-numberformat="n0"></span>
+             <?= tr("Vertical View offset")?>: <span class="stelproperty" style="margin-left: 5px; min-width: 48px;" data-prop="StelMovementMgr.viewportVerticalOffsetTarget" data-numberformat="n0"></span>
              <!-- GZ Add a few buttons with defined values to set here -->
              <table><tr>
              <td><button type="button" class="stelssc" value="StelMovementMgr.moveViewport(0.,-50., 3.)">-50%</button></td>
@@ -130,7 +130,7 @@
             </div>
             <div id="view_wrapper">
               <div id="view_fov"></div>
-              <p title='<?= tr("Field of view")?>'>FOV: <span id="view_fov_text"></span></p>
+              <p title='<?= tr("Field of view")?>'><?= tr("FOV")?>: <span id="view_fov_text"></span></p>
 
               <div id="view_fovbuttons" class="ui-corner-all ui-widget-content">
               <table>
@@ -166,7 +166,7 @@
                </tr>
               </table>
               </div> 
-              <p><?= tr("Projection")?>: <span id="view_projection"></span></p>
+              <p><?= tr("Projection")?>: <span class="stelproperty" data-prop="StelCore.currentProjectionNameI18n"></span></p>
             </div>
           </section>
         </div>
@@ -440,53 +440,53 @@
             <!-- give the checkboxes the flag values -->
             <div class="inline-block blocklabel">
               <label title='<?= tr("Messier Catalogue")?>'>
-                <input type="checkbox" value="0x0004" /><?= tr("M")?>
+                <input type="checkbox" value="0x0004" />M
               </label>
               <label title='<?= tr("Index Catalogue of Nebulae and Clusters of Stars")?>'>
-                <input type="checkbox" value="0x0002" /><?= tr("IC")?>
+                <input type="checkbox" value="0x0002" />IC
               </label>
               <label title='<?= tr("Catalogue of Reflection Nebulae (Van den Bergh, 1966)")?>'>
-                <input type="checkbox" value="0x0200" /><?= tr("VdB")?>
+                <input type="checkbox" value="0x0200" />VdB
               </label>
               <label title="<?= tr("Lynds' Catalogue of Dark Nebulae (Lynds, 1962)")?>">
-                <input type="checkbox" value="0x0080" /><?= tr("LDN")?>
+                <input type="checkbox" value="0x0080" />LDN
               </label>
               <label title='<?= tr("Catalog of galaxies")?>'>
-                <input type="checkbox" value="0x1000" /><?= tr("PGC")?>
+                <input type="checkbox" value="0x1000" />PGC
               </label>
             </div>
             <div class="inline-block blocklabel">
               <label title='<?= tr("Caldwell Catalogue")?>'>
-                <input type="checkbox" value="0x0008" /><?= tr("C")?>
+                <input type="checkbox" value="0x0008" />C
               </label>
               <label title="<?= tr("Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)")?>">
-                <input type="checkbox" value="0x0010" /><?= tr("B")?>
+                <input type="checkbox" value="0x0010" />B
               </label>
               <label title='<?= tr("A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, 1960)")?>'>
-                <input type="checkbox" value="0x0100" /><?= tr("RCW")?>
+                <input type="checkbox" value="0x0100" />RCW
               </label>
               <label title='<?= tr("Catalog of Open Galactic Clusters (Collinder, 1931)")?>'>
-                <input type="checkbox" value="0x0400" /><?= tr("Cr")?>
+                <input type="checkbox" value="0x0400" />Cr
               </label>
               <label title='<?= tr("The Uppsala General Catalogue of Galaxies")?>'>
-                <input type="checkbox" value="0x2000" /><?= tr("UGC")?>
+                <input type="checkbox" value="0x2000" />UGC
               </label>
             </div>
             <div class="inline-block blocklabel">
               <label title='<?= tr("New General Catalogue of Nebulae and Clusters of Stars")?>'>
-                <input type="checkbox" value="0x0001" /><?= tr("NGC")?>
+                <input type="checkbox" value="0x0001" />NGC
               </label>
               <label title='<?= tr("Catalogue of HII Regions (Sharpless, 1959)")?>'>
-                <input type="checkbox" value="0x0020" /><?= tr("Sh 2")?>
+                <input type="checkbox" value="0x0020" />SH 2
               </label>
               <label title="<?= tr("Lynds' Catalogue of Bright Nebulae (Lynds, 1965)")?>">
-                <input type="checkbox" value="0x0040" /><?= tr("LBN")?>
+                <input type="checkbox" value="0x0040" />LBN
               </label>
               <label title='<?= tr("A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, 1915)")?>'>
-                <input type="checkbox" value="0x0800" /><?= tr("Mel")?>
+                <input type="checkbox" value="0x0800" />Mel
               </label>
               <label title='<?= tr("Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)")?>'>
-                <input type="checkbox" value="0x4000" /><?= tr("Ced")?>
+                <input type="checkbox" value="0x4000" />Ced
               </label>
             </div>
 

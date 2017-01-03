@@ -92,7 +92,7 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
       lazyDrawing(false), updateOnlyDominantOnMoving(true), updateSecondDominantOnMoving(true), needsMovementEndUpdate(false),
       needsCubemapUpdate(true), needsMovementUpdate(false), lazyInterval(2.0), lastCubemapUpdate(0.0), lastCubemapUpdateRealTime(0), lastMovementEndRealTime(0),
       cubeMapCubeTex(0), cubeMapCubeDepth(0), cubeMapTex(), cubeRB(0), dominantFace(0), secondDominantFace(1), cubeFBO(0), cubeSideFBO(), cubeMappingCreated(false),
-      cubeVertexBuffer(QOpenGLBuffer::VertexBuffer), cubeIndexBuffer(QOpenGLBuffer::IndexBuffer), cubeIndexCount(0),
+      cubeVertexBuffer(QOpenGLBuffer::VertexBuffer), transformedCubeVertexBuffer(QOpenGLBuffer::VertexBuffer), cubeIndexBuffer(QOpenGLBuffer::IndexBuffer), cubeIndexCount(0),
       lightOrthoNear(0.1f), lightOrthoFar(1000.0f), parallaxScale(0.015f)
 {
 	#ifndef NDEBUG
@@ -1625,10 +1625,15 @@ void Scenery3d::drawFromCubeMap()
 		cubeShader->setAttributeBuffer(ShaderMgr::ATTLOC_TEXCOORD,GL_FLOAT,0,3);
 	else // 2D tex coords are stored in the same buffer, but with an offset
 		cubeShader->setAttributeBuffer(ShaderMgr::ATTLOC_TEXCOORD,GL_FLOAT,cubeVertices.size() * sizeof(Vec3f),2);
-	cubeVertexBuffer.release();
 	cubeShader->enableAttributeArray(ShaderMgr::ATTLOC_TEXCOORD);
-	cubeShader->setAttributeArray(ShaderMgr::ATTLOC_VERTEX, reinterpret_cast<const GLfloat*>(transformedCubeVertices.constData()),3);
+	cubeVertexBuffer.release();
+
+	//upload transformed vertex data
+	transformedCubeVertexBuffer.bind();
+	transformedCubeVertexBuffer.allocate(transformedCubeVertices.constData(), transformedCubeVertices.size() * sizeof(Vec3f));
+	cubeShader->setAttributeBuffer(ShaderMgr::ATTLOC_VERTEX, GL_FLOAT, 0,3);
 	cubeShader->enableAttributeArray(ShaderMgr::ATTLOC_VERTEX);
+	transformedCubeVertexBuffer.release();
 
 	glEnable(GL_BLEND);
 	//note that GL_ONE is required here for correct blending (see drawArrays)
@@ -2065,6 +2070,8 @@ void Scenery3d::init()
 
 	cubeVertexBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
 	cubeVertexBuffer.create();
+	transformedCubeVertexBuffer.setUsagePattern(QOpenGLBuffer::StreamDraw);
+	transformedCubeVertexBuffer.create();
 	cubeIndexBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
 	cubeIndexBuffer.create();
 

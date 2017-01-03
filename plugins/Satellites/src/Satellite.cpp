@@ -51,7 +51,7 @@
 // static data members - will be initialised in the Satallites class (the StelObjectMgr)
 StelTextureSP Satellite::hintTexture;
 float Satellite::showLabels = true;
-float Satellite::hintBrightness = 0.0;
+float Satellite::hintBrightness = 0.f;
 float Satellite::hintScale = 1.f;
 SphericalCap Satellite::viewportHalfspace = SphericalCap();
 int Satellite::orbitLineSegments = 90;
@@ -59,7 +59,7 @@ int Satellite::orbitLineFadeSegments = 4;
 int Satellite::orbitLineSegmentDuration = 20;
 bool Satellite::orbitLinesFlag = true;
 bool Satellite::realisticModeFlag = false;
-Vec3f Satellite::invisibleSatelliteColor = Vec3f(0.2,0.2,0.2);
+Vec3f Satellite::invisibleSatelliteColor = Vec3f(0.2f,0.2f,0.2f);
 
 #ifdef IRIDIUM_SAT_TEXT_DEBUG
 QString Satellite::myText = "";
@@ -68,25 +68,25 @@ double Satellite::sunReflAngle = 180.;
 double Satellite::timeShift = 0.;
 
 Satellite::Satellite(const QString& identifier, const QVariantMap& map)
-    : initialized(false),
-      displayed(true),
-      orbitDisplayed(false),
-      userDefined(false),
-      newlyAdded(false),
-      orbitValid(false),
-      jdLaunchYearJan1(0),
-      stdMag(99.),
-      height(0.),
-      range(0.),
-      rangeRate(0.),
-      hintColor(0.0,0.0,0.0),
-      lastUpdated(),
-      pSatWrapper(NULL),
-      visibility(0),
-      phaseAngle(0.),
-      lastEpochCompForOrbit(0.),
-      epochTime(0.)
-
+	: initialized(false)
+	, displayed(true)
+	, orbitDisplayed(false)
+	, userDefined(false)
+	, newlyAdded(false)
+	, orbitValid(false)
+	, jdLaunchYearJan1(0)
+	, stdMag(99.)
+	, status(StatusUnknown)
+	, height(0.)
+	, range(0.)
+	, rangeRate(0.)
+	, hintColor(0.0,0.0,0.0)
+	, lastUpdated()
+	, pSatWrapper(NULL)
+	, visibility(0)
+	, phaseAngle(0.)
+	, lastEpochCompForOrbit(0.)
+	, epochTime(0.)
 {
 	// return initialized if the mandatory fields are not present
 	if (identifier.isEmpty())
@@ -109,6 +109,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	orbitDisplayed = map.value("orbitVisible", orbitDisplayed).toBool();
 	userDefined = map.value("userDefined", userDefined).toBool();
 	stdMag = map.value("stdMag", 99.f).toDouble();
+	status = map.value("status", StatusUnknown).toInt();
 	// Satellite hint color
 	QVariantList list = map.value("hintColor", QVariantList()).toList();
 	if (list.count() == 3)
@@ -183,11 +184,17 @@ double Satellite::roundToDp(float n, int dp)
 	return floor(n * pow(10., dp) + .5) / pow(10., dp);
 }
 
+QString Satellite::getNameI18n() const
+{
+	return q_(name);
+}
+
 QVariantMap Satellite::getMap(void)
 {
 	QVariantMap map;
 	map["name"] = name;	
 	map["stdMag"] = stdMag;
+	map["status"] = status;
 	map["tle1"] = tleElements.first.data();
 	map["tle2"] = tleElements.second.data();
 
@@ -241,7 +248,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	
 	if (flags & Name)
 	{
-		oss << "<h2>" << name << "</h2>";
+		oss << "<h2>" << getNameI18n() << "</h2>";
 		if (!description.isEmpty())
 		{
 			// Let's convert possibile \n chars into <br/> in description of satellite
@@ -326,7 +333,10 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			       .arg(QChar(0x00B0)); // Degree sign
 			oss << "<br/>";
 		}
-		
+
+		if (status!=StatusUnknown)
+			oss << QString(q_("Operational status: %1")).arg(getOperationalStatus()) << "<br/>";
+
 		//Visibility: Full text
 		//TODO: Move to a more prominent place.
 		switch (visibility)
@@ -579,6 +589,40 @@ float Satellite::getVMagnitude(const StelCore* core) const
 float Satellite::calculateIlluminatedFraction() const
 {
 	return (1 + cos(phaseAngle))/2;
+}
+
+QString Satellite::getOperationalStatus() const
+{
+	QString statusStr = qc_("unknown", "operational status");
+	switch (status)
+	{
+		case StatusOperational:
+			statusStr = qc_("operational", "operational status");
+			break;
+		case StatusNonoperational:
+			statusStr = qc_("nonoperational", "operational status");
+			break;
+		case StatusPartiallyOperational:
+			statusStr = qc_("partially operational", "operational status");
+			break;
+		case StatusStandby:
+			statusStr = qc_("standby", "operational status");
+			break;
+		case StatusSpare:
+			statusStr = qc_("spare", "operational status");
+			break;
+		case StatusExtendedMission:
+			statusStr = qc_("extended mission", "operational status");
+			break;
+		case StatusDecayed:
+			statusStr = qc_("decayed", "operational status");
+			break;
+		default:
+			statusStr = qc_("unknown", "operational status");
+			break;
+	}
+
+	return statusStr;
 }
 
 double Satellite::getAngularSize(const StelCore*) const

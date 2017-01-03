@@ -42,24 +42,25 @@ StelTextureSP Exoplanet::markerTexture;
 bool Exoplanet::distributionMode = false;
 bool Exoplanet::timelineMode = false;
 bool Exoplanet::habitableMode = false;
+bool Exoplanet::showDesignations = false;
 Vec3f Exoplanet::exoplanetMarkerColor = Vec3f(0.4f,0.9f,0.5f);
 Vec3f Exoplanet::habitableExoplanetMarkerColor = Vec3f(1.f,0.5f,0.f);
 
 Exoplanet::Exoplanet(const QVariantMap& map)
-		: initialized(false),
-		  EPCount(0),
-		  PHEPCount(0),
-		  designation(""),
-		  RA(0.),
-		  DE(0.),
-		  distance(0.),
-		  stype(""),
-		  smass(0.),
-		  smetal(0.),
-		  Vmag(99.),
-		  sradius(0.),
-		  effectiveTemp(0),
-		  hasHabitableExoplanets(false)
+	: initialized(false)
+	, EPCount(0)
+	, PHEPCount(0)
+	, designation("")
+	, RA(0.)
+	, DE(0.)
+	, distance(0.)
+	, stype("")
+	, smass(0.)
+	, smetal(0.)
+	, Vmag(99.)
+	, sradius(0.)
+	, effectiveTemp(0)
+	, hasHabitableExoplanets(false)
 {
 	// return initialized if the mandatory fields are not present
 	if (!map.contains("designation"))
@@ -591,7 +592,8 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 
 		painter->drawSprite2dMode(XYZ, distributionMode ? 4.f : 5.f);
 
-		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+1.f)<mlimit && smgr->getFlagLabels())
+		float coeff = 4.5f + std::log10(sradius + 0.1f);
+		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+coeff)<mlimit && smgr->getFlagLabels() && showDesignations)
 		{
 			painter->drawText(XYZ, getNameI18n(), 0, shift, shift, false);
 		}

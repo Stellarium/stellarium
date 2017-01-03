@@ -80,8 +80,16 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
 			infoTextFilters |= StelObject::ObjectType;
 		if (conf->value("flag_show_galcoord", false).toBool())
 			infoTextFilters |= StelObject::GalacticCoord;
-		if (conf->value("flag_show_eclcoord", false).toBool())
-			infoTextFilters |= StelObject::EclipticCoord;
+		if (conf->value("flag_show_supergalcoord", false).toBool())
+			infoTextFilters |= StelObject::SupergalacticCoord;
+		if (conf->value("flag_show_eclcoordofdate", false).toBool())
+			infoTextFilters |= StelObject::EclipticCoordOfDate;
+		if (conf->value("flag_show_eclcoordj2000", false).toBool())
+			infoTextFilters |= StelObject::EclipticCoordJ2000;
+		if (conf->value("flag_show_constellation", false).toBool())
+			infoTextFilters |= StelObject::IAUConstellation;
+		if (conf->value("flag_show_sidereal_time", false).toBool())
+			infoTextFilters |= StelObject::SiderealTime;
 		conf->endGroup();
 	}
 	else

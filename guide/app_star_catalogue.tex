@@ -45,11 +45,11 @@ section~\ref{sec:Directories}).
 The main catalogue data is split into several files:
 
 \begin{description}
-\item[\file{stars\_0\_0v0\_6.cat}]
-\item[\file{stars\_1\_0v0\_6.cat}]
-\item[\file{stars\_2\_0v0\_6.cat}]
-\item[\file{stars\_3\_1v0\_3.cat}]
-\item[\file{stars\_4\_1v0\_1.cat}]
+\item[\file{stars\_0\_0v0\_7.cat}]
+\item[\file{stars\_1\_0v0\_7.cat}]
+\item[\file{stars\_2\_0v0\_7.cat}]
+\item[\file{stars\_3\_1v0\_4.cat}]
+\item[\file{stars\_4\_1v0\_2.cat}]
 \item[\file{stars\_5\_2v0\_1.cat}]
 \item[\file{stars\_6\_2v0\_1.cat}]
 \item[\file{stars\_7\_2v0\_1.cat}]
@@ -60,10 +60,10 @@ There also exist some control and reference files:
 
 \begin{description}
 \item[\file{stars\_hip\_cids\_0v0\_0.cat}]
-\item[\file{stars\_hip\_sp\_0v0\_2.cat}]
+\item[\file{stars\_hip\_sp\_0v0\_3.cat}]
 \item[\file{gcvs\_hip\_part.dat}]
 \item[\file{wds\_hip\_part.dat}]
-\item[\file{cross-index.dat}]
+\item[\file{cross-id.dat}]
 \item[\file{stars.ini}]
 \item[\file{name.fab}]
 \end{description}
@@ -78,7 +78,7 @@ file \file{gcvs\_hip\_part.dat} contains data about variables stars
 contains data about double stars (see section~\ref{sec:StarCatalogues:DoubleStars}) 
 which again contains references into the main catalogue files.
 
-The file \file{cross-index.dat} (see section~\ref{sec:StarCatalogues:CrossIndexData}) contains cross-identification data between HIP, SAO and HD designations.
+The file \file{cross-id.dat} (see section~\ref{sec:StarCatalogues:CrossIdentificationData}) contains cross-identification data between HIP, SAO, HD and HR designations.
 
 A given catalogue file models stars for one and only one level (i.e. for
 a fixed number of zones), which is recorded in the header of the file.
@@ -92,20 +92,20 @@ know about the zone model to be able to extract positional data.
 \emph{File} & \emph{Data Type} & \emph{Data Record Size} &
 \emph{Geodesic Level} & \emph{\#Records} & \emph{Notes}\\
 \midrule
-\file{stars\_0\_0v0\_3.cat} & 0 & 28 bytes & 0 & 4,979 & Hipparcos\\
-\file{stars\_1\_0v0\_3.cat} & 0 & 28 bytes & 1 & 21,800 & Hipparcos\\
-\file{stars\_2\_0v0\_3.cat} & 0 & 28 bytes & 2 & 150,705 & Hipparcos\\
-\file{stars\_3\_1v0\_2.cat} & 1 & 10 bytes & 3 & 428,466 & Tycho 2\\
-\file{stars\_4\_1v0\_0.cat} & 1 & 10 bytes & 4 & 1,702,042 & Tycho 2\\
-\file{stars\_5\_2v0\_0.cat} & 2 & 8 bytes & 5 & 7,083,058 & NOMAD\\
-\file{stars\_6\_2v0\_0.cat} & 2 & 8 bytes & 6 & 24,670,782 & NOMAD\\
-\file{stars\_7\_2v0\_0.cat} & 2 & 8 bytes & 7 & 50,733,321 & NOMAD\\
-\file{stars\_8\_2v0\_0.cat} & 2 & 8 bytes & 7 & 92,304,337 & NOMAD\\
+\file{stars\_0\_0v0\_7.cat} & 0 & 28 bytes & 0 & 4,979 & Hipparcos\\
+\file{stars\_1\_0v0\_7.cat} & 0 & 28 bytes & 1 & 21,806 & Hipparcos\\
+\file{stars\_2\_0v0\_7.cat} & 0 & 28 bytes & 2 & 150,850 & Hipparcos\\
+\file{stars\_3\_1v0\_4.cat} & 1 & 10 bytes & 3 & 425,807 & Tycho 2\\
+\file{stars\_4\_1v0\_2.cat} & 1 & 10 bytes & 4 & 1,692,779 & Tycho 2\\
+\file{stars\_5\_2v0\_1.cat} & 2 & 8 bytes & 5 & 7,083,058 & NOMAD\\
+\file{stars\_6\_2v0\_1.cat} & 2 & 8 bytes & 6 & 24,670,782 & NOMAD\\
+\file{stars\_7\_2v0\_1.cat} & 2 & 8 bytes & 7 & 50,733,321 & NOMAD\\
+\file{stars\_8\_2v0\_1.cat} & 2 & 8 bytes & 7 & 92,304,337 & NOMAD\\
 \bottomrule
 \end{longtabu}
 
 For a given catalogue file, there may be one of three formats for the
-actual star data. The variation comes from the source of the data - the
+actual star data. The variation comes from the source of the data -- the
 larger catalogues of fainter stars providing less data per star than the
 brighter star catalogues. See tables \emph{Stellarium's star catalogue}
 and for details.
@@ -1229,29 +1229,30 @@ stored in the plain text format with tab delimiter.
 \end{longtabu}
 
 \section{Cross-Identification Data}
-\label{sec:StarCatalogues:CrossIndexData}
+\label{sec:StarCatalogues:CrossIdentificationData}
 
-Since version 0.14.0 Stellarium supports cross-identification between stars from Hipparcos (HIP)~\cite{2012AstL...38..331A}, Smithsonian Astrophysical Observatory (SAO) Star Catalog J2000.0 (SAO) and Henry Draper Catalogue and Extension (HD)~\cite{1993yCat.3135....0C} catalogues.
+Since version 0.14.0 Stellarium supports cross-identification between stars from Hipparcos (HIP)~\cite{2012AstL...38..331A}, Smithsonian Astrophysical Observatory (SAO) Star Catalog J2000.0 (SAO), Henry Draper Catalogue and Extension (HD)~\cite{1993yCat.3135....0C} and $5^{th}$ Revised Ed. of Bright Star (Hoffleit+, 1991; HR)~\cite{1964cbs..book.....H} catalogues.
 
 \subsection{Cross-Identification Catalog File Format}
-\label{sec:StarCatalogues:CrossIndexData:format}
+\label{sec:StarCatalogues:CrossIdentificationData:format}
 
 \subsubsection{General Description}
-\label{sec:StarCatalogues:CrossIndexData:general}
+\label{sec:StarCatalogues:CrossIdentificationData:general}
 
 Stellarium's Cross-Identification catalog data is kept
 in the \file{stars/default} sub-directory of the Installation Directory and/or User Directory (see section~\ref{sec:Directories}).
 
 \subsubsection{File Format}
-\label{sec:StarCatalogues:CrossIndexData:file}
+\label{sec:StarCatalogues:CrossIdentificationData:file}
 
-The \textbf{cross-index.dat} file contains cross reference data for catalogues HIP, SAO and HD, which stored in the plain text format with tab delimiter.
+The \textbf{cross-id.dat} file contains cross reference data for catalogues HIP, SAO, HD and HR, which stored in the plain text format with tab delimiter.
 
-\begin{longtabu} to \textwidth {l|l|X}\toprule
+\begin{longtabu} to \textwidth {l|l|l|X}\toprule
 	\emph{Name} & \emph{Type} & \emph{Description}\\\midrule
 	HIP	& int & This is the HIP identificator for the star. Used for reference to the main star catalogue.\\\midrule
 	SAO	& int & This is the SAO identificator for the star.\\\midrule
-	HD	& int & This is the HD identificator for the star.\\\bottomrule
+	HD	& int & This is the HD identificator for the star.\\\midrule
+	HR	& int & This is the HR identificator for the star.\\\bottomrule
 \end{longtabu}
 
 

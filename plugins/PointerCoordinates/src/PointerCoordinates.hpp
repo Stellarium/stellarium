@@ -79,7 +79,8 @@ public:
 		Ecliptic,
 		EclipticJ2000,
 		AltAzi,
-		Galactic
+		Galactic,
+		Supergalactic
 	};
 
 
@@ -182,6 +183,8 @@ public slots:
 
 	void setCustomCoordinatesPlace(int x, int y);
 
+	void setFlagShowConstellation(bool b){flagShowConstellation=b;}
+	bool getFlagShowConstellation(void) const {return flagShowConstellation;}
 private:
 	PointerCoordinatesWindow* mainWindow;
 	QSettings* conf;
@@ -196,6 +199,7 @@ private:
 	bool flagShowCoordinates;
 	bool flagEnableAtStartup;
 	bool flagShowCoordinatesButton;
+	bool flagShowConstellation;
 	Vec3f textColor;
 	Vec3d coordinatesPoint;
 	int fontSize;

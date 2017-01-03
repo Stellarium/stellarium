@@ -1,6 +1,6 @@
 
 ########### install files ###############
-INSTALL(FILES ssystem.ini ssystem_1000comets.ini base_locations.bin.gz DejaVuSans.ttf default_config.ini DejaVuSansMono.ttf iso639-1.utf8 iso3166-1-alpha-2.utf8 countryCodes.dat constellations_boundaries.dat DESTINATION share/${PACKAGE}/data)
+INSTALL(FILES ssystem.ini ssystem_1000comets.ini base_locations.bin.gz DejaVuSans.ttf default_config.ini DejaVuSansMono.ttf iso639-1.utf8 iso3166.tab countryCodes.dat constellations_boundaries.dat constellations_spans.dat DESTINATION share/${PACKAGE}/data)
 
 ########### splash target ##############
 ADD_CUSTOM_TARGET(splash ALL)
@@ -58,10 +58,6 @@ INSTALL(DIRECTORY shaders/ DESTINATION share/${PACKAGE}/data/shaders FILES_MATCH
 	PATTERN "s3d_*.vert" 
 	PATTERN "s3d_*.geom" 
 	PATTERN "s3d_*.frag")
-# install Scenery3D docs for Windows
-IF(WIN32)
-	INSTALL(FILES ../plugins/Scenery3d/doc/Scenery3d.pdf DESTINATION share/${PACKAGE}/data)
-ENDIF(WIN32)
 ENDIF()
 
 IF (BUILD_FOR_MAEMO)

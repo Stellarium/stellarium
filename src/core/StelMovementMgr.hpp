@@ -25,6 +25,7 @@
 #include "StelProjector.hpp"
 #include "StelObjectType.hpp"
 #include <QTimeLine>
+#include <QCursor>
 
 //! @class StelMovementMgr
 //! Manages the head movements and zoom operations.
@@ -36,20 +37,30 @@ class StelMovementMgr : public StelModule
 		   WRITE setEquatorialMount
 		   NOTIFY equatorialMountChanged)
 	Q_PROPERTY(bool tracking
-			   READ getFlagTracking
-			   WRITE setFlagTracking
-			   NOTIFY flagTrackingChanged)
+		   READ getFlagTracking
+		   WRITE setFlagTracking
+		   NOTIFY flagTrackingChanged)
 
 	//The targets of viewport offset animation
-	Q_PROPERTY(float viewportHorizontalOffsetTarget READ getViewportHorizontalOffsetTarget WRITE setViewportHorizontalOffsetTarget NOTIFY viewportHorizontalOffsetTargetChanged)
-	Q_PROPERTY(float viewportVerticalOffsetTarget READ getViewportVerticalOffsetTarget WRITE setViewportVerticalOffsetTarget NOTIFY viewportVerticalOffsetTargetChanged)
+	Q_PROPERTY(float viewportHorizontalOffsetTarget
+		   READ getViewportHorizontalOffsetTarget
+		   WRITE setViewportHorizontalOffsetTarget
+		   NOTIFY viewportHorizontalOffsetTargetChanged)
+	Q_PROPERTY(float viewportVerticalOffsetTarget
+		   READ getViewportVerticalOffsetTarget
+		   WRITE setViewportVerticalOffsetTarget
+		   NOTIFY viewportVerticalOffsetTargetChanged)
 
+	Q_PROPERTY(bool flagAutoZoomOutResetsDirection
+		   READ getFlagAutoZoomOutResetsDirection
+		   WRITE setFlagAutoZoomOutResetsDirection
+		   NOTIFY flagAutoZoomOutResetsDirectionChanged)
 public:
 
 	//! Possible mount modes defining the reference frame in which head movements occur.
-	//! MountGalactic is currently only available via scripting API: core.clear("galactic")
+	//! MountGalactic and MountSupergalactic is currently only available via scripting API: core.clear("galactic") and core.clear("supergalactic")
 	// TODO: add others: MountEcliptical, MountEq2000, MountEcliptical2000 and implement proper variants.
-	enum MountMode { MountAltAzimuthal, MountEquinoxEquatorial, MountGalactic};
+	enum MountMode { MountAltAzimuthal, MountEquinoxEquatorial, MountGalactic, MountSupergalactic};
 
 	//! Named constants for zoom operations.
 	enum ZoomingMode { ZoomOut=-1, ZoomNone=0, ZoomIn=1};
@@ -69,8 +80,12 @@ public:
 	//! - Sets the auto-zoom duration and mode.
 	virtual void init();
 
-	//! Update time-dependent things (does nothing).
-	virtual void update(double) {;}
+	//! Update time-dependent things (triggers a time dragging record if required)
+	virtual void update(double)
+	{
+		if (dragTimeMode)
+			addTimeDragPoint(QCursor::pos().x(), QCursor::pos().y());
+	}
 	//! Implement required draw function.  Does nothing.
 	virtual void draw(StelCore*) {;}
 	//! Handle keyboard events.
@@ -81,7 +96,7 @@ public:
 	virtual void handleMouseWheel(class QWheelEvent* event);
 	//! Handle mouse click events.
 	virtual void handleMouseClicks(class QMouseEvent* event);
-	// GZ: allow some keypress interaction by plugins.
+	// allow some keypress interaction by plugins.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	//! Handle pinch gesture.
 	virtual bool handlePinch(qreal scale, bool started);
@@ -89,11 +104,8 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to StelMovementMgr
 
-	//! Increment/decrement smoothly the vision field and position.
+	//! Increment/decrement smoothly the vision field and position. Called in StelCore.update().
 	void updateMotion(double deltaTime);
-
-	// These are hopefully temporary.
-	bool getHasDragged() const {return hasDragged;}
 
 	//! Get the zoom speed
 	// TODO: what are the units?
@@ -142,7 +154,7 @@ public slots:
 	float getAutoMoveDuration(void) const {return autoMoveDuration;}
 
 	//! Set whether auto zoom out will reset the viewing direction to the inital value
-	void setFlagAutoZoomOutResetsDirection(bool b) {flagAutoZoomOutResetsDirection = b;}
+	void setFlagAutoZoomOutResetsDirection(bool b) {if (flagAutoZoomOutResetsDirection != b) { flagAutoZoomOutResetsDirection = b; emit flagAutoZoomOutResetsDirectionChanged(b);}}
 	//! Get whether auto zoom out will reset the viewing direction to the inital value
 	bool getFlagAutoZoomOutResetsDirection(void) {return flagAutoZoomOutResetsDirection;}
 
@@ -206,7 +218,7 @@ public slots:
 	void setInitFov(double fov) {initFov=fov;}
 
 	//! Return the inital viewing direction in altazimuthal coordinates
-	const Vec3d& getInitViewingDirection() {return initViewPos;}
+	const Vec3d getInitViewingDirection() {return initViewPos;}
 	//! Sets the initial direction of view to the current altitude and azimuth.
 	//! Note: Updates the configuration file.
 	void setInitViewDirectionToCurrent();
@@ -240,16 +252,20 @@ public slots:
 	void zoomIn(bool);
 	void zoomOut(bool);
 
-	//! Look immediately towards East.
+	//! Look immediately towards East, but keep altitude. When looking to the zenith already, turn eastern horizon to screen bottom.
 	void lookEast(void);
-	//! Look immediately towards West.
+	//! Look immediately towards West, but keep altitude. When looking to the zenith already, turn western horizon to screen bottom.
 	void lookWest(void);
-	//! Look immediately towards North.
+	//! Look immediately towards North, but keep altitude. When looking to the zenith already, turn northern horizon to screen bottom.
 	void lookNorth(void);
-	//! Look immediately towards South.
+	//! Look immediately towards South, but keep altitude. When looking to the zenith already, turn southern horizon to screen bottom.
 	void lookSouth(void);
-	//! Look immediately towards Zenith.
+	//! Look immediately towards Zenith, turning southern horizon to screen bottom.
 	void lookZenith(void);
+	//! Look immediately towards North Celestial pole.
+	void lookTowardsNCP(void);
+	//! Look immediately towards South Celestial pole.
+	void lookTowardsSCP(void);
 
 	//! start animated move of the viewport offset.
 	//! @param offsetX new horizontal viewport offset, percent. clamped to [-50...50]
@@ -263,9 +279,6 @@ public slots:
 	//! Get current mount type defining the reference frame in which head movements occur.
 	MountMode getMountMode(void) const {return mountMode;}
 	bool getEquatorialMount(void) const {return mountMode == MountEquinoxEquatorial;}
-
-	void setDragTimeMode(bool b) {dragTimeMode=b;}
-	bool getDragTimeMode() const {return dragTimeMode;}
 
 	//! Function designed only for scripting context. Put the function into the startup.ssc of your planetarium setup,
 	//! this will avoid any unwanted tracking.
@@ -283,6 +296,8 @@ signals:
 	//! Emitted when the tracking property changes
 	void flagTrackingChanged(bool b);
 	void equatorialMountChanged(bool b);
+
+	void flagAutoZoomOutResetsDirectionChanged(bool b);
 
 	void viewportHorizontalOffsetTargetChanged(float f);
 	void viewportVerticalOffsetTargetChanged(float f);
@@ -303,15 +318,12 @@ private:
 	double initFov;    // The FOV at startup
 	double minFov;     // Minimum FOV in degrees
 	double maxFov;     // Maximum FOV in degrees
-
+	double deltaFov;   // requested change of FOV (degrees) used during zooming.
 	void setFov(double f)
 	{
-		currentFov = f;
-		if (f>maxFov)
-			currentFov = maxFov;
-		if (f<minFov)
-			currentFov = minFov;
+		currentFov=qMax(minFov, qMin(f, maxFov));
 	}
+	// immediately add deltaFov argument to FOV - does not change private var.
 	void changeFov(double deltaFov);
 
 	// Move (a bit) to selected/tracked object until move.coef reaches 1, or auto-follow (track) selected object.
@@ -319,7 +331,7 @@ private:
 	void updateVisionVector(double deltaTime);
 	void updateAutoZoom(double deltaTime); // Update autoZoom if activated
 
-	//! Make the first screen position correspond to the second (useful for mouse dragging)
+	//! Make the first screen position correspond to the second (useful for mouse dragging and also time dragging.)
 	void dragView(int x1, int y1, int x2, int y2);
 
 	StelCore* core;          // The core on which the movement are applied
@@ -369,7 +381,7 @@ private:
 	bool flagAutoMove;       // Define if automove is on or off
 	ZoomingMode zoomingMode;
 
-	double deltaFov,deltaAlt,deltaAz; // View movement
+	double deltaAlt,deltaAz; // View movement
 
 	bool flagManualZoom;     // Define whether auto zoom can go further
 	float autoMoveDuration; // Duration of movement for the auto move to a selected object in seconds
@@ -378,7 +390,7 @@ private:
 	bool isDragging, hasDragged;
 	int previousX, previousY;
 
-	// Contains the last N real time / JD times pairs associated with the last N mouse move events
+	// Contains the last N real time / JD times pairs associated with the last N mouse move events at screen coordinates x/y
 	struct DragHistoryEntry
 	{
 		double runTime;
@@ -386,13 +398,12 @@ private:
 		int x;
 		int y;
 	};
-
-	QList<DragHistoryEntry> timeDragHistory;
+	QList<DragHistoryEntry> timeDragHistory; // list of max 3 entries.
 	void addTimeDragPoint(int x, int y);
 	float beforeTimeDragTimeRate;
 
 	// Time mouse control
-	bool dragTimeMode; // true during mouse time motion.
+	bool dragTimeMode; // Internal flag, true during mouse time motion. This is set true when mouse is moving with ctrl pressed. Set false when releasing ctrl.
 
 	//! @internal
 	//! Store data for auto-zoom.

@@ -123,7 +123,6 @@ public:
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=true) const;
 
 	virtual QStringList listAllObjects(bool inEnglish) const;
-	virtual QStringList listAllObjectsByType(const QString&, bool) const { return QStringList(); }
 
 	virtual QString getName() const { return "Exoplanets"; }
 
@@ -213,6 +212,13 @@ public slots:
 	//! Get status to display of markers of exoplanetary systems
 	//! @return true if it's visible
 	bool getFlagShowExoplanets(void) { return flagShowExoplanets; }
+
+	//! Enable/disable display of designations of exoplanetary systems
+	//! @param b boolean flag
+	void setFlagShowExoplanetsDesignations(bool b);
+	//! Get status to display of designations of exoplanetary systems
+	//! @return true if it's visible
+	bool getFlagShowExoplanetsDesignations(void);
 
 	//! Define whether the button toggling exoplanets should be visible
 	void setFlagShowExoplanetsButton(bool b);

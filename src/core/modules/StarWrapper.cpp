@@ -106,11 +106,12 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			oss << "<h2>";
 
 		const QString commonNameI18 = StarMgr::getCommonName(s->getHip());
+		const QString additionalNameI18 = StarMgr::getAdditionalNames(s->getHip());
 		const QString sciName = StarMgr::getSciName(s->getHip());
 		const QString addSciName = StarMgr::getSciAdditionalName(s->getHip());
 		const QString varSciName = StarMgr::getGcvsName(s->getHip());
 		const QString wdsSciName = StarMgr::getWdsName(s->getHip());
-		const QString crossIndexData = StarMgr::getCrossIndexDesignations(s->getHip());
+		const QString crossIndexData = StarMgr::getCrossIdentificationDesignations(s->getHip());
 		QStringList designations;
 		if (!sciName.isEmpty())
 			designations.append(sciName);
@@ -139,6 +140,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		{
 			if (!commonNameI18.isEmpty())
 				oss << commonNameI18;
+
+			if (!additionalNameI18.isEmpty())
+				oss << " (" << additionalNameI18 << ")";
 
 			if (!commonNameI18.isEmpty() && !designationsList.isEmpty() && flags&CatalogNumber)
 				oss << "<br>";

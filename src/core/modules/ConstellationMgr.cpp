@@ -51,8 +51,10 @@ using namespace std;
 // constructor which loads all data from appropriate files
 ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 	: hipStarMgr(_hip_stars),
+	  isolateSelected(false),
+	  constellationPickEnabled(false),
 	  constellationDisplayStyle(ConstellationMgr::constellationsTranslated),
-	  artFadeDuration(1.),
+	  artFadeDuration(2.),
 	  artIntensity(0),
 	  artIntensityMinimumFov(1.0),
 	  artIntensityMaximumFov(2.0),
@@ -64,8 +66,6 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 {
 	setObjectName("ConstellationMgr");
 	Q_ASSERT(hipStarMgr);
-	isolateSelected = false;
-	constellationPickEnabled = false;
 }
 
 ConstellationMgr::~ConstellationMgr()
@@ -134,7 +134,7 @@ void ConstellationMgr::init()
 
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);
-	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), 
+	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
 			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
@@ -145,7 +145,8 @@ void ConstellationMgr::init()
 	addAction("actionShow_Constellation_Art", displayGroup, N_("Constellation art"), "artDisplayed", "R");
 	addAction("actionShow_Constellation_Labels", displayGroup, N_("Constellation labels"), "namesDisplayed", "V");
 	addAction("actionShow_Constellation_Boundaries", displayGroup, N_("Constellation boundaries"), "boundariesDisplayed", "B");
-	addAction("actionShow_Constellation_Isolated", displayGroup, N_("Constellation selection isolated"), "isolateSelected"); // no shortcut
+	addAction("actionShow_Constellation_Isolated", displayGroup, N_("Select single constellation"), "isolateSelected"); // no shortcut, sync with GUI
+	addAction("actionShow_Constellation_Deselect", displayGroup, N_("Remove selection of constellations"), this, "deselectConstellations()", "W");
 }
 
 /*************************************************************************
@@ -195,24 +196,28 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 	updateI18n();
 
 	// load constellation boundaries
-	// First try loading constellation boundaries from sky culture. You may inhibit borders with an empty file.
-	fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellations_boundaries.dat");
-	bool existBoundaries = false;
-	if (fic.isEmpty())
+	StelApp *app = &StelApp::getInstance();
+	int idx = app->getSkyCultureMgr().getCurrentSkyCultureBoundariesIdx();
+	if (idx>=0)
 	{
-		qWarning() << "No separate constellation boundaries file in sky culture dir" << skyCultureDir << "- Using generic IAU boundaries.";
-		// OK, Second try load generic constellation boundaries
-		fic = StelFileMgr::findFile("data/constellations_boundaries.dat");
-		if (fic.isEmpty())
-			qWarning() << "ERROR loading main constellation boundaries file: " << fic;
+		// OK, the current sky culture has boundaries!
+		if (idx==1)
+		{
+			// boundaries = own
+			fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellations_boundaries.dat");
+		}
 		else
-			existBoundaries = true;
-	}
-	else
-		existBoundaries = true;
+		{
+			// boundaries = generic
+			fic = StelFileMgr::findFile("data/constellations_boundaries.dat");
+		}
 
-	if (existBoundaries)
-		loadBoundaries(fic);
+		if (fic.isEmpty())
+			qWarning() << "ERROR loading constellation boundaries file: " << fic;
+		else
+			loadBoundaries(fic);
+
+	}
 
 	lastLoadedSkyCulture = skyCultureDir;
 }
@@ -246,17 +251,19 @@ void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction a
 	}
 	else
 	{
-		const QList<StelObjectP> newSelectedStar = omgr->getSelectedObject("Star");
-		if (!newSelectedStar.empty())
+		QList<StelObjectP> newSelectedObject;
+		if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesIdx()==0) // generic IAU boundaries
+			newSelectedObject = omgr->getSelectedObject();
+		else
+			newSelectedObject = omgr->getSelectedObject("Star");
+
+		if (!newSelectedObject.empty())
 		{
-//			if (!added)
-//				setSelected(NULL);
-			setSelected(newSelectedStar[0].data());
+			setSelected(newSelectedObject[0].data());
 		}
 		else
 		{
-//			if (!added)
-				setSelected(NULL);
+			setSelected(NULL);
 		}
 	}
 }
@@ -353,10 +360,9 @@ void ConstellationMgr::setConstellationDisplayStyle(ConstellationDisplayStyle st
 	}
 }
 
-QString ConstellationMgr::getConstellationDisplayStyleString()
+QString ConstellationMgr::getConstellationDisplayStyleString(ConstellationDisplayStyle style)
 {
-	ConstellationDisplayStyle displayStyle = getConstellationDisplayStyle();
-	return (displayStyle == constellationsAbbreviated ? "abbreviated" : (displayStyle == constellationsNative ? "native" : "translated"));
+	return (style == constellationsAbbreviated ? "abbreviated" : (style == constellationsNative ? "native" : "translated"));
 }
 
 ConstellationMgr::ConstellationDisplayStyle ConstellationMgr::getConstellationDisplayStyle()
@@ -418,6 +424,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		if(cons->read(record, hipStarMgr))
 		{
 			cons->artFader.setMaxValue(artIntensity);
+			cons->artFader.setDuration((int) (artFadeDuration * 1000.f));
 			cons->setFlagArt(artDisplayed);
 			cons->setFlagBoundaries(boundariesDisplayed);
 			cons->setFlagLines(linesDisplayed);
@@ -1402,4 +1409,31 @@ QStringList ConstellationMgr::listAllObjects(bool inEnglish) const
 		}
 	}
 	return result;
+}
+
+void ConstellationMgr::setSelected(const StelObject *s)
+{
+	if (!s)
+		setSelectedConst(NULL);
+	else
+	{
+		if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesIdx()==0) // generic IAU boundaries
+			setSelectedConst(isObjectIn(s));
+		else
+			setSelectedConst(isStarIn(s));
+	}
+}
+
+Constellation* ConstellationMgr::isObjectIn(const StelObject *s) const
+{
+	StelCore *core = StelApp::getInstance().getCore();
+	QString IAUConst = core->getIAUConstellation(s->getJ2000EquatorialPos(core));
+	vector < Constellation * >::const_iterator iter;
+	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	{
+		// Check if the object is in the constellation
+		if ((*iter)->getShortName().toUpper()==IAUConst.toUpper())
+			return (*iter);
+	}
+	return NULL;
 }

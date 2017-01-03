@@ -45,7 +45,6 @@ StelTextureSP Nebula::texPlanetaryNebula;
 StelTextureSP Nebula::texDiffuseNebula;
 StelTextureSP Nebula::texDarkNebula;
 StelTextureSP Nebula::texOpenClusterWithNebulosity;
-float Nebula::circleScale = 1.f;
 bool  Nebula::drawHintProportional = false;
 bool  Nebula::surfaceBrightnessUsage = false;
 bool  Nebula::designationUsage = false;
@@ -102,6 +101,7 @@ Nebula::Nebula()
 	, PGC_nb(0)
 	, UGC_nb(0)
 	, Ced_nb()
+	, nameI18("")
 	, mTypeString()
 	, bMag(99.)
 	, vMag(99.)
@@ -116,7 +116,6 @@ Nebula::Nebula()
 	, parallaxErr(0.)
 	, nType()	
 {
-	nameI18 = "";	
 }
 
 Nebula::~Nebula()
@@ -137,6 +136,9 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	if (!nameI18.isEmpty() && flags&Name)
 	{
 		oss << getNameI18n();
+		QString aliases = getI18nAliases();
+		if (!aliases.isEmpty())
+			oss << " (" << aliases << ")";
 	}
 
 	if (flags&CatalogNumber)
@@ -153,7 +155,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		if (B_nb > 0)
 			catIds << QString("B %1").arg(B_nb);
 		if (Sh2_nb > 0)
-			catIds << QString("Sh 2-%1").arg(Sh2_nb);
+			catIds << QString("SH 2-%1").arg(Sh2_nb);
 		if (VdB_nb > 0)
 			catIds << QString("VdB %1").arg(VdB_nb);
 		if (RCW_nb > 0)
@@ -272,33 +274,36 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 		if (oDistance>0.f)
 		{
-			QString dx, dy, du;
+			QString dx, dy;
+			float dc = 3262.f;
+			int ms = 1;
+			//TRANSLATORS: Unit of measure for distance - kiloparsecs
+			QString dupc = q_("kpc");
+			//TRANSLATORS: Unit of measure for distance - Light Years
+			QString duly = q_("ly");
+
+			if (nType==NebAGx || nType==NebGx || nType==NebRGx || nType==NebIGx || nType==NebQSO || nType==NebPossQSO)
+			{
+				dc = 3.262f;
+				ms = 3;
+				//TRANSLATORS: Unit of measure for distance - Megaparsecs
+				dupc = q_("Mpc");
+				//TRANSLATORS: Unit of measure for distance - Millions of Light Years
+				duly = q_("Mio. ly");
+			}
+
 			if (oDistanceErr>0.f)
 			{
 				dx = QString("%1%2%3").arg(QString::number(oDistance, 'f', 3)).arg(QChar(0x00B1)).arg(QString::number(oDistanceErr, 'f', 3));
-				dy = QString("%1%2%3").arg(QString::number(oDistance*3262, 'f', 1)).arg(QChar(0x00B1)).arg(QString::number(oDistanceErr*3262, 'f', 1));
+				dy = QString("%1%2%3").arg(QString::number(oDistance*dc, 'f', ms)).arg(QChar(0x00B1)).arg(QString::number(oDistanceErr*dc, 'f', ms));
 			}
 			else
 			{
 				dx = QString("%1").arg(QString::number(oDistance, 'f', 3));
-				dy = QString("%1").arg(QString::number(oDistance*3262, 'f', 1));
+				dy = QString("%1").arg(QString::number(oDistance*dc, 'f', ms));
 			}
 
-			if (nType==NebAGx || nType==NebGx || nType==NebRGx || nType==NebIGx || nType==NebQSO || nType==NebISM)
-			{
-				//TRANSLATORS: Unit of measure for distance - megaparsecs
-				du = q_("Mpc");
-			}
-			else
-			{
-				du = QString("%1 (%2 %3)")
-						//TRANSLATORS: Unit of measure for distance - kiloparsecs
-						.arg(q_("kpc"))
-						.arg(dy)
-						//TRANSLATORS: Unit of measure for distance - Light Years
-						.arg(q_("ly"));
-			}
-			oss << q_("Distance: %1 %2").arg(dx).arg(du) << "<br>";
+			oss << q_("Distance: %1 %2 (%3 %4)").arg(dx).arg(dupc).arg(dy).arg(duly) << "<br>";
 		}
 	}
 
@@ -334,6 +339,22 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	postProcessInfoString(str, flags);
 
 	return str;
+}
+
+QString Nebula::getEnglishAliases() const
+{
+	QString aliases = "";
+	if (englishAliases.size()!=0)
+		aliases = englishAliases.join(" - ");
+	return aliases;
+}
+
+QString Nebula::getI18nAliases() const
+{
+	QString aliases = "";
+	if (nameI18Aliases.size()!=0)
+		aliases = nameI18Aliases.join(" - ");
+	return aliases;
 }
 
 float Nebula::getVMagnitude(const StelCore* core) const
@@ -680,7 +701,7 @@ QString Nebula::getDSODesignation()
 	else if (catalogFilters&CatB && B_nb>0)
 		str = QString("B %1").arg(B_nb);
 	else if (catalogFilters&CatSh2 && Sh2_nb>0)
-		str = QString("Sh 2-%1").arg(Sh2_nb);
+		str = QString("SH 2-%1").arg(Sh2_nb);
 	else if (catalogFilters&CatVdB && VdB_nb>0)
 		str = QString("VdB %1").arg(VdB_nb);
 	else if (catalogFilters&CatRCW && RCW_nb>0)
@@ -813,6 +834,11 @@ QString Nebula::getMorphologicalTypeString(void) const
 QString Nebula::getMorphologicalTypeDescription(void) const
 {
 	QString m, r = "";
+
+	// Let's avoid showing a wrong morphological description for galaxies
+	// NOTE: Is required the morphological description for galaxies?
+	if (nType==NebGx || nType==NebAGx || nType==NebRGx || nType==NebIGx || nType==NebQSO || nType==NebPossQSO || nType==NebBLA || nType==NebBLL)
+		return QString();
 
 	QRegExp GlClRx("\\.*(I|II|III|IV|V|VI|VI|VII|VIII|IX|X|XI|XII)\\.*");
 	int idx = GlClRx.indexIn(mTypeString);

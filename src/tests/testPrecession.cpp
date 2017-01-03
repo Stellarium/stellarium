@@ -26,7 +26,7 @@
 #include "StelUtils.hpp"
 #include "VecMath.hpp"
 
-QTEST_MAIN(TestPrecession)
+QTEST_GUILESS_MAIN(TestPrecession)
 
 static const double arcSec2Rad=M_PI*2.0/(360.0*3600.0);
 static const double eps0=84381.406*arcSec2Rad;

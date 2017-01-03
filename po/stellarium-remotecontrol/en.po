@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-06-26 19:46+0700\n"
+"POT-Creation-Date: 2016-12-10 15:56+0700\n"
 "PO-Revision-Date: 2016-06-14 17:08+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: English <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-27 05:54+0000\n"
-"X-Generator: Launchpad (build 18115)\n"
+"X-Launchpad-Export-Date: 2016-12-11 05:00+0000\n"
+"X-Generator: Launchpad (build 18292)\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -157,6 +157,10 @@ msgstr ""
 msgid "Actions and scripts"
 msgstr ""
 
+#: index.html:76
+msgid "Pause"
+msgstr ""
+
 #: index.html:81 tablet7in.html:178
 msgid "Time jumps"
 msgstr ""
@@ -277,6 +281,10 @@ msgstr ""
 msgid "Down/Right"
 msgstr ""
 
+#: index.html:122 tablet7in.html:133
+msgid "FOV"
+msgstr ""
+
 #: index.html:140 tablet7in.html:224
 msgid "Enter search term. Use TAB to navigate results."
 msgstr ""
@@ -313,64 +321,16 @@ msgstr ""
 msgid "ZHR:"
 msgstr ""
 
-#: index.html:279 tablet7in.html:443
-msgid "M"
+#: index.html:339 tablet7in.html:508
+msgid "Bright Nebulae"
 msgstr ""
 
-#: index.html:282 tablet7in.html:446
-msgid "IC"
+#: index.html:340 tablet7in.html:509
+msgid "Dark Nebulae"
 msgstr ""
 
-#: index.html:285 tablet7in.html:449
-msgid "VdB"
-msgstr ""
-
-#: index.html:288 tablet7in.html:452
-msgid "LDN"
-msgstr ""
-
-#: index.html:291 tablet7in.html:455
-msgid "PGC"
-msgstr ""
-
-#: index.html:296 tablet7in.html:460
-msgid "C"
-msgstr ""
-
-#: index.html:299 tablet7in.html:463
-msgid "B"
-msgstr ""
-
-#: index.html:302 tablet7in.html:466
-msgid "RCW"
-msgstr ""
-
-#: index.html:305 tablet7in.html:469
-msgid "Cr"
-msgstr ""
-
-#: index.html:308 tablet7in.html:472
-msgid "UGC"
-msgstr ""
-
-#: index.html:313 tablet7in.html:477
-msgid "NGC"
-msgstr ""
-
-#: index.html:316 tablet7in.html:480
-msgid "Sh 2"
-msgstr ""
-
-#: index.html:319 tablet7in.html:483
-msgid "LBN"
-msgstr ""
-
-#: index.html:322 tablet7in.html:486
-msgid "Mel"
-msgstr ""
-
-#: index.html:325 tablet7in.html:489
-msgid "Ced"
+#: index.html:341 tablet7in.html:510
+msgid "Planetary Nebulae"
 msgstr ""
 
 #: index.html:347 tablet7in.html:519
@@ -440,6 +400,10 @@ msgstr ""
 
 #: tablet7in.html:96
 msgid "View towards horizon at Azimuth"
+msgstr ""
+
+#: tablet7in.html:118
+msgid "Vertical View offset"
 msgstr ""
 
 #: tablet7in.html:128
@@ -562,6 +526,10 @@ msgstr ""
 
 #: tablet7in.html:420
 msgid "Current Planet:"
+msgstr ""
+
+#: tablet7in.html:577
+msgid "Constellation selection isolated"
 msgstr ""
 
 #: tablet7in.html:615

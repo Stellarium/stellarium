@@ -38,7 +38,7 @@ QFrame#viewContent {
 }
 
 QFrame#bottomResizeFrame {
-background:rgb(48, 49, 52);
+        background:rgb(48, 49, 52);
 }
 
 /*QWidget QFrame {
@@ -230,7 +230,7 @@ QPushButton {
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(183, 184, 185), stop: 1 rgb(111, 113, 114));
 }
 
-QPushButton::Disabled {
+QPushButton::disabled {
         color: #f0f0f0;
 }
 
@@ -718,6 +718,11 @@ QComboBox {
 	padding-left: 3px;
 }
 
+QComboBox:disabled, QSpinBox:disabled {
+        color: #f0f0f0;
+}
+
+
 QProgressBar {
 	border: 1px solid rgba(102, 102, 128, 50%);
 	border-radius: 2px;
@@ -764,6 +769,14 @@ QHeaderView::section {
         font-size: 12px;
         padding-left: 4px;
         border: 1px solid rgb(108, 108, 108);
+}
+
+QHeaderView::up-arrow {
+        image: url(:/graphicGui/spinup.png);
+}
+
+QHeaderView::down-arrow {
+        image: url(:/graphicGui/spindown.png);
 }
 
 #configurationDialogForm QPushButton#screenshotBrowseButton, QPushButton#pushButtonPickExecutablesDirectory {

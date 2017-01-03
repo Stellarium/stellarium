@@ -55,6 +55,7 @@ private slots:
 	void setHabitableEnabled(int checkState);
 	void setDisplayAtStartupEnabled(int checkState);
 	void setDisplayShowExoplanetsButton(int checkState);
+	void setDisplayShowExoplanetsDesignations(int checkState);
 	void updateStateReceiver(Exoplanets::UpdateState state);
         void updateCompleteReceiver();
 	void restoreDefaults(void);

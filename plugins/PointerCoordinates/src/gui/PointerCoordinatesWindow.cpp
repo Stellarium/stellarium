@@ -88,6 +88,9 @@ void PointerCoordinatesWindow::createDialogContent()
 	ui->coordinateSystemComboBox->setCurrentIndex(idx);
 	connect(ui->coordinateSystemComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setCoordinateSystem(int)));
 
+	ui->checkBoxConstellation->setChecked(coord->getFlagShowConstellation());
+	connect(ui->checkBoxConstellation, SIGNAL(toggled(bool)), coord, SLOT(setFlagShowConstellation(bool)));
+
 	connect(ui->spinBoxX, SIGNAL(valueChanged(int)), this, SLOT(setCustomCoordinatesPlace()));
 	connect(ui->spinBoxY, SIGNAL(valueChanged(int)), this, SLOT(setCustomCoordinatesPlace()));
 
@@ -200,6 +203,7 @@ void PointerCoordinatesWindow::populateCoordinateSystemsList()
 	csys->addItem(q_("Ecliptic Longitude/Latitude (J2000.0)"), "EclipticJ2000");
 	csys->addItem(q_("Altitude/Azimuth"), "AltAzi");
 	csys->addItem(q_("Galactic Longitude/Latitude"), "Galactic");
+	csys->addItem(q_("Supergalactic Longitude/Latitude"), "Supergalactic");
 
 	//Restore the selection
 	index = csys->findData(selectedSystemId, Qt::UserRole, Qt::MatchCaseSensitive);

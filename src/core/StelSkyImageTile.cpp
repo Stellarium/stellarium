@@ -44,6 +44,7 @@ void StelSkyImageTile::initCtor()
 	alphaBlend = false;
 	noTexture = false;
 	texFader = NULL;
+	birthJD = -1e10;
 }
 
 // Constructor
@@ -134,6 +135,13 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 	}
 
 	if (luminance>0 && luminance<limitLuminance)
+	{
+		// Schedule a deletion
+		scheduleChildsDeletion();
+		return;
+	}
+
+	if (birthJD>-1e10 && birthJD>core->getJD())
 	{
 		// Schedule a deletion
 		scheduleChildsDeletion();
@@ -454,6 +462,11 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 	else
 		noTexture = true;
 
+	if (map.contains("birthJD"))
+		birthJD = map.value("birthJD").toDouble();
+	else
+		birthJD = -1e10;
+
 	// This is a list of URLs to the child tiles or a list of already loaded map containing child information
 	// (in this later case, the StelSkyImageTile objects will be created later)
 	subTilesUrls = map.value("subTiles").toList();
@@ -506,13 +519,15 @@ QVariantMap StelSkyImageTile::toQVariantMap() const
 	if (!shortName.isEmpty())
 		res["shortName"] = shortName;
 	if (minResolution>0)
-		 res["minResolution"]=minResolution;
+		res["minResolution"]=minResolution;
 	if (luminance>0)
 		res["maxBrightness"]=StelApp::getInstance().getCore()->getSkyDrawer()->luminanceToSurfacebrightness(luminance);
 	if (alphaBlend)
 		res["alphaBlend"]=true;
 	if (noTexture==false)
 		res["imageUrl"]=absoluteImageURI;
+	if (birthJD>-1e10)
+		res["birthJD"]=birthJD;
 
 	// Polygons
 	// TODO

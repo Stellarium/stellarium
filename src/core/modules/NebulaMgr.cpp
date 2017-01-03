@@ -49,72 +49,70 @@
 #include <QRegExp>
 #include <QDir>
 
-void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c;}
-const Vec3f &NebulaMgr::getLabelsColor(void) const {return Nebula::labelColor;}
-void NebulaMgr::setCirclesColor(const Vec3f& c) {Nebula::circleColor = c;}
-const Vec3f &NebulaMgr::getCirclesColor(void) const {return Nebula::circleColor;}
-void NebulaMgr::setGalaxyColor(const Vec3f& c) {Nebula::galaxyColor = c;}
-const Vec3f &NebulaMgr::getGalaxyColor(void) const {return Nebula::galaxyColor;}
-void NebulaMgr::setRadioGalaxyColor(const Vec3f& c) {Nebula::radioGalaxyColor = c;}
-const Vec3f &NebulaMgr::getRadioGalaxyColor(void) const {return Nebula::radioGalaxyColor;}
-void NebulaMgr::setActiveGalaxyColor(const Vec3f& c) {Nebula::activeGalaxyColor = c;}
-const Vec3f &NebulaMgr::getActiveGalaxyColor(void) const {return Nebula::activeGalaxyColor;}
-void NebulaMgr::setInteractingGalaxyColor(const Vec3f& c) {Nebula::interactingGalaxyColor = c;}
-const Vec3f &NebulaMgr::getInteractingGalaxyColor(void) const {return Nebula::interactingGalaxyColor;}
-void NebulaMgr::setQuasarColor(const Vec3f& c) {Nebula::quasarColor = c;}
-const Vec3f &NebulaMgr::getQuasarColor(void) const {return Nebula::quasarColor;}
-void NebulaMgr::setBrightNebulaColor(const Vec3f& c) {Nebula::nebulaColor = c;}
-const Vec3f &NebulaMgr::getBrightNebulaColor(void) const {return Nebula::nebulaColor;}
-void NebulaMgr::setNebulaColor(const Vec3f& c) {Nebula::nebulaColor = c;}
-const Vec3f &NebulaMgr::getNebulaColor(void) const {return Nebula::nebulaColor;}
-void NebulaMgr::setPlanetaryNebulaColor(const Vec3f& c) {Nebula::planetaryNebulaColor = c;}
-const Vec3f &NebulaMgr::getPlanetaryNebulaColor(void) const {return Nebula::planetaryNebulaColor;}
-void NebulaMgr::setReflectionNebulaColor(const Vec3f& c) {Nebula::reflectionNebulaColor = c;}
-const Vec3f &NebulaMgr::getReflectionNebulaColor(void) const {return Nebula::reflectionNebulaColor;}
-void NebulaMgr::setBipolarNebulaColor(const Vec3f& c) {Nebula::bipolarNebulaColor = c;}
-const Vec3f &NebulaMgr::getBipolarNebulaColor(void) const {return Nebula::bipolarNebulaColor;}
-void NebulaMgr::setEmissionNebulaColor(const Vec3f& c) {Nebula::emissionNebulaColor = c;}
-const Vec3f &NebulaMgr::getEmissionNebulaColor(void) const {return Nebula::emissionNebulaColor;}
-void NebulaMgr::setDarkNebulaColor(const Vec3f& c) {Nebula::darkNebulaColor= c;}
-const Vec3f &NebulaMgr::getDarkNebulaColor(void) const {return Nebula::darkNebulaColor;}
-void NebulaMgr::setHydrogenRegionColor(const Vec3f& c) {Nebula::hydrogenRegionColor= c;}
-const Vec3f &NebulaMgr::getHydrogenRegionColor(void) const {return Nebula::hydrogenRegionColor;}
-void NebulaMgr::setSupernovaRemnantColor(const Vec3f& c) {Nebula::supernovaRemnantColor = c;}
-const Vec3f &NebulaMgr::getSupernovaRemnantColor(void) const {return Nebula::supernovaRemnantColor;}
-void NebulaMgr::setInterstellarMatterColor(const Vec3f& c) {Nebula::interstellarMatterColor = c;}
-const Vec3f &NebulaMgr::getInterstellarMatterColor(void) const {return Nebula::interstellarMatterColor;}
-void NebulaMgr::setClusterWithNebulosityColor(const Vec3f& c) {Nebula::clusterWithNebulosityColor= c;}
-const Vec3f &NebulaMgr::getClusterWithNebulosityColor(void) const {return Nebula::clusterWithNebulosityColor;}
-void NebulaMgr::setClusterColor(const Vec3f& c) {Nebula::clusterColor= c;}
-const Vec3f &NebulaMgr::getClusterColor(void) const {return Nebula::clusterColor;}
-void NebulaMgr::setOpenClusterColor(const Vec3f& c) {Nebula::openClusterColor = c;}
-const Vec3f &NebulaMgr::getOpenClusterColor(void) const {return Nebula::openClusterColor;}
-void NebulaMgr::setGlobularClusterColor(const Vec3f& c) {Nebula::globularClusterColor = c;}
-const Vec3f &NebulaMgr::getGlobularClusterColor(void) const {return Nebula::globularClusterColor;}
-void NebulaMgr::setStellarAssociationColor(const Vec3f& c) {Nebula::stellarAssociationColor = c;}
-const Vec3f &NebulaMgr::getStellarAssociationColor(void) const {return Nebula::stellarAssociationColor;}
-void NebulaMgr::setStarCloudColor(const Vec3f& c) {Nebula::starCloudColor = c;}
-const Vec3f &NebulaMgr::getStarCloudColor(void) const {return Nebula::starCloudColor;}
-void NebulaMgr::setEmissionObjectColor(const Vec3f& c) {Nebula::emissionObjectColor = c;}
-const Vec3f &NebulaMgr::getEmissionObjectColor(void) const {return Nebula::emissionObjectColor;}
-void NebulaMgr::setBlLacObjectColor(const Vec3f& c) {Nebula::blLacObjectColor = c;}
-const Vec3f &NebulaMgr::getBlLacObjectColor(void) const {return Nebula::blLacObjectColor;}
-void NebulaMgr::setBlazarColor(const Vec3f& c) {Nebula::blazarColor = c;}
-const Vec3f &NebulaMgr::getBlazarColor(void) const {return Nebula::blazarColor;}
-void NebulaMgr::setMolecularCloudColor(const Vec3f& c) {Nebula::molecularCloudColor = c;}
-const Vec3f &NebulaMgr::getMolecularCloudColor(void) const {return Nebula::molecularCloudColor;}
-void NebulaMgr::setYoungStellarObjectColor(const Vec3f& c) {Nebula::youngStellarObjectColor = c;}
-const Vec3f &NebulaMgr::getYoungStellarObjectColor(void) const {return Nebula::youngStellarObjectColor;}
-void NebulaMgr::setPossibleQuasarColor(const Vec3f& c) {Nebula::possibleQuasarColor = c;}
-const Vec3f &NebulaMgr::getPossibleQuasarColor(void) const {return Nebula::possibleQuasarColor;}
-void NebulaMgr::setPossiblePlanetaryNebulaColor(const Vec3f& c) {Nebula::possiblePlanetaryNebulaColor = c;}
-const Vec3f &NebulaMgr::getPossiblePlanetaryNebulaColor(void) const {return Nebula::possiblePlanetaryNebulaColor;}
-void NebulaMgr::setProtoplanetaryNebulaColor(const Vec3f& c) {Nebula::protoplanetaryNebulaColor = c;}
-const Vec3f &NebulaMgr::getProtoplanetaryNebulaColor(void) const {return Nebula::protoplanetaryNebulaColor;}
-void NebulaMgr::setStarColor(const Vec3f& c) {Nebula::starColor = c;}
-const Vec3f &NebulaMgr::getStarColor(void) const {return Nebula::starColor;}
-void NebulaMgr::setCircleScale(float scale) {Nebula::circleScale = scale;}
-float NebulaMgr::getCircleScale(void) const {return Nebula::circleScale;}
+void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c; emit labelsColorChanged(c);}
+const Vec3f NebulaMgr::getLabelsColor(void) const {return Nebula::labelColor;}
+void NebulaMgr::setCirclesColor(const Vec3f& c) {Nebula::circleColor = c; emit circlesColorChanged(c); }
+const Vec3f NebulaMgr::getCirclesColor(void) const {return Nebula::circleColor;}
+void NebulaMgr::setGalaxyColor(const Vec3f& c) {Nebula::galaxyColor = c; emit galaxiesColorChanged(c); }
+const Vec3f NebulaMgr::getGalaxyColor(void) const {return Nebula::galaxyColor;}
+void NebulaMgr::setRadioGalaxyColor(const Vec3f& c) {Nebula::radioGalaxyColor = c; emit radioGalaxiesColorChanged(c); }
+const Vec3f NebulaMgr::getRadioGalaxyColor(void) const {return Nebula::radioGalaxyColor;}
+void NebulaMgr::setActiveGalaxyColor(const Vec3f& c) {Nebula::activeGalaxyColor = c; emit activeGalaxiesColorChanged(c); }
+const Vec3f NebulaMgr::getActiveGalaxyColor(void) const {return Nebula::activeGalaxyColor;}
+void NebulaMgr::setInteractingGalaxyColor(const Vec3f& c) {Nebula::interactingGalaxyColor = c; emit interactingGalaxiesColorChanged(c); }
+const Vec3f NebulaMgr::getInteractingGalaxyColor(void) const {return Nebula::interactingGalaxyColor;}
+void NebulaMgr::setQuasarColor(const Vec3f& c) {Nebula::quasarColor = c; emit quasarsColorChanged(c); }
+const Vec3f NebulaMgr::getQuasarColor(void) const {return Nebula::quasarColor;}
+void NebulaMgr::setBrightNebulaColor(const Vec3f& c) {Nebula::nebulaColor = c; emit nebulaeColorChanged(c); }
+const Vec3f NebulaMgr::getBrightNebulaColor(void) const {return Nebula::nebulaColor;}
+void NebulaMgr::setNebulaColor(const Vec3f& c) {Nebula::nebulaColor = c; emit nebulaeColorChanged(c); }
+const Vec3f NebulaMgr::getNebulaColor(void) const {return Nebula::nebulaColor;}
+void NebulaMgr::setPlanetaryNebulaColor(const Vec3f& c) {Nebula::planetaryNebulaColor = c; emit planetaryNebulaeColorChanged(c);}
+const Vec3f NebulaMgr::getPlanetaryNebulaColor(void) const {return Nebula::planetaryNebulaColor;}
+void NebulaMgr::setReflectionNebulaColor(const Vec3f& c) {Nebula::reflectionNebulaColor = c; emit reflectionNebulaeColorChanged(c);}
+const Vec3f NebulaMgr::getReflectionNebulaColor(void) const {return Nebula::reflectionNebulaColor;}
+void NebulaMgr::setBipolarNebulaColor(const Vec3f& c) {Nebula::bipolarNebulaColor = c; emit bipolarNebulaeColorChanged(c);}
+const Vec3f NebulaMgr::getBipolarNebulaColor(void) const {return Nebula::bipolarNebulaColor;}
+void NebulaMgr::setEmissionNebulaColor(const Vec3f& c) {Nebula::emissionNebulaColor = c; emit emissionNebulaeColorChanged(c);}
+const Vec3f NebulaMgr::getEmissionNebulaColor(void) const {return Nebula::emissionNebulaColor;}
+void NebulaMgr::setDarkNebulaColor(const Vec3f& c) {Nebula::darkNebulaColor= c; emit darkNebulaeColorChanged(c);}
+const Vec3f NebulaMgr::getDarkNebulaColor(void) const {return Nebula::darkNebulaColor;}
+void NebulaMgr::setHydrogenRegionColor(const Vec3f& c) {Nebula::hydrogenRegionColor= c; emit hydrogenRegionsColorChanged(c);}
+const Vec3f NebulaMgr::getHydrogenRegionColor(void) const {return Nebula::hydrogenRegionColor;}
+void NebulaMgr::setSupernovaRemnantColor(const Vec3f& c) {Nebula::supernovaRemnantColor = c; emit supernovaRemnantsColorChanged(c);}
+const Vec3f NebulaMgr::getSupernovaRemnantColor(void) const {return Nebula::supernovaRemnantColor;}
+void NebulaMgr::setInterstellarMatterColor(const Vec3f& c) {Nebula::interstellarMatterColor = c; emit interstellarMatterColorChanged(c);}
+const Vec3f NebulaMgr::getInterstellarMatterColor(void) const {return Nebula::interstellarMatterColor;}
+void NebulaMgr::setClusterWithNebulosityColor(const Vec3f& c) {Nebula::clusterWithNebulosityColor= c; emit clusterWithNebulosityColorChanged(c);}
+const Vec3f NebulaMgr::getClusterWithNebulosityColor(void) const {return Nebula::clusterWithNebulosityColor;}
+void NebulaMgr::setClusterColor(const Vec3f& c) {Nebula::clusterColor= c; emit clustersColorChanged(c);}
+const Vec3f NebulaMgr::getClusterColor(void) const {return Nebula::clusterColor;}
+void NebulaMgr::setOpenClusterColor(const Vec3f& c) {Nebula::openClusterColor = c; emit openClustersColorChanged(c);}
+const Vec3f NebulaMgr::getOpenClusterColor(void) const {return Nebula::openClusterColor;}
+void NebulaMgr::setGlobularClusterColor(const Vec3f& c) {Nebula::globularClusterColor = c; emit globularClustersColorChanged(c);}
+const Vec3f NebulaMgr::getGlobularClusterColor(void) const {return Nebula::globularClusterColor;}
+void NebulaMgr::setStellarAssociationColor(const Vec3f& c) {Nebula::stellarAssociationColor = c; emit stellarAssociationsColorChanged(c);}
+const Vec3f NebulaMgr::getStellarAssociationColor(void) const {return Nebula::stellarAssociationColor;}
+void NebulaMgr::setStarCloudColor(const Vec3f& c) {Nebula::starCloudColor = c; emit starCloudsColorChanged(c);}
+const Vec3f NebulaMgr::getStarCloudColor(void) const {return Nebula::starCloudColor;}
+void NebulaMgr::setEmissionObjectColor(const Vec3f& c) {Nebula::emissionObjectColor = c; emit emissionObjectsColorChanged(c);}
+const Vec3f NebulaMgr::getEmissionObjectColor(void) const {return Nebula::emissionObjectColor;}
+void NebulaMgr::setBlLacObjectColor(const Vec3f& c) {Nebula::blLacObjectColor = c; emit blLacObjectsColorChanged(c);}
+const Vec3f NebulaMgr::getBlLacObjectColor(void) const {return Nebula::blLacObjectColor;}
+void NebulaMgr::setBlazarColor(const Vec3f& c) {Nebula::blazarColor = c; emit blazarsColorChanged(c);}
+const Vec3f NebulaMgr::getBlazarColor(void) const {return Nebula::blazarColor;}
+void NebulaMgr::setMolecularCloudColor(const Vec3f& c) {Nebula::molecularCloudColor = c; emit molecularCloudsColorChanged(c);}
+const Vec3f NebulaMgr::getMolecularCloudColor(void) const {return Nebula::molecularCloudColor;}
+void NebulaMgr::setYoungStellarObjectColor(const Vec3f& c) {Nebula::youngStellarObjectColor = c; emit youngStellarObjectsColorChanged(c);}
+const Vec3f NebulaMgr::getYoungStellarObjectColor(void) const {return Nebula::youngStellarObjectColor;}
+void NebulaMgr::setPossibleQuasarColor(const Vec3f& c) {Nebula::possibleQuasarColor = c; emit possibleQuasarsColorChanged(c);}
+const Vec3f NebulaMgr::getPossibleQuasarColor(void) const {return Nebula::possibleQuasarColor;}
+void NebulaMgr::setPossiblePlanetaryNebulaColor(const Vec3f& c) {Nebula::possiblePlanetaryNebulaColor = c; emit possiblePlanetaryNebulaeColorChanged(c);}
+const Vec3f NebulaMgr::getPossiblePlanetaryNebulaColor(void) const {return Nebula::possiblePlanetaryNebulaColor;}
+void NebulaMgr::setProtoplanetaryNebulaColor(const Vec3f& c) {Nebula::protoplanetaryNebulaColor = c; emit protoplanetaryNebulaeColorChanged(c);}
+const Vec3f NebulaMgr::getProtoplanetaryNebulaColor(void) const {return Nebula::protoplanetaryNebulaColor;}
+void NebulaMgr::setStarColor(const Vec3f& c) {Nebula::starColor = c; emit starsColorChanged(c);}
+const Vec3f NebulaMgr::getStarColor(void) const {return Nebula::starColor;}
 void NebulaMgr::setHintsProportional(const bool proportional) {if(Nebula::drawHintProportional!=proportional){ Nebula::drawHintProportional=proportional; emit hintsProportionalChanged(proportional);}}
 bool NebulaMgr::getHintsProportional(void) const {return Nebula::drawHintProportional;}
 void NebulaMgr::setDesignationUsage(const bool flag) {if(Nebula::designationUsage!=flag){ Nebula::designationUsage=flag; emit designationUsageChanged(flag);}}
@@ -173,7 +171,6 @@ void NebulaMgr::init()
 	setFlagHints(conf->value("astro/flag_nebula_name",false).toBool());
 	setHintsAmount(conf->value("astro/nebula_hints_amount", 3).toFloat());
 	setLabelsAmount(conf->value("astro/nebula_labels_amount", 3).toFloat());
-	setCircleScale(conf->value("astro/nebula_scale",1.0f).toFloat());	
 	setHintsProportional(conf->value("astro/flag_nebula_hints_proportional", false).toBool());
 	setDesignationUsage(conf->value("gui/flag_dso_designation_usage", false).toBool());
 	setFlagSurfaceBrightnessUsage(conf->value("astro/flag_surface_brightness_usage", false).toBool());
@@ -362,6 +359,7 @@ void NebulaMgr::init()
 	
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));	
+	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(updateSkyCulture(const QString&)));
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
 	addAction("actionShow_Nebulas", N_("Display Options"), N_("Deep-sky objects"), "flagHintDisplayed", "D", "N");
@@ -386,7 +384,7 @@ struct DrawNebulaFuncObject
 		// filter out DSOs which are too dim to be seen (e.g. for bino observers)
 		if ((drawer->getFlagNebulaMagnitudeLimit()) && (n->vMag > drawer->getCustomNebulaMagnitudeLimit())) return;
 
-		if (n->majorAxisSize>angularSizeLimit || (checkMaxMagHints && n->vMag <= maxMagHints))
+		if (n->majorAxisSize>angularSizeLimit || n->majorAxisSize==0.f || (checkMaxMagHints && n->vMag <= maxMagHints))
 		{
 			float refmag_add=0; // value to adjust hints visibility threshold.
 			sPainter->getProjector()->project(n->XYZ,n->XY);
@@ -558,8 +556,8 @@ NebulaP NebulaMgr::search(const QString& name)
 void NebulaMgr::loadNebulaSet(const QString& setName)
 {
 	QString srcCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.txt");
-	QString dsoCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.dat");	
-	QString dsoNamesPath		= StelFileMgr::findFile("nebulae/" + setName + "/names.dat");
+	QString dsoCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.dat");
+
 
 	if (flagConverter)
 	{
@@ -570,14 +568,13 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 
 	}
 
-	if (dsoCatalogPath.isEmpty() || dsoNamesPath.isEmpty())
+	if (dsoCatalogPath.isEmpty())
 	{
-		qWarning() << "ERROR while loading deep-sky data set " << setName;
+		qWarning() << "ERROR while loading deep-sky catalog data set " << setName;
 		return;
 	}
 
-	loadDSOCatalog(dsoCatalogPath);	
-	loadDSONames(dsoNamesPath);
+	loadDSOCatalog(dsoCatalogPath);		
 }
 
 // Look for a nebulae by XYZ coords
@@ -832,7 +829,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			dist			= list.at(14).toFloat(); // distance (Mpc for galaxies, kpc for other objects)
 			distErr			= list.at(15).toFloat(); // distance error (Mpc for galaxies, kpc for other objects)
 			// -----------------------------------------------
-			// cross-index data
+			// cross-identification data
 			// -----------------------------------------------
 			NGC			= list.at(16).toInt();	 // NGC number
 			IC			= list.at(17).toInt();	 // IC number
@@ -890,12 +887,12 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			       << "RNE" << "HII" << "SNR" << "BN" << "EN" << "SA" << "SC" << "CL" << "IG"
 			       << "RG" << "AGX" << "QSO" << "ISM" << "EMO" << "GNE" << "RAD" << "LIN"
 			       << "BLL" << "BLA" << "MOC" << "YSO" << "Q?" << "PN?" << "*" << "SFR"
-			       << "IR" << "**" << "MUL" << "PPN";
+			       << "IR" << "**" << "MUL" << "PPN" << "GIG";
 
 			switch (oTypes.indexOf(oType.toUpper()))
 			{
 				case 0:
-				case 1:
+				case 1:				
 					nType = (unsigned int)Nebula::NebGx;
 					break;
 				case 2:
@@ -944,6 +941,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 					nType = (unsigned int)Nebula::NebCl;
 					break;
 				case 17:
+				case 38:
 					nType = (unsigned int)Nebula::NebIGx;
 					break;
 				case 18:
@@ -1014,6 +1012,8 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 	if (!in.open(QIODevice::ReadOnly))
 		return false;
 
+	// TODO: Let's begin use gzipped data
+	// QDataStream ins(StelUtils::uncompress(in.readAll()));
 	QDataStream ins(&in);
 	ins.setVersion(QDataStream::Qt_5_2);
 
@@ -1175,7 +1175,15 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 		if (e)
 		{
 			if (transRx.exactMatch(name))
-				e->setProperName(transRx.capturedTexts().at(1).trimmed());
+			{
+				QString propName = transRx.capturedTexts().at(1).trimmed();
+				QString currName = e->getEnglishName();
+				if (currName.isEmpty())
+					e->setProperName(propName);
+				else if (currName!=propName)
+					e->addNameAlias(propName);
+			}
+
 
 			readOk++;
 		}
@@ -1185,6 +1193,82 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 	dsoNameFile.close();
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "DSO name records successfully";
 	return true;
+}
+
+
+void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
+{
+	QString namesFile = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/dso_names.fab");
+
+	foreach (const NebulaP& n, dsoArray)
+		n->removeAllNames();
+
+	if (namesFile.isEmpty())
+	{
+		QString setName = "default";
+		QString dsoNamesPath = StelFileMgr::findFile("nebulae/" + setName + "/names.dat");
+		if (dsoNamesPath.isEmpty())
+		{
+			qWarning() << "ERROR while loading deep-sky names data set " << setName;
+			return;
+		}
+		loadDSONames(dsoNamesPath);
+	}
+	else
+	{
+		// Open file
+		QFile dsoNamesFile(namesFile);
+		if (!dsoNamesFile.open(QIODevice::ReadOnly | QIODevice::Text))
+		{
+			qDebug() << "Cannot open file" << QDir::toNativeSeparators(namesFile);
+			return;
+		}
+
+		// Now parse the file
+		// lines to ignore which start with a # or are empty
+		QRegExp commentRx("^(\\s*#.*|\\s*)$");
+
+		// lines which look like records - we use the RE to extract the fields
+		// which will be available in recRx.capturedTexts()
+		QRegExp recRx("^\\s*([\\w\\s]+)\\s*\\|_[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
+
+		QString record, dsoId, nativeName;
+		int totalRecords=0;
+		int readOk=0;
+		int lineNumber=0;
+		while (!dsoNamesFile.atEnd())
+		{
+			record = QString::fromUtf8(dsoNamesFile.readLine());
+			lineNumber++;
+
+			// Skip comments
+			if (commentRx.exactMatch(record))
+				continue;
+
+			totalRecords++;
+
+			if (!recRx.exactMatch(record))
+			{
+				qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in native deep-sky object names file" << QDir::toNativeSeparators(namesFile);
+			}
+			else
+			{
+				dsoId = recRx.capturedTexts().at(1).trimmed();
+				nativeName = recRx.capturedTexts().at(2).trimmed(); // Use translatable text
+				NebulaP e = search(dsoId);
+				QString currentName = e->getEnglishName();
+				if (currentName.isEmpty()) // Set native name of DSO
+					e->setProperName(nativeName);
+				else if (currentName!=nativeName) // Add traditional (well-known?) name of DSO as alias
+					e->addNameAlias(nativeName);
+				readOk++;
+			}
+		}
+		dsoNamesFile.close();
+		qDebug() << "Loaded" << readOk << "/" << totalRecords << "native names of deep-sky objects";
+	}
+
+	updateI18n();
 }
 
 void NebulaMgr::updateI18n()
@@ -1216,6 +1300,16 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 		QString objwcap = n->nameI18.toUpper();
 		if (objwcap==objw)
 			return qSharedPointerCast<StelObject>(n);
+	}
+
+	// Search by aliases of common names
+	foreach (const NebulaP& n, dsoArray)
+	{
+		foreach(QString objwcapa, n->nameI18Aliases)
+		{
+			if (objwcapa.toUpper()==objw)
+				return qSharedPointerCast<StelObject>(n);
+		}
 	}
 
 	// Search by IC numbers (possible formats are "IC466" or "IC 466")
@@ -1385,6 +1479,16 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 		QString objwcap = n->englishName.toUpper();
 		if (objwcap==objw)
 			return qSharedPointerCast<StelObject>(n);
+	}
+
+	// Search by aliases of common names
+	foreach (const NebulaP& n, dsoArray)
+	{
+		foreach(QString objwcapa, n->englishAliases)
+		{
+			if (objwcapa.toUpper()==objw)
+				return qSharedPointerCast<StelObject>(n);
+		}
 	}
 
 	// Search by IC numbers (possible formats are "IC466" or "IC 466")
@@ -1848,6 +1952,17 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		}
 	}
 
+	// Search by aliases of common names
+	foreach (const NebulaP& n, dsoArray)
+	{
+		QStringList nameList = inEnglish ? n->englishAliases : n->nameI18Aliases;
+		foreach(QString name, nameList)
+		{
+			if (matchObjectName(name, objPrefix, useStartOfWords))
+				result.append(name);
+		}
+	}
+
 	result.sort();
 	if (result.size() > maxNbItem)
 	{
@@ -1927,7 +2042,7 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 			foreach(const NebulaP& n, dsoArray)
 			{
 				if (n->Sh2_nb>0)
-					result << QString("Sh 2-%1").arg(n->Sh2_nb);
+					result << QString("SH 2-%1").arg(n->Sh2_nb);
 			}
 			break;
 		case 104: // Van den Bergh Catalogue
@@ -2039,7 +2154,7 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 					else if (n->B_nb>0)
 						result << QString("B %1").arg(n->B_nb);
 					else if (n->Sh2_nb>0)
-						result << QString("Sh 2-%1").arg(n->Sh2_nb);
+						result << QString("SH 2-%1").arg(n->Sh2_nb);
 					else if (n->VdB_nb>0)
 						result << QString("VdB %1").arg(n->VdB_nb);
 					else if (n->RCW_nb>0)

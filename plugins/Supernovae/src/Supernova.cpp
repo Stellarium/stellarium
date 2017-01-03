@@ -37,20 +37,23 @@
 #include <QList>
 
 Supernova::Supernova(const QVariantMap& map)
-		: initialized(false),
-		  designation(""),
-		  sntype(""),
-		  maxMagnitude(21.),
-		  peakJD(0.),
-		  snra(0.),
-		  snde(0.),
-		  note(""),
-		  distance(0.)
+	: initialized(false)
+	, designation("")
+	, sntype("")
+	, maxMagnitude(21.)
+	, peakJD(0.)
+	, snra(0.)
+	, snde(0.)
+	, note("")
+	, distance(0.)
 {
-	// return initialized if the mandatory fields are not present
-	if (!map.contains("designation"))
+	if (!map.contains("designation") || !map.contains("alpha") || !map.contains("delta"))
+	{
+		qWarning() << "Supernova: INVALID quasar!" << map.value("designation").toString();
+		qWarning() << "Supernova: Please, check your 'supernovae.json' catalog!";
 		return;
-		
+	}
+
 	designation  = map.value("designation").toString();
 	sntype = map.value("type").toString();
 	maxMagnitude = map.value("maxMagnitude").toFloat();
@@ -175,10 +178,13 @@ float Supernova::getVMagnitude(const StelCore* core) const
 				vmag = maxMagnitude + 0.05 * deltaJD;
 
 			if (deltaJD>30 && deltaJD<=80)
-				vmag = maxMagnitude + 0.013 * deltaJD + 1.5;
+				vmag = maxMagnitude + 0.013 * (deltaJD - 30) + 1.5;
 
-			if (deltaJD>80)
-				vmag = maxMagnitude + 0.05 * deltaJD + 2.15;
+			if (deltaJD>80 && deltaJD<=100)
+				vmag = maxMagnitude + 0.075 * (deltaJD - 80) + 2.15;
+
+			if (deltaJD>100)
+				vmag = maxMagnitude + 0.025 * (deltaJD - 100) + 3.65;
 
 		}
 		else
@@ -198,7 +204,7 @@ float Supernova::getVMagnitude(const StelCore* core) const
 				vmag = maxMagnitude + 0.1 * deltaJD;
 
 			if (deltaJD>25)
-				vmag = maxMagnitude + 0.016 * deltaJD + 2.5;
+				vmag = maxMagnitude + 0.016 * (deltaJD - 25) + 2.5;
 
 		}
 		else

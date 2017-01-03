@@ -29,6 +29,8 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "StelSkyDrawer.hpp"
+#include "StelTextureMgr.hpp"
+#include "StelFileMgr.hpp"
 #include "precession.h"
 
 #include <set>
@@ -59,6 +61,46 @@ private:
 	LinearFader fader;
 };
 
+//! @class SkyPoint
+//! Class which manages a point to display around the sky like the North Celestial Pole.
+class SkyPoint
+{
+public:
+	enum SKY_POINT_TYPE
+	{
+		CELESTIALPOLES_J2000,
+		CELESTIALPOLES_OF_DATE,
+		ZENITH_NADIR,
+		ECLIPTICPOLES_J2000,
+		ECLIPTICPOLES_OF_DATE,
+		GALACTICPOLES,
+		SUPERGALACTICPOLES,
+		EQUINOXES_J2000,
+		EQUINOXES_OF_DATE
+	};
+	// Create and precompute positions of a SkyGrid
+	SkyPoint(SKY_POINT_TYPE _point_type = CELESTIALPOLES_J2000);
+	virtual ~SkyPoint();
+	void draw(StelCore* core) const;
+	void setColor(const Vec3f& c) {color = c;}
+	const Vec3f& getColor() {return color;}
+	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
+	void setFadeDuration(float duration) {fader.setDuration((int)(duration*1000.f));}
+	void setDisplayed(const bool displayed){fader = displayed;}
+	bool isDisplayed(void) const {return fader;}
+	void setFontSize(double newSize);
+	//! Re-translates the label.
+	void updateLabel();
+private:
+	SKY_POINT_TYPE point_type;
+	Vec3f color;
+	StelCore::FrameType frameType;
+	LinearFader fader;
+	QFont font;
+	QString northernLabel, southernLabel;
+	StelTextureSP texCross;
+};
+
 
 //! @class SkyLine
 //! Class which manages a line to display around the sky like the ecliptic line.
@@ -76,6 +118,7 @@ public:
 		MERIDIAN,
 		HORIZON,
 		GALACTICEQUATOR,
+		SUPERGALACTICEQUATOR,
 		LONGITUDE,
 		PRIME_VERTICAL,
 		COLURE_1,
@@ -246,6 +289,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 				break;			
 			}
 			case StelCore::FrameGalactic:
+			case StelCore::FrameSupergalactic:
 			{
 				double raAngle = M_PI-d->raAngle;
 				lon = M_PI-lon;
@@ -341,10 +385,10 @@ void SkyGrid::draw(const StelCore* core) const
 	const double gridStepParallelRad = M_PI/180.*getClosestResolutionDMS(prj->getPixelPerRadAtCenter());
 	double gridStepMeridianRad;
 	if (northPoleInViewport || southPoleInViewport)
-		gridStepMeridianRad = (frameType==StelCore::FrameAltAz || frameType==StelCore::FrameGalactic) ? M_PI/180.* 10. : M_PI/180.* 15.;
+		gridStepMeridianRad = (frameType==StelCore::FrameAltAz || frameType==StelCore::FrameGalactic || frameType==StelCore::FrameSupergalactic) ? M_PI/180.* 10. : M_PI/180.* 15.;
 	else
 	{
-		const double closestResLon = (frameType==StelCore::FrameAltAz || frameType==StelCore::FrameGalactic) ? getClosestResolutionDMS(prj->getPixelPerRadAtCenter()*std::cos(lat2)) : getClosestResolutionHMS(prj->getPixelPerRadAtCenter()*std::cos(lat2));
+		const double closestResLon = (frameType==StelCore::FrameAltAz || frameType==StelCore::FrameGalactic || frameType==StelCore::FrameSupergalactic) ? getClosestResolutionDMS(prj->getPixelPerRadAtCenter()*std::cos(lat2)) : getClosestResolutionHMS(prj->getPixelPerRadAtCenter()*std::cos(lat2));
 		gridStepMeridianRad = M_PI/180.* ((northPoleInViewport || southPoleInViewport) ? 15. : closestResLon);
 	}
 
@@ -574,11 +618,10 @@ void SkyGrid::draw(const StelCore* core) const
 }
 
 
-SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : color(0.f, 0.f, 1.f)
+SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : line_type(_line_type), color(0.f, 0.f, 1.f)
 {
 	// Font size is 14
 	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
-	line_type = _line_type;
 
 	updateLabel();
 }
@@ -628,6 +671,10 @@ void SkyLine::updateLabel()
 		case GALACTICEQUATOR:
 			frameType = StelCore::FrameGalactic;
 			label = q_("Galactic Equator");
+			break;
+		case SUPERGALACTICEQUATOR:
+			frameType = StelCore::FrameSupergalactic;
+			label = q_("Supergalactic Equator");
 			break;
 		case LONGITUDE:
 			frameType = StelCore::FrameObservercentricEclipticJ2000;
@@ -839,6 +886,176 @@ void SkyLine::draw(StelCore *core) const
 
 }
 
+SkyPoint::SkyPoint(SKY_POINT_TYPE _point_type) : point_type(_point_type), color(0.f, 0.f, 1.f)
+{
+	// Font size is 14
+	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
+	texCross = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cross.png");
+	updateLabel();
+}
+
+SkyPoint::~SkyPoint()
+{
+	texCross.clear();
+}
+
+void SkyPoint::setFontSize(double newFontSize)
+{
+	font.setPixelSize(newFontSize);
+}
+
+void SkyPoint::updateLabel()
+{
+	switch (point_type)
+	{
+		case CELESTIALPOLES_J2000:
+		{
+			frameType = StelCore::FrameJ2000;
+			// TRANSLATORS: North Celestial Pole
+			northernLabel = q_("NCP");
+			// TRANSLATORS: South Celestial Pole
+			southernLabel = q_("SCP");
+			break;
+		}
+		case CELESTIALPOLES_OF_DATE:
+		{
+			frameType = StelCore::FrameEquinoxEqu;
+			// TRANSLATORS: North Celestial Pole
+			northernLabel = q_("NCP");
+			// TRANSLATORS: South Celestial Pole
+			southernLabel = q_("SCP");
+			break;
+		}
+		case ZENITH_NADIR:
+		{
+			frameType = StelCore::FrameAltAz;
+			// TRANSLATORS: Zenith
+			northernLabel = qc_("Z", "zenith");
+			// TRANSLATORS: Nadir
+			southernLabel = qc_("Z'", "nadir");
+			break;
+		}
+		case ECLIPTICPOLES_J2000:
+		{
+			frameType = StelCore::FrameObservercentricEclipticJ2000;
+			// TRANSLATORS: North Ecliptic Pole
+			northernLabel = q_("NEP");
+			// TRANSLATORS: South Ecliptic Pole
+			southernLabel = q_("SEP");
+			break;
+		}
+		case ECLIPTICPOLES_OF_DATE:
+		{
+			frameType = StelCore::FrameObservercentricEclipticOfDate;
+			// TRANSLATORS: North Ecliptic Pole
+			northernLabel = q_("NEP");
+			// TRANSLATORS: South Ecliptic Pole
+			southernLabel = q_("SEP");
+			break;
+		}
+		case GALACTICPOLES:
+		{
+			frameType = StelCore::FrameGalactic;
+			// TRANSLATORS: North Galactic Pole
+			northernLabel = q_("NGP");
+			// TRANSLATORS: South Galactic Pole
+			southernLabel = q_("SGP");
+			break;
+		}
+		case SUPERGALACTICPOLES:
+		{
+			frameType = StelCore::FrameSupergalactic;
+			// TRANSLATORS: North Supergalactic Pole
+			northernLabel = q_("NSGP");
+			// TRANSLATORS: South Supergalactic Pole
+			southernLabel = q_("SSGP");
+			break;
+		}
+		case EQUINOXES_J2000:
+		{
+			frameType = StelCore::FrameJ2000;
+			northernLabel = QChar(0x2648); // Vernal equinox
+			southernLabel = QChar(0x264E); // Autumnal equinox
+			break;
+		}
+		case EQUINOXES_OF_DATE:
+		{
+			frameType = StelCore::FrameEquinoxEqu;
+			northernLabel = QChar(0x2648); // Vernal equinox
+			southernLabel = QChar(0x264E); // Autumnal equinox
+			break;
+		}
+		default:
+			Q_ASSERT(0);
+	}
+}
+
+void SkyPoint::draw(StelCore *core) const
+{
+	if (!fader.getInterstate())
+		return;
+
+	StelProjectorP prj = core->getProjection(frameType, frameType!=StelCore::FrameAltAz ? StelCore::RefractionAuto : StelCore::RefractionOff);
+
+	// Initialize a painter and set openGL state
+	StelPainter sPainter(prj);
+	sPainter.setColor(color[0], color[1], color[2], fader.getInterstate());	
+	Vec4f textColor(color[0], color[1], color[2], 0);
+	textColor[3]=fader.getInterstate();
+
+	sPainter.setFont(font);
+	/////////////////////////////////////////////////
+	// Draw the point
+
+	texCross->bind();
+	float size = 0.00001*M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
+	float shift = 4.f + size/1.8f;
+
+	switch (point_type)
+	{
+		case CELESTIALPOLES_J2000:
+		case CELESTIALPOLES_OF_DATE:
+		case ZENITH_NADIR:
+		case ECLIPTICPOLES_J2000:
+		case ECLIPTICPOLES_OF_DATE:
+		case GALACTICPOLES:
+		case SUPERGALACTICPOLES:
+		{
+			// North Pole
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_ONE, GL_ONE);
+			sPainter.drawSprite2dMode(Vec3d(0,0,1), 5.f);
+			sPainter.drawText(Vec3d(0,0,1), northernLabel, 0, shift, shift, false);
+
+			// South Pole
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_ONE, GL_ONE);
+			sPainter.drawSprite2dMode(Vec3d(0,0,-1), 5.f);
+			sPainter.drawText(Vec3d(0,0,-1), southernLabel, 0, shift, shift, false);
+			break;
+		}
+		case EQUINOXES_J2000:
+		case EQUINOXES_OF_DATE:
+		{
+			// Vernal equinox
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_ONE, GL_ONE);
+			sPainter.drawSprite2dMode(Vec3d(1,0,0), 5.f);
+			sPainter.drawText(Vec3d(1,0,0), northernLabel, 0, shift, shift, false);
+
+			// Autumnal equinox
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_ONE, GL_ONE);
+			sPainter.drawSprite2dMode(Vec3d(-1,0,0), 5.f);
+			sPainter.drawText(Vec3d(-1,0,0), southernLabel, 0, shift, shift, false);
+			break;
+		}
+		default:
+			Q_ASSERT(0);
+	}
+}
+
+
 GridLinesMgr::GridLinesMgr()
 {
 	setObjectName("GridLinesMgr");
@@ -847,6 +1064,7 @@ GridLinesMgr::GridLinesMgr()
 	eclJ2000Grid = new SkyGrid(StelCore::FrameObservercentricEclipticJ2000);
 	eclGrid = new SkyGrid(StelCore::FrameObservercentricEclipticOfDate);
 	galacticGrid = new SkyGrid(StelCore::FrameGalactic);
+	supergalacticGrid = new SkyGrid(StelCore::FrameSupergalactic);
 	aziGrid = new SkyGrid(StelCore::FrameAltAz);
 	equatorLine = new SkyLine(SkyLine::EQUATOR_OF_DATE);
 	equatorJ2000Line = new SkyLine(SkyLine::EQUATOR_J2000);
@@ -857,12 +1075,22 @@ GridLinesMgr::GridLinesMgr()
 	meridianLine = new SkyLine(SkyLine::MERIDIAN);
 	horizonLine = new SkyLine(SkyLine::HORIZON);
 	galacticEquatorLine = new SkyLine(SkyLine::GALACTICEQUATOR);
+	supergalacticEquatorLine = new SkyLine(SkyLine::SUPERGALACTICEQUATOR);
 	longitudeLine = new SkyLine(SkyLine::LONGITUDE);
 	primeVerticalLine = new SkyLine(SkyLine::PRIME_VERTICAL);
 	colureLine_1 = new SkyLine(SkyLine::COLURE_1);
 	colureLine_2 = new SkyLine(SkyLine::COLURE_2);
 	circumpolarCircleN = new SkyLine(SkyLine::CIRCUMPOLARCIRCLE_N);
 	circumpolarCircleS = new SkyLine(SkyLine::CIRCUMPOLARCIRCLE_S);
+	celestialJ2000Poles = new SkyPoint(SkyPoint::CELESTIALPOLES_J2000);
+	celestialPoles = new SkyPoint(SkyPoint::CELESTIALPOLES_OF_DATE);
+	zenithNadir = new SkyPoint(SkyPoint::ZENITH_NADIR);
+	eclipticJ2000Poles = new SkyPoint(SkyPoint::ECLIPTICPOLES_J2000);
+	eclipticPoles = new SkyPoint(SkyPoint::ECLIPTICPOLES_OF_DATE);
+	galacticPoles = new SkyPoint(SkyPoint::GALACTICPOLES);
+	supergalacticPoles = new SkyPoint(SkyPoint::SUPERGALACTICPOLES);
+	equinoxJ2000Points = new SkyPoint(SkyPoint::EQUINOXES_J2000);
+	equinoxPoints = new SkyPoint(SkyPoint::EQUINOXES_OF_DATE);
 }
 
 GridLinesMgr::~GridLinesMgr()
@@ -872,6 +1100,7 @@ GridLinesMgr::~GridLinesMgr()
 	delete eclJ2000Grid;
 	delete eclGrid;
 	delete galacticGrid;
+	delete supergalacticGrid;
 	delete aziGrid;
 	delete equatorLine;
 	delete equatorJ2000Line;
@@ -882,12 +1111,22 @@ GridLinesMgr::~GridLinesMgr()
 	delete meridianLine;
 	delete horizonLine;
 	delete galacticEquatorLine;
+	delete supergalacticEquatorLine;
 	delete longitudeLine;
 	delete primeVerticalLine;
 	delete colureLine_1;
 	delete colureLine_2;
 	delete circumpolarCircleN;
 	delete circumpolarCircleS;
+	delete celestialJ2000Poles;
+	delete celestialPoles;
+	delete zenithNadir;
+	delete eclipticJ2000Poles;
+	delete eclipticPoles;
+	delete galacticPoles;
+	delete supergalacticPoles;
+	delete equinoxJ2000Points;
+	delete equinoxPoints;
 }
 
 /*************************************************************************
@@ -911,6 +1150,7 @@ void GridLinesMgr::init()
 	setFlagEclipticJ2000Grid(conf->value("viewing/flag_ecliptic_J2000_grid").toBool());
 	setFlagEclipticGrid(conf->value("viewing/flag_ecliptic_grid").toBool());
 	setFlagGalacticGrid(conf->value("viewing/flag_galactic_grid").toBool());
+	setFlagSupergalacticGrid(conf->value("viewing/flag_supergalactic_grid").toBool());
 	setFlagEquatorLine(conf->value("viewing/flag_equator_line").toBool());
 	setFlagEquatorJ2000Line(conf->value("viewing/flag_equator_J2000_line").toBool());
 	setFlagEclipticLine(conf->value("viewing/flag_ecliptic_line").toBool());
@@ -919,10 +1159,20 @@ void GridLinesMgr::init()
 	setFlagMeridianLine(conf->value("viewing/flag_meridian_line").toBool());
 	setFlagHorizonLine(conf->value("viewing/flag_horizon_line").toBool());
 	setFlagGalacticEquatorLine(conf->value("viewing/flag_galactic_equator_line").toBool());
+	setFlagSupergalacticEquatorLine(conf->value("viewing/flag_supergalactic_equator_line").toBool());
 	setFlagLongitudeLine(conf->value("viewing/flag_longitude_line").toBool());
 	setFlagPrimeVerticalLine(conf->value("viewing/flag_prime_vertical_line").toBool());
 	setFlagColureLines(conf->value("viewing/flag_colure_lines").toBool());
 	setFlagCircumpolarCircles(conf->value("viewing/flag_circumpolar_circles").toBool());
+	setFlagCelestialJ2000Poles(conf->value("viewing/flag_celestial_J2000_poles").toBool());
+	setFlagCelestialPoles(conf->value("viewing/flag_celestial_poles").toBool());
+	setFlagZenithNadir(conf->value("viewing/flag_zenith_nadir").toBool());
+	setFlagEclipticJ2000Poles(conf->value("viewing/flag_ecliptic_J2000_poles").toBool());
+	setFlagEclipticPoles(conf->value("viewing/flag_ecliptic_poles").toBool());
+	setFlagGalacticPoles(conf->value("viewing/flag_galactic_poles").toBool());
+	setFlagSupergalacticPoles(conf->value("viewing/flag_supergalactic_poles").toBool());
+	setFlagEquinoxJ2000Points(conf->value("viewing/flag_equinox_J2000_points").toBool());
+	setFlagEquinoxPoints(conf->value("viewing/flag_equinox_points").toBool());
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
@@ -931,18 +1181,30 @@ void GridLinesMgr::init()
 	setColorEclipticJ2000Grid(StelUtils::strToVec3f(conf->value("color/ecliptical_J2000_color", defaultColor).toString()));
 	setColorEclipticGrid(StelUtils::strToVec3f(conf->value("color/ecliptical_color", defaultColor).toString()));
 	setColorGalacticGrid(StelUtils::strToVec3f(conf->value("color/galactic_color", defaultColor).toString()));
+	setColorSupergalacticGrid(StelUtils::strToVec3f(conf->value("color/supergalactic_color", defaultColor).toString()));
 	setColorAzimuthalGrid(StelUtils::strToVec3f(conf->value("color/azimuthal_color", defaultColor).toString()));
 	setColorEquatorLine(StelUtils::strToVec3f(conf->value("color/equator_color", defaultColor).toString()));
+	setColorEquatorJ2000Line(StelUtils::strToVec3f(conf->value("color/equator_J2000_color", defaultColor).toString()));
 	setColorEclipticLine(StelUtils::strToVec3f(conf->value("color/ecliptic_color", defaultColor).toString()));
 	setColorEclipticJ2000Line(StelUtils::strToVec3f(conf->value("color/ecliptic_J2000_color", defaultColor).toString()));
 	setColorPrecessionCircles(StelUtils::strToVec3f(conf->value("color/precession_circles_color", defaultColor).toString()));
 	setColorMeridianLine(StelUtils::strToVec3f(conf->value("color/meridian_color", defaultColor).toString()));
 	setColorHorizonLine(StelUtils::strToVec3f(conf->value("color/horizon_color", defaultColor).toString()));
 	setColorGalacticEquatorLine(StelUtils::strToVec3f(conf->value("color/galactic_equator_color", defaultColor).toString()));
+	setColorSupergalacticEquatorLine(StelUtils::strToVec3f(conf->value("color/supergalactic_equator_color", defaultColor).toString()));
 	setColorLongitudeLine(StelUtils::strToVec3f(conf->value("color/longitude_color", defaultColor).toString()));
 	setColorPrimeVerticalLine(StelUtils::strToVec3f(conf->value("color/prime_vertical_color", defaultColor).toString()));
 	setColorColureLines(StelUtils::strToVec3f(conf->value("color/colures_color", defaultColor).toString()));
 	setColorCircumpolarCircles(StelUtils::strToVec3f(conf->value("color/circumpolar_circles_color", defaultColor).toString()));
+	setColorCelestialJ2000Poles(StelUtils::strToVec3f(conf->value("color/celestial_J2000_poles_color", defaultColor).toString()));
+	setColorCelestialPoles(StelUtils::strToVec3f(conf->value("color/celestial_poles_color", defaultColor).toString()));
+	setColorZenithNadir(StelUtils::strToVec3f(conf->value("color/zenith_nadir_color", defaultColor).toString()));
+	setColorEclipticJ2000Poles(StelUtils::strToVec3f(conf->value("color/ecliptic_J2000_poles_color", defaultColor).toString()));
+	setColorEclipticPoles(StelUtils::strToVec3f(conf->value("color/ecliptic_poles_color", defaultColor).toString()));
+	setColorGalacticPoles(StelUtils::strToVec3f(conf->value("color/galactic_poles_color", defaultColor).toString()));
+	setColorSupergalacticPoles(StelUtils::strToVec3f(conf->value("color/supergalactic_poles_color", defaultColor).toString()));
+	setColorEquinoxJ2000Points(StelUtils::strToVec3f(conf->value("color/equinox_J2000_points_color", defaultColor).toString()));
+	setColorEquinoxPoints(StelUtils::strToVec3f(conf->value("color/equinox_points_color", defaultColor).toString()));
 
 	StelApp& app = StelApp::getInstance();
 	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateLineLabels()));
@@ -959,13 +1221,24 @@ void GridLinesMgr::init()
 	addAction("actionShow_Equatorial_J2000_Grid", displayGroup, N_("Equatorial J2000 grid"), "equatorJ2000GridDisplayed");
 	addAction("actionShow_Ecliptic_J2000_Grid", displayGroup, N_("Ecliptic J2000 grid"), "eclipticJ2000GridDisplayed");
 	addAction("actionShow_Ecliptic_Grid", displayGroup, N_("Ecliptic grid"), "eclipticGridDisplayed");
-	addAction("actionShow_Galactic_Grid", displayGroup, N_("Galactic grid"), "galacticGridDisplayed");
+	addAction("actionShow_Galactic_Grid", displayGroup, N_("Galactic grid"), "galacticGridDisplayed");	
 	addAction("actionShow_Galactic_Equator_Line", displayGroup, N_("Galactic equator"), "galacticEquatorLineDisplayed");
+	addAction("actionShow_Supergalactic_Grid", displayGroup, N_("Supergalactic grid"), "supergalacticGridDisplayed");
+	addAction("actionShow_Supergalactic_Equator_Line", displayGroup, N_("Supergalactic equator"), "supergalacticEquatorLineDisplayed");
 	addAction("actionShow_Longitude_Line", displayGroup, N_("Opposition/conjunction longitude line"), "longitudeLineDisplayed");
 	addAction("actionShow_Precession_Circles", displayGroup, N_("Precession Circles"), "precessionCirclesDisplayed");
 	addAction("actionShow_Prime_Vertical_Line", displayGroup, N_("Prime Vertical"), "primeVerticalLineDisplayed");
 	addAction("actionShow_Colure_Lines", displayGroup, N_("Colure Lines"), "colureLinesDisplayed");
 	addAction("actionShow_Circumpolar_Circles", displayGroup, N_("Circumpolar Circles"), "circumpolarCirclesDisplayed");
+	addAction("actionShow_Celestial_J2000_Poles", displayGroup, N_("Celestial J2000 poles"), "celestialJ2000PolesDisplayed");
+	addAction("actionShow_Celestial_Poles", displayGroup, N_("Celestial poles"), "celestialPolesDisplayed");
+	addAction("actionShow_Zenith_Nadir", displayGroup, N_("Zenith and nadir"), "zenithNadirDisplayed");
+	addAction("actionShow_Ecliptic_J2000_Poles", displayGroup, N_("Ecliptic J2000 poles"), "eclipticJ2000PolesDisplayed");
+	addAction("actionShow_Ecliptic_Poles", displayGroup, N_("Ecliptic poles"), "eclipticPolesDisplayed");
+	addAction("actionShow_Galactic_Poles", displayGroup, N_("Galactic poles"), "galacticPolesDisplayed");
+	addAction("actionShow_Supergalactic_Poles", displayGroup, N_("Supergalactic poles"), "supergalacticPolesDisplayed");
+	addAction("actionShow_Equinox_J2000_Points", displayGroup, N_("Equinox J2000 points"), "equinoxJ2000PointsDisplayed");
+	addAction("actionShow_Equinox_Points", displayGroup, N_("Equinox points"), "equinoxPointsDisplayed");
 }
 
 void GridLinesMgr::update(double deltaTime)
@@ -976,6 +1249,7 @@ void GridLinesMgr::update(double deltaTime)
 	eclJ2000Grid->update(deltaTime);
 	eclGrid->update(deltaTime);
 	galacticGrid->update(deltaTime);
+	supergalacticGrid->update(deltaTime);
 	aziGrid->update(deltaTime);
 	equatorLine->update(deltaTime);
 	equatorJ2000Line->update(deltaTime);
@@ -986,17 +1260,28 @@ void GridLinesMgr::update(double deltaTime)
 	meridianLine->update(deltaTime);
 	horizonLine->update(deltaTime);
 	galacticEquatorLine->update(deltaTime);
+	supergalacticEquatorLine->update(deltaTime);
 	longitudeLine->update(deltaTime);
 	primeVerticalLine->update(deltaTime);
 	colureLine_1->update(deltaTime);
 	colureLine_2->update(deltaTime);
 	circumpolarCircleN->update(deltaTime);
 	circumpolarCircleS->update(deltaTime);
+	celestialJ2000Poles->update(deltaTime);
+	celestialPoles->update(deltaTime);
+	zenithNadir->update(deltaTime);
+	eclipticJ2000Poles->update(deltaTime);
+	eclipticPoles->update(deltaTime);
+	galacticPoles->update(deltaTime);
+	supergalacticPoles->update(deltaTime);
+	equinoxJ2000Points->update(deltaTime);
+	equinoxPoints->update(deltaTime);
 }
 
 void GridLinesMgr::draw(StelCore* core)
 {
 	galacticGrid->draw(core);
+	supergalacticGrid->draw(core);
 	eclJ2000Grid->draw(core);
 	// While ecliptic of J2000 may be helpful to get a feeling of the Z=0 plane of VSOP87,
 	// ecliptic of date is related to Earth and does not make much sense for the other planets.
@@ -1008,6 +1293,7 @@ void GridLinesMgr::draw(StelCore* core)
 	aziGrid->draw(core);
 	// Lines after grids, to be able to e.g. draw equators in different color!
 	galacticEquatorLine->draw(core);
+	supergalacticEquatorLine->draw(core);
 	eclipticJ2000Line->draw(core);
 	if (core->getCurrentPlanet()->getEnglishName()=="Earth")
 	{
@@ -1025,6 +1311,15 @@ void GridLinesMgr::draw(StelCore* core)
 	primeVerticalLine->draw(core);
 	circumpolarCircleN->draw(core);
 	circumpolarCircleS->draw(core);
+	celestialJ2000Poles->draw(core);
+	celestialPoles->draw(core);
+	zenithNadir->draw(core);
+	eclipticJ2000Poles->draw(core);
+	eclipticPoles->draw(core);
+	galacticPoles->draw(core);
+	supergalacticPoles->draw(core);
+	equinoxJ2000Points->draw(core);
+	equinoxPoints->draw(core);
 }
 
 void GridLinesMgr::updateLineLabels()
@@ -1038,12 +1333,22 @@ void GridLinesMgr::updateLineLabels()
 	meridianLine->updateLabel();
 	horizonLine->updateLabel();
 	galacticEquatorLine->updateLabel();
+	supergalacticEquatorLine->updateLabel();
 	longitudeLine->updateLabel();
 	primeVerticalLine->updateLabel();
 	colureLine_1->updateLabel();
 	colureLine_2->updateLabel();
 	circumpolarCircleN->updateLabel();
 	circumpolarCircleS->updateLabel();
+	celestialJ2000Poles->updateLabel();
+	celestialPoles->updateLabel();
+	zenithNadir->updateLabel();
+	eclipticJ2000Poles->updateLabel();
+	eclipticPoles->updateLabel();
+	galacticPoles->updateLabel();
+	supergalacticPoles->updateLabel();
+	equinoxJ2000Points->updateLabel();
+	equinoxPoints->updateLabel();
 }
 
 //! Set flag for displaying Azimuthal Grid
@@ -1193,6 +1498,31 @@ void GridLinesMgr::setColorGalacticGrid(const Vec3f& newColor)
 	if(newColor != galacticGrid->getColor()) {
 		galacticGrid->setColor(newColor);
 		emit galacticGridColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying Supergalactic Grid
+void GridLinesMgr::setFlagSupergalacticGrid(const bool displayed)
+{
+	if(displayed != supergalacticGrid->isDisplayed()) {
+		supergalacticGrid->setDisplayed(displayed);
+		emit supergalacticGridDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Supergalactic Grid
+bool GridLinesMgr::getFlagSupergalacticGrid(void) const
+{
+	return supergalacticGrid->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorSupergalacticGrid(void) const
+{
+	return supergalacticGrid->getColor();
+}
+void GridLinesMgr::setColorSupergalacticGrid(const Vec3f& newColor)
+{
+	if(newColor != supergalacticGrid->getColor()) {
+		supergalacticGrid->setColor(newColor);
+		emit supergalacticGridColorChanged(newColor);
 	}
 }
 
@@ -1424,6 +1754,31 @@ void GridLinesMgr::setColorGalacticEquatorLine(const Vec3f& newColor)
 	}
 }
 
+//! Set flag for displaying Supergalactic Equator Line
+void GridLinesMgr::setFlagSupergalacticEquatorLine(const bool displayed)
+{
+	if(displayed != supergalacticEquatorLine->isDisplayed()) {
+		supergalacticEquatorLine->setDisplayed(displayed);
+		emit supergalacticEquatorLineDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Supergalactic Equator Line
+bool GridLinesMgr::getFlagSupergalacticEquatorLine(void) const
+{
+	return supergalacticEquatorLine->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorSupergalacticEquatorLine(void) const
+{
+	return supergalacticEquatorLine->getColor();
+}
+void GridLinesMgr::setColorSupergalacticEquatorLine(const Vec3f& newColor)
+{
+	if(newColor != supergalacticEquatorLine->getColor()) {
+		supergalacticEquatorLine->setColor(newColor);
+		emit supergalacticEquatorLineColorChanged(newColor);
+	}
+}
+
 //! Set flag for displaying Prime Vertical Line
 void GridLinesMgr::setFlagPrimeVerticalLine(const bool displayed)
 {
@@ -1501,5 +1856,248 @@ void GridLinesMgr::setColorCircumpolarCircles(const Vec3f& newColor)
 		circumpolarCircleN->setColor(newColor);
 		circumpolarCircleS->setColor(newColor);
 		emit circumpolarCirclesColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying celestial poles of J2000
+void GridLinesMgr::setFlagCelestialJ2000Poles(const bool displayed)
+{
+	if(displayed != celestialJ2000Poles->isDisplayed()) {
+		celestialJ2000Poles->setDisplayed(displayed);
+		emit celestialJ2000PolesDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying celestial poles of J2000
+bool GridLinesMgr::getFlagCelestialJ2000Poles(void) const
+{
+	return celestialJ2000Poles->isDisplayed();
+}
+
+Vec3f GridLinesMgr::getColorCelestialJ2000Poles(void) const
+{
+	return celestialJ2000Poles->getColor();
+}
+
+void GridLinesMgr::setColorCelestialJ2000Poles(const Vec3f& newColor)
+{
+	if(newColor != celestialJ2000Poles->getColor()) {
+		celestialJ2000Poles->setColor(newColor);
+		emit celestialJ2000PolesColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying celestial poles
+void GridLinesMgr::setFlagCelestialPoles(const bool displayed)
+{
+	if(displayed != celestialPoles->isDisplayed()) {
+		celestialPoles->setDisplayed(displayed);
+		emit celestialPolesDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying celestial poles
+bool GridLinesMgr::getFlagCelestialPoles(void) const
+{
+	return celestialPoles->isDisplayed();
+}
+
+Vec3f GridLinesMgr::getColorCelestialPoles(void) const
+{
+	return celestialPoles->getColor();
+}
+
+void GridLinesMgr::setColorCelestialPoles(const Vec3f& newColor)
+{
+	if(newColor != celestialPoles->getColor()) {
+		celestialPoles->setColor(newColor);
+		emit celestialPolesColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying zenith and nadir
+void GridLinesMgr::setFlagZenithNadir(const bool displayed)
+{
+	if(displayed != zenithNadir->isDisplayed()) {
+		zenithNadir->setDisplayed(displayed);
+		emit zenithNadirDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying zenith and nadir
+bool GridLinesMgr::getFlagZenithNadir(void) const
+{
+	return zenithNadir->isDisplayed();
+}
+
+Vec3f GridLinesMgr::getColorZenithNadir(void) const
+{
+	return zenithNadir->getColor();
+}
+
+void GridLinesMgr::setColorZenithNadir(const Vec3f& newColor)
+{
+	if(newColor != zenithNadir->getColor()) {
+		zenithNadir->setColor(newColor);
+		emit zenithNadirColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying ecliptic poles of J2000
+void GridLinesMgr::setFlagEclipticJ2000Poles(const bool displayed)
+{
+	if(displayed != eclipticJ2000Poles->isDisplayed()) {
+		eclipticJ2000Poles->setDisplayed(displayed);
+		emit eclipticJ2000PolesDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying ecliptic poles of J2000
+bool GridLinesMgr::getFlagEclipticJ2000Poles(void) const
+{
+	return eclipticJ2000Poles->isDisplayed();
+}
+
+Vec3f GridLinesMgr::getColorEclipticJ2000Poles(void) const
+{
+	return eclipticJ2000Poles->getColor();
+}
+
+void GridLinesMgr::setColorEclipticJ2000Poles(const Vec3f& newColor)
+{
+	if(newColor != eclipticJ2000Poles->getColor()) {
+		eclipticJ2000Poles->setColor(newColor);
+		emit eclipticJ2000PolesColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying ecliptic poles
+void GridLinesMgr::setFlagEclipticPoles(const bool displayed)
+{
+	if(displayed != eclipticPoles->isDisplayed()) {
+		eclipticPoles->setDisplayed(displayed);
+		emit eclipticPolesDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying ecliptic poles
+bool GridLinesMgr::getFlagEclipticPoles(void) const
+{
+	return eclipticPoles->isDisplayed();
+}
+
+Vec3f GridLinesMgr::getColorEclipticPoles(void) const
+{
+	return eclipticPoles->getColor();
+}
+
+void GridLinesMgr::setColorEclipticPoles(const Vec3f& newColor)
+{
+	if(newColor != eclipticPoles->getColor()) {
+		eclipticPoles->setColor(newColor);
+		emit eclipticPolesColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying galactic poles
+void GridLinesMgr::setFlagGalacticPoles(const bool displayed)
+{
+	if(displayed != galacticPoles->isDisplayed()) {
+		galacticPoles->setDisplayed(displayed);
+		emit galacticPolesDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying galactic poles
+bool GridLinesMgr::getFlagGalacticPoles(void) const
+{
+	return galacticPoles->isDisplayed();
+}
+
+Vec3f GridLinesMgr::getColorGalacticPoles(void) const
+{
+	return galacticPoles->getColor();
+}
+
+void GridLinesMgr::setColorGalacticPoles(const Vec3f& newColor)
+{
+	if(newColor != galacticPoles->getColor()) {
+		galacticPoles->setColor(newColor);
+		emit galacticPolesColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying supergalactic poles
+void GridLinesMgr::setFlagSupergalacticPoles(const bool displayed)
+{
+	if(displayed != supergalacticPoles->isDisplayed()) {
+		supergalacticPoles->setDisplayed(displayed);
+		emit supergalacticPolesDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying supergalactic poles
+bool GridLinesMgr::getFlagSupergalacticPoles(void) const
+{
+	return supergalacticPoles->isDisplayed();
+}
+
+Vec3f GridLinesMgr::getColorSupergalacticPoles(void) const
+{
+	return supergalacticPoles->getColor();
+}
+
+void GridLinesMgr::setColorSupergalacticPoles(const Vec3f& newColor)
+{
+	if(newColor != supergalacticPoles->getColor()) {
+		supergalacticPoles->setColor(newColor);
+		emit supergalacticPolesColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying equinox points of J2000
+void GridLinesMgr::setFlagEquinoxJ2000Points(const bool displayed)
+{
+	if(displayed != equinoxJ2000Points->isDisplayed()) {
+		equinoxJ2000Points->setDisplayed(displayed);
+		emit equinoxJ2000PointsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying equinox points of J2000
+bool GridLinesMgr::getFlagEquinoxJ2000Points(void) const
+{
+	return equinoxJ2000Points->isDisplayed();
+}
+
+Vec3f GridLinesMgr::getColorEquinoxJ2000Points(void) const
+{
+	return equinoxJ2000Points->getColor();
+}
+
+void GridLinesMgr::setColorEquinoxJ2000Points(const Vec3f& newColor)
+{
+	if(newColor != equinoxJ2000Points->getColor()) {
+		equinoxJ2000Points->setColor(newColor);
+		emit equinoxJ2000PointsColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying equinox points
+void GridLinesMgr::setFlagEquinoxPoints(const bool displayed)
+{
+	if(displayed != equinoxPoints->isDisplayed()) {
+		equinoxPoints->setDisplayed(displayed);
+		emit equinoxPointsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying equinox points
+bool GridLinesMgr::getFlagEquinoxPoints(void) const
+{
+	return equinoxPoints->isDisplayed();
+}
+
+Vec3f GridLinesMgr::getColorEquinoxPoints(void) const
+{
+	return equinoxPoints->getColor();
+}
+
+void GridLinesMgr::setColorEquinoxPoints(const Vec3f& newColor)
+{
+	if(newColor != equinoxPoints->getColor()) {
+		equinoxPoints->setColor(newColor);
+		emit equinoxPointsColorChanged(newColor);
 	}
 }

@@ -62,6 +62,8 @@
 #include <QSet>
 #include <QStringList>
 #include <QTemporaryFile>
+#include <QTimer>
+#include <QEventLoop>
 
 #include <cmath>
 
@@ -175,7 +177,7 @@ QString StelMainScriptAPI::getDate(const QString& spec)
 	if (spec=="utc")
 		return StelUtils::julianDayToISO8601String(getJDay());
 	else
-		return StelUtils::julianDayToISO8601String(getJDay()+StelUtils::getGMTShiftFromQT(getJDay())/24);
+		return StelUtils::julianDayToISO8601String(getJDay()+StelApp::getInstance().getCore()->getUTCOffset(getJDay())/24);
 }
 
 QString StelMainScriptAPI::getDeltaT() const
@@ -793,6 +795,31 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 	return StelUtils::getJDFromSystem();
 }
 
+void StelMainScriptAPI::wait(double t) {
+	QEventLoop loop;
+	QTimer timer;
+	timer.setInterval(1000*t);
+	connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
+	timer.start();
+	loop.exec();
+}
+
+void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
+{
+	double deltaJD = jdFromDateString(dt, spec) - getJDay();
+	double timeSpeed = getTimeRate();
+	if (timeSpeed == 0.) { qDebug() << "waitFor() called with no time passing - would be infinite. not waiting!"; return;}
+	QEventLoop loop;
+	QTimer timer;
+	int interval=1000*deltaJD*86400/timeSpeed;
+	//qDebug() << "timeSpeed is" << timeSpeed << " interval:" << interval;
+	timer.setInterval(interval);
+	connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
+	timer.start();
+	loop.exec();
+}
+
+
 void StelMainScriptAPI::selectObjectByName(const QString& name, bool pointer)
 {
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
@@ -871,23 +898,29 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 	pos = obj->getGalacticPos(core);
 	StelUtils::rectToSphe(&glong, &glat, pos);
 	map.insert("glong", glong*180./M_PI);
-	map.insert("glat", glat*180./M_PI);	
+	map.insert("glat", glat*180./M_PI);
 
-	if (core->getCurrentLocation().planetName == "Earth")
+	// supergalactic long/lat
+	pos = obj->getSupergalacticPos(core);
+	StelUtils::rectToSphe(&glong, &glat, pos);
+	map.insert("sglong", glong*180./M_PI);
+	map.insert("sglat", glat*180./M_PI);
+
+	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
+	double ra_equ, dec_equ, lambda, beta;
+	// J2000
+	double eclJ2000 = ssmgr->getEarth()->getRotObliquity(2451545.0);
+	double ecl = ssmgr->getEarth()->getRotObliquity(core->getJDE());
+
+	// ecliptic longitude/latitude (J2000 frame)
+	StelUtils::rectToSphe(&ra_equ,&dec_equ, obj->getJ2000EquatorialPos(core));
+	StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &lambda, &beta);
+	if (lambda<0) lambda+=2.0*M_PI;
+	map.insert("elongJ2000", lambda*180./M_PI);
+	map.insert("elatJ2000", beta*180./M_PI);
+
+	if (QString("Earth Sun").contains(core->getCurrentLocation().planetName))
 	{
-		SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
-		double ra_equ, dec_equ, lambda, beta;
-		// J2000
-		double eclJ2000 = ssmgr->getEarth()->getRotObliquity(2451545.0);
-		double ecl = ssmgr->getEarth()->getRotObliquity(core->getJDE());
-
-		// ecliptic longitude/latitude (J2000 frame)
-		StelUtils::rectToSphe(&ra_equ,&dec_equ, obj->getJ2000EquatorialPos(core));
-		StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &lambda, &beta);
-		if (lambda<0) lambda+=2.0*M_PI;
-		map.insert("elongJ2000", lambda*180./M_PI);
-		map.insert("elatJ2000", beta*180./M_PI);
-
 		// ecliptic longitude/latitude
 		StelUtils::rectToSphe(&ra_equ,&dec_equ, obj->getEquinoxEquatorialPos(core));
 		StelUtils::equToEcl(ra_equ, dec_equ, ecl, &lambda, &beta);
@@ -927,6 +960,7 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 		map.insert("elongation", elongation);
 		map.insert("elongation-dms", StelUtils::radToDmsStr(elongation));
 		map.insert("elongation-deg", StelUtils::radToDecDegStr(elongation));
+		map.insert("ptype", ssmgr->getPlanetType(name));
 	}
 
 	// localized name
@@ -1006,21 +1040,27 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 	map.insert("glong", glong*180./M_PI);
 	map.insert("glat", glat*180./M_PI);
 
-	if (core->getCurrentLocation().planetName == "Earth")
+	// supergalactic long/lat
+	pos = obj->getSupergalacticPos(core);
+	StelUtils::rectToSphe(&glong, &glat, pos);
+	map.insert("sglong", glong*180./M_PI);
+	map.insert("sglat", glat*180./M_PI);
+
+	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
+	double ra_equ, dec_equ, lambda, beta;
+	// J2000
+	double eclJ2000 = ssmgr->getEarth()->getRotObliquity(2451545.0);
+	double ecl = ssmgr->getEarth()->getRotObliquity(core->getJDE());
+
+	// ecliptic longitude/latitude (J2000 frame)
+	StelUtils::rectToSphe(&ra_equ,&dec_equ, obj->getJ2000EquatorialPos(core));
+	StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &lambda, &beta);
+	if (lambda<0) lambda+=2.0*M_PI;
+	map.insert("elongJ2000", lambda*180./M_PI);
+	map.insert("elatJ2000", beta*180./M_PI);
+
+	if (QString("Earth Sun").contains(core->getCurrentLocation().planetName))
 	{
-		SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
-		double ra_equ, dec_equ, lambda, beta;
-		// J2000
-		double eclJ2000 = ssmgr->getEarth()->getRotObliquity(2451545.0);
-		double ecl = ssmgr->getEarth()->getRotObliquity(core->getJDE());
-
-		// ecliptic longitude/latitude (J2000 frame)
-		StelUtils::rectToSphe(&ra_equ,&dec_equ, obj->getJ2000EquatorialPos(core));
-		StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &lambda, &beta);
-		if (lambda<0) lambda+=2.0*M_PI;
-		map.insert("elongJ2000", lambda*180./M_PI);
-		map.insert("elatJ2000", beta*180./M_PI);
-
 		// ecliptic longitude/latitude
 		StelUtils::rectToSphe(&ra_equ,&dec_equ, obj->getEquinoxEquatorialPos(core));
 		StelUtils::equToEcl(ra_equ, dec_equ, ecl, &lambda, &beta);
@@ -1060,6 +1100,7 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 		map.insert("elongation", elongation);
 		map.insert("elongation-dms", StelUtils::radToDmsStr(elongation));
 		map.insert("elongation-deg", StelUtils::radToDecDegStr(elongation));
+		map.insert("ptype", ssmgr->getPlanetType(obj->getEnglishName()));
 	}
 
 	// english name or designation & localized name
@@ -1096,8 +1137,11 @@ void StelMainScriptAPI::clear(const QString& state)
 		mmgr->setZHR(10);
 		glmgr->setFlagAzimuthalGrid(false);
 		glmgr->setFlagGalacticGrid(false);
+		glmgr->setFlagSupergalacticGrid(false);
 		glmgr->setFlagEquatorGrid(false);
+		glmgr->setFlagEquatorJ2000Grid(false);
 		glmgr->setFlagEquatorLine(false);
+		glmgr->setFlagEquatorJ2000Line(false);
 		glmgr->setFlagEclipticLine(false);
 		glmgr->setFlagEclipticJ2000Line(false);
 		glmgr->setFlagMeridianLine(false);
@@ -1106,9 +1150,20 @@ void StelMainScriptAPI::clear(const QString& state)
 		glmgr->setFlagColureLines(false);
 		glmgr->setFlagPrimeVerticalLine(false);
 		glmgr->setFlagGalacticEquatorLine(false);
-		glmgr->setFlagEquatorJ2000Grid(false);
+		glmgr->setFlagSupergalacticEquatorLine(false);
+		glmgr->setFlagCircumpolarCircles(false);
+		glmgr->setFlagLongitudeLine(false);
 		glmgr->setFlagEclipticGrid(false);
 		glmgr->setFlagEclipticJ2000Grid(false);
+		glmgr->setFlagCelestialJ2000Poles(false);
+		glmgr->setFlagCelestialPoles(false);
+		glmgr->setFlagZenithNadir(false);
+		glmgr->setFlagEclipticJ2000Poles(false);
+		glmgr->setFlagEclipticPoles(false);
+		glmgr->setFlagGalacticPoles(false);
+		glmgr->setFlagSupergalacticPoles(false);
+		glmgr->setFlagEquinoxJ2000Points(false);
+		glmgr->setFlagEquinoxPoints(false);
 		lmgr->setFlagCardinalsPoints(false);
 		cmgr->setFlagLines(false);
 		cmgr->setFlagLabels(false);
@@ -1135,14 +1190,28 @@ void StelMainScriptAPI::clear(const QString& state)
 		mmgr->setZHR(0);
 		glmgr->setFlagAzimuthalGrid(false);
 		glmgr->setFlagGalacticGrid(false);
+		glmgr->setFlagSupergalacticGrid(false);
 		glmgr->setFlagEquatorGrid(true);
+		glmgr->setFlagEquatorJ2000Grid(false);
 		glmgr->setFlagEquatorLine(false);
+		glmgr->setFlagEquatorJ2000Line(false);
 		glmgr->setFlagEclipticLine(false);
 		glmgr->setFlagMeridianLine(false);
 		glmgr->setFlagLongitudeLine(false);
 		glmgr->setFlagHorizonLine(false);
 		glmgr->setFlagGalacticEquatorLine(false);
-		glmgr->setFlagEquatorJ2000Grid(false);
+		glmgr->setFlagSupergalacticEquatorLine(false);
+		glmgr->setFlagCircumpolarCircles(false);
+		glmgr->setFlagLongitudeLine(false);
+		glmgr->setFlagCelestialJ2000Poles(false);
+		glmgr->setFlagCelestialPoles(false);
+		glmgr->setFlagZenithNadir(false);
+		glmgr->setFlagEclipticJ2000Poles(false);
+		glmgr->setFlagEclipticPoles(false);
+		glmgr->setFlagGalacticPoles(false);
+		glmgr->setFlagSupergalacticPoles(false);
+		glmgr->setFlagEquinoxJ2000Points(false);
+		glmgr->setFlagEquinoxPoints(false);
 		lmgr->setFlagCardinalsPoints(false);
 		cmgr->setFlagLines(true);
 		cmgr->setFlagLabels(true);
@@ -1169,14 +1238,28 @@ void StelMainScriptAPI::clear(const QString& state)
 		mmgr->setZHR(0);
 		glmgr->setFlagAzimuthalGrid(false);
 		glmgr->setFlagGalacticGrid(false);
+		glmgr->setFlagSupergalacticGrid(false);
 		glmgr->setFlagEquatorGrid(false);
+		glmgr->setFlagEquatorJ2000Grid(false);
 		glmgr->setFlagEquatorLine(false);
+		glmgr->setFlagEquatorJ2000Line(false);
 		glmgr->setFlagEclipticLine(false);
 		glmgr->setFlagMeridianLine(false);
 		glmgr->setFlagLongitudeLine(false);
 		glmgr->setFlagHorizonLine(false);
 		glmgr->setFlagGalacticEquatorLine(false);
-		glmgr->setFlagEquatorJ2000Grid(false);
+		glmgr->setFlagSupergalacticEquatorLine(false);
+		glmgr->setFlagCircumpolarCircles(false);
+		glmgr->setFlagLongitudeLine(false);
+		glmgr->setFlagCelestialJ2000Poles(false);
+		glmgr->setFlagCelestialPoles(false);
+		glmgr->setFlagZenithNadir(false);
+		glmgr->setFlagEclipticJ2000Poles(false);
+		glmgr->setFlagEclipticPoles(false);
+		glmgr->setFlagGalacticPoles(false);
+		glmgr->setFlagSupergalacticPoles(false);
+		glmgr->setFlagEquinoxJ2000Points(false);
+		glmgr->setFlagEquinoxPoints(false);
 		lmgr->setFlagCardinalsPoints(false);
 		cmgr->setFlagLines(false);
 		cmgr->setFlagLabels(false);
@@ -1202,15 +1285,29 @@ void StelMainScriptAPI::clear(const QString& state)
 		ssmgr->setFlagTrails(false);
 		mmgr->setZHR(0);
 		glmgr->setFlagAzimuthalGrid(false);
-		glmgr->setFlagGalacticGrid(false);
+		glmgr->setFlagGalacticGrid(true);
+		glmgr->setFlagSupergalacticGrid(false);
 		glmgr->setFlagEquatorGrid(false);
+		glmgr->setFlagEquatorJ2000Grid(false);
 		glmgr->setFlagEquatorLine(false);
+		glmgr->setFlagEquatorJ2000Line(false);
 		glmgr->setFlagEclipticLine(false);
 		glmgr->setFlagMeridianLine(false);
 		glmgr->setFlagLongitudeLine(false);
 		glmgr->setFlagHorizonLine(false);
 		glmgr->setFlagGalacticEquatorLine(false);
-		glmgr->setFlagEquatorJ2000Grid(false);
+		glmgr->setFlagSupergalacticEquatorLine(false);
+		glmgr->setFlagCircumpolarCircles(false);
+		glmgr->setFlagLongitudeLine(false);
+		glmgr->setFlagCelestialJ2000Poles(false);
+		glmgr->setFlagCelestialPoles(false);
+		glmgr->setFlagZenithNadir(false);
+		glmgr->setFlagEclipticJ2000Poles(false);
+		glmgr->setFlagEclipticPoles(false);
+		glmgr->setFlagGalacticPoles(false);
+		glmgr->setFlagSupergalacticPoles(false);
+		glmgr->setFlagEquinoxJ2000Points(false);
+		glmgr->setFlagEquinoxPoints(false);
 		lmgr->setFlagCardinalsPoints(false);
 		cmgr->setFlagLines(false);
 		cmgr->setFlagLabels(false);
@@ -1224,6 +1321,55 @@ void StelMainScriptAPI::clear(const QString& state)
 		lmgr->setFlagFog(false);
 		zl->setFlagShow(false);
 	}
+	else if (state.toLower() == "supergalactic")
+	{
+		movmgr->setMountMode(StelMovementMgr::MountSupergalactic);
+		skyd->setFlagTwinkle(false);
+		skyd->setFlagLuminanceAdaptation(false);
+		ssmgr->setFlagPlanets(false);
+		ssmgr->setFlagHints(false);
+		ssmgr->setFlagOrbits(false);
+		ssmgr->setFlagMoonScale(false);
+		ssmgr->setFlagTrails(false);
+		mmgr->setZHR(0);
+		glmgr->setFlagAzimuthalGrid(false);
+		glmgr->setFlagGalacticGrid(false);
+		glmgr->setFlagSupergalacticGrid(true);
+		glmgr->setFlagEquatorGrid(false);
+		glmgr->setFlagEquatorJ2000Grid(false);
+		glmgr->setFlagEquatorLine(false);
+		glmgr->setFlagEquatorJ2000Line(false);
+		glmgr->setFlagEclipticLine(false);
+		glmgr->setFlagMeridianLine(false);
+		glmgr->setFlagLongitudeLine(false);
+		glmgr->setFlagHorizonLine(false);
+		glmgr->setFlagGalacticEquatorLine(false);
+		glmgr->setFlagSupergalacticEquatorLine(false);
+		glmgr->setFlagCircumpolarCircles(false);
+		glmgr->setFlagLongitudeLine(false);
+		glmgr->setFlagCelestialJ2000Poles(false);
+		glmgr->setFlagCelestialPoles(false);
+		glmgr->setFlagZenithNadir(false);
+		glmgr->setFlagEclipticJ2000Poles(false);
+		glmgr->setFlagEclipticPoles(false);
+		glmgr->setFlagGalacticPoles(false);
+		glmgr->setFlagSupergalacticPoles(false);
+		glmgr->setFlagEquinoxJ2000Points(false);
+		glmgr->setFlagEquinoxPoints(false);
+		lmgr->setFlagCardinalsPoints(false);
+		cmgr->setFlagLines(false);
+		cmgr->setFlagLabels(false);
+		cmgr->setFlagBoundaries(false);
+		cmgr->setFlagArt(false);
+		smgr->setFlagLabels(false);
+		ssmgr->setFlagLabels(false);
+		nmgr->setFlagHints(false);
+		lmgr->setFlagLandscape(false);
+		lmgr->setFlagAtmosphere(false);
+		lmgr->setFlagFog(false);
+		zl->setFlagShow(false);
+	}
+
 	else
 	{
 		qWarning() << "WARNING clear(" << state << ") - state not known";

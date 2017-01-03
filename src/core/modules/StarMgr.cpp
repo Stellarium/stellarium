@@ -65,14 +65,18 @@ static QStringList component_array;
 // This number must be incremented each time the content or file format of the stars catalogs change
 // It can also be incremented when the defaultStarsConfig.json file change.
 // It should always matchs the version field of the defaultStarsConfig.json file
-static const int StarCatalogFormatVersion = 8;
+static const int StarCatalogFormatVersion = 9;
 
 // Initialise statics
 bool StarMgr::flagSciNames = true;
 QHash<int,QString> StarMgr::commonNamesMap;
 QHash<int,QString> StarMgr::commonNamesMapI18n;
+QHash<int,QString> StarMgr::additionalNamesMap;
+QHash<int,QString> StarMgr::additionalNamesMapI18n;
 QMap<QString,int> StarMgr::commonNamesIndexI18n;
 QMap<QString,int> StarMgr::commonNamesIndex;
+QMap<QString,int> StarMgr::additionalNamesIndex;
+QMap<QString,int> StarMgr::additionalNamesIndexI18n;
 QHash<int,QString> StarMgr::sciNamesMapI18n;
 QMap<QString,int> StarMgr::sciNamesIndexI18n;
 QHash<int,QString> StarMgr::sciAdditionalNamesMapI18n;
@@ -85,6 +89,9 @@ QHash<int, int> StarMgr::saoStarsMap;
 QMap<int, int> StarMgr::saoStarsIndex;
 QHash<int, int> StarMgr::hdStarsMap;
 QMap<int, int> StarMgr::hdStarsIndex;
+QHash<int, int> StarMgr::hrStarsMap;
+QMap<int, int> StarMgr::hrStarsIndex;
+QHash<int, QString> StarMgr::referenceMap;
 
 QStringList initStringListFromFile(const QString& file_name)
 {
@@ -180,6 +187,22 @@ QString StarMgr::getCommonName(int hip)
 	return QString();
 }
 
+QString StarMgr::getAdditionalNames(int hip)
+{
+	QHash<int,QString>::const_iterator it(additionalNamesMapI18n.find(hip));
+	if (it!=additionalNamesMapI18n.end())
+		return it.value();
+	return QString();
+}
+
+QString StarMgr::getAdditionalEnglishNames(int hip)
+{
+	QHash<int,QString>::const_iterator it(additionalNamesMap.find(hip));
+	if (it!=additionalNamesMap.end())
+		return it.value();
+	return QString();
+}
+
 QString StarMgr::getCommonEnglishName(int hip)
 {
 	QHash<int,QString>::const_iterator it(commonNamesMap.find(hip));
@@ -205,7 +228,7 @@ QString StarMgr::getSciAdditionalName(int hip)
 	return QString();
 }
 
-QString StarMgr::getCrossIndexDesignations(int hip)
+QString StarMgr::getCrossIdentificationDesignations(int hip)
 {
 	QString designations;
 	QHash<int,int>::const_iterator it(saoStarsMap.find(hip));
@@ -219,6 +242,15 @@ QString StarMgr::getCrossIndexDesignations(int hip)
 			designations = QString("HD %1").arg(it2.value());
 		else
 			designations += QString(" - HD %1").arg(it2.value());
+	}
+
+	QHash<int,int>::const_iterator it3(hrStarsMap.find(hip));
+	if (it3!=hrStarsMap.end())
+	{
+		if (designations.isEmpty())
+			designations = QString("HR %1").arg(it3.value());
+		else
+			designations += QString(" - HR %1").arg(it3.value());
 	}
 
 	return designations;
@@ -602,6 +634,18 @@ void StarMgr::loadData(QVariantMap starsConfig)
 
 	lastMaxSearchLevel = maxGeodesicGridLevel;
 	qDebug() << "Finished loading star catalogue data, max_geodesic_level: " << maxGeodesicGridLevel;
+
+	hipparcosStars.clear();
+	for (int hip=0; hip<=NR_OF_HIP; hip++)
+	{
+		const Star1 *const s = hipIndex[hip].s;
+		if (s)
+		{
+			const SpecialZoneArray<Star1> *const a = hipIndex[hip].a;
+			const SpecialZoneData<Star1> *const z = hipIndex[hip].z;
+			hipparcosStars.push_back(s->createStelObject(a,z));
+		}
+	}
 }
 
 // Load common names from file
@@ -609,8 +653,12 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 {
 	commonNamesMap.clear();
 	commonNamesMapI18n.clear();
+	additionalNamesMap.clear();
+	additionalNamesMapI18n.clear();
 	commonNamesIndexI18n.clear();
 	commonNamesIndex.clear();
+	additionalNamesIndex.clear();
+	additionalNamesIndexI18n.clear();
 
 	qDebug() << "Loading star names from" << QDir::toNativeSeparators(commonNameFile);
 	QFile cnFile(commonNameFile);
@@ -632,7 +680,7 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 	// "   677|_("Alpheratz")"
 	// "113368|_("Fomalhaut")"
 	// Note: Stellarium doesn't support sky cultures made prior version 0.10.6 now!
-	QRegExp recordRx("^\\s*(\\d+)\\s*\\|_[(]\"(.*)\"[)]\\s*\\n");
+	QRegExp recordRx("^\\s*(\\d+)\\s*\\|_[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
 
 	while(!cnFile.atEnd())
 	{
@@ -667,13 +715,45 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 				continue;
 			}
 
-			const QString commonNameI18n = englishCommonName;
-			QString commonNameI18n_cap = commonNameI18n.toUpper();
+			const QString englishNameCap = englishCommonName.toUpper();
+			if (commonNamesMap.find(hip)!=commonNamesMap.end())
+			{
+				if (additionalNamesMap.find(hip)!=additionalNamesMap.end())
+				{
+					QString sname = additionalNamesMap[hip].append(" - " + englishCommonName);
+					QString snamecap = sname.toUpper();
+					additionalNamesMap[hip] = sname;
+					additionalNamesMapI18n[hip] = sname;
+					additionalNamesIndex.remove(englishNameCap);
+					additionalNamesIndexI18n.remove(englishNameCap);
+					additionalNamesIndex[snamecap] = hip;
+					additionalNamesIndexI18n[snamecap] = hip;
+				}
+				else
+				{
+					additionalNamesMap[hip] = englishCommonName;
+					additionalNamesMapI18n[hip] = englishCommonName;
+					additionalNamesIndex[englishNameCap] = hip;
+					additionalNamesIndexI18n[englishNameCap] = hip;
+				}
+			}
+			else
+			{
+				commonNamesMap[hip] = englishCommonName;
+				commonNamesMapI18n[hip] = englishCommonName;
+				commonNamesIndexI18n[englishNameCap] = hip;
+				commonNamesIndex[englishNameCap] = hip;
+			}
 
-			commonNamesMap[hip] = englishCommonName;
-			commonNamesMapI18n[hip] = commonNameI18n;
-			commonNamesIndexI18n[commonNameI18n_cap] = hip;
-			commonNamesIndex[englishCommonName.toUpper()] = hip;
+			QString reference = recordRx.capturedTexts().at(3).trimmed();
+			if (!reference.isEmpty())
+			{
+				if (referenceMap.find(hip)!=referenceMap.end())
+					referenceMap[hip] = referenceMap[hip].append("," + reference);
+				else
+					referenceMap[hip] = reference;
+			}
+
 			readOk++;
 		}
 	}
@@ -711,7 +791,8 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 	foreach(const QString& record, allRecords)
 	{
 		++lineNumber;
-		if (record.isEmpty())
+		// skip comments and empty lines
+		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
 			continue;
 
 		++totalRecords;
@@ -785,7 +866,8 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 	foreach(const QString& record, allRecords)
 	{
 		++lineNumber;
-		if (record.isEmpty())
+		// skip comments and empty lines
+		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
 			continue;
 
 		++totalRecords;
@@ -859,7 +941,8 @@ void StarMgr::loadWds(const QString& WdsFile)
 	foreach(const QString& record, allRecords)
 	{
 		++lineNumber;
-		if (record.isEmpty())
+		// skip comments and empty lines
+		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
 			continue;
 
 		++totalRecords;
@@ -893,19 +976,21 @@ void StarMgr::loadWds(const QString& WdsFile)
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "double stars";
 }
 
-// Load cross-index data from file
-void StarMgr::loadCrossIndex(const QString& crossIndexFile)
+// Load cross-identification data from file
+void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 {
 	saoStarsMap.clear();
 	saoStarsIndex.clear();
 	hdStarsMap.clear();
 	hdStarsIndex.clear();
+	hrStarsMap.clear();
+	hrStarsIndex.clear();
 
-	qDebug() << "Loading cross-index data from" << QDir::toNativeSeparators(crossIndexFile);
-	QFile ciFile(crossIndexFile);
+	qDebug() << "Loading cross-identification data from" << QDir::toNativeSeparators(crossIdFile);
+	QFile ciFile(crossIdFile);
 	if (!ciFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "WARNING - could not open" << QDir::toNativeSeparators(crossIndexFile);
+		qWarning() << "WARNING - could not open" << QDir::toNativeSeparators(crossIdFile);
 		return;
 	}
 	const QStringList& allRecords = QString::fromUtf8(ciFile.readAll()).split('\n');
@@ -920,14 +1005,15 @@ void StarMgr::loadCrossIndex(const QString& crossIndexFile)
 	foreach(const QString& record, allRecords)
 	{
 		++lineNumber;
-		if (record.isEmpty())
+		// skip comments and empty lines
+		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
 			continue;
 
 		++totalRecords;
 		const QStringList& fields = record.split('\t');
-		if (fields.size()!=3)
+		if (fields.size()!=4)
 		{
-			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(crossIndexFile)
+			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(crossIdFile)
 				   << " - record does not match record pattern";
 			continue;
 		}
@@ -938,13 +1024,14 @@ void StarMgr::loadCrossIndex(const QString& crossIndexFile)
 			unsigned int hip = fields.at(0).toUInt(&ok);
 			if (!ok)
 			{
-				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(crossIndexFile)
+				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(crossIdFile)
 					   << " - failed to convert " << fields.at(0) << "to a number";
 				continue;
 			}
 
 			unsigned int sao = fields.at(1).toUInt(&ok);
 			unsigned int hd = fields.at(2).toUInt(&ok);
+			unsigned int hr = fields.at(3).toUInt(&ok);
 
 			if (sao>0)
 			{
@@ -958,11 +1045,17 @@ void StarMgr::loadCrossIndex(const QString& crossIndexFile)
 				hdStarsIndex[hd] = hip;
 			}
 
+			if (hr>0)
+			{
+				hrStarsMap[hip] = hr;
+				hrStarsIndex[hr] = hip;
+			}
+
 			++readOk;
 		}
 	}
 
-	qDebug() << "Loaded" << readOk << "/" << totalRecords << "cross-index data records";
+	qDebug() << "Loaded" << readOk << "/" << totalRecords << "cross-identification data records for stars";
 }
 
 int StarMgr::getMaxSearchLevel() const
@@ -1143,12 +1236,27 @@ void StarMgr::updateI18n()
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	commonNamesMapI18n.clear();
 	commonNamesIndexI18n.clear();
+	additionalNamesMapI18n.clear();
+	additionalNamesIndexI18n.clear();
 	for (QHash<int,QString>::ConstIterator it(commonNamesMap.constBegin());it!=commonNamesMap.constEnd();it++)
 	{
 		const int i = it.key();
 		const QString t(trans.qtranslate(it.value()));
 		commonNamesMapI18n[i] = t;
 		commonNamesIndexI18n[t.toUpper()] = i;
+	}
+	for (QHash<int,QString>::ConstIterator ita(additionalNamesMap.constBegin());ita!=additionalNamesMap.constEnd();ita++)
+	{
+		const int i = ita.key();
+		QStringList a = ita.value().split(" - ");
+		QStringList tn;
+		foreach(const QString &str, a)
+		{
+			tn << trans.qtranslate(str);
+		}
+		const QString r = tn.join(" - ");
+		additionalNamesMapI18n[i] = r;
+		additionalNamesIndexI18n[r.toUpper()] = i;
 	}
 }
 
@@ -1201,11 +1309,30 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 		}
 	}
 
+	// Search by HR number if it's an HR formated number
+	QRegExp rx4("^\\s*(HR)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
+	if (rx4.exactMatch(objw))
+	{
+		QMap<int,int>::const_iterator hr(hrStarsIndex.find(rx4.capturedTexts().at(2).toInt()));
+		if (hr!=hrStarsIndex.end())
+		{
+			return searchHP(hr.value());
+		}
+	}
+
 	// Search by I18n common name
 	QMap<QString,int>::const_iterator it(commonNamesIndexI18n.find(objw));
 	if (it!=commonNamesIndexI18n.end())
 	{
 		return searchHP(it.value());
+	}
+
+	// Search by I18n additional common names	
+	QMap<QString, int>::iterator ita;
+	for (ita = additionalNamesIndexI18n.begin(); ita != additionalNamesIndexI18n.end(); ++ita)
+	{
+		if (ita.key().contains(objw, Qt::CaseInsensitive))
+			return searchHP(ita.value());
 	}
 
 	// Search by sci name
@@ -1274,11 +1401,30 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 		}
 	}
 
-	// Search by I18n common name
+	// Search by HR number if it's an HR formated number
+	QRegExp rx4("^\\s*(HR)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
+	if (rx4.exactMatch(objw))
+	{
+		QMap<int,int>::const_iterator hr(hrStarsIndex.find(rx4.capturedTexts().at(2).toInt()));
+		if (hr!=hrStarsIndex.end())
+		{
+			return searchHP(hr.value());
+		}
+	}
+
+	// Search by English common name
 	QMap<QString,int>::const_iterator it(commonNamesIndex.find(objw));
 	if (it!=commonNamesIndex.end())
 	{
 		return searchHP(it.value());
+	}
+
+	// Search by English additional common names
+	QMap<QString, int>::iterator ita;
+	for (ita = additionalNamesIndex.begin(); ita != additionalNamesIndex.end(); ++ita)
+	{
+		if (ita.key().contains(objw, Qt::CaseInsensitive))
+			return searchHP(ita.value());
 	}
 
 	// Search by sci name
@@ -1310,6 +1456,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	QString objw = objPrefix.toUpper();
 
 	QMap<QString, int> cNamesIdx = inEnglish ? commonNamesIndex : commonNamesIndexI18n;
+	QMap<QString, int> aNamesIdx = inEnglish ? additionalNamesIndex : additionalNamesIndexI18n;
 
 	// Search for common names
 	if (useStartOfWords)
@@ -1326,6 +1473,26 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			else
 				break;
 		}
+		for (QMap<QString,int>::const_iterator ita(aNamesIdx.lowerBound(objw)); ita!=aNamesIdx.end(); ++ita)
+		{
+			if (ita.key().startsWith(objw))
+			{
+				if (maxNbItem<=0)
+					break;
+				QStringList names = (inEnglish ? getAdditionalEnglishNames(ita.value()) : getAdditionalNames(ita.value())).split(" - ");
+				foreach (QString name, names)
+				{
+					if (name.contains(objw, Qt::CaseInsensitive))
+					{
+						result.append(name);
+						--maxNbItem;
+					}
+				}
+			}
+			else
+				break;
+		}
+
 	}
 	else
 	{
@@ -1341,6 +1508,26 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 				--maxNbItem;
 			}
 		}
+		QMapIterator<QString, int> j(aNamesIdx);
+		while (j.hasNext())
+		{
+			j.next();
+			if (j.key().contains(objw))
+			{
+				if (maxNbItem<=0)
+					break;
+				QStringList names = (inEnglish ? getAdditionalEnglishNames(j.value()) : getAdditionalNames(j.value())).split(" - ");
+				foreach (QString name, names)
+				{
+					if (name.contains(objw, Qt::CaseInsensitive))
+					{
+						result.append(name);
+						--maxNbItem;
+					}
+				}
+			}
+		}
+
 	}
 
 	// Search for sci names
@@ -1448,6 +1635,25 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		}
 	}
 
+	// Add exact HR catalogue numbers
+	QRegExp hrRx("^(HR)\\s*(\\d+)\\s*$");
+	hrRx.setCaseSensitivity(Qt::CaseInsensitive);
+	if (hrRx.exactMatch(objw))
+	{
+		bool ok;
+		int hrNum = hrRx.capturedTexts().at(2).toInt(&ok);
+		QMap<int,int>::const_iterator hr(hrStarsIndex.find(hrNum));
+		if (hr!=hrStarsIndex.end())
+		{
+			StelObjectP s = searchHP(hr.value());
+			if (s && maxNbItem>0)
+			{
+				result << QString("HR%1").arg(hrNum);
+				maxNbItem--;
+			}
+		}
+	}
+
 	// Add exact WDS catalogue numbers
 	QRegExp wdsRx("^(WDS)\\s*(\\S+)\\s*$");
 	wdsRx.setCaseSensitivity(Qt::CaseInsensitive);
@@ -1505,11 +1711,11 @@ void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 	else
 		loadWds(fic);
 
-	fic = StelFileMgr::findFile("stars/default/cross-index.dat");
+	fic = StelFileMgr::findFile("stars/default/cross-id.dat");
 	if (fic.isEmpty())
-		qWarning() << "WARNING: could not load cross-index data file: stars/default/cross-index.dat";
+		qWarning() << "WARNING: could not load cross-identification data file: stars/default/cross-id.dat";
 	else
-		loadCrossIndex(fic);
+		loadCrossIdentificationData(fic);
 
 	// Turn on sci names/catalog names for western culture only
 	setFlagSciNames(skyCultureDir.startsWith("western"));
