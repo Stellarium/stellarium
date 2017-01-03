@@ -474,7 +474,7 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	result.insert("type", "comet");
 	//"comet_orbit" is used for all cases:
 	//"ell_orbit" interprets distances as kilometers, not AUs
-	result.insert("coord_func","comet_orbit");
+	result.insert("coord_func", "comet_orbit");
 	// GZ: moved next line below!
 	//result.insert("orbit_good", 1000); // default validity for osculating elements, days
 
@@ -523,6 +523,8 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 		const double meanMotion=std::sqrt(mu/(perihelionDistance*perihelionDistance*perihelionDistance)); // radians/day
 		double period=M_PI*2.0 / meanMotion; // period, days
 		result.insert("orbit_good", qMin(1000, (int) floor(0.5*period))); // validity for elliptical osculating elements, days. Goes from aphel to next aphel or max 1000 days.
+		//FIXME: Seems period is wrong!
+		//result.insert("orbit_visualization_period", period); // add period for visualization of orbit
 	}
 	else
 		result.insert("orbit_good", 1000); // default validity for osculating elements, days
@@ -755,6 +757,10 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 	if (!ok)
 		return SsoElements();
 	result.insert("orbit_MeanAnomaly", meanAnomalyAtEpoch);
+
+	// add period for visualization of orbit
+	if (semiMajorAxis>0)
+		result.insert("orbit_visualization_period", StelUtils::calculateSiderealPeriod(semiMajorAxis));
 
 	//Radius and albedo
 	//Assume albedo of 0.15 and calculate a radius based on the absolute magnitude
