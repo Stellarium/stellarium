@@ -334,14 +334,7 @@ void Oculars::draw(StelCore* core)
 					paintCrosshairs();
 				}
 			}
-			if (guiPanelEnabled)
-			{
-				// Reset the state to allow the panel to be painted normally
-				QOpenGLFunctions* gl = QOpenGLContext::currentContext()->functions();
-				gl->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-				gl->glEnable(GL_BLEND);
-			}
-			else
+			if (!guiPanelEnabled)
 			{
 				// Paint the information in the upper-right hand corner
 				paintText(core);
@@ -351,14 +344,7 @@ void Oculars::draw(StelCore* core)
 	else if (flagShowCCD)
 	{
 		paintCCDBounds();
-		if (guiPanelEnabled)
-		{
-			// Reset the state to allow the panel to be painted normally
-			QOpenGLFunctions* gl = QOpenGLContext::currentContext()->functions();
-			gl->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			gl->glEnable(GL_BLEND);
-		}
-		else
+		if (!guiPanelEnabled)
 		{
 			// Paint the information in the upper-right hand corner
 			paintText(core);
