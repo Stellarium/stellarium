@@ -1695,6 +1695,7 @@ bool Satellites::isValidRangeDates() const
 		return true;
 }
 
+#ifdef _OLD_IRIDIUM_PREDICTIONS
 IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 {
 	StelCore* pcore = StelApp::getInstance().getCore();
@@ -1765,6 +1766,171 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 
 	return predictions;
 }
+#else
+
+struct SatDataStruct {
+	double nextJD;
+	double angleToSun;
+	double altitude;
+	double azimuth;
+	double v;
+};
+
+IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
+{
+	StelCore* pcore = StelApp::getInstance().getCore();
+	SolarSystem* ssystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
+
+	double currentJD = pcore->getJD(); // save current JD
+	bool isTimeNow = pcore->getIsTimeNow();
+
+	double predictionJD = currentJD - 1.;  //  investigate what's seen recently// yesterday
+	double predictionEndJD = currentJD + 7.; // 7 days interval
+	pcore->setJD(predictionJD);
+
+	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+
+	IridiumFlaresPredictionList predictions;
+
+// create a lіst of Iridiums
+	QMap<SatelliteP,SatDataStruct> iridiums;
+	SatDataStruct sds;
+	double nextJD = predictionJD + 1./24;
+
+	foreach(const SatelliteP& sat, satellites)
+	{
+		if (sat->initialized && sat.data()->getEnglishName().startsWith("IRIDIUM"))
+		{
+			Vec3d pos = sat.data()->getAltAzPosApparent(pcore);
+			sds.angleToSun = sat.data()->sunReflAngle;
+			sds.altitude = pos.latitude();
+			sds.azimuth = pos.longitude();
+			sds.v = sat.data()->getVMagnitude(pcore);
+			double t;
+			if (sds.altitude<0)
+				t = qMax(-sds.altitude, 1.) / 2880;
+			else
+			if (sds.angleToSun>0)
+				t = qMax(sds.angleToSun, 1.) / (2*86400);
+			else
+			{
+				//qDebug() << "IRIDIUM warn: alt, angleToSun = " <<sds.altitude << sds.angleToSun;
+				t = 0.25/1440; // we should never be here, but assuming 1/4 minute to leave this
+			}
+
+			sds.nextJD = predictionJD + t;
+			iridiums.insert(sat, sds);
+			//qDebug() << sat.data()->getEnglishName() << ": "
+			//		 << sds.altitude
+			//		 << sds.azimuth
+			//		 << sds.angleToSun
+			//		 << sds.v
+			//		 << StelUtils::julianDayToISO8601String(predictionJD+StelApp::getInstance().getCore()->getUTCOffset(predictionJD)/24.f)
+			//			;
+			if (nextJD>sds.nextJD)
+				nextJD = sds.nextJD;
+		}
+	}
+	predictionJD = nextJD;
+
+	while (predictionJD<predictionEndJD)
+	{
+		nextJD = predictionJD + 1./24;
+		pcore->setJD(predictionJD);
+
+		ssystem->getEarth().data()->computePosition(predictionJD);
+		pcore->update(0);
+
+		QMap<SatelliteP,SatDataStruct>::iterator i = iridiums.begin();
+		while (i != iridiums.end())
+		{
+			if ( i.value().nextJD<=predictionJD)
+			{
+
+				i.key().data()->update(0);
+
+				double v = i.key().data()->getVMagnitude(pcore);
+				bool flareFound = false;
+				if (v > i.value().v)
+				{
+					if (i.value().v < 1. // brighness limit
+					 && i.value().angleToSun>0.
+					 && i.value().angleToSun<2.)
+					{
+						IridiumFlaresPrediction flare;
+						flare.datetime = StelUtils::julianDayToISO8601String(predictionJD+StelApp::getInstance().getCore()->getUTCOffset(predictionJD)/24.f);
+						flare.satellite = i.key().data()->getEnglishName();
+						flare.azimuth   = i.value().azimuth;
+						if (useSouthAzimuth)
+						{
+							flare.azimuth += M_PI;
+							if (flare.azimuth > M_PI*2)
+								flare.azimuth -= M_PI*2;
+						}
+						flare.altitude  = i.value().altitude;
+						flare.magnitude = i.value().v;
+
+						predictions.append(flare);
+						flareFound = true;
+						//qDebug() << "Flare:" << flare.datetime << flare.satellite;
+
+					}
+				}
+
+/*				qDebug() << QString::asprintf("%20s  alt:%6.1f  az:%6.1f  sun:%6.1f  v:%6.1f",
+											 i.key().data()->getEnglishName().toStdString(),
+											 i.value().altitude*180/M_PI,
+											 i.value().azimuth*180/M_PI,
+											 i.value().angleToSun,
+											 v
+											 )
+						 <<  StelUtils::julianDayToISO8601String(predictionJD+StelApp::getInstance().getCore()->getUTCOffset(predictionJD)/24.f)
+							 ;
+*/
+
+				Vec3d pos = i.key().data()->getAltAzPosApparent(pcore);
+
+				i.value().v = flareFound ?  17 : v; // block extra report
+				i.value().altitude = pos.latitude();
+				i.value().azimuth = M_PI - pos.longitude();
+				i.value().angleToSun = i.key().data()->sunReflAngle;
+
+
+
+
+				double t;
+				if (flareFound)
+					t = 1./24;
+				else
+				if (i.value().altitude<0)
+					t = qMax((-i.value().altitude)*57,1.) / 5600;
+				else
+				if (i.value().angleToSun>0)
+					t = qMax(i.value().angleToSun,1.) / (4*86400);
+				else
+				{
+					//qDebug() << "IRIDIUM warn2: alt, angleToSun = " <<i.value().altitude << i.value().angleToSun;
+					t = 0.25/1440; // we should never be here, but assuming 1/4 minute to leave this
+				}
+				i.value().nextJD = predictionJD + t;
+				if (nextJD>i.value().nextJD)
+					nextJD = i.value().nextJD;
+			}
+			++i;
+		}
+		predictionJD = nextJD;
+	}
+
+	Satellite::timeShift = 0.;
+	if (isTimeNow)
+		pcore->setTimeNow();
+	else
+		pcore->setJD(currentJD);
+
+	return predictions;
+}
+#endif
+
 
 void Satellites::translations()
 {
