@@ -1705,6 +1705,8 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	painter->enableTexture2d(true);
 	glDisable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
+	glEnable(GL_DEPTH_TEST);
+	glDepthMask(GL_TRUE);
 
 	// Draw the spheroid itself
 	// Adapt the number of facets according with the size of the sphere for optimization
@@ -1837,21 +1839,12 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	GL(shader->setAttributeArray(shaderVars->texCoord, (const GLfloat*)model.texCoordArr.constData(), 2));
 	GL(shader->enableAttributeArray(shaderVars->texCoord));
 
-	if (rings)
-	{
-		glDepthMask(GL_TRUE);
-		glClear(GL_DEPTH_BUFFER_BIT);
-		glEnable(GL_DEPTH_TEST);
-	}
-	
 	if (!drawOnlyRing)
 		GL(glDrawElements(GL_TRIANGLES, model.indiceArr.size(), GL_UNSIGNED_SHORT, model.indiceArr.constData()));
 
 	if (rings)
 	{
 		// Draw the rings just after the planet
-		glDepthMask(GL_FALSE);
-	
 		// Normal transparency mode
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_BLEND);
@@ -1890,8 +1883,6 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 		
 		if (eyePos[2]<0)
 			glCullFace(GL_BACK);
-		
-		glDisable(GL_DEPTH_TEST);
 	}
 	
 	GL(shader->release());
@@ -2029,6 +2020,8 @@ void Planet::drawOrbit(StelCore* core)
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
+	glEnable(GL_DEPTH_TEST);
+	glDepthMask(GL_TRUE);
 
 	sPainter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], orbitFader.getInterstate());
 	double dateJDE = core->getJDE();

@@ -1158,6 +1158,10 @@ void SolarSystem::draw(StelCore* core)
 	float maxMagLabel = (core->getSkyDrawer()->getLimitMagnitude()<5.f ? core->getSkyDrawer()->getLimitMagnitude() :
 			5.f+(core->getSkyDrawer()->getLimitMagnitude()-5.f)*1.2f) +(labelsAmount-3.f)*1.2f;
 
+	GL(glDepthMask(GL_TRUE));
+	GL(glClear(GL_DEPTH_BUFFER_BIT));
+	GL(glEnable(GL_DEPTH_TEST));
+
 	// Draw the elements
 	foreach (const PlanetP& p, systemPlanets)
 	{
