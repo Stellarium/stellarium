@@ -2037,7 +2037,7 @@ void Planet::drawOrbit(StelCore* core)
 
 	sPainter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], orbitFader.getInterstate());
 	double dateJDE = core->getJDE();
-	double dt = qMin(re.siderealPeriod / 360, 1.0 / 24);
+	double dt = qMin(re.siderealPeriod / 360, 0.01);
 	double t1 = dateJDE - re.siderealPeriod / 2;
 	double t2 = dateJDE + re.siderealPeriod / 2;
 
@@ -2045,12 +2045,11 @@ void Planet::drawOrbit(StelCore* core)
 	sPainter.drawParametricPath(t1, t2, ORBIT_SEGMENTS, [=](double t, Vec3d *p) {
 			computeTransMatrix(t - core->computeDeltaT(t)/86400.0, t);
 			Vec3d pos;
-			if (!posCache.get(t, dt, &pos))
+			if (osculatingFunc)
+				(*osculatingFunc)(dateJDE , t, pos);
+			else if (!posCache.get(t, dt, &pos))
 			{
-				if (osculatingFunc)
-					(*osculatingFunc)(dateJDE , t, pos);
-				else
-					coordFunc(t, pos, userDataPtr);
+				coordFunc(t, pos, userDataPtr);
 				posCache.set(t, pos);
 			}
 			*p = getHeliocentricPos(pos);
