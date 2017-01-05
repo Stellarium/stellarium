@@ -34,10 +34,9 @@
 #include <QStandardItemModel>
 #include <QTimer>
 
-Scenery3dDialog::Scenery3dDialog(QObject* parent) : StelDialog(parent), mgr(NULL)
+Scenery3dDialog::Scenery3dDialog(QObject* parent) : StelDialog("Scenery3d", parent), mgr(NULL)
 {
 	ui = new Ui_scenery3dDialogForm;
-	dialogName = "Scenery3d";
 }
 
 Scenery3dDialog::~Scenery3dDialog()

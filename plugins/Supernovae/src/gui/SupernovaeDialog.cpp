@@ -38,11 +38,11 @@
 #include "StelTranslator.hpp"
 
 SupernovaeDialog::SupernovaeDialog()
-	: sn(NULL)
+	: StelDialog("Supernovae")
+	, sn(NULL)
 	, updateTimer(NULL)
 {
 	ui = new Ui_supernovaeDialog;
-	dialogName = "Supernovae";
 }
 
 SupernovaeDialog::~SupernovaeDialog()

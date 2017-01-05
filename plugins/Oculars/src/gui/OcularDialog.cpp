@@ -43,14 +43,14 @@ OcularDialog::OcularDialog(Oculars* pluginPtr,
 			   QList<Ocular *>* oculars,
 			   QList<Telescope *>* telescopes,
 			   QList<Lens *> *lense)
-	: plugin(pluginPtr)
+	: StelDialog("Oculars")
+	, plugin(pluginPtr)
 	, ccdMapper(NULL)
 	, ocularMapper(NULL)
 	, telescopeMapper(NULL)
 	, lensMapper(NULL)
 {
 	ui = new Ui_ocularDialogForm;
-	dialogName = "Oculars";
 	this->ccds = ccds;
 	ccdTableModel = new PropertyBasedTableModel(this);
 	CCD* ccdModel = CCD::ccdModel();

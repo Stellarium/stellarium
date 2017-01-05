@@ -65,20 +65,19 @@
 #include <QDesktopWidget>
 
 ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
-	: StelDialog(parent)
+	: StelDialog("Configuration", parent)
+	, isDownloadingStarCatalog(false)
 	, nextStarCatalogToDownloadIndex(0)
 	, starCatalogsCount(0)
+	, hasDownloadedStarCatalog(false)
 	, starCatalogDownloadReply(NULL)
 	, currentDownloadFile(NULL)
 	, progressBar(NULL)
 	, gui(agui)
+	, customDeltaTEquationDialog(NULL)
+	, savedProjectionType(StelApp::getInstance().getCore()->getCurrentProjectionType())
 {
-	dialogName = "Configuration";
 	ui = new Ui_configurationDialogForm;
-	customDeltaTEquationDialog = NULL;
-	hasDownloadedStarCatalog = false;
-	isDownloadingStarCatalog = false;
-	savedProjectionType = StelApp::getInstance().getCore()->getCurrentProjectionType();	
 }
 
 ConfigurationDialog::~ConfigurationDialog()
@@ -280,8 +279,9 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->selectSingleConstellationButton, "ConstellationMgr.isolateSelected");
 	ui->diskViewportCheckbox->setChecked(proj->getMaskType() == StelProjector::MaskDisk);
 	connect(ui->diskViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
-	ui->autoZoomResetsDirectionCheckbox->setChecked(mvmgr->getFlagAutoZoomOutResetsDirection());
-	connect(ui->autoZoomResetsDirectionCheckbox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagAutoZoomOutResetsDirection(bool)));
+	//ui->autoZoomResetsDirectionCheckbox->setChecked(mvmgr->getFlagAutoZoomOutResetsDirection());
+	//connect(ui->autoZoomResetsDirectionCheckbox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagAutoZoomOutResetsDirection(bool)));
+	connectBoolProperty(ui->autoZoomResetsDirectionCheckbox, "StelMovementMgr.flagAutoZoomOutResetsDirection");
 
 	ui->showFlipButtonsCheckbox->setChecked(gui->getFlagShowFlipButtons());
 	connect(ui->showFlipButtonsCheckbox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowFlipButtons(bool)));

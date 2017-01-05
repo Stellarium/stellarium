@@ -47,12 +47,11 @@ float AstroCalcDialog::minY = -90.f;
 float AstroCalcDialog::maxY = 90.f;
 
 AstroCalcDialog::AstroCalcDialog(QObject *parent)
-	: StelDialog(parent)
+	: StelDialog("AstroCalc",parent)
 	, currentTimeLine(NULL)
 	, delimiter(", ")
 	, acEndl("\n")
 {
-	dialogName = "AstroCalc";
 	ui = new Ui_astroCalcDialogForm;
 	core = StelApp::getInstance().getCore();
 	solarSystem = GETSTELMODULE(SolarSystem);

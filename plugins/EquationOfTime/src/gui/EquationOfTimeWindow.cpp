@@ -27,10 +27,10 @@
 #include "StelModuleMgr.hpp"
 
 EquationOfTimeWindow::EquationOfTimeWindow()
-	: eq(NULL)
+	: StelDialog("EquationOfTime")
+	, eq(NULL)
 {
 	ui = new Ui_equationOfTimeWindowForm();
-	dialogName = "EquationOfTime";
 }
 
 EquationOfTimeWindow::~EquationOfTimeWindow()
