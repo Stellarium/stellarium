@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-02 21:34+0700\n"
-"PO-Revision-Date: 2016-12-21 22:00+0000\n"
+"PO-Revision-Date: 2017-01-04 17:47+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-03 05:28+0000\n"
+"X-Launchpad-Export-Date: 2017-01-05 05:26+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -1718,6 +1718,10 @@ msgid ""
 "2015</em> (%1). Outside of the named range (modelled with a spline fit) it "
 "provides values from an approximate parabola."
 msgstr ""
+"Aquesta solució de F. R. Stephenson, L. V. Morrison i C. Y. Hohenkerk (2016) "
+"es va publicar a <em>Mesurament de la rotació de la Terra: 720 aC a 2015 "
+"dC</em> (%1). Fora del rang mencionat (modelat amb un ajust de spline) "
+"proporciona valors d'una paràbola aproximada."
 
 #: src/core/StelCore.cpp:2184
 #, qt-format
@@ -1738,6 +1742,8 @@ msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
 "requires an adaptation, see Guide for details."
 msgstr ""
+"El valor de la solució de l'%1 per %2 (acceleració secular de la Lluna) "
+"requereix una adaptació, consulteu la Guia per als detalls."
 
 #: src/core/StelCore.cpp:2236
 msgid "with zero values outside this range"
@@ -1753,10 +1759,12 @@ msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
 msgstr ""
+"amb una mitjana d'error de menys d'un segon, error max. 1.9s, i els valors "
+"per els anys límit fora d'aquest rang"
 
 #: src/core/StelCore.cpp:2249
 msgid "with values for the limit years outside this range"
-msgstr ""
+msgstr "amb valors per els anys límits fora d'aquest rang"
 
 #: src/core/StelCore.cpp:2259
 #, qt-format
@@ -2272,7 +2280,7 @@ msgstr "Morrison i Stephenson (2004, 2005)"
 
 #: src/gui/ConfigurationDialog.cpp:1417
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
-msgstr ""
+msgstr "Stephenson, Morrison i Hohenkerk (2016)"
 
 #: src/gui/ConfigurationDialog.cpp:1419
 msgid "Espenak & Meeus (2006)"
@@ -3046,7 +3054,7 @@ msgstr "any"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:138
 msgid "Secular acceleration of the Moon"
-msgstr ""
+msgstr "acceleració secular de la Lluna"
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:190 src/ui_configurationDialog.h:1290
@@ -6692,7 +6700,7 @@ msgstr "Informació addicional"
 
 #: src/ui_configurationDialog.h:1308
 msgid "Sidereal time"
-msgstr ""
+msgstr "Temps sideral"
 
 #: src/ui_configurationDialog.h:1309
 msgid "Control"
