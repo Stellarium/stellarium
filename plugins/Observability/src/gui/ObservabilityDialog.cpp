@@ -34,10 +34,9 @@
 #include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 
-ObservabilityDialog::ObservabilityDialog()
+ObservabilityDialog::ObservabilityDialog() : StelDialog("Observability")
 {
         ui = new Ui_ObservabilityDialog;
-	dialogName = "Observability";
 }
 
 ObservabilityDialog::~ObservabilityDialog()

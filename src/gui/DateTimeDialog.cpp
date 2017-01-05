@@ -32,7 +32,7 @@
 #include <QLineEdit>
 
 DateTimeDialog::DateTimeDialog(QObject* parent) :
-	StelDialog(parent),
+	StelDialog("DateTime", parent),
 	year(0),
 	month(0),
 	day(0),
@@ -42,7 +42,6 @@ DateTimeDialog::DateTimeDialog(QObject* parent) :
 	jd(0)
 {
 	ui = new Ui_dateTimeDialogForm;
-	dialogName = "DateTime";
 }
 
 DateTimeDialog::~DateTimeDialog()

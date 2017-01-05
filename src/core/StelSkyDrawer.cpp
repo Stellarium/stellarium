@@ -62,6 +62,8 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	inScale(1.f),
 	starShaderProgram(NULL),
 	starShaderVars(StarShaderVars()),
+	nbPointSources(0),
+	maxPointSources(1000),
 	maxLum(0.f),
 	oldLum(-1.f),
 	big3dModelHaloRadius(150.f)
@@ -117,10 +119,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	if (!ok)
 		setAtmospherePressure(1013.0);
 
-	// Initialize buffers for use by gl vertex array
-	nbPointSources = 0;
-	maxPointSources = 1000;
-	
+	// Initialize buffers for use by gl vertex array	
 	
 	vertexArray = new StarVertex[maxPointSources*6];
 	

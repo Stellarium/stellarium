@@ -27,11 +27,10 @@
 #include "ui_MSSearchDialog.h"
 
 MSSearchDialog::MSSearchDialog(MeteorShowersMgr* mgr)
-	: m_mgr(mgr)
+	: StelDialog("MeteorShowersSearch")
+	, m_mgr(mgr)
 	, m_ui(new Ui_MSSearchDialog)
-{
-	dialogName = "MeteorShowersSearch";
-}
+{}
 
 MSSearchDialog::~MSSearchDialog()
 {

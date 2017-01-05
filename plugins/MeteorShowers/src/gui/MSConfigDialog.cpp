@@ -25,10 +25,10 @@
 #include "ui_MSConfigDialog.h"
 
 MSConfigDialog::MSConfigDialog(MeteorShowersMgr* mgr)
-	: m_mgr(mgr)
+	: StelDialog("MeteorShowers")
+	, m_mgr(mgr)
 	, m_ui(new Ui_MSConfigDialog)
 {
-	dialogName = "MeteorShowers";
 }
 
 MSConfigDialog::~MSConfigDialog()

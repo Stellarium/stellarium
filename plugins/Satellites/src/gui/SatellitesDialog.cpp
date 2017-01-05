@@ -48,14 +48,14 @@
 #include "StelUtils.hpp"
 
 SatellitesDialog::SatellitesDialog()
-	: satelliteModified(false)
+	: StelDialog("Satellites")
+	, satelliteModified(false)
 	, updateTimer(0)
 	, importWindow(0)
 	, filterModel(0)
 	, checkStateRole(Qt::UserRole)
 {
 	ui = new Ui_satellitesDialog;
-	dialogName = "Satellites";
 }
 
 SatellitesDialog::~SatellitesDialog()

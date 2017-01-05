@@ -42,11 +42,11 @@
 #include "qcustomplot/qcustomplot.h"
 
 ExoplanetsDialog::ExoplanetsDialog()
-	: ep(NULL)
+	: StelDialog("Exoplanets")
+	, ep(NULL)
 	, updateTimer(NULL)
 {
         ui = new Ui_exoplanetsDialog;
-	dialogName = "Exoplanets";
 }
 
 ExoplanetsDialog::~ExoplanetsDialog()

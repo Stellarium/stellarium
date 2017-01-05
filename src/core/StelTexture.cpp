@@ -37,10 +37,9 @@
 
 #include <cstdlib>
 
-StelTexture::StelTexture(StelTextureMgr *mgr) : textureMgr(mgr), networkReply(NULL), loader(NULL), errorOccured(false), alphaChannel(false), id(0), avgLuminance(-1.f), glSize(0)
+StelTexture::StelTexture(StelTextureMgr *mgr) : textureMgr(mgr), networkReply(NULL), loader(NULL), errorOccured(false), alphaChannel(false), id(0), avgLuminance(-1.f),
+	width(-1), height(-1), glSize(0)
 {
-	width = -1;
-	height = -1;
 }
 
 StelTexture::~StelTexture()

@@ -28,10 +28,10 @@
 #include "StelGui.hpp"
 
 PointerCoordinatesWindow::PointerCoordinatesWindow()
-	: coord(NULL)
+	: StelDialog("PointerCoordinates")
+	, coord(NULL)
 {
 	ui = new Ui_pointerCoordinatesWindowForm();
-	dialogName = "PointerCoordinates";
 }
 
 PointerCoordinatesWindow::~PointerCoordinatesWindow()

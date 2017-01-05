@@ -29,9 +29,9 @@
 #include "StelOpenGL.hpp"
 
 ArchaeoLinesDialog::ArchaeoLinesDialog()
-	: al(NULL)
+	: StelDialog("ArchaeoLines")
+	, al(NULL)
 {
-	dialogName = "ArchaeoLines";
 	ui = new Ui_archaeoLinesDialog();
 }
 

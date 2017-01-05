@@ -51,9 +51,8 @@
 #include "StelActionMgr.hpp"
 
 HelpDialog::HelpDialog(QObject* parent)
-	: StelDialog(parent)
+	: StelDialog("Help", parent)
 {
-	dialogName = "Help";
 	ui = new Ui_helpDialogForm;
 }
 
