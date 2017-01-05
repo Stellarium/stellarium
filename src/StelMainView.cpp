@@ -271,68 +271,6 @@ public:
 	}
 
 protected:
-	void mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE
-	{
-		QGraphicsScene::mousePressEvent(event);
-
-		//check if the GUI accepted the event
-		if(!event->isAccepted())
-		{
-			event->accept();
-			QMouseEvent ev = convertMouseEvent(event);
-			StelApp::getInstance().handleClick(&ev);
-			if(ev.isAccepted())
-				parent->thereWasAnEvent();
-		}
-	}
-
-	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE
-	{
-		QGraphicsScene::mouseReleaseEvent(event);
-
-		//check if the GUI accepted the event
-		if(!event->isAccepted())
-		{
-			event->accept();
-			QMouseEvent ev = convertMouseEvent(event);
-			StelApp::getInstance().handleClick(&ev);
-			if(ev.isAccepted())
-				parent->thereWasAnEvent();
-		}
-	}
-
-	void mouseMoveEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE
-	{
-		QGraphicsScene::mouseMoveEvent(event);
-
-		//check if the GUI accepted the event
-		if(!event->isAccepted())
-		{
-			event->accept();
-			QPointF pos = event->scenePos();
-			pos.setY(height() - 1 - pos.y());
-			bool handled = StelApp::getInstance().handleMove(pos.x(), pos.y(), event->buttons());
-			if(handled)
-				parent->thereWasAnEvent();
-		}
-	}
-
-	void wheelEvent(QGraphicsSceneWheelEvent *event) Q_DECL_OVERRIDE
-	{
-		QGraphicsScene::wheelEvent(event);
-
-		//check if the GUI accepted the event
-		if(!event->isAccepted())
-		{
-			event->accept();
-			QPointF pos = event->scenePos();
-			pos.setY(height() - 1 - pos.y());
-			QWheelEvent newEvent(QPoint(pos.x(),pos.y()), event->delta(), event->buttons(), event->modifiers(), event->orientation());
-			StelApp::getInstance().handleWheel(&newEvent);
-			if(newEvent.isAccepted())
-				parent->thereWasAnEvent();
-		}
-	}
 
 	void keyPressEvent(QKeyEvent* event) Q_DECL_OVERRIDE
 	{
@@ -343,58 +281,11 @@ protected:
 			parent->thereWasAnEvent(); // Refresh screen ASAP
 			return;
 		}
-		//pass event on to GUI otherwise
+		//pass event on to items otherwise
 		QGraphicsScene::keyPressEvent(event);
-
-		//if not accepted, handle it further
-		if(!event->isAccepted())
-		{
-			StelApp::getInstance().handleKeys(event);
-			if(event->isAccepted())
-				parent->thereWasAnEvent();
-		}
-	}
-
-	void keyReleaseEvent(QKeyEvent* event) Q_DECL_OVERRIDE
-	{
-		//pass event to GUI
-		QGraphicsScene::keyReleaseEvent(event);
-
-		//if not accepted, handle it further
-		if(!event->isAccepted())
-		{
-			StelApp::getInstance().handleKeys(event);
-			if(event->isAccepted())
-				parent->thereWasAnEvent();
-		}
 	}
 
 private:
-	QMouseEvent convertMouseEvent(QGraphicsSceneMouseEvent *event) const
-	{
-		//convert graphics scene mouse event to widget style mouse event
-		QEvent::Type t = QEvent::None;
-		switch(event->type())
-		{
-			case QEvent::GraphicsSceneMousePress:
-				t = QEvent::MouseButtonPress;
-				break;
-			case QEvent::GraphicsSceneMouseRelease:
-				t = QEvent::MouseButtonRelease;
-				break;
-			case QEvent::GraphicsSceneMouseMove:
-				t = QEvent::MouseMove;
-				break;
-			default:
-				qFatal("Invalid mouse event type %d",event->type());
-		}
-
-		QPointF pos = event->scenePos();
-		//Y needs to be inverted
-		pos.setY(height() - 1 - pos.y());
-		return QMouseEvent(t,pos,event->button(),event->buttons(),event->modifiers());
-	}
-
 	StelMainView* parent;
 };
 
@@ -454,7 +345,87 @@ protected:
 	{
 		return rect;
 	}
+
+	//*** Main event handlers to pass on to StelApp ***//
+	void mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE
+	{
+		QMouseEvent ev = convertMouseEvent(event);
+		StelApp::getInstance().handleClick(&ev);
+		event->setAccepted(ev.isAccepted());
+		if(ev.isAccepted())
+			mainView->thereWasAnEvent();
+	}
+
+	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE
+	{
+		QMouseEvent ev = convertMouseEvent(event);
+		StelApp::getInstance().handleClick(&ev);
+		event->setAccepted(ev.isAccepted());
+		if(ev.isAccepted())
+			mainView->thereWasAnEvent();
+	}
+
+	void mouseMoveEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE
+	{
+		QMouseEvent ev = convertMouseEvent(event);
+		QPointF pos = ev.pos();
+		event->setAccepted(StelApp::getInstance().handleMove(pos.x(), pos.y(), ev.buttons()));
+		if(event->isAccepted())
+			mainView->thereWasAnEvent();
+	}
+
+	void wheelEvent(QGraphicsSceneWheelEvent *event) Q_DECL_OVERRIDE
+	{
+		QPointF pos = event->scenePos();
+		pos.setY(rect.height() - 1 - pos.y());
+		QWheelEvent newEvent(QPoint(pos.x(),pos.y()), event->delta(), event->buttons(), event->modifiers(), event->orientation());
+		StelApp::getInstance().handleWheel(&newEvent);
+		event->setAccepted(newEvent.isAccepted());
+		if(newEvent.isAccepted())
+			mainView->thereWasAnEvent();
+	}
+
+	void keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE
+	{
+		StelApp::getInstance().handleKeys(event);
+		if(event->isAccepted())
+			mainView->thereWasAnEvent();
+	}
+
+	void keyReleaseEvent(QKeyEvent *event) Q_DECL_OVERRIDE
+	{
+		StelApp::getInstance().handleKeys(event);
+		if(event->isAccepted())
+			mainView->thereWasAnEvent();
+	}
+
 private:
+	//! Helper function to convert a QGraphicsSceneMouseEvent to a QMouseEvent suitable for StelApp consumption
+	QMouseEvent convertMouseEvent(QGraphicsSceneMouseEvent *event) const
+	{
+		//convert graphics scene mouse event to widget style mouse event
+		QEvent::Type t = QEvent::None;
+		switch(event->type())
+		{
+			case QEvent::GraphicsSceneMousePress:
+				t = QEvent::MouseButtonPress;
+				break;
+			case QEvent::GraphicsSceneMouseRelease:
+				t = QEvent::MouseButtonRelease;
+				break;
+			case QEvent::GraphicsSceneMouseMove:
+				t = QEvent::MouseMove;
+				break;
+			default:
+				qFatal("Invalid mouse event type %d",event->type());
+		}
+
+		QPointF pos = event->scenePos();
+		//Y needs to be inverted
+		pos.setY(rect.height() - 1 - pos.y());
+		return QMouseEvent(t,pos,event->button(),event->buttons(),event->modifiers());
+	}
+
 	QRectF rect;
 	double previousPaintTime;
 	StelMainView* mainView;
@@ -583,7 +554,7 @@ void StelMainView::resizeEvent(QResizeEvent* event)
 
 void StelMainView::focusSky() {
 	scene()->setActiveWindow(0);
-	clearFocus();
+	rootItem->setFocus();
 }
 
 StelMainView::~StelMainView()
