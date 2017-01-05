@@ -37,7 +37,7 @@ typedef void (OsculatingFunctType)(double jde0,double jde,double xyz[3]);
 
 // epoch J2000: 12 UT on 1 Jan 2000
 #define J2000 2451545.0
-#define ORBIT_SEGMENTS 360
+#define ORBIT_SEGMENTS 64
 
 class StelFont;
 class StelPainter;
@@ -285,13 +285,8 @@ public:
 	bool getFlagOrbits(void) const {return orbitFader;}
 	LinearFader orbitFader;
 	// draw orbital path of Planet
-	void drawOrbit(const StelCore*);
-	Vec3d orbit[ORBIT_SEGMENTS+1];   // store heliocentric coordinates for drawing the orbit
-	Vec3d orbitP[ORBIT_SEGMENTS+1];  // store local coordinate for orbit
-	double lastOrbitJDE;
+	void drawOrbit(StelCore*);
 	double deltaJDE;                 // time difference between positional updates.
-	double deltaOrbitJDE;
-	bool orbitCached;                // whether orbit calculations are cached for drawing orbit yet
 	bool closeOrbit;                 // whether to connect the beginning of the orbit line to
 					 // the end: good for elliptical orbits, bad for parabolic
 					 // and hyperbolic orbits

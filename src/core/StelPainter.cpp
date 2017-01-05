@@ -813,6 +813,86 @@ void StelPainter::drawPath(const QVector<Vec3d> &points, const QVector<Vec4f> &c
 	Q_ASSERT(smallCircleColorArray.isEmpty());
 }
 
+// Recursive method cutting a small circle in small segments
+// This is just a more generic version of fIter where we can specify
+// the full parametric function of the path we want to render.
+static inline void fIter2(const StelProjectorP& prj, std::function<void(double t, Vec3d *p)> fn,
+						  double t1, double t2, const Vec3d& p1, const Vec3d& p2, Vec3d& win1, Vec3d& win2,
+						  QLinkedList<Vec3d>& vertexList, const QLinkedList<Vec3d>::iterator& iter,
+						  int minN, int nbI=0, bool checkCrossDiscontinuity=true)
+{
+	const bool crossDiscontinuity = checkCrossDiscontinuity && prj->intersectViewportDiscontinuity(p1, p2);
+	if (crossDiscontinuity && nbI>=15)
+	{
+		win1[2]=-2.;
+		win2[2]=-2.;
+		vertexList.insert(iter, win1);
+		vertexList.insert(iter, win2);
+		return;
+	}
+
+	double newT = (t1 + t2) / 2.0;
+	Vec3d newVertex;
+	fn(newT, &newVertex);
+	Vec3d win3 = newVertex;
+	const bool isValidVertex = prj->projectInPlace(win3);
+
+	const float v10=win1[0]-win3[0];
+	const float v11=win1[1]-win3[1];
+	const float v20=win2[0]-win3[0];
+	const float v21=win2[1]-win3[1];
+
+	const float dist = std::sqrt((v10*v10+v11*v11)*(v20*v20+v21*v21));
+	const float cosAngle = (v10*v20+v11*v21)/dist;
+	if ((cosAngle>-0.999f || dist>50*50 || crossDiscontinuity || nbI<minN) && nbI<15)
+	{
+		// Use the 3rd component of the vector to store whether the vertex is valid
+		win3[2]= isValidVertex ? 1.0 : -1.;
+		fIter2(prj, fn, t1, newT, p1, newVertex, win1, win3, vertexList, vertexList.insert(iter, win3), minN, nbI+1, crossDiscontinuity || dist>50*50);
+		fIter2(prj, fn, newT, t2, newVertex, p2, win3, win2, vertexList, iter, minN, nbI+1, crossDiscontinuity || dist>50*50 );
+	}
+}
+
+
+void StelPainter::drawParametricPath(double t1, double t2, int nmin,
+									 std::function<void(double t, Vec3d *p)> fn)
+{
+	QLinkedList<Vec3d> tessArc;	// Contains the list of projected points from the tesselated arc
+	Vec3d p1, p2, win1, win2;
+	fn(t1, &p1);
+	fn(t2, &p2);
+	win1[2] = prj->project(p1, win1) ? 1.0 : -1.;
+	win2[2] = prj->project(p2, win2) ? 1.0 : -1.;
+	tessArc.append(win1);
+	fIter2(prj, fn, t1, t2, p1, p2, win1, win2, tessArc, tessArc.insert(tessArc.end(), win2), log2(nmin));
+
+	// And draw.
+	QLinkedList<Vec3d>::ConstIterator i = tessArc.constBegin();
+	while (i+1 != tessArc.constEnd())
+	{
+		const Vec3d& p1 = *i;
+		const Vec3d& p2 = *(++i);
+		const bool p1InViewport = prj->checkInViewport(p1);
+		const bool p2InViewport = prj->checkInViewport(p2);
+		if ((p1[2]>0 && p1InViewport) || (p2[2]>0 && p2InViewport))
+		{
+			smallCircleVertexArray.append(Vec2f(p1[0], p1[1]));
+			if (i+1==tessArc.constEnd())
+			{
+				smallCircleVertexArray.append(Vec2f(p2[0], p2[1]));
+				drawSmallCircleVertexArray();
+			}
+		}
+		else
+		{
+			// Break the line, draw the stored vertex and flush the list
+			if (!smallCircleVertexArray.isEmpty())
+				smallCircleVertexArray.append(Vec2f(p1[0], p1[1]));
+			drawSmallCircleVertexArray();
+		}
+	}
+}
+
 // Project the passed triangle on the screen ensuring that it will look smooth, even for non linear distortion
 // by splitting it into subtriangles.
 void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, const Vec3d* vertices, QVarLengthArray<Vec3f, 4096>* outVertices,

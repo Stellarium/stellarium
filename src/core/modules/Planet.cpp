@@ -105,10 +105,7 @@ Planet::Planet(const QString& englishName,
 	       const QString& pTypeStr)
 	: flagNativeName(true),
 	  flagTranslatedName(true),
-	  lastOrbitJDE(0.0),
 	  deltaJDE(StelCore::JD_SECOND),
-	  deltaOrbitJDE(0.0),
-	  orbitCached(false),
 	  closeOrbit(acloseOrbit),
 	  englishName(englishName),
 	  nameI18(englishName),
@@ -501,8 +498,6 @@ void Planet::setRotationElements(float _period, float _offset, double _epoch, fl
 	re.ascendingNode = _ascendingNode;
 	re.precessionRate = _precessionRate;
 	re.siderealPeriod = _siderealPeriod;  // used for drawing orbit lines
-
-	deltaOrbitJDE = re.siderealPeriod/ORBIT_SEGMENTS;
 }
 
 Vec3d Planet::getJ2000EquatorialPos(const StelCore *core) const
@@ -595,127 +590,10 @@ void Planet::computePosition(const double dateJDE)
 	if (parent)
 		parent->computePositionWithoutOrbits(dateJDE);
 
-	if (orbitFader.getInterstate()>0.000001 && deltaOrbitJDE > 0 && (fabs(lastOrbitJDE-dateJDE)>deltaOrbitJDE || !orbitCached))
-	{
-		StelCore *core=StelApp::getInstance().getCore();
-
-		double calc_date;
-		// int delta_points = (int)(0.5 + (date - lastOrbitJD)/date_increment);
-		int delta_points;
-
-		if( dateJDE > lastOrbitJDE )
-		{
-			delta_points = (int)(0.5 + (dateJDE - lastOrbitJDE)/deltaOrbitJDE);
-		}
-		else
-		{
-			delta_points = (int)(-0.5 + (dateJDE - lastOrbitJDE)/deltaOrbitJDE);
-		}
-		double new_date = lastOrbitJDE + delta_points*deltaOrbitJDE;
-
-		// qDebug( "Updating orbit coordinates for %s (delta %f) (%d points)\n", getEnglishName().toUtf8().data(), deltaOrbitJDE, delta_points);
-
-		if( delta_points > 0 && delta_points < ORBIT_SEGMENTS && orbitCached)
-		{
-
-			for( int d=0; d<ORBIT_SEGMENTS; d++ )
-			{
-				if(d + delta_points >= ORBIT_SEGMENTS-1 )
-				{
-					// calculate new points
-					calc_date = new_date + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
-
-					// date increments between points will not be completely constant though
-					computeTransMatrix(calc_date-core->computeDeltaT(calc_date)/86400.0, calc_date);
-					if (osculatingFunc)
-					{
-						(*osculatingFunc)(dateJDE,calc_date,eclipticPos);
-					}
-					else
-					{
-						coordFunc(calc_date, eclipticPos, userDataPtr);
-					}
-					orbitP[d] = eclipticPos;
-					orbit[d] = getHeliocentricEclipticPos();
-				}
-				else
-				{
-					orbitP[d] = orbitP[d+delta_points];
-					orbit[d] = getHeliocentricPos(orbitP[d]);
-				}
-			}
-
-			lastOrbitJDE = new_date;
-		}
-		else if( delta_points < 0 && abs(delta_points) < ORBIT_SEGMENTS  && orbitCached)
-		{
-
-			for( int d=ORBIT_SEGMENTS-1; d>=0; d-- )
-			{
-				if(d + delta_points < 0 )
-				{
-					// calculate new points
-					calc_date = new_date + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
-
-					computeTransMatrix(calc_date-core->computeDeltaT(calc_date)/86400.0, calc_date);
-					if (osculatingFunc) {
-						(*osculatingFunc)(dateJDE,calc_date,eclipticPos);
-					}
-					else
-					{
-						coordFunc(calc_date, eclipticPos, userDataPtr);
-					}
-					orbitP[d] = eclipticPos;
-					orbit[d] = getHeliocentricEclipticPos();
-				}
-				else
-				{
-					orbitP[d] = orbitP[d+delta_points];
-					orbit[d] = getHeliocentricPos(orbitP[d]);
-				}
-			}
-
-			lastOrbitJDE = new_date;
-
-		}
-		else if( delta_points || !orbitCached)
-		{
-
-			// update all points (less efficient)
-			for( int d=0; d<ORBIT_SEGMENTS; d++ )
-			{
-				calc_date = dateJDE + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
-				computeTransMatrix(calc_date-core->computeDeltaT(calc_date)/86400.0, calc_date);
-				if (osculatingFunc)
-				{
-					(*osculatingFunc)(dateJDE,calc_date,eclipticPos);
-				}
-				else
-				{
-					coordFunc(calc_date, eclipticPos, userDataPtr);
-				}
-				orbitP[d] = eclipticPos;
-				orbit[d] = getHeliocentricEclipticPos();
-			}
-
-			lastOrbitJDE = dateJDE;
-			if (!osculatingFunc) orbitCached = 1;
-		}
-
-
-		// calculate actual Planet position
-		coordFunc(dateJDE, eclipticPos, userDataPtr);
-
-		lastJDE = dateJDE;
-
-	}
-	else if (fabs(lastJDE-dateJDE)>deltaJDE)
+	if (fabs(lastJDE-dateJDE)>deltaJDE)
 	{
 		// calculate actual Planet position
 		coordFunc(dateJDE, eclipticPos, userDataPtr);
-		if (orbitFader.getInterstate()>0.000001)
-			for( int d=0; d<ORBIT_SEGMENTS; d++ )
-				orbit[d]=getHeliocentricPos(orbitP[d]);
 		lastJDE = dateJDE;
 	}
 
@@ -2112,7 +1990,7 @@ Vec3f Planet::getCurrentOrbitColor()
 }
 
 // draw orbital path of Planet
-void Planet::drawOrbit(const StelCore* core)
+void Planet::drawOrbit(StelCore* core)
 {
 	if (!orbitFader.getInterstate())
 		return;
@@ -2127,41 +2005,22 @@ void Planet::drawOrbit(const StelCore* core)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 
-	Vec3f orbColor = getCurrentOrbitColor();
+	sPainter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], orbitFader.getInterstate());
+	double dateJDE = core->getJDE();
 
-	sPainter.setColor(orbColor[0], orbColor[1], orbColor[2], orbitFader.getInterstate());
-	Vec3d onscreen;
-	// special case - use current Planet position as center vertex so that draws
-	// on its orbit all the time (since segmented rather than smooth curve)
-	Vec3d savePos = orbit[ORBIT_SEGMENTS/2];
-	orbit[ORBIT_SEGMENTS/2]=getHeliocentricEclipticPos();
-	orbit[ORBIT_SEGMENTS]=orbit[0];
-	int nbIter = closeOrbit ? ORBIT_SEGMENTS : ORBIT_SEGMENTS-1;
-	QVarLengthArray<float, 1024> vertexArray;
-
-	sPainter.enableClientStates(true, false, false);
-
-	for (int n=0; n<=nbIter; ++n)
-	{
-		if (prj->project(orbit[n],onscreen) && (vertexArray.size()==0 || !prj->intersectViewportDiscontinuity(orbit[n-1], orbit[n])))
-		{
-			vertexArray.append(onscreen[0]);
-			vertexArray.append(onscreen[1]);
-		}
-		else if (!vertexArray.isEmpty())
-		{
-			sPainter.setVertexPointer(2, GL_FLOAT, vertexArray.constData());
-			sPainter.drawFromArray(StelPainter::LineStrip, vertexArray.size()/2, 0, false);
-			vertexArray.clear();
-		}
-	}
-	orbit[ORBIT_SEGMENTS/2]=savePos;
-	if (!vertexArray.isEmpty())
-	{
-		sPainter.setVertexPointer(2, GL_FLOAT, vertexArray.constData());
-		sPainter.drawFromArray(StelPainter::LineStrip, vertexArray.size()/2, 0, false);
-	}
-	sPainter.enableClientStates(false);
+	sPainter.drawParametricPath(dateJDE - re.siderealPeriod / 2, dateJDE + re.siderealPeriod / 2, 360, [=](double t, Vec3d *p) {
+			computeTransMatrix(t - core->computeDeltaT(t)/86400.0, t);
+			Vec3d pos;
+			if (osculatingFunc)
+			{
+				(*osculatingFunc)(dateJDE , t, pos);
+			}
+			else
+			{
+				coordFunc(t, pos, userDataPtr);
+			}
+			*p = getHeliocentricPos(pos);
+	});
 }
 
 void Planet::update(int deltaTime)
