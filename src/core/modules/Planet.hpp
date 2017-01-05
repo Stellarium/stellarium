@@ -69,6 +69,26 @@ public:
 	StelTextureSP tex;
 };
 
+// Class used to cache a planet position at different time.
+class PosCache
+{
+public:
+	// Get the position at a given time.
+	// @param t   time key
+	// @param dt  how much error we accept on t, this allows to use a
+	//            nearby precomputed value if available.
+	// @param pos set to the cached position if we found one
+	// @return true if we found a cached position
+	bool get(double t, double dt, Vec3d* pos) const;
+	void set(double t, const Vec3d& pos) {map.insert(t, pos);}
+
+	// Clear from the cache all the positions outside a given range.
+	void clearOutside(double t1, double t2);
+private:
+	QMap<double, Vec3d> map;
+};
+
+
 
 class Planet : public StelObject
 {
@@ -294,6 +314,7 @@ public:
 	static Vec3f orbitColor;
 	static void setOrbitColor(const Vec3f& oc) {orbitColor = oc;}
 	static const Vec3f& getOrbitColor() {return orbitColor;}
+	PosCache posCache; // Position cache used for the orbits.
 
 	static Vec3f orbitMajorPlanetsColor;
 	static void setMajorPlanetOrbitColor(const Vec3f& oc) { orbitMajorPlanetsColor = oc;}

@@ -86,7 +86,37 @@ Planet::MoonShaderVars Planet::moonShaderVars;
 
 QMap<Planet::PlanetType, QString> Planet::pTypeMap;
 QMap<Planet::ApparentMagnitudeAlgorithm, QString> Planet::vMagAlgorithmMap;
-	
+
+
+bool PosCache::get(double t, double dt, Vec3d* pos) const
+{
+	QMap<double, Vec3d>::const_iterator i1, i2;
+	double d1, d2;
+	if (map.isEmpty()) return false;
+	// find two closest to t values i1 and i2 such that i1 <= i2.
+	// I think we can improve this code.
+	i2 = map.upperBound(t);
+	i1 = i2;
+	if (i1 != map.begin()) i1--;
+	if (i2 == map.end()) i2--;
+	d1 = fabs(i1.key() - t);
+	d2 = fabs(i2.key() - t);
+	if (d1 <= d2 && d1 <= dt) {*pos = i1.value(); return true;}
+	if (d2 <= d1 && d2 <= dt) {*pos = i2.value(); return true;}
+	return false;
+}
+
+void PosCache::clearOutside(double t1, double t2)
+{
+	Q_ASSERT(t1 <= t2);
+	QMap<double, Vec3d>::iterator i, i1;
+	i1 = map.lowerBound(t1);
+	i = map.begin();
+	while (i != i1) i = map.erase(i);
+	i = map.upperBound(t2);
+	while (i != map.end()) i = map.erase(i);
+}
+
 Planet::Planet(const QString& englishName,
 	       int flagLighting,
 	       double radius,
@@ -2007,17 +2037,21 @@ void Planet::drawOrbit(StelCore* core)
 
 	sPainter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], orbitFader.getInterstate());
 	double dateJDE = core->getJDE();
+	double dt = 1.0 / 24;
+	double t1 = dateJDE - re.siderealPeriod / 2;
+	double t2 = dateJDE + re.siderealPeriod / 2;
 
-	sPainter.drawParametricPath(dateJDE - re.siderealPeriod / 2, dateJDE + re.siderealPeriod / 2, 360, [=](double t, Vec3d *p) {
+	posCache.clearOutside(t1 - dt, t2 + dt);
+	sPainter.drawParametricPath(t1, t2, ORBIT_SEGMENTS, [=](double t, Vec3d *p) {
 			computeTransMatrix(t - core->computeDeltaT(t)/86400.0, t);
 			Vec3d pos;
-			if (osculatingFunc)
+			if (!posCache.get(t, dt, &pos))
 			{
-				(*osculatingFunc)(dateJDE , t, pos);
-			}
-			else
-			{
-				coordFunc(t, pos, userDataPtr);
+				if (osculatingFunc)
+					(*osculatingFunc)(dateJDE , t, pos);
+				else
+					coordFunc(t, pos, userDataPtr);
+				posCache.set(t, pos);
 			}
 			*p = getHeliocentricPos(pos);
 	});
