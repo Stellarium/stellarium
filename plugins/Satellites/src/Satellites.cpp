@@ -1602,7 +1602,7 @@ void Satellites::draw(StelCore* core)
 	if (core->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
 		return;
 
-	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
+	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionAuto);
 	StelPainter painter(prj);
 	painter.setFont(labelFont);
 	Satellite::hintBrightness = hintFader.getInterstate();
