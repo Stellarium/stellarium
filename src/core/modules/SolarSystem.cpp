@@ -1078,7 +1078,7 @@ void SolarSystem::computePositions(double dateJDE, const Vec3d& observerPos)
 	{
 		foreach (PlanetP p, systemPlanets)
 		{
-			p->computePositionWithoutOrbits(dateJDE);
+			p->computePosition(dateJDE);
 		}
 		foreach (PlanetP p, systemPlanets)
 		{
