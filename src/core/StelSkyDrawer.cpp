@@ -95,7 +95,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	setRelativeStarScale(conf->value("stars/relative_scale",1.0).toFloat(&ok));
 	if (!ok)
 		setRelativeStarScale(1.0);
-	
+
 	setAbsoluteStarScale(conf->value("stars/absolute_scale",1.0).toFloat(&ok));
 	if (!ok)
 		setAbsoluteStarScale(1.0);
@@ -110,7 +110,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 		extinction.setUndergroundExtinctionMode(Extinction::UndergroundExtinctionMirror);
 	else if (extinctionMode=="max")
 		extinction.setUndergroundExtinctionMode(Extinction::UndergroundExtinctionMax);
-	
+
 	setAtmosphereTemperature(conf->value("landscape/temperature_C",15.0).toDouble(&ok));
 	if (!ok)
 		setAtmosphereTemperature(15.0);
