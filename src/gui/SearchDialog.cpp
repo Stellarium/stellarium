@@ -131,10 +131,9 @@ SearchDialog::SearchDialogStaticData SearchDialog::staticData;
 QString SearchDialog::extSearchText = "";
 
 SearchDialog::SearchDialog(QObject* parent)
-	: StelDialog(parent)
+	: StelDialog("Search", parent)
 	, simbadReply(NULL)
 {
-	dialogName = "Search";
 	ui = new Ui_searchDialogForm;
 	simbadSearcher = new SimbadSearcher(this);
 	objectMgr = GETSTELMODULE(StelObjectMgr);

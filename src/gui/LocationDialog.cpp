@@ -43,13 +43,12 @@
 #include <QTimeZone>
 
 LocationDialog::LocationDialog(QObject* parent)
-	: StelDialog(parent)
+	: StelDialog("Location", parent)
 	, isEditingNew(false)
 	, allModel(NULL)
 	, pickedModel(NULL)
 	, proxyModel(NULL)
 {
-	dialogName = "Location";
 	ui = new Ui_locationDialogForm;
 }
 

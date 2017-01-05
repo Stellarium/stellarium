@@ -30,9 +30,8 @@
 #include <QSettings>
 #include <QColorDialog>
 
-ConfigureOrbitColorsDialog::ConfigureOrbitColorsDialog()
+ConfigureOrbitColorsDialog::ConfigureOrbitColorsDialog() : StelDialog("ConfigureOrbitColorsDialog")
 {
-	dialogName = "ConfigureOrbitColorsDialog";
 	ui = new Ui_ConfigureOrbitColorsDialogForm;
 }
 

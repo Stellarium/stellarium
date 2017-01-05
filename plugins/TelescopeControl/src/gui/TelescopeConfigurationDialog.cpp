@@ -39,10 +39,10 @@
 #include <QDir>
 
 TelescopeConfigurationDialog::TelescopeConfigurationDialog()
-	: configuredSlot(0)
+	: StelDialog("TelescopeControlConfiguration")
+	, configuredSlot(0)
 {
 	ui = new Ui_telescopeConfigurationDialog();
-	dialogName = "TelescopeControlConfiguration";
 	
 	telescopeManager = GETSTELMODULE(TelescopeControl);
 

@@ -24,9 +24,8 @@
 #include "StelTranslator.hpp"
 #include "StelObjectMgr.hpp"
 
-CustomDeltaTEquationDialog::CustomDeltaTEquationDialog()
+CustomDeltaTEquationDialog::CustomDeltaTEquationDialog() : StelDialog("CustomDeltaTEquation")
 {
-	dialogName = "CustomDeltaTEquation";
 	ui = new Ui_customDeltaTEquationDialogForm;
 	conf = StelApp::getInstance().getSettings();
 	core = StelApp::getInstance().getCore();

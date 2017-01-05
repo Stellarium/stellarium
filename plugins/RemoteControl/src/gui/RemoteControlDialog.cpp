@@ -28,10 +28,10 @@
 #include "StelModuleMgr.hpp"
 
 RemoteControlDialog::RemoteControlDialog()
-	: rc(NULL)
+	: StelDialog("RemoteControl")
+	, rc(NULL)
 {
 	ui = new Ui_remoteControlDialog();
-	dialogName="RemoteControl";
 }
 
 RemoteControlDialog::~RemoteControlDialog()

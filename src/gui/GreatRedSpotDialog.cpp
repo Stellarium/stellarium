@@ -28,9 +28,8 @@
 
 #include "ui_greatRedSpotDialog.h"
 
-GreatRedSpotDialog::GreatRedSpotDialog()
+GreatRedSpotDialog::GreatRedSpotDialog() : StelDialog("GreatRedSpot")
 {
-	dialogName = "GreatRedSpot";
 	ui = new Ui_GreatRedSpotDialogForm;
 }
 
