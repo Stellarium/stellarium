@@ -279,7 +279,13 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	
 	if ((flags & Magnitude) && (stdMag!=99.f))
 	{
-		oss << q_("Approx. magnitude: <b>%1</b>").arg(QString::number(getVMagnitude(core), 'f', 2)) << "<br/>";
+		float mag = getVMagnitude(core);
+		if (core->getSkyDrawer()->getFlagHasAtmosphere())
+			oss << q_("Approx. magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(mag, 'f', 2),
+												QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
+		else
+			oss << q_("Approx. magnitude: <b>%1</b>").arg(QString::number(mag, 'f', 2)) << "<br/>";
+
 #ifdef IRIDIUM_SAT_TEXT_DEBUG
 		oss << myText << "<br/>";
 #endif
