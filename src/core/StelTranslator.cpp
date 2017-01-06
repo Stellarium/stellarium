@@ -63,7 +63,7 @@ StelTranslator::StelTranslator(const QString& adomain, const QString& alangName)
 StelTranslator::~StelTranslator()
 {
 	delete translator;
-	translator = 0;
+	translator = NULL;
 }
 
 QString StelTranslator::qtranslate(const QString& s, const QString& c) const
