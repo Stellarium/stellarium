@@ -194,6 +194,7 @@ MeteorShower::~MeteorShower()
 {
 	qDeleteAll(m_activeMeteors);
 	m_activeMeteors.clear();
+	m_colors.clear();
 }
 
 bool MeteorShower::enabled() const

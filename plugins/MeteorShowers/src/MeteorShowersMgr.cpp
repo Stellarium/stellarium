@@ -123,6 +123,12 @@ void MeteorShowersMgr::deinit()
 	m_bolideTexture.clear();
 	m_radiantTexture.clear();
 	m_pointerTexture.clear();
+	delete m_meteorShowers;
+	m_meteorShowers = NULL;
+	delete m_configDialog;
+	m_configDialog = NULL;
+	delete m_searchDialog;
+	m_searchDialog = NULL;
 }
 
 double MeteorShowersMgr::getCallOrder(StelModuleActionName actionName) const
