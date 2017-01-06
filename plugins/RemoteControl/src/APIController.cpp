@@ -28,7 +28,7 @@ APIController::APIController(int prefixLength, QObject* parent) : HttpRequestHan
 
 APIController::~APIController()
 {
-
+	m_serviceMap.clear();
 }
 
 void APIController::update(double deltaTime)
