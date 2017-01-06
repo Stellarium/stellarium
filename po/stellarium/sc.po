@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-01-02 21:34+0700\n"
-"PO-Revision-Date: 2017-01-04 19:35+0000\n"
+"POT-Creation-Date: 2017-01-05 17:23+0700\n"
+"PO-Revision-Date: 2017-01-05 14:59+0000\n"
 "Last-Translator: Giuseppe Putzolu <giuseppe.putzolu@gmail.com>\n"
 "Language-Team: Sardinian <sc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-05 05:26+0000\n"
-"X-Generator: Launchpad (build 18298)\n"
+"X-Launchpad-Export-Date: 2017-01-06 05:45+0000\n"
+"X-Generator: Launchpad (build 18302)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
 #: src/core/modules/Constellation.cpp:296 src/core/modules/Nebula.cpp:191
@@ -2071,27 +2071,27 @@ msgstr "LTST"
 msgid "Select screenshot directory"
 msgstr "Sebera sa cartedda de su screenshot"
 
-#: src/gui/ConfigurationDialog.cpp:856
+#: src/gui/ConfigurationDialog.cpp:857
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Partinde su FOV: %1 %2"
 
-#: src/gui/ConfigurationDialog.cpp:864
+#: src/gui/ConfigurationDialog.cpp:865
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Partinde sa diretzione de vista Az/Alt: %1 %2"
 
-#: src/gui/ConfigurationDialog.cpp:926
+#: src/gui/ConfigurationDialog.cpp:927
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:253
 msgid "Authors"
 msgstr "Autores"
 
-#: src/gui/ConfigurationDialog.cpp:927 src/gui/ViewDialog.cpp:1254
+#: src/gui/ConfigurationDialog.cpp:928 src/gui/ViewDialog.cpp:1254
 msgid "Contact"
 msgstr "Cuntatu"
 
-#: src/gui/ConfigurationDialog.cpp:929
+#: src/gui/ConfigurationDialog.cpp:930
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:517
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:408
@@ -2110,15 +2110,15 @@ msgstr "Cuntatu"
 msgid "Version"
 msgstr "Versione"
 
-#: src/gui/ConfigurationDialog.cpp:1026
+#: src/gui/ConfigurationDialog.cpp:1027
 msgid "Running script: "
 msgstr "Script andande: "
 
-#: src/gui/ConfigurationDialog.cpp:1033
+#: src/gui/ConfigurationDialog.cpp:1034
 msgid "Running script: [none]"
 msgstr "Script andande: [manc'unu]"
 
-#: src/gui/ConfigurationDialog.cpp:1098
+#: src/gui/ConfigurationDialog.cpp:1099
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -2126,24 +2126,24 @@ msgstr ""
 "Ch'est finiu de iscarrigare su catalogu nou de sos isteddos!\n"
 "Torra  a faere partire Stellarium po dos poder biere."
 
-#: src/gui/ConfigurationDialog.cpp:1102
+#: src/gui/ConfigurationDialog.cpp:1103
 msgid "All available star catalogs have been installed."
 msgstr ""
 "Totu sos catalogos disponibiles de sos isteddos sun bistaos installaos."
 
-#: src/gui/ConfigurationDialog.cpp:1107
+#: src/gui/ConfigurationDialog.cpp:1108
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Piga su catalogu %1 de %2"
 
-#: src/gui/ConfigurationDialog.cpp:1114
+#: src/gui/ConfigurationDialog.cpp:1115
 #, qt-format
 msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr "Seo iscarrigande %1..."
 
-#: src/gui/ConfigurationDialog.cpp:1121
+#: src/gui/ConfigurationDialog.cpp:1122
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -2154,7 +2154,7 @@ msgstr ""
 "Contu de isteddos: %2 Miliones\n"
 "Intervallu de mannitudine: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1164 src/gui/ConfigurationDialog.cpp:1200
+#: src/gui/ConfigurationDialog.cpp:1165 src/gui/ConfigurationDialog.cpp:1201
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2163,11 +2163,11 @@ msgstr ""
 "Irballiu de iscarrigamentu%1: \n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1253
+#: src/gui/ConfigurationDialog.cpp:1254
 msgid "Verifying file integrity..."
 msgstr "Seo controllande s'integridade de su file..."
 
-#: src/gui/ConfigurationDialog.cpp:1257
+#: src/gui/ConfigurationDialog.cpp:1258
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2176,170 +2176,170 @@ msgstr ""
 "Irballiu de iscarrigamentu %1:\n"
 "Su file est mantzau."
 
-#: src/gui/ConfigurationDialog.cpp:1303 src/gui/ConfigurationDialog.cpp:1312
+#: src/gui/ConfigurationDialog.cpp:1304 src/gui/ConfigurationDialog.cpp:1313
 msgid "Available"
 msgstr "Disponibile"
 
-#: src/gui/ConfigurationDialog.cpp:1305 src/gui/ConfigurationDialog.cpp:1314
+#: src/gui/ConfigurationDialog.cpp:1306 src/gui/ConfigurationDialog.cpp:1315
 msgid "Not Available"
 msgstr "Non Disponibile"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1381
+#: src/gui/ConfigurationDialog.cpp:1382
 msgid "Algorithm of"
 msgstr "Algoritimu de"
 
-#: src/gui/ConfigurationDialog.cpp:1394
+#: src/gui/ConfigurationDialog.cpp:1395
 msgid "Without correction"
 msgstr "Chentza currezere"
 
-#: src/gui/ConfigurationDialog.cpp:1395
+#: src/gui/ConfigurationDialog.cpp:1396
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1396
+#: src/gui/ConfigurationDialog.cpp:1397
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1397
+#: src/gui/ConfigurationDialog.cpp:1398
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1398
+#: src/gui/ConfigurationDialog.cpp:1399
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Efemerides Astronomicas (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1399
+#: src/gui/ConfigurationDialog.cpp:1400
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1400
+#: src/gui/ConfigurationDialog.cpp:1401
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller & Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1401
+#: src/gui/ConfigurationDialog.cpp:1402
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1402
+#: src/gui/ConfigurationDialog.cpp:1403
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel & Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1403
+#: src/gui/ConfigurationDialog.cpp:1404
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel & Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1404
+#: src/gui/ConfigurationDialog.cpp:1405
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison & Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1405
+#: src/gui/ConfigurationDialog.cpp:1406
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson & Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1406
+#: src/gui/ConfigurationDialog.cpp:1407
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson & Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1407
+#: src/gui/ConfigurationDialog.cpp:1408
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1408
+#: src/gui/ConfigurationDialog.cpp:1409
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1409
+#: src/gui/ConfigurationDialog.cpp:1410
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze & Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1410
+#: src/gui/ConfigurationDialog.cpp:1411
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson & Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1411
+#: src/gui/ConfigurationDialog.cpp:1412
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1413
+#: src/gui/ConfigurationDialog.cpp:1414
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (cun Chapront, Chapront-Touze & Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1414
+#: src/gui/ConfigurationDialog.cpp:1415
 msgid "JPL Horizons"
 msgstr "Orizontes JPL"
 
-#: src/gui/ConfigurationDialog.cpp:1415
+#: src/gui/ConfigurationDialog.cpp:1416
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus & Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1416
+#: src/gui/ConfigurationDialog.cpp:1417
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison & Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1417
+#: src/gui/ConfigurationDialog.cpp:1418
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
 msgstr "Stephenson, Morrison et Hohenkerk (2016)"
 
-#: src/gui/ConfigurationDialog.cpp:1419
+#: src/gui/ConfigurationDialog.cpp:1420
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak & Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1422
+#: src/gui/ConfigurationDialog.cpp:1423
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr "Espenak & Meeus (2006) no extra moon acceleration"
 
-#: src/gui/ConfigurationDialog.cpp:1424
+#: src/gui/ConfigurationDialog.cpp:1425
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1425
+#: src/gui/ConfigurationDialog.cpp:1426
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1426
+#: src/gui/ConfigurationDialog.cpp:1427
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1427
+#: src/gui/ConfigurationDialog.cpp:1428
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold & Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1428
+#: src/gui/ConfigurationDialog.cpp:1429
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1429
+#: src/gui/ConfigurationDialog.cpp:1430
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana & Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1430
+#: src/gui/ConfigurationDialog.cpp:1431
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Ecuatzione Personalizada de %1T"
 
-#: src/gui/ConfigurationDialog.cpp:1479 src/gui/ConfigurationDialog.cpp:1514
+#: src/gui/ConfigurationDialog.cpp:1480 src/gui/ConfigurationDialog.cpp:1515
 #: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:408
 msgid "System default"
 msgstr "Sistema predefiniu"
 
-#: src/gui/ConfigurationDialog.cpp:1480
+#: src/gui/ConfigurationDialog.cpp:1481
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "yyyy-mm-dd (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1481
+#: src/gui/ConfigurationDialog.cpp:1482
 msgid "dd-mm-yyyy"
 msgstr "dd-mm-yyyy"
 
-#: src/gui/ConfigurationDialog.cpp:1482
+#: src/gui/ConfigurationDialog.cpp:1483
 msgid "mm-dd-yyyy"
 msgstr "mm-dd-yyyy"
 
-#: src/gui/ConfigurationDialog.cpp:1515
+#: src/gui/ConfigurationDialog.cpp:1516
 msgid "12-hour format"
 msgstr "Formau de sas 12-oras"
 
-#: src/gui/ConfigurationDialog.cpp:1516
+#: src/gui/ConfigurationDialog.cpp:1517
 msgid "24-hour format"
 msgstr "Formau de sas 24-oras"
 
@@ -8711,77 +8711,77 @@ msgstr ""
 "file predefiniu"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1774
+#: plugins/Satellites/src/Satellites.cpp:1940
 msgid "visual"
 msgstr "visulae"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1776
+#: plugins/Satellites/src/Satellites.cpp:1942
 msgid "scientific"
 msgstr "iscentificu"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1778
+#: plugins/Satellites/src/Satellites.cpp:1944
 msgid "communications"
 msgstr "comunicatziones"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1780
+#: plugins/Satellites/src/Satellites.cpp:1946
 msgid "navigation"
 msgstr "navigatzione"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1782
+#: plugins/Satellites/src/Satellites.cpp:1948
 msgid "amateur"
 msgstr "amadoers"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1784
+#: plugins/Satellites/src/Satellites.cpp:1950
 msgid "weather"
 msgstr "tempus"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1786
+#: plugins/Satellites/src/Satellites.cpp:1952
 msgid "geostationary"
 msgstr "geoistatzionariu"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1788
+#: plugins/Satellites/src/Satellites.cpp:1954
 msgid "non-operational"
 msgstr "istudau"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1790
+#: plugins/Satellites/src/Satellites.cpp:1956
 msgid "gps"
 msgstr "gps"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:1792
+#: plugins/Satellites/src/Satellites.cpp:1958
 msgid "glonass"
 msgstr "glonass"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:1794
+#: plugins/Satellites/src/Satellites.cpp:1960
 msgid "galileo"
 msgstr "galileo"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1796
+#: plugins/Satellites/src/Satellites.cpp:1962
 msgid "iridium"
 msgstr "iridium"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:1798
+#: plugins/Satellites/src/Satellites.cpp:1964
 msgid "stations"
 msgstr "istatziones"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:1800
+#: plugins/Satellites/src/Satellites.cpp:1966
 msgid "education"
 msgstr "po iscola"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:1802
+#: plugins/Satellites/src/Satellites.cpp:1968
 msgid "observatory"
 msgstr "osservatoriu"
 
@@ -8791,57 +8791,57 @@ msgstr "osservatoriu"
 #. Satellite descriptions - bright and/or famous objects
 #. Just A FEW objects please! (I'm looking at you, Alex!)
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1812
+#: plugins/Satellites/src/Satellites.cpp:1978
 msgid "The Hubble Space Telescope"
 msgstr "Su Telescopiu Ispatziale Hubble"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1814
+#: plugins/Satellites/src/Satellites.cpp:1980
 msgid "The International Space Station"
 msgstr "Sa Istatzione Ispatziale Internatzionale"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1816
+#: plugins/Satellites/src/Satellites.cpp:1982
 msgid "China's first space station"
 msgstr "Sa prima istatzione ispatziale tzinesa"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1818
+#: plugins/Satellites/src/Satellites.cpp:1984
 msgid "The russian space radio telescope RadioAstron"
 msgstr "Su radio telescopiu russu RadioAstron"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1820
+#: plugins/Satellites/src/Satellites.cpp:1986
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr "Laboratoriu Astrofisicu Internatzionale suba sos Rajos-Gamma"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1822
+#: plugins/Satellites/src/Satellites.cpp:1988
 msgid "The Gamma-Ray Observatory"
 msgstr "S'Osservatoriu de sos Rajos-Gamma"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:1826
+#: plugins/Satellites/src/Satellites.cpp:1992
 msgid "ISS (ZARYA)"
 msgstr "ISS (ZARYA)"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:1828
+#: plugins/Satellites/src/Satellites.cpp:1994
 msgid "HST"
 msgstr "HST"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:1830
+#: plugins/Satellites/src/Satellites.cpp:1996
 msgid "SPEKTR-R"
 msgstr "SPEKTR-R"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:1832
+#: plugins/Satellites/src/Satellites.cpp:1998
 msgid "INTEGRAL"
 msgstr "INTEGRAL"
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:1834
+#: plugins/Satellites/src/Satellites.cpp:2000
 msgid "TIANGONG 1"
 msgstr "TIANGONG 1"
 
@@ -8858,115 +8858,120 @@ msgstr "Desinnadore Internatzionale"
 msgid "artificial satellite"
 msgstr "satellite artifitziale"
 
-#: plugins/Satellites/src/Satellite.cpp:282
+#: plugins/Satellites/src/Satellite.cpp:284
+#, qt-format
+msgid "Approx. magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
+msgstr "Mannitude approssimada: <b>%1</b> (estinta a: <b>%2</b>)"
+
+#: plugins/Satellites/src/Satellite.cpp:287
 #, qt-format
 msgid "Approx. magnitude: <b>%1</b>"
 msgstr "Mannitudine Approssimada: <b>%1</b>"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:295
+#: plugins/Satellites/src/Satellite.cpp:301
 #, qt-format
 msgid "Range (km): %1"
 msgstr "Intervallu (km): %1"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:298
+#: plugins/Satellites/src/Satellite.cpp:304
 #, qt-format
 msgid "Range rate (km/s): %1"
 msgstr "Intervallu velocidade (km/s): %1"
 
 #. TRANSLATORS: Satellite altitude
-#: plugins/Satellites/src/Satellite.cpp:301
+#: plugins/Satellites/src/Satellite.cpp:307
 #, qt-format
 msgid "Altitude (km): %1"
 msgstr "Artesa (km): %1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:304
+#: plugins/Satellites/src/Satellite.cpp:310
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
 msgstr "SuttaPuntu (Lat./Long.): %1%2/%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:318
+#: plugins/Satellites/src/Satellite.cpp:324
 #, qt-format
 msgid "TEME coordinates (km): %1"
 msgstr "Coordinadas TEME (km): %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:326
+#: plugins/Satellites/src/Satellite.cpp:332
 #, qt-format
 msgid "TEME velocity (km/s): %1"
 msgstr "Velocidade TEME (km/s): %1"
 
-#: plugins/Satellites/src/Satellite.cpp:331
+#: plugins/Satellites/src/Satellite.cpp:337
 #, qt-format
 msgid "Sun reflection angle: %1%2"
 msgstr "Angulu de riflessione de su Sole: %1%2"
 
-#: plugins/Satellites/src/Satellite.cpp:338
+#: plugins/Satellites/src/Satellite.cpp:344
 #, qt-format
 msgid "Operational status: %1"
 msgstr "Istadu operativu: %1"
 
-#: plugins/Satellites/src/Satellite.cpp:345
+#: plugins/Satellites/src/Satellite.cpp:351
 msgid "The satellite and the observer are in sunlight."
 msgstr "Su satellite et su osservadore suni in sa lughe de su Sole."
 
-#: plugins/Satellites/src/Satellite.cpp:348
+#: plugins/Satellites/src/Satellite.cpp:354
 msgid "The satellite is visible."
 msgstr "Su satellite est visibile."
 
-#: plugins/Satellites/src/Satellite.cpp:351
+#: plugins/Satellites/src/Satellite.cpp:357
 msgid "The satellite is eclipsed."
 msgstr "Su satellite est eclissau."
 
-#: plugins/Satellites/src/Satellite.cpp:354
+#: plugins/Satellites/src/Satellite.cpp:360
 msgid "The satellite is not visible"
 msgstr "Su satellite non est visibile"
 
-#: plugins/Satellites/src/Satellite.cpp:379
+#: plugins/Satellites/src/Satellite.cpp:385
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 MHz (%2%3 kHz)"
 
-#: plugins/Satellites/src/Satellite.cpp:596
-#: plugins/Satellites/src/Satellite.cpp:621
+#: plugins/Satellites/src/Satellite.cpp:602
+#: plugins/Satellites/src/Satellite.cpp:627
 msgctxt "operational status"
 msgid "unknown"
 msgstr "non d'isco"
 
-#: plugins/Satellites/src/Satellite.cpp:600
+#: plugins/Satellites/src/Satellite.cpp:606
 msgctxt "operational status"
 msgid "operational"
 msgstr "opertivu"
 
-#: plugins/Satellites/src/Satellite.cpp:603
+#: plugins/Satellites/src/Satellite.cpp:609
 msgctxt "operational status"
 msgid "nonoperational"
 msgstr "no operativu"
 
-#: plugins/Satellites/src/Satellite.cpp:606
+#: plugins/Satellites/src/Satellite.cpp:612
 msgctxt "operational status"
 msgid "partially operational"
 msgstr "pagu operativu"
 
-#: plugins/Satellites/src/Satellite.cpp:609
+#: plugins/Satellites/src/Satellite.cpp:615
 msgctxt "operational status"
 msgid "standby"
 msgstr "stand-by"
 
-#: plugins/Satellites/src/Satellite.cpp:612
+#: plugins/Satellites/src/Satellite.cpp:618
 msgctxt "operational status"
 msgid "spare"
 msgstr "iscorta"
 
-#: plugins/Satellites/src/Satellite.cpp:615
+#: plugins/Satellites/src/Satellite.cpp:621
 msgctxt "operational status"
 msgid "extended mission"
 msgstr "missione allonghiada"
 
-#: plugins/Satellites/src/Satellite.cpp:618
+#: plugins/Satellites/src/Satellite.cpp:624
 msgctxt "operational status"
 msgid "decayed"
 msgstr "puntu"
@@ -10483,6 +10488,10 @@ msgid ""
 "(for example, a dobsonian) into a 'Push To' telescope (a telescope that uses "
 "a computer to find targets and human power to move the telescope itself)."
 msgstr ""
+"Est unu tzerchiu gradua digitale avantzau chi trasformat unu telscopiu (po "
+"esempiu, unu  un Dobsonianu) in unu telescopiu 'Push To'  (unu telescopiu "
+"chi impreat unu computer po agattare obiettivos et podere umanu po movere su "
+"telescopiu etotu)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:423
 #, qt-format
@@ -10490,6 +10499,9 @@ msgid ""
 "Just don't forget to set it to Meade compatibility mode and set the baud "
 "rate to 9600B%1."
 msgstr ""
+"Bastat a non si che ismentigare de d'impostare in modalidade  de "
+"compatibilidade Meade et impostare sa velocidade de trasmissione a 9600%1 "
+"baud."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:427
 msgid ""
@@ -10499,6 +10511,11 @@ msgid ""
 "will react in the same way as the reticle of a real telescope controlled by "
 "the plug-in."
 msgstr ""
+"Si si cheret provare custu plug-in chetza unu dispositivu reale collegau a "
+"su computer, chirrare <b>Nudda, simulare ebbia (un reticolu si est "
+"movinde)</ b> in su <b> Telescopiu controllau de: <b /> campu . Mustrat unu "
+"reticolu de telescopiu chi si hat a ciìumportare in su matessi modu de unu "
+"telescopiu eru controllau de su plug-in."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:428
 #, qt-format
@@ -10506,6 +10523,8 @@ msgid ""
 "See the section above about %1field of view indicators%2 for a possible "
 "practical application (emulating 'Telrad' circles)."
 msgstr ""
+"Abbaida sa setzion in susu riguardante %1indicadores de su campu de vista%2 "
+"po una possibile applicatzione pratiga (emulande sos tzerchios 'Telrad')."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:429
 #, qt-format
@@ -10513,6 +10532,9 @@ msgid ""
 "This feature is equivalent to the 'Dummy' type of telescope supported by "
 "%1Stellarium's original telescope control feature%2."
 msgstr ""
+"Custa funtzione est sa matessic de su tipu de telescopiu 'Dummy' supportada "
+"dae sa %1funtzione originale de Stellarium po su controllu de su "
+"telescopiu%2."
 
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:446
@@ -10544,32 +10566,36 @@ msgid ""
 "control a telescope on its own, but it is still possible to do it through an "
 "external application or to connect to a remote host."
 msgstr ""
+"No est disponibile peruna descritzione de su modellu. Stellarium non est "
+"capatzu de controllare a sa sola su telescopiu, ma est ancora possibile "
+"impreande un'applicatzione esterna o po du cullegare a unu host a tesu."
 
 #. TRANSLATORS: The translated name of the Add button is automatically inserted.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:477
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
 msgstr ""
+"Caria su tastu \"%1\" po faghere una connessione noa a unu telescopiu."
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:491
 msgid "local, Stellarium"
-msgstr ""
+msgstr "locale, Stellarium"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:495
 msgid "local, external"
-msgstr ""
+msgstr "locale, esterna"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:499
 msgid "remote, unknown"
-msgstr ""
+msgstr "a tesu, non d'isco"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:503
 msgid "virtual"
-msgstr ""
+msgstr "virtuale"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:925
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
@@ -10578,7 +10604,7 @@ msgstr "Comintza"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:926
 msgid "Start the selected local telescope"
-msgstr ""
+msgstr "Fae partire su telescopiu locale seberau"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:931
 msgid "Stop"
@@ -10586,41 +10612,41 @@ msgstr "Frima"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:932
 msgid "Stop the selected local telescope"
-msgstr ""
+msgstr "Frima su telescopiu locale seberau"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:937
 msgid "Connect"
-msgstr ""
+msgstr "Cunnette"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:938
 msgid "Connect to the selected telescope"
-msgstr ""
+msgstr "Cunnette su telescopiu seberau"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:943
 msgid "Disconnect"
-msgstr ""
+msgstr "Discunnette"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:944
 msgid "Disconnect from the selected telescope"
-msgstr ""
+msgstr "Discunnette su telescopiu seberau"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:965
 msgid "Select a directory"
-msgstr ""
+msgstr "Sebera una cartedda"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:97
 msgid "Right Ascension (J2000)"
-msgstr ""
+msgstr "Ascensione Retta (J2000)"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:98
 msgid "Declination (J2000)"
-msgstr ""
+msgstr "Declinatzione (J2000)"
 
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:262
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:291
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:412
 msgid "Select one"
-msgstr ""
+msgstr "Seberande unu"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:321
 msgid "Slew telescope to"
@@ -10628,7 +10654,7 @@ msgstr "Zira su telescopiu a"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:323
 msgid "There are no active devices."
-msgstr ""
+msgstr "Non c'hat disoisitivos attivos"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:324
 msgid "Slew telescope to coordinates"
@@ -10637,46 +10663,46 @@ msgstr "Zira su telescoiu a sas coordinadas"
 #: plugins/TelescopeControl/src/ui_slewDialog.h:325
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:247
 msgid "&Right Ascension (J2000):"
-msgstr ""
+msgstr "&Ascensione Retta (J2000):"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:326
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:248
 msgid "De&clination (J2000):"
-msgstr ""
+msgstr "De&clinatzione (J2000):"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:327
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:244
 msgid "&Current object"
-msgstr ""
+msgstr "Ogettu &Currente"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:328
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:245
 msgid "Center of the screen"
-msgstr ""
+msgstr "Centeru de s'ischermu"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:331
 msgid "Hours-minutes-seconds format"
-msgstr ""
+msgstr "Formatu Oras-minutos-segundos"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:333
 msgid "&HMS"
-msgstr ""
+msgstr "&HMS"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "Degrees-minutes-seconds format"
-msgstr ""
+msgstr "Formatu Grados-minutos-segundos"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:337
 msgid "&DMS"
-msgstr ""
+msgstr "&DMS"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:339
 msgid "Decimal degrees"
-msgstr ""
+msgstr "Grados decimales"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "D&ecimal"
-msgstr ""
+msgstr "D&ecimales"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:342
 msgid "&Slew"
@@ -10684,39 +10710,43 @@ msgstr "&Zira"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:343
 msgid "Configure &telescopes..."
-msgstr ""
+msgstr "Configura &telescopios..."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:461
 msgid "Telescope Configuration"
-msgstr ""
+msgstr "Configurazione de su Telescopiu"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:465
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
 msgstr ""
+"Unu telescopiu est cunnessu a custu computer via porta seriale et controllau "
+" direttamente de Stellarium."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:467
 msgid "Stellarium, directly through a serial port"
-msgstr ""
+msgstr "Stellarium, direttamente tramite sa porta seriale"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:469
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
 msgstr ""
+"Unu telescopiu est controllau dae un'applicatzione esterna, totu a duos a "
+"custu computer o a unu  a tesu."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
 msgid "External software or a remote computer"
-msgstr ""
+msgstr "Software esternu i unu cumputer a tesu"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Nothing, just simulate one (a moving reticle)"
-msgstr ""
+msgstr "Nudda, simulatzione ebbia (unu reticulu in movimentu)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:475
 msgid "Connection delay:"
-msgstr ""
+msgstr "Riardu de connessione:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:477
 msgid ""
@@ -10724,332 +10754,345 @@ msgid ""
 "Stellarium.\n"
 "Increase this value if the reticle is skipping."
 msgstr ""
+"Su tempus chi bi cheret a sos sinnales dae su telescopio a arribare a "
+"Stellarium.\n"
+"Aumenta custu valore si sureticulu est brincande."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:481
 msgid "J2000 (default)"
-msgstr ""
+msgstr "J2000 (preimpostaut)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
 msgid "Equinox of the date (JNow)"
-msgstr ""
+msgstr "Equinotziu de sa data (JNow)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr ""
+"Tenta automaticamente de avviare su telescopiu o provare a si cunnettere a "
+"sa partentzia de Stellarium"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
 msgid "Start/connect at startup"
-msgstr ""
+msgstr "Parti/cunnessione a sa partentzia"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:488
 msgid "Serial port:"
-msgstr ""
+msgstr "Porta seriale:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
 msgid "Device model:"
-msgstr ""
+msgstr "Modellu de dispositivu:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "Host:"
-msgstr ""
+msgstr "Host:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:493
 msgid ""
 "Host name or IPv4 address of the machine that hosts the telescope server"
 msgstr ""
+"Numene de su host o indiritziu IPv4 de sa macchina chi tenet su serve de su "
+"telescopiu"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:495
 msgid "TCP port:"
-msgstr ""
+msgstr "Porta TCP:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:496
 msgid "User interface settings"
-msgstr ""
+msgstr "Impostatzione de s'interfaccia utente"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Show circles with fixed angular size around the telescope reticle"
 msgstr ""
+"Fae biere sos tzerchios cun mannaria angulare fissa in totu su retilucu de "
+"su telescopiu"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Use field of view indicators"
-msgstr ""
+msgstr "Imprea sos indicadores de su campu de vista"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
 msgid "Circle size(s):"
-msgstr ""
+msgstr "Mannaria de su Tzerchiu:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:503
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
 msgstr ""
+"Mentras a deghe valores decimales in grados de arcu, separaos de virgulas"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
 msgid "OK"
-msgstr ""
+msgstr "Andat bene"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:394
 msgid "Telescopes Controlled"
-msgstr ""
+msgstr "Telescopios Controllaos"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:397
 msgid "Configure the selected telescope"
-msgstr ""
+msgstr "Configura su telescopiu seberau"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
 msgid "Configure"
-msgstr ""
+msgstr "Configura"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:401
 msgid "Add a new telescope"
-msgstr ""
+msgstr "Azunghe unu telescopiu nou"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
 msgid "Remove the selected telescope"
-msgstr ""
+msgstr "Cantzella su telescopiu seberau"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
 msgid "GUI"
-msgstr ""
+msgstr "Interfaccia grafica"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:410
 msgid "Show telescope labels"
-msgstr ""
+msgstr "Fae biere sas etichettas de su telescopiu"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
 msgid "Show telescope reticles"
-msgstr ""
+msgstr "Fae biere sos retilulos de su telescopiu"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
 msgid "Show field of view indicators"
-msgstr ""
+msgstr "Fae biere sos indicadores de su campu de vista"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
 msgid "Files"
-msgstr ""
+msgstr "File"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Log telescope driver messages to files"
-msgstr ""
+msgstr "Iscrie sos messaggios de du direver de su telescopiu in sos file"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
 msgid "Use telescope server executables (override built-in drivers)"
 msgstr ""
+"Imprea sos eseguibiles de su telescopiu (iscrie suba sos driver incorporaos)"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Executables directory:"
-msgstr ""
+msgstr "Cartedda de sos eseguibiles"
 
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:242
 msgid "Points"
-msgstr ""
+msgstr "Puntos"
 
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:249
 msgid "Add point"
-msgstr ""
+msgstr "Azunghe puntu"
 
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:250
 msgid "Remove selected"
-msgstr ""
+msgstr "Cantzella su seberau"
 
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:251
 msgid "Clear list"
-msgstr ""
+msgstr "Puli sa lista"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:90
 msgid "Text User Interface"
-msgstr ""
+msgstr "Interfaccia Utente de Testu"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:93
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
 msgstr ""
+"Interfaccia Utente de Testu de su plugin de sa serie 0.9.x, impreada in sos "
+"sistemas planetarios"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Solar System body"
-msgstr ""
+msgstr "Corpus de su Sistema Solare"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:175
 msgid "Current date/time"
-msgstr ""
+msgstr "Data/ora currente"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:180
 msgid "Set time zone"
-msgstr ""
+msgstr "Imposta su fusu orariu"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:181
 msgid "Day keys"
-msgstr ""
+msgstr "Tastos de sas dies"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:182
 msgid "Startup date/time preset"
-msgstr ""
+msgstr "Partentzia data/ora preimpostadas"
 
 #. TRANSLATORS: The current system time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:189
 msgid "system"
-msgstr ""
+msgstr "sistema"
 
 #. TRANSLATORS: A pre-set time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:191
 msgid "preset"
-msgstr ""
+msgstr "preimpostau"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:199
 msgid "mmddyyyy"
-msgstr ""
+msgstr "mmddyyyy"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:199
 msgid "ddmmyyyy"
-msgstr ""
+msgstr "ddmmyyyy"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:199
 msgid "yyyymmdd"
-msgstr ""
+msgstr "yyyymmdd"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:200
 msgid "Date display format"
-msgstr ""
+msgstr "Formau de sa data"
 
 #. TRANSLATORS: 12-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:208
 msgid "12h"
-msgstr ""
+msgstr "12h"
 
 #. TRANSLATORS: 24-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:210
 msgid "24h"
-msgstr ""
+msgstr "24h"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:211
 msgid "Time display format"
-msgstr ""
+msgstr "Formatu de su tempus"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:235
 msgid "Sky Language"
-msgstr ""
+msgstr "Limba de su chelu"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "App Language"
-msgstr ""
+msgstr "Limba de s'app"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:256
 msgid "Show stars"
-msgstr ""
+msgstr "Fae biere sos isteddos"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:284
 msgid "Colors"
-msgstr ""
+msgstr "Colores"
 
 #. TRANSLATORS: Refers to constellation art
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:299
 msgid "Art brightness:"
-msgstr ""
+msgstr "Luminosidade Art:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:359
 msgid "Ecliptic line (J2000)"
-msgstr ""
+msgstr "Linea eclitica (J2000)"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Nebula names"
-msgstr ""
+msgstr "Numenes de sa nebulosa"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:370
 msgid "Nebula hints"
-msgstr ""
+msgstr "Traccias de nebulosa"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:374
 msgid "Galaxy hints"
-msgstr ""
+msgstr "Traccias de galassia"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:378
 msgid "Bright nebulae hints"
-msgstr ""
+msgstr "Traccia de nebulosa luminosa"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:382
 msgid "Dark nebulae hints"
-msgstr ""
+msgstr "Traccia de nebulosa iscura"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:386
 msgid "Clusters hints"
-msgstr ""
+msgstr "Traccia de gruppos de isteddos"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:400
 msgid "Galactic equator line"
-msgstr ""
+msgstr "Linea de s'ecuatore galatticu"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:438
 msgid "Effects"
-msgstr ""
+msgstr "Efetos"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:451
 msgid "Setting landscape sets location"
-msgstr ""
+msgstr "Imposta su panorama cun parametros de sa localidade"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:462
 msgid "Zoom duration:"
-msgstr ""
+msgstr "Durada de su zoom:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:469
 msgid "Milky Way intensity:"
-msgstr ""
+msgstr "Intesidade de s'Andaina de Paza:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:475
 msgid "Zodiacal light intensity:"
-msgstr ""
+msgstr "Intensidade de sa lughe zodiacale"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:500
 msgid "Run local script"
-msgstr ""
+msgstr "Fae partire s'iscript locale"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:506
 msgid "Stop running script"
-msgstr ""
+msgstr "Frima s'iscript chi est zirande"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:517
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:520
 msgid "Administration"
-msgstr ""
+msgstr "Amministratzione"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:525
 msgid "Load default configuration"
-msgstr ""
+msgstr "Carriga sos parametros de configuratzione preimpostaos"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:526
 msgid "Save current configuration"
-msgstr ""
+msgstr "Sarva sa configuratzione currente"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:529
 msgid "Shut down"
-msgstr ""
+msgstr "Istuda"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:605
 msgid "[no TUI node]"
-msgstr ""
+msgstr "[Perunu nou TUI]"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:72
 msgid "On"
-msgstr ""
+msgstr "Allutu"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:489
 msgid "Off"
-msgstr ""
+msgstr "Istudau"
 
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:109
 #, qt-format
 msgid "error, unknown color part \"%1\""
-msgstr ""
+msgstr "irballiu, parte de colore non connota \"%1\""
 
 #: plugins/TextUserInterface/src/TuiNodeActivate.cpp:48
 msgid " [RETURN to activate]"
-msgstr ""
+msgstr " [TORRA po attivare]"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:57
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:120
 msgid "Solar System Editor"
-msgstr ""
+msgstr "Editor de su Sistema Solare"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:60
 msgid ""
@@ -11057,27 +11100,32 @@ msgid ""
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database."
 msgstr ""
+"Un'interfaccia po l'azunta de asteroides et isteddos coilongos a Stellarium. "
+"Si podene iscarrigare sos elencos de ogettos dae su sito de Minor Planet "
+"Center et faere ricercas in su database on-line."
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:120
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Import orbital elements in MPC format..."
-msgstr ""
+msgstr "Importa sos elementos orbitales in su formau MPC..."
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris Service" is inserted.
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:159
 #, qt-format
 msgid "Query the MPC's %1:"
-msgstr ""
+msgstr "Query suba MPC's %1:"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:162
 msgid "Only one result will be returned if the query is successful."
-msgstr ""
+msgstr "Unu resurtau ebbia hat a bennere torrau si sa query andat bene."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:163
 msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
 msgstr ""
+"Isteddos coilongos  et asteroides poden essere identificaos cun su numeru, "
+"numene (in Ingresu) o designtazione provisoonale."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:170
 #, qt-format
@@ -11087,15 +11135,20 @@ msgid ""
 "searching for \"%3\" will return %4, Halley's Comet, but a search for \"%5\" "
 "will return the asteroid %6."
 msgstr ""
+"Isteddu coilogu <i>numenes</i> bi chere su prefissu cun %1 o %2. Si unu o "
+"prus isteddos coilongos tenene quasi su matessi numene, benit torrau sono su "
+"primu agattau. Po esempiu, cricande \"%3\" hat a bennere torrau %4, "
+"\"Halley's Comet\",  ma cricande  \"%5\" hat a bennere torrau su asteroide "
+"%6."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:211
 msgid "Select bookmark..."
-msgstr ""
+msgstr "Sebera sinnalibru..."
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:100
 msgid "website"
-msgstr ""
+msgstr "situ web"
 
 #. TRANSLATORS: IAU = International Astronomical Union
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:104
@@ -11106,78 +11159,83 @@ msgid ""
 "objects, download such lists from the Internet or search the online Minor "
 "Planet and Comet Ephemeris Service (MPES)."
 msgstr ""
+"Podes importare isteddos coilongos et asteroides  formattaos in su formau de "
+"esportatzione IAU de su Minor Planet Center (%1). Podes importare file cun "
+"lista de ogettos, iscarrigare comente listas dae Internet o cricare online "
+"in su Minor Planet and Comet Ephemeris Service (MPES)."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:108
 msgid "Solar System Editor plug-in"
-msgstr ""
+msgstr "Plug-in Editor de su Sistema Solare"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:109
 #: plugins/FOV/src/gui/FOVWindow.cpp:81
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:83
 #, qt-format
 msgid "Version %1"
-msgstr ""
+msgstr "Versione %1"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:187
 msgid "Save the Solar System configuration file as..."
-msgstr ""
+msgstr "Sarva sa configuratzione de su Sistema Solare comente..."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:193
 msgid "Configuration files"
-msgstr ""
+msgstr "File de configuratzione"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:195
 msgid "Select a file to replace the Solar System configuration file"
 msgstr ""
+"Sebera unu file de cambiare cun cussu de configuratzione de su Sistema Solare"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:511
 msgid "Import data"
-msgstr ""
+msgstr "Importa datos"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:513
 msgid "Select the type"
-msgstr ""
+msgstr "Sebera su tipu"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:516
 msgid "Select the source"
-msgstr ""
+msgstr "Sebera sa sorgente"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:517
 msgid "Download a list of objects from the Internet"
-msgstr ""
+msgstr "Iscarriga una lista de ogettos dae Internet"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:518
 msgid "Select a source from the list:"
-msgstr ""
+msgstr "Sebera una sorgente dae sa lista:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:519
 msgid "Or enter a URL:"
-msgstr ""
+msgstr "O iscrie unu URL:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:520
 msgid "Add this URL to the bookmarks list"
-msgstr ""
+msgstr "Azunghe custu URL a sa lista de sinnalibros"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
 msgid "Bookmark title:"
-msgstr ""
+msgstr "Titulu de su sinnalibru:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:522
 msgid "A file containing a list of objects"
-msgstr ""
+msgstr "Unu file tenet una lista de ogettos"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "Get orbital elements"
-msgstr ""
+msgstr "Piga sos elementos orbitales"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 msgid "Online search"
-msgstr ""
+msgstr "Crica online"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Objects found"
-msgstr ""
+msgstr "Ogettos agattaos"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid ""
@@ -11187,26 +11245,32 @@ msgid ""
 "Solar System configuration.<br/>Note that adding a large number of objects "
 "may cause Stellarium to run slowly."
 msgstr ""
+"Marca sos ogettos chi cheres chi enzan importaos. In <i>corsivu</i> suni "
+"iscrittos sos numenes de ogettos zai carrigaos. In <b>gressette</b> suni "
+"iscrittos sos numenes de sos ogettos eredaos dae sos ogettos de su Sistema "
+"Solare de Stellarium preimpostaos in sa configuratzione.<br/>Nota chi "
+"azunghinde unu numeru mannu de ogettos podet faere zirare Stellarium prus "
+"abellu."
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid "Overwrite existing objects"
-msgstr ""
+msgstr "Iscrie in suba sos ogettos esistentes"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "Update existing objects"
-msgstr ""
+msgstr "Aggiorna sos ogettos esistentes"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "Update only the orbital elements"
-msgstr ""
+msgstr "Aggiorna solu sos elementos orbitales"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 msgid "Add objects"
-msgstr ""
+msgstr "Azunge ogettos"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:295
 msgid "Warning"
-msgstr ""
+msgstr "Attentzione"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:296
 msgid ""
@@ -11214,150 +11278,159 @@ msgid ""
 "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
 "manually that file from:"
 msgstr ""
+"Custu plug-in impreada unu file de configuratzione personale de Sistema "
+"Solare. Si cachi cosa andat male et Stellarium si ch'istudat o non partit, "
+"podes cantzellare a manos su file dae:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
 msgid ""
 "You can also reset all changes and return to the default configuration:"
 msgstr ""
+"Podes fintzas cantzellare totus sos cambiamentos po tottare a sa "
+"configuratzione predefinia:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:298
 msgid "Reset to defaults"
-msgstr ""
+msgstr "Torra a sa configuratzione predefinia"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
 msgid "Copy/replace the Solar System file"
-msgstr ""
+msgstr "Copia/cambia su file de su Sistema Solare"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 msgid ""
 "You can create a backup copy of the custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
 msgstr ""
+"Podes faghere una copia de iscorta de su file de cunfiguratzione de su "
+"Sistema Solare in unu logu comodu, o cambiaddu cun una copia."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
 msgid "Copy the Solar System file..."
-msgstr ""
+msgstr "Copia su file de su Sistema Solare"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Replace the Solar System file..."
-msgstr ""
+msgstr "Cambia su file de su Sistema Solare"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Configuration file"
-msgstr ""
+msgstr "File de configuratzione"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Add new Solar System objects"
-msgstr ""
+msgstr "Azunghe unu ogettu nou de su Sistema Solare"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
 msgid "Solar System"
-msgstr ""
+msgstr "Sistema Solare"
 
 #: plugins/Supernovae/src/Supernovae.cpp:71
 #: plugins/Supernovae/src/Supernovae.cpp:148
 msgid "Historical Supernovae"
-msgstr ""
+msgstr "Supernovas Istoricas"
 
 #: plugins/Supernovae/src/Supernovae.cpp:74
 msgid "This plugin allows you to see some bright historical supernovae."
 msgstr ""
+"Custu plug-in permittit de ti fagher biere cachi istorica supernova luminosa."
 
 #: plugins/Supernovae/src/Supernovae.cpp:148
 msgid "Historical Supernovae configuration window"
-msgstr ""
+msgstr "Fentana de configuratzione de sas Supernovas Istoricas"
 
 #: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
 msgid "January"
-msgstr ""
+msgstr "Ennarzu"
 
 #: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
 msgid "February"
-msgstr ""
+msgstr "Frearzu"
 
 #: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
 msgid "March"
-msgstr ""
+msgstr "Martzu"
 
 #: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
 msgid "April"
-msgstr ""
+msgstr "Arbile"
 
 #: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
 msgid "May"
-msgstr ""
+msgstr "Maju"
 
 #: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
 msgid "June"
-msgstr ""
+msgstr "Lampadas"
 
 #: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
 msgid "July"
-msgstr ""
+msgstr "Triulas"
 
 #: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
 msgid "August"
-msgstr ""
+msgstr "Austu"
 
 #: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
 msgid "September"
-msgstr ""
+msgstr "Cabudanni"
 
 #: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
 msgid "October"
-msgstr ""
+msgstr "Santuaini"
 
 #: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
 msgid "November"
-msgstr ""
+msgstr "Santandria"
 
 #: plugins/Supernovae/src/Supernovae.cpp:649 plugins/Novae/src/Novae.cpp:671
 msgid "December"
-msgstr ""
+msgstr "Nadale"
 
 #: plugins/Supernovae/src/Supernova.cpp:130
 msgid "supernova"
-msgstr ""
+msgstr "supernova"
 
 #: plugins/Supernovae/src/Supernova.cpp:135 plugins/Novae/src/Nova.cpp:141
 #: plugins/Quasars/src/Quasar.cpp:107 plugins/Exoplanets/src/Exoplanet.cpp:279
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Mannitudine: <b>%1</b> (estintu a: <b>%2</b>)"
 
 #: plugins/Supernovae/src/Supernova.cpp:145
 #, qt-format
 msgid "Type of supernova: %1"
-msgstr ""
+msgstr "Tipu de supernova: %1"
 
 #: plugins/Supernovae/src/Supernova.cpp:146 plugins/Novae/src/Nova.cpp:152
 #, qt-format
 msgid "Maximum brightness: %1"
-msgstr ""
+msgstr "Luminosidade massima: %1"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
 msgid "Historical Supernovae Plug-in"
-msgstr ""
+msgstr "Plug-in de sas Supernovas Istoricas"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 msgid "This plugin allows you to see some bright historical supernovae: "
 msgstr ""
+"Custu plug-in ti permittit de biere calucuna supernova instorica luminosa: "
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:126
 #: plugins/Novae/src/gui/NovaeDialog.cpp:128
 #, qt-format
 msgid "This list altogether contains %1 stars."
-msgstr ""
+msgstr "Custa lista cuntenet in totale %1 istellas."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
 #, qt-format
 msgid "All those supernovae are brighter %1 at peak of brightness."
-msgstr ""
+msgstr "Totu sas supernovas suni luminosas %1 a su massimu de luminosidade."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
 #: plugins/Novae/src/gui/NovaeDialog.cpp:130
 msgid "Light curves"
-msgstr ""
+msgstr "Curvas de lughe"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:130
 #, qt-format
@@ -11367,20 +11440,26 @@ msgid ""
 "can be seen %1here%2 (right scale in days), and this model is used for this "
 "plugin."
 msgstr ""
+"Custu plug-in faet unu modellu de curvas de lughe po supernovas differentes. "
+"Sa vista de sas survas de lughe po sos tipos I e sos tipos II de supernovas "
+"poden essere isas %1innoghe%2 (s'iscala a destra in dies), et custu modellu "
+"est impreau po custu plug-in."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:132
 msgid "Acknowledgments"
-msgstr ""
+msgstr "Ringratziamentos"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
 msgid ""
 "We thank the following people for their contribution and valuable comments:"
 msgstr ""
+"Ringratziamos custas  pessines po su contributu chi han zau et sos et sos "
+"commentos de importu:"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:135
 msgid "Sergei Blinnikov"
-msgstr ""
+msgstr "Sergei Blinnikov"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:137
 msgid "Institute for Theoretical and Experimental Physics"
