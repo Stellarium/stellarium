@@ -2023,7 +2023,8 @@ void Planet::drawOrbit(StelCore* core)
 	glEnable(GL_DEPTH_TEST);
 	glDepthMask(GL_TRUE);
 
-	sPainter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], orbitFader.getInterstate());
+	Vec3f orbColor = getCurrentOrbitColor();
+	sPainter.setColor(orbColor[0], orbColor[1], orbColor[2], orbitFader.getInterstate());
 	double dateJDE = lastJDE;
 	double dt = qMin(re.siderealPeriod / 360, 0.01);
 	double t1 = dateJDE - re.siderealPeriod / 2;
