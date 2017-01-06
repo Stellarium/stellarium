@@ -187,6 +187,7 @@ void SolarSystem::init()
 	setScatteredDiskObjectsOrbitsColor(StelUtils::strToVec3f(conf->value("color/sdo_orbits_color", "0.7,0.5,0.5").toString()));
 	setOortCloudObjectsOrbitsColor(StelUtils::strToVec3f(conf->value("color/oco_orbits_color", "0.7,0.5,0.5").toString()));
 	setCometsOrbitsColor(StelUtils::strToVec3f(conf->value("color/comet_orbits_color", "0.7,0.8,0.8").toString()));
+	setSednoidsOrbitsColor(StelUtils::strToVec3f(conf->value("color/sednoid_orbits_color", "0.7,0.5,0.5").toString()));
 	setMercuryOrbitColor(StelUtils::strToVec3f(conf->value("color/mercury_orbit_color", "0.5,0.5,0.5").toString()));
 	setVenusOrbitColor(StelUtils::strToVec3f(conf->value("color/venus_orbit_color", "0.9,0.9,0.7").toString()));
 	setEarthOrbitColor(StelUtils::strToVec3f(conf->value("color/earth_orbit_color", "0.0,0.0,1.0").toString()));
@@ -1801,6 +1802,16 @@ void SolarSystem::setCometsOrbitsColor(const Vec3f& c)
 Vec3f SolarSystem::getCometsOrbitsColor(void) const
 {
 	return Planet::getCometOrbitColor();
+}
+
+void SolarSystem::setSednoidsOrbitsColor(const Vec3f& c)
+{
+	Planet::setSednoidOrbitColor(c);
+}
+
+Vec3f SolarSystem::getSednoidsOrbitsColor(void) const
+{
+	return Planet::getSednoidOrbitColor();
 }
 
 void SolarSystem::setMercuryOrbitColor(const Vec3f &c)
