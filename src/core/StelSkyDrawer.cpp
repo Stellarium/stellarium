@@ -53,11 +53,20 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	maxAdaptFov(180.f),
 	minAdaptFov(0.1f),
 	lnfovFactor(0.f),
+	flagStarTwinkle(false),
+	flagForcedTwinkle(false),
+	twinkleAmount(0.0),
+	flagStarMagnitudeLimit(false),
+	flagNebulaMagnitudeLimit(false),
+	flagPlanetMagnitudeLimit(false),
 	starRelativeScale(1.f),
 	starAbsoluteScaleF(1.f),
 	starLinearScale(19.569f),
 	limitMagnitude(-100.f),
 	limitLuminance(0.f),
+	customStarMagLimit(0.0),
+	customNebulaMagLimit(0.0),
+	customPlanetMagLimit(0.0),
 	bortleScaleIndex(3),
 	inScale(1.f),
 	starShaderProgram(NULL),
@@ -66,6 +75,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	maxPointSources(1000),
 	maxLum(0.f),
 	oldLum(-1.f),
+	flagLuminanceAdaptation(false),
 	big3dModelHaloRadius(150.f)
 {
 	setObjectName("StelSkyDrawer");
