@@ -77,6 +77,7 @@ void ConfigureOrbitColorsDialog::createDialogContent()
 	colorButton(ui->colorGroupsSDOOrbits,		"SolarSystem.scatteredDiskObjectsOrbitsColor");
 	colorButton(ui->colorGroupsOCOOrbits,		"SolarSystem.oortCloudObjectsOrbitsColor");
 	colorButton(ui->colorGroupsCometsOrbits,	"SolarSystem.cometsOrbitsColor");
+	colorButton(ui->colorGroupsSednoidsOrbits,	"SolarSystem.sednoidsOrbitsColor");
 	colorButton(ui->colorMPMercuryOrbit,		"SolarSystem.mercuryOrbitColor");
 	colorButton(ui->colorMPVenusOrbit,		"SolarSystem.venusOrbitColor");
 	colorButton(ui->colorMPEarthOrbit,		"SolarSystem.earthOrbitColor");
@@ -96,6 +97,7 @@ void ConfigureOrbitColorsDialog::createDialogContent()
 	connect(ui->colorGroupsSDOOrbits,		SIGNAL(released()), this, SLOT(askSDOGroupOrbitColor()));
 	connect(ui->colorGroupsOCOOrbits,		SIGNAL(released()), this, SLOT(askOCOGroupOrbitColor()));
 	connect(ui->colorGroupsCometsOrbits,		SIGNAL(released()), this, SLOT(askCometsGroupOrbitColor()));
+	connect(ui->colorGroupsSednoidsOrbits,		SIGNAL(released()), this, SLOT(askSednoidsGroupOrbitColor()));
 	connect(ui->colorMPMercuryOrbit,		SIGNAL(released()), this, SLOT(askMercuryOrbitColor()));
 	connect(ui->colorMPVenusOrbit,			SIGNAL(released()), this, SLOT(askVenusOrbitColor()));
 	connect(ui->colorMPEarthOrbit,			SIGNAL(released()), this, SLOT(askEarthOrbitColor()));
@@ -204,6 +206,21 @@ void ConfigureOrbitColorsDialog::askCometsGroupOrbitColor()
 		GETSTELMODULE(SolarSystem)->setCometsOrbitsColor(vColor);
 		StelApp::getInstance().getSettings()->setValue("color/comet_orbits_color", StelUtils::vec3fToStr(vColor));
 		ui->colorGroupsCometsOrbits->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
+void ConfigureOrbitColorsDialog::askSednoidsGroupOrbitColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("SolarSystem.sednoidsOrbitsColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorGroupsSednoidsOrbits->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		GETSTELMODULE(SolarSystem)->setSednoidsOrbitsColor(vColor);
+		StelApp::getInstance().getSettings()->setValue("color/sednoid_orbits_color", StelUtils::vec3fToStr(vColor));
+		ui->colorGroupsSednoidsOrbits->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
 }
 

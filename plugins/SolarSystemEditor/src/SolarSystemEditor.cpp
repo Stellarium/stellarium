@@ -562,6 +562,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 	}
 
 	QString column;
+	QString objectType = "asteroid";
 	bool ok = false;
 	//bool isLongForm = (oneLineElements.length() > 160) ? true : false;
 
@@ -654,8 +655,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 	result.insert("section_name", sectionName);
 
 	//After a name has been determined, insert the essential keys
-	result.insert("parent", "Sun");
-	result.insert("type", "asteroid");
+	result.insert("parent", "Sun");	
 	//"comet_orbit" is used for all cases:
 	//"ell_orbit" interprets distances as kilometers, not AUs
 	result.insert("coord_func","comet_orbit");
@@ -761,6 +761,25 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 	if (semiMajorAxis>0)
 		result.insert("orbit_visualization_period", StelUtils::calculateSiderealPeriod(semiMajorAxis));
 
+	// 2:3 resonanse to Neptune
+	if ((int)semiMajorAxis == 39)
+		objectType = "plutino";
+
+	// Classical Kuiper belt objects
+	if (semiMajorAxis>=40 && semiMajorAxis<=50)
+		objectType = "cubewano";
+
+	// Calculate perihelion
+	float r = (1 - eccentricity)*semiMajorAxis;
+
+	// Scattered disc objects
+	if (r > 35)
+		objectType = "scattered disc object";
+
+	// Sednoids
+	if (r > 50 && semiMajorAxis > 150)
+		objectType = "sednoid";
+
 	//Radius and albedo
 	//Assume albedo of 0.15 and calculate a radius based on the absolute magnitude
 	//as described here: http://www.physics.sfasu.edu/astro/asteroids/sizemagnitude.html
@@ -768,6 +787,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 	double radius = std::ceil((1329 / std::sqrt(albedo)) * std::pow(10, -0.2 * absoluteMagnitude));
 	result.insert("albedo", albedo);
 	result.insert("radius", radius);
+	result.insert("type", objectType);
 
 	return result;
 }
@@ -837,8 +857,7 @@ SsoElements SolarSystemEditor::readXEphemOneLineElements(QString oneLineElements
 	{
 		return SsoElements();
 	}
-	result.insert("name", name);
-	result.insert("type", objectType);
+	result.insert("name", name);	
 	if (minorPlanetNumber)
 		result.insert("minor_planet_number", minorPlanetNumber);
 
@@ -890,10 +909,11 @@ SsoElements SolarSystemEditor::readXEphemOneLineElements(QString oneLineElements
 		return SsoElements();
 	result.insert("orbit_ArgOfPericenter", argumentOfPerihelion);
 
+	double semiMajorAxis = -1.;
 	if (orbitType == Elliptic)
 	{
 		field = fields.at(5);//Field 6
-		double semiMajorAxis = field.toDouble(&ok);
+		semiMajorAxis = field.toDouble(&ok);
 		if (!ok)
 			return SsoElements();
 		result.insert("orbit_SemiMajorAxis", semiMajorAxis);
@@ -1000,9 +1020,30 @@ SsoElements SolarSystemEditor::readXEphemOneLineElements(QString oneLineElements
 		//http://www.physics.sfasu.edu/astro/asteroids/sizemagnitude.html
 		albedo = 0.15;
 		radius = std::ceil((1329 / std::sqrt(albedo)) * std::pow(10, -0.2 * absoluteMagnitude));
+
+		// 2:3 resonanse to Neptune
+		if ((int)semiMajorAxis == 39)
+			objectType = "plutino";
+
+		// Classical Kuiper belt objects
+		if (semiMajorAxis>=40 && semiMajorAxis<=50)
+			objectType = "cubewano";
+
+		// Calculate perihelion
+		float r = (1 - eccentricity)*semiMajorAxis;
+
+		// Scattered disc objects
+		if (r > 35)
+			objectType = "scattered disc object";
+
+		// Sednoids
+		if (r > 50 && semiMajorAxis > 150)
+			objectType = "sednoid";
+
 	}
 	result.insert("albedo", albedo);
 	result.insert("radius", radius);
+	result.insert("type", objectType);
 
 	return result;
 }

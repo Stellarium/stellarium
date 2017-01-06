@@ -195,6 +195,11 @@ class SolarSystem : public StelObjectModule
 		   WRITE setCometsOrbitsColor
 		   NOTIFY cometsOrbitsColorChanged
 		   )
+	Q_PROPERTY(Vec3f sednoidsOrbitsColor
+		   READ getSednoidsOrbitsColor
+		   WRITE setSednoidsOrbitsColor
+		   NOTIFY sednoidsOrbitsColorChanged
+		   )
 	Q_PROPERTY(Vec3f mercuryOrbitColor
 		   READ getMercuryOrbitColor
 		   WRITE setMercuryOrbitColor
@@ -470,6 +475,17 @@ public slots:
 	//! @return current color
 	Vec3f getCometsOrbitsColor(void) const;
 
+	//! Set the color used to draw sednoid orbit lines.
+	//! @param c The color of the sednoid orbit lines (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setSednoidsOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setSednoidsOrbitsColor(const Vec3f& c);
+	//! Get the current color used to draw sednoid orbit lines.
+	//! @return current color
+	Vec3f getSednoidsOrbitsColor(void) const;
+
 	//! Set the color used to draw Mercury orbit line.
 	//! @param c The color of Mercury orbit line (R,G,B)
 	//! @code
@@ -729,6 +745,7 @@ signals:
 	void scatteredDiskObjectsOrbitsColorChanged(const Vec3f & color) const;
 	void oortCloudObjectsOrbitsColorChanged(const Vec3f & color) const;
 	void cometsOrbitsColorChanged(const Vec3f & color) const;
+	void sednoidsOrbitsColorChanged(const Vec3f & color) const;
 	void mercuryOrbitColorChanged(const Vec3f & color) const;
 	void venusOrbitColorChanged(const Vec3f & color) const;
 	void earthOrbitColorChanged(const Vec3f & color) const;

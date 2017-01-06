@@ -62,6 +62,8 @@ class Translations
 		N_("scattered disc object");
 		// TRANSLATORS: Type of object
 		N_("Oort cloud object");
+		// TRANSLATORS: Type of object
+		N_("sednoid");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Planets");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
@@ -80,6 +82,8 @@ class Translations
 		N_("Scattered disc objects");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Oort cloud objects");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Sednoids");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Constellations");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
