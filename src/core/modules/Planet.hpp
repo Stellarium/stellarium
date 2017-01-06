@@ -92,8 +92,9 @@ public:
 		isComet,		// ssystem.ini: type="comet"
 		isDwarfPlanet,		// ssystem.ini: type="dwarf planet"
 		isCubewano,		// ssystem.ini: type="cubewano"
-		isSDO,			// ssystem.ini: type="sdo"
+		isSDO,			// ssystem.ini: type="scattered disc object"
 		isOCO,			// ssystem.ini: type="oco"
+		isSednoid,		// ssystem.ini: type="sednoid"
 		isUNDEFINED		// ssystem.ini: type=<anything else>
 	};
 
@@ -335,6 +336,10 @@ public:
 	static Vec3f orbitCometsColor;
 	static void setCometOrbitColor(const Vec3f& oc) { orbitCometsColor = oc;}
 	static const Vec3f& getCometOrbitColor() {return orbitCometsColor;}
+
+	static Vec3f orbitSednoidsColor;
+	static void setSednoidOrbitColor(const Vec3f& oc) { orbitSednoidsColor = oc;}
+	static const Vec3f& getSednoidOrbitColor() {return orbitSednoidsColor;}
 
 	static Vec3f orbitMercuryColor;
 	static void setMercuryOrbitColor(const Vec3f& oc) { orbitMercuryColor = oc;}

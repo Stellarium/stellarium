@@ -48,6 +48,7 @@ private slots:
 	void askSDOGroupOrbitColor();
 	void askOCOGroupOrbitColor();
 	void askCometsGroupOrbitColor();
+	void askSednoidsGroupOrbitColor();
 	void askMercuryOrbitColor();
 	void askVenusOrbitColor();
 	void askEarthOrbitColor();

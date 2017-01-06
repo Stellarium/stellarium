@@ -321,6 +321,7 @@ QMap<QString, QString> StelObjectMgr::objectModulesMap() const
 			result["SolarSystem:dwarf planet"] = "Dwarf planets";
 			result["SolarSystem:scattered disc object"] = "Scattered disc objects";
 			result["SolarSystem:Oort cloud object"] = "Oort cloud objects";
+			result["SolarSystem:sednoid"] = "Sednoids";
 		}
 		// Deep-sky objects by type + amateur catalogues
 		if (m->objectName()=="NebulaMgr")

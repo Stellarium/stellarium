@@ -57,6 +57,7 @@ Vec3f Planet::orbitCubewanosColor = Vec3f(1.0f,0.6f,1.0f);
 Vec3f Planet::orbitPlutinosColor = Vec3f(1.0f,0.6f,1.0f);
 Vec3f Planet::orbitScatteredDiscObjectsColor = Vec3f(1.0f,0.6f,1.0f);
 Vec3f Planet::orbitOortCloudObjectsColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitSednoidsColor = Vec3f(1.0f,0.6f,1.0f);
 Vec3f Planet::orbitCometsColor = Vec3f(1.0f,0.6f,1.0f);
 Vec3f Planet::orbitMercuryColor = Vec3f(1.0f,0.6f,1.0f);
 Vec3f Planet::orbitVenusColor = Vec3f(1.0f,0.6f,1.0f);
@@ -171,6 +172,7 @@ void Planet::init()
 	pTypeMap.insert(Planet::isCubewano,	"cubewano");
 	pTypeMap.insert(Planet::isSDO,		"scattered disc object");
 	pTypeMap.insert(Planet::isOCO,		"Oort cloud object");
+	pTypeMap.insert(Planet::isSednoid,	"sednoid");
 	pTypeMap.insert(Planet::isUNDEFINED,	"UNDEFINED"); // something must be broken before we ever see this!
 
 	if (vMagAlgorithmMap.count() > 0)
@@ -2072,6 +2074,9 @@ Vec3f Planet::getCurrentOrbitColor()
 					break;
 				case isComet:
 					orbColor = orbitCometsColor;
+					break;
+				case isSednoid:
+					orbColor = orbitSednoidsColor;
 					break;
 				default:
 					orbColor = orbitColor;
