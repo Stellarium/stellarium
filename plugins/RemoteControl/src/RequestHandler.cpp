@@ -107,6 +107,10 @@ RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QOb
 
 RequestHandler::~RequestHandler()
 {
+	delete apiController;
+	apiController = NULL;
+	delete staticFiles;
+	staticFiles = NULL;
 }
 
 void RequestHandler::update(double deltaTime)

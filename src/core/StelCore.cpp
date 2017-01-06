@@ -1232,6 +1232,9 @@ float StelCore::getUTCOffset(const double JD) const
 
 	}
 
+	delete tz;
+	tz = NULL;
+
 	float shiftInHours = shiftInSeconds / 3600.0f;
 	return shiftInHours;
 }
