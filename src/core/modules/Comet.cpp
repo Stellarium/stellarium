@@ -252,7 +252,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 			oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(elongation, true)) << "<br>";
 		}
 
-
+		oss << QString(q_("Albedo: %1")).arg(QString::number(getAlbedo(), 'f', 2)) << "<br>";
 	}
 
 

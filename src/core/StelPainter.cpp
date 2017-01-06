@@ -133,9 +133,7 @@ StelPainter::~StelPainter()
 		if (er==GL_INVALID_OPERATION)
 			qFatal("Invalid openGL operation detected in ~StelPainter()");
 	}
-#endif
 
-#ifndef NDEBUG
 	// We are done with this StelPainter
 	globalMutex->unlock();
 #endif

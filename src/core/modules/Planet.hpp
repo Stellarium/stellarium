@@ -191,6 +191,8 @@ public:
 	virtual double getSiderealPeriod(void) const { return re.siderealPeriod; }
 	//! Get duration of mean solar day
 	double getMeanSolarDay(void) const;
+	//! Get albedo
+	double getAlbedo(void) const { return albedo; }
 
 	const QString& getTextMapName() const {return texMapName;}	
 	const QString getPlanetTypeString() const {return pTypeMap.value(pType);}

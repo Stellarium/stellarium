@@ -62,7 +62,7 @@ StelLocaleMgr::StelLocaleMgr()
 StelLocaleMgr::~StelLocaleMgr()
 {
 	delete skyTranslator;
-	skyTranslator=0;
+	skyTranslator=NULL;
 }
 
 // Mehtod which generates and save the map between 2 letters country code and english country names

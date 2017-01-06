@@ -114,7 +114,7 @@ TextUserInterface::TextUserInterface()
  Destructor
 *************************************************************************/
 TextUserInterface::~TextUserInterface()
-{
+{	
 }
 
 /*************************************************************************
