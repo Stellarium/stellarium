@@ -298,6 +298,8 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 			oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos), true)) << "<br>";
 			oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(elongation, true)) << "<br>";
 		}
+
+		oss << QString(q_("Albedo: %1")).arg(QString::number(getAlbedo(), 'f', 2)) << "<br>";
 	}
 
 	postProcessInfoString(str, flags);
