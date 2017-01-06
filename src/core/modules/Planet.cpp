@@ -2024,7 +2024,7 @@ void Planet::drawOrbit(StelCore* core)
 	glDepthMask(GL_TRUE);
 
 	sPainter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], orbitFader.getInterstate());
-	double dateJDE = core->getJDE();
+	double dateJDE = lastJDE;
 	double dt = qMin(re.siderealPeriod / 360, 0.01);
 	double t1 = dateJDE - re.siderealPeriod / 2;
 	double t2 = dateJDE + re.siderealPeriod / 2;
