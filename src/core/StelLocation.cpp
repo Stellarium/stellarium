@@ -50,13 +50,12 @@ QString StelLocation::serializeToLine() const
 QString StelLocation::getID() const
 {
 	if (name.isEmpty())
-	{
-		return QString("%1,%2").arg(latitude).arg(longitude);
-	}
-	QString ret = name;
+		return QString("%1, %2").arg(latitude).arg(longitude);
+
 	if (!country.isEmpty())
-		ret += ", " + country;
-	return ret;
+		return QString("%1, %2").arg(name).arg(country);
+	else
+		return name;
 }
 
 QDataStream& operator<<(QDataStream& out, const StelLocation& loc)
