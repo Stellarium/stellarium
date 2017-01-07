@@ -55,6 +55,8 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 	m_speed = map.value("speed").toInt();
 	m_radiantAlpha = StelUtils::getDecAngle(map.value("radiantAlpha").toString());
 	m_radiantDelta = StelUtils::getDecAngle(map.value("radiantDelta").toString());
+	// initialize position to keep valgrind happy
+	StelUtils::spheToRect(m_radiantAlpha, m_radiantDelta, m_position);
 	m_parentObj = map.value("parentObj").toString();
 	m_pidx = map.value("pidx").toFloat();
 
@@ -266,6 +268,8 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 	{
 		if (!m->update(deltaTime))
 		{
+			//important to delete when no longer active
+			delete m;
 			m_activeMeteors.removeOne(m);
 		}
 	}
