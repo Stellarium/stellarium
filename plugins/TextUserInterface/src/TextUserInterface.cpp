@@ -112,7 +112,7 @@ TextUserInterface::TextUserInterface()
  Destructor
 *************************************************************************/
 TextUserInterface::~TextUserInterface()
-{
+{	
 }
 
 /*************************************************************************
@@ -463,7 +463,6 @@ void TextUserInterface::init()
 					 movementMgr->getAutoMoveDuration(),
 					 0, 20.0, 0.1,
 					 m6, m6_4);
-//	TuiNode* m6_4 = new TuiNode(N_("Magnitude scaling multiplier"), m6, m6_3); // No longer used. Use 4.2, 4.3 instead.
 	TuiNode* m6_6 = new TuiNodeDouble(N_("Milky Way intensity:"),
 	                                 GETSTELMODULE(MilkyWay),
 					 SLOT(setIntensity(double)),
@@ -476,8 +475,6 @@ void TextUserInterface::init()
 					 GETSTELMODULE(ZodiacalLight)->getIntensity(),
 					 0, 10.0, 0.1,
 					 m6, m6_6);
-//	TuiNode* m6_8 = new TuiNode(N_("Nebula label frequency:"), m6, m6_7); // INACTIVE. Reactivate?
-//	TuiNode* m6_9 = new TuiNode(N_("Cursor timeout:"), m6, m6_8);
 	m6_1->setNextNode(m6_2);
 	m6_2->setNextNode(m6_3);
 	m6_3->setNextNode(m6_4);
@@ -485,9 +482,6 @@ void TextUserInterface::init()
 	m6_5->setNextNode(m6_6);
 	m6_6->setNextNode(m6_7);
 	m6_7->setNextNode(m6_1);
-//	m6_8->setNextNode(m6_9);
-//	m6_9->setNextNode(m6_10);
-//	m6_10->setNextNode(m6_1);
 	m6_1->loopToTheLast();
 	m6->setChildNode(m6_1);
 

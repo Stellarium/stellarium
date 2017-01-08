@@ -26,6 +26,7 @@
 #include <QTreeWidgetItem>
 #include <QMap>
 #include <QVector>
+#include <QTimer>
 
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
@@ -111,7 +112,13 @@ private slots:
 	void selectCurrentPhenomen(const QModelIndex &modelIndex);
 	void savePhenomena();
 
+	void drawAltVsTimeDiagram();
+	void drawCurrentTimeDiagram();
+	void mouseOverLine(QMouseEvent *event);
+
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
+
+	void updateSolarSystemData();
 
 private:
 	class StelCore* core;
@@ -119,6 +126,7 @@ private:
 	class NebulaMgr* dsoMgr;
 	class StarMgr* starMgr;
 	class StelObjectMgr* objectMgr;
+	QTimer *currentTimeLine;
 
 	//! Update header names for planetary positions table
 	void setPlanetaryPositionsHeaderNames();
@@ -144,7 +152,9 @@ private:
 	//! Populates the drop-down list of major planets.
 	void populateMajorPlanetList();
 	//! Populates the drop-down list of groups of celestial bodies.
-	void populateGroupCelestialBodyList();
+	void populateGroupCelestialBodyList();	
+	//! Prepare graph settings
+	void prepareAxesAndGraph();
 
 	//! Calculation conjunctions and oppositions.
 	//! @note Ported from KStars, should be improved, because this feature calculate
@@ -168,6 +178,11 @@ private:
 	QString delimiter, acEndl;
 	QStringList ephemerisHeader, phenomenaHeader, planetaryPositionsHeader;
 	static float brightLimit;
+	static float minY, maxY;
+
+	//! Make sure that no tabs icons are outside of the viewport.
+	//! @todo Limit the width to the width of the screen *available to the window*.
+	void updateTabBarListWidgetWidth();
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug

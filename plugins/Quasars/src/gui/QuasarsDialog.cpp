@@ -38,11 +38,11 @@
 #include "StelTranslator.hpp"
 
 QuasarsDialog::QuasarsDialog()
-	: qsr(NULL)
+	: StelDialog("Quasars")
+	, qsr(NULL)
 	, updateTimer(NULL)
 {
 	ui = new Ui_quasarsDialog;
-	dialogName = "Quasars";
 }
 
 QuasarsDialog::~QuasarsDialog()

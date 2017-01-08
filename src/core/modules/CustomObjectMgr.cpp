@@ -68,18 +68,16 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 		float my = p.y()-hh; // point 0 in center of the screen, axis Y directed to bottom
 		// calculate position of mouse cursor via position of center of the screen (and invert axis Y)
 		// If coordinates are invalid, don't draw them.
-		bool coordsValid=false;
-		coordsValid = prj->unProject(prj->getViewportPosX()+wh+mx, prj->getViewportPosY()+hh+1-my, mousePosition);
+		bool coordsValid = prj->unProject(prj->getViewportPosX()+wh+mx, prj->getViewportPosY()+hh+1-my, mousePosition);
+		if (coordsValid)
 		{ // Nick Fedoseev patch
 			Vec3d win;
 			prj->project(mousePosition,win);
 			float dx = prj->getViewportPosX()+wh+mx - win.v[0];
 			float dy = prj->getViewportPosY()+hh+1-my - win.v[1];
 			coordsValid = prj->unProject(prj->getViewportPosX()+wh+mx+dx, prj->getViewportPosY()+hh+1-my+dy, mousePosition);
+			addCustomObject(QString("%1 %2").arg(N_("Marker")).arg(countMarkers + 1), mousePosition, true);
 		}
-		if (coordsValid)
-			addCustomObject(QString("%1 %2").arg(q_("Marker")).arg(countMarkers + 1), mousePosition, true);
-
 		e->setAccepted(true);
 		return;
 	}
@@ -122,6 +120,40 @@ void CustomObjectMgr::addCustomObject(QString designation, Vec3d coordinates, bo
 		if (isVisible)
 			countMarkers++;
 	}
+}
+
+void CustomObjectMgr::addCustomObject(QString designation, const QString &ra, const QString &dec, bool isVisible)
+{
+	Vec3d J2000;
+	double dRa = StelUtils::getDecAngle(ra);
+	double dDec = StelUtils::getDecAngle(dec);
+	StelUtils::spheToRect(dRa,dDec,J2000);
+
+	addCustomObject(designation, J2000, isVisible);
+}
+
+void CustomObjectMgr::addCustomObjectRaDec(QString designation, const QString &ra, const QString &dec, bool isVisible)
+{
+	Vec3d aim;
+	double dRa = StelUtils::getDecAngle(ra);
+	double dDec = StelUtils::getDecAngle(dec);
+	StelUtils::spheToRect(dRa, dDec, aim);
+
+	addCustomObject(designation, StelApp::getInstance().getCore()->equinoxEquToJ2000(aim), isVisible);
+}
+
+void CustomObjectMgr::addCustomObjectAltAzi(QString designation, const QString &alt, const QString &azi, bool isVisible)
+{
+	Vec3d aim;
+	double dAlt = StelUtils::getDecAngle(alt);
+	double dAzi = M_PI - StelUtils::getDecAngle(azi);
+
+	if (StelApp::getInstance().getFlagSouthAzimuthUsage())
+		dAzi -= M_PI;
+
+	StelUtils::spheToRect(dAzi, dAlt, aim);
+
+	addCustomObject(designation, StelApp::getInstance().getCore()->altAzToJ2000(aim, StelCore::RefractionAuto), isVisible);
 }
 
 void CustomObjectMgr::removeCustomObjects()

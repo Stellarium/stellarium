@@ -74,6 +74,8 @@ void SporadicMeteorMgr::update(double deltaTime)
 	{
 		if (!m->update(deltaTime))
 		{
+			//important to delete when no longer active
+			delete m;
 			activeMeteors.removeOne(m);
 		}
 	}

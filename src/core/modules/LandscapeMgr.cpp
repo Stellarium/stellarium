@@ -70,16 +70,10 @@ private:
 };
 
 
-Cardinals::Cardinals(float _radius) : radius(_radius), color(0.6,0.2,0.2)
+Cardinals::Cardinals(float _radius) : radius(_radius), color(0.6,0.2,0.2), sNorth("N"), sSouth("S"), sEast("E"), sWest("W")
 {
 	// Font size is 30
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+17);
-	// Default labels - if sky locale specified, loaded later
-	// Improvement for gettext translation
-	sNorth = "N";
-	sSouth = "S";
-	sEast = "E";
-	sWest = "W";
+	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+17);	
 }
 
 Cardinals::~Cardinals()
@@ -413,8 +407,8 @@ void LandscapeMgr::init()
 	addAction("actionShow_Fog", displayGroup, N_("Fog"), "fogDisplayed", "F");
 	addAction("actionShow_Cardinal_Points", displayGroup, N_("Cardinal points"), "cardinalsPointsDisplayed", "Q");
 	addAction("actionShow_Ground", displayGroup, N_("Ground"), "landscapeDisplayed", "G");
-	addAction("actionShow_LandscapeIllumination", displayGroup, N_("Illumination"), "illuminationDisplayed", "Shift+G");
-	addAction("actionShow_LandscapeLabels", displayGroup, N_("Labels"), "labelsDisplayed", "Ctrl+Shift+G");
+	addAction("actionShow_LandscapeIllumination", displayGroup, N_("Landscape illumination"), "illuminationDisplayed", "Shift+G");
+	addAction("actionShow_LandscapeLabels", displayGroup, N_("Landscape labels"), "labelsDisplayed", "Ctrl+Shift+G");
 	addAction("actionShow_LightPollution_Database", displayGroup, N_("Light pollution data from locations database"), "databaseUsage");
 }
 

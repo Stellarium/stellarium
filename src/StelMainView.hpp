@@ -177,12 +177,12 @@ signals:
 private slots:
 	// Do the actual screenshot generation in the main thread with this method.
 	void doScreenshot(void);
-	void updateNightModeProperty();
 	void minFPSUpdate();
 #ifdef OPENGL_DEBUG_LOGGING
 	void logGLMessage(const QOpenGLDebugMessage& debugMessage);
 	void contextDestroyed();
 #endif
+	void updateNightModeProperty(bool b);
 
 private:
 	//! The graphics scene notifies us when a draw finished, so that we can queue the next one

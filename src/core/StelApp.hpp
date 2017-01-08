@@ -50,6 +50,10 @@ class StelActionMgr;
 class StelPropertyMgr;
 class StelProgressController;
 
+#ifdef 	ENABLE_SPOUT
+class SpoutSender;
+#endif
+
 //! @class StelApp
 //! Singleton main Stellarium application class.
 //! This is the central class of Stellarium.  Only one singleton instance of
@@ -175,7 +179,7 @@ public:
 
 	//! Get the GUI instance implementing the abstract GUI interface.
 	StelGuiBase* getGui() const {return stelGui;}
-	//! Tell the StelApp instance which GUI si currently being used.
+	//! Tell the StelApp instance which GUI is currently being used.
 	//! The caller is responsible for destroying the GUI.
 	void setGui(StelGuiBase* b) {stelGui=b;}
 
@@ -404,6 +408,9 @@ private:
 	bool flagShowDecimalDegrees;
 	// flag to indicate we want calculate azimuth from south towards west (as in old astronomical literature)
 	bool flagUseAzimuthFromSouth;
+#ifdef 	ENABLE_SPOUT
+	SpoutSender* spoutSender;
+#endif
 
 	// The current main FBO/render target handle, without requiring GL queries. Valid through a draw() call
 	quint32 currentFbo;

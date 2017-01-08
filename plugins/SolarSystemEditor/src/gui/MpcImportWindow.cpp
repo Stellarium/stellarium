@@ -52,7 +52,8 @@
 #include <QDir>
 
 MpcImportWindow::MpcImportWindow()
-	: importType(ImportType())
+	: StelDialog("SolarSystemEditorMPCimport")
+	, importType(ImportType())
 	, downloadReply(0)
 	, queryReply(0)
 	, downloadProgressBar(0)
@@ -60,7 +61,6 @@ MpcImportWindow::MpcImportWindow()
 	, countdown(0)
 {
 	ui = new Ui_mpcImportWindow();
-	dialogName = "SolarSystemEditorMPCimport";
 	ssoManager = GETSTELMODULE(SolarSystemEditor);
 
 	networkManager = StelApp::getInstance().getNetworkAccessManager();

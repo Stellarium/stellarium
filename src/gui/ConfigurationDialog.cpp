@@ -65,20 +65,19 @@
 #include <QDesktopWidget>
 
 ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
-	: StelDialog(parent)
+	: StelDialog("Configuration", parent)
+	, isDownloadingStarCatalog(false)
 	, nextStarCatalogToDownloadIndex(0)
 	, starCatalogsCount(0)
+	, hasDownloadedStarCatalog(false)
 	, starCatalogDownloadReply(NULL)
 	, currentDownloadFile(NULL)
 	, progressBar(NULL)
 	, gui(agui)
+	, customDeltaTEquationDialog(NULL)
+	, savedProjectionType(StelApp::getInstance().getCore()->getCurrentProjectionType())
 {
-	dialogName = "Configuration";
 	ui = new Ui_configurationDialogForm;
-	customDeltaTEquationDialog = NULL;
-	hasDownloadedStarCatalog = false;
-	isDownloadingStarCatalog = false;
-	savedProjectionType = StelApp::getInstance().getCore()->getCurrentProjectionType();	
 }
 
 ConfigurationDialog::~ConfigurationDialog()
@@ -280,8 +279,9 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->selectSingleConstellationButton, "ConstellationMgr.isolateSelected");
 	ui->diskViewportCheckbox->setChecked(proj->getMaskType() == StelProjector::MaskDisk);
 	connect(ui->diskViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
-	ui->autoZoomResetsDirectionCheckbox->setChecked(mvmgr->getFlagAutoZoomOutResetsDirection());
-	connect(ui->autoZoomResetsDirectionCheckbox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagAutoZoomOutResetsDirection(bool)));
+	//ui->autoZoomResetsDirectionCheckbox->setChecked(mvmgr->getFlagAutoZoomOutResetsDirection());
+	//connect(ui->autoZoomResetsDirectionCheckbox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagAutoZoomOutResetsDirection(bool)));
+	connectBoolProperty(ui->autoZoomResetsDirectionCheckbox, "StelMovementMgr.flagAutoZoomOutResetsDirection");
 
 	ui->showFlipButtonsCheckbox->setChecked(gui->getFlagShowFlipButtons());
 	connect(ui->showFlipButtonsCheckbox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowFlipButtons(bool)));
@@ -392,16 +392,13 @@ void ConfigurationDialog::selectLanguage(const QString& langName)
 {
 	QString code = StelTranslator::nativeNameToIso639_1Code(langName);
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
-//	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);
 	StelMainView::getInstance().initTitleI18n();
 }
 
 void ConfigurationDialog::selectSkyLanguage(const QString& langName)
 {
 	QString code = StelTranslator::nativeNameToIso639_1Code(langName);
-//	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
 	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);
-//	StelMainView::getInstance().initTitleI18n();
 }
 
 void ConfigurationDialog::setStartupTimeMode()
@@ -476,7 +473,7 @@ void ConfigurationDialog::setBriefSelectedInfo(void)
 
 void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 {
-	// As this signal will be called when a checbox is toggled,
+	// As this signal will be called when a checkbox is toggled,
 	// change the general mode to Custom.
 	if (!ui->customSelectedInfoRadio->isChecked())
 		ui->customSelectedInfoRadio->setChecked(true);
@@ -515,6 +512,10 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 		flags |= StelObject::EclipticCoordJ2000;
 	if (ui->checkBoxEclipticCoordsOfDate->isChecked())
 		flags |= StelObject::EclipticCoordOfDate;
+	if (ui->checkBoxConstellation->isChecked())
+		flags |= StelObject::IAUConstellation;
+	if (ui->checkBoxSiderealTime->isChecked())
+		flags |= StelObject::SiderealTime;
 
 	gui->setInfoTextFilters(flags);
 }
@@ -776,6 +777,10 @@ void ConfigurationDialog::saveCurrentViewOptions()
 			       (bool) (flags & StelObject::EclipticCoordOfDate));
 		conf->setValue("flag_show_eclcoordj2000",
 			       (bool) (flags & StelObject::EclipticCoordJ2000));
+		conf->setValue("flag_show_constellation",
+			       (bool) (flags & StelObject::IAUConstellation));
+		conf->setValue("flag_show_sidereal_time",
+			       (bool) (flags & StelObject::SiderealTime));
 		conf->endGroup();
 	}
 
@@ -784,6 +789,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("gui/auto_hide_vertical_toolbar", gui->getAutoHideVerticalButtonBar());
 	conf->setValue("gui/flag_show_nebulae_background_button", gui->getFlagShowNebulaBackgroundButton());
 	conf->setValue("gui/flag_show_toast_survey_button", gui->getFlagShowToastSurveyButton());
+	conf->setValue("gui/flag_show_bookmarks_button", gui->getFlagShowBookmarksButton());
 	conf->setValue("gui/flag_show_decimal_degrees", StelApp::getInstance().getFlagShowDecimalDegrees());
 	conf->setValue("gui/flag_use_azimuth_from_south", StelApp::getInstance().getFlagSouthAzimuthUsage());
 	conf->setValue("gui/flag_time_jd", gui->getButtonBar()->getFlagTimeJd());
@@ -1330,6 +1336,8 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxType->setChecked(flags & StelObject::ObjectType);
 	ui->checkBoxEclipticCoordsJ2000->setChecked(flags & StelObject::EclipticCoordJ2000);
 	ui->checkBoxEclipticCoordsOfDate->setChecked(flags & StelObject::EclipticCoordOfDate);
+	ui->checkBoxConstellation->setChecked(flags & StelObject::IAUConstellation);
+	ui->checkBoxSiderealTime->setChecked(flags & StelObject::SiderealTime);
 }
 
 void ConfigurationDialog::updateTabBarListWidgetWidth()
@@ -1393,12 +1401,12 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	algorithms->addItem(q_("Muller & Stephenson (1975)"), "MullerStephenson");
 	algorithms->addItem(q_("Stephenson (1978)"), "Stephenson1978");
 	algorithms->addItem(q_("Schmadel & Zech (1979)"), "SchmadelZech1979");
+	algorithms->addItem(q_("Schmadel & Zech (1988)"), "SchmadelZech1988");
 	algorithms->addItem(q_("Morrison & Stephenson (1982)"), "MorrisonStephenson1982");
 	algorithms->addItem(q_("Stephenson & Morrison (1984)"), "StephensonMorrison1984");
 	algorithms->addItem(q_("Stephenson & Houlden (1986)"), "StephensonHoulden");
 	algorithms->addItem(q_("Espenak (1987, 1989)"), "Espenak");
 	algorithms->addItem(q_("Borkowski (1988)"), "Borkowski");
-	algorithms->addItem(q_("Schmadel & Zech (1988)"), "SchmadelZech1988");
 	algorithms->addItem(q_("Chapront-Touze & Chapront (1991)"), "ChaprontTouze");	
 	algorithms->addItem(q_("Stephenson & Morrison (1995)"), "StephensonMorrison1995");
 	algorithms->addItem(q_("Stephenson (1997)"), "Stephenson1997");
@@ -1406,9 +1414,8 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	algorithms->addItem(q_("Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"), "ChaprontMeeus");
 	algorithms->addItem(q_("JPL Horizons"), "JPLHorizons");	
 	algorithms->addItem(q_("Meeus & Simons (2000)"), "MeeusSimons");
-	algorithms->addItem(q_("Montenbruck & Pfleger (2000)"), "MontenbruckPfleger");
-	algorithms->addItem(q_("Reingold & Dershowitz (2002, 2007)"), "ReingoldDershowitz");
 	algorithms->addItem(q_("Morrison & Stephenson (2004, 2005)"), "MorrisonStephenson2004");
+	algorithms->addItem(q_("Stephenson, Morrison & Hohenkerk (2016)"), "StephensonMorrisonHohenkerk2016");
 	// Espenak & Meeus (2006) used by default
 	algorithms->addItem(q_("Espenak & Meeus (2006)").append(" *"), "EspenakMeeus");
 	// GZ: I want to try out some things. Something is still wrong with eclipses, see lp:1275092.
@@ -1417,6 +1424,8 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	#endif
 	algorithms->addItem(q_("Reijs (2006)"), "Reijs");
 	algorithms->addItem(q_("Banjevic (2006)"), "Banjevic");
+	algorithms->addItem(q_("Montenbruck & Pfleger (2000)"), "MontenbruckPfleger");
+	algorithms->addItem(q_("Reingold & Dershowitz (2002, 2007)"), "ReingoldDershowitz");
 	algorithms->addItem(q_("Islam, Sadiq & Qureshi (2008, 2013)"), "IslamSadiqQureshi");
 	algorithms->addItem(q_("Khalid, Sultana & Zaidi (2014)"), "KhalidSultanaZaidi");
 	algorithms->addItem(q_("Custom equation of %1T").arg(QChar(0x0394)), "Custom");

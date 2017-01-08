@@ -277,7 +277,7 @@
           <item>
            <widget class="QCheckBox" name="displayShowDesignationsCheckBox">
             <property name="text">
-             <string>Enable display designations of exoplanets</string>
+             <string>Enable display of designations for exoplanets</string>
             </property>
            </widget>
           </item>
@@ -606,7 +606,7 @@
   <customwidget>
    <class>QCustomPlot</class>
    <extends>QWidget</extends>
-   <header>qcustomplot/qcustomplot.h</header>
+   <header>external/qcustomplot/qcustomplot.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

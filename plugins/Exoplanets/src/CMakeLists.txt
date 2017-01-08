@@ -7,13 +7,6 @@ INCLUDE_DIRECTORIES(
 
 LINK_DIRECTORIES(${BUILD_DIR}/src)
 
-set(qcustomplot_SRCS
-    gui/qcustomplot/qcustomplot.cpp
-    gui/qcustomplot/qcustomplot.h
-    )
-add_library(qcustomplot_stel STATIC EXCLUDE_FROM_ALL ${qcustomplot_SRCS})
-target_link_libraries(qcustomplot_stel Qt5::PrintSupport Qt5::Widgets)
-
 SET(Exoplanets_SRCS
      Exoplanets.hpp
      Exoplanets.cpp

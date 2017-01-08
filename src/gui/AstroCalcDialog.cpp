@@ -34,6 +34,7 @@
 
 #include "AstroCalcDialog.hpp"
 #include "ui_astroCalcDialog.h"
+#include "external/qcustomplot/qcustomplot.h"
 
 #include <QFileDialog>
 #include <QDir>
@@ -42,13 +43,15 @@ QVector<Vec3d> AstroCalcDialog::EphemerisListJ2000;
 QVector<QString> AstroCalcDialog::EphemerisListDates;
 int AstroCalcDialog::DisplayedPositionIndex = -1;
 float AstroCalcDialog::brightLimit = 10.f;
+float AstroCalcDialog::minY = -90.f;
+float AstroCalcDialog::maxY = 90.f;
 
 AstroCalcDialog::AstroCalcDialog(QObject *parent)
-	: StelDialog(parent)	
+	: StelDialog("AstroCalc",parent)
+	, currentTimeLine(NULL)
 	, delimiter(", ")
 	, acEndl("\n")
 {
-	dialogName = "AstroCalc";
 	ui = new Ui_astroCalcDialogForm;
 	core = StelApp::getInstance().getCore();
 	solarSystem = GETSTELMODULE(SolarSystem);
@@ -62,6 +65,12 @@ AstroCalcDialog::AstroCalcDialog(QObject *parent)
 
 AstroCalcDialog::~AstroCalcDialog()
 {
+	if (currentTimeLine)
+	{
+		currentTimeLine->stop();
+		delete currentTimeLine;
+		currentTimeLine = NULL;
+	}
 	delete ui;
 }
 
@@ -76,8 +85,12 @@ void AstroCalcDialog::retranslate()
 		populateCelestialBodyList();
 		populateEphemerisTimeStepsList();
 		populateMajorPlanetList();
-		populateGroupCelestialBodyList();
+		populateGroupCelestialBodyList();		
 		currentPlanetaryPositions();
+		drawAltVsTimeDiagram();
+		//Hack to shrink the tabs to optimal size after language change
+		//by causing the list items to be laid out again.
+		updateTabBarListWidgetWidth();		
 	}
 }
 
@@ -114,6 +127,9 @@ void AstroCalcDialog::createDialogContent()
 	populateEphemerisTimeStepsList();
 	populateMajorPlanetList();
 	populateGroupCelestialBodyList();
+	// Altitude vs. Time feature
+	prepareAxesAndGraph();
+	drawCurrentTimeDiagram();
 
 	double JD = core->getJD() + core->getUTCOffset(core->getJD())/24;
 	QDateTime currentDT = StelUtils::jdToQDateTime(JD);
@@ -139,11 +155,22 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->phenomenaTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentPhenomen(QModelIndex)));
 	connect(ui->phenomenaSaveButton, SIGNAL(clicked()), this, SLOT(savePhenomena()));
 
+	connect(ui->altVsTimePlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverLine(QMouseEvent*)));
+	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAltVsTimeDiagram()));
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawAltVsTimeDiagram()));
+	connect(core, SIGNAL(dateChanged()), this, SLOT(drawAltVsTimeDiagram()));
+	drawAltVsTimeDiagram();
+
 	connectBoolProperty(ui->ephemerisShowMarkersCheckBox, "SolarSystem.ephemerisMarkersDisplayed");
 	connectBoolProperty(ui->ephemerisShowDatesCheckBox, "SolarSystem.ephemerisDatesDisplayed");
 
 	currentPlanetaryPositions();
 
+	currentTimeLine = new QTimer(this);
+	connect(currentTimeLine, SIGNAL(timeout()), this, SLOT(drawCurrentTimeDiagram()));
+	currentTimeLine->start(500); // Update 'now' line position every 0.5 seconds
+
+	connect(solarSystem, SIGNAL(solarSystemDataReloaded()), this, SLOT(updateSolarSystemData()));
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 }
 
@@ -532,12 +559,12 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	groups->addItem(q_("Cubewanos"), "6");
 	groups->addItem(q_("Scattered disc objects"), "7");
 	groups->addItem(q_("Oort cloud objects"), "8");
-	groups->addItem(q_("Bright stars (<%1 mag.)").arg(QString::number(brightLimit-3.9f, 'f', 1)), "9");
-	groups->addItem(q_("Bright star clusters (<%1 mag.)").arg(brLimit), "10");
+	groups->addItem(q_("Bright stars (<%1 mag)").arg(QString::number(brightLimit-5.0f, 'f', 1)), "9");
+	groups->addItem(q_("Bright star clusters (<%1 mag)").arg(brLimit), "10");
 	groups->addItem(q_("Planetary nebulae"), "11");
-	groups->addItem(q_("Bright nebulae (<%1 mag.)").arg(brLimit), "12");
+	groups->addItem(q_("Bright nebulae (<%1 mag)").arg(brLimit), "12");
 	groups->addItem(q_("Dark nebulae"), "13");
-	groups->addItem(q_("Bright galaxies (<%1 mag.)").arg(brLimit), "14");
+	groups->addItem(q_("Bright galaxies (<%1 mag)").arg(brLimit), "14");
 
 	index = groups->findData(selectedGroupId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
@@ -545,6 +572,167 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	groups->setCurrentIndex(index);
 	groups->model()->sort(0);
 	groups->blockSignals(false);
+}
+
+void AstroCalcDialog::drawAltVsTimeDiagram()
+{
+	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
+	if (!selectedObjects.isEmpty())
+	{
+		// X axis - time; Y axis - altitude
+		QList<double> aX, aY;
+
+		StelObjectP selectedObject = selectedObjects[0];
+
+		double currentJD = core->getJD();
+		double noon = (int)currentJD;
+		double az, alt, deg;
+		bool sign;
+
+		double shift = core->getUTCOffset(currentJD)/24;
+		for(int i=-1;i<=49;i++) // Every 30 minutes (24 hours + 30 min extension in both directions)
+		{
+			double ltime = i*1800 + 43200;
+			aX.append(ltime);
+			double JD = noon + ltime/86400 - shift - 0.5;
+			core->setJD(JD);
+			StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
+			StelUtils::radToDecDeg(alt, sign, deg);
+			if (!sign)
+				deg *= -1;
+			aY.append(deg);
+			core->update(0.0);
+		}
+		core->setJD(currentJD);
+
+		QVector<double> x = aX.toVector(), y = aY.toVector();
+
+		double minYa = aY.first();
+		double maxYa = aY.first();
+
+		foreach (double temp, aY)
+		{
+			if(maxYa < temp) maxYa = temp;
+			if(minYa > temp) minYa = temp;
+		}
+
+		minY = minYa - 2.0;
+		maxY = maxYa + 2.0;
+
+		prepareAxesAndGraph();
+		drawCurrentTimeDiagram();
+
+		QString name = selectedObject->getNameI18n();
+		if (name.isEmpty() && selectedObject->getType()=="Nebula")
+			name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
+
+		ui->altVsTimePlot->graph(0)->setData(x, y);
+		ui->altVsTimePlot->graph(0)->setName(name);
+		ui->altVsTimePlot->replot();
+	}
+}
+
+// Added vertical line indicating "now"
+void AstroCalcDialog::drawCurrentTimeDiagram()
+{
+	double currentJD = core->getJD();
+	double now = ((currentJD + 0.5 - (int)currentJD) * 86400.0) + core->getUTCOffset(currentJD)*3600.0;
+	if (now>129600)
+		now -= 86400;
+	if (now<43200)
+		now += 86400;
+	QList<double> ax, ay;
+	ax.append(now);
+	ax.append(now);
+	ay.append(minY);
+	ay.append(maxY);
+	QVector<double> x = ax.toVector(), y = ay.toVector();
+	ui->altVsTimePlot->removeGraph(1);
+	ui->altVsTimePlot->addGraph();
+	ui->altVsTimePlot->graph(1)->setData(x, y);
+	ui->altVsTimePlot->graph(1)->setPen(QPen(Qt::yellow, 1));
+	ui->altVsTimePlot->graph(1)->setLineStyle(QCPGraph::lsLine);
+	ui->altVsTimePlot->graph(1)->setName("[Now]");
+
+	ui->altVsTimePlot->replot();
+}
+
+void AstroCalcDialog::prepareAxesAndGraph()
+{
+	QString xAxisStr = q_("Local Time");
+	QString yAxisStr = QString("%1, %2").arg(q_("Altitude"), QChar(0x00B0));
+
+	QColor axisColor(Qt::white);
+	QPen axisPen(axisColor, 1);
+
+	ui->altVsTimePlot->clearGraphs();
+	ui->altVsTimePlot->addGraph();
+	ui->altVsTimePlot->setBackground(QBrush(QColor(86, 87, 90)));
+	ui->altVsTimePlot->graph(0)->setPen(QPen(Qt::red, 1));
+	ui->altVsTimePlot->graph(0)->setLineStyle(QCPGraph::lsLine);
+	ui->altVsTimePlot->graph(0)->rescaleAxes(true);
+	ui->altVsTimePlot->xAxis->setLabel(xAxisStr);
+	ui->altVsTimePlot->yAxis->setLabel(yAxisStr);
+
+	ui->altVsTimePlot->xAxis->setRange(43200, 129600); // 24 hours since 12h00m (range in seconds)
+	ui->altVsTimePlot->xAxis->setScaleType(QCPAxis::stLinear);
+	ui->altVsTimePlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
+	ui->altVsTimePlot->xAxis->setLabelColor(axisColor);
+	ui->altVsTimePlot->xAxis->setTickLabelColor(axisColor);
+	ui->altVsTimePlot->xAxis->setBasePen(axisPen);
+	ui->altVsTimePlot->xAxis->setTickPen(axisPen);
+	ui->altVsTimePlot->xAxis->setSubTickPen(axisPen);
+	ui->altVsTimePlot->xAxis->setDateTimeFormat("H:mm");
+	ui->altVsTimePlot->xAxis->setDateTimeSpec(Qt::UTC); // Qt::UTC + core->getUTCOffset() give local time
+	ui->altVsTimePlot->xAxis->setAutoTickStep(false);
+	ui->altVsTimePlot->xAxis->setTickStep(7200); // step is 2 hours (in seconds)
+	ui->altVsTimePlot->xAxis->setAutoSubTicks(false);
+	ui->altVsTimePlot->xAxis->setSubTickCount(7);
+
+	ui->altVsTimePlot->yAxis->setRange(minY, maxY);
+	ui->altVsTimePlot->yAxis->setScaleType(QCPAxis::stLinear);
+	ui->altVsTimePlot->yAxis->setLabelColor(axisColor);
+	ui->altVsTimePlot->yAxis->setTickLabelColor(axisColor);
+	ui->altVsTimePlot->yAxis->setBasePen(axisPen);
+	ui->altVsTimePlot->yAxis->setTickPen(axisPen);
+	ui->altVsTimePlot->yAxis->setSubTickPen(axisPen);
+}
+
+void AstroCalcDialog::mouseOverLine(QMouseEvent *event)
+{
+	double x = ui->altVsTimePlot->xAxis->pixelToCoord(event->pos().x());
+	double y = ui->altVsTimePlot->yAxis->pixelToCoord(event->pos().y());
+
+	QCPAbstractPlottable *abstractGraph = ui->altVsTimePlot->plottableAt(event->pos(), false);
+	QCPGraph *graph = qobject_cast<QCPGraph *>(abstractGraph);
+
+	if (x>ui->altVsTimePlot->xAxis->range().lower && x<ui->altVsTimePlot->xAxis->range().upper && y>ui->altVsTimePlot->yAxis->range().lower && y<ui->altVsTimePlot->yAxis->range().upper)
+	{
+		if (graph)
+		{
+			double JD = x/86400.0 + (int)core->getJD() - 0.5;
+			QString LT = StelUtils::jdToQDateTime(JD - core->getUTCOffset(JD)).toString("H:mm");
+
+			QString info;
+			if (graph->name()=="[Now]")
+				info = q_("Now is %1").arg(LT);
+			else
+			{
+				if (StelApp::getInstance().getFlagShowDecimalDegrees())
+					info = QString("%1<br />%2: %3<br />%4: %5%6").arg(ui->altVsTimePlot->graph(0)->name(), q_("Local Time"), LT, q_("Altitude"), QString::number(y, 'f', 2), QChar(0x00B0));
+				else
+					info = QString("%1<br />%2: %3<br />%4: %5").arg(ui->altVsTimePlot->graph(0)->name(), q_("Local Time"), LT, q_("Altitude"), StelUtils::decDegToDmsStr(y));
+			}
+
+			QToolTip::hideText();
+			QToolTip::showText(event->globalPos(), info, ui->altVsTimePlot, ui->altVsTimePlot->rect());
+		}
+		else
+			QToolTip::hideText();
+	}
+
+	ui->altVsTimePlot->update();
+	ui->altVsTimePlot->replot();
 }
 
 void AstroCalcDialog::setPhenomenaHeaderNames()
@@ -682,7 +870,7 @@ void AstroCalcDialog::calculatePhenomena()
 		case 9: // Stars
 			foreach(const StelObjectP& object, hipStars)
 			{
-				if (object->getVMagnitude(core)<(brightLimit-3.9f))
+				if (object->getVMagnitude(core)<(brightLimit-5.0f))
 					star.append(object);
 			}
 			break;
@@ -1187,17 +1375,17 @@ QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP &object1, Stel
 		step0 = 24.8*365.25;
 
 	if (object1->getEnglishName()=="Neptune" || object1->getEnglishName()=="Uranus")
-		if (step0 > 3652.5)
-			step0 = 3652.5;
+		if (step0 > 1811.25)
+			step0 = 1811.25;
 	if (object1->getEnglishName()=="Jupiter" || object1->getEnglishName()=="Saturn")
-		if (step0 > 365.25)
-			step0 = 365.f;
+		if (step0 > 181.125)
+			step0 = 181.125;
 	if (object1->getEnglishName()=="Mars")
-		if (step0 > 10.f)
-			step0 = 10.f;
-	if (object1->getEnglishName()=="Venus" || object1->getEnglishName()=="Mercury")
 		if (step0 > 5.f)
-			step0 = 5.f;
+			step0 = 5.0;
+	if (object1->getEnglishName()=="Venus" || object1->getEnglishName()=="Mercury")
+		if (step0 > 2.5f)
+			step0 = 2.5;
 	if (object1->getEnglishName()=="Moon")
 		if (step0 > 0.25)
 			step0 = 0.25;
@@ -1305,4 +1493,48 @@ void AstroCalcDialog::changePage(QListWidgetItem *current, QListWidgetItem *prev
 	if (!current)
 		current = previous;
 	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
+}
+
+void AstroCalcDialog::updateTabBarListWidgetWidth()
+{
+	ui->stackListWidget->setWrapping(false);
+
+	// Update list item sizes after translation
+	ui->stackListWidget->adjustSize();
+
+	QAbstractItemModel* model = ui->stackListWidget->model();
+	if (!model)
+	{
+		return;
+	}
+
+	// stackListWidget->font() does not work properly!
+	// It has a incorrect fontSize in the first loading, which produces the bug#995107.
+	QFont font;
+	font.setPixelSize(14);
+	font.setWeight(75);
+	QFontMetrics fontMetrics(font);
+
+	int iconSize = ui->stackListWidget->iconSize().width();
+
+	int width = 0;
+	for (int row = 0; row < model->rowCount(); row++)
+	{
+		int textWidth = fontMetrics.width(ui->stackListWidget->item(row)->text());
+		width += iconSize > textWidth ? iconSize : textWidth; // use the wider one
+		width += 24; // margin - 12px left and 12px right
+	}
+
+	// Hack to force the window to be resized...
+	ui->stackListWidget->setMinimumWidth(width);
+}
+
+void AstroCalcDialog::updateSolarSystemData()
+{
+	if (dialog)
+	{
+		populateCelestialBodyList();
+		populateGroupCelestialBodyList();
+		currentPlanetaryPositions();
+	}
 }

@@ -43,6 +43,8 @@ Meteor::Meteor(const StelCore* core, const StelTextureSP& bolideTexture)
 Meteor::~Meteor()
 {
 	m_bolideTexture.clear();
+	m_lineColorVector.clear();
+	m_trainColorVector.clear();
 }
 
 void Meteor::init(const float& radiantAlpha, const float& radiantDelta,

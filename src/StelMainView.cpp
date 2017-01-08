@@ -454,7 +454,10 @@ private:
 };
 
 StelMainView::StelMainView(QSettings* settings)
-	: QGraphicsView(), guiItem(NULL), gui(NULL), stelApp(NULL),
+	: QGraphicsView(),
+	  guiItem(NULL),
+	  gui(NULL),
+	  stelApp(NULL),
 	  updateQueued(false),
 	  flagInvertScreenShotColors(false),
 	  flagOverwriteScreenshots(false),
@@ -659,6 +662,7 @@ void StelMainView::init()
 	//create and initialize main app
 	stelApp = new StelApp(this);
 	stelApp->setGui(gui);
+
 	stelApp->init(conf);
 	//this makes sure the app knows how large the window is
 	connect(stelScene,SIGNAL(sceneRectChanged(QRectF)),stelApp,SLOT(glWindowHasBeenResized(QRectF)));
@@ -674,7 +678,7 @@ void StelMainView::init()
 	guiItem = new StelGuiItem(rootItem);
 	scene()->addItem(rootItem);
 	nightModeEffect = new NightModeGraphicsEffect(this);
-	updateNightModeProperty();
+	updateNightModeProperty(StelApp::getInstance().getVisionModeNight());
 	//install the effect on the whole view
 	rootItem->setGraphicsEffect(nightModeEffect);
 
@@ -730,7 +734,7 @@ void StelMainView::init()
 	StelGui* gui = dynamic_cast<StelGui*>(stelApp->getGui());
 	if (gui!=NULL)
 		setStyleSheet(gui->getStelStyle().qtStyleSheet);
-	connect(stelApp, SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty()));
+	connect(stelApp, SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty(bool)));
 
 	// I doubt this will have any effect on framerate, but may cause problems elsewhere?
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
@@ -747,11 +751,11 @@ void StelMainView::init()
 #endif
 }
 
-void StelMainView::updateNightModeProperty()
+void StelMainView::updateNightModeProperty(bool b)
 {
 	// So that the bottom bar tooltips get properly rendered in night mode.
-	setProperty("nightMode", stelApp->getVisionModeNight());
-	nightModeEffect->setEnabled(stelApp->getVisionModeNight());
+	setProperty("nightMode", b);
+	nightModeEffect->setEnabled(b);
 }
 
 // This is a series of various diagnostics based on "bugs" reported for 0.13.0 and 0.13.1.
@@ -809,7 +813,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 		if ((!isANGLE) && (!isMesa))
 			qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, graphics hardware, or use --angle-mode (or even --mesa-mode) option.";
 		else if (isANGLE)
-			qWarning() << "Oops... Insufficient OpenGL version in ANGLE. Please update drivers, graphics hardware, or use --mesa-mode option.";
+			qWarning() << "Oops... Insufficient OpenGLES version in ANGLE. Please update drivers, graphics hardware, or use --mesa-mode option.";
 		else
 			qWarning() << "Oops... Insufficient OpenGL version. Mesa failed! Please send a bug report.";
 

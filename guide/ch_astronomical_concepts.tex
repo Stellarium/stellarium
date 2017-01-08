@@ -299,10 +299,7 @@ shortcut if you frequently use these coordinates
 (see~\ref{sec:gui:help:hotkeys}).
 
 
-\section{Units}
-\label{sec:Concepts:Units}
-
-\subsection{Distance}
+\section{Distance}
 \label{sec:Concepts:Distance}
 
 As \name{Douglas Adams} pointed out in the Hitchhiker's Guide to the
@@ -338,7 +335,8 @@ context of the mind-boggling vastness of space.
   of large-scale objects like galaxies, nebulae etc.
 \end{description}
 
-\subsection{Time}\label{time}
+\section{Time}
+\label{sec:Concepts:Time}
 
 \begin{figure}[ht]
 \centering\includegraphics[width=\textwidth]{sidereal_day}
@@ -383,7 +381,7 @@ year to travel round the Sun --
 $365\frac{1}{4}$ solar days. The length of a
 sidereal day is about 23 hours, 56 minutes and 4 seconds.
 
-\subsubsection{Sidereal Time}
+\subsection{Sidereal Time}
 \label{sec:Concepts:SiderealTime}
 
 It takes exactly one sidereal day for the celestial sphere to make one
@@ -431,7 +429,7 @@ expect more accuracy from the simulation algorithms.
 
 
 %\subsubsection{\texorpdfstring{$\mathbf{\Delta T}$}{Delta T}}
-\subsubsection{Delta T}
+\subsection{Delta T}
 \label{sec:Concepts:DeltaT}
 %% GZ 2016-05-01
 
@@ -471,7 +469,7 @@ computation of the planetary positions.
 
 Still, people living on earth prefer to have the mean solar noon
 governing the run of day and night. Therefore all forms of civil time
-is linked to Coordinated Universal Time UTC. Seconds in UTC and TAI
+are linked to Coordinated Universal Time UTC. Seconds in UTC and TAI
 are of equal length. The slow and irregular divergence between TAI and
 UTC is observed by a few standardisation institutes.  When necessary,
 a leap second can be introduced to the UTC to bring the earth's
@@ -496,7 +494,7 @@ according to the formula
          u &=& \frac{\mathrm{year}-y}{100}
 \end{eqnarray}
 
-\paragraph{List of equations of $\Delta T$ in Stellarium}
+\subsubsection{List of equations of $\Delta T$ in Stellarium}
 The following list describes sources and a few details about the models for $\Delta T$ implemented in Stellarium.
 \begin{description}
 \item[Without correction.] Correction is disabled. Use only if you know what you are doing!
@@ -645,15 +643,22 @@ The following list describes sources and a few details about the models for $\De
   Algorithms''~\cite{AstronomicalAlgorithms:1991}.
 
 \item[Morrison \& Stephenson (2004, 2005).] This important solution
-  was published by L. V. Morrison and F. R. Stephenson in article
+  was published by L. V. Morrison and F. R. Stephenson in the article
   ``Historical values of the Earth's clock error $\Delta T$ and the
   calculation of eclipses''~\cite{2004JHA....35..327M} with
   addendum~\cite{2005JHA....36..339M}. Valid range of usage: between
   years -1000 and 2000. $\dot{n}=-26.0''/\cy^2$.
 
+\item[Stephenson, Morrison \& Hohenkerk (2016).] This important new solution was published by
+  F. R. Stephenson,  L. V. Morrison and C. Y. Hohenkerk in the article 
+  ``Measurement of the Earth’s rotation: 720 BC to AD 2015''~\cite{StephensonMorrisonHohenkerk:2016}. 
+  The solution combines a spline fit to observations (used between the given limits) 
+  with a parabolic fit (used outside the range).
+  Recommended range of usage: between years -720 and 2016. $\dot{n}=-25.82''/\cy^2$.
+  
 \item[Espenak \& Meeus (2006).] This solution\footnote{This solution
     is used by default.} by F. Espenak and J. Meeus, based on Morrison
-  \& Stephenson~\cite{2004JHA....35..327M} and a polynomial fit
+  \& Stephenson~2004\cite{2004JHA....35..327M} and a polynomial fit
   through tabulated values for 1600-2000, is used for the NASA Eclipse
   Web Site\footnote{\url{http://eclipse.gsfc.nasa.gov/eclipse.html}}
   and in their ``Five Millennium Canon of Solar Eclipses: -1900 to
@@ -698,7 +703,7 @@ The following list describes sources and a few details about the models for $\De
 \end{description}
 
 
-\subsection{Angles}
+\section{Angles}
 \label{sec:Concepts:Angles}
 
 Astronomers typically use degrees to measure angles. Since many
@@ -710,7 +715,7 @@ Finer grades of precision are usually expressed using the SI prefixes
 with arc-seconds, e.g. \emph{milli arc-seconds} (one milli arc-second is
 one thousandth of an arc-second).
 
-\subsubsection{Notation}
+\subsection{Notation}
 
 Degrees are denoted using the $\degree$ symbol after a number. Minutes of arc are denoted with a~$'$, and seconds of arc are denoted using~$''$. Angles are frequently given in two formats:
 
@@ -723,7 +728,7 @@ Degrees are denoted using the $\degree$ symbol after a number. Minutes of arc ar
   Decimal degrees, for example $90.2533\degree$
 \end{enumerate}
 
-\subsubsection{Handy Angles}
+\subsection{Handy Angles}
 \label{sec:Concepts:Angles:HandyAngles}
 \index{Handy Angles}
 
@@ -765,7 +770,7 @@ will work out your own ``handy angles''.
 
 
 
-\subsection{The Magnitude Scale}
+\section{The Magnitude Scale}
 \label{sec:Concepts:Magnitudes}
 
 
@@ -793,7 +798,7 @@ quantified the scale more precisely, defining it as a logarithmic scale
 where a magnitude~1 object is 100~times as bright as a magnitude~6
 object (a difference of five magnitudes). The zero-point of the modern
 scale was originally defined as the brightness of the star Vega, however
-this was re-defined more formally in 1982\cite{landolt}. Objects brighter
+this was re-defined more formally in 1982~\cite{landolt}. Objects brighter
 than Vega are given negative magnitudes.
 
 The absolute magnitude of a star is defined as the magnitude a star
@@ -825,7 +830,7 @@ Full Moon (at brightest) & -12.6 & ---\tabularnewline
 \end{table}
 
 
-\subsection{Luminosity}
+\section{Luminosity}
 \label{sec:Concepts:Luminosity}
 
 \emph{Luminosity} is an expression of the total energy radiated by a

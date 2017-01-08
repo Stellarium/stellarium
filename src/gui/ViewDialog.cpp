@@ -25,6 +25,7 @@
 #include "AtmosphereDialog.hpp"
 #include "GreatRedSpotDialog.hpp"
 #include "ConfigureDSOColorsDialog.hpp"
+#include "ConfigureOrbitColorsDialog.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelSkyCultureMgr.hpp"
@@ -60,14 +61,14 @@
 #include <QStringList>
 #include <QColorDialog>
 
-ViewDialog::ViewDialog(QObject* parent) : StelDialog(parent)
+ViewDialog::ViewDialog(QObject* parent) : StelDialog("View", parent)
 {
-	dialogName = "View";
 	ui = new Ui_viewDialogForm;
 	addRemoveLandscapesDialog = NULL;
 	atmosphereDialog=NULL;
 	greatRedSpotDialog=NULL;
 	configureDSOColorsDialog=NULL;
+	configureOrbitColorsDialog=NULL;
 }
 
 ViewDialog::~ViewDialog()
@@ -82,6 +83,8 @@ ViewDialog::~ViewDialog()
 	greatRedSpotDialog = NULL;
 	delete configureDSOColorsDialog;
 	configureDSOColorsDialog = NULL;
+	delete configureOrbitColorsDialog;
+	configureOrbitColorsDialog = NULL;
 }
 
 void ViewDialog::retranslate()
@@ -173,11 +176,12 @@ void ViewDialog::createDialogContent()
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 
 	// Stars section
-	connectGroupBox(ui->starGroupBox, "actionShow_Stars"); // NEW FROM TRUNK
+	connectGroupBox(ui->starGroupBox, "actionShow_Stars");
 	connectBoolProperty(ui->starTwinkleCheckBox, "StelSkyDrawer.flagTwinkle");
 	connectDoubleProperty(ui->starScaleRadiusDoubleSpinBox,"StelSkyDrawer.absoluteStarScale");
 	connectDoubleProperty(ui->starRelativeScaleDoubleSpinBox, "StelSkyDrawer.relativeStarScale");
 	connectDoubleProperty(ui->milkyWayBrightnessDoubleSpinBox, "MilkyWay.intensity");
+	connectBoolProperty(ui->milkyWayCheckBox, "MilkyWay.flagMilkyWayDisplayed");
 	connectBoolProperty(ui->zodiacalLightCheckBox, "ZodiacalLight.flagZodiacalLightDisplayed");
 	connectDoubleProperty(ui->zodiacalLightBrightnessDoubleSpinBox, "ZodiacalLight.intensity");
 	connectDoubleProperty(ui->starTwinkleAmountDoubleSpinBox, "StelSkyDrawer.twinkleAmount");
@@ -216,6 +220,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->customGrsSettingsCheckBox, SIGNAL(toggled(bool)), this, SLOT(setFlagCustomGrsSettings(bool)));
 	ui->pushButtonGrsDetails->setEnabled(grsFlag);
 	connect(ui->pushButtonGrsDetails, SIGNAL(clicked()), this, SLOT(showGreatRedSpotDialog()));
+	connect(ui->pushButtonOrbitColors, SIGNAL(clicked(bool)), this, SLOT(showConfigureOrbitColorsDialog()));
 
 	// Shooting stars section
 	SporadicMeteorMgr* mmgr = GETSTELMODULE(SporadicMeteorMgr);
@@ -1081,7 +1086,6 @@ void ViewDialog::setFlagCustomGrsSettings(bool b)
 		greatRedSpotDialog->setVisible(false);
 }
 
-
 // 20160411. New function introduced with trunk merge. Not sure yet if useful or bad with property connections?.
 void ViewDialog::populateLightPollution()
 {
@@ -1353,6 +1357,14 @@ void ViewDialog::showConfigureDSOColorsDialog()
 		configureDSOColorsDialog = new ConfigureDSOColorsDialog();
 
 	configureDSOColorsDialog->setVisible(true);
+}
+
+void ViewDialog::showConfigureOrbitColorsDialog()
+{
+	if(configureOrbitColorsDialog == NULL)
+		configureOrbitColorsDialog = new ConfigureOrbitColorsDialog();
+
+	configureOrbitColorsDialog->setVisible(true);
 }
 
 void ViewDialog::updateZhrDescription(int zhr)
