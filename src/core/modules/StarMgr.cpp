@@ -89,6 +89,8 @@ QHash<int, int> StarMgr::saoStarsMap;
 QMap<int, int> StarMgr::saoStarsIndex;
 QHash<int, int> StarMgr::hdStarsMap;
 QMap<int, int> StarMgr::hdStarsIndex;
+QHash<int, int> StarMgr::hrStarsMap;
+QMap<int, int> StarMgr::hrStarsIndex;
 QHash<int, QString> StarMgr::referenceMap;
 
 QStringList initStringListFromFile(const QString& file_name)
@@ -240,6 +242,15 @@ QString StarMgr::getCrossIdentificationDesignations(int hip)
 			designations = QString("HD %1").arg(it2.value());
 		else
 			designations += QString(" - HD %1").arg(it2.value());
+	}
+
+	QHash<int,int>::const_iterator it3(hrStarsMap.find(hip));
+	if (it3!=hrStarsMap.end())
+	{
+		if (designations.isEmpty())
+			designations = QString("HR %1").arg(it3.value());
+		else
+			designations += QString(" - HR %1").arg(it3.value());
 	}
 
 	return designations;
@@ -778,7 +789,8 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 	foreach(const QString& record, allRecords)
 	{
 		++lineNumber;
-		if (record.isEmpty())
+		// skip comments and empty lines
+		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
 			continue;
 
 		++totalRecords;
@@ -852,7 +864,8 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 	foreach(const QString& record, allRecords)
 	{
 		++lineNumber;
-		if (record.isEmpty())
+		// skip comments and empty lines
+		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
 			continue;
 
 		++totalRecords;
@@ -926,7 +939,8 @@ void StarMgr::loadWds(const QString& WdsFile)
 	foreach(const QString& record, allRecords)
 	{
 		++lineNumber;
-		if (record.isEmpty())
+		// skip comments and empty lines
+		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
 			continue;
 
 		++totalRecords;
@@ -967,6 +981,8 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 	saoStarsIndex.clear();
 	hdStarsMap.clear();
 	hdStarsIndex.clear();
+	hrStarsMap.clear();
+	hrStarsIndex.clear();
 
 	qDebug() << "Loading cross-identification data from" << QDir::toNativeSeparators(crossIdFile);
 	QFile ciFile(crossIdFile);
@@ -987,12 +1003,13 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 	foreach(const QString& record, allRecords)
 	{
 		++lineNumber;
-		if (record.isEmpty())
+		// skip comments and empty lines
+		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
 			continue;
 
 		++totalRecords;
 		const QStringList& fields = record.split('\t');
-		if (fields.size()!=3)
+		if (fields.size()!=4)
 		{
 			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(crossIdFile)
 				   << " - record does not match record pattern";
@@ -1012,6 +1029,7 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 
 			unsigned int sao = fields.at(1).toUInt(&ok);
 			unsigned int hd = fields.at(2).toUInt(&ok);
+			unsigned int hr = fields.at(3).toUInt(&ok);
 
 			if (sao>0)
 			{
@@ -1023,6 +1041,12 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 			{
 				hdStarsMap[hip] = hd;
 				hdStarsIndex[hd] = hip;
+			}
+
+			if (hr>0)
+			{
+				hrStarsMap[hip] = hr;
+				hrStarsIndex[hr] = hip;
 			}
 
 			++readOk;
@@ -1283,6 +1307,17 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 		}
 	}
 
+	// Search by HR number if it's an HR formated number
+	QRegExp rx4("^\\s*(HR)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
+	if (rx4.exactMatch(objw))
+	{
+		QMap<int,int>::const_iterator hr(hrStarsIndex.find(rx4.capturedTexts().at(2).toInt()));
+		if (hr!=hrStarsIndex.end())
+		{
+			return searchHP(hr.value());
+		}
+	}
+
 	// Search by I18n common name
 	QMap<QString,int>::const_iterator it(commonNamesIndexI18n.find(objw));
 	if (it!=commonNamesIndexI18n.end())
@@ -1361,6 +1396,17 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 		if (hd!=hdStarsIndex.end())
 		{
 			return searchHP(hd.value());
+		}
+	}
+
+	// Search by HR number if it's an HR formated number
+	QRegExp rx4("^\\s*(HR)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
+	if (rx4.exactMatch(objw))
+	{
+		QMap<int,int>::const_iterator hr(hrStarsIndex.find(rx4.capturedTexts().at(2).toInt()));
+		if (hr!=hrStarsIndex.end())
+		{
+			return searchHP(hr.value());
 		}
 	}
 
@@ -1582,6 +1628,25 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			if (s && maxNbItem>0)
 			{
 				result << QString("HD%1").arg(hdNum);
+				maxNbItem--;
+			}
+		}
+	}
+
+	// Add exact HR catalogue numbers
+	QRegExp hrRx("^(HR)\\s*(\\d+)\\s*$");
+	hrRx.setCaseSensitivity(Qt::CaseInsensitive);
+	if (hrRx.exactMatch(objw))
+	{
+		bool ok;
+		int hrNum = hrRx.capturedTexts().at(2).toInt(&ok);
+		QMap<int,int>::const_iterator hr(hrStarsIndex.find(hrNum));
+		if (hr!=hrStarsIndex.end())
+		{
+			StelObjectP s = searchHP(hr.value());
+			if (s && maxNbItem>0)
+			{
+				result << QString("HR%1").arg(hrNum);
 				maxNbItem--;
 			}
 		}

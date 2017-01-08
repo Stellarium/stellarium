@@ -172,12 +172,12 @@ Satellite::~Satellite()
 {
 	if (pSatWrapper != NULL)
 	{
-
 		delete pSatWrapper;
 		pSatWrapper = NULL;
 	}
 }
 
+// TODO: REMOVE THIS FUNCTION! It is used for string formatting only.
 double Satellite::roundToDp(float n, int dp)
 {
 	// round n to dp decimal places
@@ -279,7 +279,13 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	
 	if ((flags & Magnitude) && (stdMag!=99.f))
 	{
-		oss << q_("Approx. magnitude: <b>%1</b>").arg(QString::number(getVMagnitude(core), 'f', 2)) << "<br/>";
+		float mag = getVMagnitude(core);
+		if (core->getSkyDrawer()->getFlagHasAtmosphere())
+			oss << q_("Approx. magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(mag, 'f', 2),
+												QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
+		else
+			oss << q_("Approx. magnitude: <b>%1</b>").arg(QString::number(mag, 'f', 2)) << "<br/>";
+
 #ifdef IRIDIUM_SAT_TEXT_DEBUG
 		oss << myText << "<br/>";
 #endif
@@ -391,7 +397,8 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 
 Vec3d Satellite::getJ2000EquatorialPos(const StelCore* core) const
 {
-	return core->altAzToJ2000(elAzPosition);;
+	// Bugfix LP:1654331. I assume the elAzPosition has been computed without refraction! We must say this definitely.
+	return core->altAzToJ2000(elAzPosition, StelCore::RefractionOff);
 }
 
 Vec3f Satellite::getInfoColor(void) const
@@ -588,7 +595,7 @@ float Satellite::getVMagnitude(const StelCore* core) const
 // Calculate illumination fraction of artifical satellite
 float Satellite::calculateIlluminatedFraction() const
 {
-	return (1 + cos(phaseAngle))/2;
+	return (1.f + cos(phaseAngle))*0.5f;
 }
 
 QString Satellite::getOperationalStatus() const
@@ -662,22 +669,22 @@ void Satellite::update(double)
 		position                 = pSatWrapper->getTEMEPos();
 		velocity                 = pSatWrapper->getTEMEVel();
 		latLongSubPointPosition  = pSatWrapper->getSubPoint();
-		height                   = latLongSubPointPosition[2];
-		if (height <= 0.0)
+		height                   = latLongSubPointPosition[2]; // km
+		if (height <= 50.0)
 		{
 			// The orbit is no longer valid.  Causes include very out of date
 			// TLE, system date and time out of a reasonable range, and orbital
 			// degradation and re-entry of a satellite.  In any of these cases
 			// we might end up with a problem - usually a crash of Stellarium
 			// because of a div/0 or something.  To prevent this, we turn off
-			// the satellite.
+			// the satellite when the computed height is 50km. (We can assume bogus at 250km or so...)
 			qWarning() << "Satellite has invalid orbit:" << name << id;
 			orbitValid = false;
-			displayed = false; // He shouldn't be displayed!
+			displayed = false; // It shouldn't be displayed!
 			return;
 		}
 
-		elAzPosition             = pSatWrapper->getAltAz();
+		elAzPosition = pSatWrapper->getAltAz();
 		elAzPosition.normalize();
 
 		pSatWrapper->getSlantRange(range, rangeRate);
@@ -783,7 +790,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 		drawColor = hintColor;
 	painter.setColor(drawColor[0], drawColor[1], drawColor[2], hintBrightness);
 
-	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionAuto);
 
 	Vec3d xy;
 	if (prj->projectCheck(XYZ,xy))

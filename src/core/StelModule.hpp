@@ -110,9 +110,9 @@ public:
 	//! Enum used when selecting objects to define whether to add to, replace, or remove from the existing selection list.
 	enum StelModuleSelectAction
 	{
-		AddToSelection,     //!< Add the StelObject to the current list of selected ones.
+		AddToSelection,		//!< Add the StelObject to the current list of selected ones.
 		ReplaceSelection,	//!< Set the StelObject as the new list of selected ones.
-		RemoveFromSelection //!< Subtract the StelObject from the current list of selected ones.
+		RemoveFromSelection	//!< Subtract the StelObject from the current list of selected ones.
 	};
 #if QT_VERSION >= 0x050500
 	Q_ENUM(StelModuleSelectAction)

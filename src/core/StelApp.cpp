@@ -80,6 +80,10 @@
 #include <QCoreApplication>
 #include <QScreen>
 #include <QDateTime>
+#ifdef ENABLE_SPOUT
+#include <QMessageBox>
+#include "SpoutSender.hpp"
+#endif
 
 #ifdef USE_STATIC_PLUGIN_HELLOSTELMODULE
 Q_IMPORT_PLUGIN(HelloStelModuleStelPluginInterface)
@@ -203,7 +207,15 @@ StelApp::StelApp(StelMainView *parent)
 	: QObject(parent)
 	, mainWin(parent)
 	, core(NULL)
+	, moduleMgr(NULL)
+	, localeMgr(NULL)
+	, skyCultureMgr(NULL)
+	, actionMgr(NULL)
+	, propMgr(NULL)
+	, textureMgr(NULL)
+	, stelObjectMgr(NULL)
 	, planetLocationMgr(NULL)
+	, networkAccessManager(NULL)
 	, audioMgr(NULL)
 	, videoMgr(NULL)
 	, skyImageMgr(NULL)
@@ -222,28 +234,20 @@ StelApp::StelApp(StelMainView *parent)
 	, initialized(false)
 	, saveProjW(-1)
 	, saveProjH(-1)
+	, nbDownloadedFiles(0)
+	, totalDownloadedSize(0)
+	, nbUsedCache(0)
+	, totalUsedCacheSize(0)
 	, baseFontSize(13)
 	, renderBuffer(NULL)
 	, viewportEffect(NULL)
 	, flagShowDecimalDegrees(false)
 	, flagUseAzimuthFromSouth(false)
+	#ifdef ENABLE_SPOUT
+	, spoutSender(NULL)
+	#endif
 {
-	// Stat variables
-	nbDownloadedFiles=0;
-	totalDownloadedSize=0;
-	nbUsedCache=0;
-	totalUsedCacheSize=0;
-
 	setObjectName("StelApp");
-
-	skyCultureMgr=NULL;
-	localeMgr=NULL;
-	stelObjectMgr=NULL;
-	textureMgr=NULL;
-	moduleMgr=NULL;
-	networkAccessManager=NULL;
-	actionMgr = NULL;
-	propMgr = NULL;
 
 	// Can't create 2 StelApp instances
 	Q_ASSERT(!singleton);
@@ -533,6 +537,43 @@ void StelApp::init(QSettings* conf)
 	// Animation
 	animationScale = confSettings->value("gui/pointer_animation_speed", 1.f).toFloat();
 	
+#ifdef ENABLE_SPOUT
+	//qDebug() << "Property spout is" << qApp->property("spout").toString();
+	//qDebug() << "Property spoutName is" << qApp->property("spoutName").toString();
+	if (qApp->property("spout").toString() != "none")
+	{
+		//if we are on windows and we have GLES, we are most likely on ANGLE
+		bool isANGLE=QOpenGLContext::currentContext()->isOpenGLES();
+
+		if (isANGLE)
+		{
+			qCritical() << "SPOUT: Does not run in ANGLE/OpenGL ES mode!";
+		}
+		else
+		{
+			// Create the SpoutSender object.
+			QString spoutName = qApp->property("spoutName").toString();
+			if(spoutName.isEmpty())
+				spoutName = "stellarium";
+
+			spoutSender = new SpoutSender(spoutName);
+
+			if (!spoutSender->isValid())
+			{
+				QMessageBox::warning(0, "Stellarium SPOUT", q_("Cannot create Spout sender. See log for details."), QMessageBox::Ok);
+				delete spoutSender;
+				spoutSender = Q_NULLPTR;
+				qApp->setProperty("spout", "");
+			}
+		}
+
+	}
+	else
+	{
+		qApp->setProperty("spout", "");
+	}
+#endif
+
 	initialized = true;
 }
 
@@ -556,6 +597,10 @@ void StelApp::initPlugIns()
 
 void StelApp::deinit()
 {
+#ifdef 	ENABLE_SPOUT
+	delete spoutSender;
+	spoutSender = Q_NULLPTR;
+#endif
 #ifndef DISABLE_SCRIPTING
 	if (scriptMgr->scriptIsRunning())
 		scriptMgr->stopScript();
@@ -563,7 +608,6 @@ void StelApp::deinit()
 	QCoreApplication::processEvents();
 	getModuleMgr().unloadAllPlugins();
 	QCoreApplication::processEvents();
-	
 	StelPainter::deinitGLShaders();
 }
 
@@ -658,7 +702,13 @@ void StelApp::draw()
 		module->draw(core);
 	}
 	core->postDraw();
+#ifdef ENABLE_SPOUT
+	// At this point, the sky scene has been drawn, but no GUI panels.
+	if(spoutSender)
+		spoutSender->captureAndSendFrame(drawFbo);
+#endif
 	applyRenderBuffer(drawFbo);
+
 }
 
 /*************************************************************************
@@ -679,6 +729,10 @@ void StelApp::glWindowHasBeenResized(const QRectF& rect)
 		delete renderBuffer;
 		renderBuffer = NULL;
 	}
+#ifdef ENABLE_SPOUT
+	if (spoutSender)
+		spoutSender->resize(rect.width(),rect.height());
+#endif
 }
 
 // Handle mouse clics

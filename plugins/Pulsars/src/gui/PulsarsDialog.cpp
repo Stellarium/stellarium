@@ -38,11 +38,11 @@
 #include "StelTranslator.hpp"
 
 PulsarsDialog::PulsarsDialog()
-	: psr(NULL)
+	: StelDialog("Pulsars")
+	, psr(NULL)
 	, updateTimer(NULL)
 {
 	ui = new Ui_pulsarsDialog;
-	dialogName = "Pulsars";
 }
 
 PulsarsDialog::~PulsarsDialog()

@@ -39,12 +39,6 @@ ToastMgr::ToastMgr() : survey(NULL)
 
 ToastMgr::~ToastMgr()
 {
-	if (survey)
-	{
-		delete survey;
-		survey = NULL;
-	}
-
 	delete fader;
 	fader = NULL;
 }
@@ -54,9 +48,8 @@ void ToastMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	// TODO: change settings before release (results->survey; dss.astro.altspu.ru->dss.stellarium.org)
-	QString toastHost = conf->value("astro/toast_survey_host", "http://dss.astro.altspu.ru").toString();	
-	QString toastDir = conf->value("astro/toast_survey_directory", "results").toString();
+	QString toastHost = conf->value("astro/toast_survey_host", "http://dss.stellarium.org").toString();
+	QString toastDir = conf->value("astro/toast_survey_directory", "survey").toString();
 	int toastLevel = conf->value("astro/toast_survey_levels", 11).toInt();	
 	survey = new ToastSurvey(toastHost+"/" + toastDir + "/{level}/{x}_{y}.jpg", toastLevel);
 	survey->setParent(this);
@@ -65,6 +58,12 @@ void ToastMgr::init()
 	setFlagSurveyShow(conf->value("astro/flag_toast_survey", false).toBool());
 
 	addAction("actionShow_Toast_Survey", N_("Display Options"), N_("Digitized Sky Survey (experimental)"), "surveyDisplayed", "Ctrl+Alt+D");
+}
+
+void ToastMgr::deinit()
+{
+	delete survey;
+	survey = NULL;
 }
 
 void ToastMgr::draw(StelCore* core)

@@ -76,3 +76,10 @@ target_include_directories(qtcompress_stel PUBLIC qtcompress)
 target_link_libraries(qtcompress_stel ${ZLIB_LIBRARIES} Qt5::Core)
 #turn off automoc, not needed here
 set_target_properties(qtcompress_stel PROPERTIES AUTOMOC 0)
+
+set(qcustomplot_SRCS
+    qcustomplot/qcustomplot.cpp
+    qcustomplot/qcustomplot.h
+    )
+add_library(qcustomplot_stel STATIC EXCLUDE_FROM_ALL ${qcustomplot_SRCS})
+target_link_libraries(qcustomplot_stel Qt5::PrintSupport Qt5::Widgets)

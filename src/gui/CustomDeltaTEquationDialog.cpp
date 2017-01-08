@@ -24,11 +24,8 @@
 #include "StelTranslator.hpp"
 #include "StelObjectMgr.hpp"
 
-#include <QDebug>
-
-CustomDeltaTEquationDialog::CustomDeltaTEquationDialog()
+CustomDeltaTEquationDialog::CustomDeltaTEquationDialog() : StelDialog("CustomDeltaTEquation")
 {
-	dialogName = "CustomDeltaTEquation";
 	ui = new Ui_customDeltaTEquationDialogForm;
 	conf = StelApp::getInstance().getSettings();
 	core = StelApp::getInstance().getCore();
@@ -59,7 +56,7 @@ void CustomDeltaTEquationDialog::createDialogContent()
 	ui->setupUi(dialog);
 	setDescription();
 
-	ui->labelNDot->setText(QString("%1:").arg(QChar(0x1E45)));
+	ui->labelNDot->setText(QString("n%1:").arg(QChar(0x2032)));
 
 	ui->lineEditCoefficientA->setText(QString("%1").arg(coeff[0]));
 	ui->lineEditCoefficientB->setText(QString("%1").arg(coeff[1]));
@@ -137,4 +134,7 @@ void CustomDeltaTEquationDialog::setDescription() const
 	ui->labelDescription->setText(q_("A typical equation for calculation of %1T looks like:").arg(QChar(0x0394)));
 	ui->labelEquation->setText(QString("<strong>%1T = a + b%2u + c%3u%4,</strong>").arg(QChar(0x0394)).arg(QChar(0x00B7)).arg(QChar(0x00B7)).arg(QChar(0x00B2)));
 	ui->labelSubEquation->setText(QString("%1 <em>u = (%2 - y)/100</em>").arg(q_("where")).arg(q_("year")));
+	QString tooltip = q_("Secular acceleration of the Moon");
+	ui->labelNDot->setToolTip(tooltip);
+	ui->lineEditNDot->setToolTip(tooltip);
 }

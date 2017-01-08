@@ -1,3 +1,14 @@
+#add our external dependencies first
+add_subdirectory(external)
+
+IF(ENABLE_SPOUT)
+    SET(spout_SRCS
+     external/SpoutLibrary.h
+     core/SpoutSender.hpp
+     core/SpoutSender.cpp
+	 )
+ENDIF()
+
 SET(stellarium_lib_SRCS
      core/StelAudioMgr.hpp
      core/StelAudioMgr.cpp
@@ -103,6 +114,8 @@ SET(stellarium_lib_SRCS
      core/StelProgressController.hpp
      core/StelPropertyMgr.hpp
      core/StelPropertyMgr.cpp
+
+     ${spout_SRCS}
 
      core/planetsephems/calc_interpolated_elements.c
      core/planetsephems/calc_interpolated_elements.h
@@ -272,7 +285,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/DateTimeDialog.hpp
           gui/DateTimeDialog.cpp
           gui/ViewDialog.hpp
-          gui/ViewDialog.cpp          
+          gui/ViewDialog.cpp
           gui/SearchDialog.hpp
           gui/SearchDialog.cpp
           gui/ConfigurationDialog.hpp
@@ -283,6 +296,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/AtmosphereDialog.cpp
           gui/ConfigureDSOColorsDialog.hpp
           gui/ConfigureDSOColorsDialog.cpp
+          gui/ConfigureOrbitColorsDialog.hpp
+          gui/ConfigureOrbitColorsDialog.cpp
           gui/GreatRedSpotDialog.hpp
           gui/GreatRedSpotDialog.cpp
           gui/CustomDeltaTEquationDialog.hpp
@@ -312,6 +327,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/bookmarksDialog.ui
           gui/addRemoveLandscapesDialog.ui
           gui/dsoColorsDialog.ui
+          gui/orbitColorsDialog.ui
      )
 
      IF(ENABLE_SCRIPTING)
@@ -407,17 +423,24 @@ if(USE_OLD_QGLWIDGET)
     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::OpenGL)
 endif()
 
+if(ENABLE_SPOUT AND SPOUT_LIBRARY_DLL)
+    # automatically copy the spout .dll to the binary directory, if possible
+    configure_file(${SPOUT_LIBRARY_DLL} ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
+endif()
+
+set(STELMAIN_DEPS ${ZLIB_LIBRARIES} qtcompress_stel glues_stel qcustomplot_stel ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES} ${SPOUT_LIBRARY})
+
 # Main executable/library setup
 IF(GENERATE_STELMAINLIB)
      ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
-     TARGET_LINK_LIBRARIES(stelMain ${ZLIB_LIBRARIES} qtcompress_stel glues_stel ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES})
+     TARGET_LINK_LIBRARIES(stelMain ${STELMAIN_DEPS})
      INSTALL(TARGETS stelMain DESTINATION lib)
      ADD_EXECUTABLE(stellarium ${stellarium_exe_SRCS})
      #stelMain should be after the plug-ins, otherwise the build crashes
-     TARGET_LINK_LIBRARIES(stellarium ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} stelMain ${winMMLib})
+     TARGET_LINK_LIBRARIES(stellarium stelMain ${winMMLib})
 ELSE()
      ADD_EXECUTABLE(stellarium ${stellarium_lib_SRCS} ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
-     TARGET_LINK_LIBRARIES(stellarium ${winMMLib} ${ZLIB_LIBRARIES} qtcompress_stel glues_stel ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES})
+     TARGET_LINK_LIBRARIES(stellarium ${winMMLib} ${STELMAIN_DEPS})
 
      IF(APPLE)
           SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")

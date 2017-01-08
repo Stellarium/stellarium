@@ -34,11 +34,11 @@ float CustomObject::markerSize = 1.f;
 
 CustomObject::CustomObject(const QString& codesignation, const Vec3d& coordinates, const bool isVisible)
 	: initialized(false)
+	, XYZ(coordinates)
 	, markerTexture(NULL)
+	, designation(codesignation)
+	, isMarker(isVisible)
 {
-	designation = codesignation;
-	XYZ = coordinates;
-	isMarker = isVisible;
 	markerTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cross.png");
 	initialized = true;	
 }
@@ -53,13 +53,24 @@ float CustomObject::getSelectPriority(const StelCore* core) const
 	return StelObject::getSelectPriority(core)-2.f;
 }
 
+QString CustomObject::getNameI18n() const
+{
+	QString r = designation;
+	if (isMarker)
+	{
+		QStringList cod = designation.split(" ");
+		r = QString("%1 %2").arg(q_(cod.at(0))).arg(cod.at(1));
+	}
+	return r;
+}
+
 QString CustomObject::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
 	QString str;
 	QTextStream oss(&str);
 
 	if (flags&Name)
-		oss << "<h2>" << designation << "</h2>";
+		oss << "<h2>" << getNameI18n() << "</h2>";
 
 	if (flags&ObjectType)
 	{
@@ -120,7 +131,7 @@ void CustomObject::draw(StelCore* core, StelPainter *painter)
 
 		if (labelsFader.getInterstate()<=0.f)
 		{
-			painter->drawText(XYZ, designation, 0, shift, shift, false);
+			painter->drawText(XYZ, getNameI18n(), 0, shift, shift, false);
 		}
 	}
 }

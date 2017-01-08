@@ -47,17 +47,29 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	maxAdaptFov(180.f),
 	minAdaptFov(0.1f),
 	lnfovFactor(0.f),
+	flagStarTwinkle(false),
+	flagForcedTwinkle(false),
+	twinkleAmount(0.0),
+	flagStarMagnitudeLimit(false),
+	flagNebulaMagnitudeLimit(false),
+	flagPlanetMagnitudeLimit(false),
 	starRelativeScale(1.f),
 	starAbsoluteScaleF(1.f),
 	starLinearScale(19.569f),
 	limitMagnitude(-100.f),
 	limitLuminance(0.f),
+	customStarMagLimit(0.0),
+	customNebulaMagLimit(0.0),
+	customPlanetMagLimit(0.0),
 	bortleScaleIndex(3),
 	inScale(1.f),
 	starShaderProgram(NULL),
 	starShaderVars(StarShaderVars()),
+	nbPointSources(0),
+	maxPointSources(1000),
 	maxLum(0.f),
 	oldLum(-1.f),
+	flagLuminanceAdaptation(false),
 	big3dModelHaloRadius(150.f)
 {
 	setObjectName("StelSkyDrawer");
@@ -87,7 +99,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	setRelativeStarScale(conf->value("stars/relative_scale",1.0).toFloat(&ok));
 	if (!ok)
 		setRelativeStarScale(1.0);
-	
+
 	setAbsoluteStarScale(conf->value("stars/absolute_scale",1.0).toFloat(&ok));
 	if (!ok)
 		setAbsoluteStarScale(1.0);
@@ -102,7 +114,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 		extinction.setUndergroundExtinctionMode(Extinction::UndergroundExtinctionMirror);
 	else if (extinctionMode=="max")
 		extinction.setUndergroundExtinctionMode(Extinction::UndergroundExtinctionMax);
-	
+
 	setAtmosphereTemperature(conf->value("landscape/temperature_C",15.0).toDouble(&ok));
 	if (!ok)
 		setAtmosphereTemperature(15.0);
@@ -111,10 +123,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	if (!ok)
 		setAtmospherePressure(1013.0);
 
-	// Initialize buffers for use by gl vertex array
-	nbPointSources = 0;
-	maxPointSources = 1000;
-	
+	// Initialize buffers for use by gl vertex array	
 	
 	vertexArray = new StarVertex[maxPointSources*6];
 	
@@ -210,7 +219,7 @@ void StelSkyDrawer::update(double)
 	// These value have been calibrated by hand, looking at the faintest star in stellarium at around 40 deg FOV
 	// They should roughly match the scale described at http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
 	static const float bortleToInScale[9] = {2.45f, 1.55f, 1.0f, 0.63f, 0.40f, 0.24f, 0.23f, 0.145f, 0.09f};
-	if (getFlagHasAtmosphere())
+	if (getFlagHasAtmosphere() && core->getJD()>2387627.5) // JD given is J1825.0; ignore Bortle scale index before that.
 	    setInputScale(bortleToInScale[bortleScaleIndex-1]);
 	else
 	    setInputScale(bortleToInScale[0]);

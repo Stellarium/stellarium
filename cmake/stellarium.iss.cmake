@@ -59,6 +59,7 @@ Source: "@QtConcurrent_location@"; DestDir: "{app}";
 @ISS_ANGLE_LIBS@
 @ISS_ICU_LIBS@
 @ISS_QT_PLUGINS@
+@ISS_OPENSSL_LIBS@
 ; Stellarium's stuff
 Source: "@CMAKE_INSTALL_PREFIX@\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs ignoreversion
 
@@ -102,6 +103,7 @@ Name: "{group}\Stellarium {cm:DebugMode}"; Filename: "{app}\stellarium.exe"; Par
 ; Name: "{group}\Stellarium {cm:AngleWarpMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--angle-warp"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
 Name: "{group}\Stellarium {cm:AngleMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--angle-d3d9"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
 Name: "{group}\Stellarium {cm:MesaMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--mesa-mode"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
+@ISS_SPOUT@
 Name: "{group}\{cm:UninstallProgram,Stellarium}"; Filename: "{uninstallexe}"
 Name: "{group}\config.ini"; Filename: "{userappdata}\Stellarium\config.ini"
 Name: "{group}\{cm:LastRunLog}"; Filename: "{userappdata}\Stellarium\log.txt"
@@ -129,7 +131,7 @@ Name: "da"; MessagesFile: "compiler:Languages\Danish.isl"
 Name: "nl"; MessagesFile: "compiler:Languages\Dutch.isl"
 Name: "fi"; MessagesFile: "compiler:Languages\Finnish.isl"
 Name: "fr"; MessagesFile: "compiler:Languages\French.isl,@CMAKE_SOURCE_DIR@\util\ISL\FrenchCM.isl"
-Name: "de"; MessagesFile: "compiler:Languages\German.isl"
+Name: "de"; MessagesFile: "compiler:Languages\German.isl,@CMAKE_SOURCE_DIR@\util\ISL\GermanCM.isl"
 Name: "el"; MessagesFile: "compiler:Languages\Greek.isl"
 Name: "he"; MessagesFile: "compiler:Languages\Hebrew.isl"
 Name: "hu"; MessagesFile: "compiler:Languages\Hungarian.isl"

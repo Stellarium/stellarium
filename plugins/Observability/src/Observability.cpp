@@ -938,7 +938,8 @@ void Observability::double2hms(double hfloat, int &h1, int &h2, int &h3)
 	double ffrac = std::modf(hfloat,&f1);
 	double ffrac2 = std::modf(60.*ffrac,&f2);
 	ffrac2 = std::modf(3600.*(ffrac-f2/60.),&f3);
-	h1 = (int)f1 ; h2 = (int)qAbs(f2+0.0*ffrac2) ; h3 = (int)qAbs(f3);
+	Q_UNUSED(ffrac2);
+	h1 = (int)f1; h2 = (int)qAbs(f2) ; h3 = (int)qAbs(f3);
 } 
 ////////////////////////////////////
 
