@@ -39,14 +39,14 @@
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
 
-#include "qcustomplot/qcustomplot.h"
+#include "external/qcustomplot/qcustomplot.h"
 
 ExoplanetsDialog::ExoplanetsDialog()
-	: ep(NULL)
+	: StelDialog("Exoplanets")
+	, ep(NULL)
 	, updateTimer(NULL)
 {
         ui = new Ui_exoplanetsDialog;
-	dialogName = "Exoplanets";
 }
 
 ExoplanetsDialog::~ExoplanetsDialog()

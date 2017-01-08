@@ -75,9 +75,7 @@ location so you won't need to set it again until you move.
 After installation, Stellarium uses an online service which tries to
 find your approximate location based on the IP address you are
 using. This seems very practical, but if you feel this causes privacy
-issues, you may want to switch this feature off. You should also consider
-switching it off on a computer which does not move, to save network
-bandwidth.
+issues, you may want to switch this feature off. You should also consider switching it off on a computer which does not move, to save network bandwidth.
 
 To set your location more accurately, or if the lookup service fails,
 press \key{F6} to open the location window. There are a few ways you
@@ -368,8 +366,8 @@ opacity factor for extinction, \emph{magnitude loss per airmass} $k$
 external to the solar system, and are not point-sources like stars.
 DSO include galaxies, planetary nebulae and star clusters. These
 objects may or may not have images associated with them. Stellarium
-comes with a catalogue with over 14,000 extended objects containing
-the combined data from many catalogues, with 190 images.  The DSO tab
+comes with a catalogue with over 50,000 extended objects containing
+the combined data from many catalogues, with 200 images.  The DSO tab
 (Fig.~\ref{fig:gui:view:dso}) allows you to specify which catalogs or
 which object types you are interested in. See chapter~\ref{ch:DSO} for
 details about the catalog, and how to extend it with your own photographs.
@@ -608,37 +606,59 @@ object displayed on the screen. The SIMBAD server being used can be
 selected from the scroll window.
 
 
-\section{The AstroCalc Window}
+\section{The Astronomical Calculations Window}
 \label{sec:gui:AstroCalc}
 
 \newFeature{V0.15} This window provides advanced functionality and is
-still in an experimental phase. You can call it by pressing \key{F10}.
+still in an experimental phase. You can call it by pressing \key{F10}. The Astronomical Calculations window shows four tabs with different functionality.
 
 % TODO: Add button on left side.
 
+\subsection{Planet Positions}
+\label{sec:gui:AstroCalc:Positions}
+
+Shows J2000.0 positions and magnitudes for all installed planets, planet moons, minor bodies (asteroids, comets, etc.). Clicking on an entry brings the object into focus (Figure~\ref{fig:gui:AstroCalc:Positions}).
+
 
 \begin{figure}[htbp]
-\centering\includegraphics[width=\textwidth]{gui_AstroCalc}
-\caption{AstroCalc: Plot traces of planets.}
+\centering\includegraphics[width=0.68\textwidth]{astrocalc_dialog_positions_tab}
+\caption{Astronomical Calculations (AstroCalc): Planetary positions.}
+\label{fig:gui:AstroCalc:Positions}
+\end{figure}
+
+\subsection{Ephemeris}
+\label{sec:gui:AstroCalc:Ephemeris}
+
+Select an object and start and end time, and compute an ephemeris (list of positions and magnitude evolving over time) for that object. The positions are marked in the sky with yellow circles (Figure~\ref{fig:gui:AstroCalc:Ephemeris}). When you click on a date, an orange circle indicates this date. Double-clicking sets the respective date and brings object to focus. You can export the calculated ephemeris into CSV file. 
+
+\begin{figure}[htbp]
+\centering\includegraphics[width=\textwidth]{astrocalc_dialog_ephemeris_tab}
+\caption{Astronomical Calculations (AstroCalc): Plot traces of planets.}
 \label{fig:gui:AstroCalc:Ephemeris}
 \end{figure}
 
-\noindent The AstroCalc window shows three tabs with different functionality.
-\begin{description}
-\item[Planet Positions] Shows J2000.0 positions and magnitudes for all
-  installed planets, planet moons, minor bodies (asteroids, comets,
-  etc.). Clicking on an entry brings the object into focus.
+\subsection{Phenomena}
+\label{sec:gui:AstroCalc:Phenomena}
 
-\item[Ephemeris] Select an object and start and end time, and compute
-  an ephemeris (list of positions and magnitude evolving over time)
-  for that object. The positions are marked in the sky with yellow
-  circles (Figure~\ref{fig:gui:AstroCalc:Ephemeris}). When you click on a date, an orange circle indicates this
-  date. Double-clicking sets the respective date and brings object to
-  focus. You can export the calculated ephemeris into CSV file. 
+Compute phenomena like conjunctions, oppositions, occultations and eclipses (in special cases) between planetary objects (Figure~\ref{fig:gui:AstroCalc:Phenomena}). You can export the calculated conjunctions and oppositions into CSV file.
 
-\item[Phenomena] Compute phenomena like conjunctions and oppositions
-  between planetary objects. You can export the calculated conjunctions and oppositions into CSV file.
-\end{description}
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.68\textwidth]{astrocalc_dialog_phenomena_tab}
+\caption{Astronomical Calculations (AstroCalc): Phenomena.}
+\label{fig:gui:AstroCalc:Phenomena}
+\end{figure}
+
+\newpage
+\subsection{Altitude vs Time}
+\label{sec:gui:AstroCalc:AltVsTime}
+  
+\newFeature{V0.15.1} Compute horizontal positions of object and draw it as a graph (Figure~\ref{fig:gui:AstroCalc:AltVsTime}).
+    
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.68\textwidth]{astrocalc_dialog_altvstime_tab}
+\caption{Astronomical Calculations (AstroCalc): Altitude vs Time.}
+\label{fig:gui:AstroCalc:AltVsTime}
+\end{figure}
 
 \section{Help Window}
 \label{sec:gui:help}

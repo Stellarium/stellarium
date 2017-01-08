@@ -131,10 +131,9 @@ SearchDialog::SearchDialogStaticData SearchDialog::staticData;
 QString SearchDialog::extSearchText = "";
 
 SearchDialog::SearchDialog(QObject* parent)
-	: StelDialog(parent)
+	: StelDialog("Search", parent)
 	, simbadReply(NULL)
 {
-	dialogName = "Search";
 	ui = new Ui_searchDialogForm;
 	simbadSearcher = new SimbadSearcher(this);
 	objectMgr = GETSTELMODULE(StelObjectMgr);
@@ -535,8 +534,7 @@ void SearchDialog::manualPositionChanged()
 	}
 	mvmgr->setFlagTracking(false);
 	mvmgr->moveToJ2000(pos, aimUp, 0.05);
-	if (useLockPosition)
-		mvmgr->setFlagLockEquPos(true);
+	mvmgr->setFlagLockEquPos(useLockPosition);
 }
 
 void SearchDialog::onSearchTextChanged(const QString& text)

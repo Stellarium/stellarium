@@ -147,6 +147,9 @@ void StelPainter::setProjector(const StelProjectorP& p)
 
 StelPainter::~StelPainter()
 {
+	//reset opengl state
+	glState.reset();
+
 #ifndef NDEBUG
 	GLenum er = glGetError();
 	if (er!=GL_NO_ERROR)
@@ -154,12 +157,7 @@ StelPainter::~StelPainter()
 		if (er==GL_INVALID_OPERATION)
 			qFatal("Invalid openGL operation detected in ~StelPainter()");
 	}
-#endif
 
-	//reset opengl state
-	glState.reset();
-
-#ifndef NDEBUG
 	// We are done with this StelPainter
 	globalMutex->unlock();
 #endif

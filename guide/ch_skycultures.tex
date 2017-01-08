@@ -114,19 +114,30 @@ the name. See a good example in the Mongolian skyculture.
 
 The file \file{star\_names.fab} contains a list of HIP catalogue
 numbers and common names for those stars. Each line of the file
-contains one record of two fields, separated by the pipe character
-(\texttt{|}). The first field is the Hipparcos catalogue number of the
+contains one record of two fields (separated by the pipe character
+(\texttt{|})) or three fields (the first pair is separated by the 
+pipe character (\texttt{|}) and the last one separated by the space 
+character). The first field is the Hipparcos catalogue number of the
 star, the second is the common name of the star in a format that enables
-translation support, e.g:
+translation support, the third is an optional list of references (see \ref{sec:skycultures:references})  
+to the source of the information about this name, e.g:
 \begin{configfile}
-113368|_("Fomalhaut")  
+# Piscis Austrinus (PsA)
+113368|_("Fomalhaut") 1,2,6,11,12
+113368|_("Thalim")
 \end{configfile}
+
+In the sample you can see 3 lines: the first line is a comment, the 
+second line has 3 fields and the third line has 2 fields. Both lines 
+with data have the same Hipparcos number of the star --- \textit{Fomalhaut} is 
+the well-known name of HIP 113368, and \textit{Thalim} is an additional 
+(not well-known) name of this star.
 
 \section{Planet Names}
 \label{sec:skycultures:planetnames}
 
 The file \file{planet\_names.fab} contains a list of native names of
-planets. Each line of the file contains one record of 3 fields,
+the planets. Each line of the file contains one record of 3 fields,
 separated by the white space or tab character. The first field is the
 English name of the planet, the second is the native name of the
 planet (can be in the native language, but please for maximum
@@ -138,6 +149,25 @@ English). Here is an example from the Egyptian skyculture:
 Mars	"Horus-Desher"	_("Red Horus (Mars)")
 \end{configfile}
 
+\section{Deep-Sky Objects Names}
+\label{sec:skycultures:dsonames}
+
+\newFeature{V0.15.1} The file \file{dso\_names.fab} contains a list of native names for
+deep-sky objects (DSO). The format of this file is similar to the 
+\file{star\_names.fab} format (see \ref{sec:skycultures:starnames}).
+Each line of the file contains one record of two fields (separated 
+by the pipe character (\texttt{|})) or three fields (first pair is 
+separated by the pipe character (\texttt{|}) and the last one separated 
+by the space character). The first field is an identifier of the
+deep-sky object, the second is the native name of the DSO in a 
+format that enables translation support, the optional third is a  
+list of references (see \ref{sec:skycultures:references}) to the source 
+of the information about this name, e.g.:
+\begin{configfile}
+PGC 17223|_("Native name for LMC") 1,2,3
+NGC 292  |_("Native name for SML") 1,3
+NGC 292  |_("Small Magellanic Cloud")
+\end{configfile}
 
 \section{Stick Figures}
 \label{sec:skycultures:stickfigures}
@@ -236,6 +266,18 @@ visibility (month), e.g:
 \noindent This specifies that constellation Emu (abbreviated also as ``Emu'') is
 visible only from June to March.
 %% TODO: This feature may need rework. Where is it used?
+
+\section{References}
+\label{sec:skycultures:references}
+
+\newFeature{V0.15.1} The file \file{reference.fab} contains a list of information sources. 
+Each line of the file contains one record of 3 fields,
+separated by the pipe character (\texttt{|}) --- number of source, 
+description of source and optional URL, e.g.:
+
+\begin{configfile}
+9|Kruger 60|https://en.wikipedia.org/wiki/Kruger_60
+\end{configfile}
 
 \section{Publish Your Work}
 \label{sec:skyculture:publish}

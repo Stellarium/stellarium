@@ -37,13 +37,19 @@ class StelMovementMgr : public StelModule
 		   WRITE setEquatorialMount
 		   NOTIFY equatorialMountChanged)
 	Q_PROPERTY(bool tracking
-			   READ getFlagTracking
-			   WRITE setFlagTracking
-			   NOTIFY flagTrackingChanged)
+		   READ getFlagTracking
+		   WRITE setFlagTracking
+		   NOTIFY flagTrackingChanged)
 
 	//The targets of viewport offset animation
-	Q_PROPERTY(float viewportHorizontalOffsetTarget READ getViewportHorizontalOffsetTarget WRITE setViewportHorizontalOffsetTarget NOTIFY viewportHorizontalOffsetTargetChanged)
-	Q_PROPERTY(float viewportVerticalOffsetTarget READ getViewportVerticalOffsetTarget WRITE setViewportVerticalOffsetTarget NOTIFY viewportVerticalOffsetTargetChanged)
+	Q_PROPERTY(float viewportHorizontalOffsetTarget
+		   READ getViewportHorizontalOffsetTarget
+		   WRITE setViewportHorizontalOffsetTarget
+		   NOTIFY viewportHorizontalOffsetTargetChanged)
+	Q_PROPERTY(float viewportVerticalOffsetTarget
+		   READ getViewportVerticalOffsetTarget
+		   WRITE setViewportVerticalOffsetTarget
+		   NOTIFY viewportVerticalOffsetTargetChanged)
 
 	Q_PROPERTY(bool flagAutoZoomOutResetsDirection
 		   READ getFlagAutoZoomOutResetsDirection
@@ -75,8 +81,11 @@ public:
 	virtual void init();
 
 	//! Update time-dependent things (triggers a time dragging record if required)
-	virtual void update(double) {
-		if (dragTimeMode) addTimeDragPoint(QCursor::pos().x(), QCursor::pos().y());}
+	virtual void update(double)
+	{
+		if (dragTimeMode)
+			addTimeDragPoint(QCursor::pos().x(), QCursor::pos().y());
+	}
 	//! Implement required draw function.  Does nothing.
 	virtual void draw(StelCore*) {;}
 	//! Handle keyboard events.
@@ -95,11 +104,8 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to StelMovementMgr
 
-	//! Increment/decrement smoothly the vision field and position.
+	//! Increment/decrement smoothly the vision field and position. Called in StelCore.update().
 	void updateMotion(double deltaTime);
-
-	// These are hopefully temporary.
-	//bool getHasDragged() const {return hasDragged;}
 
 	//! Get the zoom speed
 	// TODO: what are the units?
@@ -212,7 +218,7 @@ public slots:
 	void setInitFov(double fov) {initFov=fov;}
 
 	//! Return the inital viewing direction in altazimuthal coordinates
-	const Vec3d& getInitViewingDirection() {return initViewPos;}
+	const Vec3d getInitViewingDirection() {return initViewPos;}
 	//! Sets the initial direction of view to the current altitude and azimuth.
 	//! Note: Updates the configuration file.
 	void setInitViewDirectionToCurrent();
@@ -246,15 +252,15 @@ public slots:
 	void zoomIn(bool);
 	void zoomOut(bool);
 
-	//! Look immediately towards East.
+	//! Look immediately towards East, but keep altitude. When looking to the zenith already, turn eastern horizon to screen bottom.
 	void lookEast(void);
-	//! Look immediately towards West.
+	//! Look immediately towards West, but keep altitude. When looking to the zenith already, turn western horizon to screen bottom.
 	void lookWest(void);
-	//! Look immediately towards North.
+	//! Look immediately towards North, but keep altitude. When looking to the zenith already, turn northern horizon to screen bottom.
 	void lookNorth(void);
-	//! Look immediately towards South.
+	//! Look immediately towards South, but keep altitude. When looking to the zenith already, turn southern horizon to screen bottom.
 	void lookSouth(void);
-	//! Look immediately towards Zenith.
+	//! Look immediately towards Zenith, turning southern horizon to screen bottom.
 	void lookZenith(void);
 	//! Look immediately towards North Celestial pole.
 	void lookTowardsNCP(void);
@@ -312,15 +318,12 @@ private:
 	double initFov;    // The FOV at startup
 	double minFov;     // Minimum FOV in degrees
 	double maxFov;     // Maximum FOV in degrees
-
+	double deltaFov;   // requested change of FOV (degrees) used during zooming.
 	void setFov(double f)
 	{
-		currentFov = f;
-		if (f>maxFov)
-			currentFov = maxFov;
-		if (f<minFov)
-			currentFov = minFov;
+		currentFov=qMax(minFov, qMin(f, maxFov));
 	}
+	// immediately add deltaFov argument to FOV - does not change private var.
 	void changeFov(double deltaFov);
 
 	// Move (a bit) to selected/tracked object until move.coef reaches 1, or auto-follow (track) selected object.
@@ -378,7 +381,7 @@ private:
 	bool flagAutoMove;       // Define if automove is on or off
 	ZoomingMode zoomingMode;
 
-	double deltaFov,deltaAlt,deltaAz; // View movement
+	double deltaAlt,deltaAz; // View movement
 
 	bool flagManualZoom;     // Define whether auto zoom can go further
 	float autoMoveDuration; // Duration of movement for the auto move to a selected object in seconds

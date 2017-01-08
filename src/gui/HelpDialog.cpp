@@ -50,9 +50,8 @@
 #include "StelActionMgr.hpp"
 
 HelpDialog::HelpDialog(QObject* parent)
-	: StelDialog(parent)
+	: StelDialog("Help", parent)
 {
-	dialogName = "Help";
 	ui = new Ui_helpDialogForm;
 }
 
@@ -280,11 +279,12 @@ void HelpDialog::updateText(void)
 		     << "Volker Hören" << "Max Digruber" << "Dan Smale" << "Victor Reijs"
 		     << "Tanmoy Saha" << "Oleg Ginzburg" << "Peter Hickey" << "Bernd Kreuss"
 		     << "Alexander Miller" << "Maciej Serylak" << "Eleni Maria Stea" << "Kirill Snezhko"
-		     << "Simon Parzer" << "Peter Neubauer" << "Andrei Borza" << "Florian Schaukowitsch"
-		     << "Allan Johnson" << "Felix Zeltner" << "Paolo Cancedda" << "Ross Mitchell"
-		     << "David Baucum" << "Maciej Serylak" << "Adriano Steffler" << "Sibi Antony"
-		     << "Tony Furr" << "misibacsi" << "Pavel Klimenko" << "Rumen G. Bogdanovski"
-		     << "Colin Gaudion" << "Annette S. Lee" << "Vancho Stojkoski" << "Robert S. Fuller";
+		     << "Simon Parzer" << "Peter Neubauer" << "Andrei Borza" << "Allan Johnson"
+		     << "Felix Zeltner" << "Paolo Cancedda" << "Ross Mitchell" << "David Baucum"
+		     << "Maciej Serylak" << "Adriano Steffler" << "Sibi Antony" << "Tony Furr"
+		     << "misibacsi" << "Pavel Klimenko" << "Rumen G. Bogdanovski" << "Colin Gaudion"
+		     << "Annette S. Lee" << "Vancho Stojkoski" << "Robert S. Fuller" << "Giuseppe Putzolu"
+		     << "henrysky";
 	contributors.sort();
 
 	// populate About tab

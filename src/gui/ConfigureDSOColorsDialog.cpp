@@ -30,9 +30,8 @@
 #include <QSettings>
 #include <QColorDialog>
 
-ConfigureDSOColorsDialog::ConfigureDSOColorsDialog()
+ConfigureDSOColorsDialog::ConfigureDSOColorsDialog() : StelDialog("ConfigureDSOColorsDialog")
 {
-	dialogName = "ConfigureDSOColorsDialog";
 	ui = new Ui_ConfigureDSOColorsDialogForm;
 }
 

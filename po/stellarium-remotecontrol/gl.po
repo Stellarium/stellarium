@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-11-24 21:47+0700\n"
-"PO-Revision-Date: 2016-11-01 04:07+0000\n"
+"POT-Creation-Date: 2016-12-10 15:56+0700\n"
+"PO-Revision-Date: 2016-12-10 20:16+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-25 06:12+0000\n"
-"X-Generator: Launchpad (build 18282)\n"
+"X-Launchpad-Export-Date: 2016-12-11 05:00+0000\n"
+"X-Generator: Launchpad (build 18292)\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -159,7 +159,7 @@ msgstr "Accións e scripts"
 
 #: index.html:76
 msgid "Pause"
-msgstr ""
+msgstr "Pausar"
 
 #: index.html:81 tablet7in.html:178
 msgid "Time jumps"
@@ -281,9 +281,9 @@ msgstr "Abaixo"
 msgid "Down/Right"
 msgstr "Abaixo/Dereita"
 
-#: index.html:122
+#: index.html:122 tablet7in.html:133
 msgid "FOV"
-msgstr ""
+msgstr "FOV"
 
 #: index.html:140 tablet7in.html:224
 msgid "Enter search term. Use TAB to navigate results."
@@ -323,15 +323,15 @@ msgstr "ZHR:"
 
 #: index.html:339 tablet7in.html:508
 msgid "Bright Nebulae"
-msgstr ""
+msgstr "Nebulosas Brillantes"
 
 #: index.html:340 tablet7in.html:509
 msgid "Dark Nebulae"
-msgstr ""
+msgstr "Nebulosas Escuras"
 
 #: index.html:341 tablet7in.html:510
 msgid "Planetary Nebulae"
-msgstr ""
+msgstr "Nebulosas Planetarias"
 
 #: index.html:347 tablet7in.html:519
 msgid "Labels and markers"
@@ -403,6 +403,10 @@ msgstr "Grellas"
 #: tablet7in.html:96
 msgid "View towards horizon at Azimuth"
 msgstr "Vista para o horizonte en acimut"
+
+#: tablet7in.html:118
+msgid "Vertical View offset"
+msgstr "Vista vertical compensada"
 
 #: tablet7in.html:128
 msgid "Reset"

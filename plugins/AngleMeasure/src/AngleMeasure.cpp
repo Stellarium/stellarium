@@ -319,7 +319,7 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 	if (event->type()==QEvent::MouseButtonPress && event->button()==Qt::LeftButton)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
-		prj->unProject(event->x(),event->y(),startPoint);
+		if (prj->unProject(event->x(),event->y(),startPoint))
 		{ // Nick Fedoseev patch: improve click match
 			Vec3d win;
 			prj->project(startPoint,win);
@@ -356,7 +356,7 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 	else if (event->type()==QEvent::MouseButtonPress && event->button()==Qt::RightButton)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
-		prj->unProject(event->x(),event->y(),endPoint);
+		if (prj->unProject(event->x(),event->y(),endPoint))
 		{ // Nick Fedoseev patch: improve click match
 			Vec3d win;
 			prj->project(endPoint,win);
@@ -378,7 +378,7 @@ bool AngleMeasure::handleMouseMoves(int x, int y, Qt::MouseButtons)
 	if (dragging)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
-		prj->unProject(x,y,endPoint);
+		if (prj->unProject(x,y,endPoint))
 		{ // Nick Fedoseev patch: improve click match
 		   Vec3d win;
 		   prj->project(endPoint,win);

@@ -35,13 +35,13 @@ using namespace TelescopeControlGlobals;
 
 
 SlewDialog::SlewDialog()
+	: StelDialog("TelescopeControlSlew")
+	, storedPointsDialog(NULL)
 {
 	ui = new Ui_slewDialog();
-	dialogName = "TelescopeControlSlew";
 	
 	//TODO: Fix this - it's in the same plugin
-	telescopeManager = GETSTELMODULE(TelescopeControl);
-	storedPointsDialog = NULL;
+	telescopeManager = GETSTELMODULE(TelescopeControl);	
 }
 
 SlewDialog::~SlewDialog()

@@ -27,11 +27,10 @@
 #include "ui_MSSearchDialog.h"
 
 MSSearchDialog::MSSearchDialog(MeteorShowersMgr* mgr)
-	: m_mgr(mgr)
+	: StelDialog("MeteorShowersSearch")
+	, m_mgr(mgr)
 	, m_ui(new Ui_MSSearchDialog)
-{
-	dialogName = "MeteorShowersSearch";
-}
+{}
 
 MSSearchDialog::~MSSearchDialog()
 {
@@ -45,16 +44,8 @@ void MSSearchDialog::retranslate()
 		m_ui->retranslateUi(dialog);
 		setHeaderNames();
 
-		//Retranslate name and datatype strings
-		QTreeWidgetItemIterator it(m_ui->listEvents);
-		while (*it)
-		{
-			//Name
-			(*it)->setText(ColumnName, q_((*it)->text(ColumnName)));
-			//Data type
-			(*it)->setText(ColumnDataType, q_((*it)->text(ColumnDataType)));
-			++it;
-		}
+		if (!m_ui->listEvents->findItems("", Qt::MatchContains, 0).isEmpty())
+			searchEvents();
 	}
 }
 

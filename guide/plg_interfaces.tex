@@ -72,6 +72,12 @@ is a tool bar button \guibutton{0.6}{bt_compass_off} for toggling the
 compass markings.  Note that when you enable compass marks, the
 cardinal points will be turned off.
 
+\begin{figure}[ht]\centering
+\includegraphics[width=\textwidth]{compass-marks-plugin}
+\caption{Markings of Compass Marks Plugin}
+\label{fig:plugins:CompassMarks}
+\end{figure}
+
 %% TODO/FIXME?: The following is not true for current pre-0.15:
 %You can have both active at once, but there is a small
 %bug which means you have to press \key{Q} \emph{two times} to
@@ -85,20 +91,20 @@ cardinal points will be turned off.
 %% The figure just reproduces most of the text. I (GZ) regard it not so necessary. 
 %\begin{figure}[h]
 %\includegraphics[width=\textwidth]{EquationOfTime-plugin.jpg}
-%\label{fig:EqOfTime}
 %\caption{Interface of Equation of Time plugin}
+%\label{fig:EqOfTime}
 %\end{figure}
 
 \begin{figure}[h]\centering
 \includegraphics[width=.3\textwidth]{GZ_analemma_p1000}
 \includegraphics[width=.3\textwidth]{GZ_analemma_p2000}
-\label{fig:EqOfTime}
 \caption{Figure-8 plots for Equation of Time, for years 1000 (left)
   and 2000 (right). These plots, often found on sundials, link solar
   declination (vertical axis) and its deviation at mean noon from the
   meridian, in minutes. Labeled dots indicate when the sun entered the
   respective Zodiacal sign (30\degree section of the
   ecliptic). Figures by Georg Zotti.}
+\label{fig:EqOfTime}
 \end{figure}
 
 
@@ -147,9 +153,9 @@ font\_size & int & Font size for the displayed solution of the equation of time 
 \label{sec:plugins:FieldOfView}
 
 \begin{figure}[ht]\centering
-\includegraphics[trim=0 55 0 0,clip,width=.55\textwidth]{FOV-plugin.jpg}
-\label{fig:plugins:FieldOfView}
+\includegraphics[trim=0 55 0 0,clip,width=.52\textwidth]{FOV-plugin.jpg}
 \caption{Configuration dialog of Field of View plugin}
+\label{fig:plugins:FieldOfView}
 \end{figure}
 
 \noindent By default Stellarium uses smooth zooming via mouse wheel or
@@ -196,9 +202,9 @@ fov\_quick\_9  & float &  1 & Value of FOV for the shortcut \key{\ctrl+\Alt+9} \
 
 
 \begin{figure}[th]\centering
-\includegraphics[trim=0 140 0 0,clip,width=.9\textwidth]{PointerCoordinates-plugin.jpg}
-\label{fig:PointerCoordinates}
+\includegraphics[trim=0 140 0 0,clip,width=.85\textwidth]{PointerCoordinates-plugin.jpg}
 \caption{Interface of Pointer Coordinates plugin}
+\label{fig:PointerCoordinates}
 \end{figure}
 
 \noindent The Pointer Coordinates plugin shows the coordinates of the mouse pointer.
@@ -218,7 +224,8 @@ text\_color          & R,G,B & Color for text with coordinates of the mouse poin
 font\_size           & int & Font size for the displayed coordinates of the mouse pointer \\\midrule
 current\_displaying\_place  & string & Specifies the place of displaying coordinates of the mouse pointer. \textit{Possible values}: \keymap{TopRight}, \keymap{TopCenter}, \keymap{RightBottomCorner}, \keymap{Custom}. \textit{Default value}: \keymap{TopRight}. \\\midrule
 current\_coordinate\_system & string & Specifies the coordinate system. \textit{Possible values}: \keymap{RaDecJ2000}, \keymap{RaDec}, \keymap{HourAngle}, \keymap{Ecliptic}, \keymap{AltAzi}, \keymap{Galactic}. \textit{Default value}: \keymap{RaDecJ2000}. \\\midrule
-custom\_coordinates  & int,int & Specifies the screen coordinates of the custom place for displaying coordinates of the mouse pointer \\\bottomrule
+custom\_coordinates  & int,int & Specifies the screen coordinates of the custom place for displaying coordinates of the mouse pointer \\\midrule
+flag\_show\_constellation &bool& Add the 3-letter IAU abbreviation for the constellation the mouse pointer sits in \cite{1987PASP...99..695R}.\\\bottomrule
 \end{longtabu}
 
 
@@ -400,6 +407,7 @@ and scripts using HTTP calls like with the tools \file{wget} and \file{curl}.
 \begin{figure}[h]
 \centering\includegraphics[width=\columnwidth]{remote_web}
 \caption{The default remote control web interface}
+\label{fig:plugins:RemoteControl:using}
 \end{figure}
 
 After enabling the plugin, you can set it up through the configuration dialog. 
@@ -519,44 +527,6 @@ If you have a very weak computer, you may want to reduce the number of
 minor bodies (and maybe even planetary moons) to improve performance.
 
 On this tab, you find the option to connect to the MPC and download current orbital elements. 
-
-
-\newpage
-
-\section{Timezone Configuration Plugin}
-\label{sec:plugins:Timezones}
-
-
-\begin{figure}[h]\centering
-\includegraphics[width=.9\textwidth]{Timezone}
-\label{fig:plugins:Timezones}
-\caption{Interface of the TimeZone Configuration Plugin}
-\end{figure}
-
-
-\noindent After installation, Stellarium uses the timezone configured in the
-computer's operating system. This may have unwanted consequences,
-e.g.\ when you want to check the sky for a location on another
-continent. You may set location in the location panel (see
-\ref{sec:gui:location}), but the time will not be the zone time of
-this location but still zone time of your computer!
-
-Another effect of our civilisation that sometimes brings unwanted side
-effects concerns daylight saving time (DST): When you run a timelapse
-with 1-day intervals, you will see what appear to be wrong jumps on
-the days when DST is switched (e.g., end of March/end of October, but
-rules evolve over time and regions). You may want to keep a single
-time zone without DST for such simulations.
-
-
-If enabled (see section~\ref{sec:Plugins:EnablingPlugins}), you can
-choose to use your timezone (default), or plain Universal Coordinated
-Time (UTC) (equivalent to what used to be called Greenwich Mean Time
-GMT), or select a time zone (in steps of 15 minutes). 
-
-Note that you must exit and restart Stellarium to activate the new
-timezone, so jumping from location to location on Earth and showing
-correct zone time is not possible.
 
 %% TODO: Obviously, we should adapt our TZ handling to make this
 %% possible! Store TZ in location list, and suggest/guess TZ from

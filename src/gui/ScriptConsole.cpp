@@ -39,10 +39,9 @@
 #include <QTextDocumentFragment>
 
 ScriptConsole::ScriptConsole(QObject *parent)
-	: StelDialog(parent)
+	: StelDialog("ScriptConsole", parent)
 	, highlighter(NULL)
 {
-	dialogName = "ScriptConsole";
 	ui = new Ui_scriptConsoleForm;
 }
 

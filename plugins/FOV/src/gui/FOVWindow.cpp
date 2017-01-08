@@ -27,10 +27,10 @@
 #include "StelModuleMgr.hpp"
 
 FOVWindow::FOVWindow()
-	: fov(NULL)
+	: StelDialog("FOV")
+	, fov(NULL)
 {
 	ui = new Ui_fovWindowForm();
-	dialogName = "FOV";
 }
 
 FOVWindow::~FOVWindow()

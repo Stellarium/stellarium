@@ -36,10 +36,9 @@
 
 #include <cstdlib>
 
-StelTexture::StelTexture(StelTextureMgr *mgr) : textureMgr(mgr), networkReply(NULL), loader(NULL), errorOccured(false), alphaChannel(false), id(0), avgLuminance(-1.f), glSize(0)
+StelTexture::StelTexture(StelTextureMgr *mgr) : textureMgr(mgr), networkReply(NULL), loader(NULL), errorOccured(false), alphaChannel(false), id(0), avgLuminance(-1.f),
+	width(-1), height(-1), glSize(0)
 {
-	width = -1;
-	height = -1;
 }
 
 StelTexture::~StelTexture()
@@ -60,7 +59,9 @@ StelTexture::~StelTexture()
 			textureMgr->glMemoryUsage -= glSize;
 			glSize = 0;
 		}
+		#ifndef NDEBUG
 		qDebug()<<"Deleted StelTexture"<<id<<", total memory usage "<<textureMgr->glMemoryUsage / (1024.0 * 1024.0)<<"MB";
+		#endif
 		id = 0;
 	}
 	else if (id)
@@ -331,7 +332,9 @@ bool StelTexture::glLoad(const GLData& data)
 	glSize = data.data.size();
 	textureMgr->glMemoryUsage += glSize;
 
+	#ifndef NDEBUG
 	qDebug()<<"StelTexture"<<id<<"uploaded, total memory usage "<<textureMgr->glMemoryUsage / (1024.0 * 1024.0)<<"MB";
+	#endif
 
 	//restore old value
 	glPixelStorei(GL_UNPACK_ALIGNMENT, oldalignment);
