@@ -1093,7 +1093,8 @@ static void dspace
              // sgp4fix move end checks to end of routine
              if (fabs(t - atime) >= stepp)
                {
-		 iret  = 0;
+		  // NOTE: Never read!
+		  // iret  = 0;
                  iretn = 381;
                }
                else // exit here
@@ -1812,8 +1813,9 @@ bool sgp4
          em  = 1.0e-6;
      mm     = mm + satrec.no * templ;
      xlm    = mm + argpm + nodem;
-     emsq   = em * em;
-     temp   = 1.0 - emsq;
+     // NOTE: Never read!
+     // emsq   = em * em;
+     // temp   = 1.0 - emsq;
 
      nodem  = fmod(nodem, twopi);
      argpm  = fmod(argpm, twopi);

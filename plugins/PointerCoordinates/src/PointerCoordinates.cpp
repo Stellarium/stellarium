@@ -135,7 +135,7 @@ void PointerCoordinates::draw(StelCore *core)
 		prj->project(mousePosition,win);
 		float dx = prj->getViewportPosX()+wh+mx - win.v[0];
 		float dy = prj->getViewportPosY()+hh+1-my - win.v[1];
-		coordsValid = prj->unProject(prj->getViewportPosX()+wh+mx+dx, prj->getViewportPosY()+hh+1-my+dy, mousePosition);
+		prj->unProject(prj->getViewportPosX()+wh+mx+dx, prj->getViewportPosY()+hh+1-my+dy, mousePosition);
 	}
 	else
 		return;
