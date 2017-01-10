@@ -1208,9 +1208,8 @@ void Oculars::displayPopupMenu()
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("45"));
 			rotateAction = submenu->addAction(QString("&0: +90") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("90"));
-			rotateAction = submenu->addAction(q_("&Reset rotation"), this, SLOT(ccdRotationReset()));
-			popup->addMenu(submenu);
-			
+			submenu->addAction(q_("&Reset rotation"), this, SLOT(ccdRotationReset()));
+			popup->addMenu(submenu);			
 			popup->addSeparator();
 		}
 		if (flagShowCCD && selectedCCDIndex > -1 && telescopes.count() > 1)
@@ -2344,7 +2343,7 @@ void Oculars::zoomOcular()
 		if (ocular->isBinoculars())
 			diameter = ocular->fieldStop();
 		else
-			diameter = telescope->diameter();
+			diameter = telescope!=NULL ? telescope->diameter() : 0.; // Avoid a potential call of null pointer
 		double limitMag = 2.1 + 5*std::log10(diameter);
 
 		skyManager->setFlagStarMagnitudeLimit(true);
