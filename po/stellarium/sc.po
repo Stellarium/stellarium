@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2017-01-06 23:51+0700\n"
-"PO-Revision-Date: 2017-01-05 14:59+0000\n"
+"PO-Revision-Date: 2017-01-09 16:28+0000\n"
 "Last-Translator: Giuseppe Putzolu <giuseppe.putzolu@gmail.com>\n"
 "Language-Team: Sardinian <sc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-07 05:49+0000\n"
+"X-Launchpad-Export-Date: 2017-01-10 05:24+0000\n"
 "X-Generator: Launchpad (build 18302)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -993,7 +993,7 @@ msgstr "Illuminada: %1%"
 #: src/core/modules/Comet.cpp:255
 #, qt-format
 msgid "Albedo: %1"
-msgstr ""
+msgstr "Albedo: %1"
 
 #: src/core/modules/Planet.cpp:435
 #, qt-format
@@ -3429,7 +3429,7 @@ msgstr "ogettos de sa nue de Oort"
 #. TRANSLATORS: Type of object
 #: src/translations.h:66
 msgid "sednoid"
-msgstr ""
+msgstr "sednoide"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:74
@@ -3439,7 +3439,7 @@ msgstr "Lunas"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:86
 msgid "Sednoids"
-msgstr ""
+msgstr "Sednoides"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:88
@@ -7707,11 +7707,11 @@ msgstr "Colore de sas orbitas de sos ogettos ispartzinaos"
 
 #: src/ui_orbitColorsDialog.h:469
 msgid "Orbits of sednoids"
-msgstr ""
+msgstr "Orbitas de sos sednoides"
 
 #: src/ui_orbitColorsDialog.h:471
 msgid "Color of sednoid orbits"
-msgstr ""
+msgstr "Colore de sas orbitas de su sednoide"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:138
@@ -11487,12 +11487,12 @@ msgstr "Sergei Blinnikov"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:137
 msgid "Institute for Theoretical and Experimental Physics"
-msgstr ""
+msgstr "Istitutu de Fisica Teorica et Isperimentale"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:138
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:146
 msgid "in Russia"
-msgstr ""
+msgstr "in Russia"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:179
 #: plugins/Novae/src/gui/NovaeDialog.cpp:176
@@ -11500,26 +11500,26 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:192
 #, qt-format
 msgid "Next update: %1 days"
-msgstr ""
+msgstr "Prossimu aggiornamentu: %1 dies"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:215
 msgid "Historical supernovae is updated"
-msgstr ""
+msgstr "Supernovas istoricas suni aggiornadas"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:229
 msgid "Historical Supernovae Configuration"
-msgstr ""
+msgstr "Configuratzione de sas Supernovas Istoricas"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:230
 msgid "Historical Supernovae Plug-in Configuration"
-msgstr ""
+msgstr "Configuratzione de su Plug-in de sas Supernovas Istoricas"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:232
 #: plugins/Novae/src/ui_novaeDialog.h:235
 #: plugins/Quasars/src/ui_quasarsDialog.h:260
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:266
 msgid "Update catalog from Internet"
-msgstr ""
+msgstr "Aggiornamentu de su Catalogu via Internet"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:233
 #: plugins/Novae/src/ui_novaeDialog.h:236
@@ -11527,14 +11527,14 @@ msgstr ""
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:267
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:466
 msgid "Update from Internet sources"
-msgstr ""
+msgstr "Aggiornamentu de sas sorgentes via Internet"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:235
 #: plugins/Novae/src/ui_novaeDialog.h:238
 #: plugins/Quasars/src/ui_quasarsDialog.h:263
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:269
 msgid "Update frequency (days):"
-msgstr ""
+msgstr "Frecuentzia de aggiornamentu (dies):"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:236
 #: plugins/Novae/src/ui_novaeDialog.h:239
@@ -11542,20 +11542,21 @@ msgstr ""
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:270
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:469
 msgid "[next update info]"
-msgstr ""
+msgstr "[informatzione de s'ateru aggiornamentu]"
 
 #: plugins/NavStars/src/NavStars.cpp:52 plugins/NavStars/src/NavStars.cpp:109
 msgid "Navigational Stars"
-msgstr ""
+msgstr "Navigatzione de sas Instellas"
 
 #: plugins/NavStars/src/NavStars.cpp:55
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:92
 msgid "This plugin marks navigational stars from a selected set."
 msgstr ""
+"Custu plug-in sennat sas istellas de navigatzione dae unu gruppo seletzionau."
 
 #: plugins/NavStars/src/NavStars.cpp:110
 msgid "Mark the navigational stars"
-msgstr ""
+msgstr "Sinna sas istellas de navigatzione"
 
 #. TRANSLATORS: The emphasis tags mark a title.
 #: plugins/NavStars/src/NavStars.cpp:294
@@ -11566,6 +11567,11 @@ msgid ""
 "navigational aids such as the <em>2102D Star Finder</em> and "
 "<em>Identifier</em>."
 msgstr ""
+"Sas 57 \"istellas seberadas\" chi suni listadas in <em>Su Almanaccu "
+"Nauticu</em> pubblicau conzuntamente daeby Her Majesty's Nautical Almanac "
+"Office and the US Naval Observatory dae su 1958; De conseguentzia, custas "
+"istellas suni impreadas fintzas po s'azudu a sa navigatzione comente su "
+"<em>2102D Star Finder</em> et <em>Identifier</em>."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:300
@@ -11574,6 +11580,8 @@ msgid ""
 "The 81 stars that are listed in the <em>%1</em> published by the French "
 "Bureau des Longitudes."
 msgstr ""
+"Sas 81 istella listada in su <em>%1</em> pubblicau dae sa French Bureau des "
+"Longitudes."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:306
@@ -11582,10 +11590,12 @@ msgid ""
 "The 160 stars that are listed in the Russian Nautical Almanac (The original "
 "Russian title is <em>%1</em>)."
 msgstr ""
+"Sas 160 istellas sunu listadas in su Almanaccu Nauticu Russu (Su titulu "
+"orizinale russu est <em>%1</em>)."
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:87
 msgid "Navigational Stars Plug-in"
-msgstr ""
+msgstr "Plugin de sas Istellas de Navigatzione"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:105
@@ -11596,84 +11606,94 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "catalog format, you can %1get info here%2."
 msgstr ""
+"Si chere lezere totu sas informatziones de custu plug-in, s'istoria sua et "
+"su formau de su catalogu, est possibile%1pigare sas informatziones innoghe%2."
 
 #. TRANSLATORS: Part of full phrase: Anglo-American set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:141
 msgid "Anglo-American"
-msgstr ""
+msgstr "Anglo-Americanu"
 
 #. TRANSLATORS: Part of full phrase: French set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:143
 msgid "French"
-msgstr ""
+msgstr "Frantzesu"
 
 #. TRANSLATORS: Part of full phrase: Russian set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:145
 msgid "Russian"
-msgstr ""
+msgstr "Russu"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:202
 #: plugins/NavStars/src/ui_navStarsWindow.h:213
 msgid "Navigational stars"
-msgstr ""
+msgstr "Istellas de Navigatzione"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:204
 msgid "Set of navigational stars"
-msgstr ""
+msgstr "Set de Istellas de Navigatzione"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:206
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:298
 msgid "Place of the string with coordinates of the mouse pointer"
-msgstr ""
+msgstr "Logu de s'istringa cun sas coordinadas de su puntadore de su mouse"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:208
 msgid "Current set:"
-msgstr ""
+msgstr "Settaggiu currente:"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:209
 msgid "Note:"
-msgstr ""
+msgstr "Nota:"
 
 #: plugins/Novae/src/Novae.cpp:71 plugins/Novae/src/Novae.cpp:142
 msgid "Bright Novae"
-msgstr ""
+msgstr "Nova Luminosa"
 
 #: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/gui/NovaeDialog.cpp:123
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
 msgstr ""
+"Unu plugin chi faghet biere calecuna nova luminosa in sa galassia de "
+"s'Andaina de Paza."
 
 #: plugins/Novae/src/Novae.cpp:142
 msgid "Bright Novae configuration window"
-msgstr ""
+msgstr "Fentana de configuratzione de sas Novas Luminosas"
 
 #: plugins/Novae/src/Nova.cpp:136
 msgid "nova"
-msgstr ""
+msgstr "nova"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:118
 msgid "Bright Novae Plug-in"
-msgstr ""
+msgstr "Plug-in de sas Novas Luminosas"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:124
 msgid ""
 "You can find novae via search tool by entering designation of nova or its "
 "common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg')."
 msgstr ""
+"Si poden agattare sas novas cun su instrumentu de criccare inserinde sa nova "
+"o su numene comune (po esempiu 'Nova Cygni 1975' o 'V1500 Cyg')."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:126
 msgid "This plugin allows you to see recent bright novae: "
-msgstr ""
+msgstr "Custu plugin ti permittit de biere sas recentes novas luminosas: "
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:129
 #, qt-format
 msgid "All those novae are brighter than %1 at peak of brightness."
 msgstr ""
+"Totu custas novas suni prus luminosas de su %1 a su puntu prus artu de "
+"luminosidade."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:131
 msgid ""
 "This plugin uses a very simple model for calculation of light curves for "
 "novae stars."
 msgstr ""
+"Custu plugin imprea unu modellu semplitze po su calculu de sas curvas de "
+"lughe de novas."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:132
 #, qt-format
@@ -11681,24 +11701,28 @@ msgid ""
 "This model is based on time for decay by %1 magnitudes from the maximum "
 "value, where %1 is 2, 3, 6 and 9."
 msgstr ""
+"Custu modellu est fundau in su tempus de dcaimentu de %1 mannitudines dae su "
+"massimu valore, inue %1 est 2, 3, 6 et 9."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:133
 msgid ""
 "If a nova has no values for decay of magnitude then this plugin will use "
 "generalized values for it."
 msgstr ""
+"Si una nova non tenet valores de decaimentu de mannitudinetude tando custu "
+"plugin hat a impreare vaolore generales po cussu."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:212
 msgid "Novae is updated"
-msgstr ""
+msgstr "Nova est aggiornau"
 
 #: plugins/Novae/src/ui_novaeDialog.h:232
 msgid "Bright Novae Configuration"
-msgstr ""
+msgstr "Configuratzione de sa Nova Luminosa"
 
 #: plugins/Novae/src/ui_novaeDialog.h:233
 msgid "Bright Novae Plug-in Configuration"
-msgstr ""
+msgstr "Configuratzione de su plugin de una Nova Luminosa"
 
 #: plugins/Quasars/src/Quasars.cpp:75
 msgid ""
@@ -11706,23 +11730,26 @@ msgid ""
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
+"Unu plugin chi faget biere cachi quasar prus luminosu de 16 mannitudines "
+"visuales. Unu catalogu de quasar cumpilau dae 'quasar et Nucleos Galatticos "
+"Attivos' (13 ° Ed.) (Veron + 2010) = 2010A & A ... 518A..10V"
 
 #: plugins/Quasars/src/Quasars.cpp:169
 msgid "Show quasars"
-msgstr ""
+msgstr "Fae biere quasar"
 
 #: plugins/Quasars/src/Quasars.cpp:170
 msgid "Quasars configuration window"
-msgstr ""
+msgstr "Fentana de cosnfiguratzione de sos quasar"
 
 #: plugins/Quasars/src/Quasar.cpp:132
 #, qt-format
 msgid "Z (redshift): %1"
-msgstr ""
+msgstr "Z (rispostamentu cara a su ruju): %1"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 msgid "Quasars Plug-in"
-msgstr ""
+msgstr "Plugin Quasar"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
 msgid ""
@@ -11730,15 +11757,20 @@ msgid ""
 "visual magnitude 16. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"Su plug-in de su quasar zada sa visualizatzione de cachi quasar luminosos de "
+"mannitudine visuale 16. Su catalogu de sos quasar est istau cumpilau de "
+"\"Quasar et Nucleos Galatticos Attivos\" (13 ° ed.)"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 msgid "Veron+ 2010"
-msgstr ""
+msgstr "Veron+ 2010"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
 #, qt-format
 msgid "The current catalog contains info about %1 quasars."
 msgstr ""
+"Su catalogu currente contenet informatziones de pagu prus pagu mancu %1 "
+"quasar."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:139
@@ -11747,46 +11779,48 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of the catalog, you can %1get info here%2."
 msgstr ""
+"Si chere lezere totu sas informatziones de custu plug-in, s'istoria sua et "
+"su formau de su catalogu, est possibile%1pigare sas informatziones innoghe%2."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:223
 msgid "Quasars is updated"
-msgstr ""
+msgstr "Sos Quasas suni aggiornaos"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:257
 msgid "Quasars Configuration"
-msgstr ""
+msgstr "Configuratzione de sos Quasar"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:258
 msgid "Quasars Plug-in Configuration"
-msgstr ""
+msgstr "Configuratzione de su plug.in de sos Quasar"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:266
 msgid "Settings for quasars"
-msgstr ""
+msgstr "Impostatziones de sos quasar"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:268
 msgid "Plot all quasars without labels"
-msgstr ""
+msgstr "Traccia totu sos quasar chentza etichettas"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:270
 msgid "Enable display of distribution for quasars"
-msgstr ""
+msgstr "Abilita sa visualizatzione de sa distributzione de sos quasar"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:271
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:277
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:485
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:276
 msgid "Enable display at startup"
-msgstr ""
+msgstr "Abilita sa visualizzatzione a sa partentzia"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:272
 msgid "Show quasars button on toolbar"
-msgstr ""
+msgstr "Fae biere su tastu quasar in sa barra de sos istrumentos"
 
 #: plugins/Pulsars/src/Pulsars.cpp:71 plugins/Pulsars/src/Pulsars.cpp:167
 #: plugins/Pulsars/src/Pulsars.cpp:168
 msgid "Pulsars"
-msgstr ""
+msgstr "Pulsar"
 
 #: plugins/Pulsars/src/Pulsars.cpp:74
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
@@ -11794,146 +11828,155 @@ msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
 msgstr ""
+"Custu plug-in tracciat sa positzione de varias pulsar, cun informatzione po "
+"onniuna."
 
 #: plugins/Pulsars/src/Pulsars.cpp:167
 msgid "Show pulsars"
-msgstr ""
+msgstr "Fae biere sas pulsar"
 
 #: plugins/Pulsars/src/Pulsars.cpp:168
 msgid "Pulsars configuration window"
-msgstr ""
+msgstr "Fentana de configuratzione de sas pulsar"
 
 #: plugins/Pulsars/src/Pulsar.cpp:158
 msgid "pulsar"
-msgstr ""
+msgstr "pulsar"
 
 #: plugins/Pulsars/src/Pulsar.cpp:163
 msgid "has one registered glitch"
-msgstr ""
+msgstr "tenes unu problema tecnicu registrau"
 
 #. TRANSLATORS: Full phrase is "Has X registered glitches", where X is number
 #: plugins/Pulsars/src/Pulsar.cpp:167
 #, qt-format
 msgid "has %1 registered glitches"
-msgstr ""
+msgstr "tenes %1 problemas tecnicos registraos"
 
 #: plugins/Pulsars/src/Pulsar.cpp:169
 msgid "pulsar with glitches"
-msgstr ""
+msgstr "pulsar cun problemas tecnicos"
 
 #. TRANSLATORS: Unit of measure for period - seconds
 #: plugins/Pulsars/src/Pulsar.cpp:181
 #, qt-format
 msgid "Barycentric period: %1 s"
-msgstr ""
+msgstr "Periodu baricentricu: %1 s"
 
 #: plugins/Pulsars/src/Pulsar.cpp:185
 #, qt-format
 msgid "Time derivative of barycentric period: %1"
-msgstr ""
+msgstr "Tempus derivau de su periodu baricentricu: %1"
 
 #: plugins/Pulsars/src/Pulsar.cpp:190
 msgid "Dispersion measure:"
-msgstr ""
+msgstr "Misura de dispersione:"
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:193
 msgid "cm"
-msgstr ""
+msgstr "cm"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:196
 msgid "pc"
-msgstr ""
+msgstr "pc"
 
 #: plugins/Pulsars/src/Pulsar.cpp:202
 #, qt-format
 msgid "Spin down energy loss rate: %1 ergs/s"
 msgstr ""
+"Tassu de perdida de energia de sa velocidade de rotatzione: %1 erg / s"
 
 #: plugins/Pulsars/src/Pulsar.cpp:206
 #, qt-format
 msgid "Binary period of pulsar: %1 days"
-msgstr ""
+msgstr "Periodu binariu de sa pulsar: %1 dies"
 
 #: plugins/Pulsars/src/Pulsar.cpp:210
 #, qt-format
 msgid "Eccentricity: %1"
-msgstr ""
+msgstr "Eccentricidade: %1"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: plugins/Pulsars/src/Pulsar.cpp:215
 #, qt-format
 msgid "Annual parallax: %1 mas"
-msgstr ""
+msgstr "Parallasse annuale: %1 mas"
 
 #: plugins/Pulsars/src/Pulsar.cpp:219
 #, qt-format
 msgid "Distance based on electron density model: %1 kpc (%2 ly)"
 msgstr ""
+"Distantzia fundada in su modellu de densidade elettronica: %1 kpc (%2 ly)"
 
 #: plugins/Pulsars/src/Pulsar.cpp:223
 #, qt-format
 msgid "Profile width at 50% of peak: %1 ms"
-msgstr ""
+msgstr "Larghesa de su profilu a su 50% de sa punta: %1 ms"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
 #: plugins/Pulsars/src/Pulsar.cpp:229 plugins/Pulsars/src/Pulsar.cpp:241
 #: plugins/Pulsars/src/Pulsar.cpp:253
 msgid "Time averaged flux density at"
-msgstr ""
+msgstr "Tempo medio di densità del flusso a"
 
 #. TRANSLATORS: Unit of measurement of frequency
 #: plugins/Pulsars/src/Pulsar.cpp:232 plugins/Pulsars/src/Pulsar.cpp:244
 #: plugins/Pulsars/src/Pulsar.cpp:256
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 #: plugins/Pulsars/src/Pulsar.cpp:235 plugins/Pulsars/src/Pulsar.cpp:247
 #: plugins/Pulsars/src/Pulsar.cpp:259
 msgid "mJy"
-msgstr ""
+msgstr "mJy"
 
 #: plugins/Pulsars/src/Pulsar.cpp:263
 #, qt-format
 msgid "Notes: %1"
-msgstr ""
+msgstr "Notas: %1"
 
 #: plugins/Pulsars/src/Pulsar.cpp:330
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
+"pulsar a rajos X anomala o ripetidore de rajos gamma cun pulsatziones "
+"rilevadas"
 
 #: plugins/Pulsars/src/Pulsar.cpp:335
 msgid "has one or more binary companions"
-msgstr ""
+msgstr "tenet una o duas cumpanzas binarias"
 
 #: plugins/Pulsars/src/Pulsar.cpp:340
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr ""
+"con emissione pulsada dae radio a infrarujas o prus artas frequentzias"
 
 #: plugins/Pulsars/src/Pulsar.cpp:345
 msgid "with pulsed emission only at infrared or higher frequencies"
-msgstr ""
+msgstr "con emissione pulsada a infrarujas o prus artas frequentzias"
 
 #: plugins/Pulsars/src/Pulsar.cpp:350
 msgid "with pulsed emission in the radio band"
-msgstr ""
+msgstr "cun emissione pulsada in sa banda de sas ondas radio"
 
 #: plugins/Pulsars/src/Pulsar.cpp:355
 msgid "with intermittently pulsed radio emission"
-msgstr ""
+msgstr "cun emissione intermittente in sa banda de sas ondas radio"
 
 #: plugins/Pulsars/src/Pulsar.cpp:360
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
 msgstr ""
+"istella de neutrones isolada cun emissione termica pulsada de rajos X, ma "
+"chentza emissione de ondas radio rilevabiles"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:127
 msgid "Pulsars Plug-in"
-msgstr ""
+msgstr "Plug-in de sas Pulsar"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
 #, qt-format
@@ -11942,148 +11985,161 @@ msgid ""
 "Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
 "(%1astro-ph/0412641%2))."
 msgstr ""
+"Sos datos de sas pulsar suni derivaos de 'Su ATNF Catalogu de sas Pulsar' "
+"(Manchester, R. N., Hobbs, G. B., Teoh, A. et Hobbs, M., Astron. J., 129, "
+"1993-2006 (2005) (%1astro-ph/0412641%2))."
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
 #, qt-format
 msgid "Current catalog contains info about %1 pulsars."
-msgstr ""
+msgstr "Su catalogu currente contenent sas informatziones de %1 pulsar."
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
 msgid "Note"
-msgstr ""
+msgstr "Nota"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:139
 msgid "pulsar identifiers have the prefix 'PSR'"
-msgstr ""
+msgstr "sos identificadores de sas pulsar tenent su prefissu 'PSR'"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 msgid "Acknowledgment"
-msgstr ""
+msgstr "Riconnoschimentu"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:143
 msgid "Vladimir Samodourov"
-msgstr ""
+msgstr "Vladimir Samodourov"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:145
 msgid "Pushchino Radio Astronomy Observatory"
-msgstr ""
+msgstr "Osservatoriu Radio Astronomicu Pushchino"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:148
 msgid "Maciej Serylak"
-msgstr ""
+msgstr "Maciej Serylak"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
 msgid "Nancay Radioastronomical Observatory"
-msgstr ""
+msgstr "Osservatoriu Radio Astronomicu Nancay"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:151
 msgid "in France"
-msgstr ""
+msgstr "in Frantza"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:252
 msgid "Pulsars is updated"
-msgstr ""
+msgstr "Sas Pulsar suni aggiornadas"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:264
 msgid "Pulsars Plug-in Configuration"
-msgstr ""
+msgstr "Configuratzione de su Plug-in de sas Pulsar"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:272
 msgid "Settings for pulsars"
-msgstr ""
+msgstr "Impostatzione de sas pulsar"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:274
 msgid "Plot all pulsars without labels"
-msgstr ""
+msgstr "Traccia totu sas pulsar chentza etichettas"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:276
 msgid "Enable display of distribution for pulsars"
-msgstr ""
+msgstr "Abilita sa visualizatzione de sa distributzione de sas pulsar"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:278
 msgid "Show pulsars button on toolbar"
-msgstr ""
+msgstr "Fae biere su tast de sas pulsar in sa barra de sos istrumentos"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:279
 msgid "Use separate color for pulsars with glitches"
-msgstr ""
+msgstr "Imprea colore diversos po sas pulsar cun problemas tecnicos"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:58
 #: plugins/RemoteControl/src/RemoteControl.cpp:147
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:260
 msgid "Remote Control"
-msgstr ""
+msgstr "Controllu a tesu"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:61
 msgid ""
 "Provides remote control functionality using a webserver interface. See "
 "manual for detailed description."
 msgstr ""
+"Za sa funtzionalidade de su controllu de tesu impreande una interfaccia de "
+"unu server web. Abaida su manuale po una descritzione dettagliada."
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:147
 msgid "Remote control"
-msgstr ""
+msgstr "Controllu a tesu"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:106
 msgid "Remote Control Plug-in"
-msgstr ""
+msgstr "Plug-in de su controllu a tesu"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:112
 msgid ""
 "The Remote Control plugin provides a web interface to allow state changes "
 "and triggering scripts using a connected webbrowser."
 msgstr ""
+"Su Plug-in de su Controllu de Tesu zada una interfaccia web chi permitit "
+"cambiamentos de istadu et sos iscript de attivatzione impreande unu browser "
+"cullegau."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:115
 msgid "It is also possible to send commands via command line, e.g.."
 msgstr ""
+"Est fintzas possibile mandare cumandos via linea de cummandu, po esempiu..."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:121
 msgid "This allows triggering automatic show setups for museums etc."
 msgstr ""
+"Custu permittit s'attivatzione de sa visualizatzione automatica po sos "
+"museos etc."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:122
 msgid "This plugin was developed during ESA SoCiS 2015."
-msgstr ""
+msgstr "custu plug-in est istau isviluppau in su ESA Socis 2015."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:123
 #, qt-format
 msgid "This plugin uses the %1QtWebApp HTTP server%2 by Stefan Frings."
-msgstr ""
+msgstr "Custu plug-in impreat su %1QtWebApp HTTP server%2 dae Stefan Frings."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:126
 #, qt-format
 msgid "Further information can be found in the %1developer documentation%2."
 msgstr ""
+"Ateras informatziones pode essere agattadas in su %1documentatzione de "
+"isviluppu%2."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:175
 #, qt-format
 msgid "Listening on %1, IP: "
-msgstr ""
+msgstr "Iscurtande in  %1, IP: "
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:180
 msgid "Not active."
-msgstr ""
+msgstr "Not attiva."
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:246
 msgid "Remote Control Configuration"
-msgstr ""
+msgstr "Configuratzione de su controllu a tesu"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:247
 msgid "Remote Control Plug-in Configuration"
-msgstr ""
+msgstr "Configuratzione de su plug-in de su controllu a tesu"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:249
 msgid "Port Number:"
-msgstr ""
+msgstr "Porta Numeru:"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:252
 msgid "Access requires authentication"
-msgstr ""
+msgstr "Po accedere bi chere s'autenticatzione"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:253
 msgid "Password"
-msgstr ""
+msgstr "Password"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:254
 msgid ""
@@ -12091,179 +12147,185 @@ msgid ""
 "empty. </p><p>The password is transmitted over an insecure "
 "channel.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>Note: Su campu username in su browser tepet essere "
+"lassau boidu. </p><p>Sa password est trasmissa in unu canale "
+"seguru.</p></body></html>"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:255
 msgid "Your changes require a restart of the server."
-msgstr ""
+msgstr "Sas cambiamentas cherene unu riavviu de su server."
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:256
 msgid "Restart server"
-msgstr ""
+msgstr "Riavviu de su server"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:257
 msgid "Server enabled"
-msgstr ""
+msgstr "Server abilitau"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:258
 msgid "Enable automatically on startup"
-msgstr ""
+msgstr "Abilitau automaticamente a sa partentzia"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:259
 msgid "Server disabled - or Server listening on IP: aaa.bbb.ccc.ddd"
-msgstr ""
+msgstr "Server disabilitau - o Server iscurtande in su IP: aaa.bbb.ccc.ddd"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:74
 #: plugins/Exoplanets/src/Exoplanets.cpp:169
 #: plugins/Exoplanets/src/Exoplanets.cpp:170
 msgid "Exoplanets"
-msgstr ""
+msgstr "Esopianetas"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:77
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
 msgstr ""
+"Custu pianeta tracciat sa positzione de sos isteddos chi tenene esopianetas. "
+"Sos datos de sos esopianetas arribana dae sa 'Extrasolar Planets "
+"Encyclopaedia' de su situ exoplanet.eu"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:169
 msgid "Show exoplanets"
-msgstr ""
+msgstr "Fae biere esopianetas"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:170
 msgid "Exoplanets configuration window"
-msgstr ""
+msgstr "Fentana de configuratzione de sos esopianetas"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:897
 msgid "Hot"
-msgstr ""
+msgstr "Caente"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:899
 msgid "Warm"
-msgstr ""
+msgstr "Tebiu"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:901
 msgid "Cold"
-msgstr ""
+msgstr "Frittu"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:904
 msgid "Miniterran"
-msgstr ""
+msgstr "Mini terra"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:906
 msgid "Subterran"
-msgstr ""
+msgstr "Prus piticu de sa Terra"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:908
 msgid "Terran"
-msgstr ""
+msgstr "comente sa Terra"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:910
 msgid "Superterran"
-msgstr ""
+msgstr "prus mannu de sa Terra"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:912
 msgid "Jovian"
-msgstr ""
+msgstr "Zovianu"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:914
 msgid "Neptunian"
-msgstr ""
+msgstr "Nettunianu"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:270
 msgid "planetary system"
-msgstr ""
+msgstr "sistema planetariu"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:307
 msgid "Metallicity"
-msgstr ""
+msgstr "Metallicidade"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:311
 #: plugins/Exoplanets/src/Exoplanet.cpp:326
 msgid "Mass"
-msgstr ""
+msgstr "Massa"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:311
 #: plugins/Exoplanets/src/Exoplanet.cpp:315
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1277
 msgid "Sun"
-msgstr ""
+msgstr "Sole"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:315
 #: plugins/Exoplanets/src/Exoplanet.cpp:327
 msgid "Radius"
-msgstr ""
+msgstr "Raggiu"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:319
 #, qt-format
 msgid "Effective temperature: %1 K"
-msgstr ""
+msgstr "Temperadura effettiva: %1 K"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:323
 msgid "Exoplanet"
-msgstr ""
+msgstr "Esopianeta"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:325
 msgid "Period"
-msgstr ""
+msgstr "Periodu"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:325
 msgid "days"
-msgstr ""
+msgstr "dies"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:326
 #: plugins/Exoplanets/src/Exoplanet.cpp:327
 msgid "Jup"
-msgstr ""
+msgstr "Jup"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:328
 msgid "Semi-Major Axis"
-msgstr ""
+msgstr "Semiasse Majore"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:328
 msgid "AU"
-msgstr ""
+msgstr "AU"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:329
 msgid "Eccentricity"
-msgstr ""
+msgstr "Eccentricidade"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:330
 msgid "Inclination"
-msgstr ""
+msgstr "Inclintazione"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:331
 msgid "Angle Distance"
-msgstr ""
+msgstr "Distantzia angulare"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:332
 msgid "Discovered year"
-msgstr ""
+msgstr "Annu de iscoberta"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:333
 msgid "Planetary class"
-msgstr ""
+msgstr "Classe planetaria"
 
 #. TRANSLATORS: Full phrase is "Equilibrium Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:335
 msgid "Equilibrium temp."
-msgstr ""
+msgstr "Temp. de ecuilibriu"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
 #: plugins/Exoplanets/src/Exoplanet.cpp:337
 msgid "ESI"
-msgstr ""
+msgstr "ESI"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
 msgid "Exoplanets Plug-in"
-msgstr ""
+msgstr "Plug-in de sos Esopianetas"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:149
 #, qt-format
@@ -12271,6 +12333,9 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
 msgstr ""
+"Custu plug-in tracciat sa positzione de sos isteddos cun esopianetas. Sos "
+"datos de sos esopianetas arriban de %1The Extrasolar Planets "
+"Encyclopaedia%2\""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:150
 #, qt-format
@@ -12279,6 +12344,9 @@ msgid ""
 "from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
 msgstr ""
+"Sa lista de sos potentziales esopianetas abitabiles et sos datos chi dos "
+"riguardana suni pigaos dae \"%1The Habitable Exoplanets Catalog%3\" dae su "
+"%2Planetary Habitability Laboratory%3."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 #, qt-format
@@ -12287,6 +12355,9 @@ msgid ""
 "altogether have %2 exoplanets (including %3 potentially habitable "
 "exoplanets)."
 msgstr ""
+"Su catalogu currente contenet pagu prus pagu mancu %1 sistemas planetarios, "
+"chi totu paris tenene %2 esopianetas (includinde %3 potentziales esopianets "
+"abitabiles)."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:163
@@ -12296,20 +12367,24 @@ msgid ""
 "If you want to read full information about the plugin, its history and "
 "format of the catalog you can %1get info here%2."
 msgstr ""
+"Si chere lezere totu sas informatziones de custu plug-in, s'istoria sua et "
+"su formau de su catalogu, est possibile%1pigare sas informatziones innoghe%2."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
 msgid "Potential habitable exoplanets"
-msgstr ""
+msgstr "Esopianetas Potentzialmente Abitabiles"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
 msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
 msgstr ""
+"Custu plugin podet faghere biere esopianetas potentzialmente abitabiles  "
+"(marcadore aranzu) et informatzione suba custos pianetas."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
 msgid "Planetary Class"
-msgstr ""
+msgstr "Classe Planetaria"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
 msgid ""
@@ -12317,10 +12392,14 @@ msgid ""
 "zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, "
 "jovian, neptunian) (Earth = G-Warm Terran)."
 msgstr ""
+"Classificatzione dae su tipu ispettrale de s'istella ospitante (F, G, K, M), "
+"zona abitabile (caente, tebia, fritta) et sa mannaria (mini terra, prus "
+"pitica de sa terra, comente sa terra, terra manna, zovianu, nettunianu) (Sa "
+"Terra = G-Terra Caente)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "Equilibrium Temperature"
-msgstr ""
+msgstr "Temperadura de ecuilibriu"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid ""
@@ -12329,10 +12408,14 @@ msgid ""
 "body being heated only by its parent star (assuming a 0.3 bond albedo). As "
 "example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."
 msgstr ""
+"Sa temperadura de ecuilibriu planetariu est sa temperadura teorica in (°C) "
+"si su pianeta considerau comente unu corpus nieddu tiat bennere caentatu de "
+"s'istella sua ebbia (assuminde unu albedu de 0.3). Comente esempiu sa "
+"temperadura de ecuilibriu planetariude sa Terra est -18.15°C (255 K)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
 msgid "Earth Similarity Index (ESI)"
-msgstr ""
+msgstr "Indice de Similaridade de sa Terra (ESI)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
 msgid ""
@@ -12340,16 +12423,22 @@ msgid ""
 "like. ESI depends on the planet's radius, density, escape velocity, and "
 "surface temperature."
 msgstr ""
+"Assimbizadura a sa Terra in una iscala dae 0 a 1, inue 1 est su prus simile "
+"a sa Terra. ESI dipendet ade su raggiu de su pianeta, densidade, velocidade "
+"de fuga, e sa temperadura superficiale."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
 msgid "Proper names"
-msgstr ""
+msgstr "Numene propios"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
 msgid ""
 "In December 2015, the International Astronomical Union (IAU) has officially "
 "approved names for several exoplanets after a public vote."
 msgstr ""
+"Su Nadale 2015, sa Unione Astronomica Internatzionale (IAU) hat "
+"uffitzialmente approvau sos numenes po medas esopianetas dopo unu votu "
+"pubblicu."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
 msgid ""
