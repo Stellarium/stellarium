@@ -21,7 +21,7 @@
 #include <QKeyEvent>
 
 TuiNode::TuiNode(const QString& text, TuiNode* parent, TuiNode* prev)
-	: parentNode(parent), childNode(NULL), prevNode(prev), nextNode(NULL), displayText(text)
+	: QObject(parent), parentNode(parent), childNode(NULL), prevNode(prev), nextNode(NULL), displayText(text)
 {
 	updateNodeNumber();
 }
