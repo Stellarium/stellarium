@@ -201,7 +201,7 @@ void StelButton::mouseReleaseEvent(QGraphicsSceneMouseEvent*)
 		setChecked(toggleChecked(checked));
 
 	if (flagChangeFocus) // true if button is on bottom bar
-		StelMainView::getInstance().setFocusOnSky(); // Change the focus after clicking on button
+		StelMainView::getInstance().focusSky(); // Change the focus after clicking on button
 }
 
 void StelButton::updateIcon()
