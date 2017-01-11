@@ -83,7 +83,7 @@ private:
 	StelTranslator* rcTranslator;
 };
 
-RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QObject* parent) : HttpRequestHandler(parent), usePassword(false)
+RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QObject* parent) : HttpRequestHandler(parent), usePassword(false), templateMutex(QMutex::Recursive)
 {
 	apiController = new APIController(QByteArray("/api/").size(),this);
 
@@ -155,6 +155,8 @@ void RequestHandler::service(HttpRequest &request, HttpResponse &response)
 			path = "/index.html";
 		}
 
+		//make sure we can access the template map
+		templateMutex.lock();
 		if(templateMap.contains(path))
 		{
 #ifndef QT_NO_DEBUG
@@ -162,16 +164,20 @@ void RequestHandler::service(HttpRequest &request, HttpResponse &response)
 			//to allow for immediate display of changes
 			refreshTemplates();
 #endif
+			QByteArray content = templateMap[path].toUtf8();
+			templateMutex.unlock();
+
 			//get a mime type
 			QByteArray mime = StaticFileController::getContentType(path,"utf-8");
 			if(!mime.isEmpty())
 				response.setHeader("Content-Type",mime);
 
 			//serve the stored template
-			response.write(templateMap[path].toUtf8(),true);
+			response.write(content,true);
 		}
 		else
 		{
+			templateMutex.unlock();
 			//let the static file controller handle the request
 			staticFiles->service(request,response);
 		}
