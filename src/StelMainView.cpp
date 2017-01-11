@@ -488,7 +488,8 @@ StelMainView::StelMainView(QSettings* settings)
 	setFrameShape(QFrame::NoFrame);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-	setFocusPolicy(Qt::StrongFocus);
+	//because we only want child elements to have focus, we turn it off here
+	setFocusPolicy(Qt::NoFocus);
 	connect(this, SIGNAL(screenshotRequested()), this, SLOT(doScreenshot()));
 
 	lastEventTimeSec = 0;
@@ -556,7 +557,7 @@ void StelMainView::resizeEvent(QResizeEvent* event)
 }
 
 void StelMainView::focusSky() {
-	scene()->setActiveWindow(0);
+	//scene()->setActiveWindow(0);
 	rootItem->setFocus();
 }
 
@@ -677,6 +678,8 @@ void StelMainView::init()
 
 	guiItem = new StelGuiItem(rootItem);
 	scene()->addItem(rootItem);
+	//set the default focus to the sky
+	focusSky();
 	nightModeEffect = new NightModeGraphicsEffect(this);
 	updateNightModeProperty(StelApp::getInstance().getVisionModeNight());
 	//install the effect on the whole view
@@ -1318,9 +1321,4 @@ void StelMainView::glContextMakeCurrent()
 void StelMainView::glContextDoneCurrent()
 {
 	glWidget->doneCurrent();
-}
-
-void StelMainView::setFocusOnSky()
-{
-	rootItem->setFocus();
 }
