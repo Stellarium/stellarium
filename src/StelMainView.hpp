@@ -75,8 +75,7 @@ public:
 
 	//! Delete openGL textures (to call before the GLContext disappears)
 	void deinitGL();
-	//! Return focus to the sky item.  To be used when we close a dialog.
-	void focusSky();
+
 	//! Return the parent gui widget, this should be used as parent to all
 	//! the StelDialog instances.
 	QGraphicsWidget* getGuiWidget() const {return guiItem;}
@@ -101,8 +100,8 @@ public slots:
 	//! Set whether fullscreen is activated or not
 	void setFullScreen(bool);
 
-	//! Set focus on the sky
-	void setFocusOnSky();
+	//! Return focus to the sky item.  To be used when we close a dialog.
+	void focusSky();
 
 	///////////////////////////////////////////////////////////////////////////
 	// Specific methods
