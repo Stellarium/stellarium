@@ -62,6 +62,12 @@ void DateTimeDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
+	// Use ISO 8601 to date formatting
+	// See details: https://bugs.launchpad.net/stellarium/+bug/1655630
+	QString delimiter = QChar(0x2012);
+	ui->dateDelimiterLabel1->setText(delimiter);
+	ui->dateDelimiterLabel2->setText(delimiter);
+
 	connectSpinnerEvents();
 }
 
