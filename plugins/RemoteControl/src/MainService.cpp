@@ -39,13 +39,11 @@
 
 MainService::MainService(const QByteArray &serviceName, QObject *parent)
 	: AbstractAPIService(serviceName,parent),
-	  moveX(0),moveY(0),lastMoveUpdateTime(0)
+	  moveX(0),moveY(0),lastMoveUpdateTime(0),
+	  //100 should be more than enough
+	  //this only has to emcompass events that occur between 2 status updates
+	  actionCache(100), propCache(100)
 {
-	//100 should be more than enough
-	//this only has to emcompass events that occur between 2 status updates
-	actionCache.setCapacity(100);
-	propCache.setCapacity(100);
-
 	//this is run in the main thread
 	core = StelApp::getInstance().getCore();
 	actionMgr =  StelApp::getInstance().getStelActionManager();
