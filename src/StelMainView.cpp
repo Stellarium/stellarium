@@ -399,6 +399,57 @@ protected:
 			mainView->thereWasAnEvent();
 	}
 
+	//*** Gesture and touch support, currently only for Windows
+#ifdef Q_OS_WIN
+	bool event(QEvent * e) Q_DECL_OVERRIDE
+	{
+		switch (e->type()){
+			case QEvent::TouchBegin:
+			case QEvent::TouchUpdate:
+			case QEvent::TouchEnd:
+			{
+				QTouchEvent *touchEvent = static_cast<QTouchEvent *>(e);
+				QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->touchPoints();
+
+				if (touchPoints.count() == 1)
+					setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
+
+				return true;
+				break;
+			}
+
+			case QEvent::Gesture:
+				setAcceptedMouseButtons(0);
+				return gestureEvent(static_cast<QGestureEvent*>(e));
+				break;
+
+			default:
+				return QGraphicsObject::event(e);
+		}
+	}
+
+private:
+	bool gestureEvent(QGestureEvent *event)
+	{
+		if (QGesture *pinch = event->gesture(Qt::PinchGesture))
+			pinchTriggered(static_cast<QPinchGesture *>(pinch));
+
+		return true;
+	}
+
+	void pinchTriggered(QPinchGesture *gesture)
+	{
+		QPinchGesture::ChangeFlags changeFlags = gesture->changeFlags();
+		if (changeFlags & QPinchGesture::ScaleFactorChanged) {
+			qreal zoom = gesture->scaleFactor();
+
+			if (zoom < 2 && zoom > 0.5){
+				StelApp::getInstance().handlePinch(zoom, true);
+			}
+		}
+	}
+#endif
+
 private:
 	//! Helper function to convert a QGraphicsSceneMouseEvent to a QMouseEvent suitable for StelApp consumption
 	QMouseEvent convertMouseEvent(QGraphicsSceneMouseEvent *event) const
