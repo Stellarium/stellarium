@@ -614,7 +614,7 @@ void StelApp::deinit()
 
 StelProgressController* StelApp::addProgressBar()
 {
-	StelProgressController* p = new StelProgressController();
+	StelProgressController* p = new StelProgressController(this);
 	progressControllers.append(p);
 	emit(progressBarAdded(p));
 	return p;
