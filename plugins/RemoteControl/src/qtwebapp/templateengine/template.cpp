@@ -245,9 +245,9 @@ void Template::translate(ITemplateTranslationProvider &provider)
 	//This regex captures expressions of the form
 	//<?= tr("This is a test") ?> and <?= tr("optional %1 parameters %2","bla","blu") ?>
 	//The first capture group is the key (untranslated string), the second the optional list of parameters
-	const QRegularExpression regexp = QRegularExpression("<\\?=\\s*tr\\(\"([^\"\\\\]*(?:\\\\.[^\"\\\\]*)*)\"((?:,\"[^\"\\\\]*(?:\\\\.[^\"\\\\]*)*\")*)\\s*\\)\\?>");
+	static const QRegularExpression regexp = QRegularExpression("<\\?=\\s*tr\\(\"([^\"\\\\]*(?:\\\\.[^\"\\\\]*)*)\"((?:,\"[^\"\\\\]*(?:\\\\.[^\"\\\\]*)*\")*)\\s*\\)\\?>");
 	//This one is used to extract the parameters using global matching
-	const QRegularExpression paramExp = QRegularExpression(",\"([^\"\\\\]*(?:\\\\.[^\"\\\\]*)*)\"");
+	static const QRegularExpression paramExp = QRegularExpression(",\"([^\"\\\\]*(?:\\\\.[^\"\\\\]*)*)\"");
 
 	int offset = 0;
 	QRegularExpressionMatch match;
