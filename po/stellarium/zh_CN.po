@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-06 23:51+0700\n"
-"PO-Revision-Date: 2017-01-09 14:53+0000\n"
+"PO-Revision-Date: 2017-01-11 14:09+0000\n"
 "Last-Translator: sunshuwei <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-10 05:24+0000\n"
+"X-Launchpad-Export-Date: 2017-01-12 05:29+0000\n"
 "X-Generator: Launchpad (build 18302)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -584,7 +584,7 @@ msgstr "未记录亮度差异"
 #: src/core/modules/Nebula.cpp:943
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
-msgstr "不到50颗恒星的小型星团"
+msgstr "不到50颗恒星的贫星团"
 
 #: src/core/modules/Nebula.cpp:946
 msgctxt "Trumpler's Number of Members Class"
@@ -594,7 +594,7 @@ msgstr "包含50-100颗恒星的中等星团"
 #: src/core/modules/Nebula.cpp:949
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
-msgstr "超过100颗恒星的大型星团"
+msgstr "超过100颗恒星的富星团"
 
 #: src/core/modules/Nebula.cpp:952
 msgctxt "Trumpler's Number of Members Class"
@@ -3105,7 +3105,7 @@ msgstr "亮星 (<%1 星等)"
 #: src/gui/AstroCalcDialog.cpp:563
 #, qt-format
 msgid "Bright star clusters (<%1 mag)"
-msgstr "亮恒星云 (<%1 星等)"
+msgstr "亮星团(<%1 星等)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:564 src/translations.h:103
